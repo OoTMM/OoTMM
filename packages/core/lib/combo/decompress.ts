@@ -1,4 +1,4 @@
-import Yaz0 from 'yaz0';
+import * as Yaz0 from 'yaz0';
 import CRC32 from 'crc-32';
 
 import { DmaData } from './dma';

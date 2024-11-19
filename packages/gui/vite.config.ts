@@ -23,5 +23,8 @@ export default defineConfig({
     alias: {
       lodash: 'lodash-es',
     }
-  }
+  },
+  optimizeDeps: {
+    exclude: ['yaz0']
+  },
 });

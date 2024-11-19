@@ -15,7 +15,7 @@
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",
     "uint8array-extras": "^1.4.0",
-    "yaz0": "^3.0.1"
+    "yaz0": "^4.0.2"
   },
   "main": "lib/combo/index.ts",
   "devDependencies": {

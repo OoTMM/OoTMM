@@ -85,8 +85,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       yaz0:
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^4.0.2
+        version: 4.0.2
     devDependencies:
       '@types/pngjs':
         specifier: ^6.0.5
@@ -2324,10 +2324,6 @@ packages:
   node-addon-api@5.1.0:
     resolution: {integrity: sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==}
 
-  node-addon-api@8.2.1:
-    resolution: {integrity: sha512-vmEOvxwiH8tlOcv4SyE8RH34rI5/nWVaigUeAUPawC6f0+HoDthwI0vkMu4tbtsZrXq6QXFfrkhjofzKEs5tpA==}
-    engines: {node: ^18 || ^20 || >= 21}
-
   node-gyp-build@4.8.2:
     resolution: {integrity: sha512-IRUxE4BVsHWXkV/SFOut4qTlagw2aM8T5/vnTsmrHJvVoKueJHRc/JaFND7QDDc61kLYUJ6qlZM3sqTSyx2dTw==}
     hasBin: true
@@ -3373,8 +3369,8 @@ packages:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
 
-  yaz0@3.0.1:
-    resolution: {integrity: sha512-yV/yZFdM6Fs9XOVcR8SsvFei6tJh+FDY5zoX7sbG2QWagxeRb9TNXC+geUF32X8Pv33SPdY6U3IzcaVn5FKh3g==}
+  yaz0@4.0.2:
+    resolution: {integrity: sha512-gZohwkoC8DXubUu40MqWCT6IZUv2y3bxvZNdNph7aSTPeBlVIDCnDer5HgmEUR87eteKwoe5pmrvCsQNaJq+ag==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -5661,8 +5657,6 @@ snapshots:
 
   node-addon-api@5.1.0: {}
 
-  node-addon-api@8.2.1: {}
-
   node-gyp-build@4.8.2: {}
 
   node-gyp@10.2.0:
@@ -6853,9 +6847,9 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 21.1.1
 
-  yaz0@3.0.1:
+  yaz0@4.0.2:
     dependencies:
-      node-addon-api: 8.2.1
+      node-addon-api: 5.1.0
       node-gyp: 10.2.0
     transitivePeerDependencies:
       - supports-color

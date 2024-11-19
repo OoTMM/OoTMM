@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import Yaz0 from 'yaz0';
+import * as Yaz0 from 'yaz0';
 
 import { fileExists } from './util';
 
