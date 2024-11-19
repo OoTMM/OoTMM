@@ -1,0 +1,54 @@
+.header {
+  height: 5em;
+  background: black;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.header h1 {
+  margin: 0;
+  margin-left: 1em;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  flex: 0;
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 50%;
+  align-self: center;
+  margin-left: 1em;
+}
+
+.title {
+  display: inline-block;
+  align-self: center;
+  font-size: 2.2em;
+  margin-left: 0.5em;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+.header-nav {
+  flex: 1;
+}
+
+.header-nav a {
+  font-size: 1.5em;
+  margin-left: 4em;
+  display: inline-block;
+  align-self: center;
+}

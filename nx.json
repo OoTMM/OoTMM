@@ -16,7 +16,7 @@
       "cache": true
     }
   },
-  "defaultBase": "develop",
+  "defaultBase": "master",
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",

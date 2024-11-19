@@ -6,7 +6,7 @@
   "main": "app/index.ts",
   "scripts": {
     "serve": "vite dev",
-    "build": "vite build",
+    "build": "vite build && tsx ./post-build.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
@@ -47,17 +47,18 @@
       "default": [
         "{projectRoot}/**/*"
       ],
-      "version": [
-        {
-          "env": "VERSION"
-        }
+      "env": [
+        {"env": "VERSION"},
+        {"env": "VERSION_SUFFIX"},
+        {"env": "STATIC_URL"}
       ]
     },
     "targets": {
       "build": {
+        "configurations": {"production": {}},
         "inputs": [
           "default",
-          "version"
+          "env"
         ],
         "outputs": [
           "{workspaceRoot}/dist"

@@ -1,0 +1,27 @@
+.gen {
+  display: inline-block;
+  border: 1px solid rgb(37, 131, 50);
+  border-radius: 5px;
+  padding: 1em;
+  text-decoration: none;
+  margin: 1em;
+  color: inherit;
+  font-size: 1.2em;
+  background: linear-gradient(to bottom, rgb(67, 216, 87), rgb(0, 187, 25));
+  color: white;
+}
+
+.gen.gen-dev {
+  border-color: rgb(134, 134, 134);
+  background: linear-gradient(to bottom, rgb(228, 228, 228), rgb(177, 177, 177));
+  color: #333;
+}
+
+.gen-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.generator {
+  flex: 1;
+}

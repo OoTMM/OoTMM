@@ -1,0 +1,35 @@
+# Multiplayer Setup Guide
+
+OoTMM has rudimentary multiworld & coop support.
+
+## Setup
+
+You'll need to download the following:
+
+ * [Project64-EM](https://github.com/OoTMM/Project64-EM/releases/latest)
+ * [The Multiworld Client](https://github.com/OoTMM/multi-client/releases/latest)
+
+Make sure to configure Project64-EM like you would for regular Project64.  
+In particular, you need to set an Audio plugin and a RSP plugin (both are provided, but you need to select them).
+
+## Creating a Multiworld
+
+One player needs to create a multiworld using the regular web generator. Be sure to set the Mode option to "Multiworld" and to set the correct amount of players.  
+This will generate a set of numbered patch files, one for each player.
+
+## Playing a Multiworld
+
+Each player needs to get their patch file from the player that generated the multiworld. They can then use the web generator to turn their patch file into an OoTMM ROM.  
+
+To start playing and sending/receiving items, you need to do the following:
+
+ * Start the multiworld client (download link above)
+ * Start Project64-EM
+ * Open your multiworld ROM inside Project64-EM
+ * Inside Project64-EM, go to File -> Lua Scripts and start the built-in script called "adapter.lua"
+
+The multiworld client should then acknowledge that you've started playing and you should be able to send/receive items.
+
+## Troubleshooting
+
+If you run into issues, you can ask for help on Discord, in the #tech-support channel.

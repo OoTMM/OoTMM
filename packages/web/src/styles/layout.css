@@ -1,0 +1,25 @@
+main {
+  width: 1024px;
+  padding: 1em;
+  margin: 0 auto;
+  margin-top: 5em;
+  border-radius: 0.5em;
+}
+
+.flex-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.settings > label {
+  max-width: 25%;
+  flex: 1;
+  margin: 1em;
+}

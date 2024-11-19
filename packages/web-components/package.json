@@ -1,9 +1,10 @@
 {
-  "name": "@ootmm/web-static",
+  "name": "@ootmm/web-components",
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "./build.sh"
+    "build": "tsx ./build.ts",
+    "deploy": "./deploy.sh"
   },
   "author": "Nax",
   "license": "MIT",
@@ -12,9 +13,14 @@
   },
   "nx": {
     "targets": {
+      "deploy": {
+        "cache": false,
+        "dependsOn": ["build"]
+      },
       "build": {
         "inputs": [
-          "{projectRoot}/build.sh"
+          "{projectRoot}/**/*",
+          { "env": "VERSION" }
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
