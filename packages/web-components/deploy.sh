@@ -32,18 +32,20 @@ cp dist/current/config.json tmp/configs/$VERSION.json
 
 # Download from S3
 mkdir -p tmp/download
-aws s3 sync --exclude $VERSION.zip $S3_BUCKET tmp/download
+aws s3 sync --exclude $VERSION.zip $S3_BUCKET tmp/download || die "Failed to download"
 for file in `ls -1 tmp/download`; do
   base=`basename $file .zip`
-  unzip -o tmp/download/$file -d tmp/tree/
-  mv tmp/tree/config.json tmp/configs/$base.json
+  unzip -o tmp/download/$file -d tmp/tree/ || die "Failed to unzip"
+  mv tmp/tree/config.json tmp/configs/$base.json || die "Failed to move config"
 done
 rm -rf tmp/download
 
 # Merge configs
-npx tsx ./merge-configs.ts
+npx tsx ./merge-configs.ts || die "Failed to merge configs"
 rm -rf tmp/configs
 
 # Deploy to Netlify
+netlify deploy -d "$PWD/tmp/tree" --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID_STATIC --prod || die "Failed to deploy"
 
-# TODO
+# Final cleanup
+rm -rf tmp
