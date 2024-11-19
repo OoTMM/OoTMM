@@ -1,3 +1,6 @@
+[build]
+  command = "echo 'No build step'"
+
 [[headers]]
   for = "/*"
   [headers.values]
