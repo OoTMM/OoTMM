@@ -55,7 +55,7 @@ jobs:
           main-branch-name: master
 
       - name: Test
-        run: npx nx affected -t test
+        run: npx nx affected -t test --prod
 
       - name: Build
         run: npx nx affected -t build --prod
