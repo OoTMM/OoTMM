@@ -1260,32 +1260,22 @@ static int shouldItemBeHintedWithImportance(s16 gi)
 
 void comboTextAppendItemImportance(char** b, s16 gi, int importance)
 {
+    static const char* kImportanceStrs[] = {
+        TEXT_COLOR_RED "unreachable",
+        TEXT_COLOR_PINK "not required",
+        TEXT_COLOR_TEAL "sometimes required",
+        TEXT_COLOR_YELLOW "required"
+    };
+
     if (!shouldItemBeHintedWithImportance(gi))
         return;
+    if (importance < 0 || importance > 3)
+        return;
 
-    switch (importance)
-    {
-    case 0:
-        comboTextAppendStr(b, " (" TEXT_COLOR_RED "unreachable");
-        comboTextAppendClearColor(b);
-        comboTextAppendStr(b, ")");
-        break;
-    case 1:
-        comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
-        comboTextAppendClearColor(b);
-        comboTextAppendStr(b, ")");
-        break;
-    case 2:
-        comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
-        comboTextAppendClearColor(b);
-        comboTextAppendStr(b, ")");
-        break;
-    case 3:
-        comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
-        comboTextAppendClearColor(b);
-        comboTextAppendStr(b, ")");
-        break;
-    }
+    comboTextAppendStr(b, " (");
+    comboTextAppendStr(b, kImportanceStrs[importance]);
+    comboTextAppendClearColor(b);
+    comboTextAppendStr(b, ")");
 }
 
 #if defined(GAME_OOT)
