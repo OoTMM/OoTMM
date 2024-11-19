@@ -53,7 +53,7 @@ export async function build(opts: Options) {
   await fs.promises.mkdir(installDir, { recursive: true });
 
   /* Build the asset map */
-  const bam = await import('./build-assets-map');
+  const bam = await import('../build/build-assets-map');
   await bam.setupAssetsMap();
 
   /* Build and install with CMake */

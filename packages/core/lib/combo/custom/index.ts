@@ -206,6 +206,7 @@ type ObjectRef = {
 }
 
 class CustomAssetsBuilder {
+  private defines: Map<string, number>;
   private cg: CodeGen;
   private vrom: number;
   private objectId: number;
@@ -217,6 +218,7 @@ class CustomAssetsBuilder {
     private roms: DecompressedRoms,
     private patch: Patchfile,
   ) {
+    this.defines = new Map();
     const cgPath = process.env.BROWSER ? '' : path.resolve('include', 'combo', 'custom.h');
     this.cg = new CodeGen(cgPath, 'CUSTOM_H');
     this.vrom = 0x08000000;
@@ -467,6 +469,8 @@ class CustomAssetsBuilder {
     if (!process.env.BROWSER) {
       await this.cg.emit();
     }
+
+    return this.defines;
   }
 }
 

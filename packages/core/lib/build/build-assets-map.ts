@@ -2,8 +2,8 @@ import { XMLParser } from 'fast-xml-parser';
 import { promises as fs } from 'fs';
 import path from 'path';
 
-import { Game } from './config';
-import { CodeGen } from './util/codegen';
+import { Game } from '../combo/config';
+import { CodeGen } from '../combo/util/codegen';
 
 const DIR_OUT_BUILD = path.resolve(__dirname, '../../build');
 const DIR_OUT_INCLUDES = path.resolve(path.join(DIR_OUT_BUILD, 'include/assets'));
