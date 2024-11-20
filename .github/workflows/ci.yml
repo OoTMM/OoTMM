@@ -46,6 +46,9 @@ jobs:
           node-version: 22.x
           cache: 'pnpm'
 
+      - name: Install Third Party dependencies
+        run: ./install-deps.sh
+
       - name: Install dependencies
         run: pnpm i
 
