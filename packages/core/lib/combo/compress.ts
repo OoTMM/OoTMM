@@ -20,7 +20,7 @@ function fsRetry<T>(fn: () => Promise<T>, retries = 5): Promise<T> {
 export const compressFile = async (data: Uint8Array): Promise<Uint8Array> => {
   let filename = "";
 
-  if (!process.env.BROWSER) {
+  if (!process.env.__IS_BROWSER__) {
     const crypto = await import('node:crypto');
     const hash = crypto.createHash('sha256').update(data).digest('hex');
     const dir = path.resolve('build', 'cache', 'yaz0', hash.slice(0, 2));
@@ -35,7 +35,7 @@ export const compressFile = async (data: Uint8Array): Promise<Uint8Array> => {
 
   /* Cache miss - compress */
   const compressed = await Yaz0.compress(data, 7);
-  if (!process.env.BROWSER) {
+  if (!process.env.__IS_BROWSER__) {
     await fsRetry(() => fs.promises.writeFile(filename, compressed));
   }
   return compressed;

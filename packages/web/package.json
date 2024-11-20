@@ -1,55 +1,43 @@
 {
   "name": "@ootmm/web",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite preview",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
     "deploy": "./deploy.sh"
-	},
-	"dependencies": {
-		"preact": "^10.22.1",
-		"preact-iso": "^2.8.1",
-		"reset-css": "^5.0.2"
-	},
-	"devDependencies": {
-		"@mdx-js/rollup": "^3.1.0",
-		"@preact/preset-vite": "^2.9.0",
-		"typescript": "^5.6.3",
+  },
+  "dependencies": {
+    "preact": "^10.22.1",
+    "preact-iso": "^2.8.1",
+    "reset-css": "^5.0.2"
+  },
+  "devDependencies": {
+    "@ootmm/web-components": "*",
+    "@mdx-js/rollup": "^3.1.0",
+    "@preact/preset-vite": "^2.9.0",
+    "typescript": "^5.6.3",
     "vite-multiple-assets": "^2.2.0"
-	},
+  },
   "nx": {
     "targets": {
-      "dev": {
-        "cache": false,
-        "inputs": [
-          "{projectRoot}/**/*",
-          { "env": "STATIC_URL" }
-        ],
-        "dependsOn": [
-          "^build",
-          { "projects": ["@ootmm/web-components"], "target": "build:dev" }
-        ]
-      },
       "build": {
-        "configurations": {"production": {}},
         "inputs": [
           "{projectRoot}/**/*",
-          { "env": "STATIC_URL" }
+          {"env": "STATIC_URL"}
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
         ],
-        "dependsOn": [
-          "^build"
-        ]
+        "dependsOn": []
       },
-      "deploy": {
-        "cache": false,
-        "dependsOn": [
-          "build"
-        ]
+      "dev": {
+        "inputs": [
+          "{projectRoot}/**/*",
+          {"env": "STATIC_URL"}
+        ],
+        "dependsOn": ["^build"]
       }
     }
   }

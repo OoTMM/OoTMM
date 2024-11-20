@@ -40,7 +40,7 @@ export class CodeGen {
   }
 
   async emit() {
-    if (!process.env.BROWSER) {
+    if (!process.env.__IS_BROWSER__) {
       const dir = path.dirname(this.filename);
       await fs.promises.mkdir(dir, { recursive: true });
       const lines: string[] = [];

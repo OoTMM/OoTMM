@@ -20,9 +20,6 @@
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
-        ],
-        "dependsOn": [
-          "^build"
         ]
       }
     }

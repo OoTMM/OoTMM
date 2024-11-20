@@ -55,7 +55,7 @@ export function createMemo<T>() {
 }
 
 export const fileExists = async (path: string) => {
-  if (!process.env.BROWSER) {
+  if (!process.env.__IS_BROWSER__) {
     try {
       await fs.promises.access(path, fs.constants.F_OK);
       return true;

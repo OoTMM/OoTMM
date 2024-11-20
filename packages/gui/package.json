@@ -54,16 +54,12 @@
     },
     "targets": {
       "build": {
-        "configurations": {"production": {}},
         "inputs": [
           "default",
           "env"
         ],
         "outputs": [
           "{workspaceRoot}/dist"
-        ],
-        "dependsOn": [
-          "^build"
         ]
       },
       "serve": {

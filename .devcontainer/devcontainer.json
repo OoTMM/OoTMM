@@ -6,17 +6,22 @@
 		// Sets the run context to one level up instead of the .devcontainer folder.
 		"context": "..",
 		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "../Dockerfile.devcontainer"
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [5173],
 
-	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "npm i && touch packages/core/config.yml",
+	// Uncomment the next line to run commands Runafter the container is created.
+	"postCreateCommand": "./devcontainer-setup.sh",
+
+	"runArgs": ["--sysctl", "net.ipv6.conf.all.disable_ipv6=1"],
+	"remoteEnv": {
+		"NX_DAEMON": "true"
+	},
 
 	// Configure tool-specific properties.
 	"customizations": {

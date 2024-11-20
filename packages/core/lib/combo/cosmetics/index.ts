@@ -245,7 +245,7 @@ class CosmeticsPass {
     }
 
     if (typeof path === 'string') {
-      if (!process.env.BROWSER) {
+      if (!process.env.__IS_BROWSER__) {
         return fs.promises.readFile(path);
       } else {
         throw new Error(`Cannot load buffers from path`);

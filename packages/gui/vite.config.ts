@@ -10,14 +10,10 @@ const STATIC_URL = process.env.STATIC_URL || '/';
 
 export default defineConfig({
   base: STATIC_URL,
-  plugins: [
-    preact(),
-    visualizer({ open: true, filename: 'bundle-visualization.html' }),
-  ],
+  plugins: [preact(),visualizer({ open: true, filename: 'bundle-visualization.html' })],
   define: {
     'process.env.VERSION': JSON.stringify(VERSION_FULL),
-    'process.env.BROWSER': JSON.stringify(true),
-    global: 'globalThis',
+    'process.env.__IS_BROWSER__': JSON.stringify(true),
   },
   resolve: {
     alias: {

@@ -73,7 +73,7 @@ export class Generator {
     this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
 
     if (!this.opts.patch) {
-      if (!process.env.BROWSER) {
+      if (!process.env.__IS_BROWSER__) {
         await codegen(this.monitor);
       }
       const patchfile = new Patchfile;

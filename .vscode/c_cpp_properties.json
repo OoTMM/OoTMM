@@ -1,8 +1,8 @@
 {
     "env": {
         "myIncludePath": [
-            "${workspaceFolder}/packages/core/third_party/ultralib/include/gcc",
-            "${workspaceFolder}/packages/core/third_party/ultralib/include",
+            "${workspaceFolder}/third_party/ultralib/include/gcc",
+            "${workspaceFolder}/third_party/ultralib/include",
             "${workspaceFolder}/packages/core/build/include",
             "${workspaceFolder}/packages/core/include",
             "${workspaceFolder}/packages/core/src/common/ovl"

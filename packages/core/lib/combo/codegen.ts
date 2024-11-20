@@ -23,7 +23,7 @@ const ENTRANCES_DEBUG_CATEGORIES = {
 };
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
-  if (!process.env.BROWSER) {
+  if (!process.env.__IS_BROWSER__) {
     const cg = new CodeGen(path.resolve('build', 'include', 'combo', filename), guard);
     for (const [k, v] of Object.entries(data)) {
       cg.define(prefix + "_" + k, v);
@@ -43,7 +43,7 @@ function textMacro(data: string) {
 }
 
 async function genGI() {
-  if (process.env.BROWSER)
+  if (process.env.__IS_BROWSER__)
     return;
 
   /* Header */
@@ -110,7 +110,7 @@ async function genGI() {
 }
 
 async function genDrawGI() {
-  if (process.env.BROWSER)
+  if (process.env.__IS_BROWSER__)
     return;
 
   /* Header */

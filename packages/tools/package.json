@@ -17,9 +17,6 @@
         ],
         "outputs": [
           "{projectRoot}/bin/**/*"
-        ],
-        "dependsOn": [
-          "^build"
         ]
       }
     }

@@ -5,7 +5,10 @@ let dataZipPromise: Promise<JSZip> | null = null;
 async function makeDataZipPromise(): Promise<JSZip> {
   let data: Uint8Array;
 
-  if (!process.env.BROWSER) {
+  console.log(process.env.__IS_BROWSER__);
+  console.log(process.env);
+
+  if (!process.env.__IS_BROWSER__) {
     const fs = await import('fs/promises');
     const path = await import('path');
     data = await fs.readFile(path.resolve(__dirname, '..', '..', 'dist', 'data.zip'));

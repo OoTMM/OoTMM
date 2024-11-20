@@ -11,6 +11,6 @@ export function Generator() {
   } else if (!isReady) {
     return <div>Loading...</div>;
   } else {
-    return <iframe className="generator" src={`${process.env.STATIC_URL}/${data.generator.iframe.path}`}></iframe>;
+    return <iframe className="generator" src={`${__STATIC_URL__}/${data.generator.iframe.path}`}></iframe>;
   }
 }

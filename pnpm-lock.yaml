@@ -33,9 +33,6 @@ importers:
       '@types/pako':
         specifier: ^2.0.3
         version: 2.0.3
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
       glob:
         specifier: ^11.0.0
         version: 11.0.0
@@ -72,9 +69,6 @@ importers:
       '@ootmm/tools':
         specifier: '*'
         version: link:../tools
-      core-js:
-        specifier: ^3.38.1
-        version: 3.38.1
       crc-32:
         specifier: ^1.2.2
         version: 1.2.2
@@ -91,12 +85,6 @@ importers:
       '@types/pngjs':
         specifier: ^6.0.5
         version: 6.0.5
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
-      csv:
-        specifier: ^6.3.10
-        version: 6.3.10
       fast-xml-parser:
         specifier: ^4.5.0
         version: 4.5.0
@@ -182,6 +170,9 @@ importers:
       '@mdx-js/rollup':
         specifier: ^3.1.0
         version: 3.1.0(acorn@8.14.0)(rollup@4.24.0)
+      '@ootmm/web-components':
+        specifier: '*'
+        version: link:../web-components
       '@preact/preset-vite':
         specifier: ^2.9.0
         version: 2.9.1(@babel/core@7.26.0)(preact@10.24.3)(vite@5.4.11(@types/node@22.8.1))
@@ -1461,9 +1452,6 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  core-js@3.38.1:
-    resolution: {integrity: sha512-OP35aUorbU3Zvlx7pjsFdu1rGNnD4pgw/CWoYzRY3t2EzoVT7shKHY1dlAy3f41cGIO7ZDPQimhGFTlEYkG/Hw==}
-
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
@@ -1483,11 +1471,6 @@ packages:
   crc-32@1.2.2:
     resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
     engines: {node: '>=0.8'}
-    hasBin: true
-
-  cross-env@7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
     hasBin: true
 
   cross-spawn@7.0.3:
@@ -4555,8 +4538,6 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  core-js@3.38.1: {}
-
   core-util-is@1.0.3: {}
 
   cosmiconfig@7.1.0:
@@ -4577,10 +4558,6 @@ snapshots:
       typescript: 5.6.3
 
   crc-32@1.2.2: {}
-
-  cross-env@7.0.3:
-    dependencies:
-      cross-spawn: 7.0.3
 
   cross-spawn@7.0.3:
     dependencies:

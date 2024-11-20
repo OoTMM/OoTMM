@@ -13,10 +13,6 @@
   },
   "nx": {
     "targets": {
-      "deploy": {
-        "cache": false,
-        "dependsOn": ["build"]
-      },
       "build": {
         "inputs": [
           "{projectRoot}/**/*",
@@ -24,9 +20,6 @@
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
-        ],
-        "dependsOn": [
-          "^build"
         ]
       }
     }

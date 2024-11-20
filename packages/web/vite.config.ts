@@ -17,6 +17,6 @@ export default defineConfig({
   publicDir: false,
 	plugins: [MultipleAssets(assetsDirs, { ssr: false }), preact(), mdx()],
   define: {
-    'process.env.STATIC_URL': JSON.stringify(STATIC_URL),
+    '__STATIC_URL__': JSON.stringify(STATIC_URL),
   }
 });

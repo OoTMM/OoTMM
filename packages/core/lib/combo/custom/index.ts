@@ -103,7 +103,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   const seg = entry.seg || { in: 6, out: 6 };
   const obj = splitObject(buf, entry.offsets, seg.in, seg.out);
 
-  if (!process.env.BROWSER) {
+  if (!process.env.__IS_BROWSER__) {
     const outDir = path.resolve('build', 'custom');
     const outBasename = entry.name.toLowerCase();
     const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
@@ -218,7 +218,7 @@ class CustomAssetsBuilder {
     private patch: Patchfile,
   ) {
     this.defines = new Map();
-    const cgPath = process.env.BROWSER ? '' : path.resolve('include', 'combo', 'custom.h');
+    const cgPath = process.env.__IS_BROWSER__ ? '' : path.resolve('include', 'combo', 'custom.h');
     this.cg = new CodeGen(cgPath, 'CUSTOM_H');
     this.vrom = 0x08000000;
     this.objectId = 0x2000;
@@ -410,7 +410,7 @@ class CustomAssetsBuilder {
     for (const co of customObjects) {
       await this.addCustomObject(co.name, co.data, co.offsets);
 
-      if (!process.env.BROWSER) {
+      if (!process.env.__IS_BROWSER__) {
         const outDir = path.resolve('build', 'custom');
         const outBasename = co.name.toLowerCase();
         const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
@@ -465,7 +465,7 @@ class CustomAssetsBuilder {
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
-    if (!process.env.BROWSER) {
+    if (!process.env.__IS_BROWSER__) {
       await this.cg.emit();
     }
 

@@ -22,22 +22,6 @@ import { setupAssetsMap } from './build/build-assets-map';
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
 
-const cloneDependencies = async () => {
-  const thirdPartyDir = path.resolve('third_party');
-  const stampFile = path.resolve(thirdPartyDir, '.stamp');
-  if (await fileExists(stampFile))
-    return;
-  await fs.mkdir(thirdPartyDir, { recursive: true });
-  return new Promise((resolve, reject) => {
-    const proc = childProcess.spawn('git', ['clone', '--depth', '50', 'https://github.com/decompals/ultralib', thirdPartyDir + '/ultralib'], { stdio: 'inherit' });
-    proc.on('close', (code) => {
-      if (code !== 0)
-        return reject(new Error(`git clone failed with code ${code}`));
-      fs.writeFile(stampFile, '').then(_ => resolve(null));
-    });
-  });
-};
-
 async function runCommand(cmd: string, args: string[]) {
   return new Promise((resolve, reject) => {
     const proc = childProcess.spawn(cmd, args, { stdio: 'inherit' });
@@ -101,9 +85,6 @@ async function codegenCustomAssets(monitor: Monitor) {
 
 async function build() {
   const dummyMonitor = new Monitor({});
-
-  /* Clone dependencies */
-  await cloneDependencies();
 
   await Promise.all([
     codegenCustomAssets(dummyMonitor),

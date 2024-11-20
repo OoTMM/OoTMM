@@ -1,11 +1,12 @@
 {
   "targetDefaults": {
     "build": {
+      "configurations": {
+        "production": {},
+        "development": {}
+      },
       "dependsOn": [
         "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/dist"
       ],
       "cache": true
     },
@@ -14,17 +15,12 @@
     },
     "typecheck": {
       "cache": true
+    },
+    "deploy": {
+      "dependsOn": [
+        "build"
+      ]
     }
   },
-  "defaultBase": "master",
-  "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": [],
-    "production": [
-      "default"
-    ]
-  }
+  "defaultBase": "master"
 }
