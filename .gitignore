@@ -17,5 +17,4 @@
 /.vscode/settings.json
 /.nx
 /.pnpm-store
-
-**/vite.config.{js,ts,mjs,mts,cjs,cts}.timestamp*
+/devcontainer-setup.local.sh

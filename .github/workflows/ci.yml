@@ -47,7 +47,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install Third Party dependencies
-        run: ./install-deps.sh
+        run: ./scripts/install-deps.sh
 
       - name: Install dependencies
         run: pnpm i

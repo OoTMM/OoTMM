@@ -2,5 +2,5 @@
 
 corepack install
 corepack enable
-./install-deps.sh
+./scripts/install-deps.sh
 pnpm install

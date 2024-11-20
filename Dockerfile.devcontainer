@@ -10,6 +10,11 @@ RUN apt-get update \
     cmake \
     ninja-build \
     n64-ultra \
-    git
+    git \
+    zsh \
+    tig \
+    tree \
+    inotify-tools \
+  && chsh -s /usr/bin/zsh
 
 WORKDIR /app
