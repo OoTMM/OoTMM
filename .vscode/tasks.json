@@ -11,7 +11,7 @@
 		},
     {
 			"type": "npm",
-			"script": "serve",
+			"script": "gui:dev",
 			"problemMatcher": {
         "base": "$gcc",
       },

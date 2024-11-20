@@ -16,7 +16,7 @@
 	"forwardPorts": [5173],
 
 	// Uncomment the next line to run commands Runafter the container is created.
-	"postCreateCommand": "./devcontainer-setup.sh",
+	"postCreateCommand": "./setup.sh",
 
 	"runArgs": ["--sysctl", "net.ipv6.conf.all.disable_ipv6=1"],
 	"remoteEnv": {
@@ -28,7 +28,9 @@
 		"vscode": {
 			"extensions": [
 				"ms-vscode.cpptools-extension-pack",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "redhat.vscode-yaml",
+        "mechatroner.rainbow-csv"
 			]
 		}
 	},

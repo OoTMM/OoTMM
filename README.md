@@ -39,39 +39,41 @@ The roms need to be named `oot.z64` and `mm.z64` respectively and placed in the 
 
 ## Build
 
-You can build OoTMM with either docker or your native environment.
+You can build OoTMM with either a DevContainer or your native environment.
 
-### Docker (recommended)
+### DevContainer (recommended)
 
-Install docker, then run:
+You need:
 
-    docker compose up --build
+ * Docker
+ * Visual Studio Code
+ * Remote - Containers extension
 
-The first build can be a bit slow. Subsequent builds will be much faster.
-On older versions of docker, you may need to run `docker-compose up --build` instead (note the dash).
+Open the project in Visual Studio Code and click on the "Reopen in Container" button that appears in the bottom right corner.
+That's it.
 
-The output will be `out/OoTMM.z64`.
-
-### Native (for developers)
+### Native
 
 You need:
 
  * A C/C++ toolchain for your system
- * Make
+ * CMake
+ * Ninja
  * [n64-ultra](https://github.com/glankk/n64)
- * Node 18 or newer
+ * Node 22 or newer
  * Git
 
-On windows, we recommend using [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to build OoTMM.
+On windows, we recommend using [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) to build OoTMM.
 
-Install the required dependencies:
+Install everything you need:
 
-    corepack enable pnpm
-    pnpm i
+    ./setup.sh
 
-Then you can build the project:
+### Using the build
 
-    pnpm start
+You can generate a seed:
+
+    pnpm start:core:config
 
 The output will be `out/OoTMM.z64`.
 

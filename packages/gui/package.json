@@ -5,7 +5,7 @@
   "type": "module",
   "main": "app/index.ts",
   "scripts": {
-    "serve": "vite dev",
+    "dev": "vite dev",
     "build": "vite build && tsx ./post-build.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
@@ -62,7 +62,7 @@
           "{workspaceRoot}/dist"
         ]
       },
-      "serve": {
+      "dev": {
         "dependsOn": [
           "^build"
         ]
