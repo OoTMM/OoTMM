@@ -508,7 +508,7 @@ void hookPlay_Init(PlayState* play)
     }
 }
 
-void Play_UpdateWrapper(PlayState* play)
+void Play_MainWrapper(PlayState* play)
 {
     /* Auto-press A during credits */
     if (g.isCredits)
@@ -519,7 +519,7 @@ void Play_UpdateWrapper(PlayState* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Multi_Update(play);
-    Play_Update(play);
+    Play_Main(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
     Debug_Update();

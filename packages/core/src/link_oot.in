@@ -58,7 +58,7 @@ InitDmaManager = 0x80000e6c;
 
 gSaveContext = 0x8011a5d0;
 Play_Init = 0x8009a750;
-Play_Update = 0x8009cac8;
+Play_Main = 0x8009cac8;
 
 PlayMusic = 0x800c6b54;
 Actor_OfferGetItem = 0x80022bd4;

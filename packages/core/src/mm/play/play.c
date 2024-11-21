@@ -726,7 +726,7 @@ void Play_DrawMainWrapper(PlayState* play)
 
 PATCH_CALL(0x80168f48, Play_DrawMainWrapper);
 
-void Play_UpdateWrapper(PlayState* play)
+void Play_MainWrapper(PlayState* play)
 {
     Player* link;
     /* Auto-press A during credits */
@@ -741,7 +741,7 @@ void Play_UpdateWrapper(PlayState* play)
     link = GET_PLAYER(play);
     Player_TryUpdateForm(link, play);
     Multi_Update(play);
-    Play_Update(play);
+    Play_Main(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);
     Debug_Update();

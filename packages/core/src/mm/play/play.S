@@ -5,13 +5,13 @@ PATCH_START 0x801bd9b8
 .int hookPlay_Init
 PATCH_END
 
-/* Wrap Play_Update */
+/* Wrap Play_Main */
 PATCH_START 0x8016a8a8
-  lui t4,%HI(Play_UpdateWrapper)
+  lui t4,%HI(Play_MainWrapper)
 PATCH_END
 
 PATCH_START 0x8016a8b0
-  addiu t4,%LO(Play_UpdateWrapper)
+  addiu t4,%LO(Play_MainWrapper)
 PATCH_END
 
 /* Transition hooks */

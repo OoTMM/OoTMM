@@ -259,7 +259,7 @@ Message_ShouldAdvance = 0x80147624;
 Interface_LoadItemIconImpl = 0x80112b40;
 UpdateEquipment = 0x80123c90;
 
-Play_Update = 0x80168f64;
+Play_Main = 0x80168f64;
 Play_DrawMain = 0x80168090;
 
 Gfx_TexScroll = 0x8012cb4c;
