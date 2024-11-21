@@ -231,6 +231,10 @@ extern const u8 kRupeeDigits[];
 int Wallet_IndexOot(void);
 int Wallet_IndexMm(void);
 
+#if defined(GAME_MM)
+void func_8012CF0C(GraphicsContext* gfxCtx, int flagUnk0, int flagUnk1, int r, int g, int b);
+#endif
+
 void Play_Init(PlayState*);
 void Play_Update(PlayState*);
 

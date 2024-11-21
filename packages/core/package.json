@@ -37,6 +37,7 @@
           "{projectRoot}/data/**/*",
           "{projectRoot}/include/**/*",
           "{projectRoot}/lib/**/*",
+          "{projectRoot}/src/**/*",
           "{projectRoot}/CMakeLists.txt",
           "{projectRoot}/tsconfig.json",
           { "env": "VERSION" },
