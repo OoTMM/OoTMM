@@ -712,7 +712,7 @@ void hookPlay_Init(PlayState* play)
     }
 }
 
-void Play_UpdateWrapper(PlayState* play)
+void Play_DrawMainWrapper(PlayState* play)
 {
     if (sNeedsScreenClear)
     {
@@ -721,6 +721,13 @@ void Play_UpdateWrapper(PlayState* play)
         return;
     }
 
+    Play_DrawMain(play);
+}
+
+PATCH_CALL(0x80168f48, Play_DrawMainWrapper);
+
+void Play_UpdateWrapper(PlayState* play)
+{
     Player* link;
     /* Auto-press A during credits */
     if (g.isCredits)

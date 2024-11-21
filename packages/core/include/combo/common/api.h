@@ -237,6 +237,7 @@ void func_8012CF0C(GraphicsContext* gfxCtx, int flagUnk0, int flagUnk1, int r, i
 
 void Play_Init(PlayState*);
 void Play_Update(PlayState*);
+void Play_DrawMain(PlayState*);
 
 void Interface_LoadItemIconImpl(PlayState* play, int slot);
 void UpdateEquipment(PlayState* play, Player* link);
