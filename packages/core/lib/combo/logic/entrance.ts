@@ -1078,9 +1078,6 @@ export class LogicPassEntrances {
       this.propagateRegions(i);
       this.replaceAllRegions(i, 'ENTRANCE', 'NAMELESS');
       this.propagateDungeons(i);
-
-      /* DEBUG */
-      console.log(this.worlds[i].dungeonsEntrances);
     }
   }
 
