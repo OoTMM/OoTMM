@@ -101,6 +101,8 @@ class WorldShuffler {
   private overrides: EntranceOverrides;
   private backtrackCount: number;
   private readonly allEntrances: Entrance[];
+  private usedEntrancesSrc: Set<Entrance>;
+  private usedEntrancesDst: Set<Entrance>;
 
   constructor(
     private random: Random,
@@ -115,6 +117,8 @@ class WorldShuffler {
     this.worldChanged = false;
     this.overrides = {};
     this.allEntrances = this.computeAllEntrances();
+    this.usedEntrancesSrc = new Set();
+    this.usedEntrancesDst = new Set();
   }
 
   private entrancePolarity(entrance: Entrance): EntrancePolarity {
@@ -459,8 +463,8 @@ class WorldShuffler {
 
   private poolEntrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
     const entrances = this.entrancesForTypes(aTypes, reverse);
-    const src = new Set(entrances);
-    const dst = new Set(entrances);
+    const src = new Set(entrances.filter(x => !this.usedEntrancesSrc.has(x)));
+    const dst = new Set(entrances.filter(x => !this.usedEntrancesDst.has(x)));
 
     /* Fixup for game links */
     src.delete('OOT_MARKET_FROM_MASK_SHOP');
@@ -471,9 +475,13 @@ class WorldShuffler {
     return { src, dst };
   }
 
-  private overrideEntrance(src: Entrance, dst: Entrance) {
+  private overrideEntrance(src: Entrance, dst: Entrance, useDst = true) {
     this.overrides[src] = dst;
     this.worldChanged = true;
+    this.usedEntrancesSrc.add(src);
+    if (useDst) {
+      this.usedEntrancesDst.add(dst);
+    }
   }
 
   private placeWallmasters() {
@@ -488,7 +496,7 @@ class WorldShuffler {
     }
 
     /* Compute entrances */
-    const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'wallmaster' && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
+    const entrancesSrc = this.poolEntrancesForTypes(['wallmaster'], false).src;
     const entrancesDst = this.poolEntrancesForTypes(types, this.settings.erNoPolarity).dst;
 
     while (entrancesSrc.size > 0) {
@@ -498,7 +506,7 @@ class WorldShuffler {
         dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
       }
       const dst = sample(this.random, dstCandidates);
-      this.overrideEntrance(src, dst);
+      this.overrideEntrance(src, dst, false);
       entrancesSrc.delete(src);
       entrancesDst.delete(dst);
     }
@@ -525,7 +533,7 @@ class WorldShuffler {
     while (entrancesSrc!.size > 0) {
       const src = sample(this.random, entrancesSrc!);
       const dst = sample(this.random, entrancesDst);
-      this.overrideEntrance(src, dst);
+      this.overrideEntrance(src, dst, false);
       entrancesSrc!.delete(src);
       entrancesDst.delete(dst);
     }
@@ -544,17 +552,17 @@ class WorldShuffler {
 
     /* Compute entrances */
     const oneWays = this.poolOneWays();
-    const entrancesSrc = new Set(this.allEntrances.filter(x => oneWays.pool.includes(ENTRANCES[x].type) && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
+    const entrancesSrc = this.poolEntrancesForTypes(oneWays.pool, false).src;
     const entrancesDst = this.poolEntrancesForTypes(types, this.settings.erNoPolarity).dst;
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, entrancesSrc);
       let dstCandidates = [...entrancesDst];
-      if (this.settings.erOneWays === 'ownGame') {
+      if (oneWays.opts.ownGame) {
         dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
       }
       const dst = sample(this.random, dstCandidates);
-      this.overrideEntrance(src, dst);
+      this.overrideEntrance(src, dst, false);
       entrancesSrc.delete(src);
     }
   }
@@ -934,6 +942,22 @@ class WorldShuffler {
     /* Connect the games */
     if (!this.settings.erIndoorsGameLinks) {
       this.connectGamesDefault();
+    }
+
+    /* Plando */
+    for (const [src, dst] of Object.entries(this.settings.plando.entrances)) {
+      if (!this.allEntrances.includes(src as Entrance)
+        || !this.allEntrances.includes(dst)
+        || this.usedEntrancesSrc.has(src as Entrance)
+        || this.usedEntrancesDst.has(dst))
+        continue;
+
+      this.overrideEntrance(src as Entrance, dst);
+      const revSrc = this.reverseEntrance(src as Entrance);
+      const revDst = this.reverseEntrance(dst);
+      if (revSrc && revDst) {
+        this.overrideEntrance(revDst, revSrc);
+      }
     }
 
     if (this.settings.erWallmasters !== 'none') {

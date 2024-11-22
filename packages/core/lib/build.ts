@@ -7,15 +7,11 @@ import childProcess from 'child_process';
 import { codegen as comboCodegen } from './combo/codegen';
 import { customAssetsKeep, customFiles } from './combo/custom';
 import { Monitor } from './combo/monitor';
-import { DEFAULT_SETTINGS, Options } from './combo';
 import { cosmeticsAssets } from './combo/cosmetics';
-import { DEFAULT_COSMETICS } from './combo/cosmetics/util';
-import { DEFAULT_RANDOM_SETTINGS } from './combo/settings/random';
 import { custom } from './combo/custom';
 import { decompressGames } from './combo/decompress';
 import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
-import { fileExists } from './combo/util';
 
 import { setupAssetsMap } from './build/build-assets-map';
 

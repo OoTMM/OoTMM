@@ -18,7 +18,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   junkLocations: [] as string[],
   tricks: [ ...DEFAULT_TRICKS ],
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
-  plando: { locations: {} },
+  plando: { locations: {}, entrances: {} },
   hints: [ ...SETTINGS_DEFAULT_HINTS ],
 } as Settings;
 
@@ -209,6 +209,10 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
     if (arg.plando.locations !== undefined) {
       result.plando.locations = sortCopyObject({ ...arg.plando.locations }) as Settings['plando']['locations'];
     }
+
+    if (arg.plando.entrances !== undefined) {
+      result.plando.entrances = sortCopyObject({ ...arg.plando.entrances }) as Settings['plando']['entrances'];
+    }
   }
 
   if (arg.hints !== undefined) {
@@ -216,6 +220,23 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
   }
 
   return validateSettings(result);
+}
+
+function applyKeyValue<K extends string, V>(data: Record<K, V>, patch: undefined | null | Record<K, V | null>): Record<K, V> {
+  if (patch === undefined)
+    return data;
+  if (patch === null)
+    return {} as Record<K, V>;
+  const result = { ...data };
+  for (const key in patch) {
+    const value = patch[key];
+    if (value === null) {
+      delete result[key];
+    } else {
+      result[key] = value;
+    }
+  }
+  return result;
 }
 
 export function mergeSettings(settings: Settings, patch: SettingsPatch): Settings {
@@ -248,21 +269,8 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
 
   /* Apply plando */
   if (patch.plando !== undefined) {
-    const p = patch.plando;
-    if (p.locations !== undefined) {
-      if (p.locations === null) {
-        s.plando.locations = {};
-      } else {
-        for (const loc in p.locations) {
-          const item = p.locations[loc];
-          if (item === null) {
-            delete s.plando.locations[loc];
-          } else {
-            s.plando.locations[loc] = item;
-          }
-        }
-      }
-    }
+    s.plando.locations = applyKeyValue(s.plando.locations, patch.plando.locations);
+    s.plando.entrances = applyKeyValue(s.plando.entrances, patch.plando.entrances);
   }
 
   /* Apply hints */

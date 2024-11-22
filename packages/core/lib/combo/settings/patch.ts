@@ -1,3 +1,4 @@
+import { Entrance } from '@ootmm/data';
 import { TrickKey } from './tricks';
 import { Settings } from './type';
 import { PartialDeep } from 'type-fest';
@@ -12,6 +13,7 @@ export type SettingsPatch = PartialDeep<Omit<Settings, 'junkLocations' | 'tricks
   tricks?: SettingsArrayPatch<TrickKey>;
   plando?: {
     locations?: null | {[k: string]: string | null};
+    entrances?: null | Record<Entrance, Entrance | null>;
   };
   hints?: SettingsArrayPatch<Settings['hints'][number]>;
 };

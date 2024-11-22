@@ -1,3 +1,4 @@
+import { Entrance } from '@ootmm/data';
 import { SETTINGS } from './data';
 import { SettingHint } from './hints';
 import { SpecialConds } from './special-conds';
@@ -62,7 +63,8 @@ type UnionToIntersection<U> =
 export type SettingsBase = UnionToIntersection<SettingShapes>;
 
 type SettingsPlando = {
-  locations: {[k: string]: string | null},
+  locations: {[k: string]: string | null};
+  entrances: Record<Entrance, Entrance>;
 };
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number};
