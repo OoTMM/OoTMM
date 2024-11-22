@@ -28,18 +28,23 @@
   "license": "MIT",
   "private": "true",
   "nx": {
+    "namedInputs": {
+      "ts": [
+        "{projectRoot}/lib/**/*",
+        "{projectRoot}/tsconfig.json"
+      ]
+    },
     "targets": {
       "build": {
         "inputs": [
+          "ts",
           "{workspaceRoot}/third_party/**/*",
           "{workspaceRoot}/roms/**/*",
           "{projectRoot}/node_modules/**/*",
           "{projectRoot}/data/**/*",
           "{projectRoot}/include/**/*",
-          "{projectRoot}/lib/**/*",
           "{projectRoot}/src/**/*",
           "{projectRoot}/CMakeLists.txt",
-          "{projectRoot}/tsconfig.json",
           { "env": "VERSION" },
           { "env": "NODE_ENV" }
         ],
@@ -50,6 +55,7 @@
       },
       "test": {
         "inputs": [
+          "ts",
           "{projectRoot}/tests/**/*"
         ],
         "dependsOn": [

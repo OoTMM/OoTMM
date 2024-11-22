@@ -621,10 +621,10 @@ class WorldShuffler {
   private poolWarps() {
     const pool = new Set(['one-way-song', 'one-way-statue']);
 
-    if (this.settings.erWarps === 'ootOnly') {
+    if (this.settings.erWarps === 'ootOnly' || this.settings.erOneWaysStatues) {
       pool.delete('one-way-statue');
     }
-    if (this.settings.erWarps === 'mmOnly') {
+    if (this.settings.erWarps === 'mmOnly' || this.settings.erOneWaysSongs) {
       pool.delete('one-way-song');
     }
 
@@ -654,14 +654,6 @@ class WorldShuffler {
     }
     if (this.settings.erOneWaysWaterVoids) {
       pool.add('one-way-water-void');
-    }
-
-    /* ER Warps takes precendence? */
-    if (this.settings.erWarps !== 'none') {
-      const warpsPool = this.poolWarps();
-      for (const w of warpsPool.pool) {
-        pool.delete(w);
-      }
     }
 
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erOneWays === 'ownGame' } };
