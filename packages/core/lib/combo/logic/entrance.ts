@@ -632,10 +632,10 @@ class WorldShuffler {
   }
 
   private poolOneWays() {
-    const pool = new Set(['one-way']);
+    const pool = new Set<string>();
 
-    if (!this.settings.erOneWaysMajor) {
-      pool.delete('one-way');
+    if (this.settings.erOneWaysMajor) {
+      pool.add('one-way');
     }
     if (this.settings.erOneWaysIkana) {
       pool.add('one-way-ikana');
@@ -654,6 +654,14 @@ class WorldShuffler {
     }
     if (this.settings.erOneWaysWaterVoids) {
       pool.add('one-way-water-void');
+    }
+
+    /* ER Warps takes precendence? */
+    if (this.settings.erWarps !== 'none') {
+      const warpsPool = this.poolWarps();
+      for (const w of warpsPool.pool) {
+        pool.delete(w);
+      }
     }
 
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erOneWays === 'ownGame' } };
@@ -968,7 +976,7 @@ class WorldShuffler {
       this.placeSpawns();
     }
 
-    if (this.settings.erOneWays !== 'none') {
+    if (this.settings.erOneWays !== 'none' && this.settings.erOneWaysAnywhere) {
       this.placeOneWays();
     }
 
