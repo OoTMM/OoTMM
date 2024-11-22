@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Dungeon Maps hinting at dungeon locations now use a significantly better algorithm, which should handle all edge-cases.
 - When hint importance is on, unreachable items will be marked as such instead of "not required".
 - Removed the cutscenes from the Skull Kid paintings and the Skulltulas spawning from big jars, tree or chandelier in MM Spider Houses.
 - Bombchu are now accounted in logic for the SSH Gold Room hives.
