@@ -1,5 +1,5 @@
 import { cloneDeep, mapValues } from 'lodash';
-import { MACROS, WORLD, REGIONS, POOL, ENTRANCES } from '@ootmm/data';
+import { MACROS, WORLD, REGIONS, POOL, ENTRANCES, Entrance } from '@ootmm/data';
 
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
@@ -11,6 +11,7 @@ import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Random } from '../random';
+import { Region } from './regions';
 
 export const WORLD_FLAGS = [
   'ganonTrials',
@@ -162,6 +163,21 @@ export type WorldOptimized = {
   adult: WorldAreaExprsGraph;
 };
 
+type DungeonEntranceReplace = {
+  readonly type: 'replace';
+  readonly entrance: Entrance;
+};
+
+type DungeonEntranceRegion = {
+  readonly type: 'region';
+  readonly region: Region;
+};
+
+type DungeonEntrance =
+  | DungeonEntranceReplace
+  | DungeonEntranceRegion
+  ;
+
 export type World = {
   areas: { [k: string]: WorldArea };
   checks: { [k: string]: WorldCheck };
@@ -179,6 +195,7 @@ export type World = {
   resolvedFlags: ResolvedWorldFlags;
   exprParsers: ExprParsers;
   optimized: WorldOptimized | null;
+  dungeonsEntrances: Map<string, DungeonEntrance>;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -288,6 +305,7 @@ export function cloneWorld(world: World): World {
     resolvedFlags: world.resolvedFlags,
     exprParsers: world.exprParsers,
     optimized: cloneWorldOptimized(world.optimized),
+    dungeonsEntrances: new Map(world.dungeonsEntrances),
   };
 }
 
@@ -394,6 +412,7 @@ export class LogicPassWorld {
       resolvedFlags,
       exprParsers,
       optimized: null,
+      dungeonsEntrances: new Map,
     };
   }
 
