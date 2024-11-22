@@ -17,6 +17,7 @@ import { SharedItemGroups } from '../logic/shared';
 import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
 import { mustStartWithMasterSword } from '../settings/util';
+import { DUNGEON_ENTRANCES } from '../logic/entrance';
 
 const DUNGEON_REWARD_LOCATIONS = [
   'OOT Deku Tree Boss',
@@ -640,77 +641,24 @@ function dungeonWarpsBuffer(world: World) {
 }
 
 function dungeonEntrancesBuffer(world: World) {
-  const mainDungeonsReverse: {[k: number]: number} = {};
-  const mainDungeonRegions: {[k: number]: string} = {};
+  const buffer = new Uint8Array(DUNGEON_ENTRANCES.length * 4);
 
-  const defaultEntrances = [
-    'OOT_DEKU_TREE',
-    'OOT_DODONGO_CAVERN',
-    'OOT_JABU_JABU',
-    'OOT_TEMPLE_FOREST',
-    'OOT_TEMPLE_FIRE',
-    'OOT_TEMPLE_WATER',
-    'OOT_TEMPLE_SHADOW',
-    'OOT_TEMPLE_SPIRIT',
-    'MM_TEMPLE_WOODFALL',
-    'MM_TEMPLE_SNOWHEAD',
-    'MM_TEMPLE_GREAT_BAY',
-    'MM_TEMPLE_STONE_TOWER_INVERTED',
-    'MM_TEMPLE_STONE_TOWER',
-    'MM_SPIDER_HOUSE_SWAMP',
-    'MM_SPIDER_HOUSE_OCEAN',
-    'OOT_BOTTOM_OF_THE_WELL',
-    'OOT_ICE_CAVERN',
-    'OOT_GERUDO_TRAINING_GROUNDS',
-    'MM_BENEATH_THE_WELL',
-    'MM_IKANA_CASTLE',
-    'MM_SECRET_SHRINE',
-    'MM_BENEATH_THE_WELL_BACK',
-    'MM_PIRATE_FORTRESS',
-    'OOT_GANON_CASTLE',
-    'OOT_GANON_TOWER',
-    'MM_MOON',
-  ];
+  for (let i = 0; i < DUNGEON_ENTRANCES.length; ++i) {
+    const entranceName = DUNGEON_ENTRANCES[i];
+    const entranceData = world.dungeonsEntrances.get(entranceName) || { type: 'region', region: 'NONE' as Region };
+    let data: number;
 
-  /* Compute substitutions */
-  for (let i = 0; i < defaultEntrances.length; ++i) {
-    const entrance = world.entranceOverrides.get(defaultEntrances[i]) || defaultEntrances[i];
-    const index = defaultEntrances.indexOf(entrance);
-    if (index !== -1) {
-      mainDungeonsReverse[index] = i;
-    }
-  }
-
-  /* Compute main region */
-  for (const areaName in world.areas) {
-    const area = world.areas[areaName];
-    for (let i = 0; i < defaultEntrances.length; ++i) {
-      const entrName = defaultEntrances[i];
-      const entrData = ENTRANCES[entrName as keyof typeof ENTRANCES];
-      const to = entrData.to;
-      const areaTo = world.areas[to];
-      if (area.exits[to] && area.dungeon !== areaTo.dungeon) {
-        const region = area.region;
-        if (region !== 'NONE' && region !== 'POCKET' && region !== 'NAMELESS') {
-          mainDungeonRegions[i] = region;
-        }
-      }
-    }
-  }
-
-  const buffers: Uint8Array[] = [];
-  for (let i = 0; i < defaultEntrances.length; ++i) {
-    const dungeonIndex = mainDungeonsReverse[i];
-    let region = mainDungeonRegions[i] || 'NAMELESS';
-    if (dungeonIndex !== undefined) {
-      buffers.push(toU32Buffer([(dungeonIndex | 0x80000000) >>> 0]));
+    if (entranceData.type === 'replace') {
+      data = DUNGEON_ENTRANCES.indexOf(entranceData.entrance);
+      data = (data | 0x80000000) >>> 0;
     } else {
-      const regionId = (REGIONS as any)[region];
-      buffers.push(toU32Buffer([regionId]));
+      data = (REGIONS as any)[entranceData.region];
     }
+
+    bufWriteU32BE(buffer, i * 4, data);
   }
 
-  return concatUint8Arrays(buffers);
+  return buffer;
 }
 
 const regionsBuffer = (regions: Region[]) => {
