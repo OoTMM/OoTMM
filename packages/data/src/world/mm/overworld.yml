@@ -1429,7 +1429,7 @@
      BOAT_RIDE: "((soul_npc(SOUL_NPC_TOURIST_CENTER) && event(PICTURE_SWAMP)) || (event(KOUME) && (!setting(erIndoorsExtra) || can_use_wallet(1)))) && is_swamp_poisoned"
   locations:
     "Tourist Information Pictobox": "event(KOUME) && is_swamp_poisoned"
-    "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared && has_bow"
+    "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared"
     "Tourist Information Tingle Picture": "soul_npc(SOUL_NPC_TOURIST_CENTER) && (event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)) && is_swamp_poisoned"
 #    "Tourist Information Big Octo Picture": "event(PICTURE_BIG_OCTO) && is_swamp_poisoned"
 #    "Tourist Information Consolation Prize": "event(PICTURE_SWAMP) && is_swamp_poisoned"
