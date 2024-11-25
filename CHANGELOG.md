@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Romani sometimes being present without having collected her soul.
 - Some starting items being hinted "nowhere".
 - Spin attack with child sword being ridiculously small. Gilded sword spin is now as big as Biggoron sword spin.
 - Potential loss of MM sword due to Epona and overworld or region entrances randomization.

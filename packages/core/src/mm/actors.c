@@ -263,6 +263,19 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_MA_YTS:
     case ACTOR_EN_MA4:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MALON));
+    case ACTOR_EN_INVADEPOH:
+        switch ((variable >> 4) & 0xf)
+        {
+        case 0x4:
+        case 0x5:
+        case 0x7:
+        case 0x8:
+        case 0x9:
+        case 0xb:
+        case 0xc:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MALON));
+        }
+        break;
     case ACTOR_EN_ZOT:
     case ACTOR_EN_ZOW:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ZORA));
@@ -530,9 +543,9 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_THIEVES));
     case ACTOR_EN_KAIZOKU:
         return comboHasSoulMm(GI_MM_SOUL_ENEMY_THIEVES);
-    default:
-        return 1;
     }
+
+    return 1;
 }
 
 static int canSpawnActor(PlayState* play, s16 actorId, u16 variable)
