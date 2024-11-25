@@ -108,21 +108,24 @@ export class Generator {
     const playerNumber = (id: number) => patchfiles.length === 1 ? undefined : id + 1;
     const teamNumber = (id: number) => this.opts.settings.teams === 1 ? undefined : id + 1;
 
+    /* Make team UUIDs */
+    const teamsUuids: Uint8Array[] = [];
+    for (let i = 0; i < this.opts.settings.teams; ++i) {
+      teamsUuids.push(crypto.getRandomValues(new Uint8Array(16)));
+    }
+
     /* Build ROM(s) */
     if ((patchfiles.length === 1 && this.opts.settings.teams === 1) || this.opts.patch || isDev) {
       for (let i = 0; i < patchfiles.length; i++) {
+        if (!this.opts.patch) {
+          patchfiles[i].multiId = teamsUuids[0];
+        }
         const { rom, cosmeticLog } = await pack({ opts: this.opts, monitor: this.monitor, roms, patchfile: patchfiles[i], addresses });
         files.push(makeFile({ hash: hashFileName, data: rom, mime: 'application/octet-stream', world: playerNumber(i), ext: 'z64' }));
         if (cosmeticLog) {
           files.push(makeFile({ name: 'Cosmetics', hash: hashFileName, data: cosmeticLog, mime: 'text/plain', world: playerNumber(i), ext: 'txt' }));
         }
       }
-    }
-
-    /* Make team UUIDs */
-    const teamsUuids: Uint8Array[] = [];
-    for (let i = 0; i < this.opts.settings.teams; ++i) {
-      teamsUuids.push(crypto.getRandomValues(new Uint8Array(16)));
     }
 
     /* Build patch(es) */
