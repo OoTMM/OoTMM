@@ -448,7 +448,7 @@ void Save_DoSave(PlayState* play, int saveFlags)
 }
 
 static u8 sHoldTarget;
-COSMETIC(HOLD_TARGET, sHoldTarget);
+EXPORT_SYMBOL(HOLD_TARGET, sHoldTarget);
 
 static void Save_CopySettings(void* dst, const void* src, size_t size)
 {

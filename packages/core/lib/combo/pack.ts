@@ -70,7 +70,7 @@ function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder
     const compressedEntry = compressedDma.read(i);
     const name = `${game}/${FILES[game][i]}`;
     if (compressedEntry.physEnd === 0xffffffff) {
-      romBuilder.addFile({ type: 'dummy', data: new Uint8Array(0), name, game, index: i, vaddr: uncompressedEntry.virtStart });
+      romBuilder.addFile({ type: 'dummy', data: new Uint8Array(0), name, game, index: i, vaddr: uncompressedEntry.virtStart, vram: {} });
       continue;
     }
     const data = rom.subarray(uncompressedEntry.virtStart, uncompressedEntry.virtEnd);
@@ -151,7 +151,23 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
 
   /* Apply cosmetics */
   monitor.log("Pack: Cosmetics");
-  const cosmeticLog = await cosmetics(monitor, args.opts, romBuilder, (patchfile.meta || {}).cosmetics);
+  const cosmeticLog = await cosmetics(monitor, args.opts, romBuilder, patchfile.symbols);
+
+  /* Inject the multi Id */
+  for (const game of GAMES) {
+    const addrs = patchfile.symbols[game].get('MULTI_ID');
+    if (addrs === undefined) {
+      throw new Error(`Missing MULTI_ID symbol for ${game}`);
+    }
+    for (const addr of addrs) {
+      const file = romBuilder.fileByVRAM(game, addr);
+      if (file === null) {
+        throw new Error(`Failed to find file for MULTI_ID in ${game}`);
+      }
+      const offset = addr - file.vram![game]![0];
+      file.data.set(patchfile.multiId, offset);
+    }
+  }
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");

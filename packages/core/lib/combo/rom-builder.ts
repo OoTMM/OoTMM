@@ -37,6 +37,13 @@ function checksum(rom: Uint8Array) {
   return [(t6 ^ t4 ^ t3) >>> 0, (t5 ^ t2 ^ t1) >>> 0];
 }
 
+type RomFileRange = [number, number];
+
+type RomFileVram = {
+  oot?: RomFileRange;
+  mm?: RomFileRange;
+}
+
 export type RomFile = {
   name?: string;
   type: 'compressed' | 'uncompressed' | 'dummy';
@@ -46,7 +53,7 @@ export type RomFile = {
   data: Uint8Array;
   paddr?: number;
   vaddr?: number;
-  vram?: [number, number];
+  vram?: { [k in Game]?: [number, number] };
   alias?: RomFile;
   dma?: DmaDataRecord;
 };
@@ -159,7 +166,7 @@ export class RomBuilder {
   }
 
   addFile(args: AddFileArgs) {
-    const file: RomFile = { ...args, vram: args.vram ? [...args.vram] : undefined, injected: false };
+    const file: RomFile = { ...args, vram: { ...args.vram }, injected: false };
     if (file.game === 'custom' && file.vaddr === undefined) {
       const size = file.data.length;
       const sizeAligned = (size + 0xf) & ~0xf;
@@ -208,9 +215,15 @@ export class RomBuilder {
     return file;
   }
 
-  fileByVRAM(vram: number): RomFile | null {
+  fileByVRAM(game: 'oot' | 'mm', vram: number): RomFile | null {
     for (const file of this.files) {
-      if (file.vram && vram >= file.vram[0] && vram < file.vram[1])
+      const allVram = file.vram;
+      if (!allVram)
+        continue;
+      const gameVram = allVram[game];
+      if (!gameVram)
+        continue;
+      if (vram >= gameVram[0] && vram < gameVram[1])
         return file;
     }
     return null;

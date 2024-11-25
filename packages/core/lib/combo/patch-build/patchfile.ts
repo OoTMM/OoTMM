@@ -1,7 +1,8 @@
 import JSZip from 'jszip';
 import { concatUint8Arrays } from 'uint8array-extras';
+import { Game } from '../config';
 
-const VERSION = '1.1';
+const VERSION = '1.2';
 
 class BlobBuilder {
   private parts: Uint8Array[];
@@ -33,7 +34,7 @@ type Patch = {
 type NewFile = {
   name?: string;
   vrom: number;
-  vram?: [number, number];
+  vram?: { [k in Game]?: [number, number] };
   data: Uint8Array;
   compressed: boolean;
 }
@@ -44,6 +45,8 @@ export class Patchfile {
   public removedFiles: string[];
   public hash: string;
   public meta: any;
+  public symbols: Record<Game, Map<string, number[]>>;
+  public multiId: Uint8Array;
 
   constructor() {
     this.patches = {};
@@ -51,14 +54,12 @@ export class Patchfile {
     this.removedFiles = [];
     this.hash = 'XXXXXXXX';
     this.meta = {};
+    this.symbols = { oot: new Map(), mm: new Map() };
+    this.multiId = new Uint8Array(16);
   }
 
   setHash(hash: string) {
     this.hash = hash;
-  }
-
-  setMeta(meta: any) {
-    this.meta = meta;
   }
 
   addPatch(file: string, addr: number, data: Uint8Array) {
@@ -68,18 +69,22 @@ export class Patchfile {
   }
 
   addNewFile(args: NewFile) {
-    this.newFiles.push({ ...args, vram: args.vram ? [...args.vram] : undefined });
+    this.newFiles.push({ ...args, vram: { ...args.vram } });
   }
 
   async deserialize(data: Uint8Array) {
     let meta: any;
+    let symbols: any;
     let blob: Uint8Array;
+    let multiId: Uint8Array;
 
     try {
       /* Load from the zip */
       const zip = await JSZip.loadAsync(data);
       meta = JSON.parse(await zip.file('meta.json')!.async('text'));
       blob = await zip.file('blob.bin')!.async('uint8array');
+      symbols = JSON.parse(await zip.file('symbols.json')!.async('text'));
+      multiId = await zip.file('multi-uuid.bin')!.async('uint8array');
     } catch (e) {
       throw new Error(`Failed to load patchfile: ${e}`);
     }
@@ -88,11 +93,17 @@ export class Patchfile {
       throw new Error(`Unsupported patchfile version: ${meta.version}`);
     }
 
+    if (multiId.length !== 16) {
+      throw new Error('Invalid multi-id length');
+    }
+
     this.hash = meta.hash;
     this.meta = meta.meta;
     this.removedFiles = meta.removedFiles;
     this.newFiles = [];
     this.patches = {};
+    this.symbols = { oot: new Map(), mm: new Map() };
+    this.multiId = multiId;
 
     /* Load new files */
     for (const f of meta.newFiles) {
@@ -107,6 +118,15 @@ export class Patchfile {
         const data = blob.subarray(p.offset, p.offset + p.size);
         this.patches[k].push({ addr: p.addr, data });
       }
+    }
+
+    /* Load symbols */
+    for (const k in symbols.oot) {
+      this.symbols.oot.set(k, symbols.oot[k]);
+    }
+
+    for (const k in symbols.mm) {
+      this.symbols.mm.set(k, symbols.mm[k]);
     }
   }
 
@@ -151,6 +171,19 @@ export class Patchfile {
     zip.file('meta.json', JSON.stringify(meta));
     zip.file('blob.bin', blobBuilder.concat());
 
+    /* Store multi id */
+    zip.file('multi-uuid.bin', this.multiId);
+
+    /* Store symbols */
+    const symbols: any = { oot: {}, mm: {} };
+    for (const [k, v] of this.symbols.oot) {
+      symbols.oot[k] = v;
+    }
+    for (const [k, v] of this.symbols.mm) {
+      symbols.mm[k] = v;
+    }
+    zip.file('symbols.json', JSON.stringify(symbols));
+
     return await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' });
   }
 
@@ -164,6 +197,14 @@ export class Patchfile {
     }
     ret.removedFiles = [...this.removedFiles];
     ret.newFiles = [...this.newFiles];
+    ret.multiId = this.multiId.slice();
+    ret.symbols = { oot: new Map(), mm: new Map() };
+    for (const [k, v] of this.symbols.oot) {
+      ret.symbols.oot.set(k, [...v]);
+    }
+    for (const [k, v] of this.symbols.mm) {
+      ret.symbols.mm.set(k, [...v]);
+    }
     return ret;
   }
 }

@@ -137,26 +137,26 @@ function(build game)
   # Extract main sections
   set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")
   set(game_patch "${CMAKE_BINARY_DIR}/${game}_patch.bin")
-  set(game_cosmetic_name "${CMAKE_BINARY_DIR}/${game}_cosmetic_name.bin")
-  set(game_cosmetic_addr "${CMAKE_BINARY_DIR}/${game}_cosmetic_addr.bin")
+  set(game_symbols_name "${CMAKE_BINARY_DIR}/${game}_symbols_name.bin")
+  set(game_symbols_addr "${CMAKE_BINARY_DIR}/${game}_symbols_addr.bin")
   add_custom_command(
     OUTPUT
       "${game_payload}"
       "${game_patch}"
-      "${game_cosmetic_name}"
-      "${game_cosmetic_addr}"
+      "${game_symbols_name}"
+      "${game_symbols_addr}"
     COMMAND "${ARCH}-objcopy" --only-section=.text -O binary "$<TARGET_FILE:${game}>" ${game_payload}
     COMMAND "${ARCH}-objcopy" --only-section=.patch -O binary "$<TARGET_FILE:${game}>" ${game_patch}
-    COMMAND "${ARCH}-objcopy" --only-section=.cosmetic_name -O binary "$<TARGET_FILE:${game}>" ${game_cosmetic_name}
-    COMMAND "${ARCH}-objcopy" --only-section=.cosmetic_addr -O binary "$<TARGET_FILE:${game}>" ${game_cosmetic_addr}
+    COMMAND "${ARCH}-objcopy" --only-section=.symbols_name -O binary "$<TARGET_FILE:${game}>" ${game_symbols_name}
+    COMMAND "${ARCH}-objcopy" --only-section=.symbols_addr -O binary "$<TARGET_FILE:${game}>" ${game_symbols_addr}
     DEPENDS ${game}
     COMMENT "Extracting sections for ${game}"
     VERBATIM
   )
   add_custom_target(
-    ${game}_sections ALL DEPENDS "${game_payload}" "${game_patch}" "${game_cosmetic_name}" "${game_cosmetic_addr}"
+    ${game}_sections ALL DEPENDS "${game_payload}" "${game_patch}" "${game_symbols_name}" "${game_symbols_addr}"
   )
-  install(FILES ${game_payload} ${game_patch} ${game_cosmetic_name} ${game_cosmetic_addr} DESTINATION "bin")
+  install(FILES ${game_payload} ${game_patch} ${game_symbols_name} ${game_symbols_addr} DESTINATION "bin")
 
   # Extract overlays
   foreach(ovl ${OVL_NAMES})

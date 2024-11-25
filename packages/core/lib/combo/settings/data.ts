@@ -55,13 +55,23 @@ export const SETTINGS = [{
   cond: (x: any) => x.mode === 'multi',
   default: 1
 }, {
+  key: 'teams',
+  name: 'Teams',
+  category: 'main',
+  type: 'number',
+  description: 'For multiplayers, how many teams will compete. Players in different teams will play the same seed but will not interact with each other.',
+  min: 1,
+  max: 64,
+  cond: (x: any) => x.mode !== 'single',
+  default: 1
+}, {
   key: 'distinctWorlds',
   name: 'Distinct Worlds',
   category: 'main',
   type: 'boolean',
   description: 'For multiworld, with settings that involve randomness, should the worlds have distinct properties (ER, MQ, price rando...).',
   cond: (x: any) => x.mode === 'multi',
-  default: false
+  default: true
 }, {
   key: 'goal',
   name: 'Goal',

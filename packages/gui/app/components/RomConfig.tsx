@@ -57,6 +57,9 @@ export function RomConfig() {
         {isRandomSettings && (
           <>
             <Setting setting='games'/>
+            <Setting setting='mode'/>
+            <Setting setting='players'/>
+            <Setting setting='teams'/>
             {settings.games !== 'mm' && <Checkbox label="Random Settings: Master Quest" checked={randomSettings.mq} onInput={(x) => setRandomSettings({ mq: x })} />}
             {settings.games !== 'oot' && <Checkbox label="Random Settings: MM JP Layouts" checked={randomSettings.jp} onInput={(x) => setRandomSettings({ jp: x })} />}
             <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onInput={(x) => setRandomSettings({ er: x })} />

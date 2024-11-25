@@ -1057,7 +1057,6 @@ export const prices = (worldId: number, logic: LogicResult): Uint8Array => {
 
 export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array => {
   const buffers = [];
-  buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
   buffers.push(dungeonWarpsBuffer(logic.worlds[worldId]));
   buffers.push(dungeonEntrancesBuffer(logic.worlds[worldId]));

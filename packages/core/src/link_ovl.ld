@@ -5,8 +5,8 @@ SECTIONS
   .rodata : { SORT(*)(.rodata*); }
   .meta : { SORT(*)(.meta*); }
 
-  .cosmetic_addr : { SORT(*)(.cosmetic_addr); }
-  .cosmetic_name : { SORT(*)(.cosmetic_name); }
+  .symbols_addr : { SORT(*)(.symbols_addr); }
+  .symbols_name : { SORT(*)(.symbols_name); }
 
   /DISCARD/ : { *(.*); }
 }

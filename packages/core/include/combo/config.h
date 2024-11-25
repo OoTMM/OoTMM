@@ -37,7 +37,6 @@ SpecialCond;
 
 typedef struct
 {
-    u8              uuid[16];
     u8              playerId;
     u32             dungeonWarps[12];
     u32             dungeonEntrances[26];

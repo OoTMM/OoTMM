@@ -61,14 +61,14 @@ NetMsg;
 
 typedef struct
 {
-    u8*     uuid;
-    u32     ledgerBase;
-    NetCmd  cmdOut;
-    NetCmd  cmdIn;
-    u8      msgInSize[NET_MSG_MAX];
-    u8      msgOutSize[NET_MSG_MAX];
-    u16     msgClientId[NET_MSG_MAX];
-    NetMsg  msgBuffer[NET_MSG_MAX];
+    const u8*   uuid;
+    u32         ledgerBase;
+    NetCmd      cmdOut;
+    NetCmd      cmdIn;
+    u8          msgInSize[NET_MSG_MAX];
+    u8          msgOutSize[NET_MSG_MAX];
+    u16         msgClientId[NET_MSG_MAX];
+    NetMsg      msgBuffer[NET_MSG_MAX];
 }
 NetContext;
 

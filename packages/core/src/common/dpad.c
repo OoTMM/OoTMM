@@ -25,7 +25,7 @@ static const int kDpadOffY[] = { 1, -1, 0, 0 };
 static float kDpadItemScale = 0.4f;
 
 static Color_RGB8 sDpadColor = { 0x60, 0x60, 0x60 };
-COSMETIC(DPAD_COLOR, sDpadColor);
+EXPORT_SYMBOL(DPAD_COLOR, sDpadColor);
 
 static int canShowDpad(void)
 {

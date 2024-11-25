@@ -77,9 +77,7 @@ export const logic = async (monitor: Monitor, opts: Options) => {
     .apply(LogicPassHash)
     .exec();
 
-    const uuid = crypto.getRandomValues(new Uint8Array(16));
-
-    return { ...data, uuid };
+    return data;
 };
 
 export type LogicResult = Awaited<ReturnType<typeof logic>>;

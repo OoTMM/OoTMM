@@ -19,10 +19,13 @@ static void wait(void)
     }
 }
 
+ALIGNED(16) static const u8 kMultiId[16];
+EXPORT_SYMBOL(MULTI_ID, kMultiId);
+
 void netInit(void)
 {
     /* Init the context */
-    gNetCtx.uuid = gComboConfig.uuid;
+    gNetCtx.uuid = kMultiId;
     gNetCtx.ledgerBase = 0xffffffff;
 
     /* Init the global struct */

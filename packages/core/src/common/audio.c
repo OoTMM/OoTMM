@@ -33,7 +33,7 @@
 #endif
 
 static u8 sDisplayMusicNames;
-COSMETIC(MUSIC_NAMES, sDisplayMusicNames);
+EXPORT_SYMBOL(MUSIC_NAMES, sDisplayMusicNames);
 ALIGNED(16) static char sAudioNameBuffer[49];
 static u8 sAudioNameTTL;
 static u16 sAudioNameSeq = 0xffff;

@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { GAMES } from '../config';
+import { Game, GAMES } from '../config';
 import { recolorImage } from '../image';
 import { Options } from '../options';
 import { Random, randString, sample } from '../random';
@@ -65,7 +65,7 @@ class CosmeticsPass {
     private monitor: Monitor,
     private opts: Options,
     private builder: RomBuilder,
-    private meta: any,
+    private symbols: Record<Game, Map<string, number[]>>,
   ) {
     this.assetsPromise = null;
     this.logWriter = new LogWriter();
@@ -80,14 +80,13 @@ class CosmeticsPass {
 
   private patchSymbol(name: string, buffer: Uint8Array) {
     for (const game of GAMES) {
-      const syms = this.meta[game] || {};
-      const addrs = syms[name] || [];
+      const addrs = this.symbols[game].get(name) || [];
       for (const addr of addrs) {
-        const file = this.builder.fileByVRAM(addr);
+        const file = this.builder.fileByVRAM(game, addr);
         if (!file) {
           throw new Error(`Failed to find file for symbol ${name} at 0x${addr.toString(16)}`);
         }
-        const offset = addr - file.vram![0];
+        const offset = addr - file.vram![game]![0];
         file.data.set(buffer, offset);
       }
     }
@@ -424,7 +423,7 @@ class CosmeticsPass {
   }
 }
 
-export async function cosmetics(monitor: Monitor, opts: Options, builder: RomBuilder, meta: any): Promise<string | null> {
-  const x = new CosmeticsPass(monitor, opts, builder, meta);
+export async function cosmetics(monitor: Monitor, opts: Options, builder: RomBuilder, symbols: Record<Game, Map<string, number[]>>): Promise<string | null> {
+  const x = new CosmeticsPass(monitor, opts, builder, symbols);
   return x.run();
 }

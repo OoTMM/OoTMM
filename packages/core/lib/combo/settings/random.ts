@@ -55,6 +55,9 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.tricks = oldSettings.tricks;
   base.hints = oldSettings.hints;
   base.games = oldSettings.games;
+  base.mode = oldSettings.mode;
+  base.players = oldSettings.players;
+  base.teams = oldSettings.teams;
 
   /* Main Settings */
   base.goal = sampleWeighted(random, { both: 10, triforce: 3, triforce3: 3 });
