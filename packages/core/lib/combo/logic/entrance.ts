@@ -12,7 +12,6 @@ import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { optimizeStartingAndPool, optimizeWorld } from './optimizer';
-import { a } from 'vitest/dist/chunks/suite.B2jumIFP';
 import { Region } from './regions';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
