@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix talking to Skull Kid OoT sometimes crashing.
 - Fix Romani sometimes being present without having collected her soul.
 - Some starting items being hinted "nowhere".
 - Spin attack with child sword being ridiculously small. Gilded sword spin is now as big as Biggoron sword spin.

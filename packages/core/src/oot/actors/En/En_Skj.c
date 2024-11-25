@@ -76,5 +76,4 @@ static void EnSkj_InitMaskTrade(Actor* this, PlayState* play)
     func(this, play);
 }
 
-//PATCH_FUNC(0x80a6e978, EnSkj_InitMaskTrade);
 PATCH_FUNC(0x80a6e6ac, EnSkj_InitMaskTrade);

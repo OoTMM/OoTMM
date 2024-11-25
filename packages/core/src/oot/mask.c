@@ -11,6 +11,9 @@ u16 MaskReaction_GetTextId(PlayState* play, int slot)
     if (link->mask == MASK_KEATON && slot == MASK_REACTION_SET_HYRULIAN_GUARD)
         return 0x712d;
 
+    if (slot == MASK_REACTION_SET_SKULL_KID)
+        return 0x10bc;
+
     return 0;
 }
 
