@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Add the Japanese version of Stone Tower Temple.
 - Add the Japanese version of Stone Tower.
 - Add the Japanese version of Deku Palace & the matching grottos, as a setting.
+- Add a trick to climb Snowhead Temple pillar room from ground floor by using hookshot to kill freezards and spawn a hookshot-able chest
 
 ### Changed
 
@@ -28,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - Spin attack with child sword being ridiculously small. Gilded sword spin is now as big as Biggoron sword spin.
 - Potential loss of MM sword due to Epona and overworld or region entrances randomization.
 - Logic for boat archery mistakenly requiring a bow.
+- Fix the ground floor pots of Snowhead Temple pillar room not being in logic without the ability to melt ice.
 
 ## [26.1] - 2024-11-09
 
