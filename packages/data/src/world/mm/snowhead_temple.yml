@@ -123,7 +123,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 0": "true"
-    "Snowhead Temple Pillars Room Upper": "((can_use_fire_short_range || trick_sht_hot_water_er) && has(MASK_DEKU)) || short_hook_anywhere || (can_hookshot && trick(MM_SHT_PILLAR_ROOM_HOOKSHOT))" # + climb anywhere
+    "Snowhead Temple Pillars Room Upper": "((can_use_fire_short_range || trick_sht_hot_water_er) && has(MASK_DEKU)) || short_hook_anywhere || (soul_freezard && can_hookshot && trick(MM_SHT_PILLAR_ROOM_HOOKSHOT))" # + climb anywhere
   locations:
     "Snowhead Temple Pot Pillars Room Lower 1": "true"
     "Snowhead Temple Pot Pillars Room Lower 2": "true"
