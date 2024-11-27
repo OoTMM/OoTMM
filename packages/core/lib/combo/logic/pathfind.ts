@@ -3,12 +3,13 @@ import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
 import { AreaData, Expr, ExprResult, MM_TIME_SLICES, RecursiveArray, isDefaultRestrictions } from './expr';
 import { Location, locationData, makeLocation } from './locations';
-import { World, WorldOptimized, optimizedWorldView } from './world';
+import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
 import { countMapAdd } from '../util';
 import { Item, Items, ItemsCount, PlayerItems } from '../items';
 import { isTriforcePiece } from '../items/helpers';
+import { exprPartialEval } from './expr-partial-eval';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -216,14 +217,12 @@ type PathfinderOptions = {
 export class Pathfinder {
   private opts!: PathfinderOptions;
   private state!: PathfinderState;
-  private worldsOptimized: WorldOptimized[];
 
   constructor(
     private readonly worlds: World[],
     private readonly settings: Settings,
     private readonly startingItems: PlayerItems,
   ) {
-    this.worldsOptimized = worlds.map(world => optimizedWorldView(world));
   }
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
@@ -292,8 +291,6 @@ export class Pathfinder {
     const previousAreaData = as.areas.get(area);
     const newAreaData = previousAreaData ? mergeAreaData(previousAreaData, sourceAreaData) : sourceAreaData;
     const worldArea = world.areas[area];
-    const worldOptimized = this.worldsOptimized[worldId][age];
-    const worldAreaOptimized = worldOptimized[area];
 
     if (worldArea.game === 'oot') {
       if (['day', 'flow'].includes(worldArea.time)) {
@@ -308,7 +305,7 @@ export class Pathfinder {
         return;
       }
 
-      if (worldAreaOptimized.stay === null) {
+      if (worldArea.stay === null) {
         let mmTime;
         let mmTime2;
         if (newAreaData.mmTime) {
@@ -344,7 +341,7 @@ export class Pathfinder {
           if ((newAreaData.mmTime & mask1) || (newAreaData.mmTime2 & mask2)) {
             waitMode = true;
           } else if (waitMode) {
-            const stayExpr = worldAreaOptimized.stay![i];
+            const stayExpr = worldArea.stay![i];
             const result = this.evalExpr(worldId, stayExpr, age, area);
             if (result.result) {
               waitMode = true;
@@ -372,7 +369,7 @@ export class Pathfinder {
     as.areas.set(area, newAreaData);
 
     /* Eval locations */
-    for (const l in worldAreaOptimized.locations) {
+    for (const l in worldArea.locations) {
       if (ws.restrictedLocations && !this.opts.includeForbiddenReachable && !ws.restrictedLocations.has(l)) {
         continue;
       }
@@ -383,18 +380,18 @@ export class Pathfinder {
     }
 
     /* Eval events */
-    for (const e in worldAreaOptimized.events) {
+    for (const e in worldArea.events) {
       this.evalEvent(worldId, age, area, e);
     }
 
     /* Eval exits */
-    for (const e in worldAreaOptimized.exits) {
+    for (const e in worldArea.exits) {
       this.evalExit(worldId, age, area, e);
     }
 
     /* Eval gossips */
     if (this.opts.gossips) {
-      for (const g in worldAreaOptimized.gossip) {
+      for (const g in worldArea.gossip) {
         this.evalGossip(worldId, age, area, g);
       }
     }
@@ -406,6 +403,8 @@ export class Pathfinder {
     const as = ws.ages[age];
     const areaData = as.areas.get(area)!;
     const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
+
+    expr = exprPartialEval(expr, { age });
     return expr.eval(state);
   }
 
@@ -518,11 +517,9 @@ export class Pathfinder {
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
-    const areasOptimized = this.worldsOptimized[worldId][age];
     const world = this.worlds[worldId];
     const a = world.areas[area];
-    const aOptimized = areasOptimized[area];
-    const expr = aOptimized.exits[exit];
+    const expr = a.exits[exit];
     const exprResult = this.evalExpr(worldId, expr, age, area);
 
     /* Track dependencies */
@@ -568,11 +565,10 @@ export class Pathfinder {
 
     const world = this.worlds[worldId];
     const as = ws.ages[age];
-    const areasOptimized = this.worldsOptimized[worldId][age];
-    const areaOptimized = areasOptimized[area];
+    const worldArea = world.areas[area];
 
     /* Evaluate the event */
-    const expr = areaOptimized.events[event];
+    const expr = worldArea.events[event];
     if (!expr) {
       throw new Error(`Event ${event} not found in area ${area}`);
     }
@@ -629,7 +625,7 @@ export class Pathfinder {
       return;
     }
     const as = ws.ages[age];
-    const areasOptimized = this.worldsOptimized[worldId][age];
+    const worldArea = this.worlds[worldId].areas[area];
 
     let isAllowed = true;
     if (this.opts.includeForbiddenReachable) {
@@ -640,10 +636,9 @@ export class Pathfinder {
       }
     }
 
-    const areaOptimized = areasOptimized[area];
 
     /* Evaluate the location */
-    const expr = areaOptimized.locations[location];
+    const expr = worldArea.locations[location];
     const result = this.evalExpr(worldId, expr, age, area);
 
     /* If the result is true, add the location to the state and queue up everything */
@@ -668,11 +663,10 @@ export class Pathfinder {
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
-    const areasOptimized = this.worldsOptimized[worldId][age];
-    const areaOptimized = areasOptimized[area];
+    const worldArea = this.worlds[worldId].areas[area];
 
     /* Evaluate the gossip */
-    const expr = areaOptimized.gossip[gossip];
+    const expr = worldArea.gossip[gossip];
     const result = this.evalExpr(worldId, expr, age, area);
 
     /* If any of the results are true, add the gossip to the state and queue up everything */

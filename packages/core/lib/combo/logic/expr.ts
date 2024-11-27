@@ -264,6 +264,7 @@ function mergeDependencies(deps: ExprDependencies[]): ExprDependencies {
 
 export abstract class Expr {
   readonly key: string;
+  _cache: Record<string, Expr> = {};
 
   constructor(k: string) {
     this.key = k;

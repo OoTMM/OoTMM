@@ -9,7 +9,6 @@ import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewab
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
 import { ItemProperties } from './item-properties';
-import { optimizeWorld } from './optimizer';
 import { isDungeonReward } from '../items/helpers';
 import { mustStartWithMasterSword } from '../settings/util';
 
@@ -969,7 +968,6 @@ export class LogicPassSolver {
     }
 
     /* We need to reset the pathfinder as we changed the starting items and the world */
-    this.worlds.forEach(x => optimizeWorld(x));
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null, { recursive: true });
   }
