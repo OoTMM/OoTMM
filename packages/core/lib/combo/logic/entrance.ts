@@ -11,7 +11,7 @@ import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { optimizeStartingAndPool, optimizeWorld } from './optimizer';
+import { optimizeWorld } from './optimizer';
 import { Region } from './regions';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
@@ -1185,7 +1185,6 @@ export class LogicPassEntrances {
 
     for (let i = 0; i < this.worlds.length; ++i) {
       const w = this.worlds[i];
-      optimizeStartingAndPool(w, i, this.input.startingItems, this.input.allItems);
       optimizeWorld(w);
     }
 

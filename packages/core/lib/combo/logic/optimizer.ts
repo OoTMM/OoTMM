@@ -142,7 +142,7 @@ export function optimizeWorld(world: World) {
   };
 }
 
-function transformWorldExprs(world: World, cb: (e: Expr) => Expr | null) {
+function transformWorldExprs(world: World, cb: (e: Expr) => Expr | null): World {
   for (const name in world.areas) {
     const area = world.areas[name];
     area.exits = transformEvalExprMap(area.exits, cb);
@@ -154,10 +154,12 @@ function transformWorldExprs(world: World, cb: (e: Expr) => Expr | null) {
       area.stay = area.stay.map(x => exprTransform(x, cb));
     }
   }
+
+  return world;
 }
 
-export function optimizeStartingAndPool(world: World, worldId: number, startingItems: PlayerItems, allItems: PlayerItems) {
-  transformWorldExprs(world, (e) => {
+export function optimizeWorldStartingAndPool(world: World, worldId: number, startingItems: PlayerItems, allItems: PlayerItems): World {
+  return transformWorldExprs(world, (e) => {
     if (e instanceof ExprHas) {
       const pi = makePlayerItem(e.item, worldId);
 
