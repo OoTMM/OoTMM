@@ -449,8 +449,10 @@ export class LogicPassSolver {
       if (plandoItemId) {
         const plandoItem = itemByID(plandoItemId);
         for (let player = 0; player < this.input.settings.players; ++player) {
-          const item = makePlayerItem(plandoItem, player);
           const l = makeLocation(loc, player);
+          if (!this.locations.includes(l))
+            continue;
+          const item = makePlayerItem(plandoItem, player);
           this.place(l, item);
           removeItemPools(this.state.pools, item);
         }
@@ -1122,7 +1124,7 @@ export class LogicPassSolver {
 
   private placeJunkLocations() {
     const { settings } = this.input;
-    let locs = this.makePlayerLocations(settings.junkLocations);
+    let locs = this.makePlayerLocations(settings.junkLocations).filter(x => this.locations.includes(x));
     if (!settings.shuffleMasterSword && mustStartWithMasterSword(settings)) {
       locs = [...locs, ...this.makePlayerLocations(['OOT Temple of Time Master Sword'])];
     }
