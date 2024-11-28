@@ -12,6 +12,7 @@ import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { Region } from './regions';
+import { AGE_ADULT, AGE_CHILD } from './constants';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;
@@ -1111,18 +1112,18 @@ export class LogicPassEntrances {
     for (const w of newWorlds) {
       const a = w.areas['OOT SPAWN'];
       if (this.input.settings.startingAge === 'child') {
-        a.exits['OOT SPAWN ADULT'] = exprAge('adult');
+        a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
         a.exits['OOT SPAWN CHILD'] = exprFalse();
       } else {
         a.exits['OOT SPAWN ADULT'] = exprFalse();
-        a.exits['OOT SPAWN CHILD'] = exprAge('child');
+        a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
       }
     }
 
     const agePathfinder = new Pathfinder(newWorlds, this.input.settings, this.input.startingItems);
     const pathfinderState = agePathfinder.run(null, { recursive: true });
     const target = 'OOT Temple of Time';
-    if (pathfinderState.ws.some(x => !(x.ages.adult.areas.has(target) || x.ages.child.areas.has(target)))) {
+    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
       throw new LogicEntranceError('Temple of Time is unreachable from the non-starting age');
     }
   }

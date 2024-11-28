@@ -9,11 +9,8 @@ import { ItemPlacement } from './solve';
 import { countMapAdd } from '../util';
 import { Item, Items, ItemsCount, PlayerItems } from '../items';
 import { isTriforcePiece } from '../items/helpers';
-import { exprPartialEval } from './expr-partial-eval';
-
-export const AGES = ['child', 'adult'] as const;
-
-export type Age = typeof AGES[number];
+import { exprPartialEvalAge } from './expr-partial-eval';
+import { Age, AGE_ADULT, AGE_CHILD, AGES } from './constants';
 
 const recursiveForEach = <T>(arr: any, cb: (x: T) => void) => {
   if (Array.isArray(arr)) {
@@ -61,10 +58,7 @@ type PathfinderAgeState = {
 };
 
 type PathfinderWorldState = {
-  ages: {
-    child: PathfinderAgeState;
-    adult: PathfinderAgeState;
-  },
+  ages: [PathfinderAgeState, PathfinderAgeState];
   uncollectedLocations: Set<string>;
   collectedLocations: Set<string>;
   items: ItemsCount;
@@ -107,10 +101,7 @@ const defaultAgeState = (): PathfinderAgeState => ({
 });
 
 const defaultWorldState = (startingItems: ItemsCount): PathfinderWorldState => ({
-  ages: {
-    child: defaultAgeState(),
-    adult: defaultAgeState(),
-  },
+  ages: [defaultAgeState(), defaultAgeState()],
   uncollectedLocations: new Set(),
   collectedLocations: new Set(),
   items: new Map(startingItems),
@@ -359,7 +350,7 @@ export class Pathfinder {
 
     /* Age swap */
     if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.ageChange && area !== fromArea) {
-      const otherAge = age === 'child' ? 'adult' : 'child';
+      const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
       this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
     }
 
@@ -404,7 +395,7 @@ export class Pathfinder {
     const areaData = as.areas.get(area)!;
     const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
 
-    expr = exprPartialEval(expr, { age });
+    expr = exprPartialEvalAge(expr, age);
     return expr.eval(state);
   }
 
@@ -600,15 +591,15 @@ export class Pathfinder {
 
       /* If it's time travel at will, we need to re-explore everything */
       if (event === EVENT_TIME_TRAVEL) {
-        for (const [area, areaData] of ws.ages.child.areas) {
+        for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
           const a = world.areas[area];
           if (a.ageChange)
-            this.exploreArea(worldId, 'adult', area, cloneAreaData(areaData), area);
+            this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
         }
-        for (const [area, areaData] of ws.ages.adult.areas) {
+        for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
           const a = world.areas[area];
           if (a.ageChange)
-            this.exploreArea(worldId, 'child', area, cloneAreaData(areaData), area);
+            this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
         }
       }
     } else {
@@ -793,8 +784,8 @@ export class Pathfinder {
         if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
           continue;
         }
-        this.exploreArea(worldId, 'child', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
-        this.exploreArea(worldId, 'adult', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
+        this.exploreArea(worldId, AGE_CHILD, 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
+        this.exploreArea(worldId, AGE_ADULT, 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
       }
     }
   }
