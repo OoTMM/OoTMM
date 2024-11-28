@@ -13,7 +13,7 @@ import { World } from './world';
 import { ItemProperties } from './item-properties';
 import { CLOCKS } from '../items/groups';
 import { mustStartWithMasterSword } from '../settings/util';
-import { optimizeWorldStartingAndPool } from './optimizer';
+import { optimizeWorldStartingAndPool } from './world-optimizer';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
