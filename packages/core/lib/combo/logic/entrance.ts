@@ -115,6 +115,7 @@ class WorldShuffler {
   private readonly allEntrances: Entrance[];
   private usedEntrancesSrc: Set<Entrance>;
   private usedEntrancesDst: Set<Entrance>;
+  private sotExpr: Expr;
 
   constructor(
     private random: Random,
@@ -131,6 +132,7 @@ class WorldShuffler {
     this.allEntrances = this.computeAllEntrances();
     this.usedEntrancesSrc = new Set();
     this.usedEntrancesDst = new Set();
+    this.sotExpr = this.world.exprParsers.mm.parse('can_reset_time');
   }
 
   private entrancePolarity(entrance: Entrance): EntrancePolarity {
@@ -170,8 +172,7 @@ class WorldShuffler {
   }
 
   private songOfTime(e: Expr): Expr {
-    const subcond = this.world.exprParsers.mm.parse('can_reset_time');
-    return exprAnd([e, subcond]);
+    return exprAnd([e, this.sotExpr]);
   }
 
   private computeAllEntrances() {
@@ -204,6 +205,7 @@ class WorldShuffler {
 
     /* Change the world */
     let expr = this.getExpr(original);
+    /* DEBUG */
     if (entranceReplacement.game === 'mm') {
       if (!((entranceReplacement.flags as string[]).includes('no-global'))) {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
