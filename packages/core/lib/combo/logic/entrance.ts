@@ -233,6 +233,31 @@ class WorldShuffler {
     }
   }
 
+  private validateAgeTemple(world: World) {
+    if (!['ootmm', 'oot'].includes(this.settings.games))
+      return;
+
+    const newWorld = cloneWorld(world);
+    const a = newWorld.areas['OOT SPAWN'];
+    if (this.settings.startingAge === 'child') {
+      a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
+      a.exits['OOT SPAWN CHILD'] = exprFalse();
+    } else {
+      a.exits['OOT SPAWN ADULT'] = exprFalse();
+      a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
+    }
+
+    const worlds = [...this.worlds];
+    worlds[this.worldId] = newWorld;
+    const agePathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
+    const pathfinderState = agePathfinder.run(null, { recursive: true, singleWorld: this.worldId });
+    const target = 'OOT Temple of Time';
+    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
+      return false;
+    }
+    return true;
+  }
+
   private changeWorldAssumePools(world: World, pools: EntrancePools) {
     const assumedSets: Set<Entrance>[] = [];
 
@@ -337,6 +362,11 @@ class WorldShuffler {
     }
 
     if (this.settings.logic === 'allLocations' && pathfinderState.locations.size < newWorld.locations.size) {
+      return false;
+    }
+
+    /* Check ToT access */
+    if (!this.validateAgeTemple(newWorld)) {
       return false;
     }
 
@@ -483,7 +513,7 @@ class WorldShuffler {
         return finalOverrides;
       } else {
         this.backtrackCount++;
-        if (this.backtrackCount >= 1) {
+        if (this.backtrackCount >= 10) {
           throw new LogicEntranceError('Too many backtracks');
         }
       }
@@ -1161,34 +1191,10 @@ export class LogicPassEntrances {
     }
   }
 
-  private validateAgeTemple() {
-    if (!['ootmm', 'oot'].includes(this.input.settings.games))
-      return;
-
-    const newWorlds = this.worlds.map(w => cloneWorld(w));
-    for (const w of newWorlds) {
-      const a = w.areas['OOT SPAWN'];
-      if (this.input.settings.startingAge === 'child') {
-        a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
-        a.exits['OOT SPAWN CHILD'] = exprFalse();
-      } else {
-        a.exits['OOT SPAWN ADULT'] = exprFalse();
-        a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
-      }
-    }
-
-    const agePathfinder = new Pathfinder(newWorlds, this.input.settings, this.input.startingItems);
-    const pathfinderState = agePathfinder.run(null, { recursive: true });
-    const target = 'OOT Temple of Time';
-    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
-      throw new LogicEntranceError('Temple of Time is unreachable from the non-starting age');
-    }
-  }
-
   private validate() {
     if (this.input.settings.logic === 'none')
       return;
-    this.validateAgeTemple();
+
     const pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
     const pathfinderState = pathfinder.run(null, { assumedItems: this.input.allItems, recursive: true });
 
