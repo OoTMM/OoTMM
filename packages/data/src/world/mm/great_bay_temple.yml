@@ -304,6 +304,7 @@
   exits:
     "Oath to Order": "true"
   events:
+    BOSS_GYORG: "true"
     BOSS_GREAT_BAY: "true"
   locations:
     "Great Bay Temple Boss HC": "true"
