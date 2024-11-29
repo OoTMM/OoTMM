@@ -238,7 +238,7 @@ class WorldShuffler {
 
     for (const pool of Object.values(pools)) {
       const cardinality = pool.src.size * pool.dst.size;
-      if (cardinality > 2500 && pool.src.size > 50) {
+      if (cardinality > 5000 && pool.src.size > 50) {
         assumedSets.push(pool.dst);
       } else {
         for (const oldName of pool.src) {
@@ -483,7 +483,7 @@ class WorldShuffler {
         return finalOverrides;
       } else {
         this.backtrackCount++;
-        if (this.backtrackCount >= 20) {
+        if (this.backtrackCount >= 1) {
           throw new LogicEntranceError('Too many backtracks');
         }
       }
