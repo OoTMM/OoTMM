@@ -14,3 +14,11 @@ PATCH_START 0x80867c2c
   jal comboDoorIsUnlocked
    nop
 PATCH_END
+
+Door_DrawDoorLock_Hook:
+  j     Door_DrawDoorLock
+   move a1, s0
+
+PATCH_START 0x808685b0
+  jal Door_DrawDoorLock_Hook
+PATCH_END

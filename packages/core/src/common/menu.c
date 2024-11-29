@@ -63,7 +63,7 @@ static u32 kFairyColors[] = {
 };
 
 static const DungeonDef kDungeonDefsOot[] = {
-    { "Deku",           SCE_OOT_INSIDE_DEKU_TREE,       DUNGEONID_DEKU_TREE, DD_OOT | DD_MAP_COMPASS },
+    { "Deku",           SCE_OOT_DEKU_TREE,              DUNGEONID_DEKU_TREE, DD_OOT | DD_MAP_COMPASS },
     { "Dodongo",        SCE_OOT_DODONGO_CAVERN,         DUNGEONID_DODONGOS_CAVERN, DD_OOT | DD_MAP_COMPASS },
     { "Jabu",           SCE_OOT_INSIDE_JABU_JABU,       DUNGEONID_JABU_JABU, DD_OOT | DD_MAP_COMPASS },
     { "Forest",         SCE_OOT_TEMPLE_FOREST,          DUNGEONID_TEMPLE_FOREST, DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },

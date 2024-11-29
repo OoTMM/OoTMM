@@ -59,7 +59,7 @@ typedef struct PACKED
     /* 0xE304 */ u8 msgMode;
     /* 0xE305 */ u8 unk_e305;
     char unk_e306[0xdf];
-    u8   choice;
+    u8   choiceIndex;
     char unk_e3e6[0x06];
     u16  lastSongPlayed;
     u16  ocarinaMode;

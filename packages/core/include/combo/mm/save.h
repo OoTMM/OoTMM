@@ -352,10 +352,10 @@ typedef struct
     /* 0x3F17 */ u8 ambienceId;                         /* "old_env" */
     /* 0x3F18 */ u8 buttonStatus[6];                    /* "button_item" */
     /* 0x3F1E */ u8 hudVisibilityForceButtonAlphasByStatus; /* if btn alphas are updated through Interface_UpdateButtonAlphas, instead update them through Interface_UpdateButtonAlphasByStatus "ck_fg" */
-    /* 0x3F20 */ u16 nextHudVisibility;                 /* triggers the hud to change visibility to the requested value. Reset to HUD_VISIBILITY_IDLE when target is reached "alpha_type" */
+    /* 0x3F20 */ u16 nextHudVisibilityMode;             /* triggers the hud to change visibility to the requested value. Reset to HUD_VISIBILITY_IDLE when target is reached "alpha_type" */
     /* 0x3F22 */ u16 hudVisibility;                     /* current hud visibility "prev_alpha_type" */
     /* 0x3F24 */ u16 hudVisibilityTimer;                /* number of frames in the transition to a new hud visibility. Used to step alpha "alpha_count" */
-    /* 0x3F26 */ u16 prevHudVisibility;                 /* used to store and recover hud visibility for pause menu and text boxes "last_time_type" */
+    /* 0x3F26 */ u16 prevHudVisibilityMode;             /* used to store and recover hud visibility for pause menu and text boxes "last_time_type" */
     u16                 magicState;
     u16                 isMagicRequested;
     u16                 magicFlag;
@@ -566,6 +566,7 @@ typedef struct ALIGNED(16)
     u8 halfDays;
     RespawnData fw[2];
     RespawnData fwRespawnTop[2];
+    RespawnData fwRespawnDungeonEntrance[2];
 }
 MmCustomSave;
 

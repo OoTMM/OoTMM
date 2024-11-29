@@ -97,7 +97,7 @@ static int EnDns_GetID(Actor* this)
     case KEY(SCE_OOT_DESERT_COLOSSUS, 1, SCRUB_ITEM_POTION_RED):     return 0x1a;
 
     /* Deku Tree */
-    case KEY(SCE_OOT_INSIDE_DEKU_TREE, 0, SCRUB_ITEM_SHIELD_DEKU):  return 0x1b;
+    case KEY(SCE_OOT_DEKU_TREE, 0, SCRUB_ITEM_SHIELD_DEKU):  return 0x1b;
 
     /* Dodongo Cavern */
     case KEY(SCE_OOT_DODONGO_CAVERN, 0, SCRUB_ITEM_SEEDS):          return 0x1c;

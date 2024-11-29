@@ -3,8 +3,9 @@
 
 #include <combo/types.h>
 
-#define ENTR_EXTENDED 0xfffe
-#define ENTR_FW_CROSS 0xfffd
+#define ENTR_EXTENDED      0xfffe
+#define ENTR_FW_CROSS      0xfffd
+#define ENTR_CROSS_RESPAWN 0xfffc
 
 typedef struct PlayState PlayState;
 

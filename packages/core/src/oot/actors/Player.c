@@ -10,6 +10,7 @@
 #include <combo/multi.h>
 #include <combo/actor.h>
 #include <combo/hint.h>
+#include <combo/entrance.h>
 #include <actors/En_Kanban/En_Kanban.h>
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
@@ -937,3 +938,25 @@ void Player_ChargeSword(Player* this)
 }
 
 PATCH_FUNC(0x80842ef8, Player_ChargeSword);
+
+void Player_SetFaroresWindRespawnPoint(PlayState* play, s32 respawnMode, s32 playerParams)
+{
+    /* Displaced code: */
+    Play_SetupRespawnPoint(play, respawnMode, playerParams);
+    /* End displaced code */
+
+    memcpy(&gCustomSave.fwRespawnDungeonEntrance[gSave.age], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(OotRespawnData));
+}
+
+PATCH_CALL(0x8084e7b0, Player_SetFaroresWindRespawnPoint)
+
+void Player_AfterBeginFaroresWindTransition(PlayState* play)
+{
+    /* Displaced code: */
+    Interface_SetSubTimerToFinalSecond(play);
+    /* End displaced code */
+
+    memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gSave.age], sizeof(OotRespawnData));
+}
+
+PATCH_CALL(0x8084e540, Player_AfterBeginFaroresWindTransition);

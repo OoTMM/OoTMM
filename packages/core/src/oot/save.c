@@ -6,102 +6,32 @@
 #include <combo/time.h>
 #include <combo/config.h>
 #include <combo/context.h>
-
-static const u16 kDungeonEntrances[] = {
-    ENTR_OOT_DEKU_TREE,
-    ENTR_OOT_DODONGO_CAVERN,
-    ENTR_OOT_JABU_JABU,
-    ENTR_OOT_TEMPLE_FOREST,
-    ENTR_OOT_TEMPLE_FIRE,
-    ENTR_OOT_TEMPLE_WATER,
-    ENTR_OOT_TEMPLE_SHADOW,
-    ENTR_OOT_TEMPLE_SPIRIT,
-};
-
-static const u16 kBossEntrances[] = {
-    ENTR_OOT_BOSS_DEKU_TREE,
-    ENTR_OOT_BOSS_DODONGO_CAVERN,
-    ENTR_OOT_BOSS_JABU_JABU,
-    ENTR_OOT_BOSS_TEMPLE_FOREST,
-    ENTR_OOT_BOSS_TEMPLE_FIRE,
-    ENTR_OOT_BOSS_TEMPLE_WATER,
-    ENTR_OOT_BOSS_TEMPLE_SHADOW,
-    ENTR_OOT_BOSS_TEMPLE_SPIRIT,
-};
-
-static int dungeonRespawn(s16 sceneId, int isSave)
-{
-    int bossId;
-    int dungeonId;
-
-    switch (sceneId)
-    {
-    case SCE_OOT_LAIR_GOHMA:
-        bossId = BOSSID_GOHMA;
-        break;
-    case SCE_OOT_LAIR_KING_DODONGO:
-        bossId = BOSSID_KING_DODONGO;
-        break;
-    case SCE_OOT_LAIR_BARINADE:
-        bossId = BOSSID_BARINADE;
-        break;
-    case SCE_OOT_LAIR_PHANTOM_GANON:
-        bossId = BOSSID_PHANTOM_GANON;
-        break;
-    case SCE_OOT_LAIR_VOLVAGIA:
-        bossId = BOSSID_VOLVAGIA;
-        break;
-    case SCE_OOT_LAIR_MORPHA:
-        bossId = BOSSID_MORPHA;
-        break;
-    case SCE_OOT_LAIR_BONGO_BONGO:
-        bossId = BOSSID_BONGO_BONGO;
-        break;
-    case SCE_OOT_LAIR_TWINROVA:
-        bossId = BOSSID_TWINROVA;
-        break;
-    default:
-        return 0;
-    }
-
-    dungeonId = gComboConfig.boss[bossId];
-    if (dungeonId >= DUNGEONID_TEMPLE_WOODFALL)
-    {
-        if (isSave)
-            return 0;
-        gSave.entrance = kBossEntrances[bossId];
-    }
-    else
-        gSave.entrance = kDungeonEntrances[dungeonId];
-    return 1;
-}
+#include <combo/entrance.h>
 
 static void fixSpawn(void)
 {
     u32 entrance;
     s32 override;
 
-    /* If the player saved in a boss, don't touch it */
-    if (dungeonRespawn(gSave.info.sceneId, 1))
-        return;
+    gSaveContext.respawnFlag = 0;
+    gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance = 0xffff;
 
-    /* If the player saved in a dungeon, don't touch it */
-    switch (gSave.info.sceneId)
+    if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams && !gComboCtx.valid && gPlay)
     {
-    case SCE_OOT_INSIDE_DEKU_TREE:
-    case SCE_OOT_DODONGO_CAVERN:
-    case SCE_OOT_INSIDE_JABU_JABU:
-    case SCE_OOT_TEMPLE_FOREST:
-    case SCE_OOT_TEMPLE_FIRE:
-    case SCE_OOT_TEMPLE_WATER:
-    case SCE_OOT_TEMPLE_SHADOW:
-    case SCE_OOT_TEMPLE_SPIRIT:
-    case SCE_OOT_BOTTOM_OF_THE_WELL:
-    case SCE_OOT_ICE_CAVERN:
-    case SCE_OOT_GERUDO_TRAINING_GROUND:
-    case SCE_OOT_INSIDE_GANON_CASTLE:
-    case SCE_OOT_GANON_TOWER:
-        return;
+        if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].data & 0x80)
+        {
+            gComboCtx.isDungeonEntranceSpawn = 1;
+            comboGameSwitch(NULL, gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance);
+        }
+        else
+        {
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(OotRespawnData));
+            /* Copy to the void respawn */
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_DOWN], &gSaveContext.respawn[RESPAWN_MODE_RETURN], sizeof(OotRespawnData));
+            gSaveContext.respawnFlag = 2;
+            gSave.entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance;
+            return;
+        }
     }
 
     /* If the player saved in link's house, and it's not ER, honor that */
@@ -417,8 +347,26 @@ void comboCreateSave(void* unk, void* buffer)
 
 static void DeathWarpWrapper(PlayState* play)
 {
-    dungeonRespawn(play->sceneId, 0);
     DeathWarp(play);
+
+    RespawnData* dungeonEntranceRespawn = &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE];
+    if (dungeonEntranceRespawn->playerParams)
+    {
+        if (dungeonEntranceRespawn->data & 0x80)
+        {
+            play->nextEntranceIndex = ENTR_CROSS_RESPAWN;
+        }
+        else
+        {
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(OotRespawnData));
+            play->nextEntranceIndex = dungeonEntranceRespawn->entrance;
+            gSaveContext.respawnFlag = 2;
+        }
+    }
+    else if (play->gameOverCtx.state == 5)
+    {
+        gSaveContext.respawnFlag = -2;
+    }
 }
 
 PATCH_CALL(0x8009dacc, DeathWarpWrapper);

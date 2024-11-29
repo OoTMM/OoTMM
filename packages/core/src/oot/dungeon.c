@@ -7,7 +7,7 @@ int comboCurrentDungeon(PlayState* play)
     switch (play->sceneId)
     {
     /* Dungeons */
-    case SCE_OOT_INSIDE_DEKU_TREE:
+    case SCE_OOT_DEKU_TREE:
         return DUNGEONID_DEKU_TREE;
     case SCE_OOT_DODONGO_CAVERN:
         return DUNGEONID_DODONGOS_CAVERN;
