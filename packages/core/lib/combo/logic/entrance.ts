@@ -6,7 +6,7 @@ import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
+import { Expr, exprAge, exprAnd, exprFalse, exprOr, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
@@ -202,19 +202,22 @@ class WorldShuffler {
   private placeSingleExpr(world: World, original: Entrance, replacement: Entrance) {
     const entranceOriginal = ENTRANCES[original];
     const entranceReplacement = ENTRANCES[replacement];
+    const areaFrom = world.areas[entranceOriginal.from];
 
     /* Change the world */
     let expr = this.getExpr(original);
-    /* DEBUG */
     if (entranceReplacement.game === 'mm') {
       if (!((entranceReplacement.flags as string[]).includes('no-global'))) {
-        world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
+        areaFrom.exits['MM GLOBAL'] = expr;
       }
       if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
         expr = this.songOfTime(expr);
       }
     }
-    world.areas[entranceOriginal.from].exits[entranceReplacement.to] = expr;
+    if (areaFrom.exits[entranceReplacement.to]) {
+      expr = exprOr([expr, areaFrom.exits[entranceReplacement.to]]);
+    }
+    areaFrom.exits[entranceReplacement.to] = expr;
   }
 
   private placeSingle(world: World, original: Entrance, replacement: Entrance) {
@@ -227,6 +230,52 @@ class WorldShuffler {
     /* Track dungeons replacing dungeons */
     if (DUNGEON_ENTRANCES.includes(original) && DUNGEON_ENTRANCES.includes(replacement)) {
       world.dungeonsEntrances.set(replacement, { type: 'replace', entrance: original });
+    }
+  }
+
+  private changeWorldAssumePools(world: World, pools: EntrancePools) {
+    const assumedSets: Set<Entrance>[] = [];
+
+    for (const pool of Object.values(pools)) {
+      const cardinality = pool.src.size * pool.dst.size;
+      if (cardinality > 2500 && pool.src.size > 50) {
+        assumedSets.push(pool.dst);
+      } else {
+        for (const oldName of pool.src) {
+          for (const newName of pool.dst) {
+            if (this.isAssignableConstraints(oldName, newName, !!pool.opts.ownGame)) {
+              this.placeSingleExpr(world, oldName, newName);
+            }
+          }
+        }
+      }
+    }
+
+    if (assumedSets) {
+      const assumedExits: {[k: string]: Expr} = {};
+      for (const s of assumedSets) {
+        for (const e of s) {
+          const ee = ENTRANCES[e];
+          assumedExits[ee.to] = exprTrue();
+        }
+      }
+
+      const assumedArea: WorldArea = {
+        game: 'mm',
+        region: 'NONE',
+        exits: assumedExits,
+        events: {},
+        locations: {},
+        gossip: {},
+        dungeon: null,
+        boss: false,
+        stay: null,
+        ageChange: false,
+        time: 'still',
+      };
+
+      world.areas['ASSUMED'] = assumedArea;
+      world.areas['OOT SPAWN'].exits['ASSUMED'] = exprTrue();
     }
   }
 
@@ -256,15 +305,7 @@ class WorldShuffler {
 
     /* Assume pools */
     if (pools) {
-      for (const pool of Object.values(pools)) {
-        for (const oldName of pool.src) {
-          for (const newName of pool.dst) {
-            if (this.isAssignableConstraints(oldName, newName, !!pool.opts.ownGame)) {
-              this.placeSingleExpr(newWorld, oldName, newName);
-            }
-          }
-        }
-      }
+      this.changeWorldAssumePools(newWorld, pools);
     }
 
     /* Handle dungeons that aren't shuffled */
@@ -440,13 +481,14 @@ class WorldShuffler {
       const finalOverrides = this.placePoolsRecursive(newPools, newOverrides);
       if (finalOverrides) {
         return finalOverrides;
+      } else {
+        this.backtrackCount++;
+        if (this.backtrackCount >= 20) {
+          throw new LogicEntranceError('Too many backtracks');
+        }
       }
     }
 
-    this.backtrackCount++;
-    if (this.backtrackCount > 100) {
-      throw new LogicEntranceError('Too many backtracks');
-    }
     return null;
   }
 
