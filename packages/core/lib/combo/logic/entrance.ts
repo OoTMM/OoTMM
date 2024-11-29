@@ -512,33 +512,6 @@ class WorldShuffler {
     }
   }
 
-  private placeOneWays() {
-    /* Compute types */
-    const types = new Set(this.poolsTypesDst());
-    types.add('dungeon');
-    types.add('dungeon-minor');
-    types.add('dungeon-sh');
-
-    if (this.settings.erBoss !== 'none') {
-      types.add('boss');
-    }
-
-    /* Compute entrances */
-    const oneWays = this.poolOneWays();
-    const { src, dst } = this.poolEntrancesForTypes(oneWays.src, types, true);
-
-    while (src.size > 0) {
-      const srcEntrance = sample(this.random, src);
-      let dstCandidates = [...dst];
-      if (oneWays.opts.ownGame) {
-        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[srcEntrance].game);
-      }
-      const dstEntrance = sample(this.random, dstCandidates);
-      this.overrideEntrance(srcEntrance, dstEntrance, false);
-      src.delete(srcEntrance);
-    }
-  }
-
   private poolSpawns() {
     /* Compute types */
     const types = new Set(this.poolsTypesDst());
@@ -634,6 +607,22 @@ class WorldShuffler {
     }
 
     return { src: [...types], dst: [...types], opts: { ownGame: this.settings.erWarps === 'ownGame' } };
+  }
+
+  private poolOneWaysAnywhere() {
+    /* Compute types */
+    const types = new Set(this.poolsTypesDst());
+    types.add('dungeon');
+    types.add('dungeon-minor');
+    types.add('dungeon-sh');
+
+    if (this.settings.erBoss !== 'none') {
+      types.add('boss');
+    }
+
+    /* Compute entrances */
+    const oneWays = this.poolOneWays();
+    return { src: oneWays.src, dst: [...types, ...oneWays.dst], opts: { alias: true, ownGame: this.settings.erOneWays === 'ownGame' } };
   }
 
   private poolOneWays() {
@@ -933,6 +922,10 @@ class WorldShuffler {
       pools.WALLMASTERS = this.poolWallmasters();
     }
 
+    if (this.settings.erOneWays !== 'none' && this.settings.erOneWaysAnywhere) {
+      pools.ONE_WAYS = this.poolOneWaysAnywhere();
+    }
+
     return pools;
   }
 
@@ -982,10 +975,6 @@ class WorldShuffler {
       if (revSrc && revDst) {
         this.overrideEntrance(revDst, revSrc);
       }
-    }
-
-    if (this.settings.erOneWays !== 'none' && this.settings.erOneWaysAnywhere) {
-      this.placeOneWays();
     }
 
     this.placePools(this.makePools());
