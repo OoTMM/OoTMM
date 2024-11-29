@@ -322,7 +322,26 @@ class WorldShuffler {
     throw new LogicEntranceError(`Unbalanced pool: ${name}`);
   }
 
-  private placePoolsRecursive(pools: EntrancePools, overrides: EntranceOverrides, assumed: Set<Entrance>): EntranceOverrides | null {
+  private assumedFromPools(pools: EntrancePools, ignore: Set<Entrance>): Set<Entrance> {
+    const assumed = new Set<Entrance>();
+
+    for (const pool of Object.values(pools)) {
+      for (const dst of pool.dst) {
+        if (ignore.has(dst)) {
+          ignore.delete(dst);
+          continue;
+        }
+        const e = ENTRANCES[dst];
+        if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || dst === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erNoPolarity) {
+          assumed.add(dst);
+        }
+      }
+    }
+
+    return assumed;
+  }
+
+  private placePoolsRecursive(pools: EntrancePools, overrides: EntranceOverrides): EntranceOverrides | null {
     if (Object.keys(pools).length === 0) {
       return overrides;
     }
@@ -374,14 +393,15 @@ class WorldShuffler {
       const revSrc = this.reverseEntrance(src);
       const revDst = this.reverseEntrance(dst);
       const newOverrides = { ...overrides };
-      const newAssumed = new Set(assumed);
+      const assumedIgnore = new Set<Entrance>();
       newOverrides[src] = dst;
-      newAssumed.delete(dst);
+      assumedIgnore.add(dst);
       if (revSrc && revDst) {
         newOverrides[revDst] = revSrc;
-        newAssumed.delete(revSrc);
+        assumedIgnore.add(revSrc);
       }
-      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, newAssumed)) {
+      const assumed = this.assumedFromPools(pools, assumedIgnore);
+      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, assumed)) {
         continue;
       }
 
@@ -399,12 +419,12 @@ class WorldShuffler {
       }
 
       if (newSrc.size === 0) {
-        if (newDst.size !== 0) {
+        if (newDst.size !== 0 && !pool.opts.alias) {
           this.unbalancedPool(poolName);
         }
         delete newPools[poolName];
       }
-      const finalOverrides = this.placePoolsRecursive(newPools, newOverrides, newAssumed);
+      const finalOverrides = this.placePoolsRecursive(newPools, newOverrides);
       if (finalOverrides) {
         return finalOverrides;
       }
@@ -424,7 +444,6 @@ class WorldShuffler {
 
     /* Get entrances */
     const poolNames = new Set(Object.keys(poolDescrs));
-    let entrancesAssumed = new Set<Entrance>();
 
     for (const name of poolNames) {
       const descr = poolDescrs[name];
@@ -434,26 +453,19 @@ class WorldShuffler {
       for (const name of pe.src) {
         overrides[name] = null;
       }
-
-      for (const name of pe.dst) {
-        const e = ENTRANCES[name];
-        if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || name === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erNoPolarity) {
-          entrancesAssumed.add(name);
-        }
-      }
     }
 
     /* Remove any empty pools */
     for (const name of poolNames) {
       if (pools[name].src.size === 0) {
-        if (pools[name].dst.size !== 0) {
+        if (pools[name].dst.size !== 0 && !pools[name].opts.alias) {
           this.unbalancedPool(name);
         }
         delete pools[name];
       }
     }
 
-    const finalOverrides = this.placePoolsRecursive(pools, overrides, entrancesAssumed);
+    const finalOverrides = this.placePoolsRecursive(pools, overrides);
     if (!finalOverrides) {
       throw new LogicEntranceError('Unable to place pools');
     }
@@ -497,32 +509,6 @@ class WorldShuffler {
     this.usedEntrancesSrc.add(src);
     if (useDst) {
       this.usedEntrancesDst.add(dst);
-    }
-  }
-
-  private placeWallmasters() {
-    /* Compute types */
-    const types = new Set(this.poolsTypesDst());
-    types.add('dungeon');
-    types.add('dungeon-minor');
-    types.add('dungeon-sh');
-
-    if (this.settings.erBoss !== 'none') {
-      types.add('boss');
-    }
-
-    /* Compute entrances */
-    const { src, dst } = this.poolEntrancesForTypes(['wallmaster'], [...types], true);
-    while (src.size > 0) {
-      const srcEntrance = sample(this.random, src);
-      let dstCandidates = [...dst];
-      if (this.settings.erWallmasters === 'ownGame') {
-        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[srcEntrance].game);
-      }
-      const dstEntrance = sample(this.random, dstCandidates);
-      this.overrideEntrance(srcEntrance, dstEntrance, false);
-      src.delete(srcEntrance);
-      dst.delete(dstEntrance);
     }
   }
 
@@ -579,6 +565,20 @@ class WorldShuffler {
       this.overrideEntrance(srcEntrance, dstEntrance, false);
       src.delete(srcEntrance);
     }
+  }
+
+  private poolWallmasters() {
+    /* Compute types */
+    const types = new Set(this.poolsTypesDst());
+    types.add('dungeon');
+    types.add('dungeon-minor');
+    types.add('dungeon-sh');
+
+    if (this.settings.erBoss !== 'none') {
+      types.add('boss');
+    }
+
+    return { src: ['wallmaster'], dst: [...types], opts: { alias: true, ownGame: this.settings.erWallmasters === 'ownGame' } };
   }
 
   private poolDungeons() {
@@ -863,7 +863,7 @@ class WorldShuffler {
     return world;
   }
 
-  private makePools(): EntrancePoolDescrs {
+  private makePoolsSimple(): EntrancePoolDescrs {
     const pools: EntrancePoolDescrs = {};
 
     if (this.settings.erDungeons !== 'none') {
@@ -931,8 +931,18 @@ class WorldShuffler {
     return pools;
   }
 
+  private makePools(): EntrancePoolDescrs {
+    const pools = this.makePoolsSimple();
+
+    if (this.settings.erWallmasters !== 'none') {
+      pools.WALLMASTERS = this.poolWallmasters();
+    }
+
+    return pools;
+  }
+
   private poolsTypesDst(): string[] {
-    const pools = this.makePools();
+    const pools = this.makePoolsSimple();
     const poolValues = Object.values(pools);
     const types = poolValues.map(x => x.dst).flat();
     return [...new Set(types)];
@@ -977,10 +987,6 @@ class WorldShuffler {
       if (revSrc && revDst) {
         this.overrideEntrance(revDst, revSrc);
       }
-    }
-
-    if (this.settings.erWallmasters !== 'none') {
-      this.placeWallmasters();
     }
 
     if (this.settings.erSpawns !== 'none') {
