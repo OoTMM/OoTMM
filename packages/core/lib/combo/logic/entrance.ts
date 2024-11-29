@@ -6,7 +6,7 @@ import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
+import { Expr, exprAge, exprAnd, exprFalse, exprOr, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
@@ -37,7 +37,7 @@ type EntrancePool = {
 type EntrancePoolDescrs = {[k: string]: EntrancePoolDescr};
 type EntrancePools = {[k: string]: EntrancePool};
 
-type EntranceOverrides = {[k in Entrance]?: Entrance | null};
+type EntranceOverrides = {[k in Entrance]?: Entrance};
 
 const POLARITY_ANY_OVERWORLD = new Set<string>([
   'region',
@@ -115,6 +115,7 @@ class WorldShuffler {
   private readonly allEntrances: Entrance[];
   private usedEntrancesSrc: Set<Entrance>;
   private usedEntrancesDst: Set<Entrance>;
+  private sotExpr: Expr;
 
   constructor(
     private random: Random,
@@ -131,6 +132,7 @@ class WorldShuffler {
     this.allEntrances = this.computeAllEntrances();
     this.usedEntrancesSrc = new Set();
     this.usedEntrancesDst = new Set();
+    this.sotExpr = this.world.exprParsers.mm.parse('can_reset_time');
   }
 
   private entrancePolarity(entrance: Entrance): EntrancePolarity {
@@ -170,8 +172,7 @@ class WorldShuffler {
   }
 
   private songOfTime(e: Expr): Expr {
-    const subcond = this.world.exprParsers.mm.parse('can_reset_time');
-    return exprAnd([e, subcond]);
+    return exprAnd([e, this.sotExpr]);
   }
 
   private computeAllEntrances() {
@@ -198,21 +199,29 @@ class WorldShuffler {
     return entrances;
   }
 
-  private placeSingle(world: World, original: Entrance, replacement: Entrance) {
+  private placeSingleExpr(world: World, original: Entrance, replacement: Entrance) {
     const entranceOriginal = ENTRANCES[original];
     const entranceReplacement = ENTRANCES[replacement];
+    const areaFrom = world.areas[entranceOriginal.from];
 
     /* Change the world */
     let expr = this.getExpr(original);
     if (entranceReplacement.game === 'mm') {
       if (!((entranceReplacement.flags as string[]).includes('no-global'))) {
-        world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
+        areaFrom.exits['MM GLOBAL'] = expr;
       }
       if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
         expr = this.songOfTime(expr);
       }
     }
-    world.areas[entranceOriginal.from].exits[entranceReplacement.to] = expr;
+    if (areaFrom.exits[entranceReplacement.to]) {
+      expr = exprOr([expr, areaFrom.exits[entranceReplacement.to]]);
+    }
+    areaFrom.exits[entranceReplacement.to] = expr;
+  }
+
+  private placeSingle(world: World, original: Entrance, replacement: Entrance) {
+    this.placeSingleExpr(world, original, replacement);
 
     /* Mark the override */
     world.entranceOverrides.set(original, replacement);
@@ -224,45 +233,104 @@ class WorldShuffler {
     }
   }
 
-  private changedWorld(overrides: EntranceOverrides, assumed?: Iterable<Entrance>): World {
-    const newWorld = cloneWorld(this.world);
+  private validateAgeTemple(world: World) {
+    if (!['ootmm', 'oot'].includes(this.settings.games))
+      return;
 
-    /* Create the assumed area */
-    if (assumed) {
-      const areaAssumed: WorldArea = {
-        game: 'mm',
-        region: 'NONE',
-        exits: {},
-        locations: {},
-        events: {},
-        boss: false,
-        ageChange: false,
-        gossip: {},
-        dungeon: null,
-        stay: null,
-        time: 'flow',
-      };
-      newWorld.areas['ASSUMED'] = areaAssumed;
-      newWorld.areas['OOT SPAWN'].exits['ASSUMED'] = exprTrue();
+    const newWorld = cloneWorld(world);
+    const a = newWorld.areas['OOT SPAWN'];
+    if (this.settings.startingAge === 'child') {
+      a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
+      a.exits['OOT SPAWN CHILD'] = exprFalse();
+    } else {
+      a.exits['OOT SPAWN ADULT'] = exprFalse();
+      a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
+    }
 
-      for (const a of assumed) {
-        const oldE = ENTRANCES[a];
-        newWorld.areas['ASSUMED'].exits[oldE.to] = exprTrue();
+    const worlds = [...this.worlds];
+    worlds[this.worldId] = newWorld;
+    const agePathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
+    const pathfinderState = agePathfinder.run(null, { recursive: true, singleWorld: this.worldId });
+    const target = 'OOT Temple of Time';
+    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
+      return false;
+    }
+    return true;
+  }
+
+  private changeWorldAssumePools(world: World, pools: EntrancePools) {
+    const assumedSets: Set<Entrance>[] = [];
+
+    for (const pool of Object.values(pools)) {
+      const cardinality = pool.src.size * pool.dst.size;
+      if (cardinality > 5000 && pool.src.size > 50) {
+        assumedSets.push(pool.dst);
+      } else {
+        for (const oldName of pool.src) {
+          for (const newName of pool.dst) {
+            if (this.isAssignableConstraints(oldName, newName, !!pool.opts.ownGame)) {
+              this.placeSingleExpr(world, oldName, newName);
+            }
+          }
+        }
       }
     }
 
-    /* Remove the entrances */
+    if (assumedSets) {
+      const assumedExits: {[k: string]: Expr} = {};
+      for (const s of assumedSets) {
+        for (const e of s) {
+          const ee = ENTRANCES[e];
+          assumedExits[ee.to] = exprTrue();
+        }
+      }
+
+      const assumedArea: WorldArea = {
+        game: 'mm',
+        region: 'NONE',
+        exits: assumedExits,
+        events: {},
+        locations: {},
+        gossip: {},
+        dungeon: null,
+        boss: false,
+        stay: null,
+        ageChange: false,
+        time: 'still',
+      };
+
+      world.areas['ASSUMED'] = assumedArea;
+      world.areas['OOT SPAWN'].exits['ASSUMED'] = exprTrue();
+    }
+  }
+
+  private changedWorld(overrides: EntranceOverrides, pools?: EntrancePools): World {
+    const newWorld = cloneWorld(this.world);
+
+    /* Delete the overriden entrances */
     for (const oldName of Object.keys(overrides) as Entrance[]) {
       const oldE = ENTRANCES[oldName];
       delete newWorld.areas[oldE.from].exits[oldE.to];
     }
 
-    /* Place the new entrances */
-    for (const oldName of Object.keys(overrides) as Entrance[]) {
-      const newName = overrides[oldName];
-      if (newName) {
-        this.placeSingle(newWorld, oldName, newName);
+    /* Delete all pool entrances */
+    if (pools) {
+      for (const pool of Object.values(pools)) {
+        for (const oldName of pool.src) {
+          const oldE = ENTRANCES[oldName];
+          delete newWorld.areas[oldE.from].exits[oldE.to];
+        }
       }
+    }
+
+    /* Apply overrides */
+    for (const [oldName, newName] of Object.entries(overrides)) {
+      this.placeSingle(newWorld, oldName as Entrance, newName as Entrance);
+    }
+
+    /* Assume pools */
+    if (pools) {
+      this.changeWorldAssumePools(newWorld, pools);
     }
 
     /* Handle dungeons that aren't shuffled */
@@ -275,13 +343,13 @@ class WorldShuffler {
     return newWorld;
   }
 
-  private isValidShuffle(overrides: EntranceOverrides, assumed: Iterable<Entrance>) {
+  private isValidShuffle(overrides: EntranceOverrides, pools: EntrancePools) {
     if (this.settings.logic === 'none') {
       return true;
     }
 
     /* Build the new world list */
-    const newWorld = this.changedWorld(overrides, assumed);
+    const newWorld = this.changedWorld(overrides, pools);
     const worlds = [...this.worlds];
     worlds[this.worldId] = newWorld;
 
@@ -294,6 +362,11 @@ class WorldShuffler {
     }
 
     if (this.settings.logic === 'allLocations' && pathfinderState.locations.size < newWorld.locations.size) {
+      return false;
+    }
+
+    /* Check ToT access */
+    if (!this.validateAgeTemple(newWorld)) {
       return false;
     }
 
@@ -341,6 +414,47 @@ class WorldShuffler {
     return assumed;
   }
 
+  private isSelfLoop(src: Entrance, dst: Entrance) {
+    const dstEntrance = ENTRANCES[dst];
+    const srcEntrance = ENTRANCES[src];
+    const map = srcEntrance.fromMap;
+    if (map !== 'NONE') {
+      if (dstEntrance.toMap !== map) {
+        return false;
+      }
+
+      /* Same map, check for internal submap */
+      if (srcEntrance.fromMap !== srcEntrance.toMap) {
+        return true;
+      }
+
+      if (dstEntrance.fromMap !== dstEntrance.toMap) {
+        return true;
+      }
+
+      /* Both entrances are internal, check the submap */
+      return srcEntrance.fromSubmap === dstEntrance.toSubmap;
+    }
+
+    return false;
+  }
+
+  private isAssignableConstraints(src: Entrance, dst: Entrance, ownGame: boolean) {
+    if (ownGame && ENTRANCES[src].game !== ENTRANCES[dst].game) {
+      return false;
+    }
+
+    if (!this.entrancePolarityMatch(src, dst)) {
+      return false;
+    }
+
+    if (!this.settings.erSelfLoops && this.isSelfLoop(src, dst)) {
+      return false;
+    }
+
+    return true;
+  }
+
   private placePoolsRecursive(pools: EntrancePools, overrides: EntranceOverrides): EntranceOverrides | null {
     if (Object.keys(pools).length === 0) {
       return overrides;
@@ -354,62 +468,27 @@ class WorldShuffler {
     const src = sample(this.random, pool.src);
 
     /* Build the candidates list */
-    let dstCandidates = new Set(pool.dst);
-    if (pool.opts.ownGame) {
-      dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
-    }
-    dstCandidates = new Set([...dstCandidates].filter(x => this.entrancePolarityMatch(src, x)));
-
-    /* Filter self-loops */
-    if (!this.settings.erSelfLoops) {
-      const srcEntrance = ENTRANCES[src];
-      const map = srcEntrance.fromMap;
-      if (map !== 'NONE') {
-        dstCandidates = new Set([...dstCandidates].filter((candidate) => {
-          const cEntrance = ENTRANCES[candidate];
-          if (cEntrance.toMap !== map) {
-            return true;
-          }
-
-          /* Same map, check for internal submap */
-          if (srcEntrance.fromMap !== srcEntrance.toMap) {
-            return false;
-          }
-
-          if (cEntrance.fromMap !== cEntrance.toMap) {
-            return false;
-          }
-
-          /* Both entrances are internal, check the submap */
-          return srcEntrance.fromSubmap !== cEntrance.toSubmap;
-        }));
-      }
-    }
+    let dstCandidates = new Set([...pool.dst].filter(x => this.isAssignableConstraints(src, x, !!pool.opts.ownGame)));
 
     /* Try to find a match */
+    let newPools: EntrancePools;
+
     while (dstCandidates.size > 0) {
       const dst = sample(this.random, dstCandidates);
       dstCandidates.delete(dst);
       const revSrc = this.reverseEntrance(src);
       const revDst = this.reverseEntrance(dst);
       const newOverrides = { ...overrides };
-      const assumedIgnore = new Set<Entrance>();
       newOverrides[src] = dst;
-      assumedIgnore.add(dst);
       if (revSrc && revDst) {
         newOverrides[revDst] = revSrc;
-        assumedIgnore.add(revSrc);
-      }
-      const assumed = this.assumedFromPools(pools, assumedIgnore);
-      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, assumed)) {
-        continue;
       }
 
-      /* The match is valid */
+      /* Build the new pool */
       const newSrc = new Set(pool.src);
       const newDst = new Set(pool.dst);
       const newPool = { ...pool, src: newSrc, dst: newDst };
-      const newPools = { ...pools, [poolName]: newPool };
+      newPools = { ...pools, [poolName]: newPool };
 
       newSrc.delete(src);
       newDst.delete(dst);
@@ -418,6 +497,11 @@ class WorldShuffler {
         newDst.delete(revSrc);
       }
 
+      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, newPools)) {
+        continue;
+      }
+
+      /* The match is valid */
       if (newSrc.size === 0) {
         if (newDst.size !== 0 && !pool.opts.alias) {
           this.unbalancedPool(poolName);
@@ -427,13 +511,14 @@ class WorldShuffler {
       const finalOverrides = this.placePoolsRecursive(newPools, newOverrides);
       if (finalOverrides) {
         return finalOverrides;
+      } else {
+        this.backtrackCount++;
+        if (this.backtrackCount >= 10) {
+          throw new LogicEntranceError('Too many backtracks');
+        }
       }
     }
 
-    this.backtrackCount++;
-    if (this.backtrackCount > 100) {
-      throw new LogicEntranceError('Too many backtracks');
-    }
     return null;
   }
 
@@ -449,10 +534,6 @@ class WorldShuffler {
       const descr = poolDescrs[name];
       const pe = this.poolEntrancesForTypes(descr.src, descr.dst, !!descr.opts.alias);
       pools[name] = { src: pe.src, dst: pe.dst, opts: descr.opts };
-
-      for (const name of pe.src) {
-        overrides[name] = null;
-      }
     }
 
     /* Remove any empty pools */
@@ -1110,34 +1191,10 @@ export class LogicPassEntrances {
     }
   }
 
-  private validateAgeTemple() {
-    if (!['ootmm', 'oot'].includes(this.input.settings.games))
-      return;
-
-    const newWorlds = this.worlds.map(w => cloneWorld(w));
-    for (const w of newWorlds) {
-      const a = w.areas['OOT SPAWN'];
-      if (this.input.settings.startingAge === 'child') {
-        a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
-        a.exits['OOT SPAWN CHILD'] = exprFalse();
-      } else {
-        a.exits['OOT SPAWN ADULT'] = exprFalse();
-        a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
-      }
-    }
-
-    const agePathfinder = new Pathfinder(newWorlds, this.input.settings, this.input.startingItems);
-    const pathfinderState = agePathfinder.run(null, { recursive: true });
-    const target = 'OOT Temple of Time';
-    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
-      throw new LogicEntranceError('Temple of Time is unreachable from the non-starting age');
-    }
-  }
-
   private validate() {
     if (this.input.settings.logic === 'none')
       return;
-    this.validateAgeTemple();
+
     const pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
     const pathfinderState = pathfinder.run(null, { assumedItems: this.input.allItems, recursive: true });
 

@@ -8,7 +8,6 @@ test("Can make a seed - Full ER", async () => {
     erDungeons: 'full',
     erBoss: 'full',
     erRegions: 'full',
-    //erRegionsExtra: true,
     erRegionsShortcuts: true,
     erIndoors: 'full',
     erIndoorsMajor: true,
