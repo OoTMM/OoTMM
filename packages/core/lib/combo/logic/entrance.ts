@@ -512,34 +512,6 @@ class WorldShuffler {
     }
   }
 
-  private placeSpawns() {
-    /* Compute types */
-    const types = new Set(this.poolsTypesDst());
-    types.delete('boss');
-    types.add('spawn');
-    types.add('indoors');
-    types.add('one-way-song');
-    types.add('region');
-
-    let typesSrc: string[] = [];
-    switch (this.settings.erSpawns) {
-    case 'adult': typesSrc = ['spawn-adult']; break;
-    case 'child': typesSrc = ['spawn-child']; break;
-    case 'both': typesSrc = ['spawn-adult', 'spawn-child']; break;
-    }
-
-    /* Compute entrances */
-    const { src, dst } = this.poolEntrancesForTypes(typesSrc, types, true);
-
-    while (src!.size > 0) {
-      const srcEntrance = sample(this.random, src);
-      const dstEntrance = sample(this.random, dst);
-      this.overrideEntrance(srcEntrance, dstEntrance, false);
-      src.delete(srcEntrance);
-      dst.delete(dstEntrance);
-    }
-  }
-
   private placeOneWays() {
     /* Compute types */
     const types = new Set(this.poolsTypesDst());
@@ -565,6 +537,25 @@ class WorldShuffler {
       this.overrideEntrance(srcEntrance, dstEntrance, false);
       src.delete(srcEntrance);
     }
+  }
+
+  private poolSpawns() {
+    /* Compute types */
+    const types = new Set(this.poolsTypesDst());
+    types.delete('boss');
+    types.add('spawn');
+    types.add('indoors');
+    types.add('one-way-song');
+    types.add('region');
+
+    let typesSrc: string[] = [];
+    switch (this.settings.erSpawns) {
+    case 'adult': typesSrc = ['spawn-adult']; break;
+    case 'child': typesSrc = ['spawn-child']; break;
+    case 'both': typesSrc = ['spawn-adult', 'spawn-child']; break;
+    }
+
+    return { src: typesSrc, dst: [...types], opts: { alias: true, ownGame: true } };
   }
 
   private poolWallmasters() {
@@ -934,6 +925,10 @@ class WorldShuffler {
   private makePools(): EntrancePoolDescrs {
     const pools = this.makePoolsSimple();
 
+    if (this.settings.erSpawns !== 'none') {
+      pools.SPAWNS = this.poolSpawns();
+    }
+
     if (this.settings.erWallmasters !== 'none') {
       pools.WALLMASTERS = this.poolWallmasters();
     }
@@ -987,10 +982,6 @@ class WorldShuffler {
       if (revSrc && revDst) {
         this.overrideEntrance(revDst, revSrc);
       }
-    }
-
-    if (this.settings.erSpawns !== 'none') {
-      this.placeSpawns();
     }
 
     if (this.settings.erOneWays !== 'none' && this.settings.erOneWaysAnywhere) {
