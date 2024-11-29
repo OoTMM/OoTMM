@@ -103,7 +103,6 @@
   dungeon: Water
   events:
     BOSS_MORPHA: "true"
-    CLEAR_STATE_LAKE: "true" # TODO: Remove this
   locations:
     "Water Temple Boss HC": "true"
     "Water Temple Boss": "true"

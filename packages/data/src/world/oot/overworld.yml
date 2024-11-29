@@ -1953,6 +1953,7 @@
     "Fishing Pond": "is_child || event(CLEAR_STATE_LAKE) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
     "Lake Hylia Grotto": "true"
   events:
+    CLEAR_STATE_LAKE: "is_adult && event(WISP_CLEAR_STATE_LAKE)"
     SCARECROW_CHILD: "is_child && can_play_scarecrow"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
     BEAN_LAKE_HYLIA: "can_use_beans"

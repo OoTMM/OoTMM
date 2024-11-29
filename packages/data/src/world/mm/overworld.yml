@@ -1306,6 +1306,7 @@
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
   events:
+    CLEAR_STATE_WOODFALL: "event(WISP_CLEAR_STATE_WOODFALL)"
     FROG_3: "has(MASK_DON_GERO)"
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
@@ -1821,6 +1822,7 @@
     "Mountain Village Gossip Outside": "is_spring"
     "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
   events:
+    CLEAR_STATE_SNOWHEAD: "event(WISP_CLEAR_STATE_SNOWHEAD)"
     MAGIC: "true"
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -2573,6 +2575,7 @@
     "Great Bay Coast Water Void": "true"
     "Great Bay Coast Butterflies": "has_sticks"
   events:
+    CLEAR_STATE_GREAT_BAY: "event(WISP_CLEAR_STATE_GREAT_BAY)"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
@@ -3285,6 +3288,7 @@
     "Tingle Ikana": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
     "Owl Ikana": "true"
   events:
+    CLEAR_STATE_IKANA: "event(WISP_CLEAR_STATE_IKANA)"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"

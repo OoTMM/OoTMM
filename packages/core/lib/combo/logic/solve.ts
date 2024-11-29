@@ -837,12 +837,12 @@ export class LogicPassSolver {
     this.selectPreCompletedDungeons();
 
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const WISPS = {
-        'OOT_CLEAR_STATE_LAKE': 'OOT SPAWN',
-        'MM_CLEAR_STATE_WOODFALL': 'MM Swamp Front',
-        'MM_CLEAR_STATE_SNOWHEAD': 'MM Mountain Village',
-        'MM_CLEAR_STATE_GREAT_BAY': 'MM Great Bay Coast',
-        'MM_CLEAR_STATE_IKANA': 'MM Ikana Canyon',
+      const WISPS: Record<string, string> = {
+        'Water': 'OOT_WISP_CLEAR_STATE_LAKE',
+        'WF': 'MM_WISP_CLEAR_STATE_WOODFALL',
+        'SH': 'MM_WISP_CLEAR_STATE_SNOWHEAD',
+        'GB': 'MM_WISP_CLEAR_STATE_GREAT_BAY',
+        'IST': 'MM_WISP_CLEAR_STATE_IKANA',
       };
 
       const world = this.worlds[worldId];
@@ -854,7 +854,6 @@ export class LogicPassSolver {
       const locs = locNames.map(x => makeLocation(x, worldId));
       const areas = Object.keys(world.areas).filter(x => dungeons.includes(world.areas[x].dungeon || ''));
       const areasBoss = areas.filter(x => world.areas[x].boss);
-      const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => Object.keys(WISPS).includes(x));
 
       /* Get every item and fill with junk */
       this.tryJunk(locs);
@@ -893,14 +892,11 @@ export class LogicPassSolver {
       this.tryJunk(greatFairyLocs);
 
       /* Handle boss events */
-      for (const area of areasBoss) {
-        const a = world.areas[area];
-        for (const be of bossEvents) {
-          delete a.events[be];
+      for (const d of dungeons) {
+        const wisp = WISPS[d];
+        if (wisp) {
+          world.areas['OOT SPAWN'].events[wisp] = exprTrue();
         }
-      }
-      for (const be of bossEvents) {
-        world.areas[(WISPS as any)[be]].events[be] = exprTrue();
       }
 
       /* Handle boss souls */
