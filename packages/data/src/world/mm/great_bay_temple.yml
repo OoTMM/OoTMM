@@ -305,7 +305,7 @@
     "Oath to Order": "true"
   events:
     BOSS_GYORG: "true"
-    BOSS_GREAT_BAY: "true"
+    CLEAR_STATE_GREAT_BAY: "true"
   locations:
     "Great Bay Temple Boss HC": "true"
     "Great Bay Temple Boss": "true"

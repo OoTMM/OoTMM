@@ -368,7 +368,7 @@
     "Oath to Order": "true"
   events:
     BOSS_GOHT: "true"
-    BOSS_SNOWHEAD: "true"
+    CLEAR_STATE_SNOWHEAD: "true"
     MAGIC: "true"
     ARROWS: "true"
   locations:

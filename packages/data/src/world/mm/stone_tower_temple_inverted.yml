@@ -215,7 +215,7 @@
     "Oath to Order": "true"
   events:
     BOSS_TWINMOLD: "true"
-    BOSS_STONE_TOWER: "true" # TODO: Remove this
+    CLEAR_STATE_IKANA: "true" # TODO: Remove this
   locations:
     "Stone Tower Temple Inverted Boss HC": "true"
     "Stone Tower Temple Inverted Boss": "true"

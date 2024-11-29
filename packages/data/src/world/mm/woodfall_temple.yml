@@ -252,7 +252,7 @@
     "Oath to Order": "true"
   events:
     BOSS_ODOLWA: "true"
-    BOSS_WOODFALL: "true" # TODO: Remove this
+    CLEAR_STATE_WOODFALL: "true" # TODO: Remove this
   locations:
     "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"

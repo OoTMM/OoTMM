@@ -626,6 +626,10 @@ class WorldShuffler {
     return { src: ['wallmaster'], dst: [...types], opts: { alias: true, ownGame: this.settings.erWallmasters === 'ownGame' } };
   }
 
+  private poolBoss() {
+    return { src: ['boss'], dst: ['boss'], opts: { ownGame: this.settings.erBoss === 'ownGame' } };
+  }
+
   private poolDungeons() {
     const types: string[] = [];
 
@@ -927,6 +931,10 @@ class WorldShuffler {
   private makePoolsSimple(): EntrancePoolDescrs {
     const pools: EntrancePoolDescrs = {};
 
+    if (this.settings.erBoss !== 'none') {
+      pools.BOSS = this.poolBoss();
+    }
+
     if (this.settings.erDungeons !== 'none') {
       pools.DUNGEONS = this.poolDungeons();
     }
@@ -1061,10 +1069,10 @@ class WorldShuffler {
     this.placePools(this.makePools());
 
     let world = this.changedWorld(this.overrides);
-    if (this.settings.erBoss !== 'none') {
-      world = this.legacyFixBosses(world);
-      this.worldChanged = true;
-    }
+    //if (this.settings.erBoss !== 'none') {
+    //  world = this.legacyFixBosses(world);
+    //  this.worldChanged = true;
+    //}
 
     return { world, changed: this.worldChanged };
   }
