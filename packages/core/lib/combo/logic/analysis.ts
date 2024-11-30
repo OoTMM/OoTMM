@@ -11,9 +11,13 @@ import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON } from './boss';
 import { ENTRANCES } from '@ootmm/data';
 
 export type AnalysisPathBase = { locations: Set<Location> };
+export type AnalysisPathWotH = AnalysisPathBase & { type: 'woth' };
 export type AnalysisPathTriforce = AnalysisPathBase & { type: 'triforce', triforce: 'Power' | 'Courage' | 'Wisdom' };
 export type AnalysisPathBoss = AnalysisPathBase & { type: 'boss', boss: string };
-export type AnalysisPath = AnalysisPathTriforce | AnalysisPathBoss;
+export type AnalysisPath =
+  | AnalysisPathWotH
+  | AnalysisPathTriforce
+  | AnalysisPathBoss;
 
 export class LogicPassAnalysis {
   private pathfinder: Pathfinder;
@@ -151,6 +155,8 @@ export class LogicPassAnalysis {
   }
 
   private makePaths() {
+    this.addPath({ type: 'woth', locations: this.requiredLocs });
+
     if (this.state.settings.goal === 'triforce3') {
       const locsPower = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
       const locsCourage = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);

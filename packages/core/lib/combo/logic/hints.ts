@@ -1,5 +1,5 @@
 import { DUNGEONS_REGIONS, World } from './world';
-import { Analysis } from './analysis';
+import { Analysis, AnalysisPath } from './analysis';
 import { Random, sample, shuffle, randomInt } from '../random';
 import { Settings } from '../settings';
 import { Game } from '../config';
@@ -90,20 +90,11 @@ const HINTS_ITEMS_SOMETIMES = [
   'MM_KAMARO'
 ];
 
-export const HINTS_PATHS = {
-  woth: { id: 0, name: "Way of the Hero" },
-  triforcePower: { id: 1, name: "Path of Power" },
-  triforceCourage: { id: 2, name: "Path of Courage" },
-  triforceWisdom: { id: 3, name: "Path of Wisdom" },
-};
-
-export type HintPath = keyof typeof HINTS_PATHS;
-
 export type HintGossipPath = {
   type: 'path',
   region: Region,
   location: Location;
-  path: HintPath;
+  path: AnalysisPath;
 };
 
 export type HintGossipFoolish = {
@@ -547,24 +538,8 @@ export class LogicPassHints {
     if (this.state.settings.goal !== 'triforce3') {
       return 0;
     }
-    const paths = ['triforcePower', 'triforceCourage', 'triforceWisdom'] as const;
-    const mapPaths = new Map<Location, Set<HintPath>>;
-    let locations: Location[] = [];
-    const world = this.state.worlds[worldId];
-
-    for (const p of paths) {
-      const pp = this.state.analysis.paths[p];
-      for (const loc of pp) {
-        if (this.hintedLocations.has(loc) || !this.isLocationHintable(loc, 'path')) {
-          continue;
-        }
-        const s = mapPaths.get(loc) || new Set;
-        s.add(p);
-        mapPaths.set(loc, s);
-        locations.push(loc);
-      }
-    }
-    locations = shuffle(this.state.random, locations);
+    const paths = this.state.analysis.paths.filter(x => x.type === 'triforce');
+    let locations = paths.map(x => [...x.locations]).flat().filter(x => this.isLocationHintable(x, 'path'));
 
     let placed = 0;
     for (;;) {
@@ -575,10 +550,12 @@ export class LogicPassHints {
       const gossip = this.findValidGossip(worldId, loc);
       if (gossip !== null) {
         const locD = locationData(loc);
+        const world = this.state.worlds[locD.world as number];
         this.hintedLocations.add(loc);
         this.stronglyHintedLocations.add(loc);
-        const paths = mapPaths.get(loc)!;
-        const path = sample(this.state.random, Array.from(paths));
+
+        const validPaths = paths.filter(x => x.locations.has(loc));
+        const path = sample(this.state.random, validPaths);
         const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
         this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
@@ -590,6 +567,10 @@ export class LogicPassHints {
   private placePathWoth(worldId: number, count: number, extra: number) {
     const world = this.state.worlds[worldId];
     let placed = 0;
+    const wothPath = this.state.analysis.paths.find(x => x.type === 'woth');
+    if (!wothPath) {
+      return 0;
+    }
     const locs = shuffle(this.state.random, Array.from(this.woth)
       .filter(loc => locationData(loc).world === worldId)
       .filter(loc => !this.hintedLocations.has(loc)));
@@ -604,7 +585,7 @@ export class LogicPassHints {
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
         this.stronglyHintedLocations.add(loc);
-        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path: 'woth', region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
+        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path: wothPath, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
         this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
       }

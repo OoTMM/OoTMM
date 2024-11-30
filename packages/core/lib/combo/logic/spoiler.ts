@@ -2,11 +2,11 @@ import { sortBy } from 'lodash';
 
 import { Options } from '../options';
 import { SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
-import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, HINTS_PATHS } from './hints';
+import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
-import { Analysis } from './analysis';
+import { Analysis, AnalysisPath } from './analysis';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
@@ -16,6 +16,7 @@ import { PlayerItem, PlayerItems } from '../items';
 import { exportSettings } from '../settings/string';
 import { ENTRANCES } from '@ootmm/data';
 import { LogWriter } from '../util/log-writer';
+import { BOSS_METADATA_BY_DUNGEON } from './boss';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -272,6 +273,14 @@ export class LogicPassSpoiler {
     }
   }
 
+  private pathName(path: AnalysisPath): string {
+    switch (path.type) {
+    case 'woth': return 'Way of the Hero';
+    case 'triforce': return `Path to ${path.triforce}`;
+    case 'boss': return `Path to ${BOSS_METADATA_BY_DUNGEON.get(path.boss)!.name}`;
+    }
+  }
+
   private writeHints() {
     const globalHints = this.state.hints;
     this.writer.indent('Hints');
@@ -285,10 +294,10 @@ export class LogicPassSpoiler {
       const gossipsItemRegion = gossipStones.filter(stone => stone[1].type === 'item-region').sort() as [string, HintGossipItemRegion][];
 
       if (gossipsPaths.length > 0) {
-        for (const type of Object.keys(HINTS_PATHS)) {
-          const hints = gossipsPaths.filter(x => x[1].path === type);
-          if (hints.length === 0) continue;
-          const name = (HINTS_PATHS as any)[type].name;
+        const paths = new Set(gossipsPaths.map(x => x[1].path));
+        for (const path of paths) {
+          const hints = gossipsPaths.filter(x => x[1].path === path);
+          const name = this.pathName(path);
           this.writer.indent(`${name}:`);
           const longestRegionNameLength = [...hints].reduce( function (a, b) { return regionName(a[1].location).length > regionName(b[1].location).length ? a : b; } )[1].location.length;
           const longestGossipNameLength = this.getMaxKeyLength(hints);
@@ -348,6 +357,23 @@ export class LogicPassSpoiler {
       }
 
       if (this.isMulti) this.writer.unindent('');
+    }
+    this.writer.unindent('');
+  }
+
+  private writePaths() {
+    const { paths } = this.state.analysis;
+    if (paths.length === 0) {
+      return;
+    }
+    this.writer.indent('Paths');
+    for (const path of paths) {
+      this.writer.indent(this.pathName(path));
+      const locations = [...path.locations].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
+      for (const loc of locations) {
+        this.writer.write(loc);
+      }
+      this.writer.unindent('');
     }
     this.writer.unindent('');
   }

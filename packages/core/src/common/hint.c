@@ -96,12 +96,28 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
     }
 }
 
-static const char* kPathNames[] = {
-    TEXT_COLOR_YELLOW "Way of the Hero",
+#define PATH_WOTH       0
+#define PATH_TRIFORCE   1
+#define PATH_BOSS       2
+
+static const char* kPathTriforceNames[] = {
     TEXT_COLOR_RED    "Path of Power",
     TEXT_COLOR_GREEN  "Path of Courage",
     TEXT_COLOR_BLUE   "Path of Wisdom",
 };
+
+static void appendPathName(char** b, u8 path, u8 subPath)
+{
+    switch (path)
+    {
+    case PATH_WOTH:
+        comboTextAppendStr(b, TEXT_COLOR_YELLOW "Way of the Hero");
+        break;
+    case PATH_TRIFORCE:
+        comboTextAppendStr(b, kPathTriforceNames[subPath]);
+        break;
+    }
+}
 
 static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
 {
@@ -127,7 +143,7 @@ static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
     case HINT_TYPE_PATH:
         comboTextAppendRegionName(&b, hint->region, hint->world, 0);
         comboTextAppendStr(&b, " is on the ");
-        comboTextAppendStr(&b, kPathNames[hint->items[0]]);
+        appendPathName(&b, hint->items[0], hint->items[1]);
         comboTextAppendClearColor(&b);
         break;
     case HINT_TYPE_FOOLISH:
