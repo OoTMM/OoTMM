@@ -143,6 +143,7 @@ const makeBlitz = (input: PartialDeep<Settings>): Settings => {
 };
 
 const PRESET_BLITZ = makeBlitz({
+  hintPathBoss: true,
   rainbowBridge: 'custom',
   specialConds: {
     BRIDGE: {
@@ -194,6 +195,7 @@ const PRESET_BLITZ = makeBlitz({
 });
 
 const PRESET_BLITZ_PRECOMPLETED = makeBlitz({
+  hintPathBoss: true,
   rainbowBridge: 'custom',
   preCompletedDungeons: true,
   preCompletedDungeonsMajor: 6,
