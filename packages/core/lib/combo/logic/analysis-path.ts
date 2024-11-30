@@ -174,13 +174,13 @@ export class LogicPassAnalysisPaths {
       const triforcePlayerItem = makePlayerItem(triforceItem, i);
       const triforcePlayerItemLocs = Array.from(this.state.items.entries()).filter(([_, item]) => item === triforcePlayerItem).map(([loc, _]) => loc);
       const pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
-      const pathfinderState = pathfinder.run(null, { items: this.state.items, stopAtGoal: true, forbiddenLocations: new Set(triforcePlayerItemLocs) });
+      const pathfinderState = pathfinder.run(null, { recursive: true, items: this.state.items, stopAtGoal: true, forbiddenLocations: new Set(triforcePlayerItemLocs) });
       if (!pathfinderState || pathfinderState.goal) {
         continue;
       }
 
       /* The piece is required for this player */
-      const pred = (x: PathfinderState) => x.ws[i].items.has(triforceItem);
+      const pred = (x: PathfinderState) => (triforcePlayerItemLocs.length === 0 || triforcePlayerItemLocs.every(l => x.locations.has(l)));
       this.registerState({
         key: `triforce3.${triforce}.${i}`,
         locks: [],
@@ -191,34 +191,6 @@ export class LogicPassAnalysisPaths {
       });
     }
   }
-
-  /*
-  private makePathTriforce3(state: AnalysisPathState, states: AnalysisPathState[], triforce: Triforce3Type) {
-    const triforceItem = TRIFORCE3_ITEMS[triforce];
-    const locs = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === triforceItem).map(([loc, _]) => loc);
-    const path = this.makePath(`Path of ${triforce}`, x => locs.every(l => x.locations.has(l)));
-    this.addPath({ type: 'triforce', triforce, locations: path });
-  }
-  */
-
-  /*
-  private makePathsOld() {
-    this.addPath({ type: 'woth', locations: this.requiredLocs });
-
-    if (this.state.settings.goal === 'triforce3') {
-      const locsPower = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
-      const locsCourage = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);
-      const locsWisdom = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_WISDOM).map(([loc, _]) => loc);
-
-      const pathPower = this.makePath('Path of Power', x => locsPower.every(l => x.locations.has(l)));
-      const pathCourage = this.makePath('Path of Courage', x => locsCourage.every(l => x.locations.has(l)));
-      const pathWisdom = this.makePath('Path of Wisdom', x => locsWisdom.every(l => x.locations.has(l)));
-
-      this.addPath({ type: 'triforce', triforce: 'Power', locations: pathPower });
-      this.addPath({ type: 'triforce', triforce: 'Courage', locations: pathCourage });
-      this.addPath({ type: 'triforce', triforce: 'Wisdom', locations: pathWisdom });
-    }
-  }*/
 
   private makePath(state: AnalysisPathState) {
     /* Build the actual path */

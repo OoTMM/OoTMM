@@ -151,7 +151,6 @@ export class LogicPassHints {
   private hintedLocations = new Set<Location>();
   private stronglyHintedLocations = new Set<Location>();
   private gossip: {[k: string]: HintGossip}[];
-  private woth: Set<Location>;
   private pathfinder: Pathfinder;
   private hintsAlways: string[];
   private hintsSometimes: string[];
@@ -190,7 +189,6 @@ export class LogicPassHints {
     this.hintsAlways = this.alwaysHints();
     this.hintsSometimes = this.sometimesHints();
     this.pathfinder = new Pathfinder(state.worlds, state.settings, state.startingItems);
-    this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintable(loc, 'path')));
     this.gossip = Array.from({ length: this.state.settings.players }).map(_ => ({}));
   }
 
@@ -530,11 +528,8 @@ export class LogicPassHints {
     }
     const world = this.state.worlds[worldId];
     let placed = 0;
-    const wothPath = this.state.analysis.paths.find(x => x.type === 'woth');
-    if (!wothPath) {
-      return 0;
-    }
-    const locs = shuffle(this.state.random, Array.from(this.woth)
+    const locs = shuffle(this.state.random, Array.from(this.state.analysis.required)
+      .filter(loc => this.isLocationHintable(loc, 'path'))
       .filter(loc => locationData(loc).world === worldId)
       .filter(loc => !this.hintedLocations.has(loc)));
 
