@@ -30,19 +30,34 @@ const char* const kDungeonNames[] = {
     TEXT_COLOR_YELLOW "Clock Tower Roof",
 };
 
+const char* const kBossColors[] = {
+    TEXT_COLOR_GREEN,
+    TEXT_COLOR_RED,
+    TEXT_COLOR_BLUE,
+    TEXT_COLOR_GREEN,
+    TEXT_COLOR_RED,
+    TEXT_COLOR_BLUE,
+    TEXT_COLOR_PINK,
+    TEXT_COLOR_ORANGE,
+    TEXT_COLOR_GREEN,
+    TEXT_COLOR_RED,
+    TEXT_COLOR_BLUE,
+    TEXT_COLOR_ORANGE,
+};
+
 const char* const kBossNames[] = {
-    TEXT_COLOR_GREEN "Gohma",
-    TEXT_COLOR_RED "King Dodongo",
-    TEXT_COLOR_BLUE "Barinade",
-    TEXT_COLOR_GREEN "Phantom Ganon",
-    TEXT_COLOR_RED "Volvagia",
-    TEXT_COLOR_BLUE "Morpha",
-    TEXT_COLOR_PINK "Bongo Bongo",
-    TEXT_COLOR_ORANGE "Twinrova",
-    TEXT_COLOR_GREEN "Odolwa",
-    TEXT_COLOR_RED "Goht",
-    TEXT_COLOR_BLUE "Gyorg",
-    TEXT_COLOR_ORANGE "Twinmold",
+    "Gohma",
+    "King Dodongo",
+    "Barinade",
+    "Phantom Ganon",
+    "Volvagia",
+    "Morpha",
+    "Bongo Bongo",
+    "Twinrova",
+    "Odolwa",
+    "Goht",
+    "Gyorg",
+    "Twinmold",
 };
 
 void comboTextAppendDungeonName(char** buffer, u8 dungeonId)
@@ -51,8 +66,11 @@ void comboTextAppendDungeonName(char** buffer, u8 dungeonId)
     comboTextAppendClearColor(buffer);
 }
 
-void comboTextAppendBossName(char** buffer, u8 bossId)
+void comboTextAppendBossName(char** buffer, u8 bossId, const char* prefix)
 {
+    comboTextAppendStr(buffer, kBossColors[bossId]);
+    if (prefix)
+        comboTextAppendStr(buffer, prefix);
     comboTextAppendStr(buffer, kBossNames[bossId]);
     comboTextAppendClearColor(buffer);
 }

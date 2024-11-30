@@ -1,12 +1,23 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { World } from './world';
+import { cloneWorld, World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { isLocationRenewable, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
 import { ItemHelpers, Items, PlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
+import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON } from './boss';
+import { ENTRANCES } from '@ootmm/data';
+
+export type AnalysisPathBase = { locations: Set<Location> };
+export type AnalysisPathWotH = AnalysisPathBase & { type: 'woth' };
+export type AnalysisPathTriforce = AnalysisPathBase & { type: 'triforce', triforce: 'Power' | 'Courage' | 'Wisdom' };
+export type AnalysisPathBoss = AnalysisPathBase & { type: 'boss', boss: string };
+export type AnalysisPath =
+  | AnalysisPathWotH
+  | AnalysisPathTriforce
+  | AnalysisPathBoss;
 
 export class LogicPassAnalysis {
   private pathfinder: Pathfinder;
@@ -16,11 +27,7 @@ export class LogicPassAnalysis {
   private uselessLocs = new Set<Location>();
   private unreachableLocs = new Set<Location>();
   private locations: Location[];
-  private paths: {
-    triforcePower: Set<Location>;
-    triforceCourage: Set<Location>;
-    triforceWisdom: Set<Location>;
-  };
+  private paths: AnalysisPath[];
 
   constructor(
     private readonly state: {
@@ -35,7 +42,7 @@ export class LogicPassAnalysis {
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
-    this.paths = { triforcePower: new Set, triforceCourage: new Set, triforceWisdom: new Set };
+    this.paths = [];
   }
 
   private makeSpheresRaw(restrictedLocations?: Set<Location>) {
@@ -81,7 +88,7 @@ export class LogicPassAnalysis {
     const path = new Set<Location>();
     this.state.monitor.log(`Analysis - ${name}`);
     let count = 0;
-    const locations = new Set(this.spheres.flat());
+    const locations = new Set(this.requiredLocs);
     for (const loc of locations) {
       this.state.monitor.setProgress(count++, locations.size);
       const pathfinderState = this.pathfinder.run(null, { items: this.state.items, forbiddenLocations: new Set([loc]), recursive: true, stopAtGoal: true });
@@ -110,15 +117,64 @@ export class LogicPassAnalysis {
     }
   }
 
+  private addPath(path: AnalysisPath) {
+    if (path.locations.size) {
+      this.paths.push(path);
+    }
+  }
+
+  private isDungeonBossRequired(dungeon: string, worldId: number) {
+    const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
+
+    /* Create a distinct world */
+    const worlds = [...this.state.worlds];
+    const newWorld = cloneWorld(worlds[worldId]);
+    worlds[worldId] = newWorld;
+
+    /* Remove the boss */
+    newWorld.areas[ENTRANCES[meta.entrance].to].exits = {};
+    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
+    return !pathfinderState.goal;
+  }
+
+  private makePathBoss(dungeon: string) {
+    const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
+    const requiredPlayers: number[] = [];
+    for (let i = 0; i < this.state.worlds.length; i++) {
+      if (this.isDungeonBossRequired(dungeon, i)) {
+        requiredPlayers.push(i);
+      }
+    }
+    if (!requiredPlayers.length)
+      return;
+
+    /* The boss is required for some players */
+    const locations = this.makePath('Path to Boss', x => requiredPlayers.every(p => x.ws[p].events.has(meta.event)));
+    this.addPath({ type: 'boss', boss: dungeon, locations });
+  }
+
   private makePaths() {
+    this.addPath({ type: 'woth', locations: this.requiredLocs });
+
     if (this.state.settings.goal === 'triforce3') {
       const locsPower = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
       const locsCourage = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);
       const locsWisdom = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_WISDOM).map(([loc, _]) => loc);
 
-      this.paths.triforcePower = this.makePath('Path of Power', x => locsPower.every(l => x.locations.has(l)));
-      this.paths.triforceCourage = this.makePath('Path of Courage', x => locsCourage.every(l => x.locations.has(l)));
-      this.paths.triforceWisdom = this.makePath('Path of Wisdom', x => locsWisdom.every(l => x.locations.has(l)));
+      const pathPower = this.makePath('Path of Power', x => locsPower.every(l => x.locations.has(l)));
+      const pathCourage = this.makePath('Path of Courage', x => locsCourage.every(l => x.locations.has(l)));
+      const pathWisdom = this.makePath('Path of Wisdom', x => locsWisdom.every(l => x.locations.has(l)));
+
+      this.addPath({ type: 'triforce', triforce: 'Power', locations: pathPower });
+      this.addPath({ type: 'triforce', triforce: 'Courage', locations: pathCourage });
+      this.addPath({ type: 'triforce', triforce: 'Wisdom', locations: pathWisdom });
+    }
+
+    if (this.state.settings.hintPathBoss) {
+      for (const dungeon of BOSS_DUNGEONS) {
+        this.makePathBoss(dungeon);
+      }
     }
   }
 

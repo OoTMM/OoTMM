@@ -150,7 +150,7 @@ static void comboTextCompass(char** b, PlayState* play, s16 gi)
 
     /* Display the boss */
     comboTextAppendStr(b, TEXT_NL "It points at ");
-    comboTextAppendBossName(b, bossId);
+    comboTextAppendBossName(b, bossId, NULL);
     comboTextAppendStr(b, ".");
 }
 
