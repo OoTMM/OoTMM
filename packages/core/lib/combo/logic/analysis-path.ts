@@ -35,7 +35,7 @@ export type AnalysisPathState = {
   name: string;
   locks: string[];
   path: AnalysisPath;
-  pathfinderState: PathfinderState;
+  pathfinderState: PathfinderState | null;
   pred: (x: PathfinderState) => boolean;
 };
 
@@ -193,25 +193,6 @@ export class LogicPassAnalysisPaths {
       this.addPath({ type: 'triforce', triforce: 'Courage', locations: pathCourage });
       this.addPath({ type: 'triforce', triforce: 'Wisdom', locations: pathWisdom });
     }
-
-    if (this.state.settings.hintPathBoss) {
-      for (const dungeon of BOSS_DUNGEONS) {
-        const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
-        this.registerState({
-          key: `boss.${dungeon}`,
-          locks: [],
-          path: { type: 'boss', boss: dungeon, locations: new Set() },
-          run: (state, states) => this.makePathBoss(state, states, dungeon),
-        });
-      }
-    }
-
-    if (this.state.settings.hintPathEndBoss) {
-      for (const boss of END_BOSS_METADATA_BY_NAME.keys()) {
-        //this.makePathEndBoss(boss);
-        this.registerState({ key: `end-boss.${boss}`, locks: [], path: { type: 'end-boss', boss, locations: new Set() }, run: (state, states) => this.makePathEndBoss(state, states, boss) });
-      }
-    }
   }*/
 
   private makePath(state: AnalysisPathState) {
@@ -219,13 +200,15 @@ export class LogicPassAnalysisPaths {
     state.path.locations = this.makePathLocations(state.name, state.pred);
 
     /* Check for locks */
-    for (const stateName in this.states) {
-      const otherState = this.states[stateName];
-      if (otherState === state)
-        continue;
-      if (!otherState.pred(state.pathfinderState)) {
-        /* We have a lock */
-        state.locks.push(otherState.key);
+    if (state.pathfinderState) {
+      for (const stateName in this.states) {
+        const otherState = this.states[stateName];
+        if (otherState === state)
+          continue;
+        if (!otherState.pred(state.pathfinderState)) {
+          /* We have a lock */
+          state.locks.push(otherState.key);
+        }
       }
     }
 
@@ -234,7 +217,17 @@ export class LogicPassAnalysisPaths {
   }
 
   private makePaths() {
+    /* Hardcode the woth path */
+    const wothPath: AnalysisPath = { type: 'woth', locations: new Set(this.state.analysis.required) };
+    const wothState: AnalysisPathState = { key: 'woth', locks: [], name: '---WotH---', path: wothPath, pathfinderState: null, pred: x => x.goal };
+    this.states[wothState.key] = wothState;
+    this.addPath(wothPath);
+
     for (const state of Object.values(this.states)) {
+      if (state.key === 'woth') {
+        continue;
+      }
+
       this.makePath(state);
     }
   }
@@ -284,4 +277,3 @@ export class LogicPassAnalysisPaths {
     return { analysis: { ...this.state.analysis, paths: this.paths } };
   }
 }
-
