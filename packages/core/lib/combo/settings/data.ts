@@ -169,6 +169,13 @@ export const SETTINGS = [{
   description: 'Enable WotH hints to be upgraded to boss paths when appropriate.',
   default: false
 }, {
+  key: 'hintPathEndBoss',
+  name: 'Hint Path to End Boss',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Enable WotH hints to be upgraded to end boss paths when appropriate.',
+  default: false
+}, {
   key: 'hintImportance',
   name: 'Hint Importance',
   category: 'hints',

@@ -278,6 +278,7 @@ export class LogicPassSpoiler {
     case 'woth': return 'Way of the Hero';
     case 'triforce': return `Path to ${path.triforce}`;
     case 'boss': return `Path to ${BOSS_METADATA_BY_DUNGEON.get(path.boss)!.name}`;
+    case 'end-boss': return `Path to ${path.boss}`;
     }
   }
 
