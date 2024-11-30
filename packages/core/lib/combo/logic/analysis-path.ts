@@ -60,10 +60,6 @@ export class LogicPassAnalysisPaths {
     this.paths = [];
   }
 
-  private registerState(state: AnalysisPathState) {
-    this.states[state.key] = state;
-  }
-
   private makePathLocations(name: string, pred: (x: PathfinderState) => boolean) {
     const path = new Set<Location>();
     this.state.monitor.log(`Analysis - ${name}`);
@@ -79,10 +75,12 @@ export class LogicPassAnalysisPaths {
     return path;
   }
 
-  private addPath(path: AnalysisPath) {
-    if (path.locations.size) {
-      this.paths.push(path);
-    }
+  private makePath(opts: { key: string, pathType: AnalysisPathType, name: string, pathfinderState?: PathfinderState, pred: (x: PathfinderState) => boolean }) {
+    const locations = this.makePathLocations(opts.name, opts.pred);
+    if (locations.size === 0) return;
+    const path: AnalysisPath = { ...opts.pathType, locations };
+    const state = { key: opts.key, name: opts.name, locks: [], path, pathfinderState: opts.pathfinderState || null, pred: opts.pred };
+    this.states[state.key] = state;
   }
 
   private bossPathfindState(dungeon: string, worldId: number) {
@@ -123,7 +121,7 @@ export class LogicPassAnalysisPaths {
     return pathfinderState;
   }
 
-  private registerStateBoss(dungeon: string) {
+  private makePathBoss(dungeon: string) {
     const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
 
     for (let i = 0; i < this.state.worlds.length; i++) {
@@ -134,10 +132,9 @@ export class LogicPassAnalysisPaths {
 
       /* The boss is required for this player */
       const pred = (x: PathfinderState) => x.ws[i].events.has(meta.event);
-      this.registerState({
+      this.makePath({
         key: `boss.${dungeon}.${i}`,
-        locks: [],
-        path: { type: 'boss', boss: dungeon, locations: new Set },
+        pathType: { type: 'boss', boss: dungeon },
         name: `Path to Boss`,
         pathfinderState,
         pred,
@@ -145,7 +142,7 @@ export class LogicPassAnalysisPaths {
     }
   }
 
-  private registerStateEndBoss(boss: string) {
+  private makePathEndBoss(boss: string) {
     const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
 
     for (let i = 0; i < this.state.worlds.length; i++) {
@@ -156,10 +153,9 @@ export class LogicPassAnalysisPaths {
 
       /* The boss is required for this player */
       const pred = (x: PathfinderState) => x.ws[i].events.has(meta.event);
-      this.registerState({
+      this.makePath({
         key: `end-boss.${boss}.${i}`,
-        locks: [],
-        path: { type: 'end-boss', boss, locations: new Set },
+        pathType: { type: 'end-boss', boss },
         name: `Path to End Boss`,
         pathfinderState,
         pred,
@@ -167,7 +163,7 @@ export class LogicPassAnalysisPaths {
     }
   }
 
-  private registerStateTriforce3(triforce: Triforce3Type) {
+  private makePathTriforce3(triforce: Triforce3Type) {
     const triforceItem = TRIFORCE3_ITEMS[triforce];
 
     for (let i = 0; i < this.state.worlds.length; i++) {
@@ -181,10 +177,9 @@ export class LogicPassAnalysisPaths {
 
       /* The piece is required for this player */
       const pred = (x: PathfinderState) => (triforcePlayerItemLocs.length === 0 || triforcePlayerItemLocs.every(l => x.locations.has(l)));
-      this.registerState({
+      this.makePath({
         key: `triforce3.${triforce}.${i}`,
-        locks: [],
-        path: { type: 'triforce', triforce, locations: new Set },
+        pathType: { type: 'triforce', triforce },
         name: `Path to Triforce Quest Piece`,
         pathfinderState,
         pred,
@@ -192,25 +187,20 @@ export class LogicPassAnalysisPaths {
     }
   }
 
-  private makePath(state: AnalysisPathState) {
-    /* Build the actual path */
-    state.path.locations = this.makePathLocations(state.name, state.pred);
-
-    /* Check for locks */
-    if (state.pathfinderState) {
-      for (const stateName in this.states) {
-        const otherState = this.states[stateName];
-        if (otherState === state)
-          continue;
-        if (!otherState.pred(state.pathfinderState)) {
-          /* We have a lock */
-          state.locks.push(otherState.key);
+  private checkLocks() {
+    for (const state of Object.values(this.states)) {
+      if (state.pathfinderState) {
+        for (const stateName in this.states) {
+          const otherState = this.states[stateName];
+          if (otherState === state)
+            continue;
+          if (!otherState.pred(state.pathfinderState)) {
+            /* We have a lock */
+            state.locks.push(otherState.key);
+          }
         }
       }
     }
-
-    /* Add the actual path */
-    this.addPath(state.path);
   }
 
   private makePaths() {
@@ -218,33 +208,22 @@ export class LogicPassAnalysisPaths {
     const wothPath: AnalysisPath = { type: 'woth', locations: new Set(this.state.analysis.required) };
     const wothState: AnalysisPathState = { key: 'woth', locks: [], name: '---WotH---', path: wothPath, pathfinderState: null, pred: x => x.goal };
     this.states[wothState.key] = wothState;
-    this.addPath(wothPath);
 
-    for (const state of Object.values(this.states)) {
-      if (state.key === 'woth') {
-        continue;
-      }
-
-      this.makePath(state);
-    }
-  }
-
-  private registerStates() {
     if (this.state.settings.goal === 'triforce3') {
-      this.registerStateTriforce3('Power');
-      this.registerStateTriforce3('Courage');
-      this.registerStateTriforce3('Wisdom');
+      this.makePathTriforce3('Power');
+      this.makePathTriforce3('Courage');
+      this.makePathTriforce3('Wisdom');
     }
 
     if (this.state.settings.hintPathBoss) {
       for (const dungeon of BOSS_DUNGEONS) {
-        this.registerStateBoss(dungeon);
+        this.makePathBoss(dungeon);
       }
     }
 
     if (this.state.settings.hintPathEndBoss) {
       for (const boss of END_BOSS_METADATA_BY_NAME.keys()) {
-        this.registerStateEndBoss(boss);
+        this.makePathEndBoss(boss);
       }
     }
   }
@@ -272,12 +251,12 @@ export class LogicPassAnalysisPaths {
 
   run() {
     if (this.state.settings.logic !== 'none') {
-      this.registerStates();
       this.makePaths();
+      this.checkLocks();
       this.cleanPaths();
     }
 
-    const paths = this.paths.filter(p => p.locations.size > 0);
+    const paths = Object.values(this.states).map(x => x.path).filter(x => x.locations.size > 0);
 
     return { analysis: { ...this.state.analysis, paths } };
   }
