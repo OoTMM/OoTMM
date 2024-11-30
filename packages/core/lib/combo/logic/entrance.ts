@@ -6,7 +6,7 @@ import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAge, exprAnd, exprFalse, exprOr, exprTrue } from './expr';
+import { Expr, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
@@ -252,6 +252,37 @@ class WorldShuffler {
     if (DUNGEON_ENTRANCES.includes(original) && DUNGEON_ENTRANCES.includes(replacement)) {
       world.dungeonsEntrances.set(replacement, { type: 'replace', entrance: original });
     }
+
+    /* Boss needs special handling */
+    const bossSrc = BOSS_EVENTS[original];
+    const bossDst = BOSS_EVENTS[replacement];
+    if (bossSrc && bossDst) {
+      /* Set the boss ID */
+      const bossIndexSrc = BOSS_INDEX_BY_DUNGEON[bossSrc.dungeon];
+      const bossIndexDst = BOSS_INDEX_BY_DUNGEON[bossDst.dungeon];
+      world.bossIds[bossIndexDst] = bossIndexSrc;
+
+      /* Set the boss event */
+      const eventClear = bossSrc.eventClear;
+      if (eventClear) {
+        world.areas['OOT SPAWN'].events[eventClear] = exprEvent(bossDst.event);
+      }
+
+      /* Collect areas */
+      const areas = this.world.dungeonsBossAreas[bossDst.dungeon];
+      for (const a of areas) {
+        /* Patch dungeon and region */
+        world.areas[a].dungeon = bossSrc.dungeon;
+        world.areas[a].region = DUNGEONS_REGIONS[bossSrc.dungeon];
+
+        /* Patch locations */
+        for (const loc of Object.keys(world.areas[a].locations)) {
+          world.dungeons[bossDst.dungeon].delete(loc);
+          world.dungeons[bossSrc.dungeon].add(loc);
+          world.regions[loc] = DUNGEONS_REGIONS[bossSrc.dungeon];
+        }
+      }
+    }
   }
 
   private validateAgeTemple(world: World) {
@@ -322,6 +353,18 @@ class WorldShuffler {
 
       world.areas['ASSUMED'] = assumedArea;
       world.areas['OOT SPAWN'].exits['ASSUMED'] = exprTrue();
+    }
+
+    const bossPool = pools.BOSS;
+    if (bossPool) {
+      for (const oldName of bossPool.src) {
+        /* Assume we can get the event */
+        const meta = BOSS_EVENTS[oldName]!;
+        const eventClear = meta.eventClear;
+        if (eventClear) {
+          world.areas['OOT SPAWN'].events[eventClear] = exprEvent(meta.event);
+        }
+      }
     }
   }
 
@@ -764,191 +807,6 @@ class WorldShuffler {
     return { src: types, dst: types, opts: { ownGame: this.settings.erGrottos === 'ownGame' } };
   }
 
-  private isAssignableLegacy(world: World, original: Entrance, replacement: Entrance, opts?: { ownGame?: boolean, locations?: string[] }) {
-    const originalWorld = this.world;
-    const originalEntrance = ENTRANCES[original];
-    const replacementEntrance = ENTRANCES[replacement];
-    const dungeon = originalWorld.areas[replacementEntrance.to].dungeon!;
-
-    /* Reject wrong game */
-    if (opts?.ownGame) {
-      if (originalEntrance.game !== replacementEntrance.game) {
-        return false;
-      }
-    }
-
-    /* Not all locations */
-    if (this.settings.logic !== 'allLocations') {
-      return true;
-    }
-
-    /* Apply an override */
-    world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(original);
-
-    /* If the dungeon is ST or IST, we need to allow the other dungeon */
-    if (dungeon === 'ST') {
-      world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'] = exprTrue();
-    }
-    if (dungeon === 'IST') {
-      world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'] = exprTrue();
-    }
-
-    /* Check if the new world is valid */
-    const allWorlds = [...this.worlds];
-    allWorlds[this.worldId] = world;
-    const pathfinder = new Pathfinder(allWorlds, this.settings, this.startingItems);
-    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, assumedItems: this.allItems, recursive: true });
-
-    /* Restore the override */
-    delete world.areas[originalEntrance.from].exits[replacementEntrance.to]
-    delete world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'];
-    delete world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'];
-
-    /* Get the list of required locations */
-    let locations: string[];
-    if (opts?.locations) {
-      locations = opts.locations;
-    } else if (['ST', 'IST'].includes(dungeon)) {
-      locations = [...world.dungeons['ST'], ...world.dungeons['IST']];
-    } else {
-      locations = Array.from(world.dungeons[dungeon]);
-    }
-
-    /* Turn into locations */
-    const worldLocs = locations.map(l => makeLocation(l, this.worldId));
-
-    /* Check if the new world is valid */
-    if (!(worldLocs.every(l => pathfinderState.locations.has(l))))
-      return false;
-
-    /* Ganon's tower check */
-    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.settings.goal) && !pathfinderState.ws[this.worldId].events.has('OOT_GANON'))
-      return false;
-
-    return true;
-  }
-
-  private legacyFixBosses(world: World): World {
-    const bossEntrances = this.allEntrances.filter(x => ENTRANCES[x].type === 'boss');
-    const bossEntrancesByDungeon = new Map<string, Entrance>();
-    const bossEvents = new Map<string, ExprMap>();
-    const bossAreas = new Map<string, string[]>();
-    const bossLocations = new Map<string, string[]>();
-
-    /* Collect every boss event */
-    for (const a in world.areas) {
-      const area = world.areas[a];
-      const dungeon = area.dungeon!;
-      if (area.boss) {
-        /* Events */
-        if (!bossEvents.has(dungeon)) {
-          bossEvents.set(dungeon, {});
-        }
-        const oldEvents = bossEvents.get(dungeon)!;
-        bossEvents.set(dungeon, { ...oldEvents, ...area.events });
-
-        /* Areas */
-        if (!bossAreas.has(dungeon)) {
-          bossAreas.set(dungeon, []);
-        }
-        bossAreas.get(dungeon)!.push(a);
-
-        /* Locations */
-        if (!bossLocations.has(dungeon)) {
-          bossLocations.set(dungeon, []);
-        }
-        const locs = bossLocations.get(dungeon)!;
-        for (const l in area.locations) {
-          locs.push(l);
-        }
-
-        /* Remove the event */
-        area.events = {};
-      }
-    }
-
-    /* Collect the entrances and delete the original ones */
-    for (const eName of bossEntrances) {
-      const e = ENTRANCES[eName];
-      const areaFrom = world.areas[e.from];
-      const areaTo = world.areas[e.to];
-
-      /* We have a boss entrance */
-      const dungeon = areaTo.dungeon!;
-      bossEntrancesByDungeon.set(dungeon, eName);
-
-      /* Remove the entrance */
-      delete areaFrom.exits[e.to];
-    }
-
-    /* Actually shuffle bosses */
-    const unplacedBosses = new Set(bossEntrancesByDungeon.keys());
-    const unplacedLocs = new Set(bossLocations.keys());
-    const assigns = new Map<string, Set<string>>();
-    while (unplacedBosses.size > 0) {
-      /* Refresh the assigns */
-      for (const boss of unplacedBosses) {
-        if (!assigns.has(boss)) {
-          assigns.set(boss, new Set());
-        }
-        const locs = assigns.get(boss)!;
-        for (const loc of unplacedLocs) {
-          if (locs.has(loc)) {
-            continue;
-          }
-          if (this.isAssignableLegacy(world, bossEntrancesByDungeon.get(loc)!, bossEntrancesByDungeon.get(boss)!, { ownGame: this.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
-            locs.add(loc);
-          }
-        }
-      }
-
-      const minSize = Math.min(...Array.from(assigns.values()).map(s => s.size));
-      const bosses = Array.from(assigns.entries()).filter(([_, s]) => s.size === minSize).map(([k, _]) => k);
-      const boss = sample(this.random, bosses);
-      const locs = assigns.get(boss)!;
-      if (locs.size === 0) {
-        throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
-      }
-      const loc = sample(this.random, locs);
-
-      /* Mark as placed */
-      unplacedBosses.delete(boss);
-      unplacedLocs.delete(loc);
-      assigns.delete(boss);
-      for (const l of assigns.values()) {
-        l.delete(loc);
-      }
-
-      /* Place the boss */
-      const src = bossEntrancesByDungeon.get(loc)!;
-      const dst = bossEntrancesByDungeon.get(boss)!;
-      world.areas[ENTRANCES[src].from].exits[ENTRANCES[dst].to] = this.getExpr(src);
-      world.entranceOverrides.set(src, dst);
-      world.bossIds[BOSS_INDEX_BY_DUNGEON[boss]] = BOSS_INDEX_BY_DUNGEON[loc];
-
-      /* Add the events */
-      const areaNames = bossAreas.get(boss)!;
-      const lastAreaName = areaNames[areaNames.length - 1];
-      const lastArea = world.areas[lastAreaName];
-      lastArea.events = { ...lastArea.events, ...bossEvents.get(loc)! };
-
-      /* Change the associated dungeon */
-      for (const a of bossAreas.get(boss)!) {
-        const area = world.areas[a];
-        area.dungeon = loc;
-        area.region = DUNGEONS_REGIONS[loc];
-
-        for (const l in area.locations) {
-          world.regions[l] = DUNGEONS_REGIONS[loc];
-          world.dungeons[boss].delete(l);
-          world.dungeons[loc].add(l);
-        }
-      }
-    }
-
-    return world;
-  }
-
   private makePoolsSimple(): EntrancePoolDescrs {
     const pools: EntrancePoolDescrs = {};
 
@@ -1090,10 +948,6 @@ class WorldShuffler {
     this.placePools(this.makePools());
 
     let world = this.changedWorld(this.overrides);
-    //if (this.settings.erBoss !== 'none') {
-    //  world = this.legacyFixBosses(world);
-    //  this.worldChanged = true;
-    //}
 
     return { world, changed: this.worldChanged };
   }
