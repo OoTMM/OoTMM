@@ -116,6 +116,9 @@ static void appendPathName(char** b, u8 path, u8 subPath)
     case PATH_TRIFORCE:
         comboTextAppendStr(b, kPathTriforceNames[subPath]);
         break;
+    case PATH_BOSS:
+        comboTextAppendBossName(b, subPath, "Path to ");
+        break;
     }
 }
 

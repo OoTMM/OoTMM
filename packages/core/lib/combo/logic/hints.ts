@@ -564,6 +564,14 @@ export class LogicPassHints {
     return placed;
   }
 
+  private upgradePath(loc: Location) {
+    const bossPaths = this.state.analysis.paths.filter(x => x.type === 'boss' && x.locations.has(loc));
+    if (bossPaths.length) {
+      return sample(this.state.random, bossPaths);
+    }
+    return null;
+  }
+
   private placePathWoth(worldId: number, count: number, extra: number) {
     const world = this.state.worlds[worldId];
     let placed = 0;
@@ -582,10 +590,11 @@ export class LogicPassHints {
       const loc = locs.pop()!;
       const gossip = this.findValidGossip(worldId, loc);
       if (gossip !== null) {
+        const path = this.upgradePath(loc) ?? wothPath;
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
         this.stronglyHintedLocations.add(loc);
-        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path: wothPath, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
+        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
         this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
       }
