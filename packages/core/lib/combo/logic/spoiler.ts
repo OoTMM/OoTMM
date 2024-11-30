@@ -6,7 +6,8 @@ import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemR
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
-import { Analysis, AnalysisPath } from './analysis';
+import { Analysis } from './analysis';
+import { AnalysisPath } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';

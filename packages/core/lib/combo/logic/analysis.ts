@@ -1,25 +1,13 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { cloneWorld, World } from './world';
+import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { isLocationRenewable, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
-import { ItemHelpers, Items, PlayerItem, PlayerItems } from '../items';
+import { ItemHelpers, PlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
-import { ENTRANCES } from '@ootmm/data';
-
-export type AnalysisPathBase = { locations: Set<Location> };
-export type AnalysisPathWotH = AnalysisPathBase & { type: 'woth' };
-export type AnalysisPathTriforce = AnalysisPathBase & { type: 'triforce', triforce: 'Power' | 'Courage' | 'Wisdom' };
-export type AnalysisPathBoss = AnalysisPathBase & { type: 'boss', boss: string };
-export type AnalysisPathEndBoss = AnalysisPathBase & { type: 'end-boss', boss: string };
-export type AnalysisPath =
-  | AnalysisPathWotH
-  | AnalysisPathTriforce
-  | AnalysisPathBoss
-  | AnalysisPathEndBoss;
+import { AnalysisPath } from './analysis-path';
 
 export class LogicPassAnalysis {
   private pathfinder: Pathfinder;
@@ -29,7 +17,6 @@ export class LogicPassAnalysis {
   private uselessLocs = new Set<Location>();
   private unreachableLocs = new Set<Location>();
   private locations: Location[];
-  private paths: AnalysisPath[];
 
   constructor(
     private readonly state: {
@@ -44,7 +31,6 @@ export class LogicPassAnalysis {
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
-    this.paths = [];
   }
 
   private makeSpheresRaw(restrictedLocations?: Set<Location>) {
@@ -119,110 +105,6 @@ export class LogicPassAnalysis {
     }
   }
 
-  private addPath(path: AnalysisPath) {
-    if (path.locations.size) {
-      this.paths.push(path);
-    }
-  }
-
-  private isDungeonBossRequired(dungeon: string, worldId: number) {
-    const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
-
-    /* Create a distinct world */
-    const worlds = [...this.state.worlds];
-    const newWorld = cloneWorld(worlds[worldId]);
-    worlds[worldId] = newWorld;
-    const area = newWorld.areas[ENTRANCES[meta.entrance].to];
-    if (!area)
-      return false;
-
-    /* Remove the boss */
-    area.exits = {};
-    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
-    return !pathfinderState.goal;
-  }
-
-  private isDungeonEndBossRequired(boss: string, worldId: number) {
-    const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
-
-    /* Create a distinct world */
-    const worlds = [...this.state.worlds];
-    const newWorld = cloneWorld(worlds[worldId]);
-    worlds[worldId] = newWorld;
-    const area = newWorld.areas[meta.area];
-    if (!area)
-      return false;
-
-    /* Remove the boss */
-    area.events = {};
-    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
-    return !pathfinderState.goal;
-  }
-
-  private makePathBoss(dungeon: string) {
-    const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
-    const requiredPlayers: number[] = [];
-    for (let i = 0; i < this.state.worlds.length; i++) {
-      if (this.isDungeonBossRequired(dungeon, i)) {
-        requiredPlayers.push(i);
-      }
-    }
-    if (!requiredPlayers.length)
-      return;
-
-    /* The boss is required for some players */
-    const locations = this.makePath('Path to Boss', x => requiredPlayers.every(p => x.ws[p].events.has(meta.event)));
-    this.addPath({ type: 'boss', boss: dungeon, locations });
-  }
-
-  private makePathEndBoss(boss: string) {
-    const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
-    const requiredPlayers: number[] = [];
-    for (let i = 0; i < this.state.worlds.length; i++) {
-      if (this.isDungeonEndBossRequired(boss, i)) {
-        requiredPlayers.push(i);
-      }
-    }
-    if (!requiredPlayers.length)
-      return;
-
-    /* The boss is required for some players */
-    const locations = this.makePath('Path to End Boss', x => requiredPlayers.every(p => x.ws[p].events.has(meta.event)));
-    this.addPath({ type: 'end-boss', boss, locations });
-  }
-
-  private makePaths() {
-    this.addPath({ type: 'woth', locations: this.requiredLocs });
-
-    if (this.state.settings.goal === 'triforce3') {
-      const locsPower = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
-      const locsCourage = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);
-      const locsWisdom = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_WISDOM).map(([loc, _]) => loc);
-
-      const pathPower = this.makePath('Path of Power', x => locsPower.every(l => x.locations.has(l)));
-      const pathCourage = this.makePath('Path of Courage', x => locsCourage.every(l => x.locations.has(l)));
-      const pathWisdom = this.makePath('Path of Wisdom', x => locsWisdom.every(l => x.locations.has(l)));
-
-      this.addPath({ type: 'triforce', triforce: 'Power', locations: pathPower });
-      this.addPath({ type: 'triforce', triforce: 'Courage', locations: pathCourage });
-      this.addPath({ type: 'triforce', triforce: 'Wisdom', locations: pathWisdom });
-    }
-
-    if (this.state.settings.hintPathBoss) {
-      for (const dungeon of BOSS_DUNGEONS) {
-        this.makePathBoss(dungeon);
-      }
-    }
-
-    if (this.state.settings.hintPathEndBoss) {
-      for (const boss of END_BOSS_METADATA_BY_NAME.keys()) {
-        this.makePathEndBoss(boss);
-      }
-    }
-  }
-
   private isLocUselessNonRenewable(loc: Location) {
     const pi = this.state.items.get(loc)!;
     const locD = locationData(loc);
@@ -261,7 +143,6 @@ export class LogicPassAnalysis {
     if (this.state.settings.logic !== 'none') {
       this.makeSpheres();
       this.makeRequiredLocs();
-      this.makePaths();
     }
     if (this.state.settings.logic === 'beatable') {
       this.makeUnreachable();
@@ -273,7 +154,7 @@ export class LogicPassAnalysis {
       required: this.requiredLocs,
       useless: this.uselessLocs,
       unreachable: this.unreachableLocs,
-      paths: this.paths,
+      paths: [] as AnalysisPath[],
     }
 
     return { analysis };
