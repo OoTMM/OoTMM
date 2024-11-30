@@ -446,6 +446,7 @@ export class LogicPassSpoiler {
     this.writePreCompleted();
     this.writeEntrances();
     this.writeHints();
+    this.writePaths();
     this.writePlando();
     if (this.state.opts.settings.logic !== 'none') {
       this.writeSpheres();
