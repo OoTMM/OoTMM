@@ -172,6 +172,7 @@ export type World = {
   areas: { [k: string]: WorldArea };
   checks: { [k: string]: WorldCheck };
   dungeons: { [k: string]: Set<string> };
+  dungeonsBossAreas: { [k: string]: Set<string> };
   regions: { [k: string]: string };
   gossip: { [k: string]: WorldGossip };
   checkHints: { [k: string]: string[] };
@@ -257,6 +258,7 @@ export function cloneWorld(world: World): World {
     areas: mapValues(world.areas, cloneWorldArea),
     checks: cloneChecks(world.checks),
     dungeons: mapValues(world.dungeons, x => new Set(x)),
+    dungeonsBossAreas: mapValues(world.dungeonsBossAreas, x => new Set(x)),
     regions: cloneDeep(world.regions),
     gossip: cloneDeep(world.gossip),
     checkHints: cloneDeep(world.checkHints),
@@ -353,6 +355,7 @@ export class LogicPassWorld {
       areas: {},
       checks: {},
       dungeons: {},
+      dungeonsBossAreas: {},
       regions: {},
       gossip: {},
       checkHints: {},
@@ -489,6 +492,13 @@ export class LogicPassWorld {
           }
           const d = this.world.dungeons[dungeon];
           Object.keys(locations).forEach(x => d.add(x));
+
+          if (boss) {
+            if (this.world.dungeonsBossAreas[dungeon] === undefined) {
+              this.world.dungeonsBossAreas[dungeon] = new Set();
+            }
+            this.world.dungeonsBossAreas[dungeon].add(name);
+          }
         }
 
         for (const loc in locations) {

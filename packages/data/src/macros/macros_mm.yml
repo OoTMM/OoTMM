@@ -41,17 +41,17 @@
 
 # Region State
 "is_winter": "flag_on(MM_REGION_NORTH_CURSED) && flag_off(MM_REGION_NORTH_CLEARED)"
-"is_spring": "flag_on(MM_REGION_NORTH_CLEARED) && flag_off(MM_REGION_NORTH_CURSED) && event(BOSS_SNOWHEAD)"
+"is_spring": "flag_on(MM_REGION_NORTH_CLEARED) && flag_off(MM_REGION_NORTH_CURSED) && ((!setting(erBoss) && event(BOSS_GOHT)) || event(CLEAR_STATE_SNOWHEAD))"
 "is_spring_or_winter": "flag_off(MM_REGION_NORTH_CLEARED) && flag_off(MM_REGION_NORTH_CURSED)" # Used for hot water in edge-cases
 
 "is_swamp_poisoned": "flag_on(MM_REGION_SWAMP_CURSED) && flag_off(MM_REGION_SWAMP_CLEARED)"
-"is_swamp_cleared": "flag_on(MM_REGION_SWAMP_CLEARED) && flag_off(MM_REGION_SWAMP_CURSED) && event(BOSS_WOODFALL)"
+"is_swamp_cleared": "flag_on(MM_REGION_SWAMP_CLEARED) && flag_off(MM_REGION_SWAMP_CURSED) && ((!setting(erBoss) && event(BOSS_ODOLWA)) || event(CLEAR_STATE_WOODFALL))"
 
 "is_ocean_cursed": "flag_on(MM_REGION_OCEAN_CURSED) && flag_off(MM_REGION_OCEAN_CLEARED)"
-"is_ocean_cleared": "flag_on(MM_REGION_OCEAN_CLEARED) && flag_off(MM_REGION_OCEAN_CURSED) && event(BOSS_GREAT_BAY)"
+"is_ocean_cleared": "flag_on(MM_REGION_OCEAN_CLEARED) && flag_off(MM_REGION_OCEAN_CURSED) && ((!setting(erBoss) && event(BOSS_GYORG)) || event(CLEAR_STATE_GREAT_BAY))"
 
 "is_valley_cursed": "flag_on(MM_REGION_VALLEY_CURSED) && flag_off(MM_REGION_VALLEY_CLEARED)"
-"is_valley_cleared": "flag_on(MM_REGION_VALLEY_CLEARED) && flag_off(MM_REGION_VALLEY_CURSED) && event(BOSS_STONE_TOWER)"
+"is_valley_cleared": "flag_on(MM_REGION_VALLEY_CLEARED) && flag_off(MM_REGION_VALLEY_CURSED) && ((!setting(erBoss) && event(BOSS_TWINMOLD)) || event(CLEAR_STATE_IKANA))"
 
 # Age
 "is_child": "!setting(crossAge) || age(child)"

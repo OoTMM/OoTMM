@@ -251,7 +251,7 @@
   exits:
     "Oath to Order": "true"
   events:
-    BOSS_WOODFALL: "true"
+    BOSS_ODOLWA: "true"
   locations:
     "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"

@@ -1950,9 +1950,10 @@
     "Zora Domain Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_raw(2))"
-    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
+    "Fishing Pond": "is_child || event(CLEAR_STATE_LAKE) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
     "Lake Hylia Grotto": "true"
   events:
+    CLEAR_STATE_LAKE: "is_adult && event(WISP_CLEAR_STATE_LAKE)"
     SCARECROW_CHILD: "is_child && can_play_scarecrow"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
     BEAN_LAKE_HYLIA: "can_use_beans"
@@ -1964,7 +1965,7 @@
     BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
   locations:
     "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
-    "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
+    "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (event(CLEAR_STATE_LAKE) || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"

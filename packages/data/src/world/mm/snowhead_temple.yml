@@ -367,7 +367,7 @@
   exits:
     "Oath to Order": "true"
   events:
-    BOSS_SNOWHEAD: "true"
+    BOSS_GOHT: "true"
     MAGIC: "true"
     ARROWS: "true"
   locations:

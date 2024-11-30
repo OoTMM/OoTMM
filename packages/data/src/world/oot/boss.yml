@@ -17,6 +17,8 @@
   boss: true
   age_change: false
   dungeon: DT
+  events:
+    BOSS_GOHMA: "true"
   locations:
     "Deku Tree Boss Container": "true"
     "Deku Tree Boss": "true"
@@ -32,6 +34,8 @@
   boss: true
   age_change: false
   dungeon: DC
+  events:
+    BOSS_KING_DODONGO: "true"
   locations:
     "Dodongo Cavern Boss Container": "true"
     "Dodongo Cavern Boss": "true"
@@ -52,6 +56,8 @@
   boss: true
   age_change: false
   dungeon: JJ
+  events:
+    BOSS_BARINADE: "true"
   locations:
     "Jabu-Jabu Boss Container": "true"
     "Jabu-Jabu Boss": "true"
@@ -65,6 +71,8 @@
   boss: true
   age_change: false
   dungeon: Forest
+  events:
+    BOSS_PHANTOM_GANON: "true"
   locations:
     "Forest Temple Boss": "true"
     "Forest Temple Boss Container": "true"
@@ -78,6 +86,8 @@
   boss: true
   age_change: false
   dungeon: Fire
+  events:
+    BOSS_VOLVAGIA: "true"
   locations:
     "Fire Temple Boss Container": "true"
     "Fire Temple Boss": "true"
@@ -92,7 +102,7 @@
   age_change: false
   dungeon: Water
   events:
-    WATER_TEMPLE_CLEARED: "true"
+    BOSS_MORPHA: "true"
   locations:
     "Water Temple Boss HC": "true"
     "Water Temple Boss": "true"
@@ -106,6 +116,8 @@
   boss: true
   age_change: false
   dungeon: Spirit
+  events:
+    BOSS_TWINROVA: "true"
   locations:
     "Spirit Temple Boss HC": "true"
     "Spirit Temple Boss": "true"
@@ -119,6 +131,8 @@
   boss: true
   age_change: false
   dungeon: Shadow
+  events:
+    BOSS_BONGO_BONGO: "true"
   locations:
     "Shadow Temple Boss HC": "true"
     "Shadow Temple Boss": "true"

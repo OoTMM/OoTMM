@@ -214,7 +214,7 @@
   exits:
     "Oath to Order": "true"
   events:
-    BOSS_STONE_TOWER: "true"
+    BOSS_TWINMOLD: "true"
   locations:
     "Stone Tower Temple Inverted Boss HC": "true"
     "Stone Tower Temple Inverted Boss": "true"
