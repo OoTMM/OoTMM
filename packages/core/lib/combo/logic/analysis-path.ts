@@ -22,11 +22,13 @@ export type AnalysisPathTypeWotH = { type: 'woth' };
 export type AnalysisPathTypeTriforce = { type: 'triforce', triforce: Triforce3Type };
 export type AnalysisPathTypeBoss = { type: 'boss', boss: string };
 export type AnalysisPathTypeEndBoss = { type: 'end-boss', boss: string };
+export type AnalysisPathTypeEvent = { type: 'event', event: string };
 export type AnalysisPathType =
   | AnalysisPathTypeWotH
   | AnalysisPathTypeTriforce
   | AnalysisPathTypeBoss
-  | AnalysisPathTypeEndBoss;
+  | AnalysisPathTypeEndBoss
+  | AnalysisPathTypeEvent;
 
 export type AnalysisPathBase = { locations: Set<Location> };
 export type AnalysisPath = AnalysisPathBase & AnalysisPathType;
@@ -39,10 +41,19 @@ export type AnalysisPathState = {
   pred: (x: PathfinderState) => boolean;
 };
 
+type PathEventData = {
+  key: string;
+  name: string;
+  event: string;
+};
+
+export const PATH_EVENT_DATA: PathEventData[] = [
+  { key: 'TimeTravel', name: 'Time Travel', event: 'OOT_TIME_TRAVEL' }
+];
+
 export class LogicPassAnalysisPaths {
   private pathfinder: Pathfinder;
   private states: { [key: string]: AnalysisPathState } = {};
-  private paths: AnalysisPath[];
 
   constructor(
     private readonly state: {
@@ -57,7 +68,6 @@ export class LogicPassAnalysisPaths {
     },
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
-    this.paths = [];
   }
 
   private makePathLocations(name: string, pred: (x: PathfinderState) => boolean) {
@@ -81,6 +91,24 @@ export class LogicPassAnalysisPaths {
     const path: AnalysisPath = { ...opts.pathType, locations };
     const state = { key: opts.key, name: opts.name, locks: [], path, pathfinderState: opts.pathfinderState || null, pred: opts.pred };
     this.states[state.key] = state;
+  }
+
+  private pathfindNoEvent(worldId: number, event: string) {
+    /* Create a distinct world */
+    const worlds = [...this.state.worlds];
+    const newWorld = cloneWorld(worlds[worldId]);
+    worlds[worldId] = newWorld;
+
+    /* Remove the event */
+    for (const area of Object.values(newWorld.areas)) {
+      delete area.events[event];
+    }
+
+    /* Pathfind */
+    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
+
+    return pathfinderState;
   }
 
   private bossPathfindState(dungeon: string, worldId: number) {
@@ -187,6 +215,27 @@ export class LogicPassAnalysisPaths {
     }
   }
 
+  private makePathEvent(eventKey: string) {
+    const meta = PATH_EVENT_DATA.find(x => x.key === eventKey)!;
+
+    for (let i = 0; i < this.state.worlds.length; i++) {
+      const pathfinderState = this.pathfindNoEvent(i, meta.event);
+      if (!pathfinderState || pathfinderState.goal) {
+        continue;
+      }
+
+      /* The event is required for this player */
+      const pred = (x: PathfinderState) => x.ws[i].events.has(meta.event);
+      this.makePath({
+        key: `event.${eventKey}.${i}`,
+        pathType: { type: 'event', event: eventKey },
+        name: `Path to Event`,
+        pathfinderState,
+        pred,
+      });
+    }
+  }
+
   private checkLocks() {
     for (const state of Object.values(this.states)) {
       if (state.pathfinderState) {
@@ -224,6 +273,12 @@ export class LogicPassAnalysisPaths {
     if (this.state.settings.hintPathEndBoss) {
       for (const boss of END_BOSS_METADATA_BY_NAME.keys()) {
         this.makePathEndBoss(boss);
+      }
+    }
+
+    if (this.state.settings.hintPathEvents) {
+      for (const ev of PATH_EVENT_DATA) {
+        this.makePathEvent(ev.key);
       }
     }
   }
