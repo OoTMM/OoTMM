@@ -48,7 +48,8 @@ type PathEventData = {
 };
 
 export const PATH_EVENT_DATA: PathEventData[] = [
-  { key: 'TimeTravel', name: 'Time Travel', event: 'OOT_TIME_TRAVEL' }
+  { key: 'TimeTravel', name: 'Time Travel', event: 'OOT_TIME_TRAVEL' },
+  { key: 'Bridge', name: 'Bridge', event: 'OOT_BRIDGE_OPEN' }
 ];
 
 export class LogicPassAnalysisPaths {

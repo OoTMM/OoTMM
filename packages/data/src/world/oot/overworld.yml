@@ -921,17 +921,21 @@
   region: GANON_CASTLE_EXTERIOR
   age_change: false
   time: night
+  events:
+    BRIDGE_OPEN: "rainbow_bridge"
   exits:
     "Market Castle Entry": "true"
-    "Ganon Castle Exterior After Bridge": "rainbow_bridge || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
+    "Ganon Castle Exterior After Bridge": "event(BRIDGE_OPEN) || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "gs && (has_ranged_weapon || can_use_sword)"
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR
   age_change: false
+  events:
+    BRIDGE_OPEN: "is_adult && rainbow_bridge"
   exits:
-    "Ganon Castle Exterior": "is_adult && rainbow_bridge"
+    "Ganon Castle Exterior": "is_adult && event(BRIDGE_OPEN)"
     "Hyrule Castle Courtyard": "is_child && trick(OOT_COURTYARD_FROM_GANON)"
     "Hyrule Castle": "is_child"
     "Ganon Castle": "is_adult"
