@@ -13,6 +13,7 @@ import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { Region } from './regions';
 import { AGE_ADULT, AGE_CHILD } from './constants';
+import { BOSS_METADATA_BY_ENTRANCE } from './boss';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;
@@ -106,27 +107,6 @@ export const DUNGEON_ENTRANCES: readonly Entrance[] = [
   'OOT_GANON_TOWER',
   'MM_MOON',
 ];
-
-type BossMetadata = {
-  readonly event: string;
-  readonly dungeon: string;
-  readonly eventClear?: string;
-}
-
-export const BOSS_EVENTS: {[k in Entrance]?: BossMetadata} = {
-  OOT_BOSS_DEKU_TREE: { event: 'OOT_BOSS_GOHMA', dungeon: 'DT' },
-  OOT_BOSS_DODONGO_CAVERN: { event: 'OOT_BOSS_KING_DODONGO', dungeon: 'DC' },
-  OOT_BOSS_JABU_JABU: { event: 'OOT_BOSS_BARINADE', dungeon: 'JJ' },
-  OOT_BOSS_TEMPLE_FOREST: { event: 'OOT_BOSS_PHANTOM_GANON', dungeon: 'Forest' },
-  OOT_BOSS_TEMPLE_FIRE: { event: 'OOT_BOSS_VOLVAGIA', dungeon: 'Fire' },
-  OOT_BOSS_TEMPLE_WATER: { event: 'OOT_BOSS_MORPHA', dungeon: 'Water', eventClear: 'OOT_CLEAR_STATE_LAKE' },
-  OOT_BOSS_TEMPLE_SHADOW: { event: 'OOT_BOSS_BONGO_BONGO', dungeon: 'Shadow' },
-  OOT_BOSS_TEMPLE_SPIRIT: { event: 'OOT_BOSS_TWINROVA', dungeon: 'Spirit' },
-  MM_BOSS_TEMPLE_WOODFALL: { event: 'MM_BOSS_ODOLWA', dungeon: 'WF', eventClear: 'MM_CLEAR_STATE_WOODFALL' },
-  MM_BOSS_TEMPLE_SNOWHEAD: { event: 'MM_BOSS_GOHT', dungeon: 'SH', eventClear: 'MM_CLEAR_STATE_SNOWHEAD' },
-  MM_BOSS_TEMPLE_GREAT_BAY: { event: 'MM_BOSS_GYORG', dungeon: 'GB', eventClear: 'MM_CLEAR_STATE_GREAT_BAY' },
-  MM_BOSS_TEMPLE_STONE_TOWER: { event: 'MM_BOSS_TWINMOLD', dungeon: 'IST', eventClear: 'MM_CLEAR_STATE_IKANA' },
-}
 
 class WorldShuffler {
   private world: World;
@@ -254,8 +234,8 @@ class WorldShuffler {
     }
 
     /* Boss needs special handling */
-    const bossSrc = BOSS_EVENTS[original];
-    const bossDst = BOSS_EVENTS[replacement];
+    const bossSrc = BOSS_METADATA_BY_ENTRANCE.get(original);
+    const bossDst = BOSS_METADATA_BY_ENTRANCE.get(replacement);
     if (bossSrc && bossDst) {
       /* Set the boss ID */
       const bossIndexSrc = BOSS_INDEX_BY_DUNGEON[bossSrc.dungeon];
@@ -359,7 +339,7 @@ class WorldShuffler {
     if (bossPool) {
       for (const oldName of bossPool.src) {
         /* Assume we can get the event */
-        const meta = BOSS_EVENTS[oldName]!;
+        const meta = BOSS_METADATA_BY_ENTRANCE.get(oldName)!;
         const eventClear = meta.eventClear;
         if (eventClear) {
           world.areas['OOT SPAWN'].events[eventClear] = exprEvent(meta.event);
