@@ -27,6 +27,10 @@ All notable changes to this project will be documented in this file.
 - Alter death behavior to return you to the dungeon entrance even if it's cross-game.
 - Alter save behavior such that if you save and reset in a dungeon, you will start at the dungeon entrance even if it's an MM dungeon.
 
+### Changed
+
+- Grass and Pot CAMC is now its own setting and separated from the rest.
+
 ### Fixed
 
 - Fix talking to Skull Kid OoT sometimes crashing.
