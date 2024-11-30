@@ -7,17 +7,19 @@ import { isLocationRenewable, Location, makeLocation, locationData } from './loc
 import { ItemPlacement } from './solve';
 import { ItemHelpers, Items, PlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON } from './boss';
+import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
 import { ENTRANCES } from '@ootmm/data';
 
 export type AnalysisPathBase = { locations: Set<Location> };
 export type AnalysisPathWotH = AnalysisPathBase & { type: 'woth' };
 export type AnalysisPathTriforce = AnalysisPathBase & { type: 'triforce', triforce: 'Power' | 'Courage' | 'Wisdom' };
 export type AnalysisPathBoss = AnalysisPathBase & { type: 'boss', boss: string };
+export type AnalysisPathEndBoss = AnalysisPathBase & { type: 'end-boss', boss: string };
 export type AnalysisPath =
   | AnalysisPathWotH
   | AnalysisPathTriforce
-  | AnalysisPathBoss;
+  | AnalysisPathBoss
+  | AnalysisPathEndBoss;
 
 export class LogicPassAnalysis {
   private pathfinder: Pathfinder;
@@ -141,6 +143,24 @@ export class LogicPassAnalysis {
     return !pathfinderState.goal;
   }
 
+  private isDungeonEndBossRequired(boss: string, worldId: number) {
+    const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
+
+    /* Create a distinct world */
+    const worlds = [...this.state.worlds];
+    const newWorld = cloneWorld(worlds[worldId]);
+    worlds[worldId] = newWorld;
+    const area = newWorld.areas[meta.area];
+    if (!area)
+      return false;
+
+    /* Remove the boss */
+    area.events = {};
+    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
+    return !pathfinderState.goal;
+  }
+
   private makePathBoss(dungeon: string) {
     const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
     const requiredPlayers: number[] = [];
@@ -155,6 +175,22 @@ export class LogicPassAnalysis {
     /* The boss is required for some players */
     const locations = this.makePath('Path to Boss', x => requiredPlayers.every(p => x.ws[p].events.has(meta.event)));
     this.addPath({ type: 'boss', boss: dungeon, locations });
+  }
+
+  private makePathEndBoss(boss: string) {
+    const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
+    const requiredPlayers: number[] = [];
+    for (let i = 0; i < this.state.worlds.length; i++) {
+      if (this.isDungeonEndBossRequired(boss, i)) {
+        requiredPlayers.push(i);
+      }
+    }
+    if (!requiredPlayers.length)
+      return;
+
+    /* The boss is required for some players */
+    const locations = this.makePath('Path to End Boss', x => requiredPlayers.every(p => x.ws[p].events.has(meta.event)));
+    this.addPath({ type: 'end-boss', boss, locations });
   }
 
   private makePaths() {
@@ -177,6 +213,12 @@ export class LogicPassAnalysis {
     if (this.state.settings.hintPathBoss) {
       for (const dungeon of BOSS_DUNGEONS) {
         this.makePathBoss(dungeon);
+      }
+    }
+
+    if (this.state.settings.hintPathEndBoss) {
+      for (const boss of END_BOSS_METADATA_BY_NAME.keys()) {
+        this.makePathEndBoss(boss);
       }
     }
   }

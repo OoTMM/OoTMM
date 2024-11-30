@@ -569,6 +569,10 @@ export class LogicPassHints {
     if (bossPaths.length) {
       return sample(this.state.random, bossPaths);
     }
+    const endBossPaths = this.state.analysis.paths.filter(x => x.type === 'end-boss' && x.locations.has(loc));
+    if (endBossPaths.length) {
+      return sample(this.state.random, endBossPaths);
+    }
     return null;
   }
 

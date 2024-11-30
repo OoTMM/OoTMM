@@ -27,3 +27,16 @@ export const BOSS_DUNGEONS = new Set(BOSS_METADATA.map(boss => boss.dungeon));
 export const BOSS_METADATA_BY_ENTRANCE = new Map<Entrance, BossMetadata>(BOSS_METADATA.map(boss => [boss.entrance, boss]));
 export const BOSS_METADATA_BY_DUNGEON = new Map<string, BossMetadata>(BOSS_METADATA.map(boss => [boss.dungeon, boss]));
 export type BossDungeon = typeof BOSS_DUNGEONS extends Set<infer T> ? T : never;
+
+type EndBossMetadata = {
+  readonly name: string;
+  readonly area: string;
+  readonly event: string;
+};
+
+export const END_BOSS_METADATA = [
+  { name: 'Ganon', area: 'OOT Ganon Castle Tower Boss', event: 'OOT_GANON' },
+  { name: 'Majora', area: 'MM Moon Boss', event: 'MM_MAJORA' },
+] as const satisfies EndBossMetadata[];
+
+export const END_BOSS_METADATA_BY_NAME = new Map<string, EndBossMetadata>(END_BOSS_METADATA.map(boss => [boss.name, boss]));

@@ -19,6 +19,7 @@ import { concatUint8Arrays } from 'uint8array-extras';
 import { mustStartWithMasterSword } from '../settings/util';
 import { DUNGEON_ENTRANCES } from '../logic/entrance';
 import path from 'path';
+import { END_BOSS_METADATA } from '../logic/boss';
 
 const DUNGEON_REWARD_LOCATIONS = [
   'OOT Deku Tree Boss',
@@ -544,6 +545,10 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       case 'boss':
         pathId = 2;
         pathSubId = BOSS_INDEX_BY_DUNGEON[path.boss];
+        break;
+      case 'end-boss':
+        pathId = 3;
+        pathSubId = END_BOSS_METADATA.findIndex((e) => e.name === path.boss);
         break;
       }
 
