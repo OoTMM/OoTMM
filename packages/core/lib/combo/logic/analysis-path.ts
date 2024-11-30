@@ -5,7 +5,7 @@ import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { Location } from './locations';
 import { ItemPlacement } from './solve';
-import { Item, Items, PlayerItems } from '../items';
+import { Item, Items, makePlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
 import { ENTRANCES } from '@ootmm/data';
@@ -167,6 +167,31 @@ export class LogicPassAnalysisPaths {
     }
   }
 
+  private registerStateTriforce3(triforce: Triforce3Type) {
+    const triforceItem = TRIFORCE3_ITEMS[triforce];
+
+    for (let i = 0; i < this.state.worlds.length; i++) {
+      const triforcePlayerItem = makePlayerItem(triforceItem, i);
+      const triforcePlayerItemLocs = Array.from(this.state.items.entries()).filter(([_, item]) => item === triforcePlayerItem).map(([loc, _]) => loc);
+      const pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
+      const pathfinderState = pathfinder.run(null, { items: this.state.items, stopAtGoal: true, forbiddenLocations: new Set(triforcePlayerItemLocs) });
+      if (!pathfinderState || pathfinderState.goal) {
+        continue;
+      }
+
+      /* The piece is required for this player */
+      const pred = (x: PathfinderState) => x.ws[i].items.has(triforceItem);
+      this.registerState({
+        key: `triforce3.${triforce}.${i}`,
+        locks: [],
+        path: { type: 'triforce', triforce, locations: new Set },
+        name: `Path to Triforce Quest Piece`,
+        pathfinderState,
+        pred,
+      });
+    }
+  }
+
   /*
   private makePathTriforce3(state: AnalysisPathState, states: AnalysisPathState[], triforce: Triforce3Type) {
     const triforceItem = TRIFORCE3_ITEMS[triforce];
@@ -233,6 +258,12 @@ export class LogicPassAnalysisPaths {
   }
 
   private registerStates() {
+    if (this.state.settings.goal === 'triforce3') {
+      this.registerStateTriforce3('Power');
+      this.registerStateTriforce3('Courage');
+      this.registerStateTriforce3('Wisdom');
+    }
+
     if (this.state.settings.hintPathBoss) {
       for (const dungeon of BOSS_DUNGEONS) {
         this.registerStateBoss(dungeon);
@@ -274,6 +305,8 @@ export class LogicPassAnalysisPaths {
       this.cleanPaths();
     }
 
-    return { analysis: { ...this.state.analysis, paths: this.paths } };
+    const paths = this.paths.filter(p => p.locations.size > 0);
+
+    return { analysis: { ...this.state.analysis, paths } };
   }
 }

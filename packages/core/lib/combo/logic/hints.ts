@@ -519,65 +519,15 @@ export class LogicPassHints {
     return placed;
   }
 
-  private placePaths(worldId: number, count: number | 'max', extra: number) {
+  private findPath(loc: Location) {
+    const paths = this.state.analysis.paths.filter(x => x.locations.has(loc));
+    return sample(this.state.random, paths);
+  }
+
+  private placePath(worldId: number, count: number | 'max', extra: number) {
     if (count === 'max') {
       count = 999;
     }
-    let placed = 0;
-    let tmp: number;
-    tmp = this.placePathsNamedTriforce(worldId, count, extra);
-    placed += tmp;
-    count -= tmp;
-    tmp = this.placePathWoth(worldId, count, extra);
-    placed += tmp;
-    count -= tmp;
-
-    return placed;
-  }
-
-  private placePathsNamedTriforce(worldId: number, count: number, extra: number) {
-    if (this.state.settings.goal !== 'triforce3') {
-      return 0;
-    }
-    const paths = this.state.analysis.paths.filter(x => x.type === 'triforce');
-    let locations = paths.map(x => [...x.locations]).flat().filter(x => this.isLocationHintable(x, 'path'));
-
-    let placed = 0;
-    for (;;) {
-      locations = locations.filter(x => !this.hintedLocations.has(x));
-      if (placed >= count || locations.length === 0)
-        break;
-      const loc = locations.pop()!;
-      const gossip = this.findValidGossip(worldId, loc);
-      if (gossip !== null) {
-        const locD = locationData(loc);
-        const world = this.state.worlds[locD.world as number];
-        this.hintedLocations.add(loc);
-        this.stronglyHintedLocations.add(loc);
-
-        const validPaths = paths.filter(x => x.locations.has(loc));
-        const path = sample(this.state.random, validPaths);
-        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
-        this.placeWithExtra(worldId, gossip, hint, extra);
-        placed++;
-      }
-    }
-    return placed;
-  }
-
-  private upgradePath(loc: Location) {
-    const bossPaths = this.state.analysis.paths.filter(x => x.type === 'boss' && x.locations.has(loc));
-    if (bossPaths.length) {
-      return sample(this.state.random, bossPaths);
-    }
-    const endBossPaths = this.state.analysis.paths.filter(x => x.type === 'end-boss' && x.locations.has(loc));
-    if (endBossPaths.length) {
-      return sample(this.state.random, endBossPaths);
-    }
-    return null;
-  }
-
-  private placePathWoth(worldId: number, count: number, extra: number) {
     const world = this.state.worlds[worldId];
     let placed = 0;
     const wothPath = this.state.analysis.paths.find(x => x.type === 'woth');
@@ -595,7 +545,7 @@ export class LogicPassHints {
       const loc = locs.pop()!;
       const gossip = this.findValidGossip(worldId, loc);
       if (gossip !== null) {
-        const path = this.upgradePath(loc) ?? wothPath;
+        const path = this.findPath(loc);
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
         this.stronglyHintedLocations.add(loc);
@@ -782,7 +732,7 @@ export class LogicPassHints {
           this.placeGossipItemRegionSpheres(world, s.amount, s.extra);
           break;
         case 'woth':
-          this.placePaths(world, s.amount, s.extra);
+          this.placePath(world, s.amount, s.extra);
           break;
         case 'junk':
           this.placeGossipJunk(world, s.amount, s.extra, false);
