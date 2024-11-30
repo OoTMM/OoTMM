@@ -1,5 +1,6 @@
 import { DUNGEONS_REGIONS, World } from './world';
-import { Analysis, AnalysisPath } from './analysis';
+import { Analysis } from './analysis';
+import { AnalysisPath } from './analysis-path';
 import { Random, sample, shuffle, randomInt } from '../random';
 import { Settings } from '../settings';
 import { Game } from '../config';
