@@ -130,9 +130,12 @@ export class LogicPassAnalysis {
     const worlds = [...this.state.worlds];
     const newWorld = cloneWorld(worlds[worldId]);
     worlds[worldId] = newWorld;
+    const area = newWorld.areas[ENTRANCES[meta.entrance].to];
+    if (!area)
+      return false;
 
     /* Remove the boss */
-    newWorld.areas[ENTRANCES[meta.entrance].to].exits = {};
+    area.exits = {};
     const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
     const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
     return !pathfinderState.goal;
