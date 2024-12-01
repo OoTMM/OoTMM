@@ -37,7 +37,6 @@ export type AnalysisPathBase = { locations: Set<Location> };
 export type AnalysisPath = AnalysisPathBase & AnalysisPathType;
 export type AnalysisPathState = {
   key: string;
-  name: string;
   locks: string[];
   path: AnalysisPath;
   pathfinderState: PathfinderState | null;
@@ -76,26 +75,24 @@ export class LogicPassAnalysisPaths {
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
   }
 
-  private makePathLocations(name: string, pred: (x: PathfinderState) => boolean) {
-    const path = new Set<Location>();
-    this.state.monitor.log(`Analysis - ${name}`);
+  private makePathsLocations() {
+    this.state.monitor.log(`Analysis - Path`);
     let count = 0;
-    const locations = new Set(this.state.analysis.required);
+    const locations = this.state.analysis.required;
     for (const loc of locations) {
       this.state.monitor.setProgress(count++, locations.size);
       const pathfinderState = this.pathfinder.run(null, { items: this.state.items, forbiddenLocations: new Set([loc]), recursive: true, stopAtGoal: true });
-      if (!pred(pathfinderState)) {
-        path.add(loc);
+      for (const state of Object.values(this.states)) {
+        if (!state.pred(pathfinderState)) {
+          state.path.locations.add(loc);
+        }
       }
     }
-    return path;
   }
 
-  private makePath(opts: { key: string, pathType: AnalysisPathType, name: string, pathfinderState?: PathfinderState, pred: (x: PathfinderState) => boolean }) {
-    const locations = this.makePathLocations(opts.name, opts.pred);
-    if (locations.size === 0) return;
-    const path: AnalysisPath = { ...opts.pathType, locations };
-    const state = { key: opts.key, name: opts.name, locks: [], path, pathfinderState: opts.pathfinderState || null, pred: opts.pred };
+  private makePath(opts: { key: string, pathType: AnalysisPathType, pathfinderState?: PathfinderState, pred: (x: PathfinderState) => boolean }) {
+    const path: AnalysisPath = { ...opts.pathType, locations: new Set() };
+    const state = { key: opts.key, locks: [], path, pathfinderState: opts.pathfinderState || null, pred: opts.pred };
     this.states[state.key] = state;
   }
 
@@ -216,7 +213,6 @@ export class LogicPassAnalysisPaths {
       this.makePath({
         key: `dungeon.${dungeon}.${i}`,
         pathType: { type: 'dungeon', dungeon },
-        name: `Path to Dungeon`,
         pathfinderState,
         pred,
       });
@@ -237,7 +233,6 @@ export class LogicPassAnalysisPaths {
       this.makePath({
         key: `boss.${dungeon}.${i}`,
         pathType: { type: 'boss', boss: dungeon },
-        name: `Path to Boss`,
         pathfinderState,
         pred,
       });
@@ -258,7 +253,6 @@ export class LogicPassAnalysisPaths {
       this.makePath({
         key: `end-boss.${boss}.${i}`,
         pathType: { type: 'end-boss', boss },
-        name: `Path to End Boss`,
         pathfinderState,
         pred,
       });
@@ -282,7 +276,6 @@ export class LogicPassAnalysisPaths {
       this.makePath({
         key: `triforce3.${triforce}.${i}`,
         pathType: { type: 'triforce', triforce },
-        name: `Path to Triforce Quest Piece`,
         pathfinderState,
         pred,
       });
@@ -303,7 +296,6 @@ export class LogicPassAnalysisPaths {
       this.makePath({
         key: `event.${eventKey}.${i}`,
         pathType: { type: 'event', event: eventKey },
-        name: `Path to Event`,
         pathfinderState,
         pred,
       });
@@ -327,10 +319,12 @@ export class LogicPassAnalysisPaths {
   }
 
   private makePaths() {
-    /* Hardcode the woth path */
-    const wothPath: AnalysisPath = { type: 'woth', locations: new Set(this.state.analysis.required) };
-    const wothState: AnalysisPathState = { key: 'woth', locks: [], name: '---WotH---', path: wothPath, pathfinderState: null, pred: x => x.goal };
-    this.states[wothState.key] = wothState;
+    /* WotH path */
+    this.makePath({
+      key: 'woth',
+      pathType: { type: 'woth' },
+      pred: _ => false,
+    });
 
     if (this.state.settings.goal === 'triforce3') {
       this.makePathTriforce3('Power');
@@ -395,6 +389,7 @@ export class LogicPassAnalysisPaths {
   run() {
     if (this.state.settings.logic !== 'none') {
       this.makePaths();
+      this.makePathsLocations();
       this.checkLocks();
       this.cleanPaths();
     }
