@@ -1,7 +1,7 @@
 "Ancient Castle of Ikana":
   dungeon: ACoI
   exits:
-    "Ikana Castle Exterior": "true"
+    "Ikana Castle Exterior": "can_reset_time"
     "Ancient Castle of Ikana Interior": "can_reset_time_dungeon"
 "Ancient Castle of Ikana Interior":
   dungeon: ACoI

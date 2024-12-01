@@ -1,9 +1,9 @@
 "Stone Tower Temple Inverted":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Entrance": "can_reset_time_dungeon"
-    "Stone Tower Top Inverted": "true"
     "WARP_SONGS": "true"
+    "Stone Tower Top Inverted": "can_reset_time"
+    "Stone Tower Temple Inverted Entrance": "can_reset_time_dungeon"
 "Stone Tower Temple Inverted Entrance":
   dungeon: IST
   events:

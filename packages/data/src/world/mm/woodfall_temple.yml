@@ -1,9 +1,9 @@
 "Woodfall Temple":
   dungeon: WF
   exits:
-    "Woodfall Front of Temple": "true"
-    "Woodfall Temple Entrance": "can_reset_time_dungeon"
     "WARP_SONGS": "true"
+    "Woodfall Front of Temple": "can_reset_time"
+    "Woodfall Temple Entrance": "can_reset_time_dungeon"
 "Woodfall Temple Entrance":
   dungeon: WF
   events:

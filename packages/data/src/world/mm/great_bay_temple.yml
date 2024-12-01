@@ -1,9 +1,9 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "can_reset_time_dungeon"
-    "Zora Cape Peninsula": "can_hookshot || short_hook_anywhere"
     "WARP_SONGS": "true"
+    "Zora Cape Peninsula": "can_reset_time && (can_hookshot || short_hook_anywhere)"
+    "Great Bay Temple Entrance": "can_reset_time_dungeon"
 "Great Bay Temple Entrance":
   dungeon: GB
   events:
