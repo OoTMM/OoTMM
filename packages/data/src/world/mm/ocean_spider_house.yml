@@ -2,7 +2,7 @@
   dungeon: OSH
   exits:
     "Ocean Spider House Front": "(has_explosives || trick_keg_explosives) && can_reset_time_dungeon"
-    "Great Bay Coast": "true"
+    "Great Bay Coast": "can_reset_time"
   locations:
     "Ocean Spider House Wallet": "soul_citizen && has(GS_TOKEN_OCEAN, 30)"
 "Ocean Spider House Front":

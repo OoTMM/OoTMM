@@ -208,10 +208,12 @@ class WorldShuffler {
     /* Change the world */
     let expr = this.getExpr(original);
     if (entranceReplacement.game === 'mm') {
-      if (!((entranceReplacement.flags as string[]).includes('no-global'))) {
+      if (!(entranceReplacement.flags.includes('no-global'))) {
         areaFrom.exits['MM GLOBAL'] = expr;
+      } else {
+        areaFrom.exits['MM ACCESS'] = expr;
       }
-      if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
+      if (!(entranceReplacement.flags.includes('no-sot'))) {
         expr = this.songOfTime(expr);
       }
     }
