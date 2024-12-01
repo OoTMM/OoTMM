@@ -10,6 +10,7 @@ import { ItemProperties } from './item-properties';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
 import { ENTRANCES } from '@ootmm/data';
 import { Analysis } from './analysis';
+import { AGE_ADULT, AGE_CHILD } from './constants';
 
 type Triforce3Type = 'Power' | 'Courage' | 'Wisdom';
 const TRIFORCE3_ITEMS: { [key in Triforce3Type]: Item } = {
@@ -20,12 +21,14 @@ const TRIFORCE3_ITEMS: { [key in Triforce3Type]: Item } = {
 
 export type AnalysisPathTypeWotH = { type: 'woth' };
 export type AnalysisPathTypeTriforce = { type: 'triforce', triforce: Triforce3Type };
+export type AnalysisPathTypeDungeon = { type: 'dungeon', dungeon: string };
 export type AnalysisPathTypeBoss = { type: 'boss', boss: string };
 export type AnalysisPathTypeEndBoss = { type: 'end-boss', boss: string };
 export type AnalysisPathTypeEvent = { type: 'event', event: string };
 export type AnalysisPathType =
   | AnalysisPathTypeWotH
   | AnalysisPathTypeTriforce
+  | AnalysisPathTypeDungeon
   | AnalysisPathTypeBoss
   | AnalysisPathTypeEndBoss
   | AnalysisPathTypeEvent;
@@ -109,7 +112,55 @@ export class LogicPassAnalysisPaths {
 
     /* Pathfind */
     const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true });
+
+    return pathfinderState;
+  }
+
+  private dungeonsFromKey(dungeon: string) {
+    const dungeons = [dungeon];
+    if (dungeon === 'ST' && !this.state.settings.extraHintRegions) {
+      dungeons.push('IST');
+    }
+    if (dungeon === 'BtW') {
+      dungeons.push('BtWE');
+    }
+    return dungeons;
+  }
+
+  private dungeonAreas(dungeon: string, worldId: number) {
+    const dungeons = this.dungeonsFromKey(dungeon);
+    const areas: string[] = [];
+
+    for (const [areaName, area] of Object.entries(this.state.worlds[worldId].areas)) {
+      if (area.dungeon && dungeons.includes(area.dungeon)) {
+        areas.push(areaName);
+      }
+    }
+
+    return areas
+  }
+
+  private dungeonPathfindState(areas: string[], worldId: number) {
+    /* Create a distinct world */
+    const worlds = [...this.state.worlds];
+    const newWorld = cloneWorld(worlds[worldId]);
+    worlds[worldId] = newWorld;
+
+    if (areas.length === 0)
+      return null;
+
+    /* Remove the dungeon */
+    for (const areaName of areas) {
+      const area = newWorld.areas[areaName];
+      area.exits = {};
+      area.events = {};
+      area.locations = {};
+    }
+
+    /* Pathfind */
+    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true });
 
     return pathfinderState;
   }
@@ -128,7 +179,7 @@ export class LogicPassAnalysisPaths {
     /* Remove the boss */
     area.exits = {};
     const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true });
 
     return pathfinderState;
   }
@@ -147,9 +198,29 @@ export class LogicPassAnalysisPaths {
     /* Remove the boss */
     area.events = {};
     const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true, stopAtGoal: true });
+    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true });
 
     return pathfinderState;
+  }
+
+  private makePathDungeon(dungeon: string) {
+    for (let i = 0; i < this.state.worlds.length; i++) {
+      const areas = this.dungeonAreas(dungeon, i);
+      const pathfinderState = this.dungeonPathfindState(areas, i);
+      if (!pathfinderState || pathfinderState.goal) {
+        continue;
+      }
+
+      /* The dungeon is required for this player */
+      const pred = (x: PathfinderState) => areas.some(a => x.ws[i].ages[AGE_CHILD].areas.has(a) || x.ws[i].ages[AGE_ADULT].areas.has(a));
+      this.makePath({
+        key: `dungeon.${dungeon}.${i}`,
+        pathType: { type: 'dungeon', dungeon },
+        name: `Path to Dungeon`,
+        pathfinderState,
+        pred,
+      });
+    }
   }
 
   private makePathBoss(dungeon: string) {
@@ -201,7 +272,7 @@ export class LogicPassAnalysisPaths {
       const triforcePlayerItem = makePlayerItem(triforceItem, i);
       const triforcePlayerItemLocs = Array.from(this.state.items.entries()).filter(([_, item]) => item === triforcePlayerItem).map(([loc, _]) => loc);
       const pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
-      const pathfinderState = pathfinder.run(null, { recursive: true, items: this.state.items, stopAtGoal: true, forbiddenLocations: new Set(triforcePlayerItemLocs) });
+      const pathfinderState = pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: new Set(triforcePlayerItemLocs) });
       if (!pathfinderState || pathfinderState.goal) {
         continue;
       }
@@ -265,6 +336,20 @@ export class LogicPassAnalysisPaths {
       this.makePathTriforce3('Power');
       this.makePathTriforce3('Courage');
       this.makePathTriforce3('Wisdom');
+    }
+
+    if (this.state.settings.hintPathDungeons) {
+      const dungeons = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'BotW', 'IC', 'GTG', 'WF', 'SH', 'GB', 'ST', 'SSH', 'OSH', 'BtW', 'SS', 'ACoI'];
+      if (this.state.settings.extraHintRegions) {
+        dungeons.push('IST');
+      }
+      if (!this.state.settings.erPiratesWorld) {
+        dungeons.push('PF');
+      }
+
+      for (const dungeon of BOSS_DUNGEONS) {
+        this.makePathDungeon(dungeon);
+      }
     }
 
     if (this.state.settings.hintPathBoss) {

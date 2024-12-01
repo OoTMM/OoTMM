@@ -162,6 +162,13 @@ export const SETTINGS = [{
   description: 'Make the region hints more granular: Makes Goron Racetrack and Butler Race into their own regions, and splits Ganon Castle/Tower and Normal/Inverted Stone Tower Temple.',
   default: false
 }, {
+  key: 'hintPathDungeons',
+  name: 'Hint Path to Dungeons',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Enable WotH hints to be upgraded to dungeons paths when appropriate.',
+  default: false
+}, {
   key: 'hintPathBoss',
   name: 'Hint Path to Boss',
   category: 'hints',
