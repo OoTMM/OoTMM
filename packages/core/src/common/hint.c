@@ -100,6 +100,7 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 #define PATH_TRIFORCE   1
 #define PATH_BOSS       2
 #define PATH_END_BOSS   3
+#define PATH_EVENT      4
 
 static const char* kPathTriforceNames[] = {
     TEXT_COLOR_RED    "Path of Power",
@@ -110,6 +111,13 @@ static const char* kPathTriforceNames[] = {
 static const char* kPathEndBossNames[] = {
     TEXT_COLOR_RED    "Path to Ganon",
     TEXT_COLOR_PINK   "Path to Majora",
+};
+
+static const char* kPathEventNames[] = {
+    TEXT_COLOR_TEAL     "Path to Time Travel",
+    TEXT_COLOR_YELLOW   "Path to Bridge",
+    TEXT_COLOR_PINK     "Path to Termina",
+    TEXT_COLOR_RED      "Path to Moon",
 };
 
 static void appendPathName(char** b, u8 path, u8 subPath)
@@ -127,6 +135,9 @@ static void appendPathName(char** b, u8 path, u8 subPath)
         break;
     case PATH_END_BOSS:
         comboTextAppendStr(b, kPathEndBossNames[subPath]);
+        break;
+    case PATH_EVENT:
+        comboTextAppendStr(b, kPathEventNames[subPath]);
         break;
     }
 }

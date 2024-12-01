@@ -2,8 +2,9 @@
   dungeon: Moon
   events:
     MAGIC: "true"
+    MM_MOON_OPEN: "(can_play_order || setting(openMoon)) && special(MOON)"
   exits:
-    "Moon": "(can_play_order || setting(openMoon)) && special(MOON)"
+    "Moon": "event(MM_MOON_OPEN)"
     "Clock Tower Platform": "false"
   locations:
     "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
