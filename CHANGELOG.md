@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Add Path hints for bosses, including Ganon and Majora as a separate setting.
+- Add Path hints.
 - Add the ability to play the multiplayer modes as teams, racing each other in the same seed.
 - Add the ability to play multiworld random settings.
 - Add the Japanese version of Stone Tower Temple.
