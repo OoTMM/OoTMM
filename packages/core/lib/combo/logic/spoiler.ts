@@ -7,7 +7,7 @@ import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
 import { Analysis } from './analysis';
-import { AnalysisPath } from './analysis-path';
+import { AnalysisPath, PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
@@ -280,6 +280,7 @@ export class LogicPassSpoiler {
     case 'triforce': return `Path to ${path.triforce}`;
     case 'boss': return `Path to ${BOSS_METADATA_BY_DUNGEON.get(path.boss)!.name}`;
     case 'end-boss': return `Path to ${path.boss}`;
+    case 'event': return `Path to ${PATH_EVENT_DATA.find(x => x.key === path.event)!.name}`;
     }
   }
 

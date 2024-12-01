@@ -3,8 +3,13 @@
 "GLOBAL":
   region: NONE
   exits:
+    "ACCESS": "true"
     "WARP_SONGS": "true"
     "SOARING": "can_play_soaring"
+"ACCESS":
+  region: NONE
+  events:
+    ACCESS: "can_reset_time_impl"
 "WARP_SONGS":
   region: NONE
   exits:
