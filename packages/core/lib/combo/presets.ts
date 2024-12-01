@@ -6,6 +6,9 @@ export type Presets = { [k: string]: Settings };
 const PRESET_DEFAULT = DEFAULT_SETTINGS;
 
 const BLITZ_BASE: PartialDeep<Settings> = {
+  hintPathBoss: true,
+  hintPathEndBoss: true,
+  hintPathEvents: true,
   clearStateDungeonsMm: 'both',
   tingleShuffle: 'starting',
   openMaskShop: true,
@@ -143,7 +146,6 @@ const makeBlitz = (input: PartialDeep<Settings>): Settings => {
 };
 
 const PRESET_BLITZ = makeBlitz({
-  hintPathBoss: true,
   rainbowBridge: 'custom',
   specialConds: {
     BRIDGE: {
@@ -195,7 +197,6 @@ const PRESET_BLITZ = makeBlitz({
 });
 
 const PRESET_BLITZ_PRECOMPLETED = makeBlitz({
-  hintPathBoss: true,
   rainbowBridge: 'custom',
   preCompletedDungeons: true,
   preCompletedDungeonsMajor: 6,
