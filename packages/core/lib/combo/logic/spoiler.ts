@@ -18,6 +18,7 @@ import { exportSettings } from '../settings/string';
 import { ENTRANCES } from '@ootmm/data';
 import { LogWriter } from '../util/log-writer';
 import { BOSS_METADATA_BY_DUNGEON } from './boss';
+import { DUNGEONS_BY_KEY } from './dungeons';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -277,6 +278,7 @@ export class LogicPassSpoiler {
   private pathName(path: AnalysisPath): string {
     switch (path.type) {
     case 'woth': return 'Way of the Hero';
+    case 'dungeon': return `Path to ${DUNGEONS_BY_KEY.get(path.dungeon)!.name}`;
     case 'triforce': return `Path to ${path.triforce}`;
     case 'boss': return `Path to ${BOSS_METADATA_BY_DUNGEON.get(path.boss)!.name}`;
     case 'end-boss': return `Path to ${path.boss}`;

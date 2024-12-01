@@ -93,7 +93,7 @@ static void appendDungeonEntrance(char** b, int dungeonId)
     {
         /* Dungeon */
         comboTextAppendStr(b, "at ");
-        comboTextAppendDungeonName(b, data & 0xff);
+        comboTextAppendDungeonName(b, data & 0xff, NULL);
     }
     else
     {

@@ -98,9 +98,10 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 
 #define PATH_WOTH       0
 #define PATH_TRIFORCE   1
-#define PATH_BOSS       2
-#define PATH_END_BOSS   3
-#define PATH_EVENT      4
+#define PATH_DUNGEON    2
+#define PATH_BOSS       3
+#define PATH_END_BOSS   4
+#define PATH_EVENT      5
 
 static const char* kPathTriforceNames[] = {
     TEXT_COLOR_RED    "Path of Power",
@@ -129,6 +130,9 @@ static void appendPathName(char** b, u8 path, u8 subPath)
         break;
     case PATH_TRIFORCE:
         comboTextAppendStr(b, kPathTriforceNames[subPath]);
+        break;
+    case PATH_DUNGEON:
+        comboTextAppendDungeonName(b, subPath, "Path to ");
         break;
     case PATH_BOSS:
         comboTextAppendBossName(b, subPath, "Path to ");
