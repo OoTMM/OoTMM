@@ -340,8 +340,17 @@ export class LogicPassAnalysisPaths {
       if (!this.state.settings.erPiratesWorld) {
         dungeons.push('PF');
       }
+      if (this.state.settings.erGanonCastle) {
+        dungeons.push('Ganon');
+      }
+      if (this.state.settings.erGanonTower) {
+        dungeons.push('Tower');
+      }
+      if (this.state.settings.erMoon) {
+        dungeons.push('Moon');
+      }
 
-      for (const dungeon of BOSS_DUNGEONS) {
+      for (const dungeon of dungeons) {
         this.makePathDungeon(dungeon);
       }
     }
