@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Improve OoT Song of Soaring by showing the "Soar to" message without unpausing the game.
 - Alter death behavior to return you to the dungeon entrance even if it's cross-game.
 - Alter save behavior such that if you save and reset in a dungeon, you will start at the dungeon entrance even if it's an MM dungeon.
+- Remoevd Playthrough hint in Blitz pre-completed preset.
 
 ### Fixed
 
