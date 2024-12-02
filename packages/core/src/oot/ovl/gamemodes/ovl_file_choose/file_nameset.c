@@ -980,7 +980,7 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
         sramCtx->readBuff[0] = gSaveContext.audioSetting;
         sramCtx->readBuff[1] = gSaveContext.zTargetSetting;
         Sram_WriteSramHeader(sramCtx);
-        Audio_ApplySoundMode(gSaveContext.audioSetting);
+        Audio_SetFileSelectSettings(gSaveContext.audioSetting);
         return;
     }
 

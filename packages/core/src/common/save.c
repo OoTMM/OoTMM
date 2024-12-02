@@ -49,7 +49,6 @@ void Save_LoadOptions(void)
 #if defined(GAME_OOT)
     gSaveContext.audioSetting = ootHeader[0];
     gSaveContext.zTargetSetting = ootHeader[1];
-    Audio_ApplySoundMode(gSaveContext.audioSetting);
 #endif
 
 #if defined(GAME_MM)
@@ -59,6 +58,7 @@ void Save_LoadOptions(void)
     gSaveContext.options.unk_04 = 0;
     gSaveContext.options.zTarget = ootHeader[1];
 #endif
+    Audio_SetFileSelectSettings(ootHeader[0]);
 }
 
 void Save_OnLoad(void)

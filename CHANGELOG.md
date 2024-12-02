@@ -15,7 +15,6 @@ All notable changes to this project will be documented in this file.
 - Add pause menu save screen for MM and options to return to spawn or dungeon entrance after saving.
 - Alter the OoT pause menu saving to be consistent with the new MM pause menu saving.
 
-
 ### Changed
 
 - Dungeon Maps hinting at dungeon locations now use a significantly better algorithm, which should handle all edge-cases.
@@ -39,6 +38,7 @@ All notable changes to this project will be documented in this file.
 - Fix OoT door locks not being drawn on the back side of knobbed doors.
 - Remove unnecessary setting of clock to 6am day 3 after playing Oath to Order on the clock tower roof.
 - Remove unnecessary sanity checks for scene time speed.
+- Sound setting not sticking over when doing to MM.
 
 ## [26.1] - 2024-11-09
 

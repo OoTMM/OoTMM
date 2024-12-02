@@ -42,7 +42,7 @@ Actor_Angle = 0x800213b4;
 GetRoomClearFlag = 0x80020640;
 
 AudioLoad_InitTable = 0x800b70c8;
-Audio_ApplySoundMode = 0x800c7420;
+Audio_SetFileSelectSettings = 0x800c7420;
 Magic_Refill = 0x80072500;
 
 ActorRemove = 0x80025648;

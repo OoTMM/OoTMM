@@ -680,3 +680,4 @@ DynaPoly_EnableCollision = 0x800c6314;
 Collider_InitTris = 0x800e16d0;
 Collider_SetTris = 0x800e1958;
 
+Audio_SetFileSelectSettings = 0x801a3d98;
