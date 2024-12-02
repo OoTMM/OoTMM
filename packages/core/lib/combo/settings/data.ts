@@ -1144,6 +1144,19 @@ export const SETTINGS = [{
   default: 'bossBeaten',
   cond: hasMM,
 }, {
+  key: 'regionState',
+  name: 'Region State Behavior',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls what is required to change the region state.',
+  values: [
+    { value: 'dungeonBeaten', name: 'Dungeon Beaten', description: 'Enabled when the dungeon is beaten.' },
+    //{ value: 'bossBeaten', name: 'Boss Beaten', description: 'Enabled when the boss is beaten.' },
+    { value: 'reward', name: 'Rewards', description: 'Enabled when the matching dungeon reward is obtained' },
+    { value: 'free', name: 'Free', description: 'Always enabled' },
+  ],
+  default: 'dungeonBeaten',
+}, {
   key: 'freeScarecrowOot',
   name: 'Free Scarecrow (OoT)',
   category: 'main.events',

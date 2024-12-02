@@ -6,6 +6,7 @@
 void comboTriggerWarp(PlayState* play, int bossId)
 {
     int dungeonId;
+    int dungeonClearFlags;
     u32 dungeonExit;
 
 #if defined(GAME_MM)
@@ -29,7 +30,14 @@ void comboTriggerWarp(PlayState* play, int bossId)
 
     /* Compute shuffled index and set flags */
     dungeonId = (int)gComboConfig.boss[bossId];
-    comboDungeonSetFlags(dungeonId, 1);
+    dungeonClearFlags = DUNGEONCLEARFLAG_BOSS;
+    if (Config_Flag(CFG_REGION_STATE_DUNGEONS))
+    {
+        dungeonClearFlags |= DUNGEONCLEARFLAG_EFFECT;
+        if (Config_Flag(CFG_ER_MAJOR_DUNGEONS))
+            dungeonClearFlags |= DUNGEONCLEARFLAG_WISP;
+    }
+    comboDungeonSetFlags(dungeonId, dungeonClearFlags);
 
     /* Set entrance - need special case for warp dungeons */
     dungeonExit = gComboConfig.dungeonWarps[dungeonId];

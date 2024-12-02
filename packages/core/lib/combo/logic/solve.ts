@@ -892,10 +892,12 @@ export class LogicPassSolver {
       this.tryJunk(greatFairyLocs);
 
       /* Handle boss events */
-      for (const d of dungeons) {
-        const wisp = WISPS[d];
-        if (wisp) {
-          world.areas['OOT SPAWN'].events[wisp] = exprTrue();
+      if (this.input.settings.regionState === 'dungeonBeaten') {
+        for (const d of dungeons) {
+          const wisp = WISPS[d];
+          if (wisp) {
+            world.areas['OOT SPAWN'].events[wisp] = exprTrue();
+          }
         }
       }
 
