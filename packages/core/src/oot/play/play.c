@@ -504,8 +504,7 @@ static void Play_AfterInit(PlayState* play)
         }
         break;
     default:
-        /* Clear custom death respawn */
-        bzero(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
+        comboClearCustomRespawn(CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE);
         break;
     }
 }

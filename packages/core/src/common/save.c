@@ -247,3 +247,8 @@ void comboHandleAutoInvertClockSpeed(void)
     if (Config_Flag(CFG_MM_AUTO_INVERT_ALWAYS) || (Config_Flag(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.info.playerData.songOfTimeCount == 0))
         gMmSave.daySpeed = invertSpeed;
 }
+
+void comboClearCustomRespawn(CustomRespawnMode customRespawnMode)
+{
+    bzero(&gSharedCustomSave.respawn[customRespawnMode], sizeof(RespawnData));
+}
