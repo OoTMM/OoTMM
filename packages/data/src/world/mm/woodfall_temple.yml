@@ -133,7 +133,7 @@
   exits:
     "Woodfall Temple Main": "true"
     "Woodfall Temple Pits Room": "true"
-    "Woodfall Temple Pre-Boss": "has_arrows"
+    "Woodfall Temple Pre-Boss": "has_arrows || can_use_din"
     "Woodfall Temple Water Room Upper": "true"
     "WARP_SONGS": "true"
   events:

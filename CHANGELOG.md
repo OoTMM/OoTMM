@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Alter death behavior to return you to the dungeon entrance even if it's cross-game.
 - Alter save behavior such that if you save and reset in a dungeon, you will start at the dungeon entrance even if it's an MM dungeon.
 - Remoevd Playthrough hint in Blitz pre-completed preset.
+- Accessing WFT Pre-Boss room can now be done with Din's Fire in logic.
 
 ### Fixed
 
@@ -39,6 +40,7 @@ All notable changes to this project will be documented in this file.
 - Remove unnecessary setting of clock to 6am day 3 after playing Oath to Order on the clock tower roof.
 - Remove unnecessary sanity checks for scene time speed.
 - Sound setting not sticking over when doing to MM.
+- Killing Big Poes in MM no longer considers Hookshot in logic.
 
 ## [26.1] - 2024-11-09
 

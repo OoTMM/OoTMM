@@ -202,9 +202,6 @@
 "has_magic": "(has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)) && (event(MAGIC) || has_magic_jar || has_green_potion || has_blue_potion || event(CHATEAU))"
 "has_double_magic": "(has(MAGIC_UPGRADE, 2) || has(SHARED_MAGIC_UPGRADE, 2)) && (event(MAGIC) || has_green_potion || has_blue_potion || event(CHATEAU))"
 "has_rupees": "event(RUPEES)"
-"can_kill_baba_nuts": "soul_deku_baba && (can_fight || has(MASK_DEKU) || can_hookshot_short || has_explosives || has_arrows)"
-"can_kill_baba_sticks": "soul_deku_baba && (can_fight || has(MASK_DEKU) || can_hookshot_short || has_explosives || has_arrows)"
-"can_kill_baba_both_sticks": "soul_deku_baba && (has_sword || has(MASK_DEKU))"
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
@@ -216,7 +213,6 @@
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && is_swamp_cleared)"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && is_ocean_cleared)"
-"can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
 
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
@@ -287,3 +283,10 @@
 "short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm, logical)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm, logical)"
 "gs": "soul_gs"
+
+# Enemies
+"can_kill_baba_nuts": "soul_deku_baba && (can_fight || has(MASK_DEKU) || can_hookshot_short || has_explosives || has_arrows)"
+"can_kill_baba_sticks": "soul_deku_baba && (can_fight || has(MASK_DEKU) || can_hookshot_short || has_explosives || has_arrows)"
+"can_kill_baba_both_sticks": "soul_deku_baba && (has_sword || has(MASK_DEKU))"
+"can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
+"can_kill_big_poe": "has_arrows || has_mask_zora || can_use_deku_bubble"
