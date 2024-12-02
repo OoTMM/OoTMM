@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the ability to bind region clear states to dungeon clears, dungeon rewards, or set them free.
 - Add Path hints.
 - Add the ability to play the multiplayer modes as teams, racing each other in the same seed.
 - Add the ability to play multiworld random settings.
