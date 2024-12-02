@@ -340,6 +340,17 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_GERUDO_VALLEY_FROM_FIELD,        0, {   280, -555,  1470 } }, /* OOT_GROTTO_EXIT_OCTOROK */
 };
 
+static const OotRespawnData kSpiritTempleMainEntrance = {
+    { -5.0f, -150.f, 754.0f },
+    DEG_TO_BINANG(180),
+    0xdff,
+    ENTR_OOT_TEMPLE_SPIRIT,
+    0,
+    0,
+    0,
+    0,
+};
+
 static void applyGrottoExit(u32* entrance, int id)
 {
     OotRespawnData* rs;
@@ -501,11 +512,15 @@ static void Play_AfterInit(PlayState* play)
         {
             /* Copy to the custom death respawn */
             memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gSaveContext.respawn[RESPAWN_MODE_DOWN], sizeof(OotRespawnData));
+            if (gSave.entrance == 0x3f0 || gSave.entrance == 0x3f4)
+            {
+                /* Copy pos, yaw, playerParams, entrance and roomIndex */
+                memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &kSpiritTempleMainEntrance, offsetof(OotRespawnData, data));
+            }
         }
         break;
     default:
-        /* Clear custom death respawn */
-        bzero(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
+        comboClearCustomRespawn(CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE);
         break;
     }
 }

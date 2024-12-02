@@ -198,6 +198,7 @@ extern s8 gSoaringIndexSelected;
 #endif
 
 void comboHandleAutoInvertClockSpeed(void);
+void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
 
