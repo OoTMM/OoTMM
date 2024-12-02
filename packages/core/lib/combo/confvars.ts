@@ -214,6 +214,9 @@ export const CONFVARS = [
   'OOT_SPIN_UPGRADE',
   'SHARED_SPIN_UPGRADE',
   'MM_JP_LAYOUT_DEKU_PALACE',
+  'REGION_STATE_DUNGEONS',
+  'REGION_STATE_REWARDS',
+  'REGION_STATE_FREE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -246,6 +246,7 @@ static void applyStartingEvents(void)
 
 void comboCreateSave(void* unk, void* buffer)
 {
+    int dungeonClearFlags;
     u32 base;
 
     /* Create MM save */
@@ -330,10 +331,13 @@ void comboCreateSave(void* unk, void* buffer)
     applyStartingEvents();
 
     /* Apply pre-completed dungeons */
+    dungeonClearFlags = DUNGEONCLEARFLAG_BOSS;
+    if (Config_Flag(CFG_REGION_STATE_DUNGEONS))
+        dungeonClearFlags |= DUNGEONCLEARFLAG_WISP;
     for (int i = 0; i < 32; ++i)
     {
         if (gComboConfig.preCompleted & (1 << i))
-            comboDungeonSetFlags(i, 0);
+            comboDungeonSetFlags(i, dungeonClearFlags);
     }
 
     /* Write save */

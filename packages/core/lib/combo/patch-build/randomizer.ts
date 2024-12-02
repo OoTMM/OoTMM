@@ -1002,6 +1002,9 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_SPIN_UPGRADE: settings.spinUpgradeOot,
     SHARED_SPIN_UPGRADE: settings.sharedSpinUpgrade,
     MM_JP_LAYOUT_DEKU_PALACE: world.resolvedFlags.jpLayouts.has('DekuPalace'),
+    REGION_STATE_DUNGEONS: settings.regionState === 'dungeonBeaten',
+    REGION_STATE_REWARDS: settings.regionState === 'reward',
+    REGION_STATE_FREE: settings.regionState === 'free',
   };
 
   for (const v in exprs) {
