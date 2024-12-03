@@ -51,7 +51,7 @@ type PathEventData = {
 
 export const PATH_EVENT_DATA: PathEventData[] = [
   { key: 'TimeTravel', name: 'Time Travel', event: 'OOT_TIME_TRAVEL' },
-  { key: 'Bridge', name: 'Bridge', event: 'OOT_BRIDGE_OPEN' },
+  { key: 'RainbowBridge', name: 'Rainbow Bridge', event: 'OOT_BRIDGE_OPEN' },
   { key: 'Termina', name: 'Termina', event: 'MM_ACCESS' },
   { key: 'Moon', name: 'Moon', event: 'MM_MOON_OPEN' },
 ];

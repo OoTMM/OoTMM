@@ -116,7 +116,7 @@ static const char* kPathEndBossNames[] = {
 
 static const char* kPathEventNames[] = {
     TEXT_COLOR_TEAL     "Path to Time Travel",
-    TEXT_COLOR_YELLOW   "Path to Bridge",
+    TEXT_COLOR_YELLOW   "Path to Rainbow Bridge",
     TEXT_COLOR_PINK     "Path to Termina",
     TEXT_COLOR_RED      "Path to Moon",
 };
