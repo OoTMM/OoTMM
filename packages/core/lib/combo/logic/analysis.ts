@@ -50,6 +50,12 @@ export const ANALYSIS_EVENTS = new Map([
   ['OOT_BRIDGE_OPEN',   'Rainbow Bridge'],
   ['MM_ACCESS',         'Termina Access'],
   ['MM_MOON_OPEN',      'Moon Access'],
+
+  /* HSW */
+  ['MM_HOT_WATER_NORTH_WINTER', 'Hot Spring Water (North, Winter)'],
+  ['MM_HOT_WATER_NORTH_SPRING', 'Hot Spring Water (North, Spring)'],
+  ['MM_HOT_WATER_WELL_WINTER',  'Hot Spring Water (Well, Winter)'],
+  ['MM_HOT_WATER_WELL_SPRING',  'Hot Spring Water (Well, Spring)'],
 ]);
 
 export class LogicPassAnalysis {
