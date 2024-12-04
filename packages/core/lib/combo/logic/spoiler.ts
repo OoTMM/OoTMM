@@ -6,7 +6,7 @@ import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemR
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
-import { Analysis } from './analysis';
+import { Analysis, ANALYSIS_EVENTS } from './analysis';
 import { AnalysisPath, PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
@@ -450,9 +450,17 @@ export class LogicPassSpoiler {
     this.writer.indent('Spheres');
     for (const i in spheres) {
       this.writer.indent(`Sphere ${i}`);
-      const sphere = spheres[i].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
-      for (const loc of sphere) {
-        this.writer.write(loc);
+      const text: string[] = [];
+      const sphere = spheres[i];
+      for (const entry of sphere) {
+        switch (entry.type) {
+        case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.state.items.get(entry.location)!)}`); break;
+        case 'event': text.push(`Event - ${ANALYSIS_EVENTS.get(entry.event)!}`); break;
+        }
+      }
+
+      for (const t of text.sort()) {
+        this.writer.write(t);
       }
       this.writer.unindent('');
     }

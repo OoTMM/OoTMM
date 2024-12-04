@@ -11,6 +11,7 @@ import { Item, Items, ItemsCount, PlayerItems } from '../items';
 import { isTriforcePiece } from '../items/helpers';
 import { exprPartialEvalAge } from './expr-partial-eval';
 import { Age, AGE_ADULT, AGE_CHILD, AGES } from './constants';
+import { ANALYSIS_EVENTS } from './analysis';
 
 const recursiveForEach = <T>(arr: any, cb: (x: T) => void) => {
   if (Array.isArray(arr)) {
@@ -67,6 +68,7 @@ type PathfinderWorldState = {
   locations: Set<string>;
   forbiddenReachableLocations: Set<string>;
   events: Set<string>;
+  newEvents: Set<string>;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
 }
@@ -109,6 +111,7 @@ const defaultWorldState = (startingItems: ItemsCount): PathfinderWorldState => (
   renewables: new Map(),
   forbiddenReachableLocations: new Set(),
   events: new Set(),
+  newEvents: new Set(),
   locations: new Set(),
 });
 
@@ -502,6 +505,54 @@ export class Pathfinder {
     this.collectLocation(worldId, loc);
   }
 
+  private addEvent(worldId: number, event: string) {
+    const world = this.worlds[worldId];
+    const ws = this.state.ws[worldId];
+    ws.events.add(event);
+    if (event === 'OOT_GANON' || event === 'OOT_GANON_PRE_BOSS' || event === 'MM_MAJORA' || event === 'MM_MAJORA_PRE_BOSS') {
+      this.updateGoalFlags();
+    }
+
+    for (const evAge of AGES) {
+      const evAs = ws.ages[evAge];
+      const deps = evAs.dependencies.events.get(event);
+      if (deps) {
+        evAs.dependencies.events.delete(event);
+        for (const [area, d] of deps) {
+          d.exits.forEach(x => this.evalExit(worldId, evAge, area, x));
+          d.events.forEach(x => this.evalEvent(worldId, evAge, area, x));
+          d.locations.forEach(x => this.evalLocation(worldId, evAge, area, x));
+          if (this.opts.gossips) {
+            d.gossips.forEach(x => this.evalGossip(worldId, evAge, area, x));
+          }
+        }
+      }
+    }
+
+    /* If it's time travel at will, we need to re-explore everything */
+    if (event === EVENT_TIME_TRAVEL) {
+      for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
+        const a = world.areas[area];
+        if (a.ageChange)
+          this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
+      }
+      for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
+        const a = world.areas[area];
+        if (a.ageChange)
+          this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
+      }
+    }
+  }
+
+  private addEventDelayed(worldId: number, event: string) {
+    if (this.opts.recursive || !ANALYSIS_EVENTS.has(event)) {
+      this.addEvent(worldId, event);
+    } else {
+      const ws = this.state.ws[worldId];
+      ws.newEvents.add(event);
+    }
+  }
+
   private evalExit(worldId: number, age: Age, area: string, exit: string) {
     if (this.state.stopped) return;
 
@@ -568,40 +619,7 @@ export class Pathfinder {
     /* If the result is true, add the event to the state and queue up everything */
     /* Otherwise, track dependencies */
     if (result.result) {
-      ws.events.add(event);
-      if (event === 'OOT_GANON' || event === 'OOT_GANON_PRE_BOSS' || event === 'MM_MAJORA' || event === 'MM_MAJORA_PRE_BOSS') {
-        this.updateGoalFlags();
-      }
-
-      for (const evAge of AGES) {
-        const evAs = ws.ages[evAge];
-        const deps = evAs.dependencies.events.get(event);
-        if (deps) {
-          evAs.dependencies.events.delete(event);
-          for (const [area, d] of deps) {
-            d.exits.forEach(x => this.evalExit(worldId, evAge, area, x));
-            d.events.forEach(x => this.evalEvent(worldId, evAge, area, x));
-            d.locations.forEach(x => this.evalLocation(worldId, evAge, area, x));
-            if (this.opts.gossips) {
-              d.gossips.forEach(x => this.evalGossip(worldId, evAge, area, x));
-            }
-          }
-        }
-      }
-
-      /* If it's time travel at will, we need to re-explore everything */
-      if (event === EVENT_TIME_TRAVEL) {
-        for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
-          const a = world.areas[area];
-          if (a.ageChange)
-            this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
-        }
-        for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
-          const a = world.areas[area];
-          if (a.ageChange)
-            this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
-        }
-      }
+      this.addEventDelayed(worldId, event);
     } else {
       /* Track dependencies */
       this.trackDependencies('events', as.dependencies, event, area, result);
@@ -727,6 +745,19 @@ export class Pathfinder {
   private pathfind() {
     /* Reset new locations */
     this.state.newLocations.clear();
+
+    /* Reset new events */
+    const newEvents = this.state.ws.map(x => x.newEvents);
+    for (const ws of this.state.ws) {
+      ws.newEvents = new Set();
+    }
+
+    for (let i = 0; i < newEvents.length; ++i) {
+      const events = newEvents[i];
+      for (const event of events) {
+        this.addEvent(i, event);
+      }
+    }
 
     /* Collect previous stuff */
     const worldsUncollectedLocations = this.state.ws.map(ws => [...ws.uncollectedLocations]);

@@ -1,6 +1,6 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { World } from './world';
+import { cloneWorld, World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { isLocationRenewable, Location, makeLocation, locationData } from './locations';
@@ -9,9 +9,52 @@ import { ItemHelpers, PlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { AnalysisPath } from './analysis-path';
 
+type ImportantEvent = {
+  event: string;
+  name: string;
+};
+
+type SphereEntryLocation = {
+  type: 'location';
+  location: Location;
+};
+
+type SphereEntryEvent = {
+  type: 'event';
+  event: string;
+  playerId: number;
+};
+
+type SphereEntry = SphereEntryLocation | SphereEntryEvent;
+
+/* The following events are considered entries in spheres */
+export const ANALYSIS_EVENTS = new Map([
+  /* Bosses */
+  ['OOT_BOSS_GOHMA',          'Beat Gohma'],
+  ['OOT_BOSS_KING_DODONGO',   'Beat King Dodongo'],
+  ['OOT_BOSS_BARINADE',       'Beat Barinade'],
+  ['OOT_BOSS_PHANTOM_GANON',  'Beat Phantom Ganon'],
+  ['OOT_BOSS_VOLVAGIA',       'Beat Volvagia'],
+  ['OOT_BOSS_MORPHA',         'Beat Morpha'],
+  ['OOT_BOSS_BONGO_BONGO',    'Beat Bongo-Bongo'],
+  ['OOT_BOSS_TWINROVA',       'Beat Twinrova'],
+  ['OOT_GANON',               'Beat Ganon'],
+  ['MM_BOSS_ODOLWA',          'Beat Odolwa'],
+  ['MM_BOSS_GOHT',            'Beat Goht'],
+  ['MM_BOSS_GYORG',           'Beat Gyorg'],
+  ['MM_BOSS_TWINMOLD',        'Beat Twinmold'],
+  ['MM_MAJORA',               'Beat Majora'],
+
+  /* Major events */
+  ['OOT_TIME_TRAVEL' ,  'Time Travel'],
+  ['OOT_BRIDGE_OPEN',   'Rainbow Bridge'],
+  ['MM_ACCESS',         'Termina Access'],
+  ['MM_MOON_OPEN',      'Moon Access'],
+]);
+
 export class LogicPassAnalysis {
   private pathfinder: Pathfinder;
-  private spheres: Location[][] = [];
+  private spheres: SphereEntry[][] = [];
   private requiredLocs = new Set<Location>();
   private requiredlocsByItem: Map<PlayerItem, Set<Location>> = new Map();
   private uselessLocs = new Set<Location>();
@@ -33,15 +76,65 @@ export class LogicPassAnalysis {
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
   }
 
-  private makeSpheresRaw(restrictedLocations?: Set<Location>) {
-    const spheres: Location[][] = [];
+  private worldFromEntries(worlds: World[], entries: SphereEntry[]) {
+    const newWorlds = worlds.map(x => cloneWorld(x));
+
+    for (let i = 0; i < newWorlds.length; ++i) {
+      const world = newWorlds[i];
+      const events = new Set(entries.filter(x => x.type === 'event').filter(x => x.playerId === i).map(x => x.event));
+      const locationNames = new Set(entries.filter(x => x.type === 'location').filter(x => locationData(x.location).world === i).map(x => locationData(x.location).id));
+
+      for (const area of Object.values(world.areas)) {
+        for (const location of Object.keys(area.locations)) {
+          if (!locationNames.has(location)) {
+            delete area.locations[location];
+          }
+        }
+
+        for (const event of Object.keys(area.events)) {
+          if (ANALYSIS_EVENTS.has(event) && !events.has(event)) {
+            delete area.events[event];
+          }
+        }
+      }
+    }
+
+    return newWorlds;
+  }
+
+  private makeSpheresRaw(entries?: SphereEntry[]) {
+    let worlds: World[];
+    let pathfinder: Pathfinder;
+
+    if (entries) {
+      worlds = this.worldFromEntries(this.state.worlds, entries);
+      pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
+    } else {
+      worlds = this.state.worlds;
+      pathfinder = this.pathfinder;
+    }
+
+    const spheres: SphereEntry[][] = [];
     let pathfinderState: PathfinderState | null = null;
     let count = 0;
 
     do {
       this.progress(count++, 10);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true, restrictedLocations });
-      const sphere = Array.from(pathfinderState.newLocations).filter(x => this.state.itemProperties.important.has(this.state.items.get(x)!.item));
+      pathfinderState = pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true });
+      const sphere: SphereEntry[] = [];
+      const locs = Array.from(pathfinderState.newLocations).filter(x => this.state.itemProperties.important.has(this.state.items.get(x)!.item));
+      for (const loc of locs) {
+        sphere.push({ type: 'location', location: loc });
+      }
+      for (let i = 0; i < pathfinderState.ws.length; ++i) {
+        const ws = pathfinderState.ws[i];
+        const { newEvents } = ws;
+        for (const event of newEvents) {
+          if (ANALYSIS_EVENTS.has(event)) {
+            sphere.push({ type: 'event', event, playerId: i });
+          }
+        }
+      }
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
       }
@@ -53,44 +146,32 @@ export class LogicPassAnalysis {
   private makeSpheres() {
     this.state.monitor.log('Analysis - Spheres (Raw)');
 
-    const locs = this.makeSpheresRaw().reverse().flat();
-    const spheresLocs = new Set(locs);
+    const entries = this.makeSpheresRaw().reverse().flat();
+    const entriesCopy = [...entries];
 
     this.state.monitor.log('Analysis - Spheres (Playthrough)');
     let count = 0;
-    for (const loc of locs) {
-      this.state.monitor.setProgress(count++, locs.length);
-      spheresLocs.delete(loc);
-      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
+    for (const e of entriesCopy) {
+      this.state.monitor.setProgress(count++, entriesCopy.length);
+      const entriesIndex = entries.indexOf(e);
+      entries.splice(entriesIndex, 1);
+      const worlds = this.worldFromEntries(this.state.worlds, entries);
+      const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
+      const pathfinderState = pathfinder.run(null, { recursive: true, items: this.state.items, stopAtGoal: true });
       if (!pathfinderState.goal) {
-        spheresLocs.add(loc);
+        entries.push(e);
       }
     }
 
     /* Recompute spheres to ensure correct order */
     this.state.monitor.log('Analysis - Spheres (Reorder)');
-    this.spheres = this.makeSpheresRaw(spheresLocs);
-  }
-
-  private makePath(name: string, pred: (x: PathfinderState) => boolean) {
-    const path = new Set<Location>();
-    this.state.monitor.log(`Analysis - ${name}`);
-    let count = 0;
-    const locations = new Set(this.requiredLocs);
-    for (const loc of locations) {
-      this.state.monitor.setProgress(count++, locations.size);
-      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, forbiddenLocations: new Set([loc]), recursive: true, stopAtGoal: true });
-      if (!pred(pathfinderState)) {
-        path.add(loc);
-      }
-    }
-    return path;
+    this.spheres = this.makeSpheresRaw(entries);
   }
 
   private makeRequiredLocs() {
     this.state.monitor.log('Analysis - WotH');
     let count = 0;
-    const locations = new Set(this.spheres.flat());
+    const locations = new Set(this.spheres.flat().filter(x => x.type === 'location').map(x => x.location));
     for (const loc of locations) {
       this.state.monitor.setProgress(count++, locations.size);
       const pathfinderState = this.pathfinder.run(null, { items: this.state.items, forbiddenLocations: new Set([loc]), recursive: true, stopAtGoal: true });
