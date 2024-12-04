@@ -96,14 +96,17 @@ export class LogicPassAnalysisPaths {
     this.states[state.key] = state;
   }
 
-  private pathfindNoEvent(worldId: number, event: string) {
+  private pathfindNoEvent(worldId: number, event: string, noOotSpawn: boolean = false) {
     /* Create a distinct world */
     const worlds = [...this.state.worlds];
     const newWorld = cloneWorld(worlds[worldId]);
     worlds[worldId] = newWorld;
 
     /* Remove the event */
-    for (const area of Object.values(newWorld.areas)) {
+    for (const areaName of Object.keys(newWorld.areas)) {
+      if (areaName === 'OOT SPAWN' && noOotSpawn)
+        continue;
+      const area = newWorld.areas[areaName];
       delete area.events[event];
     }
 
@@ -162,44 +165,6 @@ export class LogicPassAnalysisPaths {
     return pathfinderState;
   }
 
-  private bossPathfindState(dungeon: string, worldId: number) {
-    const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
-
-    /* Create a distinct world */
-    const worlds = [...this.state.worlds];
-    const newWorld = cloneWorld(worlds[worldId]);
-    worlds[worldId] = newWorld;
-    const area = newWorld.areas[ENTRANCES[meta.entrance].to];
-    if (!area)
-      return null;
-
-    /* Remove the boss */
-    area.exits = {};
-    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true });
-
-    return pathfinderState;
-  }
-
-  private endBossPathfindState(boss: string, worldId: number) {
-    const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
-
-    /* Create a distinct world */
-    const worlds = [...this.state.worlds];
-    const newWorld = cloneWorld(worlds[worldId]);
-    worlds[worldId] = newWorld;
-    const area = newWorld.areas[meta.area];
-    if (!area)
-      return null;
-
-    /* Remove the boss */
-    area.events = {};
-    const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
-    const pathfinderState = pathfinder.run(null, { items: this.state.items, recursive: true });
-
-    return pathfinderState;
-  }
-
   private makePathDungeon(dungeon: string) {
     for (let i = 0; i < this.state.worlds.length; i++) {
       const areas = this.dungeonAreas(dungeon, i);
@@ -223,7 +188,7 @@ export class LogicPassAnalysisPaths {
     const meta = BOSS_METADATA_BY_DUNGEON.get(dungeon)!;
 
     for (let i = 0; i < this.state.worlds.length; i++) {
-      const pathfinderState = this.bossPathfindState(dungeon, i);
+      const pathfinderState = this.pathfindNoEvent(i, meta.event, true);
       if (!pathfinderState || pathfinderState.goal) {
         continue;
       }
@@ -243,7 +208,7 @@ export class LogicPassAnalysisPaths {
     const meta = END_BOSS_METADATA_BY_NAME.get(boss)!;
 
     for (let i = 0; i < this.state.worlds.length; i++) {
-      const pathfinderState = this.endBossPathfindState(boss, i);
+      const pathfinderState = this.pathfindNoEvent(i, meta.event, true);
       if (!pathfinderState || pathfinderState.goal) {
         continue;
       }
