@@ -51,7 +51,7 @@ export class LogicPassAnalysis {
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
   }
 
-  private worldFromEmtries(worlds: World[], entries: SphereEntry[]) {
+  private worldFromEntries(worlds: World[], entries: SphereEntry[]) {
     const newWorlds = worlds.map(x => cloneWorld(x));
 
     for (let i = 0; i < newWorlds.length; ++i) {
@@ -82,7 +82,7 @@ export class LogicPassAnalysis {
     let pathfinder: Pathfinder;
 
     if (entries) {
-      worlds = this.worldFromEmtries(this.state.worlds, entries);
+      worlds = this.worldFromEntries(this.state.worlds, entries);
       pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
     } else {
       worlds = this.state.worlds;
@@ -90,30 +90,23 @@ export class LogicPassAnalysis {
     }
 
     const spheres: SphereEntry[][] = [];
-    const playersEvents: Set<string>[] = [];
     let pathfinderState: PathfinderState | null = null;
     let count = 0;
-
-    for (let i = 0; i < this.state.settings.players; ++i) {
-      playersEvents.push(new Set());
-    }
 
     do {
       this.progress(count++, 10);
       pathfinderState = pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true });
       const sphere: SphereEntry[] = [];
-      for (let i = 0; i < this.state.settings.players; ++i) {
-        const events = pathfinderState.ws[i].events;
-        for (const e of events) {
-          if (!playersEvents[i].has(e)) {
-            playersEvents[i].add(e);
-            sphere.push({ type: 'event', event: e, playerId: i });
-          }
-        }
-      }
       const locs = Array.from(pathfinderState.newLocations).filter(x => this.state.itemProperties.important.has(this.state.items.get(x)!.item));
       for (const loc of locs) {
         sphere.push({ type: 'location', location: loc });
+      }
+      for (let i = 0; i < pathfinderState.ws.length; ++i) {
+        const ws = pathfinderState.ws[i];
+        const { newEvents } = ws;
+        for (const event of newEvents) {
+          sphere.push({ type: 'event', event, playerId: i });
+        }
       }
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
@@ -135,7 +128,7 @@ export class LogicPassAnalysis {
       this.state.monitor.setProgress(count++, entriesCopy.length);
       const entriesIndex = entries.indexOf(e);
       entries.splice(entriesIndex, 1);
-      const worlds = this.worldFromEmtries(this.state.worlds, entries);
+      const worlds = this.worldFromEntries(this.state.worlds, entries);
       const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
       const pathfinderState = pathfinder.run(null, { recursive: true, items: this.state.items, stopAtGoal: true });
       if (!pathfinderState.goal) {
