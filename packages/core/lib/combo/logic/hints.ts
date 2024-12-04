@@ -237,7 +237,11 @@ export class LogicPassHints {
     const items = Array.isArray(item) ? item : [item];
 
     for (const sphere of this.state.analysis.spheres) {
-      for (const loc of sphere) {
+      for (const entry of sphere) {
+        if (entry.type !== 'location') {
+          continue;
+        }
+        const loc = entry.location;
         const it = this.state.items.get(loc);
         if (it && items.includes(it)) {
           const locD = locationData(loc);
@@ -341,8 +345,10 @@ export class LogicPassHints {
 
   private playthroughLocations(player: number) {
     const locations = this.state.analysis.spheres.flat()
-      .filter(loc => this.state.items.get(loc)!.player === player)
-      .filter(loc => this.isLocationHintable(loc, 'item'));
+      .filter(x => x.type === 'location')
+      .map(x => x.location)
+      .filter(x => this.state.items.get(x)!.player === player)
+      .filter(x => this.isLocationHintable(x, 'item'))
     return shuffle(this.state.random, locations);
   }
 

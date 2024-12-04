@@ -193,9 +193,11 @@ export class LogicPassAnalysisFoolish {
 
     /* Mark playthrough locs as conditionally required */
     for (const sphere of this.state.analysis.spheres) {
-      for (const loc of sphere) {
-        if (!this.state.analysis.required.has(loc)) {
-          this.conditionallyRequiredLocations.add(loc);
+      for (const entry of sphere) {
+        if (entry.type === 'location') {
+          if (!this.state.analysis.required.has(entry.location)) {
+            this.conditionallyRequiredLocations.add(entry.location);
+          }
         }
       }
     }
