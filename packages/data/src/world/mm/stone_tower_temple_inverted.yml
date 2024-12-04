@@ -205,16 +205,16 @@
 "Stone Tower Temple Boss":
   boss: true
   dungeon: IST
+  events:
+    BOSS_TWINMOLD: "soul_boss(SOUL_BOSS_TWINMOLD) && ((has_arrows && trick(MM_TWINMOLD_BOW)) || (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY))))"
   exits:
-    "Stone Tower After Boss": "soul_boss(SOUL_BOSS_TWINMOLD) && ((has_arrows && trick(MM_TWINMOLD_BOW)) || (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY))))"
+    "Stone Tower After Boss": "event(BOSS_TWINMOLD)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
 "Stone Tower After Boss":
   boss: true
   dungeon: IST
   exits:
     "Oath to Order": "true"
-  events:
-    BOSS_TWINMOLD: "true"
   locations:
     "Stone Tower Temple Inverted Boss HC": "true"
     "Stone Tower Temple Inverted Boss": "true"

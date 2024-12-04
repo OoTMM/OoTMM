@@ -2,8 +2,10 @@
   boss: true
   age_change: false
   dungeon: DT
+  events:
+    BOSS_GOHMA: "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
   exits:
-    "Deku Tree After Boss": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
+    "Deku Tree After Boss": "event(BOSS_GOHMA)"
   locations:
     "Deku Tree Boss Grass 1": "can_cut_grass"
     "Deku Tree Boss Grass 2": "can_cut_grass"
@@ -17,8 +19,6 @@
   boss: true
   age_change: false
   dungeon: DT
-  events:
-    BOSS_GOHMA: "true"
   locations:
     "Deku Tree Boss Container": "true"
     "Deku Tree Boss": "true"
@@ -26,16 +26,16 @@
   boss: true
   age_change: false
   dungeon: DC
+  events:
+    BOSS_KING_DODONGO: "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_use_sword)"
   exits:
-    "Dodongo Cavern After Boss": "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_use_sword)"
+    "Dodongo Cavern After Boss": "event(BOSS_KING_DODONGO)"
   locations:
     "Dodongo Cavern Boss Chest": "true"
 "Dodongo Cavern After Boss":
   boss: true
   age_change: false
   dungeon: DC
-  events:
-    BOSS_KING_DODONGO: "true"
   locations:
     "Dodongo Cavern Boss Container": "true"
     "Dodongo Cavern Boss": "true"
@@ -43,8 +43,10 @@
   boss: true
   age_change: false
   dungeon: JJ
+  events:
+    BOSS_BARINADE: "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
   exits:
-    "Jabu-Jabu After Boss": "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
+    "Jabu-Jabu After Boss": "event(BOSS_BARINADE)"
   locations:
     "Jabu-Jabu Boss Pot 1": "true"
     "Jabu-Jabu Boss Pot 2": "true"
@@ -56,8 +58,6 @@
   boss: true
   age_change: false
   dungeon: JJ
-  events:
-    BOSS_BARINADE: "true"
   locations:
     "Jabu-Jabu Boss Container": "true"
     "Jabu-Jabu Boss": "true"
@@ -65,14 +65,14 @@
   boss: true
   age_change: false
   dungeon: Forest
+  events:
+    BOSS_PHANTOM_GANON: "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword"
   exits:
-    "Forest Temple After Boss": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword"
+    "Forest Temple After Boss": "event(BOSS_PHANTOM_GANON)"
 "Forest Temple After Boss":
   boss: true
   age_change: false
   dungeon: Forest
-  events:
-    BOSS_PHANTOM_GANON: "true"
   locations:
     "Forest Temple Boss": "true"
     "Forest Temple Boss Container": "true"
@@ -80,14 +80,14 @@
   boss: true
   age_change: false
   dungeon: Fire
+  events:
+    BOSS_VOLVAGIA: "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
   exits:
-    "Fire Temple After Boss": "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
+    "Fire Temple After Boss": "event(BOSS_VOLVAGIA)"
 "Fire Temple After Boss":
   boss: true
   age_change: false
   dungeon: Fire
-  events:
-    BOSS_VOLVAGIA: "true"
   locations:
     "Fire Temple Boss Container": "true"
     "Fire Temple Boss": "true"
@@ -95,14 +95,14 @@
   boss: true
   age_change: false
   dungeon: Water
+  events:
+    BOSS_MORPHA: "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && can_use_sword"
   exits:
-    "Water Temple After Boss": "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && can_use_sword"
+    "Water Temple After Boss": "event(BOSS_MORPHA)"
 "Water Temple After Boss":
   boss: true
   age_change: false
   dungeon: Water
-  events:
-    BOSS_MORPHA: "true"
   locations:
     "Water Temple Boss HC": "true"
     "Water Temple Boss": "true"
@@ -110,14 +110,14 @@
   boss: true
   age_change: false
   dungeon: Spirit
+  events:
+    BOSS_TWINROVA: "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && can_use_sword"
   exits:
-    "Spirit Temple After Boss": "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && can_use_sword"
+    "Spirit Temple After Boss": "event(BOSS_TWINROVA)"
 "Spirit Temple After Boss":
   boss: true
   age_change: false
   dungeon: Spirit
-  events:
-    BOSS_TWINROVA: "true"
   locations:
     "Spirit Temple Boss HC": "true"
     "Spirit Temple Boss": "true"
@@ -125,14 +125,14 @@
   boss: true
   age_change: false
   dungeon: Shadow
+  events:
+    BOSS_BONGO_BONGO: "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_use_slingshot)"
   exits:
-    "Shadow Temple After Boss": "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_use_slingshot)"
+    "Shadow Temple After Boss": "event(BOSS_BONGO_BONGO)"
 "Shadow Temple After Boss":
   boss: true
   age_change: false
   dungeon: Shadow
-  events:
-    BOSS_BONGO_BONGO: "true"
   locations:
     "Shadow Temple Boss HC": "true"
     "Shadow Temple Boss": "true"

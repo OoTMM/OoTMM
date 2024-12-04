@@ -286,8 +286,10 @@
 "Great Bay Temple Boss":
   boss: true
   dungeon: GB
+  events:
+    BOSS_GYORG: "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
   exits:
-    "Great Bay Temple After Boss": "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
+    "Great Bay Temple After Boss": "event(BOSS_GYORG)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
   locations:
     "Great Bay Temple Boss Pot 1": "true"
@@ -303,8 +305,6 @@
   dungeon: GB
   exits:
     "Oath to Order": "true"
-  events:
-    BOSS_GYORG: "true"
   locations:
     "Great Bay Temple Boss HC": "true"
     "Great Bay Temple Boss": "true"
