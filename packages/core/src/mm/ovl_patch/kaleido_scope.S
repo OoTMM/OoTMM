@@ -221,6 +221,22 @@ PATCH_START 0x808241e4
   li    a3, 0x40
 PATCH_END
 
+PATCH_START 0x808219d4
+  nop
+PATCH_END
+
+PATCH_START 0x80821a50
+  nop
+PATCH_END
+
+PATCH_START 0x80821d54
+  nop
+PATCH_END
+
+PATCH_START 0x808288c4
+  nop
+PATCH_END
+
 /*
   Long series of patches for shifting magic arrow unique select item ID to allow more custom items
 */
