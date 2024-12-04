@@ -19,7 +19,7 @@ type SphereEntryLocation = {
   location: Location;
 };
 
-type SphereEntryEvent = {
+export type SphereEntryEvent = {
   type: 'event';
   event: string;
   playerId: number;

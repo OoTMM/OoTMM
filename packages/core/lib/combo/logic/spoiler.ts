@@ -6,7 +6,7 @@ import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemR
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
-import { Analysis, ANALYSIS_EVENTS } from './analysis';
+import { Analysis, ANALYSIS_EVENTS, SphereEntryEvent } from './analysis';
 import { AnalysisPath, PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
@@ -419,6 +419,15 @@ export class LogicPassSpoiler {
     }
   }
 
+  private eventName(entry: SphereEntryEvent) {
+    const event = ANALYSIS_EVENTS.get(entry.event)!;
+    if (this.isMulti) {
+      return `${this.strPad("World", entry.playerId + 1)} ${event}`;
+    } else {
+      return event;
+    }
+  }
+
   private writeRaw() {
     const { worlds, items: placement, settings } = this.state;
     const allLocsCount = worlds.map(x => x.locations.size).reduce((a, b) => a + b, 0);
@@ -456,7 +465,7 @@ export class LogicPassSpoiler {
       for (const entry of sphere) {
         switch (entry.type) {
           case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.state.items.get(entry.location)!)}`); break;
-          case 'event': text.push(`Event - ${this.strPad("World", entry.playerId + 1)}: ${ANALYSIS_EVENTS.get(entry.event)!}`); break;
+          case 'event': text.push(`Event - ${this.eventName(entry)}`); break;
         }
       }
 
