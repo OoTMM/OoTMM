@@ -11,6 +11,7 @@ import { Item, Items, ItemsCount, PlayerItems } from '../items';
 import { isTriforcePiece } from '../items/helpers';
 import { exprPartialEvalAge } from './expr-partial-eval';
 import { Age, AGE_ADULT, AGE_CHILD, AGES } from './constants';
+import { ANALYSIS_EVENTS } from './analysis';
 
 const recursiveForEach = <T>(arr: any, cb: (x: T) => void) => {
   if (Array.isArray(arr)) {
@@ -544,7 +545,7 @@ export class Pathfinder {
   }
 
   private addEventDelayed(worldId: number, event: string) {
-    if (this.opts.recursive) {
+    if (this.opts.recursive || !ANALYSIS_EVENTS.has(event)) {
       this.addEvent(worldId, event);
     } else {
       const ws = this.state.ws[worldId];
