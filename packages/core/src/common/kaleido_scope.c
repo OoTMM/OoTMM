@@ -94,19 +94,39 @@ s32 KaleidoScope_Update(PlayState* play)
         case 0: /* PAUSE_MAIN_STATE_IDLE */
         case 5: /* PAUSE_MAIN_STATE_SONG_PROMPT */
         case 8: /* PAUSE_MAIN_STATE_IDLE_CURSOR_ON_SONG */
-#if defined(GAME_MM)
-            u16 shouldSave = !pauseCtx->itemDescriptionOn && (buttons & B_BUTTON);
-#else
-            u16 shouldSave = (buttons & B_BUTTON);
-#endif
-            if (shouldSave && KaleidoScope_CanSave(play))
+            if (KaleidoScope_CanSave(play))
             {
-                PlaySound(NA_SE_SY_DECIDE);
-                PlayerDisplayTextBox(play, 0, NULL);
-                saveMessage(play);
-                pauseCtx->state = 7; /* PAUSE_STATE_SAVE_PROMPT */
-                pauseCtx->savePromptState = 0;
-                return 1;
+                u16 shouldSave = (buttons & B_BUTTON);
+#if defined (GAME_MM)
+                if (play->msgCtx.msgLength != 0)
+                {
+                    if (gSaveContext.buttonStatus[0] != BTN_DISABLED)
+                    {
+                        gSaveContext.buttonStatus[0] = BTN_DISABLED;
+                        gSaveContext.hudVisibility = HUD_VISIBILITY_IDLE;
+                        Interface_SetHudVisibility(HUD_VISIBILITY_ALL);
+                    }
+                    if (shouldSave)
+                    {
+                        return 1;
+                    }
+                }
+                else if (gSaveContext.buttonStatus[0] == BTN_DISABLED)
+                {
+                    gSaveContext.buttonStatus[0] = BTN_ENABLED;
+                    gSaveContext.hudVisibility = HUD_VISIBILITY_IDLE;
+                    Interface_SetHudVisibility(HUD_VISIBILITY_ALL);
+                }
+#endif
+                if (shouldSave)
+                {
+                    PlaySound(NA_SE_SY_DECIDE);
+                    PlayerDisplayTextBox(play, 0, NULL);
+                    saveMessage(play);
+                    pauseCtx->state = 7; /* PAUSE_STATE_SAVE_PROMPT */
+                    pauseCtx->savePromptState = 0;
+                    return 1;
+                }
             }
             break;
         }
