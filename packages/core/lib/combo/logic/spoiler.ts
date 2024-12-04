@@ -389,11 +389,14 @@ export class LogicPassSpoiler {
     return count > 0 ? '0'.repeat(width - s.length) + s : s;
   }
 
+  private strPad(s: string, number: number) {
+    return `${s} ${this.decPad(number, this.state.worlds.length.toString().length)}`;
+  }
+
   private locationName(location: Location) {
     const data = locationData(location);
     if (this.isMulti) {
-      const id = data.world as number + 1
-      return `World ${this.decPad(id, this.state.worlds.length.toString().length)} ${data.id}`;
+      return `${this.strPad("World", data.world! + 1)} ${data.id}`;
     } else {
       return data.id;
     }
@@ -401,8 +404,7 @@ export class LogicPassSpoiler {
 
   private itemName(item: PlayerItem) {
     if (this.isMulti) {
-      const id = item.player + 1;
-      return `Player ${this.decPad(id, this.state.worlds.length.toString().length)} ${itemName(item.item.id)}`;
+      return `${this.strPad("Player", item.player + 1)} ${itemName(item.item.id)}`;
     } else {
       return itemName(item.item.id);
     }
@@ -411,8 +413,7 @@ export class LogicPassSpoiler {
   private regionName(region: Region) {
     const data = regionData(region);
     if (this.isMulti) {
-      const id = data.world + 1;
-      return `World ${this.decPad(id, this.state.worlds.length.toString().length)} ${regionName(data.id)}`;
+      return `${this.strPad("World", data.world + 1)} ${regionName(data.id)}`;
     } else {
       return regionName(data.id);
     }
@@ -454,8 +455,8 @@ export class LogicPassSpoiler {
       const sphere = spheres[i];
       for (const entry of sphere) {
         switch (entry.type) {
-        case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.state.items.get(entry.location)!)}`); break;
-        case 'event': text.push(`Event - ${ANALYSIS_EVENTS.get(entry.event)!}`); break;
+          case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.state.items.get(entry.location)!)}`); break;
+          case 'event': text.push(`Event - ${this.strPad("World", entry.playerId + 1)}: ${ANALYSIS_EVENTS.get(entry.event)!}`); break;
         }
       }
 
