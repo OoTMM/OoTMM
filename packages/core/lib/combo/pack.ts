@@ -12,6 +12,7 @@ import { GameAddresses } from './addresses';
 
 /* Files to alias (will use the OoT version) */
 const ALIASES_OOT = [
+  'kanji',
   'icon_item_gameover_static',
   'message_texture_static',
   'objects/object_wallmaster',
@@ -70,7 +71,7 @@ function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder
     const compressedEntry = compressedDma.read(i);
     const name = `${game}/${FILES[game][i]}`;
     if (compressedEntry.physEnd === 0xffffffff) {
-      romBuilder.addFile({ type: 'dummy', data: new Uint8Array(0), name, game, index: i, vaddr: uncompressedEntry.virtStart, vram: {} });
+      romBuilder.addFile({ type: 'dummy', data: new Uint8Array(0), name, game, index: i, vaddr: uncompressedEntry.virtStart, vsize: uncompressedEntry.virtEnd - uncompressedEntry.virtStart, vram: {} });
       continue;
     }
     const data = rom.subarray(uncompressedEntry.virtStart, uncompressedEntry.virtEnd);
@@ -112,7 +113,7 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
 
   /* Dummy out removed files */
   for (const f of patchfile.removedFiles) {
-    romBuilder.dummyOutFile(f);
+    romBuilder.removeFile(f);
   }
 
   /* Apply patches */
@@ -174,6 +175,39 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   const { rom, size } = await romBuilder.run();
   const sizeMB = (size / 1024 / 1024).toFixed(2);
   monitor.debug(`Pack: ROM size: ${sizeMB}MiB`);
+
+
+  /* Log biggest files */
+  if (process.env.DEBUG_LOG_LARGE_FILES) {
+    let unkId = 0;
+    const sizes: [string, number][] = [];
+    for (const file of romBuilder.allFiles()) {
+      let size: number | null = null;
+      let name: string;
+      if (file.type === 'uncompressed') {
+        size = file.data.length;
+      }
+      if (file.type === 'compressed') {
+        size = file.dma!.physEnd - file.dma!.physStart;
+      }
+
+      if (!size)
+        continue;
+
+      if (file.name) {
+        name = file.name;
+      } else {
+        name = `unk_${unkId++}`;
+      }
+
+      sizes.push([name, size]);
+    }
+
+    sizes.sort((a, b) => b[1] - a[1]);
+    for (let i = 0; i < 50 && i < sizes.length; ++i) {
+      monitor.log(`Pack: Largest files: ${sizes[i][0]}: 0x${sizes[i][1].toString(16)}`);
+    }
+  }
 
   return { rom, cosmeticLog };
 }

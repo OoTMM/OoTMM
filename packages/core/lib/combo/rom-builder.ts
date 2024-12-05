@@ -45,14 +45,15 @@ type RomFileVram = {
 }
 
 export type RomFile = {
-  name?: string;
   type: 'compressed' | 'uncompressed' | 'dummy';
+  name?: string;
   game: 'oot' | 'mm' | 'custom' | 'raw';
   index?: number;
   injected: boolean;
   data: Uint8Array;
   paddr?: number;
   vaddr?: number;
+  vsize?: number;
   vram?: { [k in Game]?: [number, number] };
   alias?: RomFile;
   dma?: DmaDataRecord;
@@ -82,6 +83,10 @@ export class RomBuilder {
 
   currentPaddr() {
     return this.paddr;
+  }
+
+  allFiles(): RomFile[] {
+    return this.files;
   }
 
   private addPaddr(size: number) {
@@ -141,7 +146,9 @@ export class RomBuilder {
         break;
       }
       case 'dummy':
-        dma = { physStart: 0xffffffff, physEnd: 0xffffffff, virtStart: file.vaddr || 0, virtEnd: file.vaddr || 0 };
+        const vaddr = file.vaddr || 0;
+        const vsize = file.vsize || 0;
+        dma = { physStart: 0xffffffff, physEnd: 0xffffffff, virtStart: vaddr, virtEnd: vaddr + vsize };
         break;
       }
     }
@@ -177,10 +184,11 @@ export class RomBuilder {
     return file.vaddr;
   }
 
-  dummyOutFile(name: string) {
+  removeFile(name: string) {
     const f = this.fileByNameRequired(name);
-    if (!f.injected) {
+    if (!f.injected && f.type !== 'dummy') {
       f.type = 'dummy';
+      f.vsize = f.data.length;
       f.data = new Uint8Array(0);
     }
   }

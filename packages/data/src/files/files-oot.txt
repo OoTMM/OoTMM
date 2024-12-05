@@ -4,7 +4,7 @@ dmadata
 Audiobank
 Audioseq
 Audiotable
-jpn_font_static
+kanji
 link_animetion
 icon_item_static
 icon_item_24_static

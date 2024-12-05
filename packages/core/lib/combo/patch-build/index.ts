@@ -91,6 +91,8 @@ const REMOVED_FILES = [
   'mm/ovl_select',
   'mm/ovl_opening',
   'mm/ovl_file_choose',
+  'oot/icon_item_jpn_static',
+  'oot/n64dd',
 ]
 
 export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile[]> {
