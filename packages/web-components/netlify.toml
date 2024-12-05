@@ -9,14 +9,14 @@
 [[headers]]
   for = "/config.json"
   [headers.values]
-    cache-control = "public, max-age=60, must-revalidate"
+    cache-control = "public, max-age=60"
 
 [[headers]]
   for = "/*.html"
   [headers.values]
-    cache-control = "public, max-age=3600"
+    cache-control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    cache-control = "public, max-age=3600"
+    cache-control = "public, max-age=31536000, immutable"
