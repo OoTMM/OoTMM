@@ -2210,7 +2210,7 @@
   events:
     RED_BOULDER_BROKEN: "is_adult && can_hammer"
   locations:
-    "Death Mountain Crater Volcano HP": "trick(OOT_VOLCANO_HOVERS) && (has_hover_boots || hookshot_anywhere) || glitch_megaflip"
+    "Death Mountain Crater Volcano HP": "(trick(OOT_VOLCANO_HOVERS) && (has_hover_boots || hookshot_anywhere)) || glitch_megaflip"
     "Death Mountain Crater Pot 1": "true"
     "Death Mountain Crater Pot 2": "true"
     "Death Mountain Crater Pot 3": "true"
