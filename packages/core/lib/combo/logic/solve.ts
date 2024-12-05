@@ -660,7 +660,9 @@ export class LogicPassSolver {
           }
           if (!pi)
             break;
-          const l = locsArray.pop()!;
+          const l = locsArray.pop();
+          if (!l)
+            throw new LogicSeedError('Failed to place extra triforce');
           const region = this.worlds[worldId].regions[locationData(l).id];
           if (region !== 'NONE') {
             locsArray = locsArray.filter(x => this.worlds[worldId].regions[locationData(x).id] !== region);
