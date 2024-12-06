@@ -2,22 +2,22 @@ import path from 'path';
 import fs from 'fs';
 import { FILES } from '@ootmm/data';
 
-import { Game } from '../config';
-import { DmaData } from '../dma';
-import { arrayToIndexMap, toU32Buffer } from '../util';
-import { CodeGen } from '../util/codegen';
-import { DecompressedRoms } from '../decompress';
-import { Monitor } from '../monitor';
+import { Game } from '../../combo/config';
+import { DmaData } from '../../combo/dma';
+import { arrayToIndexMap, toU32Buffer } from '../../combo/util';
+import { CodeGen } from '../../combo/util/codegen';
+import { DecompressedRoms } from '../../combo/decompress';
+import { Monitor } from '../../combo/monitor';
 import { KeepFile } from './keep';
-import { png } from '../util/png';
+import { png } from '../../combo/util/png';
 import { font } from './font';
 import { raw } from './raw';
-import { Options } from '../options';
-import { Patchfile } from '../patch-build/patchfile';
-import { grayscale } from '../image';
+import { Patchfile } from '../../combo/patch-build/patchfile';
+import { grayscale } from '../../combo/image';
 import { CustomObjectsBuilder } from './custom-objects-builder';
-import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
+import { bufReadU32BE, bufWriteU32BE } from '../../combo/util/buffer';
 import { ObjectEditor } from './object-editor';
+import { GameFile, GameFileSystem } from '../../shared/file-system';
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),
@@ -25,7 +25,6 @@ const FILES_TO_INDEX = {
 };
 
 type CustomEntry = {
-  game: Game,
   name: string,
   file: string,
   seg?: { in: number, out: number },
@@ -33,40 +32,40 @@ type CustomEntry = {
 };
 
 const ENTRIES: CustomEntry[] = [
-  { game: 'mm',  name: "GI_REMAINS_ODOLWA",     file: "objects/object_bsmask",       offsets: [0x06000690] },
-  { game: 'mm',  name: "GI_REMAINS_GOHT",       file: "objects/object_bsmask",       offsets: [0x06003ad0] },
-  { game: 'mm',  name: "GI_REMAINS_GYORG",      file: "objects/object_bsmask",       offsets: [0x06001d80] },
-  { game: 'mm',  name: "GI_REMAINS_TWINMOLD",   file: "objects/object_bsmask",       offsets: [0x06005020] },
-  { game: 'mm',  name: "GI_MASK_MAJORA",        file: "objects/object_stk",           offsets: [0x06006bb0] },
-  { game: 'oot', name: "GI_MASTER_SWORD",       file: "objects/object_toki_objects",  offsets: [0x06001bd0] },
-  { game: 'oot', name: "GI_STONE_EMERALD",      file: "objects/object_gi_jewel",      offsets: [0x06001240, 0x060010e0] },
-  { game: 'oot', name: "GI_STONE_RUBY",         file: "objects/object_gi_jewel",      offsets: [0x060020a0, 0x06001fb0] },
-  { game: 'oot', name: "GI_STONE_SAPPHIRE",     file: "objects/object_gi_jewel",      offsets: [0x06003530, 0x06003370] },
-  { game: 'oot', name: "GI_MEDALLION_FOREST",   file: "objects/object_gi_medal",      offsets: [0x06000cb0, 0x06000e18] },
-  { game: 'oot', name: "GI_MEDALLION_FIRE",     file: "objects/object_gi_medal",      offsets: [0x06001af0, 0x06000e18] },
-  { game: 'oot', name: "GI_MEDALLION_WATER",    file: "objects/object_gi_medal",      offsets: [0x06002830, 0x06000e18] },
-  { game: 'oot', name: "GI_MEDALLION_SPIRIT",   file: "objects/object_gi_medal",      offsets: [0x06003610, 0x06000e18] },
-  { game: 'oot', name: "GI_MEDALLION_SHADOW",   file: "objects/object_gi_medal",      offsets: [0x06004330, 0x06000e18] },
-  { game: 'oot', name: "GI_MEDALLION_LIGHT",    file: "objects/object_gi_medal",      offsets: [0x06005220, 0x06000e18] },
-  { game: 'mm',  name: "GI_CLOCK",              file: "objects/object_moguri",        offsets: [0x0600f518, 0x0600cf28, 0x0600bee8, 0x0600c368] },
+  { name: "GI_REMAINS_ODOLWA",     file: "mm/objects/object_bsmask",          offsets: [0x06000690] },
+  { name: "GI_REMAINS_GOHT",       file: "mm/objects/object_bsmask",          offsets: [0x06003ad0] },
+  { name: "GI_REMAINS_GYORG",      file: "mm/objects/object_bsmask",          offsets: [0x06001d80] },
+  { name: "GI_REMAINS_TWINMOLD",   file: "mm/objects/object_bsmask",          offsets: [0x06005020] },
+  { name: "GI_MASK_MAJORA",        file: "mm/objects/object_stk",             offsets: [0x06006bb0] },
+  { name: "GI_MASTER_SWORD",       file: "oot/objects/object_toki_objects",   offsets: [0x06001bd0] },
+  { name: "GI_STONE_EMERALD",      file: "oot/objects/object_gi_jewel",       offsets: [0x06001240, 0x060010e0] },
+  { name: "GI_STONE_RUBY",         file: "oot/objects/object_gi_jewel",       offsets: [0x060020a0, 0x06001fb0] },
+  { name: "GI_STONE_SAPPHIRE",     file: "oot/objects/object_gi_jewel",       offsets: [0x06003530, 0x06003370] },
+  { name: "GI_MEDALLION_FOREST",   file: "oot/objects/object_gi_medal",       offsets: [0x06000cb0, 0x06000e18] },
+  { name: "GI_MEDALLION_FIRE",     file: "oot/objects/object_gi_medal",       offsets: [0x06001af0, 0x06000e18] },
+  { name: "GI_MEDALLION_WATER",    file: "oot/objects/object_gi_medal",       offsets: [0x06002830, 0x06000e18] },
+  { name: "GI_MEDALLION_SPIRIT",   file: "oot/objects/object_gi_medal",       offsets: [0x06003610, 0x06000e18] },
+  { name: "GI_MEDALLION_SHADOW",   file: "oot/objects/object_gi_medal",       offsets: [0x06004330, 0x06000e18] },
+  { name: "GI_MEDALLION_LIGHT",    file: "oot/objects/object_gi_medal",       offsets: [0x06005220, 0x06000e18] },
+  { name: "GI_CLOCK",              file: "mm/objects/object_moguri",          offsets: [0x0600f518, 0x0600cf28, 0x0600bee8, 0x0600c368] },
   /*{ game: 'mm',  name: "GI_OWL",                file: "objects/object_tsg",          offsets: [0x3770] },*/
 
   /* Extracted OoT Masks - used for adult masks */
-  { game: 'oot', name: "MASK_OOT_SKULL",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602ad40] },
-  { game: 'oot', name: "MASK_OOT_SPOOKY",       file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602af70] },
-  { game: 'oot', name: "MASK_OOT_KEATON",       file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b060] },
-  { game: 'oot', name: "MASK_OOT_TRUTH",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b1f0] },
-  { game: 'oot', name: "MASK_OOT_GORON",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b350] },
-  { game: 'oot', name: "MASK_OOT_ZORA",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b580] },
-  { game: 'oot', name: "MASK_OOT_GERUDO",       file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b788] },
-  { game: 'oot', name: "MASK_OOT_BUNNY",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602ca38] },
+  { name: "MASK_OOT_SKULL",        file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602ad40] },
+  { name: "MASK_OOT_SPOOKY",       file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602af70] },
+  { name: "MASK_OOT_KEATON",       file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b060] },
+  { name: "MASK_OOT_TRUTH",        file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b1f0] },
+  { name: "MASK_OOT_GORON",        file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b350] },
+  { name: "MASK_OOT_ZORA",         file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b580] },
+  { name: "MASK_OOT_GERUDO",       file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602b788] },
+  { name: "MASK_OOT_BUNNY",        file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x0602ca38] },
 
-  { game: 'oot', name: "EQ_DEKU_STICK",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x06006cc0] },
+  { name: "EQ_DEKU_STICK",         file: "oot/objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x06006cc0] },
 
-  { game: 'mm',  name: "OBJECT_TORCH2",         file: "objects/gameplay_keep",       seg: { in: 0x04, out: 0x06 }, offsets: [0x0401c430] },
-  { game: 'oot', name: 'BOOTS_IRON',            file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x06025918, 0x06025a60] },
-  { game: 'oot', name: 'BOOTS_HOVER',           file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x06025ba8, 0x06025db0] },
-  { game: 'oot', name: 'GAUNTLETS',             file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x06025218, 0x060252d8, 0x06025438, 0x06025598, 0x06025658, 0x060257b8] },
+  { name: "OBJECT_TORCH2",         file: "mm/objects/gameplay_keep",       seg: { in: 0x04, out: 0x06 }, offsets: [0x0401c430] },
+  { name: 'BOOTS_IRON',            file: "oot/objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x06025918, 0x06025a60] },
+  { name: 'BOOTS_HOVER',           file: "oot/objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x06025ba8, 0x06025db0] },
+  { name: 'GAUNTLETS',             file: "oot/objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x06025218, 0x060252d8, 0x06025438, 0x06025598, 0x06025658, 0x060257b8] },
 ];
 
 const AUDIO_COPIES_OOT: {[k: number]: number} = {
@@ -98,33 +97,31 @@ function splitObject(object: Uint8Array, offsets: number[], segIn: number, segOu
 };
 
 /* TODO: Cache this */
-const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
-  const buf = await getObjectBuffer(roms, entry.game, entry.file);
+const makeSplitObject = async (fileSystem: GameFileSystem, entry: CustomEntry) => {
+  const buf = fileSystem.getFileOrThrow(entry.file).data;
   const seg = entry.seg || { in: 6, out: 6 };
   const obj = splitObject(buf, entry.offsets, seg.in, seg.out);
 
-  if (!process.env.__IS_BROWSER__) {
-    const outDir = path.resolve('build', 'custom');
-    const outBasename = entry.name.toLowerCase();
-    const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-    await fs.promises.mkdir(outDir, { recursive: true });
-    await fs.promises.writeFile(outFilename, obj.data);
-  }
+  const outDir = path.resolve('build', 'custom');
+  const outBasename = entry.name.toLowerCase();
+  const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
+  await fs.promises.mkdir(outDir, { recursive: true });
+  await fs.promises.writeFile(outFilename, obj.data);
 
   return obj;
 };
 
-const extractFileData = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
-  const objBuffer = await getObjectBuffer(roms, game, file);
+const extractFileData = async (fileSystem: GameFileSystem, file: string, offset: number, size: number) => {
+  const objBuffer = fileSystem.getFileOrThrow(file).data;
   const tex = objBuffer.subarray(offset, offset + size);
   return tex;
 };
 
-export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k: string]: Uint8Array}> => ({
-  GRASS: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0xb140, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
-  GRASS_ALT: await extractFileData(roms, 'oot', 'objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
-  HIVE: await extractFileData(roms, 'mm', 'objects/object_comb', 0x0000, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
-  BUTTERFLY: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0x2680, 32 * 64 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+export const customExtractedFiles = async (fileSystem: GameFileSystem): Promise<{[k: string]: Uint8Array}> => ({
+  GRASS: await extractFileData(fileSystem, 'oot/objects/gameplay_field_keep', 0xb140, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+  GRASS_ALT: await extractFileData(fileSystem, 'oot/objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+  HIVE: await extractFileData(fileSystem, 'mm/objects/object_comb', 0x0000, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+  BUTTERFLY: await extractFileData(fileSystem, 'oot/objects/gameplay_field_keep', 0x2680, 32 * 64 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
 });
 
 export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
@@ -176,28 +173,28 @@ export const customAssetsKeep = async (): Promise<{[k: string]: Uint8Array}> => 
   SMALL_ICON_MOON: await png('small_icon_moon', 'rgba16'),
 });
 
-const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
-  const obj = await getObjectBuffer(roms, game, file);
+const extractRaw = async (fileSystem: GameFileSystem, file: string, offset: number, size: number) => {
+  const obj = fileSystem.getFileOrThrow(file).data;
   return obj.subarray(offset, offset + size);
 };
 
-export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: string]: Uint8Array}> => ({
-  SF_TEXTURE_1: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c030, 16 * 32),
-  SF_TEXTURE_2: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c630, 16 * 16),
-  SF_TEXTURE_3: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2bc30, 32 * 32),
-  MAGIC_WIND_TEXTURE: await extractRaw(roms, 'oot', 'actors/ovl_Magic_Wind', 0x8E0, 32 * 64),
-  MAGIC_DARK_TEXTURE: await extractRaw(roms, 'oot', 'actors/ovl_Magic_Dark', 0xC90, 32 * 64),
-  MAGIC_FIRE_TEXTURE: await extractRaw(roms, 'oot', 'actors/ovl_Magic_Fire', 0xB20, 64 * 64),
-  BOOTS_IRON_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xd1b8, 16 * 16),
-  BOOTS_IRON_TLUT: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xcb40, 16 * 16 * 2),
-  BOOTS_HOVER_HEEL_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xa580, 16 * 8 * 2),
-  BOOTS_HOVER_JET_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xa680, 32 * 32 * 2),
-  BOOTS_HOVER_FEATHER_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xae80, 32 * 16 * 2),
-  BOOTS_HOVER_CIRCLE_TEXTURE: await extractRaw(roms, 'oot', 'objects/gameplay_keep', 0x37e00, 16 * 32),
-  GORON_BRACELET_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_child', 0x7208, 8 * 8 * 2),
-  GORON_SYMBOL_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_child', 0x7288, 16 * 32 * 2),
-  GAUNTLET1_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0x9980, 16 * 32 * 2),
-  GAUNTLET2_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0x9d80, 32 * 32 * 2),
+export const extractedAssets = async (fileSystem: GameFileSystem): Promise<{[k: string]: Uint8Array}> => ({
+  SF_TEXTURE_1: await extractRaw(fileSystem, 'mm/objects/gameplay_keep', 0x2c030, 16 * 32),
+  SF_TEXTURE_2: await extractRaw(fileSystem, 'mm/objects/gameplay_keep', 0x2c630, 16 * 16),
+  SF_TEXTURE_3: await extractRaw(fileSystem, 'mm/objects/gameplay_keep', 0x2bc30, 32 * 32),
+  MAGIC_WIND_TEXTURE: await extractRaw(fileSystem, 'oot/actors/ovl_Magic_Wind', 0x8E0, 32 * 64),
+  MAGIC_DARK_TEXTURE: await extractRaw(fileSystem, 'oot/actors/ovl_Magic_Dark', 0xC90, 32 * 64),
+  MAGIC_FIRE_TEXTURE: await extractRaw(fileSystem, 'oot/actors/ovl_Magic_Fire', 0xB20, 64 * 64),
+  BOOTS_IRON_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0xd1b8, 16 * 16),
+  BOOTS_IRON_TLUT: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0xcb40, 16 * 16 * 2),
+  BOOTS_HOVER_HEEL_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0xa580, 16 * 8 * 2),
+  BOOTS_HOVER_JET_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0xa680, 32 * 32 * 2),
+  BOOTS_HOVER_FEATHER_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0xae80, 32 * 16 * 2),
+  BOOTS_HOVER_CIRCLE_TEXTURE: await extractRaw(fileSystem, 'oot/objects/gameplay_keep', 0x37e00, 16 * 32),
+  GORON_BRACELET_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_child', 0x7208, 8 * 8 * 2),
+  GORON_SYMBOL_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_child', 0x7288, 16 * 32 * 2),
+  GAUNTLET1_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0x9980, 16 * 32 * 2),
+  GAUNTLET2_TEXTURE: await extractRaw(fileSystem, 'oot/objects/object_link_boy', 0x9d80, 32 * 32 * 2),
 });
 
 type ObjectRef = {
@@ -206,20 +203,15 @@ type ObjectRef = {
 }
 
 class CustomAssetsBuilder {
-  private defines: Map<string, number>;
   private cg: CodeGen;
   private vrom: number;
   private objectId: number;
   private objectVroms: ObjectRef[];
 
   constructor(
-    private monitor: Monitor,
-    private roms: DecompressedRoms,
-    private patch: Patchfile,
+    private fileSystem: GameFileSystem,
   ) {
-    this.defines = new Map();
-    const cgPath = process.env.__IS_BROWSER__ ? '' : path.resolve('include', 'combo', 'custom.h');
-    this.cg = new CodeGen(cgPath, 'CUSTOM_H');
+    this.cg = new CodeGen('build/include/custom.h', 'CUSTOM_H');
     this.vrom = 0x08000000;
     this.objectId = 0x2000;
     this.objectVroms = [];
@@ -232,11 +224,12 @@ class CustomAssetsBuilder {
   }
 
   addRawData(name: string | null, data: Uint8Array, compressed: boolean) {
-    const sizeAligned = (data.length + 0xf) & ~0xf;
-    const vrom = this.vrom;
-    this.vrom += sizeAligned;
-    this.patch.addNewFile({ name: name ?? undefined, vrom, data, compressed });
-    return vrom;
+    //const sizeAligned = (data.length + 0xf) & ~0xf;
+    //const vrom = this.vrom;
+    //this.vrom += sizeAligned;
+    //this.patch.addNewFile({ name: name ?? undefined, vrom, data, compressed });
+
+    return this.fileSystem.addCustomFile({ name: name ?? undefined, data, compressed });
   }
 
   async addFile(define: string, filename: string, compressed: boolean) {
@@ -261,14 +254,14 @@ class CustomAssetsBuilder {
   }
 
   async addCustomExtractedObject(entry: CustomEntry) {
-    const obj = await makeSplitObject(this.roms, entry);
+    const obj = await makeSplitObject(this.fileSystem, entry);
     await this.addCustomObject(entry.name, obj.data, obj.offsets);
   }
 
   async addCustomKeepFiles() {
     const keep = new KeepFile();
     const cAssets = await customAssetsKeep();
-    const eAssets = await extractedAssets(this.roms);
+    const eAssets = await extractedAssets(this.fileSystem);
     const assets = { ...cAssets, ...eAssets };
     for (const k in assets) {
       const off = await keep.addData(assets[k]);
@@ -288,7 +281,7 @@ class CustomAssetsBuilder {
   }
 
   async extractSeqTable(game: Game, count: number, codeOffset: number, romOffset: number) {
-    const seqTableDataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const seqTableDataOrig = await extractRaw(this.fileSystem, `${game}/code`, codeOffset, count * 0x10);
     const seqTableDataPatched = new Uint8Array(0x80 * 0x10);
     seqTableDataPatched.set(seqTableDataOrig);
     for (let i = 0; i < count; ++i) {
@@ -318,7 +311,7 @@ class CustomAssetsBuilder {
   }
 
   async extractAudioTable(game: Game, count: number, codeOffset: number, romOffset: number) {
-    const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const dataOrig = await extractRaw(this.fileSystem, `${game}/code`, codeOffset, count * 0x10);
     const dataPatched = new Uint8Array(8 * 0x10);
     dataPatched.set(dataOrig);
     for (let i = 0; i < count; ++i) {
@@ -334,7 +327,7 @@ class CustomAssetsBuilder {
   }
 
   async extractBankTable(game: Game, count: number, codeOffset: number, romOffset: number) {
-    const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const dataOrig = await extractRaw(this.fileSystem, `${game}/code`, codeOffset, count * 0x10);
     const dataPatched = new Uint8Array(0x30 * 0x10);
     dataPatched.set(dataOrig);
     for (let i = 0; i < count; ++i) {
@@ -359,7 +352,7 @@ class CustomAssetsBuilder {
   }
 
   async extractSeqBanks(game: Game, count: number, codeOffset: number) {
-    const seqBankDataRaw = await extractRaw(this.roms, game, 'code', codeOffset, count * 2);
+    const seqBankDataRaw = await extractRaw(this.fileSystem, `${game}/code`, codeOffset, count * 2);
     const seqBankData = new Uint8Array(0x80 * 2);
     for (let i = 0; i < count; ++i) {
       const bankId = seqBankDataRaw[i * 2];
@@ -379,7 +372,7 @@ class CustomAssetsBuilder {
   }
 
   async addCustomExtractedFiles() {
-    const cfiles = await customExtractedFiles(this.roms);
+    const cfiles = await customExtractedFiles(this.fileSystem);
     for (const [name, data] of Object.entries(cfiles)) {
       const vrom = this.addRawData(null, data, true);
       this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
@@ -402,21 +395,16 @@ class CustomAssetsBuilder {
   }
 
   async run() {
-    this.monitor.log("Building custom objects");
-
     /* Build custom objects */
-    const customObjectsBuilder = new CustomObjectsBuilder(this.roms);
+    const customObjectsBuilder = new CustomObjectsBuilder(this.fileSystem);
     const customObjects = await customObjectsBuilder.build();
     for (const co of customObjects) {
       await this.addCustomObject(co.name, co.data, co.offsets);
-
-      if (!process.env.__IS_BROWSER__) {
-        const outDir = path.resolve('build', 'custom');
-        const outBasename = co.name.toLowerCase();
-        const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-        await fs.promises.mkdir(outDir, { recursive: true });
-        await fs.promises.writeFile(outFilename, co.data);
-      }
+      const outDir = path.resolve('build', 'custom');
+      const outBasename = co.name.toLowerCase();
+      const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
+      await fs.promises.mkdir(outDir, { recursive: true });
+      await fs.promises.writeFile(outFilename, co.data);
     }
 
     /* Build custom objects (legacy) */
@@ -465,15 +453,11 @@ class CustomAssetsBuilder {
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
-    if (!process.env.__IS_BROWSER__) {
-      await this.cg.emit();
-    }
-
-    return this.defines;
+    await this.cg.emit();
   }
 }
 
-export function custom(monitor: Monitor, roms: DecompressedRoms, patch: Patchfile) {
-  const builder = new CustomAssetsBuilder(monitor, roms, patch);
-  return builder.run();
+export async function buildCustom(fileSystem: GameFileSystem) {
+  const builder = new CustomAssetsBuilder(fileSystem);
+  builder.run();
 }

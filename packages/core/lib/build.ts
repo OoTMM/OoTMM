@@ -5,16 +5,15 @@ import JSZip from 'jszip';
 import childProcess from 'child_process';
 
 import { codegen as comboCodegen } from './combo/codegen';
-import { customAssetsKeep, customFiles } from './combo/custom';
+import { buildCustom, customAssetsKeep, customFiles } from './build/custom';
 import { Monitor } from './combo/monitor';
 import { cosmeticsAssets } from './combo/cosmetics';
-import { custom } from './combo/custom';
 import { decompressGames } from './combo/decompress';
 import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
 
 import { setupAssetsMap } from './build/build-assets-map';
-import { makeVanillaFileTree } from './shared/file-system';
+import { makeVanillaFileSystem } from './shared/file-system-import-vanilla';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
@@ -61,25 +60,6 @@ function readFileUint8(path: string): Promise<Uint8Array> {
   return fs.readFile(path).then((x) => new Uint8Array(x.buffer, x.byteOffset, x.byteLength));
 }
 
-async function codegenCustomAssets(monitor: Monitor) {
-  /* We can't run that during CI because it requires the ROMs */
-  if (process.env.CI)
-    return;
-
-  const [oot, mm] = await Promise.all([
-    readFileUint8('../../roms/oot.z64'),
-    readFileUint8('../../roms/mm.z64'),
-  ]);
-
-  const roms = await decompressGames(monitor, { oot, mm });
-  const customDefines = await custom(monitor, roms, new Patchfile());
-  const cg = new CodeGen('build/include/custom.h', 'CUSTOM_H');
-  for (const [key, value] of customDefines) {
-    cg.define(key, value);
-  }
-  await cg.emit();
-}
-
 async function buildOld() {
   const dummyMonitor = new Monitor({});
 
@@ -118,9 +98,16 @@ async function buildOld() {
 }
 
 async function build() {
+  /* Build the vanilla filesystem and extract a blob from it */
   const romOot = await readFileUint8(__dirname + '/../../../roms/oot.z64');
   const romMm = await readFileUint8(__dirname + '/../../../roms/mm.z64');
-  const tree = await makeVanillaFileTree({ oot: romOot, mm: romMm });
+  const fileSystem = await makeVanillaFileSystem({ oot: romOot, mm: romMm });
+  const vanillaBlob = fileSystem.blob();
+
+  /* Build custom assets */
+  await buildCustom(fileSystem);
+
+  console.log(fileSystem);
 }
 
 build().catch((err) => {

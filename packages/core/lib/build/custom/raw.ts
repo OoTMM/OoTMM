@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { FileResolver } from '../file-resolver';
+import { FileResolver } from '../../combo/file-resolver';
 
 export const raw = async (filename: string) => {
   if (process.env.__IS_BROWSER__) {

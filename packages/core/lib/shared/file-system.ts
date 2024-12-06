@@ -1,62 +1,82 @@
-import * as Yaz0 from 'yaz0';
-import { FILES } from '@ootmm/data';
+export type GameFileType = 'compressed' | 'uncompressed' | 'dummy';
 
-import { CONFIG, GAMES } from '../combo/config';
-import { bufReadU32BE } from '../combo/util/buffer';
-
-type GameFileType = 'compressed' | 'uncompressed' | 'dummy';
-
-type GameFile = {
+export type GameFile = {
   name: string;
   type: GameFileType;
   data: Uint8Array;
 };
 
-export async function makeVanillaFileTree(roms: { oot: Uint8Array, mm: Uint8Array }): Promise<GameFile[]> {
-  let files: GameFile[] = [];
+export type GameFileSystemBlob = {
+  files: Map<string, [number, number]>;
+  data: Uint8Array;
+};
 
-  for (const game of GAMES) {
-    /* Fetch relevant config and rom */
-    const config = CONFIG[game];
-    const rom = roms[game];
-    const filenames = FILES[game];
+type AddFileArgs = {
+  name?: string;
+  compressed?: boolean;
+  data: Uint8Array;
+};
 
-    /* Extract the DMA table */
-    const dma = rom.subarray(config.dmaAddr, config.dmaAddr + config.dmaCount * 16);
-    for (let i = 0; i < config.dmaCount; ++i) {
-      const dmaEntry = dma.subarray(i * 16, i * 16 + 16);
-      const filename = `${game}/${filenames[i]}`;
-      let data: Uint8Array;
-      let type: GameFileType;
+type GameFileSystemState = {
+  nextUnkId: number;
+  vrom: number;
+}
 
-      /* Fetch the DMA fields */
-      const virtStart = bufReadU32BE(dmaEntry, 0x00);
-      const virtEnd = bufReadU32BE(dmaEntry, 0x04);
-      const physStart = bufReadU32BE(dmaEntry, 0x08);
-      const physEnd = bufReadU32BE(dmaEntry, 0x0c);
+export class GameFileSystem {
+  private files: GameFile[];
+  private state: GameFileSystemState;
 
-      /* Handle dummy file */
-      if (physStart === 0xffffffff) {
-        type = 'dummy';
-        data = new Uint8Array(0);
-      } else if (physEnd === 0) {
-        type = 'uncompressed';
-        data = rom.slice(physStart, physStart + virtEnd - virtStart);
-      } else {
-        type = 'compressed';
-        data = rom.subarray(physStart, physEnd);
-      }
-
-      files.push({ name: filename, type, data });
+  constructor() {
+    this.files = [];
+    this.state = {
+      nextUnkId: 0,
+      vrom: 0x08000000,
     }
   }
 
-  /* Actually decompress the compressed files */
-  await Promise.all(files.map(async (file) => {
-    if (file.type === 'compressed') {
-      file.data = await Yaz0.decompress(file.data);
-    }
-  }));
+  addCustomFile(args: AddFileArgs) {
+    const vrom = this.state.vrom;
+    this.state.vrom = (this.state.vrom + args.data.length + 0xf) & ~0xf;
 
-  return files;
+    const name = args.name ?? `unk_${this.state.nextUnkId++}`;
+    this.files.push({ name, type: args.compressed ? 'compressed' : 'uncompressed', data: args.data });
+
+    return vrom;
+  }
+
+  addRawFile(file: GameFile) {
+    this.files.push(file);
+  }
+
+  getFile(name: string): GameFile | undefined {
+    return this.files.find((file) => file.name === name);
+  }
+
+  getFileOrThrow(name: string): GameFile {
+    const file = this.getFile(name);
+    if (file === undefined) {
+      throw new Error(`File not found: ${name}`);
+    }
+    return file;
+  }
+
+  blob(): GameFileSystemBlob {
+    let size = 0;
+    const files = new Map<string, [number, number]>();
+
+    for (const file of this.files) {
+      const sz = file.data.length;
+      files.set(file.name, [size, sz]);
+      size += sz;
+    }
+
+    let offset = 0;
+    const buf = new Uint8Array(size);
+    for (const file of this.files) {
+      buf.set(file.data, offset);
+      offset += file.data.length;
+    }
+
+    return { files, data: buf };
+  }
 }

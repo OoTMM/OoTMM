@@ -1,5 +1,5 @@
 import { codegen } from './codegen';
-import { custom } from './custom';
+import { custom } from '../build/custom';
 import { decompressGames } from './decompress';
 import { logic } from './logic';
 import { Monitor, MonitorCallbacks } from './monitor';

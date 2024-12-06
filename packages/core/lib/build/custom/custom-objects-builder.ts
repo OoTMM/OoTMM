@@ -1,16 +1,8 @@
-import { FILES } from '@ootmm/data';
-
-import { Game } from '../config';
-import { DecompressedRoms } from '../decompress';
-import { DmaData } from '../dma';
-import { arrayToIndexMap } from '../util';
+import { Game } from '../../combo/config';
+import { DmaData } from '../../combo/dma';
 import { ObjectEditor } from './object-editor';
 import { concatUint8Arrays } from 'uint8array-extras';
-
-const FILES_TO_INDEX = {
-  oot: arrayToIndexMap(FILES.oot),
-  mm: arrayToIndexMap(FILES.mm),
-};
+import { GameFileSystem } from '../../shared/file-system';
 
 export type CustomObject = {
   name: string;
@@ -19,26 +11,23 @@ export type CustomObject = {
 };
 
 export class CustomObjectsBuilder {
-  constructor(
-    private readonly roms: DecompressedRoms,
-  ){
-  }
+  private objOotLinkChild: Uint8Array;
+  private objOotLinkBoy: Uint8Array;
+  private objMmGameplayKeep: Uint8Array;
+  private objMmLinkChild: Uint8Array;
 
-  private async getFile(game: Game, filename: string) {
-    const rom = this.roms[game].rom;
-    const dma = new DmaData(this.roms[game].dma);
-    const index = FILES_TO_INDEX[game][filename];
-    if (index === undefined) {
-      throw new Error(`File ${filename} not found in game ${game}`);
-    }
-    const dmaEntry = dma.read(index);
-    return rom.slice(dmaEntry.virtStart, dmaEntry.virtEnd);
+  constructor(
+    private readonly fileSystem: GameFileSystem,
+  ){
+    this.objOotLinkChild = this.fileSystem.getFileOrThrow('oot/objects/object_link_child').data;
+    this.objOotLinkBoy = this.fileSystem.getFileOrThrow('oot/objects/object_link_boy').data;
+    this.objMmGameplayKeep = this.fileSystem.getFileOrThrow('mm/objects/gameplay_keep').data;
+    this.objMmLinkChild = this.fileSystem.getFileOrThrow('mm/objects/object_link_child').data;
   }
 
   private async makeEqShieldMirror(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x060241c0;
     let list = editor.listData(b)!;
@@ -50,8 +39,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqShieldDeku(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const b = 0x06014440;
     let list = editor.listData(b)!;
@@ -68,8 +56,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathShieldHylianChild(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, object_link_child);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const b = 0x06014c30;
     let list = editor.listData(b)!;
@@ -81,8 +68,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathShieldHylianAdult(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x06020f48;
     let list = editor.listData(b)!;
@@ -95,8 +81,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathShieldMirror(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x060216b0;
     let list = editor.listData(b)!;
@@ -108,8 +93,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathSwordOotChildFull(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, object_link_child);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const b = 0x06015248;
     const list = editor.listData(b)!;
@@ -120,8 +104,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathSwordOotChildEmpty(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, object_link_child);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const b = 0x06015408;
     const list = editor.listData(b)!;
@@ -132,8 +115,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathSwordOotAdultFull(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, object_link_child);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x06023160;
     const list = editor.listData(b)!;
@@ -144,8 +126,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathSwordOotAdultEmpty(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, object_link_child);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x060249d8;
     const list = editor.listData(b)!;
@@ -156,10 +137,8 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathSwordRazor(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj_child = await this.getFile('mm', 'objects/object_link_child');
-    const obj_keep = await this.getFile('mm', 'objects/gameplay_keep');
-    editor.loadSegment(0x04, obj_keep);
-    editor.loadSegment(0x06, obj_child);
+    editor.loadSegment(0x04, this.objMmGameplayKeep);
+    editor.loadSegment(0x06, this.objMmLinkChild);
 
     const body = editor.processListAddr(0x06017338);
     const bodyHandle = editor.processListAddr(0x0601db40);
@@ -171,8 +150,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSheathSwordGilded(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj_child = await this.getFile('mm', 'objects/object_link_child');
-    editor.loadSegment(0x06, obj_child);
+    editor.loadSegment(0x06, this.objMmLinkChild);
 
     const body = editor.processListAddr(0x06016b80);
     const bodyHandle = editor.processListAddr(0x0601db60);
@@ -184,8 +162,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqKokiriSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, object_link_child);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const b = 0x06014048;
     let list = editor.listData(b)!;
@@ -196,8 +173,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqRazorSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('mm', 'objects/gameplay_keep');
-    editor.loadSegment(0x04, obj);
+    editor.loadSegment(0x04, this.objMmGameplayKeep);
 
     const b = 0x04003060;
     let list = editor.listData(b)!;
@@ -208,8 +184,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqGildedSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('mm', 'objects/object_link_child');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objMmLinkChild);
 
     const b = 0x0601dcb0;
     let list = editor.listData(b)!;
@@ -220,8 +195,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqMasterSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, object_link_boy);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     let ms = editor.listData(0x06021f78)!;
     ms = editor.stripList(ms, 0x2d8, 0x518);
@@ -232,8 +206,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqBiggoronSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, object_link_boy);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x060238c8;
     let ms = editor.listData(b)!;
@@ -245,8 +218,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqBiggoronSwordBroken(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, object_link_boy);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x06023d50;
     let ms = editor.listData(b)!;
@@ -258,8 +230,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqHammer(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, object_link_boy);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const b = 0x060233e0;
     let ms = editor.listData(b)!;
@@ -271,8 +242,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqOcarinaFairy(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const b = 0x06015ba8;
     let data = editor.listData(b)!;
@@ -284,8 +254,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqBoomerang(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     /* 18580 */
     const b = 0x06016908;
@@ -299,8 +268,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqHookshot(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     editor.submitList(editor.listData(0x0602b288)!); /* Pointy end */
     editor.submitList(editor.listData(0x0602aff0)!); /* Chain */
@@ -321,8 +289,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqSlingshot(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkChild);
 
     const dataFPAddr = 0x06018048;
     let dataFP = editor.listData(dataFPAddr)!;
@@ -341,8 +308,7 @@ export class CustomObjectsBuilder {
 
   private async makeEqBow(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
-    const obj = await this.getFile('oot', 'objects/object_link_boy');
-    editor.loadSegment(0x06, obj);
+    editor.loadSegment(0x06, this.objOotLinkBoy);
 
     const dataFPAddr = 0x0602a248;
     let dataFP = editor.listData(dataFPAddr)!;
