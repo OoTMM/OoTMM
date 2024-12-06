@@ -14,6 +14,7 @@ import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
 
 import { setupAssetsMap } from './build/build-assets-map';
+import { makeVanillaFileTree } from './shared/file-system';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
@@ -79,7 +80,7 @@ async function codegenCustomAssets(monitor: Monitor) {
   await cg.emit();
 }
 
-async function build() {
+async function buildOld() {
   const dummyMonitor = new Monitor({});
 
   await Promise.all([
@@ -114,6 +115,12 @@ async function build() {
   const zipBuf = await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE', compressionOptions: { level: 9 } });
   await fs.mkdir('dist', { recursive: true });
   await fs.writeFile('dist/data.zip', zipBuf);
+}
+
+async function build() {
+  const romOot = await readFileUint8(__dirname + '/../../../roms/oot.z64');
+  const romMm = await readFileUint8(__dirname + '/../../../roms/mm.z64');
+  const tree = await makeVanillaFileTree({ oot: romOot, mm: romMm });
 }
 
 build().catch((err) => {
