@@ -14,6 +14,8 @@ import { CodeGen } from './combo/util/codegen';
 
 import { setupAssetsMap } from './build/build-assets-map';
 import { makeVanillaFileSystem } from './shared/file-system-import-vanilla';
+import { secretCreateKey, secretEncode } from './shared/secret';
+import { deflateSync } from 'zlib';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
@@ -102,12 +104,20 @@ async function build() {
   const romOot = await readFileUint8(__dirname + '/../../../roms/oot.z64');
   const romMm = await readFileUint8(__dirname + '/../../../roms/mm.z64');
   const fileSystem = await makeVanillaFileSystem({ oot: romOot, mm: romMm });
-  const vanillaBlob = fileSystem.blob();
+
+  /* Create the secret key */
+  const fsBlobData = fileSystem.blob().data;
+  //const secretKey = secretCreateKey(fileSystem.blob().data);
 
   /* Build custom assets */
   await buildCustom(fileSystem);
+  const randoBlob = fileSystem.blob();
 
-  console.log(fileSystem);
+  /* Build the xdelta */
+  const compressedRandoBlob = deflateSync(randoBlob.data, { level: 6, windowBits: 15, dictionary: randoBlob.data });
+  //const secretFileSystem = secretEncode(compressedRandoBlob, secretKey);
+
+  console.log(compressedRandoBlob);
 }
 
 build().catch((err) => {

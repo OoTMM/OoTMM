@@ -70,6 +70,7 @@ export class GameFileSystem {
       size += sz;
     }
 
+    size = (size + 3) & ~3;
     let offset = 0;
     const buf = new Uint8Array(size);
     for (const file of this.files) {

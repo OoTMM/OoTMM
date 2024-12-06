@@ -72,6 +72,9 @@ importers:
       crc-32:
         specifier: ^1.2.2
         version: 1.2.2
+      pako:
+        specifier: ^2.1.0
+        version: 2.1.0
       pngjs:
         specifier: ^7.0.0
         version: 7.0.0

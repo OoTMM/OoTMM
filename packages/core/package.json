@@ -13,6 +13,7 @@
     "@ootmm/data": "*",
     "@ootmm/tools": "*",
     "crc-32": "^1.2.2",
+    "pako": "^2.1.0",
     "pngjs": "^7.0.0",
     "uint8array-extras": "^1.4.0",
     "yaz0": "^4.0.2"
@@ -46,8 +47,12 @@
           "{projectRoot}/include/**/*",
           "{projectRoot}/src/**/*",
           "{projectRoot}/CMakeLists.txt",
-          { "env": "VERSION" },
-          { "env": "NODE_ENV" }
+          {
+            "env": "VERSION"
+          },
+          {
+            "env": "NODE_ENV"
+          }
         ],
         "outputs": [
           "{projectRoot}/dist/**/*",
@@ -63,8 +68,16 @@
           "build"
         ]
       },
-      "start": {"dependsOn": ["build"]},
-      "start:config": {"dependsOn": ["build"]}
+      "start": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start:config": {
+        "dependsOn": [
+          "build"
+        ]
+      }
     }
   }
 }
