@@ -14,6 +14,7 @@ import { ItemProperties } from './item-properties';
 import { Region } from './regions';
 import { AGE_ADULT, AGE_CHILD } from './constants';
 import { BOSS_METADATA_BY_ENTRANCE } from './boss';
+import { inspect } from 'util';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;
@@ -270,9 +271,6 @@ class WorldShuffler {
   }
 
   private validateAgeTemple(world: World) {
-    if (!['ootmm', 'oot'].includes(this.settings.games))
-      return;
-
     const newWorld = cloneWorld(world);
     const a = newWorld.areas['OOT SPAWN'];
     if (this.settings.startingAge === 'child') {
@@ -416,7 +414,7 @@ class WorldShuffler {
     }
 
     /* Check ToT access */
-    if (!this.validateAgeTemple(newWorld)) {
+    if (['ootmm', 'oot'].includes(this.settings.games) && !this.validateAgeTemple(newWorld)) {
       return false;
     }
 

@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Remove unnecessary sanity checks for scene time speed.
 - Sound setting not sticking over when doing to MM.
 - Killing Big Poes in MM no longer considers Hookshot in logic.
+- ER in MM only expecting to reach Temple of Time.
 
 ## [26.1] - 2024-11-09
 
