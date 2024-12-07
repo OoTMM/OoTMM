@@ -16,6 +16,7 @@
     "pako": "^2.1.0",
     "pngjs": "^7.0.0",
     "uint8array-extras": "^1.4.0",
+    "xdelta3-wasm": "^1.0.0",
     "yaz0": "^4.0.2"
   },
   "main": "lib/combo/index.ts",

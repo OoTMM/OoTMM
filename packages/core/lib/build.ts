@@ -16,6 +16,9 @@ import { setupAssetsMap } from './build/build-assets-map';
 import { makeVanillaFileSystem } from './shared/file-system-import-vanilla';
 import { secretCreateKey, secretEncode } from './shared/secret';
 import { deflateSync } from 'zlib';
+import { GameFileSystem } from './shared/file-system';
+import { deltaEncode } from './shared/delta';
+import { patchRandomizer } from './combo/patch-build/randomizer';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
@@ -103,21 +106,27 @@ async function build() {
   /* Build the vanilla filesystem and extract a blob from it */
   const romOot = await readFileUint8(__dirname + '/../../../roms/oot.z64');
   const romMm = await readFileUint8(__dirname + '/../../../roms/mm.z64');
-  const fileSystem = await makeVanillaFileSystem({ oot: romOot, mm: romMm });
-
-  /* Create the secret key */
-  const fsBlobData = fileSystem.blob().data;
-  //const secretKey = secretCreateKey(fileSystem.blob().data);
+  const vanillaFileSystem = await makeVanillaFileSystem({ oot: romOot, mm: romMm });
+  const fileSystem = new GameFileSystem(vanillaFileSystem);
 
   /* Build custom assets */
   await buildCustom(fileSystem);
-  const randoBlob = fileSystem.blob();
 
-  /* Build the xdelta */
-  const compressedRandoBlob = deflateSync(randoBlob.data, { level: 6, windowBits: 15, dictionary: randoBlob.data });
-  //const secretFileSystem = secretEncode(compressedRandoBlob, secretKey);
+  const patches = new Map<string, Uint8Array>();
+  for (const f of fileSystem.files) {
+    const oldF = vanillaFileSystem.getFile(f.name);
+    let oldData: Uint8Array;
+    if (oldF) {
+      oldData = oldF.data;
+    } else {
+      oldData = new Uint8Array(0);
+    }
+    const delta = await deltaEncode(oldData, f.data);
+    patches.set(f.name, delta);
+  }
 
-  console.log(compressedRandoBlob);
+  const combined = [...patches.values()].reduce((acc, x) => acc + x.byteLength, 0);
+  console.log(combined);
 }
 
 build().catch((err) => {

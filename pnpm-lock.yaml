@@ -81,6 +81,9 @@ importers:
       uint8array-extras:
         specifier: ^1.4.0
         version: 1.4.0
+      xdelta3-wasm:
+        specifier: ^1.0.0
+        version: 1.0.0
       yaz0:
         specifier: ^4.0.2
         version: 4.0.2
@@ -3327,6 +3330,10 @@ packages:
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+
+  xdelta3-wasm@1.0.0:
+    resolution: {integrity: sha512-vhS28BhVaE3S/PGG1KQIwjBVqJecuS5Sdh82UAZysbnYaU93KS6l8ZPtsqonNZMeuyFgrGW9D44hh2lwQCsidA==}
+    engines: {node: '>=12'}
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -6804,6 +6811,8 @@ snapshots:
       strip-ansi: 7.1.0
 
   wrappy@1.0.2: {}
+
+  xdelta3-wasm@1.0.0: {}
 
   y18n@5.0.8: {}
 

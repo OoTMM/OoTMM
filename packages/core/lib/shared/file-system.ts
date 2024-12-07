@@ -23,14 +23,19 @@ type GameFileSystemState = {
 }
 
 export class GameFileSystem {
-  private files: GameFile[];
+  public files: GameFile[];
   private state: GameFileSystemState;
 
-  constructor() {
-    this.files = [];
-    this.state = {
-      nextUnkId: 0,
-      vrom: 0x08000000,
+  constructor(old?: GameFileSystem) {
+    if (old) {
+      this.files = old.files.map(x => ({ ...x, data: new Uint8Array(x.data) }));
+      this.state = { ...old.state };
+    } else {
+      this.files = [];
+      this.state = {
+        nextUnkId: 0,
+        vrom: 0x08000000,
+      }
     }
   }
 
