@@ -2,7 +2,7 @@ import { ENTRANCES } from '@ootmm/data';
 
 import { Random, sample } from '../random';
 import { Settings } from '../settings';
-import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
+import { DUNGEONS_REGIONS, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
@@ -14,7 +14,6 @@ import { ItemProperties } from './item-properties';
 import { Region } from './regions';
 import { AGE_ADULT, AGE_CHILD } from './constants';
 import { BOSS_METADATA_BY_ENTRANCE } from './boss';
-import { inspect } from 'util';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;
