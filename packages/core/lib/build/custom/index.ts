@@ -117,14 +117,14 @@ const extractFileData = async (fileSystem: GameFileSystem, file: string, offset:
   return tex;
 };
 
-export const customExtractedFiles = async (fileSystem: GameFileSystem): Promise<{[k: string]: Uint8Array}> => ({
+const customExtractedFiles = async (fileSystem: GameFileSystem): Promise<{[k: string]: Uint8Array}> => ({
   GRASS: await extractFileData(fileSystem, 'oot/objects/gameplay_field_keep', 0xb140, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   GRASS_ALT: await extractFileData(fileSystem, 'oot/objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   HIVE: await extractFileData(fileSystem, 'mm/objects/object_comb', 0x0000, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   BUTTERFLY: await extractFileData(fileSystem, 'oot/objects/gameplay_field_keep', 0x2680, 32 * 64 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
 });
 
-export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
+const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
   CHEST_MAJOR_FRONT: await png('chests/major_front', 'rgba16'),
   CHEST_MAJOR_SIDE: await png('chests/major_side', 'rgba16'),
   CHEST_KEY_FRONT: await png('chests/key_front', 'rgba16'),
@@ -157,7 +157,7 @@ export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
   GLITTER: await png('glitter', 'i4'),
 });
 
-export const customAssetsKeep = async (): Promise<{[k: string]: Uint8Array}> => ({
+const customAssetsKeep = async (): Promise<{[k: string]: Uint8Array}> => ({
   DPAD: await png('dpad', 'rgba16'),
   FONT: await font('font_8x12'),
   SMALL_ICON_KEY: await png('small_icon_key', 'rgba16'),

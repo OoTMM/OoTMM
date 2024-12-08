@@ -4,8 +4,8 @@ import { sync as globSync } from 'glob';
 import JSZip from 'jszip';
 import childProcess from 'child_process';
 
-import { buildCodegen, codegen as comboCodegen } from './build/codegen';
-import { buildCustom, customAssetsKeep, customFiles } from './build/custom';
+import { buildCodegen } from './build/codegen';
+import { buildCustom } from './build/custom';
 import { Monitor } from './combo/monitor';
 import { cosmeticsAssets } from './combo/cosmetics';
 import { decompressGames } from './combo/decompress';
@@ -69,10 +69,7 @@ async function buildOld() {
   const dummyMonitor = new Monitor({});
 
   await Promise.all([
-    codegenCustomAssets(dummyMonitor),
-    comboCodegen(dummyMonitor),
     cosmeticsAssets(),
-    buildAssetsMap(),
   ]);
 
   const installDir = await buildNative();
@@ -115,6 +112,9 @@ async function build() {
     buildCustom(fileSystem),
     buildAssetsMap()
   ]);
+
+  /* Build the project */
+  const installDir = await buildNative();
 
   console.log(fileSystem);
 
