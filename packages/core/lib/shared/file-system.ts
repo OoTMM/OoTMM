@@ -1,9 +1,25 @@
 export type GameFileType = 'compressed' | 'uncompressed' | 'dummy';
 
+export type GameFileInject = {
+  index: number;
+  vrom: number;
+};
+
+export type GameFileCustomInject = {
+  vrom: number;
+};
+
+export type GameFileInjects = {
+  oot?: GameFileInject;
+  mm?: GameFileInject;
+  custom?: GameFileCustomInject;
+}
+
 export type GameFile = {
   name: string;
   type: GameFileType;
   data: Uint8Array;
+  injects: GameFileInjects;
 };
 
 export type GameFileSystemBlob = {
@@ -28,7 +44,7 @@ export class GameFileSystem {
 
   constructor(old?: GameFileSystem) {
     if (old) {
-      this.files = old.files.map(x => ({ ...x, data: new Uint8Array(x.data) }));
+      this.files = old.files.map(x => ({ ...x, injects: { ...x.injects }, data: new Uint8Array(x.data) }));
       this.state = { ...old.state };
     } else {
       this.files = [];
@@ -44,7 +60,7 @@ export class GameFileSystem {
     this.state.vrom = (this.state.vrom + args.data.length + 0xf) & ~0xf;
 
     const name = args.name ?? `unk_${this.state.nextUnkId++}`;
-    this.files.push({ name, type: args.compressed ? 'compressed' : 'uncompressed', data: args.data });
+    this.files.push({ name, injects: { custom: { vrom } }, type: args.compressed ? 'compressed' : 'uncompressed', data: args.data });
 
     return vrom;
   }

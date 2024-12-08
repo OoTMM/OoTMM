@@ -111,7 +111,9 @@ async function build() {
 
   /* Build custom assets */
   await buildCustom(fileSystem);
+  console.log(fileSystem);
 
+  /*
   const patches = new Map<string, Uint8Array>();
   for (const f of fileSystem.files) {
     const oldF = vanillaFileSystem.getFile(f.name);
@@ -127,6 +129,7 @@ async function build() {
 
   const combined = [...patches.values()].reduce((acc, x) => acc + x.byteLength, 0);
   console.log(combined);
+  */
 }
 
 build().catch((err) => {

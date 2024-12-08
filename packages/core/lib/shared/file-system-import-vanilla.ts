@@ -46,7 +46,7 @@ export async function makeVanillaFileSystem(roms: { oot: Uint8Array, mm: Uint8Ar
         data = rom.subarray(physStart, physEnd);
       }
 
-      files.push({ name: filename, type, data });
+      files.push({ name: filename, type, data, injects: { [game]: { index: i, vrom: virtStart } } });
     }
   }
 
