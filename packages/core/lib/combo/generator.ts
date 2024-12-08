@@ -1,4 +1,4 @@
-import { codegen } from './codegen';
+import { codegen } from '../build/codegen';
 import { custom } from '../build/custom';
 import { decompressGames } from './decompress';
 import { logic } from './logic';

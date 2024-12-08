@@ -4,7 +4,7 @@ import { sync as globSync } from 'glob';
 import JSZip from 'jszip';
 import childProcess from 'child_process';
 
-import { codegen as comboCodegen } from './combo/codegen';
+import { buildCodegen, codegen as comboCodegen } from './build/codegen';
 import { buildCustom, customAssetsKeep, customFiles } from './build/custom';
 import { Monitor } from './combo/monitor';
 import { cosmeticsAssets } from './combo/cosmetics';
@@ -12,7 +12,7 @@ import { decompressGames } from './combo/decompress';
 import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
 
-import { setupAssetsMap } from './build/build-assets-map';
+import { setupAssetsMap as buildAssetsMap } from './build/build-assets-map';
 import { makeVanillaFileSystem } from './shared/file-system-import-vanilla';
 import { secretCreateKey, secretEncode } from './shared/secret';
 import { deflateSync } from 'zlib';
@@ -72,7 +72,7 @@ async function buildOld() {
     codegenCustomAssets(dummyMonitor),
     comboCodegen(dummyMonitor),
     cosmeticsAssets(),
-    setupAssetsMap(),
+    buildAssetsMap(),
   ]);
 
   const installDir = await buildNative();
@@ -110,7 +110,12 @@ async function build() {
   const fileSystem = new GameFileSystem(vanillaFileSystem);
 
   /* Build custom assets */
-  await buildCustom(fileSystem);
+  await Promise.all([
+    buildCodegen(),
+    buildCustom(fileSystem),
+    buildAssetsMap()
+  ]);
+
   console.log(fileSystem);
 
   /*

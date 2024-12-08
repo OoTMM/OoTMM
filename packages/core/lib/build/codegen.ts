@@ -1,14 +1,13 @@
 import path from 'path';
 import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
 
-import { DRAWGI, GI } from './data';
-import { Monitor } from './monitor';
-import { PATCH_GROUP_VALUES } from './patch-build/group';
-import { CONFVARS_VALUES } from './confvars';
-import { PRICE_RANGES } from './logic/price';
-import { SETTINGS } from './settings';
-import { CodeGen } from './util/codegen';
-import { COSMETICS } from './cosmetics';
+import { DRAWGI, GI } from '../combo/data';
+import { PATCH_GROUP_VALUES } from '../combo/patch-build/group';
+import { CONFVARS_VALUES } from '../combo/confvars';
+import { PRICE_RANGES } from '../combo/logic/price';
+import { SETTINGS } from '../combo/settings';
+import { CodeGen } from '../combo/util/codegen';
+import { COSMETICS } from '../combo/cosmetics';
 
 const ENTRANCES_DEBUG_CATEGORIES = {
   COMMON: 'Common',
@@ -23,13 +22,11 @@ const ENTRANCES_DEBUG_CATEGORIES = {
 };
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
-  if (!process.env.__IS_BROWSER__) {
-    const cg = new CodeGen(path.resolve('build', 'include', 'combo', filename), guard);
-    for (const [k, v] of Object.entries(data)) {
-      cg.define(prefix + "_" + k, v);
-    }
-    await cg.emit();
+  const cg = new CodeGen(path.resolve('build', 'include', 'combo', filename), guard);
+  for (const [k, v] of Object.entries(data)) {
+    cg.define(prefix + "_" + k, v);
   }
+  await cg.emit();
 };
 
 /* Split on <> tags and extract the inner macro */
@@ -43,9 +40,6 @@ function textMacro(data: string) {
 }
 
 async function genGI() {
-  if (process.env.__IS_BROWSER__)
-    return;
-
   /* Header */
   const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'gi_data.h'), "GENERATED_GI_DATA_H");
   cgHeader.define('GI_NONE', 0);
@@ -110,9 +104,6 @@ async function genGI() {
 }
 
 async function genDrawGI() {
-  if (process.env.__IS_BROWSER__)
-    return;
-
   /* Header */
   const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'drawgi_data.h'), "GENERATED_DRAWGI_DATA_H");
   cgHeader.define('DRAWGI_NONE', 0);
@@ -199,8 +190,7 @@ async function genDefaultConfig() {
   await defaultConfig.emit();
 }
 
-export const codegen = async (monitor: Monitor) => {
-  monitor.log("Codegen");
+export const buildCodegen = async () => {
   return Promise.all([
     genGI(),
     genDrawGI(),
