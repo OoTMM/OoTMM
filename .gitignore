@@ -1,0 +1,32 @@
+# Cache files
+__pycache__/
+.pyc
+.DS_Store
+
+# IDE files
+.vscode/
+.vs/
+.idea/
+.cache/
+compile_commands.json
+
+# Project-specific ignores
+.make_options.mk
+extracted/
+build/
+expected/
+docs/doxygen/
+*.z64
+*.n64
+*.v64
+
+# Tools
+.venv/
+ctx.c
+tools/*dSYM/
+graphs/
+
+# Per-user configuration
+# If you want to use your own gitignore rules without modifying this file:
+# - use `git config core.excludesFile path/to/my_gitignore_file`
+# - or edit `.git/info/exclude`

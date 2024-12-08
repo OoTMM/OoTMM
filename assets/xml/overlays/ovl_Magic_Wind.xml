@@ -1,0 +1,15 @@
+<Root>
+    <File Name="ovl_Magic_Wind">
+        <Skeleton Name="sSkel" Type="Curve" LimbType="Curve" Offset="0x1510"/>
+        <CurveAnimation Name="sAnim" SkelOffset="0x1510" Offset="0x14D0"/>
+        <Limb Name="sRootLimb" LimbType="Curve" Offset="0x14E0"/>
+        <Limb Name="sInnerCylinderLimb" LimbType="Curve" Offset="0x14EC"/>
+        <Limb Name="sOuterCylinderLimb" LimbType="Curve" Offset="0x14F8"/>
+        <Array Name="sCylinderVtx" Count="36" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <Texture Name="sTex" OutName="magic_wind" Format="i8" Width="64" Height="64" Offset="0x240"/>
+        <DList Name="sInnerCylinderDL" Offset="0x1240"/>
+        <DList Name="sOuterCylinderDL" Offset="0x1348"/>
+    </File>
+</Root>
