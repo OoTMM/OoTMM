@@ -74,15 +74,6 @@ void Sram_AfterOpenSave(void)
     fixSpawn();
 }
 
-void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
-{
-    Sram_CopySave(fileSelect, sramCtx);
-    Save_CopyMM(*(short*)((char*)fileSelect + 0x1ca50), *(short*)((char*)fileSelect + 0x1ca38));
-}
-
-/* TODO: Fix this */
-//PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);
-
 ALIGNED(16) static u16 gStartingItemsBuffer[64];
 
 static void applyStartingItems(void)

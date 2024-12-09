@@ -395,6 +395,7 @@ void FileSelect_CopyConfirm(GameState* thisx) {
     } else if (CHECK_BTN_ANY(input->press.button, BTN_A | BTN_START)) {
         dayTime = gSaveContext.save.dayTime;
         Sram_CopySave(this, sramCtx);
+        Save_CopyMM(this->copyDestFileIndex, this->selectedFileIndex);
         gSaveContext.save.dayTime = dayTime;
         this->fileInfoAlpha[this->copyDestFileIndex] = this->nameAlpha[this->copyDestFileIndex] = 0;
         this->nextTitleLabel = FS_TITLE_COPY_COMPLETE;
