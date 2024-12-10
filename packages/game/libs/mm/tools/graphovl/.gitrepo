@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/AngheloAlf/graphovl.git
+	branch = master
+	commit = dab4addae0c5db6274ab5daf7780c62c346120a1
+	parent = 5da1ae553569ddb0016d302cfac8c45d9cb22e73
+	method = merge
+	cmdver = 0.4.3
