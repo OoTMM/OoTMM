@@ -1,7 +1,7 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 
 typedef struct Color_RGB8 {
     u8 r, g, b;

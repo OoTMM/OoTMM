@@ -1,7 +1,7 @@
 #ifndef ULTRA64_SPTASK_H
 #define ULTRA64_SPTASK_H
 
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 /* Task Types */
 #define M_NULTASK   0

@@ -8,7 +8,7 @@
 #include "rcp.h"
 #include "stack.h"
 #include "thread.h"
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 #define ASIC_BASE   PI_DOM2_ADDR1
 
