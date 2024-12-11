@@ -1,15 +1,11 @@
 /*
  * ROM spec file
  */
-
-beginseg
-    name "makerom"
-    include "../loader/build/loader.o"
-endseg
-
+    
 beginseg
     name "boot"
-    address 0x80000460
+    address 0x7ffff400
+    include "../loader/build/loader.o"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/data/boot/rspboot.data.o"
     include "$(BUILD_DIR)/src/boot/idle.o"

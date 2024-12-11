@@ -4,7 +4,7 @@
 .section .text.makerom, "ax"
 .word 0x80371240
 .word 0x0000000f
-.word 0x80000400
+.word entrypoint
 .word 0x1449
 .word 0,0,0,0
 .ascii "THE LEGEND OF ZELDA"
