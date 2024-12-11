@@ -46,3 +46,11 @@ mm:
 clean:
 	rm -rf $(LIBS_DIR_OOT)/build
 	rm -rf $(LIBS_DIR_MM)/build
+
+.PHONY: run-oot
+run-oot:
+	"$(N64_EMULATOR)" $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).z64
+
+.PHONY: run-mm
+run-mm:
+	"$(N64_EMULATOR)" $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).z64
