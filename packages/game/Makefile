@@ -8,9 +8,10 @@ MM_VERSION 	:= n64-us
 
 ROMS_DIR        := ../../roms
 
-LIBS_DIR 		:= libs
-LIBS_DIR_OOT 	:= $(LIBS_DIR)/oot
-LIBS_DIR_MM 	:= $(LIBS_DIR)/mm
+LIBS_DIR 			:= libs
+LIBS_DIR_OOT 		:= $(LIBS_DIR)/oot
+LIBS_DIR_MM 		:= $(LIBS_DIR)/mm
+LIBS_DIR_LOADER 	:= $(LIBS_DIR)/loader
 
 MAKEARGS_OOT := COMPARE=0 NON_MATCHING=1 AVOID_UB=1 VERSION=$(OOT_VERSION) REGION=$(OOT_REGION)
 MAKEARGS_MM  := COMPARE=0 NON_MATCHING=1 AVOID_UB=1 VERSION=$(MM_VERSION)
@@ -35,17 +36,22 @@ setup-mm:
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) disasm -j
 
 .PHONY: oot
-oot:
+oot: loader
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT) -j
 
 .PHONY: mm
 mm:
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) -j
 
+.PHONY: loader
+loader:
+	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_LOADER) -j
+
 .PHONY: clean
 clean:
 	rm -rf $(LIBS_DIR_OOT)/build
 	rm -rf $(LIBS_DIR_MM)/build
+	rm -rf $(LIBS_DIR_LOADER)/build
 
 .PHONY: run-oot
 run-oot:
