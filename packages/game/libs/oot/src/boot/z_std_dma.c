@@ -640,20 +640,6 @@ void DmaMgr_Init(void) {
     }
 #endif
 
-    // Ensure that the boot segment always follows after the makerom segment.
-    if ((uintptr_t)_bootSegmentRomStart != gDmaDataTable[0].file.vromEnd) {
-        PRINTF("_bootSegmentRomStart(%08x) != dma_rom_ad[0].rom_b(%08x)\n", _bootSegmentRomStart,
-               gDmaDataTable[0].file.vromEnd);
-        //! @bug The main code file where fault.c resides is not yet loaded
-#if OOT_VERSION < NTSC_1_1
-        Fault_AddHungupAndCrash("../z_std_dma.c", 837);
-#elif OOT_VERSION < GC_JP
-        Fault_AddHungupAndCrash("../z_std_dma.c", 840);
-#else
-        Fault_AddHungupAndCrash("../z_std_dma.c", 1055);
-#endif
-    }
-
     // Start the DMA manager
     osCreateMesgQueue(&sDmaMgrMsgQueue, sDmaMgrMsgBuf, ARRAY_COUNT(sDmaMgrMsgBuf));
     StackCheck_Init(&sDmaMgrStackInfo, sDmaMgrStack, STACK_TOP(sDmaMgrStack), 0, 0x100, "dmamgr");
