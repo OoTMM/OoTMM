@@ -6,9 +6,7 @@
 
 beginseg
     name "makerom"
-    include "$(BUILD_DIR)/src/makerom/rom_header.o"
-    include "$(BUILD_DIR)/src/makerom/ipl3.o"
-    include "$(BUILD_DIR)/src/makerom/entry.o"
+    include "../loader/build/loader.o"
 endseg
 
 beginseg
