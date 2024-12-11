@@ -9,10 +9,10 @@ StackEntry sBootStackInfo;
 OSThread sIdleThread;
 STACK(sIdleStack, 0x400);
 StackEntry sIdleStackInfo;
-STACK(sBootStack, 0x400);
+STACK(sBootThreadStack, 0x400);
 
 void bootproc(void) {
-    StackCheck_Init(&sBootStackInfo, sBootStack, STACK_TOP(sBootStack), 0, -1, "boot");
+    StackCheck_Init(&sBootStackInfo, sBootThreadStack, STACK_TOP(sBootThreadStack), 0, -1, "boot");
     osMemSize = osGetMemSize();
     CIC6105_Init();
     osInitialize();
