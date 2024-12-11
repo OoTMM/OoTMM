@@ -1,7 +1,7 @@
 #ifndef PRERENDER_H
 #define PRERENDER_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 
 typedef struct ListAlloc {
     /* 0x00 */ struct ListAlloc* prev;

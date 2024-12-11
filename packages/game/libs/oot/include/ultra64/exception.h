@@ -28,7 +28,7 @@
 
 #ifdef _LANGUAGE_C
 
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 typedef u32 OSIntMask;
 typedef u32 OSHWIntr;

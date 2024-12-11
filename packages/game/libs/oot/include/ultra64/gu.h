@@ -1,7 +1,7 @@
 #ifndef ULTRA64_GU_H
 #define ULTRA64_GU_H
 
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 #define GU_PI 3.1415926
 

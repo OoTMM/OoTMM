@@ -1,5 +1,5 @@
 MAKE := make
-MAKEARGS := -j
+MAKEARGS ?= -j
 
 OOT_VERSION := ntsc-1.0
 OOT_REGION 	:= US
@@ -25,27 +25,27 @@ setup: setup-oot setup-mm
 .PHONY: setup-oot
 setup-oot:
 	ln -sf $(realpath $(ROMS_DIR)/oot.z64) $(LIBS_DIR_OOT)/baseroms/$(OOT_VERSION)/baserom.z64
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT) setup -j
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT) setup
 
 .PHONY: setup-mm
 setup-mm:
 	ln -sf $(realpath $(ROMS_DIR)/mm.z64) $(LIBS_DIR_MM)/baseroms/$(MM_VERSION)/baserom.z64
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) venv -j
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) setup -j
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) assets -j
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) disasm -j
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) venv
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) setup
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) assets
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) disasm
 
 .PHONY: oot
 oot: loader
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT) -j
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT)
 
 .PHONY: mm
 mm: loader
-	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) -j
+	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM)
 
 .PHONY: loader
 loader:
-	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_LOADER) -j
+	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_LOADER)
 
 .PHONY: clean
 clean:

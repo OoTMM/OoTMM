@@ -1,7 +1,7 @@
 #ifndef Z64BGCHECK_H
 #define Z64BGCHECK_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 #include "z64math.h"
 
 struct PlayState;

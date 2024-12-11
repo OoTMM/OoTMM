@@ -2,7 +2,7 @@
 #define ULTRA64_R4300_H
 
 #ifdef _LANGUAGE_C
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 #define U32(x) ((u32)x)
 #define C_REG(x) (x)
 #else

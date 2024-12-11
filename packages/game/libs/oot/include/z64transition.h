@@ -1,7 +1,7 @@
 #ifndef Z64TRANSITION_H
 #define Z64TRANSITION_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 #include "ultra64/gbi.h" // for Gfx
 #include "z64transition_instances.h"
 

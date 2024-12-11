@@ -22,7 +22,7 @@
 
 #ifdef _LANGUAGE_C
 
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 typedef s32 OSPri;
 typedef s32 OSId;

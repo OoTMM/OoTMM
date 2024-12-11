@@ -2,7 +2,7 @@
 #define Z64GAME_H
 // This file is named "game" after game.c for now, this may change later with the system name
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 #include "padmgr.h"
 #include "tha.h"
 
