@@ -54,13 +54,7 @@ void Main_InitScreen(void) {
 }
 
 void Main_InitMemory(void) {
-    void* memStart = (void*)BOOT_ADDRESS_ULTRA;
     void* memEnd = OS_PHYSICAL_TO_K0(osMemSize);
-
-    Main_ClearMemory(memStart, SEGMENT_START(framebuffer_lo));
-
-    // Clear the rest of the buffer that was not initialized by Main_InitScreen
-    Main_ClearMemory(&gLoBuffer.skyboxBuffer, SEGMENT_END(framebuffer_lo));
 
     // Clear all the buffers after the `code` segment, up to the end of the available RAM space
     Main_ClearMemory(SEGMENT_END(code), memEnd);
@@ -79,8 +73,8 @@ void Main_Init(void) {
 
     DmaMgr_RequestAsync(&dmaReq, SEGMENT_START(code), SEGMENT_ROM_START(code), SEGMENT_ROM_SIZE_ALT(code), 0, &mq,
                         NULL);
-    Main_InitScreen();
     Main_InitMemory();
+    Main_InitScreen();
     osRecvMesg(&mq, NULL, OS_MESG_BLOCK);
 
     gDmaMgrDmaBuffSize = prevSize;

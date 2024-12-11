@@ -40,7 +40,7 @@ oot: loader
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT) -j
 
 .PHONY: mm
-mm:
+mm: loader
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) -j
 
 .PHONY: loader

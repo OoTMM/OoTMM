@@ -1,13 +1,12 @@
 .set noreorder
 
-#define BOOT_ADDR       bootproc
 #define BOOT_STACK_SIZE 0x400
 
 .balign 16
 
 .section .text.entry, "ax"
-.global _LoaderEntry
-_LoaderEntry:
+.global entrypoint
+entrypoint:
     /* Clear boot BSS */
     la      $t0, _bootSegmentBssStart
     la      $t1, _bootSegmentBssSize
@@ -20,10 +19,10 @@ _LoaderEntry:
      addi   $t0, $t0, 8
     
     /* Prepare for execution */
-    lui     $t2, %hi(BOOT_ADDR)
+    lui     $t2, %hi(bootproc)
     lui     $sp, %hi(sBootThreadStack + BOOT_STACK_SIZE)
-    addiu   $t2, %lo(BOOT_ADDR)
+    addiu   $t2, %lo(bootproc)
     jr      $t2
      addiu  $sp, %lo(sBootThreadStack + BOOT_STACK_SIZE)
 
-.fill 0x60 - (. - _LoaderEntry)
+.fill 0x60 - (. - entrypoint)

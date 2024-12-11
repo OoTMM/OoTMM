@@ -47,7 +47,6 @@ s32 gScreenHeight = SCREEN_HEIGHT;
 size_t gSystemHeapSize = 0;
 
 void Main(void* arg) {
-    uintptr_t fb;
     uintptr_t sysHeap;
     s32 exit;
     s16* msg;
@@ -61,8 +60,7 @@ void Main(void* arg) {
     Check_ExpansionPak();
 
     sysHeap = (uintptr_t)SEGMENT_START(system_heap);
-    fb = FRAMEBUFFERS_START_ADDR;
-    gSystemHeapSize = fb - sysHeap;
+    gSystemHeapSize = (uintptr_t)(OS_PHYSICAL_TO_K0(osMemSize)) - sysHeap;
     SystemHeap_Init((void*)sysHeap, gSystemHeapSize);
 
     Regs_Init();
