@@ -68,7 +68,7 @@
 
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 /* Structure for debug port */
 typedef struct rdbPacket {

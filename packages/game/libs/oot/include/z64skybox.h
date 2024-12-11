@@ -1,7 +1,7 @@
 #ifndef Z64_SKYBOX_H
 #define Z64_SKYBOX_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 #include "ultra64/gbi.h"
 
 #include "z64math.h"

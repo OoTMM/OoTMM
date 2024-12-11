@@ -95,6 +95,17 @@ typedef VecSphGeo VecSph;
 // Pitch is 0 along the xz-plane (horizon)
 typedef VecSphGeo VecGeo;
 
+typedef float MtxF_t[4][4];
+typedef union {
+    MtxF_t mf;
+    struct {
+        float xx, yx, zx, wx,
+              xy, yy, zy, wy,
+              xz, yz, zz, wz,
+              xw, yw, zw, ww;
+    };
+} MtxF; // size = 0x40
+
 #define LERP(x, y, scale) (((y) - (x)) * (scale) + (x))
 #define LERP32(x, y, scale) ((s32)(((y) - (x)) * (scale)) + (x))
 #define LERP16(x, y, scale) ((s16)(((y) - (x)) * (scale)) + (x))

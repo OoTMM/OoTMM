@@ -10,7 +10,7 @@
 #include "libc/stdlib.h"
 #include "libc/string.h"
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 #include "unk.h"
 
 #include "ultra64/libc.h"

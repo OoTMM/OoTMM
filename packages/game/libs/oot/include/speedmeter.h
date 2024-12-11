@@ -1,7 +1,7 @@
 #ifndef SPEEDMETER_H
 #define SPEEDMETER_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 
 struct GraphicsContext;
 struct GameState;

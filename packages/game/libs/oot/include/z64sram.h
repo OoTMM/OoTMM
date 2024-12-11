@@ -1,7 +1,7 @@
 #ifndef Z64SRAM_H
 #define Z64SRAM_H
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 
 typedef struct SramContext {
     /* 0x00 */ u8* readBuff;
