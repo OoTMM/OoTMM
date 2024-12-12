@@ -20,15 +20,19 @@ OBJ := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRC:%=%.o))
 
 LOADER 	:= $(BUILD_DIR)/loader.o
 MAKEROM := $(BUILD_DIR)/makerom.o
+ENTRY 	:= $(BUILD_DIR)/entry.o
 
 .PHONY: all
-all: $(LOADER) $(MAKEROM)
+all: $(LOADER) $(MAKEROM) $(ENTRY)
 
 $(LOADER): $(OBJ)
 	$(LD) -r -o $@ $(OBJ)
 
-$(MAKEROM): makerom.S makerom.ld
-	$(CC) $(CFLAGS) -c $< -o $@ -T makerom.ld
+$(MAKEROM): makerom.S raw.ld
+	$(CC) $(CFLAGS) -c $< -o $@ -T raw.ld
+
+$(ENTRY): entry.S raw.ld
+	$(CC) $(CFLAGS) -c $< -o $@ -T raw.ld
 
 $(OBJ_DIR)/%.s.o: $(SRC_DIR)/%.s
 	@mkdir -p $(@D)
