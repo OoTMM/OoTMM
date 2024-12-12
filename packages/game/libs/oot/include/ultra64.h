@@ -30,7 +30,7 @@
 #include "ultra64/pfs.h"
 #include "ultra64/motor.h"
 #include "PR/R4300.h"
-#include "ultra64/ucode.h"
+#include "PR/ucode.h"
 
 union uObjBg;
 
