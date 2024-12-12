@@ -2,7 +2,7 @@
 #define Z64_SKYBOX_H
 
 #include "PR/ultratypes.h"
-#include "ultra64/gbi.h"
+#include "PR/gbi.h"
 
 #include "z64math.h"
 #include "z64dma.h" // for RomFile
