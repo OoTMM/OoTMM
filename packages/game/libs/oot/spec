@@ -3,10 +3,15 @@
  */
 
 #include "include/versions.h"
-    
+
+beginseg
+    name "makerom"
+    include "../loader/build/makerom.o"
+endseg
+
 beginseg
     name "boot"
-    address 0x7ffff400
+    address 0x80000400
     include "../loader/build/loader.o"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
