@@ -1,4 +1,4 @@
-#include "string.h"
+#include <string.h>
 
 char* strchr(const char* str, int c) {
     char ch = c;

@@ -9,6 +9,7 @@ endseg
 beginseg
     name "boot"
     address 0x80000400
+    include "../loader/build/entry.o"
     include "../loader/build/loader.o"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
@@ -125,7 +126,6 @@ beginseg
     include "$(BUILD_DIR)/src/libultra/io/epidma.o"
     include "$(BUILD_DIR)/src/libultra/voice/voicecontread2.o"
     include "$(BUILD_DIR)/src/libultra/voice/voicecrc.o"
-    include "$(BUILD_DIR)/src/libultra/libc/string.o"
     include "$(BUILD_DIR)/src/libultra/os/createmesgqueue.o"
     include "$(BUILD_DIR)/asm/boot/invalicache.text.o"
     include "$(BUILD_DIR)/asm/boot/invaldcache.text.o"
