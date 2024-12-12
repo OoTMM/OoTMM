@@ -9,7 +9,7 @@ CFLAGS      = 	-mips3 -G 0 -nostdinc -march=vr4300 -mfix4300 -mabi=32 \
 
 CPP_DEFINES := -DOOT_VERSION=NTSC_1_0 -DOOT_REGION=REGION_US -DPLATFORM_N64=1 -DAVOID_UB=1 -DNON_MATCHING=1
 OPTFLAGS   	:= -O2
-INC         := -I.. -Iinclude
+INC         := -I../../include -I../../include/libc -I.. -Iinclude
 
 SRC_DIR 	:= src
 BUILD_DIR 	:= build
