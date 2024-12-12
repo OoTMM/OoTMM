@@ -53,6 +53,11 @@ clean:
 	rm -rf $(LIBS_DIR_MM)/build
 	rm -rf $(LIBS_DIR_LOADER)/build
 
+.PHONY: distclean
+distclean: clean
+	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_OOT) distclean
+	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_MM) distclean
+
 .PHONY: run-oot
 run-oot:
 	"$(N64_EMULATOR)" $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).z64
