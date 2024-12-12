@@ -394,7 +394,7 @@ void Room_DrawImageSingle(PlayState* play, Room* room, u32 flags) {
         }
 
         if (drawBackground) {
-            gSPLoadUcodeL(POLY_OPA_DISP++, gspS2DEX2d_fifo);
+            gSPLoadUcodeL(POLY_OPA_DISP++, gspS2DEX2_fifo);
 
             gfx = POLY_OPA_DISP;
 
@@ -506,7 +506,7 @@ void Room_DrawImageMulti(PlayState* play, Room* room, u32 flags) {
         }
 
         if (drawBackground) {
-            gSPLoadUcodeL(POLY_OPA_DISP++, gspS2DEX2d_fifo);
+            gSPLoadUcodeL(POLY_OPA_DISP++, gspS2DEX2_fifo);
 
             gfx = POLY_OPA_DISP;
 

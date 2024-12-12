@@ -679,7 +679,7 @@ void KaleidoScope_DrawWorldMap(PlayState* play, GraphicsContext* gfxCtx) {
     } else if (HREG(15) == 1) {
         Gfx* gfx = POLY_OPA_DISP;
 
-        gSPLoadUcodeL(gfx++, gspS2DEX2d_fifo);
+        gSPLoadUcodeL(gfx++, gspS2DEX2_fifo);
 
         Room_DrawBackground2D(&gfx, gWorldMapImageTex, gWorldMapImageTLUT, WORLD_MAP_IMAGE_WIDTH,
                               WORLD_MAP_IMAGE_HEIGHT, G_IM_FMT_CI, G_IM_SIZ_8b, G_TT_RGBA16, 256, HREG(13) / 100.0f,
