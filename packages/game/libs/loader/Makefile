@@ -14,18 +14,21 @@ INC         := -I..
 SRC_DIR 	:= src
 BUILD_DIR 	:= build
 OBJ_DIR 	:= $(BUILD_DIR)/obj
-LDSCRIPT 	:= loader.ld
 
 SRC := $(shell find $(SRC_DIR) -name "*.c" -o -name "*.s" -o -name "*.S")
 OBJ := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRC:%=%.o))
 
-TARGET := $(BUILD_DIR)/loader.o
+LOADER 	:= $(BUILD_DIR)/loader.o
+MAKEROM := $(BUILD_DIR)/makerom.o
 
 .PHONY: all
-all: $(TARGET)
+all: $(LOADER) $(MAKEROM)
 
-$(TARGET): $(OBJ) $(LDSCRIPT)
-	$(LD) -r -o $@ $(OBJ) -T $(LDSCRIPT)
+$(LOADER): $(OBJ)
+	$(LD) -r -o $@ $(OBJ)
+
+$(MAKEROM): makerom.S makerom.ld
+	$(CC) $(CFLAGS) -c $< -o $@ -T makerom.ld
 
 $(OBJ_DIR)/%.s.o: $(SRC_DIR)/%.s
 	@mkdir -p $(@D)

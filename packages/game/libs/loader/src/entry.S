@@ -4,7 +4,7 @@
 
 .balign 16
 
-.section .text.entry, "ax"
+.section .text
 .global entrypoint
 entrypoint:
     /* Clear boot BSS */
@@ -25,4 +25,3 @@ entrypoint:
     jr      $t2
      addiu  $sp, %lo(sBootThreadStack + BOOT_STACK_SIZE)
 
-.fill 0x60 - (. - entrypoint)
