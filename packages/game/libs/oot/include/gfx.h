@@ -2,7 +2,7 @@
 #define GFX_H
 
 #include "ultra64.h"
-#include "ultra64/gbi.h"
+#include "PR/gbi.h"
 #include "sched.h"
 #include "thga.h"
 #include "versions.h"

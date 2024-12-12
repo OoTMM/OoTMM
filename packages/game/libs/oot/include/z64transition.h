@@ -2,7 +2,7 @@
 #define Z64TRANSITION_H
 
 #include "PR/ultratypes.h"
-#include "ultra64/gbi.h" // for Gfx
+#include "PR/gbi.h" // for Gfx
 #include "z64transition_instances.h"
 
 #define TRANS_TRIGGER_OFF 0 // transition is not active
