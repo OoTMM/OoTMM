@@ -163,7 +163,6 @@ beginseg
     include "$(BUILD_DIR)/src/libultra/os/setwatchlo.o"
 #endif
     include "$(BUILD_DIR)/src/boot/build.o"
-    include "$(BUILD_DIR)/data/rsp_boot.text.o"
     include "$(BUILD_DIR)/data/cic6105.text.o"
 #ifdef COMPILER_GCC
     include "$(BUILD_DIR)/src/libc/memset.o"
@@ -943,8 +942,6 @@ beginseg
     include "$(BUILD_DIR)/assets/audio/sequence_font_table.o"
     include "$(BUILD_DIR)/src/audio/tables/sequence_table.o"
     include "$(BUILD_DIR)/src/audio/tables/samplebank_table.o"
-    include "$(BUILD_DIR)/data/rsp.text.o"
-    include "$(BUILD_DIR)/data/rsp.rodata.o"
 endseg
 
 beginseg
