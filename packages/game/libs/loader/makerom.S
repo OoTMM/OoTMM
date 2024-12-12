@@ -1,7 +1,8 @@
 .set noat
 .set noreorder
 
-.section .text.makerom, "ax"
+.section .text, "ax"
+
 .word 0x80371240
 .word 0x0000000f
 .word entrypoint
@@ -12,3 +13,5 @@
 .byte 'C'
 .ascii "ZLE"
 .byte 0
+
+.incbin "oot/extracted/ntsc-1.0/incbin/ipl3"
