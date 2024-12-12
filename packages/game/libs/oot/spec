@@ -12,6 +12,7 @@ endseg
 beginseg
     name "boot"
     address 0x80000400
+    include "../loader/build/entry.o"
     include "../loader/build/loader.o"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
@@ -84,9 +85,6 @@ beginseg
 #endif
     include "$(BUILD_DIR)/src/libultra/os/unmaptlball.o"
     include "$(BUILD_DIR)/src/libultra/io/epidma.o"
-#if DEBUG_FEATURES || defined(COMPILER_GCC)
-    include "$(BUILD_DIR)/src/libultra/libc/string.o"
-#endif
     include "$(BUILD_DIR)/src/libultra/os/invalicache.o"
     include "$(BUILD_DIR)/src/libultra/os/createmesgqueue.o"
     include "$(BUILD_DIR)/src/libultra/os/invaldcache.o"
