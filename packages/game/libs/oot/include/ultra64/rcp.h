@@ -1,8 +1,8 @@
 #ifndef ULTRA64_RCP_H
 #define ULTRA64_RCP_H
 
-#include "R4300.h"
-#include <PR/ultratypes.h>
+#include "PR/R4300.h"
+#include "PR/ultratypes.h"
 
 /**
  * RCP memory map overview:
