@@ -24,8 +24,8 @@ extern u64 gspF3DZEX2_NoN_PosLight_fifoDataStart[];
 extern u64 gspF3DZEX2_NoN_PosLight_fifoDataEnd[];
 
 /* OoT stuff */
-extern u64 gspS2DEX2d_fifoTextStart[], gspS2DEX2d_fifoTextEnd[];
-extern u64 gspS2DEX2d_fifoDataStart[], gspS2DEX2d_fifoDataEnd[];
+extern u64 gspS2DEX2_fifoTextStart[], gspS2DEX2_fifoTextEnd[];
+extern u64 gspS2DEX2_fifoDataStart[], gspS2DEX2_fifoDataEnd[];
 extern u64 njpgdspMainTextStart[], njpgdspMainTextEnd[];
 extern u64 njpgdspMainDataStart[], njpgdspMainDataEnd[];
 extern u64 cic6105TextStart[], cic6105TextEnd[];
