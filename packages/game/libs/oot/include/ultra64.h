@@ -26,7 +26,7 @@
 #include "ultra64/vi.h"
 #include "ultra64/pi.h"
 #include "ultra64/controller.h"
-#include "ultra64/mbi.h"
+#include "PR/mbi.h"
 #include "ultra64/pfs.h"
 #include "ultra64/motor.h"
 #include "ultra64/R4300.h"
