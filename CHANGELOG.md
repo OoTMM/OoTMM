@@ -29,6 +29,10 @@ All notable changes to this project will be documented in this file.
 - Remoevd Playthrough hint in Blitz pre-completed preset.
 - Accessing WFT Pre-Boss room can now be done with Din's Fire in logic.
 
+### Changed
+
+- Grass and Pot CAMC is now its own setting and separated from the rest.
+
 ### Fixed
 
 - Fix talking to Skull Kid OoT sometimes crashing.
