@@ -1,9 +1,9 @@
 "Stone Tower Temple":
   dungeon: ST
   exits:
-    "Stone Tower Temple Entrance": "can_reset_time_dungeon"
-    "Stone Tower Front of Temple": "true"
     "WARP_SONGS": "true"
+    "Stone Tower Front of Temple": "can_reset_time"
+    "Stone Tower Temple Entrance": "can_reset_time_dungeon"
 "Stone Tower Temple Entrance":
   dungeon: ST
   events:

@@ -14,7 +14,7 @@ endforeach()
 
 project(OoTMM C ASM)
 
-set(FLAGS "-EB -static -fomit-frame-pointer -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough -Wl,--build-id=none")
+set(FLAGS "-EB -static -fomit-frame-pointer -ffreestanding -nostdlib -nostdinc -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough -Wl,--build-id=none")
 set(CMAKE_C_FLAGS "${FLAGS} -D_LANGUAGE_C=1")
 set(CMAKE_ASM_FLAGS "${FLAGS}")
 

@@ -2,29 +2,43 @@ import { ENTRANCES } from '@ootmm/data';
 
 import { Random, sample } from '../random';
 import { Settings } from '../settings';
-import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
+import { DUNGEONS_REGIONS, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
+import { Expr, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { optimizeStartingAndPool, optimizeWorld } from './optimizer';
 import { Region } from './regions';
+import { AGE_ADULT, AGE_CHILD } from './constants';
+import { BOSS_METADATA_BY_ENTRANCE } from './boss';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;
 
 type PlaceOpts = {
   ownGame?: boolean;
+  alias?: boolean;
 };
 
-type EntrancePools = {[k: string]: { pool: string[], opts: PlaceOpts }};
-type PoolEntrances = {[k: string]: { src: Set<Entrance>; dst: Set<Entrance>; }};
+type EntrancePoolDescr = {
+  src: string[];
+  dst: string[];
+  opts: PlaceOpts;
+};
 
-type EntranceOverrides = {[k in Entrance]?: Entrance | null};
+type EntrancePool = {
+  src: Set<Entrance>;
+  dst: Set<Entrance>;
+  opts: PlaceOpts;
+};
+
+type EntrancePoolDescrs = {[k: string]: EntrancePoolDescr};
+type EntrancePools = {[k: string]: EntrancePool};
+
+type EntranceOverrides = {[k in Entrance]?: Entrance};
 
 const POLARITY_ANY_OVERWORLD = new Set<string>([
   'region',
@@ -102,6 +116,7 @@ class WorldShuffler {
   private readonly allEntrances: Entrance[];
   private usedEntrancesSrc: Set<Entrance>;
   private usedEntrancesDst: Set<Entrance>;
+  private sotExpr: Expr;
 
   constructor(
     private random: Random,
@@ -118,6 +133,7 @@ class WorldShuffler {
     this.allEntrances = this.computeAllEntrances();
     this.usedEntrancesSrc = new Set();
     this.usedEntrancesDst = new Set();
+    this.sotExpr = this.world.exprParsers.mm.parse('can_reset_time');
   }
 
   private entrancePolarity(entrance: Entrance): EntrancePolarity {
@@ -157,8 +173,7 @@ class WorldShuffler {
   }
 
   private songOfTime(e: Expr): Expr {
-    const subcond = this.world.exprParsers.mm.parse('can_reset_time');
-    return exprAnd([e, subcond]);
+    return exprAnd([e, this.sotExpr]);
   }
 
   private computeAllEntrances() {
@@ -185,21 +200,31 @@ class WorldShuffler {
     return entrances;
   }
 
-  private placeSingle(world: World, original: Entrance, replacement: Entrance) {
+  private placeSingleExpr(world: World, original: Entrance, replacement: Entrance) {
     const entranceOriginal = ENTRANCES[original];
     const entranceReplacement = ENTRANCES[replacement];
+    const areaFrom = world.areas[entranceOriginal.from];
 
     /* Change the world */
     let expr = this.getExpr(original);
     if (entranceReplacement.game === 'mm') {
-      if (!((entranceReplacement.flags as string[]).includes('no-global'))) {
-        world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
+      if (!(entranceReplacement.flags.includes('no-global'))) {
+        areaFrom.exits['MM GLOBAL'] = expr;
+      } else {
+        areaFrom.exits['MM ACCESS'] = expr;
       }
-      if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
+      if (!(entranceReplacement.flags.includes('no-sot'))) {
         expr = this.songOfTime(expr);
       }
     }
-    world.areas[entranceOriginal.from].exits[entranceReplacement.to] = expr;
+    if (areaFrom.exits[entranceReplacement.to]) {
+      expr = exprOr([expr, areaFrom.exits[entranceReplacement.to]]);
+    }
+    areaFrom.exits[entranceReplacement.to] = expr;
+  }
+
+  private placeSingle(world: World, original: Entrance, replacement: Entrance) {
+    this.placeSingleExpr(world, original, replacement);
 
     /* Mark the override */
     world.entranceOverrides.set(original, replacement);
@@ -209,47 +234,150 @@ class WorldShuffler {
     if (DUNGEON_ENTRANCES.includes(original) && DUNGEON_ENTRANCES.includes(replacement)) {
       world.dungeonsEntrances.set(replacement, { type: 'replace', entrance: original });
     }
+
+    /* Boss needs special handling */
+    const bossSrc = BOSS_METADATA_BY_ENTRANCE.get(original);
+    const bossDst = BOSS_METADATA_BY_ENTRANCE.get(replacement);
+    if (bossSrc && bossDst) {
+      /* Set the boss ID */
+      const bossIndexSrc = BOSS_INDEX_BY_DUNGEON[bossSrc.dungeon];
+      const bossIndexDst = BOSS_INDEX_BY_DUNGEON[bossDst.dungeon];
+      world.bossIds[bossIndexDst] = bossIndexSrc;
+
+      /* Set the boss event */
+      if (this.settings.regionState === 'dungeonBeaten') {
+        const eventClear = bossSrc.eventClear;
+        if (eventClear) {
+          world.areas['OOT SPAWN'].events[eventClear] = exprEvent(bossDst.event);
+        }
+      }
+
+      /* Collect areas */
+      const areas = this.world.dungeonsBossAreas[bossDst.dungeon];
+      for (const a of areas) {
+        /* Patch dungeon and region */
+        world.areas[a].dungeon = bossSrc.dungeon;
+        world.areas[a].region = DUNGEONS_REGIONS[bossSrc.dungeon];
+
+        /* Patch locations */
+        for (const loc of Object.keys(world.areas[a].locations)) {
+          world.dungeons[bossDst.dungeon].delete(loc);
+          world.dungeons[bossSrc.dungeon].add(loc);
+          world.regions[loc] = DUNGEONS_REGIONS[bossSrc.dungeon];
+        }
+      }
+    }
   }
 
-  private changedWorld(overrides: EntranceOverrides, assumed?: Iterable<Entrance>): World {
-    const newWorld = cloneWorld(this.world);
+  private validateAgeTemple(world: World) {
+    const newWorld = cloneWorld(world);
+    const a = newWorld.areas['OOT SPAWN'];
+    if (this.settings.startingAge === 'child') {
+      a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
+      a.exits['OOT SPAWN CHILD'] = exprFalse();
+    } else {
+      a.exits['OOT SPAWN ADULT'] = exprFalse();
+      a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
+    }
 
-    /* Create the assumed area */
-    if (assumed) {
-      const areaAssumed: WorldArea = {
-        game: 'mm',
-        region: 'NONE',
-        exits: {},
-        locations: {},
-        events: {},
-        boss: false,
-        ageChange: false,
-        gossip: {},
-        dungeon: null,
-        stay: null,
-        time: 'flow',
-      };
-      newWorld.areas['ASSUMED'] = areaAssumed;
-      newWorld.areas['OOT SPAWN'].exits['ASSUMED'] = exprTrue();
+    const worlds = [...this.worlds];
+    worlds[this.worldId] = newWorld;
+    const agePathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
+    const pathfinderState = agePathfinder.run(null, { recursive: true, singleWorld: this.worldId });
+    const target = 'OOT Temple of Time';
+    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
+      return false;
+    }
+    return true;
+  }
 
-      for (const a of assumed) {
-        const oldE = ENTRANCES[a];
-        newWorld.areas['ASSUMED'].exits[oldE.to] = exprTrue();
+  private changeWorldAssumePools(world: World, pools: EntrancePools) {
+    const assumedSets: Set<Entrance>[] = [];
+
+    for (const pool of Object.values(pools)) {
+      const cardinality = pool.src.size * pool.dst.size;
+      if (cardinality > 5000 && pool.src.size > 50) {
+        assumedSets.push(pool.dst);
+      } else {
+        for (const oldName of pool.src) {
+          for (const newName of pool.dst) {
+            if (this.isAssignableConstraints(oldName, newName, !!pool.opts.ownGame)) {
+              this.placeSingleExpr(world, oldName, newName);
+            }
+          }
+        }
       }
     }
 
-    /* Remove the entrances */
+    if (assumedSets) {
+      const assumedExits: {[k: string]: Expr} = {};
+      for (const s of assumedSets) {
+        for (const e of s) {
+          const ee = ENTRANCES[e];
+          assumedExits[ee.to] = exprTrue();
+        }
+      }
+
+      const assumedArea: WorldArea = {
+        game: 'mm',
+        region: 'NONE',
+        exits: assumedExits,
+        events: {},
+        locations: {},
+        gossip: {},
+        dungeon: null,
+        boss: false,
+        stay: null,
+        ageChange: false,
+        time: 'still',
+      };
+
+      world.areas['ASSUMED'] = assumedArea;
+      world.areas['OOT SPAWN'].exits['ASSUMED'] = exprTrue();
+    }
+
+    if (this.settings.regionState === 'dungeonBeaten') {
+      const bossPool = pools.BOSS;
+      if (bossPool) {
+        for (const oldName of bossPool.src) {
+          /* Assume we can get the event */
+          const meta = BOSS_METADATA_BY_ENTRANCE.get(oldName)!;
+          const eventClear = meta.eventClear;
+          if (eventClear) {
+            world.areas['OOT SPAWN'].events[eventClear] = exprEvent(meta.event);
+          }
+        }
+      }
+    }
+  }
+
+  private changedWorld(overrides: EntranceOverrides, pools?: EntrancePools): World {
+    const newWorld = cloneWorld(this.world);
+
+    /* Delete the overriden entrances */
     for (const oldName of Object.keys(overrides) as Entrance[]) {
       const oldE = ENTRANCES[oldName];
       delete newWorld.areas[oldE.from].exits[oldE.to];
     }
 
-    /* Place the new entrances */
-    for (const oldName of Object.keys(overrides) as Entrance[]) {
-      const newName = overrides[oldName];
-      if (newName) {
-        this.placeSingle(newWorld, oldName, newName);
+    /* Delete all pool entrances */
+    if (pools) {
+      for (const pool of Object.values(pools)) {
+        for (const oldName of pool.src) {
+          const oldE = ENTRANCES[oldName];
+          delete newWorld.areas[oldE.from].exits[oldE.to];
+        }
       }
+    }
+
+    /* Apply overrides */
+    for (const [oldName, newName] of Object.entries(overrides)) {
+      this.placeSingle(newWorld, oldName as Entrance, newName as Entrance);
+    }
+
+    /* Assume pools */
+    if (pools) {
+      this.changeWorldAssumePools(newWorld, pools);
     }
 
     /* Handle dungeons that aren't shuffled */
@@ -262,13 +390,13 @@ class WorldShuffler {
     return newWorld;
   }
 
-  private isValidShuffle(overrides: EntranceOverrides, assumed: Iterable<Entrance>) {
+  private isValidShuffle(overrides: EntranceOverrides, pools: EntrancePools) {
     if (this.settings.logic === 'none') {
       return true;
     }
 
     /* Build the new world list */
-    const newWorld = this.changedWorld(overrides, assumed);
+    const newWorld = this.changedWorld(overrides, pools);
     const worlds = [...this.worlds];
     worlds[this.worldId] = newWorld;
 
@@ -281,6 +409,11 @@ class WorldShuffler {
     }
 
     if (this.settings.logic === 'allLocations' && pathfinderState.locations.size < newWorld.locations.size) {
+      return false;
+    }
+
+    /* Check ToT access */
+    if (['ootmm', 'oot'].includes(this.settings.games) && !this.validateAgeTemple(newWorld)) {
       return false;
     }
 
@@ -309,139 +442,158 @@ class WorldShuffler {
     throw new LogicEntranceError(`Unbalanced pool: ${name}`);
   }
 
-  private placePoolsRecursive(pools: EntrancePools, entrances: PoolEntrances, overrides: EntranceOverrides, assumed: Set<Entrance>): EntranceOverrides | null {
-    if (Object.keys(entrances).length === 0) {
+  private assumedFromPools(pools: EntrancePools, ignore: Set<Entrance>): Set<Entrance> {
+    const assumed = new Set<Entrance>();
+
+    for (const pool of Object.values(pools)) {
+      for (const dst of pool.dst) {
+        if (ignore.has(dst)) {
+          ignore.delete(dst);
+          continue;
+        }
+        const e = ENTRANCES[dst];
+        if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || dst === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erNoPolarity) {
+          assumed.add(dst);
+        }
+      }
+    }
+
+    return assumed;
+  }
+
+  private isSelfLoop(src: Entrance, dst: Entrance) {
+    const dstEntrance = ENTRANCES[dst];
+    const srcEntrance = ENTRANCES[src];
+    const map = srcEntrance.fromMap;
+    if (map !== 'NONE') {
+      if (dstEntrance.toMap !== map) {
+        return false;
+      }
+
+      /* Same map, check for internal submap */
+      if (srcEntrance.fromMap !== srcEntrance.toMap) {
+        return true;
+      }
+
+      if (dstEntrance.fromMap !== dstEntrance.toMap) {
+        return true;
+      }
+
+      /* Both entrances are internal, check the submap */
+      return srcEntrance.fromSubmap === dstEntrance.toSubmap;
+    }
+
+    return false;
+  }
+
+  private isAssignableConstraints(src: Entrance, dst: Entrance, ownGame: boolean) {
+    if (ownGame && ENTRANCES[src].game !== ENTRANCES[dst].game) {
+      return false;
+    }
+
+    if (!this.entrancePolarityMatch(src, dst)) {
+      return false;
+    }
+
+    if (!this.settings.erSelfLoops && this.isSelfLoop(src, dst)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private placePoolsRecursive(pools: EntrancePools, overrides: EntranceOverrides): EntranceOverrides | null {
+    if (Object.keys(pools).length === 0) {
       return overrides;
     }
 
     /* Select a pool */
-    const poolName = sample(this.random, Object.keys(entrances));
-    const pool = entrances[poolName];
+    const poolName = sample(this.random, Object.keys(pools));
+    const pool = pools[poolName];
 
     /* Select a source */
     const src = sample(this.random, pool.src);
 
     /* Build the candidates list */
-    let dstCandidates = new Set(pool.dst);
-    if (pools[poolName].opts?.ownGame) {
-      dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
-    }
-    dstCandidates = new Set([...dstCandidates].filter(x => this.entrancePolarityMatch(src, x)));
-
-    /* Filter self-loops */
-    if (!this.settings.erSelfLoops) {
-      const srcEntrance = ENTRANCES[src];
-      const map = srcEntrance.fromMap;
-      if (map !== 'NONE') {
-        dstCandidates = new Set([...dstCandidates].filter((candidate) => {
-          const cEntrance = ENTRANCES[candidate];
-          if (cEntrance.toMap !== map) {
-            return true;
-          }
-
-          /* Same map, check for internal submap */
-          if (srcEntrance.fromMap !== srcEntrance.toMap) {
-            return false;
-          }
-
-          if (cEntrance.fromMap !== cEntrance.toMap) {
-            return false;
-          }
-
-          /* Both entrances are internal, check the submap */
-          return srcEntrance.fromSubmap !== cEntrance.toSubmap;
-        }));
-      }
-    }
+    let dstCandidates = new Set([...pool.dst].filter(x => this.isAssignableConstraints(src, x, !!pool.opts.ownGame)));
 
     /* Try to find a match */
+    let newPools: EntrancePools;
+
     while (dstCandidates.size > 0) {
       const dst = sample(this.random, dstCandidates);
       dstCandidates.delete(dst);
       const revSrc = this.reverseEntrance(src);
       const revDst = this.reverseEntrance(dst);
       const newOverrides = { ...overrides };
-      const newAssumed = new Set(assumed);
       newOverrides[src] = dst;
-      newAssumed.delete(dst);
       if (revSrc && revDst) {
         newOverrides[revDst] = revSrc;
-        newAssumed.delete(revSrc);
       }
-      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, newAssumed)) {
+
+      /* Build the new pool */
+      const newSrc = new Set(pool.src);
+      const newDst = new Set(pool.dst);
+      const newPool = { ...pool, src: newSrc, dst: newDst };
+      newPools = { ...pools, [poolName]: newPool };
+
+      newSrc.delete(src);
+      newDst.delete(dst);
+      if (revSrc && revDst) {
+        newSrc.delete(revDst);
+        newDst.delete(revSrc);
+      }
+
+      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, newPools)) {
         continue;
       }
 
       /* The match is valid */
-      const newEntrances = { ...entrances };
-      newEntrances[poolName] = { src: new Set(pool.src), dst: new Set(pool.dst) };
-      newEntrances[poolName].src.delete(src);
-      newEntrances[poolName].dst.delete(dst);
-      if (revSrc && revDst) {
-        newEntrances[poolName].src.delete(revDst);
-        newEntrances[poolName].dst.delete(revSrc);
-      }
-
-      if (newEntrances[poolName].src.size === 0) {
-        if (newEntrances[poolName].dst.size !== 0) {
+      if (newSrc.size === 0) {
+        if (newDst.size !== 0 && !pool.opts.alias) {
           this.unbalancedPool(poolName);
         }
-        delete newEntrances[poolName];
+        delete newPools[poolName];
       }
-      const finalOverrides = this.placePoolsRecursive(pools, newEntrances, newOverrides, newAssumed);
+      const finalOverrides = this.placePoolsRecursive(newPools, newOverrides);
       if (finalOverrides) {
         return finalOverrides;
+      } else {
+        this.backtrackCount++;
+        if (this.backtrackCount >= 10) {
+          throw new LogicEntranceError('Too many backtracks');
+        }
       }
     }
 
-    this.backtrackCount++;
-    if (this.backtrackCount > 100) {
-      throw new LogicEntranceError('Too many backtracks');
-    }
     return null;
   }
 
-  private placePools(pools: EntrancePools) {
+  private placePools(poolDescrs: EntrancePoolDescrs) {
     this.backtrackCount = 0;
     const overrides: EntranceOverrides = {};
-    const poolEntrances: PoolEntrances = {};
+    const pools: EntrancePools = {};
 
     /* Get entrances */
-    const poolNames = new Set(Object.keys(pools));
-    const entrancesTypes = new Set<string>();
-    let entrancesAssumed = new Set<Entrance>();
+    const poolNames = new Set(Object.keys(poolDescrs));
 
     for (const name of poolNames) {
-      const types = pools[name].pool;
-      for (const t of types) {
-        entrancesTypes.add(t);
-      }
-      const pe = this.poolEntrancesForTypes(types, true);
-      poolEntrances[name] = pe;
-
-      for (const name of pe.src) {
-        overrides[name] = null;
-      }
-
-      for (const name of pe.dst) {
-        const e = ENTRANCES[name];
-        if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || name === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erNoPolarity) {
-          entrancesAssumed.add(name);
-        }
-      }
+      const descr = poolDescrs[name];
+      const pe = this.poolEntrancesForTypes(descr.src, descr.dst, !!descr.opts.alias);
+      pools[name] = { src: pe.src, dst: pe.dst, opts: descr.opts };
     }
 
     /* Remove any empty pools */
     for (const name of poolNames) {
-      if (poolEntrances[name].src.size === 0) {
-        if (poolEntrances[name].dst.size !== 0) {
+      if (pools[name].src.size === 0) {
+        if (pools[name].dst.size !== 0 && !pools[name].opts.alias) {
           this.unbalancedPool(name);
         }
-        delete poolEntrances[name];
+        delete pools[name];
       }
     }
 
-    const finalOverrides = this.placePoolsRecursive(pools, poolEntrances, overrides, entrancesAssumed);
+    const finalOverrides = this.placePoolsRecursive(pools, overrides);
     if (!finalOverrides) {
       throw new LogicEntranceError('Unable to place pools');
     }
@@ -451,19 +603,24 @@ class WorldShuffler {
     }
   }
 
-  private entrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
+  private entrancesForTypes(aTypes: Iterable<string>) {
     const types = new Set(aTypes);
     const entrances = this.allEntrances.filter(x => types.has(ENTRANCES[x].type));
-    if (!reverse)
-      return entrances;
     const entrancesReverse = entrances.map(x => this.reverseEntranceRaw(x)).filter(x => x) as Entrance[];
     return [...entrances, ...entrancesReverse];
   }
 
-  private poolEntrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
-    const entrances = this.entrancesForTypes(aTypes, reverse);
-    const src = new Set(entrances.filter(x => !this.usedEntrancesSrc.has(x)));
-    const dst = new Set(entrances.filter(x => !this.usedEntrancesDst.has(x)));
+  private poolEntrancesForTypes(srcTypes: Iterable<string>, dstTypes: Iterable<string>, alias: boolean) {
+    let entrancesSrc = this.entrancesForTypes(srcTypes);
+    let entrancesDst = this.entrancesForTypes(dstTypes);
+
+    entrancesSrc = entrancesSrc.filter(x => !this.usedEntrancesSrc.has(x));
+    if (!alias) {
+      entrancesDst = entrancesDst.filter(x => !this.usedEntrancesDst.has(x));
+    }
+
+    const src = new Set(entrancesSrc);
+    const dst = new Set(entrancesDst);
 
     /* Fixup for game links */
     src.delete('OOT_MARKET_FROM_MASK_SHOP');
@@ -483,9 +640,28 @@ class WorldShuffler {
     }
   }
 
-  private placeWallmasters() {
+  private poolSpawns() {
     /* Compute types */
-    const types = new Set(this.poolsTypes());
+    const types = new Set(this.poolsTypesDst());
+    types.delete('boss');
+    types.add('spawn');
+    types.add('indoors');
+    types.add('one-way-song');
+    types.add('region');
+
+    let typesSrc: string[] = [];
+    switch (this.settings.erSpawns) {
+    case 'adult': typesSrc = ['spawn-adult']; break;
+    case 'child': typesSrc = ['spawn-child']; break;
+    case 'both': typesSrc = ['spawn-adult', 'spawn-child']; break;
+    }
+
+    return { src: typesSrc, dst: [...types], opts: { alias: true, ownGame: true } };
+  }
+
+  private poolWallmasters() {
+    /* Compute types */
+    const types = new Set(this.poolsTypesDst());
     types.add('dungeon');
     types.add('dungeon-minor');
     types.add('dungeon-sh');
@@ -494,53 +670,80 @@ class WorldShuffler {
       types.add('boss');
     }
 
-    /* Compute entrances */
-    const entrancesSrc = this.poolEntrancesForTypes(['wallmaster'], false).src;
-    const entrancesDst = this.poolEntrancesForTypes(types, this.settings.erNoPolarity).dst;
-
-    while (entrancesSrc.size > 0) {
-      const src = sample(this.random, entrancesSrc);
-      let dstCandidates = [...entrancesDst];
-      if (this.settings.erWallmasters === 'ownGame') {
-        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
-      }
-      const dst = sample(this.random, dstCandidates);
-      this.overrideEntrance(src, dst, false);
-      entrancesSrc.delete(src);
-      entrancesDst.delete(dst);
-    }
+    return { src: ['wallmaster'], dst: [...types], opts: { alias: true, ownGame: this.settings.erWallmasters === 'ownGame' } };
   }
 
-  private placeSpawns() {
-    /* Compute types */
-    const types = new Set(this.poolsTypes());
-    types.delete('boss');
-    types.add('spawn');
-    types.add('indoors');
-    types.add('one-way-song');
-    types.add('region');
-
-    /* Compute entrances */
-    let entrancesSrc: Set<Entrance>;
-    if(this.settings.erSpawns === 'child' || this.settings.erSpawns === 'adult') {
-      entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === `spawn-${this.settings.erSpawns}`));
-    } else if(this.settings.erSpawns === 'both') {
-      entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type.includes('spawn')));
-    }
-    const entrancesDst = new Set([...this.poolEntrancesForTypes(types, true).dst].filter(x => ENTRANCES[x].game === 'oot'));
-
-    while (entrancesSrc!.size > 0) {
-      const src = sample(this.random, entrancesSrc!);
-      const dst = sample(this.random, entrancesDst);
-      this.overrideEntrance(src, dst, false);
-      entrancesSrc!.delete(src);
-      entrancesDst.delete(dst);
-    }
+  private poolBoss() {
+    return { src: ['boss'], dst: ['boss'], opts: { ownGame: this.settings.erBoss === 'ownGame' } };
   }
 
-  private placeOneWays() {
+  private poolDungeons() {
+    const types: string[] = [];
+
+    if (this.settings.erMajorDungeons) types.push('dungeon');
+    if (this.settings.erMinorDungeons) types.push('dungeon-minor');
+    if (this.settings.erGanonCastle) types.push('dungeon-ganon');
+    if (this.settings.erGanonTower) types.push('dungeon-ganon-tower');
+    if (this.settings.erSpiderHouses) types.push('dungeon-sh');
+    if (this.settings.erPirateFortress) types.push('dungeon-pf');
+    if (this.settings.erBeneathWell) types.push('dungeon-btw');
+    if (this.settings.erIkanaCastle) types.push('dungeon-acoi');
+    if (this.settings.erSecretShrine) types.push('dungeon-ss');
+    if (this.settings.erMoon) types.push('dungeon-ctr');
+
+    return { src: types, dst: types, opts: { ownGame: this.settings.erDungeons === 'ownGame' } };
+  }
+
+  private poolRegions() {
+    const types = new Set(['region']);
+    if (this.settings.erRegionsExtra) {
+      types.add('region-extra');
+    }
+    if (this.settings.erRegionsShortcuts) {
+      types.add('region-shortcut');
+    }
+    return { src: [...types], dst: [...types], opts: { ownGame: this.settings.erRegions === 'ownGame' } };
+  }
+
+  private poolOverworld() {
+    const types = ['region', 'region-extra', 'region-shortcut', 'overworld'];
+    if (this.settings.erPiratesWorld) types.push('overworld-pf', 'dungeon-pf');
+    return { src: types, dst: types, opts: { ownGame: this.settings.erOverworld === 'ownGame' } };
+  }
+
+  private poolIndoors() {
+    const types = new Set(['indoors']);
+    if (!this.settings.erIndoorsMajor) {
+      types.delete('indoors');
+    }
+    if (this.settings.erIndoorsExtra) {
+      types.add('indoors-extra');
+    }
+    if (this.settings.erIndoorsExtra && this.settings.erPiratesWorld) {
+      types.add('indoors-pf');
+    }
+    if (this.settings.erIndoorsGameLinks) {
+      types.add('indoors-link');
+    }
+    return { src: [...types], dst: [...types], opts: { ownGame: this.settings.erIndoors === 'ownGame' } };
+  }
+
+  private poolWarps() {
+    const types = new Set(['one-way-song', 'one-way-statue']);
+
+    if (this.settings.erWarps === 'ootOnly' || this.settings.erOneWaysStatues) {
+      types.delete('one-way-statue');
+    }
+    if (this.settings.erWarps === 'mmOnly' || this.settings.erOneWaysSongs) {
+      types.delete('one-way-song');
+    }
+
+    return { src: [...types], dst: [...types], opts: { ownGame: this.settings.erWarps === 'ownGame' } };
+  }
+
+  private poolOneWaysAnywhere() {
     /* Compute types */
-    const types = new Set(this.poolsTypes());
+    const types = new Set(this.poolsTypesDst());
     types.add('dungeon');
     types.add('dungeon-minor');
     types.add('dungeon-sh');
@@ -551,305 +754,48 @@ class WorldShuffler {
 
     /* Compute entrances */
     const oneWays = this.poolOneWays();
-    const entrancesSrc = this.poolEntrancesForTypes(oneWays.pool, false).src;
-    const entrancesDst = this.poolEntrancesForTypes(types, this.settings.erNoPolarity).dst;
-
-    while (entrancesSrc.size > 0) {
-      const src = sample(this.random, entrancesSrc);
-      let dstCandidates = [...entrancesDst];
-      if (oneWays.opts.ownGame) {
-        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
-      }
-      const dst = sample(this.random, dstCandidates);
-      this.overrideEntrance(src, dst, false);
-      entrancesSrc.delete(src);
-    }
-  }
-
-  private poolDungeons() {
-    const pool: string[] = [];
-
-    if (this.settings.erMajorDungeons) pool.push('dungeon');
-    if (this.settings.erMinorDungeons) pool.push('dungeon-minor');
-    if (this.settings.erGanonCastle) pool.push('dungeon-ganon');
-    if (this.settings.erGanonTower) pool.push('dungeon-ganon-tower');
-    if (this.settings.erSpiderHouses) pool.push('dungeon-sh');
-    if (this.settings.erPirateFortress) pool.push('dungeon-pf');
-    if (this.settings.erBeneathWell) pool.push('dungeon-btw');
-    if (this.settings.erIkanaCastle) pool.push('dungeon-acoi');
-    if (this.settings.erSecretShrine) pool.push('dungeon-ss');
-    if (this.settings.erMoon) pool.push('dungeon-ctr');
-
-    return { pool, opts: { ownGame: this.settings.erDungeons === 'ownGame' } };
-  }
-
-  private poolRegions() {
-    const pool = new Set(['region']);
-    if (this.settings.erRegionsExtra) {
-      pool.add('region-extra');
-    }
-    if (this.settings.erRegionsShortcuts) {
-      pool.add('region-shortcut');
-    }
-    return { pool: Array.from(pool), opts: { ownGame: this.settings.erRegions === 'ownGame' } };
-  }
-
-  private poolOverworld() {
-    const pool = ['region', 'region-extra', 'region-shortcut', 'overworld'];
-    if (this.settings.erPiratesWorld) pool.push('overworld-pf', 'dungeon-pf');
-    return { pool, opts: { ownGame: this.settings.erOverworld === 'ownGame' } };
-  }
-
-  private poolIndoors() {
-    const pool = new Set(['indoors']);
-    if (!this.settings.erIndoorsMajor) {
-      pool.delete('indoors');
-    }
-    if (this.settings.erIndoorsExtra) {
-      pool.add('indoors-extra');
-    }
-    if (this.settings.erIndoorsExtra && this.settings.erPiratesWorld) {
-      pool.add('indoors-pf');
-    }
-    if (this.settings.erIndoorsGameLinks) {
-      pool.add('indoors-link');
-    }
-    return { pool: Array.from(pool), opts: { ownGame: this.settings.erIndoors === 'ownGame' } };
-  }
-
-  private poolWarps() {
-    const pool = new Set(['one-way-song', 'one-way-statue']);
-
-    if (this.settings.erWarps === 'ootOnly' || this.settings.erOneWaysStatues) {
-      pool.delete('one-way-statue');
-    }
-    if (this.settings.erWarps === 'mmOnly' || this.settings.erOneWaysSongs) {
-      pool.delete('one-way-song');
-    }
-
-    return { pool: Array.from(pool), opts: { ownGame: this.settings.erWarps === 'ownGame' } };
+    return { src: oneWays.src, dst: [...types, ...oneWays.dst], opts: { alias: true, ownGame: this.settings.erOneWays === 'ownGame' } };
   }
 
   private poolOneWays() {
-    const pool = new Set<string>();
+    const types = new Set<string>();
 
     if (this.settings.erOneWaysMajor) {
-      pool.add('one-way');
+      types.add('one-way');
     }
     if (this.settings.erOneWaysIkana) {
-      pool.add('one-way-ikana');
+      types.add('one-way-ikana');
     }
     if (this.settings.erOneWaysSongs) {
-      pool.add('one-way-song');
+      types.add('one-way-song');
     }
     if (this.settings.erOneWaysStatues) {
-      pool.add('one-way-statue');
+      types.add('one-way-statue');
     }
     if (this.settings.erOneWaysOwls) {
-      pool.add('one-way-owl');
+      types.add('one-way-owl');
     }
     if (this.settings.erOneWaysWoods) {
-      pool.add('one-way-woods');
+      types.add('one-way-woods');
     }
     if (this.settings.erOneWaysWaterVoids) {
-      pool.add('one-way-water-void');
+      types.add('one-way-water-void');
     }
 
-    return { pool: Array.from(pool), opts: { ownGame: this.settings.erOneWays === 'ownGame' } };
+    return { src: [...types], dst: [...types], opts: { ownGame: this.settings.erOneWays === 'ownGame' } };
   }
 
   private poolGrottos() {
-    const pool = ['grotto', 'grave'];
-    return { pool, opts: { ownGame: this.settings.erGrottos === 'ownGame' } };
+    const types = ['grotto', 'grave'];
+    return { src: types, dst: types, opts: { ownGame: this.settings.erGrottos === 'ownGame' } };
   }
 
-  private isAssignableLegacy(world: World, original: Entrance, replacement: Entrance, opts?: { ownGame?: boolean, locations?: string[] }) {
-    const originalWorld = this.world;
-    const originalEntrance = ENTRANCES[original];
-    const replacementEntrance = ENTRANCES[replacement];
-    const dungeon = originalWorld.areas[replacementEntrance.to].dungeon!;
+  private makePoolsSimple(): EntrancePoolDescrs {
+    const pools: EntrancePoolDescrs = {};
 
-    /* Reject wrong game */
-    if (opts?.ownGame) {
-      if (originalEntrance.game !== replacementEntrance.game) {
-        return false;
-      }
+    if (this.settings.erBoss !== 'none') {
+      pools.BOSS = this.poolBoss();
     }
-
-    /* Not all locations */
-    if (this.settings.logic !== 'allLocations') {
-      return true;
-    }
-
-    /* Apply an override */
-    world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(original);
-
-    /* If the dungeon is ST or IST, we need to allow the other dungeon */
-    if (dungeon === 'ST') {
-      world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'] = exprTrue();
-    }
-    if (dungeon === 'IST') {
-      world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'] = exprTrue();
-    }
-
-    /* Check if the new world is valid */
-    const allWorlds = [...this.worlds];
-    allWorlds[this.worldId] = world;
-    const pathfinder = new Pathfinder(allWorlds, this.settings, this.startingItems);
-    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, assumedItems: this.allItems, recursive: true });
-
-    /* Restore the override */
-    delete world.areas[originalEntrance.from].exits[replacementEntrance.to]
-    delete world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'];
-    delete world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'];
-
-    /* Get the list of required locations */
-    let locations: string[];
-    if (opts?.locations) {
-      locations = opts.locations;
-    } else if (['ST', 'IST'].includes(dungeon)) {
-      locations = [...world.dungeons['ST'], ...world.dungeons['IST']];
-    } else {
-      locations = Array.from(world.dungeons[dungeon]);
-    }
-
-    /* Turn into locations */
-    const worldLocs = locations.map(l => makeLocation(l, this.worldId));
-
-    /* Check if the new world is valid */
-    if (!(worldLocs.every(l => pathfinderState.locations.has(l))))
-      return false;
-
-    /* Ganon's tower check */
-    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.settings.goal) && !pathfinderState.ws[this.worldId].events.has('OOT_GANON'))
-      return false;
-
-    return true;
-  }
-
-  private legacyFixBosses(world: World): World {
-    const bossEntrances = this.allEntrances.filter(x => ENTRANCES[x].type === 'boss');
-    const bossEntrancesByDungeon = new Map<string, Entrance>();
-    const bossEvents = new Map<string, ExprMap>();
-    const bossAreas = new Map<string, string[]>();
-    const bossLocations = new Map<string, string[]>();
-
-    /* Collect every boss event */
-    for (const a in world.areas) {
-      const area = world.areas[a];
-      const dungeon = area.dungeon!;
-      if (area.boss) {
-        /* Events */
-        if (!bossEvents.has(dungeon)) {
-          bossEvents.set(dungeon, {});
-        }
-        const oldEvents = bossEvents.get(dungeon)!;
-        bossEvents.set(dungeon, { ...oldEvents, ...area.events });
-
-        /* Areas */
-        if (!bossAreas.has(dungeon)) {
-          bossAreas.set(dungeon, []);
-        }
-        bossAreas.get(dungeon)!.push(a);
-
-        /* Locations */
-        if (!bossLocations.has(dungeon)) {
-          bossLocations.set(dungeon, []);
-        }
-        const locs = bossLocations.get(dungeon)!;
-        for (const l in area.locations) {
-          locs.push(l);
-        }
-
-        /* Remove the event */
-        area.events = {};
-      }
-    }
-
-    /* Collect the entrances and delete the original ones */
-    for (const eName of bossEntrances) {
-      const e = ENTRANCES[eName];
-      const areaFrom = world.areas[e.from];
-      const areaTo = world.areas[e.to];
-
-      /* We have a boss entrance */
-      const dungeon = areaTo.dungeon!;
-      bossEntrancesByDungeon.set(dungeon, eName);
-
-      /* Remove the entrance */
-      delete areaFrom.exits[e.to];
-    }
-
-    /* Actually shuffle bosses */
-    const unplacedBosses = new Set(bossEntrancesByDungeon.keys());
-    const unplacedLocs = new Set(bossLocations.keys());
-    const assigns = new Map<string, Set<string>>();
-    while (unplacedBosses.size > 0) {
-      /* Refresh the assigns */
-      for (const boss of unplacedBosses) {
-        if (!assigns.has(boss)) {
-          assigns.set(boss, new Set());
-        }
-        const locs = assigns.get(boss)!;
-        for (const loc of unplacedLocs) {
-          if (locs.has(loc)) {
-            continue;
-          }
-          if (this.isAssignableLegacy(world, bossEntrancesByDungeon.get(loc)!, bossEntrancesByDungeon.get(boss)!, { ownGame: this.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
-            locs.add(loc);
-          }
-        }
-      }
-
-      const minSize = Math.min(...Array.from(assigns.values()).map(s => s.size));
-      const bosses = Array.from(assigns.entries()).filter(([_, s]) => s.size === minSize).map(([k, _]) => k);
-      const boss = sample(this.random, bosses);
-      const locs = assigns.get(boss)!;
-      if (locs.size === 0) {
-        throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
-      }
-      const loc = sample(this.random, locs);
-
-      /* Mark as placed */
-      unplacedBosses.delete(boss);
-      unplacedLocs.delete(loc);
-      assigns.delete(boss);
-      for (const l of assigns.values()) {
-        l.delete(loc);
-      }
-
-      /* Place the boss */
-      const src = bossEntrancesByDungeon.get(loc)!;
-      const dst = bossEntrancesByDungeon.get(boss)!;
-      world.areas[ENTRANCES[src].from].exits[ENTRANCES[dst].to] = this.getExpr(src);
-      world.entranceOverrides.set(src, dst);
-      world.bossIds[BOSS_INDEX_BY_DUNGEON[boss]] = BOSS_INDEX_BY_DUNGEON[loc];
-
-      /* Add the events */
-      const areaNames = bossAreas.get(boss)!;
-      const lastAreaName = areaNames[areaNames.length - 1];
-      const lastArea = world.areas[lastAreaName];
-      lastArea.events = { ...lastArea.events, ...bossEvents.get(loc)! };
-
-      /* Change the associated dungeon */
-      for (const a of bossAreas.get(boss)!) {
-        const area = world.areas[a];
-        area.dungeon = loc;
-        area.region = DUNGEONS_REGIONS[loc];
-
-        for (const l in area.locations) {
-          world.regions[l] = DUNGEONS_REGIONS[loc];
-          world.dungeons[boss].delete(l);
-          world.dungeons[loc].add(l);
-        }
-      }
-    }
-
-    return world;
-  }
-
-  private makePools(): EntrancePools {
-    const pools: EntrancePools = {};
 
     if (this.settings.erDungeons !== 'none') {
       pools.DUNGEONS = this.poolDungeons();
@@ -872,30 +818,35 @@ class WorldShuffler {
     }
 
     if (this.settings.erMixed !== 'none') {
-      pools.MIXED = { pool: [], opts: { ownGame: this.settings.erMixed === 'ownGame' } };
+      pools.MIXED = { src: [], dst: [], opts: { ownGame: this.settings.erMixed === 'ownGame' } };
 
       if (this.settings.erMixedDungeons) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.DUNGEONS.pool];
+        pools.MIXED.src = [...pools.MIXED.src, ...pools.DUNGEONS.src];
+        pools.MIXED.dst = [...pools.MIXED.dst, ...pools.DUNGEONS.dst];
         delete pools.DUNGEONS;
       }
 
       if (this.settings.erMixedGrottos) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.GROTTOS.pool];
+        pools.MIXED.src = [...pools.MIXED.src, ...pools.GROTTOS.src];
+        pools.MIXED.dst = [...pools.MIXED.dst, ...pools.GROTTOS.dst];
         delete pools.GROTTOS;
       }
 
       if (this.settings.erMixedRegions) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.REGIONS.pool];
+        pools.MIXED.src = [...pools.MIXED.src, ...pools.REGIONS.src];
+        pools.MIXED.dst = [...pools.MIXED.dst, ...pools.REGIONS.dst];
         delete pools.REGIONS;
       }
 
       if (this.settings.erMixedOverworld) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.OVERWORLD.pool];
+        pools.MIXED.src = [...pools.MIXED.src, ...pools.OVERWORLD.src];
+        pools.MIXED.dst = [...pools.MIXED.dst, ...pools.OVERWORLD.dst];
         delete pools.OVERWORLD;
       }
 
       if (this.settings.erMixedIndoors) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.INDOORS.pool];
+        pools.MIXED.src = [...pools.MIXED.src, ...pools.INDOORS.src];
+        pools.MIXED.dst = [...pools.MIXED.dst, ...pools.INDOORS.dst];
         delete pools.INDOORS;
       }
     }
@@ -911,10 +862,28 @@ class WorldShuffler {
     return pools;
   }
 
-  private poolsTypes(): string[] {
-    const pools = this.makePools();
+  private makePools(): EntrancePoolDescrs {
+    const pools = this.makePoolsSimple();
+
+    if (this.settings.erSpawns !== 'none') {
+      pools.SPAWNS = this.poolSpawns();
+    }
+
+    if (this.settings.erWallmasters !== 'none') {
+      pools.WALLMASTERS = this.poolWallmasters();
+    }
+
+    if (this.settings.erOneWays !== 'none' && this.settings.erOneWaysAnywhere) {
+      pools.ONE_WAYS = this.poolOneWaysAnywhere();
+    }
+
+    return pools;
+  }
+
+  private poolsTypesDst(): string[] {
+    const pools = this.makePoolsSimple();
     const poolValues = Object.values(pools);
-    const types = poolValues.map(x => x.pool).flat();
+    const types = poolValues.map(x => x.dst).flat();
     return [...new Set(types)];
   }
 
@@ -959,25 +928,9 @@ class WorldShuffler {
       }
     }
 
-    if (this.settings.erWallmasters !== 'none') {
-      this.placeWallmasters();
-    }
-
-    if (this.settings.erSpawns !== 'none') {
-      this.placeSpawns();
-    }
-
-    if (this.settings.erOneWays !== 'none' && this.settings.erOneWaysAnywhere) {
-      this.placeOneWays();
-    }
-
     this.placePools(this.makePools());
 
     let world = this.changedWorld(this.overrides);
-    if (this.settings.erBoss !== 'none') {
-      world = this.legacyFixBosses(world);
-      this.worldChanged = true;
-    }
 
     return { world, changed: this.worldChanged };
   }
@@ -1104,34 +1057,10 @@ export class LogicPassEntrances {
     }
   }
 
-  private validateAgeTemple() {
-    if (!['ootmm', 'oot'].includes(this.input.settings.games))
-      return;
-
-    const newWorlds = this.worlds.map(w => cloneWorld(w));
-    for (const w of newWorlds) {
-      const a = w.areas['OOT SPAWN'];
-      if (this.input.settings.startingAge === 'child') {
-        a.exits['OOT SPAWN ADULT'] = exprAge('adult');
-        a.exits['OOT SPAWN CHILD'] = exprFalse();
-      } else {
-        a.exits['OOT SPAWN ADULT'] = exprFalse();
-        a.exits['OOT SPAWN CHILD'] = exprAge('child');
-      }
-    }
-
-    const agePathfinder = new Pathfinder(newWorlds, this.input.settings, this.input.startingItems);
-    const pathfinderState = agePathfinder.run(null, { recursive: true });
-    const target = 'OOT Temple of Time';
-    if (pathfinderState.ws.some(x => !(x.ages.adult.areas.has(target) || x.ages.child.areas.has(target)))) {
-      throw new LogicEntranceError('Temple of Time is unreachable from the non-starting age');
-    }
-  }
-
   private validate() {
     if (this.input.settings.logic === 'none')
       return;
-    this.validateAgeTemple();
+
     const pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
     const pathfinderState = pathfinder.run(null, { assumedItems: this.input.allItems, recursive: true });
 
@@ -1182,12 +1111,6 @@ export class LogicPassEntrances {
     }
 
     this.processRegions();
-
-    for (let i = 0; i < this.worlds.length; ++i) {
-      const w = this.worlds[i];
-      optimizeStartingAndPool(w, i, this.input.startingItems, this.input.allItems);
-      optimizeWorld(w);
-    }
 
     return { worlds: this.worlds };
   }

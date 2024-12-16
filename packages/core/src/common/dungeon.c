@@ -2,7 +2,7 @@
 #include <combo/dungeon.h>
 #include <combo/config.h>
 
-void comboDungeonSetFlags(int dungeonId, int mmCycle)
+void comboDungeonSetFlags(int dungeonId, int flags)
 {
     switch (dungeonId)
     {
@@ -13,12 +13,18 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
         break;
     case DUNGEONID_TEMPLE_WATER:
-        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
-        gMiscFlags.erWaterBeaten = 1;
+        if (flags & DUNGEONCLEARFLAG_EFFECT)
+        {
+            BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+            gMiscFlags.wispOotLake = 1;
+        }
+        if (flags & DUNGEONCLEARFLAG_WISP)
+            gMiscFlags.wispOotLake = 1;
         break;
     case DUNGEONID_TEMPLE_WOODFALL:
-        gMmExtraBoss.boss |= (1 << 0);
-        if (mmCycle)
+        if (flags & DUNGEONCLEARFLAG_BOSS)
+            gMmExtraBoss.boss |= (1 << 0);
+        if (flags & DUNGEONCLEARFLAG_EFFECT)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
             if (Config_Flag(CFG_MM_CLEAR_OPEN_WF))
@@ -26,19 +32,23 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
                 MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
             }
         }
-        gMiscFlags.erSwampClear = 1;
+        if (flags & DUNGEONCLEARFLAG_WISP)
+            gMiscFlags.wispMmSwamp = 1;
         break;
     case DUNGEONID_TEMPLE_SNOWHEAD:
-        gMmExtraBoss.boss |= (1 << 1);
-        if (mmCycle)
+        if (flags & DUNGEONCLEARFLAG_BOSS)
+            gMmExtraBoss.boss |= (1 << 1);
+        if (flags & DUNGEONCLEARFLAG_EFFECT)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
         }
-        gMiscFlags.erSpring = 1;
+        if (flags & DUNGEONCLEARFLAG_WISP)
+            gMiscFlags.wispMmMountain = 1;
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
-        gMmExtraBoss.boss |= (1 << 2);
-        if (mmCycle)
+        if (flags & DUNGEONCLEARFLAG_BOSS)
+            gMmExtraBoss.boss |= (1 << 2);
+        if (flags & DUNGEONCLEARFLAG_EFFECT)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
             if (Config_Flag(CFG_MM_CLEAR_OPEN_GB))
@@ -46,16 +56,19 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
                 MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
             }
         }
-        gMiscFlags.erCoastClear = 1;
+        if (flags & DUNGEONCLEARFLAG_WISP)
+            gMiscFlags.wispMmOcean = 1;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER:
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
-        gMmExtraBoss.boss |= (1 << 3);
-        if (mmCycle)
+        if (flags & DUNGEONCLEARFLAG_BOSS)
+            gMmExtraBoss.boss |= (1 << 3);
+        if (flags & DUNGEONCLEARFLAG_EFFECT)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
         }
-        gMiscFlags.erValleyClear = 1;
+        if (flags & DUNGEONCLEARFLAG_WISP)
+            gMiscFlags.wispMmValley = 1;
         break;
     }
 }

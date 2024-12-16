@@ -46,6 +46,7 @@ ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
 Magic_RequestChange = 0x80115db4;
 Magic_Reset = 0x80115D5C;
+Interface_SetBButtonInterfaceDoAction = 0x80115844;
 Health_ChangeBy = 0x80115908;
 GetRoomClearFlag = 0x800b5cc4;
 
@@ -244,6 +245,7 @@ ClearSwitchFlag = 0x800b5c34;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
 
+Interface_SetDoAction = 0x8011552c;
 Interface_StartMoonCrash = 0x8011c808;
 
 Play_SetRespawnData = 0x80169dcc;
@@ -285,8 +287,6 @@ Actor_RunByteCode = 0x8010bf58;
 
 DrawDungeonUnk2 = 0x801091f0;
 
-gGameData = 0x801f3f60;
-
 Gfx_DrawDListOpa = 0x800bdfc0;
 
 Actor_UpdateBgCheckInfo = 0x800b78b8;
@@ -298,6 +298,7 @@ _AddRupees = 0x801159ec;
 
 PlayStoreFlags = 0x80169d40;
 Play_GetCamera = 0x801696d4;
+DeathWarp = 0x80169f78;
 Play_CamIsNotFixed = 0x80169FFC;
 
 gPlayedOcarinaSong = 0x801d8528;
@@ -679,3 +680,4 @@ DynaPoly_EnableCollision = 0x800c6314;
 Collider_InitTris = 0x800e16d0;
 Collider_SetTris = 0x800e1958;
 
+Audio_SetFileSelectSettings = 0x801a3d98;

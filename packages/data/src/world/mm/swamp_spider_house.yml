@@ -1,7 +1,7 @@
 "Swamp Spider House":
   dungeon: SSH
   exits:
-    "Near Swamp Spider House": "true"
+    "Near Swamp Spider House": "can_reset_time"
     "Swamp Spider House Main": "can_reset_time_dungeon"
   locations:
     "Swamp Spider House Mask of Truth": "soul_citizen && has(GS_TOKEN_SWAMP, 30)"

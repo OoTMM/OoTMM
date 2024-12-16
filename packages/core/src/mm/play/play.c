@@ -435,6 +435,86 @@ void Play_CheckRoomChangeHook(PlayState* play)
     }
 }
 
+static void Play_AfterInit(PlayState* play)
+{
+    gLastEntrance = gSave.entrance;
+    g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
+    if (!g.inGrotto)
+    {
+        gLastScene = play->sceneId;
+    }
+    CustomTriggers_Spawn(play);
+    comboSpawnCustomWarps(play);
+
+    spawnSirloin(play);
+    ComboPlay_SpawnExtraSigns(play);
+    Play_CheckRoomChangeHook(play);
+
+    if (Config_Flag(CFG_ER_ANY))
+    {
+        if (play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
+        {
+            Flags_SetSwitch(play, 0x14);
+        }
+        else if (play->sceneId == SCE_MM_STONE_TOWER)
+        {
+            ClearSwitchFlag(play, 0x14);
+        }
+    }
+
+    if (gNoTimeFlow)
+    {
+        play->envCtx.sceneTimeSpeed = 0;
+        R_TIME_SPEED = 0;
+    }
+
+    switch (play->sceneId)
+    {
+    case SCE_MM_TEMPLE_WOODFALL:
+    case SCE_MM_TEMPLE_SNOWHEAD:
+    case SCE_MM_TEMPLE_GREAT_BAY:
+    case SCE_MM_TEMPLE_STONE_TOWER:
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+    case SCE_MM_SPIDER_HOUSE_SWAMP:
+    case SCE_MM_SPIDER_HOUSE_OCEAN:
+    case SCE_MM_BENEATH_THE_WELL:
+    case SCE_MM_PIRATE_FORTRESS_ENTRANCE:
+    case SCE_MM_PIRATE_FORTRESS_EXTERIOR:
+    case SCE_MM_PIRATE_FORTRESS_INTERIOR:
+    case SCE_MM_CASTLE_IKANA:
+    case SCE_MM_SECRET_SHRINE:
+    case SCE_MM_MOON:
+    case SCE_MM_MOON_DEKU:
+    case SCE_MM_MOON_GORON:
+    case SCE_MM_MOON_ZORA:
+    case SCE_MM_MOON_LINK:
+    case SCE_MM_LAIR_ODOLWA:
+    case SCE_MM_LAIR_GOHT:
+    case SCE_MM_LAIR_GYORG:
+    case SCE_MM_LAIR_TWINMOLD:
+    case SCE_MM_LAIR_IKANA:
+    case SCE_MM_LAIR_MAJORA:
+        if (!gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams)
+        {
+            /* Copy to the custom death respawn */
+            memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gSaveContext.respawn[RESPAWN_MODE_DOWN], sizeof(RespawnData));
+
+            /* 0x0X = OoT, 0x8X = MM */
+            gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].data |= 0x80;
+        }
+        break;
+    case SCE_MM_CUTSCENE_MAP:
+        break;
+    case SCE_MM_TERMINA_FIELD:
+        if (gSave.entrance == 0x54c0)
+            break;
+        /* Fallthrough */
+    default:
+        comboClearCustomRespawn(CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE);
+        break;
+    }
+}
+
 void hookPlay_Init(PlayState* play)
 {
     u32 entrance;
@@ -658,36 +738,7 @@ void hookPlay_Init(PlayState* play)
 
     Play_FixupSpawnTime();
     Play_Init(play);
-
-    gLastEntrance = gSave.entrance;
-    g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
-    if (!g.inGrotto)
-    {
-        gLastScene = play->sceneId;
-    }
-    CustomTriggers_Spawn(play);
-    comboSpawnCustomWarps(play);
-    spawnSirloin(play);
-    ComboPlay_SpawnExtraSigns(play);
-    Play_CheckRoomChangeHook(play);
-
-    if (Config_Flag(CFG_ER_ANY))
-    {
-        if (play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
-        {
-            Flags_SetSwitch(play, 0x14);
-        }
-        else if (play->sceneId == SCE_MM_STONE_TOWER)
-        {
-            ClearSwitchFlag(play, 0x14);
-        }
-    }
-
-    if (gNoTimeFlow)
-    {
-        play->envCtx.sceneTimeSpeed = 0;
-        gGameData->clockSpeed = 0;
-    }
+    Play_AfterInit(play);
 
     if (isEndOfGame)
     {
@@ -702,8 +753,7 @@ void hookPlay_Init(PlayState* play)
             gSave.time = 0x3fff;
             Save_DoSave(play, SF_NOCOMMIT);
             Sram_SaveNewDay(play);
-            play->nextEntrance = ENTR_EXTENDED;
-            g.nextEntrance = g.initialEntrance;
+            play->nextEntrance = ENTR_MM_CLOCK_TOWER_MOON_CRASH;
             play->transitionTrigger = TRANS_TRIGGER_START;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
@@ -762,6 +812,10 @@ void Play_TransitionDone(PlayState* play)
     case ENTR_FW_CROSS:
         entrance = gForeignSave.info.fw.entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
+        break;
+    case ENTR_CROSS_RESPAWN:
+        entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isDungeonEntranceSpawn = 1;
         break;
     }
 
@@ -857,6 +911,10 @@ void Play_FastInit(GameState* gs)
         gSaveContext.respawnFlag = 8;
         gComboCtx.isFwSpawn = 0;
 
+        /* Restore Game Over / Soar to Entrance respawn data. */
+        memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[gOotSave.age], sizeof(RespawnData));
+        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(RespawnData));
+
         RespawnData* fw = &gCustomSave.fw[gOotSave.age];
 
         if (fw->data)
@@ -884,6 +942,16 @@ void Play_FastInit(GameState* gs)
     applyCustomEntrance(&entrance);
     gSave.entrance = entrance;
     g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
+
+    if (gComboCtx.isDungeonEntranceSpawn)
+    {
+        gComboCtx.isDungeonEntranceSpawn = 0;
+        if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams)
+        {
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
+            gSaveContext.respawnFlag = -6;
+        }
+    }
 
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();

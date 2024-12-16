@@ -9,7 +9,6 @@ import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewab
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
 import { ItemProperties } from './item-properties';
-import { optimizeWorld } from './optimizer';
 import { isDungeonReward } from '../items/helpers';
 import { mustStartWithMasterSword } from '../settings/util';
 
@@ -449,8 +448,10 @@ export class LogicPassSolver {
       if (plandoItemId) {
         const plandoItem = itemByID(plandoItemId);
         for (let player = 0; player < this.input.settings.players; ++player) {
-          const item = makePlayerItem(plandoItem, player);
           const l = makeLocation(loc, player);
+          if (!this.locations.includes(l))
+            continue;
+          const item = makePlayerItem(plandoItem, player);
           this.place(l, item);
           removeItemPools(this.state.pools, item);
         }
@@ -659,7 +660,9 @@ export class LogicPassSolver {
           }
           if (!pi)
             break;
-          const l = locsArray.pop()!;
+          const l = locsArray.pop();
+          if (!l)
+            throw new LogicSeedError('Failed to place extra triforce');
           const region = this.worlds[worldId].regions[locationData(l).id];
           if (region !== 'NONE') {
             locsArray = locsArray.filter(x => this.worlds[worldId].regions[locationData(x).id] !== region);
@@ -836,12 +839,12 @@ export class LogicPassSolver {
     this.selectPreCompletedDungeons();
 
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const WISPS = {
-        'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
-        'MM_BOSS_WOODFALL': 'MM Swamp Front',
-        'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
-        'MM_BOSS_GREAT_BAY': 'MM Great Bay Coast',
-        'MM_BOSS_STONE_TOWER': 'MM Ikana Canyon',
+      const WISPS: Record<string, string> = {
+        'Water': 'OOT_WISP_CLEAR_STATE_LAKE',
+        'WF': 'MM_WISP_CLEAR_STATE_WOODFALL',
+        'SH': 'MM_WISP_CLEAR_STATE_SNOWHEAD',
+        'GB': 'MM_WISP_CLEAR_STATE_GREAT_BAY',
+        'IST': 'MM_WISP_CLEAR_STATE_IKANA',
       };
 
       const world = this.worlds[worldId];
@@ -853,7 +856,6 @@ export class LogicPassSolver {
       const locs = locNames.map(x => makeLocation(x, worldId));
       const areas = Object.keys(world.areas).filter(x => dungeons.includes(world.areas[x].dungeon || ''));
       const areasBoss = areas.filter(x => world.areas[x].boss);
-      const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => Object.keys(WISPS).includes(x));
 
       /* Get every item and fill with junk */
       this.tryJunk(locs);
@@ -892,14 +894,13 @@ export class LogicPassSolver {
       this.tryJunk(greatFairyLocs);
 
       /* Handle boss events */
-      for (const area of areasBoss) {
-        const a = world.areas[area];
-        for (const be of bossEvents) {
-          delete a.events[be];
+      if (this.input.settings.regionState === 'dungeonBeaten') {
+        for (const d of dungeons) {
+          const wisp = WISPS[d];
+          if (wisp) {
+            world.areas['OOT SPAWN'].events[wisp] = exprTrue();
+          }
         }
-      }
-      for (const be of bossEvents) {
-        world.areas[(WISPS as any)[be]].events[be] = exprTrue();
       }
 
       /* Handle boss souls */
@@ -967,7 +968,6 @@ export class LogicPassSolver {
     }
 
     /* We need to reset the pathfinder as we changed the starting items and the world */
-    this.worlds.forEach(x => optimizeWorld(x));
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null, { recursive: true });
   }
@@ -1122,7 +1122,7 @@ export class LogicPassSolver {
 
   private placeJunkLocations() {
     const { settings } = this.input;
-    let locs = this.makePlayerLocations(settings.junkLocations);
+    let locs = this.makePlayerLocations(settings.junkLocations).filter(x => this.locations.includes(x));
     if (!settings.shuffleMasterSword && mustStartWithMasterSword(settings)) {
       locs = [...locs, ...this.makePlayerLocations(['OOT Temple of Time Master Sword'])];
     }

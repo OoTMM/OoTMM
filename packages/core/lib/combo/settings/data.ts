@@ -162,6 +162,34 @@ export const SETTINGS = [{
   description: 'Make the region hints more granular: Makes Goron Racetrack and Butler Race into their own regions, and splits Ganon Castle/Tower and Normal/Inverted Stone Tower Temple.',
   default: false
 }, {
+  key: 'hintPathDungeons',
+  name: 'Hint Path to Dungeons',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Enable WotH hints to be upgraded to dungeons paths when appropriate.',
+  default: false
+}, {
+  key: 'hintPathBoss',
+  name: 'Hint Path to Boss',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Enable WotH hints to be upgraded to boss paths when appropriate.',
+  default: false
+}, {
+  key: 'hintPathEndBoss',
+  name: 'Hint Path to End Boss',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Enable WotH hints to be upgraded to end boss paths when appropriate.',
+  default: false
+}, {
+  key: 'hintPathEvents',
+  name: 'Hint Path to Events',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Enable WotH hints to be upgraded to events paths when appropriate.',
+  default: false,
+}, {
   key: 'hintImportance',
   name: 'Hint Importance',
   category: 'hints',
@@ -1115,6 +1143,19 @@ export const SETTINGS = [{
   ],
   default: 'bossBeaten',
   cond: hasMM,
+}, {
+  key: 'regionState',
+  name: 'Region State Behavior',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls what is required to change the region state.',
+  values: [
+    { value: 'dungeonBeaten', name: 'Dungeon Beaten', description: 'Enabled when the dungeon is beaten.' },
+    //{ value: 'bossBeaten', name: 'Boss Beaten', description: 'Enabled when the boss is beaten.' },
+    { value: 'reward', name: 'Rewards', description: 'Enabled when the matching dungeon reward is obtained' },
+    { value: 'free', name: 'Free', description: 'Always enabled' },
+  ],
+  default: 'dungeonBeaten',
 }, {
   key: 'freeScarecrowOot',
   name: 'Free Scarecrow (OoT)',

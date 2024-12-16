@@ -35,6 +35,7 @@ typedef struct ALIGNED(16)
     u8              caughtChildFishWeight[20]; /* first item is length. should this be in OotCustomSave? */
     u8              caughtAdultFishWeight[20]; /* first item is length. should this be in OotCustomSave? */
     u8              caughtFishFlags[5];
+    RespawnData     respawn[1];
     u8              foundMasterSword:1;
     u8              storedSirloin:1;
     u8              extraSwordsOot:2;
@@ -86,11 +87,11 @@ void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 # define SAVE_EXTRA_RECORD(type, index) (*((type*)(gOotSave.info.perm[index].raw + 0x10)))
 typedef struct
 {
-    u32 erSpring:1;
-    u32 erSwampClear:1;
-    u32 erCoastClear:1;
-    u32 erValleyClear:1;
-    u32 erWaterBeaten:1;
+    u32 wispMmSwamp:1;
+    u32 wispMmMountain:1;
+    u32 wispMmOcean:1;
+    u32 wispMmValley:1;
+    u32 wispOotLake:1;
     u32 unused:27;
 }
 MiscFlags;

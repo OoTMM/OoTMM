@@ -13,6 +13,7 @@ import { World } from './world';
 import { ItemProperties } from './item-properties';
 import { CLOCKS } from '../items/groups';
 import { mustStartWithMasterSword } from '../settings/util';
+import { optimizeWorldStartingAndPool } from './world-optimizer';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
@@ -1634,6 +1635,9 @@ export class LogicPassWorldTransform {
       countMapAdd(allItems, pi);
     }
 
-    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations };
+    /* Optimize the world */
+    const worlds = this.state.worlds.map((world, i) => optimizeWorldStartingAndPool(world, i, this.state.startingItems, allItems));
+
+    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations, worlds };
   }
 }

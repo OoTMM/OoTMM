@@ -31,7 +31,7 @@ AudioTable;
 
 typedef struct PlayState PlayState;
 
-void    Audio_ApplySoundMode(u8 mode);
+void    Audio_SetFileSelectSettings(u8 audioSetting);
 void    Audio_SetCutsceneFlag(int flag);
 u16     Audio_GetActiveSeqId(int channel);
 void    Audio_DisplayMusicName(PlayState* play);

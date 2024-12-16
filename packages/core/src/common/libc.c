@@ -67,17 +67,17 @@ void bzero(void* s, size_t n)
     memset(s, 0, n);
 }
 
-void* memmove(void* dst, void* src, size_t size)
+void* memmove(void* dst, const void* src, size_t size)
 {
     if (dst < src)
     {
         for (size_t i = 0; i < size; ++i)
-            ((char*)dst)[i] = ((char*)src)[i];
+            ((char*)dst)[i] = ((const char*)src)[i];
     }
     else
     {
         for (size_t i = size; i > 0; --i)
-            ((char*)dst)[i - 1] = ((char*)src)[i - 1];
+            ((char*)dst)[i - 1] = ((const char*)src)[i - 1];
     }
     return dst;
 }

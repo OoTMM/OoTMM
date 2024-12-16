@@ -97,7 +97,7 @@ s16 comboItemResolve(PlayState* play, s16 gi)
     case GI_OOT_MAP:
         switch (comboOotDungeonScene(play, 0))
         {
-        case SCE_OOT_INSIDE_DEKU_TREE:          gi = GI_OOT_MAP_DT;             break;
+        case SCE_OOT_DEKU_TREE:                 gi = GI_OOT_MAP_DT;             break;
         case SCE_OOT_DODONGO_CAVERN:            gi = GI_OOT_MAP_DC;             break;
         case SCE_OOT_INSIDE_JABU_JABU:          gi = GI_OOT_MAP_JJ;             break;
         case SCE_OOT_TEMPLE_FOREST:             gi = GI_OOT_MAP_FOREST;         break;
@@ -121,7 +121,7 @@ s16 comboItemResolve(PlayState* play, s16 gi)
     case GI_OOT_COMPASS:
         switch (comboOotDungeonScene(play, 0))
         {
-        case SCE_OOT_INSIDE_DEKU_TREE:          gi = GI_OOT_COMPASS_DT;             break;
+        case SCE_OOT_DEKU_TREE:                 gi = GI_OOT_COMPASS_DT;             break;
         case SCE_OOT_DODONGO_CAVERN:            gi = GI_OOT_COMPASS_DC;             break;
         case SCE_OOT_INSIDE_JABU_JABU:          gi = GI_OOT_COMPASS_JJ;             break;
         case SCE_OOT_TEMPLE_FOREST:             gi = GI_OOT_COMPASS_FOREST;         break;

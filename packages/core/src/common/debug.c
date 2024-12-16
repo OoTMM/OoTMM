@@ -577,6 +577,8 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.ocarina = 3;
     gMmExtraItems.hammerGFS = 3;
 
+    // gCustomSave.halfDays = 0b111111;
+
     gSave.info.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
     gSave.info.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
     gSave.info.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;

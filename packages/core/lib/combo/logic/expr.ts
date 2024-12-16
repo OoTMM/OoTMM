@@ -1,7 +1,7 @@
 import { Item, ItemGroups, Items, ItemsCount } from '../items';
 import { ItemID } from '../items/defs';
 import { SETTINGS, Settings, TRICKS, TrickKey } from '../settings';
-import { Age } from './pathfind';
+import { Age, AGE_ADULT, AGE_CHILD } from './constants';
 import { PRICE_RANGES } from './price';
 import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
 
@@ -264,9 +264,11 @@ function mergeDependencies(deps: ExprDependencies[]): ExprDependencies {
 
 export abstract class Expr {
   readonly key: string;
+  _cacheAge: [Expr | null, Expr | null];
 
   constructor(k: string) {
     this.key = k;
+    this._cacheAge = [this, this];
   }
   abstract eval(state: State): ExprResult;
 
@@ -281,6 +283,7 @@ export abstract class ExprContainer extends Expr {
   constructor(k: string, exprs: Expr[]) {
     super(k);
     this.exprs = exprs;
+    this._cacheAge = [null, null];
   }
 
   visit(cb: (expr: Expr) => void) {
@@ -387,6 +390,8 @@ export class ExprAge extends Expr {
     const key = `AGE(${age})`;
     super(key);
     this.age = age;
+    this._cacheAge = [EXPR_FALSE, EXPR_FALSE];
+    this._cacheAge[age] = EXPR_TRUE;
   }
 
   eval(state: State): ExprResult {
@@ -619,8 +624,8 @@ function exprMemo(expr: Expr): Expr {
 
 export const EXPR_TRUE = exprMemo(new ExprTrue());
 export const EXPR_FALSE = exprMemo(new ExprFalse());
-export const EXPR_AGE_CHILD = exprMemo(new ExprAge('child'));
-export const EXPR_AGE_ADULT = exprMemo(new ExprAge('adult'));
+export const EXPR_AGE_CHILD = exprMemo(new ExprAge(AGE_CHILD));
+export const EXPR_AGE_ADULT = exprMemo(new ExprAge(AGE_ADULT));
 export const EXPR_TIME_OOT_DAY = exprMemo(new ExprTimeOot('day'));
 export const EXPR_TIME_OOT_NIGHT = exprMemo(new ExprTimeOot('night'));
 
@@ -688,6 +693,17 @@ export const exprNot = (expr: Expr): Expr => {
 export const exprAge = (age: Age): Expr => {
   /* Avoids creating a new object for every call */
   switch (age) {
+    case AGE_CHILD:
+      return EXPR_AGE_CHILD;
+    case AGE_ADULT:
+      return EXPR_AGE_ADULT;
+    default:
+      throw new Error(`Invalid age: ${age}`);
+  }
+};
+
+export const exprAgeString = (age: string): Expr => {
+  switch (age) {
     case 'child':
       return EXPR_AGE_CHILD;
     case 'adult':
@@ -695,7 +711,7 @@ export const exprAge = (age: Age): Expr => {
     default:
       throw new Error(`Invalid age: ${age}`);
   }
-};
+}
 
 export const exprHas = (item: Item, count: number): Expr => {
   if (count <= 0) {

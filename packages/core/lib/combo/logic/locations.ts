@@ -114,7 +114,7 @@ type IsLocationFullyShuffledOptions = {
 };
 
 const DUNGEON_SCENES = [
-  'INSIDE_DEKU_TREE',       'LAIR_GOHMA',
+  'DEKU_TREE',              'LAIR_GOHMA',
   'DODONGO_CAVERN',         'LAIR_KING_DODONGO',
   'INSIDE_JABU_JABU',       'LAIR_BARINADE',
   'TEMPLE_FOREST',          'LAIR_PHANTOM_GANON',

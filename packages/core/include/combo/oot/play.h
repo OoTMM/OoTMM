@@ -39,7 +39,8 @@ typedef struct Player Player;
 
 typedef struct
 {
-    s32 state;
+    u16 state;
+    u8 pad02[2];
 }
 GameOverContext;
 
@@ -118,6 +119,7 @@ PlayState;
 
 ASSERT_SIZE(PlayState, 0x12518);
 ASSERT_OFFSET(PlayState, sceneSegment,             0x000b0);
+ASSERT_OFFSET(PlayState, view,                     0x000b8);
 ASSERT_OFFSET(PlayState, colCtx,                   0x007c0);
 ASSERT_OFFSET(PlayState, actorCtx,                 0x01c24);
 ASSERT_OFFSET(PlayState, csCtx,                    0x01d64);

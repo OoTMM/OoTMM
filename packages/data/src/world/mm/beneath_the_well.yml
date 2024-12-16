@@ -1,7 +1,7 @@
 "Beneath The Well Entrance":
   dungeon: BtW
   exits:
-    "Ikana Canyon": "true"
+    "Ikana Canyon": "can_reset_time"
     "Beneath The Well North Section": "(setting(beneathWell, open) || (can_pass_gibdo && has_blue_potion)) && can_reset_time_dungeon"
     "Beneath The Well East Section": "(setting(beneathWell, open) || (can_pass_gibdo && has_beans)) && can_reset_time_dungeon"
 "Beneath The Well Wallmaster Near Entrance":
@@ -27,9 +27,8 @@
 "Beneath The Well Hot Spring Water":
   dungeon: BtW
   events:
-    WELL_HOT_WATER_SPRING: "is_spring && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
-    WELL_HOT_WATER_WINTER: "is_winter && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
-    WELL_HOT_WATER: "is_spring_or_winter && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    HOT_WATER_WELL_SPRING: "is_spring && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    HOT_WATER_WELL_WINTER: "is_winter && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
     FISH: "true"
     WATER: "true"
   exits:
@@ -112,7 +111,7 @@
 "Beneath The Well Big Poe Room":
   dungeon: BtW
   events:
-    WELL_BIG_POE: "has_weapon_range"
+    WELL_BIG_POE: "can_kill_big_poe"
   exits:
     "Beneath The Well Cow Hall": "true"
   locations:
@@ -172,4 +171,4 @@
   dungeon: BtWE
   exits:
     "Beneath The Well Sun Block": "(setting(beneathWell, open) || can_use_light_arrows) && can_reset_time_dungeon"
-    "Ikana Castle Exterior": "true"
+    "Ikana Castle Exterior": "can_reset_time"

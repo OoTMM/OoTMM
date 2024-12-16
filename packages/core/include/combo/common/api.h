@@ -25,6 +25,7 @@ int TitleCard_Clear(PlayState* play, TitleCardContext* titleCtx);
 float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
 u16   Actor_Angle(Actor* a, Actor* b);
+void Actor_DrawDoorLock(PlayState* play, s32 frame, s32 type);
 
 Gfx* Gfx_Open(Gfx* gfx);
 void Gfx_Close(Gfx* gfxRef, Gfx* gfx);
@@ -373,6 +374,7 @@ void DrawHUD(PlayState* play);
 int IsSceneValidEpona(int sceneId);
 
 s32 Health_ChangeBy(PlayState* play, s16 amount);
+void Interface_SetBButtonInterfaceDoAction(PlayState* play, s16 bButtonDoAction);
 
 typedef struct ObjectContext ObjectContext;
 int Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
@@ -402,6 +404,7 @@ Actor_EnItem00* Item_DropCollectible(PlayState* play, const Vec3f* pos, s16 para
 void Item_DropCollectibleRandom(PlayState* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(PlayState* play, s32 index, s32 collectibleFlag);
 
+s16 Math_Vec3f_Yaw(Vec3f* origin, Vec3f* point);
 MtxF* Matrix_GetCurrent(void);
 
 #if defined(GAME_MM)

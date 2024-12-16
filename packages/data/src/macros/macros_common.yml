@@ -14,6 +14,11 @@
 "has_scale_raw(x)": "cond(setting(sharedScales), has(SHARED_SCALE, x), has(SCALE, x))"
 "has_strength_raw(x)": "cond(setting(sharedStrength), has(SHARED_STRENGTH, x), has(STRENGTH, x))"
 
+"wisp_enabled_free": "setting(regionState, free)"
+"wisp_enabled_boss(x)": "false"
+"wisp_enabled_reward(x)": "setting(regionState, reward) && has(x)"
+"wisp_enabled(boss, reward)": "wisp_enabled_free || wisp_enabled_boss(boss) || wisp_enabled_reward(reward)"
+
 # Shared Souls
 "shared_soul_enemy(a, b)": "cond(setting(sharedSoulsEnemy), soul_enemy(b), soul_enemy(a))"
 "soul_octorok": "shared_soul_enemy(SOUL_ENEMY_OCTOROK, SHARED_SOUL_ENEMY_OCTOROK)"

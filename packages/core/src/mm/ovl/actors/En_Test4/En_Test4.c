@@ -575,18 +575,7 @@ static int EnTest4_TimeSkip(PlayState* play, u8* day, u16* time)
     int currentHalfDay;
     int nextHalfDay;
 
-    /* Sanity checks */
-    if (gNoTimeFlow)
-        return 0;
-
-    switch (play->sceneId)
-    {
-    case SCE_MM_MOON:
-    case SCE_MM_MOON_DEKU:
-    case SCE_MM_MOON_GORON:
-    case SCE_MM_MOON_ZORA:
-    case SCE_MM_MOON_LINK:
-    case SCE_MM_LAIR_MAJORA:
+    if (play->envCtx.sceneTimeSpeed == 0) {
         return 0;
     }
 

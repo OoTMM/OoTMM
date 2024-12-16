@@ -2,11 +2,12 @@ import { sortBy } from 'lodash';
 
 import { Options } from '../options';
 import { SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
-import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, HINTS_PATHS } from './hints';
+import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
-import { Analysis } from './analysis';
+import { Analysis, ANALYSIS_EVENTS, SphereEntryEvent } from './analysis';
+import { AnalysisPath, PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
@@ -16,6 +17,8 @@ import { PlayerItem, PlayerItems } from '../items';
 import { exportSettings } from '../settings/string';
 import { ENTRANCES } from '@ootmm/data';
 import { LogWriter } from '../util/log-writer';
+import { BOSS_METADATA_BY_DUNGEON } from './boss';
+import { DUNGEONS_BY_KEY } from './dungeons';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -272,6 +275,17 @@ export class LogicPassSpoiler {
     }
   }
 
+  private pathName(path: AnalysisPath): string {
+    switch (path.type) {
+    case 'woth': return 'Way of the Hero';
+    case 'dungeon': return `Path to ${DUNGEONS_BY_KEY.get(path.dungeon)!.name}`;
+    case 'triforce': return `Path to ${path.triforce}`;
+    case 'boss': return `Path to ${BOSS_METADATA_BY_DUNGEON.get(path.boss)!.name}`;
+    case 'end-boss': return `Path to ${path.boss}`;
+    case 'event': return `Path to ${PATH_EVENT_DATA.find(x => x.key === path.event)!.name}`;
+    }
+  }
+
   private writeHints() {
     const globalHints = this.state.hints;
     this.writer.indent('Hints');
@@ -285,10 +299,10 @@ export class LogicPassSpoiler {
       const gossipsItemRegion = gossipStones.filter(stone => stone[1].type === 'item-region').sort() as [string, HintGossipItemRegion][];
 
       if (gossipsPaths.length > 0) {
-        for (const type of Object.keys(HINTS_PATHS)) {
-          const hints = gossipsPaths.filter(x => x[1].path === type);
-          if (hints.length === 0) continue;
-          const name = (HINTS_PATHS as any)[type].name;
+        const paths = new Set(gossipsPaths.map(x => x[1].path));
+        for (const path of paths) {
+          const hints = gossipsPaths.filter(x => x[1].path === path);
+          const name = this.pathName(path);
           this.writer.indent(`${name}:`);
           const longestRegionNameLength = [...hints].reduce( function (a, b) { return regionName(a[1].location).length > regionName(b[1].location).length ? a : b; } )[1].location.length;
           const longestGossipNameLength = this.getMaxKeyLength(hints);
@@ -352,17 +366,37 @@ export class LogicPassSpoiler {
     this.writer.unindent('');
   }
 
+  private writePaths() {
+    const { paths } = this.state.analysis;
+    if (paths.length === 0) {
+      return;
+    }
+    this.writer.indent('Paths');
+    for (const path of paths) {
+      this.writer.indent(this.pathName(path));
+      const locations = [...path.locations].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
+      for (const loc of locations) {
+        this.writer.write(loc);
+      }
+      this.writer.unindent('');
+    }
+    this.writer.unindent('');
+  }
+
   private decPad(n: number, width: number) {
     const s = n.toString();
     const count = width - s.length;
     return count > 0 ? '0'.repeat(width - s.length) + s : s;
   }
 
+  private strPad(s: string, number: number) {
+    return `${s} ${this.decPad(number, this.state.worlds.length.toString().length)}`;
+  }
+
   private locationName(location: Location) {
     const data = locationData(location);
     if (this.isMulti) {
-      const id = data.world as number + 1
-      return `World ${this.decPad(id, this.state.worlds.length.toString().length)} ${data.id}`;
+      return `${this.strPad("World", data.world! + 1)} ${data.id}`;
     } else {
       return data.id;
     }
@@ -370,8 +404,7 @@ export class LogicPassSpoiler {
 
   private itemName(item: PlayerItem) {
     if (this.isMulti) {
-      const id = item.player + 1;
-      return `Player ${this.decPad(id, this.state.worlds.length.toString().length)} ${itemName(item.item.id)}`;
+      return `${this.strPad("Player", item.player + 1)} ${itemName(item.item.id)}`;
     } else {
       return itemName(item.item.id);
     }
@@ -380,10 +413,18 @@ export class LogicPassSpoiler {
   private regionName(region: Region) {
     const data = regionData(region);
     if (this.isMulti) {
-      const id = data.world + 1;
-      return `World ${this.decPad(id, this.state.worlds.length.toString().length)} ${regionName(data.id)}`;
+      return `${this.strPad("World", data.world + 1)} ${regionName(data.id)}`;
     } else {
       return regionName(data.id);
+    }
+  }
+
+  private eventName(entry: SphereEntryEvent) {
+    const event = ANALYSIS_EVENTS.get(entry.event)!;
+    if (this.isMulti) {
+      return `${this.strPad("World", entry.playerId + 1)} ${event}`;
+    } else {
+      return event;
     }
   }
 
@@ -419,9 +460,17 @@ export class LogicPassSpoiler {
     this.writer.indent('Spheres');
     for (const i in spheres) {
       this.writer.indent(`Sphere ${i}`);
-      const sphere = spheres[i].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
-      for (const loc of sphere) {
-        this.writer.write(loc);
+      const text: string[] = [];
+      const sphere = spheres[i];
+      for (const entry of sphere) {
+        switch (entry.type) {
+          case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.state.items.get(entry.location)!)}`); break;
+          case 'event': text.push(`Event - ${this.eventName(entry)}`); break;
+        }
+      }
+
+      for (const t of text.sort()) {
+        this.writer.write(t);
       }
       this.writer.unindent('');
     }
@@ -446,6 +495,7 @@ export class LogicPassSpoiler {
     this.writePreCompleted();
     this.writeEntrances();
     this.writeHints();
+    this.writePaths();
     this.writePlando();
     if (this.state.opts.settings.logic !== 'none') {
       this.writeSpheres();

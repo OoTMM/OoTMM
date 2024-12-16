@@ -14,6 +14,7 @@ export default defineConfig({
   define: {
     'process.env.VERSION': JSON.stringify(VERSION_FULL),
     'process.env.__IS_BROWSER__': JSON.stringify(true),
+    'process.env.DEBUG_LOG_LARGE_FILES': JSON.stringify(false),
   },
   resolve: {
     alias: {

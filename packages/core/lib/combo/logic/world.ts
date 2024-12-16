@@ -112,15 +112,12 @@ export type ExprMap = {
   [k: string]: Expr;
 }
 
-export type WorldAreaExprs = {
+export type WorldArea = {
   exits: ExprMap;
   events: ExprMap;
   locations: ExprMap;
   gossip: ExprMap;
   stay: Expr[] | null;
-};
-
-export type WorldArea = WorldAreaExprs & {
   game: Game;
   boss: boolean;
   ageChange: boolean;
@@ -156,13 +153,6 @@ export type ExprParsers = {
   mm: ExprParser;
 }
 
-export type WorldAreaExprsGraph = {[k: string]: WorldAreaExprs};
-
-export type WorldOptimized = {
-  child: WorldAreaExprsGraph;
-  adult: WorldAreaExprsGraph;
-};
-
 type DungeonEntranceReplace = {
   readonly type: 'replace';
   readonly entrance: Entrance;
@@ -182,6 +172,7 @@ export type World = {
   areas: { [k: string]: WorldArea };
   checks: { [k: string]: WorldCheck };
   dungeons: { [k: string]: Set<string> };
+  dungeonsBossAreas: { [k: string]: Set<string> };
   regions: { [k: string]: string };
   gossip: { [k: string]: WorldGossip };
   checkHints: { [k: string]: string[] };
@@ -195,7 +186,6 @@ export type World = {
   preCompleted: Set<string>;
   resolvedFlags: ResolvedWorldFlags;
   exprParsers: ExprParsers;
-  optimized: WorldOptimized | null;
   dungeonsEntrances: Map<string, DungeonEntrance>;
 };
 
@@ -247,27 +237,13 @@ function cloneChecks(checks: { [k: string]: WorldCheck }): { [k: string]: WorldC
   return result;
 }
 
-function cloneWorldAreaExprs(worldArea: WorldAreaExprs): WorldAreaExprs {
+function cloneWorldArea(worldArea: WorldArea): WorldArea {
   return {
     exits: { ...worldArea.exits },
     events: { ...worldArea.events },
     locations: { ...worldArea.locations },
     gossip: { ...worldArea.gossip },
     stay: worldArea.stay ? [...worldArea.stay] : null,
-  };
-}
-
-function cloneWorldAreaExprsGraph(worldAreaExprsGraph: WorldAreaExprsGraph): WorldAreaExprsGraph {
-  const result: WorldAreaExprsGraph = {};
-  for (const [k, v] of Object.entries(worldAreaExprsGraph)) {
-    result[k] = cloneWorldAreaExprs(v);
-  }
-  return result;
-};
-
-function cloneWorldArea(worldArea: WorldArea): WorldArea {
-  return {
-    ...cloneWorldAreaExprs(worldArea),
     game: worldArea.game,
     boss: worldArea.boss,
     ageChange: worldArea.ageChange,
@@ -277,22 +253,12 @@ function cloneWorldArea(worldArea: WorldArea): WorldArea {
   };
 }
 
-function cloneWorldOptimized(worldOptimized: WorldOptimized | null): WorldOptimized | null {
-  if (!worldOptimized) {
-    return null;
-  }
-
-  return {
-    child: cloneWorldAreaExprsGraph(worldOptimized.child),
-    adult: cloneWorldAreaExprsGraph(worldOptimized.adult),
-  };
-}
-
 export function cloneWorld(world: World): World {
   return {
     areas: mapValues(world.areas, cloneWorldArea),
     checks: cloneChecks(world.checks),
     dungeons: mapValues(world.dungeons, x => new Set(x)),
+    dungeonsBossAreas: mapValues(world.dungeonsBossAreas, x => new Set(x)),
     regions: cloneDeep(world.regions),
     gossip: cloneDeep(world.gossip),
     checkHints: cloneDeep(world.checkHints),
@@ -306,20 +272,8 @@ export function cloneWorld(world: World): World {
     entranceOverridesRev: new Map(world.entranceOverridesRev),
     resolvedFlags: world.resolvedFlags,
     exprParsers: world.exprParsers,
-    optimized: cloneWorldOptimized(world.optimized),
     dungeonsEntrances: new Map(world.dungeonsEntrances),
   };
-}
-
-export function optimizedWorldView(world: World): WorldOptimized {
-  if (!world.optimized) {
-    return {
-      child: world.areas,
-      adult: world.areas,
-    }
-  };
-
-  return world.optimized;
 }
 
 export class LogicPassWorld {
@@ -401,6 +355,7 @@ export class LogicPassWorld {
       areas: {},
       checks: {},
       dungeons: {},
+      dungeonsBossAreas: {},
       regions: {},
       gossip: {},
       checkHints: {},
@@ -414,7 +369,6 @@ export class LogicPassWorld {
       entranceOverridesRev: new Map,
       resolvedFlags,
       exprParsers,
-      optimized: null,
       dungeonsEntrances: new Map,
     };
   }
@@ -538,6 +492,13 @@ export class LogicPassWorld {
           }
           const d = this.world.dungeons[dungeon];
           Object.keys(locations).forEach(x => d.add(x));
+
+          if (boss) {
+            if (this.world.dungeonsBossAreas[dungeon] === undefined) {
+              this.world.dungeonsBossAreas[dungeon] = new Set();
+            }
+            this.world.dungeonsBossAreas[dungeon].add(name);
+          }
         }
 
         for (const loc in locations) {

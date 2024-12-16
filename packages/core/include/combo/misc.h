@@ -796,6 +796,10 @@ typedef enum RespawnMode {
     /* 8 */ RESPAWN_MODE_MAX
 } RespawnMode;
 
+typedef enum CustomRespawnMode {
+    /* 0 */ CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE,
+} CustomRespawnMode;
+
 #if defined(GAME_MM)
 # define gGrottoData    (gSaveContext.respawn[RESPAWN_MODE_UNK_3].data)
 #endif
@@ -936,6 +940,10 @@ typedef struct {
     /* 0x1 */ s8 spawnNum;
     /* 0x2 */ u16 flags;
 } EntranceTableEntry; /* size = 0x4 */
+
+#define DO_ACTION_TEX_WIDTH  48
+#define DO_ACTION_TEX_HEIGHT 16
+#define DO_ACTION_TEX_SIZE ((DO_ACTION_TEX_WIDTH * DO_ACTION_TEX_HEIGHT) / 2)
 
 #define UPDBGCHECKINFO_FLAG_OOT_0   (1 << 0) /* check wall */
 #define UPDBGCHECKINFO_FLAG_OOT_1   (1 << 1) /* check ceiling */

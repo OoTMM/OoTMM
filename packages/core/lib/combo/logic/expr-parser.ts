@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString } from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -181,7 +181,7 @@ export class ExprParser {
       throw this.error(`Expected child or adult at ${this.ctx[0].cursor}`);
     }
     this.expect(')');
-    return exprAge(age);
+    return exprAgeString(age);
   }
 
   private parseExprHas(): Expr | undefined {
@@ -466,6 +466,9 @@ export class ExprParser {
       }
       exprs.push(expr);
     }
+    if (this.peek('&&')) {
+      throw this.error(`Ambiguous AND after OR at ${this.ctx[0].cursor}`);
+    }
     if (exprs.length === 1) {
       return exprs[0];
     } else {
@@ -475,17 +478,22 @@ export class ExprParser {
 
   private parseExprAnd(): Expr | undefined {
     const exprs: Expr[] = [];
+    let isAnd = false;
     let expr = this.parseExprSingle();
     if (expr === undefined) {
       return undefined;
     }
     exprs.push(expr);
     while (this.accept('&&')) {
+      isAnd = true;
       expr = this.parseExprSingle();
       if (expr === undefined) {
         throw this.error(`Expected expression after && at ${this.ctx[0].cursor}`);
       }
       exprs.push(expr);
+    }
+    if (isAnd && this.peek('||')) {
+      throw this.error(`Ambiguous OR after AND at ${this.ctx[0].cursor}`);
     }
     if (exprs.length === 1) {
       return exprs[0];
@@ -613,6 +621,6 @@ export class ExprParser {
   }
 
   private error(msg: string) {
-    return new Error(msg + "\nwhen parsing `" + this.ctx[0].buffer + "`");
+    return new Error(msg + "\nwhen parsing `" + this.ctx[0].buffer + "`\nTrace:\n" + this.ctx.map(x => '    ' + x.buffer).join('\n'));
   }
 };

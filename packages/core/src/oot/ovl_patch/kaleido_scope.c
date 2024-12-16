@@ -576,6 +576,30 @@ static void KaleidoScope_UpdateOwlWarpNamePanel(PlayState* play)
     }
 }
 
+static const char* kSoarNames[] = {
+    "Great Bay Coast",
+    "Zora Cape",
+    "Snowhead",
+    "Mountain Village",
+    "Clock Town",
+    "Milk Road",
+    "Woodfall",
+    "Southern Swamp",
+    "Ikana Canyon",
+    "Stone Tower"
+};
+
+static void soaringMessage(PlayState* play, u8 soaringIndex)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "Soar to " TEXT_COLOR_RED);
+    comboTextAppendStr(&b, kSoarNames[soaringIndex]);
+    comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "OK" TEXT_NL "No" TEXT_END);
+}
+
 static u32 sMapPageBgTextures[15];
 
 void KaleidoScope_BeforeUpdate(PlayState* play)
@@ -727,7 +751,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
                 interfaceCtx->startAlpha = 255;
                 WREG(2) = 0;
                 pauseCtx->alpha = 255;
-                pauseCtx->changing = 0; /* PAUSE_MAIN_STATE_IDLE; */
+                pauseCtx->mainState = 0; /* PAUSE_MAIN_STATE_IDLE; */
                 pauseCtx->cursorSpecialPos = 0;
                 pauseCtx->state = PAUSE_STATE_OWLWARP_SELECT;
                 R_PAUSE_OWLWARP_ALPHA = 120;
@@ -742,23 +766,62 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
                 WREG(2) = -6240;
                 func_800C7200(0);
                 gSoaringIndexSelected = -1;
-                gSaveContext.prevHudVisibilityMode = 50; /* HUD_VISIBILITY_ALL; */
+                gSaveContext.prevHudVisibilityMode = HUD_VISIBILITY_ALL;
             }
             else if (play->state.input[0].press.button & A_BUTTON)
             {
-                msgCtx->msgLength = 0;
-                msgCtx->msgMode = 0; /* MSGMODE_NONE; */
-                pauseCtx->state = PAUSE_STATE_OWLWARP_6;
-                WREG(2) = -6240;
-                func_800C7200(0);
-                gSoaringIndexSelected = (u8)pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
                 PlaySound(0x4808); /* NA_SE_SY_DECIDE */
+                PlayerDisplayTextBox(play, 0x88d, NULL);
+                soaringMessage(play, (u8)pauseCtx->cursorPoint[PAUSE_WORLD_MAP]);
+                pauseCtx->state = PAUSE_STATE_OWLWARP_CONFIRM;
             }
             else
             {
                 KaleidoScope_UpdateOwlWarpNamePanel(play);
             }
             KaleidoScope_UpdateSoaringMapCursor(play);
+            break;
+
+        case PAUSE_STATE_OWLWARP_CONFIRM:
+            if (play->state.input[0].press.button & A_BUTTON)
+            {
+                msgCtx->msgLength = 0;
+                msgCtx->msgMode = 0; /* MSGMODE_NONE; */
+                if (msgCtx->choiceIndex == 0)
+                {
+                    Interface_SetDoAction(play, 0x0A); /* DO_ACTION_NONE */
+                    pauseCtx->state = PAUSE_STATE_OWLWARP_6;
+                    WREG(2) = -6240;
+                    func_800C7200(0);
+                    gSoaringIndexSelected = (u8)pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
+                    PlaySound(0x4808); /* NA_SE_SY_DECIDE */
+                }
+                else
+                {
+                    pauseCtx->state = PAUSE_STATE_OWLWARP_SELECT;
+                    Interface_SetDoAction(play, 0x06); /* DO_ACTION_DECIDE */
+                    Interface_LoadActionLabelB(play, 0x12); /* DO_ACTION_STOP */
+                    PlaySound(0x4818); /* NA_SE_SY_MESSAGE_PASS */
+                }
+            }
+            else if (play->state.input[0].press.button & B_BUTTON)
+            {
+                msgCtx->msgLength = 0;
+                msgCtx->msgMode = 0; /* MSGMODE_NONE; */
+                pauseCtx->state = PAUSE_STATE_OWLWARP_SELECT;
+                Interface_SetDoAction(play, 0x06); /* DO_ACTION_DECIDE */
+                Interface_LoadActionLabelB(play, 0x12); /* DO_ACTION_STOP */
+                PlaySound(0x4818); /* NA_SE_SY_MESSAGE_PASS */
+            }
+            else if (play->state.input[0].press.button & START_BUTTON)
+            {
+                msgCtx->msgLength = 0;
+                msgCtx->msgMode = 0; /* MSGMODE_NONE; */
+                Interface_SetDoAction(play, 0x0A); /* DO_ACTION_NONE */
+                pauseCtx->state = PAUSE_STATE_OWLWARP_6;
+                WREG(2) = -6240;
+                func_800C7200(0);
+            }
             break;
 
         case PAUSE_STATE_OWLWARP_6:
@@ -1051,7 +1114,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(PlayState* play)
 
     pauseCtx->infoPanelVtx[5].v.ob[0] = pauseCtx->infoPanelVtx[7].v.ob[0] = pauseCtx->infoPanelVtx[4].v.ob[0] + 72;
 
-    if ((pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_LEFT) && (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE)) {
+    if ((pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_LEFT) && (pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE)) {
         pauseCtx->infoPanelVtx[8].v.ob[0] = pauseCtx->infoPanelVtx[10].v.ob[0] = WREG(16);
 
         pauseCtx->infoPanelVtx[9].v.ob[0] = pauseCtx->infoPanelVtx[11].v.ob[0] = pauseCtx->infoPanelVtx[8].v.ob[0] + 24;
@@ -1071,7 +1134,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(PlayState* play)
             pauseCtx->infoPanelVtx[8].v.ob[1] - 26;
     }
 
-    if ((pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_RIGHT) && (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE)) {
+    if ((pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_RIGHT) && (pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE)) {
         pauseCtx->infoPanelVtx[12].v.ob[0] = pauseCtx->infoPanelVtx[14].v.ob[0] = WREG(17);
 
         pauseCtx->infoPanelVtx[13].v.ob[0] = pauseCtx->infoPanelVtx[15].v.ob[0] =
@@ -1235,8 +1298,8 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
 
     OPEN_DISPS(play->state.gfxCtx);
 
-    if ((pauseCtx->changing == PAUSE_MAIN_STATE_IDLE) ||
-        (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE_CURSOR_ON_SONG)) {
+    if ((pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE) ||
+        (pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE_CURSOR_ON_SONG)) {
         gDPPipeSync(POLY_OPA_DISP++);
         gDPSetCombineLERP(POLY_OPA_DISP++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);

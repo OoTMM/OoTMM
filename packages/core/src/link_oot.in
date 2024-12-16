@@ -42,7 +42,7 @@ Actor_Angle = 0x800213b4;
 GetRoomClearFlag = 0x80020640;
 
 AudioLoad_InitTable = 0x800b70c8;
-Audio_ApplySoundMode = 0x800c7420;
+Audio_SetFileSelectSettings = 0x800c7420;
 Magic_Refill = 0x80072500;
 
 ActorRemove = 0x80025648;
@@ -108,6 +108,7 @@ DrawGi_Spell            = 0x80058698;
 Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;
+Interface_SetSubTimerToFinalSecond = 0x80073938;
 
 Gfx_SetupDL25_Opa       = 0x8007e298;
 Gfx_SetupDL25_Xlu       = 0x8007e2c0;
@@ -124,6 +125,7 @@ Collider_DestroyJntSph  = 0x8004a550;
 
 Font_LoadOrderedFont = 0x8005bd78;
 UnkFuncActorCollision = 0x8002650c;
+Actor_DrawDoorLock = 0x80026dc8;
 
 CollisionCheck_SetOC = 0x8004c130;
 CollisionCheck_SetAT = 0x8004bd50;
@@ -132,6 +134,7 @@ CollisionCheck_SetAC = 0x8004bf40;
 BgCheck_EntityRaycastDown4 = 0x8002f4b8;
 
 Math_Vec3f_Sum = 0x80063d10;
+Math_Vec3f_Yaw = 0x80063f00;
 
 DynaPoly_DeleteBgActor = 0x80031638;
 DynaPoly_SetBgActor = 0x800313a4;

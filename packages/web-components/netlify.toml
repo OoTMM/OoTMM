@@ -5,3 +5,18 @@
   for = "/*"
   [headers.values]
     access-control-allow-origin = "*"
+
+[[headers]]
+  for = "/config.json"
+  [headers.values]
+    cache-control = "public, max-age=60"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    cache-control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    cache-control = "public, max-age=31536000, immutable"

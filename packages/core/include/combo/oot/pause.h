@@ -42,7 +42,7 @@ typedef struct PauseContext
     u16             state;
     u16             debugState;
     Vec3f           eye;
-    u16             changing;
+    u16             mainState;
     u16             screen_prev_idx;
     u16             screen_idx;
     u16             switchPageTimer;
@@ -114,7 +114,7 @@ ASSERT_OFFSET(PauseContext, loadMsg,                    0x1d0);
 ASSERT_OFFSET(PauseContext, state,                      0x1d4);
 ASSERT_OFFSET(PauseContext, debugState,                 0x1d6);
 ASSERT_OFFSET(PauseContext, eye,                        0x1d8);
-ASSERT_OFFSET(PauseContext, changing,                   0x1e4);
+ASSERT_OFFSET(PauseContext, mainState,                  0x1e4);
 ASSERT_OFFSET(PauseContext, screen_prev_idx,            0x1e6);
 ASSERT_OFFSET(PauseContext, screen_idx,                 0x1e8);
 ASSERT_OFFSET(PauseContext, switchPageTimer,            0x1ea);

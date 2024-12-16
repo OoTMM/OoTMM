@@ -96,12 +96,55 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
     }
 }
 
-static const char* kPathNames[] = {
-    TEXT_COLOR_YELLOW "Way of the Hero",
+#define PATH_WOTH       0
+#define PATH_TRIFORCE   1
+#define PATH_DUNGEON    2
+#define PATH_BOSS       3
+#define PATH_END_BOSS   4
+#define PATH_EVENT      5
+
+static const char* kPathTriforceNames[] = {
     TEXT_COLOR_RED    "Path of Power",
     TEXT_COLOR_GREEN  "Path of Courage",
     TEXT_COLOR_BLUE   "Path of Wisdom",
 };
+
+static const char* kPathEndBossNames[] = {
+    TEXT_COLOR_RED    "Path to Ganon",
+    TEXT_COLOR_PINK   "Path to Majora",
+};
+
+static const char* kPathEventNames[] = {
+    TEXT_COLOR_TEAL     "Path to Time Travel",
+    TEXT_COLOR_YELLOW   "Path to Rainbow Bridge",
+    TEXT_COLOR_PINK     "Path to Termina",
+    TEXT_COLOR_RED      "Path to Moon",
+};
+
+static void appendPathName(char** b, u8 path, u8 subPath)
+{
+    switch (path)
+    {
+    case PATH_WOTH:
+        comboTextAppendStr(b, TEXT_COLOR_YELLOW "Way of the Hero");
+        break;
+    case PATH_TRIFORCE:
+        comboTextAppendStr(b, kPathTriforceNames[subPath]);
+        break;
+    case PATH_DUNGEON:
+        comboTextAppendDungeonName(b, subPath, "Path to ");
+        break;
+    case PATH_BOSS:
+        comboTextAppendBossName(b, subPath, "Path to ");
+        break;
+    case PATH_END_BOSS:
+        comboTextAppendStr(b, kPathEndBossNames[subPath]);
+        break;
+    case PATH_EVENT:
+        comboTextAppendStr(b, kPathEventNames[subPath]);
+        break;
+    }
+}
 
 static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
 {
@@ -127,7 +170,7 @@ static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
     case HINT_TYPE_PATH:
         comboTextAppendRegionName(&b, hint->region, hint->world, 0);
         comboTextAppendStr(&b, " is on the ");
-        comboTextAppendStr(&b, kPathNames[hint->items[0]]);
+        appendPathName(&b, hint->items[0], hint->items[1]);
         comboTextAppendClearColor(&b);
         break;
     case HINT_TYPE_FOOLISH:

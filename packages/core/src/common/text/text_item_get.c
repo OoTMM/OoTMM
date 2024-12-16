@@ -93,7 +93,7 @@ static void appendDungeonEntrance(char** b, int dungeonId)
     {
         /* Dungeon */
         comboTextAppendStr(b, "at ");
-        comboTextAppendDungeonName(b, data & 0xff);
+        comboTextAppendDungeonName(b, data & 0xff, NULL);
     }
     else
     {
@@ -150,7 +150,7 @@ static void comboTextCompass(char** b, PlayState* play, s16 gi)
 
     /* Display the boss */
     comboTextAppendStr(b, TEXT_NL "It points at ");
-    comboTextAppendBossName(b, bossId);
+    comboTextAppendBossName(b, bossId, NULL);
     comboTextAppendStr(b, ".");
 }
 

@@ -1410,8 +1410,6 @@ void FileSelect_LoadGame(GameState* thisx) {
     this->state.nextGameStateSize = sizeof(PlayState);
     this->state.running = false;
 
-    gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance = -1;
-    gSaveContext.respawnFlag = 0;
     gSaveContext.seqId = (u8)NA_BGM_DISABLED;
     gSaveContext.natureAmbienceId = 0xFF;
     gSaveContext.showTitleCard = true;

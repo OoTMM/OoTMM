@@ -6,11 +6,15 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the ability to bind region clear states to dungeon clears, dungeon rewards, or set them free.
+- Add Path hints.
 - Add the ability to play the multiplayer modes as teams, racing each other in the same seed.
 - Add the ability to play multiworld random settings.
 - Add the Japanese version of Stone Tower Temple.
 - Add the Japanese version of Stone Tower.
 - Add the Japanese version of Deku Palace & the matching grottos, as a setting.
+- Add pause menu save screen for MM and options to return to spawn or dungeon entrance after saving.
+- Alter the OoT pause menu saving to be consistent with the new MM pause menu saving.
 - Add a trick to climb Snowhead Temple pillar room from ground floor by using hookshot to kill freezards and spawn a hookshot-able chest
 
 ### Changed
@@ -20,6 +24,11 @@ All notable changes to this project will be documented in this file.
 - Removed the cutscenes from the Skull Kid paintings and the Skulltulas spawning from big jars, tree or chandelier in MM Spider Houses.
 - Bombchu are now accounted in logic for the SSH Gold Room hives.
 - Updated **Allsanity** and **Hell** presets
+- Improve OoT Song of Soaring by showing the "Soar to" message without unpausing the game.
+- Alter death behavior to return you to the dungeon entrance even if it's cross-game.
+- Alter save behavior such that if you save and reset in a dungeon, you will start at the dungeon entrance even if it's an MM dungeon.
+- Remoevd Playthrough hint in Blitz pre-completed preset.
+- Accessing WFT Pre-Boss room can now be done with Din's Fire in logic.
 
 ### Fixed
 
@@ -29,6 +38,12 @@ All notable changes to this project will be documented in this file.
 - Spin attack with child sword being ridiculously small. Gilded sword spin is now as big as Biggoron sword spin.
 - Potential loss of MM sword due to Epona and overworld or region entrances randomization.
 - Logic for boat archery mistakenly requiring a bow.
+- Fix OoT door locks not being drawn on the back side of knobbed doors.
+- Remove unnecessary setting of clock to 6am day 3 after playing Oath to Order on the clock tower roof.
+- Remove unnecessary sanity checks for scene time speed.
+- Sound setting not sticking over when doing to MM.
+- Killing Big Poes in MM no longer considers Hookshot in logic.
+- ER in MM only expecting to reach Temple of Time.
 - Fix the ground floor pots of Snowhead Temple pillar room not being in logic without the ability to melt ice.
 
 ## [26.1] - 2024-11-09

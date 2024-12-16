@@ -1,16 +1,6 @@
-let promiseManifest: Promise<any> | null = null;
-
 export async function getManifest() {
-  if (!promiseManifest) {
-    promiseManifest = new Promise((resolve, reject) => {
-      fetch(`${__STATIC_URL__}/config.json`)
-        .then((response) => response.json())
-        .then((data) => resolve(data))
-        .catch((error) => { promiseManifest = null; reject(error) });
-    });
-  }
-  const manifest = await promiseManifest;
-  return manifest;
+  const manifest = await fetch(`${__STATIC_URL__}/config.json`);
+  return manifest.json();
 }
 
 export async function getManifestForVersion(version: string) {

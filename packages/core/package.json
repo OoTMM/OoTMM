@@ -6,6 +6,7 @@
     "start": "tsx ./lib/cli.ts",
     "start:config": "tsx ./lib/cli.ts --config config.yml",
     "test": "vitest run --reporter=dot",
+    "bench": "vitest bench",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

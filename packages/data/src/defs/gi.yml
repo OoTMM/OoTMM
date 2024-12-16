@@ -168,7 +168,7 @@
 - { id: OOT_BOSS_KEY_SPIRIT, type: BOSS_KEY, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_SPIRIT], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Spirit)" }
 - { id: OOT_BOSS_KEY_SHADOW, type: BOSS_KEY, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_SHADOW], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Shadow)" }
 - { id: OOT_BOSS_KEY_GANON, type: BOSS_KEY, add: [OOT_BOSS_KEY, SCE_OOT_GANON_TOWER], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Ganon)" }
-- { id: OOT_MAP_DT, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_INSIDE_DEKU_TREE], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Deku)" }
+- { id: OOT_MAP_DT, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_DEKU_TREE], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Deku)" }
 - { id: OOT_MAP_DC, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_DODONGO_CAVERN], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Dodongo)" }
 - { id: OOT_MAP_JJ, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_INSIDE_JABU_JABU], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Jabu)" }
 - { id: OOT_MAP_FOREST, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Forest)" }
@@ -178,7 +178,7 @@
 - { id: OOT_MAP_SHADOW, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_TEMPLE_SHADOW], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Shadow)" }
 - { id: OOT_MAP_BOTW, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_BOTTOM_OF_THE_WELL], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Well)" }
 - { id: OOT_MAP_IC, type: MAP_COMPASS, add: [OOT_MAP, SCE_OOT_ICE_CAVERN], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Ice)" }
-- { id: OOT_COMPASS_DT, type: MAP_COMPASS, add: [OOT_COMPASS, SCE_OOT_INSIDE_DEKU_TREE], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Deku)" }
+- { id: OOT_COMPASS_DT, type: MAP_COMPASS, add: [OOT_COMPASS, SCE_OOT_DEKU_TREE], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Deku)" }
 - { id: OOT_COMPASS_DC, type: MAP_COMPASS, add: [OOT_COMPASS, SCE_OOT_DODONGO_CAVERN], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Dodongo)" }
 - { id: OOT_COMPASS_JJ, type: MAP_COMPASS, add: [OOT_COMPASS, SCE_OOT_INSIDE_JABU_JABU], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Jabu)" }
 - { id: OOT_COMPASS_FOREST, type: MAP_COMPASS, add: [OOT_COMPASS, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Forest)" }

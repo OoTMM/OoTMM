@@ -340,6 +340,17 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_GERUDO_VALLEY_FROM_FIELD,        0, {   280, -555,  1470 } }, /* OOT_GROTTO_EXIT_OCTOROK */
 };
 
+static const OotRespawnData kSpiritTempleMainEntrance = {
+    { -5.0f, -150.f, 754.0f },
+    DEG_TO_BINANG(180),
+    0xdff,
+    ENTR_OOT_TEMPLE_SPIRIT,
+    0,
+    0,
+    0,
+    0,
+};
+
 static void applyGrottoExit(u32* entrance, int id)
 {
     OotRespawnData* rs;
@@ -473,6 +484,45 @@ static void Play_AfterInit(PlayState* play)
 
     /* Signs */
     ComboPlay_SpawnExtraSigns(play);
+
+    switch (play->sceneId)
+    {
+    case SCE_OOT_DEKU_TREE:
+    case SCE_OOT_DODONGO_CAVERN:
+    case SCE_OOT_INSIDE_JABU_JABU:
+    case SCE_OOT_TEMPLE_FOREST:
+    case SCE_OOT_TEMPLE_FIRE:
+    case SCE_OOT_TEMPLE_WATER:
+    case SCE_OOT_TEMPLE_SPIRIT:
+    case SCE_OOT_TEMPLE_SHADOW:
+    case SCE_OOT_BOTTOM_OF_THE_WELL:
+    case SCE_OOT_ICE_CAVERN:
+    case SCE_OOT_GANON_TOWER:
+    case SCE_OOT_GERUDO_TRAINING_GROUND:
+    case SCE_OOT_INSIDE_GANON_CASTLE:
+    case SCE_OOT_LAIR_GOHMA:
+    case SCE_OOT_LAIR_KING_DODONGO:
+    case SCE_OOT_LAIR_BARINADE:
+    case SCE_OOT_LAIR_PHANTOM_GANON:
+    case SCE_OOT_LAIR_VOLVAGIA:
+    case SCE_OOT_LAIR_MORPHA:
+    case SCE_OOT_LAIR_BONGO_BONGO:
+    case SCE_OOT_LAIR_TWINROVA:
+        if (!gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams)
+        {
+            /* Copy to the custom death respawn */
+            memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gSaveContext.respawn[RESPAWN_MODE_DOWN], sizeof(OotRespawnData));
+            if (gSave.entrance == 0x3f0 || gSave.entrance == 0x3f4)
+            {
+                /* Copy pos, yaw, playerParams, entrance and roomIndex */
+                memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &kSpiritTempleMainEntrance, offsetof(OotRespawnData, data));
+            }
+        }
+        break;
+    default:
+        comboClearCustomRespawn(CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE);
+        break;
+    }
 }
 
 void hookPlay_Init(PlayState* play)
@@ -645,6 +695,10 @@ void Play_TransitionDone(PlayState* play)
         entrance = gSharedCustomSave.mm.fw[gSave.age].entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
         break;
+    case ENTR_CROSS_RESPAWN:
+        entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isDungeonEntranceSpawn = 1;
+        break;
     }
 
     /* Handle grottos */
@@ -755,6 +809,9 @@ void Play_FastInit(GameState* gs)
         gSaveContext.respawnFlag = 3;
         gComboCtx.isFwSpawn = 0;
 
+        /* Restore dungeon entrance respawn data. */
+        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(OotRespawnData));
+
         OotFaroreWind* fw = &gSave.info.fw;
 
         if (fw->set)
@@ -778,6 +835,18 @@ void Play_FastInit(GameState* gs)
             gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
         }
     }
+
+    if (gComboCtx.isDungeonEntranceSpawn)
+    {
+        gComboCtx.isDungeonEntranceSpawn = 0;
+
+        if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams)
+        {
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(OotRespawnData));
+            gSaveContext.respawnFlag = 2;
+        }
+    }
+
     gSave.cutscene = 0;
 
     /* Set the entrance */

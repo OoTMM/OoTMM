@@ -44,6 +44,7 @@ typedef struct
     u32             preCompleted;
     u32             entrancesSong[6];
     u32             entrancesOwl[10];
+    u32             entrancesSpawns[2];
     u8              config[0x40];
     SpecialCond     special[5];
     u16             maxCoins[4];
