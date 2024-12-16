@@ -97,16 +97,17 @@
     "Snowhead Temple Bridge Back": "true"
     "Snowhead Temple Center Level 0": "true"
     "Snowhead Temple Block Room": "true"
-    "Snowhead Temple Pillars Room": "can_use_fire_short_range || trick_sht_hot_water"
+    "Snowhead Temple Pillars Room Upper": "can_use_fire_short_range || trick_sht_hot_water"
     "Snowhead Temple Map Room Upper": "scarecrow_hookshot || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Pot Central Room Scarecrow 1": "scarecrow_hookshot || short_hook_anywhere"
     "Snowhead Temple Pot Central Room Scarecrow 2": "scarecrow_hookshot || short_hook_anywhere"
-"Snowhead Temple Pillars Room":
+"Snowhead Temple Pillars Room Upper":
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
+    "Snowhead Temple Pillars Room Lower": "true"
     "WARP_SONGS": "true"
   events:
     SNOWHEAD_RAISE_PILLAR: "(has_mask_goron || can_hammer) && (can_use_fire_short_range || (event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN)) || trick_sht_hot_water_er)"
@@ -118,6 +119,12 @@
     "Snowhead Temple Pot Pillars Room Upper 4": "true"
     "Snowhead Temple Pot Pillars Room Upper 5": "true"
     "Snowhead Temple Pot Pillars Room Upper 6": "true"
+"Snowhead Temple Pillars Room Lower":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 0": "true"
+    "Snowhead Temple Pillars Room Upper": "((can_use_fire_short_range || trick_sht_hot_water_er) && has(MASK_DEKU)) || short_hook_anywhere || (soul_freezard && can_hookshot && trick(MM_SHT_PILLAR_ROOM_HOOKSHOT))" # + climb anywhere
+  locations:
     "Snowhead Temple Pot Pillars Room Lower 1": "true"
     "Snowhead Temple Pot Pillars Room Lower 2": "true"
     "Snowhead Temple Pot Pillars Room Lower 3": "true"
@@ -129,6 +136,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
+    "Snowhead Temple Pillars Room Lower": "true"
     "WARP_SONGS": "true"
   events:
     FAIRY: "true"

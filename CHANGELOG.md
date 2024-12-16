@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Add the Japanese version of Deku Palace & the matching grottos, as a setting.
 - Add pause menu save screen for MM and options to return to spawn or dungeon entrance after saving.
 - Alter the OoT pause menu saving to be consistent with the new MM pause menu saving.
+- Add a trick to climb Snowhead Temple pillar room from ground floor by using hookshot to kill freezards and spawn a hookshot-able chest
 
 ### Changed
 
@@ -43,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - Sound setting not sticking over when doing to MM.
 - Killing Big Poes in MM no longer considers Hookshot in logic.
 - ER in MM only expecting to reach Temple of Time.
+- Fix the ground floor pots of Snowhead Temple pillar room not being in logic without the ability to melt ice.
 
 ## [26.1] - 2024-11-09
 

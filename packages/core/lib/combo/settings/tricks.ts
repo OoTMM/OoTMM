@@ -457,6 +457,12 @@ export const TRICKS: Tricks = {
     tooltip: 'Destroy the snowballs with fire arrows or bombs and then jump down.  A precise jump slash may help getting onto the platform.',
     linkVideo: 'https://youtube.com/clip/UgkxwCrliqwRiCbljfpozhmsnlzVwSUaAI0N',
   },
+  MM_SHT_PILLAR_ROOM_HOOKSHOT: {
+    game: 'mm',
+    name: 'Snowhead Temple Hookshot Up Pillar Room',
+    tooltip: 'From the ground floor of pillar room, use a hookshot to kill the freezards and then climb using the chest that spawns.',
+    linkVideo: 'https://youtu.be/4WVOnjC7xdE',
+  },
   MM_KEG_EXPLOSIVES: {
     game: 'mm',
     name: 'Use Powder Kegs as Explosives',
