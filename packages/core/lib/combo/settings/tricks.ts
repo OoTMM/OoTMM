@@ -461,6 +461,7 @@ export const TRICKS: Tricks = {
     game: 'mm',
     name: 'Snowhead Temple Hookshot Up Pillar Room',
     tooltip: 'From the ground floor of pillar room, use a hookshot to kill the freezards and then climb using the chest that spawns.',
+    linkVideo: 'https://youtu.be/4WVOnjC7xdE',
   },
   MM_KEG_EXPLOSIVES: {
     game: 'mm',
