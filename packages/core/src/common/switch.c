@@ -65,6 +65,12 @@ static void waitSubsystems(void)
     IO_WRITE(SI_STATUS_REG, 0);
 
     /* Disable VI */
+    //wait on vblank or the VI can crash!
+    while (1) {
+        if (IO_READ(VI_CURRENT_REG) == 512) {
+            break;
+        }
+    }
     IO_WRITE(VI_CONTROL_REG, 0);
     IO_WRITE(VI_CURRENT_REG, 0);
 }
