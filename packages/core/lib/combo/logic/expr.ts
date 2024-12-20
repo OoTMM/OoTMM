@@ -741,7 +741,7 @@ export const exprSpecial = (settings: Settings, special: string): Expr => {
   return exprMemo(new ExprSpecial(settings, special));
 };
 
-export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlags, setting: string, value: any): Expr => {
+export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlags, setting: string, value: string | undefined): Expr => {
   if ((WORLD_FLAGS as readonly string[]).includes(setting)) {
     /* World flag */
     if (!resolvedFlags.hasOwnProperty(setting)) {
@@ -753,6 +753,10 @@ export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlag
       throw new Error(`Invalid world flag value: ${value} (for flag: ${setting})`);
     }
 
+    if (value === undefined) {
+      throw new Error(`World flag ${setting} requires a value`);
+    }
+
     if (f.has(value)) {
       return EXPR_TRUE;
     } else {
@@ -760,11 +764,22 @@ export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlag
     }
   } else {
     /* Normal setting */
+    const s = SETTINGS.find((x) => x.key === setting);
     const v = (settings as any)[setting];
-    if (v === undefined) {
+    if (v === undefined || s === undefined) {
       throw new Error(`Setting ${setting} not found`);
     }
-    return v === value ? EXPR_TRUE : EXPR_FALSE;
+    if (s.type === 'boolean') {
+      if (value !== undefined) {
+        throw new Error(`Setting ${setting} does not take a value`);
+      }
+      return v ? EXPR_TRUE : EXPR_FALSE;
+    } else {
+      if (value === undefined) {
+        throw new Error(`Setting ${setting} requires a value`);
+      }
+      return v === value ? EXPR_TRUE : EXPR_FALSE;
+    }
   }
 };
 

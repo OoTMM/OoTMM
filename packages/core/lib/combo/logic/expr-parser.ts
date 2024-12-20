@@ -254,7 +254,7 @@ export class ExprParser {
   }
 
   private parseExprSetting(): Expr | undefined {
-    let value: string | boolean = true;
+    let value: string | undefined;
     if (this.peek('identifier') !== 'setting') {
       return undefined;
     }

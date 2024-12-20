@@ -7,8 +7,8 @@
     "Moon": "event(MM_MOON_OPEN)"
     "Clock Tower Platform": "false"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
-    "Clock Tower Roof Skull Kid Song of Time": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Skull Kid Ocarina": "cond(setting(shufflePotsMm, none), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Skull Kid Song of Time": "cond(setting(shufflePotsMm, none), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
     "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
     "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
     "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"

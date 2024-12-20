@@ -317,4 +317,4 @@
 "rainbow_bridge_medallions": "has(MEDALLION_LIGHT) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER) && has(MEDALLION_SHADOW) && has(MEDALLION_SPIRIT)"
 "rainbow_bridge": "setting(rainbowBridge, open) || (setting(rainbowBridge, vanilla) && rainbow_bridge_vanilla) || (setting(rainbowBridge, medallions) && rainbow_bridge_medallions) || (setting(rainbowBridge, custom) && special(BRIDGE))"
 
-"lake_water_control": "(!setting(erBoss) && setting(regionState, dungeonBeaten) && event(BOSS_MORPHA)) || event(CLEAR_STATE_LAKE)"
+"lake_water_control": "(setting(erBoss, none) && setting(regionState, dungeonBeaten) && event(BOSS_MORPHA)) || event(CLEAR_STATE_LAKE)"
