@@ -228,10 +228,6 @@ beginseg
     include "$(BUILD_DIR)/asm/boot/getwatchlo.text.o"
     include "$(BUILD_DIR)/asm/boot/setwatchlo.text.o"
     include "$(BUILD_DIR)/src/boot/libm/fmodf.o"
-    include "$(BUILD_DIR)/src/boot/libc/memset.o"
-    include "$(BUILD_DIR)/src/boot/libc/strcmp.o"
-    include "$(BUILD_DIR)/src/boot/libc/strcpy.o"
-    include "$(BUILD_DIR)/src/boot/libc/memmove.o"
     include "$(BUILD_DIR)/src/boot/build.o"
 endseg
 
