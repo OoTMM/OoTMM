@@ -21,6 +21,33 @@ size_t strlen(const char* str) {
     return ptr - str;
 }
 
+int strcmp(const char* str1, const char* str2) {
+    unsigned char c1;
+    unsigned char c2;
+
+    do {
+        c1 = *str1++;
+        c2 = *str2++;
+
+        if (c1 != c2) {
+            return c1 - c2;
+        }
+    } while (c1);
+
+    return 0;
+}
+
+char* strcpy(char* dst, const char* src) {
+    char* _dst = dst;
+
+    while (*src != '\0') {
+        *_dst++ = *src++;
+    }
+    *_dst = '\0';
+
+    return dst;
+}
+
 void* memcpy(void* dst, const void* src, size_t n) {
     char* _dst = dst;
     const char* _src = src;
@@ -30,4 +57,37 @@ void* memcpy(void* dst, const void* src, size_t n) {
         n--;
     }
     return dst;
+}
+
+void* memmove(void* dst, const void* src, size_t size) {
+    unsigned char* _dst = dst;
+    const unsigned char* _src = src;
+    register size_t rem;
+
+    if (_dst == _src) {
+        return dst;
+    }
+    if (_dst < _src) {
+        for (rem = size--; rem != 0; rem = size--) {
+            *_dst++ = *_src++;
+        }
+    } else {
+        _dst += size - 1;
+        _src += size - 1;
+        for (rem = size--; rem != 0; rem = size--) {
+            *_dst-- = *_src--;
+        }
+    }
+    return dst;
+}
+
+void* memset(void* ptr, int val, size_t size) {
+    unsigned char* dst = ptr;
+    register size_t rem;
+
+    for (rem = size--; rem != 0; rem = size--) {
+        *dst++ = val;
+    }
+
+    return ptr;
 }
