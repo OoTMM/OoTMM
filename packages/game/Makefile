@@ -23,28 +23,41 @@ all: oot mm
 setup: setup-oot setup-mm
 
 .PHONY: setup-oot
-setup-oot:
+setup-oot: stamps/setup-oot
+
+stamps/setup-oot:
+	@mkdir -p stamps
 	ln -sf $(realpath $(ROMS_DIR)/oot.z64) $(LIBS_DIR_OOT)/baseroms/$(OOT_VERSION)/baserom.z64
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT) setup
+	touch $@
 
 .PHONY: setup-mm
-setup-mm:
+setup-mm: stamps/setup-mm
+
+stamps/setup-mm:
+	@mkdir -p stamps
 	ln -sf $(realpath $(ROMS_DIR)/mm.z64) $(LIBS_DIR_MM)/baseroms/$(MM_VERSION)/baserom.z64
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) venv
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) setup
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) assets
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM) disasm
+	touch $@
 
 .PHONY: oot
-oot: loader
+oot: setup loader
+	@mkdir -p build
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT)
+	tsx ./spec2fs.ts $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/spec $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).elf dist/oot.json
+	cp $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).z64 dist/oot.z64
 
 .PHONY: mm
-mm: loader
+mm: setup loader
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM)
+	tsx ./spec2fs.ts $(LIBS_DIR_MM)/spec $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).elf dist/mm.json
+	cp $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).z64 dist/mm.z64
 
 .PHONY: loader
-loader:
+loader: setup
 	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_LOADER)
 
 .PHONY: clean
