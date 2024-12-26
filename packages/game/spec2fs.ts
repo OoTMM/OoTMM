@@ -73,7 +73,18 @@ async function run() {
     }
   }
 
-  await fs.writeFile(outFilename, JSON.stringify({ files: segs }));
+  const bootproc = findSymbol(symbols, "bootproc");
+  const bootram = findSymbol(symbols, "_bootSegmentStart");
+  const loaderStart = findSymbol(symbols, "_loaderSegmentStart");
+  const loaderOffsets = {
+    configs: findSymbol(symbols, "gLoaderGameConfigs") - loaderStart,
+  };
+  const game = {
+    bootproc,
+    ram: bootram,
+  };
+
+  await fs.writeFile(outFilename, JSON.stringify({ game, loaderOffsets, files: segs }));
 }
 
 run().catch((err) => {
