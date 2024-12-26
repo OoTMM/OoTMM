@@ -98,6 +98,8 @@ importers:
         specifier: ^6.3.10
         version: 6.3.10
 
+  packages/game: {}
+
   packages/gui:
     dependencies:
       '@fortawesome/fontawesome-svg-core':
