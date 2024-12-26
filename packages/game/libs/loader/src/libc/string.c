@@ -48,6 +48,7 @@ char* strcpy(char* dst, const char* src) {
     return dst;
 }
 
+__attribute__((optimize("-fno-tree-loop-distribute-patterns")))
 void* memcpy(void* dst, const void* src, size_t n) {
     char* _dst = dst;
     const char* _src = src;
@@ -59,6 +60,7 @@ void* memcpy(void* dst, const void* src, size_t n) {
     return dst;
 }
 
+__attribute__((optimize("-fno-tree-loop-distribute-patterns")))
 void* memmove(void* dst, const void* src, size_t size) {
     unsigned char* _dst = dst;
     const unsigned char* _src = src;
@@ -81,6 +83,7 @@ void* memmove(void* dst, const void* src, size_t size) {
     return dst;
 }
 
+__attribute__((optimize("-fno-tree-loop-distribute-patterns")))
 void* memset(void* ptr, int val, size_t size) {
     unsigned char* dst = ptr;
     register size_t rem;
