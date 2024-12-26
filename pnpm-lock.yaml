@@ -66,6 +66,9 @@ importers:
       '@ootmm/data':
         specifier: '*'
         version: link:../data
+      '@ootmm/game':
+        specifier: '*'
+        version: link:../game
       '@ootmm/tools':
         specifier: '*'
         version: link:../tools
