@@ -7,10 +7,14 @@ beginseg
 endseg
 
 beginseg
-    name "boot"
+    name "loader"
     address 0x80000400
     include "../loader/build/entry.o"
     include "../loader/build/loader.o"
+endseg
+
+beginseg
+    name "boot"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
     include "$(BUILD_DIR)/src/boot/viconfig.o"
