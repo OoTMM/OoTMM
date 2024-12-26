@@ -23,6 +23,11 @@ export class RandoFileSystemBuilder {
         fileId++;
         rfs.addFile({ id, name, data });
       }
+
+      /* Metadata */
+      rfs.meta.loaderOffsets.configs = metadata.loaderOffsets.configs;
+      rfs.meta.games[game].bootproc = metadata.game.bootproc;
+      rfs.meta.games[game].ram = metadata.game.ram;
     }
 
     /* Make the loader & makerom unique */

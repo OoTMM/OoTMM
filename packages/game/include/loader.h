@@ -5,13 +5,13 @@
 
 typedef struct
 {
-    u32 id;
-    u32 start;
-    u32 size;
+    void*   ram;
+    u32     rom;
+    u32     size;
     void (*entrypoint)(void);
 }
 GameConfig;
 
-extern GameConfig gLoaderGameConfigs[4];
+extern const GameConfig gLoaderGameConfigs[];
 
 #endif

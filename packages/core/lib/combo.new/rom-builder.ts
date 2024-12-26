@@ -1,3 +1,5 @@
+import { GAMES } from '../combo/config';
+import { toU32Buffer } from '../combo/util';
 import { bufReadU32BE, bufWriteU32BE } from '../combo/util/buffer';
 import { RandoFile, RandoFileSystem } from './file-system';
 
@@ -38,13 +40,13 @@ function checksum(rom: Uint8Array) {
 class RomBuilder {
   private rom: Uint8Array;
   private fileSystem: RandoFileSystem;
-  private injected: Set<RandoFile>;
+  private offsets: Map<RandoFile, number>;
   private pos: number;
 
   constructor(fileSystem: RandoFileSystem) {
     this.rom = new Uint8Array(128 * 1024 * 1024);
     this.fileSystem = fileSystem;
-    this.injected = new Set();
+    this.offsets = new Map();
     this.pos = 0;
   }
 
@@ -54,28 +56,49 @@ class RomBuilder {
     bufWriteU32BE(this.rom, 0x14, c2);
   }
 
-  private inject(file: RandoFile | string) {
-    /* Resolve the file */
+  private resolveFile(file: RandoFile | string) {
     if (typeof file === 'string') {
       const f = this.fileSystem.findFile(file);
       if (!f) {
         throw new Error(`File not found: ${file}`);
       }
-      file = f;
+      return f;
     }
+    return file;
+  }
+
+  private inject(file: RandoFile | string) {
+    file = this.resolveFile(file);
 
     /* Check if already injected */
-    if (this.injected.has(file)) {
+    if (this.offsets.has(file)) {
       return;
     }
 
     /* Inject the file */
     const data = file.data!;
     this.rom.set(data, this.pos);
-    this.injected.add(file);
+    this.offsets.set(file, this.pos);
 
     /* Update the position */
     this.pos += (data.length + 15) & 0xfffffff0;
+  }
+
+  private patchLoader() {
+    const loaderFile = this.resolveFile('loader');
+    const loaderOffset = this.offsets.get(loaderFile)!;
+
+    const data = [];
+    for (const game of GAMES) {
+      const bootFile = this.resolveFile(`${game}/boot`);
+      const ram = this.fileSystem.meta.games[game].ram;
+      const rom = this.offsets.get(bootFile)!;
+      const size = bootFile.data!.length;
+      const entrypoint = this.fileSystem.meta.games[game].bootproc;
+      data.push(rom, size, ram, entrypoint);
+    }
+    const configBlock = toU32Buffer(data);
+    this.rom.set(configBlock, loaderOffset + this.fileSystem.meta.loaderOffsets.configs);
   }
 
   build() {
@@ -87,6 +110,9 @@ class RomBuilder {
     for (const file of this.fileSystem.files) {
       this.inject(file);
     }
+
+    /* Patch loader */
+    this.patchLoader();
 
     /* Fix the checksum */
     this.fixChecksum();

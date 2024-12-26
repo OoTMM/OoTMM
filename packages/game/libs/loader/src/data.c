@@ -1,3 +1,3 @@
 #include <loader.h>
 
-GameConfig gLoaderGameConfigs[4];
+__attribute__((section(".rodata"))) const GameConfig gLoaderGameConfigs[2];
