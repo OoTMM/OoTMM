@@ -1,0 +1,25 @@
+{
+  "name": "@ootmm/game",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "make"
+  },
+  "author": "Nax",
+  "license": "MIT",
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/include/**/*",
+          "{projectRoot}/libs/**/*",
+          "{projectRoot}/Makefile",
+          "{projectRoot}/spec2fs.ts"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ]
+      }
+    }
+  }
+}
