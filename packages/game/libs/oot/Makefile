@@ -57,7 +57,7 @@ N64_EMULATOR ?=
 
 CFLAGS ?=
 CPPFLAGS ?=
-CPP_DEFINES ?=
+CPP_DEFINES ?= -D__OOT__
 
 # Version-specific settings
 REGIONAL_CHECKSUM := 0

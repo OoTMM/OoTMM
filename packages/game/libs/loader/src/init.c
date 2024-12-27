@@ -1,4 +1,4 @@
-#include <loader.h>
+#include <combo.h>
 #include <string.h>
 #include <ultra64.h>
 
@@ -41,7 +41,7 @@ void ClearBSS(void)
 void LoaderInit(void)
 {
     ClearBSS();
-    LoadGame(2);
+    LoadGame(1);
 
     for (;;) {}
 }

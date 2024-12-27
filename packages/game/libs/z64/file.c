@@ -1,5 +1,5 @@
 #include <ultra64.h>
-#include <loader.h>
+#include <combo.h>
 
 extern OSPiHandle* gCartHandle;
 

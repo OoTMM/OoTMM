@@ -18,7 +18,7 @@
  * There are some additional provisions to ensure that audio DMA is particularly high-speed, the audio data is assumed
  * to be uncompressed and the request queue and address translation is skipped.
  */
-#include <loader.h>
+#include <combo.h>
 #include "global.h"
 #include "fault.h"
 #include "stack.h"
