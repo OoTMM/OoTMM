@@ -1,7 +1,7 @@
 #include "libc64/sleep.h"
 #include "macros.h" // for ARRAY_COUNT
 
-void csleep(OSTime time) {
+void Sleep_Cycles(OSTime time) {
     OSMesgQueue mq;
     OSMesg msg[1];
     OSTimer timer;
@@ -11,18 +11,18 @@ void csleep(OSTime time) {
     osRecvMesg(&mq, NULL, OS_MESG_BLOCK);
 }
 
-void nsleep(u32 nsec) {
-    csleep(OS_NSEC_TO_CYCLES(nsec));
+void Sleep_Nsec(u32 nsec) {
+    Sleep_Cycles(OS_NSEC_TO_CYCLES(nsec));
 }
 
-void usleep(u32 usec) {
-    csleep(OS_USEC_TO_CYCLES(usec));
+void Sleep_Usec(u32 usec) {
+    Sleep_Cycles(OS_USEC_TO_CYCLES(usec));
 }
 
-void msleep(u32 msec) {
-    csleep((msec * OS_CPU_COUNTER) / 1000ULL);
+void Sleep_Msec(u32 msec) {
+    Sleep_Cycles((msec * OS_CPU_COUNTER) / 1000ULL);
 }
 
-void sleep(u32 sec) {
-    csleep(sec * OS_CPU_COUNTER);
+void Sleep_Sec(u32 sec) {
+    Sleep_Cycles(sec * OS_CPU_COUNTER);
 }

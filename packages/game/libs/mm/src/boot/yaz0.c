@@ -136,7 +136,7 @@ void Yaz0_Decompress(uintptr_t romStart, void* dst, size_t size) {
 
     if (sYaz0DataBufferEnd != NULL) {
         while (sYaz0DataBufferEnd != NULL) {
-            usleep(10);
+            Sleep_Usec(10);
         }
     }
 

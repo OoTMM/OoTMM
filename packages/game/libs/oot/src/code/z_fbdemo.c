@@ -132,7 +132,7 @@ void TransitionTile_InitVtxData(TransitionTile* this) {
 
 void TransitionTile_Destroy(TransitionTile* this) {
     PRINTF("fbdemo_cleanup(%08x)\n", this);
-    PRINTF("msleep(100);\n");
+    PRINTF("Sleep_Msec(100);\n");
     Sleep_Msec(100);
 
     if (this->vtxData != NULL) {

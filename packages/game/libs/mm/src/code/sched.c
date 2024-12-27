@@ -104,7 +104,7 @@ void Sched_HandleAudioCancel(Scheduler* sched) {
                     osSyncPrintf("AUDIO SP止まりませんでした(10msタイムアウト)\n");
                     goto send_mesg;
                 }
-                usleep(100);
+                Sleep_Usec(100);
             }
             // AUDIO SP stopped (% d * 100us)
             osSyncPrintf("AUDIO SP止まりました(%d * 100us)\n", i);
@@ -167,7 +167,7 @@ void Sched_HandleGfxCancel(Scheduler* sched) {
                     osSyncPrintf("GRAPH SP止まりませんでした(10msタイムアウト)\n");
                     goto send_mesg;
                 }
-                usleep(100);
+                Sleep_Usec(100);
             }
             // GRAPH SP stopped (%d * 100us)
             osSyncPrintf("GRAPH SP止まりました(%d * 100us)\n", i);
