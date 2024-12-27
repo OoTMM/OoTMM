@@ -41,7 +41,7 @@ void ClearBSS(void)
 void LoaderInit(void)
 {
     ClearBSS();
-    LoadGame(1);
+    LoadGame(GAME_MM);
 
     for (;;) {}
 }
