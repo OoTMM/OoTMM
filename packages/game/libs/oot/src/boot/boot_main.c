@@ -12,7 +12,11 @@ OSThread sIdleThread;
 STACK(sIdleThreadStack, 0x400);
 StackEntry sIdleThreadInfo;
 
+extern char _bootSegmentBssStart;
+extern char _bootSegmentBssEnd;
+
 void bootclear(void) {
+    bzero(&_bootSegmentBssStart, &_bootSegmentBssEnd - &_bootSegmentBssStart);
     bzero(_bootSegmentEnd, osMemSize - OS_K0_TO_PHYSICAL(_bootSegmentEnd));
 }
 

@@ -95,7 +95,16 @@ class RomBuilder {
       const rom = this.offsets.get(bootFile)!;
       const size = bootFile.data!.length;
       const entrypoint = this.fileSystem.meta.games[game].bootproc;
-      data.push(rom, size, ram, entrypoint);
+      data.push(ram, rom, size, entrypoint);
+
+      if (ram & 0xf || size & 0xf || rom & 0xf) {
+        throw new Error(`Game DMA: ${game} Invalid alignment`);
+      }
+
+      console.log(game);
+      console.log(ram.toString(16));
+      console.log(rom.toString(16));
+      console.log(entrypoint.toString(16));
     }
     const configBlock = toU32Buffer(data);
     this.rom.set(configBlock, loaderOffset + this.fileSystem.meta.loaderOffsets.configs);
