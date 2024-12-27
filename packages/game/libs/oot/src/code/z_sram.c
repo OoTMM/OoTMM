@@ -164,6 +164,9 @@ void Sram_InitNewSave(void) {
     gSaveContext.save.info.playerData.magicLevel = 0;
     gSaveContext.save.info.infTable[INFTABLE_1DX_INDEX] = 1;
     gSaveContext.save.info.sceneFlags[SCENE_WATER_TEMPLE].swch = 0x40000000;
+
+    gSaveContext.save.info.eventChkInf[0] |= 0x102c;
+    gSaveContext.save.info.infTable[0] |= 0x000b;
 }
 
 static SavePlayerData sDebugSavePlayerData = {
@@ -780,26 +783,12 @@ void Sram_InitSave(FileSelectState* fileSelect, SramContext* sramCtx) {
     u16* ptr;
     u16 checksum;
 
-#if DEBUG_FEATURES
-    if (fileSelect->buttonIndex != 0) {
-        Sram_InitNewSave();
-    } else {
-        Sram_InitDebugSave();
-    }
-#else
     Sram_InitNewSave();
-#endif
 
     gSaveContext.save.entranceIndex = ENTR_LINKS_HOUSE_0;
     gSaveContext.save.linkAge = LINK_AGE_CHILD;
     gSaveContext.save.dayTime = CLOCK_TIME(10, 0);
-    gSaveContext.save.cutsceneIndex = 0xFFF1;
-
-#if DEBUG_FEATURES
-    if (fileSelect->buttonIndex == 0) {
-        gSaveContext.save.cutsceneIndex = 0;
-    }
-#endif
+    gSaveContext.save.cutsceneIndex = 0;
 
     for (offset = 0; offset < 8; offset++) {
         gSaveContext.save.info.playerData.playerName[offset] = fileSelect->fileNames[fileSelect->buttonIndex][offset];
@@ -813,12 +802,6 @@ void Sram_InitSave(FileSelectState* fileSelect, SramContext* sramCtx) {
     gSaveContext.save.info.playerData.newf[5] = 'Z';
 
     gSaveContext.save.info.playerData.n64ddFlag = fileSelect->n64ddFlag;
-    PRINTF(T("６４ＤＤフラグ=%d\n", "64DD flags=%d\n"), fileSelect->n64ddFlag);
-    PRINTF("newf=%x,%x,%x,%x,%x,%x\n", gSaveContext.save.info.playerData.newf[0],
-           gSaveContext.save.info.playerData.newf[1], gSaveContext.save.info.playerData.newf[2],
-           gSaveContext.save.info.playerData.newf[3], gSaveContext.save.info.playerData.newf[4],
-           gSaveContext.save.info.playerData.newf[5]);
-    PRINTF("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
 
     ptr = (u16*)&gSaveContext;
 
