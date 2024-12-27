@@ -10,7 +10,7 @@
  *      3) Samples consisting of raw soundbytes stored using a compressed ADPCM algorithm (.aifc files)
  */
 
-#include <loader.h>
+#include <combo.h>
 #include "global.h"
 #include "audio/load.h"
 #include "buffers.h"

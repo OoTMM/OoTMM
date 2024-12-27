@@ -1,7 +1,11 @@
-#ifndef LOADER_H
-#define LOADER_H
+#ifndef COMBO_H
+#define COMBO_H
 
 #include <PR/ultratypes.h>
+
+#define GAME_NONE 0
+#define GAME_OOT  1
+#define GAME_MM   2
 
 #define FILEID_OOT_DMADATA  0x00000002
 #define FILEID_MM_DMADATA   0x00000003

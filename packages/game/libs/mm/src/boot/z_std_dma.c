@@ -20,7 +20,7 @@
  */
 #include "prevent_bss_reordering.h"
 #include "z64dma.h"
-#include <loader.h>
+#include <combo.h>
 
 #include "carthandle.h"
 #include "fault.h"
