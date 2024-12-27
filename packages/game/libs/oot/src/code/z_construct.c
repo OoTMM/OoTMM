@@ -97,37 +97,37 @@ void Interface_Init(PlayState* play) {
 
     ASSERT(interfaceCtx->iconItemSegment != NULL, "parameter->icon_itemSegment != NULL", "../z_construct.c", 193);
 
-    PRINTF("Register_Item[%x, %x, %x, %x]\n", gSaveContext.save.info.equips.buttonItems[0],
-           gSaveContext.save.info.equips.buttonItems[1], gSaveContext.save.info.equips.buttonItems[2],
-           gSaveContext.save.info.equips.buttonItems[3]);
+    PRINTF("Register_Item[%x, %x, %x, %x]\n", gOotSave.info.equips.buttonItems[0],
+           gOotSave.info.equips.buttonItems[1], gOotSave.info.equips.buttonItems[2],
+           gOotSave.info.equips.buttonItems[3]);
 
-    if (gSaveContext.save.info.equips.buttonItems[0] < 0xF0) {
+    if (gOotSave.info.equips.buttonItems[0] < 0xF0) {
         DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (0 * ITEM_ICON_SIZE),
 
-                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[0]), ITEM_ICON_SIZE,
+                         GET_ITEM_ICON_VROM(gOotSave.info.equips.buttonItems[0]), ITEM_ICON_SIZE,
                          "../z_construct.c", 198);
-    } else if (gSaveContext.save.info.equips.buttonItems[0] != 0xFF) {
+    } else if (gOotSave.info.equips.buttonItems[0] != 0xFF) {
         DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (0 * ITEM_ICON_SIZE),
 
-                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[0]), ITEM_ICON_SIZE,
+                         GET_ITEM_ICON_VROM(gOotSave.info.equips.buttonItems[0]), ITEM_ICON_SIZE,
                          "../z_construct.c", 203);
     }
 
-    if (gSaveContext.save.info.equips.buttonItems[1] < 0xF0) {
+    if (gOotSave.info.equips.buttonItems[1] < 0xF0) {
         DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (1 * ITEM_ICON_SIZE),
-                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[1]), ITEM_ICON_SIZE,
+                         GET_ITEM_ICON_VROM(gOotSave.info.equips.buttonItems[1]), ITEM_ICON_SIZE,
                          "../z_construct.c", 209);
     }
 
-    if (gSaveContext.save.info.equips.buttonItems[2] < 0xF0) {
+    if (gOotSave.info.equips.buttonItems[2] < 0xF0) {
         DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (2 * ITEM_ICON_SIZE),
-                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[2]), ITEM_ICON_SIZE,
+                         GET_ITEM_ICON_VROM(gOotSave.info.equips.buttonItems[2]), ITEM_ICON_SIZE,
                          "../z_construct.c", 214);
     }
 
-    if (gSaveContext.save.info.equips.buttonItems[3] < 0xF0) {
+    if (gOotSave.info.equips.buttonItems[3] < 0xF0) {
         DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (3 * ITEM_ICON_SIZE),
-                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[3]), ITEM_ICON_SIZE,
+                         GET_ITEM_ICON_VROM(gOotSave.info.equips.buttonItems[3]), ITEM_ICON_SIZE,
                          "../z_construct.c", 219);
     }
 
@@ -156,7 +156,7 @@ void Interface_Init(PlayState* play) {
 
         gSaveContext.timerX[timerId] = 26;
 
-        if (gSaveContext.save.info.playerData.healthCapacity > 0xA0) {
+        if (gOotSave.info.playerData.healthCapacity > 0xA0) {
             gSaveContext.timerY[timerId] = 54; // two rows of hearts
         } else {
             gSaveContext.timerY[timerId] = 46; // one row of hearts

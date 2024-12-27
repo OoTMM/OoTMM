@@ -2459,7 +2459,7 @@ void func_80833A20(Player* this, s32 newMeleeWeaponState) {
 
     if (this->meleeWeaponState == 0) {
         if ((this->heldItemAction == PLAYER_IA_SWORD_BIGGORON) &&
-            (gSaveContext.save.info.playerData.swordHealth > 0.0f)) {
+            (gOotSave.info.playerData.swordHealth > 0.0f)) {
             itemSfx = NA_SE_IT_HAMMER_SWING;
         } else {
             itemSfx = NA_SE_IT_SWORD_SWING;
@@ -2720,7 +2720,7 @@ void Player_UpdateItems(Player* this, PlayState* play) {
         !(this->stateFlags1 & PLAYER_STATE1_START_CHANGING_HELD_ITEM) &&
 #endif
         ((this->heldItemAction == this->itemAction) || (this->stateFlags1 & PLAYER_STATE1_SHIELDING)) &&
-        (gSaveContext.save.info.playerData.health != 0) && (play->csCtx.state == CS_STATE_IDLE) &&
+        (gOotSave.info.playerData.health != 0) && (play->csCtx.state == CS_STATE_IDLE) &&
         (this->csAction == PLAYER_CSACTION_NONE) && (play->shootingGalleryStatus == 0) &&
         (play->activeCamId == CAM_ID_MAIN) && (play->transitionTrigger != TRANS_TRIGGER_START) &&
         (gSaveContext.timerState != TIMER_STATE_STOP)) {
@@ -3279,7 +3279,7 @@ s32 Player_UpperAction_CarryActor(Player* this, PlayState* play) {
 }
 
 void func_808357E8(Player* this, Gfx** dLists) {
-    this->leftHandDLists = dLists + gSaveContext.save.linkAge;
+    this->leftHandDLists = dLists + gOotSave.linkAge;
 }
 
 s32 func_80835800(Player* this, PlayState* play) {
@@ -3543,7 +3543,7 @@ void Player_UseItem(PlayState* play, Player* this, s32 item) {
                 // Handle magic spells
                 if (((itemAction == PLAYER_IA_FARORES_WIND) && (gSaveContext.respawn[RESPAWN_MODE_TOP].data > 0)) ||
                     ((gSaveContext.magicCapacity != 0) && (gSaveContext.magicState == MAGIC_STATE_IDLE) &&
-                     (gSaveContext.save.info.playerData.magic >= sMagicSpellCosts[temp]))) {
+                     (gOotSave.info.playerData.magic >= sMagicSpellCosts[temp]))) {
                     this->itemAction = itemAction;
                     this->unk_6AD = 4;
                 } else {
@@ -6539,7 +6539,7 @@ s32 Player_ActionHandler_8(Player* this, PlayState* play) {
         if (!(this->stateFlags1 & PLAYER_STATE1_SHIELDING) && (Player_GetMeleeWeaponHeld2(this) != 0) &&
             (this->unk_844 == 1) && (this->heldItemAction != PLAYER_IA_DEKU_STICK)) {
             if ((this->heldItemAction != PLAYER_IA_SWORD_BIGGORON) ||
-                (gSaveContext.save.info.playerData.swordHealth > 0.0f)) {
+                (gOotSave.info.playerData.swordHealth > 0.0f)) {
                 func_808377DC(play, this);
                 return 1;
             }
@@ -8984,8 +8984,8 @@ s32 func_80842AC4(PlayState* play, Player* this) {
 
 s32 func_80842B7C(PlayState* play, Player* this) {
     if (this->heldItemAction == PLAYER_IA_SWORD_BIGGORON) {
-        if (!gSaveContext.save.info.playerData.bgsFlag && (gSaveContext.save.info.playerData.swordHealth > 0.0f)) {
-            if ((gSaveContext.save.info.playerData.swordHealth -= 1.0f) <= 0.0f) {
+        if (!gOotSave.info.playerData.bgsFlag && (gOotSave.info.playerData.swordHealth > 0.0f)) {
+            if ((gOotSave.info.playerData.swordHealth -= 1.0f) <= 0.0f) {
                 EffectSsStick_Spawn(play, &this->bodyPartsPos[PLAYER_BODYPART_R_HAND],
                                     this->actor.shape.rot.y + 0x8000);
                 func_800849EC(play);
@@ -10527,7 +10527,7 @@ void Player_StartMode_BlueWarp(PlayState* play, Player* this) {
  */
 void Player_PutSwordInHand(PlayState* play, Player* this, s32 playSfx) {
     static u8 sSwordItemIds[] = { ITEM_SWORD_MASTER, ITEM_SWORD_KOKIRI };
-    s32 swordItemId = sSwordItemIds[(void)0, gSaveContext.save.linkAge];
+    s32 swordItemId = sSwordItemIds[(void)0, gOotSave.linkAge];
     s32 swordItemAction = sItemActions[swordItemId];
 
     Player_DestroyHookshot(this);
@@ -10619,7 +10619,7 @@ static EffectBlureInit2 D_8085470C = {
 static Vec3s sSkeletonBaseTransl = { -57, 3377, 0 };
 
 void Player_InitCommon(Player* this, PlayState* play, FlexSkeletonHeader* skelHeader) {
-    this->ageProperties = &sAgeProperties[gSaveContext.save.linkAge];
+    this->ageProperties = &sAgeProperties[gOotSave.linkAge];
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->meleeWeaponEffectIndex = TOTAL_EFFECT_COUNT;
     this->yaw = this->actor.world.rot.y;
@@ -10687,7 +10687,7 @@ void Player_Init(Actor* thisx, PlayState* play2) {
     play->talkWithPlayer = Player_StartTalking;
 
     thisx->room = -1;
-    this->ageProperties = &sAgeProperties[gSaveContext.save.linkAge];
+    this->ageProperties = &sAgeProperties[gOotSave.linkAge];
     this->itemAction = this->heldItemAction = -1;
     this->heldItemId = ITEM_NONE;
 
@@ -10696,7 +10696,7 @@ void Player_Init(Actor* thisx, PlayState* play2) {
     Player_SetEquipmentData(play, this);
     this->prevBoots = this->currentBoots;
 
-    Player_InitCommon(this, play, gPlayerSkelHeaders[((void)0, gSaveContext.save.linkAge)]);
+    Player_InitCommon(this, play, gPlayerSkelHeaders[((void)0, gOotSave.linkAge)]);
 
     // `giObjectSegment` is used for both "get item" objects and title cards. The maximum size for
     // get item objects is 0x2000 (see the assert in func_8083AE40), and the maximum size for
@@ -10736,7 +10736,7 @@ void Player_Init(Actor* thisx, PlayState* play2) {
 
         if ((titleFileSize != 0) && gSaveContext.showTitleCard) {
             if (!IS_CUTSCENE_LAYER &&
-                (gEntranceTable[((void)0, gSaveContext.save.entranceIndex) + ((void)0, gSaveContext.sceneLayer)].field &
+                (gEntranceTable[((void)0, gOotSave.entranceIndex) + ((void)0, gSaveContext.sceneLayer)].field &
                  ENTRANCE_INFO_DISPLAY_TITLE_CARD_FLAG) &&
                 ((play->sceneId != SCENE_DODONGOS_CAVERN) || GET_EVENTCHKINF(EVENTCHKINF_B0)) &&
 #if OOT_VERSION < PAL_1_0
@@ -10760,13 +10760,13 @@ void Player_Init(Actor* thisx, PlayState* play2) {
     gSaveContext.respawn[RESPAWN_MODE_DOWN].data = 1;
 
     if (play->sceneId <= SCENE_INSIDE_GANONS_CASTLE_COLLAPSE) {
-        gSaveContext.save.info.infTable[INFTABLE_1AX_INDEX] |= gBitFlags[play->sceneId];
+        gOotSave.info.infTable[INFTABLE_1AX_INDEX] |= gBitFlags[play->sceneId];
     }
 
     startMode = PLAYER_GET_START_MODE(thisx);
 
     if ((startMode == PLAYER_START_MODE_WARP_SONG) || (startMode == PLAYER_START_MODE_FARORES_WIND)) {
-        if (gSaveContext.save.cutsceneIndex >= 0xFFF0) {
+        if (gOotSave.cutsceneIndex >= 0xFFF0) {
             startMode = PLAYER_START_MODE_IDLE;
         }
     }
@@ -11879,7 +11879,7 @@ void Player_UpdateCommon(Player* this, PlayState* play, Input* input) {
         if (!Player_InBlockingCsMode(play, this) && !(this->stateFlags2 & PLAYER_STATE2_CRAWLING)) {
             func_8083D53C(play, this);
 
-            if ((this->actor.category == ACTORCAT_PLAYER) && (gSaveContext.save.info.playerData.health == 0)) {
+            if ((this->actor.category == ACTORCAT_PLAYER) && (gOotSave.info.playerData.health == 0)) {
                 if (this->stateFlags1 & (PLAYER_STATE1_13 | PLAYER_STATE1_14 | PLAYER_STATE1_21)) {
                     func_80832440(play, this);
                     func_80837B9C(this, play);
@@ -12329,7 +12329,7 @@ void Player_Destroy(Actor* thisx, PlayState* play) {
 
     Magic_Reset(play);
 
-    gSaveContext.save.linkAge = play->linkAgeOnLoad;
+    gOotSave.linkAge = play->linkAgeOnLoad;
 }
 
 s16 func_8084ABD8(PlayState* play, Player* this, s32 arg2, s16 arg3) {
@@ -13386,10 +13386,10 @@ void Player_Action_8084D3E4(Player* this, PlayState* play) {
         AREG(6) = 0;
 
         if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || (DREG(1) != 0)) {
-            gSaveContext.save.info.horseData.pos.x = rideActor->actor.world.pos.x;
-            gSaveContext.save.info.horseData.pos.y = rideActor->actor.world.pos.y;
-            gSaveContext.save.info.horseData.pos.z = rideActor->actor.world.pos.z;
-            gSaveContext.save.info.horseData.angle = rideActor->actor.shape.rot.y;
+            gOotSave.info.horseData.pos.x = rideActor->actor.world.pos.x;
+            gOotSave.info.horseData.pos.y = rideActor->actor.world.pos.y;
+            gOotSave.info.horseData.pos.z = rideActor->actor.world.pos.z;
+            gOotSave.info.horseData.angle = rideActor->actor.shape.rot.y;
         }
     } else {
         Camera_RequestSetting(Play_GetCamera(play, CAM_ID_MAIN), CAM_SET_NORMAL0);
@@ -13678,7 +13678,7 @@ s32 func_8084DFF4(PlayState* play, Player* this) {
         } else {
             if ((this->getItemId == GI_HEART_CONTAINER_2) || (this->getItemId == GI_HEART_CONTAINER) ||
                 ((this->getItemId == GI_HEART_PIECE) &&
-                 ((gSaveContext.save.info.inventory.questItems & 0xF0000000) == (4 << QUEST_HEART_PIECE_COUNT)))) {
+                 ((gOotSave.info.inventory.questItems & 0xF0000000) == (4 << QUEST_HEART_PIECE_COUNT)))) {
                 temp1 = NA_BGM_HEART_GET | 0x900;
             } else {
                 temp1 = temp2 = (this->getItemId == GI_HEART_PIECE) ? NA_BGM_SMALL_ITEM_GET : NA_BGM_ITEM_GET | 0x900;
@@ -13969,7 +13969,7 @@ void Player_Action_8084EAC0(Player* this, PlayState* play) {
                     rand = 3;
                 }
 
-                if ((rand < 0) && (gSaveContext.save.info.playerData.health <= 0x10)) {
+                if ((rand < 0) && (gOotSave.info.playerData.health <= 0x10)) {
                     rand = 3;
                 }
 
@@ -14731,7 +14731,7 @@ void Player_Action_8085063C(Player* this, PlayState* play) {
 
         if (play->msgCtx.choiceIndex == 1) {
             gSaveContext.respawn[RESPAWN_MODE_TOP].data = -respawnData;
-            gSaveContext.save.info.fw.set = 0;
+            gOotSave.info.fw.set = 0;
             Sfx_PlaySfxAtPos(&gSaveContext.respawn[RESPAWN_MODE_TOP].pos, NA_SE_PL_MAGIC_WIND_VANISH);
         }
 
@@ -14813,17 +14813,17 @@ void Player_Action_808507F4(Player* this, PlayState* play) {
                 gSaveContext.respawn[RESPAWN_MODE_TOP].data = 1;
                 Play_SetupRespawnPoint(play, RESPAWN_MODE_TOP,
                                        PLAYER_PARAMS(PLAYER_START_MODE_FARORES_WIND, PLAYER_START_BG_CAM_DEFAULT));
-                gSaveContext.save.info.fw.set = 1;
-                gSaveContext.save.info.fw.pos.x = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.x;
-                gSaveContext.save.info.fw.pos.y = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.y;
-                gSaveContext.save.info.fw.pos.z = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.z;
-                gSaveContext.save.info.fw.yaw = gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw;
-                gSaveContext.save.info.fw.playerParams =
+                gOotSave.info.fw.set = 1;
+                gOotSave.info.fw.pos.x = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.x;
+                gOotSave.info.fw.pos.y = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.y;
+                gOotSave.info.fw.pos.z = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.z;
+                gOotSave.info.fw.yaw = gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw;
+                gOotSave.info.fw.playerParams =
                     PLAYER_PARAMS(PLAYER_START_MODE_FARORES_WIND, PLAYER_START_BG_CAM_DEFAULT);
-                gSaveContext.save.info.fw.entranceIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].entranceIndex;
-                gSaveContext.save.info.fw.roomIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
-                gSaveContext.save.info.fw.tempSwchFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwchFlags;
-                gSaveContext.save.info.fw.tempCollectFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags;
+                gOotSave.info.fw.entranceIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].entranceIndex;
+                gOotSave.info.fw.roomIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
+                gOotSave.info.fw.tempSwchFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwchFlags;
+                gOotSave.info.fw.tempCollectFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags;
                 this->av2.actionVar2 = 2;
             }
         } else if (this->av1.actionVar1 >= 0) {
@@ -15515,7 +15515,7 @@ void func_80851A50(PlayState* play, Player* this, CsCmdActorCue* cue) {
 
     if ((LINK_IS_ADULT && LinkAnimation_OnFrame(&this->skelAnime, 70.0f)) ||
         (!LINK_IS_ADULT && LinkAnimation_OnFrame(&this->skelAnime, 87.0f))) {
-        sp2C = &D_808551A4[gSaveContext.save.linkAge];
+        sp2C = &D_808551A4[gOotSave.linkAge];
         this->interactRangeActor->parent = &this->actor;
 
         if (!LINK_IS_ADULT) {
@@ -15523,7 +15523,7 @@ void func_80851A50(PlayState* play, Player* this, CsCmdActorCue* cue) {
         } else {
             dLists = gPlayerLeftHandClosedDLs;
         }
-        this->leftHandDLists = dLists + gSaveContext.save.linkAge;
+        this->leftHandDLists = dLists + gOotSave.linkAge;
 
         Player_PlaySfx(this, sp2C->unk_00);
         if (!LINK_IS_ADULT) {
@@ -15860,7 +15860,7 @@ void func_80852648(PlayState* play, Player* this, CsCmdActorCue* cue) {
         this->modelGroup = this->nextModelGroup = Player_ActionToModelGroup(this, PLAYER_IA_NONE);
         this->leftHandDLists = gPlayerLeftHandOpenDLs;
         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_MASTER);
-        gSaveContext.save.info.equips.buttonItems[0] = ITEM_SWORD_MASTER;
+        gOotSave.info.equips.buttonItems[0] = ITEM_SWORD_MASTER;
         Inventory_DeleteEquipment(play, EQUIP_TYPE_SWORD);
     }
 }
@@ -15879,7 +15879,7 @@ void func_808526EC(PlayState* play, Player* this, CsCmdActorCue* cue) {
     static Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
     static Color_RGBA8 primColor = { 255, 255, 255, 0 };
     static Color_RGBA8 envColor = { 0, 128, 128, 0 };
-    s32 linkAge = gSaveContext.save.linkAge;
+    s32 linkAge = gOotSave.linkAge;
     Vec3f sparklePos;
     Vec3f sp34;
     Vec3s* ptr;
@@ -15891,7 +15891,7 @@ void func_808526EC(PlayState* play, Player* this, CsCmdActorCue* cue) {
         return;
     }
 
-    ptr = D_80855210[gSaveContext.save.linkAge];
+    ptr = D_80855210[gOotSave.linkAge];
 
     sp34.x = ptr[0].x + Rand_CenteredFloat(ptr[1].x);
     sp34.y = ptr[0].y + Rand_CenteredFloat(ptr[1].y);

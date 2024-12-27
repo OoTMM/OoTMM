@@ -99,7 +99,7 @@ s32 func_80994750(DoorGerudo* this, PlayState* play) {
 void func_8099485C(DoorGerudo* this, PlayState* play) {
     if (this->isActive) {
         this->actionFunc = func_8099496C;
-        gSaveContext.save.info.inventory.dungeonKeys[gSaveContext.mapIndex] -= 1;
+        gOotSave.info.inventory.dungeonKeys[gSaveContext.mapIndex] -= 1;
         Flags_SetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6));
         Actor_PlaySfx(&this->dyna.actor, NA_SE_EV_CHAIN_KEY_UNLOCK);
     } else {
@@ -108,7 +108,7 @@ void func_8099485C(DoorGerudo* this, PlayState* play) {
         if (direction != 0) {
             Player* player = GET_PLAYER(play);
 
-            if (gSaveContext.save.info.inventory.dungeonKeys[gSaveContext.mapIndex] <= 0) {
+            if (gOotSave.info.inventory.dungeonKeys[gSaveContext.mapIndex] <= 0) {
                 player->naviTextId = -0x203;
             } else if (!Flags_GetCollectible(play, PARAMS_GET_U(this->dyna.actor.params, 8, 5))) {
                 player->naviTextId = -0x225;

@@ -188,7 +188,7 @@ u32 EnDns_CanBuyDekuNuts(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -204,7 +204,7 @@ u32 EnDns_CanBuyDekuSticks(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -216,7 +216,7 @@ u32 EnDns_CanBuyDekuSticks(EnDns* this) {
 }
 
 u32 EnDns_CanBuyPrice(EnDns* this) {
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -232,7 +232,7 @@ u32 EnDns_CanBuyDekuSeeds(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -248,7 +248,7 @@ u32 EnDns_CanBuyDekuShield(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -264,7 +264,7 @@ u32 EnDns_CanBuyBombs(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -280,7 +280,7 @@ u32 EnDns_CanBuyArrows(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 
@@ -292,7 +292,7 @@ u32 EnDns_CanBuyBottle(EnDns* this) {
         return DNS_CANBUY_RESULT_CAPACITY_FULL;
     }
 
-    if (gSaveContext.save.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
+    if (gOotSave.info.playerData.rupees < this->dnsItemEntry->itemPrice) {
         return DNS_CANBUY_RESULT_NEED_RUPEES;
     }
 

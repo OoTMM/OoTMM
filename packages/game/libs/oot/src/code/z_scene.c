@@ -211,9 +211,9 @@ BAD_RETURN(s32) Scene_CommandPlayerEntryList(PlayState* play, SceneCmd* cmd) {
         (ActorEntry*)SEGMENTED_TO_VIRTUAL(cmd->playerEntryList.data) + play->spawnList[play->spawn].playerEntryIndex;
     s16 linkObjectId;
 
-    play->linkAgeOnLoad = ((void)0, gSaveContext.save.linkAge);
+    play->linkAgeOnLoad = ((void)0, gOotSave.linkAge);
 
-    linkObjectId = gLinkObjectIds[((void)0, gSaveContext.save.linkAge)];
+    linkObjectId = gLinkObjectIds[((void)0, gOotSave.linkAge)];
 
     gActorOverlayTable[playerEntry->id].profile->objectId = linkObjectId;
     Object_SpawnPersistent(&play->objectCtx, linkObjectId);
@@ -364,7 +364,7 @@ BAD_RETURN(s32) Scene_CommandSkyboxDisables(PlayState* play, SceneCmd* cmd) {
 
 BAD_RETURN(s32) Scene_CommandTimeSettings(PlayState* play, SceneCmd* cmd) {
     if ((cmd->timeSettings.hour != 0xFF) && (cmd->timeSettings.min != 0xFF)) {
-        gSaveContext.skyboxTime = gSaveContext.save.dayTime =
+        gSaveContext.skyboxTime = gOotSave.dayTime =
             ((cmd->timeSettings.hour + (cmd->timeSettings.min / 60.0f)) * 60.0f) / ((f32)(24 * 60) / 0x10000);
     }
 
@@ -378,14 +378,14 @@ BAD_RETURN(s32) Scene_CommandTimeSettings(PlayState* play, SceneCmd* cmd) {
         gTimeSpeed = play->envCtx.sceneTimeSpeed;
     }
 
-    play->envCtx.sunPos.x = -(Math_SinS(((void)0, gSaveContext.save.dayTime) - CLOCK_TIME(12, 0)) * 120.0f) * 25.0f;
-    play->envCtx.sunPos.y = (Math_CosS(((void)0, gSaveContext.save.dayTime) - CLOCK_TIME(12, 0)) * 120.0f) * 25.0f;
-    play->envCtx.sunPos.z = (Math_CosS(((void)0, gSaveContext.save.dayTime) - CLOCK_TIME(12, 0)) * 20.0f) * 25.0f;
+    play->envCtx.sunPos.x = -(Math_SinS(((void)0, gOotSave.dayTime) - CLOCK_TIME(12, 0)) * 120.0f) * 25.0f;
+    play->envCtx.sunPos.y = (Math_CosS(((void)0, gOotSave.dayTime) - CLOCK_TIME(12, 0)) * 120.0f) * 25.0f;
+    play->envCtx.sunPos.z = (Math_CosS(((void)0, gOotSave.dayTime) - CLOCK_TIME(12, 0)) * 20.0f) * 25.0f;
 
-    if (((play->envCtx.sceneTimeSpeed == 0) && (gSaveContext.save.cutsceneIndex < 0xFFF0)) ||
-        (gSaveContext.save.entranceIndex == ENTR_LAKE_HYLIA_8)) {
+    if (((play->envCtx.sceneTimeSpeed == 0) && (gOotSave.cutsceneIndex < 0xFFF0)) ||
+        (gOotSave.entranceIndex == ENTR_LAKE_HYLIA_8)) {
 #if OOT_VERSION >= PAL_1_0
-        gSaveContext.skyboxTime = ((void)0, gSaveContext.save.dayTime);
+        gSaveContext.skyboxTime = ((void)0, gOotSave.dayTime);
 #endif
 
 #if OOT_VERSION < PAL_1_0
@@ -441,8 +441,8 @@ BAD_RETURN(s32) Scene_CommandEchoSettings(PlayState* play, SceneCmd* cmd) {
 }
 
 BAD_RETURN(s32) Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd) {
-    PRINTF("\n[ZU]sceneset age    =[%X]", ((void)0, gSaveContext.save.linkAge));
-    PRINTF("\n[ZU]sceneset time   =[%X]", ((void)0, gSaveContext.save.cutsceneIndex));
+    PRINTF("\n[ZU]sceneset age    =[%X]", ((void)0, gOotSave.linkAge));
+    PRINTF("\n[ZU]sceneset time   =[%X]", ((void)0, gOotSave.cutsceneIndex));
     PRINTF("\n[ZU]sceneset counter=[%X]", ((void)0, gSaveContext.sceneLayer));
 
     if (gSaveContext.sceneLayer != 0) {
@@ -488,9 +488,9 @@ BAD_RETURN(s32) Scene_CommandMiscSettings(PlayState* play, SceneCmd* cmd) {
 
     if (((play->sceneId >= SCENE_HYRULE_FIELD) && (play->sceneId <= SCENE_OUTSIDE_GANONS_CASTLE)) ||
         ((play->sceneId >= SCENE_MARKET_ENTRANCE_DAY) && (play->sceneId <= SCENE_TEMPLE_OF_TIME_EXTERIOR_RUINS))) {
-        if (gSaveContext.save.cutsceneIndex < 0xFFF0) {
-            gSaveContext.save.info.worldMapAreaData |= gBitFlags[((void)0, gSaveContext.worldMapArea)];
-            PRINTF("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gSaveContext.save.info.worldMapAreaData,
+        if (gOotSave.cutsceneIndex < 0xFFF0) {
+            gOotSave.info.worldMapAreaData |= gBitFlags[((void)0, gSaveContext.worldMapArea)];
+            PRINTF("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gOotSave.info.worldMapAreaData,
                    ((void)0, gSaveContext.worldMapArea));
         }
     }
