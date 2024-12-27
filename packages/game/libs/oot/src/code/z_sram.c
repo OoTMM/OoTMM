@@ -2,18 +2,15 @@
 #include "terminal.h"
 #include "versions.h"
 
-#define SLOT_SIZE (sizeof(SaveContext) + 0x28)
-#define CHECKSUM_SIZE (sizeof(Save) / 2)
+#define SLOT_SIZE (sizeof(gOotSave) + 0x28)
+#define CHECKSUM_SIZE (sizeof(gOotSave) / 2)
 
-#define DEATHS offsetof(SaveContext, save.info.playerData.deaths)
-#define NAME offsetof(SaveContext, save.info.playerData.playerName)
-#define N64DD offsetof(SaveContext, save.info.playerData.n64ddFlag)
-#define HEALTH_CAP offsetof(SaveContext, save.info.playerData.healthCapacity)
-#define QUEST offsetof(SaveContext, save.info.inventory.questItems)
-#define DEFENSE offsetof(SaveContext, save.info.inventory.defenseHearts)
-#if OOT_PAL
-#define HEALTH offsetof(SaveContext, save.info.playerData.health)
-#endif
+#define DEATHS offsetof(OotSave, info.playerData.deaths)
+#define NAME offsetof(OotSave, info.playerData.playerName)
+#define N64DD offsetof(OotSave, info.playerData.n64ddFlag)
+#define HEALTH_CAP offsetof(OotSave, info.playerData.healthCapacity)
+#define QUEST offsetof(OotSave, info.inventory.questItems)
+#define DEFENSE offsetof(OotSave, info.inventory.defenseHearts)
 
 #define SLOT_OFFSET(index) (SRAM_HEADER_SIZE + 0x10 + (index * SLOT_SIZE))
 
@@ -145,8 +142,6 @@ static u16 sNewSaveChecksum = 0;
  *  This save has an empty inventory with 3 hearts and single magic.
  */
 void Sram_InitNewSave(void) {
-    SaveContext* temp = &gSaveContext;
-
     bzero(&gOotSave.info, sizeof(OotSaveInfo));
     gOotSave.totalDays = 0;
     gOotSave.bgsDayCount = 0;
@@ -155,7 +150,7 @@ void Sram_InitNewSave(void) {
     gOotSave.info.equips = sNewSaveEquips;
     gOotSave.info.inventory = sNewSaveInventory;
 
-    temp->save.info.checksum = sNewSaveChecksum;
+    gOotSave.info.checksum = sNewSaveChecksum;
     gOotSave.info.horseData.sceneId = SCENE_HYRULE_FIELD;
     gOotSave.info.horseData.pos.x = -1840;
     gOotSave.info.horseData.pos.y = 72;
@@ -312,8 +307,6 @@ static u16 sDebugSaveChecksum = 0;
  *  and set water level in Water Temple to lowest level.
  */
 void Sram_InitDebugSave(void) {
-    SaveContext* temp = &gSaveContext;
-
     bzero(&gOotSave.info, sizeof(OotSaveInfo));
     gOotSave.totalDays = 0;
     gOotSave.bgsDayCount = 0;
@@ -322,7 +315,7 @@ void Sram_InitDebugSave(void) {
     gOotSave.info.equips = sDebugSaveEquips;
     gOotSave.info.inventory = sDebugSaveInventory;
 
-    temp->save.info.checksum = sDebugSaveChecksum;
+    gOotSave.info.checksum = sDebugSaveChecksum;
     gOotSave.info.horseData.sceneId = SCENE_HYRULE_FIELD;
     gOotSave.info.horseData.pos.x = -1840;
     gOotSave.info.horseData.pos.y = 72;
@@ -386,7 +379,7 @@ void Sram_OpenSave(SramContext* sramCtx) {
     i = gSramSlotOffsets[gSaveContext.fileNum];
     PRINTF(T("ぽいんと＝%x(%d)\n", "Point=%x(%d)\n"), i, gSaveContext.fileNum);
 
-    MemCpy(&gSaveContext, sramCtx->readBuff + i, sizeof(Save));
+    MemCpy(&gOotSave, sramCtx->readBuff + i, sizeof(gOotSave));
 
     PRINTF(VT_FGCOL(YELLOW));
     PRINTF("SCENE_DATA_ID = %d   SceneNo = %d\n", gOotSave.info.playerData.savedSceneId,
@@ -549,7 +542,7 @@ void Sram_WriteSave(SramContext* sramCtx) {
 
     gOotSave.info.checksum = 0;
 
-    ptr = (u16*)&gSaveContext;
+    ptr = (u16*)&gOotSave;
     checksum = j = 0;
 
     for (offset = 0; offset < CHECKSUM_SIZE; offset++) {
@@ -561,7 +554,7 @@ void Sram_WriteSave(SramContext* sramCtx) {
 
     gOotSave.info.checksum = checksum;
 
-    ptr = (u16*)&gSaveContext;
+    ptr = (u16*)&gOotSave;
     checksum = 0;
 
     for (offset = 0; offset < CHECKSUM_SIZE; offset++) {
@@ -572,9 +565,9 @@ void Sram_WriteSave(SramContext* sramCtx) {
     }
 
     offset = gSramSlotOffsets[gSaveContext.fileNum];
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gSaveContext, SLOT_SIZE, OS_WRITE);
+    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gOotSave, SLOT_SIZE, OS_WRITE);
 
-    ptr = (u16*)&gSaveContext;
+    ptr = (u16*)&gOotSave;
     checksum = 0;
 
     for (offset = 0; offset < CHECKSUM_SIZE; offset++) {
@@ -585,7 +578,7 @@ void Sram_WriteSave(SramContext* sramCtx) {
     }
 
     offset = gSramSlotOffsets[gSaveContext.fileNum + 3];
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gSaveContext, SLOT_SIZE, OS_WRITE);
+    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gOotSave, SLOT_SIZE, OS_WRITE);
 }
 
 /**
@@ -612,13 +605,11 @@ void Sram_VerifyAndLoadAllSaves(FileSelectState* fileSelect, SramContext* sramCt
 
     for (slotNum = 0; slotNum < 3; slotNum++) {
         offset = gSramSlotOffsets[slotNum];
-        PRINTF(T("ぽいんと＝%x(%d)    SAVE_MAX=%d\n", "Point=%x(%d)    SAVE_MAX=%d\n"), offset, gSaveContext.fileNum,
-               sizeof(Save));
-        MemCpy(&gSaveContext, sramCtx->readBuff + offset, sizeof(Save));
+        MemCpy(&gOotSave, sramCtx->readBuff + offset, sizeof(gOotSave));
 
         oldChecksum = gOotSave.info.checksum;
         gOotSave.info.checksum = 0;
-        ptr = (u16*)&gSaveContext;
+        ptr = (u16*)&gOotSave;
         PRINTF("\n＝＝＝＝＝＝＝＝＝＝＝＝＝  Ｓ（%d） ＝＝＝＝＝＝＝＝＝＝＝＝＝\n", slotNum);
 
         for (i = newChecksum = j = 0; i < CHECKSUM_SIZE; i++, offset += 2) {
@@ -639,11 +630,11 @@ void Sram_VerifyAndLoadAllSaves(FileSelectState* fileSelect, SramContext* sramCt
             // checksum didnt match, try backup save
             PRINTF("ＥＲＲＯＲ！！！ ＝ %x(%d)\n", gSramSlotOffsets[slotNum], slotNum);
             offset = gSramSlotOffsets[slotNum + 3];
-            MemCpy(&gSaveContext, sramCtx->readBuff + offset, sizeof(Save));
+            MemCpy(&gOotSave, sramCtx->readBuff + offset, sizeof(gOotSave));
 
             oldChecksum = gOotSave.info.checksum;
             gOotSave.info.checksum = 0;
-            ptr = (u16*)&gSaveContext;
+            ptr = (u16*)&gOotSave;
             PRINTF("================= ＢＡＣＫ─ＵＰ ========================\n");
 
             for (i = newChecksum = j = 0; i < CHECKSUM_SIZE; i++, offset += 2) {
@@ -694,7 +685,7 @@ void Sram_VerifyAndLoadAllSaves(FileSelectState* fileSelect, SramContext* sramCt
                 Sram_InitNewSave();
 #endif
 
-                ptr = (u16*)&gSaveContext;
+                ptr = (u16*)&gOotSave;
                 PRINTF("\n--------------------------------------------------------------\n");
 
                 for (i = newChecksum = j = 0; i < CHECKSUM_SIZE; i++) {
@@ -710,7 +701,7 @@ void Sram_VerifyAndLoadAllSaves(FileSelectState* fileSelect, SramContext* sramCt
                 PRINTF("\nCheck_Sum=%x(%x)\n", gOotSave.info.checksum, newChecksum);
 
                 i = gSramSlotOffsets[slotNum + 3];
-                SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + i, &gSaveContext, SLOT_SIZE, OS_WRITE);
+                SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + i, &gOotSave, SLOT_SIZE, OS_WRITE);
 
                 PRINTF("????#%x,%x,%x,%x,%x,%x\n", gOotSave.info.playerData.newf[0],
                        gOotSave.info.playerData.newf[1], gOotSave.info.playerData.newf[2],
@@ -721,7 +712,7 @@ void Sram_VerifyAndLoadAllSaves(FileSelectState* fileSelect, SramContext* sramCt
             }
 
             i = gSramSlotOffsets[slotNum];
-            SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + i, &gSaveContext, SLOT_SIZE, OS_WRITE);
+            SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + i, &gOotSave, SLOT_SIZE, OS_WRITE);
 
             PRINTF(T("ぽいんと＝%x(%d)  check_sum=%x(%x)\n", "point=%x(%d) check_sum=%x(%x)\n"), i, slotNum,
                    gOotSave.info.checksum, newChecksum);
@@ -803,7 +794,7 @@ void Sram_InitSave(FileSelectState* fileSelect, SramContext* sramCtx) {
 
     gOotSave.info.playerData.n64ddFlag = fileSelect->n64ddFlag;
 
-    ptr = (u16*)&gSaveContext;
+    ptr = (u16*)&gOotSave;
 
     for (j = 0, checksum = 0, offset = 0; offset < CHECKSUM_SIZE; offset++) {
         PRINTF("%x ", *ptr);
@@ -819,11 +810,11 @@ void Sram_InitSave(FileSelectState* fileSelect, SramContext* sramCtx) {
 
     offset = gSramSlotOffsets[gSaveContext.fileNum];
     PRINTF("I=%x no=%d\n", offset, gSaveContext.fileNum);
-    MemCpy(sramCtx->readBuff + offset, &gSaveContext, sizeof(Save));
+    MemCpy(sramCtx->readBuff + offset, &gOotSave, sizeof(gOotSave));
 
     offset = gSramSlotOffsets[gSaveContext.fileNum + 3];
     PRINTF("I=%x no=%d\n", offset, gSaveContext.fileNum + 3);
-    MemCpy(sramCtx->readBuff + offset, &gSaveContext, sizeof(Save));
+    MemCpy(sramCtx->readBuff + offset, &gOotSave, sizeof(gOotSave));
 
     SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000), sramCtx->readBuff, SRAM_SIZE, OS_WRITE);
 
@@ -860,15 +851,15 @@ void Sram_EraseSave(FileSelectState* fileSelect, SramContext* sramCtx) {
     Sram_InitNewSave();
 
     offset = gSramSlotOffsets[fileSelect->selectedFileIndex];
-    MemCpy(sramCtx->readBuff + offset, &gSaveContext, sizeof(Save));
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gSaveContext, SLOT_SIZE, OS_WRITE);
+    MemCpy(sramCtx->readBuff + offset, &gOotSave, sizeof(gOotSave));
+    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gOotSave, SLOT_SIZE, OS_WRITE);
 
     MemCpy(&fileSelect->n64ddFlags[fileSelect->selectedFileIndex], sramCtx->readBuff + offset + N64DD,
            sizeof(fileSelect->n64ddFlags[0]));
 
     offset = gSramSlotOffsets[fileSelect->selectedFileIndex + 3];
-    MemCpy(sramCtx->readBuff + offset, &gSaveContext, sizeof(Save));
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gSaveContext, SLOT_SIZE, OS_WRITE);
+    MemCpy(sramCtx->readBuff + offset, &gOotSave, sizeof(gOotSave));
+    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000) + offset, &gOotSave, SLOT_SIZE, OS_WRITE);
 
     PRINTF(T("ＣＬＥＡＲ終了\n", "CLEAR END\n"));
 }
@@ -881,13 +872,13 @@ void Sram_CopySave(FileSelectState* fileSelect, SramContext* sramCtx) {
            gSramSlotOffsets[fileSelect->copyDestFileIndex]);
 
     offset = gSramSlotOffsets[fileSelect->selectedFileIndex];
-    MemCpy(&gSaveContext, sramCtx->readBuff + offset, sizeof(Save));
+    MemCpy(&gOotSave, sramCtx->readBuff + offset, sizeof(gOotSave));
 
     offset = gSramSlotOffsets[fileSelect->copyDestFileIndex];
-    MemCpy(sramCtx->readBuff + offset, &gSaveContext, sizeof(Save));
+    MemCpy(sramCtx->readBuff + offset, &gOotSave, sizeof(gOotSave));
 
     offset = gSramSlotOffsets[fileSelect->copyDestFileIndex + 3];
-    MemCpy(sramCtx->readBuff + offset, &gSaveContext, sizeof(Save));
+    MemCpy(sramCtx->readBuff + offset, &gOotSave, sizeof(gOotSave));
 
     SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000), sramCtx->readBuff, SRAM_SIZE, OS_WRITE);
 
