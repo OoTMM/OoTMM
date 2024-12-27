@@ -4,6 +4,7 @@
 #include "quake.h"
 #include "terminal.h"
 #include "versions.h"
+#include <combo.h>
 #if PLATFORM_N64
 #include "n64dd.h"
 #endif
@@ -270,6 +271,10 @@ void Play_Init(GameState* thisx) {
     s32 i;
     u8 baseSceneLayer;
     s32 pad[2];
+
+    if (gSaveContext.save.entranceIndex == ENTR_MIDOS_HOUSE_0) {
+        Game_Switch(GAME_MM);
+    }
 
     if (gSaveContext.save.entranceIndex == ENTR_LOAD_OPENING) {
         gSaveContext.save.entranceIndex = 0;

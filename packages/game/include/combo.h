@@ -57,4 +57,6 @@ extern char gGameSwitch;
 extern char gGameId;
 extern char gNextGameId;
 
+void Game_Switch(int gameId);
+
 #endif
