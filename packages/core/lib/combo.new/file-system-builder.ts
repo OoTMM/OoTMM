@@ -21,7 +21,7 @@ export class RandoFileSystemBuilder {
         const data = rom.slice(f.start, f.start + f.size);
         const id = (gameId << 24 | fileId) >>> 0;
         fileId++;
-        rfs.addFile({ id, name, data, dma: { [game]: { start: f.start, size: f.size } } });
+        rfs.addFile({ id, name, data, compressed: f.compressed, dma: { [game]: { start: f.start, size: f.size } } });
       }
 
       /* Metadata */

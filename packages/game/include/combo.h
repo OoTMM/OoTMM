@@ -49,6 +49,7 @@ FileDmaData;
 
 u32 File_Offset(int index);
 u32 File_Size(int index);
+u32 File_Flags(int index);
 int File_IndexFromID(u32 id);
 int File_DmaData(u32 dmaId, u32 vaddr, FileDmaData* out);
 

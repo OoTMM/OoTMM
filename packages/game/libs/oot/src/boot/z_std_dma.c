@@ -335,6 +335,8 @@ void DmaMgr_ProcessRequest(DmaRequest* req) {
     FileDmaData dma;
     int fileIndex;
     u32 fileOffset;
+    u32 fileFlags;
+    u32 fileSize;
 
     if (!File_DmaData(FILEID_OOT_DMADATA, vrom, &dma))
         for (;;) {}
@@ -343,9 +345,22 @@ void DmaMgr_ProcessRequest(DmaRequest* req) {
     if (fileIndex == -1)
         for (;;) {}
     fileOffset = File_Offset(fileIndex);
-    fileOffset += req->vromAddr - dma.vstart;
+    fileFlags = File_Flags(fileIndex);
 
-    DmaMgr_DmaRomToRam(fileOffset, ram, size);
+    if (fileFlags & 1)
+    {
+        /* Compressed */
+        fileSize = File_Size(fileIndex);
+        osSetThreadPri(NULL, THREAD_PRI_DMAMGR_LOW);
+        Yaz0_Decompress(fileOffset, ram, fileSize);
+        osSetThreadPri(NULL, THREAD_PRI_DMAMGR);
+    }
+    else
+    {
+        /* Uncompressed */
+        fileOffset += req->vromAddr - dma.vstart;
+        DmaMgr_DmaRomToRam(fileOffset, ram, size);
+    }
 }
 
 void DmaMgr_ThreadEntry(void* arg) {

@@ -19,6 +19,14 @@ u32 File_Size(int index)
     return data;
 }
 
+u32 File_Flags(int index)
+{
+    u32 data;
+
+    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 16 + 12, &data);
+    return data;
+}
+
 int File_IndexFromID(u32 id)
 {
     u32 tmp;

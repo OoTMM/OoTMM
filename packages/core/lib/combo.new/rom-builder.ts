@@ -1,3 +1,4 @@
+import { compressFile } from '../combo/compress';
 import { Game, GAMES } from '../combo/config';
 import { toU32Buffer } from '../combo/util';
 import { bufReadU32BE, bufWriteU32BE } from '../combo/util/buffer';
@@ -41,12 +42,14 @@ class RomBuilder {
   private rom: Uint8Array;
   private fileSystem: RandoFileSystem;
   private offsets: Map<RandoFile, number>;
+  private compressed: Map<RandoFile, Uint8Array>;
   private pos: number;
 
   constructor(fileSystem: RandoFileSystem) {
     this.rom = new Uint8Array(128 * 1024 * 1024);
     this.fileSystem = fileSystem;
     this.offsets = new Map();
+    this.compressed = new Map();
     this.pos = 0;
   }
 
@@ -67,7 +70,7 @@ class RomBuilder {
     return file;
   }
 
-  private inject(file: RandoFile | string) {
+  private async inject(file: RandoFile | string) {
     file = this.resolveFile(file);
 
     /* Check if already injected */
@@ -76,7 +79,11 @@ class RomBuilder {
     }
 
     /* Inject the file */
-    const data = file.data!;
+    let data = file.data!;
+    if (file.compressed) {
+      data = await compressFile(data);
+      this.compressed.set(file, data);
+    }
     this.rom.set(data, this.pos);
     this.offsets.set(file, this.pos);
 
@@ -111,10 +118,17 @@ class RomBuilder {
 
     for (let i = 0; i < filesSorted.length; ++i) {
       const f = filesSorted[i];
+      let flags = 0;
+      let data = f.data!;
+      if (f.compressed) {
+        flags |= 1;
+        data = this.compressed.get(f)!;
+      }
+
       bufWriteU32BE(fileTable, i * 16 + 0, f.id);
       bufWriteU32BE(fileTable, i * 16 + 4, this.offsets.get(f)!);
-      bufWriteU32BE(fileTable, i * 16 + 8, f.data!.length);
-      bufWriteU32BE(fileTable, i * 16 + 12, 0);
+      bufWriteU32BE(fileTable, i * 16 + 8, data.length);
+      bufWriteU32BE(fileTable, i * 16 + 12, flags);
     }
 
     /* Inject the file table */
@@ -143,7 +157,7 @@ class RomBuilder {
     }
 
     /* Inject the DMA table in the files */
-    this.fileSystem.addFile({ id, name: `${game}/dmadata`, data: dmaTable, dma: {} });
+    this.fileSystem.addFile({ id, name: `${game}/dmadata`, data: dmaTable, dma: {}, compressed: false });
   }
 
   private makeDmaTables() {
@@ -151,17 +165,17 @@ class RomBuilder {
     this.makeDmaTable('mm', 3);
   }
 
-  build() {
+  async build() {
     /* Build the DMA tables */
     this.makeDmaTables();
 
     /* We need to inject the makerom and loader first */
-    this.inject('makerom');
-    this.inject('loader');
+    await this.inject('makerom');
+    await this.inject('loader');
 
     /* Inject all files */
     for (const file of this.fileSystem.files) {
-      this.inject(file);
+      await this.inject(file);
     }
 
     /* Inject the file table */
@@ -177,7 +191,7 @@ class RomBuilder {
   }
 }
 
-export function buildRom(fileSystem: RandoFileSystem) {
+export async function buildRom(fileSystem: RandoFileSystem) {
   const builder = new RomBuilder(fileSystem);
   return builder.build();
 }
