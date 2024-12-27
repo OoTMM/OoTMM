@@ -5,15 +5,16 @@
 #include "libu64/stackcheck.h"
 #include "z64thread.h"
 
-StackEntry sBootStackInfo;
 OSThread sIdleThread;
 STACK(sIdleStack, 0x400);
 StackEntry sIdleStackInfo;
-STACK(sBootThreadStack, 0x400);
+
+extern char _bootSegmentBssStart;
+extern char _bootSegmentBssEnd;
 
 void bootproc(void) {
-    StackCheck_Init(&sBootStackInfo, sBootThreadStack, STACK_TOP(sBootThreadStack), 0, -1, "boot");
     osMemSize = osGetMemSize();
+    bzero(&_bootSegmentBssStart, &_bootSegmentBssEnd - &_bootSegmentBssStart);
     CIC6105_Init();
     osInitialize();
     osUnmapTLBAll();

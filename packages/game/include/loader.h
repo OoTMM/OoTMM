@@ -3,7 +3,8 @@
 
 #include <PR/ultratypes.h>
 
-#define FILEID_OOT_DMADATA 0x00000002
+#define FILEID_OOT_DMADATA  0x00000002
+#define FILEID_MM_DMADATA   0x00000003
 
 typedef struct
 {

@@ -27,7 +27,6 @@ typedef struct {
 
 #define DMAMGR_DEFAULT_BUFSIZE ALIGN16(0x2000)
 
-extern DmaEntry gDmaDataTable[];
 extern size_t gDmaMgrDmaBuffSize;
 
 // Standard DMA Requests

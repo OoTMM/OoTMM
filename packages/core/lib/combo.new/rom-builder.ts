@@ -148,6 +148,7 @@ class RomBuilder {
 
   private makeDmaTables() {
     this.makeDmaTable('oot', 2);
+    this.makeDmaTable('mm', 3);
   }
 
   build() {
