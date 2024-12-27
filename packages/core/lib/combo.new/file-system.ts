@@ -2,6 +2,7 @@ import { Game } from "../combo/config";
 
 export type RandoFileSystemMetadata = {
   loaderOffsets: {
+    file: number;
     configs: number;
   };
   games: { [k in Game]: { bootproc: number, ram: number } };
@@ -21,6 +22,7 @@ export class RandoFileSystem {
     this.files = [];
     this.meta = {
       loaderOffsets: {
+        file: 0,
         configs: 0,
       },
       games: {

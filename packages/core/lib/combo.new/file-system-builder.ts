@@ -26,6 +26,7 @@ export class RandoFileSystemBuilder {
 
       /* Metadata */
       rfs.meta.loaderOffsets.configs = metadata.loaderOffsets.configs;
+      rfs.meta.loaderOffsets.file = metadata.loaderOffsets.file;
       rfs.meta.games[game].bootproc = metadata.game.bootproc;
       rfs.meta.games[game].ram = metadata.game.ram;
     }
