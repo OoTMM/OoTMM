@@ -46,7 +46,7 @@ class RomBuilder {
   private pos: number;
 
   constructor(fileSystem: RandoFileSystem) {
-    this.rom = new Uint8Array(128 * 1024 * 1024);
+    this.rom = new Uint8Array(64 * 1024 * 1024);
     this.fileSystem = fileSystem;
     this.offsets = new Map();
     this.compressed = new Map();
