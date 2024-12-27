@@ -12,6 +12,7 @@ export type RandoFile = {
   id: number;
   name: string;
   data?: Uint8Array;
+  dma: { [k in Game]?: { start: number, size: number } };
 }
 
 export class RandoFileSystem {
