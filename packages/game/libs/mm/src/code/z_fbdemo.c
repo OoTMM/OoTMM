@@ -111,7 +111,7 @@ void TransitionTile_InitVtxData(TransitionTile* this) {
 }
 
 void TransitionTile_Destroy(TransitionTile* this) {
-    msleep(100);
+    Sleep_Msec(100);
 
     if (this->vtxData != NULL) {
         free(this->vtxData);
