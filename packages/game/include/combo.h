@@ -53,4 +53,8 @@ u32 File_Flags(int index);
 int File_IndexFromID(u32 id);
 int File_DmaData(u32 dmaId, u32 vaddr, FileDmaData* out);
 
+extern char gGameSwitch;
+extern char gGameId;
+extern char gNextGameId;
+
 #endif
