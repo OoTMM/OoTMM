@@ -10,6 +10,7 @@
  *      3) Samples consisting of raw soundbytes stored using a compressed ADPCM algorithm (.aifc files)
  */
 
+#include <loader.h>
 #include "global.h"
 #include "audio/load.h"
 #include "buffers.h"
@@ -365,8 +366,13 @@ void AudioLoad_SetSampleFontLoadStatus(s32 sampleBankId, s32 loadStatus) {
     }
 }
 
-void AudioLoad_InitTable(AudioTable* table, uintptr_t romAddr, u16 unkMediumParam) {
+void AudioLoad_InitTable(AudioTable* table, uintptr_t vromAddr, u16 unkMediumParam) {
     s32 i;
+    FileDmaData dma;
+    u32 romAddr;
+
+    File_DmaData(FILEID_MM_DMADATA, vromAddr, &dma);
+    romAddr = File_Offset(File_IndexFromID(dma.id));
 
     table->header.unkMediumParam = unkMediumParam;
     table->header.romAddr = romAddr;

@@ -16,6 +16,7 @@ endseg
 beginseg
     name "boot"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
+    include "$(BUILD_DIR)/src/z64/file.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
     include "$(BUILD_DIR)/src/boot/viconfig.o"
     include "$(BUILD_DIR)/src/boot/carthandle.o"

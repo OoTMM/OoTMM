@@ -221,7 +221,7 @@ SPEC := spec
 # create asm directories
 $(shell mkdir -p asm data extracted)
 
-SRC_DIRS := $(shell find src -type d)
+SRC_DIRS := $(shell find -L src -type d)
 ASM_DIRS := $(shell find asm -type d -not -path "asm/non_matchings*") $(shell find data -type d)
 
 ifneq ($(wildcard $(EXTRACTED_DIR)/assets/audio),)
@@ -385,7 +385,7 @@ $(BUILD_DIR)/src/boot/libc64/%.o: OPTFLAGS := -O2
 $(BUILD_DIR)/src/audio/%.o: OPTFLAGS := -O2
 
 $(BUILD_DIR)/assets/%.o: OPTFLAGS := -O1
-$(BUILD_DIR)/assets/%.o: ASM_PROC_FLAGS := 
+$(BUILD_DIR)/assets/%.o: ASM_PROC_FLAGS :=
 
 # file flags
 $(BUILD_DIR)/src/libultra/libc/ll.o: OPTFLAGS := -O1
@@ -449,7 +449,7 @@ $(ELF): $(TEXTURE_FILES_OUT) $(ASSET_FILES_OUT) $(O_FILES) $(OVL_RELOC_FILES) $(
 		../loader/build/makerom.o ../loader/build/entry.o ../loader/build/loader.o
 	$(LD) -T $(LDSCRIPT) -T $(LD_FINAL_FILES) --no-check-sections --accept-unknown-input-arch --emit-relocs -Map $(MAP) -o $@
 
-## Order-only prerequisites 
+## Order-only prerequisites
 # These ensure e.g. the O_FILES are built before the OVL_RELOC_FILES.
 # The intermediate phony targets avoid quadratically-many dependencies between the targets and prerequisites.
 
@@ -488,6 +488,7 @@ venv:
 ## Extraction step
 
 setup:
+	ln -sf ../../z64 src/z64
 	$(MAKE) -C tools
 	$(PYTHON) tools/buildtools/decompress_baserom.py -v $(VERSION)
 	$(PYTHON) tools/buildtools/extract_baserom.py $(BASEROM_DIR)/baserom-decompressed.z64 $(EXTRACTED_DIR)/baserom --dmadata-start `cat $(BASEROM_DIR)/dmadata_start.txt` --dmadata-names $(BASEROM_DIR)/dmadata_names.txt

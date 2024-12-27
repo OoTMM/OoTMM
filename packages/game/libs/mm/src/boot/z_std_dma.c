@@ -20,6 +20,7 @@
  */
 #include "prevent_bss_reordering.h"
 #include "z64dma.h"
+#include <loader.h>
 
 #include "carthandle.h"
 #include "fault.h"
@@ -33,7 +34,6 @@
 size_t gDmaMgrDmaBuffSize = DMAMGR_DEFAULT_BUFSIZE;
 
 StackEntry sDmaMgrStackInfo;
-u16 sNumDmaEntries;
 OSMesgQueue sDmaMgrMsgQueue;
 OSMesg sDmaMgrMsgBuf[32];
 OSThread sDmaMgrThread;
@@ -112,44 +112,14 @@ s32 DmaMgr_AudioDmaHandler(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction) {
     return osEPiStartDma(pihandle, mb, direction);
 }
 
-DmaEntry* DmaMgr_FindDmaEntry(uintptr_t vrom) {
-    DmaEntry* entry;
-
-    for (entry = gDmaDataTable; entry->file.vromEnd != 0; entry++) {
-        if ((vrom >= entry->file.vromStart) && (vrom < entry->file.vromEnd)) {
-            return entry;
-        }
-    }
-
-    return NULL;
-}
-
 s32 DmaMgr_TranslateVromToRom(uintptr_t vrom) {
-    DmaEntry* entry = DmaMgr_FindDmaEntry(vrom);
+    FileDmaData dma;
+    u32 base;
 
-    if (entry != NULL) {
-        if (entry->romEnd == 0) {
-            return vrom + entry->romStart - entry->file.vromStart;
-        }
+    File_DmaData(FILEID_MM_DMADATA, vrom, &dma);
+    base = File_Offset(File_IndexFromID(dma.id));
 
-        if (vrom == entry->file.vromStart) {
-            return entry->romStart;
-        }
-
-        return -1;
-    }
-
-    return -1;
-}
-
-s32 DmaMgr_FindDmaIndex(uintptr_t vrom) {
-    DmaEntry* entry = DmaMgr_FindDmaEntry(vrom);
-
-    if (entry != NULL) {
-        return entry - gDmaDataTable;
-    }
-
-    return -1;
+    return base + vrom - dma.vstart;
 }
 
 const char* func_800809F4(uintptr_t vrom) {
@@ -160,47 +130,20 @@ void DmaMgr_ProcessRequest(DmaRequest* req) {
     uintptr_t vrom = req->vromAddr;
     void* ram = req->dramAddr;
     size_t size = req->size;
-    uintptr_t romStart;
-    size_t romSize;
-    DmaEntry* entry;
-    s32 index = DmaMgr_FindDmaIndex(vrom);
+    FileDmaData dma;
+    int fileIndex;
+    u32 fileOffset;
 
-    if ((index >= 0) && (index < sNumDmaEntries)) {
-        entry = &gDmaDataTable[index];
-        if (entry->romEnd == 0) {
-            // romEnd of 0 indicates that the file is uncompressed. Files that are stored uncompressed can have
-            // only part of their content loaded into RAM, so DMA only the requested region.
-            if (entry->file.vromEnd < (vrom + size)) {
-                // Error, vrom + size ends up in a different file than it started in
-                Fault_AddHungupAndCrash("../z_std_dma.c", 499);
-            }
-            DmaMgr_DmaRomToRam((entry->romStart + vrom) - entry->file.vromStart, ram, size);
-        } else {
-            // File is compressed. Files that are stored compressed must be loaded into RAM all at once.
+    if (!File_DmaData(FILEID_MM_DMADATA, vrom, &dma))
+        for (;;) {}
 
-            romSize = entry->romEnd - entry->romStart;
-            romStart = entry->romStart;
+    fileIndex = File_IndexFromID(dma.id);
+    if (fileIndex == -1)
+        for (;;) {}
+    fileOffset = File_Offset(fileIndex);
+    fileOffset += req->vromAddr - dma.vstart;
 
-            if (vrom != entry->file.vromStart) {
-                // Error, requested vrom is not the start of a file
-                Fault_AddHungupAndCrash("../z_std_dma.c", 518);
-            }
-
-            if (size != (entry->file.vromEnd - entry->file.vromStart)) {
-                // Error, only part of the file was requested
-                Fault_AddHungupAndCrash("../z_std_dma.c", 525);
-            }
-
-            // Reduce the thread priority and decompress the file, the decompression routine handles the DMA
-            // in chunks. Restores the thread priority when done.
-            osSetThreadPri(NULL, Z_PRIORITY_DMAMGR_LOW);
-            Yaz0_Decompress(romStart, ram, romSize);
-            osSetThreadPri(NULL, Z_PRIORITY_DMAMGR);
-        }
-    } else {
-        // Error, invalid index
-        Fault_AddHungupAndCrash("../z_std_dma.c", 558);
-    }
+    DmaMgr_DmaRomToRam(fileOffset, ram, size);
 }
 
 void DmaMgr_ThreadEntry(void* arg) {
@@ -285,20 +228,6 @@ s32 DmaMgr_RequestSync(void* ram, uintptr_t vrom, size_t size) {
 }
 
 void DmaMgr_Init(void) {
-    DmaMgr_DmaRomToRam(SEGMENT_ROM_START(dmadata), gDmaDataTable, SEGMENT_ROM_SIZE(dmadata));
-
-    {
-        DmaEntry* entry = gDmaDataTable;
-        s32 index = 0;
-
-        while (entry->file.vromEnd != 0) {
-            entry++;
-            index++;
-        }
-
-        sNumDmaEntries = index;
-    }
-
     osCreateMesgQueue(&sDmaMgrMsgQueue, sDmaMgrMsgBuf, ARRAY_COUNT(sDmaMgrMsgBuf));
     StackCheck_Init(&sDmaMgrStackInfo, sDmaMgrStack, STACK_TOP(sDmaMgrStack), 0, 0x100, "dmamgr");
     osCreateThread(&sDmaMgrThread, Z_THREAD_ID_DMAMGR, DmaMgr_ThreadEntry, NULL, STACK_TOP(sDmaMgrStack),

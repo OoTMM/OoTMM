@@ -63,13 +63,14 @@ int File_DmaData(u32 dmaId, u32 vaddr, FileDmaData* out)
     u32 vstart;
     u32 vsize;
     u32 id;
+    u32 i;
 
     dmaIndex = File_IndexFromID(dmaId);
     dmaOffset = File_Offset(dmaIndex);
     osEPiReadIo(gCartHandle, dmaOffset, &count);
     dmaOffset += 4;
 
-    for (u32 i = 0; i < count; ++i)
+    for (i = 0; i < count; ++i)
     {
         /* Read the DMA entry */
         osEPiReadIo(gCartHandle, dmaOffset, &vstart);
