@@ -100,14 +100,33 @@ class RomBuilder {
       if (ram & 0xf || size & 0xf || rom & 0xf) {
         throw new Error(`Game DMA: ${game} Invalid alignment`);
       }
-
-      console.log(game);
-      console.log(ram.toString(16));
-      console.log(rom.toString(16));
-      console.log(entrypoint.toString(16));
     }
     const configBlock = toU32Buffer(data);
     this.rom.set(configBlock, loaderOffset + this.fileSystem.meta.loaderOffsets.configs);
+  }
+
+  private injectFileTable() {
+    const filesSorted = Array.from(this.fileSystem.files).sort((a, b) => a.id - b.id);
+    const fileTable = new Uint8Array(filesSorted.length * 4 * 4);
+
+    for (let i = 0; i < filesSorted.length; ++i) {
+      const f = filesSorted[i];
+      bufWriteU32BE(fileTable, i * 16 + 0, f.id);
+      bufWriteU32BE(fileTable, i * 16 + 4, this.offsets.get(f)!);
+      bufWriteU32BE(fileTable, i * 16 + 8, f.data!.length);
+      bufWriteU32BE(fileTable, i * 16 + 12, 0);
+    }
+
+    /* Inject the file table */
+    const fileTableOffset = this.pos;
+    this.rom.set(fileTable, fileTableOffset);
+    this.pos += fileTable.length;
+
+    /* Patch the loader */
+    const loaderFile = this.resolveFile('loader');
+    const loaderOffset = this.offsets.get(loaderFile)!;
+    bufWriteU32BE(this.rom, loaderOffset + this.fileSystem.meta.loaderOffsets.file, fileTableOffset);
+    bufWriteU32BE(this.rom, loaderOffset + this.fileSystem.meta.loaderOffsets.file + 4, filesSorted.length);
   }
 
   build() {
@@ -119,6 +138,9 @@ class RomBuilder {
     for (const file of this.fileSystem.files) {
       this.inject(file);
     }
+
+    /* Inject the file table */
+    this.injectFileTable();
 
     /* Patch loader */
     this.patchLoader();

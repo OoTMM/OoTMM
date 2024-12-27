@@ -77,6 +77,7 @@ async function run() {
   const bootram = findSymbol(symbols, "_bootSegmentStart");
   const loaderStart = findSymbol(symbols, "_loaderSegmentStart");
   const loaderOffsets = {
+    file: findSymbol(symbols, "kLoaderFileConfig") - loaderStart,
     configs: findSymbol(symbols, "gLoaderGameConfigs") - loaderStart,
   };
   const game = {

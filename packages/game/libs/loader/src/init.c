@@ -1,4 +1,5 @@
 #include <loader.h>
+#include <string.h>
 #include <ultra64.h>
 
 __attribute__ ((aligned(8))) char gLoaderStack[0x400];
@@ -29,8 +30,17 @@ void LoadGame(int gameId)
     cfg->entrypoint();
 }
 
+extern char _loaderSegmentBssStart;
+extern char _loaderSegmentBssEnd;
+
+void ClearBSS(void)
+{
+    memset(&_loaderSegmentBssStart, 0, &_loaderSegmentBssEnd - &_loaderSegmentBssStart);
+}
+
 void LoaderInit(void)
 {
+    ClearBSS();
     LoadGame(1);
 
     for (;;) {}
