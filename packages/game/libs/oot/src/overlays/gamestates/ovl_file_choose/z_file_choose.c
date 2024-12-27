@@ -1903,29 +1903,29 @@ void FileSelect_LoadGame(GameState* thisx) {
         gSaveContext.hudVisibilityModeTimer = gSaveContext.magicCapacity = 0; // false, HUD_VISIBILITY_NO_CHANGE
 
     // Set the fill target to be the saved magic amount
-    gSaveContext.magicFillTarget = gSaveContext.save.info.playerData.magic;
+    gSaveContext.magicFillTarget = gOotSave.info.playerData.magic;
     // Set `magicLevel` and `magic` to 0 so `magicCapacity` then `magic` grows from nothing to respectively the full
     // capacity and `magicFillTarget`
-    gSaveContext.save.info.playerData.magicLevel = gSaveContext.save.info.playerData.magic = 0;
+    gOotSave.info.playerData.magicLevel = gOotSave.info.playerData.magic = 0;
 
     PRINTF(VT_FGCOL(GREEN));
     PRINTF("Z_MAGIC_NOW_NOW=%d  MAGIC_NOW=%d\n", ((void)0, gSaveContext.magicFillTarget),
-           gSaveContext.save.info.playerData.magic);
+           gOotSave.info.playerData.magic);
     PRINTF(VT_RST);
 
-    gSaveContext.save.info.playerData.naviTimer = 0;
+    gOotSave.info.playerData.naviTimer = 0;
 
-    if ((gSaveContext.save.info.equips.buttonItems[0] != ITEM_SWORD_KOKIRI) &&
-        (gSaveContext.save.info.equips.buttonItems[0] != ITEM_SWORD_MASTER) &&
-        (gSaveContext.save.info.equips.buttonItems[0] != ITEM_SWORD_BIGGORON) &&
-        (gSaveContext.save.info.equips.buttonItems[0] != ITEM_GIANTS_KNIFE)) {
+    if ((gOotSave.info.equips.buttonItems[0] != ITEM_SWORD_KOKIRI) &&
+        (gOotSave.info.equips.buttonItems[0] != ITEM_SWORD_MASTER) &&
+        (gOotSave.info.equips.buttonItems[0] != ITEM_SWORD_BIGGORON) &&
+        (gOotSave.info.equips.buttonItems[0] != ITEM_GIANTS_KNIFE)) {
         u16 swordEquipValue;
 
-        gSaveContext.save.info.equips.buttonItems[0] = ITEM_NONE;
+        gOotSave.info.equips.buttonItems[0] = ITEM_NONE;
         swordEquipValue =
-            (gEquipMasks[EQUIP_TYPE_SWORD] & gSaveContext.save.info.equips.equipment) >> (EQUIP_TYPE_SWORD * 4);
-        gSaveContext.save.info.equips.equipment &= gEquipNegMasks[EQUIP_TYPE_SWORD];
-        gSaveContext.save.info.inventory.equipment ^= OWNED_EQUIP_FLAG(EQUIP_TYPE_SWORD, swordEquipValue - 1);
+            (gEquipMasks[EQUIP_TYPE_SWORD] & gOotSave.info.equips.equipment) >> (EQUIP_TYPE_SWORD * 4);
+        gOotSave.info.equips.equipment &= gEquipNegMasks[EQUIP_TYPE_SWORD];
+        gOotSave.info.inventory.equipment ^= OWNED_EQUIP_FLAG(EQUIP_TYPE_SWORD, swordEquipValue - 1);
     }
 
 #if PLATFORM_N64
@@ -2260,7 +2260,7 @@ void FileSelect_InitContext(GameState* thisx) {
     Letterbox_SetSizeTarget(0);
 
     gSaveContext.skyboxTime = CLOCK_TIME(0, 0);
-    gSaveContext.save.dayTime = CLOCK_TIME(0, 0);
+    gOotSave.dayTime = CLOCK_TIME(0, 0);
 
     Skybox_Init(&this->state, &this->skyboxCtx, SKYBOX_NORMAL_SKY);
 

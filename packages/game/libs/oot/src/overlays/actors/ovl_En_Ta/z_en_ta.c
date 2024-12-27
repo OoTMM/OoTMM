@@ -558,7 +558,7 @@ void EnTa_IdleAtRanch(EnTa* this, PlayState* play) {
 }
 
 s32 EnTa_CheckCanBuyMilk(void) {
-    if (gSaveContext.save.info.playerData.rupees < 30) {
+    if (gOotSave.info.playerData.rupees < 30) {
         return TALON_CANBUYMILK_NOT_ENOUGH_RUPEES;
     } else if (!Inventory_HasEmptyBottle()) {
         return TALON_CANBUYMILK_NO_EMPTY_BOTTLE;
@@ -984,7 +984,7 @@ void EnTa_WaitBuyMilkOrPlayCuccoGameResponse(EnTa* this, PlayState* play) {
                 break;
 
             case 1: // Play cucco game
-                if (gSaveContext.save.info.playerData.rupees < 10) {
+                if (gOotSave.info.playerData.rupees < 10) {
                     Message_ContinueTextbox(play, 0x85);
                     EnTa_SetupAction(this, EnTa_TalkNotEnoughRupees, EnTa_AnimRunToEnd);
                 } else {
@@ -1018,7 +1018,7 @@ void EnTa_WaitForPlayCuccoGameResponse(EnTa* this, PlayState* play) {
     if (Message_GetState(&play->msgCtx) == TEXT_STATE_CHOICE && Message_ShouldAdvance(play)) {
         switch (play->msgCtx.choiceIndex) {
             case 0:
-                if (gSaveContext.save.info.playerData.rupees < price) {
+                if (gOotSave.info.playerData.rupees < price) {
                     Message_ContinueTextbox(play, 0x85);
                     EnTa_SetupAction(this, EnTa_TalkNotEnoughRupees, EnTa_AnimRunToEnd);
                 } else {

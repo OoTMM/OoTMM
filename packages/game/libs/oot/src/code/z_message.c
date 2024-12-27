@@ -1778,14 +1778,14 @@ void Message_Decode(PlayState* play) {
             }
             if (curCharWide == MESSAGE_WIDE_NAME) {
                 // Substitute the player name control character for the file's player name.
-                for (playerNameLen = ARRAY_COUNT(gSaveContext.save.info.playerData.playerName); playerNameLen > 0;
+                for (playerNameLen = ARRAY_COUNT(gOotSave.info.playerData.playerName); playerNameLen > 0;
                      playerNameLen--) {
-                    if (gSaveContext.save.info.playerData.playerName[playerNameLen - 1] != FILENAME_SPACE) {
+                    if (gOotSave.info.playerData.playerName[playerNameLen - 1] != FILENAME_SPACE) {
                         break;
                     }
                 }
                 for (i = 0; i < playerNameLen; i++) {
-                    curCharWide = gSaveContext.save.info.playerData.playerName[i];
+                    curCharWide = gOotSave.info.playerData.playerName[i];
                     fontBuf = &font->fontBuf[(curCharWide * 32) << 2]; // fake
                     msgCtx->msgBufDecodedWide[decodedBufPos + i] = MESSAGE_WIDE_NAME;
 
@@ -1871,7 +1871,7 @@ void Message_Decode(PlayState* play) {
                 // Convert the current number of collected gold skulltula tokens to digits and
                 //  add the digits to the decoded buffer in place of the control character.
                 digits[0] = digits[1] = 0;
-                digits[2] = gSaveContext.save.info.inventory.gsTokens;
+                digits[2] = gOotSave.info.inventory.gsTokens;
 
                 while (digits[2] >= 100) {
                     digits[0]++;
@@ -1997,7 +1997,7 @@ void Message_Decode(PlayState* play) {
                 }
             } else if (curCharWide == MESSAGE_WIDE_TIME) {
                 digits[0] = 0;
-                timeInSeconds = gSaveContext.save.dayTime * (24.0f * 60.0f / 0x10000);
+                timeInSeconds = gOotSave.dayTime * (24.0f * 60.0f / 0x10000);
 
                 digits[1] = timeInSeconds / 60.0f;
                 while (digits[1] >= 10) {
@@ -2116,15 +2116,15 @@ void Message_Decode(PlayState* play) {
                 break;
             } else if (curChar == MESSAGE_NAME) {
                 // Substitute the player name control character for the file's player name.
-                for (playerNameLen = ARRAY_COUNT(gSaveContext.save.info.playerData.playerName); playerNameLen > 0;
+                for (playerNameLen = ARRAY_COUNT(gOotSave.info.playerData.playerName); playerNameLen > 0;
                      playerNameLen--) {
-                    if (gSaveContext.save.info.playerData.playerName[playerNameLen - 1] != FILENAME_SPACE) {
+                    if (gOotSave.info.playerData.playerName[playerNameLen - 1] != FILENAME_SPACE) {
                         break;
                     }
                 }
                 PRINTF(T("\n名前 ＝ ", "\nName = "));
                 for (i = 0; i < playerNameLen; i++) {
-                    curChar = gSaveContext.save.info.playerData.playerName[i];
+                    curChar = gOotSave.info.playerData.playerName[i];
                     if (curChar == FILENAME_SPACE) {
                         curChar = ' ';
                     } else if (curChar == FILENAME_PERIOD) {
@@ -2227,9 +2227,9 @@ void Message_Decode(PlayState* play) {
                 // Convert the current number of collected gold skulltula tokens to digits and
                 //  add the digits to the decoded buffer in place of the control character.
                 PRINTF(T("\n金スタ合計数 ＝ %d", "\nTotal number of gold stars = %d"),
-                       gSaveContext.save.info.inventory.gsTokens);
+                       gOotSave.info.inventory.gsTokens);
                 digits[0] = digits[1] = 0;
-                digits[2] = gSaveContext.save.info.inventory.gsTokens;
+                digits[2] = gOotSave.info.inventory.gsTokens;
 
                 while (digits[2] >= 100) {
                     digits[0]++;
@@ -2367,7 +2367,7 @@ void Message_Decode(PlayState* play) {
             } else if (curChar == MESSAGE_TIME) {
                 PRINTF(T("\nゼルダ時間 ＝ ", "\nZelda time = "));
                 digits[0] = 0;
-                timeInSeconds = gSaveContext.save.dayTime * (24.0f * 60.0f / 0x10000);
+                timeInSeconds = gOotSave.dayTime * (24.0f * 60.0f / 0x10000);
 
                 digits[1] = timeInSeconds / 60.0f;
                 while (digits[1] >= 10) {
@@ -2498,7 +2498,7 @@ void Message_OpenText(PlayState* play, u16 textId) {
     if (textId == 0xC2 || textId == 0xFA) {
         // Increments text id based on piece of heart count, assumes the piece of heart text is all
         // in order and that you don't have more than the intended amount of heart pieces.
-        textId += (gSaveContext.save.info.inventory.questItems & 0xF0000000 & 0xF0000000) >> QUEST_HEART_PIECE_COUNT;
+        textId += (gOotSave.info.inventory.questItems & 0xF0000000 & 0xF0000000) >> QUEST_HEART_PIECE_COUNT;
     } else if (msgCtx->textId == 0xC && CHECK_OWNED_EQUIP(EQUIP_TYPE_SWORD, EQUIP_INV_SWORD_BIGGORON)) {
         textId = 0xB; // Traded Giant's Knife for Biggoron Sword
     } else if (msgCtx->textId == 0xB4 && GET_EVENTCHKINF(EVENTCHKINF_96)) {
@@ -2727,7 +2727,7 @@ void Message_StartOcarinaImpl(PlayState* play, u16 ocarinaActionId) {
             sOcarinaSongBitFlags |= sOcarinaSongFlagsMap[i];
         }
     }
-    if (gSaveContext.save.info.scarecrowSpawnSongSet) {
+    if (gOotSave.info.scarecrowSpawnSongSet) {
         sOcarinaSongBitFlags |= (1 << OCARINA_SONG_SCARECROW_SPAWN);
     }
     PRINTF("ocarina_bit = %x\n", sOcarinaSongBitFlags);
@@ -3589,7 +3589,7 @@ void Message_DrawMain(PlayState* play, Gfx** p) {
                         PRINTF(T("録音終了！！！！！！！！！  message->info->status=%d \n",
                                  "Recording complete!!!!!!!!!  message->info->status=%d \n"),
                                msgCtx->ocarinaStaff->state);
-                        gSaveContext.save.info.scarecrowLongSongSet = true;
+                        gOotSave.info.scarecrowLongSongSet = true;
                     }
                     Audio_PlaySfxGeneral(NA_SE_SY_OCARINA_ERROR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                          &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
@@ -3602,10 +3602,10 @@ void Message_DrawMain(PlayState* play, Gfx** p) {
                         T("録音終了！！！！！！！！！録音終了\n", "Recording complete!!!!!!!!! Recording Complete\n"));
                     PRINTF(VT_FGCOL(YELLOW));
                     PRINTF("\n====================================================================\n");
-                    MemCpy(gSaveContext.save.info.scarecrowLongSong, gScarecrowLongSongPtr,
-                           sizeof(gSaveContext.save.info.scarecrowLongSong));
-                    for (i = 0; i < ARRAY_COUNT(gSaveContext.save.info.scarecrowLongSong); i++) {
-                        PRINTF("%d, ", gSaveContext.save.info.scarecrowLongSong[i]);
+                    MemCpy(gOotSave.info.scarecrowLongSong, gScarecrowLongSongPtr,
+                           sizeof(gOotSave.info.scarecrowLongSong));
+                    for (i = 0; i < ARRAY_COUNT(gOotSave.info.scarecrowLongSong); i++) {
+                        PRINTF("%d, ", gOotSave.info.scarecrowLongSong[i]);
                     }
                     PRINTF(VT_RST);
                     PRINTF("\n====================================================================\n");
@@ -3661,16 +3661,16 @@ void Message_DrawMain(PlayState* play, Gfx** p) {
                 if (msgCtx->ocarinaStaff->state == OCARINA_RECORD_OFF) {
                     PRINTF(T("８音録音ＯＫ！\n", "8 Note Recording OK!\n"));
                     msgCtx->stateTimer = 20;
-                    gSaveContext.save.info.scarecrowSpawnSongSet = true;
+                    gOotSave.info.scarecrowSpawnSongSet = true;
                     msgCtx->msgMode = MSGMODE_SCARECROW_SPAWN_RECORDING_DONE;
                     Audio_PlaySfxGeneral(NA_SE_SY_TRE_BOX_APPEAR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                          &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
                     PRINTF(VT_FGCOL(YELLOW));
                     PRINTF("\n====================================================================\n");
-                    MemCpy(gSaveContext.save.info.scarecrowSpawnSong, gScarecrowSpawnSongPtr,
-                           sizeof(gSaveContext.save.info.scarecrowSpawnSong));
-                    for (i = 0; i < ARRAY_COUNT(gSaveContext.save.info.scarecrowSpawnSong); i++) {
-                        PRINTF("%d, ", gSaveContext.save.info.scarecrowSpawnSong[i]);
+                    MemCpy(gOotSave.info.scarecrowSpawnSong, gScarecrowSpawnSongPtr,
+                           sizeof(gOotSave.info.scarecrowSpawnSong));
+                    for (i = 0; i < ARRAY_COUNT(gOotSave.info.scarecrowSpawnSong); i++) {
+                        PRINTF("%d, ", gOotSave.info.scarecrowSpawnSong[i]);
                     }
                     PRINTF(VT_RST);
                     PRINTF("\n====================================================================\n");
@@ -3694,7 +3694,7 @@ void Message_DrawMain(PlayState* play, Gfx** p) {
             case MSGMODE_MEMORY_GAME_START:
                 AudioOcarina_SetInstrument(OCARINA_INSTRUMENT_DEFAULT);
                 AudioOcarina_SetInstrument(OCARINA_INSTRUMENT_FLUTE);
-                AudioOcarina_MemoryGameInit(gSaveContext.save.info.playerData.ocarinaGameRoundNum);
+                AudioOcarina_MemoryGameInit(gOotSave.info.playerData.ocarinaGameRoundNum);
                 msgCtx->ocarinaStaff = AudioOcarina_GetPlaybackStaff();
                 msgCtx->ocarinaStaff->pos = sOcarinaButtonIndexBufPos = 0;
                 Message_ResetOcarinaNoteState();
@@ -3988,7 +3988,7 @@ void Message_Draw(PlayState* play) {
     OPEN_DISPS(play->state.gfxCtx, "../z_message_PAL.c", 3554);
 
 #if DEBUG_FEATURES
-    watchVar = gSaveContext.save.info.scarecrowLongSongSet;
+    watchVar = gOotSave.info.scarecrowLongSongSet;
     Message_DrawDebugVariableChanged(&watchVar, play->state.gfxCtx);
     if (BREG(0) != 0 && play->msgCtx.textId != 0) {
         plusOne = Gfx_Open(polyOpaP = POLY_OPA_DISP);
@@ -4290,12 +4290,12 @@ void Message_Update(PlayState* play) {
                 }
                 if (play->csCtx.state == 0) {
                     PRINTF(VT_FGCOL(GREEN));
-                    PRINTF("day_time=%x  active_camera=%d  ", gSaveContext.save.cutsceneIndex, play->activeCamId);
+                    PRINTF("day_time=%x  active_camera=%d  ", gOotSave.cutsceneIndex, play->activeCamId);
 
                     if (msgCtx->textId != 0x2061 && msgCtx->textId != 0x2025 && msgCtx->textId != 0x208C &&
                         ((msgCtx->textId < 0x88D || msgCtx->textId >= 0x893) || msgCtx->choiceIndex != 0) &&
-                        (msgCtx->textId != 0x3055 && gSaveContext.save.cutsceneIndex < 0xFFF0)) {
-                        PRINTF("=== day_time=%x ", ((void)0, gSaveContext.save.cutsceneIndex));
+                        (msgCtx->textId != 0x3055 && gOotSave.cutsceneIndex < 0xFFF0)) {
+                        PRINTF("=== day_time=%x ", ((void)0, gOotSave.cutsceneIndex));
                         if (play->activeCamId == CAM_ID_MAIN) {
                             if (gSaveContext.prevHudVisibilityMode == HUD_VISIBILITY_NO_CHANGE ||
                                 gSaveContext.prevHudVisibilityMode == HUD_VISIBILITY_NOTHING ||
@@ -4319,10 +4319,10 @@ void Message_Update(PlayState* play) {
                 } else {
                     msgCtx->textboxEndType = TEXTBOX_ENDTYPE_DEFAULT;
                 }
-                if ((s32)(gSaveContext.save.info.inventory.questItems & 0xF0000000) == (4 << QUEST_HEART_PIECE_COUNT)) {
-                    gSaveContext.save.info.inventory.questItems ^= (4 << QUEST_HEART_PIECE_COUNT);
-                    gSaveContext.save.info.playerData.healthCapacity += 0x10;
-                    gSaveContext.save.info.playerData.health += 0x10;
+                if ((s32)(gOotSave.info.inventory.questItems & 0xF0000000) == (4 << QUEST_HEART_PIECE_COUNT)) {
+                    gOotSave.info.inventory.questItems ^= (4 << QUEST_HEART_PIECE_COUNT);
+                    gOotSave.info.playerData.healthCapacity += 0x10;
+                    gOotSave.info.playerData.health += 0x10;
                 }
                 if (msgCtx->ocarinaAction != OCARINA_ACTION_CHECK_NOWARP_DONE) {
                     if (sLastPlayedSong == OCARINA_SONG_SARIAS) {

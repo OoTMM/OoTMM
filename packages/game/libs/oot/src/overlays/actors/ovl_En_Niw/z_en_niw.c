@@ -162,7 +162,7 @@ void EnNiw_Init(Actor* thisx, PlayState* play) {
                 fabsf(this->actor.world.pos.z - sKakarikoPosList[i].z) < 40.0f) {
                 this->unk_2AA = i;
                 PRINTF(VT_FGCOL(YELLOW) " 通常鶏index %d\n" VT_RST, this->unk_2AA);
-                if (gSaveContext.save.info.infTable[INFTABLE_199_19A_19B_19C_19D_19E_19F_INDEX] &
+                if (gOotSave.info.infTable[INFTABLE_199_19A_19B_19C_19D_19E_19F_INDEX] &
                     sKakarikoFlagList[i]) {
                     this->actor.world.pos.x = 300.0f;
                     this->actor.world.pos.y = 100.0f;

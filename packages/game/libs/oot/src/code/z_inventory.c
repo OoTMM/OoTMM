@@ -276,30 +276,30 @@ u8 gItemSlots[] = {
 };
 
 void Inventory_ChangeEquipment(s16 equipment, u16 value) {
-    gSaveContext.save.info.equips.equipment &= gEquipNegMasks[equipment];
-    gSaveContext.save.info.equips.equipment |= value << gEquipShifts[equipment];
+    gOotSave.info.equips.equipment &= gEquipNegMasks[equipment];
+    gOotSave.info.equips.equipment |= value << gEquipShifts[equipment];
 }
 
 u8 Inventory_DeleteEquipment(PlayState* play, s16 equipment) {
     Player* player = GET_PLAYER(play);
     s32 pad;
-    u16 equipValue = gSaveContext.save.info.equips.equipment & gEquipMasks[equipment];
+    u16 equipValue = gOotSave.info.equips.equipment & gEquipMasks[equipment];
 
     PRINTF(T("装備アイテム抹消 = %d  zzz=%d\n", "Erasing equipment item = %d  zzz=%d\n"), equipment, equipValue);
 
     if (equipValue) {
         equipValue >>= gEquipShifts[equipment];
 
-        gSaveContext.save.info.equips.equipment &= gEquipNegMasks[equipment];
-        gSaveContext.save.info.inventory.equipment ^= OWNED_EQUIP_FLAG(equipment, equipValue - 1);
+        gOotSave.info.equips.equipment &= gEquipNegMasks[equipment];
+        gOotSave.info.inventory.equipment ^= OWNED_EQUIP_FLAG(equipment, equipValue - 1);
 
         if (equipment == EQUIP_TYPE_TUNIC) {
-            gSaveContext.save.info.equips.equipment |= EQUIP_VALUE_TUNIC_KOKIRI << (EQUIP_TYPE_TUNIC * 4);
+            gOotSave.info.equips.equipment |= EQUIP_VALUE_TUNIC_KOKIRI << (EQUIP_TYPE_TUNIC * 4);
         }
 
         if (equipment == EQUIP_TYPE_SWORD) {
-            gSaveContext.save.info.equips.buttonItems[0] = ITEM_NONE;
-            gSaveContext.save.info.infTable[INFTABLE_1DX_INDEX] = 1;
+            gOotSave.info.equips.buttonItems[0] = ITEM_NONE;
+            gOotSave.info.infTable[INFTABLE_1DX_INDEX] = 1;
         }
 
         Player_SetEquipmentData(play, player);
@@ -310,6 +310,6 @@ u8 Inventory_DeleteEquipment(PlayState* play, s16 equipment) {
 }
 
 void Inventory_ChangeUpgrade(s16 upgrade, s16 value) {
-    gSaveContext.save.info.inventory.upgrades &= gUpgradeNegMasks[upgrade];
-    gSaveContext.save.info.inventory.upgrades |= value << gUpgradeShifts[upgrade];
+    gOotSave.info.inventory.upgrades &= gUpgradeNegMasks[upgrade];
+    gOotSave.info.inventory.upgrades |= value << gUpgradeShifts[upgrade];
 }

@@ -10,6 +10,8 @@ void System_DisableInterrupts(void);
 
 __attribute__ ((aligned(8))) char gLoaderStack[0x400];
 
+Save gSave;
+
 static void waitForPi(void)
 {
     u32 status;

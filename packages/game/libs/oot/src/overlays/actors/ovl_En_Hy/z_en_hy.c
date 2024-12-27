@@ -1165,7 +1165,7 @@ void EnHy_WaitForObjects(EnHy* this, PlayState* play) {
         }
 
         if (play->sceneId == SCENE_KAKARIKO_CENTER_GUEST_HOUSE) {
-            this->talonEventChkInf = gSaveContext.save.info.eventChkInf[EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO_INDEX];
+            this->talonEventChkInf = gOotSave.info.eventChkInf[EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO_INDEX];
         }
 
         EnHy_InitSetProperties(this);

@@ -91,7 +91,7 @@ u16 EnGo_GetTextID(PlayState* play, Actor* thisx) {
 
     switch (PARAMS_GET_NOSHIFT(thisx->params, 4, 4)) {
         case 0x90:
-            if (gSaveContext.save.info.playerData.bgsFlag) {
+            if (gOotSave.info.playerData.bgsFlag) {
                 return 0x305E;
             } else if (INV_CONTENT(ITEM_TRADE_ADULT) >= ITEM_CLAIM_CHECK) {
                 if (Environment_GetBgsDayCount() >= 3) {
@@ -862,7 +862,7 @@ void func_80A405CC(EnGo* this, PlayState* play) {
 void EnGo_BiggoronActionFunc(EnGo* this, PlayState* play) {
     if ((PARAMS_GET_NOSHIFT(this->actor.params, 4, 4) == 0x90) &&
         (this->interactInfo.talkState == NPC_TALK_STATE_ACTION)) {
-        if (gSaveContext.save.info.playerData.bgsFlag) {
+        if (gOotSave.info.playerData.bgsFlag) {
             this->interactInfo.talkState = NPC_TALK_STATE_IDLE;
         } else {
             if (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_EYE_DROPS) {
@@ -990,7 +990,7 @@ void func_80A40C78(EnGo* this, PlayState* play) {
             this->interactInfo.talkState = NPC_TALK_STATE_IDLE;
         } else if (this->unk_20C) {
             this->interactInfo.talkState = NPC_TALK_STATE_IDLE;
-            gSaveContext.save.info.playerData.bgsFlag = true;
+            gOotSave.info.playerData.bgsFlag = true;
         } else if (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_PRESCRIPTION) {
             this->actor.textId = 0x3058;
             Message_ContinueTextbox(play, this->actor.textId);

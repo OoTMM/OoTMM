@@ -147,7 +147,7 @@ void func_80A89A6C(EnJsjutan* this, PlayState* play) {
     i = 1;
 
     // Credits scene. The magic carpet man is friends with the bean guy and the lakeside professor.
-    if ((gSaveContext.save.entranceIndex == ENTR_LON_LON_RANCH_0) && (gSaveContext.sceneLayer == 8)) {
+    if ((gOotSave.entranceIndex == ENTR_LON_LON_RANCH_0) && (gSaveContext.sceneLayer == 8)) {
         Actor* actorProfessor;
         Actor* actorBeanGuy;
 
@@ -300,7 +300,7 @@ void func_80A89A6C(EnJsjutan* this, PlayState* play) {
         this->dyna.actor.velocity.y = 0.0f;
         this->dyna.actor.world.pos.y = this->unk_168;
 
-        dayTime = gSaveContext.save.dayTime;
+        dayTime = gOotSave.dayTime;
 
         if (dayTime >= CLOCK_TIME(12, 0)) {
             dayTime = 0xFFFF - dayTime;

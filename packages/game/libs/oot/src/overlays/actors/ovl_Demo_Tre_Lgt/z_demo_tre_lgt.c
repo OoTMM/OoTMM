@@ -85,9 +85,9 @@ void func_809937B4(DemoTreLgt* this, PlayState* play, f32 currentFrame) {
 
     this->action = DEMO_TRE_LGT_ACTION_ANIMATE;
 
-    SkelCurve_SetAnim(skelCurve, sAnimations[gSaveContext.save.linkAge], 1.0f,
-                      sDemoTreLgtInfo[gSaveContext.save.linkAge].endFrame +
-                          sDemoTreLgtInfo[gSaveContext.save.linkAge].unk_08,
+    SkelCurve_SetAnim(skelCurve, sAnimations[gOotSave.linkAge], 1.0f,
+                      sDemoTreLgtInfo[gOotSave.linkAge].endFrame +
+                          sDemoTreLgtInfo[gOotSave.linkAge].unk_08,
                       currentFrame, 1.0f);
     SkelCurve_Update(play, skelCurve);
 }
@@ -95,24 +95,24 @@ void func_809937B4(DemoTreLgt* this, PlayState* play, f32 currentFrame) {
 void func_80993848(DemoTreLgt* this, PlayState* play) {
     f32 currentFrame = this->skelCurve.curFrame;
 
-    if (currentFrame < sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].endFrame) {
+    if (currentFrame < sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].endFrame) {
         this->unk_170 = 255;
     } else {
-        if (currentFrame <= (sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].endFrame +
-                             sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].unk_08)) {
-            this->unk_170 = ((((sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].endFrame - currentFrame) /
-                               sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].unk_08) *
+        if (currentFrame <= (sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].endFrame +
+                             sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].unk_08)) {
+            this->unk_170 = ((((sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].endFrame - currentFrame) /
+                               sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].unk_08) *
                               255.0f) +
                              255.0f);
         } else {
             this->unk_170 = 0;
         }
     }
-    if (currentFrame < sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].unk_0C) {
+    if (currentFrame < sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].unk_0C) {
         this->unk_174 = 255;
-    } else if (currentFrame < (sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].unk_0C + 10.0f)) {
+    } else if (currentFrame < (sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].unk_0C + 10.0f)) {
         this->unk_174 =
-            ((((sDemoTreLgtInfo[((void)0, gSaveContext.save.linkAge)].unk_0C - currentFrame) / 10.0f) * 255.0f) +
+            ((((sDemoTreLgtInfo[((void)0, gOotSave.linkAge)].unk_0C - currentFrame) / 10.0f) * 255.0f) +
              255.0f);
     } else {
         this->unk_174 = 0;

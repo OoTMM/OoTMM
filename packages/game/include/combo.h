@@ -2,6 +2,7 @@
 #define COMBO_H
 
 #include <PR/ultratypes.h>
+#include <save.h>
 
 #define GAME_NONE 0
 #define GAME_OOT  1

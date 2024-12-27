@@ -3,6 +3,7 @@
 
 #include "ultra64.h"
 #include "math.h"
+#include "math_structs.h"
 
 #define SQ(x) ((x)*(x))
 #define VEC_SET(V,X,Y,Z) (V).x=(X);(V).y=(Y);(V).z=(Z)
@@ -11,26 +12,6 @@ typedef union FloatInt {
     f32 f;
     u32 i;
 } FloatInt;
-
-typedef struct Vec2f {
-    f32 x, y;
-} Vec2f; // size = 0x08
-
-typedef struct Vec3f {
-    f32 x, y, z;
-} Vec3f; // size = 0x0C
-
-typedef struct Vec3us {
-    u16 x, y, z;
-} Vec3us; // size = 0x06
-
-typedef struct Vec3s {
-    s16 x, y, z;
-} Vec3s; // size = 0x06
-
-typedef struct Vec3i {
-    s32 x, y, z;
-} Vec3i; // size = 0x0C
 
 typedef struct Sphere16 {
     Vec3s center;

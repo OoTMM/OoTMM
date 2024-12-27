@@ -868,10 +868,10 @@ void Fishing_Init(Actor* thisx, PlayState* play2) {
     if (KREG(5) != 0) {
         sLinkAge = LINK_AGE_CHILD;
     } else {
-        sLinkAge = gSaveContext.save.linkAge;
+        sLinkAge = gOotSave.linkAge;
     }
 #else
-    sLinkAge = gSaveContext.save.linkAge;
+    sLinkAge = gOotSave.linkAge;
 #endif
 
     if (thisx->params < EN_FISH_PARAM) {
@@ -3155,13 +3155,13 @@ void Fishing_UpdateFish(Actor* thisx, PlayState* play2) {
             }
 
             if (Message_GetState(&play->msgCtx) == TEXT_STATE_NONE) {
-                if ((gSaveContext.save.dayTime >= CLOCK_TIME(18, 0)) &&
-                    (gSaveContext.save.dayTime <= CLOCK_TIME(18, 0) + 27)) {
+                if ((gOotSave.dayTime >= CLOCK_TIME(18, 0)) &&
+                    (gOotSave.dayTime <= CLOCK_TIME(18, 0) + 27)) {
                     this->fishState = 7;
                     this->timerArray[3] = (s16)Rand_ZeroFloat(150.0f) + 200;
                 }
-                if ((gSaveContext.save.dayTime >= CLOCK_TIME(5, 30) - 1) &&
-                    (gSaveContext.save.dayTime < CLOCK_TIME(5, 30) + 27)) {
+                if ((gOotSave.dayTime >= CLOCK_TIME(5, 30) - 1) &&
+                    (gOotSave.dayTime < CLOCK_TIME(5, 30) + 27)) {
                     this->fishState = 7;
                     this->timerArray[3] = (s16)Rand_ZeroFloat(150.0f) + 200;
                 }
@@ -3415,10 +3415,10 @@ void Fishing_UpdateFish(Actor* thisx, PlayState* play2) {
                 multiplier = 1.0f;
             }
 
-            if ((gSaveContext.save.dayTime >= CLOCK_TIME(17, 0)) && (gSaveContext.save.dayTime < CLOCK_TIME(19, 0))) {
+            if ((gOotSave.dayTime >= CLOCK_TIME(17, 0)) && (gOotSave.dayTime < CLOCK_TIME(19, 0))) {
                 multiplier *= 1.75f;
-            } else if ((gSaveContext.save.dayTime >= CLOCK_TIME(5, 0)) &&
-                       (gSaveContext.save.dayTime < CLOCK_TIME(7, 0))) {
+            } else if ((gOotSave.dayTime >= CLOCK_TIME(5, 0)) &&
+                       (gOotSave.dayTime < CLOCK_TIME(7, 0))) {
                 multiplier *= 1.5f;
             } else if (sFishingFoggy != 0) {
                 multiplier *= 1.5f;
@@ -4835,7 +4835,7 @@ void Fishing_HandleOwnerDialog(Fishing* this, PlayState* play) {
 
                 switch (play->msgCtx.choiceIndex) {
                     case 0:
-                        if (gSaveContext.save.info.playerData.rupees >= 20) {
+                        if (gOotSave.info.playerData.rupees >= 20) {
                             Rupees_ChangeBy(-20);
                             if (!Rumble_Controller1HasRumblePak()) {
                                 this->actor.textId = 0x407C;
@@ -5677,7 +5677,7 @@ void Fishing_UpdateOwner(Actor* thisx, PlayState* play2) {
 #endif
 
     PRINTF(VT_FGCOL(GREEN));
-    PRINTF("zelda_time %x\n", ((void)0, gSaveContext.save.dayTime));
+    PRINTF("zelda_time %x\n", ((void)0, gOotSave.dayTime));
     PRINTF(VT_RST);
 
     if (sStormChanceTimer >= 2) {

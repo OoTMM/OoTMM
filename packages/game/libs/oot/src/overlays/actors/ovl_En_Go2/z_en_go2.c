@@ -552,7 +552,7 @@ s16 EnGo2_UpdateTalkStateGoronCityLink(PlayState* play, EnGo2* this) {
 u16 EnGo2_GetTextIdGoronDmtBiggoron(PlayState* play, EnGo2* this) {
     Player* player = GET_PLAYER(play);
 
-    if (gSaveContext.save.info.playerData.bgsFlag) {
+    if (gOotSave.info.playerData.bgsFlag) {
         player->exchangeItemId = EXCH_ITEM_CLAIM_CHECK;
         return 0x305E;
     } else if (INV_CONTENT(ITEM_TRADE_ADULT) >= ITEM_CLAIM_CHECK) {
@@ -578,7 +578,7 @@ s16 EnGo2_UpdateTalkStateGoronDmtBiggoron(PlayState* play, EnGo2* this) {
         case TEXT_STATE_DONE:
 #endif
             if (this->actor.textId == 0x305E) {
-                if (!gSaveContext.save.info.playerData.bgsFlag) {
+                if (!gOotSave.info.playerData.bgsFlag) {
                     EnGo2_GetItem(this, play, GI_SWORD_BIGGORON);
                     this->actionFunc = EnGo2_SetupGetItem;
                     return NPC_TALK_STATE_ACTION;
@@ -1024,7 +1024,7 @@ void EnGo2_BiggoronSetTextId(EnGo2* this, PlayState* play, Player* player) {
     u16 textId;
 
     if (PARAMS_GET_S(this->actor.params, 0, 5) == GORON_DMT_BIGGORON) {
-        if (gSaveContext.save.info.playerData.bgsFlag) {
+        if (gOotSave.info.playerData.bgsFlag) {
             if (func_8002F368(play) == EXCH_ITEM_CLAIM_CHECK) {
                 this->actor.textId = 0x3003;
             } else {
@@ -1032,7 +1032,7 @@ void EnGo2_BiggoronSetTextId(EnGo2* this, PlayState* play, Player* player) {
             }
             player->actor.textId = this->actor.textId;
 
-        } else if (!gSaveContext.save.info.playerData.bgsFlag && (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_CLAIM_CHECK)) {
+        } else if (!gOotSave.info.playerData.bgsFlag && (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_CLAIM_CHECK)) {
             if (func_8002F368(play) == EXCH_ITEM_CLAIM_CHECK) {
                 if (Environment_GetBgsDayCount() >= 3) {
                     textId = 0x305E;
@@ -1087,7 +1087,7 @@ void func_80A45288(EnGo2* this, PlayState* play) {
     if (this->actionFunc != EnGo2_GoronFireGenericAction) {
         this->interactInfo.trackPos = player->actor.world.pos;
         this->interactInfo.yOffset =
-            sPlayerTrackingYOffsets[PARAMS_GET_S(this->actor.params, 0, 5)][((void)0, gSaveContext.save.linkAge)];
+            sPlayerTrackingYOffsets[PARAMS_GET_S(this->actor.params, 0, 5)][((void)0, gOotSave.linkAge)];
         Npc_TrackPoint(&this->actor, &this->interactInfo, 4, this->trackingMode);
     }
     if ((this->actionFunc != EnGo2_SetGetItem) && (this->isAwake == true)) {
@@ -1817,7 +1817,7 @@ void EnGo2_SetGetItem(EnGo2* this, PlayState* play) {
                 EnGo2_GetItemAnimation(this, play);
                 return;
             case GI_SWORD_BIGGORON:
-                gSaveContext.save.info.playerData.bgsFlag = true;
+                gOotSave.info.playerData.bgsFlag = true;
                 break;
             case GI_BOMB_BAG_30:
             case GI_BOMB_BAG_40:

@@ -216,7 +216,7 @@ s16 EnIn_UpdateTalkStateOnChoice(PlayState* play, Actor* thisx) {
         case 0x2031:
             if (play->msgCtx.choiceIndex == 1) {
                 this->actor.textId = 0x2032;
-            } else if (gSaveContext.save.info.playerData.rupees < 10) {
+            } else if (gOotSave.info.playerData.rupees < 10) {
                 this->actor.textId = 0x2033;
             } else {
                 this->actor.textId = 0x2034;
@@ -243,7 +243,7 @@ s16 EnIn_UpdateTalkStateOnChoice(PlayState* play, Actor* thisx) {
             }
             break;
         case 0x2038:
-            if (play->msgCtx.choiceIndex == 0 && gSaveContext.save.info.playerData.rupees >= 50) {
+            if (play->msgCtx.choiceIndex == 0 && gOotSave.info.playerData.rupees >= 50) {
                 talkState = NPC_TALK_STATE_ACTION;
             } else {
                 this->actor.textId = 0x2039;
@@ -252,7 +252,7 @@ s16 EnIn_UpdateTalkStateOnChoice(PlayState* play, Actor* thisx) {
             }
             break;
         case 0x205B:
-            if (play->msgCtx.choiceIndex == 0 && gSaveContext.save.info.playerData.rupees >= 50) {
+            if (play->msgCtx.choiceIndex == 0 && gOotSave.info.playerData.rupees >= 50) {
                 talkState = NPC_TALK_STATE_ACTION;
             } else {
                 Message_ContinueTextbox(play, this->actor.textId = 0x2039);
@@ -263,7 +263,7 @@ s16 EnIn_UpdateTalkStateOnChoice(PlayState* play, Actor* thisx) {
             }
             break;
     }
-    if (!gSaveContext.save.info.playerData.rupees) {}
+    if (!gOotSave.info.playerData.rupees) {}
 
     return talkState;
 }
@@ -666,7 +666,7 @@ void func_80A7A568(EnIn* this, PlayState* play) {
         gSaveContext.timerState = TIMER_STATE_OFF;
     } else if (this->interactInfo.talkState == NPC_TALK_STATE_ACTION) {
         if (play->msgCtx.choiceIndex == 0) {
-            if (gSaveContext.save.info.playerData.rupees < 50) {
+            if (gOotSave.info.playerData.rupees < 50) {
                 play->msgCtx.stateTimer = 4;
                 play->msgCtx.msgMode = MSGMODE_TEXT_CLOSING;
                 this->interactInfo.talkState = NPC_TALK_STATE_IDLE;
@@ -718,7 +718,7 @@ void func_80A7A770(EnIn* this, PlayState* play) {
 
 void func_80A7A848(EnIn* this, PlayState* play) {
     if (this->interactInfo.talkState == NPC_TALK_STATE_ACTION) {
-        if ((play->msgCtx.choiceIndex == 0 && gSaveContext.save.info.playerData.rupees < 50) ||
+        if ((play->msgCtx.choiceIndex == 0 && gOotSave.info.playerData.rupees < 50) ||
             play->msgCtx.choiceIndex == 1) {
             SET_EVENTINF_HORSES_STATE(EVENTINF_HORSES_STATE_0);
             this->actionFunc = func_80A7A4C8;
