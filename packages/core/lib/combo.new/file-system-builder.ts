@@ -21,7 +21,7 @@ export class RandoFileSystemBuilder {
         const data = rom.slice(f.start, f.start + f.size);
         const id = (gameId << 24 | fileId) >>> 0;
         fileId++;
-        rfs.addFile({ id, name, data });
+        rfs.addFile({ id, name, data, dma: { [game]: { start: f.start, size: f.size } } });
       }
 
       /* Metadata */
@@ -41,6 +41,10 @@ export class RandoFileSystemBuilder {
     loader.name = 'loader';
     makerom.id = 0;
     loader.id = 1;
+
+    /* Delete the old dmadata */
+    rfs.deleteFile('oot/dmadata');
+    rfs.deleteFile('mm/dmadata');
 
     return rfs;
   }

@@ -214,7 +214,7 @@ OBJCOPY := $(MIPS_BINUTILS_PREFIX)objcopy
 OBJDUMP := $(MIPS_BINUTILS_PREFIX)objdump
 NM      := $(MIPS_BINUTILS_PREFIX)nm
 
-INC := -Iinclude -Iinclude/libc -I../../include -I../../include/libc -Isrc -I$(BUILD_DIR) -I. -I$(EXTRACTED_DIR) 
+INC := -Iinclude -Iinclude/libc -I../../include -I../../include/libc -Isrc -I$(BUILD_DIR) -I. -I$(EXTRACTED_DIR)
 
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wno-format-security -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-missing-braces
@@ -306,9 +306,9 @@ LDSCRIPT := $(ROM:.z64=.ld)
 SPEC := spec
 
 ifeq ($(COMPILER),ido)
-SRC_DIRS := $(shell find src -type d -not -path src/gcc_fix)
+SRC_DIRS := $(shell find -L src -type d -not -path src/gcc_fix)
 else
-SRC_DIRS := $(shell find src -type d)
+SRC_DIRS := $(shell find -L src -type d)
 endif
 
 ifneq ($(wildcard $(EXTRACTED_DIR)/assets/audio),)
@@ -599,6 +599,7 @@ venv:
 	$(PYTHON) -m pip install -U -r requirements.txt
 
 setup: venv
+	ln -sf ../../z64 src/z64
 	$(MAKE) -C tools
 	$(PYTHON) tools/decompress_baserom.py $(VERSION)
 	$(PYTHON) tools/extract_baserom.py $(BASEROM_DIR)/baserom-decompressed.z64 $(EXTRACTED_DIR)/baserom -v $(VERSION)

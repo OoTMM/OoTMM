@@ -20,6 +20,7 @@ beginseg
     name "boot"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
+    include "$(BUILD_DIR)/src/z64/file.o"
 #if OOT_VERSION >= PAL_1_0
     include "$(BUILD_DIR)/src/boot/viconfig.o"
 #endif

@@ -22,8 +22,6 @@ typedef struct DmaEntry {
     /* 0x0C */ uintptr_t romEnd;
 } DmaEntry;
 
-extern DmaEntry gDmaDataTable[];
-
 extern u32 gDmaMgrVerbose;
 extern size_t gDmaMgrDmaBuffSize;
 

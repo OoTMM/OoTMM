@@ -1,4 +1,4 @@
-import { GAMES } from '../combo/config';
+import { Game, GAMES } from '../combo/config';
 import { toU32Buffer } from '../combo/util';
 import { bufReadU32BE, bufWriteU32BE } from '../combo/util/buffer';
 import { RandoFile, RandoFileSystem } from './file-system';
@@ -129,7 +129,31 @@ class RomBuilder {
     bufWriteU32BE(this.rom, loaderOffset + this.fileSystem.meta.loaderOffsets.file + 4, filesSorted.length);
   }
 
+  private makeDmaTable(game: Game, id: number) {
+    const files = Array.from(this.fileSystem.files.filter((f) => f.dma[game])).sort((a, b) => a.dma[game]!.start - b.dma[game]!.start);
+    const dmaTable = new Uint8Array(files.length * 4 * 3 + 4);
+
+    bufWriteU32BE(dmaTable, 0, files.length);
+    for (let i = 0; i < files.length; ++i) {
+      const f = files[i];
+      const dma = f.dma[game]!;
+      bufWriteU32BE(dmaTable, i * 12 + 4, dma.start);
+      bufWriteU32BE(dmaTable, i * 12 + 8, dma.size);
+      bufWriteU32BE(dmaTable, i * 12 + 12, f.id);
+    }
+
+    /* Inject the DMA table in the files */
+    this.fileSystem.addFile({ id, name: `${game}/dmadata`, data: dmaTable, dma: {} });
+  }
+
+  private makeDmaTables() {
+    this.makeDmaTable('oot', 2);
+  }
+
   build() {
+    /* Build the DMA tables */
+    this.makeDmaTables();
+
     /* We need to inject the makerom and loader first */
     this.inject('makerom');
     this.inject('loader');
