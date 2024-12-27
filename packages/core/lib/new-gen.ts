@@ -5,7 +5,7 @@ import path from 'path';
 
 async function run() {
   const fileSystem = await makeRandoFileSystem();
-  const rom = buildRom(fileSystem);
+  const rom = await buildRom(fileSystem);
   const dir = path.resolve(__dirname, '..', 'out');
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(path.resolve(dir, 'OoTMM.z64'), rom);
