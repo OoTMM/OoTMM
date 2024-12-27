@@ -7,11 +7,9 @@
  * at `codePointIndex`. The value of `character` is the SHIFT-JIS encoding of the character.
  */
 void Font_LoadCharWide(Font* font, u16 character, u16 codePointIndex) {
-#if OOT_NTSC
     DMA_REQUEST_SYNC(&font->charTexBuf[codePointIndex],
                      (uintptr_t)_kanjiSegmentRomStart + Kanji_OffsetFromShiftJIS(character), FONT_CHAR_TEX_SIZE,
                      "../z_kanfont.c", UNK_LINE);
-#endif
 }
 
 /**

@@ -343,6 +343,7 @@ void DmaMgr_ProcessRequest(DmaRequest* req) {
     if (fileIndex == -1)
         for (;;) {}
     fileOffset = File_Offset(fileIndex);
+    fileOffset += req->vromAddr - dma.vstart;
 
     DmaMgr_DmaRomToRam(fileOffset, ram, size);
 }
@@ -397,42 +398,12 @@ s32 DmaMgr_RequestAsync(DmaRequest* req, void* ram, uintptr_t vrom, size_t size,
                         OSMesg msg) {
     static s32 sDmaMgrQueueFullLogged = 0;
 
-#if DEBUG_FEATURES
-    if ((ram == NULL) || (osMemSize < OS_K0_TO_PHYSICAL(ram) + size) || (vrom & 1) || (vrom > 0x4000000) ||
-        (size == 0) || (size & 1)) {
-        //! @bug `req` is passed to `DMA_ERROR` without rom, ram and size being set
-        DMA_ERROR(req, NULL, "ILLIGAL DMA-FUNCTION CALL", T("パラメータ異常です", "Parameter error"), "../z_std_dma.c",
-                  UNK_LINE, UNK_LINE, UNK_LINE);
-    }
-#endif
-
-#if PLATFORM_N64
-    if ((B_80121220 != NULL) && (B_80121220->unk_70 != NULL)) {
-        if (B_80121220->unk_70(req, ram, vrom, size, unk, queue, msg) != 0) {
-            return 0;
-        }
-    }
-#endif
-
     req->vromAddr = vrom;
     req->dramAddr = ram;
     req->size = size;
     req->unk_14 = 0;
     req->notifyQueue = queue;
     req->notifyMsg = msg;
-
-#if DEBUG_FEATURES
-    if (1 && (sDmaMgrQueueFullLogged == 0) && MQ_IS_FULL(&sDmaMgrMsgQueue)) {
-        sDmaMgrQueueFullLogged++;
-        PRINTF("%c", BEL);
-        PRINTF(VT_FGCOL(RED));
-        PRINTF(T("dmaEntryMsgQが一杯です。キューサイズの再検討をおすすめします。",
-                 "dmaEntryMsgQ is full. Reconsider your queue size."));
-        LOG_NUM("(sizeof(dmaEntryMsgBufs) / sizeof(dmaEntryMsgBufs[0]))", ARRAY_COUNT(sDmaMgrMsgBuf), "../z_std_dma.c",
-                952);
-        PRINTF(VT_RST);
-    }
-#endif
 
     osSendMesg(&sDmaMgrMsgQueue, (OSMesg)req, OS_MESG_BLOCK);
     return 0;
