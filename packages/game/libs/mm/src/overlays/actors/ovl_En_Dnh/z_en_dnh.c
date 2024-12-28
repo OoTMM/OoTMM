@@ -316,7 +316,7 @@ void EnDnh_Init(Actor* thisx, PlayState* play) {
     SubS_ChangeAnimationByInfoS(&this->skelAnime, sAnimationInfo, ENDNH_ANIM_HEAD_MOVING);
     this->actor.shape.yOffset = 1100.0f;
 
-    if (gSaveContext.save.entrance != ENTRANCE(TOURIST_INFORMATION, 1)) {
+    if (gMmSave.entrance != ENTRANCE(TOURIST_INFORMATION, 1)) {
         SubS_SetOfferMode(&this->unk18C, SUBS_OFFER_MODE_ONSCREEN, SUBS_OFFER_MODE_MASK);
         this->unk198 = 0;
     } else {

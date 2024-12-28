@@ -433,7 +433,7 @@ void func_80C03FAC(EnBombers* this, PlayState* play) {
                 sp2A = 1;
             }
         } else if (this->actor.textId == 0x744) {
-            s32 day = gSaveContext.save.day - 1;
+            s32 day = gMmSave.day - 1;
 
             if (day == 2) {
                 this->actor.textId = 0x746;

@@ -580,9 +580,9 @@ void Environment_Init(PlayState* play2, EnvironmentContext* envCtx, s32 arg2) {
     Environment_JumpForwardInTime();
 
     if ((CURRENT_TIME >= CLOCK_TIME(18, 0)) || (CURRENT_TIME < CLOCK_TIME(6, 0))) {
-        gSaveContext.save.isNight = true;
+        gMmSave.isNight = true;
     } else {
-        gSaveContext.save.isNight = false;
+        gMmSave.isNight = false;
     }
 
     play->state.gfxCtx->callback = Environment_GraphCallback;
@@ -606,10 +606,10 @@ void Environment_Init(PlayState* play2, EnvironmentContext* envCtx, s32 arg2) {
     envCtx->lensFlareAlphaScale = 0.0f;
 
     if ((play->sceneId == SCENE_00KEIKOKU) && (gSaveContext.sceneLayer == 8)) {
-        gSaveContext.save.day = 1;
+        gMmSave.day = 1;
     }
 
-    switch (gSaveContext.save.day) {
+    switch (gMmSave.day) {
         default:
         case 0:
         case 1:
@@ -706,8 +706,8 @@ void Environment_Init(PlayState* play2, EnvironmentContext* envCtx, s32 arg2) {
     sInitSkyboxConfig = envCtx->skyboxConfig;
 
     dayOffset = 0;
-    if (((void)0, gSaveContext.save.day) != 0) {
-        dayOffset = ((void)0, gSaveContext.save.day) - 1;
+    if (((void)0, gMmSave.day) != 0) {
+        dayOffset = ((void)0, gMmSave.day) - 1;
     }
     envCtx->skyboxConfig = dayOffset + (sInitSkyboxConfig * 3);
     envCtx->changeSkyboxNextConfig = envCtx->skyboxConfig;
@@ -1209,9 +1209,9 @@ void Environment_UpdateTime(PlayState* play, EnvironmentContext* envCtx, PauseCo
                 ((play->transitionMode == TRANS_MODE_OFF) || (gSaveContext.gameMode != GAMEMODE_NORMAL))) {
                 if (play->transitionTrigger == TRANS_TRIGGER_OFF) {
                     if ((CutsceneManager_GetCurrentCsId() == CS_ID_NONE) && !Play_InCsMode(play)) {
-                        gSaveContext.save.time = CURRENT_TIME + (u16)R_TIME_SPEED;
+                        gMmSave.time = CURRENT_TIME + (u16)R_TIME_SPEED;
                         if (R_TIME_SPEED != 0) {
-                            gSaveContext.save.time = CURRENT_TIME + (u16)((void)0, gSaveContext.save.timeSpeedOffset);
+                            gMmSave.time = CURRENT_TIME + (u16)((void)0, gMmSave.timeSpeedOffset);
                         }
                     }
                 }
@@ -1227,9 +1227,9 @@ void Environment_UpdateTime(PlayState* play, EnvironmentContext* envCtx, PauseCo
     time = CURRENT_TIME;
 
     if ((time >= CLOCK_TIME(18, 0)) || (time < CLOCK_TIME(6, 0))) {
-        gSaveContext.save.isNight = true;
+        gMmSave.isNight = true;
     } else {
-        gSaveContext.save.isNight = false;
+        gMmSave.isNight = false;
     }
 }
 
@@ -1238,8 +1238,8 @@ void func_800F6CEC(PlayState* play, u8 arg1, AdjLightSettings* adjLightSettings,
     s32 temp_v1_2;
     s32 temp_v1 = (arg1 % 4);
 
-    if ((((void)0, gSaveContext.save.day) >= 2) && (arg1 >= 4) && (arg1 < 8)) {
-        temp_v1_2 = (((void)0, gSaveContext.save.day) + 1) * 4;
+    if ((((void)0, gMmSave.day) >= 2) && (arg1 >= 4) && (arg1 < 8)) {
+        temp_v1_2 = (((void)0, gMmSave.day) + 1) * 4;
         for (phi_t1 = 0; phi_t1 != 3; phi_t1++) {
             adjLightSettings->ambientColor[phi_t1] =
                 lightSettings[temp_v1_2 + temp_v1].ambientColor[phi_t1] - lightSettings[temp_v1].ambientColor[phi_t1];
@@ -1706,8 +1706,8 @@ void Environment_UpdatePostmanEvents(PlayState* play) {
     u8 eventInfBits;
     u8 day = EVENTINF_GET_7_E0;
 
-    if (day != (u8)((void)0, gSaveContext.save.day)) {
-        day = (u8)((void)0, gSaveContext.save.day);
+    if (day != (u8)((void)0, gMmSave.day)) {
+        day = (u8)((void)0, gMmSave.day);
 
         EVENTINF_SET_7_E0(day, eventInfBits);
 
@@ -1737,9 +1737,9 @@ void Environment_UpdatePostmanEvents(PlayState* play) {
     func_800F8970();
 
     if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_ROOM_KEY) && !CHECK_WEEKEVENTREG(WEEKEVENTREG_55_02)) {
-        if (((void)0, gSaveContext.save.day) >= 2) {
+        if (((void)0, gMmSave.day) >= 2) {
             SET_WEEKEVENTREG(WEEKEVENTREG_55_02);
-        } else if ((((void)0, gSaveContext.save.day) == 1) && (SCRIPT_TIME_NOW >= SCRIPT_TIME(16, 30))) {
+        } else if ((((void)0, gMmSave.day) == 1) && (SCRIPT_TIME_NOW >= SCRIPT_TIME(16, 30))) {
             SET_WEEKEVENTREG(WEEKEVENTREG_55_02);
         }
     }
@@ -2423,7 +2423,7 @@ void Environment_DrawLightning(PlayState* play, s32 unused) {
 }
 
 void Environment_PlaySceneSequence(PlayState* play) {
-    u8 dayMinusOne = ((void)0, gSaveContext.save.day) - 1;
+    u8 dayMinusOne = ((void)0, gMmSave.day) - 1;
 
     if (dayMinusOne >= 3) {
         dayMinusOne = 0;
@@ -2538,7 +2538,7 @@ void Environment_UpdateTimeBasedSequence(PlayState* play) {
         }
     }
 
-    if ((play->envCtx.timeSeqState != TIMESEQ_REQUEST) && (((void)0, gSaveContext.save.day) == 3) &&
+    if ((play->envCtx.timeSeqState != TIMESEQ_REQUEST) && (((void)0, gMmSave.day) == 3) &&
         (CURRENT_TIME < CLOCK_TIME(6, 0)) && !func_800FE5D0(play) && (play->transitionTrigger == TRANS_TRIGGER_OFF) &&
         (play->transitionMode == TRANS_MODE_OFF) && (play->csCtx.state == CS_STATE_IDLE) &&
         ((play->sceneId != SCENE_00KEIKOKU) || (((void)0, gSaveContext.sceneLayer) != 1)) &&
@@ -3023,17 +3023,17 @@ void Environment_LerpFog(PlayState* play, s16 fogNearTarget, s16 fogFarTarget, f
 
 // Repurposed from OoT to be more general
 u32 Environment_GetEventDayCount(void) {
-    return gSaveContext.save.eventDayCount;
+    return gMmSave.eventDayCount;
 }
 
 // Repurposed from OoT to be more general
 void Environment_ClearEventDayCount(void) {
-    gSaveContext.save.eventDayCount = 0;
+    gMmSave.eventDayCount = 0;
 }
 
 // Repurposed from OoT to be more general
 u32 Environment_GetTotalDays(void) {
-    return gSaveContext.save.day;
+    return gMmSave.day;
 }
 
 void Environment_ForcePlaySequence(u16 seqId) {
@@ -3080,7 +3080,7 @@ void Environment_StopStormNatureAmbience(PlayState* play) {
 
 void Environment_WarpSongLeave(PlayState* play) {
     gWeatherMode = WEATHER_MODE_CLEAR;
-    gSaveContext.save.cutsceneIndex = 0;
+    gMmSave.cutsceneIndex = 0;
     gSaveContext.respawnFlag = -3;
     play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_RETURN].entrance;
     play->transitionTrigger = TRANS_TRIGGER_START;
@@ -3191,15 +3191,15 @@ void Environment_DrawSkyboxStarsImpl(PlayState* play, Gfx** gfxP) {
                         G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE | G_PM_NPRIMITIVE,
                     G_AC_NONE | G_ZS_PRIM | G_RM_AA_XLU_LINE | G_RM_AA_XLU_LINE2);
 
-    randInt = ((u32)gSaveContext.save.saveInfo.playerData.playerName[0] << 0x18) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[1] << 0x14) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[2] << 0x10) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[3] << 0xC) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[4] << 8) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[5] << 4) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[6] << 0) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[7] >> 4) ^
-              ((u32)gSaveContext.save.saveInfo.playerData.playerName[7] << 0x1C);
+    randInt = ((u32)gMmSave.saveInfo.playerData.playerName[0] << 0x18) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[1] << 0x14) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[2] << 0x10) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[3] << 0xC) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[4] << 8) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[5] << 4) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[6] << 0) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[7] >> 4) ^
+              ((u32)gMmSave.saveInfo.playerData.playerName[7] << 0x1C);
 
     //! FAKE:
     if (play->view.viewingPtr && play->view.viewingPtr && play->view.viewingPtr) {}
@@ -3247,7 +3247,7 @@ void Environment_DrawSkyboxStarsImpl(PlayState* play, Gfx** gfxP) {
             pos.y = -pos.y;
         }
 
-        if ((i < 15) || ((i == 15) && ((((void)0, gSaveContext.save.day) % 7) == 0))) {
+        if ((i < 15) || ((i == 15) && ((((void)0, gMmSave.day) % 7) == 0))) {
             gDPSetColor(gfx++, G_SETPRIMCOLOR, D_801DD8E0[i % ARRAY_COUNTU(D_801DD8E0)].rgba);
         } else if (((i & 0x3F) == 0) || (i == 16)) {
             gDPSetColor(gfx++, G_SETPRIMCOLOR, D_801DD900[phi_v1 % ARRAY_COUNTU(D_801DD900)].rgba);
@@ -3342,7 +3342,7 @@ u32 Environment_GetStormState(PlayState* play) {
     u32 stormState = play->envCtx.stormState;
 
     if ((play->sceneId == SCENE_OMOYA) && (play->roomCtx.curRoom.num == 0)) {
-        stormState = ((gSaveContext.save.day >= 2) && !CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS))
+        stormState = ((gMmSave.day >= 2) && !CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS))
                          ? STORM_STATE_ON
                          : STORM_STATE_OFF;
     }
@@ -3376,7 +3376,7 @@ u32 Environment_GetStormState(PlayState* play) {
 u8 Environment_IsFinalHours(PlayState* play) {
     u8 ret = false;
 
-    if ((gSaveContext.save.day == 3) && (CURRENT_TIME < CLOCK_TIME(6, 0))) {
+    if ((gMmSave.day == 3) && (CURRENT_TIME < CLOCK_TIME(6, 0))) {
         ret = true;
     }
 
@@ -3386,7 +3386,7 @@ u8 Environment_IsFinalHours(PlayState* play) {
 u8 func_800FE5D0(PlayState* play) {
     u8 ret = false;
 
-    if (Entrance_GetSceneId(((void)0, gSaveContext.save.entrance)) < 0) {
+    if (Entrance_GetSceneId(((void)0, gMmSave.entrance)) < 0) {
         ret = true;
     }
 
@@ -3401,7 +3401,7 @@ u16 Environment_GetTimeSpeed(PlayState* play) {
     u16 timeSpeed = 0;
 
     if (R_TIME_SPEED != 0) {
-        timeSpeed = R_TIME_SPEED + (u16)((void)0, gSaveContext.save.timeSpeedOffset);
+        timeSpeed = R_TIME_SPEED + (u16)((void)0, gMmSave.timeSpeedOffset);
     }
 
     return timeSpeed;
@@ -3417,7 +3417,7 @@ u8 func_800FE6F8(PlayState* play, s16 timeAdvanceScaling, s16 nextTimeLimit) {
 
     if (R_TIME_SPEED != 0) {
         nextTime =
-            CURRENT_TIME + (R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset)) * timeAdvanceScaling * 20;
+            CURRENT_TIME + (R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset)) * timeAdvanceScaling * 20;
         if (nextTime > nextTimeLimit) {
             ret = true;
         }
@@ -3483,7 +3483,7 @@ u8 func_800FE9B4(PlayState* play) {
 void func_800FEA50(PlayState* play) {
     s8 phi_v0;
 
-    switch (gSaveContext.save.day) {
+    switch (gMmSave.day) {
         default:
         case 0:
         case 1:
@@ -3509,7 +3509,7 @@ void func_800FEAB0() {
 
 void Environment_JumpForwardInTime(void) {
     if (sTimeJump != 0) {
-        gSaveContext.save.time = CURRENT_TIME + sTimeJump;
+        gMmSave.time = CURRENT_TIME + sTimeJump;
         sTimeJump = 0;
     }
 }
@@ -3517,8 +3517,8 @@ void Environment_JumpForwardInTime(void) {
 void Environment_NewDay(EnvironmentContext* envCtx) {
     u8 dayOffset = 0;
 
-    if (((void)0, gSaveContext.save.day) != 0) {
-        dayOffset = ((void)0, gSaveContext.save.day) - 1;
+    if (((void)0, gMmSave.day) != 0) {
+        dayOffset = ((void)0, gMmSave.day) - 1;
     }
 
     envCtx->skyboxConfig = dayOffset + (sInitSkyboxConfig * 3);
@@ -3557,7 +3557,7 @@ void Environment_NewDay(EnvironmentContext* envCtx) {
         envCtx->changeSkyboxNextConfig = SKYBOX_CONFIG_0;
     }
 
-    switch (((void)0, gSaveContext.save.day)) {
+    switch (((void)0, gMmSave.day)) {
         default:
         case 0:
         case 1:

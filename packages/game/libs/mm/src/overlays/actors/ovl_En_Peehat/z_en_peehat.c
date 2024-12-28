@@ -190,7 +190,7 @@ void EnPeehat_Init(Actor* thisx, PlayState* play) {
 
     if (this->actor.params == 0) {
         CollisionCheck_SetInfo2(&this->actor.colChkInfo, &sDamageTable, &sColChkInfoInit1);
-        if (gSaveContext.save.isNight) {
+        if (gMmSave.isNight) {
             this->actor.shape.yOffset = -1000.0f;
         }
         Actor_SetScale(&this->actor, 0.036f);
@@ -296,7 +296,7 @@ void func_80897498(EnPeehat* this) {
 }
 
 void func_80897520(EnPeehat* this, PlayState* play) {
-    if (!gSaveContext.save.isNight) {
+    if (!gMmSave.isNight) {
         this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
         this->colliderSphere.base.acFlags |= AC_ON;
         if (this->actor.xzDistToPlayer < 740.0f) {
@@ -382,7 +382,7 @@ void func_80897910(EnPeehat* this, PlayState* play) {
     Math_StepToF(&this->actor.world.pos.y, this->actor.floorHeight + 80.0f, 3.0f);
     SkelAnime_Update(&this->skelAnime);
 
-    if (!gSaveContext.save.isNight && (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 1200.0f)) {
+    if (!gMmSave.isNight && (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 1200.0f)) {
         Math_ScaledStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 0x3E8);
         this->actor.shape.rot.y += (s16)(this->unk_2AD * 450);
     } else {
@@ -524,7 +524,7 @@ void func_80897F44(EnPeehat* this, PlayState* play) {
     this->actor.world.rot.y += this->unk_2B6;
     this->actor.shape.rot.y += 0x15E;
 
-    if (!gSaveContext.save.isNight && (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 1200.0f)) {
+    if (!gMmSave.isNight && (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 1200.0f)) {
         this->actor.world.rot.y = this->actor.yawTowardsPlayer;
         func_80897864(this);
     } else {
@@ -569,7 +569,7 @@ void func_80898144(EnPeehat* this, PlayState* play) {
         func_80897D00(this);
     }
 
-    if (!gSaveContext.save.isNight && (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 1200.0f)) {
+    if (!gMmSave.isNight && (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 1200.0f)) {
         func_80897864(this);
     }
     Actor_PlaySfx_Flagged(&this->actor, NA_SE_EN_PIHAT_FLY - SFX_FLAG);

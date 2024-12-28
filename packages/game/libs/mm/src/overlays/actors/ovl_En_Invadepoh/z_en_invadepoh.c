@@ -1976,9 +1976,9 @@ void EnInvadepoh_InvasionHandler_Init(EnInvadepoh* this, PlayState* play) {
             EnInvadepoh_InvasionHandler_SetupHandle(this);
         }
     } else if (sInvasionState == INVASION_STATE_SUCCESS) {
-        if (gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 6)) {
+        if (gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 6)) {
             EnInvadepoh_InvasionHandler_SetupWaitForRomaniReward(this);
-        } else if (gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 7)) {
+        } else if (gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 7)) {
             EnInvadepoh_InvasionHandler_SetupSuccessEnd(this);
         } else {
             EnInvadepoh_InvasionHandler_SetupSuccessEnd(this);
@@ -2113,7 +2113,7 @@ void EnInvadepoh_Romani_Init(EnInvadepoh* this, PlayState* play) {
     } else if (type == EN_INVADEPOH_TYPE_ROMANI_BARN) {
         // nothing
     } else if (type == EN_INVADEPOH_TYPE_ROMANI_REWARD) {
-        if (gSaveContext.save.entrance != ENTRANCE(ROMANI_RANCH, 6)) {
+        if (gMmSave.entrance != ENTRANCE(ROMANI_RANCH, 6)) {
             Actor_Kill(&this->actor);
         }
     } else if (type == EN_INVADEPOH_TYPE_ROMANI_NIGHT_3) {

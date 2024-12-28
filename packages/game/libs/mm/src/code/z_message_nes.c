@@ -1098,15 +1098,15 @@ void Message_DecodeNES(PlayState* play) {
             break;
         } else if (curChar == MESSAGE_NAME) {
             // Substitute the player name control character for the file's player name.
-            for (playerNameLen = ARRAY_COUNT(gSaveContext.save.saveInfo.playerData.playerName); playerNameLen > 0;
+            for (playerNameLen = ARRAY_COUNT(gMmSave.saveInfo.playerData.playerName); playerNameLen > 0;
                  playerNameLen--) {
-                if (gSaveContext.save.saveInfo.playerData.playerName[playerNameLen - 1] != 0x3E) {
+                if (gMmSave.saveInfo.playerData.playerName[playerNameLen - 1] != 0x3E) {
                     break;
                 }
             }
 
             for (i = 0; i < playerNameLen; i++) {
-                curChar = gSaveContext.save.saveInfo.playerData.playerName[i];
+                curChar = gMmSave.saveInfo.playerData.playerName[i];
                 if (curChar == 0x3E) {
                     curChar = ' ';
                 } else if (curChar == 0x40) {
@@ -1312,7 +1312,7 @@ void Message_DecodeNES(PlayState* play) {
         } else if (curChar == MESSAGE_STRAY_FAIRIES) {
             digits[0] = digits[1] = 0;
             digits[2] =
-                gSaveContext.save.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex];
+                gMmSave.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex];
 
             while (digits[2] >= 100) {
                 digits[0]++;
@@ -1334,23 +1334,23 @@ void Message_DecodeNES(PlayState* play) {
                 }
             }
 
-            if ((gSaveContext.save.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] ==
+            if ((gMmSave.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] ==
                  1) ||
-                (gSaveContext.save.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] ==
+                (gMmSave.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] ==
                  21)) {
                 Message_LoadCharNES(play, 's', &charTexIndex, &spA4, decodedBufPos);
                 decodedBufPos++;
                 Message_LoadCharNES(play, 't', &charTexIndex, &spA4, decodedBufPos);
-            } else if ((gSaveContext.save.saveInfo.inventory
+            } else if ((gMmSave.saveInfo.inventory
                             .strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] == 2) ||
-                       (gSaveContext.save.saveInfo.inventory
+                       (gMmSave.saveInfo.inventory
                             .strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] == 22)) {
                 Message_LoadCharNES(play, 'n', &charTexIndex, &spA4, decodedBufPos);
                 decodedBufPos++;
                 Message_LoadCharNES(play, 'd', &charTexIndex, &spA4, decodedBufPos);
-            } else if ((gSaveContext.save.saveInfo.inventory
+            } else if ((gMmSave.saveInfo.inventory
                             .strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] == 3) ||
-                       (gSaveContext.save.saveInfo.inventory
+                       (gMmSave.saveInfo.inventory
                             .strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] == 23)) {
                 Message_LoadCharNES(play, 'r', &charTexIndex, &spA4, decodedBufPos);
                 decodedBufPos++;
@@ -1477,9 +1477,9 @@ void Message_DecodeNES(PlayState* play) {
             }
             decodedBufPos--;
         } else if (curChar == MESSAGE_TIME_SPEED) {
-            if (((void)0, gSaveContext.save.timeSpeedOffset) == 18) {
+            if (((void)0, gMmSave.timeSpeedOffset) == 18) {
                 index = 0;
-            } else if (((void)0, gSaveContext.save.timeSpeedOffset) == 0) {
+            } else if (((void)0, gMmSave.timeSpeedOffset) == 0) {
                 index = 1;
             } else {
                 index = 2;
@@ -1513,9 +1513,9 @@ void Message_DecodeNES(PlayState* play) {
             }
             decodedBufPos--;
         } else if (curChar == MESSAGE_SPIDER_HOUSE_MASK_CODE) {
-            for (i = 0; i < ARRAY_COUNT(gSaveContext.save.saveInfo.spiderHouseMaskOrder); i++) {
+            for (i = 0; i < ARRAY_COUNT(gMmSave.saveInfo.spiderHouseMaskOrder); i++) {
                 msgCtx->decodedBuffer.schar[decodedBufPos] =
-                    sMaskCodeColorCmdENG[((void)0, gSaveContext.save.saveInfo.spiderHouseMaskOrder[i])];
+                    sMaskCodeColorCmdENG[((void)0, gMmSave.saveInfo.spiderHouseMaskOrder[i])];
                 decodedBufPos++;
                 Message_LoadCharNES(play, i + '1', &charTexIndex, &spA4, decodedBufPos);
                 decodedBufPos++;
@@ -1526,7 +1526,7 @@ void Message_DecodeNES(PlayState* play) {
             digits[0] = digits[1] = 0;
             digits[2] =
                 STRAY_FAIRY_SCATTERED_TOTAL -
-                gSaveContext.save.saveInfo.inventory.strayFairies[curChar - MESSAGE_STRAY_FAIRIES_LEFT_WOODFALL];
+                gMmSave.saveInfo.inventory.strayFairies[curChar - MESSAGE_STRAY_FAIRIES_LEFT_WOODFALL];
 
             while (digits[2] >= 100) {
                 digits[0]++;
@@ -1583,9 +1583,9 @@ void Message_DecodeNES(PlayState* play) {
             decodedBufPos--;
         } else if ((curChar == MESSAGE_LOTTERY_CODE) || (curChar == MESSAGE_LOTTERY_CODE_GUESS)) {
             if (curChar == MESSAGE_LOTTERY_CODE) {
-                digits[0] = gSaveContext.save.saveInfo.lotteryCodes[CURRENT_DAY - 1][0];
-                digits[1] = gSaveContext.save.saveInfo.lotteryCodes[CURRENT_DAY - 1][1];
-                digits[2] = gSaveContext.save.saveInfo.lotteryCodes[CURRENT_DAY - 1][2];
+                digits[0] = gMmSave.saveInfo.lotteryCodes[CURRENT_DAY - 1][0];
+                digits[1] = gMmSave.saveInfo.lotteryCodes[CURRENT_DAY - 1][1];
+                digits[2] = gMmSave.saveInfo.lotteryCodes[CURRENT_DAY - 1][2];
             } else {
                 digits[0] = (HS_GET_LOTTERY_CODE_GUESS() & 0xF00) >> 8;
                 digits[1] = (HS_GET_LOTTERY_CODE_GUESS() & 0xF0) >> 4;
@@ -1634,7 +1634,7 @@ void Message_DecodeNES(PlayState* play) {
         } else if (curChar == MESSAGE_BOMBER_CODE) {
             for (i = 0; i < 5; i++) {
                 //! @bug OoB read & write for i == 4, digits array is only 4 elements
-                digits[i] = gSaveContext.save.saveInfo.bomberCode[i];
+                digits[i] = gMmSave.saveInfo.bomberCode[i];
                 Font_LoadCharNES(play, digits[i] + '0', charTexIndex);
                 charTexIndex += FONT_CHAR_TEX_SIZE;
                 msgCtx->decodedBuffer.schar[decodedBufPos] = digits[i] + '0';
@@ -1645,13 +1645,13 @@ void Message_DecodeNES(PlayState* play) {
         } else if ((curChar >= MESSAGE_SPIDER_HOUSE_MASK_CODE_1) && (curChar <= MESSAGE_SPIDER_HOUSE_MASK_CODE_6)) {
             msgCtx->decodedBuffer.schar[decodedBufPos++] = sMaskCodeColorCmdENG[(
                 (void)0,
-                gSaveContext.save.saveInfo.spiderHouseMaskOrder[(s16)(curChar - MESSAGE_SPIDER_HOUSE_MASK_CODE_1)])];
-            index = sMaskCodeTextLengthENG[((void)0, gSaveContext.save.saveInfo.spiderHouseMaskOrder[(
+                gMmSave.saveInfo.spiderHouseMaskOrder[(s16)(curChar - MESSAGE_SPIDER_HOUSE_MASK_CODE_1)])];
+            index = sMaskCodeTextLengthENG[((void)0, gMmSave.saveInfo.spiderHouseMaskOrder[(
                                                          s16)(curChar - MESSAGE_SPIDER_HOUSE_MASK_CODE_1)])];
             for (playerNameLen = 0; playerNameLen < index; playerNameLen++, decodedBufPos++) {
                 Message_LoadCharNES(
                     play,
-                    sMaskCodeTextENG[((void)0, gSaveContext.save.saveInfo.spiderHouseMaskOrder[(
+                    sMaskCodeTextENG[((void)0, gMmSave.saveInfo.spiderHouseMaskOrder[(
                                                    s16)(curChar - MESSAGE_SPIDER_HOUSE_MASK_CODE_1)])][playerNameLen],
                     &charTexIndex, &spA4, decodedBufPos);
             }
@@ -1747,7 +1747,7 @@ void Message_DecodeNES(PlayState* play) {
             } else {
                 Message_GetTimerDigitsNES(
                     ((void)0,
-                     gSaveContext.save.saveInfo.dekuPlaygroundHighScores[curChar - MESSAGE_HS_DEKU_PLAYGROUND_DAY_1]),
+                     gMmSave.saveInfo.dekuPlaygroundHighScores[curChar - MESSAGE_HS_DEKU_PLAYGROUND_DAY_1]),
                     spA8);
             }
 
@@ -1839,13 +1839,13 @@ void Message_DecodeNES(PlayState* play) {
             index = curChar - MESSAGE_DEKU_PLAYGROUND_NAME_DAY_1;
             for (playerNameLen = 8; playerNameLen > 0; playerNameLen--) {
                 if (((void)0,
-                     gSaveContext.save.saveInfo.inventory.dekuPlaygroundPlayerName[index][playerNameLen - 1]) != 0x3E) {
+                     gMmSave.saveInfo.inventory.dekuPlaygroundPlayerName[index][playerNameLen - 1]) != 0x3E) {
                     break;
                 }
             }
 
             for (i = 0; i < playerNameLen; i++) {
-                curChar = ((void)0, gSaveContext.save.saveInfo.inventory.dekuPlaygroundPlayerName[index][i]);
+                curChar = ((void)0, gMmSave.saveInfo.inventory.dekuPlaygroundPlayerName[index][i]);
                 msgCtx->decodedBuffer.schar[decodedBufPos + i] = 0xFD;
                 fontBuf = &font->fontBuf[(curChar & 0xFFFF) * FONT_CHAR_TEX_SIZE];
 

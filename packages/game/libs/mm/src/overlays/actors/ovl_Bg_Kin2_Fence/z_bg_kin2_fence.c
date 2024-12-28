@@ -183,7 +183,7 @@ void BgKin2Fence_HandleMaskCode(BgKin2Fence* this, PlayState* play) {
     if (this->collider.base.acFlags & AC_HIT) {
         hitMask = BgKin2Fence_CheckHitMask(this);
         if (hitMask >= 0) {
-            nextMask = (s8)gSaveContext.save.saveInfo.spiderHouseMaskOrder[this->masksHit];
+            nextMask = (s8)gMmSave.saveInfo.spiderHouseMaskOrder[this->masksHit];
             if (hitMask == nextMask) {
                 Audio_PlaySfx(NA_SE_SY_TRE_BOX_APPEAR);
                 this->masksHit += 1;

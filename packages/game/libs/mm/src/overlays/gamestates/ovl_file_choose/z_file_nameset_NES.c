@@ -511,7 +511,7 @@ void FileSelect_DrawNameEntry(GameState* thisx) {
                                 gSaveContext.fileNum = this->buttonIndex;
                                 time = CURRENT_TIME;
                                 Sram_InitSave(this, sramCtx);
-                                gSaveContext.save.time = time;
+                                gMmSave.time = time;
 
                                 if (!gSaveContext.flashSaveAvailable) {
                                     this->configMode = CM_NAME_ENTRY_TO_MAIN;

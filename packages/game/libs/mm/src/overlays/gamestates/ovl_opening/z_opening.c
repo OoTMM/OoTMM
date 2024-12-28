@@ -20,17 +20,17 @@ void TitleSetup_SetupTitleScreen(TitleSetupState* this) {
 
     Sram_InitNewSave();
 
-    gSaveContext.save.entrance = sOpeningEntrances[gOpeningEntranceIndex];
-    gSaveContext.nextCutsceneIndex = gSaveContext.save.cutsceneIndex = sOpeningCutscenes[gOpeningEntranceIndex];
+    gMmSave.entrance = sOpeningEntrances[gOpeningEntranceIndex];
+    gSaveContext.nextCutsceneIndex = gMmSave.cutsceneIndex = sOpeningCutscenes[gOpeningEntranceIndex];
     gSaveContext.sceneLayer = 0;
 
-    gSaveContext.save.time = CLOCK_TIME(8, 0);
-    gSaveContext.save.day = 1;
+    gMmSave.time = CLOCK_TIME(8, 0);
+    gMmSave.day = 1;
 
     STOP_GAMESTATE(&this->state);
     SET_NEXT_GAMESTATE(&this->state, Play_Init, sizeof(PlayState));
 
-    gSaveContext.save.playerForm = PLAYER_FORM_HUMAN;
+    gMmSave.playerForm = PLAYER_FORM_HUMAN;
 }
 
 void func_80803EA0(TitleSetupState* this) {

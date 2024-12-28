@@ -243,10 +243,10 @@ void EnMa4_Init(Actor* thisx, PlayState* play) {
     } else {
         EnMa4_InitPath(this, play);
 
-        if (gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 1)) {
+        if (gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 1)) {
             EnMa4_ChangeAnim(this, ENMA4_ANIM_0);
             this->state = MA4_STATE_AFTERHORSEBACKGAME;
-        } else if (gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 10)) {
+        } else if (gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 10)) {
             EnMa4_ChangeAnim(this, ENMA4_ANIM_0);
             this->state = MA4_STATE_AFTERDESCRIBETHEMCS;
         } else {

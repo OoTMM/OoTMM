@@ -890,13 +890,13 @@ s16 func_800A7650(s16 dropId) {
           (dropId == ITEM00_ARROWS_50)) &&
          (INV_CONTENT(ITEM_BOW) == ITEM_NONE)) ||
         (((dropId == ITEM00_MAGIC_JAR_BIG) || (dropId == ITEM00_MAGIC_JAR_SMALL)) &&
-         (gSaveContext.save.saveInfo.playerData.magicLevel == 0))) {
+         (gMmSave.saveInfo.playerData.magicLevel == 0))) {
         return ITEM00_NO_DROP;
     }
 
     if (dropId == ITEM00_RECOVERY_HEART) {
-        if (((void)0, gSaveContext.save.saveInfo.playerData.healthCapacity) ==
-            ((void)0, gSaveContext.save.saveInfo.playerData.health)) {
+        if (((void)0, gMmSave.saveInfo.playerData.healthCapacity) ==
+            ((void)0, gMmSave.saveInfo.playerData.health)) {
             return ITEM00_RUPEE_GREEN;
         }
     }
@@ -1374,29 +1374,29 @@ void Item_DropCollectibleRandom(PlayState* play, Actor* fromActor, Vec3f* spawnP
         }
 
         if (dropId == ITEM00_FLEXIBLE) {
-            if (gSaveContext.save.saveInfo.playerData.health <= 0x10) {
+            if (gMmSave.saveInfo.playerData.health <= 0x10) {
                 Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, spawnPos->x, spawnPos->y + 40.0f, spawnPos->z, 0, 0, 0,
                             FAIRY_PARAMS(FAIRY_TYPE_2, false, 0));
                 SoundSource_PlaySfxAtFixedWorldPos(play, spawnPos, 40, NA_SE_EV_BUTTERFRY_TO_FAIRY);
                 return;
             }
 
-            if (gSaveContext.save.saveInfo.playerData.health <= 0x30) {
+            if (gMmSave.saveInfo.playerData.health <= 0x30) {
                 params = 0x10;
                 dropId = ITEM00_RECOVERY_HEART;
                 dropQuantity = 3;
-            } else if (gSaveContext.save.saveInfo.playerData.health <= 0x50) {
+            } else if (gMmSave.saveInfo.playerData.health <= 0x50) {
                 params = 0x10;
                 dropId = ITEM00_RECOVERY_HEART;
                 dropQuantity = 1;
-            } else if ((gSaveContext.save.saveInfo.playerData.magicLevel != 0) &&
-                       (gSaveContext.save.saveInfo.playerData.magic == 0)) {
+            } else if ((gMmSave.saveInfo.playerData.magicLevel != 0) &&
+                       (gMmSave.saveInfo.playerData.magic == 0)) {
                 params = 0xD0;
                 dropId = ITEM00_MAGIC_JAR_BIG;
                 dropQuantity = 1;
-            } else if ((gSaveContext.save.saveInfo.playerData.magicLevel != 0) &&
-                       ((gSaveContext.save.saveInfo.playerData.magicLevel >> 1) >=
-                        gSaveContext.save.saveInfo.playerData.magic)) {
+            } else if ((gMmSave.saveInfo.playerData.magicLevel != 0) &&
+                       ((gMmSave.saveInfo.playerData.magicLevel >> 1) >=
+                        gMmSave.saveInfo.playerData.magic)) {
                 params = 0xD0;
                 dropId = ITEM00_MAGIC_JAR_BIG;
                 dropQuantity = 1;
@@ -1408,7 +1408,7 @@ void Item_DropCollectibleRandom(PlayState* play, Actor* fromActor, Vec3f* spawnP
                 params = 0xB0;
                 dropId = ITEM00_BOMBS_A;
                 dropQuantity = 1;
-            } else if (gSaveContext.save.saveInfo.playerData.rupees < 11) {
+            } else if (gMmSave.saveInfo.playerData.rupees < 11) {
                 params = 0xA0;
                 dropId = ITEM00_RUPEE_RED;
                 dropQuantity = 1;

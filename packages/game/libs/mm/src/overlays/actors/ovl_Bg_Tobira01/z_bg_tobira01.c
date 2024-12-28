@@ -78,7 +78,7 @@ void BgTobira01_Init(Actor* thisx, PlayState* play) {
     DynaPolyActor_LoadMesh(play, &this->dyna, &gGoronDoorCol);
     CLEAR_WEEKEVENTREG(WEEKEVENTREG_GATEKEEPER_OPENED_GORON_SHRINE);
     Actor_SetScale(&this->dyna.actor, 1.0f);
-    this->timer = gSaveContext.save.isNight;
+    this->timer = gMmSave.isNight;
     this->posYTick = 0;
     this->actionFunc = BgTobira01_Action;
 }

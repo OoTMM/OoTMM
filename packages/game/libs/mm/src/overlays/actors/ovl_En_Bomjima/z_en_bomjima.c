@@ -780,12 +780,12 @@ void func_80BFF9B0(EnBomjima* this, PlayState* play) {
         CLEAR_WEEKEVENTREG(WEEKEVENTREG_76_08);
         CLEAR_WEEKEVENTREG(WEEKEVENTREG_76_10);
 
-        gSaveContext.save.saveInfo.bombersCaughtNum = 0;
-        gSaveContext.save.saveInfo.bombersCaughtOrder[0] = 0;
-        gSaveContext.save.saveInfo.bombersCaughtOrder[1] = 0;
-        gSaveContext.save.saveInfo.bombersCaughtOrder[2] = 0;
-        gSaveContext.save.saveInfo.bombersCaughtOrder[3] = 0;
-        gSaveContext.save.saveInfo.bombersCaughtOrder[4] = 0;
+        gMmSave.saveInfo.bombersCaughtNum = 0;
+        gMmSave.saveInfo.bombersCaughtOrder[0] = 0;
+        gMmSave.saveInfo.bombersCaughtOrder[1] = 0;
+        gMmSave.saveInfo.bombersCaughtOrder[2] = 0;
+        gMmSave.saveInfo.bombersCaughtOrder[3] = 0;
+        gMmSave.saveInfo.bombersCaughtOrder[4] = 0;
 
         EnBomjima_ChangeAnim(this, ENBOMJIMA_ANIM_3, 1.0f);
         this->unk_2C8 = 9;

@@ -122,7 +122,7 @@ u16 func_80AF705C(BgDanpeiMovebg* this, u16 flags) {
         newFlags |= DANPEI_MOVEBG_FLAG_4;
     }
     if (DynaPolyActor_IsPlayerOnTop(&this->dyna)) {
-        if (gSaveContext.save.playerForm == PLAYER_FORM_DEKU) {
+        if (gMmSave.playerForm == PLAYER_FORM_DEKU) {
             newFlags |= DANPEI_MOVEBG_FLAG_8;
         } else {
             newFlags |= DANPEI_MOVEBG_FLAG_10;

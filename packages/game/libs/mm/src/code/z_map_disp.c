@@ -214,7 +214,7 @@ s32 MapDisp_IsDataRotated(PlayState* play) {
 }
 
 s32 MapDisp_CanDrawDoors(PlayState* play) {
-    if ((gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 0)) && (Cutscene_GetSceneLayer(play) != 0)) {
+    if ((gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 0)) && (Cutscene_GetSceneLayer(play) != 0)) {
         return false;
     }
     return true;
@@ -1005,7 +1005,7 @@ void MapDisp_Minimap_DrawRedCompassIcon(PlayState* play, s32 x, s32 z, s32 rot) 
 }
 
 s32 MapDisp_IsLocationRomaniRanchAltScene(PlayState* play) {
-    if ((gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 0)) && (Cutscene_GetSceneLayer(play) != 0)) {
+    if ((gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 0)) && (Cutscene_GetSceneLayer(play) != 0)) {
         return true;
     }
     return false;

@@ -350,7 +350,7 @@ void EnLookNuts_Update(Actor* thisx, PlayState* play) {
             if (!this->isPlayerDetected) {
                 s16 effectFlags = SOLDERSRCHBALL_INVISIBLE;
 
-                if (gSaveContext.save.isNight) {
+                if (gMmSave.isNight) {
                     effectFlags = 0;
                 }
                 if (Player_GetMask(play) != PLAYER_MASK_STONE) {

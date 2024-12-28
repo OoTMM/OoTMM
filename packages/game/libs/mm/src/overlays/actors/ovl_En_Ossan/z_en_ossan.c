@@ -206,7 +206,7 @@ bool EnOssan_TestItemSelected(PlayState* play) {
 }
 
 void EnOssan_CheckValidSpawn(EnOssan* this) {
-    switch (gSaveContext.save.day) {
+    switch (gMmSave.day) {
         case 1:
         case 2:
             if ((CURRENT_TIME <= CLOCK_TIME(21, 30)) && (CURRENT_TIME > CLOCK_TIME(6, 0))) {

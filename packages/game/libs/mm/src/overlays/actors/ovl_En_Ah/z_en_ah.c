@@ -376,7 +376,7 @@ MsgScript* EnAh_GetMsgScript(EnAh* this, PlayState* play) {
 
     switch (this->scheduleResult) {
         case 1:
-            if (gSaveContext.save.day == 2) {
+            if (gMmSave.day == 2) {
                 return D_80BD3DF0;
             }
             return D_80BD3DE8;

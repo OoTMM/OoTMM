@@ -151,7 +151,7 @@ bool func_808B736C(BgBreakwall* this, PlayState* play) {
 }
 
 bool func_808B7380(BgBreakwall* this, PlayState* play) {
-    if ((gSaveContext.save.day >= 2) && !CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS)) {
+    if ((gMmSave.day >= 2) && !CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS)) {
         return false;
     }
     return true;
@@ -204,7 +204,7 @@ bool func_808B751C(BgBreakwall* this, PlayState* play) {
 
     func_800FEA50(play);
 
-    if (gSaveContext.save.isNight) {
+    if (gMmSave.isNight) {
         this->unk_15E = 0;
     } else {
         this->unk_15E = 255;
@@ -319,7 +319,7 @@ void func_808B7914(BgBreakwall* this, PlayState* play) {
 }
 
 void func_808B7A10(BgBreakwall* this, PlayState* play) {
-    if (gSaveContext.save.isNight) {
+    if (gMmSave.isNight) {
         if (this->unk_15E < 245) {
             this->unk_15E += 10;
         } else {

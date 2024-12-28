@@ -423,7 +423,7 @@ s32 func_80BA4204(EnToto* this, PlayState* play) {
 
     if (DECR(this->unk2B1) == 0) {
         if (!ENTOTO_WEEK_EVENT_FLAGS) {
-            temp_v1_2 = &D_80BA50DC[gSaveContext.save.playerForm - 1];
+            temp_v1_2 = &D_80BA50DC[gMmSave.playerForm - 1];
             Message_StartTextbox(play, (this->text->unk0 == 6) ? temp_v1_2->unk0 : temp_v1_2->unk4, NULL);
         }
         return 1;
@@ -499,7 +499,7 @@ s32 func_80BA4530(EnToto* this, PlayState* play) {
         return this->text->unk1;
     }
     if (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) {
-        temp_s0 = &D_80BA50DC[gSaveContext.save.playerForm - 1];
+        temp_s0 = &D_80BA50DC[gMmSave.playerForm - 1];
         if (func_80BA44D4(temp_s0, player)) {
             Math_Vec3s_ToVec3f(&player->actor.world.pos, &temp_s0->unk6);
             player->actor.shape.rot.y = 0;

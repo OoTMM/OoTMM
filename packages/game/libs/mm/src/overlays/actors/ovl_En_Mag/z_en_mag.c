@@ -395,7 +395,7 @@ void EnMag_Update(Actor* thisx, PlayState* play) {
                                 play->transitionTrigger = TRANS_TRIGGER_START;
                                 play->transitionType = TRANS_TYPE_FADE_BLACK;
                                 play->nextEntrance = ENTRANCE(CUTSCENE, 0);
-                                gSaveContext.save.cutsceneIndex = 0;
+                                gMmSave.cutsceneIndex = 0;
                                 gSaveContext.sceneLayer = 0;
                             }
                             this->unk11F54 = 15;

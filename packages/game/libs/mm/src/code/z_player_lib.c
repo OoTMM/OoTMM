@@ -404,7 +404,7 @@ void func_8012301C(Actor* thisx, PlayState* play2) {
             this->actor.init = PlayerCall_Init;
             this->actor.update = PlayerCall_Update;
             this->actor.draw = PlayerCall_Draw;
-            gSaveContext.save.equippedMask = PLAYER_MASK_NONE;
+            gMmSave.equippedMask = PLAYER_MASK_NONE;
         }
     }
 }
@@ -800,7 +800,7 @@ PlayerItemAction func_80123810(PlayState* play) {
     ItemId itemId;
     s32 i;
 
-    if (gSaveContext.save.unk_06 == 0) {
+    if (gMmSave.unk_06 == 0) {
         if (CHECK_BTN_ANY(CONTROLLER1(&play->state)->press.button, BTN_A | BTN_B)) {
             play->interfaceCtx.bButtonInterfaceDoActionActive = false;
             play->interfaceCtx.bButtonInterfaceDoAction = 0;
@@ -808,7 +808,7 @@ PlayerItemAction func_80123810(PlayState* play) {
             return PLAYER_IA_MINUS1;
         }
     } else {
-        gSaveContext.save.unk_06--;
+        gMmSave.unk_06--;
     }
 
     for (i = 0; i < ARRAY_COUNT(sCItemButtons); i++) {

@@ -85,7 +85,7 @@ void func_80AD68DC(BgLotus* this, PlayState* play) {
                 EffectSsGRipple_Spawn(play, &this->dyna.actor.world.pos, 0x3E8, 0x578, 8);
                 this->unk166 = 40;
             }
-            if (gSaveContext.save.playerForm != PLAYER_FORM_DEKU) {
+            if (gMmSave.playerForm != PLAYER_FORM_DEKU) {
                 this->unk166 = 40;
                 this->dyna.actor.flags |= ACTOR_FLAG_10;
                 this->actionFunc = func_80AD6A88;

@@ -159,7 +159,7 @@ void BgUmajump_Update(Actor* thisx, PlayState* play) {
                 }
             } else if ((this->dyna.actor.params == BG_UMAJUMP_TYPE_6) && (this->dyna.bgId == BGACTOR_NEG_ONE) &&
                        (!CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS) ||
-                        ((gSaveContext.save.day == 2) && (gSaveContext.save.isNight == true) &&
+                        ((gMmSave.day == 2) && (gMmSave.isNight == true) &&
                          ((CURRENT_TIME >= CLOCK_TIME(5, 30)) && (CURRENT_TIME <= CLOCK_TIME(6, 0)))))) {
                 DynaPolyActor_LoadMesh(play, &this->dyna, &object_umajump_Colheader_001558);
             }
@@ -197,11 +197,11 @@ void func_8091A5A0(Actor* thisx, PlayState* play) {
     } else if (this->dyna.actor.params == BG_UMAJUMP_TYPE_6) {
         if ((this->dyna.bgId == BGACTOR_NEG_ONE) &&
             (!CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS) ||
-             ((gSaveContext.save.day == 2) && (gSaveContext.save.isNight == true) &&
+             ((gMmSave.day == 2) && (gMmSave.isNight == true) &&
               (CURRENT_TIME >= CLOCK_TIME(5, 30)) && (CURRENT_TIME <= CLOCK_TIME(6, 0))))) {
             DynaPolyActor_LoadMesh(play, &this->dyna, &object_umajump_Colheader_001558);
         } else if ((this->dyna.bgId != BGACTOR_NEG_ONE) && CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS) &&
-                   ((gSaveContext.save.day != 2) || (gSaveContext.save.isNight != true) ||
+                   ((gMmSave.day != 2) || (gMmSave.isNight != true) ||
                     (CURRENT_TIME < CLOCK_TIME(5, 30)) || (CURRENT_TIME > CLOCK_TIME(6, 0)))) {
             DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
         }

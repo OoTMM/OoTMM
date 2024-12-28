@@ -465,7 +465,7 @@ s32 func_80BC01DC(Actor* thisx, PlayState* play) {
             FALLTHROUGH;
         case ENNB_BEHAVIOUR_5:
             if (!CHECK_EVENTINF(EVENTINF_42)) {
-                gSaveContext.save.time = CLOCK_TIME(8, 0);
+                gMmSave.time = CLOCK_TIME(8, 0);
                 Sram_IncrementDay();
             } else {
                 Environment_SetTimeJump(120.0f);
@@ -742,7 +742,7 @@ void EnNb_HandleSchedule(EnNb* this, PlayState* play) {
 void EnNb_FollowSchedule(EnNb* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
 
     if (CHECK_EVENTINF(EVENTINF_43)) {
         scheduleOutput.result = EN_NB_SCH_1;

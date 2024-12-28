@@ -197,7 +197,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
         Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
     }
 
-    if ((this->actor.params == WOOD_TREE_SPECIAL) && !gSaveContext.save.isNight && (this->unk_144 != -1) &&
+    if ((this->actor.params == WOOD_TREE_SPECIAL) && !gMmSave.isNight && (this->unk_144 != -1) &&
         !Flags_GetCollectible(play, this->unk_144)) {
         this->actor.child =
             Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_ANI, this->actor.world.pos.x,

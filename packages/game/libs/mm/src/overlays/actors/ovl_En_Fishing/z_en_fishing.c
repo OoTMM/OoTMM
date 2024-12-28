@@ -804,7 +804,7 @@ void EnFishing_Init(Actor* thisx, PlayState* play2) {
     Actor_ProcessInitChain(thisx, sInitChain);
     ActorShape_Init(&thisx->shape, 0.0f, NULL, 0.0f);
 
-    sLinkAge = gSaveContext.save.linkAge;
+    sLinkAge = gMmSave.linkAge;
 
     if (thisx->params < 100) {
         s16 i;
@@ -4720,7 +4720,7 @@ void EnFishing_HandleOwnerDialog(EnFishing* this, PlayState* play) {
 
                 switch (play->msgCtx.choiceIndex) {
                     case 0:
-                        if (gSaveContext.save.saveInfo.playerData.rupees >= 20) {
+                        if (gMmSave.saveInfo.playerData.rupees >= 20) {
                             Rupees_ChangeBy(-20);
                             if (!Rumble_ControllerOneHasRumblePak()) {
                                 this->actor.textId = 0x407C;

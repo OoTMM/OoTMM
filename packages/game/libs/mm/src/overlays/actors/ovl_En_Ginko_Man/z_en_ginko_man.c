@@ -96,7 +96,7 @@ void EnGinkoMan_Idle(EnGinkoMan* this, PlayState* play) {
             this->curTextId = 0x44C; // would you like to make an account
         } else {
             Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, GINKO_ANIM_SITTING);
-            if ((CURRENT_DAY == 3) && (gSaveContext.save.isNight == true)) {
+            if ((CURRENT_DAY == 3) && (gMmSave.isNight == true)) {
                 Message_StartTextbox(play, 0x467, &this->actor);
                 this->curTextId = 0x467;
             } else {
@@ -252,14 +252,14 @@ void EnGinkoMan_DepositDialogue(EnGinkoMan* this, PlayState* play) {
                 if (HS_GET_BANK_RUPEES() >= 5000) {
                     Message_StartTextbox(play, 0x45F, &this->actor);
                     this->curTextId = 0x45F;
-                } else if (gSaveContext.save.saveInfo.playerData.rupees == 0) {
+                } else if (gMmSave.saveInfo.playerData.rupees == 0) {
                     Message_StartTextbox(play, 0x458, &this->actor);
                     this->curTextId = 0x458;
                 } else {
                     Message_StartTextbox(play, 0x479, &this->actor);
                     this->curTextId = 0x479;
                 }
-            } else if ((CURRENT_DAY == 3) && (gSaveContext.save.isNight == true)) {
+            } else if ((CURRENT_DAY == 3) && (gMmSave.isNight == true)) {
                 Message_StartTextbox(play, 0x46D, &this->actor);
 
                 this->curTextId = 0x46D;
@@ -341,7 +341,7 @@ void EnGinkoMan_WaitForDialogueInput(EnGinkoMan* this, PlayState* play) {
                     Message_StartTextbox(play, 0x45F, &this->actor);
                     this->curTextId = 0x45F; // bank full, cannot accept more
                 } else {
-                    if (gSaveContext.save.saveInfo.playerData.rupees > 0) {
+                    if (gMmSave.saveInfo.playerData.rupees > 0) {
                         Audio_PlaySfx_MessageDecide();
                         Message_StartTextbox(play, 0x44F, &this->actor);
                         this->curTextId = 0x44F;
@@ -360,7 +360,7 @@ void EnGinkoMan_WaitForDialogueInput(EnGinkoMan* this, PlayState* play) {
 
         case 0x452:
             if (play->msgCtx.choiceIndex == GINKOMAN_CHOICE_YES) {
-                if (gSaveContext.save.saveInfo.playerData.rupees < play->msgCtx.rupeesSelected) {
+                if (gMmSave.saveInfo.playerData.rupees < play->msgCtx.rupeesSelected) {
                     Audio_PlaySfx(NA_SE_SY_ERROR);
                     Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, GINKO_ANIM_SITTING);
                     Message_StartTextbox(play, 0x459, &this->actor);
@@ -427,7 +427,7 @@ void EnGinkoMan_WaitForDialogueInput(EnGinkoMan* this, PlayState* play) {
                     Message_StartTextbox(play, 0x476, &this->actor);
                     this->curTextId = 0x476;
                 } else if (CUR_CAPACITY(UPG_WALLET) <
-                           (play->msgCtx.rupeesSelected + gSaveContext.save.saveInfo.playerData.rupees)) {
+                           (play->msgCtx.rupeesSelected + gMmSave.saveInfo.playerData.rupees)) {
                     // check if wallet is big enough
                     Audio_PlaySfx(NA_SE_SY_ERROR);
                     Message_StartTextbox(play, 0x475, &this->actor);
@@ -479,7 +479,7 @@ void EnGinkoMan_WaitForRupeeCount(EnGinkoMan* this, PlayState* play) {
                 if (play->msgCtx.rupeesSelected == 0) {
                     Message_StartTextbox(play, 0x46F, &this->actor);
                     this->curTextId = 0x46F;
-                } else if (gSaveContext.save.isNight == true) {
+                } else if (gMmSave.isNight == true) {
                     Message_StartTextbox(play, 0x477, &this->actor);
                     this->curTextId = 0x477;
                 } else {
@@ -611,7 +611,7 @@ void EnGinkoMan_Stamp(EnGinkoMan* this, PlayState* play) {
             case 0x469:
                 Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, GINKO_ANIM_SITTING);
                 play->msgCtx.rupeesTotal = HS_GET_BANK_RUPEES();
-                if ((CURRENT_DAY == 3) && (gSaveContext.save.isNight == true)) {
+                if ((CURRENT_DAY == 3) && (gMmSave.isNight == true)) {
                     Message_StartTextbox(play, 0x46C, &this->actor);
                     this->curTextId = 0x46C;
                 } else {

@@ -75,9 +75,9 @@ at the top (were it above the function we're currently working on, the prototype
 
 There are several rather odd things going on here:
 
-- `temp_a0` is only used once. As such it's probably fake. 
+- `temp_a0` is only used once. As such it's probably fake.
 - There's a weird `this = this` that does nothing
-- `if (&D_06001384 == this->skelAnime.animation)` is a bit of a funny way to write the condition: it seems more likely it would be the other way round. 
+- `if (&D_06001384 == this->skelAnime.animation)` is a bit of a funny way to write the condition: it seems more likely it would be the other way round.
 - Also, if we look up `animation`, we find it is an `AnimationHeader*`, so `D_06001384` can be externed as `AnimationHeader`.
 - `func_80C1019C` is already a pointer, so the `&` is ineffectual. Our style is to not use `&` on function pointers.
 
@@ -404,7 +404,7 @@ There remains one thing we need to fix before trying to compile it, namely `*(&g
     /* 0x0F5C */ u32 regionsVisited;         // "area_arrival"
 ```
 
-so it's somewhere in `weekEventReg`. `0xF37 - 0xEF8 = 0x3F = 63`, and it's a byte array, so the access is actually `gSaveContext.save.saveInfo.weekEventReg[63] & 0x80`. Now it will compile. We also don't use `!= 0` for flag comparisons: just `if (gSaveContext.save.saveInfo.weekEventReg[63] & 0x80)` will do.
+so it's somewhere in `weekEventReg`. `0xF37 - 0xEF8 = 0x3F = 63`, and it's a byte array, so the access is actually `gMmSave.saveInfo.weekEventReg[63] & 0x80`. Now it will compile. We also don't use `!= 0` for flag comparisons: just `if (gMmSave.saveInfo.weekEventReg[63] & 0x80)` will do.
 
 Running `./diff.py -mwo3 func_80C102D4` and scrolling down, we discover that this doesn't match!
 

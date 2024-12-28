@@ -1554,7 +1554,7 @@ void ObjUm_PostMilkRunWaitPathFinished(ObjUm* this, PlayState* play) {
         play->transitionType = TRANS_TYPE_64;
         gSaveContext.nextTransitionType = TRANS_TYPE_FADE_WHITE;
         play->transitionTrigger = TRANS_TRIGGER_START;
-        gSaveContext.save.time += CLOCK_TIME(1, 0) + 2;
+        gMmSave.time += CLOCK_TIME(1, 0) + 2;
     }
     Actor_MoveWithGravity(&this->dyna.actor);
 }

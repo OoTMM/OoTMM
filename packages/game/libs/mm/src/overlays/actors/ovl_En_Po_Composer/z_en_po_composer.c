@@ -206,7 +206,7 @@ void EnPoComposer_Init(Actor* thisx, PlayState* play) {
         this->inCutscene = true;
         EnPoComposer_SetupStartedCutscene(this);
     } else if (POE_COMPOSER_4000(&this->actor)) {
-        if (gSaveContext.save.entrance != ENTRANCE(IKANA_CANYON, 10)) {
+        if (gMmSave.entrance != ENTRANCE(IKANA_CANYON, 10)) {
             Actor_Kill(&this->actor);
             return;
         }

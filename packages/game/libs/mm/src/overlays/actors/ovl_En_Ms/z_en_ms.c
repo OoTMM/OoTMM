@@ -82,7 +82,7 @@ void EnMs_Destroy(Actor* thisx, PlayState* play) {
 void EnMs_Wait(EnMs* this, PlayState* play) {
     s16 yawDiff = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
 
-    if (gSaveContext.save.saveInfo.inventory.items[SLOT_MAGIC_BEANS] == ITEM_NONE) {
+    if (gMmSave.saveInfo.inventory.items[SLOT_MAGIC_BEANS] == ITEM_NONE) {
         this->actor.textId = 0x92E;
     } else {
         this->actor.textId = 0x932;
@@ -117,7 +117,7 @@ void EnMs_Talk(EnMs* this, PlayState* play) {
                 switch (play->msgCtx.choiceIndex) {
                     case 0: // yes
                         Message_CloseTextbox(play);
-                        if (gSaveContext.save.saveInfo.playerData.rupees < 10) {
+                        if (gMmSave.saveInfo.playerData.rupees < 10) {
                             Audio_PlaySfx(NA_SE_SY_ERROR);
                             Message_ContinueTextbox(play, 0x935);
                         } else if (AMMO(ITEM_MAGIC_BEANS) >= 20) {

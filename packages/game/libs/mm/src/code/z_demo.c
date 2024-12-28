@@ -75,7 +75,7 @@ CutsceneHandler sManualCutsceneHandlers[] = {
 };
 
 void Cutscene_UpdateManual(PlayState* play, CutsceneContext* csCtx) {
-    if (gSaveContext.save.cutsceneIndex < 0xFFF0) {
+    if (gMmSave.cutsceneIndex < 0xFFF0) {
         sManualCutsceneHandlers[csCtx->state](play, csCtx);
     }
 }
@@ -94,11 +94,11 @@ void Cutscene_UpdateScripted(PlayState* play, CutsceneContext* csCtx) {
     }
 
     if ((gSaveContext.cutsceneTrigger != 0) && (csCtx->state == CS_STATE_IDLE)) {
-        gSaveContext.save.cutsceneIndex = 0xFFFD;
+        gMmSave.cutsceneIndex = 0xFFFD;
         gSaveContext.cutsceneTrigger = 1;
     }
 
-    if (gSaveContext.save.cutsceneIndex >= 0xFFF0) {
+    if (gMmSave.cutsceneIndex >= 0xFFF0) {
         Cutscene_SetupScripted(play, csCtx);
         sScriptedCutsceneHandlers[csCtx->state](play, csCtx);
     }
@@ -273,10 +273,10 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             break;
 
         case CS_MISC_FREEZE_TIME:
-            if (!gSaveContext.save.isNight) {
-                gSaveContext.save.time = CURRENT_TIME - (u16)R_TIME_SPEED;
+            if (!gMmSave.isNight) {
+                gMmSave.time = CURRENT_TIME - (u16)R_TIME_SPEED;
             } else {
-                gSaveContext.save.time = CURRENT_TIME - (u16)(2 * R_TIME_SPEED);
+                gMmSave.time = CURRENT_TIME - (u16)(2 * R_TIME_SPEED);
             }
             break;
 
@@ -294,7 +294,7 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             break;
 
         case CS_MISC_PLAYER_FORM_DEKU:
-            gSaveContext.save.playerForm = PLAYER_FORM_DEKU;
+            gMmSave.playerForm = PLAYER_FORM_DEKU;
             break;
 
         case CS_MISC_ENABLE_PLAYER_REFLECTION:
@@ -307,8 +307,8 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
 
         case CS_MISC_PLAYER_FORM_HUMAN:
             sCutsceneStoredPlayerForm = GET_PLAYER_FORM;
-            gSaveContext.save.playerForm = PLAYER_FORM_HUMAN;
-            gSaveContext.save.equippedMask = PLAYER_MASK_NONE;
+            gMmSave.playerForm = PLAYER_FORM_HUMAN;
+            gMmSave.equippedMask = PLAYER_MASK_NONE;
             break;
 
         case CS_MISC_EARTHQUAKE_STRONG:
@@ -337,7 +337,7 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             break;
 
         case CS_MISC_PLAYER_FORM_RESTORED:
-            gSaveContext.save.playerForm = sCutsceneStoredPlayerForm;
+            gMmSave.playerForm = sCutsceneStoredPlayerForm;
             break;
 
         case CS_MISC_DISABLE_PLAYER_CSACTION_START_POS:
@@ -365,8 +365,8 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
                 D_801BB15C = csCtx->curFrame;
 
                 if (R_TIME_SPEED != 0) {
-                    gSaveContext.save.time = CURRENT_TIME + (u16)R_TIME_SPEED;
-                    gSaveContext.save.time = CURRENT_TIME + (u16)((void)0, gSaveContext.save.timeSpeedOffset);
+                    gMmSave.time = CURRENT_TIME + (u16)R_TIME_SPEED;
+                    gMmSave.time = CURRENT_TIME + (u16)((void)0, gMmSave.timeSpeedOffset);
                 }
             }
             break;
@@ -382,7 +382,7 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             break;
 
         case CS_MISC_DAWN_OF_A_NEW_DAY:
-            gSaveContext.save.day = 9; // 9 % 5 is day number 4, see `CURRENT_DAY`
+            gMmSave.day = 9; // 9 % 5 is day number 4, see `CURRENT_DAY`
 
             STOP_GAMESTATE(&play->state);
             SET_NEXT_GAMESTATE(&play->state, DayTelop_Init, sizeof(DayTelopState));
@@ -391,7 +391,7 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             break;
 
         case CS_MISC_PLAYER_FORM_ZORA:
-            gSaveContext.save.playerForm = PLAYER_FORM_ZORA;
+            gMmSave.playerForm = PLAYER_FORM_ZORA;
             break;
 
         case CS_MISC_FINALE:
@@ -461,7 +461,7 @@ void CutsceneCmd_ModifySequence(PlayState* play, CutsceneContext* csCtx, CsCmdMo
     u8 dayMinusOne;
 
     if (csCtx->curFrame == cmd->startFrame) {
-        dayMinusOne = gSaveContext.save.day - 1;
+        dayMinusOne = gMmSave.day - 1;
         if (dayMinusOne >= 3) {
             dayMinusOne = 0;
         }
@@ -565,7 +565,7 @@ void CutsceneCmd_SetTime(PlayState* play, CutsceneContext* csCtx, CsCmdTime* cmd
         hourAsMinutes = CLOCK_TIME_ALT_F(cmd->hour, 0);
         minutes = CLOCK_TIME_ALT_F(0, cmd->minute + 1);
 
-        gSaveContext.save.time = hourAsMinutes + minutes;
+        gMmSave.time = hourAsMinutes + minutes;
         gSaveContext.skyboxTime = hourAsMinutes + minutes;
     }
 }
@@ -583,7 +583,7 @@ void CutsceneCmd_DestinationDefault(PlayState* play, CutsceneContext* csCtx, CsC
         gSaveContext.hudVisibilityForceButtonAlphasByStatus = true;
     }
 
-    gSaveContext.save.cutsceneIndex = 0;
+    gMmSave.cutsceneIndex = 0;
 
     if (cmd->type == CS_DESTINATION_DEFAULT) {
         play->nextEntrance = play->csCtx.scriptList[play->csCtx.scriptIndex].nextEntrance;
@@ -809,7 +809,7 @@ void CutsceneCmd_GiveTatlToPlayer(PlayState* play, CutsceneContext* csCtx, CsCmd
 
     if (csCtx->curFrame == cmd->startFrame) {
         if (cmd->giveTatl == true) {
-            gSaveContext.save.hasTatl = true;
+            gMmSave.hasTatl = true;
             if (player->tatlActor != NULL) {
                 return;
             }
@@ -1448,7 +1448,7 @@ void Cutscene_ProcessScript(PlayState* play, CutsceneContext* csCtx, u8* script)
 /* End of command handling section */
 
 void CutsceneHandler_RunScript(PlayState* play, CutsceneContext* csCtx) {
-    if (gSaveContext.save.cutsceneIndex >= 0xFFF0) {
+    if (gMmSave.cutsceneIndex >= 0xFFF0) {
         csCtx->curFrame++;
         Cutscene_ProcessScript(play, csCtx, (u8*)play->csCtx.script);
     }
@@ -1471,7 +1471,7 @@ void CutsceneHandler_StopScript(PlayState* play, CutsceneContext* csCtx) {
             csCtx->actorCues[i] = NULL;
         }
 
-        gSaveContext.save.cutsceneIndex = 0;
+        gMmSave.cutsceneIndex = 0;
         gSaveContext.gameMode = GAMEMODE_NORMAL;
 
         CutsceneManager_Stop(CS_ID_GLOBAL_END);
@@ -1482,10 +1482,10 @@ void CutsceneHandler_StopScript(PlayState* play, CutsceneContext* csCtx) {
 
 void Cutscene_SetupScripted(PlayState* play, CutsceneContext* csCtx) {
     if ((gSaveContext.cutsceneTrigger != 0) && (csCtx->state == CS_STATE_IDLE) && !Player_InCsMode(play)) {
-        gSaveContext.save.cutsceneIndex = 0xFFFD;
+        gMmSave.cutsceneIndex = 0xFFFD;
     }
 
-    if ((gSaveContext.save.cutsceneIndex >= 0xFFF0) && (csCtx->state == CS_STATE_IDLE)) {
+    if ((gMmSave.cutsceneIndex >= 0xFFF0) && (csCtx->state == CS_STATE_IDLE)) {
         s16 i;
 
         sCurTextId = 0;
@@ -1562,7 +1562,7 @@ void Cutscene_HandleEntranceTriggers(PlayState* play) {
     if ((gSaveContext.respawnFlag == 0) || (gSaveContext.respawnFlag == -2)) {
         scene = play->loadedScene;
         if ((scene->titleTextId != 0) && gSaveContext.showTitleCard) {
-            if ((Entrance_GetTransitionFlags(((void)0, gSaveContext.save.entrance) +
+            if ((Entrance_GetTransitionFlags(((void)0, gMmSave.entrance) +
                                              ((void)0, gSaveContext.sceneLayer)) &
                  0x4000) != 0) {
                 Message_DisplaySceneTitleCard(play, scene->titleTextId);

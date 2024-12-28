@@ -218,7 +218,7 @@ MsgScript* DmTag_GetMsgScript(DmTag* this, PlayState* play) {
         case 1:
             time = SCRIPT_TIME_NOW;
             if ((time >= SCRIPT_TIME(21, 30)) && (time < SCRIPT_TIME(23, 0))) {
-                if (gSaveContext.save.day == 2) {
+                if (gMmSave.day == 2) {
                     this->msgScriptCallback = func_80C227E8;
                     return D_80C22BF0;
                 }

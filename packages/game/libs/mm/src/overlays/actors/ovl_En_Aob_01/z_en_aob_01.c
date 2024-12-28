@@ -124,8 +124,8 @@ void EnAob01_Blink(EnAob01* this, s32 maxEyeIndex) {
  * Called every frame during the race in order to make in-game time pass.
  */
 void EnAob01_AdvanceTime(void) {
-    gSaveContext.save.time = CURRENT_TIME + (u16)R_TIME_SPEED;
-    gSaveContext.save.time = CURRENT_TIME + (u16)((void)0, gSaveContext.save.timeSpeedOffset);
+    gMmSave.time = CURRENT_TIME + (u16)R_TIME_SPEED;
+    gMmSave.time = CURRENT_TIME + (u16)((void)0, gMmSave.timeSpeedOffset);
 }
 
 /**
@@ -271,9 +271,9 @@ void EnAob01_BeforeRace_HandleConversation(EnAob01* this, PlayState* play) {
         case 0x3548: // I can't let you play. (Goron)
         case 0x3549: // I can't let you play. (Zora)
         case 0x354A: // I can't let you play. (Deku)
-            switch (gSaveContext.save.day) {
+            switch (gMmSave.day) {
                 case 1:
-                    if (!gSaveContext.save.isNight) {
+                    if (!gMmSave.isNight) {
                         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_TALKED_DOGGY_RACETRACK_OWNER_DAY_1)) {
                             SET_WEEKEVENTREG(WEEKEVENTREG_TALKED_DOGGY_RACETRACK_OWNER_DAY_1);
                             this->textId = 0x3520; // This is the Doggy Racetrack. (Day 1)
@@ -291,7 +291,7 @@ void EnAob01_BeforeRace_HandleConversation(EnAob01* this, PlayState* play) {
                     break;
 
                 case 2:
-                    if (!gSaveContext.save.isNight) {
+                    if (!gMmSave.isNight) {
                         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_TALKED_DOGGY_RACETRACK_OWNER_DAY_2)) {
                             SET_WEEKEVENTREG(WEEKEVENTREG_TALKED_DOGGY_RACETRACK_OWNER_DAY_2);
                             this->textId = 0x3531; // This is the Doggy Racetrack. (Day 2)
@@ -309,7 +309,7 @@ void EnAob01_BeforeRace_HandleConversation(EnAob01* this, PlayState* play) {
                     break;
 
                 case 3:
-                    if (!gSaveContext.save.isNight) {
+                    if (!gMmSave.isNight) {
                         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_TALKED_DOGGY_RACETRACK_OWNER_DAY_3)) {
                             SET_WEEKEVENTREG(WEEKEVENTREG_TALKED_DOGGY_RACETRACK_OWNER_DAY_3);
                             this->textId = 0x3533; // This is the Doggy Racetrack. (Day 3)
@@ -359,7 +359,7 @@ void EnAob01_BeforeRace_HandleConversation(EnAob01* this, PlayState* play) {
                         break;
 
                     case PLAYER_FORM_HUMAN:
-                        if (gSaveContext.save.saveInfo.playerData.rupees < 10) {
+                        if (gMmSave.saveInfo.playerData.rupees < 10) {
                             this->textId = 0x3524; // You can't play if you can't pay!
                             this->stateFlags |= ENAOB01_FLAG_CONVERSATION_OVER;
                         } else {
@@ -424,7 +424,7 @@ void EnAob01_BeforeRace_HandleConversation(EnAob01* this, PlayState* play) {
             break;
 
         case 0x3528: // How much will you bet?
-            if (gSaveContext.save.saveInfo.playerData.rupees < this->rupeesBet) {
+            if (gMmSave.saveInfo.playerData.rupees < this->rupeesBet) {
                 this->textId = 0x3536; // You don't have enough rupees for that bet.
                 this->stateFlags |= ENAOB01_FLAG_LAUGH;
                 this->animIndex = EN_AOB01_ANIM_LAUGH_START;
@@ -497,7 +497,7 @@ void EnAob01_BeforeRace_RespondToPlayAgainQuestion(EnAob01* this, PlayState* pla
         if (Message_ShouldAdvance(play)) {
             switch (play->msgCtx.choiceIndex) {
                 case 0:
-                    if (gSaveContext.save.saveInfo.playerData.rupees < 10) {
+                    if (gMmSave.saveInfo.playerData.rupees < 10) {
                         Audio_PlaySfx(NA_SE_SY_ERROR);
                         this->textId = 0x3524; // You can't play if you can't pay!
                         Message_StartTextbox(play, this->textId, &this->actor);

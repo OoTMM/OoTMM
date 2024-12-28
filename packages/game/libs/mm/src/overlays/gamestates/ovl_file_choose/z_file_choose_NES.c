@@ -2199,7 +2199,7 @@ void FileSelect_LoadGame(GameState* thisx) {
     gSaveContext.hudVisibility = HUD_VISIBILITY_IDLE;
     gSaveContext.hudVisibilityTimer = 0;
 
-    gSaveContext.save.saveInfo.playerData.tatlTimer = 0;
+    gMmSave.saveInfo.playerData.tatlTimer = 0;
 }
 
 void (*sSelectModeUpdateFuncs[])(GameState*) = {
@@ -2472,7 +2472,7 @@ void FileSelect_InitContext(GameState* thisx) {
     ShrinkWindow_Letterbox_SetSizeTarget(0);
 
     gSaveContext.skyboxTime = 0;
-    gSaveContext.save.time = CLOCK_TIME(0, 0);
+    gMmSave.time = CLOCK_TIME(0, 0);
 
     Skybox_Init(&this->state, &this->skyboxCtx, 1);
     R_TIME_SPEED = 10;

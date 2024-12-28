@@ -347,7 +347,7 @@ void EnKakasi_SetupIdleStanding(EnKakasi* this) {
 }
 
 void EnKakasi_IdleStanding(EnKakasi* this, PlayState* play) {
-    u32 day = gSaveContext.save.day;
+    u32 day = gMmSave.day;
     s16 screenPosX;
     s16 screenPosY;
 
@@ -376,7 +376,7 @@ void EnKakasi_IdleStanding(EnKakasi* this, PlayState* play) {
             EnKakasi_ChangeAnim(this, ENKAKASI_ANIM_SIDEWAYS_SHAKING);
             this->skelAnime.playSpeed = 2.0f;
         }
-    } else if ((day == 3) && gSaveContext.save.isNight) {
+    } else if ((day == 3) && gMmSave.isNight) {
         this->skelAnime.playSpeed = 1.0f;
         if (this->animIndex != ENKAKASI_ANIM_SIDEWAYS_SHAKING) {
             EnKakasi_ChangeAnim(this, ENKAKASI_ANIM_SIDEWAYS_SHAKING);
@@ -403,7 +403,7 @@ void EnKakasi_SetupDialogue(EnKakasi* this) {
 }
 
 void EnKakasi_RegularDialogue(EnKakasi* this, PlayState* play) {
-    u32 day = gSaveContext.save.day;
+    u32 day = gMmSave.day;
     f32 curFrame = this->skelAnime.curFrame;
 
     Math_SmoothStepToS(&this->picto.actor.shape.rot.y, this->picto.actor.yawTowardsPlayer, 5, 0x7D0, 0);
@@ -441,16 +441,16 @@ void EnKakasi_RegularDialogue(EnKakasi* this, PlayState* play) {
 
             // after timeskip
             if (this->picto.actor.textId == 0x1653) {
-                u32 saveContextDay2 = gSaveContext.save.day;
+                u32 saveContextDay2 = gMmSave.day;
 
                 if (this->animIndex != ENKAKASI_ANIM_SIDEWAYS_SHAKING) {
                     EnKakasi_ChangeAnim(this, ENKAKASI_ANIM_SIDEWAYS_SHAKING);
                 }
 
-                if ((saveContextDay2 == 3) && gSaveContext.save.isNight) {
+                if ((saveContextDay2 == 3) && gMmSave.isNight) {
                     // text: dangerous outside
                     this->picto.actor.textId = 0x164F;
-                } else if (gSaveContext.save.isNight) {
+                } else if (gMmSave.isNight) {
                     // text: would you like to skip time?
                     this->picto.actor.textId = 0x164E;
                 } else {
@@ -491,7 +491,7 @@ void EnKakasi_RegularDialogue(EnKakasi* this, PlayState* play) {
                 if (this->animIndex != ENKAKASI_ANIM_SIDEWAYS_SHAKING) {
                     EnKakasi_ChangeAnim(this, ENKAKASI_ANIM_SIDEWAYS_SHAKING);
                 }
-                if (gSaveContext.save.isNight) {
+                if (gMmSave.isNight) {
                     this->picto.actor.textId = 0x164E;
                 } else {
                     this->picto.actor.textId = 0x1645;
@@ -535,7 +535,7 @@ void EnKakasi_RegularDialogue(EnKakasi* this, PlayState* play) {
                     this->picto.actor.textId = 0x1658;
                 } else if (this->picto.actor.textId == 0x165C) {
                     this->picto.actor.textId = 0x165E;
-                } else if ((day == 3) && gSaveContext.save.isNight) {
+                } else if ((day == 3) && gMmSave.isNight) {
                     this->picto.actor.textId = 0x164F;
                 } else {
                     this->picto.actor.textId = 0x1652;
@@ -803,7 +803,7 @@ void EnKakasi_PostSongLearnDialogue(EnKakasi* this, PlayState* play) {
  * talking before dancing the night away, and cutscene setup
  */
 void EnKakasi_DancingRemark(EnKakasi* this, PlayState* play) {
-    u32 currentDay = gSaveContext.save.day;
+    u32 currentDay = gMmSave.day;
 
     this->unkState196 = 3;
     if (CutsceneManager_GetCurrentCsId() == CS_ID_GLOBAL_TALK) {
@@ -814,7 +814,7 @@ void EnKakasi_DancingRemark(EnKakasi* this, PlayState* play) {
     } else {
         CutsceneManager_StartWithPlayerCs(this->csIdList[0], &this->picto.actor);
         this->subCamId = CutsceneManager_GetCurrentSubCamId(this->picto.actor.csId);
-        if ((currentDay == 3) && gSaveContext.save.isNight) {
+        if ((currentDay == 3) && gMmSave.isNight) {
             EnKakasi_SetupDigAway(this);
         } else {
             Audio_PlaySubBgm(NA_BGM_SARIAS_SONG);
@@ -957,11 +957,11 @@ void EnKakasi_DancingNightAway(EnKakasi* this, PlayState* play) {
                 func_80169EFC(play);
 
                 if ((CURRENT_TIME > CLOCK_TIME(18, 0)) || (CURRENT_TIME < CLOCK_TIME(6, 0))) {
-                    gSaveContext.save.time = CLOCK_TIME(6, 0);
+                    gMmSave.time = CLOCK_TIME(6, 0);
                     gSaveContext.respawnFlag = -4;
                     SET_EVENTINF(EVENTINF_TRIGGER_DAYTELOP);
                 } else {
-                    gSaveContext.save.time = CLOCK_TIME(18, 0);
+                    gMmSave.time = CLOCK_TIME(18, 0);
                     gSaveContext.respawnFlag = -8;
                 }
                 SET_WEEKEVENTREG(WEEKEVENTREG_83_01);

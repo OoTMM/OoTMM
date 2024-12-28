@@ -389,7 +389,7 @@ void EnBji01_Init(Actor* thisx, PlayState* play) {
     SubS_FillCutscenesList(&this->actor, this->csIdList, ARRAY_COUNT(this->csIdList));
     this->moonsTear = (ObjMoonStone*)SubS_FindActor(play, NULL, ACTORCAT_PROP, ACTOR_OBJ_MOON_STONE);
 
-    switch (gSaveContext.save.entrance) {
+    switch (gMmSave.entrance) {
         case ENTRANCE(ASTRAL_OBSERVATORY, 0): /* ECT entrance*/
         case ENTRANCE(ASTRAL_OBSERVATORY, 1): /* TF door entrance */
             this->actor.params = SHIKASHI_TYPE_DEFAULT;

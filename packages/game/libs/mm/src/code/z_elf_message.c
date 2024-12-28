@@ -50,7 +50,7 @@ u16 QuestHint_GetTatlTextId(PlayState* play) {
         return 0x21D;
     }
 
-    if (gSaveContext.save.saveInfo.playerData.isMagicAcquired != true) {
+    if (gMmSave.saveInfo.playerData.isMagicAcquired != true) {
         return 0x21F;
     }
 

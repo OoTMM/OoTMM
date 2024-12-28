@@ -952,7 +952,7 @@ void func_80AF8BA8(s32 arg0) {
 
     if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_88_02)) {
         if (CHECK_WEEKEVENTREG(D_80AFB8D4[arg0])) {
-            switch (gSaveContext.save.day) {
+            switch (gMmSave.day) {
                 case 2:
                     SET_WEEKEVENTREG(WEEKEVENTREG_28_08);
                     break;
@@ -1831,11 +1831,11 @@ void func_80AFA4D0(EnPm* this, PlayState* play) {
     u16 sp3C = 0;
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
     if (this->unk_38C != 0) {
         time = CURRENT_TIME - D_801F4E78;
         sp3C = CURRENT_TIME;
-        gSaveContext.save.time = time;
+        gMmSave.time = time;
     }
 
     if (!Schedule_RunScript(play, D_80AFB900[this->unk_38C], &scheduleOutput) ||
@@ -1852,7 +1852,7 @@ void func_80AFA4D0(EnPm* this, PlayState* play) {
     this->unk_268 = func_80AF8040(this, play);
     func_80AFA438(this, play);
     if (this->unk_38C != 0) {
-        gSaveContext.save.time = sp3C;
+        gMmSave.time = sp3C;
     }
 }
 

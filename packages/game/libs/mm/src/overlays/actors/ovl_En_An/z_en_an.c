@@ -1735,7 +1735,7 @@ MsgScript* EnAn_GetMsgScript(EnAn* this, PlayState* play) {
             return sAnjuMsgScript_SchLaundryPoolKafeiMask;
         }
 
-        if (gSaveContext.save.day >= 2) {
+        if (gMmSave.day >= 2) {
             return sAnjuMsgScript_80B58A44;
         }
 
@@ -1757,7 +1757,7 @@ MsgScript* EnAn_GetMsgScript(EnAn* this, PlayState* play) {
             return sAnjuMsgScript_SchLaundryPoolDefault;
         }
 
-        if (gSaveContext.save.day >= 2) {
+        if (gMmSave.day >= 2) {
             return sAnjuMsgScript_80B58A44;
         }
     }
@@ -1780,7 +1780,7 @@ MsgScript* EnAn_GetMsgScript(EnAn* this, PlayState* play) {
             return sAnjuMsgScript_SchLaundryPoolDefault;
 
         case ANJU_SCH_RECEPTIONIST_IDLE:
-            if (gSaveContext.save.day >= 2) {
+            if (gMmSave.day >= 2) {
                 return sAnjuMsgScript_Receptionist;
             }
             return sAnjuMsgScript_ReceptionistDay1;
@@ -3264,7 +3264,7 @@ void EnAn_FinishInit(EnAn* this, PlayState* play) {
 void EnAn_FollowSchedule(EnAn* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
 
     if (!ENAN_GET_8000(&this->actor) && !this->unk_3C0 &&
         CHECK_WEEKEVENTREG(WEEKEVENTREG_COUPLES_MASK_CUTSCENE_FINISHED)) {

@@ -3,9 +3,15 @@
 
 #include <ultra64.h>
 
+#if defined(__MM__)
+typedef struct Vec2f {
+    f32 x, z;
+} Vec2f; // size = 0x08
+#else
 typedef struct Vec2f {
     f32 x, y;
 } Vec2f; // size = 0x08
+#endif
 
 typedef struct Vec3f {
     f32 x, y, z;

@@ -115,10 +115,10 @@ void EnDaiku_Init(Actor* thisx, PlayState* play) {
         this->collider.dim.yShift = 0;
         this->actor.flags |= ACTOR_FLAG_LOCK_ON_DISABLED;
         if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RESOLVED_MAYOR_MEETING) ||
-            ((gSaveContext.save.day == 3) && gSaveContext.save.isNight)) {
+            ((gMmSave.day == 3) && gMmSave.isNight)) {
             Actor_Kill(&this->actor);
         }
-    } else if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+    } else if ((gMmSave.day == 3) && gMmSave.isNight) {
         Actor_Kill(&this->actor);
     }
 
@@ -173,7 +173,7 @@ void func_809437C8(EnDaiku* this) {
 }
 
 void func_80943820(EnDaiku* this) {
-    s32 day = gSaveContext.save.day - 1;
+    s32 day = gMmSave.day - 1;
 
     switch (this->unk_278) {
         case 0:
@@ -203,7 +203,7 @@ void func_80943820(EnDaiku* this) {
 void func_809438F8(EnDaiku* this, PlayState* play) {
     f32 curFrame = this->skelAnime.curFrame;
     s32 pad;
-    s32 day = gSaveContext.save.day - 1;
+    s32 day = gMmSave.day - 1;
     s32 pad2;
 
     if (Player_GetMask(play) == PLAYER_MASK_KAFEIS_MASK) {
@@ -293,7 +293,7 @@ void EnDaiku_Update(Actor* thisx, PlayState* play) {
         SkelAnime_Update(&this->skelAnime);
     }
 
-    if ((this->unk_278 == ENDAIKU_PARAM_FF_0) && (gSaveContext.save.day == 3) && (gSaveContext.save.isNight)) {
+    if ((this->unk_278 == ENDAIKU_PARAM_FF_0) && (gMmSave.day == 3) && (gMmSave.isNight)) {
         Actor_Kill(&this->actor);
         return;
     }

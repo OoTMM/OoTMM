@@ -421,7 +421,7 @@ void func_80ADB544(EnSellnuts* this, PlayState* play) {
                this->actor.isLockedOn) {
         Actor_OfferTalkExchangeEquiCylinder(&this->actor, play, 80.0f, PLAYER_IA_MOONS_TEAR);
         if (player->transformation == PLAYER_FORM_DEKU) {
-            if (gSaveContext.save.day == 3) {
+            if (gMmSave.day == 3) {
                 this->unk_33A = 2;
                 if (CHECK_WEEKEVENTREG(WEEKEVENTREG_77_40)) {
                     this->unk_340 = D_80ADD918[this->unk_33A];
@@ -761,7 +761,7 @@ void func_80ADC6D0(EnSellnuts* this, PlayState* play) {
         play->msgCtx.msgMode = MSGMODE_TEXT_CLOSING;
         play->msgCtx.stateTimer = 4;
         if (player->transformation == PLAYER_FORM_DEKU) {
-            if (gSaveContext.save.day == 3) {
+            if (gMmSave.day == 3) {
                 this->unk_33A = 2;
             } else {
                 this->unk_33A = 1;
@@ -1017,7 +1017,7 @@ void EnSellnuts_Init(Actor* thisx, PlayState* play) {
         this->unk_338 |= 2;
         this->unk_338 |= 1;
         if (player->transformation == PLAYER_FORM_DEKU) {
-            if (gSaveContext.save.day == 3) {
+            if (gMmSave.day == 3) {
                 this->unk_33A = 2;
             } else {
                 this->unk_33A = 1;
@@ -1075,7 +1075,7 @@ void EnSellnuts_Update(Actor* thisx, PlayState* play) {
 
     this->unk_328++;
     if (player->transformation == PLAYER_FORM_DEKU) {
-        if (gSaveContext.save.day == 3) {
+        if (gMmSave.day == 3) {
             this->unk_33A = 2;
         } else {
             this->unk_33A = 1;
