@@ -783,7 +783,6 @@ void Fault_ThreadEntry(void* arg0) {
         }
         Fault_SleepImpl(500);
         Fault_DrawCornerRecRed();
-        Fault_WaitForButtonCombo();
         do {
             func_800AF558();
             Fault_PrintThreadContext(faultedThread);
@@ -831,7 +830,6 @@ NORETURN void Fault_AddHungupAndCrashImpl(const char* exp1, const char* exp2) {
         Fault_SleepImpl(1000);
     }
     Fault_SleepImpl(500);
-    Fault_WaitForButtonCombo();
     do {
         func_800AF558();
         Fault_DrawRecBlack(22, 16, 276, 34);

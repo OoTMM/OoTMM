@@ -55,7 +55,7 @@ N64_EMULATOR ?=
 # This may also be used to disable debug features on debug ROMs by setting DEBUG_FEATURES to 0
 # DEBUG_FEATURES ?= 1
 
-CFLAGS ?=
+CFLAGS ?= -MMD
 CPPFLAGS ?=
 CPP_DEFINES ?= -D__OOT__
 
@@ -374,6 +374,8 @@ SEQUENCE_TABLE := include/tables/sequence_table.h
 # create extracted directory
 $(shell mkdir -p $(EXTRACTED_DIR))
 
+# Include dependencies
+
 ifneq ($(wildcard $(EXTRACTED_DIR)/assets),)
   ASSET_BIN_DIRS_EXTRACTED := $(shell find $(EXTRACTED_DIR)/assets -type d)
 else
@@ -408,7 +410,7 @@ OVL_RELOC_FILES := $(shell $(CPP) $(CPPFLAGS) $(SPEC) | $(BUILD_DIR_REPLACE) | g
 
 # Automatic dependency files
 # (Only asm_processor dependencies and reloc dependencies are handled for now)
-DEP_FILES := $(O_FILES:.o=.asmproc.d) $(OVL_RELOC_FILES:.o=.d)
+DEP_FILES := $(shell find $(BUILD_DIR) -name '*.d')
 
 
 TEXTURE_FILES_PNG_EXTRACTED := $(foreach dir,$(ASSET_BIN_DIRS_EXTRACTED),$(wildcard $(dir)/*.png))
