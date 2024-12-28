@@ -32,7 +32,7 @@ void DmTsg_Init(Actor* thisx, PlayState* play) {
     DmTsg* this = THIS;
     s32 i;
 
-    if (gSaveContext.save.entrance == ENTRANCE(OPENING_DUNGEON, 0)) {
+    if (gMmSave.entrance == ENTRANCE(OPENING_DUNGEON, 0)) {
         Actor_SetScale(&this->actor, 0.1f);
         for (i = 0; i < DMTSG_UNK_SIZE; i++) {
             this->unk_78C[i] = Rand_ZeroOne() * 0xFFFF;

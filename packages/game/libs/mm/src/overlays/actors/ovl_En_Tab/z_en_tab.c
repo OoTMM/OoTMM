@@ -483,7 +483,7 @@ MsgScript* EnTab_GetMsgScript(EnTab* this, PlayState* play) {
                 return D_80BE1998;
             }
 
-            if (gSaveContext.save.day == 3) {
+            if (gMmSave.day == 3) {
                 return D_80BE1A0C;
             }
             return D_80BE19A0;
@@ -614,7 +614,7 @@ void func_80BE1224(EnTab* this, PlayState* play) {
 void func_80BE127C(EnTab* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->unk_31A = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->unk_31A = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
 
     if (!Schedule_RunScript(play, D_80BE18D0, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) && !func_80BE1060(this, play, &scheduleOutput))) {

@@ -64,7 +64,7 @@ void EnSekihi_Init(Actor* thisx, PlayState* play) {
     }
 
     if ((type == SEKIHI_TYPE_4) &&
-        ((gSaveContext.save.saveInfo.skullTokenCount & 0xFFFF) >= SPIDER_HOUSE_TOKENS_REQUIRED)) {
+        ((gMmSave.saveInfo.skullTokenCount & 0xFFFF) >= SPIDER_HOUSE_TOKENS_REQUIRED)) {
         // For some reason the mikau grave sets the flag instead of something in the spider house on exit.
         SET_WEEKEVENTREG(WEEKEVENTREG_OCEANSIDE_SPIDER_HOUSE_BUYER_MOVED_IN);
     }

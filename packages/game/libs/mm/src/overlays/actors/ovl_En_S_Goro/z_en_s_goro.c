@@ -520,7 +520,7 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                 case PLAYER_FORM_GORON:
                     // Check if Powder Keg is in Powder Key slot.
                     if (INV_CONTENT(ITEM_POWDER_KEG) == ITEM_POWDER_KEG) {
-                        if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+                        if ((gMmSave.day == 3) && gMmSave.isNight) {
                             if (!(this->bombbuyFlags & EN_S_GORO_BOMBBUYFLAG_TALKED_GOROKPK_FINALNIGHT)) {
                                 this->bombbuyFlags |= EN_S_GORO_BOMBBUYFLAG_TALKED_GOROKPK_FINALNIGHT;
                                 this->actionFlags |= EN_S_GORO_ACTIONFLAG_HANDTAP;
@@ -537,7 +537,7 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                     }
 
                     // No powder keg
-                    if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+                    if ((gMmSave.day == 3) && gMmSave.isNight) {
                         if (!(this->bombbuyFlags & EN_S_GORO_BOMBBUYFLAG_TALKED_GORON_FINALNIGHT)) {
                             this->bombbuyFlags |= EN_S_GORO_BOMBBUYFLAG_TALKED_GORON_FINALNIGHT;
                             this->actionFlags |= EN_S_GORO_ACTIONFLAG_HANDTAP;
@@ -553,7 +553,7 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                     return 0x681;
 
                 case PLAYER_FORM_ZORA:
-                    if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+                    if ((gMmSave.day == 3) && gMmSave.isNight) {
                         if (!(this->bombbuyFlags & EN_S_GORO_BOMBBUYFLAG_TALKED_ZORA_FINALNIGHT)) {
                             this->bombbuyFlags |= EN_S_GORO_BOMBBUYFLAG_TALKED_ZORA_FINALNIGHT;
                             return 0x668;
@@ -571,7 +571,7 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                     return 0x66C;
 
                 case PLAYER_FORM_DEKU:
-                    if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+                    if ((gMmSave.day == 3) && gMmSave.isNight) {
                         if (!(this->bombbuyFlags & EN_S_GORO_BOMBBUYFLAG_TALKED_DEKU_FINALNIGHT)) {
                             this->bombbuyFlags |= EN_S_GORO_BOMBBUYFLAG_TALKED_DEKU_FINALNIGHT;
                             return 0x668;
@@ -587,7 +587,7 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                     return 0x66C;
 
                 case PLAYER_FORM_HUMAN:
-                    if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+                    if ((gMmSave.day == 3) && gMmSave.isNight) {
                         if (!(this->bombbuyFlags & EN_S_GORO_BOMBBUYFLAG_TALKED_HUMAN_FINALNIGHT)) {
                             this->bombbuyFlags |= EN_S_GORO_BOMBBUYFLAG_TALKED_HUMAN_FINALNIGHT;
                             return 0x668;
@@ -681,13 +681,13 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                     return 0x673;
                 }
                 this->powderKegPrice = play->msgCtx.unk1206C;
-                if (gSaveContext.save.saveInfo.playerData.rupees < this->powderKegPrice) {
+                if (gMmSave.saveInfo.playerData.rupees < this->powderKegPrice) {
                     this->actionFlags |= EN_S_GORO_ACTIONFLAG_LASTMESSAGE;
                     this->actionFlags |= EN_S_GORO_ACTIONFLAG_TIRED;
                     Audio_PlaySfx(NA_SE_SY_ERROR);
                     return 0x674;
                 }
-                if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+                if ((gMmSave.day == 3) && gMmSave.isNight) {
                     this->actionFlags |= EN_S_GORO_ACTIONFLAG_LASTMESSAGE;
                     Audio_PlaySfx_MessageDecide();
                     return 0x676;
@@ -696,7 +696,7 @@ u16 EnSGoro_BombshopGoron_NextTextId(EnSGoro* this, PlayState* play) {
                 Audio_PlaySfx_MessageDecide();
                 return 0x675;
             }
-            if ((gSaveContext.save.day == 3) && gSaveContext.save.isNight) {
+            if ((gMmSave.day == 3) && gMmSave.isNight) {
                 this->actionFlags |= EN_S_GORO_ACTIONFLAG_LASTMESSAGE;
                 return 0x672;
             }

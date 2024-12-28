@@ -373,7 +373,7 @@ void func_80BC2150(EnJa* this, PlayState* play) {
 void func_80BC21A8(EnJa* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->unk_35C = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->unk_35C = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
     if (!Schedule_RunScript(play, D_80BC35F0, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) && !func_80BC20D0(this, play, &scheduleOutput))) {
         this->actor.shape.shadowDraw = NULL;

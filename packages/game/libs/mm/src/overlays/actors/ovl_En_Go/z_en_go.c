@@ -2168,8 +2168,8 @@ void EnGo_ChangeToShiveringAnimation(EnGo* this, PlayState* play) {
  * Stretching Gorons placed in the starting area of the racetrack doing various stretches.
  */
 void EnGo_SetupAthletic(EnGo* this, PlayState* play) {
-    if (((gSaveContext.save.entrance == ENTRANCE(GORON_RACETRACK, 0)) ||
-         (gSaveContext.save.entrance == ENTRANCE(GORON_RACETRACK, 2))) &&
+    if (((gMmSave.entrance == ENTRANCE(GORON_RACETRACK, 0)) ||
+         (gMmSave.entrance == ENTRANCE(GORON_RACETRACK, 2))) &&
         CHECK_WEEKEVENTREG(WEEKEVENTREG_CLEARED_SNOWHEAD_TEMPLE)) {
         EnGo_ChangeToStretchingAnimation(this, play);
         this->actionFunc = EnGo_Idle;
@@ -2184,8 +2184,8 @@ void EnGo_SetupAthletic(EnGo* this, PlayState* play) {
  * Spectators to the Goron races cannot be engaged, they simply stand idle and cheer.
  */
 void EnGo_SetupSpectator(EnGo* this, PlayState* play) {
-    if ((gSaveContext.save.entrance == ENTRANCE(GORON_RACETRACK, 1)) ||
-        (gSaveContext.save.entrance == ENTRANCE(CUTSCENE, 0))) {
+    if ((gMmSave.entrance == ENTRANCE(GORON_RACETRACK, 1)) ||
+        (gMmSave.entrance == ENTRANCE(CUTSCENE, 0))) {
         EnGo_ChangeToSpectatingAnimation(this, play);
         this->actionFunc = EnGo_Idle;
     } else {
@@ -2201,7 +2201,7 @@ void EnGo_SetupSpectator(EnGo* this, PlayState* play) {
  * - On Days 2,3: Can be found in a snowball.
  */
 void EnGo_SetupGatekeeper(EnGo* this, PlayState* play) {
-    if (gSaveContext.save.day >= 2) {
+    if (gMmSave.day >= 2) {
         this->gatekeeperPath = SubS_GetDayDependentPath(play, ENGO_GET_PATH_INDEX(&this->actor), ENGO_PATH_INDEX_NONE,
                                                         &this->indexPathPoint);
         if (this->gatekeeperPath != NULL) {
@@ -2347,7 +2347,7 @@ void EnGo_Idle(EnGo* this, PlayState* play) {
     s16 targetRot = this->actor.world.rot.y;
 
     if ((ENGO_GET_TYPE(&this->actor) == ENGO_SPECTATOR) &&
-        (gSaveContext.save.entrance == ENTRANCE(GORON_RACETRACK, 1))) {
+        (gMmSave.entrance == ENTRANCE(GORON_RACETRACK, 1))) {
         // Spectators only cheer. No other interactions
         Actor_PlaySfx(&this->actor, NA_SE_EV_GORON_CHEER - SFX_FLAG);
     } else if (ENGO_GET_TYPE(&this->actor) != ENGO_MEDIGORON) {
@@ -2660,7 +2660,7 @@ void EnGo_Snowball(EnGo* this, PlayState* play) {
         this->actor.speed = 0.0f;
         Actor_PlaySfx(&this->actor, NA_SE_EN_GOLON_COLD);
 
-        if (gSaveContext.save.day == 3) {
+        if (gMmSave.day == 3) {
             EnGo_ChangeToFrozenAnimation(this, play);
             this->actionFunc = EnGo_Frozen;
         } else {

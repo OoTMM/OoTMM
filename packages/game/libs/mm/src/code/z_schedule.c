@@ -148,7 +148,7 @@ s32 Schedule_CheckNotInDayS(PlayState* play, u8** script, ScheduleOutput* output
     ScheduleCmdCheckNotInDayS* cmd = (ScheduleCmdCheckNotInDayS*)*script;
     s16 day = SCRIPT_PACK_16(cmd->dayH, cmd->dayL);
 
-    if (day != (s16)gSaveContext.save.day) {
+    if (day != (s16)gMmSave.day) {
         *script += cmd->offset;
     }
 
@@ -159,7 +159,7 @@ s32 Schedule_CheckNotInDayL(PlayState* play, u8** script, ScheduleOutput* output
     ScheduleCmdCheckNotInDayL* cmd = (ScheduleCmdCheckNotInDayL*)*script;
     s16 day = SCRIPT_PACK_16(cmd->dayH, cmd->dayL);
 
-    if (day != (s16)gSaveContext.save.day) {
+    if (day != (s16)gMmSave.day) {
         *script += (s16)SCRIPT_PACK_16(cmd->offsetH, cmd->offsetL);
     }
 

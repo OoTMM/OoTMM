@@ -498,10 +498,10 @@ void EnElforg_FreeFloating(EnElforg* this, PlayState* play) {
             }
 
             if (Map_IsInDungeonOrBossScene(play)) {
-                gSaveContext.save.saveInfo.inventory.strayFairies[gSaveContext.dungeonSceneSharedIndex]++;
+                gMmSave.saveInfo.inventory.strayFairies[gSaveContext.dungeonSceneSharedIndex]++;
                 // You found a Stray Fairy!
                 Message_StartTextbox(play, 0x11, NULL);
-                if (gSaveContext.save.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] >=
+                if (gMmSave.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex] >=
                     STRAY_FAIRY_SCATTERED_TOTAL) {
                     Audio_PlayFanfare(NA_BGM_GET_ITEM | 0x900);
                 }

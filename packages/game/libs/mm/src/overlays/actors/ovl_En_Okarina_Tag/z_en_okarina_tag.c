@@ -81,7 +81,7 @@ void func_8093E518(EnOkarinaTag* this, PlayState* play) {
     var_v1 = this->unk14A;
     if (var_v1 == 6) {
         var_v1 = 0xA;
-        if (!gSaveContext.save.saveInfo.scarecrowSpawnSongSet) {
+        if (!gMmSave.saveInfo.scarecrowSpawnSongSet) {
             return;
         }
     }

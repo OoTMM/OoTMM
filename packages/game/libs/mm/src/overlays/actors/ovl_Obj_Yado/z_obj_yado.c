@@ -39,7 +39,7 @@ void ObjYado_Init(Actor* thisx, PlayState* play) {
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     D_80C16470 = Lib_SegmentedToVirtual(object_yado_obj_Matanimheader_0012E8);
-    this->isNight = gSaveContext.save.isNight;
+    this->isNight = gMmSave.isNight;
 }
 
 void ObjYado_Destroy(Actor* thisx, PlayState* play) {
@@ -48,7 +48,7 @@ void ObjYado_Destroy(Actor* thisx, PlayState* play) {
 void ObjYado_Update(Actor* thisx, PlayState* play) {
     ObjYado* this = THIS;
 
-    this->isNight = gSaveContext.save.isNight;
+    this->isNight = gMmSave.isNight;
 }
 
 void ObjYado_Draw(Actor* thisx, PlayState* play) {

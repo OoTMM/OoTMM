@@ -78,7 +78,7 @@ void func_80BE61D0(EnDaiku2* this) {
 
 void EnDaiku2_Init(Actor* thisx, PlayState* play) {
     EnDaiku2* this = THIS;
-    s32 day = gSaveContext.save.day;
+    s32 day = gMmSave.day;
 
     this->actor.colChkInfo.mass = MASS_IMMOVABLE;
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 40.0f);
@@ -200,7 +200,7 @@ s32 func_80BE64C0(EnDaiku2* this, PlayState* play) {
 }
 
 void func_80BE65B4(EnDaiku2* this, PlayState* play) {
-    switch (gSaveContext.save.day - 1) {
+    switch (gMmSave.day - 1) {
         case 0:
             this->unk_28A = 0;
             if (CHECK_WEEKEVENTREG(WEEKEVENTREG_64_02)) {
@@ -241,7 +241,7 @@ void func_80BE65B4(EnDaiku2* this, PlayState* play) {
 
 void func_80BE66E4(EnDaiku2* this, PlayState* play) {
     f32 curFrame = this->skelAnime.curFrame;
-    s32 sp98 = gSaveContext.save.day - 1;
+    s32 sp98 = gMmSave.day - 1;
     s32 i;
     Vec3f sp88;
     Vec3f sp7C;
@@ -320,7 +320,7 @@ void func_80BE66E4(EnDaiku2* this, PlayState* play) {
 }
 
 void func_80BE6B40(EnDaiku2* this, PlayState* play) {
-    s32 day = gSaveContext.save.day;
+    s32 day = gMmSave.day;
 
     this->unk_288 = 1;
     if ((day != 3) && Flags_GetSwitch(play, this->switchFlag)) {
@@ -334,7 +334,7 @@ void func_80BE6B40(EnDaiku2* this, PlayState* play) {
 void func_80BE6BC0(EnDaiku2* this, PlayState* play) {
     Math_SmoothStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 1, 0xBB8, 0);
     if ((Message_GetState(&play->msgCtx) == TEXT_STATE_EVENT) && Message_ShouldAdvance(play)) {
-        s32 day = gSaveContext.save.day - 1;
+        s32 day = gMmSave.day - 1;
 
         Message_CloseTextbox(play);
 

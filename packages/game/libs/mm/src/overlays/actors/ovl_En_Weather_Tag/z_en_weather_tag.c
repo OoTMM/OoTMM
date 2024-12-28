@@ -259,7 +259,7 @@ void func_80966BF4(EnWeatherTag* this, PlayState* play) {
     if (Cutscene_IsCueInChannel(play, CS_CMD_ACTOR_CUE_567)) {
         cue = play->csCtx.actorCues[Cutscene_GetCueChannel(play, CS_CMD_ACTOR_CUE_567)];
         if ((play->csCtx.curFrame >= cue->startFrame) && (cue->id >= 2)) {
-            switch (gSaveContext.save.day) {
+            switch (gMmSave.day) {
                 case 0:
                 case 1:
                 default:
@@ -291,7 +291,7 @@ void func_80966BF4(EnWeatherTag* this, PlayState* play) {
 void func_80966D20(EnWeatherTag* this, PlayState* play) {
     u8 lightConfig;
 
-    switch (gSaveContext.save.day) {
+    switch (gMmSave.day) {
         case 0:
         case 1:
         default:
@@ -496,9 +496,9 @@ void EnWeatherTag_Update(Actor* thisx, PlayState* play) {
         (play->transitionTrigger == TRANS_TRIGGER_OFF) && (CutsceneManager_GetCurrentCsId() == CS_ID_NONE) &&
         (play->csCtx.state == CS_STATE_IDLE)) {
 
-        gSaveContext.save.time = CURRENT_TIME + (u16)R_TIME_SPEED;
+        gMmSave.time = CURRENT_TIME + (u16)R_TIME_SPEED;
         if (R_TIME_SPEED != 0) {
-            gSaveContext.save.time = CURRENT_TIME + (u16)((void)0, gSaveContext.save.timeSpeedOffset);
+            gMmSave.time = CURRENT_TIME + (u16)((void)0, gMmSave.timeSpeedOffset);
         }
     }
 }

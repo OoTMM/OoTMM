@@ -754,7 +754,7 @@ void func_80AD4DB4(EnTrt2* this, PlayState* play) {
     }
 
     if ((play->sceneId == SCENE_20SICHITAI) || (play->sceneId == SCENE_20SICHITAI2)) {
-        if (gSaveContext.save.day == 2) {
+        if (gMmSave.day == 2) {
             if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_15_80)) {
                 SET_WEEKEVENTREG(WEEKEVENTREG_15_80);
                 this->unk_3B2 = 3;
@@ -766,14 +766,14 @@ void func_80AD4DB4(EnTrt2* this, PlayState* play) {
             Actor_Kill(&this->actor);
             return;
         }
-    } else if (gSaveContext.save.day == 2) {
+    } else if (gMmSave.day == 2) {
         if (CHECK_WEEKEVENTREG(WEEKEVENTREG_15_80)) {
             this->unk_3B2 = 4;
         } else {
             Actor_Kill(&this->actor);
             return;
         }
-    } else if (gSaveContext.save.day == 3) {
+    } else if (gMmSave.day == 3) {
         this->unk_3B2 = 4;
     }
     this->actionFunc = func_80AD4FE4;

@@ -84,7 +84,7 @@ void DmChar02_PlaySfxForCutscenes(DmChar02* this, PlayState* play) {
 void DmChar02_Init(Actor* thisx, PlayState* play) {
     DmChar02* this = THIS;
 
-    if (gSaveContext.save.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+    if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
         this->animIndex = DMCHAR02_ANIM_HIT_GROUND;
         this->actor.lockOnArrowOffset = 3000.0f;
         ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 24.0f);
@@ -154,7 +154,7 @@ void DmChar02_Update(Actor* thisx, PlayState* play) {
     if (!Actor_HasParent(&this->actor, play)) {
         Actor_OfferGetItem(&this->actor, play, GI_OCARINA_OF_TIME, 30.0f, 80.0f);
     } else {
-        gSaveContext.save.playerForm = PLAYER_FORM_HUMAN;
+        gMmSave.playerForm = PLAYER_FORM_HUMAN;
         Actor_Kill(&this->actor);
     }
 

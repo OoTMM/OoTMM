@@ -82,11 +82,11 @@ s32 Horse_IsValidSpawn(s16 sceneId) {
 }
 
 void Horse_ResetHorseData(PlayState* play) {
-    gSaveContext.save.saveInfo.horseData.sceneId = SCENE_F01;
-    gSaveContext.save.saveInfo.horseData.pos.x = -1420;
-    gSaveContext.save.saveInfo.horseData.pos.y = 257;
-    gSaveContext.save.saveInfo.horseData.pos.z = -1285;
-    gSaveContext.save.saveInfo.horseData.yaw = 0x2AAA;
+    gMmSave.saveInfo.horseData.sceneId = SCENE_F01;
+    gMmSave.saveInfo.horseData.pos.x = -1420;
+    gMmSave.saveInfo.horseData.pos.y = 257;
+    gMmSave.saveInfo.horseData.pos.z = -1285;
+    gMmSave.saveInfo.horseData.yaw = 0x2AAA;
 }
 
 s32 gHorseIsMounted = false;
@@ -139,11 +139,11 @@ void Horse_SpawnOverworld(PlayState* play, Player* player) {
                                         player->actor.shape.rot.z, ENHORSE_PARAMS(ENHORSE_PARAM_4000, ENHORSE_11));
         Player_MountHorse(play, player, player->rideActor);
         Player_SetCameraHorseSetting(play, player);
-    } else if ((play->sceneId == gSaveContext.save.saveInfo.horseData.sceneId) && CHECK_QUEST_ITEM(QUEST_SONG_EPONA)) {
-        if (Horse_IsValidSpawn(gSaveContext.save.saveInfo.horseData.sceneId)) {
-            Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, gSaveContext.save.saveInfo.horseData.pos.x,
-                        gSaveContext.save.saveInfo.horseData.pos.y, gSaveContext.save.saveInfo.horseData.pos.z, 0,
-                        gSaveContext.save.saveInfo.horseData.yaw, 0, ENHORSE_PARAMS(ENHORSE_PARAM_4000, ENHORSE_1));
+    } else if ((play->sceneId == gMmSave.saveInfo.horseData.sceneId) && CHECK_QUEST_ITEM(QUEST_SONG_EPONA)) {
+        if (Horse_IsValidSpawn(gMmSave.saveInfo.horseData.sceneId)) {
+            Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, gMmSave.saveInfo.horseData.pos.x,
+                        gMmSave.saveInfo.horseData.pos.y, gMmSave.saveInfo.horseData.pos.z, 0,
+                        gMmSave.saveInfo.horseData.yaw, 0, ENHORSE_PARAMS(ENHORSE_PARAM_4000, ENHORSE_1));
         } else {
             Horse_ResetHorseData(play);
         }
@@ -169,7 +169,7 @@ void Horse_SpawnMinigame(PlayState* play, Player* player) {
                 (GET_WEEKEVENTREG_HORSE_RACE_STATE == WEEKEVENTREG_HORSE_RACE_STATE_2))) {
         Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, -1741.0f, -106.0f, -641.0f, 0, -0x4FA4, 0,
                     ENHORSE_PARAMS(ENHORSE_PARAM_4000, ENHORSE_1));
-    } else if ((gSaveContext.save.entrance == ENTRANCE(ROMANI_RANCH, 0)) && (Cutscene_GetSceneLayer(play) != 0) &&
+    } else if ((gMmSave.entrance == ENTRANCE(ROMANI_RANCH, 0)) && (Cutscene_GetSceneLayer(play) != 0) &&
                (player->transformation == PLAYER_FORM_HUMAN)) {
         player->rideActor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, -1106.0f, 260.0f, -1185.0f, 0, 0x13, 0,
                                         ENHORSE_PARAMS(ENHORSE_PARAM_4000, ENHORSE_7));

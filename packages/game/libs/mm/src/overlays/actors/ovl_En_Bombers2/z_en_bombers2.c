@@ -116,7 +116,7 @@ void EnBombers2_Init(Actor* thisx, PlayState* play) {
     this->actor.attentionRangeType = ATTENTION_RANGE_6;
     Collider_InitAndSetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
 
-    if (CHECK_WEEKEVENTREG(WEEKEVENTREG_73_80) || (gSaveContext.save.entrance == ENTRANCE(EAST_CLOCK_TOWN, 2))) {
+    if (CHECK_WEEKEVENTREG(WEEKEVENTREG_73_80) || (gMmSave.entrance == ENTRANCE(EAST_CLOCK_TOWN, 2))) {
         this->actor.world.pos.x += Math_SinS(this->actor.home.rot.y + 0xC100) * 50.0f;
         cos = Math_CosS(this->actor.home.rot.y + 0xC100) * 50.0f;
         this->unk_2AC = true;
@@ -248,7 +248,7 @@ void func_80C04D8C(EnBombers2* this, PlayState* play) {
 
             for (i = 0; i < ARRAY_COUNT(this->correctDigitSlots); i++) {
                 if (!(this->correctDigitSlots[i]) &&
-                    (play->msgCtx.unk12054[i] == gSaveContext.save.saveInfo.bomberCode[i])) {
+                    (play->msgCtx.unk12054[i] == gMmSave.saveInfo.bomberCode[i])) {
                     this->correctDigitSlots[i] = true;
                 }
             }

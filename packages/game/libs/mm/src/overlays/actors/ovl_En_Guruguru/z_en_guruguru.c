@@ -96,7 +96,7 @@ void EnGuruguru_Init(Actor* thisx, PlayState* play) {
     if (this->actor.params != 2) {
         Collider_InitAndSetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
     }
-    if (!gSaveContext.save.isNight) {
+    if (!gMmSave.isNight) {
         if (this->actor.params == 0) {
             func_80BC6E10(this);
         } else if (this->actor.params == 2) {
@@ -336,7 +336,7 @@ void EnGuruguru_Update(Actor* thisx, PlayState* play) {
     Player* player = GET_PLAYER(play);
     s16 yawTemp;
 
-    if (!gSaveContext.save.isNight) {
+    if (!gMmSave.isNight) {
         if (this->actor.params == 1) {
             Actor_Kill(&this->actor);
             return;

@@ -477,7 +477,7 @@ void EnGe2_KnockedOut(EnGe2* this, PlayState* play) {
  */
 void EnGe2_PatrolDuties(EnGe2* this, PlayState* play) {
     Player* player = GET_PLAYER(play);
-    f32 visionRange = gSaveContext.save.isNight ? 200.0f : 280.0f;
+    f32 visionRange = gMmSave.isNight ? 200.0f : 280.0f;
 
     if (player->csAction == PLAYER_CSACTION_26) {
         this->picto.actor.speed = 0.0f;

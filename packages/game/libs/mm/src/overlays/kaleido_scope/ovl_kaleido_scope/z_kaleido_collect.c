@@ -320,7 +320,7 @@ void KaleidoScope_DrawQuestStatus(PlayState* play) {
 
     //! FAKE: Used to load `0xF0000000` early
     if ((GET_SAVE_INVENTORY_QUEST_ITEMS & 0xF0000000) != 0) {}
-    questItemsPtr = &gSaveContext.save.saveInfo.inventory.questItems;
+    questItemsPtr = &gMmSave.saveInfo.inventory.questItems;
     if (1) {}
 
     if ((*questItemsPtr >> QUEST_HEART_PIECE_COUNT) != 0) {

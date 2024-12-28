@@ -199,7 +199,7 @@ s32 MsgEvent_CheckRupees(Actor* actor, PlayState* play, u8** script, MsgScriptCa
     s16 rupees = SCRIPT_PACK_16(cmd->rupeesH, cmd->rupeesL);
     s16 skip = SCRIPT_PACK_16(cmd->offsetH, cmd->offsetL);
 
-    if (gSaveContext.save.saveInfo.playerData.rupees >= rupees) {
+    if (gMmSave.saveInfo.playerData.rupees >= rupees) {
         *script += skip;
     }
     return false;
@@ -242,9 +242,9 @@ s32 MsgEvent_CheckDay(Actor* actor, PlayState* play, u8** script, MsgScriptCallb
     MsgScriptCmdCheckDay* cmd = (MsgScriptCmdCheckDay*)*script;
     s16 skip = 0;
 
-    switch (gSaveContext.save.day) {
+    switch (gMmSave.day) {
         case 1:
-            if (!gSaveContext.save.isNight) {
+            if (!gMmSave.isNight) {
                 skip = SCRIPT_PACK_16(cmd->offsetDay1H, cmd->offsetDay1L);
             } else {
                 skip = SCRIPT_PACK_16(cmd->offsetNight1H, cmd->offsetNight1L);
@@ -252,7 +252,7 @@ s32 MsgEvent_CheckDay(Actor* actor, PlayState* play, u8** script, MsgScriptCallb
             break;
 
         case 2:
-            if (!gSaveContext.save.isNight) {
+            if (!gMmSave.isNight) {
                 skip = SCRIPT_PACK_16(cmd->offsetDay2H, cmd->offsetDay2L);
             } else {
                 skip = SCRIPT_PACK_16(cmd->offsetNight2H, cmd->offsetNight2L);
@@ -260,7 +260,7 @@ s32 MsgEvent_CheckDay(Actor* actor, PlayState* play, u8** script, MsgScriptCallb
             break;
 
         case 3:
-            if (!gSaveContext.save.isNight) {
+            if (!gMmSave.isNight) {
                 skip = SCRIPT_PACK_16(cmd->offsetDay3H, cmd->offsetDay3L);
             } else {
                 skip = SCRIPT_PACK_16(cmd->offsetNight3H, cmd->offsetNight3L);
@@ -830,7 +830,7 @@ s32 MsgEvent_CheckOnDay(Actor* actor, PlayState* play, u8** script, MsgScriptCal
     s16 day = SCRIPT_PACK_16(cmd->dayH, cmd->dayL);
     s16 skip = SCRIPT_PACK_16(cmd->offsetH, cmd->offsetL);
 
-    if (gSaveContext.save.day == day) {
+    if (gMmSave.day == day) {
         *script += skip;
     }
     return false;

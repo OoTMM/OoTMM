@@ -2270,7 +2270,7 @@ s32 Camera_Normal1(Camera* camera) {
         camera->inputDir.z = 0;
 
         // crit wiggle
-        if (gSaveContext.save.saveInfo.playerData.health <= 0x10) {
+        if (gMmSave.saveInfo.playerData.health <= 0x10) {
             phi_v1_2 = ((s32)(camera->play->state.frames << 0x18) >> 0x15) & 0xFD68;
             camera->inputDir.y += phi_v1_2;
         }
@@ -2281,7 +2281,7 @@ s32 Camera_Normal1(Camera* camera) {
         *eye = *eyeNext;
     }
 
-    phi_f2 = (gSaveContext.save.saveInfo.playerData.health <= 0x10) ? 0.8f : 1.0f;
+    phi_f2 = (gMmSave.saveInfo.playerData.health <= 0x10) ? 0.8f : 1.0f;
     camera->fov = Camera_ScaledStepToCeilF(roData->unk_18 * phi_f2, camera->fov, camera->fovUpdateRate, 0.1f);
 
     if (roData->interfaceFlags & NORMAL1_FLAG_2) {
@@ -2290,7 +2290,7 @@ s32 Camera_Normal1(Camera* camera) {
         camera->roll = Camera_ScaledStepToCeilS((rand * 500.0f * camera->speedRatio) + (spD4 * spD4 * spD4 * 10000.0f),
                                                 camera->roll, 0.1f, 5);
     } else {
-        if (gSaveContext.save.saveInfo.playerData.health <= 0x10) {
+        if (gMmSave.saveInfo.playerData.health <= 0x10) {
             rand = Rand_ZeroOne() - 0.5f;
             phi_v1_2 = rand * 100.0f * camera->speedRatio;
         } else {
@@ -3841,7 +3841,7 @@ s32 Camera_Battle1(Camera* camera) {
         temp_f12 = ((camera->play->state.frames & 8) != 0) ? roData->fov - (roData->fov * 0.5f) : roData->fov;
     } else {
         temp_f12 =
-            ((gSaveContext.save.saveInfo.playerData.health <= 16) ? 0.8f : 1.0f) * (fov - (fov * 0.05f * distRatio));
+            ((gMmSave.saveInfo.playerData.health <= 16) ? 0.8f : 1.0f) * (fov - (fov * 0.05f * distRatio));
     }
     camera->fov = Camera_ScaledStepToCeilF(temp_f12, camera->fov, camera->fovUpdateRate, 0.1f);
 
@@ -7205,7 +7205,7 @@ void Camera_EarthquakeDay3(Camera* camera) {
 
     if ((CURRENT_DAY == 3) && (CutsceneManager_GetCurrentCsId() == CS_ID_NONE)) {
         time = CURRENT_TIME;
-        timeSpeedOffset = gSaveContext.save.timeSpeedOffset;
+        timeSpeedOffset = gMmSave.timeSpeedOffset;
 
         // Large earthquake created
         // Times based on sEarthquakeFreq

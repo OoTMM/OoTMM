@@ -102,7 +102,7 @@ void EnJgameTsn_Init(Actor* thisx, PlayState* play) {
     this->actor.colChkInfo.mass = MASS_IMMOVABLE;
     this->actor.velocity.y = 0.0f;
 
-    if (gSaveContext.save.entrance == ENTRANCE(GREAT_BAY_COAST, 13)) {
+    if (gMmSave.entrance == ENTRANCE(GREAT_BAY_COAST, 13)) {
         this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
     }
 
@@ -419,7 +419,7 @@ void func_80C14610(EnJgameTsn* this, PlayState* play) {
 void func_80C14684(EnJgameTsn* this, PlayState* play) {
     if (Message_ShouldAdvance(play)) {
         if (play->msgCtx.choiceIndex == 0) {
-            if (gSaveContext.save.saveInfo.playerData.rupees >= 20) {
+            if (gMmSave.saveInfo.playerData.rupees >= 20) {
                 Message_StartTextbox(play, 0x109E, &this->actor);
                 this->unk_300 = 0x109E;
                 Rupees_ChangeBy(-20);

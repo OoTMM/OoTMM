@@ -450,7 +450,7 @@ void func_80962588(EnFu* this, PlayState* play) {
     }
 
     if (play->msgCtx.choiceIndex == 0) {
-        if (gSaveContext.save.saveInfo.playerData.rupees >= 10) {
+        if (gMmSave.saveInfo.playerData.rupees >= 10) {
             Audio_PlaySfx_MessageDecide();
             Rupees_ChangeBy(-10);
             func_80963DE4(this, play);
@@ -675,7 +675,7 @@ void func_80962A10(EnFu* this, PlayState* play) {
         this->unk_546 = 1;
     }
 
-    if ((GET_PLAYER_FORM == PLAYER_FORM_DEKU) && gSaveContext.save.saveInfo.playerData.isMagicAcquired) {
+    if ((GET_PLAYER_FORM == PLAYER_FORM_DEKU) && gMmSave.saveInfo.playerData.isMagicAcquired) {
         Magic_Add(play, MAGIC_FILL_TO_CAPACITY);
     }
 
@@ -1174,7 +1174,7 @@ void func_80963DE4(EnFu* this, PlayState* play) {
 }
 
 void func_80963EAC(EnFu* this, PlayState* play) {
-    if (gSaveContext.save.saveInfo.playerData.isMagicAcquired) {
+    if (gMmSave.saveInfo.playerData.isMagicAcquired) {
         if (this->unk_540 == 1) {
             Message_StartTextbox(play, 0x2847, &this->actor);
             this->unk_552 = 0x2847;

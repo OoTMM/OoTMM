@@ -935,7 +935,7 @@ void func_80BF2A50(EnIg* this, PlayState* play) {
 void func_80BF2AF8(EnIg* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
 
     if (!Schedule_RunScript(play, D_80BF3260, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) && !func_80BF2368(this, play, &scheduleOutput))) {

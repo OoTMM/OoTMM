@@ -10,6 +10,8 @@
 
 #include "unk.h"
 
+#include <save.h>
+
 struct GameState;
 struct PlayState;
 struct FileSelectState;
@@ -201,52 +203,6 @@ typedef struct SramContext {
     /* 0x24 */ s16 unk_24;
 } SramContext; // size = 0x28
 
-typedef struct ItemEquips {
-    /* 0x00 */ u8 buttonItems[4][4];                    // "register_item"
-    /* 0x10 */ u8 cButtonSlots[4][4];                   // "register_item_pt"
-    /* 0x20 */ u16 equipment;
-} ItemEquips; // size = 0x22
-
-typedef struct Inventory {
-    /* 0x00 */ u8 items[48];                            // "item_register", first 24 elements are normal items and the other 24 are masks
-    /* 0x30 */ s8 ammo[24];                             // "item_count"
-    /* 0x48 */ u32 upgrades;                            // "non_equip_register" some bits are wallet upgrades
-    /* 0x4C */ u32 questItems;                          // "collect_register"
-    /* 0x50 */ u8 dungeonItems[10];                     // "key_compass_map"
-    /* 0x5A */ s8 dungeonKeys[9];                       // "key_register"
-    /* 0x63 */ s8 defenseHearts;
-    /* 0x64 */ s8 strayFairies[10];                     // "orange_fairy"
-    /* 0x6E */ char dekuPlaygroundPlayerName[3][8];     // "degnuts_memory_name" Stores playerName (8 char) over (3 days) when getting a new high score
-} Inventory; // size = 0x88
-
-typedef struct HorseData {
-    /* 0x0 */ s16 sceneId;                             // "spot_no"
-    /* 0x2 */ Vec3s pos;                               // "horse_x", "horse_y" and "horse_z"
-    /* 0x8 */ s16 yaw;                                 // "horse_a"
-} HorseData; // size = 0xA
-
-typedef struct RespawnData {
-    /* 0x00 */ Vec3f pos;
-    /* 0x0C */ s16 yaw;
-    /* 0x0E */ s16 playerParams;
-    /* 0x10 */ u16 entrance;
-    /* 0x12 */ u8 roomIndex;
-    /* 0x13 */ s8 data;
-    /* 0x14 */ u32 tempSwitchFlags;
-    /* 0x18 */ u32 unk_18;
-    /* 0x1C */ u32 tempCollectFlags;
-} RespawnData; // size = 0x20
-
-typedef struct PermanentSceneFlags {
-    /* 0x00 */ u32 chest;
-    /* 0x04 */ u32 switch0;
-    /* 0x08 */ u32 switch1;
-    /* 0x0C */ u32 clearedRoom;
-    /* 0x10 */ u32 collectible;
-    /* 0x14 */ u32 unk_14; // varies based on scene. For dungeons, floors visited.
-    /* 0x18 */ u32 rooms;
-} PermanentSceneFlags; // size = 0x1C
-
 typedef struct CycleSceneFlags {
     /* 0x00 */ u32 chest;
     /* 0x04 */ u32 switch0;
@@ -263,84 +219,19 @@ typedef struct SaveOptions {
     /* 0x5 */ u8 zTargetSetting;                       // "z_attention", 0: Switch; 1: Hold
 } SaveOptions; // size = 0x6
 
-typedef struct SavePlayerData {
-    /* 0x00 */ char newf[6];                          // "newf"               Will always be "ZELDA3 for a valid save
-    /* 0x06 */ u16 threeDayResetCount;                // "savect"
-    /* 0x08 */ char playerName[8];                    // "player_name"
-    /* 0x10 */ s16 healthCapacity;                    // "max_life"
-    /* 0x12 */ s16 health;                            // "now_life"
-    /* 0x14 */ s8 magicLevel; // 0 for no magic/new load, 1 for magic, 2 for double magic "magic_max"
-    /* 0x15 */ s8 magic; // current magic available for use "magic_now"
-    /* 0x16 */ s16 rupees;                            // "lupy_count"
-    /* 0x18 */ u16 swordHealth;                       // "long_sword_hp"
-    /* 0x1A */ u16 tatlTimer;                         // "navi_timer"
-    /* 0x1C */ u8 isMagicAcquired;                    // "magic_mode"
-    /* 0x1D */ u8 isDoubleMagicAcquired;              // "magic_ability"
-    /* 0x1E */ u8 doubleDefense;                      // "life_ability"
-    /* 0x1F */ u8 unk_1F;                             // "ocarina_round"
-    /* 0x20 */ u8 owlWarpId; // See `OwlWarpId`, "first_memory"
-    /* 0x22 */ u16 owlActivationFlags;                // "memory_warp_point"
-    /* 0x24 */ u8 unk_24;                             // "last_warp_pt"
-    /* 0x26 */ s16 savedSceneId;                      // "scene_data_ID"
-} SavePlayerData; // size = 0x28
-
-typedef struct SaveInfo {
-    /* 0x000 */ SavePlayerData playerData;
-    /* 0x028 */ ItemEquips equips;
-    /* 0x04C */ Inventory inventory;
-    /* 0x0D4 */ PermanentSceneFlags permanentSceneFlags[120];
-    /* 0xDF4 */ UNK_TYPE1 unk_DF4[0x54];
-    /* 0xE48 */ u32 dekuPlaygroundHighScores[3];
-    /* 0xE54 */ u32 pictoFlags0;                       // Flags set by `PictoActor`s if pictograph is valid
-    /* 0xE58 */ u32 pictoFlags1;                       // Flags set by Snap_ValidatePictograph() to record errors; volatile since that function is run many times in succession
-    /* 0xE5C */ u32 unk_E5C;
-    /* 0xE60 */ u32 unk_E60;
-    /* 0xE64 */ u32 alienInfo[7];                      // Used by EnInvadepoh to hold alien spawn times and how many aliens the player has killed
-    /* 0xE80 */ u32 scenesVisible[7];                  // tingle maps and clouded regions on pause map. Stores scenes bitwise for up to 224 scenes even though there are not that many scenes
-    /* 0xE9C */ u32 skullTokenCount;                   // upper 16 bits store Swamp skulls, lower 16 bits store Ocean skulls
-    /* 0xEA0 */ u32 unk_EA0;                           // Gossic stone heart piece flags
-    /* 0xEA4 */ u32 unk_EA4;
-    /* 0xEA8 */ u32 unk_EA8[2];                        // Related to blue warps
-    /* 0xEB0 */ u32 stolenItems;                       // Items stolen by Takkuri and given to Curiosity Shop Man
-    /* 0xEB4 */ u32 unk_EB4;
-    /* 0xEB8 */ u32 highScores[HS_MAX];
-    /* 0xED4 */ u8 weekEventReg[100];                  // "week_event_reg"
-    /* 0xF38 */ u32 regionsVisited;                    // "area_arrival"
-    /* 0xF3C */ u32 worldMapCloudVisibility;           // "cloud_clear"
-    /* 0xF40 */ u8 unk_F40;                            // "oca_rec_flag"                   has scarecrows song
-    /* 0xF41 */ u8 scarecrowSpawnSongSet;              // "oca_rec_flag8"
-    /* 0xF42 */ u8 scarecrowSpawnSong[128];
-    /* 0xFC2 */ s8 bombersCaughtNum;                   // "aikotoba_index"
-    /* 0xFC3 */ s8 bombersCaughtOrder[5];              // "aikotoba_table"
-    /* 0xFC8 */ s8 lotteryCodes[3][3];                 // "numbers_table", Preset lottery codes
-    /* 0xFD1 */ s8 spiderHouseMaskOrder[6];            // "kinsta_color_table"
-    /* 0xFD7 */ s8 bomberCode[5];                      // "bombers_aikotoba_table"
-    /* 0xFDC */ HorseData horseData;
-    /* 0xFE6 */ u16 checksum;                          // "check_sum"
-} SaveInfo; // size = 0xFE8
-
-typedef struct Save {
-    /* 0x00 */ s32 entrance;        // "scene_no"
-    /* 0x04 */ u8 equippedMask;     // "player_mask"
-    /* 0x05 */ u8 isFirstCycle;     // "opening_flag"
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 linkAge;          // "link_age"
-    /* 0x08 */ s32 cutsceneIndex;   // "day_time"
-    /* 0x0C */ u16 time;            // "zelda_time"
-    /* 0x0E */ u16 owlWarpId;       // See `OwlWarpId` enum
-    /* 0x10 */ s32 isNight;         // "asahiru_fg"
-    /* 0x14 */ s32 timeSpeedOffset; // "change_zelda_time"
-    /* 0x18 */ s32 day;             // "totalday"
-    /* 0x1C */ s32 eventDayCount;   // "eventday"
-    /* 0x20 */ u8 playerForm;       // "player_character"
-    /* 0x21 */ u8 snowheadCleared;  // "spring_flag"
-    /* 0x22 */ u8 hasTatl;          // "bell_flag"
-    /* 0x23 */ u8 isOwlSave;
-    /* 0x24 */ SaveInfo saveInfo;
-} Save; // size = 0x100C
+typedef struct RespawnData {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ s16 yaw;
+    /* 0x0E */ s16 playerParams;
+    /* 0x10 */ u16 entrance;
+    /* 0x12 */ u8 roomIndex;
+    /* 0x13 */ s8 data;
+    /* 0x14 */ u32 tempSwitchFlags;
+    /* 0x18 */ u32 unk_18;
+    /* 0x1C */ u32 tempCollectFlags;
+} RespawnData; // size = 0x20
 
 typedef struct SaveContext {
-    /* 0x0000 */ Save save;
     /* 0x100C */ u8 eventInf[8]; // "event_inf"
     /* 0x1014 */ u8 unk_1014;    // "stone_set_flag"
     /* 0x1015 */ u8 bButtonStatus;
@@ -446,68 +337,68 @@ typedef enum {
 
 // linkAge still exists in MM, but is always set to 0 (always adult)
 // There are remnants of these macros from OOT, but they are essentially useless
-#define LINK_IS_CHILD (gSaveContext.save.linkAge == 1)
-#define LINK_IS_ADULT (gSaveContext.save.linkAge == 0)
+#define LINK_IS_CHILD (gMmSave.linkAge == 1)
+#define LINK_IS_ADULT (gMmSave.linkAge == 0)
 
 #define YEARS_CHILD 5
 #define YEARS_ADULT 17
 #define LINK_AGE_IN_YEARS (!LINK_IS_ADULT ? YEARS_CHILD : YEARS_ADULT)
 
-#define CURRENT_DAY (((void)0, gSaveContext.save.day) % 5)
-#define CURRENT_TIME ((void)0, gSaveContext.save.time)
+#define CURRENT_DAY (((void)0, gMmSave.day) % 5)
+#define CURRENT_TIME ((void)0, gMmSave.time)
 
 // The day begins at CLOCK_TIME(6, 0) so it must be offset.
 #define TIME_UNTIL_MOON_CRASH \
     ((4 - CURRENT_DAY) * DAY_LENGTH - (u16)(CURRENT_TIME - CLOCK_TIME(6, 0)))
 #define TIME_UNTIL_NEW_DAY (DAY_LENGTH - (u16)(CURRENT_TIME - CLOCK_TIME(6, 0)))
 
-#define GET_PLAYER_FORM ((void)0, gSaveContext.save.playerForm)
+#define GET_PLAYER_FORM ((void)0, gMmSave.playerForm)
 
-#define GET_OWL_STATUE_ACTIVATED(owlWarpId) (((void)0, gSaveContext.save.saveInfo.playerData.owlActivationFlags) & (u16)gBitFlags[(owlWarpId)])
-#define SET_OWL_STATUE_ACTIVATED(owlWarpId) (gSaveContext.save.saveInfo.playerData.owlActivationFlags = (((void)0, gSaveContext.save.saveInfo.playerData.owlActivationFlags) | (u16)gBitFlags[(owlWarpId)]))
+#define GET_OWL_STATUE_ACTIVATED(owlWarpId) (((void)0, gMmSave.saveInfo.playerData.owlActivationFlags) & (u16)gBitFlags[(owlWarpId)])
+#define SET_OWL_STATUE_ACTIVATED(owlWarpId) (gMmSave.saveInfo.playerData.owlActivationFlags = (((void)0, gMmSave.saveInfo.playerData.owlActivationFlags) | (u16)gBitFlags[(owlWarpId)]))
 
 #define SLOT(item) gItemSlots[item]
-#define AMMO(item) gSaveContext.save.saveInfo.inventory.ammo[SLOT(item)]
-#define INV_CONTENT(item) gSaveContext.save.saveInfo.inventory.items[SLOT(item)]
-#define GET_INV_CONTENT(item) ((void)0, gSaveContext.save.saveInfo.inventory.items)[SLOT(item)]
+#define AMMO(item) gMmSave.saveInfo.inventory.ammo[SLOT(item)]
+#define INV_CONTENT(item) gMmSave.saveInfo.inventory.items[SLOT(item)]
+#define GET_INV_CONTENT(item) ((void)0, gMmSave.saveInfo.inventory.items)[SLOT(item)]
 
-#define CUR_FORM ((gSaveContext.save.playerForm == PLAYER_FORM_HUMAN) ? 0 : gSaveContext.save.playerForm)
+#define CUR_FORM ((gMmSave.playerForm == PLAYER_FORM_HUMAN) ? 0 : gMmSave.playerForm)
 
-#define GET_SAVE_EQUIPS_EQUIPMENT ((void)0, gSaveContext.save.saveInfo.equips.equipment)
-#define GET_SAVE_INVENTORY_UPGRADES ((void)0, gSaveContext.save.saveInfo.inventory.upgrades)
-#define GET_SAVE_INVENTORY_QUEST_ITEMS ((void)0, gSaveContext.save.saveInfo.inventory.questItems)
+#define GET_SAVE_EQUIPS_EQUIPMENT ((void)0, gMmSave.saveInfo.equips.equipment)
+#define GET_SAVE_INVENTORY_UPGRADES ((void)0, gMmSave.saveInfo.inventory.upgrades)
+#define GET_SAVE_INVENTORY_QUEST_ITEMS ((void)0, gMmSave.saveInfo.inventory.questItems)
 
 #define GET_CUR_EQUIP_VALUE(equip) ((GET_SAVE_EQUIPS_EQUIPMENT & gEquipMasks[equip]) >> gEquipShifts[equip])
 
-#define CUR_UPG_VALUE(upg) ((gSaveContext.save.saveInfo.inventory.upgrades & gUpgradeMasks[upg]) >> gUpgradeShifts[upg])
+#define CUR_UPG_VALUE(upg) ((gMmSave.saveInfo.inventory.upgrades & gUpgradeMasks[upg]) >> gUpgradeShifts[upg])
 #define GET_CUR_UPG_VALUE(upg) ((GET_SAVE_INVENTORY_UPGRADES & gUpgradeMasks[upg]) >> gUpgradeShifts[upg])
 
-#define SET_EQUIP_VALUE(equip, value) (gSaveContext.save.saveInfo.equips.equipment = ((GET_SAVE_EQUIPS_EQUIPMENT & gEquipNegMasks[equip]) | (u16)((u16)(value) << gEquipShifts[equip])))
+#define SET_EQUIP_VALUE(equip, value) (gMmSave.saveInfo.equips.equipment = ((GET_SAVE_EQUIPS_EQUIPMENT & gEquipNegMasks[equip]) | (u16)((u16)(value) << gEquipShifts[equip])))
 
-#define BUTTON_ITEM_EQUIP(form, button) (gSaveContext.save.saveInfo.equips.buttonItems[form][button])
+#define BUTTON_ITEM_EQUIP(form, button) (gMmSave.saveInfo.equips.buttonItems[form][button])
 #define CUR_FORM_EQUIP(button) BUTTON_ITEM_EQUIP(CUR_FORM, button)
 
-#define C_SLOT_EQUIP(form, button) (gSaveContext.save.saveInfo.equips.cButtonSlots[form][button])
+#define C_SLOT_EQUIP(form, button) (gMmSave.saveInfo.equips.cButtonSlots[form][button])
 #define CHECK_QUEST_ITEM(item) (GET_SAVE_INVENTORY_QUEST_ITEMS & gBitFlags[item])
-#define SET_QUEST_ITEM(item) (gSaveContext.save.saveInfo.inventory.questItems = (GET_SAVE_INVENTORY_QUEST_ITEMS | gBitFlags[item]))
-#define REMOVE_QUEST_ITEM(item) (gSaveContext.save.saveInfo.inventory.questItems = (GET_SAVE_INVENTORY_QUEST_ITEMS & (-1 - gBitFlags[item])))
-#define TOGGLE_QUEST_ITEM(item) (gSaveContext.save.saveInfo.inventory.questItems ^= (gBitFlags[item]))
+#define SET_QUEST_ITEM(item) (gMmSave.saveInfo.inventory.questItems = (GET_SAVE_INVENTORY_QUEST_ITEMS | gBitFlags[item]))
+#define REMOVE_QUEST_ITEM(item) (gMmSave.saveInfo.inventory.questItems = (GET_SAVE_INVENTORY_QUEST_ITEMS & (-1 - gBitFlags[item])))
+#define TOGGLE_QUEST_ITEM(item) (gMmSave.saveInfo.inventory.questItems ^= (gBitFlags[item]))
 
 #define GET_QUEST_HEART_PIECE_COUNT ((GET_SAVE_INVENTORY_QUEST_ITEMS & 0xF0000000) >> QUEST_HEART_PIECE_COUNT)
 #define EQ_MAX_QUEST_HEART_PIECE_COUNT ((GET_SAVE_INVENTORY_QUEST_ITEMS & 0xF0000000) == (4 << QUEST_HEART_PIECE_COUNT))
 #define LEQ_MAX_QUEST_HEART_PIECE_COUNT ((GET_SAVE_INVENTORY_QUEST_ITEMS & 0xF0000000) <= (4 << QUEST_HEART_PIECE_COUNT))
-#define INCREMENT_QUEST_HEART_PIECE_COUNT (gSaveContext.save.saveInfo.inventory.questItems += (1 << QUEST_HEART_PIECE_COUNT))
-#define DECREMENT_QUEST_HEART_PIECE_COUNT (gSaveContext.save.saveInfo.inventory.questItems -= (1 << QUEST_HEART_PIECE_COUNT))
-#define RESET_HEART_PIECE_COUNT (gSaveContext.save.saveInfo.inventory.questItems ^= (4 << QUEST_HEART_PIECE_COUNT))
+#define INCREMENT_QUEST_HEART_PIECE_COUNT (gMmSave.saveInfo.inventory.questItems += (1 << QUEST_HEART_PIECE_COUNT))
+#define DECREMENT_QUEST_HEART_PIECE_COUNT (gMmSave.saveInfo.inventory.questItems -= (1 << QUEST_HEART_PIECE_COUNT))
+#define RESET_HEART_PIECE_COUNT (gMmSave.saveInfo.inventory.questItems ^= (4 << QUEST_HEART_PIECE_COUNT))
 
-#define CHECK_DUNGEON_ITEM(item, dungeonSceneIndex) (gSaveContext.save.saveInfo.inventory.dungeonItems[(void)0, dungeonSceneIndex] & gBitFlags[item])
-#define CHECK_DUNGEON_ITEM_ALT(item, dungeonSceneIndex) (gSaveContext.save.saveInfo.inventory.dungeonItems[dungeonSceneIndex] & gBitFlags[item])
-#define SET_DUNGEON_ITEM(item, dungeonSceneIndex) (gSaveContext.save.saveInfo.inventory.dungeonItems[(void)0, dungeonSceneIndex] |= (u8)gBitFlags[item])
-#define DUNGEON_KEY_COUNT(dungeonSceneIndex) (gSaveContext.save.saveInfo.inventory.dungeonKeys[(void)0, dungeonSceneIndex])
-#define GET_DUNGEON_FLOOR_VISITED(sceneId, floor) (gSaveContext.save.saveInfo.permanentSceneFlags[(sceneId)].unk_14 & gBitFlags[floor])
-#define SET_DUNGEON_FLOOR_VISITED(sceneId, floor) (gSaveContext.save.saveInfo.permanentSceneFlags[(sceneId)].unk_14 |= gBitFlags[floor])
-#define GET_ROOM_VISITED(sceneId, room) (((void)0, gSaveContext.save.saveInfo.permanentSceneFlags[(sceneId)].rooms) & (1 << (room)))
-#define SET_ROOM_VISITED(sceneId, room) (gSaveContext.save.saveInfo.permanentSceneFlags[(sceneId)].rooms |= gBitFlags[room])
+#define CHECK_DUNGEON_ITEM(item, dungeonSceneIndex) (gMmSave.saveInfo.inventory.dungeonItems[(void)0, dungeonSceneIndex] & gBitFlags[item])
+#define CHECK_DUNGEON_ITEM_ALT(item, dungeonSceneIndex) (gMmSave.saveInfo.inventory.dungeonItems[dungeonSceneIndex] & gBitFlags[item])
+#define SET_DUNGEON_ITEM(item, dungeonSceneIndex) (gMmSave.saveInfo.inventory.dungeonItems[(void)0, dungeonSceneIndex] |= (u8)gBitFlags[item])
+#define DUNGEON_KEY_COUNT(dungeonSceneIndex) (gMmSave.saveInfo.inventory.dungeonKeys[(void)0, dungeonSceneIndex])
+#define GET_DUNGEON_FLOOR_VISITED(sceneId, floor) (gMmSave.saveInfo.permanentSceneFlags[(sceneId)].unk_14 & gBitFlags[floor])
+#define SET_DUNGEON_FLOOR_VISITED(sceneId, floor) (gMmSave.saveInfo.permanentSceneFlags[(sceneId)].unk_14 |= gBitFlags[floor])
+#define GET_ROOM_VISITED(sceneId, room) (((void)0, gMmSave.saveInfo.permanentSceneFlags[(sceneId)].rooms) & (1 << (room)))
+#define SET_ROOM_VISITED(sceneId, room) (gMmSave.saveInfo.permanentSceneFlags[(sceneId)].rooms |= gBitFlags[room])
 #define GET_CYCLE_CHEST_OPENED(sceneId, chestFlagId) ((void)0, gSaveContext.cycleSceneFlags[(sceneId)].chest) & (1 << (chestFlagId));
 
 
@@ -537,16 +428,16 @@ typedef enum {
 
 #define STOLEN_ITEM_NONE (0)
 
-#define STOLEN_ITEM_1 ((gSaveContext.save.saveInfo.stolenItems & 0xFF000000) >> 0x18)
-#define STOLEN_ITEM_2 ((gSaveContext.save.saveInfo.stolenItems & 0x00FF0000) >> 0x10)
+#define STOLEN_ITEM_1 ((gMmSave.saveInfo.stolenItems & 0xFF000000) >> 0x18)
+#define STOLEN_ITEM_2 ((gMmSave.saveInfo.stolenItems & 0x00FF0000) >> 0x10)
 
 #define SET_STOLEN_ITEM_1(itemId) \
-    (gSaveContext.save.saveInfo.stolenItems = (gSaveContext.save.saveInfo.stolenItems & ~0xFF000000) | ((itemId & 0xFF) << 0x18))
+    (gMmSave.saveInfo.stolenItems = (gMmSave.saveInfo.stolenItems & ~0xFF000000) | ((itemId & 0xFF) << 0x18))
 #define SET_STOLEN_ITEM_2(itemId) \
-    (gSaveContext.save.saveInfo.stolenItems = (gSaveContext.save.saveInfo.stolenItems & ~0x00FF0000) | ((itemId & 0xFF) << 0x10))
+    (gMmSave.saveInfo.stolenItems = (gMmSave.saveInfo.stolenItems & ~0x00FF0000) | ((itemId & 0xFF) << 0x10))
 
-#define HIGH_SCORE(type) (gSaveContext.save.saveInfo.highScores[(type)])
-#define GET_HIGH_SCORE(type) ((void)0, gSaveContext.save.saveInfo.highScores[(type)])
+#define HIGH_SCORE(type) (gMmSave.saveInfo.highScores[(type)])
+#define GET_HIGH_SCORE(type) ((void)0, gMmSave.saveInfo.highScores[(type)])
 
 #define HS_GET_BANK_RUPEES() (HIGH_SCORE(HS_BANK_RUPEES) & 0xFFFF)
 #define HS_SET_BANK_RUPEES(rupees) (HIGH_SCORE(HS_BANK_RUPEES) = ((HIGH_SCORE(HS_BANK_RUPEES) & 0xFFFF0000) | (rupees)))
@@ -572,21 +463,21 @@ typedef enum {
 // ranging from 0 to 7; using an `index` of 8 or 9 will overwrite data used to track the alien kill count. You can technically supply an
 // `index` value between 10 and 13 and have it work, however, since these indices are unused in the final game.
 #define ALIEN_GET_SPAWN_TIME_OFFSET(index) \
-    (((index % 2) == 0) ? ((gSaveContext.save.saveInfo.alienInfo[index >> 1] & 0xFFFF)) \
-                        : ((gSaveContext.save.saveInfo.alienInfo[index >> 1] & ~0xFFFF) >> 0x10))
+    (((index % 2) == 0) ? ((gMmSave.saveInfo.alienInfo[index >> 1] & 0xFFFF)) \
+                        : ((gMmSave.saveInfo.alienInfo[index >> 1] & ~0xFFFF) >> 0x10))
 
 #define ALIEN_SET_SPAWN_TIME_OFFSET(index, spawnTime) \
-    ((index % 2) == 0) ? (gSaveContext.save.saveInfo.alienInfo[index >> 1] = (gSaveContext.save.saveInfo.alienInfo[index >> 1] & ~0xFFFF) | (spawnTime & 0xFFFF)) \
-                       : (gSaveContext.save.saveInfo.alienInfo[index >> 1] = (gSaveContext.save.saveInfo.alienInfo[index >> 1] & 0xFFFF) | ((spawnTime & 0xFFFF) << 0x10))
+    ((index % 2) == 0) ? (gMmSave.saveInfo.alienInfo[index >> 1] = (gMmSave.saveInfo.alienInfo[index >> 1] & ~0xFFFF) | (spawnTime & 0xFFFF)) \
+                       : (gMmSave.saveInfo.alienInfo[index >> 1] = (gMmSave.saveInfo.alienInfo[index >> 1] & 0xFFFF) | ((spawnTime & 0xFFFF) << 0x10))
 
 #define ALIEN_GET_KILL_COUNT() \
-    gSaveContext.save.saveInfo.alienInfo[4] & 0xFF
+    gMmSave.saveInfo.alienInfo[4] & 0xFF
 
 #define ALIEN_SET_KILL_COUNT(count) \
-    gSaveContext.save.saveInfo.alienInfo[4] = (gSaveContext.save.saveInfo.alienInfo[4] & ~0xFF) | (count & 0xFF)
+    gMmSave.saveInfo.alienInfo[4] = (gMmSave.saveInfo.alienInfo[4] & ~0xFF) | (count & 0xFF)
 
 /**
- * gSaveContext.save.saveInfo.weekEventReg
+ * gMmSave.saveInfo.weekEventReg
  */
 
 #define PACK_WEEKEVENTREG_FLAG(index, mask) (((index) << 8) | (mask))
@@ -1530,7 +1421,7 @@ typedef enum {
 #define WEEKEVENTREG_99_40 PACK_WEEKEVENTREG_FLAG(99, 0x40)
 #define WEEKEVENTREG_99_80 PACK_WEEKEVENTREG_FLAG(99, 0x80)
 
-#define WEEKEVENTREG(index) (gSaveContext.save.saveInfo.weekEventReg[(index)])
+#define WEEKEVENTREG(index) (gMmSave.saveInfo.weekEventReg[(index)])
 #define GET_WEEKEVENTREG(index) ((void)0, WEEKEVENTREG(index))
 
 #define CHECK_WEEKEVENTREG(flag) (WEEKEVENTREG((flag) >> 8) & ((flag) & 0xFF))

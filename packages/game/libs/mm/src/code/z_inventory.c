@@ -527,7 +527,7 @@ void Inventory_ChangeUpgrade(s16 upgrade, u32 value) {
     upgrades &= gUpgradeNegMasks[upgrade];
     upgrades |= value << gUpgradeShifts[upgrade];
 
-    gSaveContext.save.saveInfo.inventory.upgrades = upgrades;
+    gMmSave.saveInfo.inventory.upgrades = upgrades;
 }
 
 s32 Inventory_IsMapVisible(s16 sceneId) {
@@ -554,7 +554,7 @@ s32 Inventory_IsMapVisible(s16 sceneId) {
         }
     }
 
-    if (gSaveContext.save.saveInfo.scenesVisible[index] & gBitFlags[sceneId - (index << 5)]) {
+    if (gMmSave.saveInfo.scenesVisible[index] & gBitFlags[sceneId - (index << 5)]) {
         return true;
     }
 
@@ -667,23 +667,23 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleIndex) {
                 index = 6;
             }
 
-            gSaveContext.save.saveInfo.scenesVisible[index] = gSaveContext.save.saveInfo.scenesVisible[index] |
+            gMmSave.saveInfo.scenesVisible[index] = gMmSave.saveInfo.scenesVisible[index] |
                                                               gBitFlags[(s16)(*tingleMapSceneIds)[i] - (index << 5)];
             i++;
         }
 
         if (*tingleMapSceneIds == sSceneIdsPerTingleMap[TINGLE_MAP_CLOCK_TOWN]) {
-            gSaveContext.save.saveInfo.worldMapCloudVisibility |= 3;
+            gMmSave.saveInfo.worldMapCloudVisibility |= 3;
         } else if (*tingleMapSceneIds == sSceneIdsPerTingleMap[TINGLE_MAP_WOODFALL]) {
-            gSaveContext.save.saveInfo.worldMapCloudVisibility |= 0x1C;
+            gMmSave.saveInfo.worldMapCloudVisibility |= 0x1C;
         } else if (*tingleMapSceneIds == sSceneIdsPerTingleMap[TINGLE_MAP_SNOWHEAD]) {
-            gSaveContext.save.saveInfo.worldMapCloudVisibility |= 0xE0;
+            gMmSave.saveInfo.worldMapCloudVisibility |= 0xE0;
         } else if (*tingleMapSceneIds == sSceneIdsPerTingleMap[TINGLE_MAP_ROMANI_RANCH]) {
-            gSaveContext.save.saveInfo.worldMapCloudVisibility |= 0x100;
+            gMmSave.saveInfo.worldMapCloudVisibility |= 0x100;
         } else if (*tingleMapSceneIds == sSceneIdsPerTingleMap[TINGLE_MAP_GREAT_BAY]) {
-            gSaveContext.save.saveInfo.worldMapCloudVisibility |= 0x1E00;
+            gMmSave.saveInfo.worldMapCloudVisibility |= 0x1E00;
         } else if (*tingleMapSceneIds == sSceneIdsPerTingleMap[TINGLE_MAP_STONE_TOWER]) {
-            gSaveContext.save.saveInfo.worldMapCloudVisibility |= 0x6000;
+            gMmSave.saveInfo.worldMapCloudVisibility |= 0x6000;
         }
     }
 
@@ -696,34 +696,34 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleIndex) {
 void Inventory_SaveDekuPlaygroundHighScore(s16 timerId) {
     s16 i;
 
-    gSaveContext.save.saveInfo.dekuPlaygroundHighScores[CURRENT_DAY - 1] = gSaveContext.timerCurTimes[timerId];
+    gMmSave.saveInfo.dekuPlaygroundHighScores[CURRENT_DAY - 1] = gSaveContext.timerCurTimes[timerId];
 
     for (i = 0; i < 8; i++) {
-        gSaveContext.save.saveInfo.inventory.dekuPlaygroundPlayerName[CURRENT_DAY - 1][i] =
-            gSaveContext.save.saveInfo.playerData.playerName[i];
+        gMmSave.saveInfo.inventory.dekuPlaygroundPlayerName[CURRENT_DAY - 1][i] =
+            gMmSave.saveInfo.playerData.playerName[i];
     }
 }
 
 void Inventory_IncrementSkullTokenCount(s16 sceneIndex) {
     if (sceneIndex == SCENE_KINSTA1) {
         // Swamp Spider House (increment high bits of skullTokenCount)
-        gSaveContext.save.saveInfo.skullTokenCount =
-            ((u16)(((gSaveContext.save.saveInfo.skullTokenCount & 0xFFFF0000) >> 0x10) + 1) << 0x10) |
-            (gSaveContext.save.saveInfo.skullTokenCount & 0xFFFF);
+        gMmSave.saveInfo.skullTokenCount =
+            ((u16)(((gMmSave.saveInfo.skullTokenCount & 0xFFFF0000) >> 0x10) + 1) << 0x10) |
+            (gMmSave.saveInfo.skullTokenCount & 0xFFFF);
     } else {
         // Ocean Spider House (increment low bits of skullTokenCount)
-        gSaveContext.save.saveInfo.skullTokenCount = (((u16)gSaveContext.save.saveInfo.skullTokenCount + 1) & 0xFFFF) |
-                                                     (gSaveContext.save.saveInfo.skullTokenCount & 0xFFFF0000);
+        gMmSave.saveInfo.skullTokenCount = (((u16)gMmSave.saveInfo.skullTokenCount + 1) & 0xFFFF) |
+                                                     (gMmSave.saveInfo.skullTokenCount & 0xFFFF0000);
     }
 }
 
 s16 Inventory_GetSkullTokenCount(s16 sceneIndex) {
     if (sceneIndex == SCENE_KINSTA1) {
         // Swamp Spider House
-        return (gSaveContext.save.saveInfo.skullTokenCount & 0xFFFF0000) >> 0x10;
+        return (gMmSave.saveInfo.skullTokenCount & 0xFFFF0000) >> 0x10;
     } else {
         // Ocean Spider House
-        return gSaveContext.save.saveInfo.skullTokenCount & 0xFFFF;
+        return gMmSave.saveInfo.skullTokenCount & 0xFFFF;
     }
 }
 

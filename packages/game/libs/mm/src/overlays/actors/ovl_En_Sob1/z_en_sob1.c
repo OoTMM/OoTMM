@@ -190,7 +190,7 @@ u16 EnSob1_GetTalkOption(EnSob1* this, PlayState* play) {
     Player* player = GET_PLAYER(play);
 
     if (this->shopType == BOMB_SHOP) {
-        if ((gSaveContext.save.day == 1) && (CURRENT_TIME >= CLOCK_TIME(6, 0))) {
+        if ((gMmSave.day == 1) && (CURRENT_TIME >= CLOCK_TIME(6, 0))) {
             return 0x648;
         } else if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECOVERED_STOLEN_BOMB_BAG)) {
             return 0x649;
@@ -348,11 +348,11 @@ u16 EnSob1_GetWelcome(EnSob1* this, PlayState* play) {
 
 u16 EnSob1_GetGoodbye(EnSob1* this) {
     if (this->shopType == BOMB_SHOP) {
-        if (gSaveContext.save.day == 1) {
+        if (gMmSave.day == 1) {
             return 0x64C;
-        } else if (gSaveContext.save.day == 2) {
+        } else if (gMmSave.day == 2) {
             return 0x64D;
-        } else if (!gSaveContext.save.isNight) {
+        } else if (!gMmSave.isNight) {
             return 0x64E;
         } else {
             return 0x64F;

@@ -116,7 +116,7 @@ void EnTakaraya_Init(Actor* thisx, PlayState* play) {
     }
 
     this->eyeTexIndex = 2;
-    if (gSaveContext.save.entrance == ENTRANCE(TREASURE_CHEST_SHOP, 1)) {
+    if (gMmSave.entrance == ENTRANCE(TREASURE_CHEST_SHOP, 1)) {
         Audio_StopSubBgm();
         if (gSaveContext.timerStates[TIMER_ID_MINIGAME_2] == TIMER_STATE_6) {
             this->actor.textId = 0x77A;
@@ -234,7 +234,7 @@ void EnTakaraya_Talk(EnTakaraya* this, PlayState* play) {
         }
     } else if ((talkState == TEXT_STATE_CHOICE) && Message_ShouldAdvance(play)) {
         if (play->msgCtx.choiceIndex == 0) {
-            if (gSaveContext.save.saveInfo.playerData.rupees < play->msgCtx.unk1206C) {
+            if (gMmSave.saveInfo.playerData.rupees < play->msgCtx.unk1206C) {
                 this->actor.textId = 0x77B;
                 if (this->skelAnime.animation == &object_bg_Anim_009890) {
                     Animation_MorphToPlayOnce(&this->skelAnime, &object_bg_Anim_000968, 5.0f);

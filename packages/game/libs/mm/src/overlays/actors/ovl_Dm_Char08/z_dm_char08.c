@@ -202,7 +202,7 @@ void DmChar08_Init(Actor* thisx, PlayState* play2) {
                 this->unk_207 = 0;
                 this->unk_208 = 0;
                 thisx->flags |= ACTOR_FLAG_ATTENTION_ENABLED;
-                if (gSaveContext.save.entrance == ENTRANCE(ZORA_CAPE, 8)) {
+                if (gMmSave.entrance == ENTRANCE(ZORA_CAPE, 8)) {
                     this->eyeMode = TURTLE_EYEMODE_BLINK_LEFT;
                     this->actionFunc = func_80AAFAC4;
                 } else {

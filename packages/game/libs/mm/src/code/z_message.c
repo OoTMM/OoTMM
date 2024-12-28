@@ -2263,15 +2263,15 @@ void Message_Decode(PlayState* play) {
             }
 
             if (curChar == 0x100) {
-                for (playerNameLen = ARRAY_COUNT(gSaveContext.save.saveInfo.playerData.playerName); playerNameLen > 0;
+                for (playerNameLen = ARRAY_COUNT(gMmSave.saveInfo.playerData.playerName); playerNameLen > 0;
                      playerNameLen--) {
-                    if (((void)0, gSaveContext.save.saveInfo.playerData.playerName[playerNameLen - 1]) != 0x3E) {
+                    if (((void)0, gMmSave.saveInfo.playerData.playerName[playerNameLen - 1]) != 0x3E) {
                         break;
                     }
                 }
 
                 for (i = 0; i < playerNameLen; i++) {
-                    curChar = gSaveContext.save.saveInfo.playerData.playerName[i];
+                    curChar = gMmSave.saveInfo.playerData.playerName[i];
                     index2 = curChar & 0xFFFF;
                     fontBuf = &font->fontBuf[index2 * FONT_CHAR_TEX_SIZE];
                     msgCtx->decodedBuffer.wchar[decodedBufPos + i] = 0x100;
@@ -2470,7 +2470,7 @@ void Message_Decode(PlayState* play) {
             } else if (curChar == 0x21C) {
                 digits[0] = digits[1] = 0;
                 digits[2] =
-                    gSaveContext.save.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex];
+                    gMmSave.saveInfo.inventory.strayFairies[(void)0, gSaveContext.dungeonSceneSharedIndex];
 
                 while (digits[2] >= 100) {
                     digits[0]++;
@@ -2590,9 +2590,9 @@ void Message_Decode(PlayState* play) {
                 }
                 decodedBufPos--;
             } else if (curChar == 0x223) {
-                if (((void)0, gSaveContext.save.timeSpeedOffset) == 0x12) {
+                if (((void)0, gMmSave.timeSpeedOffset) == 0x12) {
                     index = 0;
-                } else if (((void)0, gSaveContext.save.timeSpeedOffset) == 0) {
+                } else if (((void)0, gMmSave.timeSpeedOffset) == 0) {
                     index = 1;
                 } else {
                     index = 2;
@@ -2628,7 +2628,7 @@ void Message_Decode(PlayState* play) {
             } else if (curChar == 0x226) {
                 for (i = 0; i < 6; i++) {
                     msgCtx->decodedBuffer.wchar[decodedBufPos] =
-                        sMaskCodeColorCmdJPN[((void)0, gSaveContext.save.saveInfo.spiderHouseMaskOrder[i])];
+                        sMaskCodeColorCmdJPN[((void)0, gMmSave.saveInfo.spiderHouseMaskOrder[i])];
                     decodedBufPos++;
                     Message_LoadChar(play, i + '１', &charTexIndex, &spC0, decodedBufPos);
                     decodedBufPos++;
@@ -2637,7 +2637,7 @@ void Message_Decode(PlayState* play) {
             } else if ((curChar >= 0x227) && (curChar < 0x22B)) {
                 digits[0] = digits[1] = 0;
                 digits[2] =
-                    STRAY_FAIRY_SCATTERED_TOTAL - gSaveContext.save.saveInfo.inventory.strayFairies[curChar - 0x227];
+                    STRAY_FAIRY_SCATTERED_TOTAL - gMmSave.saveInfo.inventory.strayFairies[curChar - 0x227];
 
                 while (digits[2] >= 100) {
                     digits[0]++;
@@ -2695,9 +2695,9 @@ void Message_Decode(PlayState* play) {
                 Message_LoadChar(play, '発', &charTexIndex, &spC0, decodedBufPos);
             } else if ((curChar == 0x22C) || (curChar == 0x22D)) {
                 if (curChar == 0x22C) {
-                    digits[0] = gSaveContext.save.saveInfo.lotteryCodes[CURRENT_DAY - 1][0];
-                    digits[1] = gSaveContext.save.saveInfo.lotteryCodes[CURRENT_DAY - 1][1];
-                    digits[2] = gSaveContext.save.saveInfo.lotteryCodes[CURRENT_DAY - 1][2];
+                    digits[0] = gMmSave.saveInfo.lotteryCodes[CURRENT_DAY - 1][0];
+                    digits[1] = gMmSave.saveInfo.lotteryCodes[CURRENT_DAY - 1][1];
+                    digits[2] = gMmSave.saveInfo.lotteryCodes[CURRENT_DAY - 1][2];
                 } else {
                     digits[0] = (HS_GET_LOTTERY_CODE_GUESS() & 0xF00) >> 8;
                     digits[1] = (HS_GET_LOTTERY_CODE_GUESS() & 0xF0) >> 4;
@@ -2743,8 +2743,8 @@ void Message_Decode(PlayState* play) {
                 }
                 Message_LoadRupeesJPN(play, &decodedBufPos, &charTexIndex, &spC0);
             } else if (curChar == 0x22F) {
-                for (i = 0; i < ARRAY_COUNT(gSaveContext.save.saveInfo.bomberCode); i++) {
-                    digits[i] = gSaveContext.save.saveInfo.bomberCode[i];
+                for (i = 0; i < ARRAY_COUNT(gMmSave.saveInfo.bomberCode); i++) {
+                    digits[i] = gMmSave.saveInfo.bomberCode[i];
                     Font_LoadChar(play, digits[i] + '０', charTexIndex);
                     charTexIndex += FONT_CHAR_TEX_SIZE;
                     msgCtx->decodedBuffer.wchar[decodedBufPos] = digits[i] + '０';
@@ -2754,11 +2754,11 @@ void Message_Decode(PlayState* play) {
                 decodedBufPos--;
             } else if ((curChar >= 0x231) && (curChar < 0x237)) {
                 msgCtx->decodedBuffer.wchar[decodedBufPos] = sMaskCodeColorCmdJPN[(
-                    (void)0, gSaveContext.save.saveInfo.spiderHouseMaskOrder[(s16)(curChar - 0x231)])];
+                    (void)0, gMmSave.saveInfo.spiderHouseMaskOrder[(s16)(curChar - 0x231)])];
                 decodedBufPos++;
                 Message_LoadChar(play,
                                  sMaskCodeTextJPN[(
-                                     (void)0, gSaveContext.save.saveInfo.spiderHouseMaskOrder[(s16)(curChar - 0x231)])],
+                                     (void)0, gMmSave.saveInfo.spiderHouseMaskOrder[(s16)(curChar - 0x231)])],
                                  &charTexIndex, &spC0, decodedBufPos);
                 decodedBufPos++;
                 msgCtx->decodedBuffer.wchar[decodedBufPos] = 0x2000;
@@ -2844,7 +2844,7 @@ void Message_Decode(PlayState* play) {
                     Message_GetTimerDigits(GET_HIGH_SCORE(HS_HORSE_BACK_BALLOON), spAC);
                 } else {
                     Message_GetTimerDigits(
-                        ((void)0, gSaveContext.save.saveInfo.dekuPlaygroundHighScores[curChar - 0x30A]), spAC);
+                        ((void)0, gMmSave.saveInfo.dekuPlaygroundHighScores[curChar - 0x30A]), spAC);
                 }
 
                 loadChar = false;
@@ -2933,14 +2933,14 @@ void Message_Decode(PlayState* play) {
                 index = curChar - 0x30D;
 
                 for (playerNameLen = 8; playerNameLen > 0; playerNameLen--) {
-                    if (gSaveContext.save.saveInfo.inventory.dekuPlaygroundPlayerName[index][playerNameLen - 1] !=
+                    if (gMmSave.saveInfo.inventory.dekuPlaygroundPlayerName[index][playerNameLen - 1] !=
                         0x3E) {
                         break;
                     }
                 }
 
                 for (i = 0; i < playerNameLen; i++) {
-                    curChar = ((void)0, gSaveContext.save.saveInfo.inventory.dekuPlaygroundPlayerName[index][i]);
+                    curChar = ((void)0, gMmSave.saveInfo.inventory.dekuPlaygroundPlayerName[index][i]);
                     //! FAKE: 0xFFFF
                     fontBuf = &font->fontBuf[(curChar & 0xFFFF) * FONT_CHAR_TEX_SIZE];
                     msgCtx->decodedBuffer.wchar[decodedBufPos + i] = 0x30D;
@@ -3119,7 +3119,7 @@ void Message_OpenText(PlayState* play, u16 textId) {
         Interface_SetBButtonInterfaceDoAction(play, DO_ACTION_STOP);
         play->msgCtx.hudVisibility = gSaveContext.hudVisibility;
         Interface_SetHudVisibility(HUD_VISIBILITY_A_B_C);
-        gSaveContext.save.unk_06 = 20;
+        gMmSave.unk_06 = 20;
     } else if ((textId == 0x579) || (textId == 0x8D8)) {
         Interface_SetHudVisibility(HUD_VISIBILITY_A_HEARTS_MAGIC_WITH_OVERWRITE);
     } else if (((textId == 0x28) || (textId == 0x29) || (textId == 0x2A)) &&
@@ -3128,7 +3128,7 @@ void Message_OpenText(PlayState* play, u16 textId) {
         if (msgCtx) {}
         textId = 0xC9;
     } else if (textId == 0x11) {
-        if (gSaveContext.save.saveInfo.inventory.strayFairies[((void)0, gSaveContext.dungeonSceneSharedIndex)] == 0xF) {
+        if (gMmSave.saveInfo.inventory.strayFairies[((void)0, gSaveContext.dungeonSceneSharedIndex)] == 0xF) {
             textId = 0xF3;
         }
     } else if ((textId == 0x92) && (play->sceneId == SCENE_KOEPONARACE)) {
@@ -3492,7 +3492,7 @@ void Message_DisplayOcarinaStaffImpl(PlayState* play, u16 ocarinaAction) {
     if (CHECK_QUEST_ITEM(QUEST_SONG_LULLABY)) {
         msgCtx->ocarinaAvailableSongs &= (u16)~0x4000;
     }
-    if (gSaveContext.save.saveInfo.scarecrowSpawnSongSet) {
+    if (gMmSave.saveInfo.scarecrowSpawnSongSet) {
         msgCtx->ocarinaAvailableSongs |= 0x400000;
     }
     if (CHECK_EVENTINF(EVENTINF_31)) {
@@ -4317,7 +4317,7 @@ void Message_DrawMain(PlayState* play, Gfx** gfxP) {
                         AudioOcarina_SetInstrument(sPlayerFormOcarinaInstruments[CUR_FORM]);
                         //! FAKE:
                         (void)CUR_FORM;
-                        if (gSaveContext.save.playerForm == 4) {}
+                        if (gMmSave.playerForm == 4) {}
                     } else {
                         AudioOcarina_SetInstrument(OCARINA_INSTRUMENT_AMPLIFIED_GUITAR);
                     }
@@ -4859,12 +4859,12 @@ void Message_DrawMain(PlayState* play, Gfx** gfxP) {
 
                 if (msgCtx->ocarinaStaff->state == 0) {
                     msgCtx->stateTimer = 20;
-                    gSaveContext.save.saveInfo.scarecrowSpawnSongSet = true;
+                    gMmSave.saveInfo.scarecrowSpawnSongSet = true;
                     msgCtx->msgMode = MSGMODE_SCARECROW_SPAWN_RECORDING_DONE;
                     Audio_PlaySfx(NA_SE_SY_TRE_BOX_APPEAR);
-                    Lib_MemCpy(gSaveContext.save.saveInfo.scarecrowSpawnSong, gScarecrowSpawnSongPtr,
-                               sizeof(gSaveContext.save.saveInfo.scarecrowSpawnSong));
-                    for (i = 0; i < ARRAY_COUNT(gSaveContext.save.saveInfo.scarecrowSpawnSong); i++) {
+                    Lib_MemCpy(gMmSave.saveInfo.scarecrowSpawnSong, gScarecrowSpawnSongPtr,
+                               sizeof(gMmSave.saveInfo.scarecrowSpawnSong));
+                    for (i = 0; i < ARRAY_COUNT(gMmSave.saveInfo.scarecrowSpawnSong); i++) {
                         // osSyncPrintf("%d, ", gSaveContext.scarecrowSpawnSong[i]);
                     }
                 } else if (msgCtx->ocarinaStaff->state == 0xFF) {
@@ -5601,12 +5601,12 @@ void Message_Update(PlayState* play) {
                     if (Message_ShouldAdvance(play)) {
                         if (msgCtx->choiceIndex == 0) {
                             Audio_PlaySfx_MessageDecide();
-                            if (gSaveContext.save.timeSpeedOffset == 0) {
+                            if (gMmSave.timeSpeedOffset == 0) {
                                 play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_INV_SOT_SLOW;
-                                gSaveContext.save.timeSpeedOffset = -2;
+                                gMmSave.timeSpeedOffset = -2;
                             } else {
                                 play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_INV_SOT_FAST;
-                                gSaveContext.save.timeSpeedOffset = 0;
+                                gMmSave.timeSpeedOffset = 0;
                             }
                             Message_CloseTextbox(play);
                         } else {
@@ -5620,10 +5620,10 @@ void Message_Update(PlayState* play) {
                     if (Message_ShouldAdvance(play)) {
                         if (msgCtx->choiceIndex == 0) {
                             Audio_PlaySfx_MessageDecide();
-                            if (gSaveContext.save.isNight != 0) {
-                                gSaveContext.save.time = CLOCK_TIME(6, 0);
+                            if (gMmSave.isNight != 0) {
+                                gMmSave.time = CLOCK_TIME(6, 0);
                             } else {
-                                gSaveContext.save.time = CLOCK_TIME(18, 0);
+                                gMmSave.time = CLOCK_TIME(18, 0);
                             }
                             play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_DOUBLE_SOT;
                             gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = TIMER_STATE_OFF;
@@ -5702,7 +5702,7 @@ void Message_Update(PlayState* play) {
                         play->msgCtx.ocarinaMode = OCARINA_MODE_1B;
                         sLastPlayedSong = 0xFF;
                     } else if (!msgCtx->ocarinaSongEffectActive) {
-                        if (gSaveContext.save.saveInfo.playerData.owlActivationFlags != 0) {
+                        if (gMmSave.saveInfo.playerData.owlActivationFlags != 0) {
                             pauseCtx->unk_2C8 = pauseCtx->pageIndex;
                             pauseCtx->unk_2CA = pauseCtx->cursorPoint[4];
                             pauseCtx->pageIndex = PAUSE_ITEM;
@@ -5742,7 +5742,7 @@ void Message_Update(PlayState* play) {
                 gSaveContext.healthAccumulator = 20 * 0x10; // Refill 20 hearts
             }
 
-            if ((play->csCtx.state == CS_STATE_IDLE) && (gSaveContext.save.cutsceneIndex < 0xFFF0) &&
+            if ((play->csCtx.state == CS_STATE_IDLE) && (gMmSave.cutsceneIndex < 0xFFF0) &&
                 ((play->activeCamId == CAM_ID_MAIN) ||
                  ((play->transitionTrigger == TRANS_TRIGGER_OFF) && (play->transitionMode == TRANS_MODE_OFF))) &&
                 (play->msgCtx.ocarinaMode == OCARINA_MODE_END)) {
@@ -5787,8 +5787,8 @@ void Message_Update(PlayState* play) {
 
             if (EQ_MAX_QUEST_HEART_PIECE_COUNT) {
                 RESET_HEART_PIECE_COUNT;
-                gSaveContext.save.saveInfo.playerData.healthCapacity += 0x10;
-                gSaveContext.save.saveInfo.playerData.health += 0x10;
+                gMmSave.saveInfo.playerData.healthCapacity += 0x10;
+                gMmSave.saveInfo.playerData.health += 0x10;
             }
 
             if (msgCtx->ocarinaAction != OCARINA_ACTION_CHECK_NOTIME_DONE) {
@@ -5806,7 +5806,7 @@ void Message_Update(PlayState* play) {
                 } else if (sLastPlayedSong == OCARINA_SONG_INVERTED_TIME) {
                     if (interfaceCtx->restrictions.invSongOfTime == 0) {
                         if (R_TIME_SPEED != 0) {
-                            if (gSaveContext.save.timeSpeedOffset == 0) {
+                            if (gMmSave.timeSpeedOffset == 0) {
                                 Message_StartTextbox(play, 0x1B8C, NULL);
                             } else {
                                 Message_StartTextbox(play, 0x1B8D, NULL);
@@ -5823,8 +5823,8 @@ void Message_Update(PlayState* play) {
                     }
                 } else if (sLastPlayedSong == OCARINA_SONG_DOUBLE_TIME) {
                     if (interfaceCtx->restrictions.songOfDoubleTime == 0) {
-                        if ((CURRENT_DAY != 3) || (gSaveContext.save.isNight == 0)) {
-                            if (gSaveContext.save.isNight) {
+                        if ((CURRENT_DAY != 3) || (gMmSave.isNight == 0)) {
+                            if (gMmSave.isNight) {
                                 Message_StartTextbox(play, D_801D0464[CURRENT_DAY - 1], NULL);
                             } else {
                                 Message_StartTextbox(play, D_801D045C[CURRENT_DAY - 1], NULL);
@@ -5937,17 +5937,17 @@ void Message_Update(PlayState* play) {
 
         case MSGMODE_NEW_CYCLE_0:
             play->state.unk_A3 = 1;
-            sp44 = gSaveContext.save.cutsceneIndex;
+            sp44 = gMmSave.cutsceneIndex;
             sp3E = CURRENT_TIME;
-            sp40 = gSaveContext.save.day;
+            sp40 = gMmSave.day;
 
             Sram_SaveEndOfCycle(play);
             gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = TIMER_STATE_OFF;
             func_8014546C(&play->sramCtx);
 
-            gSaveContext.save.day = sp40;
-            gSaveContext.save.time = sp3E;
-            gSaveContext.save.cutsceneIndex = sp44;
+            gMmSave.day = sp40;
+            gMmSave.time = sp3E;
+            gMmSave.cutsceneIndex = sp44;
 
             if (gSaveContext.fileNum != 0xFF) {
                 Sram_SetFlashPagesDefault(&play->sramCtx, gFlashSaveStartPages[gSaveContext.fileNum * 2],
@@ -5972,7 +5972,7 @@ void Message_Update(PlayState* play) {
 
         case MSGMODE_OWL_SAVE_0:
             play->state.unk_A3 = 1;
-            gSaveContext.save.isOwlSave = true;
+            gMmSave.isOwlSave = true;
             Play_SaveCycleSceneFlags(play);
             func_8014546C(&play->sramCtx);
 
@@ -6001,7 +6001,7 @@ void Message_Update(PlayState* play) {
                 play->transitionTrigger = TRANS_TRIGGER_START;
                 play->transitionType = TRANS_TYPE_FADE_BLACK;
                 play->nextEntrance = ENTRANCE(CUTSCENE, 0);
-                gSaveContext.save.cutsceneIndex = 0;
+                gMmSave.cutsceneIndex = 0;
                 gSaveContext.sceneLayer = 0;
             }
             break;

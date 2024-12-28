@@ -389,15 +389,15 @@ void Message_DecodeCredits(PlayState* play) {
             break;
         } else if (curChar == MESSAGE_NAME) {
             // Substitute the player name control character for the file's player name.
-            for (playerNameLen = ARRAY_COUNT(gSaveContext.save.saveInfo.playerData.playerName); playerNameLen > 0;
+            for (playerNameLen = ARRAY_COUNT(gMmSave.saveInfo.playerData.playerName); playerNameLen > 0;
                  playerNameLen--) {
-                if (gSaveContext.save.saveInfo.playerData.playerName[playerNameLen - 1] != 0x3E) {
+                if (gMmSave.saveInfo.playerData.playerName[playerNameLen - 1] != 0x3E) {
                     break;
                 }
             }
 
             for (i = 0; i < playerNameLen; i++) {
-                curChar = gSaveContext.save.saveInfo.playerData.playerName[i];
+                curChar = gMmSave.saveInfo.playerData.playerName[i];
                 if (curChar == 62) {
                     curChar = ' ';
                 } else if (curChar == 64) {

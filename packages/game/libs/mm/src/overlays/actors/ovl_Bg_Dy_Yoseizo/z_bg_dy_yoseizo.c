@@ -322,23 +322,23 @@ void func_80A0B35C(BgDyYoseizo* this, PlayState* play) {
         if (!Flags_GetSwitch(play, GREAT_FAIRY_GET_SWITCHFLAG(&this->actor))) {
             switch (GREAT_FAIRY_GET_TYPE(&this->actor)) {
                 case GREAT_FAIRY_TYPE_MAGIC:
-                    if (gSaveContext.save.saveInfo.playerData.isMagicAcquired != true) {
-                        gSaveContext.save.saveInfo.playerData.isMagicAcquired = true;
+                    if (gMmSave.saveInfo.playerData.isMagicAcquired != true) {
+                        gMmSave.saveInfo.playerData.isMagicAcquired = true;
                         gSaveContext.magicFillTarget = MAGIC_NORMAL_METER;
                     }
                     break;
 
                 case GREAT_FAIRY_TYPE_WISDOM:
-                    if (gSaveContext.save.saveInfo.playerData.isDoubleMagicAcquired != true) {
-                        gSaveContext.save.saveInfo.playerData.isDoubleMagicAcquired = true;
+                    if (gMmSave.saveInfo.playerData.isDoubleMagicAcquired != true) {
+                        gMmSave.saveInfo.playerData.isDoubleMagicAcquired = true;
                         gSaveContext.magicFillTarget = MAGIC_DOUBLE_METER;
-                        gSaveContext.save.saveInfo.playerData.magicLevel = 0;
+                        gMmSave.saveInfo.playerData.magicLevel = 0;
                     }
                     break;
 
                 case GREAT_FAIRY_TYPE_COURAGE:
-                    if (gSaveContext.save.saveInfo.playerData.doubleDefense != true) {
-                        gSaveContext.save.saveInfo.playerData.doubleDefense = true;
+                    if (gMmSave.saveInfo.playerData.doubleDefense != true) {
+                        gMmSave.saveInfo.playerData.doubleDefense = true;
                     }
                     break;
 
@@ -350,8 +350,8 @@ void func_80A0B35C(BgDyYoseizo* this, PlayState* play) {
     }
 
     if ((this->timer < 50) && (GREAT_FAIRY_GET_TYPE(&this->actor) == GREAT_FAIRY_TYPE_COURAGE)) {
-        if (gSaveContext.save.saveInfo.inventory.defenseHearts < 20) {
-            gSaveContext.save.saveInfo.inventory.defenseHearts++;
+        if (gMmSave.saveInfo.inventory.defenseHearts < 20) {
+            gMmSave.saveInfo.inventory.defenseHearts++;
         }
     }
 

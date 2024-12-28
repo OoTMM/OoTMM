@@ -631,7 +631,7 @@ void EnPst_FollowSchedule(EnPst* this, PlayState* play) {
 void EnPst_Talk(EnPst* this, PlayState* play) {
     if (MsgEvent_RunScript(&this->actor, play, this->msgScript, this->msgScriptCallback, &this->msgScriptPos)) {
         if (EnPst_HandleLetterDay1(this) != this->isLetterToKafeiDeposited) {
-            switch (gSaveContext.save.day) {
+            switch (gMmSave.day) {
                 case 1:
                     SET_WEEKEVENTREG(WEEKEVENTREG_91_04);
                     break;

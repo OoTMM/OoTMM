@@ -393,7 +393,7 @@ void Scene_CommandSkyboxDisables(PlayState* play, SceneCmd* cmd) {
 // SceneTableEntry Header Command 0x10: Time Settings
 void Scene_CommandTimeSettings(PlayState* play, SceneCmd* cmd) {
     if ((cmd->timeSettings.hour != 0xFF) && (cmd->timeSettings.min != 0xFF)) {
-        gSaveContext.skyboxTime = gSaveContext.save.time =
+        gSaveContext.skyboxTime = gMmSave.time =
             CLOCK_TIME_ALT2_F(cmd->timeSettings.hour, cmd->timeSettings.min);
     }
 
@@ -404,7 +404,7 @@ void Scene_CommandTimeSettings(PlayState* play, SceneCmd* cmd) {
     }
 
     // Increase time speed during first cycle
-    if ((gSaveContext.save.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) && (play->envCtx.sceneTimeSpeed != 0)) {
+    if ((gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) && (play->envCtx.sceneTimeSpeed != 0)) {
         play->envCtx.sceneTimeSpeed = 5;
     }
 
@@ -416,7 +416,7 @@ void Scene_CommandTimeSettings(PlayState* play, SceneCmd* cmd) {
     play->envCtx.sunPos.y = (Math_CosS(CURRENT_TIME - CLOCK_TIME(12, 0)) * 120.0f) * 25.0f;
     play->envCtx.sunPos.z = (Math_CosS(CURRENT_TIME - CLOCK_TIME(12, 0)) * 20.0f) * 25.0f;
 
-    if ((play->envCtx.sceneTimeSpeed == 0) && (gSaveContext.save.cutsceneIndex < 0xFFF0)) {
+    if ((play->envCtx.sceneTimeSpeed == 0) && (gMmSave.cutsceneIndex < 0xFFF0)) {
         gSaveContext.skyboxTime = CURRENT_TIME;
 
         if ((gSaveContext.skyboxTime >= CLOCK_TIME(4, 0)) && (gSaveContext.skyboxTime < CLOCK_TIME(6, 30))) {
@@ -533,8 +533,8 @@ void Scene_CommandSetRegionVisitedFlag(PlayState* play, SceneCmd* cmd) {
     }
 
     if (i < REGION_MAX) {
-        gSaveContext.save.saveInfo.regionsVisited =
-            (gBitFlags[i] | gSaveContext.save.saveInfo.regionsVisited) | gSaveContext.save.saveInfo.regionsVisited;
+        gMmSave.saveInfo.regionsVisited =
+            (gBitFlags[i] | gMmSave.saveInfo.regionsVisited) | gMmSave.saveInfo.regionsVisited;
     }
 }
 
@@ -618,5 +618,5 @@ u16 Entrance_Create(s32 scene, s32 spawn, s32 layer) {
  * Creates an layer 0 entrance from the current entrance and the given spawn.
  */
 u16 Entrance_CreateFromSpawn(s32 spawn) {
-    return Entrance_Create((u32)gSaveContext.save.entrance >> 9, spawn, 0);
+    return Entrance_Create((u32)gMmSave.entrance >> 9, spawn, 0);
 }

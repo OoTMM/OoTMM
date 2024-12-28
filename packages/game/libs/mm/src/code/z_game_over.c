@@ -51,7 +51,7 @@ void GameOver_Update(PlayState* play) {
             }
 
             gSaveContext.nayrusLoveTimer = 2000;
-            gSaveContext.save.saveInfo.playerData.tatlTimer = 0;
+            gMmSave.saveInfo.playerData.tatlTimer = 0;
             gSaveContext.seqId = (u8)NA_BGM_DISABLED;
             gSaveContext.ambienceId = AMBIENCE_ID_DISABLED;
             gSaveContext.eventInf[0] = 0;
@@ -80,11 +80,11 @@ void GameOver_Update(PlayState* play) {
                     gSaveContext.respawnFlag = -6;
                 }
                 gSaveContext.nextTransitionType = TRANS_TYPE_FADE_BLACK;
-                gSaveContext.save.saveInfo.playerData.health = 0x30;
+                gMmSave.saveInfo.playerData.health = 0x30;
                 gameOverCtx->state++;
                 if (INV_CONTENT(ITEM_MASK_DEKU) == ITEM_MASK_DEKU) {
-                    gSaveContext.save.playerForm = PLAYER_FORM_HUMAN;
-                    gSaveContext.save.equippedMask = PLAYER_MASK_NONE;
+                    gMmSave.playerForm = PLAYER_FORM_HUMAN;
+                    gMmSave.equippedMask = PLAYER_MASK_NONE;
                 }
                 Rumble_StateReset();
             }

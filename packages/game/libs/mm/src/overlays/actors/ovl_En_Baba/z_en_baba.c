@@ -513,7 +513,7 @@ void EnBaba_FinishInit(EnBaba* this, PlayState* play) {
         this->actionFunc = EnBaba_Idle;
     } else if (play->sceneId == SCENE_BACKTOWN) {
         if ((BOMB_SHOP_LADY_GET_TYPE(&this->actor) == BOMB_SHOP_LADY_TYPE_FOLLOW_SCHEDULE) &&
-            (gSaveContext.save.entrance != ENTRANCE(NORTH_CLOCK_TOWN, 7)) &&
+            (gMmSave.entrance != ENTRANCE(NORTH_CLOCK_TOWN, 7)) &&
             (BOMB_SHOP_LADY_GET_PATH_INDEX(&this->actor) != BOMB_SHOP_LADY_PATH_INDEX_NONE)) {
             if (CHECK_WEEKEVENTREG(WEEKEVENTREG_58_40) ||
                 ((CURRENT_TIME >= CLOCK_TIME(0, 20)) && (CURRENT_TIME < CLOCK_TIME(6, 0)))) {
@@ -526,7 +526,7 @@ void EnBaba_FinishInit(EnBaba* this, PlayState* play) {
             Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, this->animIndex);
             this->actionFunc = EnBaba_FollowSchedule;
         } else if ((BOMB_SHOP_LADY_GET_TYPE(&this->actor) == BOMB_SHOP_LADY_TYPE_IDLE) &&
-                   (gSaveContext.save.entrance == ENTRANCE(NORTH_CLOCK_TOWN, 7))) {
+                   (gMmSave.entrance == ENTRANCE(NORTH_CLOCK_TOWN, 7))) {
             if (CHECK_WEEKEVENTREG(WEEKEVENTREG_81_02)) {
                 Actor_Kill(&this->actor);
                 return;
@@ -657,7 +657,7 @@ void EnBaba_GaveBlastMask(EnBaba* this, PlayState* play) {
 void EnBaba_FollowSchedule(EnBaba* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
 
     if (!Schedule_RunScript(play, sSchedule, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) &&

@@ -423,7 +423,7 @@ void FileSelect_CopyConfirm(GameState* thisx) {
         this->configMode = CM_RETURN_TO_COPY_DEST;
         Audio_PlaySfx(NA_SE_SY_FSEL_CLOSE);
     } else if (CHECK_BTN_ANY(input->press.button, BTN_A | BTN_START)) {
-        gSaveContext.save.time = time = CURRENT_TIME; // Set to itself with unused temp
+        gMmSave.time = time = CURRENT_TIME; // Set to itself with unused temp
         this->nameAlpha[this->copyDestFileIndex] = 0;
         this->fileInfoAlpha[this->copyDestFileIndex] = this->nameAlpha[this->copyDestFileIndex];
         this->nextTitleLabel = FS_TITLE_COPY_COMPLETE;
@@ -460,18 +460,18 @@ void FileSelect_CopyWaitForFlashSave(GameState* thisx) {
         this->configMode = CM_COPY_ANIM_1;
 
         for (i = 0; i < 6; i++) {
-            this->newf[this->copyDestFileIndex][i] = gSaveContext.save.saveInfo.playerData.newf[i];
+            this->newf[this->copyDestFileIndex][i] = gMmSave.saveInfo.playerData.newf[i];
         }
 
-        this->threeDayResetCount[this->copyDestFileIndex] = gSaveContext.save.saveInfo.playerData.threeDayResetCount;
+        this->threeDayResetCount[this->copyDestFileIndex] = gMmSave.saveInfo.playerData.threeDayResetCount;
 
         for (i = 0; i < 8; i++) {
-            this->fileNames[this->copyDestFileIndex][i] = gSaveContext.save.saveInfo.playerData.playerName[i];
+            this->fileNames[this->copyDestFileIndex][i] = gMmSave.saveInfo.playerData.playerName[i];
         }
 
-        this->healthCapacity[this->copyDestFileIndex] = gSaveContext.save.saveInfo.playerData.healthCapacity;
-        this->health[this->copyDestFileIndex] = gSaveContext.save.saveInfo.playerData.health;
-        this->defenseHearts[this->copyDestFileIndex] = gSaveContext.save.saveInfo.inventory.defenseHearts;
+        this->healthCapacity[this->copyDestFileIndex] = gMmSave.saveInfo.playerData.healthCapacity;
+        this->health[this->copyDestFileIndex] = gMmSave.saveInfo.playerData.health;
+        this->defenseHearts[this->copyDestFileIndex] = gMmSave.saveInfo.inventory.defenseHearts;
     }
 }
 
@@ -1122,7 +1122,7 @@ void FileSelect_EraseWaitForFlashSave(GameState* thisx) {
     if (sramCtx->status == 0) {
         this->configMode = CM_ERASE_ANIM_1;
         for (i = 0; i < 6; i++) {
-            this->newf[this->selectedFileIndex][i] = gSaveContext.save.saveInfo.playerData.newf[i];
+            this->newf[this->selectedFileIndex][i] = gMmSave.saveInfo.playerData.newf[i];
         }
     }
 }

@@ -197,8 +197,8 @@ void EnSuttari_TriggerTransition(PlayState* play, u16 entrance) {
 }
 
 void EnSuttari_AdvanceTime(void) {
-    gSaveContext.save.time = CURRENT_TIME + (u16)R_TIME_SPEED;
-    gSaveContext.save.time = CURRENT_TIME + (u16)((void)0, gSaveContext.save.timeSpeedOffset);
+    gMmSave.time = CURRENT_TIME + (u16)R_TIME_SPEED;
+    gMmSave.time = CURRENT_TIME + (u16)((void)0, gMmSave.timeSpeedOffset);
 }
 
 s32 func_80BAA904(EnSuttari* this, PlayState* play) {
@@ -971,13 +971,13 @@ void func_80BAC6E8(EnSuttari* this, PlayState* play) {
     this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
     if (play->sceneId == SCENE_IKANA) {
         this->flags1 |= 1;
-        if ((gSaveContext.save.day == 1) || (gSaveContext.save.day == 2)) {
+        if ((gMmSave.day == 1) || (gMmSave.day == 2)) {
             this->animIndex = SUTTARI_ANIM_2;
             Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, this->animIndex);
             this->flags1 |= 0x80;
             this->actionFunc = func_80BACA14;
             return;
-        } else if ((gSaveContext.save.day == 3) && (CURRENT_TIME <= CLOCK_TIME(19, 0)) &&
+        } else if ((gMmSave.day == 3) && (CURRENT_TIME <= CLOCK_TIME(19, 0)) &&
                    !CHECK_WEEKEVENTREG(WEEKEVENTREG_61_08) &&
                    !CHECK_WEEKEVENTREG(WEEKEVENTREG_RECOVERED_STOLEN_BOMB_BAG) &&
                    CHECK_WEEKEVENTREG(WEEKEVENTREG_51_08)) {
@@ -991,7 +991,7 @@ void func_80BAC6E8(EnSuttari* this, PlayState* play) {
             Actor_Kill(&this->actor);
         }
 
-        if ((gSaveContext.save.entrance == ENTRANCE(NORTH_CLOCK_TOWN, 7)) || CHECK_WEEKEVENTREG(WEEKEVENTREG_58_40)) {
+        if ((gMmSave.entrance == ENTRANCE(NORTH_CLOCK_TOWN, 7)) || CHECK_WEEKEVENTREG(WEEKEVENTREG_58_40)) {
             Actor_Kill(&this->actor);
         }
         this->csIdList[0] = this->actor.csId;
@@ -1129,7 +1129,7 @@ void func_80BACE4C(EnSuttari* this, PlayState* play) {
 void func_80BACEE0(EnSuttari* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
     if (!Schedule_RunScript(play, D_80BAE820, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) && !func_80BABF64(this, play, &scheduleOutput))) {
         this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
@@ -1153,7 +1153,7 @@ void func_80BACEE0(EnSuttari* this, PlayState* play) {
 void func_80BAD004(EnSuttari* this, PlayState* play) {
     ScheduleOutput scheduleOutput;
 
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
     if (!Schedule_RunScript(play, D_80BAE820, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) && !func_80BABF64(this, play, &scheduleOutput))) {
         this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
@@ -1283,7 +1283,7 @@ void func_80BAD5F8(EnSuttari* this, PlayState* play) {
         this->animIndex = SUTTARI_ANIM_2;
         Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, this->animIndex);
     }
-    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+    this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
     if (!Schedule_RunScript(play, D_80BAE820, &scheduleOutput) ||
         ((this->scheduleResult != scheduleOutput.result) && !func_80BABF64(this, play, &scheduleOutput))) {
         this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
@@ -1321,7 +1321,7 @@ void func_80BAD7F8(EnSuttari* this, PlayState* play) {
             this->animIndex = SUTTARI_ANIM_2;
             Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, this->animIndex);
         }
-        this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gSaveContext.save.timeSpeedOffset);
+        this->timePathTimeSpeed = R_TIME_SPEED + ((void)0, gMmSave.timeSpeedOffset);
         if (!Schedule_RunScript(play, D_80BAE820, &scheduleOutput) ||
             ((this->scheduleResult != scheduleOutput.result) && !func_80BABF64(this, play, &scheduleOutput))) {
             this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;

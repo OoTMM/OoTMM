@@ -1423,8 +1423,8 @@ void EnMnk_MonkeyTiedUp_TransitionAfterTalk(EnMnk* this, PlayState* play) {
                 break;
 
             case 0x8D3:
-                if ((gSaveContext.save.playerForm == PLAYER_FORM_FIERCE_DEITY) ||
-                    (gSaveContext.save.playerForm == PLAYER_FORM_HUMAN)) {
+                if ((gMmSave.playerForm == PLAYER_FORM_FIERCE_DEITY) ||
+                    (gMmSave.playerForm == PLAYER_FORM_HUMAN)) {
                     Message_CloseTextbox(play);
                     this->actionFunc = EnMnk_MonkeyTiedUp_WaitForInstrument;
                     EnMnk_MonkeyTiedUp_SetAnim(this, MONKEY_TIEDUP_ANIM_WAIT);
@@ -1465,7 +1465,7 @@ void EnMnk_MonkeyTiedUp_WaitForInstrument(EnMnk* this, PlayState* play) {
     SkelAnime_Update(&this->propSkelAnime);
 
     if (Actor_OcarinaInteractionAccepted(&this->picto.actor, &play->state)) {
-        switch (gSaveContext.save.playerForm) {
+        switch (gMmSave.playerForm) {
             case PLAYER_FORM_HUMAN:
             case PLAYER_FORM_FIERCE_DEITY:
                 this->picto.actor.textId = 0x8D4;
@@ -1529,8 +1529,8 @@ void EnMnk_MonkeyTiedUp_WaitForCutRope(EnMnk* this, PlayState* play) {
     SkelAnime_Update(&this->propSkelAnime);
 
     if (Actor_TalkOfferAccepted(&this->picto.actor, &play->state)) {
-        if ((gSaveContext.save.playerForm == PLAYER_FORM_FIERCE_DEITY) ||
-            (gSaveContext.save.playerForm == PLAYER_FORM_HUMAN)) {
+        if ((gMmSave.playerForm == PLAYER_FORM_FIERCE_DEITY) ||
+            (gMmSave.playerForm == PLAYER_FORM_HUMAN)) {
             EnMnk_MonkeyTiedUp_SetAnim(this, MONKEY_TIEDUP_ANIM_SHH);
             this->unk_3E0 = 5;
         } else {
@@ -1543,8 +1543,8 @@ void EnMnk_MonkeyTiedUp_WaitForCutRope(EnMnk* this, PlayState* play) {
         EnMnk_MonkeyTiedUp_SetAnim(this, MONKEY_TIEDUP_ANIM_SHAKEHEAD);
         this->picto.actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
     } else if (EnMnk_PlayerIsInTalkRange(this, play)) {
-        if ((gSaveContext.save.playerForm != PLAYER_FORM_FIERCE_DEITY) &&
-            (gSaveContext.save.playerForm != PLAYER_FORM_HUMAN)) {
+        if ((gMmSave.playerForm != PLAYER_FORM_FIERCE_DEITY) &&
+            (gMmSave.playerForm != PLAYER_FORM_HUMAN)) {
             this->picto.actor.textId = 0x8D1;
         } else {
             this->picto.actor.textId = 0x8D0;
@@ -1580,7 +1580,7 @@ void EnMnk_MonkeyTiedUp_Wait(EnMnk* this, PlayState* play) {
         play->msgCtx.ocarinaMode = OCARINA_MODE_END;
         CutsceneManager_Queue(this->csIdList[2]);
     } else if (Actor_TalkOfferAccepted(&this->picto.actor, &play->state)) {
-        if (gSaveContext.save.playerForm == PLAYER_FORM_DEKU) {
+        if (gMmSave.playerForm == PLAYER_FORM_DEKU) {
             if (this->picto.actor.textId == 0x8EC) {
                 EnMnk_MonkeyTiedUp_SetAnim(this, MONKEY_TIEDUP_ANIM_SHAKEHEAD);
             } else {
@@ -1591,7 +1591,7 @@ void EnMnk_MonkeyTiedUp_Wait(EnMnk* this, PlayState* play) {
         }
         this->actionFunc = EnMnk_MonkeyTiedUp_TransitionAfterTalk;
     } else if (EnMnk_PlayerIsInTalkRange(this, play)) {
-        if (gSaveContext.save.playerForm == PLAYER_FORM_DEKU) {
+        if (gMmSave.playerForm == PLAYER_FORM_DEKU) {
             if (this->flags & MONKEY_FLAGS_1000) {
                 this->picto.actor.textId = 0x8EC;
             } else {

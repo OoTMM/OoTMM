@@ -221,9 +221,9 @@ s32 func_808F3334(EnIn* this, PlayState* play) {
 }
 
 s32 func_808F33B8(void) {
-    s32 ret = (((gSaveContext.save.day == 1) &&
+    s32 ret = (((gMmSave.day == 1) &&
                 ((CURRENT_TIME >= CLOCK_TIME(5, 30)) && (CURRENT_TIME <= CLOCK_TIME(6, 0)))) ||
-               (gSaveContext.save.day >= 2)) &&
+               (gMmSave.day >= 2)) &&
               !CHECK_WEEKEVENTREG(WEEKEVENTREG_DEFENDED_AGAINST_ALIENS);
 
     return ret;
@@ -360,7 +360,7 @@ void func_808F395C(EnIn* this, PlayState* play) {
 void func_808F39DC(EnIn* this, PlayState* play) {
     u16 textId = 0;
 
-    if (gSaveContext.save.day != 3) {
+    if (gMmSave.day != 3) {
         switch (GET_WEEKEVENTREG_HORSE_RACE_STATE) {
             case WEEKEVENTREG_HORSE_RACE_STATE_2:
                 textId = 0x347A;
@@ -416,7 +416,7 @@ void func_808F3B40(EnIn* this, PlayState* play) {
         this->actor.parent = NULL;
         this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
         this->actionFunc = func_808F3AD4;
-        textId = (gSaveContext.save.day != 3) ? 0x3481 : 0x34A4;
+        textId = (gMmSave.day != 3) ? 0x3481 : 0x34A4;
         this->actor.textId = textId;
     } else {
         Actor_OfferGetItem(&this->actor, play, GI_MILK, 500.0f, 100.0f);
@@ -440,7 +440,7 @@ void func_808F3C40(EnIn* this, PlayState* play) {
         this->actor.parent = NULL;
         this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
         this->actionFunc = func_808F3BD4;
-        textId = gSaveContext.save.day != 3 ? 0x346A : 0x3492;
+        textId = gMmSave.day != 3 ? 0x346A : 0x3492;
         this->actor.textId = textId;
     } else {
         Actor_OfferGetItem(&this->actor, play, GI_MILK, 500.0f, 100.0f);
@@ -463,7 +463,7 @@ void func_808F3D40(EnIn* this, PlayState* play) {
     if (Actor_HasParent(&this->actor, play)) {
         this->actor.parent = NULL;
         this->actionFunc = func_808F3CD4;
-        textId = gSaveContext.save.day != 3 ? 0x347D : 0x34A0;
+        textId = gMmSave.day != 3 ? 0x347D : 0x34A0;
         this->actor.textId = textId;
         this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
     } else {
@@ -602,7 +602,7 @@ s32 func_808F4150(PlayState* play, EnIn* this, s32 arg2, MessageContext* msgCtx)
 
     if (msgCtx->choiceIndex == 0) {
         Audio_PlaySfx_MessageDecide();
-        if (gSaveContext.save.saveInfo.playerData.rupees >= play->msgCtx.unk1206C) {
+        if (gMmSave.saveInfo.playerData.rupees >= play->msgCtx.unk1206C) {
             Rupees_ChangeBy(-play->msgCtx.unk1206C);
             if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_57_01)) {
                 func_808F4108(this, play, 0x3474);
@@ -628,7 +628,7 @@ s32 func_808F4270(PlayState* play, EnIn* this, s32 arg2, MessageContext* msgCtx,
 
     if (msgCtx->choiceIndex == 0) {
         Audio_PlaySfx_MessageDecide();
-        if (gSaveContext.save.saveInfo.playerData.rupees >= fee) {
+        if (gMmSave.saveInfo.playerData.rupees >= fee) {
             Rupees_ChangeBy(-fee);
             if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_57_01)) {
                 if (arg4) {
@@ -797,7 +797,7 @@ s32 func_808F4414(PlayState* play, EnIn* this, s32 arg2) {
                 case 0x3466:
                     if (msgCtx->choiceIndex == 0) {
                         Audio_PlaySfx_MessageDecide();
-                        if (gSaveContext.save.saveInfo.playerData.rupees >= play->msgCtx.unk1206C) {
+                        if (gMmSave.saveInfo.playerData.rupees >= play->msgCtx.unk1206C) {
                             if (Inventory_HasEmptyBottle()) {
                                 this->actionFunc = func_808F3C40;
                                 Actor_OfferGetItem(&this->actor, play, GI_MILK, 500.0f, 100.0f);
@@ -1100,7 +1100,7 @@ s32 func_808F4414(PlayState* play, EnIn* this, s32 arg2) {
                 case 0x3490:
                     if (msgCtx->choiceIndex == 0) {
                         Audio_PlaySfx_MessageDecide();
-                        if (gSaveContext.save.saveInfo.playerData.rupees >= play->msgCtx.unk1206C) {
+                        if (gMmSave.saveInfo.playerData.rupees >= play->msgCtx.unk1206C) {
                             if (Inventory_HasEmptyBottle()) {
                                 this->actionFunc = func_808F3C40;
                                 Actor_OfferGetItem(&this->actor, play, GI_MILK, 500.0f, 100.0f);
@@ -1415,7 +1415,7 @@ s32 func_808F5994(EnIn* this, PlayState* play, Vec3f* arg2, s16 arg3) {
 }
 
 void func_808F5A34(EnIn* this, PlayState* play) {
-    if (gSaveContext.save.day != 3) {
+    if (gMmSave.day != 3) {
         func_808F5728(play, this, 3, &this->unk48C);
     } else {
         func_808F5728(play, this, 7, &this->unk48C);
@@ -1424,13 +1424,13 @@ void func_808F5A34(EnIn* this, PlayState* play) {
 
 void func_808F5A94(EnIn* this, PlayState* play) {
     if (Horse_IsActive(play, &play->actorCtx)) {
-        if (gSaveContext.save.day == 3) {
+        if (gMmSave.day == 3) {
             func_808F5728(play, this, 7, &this->unk48C);
         } else {
             func_808F5728(play, this, 3, &this->unk48C);
         }
     } else {
-        if (gSaveContext.save.day == 3) {
+        if (gMmSave.day == 3) {
             func_808F5728(play, this, 5, &this->unk48C);
         } else {
             func_808F5728(play, this, 1, &this->unk48C);
@@ -1442,7 +1442,7 @@ void func_808F5B58(EnIn* this, PlayState* play) {
     if (Horse_IsActive(play, &play->actorCtx)) {
         if (((Player_GetMask(play) == PLAYER_MASK_CIRCUS_LEADER) && CHECK_WEEKEVENTREG(WEEKEVENTREG_63_40)) ||
             CHECK_WEEKEVENTREG(WEEKEVENTREG_56_08)) {
-            if (gSaveContext.save.day == 3) {
+            if (gMmSave.day == 3) {
                 func_808F5728(play, this, 6, &this->unk48C);
             } else {
                 func_808F5728(play, this, 2, &this->unk48C);
@@ -1450,7 +1450,7 @@ void func_808F5B58(EnIn* this, PlayState* play) {
         }
     } else if ((Player_GetMask(play) != PLAYER_MASK_CIRCUS_LEADER) ||
                ((Player_GetMask(play) == PLAYER_MASK_CIRCUS_LEADER) && CHECK_WEEKEVENTREG(WEEKEVENTREG_63_40))) {
-        if (gSaveContext.save.day == 3) {
+        if (gMmSave.day == 3) {
             func_808F5728(play, this, 4, &this->unk48C);
         } else {
             func_808F5728(play, this, 0, &this->unk48C);
@@ -1464,7 +1464,7 @@ void func_808F5C98(EnIn* this, PlayState* play) {
     }
     if (((Player_GetMask(play) == PLAYER_MASK_CIRCUS_LEADER) && CHECK_WEEKEVENTREG(WEEKEVENTREG_63_40)) ||
         CHECK_WEEKEVENTREG(WEEKEVENTREG_56_08)) {
-        if (gSaveContext.save.day != 3) {
+        if (gMmSave.day != 3) {
             func_808F5728(play, this, 2, &this->unk48C);
         } else {
             func_808F5728(play, this, 6, &this->unk48C);

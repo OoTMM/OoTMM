@@ -210,36 +210,36 @@ void EnAz_Init(Actor* thisx, PlayState* play2) {
     switch (BEAVER_GET_PARAM_F00(thisx)) {
         case 0:
             phi_v1 =
-                (gSaveContext.save.entrance == ENTRANCE(WATERFALL_RAPIDS, 0)) && CHECK_WEEKEVENTREG(WEEKEVENTREG_93_01);
+                (gMmSave.entrance == ENTRANCE(WATERFALL_RAPIDS, 0)) && CHECK_WEEKEVENTREG(WEEKEVENTREG_93_01);
             phi_v1 = !phi_v1;
             break;
 
         case 2:
-            phi_v1 = (gSaveContext.save.entrance != ENTRANCE(WATERFALL_RAPIDS, 1)) ||
+            phi_v1 = (gMmSave.entrance != ENTRANCE(WATERFALL_RAPIDS, 1)) ||
                      !CHECK_WEEKEVENTREG(WEEKEVENTREG_24_04);
             break;
 
         case 4:
-            phi_v1 = gSaveContext.save.entrance != ENTRANCE(WATERFALL_RAPIDS, 2);
+            phi_v1 = gMmSave.entrance != ENTRANCE(WATERFALL_RAPIDS, 2);
             break;
 
         case 1:
             phi_v1 =
-                (gSaveContext.save.entrance == ENTRANCE(WATERFALL_RAPIDS, 0)) && CHECK_WEEKEVENTREG(WEEKEVENTREG_93_01);
+                (gMmSave.entrance == ENTRANCE(WATERFALL_RAPIDS, 0)) && CHECK_WEEKEVENTREG(WEEKEVENTREG_93_01);
             phi_v1 = !phi_v1;
             break;
 
         case 3:
             phi_v1 =
-                (gSaveContext.save.entrance != ENTRANCE(WATERFALL_RAPIDS, 1)) || CHECK_WEEKEVENTREG(WEEKEVENTREG_24_04);
+                (gMmSave.entrance != ENTRANCE(WATERFALL_RAPIDS, 1)) || CHECK_WEEKEVENTREG(WEEKEVENTREG_24_04);
             break;
 
         case 5:
-            phi_v1 = gSaveContext.save.entrance != ENTRANCE(WATERFALL_RAPIDS, 2);
+            phi_v1 = gMmSave.entrance != ENTRANCE(WATERFALL_RAPIDS, 2);
             break;
 
         case 6:
-            phi_v1 = (gSaveContext.save.entrance == ENTRANCE(WATERFALL_RAPIDS, 0)) &&
+            phi_v1 = (gMmSave.entrance == ENTRANCE(WATERFALL_RAPIDS, 0)) &&
                      !CHECK_WEEKEVENTREG(WEEKEVENTREG_93_01);
             phi_v1 = !phi_v1;
             break;
@@ -299,7 +299,7 @@ void EnAz_Init(Actor* thisx, PlayState* play2) {
     SubS_ChangeAnimationBySpeedInfo(&this->skelAnime, sAnimationSpeedInfo, BEAVER_ANIM_IDLE, &this->animIndex);
     this->skelAnime.curFrame = Rand_ZeroOne() * this->skelAnime.endFrame;
 
-    switch (gSaveContext.save.entrance) {
+    switch (gMmSave.entrance) {
         case ENTRANCE(WATERFALL_RAPIDS, 0):
             if (CHECK_WEEKEVENTREG(WEEKEVENTREG_93_01)) {
                 this->unk_2FA = 5;
@@ -326,7 +326,7 @@ void EnAz_Init(Actor* thisx, PlayState* play2) {
                 this->actor.flags |=
                     (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED);
             }
-            if (gSaveContext.save.entrance == ENTRANCE(WATERFALL_RAPIDS, 3)) {
+            if (gMmSave.entrance == ENTRANCE(WATERFALL_RAPIDS, 3)) {
                 this->unk_2FA = 0xA;
             }
             func_80A97C0C(this, play);
@@ -419,7 +419,7 @@ void EnAz_Init(Actor* thisx, PlayState* play2) {
 void EnAz_Destroy(Actor* thisx, PlayState* play2) {
     EnAz* this = THIS;
 
-    if (gSaveContext.save.entrance != ENTRANCE(WATERFALL_RAPIDS, 1)) {
+    if (gMmSave.entrance != ENTRANCE(WATERFALL_RAPIDS, 1)) {
         gSaveContext.timerStates[TIMER_ID_MINIGAME_2] = TIMER_STATE_STOP;
     }
     Collider_DestroyCylinder(play2, &this->collider);
