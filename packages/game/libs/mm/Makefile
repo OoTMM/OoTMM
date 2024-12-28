@@ -177,7 +177,7 @@ SFCFLAGS := --matching
 # We can't use the C preprocessor for this because it won't substitute inside string literals.
 BUILD_DIR_REPLACE := sed -e 's|$$(BUILD_DIR)|$(BUILD_DIR)|g'
 
-CFLAGS           += -G 0 -non_shared -Xcpluscomm -nostdinc -Wab,-r4300_mul
+CFLAGS           += -MMD -G 0 -non_shared -Xcpluscomm -nostdinc -Wab,-r4300_mul
 
 WARNINGS         := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,807
 ASFLAGS          := -march=vr4300 -32 -G0
@@ -337,8 +337,7 @@ SCHEDULE_INC_FILES := $(foreach f,$(SCHEDULE_FILES:.schl=.schl.inc),$(BUILD_DIR)
 LD_FINAL_FILES := $(foreach f,$(shell find linker_scripts/final/*.ld),$(BUILD_DIR)/$f)
 
 # Automatic dependency files
-# (Only asm_processor dependencies and reloc dependencies are handled for now)
-DEP_FILES := $(O_FILES:.o=.asmproc.d) $(OVL_RELOC_FILES:.o=.d)
+DEP_FILES := $(shell find $(BUILD_DIR) -name '*.d')
 
 # Other directories that need to be created in the build directory
 OTHER_DIRS := assets/text baserom dmadata $(shell find linker_scripts -type d)
