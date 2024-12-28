@@ -9,8 +9,9 @@ char gNextGameId;
 void System_DisableInterrupts(void);
 
 __attribute__ ((aligned(8))) char gLoaderStack[0x400];
-
-Save gSave;
+__attribute__ ((aligned(16))) Save gSave;
+__attribute__ ((aligned(16))) SaveOptions gSaveOptions;
+s8 gSaveFileNum;
 
 static void waitForPi(void)
 {
