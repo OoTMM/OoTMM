@@ -55,7 +55,13 @@ void Setup_InitImpl(SetupState* this) {
     Setup_InitRegs();
 
     STOP_GAMESTATE(&this->state);
-    SET_NEXT_GAMESTATE(&this->state, ConsoleLogo_Init, sizeof(ConsoleLogoState));
+    SET_NEXT_GAMESTATE(&this->state, Play_Init, sizeof(PlayState));
+
+    gSaveContext.fileNum = 0xff;
+    gSaveContext.nextCutsceneIndex = 0;
+    gMmSave.cutsceneIndex = 0;
+    gSaveContext.gameMode = GAMEMODE_NORMAL;
+    gSaveContext.showTitleCard = true;
 }
 
 void Setup_Destroy(GameState* thisx) {
