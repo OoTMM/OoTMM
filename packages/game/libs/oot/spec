@@ -21,6 +21,8 @@ beginseg
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
     include "$(BUILD_DIR)/src/z64/file.o"
+    include "$(BUILD_DIR)/src/z64/flash.o"
+    include "$(BUILD_DIR)/src/z64/save.o"
 #if OOT_VERSION >= PAL_1_0
     include "$(BUILD_DIR)/src/boot/viconfig.o"
 #endif
