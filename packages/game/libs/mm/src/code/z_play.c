@@ -1051,14 +1051,6 @@ void Play_UpdateMain(PlayState* this) {
 
     Environment_Update(this, &this->envCtx, &this->lightCtx, &this->pauseCtx, &this->msgCtx, &this->gameOverCtx,
                        this->state.gfxCtx);
-
-    if (this->sramCtx.status != 0) {
-        if (gMmSave.isOwlSave) {
-            Sram_UpdateWriteToFlashOwlSave(&this->sramCtx);
-        } else {
-            Sram_UpdateWriteToFlashDefault(&this->sramCtx);
-        }
-    }
 }
 
 void Play_Update(PlayState* this) {
