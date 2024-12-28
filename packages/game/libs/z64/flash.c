@@ -4,6 +4,7 @@
 #include <PR/os_time.h>
 #include <PR/os_convert.h>
 #include <PR/os_internal_flash.h>
+#include <PR/os_internal_reg.h>
 #include "alignment.h"
 
 #define ARRAY_COUNT(x) (sizeof(x) / sizeof(x[0]))
@@ -17,6 +18,19 @@ s32 __osFlashVersion;
 
 static OSMesgQueue  sFlashromMesgQueue ALIGNED(8);
 static OSMesg       sFlashromMesg[1];
+
+#if defined(__OOT__)
+s32 osEPiLinkHandle(OSPiHandle* handle) {
+    u32 saveMask = __osDisableInt();
+
+    handle->next = __osPiTable;
+    __osPiTable = handle;
+
+    __osRestoreInt(saveMask);
+
+    return 0;
+}
+#endif
 
 uintptr_t osFlashGetAddr(u32 pageNum) {
     uintptr_t addr;
