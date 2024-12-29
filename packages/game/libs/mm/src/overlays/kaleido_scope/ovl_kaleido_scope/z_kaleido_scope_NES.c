@@ -3072,8 +3072,8 @@ void KaleidoScope_Update(PlayState* play) {
                             if (!gSaveContext.flashSaveAvailable) {
                                 pauseCtx->savePromptState = PAUSE_SAVEPROMPT_STATE_5;
                             } else {
-                                Sram_SetFlashPagesDefault(sramCtx, gFlashSaveStartPages[gSaveContext.fileNum],
-                                                          gFlashSaveNumPages[gSaveContext.fileNum]);
+                                Sram_SetFlashPagesDefault(sramCtx, gFlashSaveStartPages[gSaveFileNum],
+                                                          gFlashSaveNumPages[gSaveFileNum]);
                                 Sram_StartWriteToFlashDefault(sramCtx);
                                 pauseCtx->savePromptState = PAUSE_SAVEPROMPT_STATE_4;
                             }
@@ -3339,8 +3339,8 @@ void KaleidoScope_Update(PlayState* play) {
                     if (!gSaveContext.flashSaveAvailable) {
                         pauseCtx->state = PAUSE_STATE_GAMEOVER_8;
                     } else {
-                        Sram_SetFlashPagesDefault(sramCtx, gFlashSaveStartPages[gSaveContext.fileNum],
-                                                  gFlashSaveNumPages[gSaveContext.fileNum]);
+                        Sram_SetFlashPagesDefault(sramCtx, gFlashSaveStartPages[gSaveFileNum],
+                                                  gFlashSaveNumPages[gSaveFileNum]);
                         Sram_StartWriteToFlashDefault(sramCtx);
                         pauseCtx->state = PAUSE_STATE_GAMEOVER_7;
                     }

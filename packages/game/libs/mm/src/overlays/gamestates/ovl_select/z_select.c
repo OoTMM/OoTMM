@@ -19,7 +19,7 @@ void MapSelect_LoadConsoleLogo(MapSelectState* this, u32 entrance, s32 spawn) {
 }
 
 void MapSelect_LoadGame(MapSelectState* this, u32 entrance, s32 spawn) {
-    if (gSaveContext.fileNum == 0xFF) {
+    if (gSaveFileNum == -1) {
         Sram_InitDebugSave();
     }
 

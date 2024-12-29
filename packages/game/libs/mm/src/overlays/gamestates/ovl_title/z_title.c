@@ -167,9 +167,9 @@ void ConsoleLogo_Init(GameState* thisx) {
     this->exit = false;
 
     if (!(PadMgr_GetValidControllersMask() & 1)) {
-        gSaveContext.fileNum = 0xFEDC;
+        gSaveFileNum = -2;
     } else {
-        gSaveContext.fileNum = 0xFF;
+        gSaveFileNum = -1;
     }
 
     gSaveContext.flashSaveAvailable = true;
