@@ -118,7 +118,7 @@ void EnMag_Update(Actor* thisx, PlayState* play) {
     s32 pad[2];
     EnMag* this = (EnMag*)thisx;
 
-    if (gSaveContext.fileNum != 0xFEDC) {
+    if (gSaveFileNum != -2) {
         if (this->globalState < MAG_STATE_DISPLAY) {
             if (CHECK_BTN_ALL(play->state.input[0].press.button, BTN_START) ||
                 CHECK_BTN_ALL(play->state.input[0].press.button, BTN_A) ||
@@ -638,7 +638,7 @@ void EnMag_DrawInner(Actor* thisx, PlayState* play, Gfx** gfxP) {
 #endif
     }
 
-    if (gSaveContext.fileNum == 0xFEDC) {
+    if (gSaveFileNum == -2) {
         // Draw "NO CONTROLLER" Text
         textAlpha = textFadeTimer * 10;
         if (textAlpha >= 255) {

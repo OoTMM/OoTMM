@@ -211,13 +211,13 @@ typedef struct CycleSceneFlags {
     /* 0x10 */ u32 collectible;
 } CycleSceneFlags; // size = 0x14
 
-typedef struct SaveOptions {
+typedef struct OldSaveOptions {
     /* 0x0 */ u16 optionId;                            // "option_id"
     /* 0x2 */ u8 language;                             // "j_n"
     /* 0x3 */ u8 audioSetting;                         // "s_sound"
     /* 0x4 */ u8 languageSetting;                      // "language"
     /* 0x5 */ u8 zTargetSetting;                       // "z_attention", 0: Switch; 1: Hold
-} SaveOptions; // size = 0x6
+} OldSaveOptions; // size = 0x6
 
 typedef struct RespawnData {
     /* 0x00 */ Vec3f pos;
@@ -292,7 +292,7 @@ typedef struct SaveContext {
     /* 0x3F3C */ u16 minigameHiddenScore; // "yabusame_out_ct"
     /* 0x3F3E */ u8 unk_3F3E;             // "no_save"
     /* 0x3F3F */ u8 flashSaveAvailable;   // "flash_flag"
-    /* 0x3F40 */ SaveOptions options;
+    /* 0x3F40 */ OldSaveOptions options;
     /* 0x3F46 */ u16 forcedSeqId;              // "NottoriBgm"
     /* 0x3F48 */ u8 cutsceneTransitionControl; // "fade_go"
     /* 0x3F4A */ u16 nextCutsceneIndex;        // "next_daytime"

@@ -555,6 +555,8 @@ static void Sram_InitSave(FileSelectState* this) {
 
     memcpy(gSave.magic, SAVE_MAGIC, 16);
     this->valid[this->buttonIndex] = 1;
+
+    SaveRaw_WriteTo(this->buttonIndex);
 }
 
 void FileSelect_DrawNameEntry(GameState* thisx) {
@@ -833,7 +835,7 @@ void FileSelect_DrawNameEntry(GameState* thisx) {
                                 Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4,
                                                      &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale,
                                                      &gSfxDefaultReverb);
-                                gSaveContext.fileNum = this->buttonIndex;
+                                gSaveFileNum = this->buttonIndex;
                                 dayTime = ((void)0, gOotSave.dayTime);
                                 Sram_InitSave(this);
                                 gOotSave.dayTime = dayTime;
@@ -1263,7 +1265,7 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         this->configMode = CM_OPTIONS_TO_MAIN;
         SaveRaw_OptionsWrite();
-        func_800F6700(gSaveContext.audioSetting);
+        func_800F6700(gSaveOptions.audioSetting);
         return;
     }
 
@@ -1272,11 +1274,11 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
 
         if (sSelectedSetting == FS_SETTING_AUDIO) {
-            gSaveContext.audioSetting--;
+            gSaveOptions.audioSetting--;
 
             // because audio setting is unsigned, can't check for < 0
-            if (gSaveContext.audioSetting > 0xF0) {
-                gSaveContext.audioSetting = FS_AUDIO_SURROUND;
+            if (gSaveOptions.audioSetting > 0xF0) {
+                gSaveOptions.audioSetting = FS_AUDIO_SURROUND;
             }
         } else {
 #if !OOT_PAL_N64
@@ -1297,10 +1299,10 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
 
         if (sSelectedSetting == FS_SETTING_AUDIO) {
-            gSaveContext.audioSetting++;
+            gSaveOptions.audioSetting++;
 
-            if (gSaveContext.audioSetting > FS_AUDIO_SURROUND) {
-                gSaveContext.audioSetting = FS_AUDIO_STEREO;
+            if (gSaveOptions.audioSetting > FS_AUDIO_SURROUND) {
+                gSaveOptions.audioSetting = FS_AUDIO_STEREO;
             }
         } else {
 #if !OOT_PAL_N64
@@ -1614,7 +1616,7 @@ void FileSelect_DrawOptionsImpl(GameState* thisx) {
 
     for (i = 0, vtx = 0; i < 4; i++, vtx += 4) {
         gDPPipeSync(POLY_OPA_DISP++);
-        if (i == gSaveContext.audioSetting) {
+        if (i == gSaveOptions.audioSetting) {
             if (sSelectedSetting == FS_SETTING_AUDIO) {
                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cursorPrimRed, cursorPrimGreen, cursorPrimBlue,
                                 this->titleAlpha[0]);

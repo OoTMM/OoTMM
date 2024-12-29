@@ -102,14 +102,14 @@ Gfx* FileSelect_QuadTextureIA8(Gfx* gfx, void* texture, s16 width, s16 height, s
 static void Sram_VerifyAndLoadAllSaves(FileSelectState* fileSelect) {
     u16 slotNum;
 
-    fileSelect->valid[2] = 0;
+    fileSelect->valid[0] = 0;
     for (slotNum = 0; slotNum < 2; slotNum++) {
         fileSelect->valid[slotNum] = 0;
         if (!SaveRaw_ReadFrom(slotNum) || memcmp(gSave.magic, SAVE_MAGIC, 16))
             continue;
 
         fileSelect->valid[slotNum] = 1;
-        memcpy(&fileSelect->fileNames[slotNum], gOotSave.info.playerData.playerName, 8);
+        memcpy(&fileSelect->fileNames[slotNum][0], gOotSave.info.playerData.playerName, 8);
         fileSelect->deaths[slotNum] = gOotSave.info.playerData.deaths;
         fileSelect->healthCapacities[slotNum] = gOotSave.info.playerData.healthCapacity;
         fileSelect->questItems[slotNum] = gOotSave.info.inventory.questItems;
@@ -864,13 +864,12 @@ void FileSelect_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
     s16 i;
     s16 j;
     s16 k;
-#if OOT_PAL_N64
-    s16 health;
-    s16 heartTextureIndex;
-#endif
     s16 heartType;
     s16 vtxOffset;
     s16 deathCountSplit[3];
+
+    if (!this->valid[fileIndex])
+        return;
 
     OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 1709);
 
@@ -919,37 +918,11 @@ void FileSelect_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
 
         k = this->healthCapacities[fileIndex] / 0x10;
 
-#if !OOT_PAL_N64
         // draw hearts
         for (vtxOffset = 0, j = 0; j < k; j++, vtxOffset += 4) {
             gSPVertex(POLY_OPA_DISP++, &this->windowContentVtx[D_8081284C[fileIndex] + vtxOffset] + 0x30, 4, 0);
             POLY_OPA_DISP = FileSelect_QuadTextureIA8(POLY_OPA_DISP, sHeartTextures[heartType], 0x10, 0x10, 0);
         }
-#else
-        health = this->health[fileIndex];
-        if (health <= 48) { // 3 hearts
-            health = 48;
-        }
-        heartTextureIndex = 4;
-
-        // draw hearts
-        for (vtxOffset = 0, j = 0; j < k; j++, vtxOffset += 4) {
-            if (health < 16) {
-                if (health != 0) {
-                    heartTextureIndex = sHeartTextureIndices[health];
-                    health = 0;
-                } else {
-                    heartTextureIndex = 0;
-                }
-            } else {
-                health -= 16;
-            }
-
-            gSPVertex(POLY_OPA_DISP++, &this->windowContentVtx[D_8081284C[fileIndex] + vtxOffset] + 0x30, 4, 0);
-            POLY_OPA_DISP =
-                FileSelect_QuadTextureIA8(POLY_OPA_DISP, sHeartTextures[heartType][heartTextureIndex], 0x10, 0x10, 0);
-        }
-#endif
 
         gDPPipeSync(POLY_OPA_DISP++);
 

@@ -223,12 +223,12 @@ void ConsoleLogo_Init(GameState* thisx) {
 
 #if OOT_VERSION < GC_US
     if (!(gPadMgr.validCtrlrsMask & 1)) {
-        gSaveContext.fileNum = 0xFEDC;
+        gSaveFileNum = -2;
     } else {
-        gSaveContext.fileNum = 0xFF;
+        gSaveFileNum = -1;
     }
 #else
-    gSaveContext.fileNum = 0xFF;
+    gSaveFileNum = -1;
 #endif
 
     this->ult = 0;

@@ -163,7 +163,6 @@ typedef enum WorldMapArea {
 // offsets in SavePlayerData and SaveContext/Save
 
 typedef struct SaveContext {
-    /* 0x1354 */ s32 fileNum; // "file_no"
     /* 0x1358 */ char unk_1358[0x0004];
     /* 0x135C */ s32 gameMode;
     /* 0x1360 */ s32 sceneLayer; // "counter"
@@ -205,7 +204,6 @@ typedef struct SaveContext {
     /* 0x1406 */ u16 minigameScore; // "yabusame_total"
     /* 0x1408 */ char unk_1408[0x0001];
     /* 0x1409 */ u8 language; // NTSC 0: Japanese; 1: English | PAL 0: English; 1: German; 2: French
-    /* 0x140A */ u8 audioSetting;
     /* 0x140B */ char unk_140B[0x0001];
     /* 0x140C */ u8 zTargetSetting; // 0: Switch; 1: Hold
     /* 0x140E */ u16 forcedSeqId; // immediately start playing the sequence if set
