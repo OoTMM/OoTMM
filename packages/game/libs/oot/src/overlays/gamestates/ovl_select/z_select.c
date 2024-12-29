@@ -21,9 +21,9 @@ void MapSelect_LoadTitle(MapSelectState* this) {
 
 void MapSelect_LoadGame(MapSelectState* this, s32 entranceIndex) {
     PRINTF(VT_FGCOL(BLUE));
-    PRINTF("\n\n\nＦＩＬＥ＿ＮＯ＝%x\n\n\n", gSaveContext.fileNum);
+    PRINTF("\n\n\nＦＩＬＥ＿ＮＯ＝%x\n\n\n", gSaveFileNum);
     PRINTF(VT_RST);
-    if (gSaveContext.fileNum == 0xFF) {
+    if (gSaveFileNum == -1) {
         Sram_InitDebugSave();
         // Set the fill target to be the saved magic amount
         gSaveContext.magicFillTarget = gOotSave.info.playerData.magic;

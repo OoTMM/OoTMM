@@ -305,7 +305,7 @@ void Sram_InitDebugSave(void) {
     if (LINK_AGE_IN_YEARS == YEARS_CHILD) {
         gOotSave.info.equips.buttonItems[0] = ITEM_SWORD_KOKIRI;
         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_KOKIRI);
-        if (gSaveContext.fileNum == 0xFF) {
+        if (gSaveFileNum == -1) {
             gOotSave.info.equips.buttonItems[1] = ITEM_SLINGSHOT;
             gOotSave.info.equips.cButtonSlots[0] = SLOT_SLINGSHOT;
             Inventory_ChangeEquipment(EQUIP_TYPE_SHIELD, EQUIP_VALUE_SHIELD_DEKU);

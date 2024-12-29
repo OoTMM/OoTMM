@@ -177,7 +177,7 @@ SFCFLAGS := --matching
 # We can't use the C preprocessor for this because it won't substitute inside string literals.
 BUILD_DIR_REPLACE := sed -e 's|$$(BUILD_DIR)|$(BUILD_DIR)|g'
 
-CFLAGS           += -MMD -G 0 -non_shared -Xcpluscomm -nostdinc -Wab,-r4300_mul
+CFLAGS           += -G 0 -non_shared -Xcpluscomm -nostdinc -Wab,-r4300_mul
 
 WARNINGS         := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,807
 ASFLAGS          := -march=vr4300 -32 -G0

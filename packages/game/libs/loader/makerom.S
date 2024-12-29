@@ -8,7 +8,7 @@
 .word entrypoint
 .word 0x1449
 .word 0,0,0,0
-.ascii "THE LEGEND OF ZELDA"
+.ascii "OOT+MM COMBO       "
 .byte 0,0,0,0,0,0,0,0
 .byte 'C'
 .ascii "ZLE"

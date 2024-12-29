@@ -7,10 +7,11 @@ u32 SaveRaw_Checksum(void)
 {
     u32 sum;
     u32* ptr;
+    u32 i;
 
     sum = 0;
     ptr = (u32*)&gSave;
-    for (u32 i = 0; i < (sizeof(gSave) / sizeof(u32)) - 1; i++)
+    for (i = 0; i < (sizeof(gSave) / sizeof(u32)) - 1; i++)
     {
         sum += ptr[i];
     }
