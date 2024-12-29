@@ -214,6 +214,8 @@ void FileSelect_DrawOptions(GameState* thisx);
 void FileSelect_DrawNameEntry(GameState* thisx);
 void FileSelect_DrawCharacter(GraphicsContext* gfxCtx, void* texture, s16 vtx);
 
+void FileSelect_CreateSave(FileSelectState* this, int index);
+
 #if OOT_VERSION == PAL_1_1
 extern s16 D_808124C0[];
 #endif

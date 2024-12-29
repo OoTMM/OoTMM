@@ -538,27 +538,6 @@ s32 FileSelect_ApplyDiacriticToFilename(GameState* thisx, s16 diacritic) {
 }
 #endif
 
-
-static void Sram_InitSave(FileSelectState* this) {
-    u16 offset;
-
-    Sram_InitNewSave();
-
-    gOotSave.entranceIndex = ENTR_LINKS_HOUSE_0;
-    gOotSave.linkAge = LINK_AGE_CHILD;
-    gOotSave.dayTime = CLOCK_TIME(10, 0);
-    gOotSave.cutsceneIndex = 0;
-
-    for (offset = 0; offset < 8; offset++) {
-        gOotSave.info.playerData.playerName[offset] = this->fileNames[this->buttonIndex][offset];
-    }
-
-    memcpy(gSave.magic, SAVE_MAGIC, 16);
-    this->valid[this->buttonIndex] = 1;
-
-    SaveRaw_WriteTo(this->buttonIndex);
-}
-
 void FileSelect_DrawNameEntry(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     Font* font = &this->font;
@@ -837,7 +816,7 @@ void FileSelect_DrawNameEntry(GameState* thisx) {
                                                      &gSfxDefaultReverb);
                                 gSaveFileNum = this->buttonIndex;
                                 dayTime = ((void)0, gOotSave.dayTime);
-                                Sram_InitSave(this);
+                                FileSelect_CreateSave(this, this->buttonIndex);
                                 gOotSave.dayTime = dayTime;
                                 this->configMode = CM_NAME_ENTRY_TO_MAIN;
                                 this->nameBoxAlpha[this->buttonIndex] = this->nameAlpha[this->buttonIndex] = 200;
@@ -1282,10 +1261,10 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
             }
         } else {
 #if !OOT_PAL_N64
-            gSaveContext.zTargetSetting ^= 1;
+            gSaveOptions.zTargetSetting ^= 1;
 #else
             if (sSelectedSetting == FS_SETTING_TARGET) {
-                gSaveContext.zTargetSetting ^= 1;
+                gSaveOptions.zTargetSetting ^= 1;
             } else {
                 gSaveContext.language--;
                 if (gSaveContext.language >= LANGUAGE_MAX) {
@@ -1306,10 +1285,10 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
             }
         } else {
 #if !OOT_PAL_N64
-            gSaveContext.zTargetSetting ^= 1;
+            gSaveOptions.zTargetSetting ^= 1;
 #else
             if (sSelectedSetting == FS_SETTING_TARGET) {
-                gSaveContext.zTargetSetting ^= 1;
+                gSaveOptions.zTargetSetting ^= 1;
             } else {
                 gSaveContext.language++;
                 if (gSaveContext.language >= LANGUAGE_MAX) {
@@ -1643,7 +1622,7 @@ void FileSelect_DrawOptionsImpl(GameState* thisx) {
     for (; i < 6; i++, vtx += 4) {
         gDPPipeSync(POLY_OPA_DISP++);
 
-        if (i == (gSaveContext.zTargetSetting + 4)) {
+        if (i == (gSaveOptions.zTargetSetting + 4)) {
             if (sSelectedSetting != FS_SETTING_AUDIO) {
                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cursorPrimRed, cursorPrimGreen, cursorPrimBlue,
                                 this->titleAlpha[0]);

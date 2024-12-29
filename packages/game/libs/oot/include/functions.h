@@ -132,7 +132,6 @@ void Skin_Init(PlayState* play, Skin* skin, SkeletonHeader* skeletonHeader, Anim
 void Skin_Free(PlayState* play, Skin* skin);
 s32 Skin_ApplyAnimTransformations(Skin* skin, MtxF* limbMatrices, Actor* actor, s32 setTranslation);
 
-void Sram_InitNewSave(void);
 void Sram_InitDebugSave(void);
 void Sram_OpenSave(void);
 void Sram_WriteSave(void);
