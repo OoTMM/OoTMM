@@ -188,7 +188,7 @@ void ConsoleLogo_Destroy(GameState* thisx) {
     }
 #endif
 
-    Sram_InitSram(&this->state, &this->sramCtx);
+    Sram_InitSram();
 
 #if PLATFORM_N64
     func_800014E8();
@@ -231,7 +231,6 @@ void ConsoleLogo_Init(GameState* thisx) {
     gSaveContext.fileNum = 0xFF;
 #endif
 
-    Sram_Alloc(&this->state, &this->sramCtx);
     this->ult = 0;
     this->unk_1D4 = 0x14;
     this->coverAlpha = 255;

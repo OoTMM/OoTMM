@@ -637,7 +637,6 @@ beginseg
     include "$(BUILD_DIR)/src/code/z_skin_awb.o"
     include "$(BUILD_DIR)/src/code/z_skin_matrix.o"
     include "$(BUILD_DIR)/src/code/z_sram.o"
-    include "$(BUILD_DIR)/src/code/z_ss_sram.o"
     include "$(BUILD_DIR)/src/code/z_rumble.o"
 #if DEBUG_ASSETS
     include "$(BUILD_DIR)/data/z_text.data.o"

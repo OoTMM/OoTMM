@@ -318,7 +318,6 @@ void Play_Init(GameState* thisx) {
     Camera_OverwriteStateFlags(&this->mainCamera, CAM_STATE_CHECK_BG_ALT | CAM_STATE_CHECK_WATER | CAM_STATE_CHECK_BG |
                                                       CAM_STATE_EXTERNAL_FINISHED | CAM_STATE_CAM_FUNC_FINISH |
                                                       CAM_STATE_LOCK_MODE | CAM_STATE_DISTORTION | CAM_STATE_PLAY_INIT);
-    Sram_Init(this, &this->sramCtx);
     Regs_InitData(this);
     Message_Init(this);
     GameOver_Init(this);

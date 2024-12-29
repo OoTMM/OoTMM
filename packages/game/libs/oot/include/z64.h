@@ -44,7 +44,6 @@
 #include "z64interface.h"
 #include "z64sfx_source.h"
 #include "z64skybox.h"
-#include "z64sram.h"
 #include "z64view.h"
 #include "z64vis.h"
 #include "zelda_arena.h"
@@ -130,7 +129,6 @@ typedef struct ConsoleLogoState {
     /* 0x0000 */ GameState state;
     /* 0x00A4 */ u8* staticSegment;
     /* 0x00A8 */ View view;
-    /* 0x01D0 */ SramContext sramCtx;
     /* 0x01D4 */ s16 unk_1D4;
     /* 0x01D6 */ s16 coverAlpha;
     /* 0x01D8 */ s16 addAlpha;
@@ -210,11 +208,7 @@ typedef struct FileSelectState {
     /* 0x000A4 */ Vtx* windowVtx;
     /* 0x000A8 */ u8* staticSegment;
     /* 0x000AC */ u8* parameterSegment;
-#if OOT_PAL
-    /* 0x000B0 */ u8* objectMagSegment;
-#endif
     /* 0x000B8 */ View view;
-    /* 0x001E0 */ SramContext sramCtx;
     /* 0x001E4 */ char unk_1E4[0x4];
     /* 0x001E8 */ SkyboxContext skyboxCtx;
     /* 0x00348 */ MessageContext msgCtx;
@@ -225,15 +219,13 @@ typedef struct FileSelectState {
     /* 0x1C9EC */ Vtx* keyboardVtx;
     /* 0x1C9F0 */ Vtx* nameEntryVtx;
     /* 0x1C9F4 */ u8 n64ddFlag;
+                  u8 valid[3];
     /* 0x1C9F6 */ u16 deaths[3];
     /* 0x1C9FC */ u8 fileNames[3][8];
     /* 0x1CA14 */ u16 healthCapacities[3];
     /* 0x1CA1C */ u32 questItems[3];
     /* 0x1CA28 */ s16 n64ddFlags[3];
     /* 0x1CA2E */ s8 defense[3];
-#if OOT_PAL
-    /* 0x1CA32 */ u16 health[3];
-#endif
     /* 0x1CA38 */ s16 buttonIndex;
     /* 0x1CA3A */ s16 confirmButtonIndex; // 0: yes, 1: quit
     /* 0x1CA3C */ s16 menuMode;

@@ -4178,7 +4178,7 @@ void KaleidoScope_Update(PlayState* play) {
                                                  &gSfxDefaultReverb);
                             Play_SaveSceneFlags(play);
                             gOotSave.info.playerData.savedSceneId = play->sceneId;
-                            Sram_WriteSave(&play->sramCtx);
+                            Sram_WriteSave();
                             pauseCtx->savePromptState = PAUSE_SAVE_PROMPT_STATE_SAVED;
 #if PLATFORM_N64
                             sDelayTimer = 90;
@@ -4441,7 +4441,7 @@ void KaleidoScope_Update(PlayState* play) {
                     pauseCtx->promptChoice = 0;
                     Play_SaveSceneFlags(play);
                     gOotSave.info.playerData.savedSceneId = play->sceneId;
-                    Sram_WriteSave(&play->sramCtx);
+                    Sram_WriteSave();
                     pauseCtx->state = PAUSE_STATE_GAME_OVER_SAVED;
 #if PLATFORM_N64
                     sDelayTimer = 90;
