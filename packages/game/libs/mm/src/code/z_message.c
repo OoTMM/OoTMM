@@ -5949,16 +5949,16 @@ void Message_Update(PlayState* play) {
             gMmSave.time = sp3E;
             gMmSave.cutsceneIndex = sp44;
 
-            if (gSaveContext.fileNum != 0xFF) {
-                Sram_SetFlashPagesDefault(&play->sramCtx, gFlashSaveStartPages[gSaveContext.fileNum * 2],
-                                          gFlashSpecialSaveNumPages[gSaveContext.fileNum * 2]);
+            if (gSaveFileNum != -1) {
+                Sram_SetFlashPagesDefault(&play->sramCtx, gFlashSaveStartPages[gSaveFileNum * 2],
+                                          gFlashSpecialSaveNumPages[gSaveFileNum * 2]);
                 Sram_StartWriteToFlashDefault(&play->sramCtx);
             }
             msgCtx->msgMode = MSGMODE_NEW_CYCLE_1;
             break;
 
         case MSGMODE_NEW_CYCLE_1:
-            if (gSaveContext.fileNum != 0xFF) {
+            if (gSaveFileNum != -1) {
                 play->state.unk_A3 = 1;
                 if (play->sramCtx.status == 0) {
                     play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
@@ -5976,16 +5976,16 @@ void Message_Update(PlayState* play) {
             Play_SaveCycleSceneFlags(play);
             func_8014546C(&play->sramCtx);
 
-            if (gSaveContext.fileNum != 0xFF) {
-                Sram_SetFlashPagesOwlSave(&play->sramCtx, gFlashOwlSaveStartPages[gSaveContext.fileNum * 2],
-                                          gFlashOwlSaveNumPages[gSaveContext.fileNum * 2]);
+            if (gSaveFileNum != -1) {
+                Sram_SetFlashPagesOwlSave(&play->sramCtx, gFlashOwlSaveStartPages[gSaveFileNum * 2],
+                                          gFlashOwlSaveNumPages[gSaveFileNum * 2]);
                 Sram_StartWriteToFlashOwlSave(&play->sramCtx);
             }
             msgCtx->msgMode = MSGMODE_OWL_SAVE_1;
             break;
 
         case MSGMODE_OWL_SAVE_1:
-            if (gSaveContext.fileNum != 0xFF) {
+            if (gSaveFileNum != -1) {
                 play->state.unk_A3 = 1;
                 if (play->sramCtx.status == 0) {
                     play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;

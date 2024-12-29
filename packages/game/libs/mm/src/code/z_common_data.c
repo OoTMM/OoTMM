@@ -11,7 +11,6 @@ SaveContext gSaveContext ALIGNED(16);
 void SaveContext_Init(void) {
     bzero(&gSaveContext, sizeof(SaveContext));
 
-    gMmSave.playerForm = 0;
     gSaveContext.seqId = (u8)NA_BGM_DISABLED;
     gSaveContext.ambienceId = AMBIENCE_ID_DISABLED;
     gSaveContext.forcedSeqId = NA_BGM_GENERAL_SFX;

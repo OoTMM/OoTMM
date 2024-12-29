@@ -2157,7 +2157,7 @@ void FileSelect_LoadGame(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     u16 i;
 
-    gSaveContext.fileNum = this->buttonIndex;
+    gSaveFileNum = this->buttonIndex;
     Sram_OpenSave(this, &this->sramCtx);
 
     gSaveContext.gameMode = GAMEMODE_NORMAL;

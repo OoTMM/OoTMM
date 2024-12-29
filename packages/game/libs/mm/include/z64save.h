@@ -243,7 +243,7 @@ typedef struct SaveContext {
     /* 0x1080 */ u64 bottleTimerCurTimes[BOTTLE_MAX];   // The remaining time left before the timer expires, in centiseconds (1/100th sec). "bottle_time"
     /* 0x10B0 */ OSTime bottleTimerPausedOsTimes[BOTTLE_MAX]; // The cumulative osTime spent with the timer paused. "bottle_stop_time"
     /* 0x10E0 */ u8 pictoPhotoI5[PICTO_PHOTO_COMPRESSED_SIZE]; // buffer containing the pictograph photo, compressed to I5 from I8
-    /* 0x3CA0 */ s32 fileNum;                           // "file_no"
+    /* FileNum was here */
     /* 0x3CA4 */ s16 powderKegTimer;                    // "big_bom_timer"
     /* 0x3CA6 */ u8 unk_3CA6;
     /* 0x3CA7 */ u8 unk_3CA7;                           // "day_night_flag"
