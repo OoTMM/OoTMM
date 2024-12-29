@@ -4,11 +4,14 @@
 #include <save/oot.h>
 #include <save/mm.h>
 
+#define SAVE_MAGIC "ZELDA OOTMM SAVE"
+
 typedef struct
 {
+    char    magic[16];
     OotSave oot;
     MmSave  mm;
-    u8      unused[0x6000 - sizeof(OotSave) - sizeof(MmSave) - 4];
+    u8      unused[0x6000 - sizeof(OotSave) - sizeof(MmSave) - 16 - 4];
     u32     checksum;
 }
 Save;

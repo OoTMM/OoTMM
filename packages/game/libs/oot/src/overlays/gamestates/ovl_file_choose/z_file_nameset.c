@@ -538,6 +538,25 @@ s32 FileSelect_ApplyDiacriticToFilename(GameState* thisx, s16 diacritic) {
 }
 #endif
 
+
+static void Sram_InitSave(FileSelectState* this) {
+    u16 offset;
+
+    Sram_InitNewSave();
+
+    gOotSave.entranceIndex = ENTR_LINKS_HOUSE_0;
+    gOotSave.linkAge = LINK_AGE_CHILD;
+    gOotSave.dayTime = CLOCK_TIME(10, 0);
+    gOotSave.cutsceneIndex = 0;
+
+    for (offset = 0; offset < 8; offset++) {
+        gOotSave.info.playerData.playerName[offset] = this->fileNames[this->buttonIndex][offset];
+    }
+
+    memcpy(gSave.magic, SAVE_MAGIC, 16);
+    this->valid[this->buttonIndex] = 1;
+}
+
 void FileSelect_DrawNameEntry(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     Font* font = &this->font;
@@ -666,7 +685,6 @@ void FileSelect_DrawNameEntry(GameState* thisx) {
             }
         } else {
             if (this->charPage <= FS_CHAR_PAGE_ENG) {
-#if OOT_NTSC
                 if (this->kbdY != 5) {
                     // draw the character the cursor is hovering over in yellow
                     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
@@ -817,7 +835,7 @@ void FileSelect_DrawNameEntry(GameState* thisx) {
                                                      &gSfxDefaultReverb);
                                 gSaveContext.fileNum = this->buttonIndex;
                                 dayTime = ((void)0, gOotSave.dayTime);
-                                Sram_InitSave(this, &this->sramCtx);
+                                Sram_InitSave(this);
                                 gOotSave.dayTime = dayTime;
                                 this->configMode = CM_NAME_ENTRY_TO_MAIN;
                                 this->nameBoxAlpha[this->buttonIndex] = this->nameAlpha[this->buttonIndex] = 200;
@@ -854,101 +872,6 @@ void FileSelect_DrawNameEntry(GameState* thisx) {
                                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
                     }
                 }
-#else
-                if (this->kbdY != 5) {
-                    // draw the character the cursor is hovering over in yellow
-                    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-
-                    gSPVertex(POLY_OPA_DISP++, &this->keyboardVtx[this->charIndex * 4], 4, 0);
-
-                    FileSelect_DrawCharacter(this->state.gfxCtx,
-                                             font->fontBuf + gCharPageEng[this->charIndex] * FONT_CHAR_TEX_SIZE, 0);
-
-                    if (CHECK_BTN_ALL(input->press.button, BTN_A)) {
-                        Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_S, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
-                                             &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
-                        this->fileNames[this->buttonIndex][this->newFileNameCharCount] = gCharPageEng[this->charIndex];
-                        this->newFileNameCharCount++;
-
-                        if (this->newFileNameCharCount > 7) {
-                            this->newFileNameCharCount = 7;
-                        }
-                    }
-                } else if (CHECK_BTN_ALL(input->press.button, BTN_A) && (this->charPage != this->kbdButton)) {
-                    if (this->kbdButton == FS_KBD_BTN_BACKSPACE) {
-                        if ((this->newFileNameCharCount == 7) &&
-                            (this->fileNames[this->buttonIndex][7] != FILENAME_SPACE)) {
-                            for (i = this->newFileNameCharCount; i < 7; i++) {
-                                this->fileNames[this->buttonIndex][i] = this->fileNames[this->buttonIndex][i + 1];
-                            }
-
-                            this->fileNames[this->buttonIndex][i] = FILENAME_SPACE;
-                            Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_S, &gSfxDefaultPos, 4,
-                                                 &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale,
-                                                 &gSfxDefaultReverb);
-                        } else {
-                            this->newFileNameCharCount--;
-
-                            if (this->newFileNameCharCount < 0) {
-                                this->newFileNameCharCount = 0;
-                            }
-
-                            for (i = this->newFileNameCharCount; i < 7; i++) {
-                                this->fileNames[this->buttonIndex][i] = this->fileNames[this->buttonIndex][i + 1];
-                            }
-
-                            this->fileNames[this->buttonIndex][i] = FILENAME_SPACE;
-                            Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_S, &gSfxDefaultPos, 4,
-                                                 &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale,
-                                                 &gSfxDefaultReverb);
-                        }
-                    } else if (this->kbdButton == FS_KBD_BTN_END) {
-                        validName = false;
-
-                        for (i = 0; i < 8; i++) {
-                            if (this->fileNames[this->buttonIndex][i] != FILENAME_SPACE) {
-                                validName = true;
-                                break;
-                            }
-                        }
-
-                        if (validName) {
-                            Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4,
-                                                 &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale,
-                                                 &gSfxDefaultReverb);
-                            gSaveContext.fileNum = this->buttonIndex;
-                            dayTime = ((void)0, gOotSave.dayTime);
-                            Sram_InitSave(this, &this->sramCtx);
-                            gOotSave.dayTime = dayTime;
-                            this->configMode = CM_NAME_ENTRY_TO_MAIN;
-                            this->nameBoxAlpha[this->buttonIndex] = this->nameAlpha[this->buttonIndex] = 200;
-                            this->connectorAlpha[this->buttonIndex] = 255;
-                            Rumble_Request(300.0f, 180, 20, 100);
-                        } else {
-                            Audio_PlaySfxGeneral(NA_SE_SY_FSEL_ERROR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
-                                                 &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
-                        }
-                    }
-                }
-
-                if (CHECK_BTN_ALL(input->press.button, BTN_CRIGHT)) {
-                    Audio_PlaySfxGeneral(NA_SE_SY_FSEL_CURSOR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
-                                         &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
-                    this->newFileNameCharCount++;
-
-                    if (this->newFileNameCharCount > 7) {
-                        this->newFileNameCharCount = 7;
-                    }
-                } else if (CHECK_BTN_ALL(input->press.button, BTN_CLEFT)) {
-                    Audio_PlaySfxGeneral(NA_SE_SY_FSEL_CURSOR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
-                                         &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
-                    this->newFileNameCharCount--;
-
-                    if (this->newFileNameCharCount < 0) {
-                        this->newFileNameCharCount = 0;
-                    }
-                }
-#endif
             }
         }
     }
@@ -1333,29 +1256,14 @@ static u8 sSelectedSetting;
  */
 void FileSelect_UpdateOptionsMenu(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
-    SramContext* sramCtx = &this->sramCtx;
     Input* input = &this->state.input[0];
 
     if (CHECK_BTN_ALL(input->press.button, BTN_B)) {
         Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         this->configMode = CM_OPTIONS_TO_MAIN;
-        sramCtx->readBuff[0] = gSaveContext.audioSetting;
-        sramCtx->readBuff[1] = gSaveContext.zTargetSetting;
-#if OOT_PAL_N64
-        sramCtx->readBuff[2] = gSaveContext.language;
-#endif
-        PRINTF("ＳＡＶＥ");
-        Sram_WriteSramHeader(sramCtx);
-        PRINTF(VT_FGCOL(YELLOW));
-        PRINTF("sram->read_buff[2] = J_N = %x\n", sramCtx->readBuff[2]);
-        PRINTF("sram->read_buff[2] = J_N = %x\n", &sramCtx->readBuff[2]);
-        PRINTF("Na_SetSoundOutputMode = %d\n", gSaveContext.audioSetting);
-        PRINTF("Na_SetSoundOutputMode = %d\n", gSaveContext.audioSetting);
-        PRINTF("Na_SetSoundOutputMode = %d\n", gSaveContext.audioSetting);
-        PRINTF(VT_RST);
+        SaveRaw_OptionsWrite();
         func_800F6700(gSaveContext.audioSetting);
-        PRINTF("終了\n");
         return;
     }
 

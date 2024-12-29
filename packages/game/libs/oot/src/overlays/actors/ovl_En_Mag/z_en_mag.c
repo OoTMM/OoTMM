@@ -33,34 +33,6 @@ ActorProfile En_Mag_Profile = {
 
 static s16 sDelayTimer = 0;
 
-#if OOT_VERSION < GC_US
-void EnMag_ResetSram(void) {
-    static u8 buffer[0x2000];
-
-    bzero(buffer, 0x800);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8001000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8001800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8002000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8002800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8003000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8003800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8004000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8004800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8005000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8005800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8006000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8006800), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8007000), buffer, 0x800, 1);
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8007800), buffer, 0x800, 1);
-
-    gSaveContext.audioSetting = 0;
-    gSaveContext.zTargetSetting = 0;
-    func_800F6700(gSaveContext.audioSetting);
-}
-#endif
-
 void EnMag_Init(Actor* thisx, PlayState* play) {
     EnMag* this = (EnMag*)thisx;
 
@@ -142,57 +114,9 @@ void EnMag_Init(Actor* thisx, PlayState* play) {
 void EnMag_Destroy(Actor* thisx, PlayState* play) {
 }
 
-#if OOT_VERSION < GC_US
-void EnMag_CheckSramResetCode(PlayState* play, EnMag* this) {
-    static s32 sSramResetCode[] = {
-        BTN_DUP, BTN_DDOWN,  BTN_DLEFT, BTN_DRIGHT, BTN_START, BTN_B, BTN_CDOWN,
-        BTN_L,   BTN_CRIGHT, BTN_CLEFT, BTN_A,      BTN_CUP,   BTN_R, BTN_Z,
-    };
-    s32 var_v1;
-
-    var_v1 =
-        play->state.input[2].cur.button & (BTN_A | BTN_B | BTN_Z | BTN_START | BTN_DUP | BTN_DDOWN | BTN_DLEFT |
-                                           BTN_DRIGHT | BTN_L | BTN_R | BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT);
-    if (this->unk_E31C == var_v1) {
-        this->unk_E320--;
-        if (this->unk_E320 < 0) {
-            this->unk_E320 = 1;
-        } else {
-            var_v1 ^= this->unk_E31C;
-        }
-    } else {
-        this->unk_E320 = 16;
-        this->unk_E31C = var_v1;
-    }
-
-    if (this->unk_E316 < 4) {
-        if (sSramResetCode[this->unk_E316] & var_v1) {
-            this->unk_E316++;
-        } else if (var_v1 != 0) {
-            this->unk_E316 = 0;
-        }
-    } else {
-        if (CHECK_BTN_ALL(play->state.input[2].press.button, sSramResetCode[this->unk_E316])) {
-            this->unk_E316++;
-        } else if (var_v1 != 0) {
-            this->unk_E316 = 0;
-        }
-    }
-
-    if (this->unk_E316 == ARRAY_COUNT(sSramResetCode)) {
-        EnMag_ResetSram();
-        this->unk_E316 = 0;
-    }
-}
-#endif
-
 void EnMag_Update(Actor* thisx, PlayState* play) {
     s32 pad[2];
     EnMag* this = (EnMag*)thisx;
-
-#if OOT_VERSION < GC_US
-    EnMag_CheckSramResetCode(play, this);
-#endif
 
     if (gSaveContext.fileNum != 0xFEDC) {
         if (this->globalState < MAG_STATE_DISPLAY) {
