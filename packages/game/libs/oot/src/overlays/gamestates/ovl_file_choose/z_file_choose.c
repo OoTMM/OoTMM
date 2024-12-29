@@ -1508,19 +1508,6 @@ void FileSelect_LoadGame(GameState* thisx) {
     // capacity and `magicFillTarget`
     gOotSave.info.playerData.magicLevel = gOotSave.info.playerData.magic = 0;
     gOotSave.info.playerData.naviTimer = 0;
-
-    if ((gOotSave.info.equips.buttonItems[0] != ITEM_SWORD_KOKIRI) &&
-        (gOotSave.info.equips.buttonItems[0] != ITEM_SWORD_MASTER) &&
-        (gOotSave.info.equips.buttonItems[0] != ITEM_SWORD_BIGGORON) &&
-        (gOotSave.info.equips.buttonItems[0] != ITEM_GIANTS_KNIFE)) {
-        u16 swordEquipValue;
-
-        gOotSave.info.equips.buttonItems[0] = ITEM_NONE;
-        swordEquipValue =
-            (gEquipMasks[EQUIP_TYPE_SWORD] & gOotSave.info.equips.equipment) >> (EQUIP_TYPE_SWORD * 4);
-        gOotSave.info.equips.equipment &= gEquipNegMasks[EQUIP_TYPE_SWORD];
-        gOotSave.info.inventory.equipment ^= OWNED_EQUIP_FLAG(EQUIP_TYPE_SWORD, swordEquipValue - 1);
-    }
 }
 
 static void (*sSelectModeUpdateFuncs[])(GameState*) = {
