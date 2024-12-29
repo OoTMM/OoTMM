@@ -49,18 +49,84 @@ void Setup_InitRegs(void) {
     R_PICTO_FOCUS_TEXT_Y = 177;
 }
 
+static void StartGame(void)
+{
+    u32 i;
+
+    /* Taken from Sram_OpenSave */
+    gMmSave.saveInfo.playerData.magicLevel = 0;
+    /* Owl checks */
+    if ((gMmSave.entrance == ENTRANCE(SOUTHERN_SWAMP_POISONED, 10)) &&
+        CHECK_WEEKEVENTREG(WEEKEVENTREG_CLEARED_WOODFALL_TEMPLE)) {
+        gMmSave.entrance = ENTRANCE(SOUTHERN_SWAMP_CLEARED, 10);
+    } else if ((gMmSave.entrance == ENTRANCE(MOUNTAIN_VILLAGE_WINTER, 8)) &&
+                CHECK_WEEKEVENTREG(WEEKEVENTREG_CLEARED_SNOWHEAD_TEMPLE)) {
+        gMmSave.entrance = ENTRANCE(MOUNTAIN_VILLAGE_SPRING, 8);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gSaveContext.cycleSceneFlags); i++) {
+        gSaveContext.cycleSceneFlags[i].chest = gMmSave.saveInfo.permanentSceneFlags[i].chest;
+        gSaveContext.cycleSceneFlags[i].switch0 = gMmSave.saveInfo.permanentSceneFlags[i].switch0;
+        gSaveContext.cycleSceneFlags[i].switch1 = gMmSave.saveInfo.permanentSceneFlags[i].switch1;
+        gSaveContext.cycleSceneFlags[i].clearedRoom = gMmSave.saveInfo.permanentSceneFlags[i].clearedRoom;
+        gSaveContext.cycleSceneFlags[i].collectible = gMmSave.saveInfo.permanentSceneFlags[i].collectible;
+    }
+
+    if (gMmSave.saveInfo.scarecrowSpawnSongSet) {
+        Lib_MemCpy(gScarecrowSpawnSongPtr, gMmSave.saveInfo.scarecrowSpawnSong, sizeof(gMmSave.saveInfo.scarecrowSpawnSong));
+    }
+
+    /* Taken from File Select */
+    gSaveContext.gameMode = GAMEMODE_NORMAL;
+    gSaveContext.respawnFlag = 0;
+    gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance = ENTR_LOAD_OPENING;
+    gSaveContext.seqId = (u8)NA_BGM_DISABLED;
+    gSaveContext.ambienceId = AMBIENCE_ID_DISABLED;
+    gSaveContext.showTitleCard = true;
+    gSaveContext.dogParams = 0;
+
+    for (i = 0; i < TIMER_ID_MAX; i++) {
+        gSaveContext.timerStates[i] = TIMER_STATE_OFF;
+    }
+
+    gSaveContext.prevHudVisibility = HUD_VISIBILITY_ALL;
+    gSaveContext.nayrusLoveTimer = 0;
+    gSaveContext.healthAccumulator = 0;
+    gSaveContext.magicFlag = 0;
+    gSaveContext.forcedSeqId = 0;
+    gSaveContext.skyboxTime = CLOCK_TIME(0, 0);
+    gSaveContext.nextTransitionType = TRANS_NEXT_TYPE_DEFAULT;
+    gSaveContext.cutsceneTrigger = 0;
+    gSaveContext.chamberCutsceneNum = 0;
+    gSaveContext.nextDayTime = NEXT_TIME_NONE;
+    gSaveContext.retainWeatherMode = false;
+
+    gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
+    gSaveContext.buttonStatus[EQUIP_SLOT_C_LEFT] = BTN_ENABLED;
+    gSaveContext.buttonStatus[EQUIP_SLOT_C_DOWN] = BTN_ENABLED;
+    gSaveContext.buttonStatus[EQUIP_SLOT_C_RIGHT] = BTN_ENABLED;
+    gSaveContext.buttonStatus[EQUIP_SLOT_A] = BTN_ENABLED;
+
+    gSaveContext.hudVisibilityForceButtonAlphasByStatus = false;
+    gSaveContext.nextHudVisibility = HUD_VISIBILITY_IDLE;
+    gSaveContext.hudVisibility = HUD_VISIBILITY_IDLE;
+    gSaveContext.hudVisibilityTimer = 0;
+
+    gMmSave.saveInfo.playerData.tatlTimer = 0;
+
+    /* Custom changes */
+    gSaveContext.nextCutsceneIndex = 0;
+    gMmSave.cutsceneIndex = 0;
+}
+
 void Setup_InitImpl(SetupState* this) {
     SysFlashrom_InitFlash();
     SaveContext_Init();
     Setup_InitRegs();
+    StartGame();
 
     STOP_GAMESTATE(&this->state);
     SET_NEXT_GAMESTATE(&this->state, Play_Init, sizeof(PlayState));
-
-    gSaveContext.nextCutsceneIndex = 0;
-    gMmSave.cutsceneIndex = 0;
-    gSaveContext.gameMode = GAMEMODE_NORMAL;
-    gSaveContext.showTitleCard = true;
 }
 
 void Setup_Destroy(GameState* thisx) {
