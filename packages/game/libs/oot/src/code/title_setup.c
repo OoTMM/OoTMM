@@ -8,8 +8,13 @@ void Setup_InitImpl(SetupState* this) {
 
     if (gGameStarted)
     {
+        /* Prepare save loading */
         Sram_OnLoad();
         gOotSave.entranceIndex = 0x1d1; /* Market from mask shop */
+
+        /* Enable audio */
+        R_AUDIOMGR_DEBUG_LEVEL = 0;
+
         SET_NEXT_GAMESTATE(&this->state, Play_Init, PlayState);
     }
     else
