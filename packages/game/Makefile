@@ -72,11 +72,3 @@ distclean: clean
 	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_OOT) distclean
 	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_MM) distclean
 	rm -rf stamps
-
-.PHONY: run-oot
-run-oot:
-	"$(N64_EMULATOR)" $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).z64
-
-.PHONY: run-mm
-run-mm:
-	"$(N64_EMULATOR)" $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).z64

@@ -480,7 +480,7 @@ static void Play_InitImpl(PlayState* this) {
 void Play_Init(GameState* thisx) {
     PlayState* this = (PlayState*)thisx;
 
-    if (gOotSave.entranceIndex == ENTR_MIDOS_HOUSE_0) {
+    if (gOotSave.entranceIndex == ENTR_HAPPY_MASK_SHOP_0 || gOotSave.entranceIndex == ENTR_MIDOS_HOUSE_0) {
         Play_InitImpl(this);
         Game_PrepareSave(this, 0);
         Game_Switch(GAME_MM);
