@@ -57,6 +57,7 @@ int File_DmaData(u32 dmaId, u32 vaddr, FileDmaData* out);
 extern char gGameSwitch;
 extern char gGameId;
 extern char gNextGameId;
+extern char gGameStarted;
 
 void Game_Switch(int gameId);
 

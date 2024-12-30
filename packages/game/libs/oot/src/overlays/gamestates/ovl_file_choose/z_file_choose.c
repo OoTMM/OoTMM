@@ -1,4 +1,5 @@
 #include <string.h>
+#include <combo.h>
 #include "file_select.h"
 #include "terminal.h"
 #include "versions.h"
@@ -1453,50 +1454,14 @@ void FileSelect_LoadGame(GameState* thisx) {
 
     Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                             &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
+
     gSaveFileNum = this->buttonIndex;
-    Sram_OpenSave();
-    gSaveContext.gameMode = GAMEMODE_NORMAL;
+    SaveRaw_Read();
+    Sram_OnLoad();
+    gGameStarted = 1;
+
     SET_NEXT_GAMESTATE(&this->state, Play_Init, PlayState);
     this->state.running = false;
-
-    gSaveContext.respawn[RESPAWN_MODE_DOWN].entranceIndex = ENTR_LOAD_OPENING;
-    gSaveContext.respawnFlag = 0;
-    gSaveContext.seqId = (u8)NA_BGM_DISABLED;
-    gSaveContext.natureAmbienceId = 0xFF;
-    gSaveContext.showTitleCard = true;
-    gSaveContext.dogParams = 0;
-    gSaveContext.timerState = TIMER_STATE_OFF;
-    gSaveContext.subTimerState = SUBTIMER_STATE_OFF;
-    gSaveContext.eventInf[0] = 0;
-    gSaveContext.eventInf[1] = 0;
-    gSaveContext.eventInf[2] = 0;
-    gSaveContext.eventInf[3] = 0;
-    gSaveContext.prevHudVisibilityMode = HUD_VISIBILITY_ALL;
-    gSaveContext.nayrusLoveTimer = 0;
-    gSaveContext.healthAccumulator = 0;
-    gSaveContext.magicState = MAGIC_STATE_IDLE;
-    gSaveContext.prevMagicState = MAGIC_STATE_IDLE;
-    gSaveContext.forcedSeqId = NA_BGM_GENERAL_SFX;
-    gSaveContext.skyboxTime = CLOCK_TIME(0, 0);
-    gSaveContext.nextTransitionType = TRANS_NEXT_TYPE_DEFAULT;
-    gSaveContext.nextCutsceneIndex = 0xFFEF;
-    gSaveContext.cutsceneTrigger = 0;
-    gSaveContext.chamberCutsceneNum = CHAMBER_CS_FOREST;
-    gSaveContext.nextDayTime = NEXT_TIME_NONE;
-    gSaveContext.retainWeatherMode = false;
-
-    gSaveContext.buttonStatus[0] = gSaveContext.buttonStatus[1] = gSaveContext.buttonStatus[2] =
-        gSaveContext.buttonStatus[3] = gSaveContext.buttonStatus[4] = BTN_ENABLED;
-
-    gSaveContext.forceRisingButtonAlphas = gSaveContext.nextHudVisibilityMode = gSaveContext.hudVisibilityMode =
-        gSaveContext.hudVisibilityModeTimer = gSaveContext.magicCapacity = 0; // false, HUD_VISIBILITY_NO_CHANGE
-
-    // Set the fill target to be the saved magic amount
-    gSaveContext.magicFillTarget = gOotSave.info.playerData.magic;
-    // Set `magicLevel` and `magic` to 0 so `magicCapacity` then `magic` grows from nothing to respectively the full
-    // capacity and `magicFillTarget`
-    gOotSave.info.playerData.magicLevel = gOotSave.info.playerData.magic = 0;
-    gOotSave.info.playerData.naviTimer = 0;
 }
 
 static void (*sSelectModeUpdateFuncs[])(GameState*) = {
