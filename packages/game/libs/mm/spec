@@ -134,8 +134,6 @@ beginseg
     include "$(BUILD_DIR)/src/libultra/voice/voicecontread2.o"
     include "$(BUILD_DIR)/src/libultra/voice/voicecrc.o"
     include "$(BUILD_DIR)/src/libultra/os/createmesgqueue.o"
-    include "$(BUILD_DIR)/asm/boot/invalicache.text.o"
-    include "$(BUILD_DIR)/asm/boot/invaldcache.text.o"
     include "$(BUILD_DIR)/src/libultra/os/timerintr.o"
     include "$(BUILD_DIR)/src/libultra/voice/voicecontread36.o"
     include "$(BUILD_DIR)/src/libultra/io/sp.o"

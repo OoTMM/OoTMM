@@ -35,10 +35,12 @@ void LoadGame(int gameId)
     {
         /* DMA */
         waitForPi();
+        osInvalDCache(cfg->ram, cfg->size);
         IO_WRITE(PI_DRAM_ADDR_REG, ((u32)cfg->ram) & 0x1fffffff);
         IO_WRITE(PI_CART_ADDR_REG, (cfg->rom) | PI_DOM1_ADDR2);
         IO_WRITE(PI_WR_LEN_REG, cfg->size - 1);
         waitForPi();
+        osInvalICache(cfg->ram, cfg->size);
     }
 
     gGameSwitch = 0;

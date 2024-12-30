@@ -1,4 +1,3 @@
-#include "ultra64/asm.h"
 #include "PR/R4300.h"
 
 .set noat
@@ -23,7 +22,8 @@
  *  If the amount to invalidate is at least the data cache size (DCACHE_SIZE),
  *  the entire data cache is invalidated.
  */
-LEAF(osInvalDCache)
+.global osInvalDCache
+osInvalDCache:
     // If the amount to invalidate is less than or equal to 0, return immediately
     blez    $a1, 3f
      nop
@@ -91,4 +91,3 @@ LEAF(osInvalDCache)
      addiu  $t0, DCACHE_LINESIZE
     jr      $ra
      nop
-END(osInvalDCache)
