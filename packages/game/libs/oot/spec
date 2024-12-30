@@ -92,9 +92,7 @@ beginseg
 #endif
     include "$(BUILD_DIR)/src/libultra/os/unmaptlball.o"
     include "$(BUILD_DIR)/src/libultra/io/epidma.o"
-    include "$(BUILD_DIR)/src/libultra/os/invalicache.o"
     include "$(BUILD_DIR)/src/libultra/os/createmesgqueue.o"
-    include "$(BUILD_DIR)/src/libultra/os/invaldcache.o"
     include "$(BUILD_DIR)/src/libultra/io/si.o"
     include "$(BUILD_DIR)/src/libultra/os/jammesg.o"
     include "$(BUILD_DIR)/src/libultra/os/setthreadpri.o"

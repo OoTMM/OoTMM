@@ -1,4 +1,3 @@
-#include "ultra64/asm.h"
 #include "PR/R4300.h"
 
 .set noat
@@ -8,7 +7,8 @@
 
 .balign 16
 
-LEAF(osInvalICache)
+.global osInvalICache
+osInvalICache:
     // If the amount to invalidate is less than or equal to 0, return immediately
     blez    $a1, 2f
      nop
@@ -49,4 +49,3 @@ LEAF(osInvalICache)
      addiu  $t0, ICACHE_LINESIZE
     jr      $ra
      nop
-END(osInvalICache)
