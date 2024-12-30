@@ -10,10 +10,6 @@
 #include "alloca.h"
 #include "z64.h"
 
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
-
 void MapSelect_LoadTitle(MapSelectState* this) {
     this->state.running = false;
     SET_NEXT_GAMESTATE(&this->state, ConsoleLogo_Init, ConsoleLogoState);
@@ -48,20 +44,6 @@ void MapSelect_LoadGame(MapSelectState* this, s32 entranceIndex) {
     this->state.running = false;
     SET_NEXT_GAMESTATE(&this->state, Play_Init, PlayState);
 }
-
-#if PLATFORM_N64
-void func_80800AD0_unknown(MapSelectState* this, s32 arg1) {
-    if (D_80121212 != 0) {
-        n64dd_SetDiskVersion(1);
-    }
-}
-
-void func_80800B08_unknown(MapSelectState* this, s32 arg1) {
-    if (D_80121212 != 0) {
-        n64dd_SetDiskVersion(0);
-    }
-}
-#endif
 
 static SceneSelectEntry sScenes[] = {
     { " 1:SPOT00", MapSelect_LoadGame, ENTR_HYRULE_FIELD_0 },
@@ -267,10 +249,6 @@ static SceneSelectEntry sScenes[] = {
       MapSelect_LoadGame, ENTR_HAIRAL_NIWA2_0 },
 #endif
     { "title", (void*)MapSelect_LoadTitle, 0 },
-#if PLATFORM_N64
-    { "64DD TEST  n64dd_SetDiskVersion(1)", (void*)func_80800AD0_unknown, 0 },
-    { "64DD TEST2 n64dd_SetDiskVersion(0)", (void*)func_80800B08_unknown, 0 },
-#endif
 };
 
 void MapSelect_UpdateMenu(MapSelectState* this) {

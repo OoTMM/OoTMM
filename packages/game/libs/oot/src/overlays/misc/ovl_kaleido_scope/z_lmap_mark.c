@@ -1,6 +1,3 @@
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
 #include "z_kaleido_scope.h"
 #include "assets/textures/parameter_static/parameter_static.h"
 
@@ -30,19 +27,9 @@ void PauseMapMark_Init(PlayState* play) {
     gBossMarkState = 0;
     gBossMarkScale = 1.0f;
     gLoadedPauseMarkDataTable = gPauseMapMarkDataTable;
-#if PLATFORM_N64
-    if ((B_80121220 != NULL) && (B_80121220->unk_34 != NULL)) {
-        B_80121220->unk_34(&gLoadedPauseMarkDataTable);
-    }
-#endif
 }
 
 void PauseMapMark_Clear(PlayState* play) {
-#if PLATFORM_N64
-    if ((B_80121220 != NULL) && (B_80121220->unk_38 != NULL)) {
-        B_80121220->unk_38(&gLoadedPauseMarkDataTable);
-    }
-#endif
     gLoadedPauseMarkDataTable = NULL;
 }
 

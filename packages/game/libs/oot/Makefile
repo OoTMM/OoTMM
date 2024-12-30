@@ -55,7 +55,7 @@ N64_EMULATOR ?=
 # This may also be used to disable debug features on debug ROMs by setting DEBUG_FEATURES to 0
 # DEBUG_FEATURES ?= 1
 
-CFLAGS ?= -MMD
+CFLAGS ?= -MMD -MP
 CPPFLAGS ?=
 CPP_DEFINES ?= -D__OOT__
 
