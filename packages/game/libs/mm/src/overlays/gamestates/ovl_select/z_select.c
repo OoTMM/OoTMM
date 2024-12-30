@@ -19,10 +19,6 @@ void MapSelect_LoadConsoleLogo(MapSelectState* this, u32 entrance, s32 spawn) {
 }
 
 void MapSelect_LoadGame(MapSelectState* this, u32 entrance, s32 spawn) {
-    if (gSaveFileNum == -1) {
-        Sram_InitDebugSave();
-    }
-
     gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
     gSaveContext.buttonStatus[EQUIP_SLOT_C_LEFT] = BTN_ENABLED;
     gSaveContext.buttonStatus[EQUIP_SLOT_C_DOWN] = BTN_ENABLED;

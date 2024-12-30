@@ -348,15 +348,9 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             gDisablePlayerCsActionStartPos = false;
             break;
 
-        case CS_MISC_SAVE_ENTER_CLOCK_TOWN:
-            if (isFirstFrame) {
-                Sram_SaveSpecialEnterClockTown(play);
-            }
-            break;
-
         case CS_MISC_RESET_SAVE_FROM_MOON_CRASH:
             if (isFirstFrame) {
-                Sram_ResetSaveFromMoonCrash(&play->sramCtx);
+                Sram_ResetSaveFromMoonCrash();
             }
             break;
 

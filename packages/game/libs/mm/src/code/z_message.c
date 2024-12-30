@@ -5943,16 +5943,14 @@ void Message_Update(PlayState* play) {
 
             Sram_SaveEndOfCycle(play);
             gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = TIMER_STATE_OFF;
-            func_8014546C(&play->sramCtx);
+            Sram_UpdatePermanentFlags();
 
             gMmSave.day = sp40;
             gMmSave.time = sp3E;
             gMmSave.cutsceneIndex = sp44;
 
             if (gSaveFileNum != -1) {
-                Sram_SetFlashPagesDefault(&play->sramCtx, gFlashSaveStartPages[gSaveFileNum * 2],
-                                          gFlashSpecialSaveNumPages[gSaveFileNum * 2]);
-                Sram_StartWriteToFlashDefault(&play->sramCtx);
+                SaveRaw_Write();
             }
             msgCtx->msgMode = MSGMODE_NEW_CYCLE_1;
             break;
@@ -5974,12 +5972,10 @@ void Message_Update(PlayState* play) {
             play->state.unk_A3 = 1;
             gMmSave.isOwlSave = true;
             Play_SaveCycleSceneFlags(play);
-            func_8014546C(&play->sramCtx);
+            Sram_UpdatePermanentFlags();
 
             if (gSaveFileNum != -1) {
-                Sram_SetFlashPagesOwlSave(&play->sramCtx, gFlashOwlSaveStartPages[gSaveFileNum * 2],
-                                          gFlashOwlSaveNumPages[gSaveFileNum * 2]);
-                Sram_StartWriteToFlashOwlSave(&play->sramCtx);
+                SaveRaw_Write();
             }
             msgCtx->msgMode = MSGMODE_OWL_SAVE_1;
             break;

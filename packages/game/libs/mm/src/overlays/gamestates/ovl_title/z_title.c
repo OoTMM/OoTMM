@@ -145,7 +145,7 @@ void ConsoleLogo_Main(GameState* thisx) {
 void ConsoleLogo_Destroy(GameState* thisx) {
     ConsoleLogoState* this = (ConsoleLogoState*)thisx;
 
-    Sram_InitSram(&this->state, &this->sramCtx);
+    Audio_SetFileSelectSettings(gSaveOptions.audioSetting);
     ShrinkWindow_Destroy();
     CIC6105_Noop2();
 }
@@ -173,7 +173,6 @@ void ConsoleLogo_Init(GameState* thisx) {
     }
 
     gSaveContext.flashSaveAvailable = true;
-    Sram_Alloc(thisx, &this->sramCtx);
     this->ult = 0;
     this->timer = 20;
     this->coverAlpha = 255;

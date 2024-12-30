@@ -1,5 +1,4 @@
 #include "z_title_setup.h"
-#include "sys_flashrom.h"
 
 #include "overlays/gamestates/ovl_title/z_title.h"
 
@@ -120,7 +119,6 @@ static void StartGame(void)
 }
 
 void Setup_InitImpl(SetupState* this) {
-    SysFlashrom_InitFlash();
     SaveContext_Init();
     Setup_InitRegs();
     StartGame();

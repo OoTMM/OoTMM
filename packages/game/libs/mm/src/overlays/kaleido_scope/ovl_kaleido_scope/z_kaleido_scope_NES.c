@@ -3068,13 +3068,11 @@ void KaleidoScope_Update(PlayState* play) {
                             Audio_PlaySfx(NA_SE_SY_PIECE_OF_HEART);
                             Play_SaveCycleSceneFlags(play);
                             gMmSave.saveInfo.playerData.savedSceneId = play->sceneId;
-                            func_8014546C(sramCtx);
+                            Sram_UpdatePermanentFlags();
                             if (!gSaveContext.flashSaveAvailable) {
                                 pauseCtx->savePromptState = PAUSE_SAVEPROMPT_STATE_5;
                             } else {
-                                Sram_SetFlashPagesDefault(sramCtx, gFlashSaveStartPages[gSaveFileNum],
-                                                          gFlashSaveNumPages[gSaveFileNum]);
-                                Sram_StartWriteToFlashDefault(sramCtx);
+                                SaveRaw_Write();
                                 pauseCtx->savePromptState = PAUSE_SAVEPROMPT_STATE_4;
                             }
                             sDelayTimer = 90;
@@ -3335,13 +3333,11 @@ void KaleidoScope_Update(PlayState* play) {
                     Play_SaveCycleSceneFlags(play);
                     gMmSave.saveInfo.playerData.savedSceneId = play->sceneId;
                     gMmSave.saveInfo.playerData.health = 0x30;
-                    func_8014546C(sramCtx);
+                    Sram_UpdatePermanentFlags();
                     if (!gSaveContext.flashSaveAvailable) {
                         pauseCtx->state = PAUSE_STATE_GAMEOVER_8;
                     } else {
-                        Sram_SetFlashPagesDefault(sramCtx, gFlashSaveStartPages[gSaveFileNum],
-                                                  gFlashSaveNumPages[gSaveFileNum]);
-                        Sram_StartWriteToFlashDefault(sramCtx);
+                        SaveRaw_Write();
                         pauseCtx->state = PAUSE_STATE_GAMEOVER_7;
                     }
                     sDelayTimer = 90;

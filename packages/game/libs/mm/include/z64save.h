@@ -1594,37 +1594,13 @@ void Sram_ActivateOwl(u8 owlWarpId);
 void Sram_ClearFlagsAtDawnOfTheFirstDay(void);
 void Sram_SaveEndOfCycle(struct PlayState* play);
 void Sram_IncrementDay(void);
-u16 Sram_CalcChecksum(void* data, size_t count);
-void Sram_InitNewSave(void);
-void Sram_InitDebugSave(void);
-void Sram_ResetSaveFromMoonCrash(SramContext* sramCtx);
-void Sram_OpenSave(struct FileSelectState* fileSelect, SramContext* sramCtx);
-void func_8014546C(SramContext* sramCtx);
-void func_801457CC(struct GameState* gameState, SramContext* sramCtx);
-void Sram_EraseSave(struct FileSelectState* fileSelect2, SramContext* sramCtx, s32 fileNum);
-void Sram_CopySave(struct FileSelectState* fileSelect2, SramContext* sramCtx);
-void Sram_InitSave(struct FileSelectState* fileSelect2, SramContext* sramCtx);
-void Sram_WriteSaveOptionsToBuffer(SramContext* sramCtx);
-void Sram_InitSram(struct GameState* gameState, SramContext* sramCtx);
-void Sram_Alloc(struct GameState* gameState, SramContext* sramCtx);
-void Sram_SaveSpecialEnterClockTown(struct PlayState* play);
+void Sram_ResetSaveFromMoonCrash(void);
+void Sram_UpdatePermanentFlags(void);
 void Sram_SaveSpecialNewDay(struct PlayState* play);
-void Sram_SetFlashPagesDefault(SramContext* sramCtx, u32 curPage, u32 numPages);
-void Sram_StartWriteToFlashDefault(SramContext* sramCtx);
-void Sram_UpdateWriteToFlashDefault(SramContext* sramCtx);
-void Sram_SetFlashPagesOwlSave(SramContext* sramCtx, s32 curPage, s32 numPages);
-void Sram_StartWriteToFlashOwlSave(SramContext* sramCtx);
-void Sram_UpdateWriteToFlashOwlSave(SramContext* sramCtx);
 
 void SaveContext_Init(void);
 
-extern u32 gSramSlotOffsets[];
 extern u8 gAmmoItems[];
-extern s32 gFlashSaveStartPages[];
-extern s32 gFlashSaveNumPages[];
-extern s32 gFlashSpecialSaveNumPages[];
-extern s32 gFlashOwlSaveStartPages[];
-extern s32 gFlashOwlSaveNumPages[];
 
 extern SaveContext gSaveContext;
 
