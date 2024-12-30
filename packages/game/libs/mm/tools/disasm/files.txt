@@ -761,7 +761,6 @@
     ['ovl_title', None, 'overlay', [], { 0x80800000 : "ovl_title" }],
     ['ovl_select', None, 'overlay', [], { 0x80800910 : "ovl_select" }],
     ['ovl_opening', None, 'overlay', [], { 0x80803DF0 : "ovl_opening" }],
-    ['ovl_file_choose', None, 'overlay', [], { 0x80804010 : "ovl_file_choose" }],
     ['ovl_daytelop', None, 'overlay', [], { 0x80814EB0 : "ovl_daytelop" }],
     ['ovl_kaleido_scope', None, 'overlay', [], { 0x808160A0 : "ovl_kaleido_scope" }],
     ['ovl_player_actor', None, 'overlay', [], { 0x8082DA90 : "ovl_player_actor" }],

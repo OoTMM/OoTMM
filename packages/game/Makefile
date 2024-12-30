@@ -71,6 +71,7 @@ clean:
 distclean: clean
 	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_OOT) distclean
 	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_MM) distclean
+	rm -rf stamps
 
 .PHONY: run-oot
 run-oot:
