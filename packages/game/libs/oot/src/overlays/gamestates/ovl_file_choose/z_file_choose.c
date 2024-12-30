@@ -7,9 +7,6 @@
 #endif
 #include "assets/textures/title_static/title_static.h"
 #include "assets/textures/parameter_static/parameter_static.h"
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
 
 #if OOT_PAL_N64
 static s32 sInitialLanguageAlphaAsInt = 100;
@@ -275,14 +272,6 @@ void FileSelect_UpdateMainMenu(GameState* thisx) {
             } else if (!this->n64ddFlags[this->buttonIndex]) {
                 Audio_PlaySfxGeneral(NA_SE_SY_FSEL_ERROR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                      &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
-            } else {
-#if PLATFORM_N64
-                if (D_80121212 != 0) {
-                    func_801C7268();
-                    // Setting ioData to 1 and writing it to ioPort 7 will skip the harp intro
-                    Audio_PlaySequenceWithSeqPlayerIO(SEQ_PLAYER_BGM_MAIN, NA_BGM_FILE_SELECT, 0, 7, 1);
-                }
-#endif
             }
         } else {
             if (this->warningLabel == FS_WARNING_NONE) {
@@ -1591,16 +1580,7 @@ void FileSelect_Main(GameState* thisx) {
     Input* input = &this->state.input[0];
 
     OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2898);
-
-#if PLATFORM_N64
-    if ((D_80121212 != 0) && (func_801C70FC() != 0)) {
-        this->n64ddFlag = 1;
-    } else {
-        this->n64ddFlag = 0;
-    }
-#else
     this->n64ddFlag = 0;
-#endif
 
     gSPSegment(POLY_OPA_DISP++, 0x00, NULL);
     gSPSegment(POLY_OPA_DISP++, 0x01, this->staticSegment);
@@ -1866,12 +1846,6 @@ void FileSelect_Init(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s32 pad;
     u32 size = (uintptr_t)_title_staticSegmentRomEnd - (uintptr_t)_title_staticSegmentRomStart;
-
-#if PLATFORM_N64
-    if (D_80121212 != 0) {
-        func_801C7268();
-    }
-#endif
 
 #if !OOT_PAL_N64
     SREG(30) = 1;

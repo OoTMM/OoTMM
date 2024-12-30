@@ -23,10 +23,6 @@
 #include "fault.h"
 #include "stack.h"
 #include "terminal.h"
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
-
 #pragma increment_block_number "gc-eu:128 gc-eu-mq:128 gc-jp:128 gc-jp-ce:128 gc-jp-mq:128 gc-us:128 gc-us-mq:128" \
                                "ntsc-1.2:88 pal-1.0:86 pal-1.1:86"
 
@@ -201,14 +197,6 @@ s32 DmaMgr_AudioDmaHandler(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction) {
     ASSERT(pihandle == gCartHandle, "pihandle == carthandle", "../z_std_dma.c", 530);
     ASSERT(direction == OS_READ, "direction == OS_READ", "../z_std_dma.c", 531);
     ASSERT(mb != NULL, "mb != NULL", "../z_std_dma.c", 532);
-
-#if PLATFORM_N64
-    if (D_80121212) {
-        while (D_80121214) {
-            Sleep_Msec(1000);
-        }
-    }
-#endif
 
     if (gDmaMgrVerbose == 10) {
         PRINTF(T("%10lld サウンドＤＭＡ %08x %08x %08x (%d)\n", "%10lld Sound DMA %08x %08x %08x (%d)\n"),

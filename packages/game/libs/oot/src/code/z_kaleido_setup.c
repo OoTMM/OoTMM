@@ -1,7 +1,4 @@
 #include "global.h"
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
 
 /*
  * The following three arrays are effectively unused.
@@ -175,18 +172,7 @@ void KaleidoSetup_Init(PlayState* play) {
     pauseCtx->cursorSpecialPos = 0;
 
     View_Init(&pauseCtx->view, play->state.gfxCtx);
-
-#if PLATFORM_N64
-    if ((B_80121220 != NULL) && (B_80121220->unk_3C != NULL)) {
-        B_80121220->unk_3C();
-    }
-#endif
 }
 
 void KaleidoSetup_Destroy(PlayState* play) {
-#if PLATFORM_N64
-    if ((B_80121220 != NULL) && (B_80121220->unk_40 != NULL)) {
-        B_80121220->unk_40();
-    }
-#endif
 }

@@ -1,6 +1,3 @@
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
 #include "z_kaleido_scope.h"
 #include "assets/textures/icon_item_static/icon_item_static.h"
 #include "assets/textures/icon_item_24_static/icon_item_24_static.h"
@@ -3534,16 +3531,7 @@ void KaleidoScope_UpdateDungeonMap(PlayState* play) {
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
 
     PRINTF("ＭＡＰ ＤＭＡ = %d\n", play->interfaceCtx.mapPaletteIndex);
-
-#if PLATFORM_N64
-    if (B_80121220 != NULL && B_80121220->unk_44 != NULL && B_80121220->unk_44(play)) {
-
-    } else {
-        KaleidoScope_LoadDungeonMap(play);
-    }
-#else
     KaleidoScope_LoadDungeonMap(play);
-#endif
 
     Map_SetFloorPalettesData(play, pauseCtx->dungeonMapSlot - 3);
 

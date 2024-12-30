@@ -10,7 +10,6 @@
 
 #if PLATFORM_N64
 #include "cic6105.h"
-#include "n64dd.h"
 #endif
 
 #include "assets/textures/nintendo_rogo_static/nintendo_rogo_static.h"
@@ -178,16 +177,6 @@ void ConsoleLogo_Main(GameState* thisx) {
 
 void ConsoleLogo_Destroy(GameState* thisx) {
     ConsoleLogoState* this = (ConsoleLogoState*)thisx;
-
-#if PLATFORM_N64
-    if (this->unk_1E0) {
-        if (func_801C7818() != 0) {
-            func_800D31A0();
-        }
-        func_801C7268();
-    }
-#endif
-
     Sram_InitSram();
 
 #if PLATFORM_N64
@@ -198,17 +187,6 @@ void ConsoleLogo_Destroy(GameState* thisx) {
 void ConsoleLogo_Init(GameState* thisx) {
     u32 size = (uintptr_t)_nintendo_rogo_staticSegmentRomEnd - (uintptr_t)_nintendo_rogo_staticSegmentRomStart;
     ConsoleLogoState* this = (ConsoleLogoState*)thisx;
-
-#if PLATFORM_N64
-    if ((D_80121210 != 0) && (D_80121211 != 0) && (D_80121212 == 0)) {
-        if (func_801C7658() != 0) {
-            func_800D31A0();
-        }
-        this->unk_1E0 = true;
-    } else {
-        this->unk_1E0 = false;
-    }
-#endif
 
     this->staticSegment = GAME_STATE_ALLOC(&this->state, size, "../z_title.c", 611);
     PRINTF("z_title.c\n");

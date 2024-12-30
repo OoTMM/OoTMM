@@ -2,9 +2,6 @@
 #include "quake.h"
 #include "versions.h"
 #include "z64frame_advance.h"
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
 
 #include "assets/scenes/indoors/miharigoya/miharigoya_scene.h"
 #include "assets/scenes/indoors/souko/souko_scene.h"
@@ -196,11 +193,6 @@ SceneDrawConfigFunc sSceneDrawConfigs[SDC_MAX] = {
 };
 
 void Scene_Draw(PlayState* play) {
-    if ((B_80121220 != NULL) && (B_80121220->unk_6C != NULL)) {
-        B_80121220->unk_6C(play, sSceneDrawConfigs);
-        return;
-    }
-
     sSceneDrawConfigs[play->sceneDrawConfig](play);
 }
 

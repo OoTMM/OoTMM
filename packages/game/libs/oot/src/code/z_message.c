@@ -3,9 +3,6 @@
 #include "terminal.h"
 #include "versions.h"
 #include "assets/textures/parameter_static/parameter_static.h"
-#if PLATFORM_N64
-#include "n64dd.h"
-#endif
 
 #pragma increment_block_number "gc-eu:0 gc-eu-mq:0 gc-jp:128 gc-jp-ce:128 gc-jp-mq:128 gc-us:128 gc-us-mq:128" \
                                "ntsc-1.0:96 ntsc-1.1:96 ntsc-1.2:112 pal-1.0:128 pal-1.1:128"
@@ -2524,95 +2521,20 @@ void Message_OpenText(PlayState* play, u16 textId) {
     if (sTextIsCredits) {
         Message_FindCreditsMessage(play, textId);
         msgCtx->msgLength = font->msgLength;
-#if PLATFORM_N64
-        if ((B_80121220 != NULL) && (B_80121220->unk_60 != NULL) && B_80121220->unk_60(&play->msgCtx.font)) {
-
-        } else {
-            DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_staff_message_data_staticSegmentRomStart + font->msgOffset,
-                             font->msgLength, "../z_message_PAL.c", UNK_LINE);
-        }
-#else
         DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_staff_message_data_staticSegmentRomStart + font->msgOffset,
-                         font->msgLength, "../z_message_PAL.c", 1954);
-#endif
+                            font->msgLength, "../z_message_PAL.c", UNK_LINE);
     } else {
-#if OOT_NTSC
         if (gSaveContext.language == LANGUAGE_JPN) {
             Message_FindMessageJPN(play, textId);
             msgCtx->msgLength = font->msgLength;
-#if PLATFORM_N64
-            if ((B_80121220 != NULL) && (B_80121220->unk_64 != NULL) && B_80121220->unk_64(&play->msgCtx.font)) {
-
-            } else {
-                DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_jpn_message_data_staticSegmentRomStart + font->msgOffset,
-                                 font->msgLength, "../z_message_PAL.c", UNK_LINE);
-            }
-#else
             DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_jpn_message_data_staticSegmentRomStart + font->msgOffset,
-                             font->msgLength, "../z_message_PAL.c", UNK_LINE);
-#endif
+                                font->msgLength, "../z_message_PAL.c", UNK_LINE);
         } else {
             Message_FindMessageNES(play, textId);
             msgCtx->msgLength = font->msgLength;
-#if PLATFORM_N64
-            if ((B_80121220 != NULL) && (B_80121220->unk_68 != NULL) && B_80121220->unk_68(&play->msgCtx.font)) {
-
-            } else {
-                DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_nes_message_data_staticSegmentRomStart + font->msgOffset,
-                                 font->msgLength, "../z_message_PAL.c", UNK_LINE);
-            }
-#else
             DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_nes_message_data_staticSegmentRomStart + font->msgOffset,
-                             font->msgLength, "../z_message_PAL.c", UNK_LINE);
-#endif
+                                font->msgLength, "../z_message_PAL.c", UNK_LINE);
         }
-#else
-        if (gSaveContext.language == LANGUAGE_ENG) {
-            Message_FindMessagePAL(play, textId);
-            msgCtx->msgLength = font->msgLength;
-#if PLATFORM_N64
-            if ((B_80121220 != NULL) && (B_80121220->unk_64 != NULL) && B_80121220->unk_64(&play->msgCtx.font)) {
-
-            } else {
-                DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_nes_message_data_staticSegmentRomStart + font->msgOffset,
-                                 font->msgLength, "../z_message_PAL.c", UNK_LINE);
-            }
-#else
-            DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_nes_message_data_staticSegmentRomStart + font->msgOffset,
-                             font->msgLength, "../z_message_PAL.c", 1966);
-#endif
-        } else if (gSaveContext.language == LANGUAGE_GER) {
-            Message_FindMessagePAL(play, textId);
-            msgCtx->msgLength = font->msgLength;
-#if PLATFORM_N64
-            //! @bug checks unk_64 != NULL instead of unk_68 != NULL
-            if ((B_80121220 != NULL) && (B_80121220->unk_64 != NULL) && B_80121220->unk_68(&play->msgCtx.font)) {
-
-            } else {
-                DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_ger_message_data_staticSegmentRomStart + font->msgOffset,
-                                 font->msgLength, "../z_message_PAL.c", UNK_LINE);
-            }
-#else
-            DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_ger_message_data_staticSegmentRomStart + font->msgOffset,
-                             font->msgLength, "../z_message_PAL.c", 1978);
-#endif
-        } else {
-            Message_FindMessagePAL(play, textId);
-            msgCtx->msgLength = font->msgLength;
-#if PLATFORM_N64
-            //! @bug checks unk_64 != NULL instead of unk_6C_PAL != NULL
-            if ((B_80121220 != NULL) && (B_80121220->unk_64 != NULL) && B_80121220->unk_6C_PAL(&play->msgCtx.font)) {
-
-            } else {
-                DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_fra_message_data_staticSegmentRomStart + font->msgOffset,
-                                 font->msgLength, "../z_message_PAL.c", UNK_LINE);
-            }
-#else
-            DMA_REQUEST_SYNC(font->msgBuf, (uintptr_t)_fra_message_data_staticSegmentRomStart + font->msgOffset,
-                             font->msgLength, "../z_message_PAL.c", 1990);
-#endif
-        }
-#endif
     }
     msgCtx->textBoxProperties = font->charTexBuf[0];
     msgCtx->textBoxType = msgCtx->textBoxProperties >> 4;
@@ -4364,15 +4286,4 @@ void Message_SetTables(void) {
 #endif
 
     sStaffMessageEntryTablePtr = sStaffMessageEntryTable;
-
-#if PLATFORM_N64 && OOT_NTSC
-    if ((B_80121220 != NULL) && (B_80121220->unk_58 != NULL)) {
-        B_80121220->unk_58(&sJpnMessageEntryTablePtr, &sNesMessageEntryTablePtr, &sStaffMessageEntryTablePtr);
-    }
-#elif PLATFORM_N64 && OOT_PAL
-    if ((B_80121220 != NULL) && (B_80121220->unk_58 != NULL)) {
-        B_80121220->unk_58(&sNesMessageEntryTablePtr, &sGerMessageEntryTablePtr, &sFraMessageEntryTablePtr,
-                           &sStaffMessageEntryTablePtr);
-    }
-#endif
 }

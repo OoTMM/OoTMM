@@ -20,7 +20,6 @@ extern struct IrqMgr gIrqMgr;
 #include "versions.h"
 #if PLATFORM_N64
 #include "cic6105.h"
-#include "n64dd.h"
 #endif
 
 #pragma increment_block_number "gc-eu:160 gc-eu-mq:160 gc-jp:160 gc-jp-ce:160 gc-jp-mq:160 gc-us:160 gc-us-mq:160" \
@@ -80,43 +79,13 @@ void Main(void* arg) {
     gAppNmiBufferPtr = (PreNmiBuff*)osAppNMIBuffer;
     PreNmiBuff_Init(gAppNmiBufferPtr);
     Fault_Init();
-#if PLATFORM_N64
-    func_800AD410();
-    if (D_80121211 != 0) {
-        systemHeapStart = (uintptr_t)_n64ddSegmentEnd;
-        SysCfb_Init(1);
-    } else {
-        func_800AD488();
-        systemHeapStart = (uintptr_t)_buffersSegmentEnd;
-        SysCfb_Init(0);
-    }
-#else
     SysCfb_Init(0);
     systemHeapStart = (uintptr_t)_buffersSegmentEnd;
-#endif
     fb = (uintptr_t)SysCfb_GetFbPtr(0);
     gSystemHeapSize = fb - systemHeapStart;
     PRINTF(T("システムヒープ初期化 %08x-%08x %08x\n", "System heap initialization %08x-%08x %08x\n"), systemHeapStart,
            fb, gSystemHeapSize);
     SystemHeap_Init((void*)systemHeapStart, gSystemHeapSize); // initializes the system heap
-
-#if DEBUG_FEATURES
-    {
-        void* debugHeapStart;
-        u32 debugHeapSize;
-
-        if (osMemSize >= 0x800000) {
-            debugHeapStart = SysCfb_GetFbEnd();
-            debugHeapSize = PHYS_TO_K0(0x600000) - (uintptr_t)debugHeapStart;
-        } else {
-            debugHeapSize = 0x400;
-            debugHeapStart = SYSTEM_ARENA_MALLOC(debugHeapSize, "../main.c", 565);
-        }
-
-        PRINTF("debug_InitArena(%08x, %08x)\n", debugHeapStart, debugHeapSize);
-        DebugArena_Init(debugHeapStart, debugHeapSize);
-    }
-#endif
 
     Regs_Init();
 
@@ -124,10 +93,6 @@ void Main(void* arg) {
 
     osCreateMesgQueue(&sSerialEventQueue, sSerialMsgBuf, ARRAY_COUNT(sSerialMsgBuf));
     osSetEventMesg(OS_EVENT_SI, &sSerialEventQueue, NULL);
-
-#if DEBUG_FEATURES
-    Main_LogSystemHeap();
-#endif
 
     osCreateMesgQueue(&irqMgrMsgQueue, irqMgrMsgBuf, ARRAY_COUNT(irqMgrMsgBuf));
     StackCheck_Init(&sIrqMgrStackInfo, sIrqMgrStack, STACK_TOP(sIrqMgrStack), 0, 0x100, "irqmgr");
