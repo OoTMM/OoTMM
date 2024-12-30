@@ -5231,7 +5231,6 @@ s16 D_801D0464[] = {
 void Message_Update(PlayState* play) {
     static u8 D_801D0468 = 0;
     MessageContext* msgCtx = &play->msgCtx;
-    SramContext* sramCtx = &play->sramCtx; // Optional
     PauseContext* pauseCtx = &play->pauseCtx;
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     Input* input = CONTROLLER1(&play->state);
@@ -5958,10 +5957,8 @@ void Message_Update(PlayState* play) {
         case MSGMODE_NEW_CYCLE_1:
             if (gSaveFileNum != -1) {
                 play->state.unk_A3 = 1;
-                if (play->sramCtx.status == 0) {
-                    play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
-                    msgCtx->msgMode = MSGMODE_NEW_CYCLE_2;
-                }
+                play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
+                msgCtx->msgMode = MSGMODE_NEW_CYCLE_2;
             } else {
                 play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
                 msgCtx->msgMode = MSGMODE_NEW_CYCLE_2;
@@ -5983,10 +5980,8 @@ void Message_Update(PlayState* play) {
         case MSGMODE_OWL_SAVE_1:
             if (gSaveFileNum != -1) {
                 play->state.unk_A3 = 1;
-                if (play->sramCtx.status == 0) {
-                    play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
-                    msgCtx->msgMode = MSGMODE_OWL_SAVE_2;
-                }
+                play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
+                msgCtx->msgMode = MSGMODE_OWL_SAVE_2;
             } else {
                 play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_SOT;
                 msgCtx->msgMode = MSGMODE_OWL_SAVE_2;

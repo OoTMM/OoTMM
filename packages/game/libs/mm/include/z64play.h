@@ -55,7 +55,6 @@ typedef struct PlayState {
     /* 0x01F24 */ CutsceneContext csCtx;
     /* 0x01F78 */ SoundSource soundSources[SOUND_SOURCE_COUNT];
     /* 0x02138 */ EffFootmark footprintInfo[100];
-    /* 0x046B8 */ SramContext sramCtx;
     /* 0x046E0 */ SkyboxContext skyboxCtx;
     /* 0x04908 */ MessageContext msgCtx;
     /* 0x169E8 */ InterfaceContext interfaceCtx;
