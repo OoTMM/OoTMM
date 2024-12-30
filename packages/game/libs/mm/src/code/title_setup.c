@@ -122,6 +122,7 @@ void Setup_InitImpl(SetupState* this) {
     SaveContext_Init();
     Setup_InitRegs();
     StartGame();
+    gMmSave.entrance = 0xd800; /* Entrance to Clock Town */
 
     STOP_GAMESTATE(&this->state);
     SET_NEXT_GAMESTATE(&this->state, Play_Init, sizeof(PlayState));
