@@ -10,8 +10,6 @@
 .word 0,0,0,0
 .ascii "OOT+MM COMBO       "
 .byte 0,0,0,0,0,0,0,0
-.byte 'C'
-.ascii "ZLE"
-.byte 0
+.ascii "NEDEP"
 
 .incbin "oot/extracted/ntsc-1.0/incbin/ipl3"

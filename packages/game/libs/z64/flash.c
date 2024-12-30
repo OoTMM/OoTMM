@@ -371,7 +371,7 @@ void SysFlashrom_AttemptWrite(void* addr, u32 pageNum, u32 pageCount) {
     osWritebackDCache(addr, pageCount * FLASH_BLOCK_SIZE);
     attempts = 0;
 failRetry:
-    if (attempts >= 10)
+    if (attempts >= 50)
     {
         Fault_AddHungupAndCrashImpl("Flash Error", lastError);
         return;
@@ -380,13 +380,8 @@ failRetry:
     result = osFlashSectorErase(pageNum);
     if (result != 0)
     {
-        /* Ares flash is a bit buggy */
-        /* Needs a dummy read here */
-        osFlashReadArray(&msg, OS_MESG_PRI_NORMAL, pageNum, sFlashReadbackBuffer, 1, &sFlashromMesgQueue);
-        osRecvMesg(&sFlashromMesgQueue, NULL, OS_MESG_BLOCK);
-
-        //lastError = "Erase Error";
-        //goto failRetry;
+        lastError = "Erase Error";
+        goto failRetry;
     }
     result = SysFlashrom_ExecWrite(addr, pageNum, pageCount);
     if (result != 0)
