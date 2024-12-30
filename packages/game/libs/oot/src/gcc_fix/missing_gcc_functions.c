@@ -7,25 +7,6 @@
 
 #include "global.h"
 
-// Self-hosted libc memory functions, gcc assumes these exist even in a freestanding
-// environment and there is no way to tell it otherwise.
-
-int memcmp(const void* s1, const void* s2, size_t n) {
-    const u8* m1 = s1;
-    const u8* m2 = s2;
-    size_t i;
-
-    for (i = 0; i < n; i++) {
-        if (m1[i] < m2[i]) {
-            return -1;
-        } else if (m1[i] > m2[i]) {
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
 // Conversions involving 64-bit integer types required by the O32 MIPS ABI.
 
 // f32 -> u64, negative values become 0

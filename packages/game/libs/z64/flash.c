@@ -9,12 +9,15 @@
 
 #define ARRAY_COUNT(x) (sizeof(x) / sizeof(x[0]))
 
+void Fault_AddHungupAndCrashImpl(const char* a, const char* b);
+
 u32 __osFlashID[4] ALIGNED(8);
 OSIoMesg __osFlashMsg ALIGNED(8);
 OSMesgQueue __osFlashMessageQ ALIGNED(8);
 OSPiHandle __osFlashHandler ALIGNED(8);
 OSMesg __osFlashMsgBuf[1];
 s32 __osFlashVersion;
+static char sFlashReadbackBuffer[FLASH_BLOCK_SIZE] ALIGNED(8);
 
 static OSMesgQueue  sFlashromMesgQueue ALIGNED(8);
 static OSMesg       sFlashromMesg[1];
@@ -358,34 +361,75 @@ s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount) {
     return 0;
 }
 
-s32 SysFlashrom_AttemptWrite(void* addr, u32 pageNum, u32 pageCount) {
+void SysFlashrom_AttemptWrite(void* addr, u32 pageNum, u32 pageCount) {
+    OSIoMesg msg;
     s32 result;
-    s32 i;
+    s32 attempts;
+    u32 j;
+    const char* lastError;
 
     osWritebackDCache(addr, pageCount * FLASH_BLOCK_SIZE);
-    i = 0;
+    attempts = 0;
 failRetry:
+    if (attempts >= 10)
+    {
+        Fault_AddHungupAndCrashImpl("Flash Error", lastError);
+        return;
+    }
+    attempts++;
     result = osFlashSectorErase(pageNum);
-    if (result != 0) {
-        if (i < 3) {
-            i++;
-            goto failRetry;
-        }
-        return result;
+    if (result != 0)
+    {
+        /* Ares flash is a bit buggy */
+        /* Needs a dummy read here */
+        osFlashReadArray(&msg, OS_MESG_PRI_NORMAL, pageNum, sFlashReadbackBuffer, 1, &sFlashromMesgQueue);
+        osRecvMesg(&sFlashromMesgQueue, NULL, OS_MESG_BLOCK);
+
+        //lastError = "Erase Error";
+        //goto failRetry;
     }
     result = SysFlashrom_ExecWrite(addr, pageNum, pageCount);
-    if (result != 0) {
-        if (i < 3) {
-            i++;
+    if (result != 0)
+    {
+        lastError = "Write Error";
+        goto failRetry;
+    }
+
+    /* Readback every written page */
+    for (j = 0; j < pageCount; ++j) {
+        osInvalDCache(sFlashReadbackBuffer, sizeof(sFlashReadbackBuffer));
+        osFlashReadArray(&msg, OS_MESG_PRI_NORMAL, pageNum + j, sFlashReadbackBuffer, 1, &sFlashromMesgQueue);
+        osRecvMesg(&sFlashromMesgQueue, NULL, OS_MESG_BLOCK);
+
+        if (memcmp(sFlashReadbackBuffer, (char*)addr + FLASH_BLOCK_SIZE * j, FLASH_BLOCK_SIZE))
+        {
+            lastError = "Readback Error";
             goto failRetry;
         }
-        return result;
     }
-    return 0;
 }
 
 void Flash_Write(void* src, u32 offset, u32 size)
 {
+    u32 sz;
+    char* s;
+
+    if (offset & 0x1fff)
+        Fault_AddHungupAndCrashImpl("Flash Error", "Misaligned Write");
+    if (size % FLASH_BLOCK_SIZE)
+        Fault_AddHungupAndCrashImpl("Flash Error", "Bad Write Size");
+
     Flash_EnsureInit();
-    SysFlashrom_AttemptWrite(src, offset / FLASH_BLOCK_SIZE, size / FLASH_BLOCK_SIZE);
+    s = src;
+    while (size)
+    {
+        sz = size;
+        if (sz > 0x2000)
+            sz = 0x2000;
+
+        SysFlashrom_AttemptWrite(s, offset / FLASH_BLOCK_SIZE, sz / FLASH_BLOCK_SIZE);
+        offset += sz;
+        s += sz;
+        size -= sz;
+    }
 }
