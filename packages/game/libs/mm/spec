@@ -17,6 +17,8 @@ beginseg
     name "boot"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/z64/file.o"
+    include "$(BUILD_DIR)/src/z64/save.o"
+    include "$(BUILD_DIR)/src/z64/flash.o"
     include "$(BUILD_DIR)/src/boot/idle.o"
     include "$(BUILD_DIR)/src/boot/viconfig.o"
     include "$(BUILD_DIR)/src/boot/carthandle.o"
@@ -729,9 +731,7 @@ beginseg
     include "$(BUILD_DIR)/src/code/code_80183070.o"
     include "$(BUILD_DIR)/src/code/c_keyframe.o"
     include "$(BUILD_DIR)/src/code/sys_slowly.o"
-    include "$(BUILD_DIR)/src/code/sys_flashrom.o"
     include "$(BUILD_DIR)/asm/code/kanread.text.o" // handwritten
-    include "$(BUILD_DIR)/src/code/osFlash.o"
     include "$(BUILD_DIR)/data/code/code_801D1E80.data.o"
     pad_text
     pad_text
@@ -806,16 +806,6 @@ beginseg
     compress
     include "$(BUILD_DIR)/src/overlays/gamestates/ovl_opening/z_opening.o"
     include "$(BUILD_DIR)/src/overlays/gamestates/ovl_opening/ovl_opening_reloc.o"
-endseg
-
-beginseg
-    name "ovl_file_choose"
-    compress
-    include "$(BUILD_DIR)/src/overlays/gamestates/ovl_file_choose/z_file_nameset_data.o"
-    include "$(BUILD_DIR)/src/overlays/gamestates/ovl_file_choose/z_file_copy_erase.o"
-    include "$(BUILD_DIR)/src/overlays/gamestates/ovl_file_choose/z_file_nameset_NES.o"
-    include "$(BUILD_DIR)/src/overlays/gamestates/ovl_file_choose/z_file_choose_NES.o"
-    include "$(BUILD_DIR)/src/overlays/gamestates/ovl_file_choose/ovl_file_choose_reloc.o"
 endseg
 
 beginseg

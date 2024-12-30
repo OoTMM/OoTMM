@@ -18,8 +18,6 @@ void TitleSetup_SetupTitleScreen(TitleSetupState* this) {
     CLEAR_EVENTINF(EVENTINF_17);
     gSaveContext.gameMode = GAMEMODE_TITLE_SCREEN;
 
-    Sram_InitNewSave();
-
     gMmSave.entrance = sOpeningEntrances[gOpeningEntranceIndex];
     gSaveContext.nextCutsceneIndex = gMmSave.cutsceneIndex = sOpeningCutscenes[gOpeningEntranceIndex];
     gSaveContext.sceneLayer = 0;

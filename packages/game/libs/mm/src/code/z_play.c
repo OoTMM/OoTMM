@@ -1,4 +1,5 @@
 #include "PR/ultratypes.h"
+#include "functions.h"
 
 // Variables are put before most headers as a hacky way to bypass bss reordering
 s16 sTransitionFillTimer;
@@ -22,6 +23,7 @@ u8 sMotionBlurStatus;
 #include "sys_cfb.h"
 #include "attributes.h"
 
+#include "z64.h"
 #include "z64bombers_notebook.h"
 #include "z64debug_display.h"
 #include "zelda_arena.h"
@@ -34,7 +36,6 @@ u8 sMotionBlurStatus;
 
 #include "overlays/gamestates/ovl_daytelop/z_daytelop.h"
 #include "overlays/gamestates/ovl_opening/z_opening.h"
-#include "overlays/gamestates/ovl_file_choose/z_file_select.h"
 #include "libu64/debug.h"
 
 s32 gDbgCamEnabled = false;
@@ -710,7 +711,7 @@ void Play_UpdateTransition(PlayState* this) {
                     if (gSaveContext.gameMode == GAMEMODE_OWL_SAVE) {
                         STOP_GAMESTATE(&this->state);
                         SET_NEXT_GAMESTATE(&this->state, TitleSetup_Init, sizeof(TitleSetupState));
-                    } else if (gSaveContext.gameMode != GAMEMODE_FILE_SELECT) {
+                    } else {
                         STOP_GAMESTATE(&this->state);
                         SET_NEXT_GAMESTATE(&this->state, Play_Init, sizeof(PlayState));
                         gMmSave.entrance = this->nextEntrance;
@@ -718,9 +719,6 @@ void Play_UpdateTransition(PlayState* this) {
                         if (gSaveContext.minigameStatus == MINIGAME_STATUS_ACTIVE) {
                             gSaveContext.minigameStatus = MINIGAME_STATUS_END;
                         }
-                    } else { // GAMEMODE_FILE_SELECT
-                        STOP_GAMESTATE(&this->state);
-                        SET_NEXT_GAMESTATE(&this->state, FileSelect_Init, sizeof(FileSelectState));
                     }
                 } else {
                     if (this->transitionCtx.transitionType == TRANS_TYPE_CIRCLE) {
@@ -2168,7 +2166,6 @@ void Play_Init(GameState* thisx) {
 
     Camera_OverwriteStateFlags(&this->mainCamera, CAM_STATE_0 | CAM_STATE_CHECK_WATER | CAM_STATE_2 | CAM_STATE_3 |
                                                       CAM_STATE_4 | CAM_STATE_DISABLE_MODE_CHANGE | CAM_STATE_6);
-    Sram_Alloc(&this->state, &this->sramCtx);
     Regs_InitData(this);
     Message_Init(this);
     GameOver_Init(this);
