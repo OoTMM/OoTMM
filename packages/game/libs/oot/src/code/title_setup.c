@@ -9,7 +9,8 @@ void Setup_InitImpl(SetupState* this) {
     if (gGameStarted)
     {
         Sram_OnLoad();
-        SET_NEXT_GAMESTATE(&this->state, Play_Init, ConsoleLogoState);
+        gOotSave.entranceIndex = 0x1d1; /* Market from mask shop */
+        SET_NEXT_GAMESTATE(&this->state, Play_Init, PlayState);
     }
     else
     {
