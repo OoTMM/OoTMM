@@ -198,22 +198,26 @@ static s16 sDungeonEntrances[] = {
     ENTR_INSIDE_GANONS_CASTLE_COLLAPSE_0,  // SCENE_INSIDE_GANONS_CASTLE_COLLAPSE
 };
 
-/**
- *  Copy save currently on the buffer to Save Context and complete various tasks to open the save.
- *  This includes:
- *  - Set proper entrance depending on where the game was saved
- *  - If health is less than 3 hearts, give 3 hearts
- *  - If either scarecrow song is set, copy them from save context to the proper location
- *  - Handle a case where the player saved and quit after zelda cutscene but didnt get the song
- *  - Give and equip master sword if player is adult and doesn't have master sword
- *  - Revert any trade items that spoil
- */
-void Sram_OpenSave(void) {
+void Sram_InitSram(void) {
+    static const char* kMagic = "OoTMM-SAVE-START";
+
+    SaveRaw_OptionsRead();
+    if (memcmp(gSaveOptions.magic, kMagic, 16))
+    {
+        memcpy(gSaveOptions.magic, kMagic, 16);
+        gSaveOptions.audioSetting = 0;
+        gSaveOptions.zTargetSetting = 0;
+        SaveRaw_OptionsWrite();
+    }
+
+    func_800F6700(gSaveOptions.audioSetting);
+}
+
+void Sram_OnLoad(void)
+{
     u16 i;
     u16 j;
     u8* ptr;
-
-    SaveRaw_Read();
 
     switch (gOotSave.info.playerData.savedSceneId) {
         case SCENE_DEKU_TREE:
@@ -305,19 +309,44 @@ void Sram_OpenSave(void) {
     }
 
     gOotSave.info.playerData.magicLevel = 0;
-}
 
-void Sram_InitSram(void) {
-    static const char* kMagic = "OoTMM-SAVE-START";
+    gSaveContext.gameMode = GAMEMODE_NORMAL;
+    gSaveContext.respawn[RESPAWN_MODE_DOWN].entranceIndex = ENTR_LOAD_OPENING;
+    gSaveContext.respawnFlag = 0;
+    gSaveContext.seqId = (u8)NA_BGM_DISABLED;
+    gSaveContext.natureAmbienceId = 0xFF;
+    gSaveContext.showTitleCard = true;
+    gSaveContext.dogParams = 0;
+    gSaveContext.timerState = TIMER_STATE_OFF;
+    gSaveContext.subTimerState = SUBTIMER_STATE_OFF;
+    gSaveContext.eventInf[0] = 0;
+    gSaveContext.eventInf[1] = 0;
+    gSaveContext.eventInf[2] = 0;
+    gSaveContext.eventInf[3] = 0;
+    gSaveContext.prevHudVisibilityMode = HUD_VISIBILITY_ALL;
+    gSaveContext.nayrusLoveTimer = 0;
+    gSaveContext.healthAccumulator = 0;
+    gSaveContext.magicState = MAGIC_STATE_IDLE;
+    gSaveContext.prevMagicState = MAGIC_STATE_IDLE;
+    gSaveContext.forcedSeqId = NA_BGM_GENERAL_SFX;
+    gSaveContext.skyboxTime = CLOCK_TIME(0, 0);
+    gSaveContext.nextTransitionType = TRANS_NEXT_TYPE_DEFAULT;
+    gSaveContext.nextCutsceneIndex = 0xFFEF;
+    gSaveContext.cutsceneTrigger = 0;
+    gSaveContext.chamberCutsceneNum = CHAMBER_CS_FOREST;
+    gSaveContext.nextDayTime = NEXT_TIME_NONE;
+    gSaveContext.retainWeatherMode = false;
 
-    SaveRaw_OptionsRead();
-    if (memcmp(gSaveOptions.magic, kMagic, 16))
-    {
-        memcpy(gSaveOptions.magic, kMagic, 16);
-        gSaveOptions.audioSetting = 0;
-        gSaveOptions.zTargetSetting = 0;
-        SaveRaw_OptionsWrite();
-    }
+    gSaveContext.buttonStatus[0] = gSaveContext.buttonStatus[1] = gSaveContext.buttonStatus[2] =
+        gSaveContext.buttonStatus[3] = gSaveContext.buttonStatus[4] = BTN_ENABLED;
 
-    func_800F6700(gSaveOptions.audioSetting);
+    gSaveContext.forceRisingButtonAlphas = gSaveContext.nextHudVisibilityMode = gSaveContext.hudVisibilityMode =
+        gSaveContext.hudVisibilityModeTimer = gSaveContext.magicCapacity = 0; // false, HUD_VISIBILITY_NO_CHANGE
+
+    // Set the fill target to be the saved magic amount
+    gSaveContext.magicFillTarget = gOotSave.info.playerData.magic;
+    // Set `magicLevel` and `magic` to 0 so `magicCapacity` then `magic` grows from nothing to respectively the full
+    // capacity and `magicFillTarget`
+    gOotSave.info.playerData.magicLevel = gOotSave.info.playerData.magic = 0;
+    gOotSave.info.playerData.naviTimer = 0;
 }

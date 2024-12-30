@@ -133,7 +133,7 @@ void Skin_Free(PlayState* play, Skin* skin);
 s32 Skin_ApplyAnimTransformations(Skin* skin, MtxF* limbMatrices, Actor* actor, s32 setTranslation);
 
 void Sram_InitDebugSave(void);
-void Sram_OpenSave(void);
+void Sram_OnLoad(void);
 void Sram_InitSram(void);
 
 void ViMode_LogPrint(OSViMode* osViMode);

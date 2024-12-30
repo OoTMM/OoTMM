@@ -5,6 +5,7 @@
 char gGameSwitch;
 char gGameId;
 char gNextGameId;
+char gGameStarted;
 
 void System_DisableInterrupts(void);
 
