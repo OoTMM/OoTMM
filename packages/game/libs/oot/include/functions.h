@@ -134,7 +134,6 @@ s32 Skin_ApplyAnimTransformations(Skin* skin, MtxF* limbMatrices, Actor* actor, 
 
 void Sram_InitDebugSave(void);
 void Sram_OpenSave(void);
-void Sram_WriteSave(void);
 void Sram_InitSram(void);
 
 void ViMode_LogPrint(OSViMode* osViMode);

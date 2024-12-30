@@ -247,8 +247,7 @@ void Play_Destroy(GameState* thisx) {
     ZeldaArena_Cleanup();
 }
 
-void Play_Init(GameState* thisx) {
-    PlayState* this = (PlayState*)thisx;
+static void Play_InitImpl(PlayState* this) {
     GraphicsContext* gfxCtx = this->state.gfxCtx;
     uintptr_t zAlloc;
     uintptr_t zAllocAligned;
@@ -258,10 +257,6 @@ void Play_Init(GameState* thisx) {
     s32 i;
     u8 baseSceneLayer;
     s32 pad[2];
-
-    if (gOotSave.entranceIndex == ENTR_MIDOS_HOUSE_0) {
-        Game_Switch(GAME_MM);
-    }
 
     if (gOotSave.entranceIndex == ENTR_LOAD_OPENING) {
         gOotSave.entranceIndex = 0;
@@ -480,6 +475,19 @@ void Play_Init(GameState* thisx) {
         DmaMgr_DmaRomToRam(0x03FEB000, gDebugCutsceneScript, sizeof(sDebugCutsceneScriptBuf));
     }
 #endif
+}
+
+void Play_Init(GameState* thisx) {
+    PlayState* this = (PlayState*)thisx;
+
+    if (gOotSave.entranceIndex == ENTR_MIDOS_HOUSE_0) {
+        Play_InitImpl(this);
+        Game_PrepareSave(this, 0);
+        Game_Switch(GAME_MM);
+        return;
+    }
+
+    Play_InitImpl(this);
 }
 
 void Play_Update(PlayState* this) {
@@ -1880,4 +1888,16 @@ s32 func_800C0DB4(PlayState* this, Vec3f* pos) {
     } else {
         return false;
     }
+}
+
+void Game_PrepareSave(PlayState* this, int saveFlags)
+{
+    Play_SaveSceneFlags(this);
+    gOotSave.info.playerData.savedSceneId = this->sceneId;
+}
+
+void Game_Save(PlayState* this, int saveFlags)
+{
+    Game_PrepareSave(this, saveFlags);
+    SaveRaw_Write();
 }

@@ -43,4 +43,8 @@ void SaveRaw_WriteTo(int id);
 void SaveRaw_OptionsRead(void);
 void SaveRaw_OptionsWrite(void);
 
+struct PlayState;
+void Game_PrepareSave(struct PlayState* play, int flags);
+void Game_Save(struct PlayState* play, int flags);
+
 #endif
