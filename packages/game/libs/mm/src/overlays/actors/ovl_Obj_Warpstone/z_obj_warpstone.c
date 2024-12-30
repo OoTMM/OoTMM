@@ -70,7 +70,7 @@ void ObjWarpstone_Init(Actor* thisx, PlayState* play) {
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     Collider_InitAndSetCylinder(play, &this->collider, &this->dyna.actor, &sCylinderInit);
     Actor_SetFocus(&this->dyna.actor, 40.0f);
-
+    this->dyna.actor.textId = 0xc01;
     if (!GET_OWL_STATUE_ACTIVATED(OBJ_WARPSTONE_GET_OWL_WARP_ID(&this->dyna.actor))) {
         ObjWarpstone_SetupAction(this, ObjWarpstone_ClosedIdle);
     } else {
@@ -90,8 +90,6 @@ s32 ObjWarpstone_ClosedIdle(ObjWarpstone* this, PlayState* play) {
         ObjWarpstone_SetupAction(this, ObjWarpstone_BeginOpeningCutscene);
         return true;
     } else {
-        /*Ye who hold the sacred sword, leave proof of our encounter.*/
-        this->dyna.actor.textId = 0xC00;
         return false;
     }
 }
@@ -126,9 +124,15 @@ s32 ObjWarpstone_PlayOpeningCutscene(ObjWarpstone* this, PlayState* play) {
 }
 
 s32 ObjWarpstone_OpenedIdle(ObjWarpstone* this, PlayState* play) {
-    /*You can save your progress and quit here.*/
-    this->dyna.actor.textId = 0xC01;
     return false;
+}
+
+static void ObjWarpstone_Save(PlayState* play)
+{
+    Play_SaveCycleSceneFlags(play);
+    Sram_UpdatePermanentFlags();
+    SaveRaw_Write();
+    Audio_PlaySfx(0x4823);
 }
 
 void ObjWarpstone_Update(Actor* thisx, PlayState* play) {
@@ -140,14 +144,9 @@ void ObjWarpstone_Update(Actor* thisx, PlayState* play) {
             this->isTalking = false;
         } else if ((Message_GetState(&play->msgCtx) == TEXT_STATE_CHOICE) && Message_ShouldAdvance(play)) {
             if (play->msgCtx.choiceIndex != 0) {
-                Audio_PlaySfx_MessageDecide();
-                play->msgCtx.msgMode = MSGMODE_OWL_SAVE_0;
-                play->msgCtx.unk120D6 = 0;
-                play->msgCtx.unk120D4 = 0;
-                gMmSave.owlWarpId = OBJ_WARPSTONE_GET_OWL_WARP_ID(&this->dyna.actor);
-            } else {
-                Message_CloseTextbox(play);
+                ObjWarpstone_Save(play);
             }
+            Message_CloseTextbox(play);
         }
     } else if (Actor_TalkOfferAccepted(&this->dyna.actor, &play->state)) {
         this->isTalking = true;
