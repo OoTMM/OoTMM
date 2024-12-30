@@ -190,19 +190,6 @@ typedef enum HighScore {
 #define PICTO_PHOTO_SIZE (PICTO_PHOTO_WIDTH * PICTO_PHOTO_HEIGHT)
 #define PICTO_PHOTO_COMPRESSED_SIZE (PICTO_PHOTO_SIZE * 5 / 8)
 
-typedef struct SramContext {
-    /* 0x00 */ u8* noFlashSaveBuf; // Never allocated memory
-    /* 0x04 */ u8* saveBuf;
-    /* 0x08 */ char unk_08[4];
-    /* 0x0C */ s16 status;
-    /* 0x10 */ u32 curPage;
-    /* 0x14 */ u32 numPages;
-    /* 0x18 */ OSTime startWriteOsTime;
-    /* 0x20 */ s16 unk_20;
-    /* 0x22 */ s16 unk_22;
-    /* 0x24 */ s16 unk_24;
-} SramContext; // size = 0x28
-
 typedef struct CycleSceneFlags {
     /* 0x00 */ u32 chest;
     /* 0x04 */ u32 switch0;

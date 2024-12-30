@@ -2824,7 +2824,6 @@ void KaleidoScope_Update(PlayState* play) {
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     MessageContext* msgCtx = &play->msgCtx;
     GameOverContext* gameOverCtx = &play->gameOverCtx;
-    SramContext* sramCtx = &play->sramCtx;
     Input* input = CONTROLLER1(&play->state);
     size_t size0;
     size_t size1;
@@ -3091,9 +3090,7 @@ void KaleidoScope_Update(PlayState* play) {
                     break;
 
                 case PAUSE_SAVEPROMPT_STATE_4:
-                    if (sramCtx->status == 0) {
-                        pauseCtx->savePromptState = PAUSE_SAVEPROMPT_STATE_5;
-                    }
+                    pauseCtx->savePromptState = PAUSE_SAVEPROMPT_STATE_5;
                     break;
 
                 case PAUSE_SAVEPROMPT_STATE_5:
@@ -3352,13 +3349,11 @@ void KaleidoScope_Update(PlayState* play) {
             break;
 
         case PAUSE_STATE_GAMEOVER_7:
-            if (sramCtx->status == 0) {
-                pauseCtx->state = PAUSE_STATE_OFF;
-                GameState_SetFramerateDivisor(&play->state, 3);
-                R_PAUSE_BG_PRERENDER_STATE = PAUSE_BG_PRERENDER_UNK4;
-                Object_LoadAll(&play->objectCtx);
-                BgCheck_InitCollisionHeaders(&play->colCtx, play);
-            }
+            pauseCtx->state = PAUSE_STATE_OFF;
+            GameState_SetFramerateDivisor(&play->state, 3);
+            R_PAUSE_BG_PRERENDER_STATE = PAUSE_BG_PRERENDER_UNK4;
+            Object_LoadAll(&play->objectCtx);
+            BgCheck_InitCollisionHeaders(&play->colCtx, play);
             break;
 
         case PAUSE_STATE_GAMEOVER_8:
