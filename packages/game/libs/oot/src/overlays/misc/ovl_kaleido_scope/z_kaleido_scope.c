@@ -4164,9 +4164,7 @@ void KaleidoScope_Update(PlayState* play) {
                             Audio_PlaySfxGeneral(NA_SE_SY_PIECE_OF_HEART, &gSfxDefaultPos, 4,
                                                  &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale,
                                                  &gSfxDefaultReverb);
-                            Play_SaveSceneFlags(play);
-                            gOotSave.info.playerData.savedSceneId = play->sceneId;
-                            Sram_WriteSave();
+                            Game_Save(play, 0);
                             pauseCtx->savePromptState = PAUSE_SAVE_PROMPT_STATE_SAVED;
 #if PLATFORM_N64
                             sDelayTimer = 90;
@@ -4427,9 +4425,7 @@ void KaleidoScope_Update(PlayState* play) {
                     Audio_PlaySfxGeneral(NA_SE_SY_PIECE_OF_HEART, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                          &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
                     pauseCtx->promptChoice = 0;
-                    Play_SaveSceneFlags(play);
-                    gOotSave.info.playerData.savedSceneId = play->sceneId;
-                    Sram_WriteSave();
+                    Game_Save(play, 0);
                     pauseCtx->state = PAUSE_STATE_GAME_OVER_SAVED;
 #if PLATFORM_N64
                     sDelayTimer = 90;

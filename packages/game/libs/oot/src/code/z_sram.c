@@ -307,14 +307,6 @@ void Sram_OpenSave(void) {
     gOotSave.info.playerData.magicLevel = 0;
 }
 
-/**
- *  Write the contents of the Save Context to a main and backup slot in SRAM.
- *  Note: The whole Save Context is written even though only the `save` substruct is read back later
- */
-void Sram_WriteSave(void) {
-    SaveRaw_Write();
-}
-
 void Sram_InitSram(void) {
     static const char* kMagic = "OoTMM-SAVE-START";
 
