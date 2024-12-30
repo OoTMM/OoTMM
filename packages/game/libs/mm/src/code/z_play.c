@@ -1,3 +1,4 @@
+#include <combo.h>
 #include "PR/ultratypes.h"
 #include "functions.h"
 
@@ -2058,8 +2059,7 @@ void Play_FillScreen(PlayState* this, s16 fillScreenOn, u8 red, u8 green, u8 blu
     R_PLAY_FILL_SCREEN_ALPHA = alpha;
 }
 
-void Play_Init(GameState* thisx) {
-    PlayState* this = (PlayState*)thisx;
+static void Play_InitImpl(PlayState* this) {
     GraphicsContext* gfxCtx = this->state.gfxCtx;
     s32 pad;
     uintptr_t zAlloc;
@@ -2329,4 +2329,17 @@ void Play_Init(GameState* thisx) {
     gSaveContext.respawnFlag = 0;
     sBombersNotebookOpen = false;
     BombersNotebook_Init(&sBombersNotebook);
+}
+
+void Play_Init(GameState* thisx)
+{
+    PlayState* this = (PlayState*)thisx;
+
+    if (gMmSave.entrance == ENTRANCE(CLOCK_TOWER_INTERIOR, 1)) {
+        Play_InitImpl(this);
+        Game_Switch(GAME_OOT);
+        return;
+    }
+
+    Play_InitImpl(this);
 }
