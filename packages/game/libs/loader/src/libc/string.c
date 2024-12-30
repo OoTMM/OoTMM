@@ -94,3 +94,24 @@ void* memset(void* ptr, int val, size_t size) {
 
     return ptr;
 }
+
+__attribute__((optimize("-fno-tree-loop-distribute-patterns")))
+int memcmp(const void* s1, const void* s2, size_t n) {
+    const char* m1 = s1;
+    const char* m2 = s2;
+    unsigned char v1;
+    unsigned char v2;
+    size_t i;
+
+    for (i = 0; i < n; i++) {
+        v1 = (unsigned char)m1[i];
+        v2 = (unsigned char)m2[i];
+        if (v1 < v2) {
+            return -1;
+        } else if (v1 > v2) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
