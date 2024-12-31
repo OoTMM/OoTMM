@@ -6,13 +6,12 @@ void EnZog_GiveItem(Actor* this, PlayState* play)
 {
     if (Actor_HasParentZ(this))
     {
-        gMmExtraFlags.maskZora = 1;
-        if (!(GET_PLAYER(play)->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
+        if (!gMmExtraFlags.maskZora && !(GET_PLAYER(play)->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
         {
+            gMmExtraFlags.maskZora = 1;
             play->nextEntrance = ENTR_MM_COAST_FROM_MIKAU_CS;
             play->transitionTrigger = TRANS_TRIGGER_START;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
-            Actor_Kill(this);
         }
         return;
     }
@@ -30,6 +29,15 @@ void EnZog_InitSetScaleHook(Actor* this, float scale)
 }
 
 PATCH_CALL(0x80b935dc, EnZog_InitSetScaleHook);
+
+Actor* EnZog_SpawnAsChild(ActorContext* actorCtx, Actor* parent, PlayState* play, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params)
+{
+    if (gMmExtraFlags.maskZora)
+        return NULL;
+    return Actor_SpawnAsChild(actorCtx, parent, play, actorId, posX, posY, posZ, rotX, rotY, rotZ, params);
+}
+
+PATCH_CALL(0x80b93874, EnZog_SpawnAsChild);
 
 s32 EnZog_OfferGrab(Actor* actor, PlayState* play, s32 getItemId, f32 xzRange, f32 yRange)
 {

@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a crash when performing some actions after healing Mikau on original hardware.
 - Fix talking to Skull Kid OoT sometimes crashing.
 - Fix Romani sometimes being present without having collected her soul.
 - Some starting items being hinted "nowhere".
