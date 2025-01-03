@@ -1313,7 +1313,7 @@ export const SETTINGS = [{
     { value: 'agony',  name: 'Stone of Agony', description: 'Containers will match content when you have the Stone of Agony in OoT' },
     { value: 'always', name: 'Always', description: 'Containers will always match content' },
   ],
-  description: 'Modifies the appearance of chests and other shuffled containers so that they match their content. Other shuffled containers will otherwise always be gold if the item has not been collected. Works for unique items, Small and Boss Keys, Silver Rupees, Stray Fairies, and Souls',
+  description: 'Modifies the appearance of chests and other shuffled containers so that they match their content. Other shuffled containers will otherwise always be gold if the item has not been collected.<br>Works for unique items, Small and Boss Keys, Silver Rupees, Stray Fairies, Skulltula Tokens, and Souls',
   default: 'always'
 }, {
   key: 'csmcHearts',
