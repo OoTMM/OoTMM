@@ -513,7 +513,7 @@ export const SETTINGS = [{
   name: 'Cow Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not playing Epona\'s Song near cows will give an item (OOT)',
+  description: 'Controls whether or not playing Epona\'s Song near cows will give an item (OoT)',
   cond: hasOoT,
   default: false
 }, {
@@ -529,7 +529,7 @@ export const SETTINGS = [{
   name: 'Shop Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls whether or not shops in OOT should have their items shuffled',
+  description: 'Controls whether or not shops in OoT should have their items shuffled',
   values: [
     { value: 'none', name: 'None', description: 'All the items are vanilla' },
     { value: 'full', name: 'Full', description: 'All 8 items are shuffled' },
@@ -1279,7 +1279,7 @@ export const SETTINGS = [{
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
   type: 'boolean',
-  description: 'Allows you to play OOT Warp Songs from MM to warp to their respective locations. Logic could even expect you to do so',
+  description: 'Allows you to play OoT Warp Songs from MM to warp to their respective locations. Logic could even expect you to do so',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -1287,11 +1287,11 @@ export const SETTINGS = [{
   name: 'Cross-Games MM Song of Soaring',
   category: 'main.cross',
   type: 'enum',
-  description: 'Controls whether you can play Song of Soaring from OOT to warp to MM Owl Statues and how logic should be affected',
+  description: 'Controls whether you can play Song of Soaring from OoT to warp to MM Owl Statues and how logic should be affected',
   values: [
-    { value: 'none', name: 'None', description: 'Song of Soaring is fully disabled in OOT' },
-    { value: 'childOnly', name: 'Child Only', description: 'Song of Soaring in OOT is enabled and logical only for Child' },
-    { value: 'full', name: 'Child & Adult', description: 'Song of Soaring in OOT is enabled and logical for both Child and Adult' },
+    { value: 'none', name: 'None', description: 'Song of Soaring is fully disabled in OoT' },
+    { value: 'childOnly', name: 'Child Only', description: 'Song of Soaring in OoT is enabled and logical only for Child' },
+    { value: 'full', name: 'Child & Adult', description: 'Song of Soaring in OoT is enabled and logical for both Child and Adult' },
   ],
   default: 'none',
   cond: hasOoTMM,
@@ -1300,7 +1300,7 @@ export const SETTINGS = [{
   name: 'Cross-Games Farore\'s Wind',
   category: 'main.cross',
   type: 'boolean',
-  description: 'Controls whether you can use Farore\'s Wind to warp between OOT and MM.',
+  description: 'Controls whether you can use Farore\'s Wind to warp between OoT and MM.',
   default: false,
   cond: (x: any) => hasOoTMM(x) && x.spellWindMm,
 }, {
@@ -1522,7 +1522,7 @@ export const SETTINGS = [{
   name: 'OoT Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters OOT Shields behavior',
+  description: 'Alters OoT Shields behavior',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item.' },
@@ -1534,7 +1534,7 @@ export const SETTINGS = [{
   name: 'OoT Swords',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters OOT Swords behavior',
+  description: 'Alters OoT Swords behavior',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'goron', name: 'Progressive Knife and Biggoron', description: 'Kokiri Sword and Master Sword are independent. However Giant\'s Knife and Biggoron Sword are progressive.' },
@@ -1635,7 +1635,7 @@ export const SETTINGS = [{
   name: 'Blue Fire Arrows',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Gives the OOT Ice Arrows the properties of Blue Fire',
+  description: 'Gives the OoT Ice Arrows the properties of Blue Fire',
   default: false,
   cond: hasOoT,
 }, {
@@ -1643,7 +1643,7 @@ export const SETTINGS = [{
   name: 'Sunlight Arrows',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Gives the OOT Light Arrows the ability to activate most sun switches',
+  description: 'Gives the OoT Light Arrows the ability to activate most sun switches',
   default: false,
   cond: hasOoT,
 }, {
@@ -2697,7 +2697,7 @@ export const SETTINGS = [{
   name: 'Shuffle Extra Interiors',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit is included if Shuffle Pirate Fortress Entrances is enabled',
+  description: 'Shuffle additional, more complex interiors. These include:<br>- OoT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit is included if Shuffle Pirate Fortress Entrances is enabled',
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
@@ -2756,7 +2756,7 @@ export const SETTINGS = [{
   name: 'Shuffle One-Ways with Warp Songs',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the warp songs from OOT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring".',
+  description: 'Shuffles the warp songs from OoT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring".',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erOneWays !== 'none' && x.erWarps !== 'ootOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
