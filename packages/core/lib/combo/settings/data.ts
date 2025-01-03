@@ -115,7 +115,7 @@ export const SETTINGS = [{
   description: 'The guarantees you have regarding reachability of locations.',
   values: [
     { value: 'allLocations', name: 'All Locations', description: 'Every location in the game can be reached. The seed can always be completed.' },
-    { value: 'beatable', name: 'Beatable Only', description: 'Some items can be placed in locations that are never reacheable. The seed can always be completed.' },
+    { value: 'beatable', name: 'Beatable Only', description: 'Some items can be placed in locations that are never reachable. The seed can always be completed.' },
     { value: 'none', name: 'No Logic', description: 'Items are placed completely at random. The seed might be unbeatable.' },
   ],
   default: 'allLocations'
