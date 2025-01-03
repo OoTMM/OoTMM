@@ -1197,7 +1197,7 @@ export const SETTINGS = [{
   type: 'number',
   min: 0,
   max: 12,
-  description: 'How many major dungeons sould be pre-completed. Can be combined with other pre-completed dungeon rules.',
+  description: 'How many major dungeons should be pre-completed. Can be combined with other pre-completed dungeon rules.',
   default: 0,
   cond: (s: any) => s.preCompletedDungeons,
 }, {
