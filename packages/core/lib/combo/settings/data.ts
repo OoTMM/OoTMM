@@ -1511,13 +1511,6 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
-  key: 'fillWallets',
-  name: 'Fill Wallets',
-  category: 'items.extensions',
-  type: 'boolean',
-  description: 'Fills the wallet upon finding a new one',
-  default: false
-}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',
@@ -1591,6 +1584,13 @@ export const SETTINGS = [{
   ],
   default: 'ascending',
   cond: (s: any) => s.clocks,
+}, {
+  key: 'fillWallets',
+  name: 'Fill Wallets',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Fills the wallet upon finding a new one',
+  default: false
 }, {
   key: 'bottleContentShuffle',
   name: 'Random Bottle Contents',
