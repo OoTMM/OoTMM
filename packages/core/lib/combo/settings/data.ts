@@ -1023,7 +1023,7 @@ export const SETTINGS = [{
   name: 'Beneath the Well behavior (MM)',
   category: 'main.events',
   type: 'enum',
-  description: 'Controls which MM dungeons have ',
+  description: 'Controls the behavior of the Gibdos in Beneath the Well',
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'Nothing changes, Gibdos are back once you reset the cycle.' },
     { value: 'remorseless', name: 'Remorseless', description: 'Once you\'ve given a Gibdo its item, it is permanently gone, also affects the ending ladder and the sun block.' },
