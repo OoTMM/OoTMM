@@ -1009,7 +1009,7 @@ export const SETTINGS = [{
   name: 'Clear State Dungeons (MM)',
   category: 'main.events',
   type: 'enum',
-  description: 'Controls whether or not MM dungeons will need their respectives songs in the cleared state',
+  description: 'Controls whether or not MM dungeons will need their respective songs in the cleared state',
   values: [
     { value: 'none', name: 'None' },
     { value: 'WF', name: 'Woodfall Temple' },
