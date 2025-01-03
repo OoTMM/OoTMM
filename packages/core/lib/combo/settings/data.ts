@@ -271,8 +271,8 @@ export const SETTINGS = [{
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
-    { value: 'removed', name: 'Removed', description: 'Small keys are removed and small key doors are unlocked' },
-    { value: 'vanilla', name: 'Vanilla', description: 'Dungeon small keys are placed in their original chests', cond: (s: any) => s.smallKeyRingOot.type === 'none' },
+    { value: 'removed', name: 'Removed', description: 'Small Keys are removed and Small Key doors are unlocked' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Dungeon Small Keys are placed in their original chests', cond: (s: any) => s.smallKeyRingOot.type === 'none' },
   ],
   cond: hasOoT,
   default: 'ownDungeon'
@@ -285,8 +285,8 @@ export const SETTINGS = [{
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
-    { value: 'removed', name: 'Removed', description: 'Small keys are removed and small key doors are unlocked' },
-    { value: 'vanilla', name: 'Vanilla', description: 'Dungeon small keys are placed in their original chests', cond: (s: any) => s.smallKeyRingMm.type === 'none' },
+    { value: 'removed', name: 'Removed', description: 'Small Keys are removed and Small Key doors are unlocked' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Dungeon Small Keys are placed in their original chests', cond: (s: any) => s.smallKeyRingMm.type === 'none' },
   ],
   cond: hasMM,
   default: 'ownDungeon'
