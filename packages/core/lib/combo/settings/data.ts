@@ -1397,7 +1397,7 @@ export const SETTINGS = [{
   name: 'Keep Items on Cycle Reset',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Keep items through a cycle reset',
+  description: 'Keeps items through a cycle reset',
   default: false,
   cond: hasMM,
 }, {
