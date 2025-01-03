@@ -1321,7 +1321,7 @@ export const SETTINGS = [{
   category: 'main.misc',
   type: 'boolean',
   default: true,
-  description: 'Use a specific texture for heart pieces/containers',
+  description: 'Use a specific texture for Heart Pieces/Containers',
   cond: (x: any) => x.csmc !== 'never',
 }, {
   key: 'csmcMapCompass',
@@ -1329,7 +1329,7 @@ export const SETTINGS = [{
   category: 'main.misc',
   type: 'boolean',
   default: true,
-  description: 'Use a specific texture for maps/compasses',
+  description: 'Use a specific texture for Maps/Compasses',
   cond: (x: any) => x.csmc !== 'never',
 }, {
   key: 'csmcSkulltula',
