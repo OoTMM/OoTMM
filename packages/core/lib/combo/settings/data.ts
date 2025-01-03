@@ -553,10 +553,10 @@ export const SETTINGS = [{
   name: 'Owl Statue Shuffle',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Make owl statue items that can be shuffled.',
+  description: 'Make Owl Statues items that can be shuffled.',
   values: [
-    { value: 'none', name: 'None', description: 'Owl statues are vanilla' },
-    { value: 'anywhere', name: 'Anywhere', description: 'Owl statues are shuffled in the item pool' },
+    { value: 'none', name: 'None', description: 'Owl Statues are vanilla' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Owl Statues are shuffled in the item pool' },
   ],
   cond: hasMM,
   default: 'none'
