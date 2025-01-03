@@ -1530,7 +1530,7 @@ export const SETTINGS = [{
   description: 'Alters the behavior of the OoT Swords',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'goron', name: 'Progressive Knife and Biggoron', description: 'Kokiri Sword and Master Sword are independent. However Giant\'s Knife and Biggoron Sword are progressive.' },
+    { value: 'goron', name: 'Progressive Knife and Biggoron', description: 'Kokiri Sword and Master Sword are independent. However, Giant\'s Knife and Biggoron Sword are progressive.' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Sword will grant you the next one: Kokiri Sword -> Master Sword -> Giant\'s Knife -> Biggoron Sword' },
   ],
   default: 'goron',
@@ -1543,7 +1543,7 @@ export const SETTINGS = [{
   description: 'Alters the behavior of the MM Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero Shield -> Mirror Shield. Other Hero Shields do not count towards this chain, only the Progressive Shield item. If shields are shared, Hero Shield will be obtained alongside Hylian Shield' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields do not count towards this chain, only the Progressive Shield item does. If shields are shared, the Hero\'s Shield will be obtained alongside the Hylian Shield' },
   ],
   default: 'separate',
   cond: hasMM,
