@@ -12,7 +12,7 @@ import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { Region } from './regions';
-import { AGE_ADULT, AGE_CHILD } from './constants';
+import { Age, AGE_ADULT, AGE_CHILD } from './constants';
 import { BOSS_METADATA_BY_ENTRANCE } from './boss';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
@@ -272,12 +272,16 @@ class WorldShuffler {
   private validateAgeTemple(world: World) {
     const newWorld = cloneWorld(world);
     const a = newWorld.areas['OOT SPAWN'];
+    let otherAge: Age;
+
     if (this.settings.startingAge === 'child') {
       a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
       a.exits['OOT SPAWN CHILD'] = exprFalse();
+      otherAge = AGE_ADULT;
     } else {
       a.exits['OOT SPAWN ADULT'] = exprFalse();
       a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
+      otherAge = AGE_CHILD;
     }
 
     const worlds = [...this.worlds];
@@ -286,7 +290,7 @@ class WorldShuffler {
     const pathfinderState = agePathfinder.run(null, { recursive: true, singleWorld: this.worldId });
     const target = 'OOT Temple of Time';
     const ws = pathfinderState.ws[this.worldId];
-    return (ws.ages[AGE_ADULT].areas.has(target) && ws.ages[AGE_CHILD].areas.has(target));
+    return (ws.ages[otherAge].areas.has(target));
   }
 
   private changeWorldAssumePools(world: World, pools: EntrancePools) {
