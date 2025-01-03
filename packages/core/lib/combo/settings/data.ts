@@ -1518,7 +1518,7 @@ export const SETTINGS = [{
   description: 'Alters OoT Shields behavior',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item.' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
   ],
   default: 'separate',
   cond: hasOoT,
