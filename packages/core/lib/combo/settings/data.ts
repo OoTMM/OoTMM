@@ -1567,7 +1567,7 @@ export const SETTINGS = [{
   description: 'Alters the behavior of the Goron Lullaby',
   values: [
     { value: 'single', name: 'Full Lullaby Only', description: 'Only the Goron Lullaby can be found, and when playing with Songs on Song Locations, Baby Goron in MM is no longer a Song Location' },
-    { value: 'progressive', name: 'Progressive', description: 'Lullaby Intro will be received first before getting the full song' },
+    { value: 'progressive', name: 'Progressive', description: 'The Lullaby Intro will be received first before getting the full song' },
   ],
   default: 'progressive',
   cond: hasMM,
@@ -1578,7 +1578,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Alters the behavior of Clocks',
   values: [
-    { value: 'separate', name: 'Separate', description: 'Clocks will be independant of each other. If you don\t select a starting clock, one will be given to you at random.' },
+    { value: 'separate', name: 'Separate', description: 'Clocks will be independent of each other. If you don\'t select a starting clock, one will be given to you at random.' },
     { value: 'ascending', name: 'Ascending', description: 'Clocks will be received in ascending order.' },
     { value: 'descending', name: 'Descending ', description: 'Clocks will be received in descending order.' },
   ],
