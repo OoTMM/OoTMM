@@ -1515,7 +1515,7 @@ export const SETTINGS = [{
   name: 'OoT Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters OoT Shields behavior',
+  description: 'Alters the behavior of the OoT Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
@@ -1527,7 +1527,7 @@ export const SETTINGS = [{
   name: 'OoT Swords',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters OoT Swords behavior',
+  description: 'Alters the behavior of the OoT Swords',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'goron', name: 'Progressive Knife and Biggoron', description: 'Kokiri Sword and Master Sword are independent. However Giant\'s Knife and Biggoron Sword are progressive.' },
@@ -1540,7 +1540,7 @@ export const SETTINGS = [{
   name: 'MM Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters MM Shields behavior',
+  description: 'Alters the behavior of the MM Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero Shield -> Mirror Shield. Other Hero Shields do not count towards this chain, only the Progressive Shield item. If shields are shared, Hero Shield will be obtained alongside Hylian Shield' },
@@ -1552,7 +1552,7 @@ export const SETTINGS = [{
   name: 'MM Great Fairy Sword',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Controls whether Great Fairy Sword is included in sword progression',
+  description: 'Controls whether the Great Fairy Sword is included in sword progression',
   values: [
     { value: 'separate', name: 'Separate' },
     { value: 'progressive', name: 'Progressive' },
@@ -1564,7 +1564,7 @@ export const SETTINGS = [{
   name: 'MM Goron Lullaby',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of Goron Lullaby',
+  description: 'Alters the behavior of the Goron Lullaby',
   values: [
     { value: 'single', name: 'Full Lullaby Only', description: 'Only the Goron Lullaby can be found, and when playing with Songs on Song Locations, Baby Goron in MM is no longer a Song Location' },
     { value: 'progressive', name: 'Progressive', description: 'Lullaby Intro will be received first before getting the full song' },
