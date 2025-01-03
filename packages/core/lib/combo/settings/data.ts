@@ -1240,7 +1240,7 @@ export const SETTINGS = [{
   cond: hasOoTMM,
 }, {
   key: 'ootPreplantedBeans',
-  name: 'Pre-Planted beans (OoT)',
+  name: 'Pre-Planted Beans (OoT)',
   category: 'main.events',
   type: 'boolean',
   description: 'Automatically plants beans in the various soft soils of OoT, as well as removing the beans from the item pool',
@@ -1251,7 +1251,7 @@ export const SETTINGS = [{
   name: 'Pre-Activated Owl Statues',
   category: 'main.events',
   type: 'set',
-  description: 'Automatically activates owl statues on your behalf, and you will also get the items at their location',
+  description: 'Automatically activates Owl Statues on your behalf, and you will also get the items at their location',
   values: [
     { value: 'clocktown', name: 'Clock Town' },
     { value: 'milkroad',  name: 'Milk Road' },
