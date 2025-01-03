@@ -912,18 +912,18 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Choose the starting age',
   values: [
-    { value: 'child', name:  'Child',  description: 'Link will start off as child' },
-    { value: 'adult', name:  'Adult',  description: 'Link will start off as adult' },
-    { value: 'random', name: 'Random', description: 'Link will start off as either adult or child, with a 50/50 probability' },
+    { value: 'child', name:  'Child',  description: 'Link will start off as Child' },
+    { value: 'adult', name:  'Adult',  description: 'Link will start off as Adult' },
+    { value: 'random', name: 'Random', description: 'Link will start off as either Adult or Child, with a 50/50 probability' },
   ],
   cond: hasOoT,
   default: 'child'
 }, {
   key: 'swordlessAdult',
-  name: 'Allow adult link to be swordless',
+  name: 'Allow Adult Link to be swordless',
   category: 'main.events',
   type: 'boolean',
-  description: 'Choose whether or not adult Link can be swordless',
+  description: 'Choose whether or not Adult Link can be swordless',
   cond: hasOoT,
   default: false
 }, {
