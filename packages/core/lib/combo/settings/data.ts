@@ -1421,7 +1421,7 @@ export const SETTINGS = [{
   name: 'Hookshot Anywhere (OoT)',
   category: 'main.misc',
   type: 'enum',
-  description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
+  description: 'Modifies all surfaces to be able to be hooked onto and if it is expected in logic',
   values: [
     { value: 'off', name: 'Off' },
     { value: 'enabled', name: 'On' },
@@ -1434,7 +1434,7 @@ export const SETTINGS = [{
   name: 'Hookshot Anywhere (MM)',
   category: 'main.misc',
   type: 'enum',
-  description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
+  description: 'Modifies all surfaces to be able to be hooked onto and if it is expected in logic',
   values: [
     { value: 'off', name: 'Off' },
     { value: 'enabled', name: 'On' },
