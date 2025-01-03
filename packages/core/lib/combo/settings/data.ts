@@ -1352,7 +1352,7 @@ export const SETTINGS = [{
   name: 'Blast Mask Cooldown',
   category: 'main.misc',
   type: 'enum',
-  description: 'Changes the cooldown between each explostion of the Blast Mask',
+  description: 'Changes the cooldown between each explosion of the Blast Mask',
   values: [
     { value: 'instant', name: 'Instant (0s)' },
     { value: 'veryshort', name: 'Very Short (~2s)' },
