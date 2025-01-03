@@ -1026,7 +1026,7 @@ export const SETTINGS = [{
   description: 'Controls which MM dungeons have ',
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'Nothing changes, Gibdos are back once you reset the cycle.' },
-    { value: 'remorseless', name: 'Remorseless', description: 'Once you gave a Gibdo its item, it is permanently gone, also affects the ending ladder and the sun block.' },
+    { value: 'remorseless', name: 'Remorseless', description: 'Once you\'ve given a Gibdo its item, it is permanently gone, also affects the ending ladder and the sun block.' },
     { value: 'open', name: 'Open', description: 'All the Gibdos are already gone, also applies to the ending ladder and the sun block.' }
   ],
   default: 'vanilla',
