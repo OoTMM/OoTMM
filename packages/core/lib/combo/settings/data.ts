@@ -1373,7 +1373,7 @@ export const SETTINGS = [{
     { value: 'veryslow', name: 'Very Slow', description: 'The time will flow 66% slower than usual' },
     { value: 'slow', name: 'Slow', description: 'The time will flow 33% slower than usual' },
     { value: 'default', name: 'Default', description: 'The normal clock speed' },
-    { value: 'fast', name: 'Fast', description: 'The clock speed will twice as fast than usual' },
+    { value: 'fast', name: 'Fast', description: 'The clock speed will be twice as fast than usual' },
     { value: 'veryfast', name: 'Very Fast', description: 'USE AT OWN RISK!! - The clock speed will be 3x faster than usual, even on inverted' },
     { value: 'superfast', name: 'Super Fast', description: 'USE AT OWN RISK!! - The clock speed will be 6x faster than usual, even on inverted' },
   ],
