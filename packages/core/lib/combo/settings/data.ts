@@ -1139,7 +1139,7 @@ export const SETTINGS = [{
   description: 'Controls the behavior of the MM Boss Warp Pads.',
   values: [
     { value: 'bossBeaten', name: 'Boss Beaten', description: 'Enabled when the boss is beaten' },
-    { value: 'remains', name: 'Remains', description: 'Enabled when the matching remain is obtained' },
+    { value: 'remains', name: 'Remains', description: 'Enabled when the matching remains are obtained' },
   ],
   default: 'bossBeaten',
   cond: hasMM,
@@ -1227,7 +1227,7 @@ export const SETTINGS = [{
   type: 'number',
   min: 0,
   max: 4,
-  description: 'Pre-completes dungeons containing at least one remain, until in reaches that many remains. Can be combined with other pre-completed dungeon rules.',
+  description: 'Pre-completes dungeons containing at least one of the remains, until in reaches that many remains. Can be combined with other pre-completed dungeon rules.',
   default: 0,
   cond: (s: any) => hasMM(s) && s.preCompletedDungeons,
 }, {
