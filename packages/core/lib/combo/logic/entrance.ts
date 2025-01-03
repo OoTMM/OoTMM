@@ -285,10 +285,8 @@ class WorldShuffler {
     const agePathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
     const pathfinderState = agePathfinder.run(null, { recursive: true, singleWorld: this.worldId });
     const target = 'OOT Temple of Time';
-    if (pathfinderState.ws.some(x => !(x.ages[AGE_ADULT].areas.has(target) || x.ages[AGE_CHILD].areas.has(target)))) {
-      return false;
-    }
-    return true;
+    const ws = pathfinderState.ws[this.worldId];
+    return (ws.ages[AGE_ADULT].areas.has(target) && ws.ages[AGE_CHILD].areas.has(target));
   }
 
   private changeWorldAssumePools(world: World, pools: EntrancePools) {
