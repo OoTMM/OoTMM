@@ -1491,7 +1491,7 @@ export const SETTINGS = [{
   name: 'Alter Lost Woods Exits',
   category: 'main.misc',
   type: 'boolean',
-  description: 'There are unused exits in the Lost Woods that return you to the lost woods. When this is on, all the "got lost" exits in the Lost Woods that would normally take you to Kokiri Forest instead take you back to the Lost Woods, keeping your compass direction intact.',
+  description: 'There are unused exits in the Lost Woods that return you back to the Lost Woods. When this is on, all the "got lost" exits in the Lost Woods that would normally take you to Kokiri Forest instead take you back to the Lost Woods, keeping your compass direction intact.',
   default: false,
   cond: hasOoT,
 }, {
