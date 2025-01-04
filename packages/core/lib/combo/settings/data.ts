@@ -1937,7 +1937,7 @@ export const SETTINGS = [{
   name: 'Lenient Goron Spikes',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Goron spikes can charge midair and keep their charge. Minimum speed for goron spikes is removed.',
+  description: 'Goron Spikes can charge midair and keep their charge. Minimum speed for Goron Spikes is removed.',
   default: true,
   cond: hasMM,
 }, {
@@ -1953,7 +1953,7 @@ export const SETTINGS = [{
   name: 'Coins',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enable the leftover coin items. These can be used for special conds',
+  description: 'Enable the leftover Coin items. These can be used for special conditions',
   default: false
 }, {
   key: 'coinsRed',
@@ -2000,14 +2000,14 @@ export const SETTINGS = [{
   name: 'Rupoors',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add rupoors to the item pool. They remove 10 rupees when collected',
+  description: 'Add Rupoors to the item pool. They remove 10 rupees when collected',
   default: false
 }, {
   key: 'songOfDoubleTimeOot',
   name: 'Song of Double Time (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enables using Song of Double Time in OoT when you have Song of Time in OoT',
+  description: 'Enables using Song of Double Time in OoT when you have the Song of Time in OoT',
   default: false,
   cond: hasOoT
 }, {
