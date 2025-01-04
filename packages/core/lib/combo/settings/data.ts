@@ -1929,7 +1929,7 @@ export const SETTINGS = [{
   name: 'Clocks as Items',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add items representing every Majora\'s Mask half day into the pool. The moon will crash early unless you collect these items.',
+  description: 'Add items representing every Majora\'s Mask day and night into the pool. The moon will crash early unless you collect these items.',
   default: false,
   cond: hasMM,
 }, {
