@@ -1689,7 +1689,7 @@ export const SETTINGS = [{
   name: 'Skeleton Key (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a Skeleton Key that can open every small-key-locked door.',
+  description: 'Adds a Skeleton Key that can open every small-key-locked door in OoT.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1697,7 +1697,7 @@ export const SETTINGS = [{
   name: 'Skeleton Key (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a Skeleton Key that can open every small-key-locked door.',
+  description: 'Adds a Skeleton Key that can open every small-key-locked door in MM.',
   default: false,
   cond: hasMM,
 }, {
