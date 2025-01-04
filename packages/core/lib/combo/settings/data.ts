@@ -1603,15 +1603,15 @@ export const SETTINGS = [{
   name: 'Stone of Agony in MM',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enables stone of agony in MM',
+  description: 'Enables Stone of Agony in MM',
   default: false,
   cond: hasMM,
 }, {
   key: 'sticksNutsUpgradesMm',
-  name: 'Sticks & Nuts Upgrades in MM',
+  name: 'Deku Stick & Nut Upgrades in MM',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enables sticks and nuts upgrades in MM',
+  description: 'Enables Deku Stick and Nut upgrades in MM',
   default: false,
   cond: hasMM,
 }, {
