@@ -1846,18 +1846,18 @@ export const SETTINGS = [{
   cond: hasOoT,
 }, {
   key: 'ocarinaButtonsShuffleOot',
-  name: 'Ocarina Buttons Shuffle (OoT)',
+  name: 'Ocarina Buttons (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds the Ocarina Buttons as items that are shuffled.',
+  description: 'Add the Ocarina Buttons for OoT into the item pool. Ocarina notes cannot be played until the corresponding button is obtained.',
   default: false,
   cond: hasOoT,
 }, {
   key: 'ocarinaButtonsShuffleMm',
-  name: 'Ocarina Buttons Shuffle (MM)',
+  name: 'Ocarina Buttons (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds the Ocarina Buttons as items that are shuffled.',
+  description: 'Add the Ocarina Buttons for MM into the item pool. Ocarina notes cannot be played until the corresponding button is obtained.',
   default: false,
   cond: hasMM,
 }, {
