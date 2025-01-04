@@ -1865,7 +1865,7 @@ export const SETTINGS = [{
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for OoT enemies into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1873,7 +1873,7 @@ export const SETTINGS = [{
   name: 'Enemy Souls (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for MM enemies into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasMM,
 }, {
@@ -1881,7 +1881,7 @@ export const SETTINGS = [{
   name: 'Boss Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for OoT bosses into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1889,7 +1889,7 @@ export const SETTINGS = [{
   name: 'Boss Souls (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for MM bosses into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasMM,
 }, {
@@ -1897,7 +1897,7 @@ export const SETTINGS = [{
   name: 'NPC Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for OoT NPCs into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1905,7 +1905,7 @@ export const SETTINGS = [{
   name: 'NPC Souls (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for MM NPCs into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasMM,
 }, {
@@ -1913,7 +1913,7 @@ export const SETTINGS = [{
   name: 'Misc. Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add misc. souls into the item pool. Corresponding actors won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for OoT Business Scrubs and Gold Skulltulas into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1921,7 +1921,7 @@ export const SETTINGS = [{
   name: 'Misc. Souls (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add misc. souls into the item pool. Corresponding actors won\'t spawn unless their soul is obtained.',
+  description: 'Add Souls for MM Business Scrubs and Gold Skulltulas into the item pool. They won\'t spawn unless their Soul is obtained.',
   default: false,
   cond: hasMM,
 }, {
