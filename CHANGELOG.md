@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [27.0] - 2025-01-04
+
 ### Added
 
 - Add the ability to bind region clear states to dungeon clears, dungeon rewards, or set them free.
@@ -1452,7 +1454,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v26.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v27.0...HEAD
+[27.0]: https://github.com/OoTMM/OoTMM/compare/v26.1...v27.0
 [26.1]: https://github.com/OoTMM/OoTMM/compare/v26.0...v26.1
 [26.0]: https://github.com/OoTMM/OoTMM/compare/v25.0...v26.0
 [25.0]: https://github.com/OoTMM/OoTMM/compare/v24.1...v25.0
