@@ -1769,7 +1769,7 @@ export const SETTINGS = [{
   name: "Goron Tunic (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Goron Tunic in Majora's Mask.",
+  description: "Adds the Goron Tunic in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
@@ -1777,7 +1777,7 @@ export const SETTINGS = [{
   name: "Zora Tunic (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Zora Tunic in Majora's Mask.",
+  description: "Adds the Zora Tunic in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
@@ -1785,7 +1785,7 @@ export const SETTINGS = [{
   name: "Scales (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Silver Scale and Golden Scale in Majora's Mask.",
+  description: "Adds the Silver Scale and Golden Scale in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
@@ -1793,7 +1793,7 @@ export const SETTINGS = [{
   name: "Strength (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Goron's Bracelet, Silver Gauntlets, and Golden Gauntlets in Majora's Mask.",
+  description: "Adds the Goron's Bracelet, Silver Gauntlets and Golden Gauntlets in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
@@ -1801,7 +1801,7 @@ export const SETTINGS = [{
   name: "Megaton Hammer (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Megaton Hammer in Majora's Mask.",
+  description: "Adds the Megaton Hammer in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
