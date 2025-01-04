@@ -1651,7 +1651,7 @@ export const SETTINGS = [{
   name: 'Short Hookshot in MM',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a short hookshot in MM (logic accounts for this). A trick is also there for some of the harder spots',
+  description: 'Adds a short Hookshot in MM, which logic accounts for. A trick is also there for some of the harder spots',
   default: false,
   cond: hasMM,
 }, {
