@@ -1713,7 +1713,7 @@ export const SETTINGS = [{
   name: 'Bombchu Bag (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
+  description: 'Turns the first out-of-shop OoT Bombchu pack you find into the Bombchu Bag. Has logical implications.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1721,7 +1721,7 @@ export const SETTINGS = [{
   name: 'Bombchu Bag (MM)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
+  description: 'Turns the first out-of-shop MM Bombchu pack you find into the Bombchu Bag. Has logical implications.',
   default: false,
   cond: hasMM,
 }, {
