@@ -743,6 +743,9 @@ export class Pathfinder {
   }
 
   private pathfind() {
+    const worldsUncollectedLocations = this.state.ws.map(ws => [...ws.uncollectedLocations]);
+    const worldForbiddenReachableLocations = this.state.ws.map(ws => [...ws.forbiddenReachableLocations]);
+
     /* Reset new locations */
     this.state.newLocations.clear();
 
@@ -760,8 +763,6 @@ export class Pathfinder {
     }
 
     /* Collect previous stuff */
-    const worldsUncollectedLocations = this.state.ws.map(ws => [...ws.uncollectedLocations]);
-    const worldForbiddenReachableLocations = this.state.ws.map(ws => [...ws.forbiddenReachableLocations]);
     for (let i = 0; i < this.state.ws.length; ++i) {
       const uncollected = worldsUncollectedLocations[i];
       const frl = worldForbiddenReachableLocations[i];
