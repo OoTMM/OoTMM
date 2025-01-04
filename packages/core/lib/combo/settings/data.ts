@@ -1705,7 +1705,7 @@ export const SETTINGS = [{
   name: 'Magical Rupee',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a Magical Rupee that can trigger every silver-rupee event.',
+  description: 'Adds a Magical Rupee that can trigger every silver-rupee event in OoT dungeons.',
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
