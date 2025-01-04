@@ -1659,7 +1659,7 @@ export const SETTINGS = [{
   name: 'Child Wallets',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Shuffles the starting Wallets... making it so you have to find it to hold anything!',
+  description: 'Shuffles the starting wallet in each game... making it so you have to find it to hold anything!',
   default: false
 }, {
   key: 'colossalWallets',
