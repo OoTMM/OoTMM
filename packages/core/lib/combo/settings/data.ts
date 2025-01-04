@@ -1809,7 +1809,7 @@ export const SETTINGS = [{
   name: "Spin Attack Upgrade (OoT)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Add the spin attack upgrade as an item in OoT.",
+  description: "Add the Spin Attack upgrade as an item in OoT.",
   default: false,
   cond: hasOoT,
 }, {
@@ -1817,7 +1817,7 @@ export const SETTINGS = [{
   name: "Extra Child Swords (OoT)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Add the various Majora's Mask swords in OoT, as upgrades to the kokiri sword.",
+  description: "Add the various Majora's Mask swords in OoT, as upgrades to the Kokiri Sword.",
   default: false,
   cond: (x: any) => x.progressiveSwordsOot !== 'progressive' && hasOoT(x),
 }, {
