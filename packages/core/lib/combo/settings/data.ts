@@ -1596,7 +1596,7 @@ export const SETTINGS = [{
   name: 'Random Bottle Contents',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Randomize the content of the bottles',
+  description: 'Randomize what bottles from both games contain upon finding them in the world',
   default: false
 }, {
   key: 'stoneAgonyMm',
