@@ -37,6 +37,9 @@
 
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
+"grandma_story_1": "before(DAY1_PM_04_00) || between(DAY2_AM_06_00, DAY2_PM_04_00) || (is_day1 && (clock_night1 || clock_day2 || clock_night2 || clock_day3 || clock_night3 || setting(moonCrash, cycle))) || (is_day2 && (clock_night2 || clock_day3 || clock_night3 || setting(moonCrash, cycle)))"
+"grandma_story_2": "(is_day1 && (clock_day2 || clock_night2 || clock_day3 || clock_night3 || setting(moonCrash, cycle))) || (is_day2 && (clock_day3 || clock_night3 || setting(moonCrash, cycle)))"
+
 "stone_of_agony": "!setting(stoneAgonyMm) || (cond(setting(sharedStoneAgony), has(SHARED_STONE_OF_AGONY), has(STONE_OF_AGONY))) || trick(MM_HIDDEN_GROTTOS)"
 
 # Region State
