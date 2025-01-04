@@ -46,6 +46,9 @@ All notable changes to this project will be documented in this file.
 - Killing Big Poes in MM no longer considers Hookshot in logic.
 - ER in MM only expecting to reach Temple of Time.
 - Fix the ground floor pots of Snowhead Temple pillar room not being in logic without the ability to melt ice.
+- Fix logic issue for the Gerudo Fortress wonder items expecting Bow instead of Hookshot.
+- Fix logic issue for the Gerudo Fortress crates next to the rock not accounting for Gerudo.
+- Fix logic issue for Grandma's stories in Reset Moon Behavior not expecting another clock.
 
 ## [26.1] - 2024-11-09
 
