@@ -2019,14 +2019,14 @@ export const SETTINGS = [{
   cond: (s: any) => hasOoTMM(s) && s.stoneAgonyMm,
 }, {
   key: 'sharedSpinUpgrade',
-  name: 'Shared Spin Upgrade',
+  name: 'Shared Spin Attack Upgrade',
   category: 'items.shared',
   type: 'boolean',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.spinUpgradeOot,
 }, {
   key: 'sharedNutsSticks',
-  name: 'Shared Nuts & Sticks',
+  name: 'Shared Deku Sticks & Nuts',
   category: 'items.shared',
   type: 'boolean',
   default: false,
