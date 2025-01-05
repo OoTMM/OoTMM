@@ -5,6 +5,7 @@ function die() {
   exit 1
 }
 
+
 if [ -z "$VERSION" ]; then
   die "VERSION is not set"
 fi
