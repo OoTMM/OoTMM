@@ -2796,7 +2796,7 @@ export const SETTINGS = [{
   name: 'Allow One-Ways to take you elsewhere than other one-ways',
   category: 'entrances',
   type: 'boolean',
-  description: 'Makes it so one-ways can take you to any place also shuffled.<br>This also affect warp songs and soaring locations if they are included in one-ways.',
+  description: 'Makes it so one-ways can take you to any place also shuffled.<br>This also affects warp songs and soaring spots if they are included in one-ways.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none'
 }, {
