@@ -2355,7 +2355,7 @@ export const SETTINGS = [{
   name: 'Ageless Sticks',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use deku sticks independently of his age',
+  description: 'Allows Link to use Deku Sticks independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2363,7 +2363,7 @@ export const SETTINGS = [{
   name: 'Ageless Boomerang',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the boomerang independently of his age',
+  description: 'Allows Link to use the Boomerang independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2371,7 +2371,7 @@ export const SETTINGS = [{
   name: 'Ageless Hammer',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the hammer independently of his age',
+  description: 'Allows Link to use the Hammer independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2379,7 +2379,7 @@ export const SETTINGS = [{
   name: 'Ageless Hookshot',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the hookshot independently of his age',
+  description: 'Allows Link to use the Hookshot independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2387,7 +2387,7 @@ export const SETTINGS = [{
   name: 'Ageless Slingshot',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the slingshot independently of his age',
+  description: 'Allows Link to use the Slingshot independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2395,7 +2395,7 @@ export const SETTINGS = [{
   name: 'Ageless Bow',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the bow independently of his age',
+  description: 'Allows Link to use the Bow independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2403,7 +2403,7 @@ export const SETTINGS = [{
   name: 'Ageless Child Trade',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the child trade items independently of his age',
+  description: 'Allows Link to use the Child Trade items independently of his age',
   default: false,
   cond: hasOoT,
 }, {
@@ -2411,7 +2411,7 @@ export const SETTINGS = [{
   name: 'Ageless Strength',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Child Link to use adult strength upgrades',
+  description: 'Allows Child Link to use the Adult Strength upgrades',
   default: false,
   cond: hasOoT,
 }, {
