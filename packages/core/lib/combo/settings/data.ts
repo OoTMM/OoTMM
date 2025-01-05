@@ -2436,7 +2436,7 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
     { value: 'full', name: 'Full' },
   ],
-  description: 'Enable the ability to shuffle dungeons within their own game or across both.',
+  description: 'Shuffle dungeons either within their own game or across both',
   default: 'none'
 }, {
   key: 'erGrottos',
@@ -2448,7 +2448,7 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
     { value: 'full', name: 'Full' },
   ],
-  description: 'Shuffle grottos and graves.',
+  description: 'Shuffle grottos and graves either within their own game or across both',
   default: 'none'
 }, {
   key: 'erNoPolarity',
@@ -2634,7 +2634,7 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: '- Every entrance to Hyrule Field except Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  description: 'Shuffle major regions either within their own game or across both. These include:<br>- Every entrance to Hyrule Field except Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
   cond: (x: any) => x.erOverworld === 'none',
 }, {
   key: 'erRegionsExtra',
@@ -2649,7 +2649,7 @@ export const SETTINGS = [{
   name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Zora\'s Domain/Lake Hylia',
+  description: 'Shuffles the various shortcuts between regions. These include:<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Zora\'s Domain/Lake Hylia',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erRegions !== 'none'
 }, {
@@ -2663,7 +2663,7 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: 'Shuffle every overworld entrance.',
+  description: 'Shuffle every overworld entrance either within their own game or across both',
 }, {
   key: 'erPiratesWorld',
   name: 'Shuffle Pirate Fortress Entrances',
@@ -2683,7 +2683,7 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: 'Enable the ability to shuffle interiors in their own game or across both games.',
+  description: 'Shuffle interiors either within their own game or across both',
 }, {
   key: 'erIndoorsMajor',
   name: 'Shuffle Most Interiors',
