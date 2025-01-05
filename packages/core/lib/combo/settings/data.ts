@@ -2455,7 +2455,7 @@ export const SETTINGS = [{
   name: 'No Entrance Polarity',
   category: 'entrances',
   type: 'boolean',
-  description: 'Some entrances have a polarity (e.g. dungeons entrances and exits). Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to another dungeon entrance, never to an exit. This option disables that.',
+  description: 'Some entrances have a polarity (e.g. dungeon entrances and exits). Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to another dungeon entrance, never to an exit. This option disables that.',
   default: false,
 }, {
   key: 'erSelfLoops',
