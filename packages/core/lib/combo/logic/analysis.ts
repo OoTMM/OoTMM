@@ -9,11 +9,6 @@ import { ItemHelpers, PlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { AnalysisPath } from './analysis-path';
 
-type ImportantEvent = {
-  event: string;
-  name: string;
-};
-
 type SphereEntryLocation = {
   type: 'location';
   location: Location;

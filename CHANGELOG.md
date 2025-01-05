@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [27.0] - 2025-01-04
+
 ### Added
 
 - Add the ability to bind region clear states to dungeon clears, dungeon rewards, or set them free.
@@ -46,6 +48,10 @@ All notable changes to this project will be documented in this file.
 - Killing Big Poes in MM no longer considers Hookshot in logic.
 - ER in MM only expecting to reach Temple of Time.
 - Fix the ground floor pots of Snowhead Temple pillar room not being in logic without the ability to melt ice.
+- Fix logic issue for the Gerudo Fortress wonder items expecting Bow instead of Hookshot.
+- Fix logic issue for the Gerudo Fortress crates next to the rock not accounting for Gerudo.
+- Fix logic issue for Grandma's stories in Reset Moon Behavior not expecting another clock.
+- Fix logic issue for accessing the front of swamp with only Zora; now requires Nayru's Love.
 
 ## [26.1] - 2024-11-09
 
@@ -1448,7 +1454,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v26.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v27.0...HEAD
+[27.0]: https://github.com/OoTMM/OoTMM/compare/v26.1...v27.0
 [26.1]: https://github.com/OoTMM/OoTMM/compare/v26.0...v26.1
 [26.0]: https://github.com/OoTMM/OoTMM/compare/v25.0...v26.0
 [25.0]: https://github.com/OoTMM/OoTMM/compare/v24.1...v25.0
