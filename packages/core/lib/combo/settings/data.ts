@@ -2788,7 +2788,7 @@ export const SETTINGS = [{
   name: 'Shuffle the Water Void Points in MM',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle the Water Void entrances among one-way entrances. These include:<br>- Zora Cape<br>- Great Bay Coast, south of Pinnacle Rock Entrance<br>- Great Bay Coast, north of Pinnacle Rock Entrance<br>- Pinnacle Rock',
+  description: 'Shuffle the Water Void points among one-way entrances. These can be found at:<br>- Zora Cape<br>- Great Bay Coast, south of the Pinnacle Rock entrance<br>- Great Bay Coast, north of the Pinnacle Rock entrance<br>- Pinnacle Rock',
   default: false,
   cond: (x: any) => hasMM(x) && x.erOneWays !== 'none'
 }, {
