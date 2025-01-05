@@ -2705,7 +2705,7 @@ export const SETTINGS = [{
   name: 'Shuffle Mask Shop/Clock Tower Entrances',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle the Mask Shop & Clock Tower exits among the other indoors.',
+  description: 'Shuffle the Mask Shop & Clock Tower entrances among the other indoors.',
   default: false,
   cond: (x: any) => x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full'),
 }, {
