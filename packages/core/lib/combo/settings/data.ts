@@ -2666,11 +2666,11 @@ export const SETTINGS = [{
   description: 'Shuffle every overworld entrance either within their own game or across both',
 }, {
   key: 'erPiratesWorld',
-  name: 'Shuffle Pirate Fortress Entrances',
+  name: 'Shuffle Pirates\' Fortress Entrances',
   category: 'entrances',
   type: 'boolean',
   default: false,
-  description: 'Shuffle some entrances within Pirate\'s Fortress, including the main entrance if Overworld ER is enabled.<br>Shuffle the Sewers exit door if Extra Interiors are enabled.',
+  description: 'Shuffle some entrances within Pirates\' Fortress, including the main entrance if Overworld ER is enabled.<br>Shuffle the Sewers exit door if Extra Interiors are enabled.',
   cond: (x: any) => hasMM(x) && (x.erOverworld !== 'none' || x.erIndoorsExtra)
 }, {
   key: 'erIndoors',
