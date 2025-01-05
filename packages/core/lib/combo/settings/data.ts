@@ -2641,7 +2641,7 @@ export const SETTINGS = [{
   name: 'Shuffle Market Entrance',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
+  description: 'Shuffle the entrance from Hyrule Field to Market among the regions.',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erRegions !== 'none'
 }, {
