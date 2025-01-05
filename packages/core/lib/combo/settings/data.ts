@@ -2729,9 +2729,9 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'enum',
   values: [
-    { value: 'none', name: 'None', description: 'One-Way entrances are not shuffled.' },
-    { value: 'ownGame', name: 'Own Game', description: 'One-Way entrances are only shuffled among their own game.', cond: hasOoTMM },
-    { value: 'full', name: 'Full', description: 'One-Way entrances can be shuffled among both games.' },
+    { value: 'none', name: 'None', description: 'One-way entrances are not shuffled.' },
+    { value: 'ownGame', name: 'Own Game', description: 'One-way entrances are only shuffled among their own game.', cond: hasOoTMM },
+    { value: 'full', name: 'Full', description: 'One-way entrances can be shuffled among both games.' },
   ],
   description: 'Enables the option of shuffling various one-way entrances.',
   default: 'none',
