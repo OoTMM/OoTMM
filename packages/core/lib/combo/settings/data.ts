@@ -2596,11 +2596,11 @@ export const SETTINGS = [{
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
   key: 'erPirateFortress',
-  name: 'Shuffle Pirate Fortress with Dungeons',
+  name: 'Shuffle Pirates\' Fortress with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false,
-  description: 'Shuffles the main Pirate Fortress entrance among dungeons. Option disabled if the other entrances are shuffled among the overworld.',
+  description: 'Shuffles the main Pirates\' Fortress entrance among dungeons. Option disabled if the other entrances are shuffled among the overworld.',
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none' && ((x.erPiratesWorld && x.erOverworld === 'none') || !x.erPiratesWorld)
 }, {
   key: 'erBeneathWell',
