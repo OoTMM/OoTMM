@@ -2611,7 +2611,7 @@ export const SETTINGS = [{
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
   key: 'erIkanaCastle',
-  name: 'Shuffle Ikana Castle Interior with Dungeons',
+  name: 'Shuffle Ikana Castle\'s Interior with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false,
