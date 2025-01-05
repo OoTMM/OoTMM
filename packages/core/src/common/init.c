@@ -19,7 +19,7 @@ void menuInit();
 
 void comboInit(void)
 {
-    g.delayedSwitchFlag = 0xff;
+    g.delayedSwitchFlagsCount = 0;
 
     initHeap();
     AudioCustom_Init();

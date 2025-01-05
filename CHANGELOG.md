@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix a bug where magical rupee would sometimes require a scene reload to work properly.
+
 ## [27.0] - 2025-01-04
 
 ### Added

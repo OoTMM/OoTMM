@@ -282,10 +282,11 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
 
     if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)) || Message_GetState(&play->msgCtx) == TEXT_STATE_NONE)
     {
-        if (g.delayedSwitchFlag != 0xff)
+        if (g.delayedSwitchFlagsCount)
         {
-            Flags_SetSwitch(play, g.delayedSwitchFlag);
-            g.delayedSwitchFlag = 0xff;
+            for (int i = 0; i < g.delayedSwitchFlagsCount; ++i)
+                Flags_SetSwitch(play, g.delayedSwitchFlags[i]);
+            g.delayedSwitchFlagsCount = 0;
         }
     }
 
