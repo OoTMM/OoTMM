@@ -2756,15 +2756,15 @@ export const SETTINGS = [{
   name: 'Shuffle One-Ways with Warp Songs',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the warp songs from OoT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring".',
+  description: 'Shuffles the warp songs from OoT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring Spots".',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erOneWays !== 'none' && x.erWarps !== 'ootOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
   key: 'erOneWaysStatues',
-  name: 'Shuffle One-Ways with Owl Statues',
+  name: 'Shuffle One-Ways with Soaring Spots',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the owl statues from MM among one-way entrances. This setting is disabled if the soaring spots are shuffled with "Shuffle Warp Songs and Soaring".',
+  description: 'Shuffles the soaring spots from MM among one-way entrances. This setting is disabled if the soaring spots are shuffled with "Shuffle Warp Songs and Soaring Spots".',
   default: false,
   cond: (x: any) => hasMM(x) && x.erOneWays !== 'none' && x.erWarps !== 'mmOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
