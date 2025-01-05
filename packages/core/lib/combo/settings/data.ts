@@ -2748,7 +2748,7 @@ export const SETTINGS = [{
   name: 'Shuffle Ikana Castle One-Ways',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the one-way entrances in Ikana Castle with the others. This is the keg-blocked entrance and the block moved by the switch.',
+  description: 'Shuffles the one-way entrances in Ikana Castle among the others. This is the keg-blocked entrance and the block moved by the switch.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erOneWays !== 'none'
 }, {
