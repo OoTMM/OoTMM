@@ -2710,11 +2710,11 @@ export const SETTINGS = [{
   cond: (x: any) => x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full'),
 }, {
   key: 'erWarps',
-  name: 'Shuffle Warp Songs and Soaring',
+  name: 'Shuffle Warp Songs and Soaring Spots',
   category: 'entrances',
   type: 'enum',
   values: [
-    { value: 'none', name: 'None', description: 'Warp songs and soaring are not shuffled.' },
+    { value: 'none', name: 'None', description: 'Warp songs and soaring spots are not shuffled.' },
     { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.', cond: hasOoT },
     { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.', cond: hasMM },
     { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
