@@ -2780,7 +2780,7 @@ export const SETTINGS = [{
   name: 'Shuffle Altered Lost Woods Exits',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle the Lost Woods entrances added by the "Alter Lost Woods Exits" setting among one-way entrances. ',
+  description: 'Shuffle the Lost Woods exits added by the "Alter Lost Woods Exits" setting among one-way entrances. ',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erOneWays !== 'none' && x.alterLostWoodsExits
 }, {
