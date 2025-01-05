@@ -2540,7 +2540,7 @@ export const SETTINGS = [{
   name: 'Spawn Shuffle',
   category: 'entrances',
   type: 'enum',
-  description: 'Shuffle the starting positions of the player.',
+  description: 'Shuffle the starting positions of the player in OoT.',
   values: [
     { value: 'none', name: 'None' },
     { value: 'child', name: 'Child Only' },
