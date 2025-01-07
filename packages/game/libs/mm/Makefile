@@ -487,7 +487,7 @@ venv:
 ## Extraction step
 
 setup:
-	ln -sf ../../z64 src/z64
+	ln -snf ../../z64 src/z64
 	$(MAKE) -C tools
 	$(PYTHON) tools/buildtools/decompress_baserom.py -v $(VERSION)
 	$(PYTHON) tools/buildtools/extract_baserom.py $(BASEROM_DIR)/baserom-decompressed.z64 $(EXTRACTED_DIR)/baserom --dmadata-start `cat $(BASEROM_DIR)/dmadata_start.txt` --dmadata-names $(BASEROM_DIR)/dmadata_names.txt
