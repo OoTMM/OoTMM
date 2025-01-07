@@ -601,7 +601,7 @@ venv:
 	$(PYTHON) -m pip install -U -r requirements.txt
 
 setup: venv
-	ln -sf ../../z64 src/z64
+	ln -snf ../../z64 src/z64
 	$(MAKE) -C tools
 	$(PYTHON) tools/decompress_baserom.py $(VERSION)
 	$(PYTHON) tools/extract_baserom.py $(BASEROM_DIR)/baserom-decompressed.z64 $(EXTRACTED_DIR)/baserom -v $(VERSION)
