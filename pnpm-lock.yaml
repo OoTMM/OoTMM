@@ -101,7 +101,11 @@ importers:
         specifier: ^6.3.10
         version: 6.3.10
 
-  packages/game: {}
+  packages/game:
+    dependencies:
+      '@ootmm/data':
+        specifier: '*'
+        version: link:../data
 
   packages/gui:
     dependencies:

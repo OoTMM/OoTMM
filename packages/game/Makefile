@@ -25,6 +25,10 @@ setup: setup-oot setup-mm
 .PHONY: setup-oot
 setup-oot: stamps/setup-oot
 
+.PHONY: codegen
+codegen:
+	tsx ./codegen.ts
+
 stamps/setup-oot:
 	@mkdir -p stamps
 	ln -sf $(realpath $(ROMS_DIR)/oot.z64) $(LIBS_DIR_OOT)/baseroms/$(OOT_VERSION)/baserom.z64
@@ -44,21 +48,21 @@ stamps/setup-mm:
 	touch $@
 
 .PHONY: oot
-oot: setup loader
+oot: codegen setup loader
 	@mkdir -p dist
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_OOT) -C $(LIBS_DIR_OOT)
 	tsx ./spec2fs.ts $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/spec $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).elf dist/oot.json
 	cp $(LIBS_DIR_OOT)/build/$(OOT_VERSION)/oot-$(OOT_VERSION).z64 dist/oot.z64
 
 .PHONY: mm
-mm: setup loader
+mm: codegen setup loader
 	@mkdir -p dist
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM)
 	tsx ./spec2fs.ts $(LIBS_DIR_MM)/spec $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).elf dist/mm.json
 	cp $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).z64 dist/mm.z64
 
 .PHONY: loader
-loader: setup
+loader: codegen setup
 	$(MAKE) $(MAKEARGS) -C $(LIBS_DIR_LOADER)
 
 .PHONY: clean
