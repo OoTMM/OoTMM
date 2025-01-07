@@ -317,7 +317,7 @@ void EnMa1_GiveWeirdEgg(EnMa1* this, PlayState* play) {
         this->actor.parent = NULL;
         this->actionFunc = EnMa1_FinishGivingWeirdEgg;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_WEIRD_EGG, 120.0f, 10.0f);
+        Actor_OfferGetItem(&this->actor, play,GI_OOT_WEIRD_EGG, 120.0f, 10.0f);
     }
 }
 

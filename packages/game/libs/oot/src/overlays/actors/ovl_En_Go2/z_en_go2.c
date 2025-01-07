@@ -329,7 +329,7 @@ s16 EnGo2_UpdateTalkStateGoronCityRollingBig(PlayState* play, EnGo2* this) {
             if (Message_ShouldAdvance(play)) {
                 if (this->actor.textId == 0x3012) {
                     this->actionFunc = EnGo2_SetupGetItem;
-                    bombBagUpgrade = CUR_CAPACITY(UPG_BOMB_BAG) == 30 ? GI_BOMB_BAG_40 : GI_BOMB_BAG_30;
+                    bombBagUpgrade = GI_OOT_BOMB_BAG;
                     EnGo2_GetItem(this, play, bombBagUpgrade);
                     Message_CloseTextbox(play);
                     SET_INFTABLE(INFTABLE_11E);
@@ -499,7 +499,7 @@ s16 EnGo2_UpdateTalkStateGoronCityLink(PlayState* play, EnGo2* this) {
         case TEXT_STATE_CLOSING:
             switch (this->actor.textId) {
                 case 0x3036:
-                    EnGo2_GetItem(this, play, GI_TUNIC_GORON);
+                    EnGo2_GetItem(this, play, GI_OOT_TUNIC_GORON);
                     this->actionFunc = EnGo2_SetupGetItem;
                     return NPC_TALK_STATE_ACTION;
                 case 0x3037:
@@ -579,7 +579,7 @@ s16 EnGo2_UpdateTalkStateGoronDmtBiggoron(PlayState* play, EnGo2* this) {
 #endif
             if (this->actor.textId == 0x305E) {
                 if (!gOotSave.info.playerData.bgsFlag) {
-                    EnGo2_GetItem(this, play, GI_SWORD_BIGGORON);
+                    EnGo2_GetItem(this, play, GI_OOT_SWORD_BIGGORON);
                     this->actionFunc = EnGo2_SetupGetItem;
                     return NPC_TALK_STATE_ACTION;
                 } else {
@@ -612,7 +612,7 @@ s16 EnGo2_UpdateTalkStateGoronDmtBiggoron(PlayState* play, EnGo2* this) {
             if (Message_ShouldAdvance(play)) {
                 if ((this->actor.textId == 0x3054) || (this->actor.textId == 0x3055)) {
                     if (play->msgCtx.choiceIndex == 0) {
-                        EnGo2_GetItem(this, play, GI_PRESCRIPTION);
+                        EnGo2_GetItem(this, play, GI_OOT_PRESCRIPTION);
                         this->actionFunc = EnGo2_SetupGetItem;
                         return NPC_TALK_STATE_ACTION;
                     }
@@ -1808,19 +1808,18 @@ void EnGo2_SetGetItem(EnGo2* this, PlayState* play) {
     if ((Message_GetState(&play->msgCtx) == TEXT_STATE_DONE) && Message_ShouldAdvance(play)) {
         this->interactInfo.talkState = NPC_TALK_STATE_IDLE;
         switch (this->getItemId) {
-            case GI_CLAIM_CHECK:
+            case GI_OOT_CLAIM_CHECK:
                 Environment_ClearBgsDayCount();
                 EnGo2_GetItemAnimation(this, play);
                 return;
-            case GI_TUNIC_GORON:
+            case GI_OOT_TUNIC_GORON:
                 SET_INFTABLE(INFTABLE_109);
                 EnGo2_GetItemAnimation(this, play);
                 return;
-            case GI_SWORD_BIGGORON:
+            case GI_OOT_SWORD_BIGGORON:
                 gOotSave.info.playerData.bgsFlag = true;
                 break;
-            case GI_BOMB_BAG_30:
-            case GI_BOMB_BAG_40:
+            case GI_OOT_BOMB_BAG:
                 EnGo2_RollingAnimation(this, play);
                 this->actionFunc = EnGo2_GoronRollingBigContinueRolling;
                 return;
@@ -1868,7 +1867,7 @@ void EnGo2_BiggoronEyedrops(EnGo2* this, PlayState* play) {
                 this->trackingMode = NPC_TRACKING_HEAD_AND_TORSO;
                 this->skelAnime.playSpeed = 0.0f;
                 this->skelAnime.curFrame = this->skelAnime.endFrame;
-                EnGo2_GetItem(this, play, GI_CLAIM_CHECK);
+                EnGo2_GetItem(this, play, GI_OOT_CLAIM_CHECK);
                 this->actionFunc = EnGo2_SetupGetItem;
                 this->goronState = 0;
             }

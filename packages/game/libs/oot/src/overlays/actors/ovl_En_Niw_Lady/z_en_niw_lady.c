@@ -319,14 +319,14 @@ void func_80ABA654(EnNiwLady* this, PlayState* play) {
         this->unk_26E = 0xB;
         if (!GET_ITEMGETINF(ITEMGETINF_0C)) {
             this->actor.parent = NULL;
-            this->getItemId = GI_BOTTLE_EMPTY;
-            Actor_OfferGetItem(&this->actor, play, GI_BOTTLE_EMPTY, 100.0f, 50.0f);
+            this->getItemId = GI_OOT_BOTTLE_EMPTY;
+            Actor_OfferGetItem(&this->actor, play,GI_OOT_BOTTLE_EMPTY, 100.0f, 50.0f);
             this->actionFunc = func_80ABAC00;
             return;
         }
         if (this->unk_26C == 1) {
-            this->getItemId = GI_RUPEE_PURPLE;
-            Actor_OfferGetItem(&this->actor, play, GI_RUPEE_PURPLE, 100.0f, 50.0f);
+            this->getItemId = GI_OOT_RUPEE_PURPLE;
+            Actor_OfferGetItem(&this->actor, play,GI_OOT_RUPEE_PURPLE, 100.0f, 50.0f);
             this->actionFunc = func_80ABAC00;
         }
         this->actionFunc = func_80ABA244;
@@ -402,7 +402,7 @@ void func_80ABA9B8(EnNiwLady* this, PlayState* play) {
             case 0:
                 Message_CloseTextbox(play);
                 this->actor.parent = NULL;
-                Actor_OfferGetItem(&this->actor, play, GI_POCKET_EGG, 200.0f, 100.0f);
+                Actor_OfferGetItem(&this->actor, play,GI_OOT_POCKET_EGG, 200.0f, 100.0f);
                 this->actionFunc = func_80ABAC00;
                 break;
             case 1:
@@ -430,7 +430,7 @@ void func_80ABAB08(EnNiwLady* this, PlayState* play) {
             case 0:
                 Message_CloseTextbox(play);
                 this->actor.parent = NULL;
-                Actor_OfferGetItem(&this->actor, play, GI_COJIRO, 200.0f, 100.0f);
+                Actor_OfferGetItem(&this->actor, play,GI_OOT_COJIRO, 200.0f, 100.0f);
                 this->actionFunc = func_80ABAC00;
                 break;
             case 1:
@@ -454,7 +454,7 @@ void func_80ABAC00(EnNiwLady* this, PlayState* play) {
     } else {
         getItemId = this->getItemId;
         if (LINK_IS_ADULT) {
-            getItemId = !GET_ITEMGETINF(ITEMGETINF_2C) ? GI_POCKET_EGG : GI_COJIRO;
+            getItemId = !GET_ITEMGETINF(ITEMGETINF_2C) ?GI_OOT_POCKET_EGG :GI_OOT_COJIRO;
         }
         Actor_OfferGetItem(&this->actor, play, getItemId, 200.0f, 100.0f);
     }

@@ -267,8 +267,8 @@ void ObjTsubo_Idle(ObjTsubo* this, PlayState* play) {
             temp_v0 = this->actor.yawTowardsPlayer - GET_PLAYER(play)->actor.world.rot.y;
             phi_v1 = ABS(temp_v0);
             if (phi_v1 >= 0x5556) {
-                // GI_NONE in this case allows the player to lift the actor
-                Actor_OfferGetItem(&this->actor, play, GI_NONE, 30.0f, 30.0f);
+                //GI_NONE in this case allows the player to lift the actor
+                Actor_OfferGetItem(&this->actor, play,GI_NONE, 30.0f, 30.0f);
             }
         }
     }

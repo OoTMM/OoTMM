@@ -157,61 +157,61 @@ typedef struct ShopItemEntry {
 
 static ShopItemEntry sShopItemEntries[] = {
     // SI_DEKU_NUTS_5
-    { OBJECT_GI_NUTS, GID_DEKU_NUTS, func_8002ED80, 15, 5, 0x00B2, 0x007F, GI_DEKU_NUTS_5_2, EnGirlA_CanBuy_DekuNuts,
+    { OBJECT_GI_NUTS, GID_DEKU_NUTS, func_8002ED80, 15, 5, 0x00B2, 0x007F, GI_OOT_NUTS_5, EnGirlA_CanBuy_DekuNuts,
       EnGirlA_ItemGive_DekuNuts, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_ARROWS_30 */
-    { OBJECT_GI_ARROW, GID_ARROWS_10, func_8002EBCC, 60, 30, 0x00C1, 0x009B, GI_ARROWS_10, EnGirlA_CanBuy_Arrows,
+    { OBJECT_GI_ARROW, GID_ARROWS_10, func_8002EBCC, 60, 30, 0x00C1, 0x009B, GI_OOT_ARROWS_10, EnGirlA_CanBuy_Arrows,
       EnGirlA_ItemGive_Arrows, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_ARROWS_50 */
-    { OBJECT_GI_ARROW, GID_ARROWS_30, func_8002EBCC, 90, 50, 0x00B0, 0x007D, GI_ARROWS_30, EnGirlA_CanBuy_Arrows,
+    { OBJECT_GI_ARROW, GID_ARROWS_30, func_8002EBCC, 90, 50, 0x00B0, 0x007D, GI_OOT_ARROWS_30, EnGirlA_CanBuy_Arrows,
       EnGirlA_ItemGive_Arrows, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BOMBS_5_R25 */
-    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 25, 5, 0x00A3, 0x008B, GI_BOMBS_5, EnGirlA_CanBuy_Bombs,
+    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 25, 5, 0x00A3, 0x008B, GI_OOT_BOMBS_5, EnGirlA_CanBuy_Bombs,
       EnGirlA_ItemGive_Bombs, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_DEKU_NUTS_10 */
-    { OBJECT_GI_NUTS, GID_DEKU_NUTS, func_8002ED80, 30, 10, 0x00A2, 0x0087, GI_DEKU_NUTS_10, EnGirlA_CanBuy_DekuNuts,
+    { OBJECT_GI_NUTS, GID_DEKU_NUTS, func_8002ED80, 30, 10, 0x00A2, 0x0087, GI_OOT_NUTS_10, EnGirlA_CanBuy_DekuNuts,
       EnGirlA_ItemGive_DekuNuts, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_DEKU_STICK */
-    { OBJECT_GI_STICK, GID_DEKU_STICK, NULL, 10, 1, 0x00A1, 0x0088, GI_DEKU_STICKS_1, EnGirlA_CanBuy_DekuSticks,
+    { OBJECT_GI_STICK, GID_DEKU_STICK, NULL, 10, 1, 0x00A1, 0x0088, GI_OOT_STICK, EnGirlA_CanBuy_DekuSticks,
       EnGirlA_ItemGive_DekuSticks, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BOMBS_10 */
-    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 50, 10, 0x00B1, 0x007C, GI_BOMBS_10, EnGirlA_CanBuy_Bombs,
+    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 50, 10, 0x00B1, 0x007C, GI_OOT_BOMBS_10, EnGirlA_CanBuy_Bombs,
       EnGirlA_ItemGive_Bombs, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_FISH */
-    { OBJECT_GI_FISH, GID_FISH, func_8002ED80, 200, 1, 0x00B3, 0x007E, GI_BOTTLE_FISH, EnGirlA_CanBuy_Fish, NULL,
+    { OBJECT_GI_FISH, GID_FISH, func_8002ED80, 200, 1, 0x00B3, 0x007E, GI_OOT_FISH, EnGirlA_CanBuy_Fish, NULL,
       EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_RED_POTION_R30 */
-    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_RED, func_8002EBCC, 30, 1, 0x00A5, 0x008E, GI_BOTTLE_POTION_RED,
+    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_RED, func_8002EBCC, 30, 1, 0x00A5, 0x008E, GI_OOT_POTION_RED,
       EnGirlA_CanBuy_RedPotion, EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_GREEN_POTION */
-    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_GREEN, func_8002EBCC, 30, 1, 0x00A6, 0x008F, GI_BOTTLE_POTION_GREEN,
+    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_GREEN, func_8002EBCC, 30, 1, 0x00A6, 0x008F, GI_OOT_POTION_GREEN,
       EnGirlA_CanBuy_GreenPotion, EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BLUE_POTION */
-    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_BLUE, func_8002EBCC, 60, 1, 0x00A7, 0x0090, GI_BOTTLE_POTION_BLUE,
+    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_BLUE, func_8002EBCC, 60, 1, 0x00A7, 0x0090, GI_OOT_POTION_BLUE,
       EnGirlA_CanBuy_BluePotion, EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_LONGSWORD */
-    { OBJECT_GI_LONGSWORD, GID_SWORD_BIGGORON, func_8002EBCC, 1000, 1, 0x00A8, 0x0091, GI_SWORD_KNIFE,
+    { OBJECT_GI_LONGSWORD, GID_SWORD_BIGGORON, func_8002EBCC, 1000, 1, 0x00A8, 0x0091, GI_OOT_SWORD_KNIFE,
       EnGirlA_CanBuy_Longsword, EnGirlA_ItemGive_Longsword, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_HYLIAN_SHIELD */
-    { OBJECT_GI_SHIELD_2, GID_SHIELD_HYLIAN, func_8002EBCC, 80, 1, 0x00A9, 0x0092, GI_SHIELD_HYLIAN,
+    { OBJECT_GI_SHIELD_2, GID_SHIELD_HYLIAN, func_8002EBCC, 80, 1, 0x00A9, 0x0092, GI_OOT_SHIELD_HYLIAN,
       EnGirlA_CanBuy_HylianShield, EnGirlA_ItemGive_HylianShield, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_DEKU_SHIELD */
-    { OBJECT_GI_SHIELD_1, GID_SHIELD_DEKU, func_8002EBCC, 40, 1, 0x009F, 0x0089, GI_SHIELD_DEKU,
+    { OBJECT_GI_SHIELD_1, GID_SHIELD_DEKU, func_8002EBCC, 40, 1, 0x009F, 0x0089, GI_OOT_SHIELD_DEKU,
       EnGirlA_CanBuy_DekuShield, EnGirlA_ItemGive_DekuShield, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_GORON_TUNIC */
-    { OBJECT_GI_CLOTHES, GID_TUNIC_GORON, NULL, 200, 1, 0x00AA, 0x0093, GI_TUNIC_GORON, EnGirlA_CanBuy_GoronTunic,
+    { OBJECT_GI_CLOTHES, GID_TUNIC_GORON, NULL, 200, 1, 0x00AA, 0x0093, GI_OOT_TUNIC_GORON, EnGirlA_CanBuy_GoronTunic,
       EnGirlA_ItemGive_GoronTunic, EnGirlA_BuyEvent_GoronTunic },
     /* SI_ZORA_TUNIC */
-    { OBJECT_GI_CLOTHES, GID_TUNIC_ZORA, NULL, 300, 1, 0x00AB, 0x0094, GI_TUNIC_ZORA, EnGirlA_CanBuy_ZoraTunic,
+    { OBJECT_GI_CLOTHES, GID_TUNIC_ZORA, NULL, 300, 1, 0x00AB, 0x0094, GI_OOT_TUNIC_ZORA, EnGirlA_CanBuy_ZoraTunic,
       EnGirlA_ItemGive_ZoraTunic, EnGirlA_BuyEvent_ZoraTunic },
     /* SI_RECOVERY_HEART */
-    { OBJECT_GI_HEART, GID_RECOVERY_HEART, NULL, 10, 16, 0x00AC, 0x0095, GI_RECOVERY_HEART,
+    { OBJECT_GI_HEART, GID_RECOVERY_HEART, NULL, 10, 16, 0x00AC, 0x0095, GI_OOT_RECOVERY_HEART,
       EnGirlA_CanBuy_RecoveryHeart, EnGirlA_ItemGive_Health, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_MILK_BOTTLE */
-    { OBJECT_GI_MILK, GID_BOTTLE_MILK_FULL, func_80A3C498, 100, 1, 0x00AD, 0x0097, GI_BOTTLE_MILK_FULL,
+    { OBJECT_GI_MILK, GID_BOTTLE_MILK_FULL, func_80A3C498, 100, 1, 0x00AD, 0x0097, GI_OOT_BOTTLE_MILK,
       EnGirlA_CanBuy_MilkBottle, EnGirlA_ItemGive_MilkBottle, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_WEIRD_EGG */
-    { OBJECT_GI_EGG, GID_EGG, func_8002EBCC, 100, 1, 0x00AE, 0x0099, GI_WEIRD_EGG, EnGirlA_CanBuy_WeirdEgg,
+    { OBJECT_GI_EGG, GID_EGG, func_8002EBCC, 100, 1, 0x00AE, 0x0099, GI_OOT_WEIRD_EGG, EnGirlA_CanBuy_WeirdEgg,
       EnGirlA_ItemGive_WeirdEgg, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_19 */
     { OBJECT_GI_MILK, GID_BOTTLE_MILK_FULL, func_80A3C498, 10000, 1, 0x00B4, 0x0085, GI_NONE, EnGirlA_CanBuy_Unk19,
@@ -220,91 +220,91 @@ static ShopItemEntry sShopItemEntries[] = {
     { OBJECT_GI_EGG, GID_EGG, func_8002EBCC, 10000, 1, 0x00B5, 0x0085, GI_NONE, EnGirlA_CanBuy_Unk20,
       EnGirlA_ItemGive_Unk20, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BOMBCHU_10_1 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_BOMBCHUS_10, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_OOT_BOMBCHU_10, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_20_1 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_BOMBCHUS_20, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_OOT_BOMBCHU_20, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_20_2 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_BOMBCHUS_20, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_OOT_BOMBCHU_20, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_10_2 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_BOMBCHUS_10, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_OOT_BOMBCHU_10, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_10_3 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_BOMBCHUS_10, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_OOT_BOMBCHU_10, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_20_3 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_BOMBCHUS_20, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_OOT_BOMBCHU_20, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_20_4 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_BOMBCHUS_20, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 180, 20, 0x0061, 0x002A, GI_OOT_BOMBCHU_20, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_BOMBCHU_10_4 */
-    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_BOMBCHUS_10, EnGirlA_CanBuy_Bombchus,
+    { OBJECT_GI_BOMB_2, GID_BOMBCHU, func_8002EBCC, 100, 10, 0x00BC, 0x008C, GI_OOT_BOMBCHU_10, EnGirlA_CanBuy_Bombchus,
       NULL, EnGirlA_BuyEvent_ObtainBombchuPack },
     /* SI_DEKU_SEEDS_30 */
-    { OBJECT_GI_SEED, GID_DEKU_SEEDS, func_8002EBCC, 30, 30, 0x00DF, 0x00DE, GI_DEKU_SEEDS_30, EnGirlA_CanBuy_DekuSeeds,
+    { OBJECT_GI_SEED, GID_DEKU_SEEDS, func_8002EBCC, 30, 30, 0x00DF, 0x00DE, GI_OOT_DEKU_SEEDS_30, EnGirlA_CanBuy_DekuSeeds,
       EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_KEATON_MASK */
-    { OBJECT_GI_KI_TAN_MASK, GID_MASK_KEATON, func_8002EBCC, 0, 1, 0x70B2, 0x70BE, GI_MASK_KEATON,
+    { OBJECT_GI_KI_TAN_MASK, GID_MASK_KEATON, func_8002EBCC, 0, 1, 0x70B2, 0x70BE, GI_OOT_MASK_KEATON,
       EnGirlA_CanBuy_DekuSeeds, EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_SPOOKY_MASK */
-    { OBJECT_GI_REDEAD_MASK, GID_MASK_SPOOKY, func_8002EBCC, 0, 1, 0x70B1, 0x70BD, GI_MASK_SPOOKY,
+    { OBJECT_GI_REDEAD_MASK, GID_MASK_SPOOKY, func_8002EBCC, 0, 1, 0x70B1, 0x70BD, GI_OOT_MASK_SPOOKY,
       EnGirlA_CanBuy_DekuSeeds, EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_SKULL_MASK */
-    { OBJECT_GI_SKJ_MASK, GID_MASK_SKULL, func_8002EBCC, 0, 1, 0x70B0, 0x70BC, GI_MASK_SKULL, EnGirlA_CanBuy_DekuSeeds,
+    { OBJECT_GI_SKJ_MASK, GID_MASK_SKULL, func_8002EBCC, 0, 1, 0x70B0, 0x70BC, GI_OOT_MASK_SKULL, EnGirlA_CanBuy_DekuSeeds,
       EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BUNNY_HOOD */
-    { OBJECT_GI_RABIT_MASK, GID_MASK_BUNNY_HOOD, func_8002EBCC, 0, 1, 0x70B3, 0x70BF, GI_MASK_BUNNY_HOOD,
+    { OBJECT_GI_RABIT_MASK, GID_MASK_BUNNY_HOOD, func_8002EBCC, 0, 1, 0x70B3, 0x70BF, GI_OOT_MASK_BUNNY,
       EnGirlA_CanBuy_DekuSeeds, EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_MASK_OF_TRUTH */
-    { OBJECT_GI_TRUTH_MASK, GID_MASK_TRUTH, func_80A3C498, 0, 1, 0x70AF, 0x70C3, GI_MASK_TRUTH,
+    { OBJECT_GI_TRUTH_MASK, GID_MASK_TRUTH, func_80A3C498, 0, 1, 0x70AF, 0x70C3, GI_OOT_MASK_TRUTH,
       EnGirlA_CanBuy_DekuSeeds, EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_ZORA_MASK */
-    { OBJECT_GI_ZORAMASK, GID_MASK_ZORA, NULL, 0, 1, 0x70B9, 0x70C1, GI_MASK_ZORA, EnGirlA_CanBuy_DekuSeeds,
+    { OBJECT_GI_ZORAMASK, GID_MASK_ZORA, NULL, 0, 1, 0x70B9, 0x70C1, GI_OOT_MASK_ZORA, EnGirlA_CanBuy_DekuSeeds,
       EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_GORON_MASK */
-    { OBJECT_GI_GOLONMASK, GID_MASK_GORON, NULL, 0, 1, 0x70B8, 0x70C0, GI_MASK_GORON, EnGirlA_CanBuy_DekuSeeds,
+    { OBJECT_GI_GOLONMASK, GID_MASK_GORON, NULL, 0, 1, 0x70B8, 0x70C0, GI_OOT_MASK_GORON, EnGirlA_CanBuy_DekuSeeds,
       EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_GERUDO_MASK */
-    { OBJECT_GI_GERUDOMASK, GID_MASK_GERUDO, NULL, 0, 1, 0x70BA, 0x70C2, GI_MASK_GERUDO, EnGirlA_CanBuy_DekuSeeds,
+    { OBJECT_GI_GERUDOMASK, GID_MASK_GERUDO, NULL, 0, 1, 0x70BA, 0x70C2, GI_OOT_MASK_GERUDO, EnGirlA_CanBuy_DekuSeeds,
       EnGirlA_ItemGive_DekuSeeds, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_SOLD_OUT */
-    { OBJECT_GI_SOLDOUT, GID_SOLDOUT, func_8002EBCC, 0, 0, 0x00BD, 0x70C2, GI_MASK_GERUDO, EnGirlA_CanBuy_SoldOut, NULL,
+    { OBJECT_GI_SOLDOUT, GID_SOLDOUT, func_8002EBCC, 0, 0, 0x00BD, 0x70C2, GI_OOT_MASK_GERUDO, EnGirlA_CanBuy_SoldOut, NULL,
       NULL },
     /* SI_BLUE_FIRE */
-    { OBJECT_GI_FIRE, GID_BLUE_FIRE, func_8002EBCC, 300, 1, 0x00B9, 0x00B8, GI_BOTTLE_BLUE_FIRE,
+    { OBJECT_GI_FIRE, GID_BLUE_FIRE, func_8002EBCC, 300, 1, 0x00B9, 0x00B8, GI_OOT_BLUE_FIRE,
       EnGirlA_CanBuy_BlueFire, EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BUGS */
-    { OBJECT_GI_INSECT, GID_BUG, func_80A3C498, 50, 1, 0x00BB, 0x00BA, GI_BOTTLE_BUGS, EnGirlA_CanBuy_Bugs,
+    { OBJECT_GI_INSECT, GID_BUG, func_80A3C498, 50, 1, 0x00BB, 0x00BA, GI_OOT_BUG, EnGirlA_CanBuy_Bugs,
       EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BIG_POE */
-    { OBJECT_GI_GHOST, GID_BIG_POE, func_80A3C498, 50, 1, 0x506F, 0x5070, GI_BOTTLE_BIG_POE, EnGirlA_CanBuy_Poe,
+    { OBJECT_GI_GHOST, GID_BIG_POE, func_80A3C498, 50, 1, 0x506F, 0x5070, GI_OOT_BIG_POE, EnGirlA_CanBuy_Poe,
       EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_POE */
-    { OBJECT_GI_GHOST, GID_POE, func_80A3C498, 30, 1, 0x506D, 0x506E, GI_BOTTLE_POE, EnGirlA_CanBuy_Poe,
+    { OBJECT_GI_GHOST, GID_POE, func_80A3C498, 30, 1, 0x506D, 0x506E, GI_OOT_POE, EnGirlA_CanBuy_Poe,
       EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_FAIRY */
-    { OBJECT_GI_SOUL, GID_FAIRY, func_80A3C498, 50, 1, 0x00B7, 0x00B6, GI_BOTTLE_FAIRY, EnGirlA_CanBuy_Fairy,
+    { OBJECT_GI_SOUL, GID_FAIRY, func_80A3C498, 50, 1, 0x00B7, 0x00B6, GI_OOT_FAIRY, EnGirlA_CanBuy_Fairy,
       EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_ARROWS_10 */
-    { OBJECT_GI_ARROW, GID_ARROWS_5, func_8002EBCC, 20, 10, 0x00A0, 0x008A, GI_ARROWS_5, EnGirlA_CanBuy_Arrows,
+    { OBJECT_GI_ARROW, GID_ARROWS_5, func_8002EBCC, 20, 10, 0x00A0, 0x008A, GI_OOT_ARROWS_5, EnGirlA_CanBuy_Arrows,
       EnGirlA_ItemGive_Arrows, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BOMBS_20 */
-    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 80, 20, 0x001C, 0x0006, GI_BOMBS_20, EnGirlA_CanBuy_Bombs,
+    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 80, 20, 0x001C, 0x0006, GI_OOT_BOMBS_20, EnGirlA_CanBuy_Bombs,
       EnGirlA_ItemGive_Bombs, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BOMBS_30 */
-    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 120, 30, 0x001D, 0x001E, GI_BOMBS_30, EnGirlA_CanBuy_Bombs,
+    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 120, 30, 0x001D, 0x001E, GI_OOT_BOMBS_30, EnGirlA_CanBuy_Bombs,
       EnGirlA_ItemGive_Bombs, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_BOMBS_5_R35 */
-    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 35, 5, 0x00CB, 0x00CA, GI_BOMBS_5, EnGirlA_CanBuy_Bombs,
+    { OBJECT_GI_BOMB_1, GID_BOMB, func_8002EBCC, 35, 5, 0x00CB, 0x00CA, GI_OOT_BOMBS_5, EnGirlA_CanBuy_Bombs,
       EnGirlA_ItemGive_Bombs, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_RED_POTION_R40 */
-    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_RED, func_8002EBCC, 40, 1, 0x0064, 0x0062, GI_BOTTLE_POTION_RED,
+    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_RED, func_8002EBCC, 40, 1, 0x0064, 0x0062, GI_OOT_POTION_RED,
       EnGirlA_CanBuy_RedPotion, EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount },
     /* SI_RED_POTION_R50 */
-    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_RED, func_8002EBCC, 50, 1, 0x0065, 0x0063, GI_BOTTLE_POTION_RED,
+    { OBJECT_GI_LIQUID, GID_BOTTLE_POTION_RED, func_8002EBCC, 50, 1, 0x0065, 0x0063, GI_OOT_POTION_RED,
       EnGirlA_CanBuy_RedPotion, EnGirlA_ItemGive_BottledItem, EnGirlA_BuyEvent_ShieldDiscount }
 };
 

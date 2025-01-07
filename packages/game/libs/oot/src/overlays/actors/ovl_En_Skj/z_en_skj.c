@@ -226,10 +226,10 @@ static DamageTable sDamageTable = {
 };
 
 static s32 sOcarinaGameRewards[] = {
-    GI_RUPEE_GREEN,
-    GI_RUPEE_BLUE,
-    GI_HEART_PIECE,
-    GI_RUPEE_RED,
+   GI_OOT_RUPEE_GREEN,
+   GI_OOT_RUPEE_BLUE,
+   GI_OOT_HEART_PIECE,
+   GI_OOT_RUPEE_RED,
 };
 
 static AnimationMinimalInfo sAnimationInfo[] = {
@@ -1039,7 +1039,7 @@ void EnSkj_SariaSongTalk(EnSkj* this, PlayState* play) {
             EnSkj_SetupWaitInRange(this);
         } else {
             func_80AFFE24(this);
-            Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, EnSkj_GetItemXzRange(this),
+            Actor_OfferGetItem(&this->actor, play,GI_OOT_HEART_PIECE, EnSkj_GetItemXzRange(this),
                                EnSkj_GetItemYRange(this));
         }
     }
@@ -1054,7 +1054,7 @@ void func_80AFFE44(EnSkj* this, PlayState* play) {
         this->actor.parent = NULL;
         EnSkj_SetupPostSariasSong(this);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, EnSkj_GetItemXzRange(this), EnSkj_GetItemYRange(this));
+        Actor_OfferGetItem(&this->actor, play,GI_OOT_HEART_PIECE, EnSkj_GetItemXzRange(this), EnSkj_GetItemYRange(this));
     }
 }
 

@@ -18,7 +18,7 @@ void EnBomBowlPit_GivePrize(EnBomBowlPit* this, PlayState* play);
 void EnBomBowlPit_WaitTillPrizeGiven(EnBomBowlPit* this, PlayState* play);
 void EnBomBowlPit_Reset(EnBomBowlPit* this, PlayState* play);
 
-static s32 sGetItemIds[] = { GI_BOMB_BAG_30, GI_HEART_PIECE, GI_BOMBCHUS_10, GI_BOMBS_1, GI_RUPEE_PURPLE };
+static s32 sGetItemIds[] = { GI_OOT_BOMB_BAG, GI_OOT_HEART_PIECE, GI_OOT_BOMBCHU_10, GI_OOT_BOMB, GI_OOT_RUPEE_PURPLE };
 
 ActorProfile En_Bom_Bowl_Pit_Profile = {
     /**/ ACTOR_EN_BOM_BOWL_PIT,
@@ -180,10 +180,6 @@ void EnBomBowlPit_GivePrize(EnBomBowlPit* this, PlayState* play) {
     Player_SetCsActionWithHaltedActors(play, NULL, PLAYER_CSACTION_7);
     this->getItemId = sGetItemIds[this->prizeIndex];
 
-    if ((this->getItemId == GI_BOMB_BAG_30) && (CUR_CAPACITY(UPG_BOMB_BAG) == 30)) {
-        this->getItemId = GI_BOMB_BAG_40;
-    }
-
     player->stateFlags1 &= ~PLAYER_STATE1_29;
     this->actor.parent = NULL;
     Actor_OfferGetItem(&this->actor, play, this->getItemId, 2000.0f, 1000.0f);
@@ -203,7 +199,7 @@ void EnBomBowlPit_Reset(EnBomBowlPit* this, PlayState* play) {
     if ((Message_GetState(&play->msgCtx) == TEXT_STATE_DONE) && Message_ShouldAdvance(play)) {
         // "Normal termination"/"completion"
         PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 正常終了 ☆☆☆☆☆ \n" VT_RST);
-        if (this->getItemId == GI_HEART_PIECE) {
+        if (this->getItemId == GI_OOT_HEART_PIECE) {
             gSaveContext.healthAccumulator = 0x140;
             // "Ah recovery!" (?)
             PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ あぁ回復！ ☆☆☆☆☆ \n" VT_RST);

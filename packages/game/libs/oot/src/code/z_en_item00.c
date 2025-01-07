@@ -326,22 +326,22 @@ void EnItem00_Init(Actor* thisx, PlayState* play) {
             Item_Give(play, ITEM_ARROWS_30);
             break;
         case ITEM00_MAGIC_LARGE:
-            getItemId = GI_MAGIC_JAR_SMALL;
+            getItemId = GI_OOT_MAGIC_JAR_SMALL;
             break;
         case ITEM00_MAGIC_SMALL:
-            getItemId = GI_MAGIC_JAR_LARGE;
+            getItemId = GI_OOT_MAGIC_JAR_LARGE;
             break;
         case ITEM00_SMALL_KEY:
             Item_Give(play, ITEM_SMALL_KEY);
             break;
         case ITEM00_SEEDS:
-            getItemId = GI_DEKU_SEEDS_5;
+            getItemId = GI_OOT_DEKU_SEEDS_5;
             break;
         case ITEM00_NUTS:
-            getItemId = GI_DEKU_NUTS_5;
+            getItemId = GI_OOT_NUTS_5;
             break;
         case ITEM00_STICK:
-            getItemId = GI_DEKU_STICKS_1;
+            getItemId = GI_OOT_STICK;
             break;
         case ITEM00_HEART_PIECE:
         case ITEM00_HEART_CONTAINER:
@@ -635,10 +635,10 @@ void EnItem00_Update(Actor* thisx, PlayState* play) {
             Item_Give(play, ITEM_RUPEE_GOLD);
             break;
         case ITEM00_STICK:
-            getItemId = GI_DEKU_STICKS_1;
+            getItemId = GI_OOT_STICK;
             break;
         case ITEM00_NUTS:
-            getItemId = GI_DEKU_NUTS_5;
+            getItemId = GI_OOT_NUTS_5;
             break;
         case ITEM00_RECOVERY_HEART:
             Item_Give(play, ITEM_RECOVERY_HEART);
@@ -663,34 +663,34 @@ void EnItem00_Update(Actor* thisx, PlayState* play) {
             Item_Give(play, ITEM_ARROWS_30);
             break;
         case ITEM00_SEEDS:
-            getItemId = GI_DEKU_SEEDS_5;
+            getItemId = GI_OOT_DEKU_SEEDS_5;
             break;
         case ITEM00_SMALL_KEY:
-            getItemId = GI_SMALL_KEY;
+            getItemId = GI_OOT_SMALL_KEY;
             break;
         case ITEM00_HEART_PIECE:
-            getItemId = GI_HEART_PIECE;
+            getItemId = GI_OOT_HEART_PIECE;
             break;
         case ITEM00_HEART_CONTAINER:
-            getItemId = GI_HEART_CONTAINER;
+            getItemId = GI_OOT_HEART_CONTAINER;
             break;
         case ITEM00_MAGIC_LARGE:
-            getItemId = GI_MAGIC_JAR_LARGE;
+            getItemId = GI_OOT_MAGIC_JAR_LARGE;
             break;
         case ITEM00_MAGIC_SMALL:
-            getItemId = GI_MAGIC_JAR_SMALL;
+            getItemId = GI_OOT_MAGIC_JAR_SMALL;
             break;
         case ITEM00_SHIELD_DEKU:
-            getItemId = GI_SHIELD_DEKU;
+            getItemId = GI_OOT_SHIELD_DEKU;
             break;
         case ITEM00_SHIELD_HYLIAN:
-            getItemId = GI_SHIELD_HYLIAN;
+            getItemId = GI_OOT_SHIELD_HYLIAN;
             break;
         case ITEM00_TUNIC_ZORA:
-            getItemId = GI_TUNIC_ZORA;
+            getItemId = GI_OOT_TUNIC_ZORA;
             break;
         case ITEM00_TUNIC_GORON:
-            getItemId = GI_TUNIC_GORON;
+            getItemId = GI_OOT_TUNIC_GORON;
             break;
         case ITEM00_BOMBS_SPECIAL:
             break;
