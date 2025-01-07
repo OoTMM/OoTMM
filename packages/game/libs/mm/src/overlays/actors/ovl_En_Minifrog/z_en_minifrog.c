@@ -489,7 +489,7 @@ void EnMinifrog_GetFrogHP(EnMinifrog* this, PlayState* play) {
         this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, PLAYER_IA_NONE);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 10000.0f, 50.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 10000.0f, 50.0f);
     }
 }
 

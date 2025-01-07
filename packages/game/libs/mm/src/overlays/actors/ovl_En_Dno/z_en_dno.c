@@ -700,9 +700,9 @@ void func_80A725F8(EnDno* this, PlayState* play) {
                 case 0x802:
                     if (Message_ShouldAdvance(play)) {
                         if (INV_CONTENT(ITEM_MASK_SCENTS) == ITEM_MASK_SCENTS) {
-                            this->getItemId = GI_RUPEE_RED;
+                            this->getItemId = GI_MM_RUPEE_RED;
                         } else {
-                            this->getItemId = GI_MASK_SCENTS;
+                            this->getItemId = GI_MM_MASK_SCENTS;
                         }
                         Actor_OfferGetItem(&this->actor, play, this->getItemId, 60.0f, 60.0f);
                         Message_CloseTextbox(play);

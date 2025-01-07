@@ -395,9 +395,9 @@ void func_80B5BFB8(EnOt* this, PlayState* play) {
 
 void func_80B5C154(EnOt* this, PlayState* play) {
     if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_SEAHORSE_HEART_PIECE)) {
-        this->getItemId = GI_RUPEE_RED;
+        this->getItemId = GI_MM_RUPEE_RED;
     } else {
-        this->getItemId = GI_HEART_PIECE;
+        this->getItemId = GI_MM_HEART_PIECE;
         SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_SEAHORSE_HEART_PIECE);
     }
 

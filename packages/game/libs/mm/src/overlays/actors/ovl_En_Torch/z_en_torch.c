@@ -26,7 +26,7 @@ ActorProfile En_Torch_Profile = {
 };
 
 static u8 sChestContents[] = {
-    GI_RUPEE_BLUE, GI_RUPEE_RED, GI_RUPEE_PURPLE, GI_RUPEE_SILVER, GI_BOMBCHUS_1, GI_BOMBCHUS_5, GI_BOMBS_1, GI_BOMBS_1,
+    GI_MM_RUPEE_BLUE, GI_MM_RUPEE_RED, GI_MM_RUPEE_PURPLE, GI_MM_RUPEE_SILVER, GI_MM_BOMBCHU, GI_MM_BOMBCHU_5, GI_MM_BOMB, GI_MM_BOMB,
 };
 
 void EnTorch_Init(Actor* thisx, PlayState* play) {

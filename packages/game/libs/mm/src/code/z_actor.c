@@ -2218,8 +2218,8 @@ s32 Actor_OfferGetItem(Actor* actor, PlayState* play, GetItemId getItemId, f32 x
            PLAYER_STATE1_40000 | PLAYER_STATE1_80000 | PLAYER_STATE1_100000 | PLAYER_STATE1_200000)) &&
         (Player_GetExplosiveHeld(player) <= PLAYER_EXPLOSIVE_NONE)) {
         if ((actor->xzDistToPlayer <= xzRange) && (fabsf(actor->playerHeightRel) <= fabsf(yRange))) {
-            if (((getItemId == GI_MASK_CIRCUS_LEADER) || (getItemId == GI_PENDANT_OF_MEMORIES) ||
-                 (getItemId == GI_DEED_LAND) ||
+            if (((getItemId == GI_MM_MASK_TROUPE_LEADER) || (getItemId == GI_MM_PENDANT_OF_MEMORIES) ||
+                 (getItemId == GI_MM_DEED_LAND) ||
                  (((player->heldActor != NULL) || (actor == player->talkActor)) &&
                   ((getItemId > GI_NONE) && (getItemId < GI_MAX)))) ||
                 !(player->stateFlags1 & (PLAYER_STATE1_CARRYING_ACTOR | PLAYER_STATE1_20000000))) {

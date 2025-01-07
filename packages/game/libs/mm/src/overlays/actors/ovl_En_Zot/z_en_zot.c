@@ -1235,7 +1235,7 @@ void func_80B98F30(EnZot* this, PlayState* play) {
         this->actor.parent = NULL;
         this->actionFunc = func_80B990A4;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_BLUE, 10000.0f, 50.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_BLUE, 10000.0f, 50.0f);
     }
 }
 

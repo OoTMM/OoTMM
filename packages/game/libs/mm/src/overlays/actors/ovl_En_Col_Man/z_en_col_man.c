@@ -131,9 +131,9 @@ void func_80AFDE00(EnColMan* this, PlayState* play) {
         this->actor.draw = NULL;
         this->actionFunc = EnColMan_SetHeartPieceCollectedAndKill;
     } else if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_MARINE_RESEARCH_LAB_FISH_HEART_PIECE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 40.0f, 40.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 40.0f, 40.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_RECOVERY_HEART, 40.0f, 40.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RECOVERY_HEART, 40.0f, 40.0f);
     }
 }
 

@@ -998,31 +998,31 @@ void EnBal_OfferGetItem(EnBal* this, PlayState* play) {
     } else {
         switch (this->purchaseMapId) {
             case TINGLE_MAP_CLOCK_TOWN:
-                mapGetItemId = GI_TINGLE_MAP_CLOCK_TOWN;
+                mapGetItemId = GI_MM_WORLD_MAP_CLOCK_TOWN;
                 break;
 
             case TINGLE_MAP_WOODFALL:
-                mapGetItemId = GI_TINGLE_MAP_WOODFALL;
+                mapGetItemId = GI_MM_WORLD_MAP_WOODFALL;
                 break;
 
             case TINGLE_MAP_SNOWHEAD:
-                mapGetItemId = GI_TINGLE_MAP_SNOWHEAD;
+                mapGetItemId = GI_MM_WORLD_MAP_SNOWHEAD;
                 break;
 
             case TINGLE_MAP_ROMANI_RANCH:
-                mapGetItemId = GI_TINGLE_MAP_ROMANI_RANCH;
+                mapGetItemId = GI_MM_WORLD_MAP_ROMANI_RANCH;
                 break;
 
             case TINGLE_MAP_GREAT_BAY:
-                mapGetItemId = GI_TINGLE_MAP_GREAT_BAY;
+                mapGetItemId = GI_MM_WORLD_MAP_GREAT_BAY;
                 break;
 
             case TINGLE_MAP_STONE_TOWER:
-                mapGetItemId = GI_TINGLE_MAP_STONE_TOWER;
+                mapGetItemId = GI_MM_WORLD_MAP_STONE_TOWER;
                 break;
 
             default:
-                mapGetItemId = GI_TINGLE_MAP_CLOCK_TOWN;
+                mapGetItemId = GI_MM_WORLD_MAP_CLOCK_TOWN;
                 break;
         }
         Actor_OfferGetItem(&this->picto.actor, play, mapGetItemId, 500.0f, 100.0f);

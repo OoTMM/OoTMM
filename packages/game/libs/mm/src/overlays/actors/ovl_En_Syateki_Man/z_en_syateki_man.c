@@ -897,15 +897,14 @@ void EnSyatekiMan_Swamp_SetupGiveReward(EnSyatekiMan* this, PlayState* play) {
         this->actor.parent = NULL;
         this->actionFunc = EnSyatekiMan_Swamp_GiveReward;
     } else {
-        if ((CUR_UPG_VALUE(UPG_QUIVER) < 3) &&
-            !CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_SWAMP_SHOOTING_GALLERY_QUIVER_UPGRADE)) {
-            Actor_OfferGetItem(&this->actor, play, GI_QUIVER_30 + CUR_UPG_VALUE(UPG_QUIVER), 500.0f, 100.0f);
+        if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_SWAMP_SHOOTING_GALLERY_QUIVER_UPGRADE)) {
+            Actor_OfferGetItem(&this->actor, play, GI_MM_BOW, 500.0f, 100.0f);
         } else if (this->score < SG_SWAMP_HEART_PIECE_SCORE) {
-            Actor_OfferGetItem(&this->actor, play, GI_RUPEE_RED, 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_RED, 500.0f, 100.0f);
         } else if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_SWAMP_SHOOTING_GALLERY_HEART_PIECE)) {
-            Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 500.0f, 100.0f);
         } else {
-            Actor_OfferGetItem(&this->actor, play, GI_RUPEE_PURPLE, 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_PURPLE, 500.0f, 100.0f);
         }
 
         player->actor.shape.rot.y = -0x8000;
@@ -959,16 +958,15 @@ void EnSyatekiMan_Town_SetupGiveReward(EnSyatekiMan* this, PlayState* play) {
         this->actionFunc = EnSyatekiMan_Town_GiveReward;
     } else {
         if (this->prevTextId == 0x407) {
-            if ((CUR_UPG_VALUE(UPG_QUIVER) < 3) &&
-                !CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_TOWN_SHOOTING_GALLERY_QUIVER_UPGRADE)) {
-                Actor_OfferGetItem(&this->actor, play, GI_QUIVER_30 + CUR_UPG_VALUE(UPG_QUIVER), 500.0f, 100.0f);
+            if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_TOWN_SHOOTING_GALLERY_QUIVER_UPGRADE)) {
+                Actor_OfferGetItem(&this->actor, play, GI_MM_BOW, 500.0f, 100.0f);
             } else {
-                Actor_OfferGetItem(&this->actor, play, GI_RUPEE_PURPLE, 500.0f, 100.0f);
+                Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_PURPLE, 500.0f, 100.0f);
             }
         } else if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_TOWN_SHOOTING_GALLERY_HEART_PIECE)) {
-            Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 500.0f, 100.0f);
         } else {
-            Actor_OfferGetItem(&this->actor, play, GI_RUPEE_HUGE, 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_GOLD, 500.0f, 100.0f);
         }
 
         player->actor.shape.rot.y = -0x8000;

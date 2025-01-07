@@ -451,9 +451,9 @@ void func_80A6FE30(EnMm3* this, PlayState* play) {
         this->actor.parent = NULL;
         func_80A6FED8(this);
     } else if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_POSTMAN_COUNTING_GAME_HEART_PIECE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_PURPLE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_PURPLE, 500.0f, 100.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 500.0f, 100.0f);
     }
 }
 

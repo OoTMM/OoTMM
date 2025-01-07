@@ -317,7 +317,7 @@ void func_80BC7440(EnGuruguru* this, PlayState* play) {
         SET_WEEKEVENTREG(WEEKEVENTREG_38_40);
         this->actionFunc = func_80BC7520;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_MASK_BREMEN, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MASK_BREMEN, 300.0f, 300.0f);
     }
 }
 

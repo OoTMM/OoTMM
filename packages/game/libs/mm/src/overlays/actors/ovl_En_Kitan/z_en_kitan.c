@@ -195,9 +195,9 @@ void EnKitan_OfferPrize(EnKitan* this, PlayState* play) {
 
     // Reward the player with a heart piece, or a red rupee if the heart piece was already obtained.
     if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_KEATON_HEART_PIECE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_RED, 2000.0f, 1000.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_RED, 2000.0f, 1000.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 2000.0f, 1000.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 2000.0f, 1000.0f);
     }
 }
 

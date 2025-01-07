@@ -282,7 +282,7 @@ void EnYb_ReceiveMask(EnYb* this, PlayState* play) {
         this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, PLAYER_IA_MINUS1);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_MASK_KAMARO, 10000.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MASK_KAMARO, 10000.0f, 100.0f);
     }
     EnYb_EnableProximityMusic(this);
 }

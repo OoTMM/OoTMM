@@ -152,7 +152,7 @@ void DmChar02_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 
     if (!Actor_HasParent(&this->actor, play)) {
-        Actor_OfferGetItem(&this->actor, play, GI_OCARINA_OF_TIME, 30.0f, 80.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_OCARINA_OF_TIME, 30.0f, 80.0f);
     } else {
         gMmSave.playerForm = PLAYER_FORM_HUMAN;
         Actor_Kill(&this->actor);

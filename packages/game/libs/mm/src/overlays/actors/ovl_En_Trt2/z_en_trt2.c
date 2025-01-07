@@ -419,9 +419,9 @@ void func_80AD3FF4(EnTrt2* this, PlayState* play) {
         this->actor.parent = NULL;
         this->unk_3B2 = 14;
     } else if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_KOTAKE_BOTTLE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_POTION_RED, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_POTION_RED, 300.0f, 300.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_POTION_RED_BOTTLE, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_BOTTLE_POTION_RED, 300.0f, 300.0f);
     }
 }
 

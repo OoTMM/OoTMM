@@ -87,7 +87,7 @@ void EnKgy_Init(Actor* thisx, PlayState* play) {
             this->actionFunc = func_80B419B0;
             this->actor.textId = 0xC4E;
             this->unk_29C |= 1;
-            this->getItemId = GI_RUPEE_10;
+            this->getItemId = GI_MM_RUPEE_RED;
         } else {
             EnKgy_ChangeAnim(this, ENKGY_ANIM_4, ANIMMODE_LOOP, 0);
             this->actionFunc = func_80B42714;
@@ -453,7 +453,7 @@ void func_80B4163C(EnKgy* this, PlayState* play) {
                 this->getItemId--;
             } else {
                 EnKgy_ChangeAnim(this, ENKGY_ANIM_9, ANIMMODE_ONCE, -5.0f);
-                this->getItemId = (s32)Rand_ZeroFloat(GI_RUPEE_PURPLE - GI_RUPEE_BLUE) + GI_RUPEE_BLUE;
+                this->getItemId = (s32)Rand_ZeroFloat(GI_MM_RUPEE_PURPLE - GI_MM_RUPEE_BLUE) + GI_MM_RUPEE_BLUE;
             }
         } else {
             EnKgy_ChangeAnim(this, ENKGY_ANIM_6, ANIMMODE_ONCE, -5.0f);
@@ -830,10 +830,10 @@ void func_80B41E18(EnKgy* this, PlayState* play) {
 
                         case 0xC50:
                             if (func_80B40D8C(play)) {
-                                this->getItemId = GI_SWORD_GILDED;
+                                this->getItemId = GI_MM_SWORD_GILDED;
                                 this->actor.textId = 0xC53;
                             } else {
-                                this->getItemId = GI_SWORD_RAZOR;
+                                this->getItemId = GI_MM_SWORD_RAZOR;
                                 this->actor.textId = 0xC51;
                             }
                             Message_CloseTextbox(play);

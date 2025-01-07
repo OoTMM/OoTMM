@@ -4136,7 +4136,7 @@ void EnInvadepoh_RewardRomani_GiveBottle(EnInvadepoh* this, PlayState* play) {
         SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_ALIENS_BOTTLE);
         EnInvadepoh_RewardRomani_SetupAfterGivingBottle(this);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_MILK_BOTTLE, 2000.0f, 2000.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_BOTTLE_MILK, 2000.0f, 2000.0f);
     }
 }
 

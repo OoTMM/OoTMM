@@ -926,9 +926,9 @@ void EnLiftNuts_GiveReward(EnLiftNuts* this, PlayState* play) {
         }
         EnLiftNuts_SetupResumeConversation(this);
     } else if ((this->textId == 0x27F4) && !CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_DEKU_PLAYGROUND_HEART_PIECE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 500.0f, 100.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_PURPLE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_PURPLE, 500.0f, 100.0f);
     }
 }
 

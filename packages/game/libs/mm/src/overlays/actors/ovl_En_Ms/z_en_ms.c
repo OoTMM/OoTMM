@@ -106,7 +106,7 @@ void EnMs_Talk(EnMs* this, PlayState* play) {
         case TEXT_STATE_EVENT:
             if (Message_ShouldAdvance(play)) {
                 Message_CloseTextbox(play);
-                Actor_OfferGetItem(&this->actor, play, GI_MAGIC_BEANS, this->actor.xzDistToPlayer,
+                Actor_OfferGetItem(&this->actor, play, GI_MM_MAGIC_BEAN, this->actor.xzDistToPlayer,
                                    this->actor.playerHeightRel);
                 this->actionFunc = EnMs_Sell;
             }
@@ -125,7 +125,7 @@ void EnMs_Talk(EnMs* this, PlayState* play) {
                             Message_ContinueTextbox(play, 0x937);
                         } else {
                             Audio_PlaySfx_MessageDecide();
-                            Actor_OfferGetItem(&this->actor, play, GI_MAGIC_BEANS, 90.0f, 10.0f);
+                            Actor_OfferGetItem(&this->actor, play, GI_MM_MAGIC_BEAN, 90.0f, 10.0f);
                             Rupees_ChangeBy(-10);
                             this->actionFunc = EnMs_Sell;
                         }
@@ -152,7 +152,7 @@ void EnMs_Sell(EnMs* this, PlayState* play) {
                                 PLAYER_IA_NONE);
         this->actionFunc = EnMs_TalkAfterPurchase;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_MAGIC_BEANS, this->actor.xzDistToPlayer, this->actor.playerHeightRel);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MAGIC_BEAN, this->actor.xzDistToPlayer, this->actor.playerHeightRel);
     }
 }
 
