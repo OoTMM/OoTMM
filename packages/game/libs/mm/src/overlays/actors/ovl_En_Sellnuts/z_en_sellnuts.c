@@ -520,7 +520,7 @@ void func_80ADBBEC(EnSellnuts* this, PlayState* play) {
         SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_LAND_TITLE_DEED);
         this->actionFunc = func_80ADBCE4;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_DEED_LAND, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_DEED_LAND, 300.0f, 300.0f);
     }
 }
 

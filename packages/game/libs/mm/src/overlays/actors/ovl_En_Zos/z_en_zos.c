@@ -270,9 +270,9 @@ void func_80BBB354(EnZos* this, PlayState* play) {
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, PLAYER_IA_MINUS1);
     } else {
         if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_EVAN_HEART_PIECE)) {
-            getItemId = GI_RUPEE_PURPLE;
+            getItemId = GI_MM_RUPEE_PURPLE;
         } else {
-            getItemId = GI_HEART_PIECE;
+            getItemId = GI_MM_HEART_PIECE;
         }
         Actor_OfferGetItem(&this->actor, play, getItemId, 10000.0f, 50.0f);
     }

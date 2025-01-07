@@ -682,7 +682,7 @@ void func_80BA4CB4(EnToto* this, PlayState* play) {
         }
     }
     if ((this->cueId == 4) && !Actor_HasParent(&this->actor, play)) {
-        Actor_OfferGetItem(&this->actor, play, GI_MASK_CIRCUS_LEADER, 9999.9f, 9999.9f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MASK_TROUPE_LEADER, 9999.9f, 9999.9f);
     }
 }
 

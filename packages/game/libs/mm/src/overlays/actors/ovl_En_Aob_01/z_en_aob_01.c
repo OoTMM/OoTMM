@@ -916,9 +916,9 @@ void EnAob01_AfterRace_GiveReward(EnAob01* this, PlayState* play) {
                 this->actionFunc = EnAob01_AfterRace_AfterGivingReward;
             }
         } else if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_DOGGY_RACETRACK_HEART_PIECE)) {
-            Actor_OfferGetItem(&this->actor, play, GI_RUPEE_RED, 300.0f, 300.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_RED, 300.0f, 300.0f);
         } else {
-            Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 300.0f, 300.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 300.0f, 300.0f);
         }
     }
 }

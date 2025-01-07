@@ -385,7 +385,7 @@ void EnTrt_PayForMushroom(EnTrt* this, PlayState* play) {
         Player_UpdateBottleHeld(play, GET_PLAYER(play), ITEM_BOTTLE, PLAYER_IA_BOTTLE_EMPTY);
         this->actionFunc = EnTrt_SetupItemGiven;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_RED, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_RED, 300.0f, 300.0f);
     }
 }
 
@@ -464,9 +464,9 @@ void EnTrt_GiveRedPotionForKoume(EnTrt* this, PlayState* play) {
         player->stateFlags2 &= ~PLAYER_STATE2_20000000;
         this->actionFunc = EnTrt_GivenRedPotionForKoume;
     } else if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_KOTAKE_BOTTLE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_POTION_RED, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_POTION_RED, 300.0f, 300.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_POTION_RED_BOTTLE, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_BOTTLE_POTION_RED, 300.0f, 300.0f);
     }
 }
 

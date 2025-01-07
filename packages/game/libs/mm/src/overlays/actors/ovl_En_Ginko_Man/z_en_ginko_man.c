@@ -546,16 +546,16 @@ void EnGinkoMan_BankAward(EnGinkoMan* this, PlayState* play) {
         EnGinkoMan_SetupBankAward2(this);
     } else if (this->curTextId == 0x45B) {
         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_BANK_WALLET_UPGRADE)) {
-            Actor_OfferGetItem(&this->actor, play, GI_WALLET_ADULT + CUR_UPG_VALUE(UPG_WALLET), 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_WALLET2, 500.0f, 100.0f);
         } else {
-            Actor_OfferGetItem(&this->actor, play, GI_RUPEE_BLUE, 500.0f, 100.0f);
+            Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_BLUE, 500.0f, 100.0f);
         }
     } else if (this->curTextId == 0x45C) {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_BLUE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_BLUE, 500.0f, 100.0f);
     } else if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_BANK_HEART_PIECE)) {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 500.0f, 100.0f);
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_BLUE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_BLUE, 500.0f, 100.0f);
     }
 }
 

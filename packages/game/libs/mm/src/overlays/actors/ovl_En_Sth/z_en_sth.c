@@ -290,17 +290,17 @@ void EnSth_PostOceanspiderhouseReward(EnSth* this, PlayState* play) {
         this->actionFunc = EnSth_HandleOceansideSpiderHouseConversation;
 
         switch (STH_GI_ID(&this->actor)) {
-            case GI_WALLET_ADULT:
-            case GI_WALLET_GIANT:
+            case GI_MM_WALLET2:
+            case GI_MM_WALLET3:
                 nextTextId = 0x1137; // I'm just glad it was something you needed
                 break;
 
-            case GI_RUPEE_SILVER:
+            case GI_MM_RUPEE_SILVER:
                 // unused code, as he only gives wallet, purple and red, silver is never assigned to STH_GI_ID
                 nextTextId = 0x1138; // That's my life's fortune
                 break;
 
-            case GI_RUPEE_PURPLE:
+            case GI_MM_RUPEE_PURPLE:
                 if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_OCEANSIDE_WALLET_UPGRADE)) {
                     nextTextId = 0x113D; // That's my life's savings
                 } else {
@@ -380,29 +380,21 @@ void EnSth_HandleOceansideSpiderHouseConversation(EnSth* this, PlayState* play) 
                         switch (day) {
                             case 0: // first day
                                 if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_OCEANSIDE_WALLET_UPGRADE)) {
-                                    STH_GI_ID(&this->actor) = GI_RUPEE_SILVER;
+                                    STH_GI_ID(&this->actor) = GI_MM_RUPEE_SILVER;
                                 } else {
                                     // This flag prevents getting two wallets from the same place.
                                     //   Instead, getting silver rupee above.
                                     SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_OCEANSIDE_WALLET_UPGRADE);
-                                    switch (CUR_UPG_VALUE(UPG_WALLET)) {
-                                        case 0:
-                                            STH_GI_ID(&this->actor) = GI_WALLET_ADULT;
-                                            break;
-
-                                        case 1:
-                                            STH_GI_ID(&this->actor) = GI_WALLET_GIANT;
-                                            break;
-                                    }
+                                    STH_GI_ID(&this->actor) = GI_MM_WALLET2;
                                 }
                                 break;
 
                             case 1: // second day
-                                STH_GI_ID(&this->actor) = GI_RUPEE_PURPLE;
+                                STH_GI_ID(&this->actor) = GI_MM_RUPEE_PURPLE;
                                 break;
 
                             default: // final day
-                                STH_GI_ID(&this->actor) = GI_RUPEE_RED;
+                                STH_GI_ID(&this->actor) = GI_MM_RUPEE_RED;
                                 break;
                         }
                         Message_CloseTextbox(play);
@@ -534,7 +526,7 @@ void EnSth_SwampSpiderHouseGiveMask(EnSth* this, PlayState* play) {
         this->sthFlags &= ~STH_FLAG_DRAW_MASK_OF_TRUTH;
         // This flag is used to keep track if the player has already spoken to the actor, triggering secondary dialogue.
         SET_WEEKEVENTREG(WEEKEVENTREG_TALKED_SWAMP_SPIDER_HOUSE_MAN);
-        Actor_OfferGetItem(&this->actor, play, GI_MASK_TRUTH, 10000.0f, 50.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MASK_TRUTH, 10000.0f, 50.0f);
     }
 }
 

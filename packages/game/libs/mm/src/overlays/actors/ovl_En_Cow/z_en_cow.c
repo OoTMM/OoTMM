@@ -225,7 +225,7 @@ void EnCow_GiveMilkWait(EnCow* this, PlayState* play) {
         this->actor.parent = NULL;
         this->actionFunc = EnCow_GiveMilkEnd;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_MILK, 10000.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MILK, 10000.0f, 100.0f);
     }
 }
 
@@ -234,7 +234,7 @@ void EnCow_GiveMilk(EnCow* this, PlayState* play) {
         this->actor.flags &= ~ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
         Message_CloseTextbox(play);
         this->actionFunc = EnCow_GiveMilkWait;
-        Actor_OfferGetItem(&this->actor, play, GI_MILK, 10000.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MILK, 10000.0f, 100.0f);
     }
 }
 

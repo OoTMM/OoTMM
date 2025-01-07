@@ -482,21 +482,21 @@ void func_8099874C(EnGs* this, PlayState* play) {
                 switch (this->unk_194) {
                     case 1:
                         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_77_08)) {
-                            this->getItemId = GI_RUPEE_SILVER;
+                            this->getItemId = GI_MM_RUPEE_SILVER;
                             SET_WEEKEVENTREG(WEEKEVENTREG_77_08);
                         }
                         break;
 
                     case 3:
                         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_77_10)) {
-                            this->getItemId = GI_RUPEE_SILVER;
+                            this->getItemId = GI_MM_RUPEE_SILVER;
                             SET_WEEKEVENTREG(WEEKEVENTREG_77_10);
                         }
                         break;
 
                     case 2:
                         if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_77_20)) {
-                            this->getItemId = GI_RUPEE_SILVER;
+                            this->getItemId = GI_MM_RUPEE_SILVER;
                             SET_WEEKEVENTREG(WEEKEVENTREG_77_20);
                         }
                         break;
@@ -507,7 +507,7 @@ void func_8099874C(EnGs* this, PlayState* play) {
 
                 if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_GOSSIP_STONE_GROTTO_HEART_PIECE)) {
                     SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_GOSSIP_STONE_GROTTO_HEART_PIECE);
-                    this->getItemId = GI_HEART_PIECE;
+                    this->getItemId = GI_MM_HEART_PIECE;
                 }
 
                 if (this->getItemId > GI_NONE) {

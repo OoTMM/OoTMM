@@ -828,15 +828,15 @@ void func_80BB30B4(EnGeg* this, PlayState* play) {
 }
 
 void func_80BB31B8(EnGeg* this, PlayState* play) {
-    s32 getItemId = GI_MASK_DON_GERO;
+    s32 getItemId = GI_MM_MASK_DON_GERO;
 
     if (INV_CONTENT(ITEM_MASK_DON_GERO) == ITEM_MASK_DON_GERO) {
         if (Player_GetMask(play) == PLAYER_MASK_DON_GERO) {
             this->unk_496 = 0xD8B;
-            getItemId = GI_RUPEE_PURPLE;
+            getItemId = GI_MM_RUPEE_PURPLE;
         } else {
             this->unk_496 = 0xD73;
-            getItemId = GI_RUPEE_PURPLE;
+            getItemId = GI_MM_RUPEE_PURPLE;
         }
     } else {
         this->unk_496 = 0xD70;
@@ -845,7 +845,7 @@ void func_80BB31B8(EnGeg* this, PlayState* play) {
     if (Actor_HasParent(&this->actor, play)) {
         this->actor.parent = NULL;
         SET_WEEKEVENTREG(WEEKEVENTREG_61_01);
-        if (getItemId == GI_MASK_DON_GERO) {
+        if (getItemId == GI_MM_MASK_DON_GERO) {
             this->unk_230 |= 0x40;
         }
         this->actionFunc = func_80BB32AC;

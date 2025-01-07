@@ -172,7 +172,7 @@ void EnFsn_HandleConversationBackroom(EnFsn* this, PlayState* play) {
             if (INV_CONTENT(ITEM_MASK_KEATON) == ITEM_MASK_KEATON) {
                 this->flags |= ENFSN_GIVE_ITEM;
                 this->flags |= ENFSN_GAVE_LETTER_TO_MAMA;
-                this->getItemId = GI_LETTER_TO_MAMA;
+                this->getItemId = GI_MM_LETTER_TO_MAMA;
                 SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_PRIORITY_MAIL);
                 this->textId = 0x29F1;
                 break;
@@ -188,14 +188,14 @@ void EnFsn_HandleConversationBackroom(EnFsn* this, PlayState* play) {
         case 0x29E2:
             this->flags |= ENFSN_GIVE_ITEM;
             this->flags |= ENFSN_GAVE_KEATONS_MASK;
-            this->getItemId = GI_MASK_KEATON;
+            this->getItemId = GI_MM_MASK_KEATON;
             this->textId = 0x29E3;
             break;
 
         case 0x29E3:
             this->flags |= ENFSN_GIVE_ITEM;
             this->flags |= ENFSN_GAVE_LETTER_TO_MAMA;
-            this->getItemId = GI_LETTER_TO_MAMA;
+            this->getItemId = GI_MM_LETTER_TO_MAMA;
             SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_PRIORITY_MAIL);
             this->textId = 0x29F1;
             break;
@@ -1005,23 +1005,23 @@ void EnFsn_MakeOffer(EnFsn* this, PlayState* play) {
                 }
                 switch (this->price) {
                     case 5:
-                        this->getItemId = GI_RUPEE_BLUE;
+                        this->getItemId = GI_MM_RUPEE_BLUE;
                         break;
 
                     case 10:
-                        this->getItemId = GI_RUPEE_10;
+                        this->getItemId = GI_MM_RUPEE_RED;
                         break;
 
                     case 20:
-                        this->getItemId = GI_RUPEE_RED;
+                        this->getItemId = GI_MM_RUPEE_RED;
                         break;
 
                     case 50:
-                        this->getItemId = GI_RUPEE_PURPLE;
+                        this->getItemId = GI_MM_RUPEE_PURPLE;
                         break;
 
                     case 200:
-                        this->getItemId = GI_RUPEE_HUGE;
+                        this->getItemId = GI_MM_RUPEE_GOLD;
                         break;
 
                     default:
@@ -1041,7 +1041,7 @@ void EnFsn_MakeOffer(EnFsn* this, PlayState* play) {
 
 void EnFsn_GiveItem(EnFsn* this, PlayState* play) {
     if (Actor_HasParent(&this->actor, play)) {
-        if ((this->isSelling == true) && (this->items[this->cursorIndex]->getItemId == GI_MASK_ALL_NIGHT)) {
+        if ((this->isSelling == true) && (this->items[this->cursorIndex]->getItemId == GI_MM_MASK_ALL_NIGHT)) {
             Message_BombersNotebookQueueEvent(play, BOMBERS_NOTEBOOK_EVENT_RECEIVED_ALL_NIGHT_MASK);
             Message_BombersNotebookQueueEvent(play, BOMBERS_NOTEBOOK_EVENT_MET_CURIOSITY_SHOP_MAN);
         }

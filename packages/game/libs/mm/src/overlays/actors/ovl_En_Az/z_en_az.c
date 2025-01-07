@@ -1007,9 +1007,9 @@ s32 func_80A9617C(EnAz* this, PlayState* play) {
                     case 0x10F1:
                         SET_WEEKEVENTREG(WEEKEVENTREG_93_01);
                         if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_BEAVER_RACE_BOTTLE)) {
-                            this->getItemId = GI_RUPEE_RED;
+                            this->getItemId = GI_MM_RUPEE_RED;
                         } else {
-                            this->getItemId = GI_BOTTLE;
+                            this->getItemId = GI_MM_BOTTLE_EMPTY;
                             SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_BEAVER_RACE_BOTTLE);
                         }
                         SubS_ChangeAnimationBySpeedInfo(&this->skelAnime, sAnimationSpeedInfo, BEAVER_ANIM_IDLE,
@@ -1179,9 +1179,9 @@ s32 func_80A9617C(EnAz* this, PlayState* play) {
 
                     case 0x1105:
                         if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_BEAVER_BROS_HEART_PIECE)) {
-                            this->getItemId = GI_RUPEE_PURPLE;
+                            this->getItemId = GI_MM_RUPEE_PURPLE;
                         } else {
-                            this->getItemId = GI_HEART_PIECE;
+                            this->getItemId = GI_MM_HEART_PIECE;
                             SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_BEAVER_BROS_HEART_PIECE);
                         }
                         SubS_ChangeAnimationBySpeedInfo(&this->skelAnime, sAnimationSpeedInfo, BEAVER_ANIM_IDLE,
@@ -1333,9 +1333,9 @@ s32 func_80A97274(EnAz* this, PlayState* play) {
 s32 func_80A973B4(EnAz* this, PlayState* play) {
     s32 ret = 0;
 
-    if (this->getItemId != GI_RUPEE_RED) {
-        if ((this->getItemId != GI_RUPEE_PURPLE) && (this->getItemId != GI_HEART_PIECE)) {
-            if (this->getItemId == GI_BOTTLE) {
+    if (this->getItemId != GI_MM_RUPEE_RED) {
+        if ((this->getItemId != GI_MM_RUPEE_PURPLE) && (this->getItemId != GI_MM_HEART_PIECE)) {
+            if (this->getItemId == GI_MM_BOTTLE_EMPTY) {
                 ret = 0x10F2;
             }
         } else {

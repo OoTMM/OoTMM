@@ -1009,14 +1009,14 @@ void func_80B5253C(EnGk* this, PlayState* play) {
     s32 getItemId;
 
     if (CHECK_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_GORON_RACE_BOTTLE)) {
-        getItemId = GI_GOLD_DUST_2;
+        getItemId = GI_MM_BOTTLED_GOLD_DUST;
     } else {
-        getItemId = GI_GOLD_DUST;
+        getItemId = GI_MM_GOLD_DUST;
     }
 
     if (Actor_HasParent(&this->actor, play)) {
         this->actor.parent = NULL;
-        if (getItemId == GI_GOLD_DUST) {
+        if (getItemId == GI_MM_GOLD_DUST) {
             SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_GORON_RACE_BOTTLE);
         }
         this->actionFunc = func_80B525E0;

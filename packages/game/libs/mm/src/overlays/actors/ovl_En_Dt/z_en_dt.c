@@ -685,7 +685,7 @@ void EnDt_FinishMeetingCutscene(EnDt* this, PlayState* play) {
 }
 
 void EnDt_OfferMeetingReward(EnDt* this, PlayState* play) {
-    Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 300.0f, 300.0f);
+    Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 300.0f, 300.0f);
     this->state = EN_DT_NPC_STATE_OFFERED_MEETING_REWARD;
     this->actionFunc = EnDt_TriggerMeetingRewardEvent;
 }
@@ -701,7 +701,7 @@ void EnDt_TriggerMeetingRewardEvent(EnDt* this, PlayState* play) {
         SET_WEEKEVENTREG(WEEKEVENTREG_RECEIVED_MAYOR_HEART_PIECE);
         this->actionFunc = EnDt_TriggerMeetingNotebookEvent;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_HEART_PIECE, 300.0f, 300.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_HEART_PIECE, 300.0f, 300.0f);
     }
 }
 

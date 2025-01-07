@@ -1002,10 +1002,10 @@ void EnMaYto_PostMilkRunGiveReward(EnMaYto* this, PlayState* play) {
     if (Actor_HasParent(&this->actor, play)) {
         EnMaYto_SetupPostMilkRunExplainReward(this);
     } else if (INV_CONTENT(ITEM_MASK_ROMANI) == ITEM_MASK_ROMANI) {
-        Actor_OfferGetItem(&this->actor, play, GI_RUPEE_HUGE, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_GOLD, 500.0f, 100.0f);
         this->unk310 = 2;
     } else {
-        Actor_OfferGetItem(&this->actor, play, GI_MASK_ROMANI, 500.0f, 100.0f);
+        Actor_OfferGetItem(&this->actor, play, GI_MM_MASK_ROMANI, 500.0f, 100.0f);
         this->unk310 = 1;
     }
 }

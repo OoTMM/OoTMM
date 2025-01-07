@@ -292,11 +292,11 @@ void EnItem00_Init(Actor* thisx, PlayState* play) {
             break;
 
         case ITEM00_DEKU_NUTS_1:
-            getItemId = GI_DEKU_NUTS_1;
+            getItemId = GI_MM_NUT;
             break;
 
         case ITEM00_DEKU_NUTS_10:
-            getItemId = GI_DEKU_NUTS_10;
+            getItemId = GI_MM_NUTS_10;
             break;
 
         default:
@@ -574,15 +574,15 @@ void EnItem00_Update(Actor* thisx, PlayState* play) {
             break;
 
         case ITEM00_DEKU_STICK:
-            getItemId = GI_DEKU_STICKS_1;
+            getItemId = GI_MM_STICK;
             break;
 
         case ITEM00_DEKU_NUTS_1:
-            getItemId = GI_DEKU_NUTS_1;
+            getItemId = GI_MM_NUT;
             break;
 
         case ITEM00_DEKU_NUTS_10:
-            getItemId = GI_DEKU_NUTS_10;
+            getItemId = GI_MM_NUTS_10;
             break;
 
         case ITEM00_RECOVERY_HEART:
@@ -616,15 +616,15 @@ void EnItem00_Update(Actor* thisx, PlayState* play) {
             break;
 
         case ITEM00_SMALL_KEY:
-            getItemId = GI_KEY_SMALL;
+            getItemId = GI_MM_SMALL_KEY;
             break;
 
         case ITEM00_HEART_PIECE:
-            getItemId = GI_HEART_PIECE;
+            getItemId = GI_MM_HEART_PIECE;
             break;
 
         case ITEM00_HEART_CONTAINER:
-            getItemId = GI_HEART_CONTAINER;
+            getItemId = GI_MM_HEART_CONTAINER;
             break;
 
         case ITEM00_MAGIC_JAR_BIG:
@@ -636,15 +636,15 @@ void EnItem00_Update(Actor* thisx, PlayState* play) {
             break;
 
         case ITEM00_SHIELD_HERO:
-            getItemId = GI_SHIELD_HERO;
+            getItemId = GI_MM_SHIELD_HERO;
             break;
 
         case ITEM00_MAP:
-            getItemId = GI_MAP;
+            getItemId = GI_MM_MAP;
             break;
 
         case ITEM00_COMPASS:
-            getItemId = GI_COMPASS;
+            getItemId = GI_MM_COMPASS;
             break;
 
         default:
