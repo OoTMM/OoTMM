@@ -224,7 +224,7 @@ s16 EnGo_UpdateTalkState(PlayState* play, Actor* thisx) {
                     talkState = NPC_TALK_STATE_IDLE;
                     break;
                 case 0x3036:
-                    Actor_OfferGetItem(thisx, play, GI_TUNIC_GORON, xzRange, yRange);
+                    Actor_OfferGetItem(thisx, play, GI_OOT_TUNIC_GORON, xzRange, yRange);
                     SET_INFTABLE(INFTABLE_10D); // EnGo exclusive flag
                     talkState = NPC_TALK_STATE_ACTION;
                     break;
@@ -962,19 +962,19 @@ void EnGo_GetItem(EnGo* this, PlayState* play) {
         this->unk_20C = 0;
         if (PARAMS_GET_NOSHIFT(this->actor.params, 4, 4) == 0x90) {
             if (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_CLAIM_CHECK) {
-                getItemId = GI_SWORD_BIGGORON;
+                getItemId = GI_OOT_SWORD_BIGGORON;
                 this->unk_20C = 1;
             }
             if (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_EYE_DROPS) {
-                getItemId = GI_CLAIM_CHECK;
+                getItemId = GI_OOT_CLAIM_CHECK;
             }
             if (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_BROKEN_GORONS_SWORD) {
-                getItemId = GI_PRESCRIPTION;
+                getItemId = GI_OOT_PRESCRIPTION;
             }
         }
 
         if (PARAMS_GET_NOSHIFT(this->actor.params, 4, 4) == 0) {
-            getItemId = GI_TUNIC_GORON;
+            getItemId = GI_OOT_TUNIC_GORON;
         }
 
         yDist = fabsf(this->actor.yDistToPlayer) + 1.0f;

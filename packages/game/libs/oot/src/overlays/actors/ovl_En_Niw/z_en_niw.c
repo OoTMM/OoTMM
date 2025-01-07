@@ -466,8 +466,8 @@ void func_80AB6450(EnNiw* this, PlayState* play) {
         this->actor.speed = 0.0f;
         this->actionFunc = func_80AB6BF8;
     } else {
-        // GI_NONE in this case allows the player to lift the actor
-        Actor_OfferGetItem(&this->actor, play, GI_NONE, 25.0f, 10.0f);
+        //GI_NONE in this case allows the player to lift the actor
+        Actor_OfferGetItem(&this->actor, play,GI_NONE, 25.0f, 10.0f);
         func_80AB5BF8(this, play, 1);
     }
 }

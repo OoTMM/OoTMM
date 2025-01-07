@@ -47,7 +47,7 @@ static Vec3f sRightChestPos[] = {
 };
 
 static s32 sLoserGetItemIds[] = {
-    GI_NONE, GI_RUPEE_GREEN_LOSE, GI_RUPEE_GREEN_LOSE, GI_RUPEE_BLUE_LOSE, GI_RUPEE_BLUE_LOSE, GI_RUPEE_RED_LOSE,
+    GI_NONE, GI_OOT_TC_RUPEE_GREEN, GI_OOT_TC_RUPEE_GREEN, GI_OOT_TC_RUPEE_BLUE, GI_OOT_TC_RUPEE_BLUE, GI_OOT_TC_RUPEE_RED,
 };
 
 static s32 sItemEtcTypes[] = {
@@ -128,7 +128,7 @@ void EnChanger_Init(Actor* thisx, PlayState* play2) {
     leftChestParams |= minigameRoomNum;
     rightChestParams = minigameRoomNum | 0x4E21;
     this->rightChestNum = minigameRoomNum | 1;
-    this->rightChestGetItemId = GI_DOOR_KEY;
+    this->rightChestGetItemId = GI_OOT_TC_SMALL_KEY;
     rightChestItem = ITEM_ETC_KEY_SMALL_CHEST_GAME;
 
     if (Rand_ZeroFloat(1.99f) < 1.0f) {
@@ -139,7 +139,7 @@ void EnChanger_Init(Actor* thisx, PlayState* play2) {
         leftChestParams = minigameRoomNum | 0x4E21;
         rightChestParams |= minigameRoomNum;
         this->leftChestNum = minigameRoomNum | 1;
-        this->leftChestGetItemId = GI_DOOR_KEY;
+        this->leftChestGetItemId = GI_OOT_TC_SMALL_KEY;
         leftChestItem = ITEM_ETC_KEY_SMALL_CHEST_GAME;
     }
 
@@ -234,13 +234,13 @@ void EnChanger_OpenChests(EnChanger* this, PlayState* play) {
                 yPos = right->dyna.actor.world.pos.y;
                 zPos = right->dyna.actor.world.pos.z;
 
-                if (this->rightChestGetItemId == GI_DOOR_KEY) {
+                if (this->rightChestGetItemId == GI_OOT_TC_SMALL_KEY) {
                     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_EX_ITEM, xPos, yPos, zPos, 0, 0, 0,
                                 EXITEM_SMALL_KEY_CHEST);
                     Flags_SetSwitch(play, 0x32);
                 } else {
                     unopenedChestItemType =
-                        (s16)(this->rightChestGetItemId - GI_RUPEE_GREEN_LOSE) + EXITEM_GREEN_RUPEE_CHEST;
+                        (s16)(this->rightChestGetItemId - GI_OOT_TC_RUPEE_GREEN) + EXITEM_GREEN_RUPEE_CHEST;
                     // "Open right treasure (chest)"
                     PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 右宝開く ☆☆☆☆☆ %d\n" VT_RST, unopenedChestItemType);
                     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_EX_ITEM, xPos, yPos, zPos, 0, 0, 0,
@@ -252,13 +252,13 @@ void EnChanger_OpenChests(EnChanger* this, PlayState* play) {
                 yPos = left->dyna.actor.world.pos.y;
                 zPos = left->dyna.actor.world.pos.z;
 
-                if (this->leftChestGetItemId == GI_DOOR_KEY) {
+                if (this->leftChestGetItemId == GI_OOT_SMALL_KEY) {
                     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_EX_ITEM, xPos, yPos, zPos, 0, 0, 0,
                                 EXITEM_SMALL_KEY_CHEST);
                     Flags_SetSwitch(play, 0x32);
                 } else {
                     unopenedChestItemType =
-                        (s16)(this->leftChestGetItemId - GI_RUPEE_GREEN_LOSE) + EXITEM_GREEN_RUPEE_CHEST;
+                        (s16)(this->leftChestGetItemId - GI_OOT_TC_RUPEE_GREEN) + EXITEM_GREEN_RUPEE_CHEST;
                     // "Open left treasure (chest)"
                     PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 左宝開く ☆☆☆☆☆ %d\n" VT_RST, unopenedChestItemType);
                     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_EX_ITEM, xPos, yPos, zPos, 0, 0, 0,

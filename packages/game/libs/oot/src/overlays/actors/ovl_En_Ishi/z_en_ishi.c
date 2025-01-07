@@ -368,11 +368,11 @@ void EnIshi_Wait(EnIshi* this, PlayState* play) {
         if (this->actor.xzDistToPlayer < 400.0f) {
             CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
             if (this->actor.xzDistToPlayer < 90.0f) {
-                // GI_NONE in these cases allows the player to lift the actor
+                //GI_NONE in these cases allows the player to lift the actor
                 if (type == ROCK_LARGE) {
-                    Actor_OfferGetItem(&this->actor, play, GI_NONE, 80.0f, 20.0f);
+                    Actor_OfferGetItem(&this->actor, play,GI_NONE, 80.0f, 20.0f);
                 } else {
-                    Actor_OfferGetItem(&this->actor, play, GI_NONE, 50.0f, 10.0f);
+                    Actor_OfferGetItem(&this->actor, play,GI_NONE, 50.0f, 10.0f);
                 }
             }
         }

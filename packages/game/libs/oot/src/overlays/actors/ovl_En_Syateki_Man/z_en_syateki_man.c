@@ -342,32 +342,23 @@ void EnSyatekiMan_EndGame(EnSyatekiMan* this, PlayState* play) {
                     this->actor.parent = NULL;
                     if (!LINK_IS_ADULT) {
                         if (!GET_ITEMGETINF(ITEMGETINF_0D)) {
-                            PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ Equip_Pachinko ☆☆☆☆☆ %d\n" VT_RST,
-                                   CUR_UPG_VALUE(UPG_BULLET_BAG));
-                            if (CUR_UPG_VALUE(UPG_BULLET_BAG) == 1) {
-                                this->getItemId = GI_BULLET_BAG_40;
-                            } else {
-                                this->getItemId = GI_BULLET_BAG_50;
-                            }
+                            this->getItemId = GI_OOT_SLINGSHOT;
                         } else {
-                            this->getItemId = GI_RUPEE_PURPLE;
+                            this->getItemId = GI_OOT_RUPEE_PURPLE;
                         }
                     } else {
                         if (!GET_ITEMGETINF(ITEMGETINF_0E)) {
                             PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ Equip_Bow ☆☆☆☆☆ %d\n" VT_RST, CUR_UPG_VALUE(UPG_QUIVER));
                             switch (CUR_UPG_VALUE(UPG_QUIVER)) {
                                 case 0:
-                                    this->getItemId = GI_RUPEE_PURPLE;
+                                    this->getItemId = GI_OOT_RUPEE_PURPLE;
                                     break;
-                                case 1:
-                                    this->getItemId = GI_QUIVER_40;
-                                    break;
-                                case 2:
-                                    this->getItemId = GI_QUIVER_50;
+                                default:
+                                    this->getItemId = GI_OOT_BOW;
                                     break;
                             }
                         } else {
-                            this->getItemId = GI_RUPEE_PURPLE;
+                            this->getItemId = GI_OOT_RUPEE_PURPLE;
                         }
                     }
                     Actor_OfferGetItem(&this->actor, play, this->getItemId, 2000.0f, 1000.0f);
@@ -410,7 +401,7 @@ void EnSyatekiMan_FinishPrize(EnSyatekiMan* this, PlayState* play) {
         PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 正常終了 ☆☆☆☆☆ \n" VT_RST);
         if (!LINK_IS_ADULT) {
             SET_ITEMGETINF(ITEMGETINF_0D);
-        } else if ((this->getItemId == GI_QUIVER_40) || (this->getItemId == GI_QUIVER_50)) {
+        } else if (this->getItemId == GI_OOT_BOW) {
             SET_ITEMGETINF(ITEMGETINF_0E);
         }
         this->gameResult = SYATEKI_RESULT_NONE;

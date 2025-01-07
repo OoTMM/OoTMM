@@ -494,9 +494,9 @@ void EnKz_SetupGetItem(EnKz* this, PlayState* play) {
         this->actionFunc = EnKz_StartTimer;
     } else {
 #if OOT_VERSION < PAL_1_0
-        getItemId = func_8002F368(play) == EXCH_ITEM_PRESCRIPTION ? GI_EYEBALL_FROG : GI_TUNIC_ZORA;
+        getItemId = func_8002F368(play) == EXCH_ITEM_PRESCRIPTION ?GI_OOT_EYEBALL_FROG :GI_OOT_TUNIC_ZORA;
 #else
-        getItemId = this->isTrading == true ? GI_EYEBALL_FROG : GI_TUNIC_ZORA;
+        getItemId = this->isTrading == true ?GI_OOT_EYEBALL_FROG :GI_OOT_TUNIC_ZORA;
 #endif
         yRange = fabsf(this->actor.yDistToPlayer) + 1.0f;
         xzRange = this->actor.xzDistToPlayer + 1.0f;

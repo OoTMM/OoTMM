@@ -93,19 +93,19 @@ static char* sItemDebugTxt[] = {
 };
 #endif
 
-static DnsItemEntry sItemDekuNuts = { 20, 5, GI_DEKU_NUTS_5_2, EnDns_CanBuyDekuNuts, EnDns_PayForDekuNuts };
-static DnsItemEntry sItemDekuSticks = { 15, 1, GI_DEKU_STICKS_1, EnDns_CanBuyDekuSticks, EnDns_PayPrice };
-static DnsItemEntry sItemHeartPiece = { 10, 1, GI_HEART_PIECE, EnDns_CanBuyPrice, EnDns_PayForHeartPiece };
-static DnsItemEntry sItemDekuSeeds = { 40, 30, GI_DEKU_SEEDS_30, EnDns_CanBuyDekuSeeds, EnDns_PayPrice };
-static DnsItemEntry sItemDekuShield = { 50, 1, GI_SHIELD_DEKU, EnDns_CanBuyDekuShield, EnDns_PayPrice };
-static DnsItemEntry sItemBombs = { 40, 5, GI_BOMBS_5, EnDns_CanBuyBombs, EnDns_PayForBombs };
-static DnsItemEntry sItemArrows = { 70, 20, GI_ARROWS_30, EnDns_CanBuyArrows, EnDns_PayForArrows };
-static DnsItemEntry sItemRedPotion = { 40, 1, GI_BOTTLE_POTION_RED, EnDns_CanBuyBottle, EnDns_PayPrice };
-static DnsItemEntry sItemGreenPotion = { 40, 1, GI_BOTTLE_POTION_GREEN, EnDns_CanBuyBottle, EnDns_PayPrice };
+static DnsItemEntry sItemDekuNuts = { 20, 5, GI_OOT_NUTS_5, EnDns_CanBuyDekuNuts, EnDns_PayForDekuNuts };
+static DnsItemEntry sItemDekuSticks = { 15, 1, GI_OOT_STICK, EnDns_CanBuyDekuSticks, EnDns_PayPrice };
+static DnsItemEntry sItemHeartPiece = { 10, 1, GI_OOT_HEART_PIECE, EnDns_CanBuyPrice, EnDns_PayForHeartPiece };
+static DnsItemEntry sItemDekuSeeds = { 40, 30, GI_OOT_DEKU_SEEDS_30, EnDns_CanBuyDekuSeeds, EnDns_PayPrice };
+static DnsItemEntry sItemDekuShield = { 50, 1, GI_OOT_SHIELD_DEKU, EnDns_CanBuyDekuShield, EnDns_PayPrice };
+static DnsItemEntry sItemBombs = { 40, 5, GI_OOT_BOMBS_5, EnDns_CanBuyBombs, EnDns_PayForBombs };
+static DnsItemEntry sItemArrows = { 70, 20, GI_OOT_ARROWS_30, EnDns_CanBuyArrows, EnDns_PayForArrows };
+static DnsItemEntry sItemRedPotion = { 40, 1, GI_OOT_POTION_RED, EnDns_CanBuyBottle, EnDns_PayPrice };
+static DnsItemEntry sItemGreenPotion = { 40, 1, GI_OOT_POTION_GREEN, EnDns_CanBuyBottle, EnDns_PayPrice };
 
-static DnsItemEntry sItemDekuStickUpgrade = { 40, 1, GI_DEKU_STICK_UPGRADE_20, EnDns_CanBuyPrice,
+static DnsItemEntry sItemDekuStickUpgrade = { 40, 1, GI_OOT_STICK_UPGRADE, EnDns_CanBuyPrice,
                                               EnDns_PayForDekuStickUpgrade };
-static DnsItemEntry sItemDekuNutUpgrade = { 40, 1, GI_DEKU_NUT_UPGRADE_30, EnDns_CanBuyPrice,
+static DnsItemEntry sItemDekuNutUpgrade = { 40, 1, GI_OOT_NUT_UPGRADE, EnDns_CanBuyPrice,
                                             EnDns_PayForDekuNutUpgrade };
 
 static DnsItemEntry* sItemEntries[] = {
@@ -394,17 +394,9 @@ void EnDns_Talk(EnDns* this, PlayState* play) {
 
 void EnDns_OfferSaleItem(EnDns* this, PlayState* play) {
     if (DNS_GET_TYPE(&this->actor) == DNS_TYPE_DEKU_STICK_UPGRADE) {
-        if (CUR_UPG_VALUE(UPG_DEKU_STICKS) < 2) {
-            Actor_OfferGetItem(&this->actor, play, GI_DEKU_STICK_UPGRADE_20, 130.0f, 100.0f);
-        } else {
-            Actor_OfferGetItem(&this->actor, play, GI_DEKU_STICK_UPGRADE_30, 130.0f, 100.0f);
-        }
+        Actor_OfferGetItem(&this->actor, play, GI_OOT_STICK_UPGRADE, 130.0f, 100.0f);
     } else if (DNS_GET_TYPE(&this->actor) == DNS_TYPE_DEKU_NUT_UPGRADE) {
-        if (CUR_UPG_VALUE(UPG_DEKU_NUTS) < 2) {
-            Actor_OfferGetItem(&this->actor, play, GI_DEKU_NUT_UPGRADE_30, 130.0f, 100.0f);
-        } else {
-            Actor_OfferGetItem(&this->actor, play, GI_DEKU_NUT_UPGRADE_40, 130.0f, 100.0f);
-        }
+        Actor_OfferGetItem(&this->actor, play, GI_OOT_NUT_UPGRADE, 130.0f, 100.0f);
     } else {
         Actor_OfferGetItem(&this->actor, play, this->dnsItemEntry->getItemId, 130.0f, 100.0f);
     }

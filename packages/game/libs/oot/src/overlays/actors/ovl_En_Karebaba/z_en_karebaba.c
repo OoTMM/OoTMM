@@ -362,7 +362,7 @@ void EnKarebaba_DeadItemDrop(EnKarebaba* this, PlayState* play) {
     if (Actor_HasParent(&this->actor, play) || this->actor.params == 0) {
         EnKarebaba_SetupDead(this);
     } else {
-        Actor_OfferGetItemNearby(&this->actor, play, GI_DEKU_STICKS_1);
+        Actor_OfferGetItemNearby(&this->actor, play, GI_OOT_STICK);
     }
 }
 

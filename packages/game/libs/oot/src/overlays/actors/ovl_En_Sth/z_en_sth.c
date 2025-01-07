@@ -78,7 +78,7 @@ static u16 sEventFlags[6] = {
 };
 
 static s16 sGetItemIds[6] = {
-    GI_RUPEE_GOLD, GI_WALLET_ADULT, GI_STONE_OF_AGONY, GI_WALLET_GIANT, GI_BOMBCHUS_10, GI_HEART_PIECE,
+   GI_OOT_RUPEE_HUGE, GI_OOT_WALLET2, GI_OOT_STONE_OF_AGONY, GI_OOT_WALLET2, GI_OOT_BOMBCHU_10, GI_OOT_HEART_PIECE,
 };
 
 static Vec3f D_80B0B49C = { 700.0f, 400.0f, 0.0f };
@@ -233,22 +233,6 @@ void EnSth_ParentRewardObtainedWait(EnSth* this, PlayState* play) {
 
 void EnSth_GivePlayerItem(EnSth* this, PlayState* play) {
     u16 getItemId = sGetItemIds[this->actor.params];
-
-    switch (this->actor.params) {
-        case 1:
-        case 3:
-            switch (CUR_UPG_VALUE(UPG_WALLET)) {
-                case 0:
-                    getItemId = GI_WALLET_ADULT;
-                    break;
-
-                case 1:
-                    getItemId = GI_WALLET_GIANT;
-                    break;
-            }
-            break;
-    }
-
     Actor_OfferGetItem(&this->actor, play, getItemId, 10000.0f, 50.0f);
 }
 
