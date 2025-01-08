@@ -1,7 +1,7 @@
 #ifndef Z64ITEM_H
 #define Z64ITEM_H
 
-#include <combo/gi.h>
+#include <combo/item.h>
 
 // Note that z_kaleido_scope.c assumes that the dimensions and texture format here also matches the dimensions and
 // texture format for MAP_NAME_TEX1_*
@@ -124,34 +124,6 @@ typedef enum DungeonItem {
     /* 0x01 */ DUNGEON_COMPASS,
     /* 0x02 */ DUNGEON_MAP
 } DungeonItem;
-
-typedef enum InventorySlot {
-    /* 0x00 */ SLOT_DEKU_STICK,
-    /* 0x01 */ SLOT_DEKU_NUT,
-    /* 0x02 */ SLOT_BOMB,
-    /* 0x03 */ SLOT_BOW,
-    /* 0x04 */ SLOT_ARROW_FIRE,
-    /* 0x05 */ SLOT_DINS_FIRE,
-    /* 0x06 */ SLOT_SLINGSHOT,
-    /* 0x07 */ SLOT_OCARINA,
-    /* 0x08 */ SLOT_BOMBCHU,
-    /* 0x09 */ SLOT_HOOKSHOT,
-    /* 0x0A */ SLOT_ARROW_ICE,
-    /* 0x0B */ SLOT_FARORES_WIND,
-    /* 0x0C */ SLOT_BOOMERANG,
-    /* 0x0D */ SLOT_LENS_OF_TRUTH,
-    /* 0x0E */ SLOT_MAGIC_BEAN,
-    /* 0x0F */ SLOT_HAMMER,
-    /* 0x10 */ SLOT_ARROW_LIGHT,
-    /* 0x11 */ SLOT_NAYRUS_LOVE,
-    /* 0x12 */ SLOT_BOTTLE_1,
-    /* 0x13 */ SLOT_BOTTLE_2,
-    /* 0x14 */ SLOT_BOTTLE_3,
-    /* 0x15 */ SLOT_BOTTLE_4,
-    /* 0x16 */ SLOT_TRADE_ADULT,
-    /* 0x17 */ SLOT_TRADE_CHILD,
-    /* 0xFF */ SLOT_NONE = 0xFF
-} InventorySlot;
 
 typedef enum ItemID {
     /* 0x00 */ ITEM_DEKU_STICK,

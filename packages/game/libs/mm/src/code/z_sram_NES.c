@@ -248,30 +248,30 @@ u16 sPersistentCycleWeekEventRegs[ARRAY_COUNT(gMmSave.saveInfo.weekEventReg)] = 
 };
 
 u8 gAmmoItems[ITEM_NUM_SLOTS] = {
-    ITEM_NONE,           // SLOT_OCARINA
-    ITEM_BOW,            // SLOT_BOW
-    ITEM_NONE,           // SLOT_ARROW_FIRE
-    ITEM_NONE,           // SLOT_ARROW_ICE
-    ITEM_NONE,           // SLOT_ARROW_LIGHT
-    ITEM_NONE,           // SLOT_TRADE_DEED
-    ITEM_BOMB,           // SLOT_BOMB
-    ITEM_BOMBCHU,        // SLOT_BOMBCHU
-    ITEM_DEKU_STICK,     // SLOT_DEKU_STICK
-    ITEM_DEKU_NUT,       // SLOT_DEKU_NUT
-    ITEM_MAGIC_BEANS,    // SLOT_MAGIC_BEANS
-    ITEM_NONE,           // SLOT_TRADE_KEY_MAMA
-    ITEM_POWDER_KEG,     // SLOT_POWDER_KEG
-    ITEM_PICTOGRAPH_BOX, // SLOT_PICTOGRAPH_BOX
-    ITEM_NONE,           // SLOT_LENS_OF_TRUTH
-    ITEM_NONE,           // SLOT_HOOKSHOT
-    ITEM_NONE,           // SLOT_SWORD_GREAT_FAIRY
-    ITEM_NONE,           // SLOT_TRADE_COUPLE
-    ITEM_NONE,           // SLOT_BOTTLE_1
-    ITEM_NONE,           // SLOT_BOTTLE_2
-    ITEM_NONE,           // SLOT_BOTTLE_3
-    ITEM_NONE,           // SLOT_BOTTLE_4
-    ITEM_NONE,           // SLOT_BOTTLE_5
-    ITEM_NONE,           // SLOT_BOTTLE_6
+    ITEM_NONE,           // SLOT_MM_OCARINA
+    ITEM_BOW,            // SLOT_MM_BOW
+    ITEM_NONE,           // SLOT_MM_ARROW_FIRE
+    ITEM_NONE,           // SLOT_MM_ARROW_ICE
+    ITEM_NONE,           // SLOT_MM_ARROW_LIGHT
+    ITEM_NONE,           // SLOT_MM_TRADE_DEED
+    ITEM_BOMB,           // SLOT_MM_BOMB
+    ITEM_BOMBCHU,        // SLOT_MM_BOMBCHU
+    ITEM_DEKU_STICK,     // SLOT_MM_DEKU_STICK
+    ITEM_DEKU_NUT,       // SLOT_MM_DEKU_NUT
+    ITEM_MAGIC_BEANS,    // SLOT_MM_MAGIC_BEANS
+    ITEM_NONE,           // SLOT_MM_TRADE_KEY_MAMA
+    ITEM_POWDER_KEG,     // SLOT_MM_POWDER_KEG
+    ITEM_PICTOGRAPH_BOX, // SLOT_MM_PICTOGRAPH_BOX
+    ITEM_NONE,           // SLOT_MM_LENS_OF_TRUTH
+    ITEM_NONE,           // SLOT_MM_HOOKSHOT
+    ITEM_NONE,           // SLOT_MM_SWORD_GREAT_FAIRY
+    ITEM_NONE,           // SLOT_MM_TRADE_COUPLE
+    ITEM_NONE,           // SLOT_MM_BOTTLE_1
+    ITEM_NONE,           // SLOT_MM_BOTTLE_2
+    ITEM_NONE,           // SLOT_MM_BOTTLE_3
+    ITEM_NONE,           // SLOT_MM_BOTTLE_4
+    ITEM_NONE,           // SLOT_MM_BOTTLE_5
+    ITEM_NONE,           // SLOT_MM_BOTTLE_6
 };
 
 // Bit Flag array in which sBitFlags8[n] is (1 << n)
@@ -422,14 +422,14 @@ void Sram_SaveEndOfCycle(PlayState* play) {
 
     for (i = 0; i < ITEM_NUM_SLOTS; i++) {
         if (gAmmoItems[i] != ITEM_NONE) {
-            if ((gMmSave.saveInfo.inventory.items[i] != ITEM_NONE) && (i != SLOT_PICTOGRAPH_BOX)) {
+            if ((gMmSave.saveInfo.inventory.items[i] != ITEM_NONE) && (i != SLOT_MM_PICTOGRAPH_BOX)) {
                 item = gMmSave.saveInfo.inventory.items[i];
                 AMMO(item) = 0;
             }
         }
     }
 
-    for (i = SLOT_BOTTLE_1; i <= SLOT_BOTTLE_6; i++) {
+    for (i = SLOT_MM_BOTTLE_1; i <= SLOT_MM_BOTTLE_6; i++) {
         // Check for all bottled items
         if (gMmSave.saveInfo.inventory.items[i] >= ITEM_POTION_RED) {
             if (gMmSave.saveInfo.inventory.items[i] <= ITEM_OBABA_DRINK) {
@@ -497,9 +497,9 @@ void Sram_SaveEndOfCycle(PlayState* play) {
     SET_STOLEN_ITEM_1(STOLEN_ITEM_NONE);
     SET_STOLEN_ITEM_2(STOLEN_ITEM_NONE);
 
-    Inventory_DeleteItem(ITEM_OCARINA_FAIRY, SLOT_TRADE_DEED);
-    Inventory_DeleteItem(ITEM_SLINGSHOT, SLOT_TRADE_KEY_MAMA);
-    Inventory_DeleteItem(ITEM_LONGSHOT, SLOT_TRADE_COUPLE);
+    Inventory_DeleteItem(ITEM_OCARINA_FAIRY, SLOT_MM_TRADE_DEED);
+    Inventory_DeleteItem(ITEM_SLINGSHOT, SLOT_MM_TRADE_KEY_MAMA);
+    Inventory_DeleteItem(ITEM_LONGSHOT, SLOT_MM_TRADE_COUPLE);
 
     for (j = EQUIP_SLOT_C_LEFT; j <= EQUIP_SLOT_C_RIGHT; j++) {
         if ((GET_CUR_FORM_BTN_ITEM(j) >= ITEM_MOONS_TEAR) && (GET_CUR_FORM_BTN_ITEM(j) <= ITEM_PENDANT_OF_MEMORIES)) {

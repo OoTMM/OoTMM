@@ -1,7 +1,7 @@
 #ifndef Z64ITEM_H
 #define Z64ITEM_H
 
-#include <combo/gi.h>
+#include <combo/item.h>
 
 #define DROP_TABLE_SIZE 16
 #define DROP_TABLE_NUMBER 17
@@ -92,58 +92,6 @@ typedef enum {
     /*  7 */ DUNGEON_FLOOR_INDEX_1,
     /*  8 */ DUNGEON_FLOOR_INDEX_0 // Bottom Floor
 } DungeonItem;
-
-typedef enum {
-    /* 0x00 */ SLOT_OCARINA,
-    /* 0x01 */ SLOT_BOW,
-    /* 0x02 */ SLOT_ARROW_FIRE,
-    /* 0x03 */ SLOT_ARROW_ICE,
-    /* 0x04 */ SLOT_ARROW_LIGHT,
-    /* 0x05 */ SLOT_TRADE_DEED,
-    /* 0x06 */ SLOT_BOMB,
-    /* 0x07 */ SLOT_BOMBCHU,
-    /* 0x08 */ SLOT_DEKU_STICK,
-    /* 0x09 */ SLOT_DEKU_NUT,
-    /* 0x0A */ SLOT_MAGIC_BEANS,
-    /* 0x0B */ SLOT_TRADE_KEY_MAMA,
-    /* 0x0C */ SLOT_POWDER_KEG,
-    /* 0x0D */ SLOT_PICTOGRAPH_BOX,
-    /* 0x0E */ SLOT_LENS_OF_TRUTH,
-    /* 0x0F */ SLOT_HOOKSHOT,
-    /* 0x10 */ SLOT_SWORD_GREAT_FAIRY,
-    /* 0x11 */ SLOT_TRADE_COUPLE,
-    /* 0x12 */ SLOT_BOTTLE_1,
-    /* 0x13 */ SLOT_BOTTLE_2,
-    /* 0x14 */ SLOT_BOTTLE_3,
-    /* 0x15 */ SLOT_BOTTLE_4,
-    /* 0x16 */ SLOT_BOTTLE_5,
-    /* 0x17 */ SLOT_BOTTLE_6,
-    /* 0x18 */ SLOT_MASK_POSTMAN,
-    /* 0x19 */ SLOT_MASK_ALL_NIGHT,
-    /* 0x1A */ SLOT_MASK_BLAST,
-    /* 0x1B */ SLOT_MASK_STONE,
-    /* 0x1C */ SLOT_MASK_GREAT_FAIRY,
-    /* 0x1D */ SLOT_MASK_DEKU,
-    /* 0x1E */ SLOT_MASK_KEATON,
-    /* 0x1F */ SLOT_MASK_BREMEN,
-    /* 0x20 */ SLOT_MASK_BUNNY,
-    /* 0x21 */ SLOT_MASK_DON_GERO,
-    /* 0x22 */ SLOT_MASK_SCENTS,
-    /* 0x23 */ SLOT_MASK_GORON,
-    /* 0x24 */ SLOT_MASK_ROMANI,
-    /* 0x25 */ SLOT_MASK_CIRCUS_LEADER,
-    /* 0x26 */ SLOT_MASK_KAFEIS_MASK,
-    /* 0x27 */ SLOT_MASK_COUPLE,
-    /* 0x28 */ SLOT_MASK_TRUTH,
-    /* 0x29 */ SLOT_MASK_ZORA,
-    /* 0x2A */ SLOT_MASK_KAMARO,
-    /* 0x2B */ SLOT_MASK_GIBDO,
-    /* 0x2C */ SLOT_MASK_GARO,
-    /* 0x2D */ SLOT_MASK_CAPTAIN,
-    /* 0x2E */ SLOT_MASK_GIANT,
-    /* 0x2F */ SLOT_MASK_FIERCE_DEITY,
-    /* 0xFF */ SLOT_NONE = 0xFF
-} InventorySlot;
 
 typedef enum ItemId {
     /* 0x00 */ ITEM_OCARINA_OF_TIME,

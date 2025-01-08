@@ -500,7 +500,7 @@ void EnTest4_HandleEvents(EnTest4* this, PlayState* play) {
 
             if (CURRENT_DAY == 3) {
                 if ((this->nextBellTime == CLOCK_TIME(0, 0)) &&
-                    ((gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) ||
+                    ((gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) ||
                      (play->sceneId == SCENE_CLOCKTOWER))) {
                     // Initiate Clocktown day 3 midnight festival cutscene
                     s32 playerParams;

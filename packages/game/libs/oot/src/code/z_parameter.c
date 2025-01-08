@@ -676,7 +676,7 @@ void func_80083108(PlayState* play) {
 
                             Interface_LoadItemIcon1(play, 0);
                         } else {
-                            if (gOotSave.info.inventory.items[SLOT_BOW] == ITEM_NONE) {
+                            if (gOotSave.info.inventory.items[SLOT_OOT_BOW] == ITEM_NONE) {
                                 gOotSave.info.equips.buttonItems[0] = ITEM_NONE;
                             } else {
                                 Interface_LoadItemIcon1(play, 0);
@@ -794,7 +794,7 @@ void func_80083108(PlayState* play) {
                 if (player->stateFlags1 & PLAYER_STATE1_23) {
                     if ((gOotSave.info.equips.buttonItems[0] != ITEM_NONE) &&
                         (gOotSave.info.equips.buttonItems[0] != ITEM_BOW)) {
-                        if (gOotSave.info.inventory.items[SLOT_BOW] == ITEM_NONE) {
+                        if (gOotSave.info.inventory.items[SLOT_OOT_BOW] == ITEM_NONE) {
                             gOotSave.info.equips.buttonItems[0] = ITEM_NONE;
                         } else {
                             gOotSave.info.equips.buttonItems[0] = ITEM_BOW;
@@ -1201,18 +1201,18 @@ void Inventory_SwapAgeEquipment(void) {
         if (gOotSave.info.playerData.adultEquips.buttonItems[0] == ITEM_NONE) {
             gOotSave.info.equips.buttonItems[0] = ITEM_SWORD_MASTER;
 
-            if (gOotSave.info.inventory.items[SLOT_DEKU_NUT] != ITEM_NONE) {
+            if (gOotSave.info.inventory.items[SLOT_OOT_DEKU_NUT] != ITEM_NONE) {
                 gOotSave.info.equips.buttonItems[1] = ITEM_DEKU_NUT;
-                gOotSave.info.equips.cButtonSlots[0] = SLOT_DEKU_NUT;
+                gOotSave.info.equips.cButtonSlots[0] = SLOT_OOT_DEKU_NUT;
             } else {
                 gOotSave.info.equips.buttonItems[1] = gOotSave.info.equips.cButtonSlots[0] =
                     ITEM_NONE;
             }
 
             gOotSave.info.equips.buttonItems[2] = ITEM_BOMB;
-            gOotSave.info.equips.buttonItems[3] = gOotSave.info.inventory.items[SLOT_OCARINA];
-            gOotSave.info.equips.cButtonSlots[1] = SLOT_BOMB;
-            gOotSave.info.equips.cButtonSlots[2] = SLOT_OCARINA;
+            gOotSave.info.equips.buttonItems[3] = gOotSave.info.inventory.items[SLOT_OOT_OCARINA];
+            gOotSave.info.equips.cButtonSlots[1] = SLOT_OOT_BOMB;
+            gOotSave.info.equips.cButtonSlots[2] = SLOT_OOT_OCARINA;
             gOotSave.info.equips.equipment = (EQUIP_VALUE_SWORD_MASTER << (EQUIP_TYPE_SWORD * 4)) |
                                                       (EQUIP_VALUE_SHIELD_HYLIAN << (EQUIP_TYPE_SHIELD * 4)) |
                                                       (EQUIP_VALUE_TUNIC_KOKIRI << (EQUIP_TYPE_TUNIC * 4)) |
@@ -2028,7 +2028,7 @@ s32 Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem) {
 s32 Inventory_HasEmptyBottle(void) {
     s32 slot;
 
-    for (slot = SLOT_BOTTLE_1; slot <= SLOT_BOTTLE_4; slot++) {
+    for (slot = SLOT_OOT_BOTTLE_1; slot <= SLOT_OOT_BOTTLE_4; slot++) {
         if (gOotSave.info.inventory.items[slot] == ITEM_BOTTLE_EMPTY) {
             return true;
         }
@@ -2040,7 +2040,7 @@ s32 Inventory_HasEmptyBottle(void) {
 s32 Inventory_HasSpecificBottle(u8 bottleItem) {
     s32 slot;
 
-    for (slot = SLOT_BOTTLE_1; slot <= SLOT_BOTTLE_4; slot++) {
+    for (slot = SLOT_OOT_BOTTLE_1; slot <= SLOT_OOT_BOTTLE_4; slot++) {
         if (gOotSave.info.inventory.items[slot] == bottleItem) {
             return true;
         }

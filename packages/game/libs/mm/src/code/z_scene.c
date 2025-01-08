@@ -403,11 +403,6 @@ void Scene_CommandTimeSettings(PlayState* play, SceneCmd* cmd) {
         play->envCtx.sceneTimeSpeed = 0;
     }
 
-    // Increase time speed during first cycle
-    if ((gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) && (play->envCtx.sceneTimeSpeed != 0)) {
-        play->envCtx.sceneTimeSpeed = 5;
-    }
-
     if (gSaveContext.sunsSongState == SUNSSONG_INACTIVE) {
         R_TIME_SPEED = play->envCtx.sceneTimeSpeed;
     }

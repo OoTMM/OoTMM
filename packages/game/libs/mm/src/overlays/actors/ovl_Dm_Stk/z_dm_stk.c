@@ -1101,7 +1101,7 @@ void DmStk_Init(Actor* thisx, PlayState* play) {
                         R_MOON_CRASH_TIMER_X = 115;
                     }
 
-                    if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+                    if (gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) {
                         sCylinderInit.base.colMaterial = COL_MATERIAL_WOOD;
                         this->actionFunc = DmStk_ClockTower_StartIntroCutsceneVersion1;
                     } else {
@@ -1451,7 +1451,7 @@ void DmStk_HandleCutscene(DmStk* this, PlayState* play) {
 
                     case 22:
                         this->animIndex = SK_ANIM_PLAY_OCARINA_WHILE_FLOATING;
-                        if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+                        if (gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) {
                             this->handType = SK_HAND_TYPE_HOLDING_OCARINA;
                         }
                         break;
@@ -1463,7 +1463,7 @@ void DmStk_HandleCutscene(DmStk* this, PlayState* play) {
 
                     case 24:
                         this->animIndex = SK_ANIM_CALL_DOWN_MOON_START;
-                        if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+                        if (gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) {
                             this->handType = SK_HAND_TYPE_HOLDING_OCARINA;
                         }
                         break;
@@ -1474,14 +1474,14 @@ void DmStk_HandleCutscene(DmStk* this, PlayState* play) {
 
                     case 26:
                         this->animIndex = SK_ANIM_SMACK_FAIRY_START;
-                        if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+                        if (gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) {
                             this->handType = SK_HAND_TYPE_HOLDING_OCARINA;
                         }
                         break;
 
                     case 27:
                         this->animIndex = SK_ANIM_HIT_BY_BUBBLE;
-                        if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+                        if (gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) {
                             this->handType = SK_HAND_TYPE_HOLDING_OCARINA;
                         }
                         break;

@@ -1813,7 +1813,7 @@ void Interface_UpdateButtonsPart2(PlayState* play) {
     } else if (CHECK_EVENTINF(EVENTINF_34)) {
         // Deku playground minigame
         if (player->stateFlags3 & PLAYER_STATE3_1000000) {
-            if (gMmSave.saveInfo.inventory.items[SLOT_DEKU_NUT] == ITEM_DEKU_NUT) {
+            if (gMmSave.saveInfo.inventory.items[SLOT_MM_DEKU_NUT] == ITEM_DEKU_NUT) {
                 BUTTON_ITEM_EQUIP(CUR_FORM, EQUIP_SLOT_B) = ITEM_DEKU_NUT;
                 Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
             } else {
@@ -1841,7 +1841,7 @@ void Interface_UpdateButtonsPart2(PlayState* play) {
         }
     } else if (player->stateFlags3 & PLAYER_STATE3_1000000) {
         // Nuts on B (from flying as Deku Link)
-        if (gMmSave.saveInfo.inventory.items[SLOT_DEKU_NUT] == ITEM_DEKU_NUT) {
+        if (gMmSave.saveInfo.inventory.items[SLOT_MM_DEKU_NUT] == ITEM_DEKU_NUT) {
             if (BUTTON_ITEM_EQUIP(CUR_FORM, EQUIP_SLOT_B) != ITEM_DEKU_NUT) {
                 BUTTON_ITEM_EQUIP(CUR_FORM, EQUIP_SLOT_B) = ITEM_DEKU_NUT;
                 Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
@@ -2257,7 +2257,7 @@ void Interface_UpdateButtonsPart1(PlayState* play) {
 
                             if (play->bButtonAmmoPlusOne >= 2) {
                                 Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
-                            } else if (gMmSave.saveInfo.inventory.items[SLOT_BOW] == ITEM_NONE) {
+                            } else if (gMmSave.saveInfo.inventory.items[SLOT_MM_BOW] == ITEM_NONE) {
                                 BUTTON_ITEM_EQUIP(CUR_FORM, EQUIP_SLOT_B) = ITEM_NONE;
                             } else {
                                 Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
@@ -2314,7 +2314,7 @@ void Interface_UpdateButtonsPart1(PlayState* play) {
 
                 if (play->bButtonAmmoPlusOne >= 2) {
                     Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
-                } else if (gMmSave.saveInfo.inventory.items[SLOT_BOW] == ITEM_NONE) {
+                } else if (gMmSave.saveInfo.inventory.items[SLOT_MM_BOW] == ITEM_NONE) {
                     BUTTON_ITEM_EQUIP(CUR_FORM, EQUIP_SLOT_B) = ITEM_NONE;
                 } else {
                     Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
@@ -2764,7 +2764,7 @@ u8 Item_Give(PlayState* play, u8 item) {
         return ITEM_NONE;
 
     } else if ((item >= ITEM_BOMBS_5) && (item <= ITEM_BOMBS_30)) {
-        if (gMmSave.saveInfo.inventory.items[SLOT_BOMB] != ITEM_BOMB) {
+        if (gMmSave.saveInfo.inventory.items[SLOT_MM_BOMB] != ITEM_BOMB) {
             INV_CONTENT(ITEM_BOMB) = ITEM_BOMB;
             AMMO(ITEM_BOMB) += sAmmoRefillCounts[item - ITEM_BOMBS_5];
             return ITEM_NONE;
@@ -2787,7 +2787,7 @@ u8 Item_Give(PlayState* play, u8 item) {
         return ITEM_NONE;
 
     } else if ((item >= ITEM_BOMBCHUS_20) && (item <= ITEM_BOMBCHUS_5)) {
-        if (gMmSave.saveInfo.inventory.items[SLOT_BOMBCHU] != ITEM_BOMBCHU) {
+        if (gMmSave.saveInfo.inventory.items[SLOT_MM_BOMBCHU] != ITEM_BOMBCHU) {
             INV_CONTENT(ITEM_BOMBCHU) = ITEM_BOMBCHU;
             AMMO(ITEM_BOMBCHU) += sBombchuRefillCounts[item - ITEM_BOMBCHUS_20];
 
@@ -3196,7 +3196,7 @@ void Inventory_UpdateDeitySwordEquip(PlayState* play) {
 s32 Inventory_HasEmptyBottle(void) {
     s32 slot;
 
-    for (slot = SLOT_BOTTLE_1; slot <= SLOT_BOTTLE_6; slot++) {
+    for (slot = SLOT_MM_BOTTLE_1; slot <= SLOT_MM_BOTTLE_6; slot++) {
         if (gMmSave.saveInfo.inventory.items[slot] == ITEM_BOTTLE) {
             return true;
         }
@@ -3207,7 +3207,7 @@ s32 Inventory_HasEmptyBottle(void) {
 s32 Inventory_HasItemInBottle(u8 item) {
     s32 slot;
 
-    for (slot = SLOT_BOTTLE_1; slot <= SLOT_BOTTLE_6; slot++) {
+    for (slot = SLOT_MM_BOTTLE_1; slot <= SLOT_MM_BOTTLE_6; slot++) {
         if (gMmSave.saveInfo.inventory.items[slot] == item) {
             return true;
         }
@@ -3225,7 +3225,7 @@ void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 btn) {
     gSaveContext.buttonStatus[btn] = BTN_ENABLED;
 
     if (item == ITEM_HOT_SPRING_WATER) {
-        Interface_StartBottleTimer(60, GET_CUR_FORM_BTN_SLOT(btn) - SLOT_BOTTLE_1);
+        Interface_StartBottleTimer(60, GET_CUR_FORM_BTN_SLOT(btn) - SLOT_MM_BOTTLE_1);
     }
 }
 
@@ -6171,8 +6171,8 @@ void Interface_UpdateBottleTimers(PlayState* play) {
                     // Time has passed, and the time limit has been exceeded.
                     gSaveContext.bottleTimerCurTimes[i] = SECONDS_TO_TIMER(0);
 
-                    if (gMmSave.saveInfo.inventory.items[i + SLOT_BOTTLE_1] == ITEM_HOT_SPRING_WATER) {
-                        Inventory_UpdateItem(play, i + SLOT_BOTTLE_1, ITEM_SPRING_WATER);
+                    if (gMmSave.saveInfo.inventory.items[i + SLOT_MM_BOTTLE_1] == ITEM_HOT_SPRING_WATER) {
+                        Inventory_UpdateItem(play, i + SLOT_MM_BOTTLE_1, ITEM_SPRING_WATER);
                         Message_StartTextbox(play, 0xFA, NULL);
                     }
                     gSaveContext.bottleTimerStates[i] = BOTTLE_TIMER_STATE_OFF;

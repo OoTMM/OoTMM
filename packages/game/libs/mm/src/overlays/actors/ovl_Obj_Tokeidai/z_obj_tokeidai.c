@@ -624,7 +624,7 @@ void ObjTokeidai_StaircaseToRooftop_Idle(ObjTokeidai* this, PlayState* play) {
 }
 
 s32 ObjTokeidai_IsPostFirstCycleFinalHours(ObjTokeidai* this, PlayState* play) {
-    if (gMmSave.saveInfo.inventory.items[SLOT_OCARINA] == ITEM_NONE) {
+    if (gMmSave.saveInfo.inventory.items[SLOT_MM_OCARINA] == ITEM_NONE) {
         return false;
     }
     if ((CURRENT_DAY == 3) && (CURRENT_TIME < CLOCK_TIME(6, 0))) {

@@ -220,7 +220,7 @@ s32 func_80C10B0C(EnThiefbird* this, PlayState* play) {
     };
     s32 isItemFound = false;
     s32 phi_a3 = 0;
-    s32 slotId = SLOT_BOTTLE_1;
+    s32 slotId = SLOT_MM_BOTTLE_1;
     s32 itemId1;
     s16 itemId2 = 0;
 
@@ -266,7 +266,7 @@ s32 func_80C10B0C(EnThiefbird* this, PlayState* play) {
 
         itemId1 = phi_a3 + (ITEM_SWORD_KOKIRI - 1);
         if (phi_a3 == 4) {
-            Inventory_DeleteItem(ITEM_SWORD_GREAT_FAIRY, SLOT_SWORD_GREAT_FAIRY);
+            Inventory_DeleteItem(ITEM_SWORD_GREAT_FAIRY, SLOT_MM_SWORD_GREAT_FAIRY);
             this->unk_3E8 = gTakkuriStolenGreatFairysSwordDL;
             itemId1 = ITEM_SWORD_GREAT_FAIRY;
         } else {

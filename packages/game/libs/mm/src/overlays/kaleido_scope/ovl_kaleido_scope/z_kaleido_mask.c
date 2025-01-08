@@ -18,138 +18,138 @@ s16 sMaskEquipAnimTimer = 10;
 u8 gMaskPlayerFormSlotRestrictions[PLAYER_FORM_MAX][MASK_NUM_SLOTS] = {
     // PLAYER_FORM_FIERCE_DEITY
     {
-        false, // SLOT_MASK_POSTMAN
-        false, // SLOT_MASK_ALL_NIGHT
-        false, // SLOT_MASK_BLAST
-        false, // SLOT_MASK_STONE
-        false, // SLOT_MASK_GREAT_FAIRY
-        false, // SLOT_MASK_DEKU
-        false, // SLOT_MASK_KEATON
-        false, // SLOT_MASK_BREMEN
-        false, // SLOT_MASK_BUNNY
-        false, // SLOT_MASK_DON_GERO
-        false, // SLOT_MASK_SCENTS
-        false, // SLOT_MASK_GORON
-        false, // SLOT_MASK_ROMANI
-        false, // SLOT_MASK_CIRCUS_LEADER
-        false, // SLOT_MASK_KAFEIS_MASK
-        false, // SLOT_MASK_COUPLE
-        false, // SLOT_MASK_TRUTH
-        false, // SLOT_MASK_ZORA
-        false, // SLOT_MASK_KAMARO
-        false, // SLOT_MASK_GIBDO
-        false, // SLOT_MASK_GARO
-        false, // SLOT_MASK_CAPTAIN
-        false, // SLOT_MASK_GIANT
-        true,  // SLOT_MASK_FIERCE_DEITY
+        false, // SLOT_MM_MASK_POSTMAN
+        false, // SLOT_MM_MASK_ALL_NIGHT
+        false, // SLOT_MM_MASK_BLAST
+        false, // SLOT_MM_MASK_STONE
+        false, // SLOT_MM_MASK_GREAT_FAIRY
+        false, // SLOT_MM_MASK_DEKU
+        false, // SLOT_MM_MASK_KEATON
+        false, // SLOT_MM_MASK_BREMEN
+        false, // SLOT_MM_MASK_BUNNY
+        false, // SLOT_MM_MASK_DON_GERO
+        false, // SLOT_MM_MASK_SCENTS
+        false, // SLOT_MM_MASK_GORON
+        false, // SLOT_MM_MASK_ROMANI
+        false, // SLOT_MM_MASK_CIRCUS_LEADER
+        false, // SLOT_MM_MASK_KAFEIS_MASK
+        false, // SLOT_MM_MASK_COUPLE
+        false, // SLOT_MM_MASK_TRUTH
+        false, // SLOT_MM_MASK_ZORA
+        false, // SLOT_MM_MASK_KAMARO
+        false, // SLOT_MM_MASK_GIBDO
+        false, // SLOT_MM_MASK_GARO
+        false, // SLOT_MM_MASK_CAPTAIN
+        false, // SLOT_MM_MASK_GIANT
+        true,  // SLOT_MM_MASK_FIERCE_DEITY
     },
     // PLAYER_FORM_GORON
     {
-        false, // SLOT_MASK_POSTMAN
-        false, // SLOT_MASK_ALL_NIGHT
-        false, // SLOT_MASK_BLAST
-        false, // SLOT_MASK_STONE
-        false, // SLOT_MASK_GREAT_FAIRY
-        true,  // SLOT_MASK_DEKU
-        false, // SLOT_MASK_KEATON
-        false, // SLOT_MASK_BREMEN
-        false, // SLOT_MASK_BUNNY
-        false, // SLOT_MASK_DON_GERO
-        false, // SLOT_MASK_SCENTS
-        true,  // SLOT_MASK_GORON
-        false, // SLOT_MASK_ROMANI
-        false, // SLOT_MASK_CIRCUS_LEADER
-        false, // SLOT_MASK_KAFEIS_MASK
-        false, // SLOT_MASK_COUPLE
-        false, // SLOT_MASK_TRUTH
-        true,  // SLOT_MASK_ZORA
-        false, // SLOT_MASK_KAMARO
-        false, // SLOT_MASK_GIBDO
-        false, // SLOT_MASK_GARO
-        false, // SLOT_MASK_CAPTAIN
-        false, // SLOT_MASK_GIANT
-        true,  // SLOT_MASK_FIERCE_DEITY
+        false, // SLOT_MM_MASK_POSTMAN
+        false, // SLOT_MM_MASK_ALL_NIGHT
+        false, // SLOT_MM_MASK_BLAST
+        false, // SLOT_MM_MASK_STONE
+        false, // SLOT_MM_MASK_GREAT_FAIRY
+        true,  // SLOT_MM_MASK_DEKU
+        false, // SLOT_MM_MASK_KEATON
+        false, // SLOT_MM_MASK_BREMEN
+        false, // SLOT_MM_MASK_BUNNY
+        false, // SLOT_MM_MASK_DON_GERO
+        false, // SLOT_MM_MASK_SCENTS
+        true,  // SLOT_MM_MASK_GORON
+        false, // SLOT_MM_MASK_ROMANI
+        false, // SLOT_MM_MASK_CIRCUS_LEADER
+        false, // SLOT_MM_MASK_KAFEIS_MASK
+        false, // SLOT_MM_MASK_COUPLE
+        false, // SLOT_MM_MASK_TRUTH
+        true,  // SLOT_MM_MASK_ZORA
+        false, // SLOT_MM_MASK_KAMARO
+        false, // SLOT_MM_MASK_GIBDO
+        false, // SLOT_MM_MASK_GARO
+        false, // SLOT_MM_MASK_CAPTAIN
+        false, // SLOT_MM_MASK_GIANT
+        true,  // SLOT_MM_MASK_FIERCE_DEITY
     },
     // PLAYER_FORM_ZORA
     {
-        false, // SLOT_MASK_POSTMAN
-        false, // SLOT_MASK_ALL_NIGHT
-        false, // SLOT_MASK_BLAST
-        false, // SLOT_MASK_STONE
-        false, // SLOT_MASK_GREAT_FAIRY
-        true,  // SLOT_MASK_DEKU
-        false, // SLOT_MASK_KEATON
-        false, // SLOT_MASK_BREMEN
-        false, // SLOT_MASK_BUNNY
-        false, // SLOT_MASK_DON_GERO
-        false, // SLOT_MASK_SCENTS
-        true,  // SLOT_MASK_GORON
-        false, // SLOT_MASK_ROMANI
-        false, // SLOT_MASK_CIRCUS_LEADER
-        false, // SLOT_MASK_KAFEIS_MASK
-        false, // SLOT_MASK_COUPLE
-        false, // SLOT_MASK_TRUTH
-        true,  // SLOT_MASK_ZORA
-        false, // SLOT_MASK_KAMARO
-        false, // SLOT_MASK_GIBDO
-        false, // SLOT_MASK_GARO
-        false, // SLOT_MASK_CAPTAIN
-        false, // SLOT_MASK_GIANT
-        true,  // SLOT_MASK_FIERCE_DEITY
+        false, // SLOT_MM_MASK_POSTMAN
+        false, // SLOT_MM_MASK_ALL_NIGHT
+        false, // SLOT_MM_MASK_BLAST
+        false, // SLOT_MM_MASK_STONE
+        false, // SLOT_MM_MASK_GREAT_FAIRY
+        true,  // SLOT_MM_MASK_DEKU
+        false, // SLOT_MM_MASK_KEATON
+        false, // SLOT_MM_MASK_BREMEN
+        false, // SLOT_MM_MASK_BUNNY
+        false, // SLOT_MM_MASK_DON_GERO
+        false, // SLOT_MM_MASK_SCENTS
+        true,  // SLOT_MM_MASK_GORON
+        false, // SLOT_MM_MASK_ROMANI
+        false, // SLOT_MM_MASK_CIRCUS_LEADER
+        false, // SLOT_MM_MASK_KAFEIS_MASK
+        false, // SLOT_MM_MASK_COUPLE
+        false, // SLOT_MM_MASK_TRUTH
+        true,  // SLOT_MM_MASK_ZORA
+        false, // SLOT_MM_MASK_KAMARO
+        false, // SLOT_MM_MASK_GIBDO
+        false, // SLOT_MM_MASK_GARO
+        false, // SLOT_MM_MASK_CAPTAIN
+        false, // SLOT_MM_MASK_GIANT
+        true,  // SLOT_MM_MASK_FIERCE_DEITY
     },
     // PLAYER_FORM_DEKU
     {
-        false, // SLOT_MASK_POSTMAN
-        false, // SLOT_MASK_ALL_NIGHT
-        false, // SLOT_MASK_BLAST
-        false, // SLOT_MASK_STONE
-        false, // SLOT_MASK_GREAT_FAIRY
-        true,  // SLOT_MASK_DEKU
-        false, // SLOT_MASK_KEATON
-        false, // SLOT_MASK_BREMEN
-        false, // SLOT_MASK_BUNNY
-        false, // SLOT_MASK_DON_GERO
-        false, // SLOT_MASK_SCENTS
-        true,  // SLOT_MASK_GORON
-        false, // SLOT_MASK_ROMANI
-        false, // SLOT_MASK_CIRCUS_LEADER
-        false, // SLOT_MASK_KAFEIS_MASK
-        false, // SLOT_MASK_COUPLE
-        false, // SLOT_MASK_TRUTH
-        true,  // SLOT_MASK_ZORA
-        false, // SLOT_MASK_KAMARO
-        false, // SLOT_MASK_GIBDO
-        false, // SLOT_MASK_GARO
-        false, // SLOT_MASK_CAPTAIN
-        false, // SLOT_MASK_GIANT
-        true,  // SLOT_MASK_FIERCE_DEITY
+        false, // SLOT_MM_MASK_POSTMAN
+        false, // SLOT_MM_MASK_ALL_NIGHT
+        false, // SLOT_MM_MASK_BLAST
+        false, // SLOT_MM_MASK_STONE
+        false, // SLOT_MM_MASK_GREAT_FAIRY
+        true,  // SLOT_MM_MASK_DEKU
+        false, // SLOT_MM_MASK_KEATON
+        false, // SLOT_MM_MASK_BREMEN
+        false, // SLOT_MM_MASK_BUNNY
+        false, // SLOT_MM_MASK_DON_GERO
+        false, // SLOT_MM_MASK_SCENTS
+        true,  // SLOT_MM_MASK_GORON
+        false, // SLOT_MM_MASK_ROMANI
+        false, // SLOT_MM_MASK_CIRCUS_LEADER
+        false, // SLOT_MM_MASK_KAFEIS_MASK
+        false, // SLOT_MM_MASK_COUPLE
+        false, // SLOT_MM_MASK_TRUTH
+        true,  // SLOT_MM_MASK_ZORA
+        false, // SLOT_MM_MASK_KAMARO
+        false, // SLOT_MM_MASK_GIBDO
+        false, // SLOT_MM_MASK_GARO
+        false, // SLOT_MM_MASK_CAPTAIN
+        false, // SLOT_MM_MASK_GIANT
+        true,  // SLOT_MM_MASK_FIERCE_DEITY
     },
     // PLAYER_FORM_HUMAN
     {
-        true, // SLOT_MASK_POSTMAN
-        true, // SLOT_MASK_ALL_NIGHT
-        true, // SLOT_MASK_BLAST
-        true, // SLOT_MASK_STONE
-        true, // SLOT_MASK_GREAT_FAIRY
-        true, // SLOT_MASK_DEKU
-        true, // SLOT_MASK_KEATON
-        true, // SLOT_MASK_BREMEN
-        true, // SLOT_MASK_BUNNY
-        true, // SLOT_MASK_DON_GERO
-        true, // SLOT_MASK_SCENTS
-        true, // SLOT_MASK_GORON
-        true, // SLOT_MASK_ROMANI
-        true, // SLOT_MASK_CIRCUS_LEADER
-        true, // SLOT_MASK_KAFEIS_MASK
-        true, // SLOT_MASK_COUPLE
-        true, // SLOT_MASK_TRUTH
-        true, // SLOT_MASK_ZORA
-        true, // SLOT_MASK_KAMARO
-        true, // SLOT_MASK_GIBDO
-        true, // SLOT_MASK_GARO
-        true, // SLOT_MASK_CAPTAIN
-        true, // SLOT_MASK_GIANT
-        true, // SLOT_MASK_FIERCE_DEITY
+        true, // SLOT_MM_MASK_POSTMAN
+        true, // SLOT_MM_MASK_ALL_NIGHT
+        true, // SLOT_MM_MASK_BLAST
+        true, // SLOT_MM_MASK_STONE
+        true, // SLOT_MM_MASK_GREAT_FAIRY
+        true, // SLOT_MM_MASK_DEKU
+        true, // SLOT_MM_MASK_KEATON
+        true, // SLOT_MM_MASK_BREMEN
+        true, // SLOT_MM_MASK_BUNNY
+        true, // SLOT_MM_MASK_DON_GERO
+        true, // SLOT_MM_MASK_SCENTS
+        true, // SLOT_MM_MASK_GORON
+        true, // SLOT_MM_MASK_ROMANI
+        true, // SLOT_MM_MASK_CIRCUS_LEADER
+        true, // SLOT_MM_MASK_KAFEIS_MASK
+        true, // SLOT_MM_MASK_COUPLE
+        true, // SLOT_MM_MASK_TRUTH
+        true, // SLOT_MM_MASK_ZORA
+        true, // SLOT_MM_MASK_KAMARO
+        true, // SLOT_MM_MASK_GIBDO
+        true, // SLOT_MM_MASK_GARO
+        true, // SLOT_MM_MASK_CAPTAIN
+        true, // SLOT_MM_MASK_GIANT
+        true, // SLOT_MM_MASK_FIERCE_DEITY
     },
 };
 
@@ -159,30 +159,30 @@ u8 gMaskPlayerFormSlotRestrictions[PLAYER_FORM_MAX][MASK_NUM_SLOTS] = {
     (gSaveContext.masksGivenOnMoon[sMasksGivenOnMoonBits[maskIndex] >> 8] & (u8)sMasksGivenOnMoonBits[maskIndex])
 
 u16 sMasksGivenOnMoonBits[] = {
-    SET_MOON_MASK_BIT(1, 0x1),  // SLOT_MASK_POSTMAN
-    SET_MOON_MASK_BIT(0, 0x4),  // SLOT_MASK_ALL_NIGHT
-    SET_MOON_MASK_BIT(2, 0x2),  // SLOT_MASK_BLAST
-    SET_MOON_MASK_BIT(1, 0x80), // SLOT_MASK_STONE
-    SET_MOON_MASK_BIT(1, 0x4),  // SLOT_MASK_GREAT_FAIRY
-    SET_MOON_MASK_BIT(2, 0x10), // SLOT_MASK_DEKU
-    SET_MOON_MASK_BIT(0, 0x10), // SLOT_MASK_KEATON
-    SET_MOON_MASK_BIT(2, 0x1),  // SLOT_MASK_BREMEN
-    SET_MOON_MASK_BIT(0, 0x8),  // SLOT_MASK_BUNNY
-    SET_MOON_MASK_BIT(1, 0x10), // SLOT_MASK_DON_GERO
-    SET_MOON_MASK_BIT(2, 0x4),  // SLOT_MASK_SCENTS
-    SET_MOON_MASK_BIT(2, 0x20), // SLOT_MASK_GORON
-    SET_MOON_MASK_BIT(0, 0x40), // SLOT_MASK_ROMANI
-    SET_MOON_MASK_BIT(0, 0x80), // SLOT_MASK_CIRCUS_LEADER
-    SET_MOON_MASK_BIT(0, 0x2),  // SLOT_MASK_KAFEIS_MASK
-    SET_MOON_MASK_BIT(1, 0x2),  // SLOT_MASK_COUPLE
-    SET_MOON_MASK_BIT(0, 0x1),  // SLOT_MASK_TRUTH
-    SET_MOON_MASK_BIT(2, 0x40), // SLOT_MASK_ZORA
-    SET_MOON_MASK_BIT(1, 0x20), // SLOT_MASK_KAMARO
-    SET_MOON_MASK_BIT(1, 0x8),  // SLOT_MASK_GIBDO
-    SET_MOON_MASK_BIT(0, 0x20), // SLOT_MASK_GARO
-    SET_MOON_MASK_BIT(1, 0x40), // SLOT_MASK_CAPTAIN
-    SET_MOON_MASK_BIT(2, 0x8),  // SLOT_MASK_GIANT
-    SET_MOON_MASK_BIT(2, 0X80), // SLOT_MASK_FIERCE_DEITY
+    SET_MOON_MASK_BIT(1, 0x1),  // SLOT_MM_MASK_POSTMAN
+    SET_MOON_MASK_BIT(0, 0x4),  // SLOT_MM_MASK_ALL_NIGHT
+    SET_MOON_MASK_BIT(2, 0x2),  // SLOT_MM_MASK_BLAST
+    SET_MOON_MASK_BIT(1, 0x80), // SLOT_MM_MASK_STONE
+    SET_MOON_MASK_BIT(1, 0x4),  // SLOT_MM_MASK_GREAT_FAIRY
+    SET_MOON_MASK_BIT(2, 0x10), // SLOT_MM_MASK_DEKU
+    SET_MOON_MASK_BIT(0, 0x10), // SLOT_MM_MASK_KEATON
+    SET_MOON_MASK_BIT(2, 0x1),  // SLOT_MM_MASK_BREMEN
+    SET_MOON_MASK_BIT(0, 0x8),  // SLOT_MM_MASK_BUNNY
+    SET_MOON_MASK_BIT(1, 0x10), // SLOT_MM_MASK_DON_GERO
+    SET_MOON_MASK_BIT(2, 0x4),  // SLOT_MM_MASK_SCENTS
+    SET_MOON_MASK_BIT(2, 0x20), // SLOT_MM_MASK_GORON
+    SET_MOON_MASK_BIT(0, 0x40), // SLOT_MM_MASK_ROMANI
+    SET_MOON_MASK_BIT(0, 0x80), // SLOT_MM_MASK_CIRCUS_LEADER
+    SET_MOON_MASK_BIT(0, 0x2),  // SLOT_MM_MASK_KAFEIS_MASK
+    SET_MOON_MASK_BIT(1, 0x2),  // SLOT_MM_MASK_COUPLE
+    SET_MOON_MASK_BIT(0, 0x1),  // SLOT_MM_MASK_TRUTH
+    SET_MOON_MASK_BIT(2, 0x40), // SLOT_MM_MASK_ZORA
+    SET_MOON_MASK_BIT(1, 0x20), // SLOT_MM_MASK_KAMARO
+    SET_MOON_MASK_BIT(1, 0x8),  // SLOT_MM_MASK_GIBDO
+    SET_MOON_MASK_BIT(0, 0x20), // SLOT_MM_MASK_GARO
+    SET_MOON_MASK_BIT(1, 0x40), // SLOT_MM_MASK_CAPTAIN
+    SET_MOON_MASK_BIT(2, 0x8),  // SLOT_MM_MASK_GIANT
+    SET_MOON_MASK_BIT(2, 0X80), // SLOT_MM_MASK_FIERCE_DEITY
 };
 
 s16 sMaskMagicArrowEffectsR[] = { 255, 100, 255 };
@@ -225,9 +225,9 @@ void KaleidoScope_DrawMaskSelect(PlayState* play) {
             if (!CHECK_GIVEN_MASK_ON_MOON(i)) {
                 if ((pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE) && (pauseCtx->pageIndex == PAUSE_MASK) &&
                     (pauseCtx->cursorSpecialPos == 0) && gMaskPlayerFormSlotRestrictions[GET_PLAYER_FORM][i]) {
-                    if ((sMaskEquipState == EQUIP_STATE_MAGIC_ARROW_HOVER_OVER_BOW_SLOT) && (i == SLOT_ARROW_ICE)) {
+                    if ((sMaskEquipState == EQUIP_STATE_MAGIC_ARROW_HOVER_OVER_BOW_SLOT) && (i == SLOT_MM_ARROW_ICE)) {
                         // Possible bug:
-                        // Supposed to be `SLOT_BOW`, unchanged from OoT, instead increase size of ice arrow icon
+                        // Supposed to be `SLOT_MM_BOW`, unchanged from OoT, instead increase size of ice arrow icon
                         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0,
                                         sMaskMagicArrowEffectsR[pauseCtx->equipTargetItem - 0xB5],
                                         sMaskMagicArrowEffectsG[pauseCtx->equipTargetItem - 0xB5],
@@ -386,7 +386,7 @@ void KaleidoScope_UpdateMaskCursor(PlayState* play) {
                 KaleidoScope_MoveCursorFromSpecialPos(play);
                 cursorYIndex = 0;
                 cursorXIndex = 0;
-                cursorPoint = 0; // top row, left column (SLOT_MASK_POSTMAN)
+                cursorPoint = 0; // top row, left column (SLOT_MM_MASK_POSTMAN)
 
                 // Search for slot to move to
                 while (true) {
@@ -426,7 +426,7 @@ void KaleidoScope_UpdateMaskCursor(PlayState* play) {
             if (pauseCtx->stickAdjX < -30) {
                 KaleidoScope_MoveCursorFromSpecialPos(play);
                 cursorXIndex = 5;
-                cursorPoint = 5; // top row, right column (SLOT_MASK_DEKU)
+                cursorPoint = 5; // top row, right column (SLOT_MM_MASK_DEKU)
                 cursorYIndex = 0;
 
                 // Search for slot to move to
@@ -571,8 +571,8 @@ void KaleidoScope_UpdateMaskCursor(PlayState* play) {
 
                     if ((Player_GetEnvironmentalHazard(play) >= PLAYER_ENV_HAZARD_UNDERWATER_FLOOR) &&
                         (Player_GetEnvironmentalHazard(play) <= PLAYER_ENV_HAZARD_UNDERWATER_FREE) &&
-                        ((cursorSlot == (SLOT_MASK_DEKU - ITEM_NUM_SLOTS)) ||
-                         (cursorSlot == (SLOT_MASK_GORON - ITEM_NUM_SLOTS)))) {
+                        ((cursorSlot == (SLOT_MM_MASK_DEKU - ITEM_NUM_SLOTS)) ||
+                         (cursorSlot == (SLOT_MM_MASK_GORON - ITEM_NUM_SLOTS)))) {
                         Audio_PlaySfx(NA_SE_SY_ERROR);
                         return;
                     }
@@ -648,7 +648,7 @@ void KaleidoScope_UpdateMaskEquip(PlayState* play) {
 
         if (sMaskEquipMagicArrowBowSlotHoldTimer == 0) {
             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-            pauseCtx->equipTargetSlot = SLOT_BOW;
+            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
             sMaskEquipAnimTimer = 6;
             pauseCtx->equipAnimScale = 320;
             pauseCtx->equipAnimShrinkRate = 40;
@@ -659,10 +659,10 @@ void KaleidoScope_UpdateMaskEquip(PlayState* play) {
     }
 
     if (sMaskEquipState == EQUIP_STATE_MAGIC_ARROW_MOVE_TO_BOW_SLOT) {
-        //! Note: Copied from OoT when `SLOT_BOW` was still valued at 3.
-        // Due to a shift, `SLOT_ARROW_ICE` now occupies slot 3 but this value was not updated
+        //! Note: Copied from OoT when `SLOT_MM_BOW` was still valued at 3.
+        // Due to a shift, `SLOT_MM_ARROW_ICE` now occupies slot 3 but this value was not updated
         // Block is never reached as you can not equip magic arrows from the mask page
-        bowItemVtx = &pauseCtx->itemVtx[SLOT_ARROW_ICE * 4];
+        bowItemVtx = &pauseCtx->itemVtx[SLOT_MM_ARROW_ICE * 4];
         offsetX = ABS_ALT(pauseCtx->equipAnimX - bowItemVtx->v.ob[0] * 10) / sMaskEquipAnimTimer;
         offsetY = ABS_ALT(pauseCtx->equipAnimY - bowItemVtx->v.ob[1] * 10) / sMaskEquipAnimTimer;
     } else {

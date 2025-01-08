@@ -2,21 +2,21 @@
 #include "assets/textures/parameter_static/parameter_static.h"
 
 u8 gAmmoItems[] = {
-    ITEM_DEKU_STICK, // SLOT_DEKU_STICK
-    ITEM_DEKU_NUT,   // SLOT_DEKU_NUT
-    ITEM_BOMB,       // SLOT_BOMB
-    ITEM_BOW,        // SLOT_BOW
-    ITEM_NONE,       // SLOT_ARROW_FIRE
-    ITEM_NONE,       // SLOT_DINS_FIRE
-    ITEM_SLINGSHOT,  // SLOT_SLINGSHOT
-    ITEM_NONE,       // SLOT_OCARINA
-    ITEM_BOMBCHU,    // SLOT_BOMBCHU
-    ITEM_NONE,       // SLOT_HOOKSHOT
-    ITEM_NONE,       // SLOT_ARROW_ICE
-    ITEM_NONE,       // SLOT_FARORES_WIND
-    ITEM_NONE,       // SLOT_BOOMERANG
-    ITEM_NONE,       // SLOT_LENS_OF_TRUTH
-    ITEM_MAGIC_BEAN, // SLOT_MAGIC_BEAN
+    ITEM_DEKU_STICK, // SLOT_OOT_DEKU_STICK
+    ITEM_DEKU_NUT,   // SLOT_OOT_DEKU_NUT
+    ITEM_BOMB,       // SLOT_OOT_BOMB
+    ITEM_BOW,        // SLOT_OOT_BOW
+    ITEM_NONE,       // SLOT_OOT_ARROW_FIRE
+    ITEM_NONE,       // SLOT_OOT_DINS_FIRE
+    ITEM_SLINGSHOT,  // SLOT_OOT_SLINGSHOT
+    ITEM_NONE,       // SLOT_OOT_OCARINA
+    ITEM_BOMBCHU,    // SLOT_OOT_BOMBCHU
+    ITEM_NONE,       // SLOT_OOT_HOOKSHOT
+    ITEM_NONE,       // SLOT_OOT_ARROW_ICE
+    ITEM_NONE,       // SLOT_OOT_FARORES_WIND
+    ITEM_NONE,       // SLOT_OOT_BOOMERANG
+    ITEM_NONE,       // SLOT_OOT_LENS_OF_TRUTH
+    ITEM_MAGIC_BEAN, // SLOT_OOT_MAGIC_BEAN
     ITEM_NONE,
 };
 
@@ -551,7 +551,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
 
         if (D_8082A488 == 0) {
             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-            pauseCtx->equipTargetSlot = SLOT_BOW;
+            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
             sEquipMoveTimer = 6;
             WREG(90) = 320;
             WREG(87) = WREG(91);
@@ -630,7 +630,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              ((gOotSave.info.equips.buttonItems[1] >= ITEM_BOW_FIRE) &&
                               (gOotSave.info.equips.buttonItems[1] <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                         } else {
                             gOotSave.info.equips.buttonItems[2] = gOotSave.info.equips.buttonItems[1];
                             gOotSave.info.equips.cButtonSlots[1] =
@@ -648,7 +648,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              ((gOotSave.info.equips.buttonItems[1] >= ITEM_BOW_FIRE) &&
                               (gOotSave.info.equips.buttonItems[1] <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                         } else {
                             gOotSave.info.equips.buttonItems[3] = gOotSave.info.equips.buttonItems[1];
                             gOotSave.info.equips.cButtonSlots[2] =
@@ -666,7 +666,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         ((gOotSave.info.equips.buttonItems[1] >= ITEM_BOW_FIRE) &&
                          (gOotSave.info.equips.buttonItems[1] <= ITEM_BOW_LIGHT))) {
                         pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                        pauseCtx->equipTargetSlot = SLOT_BOW;
+                        pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                     }
                 } else if (pauseCtx->equipTargetItem == ITEM_BOW) {
                     if ((gOotSave.info.equips.buttonItems[2] >= ITEM_BOW_FIRE) &&
@@ -707,7 +707,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              ((gOotSave.info.equips.buttonItems[2] >= ITEM_BOW_FIRE) &&
                               (gOotSave.info.equips.buttonItems[2] <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                         } else {
                             gOotSave.info.equips.buttonItems[1] = gOotSave.info.equips.buttonItems[2];
                             gOotSave.info.equips.cButtonSlots[0] =
@@ -725,7 +725,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              ((gOotSave.info.equips.buttonItems[2] >= ITEM_BOW_FIRE) &&
                               (gOotSave.info.equips.buttonItems[2] <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                         } else {
                             gOotSave.info.equips.buttonItems[3] = gOotSave.info.equips.buttonItems[2];
                             gOotSave.info.equips.cButtonSlots[2] =
@@ -743,7 +743,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         ((gOotSave.info.equips.buttonItems[2] >= ITEM_BOW_FIRE) &&
                          (gOotSave.info.equips.buttonItems[2] <= ITEM_BOW_LIGHT))) {
                         pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                        pauseCtx->equipTargetSlot = SLOT_BOW;
+                        pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                     }
                 } else if (pauseCtx->equipTargetItem == ITEM_BOW) {
                     if ((gOotSave.info.equips.buttonItems[1] >= ITEM_BOW_FIRE) &&
@@ -782,7 +782,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              ((gOotSave.info.equips.buttonItems[3] >= ITEM_BOW_FIRE) &&
                               (gOotSave.info.equips.buttonItems[3] <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                         } else {
                             gOotSave.info.equips.buttonItems[1] = gOotSave.info.equips.buttonItems[3];
                             gOotSave.info.equips.cButtonSlots[0] =
@@ -800,7 +800,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              ((gOotSave.info.equips.buttonItems[3] >= ITEM_BOW_FIRE) &&
                               (gOotSave.info.equips.buttonItems[3] <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                         } else {
                             gOotSave.info.equips.buttonItems[2] = gOotSave.info.equips.buttonItems[3];
                             gOotSave.info.equips.cButtonSlots[1] =
@@ -818,7 +818,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         ((gOotSave.info.equips.buttonItems[3] >= ITEM_BOW_FIRE) &&
                          (gOotSave.info.equips.buttonItems[3] <= ITEM_BOW_LIGHT))) {
                         pauseCtx->equipTargetItem -= 0xBF - ITEM_BOW_FIRE;
-                        pauseCtx->equipTargetSlot = SLOT_BOW;
+                        pauseCtx->equipTargetSlot = SLOT_OOT_BOW;
                     }
                 } else if (pauseCtx->equipTargetItem == ITEM_BOW) {
                     if ((gOotSave.info.equips.buttonItems[1] >= ITEM_BOW_FIRE) &&
