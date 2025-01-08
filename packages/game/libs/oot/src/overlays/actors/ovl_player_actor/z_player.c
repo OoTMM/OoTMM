@@ -30,7 +30,7 @@
 typedef struct GetItemEntry {
     /* 0x00 */ u8 itemId;
     /* 0x01 */ u8 field; // various bit-packed data
-    /* 0x02 */ s8 gi;    // defines the draw id and chest opening animation
+    /* 0x02 */ s8 gid;   // defines the draw id and chest opening animation
     /* 0x03 */ u8 textId;
     /* 0x04 */ u16 objectId;
 } GetItemEntry; // size = 0x06
@@ -2204,8 +2204,7 @@ s32 func_808332E4(Player* this) {
 
 void func_808332F4(Player* this, PlayState* play) {
     GetItemEntry* giEntry = &sGetItemTable[this->getItemId - 1];
-
-    this->unk_862 = ABS(giEntry->gi);
+    this->unk_862 = ABS(giEntry->gid);
 }
 
 /**
@@ -7357,7 +7356,7 @@ s32 Player_ActionHandler_2(Player* this, PlayState* play) {
                 this->yaw = this->actor.shape.rot.y = chest->dyna.actor.shape.rot.y;
                 func_80832224(this);
 
-                if ((giEntry->itemId != ITEM_NONE) && (giEntry->gi >= 0) &&
+                if ((giEntry->itemId != ITEM_NONE) && (giEntry->gid >= 0) &&
                     (Item_CheckObtainability(giEntry->itemId) == ITEM_NONE)) {
                     Player_AnimPlayOnceAdjusted(play, this, this->ageProperties->unk_98);
                     Player_StartAnimMovement(play, this,
@@ -14174,7 +14173,7 @@ void Player_Action_ExchangeItem(Player* this, PlayState* play) {
             GetItemEntry* giEntry = &sGetItemTable[D_80854528[this->exchangeItemId - 1] - 1];
 
             if (this->itemAction >= PLAYER_IA_ZELDAS_LETTER) {
-                this->unk_862 = ABS(giEntry->gi);
+                this->unk_862 = ABS(giEntry->gid);
             }
 
             if (this->av2.actionVar2 == 0) {
