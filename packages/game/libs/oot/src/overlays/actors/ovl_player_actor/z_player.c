@@ -13652,7 +13652,7 @@ void func_8084DFAC(PlayState* play, Player* this) {
     this->yaw = this->actor.shape.rot.y;
 }
 
-s32 func_8084DFF4(PlayState* play, Player* this) {
+s32 Player_GetItem(PlayState* play, Player* this) {
     GetItemEntry* giEntry;
     s32 temp1;
     s32 temp2;
@@ -13705,7 +13705,7 @@ void Player_Action_8084E1EC(Player* this, PlayState* play) {
     this->stateFlags2 |= PLAYER_STATE2_5;
 
     if (LinkAnimation_Update(play, &this->skelAnime)) {
-        if (!(this->stateFlags1 & PLAYER_STATE1_10) || func_8084DFF4(play, this)) {
+        if (!(this->stateFlags1 & PLAYER_STATE1_10) || Player_GetItem(play, this)) {
             func_8084DF6C(play, this);
             func_80838F18(play, this);
             func_80832340(play, this);
@@ -13843,7 +13843,7 @@ void Player_Action_8084E6D4(Player* this, PlayState* play) {
                 this->av2.actionVar2--;
             }
 
-            if (func_8084DFF4(play, this) && (this->av2.actionVar2 == 1)) {
+            if (Player_GetItem(play, this) && (this->av2.actionVar2 == 1)) {
                 cond =
                     ((this->talkActor != NULL) && (this->exchangeItemId < 0)) || (this->stateFlags3 & PLAYER_STATE3_5);
 

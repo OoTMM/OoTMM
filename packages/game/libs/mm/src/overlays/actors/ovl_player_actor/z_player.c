@@ -13617,8 +13617,7 @@ void func_80848294(PlayState* play, Player* this) {
     this->yaw = this->actor.shape.rot.y;
 }
 
-// Player_GetItem?
-s32 func_808482E0(PlayState* play, Player* this) {
+s32 Player_GetItem(PlayState* play, Player* this) {
     if (this->getItemId == GI_NONE) {
         return true;
     }
@@ -17153,7 +17152,7 @@ void Player_Action_60(Player* this, PlayState* play) {
     func_8082F164(this, BTN_R);
     if (((this->stateFlags1 & PLAYER_STATE1_400) || (this->skelAnime.curFrame <= 1.0f) || !func_80850734(play, this)) &&
         PlayerAnimation_Update(play, &this->skelAnime)) {
-        if (!(this->stateFlags1 & PLAYER_STATE1_400) || func_808482E0(play, this)) {
+        if (!(this->stateFlags1 & PLAYER_STATE1_400) || Player_GetItem(play, this)) {
             func_80848250(play, this);
             func_808353DC(play, this);
             func_8082DC64(play, this);
@@ -17537,7 +17536,7 @@ void Player_Action_65(Player* this, PlayState* play) {
                 this->av2.actionVar2--;
             }
 
-            if (func_808482E0(play, this) && (this->av2.actionVar2 == 1)) {
+            if (Player_GetItem(play, this) && (this->av2.actionVar2 == 1)) {
                 Player_SetModels(this, Player_ActionToModelGroup(this, this->itemAction));
 
                 if ((this->getItemDrawIdPlusOne == GID_REMAINS_ODOLWA + 1) ||
