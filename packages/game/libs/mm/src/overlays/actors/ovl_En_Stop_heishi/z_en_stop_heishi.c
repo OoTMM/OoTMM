@@ -381,9 +381,9 @@ void func_80AE7F34(EnStopheishi* this, PlayState* play) {
     phi_a2 = 0;
     switch (player->transformation) {
         case PLAYER_FORM_HUMAN:
-            if ((STOLEN_ITEM_1 == SLOT_SWORD_GREAT_FAIRY) || (STOLEN_ITEM_1 == ITEM_SWORD_KOKIRI) ||
+            if ((STOLEN_ITEM_1 == SLOT_MM_SWORD_GREAT_FAIRY) || (STOLEN_ITEM_1 == ITEM_SWORD_KOKIRI) ||
                 (STOLEN_ITEM_1 == ITEM_SWORD_RAZOR) || (STOLEN_ITEM_1 == ITEM_SWORD_GILDED) ||
-                (STOLEN_ITEM_2 == SLOT_SWORD_GREAT_FAIRY) || (STOLEN_ITEM_2 == ITEM_SWORD_KOKIRI) ||
+                (STOLEN_ITEM_2 == SLOT_MM_SWORD_GREAT_FAIRY) || (STOLEN_ITEM_2 == ITEM_SWORD_KOKIRI) ||
                 (STOLEN_ITEM_2 == ITEM_SWORD_RAZOR) || (STOLEN_ITEM_2 == ITEM_SWORD_GILDED)) {
                 if (this->unk_265 != 0) {
                     phi_a2 = 1;

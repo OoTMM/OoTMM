@@ -192,9 +192,9 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
         for (j = 0, x = 78; j < 6; j++, slot++, x += 26) {
             spD8[2] = 0;
 
-            if ((slot <= SLOT_BOW) || (slot == SLOT_SLINGSHOT) || (slot == SLOT_BOMBCHU) || (slot == SLOT_MAGIC_BEAN)) {
+            if ((slot <= SLOT_OOT_BOW) || (slot == SLOT_OOT_SLINGSHOT) || (slot == SLOT_OOT_BOMBCHU) || (slot == SLOT_OOT_MAGIC_BEAN)) {
                 spD8[3] = AMMO(gAmmoItems[slot]);
-            } else if (slot == SLOT_OCARINA) {
+            } else if (slot == SLOT_OOT_OCARINA) {
                 spD8[3] = gOotSave.info.inventory.items[slot];
             } else {
                 spD8[3] = gOotSave.info.inventory.items[slot];
@@ -410,7 +410,7 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
         default:
             if (curSection < 0x1B) {
                 i = curSection - 3;
-                if ((i <= SLOT_BOW) || (i == SLOT_SLINGSHOT) || (i == SLOT_BOMBCHU) || (i == SLOT_MAGIC_BEAN)) {
+                if ((i <= SLOT_OOT_BOW) || (i == SLOT_OOT_SLINGSHOT) || (i == SLOT_OOT_BOMBCHU) || (i == SLOT_OOT_MAGIC_BEAN)) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         Inventory_DeleteItem(gAmmoItems[i], SLOT(gAmmoItems[i]));
                         AMMO(gAmmoItems[i]) = 0;
@@ -430,7 +430,7 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
                             AMMO(gAmmoItems[i]) = 0;
                         }
                     }
-                } else if (i == SLOT_OCARINA) {
+                } else if (i == SLOT_OOT_OCARINA) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         Inventory_DeleteItem(ITEM_OCARINA_FAIRY, SLOT(ITEM_OCARINA_FAIRY));
                     } else if (CHECK_BTN_ALL(input->press.button, BTN_CLEFT)) {
@@ -448,7 +448,7 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
                             gOotSave.info.inventory.items[i]--;
                         }
                     }
-                } else if (i == SLOT_HOOKSHOT) {
+                } else if (i == SLOT_OOT_HOOKSHOT) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         Inventory_DeleteItem(ITEM_HOOKSHOT, SLOT(ITEM_HOOKSHOT));
                     } else if (CHECK_BTN_ALL(input->press.button, BTN_CLEFT)) {
@@ -466,7 +466,7 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
                             gOotSave.info.inventory.items[i]--;
                         }
                     }
-                } else if (i == SLOT_TRADE_ADULT) {
+                } else if (i == SLOT_OOT_TRADE_ADULT) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         Inventory_DeleteItem(ITEM_POCKET_EGG, SLOT(ITEM_POCKET_EGG));
                     } else if (CHECK_BTN_ALL(input->press.button, BTN_CLEFT)) {
@@ -484,7 +484,7 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
                             gOotSave.info.inventory.items[i]--;
                         }
                     }
-                } else if (i == SLOT_TRADE_CHILD) {
+                } else if (i == SLOT_OOT_TRADE_CHILD) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         Inventory_DeleteItem(ITEM_WEIRD_EGG, SLOT(ITEM_WEIRD_EGG));
                     } else if (CHECK_BTN_ALL(input->press.button, BTN_CLEFT)) {
@@ -502,10 +502,10 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
                             gOotSave.info.inventory.items[i]--;
                         }
                     }
-                } else if ((i >= SLOT_BOTTLE_1) && (i <= SLOT_BOTTLE_4)) {
+                } else if ((i >= SLOT_OOT_BOTTLE_1) && (i <= SLOT_OOT_BOTTLE_4)) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
-                        Inventory_DeleteItem(ITEM_BOTTLE_EMPTY + i - SLOT_BOTTLE_1,
-                                             SLOT(ITEM_BOTTLE_EMPTY) + i - SLOT_BOTTLE_1);
+                        Inventory_DeleteItem(ITEM_BOTTLE_EMPTY + i - SLOT_OOT_BOTTLE_1,
+                                             SLOT(ITEM_BOTTLE_EMPTY) + i - SLOT_OOT_BOTTLE_1);
                     } else if (CHECK_BTN_ALL(input->press.button, BTN_CLEFT)) {
                         if (gOotSave.info.inventory.items[i] == ITEM_NONE) {
                             gOotSave.info.inventory.items[i] = ITEM_BOTTLE_EMPTY;
@@ -525,7 +525,7 @@ void KaleidoScope_DrawDebugEditor(PlayState* play) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP) || CHECK_BTN_ALL(input->press.button, BTN_CLEFT) ||
                         CHECK_BTN_ALL(input->press.button, BTN_CDOWN) ||
                         CHECK_BTN_ALL(input->press.button, BTN_CRIGHT)) {
-                        if (i == SLOT_TRADE_ADULT) {
+                        if (i == SLOT_OOT_TRADE_ADULT) {
                             if (gOotSave.info.inventory.items[i] == ITEM_NONE) {
                                 gOotSave.info.inventory.items[i] = ITEM_MAGIC_BEAN;
                             } else {

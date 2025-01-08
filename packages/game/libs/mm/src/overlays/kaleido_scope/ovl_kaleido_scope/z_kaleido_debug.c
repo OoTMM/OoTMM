@@ -430,12 +430,12 @@ void KaleidoScope_DrawInventoryEditor(PlayState* play) {
         for (j = 0, rectLeft = 44; j < ITEM_GRID_COLS; j++, slot++, rectLeft += 23) {
             counterDigits[3] = 0;
             counterDigits[2] = 0;
-            if ((slot == SLOT_BOW) || ((slot >= SLOT_BOMB) && (slot <= SLOT_DEKU_NUT)) || (slot == SLOT_POWDER_KEG) ||
-                (slot == SLOT_MAGIC_BEANS)) {
+            if ((slot == SLOT_MM_BOW) || ((slot >= SLOT_MM_BOMB) && (slot <= SLOT_MM_DEKU_NUT)) || (slot == SLOT_MM_POWDER_KEG) ||
+                (slot == SLOT_MM_MAGIC_BEANS)) {
                 counterDigits[3] = AMMO(gAmmoItems[slot]);
-            } else if ((slot == SLOT_TRADE_DEED) || (slot == SLOT_TRADE_KEY_MAMA) || (slot == SLOT_TRADE_COUPLE)) {
+            } else if ((slot == SLOT_MM_TRADE_DEED) || (slot == SLOT_MM_TRADE_KEY_MAMA) || (slot == SLOT_MM_TRADE_COUPLE)) {
                 counterDigits[3] = gMmSave.saveInfo.inventory.items[slot];
-            } else if (slot >= SLOT_BOTTLE_1) {
+            } else if (slot >= SLOT_MM_BOTTLE_1) {
                 counterDigits[3] = gMmSave.saveInfo.inventory.items[slot];
             } else if (gMmSave.saveInfo.inventory.items[slot] != ITEM_NONE) {
                 counterDigits[3] = 1;
@@ -781,8 +781,8 @@ void KaleidoScope_UpdateInventoryEditor(PlayState* play) {
             if (sCurSection < INV_EDITOR_SECTION_BOSS) {
                 // Items
                 slot = sCurSection - INV_EDITOR_SECTION_ITEMS;
-                if ((slot == SLOT_BOW) || ((slot >= SLOT_BOMB) && (slot <= SLOT_DEKU_NUT)) ||
-                    (slot == SLOT_POWDER_KEG) || (slot == SLOT_MAGIC_BEANS)) {
+                if ((slot == SLOT_MM_BOW) || ((slot >= SLOT_MM_BOMB) && (slot <= SLOT_MM_DEKU_NUT)) ||
+                    (slot == SLOT_MM_POWDER_KEG) || (slot == SLOT_MM_MAGIC_BEANS)) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         Inventory_DeleteItem(gAmmoItems[slot], SLOT(gAmmoItems[slot]));
                         AMMO(gAmmoItems[slot]) = 0;
@@ -802,11 +802,11 @@ void KaleidoScope_UpdateInventoryEditor(PlayState* play) {
                             AMMO(gAmmoItems[slot]) = 0;
                         }
                     }
-                } else if ((slot == SLOT_TRADE_DEED) || (slot == SLOT_TRADE_KEY_MAMA) || (slot == SLOT_TRADE_COUPLE)) {
+                } else if ((slot == SLOT_MM_TRADE_DEED) || (slot == SLOT_MM_TRADE_KEY_MAMA) || (slot == SLOT_MM_TRADE_COUPLE)) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
                         value = sSlotItems[slot];
                         Inventory_DeleteItem(value, slot);
-                    } else if (slot == SLOT_TRADE_DEED) {
+                    } else if (slot == SLOT_MM_TRADE_DEED) {
                         if (CHECK_BTN_ALL(input->press.button, BTN_CRIGHT)) {
                             if (INV_CONTENT(ITEM_MOONS_TEAR) == ITEM_NONE) {
                                 gMmSave.saveInfo.inventory.items[slot] = ITEM_MOONS_TEAR;
@@ -822,7 +822,7 @@ void KaleidoScope_UpdateInventoryEditor(PlayState* play) {
                                 gMmSave.saveInfo.inventory.items[slot] = INV_CONTENT(ITEM_MOONS_TEAR) - 1;
                             }
                         }
-                    } else if (slot == SLOT_TRADE_KEY_MAMA) {
+                    } else if (slot == SLOT_MM_TRADE_KEY_MAMA) {
                         if (CHECK_BTN_ALL(input->press.button, BTN_CRIGHT)) {
                             if (INV_CONTENT(ITEM_ROOM_KEY) == ITEM_NONE) {
                                 gMmSave.saveInfo.inventory.items[slot] = ITEM_ROOM_KEY;
@@ -853,10 +853,10 @@ void KaleidoScope_UpdateInventoryEditor(PlayState* play) {
                             gMmSave.saveInfo.inventory.items[slot] = INV_CONTENT(ITEM_LETTER_TO_KAFEI) - 1;
                         }
                     }
-                } else if ((slot >= SLOT_BOTTLE_1) && (slot <= SLOT_BOTTLE_6)) {
+                } else if ((slot >= SLOT_MM_BOTTLE_1) && (slot <= SLOT_MM_BOTTLE_6)) {
                     if (CHECK_BTN_ALL(input->press.button, BTN_CUP)) {
-                        value = ITEM_BOTTLE + slot - SLOT_BOTTLE_1;
-                        Inventory_DeleteItem(value, SLOT(ITEM_BOTTLE) + slot - SLOT_BOTTLE_1);
+                        value = ITEM_BOTTLE + slot - SLOT_MM_BOTTLE_1;
+                        Inventory_DeleteItem(value, SLOT(ITEM_BOTTLE) + slot - SLOT_MM_BOTTLE_1);
                     } else if (CHECK_BTN_ALL(input->press.button, BTN_CRIGHT)) {
                         if (gMmSave.saveInfo.inventory.items[slot] == ITEM_NONE) {
                             gMmSave.saveInfo.inventory.items[slot] = ITEM_BOTTLE;

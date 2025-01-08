@@ -142,7 +142,7 @@ void EnGe1_Init(Actor* thisx, PlayState* play) {
             break;
 
         case GE1_TYPE_HORSEBACK_ARCHERY:
-            if (INV_CONTENT(SLOT_BOW) == ITEM_NONE) {
+            if (INV_CONTENT(SLOT_OOT_BOW) == ITEM_NONE) {
                 Actor_Kill(&this->actor);
                 return;
             }

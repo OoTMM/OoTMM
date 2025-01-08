@@ -59,7 +59,7 @@ static OotSavePlayerData sDebugSavePlayerData = {
 
 static OotItemEquips sDebugSaveEquips = {
     { ITEM_SWORD_MASTER, ITEM_BOW, ITEM_BOMB, ITEM_OCARINA_FAIRY }, // buttonItems
-    { SLOT_BOW, SLOT_BOMB, SLOT_OCARINA },                          // cButtonSlots
+    { SLOT_OOT_BOW, SLOT_OOT_BOMB, SLOT_OOT_OCARINA },              // cButtonSlots
     // equipment
     (EQUIP_VALUE_SWORD_MASTER << (EQUIP_TYPE_SWORD * 4)) | (EQUIP_VALUE_SHIELD_HYLIAN << (EQUIP_TYPE_SHIELD * 4)) |
         (EQUIP_VALUE_TUNIC_KOKIRI << (EQUIP_TYPE_TUNIC * 4)) | (EQUIP_VALUE_BOOTS_KOKIRI << (EQUIP_TYPE_BOOTS * 4)),
@@ -68,49 +68,49 @@ static OotItemEquips sDebugSaveEquips = {
 static OotInventory sDebugSaveInventory = {
     // items
     {
-        ITEM_DEKU_STICK,          // SLOT_DEKU_STICK
-        ITEM_DEKU_NUT,            // SLOT_DEKU_NUT
-        ITEM_BOMB,                // SLOT_BOMB
-        ITEM_BOW,                 // SLOT_BOW
-        ITEM_ARROW_FIRE,          // SLOT_ARROW_FIRE
-        ITEM_DINS_FIRE,           // SLOT_DINS_FIRE
-        ITEM_SLINGSHOT,           // SLOT_SLINGSHOT
-        ITEM_OCARINA_FAIRY,       // SLOT_OCARINA
-        ITEM_BOMBCHU,             // SLOT_BOMBCHU
-        ITEM_HOOKSHOT,            // SLOT_HOOKSHOT
-        ITEM_ARROW_ICE,           // SLOT_ARROW_ICE
-        ITEM_FARORES_WIND,        // SLOT_FARORES_WIND
-        ITEM_BOOMERANG,           // SLOT_BOOMERANG
-        ITEM_LENS_OF_TRUTH,       // SLOT_LENS_OF_TRUTH
-        ITEM_MAGIC_BEAN,          // SLOT_MAGIC_BEAN
-        ITEM_HAMMER,              // SLOT_HAMMER
-        ITEM_ARROW_LIGHT,         // SLOT_ARROW_LIGHT
-        ITEM_NAYRUS_LOVE,         // SLOT_NAYRUS_LOVE
-        ITEM_BOTTLE_EMPTY,        // SLOT_BOTTLE_1
-        ITEM_BOTTLE_POTION_RED,   // SLOT_BOTTLE_2
-        ITEM_BOTTLE_POTION_GREEN, // SLOT_BOTTLE_3
-        ITEM_BOTTLE_POTION_BLUE,  // SLOT_BOTTLE_4
-        ITEM_POCKET_EGG,          // SLOT_TRADE_ADULT
-        ITEM_WEIRD_EGG,           // SLOT_TRADE_CHILD
+        ITEM_DEKU_STICK,          // SLOT_OOT_DEKU_STICK
+        ITEM_DEKU_NUT,            // SLOT_OOT_DEKU_NUT
+        ITEM_BOMB,                // SLOT_OOT_BOMB
+        ITEM_BOW,                 // SLOT_OOT_BOW
+        ITEM_ARROW_FIRE,          // SLOT_OOT_ARROW_FIRE
+        ITEM_DINS_FIRE,           // SLOT_OOT_DINS_FIRE
+        ITEM_SLINGSHOT,           // SLOT_OOT_SLINGSHOT
+        ITEM_OCARINA_FAIRY,       // SLOT_OOT_OCARINA
+        ITEM_BOMBCHU,             // SLOT_OOT_BOMBCHU
+        ITEM_HOOKSHOT,            // SLOT_OOT_HOOKSHOT
+        ITEM_ARROW_ICE,           // SLOT_OOT_ARROW_ICE
+        ITEM_FARORES_WIND,        // SLOT_OOT_FARORES_WIND
+        ITEM_BOOMERANG,           // SLOT_OOT_BOOMERANG
+        ITEM_LENS_OF_TRUTH,       // SLOT_OOT_LENS_OF_TRUTH
+        ITEM_MAGIC_BEAN,          // SLOT_OOT_MAGIC_BEAN
+        ITEM_HAMMER,              // SLOT_OOT_HAMMER
+        ITEM_ARROW_LIGHT,         // SLOT_OOT_ARROW_LIGHT
+        ITEM_NAYRUS_LOVE,         // SLOT_OOT_NAYRUS_LOVE
+        ITEM_BOTTLE_EMPTY,        // SLOT_OOT_BOTTLE_1
+        ITEM_BOTTLE_POTION_RED,   // SLOT_OOT_BOTTLE_2
+        ITEM_BOTTLE_POTION_GREEN, // SLOT_OOT_BOTTLE_3
+        ITEM_BOTTLE_POTION_BLUE,  // SLOT_OOT_BOTTLE_4
+        ITEM_POCKET_EGG,          // SLOT_OOT_TRADE_ADULT
+        ITEM_WEIRD_EGG,           // SLOT_OOT_TRADE_CHILD
     },
     // ammo
     {
-        50, // SLOT_DEKU_STICK
-        50, // SLOT_DEKU_NUT
-        10, // SLOT_BOMB
-        30, // SLOT_BOW
-        1,  // SLOT_ARROW_FIRE
-        1,  // SLOT_DINS_FIRE
-        30, // SLOT_SLINGSHOT
-        1,  // SLOT_OCARINA
-        50, // SLOT_BOMBCHU
-        1,  // SLOT_HOOKSHOT
-        1,  // SLOT_ARROW_ICE
-        1,  // SLOT_FARORES_WIND
-        1,  // SLOT_BOOMERANG
-        1,  // SLOT_LENS_OF_TRUTH
-        1,  // SLOT_MAGIC_BEAN
-        1   // SLOT_HAMMER
+        50, // SLOT_OOT_DEKU_STICK
+        50, // SLOT_OOT_DEKU_NUT
+        10, // SLOT_OOT_BOMB
+        30, // SLOT_OOT_BOW
+        1,  // SLOT_OOT_ARROW_FIRE
+        1,  // SLOT_OOT_DINS_FIRE
+        30, // SLOT_OOT_SLINGSHOT
+        1,  // SLOT_OOT_OCARINA
+        50, // SLOT_OOT_BOMBCHU
+        1,  // SLOT_OOT_HOOKSHOT
+        1,  // SLOT_OOT_ARROW_ICE
+        1,  // SLOT_OOT_FARORES_WIND
+        1,  // SLOT_OOT_BOOMERANG
+        1,  // SLOT_OOT_LENS_OF_TRUTH
+        1,  // SLOT_OOT_MAGIC_BEAN
+        1   // SLOT_OOT_HAMMER
     },
     // equipment
     ((((1 << EQUIP_INV_SWORD_KOKIRI) << (EQUIP_TYPE_SWORD * 4)) |
@@ -169,7 +169,7 @@ void Sram_InitDebugSave(void) {
         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_KOKIRI);
         if (gSaveFileNum == -1) {
             gOotSave.info.equips.buttonItems[1] = ITEM_SLINGSHOT;
-            gOotSave.info.equips.cButtonSlots[0] = SLOT_SLINGSHOT;
+            gOotSave.info.equips.cButtonSlots[0] = SLOT_OOT_SLINGSHOT;
             Inventory_ChangeEquipment(EQUIP_TYPE_SHIELD, EQUIP_VALUE_SHIELD_DEKU);
         }
     }

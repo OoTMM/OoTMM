@@ -18,161 +18,161 @@ s16 sEquipAnimTimer = 10;
 u8 gPlayerFormSlotRestrictions[PLAYER_FORM_MAX][ITEM_NUM_SLOTS] = {
     // PLAYER_FORM_FIERCE_DEITY
     {
-        false, // SLOT_OCARINA
-        false, // SLOT_BOW
-        false, // SLOT_ARROW_FIRE
-        false, // SLOT_ARROW_ICE
-        false, // SLOT_ARROW_LIGHT
-        false, // SLOT_TRADE_DEED
-        false, // SLOT_BOMB
-        false, // SLOT_BOMBCHU
-        false, // SLOT_DEKU_STICK
-        false, // SLOT_DEKU_NUT
-        false, // SLOT_MAGIC_BEANS
-        false, // SLOT_TRADE_KEY_MAMA
-        false, // SLOT_POWDER_KEG
-        false, // SLOT_PICTOGRAPH_BOX
-        false, // SLOT_LENS_OF_TRUTH
-        false, // SLOT_HOOKSHOT
-        false, // SLOT_SWORD_GREAT_FAIRY
-        false, // SLOT_TRADE_COUPLE
-        true,  // SLOT_BOTTLE_1
-        true,  // SLOT_BOTTLE_2
-        true,  // SLOT_BOTTLE_3
-        true,  // SLOT_BOTTLE_4
-        true,  // SLOT_BOTTLE_5
-        true,  // SLOT_BOTTLE_6
+        false, // SLOT_MM_OCARINA
+        false, // SLOT_MM_BOW
+        false, // SLOT_MM_ARROW_FIRE
+        false, // SLOT_MM_ARROW_ICE
+        false, // SLOT_MM_ARROW_LIGHT
+        false, // SLOT_MM_TRADE_DEED
+        false, // SLOT_MM_BOMB
+        false, // SLOT_MM_BOMBCHU
+        false, // SLOT_MM_DEKU_STICK
+        false, // SLOT_MM_DEKU_NUT
+        false, // SLOT_MM_MAGIC_BEANS
+        false, // SLOT_MM_TRADE_KEY_MAMA
+        false, // SLOT_MM_POWDER_KEG
+        false, // SLOT_MM_PICTOGRAPH_BOX
+        false, // SLOT_MM_LENS_OF_TRUTH
+        false, // SLOT_MM_HOOKSHOT
+        false, // SLOT_MM_SWORD_GREAT_FAIRY
+        false, // SLOT_MM_TRADE_COUPLE
+        true,  // SLOT_MM_BOTTLE_1
+        true,  // SLOT_MM_BOTTLE_2
+        true,  // SLOT_MM_BOTTLE_3
+        true,  // SLOT_MM_BOTTLE_4
+        true,  // SLOT_MM_BOTTLE_5
+        true,  // SLOT_MM_BOTTLE_6
     },
     // PLAYER_FORM_GORON
     {
-        true,  // SLOT_OCARINA
-        false, // SLOT_BOW
-        false, // SLOT_ARROW_FIRE
-        false, // SLOT_ARROW_ICE
-        false, // SLOT_ARROW_LIGHT
-        true,  // SLOT_TRADE_DEED
-        false, // SLOT_BOMB
-        false, // SLOT_BOMBCHU
-        false, // SLOT_DEKU_STICK
-        false, // SLOT_DEKU_NUT
-        false, // SLOT_MAGIC_BEANS
-        true,  // SLOT_TRADE_KEY_MAMA
-        true,  // SLOT_POWDER_KEG
-        true,  // SLOT_PICTOGRAPH_BOX
-        true,  // SLOT_LENS_OF_TRUTH
-        false, // SLOT_HOOKSHOT
-        false, // SLOT_SWORD_GREAT_FAIRY
-        true,  // SLOT_TRADE_COUPLE
-        true,  // SLOT_BOTTLE_1
-        true,  // SLOT_BOTTLE_2
-        true,  // SLOT_BOTTLE_3
-        true,  // SLOT_BOTTLE_4
-        true,  // SLOT_BOTTLE_5
-        true,  // SLOT_BOTTLE_6
+        true,  // SLOT_MM_OCARINA
+        false, // SLOT_MM_BOW
+        false, // SLOT_MM_ARROW_FIRE
+        false, // SLOT_MM_ARROW_ICE
+        false, // SLOT_MM_ARROW_LIGHT
+        true,  // SLOT_MM_TRADE_DEED
+        false, // SLOT_MM_BOMB
+        false, // SLOT_MM_BOMBCHU
+        false, // SLOT_MM_DEKU_STICK
+        false, // SLOT_MM_DEKU_NUT
+        false, // SLOT_MM_MAGIC_BEANS
+        true,  // SLOT_MM_TRADE_KEY_MAMA
+        true,  // SLOT_MM_POWDER_KEG
+        true,  // SLOT_MM_PICTOGRAPH_BOX
+        true,  // SLOT_MM_LENS_OF_TRUTH
+        false, // SLOT_MM_HOOKSHOT
+        false, // SLOT_MM_SWORD_GREAT_FAIRY
+        true,  // SLOT_MM_TRADE_COUPLE
+        true,  // SLOT_MM_BOTTLE_1
+        true,  // SLOT_MM_BOTTLE_2
+        true,  // SLOT_MM_BOTTLE_3
+        true,  // SLOT_MM_BOTTLE_4
+        true,  // SLOT_MM_BOTTLE_5
+        true,  // SLOT_MM_BOTTLE_6
     },
     // PLAYER_FORM_ZORA
     {
-        true,  // SLOT_OCARINA
-        false, // SLOT_BOW
-        false, // SLOT_ARROW_FIRE
-        false, // SLOT_ARROW_ICE
-        false, // SLOT_ARROW_LIGHT
-        true,  // SLOT_TRADE_DEED
-        false, // SLOT_BOMB
-        false, // SLOT_BOMBCHU
-        false, // SLOT_DEKU_STICK
-        false, // SLOT_DEKU_NUT
-        false, // SLOT_MAGIC_BEANS
-        true,  // SLOT_TRADE_KEY_MAMA
-        false, // SLOT_POWDER_KEG
-        true,  // SLOT_PICTOGRAPH_BOX
-        true,  // SLOT_LENS_OF_TRUTH
-        false, // SLOT_HOOKSHOT
-        false, // SLOT_SWORD_GREAT_FAIRY
-        true,  // SLOT_TRADE_COUPLE
-        true,  // SLOT_BOTTLE_1
-        true,  // SLOT_BOTTLE_2
-        true,  // SLOT_BOTTLE_3
-        true,  // SLOT_BOTTLE_4
-        true,  // SLOT_BOTTLE_5
-        true,  // SLOT_BOTTLE_6
+        true,  // SLOT_MM_OCARINA
+        false, // SLOT_MM_BOW
+        false, // SLOT_MM_ARROW_FIRE
+        false, // SLOT_MM_ARROW_ICE
+        false, // SLOT_MM_ARROW_LIGHT
+        true,  // SLOT_MM_TRADE_DEED
+        false, // SLOT_MM_BOMB
+        false, // SLOT_MM_BOMBCHU
+        false, // SLOT_MM_DEKU_STICK
+        false, // SLOT_MM_DEKU_NUT
+        false, // SLOT_MM_MAGIC_BEANS
+        true,  // SLOT_MM_TRADE_KEY_MAMA
+        false, // SLOT_MM_POWDER_KEG
+        true,  // SLOT_MM_PICTOGRAPH_BOX
+        true,  // SLOT_MM_LENS_OF_TRUTH
+        false, // SLOT_MM_HOOKSHOT
+        false, // SLOT_MM_SWORD_GREAT_FAIRY
+        true,  // SLOT_MM_TRADE_COUPLE
+        true,  // SLOT_MM_BOTTLE_1
+        true,  // SLOT_MM_BOTTLE_2
+        true,  // SLOT_MM_BOTTLE_3
+        true,  // SLOT_MM_BOTTLE_4
+        true,  // SLOT_MM_BOTTLE_5
+        true,  // SLOT_MM_BOTTLE_6
     },
     // PLAYER_FORM_DEKU
     {
-        true,  // SLOT_OCARINA
-        false, // SLOT_BOW
-        false, // SLOT_ARROW_FIRE
-        false, // SLOT_ARROW_ICE
-        false, // SLOT_ARROW_LIGHT
-        true,  // SLOT_TRADE_DEED
-        false, // SLOT_BOMB
-        false, // SLOT_BOMBCHU
-        false, // SLOT_DEKU_STICK
-        true,  // SLOT_DEKU_NUT
-        false, // SLOT_MAGIC_BEANS
-        true,  // SLOT_TRADE_KEY_MAMA
-        false, // SLOT_POWDER_KEG
-        true,  // SLOT_PICTOGRAPH_BOX
-        true,  // SLOT_LENS_OF_TRUTH
-        false, // SLOT_HOOKSHOT
-        false, // SLOT_SWORD_GREAT_FAIRY
-        true,  // SLOT_TRADE_COUPLE
-        true,  // SLOT_BOTTLE_1
-        true,  // SLOT_BOTTLE_2
-        true,  // SLOT_BOTTLE_3
-        true,  // SLOT_BOTTLE_4
-        true,  // SLOT_BOTTLE_5
-        true,  // SLOT_BOTTLE_6
+        true,  // SLOT_MM_OCARINA
+        false, // SLOT_MM_BOW
+        false, // SLOT_MM_ARROW_FIRE
+        false, // SLOT_MM_ARROW_ICE
+        false, // SLOT_MM_ARROW_LIGHT
+        true,  // SLOT_MM_TRADE_DEED
+        false, // SLOT_MM_BOMB
+        false, // SLOT_MM_BOMBCHU
+        false, // SLOT_MM_DEKU_STICK
+        true,  // SLOT_MM_DEKU_NUT
+        false, // SLOT_MM_MAGIC_BEANS
+        true,  // SLOT_MM_TRADE_KEY_MAMA
+        false, // SLOT_MM_POWDER_KEG
+        true,  // SLOT_MM_PICTOGRAPH_BOX
+        true,  // SLOT_MM_LENS_OF_TRUTH
+        false, // SLOT_MM_HOOKSHOT
+        false, // SLOT_MM_SWORD_GREAT_FAIRY
+        true,  // SLOT_MM_TRADE_COUPLE
+        true,  // SLOT_MM_BOTTLE_1
+        true,  // SLOT_MM_BOTTLE_2
+        true,  // SLOT_MM_BOTTLE_3
+        true,  // SLOT_MM_BOTTLE_4
+        true,  // SLOT_MM_BOTTLE_5
+        true,  // SLOT_MM_BOTTLE_6
     },
     // PLAYER_FORM_HUMAN
     {
-        true,  // SLOT_OCARINA
-        true,  // SLOT_BOW
-        true,  // SLOT_ARROW_FIRE
-        true,  // SLOT_ARROW_ICE
-        true,  // SLOT_ARROW_LIGHT
-        true,  // SLOT_TRADE_DEED
-        true,  // SLOT_BOMB
-        true,  // SLOT_BOMBCHU
-        true,  // SLOT_DEKU_STICK
-        true,  // SLOT_DEKU_NUT
-        true,  // SLOT_MAGIC_BEANS
-        true,  // SLOT_TRADE_KEY_MAMA
-        false, // SLOT_POWDER_KEG
-        true,  // SLOT_PICTOGRAPH_BOX
-        true,  // SLOT_LENS_OF_TRUTH
-        true,  // SLOT_HOOKSHOT
-        true,  // SLOT_SWORD_GREAT_FAIRY
-        true,  // SLOT_TRADE_COUPLE
-        true,  // SLOT_BOTTLE_1
-        true,  // SLOT_BOTTLE_2
-        true,  // SLOT_BOTTLE_3
-        true,  // SLOT_BOTTLE_4
-        true,  // SLOT_BOTTLE_5
-        true,  // SLOT_BOTTLE_6
+        true,  // SLOT_MM_OCARINA
+        true,  // SLOT_MM_BOW
+        true,  // SLOT_MM_ARROW_FIRE
+        true,  // SLOT_MM_ARROW_ICE
+        true,  // SLOT_MM_ARROW_LIGHT
+        true,  // SLOT_MM_TRADE_DEED
+        true,  // SLOT_MM_BOMB
+        true,  // SLOT_MM_BOMBCHU
+        true,  // SLOT_MM_DEKU_STICK
+        true,  // SLOT_MM_DEKU_NUT
+        true,  // SLOT_MM_MAGIC_BEANS
+        true,  // SLOT_MM_TRADE_KEY_MAMA
+        false, // SLOT_MM_POWDER_KEG
+        true,  // SLOT_MM_PICTOGRAPH_BOX
+        true,  // SLOT_MM_LENS_OF_TRUTH
+        true,  // SLOT_MM_HOOKSHOT
+        true,  // SLOT_MM_SWORD_GREAT_FAIRY
+        true,  // SLOT_MM_TRADE_COUPLE
+        true,  // SLOT_MM_BOTTLE_1
+        true,  // SLOT_MM_BOTTLE_2
+        true,  // SLOT_MM_BOTTLE_3
+        true,  // SLOT_MM_BOTTLE_4
+        true,  // SLOT_MM_BOTTLE_5
+        true,  // SLOT_MM_BOTTLE_6
     },
 };
 
 s16 sAmmoRectLeft[] = {
-    95,  // SLOT_BOW
-    62,  // SLOT_BOMB
-    95,  // SLOT_BOMBCHU
-    128, // SLOT_DEKU_STICK
-    161, // SLOT_DEKU_NUT
-    194, // SLOT_MAGIC_BEANS
-    62,  // SLOT_POWDER_KEG
-    95,  // SLOT_PICTOGRAPH_BOX
+    95,  // SLOT_MM_BOW
+    62,  // SLOT_MM_BOMB
+    95,  // SLOT_MM_BOMBCHU
+    128, // SLOT_MM_DEKU_STICK
+    161, // SLOT_MM_DEKU_NUT
+    194, // SLOT_MM_MAGIC_BEANS
+    62,  // SLOT_MM_POWDER_KEG
+    95,  // SLOT_MM_PICTOGRAPH_BOX
 };
 
 s16 sAmmoRectHeight[] = {
-    85,  // SLOT_BOW
-    117, // SLOT_BOMB
-    117, // SLOT_BOMBCHU
-    117, // SLOT_DEKU_STICK
-    117, // SLOT_DEKU_NUT
-    117, // SLOT_MAGIC_BEANS
-    150, // SLOT_POWDER_KEG
-    150, // SLOT_PICTOGRAPH_BOX
+    85,  // SLOT_MM_BOW
+    117, // SLOT_MM_BOMB
+    117, // SLOT_MM_BOMBCHU
+    117, // SLOT_MM_DEKU_STICK
+    117, // SLOT_MM_DEKU_NUT
+    117, // SLOT_MM_MAGIC_BEANS
+    150, // SLOT_MM_POWDER_KEG
+    150, // SLOT_MM_PICTOGRAPH_BOX
 };
 
 void KaleidoScope_DrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* gfxCtx, s16 item, u16 ammoIndex) {
@@ -278,9 +278,9 @@ void KaleidoScope_DrawItemSelect(PlayState* play) {
         if (((void)0, gMmSave.saveInfo.inventory.items[i]) != ITEM_NONE) {
             if ((pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE) && (pauseCtx->pageIndex == PAUSE_ITEM) &&
                 (pauseCtx->cursorSpecialPos == 0) && gPlayerFormSlotRestrictions[GET_PLAYER_FORM][i]) {
-                if ((sEquipState == EQUIP_STATE_MAGIC_ARROW_HOVER_OVER_BOW_SLOT) && (i == SLOT_ARROW_ICE)) {
+                if ((sEquipState == EQUIP_STATE_MAGIC_ARROW_HOVER_OVER_BOW_SLOT) && (i == SLOT_MM_ARROW_ICE)) {
                     // Possible bug:
-                    // Supposed to be `SLOT_BOW`, unchanged from OoT, instead increase size of ice arrow icon
+                    // Supposed to be `SLOT_MM_BOW`, unchanged from OoT, instead increase size of ice arrow icon
                     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sMagicArrowEffectsR[pauseCtx->equipTargetItem - 0xB5],
                                     sMagicArrowEffectsG[pauseCtx->equipTargetItem - 0xB5],
                                     sMagicArrowEffectsB[pauseCtx->equipTargetItem - 0xB5], pauseCtx->alpha);
@@ -457,7 +457,7 @@ void KaleidoScope_UpdateItemCursor(PlayState* play) {
                 KaleidoScope_MoveCursorFromSpecialPos(play);
                 cursorYIndex = 0;
                 cursorXIndex = 0;
-                cursorPoint = 0; // top row, left column (SLOT_OCARINA)
+                cursorPoint = 0; // top row, left column (SLOT_MM_OCARINA)
 
                 // Search for slot to move to
                 while (true) {
@@ -494,7 +494,7 @@ void KaleidoScope_UpdateItemCursor(PlayState* play) {
             if (pauseCtx->stickAdjX < -30) {
                 KaleidoScope_MoveCursorFromSpecialPos(play);
                 cursorXIndex = 5;
-                cursorPoint = 5; // top row, right columne (SLOT_TRADE_DEED)
+                cursorPoint = 5; // top row, right columne (SLOT_MM_TRADE_DEED)
                 cursorYIndex = 0;
 
                 // Search for slot to move to
@@ -726,7 +726,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
 
         if (sEquipMagicArrowBowSlotHoldTimer == 0) {
             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-            pauseCtx->equipTargetSlot = SLOT_BOW;
+            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
             sEquipAnimTimer = 6;
             pauseCtx->equipAnimScale = 320;
             pauseCtx->equipAnimShrinkRate = 40;
@@ -737,7 +737,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
     }
 
     if (sEquipState == EQUIP_STATE_MAGIC_ARROW_MOVE_TO_BOW_SLOT) {
-        bowItemVtx = &pauseCtx->itemVtx[SLOT_BOW * 4];
+        bowItemVtx = &pauseCtx->itemVtx[SLOT_MM_BOW * 4];
         offsetX = ABS_ALT(pauseCtx->equipAnimX - bowItemVtx->v.ob[0] * 10) / sEquipAnimTimer;
         offsetY = ABS_ALT(pauseCtx->equipAnimY - bowItemVtx->v.ob[1] * 10) / sEquipAnimTimer;
     } else {
@@ -761,13 +761,13 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
         // Update coordinates of item icon while being equipped
         if (sEquipState == EQUIP_STATE_MAGIC_ARROW_MOVE_TO_BOW_SLOT) {
             // target is the bow slot
-            if (pauseCtx->equipAnimX >= (pauseCtx->itemVtx[SLOT_BOW * 4].v.ob[0] * 10)) {
+            if (pauseCtx->equipAnimX >= (pauseCtx->itemVtx[SLOT_MM_BOW * 4].v.ob[0] * 10)) {
                 pauseCtx->equipAnimX -= offsetX;
             } else {
                 pauseCtx->equipAnimX += offsetX;
             }
 
-            if (pauseCtx->equipAnimY >= (pauseCtx->itemVtx[SLOT_BOW * 4].v.ob[1] * 10)) {
+            if (pauseCtx->equipAnimY >= (pauseCtx->itemVtx[SLOT_MM_BOW * 4].v.ob[1] * 10)) {
                 pauseCtx->equipAnimY -= offsetY;
             } else {
                 pauseCtx->equipAnimY += offsetY;
@@ -805,7 +805,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              (((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) & 0xFF) >= ITEM_BOW_FIRE) &&
                               ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) & 0xFF) <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                         } else {
                             BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) = BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT);
                             C_SLOT_EQUIP(0, EQUIP_SLOT_C_DOWN) = C_SLOT_EQUIP(0, EQUIP_SLOT_C_LEFT);
@@ -822,7 +822,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              (((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) & 0xFF) >= ITEM_BOW_FIRE) &&
                               ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) & 0xFF) <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                         } else {
                             BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) = BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT);
                             C_SLOT_EQUIP(0, EQUIP_SLOT_C_RIGHT) = C_SLOT_EQUIP(0, EQUIP_SLOT_C_LEFT);
@@ -840,7 +840,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) >= ITEM_BOW_FIRE) &&
                          (BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) <= ITEM_BOW_LIGHT))) {
                         pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                        pauseCtx->equipTargetSlot = SLOT_BOW;
+                        pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                     }
                 } else if (pauseCtx->equipTargetItem == ITEM_BOW) {
                     if ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) >= ITEM_BOW_FIRE) &&
@@ -869,7 +869,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              (((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) & 0xFF) >= ITEM_BOW_FIRE) &&
                               ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) & 0xFF) <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                         } else {
                             BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) = BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN);
                             C_SLOT_EQUIP(0, EQUIP_SLOT_C_LEFT) = C_SLOT_EQUIP(0, EQUIP_SLOT_C_DOWN);
@@ -886,7 +886,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              (((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) & 0xFF) >= ITEM_BOW_FIRE) &&
                               ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) & 0xFF) <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                         } else {
                             BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) = BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN);
                             C_SLOT_EQUIP(0, EQUIP_SLOT_C_RIGHT) = C_SLOT_EQUIP(0, EQUIP_SLOT_C_DOWN);
@@ -904,7 +904,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) >= ITEM_BOW_FIRE) &&
                          (BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) <= ITEM_BOW_LIGHT))) {
                         pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                        pauseCtx->equipTargetSlot = SLOT_BOW;
+                        pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                     }
                 } else if (pauseCtx->equipTargetItem == ITEM_BOW) {
                     if ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) >= ITEM_BOW_FIRE) &&
@@ -931,7 +931,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              (((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) & 0xFF) >= ITEM_BOW_FIRE) &&
                               ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) & 0xFF) <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                         } else {
                             BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) = BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT);
                             C_SLOT_EQUIP(0, EQUIP_SLOT_C_LEFT) = C_SLOT_EQUIP(0, EQUIP_SLOT_C_RIGHT);
@@ -948,7 +948,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                              (((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) & 0xFF) >= ITEM_BOW_FIRE) &&
                               ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) & 0xFF) <= ITEM_BOW_LIGHT)))) {
                             pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                            pauseCtx->equipTargetSlot = SLOT_BOW;
+                            pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                         } else {
                             BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_DOWN) = BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT);
                             C_SLOT_EQUIP(0, EQUIP_SLOT_C_DOWN) = C_SLOT_EQUIP(0, EQUIP_SLOT_C_RIGHT);
@@ -966,7 +966,7 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) >= ITEM_BOW_FIRE) &&
                          (BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_RIGHT) <= ITEM_BOW_LIGHT))) {
                         pauseCtx->equipTargetItem -= 0xB5 - ITEM_BOW_FIRE;
-                        pauseCtx->equipTargetSlot = SLOT_BOW;
+                        pauseCtx->equipTargetSlot = SLOT_MM_BOW;
                     }
                 } else if (pauseCtx->equipTargetItem == ITEM_BOW) {
                     if ((BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_C_LEFT) >= ITEM_BOW_FIRE) &&

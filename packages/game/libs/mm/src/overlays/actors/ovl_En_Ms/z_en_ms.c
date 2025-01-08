@@ -82,7 +82,7 @@ void EnMs_Destroy(Actor* thisx, PlayState* play) {
 void EnMs_Wait(EnMs* this, PlayState* play) {
     s16 yawDiff = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
 
-    if (gMmSave.saveInfo.inventory.items[SLOT_MAGIC_BEANS] == ITEM_NONE) {
+    if (gMmSave.saveInfo.inventory.items[SLOT_MM_MAGIC_BEANS] == ITEM_NONE) {
         this->actor.textId = 0x92E;
     } else {
         this->actor.textId = 0x932;
