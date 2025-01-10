@@ -437,7 +437,7 @@
     FIRE_MQ_TOWER_TOP_HAMMER_SWITCH_BEFORE_STAIRCASE: "can_hammer"
     FIRE_MQ_TOWER_AFTER_FLARE_DANCER_HOOKSHOT_TARGETS: "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang" #Many ways to hit crystal switch. Are they even useful in this section?
   locations:
-    "MQ Fire Temple Topmost Chest": "scarecrow_hookshot || climb_anywhere || hookshot_anywhere" #Originally 'true' but I think that is an error because I don't see how you can get it without scarecrow or climb/hook anywhere.
+    "MQ Fire Temple Topmost Chest": "is_adult || (scarecrow_hookshot || climb_anywhere || hookshot_anywhere)" #Child can't do it without these.
 "Fire Temple Tower After Flare Dancer Area Before Staircase":
   dungeon: Fire
   exits:
