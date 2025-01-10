@@ -528,6 +528,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'path':
     {
       const { path } = hint;
+      const player = path.player === 'all' ? 0xff : path.player + 1;
       let pathId: number;
       let pathSubId: number;
       const regionD = regionData(hint.region);
@@ -568,6 +569,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
       bufWriteU16BE(data, HINT_OFFSETS.ITEM, pathId);
       bufWriteU16BE(data, HINT_OFFSETS.ITEM2, pathSubId);
+      bufWriteU8(data, HINT_OFFSETS.PLAYER, player);
     }
     break;
   case 'foolish':

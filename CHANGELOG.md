@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Path hints now tell the exact world the path corresponds to in multiworld.
+
 ### Fixed
 
 - Fix a bug where magical rupee would sometimes require a scene reload to work properly.
