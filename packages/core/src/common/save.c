@@ -80,6 +80,7 @@ void Save_OnLoad(void)
     netMutexUnlock();
 
     comboWalletRefresh();
+    Inventory_UpdateMaxBombchu();
 
 #if defined(GAME_MM)
     gracePeriod();

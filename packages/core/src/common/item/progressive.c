@@ -334,7 +334,7 @@ static s16 progressiveBombchuBagMm(s16 gi, int ovflags)
 
     switch (gi)
     {
-    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG;
+    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG_1;
     case GI_MM_BOMBCHU_5:  return GI_MM_BOMBCHU_BAG_5;
     case GI_MM_BOMBCHU_10: return GI_MM_BOMBCHU_BAG_10;
     case GI_MM_BOMBCHU_20: return GI_MM_BOMBCHU_BAG_20;

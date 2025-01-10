@@ -16,7 +16,7 @@ int isItemLicensed(s16 gi)
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-    case GI_MM_BOMBCHU_BAG:
+    case GI_MM_BOMBCHU_BAG_1:
     case GI_MM_BOMBCHU_BAG_5:
     case GI_MM_BOMBCHU_BAG_10:
     case GI_MM_BOMBCHU_BAG_20:

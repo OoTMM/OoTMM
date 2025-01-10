@@ -237,4 +237,17 @@ s16 comboProgressive(s16 gi, int ovflags);
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q);
 
+extern u8 gMaxBombchuOot;
+extern u8 gMaxBombchuMm;
+
+#if defined(GAME_OOT)
+# define gMaxBombchu gMaxBombchuOot
+#endif
+
+#if defined(GAME_MM)
+# define gMaxBombchu gMaxBombchuMm
+#endif
+
+void Inventory_UpdateMaxBombchu(void);
+
 #endif
