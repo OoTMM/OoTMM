@@ -60,7 +60,7 @@
 "Fire Temple Pre-Boss Room Tall Ledges Corner":
   dungeon: Fire
   exits:
-    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (is_adult || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pre-Boss": "has_tunic_goron && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
     FIRE_MQ_PRE_BOSS_TORCHES: "(has_tunic_goron || (is_child && has_tunic_goron_strict)) && has_fire && (can_use_bow || has_hover_boots)"
