@@ -291,7 +291,7 @@
   events:
     FIRE_MQ_EAST_TOWER_TOP_HOOKSHOT_TARGETS: "can_hammer"
   locations:
-    "MQ Fire Temple GS Burning Block": "gs && ((event(FIRE_MQ_EAST_TOWER_TOP_HOOKSHOT_TARGETS) && can_hookshot) || hookshot_anywhere || climb_anywhere)"
+    "MQ Fire Temple GS Burning Block": "gs && ((event(FIRE_MQ_EAST_TOWER_TOP_HOOKSHOT_TARGETS) && can_hookshot) || hookshot_anywhere || climb_anywhere)" #TODO: add a trick for getting it with boomerang
 "Fire Temple 3F Lava Floor Room After Maze":
   dungeon: Fire
   exits:
