@@ -210,7 +210,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Room Before Maze": "true"
-    "Fire Temple Maze Room Upper": "(event(FIRE_MQ_MAZE_ROOM_LOWER_RUSTY_SWITCH) && can_hookshot) || climb_anywhere || hookshot_anywhere"
+    "Fire Temple Maze Room Upper": "(event(FIRE_MQ_MAZE_ROOM_LOWER_RUSTY_SWITCH) && can_hookshot) || climb_anywhere || hookshot_anywhere" #TODO: the Hover Boots trick off the crate behind the gate
     "Fire Temple Maze Room Upper Switch Cage Alcove": "has_ranged_weapon && (can_hookshot || climb_anywhere)" #You can get here to get to Upper Maze without the rusty switch.
     "Fire Temple Maze Room Rusty Switch Behind Bombable Wall": "has_explosives" #Separated for enemy drop rando and the skulwalltula
     "Fire Temple Maze Room Blue Switch Behind Bombable Wall": "has_explosives"
