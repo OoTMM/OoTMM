@@ -303,8 +303,8 @@
     FIRE_MQ_3F_LAVA_ROOM_BLUE_SWITCH: "has_tunic_goron_strict && (can_hookshot || climb_anywhere || can_play_elegy)" #Listed here because you need to get out of cage anyway.
     FIRE_MQ_3F_LAVA_ROOM_TORCHES: "event(FIRE_MQ_3F_LAVA_ROOM_BLUE_SWITCH) && can_use_bow" #I could not get fire arrows to hit; maybe it works though.
   locations:
-    "MQ Fire Temple Pot Grids Above Lava 1": "has_tunic_goron_strict"
-    "MQ Fire Temple Pot Grids Above Lava 2": "has_tunic_goron_strict"
+    "MQ Fire Temple Pot Grids Above Lava 1": "has_tunic_goron"
+    "MQ Fire Temple Pot Grids Above Lava 2": "has_tunic_goron"
     "MQ Fire Temple Wonder Item Torch Room": "has_tunic_goron && can_hookshot"
     "MQ Fire Temple 3F Lava Room Lower Large Crate 1": "has_tunic_goron"
     "MQ Fire Temple 3F Lava Room Lower Large Crate 2": "has_tunic_goron"
