@@ -154,7 +154,7 @@
   exits:
     "Fire Temple 1F Lava Bridge Room Main": "true"
   locations:
-    "MQ Fire Temple GS 1f Lava Room": "gs && can_hammer && can_damage_skull"
+    "MQ Fire Temple GS 1f Lava Room": "gs && can_damage_skull"
 "Fire Temple Lava Bridge Room South Side Ledge":
   dungeon: Fire
   exits:
