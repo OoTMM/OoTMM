@@ -24,7 +24,7 @@
     "Fire Temple Lower Lobby": "event(FIRE_MQ_1ST_GORON_LIKELIKE)"
     "Fire Temple Hammer Loop Goron Cell Map Chest Side": "event(FIRE_MQ_MAP_CHEST_HAMMER_SWITCH)"
   events:
-    FIRE_MQ_1ST_GORON_LIKELIKE: "can_damage && soul_like_like"
+    FIRE_MQ_1ST_GORON_LIKELIKE: "(can_damage || can_hammer) && soul_like_like"
   locations:
     "MQ Fire Temple Early Lower Left Chest": "event(FIRE_MQ_1ST_GORON_LIKELIKE)"
     "MQ Fire Temple Map Chest": "event(FIRE_MQ_MAP_CHEST_HAMMER_SWITCH)"
