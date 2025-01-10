@@ -355,7 +355,7 @@
     "Fire Temple Fire Walls Middle Hallway Lower": "true"
     "Fire Temple Fire Walls Middle Hallway Upper": "true"
     "Fire Temple Fire Walls Room Large Fire Wall Side": "hookshot_anywhere || climb_anywhere"
-    "Fire Temple Fire Walls Room High Area After Staircase": "event(FIRE_MQ_HIGH_LEDGE_AFTER_STAIRCASE_PILLAR) && longshot_anywhere"
+    "Fire Temple Fire Walls Room High Area After Staircase": "event(FIRE_MQ_HIGH_LEDGE_AFTER_STAIRCASE_PILLAR) && longshot_anywhere" #TODO: implement here the trick for one-sided collision.
   events:
     FIRE_MQ_PRE_BOSS_PILLAR: "can_hammer"
   locations:
