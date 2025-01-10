@@ -297,7 +297,7 @@
   exits:
     "Fire Temple Maze Room Upper": "has_tunic_goron && small_keys_fire_mq(3)"
     "Fire Temple 3F Lava Room Cage Area": "(has_tunic_goron && (is_adult || hookshot_anywhere || climb_anywhere)) || (has_tunic_goron_strict && can_hookshot)" #Adult can make an angled jump from the Upper Mazr Door to on top of the cage quickly.
-    "Fire Temple Inside Maze Narrow Paths Room": "has_tunic_goron_strict || (has_tunic_goron && is_adult)" #Adult just gets through it faster.
+    "Fire Temple Inside Maze Narrow Paths Room": "has_tunic_goron"
     "Fire Temple 3F Lava Room Ledge Before Fire Walls Hallway": "(has_tunic_goron && is_adult) || (has_tunic_goron_strict && (can_hookshot || climb_anywhere))"
   events:
     FIRE_MQ_3F_LAVA_ROOM_BLUE_SWITCH: "has_tunic_goron_strict && (can_hookshot || climb_anywhere || can_play_elegy)" #Listed here because you need to get out of cage anyway.
