@@ -419,7 +419,7 @@
   events:
     FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || can_use_mask_blast || can_hammer || can_hookshot) && has_weapon"
   locations:
-    "MQ Fire Temple Flare Dancer Key": "event(FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS)"
+    "MQ Fire Temple Flare Dancer Key": "event(FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS)" #TODO: trick to get with boomerang
 "Fire Temple Tower After Flare Dancer First Room":
   dungeon: Fire
   exits:
