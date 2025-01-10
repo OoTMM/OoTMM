@@ -119,7 +119,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Upper Lobby": "true"
-    "Fire Temple Lava Bridge Room North Side Upper Ledge": "has_tunic_goron_strict && ((event(FIRE_MQ_LAVA_BRIDGE_ROOM_HOOKSHOT_PLATFORMS) && can_hookshot) || hookshot_anywhere || climb_anywhere)"
+    "Fire Temple Lava Bridge Room North Side Upper Ledge": "has_tunic_goron && ((event(FIRE_MQ_LAVA_BRIDGE_ROOM_HOOKSHOT_PLATFORMS) && can_hookshot) || hookshot_anywhere || climb_anywhere)"
     "Fire Temple Lava Bridge Room North Side Lower Room": "has_tunic_goron"
     "Fire Temple 1F Lava Bridge Room High Alcove": "true"
     "Fire Temple Lava Bridge Room South Side Ledge": "(has_tunic_goron && can_hookshot) || (has_tunic_goron_strict && climb_anywhere)" #Found a glitch too with climb anywhere and damage boosting through the moving platform.
