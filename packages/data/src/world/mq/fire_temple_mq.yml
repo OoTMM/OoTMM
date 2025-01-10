@@ -214,7 +214,7 @@
     "Fire Temple Maze Room Upper Switch Cage Alcove": "has_ranged_weapon && (can_hookshot || climb_anywhere)" #You can get here to get to Upper Maze without the rusty switch.
     "Fire Temple Maze Room Rusty Switch Behind Bombable Wall": "has_explosives" #Separated for enemy drop rando and the skulwalltula
     "Fire Temple Maze Room Blue Switch Behind Bombable Wall": "has_explosives"
-    "Fire Temple Tower Area Above Maze Room": "can_longshot || (is_adult && hookshot_anywhere) || climb_anywhere" #Can be used to get to upper maze room without the rusty switch.
+    "Fire Temple Tower Area Above Maze Room": "can_longshot" #Can be used to get to upper maze room without the rusty switch.
     #"Fire Temple Inside Maze Narrow Paths Room": "false"
   events:
     FIRE_MQ_MAZE_ROOM_LOWER_CAGE_SWITCH: "can_jump_slash || (has_weapon && has_magic)" #Not too sure about this.
