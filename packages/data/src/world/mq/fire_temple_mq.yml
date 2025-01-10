@@ -53,7 +53,7 @@
 "Fire Temple Pre-Boss":
   dungeon: Fire
   exits:
-    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (hookshot_anywhere || climb_anywhere || event(FIRE_MQ_PRE_BOSS_PILLAR))"
+    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (is_adult || hookshot_anywhere || climb_anywhere || (event(FIRE_MQ_PRE_BOSS_PILLAR) && has_hover_boots))"
     "Fire Temple Pre-Boss Room Cell Corner": "has_tunic_goron && (can_hookshot || has_hover_boots || climb_anywhere)"
     "Fire Temple Pre-Boss Room Tall Ledges Corner": "has_tunic_goron && (can_hookshot || has_hover_boots || climb_anywhere)"
     "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE)"
