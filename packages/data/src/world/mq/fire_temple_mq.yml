@@ -311,9 +311,9 @@
     "MQ Fire Temple 3F Lava Room Lower Large Crate 3": "has_tunic_goron"
     "MQ Fire Temple 3F Lava Room Lower Small Crate 1": "has_tunic_goron"
     "MQ Fire Temple 3F Lava Room Lower Small Crate 2": "has_tunic_goron"
-    "MQ Fire Temple 3F Lava Room Near Cage Large Crate": "has_tunic_goron_strict && (is_adult || can_hookshot || climb_anywhere)"
-    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 1": "has_tunic_goron_strict && (is_adult || can_hookshot || climb_anywhere)"
-    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 2": "has_tunic_goron_strict && (is_adult || can_hookshot || climb_anywhere)"
+    "MQ Fire Temple 3F Lava Room Near Cage Large Crate": "has_tunic_goron && (can_hookshot || climb_anywhere)" #TODO: trick for adult walking along the edge of cage
+    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 1": "has_tunic_goron && (can_hookshot || climb_anywhere)" #TODO: trick for adult walking along the edge of cage
+    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 2": "has_tunic_goron && (can_hookshot || climb_anywhere)" #TODO: trick for adult walking along the edge of cage
 "Fire Temple 3F Lava Room Ledge Before Fire Walls Hallway":
   dungeon: Fire
   exits:
