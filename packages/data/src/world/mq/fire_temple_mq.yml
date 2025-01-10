@@ -32,8 +32,8 @@
   dungeon: Fire
   exits:
     "Fire Temple Lower Lobby": "true"
-    "Fire Temple Pre-Boss Room Entrance Side": "has_fire && has_tunic_goron"
-    "Fire Temple 1F Lava Bridge Room Main": "can_hammer && has_tunic_goron"
+    "Fire Temple Pre-Boss Room Entrance Side": "has_fire"
+    "Fire Temple 1F Lava Bridge Room Main": "can_hammer"
 "Fire Temple Pre-Boss Room Entrance Side":
   dungeon: Fire
   exits:
