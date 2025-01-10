@@ -65,12 +65,12 @@
   events:
     FIRE_MQ_PRE_BOSS_TORCHES: "(has_tunic_goron || (is_child && has_tunic_goron_strict)) && has_fire && (can_use_bow || has_hover_boots)"
   locations:
-    "MQ Fire Temple Pot Pre-Boss 1": "true"
-    "MQ Fire Temple Pot Pre-Boss 2": "true"
+    "MQ Fire Temple Pot Pre-Boss 1": "has_tunic_goron"
+    "MQ Fire Temple Pot Pre-Boss 2": "has_tunic_goron"
     "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 1": "has_tunic_goron"
     "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2": "has_tunic_goron"
-    "MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate": "has_tunic_goron || (is_child && has_tunic_goron_strict)" #Child can reach this by jumping off the hookshot platform that has the torch.
-    "MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate": "has_tunic_goron || (is_child && has_tunic_goron_strict)" #Child can reach this by using the middle crate as a platform.
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate": "has_tunic_goron" #Child can reach this by jumping off the hookshot platform that has the torch.
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate": "has_tunic_goron" #Child can reach this by using the middle crate as a platform.
 "Fire Temple Hammer Loop Enemies Room":
   dungeon: Fire
   exits:
