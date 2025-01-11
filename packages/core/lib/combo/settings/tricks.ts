@@ -586,7 +586,7 @@ export const TRICKS: Tricks = {
   MM_ISTT_RUPEES_GORON: {
     game: 'mm',
     name: 'Collect the Floating Rupees in ISTT as Goron',
-    tooltip: 'In the room before Twinmold, Goron can collect the rupees by rolling over them.',
+    tooltip: 'In the room before Twinmold, Goron can collect the rupees by rolling on the platform over them.',
   },
   MM_BOMBER_BACKFLIP: {
     game: 'mm',
