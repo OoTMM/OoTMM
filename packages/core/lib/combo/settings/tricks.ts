@@ -591,7 +591,7 @@ export const TRICKS: Tricks = {
   MM_BOMBER_BACKFLIP: {
     game: 'mm',
     name: 'Backflip over the Bomber in East Clock Town',
-    tooltip: 'Just backflip over the kid.',
+    tooltip: 'Just backflip over the kid.', // Is Guess Bombers' Code not logically equivalent to this?
   },
   MM_NCT_TINGLE: {
     game: 'mm',
