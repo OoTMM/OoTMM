@@ -356,7 +356,7 @@ export const TRICKS: Tricks = {
   MM_PALACE_BEAN_SKIP: {
     game: 'mm',
     name: 'Skip Planting Beans in Deku Palace',
-    tooltip: 'Jump onto on of the doorframes to skip planting the beans, removing bottle for this check',
+    tooltip: 'Backflip onto the doorframe in the left side of Deku Palace to skip planting the beans, removing the bottle requirement for the Sonata check',
     linkVideo: 'https://www.youtube.com/watch?v=sL30HLF9tAQ&ab_channel=PushyMisumi',
   },
   MM_DARMANI_WALL: {
