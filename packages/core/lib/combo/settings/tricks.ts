@@ -285,18 +285,17 @@ export const TRICKS: Tricks = {
   OOT_WELL_ADULT_TT: {
     game: 'oot',
     name: 'Enter Bottom of the Well as Adult with Time Travel',
-    tooltip: 'Entering the drained well as Child and turning Adult behind the blockage grants access to that entrance as Adult. In Boss ER and Full Dungeon ER, this trick will allow an Adult Boss to be placed inside an MM Dungeon in this location.',
+    tooltip: 'Entering the drained well as Child and turning Adult behind the blockage grants access to that entrance as Adult.<br>Intended for use with Boss ER and Full Dungeon ER. This trick will allow an Adult Boss to be placed inside an MM Dungeon in this location.',
   },
   OOT_ADULT_GALLERY_TT: {
     game: 'oot',
     name: 'Enter Adult Shooting Gallery as Child with Time Travel',
-    tooltip:
-      'Intended for use with Interior ER. This will allow interiors with Child-only checks where you cannot age swap to be placed in this location.',
+    tooltip:'It is possible to turn from Child to Adult inside of the construction area, get close to the loading zone, and turn back to Child to enter the loading zone inside of the brick stack.<br> Intended for use with Interior ER. This will allow interiors with Child-only checks where you cannot age swap to be placed in this location.',
   },
   OOT_GTG_CHILD_TT: {
     game: 'oot',
     name: 'Enter Gerudo Training Grounds as Child with Time Travel',
-    tooltip: 'Intended for use with Boss ER and Full Dungeon ER. This trick will allow a Child Boss to be placed in an MM Dungeon in this location.',
+    tooltip: 'Turning from Adult to Child inside of the doorframe puts you behind the gates, granting access to that entrance as Child.<br> Intended for use with Boss ER and Full Dungeon ER. This trick will allow a Child Boss to be placed in an MM Dungeon in this location.',
   },
   OOT_REVERSE_DAMPE: {
     game: 'oot',
