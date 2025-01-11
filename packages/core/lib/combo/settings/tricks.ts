@@ -525,7 +525,7 @@ export const TRICKS: Tricks = {
   MM_ISTT_CHUCHU_LESS: {
     game: 'mm',
     name: 'ISTT Block Room without Chuchu Jellies',
-    tooltip: 'Normally the room contains Chuchu Jellies to restock your arrows and magic. With this trick on, logic can expect to do this room without the Soul of Chuchus.',
+    tooltip: 'Normally the room contains Chuchu Jellies to restock your arrows and magic. With this trick on, logic can expect you to do this room without the Soul of Chuchus.',
   },
   MM_GBT_WATERWHEEL_GORON: {
     game: 'mm',
