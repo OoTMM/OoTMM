@@ -487,13 +487,13 @@ export const TRICKS: Tricks = {
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: {
     game: 'mm',
     name: 'Zora Hall Scrub HP without Deku',
-    tooltip: 'As either Goron or Zora Link, jump up to the heart piece.  Linked playlist has both versions.',
+    tooltip: 'As either Goron or Zora Link, jump up to the heart piece. Linked playlist has both versions.',
     linkVideo: 'https://www.youtube.com/playlist?list=PL7AtrmSRvw6JxohRTRK61ZGSvuIL5rq0w',
   },
   MM_ZORA_HALL_DOORS: {
     game: 'mm',
     name: 'Access the doors in Zora Hall using Short Hookshot Anywhere',
-    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot behind the doors and open the doors behind them. It is somewhat precise but works with all doors.',
+    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot behind the doors and open the doors behind them. It is somewhat precise but works with all doors.', //How does this trick work exactly?
   },
   MM_IKANA_ROOF_PARKOUR: {
     game: 'mm',
