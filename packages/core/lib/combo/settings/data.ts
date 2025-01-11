@@ -964,10 +964,10 @@ export const SETTINGS = [{
   name: 'Deku Tree',
   category: 'main.events',
   type: 'enum',
-  description: 'Controls the behavior of Mido blocking the Deku Tree as child',
+  description: 'Controls the behavior of Mido blocking the Deku Tree as Child',
   values: [
     { value: 'closed', name: 'Closed', description: 'Mido will block the way to the Deku Tree until you have a Deku Shield and the Kokiri Sword.' },
-    { value: 'vanilla', name: 'Vanilla', description: 'Mido will block the way to the Deku Tree, but the tree itself will be open as child.' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Mido will block the way to the Deku Tree, but the tree itself will be open as Child.' },
     { value: 'open', name: 'Open', description: 'Mido will not block the way, the Deku Tree will be open from the start' },
   ],
   default: 'open',
@@ -1036,7 +1036,7 @@ export const SETTINGS = [{
   name: 'Kakariko Gate',
   category: 'main.events',
   type: 'enum',
-  description: 'Controls the behavior of the gate in Kakariko blocking Death Mountain as child',
+  description: 'Controls the behavior of the gate in Kakariko blocking Death Mountain as Child',
   values: [
     { value: 'closed', name: 'Closed', description: 'The gate will be closed until you show Zelda\'s Letter to the guard' },
     { value: 'open', name: 'Open', description: 'The gate will be open from the start' },
@@ -1048,7 +1048,7 @@ export const SETTINGS = [{
   name: 'Open Zora\'s Domain Shortcut',
   category: 'main.events',
   type: 'boolean',
-  description: 'Removes the ice blocking Zora\'s Domain in Lake Hylia as adult',
+  description: 'Removes the ice blocking Zora\'s Domain in Lake Hylia as Adult',
   default: false,
   cond: hasOoT,
 }, {
@@ -1073,7 +1073,7 @@ export const SETTINGS = [{
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'You will need to rescue all carpenters.' },
     { value: 'single', name: 'One Carpenter', description: 'You will need to rescue only one carpenter.' },
-    { value: 'open', name: 'Open', description: 'Carpenters are rescued from the start and the bridge in Gerudo Valley as adult is repaired.' },
+    { value: 'open', name: 'Open', description: 'Carpenters are rescued from the start and the bridge in Gerudo Valley as Adult is repaired.' },
   ],
   default: 'vanilla',
   cond: hasOoT,
@@ -1082,7 +1082,7 @@ export const SETTINGS = [{
   name: 'Skip Child Zelda',
   category: 'main.events',
   type: 'boolean',
-  description: 'This changes the beginning of the child trade quest. True means you\'ll start having already met Zelda and got her item along with the one from Impa. The Chicken is also removed from the game, but Malon will still be at Hyrule Castle',
+  description: 'This changes the beginning of the Child trade quest. True means you\'ll start having already met Zelda and got her item along with the one from Impa. The Chicken is also removed from the game, but Malon will still be at Hyrule Castle',
   default: false,
   cond: hasOoT,
 }, {
@@ -2415,7 +2415,7 @@ export const SETTINGS = [{
   name: 'Ageless Child Trade',
   category: 'items.ageless',
   type: 'boolean',
-  description: 'Allows Link to use the Child Trade items independently of his age',
+  description: 'Allows Link to use the Child trade items independently of his age',
   default: false,
   cond: hasOoT,
 }, {

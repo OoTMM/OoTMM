@@ -164,7 +164,7 @@ export const TRICKS: Tricks = {
   OOT_PASS_COLLISION: {
     game: 'oot',
     name: 'Pass through Visible One-Way Collisions',
-    tooltip: "Some walls and gates, despite their appearance, only have collision on one side. Turning this on may expect you to know of these and walk through them. Some examples are the Kakariko Gate as child and the awning behind Impa's House.",
+    tooltip: "Some walls and gates, despite their appearance, only have collision on one side. Turning this on may expect you to know of these and walk through them. Some examples are the Kakariko Gate as Child and the awning behind Impa's House.",
     linkVideo: 'https://www.youtube.com/watch?v=OnnNUZVW8Gw&ab_channel=StoneeBadLuck',
   },
   OOT_DMT_RED_ROCK_GS: {
@@ -176,7 +176,7 @@ export const TRICKS: Tricks = {
   OOT_DEAD_HAND_STICKS: {
     game: 'oot',
     name: 'Child Dead Hand without Kokiri Sword',
-    tooltip: 'Fighting Dead Hand as child with Deku Sticks requires all 10 if you only use slashes. This trick removes the mercy of fighting it with a sword.',
+    tooltip: 'Fighting Dead Hand as Child with Deku Sticks requires all 10 if you only use slashes. This trick removes the mercy of fighting it with a sword.',
     linkVideo: 'https://www.youtube.com/watch?v=gROY5Y66xeA&ab_channel=dotzo',
   },
   OOT_BFA_MUDWALLS: {
@@ -265,7 +265,7 @@ export const TRICKS: Tricks = {
   OOT_DC_BOULDER: {
     game: 'oot',
     name: "Skip Dodongo Cavern's Boulder using Ageless Hookshot Anywhere",
-    tooltip: 'Using Ageless Hookshot Anywhere, child can hookshot through the small hole at the bottom right next to the soft soil. Doing this can get you past the boulder without blowing it up.',
+    tooltip: 'Using Ageless Hookshot Anywhere, Child can hookshot through the small hole at the bottom right next to the soft soil. Doing this can get you past the boulder without blowing it up.',
   },
   OOT_LAKE_SHORTCUT: {
     game: 'oot',
@@ -280,7 +280,7 @@ export const TRICKS: Tricks = {
   OOT_TENT_CHILD: {
     game: 'oot',
     name: 'Enter the Gerudo Valley Tent as Child',
-    tooltip: "The Gerudo Valley Tent is only present as Adult, however it's entrance is still there as child. Turning this on may expect the player to know where it is and use it for progress in Interior ER.",
+    tooltip: "The Gerudo Valley Tent is only present as Adult, however it's entrance is still there as Child. Turning this on may expect the player to know where it is and use it for progress in Interior ER.",
   },
   OOT_WELL_ADULT_TT: {
     game: 'oot',
@@ -306,7 +306,7 @@ export const TRICKS: Tricks = {
   OOT_GANON_FAIRY_TT: {
     game: 'oot',
     name: "Ganon's Great Fairy with Age Swap and without Gold Gauntlets",
-    tooltip: 'By using Age Swap in the child Great Fairy entrance, Adult can walk out of his entrance and then walk right back in to access his Great Fairy entrance.',
+    tooltip: 'By using Age Swap in the Child Great Fairy entrance, Adult can walk out of his entrance and then walk right back in to access his Great Fairy entrance.',
   },
   OOT_GANON_CASTLE_ENTRY: {
     game: 'oot',
