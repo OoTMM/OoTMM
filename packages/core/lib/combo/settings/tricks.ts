@@ -656,7 +656,7 @@ export const TRICKS: Tricks = {
   MM_GBT_CENTER_POT_IRONS: {
     game: 'mm',
     name: 'Great Bay Temple Center Underwater Pot using only Iron Boots',
-    tooltip: 'The pot can be broken by rolling into it and the Stray Fairy collected.',
+    tooltip: 'The pot can be broken by rolling into it, allowing you to collect the Stray Fairy.',
   },
   MM_GBT_RED1_HOVERS: {
     game: 'mm',
