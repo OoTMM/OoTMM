@@ -416,9 +416,12 @@
 - { id: OOT_FISHING_POND_ADULT_LOACH_34LBS, type: MAJOR, add: [POND_FISH, 0x3022], flags: 0x80, draw: [POND_FISH, 30], object: GI_POND_FISH, name: "an <C1>Adult Loach (34 pounds)" }
 - { id: OOT_FISHING_POND_ADULT_LOACH_35LBS, type: MAJOR, add: [POND_FISH, 0x3023], flags: 0x80, draw: [POND_FISH, 30], object: GI_POND_FISH, name: "an <C1>Adult Loach (35 pounds)" }
 - { id: OOT_FISHING_POND_ADULT_LOACH_36LBS, type: MAJOR, add: [POND_FISH, 0x3024], flags: 0x80, draw: [POND_FISH, 30], object: GI_POND_FISH, name: "an <C1>Adult Loach (36 pounds)" }
-- { id: OOT_BOMBCHU_BAG_5,  type: MAJOR, add: [OOT_BOMBCHU_BAG, 5],  flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: OOT_BOMBCHU_BAG_10, type: MAJOR, add: [OOT_BOMBCHU_BAG, 10], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: OOT_BOMBCHU_BAG_20, type: MAJOR, add: [OOT_BOMBCHU_BAG, 20], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: OOT_BOMBCHU_BAG,    type: MAJOR, add: [OOT_BOMBCHU_BAG, 1],   flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: OOT_BOMBCHU_BAG2,   type: MAJOR, add: [OOT_BOMBCHU_BAG, 2],   flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Big Bombchu Bag" }
+- { id: OOT_BOMBCHU_BAG3,   type: MAJOR, add: [OOT_BOMBCHU_BAG, 3],   flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Biggest Bombchu Bag" }
+- { id: OOT_BOMBCHU_BAG_FIRST_5,  type: MAJOR, add: [OOT_BOMBCHU_BAG, -5],  flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: OOT_BOMBCHU_BAG_FIRST_10, type: MAJOR, add: [OOT_BOMBCHU_BAG, -10], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: OOT_BOMBCHU_BAG_FIRST_20, type: MAJOR, add: [OOT_BOMBCHU_BAG, -20], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_SWORD_RAZOR, type: MAJOR, add: [OOT_SWORD_EXTRA, 1], flags: 0x80, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9], name: "the <C1>Razor Sword" }
 - { id: OOT_SWORD_GILDED, type: MAJOR, add: [OOT_SWORD_EXTRA, 2], flags: 0x80, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
 - { id: OOT_SPIN_UPGRADE, type: MAJOR, add: OOT_SPIN_UPGRADE, flags: 0xa0, draw: [SPIN_UPGRADE, 1], object: [oot, 0x018d], name: "the <C1>Spin Attack Upgrade" }
@@ -732,10 +735,13 @@
 - { id: MM_POE, item: MM_POE, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0xa0, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
 - { id: MM_BOTTLE_POE, item: MM_POE, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [MM_BOTTLE_FAIRY, 1], object: [mm, 0x0272], name:  "a <C1>bottled Poe" }
 - { id: MM_BOTTLE_BIG_POE, item: MM_BIG_POE, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [MM_BOTTLE_FAIRY, 2], object: [mm, 0x0272], name:  "a <C1>bottled Big Poe" }
-- { id: MM_BOMBCHU_BAG,    type: MAJOR, add: [MM_BOMBCHU_BAG, 1],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: MM_BOMBCHU_BAG_5,  type: MAJOR, add: [MM_BOMBCHU_BAG, 5],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: MM_BOMBCHU_BAG_10, type: MAJOR, add: [MM_BOMBCHU_BAG, 10], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: MM_BOMBCHU_BAG_20, type: MAJOR, add: [MM_BOMBCHU_BAG, 20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG,    type: MAJOR, add: [MM_BOMBCHU_BAG,  1],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG2,   type: MAJOR, add: [MM_BOMBCHU_BAG,  2],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Big Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG3,   type: MAJOR, add: [MM_BOMBCHU_BAG,  3],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Biggest Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_FIRST_1,  type: MAJOR, add: [MM_BOMBCHU_BAG, -1],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_FIRST_5,  type: MAJOR, add: [MM_BOMBCHU_BAG, -5],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_FIRST_10, type: MAJOR, add: [MM_BOMBCHU_BAG, -10], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_FIRST_20, type: MAJOR, add: [MM_BOMBCHU_BAG, -20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_FAIRY_BIG, type: MINOR, add: MM_FAIRY_BIG, flags: 0xa0, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_SPELL_FIRE, item: MM_SPELL_FIRE, type: MAJOR, add: [MM_TRADE1, XITEM_MM_TRADE1_SPELL_FIRE], flags: 0x80, draw: OOT_SPELL_FIRE, object: [oot, 0x015d], name: "<C1>Din's Fire" }
 - { id: MM_SPELL_WIND, item: MM_SPELL_WIND, type: MAJOR, add: [MM_TRADE2, XITEM_MM_TRADE2_SPELL_WIND], flags: 0x80, draw: OOT_SPELL_WIND, object: [oot, 0x015d], name: "<C1>Farore's Wind" }

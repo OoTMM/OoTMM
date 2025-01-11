@@ -33,12 +33,7 @@ CheckBombchuBag_Ret:
   jr ra
    nop
 
-
-PATCH_GROUP PG_MM_BOMBCHU_BAG
-
 PATCH_START 0x80963a50
   jal CheckBombchuBag
    nop
 PATCH_END
-
-PATCH_GROUP_END

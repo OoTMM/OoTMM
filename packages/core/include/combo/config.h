@@ -5,6 +5,11 @@
 #include <combo/prices.h>
 #include <combo/types.h>
 
+#define BOMBCHU_BEHAVIOR_FREE           0
+#define BOMBCHU_BEHAVIOR_BOMB_BAG       1
+#define BOMBCHU_BEHAVIOR_BAG_FIRST      2
+#define BOMBCHU_BEHAVIOR_BAG_SEPARATE   3
+
 #define SPECIAL_BRIDGE      0
 #define SPECIAL_MOON        1
 #define SPECIAL_LACS        2
@@ -56,6 +61,8 @@ typedef struct
     u16             giZoraSapphire;
     u8              boss[12];
     u8              strayFairyRewardCount;
+    u8              bombchuBehaviorOot;
+    u8              bombchuBehaviorMm;
 }
 ComboConfig;
 

@@ -253,6 +253,7 @@ void comboCreateSave(void* unk, void* buffer)
         gMmExtraFlags2.childWallet = 1;
     }
     comboWalletRefresh();
+    Inventory_UpdateMaxBombchu();
 
     /* Apply enemy souls */
     if (!Config_Flag(CFG_OOT_SOULS_ENEMY))

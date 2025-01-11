@@ -39,6 +39,8 @@ typedef struct ALIGNED(16)
     u8              foundMasterSword:1;
     u8              storedSirloin:1;
     u8              extraSwordsOot:2;
+    u8              bombchuBagOot:2;
+    u8              bombchuBagMm:2;
 #if defined(DEBUG)
     u8              cheats[4];
 #endif

@@ -144,6 +144,15 @@
 "has_sword": "has_b_sword || has(GREAT_FAIRY_SWORD)"
 "has_weapon": "has_sword || can_hammer"
 
+# Bombchu
+"bombchu_license_bag_first": "license(BOMBCHU) || license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
+"bombchu_license_bag_separate": "has(BOMBCHU_BAG) || has(SHARED_BOMBCHU_BAG)"
+"bombchu_license_bag": "(setting(bombchuBehaviorMm, bagSeparate) && bombchu_license_bag_separate) || (setting(bombchuBehaviorMm, bagFirst) && bombchu_license_bag_first)"
+"bombchu_license": "((setting(bombchuBehaviorMm, free) || setting(bombchuBehaviorMm, bombBag)) && has_bomb_bag) || bombchu_license_bag"
+"bombchu_drops": "bombchu_license_bag && (event(BOMBS_OR_BOMBCHU) || (setting(sharedBombchu) && event(OOT_BOMBS_OR_BOMBCHU)))"
+"bombchu_source": "event(BOMBCHU) || bombchu_drops || renewable(BOMBCHU) || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20) || (setting(sharedBombchu) && (event(OOT_BOMBCHU) || renewable(SHARED_BOMBCHU) || renewable(SHARED_BOMBCHU_5) || renewable(SHARED_BOMBCHU_10) || renewable(SHARED_BOMBCHU_20)))"
+"has_bombchu": "bombchu_source && bombchu_license"
+
 "can_break_boulders": "has_explosives || has_mask_goron || can_hammer"
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
 "can_break_snowballs": "can_break_boulders || can_use_fire_short_range"
@@ -163,11 +172,6 @@
 "can_use_elegy2": "can_play_emptiness && (has_mask_zora || has_mask_goron)"
 "can_use_elegy3": "can_play_emptiness && has_mask_zora && has_mask_goron"
 "has_bomb_bag": "has(BOMB_BAG) || has(SHARED_BOMB_BAG)"
-"has_bombchu_source": "event(BOMBCHU) || renewable(BOMBCHU) || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20) || (setting(bombchuBagMm) && event(BOMBS_OR_BOMBCHU)) || (setting(sharedBombchuBags) && (renewable(SHARED_BOMBCHU) || renewable(SHARED_BOMBCHU_5) || renewable(SHARED_BOMBCHU_10) || renewable(SHARED_BOMBCHU_20) || event(OOT_BOMBCHU) || event(OOT_BOMBS_OR_BOMBCHU)))"
-"has_bombchu_license_nonshared": "license(BOMBCHU) || license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20)"
-"has_bombchu_license_shared": "license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
-"has_bombchu_license": "cond(setting(bombchuBagMm), cond(setting(sharedBombchuBags), has_bombchu_license_shared, has_bombchu_license_nonshared), has_bomb_bag)"
-"has_bombchu": "has_bombchu_source && has_bombchu_license"
 "has_beans": "event(MAGIC_BEANS_PALACE) || (license(MAGIC_BEAN) && renewable(MAGIC_BEAN))"
 "can_use_beans": "has_beans && (has_water || can_play_storms)"
 "scarecrow_set": "event(SCARECROW) || setting(freeScarecrowMm)"

@@ -51,6 +51,7 @@ const EXTRA_ITEMS_MM = new Set([
 
 const ITEM_POOL_SCARCE = new Set([
   Items.OOT_BOMB_BAG,
+  Items.OOT_BOMBCHU_BAG,
   Items.OOT_BOW,
   Items.OOT_MAGIC_UPGRADE,
   Items.OOT_SLINGSHOT,
@@ -58,9 +59,11 @@ const ITEM_POOL_SCARCE = new Set([
   Items.MM_BOW,
   Items.MM_SWORD,
   Items.MM_BOMB_BAG,
+  Items.MM_BOMBCHU_BAG,
   Items.MM_OCARINA,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
+  Items.SHARED_BOMBCHU_BAG,
   Items.SHARED_MAGIC_UPGRADE,
   Items.SHARED_SWORD,
 ]);
@@ -86,6 +89,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_ARROW_LIGHT,
   Items.OOT_ARROW_ICE,
   Items.OOT_BOMB_BAG,
+  Items.OOT_BOMBCHU_BAG,
   Items.OOT_BOOMERANG,
   Items.OOT_BOOTS_HOVER,
   Items.OOT_BOOTS_IRON,
@@ -175,6 +179,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_SHIELD,
   Items.MM_SHIELD_MIRROR,
   Items.MM_BOMB_BAG,
+  Items.MM_BOMBCHU_BAG,
   Items.MM_LENS,
   Items.MM_ARROW_FIRE,
   Items.MM_ARROW_ICE,
@@ -209,6 +214,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_STRENGTH,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
+  Items.SHARED_BOMBCHU_BAG,
   Items.SHARED_MAGIC_UPGRADE,
   Items.SHARED_ARROW_FIRE,
   Items.SHARED_ARROW_ICE,
@@ -628,7 +634,7 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_BOMBS_30,   Items.SHARED_BOMBS_30);
     }
 
-    if (settings.sharedBombchuBags) {
+    if (settings.sharedBombchu) {
       this.replaceItem(Items.OOT_BOMBCHU_5,   Items.SHARED_BOMBCHU_5);
       this.replaceItem(Items.OOT_BOMBCHU_10,  Items.SHARED_BOMBCHU_10);
       this.replaceItem(Items.OOT_BOMBCHU_20,  Items.SHARED_BOMBCHU_20);
@@ -636,6 +642,17 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_BOMBCHU_5,    Items.SHARED_BOMBCHU_5);
       this.replaceItem(Items.MM_BOMBCHU_10,   Items.SHARED_BOMBCHU_10);
       this.replaceItem(Items.MM_BOMBCHU_20,   Items.SHARED_BOMBCHU_20);
+
+      if (settings.bombchuBehaviorOot === 'bagSeparate') {
+        this.addItem(Items.SHARED_BOMBCHU_BAG, 3);
+      }
+    } else {
+      if (settings.bombchuBehaviorOot === 'bagSeparate') {
+        this.addItem(Items.OOT_BOMBCHU_BAG, 3);
+      }
+      if (settings.bombchuBehaviorMm === 'bagSeparate') {
+        this.addItem(Items.MM_BOMBCHU_BAG, 3);
+      }
     }
 
     if (settings.sharedMagic) {

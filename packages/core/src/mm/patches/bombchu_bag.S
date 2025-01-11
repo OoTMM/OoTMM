@@ -1,33 +1,32 @@
 #include <combo.h>
 
-PATCH_GROUP PG_MM_BOMBCHU_BAG
-
-PATCH_START 0x80113bac
-  li a0,50
+PATCH_START 0x80113ba8
+  lbu a0,(gMaxBombchuMm)
 PATCH_END
 
-PATCH_START 0x80113c3c
-  li a0,50
+PATCH_START 0x80113c38
+  lbu a0,(gMaxBombchuMm)
 PATCH_END
 
-PATCH_START 0x80113ca8
-  li a0,50
+PATCH_START 0x80113ca4
+  lbu a0,(gMaxBombchuMm)
 PATCH_END
 
-PATCH_START 0x80115b78
-  li a2,50
+PATCH_START 0x80115b74
+  lbu a2,(gMaxBombchuMm)
 PATCH_END
 
-PATCH_START 0x80117ec0
-  li t7,50
+PATCH_START 0x80117ebc
+  lbu t7,(gMaxBombchuMm)
 PATCH_END
 
-PATCH_START 0x8081b510
-  li t8,50
+PATCH_START 0x8081b50c
+  lbu t7,(gMaxBombchuMm)
 PATCH_END
+
+PATCH_START 0x80863f1c
+  lui t4,%HI(gMaxBombchuMm)
 
 PATCH_START 0x80863f28
-  li t4,50
+  lbu t4,%LO(gMaxBombchuMm)(t4)
 PATCH_END
-
-PATCH_GROUP_END

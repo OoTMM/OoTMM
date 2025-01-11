@@ -52,7 +52,7 @@ int isItemBuyable(s16 gi)
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
-        return (gOotSave.info.inventory.ammo[ITS_OOT_BOMBCHU] < 50);
+        return (gOotSave.info.inventory.ammo[ITS_OOT_BOMBCHU] < gMaxBombchuOot);
     case GI_OOT_ARROWS_5:
     case GI_OOT_ARROWS_10:
     case GI_OOT_ARROWS_30:
@@ -98,10 +98,11 @@ int isItemBuyable(s16 gi)
     case GI_MM_BOMBS_20:
     case GI_MM_BOMBS_30:
         return (gMmSave.info.inventory.upgrades.bombBag > 0) && (gMmSave.info.inventory.ammo[ITS_MM_BOMBS] < kMaxBombs[gMmSave.info.inventory.upgrades.bombBag]);
+    case GI_MM_BOMBCHU:
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-        return (gMmSave.info.inventory.ammo[ITS_MM_BOMBCHU] < (Config_Flag(CFG_MM_BOMBCHU_BAG) ? 50 : kMaxBombs[gMmSave.info.inventory.upgrades.bombBag]));
+        return (gMmSave.info.inventory.ammo[ITS_MM_BOMBCHU] < gMaxBombchuMm);
     case GI_MM_ARROWS_10:
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:
