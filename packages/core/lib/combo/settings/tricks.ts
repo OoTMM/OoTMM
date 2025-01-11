@@ -182,7 +182,7 @@ export const TRICKS: Tricks = {
   OOT_BFA_MUDWALLS: {
     game: 'oot',
     name: 'Break Mud Walls with Blue Fire Arrows',
-    tooltip: 'Blue Fire has the ability to break mudwalls. Turning this on will allow the Blue Fire Arrows to be logical for breaking these.',
+    tooltip: 'Blue Fire has the ability to break mud walls. Turning this on will allow the Blue Fire Arrows to be logical for breaking these.',
     linkVideo: 'https://www.youtube.com/watch?v=XXAFs1cfRrc&ab_channel=ThatWelshKaren',
   },
   OOT_JABU_BOSS_HOVER: {
