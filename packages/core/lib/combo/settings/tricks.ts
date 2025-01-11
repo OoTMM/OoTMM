@@ -556,7 +556,7 @@ export const TRICKS: Tricks = {
   MM_GBT_FAIRY2_HOOK: {
     game: 'mm',
     name: 'GBT First Underwater Fairy with Short Hookshot Anywhere',
-    tooltip: 'The first Stray Fairy in a bubble can be obtained with a precise angle.',
+    tooltip: 'The first Stray Fairy in a bubble can be obtained with a precise Hookshot angle.',
   },
   MM_GBT_CENTRAL_GEYSER: {
     game: 'mm',
