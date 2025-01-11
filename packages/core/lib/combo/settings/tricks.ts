@@ -448,7 +448,7 @@ export const TRICKS: Tricks = {
   MM_SHT_STICKS_RUN: {
     game: 'mm',
     name: 'Access SHT Pillar Fireless with Precise Stick Run',
-    tooltip: 'With a precise path, light the three torches.',
+    tooltip: 'With a precise path, light the three torches.', //Clearer description?
   },
   MM_SHT_PILLARLESS: {
     game: 'mm',
