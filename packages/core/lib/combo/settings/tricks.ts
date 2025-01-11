@@ -404,7 +404,7 @@ export const TRICKS: Tricks = {
   MM_GORON_BOMB_JUMP: {
     game: 'mm',
     name: 'Bomb Jump Fences as Goron',
-    tooltip: 'Using bombs or a keg, use the Goron Pound to leap into the air and get damaged by the explosion to hop over fences',
+    tooltip: 'Place down bombs or a Powder Keg, then use the Goron Pound to leap into the air and get damaged mid-air by the explosion to hop over fences',
     linkVideo: 'https://www.youtube.com/watch?v=lLMT2-wNs9w&ab_channel=KokiriKid07',
   },
   MM_BOMBER_GUESS: {
