@@ -631,7 +631,7 @@ export const TRICKS: Tricks = {
   MM_SOARING_ZORA: {
     game: 'mm',
     name: 'Zora Long Jump to the Soaring Tablet',
-    tooltip: 'The Soaring Tablet can be long jumped to as Zora from the back poisoned swamp or from the Woodfall entrance.',
+    tooltip: 'The Soaring Tablet can be long jumped to as Zora from the giant flower in the back of Poison Swamp or from the Woodfall entrance.',
   },
   MM_SOARING_HOVERS: {
     game: 'mm',
