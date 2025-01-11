@@ -128,7 +128,7 @@ export const TRICKS: Tricks = {
   OOT_SHADOW_FIRE_ARROW: {
     game: 'oot',
     name: 'Enter Shadow Temple using Fire Arrows',
-    tooltip: 'With a precise setup, it is possible to light all of the torches for the Shadow Temple Entrance with a mix of fire arrows and normal arrow. The timing is very quick.',
+    tooltip: 'With a precise setup, it is possible to light all of the torches for the Shadow Temple Entrance with a mix of Fire Arrows and normal arrows. The timing is very tight.',
     linkVideo: 'https://www.youtube.com/watch?v=im3IXe__8ww&ab_channel=Exodus122',
   },
   OOT_KZ_SKIP: {
