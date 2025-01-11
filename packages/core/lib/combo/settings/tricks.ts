@@ -35,7 +35,7 @@ export const TRICKS: Tricks = {
   OOT_TUNICS: {
     game: 'oot',
     name: 'Fewer Tunic Requirements (OoT)',
-    tooltip: 'Most things that would normally require Tunics no longer will. Fire Temple past the big lava room, Volvagia, Fire Trial without silver rupee shuffle, and Water Temple central pillar still require Tunics.',
+    tooltip: 'Most things that would normally require Tunics no longer will. Fire Temple past the big lava room, Volvagia, Fire Trial without Silver Rupee shuffle, and Water Temple central pillar still require Tunics.',
   },
   OOT_HIDDEN_GROTTOS: {
     game: 'oot',
