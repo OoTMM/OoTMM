@@ -91,10 +91,7 @@ static s16 bombDrop(s16 dropId)
     u8  bombCount;
     u8  bombchuCount;
 
-    if (!Config_Flag(CFG_OOT_BOMBCHU_BAG))
-        return dropId;
-
-    hasChuBag = (gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10);
+    hasChuBag = (gSharedCustomSave.bombchuBagOot > 0);
     hasBombBag = (gOotSave.info.inventory.upgrades.bombBag > 0);
 
     if (!hasChuBag)

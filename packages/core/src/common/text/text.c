@@ -482,18 +482,22 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_BOMBCHU_BAG:
-    case GI_OOT_BOMBCHU_BAG_5:
-    case GI_OOT_BOMBCHU_BAG_10:
-    case GI_OOT_BOMBCHU_BAG_20:
+    case GI_OOT_BOMBCHU_BAG2:
+    case GI_OOT_BOMBCHU_BAG3:
+    case GI_OOT_BOMBCHU_BAG_FIRST_5:
+    case GI_OOT_BOMBCHU_BAG_FIRST_10:
+    case GI_OOT_BOMBCHU_BAG_FIRST_20:
     case GI_MM_BOMBCHU:
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_BAG:
-    case GI_MM_BOMBCHU_BAG_1:
-    case GI_MM_BOMBCHU_BAG_5:
-    case GI_MM_BOMBCHU_BAG_10:
-    case GI_MM_BOMBCHU_BAG_20:
+    case GI_MM_BOMBCHU_BAG2:
+    case GI_MM_BOMBCHU_BAG3:
+    case GI_MM_BOMBCHU_BAG_FIRST_1:
+    case GI_MM_BOMBCHU_BAG_FIRST_5:
+    case GI_MM_BOMBCHU_BAG_FIRST_10:
+    case GI_MM_BOMBCHU_BAG_FIRST_20:
         return !Config_Flag(CFG_SHARED_BOMBCHU);
     case GI_OOT_SPELL_FIRE:
     case GI_MM_SPELL_FIRE:
@@ -950,14 +954,14 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_OOT_BOMBCHU_5:
         case GI_OOT_BOMBCHU_10:
         case GI_OOT_BOMBCHU_20:
-            if (Config_Flag(CFG_OOT_BOMBCHU_BAG))
+            if (gComboConfig.bombchuBehaviorOot == BOMBCHU_BEHAVIOR_BAG_FIRST)
                 itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
             break;
         case GI_MM_BOMBCHU:
         case GI_MM_BOMBCHU_5:
         case GI_MM_BOMBCHU_10:
         case GI_MM_BOMBCHU_20:
-            if (Config_Flag(CFG_MM_BOMBCHU_BAG))
+            if (gComboConfig.bombchuBehaviorMm == BOMBCHU_BEHAVIOR_BAG_FIRST)
                 itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
             break;
         }

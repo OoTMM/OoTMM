@@ -320,9 +320,9 @@ static s16 progressiveBombchuBagFirstOot(s16 gi, int ovflags)
 
     switch (gi)
     {
-    case GI_OOT_BOMBCHU_5:  return GI_OOT_BOMBCHU_BAG_5;
-    case GI_OOT_BOMBCHU_10: return GI_OOT_BOMBCHU_BAG_10;
-    case GI_OOT_BOMBCHU_20: return GI_OOT_BOMBCHU_BAG_20;
+    case GI_OOT_BOMBCHU_5:  return GI_OOT_BOMBCHU_BAG_FIRST_5;
+    case GI_OOT_BOMBCHU_10: return GI_OOT_BOMBCHU_BAG_FIRST_10;
+    case GI_OOT_BOMBCHU_20: return GI_OOT_BOMBCHU_BAG_FIRST_20;
     default: return gi;
     }
 }
@@ -334,10 +334,10 @@ static s16 progressiveBombchuBagFirstMm(s16 gi, int ovflags)
 
     switch (gi)
     {
-    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG_1;
-    case GI_MM_BOMBCHU_5:  return GI_MM_BOMBCHU_BAG_5;
-    case GI_MM_BOMBCHU_10: return GI_MM_BOMBCHU_BAG_10;
-    case GI_MM_BOMBCHU_20: return GI_MM_BOMBCHU_BAG_20;
+    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG_FIRST_1;
+    case GI_MM_BOMBCHU_5:  return GI_MM_BOMBCHU_BAG_FIRST_5;
+    case GI_MM_BOMBCHU_10: return GI_MM_BOMBCHU_BAG_FIRST_10;
+    case GI_MM_BOMBCHU_20: return GI_MM_BOMBCHU_BAG_FIRST_20;
     default: return gi;
     }
 }
