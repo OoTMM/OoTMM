@@ -561,7 +561,7 @@ export const TRICKS: Tricks = {
   MM_GBT_CENTRAL_GEYSER: {
     game: 'mm',
     name: 'GBT Central Room without Zora using Fire & Ice Arrows or an OoT Magic Spell',
-    tooltip: 'Using Fire and Ice Arrows or an OoT Spell, it is possible to sink down during the cutscene, then swim into one of the tunnels.',
+    tooltip: 'Using Fire and Ice Arrows on the water stream above the ladder or an OoT Spell while on the spinning platform, it is possible to sink down during the cutscene, then swim into one of the tunnels.',
   },
   MM_BANK_ONE_WALLET: {
     game: 'mm',
