@@ -498,7 +498,7 @@ export const TRICKS: Tricks = {
   MM_IKANA_ROOF_PARKOUR: {
     game: 'mm',
     name: "Jump from Ikana Castle's Roof Interior to Exterior",
-    tooltip: 'Jump off of a piece of rubble to the slope on the wall, and jump outside the fenced wall.  Walk around the edge to get to the other side.',
+    tooltip: 'Jump off of a piece of rubble to a sloped wall, walk up, and jump across the block to the outside of the fence. Walk around the edge to get to the other side.',
     linkVideo: 'https://www.youtube.com/watch?v=9af_q8oYBhA&t=1s',
   },
   MM_IKANA_PILLAR_ENTRANCE_FLOAT: {
