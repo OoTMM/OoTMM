@@ -285,7 +285,7 @@ export const TRICKS: Tricks = {
   OOT_WELL_ADULT_TT: {
     game: 'oot',
     name: 'Enter Bottom of the Well as Adult with Time Travel',
-    tooltip: 'Intended for use with Boss ER and Full Dungeon ER. This trick will allow an Adult Boss to be placed in an MM Dungeon in this location.',
+    tooltip: 'Entering the drained well as Child and turning Adult behind the blockage grants access to that entrance as Adult. In Boss ER and Full Dungeon ER, this trick will allow an Adult Boss to be placed inside an MM Dungeon in this location.',
   },
   OOT_ADULT_GALLERY_TT: {
     game: 'oot',
