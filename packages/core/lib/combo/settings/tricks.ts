@@ -139,8 +139,8 @@ export const TRICKS: Tricks = {
   },
   OOT_LOST_WOODS_ADULT_GS: {
     game: 'oot',
-    name: 'Lost Woods Adult GS without Bean',
-    tooltip: "This bean can be collected using Hookshot at a precise angle after killing it with Bow, Din's Fire, Bombchus, or Longshot.",
+    name: 'Lost Woods Adult GS without Magic Beans',
+    tooltip: "This Gold Skulltula can be collected using Hookshot at a precise angle after killing it with Bow, Din's Fire, Bombchus, or Longshot.",
     linkVideo: 'https://www.youtube.com/watch?v=YFLxEw2_PBw&ab_channel=dotzo',
   },
   OOT_WINDMILL_HP_NOTHING: {
