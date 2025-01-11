@@ -198,7 +198,7 @@ export const TRICKS: Tricks = {
   OOT_VALLEY_GATE_HOVER: {
     game: 'oot',
     name: 'Reach Gerudo Fortress as Child using Hover Boots',
-    tooltip: 'Using Ageless Hover Boots, it is possible to backwalk off the small pegs near the gate then backflip over it.',
+    tooltip: 'Using Ageless Hover Boots, it is possible to backwalk off the small pegs near the gate, then backflip over it.',
   },
   OOT_MQ_ICE_SCARE_NOTHING: {
     game: 'oot',
