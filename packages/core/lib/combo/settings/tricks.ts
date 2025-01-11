@@ -660,7 +660,7 @@ export const TRICKS: Tricks = {
   },
   MM_GBT_RED1_HOVERS: {
     game: 'mm',
-    name: 'Reach the first red pipe in GBT using Hover Boots, Bunny Hood, and a Jump Slash',
+    name: 'Reach the First Red Turnkey in GBT using Hover Boots, Bunny Hood, and a Jump Slash',
     tooltip: 'The red turnkey in front of Wart can be reached with a precise jump slash after the hover duration, using Bunny Hood for extra speed.',
   },
   MM_GBT_GREEN2_UPPER_HOVERS: {
