@@ -234,7 +234,7 @@ export const TRICKS: Tricks = {
   OOT_JABU_BOSS_HIGH_SWITCH: {
     game: 'oot',
     name: 'Jabu Boss Switch without Boomerang or Climb Anywhere',
-    tooltip: "It is possible to hit the switch before Jabu-Jabu's boss using Bow, Slingshot, Longshot, Bombchu, and Hover Boots + Bombs. Having Climb Anywhere logical makes this trickless.",
+    tooltip: "It is possible to hit the switch before Jabu-Jabu's boss using Bow, Slingshot, Longshot, Bombchu or Hover Boots + Bombs. Having Climb Anywhere logical makes this trickless.",
   },
   OOT_WATER_REVERSE_RIVER: {
     game: 'oot',
