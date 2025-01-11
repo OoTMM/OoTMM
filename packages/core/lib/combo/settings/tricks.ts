@@ -299,8 +299,8 @@ export const TRICKS: Tricks = {
   },
   OOT_REVERSE_DAMPE: {
     game: 'oot',
-    name: "Navigate Dampe's Grave in Reverse",
-    tooltip: "Using Climb Anywhere or Hookshot Anywhere and Age Swap, it is possible to get past the final door of Dampe's Grave and then navigate to the entrance in complete darkness.",
+    name: "Navigate Dampé's Grave in Reverse",
+    tooltip: "Using Climb Anywhere or Hookshot Anywhere and Age Swap, it is possible to get past the final door of Dampé's Grave and then navigate to the entrance in complete darkness.",
   },
   OOT_GANON_FAIRY_TT: {
     game: 'oot',
