@@ -437,7 +437,7 @@ export const TRICKS: Tricks = {
   MM_PALACE_GUARD_SKIP: {
     game: 'mm',
     name: 'Backflip over Deku Palace Guards',
-    tooltip: 'With a precise backflip on the fence, jump over the guards as human link',
+    tooltip: 'With a precise backflip on the fence, jump over the guards as Human Link',
     linkVideo: 'https://www.youtube.com/watch?v=-4F9lzES7tM&ab_channel=Pokemongenius88',
   },
   MM_SHT_HOT_WATER: {
@@ -453,13 +453,13 @@ export const TRICKS: Tricks = {
   MM_SHT_PILLARLESS: {
     game: 'mm',
     name: 'Snowhead Temple Skip Raising Pillar',
-    tooltip: 'Destroy the snowballs with fire arrows or bombs and then jump down.  A precise jump slash may help getting onto the platform.',
+    tooltip: 'Destroy the snowballs with Fire Arrows or bombs and then jump down. A precise jump slash may help getting onto the platform.',
     linkVideo: 'https://youtube.com/clip/UgkxwCrliqwRiCbljfpozhmsnlzVwSUaAI0N',
   },
   MM_SHT_PILLAR_ROOM_HOOKSHOT: {
     game: 'mm',
     name: 'Snowhead Temple Hookshot Up Pillar Room',
-    tooltip: 'From the ground floor of pillar room, use a hookshot to kill the freezards and then climb using the chest that spawns.',
+    tooltip: 'From the ground floor of pillar room, use a Hookshot to kill the freezards and then climb using the chest that spawns.',
     linkVideo: 'https://youtu.be/4WVOnjC7xdE',
   },
   MM_KEG_EXPLOSIVES: {
