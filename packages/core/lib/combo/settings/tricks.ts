@@ -465,7 +465,7 @@ export const TRICKS: Tricks = {
   MM_KEG_EXPLOSIVES: {
     game: 'mm',
     name: 'Use Powder Kegs as Explosives',
-    tooltip: 'Allows Powder Keg to be an alternative to bombs in logic',
+    tooltip: 'Allows Powder Kegs to be an alternative to bombs in logic',
   },
   MM_DOG_RACE_CHEST_NOTHING: {
     game: 'mm',
