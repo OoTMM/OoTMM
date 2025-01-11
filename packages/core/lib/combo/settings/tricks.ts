@@ -274,8 +274,8 @@ export const TRICKS: Tricks = {
   },
   OOT_JJB_BOXLESS: {
     game: 'oot',
-    name: 'Access Jabu-Jabu pre-boss without the box',
-    tooltip: 'By doing a jump slash and precise roll, it is possible to get through the door without the box.',
+    name: 'Access Jabu-Jabu Pre-Boss without a box',
+    tooltip: 'By doing a jump slash and a precise roll, it is possible to get through the door without a box.',
   },
   OOT_TENT_CHILD: {
     game: 'oot',
