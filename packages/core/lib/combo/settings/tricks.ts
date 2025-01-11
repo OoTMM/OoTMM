@@ -595,7 +595,7 @@ export const TRICKS: Tricks = {
   },
   MM_NCT_TINGLE: {
     game: 'mm',
-    name: 'Jump slash Tingle in North Clock Town',
+    name: 'Jump Slash Tingle in North Clock Town',
     tooltip: "Jump off the tree and jump slash Tingle's balloon. Sticks will not work.",
   },
   MM_GBT_FIRELESS: {
