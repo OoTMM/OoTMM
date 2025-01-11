@@ -716,6 +716,7 @@ export const TRICKS: Tricks = {
   MM_KEG_TRIAL_HEATLESS: {
     game: 'mm',
     name: 'Powder Keg Trial without Thawing Ice using Hookshot Anywhere',
+    tooltip: "With Hookshot Anywhere, it is possible to hookshot through the little gap in the left bottom corner.",
   },
   MM_STT_LAVA_SWITCH_HAMMER: {
     game: 'mm',
