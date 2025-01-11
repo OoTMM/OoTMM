@@ -386,7 +386,7 @@ export const TRICKS: Tricks = {
   MM_ONE_MASK_STONE_TOWER: {
     game: 'mm',
     name: 'Climb Stone Tower with One Mask',
-    tooltip: 'Play the Elegy of Emptiness on a specific block to climb a certain portion of Stone Tower',
+    tooltip: 'Playing the Elegy of Emptiness while standing on a block to move with it, along with other clever Elegy of Emptiness usage, allows you to climb Stone Tower using just two Elegy statues',
     linkVideo: 'https://www.youtube.com/watch?v=I3xLE1X9Iiw&t=3s&ab_channel=dodo',
   },
   MM_ISTT_EYEGORE: {
