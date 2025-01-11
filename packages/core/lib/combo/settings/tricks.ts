@@ -243,7 +243,7 @@ export const TRICKS: Tricks = {
   },
   OOT_WATER_PIT_GS_CHU: {
     game: 'oot',
-    name: 'Water Temple Large Pit GS with Bombchu',
+    name: 'Water Temple Large Pit GS with Bombchu and Climb Anywhere',
     tooltip: 'It is possible to kill the Gold Skulltula using a Bombchu with a precise angle and timing. This is only relevant if Climb Anywhere is logical.',
   },
   OOT_SHADOW_BOAT_EARLY: {
