@@ -566,12 +566,12 @@ export const TRICKS: Tricks = {
   MM_BANK_ONE_WALLET: {
     game: 'mm',
     name: 'Bank Rewards Require One Less Wallet',
-    tooltip: 'The 500-Rupee item will not require a wallet, and the 1000-rupee item will require one wallet.',
+    tooltip: 'The 500-Rupee item reward will only require the Child Wallet, and the 1000-rupee item reward will require the Adult Wallet.',
   },
   MM_BANK_NO_WALLET: {
     game: 'mm',
-    name: 'Bank Rewards Require No Wallets',
-    tooltip: 'All bank items will not require a wallet.',
+    name: 'Bank Rewards Require No Extra Wallets',
+    tooltip: 'All bank rewards will only require the Child Wallet.',
   },
   MM_CLOCK_TOWER_WAIT: {
     game: 'mm',
