@@ -676,7 +676,7 @@ export const TRICKS: Tricks = {
   MM_STT_LAVA_BLOCK_HOVERS: {
     game: 'mm',
     name: 'Stone Tower Temple Map Chest using Hover Boots',
-    tooltip: 'After hooking to the chest near the entrance of the room, one can then hover on top of the sun block.',
+    tooltip: 'After using the Hookshot to reach the chest on the high platform in the lava room, one can then use the Hover Boots to land on top of the sun block.',
   },
   MM_ISTT_ENTRY_HOVER: {
     game: 'mm',
