@@ -305,7 +305,7 @@ export const TRICKS: Tricks = {
   OOT_GANON_FAIRY_TT: {
     game: 'oot',
     name: "Ganon's Great Fairy with Age Swap and without Gold Gauntlets",
-    tooltip: 'By using Age Swap in the Child Great Fairy entrance, Adult can walk out of his entrance and then walk right back in to access his Great Fairy entrance.',
+    tooltip: 'Entering the Hyrule Castle Great Fairy entrance as Child, age swapping there, walking out as Adult and then walking right back in grants access to the Outside Ganon\'s Castle Great Fairy entrance.',
   },
   OOT_GANON_CASTLE_ENTRY: {
     game: 'oot',
