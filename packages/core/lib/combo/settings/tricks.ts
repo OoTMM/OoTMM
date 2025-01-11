@@ -706,7 +706,7 @@ export const TRICKS: Tricks = {
   MM_RANCH_FARORE: {
     game: 'mm',
     name: "Romani's Ranch locations using Farore's Wind and Time Reset",
-    tooltip: "Turning this on will let logic allow placing Farore's Wind then resetting time to obtain these items.",
+    tooltip: "It is possible to place Farore's Wind in Romani Ranch on Day 3, reset time and warp back to Romani Ranch to obtain the Day 1 and 2 checks without the Powder Keg",
   },
   MM_EVAN_FARORE: {
     game: 'mm',
