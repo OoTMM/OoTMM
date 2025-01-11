@@ -605,8 +605,8 @@ export const TRICKS: Tricks = {
   },
   MM_IGOS_DINS: {
     game: 'mm',
-    name: "Burn Igos' curtains with Din's Fire",
-    tooltip: "Igos' curtains can be burned by standing at the top of the stairs next to his throne.",
+    name: "Burn Igos' curtain with Din's Fire",
+    tooltip: "Igos' left curtain can be burned by standing at the top of the stairs next to his throne.",
   },
   MM_BIO_BABA_CHU: {
     game: 'mm',
