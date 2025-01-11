@@ -681,7 +681,7 @@ export const TRICKS: Tricks = {
   MM_ISTT_ENTRY_HOVER: {
     game: 'mm',
     name: 'Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood',
-    tooltip: 'The Death Armos can be reached by hovering and then sidehopping, using Bunny Hood for extra speed.',
+    tooltip: 'The switch can be reached by using the Hover Boots and then sidehopping to grab the ledge, using Bunny Hood for extra speed.',
   },
   MM_GYORG_POTS_DIVE: {
     game: 'mm',
