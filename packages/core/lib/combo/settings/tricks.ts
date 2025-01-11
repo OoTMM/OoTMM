@@ -421,13 +421,13 @@ export const TRICKS: Tricks = {
   MM_ISTT_ENTRY_JUMP: {
     game: 'mm',
     name: 'Inverted Stone Tower Temple Long Jump to Death Armos',
-    tooltip: 'Using a precise bomb long jump, you can make it to the switch on the left side of the room, normally blocked by the wall',
+    tooltip: 'Using a precise bomb long jump, you can make it to the switch on the left side of the room',
     linkVideo: 'https://www.youtube.com/watch?v=UAG9jbjKwek&ab_channel=Gigopler',
   },
   MM_HARD_HOOKSHOT: {
     game: 'mm',
     name: 'Precise Hookshot Usage',
-    tooltip: 'Using the short hookshot gives you logical access to:<br>- the Deku Palace Bean Grotto chest<br>- the Road to Ikana chest and tree',
+    tooltip: 'With this trick enabled, using the Short Hookshot gives you logical access to:<br>- the Deku Palace Bean Grotto chest<br>- the Road to Ikana chest and tree',
   },
   MM_PFI_BOAT_HOOK: {
     game: 'mm',
