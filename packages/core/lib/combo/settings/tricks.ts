@@ -291,7 +291,7 @@ export const TRICKS: Tricks = {
     game: 'oot',
     name: 'Enter Adult Shooting Gallery as Child with Time Travel',
     tooltip:
-      'Inteded for use with Interior ER. This will allow interiors where you cannot age swap with Child-only checks to be placed in this location.',
+      'Intended for use with Interior ER. This will allow interiors with Child-only checks where you cannot age swap to be placed in this location.',
   },
   OOT_GTG_CHILD_TT: {
     game: 'oot',
