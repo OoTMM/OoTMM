@@ -280,7 +280,7 @@ export const TRICKS: Tricks = {
   OOT_TENT_CHILD: {
     game: 'oot',
     name: 'Enter the Gerudo Valley Tent as Child',
-    tooltip: "The Gerudo Valley Tent is only present as Adult, however it's entrance is still there as Child. Turning this on may expect the player to know where it is and use it for progress in Interior ER.",
+    tooltip: "The Gerudo Valley Tent is only present as Adult, however its entrance is still there as Child. Turning this on may expect the player to know where it is and use it for progress in Interior ER.",
   },
   OOT_WELL_ADULT_TT: {
     game: 'oot',
