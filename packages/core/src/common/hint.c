@@ -82,18 +82,21 @@ void Hint_Init(void)
     comboDmaLoadFile(gHints, COMBO_VROM_HINTS);
 }
 
-static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
+void appendPlayer(char** b, u8 player)
 {
-    comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
-
-    comboTextAppendItemImportance(b, gi, importance);
-
     if (player != 0 && player != 0xff && player != gComboConfig.playerId)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, player);
         comboTextAppendClearColor(b);
     }
+}
+
+static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
+{
+    comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
+    comboTextAppendItemImportance(b, gi, importance);
+    appendPlayer(b, player);
 }
 
 #define PATH_WOTH       0
@@ -172,6 +175,7 @@ static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
         comboTextAppendStr(&b, " is on the ");
         appendPathName(&b, hint->items[0], hint->items[1]);
         comboTextAppendClearColor(&b);
+        appendPlayer(&b, hint->players[0]);
         break;
     case HINT_TYPE_FOOLISH:
         comboTextAppendStr(&b, "plundering ");

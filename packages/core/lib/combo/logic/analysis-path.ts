@@ -8,7 +8,6 @@ import { ItemPlacement } from './solve';
 import { Item, Items, makePlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
-import { ENTRANCES } from '@ootmm/data';
 import { Analysis } from './analysis';
 import { AGE_ADULT, AGE_CHILD } from './constants';
 
@@ -33,7 +32,7 @@ export type AnalysisPathType =
   | AnalysisPathTypeEndBoss
   | AnalysisPathTypeEvent;
 
-export type AnalysisPathBase = { locations: Set<Location> };
+export type AnalysisPathBase = { player: number | 'all', locations: Set<Location> };
 export type AnalysisPath = AnalysisPathBase & AnalysisPathType;
 export type AnalysisPathState = {
   key: string;
@@ -90,8 +89,8 @@ export class LogicPassAnalysisPaths {
     }
   }
 
-  private makePath(opts: { key: string, pathType: AnalysisPathType, pathfinderState?: PathfinderState, pred: (x: PathfinderState) => boolean }) {
-    const path: AnalysisPath = { ...opts.pathType, locations: new Set() };
+  private makePath(opts: { player: number | 'all', key: string, pathType: AnalysisPathType, pathfinderState?: PathfinderState, pred: (x: PathfinderState) => boolean }) {
+    const path: AnalysisPath = { ...opts.pathType, locations: new Set(), player: opts.player };
     const state = { key: opts.key, locks: [], path, pathfinderState: opts.pathfinderState || null, pred: opts.pred };
     this.states[state.key] = state;
   }
@@ -176,6 +175,7 @@ export class LogicPassAnalysisPaths {
       /* The dungeon is required for this player */
       const pred = (x: PathfinderState) => areas.some(a => x.ws[i].ages[AGE_CHILD].areas.has(a) || x.ws[i].ages[AGE_ADULT].areas.has(a));
       this.makePath({
+        player: i,
         key: `dungeon.${dungeon}.${i}`,
         pathType: { type: 'dungeon', dungeon },
         pathfinderState,
@@ -196,6 +196,7 @@ export class LogicPassAnalysisPaths {
       /* The boss is required for this player */
       const pred = (x: PathfinderState) => x.ws[i].events.has(meta.event);
       this.makePath({
+        player: i,
         key: `boss.${dungeon}.${i}`,
         pathType: { type: 'boss', boss: dungeon },
         pathfinderState,
@@ -216,6 +217,7 @@ export class LogicPassAnalysisPaths {
       /* The boss is required for this player */
       const pred = (x: PathfinderState) => x.ws[i].events.has(meta.event);
       this.makePath({
+        player: i,
         key: `end-boss.${boss}.${i}`,
         pathType: { type: 'end-boss', boss },
         pathfinderState,
@@ -239,6 +241,7 @@ export class LogicPassAnalysisPaths {
       /* The piece is required for this player */
       const pred = (x: PathfinderState) => (triforcePlayerItemLocs.length === 0 || triforcePlayerItemLocs.every(l => x.locations.has(l)));
       this.makePath({
+        player: i,
         key: `triforce3.${triforce}.${i}`,
         pathType: { type: 'triforce', triforce },
         pathfinderState,
@@ -259,6 +262,7 @@ export class LogicPassAnalysisPaths {
       /* The event is required for this player */
       const pred = (x: PathfinderState) => x.ws[i].events.has(meta.event);
       this.makePath({
+        player: i,
         key: `event.${eventKey}.${i}`,
         pathType: { type: 'event', event: eventKey },
         pathfinderState,
@@ -286,6 +290,7 @@ export class LogicPassAnalysisPaths {
   private makePaths() {
     /* WotH path */
     this.makePath({
+      player: 'all',
       key: 'woth',
       pathType: { type: 'woth' },
       pred: _ => false,

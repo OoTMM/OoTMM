@@ -716,7 +716,7 @@
   age_change: false
   exits:
     "Market": "true"
-    "Bombchu Bowling Rewards": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
+    "Bombchu Bowling Rewards": "(has_bomb_bag || bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
 "Bombchu Bowling Rewards":
   region: ENTRANCE
   age_change: false

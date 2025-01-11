@@ -313,32 +313,52 @@ static s16 progressiveSongLullaby(void)
     }
 }
 
-static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
+static s16 progressiveBombchuBagFirstOot(s16 gi, int ovflags)
 {
-    if (!Config_Flag(CFG_OOT_BOMBCHU_BAG) || (gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10) || (ovflags & OVF_PRECOND))
+    if (gComboConfig.bombchuBehaviorOot != BOMBCHU_BEHAVIOR_BAG_FIRST || gSharedCustomSave.bombchuBagOot || (ovflags & OVF_PRECOND))
         return gi;
 
     switch (gi)
     {
-    case GI_OOT_BOMBCHU_5:  return GI_OOT_BOMBCHU_BAG_5;
-    case GI_OOT_BOMBCHU_10: return GI_OOT_BOMBCHU_BAG_10;
-    case GI_OOT_BOMBCHU_20: return GI_OOT_BOMBCHU_BAG_20;
+    case GI_OOT_BOMBCHU_5:  return GI_OOT_BOMBCHU_BAG_FIRST_5;
+    case GI_OOT_BOMBCHU_10: return GI_OOT_BOMBCHU_BAG_FIRST_10;
+    case GI_OOT_BOMBCHU_20: return GI_OOT_BOMBCHU_BAG_FIRST_20;
     default: return gi;
     }
 }
 
-static s16 progressiveBombchuBagMm(s16 gi, int ovflags)
+static s16 progressiveBombchuBagFirstMm(s16 gi, int ovflags)
 {
-    if (!Config_Flag(CFG_MM_BOMBCHU_BAG) || (gMmSave.info.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU) || (ovflags & OVF_PRECOND))
+    if (gComboConfig.bombchuBehaviorMm != BOMBCHU_BEHAVIOR_BAG_FIRST || gSharedCustomSave.bombchuBagMm || (ovflags & OVF_PRECOND))
         return gi;
 
     switch (gi)
     {
-    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG;
-    case GI_MM_BOMBCHU_5:  return GI_MM_BOMBCHU_BAG_5;
-    case GI_MM_BOMBCHU_10: return GI_MM_BOMBCHU_BAG_10;
-    case GI_MM_BOMBCHU_20: return GI_MM_BOMBCHU_BAG_20;
+    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG_FIRST_1;
+    case GI_MM_BOMBCHU_5:  return GI_MM_BOMBCHU_BAG_FIRST_5;
+    case GI_MM_BOMBCHU_10: return GI_MM_BOMBCHU_BAG_FIRST_10;
+    case GI_MM_BOMBCHU_20: return GI_MM_BOMBCHU_BAG_FIRST_20;
     default: return gi;
+    }
+}
+
+static s16 progressiveBombchuBagSeparateOot(s16 gi)
+{
+    switch (gSharedCustomSave.bombchuBagOot)
+    {
+    case 0: return GI_OOT_BOMBCHU_BAG;
+    case 1: return GI_OOT_BOMBCHU_BAG2;
+    default: return GI_OOT_BOMBCHU_BAG3;
+    }
+}
+
+static s16 progressiveBombchuBagSeparateMm(s16 gi)
+{
+    switch (gSharedCustomSave.bombchuBagMm)
+    {
+    case 0: return GI_MM_BOMBCHU_BAG;
+    case 1: return GI_MM_BOMBCHU_BAG2;
+    default: return GI_MM_BOMBCHU_BAG3;
     }
 }
 
@@ -391,10 +411,20 @@ s16 comboProgressive(s16 gi, int ovflags)
     switch (gi)
     {
     /* Items */
+    case GI_OOT_BOMBCHU_BAG:
+    case GI_OOT_BOMBCHU_BAG2:
+    case GI_OOT_BOMBCHU_BAG3:
+        gi = progressiveBombchuBagSeparateOot(gi);
+        break;
+    case GI_MM_BOMBCHU_BAG:
+    case GI_MM_BOMBCHU_BAG2:
+    case GI_MM_BOMBCHU_BAG3:
+        gi = progressiveBombchuBagSeparateMm(gi);
+        break;
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
-        gi = progressiveBombchuBagOot(gi, ovflags);
+        gi = progressiveBombchuBagFirstOot(gi, ovflags);
         break;
     case GI_OOT_BOMB_BAG:
     case GI_OOT_BOMB_BAG2:
@@ -481,7 +511,7 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-        gi = progressiveBombchuBagMm(gi, ovflags);
+        gi = progressiveBombchuBagFirstMm(gi, ovflags);
         break;
     case GI_MM_BOTTLED_GOLD_DUST:
         gi = progressiveGoldDustBottle();

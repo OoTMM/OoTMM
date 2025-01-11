@@ -564,7 +564,7 @@
 "Honey & Darling Game":
   region: ENTRANCE
   events:
-    HD_REWARD_1: "soul_honey_darling && (has_bomb_bag || has_bombchu_license) && before(NIGHT1_PM_10_00)"
+    HD_REWARD_1: "soul_honey_darling && (has_bomb_bag || bombchu_license) && before(NIGHT1_PM_10_00)"
     HD_REWARD_2: "soul_honey_darling && has_bomb_bag && between(DAY2_AM_06_00, NIGHT2_PM_10_00)"
     HD_REWARD_3: "soul_honey_darling && (has_bow || can_use_deku_bubble) && is_day3"
   exits:

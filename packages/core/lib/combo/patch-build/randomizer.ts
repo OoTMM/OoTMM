@@ -113,6 +113,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_NUT_UPGRADE',      'OOT_NUT_UPGRADE'],
   ['SHARED_STONE_OF_AGONY',   'OOT_STONE_OF_AGONY'],
   ['SHARED_SPIN_UPGRADE',     'OOT_SPIN_UPGRADE'],
+  ['SHARED_BOMBCHU_BAG',      'OOT_BOMBCHU_BAG'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -190,6 +191,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_NUT_UPGRADE',      'MM_NUT_UPGRADE'],
   ['SHARED_STONE_OF_AGONY',   'MM_STONE_OF_AGONY'],
   ['SHARED_SPIN_UPGRADE',     'MM_SPIN_UPGRADE'],
+  ['SHARED_BOMBCHU_BAG',      'MM_BOMBCHU_BAG'],
 ]);
 
 const SHARED_ITEMS = {
@@ -528,6 +530,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'path':
     {
       const { path } = hint;
+      const player = path.player === 'all' ? 0xff : path.player + 1;
       let pathId: number;
       let pathSubId: number;
       const regionD = regionData(hint.region);
@@ -568,6 +571,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
       bufWriteU16BE(data, HINT_OFFSETS.ITEM, pathId);
       bufWriteU16BE(data, HINT_OFFSETS.ITEM2, pathSubId);
+      bufWriteU8(data, HINT_OFFSETS.PLAYER, player);
     }
     break;
   case 'foolish':
@@ -912,9 +916,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ER_MOON: settings.erMoon,
     MM_OPEN_MOON: settings.openMoon,
     NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
-    OOT_BOMBCHU_BAG: settings.bombchuBagOot,
-    MM_BOMBCHU_BAG: settings.bombchuBagMm,
-    SHARED_BOMBCHU: settings.sharedBombchuBags,
+    SHARED_BOMBCHU: settings.sharedBombchu,
     ER_WALLMASTERS: settings.erWallmasters !== 'none',
     OOT_OPEN_MASK_SHOP: settings.openMaskShop,
     OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
@@ -1071,6 +1073,17 @@ export const prices = (worldId: number, logic: LogicResult): Uint8Array => {
   return toU16Buffer(logic.worlds[worldId].prices);
 };
 
+const BOMBCHU_BEHAVIORS = {
+  free: 0,
+  bombBag: 1,
+  bagFirst: 2,
+  bagSeparate: 3,
+};
+
+function configBombchuBehavior(behavior: keyof typeof BOMBCHU_BEHAVIORS): Uint8Array {
+  return new Uint8Array([BOMBCHU_BEHAVIORS[behavior]]);
+}
+
 export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array => {
   const buffers = [];
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
@@ -1088,6 +1101,8 @@ export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array 
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(toU8Buffer([logic.settings.strayFairyRewardCount]));
+  buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorOot));
+  buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorMm));
   return concatUint8Arrays(buffers);
 };
 

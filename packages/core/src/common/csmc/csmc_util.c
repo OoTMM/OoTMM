@@ -38,7 +38,7 @@ int csmcFromItem(s16 gi)
         gi = -gi;
 
     /* Special case: OoT bombchu */
-    if (Config_Flag(CFG_OOT_BOMBCHU_BAG))
+    if (gComboConfig.bombchuBehaviorOot == BOMBCHU_BEHAVIOR_BAG_FIRST)
     {
         switch (gi)
         {
@@ -50,7 +50,7 @@ int csmcFromItem(s16 gi)
     }
 
     /* Special case: MM bombchu */
-    if (Config_Flag(CFG_MM_BOMBCHU_BAG))
+    if (gComboConfig.bombchuBehaviorMm == BOMBCHU_BEHAVIOR_BAG_FIRST)
     {
         switch (gi)
         {

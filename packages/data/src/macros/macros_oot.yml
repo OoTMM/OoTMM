@@ -51,17 +51,21 @@
 
 "can_play_cross_soaring": "can_play_cross(MM_SONG_SOARING) && ocarina_button_up && ocarina_button_down && ocarina_button_left"
 
+# Bombchu
+"bombchu_license_bag_first": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
+"bombchu_license_bag_separate": "has(BOMBCHU_BAG) || has(SHARED_BOMBCHU_BAG)"
+"bombchu_license_bag": "(setting(bombchuBehaviorOot, bagSeparate) && bombchu_license_bag_separate) || (setting(bombchuBehaviorOot, bagFirst) && bombchu_license_bag_first)"
+"bombchu_license": "((setting(bombchuBehaviorOot, free) || setting(bombchuBehaviorOot, bombBag)) && has_bomb_bag) || bombchu_license_bag"
+"bombchu_drops": "bombchu_license_bag && (event(BOMBS_OR_BOMBCHU) || (setting(sharedBombchu) && event(MM_BOMBS_OR_BOMBCHU)))"
+"bombchu_source": "event(BOMBCHU) || bombchu_drops || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20) || (setting(sharedBombchu) && (event(MM_BOMBCHU) || renewable(SHARED_BOMBCHU) || renewable(SHARED_BOMBCHU_5) || renewable(SHARED_BOMBCHU_10) || renewable(SHARED_BOMBCHU_20)))"
+"has_bombchu": "bombchu_source && bombchu_license"
+
 #Standard Single Item Use Macros
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(STICKS_5) || renewable(STICKS_10) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(MM_NUTS))"
 "can_use_sticks": "age_sticks && has_sticks"
 "has_bomb_bag": "has(BOMB_BAG) || has(SHARED_BOMB_BAG)"
 "has_bombs": "has_bomb_bag && (event(BOMBS) || event(BOMBS_OR_BOMBCHU) || (setting(sharedBombBags) && (event(MM_BOMBS) || event(MM_BOMBS_OR_BOMBCHU))) || renewable(BOMBS_5) || renewable(BOMBS_10) || renewable(BOMBS_20) || renewable(BOMBS_30) || renewable(SHARED_BOMBS_5) || renewable(SHARED_BOMBS_10) || renewable(SHARED_BOMBS_20) || renewable(SHARED_BOMBS_30))"
-"has_bombchu_source": "event(BOMBCHU) || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20) || (setting(bombchuBagOot) && event(BOMBS_OR_BOMBCHU)) || (setting(sharedBombchuBags) && (renewable(SHARED_BOMBCHU) || renewable(SHARED_BOMBCHU_5) || renewable(SHARED_BOMBCHU_10) || renewable(SHARED_BOMBCHU_20) || event(MM_BOMBCHU) || event(MM_BOMBS_OR_BOMBCHU)))"
-"has_bombchu_license_nonshared": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20)"
-"has_bombchu_license_shared": "license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
-"has_bombchu_license": "cond(setting(bombchuBagOot), cond(setting(sharedBombchuBags), has_bombchu_license_shared, has_bombchu_license_nonshared), has_bomb_bag)"
-"has_bombchu": "has_bombchu_source && has_bombchu_license"
 "can_use_slingshot": "has(SLINGSHOT) && age_slingshot && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"

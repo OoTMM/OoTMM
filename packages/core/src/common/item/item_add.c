@@ -438,24 +438,18 @@ static int addItemNutsUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addBombchuRawOot(u8 count)
 {
-    if (Config_Flag(CFG_OOT_BOMBCHU_BAG) && gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
+    if (!gMaxBombchuOot)
         return;
 
-    addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, count);
+    addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, gMaxBombchuOot, count);
 }
 
 static void addBombchuRawMm(u8 count)
 {
-    if (Config_Flag(CFG_MM_BOMBCHU_BAG))
-    {
-        if (gMmSave.info.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU)
-            addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 50, count);
-    }
-    else
-    {
-        if (gMmSave.info.inventory.upgrades.bombBag)
-            addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, kMaxBombs[gMmSave.info.inventory.upgrades.bombBag], count);
-    }
+    if (!gMaxBombchuMm)
+        return;
+
+    addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, gMaxBombchuMm, count);
 }
 
 static void addBombchuOot(u8 count)
@@ -1713,41 +1707,59 @@ static int addItemMagicMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static void addBombchuBagRawOot(void)
+static void addBombchuBagRawOot(int count)
 {
     gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
+    if (count > 0)
+        gSharedCustomSave.bombchuBagOot = count;
+    else
+        gSharedCustomSave.bombchuBagOot = 1;
 }
 
-static void addBombchuBagRawMm(void)
+static void addBombchuBagRawMm(int count)
 {
     gMmSave.info.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+    if (count > 0)
+        gSharedCustomSave.bombchuBagMm = count;
+    else
+        gSharedCustomSave.bombchuBagMm = 1;
 }
 
-static void addBombchuBagOot(u8 count)
+static void addBombchuBagOot(int count)
 {
-    addBombchuBagRawOot();
+    addBombchuBagRawOot(count);
     if (Config_Flag(CFG_SHARED_BOMBCHU))
-        addBombchuBagRawMm();
-    addBombchuOot(count);
+        addBombchuBagRawMm(count);
+    Inventory_UpdateMaxBombchu();
+
+    if (count < 0)
+        addBombchuOot(-count);
+    else
+        addBombchuOot(50);
 }
 
-static void addBombchuBagMm(u8 count)
+static void addBombchuBagMm(int count)
 {
-    addBombchuBagRawMm();
+    addBombchuBagRawMm(count);
     if (Config_Flag(CFG_SHARED_BOMBCHU))
-        addBombchuBagRawOot();
-    addBombchuMm(count);
+        addBombchuBagRawOot(count);
+    Inventory_UpdateMaxBombchu();
+
+    if (count < 0)
+        addBombchuMm(-count);
+    else
+        addBombchuMm(50);
 }
 
 static int addItemBombchuBagOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addBombchuBagOot(param);
+    addBombchuBagOot((s16)param);
     return 0;
 }
 
 static int addItemBombchuBagMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addBombchuBagMm(param);
+    addBombchuBagMm((s16)param);
     return 0;
 }
 

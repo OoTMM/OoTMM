@@ -698,6 +698,18 @@ void hookPlay_Init(PlayState* play)
         gSave.entrance = entrance;
     }
 
+    /* Raise Woodfall Temple with setting enabled */
+    if (Config_Flag(CFG_MM_OPEN_WF))
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
+
+    /* Make Biggoron move with setting enabled */
+    if (Config_Flag(CFG_MM_OPEN_SH))
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_SNOWHEAD_BLIZZARD);
+
+    /* Make turtle surface with setting enabled */
+    if (Config_Flag(CFG_MM_OPEN_GB))
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
+
     if (gSave.entrance == ENTR_MM_WOODFALL_FROM_TEMPLE)
     {
         /* Woodfall from temple */
@@ -723,18 +735,6 @@ void hookPlay_Init(PlayState* play)
 
     /* Tingle already knows about the player */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_TINGLE_TALKED);
-
-    /* Raise Woodfall Temple with setting enabled */
-    if (Config_Flag(CFG_MM_OPEN_WF))
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
-
-    /* Make Biggoron move with setting enabled */
-    if (Config_Flag(CFG_MM_OPEN_SH))
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_SNOWHEAD_BLIZZARD);
-
-    /* Make turtle surface with setting enabled */
-    if (Config_Flag(CFG_MM_OPEN_GB))
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
 
     Play_FixupSpawnTime();
     Play_Init(play);

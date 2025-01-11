@@ -93,6 +93,7 @@ const HINTS_ITEMS_SOMETIMES = [
 
 export type HintGossipPath = {
   type: 'path',
+  player: number | 'all';
   region: Region,
   location: Location;
   path: AnalysisPath;
@@ -227,7 +228,6 @@ export class LogicPassHints {
   }
 
   private toRegion(world: number, loc: Location) {
-
     const locD = locationData(loc);
     return makeRegion(this.state.worlds[locD.world as number].regions[locD.id], locD.world as number);
   }
@@ -550,7 +550,7 @@ export class LogicPassHints {
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
         this.stronglyHintedLocations.add(loc);
-        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
+        const hint: HintGossip = { player: path.player, game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
         this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
       }
