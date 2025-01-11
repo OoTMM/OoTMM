@@ -541,7 +541,7 @@ export const TRICKS: Tricks = {
   MM_OOB_MOVEMENT: {
     game: 'mm',
     name: 'Walk Along Surfaces Out of Bounds',
-    tooltip: 'In certain situations, it is required to walk on surfaces that are unable to be reached normally.',
+    tooltip: 'In certain situations, it is required to walk on surfaces that are unable to be reached normally.', //Examples could help
   },
   MM_ST_UPDRAFTS: {
     game: 'mm',
