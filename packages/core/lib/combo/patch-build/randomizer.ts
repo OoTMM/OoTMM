@@ -1071,6 +1071,17 @@ export const prices = (worldId: number, logic: LogicResult): Uint8Array => {
   return toU16Buffer(logic.worlds[worldId].prices);
 };
 
+const BOMBCHU_BEHAVIORS = {
+  free: 0,
+  bombBag: 1,
+  bagFirst: 2,
+  bagSeparate: 3,
+};
+
+function configBombchuBehavior(behavior: keyof typeof BOMBCHU_BEHAVIORS): Uint8Array {
+  return new Uint8Array([BOMBCHU_BEHAVIORS[behavior]]);
+}
+
 export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array => {
   const buffers = [];
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
@@ -1088,6 +1099,8 @@ export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array 
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(toU8Buffer([logic.settings.strayFairyRewardCount]));
+  buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorOot));
+  buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorMm));
   return concatUint8Arrays(buffers);
 };
 
