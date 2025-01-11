@@ -1254,11 +1254,12 @@ static int shouldItemBeHintedWithImportance(s16 gi)
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
+        return gComboConfig.bombchuBehaviorOot != BOMBCHU_BEHAVIOR_BAG_SEPARATE;
     case GI_MM_BOMBCHU:
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-        return 1;
+        return gComboConfig.bombchuBehaviorMm != BOMBCHU_BEHAVIOR_BAG_SEPARATE;
     default:
         return !isItemFastBuy(gi);
     }
