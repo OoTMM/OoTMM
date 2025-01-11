@@ -368,7 +368,7 @@ export const TRICKS: Tricks = {
   MM_NO_SEAHORSE: {
     game: 'mm',
     name: 'Pinnacle Rock without Seahorse',
-    tooltip: 'Go to Pinnacle Rock blind. The Signs are your markers for turns.',
+    tooltip: 'Cross Pinnacle Rock blind. The Signs are your markers for turns.',
     linkVideo: 'https://www.youtube.com/watch?v=Ye7lu1kSxpQ&ab_channel=Rahylia',
   },
   MM_ZORA_HALL_HUMAN: {
