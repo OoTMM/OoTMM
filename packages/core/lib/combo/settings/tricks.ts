@@ -331,7 +331,7 @@ export const TRICKS: Tricks = {
   },
   OOT_HIVE_BOMBCHU: {
     game: 'oot',
-    name: "Destroy Beehives using Bombchu (OOT)",
+    name: "Destroy Beehives using Bombchu (OoT)",
     tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Hyrule.",
   },
   OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL: {
@@ -562,7 +562,7 @@ export const TRICKS: Tricks = {
   MM_GBT_CENTRAL_GEYSER: {
     game: 'mm',
     name: 'GBT Central Room without Zora using Fire & Ice Arrows or an OoT Magic Spell',
-    tooltip: 'Using Fire and Ice Arrows or an OOT Spell, it is possible to sink down during the cutscene, then swim into one of the tunnels.',
+    tooltip: 'Using Fire and Ice Arrows or an OoT Spell, it is possible to sink down during the cutscene, then swim into one of the tunnels.',
   },
   MM_BANK_ONE_WALLET: {
     game: 'mm',
