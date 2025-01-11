@@ -701,7 +701,7 @@ export const TRICKS: Tricks = {
   MM_STAGE_LIGHTS_DIN: {
     game: 'mm',
     name: "Light the Zora Hall Stage Lights using Din's Fire, Bow, and Hookshot",
-    tooltip: "The item can be obtained without Fire Arrows by first hooking to either torch, using Din's Fire, then shooting an arrow to the other torch.",
+    tooltip: "The item can be obtained without Fire Arrows by first reaching either torch with the hookshot, using Din's Fire, then shooting an arrow to the other torch.",
   },
   MM_RANCH_FARORE: {
     game: 'mm',
