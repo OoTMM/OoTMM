@@ -1716,8 +1716,8 @@ export const SETTINGS = [{
   values: [
     { value: 'free', name: 'Free', description: 'Bombchu can be collected freely. Max ammo is 50.' },
     { value: 'bombBag', name: 'Bomb Bag', description: 'Bombchu can be collected in the bomb bag. Max ammo is the bomb bag maximum.' },
-    { value: 'bagFirst', name: 'Bombchu Bag - First', description: 'The first non-shop bombchu you find will turn into a bombchu bag. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag - Separate', description: 'A separate bombchu bag is in the item pool. It is required to get bombchu. Max ammo is 50.' },
+    { value: 'bagFirst', name: 'Bombchu Bag - First Pack', description: 'The first non-shop bombchu you find will turn into a bombchu bag. Max ammo is 50.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Separate bombchu bags are in the item pool. It is required to get bombchu. Max ammo is 20/30/40.' },
   ],
   description: 'Controls the behavior of bombchu.',
   default: 'free',
@@ -1730,8 +1730,8 @@ export const SETTINGS = [{
   values: [
     { value: 'free', name: 'Free', description: 'Bombchu can be collected freely. Max ammo is 50.' },
     { value: 'bombBag', name: 'Bomb Bag', description: 'Bombchu can be collected in the bomb bag. Max ammo is the bomb bag maximum.' },
-    { value: 'bagFirst', name: 'Bombchu Bag - First', description: 'The first non-shop bombchu you find will turn into a bombchu bag. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag - Separate', description: 'A separate bombchu bag is in the item pool. It is required to get bombchu. Max ammo is 50.' },
+    { value: 'bagFirst', name: 'Bombchu Bag - First Pack', description: 'The first non-shop bombchu you find will turn into a bombchu bag. Max ammo is 50.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Separate bombchu bags are in the item pool. It is required to get bombchu. Max ammo is 20/30/40.' },
   ],
   description: 'Controls the behavior of bombchu.',
   default: 'bombBag',

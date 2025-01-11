@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Completely rework bombchu, behavior is now a setting with 4 values : free like in OoT, tied to bomb bag like in MM, old-style bombchu bags, and a new bombchu bag setting where 3 bags are in the pool, allowing for 20/30/40 bombchu.
+
 ### Changed
 
 - Path hints now tell the exact world the path corresponds to in multiworld.
