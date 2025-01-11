@@ -409,8 +409,8 @@ export const TRICKS: Tricks = {
   },
   MM_BOMBER_GUESS: {
     game: 'mm',
-    name: 'Guess Bomber Code',
-    tooltip: 'Guess the Bomber Code for Astral Observatory.  There are 120 Combinations. (The Video Link is a backflip over him)',
+    name: 'Guess Bombers\' Code',
+    tooltip: 'Guess the Bombers\' Code for Astral Observatory from 120 possible combinations. Alternatively, you can backflip over the bomber kid guarding the entrance',
     linkVideo: 'https://www.youtube.com/watch?v=W6DhLXzJn0A&ab_channel=Tyler%2706',
   },
   MM_CAPTAIN_SKIP: {
