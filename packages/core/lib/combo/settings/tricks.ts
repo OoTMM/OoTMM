@@ -368,7 +368,7 @@ export const TRICKS: Tricks = {
   MM_NO_SEAHORSE: {
     game: 'mm',
     name: 'Pinnacle Rock without Seahorse',
-    tooltip: 'Cross Pinnacle Rock blind. The Signs are your markers for turns.',
+    tooltip: 'Cross Pinnacle Rock blind. The signs are your markers for turns.',
     linkVideo: 'https://www.youtube.com/watch?v=Ye7lu1kSxpQ&ab_channel=Rahylia',
   },
   MM_ZORA_HALL_HUMAN: {
@@ -380,7 +380,7 @@ export const TRICKS: Tricks = {
   MM_ICELESS_IKANA: {
     game: 'mm',
     name: 'Climb Ikana Canyon without Ice Arrows',
-    tooltip: 'With a precise hookshot position, you can hit the first tree directly from the riverside, removing the Ice Arrow requirement',
+    tooltip: 'With a precise Hookshot position, you can hit the first tree directly from the riverside, removing the Ice Arrow requirement',
     linkVideo: 'https://www.youtube.com/watch?v=VtMx8XIE0tA&ab_channel=yogamoanyo',
   },
   MM_ONE_MASK_STONE_TOWER: {
