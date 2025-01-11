@@ -616,7 +616,7 @@ export const TRICKS: Tricks = {
   MM_BIO_BABA_LUCK: {
     game: 'mm',
     name: 'Bio Baba Grotto Lilypad Luck',
-    tooltip: 'Hope the item lands on the lilypads.',
+    tooltip: 'If the item happens to land on one of the lilypads, you can get it without Zora Mask or Iron Boots.',
   },
   MM_WF_SHRINE_HOVERS: {
     game: 'mm',
