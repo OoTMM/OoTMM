@@ -380,7 +380,7 @@ export const TRICKS: Tricks = {
   MM_ICELESS_IKANA: {
     game: 'mm',
     name: 'Climb Ikana Canyon without Ice Arrows',
-    tooltip: 'With a precise hookshot postition, you can hit the first tree instead of using the ice arrows to get closer',
+    tooltip: 'With a precise hookshot position, you can hit the first tree directly from the riverside, removing the Ice Arrow requirement',
     linkVideo: 'https://www.youtube.com/watch?v=VtMx8XIE0tA&ab_channel=yogamoanyo',
   },
   MM_ONE_MASK_STONE_TOWER: {
