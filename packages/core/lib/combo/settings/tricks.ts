@@ -374,7 +374,7 @@ export const TRICKS: Tricks = {
   MM_ZORA_HALL_HUMAN: {
     game: 'mm',
     name: 'Swim to Zora Hall as Human',
-    tooltip: "Swim around the back of Zora Hall to get there without Zora' mask",
+    tooltip: "Swim around Zora Hall to reach the back without Zora Mask",
     linkVideo: 'https://www.youtube.com/watch?v=j4GiWM0xgtA&ab_channel=Rahylia',
   },
   MM_ICELESS_IKANA: {
