@@ -392,13 +392,13 @@ export const TRICKS: Tricks = {
   MM_ISTT_EYEGORE: {
     game: 'mm',
     name: 'Inverted Stone Tower Temple Eyegore Skips',
-    tooltip: 'Using either hookshot and light arrows, or bombs for a recoil jump, skip portions of the dungeon using the central bridge with an Eyegore on it',
+    tooltip: 'Using either Hookshot and Light Arrows, or bombs for a recoil flip, you can access the central bridge with the Eyegore on it early, skipping a portion of the dungeon',
     linkVideo: 'https://www.youtube.com/watch?v=PxUhL6pombo&list=PLJoiLTDPjgenwpASzbu07cLnUSGZcIUnB&index=52&ab_channel=dodo',
   },
   MM_SCT_NOTHING: {
     game: 'mm',
     name: 'South Clock Town Chest with Nothing',
-    tooltip: 'Climb the roof with a precise jump to access the South Clock town Chest',
+    tooltip: 'Climb the roof with a precise jump to access the South Clock Town Chest',
     linkVideo: 'https://www.youtube.com/watch?v=8_tjO86vRsY&ab_channel=PushyMisumi',
   },
   MM_GORON_BOMB_JUMP: {
