@@ -151,7 +151,7 @@ export const TRICKS: Tricks = {
   },
   OOT_LAB_DIVE_NO_GOLD_SCALE: {
     game: 'oot',
-    name: 'Laboratory Dive without Gold Scale',
+    name: 'Laboratory Dive without Golden Scale',
     tooltip: 'Using Iron Boots and Hookshot, it is possible to obtain this check without the Golden Scale.',
     linkVideo: 'https://www.youtube.com/watch?v=7ihH-wBP0PM&ab_channel=dotzo',
   },
@@ -321,7 +321,7 @@ export const TRICKS: Tricks = {
   },
   OOT_WATER_GOLD_SCALE: {
     game: 'oot',
-    name: 'Enter Water Temple with Gold Scale and Longshot',
+    name: 'Enter Water Temple with Golden Scale and Longshot',
     tooltip: 'It is possible to enter Water Temple without Iron Boots by using the Golden Scale.',
   },
   OOT_COURTYARD_FROM_GANON: {
