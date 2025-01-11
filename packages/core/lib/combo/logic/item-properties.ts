@@ -25,13 +25,13 @@ export class LogicPassItemProperties {
     this.properties.junk = new Set(ItemGroups.JUNK);
     this.properties.license = new Set(ItemGroups.LICENSES);
 
-    if (this.state.settings.bombchuBagOot) {
+    if (this.state.settings.bombchuBehaviorOot === 'bagFirst') {
       this.properties.license = new Set([...this.properties.license, ...ItemGroups.OOT_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     } else {
       this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.OOT_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     }
 
-    if (this.state.settings.bombchuBagMm) {
+    if (this.state.settings.bombchuBehaviorMm === 'bagFirst') {
       this.properties.license = new Set([...this.properties.license, ...ItemGroups.MM_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     } else {
       this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.MM_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);

@@ -66,7 +66,6 @@ function asmPatchGroups(world: World, settings: Settings) {
     NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
     OOT_FISHING_POND_SHUFFLE: settings.pondFishShuffle,
     OOT_NOT_FISHING_POND_SHUFFLE: !settings.pondFishShuffle,
-    MM_BOMBCHU_BAG: settings.bombchuBagMm,
     ER_WALLMASTERS: settings.erWallmasters !== 'none',
     OOT_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesOot !== 'none',
     MM_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesMm !== 'none',

@@ -836,6 +836,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_NUT_UPGRADE: "Deku Nut Upgrade (MM)",
   SHARED_STICK_UPGRADE: "Deku Stick Upgrade",
   SHARED_NUT_UPGRADE: "Deku Nut Upgrade",
+  OOT_BOMBCHU_BAG: "Bombchu Bag (OoT)",
+  MM_BOMBCHU_BAG: "Bombchu Bag (MM)",
+  SHARED_BOMBCHU_BAG: "Bombchu Bag",
 };
 
 export function itemName(item: string) {
