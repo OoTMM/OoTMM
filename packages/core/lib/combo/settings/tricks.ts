@@ -285,17 +285,17 @@ export const TRICKS: Tricks = {
   OOT_WELL_ADULT_TT: {
     game: 'oot',
     name: 'Enter Bottom of the Well as Adult with Time Travel',
-    tooltip: 'Entering the drained well as Child and turning Adult behind the blockage grants access to that entrance as Adult.<br>Intended for use with Boss ER and Full Dungeon ER. This trick will allow an Adult Boss to be placed inside an MM Dungeon in this location.',
+    tooltip: 'Entering the drained well as Child and turning Adult behind the blockage grants access to that entrance as Adult. Useful in Entrance Randomizer.',
   },
   OOT_ADULT_GALLERY_TT: {
     game: 'oot',
     name: 'Enter Adult Shooting Gallery as Child with Time Travel',
-    tooltip:'It is possible to turn from Child to Adult inside of the construction area, get close to the loading zone, and turn back to Child to enter the loading zone inside of the brick stack.<br> Intended for use with Interior ER. This will allow interiors with Child-only checks where you cannot age swap to be placed in this location.',
+    tooltip:'It is possible to turn from Child to Adult inside of the construction area, get close to the loading zone, and turn back to Child to enter the loading zone inside of the brick stack. Useful in Entrance Randomizer.',
   },
   OOT_GTG_CHILD_TT: {
     game: 'oot',
     name: 'Enter Gerudo Training Grounds as Child with Time Travel',
-    tooltip: 'Turning from Adult to Child inside of the doorframe puts you behind the gates, granting access to that entrance as Child.<br> Intended for use with Boss ER and Full Dungeon ER. This trick will allow a Child Boss to be placed in an MM Dungeon in this location.',
+    tooltip: 'Turning from Adult to Child inside of the doorframe puts you behind the gates, granting access to that entrance as Child. Useful in Entrance Randomizer.',
   },
   OOT_REVERSE_DAMPE: {
     game: 'oot',
@@ -426,8 +426,8 @@ export const TRICKS: Tricks = {
   },
   MM_HARD_HOOKSHOT: {
     game: 'mm',
-    name: 'Precise Hookshot Usage',
-    tooltip: 'With this trick enabled, using the Short Hookshot gives you logical access to:<br>- the Deku Palace Bean Grotto chest<br>- the Road to Ikana chest and tree',
+    name: 'Precise Short Hookshot Usage',
+    tooltip: 'With this trick enabled, using the Short Hookshot gives you logical access to the Deku Palace Bean Grotto chest, the Road to Ikana chest and Ikana Canyon through the Road to Ikana tree',
   },
   MM_PFI_BOAT_HOOK: {
     game: 'mm',
