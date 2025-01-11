@@ -431,8 +431,8 @@ export const TRICKS: Tricks = {
   },
   MM_PFI_BOAT_HOOK: {
     game: 'mm',
-    name: 'Enter Pirate Fortress Interior using Hookshot from the Boats',
-    tooltip: 'From the boats, you can make a precise hookshot to a barrel',
+    name: 'Enter Pirates\' Fortress Interior using Hookshot from the Boats',
+    tooltip: 'From the boats, you can make a precise shot to the barrels in front of the interior entrance',
   },
   MM_PALACE_GUARD_SKIP: {
     game: 'mm',
