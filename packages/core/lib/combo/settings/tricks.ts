@@ -636,12 +636,12 @@ export const TRICKS: Tricks = {
   MM_SOARING_HOVERS: {
     game: 'mm',
     name: 'Jump Slash or Damage Boost to the Soaring Tablet with Hover Boots and Bunny Hood',
-    tooltip: 'Using Bunny Hood for extra speed, Hover Boots can be used to reach the Soaring Tablet with a tight jump slash or damage boost with explosives.',
+    tooltip: 'Using Bunny Hood for extra speed, Hover Boots can be used to reach the Soaring Tablet with a tight jump slash or a damage boost with explosives.',
   },
   MM_LULLABY_SKIP_IRONS: {
     game: 'mm',
     name: 'Skip playing Goron Lullaby by using Iron Boots',
-    tooltip: 'By combining Iron Boots to not be blown by wind and Goron to roll up the slope, Goron Lullaby can be skipped.',
+    tooltip: 'By combining Iron Boots to not be blown away by the wind and Goron to roll up the slope, Goron Lullaby can be skipped.',
   },
   MM_PATH_SNOWHEAD_HOVERS: {
     game: 'mm',
