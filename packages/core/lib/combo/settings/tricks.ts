@@ -310,7 +310,7 @@ export const TRICKS: Tricks = {
   OOT_GANON_CASTLE_ENTRY: {
     game: 'oot',
     name: "Enter Ganon's Castle with Longshot Anywhere",
-    tooltip: 'While easy, doing this can bypass a huge chunk of potential logic.',
+    tooltip: 'While easy, doing this can bypass a huge chunk of potential logic if this trick is not enabled.',
   },
   OOT_SHADOW_TEMPLE_STICKS: {
     game: 'oot',
