@@ -116,7 +116,7 @@ export const TRICKS: Tricks = {
   OOT_WATER_LONGSHOT: {
     game: 'oot',
     name: 'Drain Water Temple using Longshot',
-    tooltip: 'Using Longshot, Link can hook to the torches at the bottom in front of the room he meets Ruto.',
+    tooltip: 'Using Longshot, Link can hookshot to the torches at the bottom in front of the room he meets Ruto.',
     linkVideo: 'Link Needed',
   },
   OOT_SAND_RIVER_NOTHING: {
@@ -239,7 +239,7 @@ export const TRICKS: Tricks = {
   OOT_WATER_REVERSE_RIVER: {
     game: 'oot',
     name: 'Water Temple Reverse River with Hookshot Anywhere',
-    tooltip: 'Using Hookshot Anywhere, Link can hook up from the Dragon Statue room, and then hook through the gate blocking the river before it has loaded.',
+    tooltip: 'Using Hookshot Anywhere, Link can hookshot up from the Dragon Statue room, and then hookshot through the gate blocking the river before it has loaded.',
   },
   OOT_WATER_PIT_GS_CHU: {
     game: 'oot',
@@ -494,7 +494,7 @@ export const TRICKS: Tricks = {
   MM_ZORA_HALL_DOORS: {
     game: 'mm',
     name: 'Access the doors in Zora Hall using Short Hookshot Anywhere',
-    tooltip: 'Using Hookshot Anywhere, it is possible to hook behind the doors and open the doors behind them. It is somewhat precise but works with all doors.',
+    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot behind the doors and open the doors behind them. It is somewhat precise but works with all doors.',
   },
   MM_IKANA_ROOF_PARKOUR: {
     game: 'mm',
@@ -552,7 +552,7 @@ export const TRICKS: Tricks = {
   MM_ESCAPE_CAGE: {
     game: 'mm',
     name: 'Escape the Monkey Cage with Hookshot Anywhere',
-    tooltip: 'For Interior ER, it is possible to hook over the fence and land in a spot where Deku Mask can then be used to leave out the front entrance.',
+    tooltip: 'For Interior ER, it is possible to hookshot over the fence and land in a spot where Deku Mask can then be used to leave out the front entrance.',
   },
   MM_GBT_FAIRY2_HOOK: {
     game: 'mm',
