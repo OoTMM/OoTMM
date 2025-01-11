@@ -30,7 +30,7 @@ export const TRICKS: Tricks = {
   OOT_LENS: {
     game: 'oot',
     name: 'Fewer Lens Requirements (OoT)',
-    tooltip: 'Doing things that would normally require Lens will no longer will, except for Treasure Chest Game and Haunted Wasteland.',
+    tooltip: 'Doing things that would normally require Lens no longer will, except for Treasure Chest Game and Haunted Wasteland.',
   },
   OOT_TUNICS: {
     game: 'oot',
