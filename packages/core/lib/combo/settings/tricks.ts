@@ -651,7 +651,7 @@ export const TRICKS: Tricks = {
   MM_GBT_WATERWHEEL_HOVERS: {
     game: 'mm',
     name: 'Cross GBT Waterwheel Room using Hover Boots',
-    tooltip: 'Similar to using Goron, Hover Boots can be used to get on the water wheel and then to the central room.',
+    tooltip: 'Similar to using Goron, Hover Boots can be used to get on the water wheel and then reach the central room.',
   },
   MM_GBT_CENTER_POT_IRONS: {
     game: 'mm',
