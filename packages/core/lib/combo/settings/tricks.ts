@@ -671,7 +671,7 @@ export const TRICKS: Tricks = {
   MM_GYORG_IRONS: {
     game: 'mm',
     name: 'Fight Gyorg as Human using Iron Boots and Hookshot',
-    tooltip: 'Gyorg can be damaged with Hookshot. Turning this on will enable the fight in logic with Iron Boots.',
+    tooltip: 'Gyorg can be damaged with Hookshot. Turning this trick on will enable the fight in logic with Iron Boots and Hookshot.',
   },
   MM_STT_LAVA_BLOCK_HOVERS: {
     game: 'mm',
