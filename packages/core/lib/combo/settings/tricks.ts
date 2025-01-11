@@ -576,7 +576,7 @@ export const TRICKS: Tricks = {
   MM_CLOCK_TOWER_WAIT: {
     game: 'mm',
     name: 'Wait for the Clock Tower to Open When Shuffled',
-    tooltip: 'With this enabled, it may be expected to wait for the Clock Tower to open without a way to quickly advance time.',
+    tooltip: 'With this trick enabled and the Clock Tower entrance shuffled, it may be expected to wait for the Clock Tower to open without a way to quickly advance time.',
   },
   MM_WFT_RUPEES_ICE: {
     game: 'mm',
