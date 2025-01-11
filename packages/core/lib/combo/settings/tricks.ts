@@ -346,7 +346,7 @@ export const TRICKS: Tricks = {
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
-    tooltip: 'Makes Lens of Truth not a required item for most checks, excluding Shiro (stone mask check) and climbing the wall to Darmani',
+    tooltip: 'Makes Lens of Truth not a required item for most checks, excluding Shiro (Stone Mask check) and climbing the wall to Darmani',
   },
   MM_TUNICS: {
     game: 'mm',
