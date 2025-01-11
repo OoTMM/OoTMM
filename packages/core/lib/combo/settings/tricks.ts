@@ -481,7 +481,7 @@ export const TRICKS: Tricks = {
   MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: {
     game: 'mm',
     name: 'Southern Swamp Scrub HP as Goron',
-    tooltip: "Use Goron's ground pound in front of the Tourist Center door to clip through the roof and reach the heart piece",
+    tooltip: "Use Goron's ground pound in front of the Tourist Center door to land on the roof and reach the heart piece",
     linkVideo: 'https://www.youtube.com/watch?v=HvH5NaTsf5w&list=PLuteuW9RqeG0NfhzoiZlJ1HQM2BdHftzg&index=5&ab_channel=Pokemongenius88',
   },
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: {
