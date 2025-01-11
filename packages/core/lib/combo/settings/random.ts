@@ -140,6 +140,41 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.smallKeyShuffleHideout = sampleWeighted(random, { ownDungeon: 10, anywhere: 7 });
   }
 
+  /* Bombchu Bag behavior */
+  switch (randomInt(random, 4)) {
+  case 0:
+    base.bombchuBehaviorOot = 'free';
+    break;
+  case 1:
+    base.bombchuBehaviorOot = 'bombBag';
+    break;
+  case 2:
+    base.bombchuBehaviorOot = 'bagFirst';
+    break;
+  case 3:
+    base.bombchuBehaviorOot = 'bagSeparate';
+    break;
+  }
+
+  switch (randomInt(random, 4)) {
+  case 0:
+    base.bombchuBehaviorMm = 'free';
+    break;
+  case 1:
+    base.bombchuBehaviorMm = 'bombBag';
+    break;
+  case 2:
+    base.bombchuBehaviorMm = 'bagFirst';
+    break;
+  case 3:
+    base.bombchuBehaviorMm = 'bagSeparate';
+    break;
+  }
+
+  if (booleanWeighted(random, 0.5)) {
+    base.bombchuBehaviorMm = base.bombchuBehaviorOot;
+  }
+
   /* Skeleton key */
   switch (randomInt(random, 4)) {
   case 0:
@@ -374,6 +409,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedNutsSticks = true;
     base.sharedBows = true;
     base.sharedBombBags = true;
+    base.sharedBombchu = true;
     base.sharedMagic = true;
     base.sharedMagicArrowFire = true;
     base.sharedMagicArrowIce = true;
@@ -412,6 +448,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
     base.sharedBows = booleanWeighted(random, 0.5);
     base.sharedBombBags = booleanWeighted(random, 0.5);
+    base.sharedBombchu = booleanWeighted(random, 0.5);
     base.sharedMagic = booleanWeighted(random, 0.5);
     base.sharedHookshot = booleanWeighted(random, 0.5);
     base.sharedLens = booleanWeighted(random, 0.5);
