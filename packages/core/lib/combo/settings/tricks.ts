@@ -391,7 +391,7 @@ export const TRICKS: Tricks = {
   },
   MM_ISTT_EYEGORE: {
     game: 'mm',
-    name: 'Inverted Stone Tower Temple Eyegore Skips',
+    name: 'Inverted Stone Tower Temple Early Eyegore',
     tooltip: 'Using either Hookshot and Light Arrows, or bombs for a recoil flip, you can access the central bridge with the Eyegore on it early, skipping a portion of the dungeon',
     linkVideo: 'https://www.youtube.com/watch?v=PxUhL6pombo&list=PLJoiLTDPjgenwpASzbu07cLnUSGZcIUnB&index=52&ab_channel=dodo',
   },
