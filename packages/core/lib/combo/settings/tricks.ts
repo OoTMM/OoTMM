@@ -611,7 +611,7 @@ export const TRICKS: Tricks = {
   MM_BIO_BABA_CHU: {
     game: 'mm',
     name: 'Destroy the Bio Baba Grotto Hives with a Bombchu',
-    tooltip: 'The hives in this grotto can be destroyed with a precise bombchu toss.',
+    tooltip: 'The hives in this grotto can be destroyed with a precise bombchu placement.',
   },
   MM_BIO_BABA_LUCK: {
     game: 'mm',
