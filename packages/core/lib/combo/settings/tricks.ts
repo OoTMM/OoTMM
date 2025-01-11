@@ -514,7 +514,7 @@ export const TRICKS: Tricks = {
   MM_POST_OFFICE_GAME: {
     game: 'mm',
     name: 'Post Office Timing Game without Bunny Hood',
-    tooltip: 'Get good at counting to 10',
+    tooltip: 'Obtain the reward without an on-screen timer to help you',
     linkVideo: 'https://www.youtube.com/watch?v=bAlGLPkp8go&ab_channel=ZZtheCat2',
   },
   MM_WELL_HSW: {
