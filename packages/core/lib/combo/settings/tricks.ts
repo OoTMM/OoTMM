@@ -711,7 +711,7 @@ export const TRICKS: Tricks = {
   MM_EVAN_FARORE: {
     game: 'mm',
     name: "Evan's Piece of Heart using Farore's Wind and Time Reset",
-    tooltip: "Turning this on will let logic allow placing Farore's Wind then resetting time to obtain this item.",
+    tooltip: "After beating Great Bay Temple, the door to Evan's Room will no longer be blocked. Use Farore's Wind inside the empty room, reset time so that Evan reappears in his room, and warp back.",
   },
   MM_KEG_TRIAL_HEATLESS: {
     game: 'mm',
