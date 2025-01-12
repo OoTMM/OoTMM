@@ -873,9 +873,9 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false
 },
-{ ...SETTING_PRICE, key: 'priceOotShops', name: 'OoT Shops Prices', description: 'Sets the price of items inside OoT shops', cond: hasOoT },
-{ ...SETTING_PRICE, key: 'priceOotScrubs', name: 'OoT Scrubs Prices', description: 'Sets the price of items sold by OoT scrubs', cond: hasOoT },
-{ ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shops Prices', description: 'Sets the price of items sold inside MM shops', cond: hasMM },
+{ ...SETTING_PRICE, key: 'priceOotShops', name: 'OoT Shop Prices', description: 'Sets the price of items inside OoT shops', cond: hasOoT },
+{ ...SETTING_PRICE, key: 'priceOotScrubs', name: 'OoT Scrub Prices', description: 'Sets the price of items sold by OoT scrubs', cond: hasOoT },
+{ ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shop Prices', description: 'Sets the price of items sold inside MM shops', cond: hasMM },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle', cond: hasMM },
 {
   key: 'ganonTrials',
