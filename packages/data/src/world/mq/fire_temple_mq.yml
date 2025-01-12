@@ -41,6 +41,8 @@
     "Fire Temple Pre-Boss Room Cell Corner": "has_tunic_goron"
     "Fire Temple Pre-Boss": "has_tunic_goron && ((event(FIRE_MQ_PRE_BOSS_PILLAR) && has_hover_boots) || hookshot_anywhere || climb_anywhere)"
     "Fire Temple Pre-Boss Room Tall Ledges Corner": "has_tunic_goron && (climb_anywhere || can_hookshot || has_hover_boots)"
+  #events:
+    # FIRE_MQ_PRE_BOSS_TORCHES: "has_tunic_goron && has_fire && can_use_bow" #TODO: Trick with shotting the torch through the crate
 "Fire Temple Pre-Boss Room Cell Corner":
   dungeon: Fire
   exits:
@@ -63,7 +65,7 @@
     "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pre-Boss": "has_tunic_goron && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
-    FIRE_MQ_PRE_BOSS_TORCHES: "(has_tunic_goron || (is_child && has_tunic_goron_strict)) && has_fire && (can_use_bow || has_hover_boots)"
+    FIRE_MQ_PRE_BOSS_TORCHES: "(has_tunic_goron && can_use_din && (is_adult || can_longshot || has_hover_boots || can_use_bow || hookshot_anywhere || climb_anywhere)) || (has_fire_arrows && ((has_goron_tunic_strict && is_child) || (has_goron_tunic && (can_longshot || hookshot_anywhere || (has_hover_boots && (is_adult || climb_anywhere))))))"
   locations:
     "MQ Fire Temple Pot Pre-Boss 1": "has_tunic_goron"
     "MQ Fire Temple Pot Pre-Boss 2": "has_tunic_goron"
