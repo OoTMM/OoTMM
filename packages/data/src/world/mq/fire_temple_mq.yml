@@ -469,4 +469,4 @@
   events:
     FIRE_MQ_HIGH_LEDGE_AFTER_STAIRCASE_PILLAR: "can_hammer"
   locations:
-    "MQ Fire Temple GS Topmost": "gs && (can_collect_distance || ((has_explosives || can_use_mask_blast || has_weapon || has_ranged_weapon) && climb_anywhere))"
+    "MQ Fire Temple GS Topmost": "gs && (can_collect_distance || ((has_explosives || can_use_mask_blast || has_weapon || has_ranged_weapon || has_sticks) && climb_anywhere))"
