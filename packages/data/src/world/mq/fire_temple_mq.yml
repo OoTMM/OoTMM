@@ -105,7 +105,7 @@
     "Fire Temple Hammer Loop Iron Knuckle Room": "true"
     "Fire Temple Hammer Loop Goron Cell Map Chest Side": "event(FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR)"
   events:
-    FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || can_use_mask_blast || can_hammer || can_hookshot) && has_weapon"
+    FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || has_bombchu || can_use_mask_blast || can_hammer || can_hookshot) && (has_weapon || has_sticks || can_hammer)"
   locations:
     "MQ Fire Temple Hammer Chest": "event(FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR) && (is_adult || can_hookshot || climb_anywhere)"
 "Fire Temple Hammer Loop Goron Cell Map Chest Side":
