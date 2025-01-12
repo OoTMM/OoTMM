@@ -18,7 +18,7 @@ PATCH_END
 
 PATCH_START 0x80070ccc
   lbu t7,%LO(gMaxBombchuOot)(t7)
-  slt at,t6,t7
+  slt at,t9,t7
 PATCH_END
 
 InterfaceBombchuAmmoColorHook:
