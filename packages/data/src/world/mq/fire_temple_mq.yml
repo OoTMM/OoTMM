@@ -419,7 +419,7 @@
     "Fire Temple Fire Walls Room Area After Large Fire Wall": "event(FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS)"
     "Fire Temple Tower After Flare Dancer First Room": "event(FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS) || (longshot_anywhere && climb_anywhere)"
   events:
-    FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || can_use_mask_blast || can_hammer || can_hookshot) && has_weapon"
+    FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || has_bombchu || can_use_mask_blast || can_hammer || can_hookshot) && (has_weapon || has_sticks || can_hammer)"
   locations:
     "MQ Fire Temple Flare Dancer Key": "event(FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS)" #TODO: trick to get with boomerang
 "Fire Temple Tower After Flare Dancer First Room":
