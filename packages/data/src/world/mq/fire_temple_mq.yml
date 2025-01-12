@@ -303,7 +303,7 @@
     "Fire Temple 3F Lava Room Ledge Before Fire Walls Hallway": "has_tunic_goron && (is_adult || can_hookshot || climb_anywhere)"
   events:
     FIRE_MQ_3F_LAVA_ROOM_BLUE_SWITCH: "has_tunic_goron_strict && (can_hookshot || climb_anywhere)" #Listed here because you need to get out of cage anyway.
-    FIRE_MQ_3F_LAVA_ROOM_TORCHES: "(event(FIRE_MQ_3F_LAVA_ROOM_BLUE_SWITCH) && can_use_bow) || can_use_fire_arrow"
+    FIRE_MQ_3F_LAVA_ROOM_TORCHES: "(event(FIRE_MQ_3F_LAVA_ROOM_BLUE_SWITCH) && can_use_bow) || has_fire_arrows"
   locations:
     "MQ Fire Temple Pot Grids Above Lava 1": "has_tunic_goron"
     "MQ Fire Temple Pot Grids Above Lava 2": "has_tunic_goron"
