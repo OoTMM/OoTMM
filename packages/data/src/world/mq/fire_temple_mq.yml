@@ -62,7 +62,7 @@
 "Fire Temple Pre-Boss Room Tall Ledges Corner":
   dungeon: Fire
   exits:
-    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron" #Both child (via the hookshot platform and crates) and adult (normally) can climb up top and jump down.
     "Fire Temple Pre-Boss": "has_tunic_goron && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
     FIRE_MQ_PRE_BOSS_TORCHES: "(has_tunic_goron && can_use_din && (is_adult || can_longshot || has_hover_boots || can_use_bow || hookshot_anywhere || climb_anywhere)) || (has_fire_arrows && ((has_tunic_goron_strict && is_child) || (has_tunic_goron && (can_longshot || hookshot_anywhere || (has_hover_boots && (is_adult || climb_anywhere))))))"
