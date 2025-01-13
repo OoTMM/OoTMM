@@ -758,5 +758,6 @@ void func_800C0094(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
 #endif
 
 Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, struct Actor* actor, Gfx* gfx);
+void AnimatedMat_Draw(PlayState* play, void* arg);
 
 void ComboPlay_SpawnExtraSigns(PlayState* play);

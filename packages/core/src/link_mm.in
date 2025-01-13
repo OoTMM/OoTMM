@@ -567,6 +567,7 @@ Gfx_SetupDL72 = 0x8012c304;
 Scene_SetRenderModeXlu = 0x80131df0;
 Player_GetMask = 0x8012403c;
 SkelAnime_DrawFlex = 0x80134dbc;
+AnimatedMat_Draw = 0x80131758;
 
 Actor_TextboxIsClosing = 0x800b867c;
 func_800B0E48 = 0x800b0e48;

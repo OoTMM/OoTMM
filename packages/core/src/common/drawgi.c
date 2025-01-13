@@ -648,8 +648,6 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
     Draw_SetObjectSegment(play->state.gfxCtx, sDrawStrayFairyObject);
 #endif
 
-    SkelAnime_Update(&sDrawStrayFairySkelAnime);
-
     drawGi = &kDrawGi[drawGiId];
     index = drawGi->lists[0];
 #if defined(GAME_MM)
@@ -664,13 +662,17 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    ModelViewUnkTransform(&play->billboardMtxF);
-    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+#if defined(GAME_MM)
+    AnimatedMat_Draw(play, Lib_SegmentedToVirtual((void*)0x0402C908));
+#endif
+    Matrix_ReplaceRotation(&play->billboardMtxF);
+    Matrix_Scale(0.03f, 0.03f, 0.03f, MTXMODE_APPLY);
+    SkelAnime_Update(&sDrawStrayFairySkelAnime);
     color4(&r, &gg, &b, &a, kEnvColors[index - 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, gg, b, a);
     color4(&r, &gg, &b, &a, kPrimColors[index - 1]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, gg, b, a);
-    SkelAnime_DrawFlex(play, sDrawStrayFairySkelAnime.skeleton, sDrawStrayFairySkelAnime.jointTable, sDrawStrayFairySkelAnime.dListCount, NULL, NULL, NULL, POLY_XLU_DISP);
+    POLY_XLU_DISP = SkelAnime_DrawFlex(play, sDrawStrayFairySkelAnime.skeleton, sDrawStrayFairySkelAnime.jointTable, sDrawStrayFairySkelAnime.dListCount, NULL, NULL, NULL, POLY_XLU_DISP);
     CLOSE_DISPS();
 }
 
