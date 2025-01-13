@@ -359,7 +359,7 @@
     "Fire Temple Fire Walls Room Large Fire Wall Side": "hookshot_anywhere || climb_anywhere"
     "Fire Temple Fire Walls Room High Area After Staircase": "event(FIRE_MQ_HIGH_LEDGE_AFTER_STAIRCASE_PILLAR) && longshot_anywhere" #TODO: implement here the trick for one-sided collision.
   events:
-    FIRE_MQ_PRE_BOSS_PILLAR: "can_hammer"
+    FIRE_MQ_PRE_BOSS_PILLAR: "can_hammer && (is_adult || can_play_time || has_hover_boots || hookshot_anywhere || climb_anywhere)" #TODO: Add to ledge region with room rewrite.
   locations:
     "MQ Fire Temple Pot Fire Maze Room Left 1": "true"
     "MQ Fire Temple Pot Fire Maze Room Left 2": "true"
