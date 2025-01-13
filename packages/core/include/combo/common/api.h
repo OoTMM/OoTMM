@@ -414,9 +414,10 @@ f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 void Audio_PlaySfx_AtPosWithAllChannelsIO(Vec3f* pos, u16 sfxId, u8 ioData);
 void EffectSsDust_Spawn_2_Normal(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
 
-void SkelAnime_InitFlex(PlayState* play, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg, AnimationHeader* animation, Vec3s* jointTable, Vec3s* morphTable, s32 limbCount);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 #endif
+
+void SkelAnime_InitFlex(PlayState* play, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg, AnimationHeader* animation, Vec3s* jointTable, Vec3s* morphTable, s32 limbCount);
 
 s32     SkelAnime_Update(SkelAnime* skelAnime);
 void    Animation_Change(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed, f32 startFrame, f32 endFrame, u8 mode, f32 morphFrames);
@@ -593,8 +594,6 @@ typedef s32 (*OverrideLimbDraw)(PlayState* play, s32 limbIndex, Gfx** dList, Vec
 typedef void (*PostLimbDraw)(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot,
                              Actor* thisx, Gfx** gfx);
 
-Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDraw overrideLimbDraw, PostLimbDraw postLimbDraw, struct Actor* actor, Gfx* gfx);
-
 f32 Math3D_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
 void Actor_UpdateVelocityWithGravity(Actor* actor);
 void Math_Vec3f_Scale(Vec3f* vec, f32 scale);
@@ -757,5 +756,8 @@ void func_800B0E48(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, C
 void func_800C0094(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
 
 #endif
+
+Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, struct Actor* actor, Gfx* gfx);
+void AnimatedMat_Draw(PlayState* play, void* arg);
 
 void ComboPlay_SpawnExtraSigns(PlayState* play);

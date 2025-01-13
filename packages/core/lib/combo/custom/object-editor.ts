@@ -1,5 +1,5 @@
 import { concatUint8Arrays } from "uint8array-extras";
-import { bufReadU32BE, bufWriteU32BE } from "../util/buffer";
+import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE } from "../util/buffer";
 
 export type ObjectEditorOut = {
   data: Uint8Array;
@@ -117,6 +117,89 @@ export class ObjectEditor {
     }
 
     return outAddr;
+  }
+
+  private emitData(data: Uint8Array) {
+    const newAddr = this.outSize | (this.segOut << 24);
+    this.outSize += data.length;
+    this.out.push(data);
+    if (this.outSize % 16) {
+      const extraSize = 16 - (this.outSize % 16);
+      const extraBuf = new Uint8Array(extraSize);
+      this.outSize += extraSize;
+      this.out.push(extraBuf);
+    }
+    return newAddr;
+  }
+
+  processJointIndexAddr(addr: number, limbCount: number) {
+    const data = this.segData(addr, 2 * 3 * (limbCount + 1));
+    if (!data)
+      return { addr, max: 0 };
+    const newAddr = this.emitData(data);
+    let max = 0;
+    for (let i = 0; i < (limbCount + 1) * 3; ++i) {
+      const index = bufReadU16BE(data, i * 2);
+      if (index > max)
+        max = index;
+    }
+    return { addr: newAddr, max };
+  }
+
+  processFrameDataAddr(addr: number, count: number) {
+    const data = this.segData(addr, 2 * count);
+    if (!data)
+      return addr;
+    return this.emitData(data);
+  }
+
+  processAnimationHeaderAddr(addr: number, limbCount: number) {
+    const data = this.segData(addr, 0x10);
+    if (!data)
+      return addr;
+
+    const newData = new Uint8Array(data);
+    const frameCount = bufReadU16BE(data, 0x00);
+    const newJointData = this.processJointIndexAddr(bufReadU32BE(data, 0x08), limbCount);
+    const newFrameData = this.processFrameDataAddr(bufReadU32BE(data, 0x04), newJointData.max + frameCount);
+
+    bufWriteU32BE(newData, 0x04, newFrameData);
+    bufWriteU32BE(newData, 0x08, newJointData.addr);
+
+    const newAddr = this.emitData(newData);
+    return newAddr;
+  }
+
+  processSkeletonStandardLimbAddr(addr: number) {
+    const data = this.segData(addr, 0x0c);
+    if (!data)
+      return addr;
+    const newData = new Uint8Array(data);
+    const newList = this.processListAddr(bufReadU32BE(data, 0x08));
+    bufWriteU32BE(newData, 0x08, newList);
+    return this.emitData(newData);
+  }
+
+  processSkeletonLimbsAddr(addr: number, count: number) {
+    const data = this.segData(addr, 4 * count);
+    if (!data)
+      return addr;
+    const newData = new Uint8Array(data);
+    for (let i = 0; i < count; ++i) {
+      const newAddr = this.processSkeletonStandardLimbAddr(bufReadU32BE(data, i * 4));
+      bufWriteU32BE(newData, i * 4, newAddr);
+    }
+    return this.emitData(newData);
+  }
+
+  processFlexSkeletonHeaderAddr(addr: number) {
+    const data = this.segData(addr, 0xc);
+    if (!data)
+      return addr;
+    const newData = new Uint8Array(data);
+    const newLimbs = this.processSkeletonLimbsAddr(bufReadU32BE(data, 0), bufReadU8(data, 0x08));
+    bufWriteU32BE(newData, 0, newLimbs);
+    return this.emitData(newData);
   }
 
   loadSegment(num: number, data: Uint8Array | null) {

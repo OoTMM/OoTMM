@@ -359,6 +359,22 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_BOW', ...editor.build() };
   }
 
+  private async makeStrayFairy(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+
+    const animHeaderAddr = 0x0402b494;
+    const newAnimHeaderAddr = editor.processAnimationHeaderAddr(animHeaderAddr, 9);
+    editor.submitOut(newAnimHeaderAddr);
+
+    const skeletonHeaderAddr = 0x0402ca98;
+    const newSkeletonHeaderAddr = editor.processFlexSkeletonHeaderAddr(skeletonHeaderAddr);
+    editor.submitOut(newSkeletonHeaderAddr);
+
+    return { name: 'STRAY_FAIRY', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -384,6 +400,7 @@ export class CustomObjectsBuilder {
       await this.makeEqHookshot(),
       await this.makeEqSlingshot(),
       await this.makeEqBow(),
+      await this.makeStrayFairy(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

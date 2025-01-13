@@ -315,6 +315,8 @@ DeathWarp = 0x8009da10;
 _AddRupees = 0x800721cc;
 
 SkelAnime_DrawFlexLod = 0x800894a4;
+SkelAnime_DrawFlex = 0x8008a88c;
+SkelAnime_InitFlex = 0x8008c788;
 _Player_OverrideLimbDrawGameplayDefault = 0x8007aa94;
 _Player_OverrideLimbDrawPause = 0x8007c1c8;
 _Player_OverrideLimbDrawGameplayFirstPerson = 0x8007ad80;
