@@ -590,11 +590,13 @@ CustomStrayFairyObj kStrayFairyObj =
 };
 
 static u8 sDrawStrayFairyInitialized;
-static void* sDrawStrayFairyObject;
 static SkelAnime sDrawStrayFairySkelAnime;
 static Vec3s sDrawStrayFairyJointTable[10];
+static u32 sDrawStrayFairyLastFrame;
+static u32 sDrawStrayFairyLimit;
 
 #if defined(GAME_OOT)
+static void* sDrawStrayFairyObject;
 # define STRAY_FAIRY_SKEL CUSTOM_OBJECT_STRAY_FAIRY_1
 # define STRAY_FAIRY_ANIM CUSTOM_OBJECT_STRAY_FAIRY_0
 #endif
@@ -624,11 +626,25 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 
     const DrawGi* drawGi;
     int index;
-    u32 tmp;
     u8 r;
     u8 gg;
     u8 b;
     u8 a;
+#if defined(GAME_OOT)
+    u32 tmp;
+#endif
+
+    if (sDrawStrayFairyLastFrame != play->state.frameCount)
+    {
+        sDrawStrayFairyLastFrame = play->state.frameCount;
+        sDrawStrayFairyLimit = 0;
+    }
+    else
+    {
+        sDrawStrayFairyLimit++;
+        if (sDrawStrayFairyLimit >= 15)
+            return;
+    }
 
     if (!sDrawStrayFairyInitialized)
     {
@@ -667,7 +683,10 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 #endif
     Matrix_ReplaceRotation(&play->billboardMtxF);
     Matrix_Scale(0.03f, 0.03f, 0.03f, MTXMODE_APPLY);
-    SkelAnime_Update(&sDrawStrayFairySkelAnime);
+
+    if (sDrawStrayFairyLimit == 0)
+        SkelAnime_Update(&sDrawStrayFairySkelAnime);
+
     color4(&r, &gg, &b, &a, kEnvColors[index - 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, gg, b, a);
     color4(&r, &gg, &b, &a, kPrimColors[index - 1]);
