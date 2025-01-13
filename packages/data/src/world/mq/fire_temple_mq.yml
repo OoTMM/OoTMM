@@ -39,7 +39,7 @@
   exits:
     "Fire Temple Upper Lobby": "true"
     "Fire Temple Pre-Boss Room Cell Corner": "has_tunic_goron"
-    "Fire Temple Pre-Boss": ""has_tunic_goron && ((event(FIRE_MQ_PRE_BOSS_PILLAR) && (is_adult || has_hover_boots)) || hookshot_anywhere || climb_anywhere)"
+    "Fire Temple Pre-Boss": "has_tunic_goron && ((event(FIRE_MQ_PRE_BOSS_PILLAR) && (is_adult || has_hover_boots)) || hookshot_anywhere || climb_anywhere)"
     "Fire Temple Pre-Boss Room Tall Ledges Corner": "has_tunic_goron && (climb_anywhere || can_hookshot || has_hover_boots)"
   #events:
     # FIRE_MQ_PRE_BOSS_TORCHES: "has_tunic_goron && has_fire && can_use_bow" #TODO: Trick with shotting the torch through the crate
@@ -355,7 +355,7 @@
     "Fire Temple Pre-Boss Room Tall Ledges Corner": "has_tunic_goron && event(FIRE_MQ_PRE_BOSS_PILLAR) && (can_longshot || hookshot_anywhere || climb_anywhere)"
     "Fire Temple Fire Walls Room Outside Side Room": "has_hover_boots || can_play_time || hookshot_anywhere || climb_anywhere"
     "Fire Temple Fire Walls Middle Hallway Lower": "true"
-    "Fire Temple Fire Walls Middle Hallway Upper": "true"
+    "Fire Temple Fire Walls Middle Hallway Upper": "is_adult || can_play_time || has_hover_boots || hookshot_anywhere || climb_anywhere" #TODO: Make this ledge in Fire Walls Room its own region, and rewrite room accordingly.
     "Fire Temple Fire Walls Room Large Fire Wall Side": "hookshot_anywhere || climb_anywhere"
     "Fire Temple Fire Walls Room High Area After Staircase": "event(FIRE_MQ_HIGH_LEDGE_AFTER_STAIRCASE_PILLAR) && longshot_anywhere" #TODO: implement here the trick for one-sided collision.
   events:
