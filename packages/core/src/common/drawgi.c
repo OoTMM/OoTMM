@@ -531,8 +531,20 @@ static const Gfx kStrayFairyDlistColorWoodfall[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kStrayFairyDlistColorWoodfallBg[] = {
+    gsDPSetPrimColor(0, 0, 0xba, 0x50, 0x84, 255),
+    gsDPSetEnvColor(0xba, 0x50, 0x84, 255),
+    gsSPEndDisplayList(),
+};
+
 static const Gfx kStrayFairyDlistColorSnowhead[] = {
     gsDPSetPrimColor(0, 0, 0xf0, 0xf6, 0xc2, 255),
+    gsDPSetEnvColor(0x45, 0x85, 0x2b, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kStrayFairyDlistColorSnowheadBg[] = {
+    gsDPSetPrimColor(0, 0, 0x45, 0x85, 0x2b, 255),
     gsDPSetEnvColor(0x45, 0x85, 0x2b, 255),
     gsSPEndDisplayList(),
 };
@@ -543,8 +555,20 @@ static const Gfx kStrayFairyDlistColorGreatBay[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kStrayFairyDlistColorGreatBayBg[] = {
+    gsDPSetPrimColor(0, 0, 0x7f, 0x65, 0xcc, 255),
+    gsDPSetEnvColor(0x7f, 0x65, 0xcc, 255),
+    gsSPEndDisplayList(),
+};
+
 static const Gfx kStrayFairyDlistColorStoneTower[] = {
     gsDPSetPrimColor(0, 0, 0xfe, 0xfe, 0xe7, 255),
+    gsDPSetEnvColor(0xc2, 0xc1, 0x64, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kStrayFairyDlistColorStoneTowerBg[] = {
+    gsDPSetPrimColor(0, 0, 0xc2, 0xc1, 0x64, 255),
     gsDPSetEnvColor(0xc2, 0xc1, 0x64, 255),
     gsSPEndDisplayList(),
 };
@@ -555,6 +579,20 @@ static const Gfx kStrayFairyDlistColorTown[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kStrayFairyDlistColorTownBg[] = {
+    gsDPSetPrimColor(0, 0, 0xbc, 0x70, 0x2d, 255),
+    gsDPSetEnvColor(0xbc, 0x70, 0x2d, 255),
+    gsSPEndDisplayList(),
+};
+
+static int DrawGi_CustomStrayFairyLimbOverride(PlayState* play, int limbIndex, Gfx** dlist, Vec3f* pos, Vec3s* rot, Actor* this)
+{
+    if (limbIndex == 9)
+        *dlist = NULL;
+
+    return FALSE;
+}
+
 void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 {
     static const Gfx* const kColors[] = {
@@ -563,6 +601,14 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
         kStrayFairyDlistColorGreatBay,
         kStrayFairyDlistColorStoneTower,
         kStrayFairyDlistColorTown,
+    };
+
+    static const Gfx* const kColorsBg[] = {
+        kStrayFairyDlistColorWoodfallBg,
+        kStrayFairyDlistColorSnowheadBg,
+        kStrayFairyDlistColorGreatBayBg,
+        kStrayFairyDlistColorStoneTowerBg,
+        kStrayFairyDlistColorTownBg,
     };
 
     const DrawGi* drawGi;
@@ -619,14 +665,14 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 0x08, kColors[index - 1]);
-    gSPSegment(POLY_XLU_DISP++, 0x09, kColors[index - 1]);
+    gSPSegment(POLY_XLU_DISP++, 0x09, kColorsBg[index - 1]);
     Matrix_ReplaceRotation(&play->billboardMtxF);
     Matrix_Scale(0.03f, 0.03f, 0.03f, MTXMODE_APPLY);
 
     if (sDrawStrayFairyLimit == 0)
         SkelAnime_Update(&sDrawStrayFairySkelAnime);
 
-    POLY_XLU_DISP = SkelAnime_DrawFlex(play, sDrawStrayFairySkelAnime.skeleton, sDrawStrayFairySkelAnime.jointTable, sDrawStrayFairySkelAnime.dListCount, NULL, NULL, NULL, POLY_XLU_DISP);
+    POLY_XLU_DISP = SkelAnime_DrawFlex(play, sDrawStrayFairySkelAnime.skeleton, sDrawStrayFairySkelAnime.jointTable, sDrawStrayFairySkelAnime.dListCount, DrawGi_CustomStrayFairyLimbOverride, NULL, NULL, POLY_XLU_DISP);
     CLOSE_DISPS();
 }
 
