@@ -526,30 +526,48 @@ static void* sDrawStrayFairyObject;
 # define STRAY_FAIRY_ANIM 0x0402b494
 #endif
 
+static const Gfx kStrayFairyDlistColorWoodfall[] = {
+    gsDPSetPrimColor(0, 0, 0xd2, 0xb8, 0xc8, 255),
+    gsDPSetEnvColor(0xba, 0x50, 0x84, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kStrayFairyDlistColorSnowhead[] = {
+    gsDPSetPrimColor(0, 0, 0xf0, 0xf6, 0xc2, 255),
+    gsDPSetEnvColor(0x45, 0x85, 0x2b, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kStrayFairyDlistColorGreatBay[] = {
+    gsDPSetPrimColor(0, 0, 0xe1, 0xeb, 0xfd, 255),
+    gsDPSetEnvColor(0x7f, 0x65, 0xcc, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kStrayFairyDlistColorStoneTower[] = {
+    gsDPSetPrimColor(0, 0, 0xfe, 0xfe, 0xe7, 255),
+    gsDPSetEnvColor(0xc2, 0xc1, 0x64, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kStrayFairyDlistColorTown[] = {
+    gsDPSetPrimColor(0, 0, 0xf1, 0xe5, 0xd9, 255),
+    gsDPSetEnvColor(0xbc, 0x70, 0x2d, 255),
+    gsSPEndDisplayList(),
+};
+
 void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 {
-    static u32 kEnvColors[] = {
-        0xba5084ff,
-        0x45852bff,
-        0x7f65ccff,
-        0xc2c164ff,
-        0xbc702dff,
-    };
-
-    static u32 kPrimColors[] = {
-        0xd2b8c8ff,
-        0xf0f6c2ff,
-        0xe1ebfdff,
-        0xfefee7ff,
-        0xf1e5d9ff,
+    static const Gfx* const kColors[] = {
+        kStrayFairyDlistColorWoodfall,
+        kStrayFairyDlistColorSnowhead,
+        kStrayFairyDlistColorGreatBay,
+        kStrayFairyDlistColorStoneTower,
+        kStrayFairyDlistColorTown,
     };
 
     const DrawGi* drawGi;
     int index;
-    u8 r;
-    u8 gg;
-    u8 b;
-    u8 a;
 #if defined(GAME_OOT)
     u32 tmp;
 #endif
@@ -598,19 +616,14 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-#if defined(GAME_MM)
-    AnimatedMat_Draw(play, Lib_SegmentedToVirtual((void*)0x0402C908));
-#endif
+    gSPSegment(POLY_XLU_DISP++, 0x08, kColors[index - 1]);
+    gSPSegment(POLY_XLU_DISP++, 0x09, kColors[index - 1]);
     Matrix_ReplaceRotation(&play->billboardMtxF);
     Matrix_Scale(0.03f, 0.03f, 0.03f, MTXMODE_APPLY);
 
     if (sDrawStrayFairyLimit == 0)
         SkelAnime_Update(&sDrawStrayFairySkelAnime);
 
-    color4(&r, &gg, &b, &a, kEnvColors[index - 1]);
-    gDPSetEnvColor(POLY_XLU_DISP++, r, gg, b, a);
-    color4(&r, &gg, &b, &a, kPrimColors[index - 1]);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, gg, b, a);
     POLY_XLU_DISP = SkelAnime_DrawFlex(play, sDrawStrayFairySkelAnime.skeleton, sDrawStrayFairySkelAnime.jointTable, sDrawStrayFairySkelAnime.dListCount, NULL, NULL, NULL, POLY_XLU_DISP);
     CLOSE_DISPS();
 }
