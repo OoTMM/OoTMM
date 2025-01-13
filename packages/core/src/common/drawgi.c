@@ -509,7 +509,6 @@ void DrawGi_CustomOwl(PlayState* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-static u8 sDrawStrayFairyInitialized;
 static SkelAnime sDrawStrayFairySkelAnime;
 static Vec3s sDrawStrayFairyJointTable[10];
 static u32 sDrawStrayFairyLastFrame;
@@ -584,18 +583,21 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
             return;
     }
 
-    if (!sDrawStrayFairyInitialized)
+    if (!g.strayFairySkeletonInitialized)
     {
 #if defined(GAME_OOT)
-        tmp = comboLoadObject(NULL, CUSTOM_OBJECT_ID_STRAY_FAIRY);
-        sDrawStrayFairyObject = malloc(tmp);
         if (!sDrawStrayFairyObject)
-            return;
-        comboLoadObject(sDrawStrayFairyObject, CUSTOM_OBJECT_ID_STRAY_FAIRY);
-        Draw_SetObjectSegment(play->state.gfxCtx, sDrawStrayFairyObject);
+        {
+            tmp = comboLoadObject(NULL, CUSTOM_OBJECT_ID_STRAY_FAIRY);
+            sDrawStrayFairyObject = malloc(tmp);
+            if (!sDrawStrayFairyObject)
+                return;
+            comboLoadObject(sDrawStrayFairyObject, CUSTOM_OBJECT_ID_STRAY_FAIRY);
+            Draw_SetObjectSegment(play->state.gfxCtx, sDrawStrayFairyObject);
+        }
 #endif
         SkelAnime_InitFlex(play, &sDrawStrayFairySkelAnime, (void*)STRAY_FAIRY_SKEL, (void*)STRAY_FAIRY_ANIM, sDrawStrayFairyJointTable, sDrawStrayFairyJointTable, 10);
-        sDrawStrayFairyInitialized = 1;
+        g.strayFairySkeletonInitialized = 1;
     }
 
 #if defined(GAME_OOT)

@@ -528,6 +528,7 @@ static void Play_AfterInit(PlayState* play)
 void hookPlay_Init(PlayState* play)
 {
     /* Init */
+    g.strayFairySkeletonInitialized = 0;
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
     gActorCustomTriggers = NULL;

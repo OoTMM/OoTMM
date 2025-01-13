@@ -523,6 +523,7 @@ void hookPlay_Init(PlayState* play)
     int isEndOfGame;
 
     /* Init */
+    g.strayFairySkeletonInitialized = 0;
     g.prevRoom = -1;
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
