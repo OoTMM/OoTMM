@@ -1,29 +1,16 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static u8 sIsHeartPiece;
-
-void EnNb_AfterGivingItem(Actor* this)
-{
-    if (sIsHeartPiece)
-    {
-        sIsHeartPiece = 0;
-        gMmExtraFlags2.grandma = 1;
-    }
-}
-
 void EnNb_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
-    npc = -1;
-    if (gi == GI_MM_HEART_PIECE)
+    switch (gi)
     {
-        sIsHeartPiece = 1;
-        if (!gMmExtraFlags2.grandma)
-            npc = NPC_MM_GRANDMA_HEART_PIECE_1;
-        else
-            npc = NPC_MM_GRANDMA_HEART_PIECE_2;
+    case 0x0001: npc = NPC_MM_GRANDMA_HEART_PIECE_1; break;
+    case 0x0002: npc = NPC_MM_GRANDMA_HEART_PIECE_2; break;
+    default: UNREACHABLE();
     }
-    comboGiveItemNpc(this, play, gi, npc, a, b);
+
+    comboGiveItemNpc(this, play, GI_MM_HEART_PIECE, npc, a, b);
 }

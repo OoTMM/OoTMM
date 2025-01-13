@@ -61,7 +61,8 @@ static void Actor_ByteCode_GiveItem(Actor* actor, PlayState* play, s16 gi, float
 {
     void (*func)(Actor*, PlayState*, s16, float, float);
 
-    gi = convertGi(gi);
+    if (actor->id != ACTOR_EN_NB)
+        gi = convertGi(gi);
 
     switch (actor->id)
     {
@@ -109,7 +110,6 @@ void EnGo_AfterGivingItem(Actor* actor);
 void EnDnh_AfterGivingItem(Actor* actor);
 void EnPm_AfterGivingItem(Actor* actor);
 void EnAn_AfterGivingItem(Actor* actor);
-void EnNb_AfterGivingItem(Actor* actor);
 void EnTab_AfterGivingItem(Actor* actor);
 
 static int Actor_ByteCode_HasParent(Actor* actor)
@@ -136,9 +136,6 @@ static int Actor_ByteCode_HasParent(Actor* actor)
             break;
         case ACTOR_EN_TAB:
             func = EnTab_AfterGivingItem;
-            break;
-        case ACTOR_EN_NB:
-            func = EnNb_AfterGivingItem;
             break;
         default:
             func = NULL;

@@ -522,7 +522,7 @@ typedef struct
     u32 maskBlast:1;
     u32 dekuPlayground:1;
     u32 maskCouple:1;
-    u32 grandma:1;
+    u32 unused:1;
     u32 maskPostman:1;
     u32 maskTroupeLeader:1;
     u32 maskFierceDeity:1;
