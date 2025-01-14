@@ -192,7 +192,8 @@ s32 KaleidoScope_Update(PlayState* play)
                         }
                         else
                         {
-                            memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(RespawnData));
+                            memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(OotRespawnData));
+                            memcpy(&gSaveContext.respawn[RESPAWN_MODE_DOWN], dungeonEntranceRespawn, sizeof(OotRespawnData));
                             play->nextEntranceIndex = dungeonEntranceRespawn->entrance;
                             gSaveContext.respawnFlag = 2;
                         }
