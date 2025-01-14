@@ -19,4 +19,7 @@ void Draw_Blit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float y, f
 void Draw_Blit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
 void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi);
 
+void DrawGiSystem_Reset(PlayState* play);
+void DrawGiSystem_Update(PlayState* play);
+
 #endif

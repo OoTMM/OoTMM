@@ -512,7 +512,6 @@ void DrawGi_CustomOwl(PlayState* play, s16 drawGiId)
 
 static SkelAnime sDrawStrayFairySkelAnime;
 static Vec3s sDrawStrayFairyJointTable[10];
-static u32 sDrawStrayFairyLastFrame;
 static u32 sDrawStrayFairyLimit;
 
 #if defined(GAME_OOT)
@@ -594,6 +593,39 @@ static int DrawGi_CustomStrayFairyLimbOverride(PlayState* play, int limbIndex, G
     return FALSE;
 }
 
+void DrawGiSystem_Reset(PlayState* play)
+{
+#if defined(GAME_OOT)
+    u32 tmp;
+
+    if (!sDrawStrayFairyObject)
+    {
+        tmp = comboLoadObject(NULL, CUSTOM_OBJECT_ID_STRAY_FAIRY);
+        sDrawStrayFairyObject = malloc(tmp);
+
+        if (sDrawStrayFairyObject)
+        {
+            comboLoadObject(sDrawStrayFairyObject, CUSTOM_OBJECT_ID_STRAY_FAIRY);
+        }
+    }
+    gSegments[0x06] = (u32)sDrawStrayFairyObject - 0x80000000;
+#endif
+
+    memset(&sDrawStrayFairySkelAnime, 0, sizeof(sDrawStrayFairySkelAnime));
+    memset(&sDrawStrayFairyJointTable, 0, sizeof(sDrawStrayFairyJointTable));
+
+    SkelAnime_InitFlex(play, &sDrawStrayFairySkelAnime, (void*)STRAY_FAIRY_SKEL, (void*)STRAY_FAIRY_ANIM, sDrawStrayFairyJointTable, sDrawStrayFairyJointTable, 10);
+}
+
+void DrawGiSystem_Update(PlayState* play)
+{
+    sDrawStrayFairyLimit = 0;
+#if defined(GAME_OOT)
+    gSegments[0x06] = (u32)sDrawStrayFairyObject - 0x80000000;
+#endif
+    SkelAnime_Update(&sDrawStrayFairySkelAnime);
+}
+
 void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 {
     static const Gfx* const kColors[] = {
@@ -614,42 +646,10 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 
     const DrawGi* drawGi;
     int index;
-#if defined(GAME_OOT)
-    u32 tmp;
-#endif
 
-    if (sDrawStrayFairyLastFrame != play->state.frameCount)
-    {
-        sDrawStrayFairyLastFrame = play->state.frameCount;
-        sDrawStrayFairyLimit = 0;
-    }
-    else
-    {
-        sDrawStrayFairyLimit++;
-        if (sDrawStrayFairyLimit >= 15)
-            return;
-    }
-
-    if (!g.strayFairySkeletonInitialized)
-    {
-#if defined(GAME_OOT)
-        if (!sDrawStrayFairyObject)
-        {
-            tmp = comboLoadObject(NULL, CUSTOM_OBJECT_ID_STRAY_FAIRY);
-            sDrawStrayFairyObject = malloc(tmp);
-            if (!sDrawStrayFairyObject)
-                return;
-            comboLoadObject(sDrawStrayFairyObject, CUSTOM_OBJECT_ID_STRAY_FAIRY);
-            Draw_SetObjectSegment(play->state.gfxCtx, sDrawStrayFairyObject);
-        }
-#endif
-        SkelAnime_InitFlex(play, &sDrawStrayFairySkelAnime, (void*)STRAY_FAIRY_SKEL, (void*)STRAY_FAIRY_ANIM, sDrawStrayFairyJointTable, sDrawStrayFairyJointTable, 10);
-        g.strayFairySkeletonInitialized = 1;
-    }
-
-#if defined(GAME_OOT)
-    Draw_SetObjectSegment(play->state.gfxCtx, sDrawStrayFairyObject);
-#endif
+    sDrawStrayFairyLimit++;
+    if (sDrawStrayFairyLimit >= 15)
+        return;
 
     drawGi = &kDrawGi[drawGiId];
     index = drawGi->lists[0];
@@ -669,10 +669,10 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
     gSPSegment(POLY_XLU_DISP++, 0x09, kColorsBg[index - 1]);
     Matrix_ReplaceRotation(&play->billboardMtxF);
     Matrix_Scale(0.03f, 0.03f, 0.03f, MTXMODE_APPLY);
-
-    if (sDrawStrayFairyLimit == 0)
-        SkelAnime_Update(&sDrawStrayFairySkelAnime);
-
+#if defined(GAME_OOT)
+    gSegments[0x06] = (u32)sDrawStrayFairyObject - 0x80000000;
+    gSPSegment(POLY_XLU_DISP++, 0x06, sDrawStrayFairyObject);
+#endif
     POLY_XLU_DISP = SkelAnime_DrawFlex(play, sDrawStrayFairySkelAnime.skeleton, sDrawStrayFairySkelAnime.jointTable, sDrawStrayFairySkelAnime.dListCount, DrawGi_CustomStrayFairyLimbOverride, NULL, NULL, POLY_XLU_DISP);
     CLOSE_DISPS();
 }
