@@ -1519,7 +1519,7 @@ export const SETTINGS = [{
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'removed', name: 'Remove Extras', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. All non-progressive shields are removed from the item pool when possible.' },
-    { value: 'conserved', name: 'Conserved Extras', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
+    { value: 'conserved', name: 'Conserve Extras', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
   ],
   default: 'separate',
   cond: hasOoT,
