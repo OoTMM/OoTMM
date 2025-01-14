@@ -575,7 +575,10 @@ void Play_MainWrapper(PlayState* play)
     Play_Main(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
-    DrawGiSystem_Update(play);
+
+    if (play->pauseCtx.state == 0)
+        DrawGiSystem_Update(play);
+
     Debug_Update();
 }
 
