@@ -502,6 +502,7 @@ void DrawGi_CustomOwl(PlayState* play, s16 drawGiId)
 
     drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->state.gfxCtx);
+    Matrix_Translate(0.f, -25.f, 0.f, MTXMODE_APPLY);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
