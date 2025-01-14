@@ -1321,11 +1321,14 @@ export class LogicPassWorldTransform {
     if (this.state.settings.progressiveShieldsOot === 'progressive') {
       this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.OOT_SHIELD);
       this.addItem(Items.OOT_SHIELD, 2);
+      this.removeItem(Items.OOT_SHIELD_DEKU);
+      this.removeItem(Items.OOT_SHIELD_HYLIAN);
     }
 
     if (settings.progressiveShieldsMm === 'progressive') {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
+      this.removeItem(Items.MM_SHIELD_HERO);
     }
 
     if (settings.extraChildSwordsOot) {
