@@ -12,6 +12,7 @@
 #include <combo/multi.h>
 #include <combo/context.h>
 #include <combo/audio.h>
+#include <combo/inventory.h>
 #include <actors/Obj_Grass/Obj_Grass.h>
 
 /* Grass hooks */
@@ -534,6 +535,7 @@ void hookPlay_Init(PlayState* play)
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
     Multi_ResetWisps();
+    Inventory_ReobtainProgressiveShields();
 
     if (Config_Flag(CFG_ER_OVERWORLD) || Config_Flag(CFG_ER_INDOORS))
         gSave.hasSirloin = 0;

@@ -19,4 +19,6 @@ void comboRemoveTradeItem2(u16 xitemId);
 void comboRemoveTradeItem3(u16 xitemId);
 #endif
 
+void Inventory_ReobtainProgressiveShields(void);
+
 #endif

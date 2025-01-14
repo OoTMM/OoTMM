@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Progressive shields are now re-obtained on every scene transition, thus making them permanent logically.
 - Progressive shields now have a flame effect to differentiate them from the regular shields.
 - Made the Owl Statue item model render slightly lower to be aligned with other items.
 - Change the Old Hag checks in MM, now the two checks are separate instead of progressing into each other.

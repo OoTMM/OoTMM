@@ -12,6 +12,7 @@
 #include <combo/context.h>
 #include <combo/dungeon.h>
 #include <combo/audio.h>
+#include <combo/inventory.h>
 
 PlayState* gPlay;
 
@@ -527,6 +528,8 @@ static void Play_AfterInit(PlayState* play)
 
 void hookPlay_Init(PlayState* play)
 {
+    gPlay = play;
+
     /* Init */
     g.strayFairySkeletonInitialized = 0;
     gIsEntranceOverride = 0;
@@ -537,9 +540,7 @@ void hookPlay_Init(PlayState* play)
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
     Multi_ResetWisps();
-
-    /* Register play */
-    gPlay = play;
+    Inventory_ReobtainProgressiveShields();
 
     /* Adjust entrance */
     playAdjustEntrance(play);

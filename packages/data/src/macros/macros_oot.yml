@@ -116,8 +116,8 @@
 "can_use_sword_or_sticks": "can_use_sword || can_use_sticks"
 
 # Shields
-"has_shield_deku": "age_shield_child && (renewable(SHIELD_DEKU) || event(SHIELD_DEKU))"
-"has_shield_hylian": "cond(setting(sharedShields), renewable(SHARED_SHIELD_HYLIAN), renewable(SHIELD_HYLIAN))"
+"has_shield_deku": "age_shield_child && (renewable(SHIELD_DEKU) || event(SHIELD_DEKU) || has(SHIELD, 1) || has(SHARED_SHIELD, 1))"
+"has_shield_hylian": "cond(setting(sharedShields), renewable(SHARED_SHIELD_HYLIAN), renewable(SHIELD_HYLIAN)) || has(SHIELD, 2) || has(SHARED_SHIELD, 2)"
 "has_shield": "has_shield_hylian || has_mirror_shield || has_shield_deku"
 "has_shield_for_scrubs": "(is_adult && has_shield_hylian) || has_shield_deku"
 "has_mirror_shield_raw_nonshared": "cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
