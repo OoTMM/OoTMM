@@ -1518,8 +1518,8 @@ export const SETTINGS = [{
   description: 'Alters the behavior of the OoT Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'removed', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. All non-progressive shields are removed from the item pool when possible.' },
-    { value: 'conserved', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
+    { value: 'removed', name: 'Remove Extras', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. All non-progressive shields are removed from the item pool when possible.' },
+    { value: 'conserved', name: 'Conserved Extras', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
   ],
   default: 'separate',
   cond: hasOoT,
@@ -1544,8 +1544,8 @@ export const SETTINGS = [{
   description: 'Alters the behavior of the MM Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'removed', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. All non-progressive shields are removed from the item pool when possible. If shields are shared, the Hero\'s Shield will be obtained alongside the Hylian Shield' },
-    { value: 'conserved', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields do not count towards this chain, only the Progressive Shield item does. If shields are shared, the Hero\'s Shield will be obtained alongside the Hylian Shield' },
+    { value: 'removed', name: 'Remove Extras', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. All non-progressive shields are removed from the item pool when possible. If shields are shared, the Hero\'s Shield will be obtained alongside the Hylian Shield' },
+    { value: 'conserved', name: 'Conserve Extras', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields do not count towards this chain, only the Progressive Shield item does. If shields are shared, the Hero\'s Shield will be obtained alongside the Hylian Shield' },
   ],
   default: 'separate',
   cond: hasMM,
