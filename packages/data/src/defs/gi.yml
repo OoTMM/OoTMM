@@ -38,8 +38,8 @@
 - { id: OOT_CLAIM_CHECK, item: OOT_CLAIM_CHECK, type: MAJOR, add: [OOT_TRADE_ADULT, 10], flags: 0x80, draw: OOT_CLAIM_CHECK, object: [oot, 0x0142], name: "the <C1>Claim Check" }
 - { id: OOT_SWORD_KOKIRI, item: OOT_SWORD_KOKIRI, type: MAJOR, add: [OOT_SWORD, 1], flags: 0x80, draw: OOT_SWORD_KOKIRI, object: [oot, 0x018d], name: "the <C1>Kokiri Sword" }
 - { id: OOT_SWORD_KNIFE, item: OOT_SWORD_KNIFE_BIGGORON, type: MAJOR, add: [OOT_SWORD, 3], flags: 0x80, draw: OOT_BIGGORON_SWORD, object: [oot, 0x00f8], name: "the <C1>Giant's Knife" }
-- { id: OOT_SHIELD_DEKU, item: OOT_SHIELD_DEKU, type: NORMAL, add: [OOT_SHIELD, 1], flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Deku Shield" }
-- { id: OOT_SHIELD_HYLIAN, item: OOT_SHIELD_HYLIAN, type: NORMAL, add: [OOT_SHIELD, 2], flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Hylian Shield" }
+- { id: OOT_SHIELD_DEKU, item: OOT_SHIELD_DEKU, type: NORMAL, add: [OOT_SHIELD, 1], flags: 0xa0, draw: [OOT_SHIELD_DEKU, 0], object: [oot, 0x00cb], name: "the <C1>Deku Shield" }
+- { id: OOT_SHIELD_HYLIAN, item: OOT_SHIELD_HYLIAN, type: NORMAL, add: [OOT_SHIELD, 2], flags: 0xa0, draw: [OOT_SHIELD_HYLIAN, 0], object: [oot, 0x00dc], name: "the <C1>Hylian Shield" }
 - { id: OOT_SHIELD_MIRROR, item: OOT_SHIELD_MIRROR, type: MAJOR, add: [OOT_SHIELD, 3], flags: 0x80, draw: OOT_SHIELD_MIRROR, object: [oot, 0x00ee], name: "the <C1>Mirror Shield" }
 - { id: OOT_TUNIC_GORON, item: OOT_TUNIC_GORON, type: MAJOR, add: [TUNIC, 2], flags: 0xa0, draw: OOT_TUNIC_GORON, object: [oot, 0x00f2], name: "the <C1>Goron Tunic" }
 - { id: OOT_TUNIC_ZORA, item: OOT_TUNIC_ZORA, type: MAJOR, add: [TUNIC, 3], flags: 0xa0, draw: OOT_TUNIC_ZORA, object: [oot, 0x00f2], name: "the <C1>Zora Tunic" }
@@ -151,8 +151,8 @@
 - { id: OOT_MAGIC_UPGRADE, type: MAJOR, add: [OOT_MAGIC_UPGRADE, 1], flags: 0x80, draw: MAGIC_UPGRADE, object: [oot, 0x00cd], name: "the <C1>Magic Upgrade" }
 - { id: OOT_MAGIC_UPGRADE2, type: MAJOR, add: [OOT_MAGIC_UPGRADE, 2], flags: 0x80, draw: MAGIC_UPGRADE2, object: [oot, 0x00cd], name: "the <C1>Larger Magic Upgrade" }
 - { id: OOT_DEFENSE_UPGRADE, type: MAJOR, add: OOT_DEFENSE_UPGRADE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }
-- { id: OOT_PROGRESSIVE_SHIELD_DEKU, type: MAJOR, add: [OOT_SHIELD, 0x101], flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
-- { id: OOT_PROGRESSIVE_SHIELD_HYLIAN, type: MAJOR, add: [OOT_SHIELD, 0x102], flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Progressive Hylian Shield" }
+- { id: OOT_PROGRESSIVE_SHIELD_DEKU, type: MAJOR, add: [OOT_SHIELD, 0x101], flags: 0xa0, draw: [OOT_SHIELD_DEKU, 1], object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
+- { id: OOT_PROGRESSIVE_SHIELD_HYLIAN, type: MAJOR, add: [OOT_SHIELD, 0x102], flags: 0xa0, draw: [OOT_SHIELD_HYLIAN, 1], object: [oot, 0x00dc], name: "the <C1>Progressive Hylian Shield" }
 - { id: OOT_SMALL_KEY_FOREST, type: KEY, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Forest)" }
 - { id: OOT_SMALL_KEY_FIRE, type: KEY, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_FIRE], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Fire)" }
 - { id: OOT_SMALL_KEY_WATER, type: KEY, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_WATER], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Water)" }
@@ -476,7 +476,7 @@
 - { id: MM_UNK_2F, item: MM_STICKS_20, type: MINOR, add: [MM_STICKS, 20], flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>20 Deku Sticks" }
 - { id: MM_UNK_30, item: MM_STICKS_20, type: MINOR, add: [MM_STICKS, 20], flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>20 Deku Sticks" }
 - { id: MM_UNK_31, item: MM_STICKS_30, type: MINOR, add: [MM_STICKS, 30], flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>30 Deku Sticks" }
-- { id: MM_SHIELD_HERO, item: MM_SHIELD_HERO, type: NORMAL, add: [MM_SHIELD, 1], flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Hero's Shield" }
+- { id: MM_SHIELD_HERO, item: MM_SHIELD_HERO, type: NORMAL, add: [MM_SHIELD, 1], flags: 0xa0, draw: [MM_SHIELD_HERO, 0], object: [mm, 0x00b3], name: "the <C1>Hero's Shield" }
 - { id: MM_SHIELD_MIRROR, item: MM_SHIELD_MIRROR, type: MAJOR, add: [MM_SHIELD, 2], flags: 0xa0, draw: MM_SHIELD_MIRROR, object: [mm, 0x00c3], name: "the <C1>Mirror Shield" }
 - { id: MM_POWDER_KEG, item: MM_POWDER_KEG, type: MAJOR, add: [KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
 - { id: MM_MAGIC_BEAN, item: MM_MAGIC_BEAN, type: MAJOR, add: [MM_BEANS, 1], flags: 0x80, draw: MAGIC_BEAN, object: [mm, 0x00c6], name: "a <C0>Magic Bean" }
@@ -570,7 +570,7 @@
 - { id: MM_REMAINS_GOHT, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_GOHT], flags: 0xa0, draw: MM_REMAINS_GOHT, object: GI_REMAINS_GOHT, name: "<C3>Goht's Remains" }
 - { id: MM_REMAINS_GYORG, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_GYORG], flags: 0xa0, draw: MM_REMAINS_GYORG, object: GI_REMAINS_GYORG, name: "<C3>Gyorg's Remains" }
 - { id: MM_REMAINS_TWINMOLD, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_TWINMOLD], flags: 0xa0, draw: MM_REMAINS_TWINMOLD, object: GI_REMAINS_TWINMOLD, name: "<C3>Twinmold's Remains" }
-- { id: MM_PROGRESSIVE_SHIELD_HERO, type: MAJOR, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
+- { id: MM_PROGRESSIVE_SHIELD_HERO, type: MAJOR, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: [MM_SHIELD_HERO, 1], object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
 - { id: MM_GS_TOKEN_SWAMP, type: SKULL, add: GS_TOKEN_SWAMP, flags: 0x80, draw: MM_GS_TOKEN_SWAMP, object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
 - { id: MM_GS_TOKEN_OCEAN, type: SKULL, add: GS_TOKEN_OCEAN, flags: 0x80, draw: MM_GS_TOKEN_OCEAN, object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
 - { id: MM_SMALL_KEY_WF, type: KEY, add: [MM_SMALL_KEY, 0], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Woodfall)" }

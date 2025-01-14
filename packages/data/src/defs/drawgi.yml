@@ -20,7 +20,8 @@
 - { id: BOMB_BAG3, func: Opa1023, params: [0x6000b90, 0x6000b10, 0x6000b70, 0x6000d98] }
 - { id: DEKU_STICK, func: CustomStick, params: [0x60004d0, 0] }
 - { id: MAP, func: Opa0, params: [0x60003c0] }
-- { id: OOT_SHIELD_DEKU, func: Opa0, params: [0x6000a50] }
+- { id: OOT_SHIELD_DEKU, func: CustomShield, params: [0x6000a50, 0, 0] }
+- { id: OOT_SHIELD_HYLIAN, func: CustomShield, params: [0x6000c70, 0, 1] }
 - { id: MAGIC_SMALL, func: MagicJar, params: [0x6000580, 0, 0] }
 - { id: MAGIC_LARGE, func: MagicJar, params: [0x6000ee0, 0, 1] }
 - { id: BOMB, func: Opa0, params: [0x60009a0] }
@@ -35,7 +36,6 @@
 - { id: OOT_EGG, func: Medallion, params: [0x6000fd0, 0x6001008] }
 - { id: OOT_SCALE_SILVER, func: Scale, params: [0x6000aa0, 0x6000a20, 0x6000a60, 0x6000cc8] }
 - { id: OOT_SCALE_GOLD, func: Scale, params: [0x6000aa0, 0x6000a40, 0x6000a80, 0x6000cc8] }
-- { id: OOT_SHIELD_HYLIAN, func: Opa0, params: [0x6000c70] }
 - { id: OOT_HOOKSHOT, func: Opa0, params: [0x6000750] }
 - { id: OOT_LONGSHOT, func: Opa0, params: [0x6001240] }
 - { id: OCARINA_TIME, func: Opa0_Xlu1, params: [0x60008c0, 0x6000af8] }
@@ -117,7 +117,7 @@
 - { id: MM_MASK_BREMEN, func: Opa01, params: [0x6000808, 0x6000800] }
 - { id: MM_MASK_ALL_NIGHT, func: Opa0_Xlu1, params: [0x6000968, 0x60006f0] }
 - { id: MM_MASK_DON_GERO, func: Opa0_Xlu1, params: [0x6001438, 0x6001040] }
-- { id: MM_SHIELD_HERO, func: Opa0_Xlu1, params: [0x6000d28, 0x60009f0] }
+- { id: MM_SHIELD_HERO, func: CustomShield, params: [0x6000d28, 0x60009f0, 1] }
 - { id: MM_HOOKSHOT, func: Opa01, params: [0x6000e48, 0x6000a10] }
 - { id: MM_WORLD_MAP, func: Opa01, params: [0x60006e8, 0x60006e0] }
 - { id: MM_BOW, func: Opa01, params: [0x6000c80, 0x6000f40] }

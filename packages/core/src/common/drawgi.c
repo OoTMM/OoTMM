@@ -1503,3 +1503,34 @@ void DrawGi_Rupee(PlayState* play, s16 index, u8 param)
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
     CLOSE_DISPS();
 }
+
+void DrawGi_CustomShield(PlayState* play, s16 index, u8 param)
+{
+    const DrawGi* drawGi;
+    u32 dlistOpa;
+    u32 dlistXlu;
+
+    drawGi = &kDrawGi[index];
+    dlistOpa = drawGi->lists[0];
+    dlistXlu = drawGi->lists[1];
+
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, dlistOpa);
+
+    if (dlistXlu || param)
+        Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+
+    if (dlistXlu)
+    {
+        gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(POLY_XLU_DISP++, dlistXlu);
+    }
+
+    /* Flame for progressive */
+    if (param)
+        shaderFlameEffect(play, drawGi->lists[2], 1.5f, 20.f);
+
+    CLOSE_DISPS();
+}
