@@ -14,11 +14,11 @@
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
-static void Player_HandleBurningDekuShield(Player* this, PlayState* play)
+static void Player_TryBurnDekuShield(Player* this, PlayState* play)
 {
     char* b;
 
-    if (this->isBurning && this->transformation == MM_PLAYER_FORM_HUMAN && this->currentShield == 1 && gSharedCustomSave.mmShieldIsDeku)
+    if (this->transformation == MM_PLAYER_FORM_HUMAN && this->currentShield == 1 && gSharedCustomSave.mmShieldIsDeku)
     {
         gMmSave.info.itemEquips.shield = 0;
         UpdateEquipment(play, this);
@@ -31,11 +31,27 @@ static void Player_HandleBurningDekuShield(Player* this, PlayState* play)
     }
 }
 
+static void Player_HandleBurningDekuShield(Player* this, PlayState* play)
+{
+    int shouldBurn;
+
+    shouldBurn = 0;
+    if (this->isBurning)
+        shouldBurn = 1;
+    else if ((this->shieldCylinder.base.acFlags & AC_HIT) && this->shieldCylinder.elem.acHitElem->atDmgInfo.effect == 1)
+        shouldBurn = 1;
+    else if ((this->shieldQuad.base.acFlags & AC_HIT) && this->shieldQuad.elem.acHitElem->atDmgInfo.effect == 1)
+        shouldBurn = 1;
+
+    if (shouldBurn)
+        Player_TryBurnDekuShield(this, play);
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
-    Player_Update(this, play);
     Player_HandleBurningDekuShield(this, play);
+    Player_Update(this, play);
     Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
 }
