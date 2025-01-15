@@ -539,6 +539,7 @@ void hookPlay_Init(PlayState* play)
     g.prevRoom = -1;
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
+    g.bronzeScaleSolidGround = 0;
     isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
