@@ -221,6 +221,8 @@
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
 
+"can_swim": "true"
+
 # Hot water
 "OLD_hot_water(winter, spring)": "has_bottle && ((event(winter) && event(spring)) || (is_winter && event(winter)) || (is_spring && event(spring)))"
 
