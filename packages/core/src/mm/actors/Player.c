@@ -14,10 +14,28 @@
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
+static void Player_HandleBurningDekuShield(Player* this, PlayState* play)
+{
+    char* b;
+
+    if (this->isBurning && this->transformation == MM_PLAYER_FORM_HUMAN && this->currentShield == 1 && gSharedCustomSave.mmShieldIsDeku)
+    {
+        gMmSave.info.itemEquips.shield = 0;
+        UpdateEquipment(play, this);
+        PlayerDisplayTextBox(play, 0xf6, NULL);
+        b = play->msgCtx.font.textBuffer.schar;
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_BLUE "Your ");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "shield" TEXT_COLOR_BLUE " is gone!\x1c\x00\x20" TEXT_END);
+    }
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
+    Player_HandleBurningDekuShield(this, play);
     Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
 }
