@@ -1336,6 +1336,7 @@ export class LogicPassWorldTransform {
 
       if (settings.dekuShieldMm) {
         this.addItem(Items.MM_SHIELD);
+        this.removeItem(Items.MM_SHIELD_DEKU);
       }
     }
     else if (settings.dekuShieldMm) {

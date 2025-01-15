@@ -173,7 +173,7 @@ static s16 progressiveShieldOot(void)
 
 static s16 progressiveShieldMm(void)
 {
-    if (Config_Flag(CFG_MM_DEKU_SHIELD) && !(gSharedCustomSave.mmProgressiveShields & 1))
+    if ((Config_Flag(CFG_MM_DEKU_SHIELD) || Config_Flag(CFG_SHARED_SHIELDS)) && !(gSharedCustomSave.mmProgressiveShields & 1))
         return GI_MM_PROGRESSIVE_SHIELD_DEKU;
     if (!(gSharedCustomSave.mmProgressiveShields & 2))
         return GI_MM_PROGRESSIVE_SHIELD_HERO;
