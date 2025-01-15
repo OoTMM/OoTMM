@@ -1350,14 +1350,8 @@ PATCH_START 0x8086059c
 .int 0
 PATCH_END
 
-Player_DrawShield_Trampoline:
-  HOOK_CALL Player_DrawShield
-  jr ra
-   nop
-
-/* Hook the shield drawing */
+/* Disable vanilla shield drawing */
 PATCH_START 0x80129e30
-  jal Player_DrawShield_Trampoline
-   nop
-  b .+0x28
+  b .+0x30
+    nop
 PATCH_END

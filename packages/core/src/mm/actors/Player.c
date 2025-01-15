@@ -1081,31 +1081,10 @@ static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 
 static int (*sPlayerOverrideLimb)(PlayState*, s32, Gfx**, Vec3f*, Vec3s*, void*);
 
-int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
-{
-    Player* player = GET_PLAYER(play);
-
-    if (player->transformation == MM_PLAYER_FORM_HUMAN)
-    {
-        if (limbIndex == PLAYER_LIMB_RIGHT_HAND && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
-        {
-            if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
-            {
-                *dList = Player_CustomHandEq((u32)kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
-                return FALSE;
-            }
-        }
-    }
-
-    return sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
-}
-
 extern void* kLinkHumanShieldsDLs[];
 
-void Player_DrawShield(void)
+void Player_DrawShield(PlayState* play, Player* player)
 {
-    PlayState* play = gPlay;
-    Player* player = GET_PLAYER(play);
     void* obj;
 
     if (player->currentShield == 0)
@@ -1126,7 +1105,34 @@ void Player_DrawShield(void)
     CLOSE_DISPS();
 }
 
-void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Player* player, s32 lod)
+void Player_PostLimbDrawGameplayWrapper(PlayState* play, s32 limbIndex, Gfx** dList1, Gfx** dList2, Vec3s* rot, Actor* actor)
+{
+    Player* player = (Player*)actor;
+    Player_PostLimbDrawGameplay(play, limbIndex, dList1, dList2, rot, actor);
+    if (player->transformation == MM_PLAYER_FORM_HUMAN && limbIndex == PLAYER_LIMB_SHEATH && (player->sheathType == PLAYER_MODELTYPE_SHEATH_14 || player->sheathType == PLAYER_MODELTYPE_SHEATH_15))
+        Player_DrawShield(play, player);
+}
+
+int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
+{
+    Player* player = GET_PLAYER(play);
+
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+        {
+            if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
+            {
+                *dList = Player_CustomHandEq((u32)kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+                return FALSE;
+            }
+        }
+    }
+
+    return sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
+}
+
+void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawFlex postLimbDraw, Player* player, s32 lod)
 {
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -1139,6 +1145,9 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         tunicColor = &sTunicColors[tunic];
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
+
+    if (postLimbDraw == (void*)Player_PostLimbDrawGameplay)
+        postLimbDraw = Player_PostLimbDrawGameplayWrapper;
 
     sPlayerOverrideLimb = overrideLimbDraw;
     SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, Player_OverrideLimbWrapper, postLimbDraw, &player->actor, lod);

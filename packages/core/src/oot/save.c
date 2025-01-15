@@ -274,7 +274,7 @@ void comboCreateSave(void* unk, void* buffer)
         memset(gSharedCustomSave.soulsMiscMm, 0xff, sizeof(gSharedCustomSave.soulsMiscMm));
 
     /* Apply deku shield flag */
-    if (!Config_Flag(CFG_MM_DEKU_SHIELD))
+    if (Config_Flag(CFG_MM_DEKU_SHIELD))
         gSharedCustomSave.mmShieldIsDeku = 1;
 
     /* Apply ocarina buttons */

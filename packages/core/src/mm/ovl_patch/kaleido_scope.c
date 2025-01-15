@@ -488,3 +488,10 @@ void KaleidoScope_SetSaveButton(PlayState* play, s16 bButtonDoAction)
 }
 
 PATCH_CALL(0x80828908, KaleidoScope_SetSaveButton);
+
+void Kaleido_LoadItemNameStatic(void* dst, int index)
+{
+    LoadIcon(0xa27660, index, dst, 0x400);
+}
+
+PATCH_FUNC(0x80821958, Kaleido_LoadItemNameStatic);

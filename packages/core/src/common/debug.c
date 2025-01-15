@@ -465,6 +465,8 @@ void Debug_Init(void)
 #if defined(GAME_MM)
 static void cheatAllItems(PlayState* play)
 {
+    gSharedCustomSave.mmShieldIsDeku = 0;
+
     /* Notebook */
     gSave.info.weekEventReg[66] = 0xff;
     gSave.info.weekEventReg[67] = 0xff;
