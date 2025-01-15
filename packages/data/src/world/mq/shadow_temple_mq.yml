@@ -83,7 +83,7 @@
   events:
     SHADOW_MQ_TEXTURED_MAZE_DEAD_HAND_ROOM_CLEAR: "soul_enemy(SOUL_ENEMY_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
   locations:
-    "MQ Shadow Temple Hover Boots Chest": "event(SHADOW_MQ_DEAD_HAND_ROOM_CLEAR)"
+    "MQ Shadow Temple Hover Boots Chest": "event(SHADOW_MQ_TEXTURED_MAZE_DEAD_HAND_ROOM_CLEAR)"
 "Shadow Temple Spinner Room Platform Before First Beamos Fork":
   dungeon: Shadow
   exits:
