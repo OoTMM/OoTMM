@@ -232,16 +232,8 @@
   events:
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS: "silver_rupees_shadow_spikes_mq"
-  locations:
-    "MQ Shadow Temple Invisible Spike Floor Chest": "event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR)"
-"Shadow Temple Dual Staircase Stalfos Room":
-  dungeon: Shadow
-  exits:
-    "Shadow Temple Invisible Spike Floors Room": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
-  events:
-    SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations: #I have no idea how hookshot alone is normally viable, even as adult.
-    "MQ Shadow Temple Stalfos Room Chest": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
+    "MQ Shadow Temple Invisible Spike Floor Chest": "event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR)"
     "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot || climb_anywhere"
     "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Midair": "can_hookshot"
@@ -252,6 +244,14 @@
     "MQ Shadow Temple SR Spikes Right Ground": "true"
     "MQ Shadow Temple SR Spikes Right Back Wall": "can_hookshot"
     "MQ Shadow Temple SR Spikes Right Lateral Wall": "can_hookshot"
+"Shadow Temple Dual Staircase Stalfos Room":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Invisible Spike Floors Room": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
+  events:
+    SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+  locations:
+    "MQ Shadow Temple Stalfos Room Chest": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
 "Shadow Temple Ivisible Spike Floors Room Upper Ledge Before Door":
   dungeon: Shadow
   exits:
