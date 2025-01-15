@@ -528,7 +528,7 @@ typedef struct
     u32 maskFierceDeity:1;
     u32 ocarina:1;
     u32 songOath:1;
-    u32 progressiveShield:1;
+    u32 unused2:1;
     u32 majora:1;
     u32 maskBremen:1;
     u32 maskScents:1;

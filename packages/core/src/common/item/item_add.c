@@ -1007,15 +1007,23 @@ static int addItemShieldOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemShieldMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
+    u8 shieldVal;
     u8 shieldType;
     u8 isProgressive;
 
     shieldType = (param & 0xff);
     isProgressive = !!((param >> 8) & 0xff);
-    if (shieldType > gMmSave.info.itemEquips.shield)
-        gMmSave.info.itemEquips.shield = shieldType;
+    shieldVal = (shieldType == 3) ? 2 : 1;
+
     if (isProgressive)
-        gMmExtraFlags2.progressiveShield = 1;
+        gSharedCustomSave.mmProgressiveShields |= (1 << (shieldType - 1));
+    if (!Config_Flag(CFG_MM_DEKU_SHIELD) && shieldType == 1)
+        return 0;
+
+    if (shieldVal > gMmSave.info.itemEquips.shield)
+        gMmSave.info.itemEquips.shield = shieldVal;
+    if (shieldType >= 2)
+        gSharedCustomSave.mmShieldIsDeku = 0;
 
 #if defined(GAME_MM)
     if (play)
@@ -2037,8 +2045,10 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SOULS_NPC, GI_OOT_SOUL_NPC_BANKER, GI_MM_SOUL_NPC_BANKER },
     { CFG_SHARED_SOULS_MISC,  GI_OOT_SOUL_MISC_GS, GI_MM_SOUL_MISC_GS },
     { CFG_SHARED_SOULS_MISC,  GI_OOT_SOUL_MISC_BUSINESS_SCRUB, GI_MM_SOUL_MISC_BUSINESS_SCRUB },
+    { CFG_SHARED_SHIELDS, GI_OOT_SHIELD_DEKU,   GI_MM_SHIELD_DEKU },
     { CFG_SHARED_SHIELDS, GI_OOT_SHIELD_HYLIAN, GI_MM_SHIELD_HERO },
     { CFG_SHARED_SHIELDS, GI_OOT_SHIELD_MIRROR, GI_MM_SHIELD_MIRROR },
+    { CFG_SHARED_SHIELDS, GI_OOT_PROGRESSIVE_SHIELD_DEKU,   GI_MM_PROGRESSIVE_SHIELD_DEKU },
     { CFG_SHARED_SHIELDS, GI_OOT_PROGRESSIVE_SHIELD_HYLIAN, GI_MM_PROGRESSIVE_SHIELD_HERO },
     { CFG_SHARED_SPELL_FIRE, GI_OOT_SPELL_FIRE, GI_MM_SPELL_FIRE },
     { CFG_SHARED_SPELL_WIND, GI_OOT_SPELL_WIND, GI_MM_SPELL_WIND },

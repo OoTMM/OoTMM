@@ -1089,7 +1089,7 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
     {
         if (limbIndex == PLAYER_LIMB_RIGHT_HAND && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
         {
-            if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD))
+            if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
             {
                 *dList = Player_CustomHandEq((u32)kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
                 return FALSE;
@@ -1106,14 +1106,13 @@ void Player_DrawShield(void)
 {
     PlayState* play = gPlay;
     Player* player = GET_PLAYER(play);
-    void* dlist;
     void* obj;
 
     if (player->currentShield == 0)
         return;
 
     OPEN_DISPS(play->state.gfxCtx);
-    if (gSharedCustomSave.mmShieldIsDeku || 1)
+    if (gSharedCustomSave.mmShieldIsDeku)
     {
         obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU);
         if (!obj)

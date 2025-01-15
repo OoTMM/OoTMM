@@ -477,7 +477,14 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_SHIELD_MIRROR:
     case GI_MM_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
+    case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
+    case GI_MM_PROGRESSIVE_SHIELD_HERO:
         return !Config_Flag(CFG_SHARED_SHIELDS);
+    case GI_OOT_SHIELD_DEKU:
+    case GI_MM_SHIELD_DEKU:
+    case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
+    case GI_MM_PROGRESSIVE_SHIELD_DEKU:
+        return !Config_Flag(CFG_SHARED_SHIELDS) && Config_Flag(CFG_MM_DEKU_SHIELD);
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
@@ -907,7 +914,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
             break;
         case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
-        case GI_MM_PROGRESSIVE_SHIELD_HERO:
+        case GI_MM_PROGRESSIVE_SHIELD_DEKU:
             itemName = "a " TEXT_C1 "Progressive Shield";
             ambiguous = !Config_Flag(CFG_SHARED_SHIELDS);
             break;

@@ -476,7 +476,7 @@ static void cheatAllItems(PlayState* play)
 
     gSave.info.itemEquips.sword = 1;
     gSave.info.itemEquips.shield = 2;
-    gMmExtraFlags2.progressiveShield = 1;
+    gSharedCustomSave.mmProgressiveShields = 3;
     gSave.info.inventory.upgrades.quiver = 3;
     gSave.info.inventory.upgrades.dekuStick = 3;
     gSave.info.inventory.upgrades.dekuNut = 3;
