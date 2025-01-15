@@ -208,16 +208,16 @@ static s16 progressiveStrengthMm(void)
 
 static s16 progressiveDiveOot(void)
 {
-    if (gOotSave.info.inventory.upgrades.dive)
-        return GI_OOT_SCALE_GOLDEN;
-    return GI_OOT_SCALE_SILVER;
+    if (gOotSave.info.inventory.upgrades.dive == 0)
+        return gSharedCustomSave.bronzeScaleOot ? GI_OOT_SCALE_SILVER : GI_OOT_SCALE_BRONZE;
+    return GI_OOT_SCALE_GOLDEN;
 }
 
 static s16 progressiveDiveMm(void)
 {
-    if (gMmSave.info.inventory.upgrades.scale)
-        return GI_MM_SCALE_GOLDEN;
-    return GI_MM_SCALE_SILVER;
+    if (gMmSave.info.inventory.upgrades.scale == 0)
+        return gSharedCustomSave.bronzeScaleMm ? GI_MM_SCALE_SILVER : GI_MM_SCALE_BRONZE;
+    return GI_MM_SCALE_GOLDEN;
 }
 
 static s16 progressiveWalletOot(void)
@@ -463,6 +463,7 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_OOT_GOLDEN_GAUNTLETS:
         gi = progressiveStrengthOot();
         break;
+    case GI_OOT_SCALE_BRONZE:
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
         gi = progressiveDiveOot();
@@ -541,6 +542,7 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_MM_GOLDEN_GAUNTLETS:
         gi = progressiveStrengthMm();
         break;
+    case GI_MM_SCALE_BRONZE:
     case GI_MM_SCALE_SILVER:
     case GI_MM_SCALE_GOLDEN:
         gi = progressiveDiveMm();

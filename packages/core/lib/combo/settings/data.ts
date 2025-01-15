@@ -1720,6 +1720,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'bronzeScale',
+  name: 'Bronze Scale',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add an extra scale item, that is required to enter deep water.',
+  default: false,
+  cond: (s: any) => hasOoT(s) || s.scalesMm,
+}, {
   key: 'childWallets',
   name: 'Child Wallets',
   category: 'items.extensions',

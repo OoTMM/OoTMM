@@ -778,10 +778,16 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_TUNIC_ZORA);
     }
 
+    if (settings.bronzeScale) {
+      this.addItem(Items.OOT_SCALE, 1);
+    }
     if (settings.sharedScales) {
       this.replaceItem(Items.OOT_SCALE, Items.SHARED_SCALE);
     } else if (settings.scalesMm) {
       this.addItem(Items.MM_SCALE, 2);
+      if (settings.bronzeScale) {
+        this.addItem(Items.MM_SCALE, 1);
+      }
     }
 
     if (settings.sharedStrength) {

@@ -34,8 +34,7 @@
 - { id: ARROW3, func: Opa0, params: [0x6001830] }
 - { id: BOMBCHU, func: BombchuMask, params: [0x60004b0] }
 - { id: OOT_EGG, func: Medallion, params: [0x6000fd0, 0x6001008] }
-- { id: OOT_SCALE_SILVER, func: Scale, params: [0x6000aa0, 0x6000a20, 0x6000a60, 0x6000cc8] }
-- { id: OOT_SCALE_GOLD, func: Scale, params: [0x6000aa0, 0x6000a40, 0x6000a80, 0x6000cc8] }
+- { id: SCALE, func: CustomScale, params: [0x6000aa0, 0x6000cc8] }
 - { id: OOT_HOOKSHOT, func: Opa0, params: [0x6000750] }
 - { id: OOT_LONGSHOT, func: Opa0, params: [0x6001240] }
 - { id: OCARINA_TIME, func: Opa0_Xlu1, params: [0x60008c0, 0x6000af8] }

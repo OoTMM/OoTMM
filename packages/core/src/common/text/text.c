@@ -527,8 +527,10 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_TUNIC_ZORA:
     case GI_MM_TUNIC_ZORA:
         return (Config_Flag(CFG_MM_TUNIC_ZORA) && !Config_Flag(CFG_SHARED_TUNIC_ZORA));
+    case GI_OOT_SCALE_BRONZE:
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
+    case GI_MM_SCALE_BRONZE:
     case GI_MM_SCALE_SILVER:
     case GI_MM_SCALE_GOLDEN:
         return (Config_Flag(CFG_MM_SCALES) && !Config_Flag(CFG_SHARED_SCALES));
@@ -936,8 +938,8 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_MM_SONG_GORON_HALF:
             itemName = "a " TEXT_C2 "Progressive Goron Lullaby";
             break;
-        case GI_OOT_SCALE_SILVER:
-        case GI_MM_SCALE_SILVER:
+        case GI_OOT_SCALE_BRONZE:
+        case GI_MM_SCALE_BRONZE:
             itemName = "a " TEXT_C1 "Progressive Scale";
             ambiguous = !Config_Flag(CFG_SHARED_SCALES) && Config_Flag(CFG_MM_SCALES);
             break;
