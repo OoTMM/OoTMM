@@ -14,10 +14,28 @@
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
+static void Player_HandleBurningDekuShield(Player* this, PlayState* play)
+{
+    char* b;
+
+    if (this->isBurning && this->transformation == MM_PLAYER_FORM_HUMAN && this->currentShield == 1 && gSharedCustomSave.mmShieldIsDeku)
+    {
+        gMmSave.info.itemEquips.shield = 0;
+        UpdateEquipment(play, this);
+        PlayerDisplayTextBox(play, 0xf6, NULL);
+        b = play->msgCtx.font.textBuffer.schar;
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_BLUE "Your ");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "shield" TEXT_COLOR_BLUE " is gone!\x1c\x00\x20" TEXT_END);
+    }
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
+    Player_HandleBurningDekuShield(this, play);
     Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
 }
@@ -1062,7 +1080,77 @@ EXPORT_SYMBOL(MM_COLOR_TUNIC_KOKIRI, sTunicColors[0]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_GORON, sTunicColors[2]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
-void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Player* player, s32 lod)
+#define DLIST_INDIRECT(x)           (*(u32*)((x)))
+
+static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
+{
+    Gfx* dlist;
+    Gfx* d;
+
+    if (!eqData) return (void*)kDListEmpty;
+
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 3);
+    gSPDisplayList(d++, handDlist);
+    gSPSegment(d++, 0x0a, eqData);
+    gSPBranchList(d++, eqDlist);
+
+    return dlist;
+}
+
+static int (*sPlayerOverrideLimb)(PlayState*, s32, Gfx**, Vec3f*, Vec3s*, void*);
+
+extern void* kLinkHumanShieldsDLs[];
+
+void Player_DrawShield(PlayState* play, Player* player)
+{
+    void* obj;
+
+    if (player->currentShield == 0)
+        return;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    if (gSharedCustomSave.mmShieldIsDeku)
+    {
+        obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU);
+        if (!obj)
+            return;
+        gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_SHIELD_DEKU_1);
+        return;
+    }
+
+    gSPDisplayList(POLY_OPA_DISP++, kLinkHumanShieldsDLs[(player->currentShield - 1) * 2]);
+    CLOSE_DISPS();
+}
+
+void Player_PostLimbDrawGameplayWrapper(PlayState* play, s32 limbIndex, Gfx** dList1, Gfx** dList2, Vec3s* rot, Actor* actor)
+{
+    Player* player = (Player*)actor;
+    Player_PostLimbDrawGameplay(play, limbIndex, dList1, dList2, rot, actor);
+    if (player->transformation == MM_PLAYER_FORM_HUMAN && limbIndex == PLAYER_LIMB_SHEATH && (player->sheathType == PLAYER_MODELTYPE_SHEATH_14 || player->sheathType == PLAYER_MODELTYPE_SHEATH_15))
+        Player_DrawShield(play, player);
+}
+
+int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
+{
+    Player* player = GET_PLAYER(play);
+
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+        {
+            if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
+            {
+                *dList = Player_CustomHandEq((u32)kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+                return FALSE;
+            }
+        }
+    }
+
+    return sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
+}
+
+void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawFlex postLimbDraw, Player* player, s32 lod)
 {
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -1076,10 +1164,13 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
 
-    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->actor, lod);
+    if (postLimbDraw == (void*)Player_PostLimbDrawGameplay && overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson)
+        postLimbDraw = Player_PostLimbDrawGameplayWrapper;
 
+    sPlayerOverrideLimb = overrideLimbDraw;
+    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, Player_OverrideLimbWrapper, postLimbDraw, &player->actor, lod);
 
-    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) /* GAMEMODE_END_CREDITS */
+    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != GAMEMODE_END_CREDITS)
     {
         switch (GET_PLAYER_CUSTOM_BOOTS(player))
         {

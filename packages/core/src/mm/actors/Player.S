@@ -1349,3 +1349,9 @@ PATCH_END
 PATCH_START 0x8086059c
 .int 0
 PATCH_END
+
+/* Disable vanilla shield drawing */
+PATCH_START 0x80129e30
+  b .+0x30
+    nop
+PATCH_END

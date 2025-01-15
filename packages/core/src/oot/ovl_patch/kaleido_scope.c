@@ -1726,7 +1726,7 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
 {
     s16 itemId;
 
-    itemId = id - 123;
+    itemId = id - ITEM_OFFSET;
     if (itemId == ITEM_NONE)
     {
         memset(dst, 0, 0x400);

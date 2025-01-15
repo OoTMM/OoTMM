@@ -273,6 +273,10 @@ void comboCreateSave(void* unk, void* buffer)
     if (!Config_Flag(CFG_MM_SOULS_MISC))
         memset(gSharedCustomSave.soulsMiscMm, 0xff, sizeof(gSharedCustomSave.soulsMiscMm));
 
+    /* Apply deku shield flag */
+    if (Config_Flag(CFG_MM_DEKU_SHIELD))
+        gSharedCustomSave.mmShieldIsDeku = 1;
+
     /* Apply ocarina buttons */
     if (!Config_Flag(CFG_OOT_OCARINA_BUTTONS))
         gSharedCustomSave.ocarinaButtonMaskOot = 0xffff;

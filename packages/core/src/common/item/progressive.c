@@ -167,27 +167,17 @@ static s16 progressiveShieldOot(void)
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
         return GI_OOT_PROGRESSIVE_SHIELD_DEKU;
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
-    {
-#if defined(GAME_MM)
-        if (Config_Flag(CFG_SHARED_SHIELDS))
-            return GI_MM_PROGRESSIVE_SHIELD_HERO;
-#endif
         return GI_OOT_PROGRESSIVE_SHIELD_HYLIAN;
-    }
-
-#if defined(GAME_MM)
-    if (Config_Flag(CFG_SHARED_SHIELDS))
-        return GI_MM_SHIELD_MIRROR;
-#endif
-
     return GI_OOT_SHIELD_MIRROR;
 }
 
 static s16 progressiveShieldMm(void)
 {
-    if (gMmExtraFlags2.progressiveShield)
-        return GI_MM_SHIELD_MIRROR;
-    return GI_MM_PROGRESSIVE_SHIELD_HERO;
+    if ((Config_Flag(CFG_MM_DEKU_SHIELD) || Config_Flag(CFG_SHARED_SHIELDS)) && !(gSharedCustomSave.mmProgressiveShields & 1))
+        return GI_MM_PROGRESSIVE_SHIELD_DEKU;
+    if (!(gSharedCustomSave.mmProgressiveShields & 2))
+        return GI_MM_PROGRESSIVE_SHIELD_HERO;
+    return GI_MM_SHIELD_MIRROR;
 }
 
 static s16 progressiveStrengthOot(void)
@@ -530,6 +520,7 @@ s16 comboProgressive(s16 gi, int ovflags)
         if (Config_Flag(CFG_MM_PROGRESSIVE_GFS))
             gi = progressiveSwordMm();
         break;
+    case GI_MM_PROGRESSIVE_SHIELD_DEKU:
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
         if (Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))

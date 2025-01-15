@@ -1833,6 +1833,14 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.progressiveSwordsOot !== 'progressive' && hasOoT(x),
 }, {
+  key: 'dekuShieldMm',
+  name: "Deku Shield (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Deku Shield in Majora's Mask.",
+  default: false,
+  cond: hasMM,
+}, {
   key: 'blastMaskOot',
   name: "Blast Mask (OoT)",
   category: 'items.extensions',

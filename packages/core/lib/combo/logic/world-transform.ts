@@ -930,6 +930,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SHIELDS, 'max');
       this.replaceItem(Items.OOT_SHIELD_HYLIAN, Items.SHARED_SHIELD_HYLIAN);
       this.replaceItem(Items.MM_SHIELD_HERO,    Items.SHARED_SHIELD_HYLIAN);
+      if (settings.dekuShieldMm) {
+        this.replaceItem(Items.OOT_SHIELD_DEKU, Items.SHARED_SHIELD_DEKU);
+        this.replaceItem(Items.MM_SHIELD_DEKU, Items.SHARED_SHIELD_DEKU);
+      }
     }
 
     if (settings.sharedHammer) {
@@ -1329,6 +1333,14 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
       this.removeItem(Items.MM_SHIELD_HERO);
+
+      if (settings.dekuShieldMm) {
+        this.addItem(Items.MM_SHIELD);
+        this.removeItem(Items.MM_SHIELD_DEKU);
+      }
+    }
+    else if (settings.dekuShieldMm) {
+      this.addItem(Items.MM_SHIELD_DEKU, 3);
     }
 
     if (settings.extraChildSwordsOot) {

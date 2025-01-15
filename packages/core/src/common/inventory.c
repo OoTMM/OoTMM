@@ -9,6 +9,6 @@ void Inventory_ReobtainProgressiveShields(void)
     if (gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN)
         gOotSave.info.inventory.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
 
-    if (gMmExtraFlags2.progressiveShield && gMmSave.info.itemEquips.shield == 0)
+    if (gSharedCustomSave.mmProgressiveShields && gMmSave.info.itemEquips.shield == 0)
         gMmSave.info.itemEquips.shield = 1;
 }

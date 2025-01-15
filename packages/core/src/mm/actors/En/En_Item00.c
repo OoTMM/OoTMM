@@ -37,6 +37,9 @@ void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play, s16 gi, float a, f
         itemId = kExtendedGetItems[gi - 1].itemId;
         if (GetItemCollectBehavior(itemId) == 0xff)
             itemId = -1;
+
+        if (gi == GI_MM_SHIELD_HERO && gSharedCustomSave.mmShieldIsDeku)
+            q.gi = GI_MM_SHIELD_DEKU;
     }
 
     if (itemId >= 0)
@@ -177,3 +180,18 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 void EnItem00_AliasFreestandingHeart(Xflag* xflag)
 {
 }
+
+void EnItem00_DrawShield(PlayState* play)
+{
+    s16 gi;
+
+    if (gSharedCustomSave.mmShieldIsDeku)
+        gi = GI_MM_SHIELD_DEKU;
+    else
+        gi = GI_MM_SHIELD_HERO;
+
+
+    Draw_Gi(play, NULL, gi, DRAW_RAW);
+}
+
+PATCH_CALL(0x800a726c, EnItem00_DrawShield);

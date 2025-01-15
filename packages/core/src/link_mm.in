@@ -554,6 +554,8 @@ Cutscene_StartManual = 0x800ea0d4;
 Cutscene_StopManual = 0x800ea0ec;
 Actor_Noop = 0x800bdfb0;
 Math3D_Dist1DSq = 0x8017a5f8;
+kLinkHumanShieldsDLs = 0x801c00ac;
+Player_PostLimbDrawGameplay = 0x80128bd0;
 
 CutsceneManager_GetAdditionalCsId = 0x800f20b8;
 func_800B4AEC = 0x800b4aec;
