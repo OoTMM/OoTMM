@@ -400,6 +400,12 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
 
         *size += customIconSize;
     }
+
+    /* Replace the Hero's Shield texture with Deku Shield */
+    if (gSharedCustomSave.mmShieldIsDeku)
+    {
+        DMARomToRam((textureFileAddress + customIconSize * ITEM_OOT_SHIELD_DEKU) | PI_DOM1_ADDR2, (char*)dst + customIconSize * ITEM_MM_SHIELD_HERO, customIconSize);
+    }
 }
 
 static u32 GetItemTexture(u8 item)
