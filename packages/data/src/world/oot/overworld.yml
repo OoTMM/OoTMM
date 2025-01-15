@@ -996,7 +996,7 @@
     "Lost Woods Generic Grotto": "has_explosives_or_hammer"
     "Goron City Shortcut": "true"
     "Zora River": "can_dive_small || hookshot_anywhere && can_swim"
-    "Lost Woods Rupee Arrow": "is_child && (can_dive_small || hookshot_anywhere || can_boomerang)"
+    "Lost Woods Rupee Arrow": "is_child && can_swim && (can_dive_small || hookshot_anywhere || can_boomerang)"
     "Lost Woods Lost North": "setting(alterLostWoodsExits)"
     "Lost Woods Lost South": "setting(alterLostWoodsExits)"
     "Lost Woods Lost West": "setting(alterLostWoodsExits)"
@@ -1030,14 +1030,14 @@
 "Lost Woods Rupee Arrow":
   region: LOST_WOODS
   locations:
-    "Lost Woods Rupee Arrow 1": "can_swim"
-    "Lost Woods Rupee Arrow 2": "can_swim"
-    "Lost Woods Rupee Arrow 3": "can_swim"
-    "Lost Woods Rupee Arrow 4": "can_swim"
-    "Lost Woods Rupee Arrow 5": "can_swim"
-    "Lost Woods Rupee Arrow 6": "can_swim"
-    "Lost Woods Rupee Arrow 7": "can_swim"
-    "Lost Woods Rupee Arrow 8": "can_swim"
+    "Lost Woods Rupee Arrow 1": "true"
+    "Lost Woods Rupee Arrow 2": "true"
+    "Lost Woods Rupee Arrow 3": "true"
+    "Lost Woods Rupee Arrow 4": "true"
+    "Lost Woods Rupee Arrow 5": "true"
+    "Lost Woods Rupee Arrow 6": "true"
+    "Lost Woods Rupee Arrow 7": "true"
+    "Lost Woods Rupee Arrow 8": "true"
 "Lost Woods Generic Grotto":
   region: ENTRANCE
   age_change: false
