@@ -135,7 +135,7 @@
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
+    "Shadow Temple Pre-Boss": "small_keys_shadow(5) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
   events:
     SHADOW_PILLAR: "can_use_bow || (has_bombflowers && (scarecrow_longshot || climb_anywhere || longshot_anywhere))"
   locations:
@@ -154,3 +154,7 @@
     "Shadow Temple Heart Pre-Boss 2": "scarecrow_longshot || climb_anywhere"
     "Shadow Temple Heart Pre-Boss 3": "scarecrow_longshot || climb_anywhere"
     "Shadow Temple Wonder Item": "can_use_bow"
+"Shadow Temple Pre-Boss":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Boss": "boss_key(BOSS_KEY_SHADOW)"
