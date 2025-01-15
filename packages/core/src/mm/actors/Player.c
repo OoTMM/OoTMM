@@ -52,6 +52,7 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     ArrowCycle_Handle(this, play);
     Player_HandleBurningDekuShield(this, play);
     Player_Update(this, play);
+    Player_HandleBronzeScale(this, play);
     Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
 }

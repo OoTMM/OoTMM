@@ -49,4 +49,7 @@ void Player_UpdateForm(Player* this, PlayState* play);
 void Player_TryUpdateForm(Player* this, PlayState* play);
 #endif
 
+/* Custom stuff */
+void Player_HandleBronzeScale(Player* this, PlayState* play);
+
 #endif
