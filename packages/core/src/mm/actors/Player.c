@@ -1062,6 +1062,130 @@ EXPORT_SYMBOL(MM_COLOR_TUNIC_KOKIRI, sTunicColors[0]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_GORON, sTunicColors[2]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
+#define DLIST_INDIRECT(x)           (*(u32*)((x)))
+
+static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
+{
+    Gfx* dlist;
+    Gfx* d;
+
+    if (!eqData) return (void*)kDListEmpty;
+
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 3);
+    gSPDisplayList(d++, handDlist);
+    gSPSegment(d++, 0x0a, eqData);
+    gSPBranchList(d++, eqDlist);
+
+    return dlist;
+}
+
+static void* Player_CustomEq(void* eqData, u32 eqDlist)
+{
+    Gfx* dlist;
+    Gfx* d;
+
+    if (!eqData) return (void*)kDListEmpty;
+
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 2);
+    gSPSegment(d++, 0x0a, eqData);
+    gSPBranchList(d++, eqDlist);
+
+    return dlist;
+}
+
+static void* dlistOrNothing(void* dlist)
+{
+    if (!dlist)
+        return (void*)kDListEmpty;
+    return dlist;
+}
+
+static void* Player_CustomPair(void* a, void* b)
+{
+    Gfx* dlist;
+    Gfx* d;
+
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 2);
+    gSPDisplayList(d++, dlistOrNothing(a));
+    gSPBranchList(d++, dlistOrNothing(b));
+
+    return dlist;
+}
+
+static int (*sPlayerOverrideLimb)(PlayState*, s32, Gfx**, Vec3f*, Vec3s*, void*);
+static int (*sPlayerPostLimbDraw)(PlayState*, s32 limbIndex, Gfx** dList, Vec3s* rot, void*);
+
+static int Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dlist)
+{
+    void*   shield;
+    void*   sword;
+    u8      swordInUse;
+    u8      shieldOnBack;
+
+    shield = NULL;
+    sword = NULL;
+    swordInUse = 0;
+
+    switch (this->leftHandType)
+    {
+    case PLAYER_MODELTYPE_LH_ONE_HAND_SWORD:
+    case PLAYER_MODELTYPE_LH_TWO_HAND_SWORD:
+        swordInUse = 1;
+        break;
+    }
+    shieldOnBack = !!(this->rightHandType != PLAYER_MODELTYPE_RH_SHIELD);
+
+    if (!shieldOnBack)
+    {
+        return FALSE;
+    }
+    if (shieldOnBack)
+    {
+        shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_1);
+    }
+
+    switch (gSave.info.itemEquips.sword)
+    {
+    case 1: /* TODO: Add this */
+    case 2:
+        sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_RAZOR), swordInUse ? CUSTOM_OBJECT_EQ_SHEATH_SWORD_RAZOR_0 : CUSTOM_OBJECT_EQ_SHEATH_SWORD_RAZOR_1);
+        break;
+    case 3:
+        sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_GILDED), swordInUse ? CUSTOM_OBJECT_EQ_SHEATH_SWORD_GILDED_0 : CUSTOM_OBJECT_EQ_SHEATH_SWORD_GILDED_1);
+        break;
+    }
+
+    *dlist = Player_CustomPair(shield, sword);
+    return TRUE;
+}
+
+int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
+{
+    Player* player = GET_PLAYER(play);
+
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+        {
+            if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD))
+            {
+                *dList = Player_CustomHandEq(kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+                return FALSE;
+            }
+        }
+
+        if (limbIndex == PLAYER_LIMB_SHEATH && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+        {
+            if (Player_OverrideCustomSheath(play, player, dList))
+            {
+                return FALSE;
+            }
+        }
+    }
+
+    return sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
+}
+
 void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Player* player, s32 lod)
 {
     OPEN_DISPS(play->state.gfxCtx);
@@ -1076,10 +1200,10 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
 
-    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->actor, lod);
+    sPlayerOverrideLimb = overrideLimbDraw;
+    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, Player_OverrideLimbWrapper, postLimbDraw, &player->actor, lod);
 
-
-    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) /* GAMEMODE_END_CREDITS */
+    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != GAMEMODE_END_CREDITS)
     {
         switch (GET_PLAYER_CUSTOM_BOOTS(player))
         {

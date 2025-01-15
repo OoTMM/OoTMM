@@ -49,6 +49,33 @@ typedef enum PlayerLimb {
     /* 0x16 */ PLAYER_LIMB_MAX
 } PlayerLimb;
 
+typedef enum PlayerModelType {
+    // left hand
+    /*   0 */ PLAYER_MODELTYPE_LH_OPEN,
+    /*   1 */ PLAYER_MODELTYPE_LH_CLOSED,
+    /*   2 */ PLAYER_MODELTYPE_LH_ONE_HAND_SWORD,
+    /*   3 */ PLAYER_MODELTYPE_LH_TWO_HAND_SWORD,
+    /*   4 */ PLAYER_MODELTYPE_LH_4,
+    /*   5 */ PLAYER_MODELTYPE_LH_BOTTLE,
+    // right hand
+    /*   6 */ PLAYER_MODELTYPE_RH_OPEN,
+    /*   7 */ PLAYER_MODELTYPE_RH_CLOSED,
+    /*   8 */ PLAYER_MODELTYPE_RH_SHIELD,
+    /*   9 */ PLAYER_MODELTYPE_RH_BOW,
+    /*  10 */ PLAYER_MODELTYPE_RH_INSTRUMENT,
+    /*  11 */ PLAYER_MODELTYPE_RH_HOOKSHOT,
+    // sheath
+    /*  12 */ PLAYER_MODELTYPE_SHEATH_12,
+    /*  13 */ PLAYER_MODELTYPE_SHEATH_13,
+    /*  14 */ PLAYER_MODELTYPE_SHEATH_14,
+    /*  15 */ PLAYER_MODELTYPE_SHEATH_15,
+    // waist
+    /*  16 */ PLAYER_MODELTYPE_WAIST,
+    /*  17 */ PLAYER_MODELTYPE_17, // NULL?
+    /*  18 */ PLAYER_MODELTYPE_MAX,
+    /* 255 */ PLAYER_MODELTYPE_RH_FF = 0xFF // disable shield collider, cutscene-specific
+} PlayerModelType;
+
 typedef enum PlayerBodyPart {
     /* 0x00 */ PLAYER_BODYPART_WAIST,          /* PLAYER_LIMB_WAIST */
     /* 0x01 */ PLAYER_BODYPART_RIGHT_THIGH,    /* PLAYER_LIMB_RIGHT_THIGH */
