@@ -2020,7 +2020,7 @@
     "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (lake_water_control || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
-    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && can_swim"
+    "Lake Hylia GS Island": "is_child && gs_night && ((can_damage_skull && can_swim) || (has_iron_boots && can_longshot))"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
     "Lake Hylia Island Big Fairy": "can_play_sun && (is_child || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
@@ -2070,7 +2070,7 @@
     "Lake Hylia Grass Pack 3 Bush 10": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 11": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 12": "can_cut_grass"
-    "Lake Hylia Rupee 1": "is_child && can_swim" #this rupee can be gotten with base dive distance
+    "Lake Hylia Rupee 1": "is_child && (can_swim || has_iron_boots)" #this rupee can be gotten with base dive distance
     "Lake Hylia Rupee 2": "is_child && can_dive_small"
     "Lake Hylia Rupee 3": "is_child && can_dive_small"
     "Lake Hylia Butterfly 1": "is_child && can_use_sticks"
@@ -2359,7 +2359,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Gerudo Valley Falls": "is_child || can_swim"
+    "Gerudo Valley Falls": "is_child || can_swim || has_iron_boots"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || can_hookshot)) || time_travel_at_will"
     "Octorok Grotto Ledge": "true"
@@ -2371,7 +2371,7 @@
     BUGS: "is_child && has_bottle"
   locations:
     "Gerudo Valley Crate HP": "is_child || can_longshot || climb_anywhere"
-    "Gerudo Valley Waterfall HP": "is_child || can_swim" ##Grab the PoH with Cucco as child
+    "Gerudo Valley Waterfall HP": "is_child || can_swim || can_longshot || (has_iron_boots && can_hookshot)" ##Grab the PoH with Cucco as child. The Hookshot can attach to the ladder.
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && can_play_epona"
@@ -2413,7 +2413,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Gerudo Valley Falls": "can_swim"
+    "Gerudo Valley Falls": "can_swim || has_iron_boots"
     "Gerudo Valley": "climb_anywhere"
     "Octorok Grotto": "can_lift_silver"
   locations:
@@ -2427,7 +2427,7 @@
     RUPEES: "true"
   locations:
     "Gerudo Valley Octorok Grotto Rupee 1": "can_swim || has_iron_boots || can_boomerang"
-    "Gerudo Valley Octorok Grotto Rupee 2": "can_swim || has_iron_boots || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 1": "can_swim || has_iron_boots || can_boomerang"
     "Gerudo Valley Octorok Grotto Rupee 3": "can_swim || has_iron_boots || can_boomerang"
     "Gerudo Valley Octorok Grotto Rupee 4": "can_swim || has_iron_boots || can_boomerang"
     "Gerudo Valley Octorok Grotto Rupee 5": "can_swim || has_iron_boots || can_boomerang"
