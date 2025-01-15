@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/entrance.h>
+#include <combo/config.h>
 
 #if defined(GAME_OOT)
 # define HAS_BRONZE_SCALE() (!!(gSharedCustomSave.bronzeScaleOot))
@@ -17,6 +18,11 @@ static u8 sBronzeScaleGroundRoom;
 
 void Player_HandleBronzeScale(Player* this, PlayState* play)
 {
+#if defined(GAME_MM)
+    if (!Config_Flag(CFG_MM_SCALES))
+        return;
+#endif
+
     if (HAS_BRONZE_SCALE())
         return;
 
