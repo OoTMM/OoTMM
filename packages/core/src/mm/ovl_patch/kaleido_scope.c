@@ -61,6 +61,13 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     u32 isForeign = 0;
     switch (texIndex)
     {
+    case ITEM_MM_SHIELD_HERO:
+        if (gSharedCustomSave.mmShieldIsDeku)
+        {
+            isForeign = 1;
+            texIndex = 0x7b + ITEM_OOT_SHIELD_DEKU;
+        }
+        break;
     case ITEM_MM_OCARINA_FAIRY:
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_OCARINA_FAIRY;
@@ -115,6 +122,29 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     }
 
 }
+
+void KaleidoScope_ShowEquipMessage(PlayState* play, u16 messageId, u8 yPosition)
+{
+    char* b;
+    Message_ShowMessageAtYPosition(play, messageId, yPosition);
+    s16 itemId = messageId - 0x1737;
+    switch (itemId)
+    {
+    case ITEM_MM_SHIELD_HERO:
+        if (!gSharedCustomSave.mmShieldIsDeku)
+            break;
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_YELLOW "Deku Shield" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "A basic shield." TEXT_NL "Vulnerable to fire." TEXT_END);
+        break;
+    }
+}
+
+PATCH_CALL(0x808184e4, KaleidoScope_ShowEquipMessage);
+PATCH_CALL(0x80818528, KaleidoScope_ShowEquipMessage);
 
 void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
 {
@@ -488,10 +518,3 @@ void KaleidoScope_SetSaveButton(PlayState* play, s16 bButtonDoAction)
 }
 
 PATCH_CALL(0x80828908, KaleidoScope_SetSaveButton);
-
-void Kaleido_LoadItemNameStatic(void* dst, int index)
-{
-    LoadIcon(0xa27660, index, dst, 0x400);
-}
-
-PATCH_FUNC(0x80821958, Kaleido_LoadItemNameStatic);
