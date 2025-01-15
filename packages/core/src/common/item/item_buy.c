@@ -22,6 +22,42 @@ static int hasFreeBottleMm(void)
     return 0;
 }
 
+static int canBuyShieldOotRaw(int level)
+{
+    switch (level)
+    {
+    case 0:
+        return !(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+    case 1:
+        return !(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+    default:
+        return 1;
+    }
+}
+
+static int canBuyShieldMmRaw(int level)
+{
+    switch (level)
+    {
+    case 0:
+        return gMmSave.info.itemEquips.shield == 0;
+    case 1:
+        return gMmSave.info.itemEquips.shield == 0 || gSharedCustomSave.mmShieldIsDeku;
+    default:
+        return 1;
+    }
+}
+
+static int canBuyShieldOot(int level)
+{
+    return canBuyShieldOotRaw(level) || (Config_Flag(CFG_SHARED_SHIELDS) && canBuyShieldMmRaw(level));
+}
+
+static int canBuyShieldMm(int level)
+{
+    return canBuyShieldMmRaw(level) || (Config_Flag(CFG_SHARED_SHIELDS) && canBuyShieldOotRaw(level));
+}
+
 int isItemBuyable(s16 gi)
 {
     switch (gi)
@@ -78,9 +114,9 @@ int isItemBuyable(s16 gi)
     case GI_OOT_MILK:
         return hasFreeBottleOot();
     case GI_OOT_SHIELD_DEKU:
-        return !(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+        return canBuyShieldOot(0);
     case GI_OOT_SHIELD_HYLIAN:
-        return !(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+        return canBuyShieldOot(1);
     case GI_MM_RECOVERY_HEART:
         return gMmSave.info.playerData.health < gMmSave.info.playerData.healthCapacity;
     case GI_MM_MAGIC_JAR_SMALL:
@@ -127,8 +163,10 @@ int isItemBuyable(s16 gi)
     case GI_MM_POE:
     case GI_MM_BIG_POE:
         return hasFreeBottleMm();
+    case GI_MM_SHIELD_DEKU:
+        return canBuyShieldMm(0);
     case GI_MM_SHIELD_HERO:
-        return gMmSave.info.itemEquips.shield == 0;
+        return canBuyShieldMm(1);
     case GI_NOTHING:
         return 0;
     default:

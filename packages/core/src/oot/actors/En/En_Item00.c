@@ -170,3 +170,17 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 void EnItem00_AliasFreestandingHeart(Xflag* xflag)
 {
 }
+
+void EnItem00_DrawShieldDeku(PlayState* play)
+{
+    Draw_Gi(play, NULL, GI_OOT_SHIELD_DEKU, DRAW_RAW);
+}
+
+PATCH_CALL(0x800130fc, EnItem00_DrawShieldDeku);
+
+void EnItem00_DrawShieldHylian(PlayState* play)
+{
+    Draw_Gi(play, NULL, GI_OOT_SHIELD_HYLIAN, DRAW_RAW);
+}
+
+PATCH_CALL(0x80013110, EnItem00_DrawShieldHylian);

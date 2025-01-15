@@ -1146,7 +1146,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
 
-    if (postLimbDraw == (void*)Player_PostLimbDrawGameplay)
+    if (postLimbDraw == (void*)Player_PostLimbDrawGameplay && overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson)
         postLimbDraw = Player_PostLimbDrawGameplayWrapper;
 
     sPlayerOverrideLimb = overrideLimbDraw;
