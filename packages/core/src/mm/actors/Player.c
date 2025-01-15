@@ -1097,6 +1097,7 @@ EXPORT_SYMBOL(MM_COLOR_TUNIC_GORON, sTunicColors[2]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
 #define DLIST_INDIRECT(x)           (*(u32*)((x)))
+#define DLIST_RHAND_OPEN            DLIST_INDIRECT(0x801c01c4)
 
 static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -1151,13 +1152,18 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
 {
     Player* player = GET_PLAYER(play);
 
-    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    if (player->transformation == MM_PLAYER_FORM_HUMAN && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
     {
-        if (limbIndex == PLAYER_LIMB_RIGHT_HAND && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
         {
             if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
             {
                 *dList = Player_CustomHandEq((u32)kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+                return FALSE;
+            }
+            else if (player->rightHandType == PLAYER_MODELTYPE_RH_INSTRUMENT && gMmSave.info.inventory.items[ITS_MM_OCARINA] == ITEM_MM_OCARINA_FAIRY)
+            {
+                *dList = Player_CustomHandEq(DLIST_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_OCARINA_FAIRY), CUSTOM_OBJECT_EQ_OCARINA_FAIRY_0);
                 return FALSE;
             }
         }
