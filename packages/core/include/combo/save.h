@@ -41,6 +41,7 @@ typedef struct ALIGNED(16)
     u8              extraSwordsOot:2;
     u8              bombchuBagOot:2;
     u8              bombchuBagMm:2;
+    u8              mmShieldIsDeku:1;
 #if defined(DEBUG)
     u8              cheats[4];
 #endif
