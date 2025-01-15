@@ -51,7 +51,7 @@ void DrawGi_VanillaRupee(PlayState*, s16);
 
 /* Custom draw funcs */
 void DrawGi_Xlu0(PlayState* play, s16 drawGiId);
-void DrawGi_CustomScale(PlayState*, s16);
+void DrawGi_CustomScale(PlayState*, s16, u8);
 void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param);
 void DrawGi_CustomHeartContainer(PlayState* play, s16 drawGiId);
 void DrawGi_CustomStick(PlayState* play, s16 drawGiId);
