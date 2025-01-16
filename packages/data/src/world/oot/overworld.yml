@@ -1931,7 +1931,7 @@
     FISH: "is_child && has_bottle"
   locations:
     "Zora Domain Waterfall Chest": "is_child"
-    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora && (can_swim || has_iron_boots)"
     "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora && (can_swim || has_iron_boots)"
     "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora (can_swim || has_iron_boots)"
     "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora (can_swim || has_iron_boots)"
