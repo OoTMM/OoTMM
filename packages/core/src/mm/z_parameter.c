@@ -74,11 +74,9 @@ extern s8 gPlayerFormCustomItemRestrictions[5][8];
 /* button and item are stored in SP10 and SP14 by HOOK_SAVE */
 s8 Interface_GetItemRestriction(u8 playerForm, PlayState* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
 {
-    s8 (*gPlayerFormItemRestrictions)[0x72] = (s8(*)[0x72])0x801c2410;
     if (item == ITEM_MM_MASK_GIANT && !comboHasSoulMm(GI_MM_SOUL_BOSS_TWINMOLD))
     {
-        gPlayerFormItemRestrictions[playerForm][item] = 0;
-        gSaveContext.buttonStatus[button] = 0xff;
+        return 0;
     }
 
     if (item < ITEM_MM_CUSTOM_MIN)

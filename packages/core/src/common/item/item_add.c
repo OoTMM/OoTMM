@@ -1056,6 +1056,14 @@ static int addItemStrengthMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gMmSave.info.inventory.upgrades.strength)
         gMmSave.info.inventory.upgrades.strength = param;
+
+#if defined(GAME_MM)
+    if (gPlayerFormItemRestrictions[MM_PLAYER_FORM_HUMAN][ITEM_MM_POWDER_KEG] == 0 && Config_Flag(CFG_MM_KEG_STRENGTH_3) && gSave.info.inventory.upgrades.strength >= 3)
+    {
+        gPlayerFormItemRestrictions[MM_PLAYER_FORM_HUMAN][ITEM_MM_POWDER_KEG] = 1;
+    }
+#endif
+
     return 0;
 }
 
