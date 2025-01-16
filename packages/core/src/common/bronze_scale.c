@@ -14,6 +14,13 @@ static Vec3f sBronzeScaleGroundPos;
 static s16 sBronzeScaleGroundRot;
 static u8 sBronzeScaleGroundRoom;
 
+static void BronzeScale_CopyPos(Player* this, PlayState* play)
+{
+    sBronzeScaleGroundPos = this->actor.world.pos;
+    sBronzeScaleGroundRot = this->actor.world.rot.y;
+    sBronzeScaleGroundRoom = play->roomCtx.curRoom.num;
+}
+
 void Player_HandleBronzeScale(Player* this, PlayState* play)
 {
 #if defined(GAME_MM)
@@ -24,11 +31,21 @@ void Player_HandleBronzeScale(Player* this, PlayState* play)
     if (HAS_BRONZE_SCALE())
         return;
 
+    if (g.bronzeScaleTimer == 0)
+    {
+        BronzeScale_CopyPos(this, play);
+        g.bronzeScaleTimer = 1;
+    }
+
+    if (play->transitionTrigger)
+        return;
+
+    if (this->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_FROZEN))
+        return;
+
     if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_WATER | PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2 | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_JUMPING) || (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) || !(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)))
     {
-        sBronzeScaleGroundPos = this->actor.world.pos;
-        sBronzeScaleGroundRot = this->actor.world.rot.y;
-        sBronzeScaleGroundRoom = play->roomCtx.curRoom.num;
+        BronzeScale_CopyPos(this, play);
         g.bronzeScaleSolidGround = 1;
         return;
     }
@@ -52,10 +69,11 @@ void Player_HandleBronzeScale(Player* this, PlayState* play)
         return;
 
     if (!g.bronzeScaleSolidGround)
-        return;
-
-    if (play->transitionTrigger)
-        return;
+    {
+        g.bronzeScaleTimer++;
+        if (g.bronzeScaleTimer < 20)
+            return;
+    }
 
     /* Player is in deep water with no bronze scale */
     PlaySound(NA_SE_EV_WATER_CONVECTION);
