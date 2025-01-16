@@ -4,12 +4,10 @@
 
 #if defined(GAME_OOT)
 # define HAS_BRONZE_SCALE() (!!(gSharedCustomSave.bronzeScaleOot))
-# define BOOTS              2
 #endif
 
 #if defined(GAME_MM)
 # define HAS_BRONZE_SCALE() (!!(gSharedCustomSave.bronzeScaleMm))
-# define BOOTS              6
 #endif
 
 static Vec3f sBronzeScaleGroundPos;
@@ -40,8 +38,15 @@ void Player_HandleBronzeScale(Player* this, PlayState* play)
         return;
 #endif
 
-    if (this->currentBoots == BOOTS)
+#if defined(GAME_OOT)
+    if (this->currentBoots == 2)
         return;
+#endif
+
+#if defined(GAME_MM)
+    if (this->currentBoots == 6 || this->currentBoots == 3)
+        return;
+#endif
 
     if (!(this->stateFlags1 & PLAYER_ACTOR_STATE_WATER))
         return;
