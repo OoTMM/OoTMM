@@ -2427,7 +2427,7 @@
     RUPEES: "true"
   locations:
     "Gerudo Valley Octorok Grotto Rupee 1": "can_swim || has_iron_boots || can_boomerang"
-    "Gerudo Valley Octorok Grotto Rupee 1": "can_swim || has_iron_boots || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 2": "can_swim || has_iron_boots || can_boomerang"
     "Gerudo Valley Octorok Grotto Rupee 3": "can_swim || has_iron_boots || can_boomerang"
     "Gerudo Valley Octorok Grotto Rupee 4": "can_swim || has_iron_boots || can_boomerang"
     "Gerudo Valley Octorok Grotto Rupee 5": "can_swim || has_iron_boots || can_boomerang"
