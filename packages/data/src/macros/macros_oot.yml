@@ -51,8 +51,6 @@
 
 "can_play_cross_soaring": "can_play_cross(MM_SONG_SOARING) && ocarina_button_up && ocarina_button_down && ocarina_button_left"
 
-"can_swim": "true"
-
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
 "bombchu_license_bag_separate": "has(BOMBCHU_BAG) || has(SHARED_BOMBCHU_BAG)"
@@ -173,8 +171,9 @@
 "scarecrow_longshot": "has_ocarina && can_longshot && (event(SCARECROW) || setting(freeScarecrowOot))"
 "has_fire": "has_fire_arrows || can_use_din"
 "has_fire_or_sticks": "can_use_sticks || has_fire"
-"can_dive_small": "has_scale_raw(1) || has_iron_boots"
-"can_dive_big": "has_scale_raw(2) || has_iron_boots"
+"can_swim": "setting(bronzeScale) && has_scale_raw(1)"
+"can_dive_small": "cond(setting(bronzeScale), has_scale_raw(2), has_scale_raw(1)) || has_iron_boots"
+"can_dive_big": "cond(setting(bronzeScale), has_scale_raw(3), has_scale_raw(2)) || has_iron_boots"
 "hidden_grotto_bomb": "stone_of_agony && has_explosives_or_hammer"
 "hidden_grotto_storms": "stone_of_agony && can_play_storms"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
