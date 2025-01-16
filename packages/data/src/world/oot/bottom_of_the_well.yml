@@ -43,7 +43,7 @@
     "Bottom of the Well Pot Main Room 3": "true"
     "Bottom of the Well Pot Main Room 4": "true"
     "Bottom of the Well Pot Main Room 5": "true"
-    "Bottom of the Well Pot Main Room Underwater": "can_play_zelda || can_swim && (has_ranged_weapon || has_bombchu)"
+    "Bottom of the Well Pot Main Room Underwater": "can_play_zelda || (can_swim && (has_ranged_weapon || has_bombchu))"
     "Bottom of the Well Pot Basement 01": "true"
     "Bottom of the Well Pot Basement 02": "true"
     "Bottom of the Well Pot Basement 03": "true"
