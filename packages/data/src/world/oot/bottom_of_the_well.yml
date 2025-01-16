@@ -16,7 +16,7 @@
   events:
     STICKS: "true"
   locations:
-    "Bottom of the Well Coffin": "(can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere))"
+    "Bottom of the Well Coffin": "can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere)"
     "Bottom of the Well Compass": "has_lens"
     "Bottom of the Well Under Debris": "has_explosives"
     "Bottom of the Well Back West": "has_explosives && has_lens"
@@ -43,7 +43,7 @@
     "Bottom of the Well Pot Main Room 3": "true"
     "Bottom of the Well Pot Main Room 4": "true"
     "Bottom of the Well Pot Main Room 5": "true"
-    "Bottom of the Well Pot Main Room Underwater": "can_play_zelda || (can_swim && (has_ranged_weapon || has_bombchu))"
+    "Bottom of the Well Pot Main Room Underwater": "can_play_zelda || ((can_swim || has_iron_boots) && (has_ranged_weapon || has_bombchu)))"
     "Bottom of the Well Pot Basement 01": "true"
     "Bottom of the Well Pot Basement 02": "true"
     "Bottom of the Well Pot Basement 03": "true"
@@ -72,8 +72,8 @@
     "Bottom of the Well Grass 10": "can_cut_grass"
     "Bottom of the Well Grass 11": "can_cut_grass"
     "Bottom of the Well Grass 12": "can_cut_grass"
-    "Bottom of the Well Heart 1": "(can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere))"
-    "Bottom of the Well Heart 2": "(can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere))"
+    "Bottom of the Well Heart 1": "can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere)"
+    "Bottom of the Well Heart 2": "can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere)"
     "Bottom of the Well Basement Big Fairy": "can_play_sun"
 "Bottom of the Well Basement Platform":
   dungeon: BotW
