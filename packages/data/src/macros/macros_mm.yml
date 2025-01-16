@@ -77,7 +77,7 @@
 "has_tunic_zora": "has_tunic_zora_strict || trick(MM_TUNICS)"
 
 # Scales
-"can_swim": "cond(setting(scalesMm) && setting(bronzeScale), has scale_raw(1), true)"
+"can_swim": "cond(setting(scalesMm) && setting(bronzeScale), has scale_raw(1) || has_mask_zora, true)"
 "can_dive_small": "setting(scalesMm) && cond(setting(bronzeScale), has_scale_raw(2), has_scale_raw(1))"
 "can_dive_big": "setting(scalesMm) && cond(setting(bronzeScale), has_scale_raw(3), has_scale_raw(2))"
 
