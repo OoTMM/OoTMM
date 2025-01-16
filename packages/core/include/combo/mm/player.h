@@ -9,6 +9,7 @@
 struct Player;
 
 int Player_GetMask(PlayState* play);
+s32 Player_HasStrength(u8 requiredStrength);
 
 typedef struct {
     /* 0x00 */ u8 unk_00;

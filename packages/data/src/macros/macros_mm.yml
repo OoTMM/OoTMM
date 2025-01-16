@@ -84,6 +84,7 @@
 "can_lift_bracelet": "!setting(strengthMm) || has_strength_raw(1)"
 "can_lift_silver": "setting(strengthMm) && has_strength_raw(2)"
 "can_lift_gold": "setting(strengthMm) && has_strength_raw(3)"
+"can_carry_keg": "has_mask_goron || (setting(kegStrength3) && can_lift_gold)"
 
 # Megaton Hammer
 "can_hammer": "setting(hammerMm) && has_hammer_raw"

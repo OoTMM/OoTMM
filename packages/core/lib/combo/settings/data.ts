@@ -1809,6 +1809,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'kegStrength3',
+  name: "Use Keg With Golden Gauntlets",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "If you have the Golden Gauntlets in Majora's Mask, this allows you to purchase and use Powder Kegs and attempt the Keg Trial.",
+  default: false,
+  cond: (x: any) => x.strengthMm && hasMM(x),
+}, {
   key: 'hammerMm',
   name: "Megaton Hammer (MM)",
   category: 'items.extensions',

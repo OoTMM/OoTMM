@@ -938,6 +938,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_TUNIC_ZORA: settings.tunicZoraMm,
     MM_SCALES: settings.scalesMm,
     MM_STRENGTH: settings.strengthMm,
+    MM_KEG_STRENGTH_3: settings.kegStrength3,
     OOT_GANON_BOSS_KEY_HINT: settings.ganonBossKey === 'anywhere',
     BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
     BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',

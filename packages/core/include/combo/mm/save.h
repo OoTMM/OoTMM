@@ -444,6 +444,8 @@ ALIGNED(16) extern MmSaveContext gSaveContext;
 ALIGNED(16) extern MmSave gMmSave;
 #endif
 
+extern s8 gPlayerFormItemRestrictions[5][0x72];
+
 /* Custom */
 typedef struct
 {

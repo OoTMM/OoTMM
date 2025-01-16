@@ -15,6 +15,7 @@
 #include <combo/inventory.h>
 #include <combo/draw.h>
 #include <actors/Obj_Grass/Obj_Grass.h>
+#include <combo/souls.h>
 
 /* Grass hooks */
 ObjGrass* gObjGrass;
@@ -437,6 +438,14 @@ void Play_CheckRoomChangeHook(PlayState* play)
     }
 }
 
+static void Play_CheckItemRestrictions()
+{
+    if (gPlayerFormItemRestrictions[MM_PLAYER_FORM_HUMAN][ITEM_MM_POWDER_KEG] == 0 && Config_Flag(CFG_MM_KEG_STRENGTH_3) && gSave.info.inventory.upgrades.strength >= 3)
+    {
+        gPlayerFormItemRestrictions[MM_PLAYER_FORM_HUMAN][ITEM_MM_POWDER_KEG] = 1;
+    }
+}
+
 static void Play_AfterInit(PlayState* play)
 {
     DrawGiSystem_Reset(play);
@@ -452,6 +461,8 @@ static void Play_AfterInit(PlayState* play)
     spawnSirloin(play);
     ComboPlay_SpawnExtraSigns(play);
     Play_CheckRoomChangeHook(play);
+
+    Play_CheckItemRestrictions();
 
     if (Config_Flag(CFG_ER_ANY))
     {

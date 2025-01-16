@@ -43,6 +43,7 @@
 # define TEXT_SIGNAL         "\xe0"
 # define TEXT_ICON           ""
 # define TEXT_BB             "\x10"
+# define TEXT_SFX(sfxId)     "\x1e" sfxId
 #endif
 
 #define TEXT_C0   TEXT_COLOR_TEAL
