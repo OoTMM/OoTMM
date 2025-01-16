@@ -1932,11 +1932,11 @@
   locations:
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora && (can_swim || has_iron_boots)"
+    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora (can_swim || has_iron_boots)"
+    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora (can_swim || has_iron_boots)"
+    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_zora (can_swim || has_iron_boots)"
+    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora (can_swim || has_iron_boots)"
     "Zora Domain Tunic": "is_adult && has_blue_fire && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION) && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || (has_magic && can_use_sword) || has_explosives)"
@@ -2632,14 +2632,14 @@
 "Desert Colossus Oasis":
   region: DESERT_COLOSSUS
   locations:
-    "Desert Colossus Oasis Fairy 1": "true"
-    "Desert Colossus Oasis Fairy 2": "true"
-    "Desert Colossus Oasis Fairy 3": "true"
-    "Desert Colossus Oasis Fairy 4": "true"
-    "Desert Colossus Oasis Fairy 5": "true"
-    "Desert Colossus Oasis Fairy 6": "true"
-    "Desert Colossus Oasis Fairy 7": "true"
-    "Desert Colossus Oasis Fairy 8": "true"
+    "Desert Colossus Oasis Fairy 1": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 2": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 3": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 4": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 5": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 6": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 7": "can_swim || has_iron_boots"
+    "Desert Colossus Oasis Fairy 8": "can_swim || has_iron_boots"
 "Desert Colossus Spirit Exit":
   region: DESERT_COLOSSUS
   time: flow
