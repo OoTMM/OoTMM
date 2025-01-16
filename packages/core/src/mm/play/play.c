@@ -15,7 +15,6 @@
 #include <combo/inventory.h>
 #include <combo/draw.h>
 #include <actors/Obj_Grass/Obj_Grass.h>
-#include <combo/souls.h>
 
 /* Grass hooks */
 ObjGrass* gObjGrass;
