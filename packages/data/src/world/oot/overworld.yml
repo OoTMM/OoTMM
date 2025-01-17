@@ -2020,10 +2020,10 @@
     "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (lake_water_control || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
-    "Lake Hylia GS Island": "is_child && gs_night && ((can_damage_skull && can_swim) || (has_iron_boots && can_longshot)) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere))"
+    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
-    "Lake Hylia Island Big Fairy": "can_play_sun && (is_child || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
+    "Lake Hylia Island Big Fairy": "is_child && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     # These pots do exist in the vanilla game but they fail to load
     "Lake Hylia Pot 1": "is_child"
     "Lake Hylia Pot 2": "is_child"
