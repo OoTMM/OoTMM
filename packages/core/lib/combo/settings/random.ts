@@ -102,6 +102,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   }
 
   base.shuffleMerchantsMm = booleanWeighted(random, 0.50);
+  base.shuffleMerchantsOot = booleanWeighted(random, 0.50);
   base.eggShuffle = booleanWeighted(random, 0.50);
   base.songs = sampleWeighted(random, { songLocations: 6, anywhere: 4 });
   base.divingGameRupeeShuffle = booleanWeighted(random, 0.50);

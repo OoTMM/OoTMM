@@ -304,6 +304,9 @@ void EnGs_TalkedTo(Actor*, PlayState*);
 void EnGm_TalkedTo(Actor*, PlayState*);
 void EnMs_TalkedTo(Actor*, PlayState*);
 void EnSsh_TalkedTo(Actor*, PlayState*);
+void EnDs_TalkedTo(Actor*, PlayState*, s16);
+void EnJs_TalkedTo(Actor*, PlayState*, s16);
+void EnTa_TalkedTo(Actor*, PlayState*, s16);
 
 void DemoEffect_TextRutoSapphire(PlayState*);
 
@@ -330,6 +333,15 @@ void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
             break;
         case ACTOR_EN_KANBAN:
             gEnKanban_TalkedTo(actor, play);
+            break;
+        case ACTOR_EN_DS:
+            EnDs_TalkedTo(actor, play, textId);
+            break;
+        case ACTOR_EN_JS:
+            EnJs_TalkedTo(actor, play, textId);
+            break;
+        case ACTOR_EN_TA:
+            EnTa_TalkedTo(actor, play, textId);
             break;
         }
     }

@@ -65,6 +65,7 @@ Actor_OfferGetItem = 0x80022bd4;
 GiveItemDefaultRange = 0x80022cf4;
 DisplayTextBox = 0x800dc838;
 DisplayTextBox2 = 0x800dce80;
+Message_ShouldAdvance = 0x800d6110;
 
 RequestDma = 0x80000d28;
 kObjectsTable = 0x800f8ff8;

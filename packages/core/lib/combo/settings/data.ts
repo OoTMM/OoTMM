@@ -817,6 +817,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false,
 }, {
+  key: 'shuffleMerchantsOot',
+  name: 'Merchants Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the Old Hag Potion, Talon Milk and Carpet Man Bombchu are shuffled.',
+  cond: hasOoT,
+  default: false
+}, {
   key: 'shuffleMerchantsMm',
   name: 'Merchants Shuffle (MM)',
   category: 'main.shuffle',
@@ -875,6 +883,7 @@ export const SETTINGS = [{
 },
 { ...SETTING_PRICE, key: 'priceOotShops', name: 'OoT Shop Prices', description: 'Sets the price of items inside OoT shops', cond: hasOoT },
 { ...SETTING_PRICE, key: 'priceOotScrubs', name: 'OoT Scrub Prices', description: 'Sets the price of items sold by OoT scrubs', cond: hasOoT },
+{ ...SETTING_PRICE, key: 'priceOotMerchants', name: 'OoT Merchants Prices', description: 'Sets the price of items sold by OoT merchants', cond: hasOoT },
 { ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shop Prices', description: 'Sets the price of items sold inside MM shops', cond: hasMM },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle', cond: hasMM },
 {
