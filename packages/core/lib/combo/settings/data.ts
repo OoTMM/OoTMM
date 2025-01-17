@@ -900,7 +900,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Change the behavior of moon crashing',
   values: [
-    { value: 'reset', name:  'Reset',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
+    { value: 'reset', name:  'Last Save',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
     { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Saving is enabled on the Clock Tower Roof.' },
   ],
   cond: hasMM,
