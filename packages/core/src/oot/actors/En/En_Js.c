@@ -6,7 +6,7 @@
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x27c) = (h); } while (0)
 #define PRICE (gComboConfig.prices[PRICES_OOT_MERCHANTS + 0x01])
 
-void EnJs_ItemQuery(ComboItemQuery* q)
+static void EnJs_ItemQuery(ComboItemQuery* q)
 {
     memset(q, 0, sizeof(ComboItemQuery));
     q->gi = GI_OOT_BOMBCHU_20;

@@ -28,23 +28,15 @@ void EnDs_BluePotionItemQuery(ComboItemQuery* q)
         q->ovFlags |= OVF_RENEW;
 }
 
-static void EnDs_BluePotionItemOverride(ComboItemOverride* o)
-{
-    ComboItemQuery q;
-
-    EnDs_BluePotionItemQuery(&q);
-    comboItemOverride(o, &q);
-}
-
 static void EnDs_BluePotionTextOverride(PlayState* play)
 {
     char* b;
-    ComboItemOverride o;
+    ComboItemQuery q;
 
-    EnDs_BluePotionItemOverride(&o);
+    EnDs_BluePotionItemQuery(&q);
     b = play->msgCtx.textBuffer;
     comboTextAppendHeader(&b);
-    comboTextAppendItemName(&b, o.giRaw, TF_CAPITALIZE | TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q, TF_CAPITALIZE | TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_NL "How about " TEXT_COLOR_RED);
     comboTextAppendNum(&b, PRICE);
     comboTextAppendStr(&b, " Rupees");
