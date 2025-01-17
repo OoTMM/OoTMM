@@ -248,6 +248,7 @@ Kakariko Wonder Item,                                       wonder,         NONE
 Kakariko Butterfly 1,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x0002e,                    FAIRY
 Kakariko Butterfly 2,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x1002e,                    NOTHING
 Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
+Kakariko Potion Shop Buy Blue Potion,                       npc,            NONE,                 KAKARIKO_POTION_SHOP,           WITCH_BLUE_POTION,          POTION_BLUE
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
 Kakariko Bazaar Item 2,                                     shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
 Kakariko Bazaar Item 3,                                     shop,           NONE,                 BAZAAR,                         0x32,                       ARROWS_30
@@ -693,6 +694,7 @@ Fishing Pond Adult Loach,                                   fish,           NONE
 Lon Lon Ranch Malon Song,                                   npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
 Lon Lon Ranch Silo HP,                                      collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
 Lon Lon Ranch Talon Bottle,                                 npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK
+Lon Lon Ranch Talon Buy Milk,                               npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_MILK,                 MILK
 Lon Lon Ranch Talon House Pot 1,                            pot,            NONE,                 RANCH_HOUSE_SILO,               0x0200,                     RUPEE_BLUE
 Lon Lon Ranch Talon House Pot 2,                            pot,            NONE,                 RANCH_HOUSE_SILO,               0x0201,                     RUPEE_BLUE
 Lon Lon Ranch Talon House Pot 3,                            pot,            NONE,                 RANCH_HOUSE_SILO,               0x0202,                     RUPEE_GREEN
@@ -1052,6 +1054,7 @@ Gerudo Fortress Fairy Fountain Fairy 5,                     fairy,          NONE
 Gerudo Fortress Fairy Fountain Fairy 6,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52400,                    FAIRY
 Gerudo Fortress Fairy Fountain Fairy 7,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62400,                    FAIRY
 Gerudo Fortress Fairy Fountain Fairy 8,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72400,                    FAIRY
+Haunted Wasteland Carpet Merchant,                          npc,            NONE,                 HAUNTED_WASTELAND,              CARPET_MERCHANT,            BOMBCHU_20
 Haunted Wasteland Chest,                                    chest,          HAUNTED_WASTELAND,    HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
 Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
 Haunted Wasteland Pot 1,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0000,                     RECOVERY_HEART

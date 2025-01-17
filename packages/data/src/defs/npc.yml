@@ -14,8 +14,8 @@ OOT_LOST_WOODS_MEMORY:          0x0c
 OOT_THEATER_STICKS:             0x0d
 OOT_THEATER_NUTS:               0x0e
 OOT_BEAN_SELLER:                0x0f
-#OOT_SCRUB_STICKS:               0x10
-#OOT_SCRUB_NUTS:                 0x11
+OOT_WITCH_BLUE_POTION:          0x10
+OOT_TALON_MILK:                 0x11
 #OOT_SCRUB_HP:                   0x12
 OOT_GS_10:                      0x13
 OOT_GS_20:                      0x14
