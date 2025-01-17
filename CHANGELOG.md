@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Change the Old Hag checks in MM, now the two checks are separate instead of progressing into each other.
 - Completely reworked the stray fairy item model to be much closer to the actual fairies.
 - Path hints now tell the exact world the path corresponds to in multiworld.
+- Logic can now expect Sunlight Arrows to go through Spirit Temple child climb.
 
 ### Fixed
 
