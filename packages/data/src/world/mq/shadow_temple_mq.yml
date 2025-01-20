@@ -412,7 +412,6 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Wall Maze Corridor To Triple Spinning Pots Room": "true"
-  events:
   locations:
     "MQ Shadow Temple Triple Pot Key": "true" #Literally in the open, don't need to blow anything up.
     "MQ Shadow Temple Wonder Item": "can_use_bow"
