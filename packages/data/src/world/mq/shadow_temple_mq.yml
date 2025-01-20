@@ -137,7 +137,7 @@
 "Shadow Temple Enclosed Shortcut Area":
   dungeon: Shadow
   exits:
-    "Shadow Temple Scythe Room": "has_lens" #Maybe needs something to get past skultulla too.
+    "Shadow Temple Scythe Room": "true" #Maybe needs something to get past skultulla too.
     "Shadow Temple Area Before Boat Ride": "event(SHADOW_MQ_SHORTCUT_BLOCK_PUSHED)" #TODO: Add the glitch to skip this, remember it needs climb anywhere disabled.
   locations:
     "MQ Shadow Temple Boat Passage Chest": "has_lens"
