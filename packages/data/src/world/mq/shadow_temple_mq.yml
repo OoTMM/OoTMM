@@ -185,8 +185,8 @@
     "MQ Shadow Temple SR Invisible Blades Time Block": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere)" #TODO: Add trick for Like-Like boosting onto the block.
     "MQ Shadow Temple Second Silver Rupee Visible Chest": "silver_rupees_shadow_blades"
     "MQ Shadow Temple Second Silver Rupee Invisible Chest": "silver_rupees_shadow_blades && has_lens"
-    "MQ Shadow Temple Heart Invisible Blades 1": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang"
-    "MQ Shadow Temple Heart Invisible Blades 2": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang"
+    "MQ Shadow Temple Heart Invisible Blades 1": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang" #TODO: Add trick for Like-Like boosting onto the block.
+    "MQ Shadow Temple Heart Invisible Blades 2": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang" #TODO: Add trick for Like-Like boosting onto the block.
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
