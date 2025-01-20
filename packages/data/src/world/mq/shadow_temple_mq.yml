@@ -182,7 +182,7 @@
     "MQ Shadow Temple SR Invisible Blades Ground 7": "true"
     "MQ Shadow Temple SR Invisible Blades Ground 8": "true"
     "MQ Shadow Temple SR Invisible Blades Ground 9": "true"
-    "MQ Shadow Temple SR Invisible Blades Time Block": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere)"
+    "MQ Shadow Temple SR Invisible Blades Time Block": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere)" #TODO: Add trick for Like-Like boosting onto the block.
     "MQ Shadow Temple Second Silver Rupee Visible Chest": "silver_rupees_shadow_blades"
     "MQ Shadow Temple Second Silver Rupee Invisible Chest": "silver_rupees_shadow_blades && has_lens"
     "MQ Shadow Temple Heart Invisible Blades 1": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang"
