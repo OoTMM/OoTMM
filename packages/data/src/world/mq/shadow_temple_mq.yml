@@ -190,7 +190,7 @@
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Upper Huge Pit After Drop": "event(SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE) || hookshot_anywhere"
+    "Shadow Temple Upper Huge Pit After Drop": "event(SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE) || hookshot_anywhere" #TODO: via Xeno: "You can climb anywhere if you walk the seam by the guillotine."
     "Shadow Temple Falling Spikes Room Entrance": "event(SHADOW_MQ_LOWER_HUGE_PIT_FALLING_SPIKES_GATE_SWITCH)"
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "has_lens && has_hover_boots"
   events:
