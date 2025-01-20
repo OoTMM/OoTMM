@@ -227,7 +227,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "small_keys_shadow(3)"
-    "Shadow Temple Ivisible Spike Floors Room Upper Ledge Before Door": "(event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) && (can_longshot || (has_tunic_goron_strict && can_hookshot))) || climb_anywhere || hookshot_anywhere" #Goron Tunic acts on the spikes as well, allowing you to use hookshot while standing on the spikes.
+    "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "(event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) && (can_longshot || (has_tunic_goron_strict && can_hookshot))) || climb_anywhere || hookshot_anywhere" #Goron Tunic acts on the spikes as well, allowing you to use hookshot while standing on the spikes.
     "Shadow Temple Dual Staircase Stalfos Room": "silver_rupees_shadow_spikes_mq"
   events:
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
@@ -252,7 +252,7 @@
     SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "MQ Shadow Temple Stalfos Room Chest": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
-"Shadow Temple Ivisible Spike Floors Room Upper Ledge Before Door":
+"Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floors Room": "true"
@@ -260,7 +260,7 @@
 "Shadow Temple Wind Tunnel First Part":
   dungeon: Shadow
   exits:
-    "Shadow Temple Ivisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
+    "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
     "Shadow Temple Wind Tunnel After Pit Before Drop": "(has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din) && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
