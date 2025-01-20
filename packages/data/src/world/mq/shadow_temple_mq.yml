@@ -28,7 +28,7 @@
 "Shadow Temple Spinner Room Hallway to Textured Maze":
   dungeon: Shadow
   exits:
-    "Shadow Temple Truth Spinner": "has_lens && has_explosives"
+    "Shadow Temple Truth Spinner": "(has_lens && has_explosives) || trick(OOT_PASS_COLLISION)"
     "Shadow Temple Textured Maze Room Lens Alcove to Spinner": "small_keys_shadow(6)"
 "Shadow Temple Textured Maze Room Lens Alcove to Spinner":
   dungeon: Shadow
@@ -144,7 +144,7 @@
 "Shadow Temple First Beamos Fork Room Solid Wall Alcove to Guillotine Hallway":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Beamos Fork": "has_explosives"
+    "Shadow Temple First Beamos Fork": "has_explosives || trick(OOT_PASS_COLLISION)"
     "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit": "small_keys_shadow(2)"
 "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit":
   dungeon: Shadow
