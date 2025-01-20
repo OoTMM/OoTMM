@@ -59,8 +59,8 @@
     SHADOW_MQ_TEXTURED_MAZE_SIDE_ROOM_CLEAR: "soul_redead_gibdo && (can_use_din || (can_play_sun && (has_weapon || can_use_sticks)))"
   locations:
     "MQ Shadow Temple Compass Chest": "event(SHADOW_MQ_TEXTURED_MAZE_SIDE_ROOM_CLEAR)"
-    "MQ Shadow Temple Pot Compass Room 1": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
-    "MQ Shadow Temple Pot Compass Room 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
+    "MQ Shadow Temple Pot Compass Room 1": "can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
+    "MQ Shadow Temple Pot Compass Room 2": "can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
 "Shadow Temple Textured Maze Second Half":
   dungeon: Shadow
   exits:
