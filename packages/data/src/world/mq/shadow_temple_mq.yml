@@ -67,7 +67,7 @@
     "Shadow Temple Textured Maze First Half": "has_lens && can_play_time"
     "Shadow Temple Textured Maze Room Lens Alcove to Dead Hand Room": "has_lens && event(SHADOW_MQ_TEXTURED_MAZE_LOWER_ICE_BLOCK)"
   events:
-    SHADOW_MQ_TEXTURED_MAZE_LOWER_ICE_BLOCK: "can_use_bow || can_use_slingshot"
+    SHADOW_MQ_TEXTURED_MAZE_LOWER_ICE_BLOCK: "can_hit_triggers_distance"
   locations:
     "MQ Shadow Temple Flying Pot Entrance Maze 3": "soul_flying_pot"
     "MQ Shadow Temple Flying Pot Entrance Maze 4": "soul_flying_pot"
