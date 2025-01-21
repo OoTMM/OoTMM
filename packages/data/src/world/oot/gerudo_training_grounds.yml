@@ -101,7 +101,7 @@
     "Gerudo Training Grounds SR Water 2": "can_swim || can_hookshot"
     "Gerudo Training Grounds SR Water 3": "true"
     "Gerudo Training Grounds SR Water 4": "can_swim || can_hookshot"
-    "Gerudo Training Grounds SR Water 5": "can_swim || can_hookshot"
+    "Gerudo Training Grounds SR Water 5": "can_swim || hookshot_anywhere"
 "Gerudo Training Grounds Hammer":
   dungeon: GTG
   exits:
