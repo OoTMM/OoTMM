@@ -139,7 +139,7 @@
   exits:
     "Shadow Temple Scythe Room": "true" #Maybe needs something to get past skultulla too.
     "Shadow Temple Area Before Boat Ride": "event(SHADOW_MQ_SHORTCUT_BLOCK_PUSHED)" #TODO: Add the glitch to jump through wall and skip this.
-    #"Shadow Temple Area Above Shortcut Enclosure": "climb_anywere" #TODO: Add the glitch.
+    "Shadow Temple Area Above Shortcut Enclosure": "climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY)"
   locations:
     "MQ Shadow Temple Boat Passage Chest": "has_lens"
 "Shadow Temple First Beamos Fork Room Solid Wall Alcove to Guillotine Hallway":
