@@ -1388,7 +1388,7 @@
     "Near Swamp Grotto": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Grotto":
-  region: ENTRANCE
+  region: SOUTHERN_SWAMP
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
