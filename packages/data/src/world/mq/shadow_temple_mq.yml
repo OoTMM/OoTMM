@@ -449,5 +449,5 @@
 "Shadow Temple Pre-Boss":
   dungeon: Shadow
   exits:
-    "Shadow Temple Pre-Boss Room": "has_lens && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Shadow Temple Pre-Boss Room": "has_lens && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
     "Shadow Temple Boss": "boss_key(BOSS_KEY_SHADOW)"
