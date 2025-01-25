@@ -374,7 +374,7 @@
     "MQ Shadow Temple GS After Boat": "gs && ((event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) && (can_boomerang || can_hookshot)) || can_longshot)"
     "MQ Shadow Temple Pot After Boat After Bridge 1": "true"
     "MQ Shadow Temple Pot After Boat After Bridge 2": "true"
-    "MQ Shadow Temple Heart Pre-Boss Lower": "is_adult || hookshot_anywhere || climb_anywhere || (is_child && can_hookshot && event(SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH))" #Child can jump back onto the time block after hookshotting the target.
+    "MQ Shadow Temple Heart Pre-Boss Lower": "is_adult || hookshot_anywhere || climb_anywhere || (can_hookshot && event(SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH))" #Child can jump back onto the time block after hookshotting the target.
 "Shadow Temple Area After Boat After Bridge High Ledge":
   dungeon: Shadow
   exits:
