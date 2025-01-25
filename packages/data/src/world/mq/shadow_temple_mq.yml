@@ -126,7 +126,7 @@
     "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room": "event(SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR)" #Don't need SR itself to exit, only the skultullas. See below comment.
     "Shadow Temple Enclosed Shortcut Area": "has_lens" #Maybe needs something to get past skultulla too.
   events:
-    SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR: "soul_skulltula && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)" #TODO: Din's can kill the skultullas, even the one behind the barred wall that needs SR to lower.
+    SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR: "soul_skulltula && (can_use_din || (silver_rupees_shadow_scythe && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)))"
   locations:
     "MQ Shadow Temple SR Scythe 1": "true"
     "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
