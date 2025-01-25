@@ -157,6 +157,7 @@
   exits:
     "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit": "can_hookshot || climb_anywhere"
     "Shadow Temple Upper Huge Pit Guillotine Section Before Drop": "true" #Can avoid all beamos and skultullas.
+    "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "climb_anywhere"
 "Shadow Temple Upper Huge Pit Guillotine Section Before Drop":
   dungeon: Shadow
   exits:
