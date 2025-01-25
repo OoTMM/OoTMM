@@ -166,14 +166,19 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Huge Pit Guillotine Section Before Drop": "hookshot_anywhere"
-    "Shadow Temple Upper Huge Pit East Invisible Scythe Room": "has_lens"
+    "Shadow Temple Upper Huge Pit East Ledge Before Invisible Scythe Room": "has_lens"
     "Shadow Temple Lower Huge Pit": "event(SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE) || has_hover_boots || hookshot_anywhere" #Child can *easily* reach with hovers+fast bunny hood without the platforms. Child can also reach with just hovers but its tight. Adult reaches with hovers only no problems.
   events:
     SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE: "has_fire" #If HSW (OoT) is added as a bottle content, maybe can work here because it's below you.
-"Shadow Temple Upper Huge Pit East Invisible Scythe Room":
+"Shadow Temple Upper Huge Pit East Ledge Before Invisible Scythe Room":
   dungeon: Shadow
   exits:
-    "Shadow Temple Upper Huge Pit After Drop": "true"
+    "Shadow Temple Upper Huge Pit After Drop": "has_lens"
+    "Shadow Temple Invisible Scythe Room": "true"
+"Shadow Temple Invisible Scythe Room":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Upper Huge Pit East Ledge Before Invisible Scythe Room": "true"
   locations: #Should we add lens for the SR checks as a mercy for later damage settings?
     "MQ Shadow Temple SR Invisible Blades Ground 1": "true"
     "MQ Shadow Temple SR Invisible Blades Ground 2": "true"
