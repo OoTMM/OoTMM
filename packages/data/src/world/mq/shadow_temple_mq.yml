@@ -229,7 +229,7 @@
 "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors":
   dungeon: Shadow
   exits:
-    "Shadow Temple Lower Huge Pit": "has_lens && has_hover_boots"
+    "Shadow Temple Lower Huge Pit": "has_lens && (has_hover_boots || hookshot_anywhere)"
     "Shadow Temple Invisible Spike Floors Room": "small_keys_shadow(3)"
     "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "climb_anywhere"
 "Shadow Temple Invisible Spike Floors Room":
