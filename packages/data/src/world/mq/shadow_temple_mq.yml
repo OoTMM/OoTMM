@@ -445,7 +445,7 @@
     "Shadow Temple Area After Boat After Bridge": "true"
     "Shadow Temple Pre-Boss": "has_lens && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
   locations:
-    "MQ Shadow Temple GS Pre-Boss": "gs && has_lens && (hookshot_anywhere || ((climb_anywhere && has_ranged_weapon) || (has_hover_boots && can_collect_distance)))" #A lot of overlap bewtween macros.
+    "MQ Shadow Temple GS Pre-Boss": "gs && has_lens && (hookshot_anywhere || ((climb_anywhere && (has_ranged_weapon || has_explosives)) || (has_hover_boots && can_collect_distance)))" #A lot of overlap bewtween macros.
 "Shadow Temple Pre-Boss":
   dungeon: Shadow
   exits:
