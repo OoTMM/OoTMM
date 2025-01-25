@@ -358,7 +358,7 @@
   events:
     SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL: "can_use_bow"
   locations:
-    "MQ Shadow Temple GS After Boat": "gs && (can_hookshot || (can_boomerang && event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL)))" #The angle is a little tricky though, but totally doable. Boomerang, though, is possible without the bridge but should be a trick as you have to make the Boomerang go trough the wall with movement after launch.
+    "MQ Shadow Temple GS After Boat": "gs && (can_hookshot || (can_boomerang && event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL)))" #The angle is a little tricky though, but totally doable. Boomerang, though, is possible without the bridge but should be a trick. TODO: 2 tricks: boomerang no bridge, and falling to skultulla after killing it.
     "MQ Shadow Temple Pot After Boat Before Bridge 1": "true"
     "MQ Shadow Temple Pot After Boat Before Bridge 2": "true"
 "Shadow Temple Area After Boat After Bridge":
