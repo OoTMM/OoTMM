@@ -26,7 +26,6 @@ All notable changes to this project will be documented in this file.
 
 - Fix a bug where magical rupee would sometimes require a scene reload to work properly.
 - Fix an odd interaction between open MM dungeons and the moon crash.
-- Fix Mirror Shield macro required 2 progressive shields if MM Deku Shield was on, instead of 3.
 
 ## [27.0] - 2025-01-04
 
