@@ -353,7 +353,7 @@
     #"Shadow Temple On The Boat": "false"
     #"Shadow Temple Boarding Boat Landing Area": "false" #Maybe with bomb hovering glitches later.
     "Shadow Temple Invisible Wall Maze Corridor To After Boat": "event(SHADOW_MQ_AREA_AFTER_BOAT_AFTER_BRIDGE_HIGH_LEDGE_SWITCH)"
-    "Shadow Temple Area After Boat After Bridge": "event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) || longshot_anywhere || climb_anywhere"
+    "Shadow Temple Area After Boat After Bridge": "event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) || (can_longshot && event(SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH)) || longshot_anywhere || climb_anywhere"
     "Shadow Temple Area After Boat After Bridge High Ledge": "longshot_anywhere || climb_anywhere"
   events:
     SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL: "can_use_bow"
@@ -369,7 +369,7 @@
     "Shadow Temple Pre-Boss Room": "true"
   events:
     SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL: "can_use_bow || has_bombflowers"
-    SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH: "can_play_time && can_hit_triggers_distance"
+    SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH: "can_play_time && can_hit_triggers_distance" #Time block exists as both child and adult.
   locations:
     "MQ Shadow Temple GS After Boat": "gs && ((event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) && (can_boomerang || can_hookshot)) || can_longshot)"
     "MQ Shadow Temple Pot After Boat After Bridge 1": "true"
