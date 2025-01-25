@@ -281,7 +281,7 @@
   exits:
     "Shadow Temple Wind Tunnel After Pit Before Drop": "can_hookshot || climb_anywhere"
     "Shadow Temple Wind Tunnel Hint Room": "true"
-    "Shadow Temple Wind Tunnel Lens Alcove": "has_lens && (has_hover_boots || hookshot_anywhere)"
+    "Shadow Temple Wind Tunnel Lens Alcove": "has_lens" #Adult can just make it with a roll jump, and the fan pushes child.
 "Shadow Temple Wind Tunnel Hint Room":
   dungeon: Shadow
   exits:
