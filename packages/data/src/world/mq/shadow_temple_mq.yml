@@ -326,7 +326,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Area Before Boat Ride": "true"
-    "Shadow Temple Boarding Boat Landing Area": "longshot_anywhere"
+    "Shadow Temple Boarding Boat Landing Area": "can_longshot"
     "Shadow Temple On The Boat": "hookshot_anywhere"
   locations:
     "MQ Shadow Temple Heart Shortcut 1": "true"
