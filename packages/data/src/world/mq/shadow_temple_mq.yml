@@ -364,7 +364,7 @@
 "Shadow Temple Area After Boat After Bridge":
   dungeon: Shadow
   exits:
-    "Shadow Temple Area After Boat Initial Landing": "(event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) && (is_adult || hookshot_anywhere || climb_anywhere)) || longshot_anywhere"
+    "Shadow Temple Area After Boat Initial Landing": "(event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) && (is_adult || has_hover_boots || hookshot_anywhere)) || climb_anywhere || longshot_anywhere"
     "Shadow Temple Area After Boat After Bridge High Ledge": "(event(SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH) && (can_longshot || hookshot_anywhere)) || longshot_anywhere || climb_anywhere"
     "Shadow Temple Pre-Boss Room": "true"
   events:
