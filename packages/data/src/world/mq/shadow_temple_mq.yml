@@ -368,7 +368,7 @@
     "Shadow Temple Area After Boat After Bridge High Ledge": "(event(SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH) && can_longshot) || hookshot_anywhere || climb_anywhere"
     "Shadow Temple Pre-Boss Room": "true"
   events:
-    SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL: "can_use_bow || has_bombflowers"
+    SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL: "can_use_bow || has_bombflowers || can_use_din"
     SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH: "can_play_time && can_hit_triggers_distance" #Time block exists as both child and adult.
   locations:
     "MQ Shadow Temple GS After Boat": "gs && ((event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL) && (can_boomerang || can_hookshot)) || can_longshot)"
