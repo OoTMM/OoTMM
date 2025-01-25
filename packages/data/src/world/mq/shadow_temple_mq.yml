@@ -318,7 +318,7 @@
     "Shadow Temple After Wind Tunnel Gibdos Room": "small_keys_shadow(5)"
     "Shadow Temple Enclosed Shortcut Area": "event(SHADOW_MQ_SHORTCUT_BLOCK_PUSHED)"
     "Shadow Temple Boarding Boat Landing Area": "(event(SHADOW_MQ_SHORTCUT_BLOCK_PUSHED) && is_adult) || climb_anywhere || can_hookshot"
-    "Shadow Temple Area Above Shortcut Enclosure": "hookshot_anywhere" #Climb anywhere does not work.
+    "Shadow Temple Area Above Shortcut Enclosure": "hookshot_anywhere || climb_anywhere"
     "Shadow Temple On The Boat": "hookshot_anywhere || climb_anywhere" #Climb Anywhere works on the wheel. TODO: Add as trick - "Adult can jump onto the wheel and climb from there."
   events:
     SHADOW_MQ_SHORTCUT_BLOCK_PUSHED: "has_goron_bracelet"
