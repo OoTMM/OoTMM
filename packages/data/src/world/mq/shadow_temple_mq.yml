@@ -295,7 +295,7 @@
 "Shadow Temple Wind Tunnel Lens Alcove":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind Tunnel After Drop": "has_lens && (has_hover_boots || hookshot_anywhere)"
+    "Shadow Temple Wind Tunnel After Drop": "has_lens && (is_adult || has_hover_boots || hookshot_anywhere || climb_anywhere)" #Can use climb anywhere to climb onto the fan next to the alcove then jump to the center area.
     "Shadow Temple After Wind Tunnel Gibdos Room": "true"
 "Shadow Temple After Wind Tunnel Gibdos Room":
   dungeon: Shadow
