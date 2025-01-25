@@ -160,11 +160,12 @@
 "Shadow Temple Upper Huge Pit Guillotine Section Before Drop":
   dungeon: Shadow
   exits:
-    "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "hookshot_anywhere" #Climb anywhere does not work. TODO: test if hook NON-anywhere works on those side barriers that look wooden
+    "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "true"
     "Shadow Temple Upper Huge Pit After Drop": "true"
 "Shadow Temple Upper Huge Pit After Drop":
   dungeon: Shadow
   exits:
+    "Shadow Temple Upper Huge Pit Guillotine Section Before Drop": "hookshot_anywhere"
     "Shadow Temple Upper Huge Pit East Invisible Scythe Room": "has_lens"
     "Shadow Temple Lower Huge Pit": "event(SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE) || has_hover_boots || hookshot_anywhere" #Child can *easily* reach with hovers+fast bunny hood without the platforms. Child can also reach with just hovers but its tight. Adult reaches with hovers only no problems.
   events:
