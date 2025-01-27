@@ -482,15 +482,23 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
 
     const key = checkKey(c);
     const itemGi = gi(settings, game, item.item, true);
-    const b = new Uint8Array(8);
+    const b = new Uint8Array(16);
     bufWriteU32BE(b, 0, key);
     bufWriteU16BE(b, 4, item.player + 1);
     bufWriteU16BE(b, 6, itemGi);
+    let cloakGi = 0xffff;
+    if (item.item === Items.OOT_TRAP_ICE) {
+      cloakGi = gi(settings, 'oot', Items.OOT_ARROW_LIGHT, false);
+    }
+    bufWriteU16BE(b, 8, cloakGi);
     buffers.push(b);
   }
   /* Sort by key ascending */
   buffers.sort((a, b) => bufReadU32BE(a, 0) < bufReadU32BE(b, 0) ? -1 : 1);
-  return padBuffer16(concatUint8Arrays(buffers));
+  const end = new Uint8Array(16);
+  end.fill(0xff);
+  buffers.push(end);
+  return concatUint8Arrays(buffers);
 };
 
 const HINT_OFFSETS = {
