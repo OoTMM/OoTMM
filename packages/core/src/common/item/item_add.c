@@ -1450,6 +1450,12 @@ static int addItemGsTokenOcean(PlayState* play, u8 itemId, s16 gi, u16 param)
     return ++gMmSave.info.skullCountOcean;
 }
 
+static int addItemIceTrap(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.pendingIceTraps++;
+    return 0;
+}
+
 static void fillMagicOot(PlayState* play)
 {
     int level;
@@ -1955,6 +1961,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemNutsUpgradeMm,
     addItemStoneAgonyMm,
     addItemSpinUpgradeOot,
+    addItemIceTrap,
 };
 
 extern const u8 kAddItemFuncs[];
