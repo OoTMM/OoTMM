@@ -552,7 +552,7 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, PlayState* play)
     }
     else if (csmcEnabled())
     {
-        csmcType = csmcFromItem(o.gi);
+        csmcType = csmcFromItemCloaked(o.gi, o.cloakGi);
     }
     else
     {

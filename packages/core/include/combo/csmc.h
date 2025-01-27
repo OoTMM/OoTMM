@@ -69,24 +69,24 @@ typedef struct Actor Actor;
 /* Generic */
 void*   csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int mirror);
 void*   csmcLoadTextureEx(const CsmcDisplayList* dl);
-int     csmcFromItem(s16 gi);
+int     csmcFromItemCloaked(s16 gi, s16 cloakGi);
 int     csmcEnabled(void);
 int     csmcEnabledSkulltula(void);
 int     csmcEnabledCow(void);
 
 /* Chest */
-void    csmcChestInit(Actor* this, PlayState* play, s16 gi);
-void    csmcChestPreDraw(Actor* this, PlayState* play, s16 gi);
-int     csmcChestLarge(s16 gi);
+void    csmcChestInit(Actor* this, PlayState* play, s16 gi, s16 cloakGi);
+void    csmcChestPreDraw(Actor* this, PlayState* play, s16 gi, s16 cloakGi);
+int     csmcChestLarge(s16 gi, s16 cloakGi);
 
 /* Pots */
-void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, int def);
+void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, s16 cloakGi, int def);
 
 /* Grass */
-void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct);
+void csmcGrassPreDraw(PlayState* play, s16 gi, s16 cloakGi, int def, int alt, int direct);
 
 /* GS */
-void csmcGsPreDraw(PlayState* play, s16 gi);
+void csmcGsPreDraw(PlayState* play, s16 gi, s16 cloakGi);
 
 const Color_RGB8* csmcTypeColor(int type);
 

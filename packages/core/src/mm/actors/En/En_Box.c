@@ -49,15 +49,12 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
     }
 }
 
-static s16 EnBox_Item(Actor* this, PlayState* play)
+static void EnBox_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play)
 {
     ComboItemQuery q;
-    ComboItemOverride ov;
 
     EnBox_ItemQuery(&q, this, play);
-    comboItemOverride(&ov, &q);
-
-    return ov.giRaw;
+    comboItemOverride(o, &q);
 }
 
 void EnBox_GiveItemDefaultRange(Actor* actor, PlayState* play, s16 gi)
@@ -73,25 +70,25 @@ PATCH_CALL(0x80868fe0, EnBox_GiveItemDefaultRange);
 void EnBox_InitWrapper(Actor* this, PlayState* play)
 {
     ActorCallback init;
-    s16 gi;
+    ComboItemOverride o;
 
     /* Init the chest */
     init = actorAddr(ACTOR_EN_BOX, 0x808680ac);
     init(this, play);
 
     /* Resize chest */
-    gi = EnBox_Item(this, play);
-    csmcChestInit(this, play, gi);
+    EnBox_ItemOverride(&o, this, play);
+    csmcChestInit(this, play, o.giRaw, o.cloakGi);
 }
 
 void EnBox_DrawWrapper(Actor* this, PlayState* play)
 {
     ActorCallback draw;
-    s16 gi;
+    ComboItemOverride o;
 
     /* Prepare the segments */
-    gi = EnBox_Item(this, play);
-    csmcChestPreDraw(this, play, gi);
+    EnBox_ItemOverride(&o, this, play);
+    csmcChestPreDraw(this, play, o.giRaw, o.cloakGi);
 
     /* Draw */
     draw = actorAddr(ACTOR_EN_BOX, 0x808698f4);

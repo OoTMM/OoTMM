@@ -859,7 +859,7 @@ static int ObjComb_CsmcType(Actor_ObjComb* this, PlayState* play)
         return CSMC_MAJOR;
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    return csmcFromItem(o.gi);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
 static void ObjComb_Draw(Actor_ObjComb* this, PlayState* play)

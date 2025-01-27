@@ -300,7 +300,7 @@ static int ObjTaru_CsmcType(Actor_ObjTaru* this)
         return CSMC_MAJOR;
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    return csmcFromItem(o.gi);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
 static const Gfx sListLoaderTextureDefault[] = {

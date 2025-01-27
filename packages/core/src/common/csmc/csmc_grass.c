@@ -43,7 +43,7 @@ static const CsmcDisplayList kGrassAltDlist[] = {
     { CUSTOM_GRASS_ALT_ADDR,    kColorMap,     CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
 };
 
-static int csmcGrassId(s16 gi, int def)
+static int csmcGrassId(s16 gi, s16 giCloak, int def)
 {
     int csmcId;
 
@@ -52,7 +52,7 @@ static int csmcGrassId(s16 gi, int def)
     if (!csmcEnabled())
         return CSMC_GRASS_MAJOR;
 
-    csmcId = csmcFromItem(gi);
+    csmcId = csmcFromItemCloaked(gi, giCloak);
     switch (csmcId)
     {
     case CSMC_NORMAL:       return def;
@@ -68,7 +68,7 @@ static int csmcGrassId(s16 gi, int def)
     }
 }
 
-void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct)
+void csmcGrassPreDraw(PlayState* play, s16 gi, s16 cloakGi, int def, int alt, int direct)
 {
     const CsmcDisplayList* dlists;
     int id;
@@ -79,7 +79,7 @@ void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct)
     else
         dlists = kGrassStandardDlist;
 
-    id = csmcGrassId(gi, def);
+    id = csmcGrassId(gi, cloakGi, def);
     list = csmcLoadTextureEx(&dlists[id]);
 
     OPEN_DISPS(play->state.gfxCtx);

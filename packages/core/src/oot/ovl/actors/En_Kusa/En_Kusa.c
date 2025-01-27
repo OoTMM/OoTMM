@@ -574,7 +574,7 @@ void EnKusa_Draw(Actor* thisx, PlayState* play)
         alt = 0;
     else
         alt = 1;
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt, 0);
+    csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, alt, 0);
 
     /* Draw the actor */
     EnKusa_DrawImpl(this, play);

@@ -1385,7 +1385,7 @@ static void EnKusa2_DrawImpl(EnKusa2* this, PlayState* play)
         o.gi = GI_NONE;
 
     /* Prepare */
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
+    csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
     Gfx_DrawDListOpa(play, gKusaBushType1DL);

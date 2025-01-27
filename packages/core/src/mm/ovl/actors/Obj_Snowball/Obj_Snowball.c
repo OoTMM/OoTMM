@@ -919,7 +919,7 @@ static int ObjSnowball_CsmcType(Actor_ObjSnowball* this)
         return CSMC_MAJOR;
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    return csmcFromItem(o.gi);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
 void ObjSnowball_Draw(Actor_ObjSnowball* this, PlayState* play) {

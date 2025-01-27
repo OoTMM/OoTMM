@@ -578,7 +578,7 @@ static int ObjKibako2_CsmcType(Actor_ObjKibako2* this)
     if (!csmcEnabled())
         return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
 
-    return csmcFromItem(o.gi);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
 static void ObjKibako2_PreDraw(PlayState* play, const Gfx* loader, void* tex1, void* tex2)

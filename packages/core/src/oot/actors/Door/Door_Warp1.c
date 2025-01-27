@@ -94,7 +94,7 @@ static void DoorWarp1_ItemOverride(ComboItemOverride* o, const BlueWarpData* dat
     q.id = data->npc;
     q.gi = data->gi;
 
-    comboItemOverride(&o, &q);
+    comboItemOverride(o, &q);
 }
 
 int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
@@ -141,7 +141,6 @@ void DoorWarp1_AfterDrawWarp(Actor* this, PlayState* play)
     float angle;
     const BlueWarpData* data;
     ComboItemOverride o;
-    s16 gi;
 
     data = DoorWarp1_GetData(play);
     if (!data)

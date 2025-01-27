@@ -253,14 +253,14 @@ static const Gfx kDlistGlitter[] = {
     gsSPEndDisplayList(),
 };
 
-static u32 Draw_GetGlitterColor(s16 gi)
+static u32 Draw_GetGlitterColor(s16 gi, s16 cloakGi)
 {
     int type;
 
     if (!csmcEnabled())
         type = CSMC_SPIDER;
     else
-        type = csmcFromItem(gi);
+        type = csmcFromItemCloaked(gi, cloakGi);
 
     switch (type)
     {
@@ -277,7 +277,7 @@ static u32 Draw_GetGlitterColor(s16 gi)
     }
 }
 
-void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi)
+void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi, s16 giCloak)
 {
     void* tex;
     float alpha;
@@ -288,7 +288,7 @@ void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi)
     u8 b;
 
     /* Get color */
-    color = Draw_GetGlitterColor(gi);
+    color = Draw_GetGlitterColor(gi, giCloak);
     r = (color >> 16) & 0xff;
     g = (color >>  8) & 0xff;
     b = (color >>  0) & 0xff;

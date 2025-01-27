@@ -32,11 +32,11 @@ void BgMoriHineri_DrawWrapper(Actor* this, PlayState* play)
 
     /* Init CSMC */
     BgMoriHineri_ItemOverride(&o, 0);
-    csmcChestPreDraw(this, play, o.gi);
+    csmcChestPreDraw(this, play, o.gi, o.cloakGi);
 
     /* Check for CSMC and small chest */
     sIsSmallChest = 0;
-    if (csmcChestLarge(o.gi) == 0)
+    if (csmcChestLarge(o.gi, o.cloakGi) == 0)
     {
         sIsSmallChest = 1;
         f = actorAddr(0x068, 0x80913d74);
