@@ -506,7 +506,7 @@ const gameChecks = (worldId: number, opts: Options, settings: Settings, game: Ga
     bufWriteU16BE(b, 4, item.player + 1);
     bufWriteU16BE(b, 6, itemGi);
     let cloakGi = 0;
-    if (item.item === Items.OOT_TRAP_ICE) {
+    if (item.item === Items.OOT_TRAP_ICE && settings.cloakIceTraps) {
       cloakGi = makeCloakGi(key, opts.seed, settings, logic);
     }
     bufWriteU16BE(b, 8, cloakGi);

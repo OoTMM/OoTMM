@@ -1357,6 +1357,14 @@ export const SETTINGS = [{
   description: 'Enables CAMC for shuffled Cows',
   cond: (x: any) => x.csmc !== 'never',
 }, {
+  key: 'cloakIceTraps',
+  name: 'Cloak Ice Traps',
+  category: 'main.misc',
+  type: 'boolean',
+  default: true,
+  description: 'Makes Ice Traps look like different items.',
+  cond: hasOoT,
+}, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
   category: 'main.misc',
