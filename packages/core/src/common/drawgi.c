@@ -1547,6 +1547,7 @@ void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
 {
     static const float scale = 0.5f;
 
+    Matrix_Translate(0.f, -25.f, 0.f, MTXMODE_APPLY);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
