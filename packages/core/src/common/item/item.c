@@ -315,6 +315,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     {
         dst->player = data.player;
         gi = (s16)data.value;
+        dst->cloakGi = data.giCloak;
     }
 
     if (q->ovFlags & OVF_RENEW)

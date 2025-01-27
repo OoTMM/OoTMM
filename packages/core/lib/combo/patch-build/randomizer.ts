@@ -486,7 +486,7 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     bufWriteU32BE(b, 0, key);
     bufWriteU16BE(b, 4, item.player + 1);
     bufWriteU16BE(b, 6, itemGi);
-    let cloakGi = 0xffff;
+    let cloakGi = 0;
     if (item.item === Items.OOT_TRAP_ICE) {
       cloakGi = gi(settings, 'oot', Items.OOT_ARROW_LIGHT, false);
     }

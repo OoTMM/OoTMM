@@ -12,7 +12,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, PlayState* play)
     EnGirlA_ItemOverride(&o, this);
     if (o.gi != GI_MM_SOLD_OUT)
         MatrixRotation(this->angle, 1);
-    Draw_Gi(play, &this->base, o.gi, 0);
+    Draw_GiCloaked(play, &this->base, o.gi, o.cloakGi, 0);
 }
 
 void EnGirlA_AfterHandler(Actor_EnGirlA* this, PlayState* play)

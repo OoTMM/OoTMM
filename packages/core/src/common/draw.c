@@ -71,6 +71,14 @@ void Draw_Gi(PlayState* play, Actor* actor, s16 gi, int flags)
     drawGiParam(play, gi);
 }
 
+void Draw_GiCloaked(PlayState* play, Actor* actor, s16 gi, s16 cloakGi, int flags)
+{
+    if (cloakGi && gi != GI_MM_SOLD_OUT)
+        gi = cloakGi;
+
+    Draw_Gi(play, actor, gi, flags);
+}
+
 void comboPlayerDrawGI(PlayState* play, int drawGiMinusOne)
 {
     drawGiParamDrawId(play, (u8)(drawGiMinusOne + 1), playerDrawGiParam);

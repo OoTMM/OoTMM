@@ -176,6 +176,7 @@ typedef struct ComboItemOverride
     u8  playerFrom;
     s16 giRaw;
     s16 gi;
+    s16 cloakGi;
 }
 ComboItemOverride;
 

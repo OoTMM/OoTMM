@@ -18,7 +18,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, PlayState* play)
 
     if (o.gi != GI_MM_SOLD_OUT)
         Matrix_RotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MTXMODE_APPLY);
-    Draw_Gi(play, &this->base, o.gi, 0);
+    Draw_GiCloaked(play, &this->base, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80864910, EnGirlA_Draw);
