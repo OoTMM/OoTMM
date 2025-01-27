@@ -79,7 +79,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
     EnItem00_ItemQuery(&q, this, play, -1);
     comboItemOverride(&o, &q);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_Gi(play, &this->base, o.gi, 0);
+    Draw_GiCloaked(play, &this->base, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);

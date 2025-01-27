@@ -44,7 +44,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
     Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
     Matrix_RotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MTXMODE_APPLY);
-    Draw_Gi(play, &this->base, gi, 0);
+    Draw_GiCloaked(play, &this->base, gi, o.cloakGi, 0);
 }
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, PlayState* play)

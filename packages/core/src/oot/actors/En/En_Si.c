@@ -41,7 +41,7 @@ void EnSi_Draw(Actor* this, PlayState* play)
     ComboItemOverride o;
 
     EnSi_ItemOverride(&o, this);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
 }
 
 PATCH_CALL(0x80b4b3f8, EnSi_Draw);
