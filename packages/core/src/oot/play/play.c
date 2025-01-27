@@ -579,7 +579,10 @@ void Play_MainWrapper(PlayState* play)
     Audio_DisplayMusicName(play);
 
     if (play->pauseCtx.state == 0)
+    {
         DrawGiSystem_Update(play);
+        Play_UpdateIceTrap(play);
+    }
 
     Debug_Update();
 }
