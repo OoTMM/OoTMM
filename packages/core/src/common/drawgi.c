@@ -1550,7 +1550,9 @@ void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+    gSPSegment(POLY_XLU_DISP++, 0x08, Gfx_TwoTexScroll(play->state.gfxCtx, G_TX_RENDERTILE, 0, (0 - play->gameplayFrames) % 128, 32, 32, 1, 0, (play->gameplayFrames * -2) % 128, 32, 32));
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetEnvColor(POLY_XLU_DISP++, 0, 50, 100, 255);
     gSPDisplayList(POLY_XLU_DISP++, gEffIceFragment3DL);
     CLOSE_DISPS();
 }

@@ -5,7 +5,7 @@
 #endif
 
 #if defined(GAME_MM)
-# define APPLY_DAMAGE_ADDR 0x00000000
+# define APPLY_DAMAGE_ADDR 0x80833b18
 #endif
 
 void Play_UpdateIceTrap(PlayState* play)
