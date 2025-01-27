@@ -68,14 +68,14 @@ static const Gfx* const kCsmcGs[] = {
     kCsmcGsMap,
 };
 
-static int csmcGsId(s16 gi)
+static int csmcGsId(s16 gi, s16 cloakGi)
 {
     int csmcId;
 
     if (gi == 0 || !csmcEnabledSkulltula())
         return CSMC_GS_MAJOR;
 
-    csmcId = csmcFromItem(gi);
+    csmcId = csmcFromItemCloaked(gi, cloakGi);
     switch (csmcId)
     {
     case CSMC_NORMAL:       return CSMC_GS_NORMAL;
@@ -91,11 +91,11 @@ static int csmcGsId(s16 gi)
     }
 }
 
-void csmcGsPreDraw(PlayState* play, s16 gi)
+void csmcGsPreDraw(PlayState* play, s16 gi, s16 cloakGi)
 {
     int id;
 
-    id = csmcGsId(gi);
+    id = csmcGsId(gi, cloakGi);
     OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, ((u32)kCsmcGs[id]) & 0xffffff);
     CLOSE_DISPS();

@@ -470,7 +470,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
         type = CSMC_POT_NORMAL;
     else
         type = CSMC_POT_NORMAL_DANGEON;
-    csmcPotPreDraw(&this->actor, play, o.gi, type);
+    csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, type);
     Gfx_DrawDListOpa(play, D_80BA1B84[(this->actor.params >> 8) & 1]);
 }
 

@@ -3,6 +3,14 @@
 #include <combo/global.h>
 #include <combo/draw.h>
 
+#if defined(GAME_OOT)
+# include <assets/oot/objects/gameplay_keep.h>
+#endif
+
+#if defined(GAME_MM)
+# include <assets/mm/objects/gameplay_keep.h>
+#endif
+
 #define M_PI            3.14159265358979323846
 #define M_SQRT1_2       0.707106781186547524401
 #define DLIST_RAW(x)    (((u32)(x)) - 0x80000000)
@@ -1532,5 +1540,20 @@ void DrawGi_CustomShield(PlayState* play, s16 index, u8 param)
     if (param)
         shaderFlameEffect(play, drawGi->lists[2], 1.5f, 20.f);
 
+    CLOSE_DISPS();
+}
+
+void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
+{
+    static const float scale = 0.5f;
+
+    Matrix_Translate(0.f, -25.f, 0.f, MTXMODE_APPLY);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+    gSPSegment(POLY_XLU_DISP++, 0x08, Gfx_TwoTexScroll(play->state.gfxCtx, G_TX_RENDERTILE, 0, (0 - play->gameplayFrames) % 128, 32, 32, 1, 0, (play->gameplayFrames * -2) % 128, 32, 32));
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetEnvColor(POLY_XLU_DISP++, 0, 50, 100, 255);
+    gSPDisplayList(POLY_XLU_DISP++, gEffIceFragment3DL);
     CLOSE_DISPS();
 }

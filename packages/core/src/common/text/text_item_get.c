@@ -179,7 +179,7 @@ void comboTextHijackItemEx(PlayState* play, const ComboItemOverride* o, int coun
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "You got ");
-    comboTextAppendItemNameOverride(&b, o, 0);
+    comboTextAppendItemNameOverride(&b, o, TF_NOCLOAK);
     comboTextAppendStr(&b, "!");
     if (isSelf)
     {

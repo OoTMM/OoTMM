@@ -372,7 +372,7 @@ void ObjGrassCarry_PreDraw(ObjGrassElement* grassElem, PlayState* play)
         comboXflagItemOverride(&o, &xflag, 0);
     else
         o.gi = 0;
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
+    csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 0);
 }
 
 void ObjGrassCarry_Draw(Actor* thisx, PlayState* play) {

@@ -220,6 +220,7 @@ export const TRAPS = new Set([
   Items.OOT_TRAP_RUPOOR,
   Items.MM_TRAP_RUPOOR,
   Items.SHARED_TRAP_RUPOOR,
+  Items.OOT_TRAP_ICE,
 ])
 
 export const JUNK = new Set([

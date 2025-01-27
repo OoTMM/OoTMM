@@ -36,7 +36,7 @@ void EnColMan_DrawHeartPiece(Actor* this, PlayState* play)
 
     EnColMan_ItemOverride(&o);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80afe414, EnColMan_DrawHeartPiece);

@@ -25,7 +25,7 @@ void ObjMoonStone_Draw(Actor* this, PlayState* play)
 
     ObjMoonStone_ItemQuery(&q, play);
     comboItemOverride(&o, &q);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80c06910, ObjMoonStone_Draw);

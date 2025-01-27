@@ -60,7 +60,7 @@ static int ObjKibako_CsmcType(Actor_ObjKibako* this)
     if (!csmcEnabled())
         return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
 
-    return csmcFromItem(o.gi);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
 static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, PlayState* play, u32 dlist, u32 baseTex)

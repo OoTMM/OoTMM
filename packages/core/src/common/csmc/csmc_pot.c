@@ -214,7 +214,7 @@ static void loadTexture(int csmcPotId)
     }
 }
 
-static int csmcPotId(s16 gi, int def)
+static int csmcPotId(s16 gi, s16 cloakGi, int def)
 {
     int csmcId;
 
@@ -223,7 +223,7 @@ static int csmcPotId(s16 gi, int def)
     if (!csmcEnabled())
         return CSMC_POT_MAJOR;
 
-    csmcId = csmcFromItem(gi);
+    csmcId = csmcFromItemCloaked(gi, cloakGi);
     switch (csmcId)
     {
     case CSMC_NORMAL:       return def;
@@ -239,11 +239,11 @@ static int csmcPotId(s16 gi, int def)
     }
 }
 
-void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, int def)
+void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, s16 cloakGi, int def)
 {
     int type;
 
-    type = csmcPotId(gi, def);
+    type = csmcPotId(gi, cloakGi, def);
     loadTexture(type);
 
     OPEN_DISPS(play->state.gfxCtx);

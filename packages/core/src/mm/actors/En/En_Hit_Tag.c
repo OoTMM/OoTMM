@@ -12,8 +12,11 @@ static void EnHitTag_DrawGlitter(Actor_EnHitTag* this, PlayState* play)
     ComboItemOverride o;
     Xflag x;
     s16 giList[3];
+    s16 giCloakList[3];
     s16 gi;
+    s16 giCloak;
     u8 giCount;
+    int index;
 
     /* Get the gi list */
     giCount = 0;
@@ -26,7 +29,9 @@ static void EnHitTag_DrawGlitter(Actor_EnHitTag* this, PlayState* play)
         comboXflagItemOverride(&o, &x, 0);
         if (o.gi == 0)
             continue;
-        giList[giCount++] = o.gi;
+        giList[giCount] = o.gi;
+        giCloakList[giCount] = o.cloakGi;
+        giCount++;
     }
 
     if (giCount == 0)
@@ -39,18 +44,23 @@ static void EnHitTag_DrawGlitter(Actor_EnHitTag* this, PlayState* play)
     {
     case 1:
         gi = giList[0];
+        giCloak = giCloakList[0];
         break;
     case 2:
-        gi = giList[(play->state.frameCount % 12) / 6];
+        index = (play->state.frameCount % 12) / 6;
+        gi = giList[index];
+        giCloak = giCloakList[index];
         break;
     case 3:
-        gi = giList[(play->state.frameCount % 12) / 4];
+        index = (play->state.frameCount % 12) / 4;
+        gi = giList[index];
+        giCloak = giCloakList[index];
         break;
     default:
         UNREACHABLE();
     }
 
-    Draw_GlitterGi(play, &this->base, gi);
+    Draw_GlitterGi(play, &this->base, gi, giCloak);
 }
 
 static void EnHitTag_ItemDropCollectible(PlayState* play, const Vec3f* pos, int param)

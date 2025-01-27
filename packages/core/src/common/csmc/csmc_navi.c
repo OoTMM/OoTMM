@@ -32,7 +32,7 @@ static NaviColor sNaviColorList[] = {
     { { 252, 86, 3, 255 }, { 252, 86, 3, 0 } },
 };
 
-static int csmcNaviId(s16 gi)
+static int csmcNaviId(s16 gi, s16 cloakGi)
 {
     int csmcId;
 
@@ -41,7 +41,7 @@ static int csmcNaviId(s16 gi)
     if (!csmcEnabled())
         return CSMC_NORMAL;
 
-    csmcId = csmcFromItem(gi);
+    csmcId = csmcFromItemCloaked(gi, cloakGi);
     switch (csmcId)
     {
     case CSMC_NORMAL:       return CSMC_NAVI_NORMAL;
@@ -71,7 +71,7 @@ void Actor_AfterSetNaviToActor(TargetContext* targetCtx, Actor* actor, s32 actor
         if (comboXflagsGet(&shotSun->xflag))
             q.ovFlags |= OVF_RENEW;
         comboItemOverride(&o, &q);
-        type = csmcNaviId(o.gi);
+        type = csmcNaviId(o.gi, o.cloakGi);
         NaviColor* naviColor = &sNaviColorList[type];
         targetCtx->naviInner.r = naviColor->inner.r;
         targetCtx->naviInner.g = naviColor->inner.g;
