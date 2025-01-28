@@ -139,17 +139,24 @@ void DoorWarp1_AfterDraw(Actor* this, PlayState* play)
     static const int kRotDivisor = 100;
     const BlueWarpData* data;
     ComboItemOverride o;
+    Player* player;
     float angle;
+    float scale;
+    float giantScale;
 
+    player = GET_PLAYER(play);
     data = DoorWarp1_GetData(this, play);
     if (data == NULL)
         return;
     if (gMmExtraBoss.items & (1 << data->index))
         return;
+
     DoorWarp1_ItemOverride(&o, data);
     angle = (play->state.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
-    Matrix_Translate(this->world.pos.x, this->world.pos.y + 35.f, this->world.pos.z, MTXMODE_NEW);
-    Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
+    giantScale = (player->currentMask == PLAYER_MASK_GIANT) ? 0.1f : 1.f;
+    scale = 0.35f * giantScale;
+    Matrix_Translate(this->world.pos.x, this->world.pos.y + 35.f * giantScale, this->world.pos.z, MTXMODE_NEW);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Matrix_RotateY(angle, MTXMODE_APPLY);
     Draw_GiCloaked(play, this, o.gi, o.cloakGi, DRAW_RAW);
 }

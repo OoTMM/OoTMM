@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix the twinmold blue warp item being gigantic when giant mask is equipped.
 - Fix a vanilla bug where the frozen link effect would sometimes get distorded.
 - Fix FD mask item having weird colors sometimes.
 - Fix a small region issue near swamp spider house.
