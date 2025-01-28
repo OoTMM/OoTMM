@@ -14,6 +14,7 @@
 void EnItem00_AliasFreestandingRupee(Xflag* xflag);
 void EnItem00_AliasFreestandingHeart(Xflag* xflag);
 
+
 void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
 {
     /* Forward */
@@ -31,20 +32,25 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
     ComboItemOverride o;
     s16 gi;
+    s16 cloakGi;
 
     if (this->isExtendedCollected)
+    {
         gi = this->xflagGi;
+        cloakGi = GI_NONE;
+    }
     else
     {
         comboXflagItemOverride(&o, &this->xflag, 0);
         gi = o.gi;
+        cloakGi = o.cloakGi;
         this->xflagGi = gi;
     }
 
     Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
     Matrix_RotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->base, gi, o.cloakGi, 0);
+    Draw_GiCloaked(play, &this->base, gi, cloakGi, 0);
 }
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, PlayState* play)
