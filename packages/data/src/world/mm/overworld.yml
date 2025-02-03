@@ -1577,8 +1577,8 @@
     "Deku Palace Near Cage": "has(MASK_DEKU) || short_hook_anywhere"
     "Deku Palace Corner Ledge Top": "has(MASK_DEKU)"
   locations:
-    "Deku Palace Pot 1": "true"
-    "Deku Palace Pot 2": "true"
+    "Deku Palace Pot 1": "has(MASK_DEKU) || short_hook_anywhere"
+    "Deku Palace Pot 2": "has(MASK_DEKU) || short_hook_anywhere"
 "Deku Palace Throne":
   region: DEKU_PALACE
   exits:
