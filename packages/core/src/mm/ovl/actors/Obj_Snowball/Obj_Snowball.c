@@ -84,7 +84,7 @@ static Gfx* D_80B04FC8[] = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_STOP),
 };
 
 static void ObjSnowball_Alias(Actor_ObjSnowball* this)
@@ -596,8 +596,8 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, PlayState* play) {
     this->actor.shape.rot.x = 0;
     this->actor.shape.rot.z = 0;
     this->actor.world.pos.y += 20.0f * phi_f20;
-    this->actor.uncullZoneScale = 150.0f * phi_f20;
-    this->actor.uncullZoneDownward = 300.0f * phi_f20;
+    this->actor.cullingVolumeScale = 150.0f * phi_f20;
+    this->actor.cullingVolumeDownward = 300.0f * phi_f20;
     this->actor.shape.rot.y = Rand_Next() >> 0x10;
     this->unk_20C = phi_f20;
 

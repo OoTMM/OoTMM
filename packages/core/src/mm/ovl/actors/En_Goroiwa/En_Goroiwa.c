@@ -90,8 +90,8 @@ static Vec3f D_80942E6C = { 0.0f, 0.0f, 1.0f };
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -900, ICHAIN_CONTINUE),   ICHAIN_F32_DIV1000(minVelocityY, -26000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_CONTINUE), ICHAIN_F32(uncullZoneScale, 160, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 350, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE), ICHAIN_F32(cullingVolumeScale, 160, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 350, ICHAIN_STOP),
 };
 
 static void* D_80942E8C[] = {

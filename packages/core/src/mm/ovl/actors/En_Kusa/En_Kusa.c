@@ -104,9 +104,9 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 400, ICHAIN_CONTINUE),
     ICHAIN_F32_DIV1000(gravity, -3200, ICHAIN_CONTINUE),
     ICHAIN_F32_DIV1000(minVelocityY, -17000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 1200, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 200, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 1200, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 200, ICHAIN_STOP),
 };
 
 void EnKusa_Aliases(Xflag* xflag)
@@ -403,7 +403,7 @@ void EnKusa_Init(Actor* thisx, PlayState* play) {
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (play->csCtx.state != CS_STATE_IDLE) {
-        this->actor.uncullZoneForward += 1000.0f;
+        this->actor.cullingVolumeDistance += 1000.0f;
     }
     EnKusa_InitCollider(&this->actor, play);
     CollisionCheck_SetInfo(&this->actor.colChkInfo, NULL, &sColChkInfoInit);

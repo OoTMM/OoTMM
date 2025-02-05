@@ -113,8 +113,8 @@ void EnBombf_Init(Actor* thisx, PlayState* play) {
         EnBombf_SetupGrowBomb(this, thisx->params);
     }
 
-    thisx->uncullZoneScale += 31000.0f;
-    thisx->uncullZoneForward += 31000.0f;
+    thisx->cullingVolumeScale += 31000.0f;
+    thisx->cullingVolumeDistance += 31000.0f;
 }
 
 void EnBombf_Destroy(Actor* thisx, PlayState* play) {

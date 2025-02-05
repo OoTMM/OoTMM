@@ -785,6 +785,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false,
 }, {
+  key: 'shuffleRedBouldersOot',
+  name: 'Red Boulder Sanity (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the red boulders drop an item for breaking them for the first time (OoT)',
+  cond: hasOoT,
+  default: false,
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

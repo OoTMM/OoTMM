@@ -379,8 +379,8 @@ void func_80B39B5C(Actor_ObjSnowball2* this, PlayState* play) {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -2000, ICHAIN_CONTINUE),  ICHAIN_F32_DIV1000(minVelocityY, -20000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_CONTINUE), ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_CONTINUE), ICHAIN_VEC3F_DIV1000(scale, 25, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE), ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_CONTINUE), ICHAIN_VEC3F_DIV1000(scale, 25, ICHAIN_STOP),
 };
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, PlayState* play) {

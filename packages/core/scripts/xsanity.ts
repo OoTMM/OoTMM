@@ -166,6 +166,7 @@ const ACTORS_OOT = {
   OBJ_KIBAKO2: 0x1a0,
   OBJ_COMB: 0x19e,
   //DOOR_ANA: 0x9b,
+  OBJ_HAMISHI: 0x1d2,
 };
 
 const ACTORS_MM = {
@@ -1357,6 +1358,10 @@ function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Barrel', type: 'barrel' });
 }
 
+function actorHandlerOotObjHamishi(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'redboulder' });
+}
+
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
@@ -1366,6 +1371,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_MURE]: actorHandlerOotObjMure,
   [ACTORS_OOT.OBJ_HANA]: actorHandlerOotObjHana,
   [ACTORS_OOT.OBJ_MURE2]: actorHandlerOotObjMure2,
+  [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerOotObjHamishi,
 };
 
 const ACTORS_HANDLERS_MM = {

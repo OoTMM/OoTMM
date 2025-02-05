@@ -689,3 +689,5 @@ Math_Atan2F = 0x800aa670;
 Math_ApproachF = 0x80064280;
 Math_ApproachZeroF = 0x800642f0;
 Math_ApproachS = 0x80064624;
+
+func_80033480 = 0x80026308;
