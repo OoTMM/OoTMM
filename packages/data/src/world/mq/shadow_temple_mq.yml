@@ -220,7 +220,7 @@
     "MQ Shadow Temple Spike Curtain Ground Chest": "true"
     "MQ Shadow Temple Spike Curtain Upper Cage Chest": "(has_lens && has_goron_bracelet && is_adult) || climb_anywhere || hookshot_anywhere"
     "MQ Shadow Temple Spike Curtain Upper Switch Chest": "(has_lens && has_goron_bracelet && is_adult) || climb_anywhere || hookshot_anywhere"
-    "MQ Shadow Temple GS Spike Curtain": "gs && (can_collect_distance || (can_damage_skull && climb_anywhere))"
+    "MQ Shadow Temple GS Spike Curtain": "gs && collect_gs_on_walls"
     "MQ Shadow Temple Pot Guillotines Room Lower 1": "true"
     "MQ Shadow Temple Pot Guillotines Room Lower 2": "true"
     "MQ Shadow Temple Pot Guillotines Room Upper 1": "(has_lens && has_goron_bracelet && is_adult) || climb_anywhere || hookshot_anywhere"
@@ -290,7 +290,7 @@
     SHADOW_MQ_WIND_TUNNEL_HINT_ROOM_REDEADS_CLEAR: "soul_redead_gibdo && (can_use_din || (can_play_sun && (has_weapon || can_use_sticks)))"
   locations:
     "MQ Shadow Temple Wind Hint Chest": "event(SHADOW_MQ_WIND_TUNNEL_HINT_ROOM_REDEADS_CLEAR)"
-    "MQ Shadow Temple GS Wind Hint": "gs && (can_collect_distance || (has_ranged_weapon && climb_anywhere))" #Bombchu or Blast Mask too? We should have macros for GS on walls.
+    "MQ Shadow Temple GS Wind Hint": "gs && collect_gs_on_walls"
     "MQ Shadow Temple Big Fairy After Wind": "can_play_sun"
 "Shadow Temple Wind Tunnel Lens Alcove":
   dungeon: Shadow
