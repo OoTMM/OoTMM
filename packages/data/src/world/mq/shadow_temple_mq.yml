@@ -274,7 +274,7 @@
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind Tunnel First Part": "get_passed_skultullas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get passed Skultulla and the pit. TODO: Add a trick for jumping with the fan to get passed the pit and skultullas.
+    "Shadow Temple Wind Tunnel First Part": "true" #Can use the wind to jump across and the other wind to get passed the skultulla.
     "Shadow Temple Wind Tunnel After Drop": "true"
 "Shadow Temple Wind Tunnel After Drop":
   dungeon: Shadow
