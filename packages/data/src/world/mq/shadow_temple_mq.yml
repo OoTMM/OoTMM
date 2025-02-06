@@ -124,7 +124,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room": "event(SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR)" #Don't need SR itself to exit, only the skultullas. See below comment.
-    "Shadow Temple Enclosed Shortcut Area": "has_lens" #Maybe needs something to get past skultulla too.
+    "Shadow Temple Enclosed Shortcut Area": "has_lens && get_past_skultullas"
   events:
     SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR: "soul_skulltula && (can_use_din || (silver_rupees_shadow_scythe && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)))"
   locations:
@@ -137,7 +137,7 @@
 "Shadow Temple Enclosed Shortcut Area":
   dungeon: Shadow
   exits:
-    "Shadow Temple Scythe Room": "true" #Maybe needs something to get past skultulla too.
+    "Shadow Temple Scythe Room": "get_past_skultullas"
     "Shadow Temple Area Before Boat Ride": "event(SHADOW_MQ_SHORTCUT_BLOCK_PUSHED)" #TODO: Add the glitch to jump through wall and skip this.
     "Shadow Temple Area Above Shortcut Enclosure": "climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY)"
   locations:
@@ -270,11 +270,11 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
-    "Shadow Temple Wind Tunnel After Pit Before Drop": "(has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din) && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit
+    "Shadow Temple Wind Tunnel After Pit Before Drop": "get_past_skultullas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind Tunnel First Part": "(has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din) && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit. TODO: Add a trick for jumping with the fan to get past the pit and skultullas.
+    "Shadow Temple Wind Tunnel First Part": "get_past_skultullas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit. TODO: Add a trick for jumping with the fan to get past the pit and skultullas.
     "Shadow Temple Wind Tunnel After Drop": "true"
 "Shadow Temple Wind Tunnel After Drop":
   dungeon: Shadow
