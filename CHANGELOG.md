@@ -6,14 +6,18 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Implement the Deku Shield in MM.
 - Completely rework bombchu, behavior is now a setting with 4 values : free like in OoT, tied to bomb bag like in MM, old-style bombchu bags, and a new bombchu bag setting where 3 bags are in the pool, allowing for 20/30/40 bombchu.
 
 ### Changed
 
+- Progressive shields will now remove as many regular shields from the pool as possible.
+- Progressive shields are now re-obtained on every scene transition, thus making them permanent logically.
+- Progressive shields now have a flame effect to differentiate them from the regular shields.
+- Made the Owl Statue item model render slightly lower to be aligned with other items.
+- Change the Old Hag checks in MM, now the two checks are separate instead of progressing into each other.
 - Completely reworked the stray fairy item model to be much closer to the actual fairies.
 - Path hints now tell the exact world the path corresponds to in multiworld.
-- Rework of OoT Shadow Temple MQ dungeon logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
-- Add two macros for OoT needed for new logic situations.
 
 ### Fixed
 
@@ -113,8 +117,6 @@ All notable changes to this project will be documented in this file.
 - Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
-- Reworks of most OoT MQ dungeon logic (all except Shadow MQ, Forest MQ, and Spirit MQ), including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
-- Rework of OoT Ganon Castle Tower dungeon logic in preparation for future features.
 
 ### Fixed
 
