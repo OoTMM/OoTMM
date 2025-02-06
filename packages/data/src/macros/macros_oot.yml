@@ -1,4 +1,4 @@
-#Generic Utility Macros #kickstart tests
+#Generic Utility Macros
 "is_child": "age(child)"
 "is_adult": "age(adult)"
 "is_day": "oot_time(day) || can_play_sun"
