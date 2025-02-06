@@ -119,7 +119,7 @@ All notable changes to this project will be documented in this file.
 - Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
-- Reworks of most OoT MQ dungeon logic (all except Fire Temple MQ, Shadow Temple MQ, Forest Temple MQ, and Spirit Temple MQ), including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
+- Reworks of most OoT MQ dungeon logic (all except Forest Temple MQ, Fire Temple MQ, Shadow Temple MQ, and Spirit Temple MQ), including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
 - Rework of OoT Ganon Castle Tower dungeon logic in preparation for future features.
 
 ### Fixed
