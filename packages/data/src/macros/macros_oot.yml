@@ -116,8 +116,8 @@
 "can_use_sword_or_sticks": "can_use_sword || can_use_sticks"
 
 # Shields
-"has_shield_deku": "age_shield_child && (renewable(SHIELD_DEKU) || event(SHIELD_DEKU) || has(SHIELD, 1) || has(SHARED_SHIELD, 1))"
-"has_shield_hylian": "cond(setting(sharedShields), renewable(SHARED_SHIELD_HYLIAN), renewable(SHIELD_HYLIAN)) || has(SHIELD, 2) || has(SHARED_SHIELD, 2)"
+"has_shield_deku": "age_shield_child && (renewable(SHIELD_DEKU) || renewable(SHARED_SHIELD_DEKU) || event(SHIELD_DEKU) || has(SHIELD, 1) || has(SHARED_SHIELD, 1))"
+"has_shield_hylian": "renewable(SHARED_SHIELD_HYLIAN) || renewable(SHIELD_HYLIAN) || has(SHIELD, 2) || has(SHARED_SHIELD, 2)"
 "has_shield": "has_shield_hylian || has_mirror_shield || has_shield_deku"
 "has_shield_for_scrubs": "(is_adult && has_shield_hylian) || has_shield_deku"
 "has_mirror_shield_raw_nonshared": "cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
@@ -210,7 +210,7 @@
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has_bow || has_hookshot(1) || has(SHARED_ARROW_FIRE) || has(ARROW_FIRE) || has(SHARED_ARROW_LIGHT) || has(ARROW_LIGHT))"
 
 # Mido / Deku Tree
-"can_move_mido_reqs": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
+"can_move_mido_reqs": "is_child && has_sword_kokiri && has_shield_deku"
 "can_move_mido": "can_move_mido_reqs && soul_npc(SOUL_NPC_MIDO)"
 "can_bypass_mido": "setting(dekuTree, open) || is_adult || climb_anywhere || hookshot_anywhere || can_move_mido_reqs"
 
@@ -232,6 +232,7 @@
 "wallet_price(range, id)": "price(range, id, 0) || has_rupees && ((price(range, id, 99) && has_wallet(1)) || (price(range, id, 200) && has_wallet(2)) || (price(range, id, 500) && has_wallet(3)) || (setting(colossalWallets) && price(range, id, 999) && has_wallet(4)) || (setting(bottomlessWallets) && price(range, id, 9999) && has_wallet(5)))"
 "shop_price(id)": "wallet_price(OOT_SHOPS, id)"
 "scrub_price(id)": "wallet_price(OOT_SCRUBS, id)"
+"merchant_price(id)": "wallet_price(OOT_MERCHANTS, id)"
 
 # Keys
 "has_skeleton_key": "setting(skeletonKeyOot) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"

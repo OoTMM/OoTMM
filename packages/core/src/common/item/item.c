@@ -173,6 +173,8 @@ typedef struct ComboOverrideData
     u32  key;
     s16  player;
     u16  value;
+    s16  giCloak;
+    s16  unused[3];
 }
 ComboOverrideData;
 
@@ -236,25 +238,10 @@ static u32 makeOverrideKey(const ComboItemQuery* q)
 
 static int overrideData(ComboOverrideData* data, u32 key)
 {
-    ComboOverrideData d;
     u32 min;
     u32 max;
     u32 cursor;
-    u32 ovData[2];
-
-#if defined(DEBUG) && defined(DEBUG_MM_OVERRIDE) && defined(GAME_MM)
-    data->key = 0;
-    data->player = 1;
-    data->value = DEBUG_MM_OVERRIDE;
-    return 1;
-#endif
-
-#if defined(DEBUG) && defined(DEBUG_OOT_OVERRIDE) && defined(GAME_OOT)
-    data->key = 0;
-    data->player = 1;
-    data->value = DEBUG_OOT_OVERRIDE;
-    return 1;
-#endif
+    u32 ovData[4];
 
     /* Check the cache */
     for (int i = 0; i < ARRAY_COUNT(sComboOverridesCache); ++i)
@@ -278,18 +265,19 @@ static int overrideData(ComboOverrideData* data, u32 key)
         /* Read from cart */
         /* TODO: Have a generic helper for this */
         ovData[0] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x00);
-        ovData[1] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x04);
-        memcpy(&d, ovData, sizeof(d));
-
-        if (d.key == key)
+        if (ovData[0] == key)
         {
+            ovData[1] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x04);
+            ovData[2] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x08);
+            ovData[3] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x0c);
+
             /* Copy and add to cache */
-            memcpy(data, &d, sizeof(*data));
-            memcpy(&sComboOverridesCache[sComboOverridesCacheCursor], &d, sizeof(d));
+            memcpy(data, ovData, sizeof(*data));
+            memcpy(&sComboOverridesCache[sComboOverridesCacheCursor], data, sizeof(*data));
             sComboOverridesCacheCursor = (sComboOverridesCacheCursor + 1) % ARRAY_COUNT(sComboOverridesCache);
             return 1;
         }
-        if (key > d.key)
+        if (key > ovData[0])
             min = cursor + 1;
         else
             max = cursor;
@@ -327,6 +315,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     {
         dst->player = data.player;
         gi = (s16)data.value;
+        dst->cloakGi = data.giCloak;
     }
 
     if (q->ovFlags & OVF_RENEW)

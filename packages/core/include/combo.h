@@ -72,6 +72,7 @@
 #  include <combo/mm/actor_bgingate.h>
 #  include <combo/mm/actor_objboat.h>
 #  include <combo/mm/sequence.h>
+#  include <combo/mm/z_msgevent.h>
 #  include <combo/mm/actors/En_Elf.h>
 #  include <combo/mm/actors/Bg_Hakugin_Post.h>
 # endif
@@ -201,6 +202,9 @@ void comboHandleAutoInvertClockSpeed(void);
 void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
+
+/* Ice Traps */
+void Play_UpdateIceTrap(PlayState* play);
 
 #else
 # include <combo/asm.h>

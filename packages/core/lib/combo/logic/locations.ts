@@ -45,6 +45,12 @@ export const MM_SCRUBS = [
   'MM Ikana Valley Scrub Shop',
 ];
 
+export const OOT_MERCHANTS = [
+  'OOT Haunted Wasteland Carpet Merchant',
+  'OOT Kakariko Potion Shop Buy Blue Potion',
+  'OOT Lon Lon Ranch Talon Buy Milk',
+];
+
 export const MM_MERCHANTS = [
   'MM Gorman Track Milk Purchase',
   'MM Milk Bar Purchase Milk',
@@ -67,7 +73,7 @@ export function locationsZelda(settings: Settings) {
 
 export function isLocationRenewable(world: World, loc: Location) {
   const locationId = locationData(loc).id;
-  if (MM_SCRUBS.includes(locationId) || MM_MERCHANTS.includes(locationId))
+  if (MM_SCRUBS.includes(locationId) || MM_MERCHANTS.includes(locationId) || OOT_MERCHANTS.includes(locationId))
     return true;
   if (ONE_TIME_SHOP_CHECKS.includes(locationId))
     return false;
@@ -84,7 +90,7 @@ export function isLocationRenewable(world: World, loc: Location) {
 
 export function isLocationLicenseGranting(world: World, loc: Location) {
   const locationId = locationData(loc).id;
-  if (ONE_TIME_SHOP_CHECKS.includes(locationId) || MM_MERCHANTS.includes(locationId)) {
+  if (ONE_TIME_SHOP_CHECKS.includes(locationId) || MM_MERCHANTS.includes(locationId) || OOT_MERCHANTS.includes(locationId)) {
     return false;
   }
   const check = world.checks[locationId];

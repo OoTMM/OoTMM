@@ -798,6 +798,7 @@
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon"
+    "Lon Lon Ranch Talon Buy Milk": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && merchant_price(0x03)"
     "Lon Lon Ranch Talon House Pot 1": "true"
     "Lon Lon Ranch Talon House Pot 2": "true"
     "Lon Lon Ranch Talon House Pot 3": "true"
@@ -1329,10 +1330,9 @@
   region: ENTRANCE
   exits:
     "Kakariko Back": "true"
-  events:
-    MAGIC: "adult_trade(ODD_MUSHROOM) && can_use_wallet(2) && has_bottle"
   locations:
     "Kakariko Potion Shop Odd Potion": "soul_old_hag && adult_trade(ODD_MUSHROOM)"
+    "Kakariko Potion Shop Buy Blue Potion": "soul_old_hag && adult_trade(ODD_MUSHROOM) && merchant_price(0x02)"
 "Shooting Gallery Adult":
   region: ENTRANCE
   exits:
@@ -1669,7 +1669,7 @@
     "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child"
     "Goron City Bomb Bag": "is_child && has_explosives && soul_goron"
-    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && can_use_wallet(2) && soul_medigoron"
+    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && merchant_price(0x00) && soul_medigoron"
     "Goron City GS Platform": "gs && is_adult && can_damage_skull"
     "Goron City GS Maze": "gs && is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Goron City Pot Stairs 1": "true"
@@ -2521,9 +2521,8 @@
   exits:
     "Haunted Wasteland Start": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
     "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
-  events:
-    BOMBCHU: "soul_carpet_man && can_use_wallet(2)"
   locations:
+    "Haunted Wasteland Carpet Merchant": "soul_carpet_man && merchant_price(0x01)"
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Haunted Wasteland Pot 1": "true"

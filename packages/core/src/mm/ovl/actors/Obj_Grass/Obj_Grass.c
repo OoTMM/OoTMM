@@ -487,7 +487,7 @@ void ObjGrass_PreDraw(ObjGrassElement* grassElem, PlayState* play)
         comboXflagItemOverride(&o, &xflag, 0);
     else
         o.gi = 0;
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 1);
+    csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 1);
 }
 
 void ObjGrass_DrawOpa(Actor* thisx, PlayState* play2) {

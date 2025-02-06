@@ -212,3 +212,4 @@
 - { id: BOTTLE_BLUE_FIRE, func: BottleBlueFire, params: [0x6000670, 0x6000750] }
 - { id: CLOCK, func: Clock, params: [GI_CLOCK_0, GI_CLOCK_1, GI_CLOCK_2, GI_CLOCK_3] }
 - { id: POND_FISH, func: PondFish, params: [GI_POND_FISH_0] }
+- { id: TRAP_ICE, func: TrapIce, params: [0] }

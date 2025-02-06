@@ -86,17 +86,15 @@ int DoorWarp1_Collide(Actor* this, PlayState* play)
     return 0;
 }
 
-static s16 DoorWarp1_GetGI(const BlueWarpData* data)
+static void DoorWarp1_ItemOverride(ComboItemOverride* o, const BlueWarpData* data)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
-    ComboItemOverride o;
 
     q.ovType = OV_NPC;
     q.id = data->npc;
     q.gi = data->gi;
 
-    comboItemOverride(&o, &q);
-    return o.gi;
+    comboItemOverride(o, &q);
 }
 
 int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
@@ -142,7 +140,7 @@ void DoorWarp1_AfterDrawWarp(Actor* this, PlayState* play)
     static const int kRotDivisor = 100;
     float angle;
     const BlueWarpData* data;
-    s16 gi;
+    ComboItemOverride o;
 
     data = DoorWarp1_GetData(play);
     if (!data)
@@ -151,10 +149,10 @@ void DoorWarp1_AfterDrawWarp(Actor* this, PlayState* play)
         return;
 
     angle = (play->state.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
-    gi = DoorWarp1_GetGI(data);
+    DoorWarp1_ItemOverride(&o, data);
 
     Matrix_Translate(this->world.pos.x, this->world.pos.y + 35.f, this->world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
     Matrix_RotateY(angle, MTXMODE_APPLY);
-    Draw_Gi(play, this, gi, DRAW_RAW);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, DRAW_RAW);
 }

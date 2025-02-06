@@ -101,16 +101,25 @@ static int ObjFlowerpot_IsShuffled(Actor_ObjFlowerpot* this, int slice)
     return !!((this->isExtendedFlags & (1 << slice)) && (!comboXflagsGet(&xflags)));
 }
 
-static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
+static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlowerpot* this, int slice)
 {
-    ComboItemOverride o;
     Xflag xf;
 
     ObjFlowerpot_Xflag(&xf, slice, this);
-    comboXflagItemOverride(&o, &xf, 0);
-    if (o.gi && !comboXflagsGet(&xf))
-        return o.gi;
-    return 0;
+    comboXflagItemOverride(o, &xf, 0);
+    if (comboXflagsGet(&xf))
+    {
+        o->gi = 0;
+        o->cloakGi = 0;
+    }
+}
+
+static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
+{
+    ComboItemOverride o;
+
+    ObjFlowerpot_ShuffledItemOverride(&o, this, slice);
+    return o.gi;
 }
 
 static void ObjFlowerpot_Alias(Xflag* xf)
@@ -729,14 +738,14 @@ void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, PlayState* play)
 
 static int ObjFlowerpot_CsmcType(Actor_ObjFlowerpot* this, int slice)
 {
-    s16 gi;
+    ComboItemOverride o;
 
-    gi = ObjFlowerpot_ShuffledItem(this, slice);
-    if (gi == GI_NONE)
+    ObjFlowerpot_ShuffledItemOverride(&o, this, slice);
+    if (o.gi == GI_NONE)
         return CSMC_NORMAL;
     if (!csmcEnabled())
         return CSMC_MAJOR;
-    return csmcFromItem(gi);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
 static const Gfx sListLoaderPotDefault[] = {

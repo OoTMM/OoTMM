@@ -72,5 +72,5 @@ void DmChar02_DrawOcarina(Actor* this, PlayState* play)
     DmChar02_ItemOverride(&o, NPC_MM_SKULL_KID_OCARINA);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Matrix_Translate(0.0f, 20.0f, 0.0f, MTXMODE_APPLY);
-    Draw_Gi(play, this, o.gi, DRAW_RAW);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, DRAW_RAW);
 }

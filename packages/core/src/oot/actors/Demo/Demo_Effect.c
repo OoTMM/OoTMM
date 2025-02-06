@@ -48,7 +48,7 @@ static void DemoEffect_DrawSapphireInJabu(Actor* this, PlayState* play)
     Matrix_Translate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
     Matrix_RotateY(angle, MTXMODE_APPLY);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
 }
 
 void DemoEffect_DrawSpiritualLoader(Actor* this, PlayState* play)

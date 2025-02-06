@@ -426,6 +426,7 @@
 - { id: OOT_SWORD_GILDED, type: MAJOR, add: [OOT_SWORD_EXTRA, 2], flags: 0x80, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
 - { id: OOT_SPIN_UPGRADE, type: MAJOR, add: OOT_SPIN_UPGRADE, flags: 0xa0, draw: [SPIN_UPGRADE, 1], object: [oot, 0x018d], name: "the <C1>Spin Attack Upgrade" }
 - { id: OOT_TRIFORCE_FULL, type: MAJOR, add: [ENDGAME, 0], flags: 0x80, draw: TRIFORCE_FULL, object: TRIFORCE, name: "the <C3>Triforce" }
+- { id: OOT_TRAP_ICE, type: MINOR, add: TRAP_ICE, flags: 0x80, draw: TRAP_ICE, name: "an <COLOR_BLUE>Ice Trap" }
 - { id: OOT_FAIRY_BIG, type: MINOR, add: OOT_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: OOT_MASK_BLAST, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_BLAST], flags: 0x80, draw: MM_MASK_BLAST, object: [mm, 0x026d], name: "the <C1>Blast Mask" }
 - { id: OOT_MASK_STONE, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_STONE], flags: 0x80, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }

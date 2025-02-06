@@ -30,7 +30,7 @@ const Color_RGB8* csmcTypeColor(int type)
     }
 }
 
-int csmcFromItem(s16 gi)
+static int csmcFromItem(s16 gi)
 {
     if (gi == 0)
         return CSMC_NORMAL;
@@ -88,6 +88,13 @@ int csmcFromItem(s16 gi)
     default:
         return CSMC_NORMAL;
     }
+}
+
+int csmcFromItemCloaked(s16 gi, s16 cloakedGi)
+{
+    if (cloakedGi && cloakedGi != GI_MM_SOLD_OUT)
+        gi = cloakedGi;
+    return csmcFromItem(gi);
 }
 
 static int hasStoneAgonyForCsmc(void)

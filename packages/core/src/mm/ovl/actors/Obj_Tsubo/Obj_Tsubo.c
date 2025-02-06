@@ -884,7 +884,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
     else
         o.gi = 0;
 
-    csmcPotPreDraw(&this->actor, play, o.gi, type);
+    csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, type);
     Gfx_DrawDListOpa(play, sPotTypeData[OBJ_TSUBO_GET_TYPE(&this->actor)].modelDL);
 }
 

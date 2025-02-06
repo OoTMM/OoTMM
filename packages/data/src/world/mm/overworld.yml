@@ -426,7 +426,7 @@
 "Bomb Shop":
   region: ENTRANCE
   events:
-    BUY_KEG: "soul_goron && has_mask_goron && has(POWDER_KEG) && can_use_wallet(1)"
+    BUY_KEG: "soul_goron && can_carry_keg && has(POWDER_KEG) && can_use_wallet(1)"
   exits:
     "Clock Town West": "true"
   locations:
@@ -1388,7 +1388,7 @@
     "Near Swamp Grotto": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Grotto":
-  region: ENTRANCE
+  region: SOUTHERN_SWAMP
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
@@ -2061,7 +2061,7 @@
     STICKS: "can_kill_baba_sticks"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
-    "Twin Islands Frozen Grotto Chest": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
+    "Twin Islands Frozen Grotto Chest": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none) && setting(erGrottos, none))"
 "Near Goron Race":
   region: TWIN_ISLANDS
   exits:
@@ -2069,14 +2069,14 @@
     "Goron Race": "event(TRIAL_BOULDER) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
     "Near Ramp Grotto": "true"
   events:
-    TRIAL_BOULDER: "can_use_keg || (setting(erOverworld, none) && event(POWDER_KEG_TRIAL))"
+    TRIAL_BOULDER: "can_use_keg || (setting(erOverworld, none) && event(POWDER_KEG_TRIAL) && (has_mask_goron || has_mask_bunny))"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
   events:
     MAGIC: "true"
   exits:
     "Twin Islands": "true"
-    "Twin Islands Ramp Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)) || can_hammer)"
+    "Twin Islands Ramp Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none)) || can_hammer)"
   locations:
     "Twin Islands Small Snowball Ramp 1": "is_winter"
     "Twin Islands Small Snowball Ramp 2": "is_winter"
@@ -2088,7 +2088,7 @@
     "Front of Lone Peak Shrine": "is_winter"
     "Goron Shrine": "(soul_goron && first_day) || has_mask_goron || can_hammer"
   events:
-    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && has_mask_goron"
+    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && can_carry_keg && (has_mask_goron || scarecrow_hookshot)"
     BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"

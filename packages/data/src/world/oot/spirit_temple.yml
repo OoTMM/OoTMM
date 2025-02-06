@@ -84,7 +84,7 @@
 "Spirit Temple Child Climb":
   dungeon: Spirit
   exits:
-    "Spirit Temple Statue": "has_explosives"
+    "Spirit Temple Statue": "has_explosives || has_sunlight_arrows"
     "Spirit Temple Child Crawlspace": "small_keys_spirit(5)"
   locations:
     "Spirit Temple Child Climb 1": "has_ranged_weapon_both || (climb_anywhere && (can_use_sword || can_use_sticks || can_hammer)) || (event(SPIRIT_CHILD_DOOR) && (has_ranged_weapon_child || can_hookshot)) || (event(SPIRIT_ADULT_DOOR) && (has_ranged_weapon_adult || can_boomerang))"

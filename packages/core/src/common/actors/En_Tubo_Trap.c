@@ -51,7 +51,7 @@ static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, PlayState* play)
     else
         o.gi = 0;
 
-    csmcPotPreDraw(&this->base, play, o.gi, CSMC_POT_NORMAL_DANGEON);
+    csmcPotPreDraw(&this->base, play, o.gi, o.cloakGi, CSMC_POT_NORMAL_DANGEON);
 
     /* Draw the pot */
     Gfx_DrawDListOpa(play, (void*)ADDR_DLIST);

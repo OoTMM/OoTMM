@@ -38,6 +38,8 @@ const OOT_SCRUBS = [
   ...OOT_SCRUBS_GC,
 ];
 
+const OOT_MERCHANTS = [200, 200, 100, 30];
+
 const MM_SHOP_BOMB = [30, 40, 50, 90];
 const MM_SHOP_CURIOSITY = [500];
 const MM_SHOP_TRADING = [30, 80, 80, 50, 10, 30, 30, 30];
@@ -65,6 +67,7 @@ const MM_TINGLE = [5, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40];
 const PRICES = {
   OOT_SHOPS,
   OOT_SCRUBS,
+  OOT_MERCHANTS,
   MM_SHOPS,
   MM_SHOPS_EX,
   MM_TINGLE,
@@ -195,6 +198,7 @@ export class LogicPassPrice {
     for (const world of this.state.worlds) {
       this.shufflePrices(world, 'OOT_SHOPS', this.state.settings.priceOotShops);
       this.shufflePrices(world, 'OOT_SCRUBS', this.state.settings.priceOotScrubs);
+      this.shufflePrices(world, 'OOT_MERCHANTS', this.state.settings.priceOotMerchants);
       this.shufflePrices(world, 'MM_SHOPS', this.state.settings.priceMmShops);
       this.shufflePrices(world, 'MM_SHOPS_EX', this.state.settings.priceMmShops);
       this.shufflePrices(world, 'MM_TINGLE', this.state.settings.priceMmTingle);

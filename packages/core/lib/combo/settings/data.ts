@@ -817,6 +817,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false,
 }, {
+  key: 'shuffleMerchantsOot',
+  name: 'Merchants Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the Old Hag Potion, Talon Milk and Carpet Man Bombchu are shuffled.',
+  cond: hasOoT,
+  default: false
+}, {
   key: 'shuffleMerchantsMm',
   name: 'Merchants Shuffle (MM)',
   category: 'main.shuffle',
@@ -875,6 +883,7 @@ export const SETTINGS = [{
 },
 { ...SETTING_PRICE, key: 'priceOotShops', name: 'OoT Shop Prices', description: 'Sets the price of items inside OoT shops', cond: hasOoT },
 { ...SETTING_PRICE, key: 'priceOotScrubs', name: 'OoT Scrub Prices', description: 'Sets the price of items sold by OoT scrubs', cond: hasOoT },
+{ ...SETTING_PRICE, key: 'priceOotMerchants', name: 'OoT Merchants Prices', description: 'Sets the price of items sold by OoT merchants', cond: hasOoT },
 { ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shop Prices', description: 'Sets the price of items sold inside MM shops', cond: hasMM },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle', cond: hasMM },
 {
@@ -900,7 +909,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Change the behavior of moon crashing',
   values: [
-    { value: 'reset', name:  'Reset',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
+    { value: 'reset', name:  'Last Save',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
     { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Saving is enabled on the Clock Tower Roof.' },
   ],
   cond: hasMM,
@@ -1347,6 +1356,14 @@ export const SETTINGS = [{
   default: false,
   description: 'Enables CAMC for shuffled Cows',
   cond: (x: any) => x.csmc !== 'never',
+}, {
+  key: 'cloakIceTraps',
+  name: 'Cloak Ice Traps',
+  category: 'main.misc',
+  type: 'boolean',
+  default: true,
+  description: 'Makes Ice Traps look like different items.',
+  cond: hasOoT,
 }, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
@@ -1808,6 +1825,14 @@ export const SETTINGS = [{
   description: "Adds the Goron's Bracelet, Silver Gauntlets and Golden Gauntlets in Majora's Mask.",
   default: false,
   cond: hasMM,
+}, {
+  key: 'kegStrength3',
+  name: "Use Keg With Golden Gauntlets",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "If you have the Golden Gauntlets in Majora's Mask, this allows you to purchase and use Powder Kegs and attempt the Keg Trial.",
+  default: false,
+  cond: (x: any) => x.strengthMm && hasMM(x),
 }, {
   key: 'hammerMm',
   name: "Megaton Hammer (MM)",

@@ -1028,6 +1028,10 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
         gi = o->giRaw;
     else
         gi = o->gi;
+
+    if (gi != GI_MM_SOLD_OUT && o->cloakGi && !(flags & TF_NOCLOAK))
+        gi = o->cloakGi;
+
     comboTextAppendItemNameEx(b, gi, flags, importance);
     if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboConfig.playerId)
     {

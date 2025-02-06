@@ -58,9 +58,11 @@ export class CustomObjectsBuilder {
     //list = editor.stripList(list, 0x060242c8 - b, 0x060245a8 - b);
     editor.submitList(list);
 
-    const bSheath = 0x06015100;
+    const bSheath = 0x06015010;
     let listSheath = editor.listData(bSheath)!;
     listSheath = editor.stripList(listSheath, 0x06015130 - bSheath, 0x06015140 - bSheath);
+    listSheath = editor.stripList(listSheath, 0x060150b0 - bSheath, 0x06015108 - bSheath);
+    listSheath = editor.stripList(listSheath, 0x06015018 - bSheath, 0x06015098 - bSheath);
     editor.submitList(listSheath);
 
     return { name: 'EQ_SHIELD_DEKU', ...editor.build() };

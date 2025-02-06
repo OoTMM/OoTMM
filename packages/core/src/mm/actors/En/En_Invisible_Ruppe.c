@@ -16,7 +16,7 @@ static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, PlayState
     }
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    Draw_GlitterGi(play, &this->base, o.gi);
+    Draw_GlitterGi(play, &this->base, o.gi, o.cloakGi);
 }
 
 void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* play)

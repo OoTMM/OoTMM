@@ -194,7 +194,7 @@ static const Gfx* EnCow_RingList(PlayState* play, Actor* this)
     if (gi == GI_NONE)
         return NULL;
 
-    type = csmcFromItem(gi);
+    type = csmcFromItemCloaked(gi, o.cloakGi);
     if (type == CSMC_NORMAL && giRenew != GI_NONE)
         return kDlistColoredRingRenewable;
 

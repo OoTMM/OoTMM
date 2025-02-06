@@ -47,10 +47,56 @@ static void powderKegHint(PlayState* play)
     comboTextAutoLineBreaks(start);
 }
 
+static void strengthText(PlayState* play)
+{
+    if (!Config_Flag(CFG_MM_KEG_STRENGTH_3)) return;
+
+    char* b;
+
+    b = play->msgCtx.font.textBuffer.schar;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "I'm the Goron who sells " TEXT_COLOR_RED "Powder" TEXT_NL "Kegs");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, ", the most famous product of" TEXT_NL);
+    comboTextAppendStr(&b, "the Gorons." TEXT_NL TEXT_BOX_BREAK_2);
+    comboTextAppendStr(&b, "But the rules say I can't sell" TEXT_NL);
+    comboTextAppendStr(&b, TEXT_COLOR_RED "Powder Kegs");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, " to anyone who isn't" TEXT_NL);
+    comboTextAppendStr(&b, TEXT_COLOR_RED "strong enough");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, " to carry them. " TEXT_SFX("\x39\x1c") "Sorry." TEXT_END);
+}
+
+static void strengthTextRepeat(PlayState* play)
+{
+    if (!Config_Flag(CFG_MM_KEG_STRENGTH_3)) return;
+
+    char* b;
+
+    b = play->msgCtx.font.textBuffer.schar;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "The rules say I can't sell " TEXT_COLOR_RED "Powder" TEXT_NL);
+    comboTextAppendStr(&b, "Kegs");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, " to anyone who isn't " TEXT_COLOR_RED "strong" TEXT_NL);
+    comboTextAppendStr(&b, "enough");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, " to carry them. " TEXT_SFX("\x39\x1c") "Sorry." TEXT_END);
+}
+
 void EnGo_AfterTextBox(Actor* this, PlayState* play, s16 messageId)
 {
-    if (messageId == 0x0c81)
+    switch (messageId)
     {
+    case 0x0c81:
         powderKegHint(play);
+        break;
+    case 0xc8e:
+        strengthText(play);
+        break;
+    case 0xc8f:
+        strengthTextRepeat(play);
+        break;
     }
 }

@@ -15,7 +15,7 @@ static void EnSw_GoldPreDraw1(Actor* this, PlayState* play, int unk)
     PreDraw1(this, play, unk);
 
     /* Inject */
-    csmcGsPreDraw(play, o.gi);
+    csmcGsPreDraw(play, o.gi, o.cloakGi);
 }
 
 PATCH_CALL(0x809488c0, EnSw_GoldPreDraw1);

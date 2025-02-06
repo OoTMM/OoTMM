@@ -46,11 +46,11 @@ static const ChestCsmcData kCsmcData[] = {
     { 1, CUSTOM_CHEST_MAP_FRONT_ADDR, CUSTOM_CHEST_MAP_SIDE_ADDR },
 };
 
-static int csmcChestId(s16 gi)
+static int csmcChestId(s16 gi, s16 cloakGi)
 {
     int csmcId;
 
-    csmcId = csmcFromItem(gi);
+    csmcId = csmcFromItemCloaked(gi, cloakGi);
     switch (csmcId)
     {
     case CSMC_NORMAL:       return CSMC_CHEST_NORMAL;
@@ -84,14 +84,14 @@ static int csmcEnabledActor(Actor* this, PlayState* play)
     return 1;
 }
 
-void csmcChestInit(Actor* this, PlayState* play, s16 gi)
+void csmcChestInit(Actor* this, PlayState* play, s16 gi, s16 cloakGi)
 {
     int type;
 
     if (!csmcEnabledActor(this, play))
         return;
 
-    type = csmcFromItem(gi);
+    type = csmcFromItemCloaked(gi, cloakGi);
     if (type == CSMC_MAJOR || type == CSMC_BOSS_KEY)
     {
         Actor_SetScale(this, 0.01f);
@@ -125,14 +125,14 @@ void csmcChestInit(Actor* this, PlayState* play, s16 gi)
 
 }
 
-void csmcChestPreDraw(Actor* this, PlayState* play, s16 gi)
+void csmcChestPreDraw(Actor* this, PlayState* play, s16 gi, s16 cloakGi)
 {
     int type;
     const void* listFront;
     const void* listSide;
 
     if (csmcEnabledActor(this, play))
-        type = csmcChestId(gi);
+        type = csmcChestId(gi, cloakGi);
     else
         type = CSMC_CHEST_NORMAL;
 
@@ -147,11 +147,11 @@ void csmcChestPreDraw(Actor* this, PlayState* play, s16 gi)
     CLOSE_DISPS();
 }
 
-int csmcChestLarge(s16 gi)
+int csmcChestLarge(s16 gi, s16 cloakGi)
 {
     if (!csmcEnabled())
         return -1;
-    switch (csmcFromItem(gi))
+    switch (csmcFromItemCloaked(gi, cloakGi))
     {
     case CSMC_MAJOR:
     case CSMC_BOSS_KEY:

@@ -84,6 +84,7 @@
 "can_lift_bracelet": "!setting(strengthMm) || has_strength_raw(1)"
 "can_lift_silver": "setting(strengthMm) && has_strength_raw(2)"
 "can_lift_gold": "setting(strengthMm) && has_strength_raw(3)"
+"can_carry_keg": "has_mask_goron || (setting(kegStrength3) && can_lift_gold)"
 
 # Megaton Hammer
 "can_hammer": "setting(hammerMm) && has_hammer_raw"
@@ -165,7 +166,7 @@
 "can_use_ice_arrows": "has_magic && has_arrows && (has(ARROW_ICE) || has(SHARED_ARROW_ICE))"
 "can_use_light_arrows": "has_magic && has_arrows && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT))"
 "can_use_keg": "event(BUY_KEG)"
-"has_mirror_shield": "has(SHIELD_MIRROR) || has(SHARED_SHIELD_MIRROR) || has(SHARED_SHIELD, 3) || (cond(setting(dekuShieldMm), has(SHIELD, 2), has(SHIELD, 3)))"
+"has_mirror_shield": "has(SHIELD_MIRROR) || has(SHARED_SHIELD_MIRROR) || has(SHARED_SHIELD, 3) || (cond(setting(dekuShieldMm), has(SHIELD, 3), has(SHIELD, 2)))"
 "can_use_elegy": "can_play_emptiness"
 "can_use_elegy2": "can_play_emptiness && (has_mask_zora || has_mask_goron)"
 "can_use_elegy3": "can_play_emptiness && has_mask_zora && has_mask_goron"

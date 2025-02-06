@@ -173,6 +173,11 @@ PATCH_END
 
 PATCH_GROUP PG_OOT_FISHING_POND_SHUFFLE
 
+/* Increase draw distance */
+PATCH_START 0x80a3be08
+  lui at,0x46ff
+PATCH_END
+
 /*
 Replaces:
   LUI       V0, 0x80A4 // Relocation

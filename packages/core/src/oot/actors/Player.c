@@ -304,6 +304,9 @@ void EnGs_TalkedTo(Actor*, PlayState*);
 void EnGm_TalkedTo(Actor*, PlayState*);
 void EnMs_TalkedTo(Actor*, PlayState*);
 void EnSsh_TalkedTo(Actor*, PlayState*);
+void EnDs_TalkedTo(Actor*, PlayState*, s16);
+void EnJs_TalkedTo(Actor*, PlayState*, s16);
+void EnTa_TalkedTo(Actor*, PlayState*, s16);
 
 void DemoEffect_TextRutoSapphire(PlayState*);
 
@@ -330,6 +333,15 @@ void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
             break;
         case ACTOR_EN_KANBAN:
             gEnKanban_TalkedTo(actor, play);
+            break;
+        case ACTOR_EN_DS:
+            EnDs_TalkedTo(actor, play, textId);
+            break;
+        case ACTOR_EN_JS:
+            EnJs_TalkedTo(actor, play, textId);
+            break;
+        case ACTOR_EN_TA:
+            EnTa_TalkedTo(actor, play, textId);
             break;
         }
     }
@@ -961,3 +973,16 @@ void Player_AfterBeginFaroresWindTransition(PlayState* play)
 }
 
 PATCH_CALL(0x8084e540, Player_AfterBeginFaroresWindTransition);
+
+/* Fixes a vanilla bug where the frozen link effect would sometimes get distorded */
+void Player_SetupMatrixFrozenEffect(float scale)
+{
+    Player* player;
+
+    player = GET_PLAYER(gPlay);
+    Matrix_Translate(player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, MTXMODE_NEW);
+    Matrix_RotateY(player->actor.world.rot.y * (M_PI / 0x8000), MTXMODE_APPLY);
+    Matrix_Scale(scale * player->actor.scale.x, scale * player->actor.scale.y, scale * player->actor.scale.z, MTXMODE_APPLY);
+}
+
+PATCH_CALL(0x80848b10, Player_SetupMatrixFrozenEffect);

@@ -511,6 +511,8 @@ static void Play_AfterInit(PlayState* play)
     case SCE_OOT_LAIR_MORPHA:
     case SCE_OOT_LAIR_BONGO_BONGO:
     case SCE_OOT_LAIR_TWINROVA:
+    case SCE_OOT_LAIR_GANONDORF:
+    case SCE_OOT_GANON_BATTLE_ARENA:
         if (!gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams)
         {
             /* Copy to the custom death respawn */
@@ -577,7 +579,10 @@ void Play_MainWrapper(PlayState* play)
     Audio_DisplayMusicName(play);
 
     if (play->pauseCtx.state == 0)
+    {
         DrawGiSystem_Update(play);
+        Play_UpdateIceTrap(play);
+    }
 
     Debug_Update();
 }

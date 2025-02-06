@@ -58,7 +58,7 @@ void EnExRuppy_Draw(Actor_EnExRuppy* this, PlayState* play)
     EnExRuppy_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
     Matrix_Scale(25.0f, 25.0f, 25.0f, MTXMODE_APPLY);
-    Draw_Gi(play, &this->actor, o.gi, 0);
+    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
 }
 
 void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, PlayState* play)

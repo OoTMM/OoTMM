@@ -82,7 +82,7 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, PlayState* play)
     }
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    Draw_GlitterGi(play, &this->base, o.gi);
+    Draw_GlitterGi(play, &this->base, o.gi, o.cloakGi);
 }
 
 static void EnWonderItem_DropCustomDecoy(Actor_EnWonderItem* this, PlayState* play)

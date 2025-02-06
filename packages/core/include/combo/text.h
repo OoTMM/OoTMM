@@ -43,6 +43,7 @@
 # define TEXT_SIGNAL         "\xe0"
 # define TEXT_ICON           ""
 # define TEXT_BB             "\x10"
+# define TEXT_SFX(sfxId)     "\x1e" sfxId
 #endif
 
 #define TEXT_C0   TEXT_COLOR_TEAL
@@ -57,6 +58,7 @@
 #define TF_PROGRESSIVE  (1 << 2)
 #define TF_SIGNAL       (1 << 3)
 #define TF_PLURAL       (1 << 4)
+#define TF_NOCLOAK      (1 << 5)
 
 #define TFS_CONFIRM     (1 << 0)
 #define TFS_MUSHROOM    (1 << 1)

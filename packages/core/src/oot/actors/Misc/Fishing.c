@@ -94,7 +94,7 @@ void Fishing_DrawFish_SkelAnime(PlayState* play, void** skeleton, Vec3s* jointTa
     Matrix_MultVec3f(&mouthOffset, fishMouthPos);
 
     Matrix_Scale(56.0f, 56.0f, 56.0f, MTXMODE_APPLY);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
 }
 
 PATCH_CALL(0x80a405d8, Fishing_DrawFish_SkelAnime);

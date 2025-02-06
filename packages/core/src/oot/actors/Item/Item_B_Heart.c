@@ -29,7 +29,7 @@ static void ItemBHeart_Draw(Actor* this, PlayState* play)
 
     ItemBHeart_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80909620, ItemBHeart_Draw);

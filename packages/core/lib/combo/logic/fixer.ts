@@ -2,7 +2,7 @@ import { ItemHelpers, Items } from '../items';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { mustStartWithMasterSword } from '../settings/util';
-import { Location, MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS, isLocationChestFairy, isLocationOtherFairy, makeLocation } from './locations';
+import { Location, MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, isLocationChestFairy, isLocationOtherFairy, makeLocation } from './locations';
 import { World } from './world';
 
 export class LogicPassFixer {
@@ -33,6 +33,10 @@ export class LogicPassFixer {
     }
 
     if (!settings.shuffleMerchantsMm && MM_MERCHANTS.includes(locId)) {
+      return true;
+    }
+
+    if (!settings.shuffleMerchantsOot && OOT_MERCHANTS.includes(locId)) {
       return true;
     }
 
