@@ -260,7 +260,23 @@ void ObjHamishi_Update(Actor_ObjHamishi* this, PlayState* play) {
     }
 }
 
+static int ObjHamishi_CsmcType(Actor_ObjHamishi* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!ObjHamishi_IsShuffled(this))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
 void ObjHamishi_Draw(Actor_ObjHamishi* this, PlayState* play) {
+    int camcType;
+
     OPEN_DISPS(play->state.gfxCtx);
 
     Gfx_SetupDL_25Opa(play->state.gfxCtx);
@@ -268,7 +284,13 @@ void ObjHamishi_Draw(Actor_ObjHamishi* this, PlayState* play) {
     MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 170, 130, 255);
     gSPDisplayList(POLY_OPA_DISP++, gSilverRockDL);
-
+    camcType = ObjHamishi_CsmcType(this, play);
+    if(camcType != CSMC_NORMAL)
+    {
+      const Color_RGB8*   color;
+      color = csmcTypeColor(camcType);
+      Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 4.5f, 120.f);
+    }
     CLOSE_DISPS();
 }
 
