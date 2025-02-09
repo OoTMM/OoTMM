@@ -50,6 +50,7 @@ test("Can make a seed - MQ Extrasanity", async () => {
     shuffleWonderItemsMm: true,
     fairySpotShuffleOot: true,
     shuffleRedBouldersOot: true,
+    shuffleRedBouldersMm: true,
     mqDungeons: { type: 'all' },
   });
   expect(res).toBeDefined();

@@ -50,6 +50,7 @@ test("Can make a seed - Extrasanity", async () => {
     shuffleWonderItemsMm: true,
     fairySpotShuffleOot: true,
     shuffleRedBouldersOot: true,
+    shuffleRedBouldersMm: true,
   });
   expect(res).toBeDefined();
 });

@@ -404,7 +404,7 @@ void ObjSnowball2_Destroy(Actor_ObjSnowball2* this, PlayState* play) {
 }
 
 void func_80B39C78(Actor_ObjSnowball2* this) {
-    this->actor.flags |= ACTOR_FLAG_MM_10;
+    this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
     this->unk_1AD = 0;
     this->actionFunc = func_80B39C9C;
 }
@@ -418,7 +418,7 @@ void func_80B39C9C(Actor_ObjSnowball2* this, PlayState* play) {
 
     if (Actor_HasParent(&this->actor, play)) {
         this->actor.room = -1;
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
         if (Item_CollectibleDropTable2(ENOBJSNOWBALL2_GET_3F(&this->actor))) {
             ObjSnowball2_DropCollectible(this, play);
         }
@@ -446,7 +446,7 @@ void func_80B39C9C(Actor_ObjSnowball2* this, PlayState* play) {
             if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) &&
                 (DynaPoly_GetActor(&play->colCtx, this->actor.floorBgId) == NULL)) {
                 this->unk_1AD = 1;
-                this->actor.flags &= ~ACTOR_FLAG_MM_10;
+                this->actor.flags &= ~ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
             }
         }
 
@@ -593,7 +593,7 @@ void func_80B3A13C(Actor_ObjSnowball2* this, PlayState* play) {
 void func_80B3A498(Actor_ObjSnowball2* this) {
     this->actor.home.pos.x = this->actor.world.pos.x;
     this->unk_1AC = 46;
-    this->actor.flags |= ACTOR_FLAG_MM_10;
+    this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
     this->actor.home.pos.y = this->actor.world.pos.y + this->actor.depthInWater;
     this->actor.home.pos.z = this->actor.world.pos.z;
     this->actor.world.pos.y += this->actor.shape.yOffset * this->actor.scale.y;

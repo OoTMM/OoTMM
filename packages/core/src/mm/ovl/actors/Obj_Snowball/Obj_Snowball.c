@@ -657,7 +657,7 @@ void func_80B04350(Actor_ObjSnowball* this, PlayState* play) {
     if (flag && (this->unk_211 == 0) &&
         (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags &
          (0x80000000 | 0x4000 | 0x800 | 0x400 | 0x100 | 0x8))) {
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
         if (this->actor.home.rot.y == 1) {
             this->actor.flags &= ~(ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY);
         }
@@ -876,11 +876,11 @@ void ObjSnowball_Update(Actor_ObjSnowball* this, PlayState* play) {
     if (this->actor.home.rot.y == 1) {
         if (this->unk_211 != 0) {
             if (Actor_TextboxIsClosing(&this->actor, play)) {
-                this->actor.flags &= ~ACTOR_FLAG_MM_10;
+                this->actor.flags &= ~ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
                 this->unk_211 = 0;
             }
         } else if (Actor_TalkOfferAccepted(&this->actor, &play->state)) {
-            this->actor.flags |= ACTOR_FLAG_MM_10;
+            this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
             this->unk_211 = 1;
         } else if (this->actor.isTargeted) {
             sp24 = TRUE;

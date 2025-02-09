@@ -710,6 +710,9 @@ Deku Palace Rupee Left Far 2,                           rupee,          NONE,   
 Deku Palace Rupee Left Far 3,                           rupee,          NONE,                   DEKU_PALACE,                  0x00209,                    RUPEE_BLUE
 Deku Palace Rupee Layout-Dependant 1,                   rupee,          NONE,                   DEKU_PALACE,                  0x0020a,                    RUPEE_BLUE
 Deku Palace Rupee Layout-Dependant 2,                   rupee,          NONE,                   DEKU_PALACE,                  0x0020b,                    RUPEE_BLUE
+Deku Palace Red Boulder 1,                              redboulder,     NONE,                   DEKU_PALACE,                  0x0010c,                    NOTHING
+Deku Palace Red Boulder 2,                              redboulder,     NONE,                   DEKU_PALACE,                  0x0010d,                    NOTHING
+Deku Palace Red Boulder 3,                              redboulder,     NONE,                   DEKU_PALACE,                  0x0010e,                    NOTHING
 Deku Shrine Mask of Scents,                             npc,            BUTLER_RACE,            DEKU_SHRINE,                  MASK_SCENTS,                MASK_SCENTS
 Deku Shrine Pot 1,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000e,                     RUPEE_GREEN
 Deku Shrine Pot 2,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000f,                     RUPEE_GREEN
@@ -957,6 +960,9 @@ Mountain Village Butterfly Pack 2 Butterfly 2,          butterfly,      NONE,   
 Mountain Village Butterfly Pack 2 Butterfly 3,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x20021,                    NOTHING
 Mountain Village Butterfly Pack 2 Butterfly 4,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x30021,                    NOTHING
 Mountain Village Butterfly Pack 2 Butterfly 5,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x40021,                    NOTHING
+Mountain Village Spring Red Boulder 1,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00000,                    NOTHING
+Mountain Village Spring Red Boulder 2,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00001,                    NOTHING
+Mountain Village Spring Red Boulder 3,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00002,                    NOTHING
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
@@ -1523,6 +1529,7 @@ Road to Ikana Grotto Grass 13,                          grass,          NONE,   
 Road to Ikana Grotto Grass 14,                          grass,          NONE,                   GROTTOS,                      0x03613,                    RANDOM
 Road to Ikana Stone Mask,                               npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
 Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
+Road to Ikana Red Boulder,                              redboulder,     NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Gorman Track Garo Mask,                                 npc,            NONE,                   GORMAN_TRACK,                 MASK_GARO,                  MASK_GARO
 Gorman Track Milk Purchase,                             npc,            NONE,                   GORMAN_TRACK,                 GORMAN_MILK,                MILK
 Gorman Track Crate,                                     crate,          NONE,                   GORMAN_TRACK,                 0x00049,                    NOTHING

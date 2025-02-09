@@ -330,7 +330,7 @@ void ObjKibako2_Idle(Actor_ObjKibako2* this, PlayState* play)
     {
         ObjKibako2_Break(this, play);
         SfxSource_PlaySfxAtFixedWorldPos(play, &this->dyna.actor.world.pos, 20, NA_SE_EV_WOODBOX_BREAK);
-        this->dyna.actor.flags |= ACTOR_FLAG_MM_10;
+        this->dyna.actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
         DynaPoly_DisableCollision(play, &play->colCtx.dyna, this->dyna.bgId);
         this->dyna.actor.draw = NULL;
         this->actionFunc = ObjKibako2_Kill;
@@ -515,7 +515,7 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
         if (Item_CanDropBigFairy(play, KIBAKO2_COLLECTIBLE_ID(this),
                                  KIBAKO2_COLLECTIBLE_FLAG(this))) {
             this->unk_1AC = 1;
-            this->dyna.actor.flags |= ACTOR_FLAG_MM_10;
+            this->dyna.actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
         }
     }
     if ((contents != OBJKIBAKO2_CONTENTS_SKULLTULA) || !ObjKibako2_ContainsSkulltula(this, play)) {

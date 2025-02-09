@@ -522,7 +522,7 @@ void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
         func_80A1CBF8(this);
         this->actor.room = -1;
         this->actor.colChkInfo.mass = 180;
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
         if (Item_CollectibleDropTable2(ENOBJFLOWERPOT_GET_3F(this)))
         {
             ObjFlowerpot_GrassSpawnCollectible(this, play);
@@ -571,7 +571,7 @@ void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
             if (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) {
                 if (this->actor.colChkInfo.mass == MASS_IMMOVABLE) {
                     if (DynaPoly_GetActor(&play->colCtx, this->actor.floorBgId) == NULL) {
-                        this->actor.flags &= ~ACTOR_FLAG_MM_10;
+                        this->actor.flags &= ~ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
                         this->unk_1EA &= ~0x1;
                     }
                 } else if (Math3D_Vec3fDistSq(&this->actor.world.pos, &this->actor.prevPos) < 0.01f) {

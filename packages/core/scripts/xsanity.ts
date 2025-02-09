@@ -192,6 +192,7 @@ const ACTORS_MM = {
   OBJ_SNOWBALL: 0x1dc,
   OBJ_SNOWBALL2: 0x1f9,
   //DOOR_ANA: 0x55,
+  OBJ_HAMISHI: 0x0fc,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -1358,9 +1359,10 @@ function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Barrel', type: 'barrel' });
 }
 
-function actorHandlerOotObjHamishi(checks: Check[], ra: RoomActor) {
+function actorHandlerObjHamishi(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'redboulder' });
 }
+
 
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
@@ -1371,7 +1373,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_MURE]: actorHandlerOotObjMure,
   [ACTORS_OOT.OBJ_HANA]: actorHandlerOotObjHana,
   [ACTORS_OOT.OBJ_MURE2]: actorHandlerOotObjMure2,
-  [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerOotObjHamishi,
+  [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerObjHamishi,
 };
 
 const ACTORS_HANDLERS_MM = {
@@ -1386,6 +1388,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_MURE]: actorHandlerMmObjMure,
   [ACTORS_MM.OBJ_MURE2]: actorHandlerMmObjMure2,
   [ACTORS_MM.OBJ_GRASS_UNIT]: actorHandlerMmObjGrassUnit,
+  [ACTORS_MM.OBJ_HAMISHI]: actorHandlerObjHamishi,
 };
 
 const ACTORS_HANDLERS = {

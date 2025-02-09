@@ -22,9 +22,9 @@
 #define ACTOR_FLAG_OOT_30           (1 << 30)
 #define ACTOR_FLAG_OOT_31           (1 << 31)
 
-#define ACTOR_FLAG_MM_10                        (1 << 4)
+#define ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED   (1 << 4)
 #define ACTOR_FLAG_MM_20                        (1 << 5)
-#define ACTOR_FLAG_MM_40                        (1 << 6)
+#define ACTOR_FLAG_MM_INSIDE_CULLING_VOLUME     (1 << 6)
 #define ACTOR_FLAG_MM_200                       (1 << 9)
 #define ACTOR_FLAG_MM_400                       (1 << 10)
 #define ACTOR_FLAG_MM_800                       (1 << 11)
@@ -605,6 +605,9 @@ typedef struct NpcInteractInfo {
 #if defined(GAME_OOT)
 void func_80033480(struct PlayState* play, Vec3f* posBase, f32 randRangeDiameter, s32 amountMinusOne, s16 scaleBase,
                    s16 scaleStep, u8 arg6);
+#else
+extern Gfx D_801AEFA0[];
+extern Gfx D_801AEF88[];
 #endif
 
 #endif

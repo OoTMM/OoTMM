@@ -800,6 +800,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleButterfliesOot = true;
       base.shuffleButterfliesMm = true;
       base.shuffleRedBouldersOot = true;
+      base.shuffleRedBouldersMm = true;
       break;
     case 3:
       base.shufflePotsOot = 'overworld';
@@ -821,6 +822,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleButterfliesOot = true;
       base.shuffleButterfliesMm = true;
       base.shuffleRedBouldersOot = true;
+      base.shuffleRedBouldersMm = true;
       break;
     case 4:
       base.shufflePotsOot = 'dungeons';
@@ -858,6 +860,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleButterfliesOot = booleanWeighted(random, 0.5);
       base.shuffleButterfliesMm = booleanWeighted(random, 0.5);
       base.shuffleRedBouldersOot = booleanWeighted(random, 0.5);
+      base.shuffleRedBouldersMm = booleanWeighted(random, 0.5);
       break;
     }
   }

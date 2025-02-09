@@ -14,6 +14,11 @@ typedef struct Actor_ObjHamishi {
     s16 shakePosPhase;
     s16 shakeRotPhase;
     s16 hitCount;
+#if defined(GAME_MM)
+    s8 unk_1A0;
+    s8 unk_1A1;
+    u8 unk_1A2;
+#endif
 
     Xflag  xflag;
     u8     isExtended;

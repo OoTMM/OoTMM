@@ -155,6 +155,8 @@
 "has_bombchu": "bombchu_source && bombchu_license"
 
 "can_break_boulders": "has_explosives || has_mask_goron || can_hammer"
+"can_break_red_boulders": "has_mask_goron || can_hammer || (can_use_keg && trick(MM_KEG_RED_BOULDER))"
+
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
 "can_break_snowballs": "can_break_boulders || can_use_fire_short_range"
 "can_use_lens": "can_use_lens_strict || trick(MM_LENS)"

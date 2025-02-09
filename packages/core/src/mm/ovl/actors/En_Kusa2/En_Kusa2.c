@@ -2,7 +2,7 @@
 #include <assets/mm/objects/gameplay_field_keep.h>
 #include <assets/mm/objects/gameplay_keep.h>
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_THROW_ONLY)
+#define FLAGS (ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
 
 #define THIS ((EnKusa2*)thisx)
 
@@ -287,7 +287,7 @@ void func_80A5BB40(EnKusa2* this, PlayState* play, s32 arg2) {
     f32 temp_f24;
     s16 temp_s0;
 
-    if (this->actor.flags & ACTOR_FLAG_MM_40) {
+    if (this->actor.flags & ACTOR_FLAG_MM_INSIDE_CULLING_VOLUME) {
         for (i = 0; i <= arg2; i++) {
             temp_s0 = Rand_S16Offset(-16000, 32000) + this->actor.world.rot.y;
             temp_f20 = Math_SinS(temp_s0);
