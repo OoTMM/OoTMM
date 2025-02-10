@@ -2776,7 +2776,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffle the Mask Shop & Clock Tower entrances among the other indoors.',
   default: false,
-  cond: (x: any) => x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full'),
+  cond: (x: any) => hasOoTMM(x) && (x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full')),
 }, {
   key: 'erWarps',
   name: 'Shuffle Warp Songs and Soaring Spots',
