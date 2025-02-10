@@ -1203,7 +1203,7 @@ export class LogicPassWorldTransform {
     }
 
     if(!settings.shuffleRedBouldersMm) {
-      const data = POOL.oot.filter((x: any) => x.type === 'redboulder').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      const data = POOL.mm.filter((x: any) => x.type === 'redboulder').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(data);
     }
 
