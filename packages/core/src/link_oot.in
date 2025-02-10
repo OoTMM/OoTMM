@@ -710,3 +710,4 @@ Message_Init = 0x800e2008;
 Sfx_PlaySfxCentered = 0x800646f0;
 AudioOcarina_SetInstrument = 0x800c2c90;
 
+DynaPoly_EnableCollision = 0x80031530;
