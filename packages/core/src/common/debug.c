@@ -707,7 +707,7 @@ static void cheatAllItems(PlayState* play)
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
     gSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
-    gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
+    gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_BUNNY_HOOD;
 
     SetEventChk(EV_OOT_CHK_EPONA);
 

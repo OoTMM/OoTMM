@@ -172,7 +172,7 @@ void comboTextHijackItemEx(PlayState* play, const ComboItemOverride* o, int coun
     isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
 #if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 #else
     b = play->msgCtx.font.textBuffer.schar;
 #endif

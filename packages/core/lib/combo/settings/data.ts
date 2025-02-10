@@ -801,6 +801,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false,
 }, {
+  key: 'shuffleFrogsRupeesOot',
+  name: 'Frogs Rupees Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the purple rupees from the frogs in Zora\'s River are shuffled',
+  cond: hasOoT,
+  default: false,
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

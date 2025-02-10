@@ -266,7 +266,7 @@ void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, PlayState* play)
 {
     if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) <
         sActivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) {
-        this->actor.flags |= ACTOR_FLAG_OOT_4;
+        this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         ObjMure2_SpawnChildren(this, play);
         ObjMure2_SetupWaitForPlayerOutOfRange(this);
     }
@@ -283,7 +283,7 @@ void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, PlayState* play)
 
     if ((sDeactivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
     {
-        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         ObjMure2_KillChildren(this, play);
         ObjMure2_SetupWaitForPlayerInRange(this);
     }

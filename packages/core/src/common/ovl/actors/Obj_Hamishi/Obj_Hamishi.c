@@ -16,7 +16,7 @@
 #else
 # include "assets/mm/objects/gameplay_field_keep.h"
 # define OBJHAMISHI_GET_SWITCH_FLAG(thisx) ((thisx)->params & 0x7F)
-# define FLAGS ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED
+# define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 # define DAMAGE (DMG_POWDER_KEG | DMG_GORON_PUNCH | DMG_GORON_PUNCH)
 # define SILVER_ROCK_FRAGMENTS_DL gameplay_field_keep_DL_006420
 # define SILVER_ROCK_DL gameplay_field_keep_DL_0061E8

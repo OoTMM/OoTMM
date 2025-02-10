@@ -6,7 +6,7 @@
 #include <assets/mm/objects/gameplay_dangeon_keep.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY | ACTOR_FLAG_CAN_PRESS_SWITCHES)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY | ACTOR_FLAG_CAN_PRESS_SWITCHES)
 
 #define OBJ_TSUBO_P000F(thisx)      ((thisx)->params & 0x0F)
 #define OBJ_TSUBO_P001F(thisx)      ((thisx)->params & 0x1F)

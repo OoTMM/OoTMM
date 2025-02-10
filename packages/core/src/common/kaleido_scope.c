@@ -37,7 +37,7 @@ static void saveMessage(PlayState* play)
     char* b;
 
 #if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 #else
     b = play->msgCtx.font.textBuffer.schar;
 #endif
@@ -53,7 +53,7 @@ static void gameSavedMessage(PlayState* play)
     char* b;
 
 #if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 #else
     b = play->msgCtx.font.textBuffer.schar;
 #endif

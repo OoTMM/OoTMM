@@ -541,6 +541,11 @@ Zora River Wonder Item Back 24,                             wonder,         NONE
 Zora River Wonder Item Back 25,                             wonder,         NONE,                 ZORA_RIVER,                     0x00106,                    RUPEE_GREEN
 Zora River Wonder Item Back 26,                             wonder,         NONE,                 ZORA_RIVER,                     0x00107,                    RUPEE_GREEN
 Zora River Wonder Item Back 27,                             wonder,         NONE,                 ZORA_RIVER,                     0x00108,                    RUPEE_GREEN
+Zora River Frogs Zeldas Lullaby,                            npc,            NONE,                 ZORA_RIVER,                     FROGS_ZL,                   RUPEE_PURPLE
+Zora River Frogs Eponas Song,                               npc,            NONE,                 ZORA_RIVER,                     FROGS_EPONA,                RUPEE_PURPLE
+Zora River Frogs Sarias Song,                               npc,            NONE,                 ZORA_RIVER,                     FROGS_SARIA,                RUPEE_PURPLE
+Zora River Frogs Suns Song,                                 npc,            NONE,                 ZORA_RIVER,                     FROGS_SUNS,                 RUPEE_PURPLE
+Zora River Frogs Song of Time,                              npc,            NONE,                 ZORA_RIVER,                     FROGS_SOT,                  RUPEE_PURPLE
 Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
 Zora Domain Diving Game Green Rupee,                        collectible,    NONE,                 ZORA_DOMAIN,                    0x1,                        RUPEE_GREEN

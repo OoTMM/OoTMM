@@ -27,7 +27,7 @@ void DemoEffect_TextRutoSapphire(PlayState* play)
     char* start;
 
     DemoEffect_SapphireItemQuery(&q);
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Princess Ruto got ");

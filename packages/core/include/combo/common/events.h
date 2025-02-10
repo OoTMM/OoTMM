@@ -58,6 +58,12 @@
 #define EV_OOT_CHK_LIGHT_ARROW              0xc4
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
 #define EV_OOT_CHK_FROGS_GAME               0xd0
+#define EV_OOT_CHK_FROGS_ZL                 0xd1
+#define EV_OOT_CHK_FROGS_EPONA              0xd2
+#define EV_OOT_CHK_FROGS_SUNS               0xd3
+#define EV_OOT_CHK_FROGS_SARIA              0xd4
+#define EV_OOT_CHK_FROGS_SOT                0xd5
+#define EV_OOT_CHK_FROGS_STORMS             0xd6
 #define EV_OOT_CHK_JABU_JABU_OPEN           0x3a
 
 #define EV_OOT_CHK_TRIAL_LIGHT              0xbf
@@ -268,6 +274,15 @@
 #define EV_OOT_IS_SWORDLESS()                               (!!(gOotSave.info.eventsMisc[29]))
 #define EV_OOT_SET_SWORDLESS()                              do { gOotSave.info.eventsMisc[29] = 1; } while (0)
 #define EV_OOT_UNSET_SWORDLESS()                            do { gOotSave.info.eventsMisc[29] = 0; } while (0)
+
+#if defined(GAME_OOT)
+#define EVENTCHKINF_INDEX(flag) ((flag) >> 4)
+#define EVENTCHKINF_MASK(flag) (1 << ((flag) & 0xF))
+
+#define GET_EVENTCHKINF(flag) (gOotSave.info.eventsChk[EVENTCHKINF_INDEX(flag)] & EVENTCHKINF_MASK(flag))
+#define SET_EVENTCHKINF(flag) (gOotSave.info.eventsChk[EVENTCHKINF_INDEX(flag)] |= EVENTCHKINF_MASK(flag))
+#define CLEAR_EVENTCHKINF(flag) (gOotSave.info.eventsChk[EVENTCHKINF_INDEX(flag)] &= ~EVENTCHKINF_MASK(flag))
+#endif
 
 #if !defined(__ASSEMBLER__)
 # define MM_SET_EVENT_WEEK(x)       (gMmSave.info.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))

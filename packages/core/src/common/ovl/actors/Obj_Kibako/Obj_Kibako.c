@@ -4,7 +4,7 @@
 #include <combo/custom.h>
 #include "Obj_Kibako.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_CAN_PRESS_SWITCHES)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_CAN_PRESS_SWITCHES)
 
 void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play);
 void ObjKibako_Destroy(Actor_ObjKibako* this, PlayState* play);

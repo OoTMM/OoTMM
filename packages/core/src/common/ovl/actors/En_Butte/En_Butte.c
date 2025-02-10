@@ -400,7 +400,7 @@ void EnButte_FollowLink(Actor_EnButte* this, PlayState* play) {
 void EnButte_SetupTransformIntoFairy(Actor_EnButte* this)
 {
     this->timer = 9;
-    this->actor.flags |= ACTOR_FLAG_OOT_4;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     this->skelAnime.playSpeed = 1.0f;
     EnButte_ResetTransformationEffect();
     this->actionFunc = EnButte_TransformIntoFairy;

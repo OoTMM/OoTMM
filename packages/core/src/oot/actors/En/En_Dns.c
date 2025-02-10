@@ -198,7 +198,7 @@ static void EnDns_ShopText(Actor* this, PlayState* play)
 
     EnDns_ItemQuery(&q, EnDns_GetID(this));
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     start = b;
     price = EnDns_GetPrice(this);
     comboTextAppendShopHeader(&b, price);

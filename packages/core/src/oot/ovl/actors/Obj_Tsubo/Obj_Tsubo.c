@@ -11,7 +11,7 @@
 #include <assets/oot/objects/object_tsubo.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_THROW_ONLY)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play);
 void ObjTsubo_Destroy(Actor_ObjTsubo* this, PlayState* play2);
@@ -330,7 +330,7 @@ void ObjTsubo_WaitForObject(Actor_ObjTsubo* this, PlayState* play)
         this->actor.draw = ObjTsubo_Draw;
         this->actor.objectSlot = this->requiredObjectSlot;
         ObjTsubo_SetupIdle(this);
-        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     }
 }
 
@@ -394,7 +394,7 @@ void ObjTsubo_SetupLiftedUp(Actor_ObjTsubo* this)
     this->actor.room = -1;
     //! @bug: This is an unsafe cast, although the sound effect will still play
     Player_PlaySfx((Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
-    this->actor.flags |= ACTOR_FLAG_OOT_4;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 }
 
 void ObjTsubo_LiftedUp(Actor_ObjTsubo* this, PlayState* play)

@@ -5,7 +5,7 @@
 #include "En_Goroiwa.h"
 #include "assets/mm/objects/object_goroiwa.h"
 
-#define FLAGS (ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_80000000)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_80000000)
 
 void EnGoroiwa_Init(Actor_EnGoroiwa* this, PlayState* play);
 void EnGoroiwa_Destroy(Actor_EnGoroiwa* this, PlayState* play);

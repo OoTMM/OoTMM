@@ -9,7 +9,7 @@
 #include <combo/math.h>
 #include <combo/actor.h>
 
-#define FLAGS (ACTOR_FLAG_OOT_4)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnTorch2_Init(Actor_CustomEnTorch2 *this, PlayState *play);
 void EnTorch2_Destroy(Actor_CustomEnTorch2 *this, PlayState *play);

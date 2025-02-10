@@ -12,7 +12,6 @@
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
 #define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
 
-#define ACTOR_FLAG_OOT_4            (1 << 4)
 #define ACTOR_FLAG_OOT_5            (1 << 5)
 #define ACTOR_FLAG_OOT_6            (1 << 6)
 #define ACTOR_FLAG_OOT_9            (1 << 9)
@@ -22,7 +21,6 @@
 #define ACTOR_FLAG_OOT_30           (1 << 30)
 #define ACTOR_FLAG_OOT_31           (1 << 31)
 
-#define ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED   (1 << 4)
 #define ACTOR_FLAG_MM_20                        (1 << 5)
 #define ACTOR_FLAG_MM_INSIDE_CULLING_VOLUME     (1 << 6)
 #define ACTOR_FLAG_MM_200                       (1 << 9)
@@ -55,6 +53,7 @@
 #define ACTOR_FLAG_ATTENTION_ENABLED            (1 << 0)
 #define ACTOR_FLAG_HOSTILE                      (1 << 2)
 #define ACTOR_FLAG_FRIENDLY                     (1 << 3)
+#define ACTOR_FLAG_UPDATE_CULLING_DISABLED      (1 << 4)
 #define ACTOR_FLAG_REACT_TO_LENS                (1 << 7)
 #define ACTOR_FLAG_TALK                         (1 << 8)
 #define ACTOR_FLAG_IGNORE_QUAKE                 (1 << 12)

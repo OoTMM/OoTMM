@@ -5,7 +5,7 @@
 
 #define ENINSECT_PARAMS(param) (param)
 
-#define FLAGS (ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
 
 #define THIS ((EnKusa*)thisx)
 
@@ -475,13 +475,13 @@ void EnKusa_WaitObject(EnKusa* this, PlayState* play) {
             this->actor.draw = EnKusa_DrawGrass;
         }
         this->actor.objectSlot = this->objectSlot;
-        this->actor.flags &= ~ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     }
 }
 
 void EnKusa_SetupInteract(EnKusa* this) {
     this->actionFunc = EnKusa_WaitForInteract;
-    this->actor.flags &= ~ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
+    this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 }
 
 void EnKusa_WaitForInteract(EnKusa* this, PlayState* play) {
@@ -532,7 +532,7 @@ void EnKusa_WaitForInteract(EnKusa* this, PlayState* play) {
 void EnKusa_SetupLiftedUp(EnKusa* this) {
     this->actionFunc = EnKusa_LiftedUp;
     this->actor.room = -1;
-    this->actor.flags |= ACTOR_FLAG_MM_UPDATE_CULLING_DISABLED;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 }
 
 void EnKusa_LiftedUp(EnKusa* this, PlayState* play) {

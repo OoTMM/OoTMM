@@ -8,7 +8,7 @@
 #include "assets/oot/objects/object_bombf.h"
 // #include "overlays/effects/ovl_Effect_Ss_Dead_Sound/z_eff_ss_dead_sound.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_OOT_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnBombf_Init(Actor* thisx, PlayState* play);
 void EnBombf_Destroy(Actor* thisx, PlayState* play);
