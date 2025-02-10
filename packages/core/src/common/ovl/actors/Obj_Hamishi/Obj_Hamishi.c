@@ -90,7 +90,14 @@ static void ObjHamishi_Alias(Actor_ObjHamishi* this)
         if(xflag->setupId == 2)
         {
             xflag->setupId = 0;
-            xflag->id -= 40;
+            switch(xflag->id)
+            {
+            case 1: xflag->id = 41; break;
+            case 4: xflag->id = 45; break;
+            case 2: xflag->id = 42; break;
+            case 5: xflag->id = 46; break;
+            case 3: xflag->id = 43; break;
+            }
         }
         break;
     case SCE_OOT_DEATH_MOUNTAIN_CRATER:
@@ -99,18 +106,10 @@ static void ObjHamishi_Alias(Actor_ObjHamishi* this)
             xflag->setupId = 0;
             switch(xflag->id)
             {
-            case 4:
-                xflag->id = 0xc;
-                break;
-            case 5:
-                xflag->id = 0xd;
-                break;
-            case 6:
-                xflag->id = 0xb;
-                break;
-            case 7:
-                xflag->id = 0xe;
-                break;
+            case 4: xflag->id = 12; break;
+            case 5: xflag->id = 13; break;
+            case 6: xflag->id = 11; break;
+            case 7: xflag->id = 14; break;
             }
         }
         break;
@@ -125,9 +124,10 @@ static int ObjHamishi_IsShuffled(Actor_ObjHamishi* this)
 
 static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
 {
+    Player* player = GET_PLAYER(play);
     if (!ObjHamishi_IsShuffled(this))
         return 0;
-    EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    EnItem00_DropCustom(play, &player->actor.world.pos, &this->xflag);
     return 1;
 }
 
