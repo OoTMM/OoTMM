@@ -124,10 +124,18 @@ static int ObjHamishi_IsShuffled(Actor_ObjHamishi* this)
 
 static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
 {
-    Player* player = GET_PLAYER(play);
     if (!ObjHamishi_IsShuffled(this))
         return 0;
-    EnItem00_DropCustom(play, &player->actor.world.pos, &this->xflag);
+    if(this->xflag.sceneId == SCE_OOT_DEATH_MOUNTAIN_CRATER && this->xflag.id == 14)
+    {
+        Player* player;
+        player = GET_PLAYER(play);
+        EnItem00_DropCustom(play, &player->actor.world.pos, &this->xflag);
+    }
+    else
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    }
     return 1;
 }
 
@@ -275,9 +283,9 @@ void ObjHamishi_Init(Actor_ObjHamishi* this, PlayState* play) {
 #endif
 
 #if defined(GAME_OOT)
-    if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 0, 6))) {
+    if (!ObjHamishi_IsShuffled(this) && Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 0, 6))) {
 #else
-    if (Flags_GetSwitch(play, OBJHAMISHI_GET_SWITCH_FLAG(&this->actor))) {
+    if (!ObjHamishi_IsShuffled(this) && Flags_GetSwitch(play, OBJHAMISHI_GET_SWITCH_FLAG(&this->actor))) {
 #endif
         Actor_Kill(&this->actor);
         return;
