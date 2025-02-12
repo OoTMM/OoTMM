@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 - Fix an odd interaction between open MM dungeons and the moon crash.
 - Fix Ganondorf and Ganon fight not allowing Return to Dungeon Entrance.
 - Fix logic for pots in upper Deku Palace.
+- Fix snowballs in Snowhead (spring) not being paired with their winter counterpart.
 
 ## [27.0] - 2025-01-04
 

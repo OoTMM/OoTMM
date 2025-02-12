@@ -96,7 +96,7 @@ void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
                 UNREACHABLE();
         }
     }
-    if (xflag->sceneId == SCE_MM_PATH_SNOWHEAD)
+    if (xflag->sceneId == SCE_MM_PATH_SNOWHEAD && xflag->setupId == 1)
     {
         switch(xflag->id)
         {
@@ -108,26 +108,14 @@ void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
                 break;
         }
     }
-    if (xflag->sceneId == SCE_MM_SNOWHEAD)
+    if (xflag->sceneId == SCE_MM_SNOWHEAD && xflag->setupId == 1)
     {
         switch(xflag->id)
         {
-            case 11:
-                xflag->id = 43;
-                xflag->setupId = 0;
-                break;
-            case 12:
-                xflag->id = 45;
-                xflag->setupId = 0;
-                break;
-            case 13:
-                xflag->id = 42;
-                xflag->setupId = 0;
-                break;
-            case 20:
-                xflag->id = 4;
-                xflag->setupId = 0;
-                break;
+            case 11: xflag->id = 43; xflag->setupId = 0; break;
+            case 12: xflag->id = 44; xflag->setupId = 0; break;
+            case 13: xflag->id = 45; xflag->setupId = 0; break;
+            case 20: xflag->id = 42; xflag->setupId = 0; break;
         }
     }
 }
