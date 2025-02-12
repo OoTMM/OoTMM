@@ -1175,8 +1175,8 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls the requirements to enter Majora\'s arena',
   values: [
-    { value: 'none', name: 'None', description: 'As soon as you have access to the Moon you can enter Majora\'s arena' },
-    { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to enter Majora\'s arena' },
+    { value: 'none', name: 'None', description: 'As soon as you have satisfied the "Moon Access" special condition you can enter Majora\'s arena' },
+    { value: 'custom', name: 'Custom', description: 'You will need to meet the "Majora Child Requirements" special condition to enter Majora\'s arena' },
   ],
   default: 'none',
   cond: (s: any) => hasMM(s) && s.goal !== 'triforce' && s.goal !== 'triforce3',
