@@ -113,6 +113,11 @@
     "Great Bay Temple Pot Compass Room Water 3": "underwater_walking || short_hook_anywhere || (can_dive_small && (has_weapon_range || has_bombchu))"
     "Great Bay Temple Rupee Compass Room 1": "underwater_walking || short_hook_anywhere"
     "Great Bay Temple Rupee Compass Room 2": "underwater_walking || short_hook_anywhere"
+    "Great Bay Temple Icicle Compass Room 1": "can_use_ice_arrows && break_icicle"
+    "Great Bay Temple Icicle Compass Room 2": "can_use_ice_arrows && break_icicle"
+    "Great Bay Temple Icicle Compass Room 3": "can_use_ice_arrows && break_icicle"
+    "Great Bay Temple Icicle Compass Room 4": "can_use_ice_arrows && break_icicle"
+    "Great Bay Temple Icicle Compass Room 5": "can_use_ice_arrows && break_icicle"
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:

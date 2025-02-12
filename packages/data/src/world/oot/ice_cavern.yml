@@ -7,6 +7,12 @@
   locations:
     "Ice Cavern Rupee Ice": "has_blue_fire"
     "Ice Cavern Entrance Big Fairy": "can_play_storms"
+    "Ice Cavern Icicle Before Entrance 1": "break_icicle"
+    "Ice Cavern Icicle Before Entrance 2": "break_icicle"
+    "Ice Cavern Icicle Before Entrance 3": "break_icicle"
+    "Ice Cavern Icicle Entrance 1": "break_icicle"
+    "Ice Cavern Icicle Entrance 2": "break_icicle"
+    "Ice Cavern Icicle Entrance 3": "break_icicle"
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
@@ -26,6 +32,13 @@
     "Ice Cavern Pot Scythe Room 2": "true"
     "Ice Cavern Pot Scythe Room 3": "true"
     "Ice Cavern Flying Pot Scythe Room": "soul_flying_pot"
+    "Ice Cavern Icicle Before Scythe 1": "break_icicle"
+    "Ice Cavern Icicle Before Scythe 2": "break_icicle"
+    "Ice Cavern Icicle Before Scythe 3": "break_icicle"
+    "Ice Cavern Icicle Before Scythe 4": "break_icicle"
+    "Ice Cavern Icicle Scythe 1": "break_icicle"
+    "Ice Cavern Icicle Scythe 2": "break_icicle"
+    "Ice Cavern Icicle Scythe 3": "break_icicle"
 "Ice Cavern HP Room":
   dungeon: IC
   events:
@@ -34,6 +47,19 @@
     "Ice Cavern Compass": "true"
     "Ice Cavern HP": "true"
     "Ice Cavern GS HP Room": "gs && (can_collect_distance || (climb_anywhere && (can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
+    "Ice Cavern Icicle Compass 01": "break_icicle"
+    "Ice Cavern Icicle Compass 02": "break_icicle"
+    "Ice Cavern Icicle Compass 03": "break_icicle"
+    "Ice Cavern Icicle Compass 04": "break_icicle"
+    "Ice Cavern Icicle Compass 05": "break_icicle"
+    "Ice Cavern Icicle Compass 06": "break_icicle"
+    "Ice Cavern Icicle Compass 07": "break_icicle"
+    "Ice Cavern Icicle Compass 08": "break_icicle"
+    "Ice Cavern Icicle Compass 09": "break_icicle"
+    "Ice Cavern Icicle Compass 10": "break_icicle"
+    "Ice Cavern Icicle Compass 11": "break_icicle"
+    "Ice Cavern Icicle Compass 12": "break_icicle"
+    "Ice Cavern Icicle Compass 13": "break_icicle"
 "Ice Cavern First Fire Room":
   dungeon: IC
   events:
@@ -44,6 +70,9 @@
     "Ice Cavern Heart 1": "true"
     "Ice Cavern Heart 2": "true"
     "Ice Cavern Heart 3": "true"
+    "Ice Cavern Icicle Before Map 1": "break_icicle"
+    "Ice Cavern Icicle Before Map 2": "break_icicle"
+    "Ice Cavern Icicle Before Map 3": "break_icicle"
 "Ice Cavern Block Room":
   dungeon: IC
   exits:
@@ -63,6 +92,11 @@
     "Ice Cavern Rupee Midair 1": "can_play_time"
     "Ice Cavern Rupee Midair 2": "can_play_time"
     "Ice Cavern Rupee Midair 3": "can_play_time"
+    "Ice Cavern Icicle Before Block 1": "break_icicle"
+    "Ice Cavern Icicle Before Block 2": "break_icicle"
+    "Ice Cavern Icicle Before Block 3": "break_icicle"
+    "Ice Cavern Icicle Before Block 4": "break_icicle"
+    "Ice Cavern Icicle Before Block 5": "break_icicle"
 "Ice Cavern End":
   dungeon: IC
   exits:
@@ -72,3 +106,11 @@
     "Ice Cavern Sheik Song": "soul_wolfos && soul_npc(SOUL_NPC_SHEIK) && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
     "Ice Cavern Pot Red Ice 1": "soul_wolfos && has_blue_fire && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
     "Ice Cavern Pot Red Ice 2": "soul_wolfos && has_blue_fire && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Icicle After Block 1": "break_icicle"
+    "Ice Cavern Icicle After Block 2": "break_icicle"
+    "Ice Cavern Icicle After Block 3": "break_icicle"
+    "Ice Cavern Icicle After Block 4": "break_icicle"
+    "Ice Cavern Icicle After Block 5": "break_icicle"
+    "Ice Cavern Icicle After Block 6": "break_icicle"
+    "Ice Cavern Icicle After Block 7": "break_icicle"
+    "Ice Cavern Icicle After Block 8": "break_icicle"

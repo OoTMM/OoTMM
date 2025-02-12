@@ -21,6 +21,11 @@
   locations:
     "MQ Ice Cavern Pot First Room 1": "true"
     "MQ Ice Cavern Pot First Room 2": "true"
+    "MQ Ice Cavern Icicle Before Main Room 1": "break_icicle"
+    "MQ Ice Cavern Icicle Before Main Room 2": "break_icicle"
+    "MQ Ice Cavern Icicle Before Main Room 3": "break_icicle"
+    "MQ Ice Cavern Icicle Before Main Room 4": "break_icicle"
+    "MQ Ice Cavern Icicle Before Main Room 5": "break_icicle"
 "Ice Cavern Main Room":
   dungeon: IC
   exits:
@@ -35,6 +40,11 @@
     "MQ Ice Cavern Pot Main Room 2": "true"
     "MQ Ice Cavern Pot Main Room 3": "true"
     "MQ Ice Cavern Pot Main Room 4": "true"
+    "MQ Ice Cavern Icicle Main Room 1": "break_icicle"
+    "MQ Ice Cavern Icicle Main Room 2": "break_icicle"
+    "MQ Ice Cavern Icicle Main Room 3": "break_icicle"
+    "MQ Ice Cavern Icicle Main Room 4": "break_icicle"
+    "MQ Ice Cavern Icicle Main Room 5": "break_icicle"
 "Ice Cavern Map Room":
   dungeon: IC
   exits:
@@ -45,6 +55,16 @@
     ICE_MQ_MAP_SWITCH: "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang" #Many ways to hit crystal switch
   locations:
     "MQ Ice Cavern Map Chest": "event(ICE_MQ_MAP_SWITCH) && has_blue_fire"
+    "MQ Ice Cavern Icicle Before Map Room": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 1": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 2": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 3": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 4": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 5": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 6": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 7": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 8": "break_icicle"
+    "MQ Ice Cavern Icicle Map Room 9": "break_icicle"
 "Ice Cavern Compass Room":
   dungeon: IC
   exits:
@@ -57,6 +77,10 @@
     "MQ Ice Cavern GS Compass Room": "gs && ((can_play_time && has_blue_fire && can_damage_skull) || has_blue_fire_arrows || can_boomerang)"
     "MQ Ice Cavern Pot Compass Room 1": "true"
     "MQ Ice Cavern Pot Compass Room 2": "true"
+    "MQ Ice Cavern Icicle Compass Room 1": "break_icicle"
+    "MQ Ice Cavern Icicle Compass Room 2": "break_icicle"
+    "MQ Ice Cavern Icicle Compass Room 3": "break_icicle"
+    "MQ Ice Cavern Icicle Compass Room 4": "break_icicle"
 "Ice Cavern Vanilla Push Block Room":
   dungeon: IC
   exits:

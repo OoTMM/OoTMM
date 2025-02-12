@@ -1927,6 +1927,22 @@ Snowhead Temple Small Snowball Central Room 3,          snowball,       NONE,   
 Snowhead Temple Small Snowball Central Room 4,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00423,                    MAGIC_JAR_SMALL
 Snowhead Temple Small Snowball Central Room 5,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00424,                    MAGIC_JAR_SMALL
 Snowhead Temple Small Snowball Central Room 6,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00425,                    MAGIC_JAR_SMALL
+Snowhead Temple Icicle Entrance 1,                      icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00000,                    NOTHING
+Snowhead Temple Icicle Entrance 2,                      icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00001,                    NOTHING
+Snowhead Temple Icicle Entrance 3,                      icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00004,                    RANDOM
+Snowhead Temple Icicle Entrance 4,                      icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00005,                    RANDOM
+Snowhead Temple Icicle Entrance 5,                      icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00006,                    RANDOM
+Snowhead Temple Icicle Entrance After Block 1,          icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00002,                    RANDOM
+Snowhead Temple Icicle Entrance After Block 2,          icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00003,                    RANDOM
+Snowhead Temple Icicle Central Room Near Boss Key 1,    icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00400,                    RANDOM
+Snowhead Temple Icicle Central Room Near Boss Key 2,    icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00404,                    RANDOM
+Snowhead Temple Icicle Central Room Near Boss 1,        icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00401,                    RANDOM
+Snowhead Temple Icicle Central Room Near Boss 2,        icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00402,                    RANDOM
+Snowhead Temple Icicle Central Room Near Boss 3,        icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00403,                    RANDOM
+Snowhead Temple Icicle Central Room Near Boss 4,        icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00405,                    RANDOM
+Snowhead Temple Icicle Snow Room 1,                     icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00a00,                    RANDOM
+Snowhead Temple Icicle Snow Room 2,                     icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00a01,                    RANDOM
+Snowhead Temple Icicle Snow Room 3,                     icicle,         NONE,                   TEMPLE_SNOWHEAD,              0x00a02,                    RECOVERY_HEART
 Pirate Fortress Entrance Chest 1,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x02,                       RUPEE_RED
@@ -2157,6 +2173,11 @@ Great Bay Temple Rupee Entrance 4,                      rupee,          NONE,   
 Great Bay Temple Rupee Entrance 5,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00804,                    RUPEE_BLUE
 Great Bay Temple Rupee Hookshot 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00c00,                    RUPEE_RED
 Great Bay Temple Rupee Hookshot 2,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00c01,                    RUPEE_RED
+Great Bay Temple Icicle Compass Room 1,                 icicle,         NONE,                   TEMPLE_GREAT_BAY,             0x00403,                    RANDOM
+Great Bay Temple Icicle Compass Room 2,                 icicle,         NONE,                   TEMPLE_GREAT_BAY,             0x00404,                    RANDOM
+Great Bay Temple Icicle Compass Room 3,                 icicle,         NONE,                   TEMPLE_GREAT_BAY,             0x00405,                    RANDOM
+Great Bay Temple Icicle Compass Room 4,                 icicle,         NONE,                   TEMPLE_GREAT_BAY,             0x00406,                    RANDOM
+Great Bay Temple Icicle Compass Room 5,                 icicle,         NONE,                   TEMPLE_GREAT_BAY,             0x00407,                    RANDOM
 Beneath The Well Skulltulla Chest,                      chest,          NONE,                   BENEATH_THE_WELL,             0x01,                       RUPEE_PURPLE
 Beneath The Well Keese Chest,                           chest,          NONE,                   BENEATH_THE_WELL,             0x02,                       RUPEE_PURPLE
 Beneath The Well Mirror Shield,                         chest,          NONE,                   BENEATH_THE_WELL,             0x1b,                       SHIELD_MIRROR
@@ -2475,6 +2496,10 @@ Moon Trial Goron Pot 08,                                pot,            NONE,   
 Moon Trial Goron Pot 09,                                pot,            NONE,                   MOON_GORON,                   0x0021,                     MAGIC_JAR_LARGE
 Moon Trial Goron Pot 10,                                pot,            NONE,                   MOON_GORON,                   0x0022,                     MAGIC_JAR_LARGE
 Moon Trial Goron Pot 11,                                pot,            NONE,                   MOON_GORON,                   0x0023,                     MAGIC_JAR_LARGE
+Moon Trial Goron Icicle 1,                              icicle,         NONE,                   MOON_GORON,                   0x00000,                    MAGIC_JAR_LARGE
+Moon Trial Goron Icicle 2,                              icicle,         NONE,                   MOON_GORON,                   0x00001,                    MAGIC_JAR_LARGE
+Moon Trial Goron Icicle 3,                              icicle,         NONE,                   MOON_GORON,                   0x00002,                    MAGIC_JAR_LARGE
+Moon Trial Goron Icicle 4,                              icicle,         NONE,                   MOON_GORON,                   0x00003,                    MAGIC_JAR_LARGE
 Moon Trial Zora HP,                                     collectible,    NONE,                   MOON_ZORA,                    0x01,                       HEART_PIECE
 Moon Trial Link Garo Master Chest,                      chest,          NONE,                   MOON_LINK,                    0x01,                       ARROWS_30
 Moon Trial Link Iron Knuckle Chest,                     chest,          NONE,                   MOON_LINK,                    0x02,                       BOMBCHU_10

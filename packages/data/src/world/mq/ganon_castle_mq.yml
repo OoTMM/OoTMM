@@ -159,6 +159,14 @@
   locations:
     "MQ Ganon Castle Water Trial Chest": "has_blue_fire"
     "MQ Ganon Castle Heart Water": "has_blue_fire"
+    "MQ Ganon Castle Icicle Water 1": "break_icicle"
+    "MQ Ganon Castle Icicle Water 2": "break_icicle"
+    "MQ Ganon Castle Icicle Water 3": "break_icicle"
+    "MQ Ganon Castle Icicle Water 4": "break_icicle"
+    "MQ Ganon Castle Icicle Water 5": "break_icicle"
+    "MQ Ganon Castle Icicle Water 6": "break_icicle"
+    "MQ Ganon Castle Icicle Water 7": "break_icicle"
+    "MQ Ganon Castle Icicle Water 8": "break_icicle"
 "Ganon Castle Water Trial Entrance Room Behind Red Ice":
   dungeon: Ganon
   exits:

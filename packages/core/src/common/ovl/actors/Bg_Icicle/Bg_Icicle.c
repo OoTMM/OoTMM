@@ -68,6 +68,43 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
+static void BgIcicle_Alias(Actor_BgIcicle* this)
+{
+}
+
+static void BgIcicle_InitXflag(Actor_BgIcicle* this, PlayState* play)
+{
+    ComboItemOverride   o;
+    Xflag*              xflag;
+
+    /* Set the extended properties */
+    xflag = &this->xflag;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->dyna.actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->dyna.actor.actorIndex;
+
+    BgIcicle_Alias(this);
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
+
+static int BgIcicle_IsShuffled(Actor_BgIcicle* this)
+{
+    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+}
+
+static int BgIcicle_DropCustom(Actor_BgIcicle* this, PlayState* play)
+{
+    if (!BgIcicle_IsShuffled(this))
+        return 0;
+    EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+    return 1;
+}
+
+
 void BgIcicle_Init(Actor* thisx, PlayState* play) {
     Actor_BgIcicle* this = (Actor_BgIcicle*)thisx;
 #if defined(GAME_OOT)
@@ -112,6 +149,7 @@ void BgIcicle_Init(Actor* thisx, PlayState* play) {
     }
 #endif
 
+    BgIcicle_InitXflag(this, play);
 }
 
 void BgIcicle_Destroy(Actor* thisx, PlayState* play) {
@@ -155,6 +193,7 @@ void BgIcicle_DoNothing(Actor_BgIcicle* this, PlayState* play) {
 #if defined(GAME_OOT)
     if (this->collider.base.acFlags & AC_HIT) {
         BgIcicle_Break(this, play, 50.0f);
+        BgIcicle_DropCustom(this, play);
         Actor_Kill(&this->dyna.actor);
         return;
     }
@@ -251,13 +290,14 @@ void BgIcicle_UpdateAttacked(Actor_BgIcicle* this, PlayState* play) {
         if (this->dyna.actor.params == ICICLE_STALAGMITE_RANDOM_DROP) {
             BgIcicle_Break(this, play, 50.0f);
 
-            if (this->unk_160 != 0xFF) {
+            if (!BgIcicle_DropCustom(this, play) && this->unk_160 != 0xFF) {
                 Item_DropCollectibleRandom(play, NULL, &this->dyna.actor.world.pos, this->unk_160 << 4);
             }
         } else if (this->dyna.actor.params == ICICLE_STALAGMITE_FIXED_DROP) {
             dropItem00Id = func_800A8150(this->unk_160);
             BgIcicle_Break(this, play, 50.0f);
-            Item_DropCollectible(play, &this->dyna.actor.world.pos, (this->unk_161 << 8) | dropItem00Id);
+            if(!BgIcicle_DropCustom(this, play))
+                Item_DropCollectible(play, &this->dyna.actor.world.pos, (this->unk_161 << 8) | dropItem00Id);
         } else {
             if (this->dyna.actor.params == ICICLE_STALACTITE_REGROW) {
                 BgIcicle_Break(this, play, 40.0f);
@@ -291,7 +331,37 @@ void BgIcicle_Update(Actor* thisx, PlayState* play) {
 #endif
 }
 
+static int BgIcicle_CsmcType(Actor_BgIcicle* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!BgIcicle_IsShuffled(this))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
 void BgIcicle_Draw(Actor* thisx, PlayState* play) {
+    const Color_RGB8 *color;
+    Actor_BgIcicle* this;
+    int type;
+
+    this = (Actor_BgIcicle*)thisx;
+    type = BgIcicle_CsmcType(this, play);
+    color = csmcTypeColor(type);
+
+    OPEN_DISPS(play->state.gfxCtx);
+    switch(type) {
+        case CSMC_NORMAL: gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255); break;
+        case CSMC_SPIDER: gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 144, 144, 144, 255); break;
+        default: gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, color->r, color->g, color->b, 255);
+    }
+
+    CLOSE_DISPS();
     Gfx_DrawDListOpa(play, ICICLE_DL);
 }
 

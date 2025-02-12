@@ -97,6 +97,11 @@
     "Moon Trial Goron Entrance": "goron_fast_roll"
   events:
     MOON_TRIAL_GORON: "true"
+  locations:
+    "Moon Trial Goron Icicle 1": "break_icicle"
+    "Moon Trial Goron Icicle 2": "break_icicle"
+    "Moon Trial Goron Icicle 3": "break_icicle"
+    "Moon Trial Goron Icicle 4": "break_icicle"
 "Moon Trial Zora":
   region: MOON
   exits:

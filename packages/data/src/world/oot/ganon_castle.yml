@@ -116,6 +116,20 @@
   locations:
     "Ganon Castle Water Chest 1": "true"
     "Ganon Castle Water Chest 2": "true"
+    "Ganon Castle Icicle Water 01": "break_icicle"
+    "Ganon Castle Icicle Water 02": "break_icicle"
+    "Ganon Castle Icicle Water 03": "break_icicle"
+    "Ganon Castle Icicle Water 04": "break_icicle"
+    "Ganon Castle Icicle Water 05": "break_icicle"
+    "Ganon Castle Icicle Water 06": "break_icicle"
+    "Ganon Castle Icicle Water 07": "break_icicle"
+    "Ganon Castle Icicle Water 08": "break_icicle"
+    "Ganon Castle Icicle Water 09": "break_icicle"
+    "Ganon Castle Icicle Water 10": "break_icicle"
+    "Ganon Castle Icicle Water 11": "break_icicle"
+    "Ganon Castle Icicle Water 12": "break_icicle"
+    "Ganon Castle Icicle Water 13": "break_icicle"
+    "Ganon Castle Icicle Water 14": "break_icicle"
 "Ganon Castle Water 2":
   dungeon: Ganon
   locations:

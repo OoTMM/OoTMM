@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Completely rework bombchu, behavior is now a setting with 4 values : free like in OoT, tied to bomb bag like in MM, old-style bombchu bags, and a new bombchu bag setting where 3 bags are in the pool, allowing for 20/30/40 bombchu.
 - Add the ability to shuffle the drops from Red Boulders in OoT and MM.
 - Add the ability to shuffle the Purple Rupees from the OoT Frogs.
+- Add the ability to shuffle the drops from Icicles (**stalagmites** only) in OoT and MM.
 
 ### Changed
 

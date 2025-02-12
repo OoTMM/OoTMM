@@ -809,6 +809,22 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false,
 }, {
+  key: 'shuffleIciclesOot',
+  name: 'Red Boulder Sanity (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the icicles drop an item for breaking them (OoT)',
+  cond: hasOoT,
+  default: false,
+}, {
+  key: 'shuffleIciclesMm',
+  name: 'Red Boulder Sanity (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the icicles drop an item for breaking them (MM)',
+  cond: hasMM,
+  default: false,
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

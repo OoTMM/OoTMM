@@ -167,6 +167,7 @@ const ACTORS_OOT = {
   OBJ_COMB: 0x19e,
   //DOOR_ANA: 0x9b,
   OBJ_HAMISHI: 0x1d2,
+  BG_ICICLE: 0x1c7,
 };
 
 const ACTORS_MM = {
@@ -193,6 +194,7 @@ const ACTORS_MM = {
   OBJ_SNOWBALL2: 0x1f9,
   //DOOR_ANA: 0x55,
   OBJ_HAMISHI: 0x0fc,
+  BG_ICICLE: 0x11f,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -1363,6 +1365,22 @@ function actorHandlerObjHamishi(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'redboulder' });
 }
 
+function actorHandlerOotBgIcicle(checks: Check[], ra: RoomActor) {
+  if(ra.actor.params != 0) return;
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Icicle', type: 'icicle' });
+}
+
+function actorHandlerMmBgIcicle(checks: Check[], ra: RoomActor) {
+  let item = 'NOTHING';
+  switch(ra.actor.params & 0x3) {
+    case 0:
+    if(((ra.actor.params >> 8) & 0xFF) != 0xff) item = 'RANDOM'; break;
+    case 3: item = mmCollectibleDrop((ra.actor.params >> 2) & 0x3F); break;
+    default: return;
+  }
+
+  checks.push({ roomActor: ra, item, name: 'Icicle', type: 'icicle' });
+}
 
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
@@ -1374,6 +1392,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_HANA]: actorHandlerOotObjHana,
   [ACTORS_OOT.OBJ_MURE2]: actorHandlerOotObjMure2,
   [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerObjHamishi,
+  [ACTORS_OOT.BG_ICICLE]: actorHandlerOotBgIcicle,
 };
 
 const ACTORS_HANDLERS_MM = {
@@ -1389,6 +1408,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_MURE2]: actorHandlerMmObjMure2,
   [ACTORS_MM.OBJ_GRASS_UNIT]: actorHandlerMmObjGrassUnit,
   [ACTORS_MM.OBJ_HAMISHI]: actorHandlerObjHamishi,
+  [ACTORS_MM.BG_ICICLE]: actorHandlerMmBgIcicle,
 };
 
 const ACTORS_HANDLERS = {
