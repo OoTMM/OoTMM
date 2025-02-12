@@ -810,7 +810,7 @@ export const SETTINGS = [{
   default: false,
 }, {
   key: 'shuffleIciclesOot',
-  name: 'Red Boulder Sanity (OoT)',
+  name: 'Icicles Sanity (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the icicles drop an item for breaking them (OoT)',
@@ -818,7 +818,7 @@ export const SETTINGS = [{
   default: false,
 }, {
   key: 'shuffleIciclesMm',
-  name: 'Red Boulder Sanity (MM)',
+  name: 'Icicles Sanity (MM)',
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the icicles drop an item for breaking them (MM)',
