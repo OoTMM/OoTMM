@@ -638,6 +638,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
 
     gOotExtraItems.ocarina = 3;
+    gOotExtraItems.hookshot = 3;
 
     gSave.info.inventory.equipment.swords = 0x7;
     gSave.info.inventory.equipment.shields = 0x7;
