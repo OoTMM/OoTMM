@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - Completely reworked the stray fairy item model to be much closer to the actual fairies.
 - Path hints now tell the exact world the path corresponds to in multiworld.
 - Logic can now expect Sunlight Arrows to go through Spirit Temple child climb.
+- Make the GBT spawn point from the Turtle less awkward.
 
 ### Fixed
 
