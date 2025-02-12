@@ -786,7 +786,7 @@ export const SETTINGS = [{
   default: false,
 }, {
   key: 'shuffleRedBouldersOot',
-  name: 'Red Boulder Sanity (OoT)',
+  name: 'Red Boulder Drops Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the red boulders drop an item for breaking them (OoT)',
@@ -794,7 +794,7 @@ export const SETTINGS = [{
   default: false,
 }, {
   key: 'shuffleRedBouldersMm',
-  name: 'Red Boulder Sanity (MM)',
+  name: 'Red Boulder Drops Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the red boulders drop an item for breaking them (MM)',
@@ -810,7 +810,7 @@ export const SETTINGS = [{
   default: false,
 }, {
   key: 'shuffleIciclesOot',
-  name: 'Icicles Sanity (OoT)',
+  name: 'Icicles Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the icicles drop an item for breaking them (OoT)',
@@ -818,7 +818,7 @@ export const SETTINGS = [{
   default: false,
 }, {
   key: 'shuffleIciclesMm',
-  name: 'Icicles Sanity (MM)',
+  name: 'Icicles Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the icicles drop an item for breaking them (MM)',
