@@ -325,4 +325,4 @@
 
 "lake_water_control": "(setting(erBoss, none) && setting(regionState, dungeonBeaten) && event(BOSS_MORPHA)) || event(CLEAR_STATE_LAKE)"
 
-"break_icicle": "has_explosives_or_hammer || has_explosives_or_hammer"
+"break_icicle": "can_use_sword_or_sticks || has_explosives_or_hammer"
