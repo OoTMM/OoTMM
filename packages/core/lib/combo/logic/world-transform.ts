@@ -1494,17 +1494,39 @@ export class LogicPassWorldTransform {
 
     /* Handle MM Lullaby */
     if (settings.progressiveGoronLullaby === 'progressive') {
-      this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
+      if (settings.songs !== 'notes') {
+        this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
+      } else {
+        /*
+        * Replace the first 6 notes of Goron Lullaby with those from the half song.
+        * Remove the last 2 notes from the pool.
+        */
+        ItemGroups.MM_SONG_GORON_NOTES.forEach((item,index) => {
+          if (typeof ItemGroups.MM_SONG_GORON_HALF_NOTES[index] !== 'undefined') {
+            this.replaceItem(ItemGroups.MM_SONG_GORON_HALF_NOTES[index], item);
+          } else {
+            this.removeItem(item);
+          }
+        })
+      }
     } else {
-      this.removeItem(Items.MM_SONG_GORON_HALF);
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.state.worlds[i].songLocations.delete('MM Goron Baby');
+      if (settings.songs !== 'notes') {
+        this.removeItem(Items.MM_SONG_GORON_HALF);
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          this.state.worlds[i].songLocations.delete('MM Goron Baby');
+        }
+      } else {
+        this.removeItems(ItemGroups.MM_SONG_GORON_HALF_NOTES)
       }
     }
 
     /* Handle MM sun song */
     if (settings.sunSongMm && !settings.sharedSongSun) {
-      this.addItem(Items.MM_SONG_SUN);
+      if (settings.songs !== 'notes') {
+        this.addItem(Items.MM_SONG_SUN);
+      } else {
+        this.addItems(ItemGroups.MM_SONG_SUN_NOTES);
+      }
     }
 
     /* Handle MM other fairies */
