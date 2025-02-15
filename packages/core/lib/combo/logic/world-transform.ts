@@ -467,6 +467,10 @@ export class LogicPassWorldTransform {
       items = [...items, ...ItemGroups.SONGS];
     }
 
+    if (settings.songs === 'notes') {
+      items = [...items, ...ItemGroups.SONG_NOTES];
+    }
+
     if (settings.dungeonRewardShuffle === 'anywhere' || settings.dungeonRewardShuffle === 'dungeonsLimited') {
       items = [...items, ...ItemGroups.DUNGEON_REWARDS];
     }
@@ -1280,6 +1284,10 @@ export class LogicPassWorldTransform {
     /* Add magical rupee */
     if (settings.magicalRupee) {
       this.addItem(Items.OOT_RUPEE_MAGICAL);
+    }
+
+    if (settings.songs === 'notes') {
+      this.addItems(ItemGroups.SONG_NOTES);
     }
 
     /* Add ocarina buttons */
