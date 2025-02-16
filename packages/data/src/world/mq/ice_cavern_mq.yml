@@ -13,6 +13,9 @@
     "Ice Cavern After Initial Ice Block": "event(ICE_MQ_FIRST_CRYSTAL)"
   events:
     ICE_MQ_FIRST_CRYSTAL: "has_ranged_weapon || has_explosives || (is_adult && (has(SWORD_BIGGORON) || can_use_mask_blast))" #Biggoron Jump Slash as Adult hits it, so does Adult Blast Mask. The pot carry is very trick territory; this crystal switch is a problem.
+  locations:
+    "MQ Ice Cavern Icicle Entrance 1": "break_icicle"
+    "MQ Ice Cavern Icicle Entrance 2": "break_icicle"
 "Ice Cavern After Initial Ice Block":
   dungeon: IC
   exits:
