@@ -202,7 +202,7 @@
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer || has_explosives"
 "can_rescue_carpenter": "small_keys_hideout_all && (can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4))))"
-"get_passed_skultullas": "has_nuts || can_use_sword_or_sticks || has_ranged_weapon || can_use_din || has_explosives || can_hammer || can_use_mask_blast || can_use_mask_stone"
+"get_past_skultullas": "has_nuts || can_use_sword_or_sticks || has_ranged_weapon || can_use_din || has_explosives || can_hammer || can_use_mask_blast || can_use_mask_stone"
 "collect_gs_on_walls": "gs && (can_collect_distance || (has_ranged_weapon && climb_anywhere))" #Blast mask, bomchus, bombs (if within throwing distance) and maybe even jump slashes if space permits (and damage?)
 
 #Trick Macros
