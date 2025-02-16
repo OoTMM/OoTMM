@@ -2,6 +2,7 @@
 #define COMBO_AUDIO_H
 
 #include <combo/types.h>
+#include <combo/math/vec.h>
 
 typedef struct
 {
@@ -38,7 +39,9 @@ void    Audio_DisplayMusicName(PlayState* play);
 void    Audio_PlaySequenceWithSeqPlayerIO(u8 seqPlayerIndex, u16 seqId, u8 fadeInDuration, s8 ioPort, s8 ioData);
 
 #if defined(GAME_OOT)
+void Audio_PlaySfxTransposed(Vec3f* pos, u16 sfxId, s8 semitone);
 void func_800F6964(u16);
+extern u8* gFrogsSongPtr;
 #endif
 
 #endif

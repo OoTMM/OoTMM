@@ -201,13 +201,18 @@
     "Gerudo Training Grounds Left Path First Room": "true"
     "Gerudo Training Grounds Stalfos Room": "silver_rupees_gtg_slopes"
   events:
-    GTG_MQ_SLOPES_STALAGMITES: "has_explosives || can_use_mask_blast || has_weapon || can_hammer || climb_anywhere || hookshot_anywhere"
+    GTG_MQ_SLOPES_STALAGMITES: "break_icicle || climb_anywhere || hookshot_anywhere"
   locations:
     "MQ Gerudo Training Grounds SR Slopes Top Right": "event(GTG_MQ_SLOPES_STALAGMITES)"
     "MQ Gerudo Training Grounds SR Slopes Middle": "true"
     "MQ Gerudo Training Grounds SR Slopes Front": "can_longshot"
     "MQ Gerudo Training Grounds SR Slopes Front-Left": "true"
     "MQ Gerudo Training Grounds SR Slopes Front-Right": "true"
+    "MQ Gerudo Training Grounds Icicle Slopes 1": "break_icicle"
+    "MQ Gerudo Training Grounds Icicle Slopes 2": "break_icicle"
+    "MQ Gerudo Training Grounds Icicle Slopes 3": "break_icicle"
+    "MQ Gerudo Training Grounds Icicle Slopes 4": "break_icicle"
+    "MQ Gerudo Training Grounds Icicle Slopes 5": "break_icicle"
 "Gerudo Training Grounds Stalfos Room":
   dungeon: GTG
   exits:

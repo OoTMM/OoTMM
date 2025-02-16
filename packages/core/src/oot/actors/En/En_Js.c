@@ -23,7 +23,7 @@ static void EnJs_TextOverride(PlayState* play)
     ComboItemQuery q;
 
     EnJs_ItemQuery(&q);
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendItemNameQuery(&b, &q, TF_CAPITALIZE | TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_NL "How about " TEXT_COLOR_RED);

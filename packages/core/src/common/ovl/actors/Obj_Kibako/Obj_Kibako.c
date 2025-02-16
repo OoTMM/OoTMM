@@ -4,7 +4,7 @@
 #include <combo/custom.h>
 #include "Obj_Kibako.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_CAN_PRESS_SWITCHES)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_CAN_PRESS_SWITCHES)
 
 void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play);
 void ObjKibako_Destroy(Actor_ObjKibako* this, PlayState* play);
@@ -137,9 +137,9 @@ static CollisionCheckInfoInit sCCInfoInit = { 0, 12, 60, MASS_HEAVY };
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 1000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 60, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 1000, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 1000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 60, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 1000, ICHAIN_STOP),
 };
 
 void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play)
@@ -432,8 +432,8 @@ static u32 sTextures[] = { 0x050122c0, 0x06000000 };
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -1500, ICHAIN_CONTINUE),
     ICHAIN_F32_DIV1000(minVelocityY, -18000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 60, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 60, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeScale, 60, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 60, ICHAIN_STOP),
 };
 
 void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play)
@@ -502,9 +502,9 @@ void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Actor_SetScale(&this->actor, 0.15f);
     if (objectIndex == 0) {
-        this->actor.uncullZoneForward = 4000.0f;
+        this->actor.cullingVolumeDistance = 4000.0f;
     } else {
-        this->actor.uncullZoneForward = 800.0f;
+        this->actor.cullingVolumeDistance = 800.0f;
     }
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);

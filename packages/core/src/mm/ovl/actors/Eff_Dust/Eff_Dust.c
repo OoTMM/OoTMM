@@ -1,7 +1,7 @@
 #include "Eff_Dust.h"
 #include <assets/mm/objects/gameplay_keep.h>
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20)
 
 void EffDust_Init(EffDust* this, PlayState* play);
 void EffDust_Destroy(EffDust* this, PlayState* play);

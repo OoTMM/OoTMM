@@ -4,7 +4,7 @@
 #include <combo/magic.h>
 #include <combo/math.h>
 
-#define FLAGS (ACTOR_FLAG_MM_10)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnMThunder_Init(EnMThunder* this, PlayState* play);
 void EnMThunder_Destroy(EnMThunder* this, PlayState* play);

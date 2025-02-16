@@ -8,7 +8,7 @@
 #include <assets/oot/objects/gameplay_keep.h>
 #include <assets/oot/objects/object_kanban.h>
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_OOT_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 #define PART_UPPER_LEFT (1 << 0)
 #define PART_LEFT_UPPER (1 << 1)
@@ -274,7 +274,7 @@ static void EnKanban_LocText(PlayState* play)
     char* b;
     char* start;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 
     comboTextAppendHeader(&b);
     start = b;

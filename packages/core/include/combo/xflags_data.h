@@ -1,7 +1,7 @@
 #ifndef XFLAGS_DATA
 #define XFLAGS_DATA
 
-#define XFLAGS_COUNT_OOT 0x23f
-#define XFLAGS_COUNT_MM 0x2ba
+#define XFLAGS_COUNT_OOT 0x259
+#define XFLAGS_COUNT_MM 0x2c9
 
 #endif

@@ -86,7 +86,7 @@ static void changeAgeMessage(PlayState* play, s32 toChild)
 {
     char* b;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     if (toChild)
         comboTextAppendStr(&b, "Become a " TEXT_COLOR_RED "child");
@@ -199,7 +199,7 @@ static void soaringNoStatuesMessage(PlayState* play)
 {
     char* b;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "You have yet to leave your " TEXT_COLOR_RED "mark" TEXT_CZ TEXT_NL);
     comboTextAppendStr(&b, "on any of the " TEXT_COLOR_RED "statues" TEXT_CZ " you have" TEXT_NL);
@@ -384,7 +384,7 @@ static void songOfDoubleTimeMessage(PlayState* play)
 {
     char* b;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "Proceed to " TEXT_COLOR_RED);
     if (gSave.isNight)
@@ -402,7 +402,7 @@ static void songOfDoubleTimeFailMessage(PlayState* play)
 {
     char* b;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "Your notes echoed far.... " TEXT_NL "but nothing happened." TEXT_FADE("\x28") TEXT_END);
 }

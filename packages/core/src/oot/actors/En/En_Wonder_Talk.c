@@ -33,7 +33,7 @@ static void hintDungeons(PlayState* play)
     int count;
     int isChild;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     start = b;
     isChild = gSave.age == AGE_CHILD;
     base = isChild ? 0 : 3;

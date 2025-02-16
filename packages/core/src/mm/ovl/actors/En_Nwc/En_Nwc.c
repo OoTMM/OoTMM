@@ -4,7 +4,7 @@
 #include <assets/mm/objects/object_niw.h>
 #include "En_Nwc.h"
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_80000000)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_80000000)
 
 void EnNwc_Init(Actor_EnNwc* this, PlayState* play);
 void EnNwc_Destroy(Actor_EnNwc* this, PlayState* play);

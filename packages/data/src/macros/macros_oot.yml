@@ -327,3 +327,5 @@
 "rainbow_bridge": "setting(rainbowBridge, open) || (setting(rainbowBridge, vanilla) && rainbow_bridge_vanilla) || (setting(rainbowBridge, medallions) && rainbow_bridge_medallions) || (setting(rainbowBridge, custom) && special(BRIDGE))"
 
 "lake_water_control": "(setting(erBoss, none) && setting(regionState, dungeonBeaten) && event(BOSS_MORPHA)) || event(CLEAR_STATE_LAKE)"
+
+"break_icicle": "can_use_sword_or_sticks || has_explosives_or_hammer"

@@ -2,7 +2,7 @@
 
 // #include "overlays/actors/ovl_En_Sw/z_en_sw.h"
 
-#define FLAGS (ACTOR_FLAG_MM_10)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 #define THIS ((TGSw*)thisx)
 

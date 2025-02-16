@@ -1123,7 +1123,7 @@ void comboTextHijackItemShop(PlayState* play, const ComboItemOverride* o, s16 pr
     char* b;
 
 #if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 #else
     b = play->msgCtx.font.textBuffer.schar;
 #endif
@@ -1192,14 +1192,14 @@ void comboTextHijackLightArrows(PlayState* play)
 {
     char* b;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b,
         "Have you found the " TEXT_COLOR_YELLOW "Light Arrows " TEXT_CZ
     );
     comboTextAppendRegionName(&b, gComboConfig.hints.lightArrows.region, gComboConfig.hints.lightArrows.world, TF_PREPOS);
     comboTextAppendStr(&b, "?" TEXT_END);
-    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
+    comboTextAutoLineBreaks(play->msgCtx.font.msgBuf);
 }
 #endif
 
@@ -1238,7 +1238,7 @@ void comboTextMessageCantBuy(PlayState* play, int flags)
     char* start;
 
 #if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 #else
     b = play->msgCtx.font.textBuffer.schar;
 #endif
@@ -1305,7 +1305,7 @@ void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o)
 
     isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 
     comboTextAppendHeader(&b);
     start = b;

@@ -38,3 +38,13 @@ void DmChar08_Emerge(PlayState* play, Actor* this)
     *((char*)this + 0x207) = 0;
     *((char*)this + 0x208) = 0;
 }
+
+void func_80AAFA18(Actor* this, PlayState* play) {
+    play->nextEntrance = ENTR_MM_TEMPLE_GREAT_BAY;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
+    gSaveContext.nextTransitionType = TRANS_TYPE_FADE_BLACK;
+    play->transitionTrigger = TRANS_TRIGGER_START;
+    Audio_PlaySfx(NA_SE_SY_WHITE_OUT_T);
+}
+
+PATCH_FUNC(0x80aafa18, func_80AAFA18);

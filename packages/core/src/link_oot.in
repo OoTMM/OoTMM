@@ -689,3 +689,25 @@ Math_Atan2F = 0x800aa670;
 Math_ApproachF = 0x80064280;
 Math_ApproachZeroF = 0x800642f0;
 Math_ApproachS = 0x80064624;
+
+func_80033480 = 0x80026308;
+WaterBox_GetSurfaceImpl = 0x80034908;
+gFrogsSongPtr = 0x80102b50;
+Audio_PlaySfxTransposed = 0x800c5934;
+OnePointCutscene_Init = 0x8006b6fc;
+Message_UpdateOcarinaMemoryGame = 0x800d5fec;
+Message_ShouldAdvance = 0x800d6110;
+Message_CloseTextbox = 0x800d6218;
+Message_StartTextbox = 0x800dce14;
+Message_ContinueTextbox = 0x800dce80;
+Message_StartOcarina = 0x800dd400;
+Message_StartOcarinaSunsSongDisabled = 0x800dd430;
+Message_GetState = 0x800dd464;
+Message_Draw = 0x800e0a18;
+Message_Update = 0x800e0aa4;
+Message_SetTables = 0x800e162c;
+Message_Init = 0x800e2008;
+Sfx_PlaySfxCentered = 0x800646f0;
+AudioOcarina_SetInstrument = 0x800c2c90;
+
+DynaPoly_EnableCollision = 0x80031530;

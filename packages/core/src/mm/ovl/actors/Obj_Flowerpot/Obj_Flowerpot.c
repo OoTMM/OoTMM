@@ -83,8 +83,8 @@ Vec3f D_80A1D408 = { 0.0f, 20.0f, 0.0f };
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -2000, ICHAIN_CONTINUE), ICHAIN_F32_DIV1000(minVelocityY, -20000, ICHAIN_CONTINUE),
-    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneForward, 1600, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDistance, 1600, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
 static void ObjFlowerpot_Xflag(Xflag* dst, int slice, Actor_ObjFlowerpot* this)
@@ -522,7 +522,7 @@ void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
         func_80A1CBF8(this);
         this->actor.room = -1;
         this->actor.colChkInfo.mass = 180;
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         if (Item_CollectibleDropTable2(ENOBJFLOWERPOT_GET_3F(this)))
         {
             ObjFlowerpot_GrassSpawnCollectible(this, play);
@@ -571,7 +571,7 @@ void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
             if (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) {
                 if (this->actor.colChkInfo.mass == MASS_IMMOVABLE) {
                     if (DynaPoly_GetActor(&play->colCtx, this->actor.floorBgId) == NULL) {
-                        this->actor.flags &= ~ACTOR_FLAG_MM_10;
+                        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
                         this->unk_1EA &= ~0x1;
                     }
                 } else if (Math3D_Vec3fDistSq(&this->actor.world.pos, &this->actor.prevPos) < 0.01f) {

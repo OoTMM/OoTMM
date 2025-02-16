@@ -90,6 +90,12 @@ OOT_WEIRD_EGG:                  0x58
 OOT_POCKET_EGG:                 0x59
 OOT_CHEST_GAME_KEY:             0x5a
 OOT_GANON:                      0x5b
+OOT_FROGS_ZL:                   0x5c
+OOT_FROGS_EPONA:                0x5d
+OOT_FROGS_SARIA:                0x5e
+OOT_FROGS_SUNS:                 0x5f
+OOT_FROGS_SOT:                  0x60
+
 
 MM_KOTAKE_RED_POTION:         0x00
 MM_KOUME_PICTOGRAPH_BOX:      0x01

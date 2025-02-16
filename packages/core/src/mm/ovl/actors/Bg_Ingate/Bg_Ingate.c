@@ -4,7 +4,7 @@
 #include <assets/mm/objects/object_sichitai_obj.h>
 #include "Bg_Ingate.h"
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20)
 
 void BgIngate_Init(Actor_BgIngate* this, PlayState* play);
 void BgIngate_Destroy(Actor_BgIngate* this, PlayState* play);

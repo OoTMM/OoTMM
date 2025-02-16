@@ -6,7 +6,7 @@
 #include <combo/config.h>
 #include "En_Test4.h"
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_100000)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_100000)
 
 void EnTest4_Init(Actor_EnTest4* this, PlayState* play);
 void EnTest4_Destroy(Actor_EnTest4* this, PlayState* play);

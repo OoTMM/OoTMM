@@ -103,6 +103,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
 
   base.shuffleMerchantsMm = booleanWeighted(random, 0.50);
   base.shuffleMerchantsOot = booleanWeighted(random, 0.50);
+  base.shuffleFrogsRupeesOot = booleanWeighted(random, 0.50);
   base.eggShuffle = booleanWeighted(random, 0.50);
   base.songs = sampleWeighted(random, { songLocations: 6, anywhere: 4 });
   base.divingGameRupeeShuffle = booleanWeighted(random, 0.50);
@@ -799,6 +800,10 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleWonderItemsMm = true;
       base.shuffleButterfliesOot = true;
       base.shuffleButterfliesMm = true;
+      base.shuffleRedBouldersOot = true;
+      base.shuffleRedBouldersMm = true;
+      base.shuffleIciclesOot = true;
+      base.shuffleIciclesMm = true;
       break;
     case 3:
       base.shufflePotsOot = 'overworld';
@@ -819,6 +824,10 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleWonderItemsMm = true;
       base.shuffleButterfliesOot = true;
       base.shuffleButterfliesMm = true;
+      base.shuffleRedBouldersOot = true;
+      base.shuffleRedBouldersMm = true;
+      base.shuffleIciclesOot = true;
+      base.shuffleIciclesMm = true;
       break;
     case 4:
       base.shufflePotsOot = 'dungeons';
@@ -855,6 +864,10 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleWonderItemsMm = booleanWeighted(random, 0.5);
       base.shuffleButterfliesOot = booleanWeighted(random, 0.5);
       base.shuffleButterfliesMm = booleanWeighted(random, 0.5);
+      base.shuffleRedBouldersOot = booleanWeighted(random, 0.5);
+      base.shuffleRedBouldersMm = booleanWeighted(random, 0.5);
+      base.shuffleIciclesOot = booleanWeighted(random, 0.5);
+      base.shuffleIciclesMm = booleanWeighted(random, 0.5);
       break;
     }
   }

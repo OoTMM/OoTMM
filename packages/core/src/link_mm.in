@@ -689,3 +689,6 @@ Collider_SetTris = 0x800e1958;
 Audio_SetFileSelectSettings = 0x801a3d98;
 
 gPlayerFormItemRestrictions = 0x801c2410;
+
+D_801AEFA0 = 0x801aefa0;
+D_801AEF88 = 0x801aef88;

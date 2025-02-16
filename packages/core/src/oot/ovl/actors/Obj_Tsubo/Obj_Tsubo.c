@@ -11,7 +11,7 @@
 #include <assets/oot/objects/object_tsubo.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_THROW_ONLY)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play);
 void ObjTsubo_Destroy(Actor_ObjTsubo* this, PlayState* play2);
@@ -68,8 +68,8 @@ static CollisionCheckInfoInit sColChkInfoInit[] = {{ 0, 12, 60, MASS_IMMOVABLE }
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -1200, ICHAIN_CONTINUE), ICHAIN_F32_DIV1000(minVelocityY, -20000, ICHAIN_CONTINUE),
-    ICHAIN_VEC3F_DIV1000(scale, 150, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneForward, 900, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneDownward, 800, ICHAIN_STOP),
+    ICHAIN_VEC3F_DIV1000(scale, 150, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDistance, 900, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 800, ICHAIN_STOP),
 };
 
 #if defined(GAME_OOT)
@@ -330,7 +330,7 @@ void ObjTsubo_WaitForObject(Actor_ObjTsubo* this, PlayState* play)
         this->actor.draw = ObjTsubo_Draw;
         this->actor.objectSlot = this->requiredObjectSlot;
         ObjTsubo_SetupIdle(this);
-        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     }
 }
 
@@ -394,7 +394,7 @@ void ObjTsubo_SetupLiftedUp(Actor_ObjTsubo* this)
     this->actor.room = -1;
     //! @bug: This is an unsafe cast, although the sound effect will still play
     Player_PlaySfx((Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
-    this->actor.flags |= ACTOR_FLAG_OOT_4;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 }
 
 void ObjTsubo_LiftedUp(Actor_ObjTsubo* this, PlayState* play)

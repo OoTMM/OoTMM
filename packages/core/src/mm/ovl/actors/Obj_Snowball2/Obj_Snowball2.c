@@ -96,7 +96,7 @@ void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
                 UNREACHABLE();
         }
     }
-    if (xflag->sceneId == SCE_MM_PATH_SNOWHEAD)
+    if (xflag->sceneId == SCE_MM_PATH_SNOWHEAD && xflag->setupId == 1)
     {
         switch(xflag->id)
         {
@@ -108,26 +108,14 @@ void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
                 break;
         }
     }
-    if (xflag->sceneId == SCE_MM_SNOWHEAD)
+    if (xflag->sceneId == SCE_MM_SNOWHEAD && xflag->setupId == 1)
     {
         switch(xflag->id)
         {
-            case 11:
-                xflag->id = 43;
-                xflag->setupId = 0;
-                break;
-            case 12:
-                xflag->id = 45;
-                xflag->setupId = 0;
-                break;
-            case 13:
-                xflag->id = 42;
-                xflag->setupId = 0;
-                break;
-            case 20:
-                xflag->id = 4;
-                xflag->setupId = 0;
-                break;
+            case 11: xflag->id = 43; xflag->setupId = 0; break;
+            case 12: xflag->id = 44; xflag->setupId = 0; break;
+            case 13: xflag->id = 45; xflag->setupId = 0; break;
+            case 20: xflag->id = 42; xflag->setupId = 0; break;
         }
     }
 }
@@ -379,8 +367,8 @@ void func_80B39B5C(Actor_ObjSnowball2* this, PlayState* play) {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -2000, ICHAIN_CONTINUE),  ICHAIN_F32_DIV1000(minVelocityY, -20000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_CONTINUE), ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_CONTINUE), ICHAIN_VEC3F_DIV1000(scale, 25, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE), ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_CONTINUE), ICHAIN_VEC3F_DIV1000(scale, 25, ICHAIN_STOP),
 };
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, PlayState* play) {
@@ -404,7 +392,7 @@ void ObjSnowball2_Destroy(Actor_ObjSnowball2* this, PlayState* play) {
 }
 
 void func_80B39C78(Actor_ObjSnowball2* this) {
-    this->actor.flags |= ACTOR_FLAG_MM_10;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     this->unk_1AD = 0;
     this->actionFunc = func_80B39C9C;
 }
@@ -418,7 +406,7 @@ void func_80B39C9C(Actor_ObjSnowball2* this, PlayState* play) {
 
     if (Actor_HasParent(&this->actor, play)) {
         this->actor.room = -1;
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         if (Item_CollectibleDropTable2(ENOBJSNOWBALL2_GET_3F(&this->actor))) {
             ObjSnowball2_DropCollectible(this, play);
         }
@@ -446,7 +434,7 @@ void func_80B39C9C(Actor_ObjSnowball2* this, PlayState* play) {
             if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) &&
                 (DynaPoly_GetActor(&play->colCtx, this->actor.floorBgId) == NULL)) {
                 this->unk_1AD = 1;
-                this->actor.flags &= ~ACTOR_FLAG_MM_10;
+                this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
             }
         }
 
@@ -593,7 +581,7 @@ void func_80B3A13C(Actor_ObjSnowball2* this, PlayState* play) {
 void func_80B3A498(Actor_ObjSnowball2* this) {
     this->actor.home.pos.x = this->actor.world.pos.x;
     this->unk_1AC = 46;
-    this->actor.flags |= ACTOR_FLAG_MM_10;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     this->actor.home.pos.y = this->actor.world.pos.y + this->actor.depthInWater;
     this->actor.home.pos.z = this->actor.world.pos.z;
     this->actor.world.pos.y += this->actor.shape.yOffset * this->actor.scale.y;

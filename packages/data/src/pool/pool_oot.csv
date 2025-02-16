@@ -368,6 +368,17 @@ Death Mountain Trail Cow Grotto Hive,                       hive,           NONE
 Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
+Death Mountain Trail Red Boulder Near Lower GS,             redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800a,                    NOTHING
+Death Mountain Trail Red Boulder Lower 1,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800b,                    NOTHING
+Death Mountain Trail Red Boulder Lower 2,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800c,                    NOTHING
+Death Mountain Trail Red Boulder Lower 3,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08014,                    NOTHING
+Death Mountain Trail Red Boulder Lower 4,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800d,                    NOTHING
+Death Mountain Trail Red Boulder Lower 5,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08010,                    NOTHING
+Death Mountain Trail Red Boulder Lower 6,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800e,                    NOTHING
+Death Mountain Trail Red Boulder Lower 7,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800f,                    NOTHING
+Death Mountain Trail Red Boulder Near Upper GS,             redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08011,                    NOTHING
+Death Mountain Trail Red Boulder Upper 1,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08013,                    NOTHING
+Death Mountain Trail Red Boulder Upper 2,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08012,                    NOTHING
 Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
 Goron City Maze Center 1,                                   chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
 Goron City Maze Center 2,                                   chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE
@@ -399,6 +410,11 @@ Goron Shop Item 5,                                          shop,           NONE
 Goron Shop Item 6,                                          shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
 Goron Shop Item 7,                                          shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
 Goron Shop Item 8,                                          shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
+Goron City Red Boulder 1,                                   redboulder,     NONE,                 GORON_CITY,                     0x00029,                    NOTHING
+Goron City Red Boulder 2,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002d,                    NOTHING
+Goron City Red Boulder 3,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002a,                    NOTHING
+Goron City Red Boulder 4,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002e,                    NOTHING
+Goron City Red Boulder 5,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002b,                    NOTHING
 Death Mountain Crater Alcove HP,                            collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
 Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
@@ -438,6 +454,10 @@ Death Mountain Crater Rupee Adult 4,                        rupee,          NONE
 Death Mountain Crater Rupee Adult 5,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x48112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 6,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x58112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 7,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x68112,                    RUPEE_RED
+Death Mountain Crater Red Boulder Grotto,                   redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010b,                    NOTHING
+Death Mountain Crater Red Boulder Great Fairy 1,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
+Death Mountain Crater Red Boulder Great Fairy 2,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING
+Death Mountain Crater Red Boulder Shortcut,                 redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010e,                    NOTHING
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
 Zora River HP Platform,                                     collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
 Zora River Bean Seller,                                     npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
@@ -521,6 +541,11 @@ Zora River Wonder Item Back 24,                             wonder,         NONE
 Zora River Wonder Item Back 25,                             wonder,         NONE,                 ZORA_RIVER,                     0x00106,                    RUPEE_GREEN
 Zora River Wonder Item Back 26,                             wonder,         NONE,                 ZORA_RIVER,                     0x00107,                    RUPEE_GREEN
 Zora River Wonder Item Back 27,                             wonder,         NONE,                 ZORA_RIVER,                     0x00108,                    RUPEE_GREEN
+Zora River Frogs Zeldas Lullaby,                            npc,            NONE,                 ZORA_RIVER,                     FROGS_ZL,                   RUPEE_PURPLE
+Zora River Frogs Eponas Song,                               npc,            NONE,                 ZORA_RIVER,                     FROGS_EPONA,                RUPEE_PURPLE
+Zora River Frogs Sarias Song,                               npc,            NONE,                 ZORA_RIVER,                     FROGS_SARIA,                RUPEE_PURPLE
+Zora River Frogs Suns Song,                                 npc,            NONE,                 ZORA_RIVER,                     FROGS_SUNS,                 RUPEE_PURPLE
+Zora River Frogs Song of Time,                              npc,            NONE,                 ZORA_RIVER,                     FROGS_SOT,                  RUPEE_PURPLE
 Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
 Zora Domain Diving Game Green Rupee,                        collectible,    NONE,                 ZORA_DOMAIN,                    0x1,                        RUPEE_GREEN
@@ -816,6 +841,10 @@ Hyrule Field River Big Fairy,                               fairy_spot,     NONE
 Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
 Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
 Hyrule Field Wonder Item 3,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00036,                    RUPEE_RED
+Hyrule Field Red Boulder 1,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x08008,                    NOTHING
+Hyrule Field Red Boulder 2,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x08009,                    NOTHING
+Hyrule Field Red Boulder 3,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x0800a,                    NOTHING
+Hyrule Field Red Boulder 4,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x0800b,                    NOTHING
 Hyrule Field Fairy Fountain Fairy 1,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 2,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 3,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22000,                    FAIRY
@@ -984,6 +1013,9 @@ Hyrule Castle Butterfly Pack 4 Butterfly 3,                 butterfly,      NONE
 Hyrule Castle Butterfly Pack 4 Butterfly 4,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x30036,                    NOTHING
 Hyrule Castle Butterfly Pack 4 Butterfly 5,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x40036,                    NOTHING
 Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
+Ganon Castle Exterior Red Boulder 1,                        redboulder,     NONE,                 GANON_CASTLE_EXTERIOR,          0x00003,                    NOTHING
+Ganon Castle Exterior Red Boulder 2,                        redboulder,     NONE,                 GANON_CASTLE_EXTERIOR,          0x00004,                    NOTHING
+Ganon Castle Exterior Red Boulder 3,                        redboulder,     NONE,                 GANON_CASTLE_EXTERIOR,          0x00005,                    NOTHING
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
 Temple of Time Sheik Song,                                  npc,            NONE,                 TEMPLE_OF_TIME,                 SHEIK_LIGHT,                SONG_TP_LIGHT
@@ -1010,6 +1042,14 @@ Gerudo Valley Crate Child Bottom,                           crate,          NONE
 Gerudo Valley Crate Ledge,                                  crate,          NONE,                 GERUDO_VALLEY,                  0x00026,                    RUPEE_GREEN
 Gerudo Valley Wonder Item Lower,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08028,                    RUPEE_RED
 Gerudo Valley Wonder Item Upper,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08029,                    RUPEE_RED
+Gerudo Valley Red Boulder Before Bridge 1,                  redboulder,     NONE,                 GERUDO_VALLEY,                  0x08010,                    NOTHING
+Gerudo Valley Red Boulder Before Bridge 2,                  redboulder,     NONE,                 GERUDO_VALLEY,                  0x08011,                    NOTHING
+Gerudo Valley Red Boulder After Bridge 1,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08012,                    NOTHING
+Gerudo Valley Red Boulder After Bridge 2,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08013,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 1,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x0800f,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 2,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08014,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 3,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08015,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 4,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08016,                    NOTHING
 Gerudo Valley Octorok Grotto Rupee 1,                       rupee,          NONE,                 GROTTOS,                        0x00501,                    RUPEE_BLUE
 Gerudo Valley Octorok Grotto Rupee 2,                       rupee,          NONE,                 GROTTOS,                        0x00502,                    RUPEE_BLUE
 Gerudo Valley Octorok Grotto Rupee 3,                       rupee,          NONE,                 GROTTOS,                        0x00503,                    RUPEE_BLUE
@@ -1357,6 +1397,48 @@ Ice Cavern Heart 1,                                         heart,          NONE
 Ice Cavern Heart 2,                                         heart,          NONE,                 ICE_CAVERN,                     0x00907,                    RECOVERY_HEART
 Ice Cavern Heart 3,                                         heart,          NONE,                 ICE_CAVERN,                     0x00908,                    RECOVERY_HEART
 Ice Cavern Entrance Big Fairy,                              fairy_spot,     NONE,                 ICE_CAVERN,                     0x0010d,                    FAIRY_BIG
+Ice Cavern Icicle Before Entrance 1,                        icicle,         NONE,                 ICE_CAVERN,                     0x00000,                    NOTHING
+Ice Cavern Icicle Before Entrance 2,                        icicle,         NONE,                 ICE_CAVERN,                     0x00001,                    NOTHING
+Ice Cavern Icicle Before Entrance 3,                        icicle,         NONE,                 ICE_CAVERN,                     0x00002,                    NOTHING
+Ice Cavern Icicle Entrance 1,                               icicle,         NONE,                 ICE_CAVERN,                     0x00103,                    NOTHING
+Ice Cavern Icicle Entrance 2,                               icicle,         NONE,                 ICE_CAVERN,                     0x00104,                    NOTHING
+Ice Cavern Icicle Entrance 3,                               icicle,         NONE,                 ICE_CAVERN,                     0x00105,                    NOTHING
+Ice Cavern Icicle Before Scythe 1,                          icicle,         NONE,                 ICE_CAVERN,                     0x00202,                    NOTHING
+Ice Cavern Icicle Before Scythe 2,                          icicle,         NONE,                 ICE_CAVERN,                     0x00203,                    NOTHING
+Ice Cavern Icicle Before Scythe 3,                          icicle,         NONE,                 ICE_CAVERN,                     0x00204,                    NOTHING
+Ice Cavern Icicle Before Scythe 4,                          icicle,         NONE,                 ICE_CAVERN,                     0x00205,                    NOTHING
+Ice Cavern Icicle Scythe 1,                                 icicle,         NONE,                 ICE_CAVERN,                     0x0030c,                    NOTHING
+Ice Cavern Icicle Scythe 2,                                 icicle,         NONE,                 ICE_CAVERN,                     0x0030d,                    NOTHING
+Ice Cavern Icicle Scythe 3,                                 icicle,         NONE,                 ICE_CAVERN,                     0x0030e,                    NOTHING
+Ice Cavern Icicle Before Block 1,                           icicle,         NONE,                 ICE_CAVERN,                     0x00400,                    NOTHING
+Ice Cavern Icicle Before Block 2,                           icicle,         NONE,                 ICE_CAVERN,                     0x00401,                    NOTHING
+Ice Cavern Icicle Before Block 3,                           icicle,         NONE,                 ICE_CAVERN,                     0x00402,                    NOTHING
+Ice Cavern Icicle Before Block 4,                           icicle,         NONE,                 ICE_CAVERN,                     0x00403,                    NOTHING
+Ice Cavern Icicle Before Block 5,                           icicle,         NONE,                 ICE_CAVERN,                     0x00404,                    NOTHING
+Ice Cavern Icicle After Block 1,                            icicle,         NONE,                 ICE_CAVERN,                     0x00602,                    NOTHING
+Ice Cavern Icicle After Block 2,                            icicle,         NONE,                 ICE_CAVERN,                     0x00603,                    NOTHING
+Ice Cavern Icicle After Block 3,                            icicle,         NONE,                 ICE_CAVERN,                     0x00604,                    NOTHING
+Ice Cavern Icicle After Block 4,                            icicle,         NONE,                 ICE_CAVERN,                     0x00605,                    NOTHING
+Ice Cavern Icicle After Block 5,                            icicle,         NONE,                 ICE_CAVERN,                     0x00606,                    NOTHING
+Ice Cavern Icicle After Block 6,                            icicle,         NONE,                 ICE_CAVERN,                     0x00607,                    NOTHING
+Ice Cavern Icicle After Block 7,                            icicle,         NONE,                 ICE_CAVERN,                     0x00608,                    NOTHING
+Ice Cavern Icicle After Block 8,                            icicle,         NONE,                 ICE_CAVERN,                     0x00609,                    NOTHING
+Ice Cavern Icicle Before Map 1,                             icicle,         NONE,                 ICE_CAVERN,                     0x00800,                    NOTHING
+Ice Cavern Icicle Before Map 2,                             icicle,         NONE,                 ICE_CAVERN,                     0x00801,                    NOTHING
+Ice Cavern Icicle Before Map 3,                             icicle,         NONE,                 ICE_CAVERN,                     0x00802,                    NOTHING
+Ice Cavern Icicle Compass 01,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b05,                    NOTHING
+Ice Cavern Icicle Compass 02,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b06,                    NOTHING
+Ice Cavern Icicle Compass 03,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b07,                    NOTHING
+Ice Cavern Icicle Compass 04,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b08,                    NOTHING
+Ice Cavern Icicle Compass 05,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b09,                    NOTHING
+Ice Cavern Icicle Compass 06,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0a,                    NOTHING
+Ice Cavern Icicle Compass 07,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0b,                    NOTHING
+Ice Cavern Icicle Compass 08,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0c,                    NOTHING
+Ice Cavern Icicle Compass 09,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0d,                    NOTHING
+Ice Cavern Icicle Compass 10,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0e,                    NOTHING
+Ice Cavern Icicle Compass 11,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0f,                    NOTHING
+Ice Cavern Icicle Compass 12,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b10,                    NOTHING
+Ice Cavern Icicle Compass 13,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b11,                    NOTHING
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
@@ -1776,6 +1858,20 @@ Ganon Castle Heart Shadow 3,                                heart,          NONE
 Ganon Castle Heart Fire,                                    heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00e13,                    RECOVERY_HEART
 Ganon Castle Heart Spirit,                                  heart,          NONE,                 INSIDE_GANON_CASTLE,            0x0111b,                    RECOVERY_HEART
 Ganon Castle Spirit Big Fairy,                              fairy_spot,     NONE,                 INSIDE_GANON_CASTLE,            0x0110b,                    FAIRY_BIG
+Ganon Castle Icicle Water 01,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00202,                    NOTHING
+Ganon Castle Icicle Water 02,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00203,                    NOTHING
+Ganon Castle Icicle Water 03,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00204,                    NOTHING
+Ganon Castle Icicle Water 04,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00205,                    NOTHING
+Ganon Castle Icicle Water 05,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00206,                    NOTHING
+Ganon Castle Icicle Water 06,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00207,                    NOTHING
+Ganon Castle Icicle Water 07,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00208,                    NOTHING
+Ganon Castle Icicle Water 08,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00209,                    NOTHING
+Ganon Castle Icicle Water 09,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020a,                    NOTHING
+Ganon Castle Icicle Water 10,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020b,                    NOTHING
+Ganon Castle Icicle Water 11,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020c,                    NOTHING
+Ganon Castle Icicle Water 12,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020d,                    NOTHING
+Ganon Castle Icicle Water 13,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020e,                    NOTHING
+Ganon Castle Icicle Water 14,                               icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020f,                    NOTHING
 Ganon Tower Pot 01,                                         pot,            NONE,                 GANON_TOWER,                    0x0801,                     MAGIC_JAR_LARGE
 Ganon Tower Pot 02,                                         pot,            NONE,                 GANON_TOWER,                    0x0802,                     RECOVERY_HEART
 Ganon Tower Pot 03,                                         pot,            NONE,                 GANON_TOWER,                    0x0803,                     MAGIC_JAR_SMALL
@@ -2085,6 +2181,32 @@ MQ Ice Cavern Pot Final Corridor 1,                         pot,            NONE
 MQ Ice Cavern Pot Final Corridor 2,                         pot,            NONE,                 ICE_CAVERN,                     0x0606,                     MAGIC_JAR_LARGE
 MQ Ice Cavern Pot Compass Room 1,                           pot,            NONE,                 ICE_CAVERN,                     0x090a,                     BOMBS_5
 MQ Ice Cavern Pot Compass Room 2,                           pot,            NONE,                 ICE_CAVERN,                     0x090b,                     BOMBS_5
+MQ Ice Cavern Icicle Entrance 1,                            icicle,         NONE,                 ICE_CAVERN,                     0x00000,                    NOTHING
+MQ Ice Cavern Icicle Entrance 2,                            icicle,         NONE,                 ICE_CAVERN,                     0x00001,                    NOTHING
+MQ Ice Cavern Icicle Before Main Room 1,                    icicle,         NONE,                 ICE_CAVERN,                     0x00200,                    NOTHING
+MQ Ice Cavern Icicle Before Main Room 2,                    icicle,         NONE,                 ICE_CAVERN,                     0x00201,                    NOTHING
+MQ Ice Cavern Icicle Before Main Room 3,                    icicle,         NONE,                 ICE_CAVERN,                     0x00202,                    NOTHING
+MQ Ice Cavern Icicle Before Main Room 4,                    icicle,         NONE,                 ICE_CAVERN,                     0x00203,                    NOTHING
+MQ Ice Cavern Icicle Before Main Room 5,                    icicle,         NONE,                 ICE_CAVERN,                     0x00205,                    NOTHING
+MQ Ice Cavern Icicle Main Room 1,                           icicle,         NONE,                 ICE_CAVERN,                     0x00300,                    NOTHING
+MQ Ice Cavern Icicle Main Room 2,                           icicle,         NONE,                 ICE_CAVERN,                     0x00301,                    NOTHING
+MQ Ice Cavern Icicle Main Room 3,                           icicle,         NONE,                 ICE_CAVERN,                     0x00302,                    NOTHING
+MQ Ice Cavern Icicle Main Room 4,                           icicle,         NONE,                 ICE_CAVERN,                     0x00303,                    NOTHING
+MQ Ice Cavern Icicle Main Room 5,                           icicle,         NONE,                 ICE_CAVERN,                     0x00304,                    NOTHING
+MQ Ice Cavern Icicle Before Map Room,                       icicle,         NONE,                 ICE_CAVERN,                     0x00400,                    NOTHING
+MQ Ice Cavern Icicle Compass Room 1,                        icicle,         NONE,                 ICE_CAVERN,                     0x00906,                    NOTHING
+MQ Ice Cavern Icicle Compass Room 2,                        icicle,         NONE,                 ICE_CAVERN,                     0x00907,                    NOTHING
+MQ Ice Cavern Icicle Compass Room 3,                        icicle,         NONE,                 ICE_CAVERN,                     0x00908,                    NOTHING
+MQ Ice Cavern Icicle Compass Room 4,                        icicle,         NONE,                 ICE_CAVERN,                     0x00909,                    NOTHING
+MQ Ice Cavern Icicle Map Room 1,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b02,                    NOTHING
+MQ Ice Cavern Icicle Map Room 2,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b03,                    NOTHING
+MQ Ice Cavern Icicle Map Room 3,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b04,                    NOTHING
+MQ Ice Cavern Icicle Map Room 4,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b05,                    NOTHING
+MQ Ice Cavern Icicle Map Room 5,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b06,                    NOTHING
+MQ Ice Cavern Icicle Map Room 6,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b07,                    NOTHING
+MQ Ice Cavern Icicle Map Room 7,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b08,                    NOTHING
+MQ Ice Cavern Icicle Map Room 8,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b09,                    NOTHING
+MQ Ice Cavern Icicle Map Room 9,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b0a,                    NOTHING
 MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
 MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
 MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
@@ -2598,6 +2720,11 @@ MQ Gerudo Training Grounds Pot 4,                           pot,            NONE
 MQ Gerudo Training Grounds Wonder Item Eye Statue,          wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00404,                    MAGIC_JAR_LARGE
 MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall,   wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00709,                    FLEXIBLE
 MQ Gerudo Training Grounds Maze Center Room Large Crate,    crate,          NONE,                 GERUDO_TRAINING_GROUND,         0x00801,                    RUPEE_GREEN
+MQ Gerudo Training Grounds Icicle Slopes 1,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x00209,                    NOTHING
+MQ Gerudo Training Grounds Icicle Slopes 2,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020a,                    NOTHING
+MQ Gerudo Training Grounds Icicle Slopes 3,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020b,                    NOTHING
+MQ Gerudo Training Grounds Icicle Slopes 4,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020c,                    NOTHING
+MQ Gerudo Training Grounds Icicle Slopes 5,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020d,                    NOTHING
 MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
 MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
 MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
@@ -2655,3 +2782,11 @@ MQ Ganon Castle Heart Water,                                heart,          NONE
 MQ Ganon Castle Heart Light 1,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00805,                    RECOVERY_HEART
 MQ Ganon Castle Heart Light 2,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00806,                    RECOVERY_HEART
 MQ Ganon Castle Wonder Item,                                wonder,         NONE,                 INSIDE_GANON_CASTLE,            0x00c0c,                    NUTS_5
+MQ Ganon Castle Icicle Water 1,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00204,                    NOTHING
+MQ Ganon Castle Icicle Water 2,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00205,                    NOTHING
+MQ Ganon Castle Icicle Water 3,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00206,                    NOTHING
+MQ Ganon Castle Icicle Water 4,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00207,                    NOTHING
+MQ Ganon Castle Icicle Water 5,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00208,                    NOTHING
+MQ Ganon Castle Icicle Water 6,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00209,                    NOTHING
+MQ Ganon Castle Icicle Water 7,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020a,                    NOTHING
+MQ Ganon Castle Icicle Water 8,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020b,                    NOTHING

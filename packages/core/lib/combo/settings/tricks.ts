@@ -749,6 +749,11 @@ export const TRICKS: Tricks = {
     name: "Twinmold with Bow (MM)",
     tooltip: "Defeat Twinmold using only the Bow.",
   },
+  MM_KEG_RED_BOULDER: {
+    game: 'mm',
+    name: "Break Red Boulders using Powder Keg (MM)",
+    tooltip: "Use a Powder Keg to break Red Boulders. Only relevant with Strengths in MM",
+  },
 };
 
 export const DEFAULT_TRICKS: TrickKey[] = ['OOT_NIGHT_GS'];
