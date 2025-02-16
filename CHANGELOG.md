@@ -27,7 +27,6 @@ All notable changes to this project will be documented in this file.
 - Logic can now expect Sunlight Arrows to go through Spirit Temple child climb.
 - Make the GBT spawn point from the Turtle less awkward.
 - Reworks of OoT Fire Temple MQ and Shadow Temple MQ dungeon logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
-- Add two macros for OoT that are needed for new logic situations given the logic reworks.
 
 ### Fixed
 
