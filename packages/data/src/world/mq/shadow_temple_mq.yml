@@ -435,7 +435,7 @@
     "Shadow Temple Invisible Wall Maze Corridor To Crushing Walls Room": "small_keys_shadow(6)"
   events:
     SHADOW_MQ_CRUSHING_WALLS_BURNT: "can_use_din"
-  locations: #TODO: Add a trick for opening chests before void out with climb/hook anywhere.
+  locations: #TODO: MQ ONLY - Add a trick for opening right (only this one?) chest before void out with climb/hook anywhere because of enemies.
     "MQ Shadow Temple Crushing Wall Left Chest": "event(SHADOW_MQ_CRUSHING_WALLS_BURNT)"
     "MQ Shadow Temple Boss Key Chest": "event(SHADOW_MQ_CRUSHING_WALLS_BURNT)"
     "MQ Shadow Temple Pot Boss Key Room": "true"
