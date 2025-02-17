@@ -239,22 +239,22 @@
   exits:
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "small_keys_shadow(3)"
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "hookshot_anywhere || climb_anywhere || (((is_adult && can_hookshot && (event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) || event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR))) || can_longshot) && (glitch_megaflip || has_hover_boots || can_jump_slash))" #Worst-case scenario because the ice platforms can block access to the door.
-    "Shadow Temple Dual Staircase Stalfos Room": "silver_rupees_shadow_spikes_mq"
+    "Shadow Temple Dual Staircase Stalfos Room": "event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS)"
   events:
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS: "silver_rupees_shadow_spikes_mq"
-  locations: #I have no idea how hookshot alone is normally viable, even as adult.
+  locations: #Might need some more testing later on.
     "MQ Shadow Temple Invisible Spike Floor Chest": "event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR)"
-    "MQ Shadow Temple SR Spikes Northwest Corner": "can_hookshot || climb_anywhere"
-    "MQ Shadow Temple SR Spikes Southwest Wall": "can_hookshot"
-    "MQ Shadow Temple SR Spikes West Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Northwest Corner": "(has_lens && can_hookshot) || hookshot_anywhere || climb_anywhere"
+    "MQ Shadow Temple SR Spikes Southwest Wall": "can_hookshot || climb_anywhere"
+    "MQ Shadow Temple SR Spikes West Midair": "(can_hookshot && has_lens) || longshot_anywhere"
     "MQ Shadow Temple SR Spikes Ceiling": "can_hookshot"
     "MQ Shadow Temple SR Spikes Center Ground": "true"
-    "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
-    "MQ Shadow Temple SR Spikes South Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Center Midair": "(is_adult && can_hookshot) || can_longshot"
+    "MQ Shadow Temple SR Spikes South Midair": "(is_adult && can_hookshot) || can_longshot"
     "MQ Shadow Temple SR Spikes East Ground": "true"
-    "MQ Shadow Temple SR Spikes Northeast Wall": "can_hookshot"
-    "MQ Shadow Temple SR Spikes East Wall": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Northeast Wall": "hookshot_anywhere || (has_lens && can_longshot)" #Can angle it and longshot the ceiling target.
+    "MQ Shadow Temple SR Spikes East Wall": "can_hookshot || climb_anywhere"
 "Shadow Temple Dual Staircase Stalfos Room":
   dungeon: Shadow
   exits:
@@ -268,6 +268,11 @@
   exits:
     "Shadow Temple Invisible Spike Floors Room": "true"
     "Shadow Temple Wind Tunnel First Part": "small_keys_shadow(4)"
+  locations:
+    "MQ Shadow Temple SR Spikes West Midair": "true" #Can jump to it even as child.
+    "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes South Midair": "can_hookshot && event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS)"
+    "MQ Shadow Temple SR Spikes Northeast Wall": "has_hover_boots || can_jump_slash"
 "Shadow Temple Wind Tunnel First Part":
   dungeon: Shadow
   exits:
