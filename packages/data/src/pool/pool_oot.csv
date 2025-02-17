@@ -2554,16 +2554,16 @@ MQ Shadow Temple SR Pit Midair Low,                         sr,             NONE
 MQ Shadow Temple SR Pit Midair High,                        sr,             NONE,                 TEMPLE_SHADOW,                  0x2a,                       RUPEE_SILVER_SHADOW_PIT
 MQ Shadow Temple SR Pit Right,                              sr,             NONE,                 TEMPLE_SHADOW,                  0x2b,                       RUPEE_SILVER_SHADOW_PIT
 MQ Shadow Temple SR Pit Front,                              sr,             NONE,                 TEMPLE_SHADOW,                  0x2c,                       RUPEE_SILVER_SHADOW_PIT
-MQ Shadow Temple SR Spikes Left Corner,                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2d,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Left Wall,                       sr,             NONE,                 TEMPLE_SHADOW,                  0x2e,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Left Midair,                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2f,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Center Platforms,                sr,             NONE,                 TEMPLE_SHADOW,                  0x30,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Northwest Corner,                sr,             NONE,                 TEMPLE_SHADOW,                  0x2d,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Southwest Wall,                  sr,             NONE,                 TEMPLE_SHADOW,                  0x2e,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes West Midair,                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2f,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Ceiling,                         sr,             NONE,                 TEMPLE_SHADOW,                  0x30,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple SR Spikes Center Ground,                   sr,             NONE,                 TEMPLE_SHADOW,                  0x31,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple SR Spikes Center Midair,                   sr,             NONE,                 TEMPLE_SHADOW,                  0x32,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Front Midair,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x33,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Right Ground,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x34,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Right Back Wall,                 sr,             NONE,                 TEMPLE_SHADOW,                  0x35,                       RUPEE_SILVER_SHADOW_SPIKES
-MQ Shadow Temple SR Spikes Right Lateral Wall,              sr,             NONE,                 TEMPLE_SHADOW,                  0x36,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes South Midair,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x33,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes East Ground,                     sr,             NONE,                 TEMPLE_SHADOW,                  0x34,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Northeast Wall,                  sr,             NONE,                 TEMPLE_SHADOW,                  0x35,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes East Wall,                       sr,             NONE,                 TEMPLE_SHADOW,                  0x36,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple Pot Entrance Maze 1,                       pot,            NONE,                 TEMPLE_SHADOW,                  0x0004,                     RECOVERY_HEART
 MQ Shadow Temple Pot Entrance Maze 2,                       pot,            NONE,                 TEMPLE_SHADOW,                  0x0005,                     RECOVERY_HEART
 MQ Shadow Temple Pot Compass Room 1,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0104,                     RECOVERY_HEART
