@@ -273,7 +273,7 @@
     "MQ Shadow Temple SR Spikes Ceiling": "(has_lens && can_hookshot) || hookshot_anywhere"
     "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
     "MQ Shadow Temple SR Spikes South Midair": "can_hookshot && event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS)"
-    "MQ Shadow Temple SR Spikes Northeast Wall": "has_hover_boots || can_jump_slash"
+    "MQ Shadow Temple SR Spikes Northeast Wall": "has_hover_boots || can_jump_slash || glitch_megaflip"
 "Shadow Temple Wind Tunnel First Part":
   dungeon: Shadow
   exits:
