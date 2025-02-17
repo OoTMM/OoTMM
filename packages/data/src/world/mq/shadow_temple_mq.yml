@@ -236,7 +236,7 @@
     "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "climb_anywhere"
 "Shadow Temple Invisible Spike Floors Room":
   dungeon: Shadow
-  exits:
+  exits: #Possibly add the ice platform as a region.
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "small_keys_shadow(3)"
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "hookshot_anywhere || climb_anywhere || (((is_adult && can_hookshot && (event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) || event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR))) || can_longshot) && (glitch_megaflip || has_hover_boots || can_jump_slash))" #Worst-case scenario because the ice platforms can block access to the door.
     "Shadow Temple Dual Staircase Stalfos Room": "event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS)"
@@ -248,12 +248,12 @@
     "MQ Shadow Temple SR Spikes Northwest Corner": "(has_lens && can_hookshot) || hookshot_anywhere || climb_anywhere"
     "MQ Shadow Temple SR Spikes Southwest Wall": "can_hookshot || climb_anywhere"
     "MQ Shadow Temple SR Spikes West Midair": "(can_hookshot && has_lens) || longshot_anywhere"
-    "MQ Shadow Temple SR Spikes Ceiling": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Ceiling": "(is_adult && (((has_lens && can_hookshot) && (event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) || event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR))) || hookshot_anywhere)) || can_longshot"
     "MQ Shadow Temple SR Spikes Center Ground": "true"
     "MQ Shadow Temple SR Spikes Center Midair": "(is_adult && can_hookshot) || can_longshot"
     "MQ Shadow Temple SR Spikes South Midair": "(is_adult && can_hookshot) || can_longshot"
     "MQ Shadow Temple SR Spikes East Ground": "true"
-    "MQ Shadow Temple SR Spikes Northeast Wall": "hookshot_anywhere || (has_lens && can_longshot)" #Can angle it and longshot the ceiling target.
+    "MQ Shadow Temple SR Spikes Northeast Wall": "hookshot_anywhere || (has_lens && can_longshot)" #Can angle it and longshot the ceiling target. TODO: Northeast Wall - Climb anywhere or Hookshot for adult and longshot for child, and the silver rupees (jump from the platforms above the door)
     "MQ Shadow Temple SR Spikes East Wall": "can_hookshot || climb_anywhere"
 "Shadow Temple Dual Staircase Stalfos Room":
   dungeon: Shadow
@@ -265,11 +265,12 @@
     "MQ Shadow Temple Stalfos Room Chest": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
 "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door":
   dungeon: Shadow
-  exits:
+  exits: #Possibly add the ice platform as a region.
     "Shadow Temple Invisible Spike Floors Room": "true"
     "Shadow Temple Wind Tunnel First Part": "small_keys_shadow(4)"
   locations:
     "MQ Shadow Temple SR Spikes West Midair": "true" #Can jump to it even as child.
+    "MQ Shadow Temple SR Spikes Ceiling": "(has_lens && can_hookshot) || hookshot_anywhere"
     "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
     "MQ Shadow Temple SR Spikes South Midair": "can_hookshot && event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS)"
     "MQ Shadow Temple SR Spikes Northeast Wall": "has_hover_boots || can_jump_slash"
