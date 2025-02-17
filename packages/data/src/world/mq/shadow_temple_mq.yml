@@ -238,7 +238,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "small_keys_shadow(3)"
-    "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "hookshot_anywhere || climb_anywhere || (((is_adult && can_hookshot && (event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) || event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR))) || can_longshot) && (glitch_megaflip || has_hover_boots))" #Worst-case scenario because the ice platforms can block access to the door.
+    "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "hookshot_anywhere || climb_anywhere || (((is_adult && can_hookshot && (event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS) || event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR))) || can_longshot) && (glitch_megaflip || has_hover_boots || can_jump_slash))" #Worst-case scenario because the ice platforms can block access to the door.
     "Shadow Temple Dual Staircase Stalfos Room": "silver_rupees_shadow_spikes_mq"
   events:
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
