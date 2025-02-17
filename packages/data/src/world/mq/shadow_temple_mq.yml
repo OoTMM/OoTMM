@@ -245,16 +245,16 @@
     SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS: "silver_rupees_shadow_spikes_mq"
   locations: #I have no idea how hookshot alone is normally viable, even as adult.
     "MQ Shadow Temple Invisible Spike Floor Chest": "event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR)"
-    "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot || climb_anywhere"
-    "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
-    "MQ Shadow Temple SR Spikes Left Midair": "can_hookshot"
-    "MQ Shadow Temple SR Spikes Center Platforms": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Northwest Corner": "can_hookshot || climb_anywhere"
+    "MQ Shadow Temple SR Spikes Southwest Wall": "can_hookshot"
+    "MQ Shadow Temple SR Spikes West Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Ceiling": "can_hookshot"
     "MQ Shadow Temple SR Spikes Center Ground": "true"
     "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
-    "MQ Shadow Temple SR Spikes Front Midair": "can_hookshot"
-    "MQ Shadow Temple SR Spikes Right Ground": "true"
-    "MQ Shadow Temple SR Spikes Right Back Wall": "can_hookshot"
-    "MQ Shadow Temple SR Spikes Right Lateral Wall": "can_hookshot"
+    "MQ Shadow Temple SR Spikes South Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes East Ground": "true"
+    "MQ Shadow Temple SR Spikes Northeast Wall": "can_hookshot"
+    "MQ Shadow Temple SR Spikes East Wall": "can_hookshot"
 "Shadow Temple Dual Staircase Stalfos Room":
   dungeon: Shadow
   exits:
