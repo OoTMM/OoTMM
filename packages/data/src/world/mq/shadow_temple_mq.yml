@@ -163,6 +163,7 @@
   exits:
     "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "true"
     "Shadow Temple Upper Huge Pit After Drop": "true"
+    "Shadow Temple Lower Huge Pit": "longshot_anywhere" #Can stand on the hookshot target and then make it.
 "Shadow Temple Upper Huge Pit After Drop":
   dungeon: Shadow
   exits:
