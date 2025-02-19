@@ -14,8 +14,8 @@
   events:
     ICE_MQ_FIRST_CRYSTAL: "has_ranged_weapon || has_explosives || (is_adult && (has(SWORD_BIGGORON) || can_use_mask_blast))" #Biggoron Jump Slash as Adult hits it, so does Adult Blast Mask. The pot carry is very trick territory; this crystal switch is a problem.
   locations:
-    "MQ Ice Cavern Icicle Entrance 1": "break_icicle"
-    "MQ Ice Cavern Icicle Entrance 2": "break_icicle"
+    "MQ Ice Cavern Icicle Entrance 1": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Entrance 2": "break_icicle_ice_cavern"
 "Ice Cavern After Initial Ice Block":
   dungeon: IC
   exits:
@@ -24,11 +24,11 @@
   locations:
     "MQ Ice Cavern Pot First Room 1": "true"
     "MQ Ice Cavern Pot First Room 2": "true"
-    "MQ Ice Cavern Icicle Before Main Room 1": "break_icicle"
-    "MQ Ice Cavern Icicle Before Main Room 2": "break_icicle"
-    "MQ Ice Cavern Icicle Before Main Room 3": "break_icicle"
-    "MQ Ice Cavern Icicle Before Main Room 4": "break_icicle"
-    "MQ Ice Cavern Icicle Before Main Room 5": "break_icicle"
+    "MQ Ice Cavern Icicle Before Main Room 1": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Before Main Room 2": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Before Main Room 3": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Before Main Room 4": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Before Main Room 5": "break_icicle_ice_cavern"
 "Ice Cavern Main Room":
   dungeon: IC
   exits:
@@ -43,11 +43,11 @@
     "MQ Ice Cavern Pot Main Room 2": "true"
     "MQ Ice Cavern Pot Main Room 3": "true"
     "MQ Ice Cavern Pot Main Room 4": "true"
-    "MQ Ice Cavern Icicle Main Room 1": "break_icicle"
-    "MQ Ice Cavern Icicle Main Room 2": "break_icicle"
-    "MQ Ice Cavern Icicle Main Room 3": "break_icicle"
-    "MQ Ice Cavern Icicle Main Room 4": "break_icicle"
-    "MQ Ice Cavern Icicle Main Room 5": "break_icicle"
+    "MQ Ice Cavern Icicle Main Room 1": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Main Room 2": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Main Room 3": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Main Room 4": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Main Room 5": "break_icicle_ice_cavern"
 "Ice Cavern Map Room":
   dungeon: IC
   exits:
@@ -58,16 +58,16 @@
     ICE_MQ_MAP_SWITCH: "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang" #Many ways to hit crystal switch
   locations:
     "MQ Ice Cavern Map Chest": "event(ICE_MQ_MAP_SWITCH) && has_blue_fire"
-    "MQ Ice Cavern Icicle Before Map Room": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 1": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 2": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 3": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 4": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 5": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 6": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 7": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 8": "break_icicle"
-    "MQ Ice Cavern Icicle Map Room 9": "break_icicle"
+    "MQ Ice Cavern Icicle Before Map Room": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 1": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 2": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 3": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 4": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 5": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 6": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 7": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 8": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Map Room 9": "break_icicle_ice_cavern"
 "Ice Cavern Compass Room":
   dungeon: IC
   exits:
@@ -80,10 +80,10 @@
     "MQ Ice Cavern GS Compass Room": "gs && ((can_play_time && has_blue_fire && can_damage_skull) || has_blue_fire_arrows || can_boomerang)"
     "MQ Ice Cavern Pot Compass Room 1": "true"
     "MQ Ice Cavern Pot Compass Room 2": "true"
-    "MQ Ice Cavern Icicle Compass Room 1": "break_icicle"
-    "MQ Ice Cavern Icicle Compass Room 2": "break_icicle"
-    "MQ Ice Cavern Icicle Compass Room 3": "break_icicle"
-    "MQ Ice Cavern Icicle Compass Room 4": "break_icicle"
+    "MQ Ice Cavern Icicle Compass Room 1": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Compass Room 2": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Compass Room 3": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Icicle Compass Room 4": "break_icicle_ice_cavern"
 "Ice Cavern Vanilla Push Block Room":
   dungeon: IC
   exits:
