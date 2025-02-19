@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
 - Make the GBT spawn point from the Turtle less awkward.
 - Reworks of OoT Fire Temple MQ and Shadow Temple MQ dungeon logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
 - Rename some of the Silver Rupee checks in OoT Shadow Temple MQ for clarity.
+- Add "Broken Deku Stick (OoT)" glitch, which can now be logical for grass shuffle.
+- Add Deku Stick as a logical possibility for obtaining bugs from grass in OoT.
 
 ### Fixed
 
