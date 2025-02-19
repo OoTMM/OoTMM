@@ -346,7 +346,7 @@ export const TRICKS: Tricks = {
   OOT_ICE_CAVERN_ICICLES_STICKS: {
     game: 'oot',
     name: "Use Deku Sticks to Break Ice Cavern Stalagmite Icicles",
-    tooltip: "Logic can expect you to use Deku Sticks to break the stalagmite icicles in Ice Cavern (Ordinary and MQ).",
+    tooltip: "Logic can expect you to use Deku Sticks to break the stalagmite icicles for their item drops in Ice Cavern (Ordinary and MQ) when Icicle Shuffle is active (thus potentially needing multiple revisits with more sticks). This does not affect other checks or dungeon progression.",
   },
   MM_LENS: {
     game: 'mm',
