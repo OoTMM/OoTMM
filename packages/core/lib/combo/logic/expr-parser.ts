@@ -2,7 +2,33 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString } from './expr';
+import {SONG_NOTE_MAP} from "../items/groups";
+import {
+  Expr,
+  exprTrue,
+  exprFalse,
+  exprAnd,
+  exprOr,
+  exprAge,
+  exprHas,
+  exprRenewable,
+  exprEvent,
+  exprMasks,
+  exprSetting,
+  exprNot,
+  exprCond,
+  exprTrick,
+  exprSpecial,
+  exprOotTime,
+  exprMmTime,
+  exprLicense,
+  exprPrice,
+  exprFish,
+  exprFlagOn,
+  exprFlagOff,
+  exprAgeString,
+  exprHasNotes
+} from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -182,6 +208,20 @@ export class ExprParser {
     }
     this.expect(')');
     return exprAgeString(age);
+  }
+
+  private parseExprHasNotes(): Expr | undefined {
+    if (this.peek('identifier') !== 'hasNotes') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const songName = this.expect('identifier');
+    const song = itemByID(gameId(this.game, songName, '_'));
+    const songNotes = SONG_NOTE_MAP.get(song);
+    const count = songNotes.size;
+    this.expect(')');
+    return exprHasNotes(song, songNotes, count);
   }
 
   private parseExprHas(): Expr | undefined {
@@ -436,6 +476,7 @@ export class ExprParser {
       || this.parseExprCond()
       || this.parseExprAge()
       || this.parseExprHas()
+      || this.parseExprHasNotes()
       || this.parseExprRenewable()
       || this.parseExprLicense()
       || this.parseExprEvent()

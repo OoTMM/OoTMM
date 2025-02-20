@@ -4,6 +4,7 @@ import { SETTINGS, Settings, TRICKS, TrickKey } from '../settings';
 import { Age, AGE_ADULT, AGE_CHILD } from './constants';
 import { PRICE_RANGES } from './price';
 import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
+import {SONG_NOTE_MAP} from "../items/groups";
 
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',
@@ -422,6 +423,30 @@ export class ExprHas extends Expr {
   }
 }
 
+export class ExprHasNotes extends Expr {
+  readonly item: Item;
+  readonly notes: Set<Item>;
+  readonly count: number;
+  private readonly resultFalse: ExprResultFalse;
+
+  constructor(item: Item, songNotes: Set<Item>, count: number) {
+    const key = `HAS_NOTES(${item.id},${count})`;
+    super(key);
+    this.item = item;
+    this.notes = songNotes;
+    this.count = count;
+    this.resultFalse = { result: false, depItems: [[...songNotes]], depEvents: [] };
+  }
+
+  eval(state: State): ExprResult {
+    if (itemsCount(state, [...this.notes]) >= this.count) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
+  }
+}
+
 export class ExprRenewable extends Expr {
   readonly item: Item;
   readonly resultFalse: ExprResultFalse;
@@ -720,6 +745,14 @@ export const exprHas = (item: Item, count: number): Expr => {
   }
 
   return exprMemo(new ExprHas(item, count));
+};
+
+export const exprHasNotes = (song: Item, songNotes: Set<Item>, count: number): Expr => {
+  if (count <= 0) {
+    return EXPR_TRUE;
+  }
+
+  return exprMemo(new ExprHasNotes(song, songNotes, count));
 };
 
 export const exprRenewable = (item: Item): Expr => {

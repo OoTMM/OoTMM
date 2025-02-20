@@ -206,7 +206,9 @@ export const SETTINGS = [{
   values: [
     { value: 'songLocations', name: 'Song Locations', description: 'Only locations that contain songs in the vanilla games will have songs.' },
     { value: 'anywhere', name: 'Anywhere', description: 'Songs can be placed anywhere.' },
-    { value: 'notes', name: 'Shuffle Notes', description: 'Song Notes are shuffled and must be found to unlock song' },
+    { value: 'notes', name: 'Shuffle Notes', description: 'Song Notes are shuffled and must be found to unlock song. ' +
+          'Due to the number of notes among the songs, this option requires at least PotSanity or GrassSanity to be enabled. ' +
+          'If neither is selected, one of those options will be enabled at random.' },
   ],
   default: 'songLocations'
 }, {
