@@ -1134,39 +1134,6 @@ export class LogicPassWorldTransform {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
 
-    /* Force Potsanity or Grasssanity if neither is selected with Song Notes */
-    if (settings.songs === 'notes') {
-      if (
-          (settings.shuffleGrassMm !== 'all'
-          || settings.shuffleGrassOot !== 'all')
-          && (settings.shufflePotsMm !== 'all'
-          || settings.shufflePotsOot !== 'all')
-      ) {
-        if ((settings.shuffleGrassMm === 'all'
-            || settings.shuffleGrassOot === 'all')) {
-          settings.shuffleGrassMm = 'all';
-          settings.shuffleGrassOot = 'all';
-        } else if ((settings.shufflePotsMm === 'all'
-            || settings.shufflePotsOot === 'all')) {
-          settings.shufflePotsMm = 'all';
-          settings.shufflePotsOot = 'all';
-        } else {
-          const sanityOptions = ['pots', 'grass'];
-          switch (sanityOptions[Math.floor(Math.random() * sanityOptions.length)]) {
-            case 'pots':
-              settings.shufflePotsMm = 'all';
-              settings.shufflePotsOot = 'all';
-              break;
-            case 'grass':
-              settings.shuffleGrassMm = 'all';
-              settings.shuffleGrassOot = 'all';
-          }
-        }
-      }
-
-      settings.progressiveGoronLullaby = 'single';  //SONG_NOTES breaks progressive Goron Lullaby, so forcing it off for now
-    }
-
     /* Broken actors */
     if (!settings.restoreBrokenActors) {
       this.removeLocations(BROKEN_ACTORS_CHECKS);
@@ -1573,26 +1540,17 @@ export class LogicPassWorldTransform {
       if (settings.songs !== 'notes') {
         this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
       } else {
-        /*
-        * Replace the first 6 notes of Goron Lullaby with those from the half song.
-        * Remove the last 2 notes from the pool.
-        */
-        ItemGroups.MM_SONG_GORON_NOTES.forEach((item,index) => {
-          if (typeof ItemGroups.MM_SONG_GORON_HALF_NOTES[index] !== 'undefined') {
-            this.replaceItem(ItemGroups.MM_SONG_GORON_HALF_NOTES[index], item);
-          } else {
-            this.removeItem(item);
-          }
-        })
+        this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES)
+        this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES)
       }
     } else {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
+        this.addItems(ItemGroups.MM_SONG_GORON_NOTES);
       } else {
         this.removeItem(Items.MM_SONG_GORON_HALF);
-      }
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.state.worlds[i].songLocations.delete('MM Goron Baby');
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          this.state.worlds[i].songLocations.delete('MM Goron Baby');
+        }
       }
     }
 

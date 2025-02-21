@@ -747,7 +747,7 @@ export const exprHas = (item: Item, count: number): Expr => {
   return exprMemo(new ExprHas(item, count));
 };
 
-export const exprHasNotes = (song: Item, songNotes: Set<Item>, count: number): Expr => {
+export const exprHasNotes = (song: Item, songNotes: Set<Item> | undefined, count: number): Expr => {
   if (count <= 0) {
     return EXPR_TRUE;
   }

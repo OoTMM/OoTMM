@@ -219,7 +219,14 @@ export class ExprParser {
     const songName = this.expect('identifier');
     const song = itemByID(gameId(this.game, songName, '_'));
     const songNotes = SONG_NOTE_MAP.get(song);
-    const count = songNotes.size;
+    let count = songNotes.size;
+    if (this.accept(',')) {
+      const n = this.parseNumeric();
+      if (n === undefined) {
+        throw this.error("Expected number");
+      }
+      count = count * n;
+    }
     this.expect(')');
     return exprHasNotes(song, songNotes, count);
   }

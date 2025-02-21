@@ -8,6 +8,14 @@ const hasOoTMM = (x: any) => x.games === 'ootmm';
 const hasOoT = (x: any) => hasGame(x, 'oot');
 const hasMM = (x: any) => hasGame(x, 'mm');
 
+const notesRequirements = (s: any) => {
+  return (
+      (s.shuffleGrassMm === 'all' || s.shuffleGrassOot === 'all')
+      || (s.shufflePotsMm === 'all' || s.shufflePotsOot === 'all')
+  )
+  && s.progressiveGoronLullaby === 'single'
+};
+
 const SETTING_PRICE = {
   type: 'enum',
   values: [
