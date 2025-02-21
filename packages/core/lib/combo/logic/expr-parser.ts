@@ -2,7 +2,6 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr } from './expr';
 import {SONG_NOTE_MAP} from "../items/groups";
 import {
   Expr,
