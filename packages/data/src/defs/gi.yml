@@ -509,7 +509,7 @@
 - { id: OOT_SONG_EMPTINESS_C_DOWN_1, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_EMPTINESS], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness 1st C Down" }
 - { id: OOT_SONG_EMPTINESS_C_RIGHT_3, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_EMPTINESS], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 3rd C Right" }
 - { id: OOT_SONG_EMPTINESS_C_UP, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_EMPTINESS], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Up" }
-- { id: OOT_SONG_EMPTINESS_C_LEFT_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_EMPTINESS], flags: 0x80, draw: OOT_BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Left" }
+- { id: OOT_SONG_EMPTINESS_C_LEFT_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_EMPTINESS], flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Left" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
