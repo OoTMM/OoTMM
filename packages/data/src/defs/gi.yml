@@ -691,6 +691,13 @@
 - { id: MM_SONG_ORDER_C_DOWN_2, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_ORDER], flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Oath to Order 2nd C Down" }
 - { id: MM_SONG_ORDER_C_RIGHT_2, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_ORDER], flags: 0xa0, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Oath to Order 2nd C Right" }
 - { id: MM_SONG_ORDER_C_UP, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_ORDER], flags: 0xa0, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Oath to Order C Up" }
+- { id: MM_SONG_TIME, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_TIME], flags: 0xa0, draw: [NOTE, 0x01], object: [mm, 0x008f], name: "the <C2>Song of Time" }
+- { id: OOT_SONG_TIME_C_RIGHT_1, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Song of Time 1st C Right" }
+- { id: OOT_SONG_TIME_A_1, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C2>Song of Time 1st A" }
+- { id: OOT_SONG_TIME_C_DOWN_1, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Song of Time 1st C Down" }
+- { id: OOT_SONG_TIME_C_RIGHT_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Song of Time 2nd C Right" }
+- { id: OOT_SONG_TIME_A_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C2>Song of Time 2nd A" }
+- { id: OOT_SONG_TIME_C_DOWN_3, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Song of Time 3rd C Down" }
 - { id: MM_SONG_SOARING, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SOARING], flags: 0xa0, draw: [NOTE, 0x05], object: [mm, 0x008f], name: "the <C2>Song of Soaring" }
 - { id: MM_SONG_SOARING_C_DOWN_1, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SOARING], flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Song of Soaring 1st C Down" }
 - { id: MM_SONG_SOARING_C_LEFT_1, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SOARING], flags: 0xa0, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Song of Soaring 1st C Left" }
