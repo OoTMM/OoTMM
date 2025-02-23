@@ -4,7 +4,7 @@
 #include <actors/En_Bom_Chu/En_Bom_Chu.h>
 #include "assets/oot/objects/object_dodongo.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_OOT_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 typedef enum EnDodongoActionState {
     DODONGO_SWEEP_TAIL,

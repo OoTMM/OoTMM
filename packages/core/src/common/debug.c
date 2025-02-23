@@ -638,6 +638,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
 
     gOotExtraItems.ocarina = 3;
+    gOotExtraItems.hookshot = 3;
 
     gSave.info.inventory.equipment.swords = 0x7;
     gSave.info.inventory.equipment.shields = 0x7;
@@ -707,7 +708,7 @@ static void cheatAllItems(PlayState* play)
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
     gSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
-    gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
+    gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_BUNNY_HOOD;
 
     SetEventChk(EV_OOT_CHK_EPONA);
 

@@ -26,7 +26,7 @@ static void EnSsh_Hint(PlayState* play, int index)
     char* b;
 
     EnSsh_ItemQuery(&q, index, 0);
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b,
         "Yeaaarrgh! I'm cursed!! Please save me by destroying " TEXT_COLOR_RED
@@ -37,7 +37,7 @@ static void EnSsh_Hint(PlayState* play, int index)
     );
     comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[index]);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
-    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
+    comboTextAutoLineBreaks(play->msgCtx.font.msgBuf);
 }
 
 void EnSsh_TalkedTo(Actor* this, PlayState* play)

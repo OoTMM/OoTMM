@@ -157,7 +157,7 @@ static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
     int tmp;
 
 #if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
 #else
     b = play->msgCtx.font.textBuffer.schar;
 #endif

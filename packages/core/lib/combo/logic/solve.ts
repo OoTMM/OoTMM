@@ -1319,7 +1319,7 @@ export class LogicPassSolver {
     for (const item of items) {
       if (locations.length === 0) {
         if (required) {
-          throw new Error('Too many items');
+          throw new Error('There are more items than places to put them. Try reducing the number of items or increasing the number of places where items can be placed (e.g. add more shuffles).');
         }
         break;
       }

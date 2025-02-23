@@ -12,7 +12,6 @@
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
 #define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
 
-#define ACTOR_FLAG_OOT_4            (1 << 4)
 #define ACTOR_FLAG_OOT_5            (1 << 5)
 #define ACTOR_FLAG_OOT_6            (1 << 6)
 #define ACTOR_FLAG_OOT_9            (1 << 9)
@@ -22,9 +21,8 @@
 #define ACTOR_FLAG_OOT_30           (1 << 30)
 #define ACTOR_FLAG_OOT_31           (1 << 31)
 
-#define ACTOR_FLAG_MM_10                        (1 << 4)
 #define ACTOR_FLAG_MM_20                        (1 << 5)
-#define ACTOR_FLAG_MM_40                        (1 << 6)
+#define ACTOR_FLAG_MM_INSIDE_CULLING_VOLUME     (1 << 6)
 #define ACTOR_FLAG_MM_200                       (1 << 9)
 #define ACTOR_FLAG_MM_400                       (1 << 10)
 #define ACTOR_FLAG_MM_800                       (1 << 11)
@@ -55,6 +53,7 @@
 #define ACTOR_FLAG_ATTENTION_ENABLED            (1 << 0)
 #define ACTOR_FLAG_HOSTILE                      (1 << 2)
 #define ACTOR_FLAG_FRIENDLY                     (1 << 3)
+#define ACTOR_FLAG_UPDATE_CULLING_DISABLED      (1 << 4)
 #define ACTOR_FLAG_REACT_TO_LENS                (1 << 7)
 #define ACTOR_FLAG_TALK                         (1 << 8)
 #define ACTOR_FLAG_IGNORE_QUAKE                 (1 << 12)
@@ -173,9 +172,9 @@ typedef struct Actor
     ActorShape          shape;
     Vec3f               projectedPos;
     float               projectedW;
-    float               uncullZoneForward;
-    float               uncullZoneScale;
-    float               uncullZoneDownward;
+    float               cullingVolumeDistance;
+    float               cullingVolumeScale;
+    float               cullingVolumeDownward;
     Vec3f               prevPos;
     u8                  isTargeted;
     u8                  targetPriority;
@@ -575,5 +574,39 @@ typedef struct NpcInteractInfo {
     /* 0x18 */ Vec3f trackPos;
     /* 0x24 */ char unk_24[0x4];
 } NpcInteractInfo;
+
+// Converts a number of bits to a bitmask, helper for params macros
+// e.g. 3 becomes 0b111 (7)
+#define NBITS_TO_MASK(n) \
+    ((1 << (n)) - 1)
+
+// Extracts the `n`-bit value at position `s` in `p`, shifts then masks
+// Unsigned variant, no possibility of sign extension
+#define PARAMS_GET_U(p, s, n) \
+    (((p) >> (s)) & NBITS_TO_MASK(n))
+
+// Extracts the `n`-bit value at position `s` in `p`, masks then shifts
+// Signed variant, possibility of sign extension
+#define PARAMS_GET_S(p, s, n) \
+    (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
+
+// Extracts all bits past position `s` in `p`
+#define PARAMS_GET_NOMASK(p, s) \
+    ((p) >> (s))
+
+// Extracts the `n`-bit value at position `s` in `p` without shifting it from its current position
+#define PARAMS_GET_NOSHIFT(p, s, n) \
+    ((p) & (NBITS_TO_MASK(n) << (s)))
+
+// Generates a bitmask for bit position `s` of length `n`
+#define PARAMS_MAKE_MASK(s, n) PARAMS_GET_NOSHIFT(~0, s, n)
+
+#if defined(GAME_OOT)
+void func_80033480(struct PlayState* play, Vec3f* posBase, f32 randRangeDiameter, s32 amountMinusOne, s16 scaleBase,
+                   s16 scaleStep, u8 arg6);
+#else
+extern Gfx D_801AEFA0[];
+extern Gfx D_801AEF88[];
+#endif
 
 #endif

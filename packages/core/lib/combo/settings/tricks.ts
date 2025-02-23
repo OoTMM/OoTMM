@@ -343,6 +343,11 @@ export const TRICKS: Tricks = {
     name: "Backflip/Sidehop Over Gap to Reach BotW MQ's Main Room's Center",
     tooltip: "Makes the center of the main room reachable without Zelda's Lullaby or Hover Boots by entering the left cage and backflipping/sidehopping over the invisible gap",
   },
+  OOT_ICE_CAVERN_ICICLES_STICKS: {
+    game: 'oot',
+    name: "Use Deku Sticks to Break Ice Cavern Stalagmite Icicles",
+    tooltip: "Logic can expect you to use Deku Sticks to break the stalagmite icicles for their item drops in Ice Cavern (Ordinary and MQ) when Icicle Shuffle is active (thus potentially needing multiple revisits with more sticks). This does not affect other checks or dungeon progression.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
@@ -724,6 +729,21 @@ export const TRICKS: Tricks = {
     tooltip: "The switch in the lava room with updrafts can be pressed without Goron by using Megaton Hammer, Iron Boots, and Bunny Hood. It has pretty tight timing.",
     linkVideo: 'https://www.youtube.com/watch?v=_fTKOvkVTTA',
   },
+  MM_HIVE_BOMBCHU: {
+    game: 'mm',
+    name: "Destroy Beehives using Bombchu (MM)",
+    tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Termina.",
+  },
+  MM_TWINMOLD_BOW: {
+    game: 'mm',
+    name: "Twinmold with Bow (MM)",
+    tooltip: "Defeat Twinmold using only the Bow.",
+  },
+  MM_KEG_RED_BOULDER: {
+    game: 'mm',
+    name: "Break Red Boulders using Powder Keg (MM)",
+    tooltip: "Use a Powder Keg to break Red Boulders. Only relevant with Strengths in MM",
+  },
   GLITCH_OOT_EQUIP_SWAP: {
     game: 'oot',
     name: "Equip Swap (OoT)",
@@ -739,15 +759,10 @@ export const TRICKS: Tricks = {
     name: "Megaflips (OoT)",
     glitch: true,
   },
-  MM_HIVE_BOMBCHU: {
-    game: 'mm',
-    name: "Destroy Beehives using Bombchu (MM)",
-    tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Termina.",
-  },
-  MM_TWINMOLD_BOW: {
-    game: 'mm',
-    name: "Twinmold with Bow (MM)",
-    tooltip: "Defeat Twinmold using only the Bow.",
+  GLITCH_OOT_BROKEN_STICK: {
+    game: 'oot',
+    name: "Broken Deku Stick (OoT)",
+    glitch: true,
   },
 };
 

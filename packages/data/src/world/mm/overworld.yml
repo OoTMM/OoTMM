@@ -1568,6 +1568,9 @@
     "Deku Palace Rupee Left Far 1": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Rupee Left Far 2": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Rupee Left Far 3": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Red Boulder 1": "can_break_red_boulders"
+    "Deku Palace Red Boulder 2": "can_break_red_boulders"
+    "Deku Palace Red Boulder 3": "can_break_red_boulders"
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
@@ -1577,8 +1580,8 @@
     "Deku Palace Near Cage": "has(MASK_DEKU) || short_hook_anywhere"
     "Deku Palace Corner Ledge Top": "has(MASK_DEKU)"
   locations:
-    "Deku Palace Pot 1": "true"
-    "Deku Palace Pot 2": "true"
+    "Deku Palace Pot 1": "has(MASK_DEKU) || short_hook_anywhere"
+    "Deku Palace Pot 2": "has(MASK_DEKU) || short_hook_anywhere"
 "Deku Palace Throne":
   region: DEKU_PALACE
   exits:
@@ -1897,6 +1900,9 @@
     "Mountain Village Small Snowball Winter 2": "is_winter"
     "Mountain Village Small Snowball Winter 3": "is_winter"
     "Mountain Village Small Snowball Winter 4": "is_winter"
+    "Mountain Village Spring Red Boulder 1": "is_spring && can_break_red_boulders"
+    "Mountain Village Spring Red Boulder 2": "is_spring && can_break_red_boulders"
+    "Mountain Village Spring Red Boulder 3": "is_spring && can_break_red_boulders"
 "Mountain Village Butterflies":
   region: MOUNTAIN_VILLAGE
   locations:
@@ -3022,10 +3028,11 @@
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   exits:
     "Termina Field": "true"
-    "Road to Ikana Grotto": "has_mask_goron || can_hammer"
+    "Road to Ikana Grotto": "can_break_red_boulders"
     "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT))"
+    "Road to Ikana Red Boulder": "can_break_red_boulders"
 "Road to Ikana Grotto":
   region: ENTRANCE
   events:

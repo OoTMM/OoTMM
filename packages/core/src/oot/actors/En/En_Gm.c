@@ -72,7 +72,7 @@ static void hintMedigoron(PlayState* play)
     char* b;
     char* start;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     start = b;
 
     EnGm_ItemQuery(&q);

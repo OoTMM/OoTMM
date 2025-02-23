@@ -593,7 +593,7 @@ static void soaringMessage(PlayState* play, u8 soaringIndex)
 {
     char* b;
 
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "Soar to " TEXT_COLOR_RED);
     comboTextAppendStr(&b, kSoarNames[soaringIndex]);

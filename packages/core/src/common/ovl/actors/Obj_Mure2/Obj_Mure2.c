@@ -217,9 +217,9 @@ void ObjMure2_ClearChildrenList(Actor_ObjMure2* this)
 }
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneForward, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 2100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 2100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
 void ObjMure2_AliasGrass(Xflag* xf);
@@ -243,7 +243,7 @@ void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (play->csCtx.state != CS_STATE_IDLE)
-        this->actor.uncullZoneForward += 1200.0f;
+        this->actor.cullingVolumeDistance += 1200.0f;
     ObjMure2_SetupWait(this);
 }
 
@@ -266,7 +266,7 @@ void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, PlayState* play)
 {
     if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) <
         sActivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) {
-        this->actor.flags |= ACTOR_FLAG_OOT_4;
+        this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         ObjMure2_SpawnChildren(this, play);
         ObjMure2_SetupWaitForPlayerOutOfRange(this);
     }
@@ -283,7 +283,7 @@ void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, PlayState* play)
 
     if ((sDeactivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
     {
-        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         ObjMure2_KillChildren(this, play);
         ObjMure2_SetupWaitForPlayerInRange(this);
     }

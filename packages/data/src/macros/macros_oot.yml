@@ -195,13 +195,16 @@
 "can_damage": "can_use_sword || can_use_sticks || has_explosives || has_ranged_weapon || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance || can_hammer"
 "can_cut_grass_no_c_button": "can_use_sword || has_strength_raw(1) || can_use_mask_blast"
-"can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer"
-"can_cut_grass_for_bugs": "can_use_sword || can_use_mask_blast || can_boomerang || has_explosives || can_hammer"
+"can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer || glitch_broken_stick"
+"can_cut_grass_for_bugs": "can_use_sword || can_use_sticks || can_use_mask_blast || can_boomerang || has_explosives || can_hammer"
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (can_use_sword && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (can_use_sword || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer || has_explosives"
 "can_rescue_carpenter": "small_keys_hideout_all && (can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4))))"
+"get_past_skultullas": "has_nuts || can_use_sword_or_sticks || has_ranged_weapon || can_use_din || has_explosives || can_hammer || can_use_mask_blast || can_use_mask_stone"
+"collect_gs_on_walls": "gs && (can_collect_distance || (has_ranged_weapon && climb_anywhere))" #TODO: Low/high macros like beehives; Din's, Blast mask, bomchus, bombs (if within throwing distance) and maybe even jump slashes if space permits (and damage?)
+
 
 #Trick Macros
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
@@ -297,6 +300,7 @@
 "glitch_equip_swap_anyage": "trick(GLITCH_OOT_EQUIP_SWAP) && ((has(SPELL_FIRE) || has(SHARED_SPELL_FIRE)) || (has_sticks && setting(agelessSticks)))"
 "glitch_ocarina_items": "trick(GLITCH_OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
 "glitch_megaflip": "trick(GLITCH_OOT_MEGAFLIP) && has_explosives && has_one_hand_shield"
+"glitch_broken_stick": "trick(GLITCH_OOT_BROKEN_STICK) && can_use_sticks"
 
 # Misc
 "soul_enemy(x)": "(!setting(soulsEnemyOot)) || has(x)"
@@ -324,3 +328,6 @@
 "rainbow_bridge": "setting(rainbowBridge, open) || (setting(rainbowBridge, vanilla) && rainbow_bridge_vanilla) || (setting(rainbowBridge, medallions) && rainbow_bridge_medallions) || (setting(rainbowBridge, custom) && special(BRIDGE))"
 
 "lake_water_control": "(setting(erBoss, none) && setting(regionState, dungeonBeaten) && event(BOSS_MORPHA)) || event(CLEAR_STATE_LAKE)"
+
+"break_icicle": "can_use_sword_or_sticks || has_explosives_or_hammer"
+"break_icicle_ice_cavern": "can_use_sword || has_explosives_or_hammer || (can_use_sticks && (trick(OOT_ICE_CAVERN_ICICLES_STICKS) || glitch_broken_stick))"

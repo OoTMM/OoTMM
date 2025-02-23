@@ -34,7 +34,7 @@ static void EnDs_BluePotionTextOverride(PlayState* play)
     ComboItemQuery q;
 
     EnDs_BluePotionItemQuery(&q);
-    b = play->msgCtx.textBuffer;
+    b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendItemNameQuery(&b, &q, TF_CAPITALIZE | TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_NL "How about " TEXT_COLOR_RED);

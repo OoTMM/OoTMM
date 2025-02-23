@@ -10,7 +10,7 @@
 #include <combo/magic.h>
 #include <combo/global.h>
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_UPDATE_DURING_OCARINA)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_UPDATE_DURING_OCARINA)
 
 void MagicWind_Init(Actor* thisx, PlayState* play);
 void MagicWind_Destroy(Actor* thisx, PlayState* play);

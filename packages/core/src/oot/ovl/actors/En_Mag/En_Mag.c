@@ -18,7 +18,7 @@
                        ((height)-1) << G_TEXTURE_IMAGE_FRAC);                                                          \
     } while (0)
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_5)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_OOT_5)
 
 
 // FIXME cross-game object metadata

@@ -6,7 +6,7 @@
 #include <assets/mm/objects/object_hs.h>
 #include "En_Hs.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_MM_10)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnHs_Init(Actor_EnHs* this, PlayState* play);
 void EnHs_Destroy(Actor_EnHs* this, PlayState* play);

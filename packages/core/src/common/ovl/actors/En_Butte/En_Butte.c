@@ -176,9 +176,9 @@ void EnButte_DrawTransformationEffect(Actor_EnButte* this, PlayState* play)
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 10, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 700, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 20, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 600, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 700, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 20, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 600, ICHAIN_STOP),
 };
 
 void EnButte_Init(Actor_EnButte* this, PlayState* play)
@@ -197,7 +197,7 @@ void EnButte_Init(Actor_EnButte* this, PlayState* play)
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (EnButte_CanTransform(this, play))
-        this->actor.uncullZoneScale = 200.0f;
+        this->actor.cullingVolumeScale = 200.0f;
 
     SkelAnime_Init(play, &this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, this->jointTable, this->morphTable, 8);
     Collider_InitJntSph(play, &this->collider);
@@ -400,7 +400,7 @@ void EnButte_FollowLink(Actor_EnButte* this, PlayState* play) {
 void EnButte_SetupTransformIntoFairy(Actor_EnButte* this)
 {
     this->timer = 9;
-    this->actor.flags |= ACTOR_FLAG_OOT_4;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     this->skelAnime.playSpeed = 1.0f;
     EnButte_ResetTransformationEffect();
     this->actionFunc = EnButte_TransformIntoFairy;

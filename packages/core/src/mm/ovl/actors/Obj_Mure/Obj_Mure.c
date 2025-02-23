@@ -39,9 +39,9 @@ static s16 sSpawnActorIds[OBJMURE_TYPE_MAX] = {
 static s16 sSpawnParams[] = { 0, 2, -1, 0, -1 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneForward, 1200, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 200, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 1200, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 1200, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 200, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 1200, ICHAIN_STOP),
 };
 
 typedef enum {
@@ -291,7 +291,7 @@ void ObjMure_InitialAction(Actor_ObjMure* this, PlayState* play) {
 void ObjMure_CulledState(Actor_ObjMure* this, PlayState* play) {
     if (fabsf(this->actor.projectedPos.z) < sZClip[this->type]) {
         this->actionFunc = ObjMure_ActiveState;
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         ObjMure_SpawnActors(this, play);
     }
 }
@@ -413,7 +413,7 @@ void ObjMure_ActiveState(Actor_ObjMure* this, PlayState* play) {
     ObjMure_CheckChildren(this, play);
     if ((sZClip[this->type] + 40.0f) <= fabsf(this->actor.projectedPos.z)) {
         this->actionFunc = ObjMure_CulledState;
-        this->actor.flags &= ~ACTOR_FLAG_MM_10;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         ObjMure_KillActors(this, play);
     } else if (sTypeGroupBehaviorFunc[this->type] != NULL) {
         sTypeGroupBehaviorFunc[this->type](this, play);

@@ -28,4 +28,6 @@ ASSERT_OFFSET(CutsceneContext, script,  0x04);
 ASSERT_OFFSET(CutsceneContext, state,   0x08);
 ASSERT_OFFSET(CutsceneContext, timer,   0x0c);
 
+// Should probably be in its own file
+s16 OnePointCutscene_Init(PlayState* play, s16 csId, s16 timer, Actor* actor, s16 parentCamId);
 #endif

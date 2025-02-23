@@ -6,7 +6,7 @@
 #include <assets/mm/objects/gameplay_dangeon_keep.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_THROW_ONLY | ACTOR_FLAG_CAN_PRESS_SWITCHES)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY | ACTOR_FLAG_CAN_PRESS_SWITCHES)
 
 #define OBJ_TSUBO_P000F(thisx)      ((thisx)->params & 0x0F)
 #define OBJ_TSUBO_P001F(thisx)      ((thisx)->params & 0x1F)
@@ -97,8 +97,8 @@ static ColliderCylinderInit sCylinderInit =
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -2000, ICHAIN_CONTINUE),  ICHAIN_F32_DIV1000(minVelocityY, -20000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 4000, ICHAIN_CONTINUE), ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 4000, ICHAIN_CONTINUE), ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
 static void ObjTsubo_Alias(Actor_ObjTsubo* this)

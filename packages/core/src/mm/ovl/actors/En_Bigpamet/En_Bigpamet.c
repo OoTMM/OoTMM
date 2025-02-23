@@ -5,7 +5,7 @@
 #include "En_Bigpamet.h"
 #include "../En_Pametfrog/En_Pametfrog.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_400)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_400)
 
 void EnBigpamet_Init(Actor_EnBigpamet* this, PlayState* play);
 void EnBigpamet_Destroy(Actor_EnBigpamet* this, PlayState* play);

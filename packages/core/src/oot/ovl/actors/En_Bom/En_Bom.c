@@ -9,7 +9,7 @@
 #include <combo/math.h>
 
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_5)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_OOT_5)
 
 void EnBom_Init(EnBom* this, PlayState* play);
 void EnBom_Destroy(EnBom* this, PlayState* play);

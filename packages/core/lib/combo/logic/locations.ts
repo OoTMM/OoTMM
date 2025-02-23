@@ -63,6 +63,14 @@ export const OOT_ONE_TIME_SCRUBS = [
   'OOT Hyrule Field Grotto Scrub HP',
 ];
 
+export const OOT_FROGS = [
+  'OOT Zora River Frogs Zeldas Lullaby',
+  'OOT Zora River Frogs Eponas Song',
+  'OOT Zora River Frogs Sarias Song',
+  'OOT Zora River Frogs Suns Song',
+  'OOT Zora River Frogs Song of Time'
+]
+
 export function locationsZelda(settings: Settings) {
   const locs = ['OOT Zelda\'s Letter', 'OOT Zelda\'s Song'];
   if (settings.shuffleWonderItemsOot === 'all' || settings.shuffleWonderItemsOot === 'overworld') {

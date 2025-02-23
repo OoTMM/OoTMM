@@ -3,7 +3,7 @@
 #include <actors/En_Bom/En_Bom.h>
 #include <combo/collision.h>
 
-#define FLAGS ACTOR_FLAG_OOT_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 #define BOMBCHU_SCALE 0.01f
 

@@ -2,7 +2,7 @@
 #include <assets/mm/objects/gameplay_keep.h>
 #include <assets/mm/objects/gameplay_field_keep.h>
 
-#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20)
 
 #define THIS ((ObjGrass*)thisx)
 

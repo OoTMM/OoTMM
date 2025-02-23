@@ -290,8 +290,8 @@ s32 Animation_OnFrame(SkelAnime* skelAnime, f32 frame);
 s16 Animation_GetLength(void* animation);
 s16 Animation_GetLastFrame(void* animation);
 
-#if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+#if defined(GAME_MM)
 s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
 s32 Player_IsFacingActor(Actor* actor, s16 maxAngleDiff, PlayState* play);
@@ -486,8 +486,11 @@ void SkinMatrix_Vec3fMtxFMultXYZW(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDe
 void func_800B1210(struct PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep);
 #endif
 
+#if defined(GAME_MM)
 s32 WaterBox_GetSurfaceImpl(struct PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox, s32* bgId);
-
+#else
+s32 WaterBox_GetSurfaceImpl(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
+#endif
 /* Gamemodes */
 void FileSelect_Init(GameState* this);
 

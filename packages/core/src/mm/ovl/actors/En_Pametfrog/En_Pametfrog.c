@@ -4,7 +4,7 @@
 #include "En_Pametfrog.h"
 #include "../src/mm/actors.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20)
 
 void EnPametfrog_Init(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_Destroy(Actor_EnPametfrog* this, PlayState* play);

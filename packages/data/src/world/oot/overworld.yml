@@ -290,6 +290,7 @@
     "Hyrule Field Grotto Near GV": "(is_child && hidden_grotto_bomb) || (can_hammer && stone_of_agony)"
     "Hyrule Field Grotto Near Kak": "hidden_grotto_bomb"
     "Hyrule Field Fairy Grotto": "has_explosives_or_hammer"
+    "Hyrule Field Red Boulders": "is_adult && can_hammer"
   events:
     BIG_POE: "can_ride_epona && can_use_bow && has_bottle"
     #There are rocks near Gerudo Valley you can farm for drops
@@ -358,6 +359,14 @@
     "Hyrule Field Grass Pack 4 Bush 10": "true"
     "Hyrule Field Grass Pack 4 Bush 11": "true"
     "Hyrule Field Grass Pack 4 Bush 12": "true"
+"Hyrule Field Red Boulders":
+  region: HYRULE_FIELD
+  age_change: false
+  locations:
+    "Hyrule Field Red Boulder 1": "true"
+    "Hyrule Field Red Boulder 2": "true"
+    "Hyrule Field Red Boulder 3": "true"
+    "Hyrule Field Red Boulder 4": "true"
 "Hyrule Field Drawbridge":
   region: HYRULE_FIELD
   time: flow
@@ -930,6 +939,9 @@
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "gs && (has_ranged_weapon || can_use_sword)"
+    "Ganon Castle Exterior Red Boulder 1": "can_hammer"
+    "Ganon Castle Exterior Red Boulder 2": "can_hammer"
+    "Ganon Castle Exterior Red Boulder 3": "can_hammer"
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR
   age_change: false
@@ -1556,6 +1568,7 @@
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Storms Grotto": "hidden_grotto_storms"
     "Death Mountain Cow Grotto": "has_explosives_or_hammer"
+    "Death Mountain Trail Red Boulders Lower": "is_adult && can_hammer"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"
     BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
@@ -1569,6 +1582,18 @@
     "Death Mountain Trail Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
     "Death Mountain Trail Rupee Lower": "is_child && has_explosives_or_hammer"
     "Death Mountain Trail Big Fairy": "can_play_sun"
+"Death Mountain Trail Red Boulders Lower":
+  region: DEATH_MOUNTAIN_TRAIL
+  age_change: false
+  locations:
+    "Death Mountain Trail Red Boulder Lower 1": "true"
+    "Death Mountain Trail Red Boulder Lower 2": "true"
+    "Death Mountain Trail Red Boulder Lower 3": "true"
+    "Death Mountain Trail Red Boulder Lower 4": "true"
+    "Death Mountain Trail Red Boulder Lower 5": "true"
+    "Death Mountain Trail Red Boulder Lower 6": "true"
+    "Death Mountain Trail Red Boulder Lower 7": "true"
+    "Death Mountain Trail Red Boulder Near Lower GS": "true"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
@@ -1577,6 +1602,7 @@
     "Kakariko Rooftop": "is_child"
     "Death Mountain Crater Top": "true"
     "Fairy Fountain Magic": "has_explosives_or_hammer"
+    "Death Mountain Trail Red Boulders Upper": "is_adult && can_hammer"
   locations:
     "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_biggoron"
     "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_biggoron"
@@ -1584,6 +1610,13 @@
     "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
   gossip:
     "Death Mountain Trail Gossip on Climb": "true"
+"Death Mountain Trail Red Boulders Upper":
+  region: DEATH_MOUNTAIN_TRAIL
+  age_change: false
+  locations:
+    "Death Mountain Trail Red Boulder Near Upper GS": "true"
+    "Death Mountain Trail Red Boulder Upper 1": "true"
+    "Death Mountain Trail Red Boulder Upper 2": "true"
 "Death Mountain Storms Grotto":
   region: ENTRANCE
   age_change: false
@@ -1657,6 +1690,7 @@
     "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child) || (is_child && can_play_zelda)"
     "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will)) || (has_blue_fire_arrows_mudwall && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
+    "Goron City Red Boulders": "can_hammer"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
     STICKS: "is_child"
@@ -1681,6 +1715,15 @@
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+"Goron City Red Boulders":
+  region: GORON_CITY
+  age_change: false
+  locations:
+    "Goron City Red Boulder 1": "true"
+    "Goron City Red Boulder 2": "true"
+    "Goron City Red Boulder 3": "true"
+    "Goron City Red Boulder 4": "true"
+    "Goron City Red Boulder 5": "true"
 "Darunia Chamber":
   region: GORON_CITY
   exits:
@@ -1769,6 +1812,11 @@
     "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
+    "Zora River Frogs Zeldas Lullaby": "is_child && can_play_zelda"
+    "Zora River Frogs Eponas Song": "is_child && can_play_epona"
+    "Zora River Frogs Sarias Song": "is_child && can_play_saria"
+    "Zora River Frogs Suns Song": "is_child && can_play_sun"
+    "Zora River Frogs Song of Time": "is_child && can_play_time"
     "Zora River Frogs Game": "is_child && can_play_zelda && can_play_saria && can_play_epona && can_play_sun && can_play_time && can_play_storms && can_play_minigame"
     "Zora River GS Ladder": "is_child && gs_night && can_damage"
     "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
@@ -2207,6 +2255,7 @@
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
     "Death Mountain Crater Scrub Grotto": "can_hammer"
     "Fairy Fountain Double Magic": "can_hammer || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Crater Red Boulders": "can_hammer"
   events:
     RED_BOULDER_BROKEN: "is_adult && can_hammer"
   locations:
@@ -2215,6 +2264,14 @@
     "Death Mountain Crater Pot 2": "true"
     "Death Mountain Crater Pot 3": "true"
     "Death Mountain Crater Pot 4": "true"
+"Death Mountain Crater Red Boulders":
+  region: DEATH_MOUNTAIN_CRATER
+  age_change: false
+  locations:
+    "Death Mountain Crater Red Boulder Grotto": "true"
+    "Death Mountain Crater Red Boulder Great Fairy 1": "true"
+    "Death Mountain Crater Red Boulder Great Fairy 2": "true"
+    "Death Mountain Crater Red Boulder Shortcut": "true"
 "Death Mountain Crater Bottom Child":
   region: DEATH_MOUNTAIN_CRATER
   locations:
@@ -2322,6 +2379,8 @@
     "Gerudo Valley Crate Child Bottom": "is_child"
     "Gerudo Valley Wonder Item Lower": "is_adult"
     "Gerudo Valley Wonder Item Upper": "is_adult"
+    "Gerudo Valley Red Boulder Before Bridge 1": "is_adult && can_hammer"
+    "Gerudo Valley Red Boulder Before Bridge 2": "is_adult && can_hammer"
   gossip:
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
@@ -2339,6 +2398,12 @@
     "Gerudo Valley GS Tent": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
     "Gerudo Valley Crate HP": "climb_anywhere"
+    "Gerudo Valley Red Boulder After Bridge 1": "is_adult && can_hammer"
+    "Gerudo Valley Red Boulder After Bridge 2": "is_adult && can_hammer"
+    "Gerudo Valley Red Boulder Around Chest 1": "is_adult && can_hammer"
+    "Gerudo Valley Red Boulder Around Chest 2": "is_adult && can_hammer"
+    "Gerudo Valley Red Boulder Around Chest 3": "is_adult && can_hammer"
+    "Gerudo Valley Red Boulder Around Chest 4": "is_adult && can_hammer"
     # Unreachable with some settings, need a way to detect that
     #"Gerudo Valley Crate Child Unreachable 1": "is_child"
     #"Gerudo Valley Crate Child Unreachable 2": "is_child"
