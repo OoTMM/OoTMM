@@ -158,7 +158,7 @@
 - { id: OOT_SONG_TP_SHADOW_C_RIGHT_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Nocturne of Shadow 2nd C Right" }
 - { id: OOT_SONG_TP_SHADOW_A, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C2>Nocturne of Shadow A" }
 - { id: OOT_SONG_TP_SHADOW_C_LEFT_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Nocturne of Shadow 2nd C Left" }
-- { id: OOT_SONG_TP_SHADOW_C_RIGHT_2, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Nocturne of Shadow 2nd C Right" }
+- { id: OOT_SONG_TP_SHADOW_C_RIGHT_3, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Nocturne of Shadow 2nd C Right" }
 - { id: OOT_SONG_TP_SHADOW_C_DOWN, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Nocturne of Shadow C Down" }
 - { id: OOT_SONG_TP_LIGHT, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_LIGHT], flags: 0x80, draw: [NOTE, 0x83], object: [oot, 0x00b6], name: "the <C2>Prelude of Light" }
 - { id: OOT_SONG_TP_LIGHT_C_UP_1, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_LIGHT], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Prelude of Light 1st C Up" }
@@ -506,7 +506,7 @@
 - { id: OOT_SONG_EMPTINESS_C_RIGHT_1, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 1st C Right" }
 - { id: OOT_SONG_EMPTINESS_C_LEFT_1, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 1st C Left" }
 - { id: OOT_SONG_EMPTINESS_C_RIGHT_2, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Right" }
-- { id: OOT_SONG_EMPTINESS_C_DOWN_1, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness 1st C Down" }
+- { id: OOT_SONG_EMPTINESS_C_DOWN, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Down" }
 - { id: OOT_SONG_EMPTINESS_C_RIGHT_3, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 3rd C Right" }
 - { id: OOT_SONG_EMPTINESS_C_UP, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Up" }
 - { id: OOT_SONG_EMPTINESS_C_LEFT_2, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Left" }

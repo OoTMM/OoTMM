@@ -11,7 +11,7 @@ import { Location, isLocationOtherFairy, isLocationRenewable, locationData, loca
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
-import {CLOCKS} from '../items/groups';
+import {CLOCKS, SHARED_SONG_EMPTINESS_NOTES} from '../items/groups';
 import { mustStartWithMasterSword } from '../settings/util';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
 
@@ -691,45 +691,49 @@ export class LogicPassWorldTransform {
       if (settings.songs === 'notes') {
         this.removeItems(ItemGroups.OOT_SONG_EPONA_NOTES);
         this.removeItems(ItemGroups.MM_SONG_EPONA_NOTES);
-        this.addItems(ItemGroups.SHARED_SONG_EPONA_NOTES);
       } else {
         this.replaceItem(Items.OOT_SONG_EPONA,   Items.SHARED_SONG_EPONA);
         this.replaceItem(Items.MM_SONG_EPONA,    Items.SHARED_SONG_EPONA);
         this.removeItem(Items.SHARED_SONG_EPONA, 1);
       }
+    } else if(!settings.sharedSongEpona && settings.songs === 'notes') {
+      this.removeItems(ItemGroups.SHARED_SONG_EPONA_NOTES);
     }
 
     if (settings.sharedSongStorms) {
       if (settings.songs === 'notes') {
         this.removeItems(ItemGroups.OOT_SONG_STORMS_NOTES);
         this.removeItems(ItemGroups.MM_SONG_STORMS_NOTES);
-        this.addItems(ItemGroups.SHARED_SONG_STORMS_NOTES);
       } else {
         this.replaceItem(Items.OOT_SONG_STORMS,  Items.SHARED_SONG_STORMS);
         this.replaceItem(Items.MM_SONG_STORMS,   Items.SHARED_SONG_STORMS);
         this.removeItem(Items.SHARED_SONG_STORMS, 1);
       }
+    } else if(!settings.sharedSongStorms && settings.songs === 'notes') {
+      this.removeItems(ItemGroups.SHARED_SONG_STORMS_NOTES);
     }
 
     if (settings.sharedSongTime) {
       if (settings.songs === 'notes') {
         this.removeItems(ItemGroups.OOT_SONG_TIME_NOTES);
         this.removeItems(ItemGroups.MM_SONG_TIME_NOTES);
-        this.addItems(ItemGroups.SHARED_SONG_TIME_NOTES);
       } else {
         this.replaceItem(Items.OOT_SONG_TIME,    Items.SHARED_SONG_TIME);
         this.replaceItem(Items.MM_SONG_TIME,     Items.SHARED_SONG_TIME);
         this.removeItem(Items.SHARED_SONG_TIME, 1);
       }
+    } else if(!settings.sharedSongTime && settings.songs === 'notes') {
+      this.removeItems(ItemGroups.SHARED_SONG_TIME_NOTES);
     }
 
     if (settings.sharedSongSun && settings.sunSongMm) {
       if (settings.songs === 'notes') {
         this.removeItems(ItemGroups.OOT_SONG_SUN_NOTES);
-        this.addItems(ItemGroups.SHARED_SONG_SUN_NOTES);
       } else {
         this.replaceItem(Items.OOT_SONG_SUN, Items.SHARED_SONG_SUN);
       }
+    } else if (settings.sharedSongSun && !settings.sunSongMm) {
+      this.removeItems(ItemGroups.SHARED_SONG_SUN_NOTES);
     }
 
     if (settings.sharedNutsSticks) {
@@ -832,16 +836,18 @@ export class LogicPassWorldTransform {
     if (settings.sharedSongElegy) {
       if (settings.songs === 'notes') {
         this.removeItems(ItemGroups.MM_SONG_EMPTINESS_NOTES);
-        this.addItems(ItemGroups.SHARED_SONG_EMPTINESS_NOTES);
+        this.removeItems(ItemGroups.OOT_SONG_EMPTINESS_NOTES);
       } else {
         this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
       }
     } else if (settings.elegyOot) {
       if (settings.songs === 'notes') {
-        this.addItems(ItemGroups.OOT_SONG_EMPTINESS_NOTES);
+        this.removeItems(ItemGroups.SHARED_SONG_EMPTINESS_NOTES);
       } else {
         this.addItem(Items.OOT_SONG_EMPTINESS);
       }
+    } else if (!settings.elegyOot && settings.songs === 'notes') {
+      this.removeItems(ItemGroups.OOT_SONG_EMPTINESS_NOTES);
     }
 
     if (settings.sharedLens) {
@@ -1533,12 +1539,12 @@ export class LogicPassWorldTransform {
       if (settings.songs !== 'notes') {
         this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
       } else {
-        this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES)
-        this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES)
+        this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
       }
     } else {
       if (settings.songs === 'notes') {
         this.addItems(ItemGroups.MM_SONG_GORON_NOTES);
+        this.removeItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
       } else {
         this.removeItem(Items.MM_SONG_GORON_HALF);
         for (let i = 0; i < this.state.worlds.length; ++i) {
@@ -1549,11 +1555,7 @@ export class LogicPassWorldTransform {
 
     /* Handle MM sun song */
     if (settings.sunSongMm && !settings.sharedSongSun) {
-      if (settings.songs === 'notes') {
-        this.addItems(ItemGroups.MM_SONG_SUN_NOTES);
-      } else {
-        this.addItem(Items.MM_SONG_SUN);
-      }
+      this.addItem(Items.MM_SONG_SUN);
     }
 
     /* Handle MM other fairies */
