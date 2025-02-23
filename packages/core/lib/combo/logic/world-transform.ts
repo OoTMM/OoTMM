@@ -1563,7 +1563,6 @@ export class LogicPassWorldTransform {
       }
     } else {
       if (settings.songs === 'notes') {
-        this.addItems(ItemGroups.MM_SONG_GORON_NOTES);
         this.removeItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
       } else {
         this.removeItem(Items.MM_SONG_GORON_HALF);
