@@ -13,6 +13,8 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
+#define TRIGGER_SONG_STORMS     0x03
+
 static const u16 kButtonMasks[] = {
     A_BUTTON,
     R_CBUTTONS,
@@ -1107,7 +1109,8 @@ static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 para
     gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value |= (1 << param);
 
     if (gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
-        gOotSave.info.inventory.quest.songStorms = 1;
+        gComboTriggersData.acc = 0;
+        gComboTriggersData.trigger = TRIGGER_SONG_STORMS;
     }
     return 0;
 }
