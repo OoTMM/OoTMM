@@ -1095,6 +1095,19 @@ static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value |= (1 << param);
+    return 0;
+}
+
+static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value |= (1 << param);
+    //TODO Check if all notes are found and if they are, give Song of Storms (Oot) to player
+    return 0;
+}
+
 static void addHealthEffect(u8 count)
 {
     gSaveContext.healthDelta += count * 0x10;
@@ -1906,6 +1919,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemScaleOot,
     addItemQuestOot,
     addItemQuestMm,
+    addItemOotSongForestNote,
+    addItemOotSongStormsNote,
     addItemHeartOot,
     addItemHeartMm,
     addItemDefenseUpgradeOot,
