@@ -1101,10 +1101,14 @@ static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
+static const u32 OOT_STORMS_NOTES_MASK = 0x3F;
 static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value |= (1 << param);
-    //TODO Check if all notes are found and if they are, give Song of Storms (Oot) to player
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
+        gOotSave.info.inventory.quest.songStorms = 1;
+    }
     return 0;
 }
 
@@ -1919,8 +1923,6 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemScaleOot,
     addItemQuestOot,
     addItemQuestMm,
-    addItemOotSongForestNote,
-    addItemOotSongStormsNote,
     addItemHeartOot,
     addItemHeartMm,
     addItemDefenseUpgradeOot,
@@ -1977,6 +1979,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStoneAgonyMm,
     addItemSpinUpgradeOot,
     addItemIceTrap,
+    addItemOotSongForestNote,
+    addItemOotSongStormsNote,
 };
 
 extern const u8 kAddItemFuncs[];
