@@ -14,6 +14,7 @@
 #endif
 
 #define TRIGGER_SONG_STORMS     0x03
+#define TRIGGER_SONG_FOREST     0x04
 
 static const u16 kButtonMasks[] = {
     A_BUTTON,
@@ -1096,10 +1097,15 @@ static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     gMmSave.info.inventory.quest.value |= (1 << param);
     return 0;
 }
-
+static const u32 OOT_TP_FOREST_NOTES_MASK = 0x3F;
 static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value == OOT_TP_FOREST_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_SONG_FOREST);
+    }
     return 0;
 }
 
@@ -1110,7 +1116,7 @@ static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 para
 
     if (gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
         gComboTriggersData.acc = 0;
-        gComboTriggersData.trigger = TRIGGER_SONG_STORMS;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_SONG_STORMS);
     }
     return 0;
 }
