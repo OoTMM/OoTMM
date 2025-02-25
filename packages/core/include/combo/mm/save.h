@@ -3,6 +3,7 @@
 
 #include <combo/types.h>
 #include <combo/xflags.h>
+#include <combo/mm/song_notes.h>
 
 typedef struct
 {
@@ -122,6 +123,7 @@ typedef struct
     s8              defenseHearts;
     s8              strayFairies[10];
     char            dekuPlaygroundPlayerName[3][8];
+    MmSongNotes     songNotes[12];
 }
 MmInventory;
 

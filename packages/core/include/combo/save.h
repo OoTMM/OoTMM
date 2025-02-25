@@ -15,7 +15,6 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
-# include <combo/common/song_notes.h>
 
 typedef struct ALIGNED(16)
 {

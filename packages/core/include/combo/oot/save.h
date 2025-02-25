@@ -4,6 +4,7 @@
 #include <combo/types.h>
 #include <combo/util.h>
 #include <combo/xflags.h>
+#include <combo/oot/song_notes.h>
 
 #define LANGUAGE_JPN 0
 #define LANGUAGE_ENG 1
@@ -184,6 +185,7 @@ typedef struct
     s8                      dungeonKeys[0x13];
     u8                      doubleDefenseHearts;
     u16                     goldTokens;
+    OotSongNotes            songNotes;
 }
 OotInventory;
 

@@ -417,6 +417,7 @@ export const OOT_SONG_TP_SPIRIT_NOTES = new Set([
   Items.OOT_SONG_TP_SPIRIT_A_2,
   Items.OOT_SONG_TP_SPIRIT_C_RIGHT,
   Items.OOT_SONG_TP_SPIRIT_C_DOWN_2,
+  Items.OOT_SONG_TP_SPIRIT_A_3,
 ]);
 
 export const OOT_SONG_TP_WATER_NOTES = new Set([

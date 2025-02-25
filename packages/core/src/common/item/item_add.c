@@ -1100,9 +1100,9 @@ static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 static const u32 OOT_TP_FOREST_NOTES_MASK = 0x3F;
 static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value |= (1 << param);
+    gOotSave.info.inventory.quest.songNotes.oot_tp_forest_notes.value |= (1 << param);
 
-    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value == OOT_TP_FOREST_NOTES_MASK) {
+    if (gOotSave.info.inventory.quest.songNotes.oot_tp_forest_notes.value == OOT_TP_FOREST_NOTES_MASK) {
         gComboTriggersData.acc = 0;
         CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_SONG_FOREST);
     }
@@ -1112,9 +1112,9 @@ static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 para
 static const u32 OOT_STORMS_NOTES_MASK = 0x3F;
 static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value |= (1 << param);
+    gOotSave.info.inventory.quest.songNotes.oot_storms_notes.value |= (1 << param);
 
-    if (gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
+    if (gOotSave.info.inventory.quest.songNotes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
         gComboTriggersData.acc = 0;
         CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_SONG_STORMS);
     }

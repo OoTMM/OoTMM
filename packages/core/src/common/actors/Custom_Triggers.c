@@ -11,8 +11,6 @@
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01
 #define TRIGGER_TRIFORCE        0x02
-#define TRIGGER_SONG_STORMS     0x03
-#define TRIGGER_SONG_FOREST     0x04
 
 #if defined(GAME_OOT)
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART
@@ -136,7 +134,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, PlayState* 
             comboCreditWarp(play);
         }
         break;
-    case TRIGGER_SONG_STORMS:
+    case TRIGGER_OOT_SONG_STORMS:
         if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT_SONG_STORMS))
         {
             gOotSave.info.inventory.quest.songStorms = 1;
@@ -144,7 +142,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, PlayState* 
         }
         break;
 
-    case TRIGGER_SONG_FOREST:
+    case TRIGGER_OOT_SONG_TP_FOREST:
         if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT_SONG_TP_FOREST))
         {
             gOotSave.info.inventory.quest.songTpForest = 1;
