@@ -1560,6 +1560,7 @@ export class LogicPassWorldTransform {
         this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
       } else {
         this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
+        this.removeItems(ItemGroups.MM_SONG_GORON_NOTES);
       }
     } else {
       if (settings.songs === 'notes') {

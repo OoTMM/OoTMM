@@ -13,9 +13,6 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
-#define TRIGGER_SONG_STORMS     0x03
-#define TRIGGER_SONG_FOREST     0x04
-
 static const u16 kButtonMasks[] = {
     A_BUTTON,
     R_CBUTTONS,
@@ -1100,11 +1097,131 @@ static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 static const u32 OOT_TP_FOREST_NOTES_MASK = 0x3F;
 static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.info.inventory.quest.songNotes.oot_tp_forest_notes.value |= (1 << param);
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value |= (1 << param);
 
-    if (gOotSave.info.inventory.quest.songNotes.oot_tp_forest_notes.value == OOT_TP_FOREST_NOTES_MASK) {
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value == OOT_TP_FOREST_NOTES_MASK) {
         gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_SONG_FOREST);
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_FOREST);
+    }
+    return 0;
+}
+
+static const u32 OOT_TP_FIRE_NOTES_MASK = 0x3F;
+static int addItemOotSongFireNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_fire_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_fire_notes.value == OOT_TP_FIRE_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_FIRE);
+    }
+    return 0;
+}
+
+static const u32 OOT_TP_WATER_NOTES_MASK = 0x1F;
+static int addItemOotSongWaterNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_water_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_water_notes.value == OOT_TP_WATER_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_WATER);
+    }
+    return 0;
+}
+
+static const u32 OOT_TP_SPIRIT_NOTES_MASK = 0x3F;
+static int addItemOotSongSpiritNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_spirit_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_spirit_notes.value == OOT_TP_SPIRIT_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SPIRIT);
+    }
+    return 0;
+}
+
+static const u32 OOT_TP_SHADOW_NOTES_MASK = 0x7F;
+static int addItemOotSongShadowNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_shadow_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_shadow_notes.value == OOT_TP_SHADOW_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SHADOW);
+    }
+    return 0;
+}
+
+static const u32 OOT_TP_LIGHT_NOTES_MASK = 0x3F;
+static int addItemOotSongLightNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_light_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_tp_light_notes.value == OOT_TP_LIGHT_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_LIGHT);
+    }
+    return 0;
+}
+
+static const u32 OOT_ZELDA_NOTES_MASK  = 0x3F;
+static int addItemOotSongZeldaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_zelda_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_zelda_notes.value == OOT_ZELDA_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_ZELDA);
+    }
+    return 0;
+}
+
+static const u32 OOT_EPONA_NOTES_MASK  = 0x3F;
+static int addItemOotSongEponaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_epona_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_epona_notes.value == OOT_EPONA_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_EPONA);
+    }
+    return 0;
+}
+
+static const u32 OOT_SARIA_NOTES_MASK  = 0x3F;
+static int addItemOotSongSariaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_saria_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_saria_notes.value == OOT_SARIA_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_SARIA);
+    }
+    return 0;
+}
+
+static const u32 OOT_SUN_NOTES_MASK  = 0x3F;
+static int addItemOotSongSunNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_sun_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_sun_notes.value == OOT_SUN_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_SUN);
+    }
+    return 0;
+}
+
+static const u32 OOT_TIME_NOTES_MASK  = 0x3F;
+static int addItemOotSongTimeNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_time_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_time_notes.value == OOT_TIME_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TIME);
     }
     return 0;
 }
@@ -1112,14 +1229,176 @@ static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 para
 static const u32 OOT_STORMS_NOTES_MASK = 0x3F;
 static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.info.inventory.quest.songNotes.oot_storms_notes.value |= (1 << param);
+    gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value |= (1 << param);
 
-    if (gOotSave.info.inventory.quest.songNotes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
         gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_SONG_STORMS);
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_STORMS);
     }
     return 0;
 }
+
+static const u32 OOT_EMPTINESS_NOTES_MASK = 0x7F;
+static int addItemOotSongEmptinessNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.oot_song_notes.oot_emptiness_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.oot_song_notes.oot_emptiness_notes.value == OOT_EMPTINESS_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_EMPTINESS);
+        comboAddItemRaw(play, GI_OOT_SONG_EMPTINESS);
+    }
+    return 0;
+}
+
+// Awakening Notes
+static const u32 MM_AWAKENING_NOTES_MASK = 0x7F;
+static int addItemMmSongAwakeningNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_awakening_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_awakening_notes.value == MM_AWAKENING_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_AWAKENING);
+    }
+    return 0;
+}
+
+// Emptiness Notes
+static const u32 MM_EMPTINESS_NOTES_MASK = 0x7F;
+static int addItemMmSongEmptinessNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_emptiness_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_emptiness_notes.value == MM_EMPTINESS_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EMPTINESS);
+    }
+    return 0;
+}
+
+static const u32 MM_GORON_NOTES_MASK = 0xFF;
+static int addItemMmSongGoronNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_goron_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_notes.value == MM_GORON_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
+    }
+    return 0;
+}
+
+static const u32 MM_EPONA_NOTES_MASK =  0x3F;
+static int addItemMmSongEponaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_epona_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_epona_notes.value == MM_EPONA_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EPONA);
+    }
+    return 0;
+}
+
+static const u32 MM_ZORA_NOTES_MASK = 0x7F;
+static int addItemMmSongZoraNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_zora_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_zora_notes.value == MM_ZORA_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ZORA);
+    }
+    return 0;
+}
+
+// Healing Notes
+static const u32 MM_HEALING_NOTES_MASK = 0x3F;
+static int addItemMmSongHealingNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_healing_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_healing_notes.value == MM_HEALING_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_HEALING);
+    }
+    return 0;
+}
+
+// Order Notes
+static const u32 MM_ORDER_NOTES_MASK = 0x3F;
+static int addItemMmSongOrderNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_order_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_order_notes.value == MM_ORDER_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ORDER);
+    }
+    return 0;
+}
+
+// Time Notes
+static const u32 MM_TIME_NOTES_MASK = 0x3F;
+static int addItemMmSongTimeNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_time_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_time_notes.value == MM_TIME_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_TIME);
+    }
+    return 0;
+}
+
+// Soaring Notes
+static const u32 MM_SOARING_NOTES_MASK = 0x3F;
+static int addItemMmSongSoaringNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_soaring_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_soaring_notes.value == MM_SOARING_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_SOARING);
+    }
+    return 0;
+}
+
+// Storms Notes
+static const u32 MM_STORMS_NOTES_MASK = 0x3F;
+static int addItemMmSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.songNotes.mm_song_notes.mm_storms_notes.value |= (1 << param);
+
+    if (gSharedCustomSave.songNotes.mm_song_notes.mm_storms_notes.value == MM_STORMS_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_STORMS);
+    }
+    return 0;
+}
+
+static const u32 MM_GORON_HALF_NOTES_MASK = 0xAAAA;
+static int addItemMmSongGoronHalfNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    u32* notes = &gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value;
+
+    u32 shift = param * 2;
+
+    u32 currentValue = (*notes >> shift) & 0x3;
+
+    if (currentValue < 2) {
+        *notes += (1 << shift);
+    }
+
+    if (*notes == MM_GORON_HALF_NOTES_MASK) {
+        gComboTriggersData.acc = 0;
+        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
+    }
+
+    return 0;
+}
+
 
 static void addHealthEffect(u8 count)
 {

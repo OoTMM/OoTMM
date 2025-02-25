@@ -191,11 +191,11 @@
 - { id: OOT_SONG_SARIA_C_LEFT_2, type: MAJOR, add: [OOT_SONG_SARIA_NOTE, 5], flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Saria's Song 2nd C Left" }
 - { id: OOT_SONG_SUN, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_SUN], flags: 0x80, draw: [NOTE, 0x03], object: [oot, 0x00b6], name: "the <C2>Sun's Song" }
 - { id: OOT_SONG_SUN_C_RIGHT_1, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 0], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Sun's Song 1st C Right" }
-- { id: OOT_SONG_SUN_C_DOWN_1, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 0], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 1st C Down" }
-- { id: OOT_SONG_SUN_C_UP_1, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 0], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 1st C Up" }
-- { id: OOT_SONG_SUN_C_RIGHT_2, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 0], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Sun's Song 2nd C Right" }
-- { id: OOT_SONG_SUN_C_DOWN_2, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 0], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 2nd C Down" }
-- { id: OOT_SONG_SUN_C_UP_2, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 0], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 2nd C Up" }
+- { id: OOT_SONG_SUN_C_DOWN_1, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 1], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 1st C Down" }
+- { id: OOT_SONG_SUN_C_UP_1, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 2], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 1st C Up" }
+- { id: OOT_SONG_SUN_C_RIGHT_2, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 3], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Sun's Song 2nd C Right" }
+- { id: OOT_SONG_SUN_C_DOWN_2, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 4], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 2nd C Down" }
+- { id: OOT_SONG_SUN_C_UP_2, type: MAJOR, add: [OOT_SONG_SUN_NOTE, 5], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Sun's Song 2nd C Up" }
 - { id: OOT_SONG_TIME, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: [NOTE, 0x01], object: [oot, 0x00b6], name: "the <C2>Song of Time" }
 - { id: OOT_SONG_TIME_C_RIGHT_1, type: MAJOR, add: [OOT_SONG_TIME_NOTE, 0], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Song of Time 1st C Right" }
 - { id: OOT_SONG_TIME_A_1, type: MAJOR, add: [OOT_SONG_TIME_NOTE, 1], flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C2>Song of Time 1st A" }
@@ -504,13 +504,13 @@
 - { id: OOT_MASK_STONE, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_STONE], flags: 0x80, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
 - { id: OOT_TRAP_RUPOOR, type: RUPEE, add: [OOT_RUPEE, -10], flags: 0x80, draw: [RUPEE, 0], object: [mm, 0x013f], name: "a <COLOR_BLUE>Rupoor" }
 - { id: OOT_SONG_EMPTINESS, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: [NOTE, 0x84], object: [oot, 0x00b6], name: "the <C2>Elegy of Emptiness" }
-- { id: OOT_SONG_EMPTINESS_C_RIGHT_1, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 1st C Right" }
-- { id: OOT_SONG_EMPTINESS_C_LEFT_1, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 1st C Left" }
-- { id: OOT_SONG_EMPTINESS_C_RIGHT_2, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Right" }
-- { id: OOT_SONG_EMPTINESS_C_DOWN, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Down" }
-- { id: OOT_SONG_EMPTINESS_C_RIGHT_3, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 3rd C Right" }
-- { id: OOT_SONG_EMPTINESS_C_UP, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Up" }
-- { id: OOT_SONG_EMPTINESS_C_LEFT_2, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Left" }
+- { id: OOT_SONG_EMPTINESS_C_RIGHT_1, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 0], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 1st C Right" }
+- { id: OOT_SONG_EMPTINESS_C_LEFT_1, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 1], flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 1st C Left" }
+- { id: OOT_SONG_EMPTINESS_C_RIGHT_2, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 2], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Right" }
+- { id: OOT_SONG_EMPTINESS_C_DOWN, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 3], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Down" }
+- { id: OOT_SONG_EMPTINESS_C_RIGHT_3, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 4], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 3rd C Right" }
+- { id: OOT_SONG_EMPTINESS_C_UP, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 5], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C2>Elegy of Emptiness C Up" }
+- { id: OOT_SONG_EMPTINESS_C_LEFT_2, type: MAJOR, add: [OOT_SONG_EMPTINESS_NOTE, 6], flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C2>Elegy of Emptiness 2nd C Left" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }

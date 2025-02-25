@@ -330,6 +330,7 @@ typedef union
         u32 tp_spirit_a_2:1;
         u32 tp_spirit_c_right:1;
         u32 tp_spirit_c_down_2:1;
+        u32 tp_spirit_a_3:1;
     };
     u32 value;
 } OotTpSpiritNotes;
