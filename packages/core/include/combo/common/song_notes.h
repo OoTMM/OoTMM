@@ -51,12 +51,12 @@ typedef union
 {
     struct
     {
-        u32 goron_half_a_1:1;
-        u32 goron_half_c_right_1:1;
-        u32 goron_half_c_left_1:1;
-        u32 goron_half_a_2:1;
-        u32 goron_half_c_right_2:1;
-        u32 goron_half_c_left_2:1;
+        u32 goron_half_a_1:2;
+        u32 goron_half_c_right_1:2;
+        u32 goron_half_c_left_1:2;
+        u32 goron_half_a_2:2;
+        u32 goron_half_c_right_2:2;
+        u32 goron_half_c_left_2:2;
     };
     u32 value;
 } MmGoronHalfNotes;

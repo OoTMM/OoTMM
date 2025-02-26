@@ -25,6 +25,7 @@ Actor_CustomTriggers* gActorCustomTriggers;
 ComboTriggersData gComboTriggersData;
 TriggerArray gCustomTriggers;
 
+/* Add Trigger Event to queue. Currently only used for Song Note events */
 void CustomTriggers_AddTrigger(TriggerArray* triggers, int value) {
     if (triggers->size >= triggers->capacity) {
         size_t new_capacity = triggers->capacity * 2;
@@ -134,21 +135,6 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, PlayState* 
             comboCreditWarp(play);
         }
         break;
-    case TRIGGER_OOT_SONG_STORMS:
-        if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT_SONG_STORMS))
-        {
-            gOotSave.info.inventory.quest.songStorms = 1;
-            gComboTriggersData.trigger = TRIGGER_NONE;
-        }
-        break;
-
-    case TRIGGER_OOT_SONG_TP_FOREST:
-        if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT_SONG_TP_FOREST))
-        {
-            gOotSave.info.inventory.quest.songTpForest = 1;
-            gComboTriggersData.trigger = TRIGGER_NONE;
-        }
-        break;
     }
 
     CustomTriggers_HandleTriggerGame(this, play);
@@ -203,9 +189,8 @@ static void CustomTriggers_Fini(Actor_CustomTriggers* this, PlayState* play)
 
 static void CustomTriggers_HandleBulkTrigger(Actor_CustomTriggers* this, PlayState* play, int trigger)
 {
-    gComboTriggersData.trigger = trigger;
-    CustomTriggers_HandleTrigger(this, play);
-    if (gComboTriggersData.trigger == TRIGGER_NONE) {
+    int isSongSaved = CustomSongTriggers_HandleSongTriggers(this, play, trigger);
+    if (isSongSaved == 1) {
         CustomTriggers_RemoveTrigger(&gCustomTriggers, trigger);
     }
 }
@@ -227,6 +212,7 @@ static void CustomTriggers_Update(Actor_CustomTriggers* this, PlayState* play)
     if (gComboTriggersData.trigger != TRIGGER_NONE)
         CustomTriggers_HandleTrigger(this, play);
 
+    /* Handles Multiple Trigger events one after another to ensure none are missed */
     if (gCustomTriggers.size > 0) {
         int trigger = gCustomTriggers.array[0];
         CustomTriggers_HandleBulkTrigger(this, play, trigger);
