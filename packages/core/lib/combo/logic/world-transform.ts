@@ -726,14 +726,13 @@ export class LogicPassWorldTransform {
       this.removeItems(ItemGroups.SHARED_SONG_TIME_NOTES);
     }
 
+    if (settings.sharedSongSun && settings.songs === 'notes') {
+      this.removeItems(ItemGroups.OOT_SONG_SUN_NOTES);
+      this.removeItems(ItemGroups.MM_SONG_SUN_NOTES);
+    }
+
     if (settings.sharedSongSun && settings.sunSongMm) {
-      if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.OOT_SONG_SUN_NOTES);
-      } else {
-        this.replaceItem(Items.OOT_SONG_SUN, Items.SHARED_SONG_SUN);
-      }
-    } else if (settings.sharedSongSun && !settings.sunSongMm) {
-      this.removeItems(ItemGroups.SHARED_SONG_SUN_NOTES);
+      this.replaceItem(Items.OOT_SONG_SUN, Items.SHARED_SONG_SUN);
     }
 
     if (settings.sharedNutsSticks) {
