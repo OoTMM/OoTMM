@@ -1401,30 +1401,48 @@ static int addItemMmSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param
     return 0;
 }
 
-static const u32 MM_GORON_HALF_NOTES_FIRST_MASK = 0x15;  // Each note at least 0b01
-static const u32 MM_GORON_HALF_NOTES_FULL_MASK = 0x3F;   // Each note at 0b11
-
 static int addItemMmSongGoronHalfNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    // Ensure we properly increment the 2-bit fields
-    if (((gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value >> (param * 2)) & 0b11) < 0b11)
-    {
-        gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value += (1 << (param * 2));
+    // Read the current note's 2-bit value
+    u32 noteShift = param * 2;
+    u32 noteMask = (0b11 << noteShift);
+    u32 noteValue = (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value & noteMask) >> noteShift;
+
+    // Increment only if the current note is not already at max (0b10)
+    if (noteValue < 0b10) {
+        gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value += (1 << noteShift);
     }
 
-    // First trigger: At least 0b01 in each 2-bit field
-    if (gMmSave.info.inventory.quest.songLullabyIntro != 1 &&
-        (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value & MM_GORON_HALF_NOTES_FIRST_MASK) == MM_GORON_HALF_NOTES_FIRST_MASK)
-    {
+    // First trigger: All notes collected at least once (0b01 or higher)
+    int firstTrigger = 1;
+    for (int i = 0; i < 6; i++) { // 6 notes in total
+        u32 noteShiftCheck = i * 2;
+        u32 noteValueCheck = (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value >> noteShiftCheck) & 0b11;
+        if (noteValueCheck < 0b01) {
+            firstTrigger = 0;
+            break;
+        }
+    }
+
+    if (gMmSave.info.inventory.quest.songLullabyIntro != 1 && firstTrigger == 1) {
         gComboTriggersData.acc = 0;
         CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON_HALF);
-        gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value = 0;  // Reset for second phase
     }
 
-    // Second trigger: Fully 0b11 in each 2-bit field
+    // Second trigger: All notes collected exactly twice (0b10)
+    int secondTrigger = 1;
+    for (int i = 0; i < 6; i++) {
+        u32 noteShiftCheck = i * 2;
+        u32 noteValueCheck = (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value >> noteShiftCheck) & 0b11;
+        if (noteValueCheck < 0b10) {
+            secondTrigger = 0;
+            break;
+        }
+    }
+
     if (gMmSave.info.inventory.quest.songLullabyIntro == 1 &&
         gMmSave.info.inventory.quest.songLullaby != 1 &&
-        (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value & MM_GORON_HALF_NOTES_FULL_MASK) == MM_GORON_HALF_NOTES_FULL_MASK)
+        secondTrigger == 1)
     {
         gComboTriggersData.acc = 0;
         CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
@@ -1432,7 +1450,6 @@ static int addItemMmSongGoronHalfNote(PlayState* play, u8 itemId, s16 gi, u16 pa
 
     return 0;
 }
-
 
 static void addHealthEffect(u8 count)
 {
