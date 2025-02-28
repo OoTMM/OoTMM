@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import {SONG_NOTE_MAP} from "../items/groups";
+import {PROGRESSIVE_SONG_NOTE_MAP} from "../items/groups";
 import {
   Expr,
   exprTrue,
@@ -218,8 +218,9 @@ export class ExprParser {
     this.expect('(');
     const songName = this.expect('identifier');
     const song = itemByID(gameId(this.game, songName, '_'));
-    const songNotes = SONG_NOTE_MAP.get(song);
-    let count = songNotes.size;
+    const songNotes = PROGRESSIVE_SONG_NOTE_MAP.get(song);
+    const progressiveNote = songNotes[0];
+    let count = songNotes[1];
     if (this.accept(',')) {
       const n = this.parseNumeric();
       if (n === undefined) {
@@ -228,7 +229,7 @@ export class ExprParser {
       count = count * n;
     }
     this.expect(')');
-    return exprHasNotes(song, songNotes, count);
+    return exprHasNotes(song, progressiveNote, count);
   }
 
   private parseExprHas(): Expr | undefined {

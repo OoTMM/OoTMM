@@ -467,9 +467,15 @@ export class LogicPassWorldTransform {
       items = [...items, ...ItemGroups.SONGS];
     }
 
+
     if (settings.songs === 'notes') {
-      items = [...items, ...ItemGroups.SONG_NOTES];
+      for (const songNotes of ItemGroups.PROGRESSIVE_SONG_NOTE_MAP) {
+        for (let songNote = 0; songNote < songNotes[1][1]; songNote++) {
+          items.push(songNotes[1][0]);
+        }
+      }
     }
+
 
     if (settings.dungeonRewardShuffle === 'anywhere' || settings.dungeonRewardShuffle === 'dungeonsLimited') {
       items = [...items, ...ItemGroups.DUNGEON_REWARDS];
@@ -689,46 +695,48 @@ export class LogicPassWorldTransform {
 
     if (settings.sharedSongEpona) {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.OOT_SONG_EPONA_NOTES);
-        this.removeItems(ItemGroups.MM_SONG_EPONA_NOTES);
+        this.removeItem(Items.OOT_SONG_EPONA_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_EPONA_NOTES.size);
+        this.removeItem(Items.MM_SONG_EPONA_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_EPONA_NOTES.size);
       } else {
         this.replaceItem(Items.OOT_SONG_EPONA,   Items.SHARED_SONG_EPONA);
         this.replaceItem(Items.MM_SONG_EPONA,    Items.SHARED_SONG_EPONA);
         this.removeItem(Items.SHARED_SONG_EPONA, 1);
       }
     } else if(!settings.sharedSongEpona && settings.songs === 'notes') {
-      this.removeItems(ItemGroups.SHARED_SONG_EPONA_NOTES);
+      this.removeItem(Items.SHARED_SONG_EPONA_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_EPONA_NOTES.size);
     }
 
     if (settings.sharedSongStorms) {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.OOT_SONG_STORMS_NOTES);
-        this.removeItems(ItemGroups.MM_SONG_STORMS_NOTES);
+        this.removeItem(Items.OOT_SONG_STORMS_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_STORMS_NOTES.size);
+        this.removeItem(Items.MM_SONG_STORMS_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_STORMS_NOTES.size);
       } else {
         this.replaceItem(Items.OOT_SONG_STORMS,  Items.SHARED_SONG_STORMS);
         this.replaceItem(Items.MM_SONG_STORMS,   Items.SHARED_SONG_STORMS);
         this.removeItem(Items.SHARED_SONG_STORMS, 1);
       }
     } else if(!settings.sharedSongStorms && settings.songs === 'notes') {
-      this.removeItems(ItemGroups.SHARED_SONG_STORMS_NOTES);
+      this.removeItem(Items.SHARED_SONG_STORMS_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_STORMS_NOTES.size);
     }
 
     if (settings.sharedSongTime) {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.OOT_SONG_TIME_NOTES);
-        this.removeItems(ItemGroups.MM_SONG_TIME_NOTES);
+        this.removeItem(Items.OOT_SONG_TIME_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_TIME_NOTES.size);
+        this.removeItem(Items.MM_SONG_TIME_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_TIME_NOTES.size);
       } else {
         this.replaceItem(Items.OOT_SONG_TIME,    Items.SHARED_SONG_TIME);
         this.replaceItem(Items.MM_SONG_TIME,     Items.SHARED_SONG_TIME);
         this.removeItem(Items.SHARED_SONG_TIME, 1);
       }
     } else if(!settings.sharedSongTime && settings.songs === 'notes') {
-      this.removeItems(ItemGroups.SHARED_SONG_TIME_NOTES);
+      this.removeItem(Items.SHARED_SONG_TIME_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_TIME_NOTES.size);
     }
 
     if (settings.sharedSongSun && settings.songs === 'notes') {
-      this.removeItems(ItemGroups.OOT_SONG_SUN_NOTES);
-      this.removeItems(ItemGroups.MM_SONG_SUN_NOTES);
+      this.removeItem(Items.OOT_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_SUN_NOTES.size);
+      this.removeItem(Items.MM_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_SUN_NOTES.size);
+    } else if (!settings.sharedSongSun && settings.songs === 'notes') {
+      this.removeItem(Items.SHARED_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_SUN_NOTES.size);
     }
 
     if (settings.sharedSongSun && settings.sunSongMm) {
@@ -834,19 +842,19 @@ export class LogicPassWorldTransform {
 
     if (settings.sharedSongElegy) {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.MM_SONG_EMPTINESS_NOTES);
-        this.removeItems(ItemGroups.OOT_SONG_EMPTINESS_NOTES);
+        this.removeItem(Items.MM_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_EMPTINESS_NOTES.size);
+        this.removeItem(Items.OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_EMPTINESS_NOTES.size);
       } else {
         this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
       }
     } else if (settings.elegyOot) {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.SHARED_SONG_EMPTINESS_NOTES);
+        this.removeItem(Items.SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_EMPTINESS_NOTES.size);
       } else {
         this.addItem(Items.OOT_SONG_EMPTINESS);
       }
     } else if (!settings.elegyOot && settings.songs === 'notes') {
-      this.removeItems(ItemGroups.OOT_SONG_EMPTINESS_NOTES);
+      this.removeItem(Items.OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_EMPTINESS_NOTES.size);
     }
 
     if (settings.sharedLens) {
@@ -1411,9 +1419,7 @@ export class LogicPassWorldTransform {
 
     if (settings.songs === 'notes') {
       this.removeItems(ItemGroups.SONGS);
-      this.addItems(ItemGroups.SONG_NOTES);
-    } else {
-      this.removeItems(ItemGroups.SONG_NOTES);
+      ItemGroups.PROGRESSIVE_SONG_NOTE_MAP.forEach(songNotes => this.addItem(songNotes[0], songNotes[1]));
     }
 
     /* Setup extra traps */
@@ -1558,12 +1564,12 @@ export class LogicPassWorldTransform {
       if (settings.songs !== 'notes') {
         this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
       } else {
-        this.addItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
-        this.removeItems(ItemGroups.MM_SONG_GORON_NOTES);
+        this.addItem(Items.MM_SONG_GORON_HALF_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_GORON_HALF_NOTES.size);
+        this.removeItem(Items.MM_SONG_GORON_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_GORON_NOTES.size);
       }
     } else {
       if (settings.songs === 'notes') {
-        this.removeItems(ItemGroups.MM_SONG_GORON_HALF_NOTES);
+        this.removeItem(Items.MM_SONG_GORON_HALF_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_GORON_HALF_NOTES.size);
       } else {
         this.removeItem(Items.MM_SONG_GORON_HALF);
         for (let i = 0; i < this.state.worlds.length; ++i) {

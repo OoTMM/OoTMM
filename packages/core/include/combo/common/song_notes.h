@@ -7,401 +7,76 @@ typedef union
 {
     struct
     {
-        u32 awakening_c_up_1:1;
-        u32 awakening_c_left_1:1;
-        u32 awakening_c_up_2:1;
-        u32 awakening_c_left_2:1;
-        u32 awakening_a_1:1;
-        u32 awakening_c_right:1;
-        u32 awakening_a_2:1;
+        u32 songTpForest:4;
+        u32 songTpFire:4;
+        u32 songTpWater:4;
+        u32 songTpShadow:4;
+        u32 songTpSpirit:4;
+        u32 songTpLight:4;
+        u32 songZelda:4;
+        u32 songEpona:4;
+        u32 songSaria:4;
+        u32 songSun:4;
+        u32 songTime:4;
+        u32 songStorms:4;
+        u32 songEmpty:4;
     };
-    u32 value;
-} MmAwakeningNotes;
+    u64 value;
+} OotSongNotes;
 
 typedef union
 {
     struct
     {
-        u32 emptiness_c_right_1:1;
-        u32 emptiness_c_left_1:1;
-        u32 emptiness_c_right_2:1;
-        u32 emptiness_c_down:1;
-        u32 emptiness_c_right_3:1;
-        u32 emptiness_c_up:1;
-        u32 emptiness_c_left_2:1;
+        u32 songAwakening:4;
+        u32 songEmpty:4;
+        u32 songGoron:4;
+        u32 songGoronHalf:4;
+        u32 songEpona:4;
+        u32 songZora:4;
+        u32 songHealing:4;
+        u32 songOrder:4;
+        u32 songTime:4;
+        u32 songSoaring:4;
+        u32 songStorms:4;
+        u32 songSun:4;
     };
-    u32 value;
-} MmEmptinessNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 epona_c_up_1:1;
-        u32 epona_c_left_1:1;
-        u32 epona_c_right_1:1;
-        u32 epona_c_up_2:1;
-        u32 epona_c_left_2:1;
-        u32 epona_c_right_2:1;
-    };
-    u32 value;
-} MmEponaNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 goron_half_a_1:2;
-        u32 goron_half_c_right_1:2;
-        u32 goron_half_c_left_1:2;
-        u32 goron_half_a_2:2;
-        u32 goron_half_c_right_2:2;
-        u32 goron_half_c_left_2:2;
-    };
-    u32 value;
-} MmGoronHalfNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 goron_a_1:1;
-        u32 goron_c_right_1:1;
-        u32 goron_c_left_1:1;
-        u32 goron_a_2:1;
-        u32 goron_c_right_2:1;
-        u32 goron_c_left_2:1;
-        u32 goron_c_right_3:1;
-        u32 goron_a_3:1;
-    };
-    u32 value;
-} MmGoronNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 healing_c_left_1:1;
-        u32 healing_c_right_1:1;
-        u32 healing_c_down_1:1;
-        u32 healing_c_left_2:1;
-        u32 healing_c_right_2:1;
-        u32 healing_c_down_2:1;
-    };
-    u32 value;
-} MmHealingNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 order_c_right_1:1;
-        u32 order_c_down_1:1;
-        u32 order_a:1;
-        u32 order_c_down_2:1;
-        u32 order_c_right_2:1;
-        u32 order_c_up:1;
-    };
-    u32 value;
-} MmOrderNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 soaring_c_down_1:1;
-        u32 soaring_c_left_1:1;
-        u32 soaring_c_up_1:1;
-        u32 soaring_c_down_2:1;
-        u32 soaring_c_left_2:1;
-        u32 soaring_c_up_2:1;
-    };
-    u32 value;
-} MmSoaringNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 storms_a_1:1;
-        u32 storms_c_down_1:1;
-        u32 storms_c_up_1:1;
-        u32 storms_a_2:1;
-        u32 storms_c_down_2:1;
-        u32 storms_c_up_2:1;
-    };
-    u32 value;
-} MmStormsNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 sun_c_right_1:1;
-        u32 sun_c_down_1:1;
-        u32 sun_c_up_1:1;
-        u32 sun_c_right_2:1;
-        u32 sun_c_down_2:1;
-        u32 sun_c_up_2:1;
-    };
-    u32 value;
-} MmSunNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 time_c_right_1:1;
-        u32 time_a_1:1;
-        u32 time_c_down_1:1;
-        u32 time_c_right_2:1;
-        u32 time_a_2:1;
-        u32 time_c_down_3:1;
-    };
-    u32 value;
-} MmTimeNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 zora_c_left_1:1;
-        u32 zora_c_up:1;
-        u32 zora_c_left_2:1;
-        u32 zora_c_right_1:1;
-        u32 zora_c_down:1;
-        u32 zora_c_left_3:1;
-        u32 zora_c_right_2:1;
-    };
-    u32 value;
-} MmZoraNotes;
+    u64 value;
+} MmSongNotes;
 
 typedef struct
 {
-    MmAwakeningNotes   mm_awakening_notes;
-    MmEmptinessNotes   mm_emptiness_notes;
-    MmEponaNotes       mm_epona_notes;
-    MmGoronHalfNotes   mm_goron_half_notes;
-    MmGoronNotes       mm_goron_notes;
-    MmHealingNotes     mm_healing_notes;
-    MmOrderNotes       mm_order_notes;
-    MmSoaringNotes     mm_soaring_notes;
-    MmStormsNotes      mm_storms_notes;
-    MmSunNotes         mm_sun_notes;
-    MmTimeNotes        mm_time_notes;
-    MmZoraNotes        mm_zora_notes;
-}
-MmSongNotes;
+    OotSongNotes ootSongNotes;
+    MmSongNotes  MmSongNotes;
+} SongNotes;
 
 
-typedef union
-{
-    struct
-    {
-        u32 epona_c_up_1:1;
-        u32 epona_c_left_1:1;
-        u32 epona_c_right_1:1;
-        u32 epona_c_up_2:1;
-        u32 epona_c_left_2:1;
-        u32 epona_c_right_2:1;
-    };
-    u32 value;
-} OotEponaNotes;
+#define QUEST_OOT_SONG_TP_FOREST_NOTE 0
+#define QUEST_OOT_SONG_TP_FIRE_NOTE 1
+#define QUEST_OOT_SONG_TP_WATER_NOTE 2
+#define QUEST_OOT_SONG_TP_SHADOW_NOTE 3
+#define QUEST_OOT_SONG_TP_SPIRIT_NOTE 4
+#define QUEST_OOT_SONG_TP_LIGHT_NOTE 5
+#define QUEST_OOT_SONG_ZELDA_NOTE 6
+#define QUEST_OOT_SONG_EPONA_NOTE 7
+#define QUEST_OOT_SONG_SARIA_NOTE 8
+#define QUEST_OOT_SONG_SUN_NOTE 9
+#define QUEST_OOT_SONG_TIME_NOTE 10
+#define QUEST_OOT_SONG_STORMS_NOTE 11
+#define QUEST_OOT_SONG_EMPTY_NOTE 12
 
-typedef union
-{
-    struct
-    {
-        u32 saria_c_down_1:1;
-        u32 saria_c_right_1:1;
-        u32 saria_c_left_1:1;
-        u32 saria_c_down_2:1;
-        u32 saria_c_right_2:1;
-        u32 saria_c_left_2:1;
-    };
-    u32 value;
-} OotSariaNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 storms_a_1:1;
-        u32 storms_c_down_1:1;
-        u32 storms_c_up_1:1;
-        u32 storms_a_2:1;
-        u32 storms_c_down_2:1;
-        u32 storms_c_up_2:1;
-    };
-    u32 value;
-} OotStormsNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 sun_c_right_1:1;
-        u32 sun_c_down_1:1;
-        u32 sun_c_up_1:1;
-        u32 sun_c_right_2:1;
-        u32 sun_c_down_2:1;
-        u32 sun_c_up_2:1;
-    };
-    u32 value;
-} OotSunNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 time_c_right_1:1;
-        u32 time_a_1:1;
-        u32 time_c_down_1:1;
-        u32 time_c_right_2:1;
-        u32 time_a_2:1;
-        u32 time_c_down_3:1;
-    };
-    u32 value;
-} OotTimeNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 tp_fire_c_down_1:1;
-        u32 tp_fire_a_1:1;
-        u32 tp_fire_c_down_2:1;
-        u32 tp_fire_a_2:1;
-        u32 tp_fire_c_right_1:1;
-        u32 tp_fire_c_right_2:1;
-    };
-    u32 value;
-} OotTpFireNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 tp_forest_a:1;
-        u32 tp_forest_c_up:1;
-        u32 tp_forest_c_left_1:1;
-        u32 tp_forest_c_right_1:1;
-        u32 tp_forest_c_left_2:1;
-        u32 tp_forest_c_right_2:1;
-    };
-    u32 value;
-} OotTpForestNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 tp_light_c_up_1:1;
-        u32 tp_light_c_right_1:1;
-        u32 tp_light_c_up_2:1;
-        u32 tp_light_c_right_2:1;
-        u32 tp_light_c_left:1;
-        u32 tp_light_c_up_3:1;
-    };
-    u32 value;
-} OotTpLightNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 tp_shadow_c_left_1:1;
-        u32 tp_shadow_c_right_1:1;
-        u32 tp_shadow_c_right_2:1;
-        u32 tp_shadow_a:1;
-        u32 tp_shadow_c_left_2:1;
-        u32 tp_shadow_c_right_3:1;
-        u32 tp_shadow_c_down:1;
-    };
-    u32 value;
-} OotTpShadowNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 tp_spirit_a_1:1;
-        u32 tp_spirit_c_down_1:1;
-        u32 tp_spirit_a_2:1;
-        u32 tp_spirit_c_right:1;
-        u32 tp_spirit_c_down_2:1;
-        u32 tp_spirit_a_3:1;
-    };
-    u32 value;
-} OotTpSpiritNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 tp_water_a:1;
-        u32 tp_water_c_down:1;
-        u32 tp_water_c_right_1:1;
-        u32 tp_water_c_right_2:1;
-        u32 tp_water_c_left:1;
-    };
-    u32 value;
-} OotTpWaterNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 zelda_c_left_1:1;
-        u32 zelda_c_up_1:1;
-        u32 zelda_c_right_1:1;
-        u32 zelda_c_left_2:1;
-        u32 zelda_c_up_2:1;
-        u32 zelda_c_right_2:1;
-    };
-    u32 value;
-} OotZeldaNotes;
-
-typedef union
-{
-    struct
-    {
-        u32 emptiness_c_right_1:1;
-        u32 emptiness_c_left_1:1;
-        u32 emptiness_c_right_2:1;
-        u32 emptiness_c_down:1;
-        u32 emptiness_c_right_3:1;
-        u32 emptiness_c_up:1;
-        u32 emptiness_c_left_2:1;
-    };
-    u32 value;
-} OotEmptinessNotes;
-
-typedef struct
-{
-    OotEponaNotes      oot_epona_notes;
-    OotSariaNotes      oot_saria_notes;
-    OotStormsNotes     oot_storms_notes;
-    OotSunNotes        oot_sun_notes;
-    OotTimeNotes       oot_time_notes;
-    OotTpFireNotes     oot_tp_fire_notes;
-    OotTpForestNotes   oot_tp_forest_notes;
-    OotTpLightNotes    oot_tp_light_notes;
-    OotTpShadowNotes   oot_tp_shadow_notes;
-    OotTpSpiritNotes   oot_tp_spirit_notes;
-    OotTpWaterNotes    oot_tp_water_notes;
-    OotZeldaNotes      oot_zelda_notes;
-    OotEmptinessNotes  oot_emptiness_notes;
-}
-OotSongNotes;
-
-
-typedef struct
-{
-  OotSongNotes oot_song_notes;
-  MmSongNotes  mm_song_notes;
-}
-SongNotes;
+#define QUEST_MM_SONG_AWAKENING_NOTE 0
+#define QUEST_MM_SONG_EMPTY_NOTE 1
+#define QUEST_MM_SONG_GORON_NOTE 2
+#define QUEST_MM_SONG_GORON_HALF_NOTE 3
+#define QUEST_MM_SONG_EPONA_NOTE 4
+#define QUEST_MM_SONG_ZORA_NOTE 5
+#define QUEST_MM_SONG_HEALING_NOTE 6
+#define QUEST_MM_SONG_ORDER_NOTE 7
+#define QUEST_MM_SONG_TIME_NOTE 8
+#define QUEST_MM_SONG_SOARING_NOTE 9
+#define QUEST_MM_SONG_STORMS_NOTE 10
+#define QUEST_MM_SONG_SUN_NOTE 11
 
 
 #define TRIGGER_OOT_SONG_EPONA       0x13
@@ -429,5 +104,6 @@ SongNotes;
 #define TRIGGER_MM_SONG_SUN          0x2B
 #define TRIGGER_MM_SONG_TIME         0x2C
 #define TRIGGER_MM_SONG_ZORA         0x2D
+
 
 #endif //SONG_NOTES_H

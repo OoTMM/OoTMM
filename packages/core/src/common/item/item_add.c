@@ -1094,362 +1094,6 @@ static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     gMmSave.info.inventory.quest.value |= (1 << param);
     return 0;
 }
-static const u32 OOT_TP_FOREST_NOTES_MASK = 0x3F;
-static int addItemOotSongForestNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTpForest != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_tp_forest_notes.value == OOT_TP_FOREST_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_FOREST);
-    }
-    return 0;
-}
-
-static const u32 OOT_TP_FIRE_NOTES_MASK = 0x3F;
-static int addItemOotSongFireNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_fire_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTpFire != 1
-        &&gSharedCustomSave.songNotes.oot_song_notes.oot_tp_fire_notes.value == OOT_TP_FIRE_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_FIRE);
-    }
-    return 0;
-}
-
-static const u32 OOT_TP_WATER_NOTES_MASK = 0x1F;
-static int addItemOotSongWaterNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_water_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTpWater != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_tp_water_notes.value == OOT_TP_WATER_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_WATER);
-    }
-    return 0;
-}
-
-static const u32 OOT_TP_SPIRIT_NOTES_MASK = 0x3F;
-static int addItemOotSongSpiritNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_spirit_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTpSpirit != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_tp_spirit_notes.value == OOT_TP_SPIRIT_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SPIRIT);
-    }
-    return 0;
-}
-
-static const u32 OOT_TP_SHADOW_NOTES_MASK = 0x7F;
-static int addItemOotSongShadowNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_shadow_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTpShadow != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_tp_shadow_notes.value == OOT_TP_SHADOW_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SHADOW);
-    }
-    return 0;
-}
-
-static const u32 OOT_TP_LIGHT_NOTES_MASK = 0x3F;
-static int addItemOotSongLightNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_tp_light_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTpLight != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_tp_light_notes.value == OOT_TP_LIGHT_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_LIGHT);
-    }
-    return 0;
-}
-
-static const u32 OOT_ZELDA_NOTES_MASK  = 0x3F;
-static int addItemOotSongZeldaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_zelda_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songZelda != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_zelda_notes.value == OOT_ZELDA_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_ZELDA);
-    }
-    return 0;
-}
-
-static const u32 OOT_EPONA_NOTES_MASK  = 0x3F;
-static int addItemOotSongEponaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_epona_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songEpona != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_epona_notes.value == OOT_EPONA_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_EPONA);
-    }
-    return 0;
-}
-
-static const u32 OOT_SARIA_NOTES_MASK  = 0x3F;
-static int addItemOotSongSariaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_saria_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songSaria != 1
-        && gSharedCustomSave.songNotes.oot_song_notes.oot_saria_notes.value == OOT_SARIA_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_SARIA);
-    }
-    return 0;
-}
-
-static const u32 OOT_SUN_NOTES_MASK  = 0x3F;
-static int addItemOotSongSunNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_sun_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songSun != 1
-            && gSharedCustomSave.songNotes.oot_song_notes.oot_sun_notes.value == OOT_SUN_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_SUN);
-    }
-    return 0;
-}
-
-static const u32 OOT_TIME_NOTES_MASK  = 0x3F;
-static int addItemOotSongTimeNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_time_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songTime != 1
-            && gSharedCustomSave.songNotes.oot_song_notes.oot_time_notes.value == OOT_TIME_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TIME);
-    }
-    return 0;
-}
-
-static const u32 OOT_STORMS_NOTES_MASK = 0x3F;
-static int addItemOotSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value |= (1 << param);
-
-    if (gOotSave.info.inventory.quest.songStorms != 1
-            && gSharedCustomSave.songNotes.oot_song_notes.oot_storms_notes.value == OOT_STORMS_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_STORMS);
-    }
-    return 0;
-}
-
-static const u32 OOT_EMPTINESS_NOTES_MASK = 0x7F;
-static int addItemOotSongEmptinessNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.oot_song_notes.oot_emptiness_notes.value |= (1 << param);
-
-    if (gSharedCustomSave.oot.hasElegy != 1
-            && gSharedCustomSave.songNotes.oot_song_notes.oot_emptiness_notes.value == OOT_EMPTINESS_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_EMPTINESS);
-        comboAddItemRaw(play, GI_OOT_SONG_EMPTINESS);
-    }
-    return 0;
-}
-
-// Awakening Notes
-static const u32 MM_AWAKENING_NOTES_MASK = 0x7F;
-static int addItemMmSongAwakeningNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_awakening_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songAwakening != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_awakening_notes.value == MM_AWAKENING_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_AWAKENING);
-    }
-    return 0;
-}
-
-// Emptiness Notes
-static const u32 MM_EMPTINESS_NOTES_MASK = 0x7F;
-static int addItemMmSongEmptinessNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_emptiness_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songEmpty != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_emptiness_notes.value == MM_EMPTINESS_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EMPTINESS);
-    }
-    return 0;
-}
-
-static const u32 MM_GORON_NOTES_MASK = 0xFF;
-static int addItemMmSongGoronNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_goron_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songLullaby != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_goron_notes.value == MM_GORON_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
-    }
-    return 0;
-}
-
-static const u32 MM_EPONA_NOTES_MASK =  0x3F;
-static int addItemMmSongEponaNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_epona_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songEpona != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_epona_notes.value == MM_EPONA_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EPONA);
-    }
-    return 0;
-}
-
-static const u32 MM_ZORA_NOTES_MASK = 0x7F;
-static int addItemMmSongZoraNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_zora_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songNewWave != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_zora_notes.value == MM_ZORA_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ZORA);
-    }
-    return 0;
-}
-
-// Healing Notes
-static const u32 MM_HEALING_NOTES_MASK = 0x3F;
-static int addItemMmSongHealingNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_healing_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songHealing != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_healing_notes.value == MM_HEALING_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_HEALING);
-    }
-    return 0;
-}
-
-// Order Notes
-static const u32 MM_ORDER_NOTES_MASK = 0x3F;
-static int addItemMmSongOrderNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_order_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songOrder != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_order_notes.value == MM_ORDER_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ORDER);
-    }
-    return 0;
-}
-
-// Time Notes
-static const u32 MM_TIME_NOTES_MASK = 0x3F;
-static int addItemMmSongTimeNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_time_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songTime != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_time_notes.value == MM_TIME_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_TIME);
-    }
-    return 0;
-}
-
-// Soaring Notes
-static const u32 MM_SOARING_NOTES_MASK = 0x3F;
-static int addItemMmSongSoaringNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_soaring_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songSoaring != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_soaring_notes.value == MM_SOARING_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_SOARING);
-    }
-    return 0;
-}
-
-// Storms Notes
-static const u32 MM_STORMS_NOTES_MASK = 0x3F;
-static int addItemMmSongStormsNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.songNotes.mm_song_notes.mm_storms_notes.value |= (1 << param);
-
-    if (gMmSave.info.inventory.quest.songStorms != 1
-            && gSharedCustomSave.songNotes.mm_song_notes.mm_storms_notes.value == MM_STORMS_NOTES_MASK) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_STORMS);
-    }
-    return 0;
-}
-
-static int addItemMmSongGoronHalfNote(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    // Read the current note's 2-bit value
-    u32 noteShift = param * 2;
-    u32 noteMask = (0b11 << noteShift);
-    u32 noteValue = (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value & noteMask) >> noteShift;
-
-    // Increment only if the current note is not already at max (0b10)
-    if (noteValue < 0b10) {
-        gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value += (1 << noteShift);
-    }
-
-    // First trigger: All notes collected at least once (0b01 or higher)
-    int firstTrigger = 1;
-    for (int i = 0; i < 6; i++) { // 6 notes in total
-        u32 noteShiftCheck = i * 2;
-        u32 noteValueCheck = (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value >> noteShiftCheck) & 0b11;
-        if (noteValueCheck < 0b01) {
-            firstTrigger = 0;
-            break;
-        }
-    }
-
-    if (gMmSave.info.inventory.quest.songLullabyIntro != 1 && firstTrigger == 1) {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON_HALF);
-    }
-
-    // Second trigger: All notes collected exactly twice (0b10)
-    int secondTrigger = 1;
-    for (int i = 0; i < 6; i++) {
-        u32 noteShiftCheck = i * 2;
-        u32 noteValueCheck = (gSharedCustomSave.songNotes.mm_song_notes.mm_goron_half_notes.value >> noteShiftCheck) & 0b11;
-        if (noteValueCheck < 0b10) {
-            secondTrigger = 0;
-            break;
-        }
-    }
-
-    if (gMmSave.info.inventory.quest.songLullabyIntro == 1 &&
-        gMmSave.info.inventory.quest.songLullaby != 1 &&
-        secondTrigger == 1)
-    {
-        gComboTriggersData.acc = 0;
-        CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
-    }
-
-    return 0;
-}
 
 static void addHealthEffect(u8 count)
 {
@@ -1809,6 +1453,243 @@ static int addItemGsTokenOcean(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemIceTrap(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.pendingIceTraps++;
+    return 0;
+}
+
+static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+        switch (param) {
+        case 0:
+            gSharedCustomSave.songNotes.ootSongNotes.songTpForest++;
+            if (gOotSave.info.inventory.quest.songTpForest != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpForest >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_FOREST);
+            }
+            break;
+
+        case 1:
+            gSharedCustomSave.songNotes.ootSongNotes.songTpFire++;
+            if (gOotSave.info.inventory.quest.songTpFire != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpFire >= 8) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_FIRE);
+            }
+            break;
+
+        case 2:
+            gSharedCustomSave.songNotes.ootSongNotes.songTpWater++;
+            if (gOotSave.info.inventory.quest.songTpWater != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpWater >= 5) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_WATER);
+            }
+            break;
+
+        case 3:
+            gSharedCustomSave.songNotes.ootSongNotes.songTpShadow++;
+            if (gOotSave.info.inventory.quest.songTpShadow != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpShadow >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SHADOW);
+            }
+            break;
+
+        case 4:
+            gSharedCustomSave.songNotes.ootSongNotes.songTpSpirit++;
+            if (gOotSave.info.inventory.quest.songTpSpirit != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpSpirit >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SPIRIT);
+            }
+            break;
+
+        case 5:
+            gSharedCustomSave.songNotes.ootSongNotes.songTpLight++;
+            if (gOotSave.info.inventory.quest.songTpLight != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpLight >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_LIGHT);
+            }
+            break;
+
+        case 6:
+            gSharedCustomSave.songNotes.ootSongNotes.songZelda++;
+            if (gOotSave.info.inventory.quest.songZelda != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songZelda >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_ZELDA);
+            }
+            break;
+
+        case 7:
+            gSharedCustomSave.songNotes.ootSongNotes.songEpona++;
+            if (gOotSave.info.inventory.quest.songEpona != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songEpona >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_EPONA);
+            }
+            break;
+
+        case 8:
+            gSharedCustomSave.songNotes.ootSongNotes.songSaria++;
+            if (gOotSave.info.inventory.quest.songSaria != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songSaria >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_SARIA);
+            }
+            break;
+
+        case 9:
+            gSharedCustomSave.songNotes.ootSongNotes.songSun++;
+            if (gOotSave.info.inventory.quest.songSun != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songSun >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_SUN);
+            }
+            break;
+
+        case 10:
+            gSharedCustomSave.songNotes.ootSongNotes.songTime++;
+            if (gOotSave.info.inventory.quest.songTime != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songTime >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TIME);
+            }
+            break;
+
+        case 11:
+            gSharedCustomSave.songNotes.ootSongNotes.songStorms++;
+            if (gOotSave.info.inventory.quest.songStorms != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songStorms >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_STORMS);
+            }
+            break;
+
+        case 12:
+            gSharedCustomSave.songNotes.ootSongNotes.songEmpty++;
+            if (gSharedCustomSave.oot.hasElegy != 1
+                && gSharedCustomSave.songNotes.ootSongNotes.songEmpty >= 7) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_EMPTINESS);
+            }
+            break;
+
+        }
+    return 0;
+}
+
+static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    switch (param) {
+        case 0:
+            gSharedCustomSave.songNotes.MmSongNotes.songAwakening++;
+            if (gMmSave.info.inventory.quest.songAwakening != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songAwakening >= 7) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_AWAKENING);
+            }
+            break;
+
+        case 1: 
+            gSharedCustomSave.songNotes.MmSongNotes.songEmpty++;
+            if (gMmSave.info.inventory.quest.songEmpty != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songEmpty >= 7) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EMPTINESS);
+            }
+            break;
+
+        case 2: 
+            gSharedCustomSave.songNotes.MmSongNotes.songGoron++;
+            if (gMmSave.info.inventory.quest.songLullaby != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songGoron >= 8) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
+            }
+            break;
+
+        case 3: 
+            gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf++;
+            if (gMmSave.info.inventory.quest.songLullabyIntro != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON_HALF);
+            }
+            break;
+
+        case 4: 
+            gSharedCustomSave.songNotes.MmSongNotes.songEpona++;
+            if (gMmSave.info.inventory.quest.songEpona != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songEpona >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EPONA);
+            }
+            break;
+
+        case 5: 
+            gSharedCustomSave.songNotes.MmSongNotes.songZora++;
+            if (gMmSave.info.inventory.quest.songNewWave != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songZora >= 7) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ZORA);
+            }
+            break;
+
+        case 6: 
+            gSharedCustomSave.songNotes.MmSongNotes.songHealing++;
+            if (gMmSave.info.inventory.quest.songHealing != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songHealing >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_HEALING);
+            }
+            break;
+
+        case 7: 
+            gSharedCustomSave.songNotes.MmSongNotes.songOrder++;
+            if (gMmSave.info.inventory.quest.songOrder != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songOrder >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ORDER);
+            }
+            break;
+
+        case 8: 
+            gSharedCustomSave.songNotes.MmSongNotes.songTime++;
+            if (gMmSave.info.inventory.quest.songTime != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songTime >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_TIME);
+            }
+            break;
+
+        case 9: 
+            gSharedCustomSave.songNotes.MmSongNotes.songSoaring++;
+            if (gMmSave.info.inventory.quest.songSoaring != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songSoaring >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_SOARING);
+            }
+            break;
+
+        case 10: 
+            gSharedCustomSave.songNotes.MmSongNotes.songStorms++;
+            if (gMmSave.info.inventory.quest.songStorms != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songStorms >= 6) { 
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_STORMS);
+            }
+            break;
+        case 11:
+            gSharedCustomSave.songNotes.MmSongNotes.songSun++;
+            if (gMmSave.info.inventory.quest.songSun != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songSun >= 6) {
+                gComboTriggersData.acc = 0;
+                CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_SUN);
+                }
+            break;
+    }
     return 0;
 }
 
@@ -2318,30 +2199,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStoneAgonyMm,
     addItemSpinUpgradeOot,
     addItemIceTrap,
-    addItemOotSongForestNote,
-    addItemOotSongFireNote,
-    addItemOotSongWaterNote,
-    addItemOotSongSpiritNote,
-    addItemOotSongShadowNote,
-    addItemOotSongLightNote,
-    addItemOotSongZeldaNote,
-    addItemOotSongEponaNote,
-    addItemOotSongSariaNote,
-    addItemOotSongSunNote,
-    addItemOotSongTimeNote,
-    addItemOotSongStormsNote,
-    addItemOotSongEmptinessNote,
-    addItemMmSongAwakeningNote,
-    addItemMmSongEmptinessNote,
-    addItemMmSongGoronNote,
-    addItemMmSongEponaNote,
-    addItemMmSongZoraNote,
-    addItemMmSongHealingNote,
-    addItemMmSongOrderNote,
-    addItemMmSongTimeNote,
-    addItemMmSongSoaringNote,
-    addItemMmSongStormsNote,
-    addItemMmSongGoronHalfNote,
+    addItemOotSongNote,
+    addItemMmSongNote,
 };
 
 extern const u8 kAddItemFuncs[];
