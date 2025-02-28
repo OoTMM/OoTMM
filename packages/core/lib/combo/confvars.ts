@@ -217,6 +217,7 @@ export const CONFVARS = [
   'REGION_STATE_DUNGEONS',
   'REGION_STATE_REWARDS',
   'REGION_STATE_FREE',
+  'IS_NOTE_SHUFFLE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
