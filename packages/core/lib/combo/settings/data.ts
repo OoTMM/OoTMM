@@ -1635,9 +1635,9 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Alters the behavior of Clocks',
   values: [
-    { value: 'separate', name: 'Separate', description: 'Clocks will be independent of each other. If you don\'t select a starting clock, one will be given to you at random.' },
-    { value: 'ascending', name: 'Ascending', description: 'Clocks will be received in ascending order.' },
-    { value: 'descending', name: 'Descending ', description: 'Clocks will be received in descending order.' },
+    { value: 'separate', name: 'Separate', description: 'Clocks will be independent of each other. If you don\'t select a starting clock, you start with a random clock.' },
+    { value: 'ascending', name: 'Ascending', description: 'Clocks will be received in ascending order, with Day 1 already unlocked.' },
+    { value: 'descending', name: 'Descending ', description: 'Clocks will be received in descending order, with Night 3 already unlocked.' },
   ],
   default: 'ascending',
   cond: (s: any) => s.clocks,
