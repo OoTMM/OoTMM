@@ -1611,10 +1611,21 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 
         case 3:
             gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf++;
+
             if (gMmSave.info.inventory.quest.songLullabyIntro != 1
-                && gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf >= 2) {
+                && gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf >= 6) {
                 gComboTriggersData.acc = 0;
                 CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON_HALF);
+                /* Handles edge case in which 2 or more lullaby intro notes are found at the same time
+                * which could cause the trigger to be loaded multiple times if they both push it past 6 notes */
+                gMmSave.info.inventory.quest.songLullabyIntro = 1;
+            }
+
+            if (gMmSave.info.inventory.quest.songLullabyIntro == 1
+                && gMmSave.info.inventory.quest.songLullaby != 1
+                && gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf >= 8) {
+                    gComboTriggersData.acc = 0;
+                    CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_GORON);
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf;
 

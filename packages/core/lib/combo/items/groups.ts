@@ -252,6 +252,8 @@ export const MM_SONG_GORON_HALF_NOTES = new Set([
   Items.MM_SONG_GORON_HALF_A_2,
   Items.MM_SONG_GORON_HALF_C_RIGHT_2,
   Items.MM_SONG_GORON_HALF_C_LEFT_2,
+  Items.MM_SONG_GORON_HALF_C_RIGHT_3,
+  Items.MM_SONG_GORON_HALF_A_3,
 ]);
 
 export const MM_SONG_GORON_NOTES = new Set([
