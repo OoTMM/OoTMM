@@ -1597,7 +1597,7 @@ export const SETTINGS = [{
   name: 'MM Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of the MM Shields.<br>If shields are Progressive and Shared, the Hero\'s Shield will be obtained alongside the Hylian Shield',
+  description: 'Alters the behavior of the MM Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields are removed from the item pool.' },
@@ -1676,7 +1676,7 @@ export const SETTINGS = [{
   name: 'Sun\'s Song in MM',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enables Sun\'s Song as an item in MM. If Songs are on Songs, you must share or start with at least one song',
+  description: 'Enables Sun\'s Song as an item in MM. If Songs are on Song Locations, you must share or start with at least one song',
   default: false,
   cond: hasMM,
 }, {
@@ -1870,7 +1870,7 @@ export const SETTINGS = [{
   name: "Use Keg With Golden Gauntlets",
   category: 'items.extensions',
   type: 'boolean',
-  description: "If you have the Golden Gauntlets in Majora's Mask, this allows you to purchase and use Powder Kegs and attempt the Keg Trial.",
+  description: "If you have the Golden Gauntlets in Majora's Mask, this allows you to purchase and use Powder Kegs, and attempt the Keg Trial.",
   default: false,
   cond: (x: any) => x.strengthMm && hasMM(x),
 }, {
@@ -1926,7 +1926,7 @@ export const SETTINGS = [{
   name: "Elegy of Emptiness (OoT)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Add the Elegy of Emptiness in Ocarina of Time.",
+  description: "Add the Elegy of Emptiness in Ocarina of Time. If Songs are on Song Locations, you must share or start with at least one song",
   default: false,
   cond: hasOoT,
 }, {
@@ -2100,6 +2100,7 @@ export const SETTINGS = [{
   name: 'Shared Stone of Agony',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Stones of Agony from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.stoneAgonyMm,
 }, {
@@ -2107,6 +2108,7 @@ export const SETTINGS = [{
   name: 'Shared Spin Attack Upgrade',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Spin Attack Upgrades from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.spinUpgradeOot,
 }, {
@@ -2114,6 +2116,7 @@ export const SETTINGS = [{
   name: 'Shared Deku Sticks & Nuts',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Deku Stick and Nut Upgrades from OoT and MM into two items each for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.sticksNutsUpgradesMm,
 }, {
@@ -2121,6 +2124,7 @@ export const SETTINGS = [{
   name: 'Shared Bows',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Bows from OoT and MM into three progressive items for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2128,6 +2132,7 @@ export const SETTINGS = [{
   name: 'Shared Bomb Bags',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Bomb Bags from OoT and MM into three progressive items for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2135,27 +2140,31 @@ export const SETTINGS = [{
   name: 'Shared Magic',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Magic Upgrades from OoT and MM into two progressive items for both games',
   default: false,
   cond: hasOoTMM,
 }, {
   key: 'sharedMagicArrowFire',
-  name: 'Shared Fire Arrow',
+  name: 'Shared Fire Arrows',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Fire Arrows from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
   key: 'sharedMagicArrowIce',
-  name: 'Shared Ice Arrow',
+  name: 'Shared Ice Arrows',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Ice Arrows from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
   key: 'sharedMagicArrowLight',
-  name: 'Shared Light Arrow',
+  name: 'Shared Light Arrows',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Light Arrows from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2163,6 +2172,7 @@ export const SETTINGS = [{
   name: 'Shared Epona\'s Song',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Epona\'s Song from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2170,6 +2180,7 @@ export const SETTINGS = [{
   name: 'Shared Song of Storms',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Song of Storms from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2177,6 +2188,7 @@ export const SETTINGS = [{
   name: 'Shared Song of Time',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Song of Time from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2184,6 +2196,7 @@ export const SETTINGS = [{
   name: 'Shared Sun\'s Song',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Sun\'s Song from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.sunSongMm,
 }, {
@@ -2191,6 +2204,7 @@ export const SETTINGS = [{
   name: 'Shared Hookshots',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Hookshots from OoT and MM into two progressive items for both games.<br>If "Short Hookshot in MM" is disabled, the MM Hookshot will be given along with the second progressive item.',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2198,13 +2212,15 @@ export const SETTINGS = [{
   name: 'Shared Lens of Truth',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Lenses of Truth from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
   key: 'sharedOcarina',
-  name: 'Shared Ocarina of Time',
+  name: 'Shared Ocarinas',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Ocarinas from OoT and MM into two progressive items for both games.<br>If "Fairy Ocarina in MM" is disabled, the MM Ocarina will be given along with the second progressive item.',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2212,6 +2228,7 @@ export const SETTINGS = [{
   name: 'Shared Goron Mask',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Goron Masks from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2219,6 +2236,7 @@ export const SETTINGS = [{
   name: 'Shared Zora Mask',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Zora Masks from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2226,6 +2244,7 @@ export const SETTINGS = [{
   name: 'Shared Bunny Hood',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Bunny Hoods from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2233,6 +2252,7 @@ export const SETTINGS = [{
   name: 'Shared Keaton Mask',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Keaton Masks from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2240,6 +2260,7 @@ export const SETTINGS = [{
   name: 'Shared Mask of Truth',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Masks of Truth from OoT and MM into one item for both games',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2247,6 +2268,7 @@ export const SETTINGS = [{
   name: 'Shared Blast Mask',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Blast Masks from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.blastMaskOot,
 }, {
@@ -2254,6 +2276,7 @@ export const SETTINGS = [{
   name: 'Shared Stone Mask',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Stone Masks from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.stoneMaskOot,
 }, {
@@ -2261,6 +2284,7 @@ export const SETTINGS = [{
   name: 'Shared Elegy of Emptiness',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Elegies of Emptiness from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.elegyOot,
 }, {
@@ -2268,6 +2292,7 @@ export const SETTINGS = [{
   name: 'Shared Wallets',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Wallets from OoT and MM into multiple progressive items for both games, depending on settings',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -2275,13 +2300,15 @@ export const SETTINGS = [{
   name: 'Shared Health',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Heart Pieces, Heart Containers and Double Defenses from OoT and MM into 44 Heart Pieces, 6 Heart Containers and one Double Defense for both games',
   default: false,
   cond: hasOoTMM,
 }, {
   key: 'sharedSwords',
-  name: 'Shared Swords',
+  name: 'Shared Child Swords',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Kokiri, Razor and Gilded Swords from OoT and MM into three progressive items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.extraChildSwordsOot && s.progressiveGFS !== 'progressive',
 }, {
@@ -2289,6 +2316,7 @@ export const SETTINGS = [{
   name: 'Shared Shields',
   category: 'items.shared',
   type: 'boolean',
+  description: 'When you obtain a shield, the opposite game\'s equivalent is given to you as well. With this, the Hylian and Hero\'s Shields are considered equivalent.<br>If Shields are Progressive, all Shields are combined into three progressive items: Deku Shield -> Hylian/Hero\'s Shield -> Mirror Shield',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.progressiveShieldsOot === s.progressiveShieldsMm,
 }, {
@@ -2296,6 +2324,7 @@ export const SETTINGS = [{
   name: 'Shared Enemy Souls',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the OoT and MM Souls for a specific enemy into one item, for all enemies present in both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.soulsEnemyOot && s.soulsEnemyMm,
 }, {
@@ -2303,6 +2332,7 @@ export const SETTINGS = [{
   name: 'Shared NPC Souls',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the OoT and MM Souls for a specific NPC into one item, for all NPCs present in both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.soulsNpcOot && s.soulsNpcMm,
 }, {
@@ -2310,6 +2340,7 @@ export const SETTINGS = [{
   name: 'Shared Misc. Souls',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the OoT and MM Souls for Business Scrubs and Gold Skulltulas into two items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.soulsMiscOot && s.soulsMiscMm,
 }, {
@@ -2317,6 +2348,7 @@ export const SETTINGS = [{
   name: 'Shared Ocarina Buttons',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Ocarina Buttons from OoT and MM into five items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.ocarinaButtonsShuffleOot && s.ocarinaButtonsShuffleMm,
 }, {
@@ -2324,6 +2356,7 @@ export const SETTINGS = [{
   name: 'Shared Skeleton Key',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Skeleton Key from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.skeletonKeyOot && s.skeletonKeyMm,
 }, {
@@ -2331,6 +2364,7 @@ export const SETTINGS = [{
   name: 'Shared Bombchu',
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines either Bombchu or the Bombchu Bags from OoT and MM into items for both games, depending on settings',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.bombchuBehaviorOot === s.bombchuBehaviorMm && (s.bombchuBehaviorOot !== 'bombBag' || s.sharedBombBags),
 }, {
@@ -2338,6 +2372,7 @@ export const SETTINGS = [{
   name: "Shared Din's Fire",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Din\'s Fire from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.spellFireMm,
 }, {
@@ -2345,6 +2380,7 @@ export const SETTINGS = [{
   name: "Shared Farore's Wind",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Farore\'s Wind from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.spellWindMm,
 }, {
@@ -2352,6 +2388,7 @@ export const SETTINGS = [{
   name: "Shared Nayru's Love",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines Nayru\'s Love from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.spellLoveMm,
 }, {
@@ -2359,6 +2396,7 @@ export const SETTINGS = [{
   name: "Shared Iron Boots",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Iron Boots from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.bootsIronMm,
 }, {
@@ -2366,6 +2404,7 @@ export const SETTINGS = [{
   name: "Shared Hover Boots",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Hover Boots from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.bootsHoverMm,
 }, {
@@ -2373,6 +2412,7 @@ export const SETTINGS = [{
   name: "Shared Goron Tunic",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Goron Tunics from OoT and MM into two items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.tunicGoronMm,
 }, {
@@ -2380,6 +2420,7 @@ export const SETTINGS = [{
   name: "Shared Zora Tunic",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Zora Tunics from OoT and MM into two items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.tunicZoraMm,
 }, {
@@ -2387,6 +2428,7 @@ export const SETTINGS = [{
   name: "Shared Scales",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Scales from OoT and MM into multiple progressive items for both games, depending on settings', //prep for Bronze Scale
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.scalesMm,
 }, {
@@ -2394,6 +2436,7 @@ export const SETTINGS = [{
   name: "Shared Strength",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Strength Upgrades from OoT and MM into three progressive items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.strengthMm,
 }, {
@@ -2401,6 +2444,7 @@ export const SETTINGS = [{
   name: "Shared Megaton Hammer",
   category: 'items.shared',
   type: 'boolean',
+  description: 'Combines the Megaton Hammers from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.hammerMm,
 }, {
