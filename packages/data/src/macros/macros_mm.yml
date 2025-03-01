@@ -185,7 +185,7 @@
 "has_paper": "has(DEED_LAND) || has(DEED_SWAMP) || has(DEED_MOUNTAIN) || has(DEED_OCEAN) || has(LETTER_TO_KAFEI) || has(LETTER_TO_MAMA)"
 "can_fight": "has_weapon || has_mask_zora || has_mask_goron"
 "has_goron_song_half": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF) || hasNotes(SONG_GORON_HALF)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
-"has_goron_song": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF, 2) || hasNotes(SONG_GORON_HALF, 2)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
+"has_goron_song": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF, 2) || hasNotes(SONG_GORON_HALF)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
 "can_lullaby_half": "has_mask_goron && can_play_goron_half"
 "can_lullaby": "has_mask_goron && can_play_goron"
 "has_shield": "renewable(SHIELD_HERO) || renewable(SHIELD_DEKU) || renewable(SHARED_SHIELD_DEKU) || renewable(SHARED_SHIELD_HYLIAN) || has(SHIELD, 1) || cond(setting(dekuShieldMm), has(SHARED_SHIELD, 1), has(SHARED_SHIELD, 2)) || has_mirror_shield"

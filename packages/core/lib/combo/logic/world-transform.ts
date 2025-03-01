@@ -1564,7 +1564,6 @@ export class LogicPassWorldTransform {
       if (settings.songs !== 'notes') {
         this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
       } else {
-        this.addItem(Items.MM_SONG_GORON_HALF_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_GORON_HALF_NOTES.size);
         this.removeItem(Items.MM_SONG_GORON_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_GORON_NOTES.size);
       }
     } else {
