@@ -1559,7 +1559,6 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle MM Lullaby */
-    //TODO need to fix Goron Lullaby Half Notes breaking pathfinding
     if (settings.progressiveGoronLullaby === 'progressive') {
       if (settings.songs !== 'notes') {
         this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
