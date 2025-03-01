@@ -947,10 +947,10 @@ export const SETTINGS = [{
   name: 'Moon Crash Behavior',
   category: 'main.events',
   type: 'enum',
-  description: 'Change the behavior of moon crashing',
+  description: 'Changes the behavior of moon crashing',
   values: [
-    { value: 'reset', name:  'Last Save',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
-    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Saving is enabled on the Clock Tower Roof.' },
+    { value: 'reset', name:  'Last Save',  description: 'Moon Crash will wipe all progress made in MM since the last save. Saving is disabled on the Clock Tower Roof.' },
+    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Saving is enabled on the Clock Tower Roof, allowing you to leave by warping back to spawn.' },
   ],
   cond: hasMM,
   default: 'reset'
@@ -2666,10 +2666,10 @@ export const SETTINGS = [{
   cond: (x: any) => hasOoT(x) && x.erDungeons !== 'none'
 }, {
   key: 'erMoon',
-  name: 'Shuffle Clock Tower with Dungeons',
+  name: 'Shuffle Clock Tower Roof with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  description: 'If paired with another dungeon shuffle, allows saving from the Quest Menu with L/C-Up while on the Clock Tower Roof.', /*How does the new MM saving system handle this?*/
+  description: 'When paired with another dungeon shuffle, saving is enabled on the Clock Tower Roof, allowing you to leave by warping back to spawn.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
