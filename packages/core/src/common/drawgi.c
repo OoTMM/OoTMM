@@ -302,6 +302,10 @@ void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
         angle += M_PI;
     color4(&r, &g, &b, &a, kColors[param & 0xf]);
 
+    if (Config_Flag(CFG_IS_NOTE_SHUFFLE) && isProgressive != 1) {
+        a = a * 1.25;
+    }
+
     Matrix_RotateZ(angle, MTXMODE_APPLY);
 
     OPEN_DISPS(play->state.gfxCtx);
