@@ -949,8 +949,8 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Changes the behavior of moon crashing',
   values: [
-    { value: 'reset', name:  'Last Save',  description: 'Moon Crash will wipe all progress made in MM since the last save. Saving is disabled on the Clock Tower Roof.' },
-    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Saving is enabled on the Clock Tower Roof, allowing you to leave by warping back to spawn.' },
+    { value: 'reset', name:  'Last Save',  description: 'When the Moon crashes, all progress made in MM since the last save will be lost. Saving is disabled on the Clock Tower Roof.' },
+    { value: 'cycle', name:  'New Cycle',  description: 'When the Moon crashes, a new cycle will start, keeping progress. Saving is enabled on the Clock Tower Roof, allowing you to leave by warping back to spawn.' },
   ],
   cond: hasMM,
   default: 'reset'
