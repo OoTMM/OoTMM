@@ -310,7 +310,7 @@ void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
 
     if (Config_Flag(CFG_IS_NOTE_SHUFFLE) && isProgressive != 1) {
-        shaderFlameEffect(play, 0, 1.f, 0.f);
+        shaderFlameEffect(play, 0, 2.f, 30.f);
     }
 
     CLOSE_DISPS();
