@@ -497,7 +497,7 @@ export const SETTINGS = [{
   name: 'Scrub Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not Business Scrubs are shuffled (OoT). If not, the one in Hyrule Field by Lake Hylia\'s fences, the one by the Bridge in Lost Woods, and the front one in the grotto near Sacred Forest Meadow will still be shuffled',
+  description: 'Controls whether or not Business Scrubs are shuffled (OoT).<br>If disabled, the one in Hyrule Field by Lake Hylia\'s fences, the one by the Bridge in Lost Woods, and the front one in the grotto near Sacred Forest Meadow will still be shuffled',
   cond: hasOoT,
   default: false,
 }, {
@@ -505,7 +505,7 @@ export const SETTINGS = [{
   name: 'Scrub Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not Business Scrubs are shuffled (MM). If not, the one in Termina Field near the Observatory and the one in Goron Village will still be shuffled',
+  description: 'Controls whether or not Business Scrubs are shuffled (MM).<br>If disabled, the one in Termina Field near the Observatory and the one in Goron Village will still be shuffled',
   cond: hasMM,
   default: false
 }, {
@@ -541,7 +541,7 @@ export const SETTINGS = [{
   name: 'Shop Shuffle (MM)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls whether or not shops in MM should have their items shuffled. If not, the Bomb Bag purchases will still be shuffled',
+  description: 'Controls whether or not shops in MM should have their items shuffled.<br>If "None" is selected, the Bomb Bag purchases will still be shuffled',
   values: [
     { value: 'none', name: 'None', description: 'All the items are vanilla' },
     { value: 'full', name: 'Full', description: 'All 8 items are shuffled' },
@@ -1131,7 +1131,7 @@ export const SETTINGS = [{
   name: 'Skip Child Zelda',
   category: 'main.events',
   type: 'boolean',
-  description: 'This changes the beginning of the Child trade quest. True means you\'ll start having already met Zelda and got her item along with the one from Impa. The Chicken is also removed from the game, but Malon will still be at Hyrule Castle',
+  description: 'This changes the beginning of the Child trade quest.<br>True means you\'ll start having already met Zelda and got her item along with the one from Impa.<br>The Chicken is also removed from the game, but Malon will still be at Hyrule Castle',
   default: false,
   cond: hasOoT,
 }, {
@@ -1328,7 +1328,7 @@ export const SETTINGS = [{
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
   type: 'boolean',
-  description: 'Allows you to play OoT Warp Songs from MM to warp to their respective locations. Logic could even expect you to do so',
+  description: 'Allows you to play OoT Warp Songs from MM to warp to their respective locations, which can be logical.',
   default: false,
   cond: hasOoTMM,
 }, {
@@ -1362,7 +1362,7 @@ export const SETTINGS = [{
     { value: 'agony',  name: 'Stone of Agony', description: 'Containers will match content when you have the Stone of Agony in OoT' },
     { value: 'always', name: 'Always', description: 'Containers will always match content' },
   ],
-  description: 'Modifies the appearance of chests and other shuffled containers so that they match their content. Other shuffled containers will otherwise always be gold if the item has not been collected.<br>Works for unique items, Small and Boss Keys, Silver Rupees, Stray Fairies, Skulltula Tokens, and Souls',
+  description: 'Modifies the appearance of chests and other shuffled containers so that they match their content.<br>Other shuffled containers will otherwise always be gold if the item has not been collected.<br>Works for unique items, Small and Boss Keys, Silver Rupees, Stray Fairies, Skulltula Tokens, and Souls',
   default: 'always'
 }, {
   key: 'csmcHearts',
@@ -1548,7 +1548,7 @@ export const SETTINGS = [{
   name: 'Alter Lost Woods Exits',
   category: 'main.misc',
   type: 'boolean',
-  description: 'There are unused exits in the Lost Woods that return you back to the Lost Woods. When this is on, all the "got lost" exits in the Lost Woods that would normally take you to Kokiri Forest instead take you back to the Lost Woods, keeping your compass direction intact.',
+  description: 'There are unused exits in the Lost Woods that return you back to the Lost Woods.<br>When this is on, all the "got lost" exits in the Lost Woods that would normally take you to Kokiri Forest instead take you back to the Lost Woods, keeping your compass direction intact.',
   default: false,
   cond: hasOoT,
 }, {
@@ -1556,7 +1556,7 @@ export const SETTINGS = [{
   name: 'Void Warp in MM',
   category: 'main.misc',
   type: 'boolean',
-  description: 'In vanilla OoT, various code only checks for transitionTrigger, but in MM it also checks for transitionMode. When this is on, MM will no longer check transitionMode in those circumstances.',
+  description: 'In vanilla OoT, various code only checks for transitionTrigger, but in MM it also checks for transitionMode.<br>When this is on, MM will no longer check transitionMode in those circumstances, allowing you to perform the Void Warp glitch in MM.',
   default: false,
   cond: hasMM,
 }, {
@@ -1575,7 +1575,7 @@ export const SETTINGS = [{
   description: 'Alters the behavior of the OoT Shields',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item does.' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields are removed from the item pool.' },
   ],
   default: 'separate',
   cond: hasOoT,
@@ -1597,10 +1597,10 @@ export const SETTINGS = [{
   name: 'MM Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of the MM Shields',
+  description: 'Alters the behavior of the MM Shields.<br>If shields are Progressive and Shared, the Hero\'s Shield will be obtained alongside the Hylian Shield',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields do not count towards this chain, only the Progressive Shield item does. If shields are shared, the Hero\'s Shield will be obtained alongside the Hylian Shield' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields are removed from the item pool.' },
   ],
   default: 'separate',
   cond: hasMM,
