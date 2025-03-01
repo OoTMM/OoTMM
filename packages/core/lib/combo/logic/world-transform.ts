@@ -11,7 +11,7 @@ import { Location, isLocationOtherFairy, isLocationRenewable, locationData, loca
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
-import {CLOCKS, SHARED_SONG_EMPTINESS_NOTES} from '../items/groups';
+import {CLOCKS} from '../items/groups';
 import { mustStartWithMasterSword } from '../settings/util';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
 
