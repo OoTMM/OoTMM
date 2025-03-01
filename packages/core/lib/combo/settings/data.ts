@@ -1771,12 +1771,12 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'enum',
   values: [
-    { value: 'free', name: 'Free', description: 'Bombchu can be used freely once collected. Max ammo is 50.' },
+    { value: 'free', name: 'Free', description: 'Bombchu can be used as soon as they are obtained. Max ammo is 50.' },
     { value: 'bombBag', name: 'Bomb Bag', description: 'Bombchu can be used when you have the Bomb Bag. Max ammo is the Bomb Bag maximum.' },
     { value: 'bagFirst', name: 'Bombchu Bag - First Pack', description: 'The first out-of-shop bombchu you find will turn into a Bombchu Bag. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Bombchu Bags and bombchu are placed in the item pool separately. Without the Bombchu Bag, bombchu cannot be used. Max ammo is 20/30/40.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Bombchu Bags separate from bombchu are added to the item pool. Without the Bombchu Bag, bombchu cannot be used. Max ammo is 20/30/40 each.' },
   ],
-  description: 'Controls the behavior of bombchu.',
+  description: 'Controls the behavior of bombchu.<br>Bombchu Bags allow bombchu refills to drop from item refill locations such as grass and pots, making bombchu logical.<br>With Bombchu Bags disabled, access to a renewable source of bombchu is required in order for bombchu to be logical.',
   default: 'free',
   cond: hasOoT,
 }, {
@@ -1785,12 +1785,12 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'enum',
   values: [
-    { value: 'free', name: 'Free', description: 'Bombchu can be used freely once collected. Max ammo is 50.' },
+    { value: 'free', name: 'Free', description: 'Bombchu can be used as soon as they are obtained. Max ammo is 50.' },
     { value: 'bombBag', name: 'Bomb Bag', description: 'Bombchu can be used when you have the Bomb Bag. Max ammo is the Bomb Bag maximum.' },
     { value: 'bagFirst', name: 'Bombchu Bag - First Pack', description: 'The first out-of-shop bombchu you find will turn into a Bombchu Bag. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Bombchu Bags and bombchu are placed in the item pool separately. Without the Bombchu Bag, bombchu cannot be used. Max ammo is 20/30/40.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Bombchu Bags separate from bombchu are added to the item pool. Without the Bombchu Bag, bombchu cannot be used. Max ammo is 20/30/40 each.' },
   ],
-  description: 'Controls the behavior of bombchu.',
+  description: 'Controls the behavior of bombchu.<br>Bombchu Bags allow bombchu refills to drop from item refill locations such as grass and pots, making bombchu logical.<br>With Bombchu Bags disabled, access to a renewable source of bombchu is required in order for bombchu to be logical.',
   default: 'bombBag',
   cond: hasMM,
 }, {
