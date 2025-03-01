@@ -789,7 +789,7 @@ export const SETTINGS = [{
   name: 'Red Boulder Drops Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the red boulders drop an item for breaking them (OoT)',
+  description: 'Controls whether or not the red boulders drop an item when broken (OoT)',
   cond: hasOoT,
   default: false,
 }, {
@@ -797,7 +797,7 @@ export const SETTINGS = [{
   name: 'Red Boulder Drops Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the red boulders drop an item for breaking them (MM)',
+  description: 'Controls whether or not the red boulders drop an item when broken (MM)',
   cond: hasMM,
   default: false,
 }, {
@@ -805,7 +805,7 @@ export const SETTINGS = [{
   name: 'Frogs Rupees Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the purple rupees from the frogs in Zora\'s River are shuffled',
+  description: 'Controls whether or not the purple rupees from the Frogs Ocarina Game in Zora\'s River are shuffled',
   cond: hasOoT,
   default: false,
 }, {
@@ -813,7 +813,7 @@ export const SETTINGS = [{
   name: 'Icicles Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the icicles drop an item for breaking them (OoT)',
+  description: 'Controls whether or not grounded icicles drop an item when broken (OoT)',
   cond: hasOoT,
   default: false,
 }, {
@@ -821,7 +821,7 @@ export const SETTINGS = [{
   name: 'Icicles Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the icicles drop an item for breaking them (MM)',
+  description: 'Controls whether or not grounded icicles drop an item when broken (MM)',
   cond: hasMM,
   default: false,
 }, {
