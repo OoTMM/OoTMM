@@ -220,7 +220,7 @@ static void drawFire(PlayState* play, u32 primColor, u32 envColor, float scale, 
     CLOSE_DISPS();
 }
 
-static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, float offsetY)
+static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, float offsetY, float scaleWidth)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -228,7 +228,12 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
     static const u32 kFlameDlist = 0x7d590;
 #endif
 
-    float flameScale = 0.0055f * scale;
+    float flameHeightScale = 0.0055f * scale;
+    float flameWidthScale = flameHeightScale;
+    if (scaleWidth != -1) {
+        flameWidthScale = 0.0055f * scaleWidth;
+    }
+
 
     static const u32 kPrimColors[] = {
         0x00ffffc0,
@@ -252,7 +257,7 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
     OPEN_DISPS(play->state.gfxCtx);
     ModelViewUnkTransform(&play->billboardMtxF);
     Matrix_Translate(0.f, -(30.f + offsetY), -15.f, MTXMODE_APPLY);
-    Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MTXMODE_APPLY);
+    Matrix_Scale(flameWidthScale * 1.7f, flameHeightScale, flameWidthScale, MTXMODE_APPLY);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->state.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
@@ -310,7 +315,7 @@ void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
 
     if (Config_Flag(CFG_IS_NOTE_SHUFFLE) && isProgressive != 1) {
-        shaderFlameEffect(play, 0, 2.f, 30.f);
+        shaderFlameEffect(play, 0, 2.f, 30.f, 1.5f);
     }
 
     CLOSE_DISPS();
@@ -339,7 +344,7 @@ void DrawGi_CustomStick(PlayState* play, s16 drawGiId)
     if (drawGi->lists[1])
     {
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
+        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f, -1);
     }
 
     CLOSE_DISPS();
@@ -371,7 +376,7 @@ void DrawGi_CustomNut(PlayState* play, s16 drawGiId)
     if (drawGi->lists[1])
     {
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
+        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f, -1);
     }
 
     CLOSE_DISPS();
@@ -507,7 +512,7 @@ void DrawGi_CustomSpin(PlayState* play, s16 drawGiId, u8 param)
     }
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    shaderFlameEffect(play, 2, 1.f, 0.f);
+    shaderFlameEffect(play, 2, 1.f, 0.f, -1);
     CLOSE_DISPS();
 }
 
@@ -1077,7 +1082,7 @@ void DrawGi_MagicJar(PlayState* play, s16 index)
     if (isUpgrade)
     {
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-        shaderFlameEffect(play, 3, 1.5f, 20.f);
+        shaderFlameEffect(play, 3, 1.5f, 20.f, -1);
     }
 }
 
@@ -1546,7 +1551,7 @@ void DrawGi_CustomShield(PlayState* play, s16 index, u8 param)
 
     /* Flame for progressive */
     if (param)
-        shaderFlameEffect(play, drawGi->lists[2], 1.5f, 20.f);
+        shaderFlameEffect(play, drawGi->lists[2], 1.5f, 20.f, -1);
 
     CLOSE_DISPS();
 }
