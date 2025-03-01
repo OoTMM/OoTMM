@@ -1139,7 +1139,7 @@ export const SETTINGS = [{
   name: 'Skip Oath to Order',
   category: 'main.events',
   type: 'boolean',
-  description: 'Skip playing Oath to Order to reach the Moon.',
+  description: 'Skip playing Oath to Order to reach the Moon, by using a wisp placed on the Clock Tower Roof with this setting',
   default: false,
   cond: hasMM,
 }, {
