@@ -139,7 +139,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SONG_EPONA: "Epona's Song (MM)",
   MM_SONG_EPONA_PROGRESSIVE_NOTE: "Epona's Song (MM) Progressive Note",
   MM_SONG_GORON_HALF: "Progressive Goron Lullaby",
-  MM_SONG_GORON_HALF_PROGRESSIVE_NOTE: "Progressive Goron Lullaby Progressive Note",
+  MM_SONG_GORON_HALF_PROGRESSIVE_NOTE: "Goron Lullaby Intro Progressive Note",
   MM_SONG_GORON: "Goron Lullaby",
   MM_SONG_GORON_PROGRESSIVE_NOTE: "Goron Lullaby Progressive Note",
   MM_SONG_HEALING: "Song of Healing",
