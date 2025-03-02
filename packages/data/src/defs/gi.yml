@@ -593,7 +593,7 @@
 - { id: MM_SONG_STORMS, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_STORMS], flags: 0xa0, draw: [NOTE, 0x00], object: [mm, 0x008f], name: "the <C2>Song of Storms" }
 - { id: MM_SONG_STORMS_PROGRESSIVE_NOTE, type: MAJOR, add: [MM_SONG_NOTE, QUEST_MM_SONG_STORMS_NOTE], flags: 0xa0, draw: [PROGRESSIVE_NOTE, 0x00], object: [mm, 0x008f], name: "a <C2>Song of Storms Note" }
 - { id: MM_SONG_GORON_HALF, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_GORON_HALF], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Lullaby Intro" }
-- { id: MM_SONG_GORON_HALF_PROGRESSIVE_NOTE, type: MAJOR, add: [MM_SONG_NOTE, QUEST_MM_SONG_GORON_HALF_NOTE], flags: 0xa0, draw: [PROGRESSIVE_NOTE, 0x85], object: [mm, 0x008f], name: "a <C2>Lullaby Intro Note" }
+- { id: MM_SONG_GORON_HALF_PROGRESSIVE_NOTE, type: MAJOR, add: [MM_SONG_NOTE, QUEST_MM_SONG_GORON_HALF_NOTE], flags: 0xa0, draw: [PROGRESSIVE_NOTE, 0x85], object: [mm, 0x008f], name: "a <C2>Goron Lullaby Note" }
 - { id: MM_REMAINS_ODOLWA, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_ODOLWA], flags: 0xa0, draw: MM_REMAINS_ODOLWA, object: GI_REMAINS_ODOLWA, name: "<C3>Odolwa's Remains" }
 - { id: MM_REMAINS_GOHT, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_GOHT], flags: 0xa0, draw: MM_REMAINS_GOHT, object: GI_REMAINS_GOHT, name: "<C3>Goht's Remains" }
 - { id: MM_REMAINS_GYORG, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_GYORG], flags: 0xa0, draw: MM_REMAINS_GYORG, object: GI_REMAINS_GYORG, name: "<C3>Gyorg's Remains" }
