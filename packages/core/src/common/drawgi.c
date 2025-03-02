@@ -243,6 +243,7 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
         0xff0000c0,
         0xffff00c0,
         0x44ff44c0,
+        0x44ff4480,
     };
 
     u8 r;
