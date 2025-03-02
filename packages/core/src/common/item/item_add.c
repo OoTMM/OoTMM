@@ -1489,7 +1489,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
         case 3:
             gSharedCustomSave.songNotes.ootSongNotes.songTpShadow++;
             if (gOotSave.info.inventory.quest.songTpShadow != 1
-                && gSharedCustomSave.songNotes.ootSongNotes.songTpShadow >= 6) {
+                && gSharedCustomSave.songNotes.ootSongNotes.songTpShadow >= 7) {
                 gComboTriggersData.acc = 0;
                 CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_OOT_SONG_TP_SHADOW);
             }
@@ -1594,7 +1594,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
         case 1:
             gSharedCustomSave.songNotes.MmSongNotes.songEmpty++;
             if (gMmSave.info.inventory.quest.songEmpty != 1
-                && gSharedCustomSave.songNotes.MmSongNotes.songEmpty >= 6) {
+                && gSharedCustomSave.songNotes.MmSongNotes.songEmpty >= 7) {
                 gComboTriggersData.acc = 0;
                 CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_EMPTINESS);
             }
@@ -1641,7 +1641,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
         case 5:
             gSharedCustomSave.songNotes.MmSongNotes.songZora++;
             if (gMmSave.info.inventory.quest.songNewWave != 1
-                && gSharedCustomSave.songNotes.MmSongNotes.songZora >= 6) {
+                && gSharedCustomSave.songNotes.MmSongNotes.songZora >= 7) {
                 gComboTriggersData.acc = 0;
                 CustomTriggers_AddTrigger(&gCustomTriggers, TRIGGER_MM_SONG_ZORA);
             }
