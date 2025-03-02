@@ -624,7 +624,7 @@
 - { id: MM_OCARINA_FAIRY, type: MAJOR, add: [MM_OCARINA, 1], flags: 0xa0, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
 - { id: MM_HOOKSHOT_SHORT, type: MAJOR, add: [MM_HOOKSHOT, 1], flags: 0xa0, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Short Hookshot" }
 - { id: MM_SONG_SUN, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SUN], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
-- { id: MM_SONG_SUN_PROGRESSIVE_NOTE, type: MAJOR, add: [MM_SONG_NOTE, QUEST_MM_SONG_SUN_NOTE], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "a <C2>Sun's Song Note" }
+- { id: MM_SONG_SUN_PROGRESSIVE_NOTE, type: MAJOR, add: [MM_SONG_NOTE, QUEST_MM_SONG_SUN_NOTE], flags: 0xa0, draw: [PROGRESSIVE_NOTE, 0x03], object: [mm, 0x008f], name: "a <C2>Sun's Song Note" }
 - { id: MM_WALLET, type: MAJOR, add: [MM_WALLET, 1], flags: 0xa0, draw: WALLET, object: [mm, 0x00a8], name: "the <C1>Child Wallet" }
 - { id: MM_WALLET4, type: MAJOR, add: [MM_WALLET, 4], flags: 0xa0, draw: WALLET4, object: [mm, 0x00a8], name: "the <C1>Colossal Wallet" }
 - { id: MM_OWL_GREAT_BAY, type: MAJOR, add: [OWL, 0], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Great Bay)" }
