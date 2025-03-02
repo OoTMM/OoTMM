@@ -226,7 +226,7 @@ export class ExprParser {
       if (n === undefined) {
         throw this.error("Expected number");
       }
-      count = count * n;
+      count = n;
     }
     this.expect(')');
     return exprHasNotes(song, progressiveNote, count);

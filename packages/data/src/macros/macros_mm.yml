@@ -184,7 +184,7 @@
 "has_weapon_range": "has_arrows || can_hookshot_short || has_mask_zora || can_use_deku_bubble"
 "has_paper": "has(DEED_LAND) || has(DEED_SWAMP) || has(DEED_MOUNTAIN) || has(DEED_OCEAN) || has(LETTER_TO_KAFEI) || has(LETTER_TO_MAMA)"
 "can_fight": "has_weapon || has_mask_zora || has_mask_goron"
-"has_goron_song_half": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF) || hasNotes(SONG_GORON_HALF)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
+"has_goron_song_half": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF) || hasNotes(SONG_GORON_HALF, 6)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
 "has_goron_song": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF, 2) || hasNotes(SONG_GORON_HALF)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
 "can_lullaby_half": "has_mask_goron && can_play_goron_half"
 "can_lullaby": "has_mask_goron && can_play_goron"
