@@ -732,11 +732,16 @@ export class LogicPassWorldTransform {
       this.removeItem(Items.SHARED_SONG_TIME_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_TIME_NOTES.size);
     }
 
-    if (settings.sharedSongSun && settings.songs === 'notes') {
-      this.removeItem(Items.OOT_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_SUN_NOTES.size);
-      this.removeItem(Items.MM_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_SUN_NOTES.size);
-    } else if (!settings.sharedSongSun && settings.songs === 'notes') {
-      this.removeItem(Items.SHARED_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_SUN_NOTES.size);
+    if (settings.songs === 'notes') {
+      if (settings.sharedSongSun) {
+        this.removeItem(Items.OOT_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_SUN_NOTES.size);
+        this.removeItem(Items.MM_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_SUN_NOTES.size);
+      } else {
+        this.removeItem(Items.SHARED_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_SUN_NOTES.size);
+        if (!settings.sunSongMm) {
+          this.removeItem(Items.MM_SONG_SUN_PROGRESSIVE_NOTE, ItemGroups.MM_SONG_SUN_NOTES.size);
+        }
+      }
     }
 
     if (settings.sharedSongSun && settings.sunSongMm) {
@@ -847,14 +852,15 @@ export class LogicPassWorldTransform {
       } else {
         this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
       }
-    } else if (settings.elegyOot) {
+    } else {
       if (settings.songs === 'notes') {
         this.removeItem(Items.SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.SHARED_SONG_EMPTINESS_NOTES.size);
-      } else {
+        if (!settings.elegyOot) {
+          this.removeItem(Items.OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_EMPTINESS_NOTES.size);
+        }
+      } else if (settings.elegyOot) {
         this.addItem(Items.OOT_SONG_EMPTINESS);
       }
-    } else if (!settings.elegyOot && settings.songs === 'notes') {
-      this.removeItem(Items.OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE, ItemGroups.OOT_SONG_EMPTINESS_NOTES.size);
     }
 
     if (settings.sharedLens) {
