@@ -2555,14 +2555,14 @@ export const SETTINGS = [{
   name: 'No Entrance Polarity',
   category: 'entrances',
   type: 'boolean',
-  description: 'Some entrances have a polarity (e.g. dungeon entrances and exits). Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to another dungeon entrance, never to an exit. This option disables that.',
+  description: 'Some entrances have a polarity, for example dungeon entrances and exits.<br>Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to the inside of a dungeon, never to a dungeon exit. This option disables that.',
   default: false,
 }, {
   key: 'erDecoupled',
   name: 'Decoupled Entrances',
   category: 'entrances',
   type: 'boolean',
-  description: 'Makes the entrances decoupled from the exits. This means that the entrance you take does not have to be the same as the exit you take.',
+  description: 'Makes the entrances decoupled from the exits.<br>This means that entering and exiting an area does not lead you back to where you came from, but to a different location instead.',
   default: false,
 }, {
   key: 'erBoss',
@@ -2593,7 +2593,7 @@ export const SETTINGS = [{
   name: 'Shuffle Major Dungeons with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  description: 'If turned on, it means the boss-containing dungeons and uninverted Stone Tower Temple will be shuffled.',
+  description: 'If turned on, the boss-containing dungeons and uninverted Stone Tower Temple will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => x.erDungeons !== 'none',
 }, {
@@ -2601,7 +2601,7 @@ export const SETTINGS = [{
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  description: 'If turned on, it means Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
+  description: 'If turned on, Bottom of the Well, Ice Cavern and Gerudo Training Grounds will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erDungeons !== 'none'
 }, {
@@ -2609,6 +2609,7 @@ export const SETTINGS = [{
   name: 'Shuffle Ganon\'s Castle with Dungeons',
   category: 'entrances',
   type: 'boolean',
+  description: 'If turned on, Ganon\'s Castle will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erDungeons !== 'none'
 }, {
@@ -2616,6 +2617,7 @@ export const SETTINGS = [{
   name: 'Shuffle Ganon\'s Tower with Dungeons',
   category: 'entrances',
   type: 'boolean',
+  description: 'If turned on, Ganon\'s Tower will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erDungeons !== 'none'
 }, {
@@ -2623,7 +2625,7 @@ export const SETTINGS = [{
   name: 'Shuffle Clock Tower Roof with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  description: 'When paired with another dungeon shuffle, saving is enabled on the Clock Tower Roof, allowing you to leave by warping back to spawn.',
+  description: 'If turned on, Clock Tower Roof will be shuffled among dungeons.<br>When paired with another dungeon shuffle, saving is enabled on the Clock Tower Roof, allowing you to leave by warping back to spawn.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
@@ -2631,6 +2633,7 @@ export const SETTINGS = [{
   name: 'Shuffle Spider Houses with Dungeons',
   category: 'entrances',
   type: 'boolean',
+  description: 'If turned on, the Swamp and Ocean Spider Houses will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
@@ -2639,13 +2642,14 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   default: false,
-  description: 'Shuffles the main Pirates\' Fortress entrance among dungeons. Option disabled if the other entrances are shuffled among the overworld.',
+  description: 'If turned on, the main Pirates\' Fortress entrance will be shuffled among dungeons.<br>This setting is disabled if the other entrances are shuffled among the overworld.',
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none' && ((x.erPiratesWorld && x.erOverworld === 'none') || !x.erPiratesWorld)
 }, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath The Well with Dungeons',
   category: 'entrances',
   type: 'boolean',
+  description: 'If turned on, the entrance in Ikana Canyon and the exit in Ikana Castle Exterior will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
@@ -2653,6 +2657,7 @@ export const SETTINGS = [{
   name: 'Shuffle Ikana Castle\'s Interior with Dungeons',
   category: 'entrances',
   type: 'boolean',
+  description: 'If turned on, the main entrance leading into Ikana Castle\'s Interior will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
@@ -2660,6 +2665,7 @@ export const SETTINGS = [{
   name: 'Shuffle Secret Shrine with Dungeons',
   category: 'entrances',
   type: 'boolean',
+  description: 'If turned on, Secret Shrine will be shuffled among dungeons.',
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
@@ -2838,6 +2844,21 @@ export const SETTINGS = [{
   description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
   default: 'none'
 }, {
+  key: 'erWarps',
+  name: 'Warp Songs and Soaring Spots Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'Warp songs and soaring spots are not shuffled.' },
+    { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.', cond: hasOoT },
+    { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.', cond: hasMM },
+    { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
+    { value: 'full', name: 'Full', description: 'Shuffles both warp songs and soaring spots together.' },
+  ],
+  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
+  default: 'none',
+  cond: (s: any) => !s.erOneWaysSongs || !s.erOneWaysStatues
+}, {
   key: 'erOneWays',
   name: 'One-Ways Shuffle',
   category: 'entrances',
@@ -2913,21 +2934,6 @@ export const SETTINGS = [{
   description: 'Makes it so one-ways can take you to any place also shuffled.<br>This also affects warp songs and soaring spots if they are included in one-ways.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none'
-}, {
-  key: 'erWarps',
-  name: 'Shuffle Warp Songs and Soaring Spots',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None', description: 'Warp songs and soaring spots are not shuffled.' },
-    { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.', cond: hasOoT },
-    { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.', cond: hasMM },
-    { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
-    { value: 'full', name: 'Full', description: 'Shuffles both warp songs and soaring spots together.' },
-  ],
-  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
-  default: 'none',
-  cond: (s: any) => !s.erOneWaysSongs || !s.erOneWaysStatues
 }, {
   key: 'mqDungeons',
   name: 'Master Quest Dungeons',
