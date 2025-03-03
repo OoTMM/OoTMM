@@ -747,21 +747,25 @@ export const TRICKS: Tricks = {
   GLITCH_OOT_EQUIP_SWAP: {
     game: 'oot',
     name: "Equip Swap (OoT)",
+    tooltip: "With a frame-perfect button press, you can equip an item over a different item's slot in the pause menu, which applies the properties of the slot to the item. Most often used to bypass age restrictions.",
     glitch: true,
   },
   GLITCH_OOT_OCARINA_ITEMS: {
     game: 'oot',
     name: "Ocarina Items (OoT)",
+    tooltip: "Different methods can be used to make the game play the default cutscene, which happens to be playing the ocarina. This is used to play songs without an ocarina.",
     glitch: true,
   },
   GLITCH_OOT_MEGAFLIP: {
     game: 'oot',
     name: "Megaflips (OoT)",
+    tooltip: "Backflipping with a shield in the exact moment the shield is hit causes Link to backflip much farther, allowing larger gaps to be cleared.",
     glitch: true,
   },
   GLITCH_OOT_BROKEN_STICK: {
     game: 'oot',
     name: "Broken Deku Stick (OoT)",
+    tooltip: "Using different ways to prevent Link from putting away the Deku Stick after breaking it, the broken stick remains in Link's hands and can be used infinitely.",
     glitch: true,
   },
 };
