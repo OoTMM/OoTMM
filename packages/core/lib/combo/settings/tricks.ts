@@ -452,7 +452,7 @@ export const TRICKS: Tricks = {
   MM_SHT_STICKS_RUN: {
     game: 'mm',
     name: 'Access SHT Pillar Fireless with Precise Stick Run',
-    tooltip: 'With a precise path, light the three torches.', //Clearer description?
+    tooltip: 'Use the lower torch on the third floor in the center room to light the stick, drop down to the pillars room, enter and light the closest torch. Use another stick for the two other torches.',
   },
   MM_SHT_PILLARLESS: {
     game: 'mm',
