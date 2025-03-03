@@ -452,7 +452,7 @@ export const TRICKS: Tricks = {
   MM_SHT_STICKS_RUN: {
     game: 'mm',
     name: 'Access SHT Pillar Fireless with Precise Stick Run',
-    tooltip: 'Use the lower torch on the third floor in the center room to light the stick, drop down to the pillars room, enter and light the closest torch. Use another stick for the two other torches.',
+    tooltip: 'Use the lower torch on the third floor in the center room to light the stick, drop down to the pillar room, enter and light the closest torch. Use another stick for the two other torches.',
   },
   MM_SHT_PILLARLESS: {
     game: 'mm',
@@ -469,7 +469,7 @@ export const TRICKS: Tricks = {
   MM_KEG_EXPLOSIVES: {
     game: 'mm',
     name: 'Use Powder Kegs as Explosives',
-    tooltip: 'Allows Powder Kegs to be an alternative to bombs in logic',
+    tooltip: 'Allows Powder Kegs to be an alternative to bombs and bombchu in logic',
   },
   MM_DOG_RACE_CHEST_NOTHING: {
     game: 'mm',
