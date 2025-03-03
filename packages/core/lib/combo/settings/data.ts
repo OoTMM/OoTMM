@@ -1504,7 +1504,7 @@ export const SETTINGS = [{
   name: 'Climb Most Surfaces (OoT)',
   category: 'main.misc',
   type: 'enum',
-  description: 'Modifies most surface to be climbable and if it is expected in logic',
+  description: 'Modifies most surfaces to be climbable and if it is expected in logic',
   values: [
     { value: 'off', name: 'Off' },
     { value: 'enabled', name: 'On' },
@@ -1517,7 +1517,7 @@ export const SETTINGS = [{
   name: 'Climb Most Surfaces (MM)',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Modifies most surface to be climbable',
+  description: 'Modifies most surfaces to be climbable',
   default: false,
   cond: hasMM,
 }, {
@@ -2544,6 +2544,27 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'erSelfLoops',
+  name: 'Allow Self-Loops',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Allow entrances to loop back to the same map. Might make the topology of the world very confusing.',
+  default: false,
+}, {
+  key: 'erNoPolarity',
+  name: 'No Entrance Polarity',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Some entrances have a polarity (e.g. dungeon entrances and exits). Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to another dungeon entrance, never to an exit. This option disables that.',
+  default: false,
+}, {
+  key: 'erDecoupled',
+  name: 'Decoupled Entrances',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Makes the entrances decoupled from the exits. This means that the entrance you take does not have to be the same as the exit you take.',
+  default: false,
+}, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
   category: 'entrances',
@@ -2567,117 +2588,6 @@ export const SETTINGS = [{
   ],
   description: 'Shuffle dungeons either within their own game or across both',
   default: 'none'
-}, {
-  key: 'erGrottos',
-  name: 'Grotto Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
-    { value: 'full', name: 'Full' },
-  ],
-  description: 'Shuffle grottos and graves either within their own game or across both',
-  default: 'none'
-}, {
-  key: 'erNoPolarity',
-  name: 'No Entrance Polarity',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'Some entrances have a polarity (e.g. dungeon entrances and exits). Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to another dungeon entrance, never to an exit. This option disables that.',
-  default: false,
-}, {
-  key: 'erSelfLoops',
-  name: 'Allow Self-Loops',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'Allow entrances to loop back to the same map. Might make the topology of the world very confusing.',
-  default: false,
-}, {
-  key: 'erDecoupled',
-  name: 'Decoupled Entrances',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'Makes the entrances decoupled from the exits. This means that the entrance you take does not have to be the same as the exit you take.',
-  default: false,
-}, {
-  key: 'erMixed',
-  name: 'Mixed Pools',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
-    { value: 'full', name: 'Full' },
-  ],
-  description: 'Allow shuffling multiple pools together.',
-  default: 'none'
-}, {
-  key: 'erMixedDungeons',
-  name: 'Mixed Pools - Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'If turned on, dungeons will be shuffled with other mixed pools.',
-  default: false,
-  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erDungeons,
-}, {
-  key: 'erMixedRegions',
-  name: 'Mixed Pools - Regions',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'If turned on, regions will be shuffled with other mixed pools.',
-  default: false,
-  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erRegions,
-}, {
-  key: 'erMixedOverworld',
-  name: 'Mixed Pools - Overworld',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'If turned on, overworld entrances will be shuffled with other mixed pools.',
-  default: false,
-  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erOverworld,
-}, {
-  key: 'erMixedIndoors',
-  name: 'Mixed Pools - Interiors',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'If turned on, interiors will be shuffled with other mixed pools.',
-  default: false,
-  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erIndoors,
-}, {
-  key: 'erMixedGrottos',
-  name: 'Mixed Pools - Grottos',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'If turned on, grottos will be shuffled with other mixed pools.',
-  default: false,
-  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erGrottos,
-}, {
-  key: 'erWallmasters',
-  name: 'Wallmaster Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
-    { value: 'full', name: 'Full' },
-  ],
-  description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
-  default: 'none'
-}, {
-  key: 'erSpawns',
-  name: 'Spawn Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  description: 'Shuffle the starting positions of the player in OoT.',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'child', name: 'Child Only' },
-    { value: 'adult', name: 'Adult Only' },
-    { value: 'both', name: 'Both' },
-  ],
-  default: 'none',
-  cond: hasOoT,
 }, {
   key: 'erMajorDungeons',
   name: 'Shuffle Major Dungeons with Dungeons',
@@ -2753,6 +2663,54 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
 }, {
+  key: 'erGrottos',
+  name: 'Grotto Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
+    { value: 'full', name: 'Full' },
+  ],
+  description: 'Shuffle grottos and graves either within their own game or across both',
+  default: 'none'
+}, {
+  key: 'erIndoors',
+  name: 'Shuffle Interiors',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none',
+  description: 'Shuffle interiors either within their own game or across both',
+}, {
+  key: 'erIndoorsMajor',
+  name: 'Shuffle Most Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle most interiors with each other.',
+  default: false,
+  cond: (x: any) => x.erIndoors !== 'none'
+}, {
+  key: 'erIndoorsExtra',
+  name: 'Shuffle Extra Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle additional, more complex interiors. These include:<br>- OoT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit is included if Shuffle Pirate Fortress Entrances is enabled',
+  default: false,
+  cond: (x: any) => x.erIndoors !== 'none'
+}, {
+  key: 'erIndoorsGameLinks',
+  name: 'Shuffle Mask Shop/Clock Tower Entrances',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the Mask Shop & Clock Tower entrances among the other indoors.',
+  default: false,
+  cond: (x: any) => hasOoTMM(x) && (x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full')),
+}, {
   key: 'erRegions',
   name: 'Shuffle Major Regions',
   category: 'entrances',
@@ -2802,8 +2760,8 @@ export const SETTINGS = [{
   description: 'Shuffle some entrances within Pirates\' Fortress, including the main entrance if Overworld ER is enabled.<br>Shuffle the Sewers exit door if Extra Interiors are enabled.',
   cond: (x: any) => hasMM(x) && (x.erOverworld !== 'none' || x.erIndoorsExtra)
 }, {
-  key: 'erIndoors',
-  name: 'Shuffle Interiors',
+  key: 'erMixed',
+  name: 'Mixed Pools',
   category: 'entrances',
   type: 'enum',
   values: [
@@ -2811,32 +2769,74 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
     { value: 'full', name: 'Full' },
   ],
+  description: 'Allow shuffling multiple pools together.',
+  default: 'none'
+}, {
+  key: 'erMixedDungeons',
+  name: 'Mixed Pools - Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, dungeons will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erDungeons,
+}, {
+  key: 'erMixedGrottos',
+  name: 'Mixed Pools - Grottos',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, grottos will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erGrottos,
+}, {
+  key: 'erMixedIndoors',
+  name: 'Mixed Pools - Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, interiors will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erIndoors,
+}, {
+  key: 'erMixedRegions',
+  name: 'Mixed Pools - Regions',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, regions will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erRegions,
+}, {
+  key: 'erMixedOverworld',
+  name: 'Mixed Pools - Overworld',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, overworld entrances will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erOverworld,
+}, {
+  key: 'erSpawns',
+  name: 'Spawn Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  description: 'Shuffle the starting positions of the player in OoT.',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'child', name: 'Child Only' },
+    { value: 'adult', name: 'Adult Only' },
+    { value: 'both', name: 'Both' },
+  ],
   default: 'none',
-  description: 'Shuffle interiors either within their own game or across both',
+  cond: hasOoT,
 }, {
-  key: 'erIndoorsMajor',
-  name: 'Shuffle Most Interiors',
+  key: 'erWallmasters',
+  name: 'Wallmaster Shuffle',
   category: 'entrances',
-  type: 'boolean',
-  description: 'Shuffle most interiors with each other.',
-  default: false,
-  cond: (x: any) => x.erIndoors !== 'none'
-}, {
-  key: 'erIndoorsExtra',
-  name: 'Shuffle Extra Interiors',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'Shuffle additional, more complex interiors. These include:<br>- OoT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit is included if Shuffle Pirate Fortress Entrances is enabled',
-  default: false,
-  cond: (x: any) => x.erIndoors !== 'none'
-}, {
-  key: 'erIndoorsGameLinks',
-  name: 'Shuffle Mask Shop/Clock Tower Entrances',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'Shuffle the Mask Shop & Clock Tower entrances among the other indoors.',
-  default: false,
-  cond: (x: any) => hasOoTMM(x) && (x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full')),
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game', cond: hasOoTMM },
+    { value: 'full', name: 'Full' },
+  ],
+  description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
+  default: 'none'
 }, {
   key: 'erWarps',
   name: 'Shuffle Warp Songs and Soaring Spots',
