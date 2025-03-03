@@ -469,7 +469,7 @@ export const TRICKS: Tricks = {
   MM_KEG_EXPLOSIVES: {
     game: 'mm',
     name: 'Use Powder Kegs as Explosives',
-    tooltip: 'Allows Powder Kegs to be an alternative to bombs and bombchu in logic',
+    tooltip: 'Allows Powder Kegs to be considered in logic for one-time explosives usages, such as blowing up boulders, opening up hidden grottos and destroying breakable walls.',
   },
   MM_DOG_RACE_CHEST_NOTHING: {
     game: 'mm',
@@ -686,7 +686,8 @@ export const TRICKS: Tricks = {
   MM_ISTT_ENTRY_HOVER: {
     game: 'mm',
     name: 'Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood',
-    tooltip: 'The switch can be reached by using the Hover Boots and then sidehopping to grab the ledge, using Bunny Hood for extra speed.',
+    tooltip: 'The Death Armos switch can be reached by using the Hover Boots and then sidehopping onto the platform, with Bunny Hood for extra speed.',
+    linkVideo: 'https://www.youtube.com/watch?v=fT9pHZuD128',
   },
   MM_GYORG_POTS_DIVE: {
     game: 'mm',
