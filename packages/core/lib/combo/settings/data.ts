@@ -2676,7 +2676,7 @@ export const SETTINGS = [{
   default: 'none'
 }, {
   key: 'erIndoors',
-  name: 'Shuffle Interiors',
+  name: 'Interiors Shuffle',
   category: 'entrances',
   type: 'enum',
   values: [
@@ -2699,7 +2699,7 @@ export const SETTINGS = [{
   name: 'Shuffle Extra Interiors',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle additional, more complex interiors. These include:<br>- OoT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit is included if Shuffle Pirate Fortress Entrances is enabled',
+  description: 'Shuffle additional, more complex interiors. These include:<br>- OoT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit if Shuffle Pirate Fortress Entrances is enabled',
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
@@ -2712,7 +2712,7 @@ export const SETTINGS = [{
   cond: (x: any) => hasOoTMM(x) && (x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full')),
 }, {
   key: 'erRegions',
-  name: 'Shuffle Major Regions',
+  name: 'Major Regions Shuffle',
   category: 'entrances',
   type: 'enum',
   values: [
@@ -2741,7 +2741,7 @@ export const SETTINGS = [{
   cond: (x: any) => hasOoT(x) && x.erRegions !== 'none'
 }, {
   key: 'erOverworld',
-  name: 'Shuffle Overworld',
+  name: 'Overworld Shuffle',
   category: 'entrances',
   type: 'enum',
   values: [
@@ -2838,23 +2838,8 @@ export const SETTINGS = [{
   description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
   default: 'none'
 }, {
-  key: 'erWarps',
-  name: 'Shuffle Warp Songs and Soaring Spots',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None', description: 'Warp songs and soaring spots are not shuffled.' },
-    { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.', cond: hasOoT },
-    { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.', cond: hasMM },
-    { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
-    { value: 'full', name: 'Full', description: 'Shuffles both warp songs and soaring spots together.' },
-  ],
-  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
-  default: 'none',
-  cond: (s: any) => !s.erOneWaysSongs || !s.erOneWaysStatues
-}, {
   key: 'erOneWays',
-  name: 'Shuffle One-Way Entrances',
+  name: 'One-Ways Shuffle',
   category: 'entrances',
   type: 'enum',
   values: [
@@ -2928,6 +2913,21 @@ export const SETTINGS = [{
   description: 'Makes it so one-ways can take you to any place also shuffled.<br>This also affects warp songs and soaring spots if they are included in one-ways.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'erWarps',
+  name: 'Shuffle Warp Songs and Soaring Spots',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'Warp songs and soaring spots are not shuffled.' },
+    { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.', cond: hasOoT },
+    { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.', cond: hasMM },
+    { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
+    { value: 'full', name: 'Full', description: 'Shuffles both warp songs and soaring spots together.' },
+  ],
+  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
+  default: 'none',
+  cond: (s: any) => !s.erOneWaysSongs || !s.erOneWaysStatues
 }, {
   key: 'mqDungeons',
   name: 'Master Quest Dungeons',
