@@ -497,7 +497,7 @@ export const TRICKS: Tricks = {
   MM_ZORA_HALL_DOORS: {
     game: 'mm',
     name: 'Access the doors in Zora Hall using Short Hookshot Anywhere',
-    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot behind the doors and open the doors behind them. It is somewhat precise but works with all doors.', //How does this trick work exactly?
+    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot the bottom of the door through the Zora standing in front, and mash A to open the door. It is somewhat precise but works with all doors.',
   },
   MM_IKANA_ROOF_PARKOUR: {
     game: 'mm',
