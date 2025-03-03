@@ -4,7 +4,6 @@ import { SETTINGS, Settings, TRICKS, TrickKey } from '../settings';
 import { Age, AGE_ADULT, AGE_CHILD } from './constants';
 import { PRICE_RANGES } from './price';
 import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
-import {SONG_NOTE_MAP} from "../items/groups";
 
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',
