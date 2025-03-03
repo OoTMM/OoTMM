@@ -165,7 +165,8 @@
 - { id: MM_BOTTLE_CHATEAU, func: Opa0_Xlu1, params: [0x6000e90, 0x6000a50] }
 - { id: MM_PICTOBOX, func: Opa0_Xlu1, params: [0x6000ec8, 0x6000bc0] }
 - { id: MM_MASK_FIERCE_DEITY, func: Opa01, params: [0x6000b90, 0x60009b0] }
-- { id: NOTE, func: CustomNote, params: [0x6000ae0] }
+- { id: NOTE, func: CustomNote, params: [0x6000ae0, 0] }
+- { id: PROGRESSIVE_NOTE, func: CustomNote, params: [0x6000ae0, 1] }
 - { id: OOT_STICK_UPGRADE, func: CustomStick, params: [0x60004d0, 1] }
 - { id: OOT_STICK_UPGRADE2, func: CustomStick, params: [0x60004d0, 2] }
 - { id: OOT_NUT_UPGRADE, func: CustomNut, params: [0x6000e90, 1] }
