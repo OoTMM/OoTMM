@@ -415,8 +415,7 @@ export const TRICKS: Tricks = {
   MM_BOMBER_GUESS: {
     game: 'mm',
     name: 'Guess Bombers\' Code',
-    tooltip: 'Guess the Bombers\' Code for Astral Observatory from 120 possible combinations. Alternatively, you can backflip over the bomber kid guarding the entrance',
-    linkVideo: 'https://www.youtube.com/watch?v=W6DhLXzJn0A&ab_channel=Tyler%2706',
+    tooltip: 'Guess the Bombers\' Code for Astral Observatory from 120 possible combinations. Grants access to the Bomber\'s Notebook check when entering ECT from the Bomber\s Hideout.',
   },
   MM_CAPTAIN_SKIP: {
     game: 'mm',
@@ -546,7 +545,7 @@ export const TRICKS: Tricks = {
   MM_OOB_MOVEMENT: {
     game: 'mm',
     name: 'Walk Along Surfaces Out of Bounds',
-    tooltip: 'In certain situations, it is required to walk on surfaces that are unable to be reached normally.', //Examples could help
+    tooltip: 'With this trick enabled, logic may expect you to use Short Hookshot Anywhere to reach normally inaccessible surfaces to get behind the Milk Road Boulder and (with 3 elegy statues) climb Stone Tower.',
   },
   MM_ST_UPDRAFTS: {
     game: 'mm',
@@ -596,7 +595,8 @@ export const TRICKS: Tricks = {
   MM_BOMBER_BACKFLIP: {
     game: 'mm',
     name: 'Backflip over the Bomber in East Clock Town',
-    tooltip: 'Just backflip over the kid.',
+    tooltip: 'By backwalking at an angle right next to the kid, the "Speak" prompt disappears, allowing you to backflip over the kid. Does not grant access to the Bomber\'s Notebook check when entering ECT from the Bomber\s Hideout.',
+    linkVideo: 'https://www.youtube.com/watch?v=W6DhLXzJn0A&ab_channel=Tyler%2706',
   },
   MM_NCT_TINGLE: {
     game: 'mm',
