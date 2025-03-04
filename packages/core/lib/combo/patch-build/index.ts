@@ -81,6 +81,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     MM_JP_LAYOUT_STONE_TOWER: world.resolvedFlags.jpLayouts.has('StoneTower') && !world.resolvedFlags.openDungeonsMm.has('ST'),
     MM_JP_LAYOUT_STONE_TOWER_TEMPLE: world.resolvedFlags.jpLayouts.has('ST'),
     MM_KEG_STRENGTH_3: settings.kegStrength3,
+    IS_NOTE_SHUFFLE: settings.songs === 'notes',
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

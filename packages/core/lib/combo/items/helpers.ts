@@ -5,6 +5,7 @@ export const isCompass = (item: Item) => ItemGroups.COMPASSES.has(item);
 export const isMap = (item: Item) => ItemGroups.MAPS.has(item);
 export const isMapCompass = (item: Item) => isMap(item) || isCompass(item);
 export const isSong = (item: Item) => ItemGroups.SONGS.has(item);
+export const isSongNote = (item: Item) => ItemGroups.SONG_NOTES.has(item);
 export const isSmallKey = (item: Item) => isSmallKeyRegular(item) || isSmallKeyHideout(item) || isSmallKeyTCG(item);
 export const isSmallKeyHideout = (item: Item) => item === Items.OOT_SMALL_KEY_GF;
 export const isSmallKeyTCG = (item: Item) => item === Items.OOT_SMALL_KEY_TCG;
