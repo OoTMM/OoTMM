@@ -1226,7 +1226,7 @@ export const SETTINGS = [{
   name: 'Stray Fairy Reward Count',
   category: 'main.events',
   type: 'number',
-  description: 'How many stray fairies are required to get a reward.',
+  description: 'How many stray fairies are required to get the respective Great Fairy reward.',
   default: 15,
   min: 0,
   max: 15,
@@ -1236,7 +1236,7 @@ export const SETTINGS = [{
   name: 'Pre-Completed Dungeons',
   category: 'main.events',
   type: 'boolean',
-  description: 'Allow dungeons to be pre-completed depending on rules.',
+  description: 'Allow dungeons to be pre-completed depending on rules. Every check in a pre-completed dungeon will be junked, and its boss will be considered defeated, granting clear state access.',
   default: false,
   cond: (s: any) => (s.mode !== 'multi' || s.distinctWorlds),
 }, {
@@ -1256,7 +1256,7 @@ export const SETTINGS = [{
   type: 'number',
   min: 0,
   max: 3,
-  description: 'Pre-completes dungeons containing at least one stone, until it reaches that many stones. Can be combined with other pre-completed dungeon rules.',
+  description: 'How many OoT Child dungeons containing stones should be pre-completed. Can be combined with other pre-completed dungeon rules.',
   default: 0,
   cond: (s: any) => hasOoT(s) && s.preCompletedDungeons,
 }, {
@@ -1266,7 +1266,7 @@ export const SETTINGS = [{
   type: 'number',
   min: 0,
   max: 6,
-  description: 'Pre-completes dungeons containing at least one medallion, until it reaches that many medallions. Can be combined with other pre-completed dungeon rules.',
+  description: 'How many OoT Adult dungeons containing medaillons should be pre-completed. Can be combined with other pre-completed dungeon rules.',
   default: 0,
   cond: (s: any) => hasOoT(s) && s.preCompletedDungeons,
 }, {
@@ -1276,7 +1276,7 @@ export const SETTINGS = [{
   type: 'number',
   min: 0,
   max: 4,
-  description: 'Pre-completes dungeons containing at least one of the remains, until in reaches that many remains. Can be combined with other pre-completed dungeon rules.',
+  description: 'How many MM dungeons containing remains should be pre-completed. Stone Tower Temple and Inverted Stone Tower Temple are considered one dungeon. Can be combined with other pre-completed dungeon rules.',
   default: 0,
   cond: (s: any) => hasMM(s) && s.preCompletedDungeons,
 }, {
