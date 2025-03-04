@@ -33,7 +33,7 @@ export function Generator() {
         <TabSettingsEditor name="Shuffle" category="main.shuffle"/>
         <TabSettingsEditor name="Price" category="main.prices"/>
         <TabSettingsEditor name="Events" category="main.events"/>
-        <TabSettingsEditor name="Cross-Game" category="main.cross"/>
+        <TabSettingsEditor name="Cross-Game" disabled={settings.games !== 'ootmm'} category="main.cross" />
         <TabSettingsEditor name="World" category="main.world"/>
         <Tab name="Special Conditions"><SpecialConds/></Tab>
         <Tab name="Starting Items"><StartingItems/></Tab>

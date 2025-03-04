@@ -415,8 +415,7 @@ export const TRICKS: Tricks = {
   MM_BOMBER_GUESS: {
     game: 'mm',
     name: 'Guess Bombers\' Code',
-    tooltip: 'Guess the Bombers\' Code for Astral Observatory from 120 possible combinations. Alternatively, you can backflip over the bomber kid guarding the entrance',
-    linkVideo: 'https://www.youtube.com/watch?v=W6DhLXzJn0A&ab_channel=Tyler%2706',
+    tooltip: 'Guess the Bombers\' Code for Astral Observatory from 120 possible combinations. Grants access to the Bomber\'s Notebook check when entering ECT from the Bomber\s Hideout.',
   },
   MM_CAPTAIN_SKIP: {
     game: 'mm',
@@ -453,7 +452,7 @@ export const TRICKS: Tricks = {
   MM_SHT_STICKS_RUN: {
     game: 'mm',
     name: 'Access SHT Pillar Fireless with Precise Stick Run',
-    tooltip: 'With a precise path, light the three torches.', //Clearer description?
+    tooltip: 'Use the lower torch on the third floor in the center room to light the stick, drop down to the pillar room, enter and light the closest torch. Use another stick for the two other torches.',
   },
   MM_SHT_PILLARLESS: {
     game: 'mm',
@@ -470,7 +469,7 @@ export const TRICKS: Tricks = {
   MM_KEG_EXPLOSIVES: {
     game: 'mm',
     name: 'Use Powder Kegs as Explosives',
-    tooltip: 'Allows Powder Kegs to be an alternative to bombs in logic',
+    tooltip: 'Allows Powder Kegs to be considered in logic for one-time explosives usages, such as blowing up boulders, opening up hidden grottos and destroying breakable walls.',
   },
   MM_DOG_RACE_CHEST_NOTHING: {
     game: 'mm',
@@ -498,7 +497,7 @@ export const TRICKS: Tricks = {
   MM_ZORA_HALL_DOORS: {
     game: 'mm',
     name: 'Access the doors in Zora Hall using Short Hookshot Anywhere',
-    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot behind the doors and open the doors behind them. It is somewhat precise but works with all doors.', //How does this trick work exactly?
+    tooltip: 'Using Hookshot Anywhere, it is possible to hookshot the bottom of the door through the Zora standing in front, and mash A to open the door. It is somewhat precise but works with all doors.',
   },
   MM_IKANA_ROOF_PARKOUR: {
     game: 'mm',
@@ -546,7 +545,7 @@ export const TRICKS: Tricks = {
   MM_OOB_MOVEMENT: {
     game: 'mm',
     name: 'Walk Along Surfaces Out of Bounds',
-    tooltip: 'In certain situations, it is required to walk on surfaces that are unable to be reached normally.', //Examples could help
+    tooltip: 'With this trick enabled, logic may expect you to use Short Hookshot Anywhere to reach normally inaccessible surfaces to get behind the Milk Road Boulder and (with 3 elegy statues) climb Stone Tower.',
   },
   MM_ST_UPDRAFTS: {
     game: 'mm',
@@ -596,7 +595,8 @@ export const TRICKS: Tricks = {
   MM_BOMBER_BACKFLIP: {
     game: 'mm',
     name: 'Backflip over the Bomber in East Clock Town',
-    tooltip: 'Just backflip over the kid.', // Is Guess Bombers' Code not logically equivalent to this?
+    tooltip: 'By backwalking at an angle right next to the kid, the "Speak" prompt disappears, allowing you to backflip over the kid. Does not grant access to the Bomber\'s Notebook check when entering ECT from the Bomber\s Hideout.',
+    linkVideo: 'https://www.youtube.com/watch?v=W6DhLXzJn0A&ab_channel=Tyler%2706',
   },
   MM_NCT_TINGLE: {
     game: 'mm',
@@ -686,7 +686,8 @@ export const TRICKS: Tricks = {
   MM_ISTT_ENTRY_HOVER: {
     game: 'mm',
     name: 'Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood',
-    tooltip: 'The switch can be reached by using the Hover Boots and then sidehopping to grab the ledge, using Bunny Hood for extra speed.',
+    tooltip: 'The Death Armos switch can be reached by using the Hover Boots and then sidehopping onto the platform, with Bunny Hood for extra speed.',
+    linkVideo: 'https://www.youtube.com/watch?v=fT9pHZuD128',
   },
   MM_GYORG_POTS_DIVE: {
     game: 'mm',
@@ -747,21 +748,25 @@ export const TRICKS: Tricks = {
   GLITCH_OOT_EQUIP_SWAP: {
     game: 'oot',
     name: "Equip Swap (OoT)",
+    tooltip: "With a frame-perfect button press, you can equip an item over a different item's slot in the pause menu, which applies the properties of the slot to the item. Most often used to bypass age restrictions.",
     glitch: true,
   },
   GLITCH_OOT_OCARINA_ITEMS: {
     game: 'oot',
     name: "Ocarina Items (OoT)",
+    tooltip: "Different methods can be used to make the game play the default cutscene, which happens to be playing the ocarina. This is used to play songs without an ocarina.",
     glitch: true,
   },
   GLITCH_OOT_MEGAFLIP: {
     game: 'oot',
     name: "Megaflips (OoT)",
+    tooltip: "Backflipping with a shield in the exact moment the shield is hit causes Link to backflip much farther, allowing larger gaps to be cleared.",
     glitch: true,
   },
   GLITCH_OOT_BROKEN_STICK: {
     game: 'oot',
     name: "Broken Deku Stick (OoT)",
+    tooltip: "Using different ways to prevent Link from putting away the Deku Stick after breaking it, the broken stick remains in Link's hands and can be used infinitely.",
     glitch: true,
   },
 };
