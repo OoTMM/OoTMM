@@ -1894,7 +1894,7 @@ export const SETTINGS = [{
   name: "Extra Child Swords (OoT)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Add the various Majora's Mask swords in OoT, as upgrades to the Kokiri Sword.",
+  description: "Add the Razor and Gilded Swords in OoT, as upgrades to the Kokiri Sword.",
   default: false,
   cond: (x: any) => x.progressiveSwordsOot !== 'progressive' && hasOoT(x),
 }, {
@@ -2757,6 +2757,7 @@ export const SETTINGS = [{
   ],
   default: 'none',
   description: 'Shuffle every overworld entrance either within their own game or across both',
+  cond: (x: any) => x.erRegions === 'none',
 }, {
   key: 'erPiratesWorld',
   name: 'Shuffle Pirates\' Fortress Entrances',
@@ -2855,7 +2856,7 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
     { value: 'full', name: 'Full', description: 'Shuffles both warp songs and soaring spots together.' },
   ],
-  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
+  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "One-Ways Shuffle".',
   default: 'none',
   cond: (s: any) => !s.erOneWaysSongs || !s.erOneWaysStatues
 }, {
@@ -2888,18 +2889,18 @@ export const SETTINGS = [{
   cond: (x: any) => hasMM(x) && x.erOneWays !== 'none'
 }, {
   key: 'erOneWaysSongs',
-  name: 'Shuffle One-Ways with Warp Songs',
+  name: 'Shuffle Warp Songs with One-Ways',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the warp songs from OoT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring Spots".',
+  description: 'Shuffles the warp songs from OoT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Warp Songs and Soaring Spots Shuffle".',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erOneWays !== 'none' && x.erWarps !== 'ootOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
   key: 'erOneWaysStatues',
-  name: 'Shuffle One-Ways with Soaring Spots',
+  name: 'Shuffle Soaring Spots with One-Ways',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the soaring spots from MM among one-way entrances. This setting is disabled if the soaring spots are shuffled with "Shuffle Warp Songs and Soaring Spots".',
+  description: 'Shuffles the soaring spots from MM among one-way entrances. This setting is disabled if the soaring spots are shuffled with "Warp Songs and Soaring Spots Shuffle".',
   default: false,
   cond: (x: any) => hasMM(x) && x.erOneWays !== 'none' && x.erWarps !== 'mmOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
