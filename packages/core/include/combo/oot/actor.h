@@ -128,5 +128,6 @@ void Actor_MoveXYZ(Actor* actor);
 s32 Actor_TalkOfferAccepted(Actor* actor, PlayState* play);
 s32 Actor_OfferTalk(Actor* actor, PlayState* play, f32 radius);
 u32 Actor_TextboxIsClosing(Actor* actor, PlayState* play);
+void func_8002ED80(Actor* actor, PlayState* play, s32 flag);
 
 #endif
