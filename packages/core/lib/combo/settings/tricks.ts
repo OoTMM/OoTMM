@@ -343,6 +343,11 @@ export const TRICKS: Tricks = {
     name: "Backflip/Sidehop Over Gap to Reach BotW MQ's Main Room's Center",
     tooltip: "Makes the center of the main room reachable without Zelda's Lullaby or Hover Boots by entering the left cage and backflipping/sidehopping over the invisible gap",
   },
+  OOT_FOREST_MQ_CLIMBING_BLOCK_ROOM_TWIST_SWITCH_EARLY: {
+    game: 'oot',
+    name: "Hit/Reach the Forest MQ Twisting Switch While It Is Blocked",
+    tooltip: "This trick makes hitting/reaching this switch, through a variety of means, while the Ice Blocks are still covering the alcove.",
+  },
   OOT_ICE_CAVERN_ICICLES_STICKS: {
     game: 'oot',
     name: "Use Deku Sticks to Break Ice Cavern Stalagmite Icicles",
