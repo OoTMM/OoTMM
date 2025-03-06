@@ -893,7 +893,7 @@ export const SETTINGS = [{
   name: 'Fairy Fountain Fairy Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not fairies in fairy fountains are shuffled (OoT).',
+  description: 'Controls whether or not the fairies in fairy fountains are shuffled (OoT).<br>Includes the fairies in Ganon\'s Castle behind the invisible wall and in Desert Colossus from the oasis.',
   cond: hasOoT,
   default: false
 }, {
@@ -901,7 +901,7 @@ export const SETTINGS = [{
   name: 'Fairy Fountain Fairy Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not fairies in fairy fountains are shuffled (MM).',
+  description: 'Controls whether or not the fairies in the Beneath the Well fairy fountain are shuffled (MM).',
   cond: hasMM,
   default: false
 }, {
