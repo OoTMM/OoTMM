@@ -2204,7 +2204,7 @@ export const SETTINGS = [{
   name: 'Shared Hookshots',
   category: 'items.shared',
   type: 'boolean',
-  description: 'Combines the Hookshots from OoT and MM into two progressive items for both games.<br>If "Short Hookshot in MM" is disabled, the MM Hookshot will be given along with the second progressive item.',
+  description: 'Combines the Hookshots from OoT and MM into two progressive items for both games.<br>If "Short Hookshot in MM" is disabled, the MM Hookshot will be given along with the first progressive item.',
   default: false,
   cond: hasOoTMM,
 }, {
