@@ -13,10 +13,10 @@
 #define BGICESHELTER_GET_TYPE(thisx) PARAMS_GET_U((thisx)->params, 8, 3)
 #define BGICESHELTER_NO_SWITCH_FLAG(thisx) PARAMS_GET_U((thisx)->params, 6, 1)
 
-static void BgIceShelter_Init(Actor* thisx, PlayState* play);
-void BgIceShelter_Destroy(Actor* thisx, PlayState* play);
-void BgIceShelter_Update(Actor* thisx, PlayState* play);
-void BgIceShelter_Draw(Actor* thisx, PlayState* play2);
+static void BgIceShelter_Init(Actor_BgIceShelter* this, PlayState* play);
+void BgIceShelter_Destroy(Actor_BgIceShelter* this, PlayState* play);
+void BgIceShelter_Update(Actor_BgIceShelter* this, PlayState* play);
+void BgIceShelter_Draw(Actor_BgIceShelter* this, PlayState* play2);
 
 void BgIceShelter_SetupIdle(Actor_BgIceShelter* this);
 void BgIceShelter_SetupMelt(Actor_BgIceShelter* this);
@@ -69,10 +69,47 @@ static ColliderCylinderInit sCylinderInit2 = {
     { 0, 0, 0, { 0, 0, 0 } },
 };
 
+static void BgIceShelter_Alias(Actor_BgIceShelter* this)
+{
+}
+
+static void BgIceShelter_InitXflag(Actor_BgIceShelter* this, PlayState* play)
+{
+    ComboItemOverride   o;
+    Xflag*              xflag;
+
+    /* Set the extended properties */
+    xflag = &this->xflag;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->dyna.actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->dyna.actor.actorIndex;
+
+    BgIceShelter_Alias(this);
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
+
+static int BgIceShelter_IsShuffled(Actor_BgIceShelter* this)
+{
+    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+}
+
+static int BgIceShelter_DropCustom(Actor_BgIceShelter* this, PlayState* play)
+{
+    if (!BgIceShelter_IsShuffled(this))
+        return 0;
+    EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+    return 1;
+}
+
+
 /**
  * Initializes either one or both cylinder colliders, depending on the actor's type.
  */
-static void BgIceShelter_InitColliders(Actor_BgIceShelter* this, PlayState* play) {
+void BgIceShelter_InitColliders(Actor_BgIceShelter* this, PlayState* play) {
     static s16 cylinderRadii[] = { 47, 33, 44, 41, 100 };
     static s16 cylinderHeights[] = { 80, 54, 90, 60, 200 };
 
@@ -130,10 +167,10 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 1000, ICHAIN_STOP),
 };
 
-void BgIceShelter_Init(Actor* thisx, PlayState* play) {
-    Actor_BgIceShelter* this = (Actor_BgIceShelter*)thisx;
+void BgIceShelter_Init(Actor_BgIceShelter* this, PlayState* play) {
     s16 type = BGICESHELTER_GET_TYPE(&this->dyna.actor);
 
+    BgIceShelter_InitXflag(this, play);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
 
     if (type == RED_ICE_KING_ZORA) {
@@ -177,9 +214,7 @@ void BgIceShelter_Init(Actor* thisx, PlayState* play) {
 
 }
 
-void BgIceShelter_Destroy(Actor* thisx, PlayState* play) {
-    Actor_BgIceShelter* this = (Actor_BgIceShelter*)thisx;
-
+void BgIceShelter_Destroy(Actor_BgIceShelter* this, PlayState* play) {
     switch (BGICESHELTER_GET_TYPE(&this->dyna.actor)) {
         case RED_ICE_PLATFORM:
         case RED_ICE_WALL:
@@ -321,17 +356,14 @@ void BgIceShelter_Idle(Actor_BgIceShelter* this, PlayState* play) {
     if (this->cylinder1.base.acFlags & AC_HIT) {
         this->cylinder1.base.acFlags &= ~AC_HIT;
 
-        if ((this->cylinder1.base.ac != NULL)) {
 
+        if (this->cylinder1.base.ac != NULL && (this->cylinder1.base.ac->id == ACTOR_EN_ICE_HONO ||
             // PATCH: Blue Fire Arrow
-            if (Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS) && this->cylinder1.base.ac->id == ACTOR_EN_ARROW && this->cylinder1.base.ac->type == 4)
-                this->cylinder1.base.ac->id = ACTOR_EN_ICE_HONO;
-
-            if (this->cylinder1.base.ac->id == ACTOR_EN_ICE_HONO) {
-                if (type == RED_ICE_KING_ZORA) {
-                    if (this->dyna.actor.parent != NULL) {
-                        this->dyna.actor.parent->freezeTimer = 50;
-                    }
+            (Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS) && this->cylinder1.base.ac->id == ACTOR_EN_ARROW && this->cylinder1.base.ac->params == 4)))
+        {
+            if (type == RED_ICE_KING_ZORA) {
+                if (this->dyna.actor.parent != NULL) {
+                    this->dyna.actor.parent->freezeTimer = 50;
                 }
             }
 
@@ -412,6 +444,7 @@ void BgIceShelter_Melt(Actor_BgIceShelter* this, PlayState* play) {
     sSteamSpawnFuncs[type](this, play, particleSpawningChance, sSteamEffectScales[type]);
 
     if (this->alpha <= 0) {
+        BgIceShelter_DropCustom(this, play);
         if (!BGICESHELTER_NO_SWITCH_FLAG(&this->dyna.actor)) {
             Flags_SetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6));
         }
@@ -424,15 +457,28 @@ void BgIceShelter_Melt(Actor_BgIceShelter* this, PlayState* play) {
     }
 }
 
-void BgIceShelter_Update(Actor* thisx, PlayState* play) {
-    Actor_BgIceShelter* this = (Actor_BgIceShelter*)thisx;
-
+void BgIceShelter_Update(Actor_BgIceShelter* this, PlayState* play) {
     this->actionFunc(this, play);
 }
 
-void BgIceShelter_Draw(Actor* thisx, PlayState* play2) {
-    PlayState* play = play2;
-    Actor_BgIceShelter* this = (Actor_BgIceShelter*)thisx;
+static int BgIceShelter_CsmcType(Actor_BgIceShelter* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!BgIceShelter_IsShuffled(this))
+        return CSMC_HEART; // default red ice color
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+
+void BgIceShelter_Draw(Actor_BgIceShelter* this, PlayState* play) {
+    const Color_RGB8 *color;
+    int type;
 
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -449,7 +495,16 @@ void BgIceShelter_Draw(Actor* thisx, PlayState* play2) {
             break;
     }
 
-    gDPSetEnvColor(POLY_XLU_DISP++, 255, 0, 0, this->alpha);
+    type = BgIceShelter_CsmcType(this, play);
+    color = csmcTypeColor(type);
+    switch(type)
+    {
+    case CSMC_NORMAL:
+        gDPSetEnvColor(POLY_XLU_DISP++, 128, 0, 0, 128);
+        break;
+    default:
+        gDPSetEnvColor(POLY_XLU_DISP++, color->r, color->g, color->b, this->alpha);
+    }
 
     switch (BGICESHELTER_GET_TYPE(&this->dyna.actor)) {
         case RED_ICE_LARGE:

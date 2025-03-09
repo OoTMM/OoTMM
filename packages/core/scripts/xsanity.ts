@@ -168,6 +168,7 @@ const ACTORS_OOT = {
   //DOOR_ANA: 0x9b,
   OBJ_HAMISHI: 0x1d2,
   BG_ICICLE: 0x1c7,
+  BG_ICE_SHELTER: 0x0ef,
 };
 
 const ACTORS_MM = {
@@ -1382,6 +1383,17 @@ function actorHandlerMmBgIcicle(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Icicle', type: 'icicle' });
 }
 
+function actorHandlerOotBgIceShelter(checks: Check[], ra: RoomActor) {
+  switch(ra.actor.params >> 8) {
+    case 0: // Large
+    case 1: // Small
+    case 2: // Weird structure on Map Chest in MQ
+      checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Ice', type: 'redice' });
+    default:
+      return;
+  }
+}
+
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
@@ -1393,6 +1405,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_MURE2]: actorHandlerOotObjMure2,
   [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_OOT.BG_ICICLE]: actorHandlerOotBgIcicle,
+  [ACTORS_OOT.BG_ICE_SHELTER]: actorHandlerOotBgIceShelter,
 };
 
 const ACTORS_HANDLERS_MM = {

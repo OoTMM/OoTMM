@@ -1217,6 +1217,11 @@ export class LogicPassWorldTransform {
       this.removeLocations(data);
     }
 
+    if(!settings.shuffleRedIceOot) {
+      const data = POOL.oot.filter((x: any) => x.type === 'redice').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(data);
+    }
+
     /* Carpenters */
     if (['open', 'single'].includes(settings.gerudoFortress)) {
       this.removeLocations(['OOT Gerudo Fortress Jail 2', 'OOT Gerudo Fortress Jail 3', 'OOT Gerudo Fortress Jail 4']);

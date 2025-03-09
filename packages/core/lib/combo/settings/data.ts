@@ -825,6 +825,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false,
 }, {
+  key: 'shuffleRedIceOot',
+  name: 'Red Ice Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the red ice drop an item for thawing it (OoT)',
+  cond: hasOoT,
+  default: false,
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

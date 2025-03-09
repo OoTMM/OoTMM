@@ -16,11 +16,14 @@ typedef enum RedIceType {
 } RedIceType;
 
 typedef struct Actor_BgIceShelter {
-    /* 0x0000 */ DynaPolyActor dyna;
-    /* 0x0164 */ Actor_BgIceShelterActionFunc actionFunc;
-    /* 0x0168 */ ColliderCylinder cylinder1; // Used to detect blue fire and also as OC for no-dynapoly types
-    /* 0x01B4 */ ColliderCylinder cylinder2; // Only used by no-dynapoly types to make weapons bounce off
-    /* 0x0200 */ s16 alpha;
+    DynaPolyActor dyna;
+    Actor_BgIceShelterActionFunc actionFunc;
+    ColliderCylinder cylinder1; // Used to detect blue fire and also as OC for no-dynapoly types
+    ColliderCylinder cylinder2; // Only used by no-dynapoly types to make weapons bounce off
+    s16 alpha;
+
+    Xflag xflag;
+    u8 isExtended;
 } Actor_BgIceShelter; // size = 0x0204
 
 #endif

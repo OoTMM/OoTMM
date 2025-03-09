@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Add the ability to shuffle the drops from Red Boulders in OoT and MM.
 - Add the ability to shuffle the Purple Rupees from the OoT Frogs.
 - Add the ability to shuffle the drops from Icicles (**stalagmites** only) in OoT and MM.
+- Add the ability to shuffle the drops from thawing Red Ice in OoT.
 
 ### Changed
 
