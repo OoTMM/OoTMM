@@ -115,7 +115,7 @@ void BgIceShelter_InitColliders(Actor_BgIceShelter* this, PlayState* play) {
 
     if(Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS)) {
         sCylinderInit2.elem.acDmgInfo.dmgFlags = 0x4fc1eff6;
-        cylinderRadii[4] = 20521;
+        cylinderRadii[4] = 80;
         cylinderHeights[4] = 90;
     }
 
