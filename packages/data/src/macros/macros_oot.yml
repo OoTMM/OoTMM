@@ -52,6 +52,7 @@
 "can_play_cross_soaring": "can_play_cross(MM_SONG_SOARING) && ocarina_button_up && ocarina_button_down && ocarina_button_left"
 
 "can_swim": "true"
+"can_swim_or_sink": "can_swim || has_iron_boots"
 
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
