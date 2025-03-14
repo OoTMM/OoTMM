@@ -1957,7 +1957,7 @@
 "Zora Domain Shortcut":
   region: ZORA_DOMAIN
   exits:
-    "Zora Domain Underwater": "true"
+    "Zora Domain Underwater": "is_adult || can_swim"
     "Lake Hylia": "true"
 "Zora Domain Back":
   region: ZORA_DOMAIN
