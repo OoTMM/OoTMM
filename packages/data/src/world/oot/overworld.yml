@@ -66,6 +66,17 @@
   locations:
     "Hatch Chicken": "age_child_trade && has(WEIRD_EGG)"
     "Hatch Pocket Cucco": "is_adult && has(POCKET_EGG)"
+"GENERIC_GROTTO_EVENTS":
+  region: NONE
+  age_change: false
+  events:
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
+    RUPEES: "can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
+    MAGIC: "can_cut_grass"
+    FISH: "has_bottle"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
 "Link's House":
   region: ENTRANCE
   exits:
@@ -76,6 +87,7 @@
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
+    "Kokiri Forest Child": "is_child"
     "Kokiri Forest Grass": "can_cut_grass"
     "Link's House": "true"
     "Mido's House": "true"
@@ -97,31 +109,35 @@
     MIDO_MOVED: "can_move_mido"
     BEAN_KOKIRI_FOREST: "can_use_beans"
   locations:
-    "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
-    "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || (climb_anywhere && can_damage_skull)) && gs_night"
-    "Kokiri Forest Rupee Child 1": "is_child"
-    "Kokiri Forest Rupee Child 2": "is_child"
-    "Kokiri Forest Rupee Crawl 1": "is_child"
-    "Kokiri Forest Rupee Crawl 2": "is_child"
-    "Kokiri Forest Heart 1": "is_child"
-    "Kokiri Forest Heart 2": "is_child"
-    "Kokiri Forest Heart 3": "is_child"
-    "Kokiri Forest Wonder Item Invisible Rupee 1": "is_child"
-    "Kokiri Forest Wonder Item Invisible Rupee 2": "is_child"
-    "Kokiri Forest Wonder Item Invisible Rupee 3": "is_child"
-    "Kokiri Forest Wonder Item Invisible Rupee 4": "is_child"
-    "Kokiri Forest Wonder Item Sign": "is_child && can_use_sword"
-    "Kokiri Forest Wonder Item Midair 1": "is_child"
-    "Kokiri Forest Wonder Item Midair 2": "is_child"
-    "Kokiri Forest Wonder Item Midair 3": "is_child"
-    "Kokiri Forest Wonder Item Crawl 1": "is_child"
-    "Kokiri Forest Wonder Item Crawl 2": "is_child"
-    "Kokiri Forest Wonder Item Platforms 1": "is_child"
-    "Kokiri Forest Wonder Item Platforms 2": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
+"Kokiri Forest Child":
+  region: KOKIRI_FOREST
+  age_change: false
+  locations:
+    "Kokiri Forest Kokiri Sword Chest": "true"
+    "Kokiri Forest GS Night Child": "gs_night && can_damage_skull"
+    "Kokiri Forest Rupee Child 1": "true"
+    "Kokiri Forest Rupee Child 2": "true"
+    "Kokiri Forest Rupee Crawl 1": "true"
+    "Kokiri Forest Rupee Crawl 2": "true"
+    "Kokiri Forest Heart 1": "true"
+    "Kokiri Forest Heart 2": "true"
+    "Kokiri Forest Heart 3": "true"
+    "Kokiri Forest Wonder Item Invisible Rupee 1": "true"
+    "Kokiri Forest Wonder Item Invisible Rupee 2": "true"
+    "Kokiri Forest Wonder Item Invisible Rupee 3": "true"
+    "Kokiri Forest Wonder Item Invisible Rupee 4": "true"
+    "Kokiri Forest Wonder Item Midair 1": "true"
+    "Kokiri Forest Wonder Item Midair 2": "true"
+    "Kokiri Forest Wonder Item Midair 3": "true"
+    "Kokiri Forest Wonder Item Crawl 1": "true"
+    "Kokiri Forest Wonder Item Crawl 2": "true"
+    "Kokiri Forest Wonder Item Platforms 1": "true"
+    "Kokiri Forest Wonder Item Platforms 2": "true"
+    "Kokiri Forest Wonder Item Sign": "can_use_sword"
 "Kokiri Forest Grass":
   region: KOKIRI_FOREST
   age_change: false
@@ -248,15 +264,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Kokiri Forest": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Kokiri Forest Storms Grotto": "true"
     "Kokiri Forest Storms Grotto Grass 1": "can_cut_grass"
@@ -385,15 +394,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Hyrule Field": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Open": "true"
     "Hyrule Field Grotto Open Grass 1": "can_cut_grass"
@@ -411,15 +413,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Hyrule Field": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Southeast": "true"
     "Hyrule Field Grotto Southeast Grass 1": "can_cut_grass"
@@ -437,15 +432,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Hyrule Field": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Market": "true"
     "Hyrule Field Grotto Market Grass 1": "can_cut_grass"
@@ -1041,15 +1029,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Lost Woods": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Lost Woods Grotto Generic": "true"
     "Lost Woods Grotto Generic Grass 1": "can_cut_grass"
@@ -1407,15 +1388,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Kakariko Back": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Kakariko Grotto Back": "true"
     "Kakariko Grotto Back Grass 1": "can_cut_grass"
@@ -1621,15 +1595,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Death Mountain": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Death Mountain Trail Grotto": "true"
     "Death Mountain Trail Grotto Grass 1": "can_cut_grass"
@@ -1879,15 +1846,8 @@
 "Zora River Open Grotto":
   region: ENTRANCE
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Zora River": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Zora River Grotto": "true"
     "Zora River Grotto Grass 1": "can_cut_grass"
@@ -2315,15 +2275,8 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GENERIC_GROTTO_EVENTS": "true"
     "Death Mountain Crater Top": "true"
-  events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult && can_cut_grass"
-    MAGIC: "can_cut_grass"
-    FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Death Mountain Crater Grotto": "true"
     "Death Mountain Crater Grotto Grass 1": "can_cut_grass"
