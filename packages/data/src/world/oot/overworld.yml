@@ -2002,7 +2002,7 @@
     "Zora Domain Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_raw(2))"
-    "Fishing Pond": "is_child || lake_water_control || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
+    "Lake Hylia Near Pond": "(can_swim && (is_child || lake_water_control)) || (is_adult && (scarecrow_hookshot || hookshot_anywhere || climb_anywhere)) || can_ride_bean(BEAN_LAKE_HYLIA)"
     "Lake Hylia Grotto": "true"
   events:
     CLEAR_STATE_LAKE: "is_adult && (wisp_enabled(BOSS_MORPHA, MEDALLION_WATER) || event(WISP_CLEAR_STATE_LAKE))"
@@ -2080,12 +2080,18 @@
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
     "Lake Hylia Gossip Southwest Lake": "true"
+"Lake Hylia Near Pond":
+  region: LAKE_HYLIA
+  time: flow
+  exits:
+    "Fishing Pond": "true"
+    "Lake Hylia": "is_adult || can_swim_or_sink"
 "Laboratory":
   region: ENTRANCE
   exits:
     "Lake Hylia": "true"
   locations:
-    "Laboratory Dive": "soul_scientist && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot))"
+    "Laboratory Dive": "soul_scientist && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot && can_swim))"
     "Laboratory Eye Drops": "soul_scientist && adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "gs && has_iron_boots && can_hookshot"
     "Laboratory Rupee 1": "can_dive_big"
@@ -2095,7 +2101,7 @@
   region: ENTRANCE
   age_change: false
   exits:
-    "Lake Hylia": "true"
+    "Lake Hylia Near Pond": "true"
   locations:
     "Fishing Pond Child": "is_child && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(CHILD_FISH, 7, 14) || has_pond_fish(CHILD_LOACH, 14, 19))"
     "Fishing Pond Adult": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(ADULT_FISH, 8, 25) || has_pond_fish(ADULT_LOACH, 29, 36))"

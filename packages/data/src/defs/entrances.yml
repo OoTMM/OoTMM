@@ -98,7 +98,7 @@ OOT_HOUSE_KNOW_IT_ALL:                          { game: oot, id: 0x0c9, type: in
 OOT_KOKIRI_SHOP:                                { game: oot, id: 0x0c1, type: indoors, areas: ["OOT Kokiri Forest", "OOT Kokiri Shop"], reverse: OOT_KOKIRI_FOREST_FROM_SHOP }
 OOT_HOUSE_POTS:                                 { game: oot, id: 0x07e, type: indoors, areas: ["OOT Market Entryway", "OOT Market Pot House"], reverse: OOT_MARKET_ENTRANCE_FROM_POTS }
 OOT_LABORATORY:                                 { game: oot, id: 0x043, type: indoors, areas: ["OOT Lake Hylia", "OOT Laboratory"], reverse: OOT_LAKE_HYLIA_FROM_LABORATORY }
-OOT_FISHING_POND:                               { game: oot, id: 0x45f, type: indoors, areas: ["OOT Lake Hylia", "OOT Fishing Pond"], reverse: OOT_LAKE_HYLIA_FROM_FISHING_POND }
+OOT_FISHING_POND:                               { game: oot, id: 0x45f, type: indoors, areas: ["OOT Lake Hylia Near Pond", "OOT Fishing Pond"], reverse: OOT_LAKE_HYLIA_FROM_FISHING_POND }
 OOT_VALLEY_TENT:                                { game: oot, id: 0x3a0, type: indoors, areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Valley Tent"], reverse: OOT_GERUDO_VALLEY_FROM_TENT }
 OOT_HOUSE_CARPENTER:                            { game: oot, id: 0x2fd, type: indoors, areas: ["OOT Kakariko", "OOT Kakariko Carpenter House"], reverse: OOT_KAKARIKO_FROM_CARPENTER }
 OOT_HOUSE_SKULLTULA:                            { game: oot, id: 0x550, type: indoors, areas: ["OOT Kakariko", "OOT Skulltula House"], reverse: OOT_KAKARIKO_FROM_SKULLTULA }
@@ -138,7 +138,7 @@ OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL:             { game: oot, id: 0x26a, type: in
 OOT_KOKIRI_FOREST_FROM_SHOP:                    { game: oot, id: 0x266, type: indoors-exit, maps: [NONE, OOT_KOKIRI_FOREST], areas: ["OOT Kokiri Shop", "OOT Kokiri Forest"], reverse: OOT_KOKIRI_SHOP }
 OOT_MARKET_ENTRANCE_FROM_POTS:                  { game: oot, id: 0x26e, type: indoors-exit, maps: [NONE, OOT_MARKET], areas: ["OOT Market Pot House", "OOT Market Entryway"], reverse: OOT_HOUSE_POTS }
 OOT_LAKE_HYLIA_FROM_LABORATORY:                 { game: oot, id: 0x3cc, type: indoors-exit, maps: [NONE, OOT_LAKE_HYLIA], areas: ["OOT Laboratory", "OOT Lake Hylia"], reverse: OOT_LABORATORY }
-OOT_LAKE_HYLIA_FROM_FISHING_POND:               { game: oot, id: 0x309, type: indoors-exit, maps: [NONE, OOT_LAKE_HYLIA], areas: ["OOT Fishing Pond", "OOT Lake Hylia"], reverse: OOT_FISHING_POND }
+OOT_LAKE_HYLIA_FROM_FISHING_POND:               { game: oot, id: 0x309, type: indoors-exit, maps: [NONE, OOT_LAKE_HYLIA], areas: ["OOT Fishing Pond", "OOT Lake Hylia Near Pond"], reverse: OOT_FISHING_POND }
 OOT_GERUDO_VALLEY_FROM_TENT:                    { game: oot, id: 0x3d0, type: indoors-exit, maps: [NONE, OOT_GERUDO_VALLEY], areas: ["OOT Gerudo Valley Tent", "OOT Gerudo Valley After Bridge"], reverse: OOT_VALLEY_TENT }
 OOT_KAKARIKO_FROM_CARPENTER:                    { game: oot, id: 0x349, type: indoors-exit, maps: [NONE, OOT_KAKARIKO], areas: ["OOT Kakariko Carpenter House", "OOT Kakariko"], reverse: OOT_HOUSE_CARPENTER }
 OOT_KAKARIKO_FROM_SKULLTULA:                    { game: oot, id: 0x4ee, type: indoors-exit, maps: [NONE, OOT_KAKARIKO], areas: ["OOT Skulltula House", "OOT Kakariko"], reverse: OOT_HOUSE_SKULLTULA }
