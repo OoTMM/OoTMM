@@ -2023,7 +2023,7 @@
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
-    "Lake Hylia Island Big Fairy": "is_child && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
+    "Lake Hylia Island Big Fairy": "can_play_sun && ((is_child && (can_swim || (has_iron_boots && longshot_anywhere))) || (is_adult && ((lake_water_control && can_swim) || scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     # These pots do exist in the vanilla game but they fail to load
     "Lake Hylia Pot 1": "is_child"
     "Lake Hylia Pot 2": "is_child"
