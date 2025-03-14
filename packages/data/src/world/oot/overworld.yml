@@ -1958,7 +1958,7 @@
   region: ZORA_DOMAIN
   exits:
     "Zora Domain Underwater": "is_adult || can_swim"
-    "Lake Hylia": "true"
+    "Lake Hylia Near Shortcut": "can_swim"
 "Zora Domain Back":
   region: ZORA_DOMAIN
   exits:
@@ -1999,7 +1999,7 @@
   exits:
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
-    "Zora Domain Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
+    "Lake Hylia Near Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_raw(2))"
     "Lake Hylia Near Pond": "(can_swim && (is_child || lake_water_control)) || (is_adult && (scarecrow_hookshot || hookshot_anywhere || climb_anywhere)) || can_ride_bean(BEAN_LAKE_HYLIA)"
@@ -2016,7 +2016,7 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
   locations:
-    "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
+    "Lake Hylia Underwater Bottle": "is_child && can_dive_small && can_swim"
     "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (lake_water_control || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
@@ -2080,6 +2080,12 @@
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
     "Lake Hylia Gossip Southwest Lake": "true"
+"Lake Hylia Near Shortcut":
+  region: LAKE_HYLIA
+  age_change: false
+  exits:
+    "Lake Hylia": "is_adult || can_swim"
+    "Zora Domain Shortcut": "is_adult || can_swim"
 "Lake Hylia Near Pond":
   region: LAKE_HYLIA
   time: flow
