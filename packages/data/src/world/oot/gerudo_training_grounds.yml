@@ -91,7 +91,7 @@
 "Gerudo Training Grounds Water":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Underwater": "can_play_time && has_iron_boots && (has_tunic_zora || longshot_anywhere)"
+    "Gerudo Training Grounds Underwater": "can_play_time && has_iron_boots && has_tunic_zora"
   locations:
     "Gerudo Training Water": "silver_rupees_gtg_water"
 "Gerudo Training Grounds Underwater":
