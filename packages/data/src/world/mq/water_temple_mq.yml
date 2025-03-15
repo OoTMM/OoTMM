@@ -1,7 +1,7 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "Lake Hylia": "true"
+    "Lake Hylia Near Water Temple": "true"
     "Water Temple Entrance": "true"
 "Water Temple Entrance":
   dungeon: Water
@@ -171,7 +171,7 @@
     "MQ Water Temple Pot River 2": "true"
 "Water Temple River End":
   dungeon: Water
-  exits: 
+  exits:
     "Water Temple River Start": "has_iron_boots && can_hookshot"
     "Water Temple Dragon Room": "true"
 "Water Temple Dragon Room":
@@ -208,7 +208,7 @@
     "MQ Water Temple Boss Key Room In Center Large Crate 4": "true"
 "Water Temple Boss Key Room Switch Side":
   dungeon: Water
-  exits: 
+  exits:
     "Water Temple Boss Key Room Dragon Side": "can_use_din && (can_hit_triggers_distance || climb_anywhere || can_hookshot)"
     "Water Temple Main Room Bottom Floor": "event(WATER_GATES)"
   events:
