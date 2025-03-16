@@ -86,12 +86,12 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Basement": "true"
-    "Jabu-Jabu Elevator": "true"
+    "Jabu-Jabu Elevator": "(can_swim || is_adult || time_travel_at_will || has_hover_boots) && (has_ranged_weapon || has_bombs)" #|| Has soul_ruto && settingRutoF1=false
   locations:
     "Jabu-Jabu GS Water Switch": "gs"
-    "Jabu-Jabu Pot Alcove 1": "true"
-    "Jabu-Jabu Pot Alcove 2": "true"
-    "Jabu-Jabu Pot Alcove 3": "true"
+    "Jabu-Jabu Pot Alcove 1": "can_swim || has_hover_boots || climb_anywhere"
+    "Jabu-Jabu Pot Alcove 2": "can_swim || has_hover_boots || climb_anywhere"
+    "Jabu-Jabu Pot Alcove 3": "can_swim || has_hover_boots || climb_anywhere"
 "Jabu-Jabu Before Big Octo":
   dungeon: JJ
   exits:
