@@ -1306,7 +1306,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "((event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din) && (has(MASK_DEKU) || (can_swim && (has_hover_boots || can_use_nayru) || is_adult || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots))) || has_mask_zora"
+    "Swamp Back": "((event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din) && (has(MASK_DEKU) || (can_swim && (has_hover_boots || can_use_nayru)) || is_adult || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots))) || has_mask_zora"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
