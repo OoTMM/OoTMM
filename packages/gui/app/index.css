@@ -218,6 +218,19 @@ main {
   width: auto;
 }
 
+.rom-config-wrapper {
+  background: #eee;
+}
+
+.rom-config {
+  background: white;
+  width: 1024px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+
 .rom-config-form {
   display: flex;
   flex-direction: column;
