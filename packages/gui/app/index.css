@@ -5,6 +5,8 @@
 
 :root {
   --margin: 0.5rem;
+
+  --color-border: #ddd;
 }
 
 * {
@@ -226,7 +228,7 @@ main {
   background: white;
   width: 1024px;
   margin: 0 auto;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   padding: 2rem;
 }
@@ -244,7 +246,7 @@ main {
 }
 
 .panel {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   background: #eee;
   padding: 3rem;
   margin: 3rem 1rem;
@@ -281,7 +283,7 @@ main {
   flex-direction: column;
   justify-content: center;
   font-size: 1.2em;
-  border: 1px solid #aaa;
+  border: 1px solid var(--color-border);
 }
 
 .warning {
@@ -309,7 +311,7 @@ form {
 form.vertical {
   display: inline-flex;
   flex-direction: column;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 1rem;
   margin: var(--margin);
   margin-top: 3rem;
@@ -340,7 +342,8 @@ input[type=checkbox] {
 }
 
 input[type=text], input[type=number], select {
-  border: 1px solid #aaa;
+  border: 1px solid var(--color-border);
+  background: white;
 }
 
 input[type=text], input[type=number], select, .select {
@@ -387,7 +390,7 @@ input[type=text]:focus, select:focus, textarea:focus {
 .double-list-col {
   flex: 1;
   flex-direction: column;
-  border: 1px solid #aaa;
+  border: 1px solid var(--color-border);
   padding: 0 0.5em;
   height: 35em;
   min-width: 20em;
@@ -455,7 +458,7 @@ li {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  border: 1px solid #aaa;
+  border: 1px solid var(--color-border);
   border-radius: 5%;
   background: #eee;
   padding: 1em;
