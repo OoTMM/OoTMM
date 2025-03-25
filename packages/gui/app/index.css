@@ -5,7 +5,7 @@
 
 :root {
   --margin: 0.5rem;
-  --radius: 0.5rem;
+  --radius: 0.25rem;
 
   --color-border: #bbb;
   --color-focus: #105fc5;
@@ -15,12 +15,7 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body {
-  font-size: 1.6rem;
   font-family: Sailec, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   color: #222;
 }
@@ -231,7 +226,7 @@ main {
   width: 1024px;
   margin: 0 auto;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   padding: 2rem;
 }
 
@@ -239,15 +234,15 @@ main {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 
 .rom-config-header-title {
-  font-size: 3rem;
+  font-size: 1.75rem;
 }
 
 .rom-config-header-version {
-  font-size: 2rem;
+  font-size: 1.25rem;
 }
 
 .rom-config-form {
@@ -355,8 +350,8 @@ input[type=checkbox] {
   display: grid;
   place-content: center;
   flex: none;
-  height: 3rem;
-  width: 3rem;
+  height: 1.8rem;
+  width: 1.8rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   margin-right: 0.5em;
@@ -365,8 +360,8 @@ input[type=checkbox] {
 
 input[type=checkbox]:checked::before {
   content: "";
-  width: 2rem;
-  height: 2rem;
+  width: 1.2rem;
+  height: 1.2rem;
   background: var(--color-focus);
   border-radius: 2px;
 }
@@ -377,10 +372,9 @@ input[type=text], input[type=number], select {
 }
 
 input[type=text], input[type=number], select, .select {
-  font-size: 1.6rem;
   flex-basis: 100%;
-  padding: 0.5em 0.2em;
-  margin: 0.5em 0;
+  padding: 0.5rem 0.2rem;
+  margin: 0.5rem 0;
   border-radius: var(--radius);
   outline: none;
 }
