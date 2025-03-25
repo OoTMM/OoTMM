@@ -24,8 +24,10 @@ export function RomConfig() {
   return (
     <main className="rom-config-wrapper">
       <div className="rom-config">
-        <h1>OoTMM Web Generator</h1>
-        <h2>Version: {process.env.VERSION}</h2>
+        <div className="rom-config-header">
+          <span className="rom-config-header-title">OoTMM Web Generator</span>
+          <span className="rom-config-header-version">{process.env.VERSION}</span>
+        </div>
         {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
         {result && <Result archive={archive} warnings={warnings}/>}
         <form className="rom-config-form"

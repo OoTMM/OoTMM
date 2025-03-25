@@ -235,6 +235,21 @@ main {
   padding: 2rem;
 }
 
+.rom-config-header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.rom-config-header-title {
+  font-size: 3rem;
+}
+
+.rom-config-header-version {
+  font-size: 2rem;
+}
+
 .rom-config-form {
   display: flex;
   flex-direction: column;
