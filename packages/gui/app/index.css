@@ -4,7 +4,7 @@
 @import 'react-tooltip/dist/react-tooltip.css';
 
 :root {
-  --margin: 0.5rem;
+  --margin: 0.3rem;
   --radius: 0.25rem;
 
   --color-border: #bbb;
@@ -227,7 +227,7 @@ main {
   margin: 0 auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .rom-config-header {
