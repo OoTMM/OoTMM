@@ -16,7 +16,7 @@ export const SettingsImportExport = () => {
   return (
     <label>
       Import/Export Settings
-      <textarea class='settings-string' value={settingsString} onInput={x => onInput(x.currentTarget.value)}/>
+      <input type="text" spellcheck={false} value={settingsString} onClick={(e) => { e.currentTarget.focus(); e.currentTarget.select(); }} onInput={x => onInput(x.currentTarget.value)}/>
     </label>
   )
 };
