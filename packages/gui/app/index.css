@@ -4,11 +4,17 @@
 @import 'react-tooltip/dist/react-tooltip.css';
 
 :root {
+  color-scheme: light dark;
+
   --margin: 0.3rem;
   --radius: 0.25rem;
 
-  --color-border: #bbb;
+  --color-border: light-dark(#bbb, #555);
   --color-focus: #105fc5;
+
+  --color-text: light-dark(#111, #eee);
+  --color-background: light-dark(#ffffff, #333);
+  --color-background-alt: light-dark(#eee, #222);
 }
 
 * {
@@ -17,7 +23,8 @@
 
 body {
   font-family: Sailec, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  color: #222;
+  color: var(--color-text);
+  background: var(--color-background);
 }
 
 body, #root {
@@ -218,11 +225,11 @@ main {
 }
 
 .rom-config-wrapper {
-  background: #eee;
+  background: var(--color-background-alt);
 }
 
 .rom-config {
-  background: white;
+  background: var(--color-background);
   width: 1024px;
   margin: 0 auto;
   border: 1px solid var(--color-border);
@@ -355,7 +362,7 @@ input[type=checkbox] {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   margin-right: 0.5em;
-  background: white;
+  background: var(--color-background);
 }
 
 input[type=checkbox]:checked::before {
@@ -366,12 +373,35 @@ input[type=checkbox]:checked::before {
   border-radius: 2px;
 }
 
-input[type=text], input[type=number], select {
-  border: 1px solid var(--color-border);
-  background: white;
+.react-select-container {
+  flex-basis: 100%;
+  margin: 0.5rem 0;
 }
 
-input[type=text], input[type=number], select, .select {
+.react-select__control {
+  background: var(--color-background) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.react-select__input-container, .react-select__single-value {
+  color: var(--color-text) !important;
+}
+
+.react-select__menu {
+  background: var(--color-background) !important;
+  color: var(--color-text) !important;
+}
+
+.react-select__option:hover {
+  background: var(--color-background-alt) !important;
+}
+
+input[type=text], input[type=number], select {
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+input[type=text], input[type=number], select {
   flex-basis: 100%;
   padding: 0.5rem 0.2rem;
   margin: 0.5rem 0;
@@ -483,7 +513,7 @@ li {
   cursor: pointer;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  background: #eee;
+  background: var(--color-background-alt);
   padding: 1em;
   margin: 1em;
   transform: scale(1);

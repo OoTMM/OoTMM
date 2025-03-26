@@ -117,6 +117,8 @@ function SettingSet({ setting }: { setting: string }) {
       />
       {s.type === 'specific' &&
         <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
           isMulti
           options={options} value={valuesSet}
           onChange={(v) => handleChangeSpecific(v)}
@@ -125,12 +127,16 @@ function SettingSet({ setting }: { setting: string }) {
       {s.type === 'random-mixed' && <>
         <label>Disabled</label>
         <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
           isMulti
           options={optionsUnset} value={valuesUnset}
           onChange={(v) => handleChangeRandomMixedUnset(v)}
         />
         <label>Enabled</label>
         <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
           isMulti
           options={optionsSet} value={valuesSet}
           onChange={(v) => handleChangeRandomMixedSet(v)}
