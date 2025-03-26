@@ -63,6 +63,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@alttiri/base85':
+        specifier: ^1.8.0
+        version: 1.8.0
       '@ootmm/data':
         specifier: '*'
         version: link:../data
@@ -190,6 +193,9 @@ importers:
         version: link:../gui
 
 packages:
+
+  '@alttiri/base85@1.8.0':
+    resolution: {integrity: sha512-HrfdFtOPJ2dlZjHcCDgd9o4ph9+iQnZ+ayWNALImDm1VLv46aMriO13QZ0bpZuvDc8XbPcQK2rb4o38Xt+MMpA==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -3363,6 +3369,8 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
+
+  '@alttiri/base85@1.8.0': {}
 
   '@ampproject/remapping@2.3.0':
     dependencies:

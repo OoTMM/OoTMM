@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@alttiri/base85": "^1.8.0",
     "@ootmm/data": "*",
     "@ootmm/tools": "*",
     "crc-32": "^1.2.2",
@@ -46,8 +47,12 @@
           "{projectRoot}/include/**/*",
           "{projectRoot}/src/**/*",
           "{projectRoot}/CMakeLists.txt",
-          { "env": "VERSION" },
-          { "env": "NODE_ENV" }
+          {
+            "env": "VERSION"
+          },
+          {
+            "env": "NODE_ENV"
+          }
         ],
         "outputs": [
           "{projectRoot}/dist/**/*",
@@ -63,8 +68,16 @@
           "build"
         ]
       },
-      "start": {"dependsOn": ["build"]},
-      "start:config": {"dependsOn": ["build"]}
+      "start": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start:config": {
+        "dependsOn": [
+          "build"
+        ]
+      }
     }
   }
 }
