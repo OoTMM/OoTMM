@@ -133,8 +133,8 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-  background: white;
-  border: 1px solid #333;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
 }
 
@@ -266,7 +266,7 @@ main {
 
 .panel {
   border: 1px solid var(--color-border);
-  background: #eee;
+  background: var(--color-background);
   padding: 3rem;
   margin: 3rem 1rem;
   border-radius: var(--radius);
@@ -286,7 +286,7 @@ main {
 .generator-modal-progress {
   position: absolute;
   top: 0;
-  background: #bbb;
+  background: var(--color-background-alt);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -415,7 +415,7 @@ input:focus, select:focus {
 
 .tooltip-link {
   margin: 0 0.5em;
-  color: #333;
+  color: var(--color-text);
 }
 
 .double-list {
