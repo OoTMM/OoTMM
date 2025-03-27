@@ -85,7 +85,6 @@ osInvalDCache = 0x8008f2f0;
 osInvalICache = 0x8008f270;
 osWritebackDCache = 0x8008a5e0;
 osWritebackDCacheAll = 0x800955c0;
-EnItem00_FixDrop = 0x800a7650;
 
 AudioLoad_InitTable = 0x8018f478;
 

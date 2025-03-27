@@ -84,7 +84,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
 
-static s16 bombDrop(s16 dropId)
+static int fixDropBomb(int dropId)
 {
     int hasChuBag;
     int hasBombBag;
@@ -122,29 +122,72 @@ static s16 bombDrop(s16 dropId)
     return dropId;
 }
 
+static int fixDropArrowSeeds(int size)
+{
+    static const s8 kDrops[] = { ITEM00_ARROWS_5, ITEM00_ARROWS_10, ITEM00_ARROWS_30, ITEM00_SEEDS, ITEM00_SEEDS, ITEM00_SEEDS };
+
+    int isAllowedArrows;
+    int isAllowedSeeds;
+    int index;
+
+    isAllowedArrows = TRUE;
+    isAllowedSeeds = TRUE;
+
+    if ((gSave.age == AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_BOW)) || gSave.info.inventory.upgrades.quiver == 0)
+        isAllowedArrows = FALSE;
+    if ((gSave.age == AGE_ADULT && !Config_Flag(CFG_OOT_AGELESS_SLINGSHOT)) || gSave.info.inventory.upgrades.bulletBag == 0)
+        isAllowedSeeds = FALSE;
+
+    if (!isAllowedArrows && !isAllowedSeeds)
+        return -1;
+
+    if (!isAllowedSeeds)
+        index = 0;
+    else if (!isAllowedArrows)
+        index = 1;
+    else
+        index = (Rand_ZeroOne() < 0.5f) ? 0 : 1;
+
+    return kDrops[index * 3 + size];
+}
+
 /* TODO: Flexible drops would ideally need to be patched on top of this */
-static s16 EnItem00_FixDropWrapper(s16 dropId)
+int EnItem00_FixDrop(int dropId)
 {
     switch (dropId)
     {
+    case ITEM00_STICK:
+        if (gSave.age == AGE_ADULT && !Config_Flag(CFG_OOT_AGELESS_STICKS))
+            dropId = ITEM00_RUPEE_GREEN;
+        break;
     case ITEM00_BOMB:
     case ITEM00_BOMBS_5:
     case ITEM00_BOMBS_5_ALT:
-        dropId = bombDrop(dropId);
+        dropId = fixDropBomb(dropId);
+        break;
+    case ITEM00_ARROWS_5: dropId = fixDropArrowSeeds(0); break;
+    case ITEM00_ARROWS_10: dropId = fixDropArrowSeeds(1); break;
+    case ITEM00_ARROWS_30: dropId = fixDropArrowSeeds(2); break;
+    case ITEM00_SEEDS: dropId = fixDropArrowSeeds(0); break;
+    case ITEM00_RECOVERY_HEART:
+        if (gSave.info.playerData.health >= gSave.info.playerData.healthCapacity)
+            dropId = ITEM00_RUPEE_GREEN;
+        break;
+    case ITEM00_MAGIC_SMALL:
+    case ITEM00_MAGIC_LARGE:
+        if (!gSave.info.playerData.isMagicAcquired)
+            dropId = -1;
         break;
     default:
         break;
     }
 
-    if (dropId == ITEM00_BOMBCHU)
-        return dropId;
-
-    return EnItem00_FixDrop(dropId);
+    return dropId;
 }
 
-PATCH_CALL(0x8001376c, EnItem00_FixDropWrapper);
-PATCH_CALL(0x80013998, EnItem00_FixDropWrapper);
-PATCH_CALL(0x80013dec, EnItem00_FixDropWrapper);
+PATCH_CALL(0x8001376c, EnItem00_FixDrop);
+PATCH_CALL(0x80013998, EnItem00_FixDrop);
+PATCH_CALL(0x80013dec, EnItem00_FixDrop);
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 {

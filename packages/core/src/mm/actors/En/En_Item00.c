@@ -70,7 +70,7 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, PlayState* play)
 
 PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);
 
-static s16 bombDrop(s16 dropId)
+static int dropBombs(int dropId)
 {
     int hasChuBag;
     int hasBombBag;
@@ -109,27 +109,40 @@ static s16 bombDrop(s16 dropId)
 }
 
 /* TODO: Flexible drops would ideally need to be patched on top of this */
-static s16 EnItem00_FixDropWrapper(s16 dropId)
+int EnItem00_FixDrop(int dropId)
 {
     switch (dropId)
     {
+    case ITEM00_ARROWS_10:
+    case ITEM00_ARROWS_30:
+    case ITEM00_ARROWS_40:
+    case ITEM00_ARROWS_50:
+        if (gSave.info.inventory.upgrades.quiver == 0)
+            dropId = -1;
+        break;
     case ITEM00_BOMB:
     case ITEM00_BOMBS_5:
-        dropId = bombDrop(dropId);
+        dropId = dropBombs(dropId);
+        break;
+    case ITEM00_RECOVERY_HEART:
+        if (gSave.info.playerData.health >= gSave.info.playerData.healthCapacity)
+            dropId = ITEM00_RUPEE_GREEN;
+        break;
+    case ITEM00_MAGIC_SMALL:
+    case ITEM00_MAGIC_LARGE:
+        if (!gSave.info.playerData.isMagicAcquired)
+            dropId = -1;
         break;
     default:
         break;
     }
 
-    if (dropId == ITEM00_BOMBCHU)
-        return dropId;
-
-    return EnItem00_FixDrop(dropId);
+    return dropId;
 }
 
-PATCH_CALL(0x800a7994, EnItem00_FixDropWrapper);
-PATCH_CALL(0x800a7c44, EnItem00_FixDropWrapper);
-PATCH_CALL(0x800a8024, EnItem00_FixDropWrapper);
+PATCH_CALL(0x800a7994, EnItem00_FixDrop);
+PATCH_CALL(0x800a7c44, EnItem00_FixDrop);
+PATCH_CALL(0x800a8024, EnItem00_FixDrop);
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 {
