@@ -41,8 +41,8 @@ export function exportSettings(settings: Settings): string {
 
   const j = JSON.stringify(diff);
   const compressed = deflateRaw(j, { level: 9 });
-  const str = encode85(compressed);
-  return `v2.${str}`;
+  const str = encode85(compressed, 'z85');
+  return `v2.z${str}`;
 }
 
 export function importSettingsRaw(str: string): PartialDeep<Settings> {
@@ -64,8 +64,14 @@ export function importSettings(str: string): Settings {
 }
 
 function importSettingsV2(str: string): any {
-  const data = str.slice(3);
-  const buf = decode85(data);
+  let data = str.slice(3);
+  let charset = "ascii85";
+  if (data[0] == 'z') {
+    data = data.slice(1);
+    charset = "z85";
+  }
+
+  const buf = decode85(data, charset);
   const decompressed = inflateRaw(buf, { to: 'string' });
   const partial = JSON.parse(decompressed);
   return partial;
