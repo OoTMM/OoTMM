@@ -125,39 +125,27 @@ void func_80954960(EnKanban* this) {
 
 static const char* EnKanban_LocName(PlayState* play)
 {
-    switch (play->sceneId)
+    int instanceId;
+
+    instanceId = Play_GetInstance(play);
+    switch (instanceId)
     {
-    case SCE_MM_GROTTOS:
-        switch (play->roomCtx.curRoom.num)
-        {
-        case 0x04:
-            /* Generic Grottos */
-            switch (gGrottoData & 0x1f)
-            {
-            case 0x13: return "Path to Snowhead Generic Grotto";
-            case 0x14: return "Ikana Valley Generic Grotto";
-            case 0x15: return "Zora Cape Generic Grotto";
-            case 0x16: return "Road to Ikana Generic Grotto";
-            case 0x17: return "Great Bay Coast Generic Grotto";
-            case 0x18: return "Ikana Graveyard Generic Grotto";
-            case 0x19: return "Twin Islands Generic Grotto";
-            case 0x1a: return "Termina Field Pillar Generic Grotto";
-            case 0x1b: return "Mountain Village Generic Grotto";
-            case 0x1c: return "Woods of Mystery Generic Grotto";
-            case 0x1d: return "Southern Swamp Generic Grotto";
-            case 0x1e: return "Road to Southern Swamp Generic Grotto";
-            case 0x1f: return "Termina Field Tall Grass Generic Grotto";
-            }
-            break;
-        case 0x0a:
-            switch (gLastScene)
-            {
-            case SCE_MM_TERMINA_FIELD: return "Termina Field Cow Grotto";
-            case SCE_MM_GREAT_BAY_COAST: return "Great Bay Coast Cow Grotto";
-            }
-            break;
-        }
-        break;
+    case INSTANCE_MM_GROTTO_GENERIC_PATH_TO_SNOWHEAD: return "Path to Snowhead Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_IKANA_VALLEY: return "Ikana Valley Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_ZORA_CAPE: return "Zora Cape Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_ROAD_TO_IKANA: return "Road to Ikana Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_GREAT_BAY_COAST: return "Great Bay Coast Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_IKANA_GRAVEYARD: return "Ikana Graveyard Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_TWIN_ISLANDS: return "Twin Islands Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_TERMINA_FIELD_PILLAR: return "Termina Field Pillar Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE: return "Mountain Village Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_WOODS_OF_MYSTERY: return "Woods of Mystery Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_SOUTHERN_SWAMP: return "Southern Swamp Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_ROAD_TO_SOUTHERN_SWAMP: return "Road to Southern Swamp Generic Grotto";
+    case INSTANCE_MM_GROTTO_GENERIC_TERMINA_FIELD_TALL_GRASS: return "Termina Field Tall Grass Generic Grotto";
+
+    case INSTANCE_MM_GROTTO_COW_TERMINA_FIELD: return "Termina Field Cow Grotto";
+    case INSTANCE_MM_GROTTO_COW_GREAT_BAY_COAST: return "Great Bay Coast Cow Grotto";
     }
 
     return "Unknown Location";
