@@ -90,6 +90,7 @@
 #include <combo/object_id.h>
 #include <combo/save.h>
 #include <combo/gi.h>
+#include <combo/instances.h>
 #include <combo/data/items.h>
 #include <combo/entrances.h>
 #include <combo/common/events.h>
@@ -202,6 +203,7 @@ void comboHandleAutoInvertClockSpeed(void);
 void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
+int  Play_GetInstance(PlayState* play);
 
 /* Ice Traps */
 void Play_UpdateIceTrap(PlayState* play);

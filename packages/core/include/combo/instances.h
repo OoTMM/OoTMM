@@ -1,0 +1,53 @@
+#ifndef COMBO_INSTANCES_H
+#define COMBO_INSTANCES_H
+
+#include <combo/scenes.h>
+
+#define INSTANCE_NONE 0x00
+
+#define INSTANCE_OOT_GROTTO_GENERIC_HYRULE_FIELD_MARKET                     0x01
+#define INSTANCE_OOT_GROTTO_GENERIC_HYRULE_FIELD_SOUTHEAST                  0x02
+#define INSTANCE_OOT_GROTTO_GENERIC_HYRULE_FIELD_OPEN                       0x03
+#define INSTANCE_OOT_GROTTO_GENERIC_KAKARIKO                                0x04
+#define INSTANCE_OOT_GROTTO_GENERIC_ZORA_RIVER                              0x05
+#define INSTANCE_OOT_GROTTO_GENERIC_KOKIRI_FOREST                           0x06
+#define INSTANCE_OOT_GROTTO_GENERIC_LOST_WOODS                              0x07
+#define INSTANCE_OOT_GROTTO_GENERIC_DEATH_MOUNTAIN_TRAIL                    0x08
+#define INSTANCE_OOT_GROTTO_GENERIC_DEATH_MOUNTAIN_CRATER                   0x09
+#define INSTANCE_OOT_GROTTO_SCRUB2_SACRED_FOREST_MEADOW                     0x0a
+#define INSTANCE_OOT_GROTTO_SCRUB2_ZORA_RIVER                               0x0b
+#define INSTANCE_OOT_GROTTO_SCRUB2_GERUDO_VALLEY                            0x0c
+#define INSTANCE_OOT_GROTTO_SCRUB2_DESERT_COLOSSUS                          0x0d
+#define INSTANCE_OOT_GROTTO_SCRUB3_LON_LON_RANCH                            0x0e
+#define INSTANCE_OOT_GROTTO_SCRUB3_GORON_CITY                               0x0f
+#define INSTANCE_OOT_GROTTO_SCRUB3_DEATH_MOUNTAIN_CRATER                    0x10
+#define INSTANCE_OOT_GROTTO_SCRUB3_LAKE_HYLIA                               0x11
+#define INSTANCE_OOT_FAIRY_FOUNTAIN_SACRED_FOREST_MEADOW                    0x12
+#define INSTANCE_OOT_FAIRY_FOUNTAIN_HYRULE_FIELD                            0x13
+#define INSTANCE_OOT_FAIRY_FOUNTAIN_ZORA_RIVER                              0x14
+#define INSTANCE_OOT_FAIRY_FOUNTAIN_ZORA_DOMAIN                             0x15
+#define INSTANCE_OOT_FAIRY_FOUNTAIN_GERUDO_FORTRESS                         0x16
+#define INSTANCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES_DEATH_MOUNTAIN_TRAIL     0x17
+#define INSTANCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES_DEATH_MOUNTAIN_CRATER    0x18
+#define INSTANCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES_OUTSIDE_GANON_CASTLE     0x19
+#define INSTANCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS_ZORA_FOUNTAIN              0x1a
+#define INSTANCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS_HYRULE_CASTLE              0x1b
+#define INSTANCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS_DESERT_COLOSSUS            0x1c
+
+#define INSTANCE_MM_GROTTO_GENERIC_PATH_TO_SNOWHEAD                         0x01
+#define INSTANCE_MM_GROTTO_GENERIC_IKANA_VALLEY                             0x02
+#define INSTANCE_MM_GROTTO_GENERIC_ZORA_CAPE                                0x03
+#define INSTANCE_MM_GROTTO_GENERIC_ROAD_TO_IKANA                            0x04
+#define INSTANCE_MM_GROTTO_GENERIC_GREAT_BAY_COAST                          0x05
+#define INSTANCE_MM_GROTTO_GENERIC_IKANA_GRAVEYARD                          0x06
+#define INSTANCE_MM_GROTTO_GENERIC_TWIN_ISLANDS                             0x07
+#define INSTANCE_MM_GROTTO_GENERIC_TERMINA_FIELD_PILLAR                     0x08
+#define INSTANCE_MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE                         0x09
+#define INSTANCE_MM_GROTTO_GENERIC_WOODS_OF_MYSTERY                         0x0a
+#define INSTANCE_MM_GROTTO_GENERIC_SOUTHERN_SWAMP                           0x0b
+#define INSTANCE_MM_GROTTO_GENERIC_ROAD_TO_SOUTHERN_SWAMP                   0x0c
+#define INSTANCE_MM_GROTTO_GENERIC_TERMINA_FIELD_TALL_GRASS                 0x0d
+#define INSTANCE_MM_GROTTO_COW_TERMINA_FIELD                                0x0e
+#define INSTANCE_MM_GROTTO_COW_GREAT_BAY_COAST                              0x0f
+
+#endif
