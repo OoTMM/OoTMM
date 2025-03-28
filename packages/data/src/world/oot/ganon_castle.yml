@@ -173,15 +173,15 @@
 "Ganon Castle Shadow":
   dungeon: Ganon
   exits:
-    "Ganon Castle Shadow End": "can_hammer && (((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire) && (has_lens || (can_longshot && has_hover_boots))) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
+    "Ganon Castle Shadow End": "can_hammer && ((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire) && (has_lens || (can_longshot && has_hover_boots))) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
   locations:
     "Ganon Castle Shadow Chest 1": "can_play_time || can_hookshot || has_hover_boots || has_fire_arrows"
-    "Ganon Castle Shadow Chest 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
-    "Ganon Castle Pot Shadow 1": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
-    "Ganon Castle Pot Shadow 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
-    "Ganon Castle Heart Shadow 1": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
-    "Ganon Castle Heart Shadow 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
-    "Ganon Castle Heart Shadow 3": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
+    "Ganon Castle Shadow Chest 2": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
+    "Ganon Castle Pot Shadow 1": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
+    "Ganon Castle Pot Shadow 2": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
+    "Ganon Castle Heart Shadow 1": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
+    "Ganon Castle Heart Shadow 2": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
+    "Ganon Castle Heart Shadow 3": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
 "Ganon Castle Shadow End":
   dungeon: Ganon
   events:
