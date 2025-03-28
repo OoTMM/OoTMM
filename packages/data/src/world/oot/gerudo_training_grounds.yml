@@ -111,7 +111,7 @@
     "Gerudo Training Grounds Hammer Room Switch": "can_hammer"
     "Gerudo Training Grounds Hammer Room": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword || can_use_sticks || can_hammer || can_use_bow)"
     "Gerudo Training Grounds SR Lava Back Center": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
-    "Gerudo Training Grounds SR Lava Back Right": "true"
+    "Gerudo Training Grounds SR Lava Back Right": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
     "Gerudo Training Grounds Wonder Item Torch Slugs Room": "can_use_bow"
 "Gerudo Training Grounds Statue":
   dungeon: GTG
