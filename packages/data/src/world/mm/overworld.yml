@@ -2775,7 +2775,7 @@
   exits:
     "Great Bay Coast": "true"
   events:
-    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle"
+    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle && is_ocean_cursed"
 "Pinnacle Rock Entrance":
   region: PINNACLE_ROCK
   exits:
@@ -2790,7 +2790,7 @@
     "Pinnacle Rock Water Void": "true"
     "Pinnacle Rock Entrance": "true"
   events:
-    ZORA_EGGS_PINNACLE_ROCK: "true"
+    ZORA_EGGS_PINNACLE_ROCK: "has_mask_zora || can_hookshot_short"
     MAGIC: "true"
     FISH: "true"
   locations:
