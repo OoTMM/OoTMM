@@ -64,7 +64,7 @@
   events:
     MAGIC: "true"
   exits:
-    "Great Bay Temple Baba Room": "has_mask_zora || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || underwater_walking || (can_dive_big && has_tunic_zora))) || hookshot_anywhere"
+    "Great Bay Temple Baba Room": "has_mask_zora || (((has_bombchu && trick(MM_GBT_BABA_ENTRY_BOMBCHU)) || has_mask_blast) && (short_hook_anywhere || underwater_walking || (can_dive_big && has_tunic_zora))) || hookshot_anywhere"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
     "WARP_SONGS": "true"
