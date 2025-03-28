@@ -2775,7 +2775,7 @@
   exits:
     "Great Bay Coast": "true"
   events:
-    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle"
+    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle && is_ocean_cursed"
 "Pinnacle Rock Entrance":
   region: PINNACLE_ROCK
   exits:
@@ -2790,7 +2790,7 @@
     "Pinnacle Rock Water Void": "true"
     "Pinnacle Rock Entrance": "true"
   events:
-    ZORA_EGGS_PINNACLE_ROCK: "true"
+    ZORA_EGGS_PINNACLE_ROCK: "has_mask_zora || can_hookshot_short"
     MAGIC: "true"
     FISH: "true"
   locations:
@@ -2837,7 +2837,7 @@
     "Zora Cape Water Void": "true"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
-    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"
+    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || (has_bombchu && trick(MM_CAPE_LIKE_LIKE_BOMBCHU)) || has_mask_blast))"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
   gossip:

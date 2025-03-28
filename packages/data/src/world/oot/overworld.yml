@@ -2479,7 +2479,7 @@
     "Gerudo Fortress Upper-Left Ledge": "(is_adult && scarecrow_hookshot) || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Gerudo Fortress Center Ledge": "true"
   locations:
-    "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
+    "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || has_bombs || can_use_bow || can_use_slingshot || (climb_anywhere && can_damage))"
 "Gerudo Fortress Upper-Left Ledge":
   region: GERUDO_FORTRESS
   exits:

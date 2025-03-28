@@ -745,6 +745,16 @@ export const TRICKS: Tricks = {
     name: "Break Red Boulders using Powder Keg (MM)",
     tooltip: "Use a Powder Keg to break Red Boulders. Only relevant with Strengths in MM",
   },
+  MM_GBT_BABA_ENTRY_BOMBCHU: {
+    game: 'mm',
+    name: "Enter the Bio Baba room by using a precise Bombchu launch.",
+    tooltip: "By standing next to the Stray Fairy pot, it is possible to get an angle for the Bombchu to crawl along and blow up the Dexihands blocking access.",
+  },
+  MM_CAPE_LIKE_LIKE_BOMBCHU: {
+    game: 'mm',
+    name: "Defeat the waterfall Like Like in Zora Cape by using a precise Bombchu launch.",
+    tooltip: "It is possible to get a precise angle for the Bombchu to crawl along and blow up the Like Like for the Piece of Heart.",
+  },
   GLITCH_OOT_EQUIP_SWAP: {
     game: 'oot',
     name: "Equip Swap (OoT)",
