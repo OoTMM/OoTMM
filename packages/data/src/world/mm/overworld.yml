@@ -2837,7 +2837,7 @@
     "Zora Cape Water Void": "true"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
-    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"
+    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || (has_bombchu && trick(MM_CAPE_LIKE_LIKE_BOMBCHU)) || has_mask_blast))"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
   gossip:
