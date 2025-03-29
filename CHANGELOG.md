@@ -31,6 +31,9 @@ All notable changes to this project will be documented in this file.
 - Rename some of the Silver Rupee checks in OoT Shadow Temple MQ for clarity.
 - Add "Broken Deku Stick (OoT)" glitch, which can now be logical for grass shuffle.
 - Add Deku Stick as a logical possibility for obtaining bugs from grass in OoT.
+- Using a Bombchu to destroy the Dexihands blocking the path to the Bio Baba room in Great Bay Temple is now a trick.
+- Using a Bombchu to defeat the Like Like on top of the Piece of Heart in Zora Cape is now a trick.
+- The Gerudo Fortress wall GS can now be gotten by defeating it from above then jumping to it.
 
 ### Fixed
 
@@ -44,6 +47,9 @@ All notable changes to this project will be documented in this file.
 - Fix logic for pots in upper Deku Palace.
 - Fix snowballs in Snowhead (spring) not being paired with their winter counterpart.
 - Fix spoiler log including Hint Importance even if the setting is off.
+- Fix the Seahorse event not checking for Great Bay cursed state.
+- Fix Shadow Trial logic not accounting for the Like Like Soul when using Longshot to cross the room.
+- Fix logic in Gerudo Training Grounds not accounting for defeating the enemies in the hammer room to get one of the lava Silver Rupees.
 
 ## [27.0] - 2025-01-04
 
