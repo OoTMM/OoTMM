@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a new Misc. soul.
 - Add Ice Traps.
 - Add the ability to shuffle extra merchants in OoT.
 - Add the ability to shuffle merchant prices in OoT.

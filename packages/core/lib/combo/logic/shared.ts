@@ -77,6 +77,7 @@ const SOULS_NPC: ItemSharedDef[] = [
 const SOULS_MISC: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_MISC_GS,              oot: Items.OOT_SOUL_MISC_GS,              mm: Items.MM_SOUL_MISC_GS },
   { shared: Items.SHARED_SOUL_MISC_BUSINESS_SCRUB,  oot: Items.OOT_SOUL_MISC_BUSINESS_SCRUB,  mm: Items.MM_SOUL_MISC_BUSINESS_SCRUB },
+  { shared: Items.SHARED_SOUL_MISC_TREE,            oot: Items.OOT_SOUL_MISC_TREE,            mm: Items.MM_SOUL_MISC_TREE },
 ];
 
 const SKELETON_KEY: ItemSharedDef[] = [

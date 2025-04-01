@@ -456,8 +456,10 @@ static int isItemAmbiguous(s16 gi)
         return !Config_Flag(CFG_SHARED_SOULS_NPC);
     case GI_OOT_SOUL_MISC_GS:
     case GI_OOT_SOUL_MISC_BUSINESS_SCRUB:
+    case GI_OOT_SOUL_MISC_TREE:
     case GI_MM_SOUL_MISC_GS:
     case GI_MM_SOUL_MISC_BUSINESS_SCRUB:
+    case GI_MM_SOUL_MISC_TREE:
         return !Config_Flag(CFG_SHARED_SOULS_MISC);
     case GI_OOT_SKELETON_KEY:
     case GI_MM_SKELETON_KEY:
