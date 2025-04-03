@@ -105,7 +105,7 @@
 
 "has_ocarina_n(x)": "has(OCARINA, x) || has(SHARED_OCARINA, x)"
 "has_ocarina": "cond(setting(sharedOcarina), cond(setting(fairyOcarinaMm), has_ocarina_n(1), has_ocarina_n(2)), has_ocarina_n(1))"
-"can_play(song)": "has_ocarina && has(song)"
+"can_play(song)": "has_ocarina && (has(song) || hasNotes(song))"
 "can_play_cross(x)": "can_play(x) && setting(crossWarpOot)"
 
 "can_play_sun": "(can_play(SONG_SUN) || can_play(SHARED_SONG_SUN)) && ocarina_button_right && ocarina_button_down && ocarina_button_up"
@@ -184,8 +184,8 @@
 "has_weapon_range": "has_arrows || can_hookshot_short || has_mask_zora || can_use_deku_bubble"
 "has_paper": "has(DEED_LAND) || has(DEED_SWAMP) || has(DEED_MOUNTAIN) || has(DEED_OCEAN) || has(LETTER_TO_KAFEI) || has(LETTER_TO_MAMA)"
 "can_fight": "has_weapon || has_mask_zora || has_mask_goron"
-"has_goron_song_half": "cond(setting(progressiveGoronLullaby, progressive), has(SONG_GORON_HALF), has(SONG_GORON))"
-"has_goron_song": "cond(setting(progressiveGoronLullaby, progressive), has(SONG_GORON_HALF, 2), has(SONG_GORON))"
+"has_goron_song_half": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF) || hasNotes(SONG_GORON_HALF, 6)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
+"has_goron_song": "cond(setting(progressiveGoronLullaby, progressive), (has(SONG_GORON_HALF, 2) || hasNotes(SONG_GORON_HALF)), (has(SONG_GORON) || hasNotes(SONG_GORON)))"
 "can_lullaby_half": "has_mask_goron && can_play_goron_half"
 "can_lullaby": "has_mask_goron && can_play_goron"
 "has_shield": "renewable(SHIELD_HERO) || renewable(SHIELD_DEKU) || renewable(SHARED_SHIELD_DEKU) || renewable(SHARED_SHIELD_HYLIAN) || has(SHIELD, 1) || cond(setting(dekuShieldMm), has(SHARED_SHIELD, 1), has(SHARED_SHIELD, 2)) || has_mirror_shield"
