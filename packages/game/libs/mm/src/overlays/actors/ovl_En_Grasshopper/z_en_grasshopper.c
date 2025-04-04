@@ -8,9 +8,7 @@
 #include "overlays/actors/ovl_En_Clear_Tag/z_en_clear_tag.h"
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_10)
-
-#define THIS ((EnGrasshopper*)thisx)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnGrasshopper_Init(Actor* thisx, PlayState* play);
 void EnGrasshopper_Destroy(Actor* thisx, PlayState* play);
@@ -261,7 +259,7 @@ static ColliderJntSphInit sJntSphInit = {
 };
 
 void EnGrasshopper_Init(Actor* thisx, PlayState* play) {
-    EnGrasshopper* this = THIS;
+    EnGrasshopper* this = (EnGrasshopper*)thisx;
     s32 i;
 
     this->actor.hintId = TATL_HINT_ID_DRAGONFLY;
@@ -324,7 +322,7 @@ void EnGrasshopper_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnGrasshopper_Destroy(Actor* thisx, PlayState* play) {
-    EnGrasshopper* this = THIS;
+    EnGrasshopper* this = (EnGrasshopper*)thisx;
 
     Collider_DestroyJntSph(play, &this->collider);
 
@@ -836,7 +834,7 @@ void EnGrasshopper_Dead(EnGrasshopper* this, PlayState* play) {
     }
 
     if (curFrame >= this->animEndFrame) {
-        this->actor.flags &= ~ACTOR_FLAG_10;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         EnGrasshopper_SetupFall(this);
     }
 }
@@ -973,7 +971,7 @@ void EnGrasshopper_UpdateDamage(EnGrasshopper* this, PlayState* play) {
 
 void EnGrasshopper_Update(Actor* thisx, PlayState* play) {
     s32 pad;
-    EnGrasshopper* this = THIS;
+    EnGrasshopper* this = (EnGrasshopper*)thisx;
 
     SkelAnime_Update(&this->skelAnime);
     EnGrasshopper_UpdateDamage(this, play);
@@ -1026,7 +1024,7 @@ void EnGrasshopper_Update(Actor* thisx, PlayState* play) {
 }
 
 void EnGrasshopper_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx) {
-    EnGrasshopper* this = THIS;
+    EnGrasshopper* this = (EnGrasshopper*)thisx;
     Vec3f sEffectOffsetFromTailTop = { 500.0f, 0.0f, 0.0f };
     Vec3f sZeroVec3f = { 0.0f, 0.0f, 0.0f };
 
@@ -1072,7 +1070,7 @@ void EnGrasshopper_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec
 }
 
 void EnGrasshopper_Draw(Actor* thisx, PlayState* play) {
-    EnGrasshopper* this = THIS;
+    EnGrasshopper* this = (EnGrasshopper*)thisx;
     s32 i;
     u8* shadowTex = GRAPH_ALLOC(play->state.gfxCtx, SUBS_SHADOW_TEX_SIZE);
     u8* shadowTexIter;

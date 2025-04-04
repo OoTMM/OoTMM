@@ -215,7 +215,7 @@ void CutsceneManager_End(void) {
 
     switch (sCutsceneMgr.startMethod) {
         case CS_START_2:
-            sCutsceneMgr.targetActor->flags &= ~ACTOR_FLAG_100000;
+            sCutsceneMgr.targetActor->flags &= ~ACTOR_FLAG_FREEZE_EXCEPTION;
             FALLTHROUGH;
         case CS_START_1:
             Player_SetCsActionWithHaltedActors(sCutsceneMgr.play, NULL, PLAYER_CSACTION_END);
@@ -359,7 +359,7 @@ s16 CutsceneManager_StartWithPlayerCs(s16 csId, Actor* actor) {
 }
 
 /**
- * Start an actor cutscene, activate Player Cutscene Action "Wait", turn on ACTOR_FLAG_100000
+ * Start an actor cutscene, activate Player Cutscene Action "Wait", turn on ACTOR_FLAG_FREEZE_EXCEPTION
  */
 s16 CutsceneManager_StartWithPlayerCsAndSetFlag(s16 csId, Actor* actor) {
     s16 startCsId = CutsceneManager_Start(csId, actor);
@@ -370,7 +370,7 @@ s16 CutsceneManager_StartWithPlayerCsAndSetFlag(s16 csId, Actor* actor) {
             CutsceneManager_Stop(sCutsceneMgr.csId);
         }
         if (actor != NULL) {
-            actor->flags |= ACTOR_FLAG_100000;
+            actor->flags |= ACTOR_FLAG_FREEZE_EXCEPTION;
             sCutsceneMgr.startMethod = CS_START_2;
         } else {
             sCutsceneMgr.startMethod = CS_START_1;
@@ -518,12 +518,14 @@ s16 CutsceneManager_FindEntranceCsId(void) {
     s32 csId;
 
     for (csId = 0; csId < sSceneCutsceneCount; csId++) {
-        //! FAKE:
-        if ((sSceneCutsceneList[csId].scriptIndex != CS_SCRIPT_ID_NONE) &&
-            (sSceneCutsceneList[csId].scriptIndex < (play = sCutsceneMgr.play)->csCtx.scriptListCount) &&
-            (sCutsceneMgr.play->curSpawn ==
-             sCutsceneMgr.play->csCtx.scriptList[sSceneCutsceneList[csId].scriptIndex].spawn)) {
-            return csId;
+        if (sSceneCutsceneList[csId].scriptIndex != CS_SCRIPT_ID_NONE) {
+            PlayState* play = sCutsceneMgr.play;
+
+            if ((sSceneCutsceneList[csId].scriptIndex < play->csCtx.scriptListCount) &&
+                (sCutsceneMgr.play->curSpawn ==
+                 sCutsceneMgr.play->csCtx.scriptList[sSceneCutsceneList[csId].scriptIndex].spawn)) {
+                return csId;
+            }
         }
     }
 

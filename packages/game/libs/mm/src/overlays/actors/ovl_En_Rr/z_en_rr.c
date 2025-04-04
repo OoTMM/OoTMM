@@ -11,8 +11,6 @@
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_HOOKSHOT_PULLS_PLAYER)
 
-#define THIS ((EnRr*)thisx)
-
 void EnRr_Init(Actor* thisx, PlayState* play);
 void EnRr_Destroy(Actor* thisx, PlayState* play);
 void EnRr_Update(Actor* thisx, PlayState* play);
@@ -122,13 +120,13 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_S8(hintId, TATL_HINT_ID_LIKE_LIKE, ICHAIN_CONTINUE),
     ICHAIN_U8(attentionRangeType, ATTENTION_RANGE_2, ICHAIN_CONTINUE),
     ICHAIN_F32_DIV1000(gravity, -400, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE),
     ICHAIN_F32(lockOnArrowOffset, 30, ICHAIN_STOP),
 };
 
 void EnRr_Init(Actor* thisx, PlayState* play) {
     s32 pad;
-    EnRr* this = THIS;
+    EnRr* this = (EnRr*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Collider_InitAndSetCylinder(play, &this->collider1, &this->actor, &sCylinderInit1);
@@ -164,7 +162,7 @@ void EnRr_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnRr_Destroy(Actor* thisx, PlayState* play) {
-    EnRr* this = THIS;
+    EnRr* this = (EnRr*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider1);
     Collider_DestroyCylinder(play, &this->collider2);
@@ -777,7 +775,7 @@ void func_808FB794(EnRr* this, PlayState* play) {
 }
 
 void EnRr_Update(Actor* thisx, PlayState* play) {
-    EnRr* this = THIS;
+    EnRr* this = (EnRr*)thisx;
     EnRrStruct* ptr;
     s32 i;
 
@@ -805,6 +803,8 @@ void EnRr_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 
     if (this->actor.params == LIKE_LIKE_PARAM_2) {
+        //! @bug: Actor will constantly play an SFX every frame when player is close enough.
+        //! In `func_808FAF94` the check is if the actor has zero speed.
         this->actor.speed = 0.0f;
     } else {
         Math_StepToF(&this->actor.speed, 0.0f, 0.1f);
@@ -879,7 +879,7 @@ void EnRr_Update(Actor* thisx, PlayState* play) {
 
 void EnRr_Draw(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
-    EnRr* this = THIS;
+    EnRr* this = (EnRr*)thisx;
     Mtx* mtx = GRAPH_ALLOC(play->state.gfxCtx, 4 * sizeof(Mtx));
     Vec3f* bodyPartPos;
     s32 i;
