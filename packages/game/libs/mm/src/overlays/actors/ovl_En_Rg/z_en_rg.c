@@ -3,13 +3,10 @@
  * Overlay: ovl_En_Rg
  * Description: Racing Goron
  */
-#include "prevent_bss_reordering.h"
 #include "z_en_rg.h"
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 
-#define FLAGS (ACTOR_FLAG_10 | ACTOR_FLAG_MINIMAP_ICON_ENABLED)
-
-#define THIS ((EnRg*)thisx)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MINIMAP_ICON_ENABLED)
 
 void EnRg_Init(Actor* thisx, PlayState* play);
 void EnRg_Destroy(Actor* thisx, PlayState* play);
@@ -726,7 +723,7 @@ EffectTireMarkInit D_80BF59F0 = {
 };
 
 void EnRg_Init(Actor* thisx, PlayState* play) {
-    EnRg* this = THIS;
+    EnRg* this = (EnRg*)thisx;
 
     if (gSaveContext.save.entrance == ENTRANCE(GORON_RACETRACK, 1)) {
         ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 20.0f);
@@ -771,7 +768,7 @@ void EnRg_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnRg_Destroy(Actor* thisx, PlayState* play) {
-    EnRg* this = THIS;
+    EnRg* this = (EnRg*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider1);
     Collider_DestroySphere(play, &this->collider2);
@@ -779,7 +776,7 @@ void EnRg_Destroy(Actor* thisx, PlayState* play) {
 }
 
 void EnRg_Update(Actor* thisx, PlayState* play) {
-    EnRg* this = THIS;
+    EnRg* this = (EnRg*)thisx;
 
     func_80BF3F14(this, play);
 
@@ -828,7 +825,7 @@ void func_80BF547C(EnRg* this, PlayState* play) {
 }
 
 s32 EnRg_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx) {
-    EnRg* this = THIS;
+    EnRg* this = (EnRg*)thisx;
     s32 fidgetIndex;
 
     switch (limbIndex) {
@@ -862,7 +859,7 @@ static TexturePtr sEyeTextures[] = {
 };
 
 void EnRg_Draw(Actor* thisx, PlayState* play) {
-    EnRg* this = THIS;
+    EnRg* this = (EnRg*)thisx;
 
     if (!(this->unk_310 & 0x10)) {
         OPEN_DISPS(play->state.gfxCtx);

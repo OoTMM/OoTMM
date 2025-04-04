@@ -9,8 +9,6 @@
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_HOOKSHOT_PULLS_PLAYER)
 
-#define THIS ((EnFloormas*)thisx)
-
 void EnFloormas_Init(Actor* thisx, PlayState* play2);
 void EnFloormas_Destroy(Actor* thisx, PlayState* play);
 void EnFloormas_Update(Actor* thisx, PlayState* play);
@@ -137,7 +135,7 @@ static InitChainEntry sInitChain[] = {
 
 void EnFloormas_Init(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
     s32 pad;
     s32 params;
 
@@ -189,7 +187,7 @@ void EnFloormas_Init(Actor* thisx, PlayState* play2) {
 }
 
 void EnFloormas_Destroy(Actor* thisx, PlayState* play) {
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
 }
@@ -547,7 +545,7 @@ void func_808D19D4(EnFloormas* this) {
     this->actor.colorFilterTimer = 0;
     this->drawDmgEffAlpha = 0.0f;
     Actor_SetScale(&this->actor, 0.004f);
-    this->actor.flags |= ACTOR_FLAG_10;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     if (CHECK_FLAG_ALL(this->actor.flags, ACTOR_FLAG_REACT_TO_LENS)) {
         this->actor.draw = func_808D3754;
     } else {
@@ -868,7 +866,7 @@ void func_808D2764(EnFloormas* this, PlayState* play) {
 
     if (SkelAnime_Update(&this->skelAnime)) {
         if (this->actor.scale.x >= 0.01f) {
-            this->actor.flags &= ~ACTOR_FLAG_10;
+            this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
             func_808D0908(this);
             this->actor.params = ENFLOORMAS_GET_7FFF_0;
             this->actor.flags &= ~ACTOR_FLAG_HOOKSHOT_PULLS_ACTOR;
@@ -899,7 +897,7 @@ void func_808D2A20(EnFloormas* this) {
         Actor_Kill(&this->actor);
     } else {
         this->actor.draw = NULL;
-        this->actor.flags &= ~(ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_10);
+        this->actor.flags &= ~(ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED);
         this->actionFunc = func_808D2AA8;
     }
 }
@@ -1079,7 +1077,7 @@ void func_808D2E34(EnFloormas* this, PlayState* play) {
 }
 
 void EnFloormas_Update(Actor* thisx, PlayState* play) {
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
     s32 pad;
 
     if (this->actionFunc != func_808D2AA8) {
@@ -1148,7 +1146,7 @@ void EnFloormas_Update(Actor* thisx, PlayState* play) {
 
 s32 EnFloormas_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx,
                                 Gfx** gfx) {
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
 
     if (limbIndex == WALLMASTER_LIMB_ROOT) {
         pos->z += this->unk_192;
@@ -1186,7 +1184,7 @@ static s8 sLimbToBodyParts[WALLMASTER_LIMB_MAX] = {
 };
 
 void EnFloormas_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx, Gfx** gfx) {
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
 
     if (sLimbToBodyParts[limbIndex] != BODYPART_NONE) {
         Matrix_MultZero(&this->bodyPartsPos[sLimbToBodyParts[limbIndex]]);
@@ -1212,7 +1210,7 @@ void EnFloormas_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s*
 static Color_RGBA8 D_808D3958 = { 0, 255, 0, 0 };
 
 void EnFloormas_Draw(Actor* thisx, PlayState* play) {
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -1237,7 +1235,7 @@ void EnFloormas_Draw(Actor* thisx, PlayState* play) {
 }
 
 void func_808D3754(Actor* thisx, PlayState* play) {
-    EnFloormas* this = THIS;
+    EnFloormas* this = (EnFloormas*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 

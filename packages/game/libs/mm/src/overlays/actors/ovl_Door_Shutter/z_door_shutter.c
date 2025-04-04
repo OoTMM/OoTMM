@@ -20,9 +20,7 @@
 #include "assets/objects/object_kaizoku_obj/object_kaizoku_obj.h"
 #include "assets/objects/object_last_obj/object_last_obj.h"
 
-#define FLAGS (ACTOR_FLAG_10)
-
-#define THIS ((DoorShutter*)thisx)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void DoorShutter_Init(Actor* thisx, PlayState* play2);
 void DoorShutter_Destroy(Actor* thisx, PlayState* play);
@@ -95,9 +93,9 @@ s8 D_808A2240[] = {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F(scale, 1, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 4000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 400, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 800, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 4000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 400, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 800, ICHAIN_STOP),
 };
 
 typedef struct {
@@ -199,7 +197,7 @@ s32 DoorShutter_SetupDoor(DoorShutter* this, PlayState* play) {
 
 void DoorShutter_Init(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
-    DoorShutter* this = THIS;
+    DoorShutter* this = (DoorShutter*)thisx;
     s32 sp24;
     s32 i;
 
@@ -252,7 +250,7 @@ void DoorShutter_Init(Actor* thisx, PlayState* play2) {
 }
 
 void DoorShutter_Destroy(Actor* thisx, PlayState* play) {
-    DoorShutter* this = THIS;
+    DoorShutter* this = (DoorShutter*)thisx;
 
     if (this->slidingDoor.dyna.actor.room >= 0) {
         s32 transitionActorId = DOOR_GET_TRANSITION_ID(&this->slidingDoor.dyna.actor);
@@ -643,7 +641,7 @@ void func_808A1C50(DoorShutter* this, PlayState* play) {
 }
 
 void DoorShutter_Update(Actor* thisx, PlayState* play) {
-    DoorShutter* this = THIS;
+    DoorShutter* this = (DoorShutter*)thisx;
     Player* player = GET_PLAYER(play);
 
     if (!(player->stateFlags1 &
@@ -682,7 +680,7 @@ s32 func_808A1D68(DoorShutter* this, PlayState* play) {
 
 void DoorShutter_Draw(Actor* thisx, PlayState* play) {
     s32 pad;
-    DoorShutter* this = THIS;
+    DoorShutter* this = (DoorShutter*)thisx;
     ShutterInfo* sp44;
 
     if (func_808A1D68(this, play)) {

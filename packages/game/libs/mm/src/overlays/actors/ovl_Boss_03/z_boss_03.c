@@ -49,7 +49,6 @@
  * - Seaweed
  */
 
-#include "prevent_bss_reordering.h"
 #include "z_boss_03.h"
 #include "overlays/actors/ovl_Door_Warp1/z_door_warp1.h"
 #include "overlays/actors/ovl_En_Water_Effect/z_en_water_effect.h"
@@ -57,9 +56,9 @@
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_water_effect/object_water_effect.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_10 | ACTOR_FLAG_20)
-
-#define THIS ((Boss03*)thisx)
+#define FLAGS                                                                                 \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 #define WORK_TIMER_UNK0_A 0 // used in func_809E34B8
 #define WORK_TIMER_CURRENT_ACTION 0
@@ -446,7 +445,7 @@ void Boss03_SpawnDust(Boss03* this, PlayState* play) {
 }
 
 void Boss03_Init(Actor* thisx, PlayState* play2) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
     s32 i;
     PlayState* play = play2;
     Vec3f sp70;
@@ -532,7 +531,7 @@ void Boss03_Init(Actor* thisx, PlayState* play2) {
 }
 
 void Boss03_Destroy(Actor* thisx, PlayState* play) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
 }
 
 /* Start of ActionFuncs section */
@@ -1947,7 +1946,7 @@ void Boss03_UpdateCollision(Boss03* this, PlayState* play) {
 
 void Boss03_Update(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
     Actor* dblueActor;
     Player* player = GET_PLAYER(play);
     s32 i;
@@ -2168,7 +2167,7 @@ void Boss03_SetObject(PlayState* play, s16 objectId) {
 }
 
 s32 Boss03_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
 
     if ((limbIndex == GYORG_LIMB_UPPER_TRUNK) || (limbIndex == GYORG_LIMB_LOWER_TRUNK) ||
         (limbIndex == GYORG_LIMB_TAIL)) {
@@ -2245,7 +2244,7 @@ Vec3f D_809E91A8 = { 100000.0f, 100000.0f, 100000.0f };
 Vec3f D_809E91B4 = { 300.0f, -100.0f, -200.0f };
 
 void Boss03_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
     s32 pad;
     s8 sphereElementIndex;
     Vec3f spherePos;
@@ -2281,7 +2280,7 @@ void Boss03_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot
 }
 
 void Boss03_Draw(Actor* thisx, PlayState* play) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -2518,7 +2517,7 @@ void Boss03_DrawEffects(PlayState* play) {
 #define SEAWEED_FLAG_INTERACT_GYORG 2
 
 void Boss03_SeaweedUpdate(Actor* thisx, PlayState* play) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
     s16 i;
     s16 pad;
     s16 maxBendSpeed;
@@ -2612,7 +2611,7 @@ Gfx* sGyorgSeaweedDLs[] = {
 };
 
 void Boss03_SeaweedDraw(Actor* thisx, PlayState* play) {
-    Boss03* this = THIS;
+    Boss03* this = (Boss03*)thisx;
     s16 i;
     // Why 10 Mtxs? This seems to only use the first 6 elements
     Mtx* mtx = GRAPH_ALLOC(play->state.gfxCtx, 10 * sizeof(Mtx));

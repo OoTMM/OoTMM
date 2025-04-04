@@ -7,11 +7,9 @@
 #include "z_en_dinofos.h"
 #include "overlays/actors/ovl_En_Clear_Tag/z_en_clear_tag.h"
 
-#define FLAGS                                                                            \
-    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_10 | ACTOR_FLAG_20 | \
-     ACTOR_FLAG_HOOKSHOT_PULLS_PLAYER)
-
-#define THIS ((EnDinofos*)thisx)
+#define FLAGS                                                                                 \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_DRAW_CULLING_DISABLED | ACTOR_FLAG_HOOKSHOT_PULLS_PLAYER)
 
 void EnDinofos_Init(Actor* thisx, PlayState* play);
 void EnDinofos_Destroy(Actor* thisx, PlayState* play);
@@ -287,7 +285,7 @@ void EnDinofos_Init(Actor* thisx, PlayState* play) {
         { 0, 0, 0, 0 },
         { 0, 0, 0, 0 },
     };
-    EnDinofos* this = THIS;
+    EnDinofos* this = (EnDinofos*)thisx;
     s32 i;
     ColliderJntSphElementDim* dim;
 
@@ -320,7 +318,7 @@ void EnDinofos_Init(Actor* thisx, PlayState* play) {
     if (this->actor.csId == CS_ID_NONE) {
         EnDinofos_SetupIdle(this);
     } else {
-        this->actor.flags |= ACTOR_FLAG_100000;
+        this->actor.flags |= ACTOR_FLAG_FREEZE_EXCEPTION;
         this->actor.gravity = 0.0f;
         this->actor.velocity.y = 0.0f;
         sCsId = thisx->csId;
@@ -331,7 +329,7 @@ void EnDinofos_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnDinofos_Destroy(Actor* thisx, PlayState* play) {
-    EnDinofos* this = THIS;
+    EnDinofos* this = (EnDinofos*)thisx;
 
     Effect_Destroy(play, this->effectIndex);
     Collider_DestroyJntSph(play, &this->bodyAndFireCollider);
@@ -615,7 +613,7 @@ void EnDinofos_IntroCutsceneYell(EnDinofos* this, PlayState* play) {
 
     if (SkelAnime_Update(&this->skelAnime)) {
         EnDinofos_EndCutscene(this, play);
-        this->actor.flags &= ~ACTOR_FLAG_100000;
+        this->actor.flags &= ~ACTOR_FLAG_FREEZE_EXCEPTION;
         this->actor.csId = CS_ID_NONE;
         EnDinofos_SetupIdle(this);
     }
@@ -1390,7 +1388,7 @@ s32 EnDinofos_UpdateDamage(EnDinofos* this, PlayState* play) {
 
 void EnDinofos_Update(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
-    EnDinofos* this = THIS;
+    EnDinofos* this = (EnDinofos*)thisx;
     s32 pad;
     Vec3f bodyPartPos;
 
@@ -1453,7 +1451,7 @@ void EnDinofos_Update(Actor* thisx, PlayState* play2) {
 
 s32 EnDinofos_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx,
                                Gfx** gfx) {
-    EnDinofos* this = THIS;
+    EnDinofos* this = (EnDinofos*)thisx;
 
     if (limbIndex == DINOLFOS_LIMB_HEAD) {
         rot->y -= this->headRotY;
@@ -1491,7 +1489,7 @@ static s8 sLimbToBodyParts[DINOLFOS_LIMB_MAX] = {
 };
 
 void EnDinofos_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx, Gfx** gfx) {
-    EnDinofos* this = THIS;
+    EnDinofos* this = (EnDinofos*)thisx;
     Vec3f prevKnifeTipQuadPos;
     Vec3f prevKnifeBaseQuadPos;
     Vec3f knifeTipQuadPos;
@@ -1543,7 +1541,7 @@ void EnDinofos_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* 
 }
 
 void EnDinofos_Draw(Actor* thisx, PlayState* play) {
-    EnDinofos* this = THIS;
+    EnDinofos* this = (EnDinofos*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 

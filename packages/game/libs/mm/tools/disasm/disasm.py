@@ -57,7 +57,7 @@ DATA_OUT = "data/"
 def discard_decomped_files(files_spec, include_files):
     root_path = Path(__file__).parent.parent.parent
 
-    with open(root_path / "spec", "r") as f:
+    with open(root_path / "spec/spec", "r") as f:
         spec = f.read()
     # No need to check anything beyond here
     spec = spec[: spec.find('name "gameplay_keep"')].splitlines()[:-2]
@@ -118,9 +118,12 @@ def discard_decomped_files(files_spec, include_files):
                             .split("$(BUILD_DIR)/", 1)[1]
                             .replace(".o", ".c")[:-1]
                         )
-                        with open(root_path / last_line, "r") as f2:
-                            if "GLOBAL_ASM" in f2.read():
-                                include = True
+                        if os.path.exists(root_path / last_line):
+                            with open(root_path / last_line, "r") as f2:
+                                if "GLOBAL_ASM" in f2.read():
+                                    include = True
+                        else:
+                            assert os.path.exists(root_path / last_line.replace(".c", ".s"))
 
             include |= force_include
             if include:
@@ -131,8 +134,7 @@ def discard_decomped_files(files_spec, include_files):
             continue
         if included:
             f[4] = new_files
-
-        new_spec.append(f)
+            new_spec.append(f)
 
     return new_spec
 
@@ -456,7 +458,7 @@ def format_f32(f_wd):
         return ".float 3.4028235e+38"
 
     f = as_float(struct.pack(">I", f_wd))
-    if math.isnan(f):
+    if math.isnan(f) or math.isinf(f):
         return f".word 0x{f_wd:08X}"
     return f".float {reduce_float(repr(f))}"
 
@@ -2227,7 +2229,7 @@ for segment in files_spec:
                 data_size = 0x80800000 - file_list[full_index]
             elif segment[0] == "boot" and name == "vimgr" and segment[3][i][2] == "bss":
                 # This is the end of boot, hardcode it
-                data_size = 0x800A5AC0 - file_list[full_index]
+                data_size = 0x8009F8B0 - file_list[full_index]
             else:
                 data_size = file_list[full_index + 1] - file_list[full_index]
 
