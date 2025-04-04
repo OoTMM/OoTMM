@@ -1,7 +1,9 @@
 #ifndef LIBC_STDDEF_H
 #define LIBC_STDDEF_H
 
+#ifndef NULL
 #define NULL ((void*)0)
+#endif
 
 #if !defined(_SIZE_T)
 #define _SIZE_T

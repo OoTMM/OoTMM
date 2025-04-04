@@ -10,9 +10,9 @@
 #include "overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.h"
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_10 | ACTOR_FLAG_HOOKSHOT_PULLS_PLAYER)
-
-#define THIS ((EnWallmas*)thisx)
+#define FLAGS                                                                                 \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_HOOKSHOT_PULLS_PLAYER)
 
 void EnWallmas_Init(Actor* thisx, PlayState* play);
 void EnWallmas_Destroy(Actor* thisx, PlayState* play);
@@ -139,7 +139,7 @@ static f32 sYOffsetPerForm[PLAYER_FORM_MAX] = {
 };
 
 void EnWallmas_Init(Actor* thisx, PlayState* play) {
-    EnWallmas* this = THIS;
+    EnWallmas* this = (EnWallmas*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     ActorShape_Init(&this->actor.shape, 0.0f, NULL, 0.5f);
@@ -184,7 +184,7 @@ void EnWallmas_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnWallmas_Destroy(Actor* thisx, PlayState* play) {
-    EnWallmas* this = THIS;
+    EnWallmas* this = (EnWallmas*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
 
@@ -222,7 +222,7 @@ void EnWallmas_TimerInit(EnWallmas* this, PlayState* play) {
     Player* player = GET_PLAYER(play);
 
     this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
-    this->actor.flags |= ACTOR_FLAG_20;
+    this->actor.flags |= ACTOR_FLAG_DRAW_CULLING_DISABLED;
     this->timer = 130;
     this->actor.velocity.y = 0.0f;
     this->actor.world.pos.y = player->actor.world.pos.y;
@@ -273,7 +273,7 @@ void EnWallmas_SetupDrop(EnWallmas* this, PlayState* play) {
     this->actor.world.rot.y = this->actor.shape.rot.y;
     this->actor.floorHeight = player->actor.floorHeight;
     this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
-    this->actor.flags &= ~ACTOR_FLAG_20;
+    this->actor.flags &= ~ACTOR_FLAG_DRAW_CULLING_DISABLED;
     this->actionFunc = EnWallmas_Drop;
 }
 
@@ -617,7 +617,7 @@ void EnWallmas_UpdateDamage(EnWallmas* this, PlayState* play) {
 
 void EnWallmas_Update(Actor* thisx, PlayState* play) {
     s32 pad;
-    EnWallmas* this = THIS;
+    EnWallmas* this = (EnWallmas*)thisx;
 
     EnWallmas_UpdateDamage(this, play);
     this->actionFunc(this, play);
@@ -692,7 +692,7 @@ void EnWallmas_DrawShadow(EnWallmas* this, PlayState* play) {
 }
 
 s32 EnWallmas_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx) {
-    EnWallmas* this = THIS;
+    EnWallmas* this = (EnWallmas*)thisx;
 
     if (limbIndex == WALLMASTER_LIMB_ROOT) {
         if (this->actionFunc != EnWallmas_TakePlayer) {
@@ -738,7 +738,7 @@ static s8 sLimbToBodyParts[WALLMASTER_LIMB_MAX] = {
 };
 
 void EnWallmas_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx) {
-    EnWallmas* this = THIS;
+    EnWallmas* this = (EnWallmas*)thisx;
     Gfx* gfx;
 
     if (sLimbToBodyParts[limbIndex] != BODYPART_NONE) {
@@ -771,7 +771,7 @@ void EnWallmas_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* 
 }
 
 void EnWallmas_Draw(Actor* thisx, PlayState* play) {
-    EnWallmas* this = THIS;
+    EnWallmas* this = (EnWallmas*)thisx;
 
     if (this->actionFunc != EnWallmas_WaitToDrop) {
         Gfx_SetupDL25_Opa(play->state.gfxCtx);

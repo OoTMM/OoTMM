@@ -7,9 +7,7 @@
 #include "z_en_minifrog.h"
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_10)
-
-#define THIS ((EnMinifrog*)thisx)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnMinifrog_Init(Actor* thisx, PlayState* play);
 void EnMinifrog_Destroy(Actor* thisx, PlayState* play);
@@ -79,15 +77,15 @@ static InitChainEntry sInitChain[] = {
 };
 
 void EnMinifrog_Init(Actor* thisx, PlayState* play) {
-    EnMinifrog* this = THIS;
+    EnMinifrog* this = (EnMinifrog*)thisx;
     s32 i;
 
-    Actor_ProcessInitChain(&this->actor, sInitChain);
-    ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 15.0f);
+    Actor_ProcessInitChain(thisx, sInitChain);
+    ActorShape_Init(&thisx->shape, 0.0f, ActorShadow_DrawCircle, 15.0f);
     SkelAnime_InitFlex(play, &this->skelAnime, &gFrogSkel, &gFrogIdleAnim, this->jointTable, this->morphTable,
                        FROG_LIMB_MAX);
-    CollisionCheck_SetInfo(&this->actor.colChkInfo, NULL, &sColChkInfoInit);
-    Collider_InitAndSetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
+    CollisionCheck_SetInfo(&thisx->colChkInfo, NULL, &sColChkInfoInit);
+    Collider_InitAndSetCylinder(play, &this->collider, thisx, &sCylinderInit);
 
     if (!sTexturesDesegmented) {
         for (i = 0; i < ARRAY_COUNT(sEyeTextures); i++) {
@@ -96,19 +94,16 @@ void EnMinifrog_Init(Actor* thisx, PlayState* play) {
         sTexturesDesegmented = true;
     }
 
-    this->frogIndex = (this->actor.params & 0xF);
+    this->frogIndex = (thisx->params & 0xF);
     if (this->frogIndex >= 5) {
         this->frogIndex = FROG_YELLOW;
     }
 
-    this->actor.speed = 0.0f;
+    thisx->speed = 0.0f;
     this->actionFunc = EnMinifrog_Idle;
     this->jumpState = FROG_STATE_GROUND;
     this->flags = 0;
     this->timer = 0;
-
-    //! FAKE:
-    if (1) {}
 
     if (!EN_FROG_IS_RETURNED(&this->actor)) {
         if ((this->frogIndex == FROG_YELLOW) || CHECK_WEEKEVENTREG(sIsFrogReturnedFlags[this->frogIndex])) {
@@ -118,36 +113,36 @@ void EnMinifrog_Init(Actor* thisx, PlayState* play) {
 
         this->timer = 30;
         this->actionFunc = EnMinifrog_SpawnGrowAndShrink;
-        this->actor.textId = 0xD81;
-        this->actor.colChkInfo.mass = 30;
+        thisx->textId = 0xD81;
+        thisx->colChkInfo.mass = 30;
     } else { // Frogs in mountain village
         if (this->frogIndex == FROG_YELLOW) {
-            this->actor.textId = 0;
+            thisx->textId = 0;
             this->actionFunc = EnMinifrog_SetupYellowFrogDialog;
 
             if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_34_01)) {
-                this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
+                thisx->flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
             }
 
-            this->actor.home.rot.x = this->actor.home.rot.z = 0;
+            thisx->home.rot.x = thisx->home.rot.z = 0;
             this->frog = NULL;
         } else {
             this->frog = EnMinifrog_GetFrog(play);
-            this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
+            thisx->flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
 
             // Frog has been returned
             if (CHECK_WEEKEVENTREG(sIsFrogReturnedFlags[this->frogIndex])) {
                 this->actionFunc = EnMinifrog_SetupNextFrogInit;
             } else {
-                this->actor.draw = NULL;
-                this->actor.update = EnMinifrog_UpdateMissingFrog;
+                thisx->draw = NULL;
+                thisx->update = EnMinifrog_UpdateMissingFrog;
             }
         }
     }
 }
 
 void EnMinifrog_Destroy(Actor* thisx, PlayState* play) {
-    EnMinifrog* this = THIS;
+    EnMinifrog* this = (EnMinifrog*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
     if (this->flags & 0x100) {
@@ -592,7 +587,7 @@ void EnMinifrog_SetupYellowFrogDialog(EnMinifrog* this, PlayState* play) {
 }
 
 void EnMinifrog_Update(Actor* thisx, PlayState* play) {
-    EnMinifrog* this = THIS;
+    EnMinifrog* this = (EnMinifrog*)thisx;
     s32 pad;
 
     this->actionFunc(this, play);
@@ -606,7 +601,7 @@ void EnMinifrog_Update(Actor* thisx, PlayState* play) {
 }
 
 void EnMinifrog_UpdateMissingFrog(Actor* thisx, PlayState* play) {
-    EnMinifrog* this = THIS;
+    EnMinifrog* this = (EnMinifrog*)thisx;
     EnMinifrog* missingFrog;
 
     missingFrog = this->frog;
@@ -628,7 +623,7 @@ s32 EnMinifrog_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec
 }
 
 void EnMinifrog_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx) {
-    EnMinifrog* this = THIS;
+    EnMinifrog* this = (EnMinifrog*)thisx;
 
     if ((limbIndex == FROG_LIMB_RIGHT_EYE) || (limbIndex == FROG_LIMB_LEFT_EYE)) {
         OPEN_DISPS(play->state.gfxCtx);
@@ -654,7 +649,7 @@ static Color_RGBA8 sFrogEnvColors[] = {
 };
 
 void EnMinifrog_Draw(Actor* thisx, PlayState* play) {
-    EnMinifrog* this = THIS;
+    EnMinifrog* this = (EnMinifrog*)thisx;
     Color_RGBA8* envColor;
 
     OPEN_DISPS(play->state.gfxCtx);

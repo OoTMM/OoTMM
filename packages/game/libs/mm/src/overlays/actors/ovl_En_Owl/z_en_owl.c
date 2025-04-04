@@ -6,9 +6,7 @@
 
 #include "z_en_owl.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_10)
-
-#define THIS ((EnOwl*)thisx)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnOwl_Init(Actor* thisx, PlayState* play);
 void EnOwl_Destroy(Actor* thisx, PlayState* play);
@@ -81,9 +79,9 @@ static ColliderCylinderInit sCylinderInit = {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 25, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 1400, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 2000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 2400, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 1400, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 2400, ICHAIN_STOP),
 };
 
 void func_8095A510(EnOwl* this, PlayState* play) {
@@ -99,7 +97,7 @@ void func_8095A510(EnOwl* this, PlayState* play) {
 
 void EnOwl_Init(Actor* thisx, PlayState* play) {
     s32 pad;
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
     s32 i;
     s16 csId = this->actor.csId;
     s32 owlType;
@@ -209,7 +207,7 @@ void EnOwl_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnOwl_Destroy(Actor* thisx, PlayState* play) {
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
 
     if (ENOWL_GET_TYPE(&this->actor) != ENOWL_GET_TYPE_30) {
         Collider_DestroyCylinder(play, &this->collider);
@@ -449,7 +447,7 @@ void func_8095B254(EnOwl* this, PlayState* play) {
     if (this->actionFlags & 1) {
         EnOwl_ChangeMode(this, func_8095B1E4, func_8095C328, &this->skelAnimeFlying, &gOwlFlyAnim, 0.0f);
         this->unk_3EA = 6;
-        this->actor.flags |= ACTOR_FLAG_20;
+        this->actor.flags |= ACTOR_FLAG_DRAW_CULLING_DISABLED;
     }
 
     func_8095B158(this);
@@ -541,23 +539,19 @@ void func_8095B6C8(EnOwl* this, PlayState* play) {
 }
 
 void func_8095B76C(EnOwl* this, PlayState* play) {
-    s32 pad;
+    Actor* thisx = &this->actor;
     s16 sp4A;
-    f32 sp44 = Path_OrientAndGetDistSq(&this->actor, this->path, this->unk_3F8, &sp4A);
-    Vec3s* points;
+    f32 sp44 = Path_OrientAndGetDistSq(thisx, this->path, this->unk_3F8, &sp4A);
+    Vec3s* point;
 
-    Math_SmoothStepToS(&this->actor.world.rot.y, sp4A, 6, 0x800, 0x200);
-    this->actor.shape.rot.y = this->actor.world.rot.y;
-    if (sp44 < SQ(this->actor.speed)) {
-        this->actor.speed = 0.0f;
-        points = Lib_SegmentedToVirtual(this->path->points);
-        points += this->unk_3F8;
+    Math_SmoothStepToS(&thisx->world.rot.y, sp4A, 6, 0x800, 0x200);
+    thisx->shape.rot.y = thisx->world.rot.y;
+    if (sp44 < SQ(thisx->speed)) {
+        thisx->speed = 0.0f;
+        point = &((Vec3s*)Lib_SegmentedToVirtual(this->path->points))[this->unk_3F8];
 
-        //! FAKE:
-        if (1) {
-            this->actor.world.pos.x = points->x;
-            this->actor.world.pos.z = points->z;
-        }
+        thisx->world.pos.x = point->x;
+        thisx->world.pos.z = point->z;
 
         this->unk_3F8++;
         if (this->unk_3F8 >= this->path->count) {
@@ -565,21 +559,21 @@ void func_8095B76C(EnOwl* this, PlayState* play) {
             return;
         }
 
-        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_OWL, this->actor.world.pos.x, this->actor.world.pos.y,
-                    this->actor.world.pos.z, 0, 0, 0, 0xF00);
-        this->actor.home.rot.x++;
-        if (this->actor.home.rot.x >= 3) {
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_OWL, thisx->world.pos.x, thisx->world.pos.y, thisx->world.pos.z, 0,
+                    0, 0, 0xF00);
+        thisx->home.rot.x++;
+        if (thisx->home.rot.x >= 3) {
             func_8095ACEC(this);
         }
         func_8095B0C8(this);
     } else if (sp44 < SQ(21.0f)) {
-        if (this->actor.speed > 1.0f) {
-            this->actor.speed -= 1.0f;
+        if (thisx->speed > 1.0f) {
+            thisx->speed -= 1.0f;
         } else {
-            this->actor.speed = 1.0f;
+            thisx->speed = 1.0f;
         }
-    } else if (this->actor.speed < 6.0f) {
-        this->actor.speed += 1.0f;
+    } else if (thisx->speed < 6.0f) {
+        thisx->speed += 1.0f;
     }
 
     func_8095B06C(this);
@@ -762,7 +756,7 @@ void func_8095BF58(EnOwl* this, PlayState* play) {
 }
 
 void func_8095BF78(EnOwl* this, PlayState* play) {
-    this->actor.flags |= ACTOR_FLAG_20;
+    this->actor.flags |= ACTOR_FLAG_DRAW_CULLING_DISABLED;
     if (this->actor.xzDistToPlayer > 6000.0f) {
         Actor_Kill(&this->actor);
     }
@@ -905,7 +899,7 @@ void func_8095C568(EnOwl* this) {
 
 void EnOwl_Update(Actor* thisx, PlayState* play) {
     s32 pad;
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
     s16 sp36;
 
     if (this->actor.draw != NULL) {
@@ -1100,7 +1094,7 @@ void EnOwl_Update(Actor* thisx, PlayState* play) {
 }
 
 void func_8095CCF4(Actor* thisx, PlayState* play) {
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
     Player* player = GET_PLAYER(play);
 
     if (player->stateFlags3 & PLAYER_STATE3_10000000) {
@@ -1130,7 +1124,7 @@ void func_8095CCF4(Actor* thisx, PlayState* play) {
 }
 
 s32 EnOwl_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx) {
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
 
     switch (limbIndex) {
         case OWL_FLYING_LIMB_HEAD: // OWL_PERCHING_LIMB_HEAD
@@ -1163,7 +1157,7 @@ s32 EnOwl_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* p
 }
 
 void EnOwl_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx) {
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
     Vec3f sp18;
 
     sp18.z = 0.0f;
@@ -1187,7 +1181,7 @@ void EnOwl_Draw(Actor* thisx, PlayState* play) {
         gOwlEyeClosedTex,
     };
     s32 pad;
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -1202,7 +1196,7 @@ void EnOwl_Draw(Actor* thisx, PlayState* play) {
 }
 
 void func_8095D074(Actor* thisx, PlayState* play) {
-    EnOwl* this = THIS;
+    EnOwl* this = (EnOwl*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 

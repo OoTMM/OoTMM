@@ -1,3 +1,4 @@
+#include "boot.h"
 #include "carthandle.h"
 #include "CIC6105.h"
 #include "idle.h"
@@ -8,6 +9,7 @@
 OSThread sIdleThread;
 STACK(sIdleStack, 0x400);
 StackEntry sIdleStackInfo;
+STACK(sBootStack, BOOT_STACK_SIZE);
 
 extern char _bootSegmentBssStart;
 extern char _bootSegmentBssEnd;
