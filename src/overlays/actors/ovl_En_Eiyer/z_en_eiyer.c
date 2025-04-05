@@ -1,4 +1,16 @@
 #include "z_en_eiyer.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "sfx.h"
+#include "z_en_item00.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+
 #include "assets/objects/object_ei/object_ei.h"
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE)
@@ -215,7 +227,7 @@ void EnEiyer_SetupUnderground(EnEiyer* this) {
     }
 
     this->collider.base.acFlags |= AC_ON;
-    this->actor.flags &= ~ACTOR_FLAG_4;
+    this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
 }
 
@@ -265,7 +277,7 @@ void EnEiyer_SetupDiveAttack(EnEiyer* this, PlayState* play) {
 void EnEiyer_SetupLand(EnEiyer* this) {
     Animation_MorphToPlayOnce(&this->skelanime, &gStingerDiveAnim, -3.0f);
     this->collider.base.atFlags &= ~AT_ON;
-    this->actor.flags |= ACTOR_FLAG_4;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 
     // Update BgCheck info, play sound, and spawn effect on the first frame of the land action
     this->timer = -1;

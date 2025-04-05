@@ -5,12 +5,30 @@
  */
 
 #include "z_en_ik.h"
-#include "assets/scenes/dungeons/jyasinboss/jyasinboss_scene.h"
-#include "assets/objects/object_ik/object_ik.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "rand.h"
+#include "rumble.h"
+#include "sfx.h"
+#include "sequence.h"
+#include "sys_matrix.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z_en_item00.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+#include "z64skin_matrix.h"
 
-#define FLAGS ACTOR_FLAG_4
+#include "assets/scenes/dungeons/jyasinboss/jyasinboss_scene.h"
+#include "assets/objects/object_ik/object_ik.h"
+
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 typedef void (*EnIkDrawFunc)(struct EnIk*, PlayState*);
 
@@ -1394,7 +1412,8 @@ void EnIk_UpdateCutscene(Actor* thisx, PlayState* play) {
     EnIk* this = (EnIk*)thisx;
 
     if (this->csAction < 0 || this->csAction >= ARRAY_COUNT(sCsActionFuncs) || sCsActionFuncs[this->csAction] == NULL) {
-        PRINTF(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The main mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
 
@@ -1488,7 +1507,8 @@ void EnIk_DrawCutscene(Actor* thisx, PlayState* play) {
 
     if (this->csDrawMode < 0 || this->csDrawMode >= ARRAY_COUNT(sCsDrawFuncs) ||
         sCsDrawFuncs[this->csDrawMode] == NULL) {
-        PRINTF(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The drawing mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
 
@@ -1528,7 +1548,7 @@ void EnIk_StartDefeatCutscene(Actor* thisx, PlayState* play) {
         Cutscene_SetScript(play, gSpiritBossNabooruKnuckleDefeatCs);
         gSaveContext.cutsceneTrigger = 1;
         Actor_SetScale(&this->actor, 0.01f);
-        SET_EVENTCHKINF(EVENTCHKINF_3C);
+        SET_EVENTCHKINF(EVENTCHKINF_DEFEATED_NABOORU_KNUCKLE);
         EnIk_SetupCsAction3(this, play);
     }
 }
@@ -1537,7 +1557,8 @@ void EnIk_Init(Actor* thisx, PlayState* play) {
     EnIk* this = (EnIk*)thisx;
     s32 upperParams = IK_GET_UPPER_PARAMS(&this->actor);
 
-    if (((IK_GET_ARMOR_TYPE(&this->actor) == IK_TYPE_NABOORU) && GET_EVENTCHKINF(EVENTCHKINF_3C)) ||
+    if (((IK_GET_ARMOR_TYPE(&this->actor) == IK_TYPE_NABOORU) &&
+         GET_EVENTCHKINF(EVENTCHKINF_DEFEATED_NABOORU_KNUCKLE)) ||
         (upperParams != 0 && Flags_GetSwitch(play, upperParams >> 8))) {
         Actor_Kill(&this->actor);
     } else {

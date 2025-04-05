@@ -1,9 +1,32 @@
 #include "z_boss_tw.h"
-#include "assets/objects/gameplay_keep/gameplay_keep.h"
-#include "assets/objects/object_tw/object_tw.h"
 #include "overlays/actors/ovl_Door_Warp1/z_door_warp1.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_4 | ACTOR_FLAG_5)
+#include "libc64/math64.h"
+#include "libc64/qrand.h"
+#include "attributes.h"
+#include "controller.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "rand.h"
+#include "rumble.h"
+#include "segmented_address.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+#include "z64skin_matrix.h"
+
+#include "assets/objects/gameplay_keep/gameplay_keep.h"
+#include "assets/objects/object_tw/object_tw.h"
+
+#define FLAGS                                                                                 \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 typedef enum TwEffType {
     /*  0 */ TWEFF_NONE,
@@ -513,7 +536,7 @@ void BossTw_Init(Actor* thisx, PlayState* play2) {
         this->actor.naviEnemyId = NAVI_ENEMY_TWINROVA_KOTAKE;
         SkelAnime_InitFlex(play, &this->skelAnime, &gTwinrovaKotakeSkel, &gTwinrovaKotakeKoumeFlyAnim, NULL, NULL, 0);
 
-        if (GET_EVENTCHKINF(EVENTCHKINF_75)) {
+        if (GET_EVENTCHKINF(EVENTCHKINF_BEGAN_TWINROVA_BATTLE)) {
             // began twinrova battle
             BossTw_SetupFlyTo(this, play);
             this->actor.world.pos.x = -600.0f;
@@ -531,7 +554,7 @@ void BossTw_Init(Actor* thisx, PlayState* play2) {
         this->actor.naviEnemyId = NAVI_ENEMY_TWINROVA_KOUME;
         SkelAnime_InitFlex(play, &this->skelAnime, &gTwinrovaKoumeSkel, &gTwinrovaKotakeKoumeFlyAnim, NULL, NULL, 0);
 
-        if (GET_EVENTCHKINF(EVENTCHKINF_75)) {
+        if (GET_EVENTCHKINF(EVENTCHKINF_BEGAN_TWINROVA_BATTLE)) {
             // began twinrova battle
             BossTw_SetupFlyTo(this, play);
             this->actor.world.pos.x = 600.0f;
@@ -553,7 +576,7 @@ void BossTw_Init(Actor* thisx, PlayState* play2) {
         SkelAnime_InitFlex(play, &this->skelAnime, &gTwinrovaSkel, &gTwinrovaTPoseAnim, NULL, NULL, 0);
         Animation_MorphToLoop(&this->skelAnime, &gTwinrovaTPoseAnim, -3.0f);
 
-        if (GET_EVENTCHKINF(EVENTCHKINF_75)) {
+        if (GET_EVENTCHKINF(EVENTCHKINF_BEGAN_TWINROVA_BATTLE)) {
             // began twinrova battle
             BossTw_SetupWait(this, play);
         } else {
@@ -2217,7 +2240,7 @@ void BossTw_TwinrovaIntroCS(BossTw* this, PlayState* play) {
                 play->envCtx.lightBlend = 0.0f;
                 TitleCard_InitBossName(play, &play->actorCtx.titleCtx, SEGMENTED_TO_VIRTUAL(gTwinrovaTitleCardTex), 160,
                                        180, 128, 40);
-                SET_EVENTCHKINF(EVENTCHKINF_75);
+                SET_EVENTCHKINF(EVENTCHKINF_BEGAN_TWINROVA_BATTLE);
                 SEQCMD_PLAY_SEQUENCE(SEQ_PLAYER_BGM_MAIN, 0, 0, NA_BGM_BOSS);
             }
 

@@ -5,7 +5,22 @@
  */
 
 #include "z_en_hy.h"
+
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "segmented_address.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
 #include "versions.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64face_reaction.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_aob/object_aob.h"
 #include "assets/objects/object_ahg/object_ahg.h"
 #include "assets/objects/object_bob/object_bob.h"
@@ -16,7 +31,7 @@
 #include "assets/objects/object_cob/object_cob.h"
 #include "assets/objects/object_os_anime/object_os_anime.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnHy_Init(Actor* thisx, PlayState* play);
 void EnHy_Destroy(Actor* thisx, PlayState* play);
@@ -605,7 +620,7 @@ u16 EnHy_GetTextId(PlayState* play, Actor* thisx) {
     switch (ENHY_GET_TYPE(&this->actor)) {
         case ENHY_TYPE_DOG_LADY:
             if (play->sceneId == SCENE_KAKARIKO_CENTER_GUEST_HOUSE) {
-                return (this->talonEventChkInf & EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO_MASK)
+                return (this->talonEventChkInf & EVENTCHKINF_MASK(EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO))
                            ? 0x508D
                            : (GET_INFTABLE(INFTABLE_CB) ? 0x508C : 0x508B);
             } else if (play->sceneId == SCENE_MARKET_DAY) {
@@ -738,7 +753,7 @@ u16 EnHy_GetTextId(PlayState* play, Actor* thisx) {
             if (!LINK_IS_ADULT) {
                 return GET_EVENTCHKINF(EVENTCHKINF_80) ? 0x505F : (GET_INFTABLE(INFTABLE_163) ? 0x505E : 0x505D);
             } else {
-                return (this->talonEventChkInf & EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO_MASK)
+                return (this->talonEventChkInf & EVENTCHKINF_MASK(EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO))
                            ? 0x5062
                            : (GET_INFTABLE(INFTABLE_164) ? 0x5061 : 0x5060);
             }
@@ -957,7 +972,7 @@ void EnHy_OfferBuyBottledItem(EnHy* this, PlayState* play) {
     if (ENHY_GET_TYPE(&this->actor) == ENHY_TYPE_BEGGAR) {
         if (!Inventory_HasSpecificBottle(ITEM_BOTTLE_BLUE_FIRE) && !Inventory_HasSpecificBottle(ITEM_BOTTLE_BUG) &&
             !Inventory_HasSpecificBottle(ITEM_BOTTLE_FISH)) {
-            switch (func_8002F368(play)) {
+            switch (Actor_GetPlayerExchangeItemId(play)) {
                 case EXCH_ITEM_BOTTLE_POE:
                 case EXCH_ITEM_BOTTLE_BIG_POE:
                 case EXCH_ITEM_BOTTLE_RUTOS_LETTER:
@@ -971,7 +986,7 @@ void EnHy_OfferBuyBottledItem(EnHy* this, PlayState* play) {
                     break;
             }
         } else {
-            switch (func_8002F368(play)) {
+            switch (Actor_GetPlayerExchangeItemId(play)) {
                 case EXCH_ITEM_BOTTLE_BLUE_FIRE:
                     this->actor.textId = 0x70F0;
                     break;
@@ -1160,12 +1175,12 @@ void EnHy_WaitForObjects(EnHy* this, PlayState* play) {
         Animation_ChangeByInfo(&this->skelAnime, sAnimationInfo, sModelInfo[ENHY_GET_TYPE(&this->actor)].animInfoIndex);
 
         if ((play->sceneId == SCENE_BACK_ALLEY_DAY) || (play->sceneId == SCENE_MARKET_DAY)) {
-            this->actor.flags &= ~ACTOR_FLAG_4;
-            this->actor.uncullZoneScale = 0.0f;
+            this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
+            this->actor.cullingVolumeScale = 0.0f;
         }
 
         if (play->sceneId == SCENE_KAKARIKO_CENTER_GUEST_HOUSE) {
-            this->talonEventChkInf = gSaveContext.save.info.eventChkInf[EVENTCHKINF_TALON_RETURNED_FROM_KAKARIKO_INDEX];
+            this->talonEventChkInf = gSaveContext.save.info.eventChkInf[EVENTCHKINF_INDEX_TALON_RETURNED_FROM_KAKARIKO];
         }
 
         EnHy_InitSetProperties(this);

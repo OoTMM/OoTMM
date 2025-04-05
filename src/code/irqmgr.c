@@ -32,9 +32,14 @@
  *
  * @see sched.c
  */
-#include "global.h"
+#include "libu64/debug.h"
+#include "irqmgr.h"
+#include "stackcheck.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z64thread.h"
+
+#include "macros.h"
 
 vu32 gIrqMgrResetStatus = IRQ_RESET_STATUS_IDLE;
 volatile OSTime sIrqMgrResetTime = 0;
@@ -185,11 +190,11 @@ void IrqMgr_CheckStacks(void) {
         PRINTF(T("スタックは大丈夫みたいです\n", "The stack looks ok\n"));
     } else {
         PRINTF("%c", BEL);
-        PRINTF(VT_FGCOL(RED));
+        PRINTF_COLOR_RED();
         PRINTF(T("スタックがオーバーフローしたか危険な状態です\n", "Stack overflow or dangerous\n"));
         PRINTF(T("早々にスタックサイズを増やすか、スタックを消費しないようにしてください\n",
                  "Increase stack size early or don't consume stack\n"));
-        PRINTF(VT_RST);
+        PRINTF_RST();
     }
 }
 

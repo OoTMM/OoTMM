@@ -11,7 +11,7 @@ typedef struct Arena {
 #if PLATFORM_N64
     /* 0x08 */ u32 size;
     /* 0x0C */ u8 allocFailures;
-#elif PLATFORM_GC
+#else
     /* 0x08 */ OSMesgQueue lockQueue;
     /* 0x20 */ u8 allocFailures; // only used in non-debug builds
     /* 0x21 */ u8 isInit;
@@ -64,7 +64,7 @@ void __osFreeDebug(Arena* arena, void* ptr, const char* file, int line);
 void* __osReallocDebug(Arena* arena, void* ptr, u32 newSize, const char* file, int line);
 #endif
 
-#if PLATFORM_GC && DEBUG_FEATURES
+#if !PLATFORM_N64 && DEBUG_FEATURES
 void __osDisplayArena(Arena* arena);
 extern u32 __osMalloc_FreeBlockTest_Enable;
 #endif

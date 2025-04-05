@@ -5,10 +5,26 @@
  */
 
 #include "z_en_heishi1.h"
-#include "assets/objects/object_sd/object_sd.h"
-#include "terminal.h"
 
-#define FLAGS ACTOR_FLAG_4
+#include "libc64/math64.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "rand.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64debug_display.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#include "assets/objects/object_sd/object_sd.h"
+
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnHeishi1_Init(Actor* thisx, PlayState* play2);
 void EnHeishi1_Destroy(Actor* thisx, PlayState* play);
@@ -404,9 +420,9 @@ void EnHeishi1_Update(Actor* thisx, PlayState* play) {
 
         this->actionFunc(this, play);
 
-        this->actor.uncullZoneForward = 550.0f;
-        this->actor.uncullZoneScale = 350.0f;
-        this->actor.uncullZoneDownward = 700.0f;
+        this->actor.cullingVolumeDistance = 550.0f;
+        this->actor.cullingVolumeScale = 350.0f;
+        this->actor.cullingVolumeDownward = 700.0f;
 
         if (this->type != 5) {
             path = this->path * 2;

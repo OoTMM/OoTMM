@@ -5,9 +5,21 @@
  */
 
 #include "z_en_po_desert.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64light.h"
+#include "z64play.h"
+
 #include "assets/objects/object_po_field/object_po_field.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_REACT_TO_LENS | ACTOR_FLAG_IGNORE_QUAKE)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_REACT_TO_LENS | ACTOR_FLAG_IGNORE_QUAKE)
 
 void EnPoDesert_Init(Actor* thisx, PlayState* play);
 void EnPoDesert_Destroy(Actor* thisx, PlayState* play);
@@ -53,7 +65,7 @@ static ColliderCylinderInit sColliderInit = {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_S8(naviEnemyId, NAVI_ENEMY_POE_WASTELAND, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE),
     ICHAIN_F32(lockOnArrowOffset, 3200, ICHAIN_STOP),
 };
 

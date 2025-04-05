@@ -5,13 +5,21 @@
  */
 
 #include "z_en_wall_tubo.h"
-#include "quake.h"
-#include "terminal.h"
 #include "overlays/actors/ovl_En_Bom_Chu/z_en_bom_chu.h"
 #include "overlays/actors/ovl_Bg_Bowl_Wall/z_bg_bowl_wall.h"
 #include "overlays/effects/ovl_Effect_Ss_Hahen/z_eff_ss_hahen.h"
 
-#define FLAGS ACTOR_FLAG_4
+#include "rand.h"
+#include "regs.h"
+#include "sfx.h"
+#include "quake.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64debug_display.h"
+#include "z64effect.h"
+#include "z64play.h"
+
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnWallTubo_Init(Actor* thisx, PlayState* play);
 void EnWallTubo_Destroy(Actor* thisx, PlayState* play);

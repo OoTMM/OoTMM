@@ -6,12 +6,25 @@
 
 #include "z_en_goroiwa.h"
 #include "overlays/effects/ovl_Effect_Ss_Kakera/z_eff_ss_kakera.h"
+
+#include "libc64/qrand.h"
+#include "ichain.h"
+#include "quake.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_math3d.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_goroiwa/object_goroiwa.h"
-#include "quake.h"
-#include "terminal.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 typedef s32 (*EnGoroiwaUnkFunc1)(EnGoroiwa* this, PlayState* play);
 typedef void (*EnGoroiwaUnkFunc2)(EnGoroiwa* this);
@@ -105,7 +118,7 @@ void EnGoroiwa_InitCollider(EnGoroiwa* this, PlayState* play) {
     s32 pad;
 
     Collider_InitJntSph(play, &this->collider);
-    Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
+    Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderElements);
     EnGoroiwa_UpdateCollider(this);
     this->collider.elements[0].dim.worldSphere.radius = 58;
 }
@@ -536,9 +549,9 @@ void EnGoroiwa_SpawnFragments(EnGoroiwa* this, PlayState* play) {
 }
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32_DIV1000(gravity, -860, ICHAIN_CONTINUE), ICHAIN_F32_DIV1000(minVelocityY, -15000, ICHAIN_CONTINUE),
-    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),  ICHAIN_F32(uncullZoneForward, 1500, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 150, ICHAIN_CONTINUE),  ICHAIN_F32(uncullZoneDownward, 1500, ICHAIN_STOP),
+    ICHAIN_F32_DIV1000(gravity, -860, ICHAIN_CONTINUE),   ICHAIN_F32_DIV1000(minVelocityY, -15000, ICHAIN_CONTINUE),
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),    ICHAIN_F32(cullingVolumeDistance, 1500, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 150, ICHAIN_CONTINUE), ICHAIN_F32(cullingVolumeDownward, 1500, ICHAIN_STOP),
 };
 
 void EnGoroiwa_Init(Actor* thisx, PlayState* play) {
@@ -610,9 +623,9 @@ void EnGoroiwa_Roll(EnGoroiwa* this, PlayState* play) {
             }
         }
         Actor_SetPlayerKnockbackLarge(play, &this->actor, 2.0f, this->actor.yawTowardsPlayer, 0.0f, 0);
-        PRINTF(VT_FGCOL(CYAN));
+        PRINTF_COLOR_CYAN();
         PRINTF("Player ぶっ飛ばし\n"); // "Player knocked down"
-        PRINTF(VT_RST);
+        PRINTF_RST();
         onHitSetupFuncs[PARAMS_GET_U(this->actor.params, 10, 1)](this);
         Player_PlaySfx(GET_PLAYER(play), NA_SE_PL_BODY_HIT);
         if ((this->actor.home.rot.z & 1) == 1) {

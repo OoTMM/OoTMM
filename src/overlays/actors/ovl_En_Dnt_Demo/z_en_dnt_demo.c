@@ -5,10 +5,23 @@
  */
 
 #include "z_en_dnt_demo.h"
-
 #include "overlays/actors/ovl_En_Dnt_Jiji/z_en_dnt_jiji.h"
 #include "overlays/actors/ovl_En_Dnt_Nomal/z_en_dnt_nomal.h"
+
+#include "attributes.h"
+#include "one_point_cutscene.h"
+#include "rand.h"
+#include "regs.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
 #include "terminal.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64debug_display.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
 
 #define FLAGS 0
 
@@ -156,7 +169,7 @@ void EnDntDemo_Judge(EnDntDemo* this, PlayState* play) {
             delay = 0;
             switch (Player_GetMask(play)) {
                 case PLAYER_MASK_SKULL:
-                    if (!GET_ITEMGETINF(ITEMGETINF_1E)) {
+                    if (!GET_ITEMGETINF(ITEMGETINF_FOREST_STAGE_STICK_UPGRADE)) {
                         reaction = DNT_SIGNAL_CELEBRATE;
                         this->prize = DNT_PRIZE_STICK;
                         SEQCMD_PLAY_SEQUENCE(SEQ_PLAYER_BGM_MAIN, 0, 0, NA_BGM_SARIA_THEME);
@@ -164,7 +177,8 @@ void EnDntDemo_Judge(EnDntDemo* this, PlayState* play) {
                     }
                     FALLTHROUGH;
                 case PLAYER_MASK_TRUTH:
-                    if (!GET_ITEMGETINF(ITEMGETINF_1F) && (Player_GetMask(play) != PLAYER_MASK_SKULL)) {
+                    if (!GET_ITEMGETINF(ITEMGETINF_FOREST_STAGE_NUT_UPGRADE) &&
+                        (Player_GetMask(play) != PLAYER_MASK_SKULL)) {
                         Audio_PlaySfxGeneral(NA_SE_SY_TRE_BOX_APPEAR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
                         this->prize = DNT_PRIZE_NUTS;

@@ -17,7 +17,7 @@ AudioTask* AudioThread_Update(void) {
     return AudioThread_UpdateImpl();
 }
 
-#if !(OOT_VERSION < PAL_1_0 || PLATFORM_GC)
+#if !(OOT_VERSION < PAL_1_0 || !PLATFORM_N64)
 static s32 sMaxAbiCmdCnt = 0x80;
 static AudioTask* sWaitingAudioTask = NULL;
 #endif
@@ -26,7 +26,7 @@ static AudioTask* sWaitingAudioTask = NULL;
  * This is Audio_Update for the audio thread
  */
 AudioTask* AudioThread_UpdateImpl(void) {
-#if OOT_VERSION < PAL_1_0 || PLATFORM_GC
+#if OOT_VERSION < PAL_1_0 || !PLATFORM_N64
     static s32 sMaxAbiCmdCnt = 0x80;
     static AudioTask* sWaitingAudioTask = NULL;
 #endif
@@ -226,8 +226,8 @@ void AudioThread_ProcessGlobalCmd(AudioCmd* cmd) {
             }
             break;
 
-        case AUDIOCMD_OP_GLOBAL_SET_SOUND_MODE:
-            gAudioCtx.soundMode = cmd->asUInt;
+        case AUDIOCMD_OP_GLOBAL_SET_SOUND_OUTPUT_MODE:
+            gAudioCtx.soundOutputMode = cmd->asUInt;
             break;
 
         case AUDIOCMD_OP_GLOBAL_MUTE:

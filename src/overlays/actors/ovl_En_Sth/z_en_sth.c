@@ -4,12 +4,21 @@
  * Description: Uncursed House of Skulltula People
  */
 
-#include "terminal.h"
 #include "z_en_sth.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "segmented_address.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64save.h"
+
 #include "assets/objects/object_ahg/object_ahg.h"
 #include "assets/objects/object_boj/object_boj.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnSth_Init(Actor* thisx, PlayState* play);
 void EnSth_Destroy(Actor* thisx, PlayState* play);
@@ -74,17 +83,16 @@ static EnSthActionFunc sRewardObtainedWaitActions[6] = {
 };
 
 static u16 sEventFlags[6] = {
-    0, EVENTCHKINF_DA_MASK, EVENTCHKINF_DB_MASK, EVENTCHKINF_DC_MASK, EVENTCHKINF_DD_MASK, EVENTCHKINF_DE_MASK,
+    0,
+    EVENTCHKINF_MASK(EVENTCHKINF_SKULLTULA_REWARD_10),
+    EVENTCHKINF_MASK(EVENTCHKINF_SKULLTULA_REWARD_20),
+    EVENTCHKINF_MASK(EVENTCHKINF_SKULLTULA_REWARD_30),
+    EVENTCHKINF_MASK(EVENTCHKINF_SKULLTULA_REWARD_40),
+    EVENTCHKINF_MASK(EVENTCHKINF_SKULLTULA_REWARD_50),
 };
 
 static s16 sGetItemIds[6] = {
     GI_RUPEE_GOLD, GI_WALLET_ADULT, GI_STONE_OF_AGONY, GI_WALLET_GIANT, GI_BOMBCHUS_10, GI_HEART_PIECE,
-};
-
-static Vec3f D_80B0B49C = { 700.0f, 400.0f, 0.0f };
-
-static Color_RGB8 sTunicColors[6] = {
-    { 190, 110, 0 }, { 0, 180, 110 }, { 0, 255, 80 }, { 255, 160, 60 }, { 190, 230, 250 }, { 240, 230, 120 },
 };
 
 void EnSth_SetupAction(EnSth* this, EnSthActionFunc actionFunc) {
@@ -114,7 +122,7 @@ void EnSth_Init(Actor* thisx, PlayState* play) {
     }
 
     objectId = sObjectIds[params];
-    if (objectId != 1) {
+    if (objectId != OBJECT_GAMEPLAY_KEEP) {
         objectSlot = Object_GetSlot(&play->objectCtx, objectId);
     } else {
         objectSlot = 0;
@@ -154,9 +162,9 @@ void EnSth_SetupAfterObjectLoaded(EnSth* this, PlayState* play) {
                        16);
     Animation_PlayLoop(&this->skelAnime, sAnimations[this->actor.params]);
 
-    this->eventFlag = sEventFlags[this->actor.params];
     params = &this->actor.params;
-    if (gSaveContext.save.info.eventChkInf[EVENTCHKINF_DA_DB_DC_DD_DE_INDEX] & this->eventFlag) {
+    this->eventFlag = sEventFlags[*params];
+    if (gSaveContext.save.info.eventChkInf[EVENTCHKINF_INDEX_SKULLTULA_REWARD] & this->eventFlag) {
         EnSth_SetupAction(this, sRewardObtainedWaitActions[*params]);
     } else {
         EnSth_SetupAction(this, EnSth_RewardUnobtainedWait);
@@ -256,7 +264,7 @@ void EnSth_GiveReward(EnSth* this, PlayState* play) {
     if (Actor_HasParent(&this->actor, play)) {
         this->actor.parent = NULL;
         EnSth_SetupAction(this, EnSth_RewardObtainedTalk);
-        gSaveContext.save.info.eventChkInf[EVENTCHKINF_DA_DB_DC_DD_DE_INDEX] |= this->eventFlag;
+        gSaveContext.save.info.eventChkInf[EVENTCHKINF_INDEX_SKULLTULA_REWARD] |= this->eventFlag;
     } else {
         EnSth_GivePlayerItem(this, play);
     }
@@ -358,6 +366,7 @@ s32 EnSth_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* p
 }
 
 void EnSth_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx) {
+    static Vec3f D_80B0B49C = { 700.0f, 400.0f, 0.0f };
     EnSth* this = (EnSth*)thisx;
 
     if (limbIndex == 15) {
@@ -383,6 +392,9 @@ Gfx* EnSth_AllocColorDList(GraphicsContext* play, u8 envR, u8 envG, u8 envB, u8 
 }
 
 void EnSth_Draw(Actor* thisx, PlayState* play) {
+    static Color_RGB8 sShirtColors[6] = {
+        { 190, 110, 0 }, { 0, 180, 110 }, { 0, 255, 80 }, { 255, 160, 60 }, { 190, 230, 250 }, { 240, 230, 120 },
+    };
     EnSth* this = (EnSth*)thisx;
     Color_RGB8* envColor1;
 
@@ -392,8 +404,8 @@ void EnSth_Draw(Actor* thisx, PlayState* play) {
     Gfx_SetupDL_37Opa(play->state.gfxCtx);
 
     gSPSegment(POLY_OPA_DISP++, 0x08,
-               EnSth_AllocColorDList(play->state.gfxCtx, sTunicColors[this->actor.params].r,
-                                     sTunicColors[this->actor.params].g, sTunicColors[this->actor.params].b, 255));
+               EnSth_AllocColorDList(play->state.gfxCtx, sShirtColors[this->actor.params].r,
+                                     sShirtColors[this->actor.params].g, sShirtColors[this->actor.params].b, 255));
 
     if (this->actor.params == 0) {
         gSPSegment(POLY_OPA_DISP++, 0x09, EnSth_AllocColorDList(play->state.gfxCtx, 190, 110, 0, 255));

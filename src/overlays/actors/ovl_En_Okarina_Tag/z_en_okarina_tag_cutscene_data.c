@@ -1,8 +1,9 @@
-#include "z_en_okarina_tag.h"
+#include "sequence.h"
 #include "z64cutscene_commands.h"
+#include "z64player.h"
 
 // clang-format off
-CutsceneData D_80ABF9D0[] = {
+CutsceneData gWindmillSpinningFasterCs[] = {
     CS_HEADER(4, 360),
     CS_DESTINATION(CS_DEST_KAKARIKO_VILLAGE_DRAIN_WELL, 200, 201),
     CS_CAM_EYE_SPLINE(0, 331),
@@ -28,7 +29,7 @@ CutsceneData D_80ABF9D0[] = {
     CS_END_OF_SCRIPT(),
 };
 
-CutsceneData D_80ABFB40[] = {
+CutsceneData gDoorOfTimeOpeningCs[] = {
     CS_HEADER(18, 3000),
     CS_UNK_DATA_LIST(0x00000021, 1),
         CS_UNK_DATA(0x00010000, 0x0BB80000, 0x00000000, 0x00000000, 0xFFFFFFAA, 0xFFFFFFAE, 0x00000000, 0xFFFFFFAA, 0xFFFFFFAE, 0x00000000, 0x00000000, 0x00000000),

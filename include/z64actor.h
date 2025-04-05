@@ -3,6 +3,7 @@
 
 #include "color.h"
 #include "romfile.h"
+#include "z64actor_profile.h"
 #include "z64animation.h"
 #include "z64math.h"
 #include "z64collision_check.h"
@@ -23,87 +24,15 @@
 
 struct Actor;
 struct ActorEntry;
+struct ActorOverlay;
 struct CollisionPoly;
 struct Lights;
 struct Player;
 struct PlayState;
 
-typedef void (*ActorFunc)(struct Actor*, struct PlayState*);
 typedef void (*ActorShadowFunc)(struct Actor*, struct Lights*, struct PlayState*);
 typedef u16 (*NpcGetTextIdFunc)(struct PlayState*, struct Actor*);
 typedef s16 (*NpcUpdateTalkStateFunc)(struct PlayState*, struct Actor*);
-
-typedef struct ActorProfile {
-    /* 0x00 */ s16 id;
-    /* 0x02 */ u8 category; // Classifies actor and determines when it will update or draw
-    /* 0x04 */ u32 flags;
-    /* 0x08 */ s16 objectId;
-    /* 0x0C */ u32 instanceSize;
-    /* 0x10 */ ActorFunc init; // Constructor
-    /* 0x14 */ ActorFunc destroy; // Destructor
-    /* 0x18 */ ActorFunc update; // Update Function
-    /* 0x1C */ ActorFunc draw; // Draw function
-} ActorProfile; // size = 0x20
-
-/**
- * @see ACTOROVL_ALLOC_ABSOLUTE
- */
-#if DEBUG_FEATURES
-#define ACTOROVL_ABSOLUTE_SPACE_SIZE 0x27A0
-#else
-#define ACTOROVL_ABSOLUTE_SPACE_SIZE 0x24E0
-#endif
-
-/**
- * The actor overlay should be allocated memory for when loading,
- * and the memory deallocated when there is no more actor using the overlay.
- *
- * `ACTOROVL_ALLOC_` defines indicate how an actor overlay should be loaded.
- *
- * @note Bitwise or-ing `ACTOROVL_ALLOC_` types is not meaningful.
- * The `ACTOROVL_ALLOC_` types are 0, 1, 2 but checked against with a bitwise and.
- *
- * @see ACTOROVL_ALLOC_ABSOLUTE
- * @see ACTOROVL_ALLOC_PERSISTENT
- * @see actor_table.h
- */
-#define ACTOROVL_ALLOC_NORMAL 0
-
-/**
- * The actor overlay should be loaded to "absolute space".
- *
- * Absolute space is a fixed amount of memory allocated once.
- * The overlay will still need to be loaded again if at some point there is no more actor using the overlay.
- *
- * @note Only one such overlay may be loaded at a time.
- * This is not checked: a newly loaded overlay will overwrite the previous one in absolute space,
- * even if actors are still relying on the previous one. Actors using absolute-allocated overlays should be deleted
- * when another absolute-allocated overlay is about to be used.
- *
- * @see ACTOROVL_ABSOLUTE_SPACE_SIZE
- * @see ActorContext.absoluteSpace
- * @see ACTOROVL_ALLOC_NORMAL
- */
-#define ACTOROVL_ALLOC_ABSOLUTE (1 << 0)
-
-/**
- * The actor overlay should be loaded persistently.
- * It will stay loaded until the current game state instance ends.
- *
- * @see ACTOROVL_ALLOC_NORMAL
- */
-#define ACTOROVL_ALLOC_PERSISTENT (1 << 1)
-
-typedef struct ActorOverlay {
-    /* 0x00 */ RomFile file;
-    /* 0x08 */ void* vramStart;
-    /* 0x0C */ void* vramEnd;
-    /* 0x10 */ void* loadedRamAddr; // original name: "allocp"
-    /* 0x14 */ ActorProfile* profile;
-    /* 0x18 */ char* name;
-    /* 0x1C */ u16 allocType; // See `ACTOROVL_ALLOC_` defines
-    /* 0x1E */ s8 numLoaded; // original name: "clients"
-} ActorOverlay; // size = 0x20
 
 typedef struct ActorShape {
     /* 0x00 */ Vec3s rot; // Current actor shape rotation
@@ -130,14 +59,25 @@ typedef struct ActorShape {
 // What actually matters is the presence or lack of `ACTOR_FLAG_HOSTILE`.
 #define ACTOR_FLAG_FRIENDLY (1 << 3)
 
-//
-#define ACTOR_FLAG_4 (1 << 4)
+// Culling of the actor's update process is disabled.
+// In other words, the actor will keep updating even if the actor is outside its own culling volume.
+// See `Actor_CullingCheck` for more information about culling.
+// See `Actor_CullingVolumeTest` for more information on the test used to determine if an actor should be culled.
+#define ACTOR_FLAG_UPDATE_CULLING_DISABLED (1 << 4)
 
-//
-#define ACTOR_FLAG_5 (1 << 5)
+// Culling of the actor's draw process is disabled.
+// In other words, the actor will keep drawing even if the actor is outside its own culling volume.
+// See `Actor_CullingCheck` for more information about culling.
+// See `Actor_CullingVolumeTest` for more information on the test used to determine if an actor should be culled.
+// (The original name for this flag is `NO_CULL_DRAW`, known from the Majora's Mask Debug ROM)
+#define ACTOR_FLAG_DRAW_CULLING_DISABLED (1 << 5)
 
-//
-#define ACTOR_FLAG_6 (1 << 6)
+// Set if the actor is currently within the bounds of its culling volume.
+// In most cases, this flag can be used to determine whether or not an actor is currently culled.
+// However this flag still updates even if `ACTOR_FLAG_UPDATE_CULLING_DISABLED` or `ACTOR_FLAG_DRAW_CULLING_DISABLED`
+// are set. Meaning, the flag can still have a value of "false" even if it is not actually culled.
+// (The original name for this flag is `NO_CULL_FLAG`, known from the Majora's Mask Debug ROM)
+#define ACTOR_FLAG_INSIDE_CULLING_VOLUME (1 << 6)
 
 // hidden or revealed by Lens of Truth (depending on room lensMode)
 #define ACTOR_FLAG_REACT_TO_LENS (1 << 7)
@@ -277,9 +217,9 @@ typedef struct Actor {
     /* 0x0B4 */ ActorShape shape; // Variables related to the physical shape of the actor
     /* 0x0E4 */ Vec3f projectedPos; // Position of the actor in projected space
     /* 0x0F0 */ f32 projectedW; // w component of the projected actor position
-    /* 0x0F4 */ f32 uncullZoneForward; // Amount to increase the uncull zone forward by (in projected space)
-    /* 0x0F8 */ f32 uncullZoneScale; // Amount to increase the uncull zone scale by (in projected space)
-    /* 0x0FC */ f32 uncullZoneDownward; // Amount to increase uncull zone downward by (in projected space)
+    /* 0x0F4 */ f32 cullingVolumeDistance; // Forward distance of the culling volume (in projected space). See `Actor_CullingCheck` and `Actor_CullingVolumeTest` for more information.
+    /* 0x0F8 */ f32 cullingVolumeScale; // Scale of the culling volume (in projected space). See `Actor_CullingCheck` and `Actor_CullingVolumeTest` for more information.
+    /* 0x0FC */ f32 cullingVolumeDownward; // Downward height of the culling volume (in projected space). See `Actor_CullingCheck` and `Actor_CullingVolumeTest` for more information.
     /* 0x100 */ Vec3f prevPos; // World position from the previous update cycle
     /* 0x10C */ u8 isLockedOn; // Set to true if the actor is currently locked-on by Player
     /* 0x10D */ u8 attentionPriority; // Lower values have higher priority. Resets to 0 when lock-on is released.
@@ -298,7 +238,7 @@ typedef struct Actor {
     /* 0x12C */ ActorFunc destroy; // Destruction Routine. Called by `Actor_Destroy`
     /* 0x130 */ ActorFunc update; // Update Routine. Called by `Actor_UpdateAll`
     /* 0x134 */ ActorFunc draw; // Draw Routine. Called by `Actor_Draw`
-    /* 0x138 */ ActorOverlay* overlayEntry; // Pointer to the overlay table entry for this actor
+    /* 0x138 */ struct ActorOverlay* overlayEntry; // Pointer to the overlay table entry for this actor
 #if DEBUG_FEATURES
     /* 0x13C */ char dbgPad[0x10];
 #endif
@@ -350,117 +290,6 @@ typedef struct BodyBreak {
 #define BODYBREAK_OBJECT_SLOT_DEFAULT -1 // use the same object as the actor
 #define BODYBREAK_STATUS_READY -1
 #define BODYBREAK_STATUS_FINISHED 0
-
-typedef enum Item00Type {
-    /* 0x00 */ ITEM00_RUPEE_GREEN,
-    /* 0x01 */ ITEM00_RUPEE_BLUE,
-    /* 0x02 */ ITEM00_RUPEE_RED,
-    /* 0x03 */ ITEM00_RECOVERY_HEART,
-    /* 0x04 */ ITEM00_BOMBS_A,
-    /* 0x05 */ ITEM00_ARROWS_SINGLE,
-    /* 0x06 */ ITEM00_HEART_PIECE,
-    /* 0x07 */ ITEM00_HEART_CONTAINER,
-    /* 0x08 */ ITEM00_ARROWS_SMALL,
-    /* 0x09 */ ITEM00_ARROWS_MEDIUM,
-    /* 0x0A */ ITEM00_ARROWS_LARGE,
-    /* 0x0B */ ITEM00_BOMBS_B,
-    /* 0x0C */ ITEM00_NUTS,
-    /* 0x0D */ ITEM00_STICK,
-    /* 0x0E */ ITEM00_MAGIC_LARGE,
-    /* 0x0F */ ITEM00_MAGIC_SMALL,
-    /* 0x10 */ ITEM00_SEEDS,
-    /* 0x11 */ ITEM00_SMALL_KEY,
-    /* 0x12 */ ITEM00_FLEXIBLE,
-    /* 0x13 */ ITEM00_RUPEE_ORANGE,
-    /* 0x14 */ ITEM00_RUPEE_PURPLE,
-    /* 0x15 */ ITEM00_SHIELD_DEKU,
-    /* 0x16 */ ITEM00_SHIELD_HYLIAN,
-    /* 0x17 */ ITEM00_TUNIC_ZORA,
-    /* 0x18 */ ITEM00_TUNIC_GORON,
-    /* 0x19 */ ITEM00_BOMBS_SPECIAL,
-    /* 0x1A */ ITEM00_MAX,
-    /* 0xFF */ ITEM00_NONE = 0xFF
-} Item00Type;
-
-struct EnItem00;
-
-typedef void (*EnItem00ActionFunc)(struct EnItem00*, struct PlayState*);
-
-typedef struct EnItem00 {
-    /* 0x000 */ Actor actor;
-    /* 0x14C */ EnItem00ActionFunc actionFunc;
-    /* 0x150 */ s16 collectibleFlag;
-    /* 0x152 */ s16 getItemId;
-    /* 0x154 */ s16 unk_154;
-    /* 0x156 */ s16 unk_156;
-    /* 0x158 */ s16 unk_158;
-    /* 0x15A */ s16 despawnTimer;
-    /* 0x15C */ f32 scale;
-    /* 0x160 */ ColliderCylinder collider;
-} EnItem00; // size = 0x1AC
-
-// Only A_OBJ_SIGNPOST_OBLONG and A_OBJ_SIGNPOST_ARROW are used in room files.
-typedef enum AObjType {
-    /* 0x00 */ A_OBJ_BLOCK_SMALL,
-    /* 0x01 */ A_OBJ_BLOCK_LARGE,
-    /* 0x02 */ A_OBJ_BLOCK_HUGE,
-    /* 0x03 */ A_OBJ_BLOCK_SMALL_ROT,
-    /* 0x04 */ A_OBJ_BLOCK_LARGE_ROT,
-    /* 0x05 */ A_OBJ_CUBE_SMALL,
-    /* 0x06 */ A_OBJ_UNKNOWN_6,
-    /* 0x07 */ A_OBJ_GRASS_CLUMP,
-    /* 0x08 */ A_OBJ_TREE_STUMP,
-    /* 0x09 */ A_OBJ_SIGNPOST_OBLONG,
-    /* 0x0A */ A_OBJ_SIGNPOST_ARROW,
-    /* 0x0B */ A_OBJ_BOULDER_FRAGMENT,
-    /* 0x0C */ A_OBJ_MAX
-} AObjType;
-
-struct EnAObj;
-
-typedef void (*EnAObjActionFunc)(struct EnAObj*, struct PlayState*);
-
-typedef struct EnAObj {
-    /* 0x000 */ DynaPolyActor dyna;
-    /* 0x164 */ EnAObjActionFunc actionFunc;
-    /* 0x168 */ s32 rotateWaitTimer;
-    /* 0x16C */ s16 textId;
-    /* 0x16E */ s16 rotateState;
-    /* 0x170 */ s16 rotateForTimer;
-    /* 0x172 */ s16 rotSpeedY;
-    /* 0x174 */ s16 rotSpeedX;
-    /* 0x178 */ f32 focusYoffset;
-    /* 0x17C */ ColliderCylinder collider;
-} EnAObj; // size = 0x1C8
-
-typedef enum ActorCategory {
-    /* 0x00 */ ACTORCAT_SWITCH,
-    /* 0x01 */ ACTORCAT_BG,
-    /* 0x02 */ ACTORCAT_PLAYER,
-    /* 0x03 */ ACTORCAT_EXPLOSIVE,
-    /* 0x04 */ ACTORCAT_NPC,
-    /* 0x05 */ ACTORCAT_ENEMY,
-    /* 0x06 */ ACTORCAT_PROP,
-    /* 0x07 */ ACTORCAT_ITEMACTION,
-    /* 0x08 */ ACTORCAT_MISC,
-    /* 0x09 */ ACTORCAT_BOSS,
-    /* 0x0A */ ACTORCAT_DOOR,
-    /* 0x0B */ ACTORCAT_CHEST,
-    /* 0x0C */ ACTORCAT_MAX
-} ActorCategory;
-
-#define DEFINE_ACTOR(_0, enum, _2, _3) enum,
-#define DEFINE_ACTOR_INTERNAL(_0, enum, _2, _3) enum,
-#define DEFINE_ACTOR_UNSET(enum) enum,
-
-typedef enum ActorID {
-    #include "tables/actor_table.h"
-    /* 0x0192 */ ACTOR_ID_MAX // originally "ACTOR_DLF_MAX"
-} ActorID;
-
-#undef DEFINE_ACTOR
-#undef DEFINE_ACTOR_INTERNAL
-#undef DEFINE_ACTOR_UNSET
 
 typedef enum DoorLockType {
     DOORLOCK_NORMAL,
@@ -769,6 +598,8 @@ typedef struct NpcInteractInfo {
 #define TRANSITION_ACTOR_PARAMS_INDEX_SHIFT 10
 #define GET_TRANSITION_ACTOR_INDEX(actor) PARAMS_GET_NOMASK((u16)(actor)->params, 10)
 
+extern Gfx D_80116280[];
+
 void ActorShape_Init(ActorShape* shape, f32 yOffset, ActorShadowFunc shadowDraw, f32 shadowScale);
 void ActorShadow_DrawCircle(Actor* actor, struct Lights* lights, struct PlayState* play);
 void ActorShadow_DrawWhiteCircle(Actor* actor, struct Lights* lights, struct PlayState* play);
@@ -827,10 +658,10 @@ int func_8002DD78(struct Player* player);
 s32 func_8002DDE4(struct PlayState* play);
 s32 func_8002DDF4(struct PlayState* play);
 void Actor_SwapHookshotAttachment(struct PlayState* play, Actor* srcActor, Actor* destActor);
-void func_8002DE74(struct PlayState* play, struct Player* player);
+void Actor_RequestHorseCameraSetting(struct PlayState* play, struct Player* player);
 void Actor_MountHorse(struct PlayState* play, struct Player* player, Actor* horse);
 int func_8002DEEC(struct Player* player);
-void func_8002DF18(struct PlayState* play, struct Player* player);
+void Actor_InitPlayerHorse(struct PlayState* play, struct Player* player);
 s32 Player_SetCsAction(struct PlayState* play, Actor* csActor, u8 csAction);
 s32 Player_SetCsActionWithHaltedActors(struct PlayState* play, Actor* csActor, u8 csAction);
 void func_8002DF90(DynaPolyActor* dynaActor);
@@ -857,7 +688,7 @@ s32 Actor_OfferTalkExchangeEquiCylinder(Actor* actor, struct PlayState* play, f3
 s32 Actor_OfferTalk(Actor* actor, struct PlayState* play, f32 radius);
 s32 Actor_OfferTalkNearColChkInfoCylinder(Actor* actor, struct PlayState* play);
 u32 Actor_TextboxIsClosing(Actor* actor, struct PlayState* play);
-s8 func_8002F368(struct PlayState* play);
+s8 Actor_GetPlayerExchangeItemId(struct PlayState* play);
 void Actor_GetScreenPos(struct PlayState* play, Actor* actor, s16* x, s16* y);
 u32 Actor_HasParent(Actor* actor, struct PlayState* play);
 s32 Actor_OfferGetItem(Actor* actor, struct PlayState* play, s32 getItemId, f32 xzRange, f32 yRange);
@@ -886,8 +717,8 @@ s32 func_8002F9EC(struct PlayState* play, Actor* actor, struct CollisionPoly* po
 void Actor_DisableLens(struct PlayState* play);
 void Actor_InitContext(struct PlayState* play, ActorContext* actorCtx, struct ActorEntry* playerEntry);
 void Actor_UpdateAll(struct PlayState* play, ActorContext* actorCtx);
-s32 func_800314D4(struct PlayState* play, Actor* actor, Vec3f* arg2, f32 arg3);
-void func_800315AC(struct PlayState* play, ActorContext* actorCtx);
+s32 Actor_CullingVolumeTest(struct PlayState* play, Actor* actor, Vec3f* projPos, f32 projW);
+void Actor_DrawAll(struct PlayState* play, ActorContext* actorCtx);
 void Actor_KillAllWithMissingObject(struct PlayState* play, ActorContext* actorCtx);
 void func_80031B14(struct PlayState* play, ActorContext* actorCtx);
 void func_80031C3C(ActorContext* actorCtx, struct PlayState* play);
@@ -936,7 +767,7 @@ void func_80034BA0(struct PlayState* play, SkelAnime* skelAnime, OverrideLimbDra
                    PostLimbDraw postLimbDraw, Actor* actor, s16 alpha);
 void func_80034CC4(struct PlayState* play, SkelAnime* skelAnime, OverrideLimbDraw overrideLimbDraw,
                    PostLimbDraw postLimbDraw, Actor* actor, s16 alpha);
-s16 func_80034DD4(Actor* actor, struct PlayState* play, s16 arg2, f32 arg3);
+s16 Actor_UpdateAlphaByDistance(Actor* actor, struct PlayState* play, s16 alpha, f32 radius);
 void Actor_UpdateFidgetTables(struct PlayState* play, s16* fidgetTableY, s16* fidgetTableZ, s32 tableLen);
 void Actor_Noop(Actor* actor, struct PlayState* play);
 
@@ -960,7 +791,7 @@ void Flags_SetEventChkInf(s32 flag);
 s32 Flags_GetInfTable(s32 flag);
 void Flags_SetInfTable(s32 flag);
 u16 func_80037C30(struct PlayState* play, s16 arg1);
-s32 func_80037D98(struct PlayState* play, Actor* actor, s16 arg2, s32* arg3);
+s32 func_80037D98(struct PlayState* play, Actor* actor, s32 arg2, s32* arg3);
 s32 Actor_TrackPlayer(struct PlayState* play, Actor* actor, Vec3s* headRot, Vec3s* torsoRot, Vec3f focusPos);
 
 #endif

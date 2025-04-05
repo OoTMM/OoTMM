@@ -5,6 +5,21 @@
  */
 
 #include "z_en_gb.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "rand.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64light.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_ps/object_ps.h"
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY)
@@ -284,7 +299,7 @@ void func_80A2F83C(EnGb* this, PlayState* play) {
     if (Actor_TalkOfferAccepted(&this->dyna.actor, play)) {
         s32 pad;
 
-        switch (func_8002F368(play)) {
+        switch (Actor_GetPlayerExchangeItemId(play)) {
             case EXCH_ITEM_NONE:
                 func_80A2F180(this);
                 this->actionFunc = func_80A2F94C;

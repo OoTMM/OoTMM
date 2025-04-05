@@ -5,15 +5,30 @@
  */
 
 #include "z_en_zl2.h"
-#include "terminal.h"
-
-#include "z64frame_advance.h"
-
 #include "overlays/actors/ovl_Door_Warp1/z_door_warp1.h"
+
+#include "libc64/math64.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64frame_advance.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#if PLATFORM_N64
+#include "global.h"
+#endif
+
 #include "assets/objects/object_zl2/object_zl2.h"
 #include "assets/objects/object_zl2_anime1/object_zl2_anime1.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnZl2_Init(Actor* thisx, PlayState* play);
 void EnZl2_Destroy(Actor* thisx, PlayState* play);
@@ -1617,7 +1632,8 @@ void EnZl2_Update(Actor* thisx, PlayState* play) {
     EnZl2* this = (EnZl2*)thisx;
 
     if (this->action < 0 || this->action >= 0x24 || sActionFuncs[this->action] == NULL) {
-        PRINTF(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The main mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     sActionFuncs[this->action](this, play);
@@ -1713,7 +1729,8 @@ void EnZl2_Draw(Actor* thisx, PlayState* play) {
     EnZl2* this = (EnZl2*)thisx;
 
     if ((this->drawConfig < 0) || (this->drawConfig >= 3) || (sDrawFuncs[this->drawConfig] == NULL)) {
-        PRINTF(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The drawing mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     sDrawFuncs[this->drawConfig](this, play);

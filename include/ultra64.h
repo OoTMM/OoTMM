@@ -31,6 +31,7 @@
 #include "ultra64/motor.h"
 #include "ultra64/R4300.h"
 #include "ultra64/ucode.h"
+#include "ultra64/version.h"
 
 union uObjBg;
 
@@ -42,7 +43,7 @@ void osStopThread(OSThread* thread);
 void osViExtendVStart(u32 value);
 s32 osRecvMesg(OSMesgQueue* mq, OSMesg* msg, s32 flag);
 
-#if PLATFORM_N64
+#if LIBULTRA_VERSION < LIBULTRA_VERSION_K
 void osInitialize(void);
 #else
 #define osInitialize()               \
@@ -69,7 +70,6 @@ void* osViGetNextFramebuffer(void);
 void osCreatePiManager(OSPri pri, OSMesgQueue* cmdQueue, OSMesg* cmdBuf, s32 cmdMsgCnt);
 void __osDevMgrMain(void* arg);
 s32 __osPiRawStartDma(s32 dir, u32 cartAddr, void* dramAddr, size_t size);
-u32 osVirtualToPhysical(void* vaddr);
 void osViBlack(u8 active);
 s32 __osSiRawReadIo(void* devAddr, u32* dst);
 OSId osGetThreadId(OSThread* thread);
@@ -189,7 +189,6 @@ void osViSetEvent(OSMesgQueue* mq, OSMesg msg, u32 retraceCount);
 s32 osPfsIsPlug(OSMesgQueue* mq, u8* pattern);
 void __osPfsRequestData(u8 cmd);
 void __osPfsGetInitData(u8* pattern, OSContStatus* contData);
-void guS2DInitBg(union uObjBg* bg);
 s32 __osPfsSelectBank(OSPfs* pfs, u8 bank);
 s32 osContSetCh(u8 ch);
 s32 osPfsFileState(OSPfs* pfs, s32 fileNo, OSPfsState* state);

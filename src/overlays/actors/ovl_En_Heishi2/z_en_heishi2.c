@@ -4,13 +4,25 @@
  * Description: Hyrulian Guards
  */
 
-#include "terminal.h"
 #include "z_en_heishi2.h"
+#include "overlays/actors/ovl_Bg_Gate_Shutter/z_bg_gate_shutter.h"
+#include "overlays/actors/ovl_Bg_Spot15_Saku/z_bg_spot15_saku.h"
+#include "overlays/actors/ovl_En_Bom/z_en_bom.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "rand.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64face_reaction.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_sd/object_sd.h"
 #include "assets/objects/object_link_child/object_link_child.h"
-#include "overlays/actors/ovl_Bg_Gate_Shutter/z_bg_gate_shutter.h"
-#include "overlays/actors/ovl_En_Bom/z_en_bom.h"
-#include "overlays/actors/ovl_Bg_Spot15_Saku/z_bg_spot15_saku.h"
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY)
 
@@ -112,7 +124,7 @@ void EnHeishi2_Init(Actor* thisx, PlayState* play) {
             this->actor.shape.rot.y = this->actor.world.rot.y;
             Collider_DestroyCylinder(play, &this->collider);
             Player_SetCsActionWithHaltedActors(play, NULL, PLAYER_CSACTION_8);
-            this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_4;
+            this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED;
             this->actionFunc = func_80A544AC;
         }
     } else {
@@ -402,7 +414,7 @@ void func_80A53AD4(EnHeishi2* this, PlayState* play) {
     this->unk_300 = TEXT_STATE_DONE;
 
     if (Actor_TalkOfferAccepted(&this->actor, play)) {
-        s32 exchangeItemId = func_8002F368(play);
+        s32 exchangeItemId = Actor_GetPlayerExchangeItemId(play);
 
         if (exchangeItemId == EXCH_ITEM_ZELDAS_LETTER) {
             Sfx_PlaySfxCentered(NA_SE_SY_CORRECT_CHIME);

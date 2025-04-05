@@ -5,7 +5,15 @@
  */
 
 #include "z_demo_ec.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "segmented_address.h"
 #include "terminal.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64save.h"
+
 #include "assets/objects/object_zo/object_zo.h"
 #include "assets/objects/object_ec/object_ec.h"
 #include "assets/objects/object_ma2/object_ma2.h"
@@ -37,7 +45,7 @@
 #include "assets/objects/object_bba/object_bba.h"
 #include "assets/objects/object_ane/object_ane.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void DemoEc_Init(Actor* thisx, PlayState* play);
 void DemoEc_Destroy(Actor* thisx, PlayState* play);
@@ -1326,8 +1334,8 @@ void DemoEc_Update(Actor* thisx, PlayState* play) {
     s32 updateMode = this->updateMode;
 
     if ((updateMode < 0) || (updateMode >= ARRAY_COUNT(sUpdateFuncs)) || sUpdateFuncs[updateMode] == NULL) {
-        // "The main mode is strange !!!!!!!!!!!!!!!!!!!!!!!!!"
-        PRINTF(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The main mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
     } else {
         if (updateMode != EC_UPDATE_COMMON) {
             DemoEc_UseAnimationObject(this, play);
@@ -1359,8 +1367,8 @@ void DemoEc_Draw(Actor* thisx, PlayState* play) {
     s32 drawConfig = this->drawConfig;
 
     if ((drawConfig < 0) || (drawConfig >= ARRAY_COUNT(sDrawFuncs)) || sDrawFuncs[drawConfig] == NULL) {
-        // "The main mode is strange !!!!!!!!!!!!!!!!!!!!!!!!!"
-        PRINTF(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The drawing mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
     } else {
         if (drawConfig != EC_DRAW_COMMON) {
             DemoEc_UseDrawObject(this, play);

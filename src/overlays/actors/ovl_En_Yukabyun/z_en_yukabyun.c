@@ -5,9 +5,20 @@
  */
 
 #include "z_en_yukabyun.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64play.h"
+
 #include "assets/objects/object_yukabyun/object_yukabyun.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnYukabyun_Init(Actor* thisx, PlayState* play);
 void EnYukabyun_Destroy(Actor* thisx, PlayState* play);

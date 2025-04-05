@@ -2,7 +2,7 @@ checksums:
   - checksum-JP
   - checksum-US
 dmadata_start: 0x7430
-text_lang_pal: false
+text_lang: NTSC
 incbins:
   - name: ipl3
     segment: makerom
@@ -45,7 +45,7 @@ incbins:
     vram: 0x80114F30
     size: 0x60
 variables:
-  gMtxClear: 0x800FEF70
+  gIdentityMtx: 0x800FEF70
   sJpnMessageEntryTable: 0x8010AB0C
   sNesMessageEntryTable: 0x8010EC4C
   sStaffMessageEntryTable: 0x80112E6C

@@ -5,12 +5,25 @@
  */
 
 #include "z_en_anubice.h"
-#include "assets/objects/object_anubice/object_anubice.h"
 #include "overlays/actors/ovl_En_Anubice_Tag/z_en_anubice_tag.h"
 #include "overlays/actors/ovl_Bg_Hidan_Curtain/z_bg_hidan_curtain.h"
-#include "terminal.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_4)
+#include "libc64/math64.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "rand.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_en_item00.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+
+#include "assets/objects/object_anubice/object_anubice.h"
+
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnAnubice_Init(Actor* thisx, PlayState* play);
 void EnAnubice_Destroy(Actor* thisx, PlayState* play);

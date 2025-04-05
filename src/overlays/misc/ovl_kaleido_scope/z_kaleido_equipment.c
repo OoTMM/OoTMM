@@ -1,4 +1,14 @@
 #include "z_kaleido_scope.h"
+
+#include "controller.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "regs.h"
+#include "sfx.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/textures/icon_item_static/icon_item_static.h"
 #include "assets/textures/parameter_static/parameter_static.h"
 
@@ -466,7 +476,7 @@ void KaleidoScope_DrawEquipment(PlayState* play) {
                 Inventory_ChangeEquipment(pauseCtx->cursorY[PAUSE_EQUIP], pauseCtx->cursorX[PAUSE_EQUIP]);
 
                 if (pauseCtx->cursorY[PAUSE_EQUIP] == 0) {
-                    gSaveContext.save.info.infTable[INFTABLE_1DX_INDEX] = 0;
+                    gSaveContext.save.info.infTable[INFTABLE_INDEX_1DX] = 0;
                     gSaveContext.save.info.equips.buttonItems[0] = cursorItem;
 
                     if ((pauseCtx->cursorX[PAUSE_EQUIP] == 3) && (gSaveContext.save.info.playerData.bgsFlag != 0)) {

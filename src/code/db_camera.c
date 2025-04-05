@@ -1,6 +1,21 @@
-#include "global.h"
-
-#if DEBUG_FEATURES
+#include "libu64/gfxprint.h"
+#include "attributes.h"
+#include "controller.h"
+#include "db_camera.h"
+#include "debug_arena.h"
+#include "letterbox.h"
+#include "mempak.h"
+#include "regs.h"
+#include "sfx.h"
+#include "z_lib.h"
+#include "z64camera.h"
+#include "z64cutscene.h"
+#include "z64cutscene_spline.h"
+#include "z64debug.h"
+#include "z64debug_display.h"
+#include "z64olib.h"
+#include "z64play.h"
+#include "z64save.h"
 
 #define DEBUG_CAM_CONTROLLER_PORT 2
 
@@ -2368,5 +2383,3 @@ void func_800BB060(void) {
 int func_800BB06C(void) {
     return sDebugCamPtr->unk_00 == 2 && sDebugCamAnim.unk_0A != 0;
 }
-
-#endif

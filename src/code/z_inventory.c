@@ -1,4 +1,8 @@
-#include "global.h"
+#include "ultra64.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/textures/icon_item_static/icon_item_static.h"
 #include "assets/textures/icon_item_24_static/icon_item_24_static.h"
 #include "assets/textures/parameter_static/parameter_static.h"
@@ -299,7 +303,7 @@ u8 Inventory_DeleteEquipment(PlayState* play, s16 equipment) {
 
         if (equipment == EQUIP_TYPE_SWORD) {
             gSaveContext.save.info.equips.buttonItems[0] = ITEM_NONE;
-            gSaveContext.save.info.infTable[INFTABLE_1DX_INDEX] = 1;
+            gSaveContext.save.info.infTable[INFTABLE_INDEX_1DX] = 1;
         }
 
         Player_SetEquipmentData(play, player);

@@ -7,10 +7,27 @@
 
 #include "z_en_reeba.h"
 #include "overlays/actors/ovl_En_Encount1/z_en_encount1.h"
+
+#include "libc64/qrand.h"
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "rand.h"
+#include "regs.h"
+#include "sfx.h"
 #include "terminal.h"
+#include "z_en_item00.h"
+#include "z_lib.h"
+#include "z64debug_display.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+
 #include "assets/objects/object_reeba/object_reeba.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_4 | ACTOR_FLAG_LOCK_ON_DISABLED)
+#define FLAGS                                                                                 \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_LOCK_ON_DISABLED)
 
 void EnReeba_Init(Actor* thisx, PlayState* play);
 void EnReeba_Destroy(Actor* thisx, PlayState* play);

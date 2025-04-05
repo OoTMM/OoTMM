@@ -42,6 +42,7 @@ It builds the following versions:
 | gc-eu        | 03-02-21 20:12:23 | GameCube Europe/PAL                       | `2c27b4e000e85fd78dbca551f1b1c965` |
 | gc-eu-mq     | 03-02-21 20:37:19 | GameCube Europe/PAL Master Quest          | `1618403427e4344a57833043db5ce3c3` |
 | gc-jp-ce     | 03-10-08 21:53:00 | GameCube Japan (Collector's Edition Disc) | `0c13e0449a28ea5b925cdb8af8d29768` |
+| ique-cn      | 03-10-22 16:23:19 | iQue Player (Simplified Chinese)          | `0ab48b2d44a74b3bb2d384f6170c2742` |
 
 The default version is `gc-eu-mq-dbg`, i.e. the GameCube Europe/PAL Master Quest Debug ROM.
 
@@ -81,6 +82,7 @@ The build process has the following package requirements:
 * git
 * build-essential
 * binutils-mips-linux-gnu
+* curl
 * python3
 * python3-pip
 * python3-venv
@@ -91,7 +93,7 @@ Under Debian / Ubuntu (which we recommend using), you can install them with the 
 
 ```bash
 sudo apt-get update
-sudo apt-get install git build-essential binutils-mips-linux-gnu python3 python3-pip python3-venv libpng-dev libxml2-dev
+sudo apt-get install git build-essential binutils-mips-linux-gnu curl python3 python3-pip python3-venv libpng-dev libxml2-dev
 ```
 
 If you are using GCC as the compiler for Ocarina of Time, you will also need:

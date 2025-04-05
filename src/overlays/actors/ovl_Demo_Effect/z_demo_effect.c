@@ -1,6 +1,27 @@
 #include "z_demo_effect.h"
+
+#include "libc64/math64.h"
+#include "libc64/qrand.h"
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "rand.h"
+#include "segmented_address.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_math.h"
+#include "sys_matrix.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64curve.h"
+#include "z64draw.h"
+#include "z64cutscene_flags.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64save.h"
+
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_efc_crystal_light/object_efc_crystal_light.h"
 #include "assets/objects/object_efc_fire_ball/object_efc_fire_ball.h"
@@ -11,7 +32,7 @@
 #include "assets/objects/object_efc_tw/object_efc_tw.h"
 #include "assets/objects/object_gi_jewel/object_gi_jewel.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_5)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 void DemoEffect_Init(Actor* thisx, PlayState* play2);
 void DemoEffect_Destroy(Actor* thisx, PlayState* play);

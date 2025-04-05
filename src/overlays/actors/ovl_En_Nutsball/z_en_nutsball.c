@@ -6,13 +6,23 @@
 
 #include "z_en_nutsball.h"
 #include "overlays/effects/ovl_Effect_Ss_Hahen/z_eff_ss_hahen.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_dekunuts/object_dekunuts.h"
 #include "assets/objects/object_hintnuts/object_hintnuts.h"
 #include "assets/objects/object_shopnuts/object_shopnuts.h"
 #include "assets/objects/object_dns/object_dns.h"
 #include "assets/objects/object_dnk/object_dnk.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnNutsball_Init(Actor* thisx, PlayState* play);
 void EnNutsball_Destroy(Actor* thisx, PlayState* play);

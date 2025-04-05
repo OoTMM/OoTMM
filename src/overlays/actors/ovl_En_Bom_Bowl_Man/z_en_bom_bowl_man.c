@@ -1,11 +1,24 @@
 #include "z_en_bom_bowl_man.h"
-#include "terminal.h"
 #include "overlays/actors/ovl_En_Syateki_Niw/z_en_syateki_niw.h"
-#include "overlays/actors/ovl_En_Ex_Item/z_en_ex_item.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "one_point_cutscene.h"
+#include "rand.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "terminal.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_bg/object_bg.h"
 
-#define FLAGS \
-    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4 | ACTOR_FLAG_5 | ACTOR_FLAG_LOCK_ON_DISABLED)
+#define FLAGS                                                                                  \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_DRAW_CULLING_DISABLED | ACTOR_FLAG_LOCK_ON_DISABLED)
 
 typedef enum BombchuGirlEyeMode {
     /* 0 */ CHU_GIRL_EYES_ASLEEP,

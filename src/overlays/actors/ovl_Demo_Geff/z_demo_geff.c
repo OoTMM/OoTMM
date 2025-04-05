@@ -5,10 +5,19 @@
  */
 
 #include "z_demo_geff.h"
-#include "assets/objects/object_geff/object_geff.h"
-#include "terminal.h"
+#include "overlays/actors/ovl_Demo_Gt/z_demo_gt.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_5)
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z64play.h"
+
+#include "assets/objects/object_geff/object_geff.h"
+
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 void DemoGeff_Init(Actor* thisx, PlayState* play);
 void DemoGeff_Destroy(Actor* thisx, PlayState* play);
@@ -209,7 +218,8 @@ void DemoGeff_Update(Actor* thisx, PlayState* play) {
     DemoGeff* this = (DemoGeff*)thisx;
 
     if (this->action < 0 || this->action >= 2 || sActionFuncs[this->action] == NULL) {
-        PRINTF(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The main mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     sActionFuncs[this->action](this, play);
@@ -223,7 +233,8 @@ void DemoGeff_Draw(Actor* thisx, PlayState* play) {
     s32 drawConfig = this->drawConfig;
 
     if (drawConfig < 0 || drawConfig >= 2 || sDrawFuncs[drawConfig] == NULL) {
-        PRINTF(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The drawing mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     if (drawConfig != 0) {

@@ -6,9 +6,19 @@
 
 #include "z_bg_mizu_bwall.h"
 #include "overlays/actors/ovl_Bg_Mizu_Water/z_bg_mizu_water.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64play.h"
+
 #include "assets/objects/object_mizu_objects/object_mizu_objects.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void BgMizuBwall_Init(Actor* thisx, PlayState* play);
 void BgMizuBwall_Destroy(Actor* thisx, PlayState* play);
@@ -157,9 +167,9 @@ static CollisionHeader* sColHeaders[] = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneScale, 1500, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 1100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 1000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 1500, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 1100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDistance, 1000, ICHAIN_CONTINUE),
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
@@ -196,9 +206,11 @@ void BgMizuBwall_Init(Actor* thisx, PlayState* play) {
                 this->actionFunc = BgMizuBwall_DoNothing;
             } else {
                 Collider_InitTris(play, &this->collider);
-                if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitFloor, this->elements)) {
-                    PRINTF("Error : コリジョンデータセット失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_mizu_bwall.c", 484,
-                           this->dyna.actor.params);
+                if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitFloor,
+                                      this->colliderElements)) {
+                    PRINTF(T("Error : コリジョンデータセット失敗",
+                             "Error : Collision data set failure") "(%s %d)(arg_data 0x%04x)\n",
+                           "../z_bg_mizu_bwall.c", 484, this->dyna.actor.params);
                     Actor_Kill(&this->dyna.actor);
                 } else {
                     sin = Math_SinS(this->dyna.actor.shape.rot.y);
@@ -235,9 +247,11 @@ void BgMizuBwall_Init(Actor* thisx, PlayState* play) {
                 this->actionFunc = BgMizuBwall_DoNothing;
             } else {
                 Collider_InitTris(play, &this->collider);
-                if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitRutoWall, this->elements)) {
-                    PRINTF("Error : コリジョンデータセット失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_mizu_bwall.c", 558,
-                           this->dyna.actor.params);
+                if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitRutoWall,
+                                      this->colliderElements)) {
+                    PRINTF(T("Error : コリジョンデータセット失敗",
+                             "Error : Collision data set failure") "(%s %d)(arg_data 0x%04x)\n",
+                           "../z_bg_mizu_bwall.c", 558, this->dyna.actor.params);
                     Actor_Kill(&this->dyna.actor);
                 } else {
                     sin = Math_SinS(this->dyna.actor.shape.rot.y);
@@ -274,9 +288,11 @@ void BgMizuBwall_Init(Actor* thisx, PlayState* play) {
                 this->actionFunc = BgMizuBwall_DoNothing;
             } else {
                 Collider_InitTris(play, &this->collider);
-                if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitUnusedWall, this->elements)) {
-                    PRINTF("Error : コリジョンデータセット失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_mizu_bwall.c", 638,
-                           this->dyna.actor.params);
+                if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitUnusedWall,
+                                      this->colliderElements)) {
+                    PRINTF(T("Error : コリジョンデータセット失敗",
+                             "Error : Collision data set failure") "(%s %d)(arg_data 0x%04x)\n",
+                           "../z_bg_mizu_bwall.c", 638, this->dyna.actor.params);
                     Actor_Kill(&this->dyna.actor);
                 } else {
                     sin = Math_SinS(this->dyna.actor.shape.rot.y);
@@ -316,9 +332,10 @@ void BgMizuBwall_Init(Actor* thisx, PlayState* play) {
             } else {
                 Collider_InitTris(play, &this->collider);
                 if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitStingerWall,
-                                      this->elements)) {
-                    PRINTF("Error : コリジョンデータセット失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_mizu_bwall.c", 724,
-                           this->dyna.actor.params);
+                                      this->colliderElements)) {
+                    PRINTF(T("Error : コリジョンデータセット失敗",
+                             "Error : Collision data set failure") "(%s %d)(arg_data 0x%04x)\n",
+                           "../z_bg_mizu_bwall.c", 724, this->dyna.actor.params);
                     Actor_Kill(&this->dyna.actor);
                 } else {
                     sin = Math_SinS(this->dyna.actor.shape.rot.y);
@@ -358,9 +375,10 @@ void BgMizuBwall_Init(Actor* thisx, PlayState* play) {
             } else {
                 Collider_InitTris(play, &this->collider);
                 if (!Collider_SetTris(play, &this->collider, &this->dyna.actor, &sTrisInitStingerWall,
-                                      this->elements)) {
-                    PRINTF("Error : コリジョンデータセット失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_mizu_bwall.c", 798,
-                           this->dyna.actor.params);
+                                      this->colliderElements)) {
+                    PRINTF(T("Error : コリジョンデータセット失敗",
+                             "Error : Collision data set failure") "(%s %d)(arg_data 0x%04x)\n",
+                           "../z_bg_mizu_bwall.c", 798, this->dyna.actor.params);
                     Actor_Kill(&this->dyna.actor);
                 } else {
                     sin = Math_SinS(this->dyna.actor.shape.rot.y);

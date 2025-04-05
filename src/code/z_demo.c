@@ -1,9 +1,29 @@
+#pragma increment_block_number "gc-eu:0 gc-eu-mq:0 gc-jp:0 gc-jp-ce:0 gc-jp-mq:0 gc-us:0 gc-us-mq:0 ique-cn:0" \
+                               "ntsc-1.0:0 ntsc-1.1:0 ntsc-1.2:0 pal-1.0:0 pal-1.1:0"
 #include "global.h"
-#include "quake.h"
-#include "z64camera.h"
+#include "libu64/gfxprint.h"
+#include "controller.h"
+#include "gfx.h"
+#include "gfxalloc.h"
+#include "letterbox.h"
 #if PLATFORM_N64
 #include "n64dd.h"
 #endif
+#include "regs.h"
+#include "rumble.h"
+#include "quake.h"
+#include "segmented_address.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64camera.h"
+#include "z64cutscene.h"
+#include "z64cutscene_flags.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
 
 #include "assets/scenes/indoors/tokinoma/tokinoma_scene.h"
 
@@ -95,7 +115,7 @@ EntranceCutscene sEntranceCutsceneTable[] = {
     { ENTR_GERUDO_VALLEY_0, 2, EVENTCHKINF_B2, gGerudoValleyIntroCs },
     { ENTR_GERUDOS_FORTRESS_0, 2, EVENTCHKINF_B3, gGerudoFortressIntroCs },
     { ENTR_LON_LON_RANCH_0, 2, EVENTCHKINF_B4, gLonLonRanchIntroCs },
-    { ENTR_JABU_JABU_0, 2, EVENTCHKINF_B5, gJabuJabuIntroCs },
+    { ENTR_JABU_JABU_0, 2, EVENTCHKINF_B5, gJabuIntroCs },
     { ENTR_GRAVEYARD_0, 2, EVENTCHKINF_B6, gGraveyardIntroCs },
     { ENTR_ZORAS_FOUNTAIN_2, 2, EVENTCHKINF_B7, gZorasFountainIntroCs },
     { ENTR_DESERT_COLOSSUS_0, 2, EVENTCHKINF_B8, gDesertColossusIntroCs },
@@ -111,11 +131,11 @@ EntranceCutscene sEntranceCutsceneTable[] = {
     { ENTR_SPIRIT_TEMPLE_BOSS_0, 0, EVENTCHKINF_C0, gSpiritBossNabooruKnuckleIntroCs },
     { ENTR_GERUDOS_FORTRESS_17, 0, EVENTCHKINF_C7, gGerudoFortressFirstCaptureCs },
     { ENTR_DEATH_MOUNTAIN_CRATER_1, 2, EVENTCHKINF_B9, gDeathMountainCraterIntroCs },
-    { ENTR_KOKIRI_FOREST_12, 2, EVENTCHKINF_C6, gKokiriForestDekuSproutCs },
+    { ENTR_KOKIRI_FOREST_12, 2, EVENTCHKINF_C6, gKokiriForestDekuSproutPart3Cs },
 };
 
 void* sCutscenesUnknownList[] = {
-    gDekuTreeIntroCs,     gJabuJabuIntroCs, gDcOpeningCs, gSpiritBossNabooruKnuckleDefeatCs,
+    gDekuTreeIntroCs,     gJabuIntroCs,    gDcOpeningCs, gSpiritBossNabooruKnuckleDefeatCs,
     gIceCavernSerenadeCs, gTowerBarrierCs,
 };
 
@@ -124,8 +144,8 @@ u16 gCamAtSplinePointsAppliedFrame;
 u16 gCamEyePointAppliedFrame;
 u16 gCamAtPointAppliedFrame;
 
-#pragma increment_block_number "gc-eu:186 gc-eu-mq:176 gc-jp:188 gc-jp-ce:188 gc-jp-mq:176 gc-us:188 gc-us-mq:176" \
-                               "ntsc-1.0:80 ntsc-1.1:80 ntsc-1.2:80 pal-1.0:80 pal-1.1:80"
+#pragma increment_block_number "gc-eu:0 gc-eu-mq:0 gc-jp:0 gc-jp-ce:0 gc-jp-mq:0 gc-us:0 gc-us-mq:0 ique-cn:0" \
+                               "ntsc-1.0:128 ntsc-1.1:128 ntsc-1.2:0 pal-1.0:128 pal-1.1:128"
 
 // Cam ID to return to when a scripted cutscene is finished
 s16 sReturnToCamId;
@@ -400,12 +420,12 @@ void CutsceneCmd_Misc(PlayState* play, CutsceneContext* csCtx, CsCmdMisc* cmd) {
             SET_EVENTCHKINF(EVENTCHKINF_65);
             break;
 
-        case CS_MISC_SET_FLAG_WELL_DRAINED:
-            SET_EVENTCHKINF(EVENTCHKINF_67);
+        case CS_MISC_SET_FLAG_DRAINED_WELL:
+            SET_EVENTCHKINF(EVENTCHKINF_DRAINED_WELL);
             break;
 
-        case CS_MISC_SET_FLAG_LAKE_HYLIA_RESTORED:
-            SET_EVENTCHKINF(EVENTCHKINF_69);
+        case CS_MISC_SET_FLAG_RESTORED_LAKE_HYLIA:
+            SET_EVENTCHKINF(EVENTCHKINF_RESTORED_LAKE_HYLIA);
             break;
 
         case CS_MISC_VISMONO_BLACK_AND_WHITE:
@@ -732,7 +752,7 @@ void CutsceneCmd_Destination(PlayState* play, CutsceneContext* csCtx, CsCmdDesti
 
             case CS_DEST_TEMPLE_OF_TIME_AFTER_LIGHT_MEDALLION:
 #if DEBUG_FEATURES
-                SET_EVENTCHKINF(EVENTCHKINF_WATCHED_SHEIK_AFTER_MASTER_SWORD_CS);
+                SET_EVENTCHKINF(EVENTCHKINF_REVEALED_MASTER_SWORD);
 #endif
                 play->nextEntranceIndex = ENTR_TEMPLE_OF_TIME_4;
                 play->transitionTrigger = TRANS_TRIGGER_START;
@@ -903,7 +923,7 @@ void CutsceneCmd_Destination(PlayState* play, CutsceneContext* csCtx, CsCmdDesti
 
             case CS_DEST_TEMPLE_OF_TIME_AFTER_LIGHT_MEDALLION_ALT:
 #if DEBUG_FEATURES
-                SET_EVENTCHKINF(EVENTCHKINF_WATCHED_SHEIK_AFTER_MASTER_SWORD_CS);
+                SET_EVENTCHKINF(EVENTCHKINF_REVEALED_MASTER_SWORD);
 #endif
                 play->nextEntranceIndex = ENTR_TEMPLE_OF_TIME_4;
                 play->transitionTrigger = TRANS_TRIGGER_START;
@@ -1134,7 +1154,7 @@ void CutsceneCmd_Destination(PlayState* play, CutsceneContext* csCtx, CsCmdDesti
                 play->transitionType = TRANS_TYPE_FADE_BLACK;
                 break;
 
-            case CS_DEST_LON_LON_RANCH_CREDITS_PART_5:
+            case CS_DEST_LON_LON_RANCH_CREDITS_PART_6:
                 play->linkAgeOnLoad = LINK_AGE_CHILD;
                 play->nextEntranceIndex = ENTR_LON_LON_RANCH_0;
                 play->transitionTrigger = TRANS_TRIGGER_START;
@@ -1142,7 +1162,7 @@ void CutsceneCmd_Destination(PlayState* play, CutsceneContext* csCtx, CsCmdDesti
                 play->transitionType = TRANS_TYPE_FADE_BLACK;
                 break;
 
-            case CS_DEST_LON_LON_RANCH_CREDITS_PART_6:
+            case CS_DEST_LON_LON_RANCH_CREDITS_PART_5:
                 play->nextEntranceIndex = ENTR_LON_LON_RANCH_0;
                 play->transitionTrigger = TRANS_TRIGGER_START;
                 gSaveContext.save.cutsceneIndex = 0xFFF7;

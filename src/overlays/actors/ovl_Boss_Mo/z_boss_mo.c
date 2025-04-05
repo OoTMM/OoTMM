@@ -5,15 +5,44 @@
  */
 
 #include "z_boss_mo.h"
-#include "assets/objects/object_mo/object_mo.h"
 #include "overlays/actors/ovl_Door_Warp1/z_door_warp1.h"
-#include "assets/objects/gameplay_keep/gameplay_keep.h"
+
+#include "libc64/math64.h"
+#include "libc64/qrand.h"
+#include "attributes.h"
+#include "controller.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "letterbox.h"
+#include "rand.h"
+#include "regs.h"
+#include "rumble.h"
+#include "segmented_address.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
 #include "terminal.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+#include "z64skin_matrix.h"
+
+#include "global.h"
+
+#include "assets/objects/gameplay_keep/gameplay_keep.h"
+#include "assets/objects/object_mo/object_mo.h"
 
 #pragma increment_block_number "gc-eu:128 gc-eu-mq:128 gc-jp:128 gc-jp-ce:128 gc-jp-mq:128 gc-us:128 gc-us-mq:128" \
                                "pal-1.0:128 pal-1.1:128"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_4 | ACTOR_FLAG_5)
+#define FLAGS                                                                                 \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 #define MO_WATER_LEVEL(play) play->colCtx.colHeader->waterBoxes[0].ySurface
 
@@ -362,7 +391,7 @@ void BossMo_Init(Actor* thisx, PlayState* play2) {
             MO_WATER_LEVEL(play) = -500;
             return;
         }
-        if (GET_EVENTCHKINF(EVENTCHKINF_74)) {
+        if (GET_EVENTCHKINF(EVENTCHKINF_BEGAN_MORPHA_BATTLE)) {
             SEQCMD_PLAY_SEQUENCE(SEQ_PLAYER_BGM_MAIN, 0, 0, NA_BGM_BOSS);
             this->tentMaxAngle = 5.0f;
             this->timers[0] = 50;
@@ -387,7 +416,7 @@ void BossMo_Init(Actor* thisx, PlayState* play2) {
         this->actor.world.pos.y = MO_WATER_LEVEL(play);
         this->actor.prevPos = this->targetPos = this->actor.world.pos;
         Collider_InitJntSph(play, &this->tentCollider);
-        Collider_SetJntSph(play, &this->tentCollider, &this->actor, &sJntSphInit, this->tentElements);
+        Collider_SetJntSph(play, &this->tentCollider, &this->actor, &sJntSphInit, this->tentColliderElements);
         this->tentMaxAngle = 1.0f;
     }
 }
@@ -1149,7 +1178,7 @@ void BossMo_TentCollisionCheck(BossMo* this, PlayState* play) {
     s16 i2;
     ColliderElement* acHitElem;
 
-    for (i1 = 0; i1 < ARRAY_COUNT(this->tentElements); i1++) {
+    for (i1 = 0; i1 < ARRAY_COUNT(this->tentColliderElements); i1++) {
         if (this->tentCollider.elements[i1].base.acElemFlags & ACELEM_HIT) {
 
             for (i2 = 0; i2 < 19; i2++) {
@@ -1432,7 +1461,7 @@ void BossMo_IntroCs(BossMo* this, PlayState* play) {
             if (this->timers[2] == 130) {
                 TitleCard_InitBossName(play, &play->actorCtx.titleCtx, SEGMENTED_TO_VIRTUAL(gMorphaTitleCardTex), 160,
                                        180, 128, 40);
-                SET_EVENTCHKINF(EVENTCHKINF_74);
+                SET_EVENTCHKINF(EVENTCHKINF_BEGAN_MORPHA_BATTLE);
             }
             break;
         case MO_INTRO_FINISH:
@@ -1745,7 +1774,7 @@ void BossMo_CoreCollisionCheck(BossMo* this, PlayState* play) {
     s16 i;
     Player* player = GET_PLAYER(play);
 
-    PRINTF(VT_FGCOL(YELLOW));
+    PRINTF_COLOR_YELLOW();
     PRINTF("Core_Damage_check START\n");
     if (this->coreCollider.base.atFlags & AT_HIT) {
         this->coreCollider.base.atFlags &= ~AT_HIT;
@@ -1841,7 +1870,7 @@ void BossMo_CoreCollisionCheck(BossMo* this, PlayState* play) {
     }
     // "end !!"
     PRINTF("Core_Damage_check 終わり ！！\n");
-    PRINTF(VT_RST);
+    PRINTF_RST();
 }
 
 void BossMo_Core(BossMo* this, PlayState* play) {

@@ -1,8 +1,8 @@
-#include "z_bg_toki_swd.h"
 #include "z64cutscene_commands.h"
+#include "z64player.h"
 
 // clang-format off
-CutsceneData D_808BB7A0[] = {
+CutsceneData gPlaceMasterSwordCs[] = {
     CS_HEADER(9, 368),
     CS_CAM_EYE_SPLINE(0, 126),
         CS_CAM_POINT(CS_CAM_CONTINUE, 0x00, 0, CS_FLOAT(0x42700000, 60.0f), -1, 101, -110, 0x616D),

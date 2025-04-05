@@ -5,6 +5,21 @@
  */
 
 #include "z_bg_ydan_sp.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "one_point_cutscene.h"
+#include "rand.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+
 #include "assets/objects/object_ydan_objects/object_ydan_objects.h"
 
 #define FLAGS 0
@@ -293,7 +308,7 @@ void BgYdanSp_FloorWebIdle(BgYdanSp* this, PlayState* play) {
             if (this->dyna.actor.xzDistToPlayer < 80.0f) {
                 this->unk_16C = 200.0f;
                 this->dyna.actor.room = -1;
-                this->dyna.actor.flags |= ACTOR_FLAG_4;
+                this->dyna.actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
                 this->timer = 40;
                 Actor_PlaySfx(&this->dyna.actor, NA_SE_EV_WEB_BROKEN);
                 this->actionFunc = BgYdanSp_FloorWebBreaking;

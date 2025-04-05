@@ -5,11 +5,23 @@
  */
 
 #include "z_en_gm.h"
+
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "rand.h"
+#include "segmented_address.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_oF1d_map/object_oF1d_map.h"
 #include "assets/objects/object_gm/object_gm.h"
-#include "terminal.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnGm_Init(Actor* thisx, PlayState* play);
 void EnGm_Destroy(Actor* thisx, PlayState* play);
@@ -73,10 +85,10 @@ void EnGm_Init(Actor* thisx, PlayState* play) {
     this->gmObjectSlot = Object_GetSlot(&play->objectCtx, OBJECT_GM);
 
     if (this->gmObjectSlot < 0) {
-        PRINTF(VT_COL(RED, WHITE));
+        PRINTF_COLOR_ERROR();
         // "There is no model bank! !! (Medi Goron)"
         PRINTF("モデル バンクが無いよ！！（中ゴロン）\n");
-        PRINTF(VT_RST);
+        PRINTF_RST();
         ASSERT(0, "0", "../z_en_gm.c", 145);
     }
 
@@ -103,7 +115,7 @@ s32 func_80A3D7C8(void) {
 
 void func_80A3D838(EnGm* this, PlayState* play) {
     if (Object_IsLoaded(&play->objectCtx, this->gmObjectSlot)) {
-        this->actor.flags &= ~ACTOR_FLAG_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         SkelAnime_InitFlex(play, &this->skelAnime, &gGoronSkel, NULL, this->jointTable, this->morphTable, 18);
         gSegments[6] = VIRTUAL_TO_PHYSICAL(play->objectCtx.slots[this->gmObjectSlot].segment);
         Animation_Change(&this->skelAnime, &object_gm_Anim_0002B8, 1.0f, 0.0f,

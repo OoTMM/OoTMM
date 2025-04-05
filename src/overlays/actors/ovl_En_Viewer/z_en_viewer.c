@@ -7,6 +7,23 @@
 #include "z_en_viewer.h"
 #include "overlays/actors/ovl_Boss_Ganon/z_boss_ganon.h"
 #include "overlays/actors/ovl_En_Ganon_Mant/z_en_ganon_mant.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64play.h"
+#include "z64save.h"
+#include "z64skin.h"
+
 #include "assets/objects/object_zl4/object_zl4.h"
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_horse_zelda/object_horse_zelda.h"
@@ -16,7 +33,7 @@
 #include "assets/objects/object_ganon/object_ganon.h"
 #include "assets/objects/object_opening_demo1/object_opening_demo1.h"
 
-#define FLAGS ACTOR_FLAG_4
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnViewer_Init(Actor* thisx, PlayState* play);
 void EnViewer_Destroy(Actor* thisx, PlayState* play);
@@ -44,7 +61,7 @@ ActorProfile En_Viewer_Profile = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneScale, 300, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeScale, 300, ICHAIN_STOP),
 };
 
 static EnViewerInitData sInitData[] = {
@@ -176,7 +193,7 @@ void EnViewer_InitImpl(EnViewer* this, PlayState* play) {
 
     if (!Object_IsLoaded(&play->objectCtx, skelObjectSlot) ||
         !Object_IsLoaded(&play->objectCtx, this->animObjectSlot)) {
-        this->actor.flags &= ~ACTOR_FLAG_6;
+        this->actor.flags &= ~ACTOR_FLAG_INSIDE_CULLING_VOLUME;
         return;
     }
 
@@ -209,9 +226,9 @@ void EnViewer_UpdateImpl(EnViewer* this, PlayState* play) {
         }
     } else if (type == ENVIEWER_TYPE_7_GANONDORF) {
         Actor_SetScale(&this->actor, 0.3f);
-        this->actor.uncullZoneForward = 10000.0f;
-        this->actor.uncullZoneScale = 10000.0f;
-        this->actor.uncullZoneDownward = 10000.0f;
+        this->actor.cullingVolumeDistance = 10000.0f;
+        this->actor.cullingVolumeScale = 10000.0f;
+        this->actor.cullingVolumeDownward = 10000.0f;
     } else if (type == ENVIEWER_TYPE_3_GANONDORF) {
         if (gSaveContext.sceneLayer == 4) {
             switch (play->csCtx.curFrame) {

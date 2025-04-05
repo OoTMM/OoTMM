@@ -5,11 +5,23 @@
  */
 
 #include "z_en_guest.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "rand.h"
+#include "segmented_address.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_os_anime/object_os_anime.h"
 #include "assets/objects/object_boj/object_boj.h"
-#include "terminal.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnGuest_Init(Actor* thisx, PlayState* play);
 void EnGuest_Destroy(Actor* thisx, PlayState* play);
@@ -57,10 +69,10 @@ void EnGuest_Init(Actor* thisx, PlayState* play) {
     } else {
         this->osAnimeObjectSlot = Object_GetSlot(&play->objectCtx, OBJECT_OS_ANIME);
         if (this->osAnimeObjectSlot < 0) {
-            PRINTF(VT_COL(RED, WHITE));
+            PRINTF_COLOR_ERROR();
             // "No such bank!!"
             PRINTF("%s[%d] : バンクが無いよ！！\n", "../z_en_guest.c", 129);
-            PRINTF(VT_RST);
+            PRINTF_RST();
             ASSERT(0, "0", "../z_en_guest.c", 132);
         }
     }
@@ -77,7 +89,7 @@ void EnGuest_Update(Actor* thisx, PlayState* play) {
     s32 pad;
 
     if (Object_IsLoaded(&play->objectCtx, this->osAnimeObjectSlot)) {
-        this->actor.flags &= ~ACTOR_FLAG_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         Actor_ProcessInitChain(&this->actor, sInitChain);
 
         SkelAnime_InitFlex(play, &this->skelAnime, &gHylianMan2Skel, NULL, this->jointTable, this->morphTable, 16);

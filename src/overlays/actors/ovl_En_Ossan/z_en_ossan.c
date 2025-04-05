@@ -1,5 +1,22 @@
 #include "z_en_ossan.h"
+#include "overlays/actors/ovl_En_Elf/z_en_elf.h"
+#include "overlays/actors/ovl_En_GirlA/z_en_girla.h"
+#include "overlays/actors/ovl_En_Tana/z_en_tana.h"
+
+#include "libc64/qrand.h"
+#include "controller.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sfx.h"
 #include "terminal.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_ossan/object_ossan.h"
 #include "assets/objects/object_oF1d_map/object_oF1d_map.h"
@@ -7,14 +24,13 @@
 #include "assets/objects/object_zo/object_zo.h"
 #include "assets/objects/object_rs/object_rs.h"
 #include "assets/objects/object_ds2/object_ds2.h"
-#include "overlays/actors/ovl_En_Elf/z_en_elf.h"
 #include "assets/objects/object_masterkokiri/object_masterkokiri.h"
 #include "assets/objects/object_km1/object_km1.h"
 #include "assets/objects/object_mastergolon/object_mastergolon.h"
 #include "assets/objects/object_masterzoora/object_masterzoora.h"
 #include "assets/objects/object_masterkokirihead/object_masterkokirihead.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 #if !PLATFORM_GC
 #define CURSOR_COLOR_R 0
@@ -593,9 +609,9 @@ void EnOssan_Init(Actor* thisx, PlayState* play) {
     //! @bug This check will always evaluate to false, it should be || not &&
     if (this->actor.params > OSSAN_TYPE_MASK && this->actor.params < OSSAN_TYPE_KOKIRI) {
         Actor_Kill(&this->actor);
-        PRINTF(VT_COL(RED, WHITE));
+        PRINTF_COLOR_ERROR();
         PRINTF("引数がおかしいよ(arg_data=%d)！！\n", this->actor.params);
-        PRINTF(VT_RST);
+        PRINTF_RST();
         ASSERT(0, "0", "../z_en_oB1.c", 1246);
         return;
     }
@@ -622,18 +638,18 @@ void EnOssan_Init(Actor* thisx, PlayState* play) {
 
     if (this->objectSlot1 < 0) {
         Actor_Kill(&this->actor);
-        PRINTF(VT_COL(RED, WHITE));
+        PRINTF_COLOR_ERROR();
         PRINTF("バンクが無いよ！！(%s)\n", sShopkeeperPrintName[this->actor.params]);
-        PRINTF(VT_RST);
+        PRINTF_RST();
         ASSERT(0, "0", "../z_en_oB1.c", 1284);
         return;
     }
 
     if (EnOssan_TryGetObjBankIndices(this, play, objectIds) == 0) {
         Actor_Kill(&this->actor);
-        PRINTF(VT_COL(RED, WHITE));
+        PRINTF_COLOR_ERROR();
         PRINTF("予備バンクが無いよ！！(%s)\n", sShopkeeperPrintName[this->actor.params]);
-        PRINTF(VT_RST);
+        PRINTF_RST();
         ASSERT(0, "0", "../z_en_oB1.c", 1295);
         return;
     }
@@ -877,18 +893,18 @@ void EnOssan_TryPaybackMask(EnOssan* this, PlayState* play) {
         Rupees_ChangeBy(-price);
 
         if (this->happyMaskShopState == OSSAN_HAPPY_STATE_REQUEST_PAYMENT_BUNNY_HOOD) {
-            SET_EVENTCHKINF(EVENTCHKINF_8F);
+            SET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_BUNNY_HOOD);
             Message_ContinueTextbox(play, 0x70A9);
             this->happyMaskShopState = OSSAN_HAPPY_STATE_ALL_MASKS_SOLD;
             return;
         }
 
         if (this->happyMaskShopState == OSSAN_HAPPY_STATE_REQUEST_PAYMENT_KEATON_MASK) {
-            SET_EVENTCHKINF(EVENTCHKINF_8C);
+            SET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_KEATON_MASK);
         } else if (this->happyMaskShopState == OSSAN_HAPPY_STATE_REQUEST_PAYMENT_SPOOKY_MASK) {
-            SET_EVENTCHKINF(EVENTCHKINF_8E);
+            SET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_SPOOKY_MASK);
         } else if (this->happyMaskShopState == OSSAN_HAPPY_STATE_REQUEST_PAYMENT_SKULL_MASK) {
-            SET_EVENTCHKINF(EVENTCHKINF_8D);
+            SET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_SKULL_MASK);
         }
 
         Message_ContinueTextbox(play, 0x70A7);
@@ -2059,7 +2075,7 @@ u16 EnOssan_SetupHelloDialog(EnOssan* this) {
     if (this->actor.params == OSSAN_TYPE_MASK) {
         if (INV_CONTENT(ITEM_TRADE_CHILD) == ITEM_SOLD_OUT) {
             if (GET_ITEMGETINF(ITEMGETINF_3B)) {
-                if (!GET_EVENTCHKINF(EVENTCHKINF_8F)) {
+                if (!GET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_BUNNY_HOOD)) {
                     // Pay back Bunny Hood
                     this->happyMaskShopState = OSSAN_HAPPY_STATE_REQUEST_PAYMENT_BUNNY_HOOD;
                     return 0x70C6;
@@ -2068,7 +2084,7 @@ u16 EnOssan_SetupHelloDialog(EnOssan* this) {
                 }
             }
             if (GET_ITEMGETINF(ITEMGETINF_3A)) {
-                if (!GET_EVENTCHKINF(EVENTCHKINF_8E)) {
+                if (!GET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_SPOOKY_MASK)) {
                     // Pay back Spooky Mask
                     this->happyMaskShopState = OSSAN_HAPPY_STATE_REQUEST_PAYMENT_SPOOKY_MASK;
                     return 0x70C5;
@@ -2077,7 +2093,7 @@ u16 EnOssan_SetupHelloDialog(EnOssan* this) {
                 }
             }
             if (GET_ITEMGETINF(ITEMGETINF_39)) {
-                if (!GET_EVENTCHKINF(EVENTCHKINF_8D)) {
+                if (!GET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_SKULL_MASK)) {
                     // Pay back Skull Mask
                     this->happyMaskShopState = OSSAN_HAPPY_STATE_REQUEST_PAYMENT_SKULL_MASK;
                     return 0x70C4;
@@ -2086,7 +2102,7 @@ u16 EnOssan_SetupHelloDialog(EnOssan* this) {
                 }
             }
             if (GET_ITEMGETINF(ITEMGETINF_38)) {
-                if (!GET_EVENTCHKINF(EVENTCHKINF_8C)) {
+                if (!GET_EVENTCHKINF(EVENTCHKINF_PAID_BACK_KEATON_MASK)) {
                     // Pay back Keaton Mask
                     this->happyMaskShopState = OSSAN_HAPPY_STATE_REQUEST_PAYMENT_KEATON_MASK;
                     return 0x70A5;
@@ -2120,17 +2136,17 @@ void EnOssan_InitActionFunc(EnOssan* this, PlayState* play) {
     ShopItem* items;
 
     if (EnOssan_AreShopkeeperObjectsLoaded(this, play)) {
-        this->actor.flags &= ~ACTOR_FLAG_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         this->actor.objectSlot = this->objectSlot1;
         Actor_SetObjectDependency(play, &this->actor);
 
         this->shelves = (EnTana*)Actor_Find(&play->actorCtx, ACTOR_EN_TANA, ACTORCAT_PROP);
 
         if (this->shelves == NULL) {
-            PRINTF(VT_COL(RED, WHITE));
+            PRINTF_COLOR_ERROR();
             // "Warning!! There are no shelves!!"
             PRINTF("★★★ 警告！！ 棚がないよ！！ ★★★\n");
-            PRINTF(VT_RST);
+            PRINTF_RST();
             return;
         }
 

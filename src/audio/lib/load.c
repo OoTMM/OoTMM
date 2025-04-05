@@ -1,6 +1,9 @@
 #include "ultra64.h"
-#include "global.h"
+#include "attributes.h"
+#include "buffers.h"
 #include "versions.h"
+
+#include "global.h"
 
 #define MK_ASYNC_MSG(retData, tableType, id, loadStatus) \
     (((retData) << 24) | ((tableType) << 16) | ((id) << 8) | (loadStatus))
@@ -1189,7 +1192,7 @@ void AudioLoad_Init(void* heap, u32 heapSize) {
     gAudioCtx.totalTaskCount = 0;
     gAudioCtx.rspTaskIndex = 0;
     gAudioCtx.curAiBufIndex = 0;
-    gAudioCtx.soundMode = SOUNDMODE_STEREO;
+    gAudioCtx.soundOutputMode = SOUND_OUTPUT_STEREO;
     gAudioCtx.curTask = NULL;
     gAudioCtx.rspTask[0].task.t.data_size = 0;
     gAudioCtx.rspTask[1].task.t.data_size = 0;
@@ -1250,8 +1253,7 @@ void AudioLoad_Init(void* heap, u32 heapSize) {
 
     ramAddr = AudioHeap_Alloc(&gAudioCtx.initPool, gAudioHeapInitSizes.permanentPoolSize);
     if (ramAddr == NULL) {
-        // cast away const from gAudioHeapInitSizes
-        *((u32*)&gAudioHeapInitSizes.permanentPoolSize) = 0;
+        gAudioHeapInitSizes.permanentPoolSize = 0;
     }
 
     AudioHeap_InitPool(&gAudioCtx.permanentPool, ramAddr, gAudioHeapInitSizes.permanentPoolSize);

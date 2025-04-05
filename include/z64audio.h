@@ -68,12 +68,19 @@ typedef void (*AudioCustomUpdateFunction)(void);
 
 #define AUDIO_RELOCATED_ADDRESS_START K0BASE
 
-typedef enum SoundMode {
-    /* 0 */ SOUNDMODE_STEREO,
-    /* 1 */ SOUNDMODE_HEADSET,
-    /* 2 */ SOUNDMODE_SURROUND,
-    /* 3 */ SOUNDMODE_MONO
-} SoundMode;
+typedef enum SoundSetting {
+    /* 0 */ SOUND_SETTING_STEREO,
+    /* 1 */ SOUND_SETTING_MONO,
+    /* 2 */ SOUND_SETTING_HEADSET,
+    /* 3 */ SOUND_SETTING_SURROUND
+} SoundSetting;
+
+typedef enum SoundOutputMode {
+    /* 0 */ SOUND_OUTPUT_STEREO,
+    /* 1 */ SOUND_OUTPUT_HEADSET,
+    /* 2 */ SOUND_OUTPUT_SURROUND,
+    /* 3 */ SOUND_OUTPUT_MONO
+} SoundOutputMode;
 
 typedef enum AdsrStatus {
     /* 0 */ ADSR_STATE_DISABLED,
@@ -201,11 +208,9 @@ typedef struct AdpcmBookHeader {
  * The procedure used to design the codeBook is based on an adaptive clustering algorithm.
  * The size of the codeBook is (8 * order * numPredictors) and is 8-byte aligned
  */
-typedef s16 AdpcmBookData[];
-
 typedef struct AdpcmBook {
     /* 0x00 */ AdpcmBookHeader header;
-    /* 0x08 */ AdpcmBookData book; // size 8 * order * numPredictors. 8-byte aligned
+    /* 0x08 */ s16 book[1]; // size 8 * order * numPredictors. 8-byte aligned
 } AdpcmBook; // size >= 0x8
 
 typedef struct Sample {
@@ -931,7 +936,7 @@ typedef struct AudioContext {
     /* 0x2890 */ s32 maxAudioCmds;
     /* 0x2894 */ s32 numNotes;
     /* 0x2898 */ s16 maxTempo; // Maximum possible tempo (seqTicks per minute), using every tick as a seqTick to process a .seq file
-    /* 0x289A */ s8 soundMode;
+    /* 0x289A */ s8 soundOutputMode;
     /* 0x289C */ s32 totalTaskCount; // The total number of times the top-level function on the audio thread has run since audio was initialized
     /* 0x28A0 */ s32 curAudioFrameDmaCount;
     /* 0x28A4 */ s32 rspTaskIndex;
@@ -1199,7 +1204,7 @@ void func_800F64E0(u8 arg0);
 void Audio_ToggleMalonSinging(u8 malonSingingDisabled);
 void Audio_SetEnvReverb(s8 reverb);
 void Audio_SetCodeReverb(s8 reverb);
-void func_800F6700(s8 audioSetting);
+void Audio_SetSoundOutputMode(s8 soundSetting);
 void Audio_SetBaseFilter(u8);
 void Audio_SetExtraFilter(u8);
 void Audio_SetCutsceneFlag(s8 flag);

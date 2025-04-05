@@ -5,12 +5,29 @@
  */
 
 #include "z_en_ru1.h"
-#include "assets/objects/object_ru1/object_ru1.h"
-#include "terminal.h"
-#include "versions.h"
 #include "overlays/actors/ovl_Demo_Effect/z_demo_effect.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_4 | ACTOR_FLAG_CAN_PRESS_SWITCHES)
+#include "libc64/math64.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "terminal.h"
+#include "versions.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64face_reaction.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#include "assets/objects/object_ru1/object_ru1.h"
+
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_CAN_PRESS_SWITCHES)
 
 void EnRu1_Init(Actor* thisx, PlayState* play);
 void EnRu1_Destroy(Actor* thisx, PlayState* play);
@@ -862,7 +879,7 @@ void func_80AEC780(EnRu1* this, PlayState* play) {
         (!(player->stateFlags1 & (PLAYER_STATE1_13 | PLAYER_STATE1_14 | PLAYER_STATE1_21))) &&
         (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND)) {
 
-        play->csCtx.script = D_80AF0880;
+        play->csCtx.script = gRutoFirstMeetingCs;
         gSaveContext.cutsceneTrigger = 1;
         player->speedXZ = 0.0f;
         this->action = 8;
@@ -1552,7 +1569,7 @@ s32 func_80AEE394(EnRu1* this, PlayState* play) {
         if (dynaPolyActor != NULL && dynaPolyActor->actor.id == ACTOR_BG_BDAN_OBJECTS &&
             dynaPolyActor->actor.params == 0 && !Player_InCsMode(play) && play->msgCtx.msgLength == 0) {
             func_80AEE02C(this);
-            play->csCtx.script = D_80AF10A4;
+            play->csCtx.script = gRutoObtainingSapphireCs;
             gSaveContext.cutsceneTrigger = 1;
             this->action = 36;
             this->drawConfig = 0;
@@ -1625,7 +1642,7 @@ s32 func_80AEE6D0(EnRu1* this, PlayState* play) {
             func_80AED600(this);
             this->action = 34;
             this->unk_26C = 0.0f;
-            play->csCtx.script = D_80AF1728;
+            play->csCtx.script = gRutoFoundSapphireCs;
             gSaveContext.cutsceneTrigger = 1;
         }
         this->roomNum3 = curRoomNum;
@@ -2155,7 +2172,7 @@ void func_80AEFCE8(EnRu1* this, PlayState* play) {
 void func_80AEFD38(EnRu1* this, PlayState* play) {
     if (GET_EVENTCHKINF(EVENTCHKINF_37) && LINK_IS_CHILD) {
         func_80AEB264(this, &gRutoChildWait2Anim, 0, 0, 0);
-        this->actor.flags &= ~ACTOR_FLAG_4;
+        this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         this->action = 44;
         this->drawConfig = 1;
     } else {
@@ -2249,8 +2266,8 @@ void EnRu1_Update(Actor* thisx, PlayState* play) {
     EnRu1* this = (EnRu1*)thisx;
 
     if (this->action < 0 || this->action >= ARRAY_COUNT(sActionFuncs) || sActionFuncs[this->action] == NULL) {
-        // "Main mode is improper!"
-        PRINTF(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The main mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
 
@@ -2403,8 +2420,8 @@ void EnRu1_Draw(Actor* thisx, PlayState* play) {
     EnRu1* this = (EnRu1*)thisx;
 
     if (this->drawConfig < 0 || this->drawConfig >= ARRAY_COUNT(sDrawFuncs) || sDrawFuncs[this->drawConfig] == NULL) {
-        // "Draw mode is improper!"
-        PRINTF(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The drawing mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     sDrawFuncs[this->drawConfig](this, play);

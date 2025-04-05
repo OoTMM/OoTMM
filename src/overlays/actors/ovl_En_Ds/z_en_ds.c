@@ -5,6 +5,16 @@
  */
 
 #include "z_en_ds.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_ds/object_ds.h"
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY)
@@ -206,7 +216,7 @@ void EnDs_Wait(EnDs* this, PlayState* play) {
     s16 yawDiff;
 
     if (Actor_TalkOfferAccepted(&this->actor, play)) {
-        if (func_8002F368(play) == EXCH_ITEM_ODD_MUSHROOM) {
+        if (Actor_GetPlayerExchangeItemId(play) == EXCH_ITEM_ODD_MUSHROOM) {
             Audio_PlaySfxGeneral(NA_SE_SY_TRE_BOX_APPEAR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                  &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
             player->actor.textId = 0x504A;

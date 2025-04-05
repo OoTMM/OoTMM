@@ -1,5 +1,11 @@
 #include "global.h"
+#include "ultra64.h"
+#include "attributes.h"
+#include "jpeg.h"
+#include "sys_ucode.h"
 #include "terminal.h"
+
+#include "macros.h"
 
 #define MARKER_ESCAPE 0x00
 #define MARKER_SOI 0xD8
@@ -337,9 +343,9 @@ s32 Jpeg_Decode(void* data, void* zbuffer, void* work, u32 workSize) {
     x = y = 0;
     for (i = 0; i < 300; i += 4) {
         if (JpegDecoder_Decode(&decoder, (u16*)workBuff->data, 4, i != 0, &state)) {
-            PRINTF(VT_FGCOL(RED));
+            PRINTF_COLOR_RED();
             PRINTF("Error : Can't decode jpeg\n");
-            PRINTF(VT_RST);
+            PRINTF_RST();
         } else {
             Jpeg_ScheduleDecoderTask(&ctx);
             osInvalDCache(&workBuff->data, sizeof(workBuff->data[0]));

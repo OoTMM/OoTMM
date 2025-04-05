@@ -5,11 +5,25 @@
  */
 
 #include "z_en_ru2.h"
-#include "assets/objects/object_ru2/object_ru2.h"
 #include "overlays/actors/ovl_Door_Warp1/z_door_warp1.h"
-#include "terminal.h"
 
-#define FLAGS ACTOR_FLAG_4
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "one_point_cutscene.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#include "assets/objects/object_ru2/object_ru2.h"
+
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnRu2_Init(Actor* thisx, PlayState* play);
 void EnRu2_Destroy(Actor* thisx, PlayState* play);
@@ -340,17 +354,17 @@ void EnRu2_SpawnWaterMedallion(EnRu2* this, PlayState* play) {
 void EnRu2_CheckWaterMedallionCutscene(EnRu2* this, PlayState* play) {
     s32 pad[2];
     Player* player;
-    s16 temp;
+    s16 yaw;
 
     if ((gSaveContext.chamberCutsceneNum == CHAMBER_CS_WATER) && !IS_CUTSCENE_LAYER) {
         player = GET_PLAYER(play);
         this->action = ENRU2_AWAIT_BLUE_WARP;
-        play->csCtx.script = gWaterMedallionCS;
+        play->csCtx.script = gWaterMedallionCs;
         gSaveContext.cutsceneTrigger = 2;
         Item_Give(play, ITEM_MEDALLION_WATER);
-        temp = this->actor.world.rot.y + 0x8000;
-        player->actor.shape.rot.y = temp;
-        player->actor.world.rot.y = temp;
+        yaw = this->actor.world.rot.y + 0x8000;
+        player->actor.shape.rot.y = yaw;
+        player->actor.world.rot.y = yaw;
     }
 }
 
@@ -582,8 +596,8 @@ void EnRu2_AwaitSpawnLightBall(EnRu2* this, PlayState* play) {
 
 void EnRu2_DrawXlu(EnRu2* this, PlayState* play) {
     s32 pad[2];
-    s16 temp = this->eyeIndex;
-    void* tex = sEyeTextures[temp];
+    s16 eyeIndex = this->eyeIndex;
+    void* tex = sEyeTextures[eyeIndex];
     SkelAnime* skelAnime = &this->skelAnime;
 
     OPEN_DISPS(play->state.gfxCtx, "../z_en_ru2_inKenjyanomaDemo02.c", 264);
@@ -616,19 +630,19 @@ void EnRu2_InitCredits(EnRu2* this, PlayState* play) {
  */
 void EnRu2_FadeInCredits(EnRu2* this) {
     f32* fadeTimer = &this->fadeTimer;
-    f32 temp_f0;
-    s32 temp_f18;
+    f32 fadeDuration;
+    s32 alpha;
 
     *fadeTimer += 1.0f;
 
-    temp_f0 = kREG(17) + 10.0f;
-    if (temp_f0 <= *fadeTimer) {
+    fadeDuration = kREG(17) + 10.0f;
+    if (fadeDuration <= *fadeTimer) {
         this->alpha = 255;
         this->actor.shape.shadowAlpha = 0xFF;
     } else {
-        temp_f18 = (*fadeTimer / temp_f0) * 255.0f;
-        this->alpha = temp_f18;
-        this->actor.shape.shadowAlpha = temp_f18;
+        alpha = (*fadeTimer / fadeDuration) * 255.0f;
+        this->alpha = alpha;
+        this->actor.shape.shadowAlpha = alpha;
     }
 }
 
@@ -907,8 +921,8 @@ void EnRu2_Update(Actor* thisx, PlayState* play) {
     EnRu2* this = (EnRu2*)thisx;
 
     if ((this->action < 0) || (this->action >= ARRAY_COUNT(sActionFuncs)) || (sActionFuncs[this->action] == NULL)) {
-        // "Main Mode is improper!"
-        PRINTF(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The main mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     sActionFuncs[this->action](this, play);
@@ -945,8 +959,8 @@ void EnRu2_DrawNothing(EnRu2* this, PlayState* play) {
 
 void EnRu2_DrawOpa(EnRu2* this, PlayState* play) {
     s32 pad[2];
-    s16 temp = this->eyeIndex;
-    void* tex = sEyeTextures[temp];
+    s16 eyeIndex = this->eyeIndex;
+    void* tex = sEyeTextures[eyeIndex];
     SkelAnime* skelAnime = &this->skelAnime;
 
     OPEN_DISPS(play->state.gfxCtx, "../z_en_ru2.c", 642);
@@ -968,8 +982,8 @@ void EnRu2_Draw(Actor* thisx, PlayState* play) {
 
     if ((this->drawConfig < 0) || (this->drawConfig >= ARRAY_COUNT(sDrawFuncs)) ||
         (sDrawFuncs[this->drawConfig] == NULL)) {
-        // "Draw Mode is improper!"
-        PRINTF(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+        PRINTF(VT_FGCOL(RED) T("描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+                               "The drawing mode is wrong!!!!!!!!!!!!!!!!!!!!!!!!!\n") VT_RST);
         return;
     }
     sDrawFuncs[this->drawConfig](this, play);

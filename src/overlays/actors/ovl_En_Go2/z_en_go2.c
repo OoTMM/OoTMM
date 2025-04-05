@@ -1,11 +1,30 @@
 #include "z_en_go2.h"
 #include "overlays/actors/ovl_En_Bom/z_en_bom.h"
+
+#include "libc64/qrand.h"
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "one_point_cutscene.h"
+#include "quake.h"
+#include "segmented_address.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
+#include "versions.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64face_reaction.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_oF1d_map/object_oF1d_map.h"
-#include "quake.h"
-#include "versions.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4 | ACTOR_FLAG_5)
+#define FLAGS                                                                                  \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 /*
 FLAGS
@@ -591,7 +610,7 @@ s16 EnGo2_UpdateTalkStateGoronDmtBiggoron(PlayState* play, EnGo2* this) {
         case TEXT_STATE_DONE_FADING:
             switch (this->actor.textId) {
                 case 0x305E:
-                    if (func_8002F368(play) != EXCH_ITEM_CLAIM_CHECK) {
+                    if (Actor_GetPlayerExchangeItemId(play) != EXCH_ITEM_CLAIM_CHECK) {
                         break;
                     }
                     FALLTHROUGH;
@@ -1025,7 +1044,7 @@ void EnGo2_BiggoronSetTextId(EnGo2* this, PlayState* play, Player* player) {
 
     if (PARAMS_GET_S(this->actor.params, 0, 5) == GORON_DMT_BIGGORON) {
         if (gSaveContext.save.info.playerData.bgsFlag) {
-            if (func_8002F368(play) == EXCH_ITEM_CLAIM_CHECK) {
+            if (Actor_GetPlayerExchangeItemId(play) == EXCH_ITEM_CLAIM_CHECK) {
                 this->actor.textId = 0x3003;
             } else {
                 this->actor.textId = 0x305E;
@@ -1033,7 +1052,7 @@ void EnGo2_BiggoronSetTextId(EnGo2* this, PlayState* play, Player* player) {
             player->actor.textId = this->actor.textId;
 
         } else if (!gSaveContext.save.info.playerData.bgsFlag && (INV_CONTENT(ITEM_TRADE_ADULT) == ITEM_CLAIM_CHECK)) {
-            if (func_8002F368(play) == EXCH_ITEM_CLAIM_CHECK) {
+            if (Actor_GetPlayerExchangeItemId(play) == EXCH_ITEM_CLAIM_CHECK) {
                 if (Environment_GetBgsDayCount() >= 3) {
                     textId = 0x305E;
                 } else {
@@ -1052,7 +1071,7 @@ void EnGo2_BiggoronSetTextId(EnGo2* this, PlayState* play, Player* player) {
 
         } else if ((INV_CONTENT(ITEM_TRADE_ADULT) >= ITEM_PRESCRIPTION) &&
                    (INV_CONTENT(ITEM_TRADE_ADULT) <= ITEM_CLAIM_CHECK)) {
-            if (func_8002F368(play) == EXCH_ITEM_EYE_DROPS) {
+            if (Actor_GetPlayerExchangeItemId(play) == EXCH_ITEM_EYE_DROPS) {
                 this->actor.textId = 0x3059;
             } else {
                 this->actor.textId = 0x3058;
@@ -1063,7 +1082,7 @@ void EnGo2_BiggoronSetTextId(EnGo2* this, PlayState* play, Player* player) {
             player->actor.textId = this->actor.textId;
 
         } else if (INV_CONTENT(ITEM_TRADE_ADULT) <= ITEM_BROKEN_GORONS_SWORD) {
-            if (func_8002F368(play) == EXCH_ITEM_BROKEN_GORONS_SWORD) {
+            if (Actor_GetPlayerExchangeItemId(play) == EXCH_ITEM_BROKEN_GORONS_SWORD) {
                 if (GET_INFTABLE(INFTABLE_B4)) {
                     textId = 0x3055;
                 } else {
@@ -1536,8 +1555,8 @@ void EnGo2_Init(Actor* thisx, PlayState* play) {
         case GORON_CITY_LOST_WOODS:
         case GORON_DMT_FAIRY_HINT:
         case GORON_MARKET_BAZAAR:
-            this->actor.flags &= ~ACTOR_FLAG_4;
-            this->actor.flags &= ~ACTOR_FLAG_5;
+            this->actor.flags &= ~ACTOR_FLAG_UPDATE_CULLING_DISABLED;
+            this->actor.flags &= ~ACTOR_FLAG_DRAW_CULLING_DISABLED;
     }
 
     EnGo2_SetColliderDim(this);

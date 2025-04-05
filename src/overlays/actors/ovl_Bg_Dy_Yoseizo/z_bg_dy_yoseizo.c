@@ -5,17 +5,33 @@
  */
 
 #include "z_bg_dy_yoseizo.h"
-#include "assets/objects/object_dy_obj/object_dy_obj.h"
+#include "overlays/actors/ovl_Demo_Effect/z_demo_effect.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "one_point_cutscene.h"
+#include "rand.h"
+#include "regs.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
 #include "terminal.h"
 #include "versions.h"
-#include "overlays/actors/ovl_Demo_Effect/z_demo_effect.h"
+#include "z_lib.h"
+#include "z64ocarina.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#include "assets/objects/object_dy_obj/object_dy_obj.h"
 #include "assets/scenes/indoors/yousei_izumi_yoko/yousei_izumi_yoko_scene.h"
 #include "assets/scenes/indoors/daiyousei_izumi/daiyousei_izumi_scene.h"
 
 #if OOT_VERSION < NTSC_1_1
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_5)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 #else
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_5 | ACTOR_FLAG_UPDATE_DURING_OCARINA)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED | ACTOR_FLAG_UPDATE_DURING_OCARINA)
 #endif
 
 typedef enum BgDyYoseizoRewardType {
@@ -86,8 +102,7 @@ void BgDyYoseizo_Init(Actor* thisx, PlayState* play2) {
     this->actor.focus.pos = this->actor.world.pos;
 
     if (play->sceneId == SCENE_GREAT_FAIRYS_FOUNTAIN_MAGIC) {
-        // "Great Fairy Fountain"
-        PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 大妖精の泉 ☆☆☆☆☆ %d\n" VT_RST, play->spawn);
+        PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ " T("大妖精の泉", "Great Fairy Fountain") " ☆☆☆☆☆ %d\n" VT_RST, play->spawn);
         SkelAnime_InitFlex(play, &this->skelAnime, &gGreatFairySkel, &gGreatFairySittingTransitionAnim,
                            this->jointTable, this->morphTable, 28);
 #if OOT_VERSION < NTSC_1_1
@@ -97,8 +112,7 @@ void BgDyYoseizo_Init(Actor* thisx, PlayState* play2) {
         }
 #endif
     } else {
-        // "Stone/Jewel Fairy Fountain"
-        PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 石妖精の泉 ☆☆☆☆☆ %d\n" VT_RST, play->spawn);
+        PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ " T("石妖精の泉", "Stone Fairy Fountain") " ☆☆☆☆☆ %d\n" VT_RST, play->spawn);
         SkelAnime_InitFlex(play, &this->skelAnime, &gGreatFairySkel, &gGreatFairyLayingDownTransitionAnim,
                            this->jointTable, this->morphTable, 28);
 #if OOT_VERSION < NTSC_1_1
@@ -235,8 +249,7 @@ void BgDyYoseizo_ChooseType(BgDyYoseizo* this, PlayState* play) {
 #endif
 
     Player_SetCsActionWithHaltedActors(play, &this->actor, PLAYER_CSACTION_1);
-    // "Mode"
-    PRINTF(VT_FGCOL(YELLOW) "☆☆☆☆☆ もうど ☆☆☆☆☆ %d\n" VT_RST, play->msgCtx.ocarinaMode);
+    PRINTF(VT_FGCOL(YELLOW) "☆☆☆☆☆ " T("もうど", "Mode") " ☆☆☆☆☆ %d\n" VT_RST, play->msgCtx.ocarinaMode);
     givingReward = false;
 
     if (play->sceneId != SCENE_GREAT_FAIRYS_FOUNTAIN_MAGIC) {
@@ -261,24 +274,22 @@ void BgDyYoseizo_ChooseType(BgDyYoseizo* this, PlayState* play) {
         switch (this->fountainType) {
             case FAIRY_UPGRADE_MAGIC:
                 if (!gSaveContext.save.info.playerData.isMagicAcquired || BREG(2)) {
-                    // "Spin Attack speed UP"
-                    PRINTF(VT_FGCOL(GREEN) " ☆☆☆☆☆ 回転切り速度ＵＰ ☆☆☆☆☆ \n" VT_RST);
+                    PRINTF(VT_FGCOL(GREEN) " ☆☆☆☆☆ " T("回転切り速度ＵＰ", "Turning speed UP") " ☆☆☆☆☆ \n" VT_RST);
                     this->givingSpell = true;
                     givingReward = true;
                 }
                 break;
             case FAIRY_UPGRADE_DOUBLE_MAGIC:
                 if (!gSaveContext.save.info.playerData.isDoubleMagicAcquired) {
-                    // "Magic Meter doubled"
-                    PRINTF(VT_FGCOL(YELLOW) " ☆☆☆☆☆ 魔法ゲージメーター倍増 ☆☆☆☆☆ \n" VT_RST);
+                    PRINTF(VT_FGCOL(YELLOW) " ☆☆☆☆☆ " T("魔法ゲージメーター倍増",
+                                                        "Magic Gauge Meter Doubled") " ☆☆☆☆☆ \n" VT_RST);
                     this->givingSpell = true;
                     givingReward = true;
                 }
                 break;
             case FAIRY_UPGRADE_DOUBLE_DEFENSE:
                 if (!gSaveContext.save.info.playerData.isDoubleDefenseAcquired) {
-                    // "Damage halved"
-                    PRINTF(VT_FGCOL(MAGENTA) " ☆☆☆☆☆ ダメージ半減 ☆☆☆☆☆ \n" VT_RST);
+                    PRINTF(VT_FGCOL(MAGENTA) " ☆☆☆☆☆ " T("ダメージ半減", "Damage halved") " ☆☆☆☆☆ \n" VT_RST);
                     this->givingSpell = true;
                     givingReward = true;
                 }
@@ -696,7 +707,8 @@ static s16 sDemoEffectLightColors[] = { DEMO_EFFECT_LIGHT_GREEN, DEMO_EFFECT_LIG
 
 static s16 sExItemTypes[] = { EXITEM_MAGIC_WIND, EXITEM_MAGIC_FIRE, EXITEM_MAGIC_DARK };
 
-static s16 sItemGetFlags[] = { ITEMGETINF_18_MASK, ITEMGETINF_19_MASK, ITEMGETINF_1A_MASK };
+static s16 sItemGetFlagMasks[] = { ITEMGETINF_MASK(ITEMGETINF_18), ITEMGETINF_MASK(ITEMGETINF_19),
+                                   ITEMGETINF_MASK(ITEMGETINF_1A) };
 
 static u8 sItemIds[] = { ITEM_FARORES_WIND, ITEM_DINS_FIRE, ITEM_NAYRUS_LOVE };
 
@@ -808,7 +820,7 @@ void BgDyYoseizo_Give_Reward(BgDyYoseizo* this, PlayState* play) {
                 this->itemSpawned = true;
                 gSaveContext.healthAccumulator = 0x140;
                 Interface_ChangeHudVisibilityMode(HUD_VISIBILITY_HEARTS_MAGIC);
-                gSaveContext.save.info.itemGetInf[ITEMGETINF_18_19_1A_INDEX] |= sItemGetFlags[cueIdTemp];
+                gSaveContext.save.info.itemGetInf[ITEMGETINF_INDEX_18_19_1A] |= sItemGetFlagMasks[cueIdTemp];
                 Item_Give(play, sItemIds[cueIdTemp]);
             }
         } else {

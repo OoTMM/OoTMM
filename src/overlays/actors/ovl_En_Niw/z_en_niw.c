@@ -5,12 +5,30 @@
  */
 
 #include "z_en_niw.h"
-#include "assets/objects/object_niw/object_niw.h"
 #include "overlays/actors/ovl_En_Attack_Niw/z_en_attack_niw.h"
+
+#include "libc64/math64.h"
+#include "libc64/qrand.h"
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "one_point_cutscene.h"
+#include "rand.h"
+#include "segmented_address.h"
+#include "sfx.h"
+#include "sys_matrix.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z_lib.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_THROW_ONLY)
+#include "assets/objects/object_niw/object_niw.h"
+
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
 
 void EnNiw_Init(Actor* thisx, PlayState* play);
 void EnNiw_Destroy(Actor* thisx, PlayState* play);
@@ -66,8 +84,8 @@ static Vec3f sKakarikoPosList[] = {
 };
 
 static s16 sKakarikoFlagList[] = {
-    INFTABLE_199_MASK, INFTABLE_19A_MASK, INFTABLE_19B_MASK, INFTABLE_19C_MASK,
-    INFTABLE_19D_MASK, INFTABLE_19E_MASK, INFTABLE_19F_MASK,
+    INFTABLE_MASK(INFTABLE_199), INFTABLE_MASK(INFTABLE_19A), INFTABLE_MASK(INFTABLE_19B), INFTABLE_MASK(INFTABLE_19C),
+    INFTABLE_MASK(INFTABLE_19D), INFTABLE_MASK(INFTABLE_19E), INFTABLE_MASK(INFTABLE_19F),
 };
 
 static u8 sLowerRiverSpawned = false;
@@ -162,7 +180,7 @@ void EnNiw_Init(Actor* thisx, PlayState* play) {
                 fabsf(this->actor.world.pos.z - sKakarikoPosList[i].z) < 40.0f) {
                 this->unk_2AA = i;
                 PRINTF(VT_FGCOL(YELLOW) " 通常鶏index %d\n" VT_RST, this->unk_2AA);
-                if (gSaveContext.save.info.infTable[INFTABLE_199_19A_19B_19C_19D_19E_19F_INDEX] &
+                if (gSaveContext.save.info.infTable[INFTABLE_INDEX_199_19A_19B_19C_19D_19E_19F] &
                     sKakarikoFlagList[i]) {
                     this->actor.world.pos.x = 300.0f;
                     this->actor.world.pos.y = 100.0f;

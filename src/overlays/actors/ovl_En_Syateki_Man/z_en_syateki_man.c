@@ -1,9 +1,23 @@
 #include "z_en_syateki_man.h"
-#include "terminal.h"
 #include "overlays/actors/ovl_En_Syateki_Itm/z_en_syateki_itm.h"
+
+#include "libc64/qrand.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "one_point_cutscene.h"
+#include "regs.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "terminal.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
 #include "assets/objects/object_ossan/object_ossan.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_4 | ACTOR_FLAG_LOCK_ON_DISABLED)
+#define FLAGS                                                                                  \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
+     ACTOR_FLAG_LOCK_ON_DISABLED)
 
 typedef enum EnSyatekiManGameResult {
     /* 0 */ SYATEKI_RESULT_NONE,

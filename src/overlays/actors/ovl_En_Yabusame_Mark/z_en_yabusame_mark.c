@@ -5,7 +5,17 @@
  */
 
 #include "z_en_yabusame_mark.h"
+
+#include "regs.h"
+#include "sequence.h"
+#include "sfx.h"
 #include "terminal.h"
+#include "z_lib.h"
+#include "z64audio.h"
+#include "z64debug_display.h"
+#include "z64effect.h"
+#include "z64play.h"
+#include "z64save.h"
 
 #define FLAGS 0
 
@@ -104,7 +114,7 @@ void EnYabusameMark_Init(Actor* thisx, PlayState* play) {
     Collider_InitQuad(play, &this->collider);
     Collider_SetQuad(play, &this->collider, &this->actor, &sQuadInit);
     this->worldPos = this->actor.world.pos;
-    this->actor.flags |= ACTOR_FLAG_4;
+    this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
     if (gSaveContext.sceneLayer != 4) {
         Actor_Kill(&this->actor);
         return;

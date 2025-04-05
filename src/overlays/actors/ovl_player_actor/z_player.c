@@ -4,11 +4,6 @@
  * Description: Link
  */
 
-#include "ultra64.h"
-#include "global.h"
-#include "quake.h"
-#include "versions.h"
-
 #include "overlays/actors/ovl_Bg_Heavy_Block/z_bg_heavy_block.h"
 #include "overlays/actors/ovl_Demo_Kankyo/z_demo_kankyo.h"
 #include "overlays/actors/ovl_En_Boom/z_en_boom.h"
@@ -20,6 +15,39 @@
 #include "overlays/actors/ovl_En_Horse/z_en_horse.h"
 #include "overlays/actors/ovl_En_Insect/z_en_insect.h"
 #include "overlays/effects/ovl_Effect_Ss_Fhg_Flash/z_eff_ss_fhg_flash.h"
+
+#include "libc64/qrand.h"
+#include "libu64/debug.h"
+#include "controller.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "ichain.h"
+#include "letterbox.h"
+#include "map.h"
+#include "one_point_cutscene.h"
+#include "quake.h"
+#include "rand.h"
+#include "regs.h"
+#include "rumble.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_math.h"
+#include "sys_math3d.h"
+#include "sys_matrix.h"
+#include "ultra64.h"
+#include "versions.h"
+#include "z_en_item00.h"
+#include "z_lib.h"
+#include "zelda_arena.h"
+#include "z64audio.h"
+#include "z64debug.h"
+#include "z64effect.h"
+#include "z64lifemeter.h"
+#include "z64ocarina.h"
+#include "z64play.h"
+#include "z64save.h"
+#include "z64skin_matrix.h"
+
 #include "assets/objects/gameplay_keep/gameplay_keep.h"
 #include "assets/objects/object_link_child/object_link_child.h"
 
@@ -331,22 +359,22 @@ void Player_Action_CsAction(Player* this, PlayState* play);
 
 // .bss part 1
 
-#pragma increment_block_number "gc-eu:128 gc-eu-mq:128 gc-jp:128 gc-jp-ce:128 gc-jp-mq:128 gc-us:128 gc-us-mq:128" \
-                               "ntsc-1.0:64 ntsc-1.1:128 ntsc-1.2:128 pal-1.0:128 pal-1.1:128"
+#pragma increment_block_number "gc-eu:0 gc-eu-mq:0 gc-jp:0 gc-jp-ce:0 gc-jp-mq:0 gc-us:0 gc-us-mq:0 ique-cn:0" \
+                               "ntsc-1.0:0 ntsc-1.1:0 ntsc-1.2:0 pal-1.0:0 pal-1.1:0"
 
 static s32 D_80858AA0;
 
 // TODO: There's probably a way to match BSS ordering with less padding by spreading the variables out and moving
 // data around. It would be easier if we had more options for controlling BSS ordering in debug.
-#pragma increment_block_number "gc-eu:192 gc-eu-mq:192 gc-jp:192 gc-jp-ce:192 gc-jp-mq:192 gc-us:192 gc-us-mq:192" \
-                               "ntsc-1.0:192 ntsc-1.1:128 ntsc-1.2:192 pal-1.0:192 pal-1.1:192"
+#pragma increment_block_number "gc-eu:224 gc-eu-mq:224 gc-jp:192 gc-jp-ce:192 gc-jp-mq:192 gc-us:192 gc-us-mq:192" \
+                               "ique-cn:192 ntsc-1.0:192 ntsc-1.1:192 ntsc-1.2:192 pal-1.0:192 pal-1.1:192"
 
 static s32 sSavedCurrentMask;
 static Vec3f sInteractWallCheckResult;
 static Input* sControlInput;
 
-#pragma increment_block_number "gc-eu:192 gc-eu-mq:192 gc-jp:160 gc-jp-ce:160 gc-jp-mq:160 gc-us:160 gc-us-mq:160" \
-                               "ntsc-1.0:128 ntsc-1.1:192 ntsc-1.2:128 pal-1.0:128 pal-1.1:128"
+#pragma increment_block_number "gc-eu:192 gc-eu-mq:192 gc-jp:192 gc-jp-ce:192 gc-jp-mq:192 gc-us:192 gc-us-mq:192" \
+                               "ique-cn:192 ntsc-1.0:128 ntsc-1.1:128 ntsc-1.2:128 pal-1.0:128 pal-1.1:128"
 
 // .data
 
@@ -10760,7 +10788,7 @@ void Player_Init(Actor* thisx, PlayState* play2) {
     gSaveContext.respawn[RESPAWN_MODE_DOWN].data = 1;
 
     if (play->sceneId <= SCENE_INSIDE_GANONS_CASTLE_COLLAPSE) {
-        gSaveContext.save.info.infTable[INFTABLE_1AX_INDEX] |= gBitFlags[play->sceneId];
+        gSaveContext.save.info.infTable[INFTABLE_INDEX_1AX] |= gBitFlags[play->sceneId];
     }
 
     startMode = PLAYER_GET_START_MODE(thisx);
@@ -11842,7 +11870,7 @@ void Player_UpdateCommon(Player* this, PlayState* play, Input* input) {
                     if (DREG(25) != 0) {
                         DREG(25) = 0;
                     } else {
-                        AREG(6) = 1;
+                        R_EXITED_SCENE_RIDING_HORSE = true;
                     }
                 }
             }
@@ -13216,7 +13244,7 @@ void Player_Action_8084CC98(Player* this, PlayState* play) {
         }
 
         if (LinkAnimation_OnFrame(&this->skelAnime, arr[1])) {
-            func_8002DE74(play, this);
+            Actor_RequestHorseCameraSetting(play, this);
             Player_PlaySfx(this, NA_SE_PL_SIT_ON_HORSE);
             return;
         }
@@ -13224,7 +13252,7 @@ void Player_Action_8084CC98(Player* this, PlayState* play) {
         return;
     }
 
-    func_8002DE74(play, this);
+    Actor_RequestHorseCameraSetting(play, this);
     this->skelAnime.prevTransl = D_8085499C;
 
     if ((rideActor->animationIdx != this->av2.actionVar2) &&
@@ -13383,9 +13411,9 @@ void Player_Action_8084D3E4(Player* this, PlayState* play) {
         func_8083C0E8(this, play);
         this->stateFlags1 &= ~PLAYER_STATE1_23;
         this->actor.parent = NULL;
-        AREG(6) = 0;
+        R_EXITED_SCENE_RIDING_HORSE = false;
 
-        if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || (DREG(1) != 0)) {
+        if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || R_DEBUG_FORCE_EPONA_OBTAINED) {
             gSaveContext.save.info.horseData.pos.x = rideActor->actor.world.pos.x;
             gSaveContext.save.info.horseData.pos.y = rideActor->actor.world.pos.y;
             gSaveContext.save.info.horseData.pos.z = rideActor->actor.world.pos.z;
@@ -15998,7 +16026,7 @@ void func_80852C50(PlayState* play, Player* this, CsCmdActorCue* cueUnused) {
     }
 
     if (cue == NULL) {
-        this->actor.flags &= ~ACTOR_FLAG_6;
+        this->actor.flags &= ~ACTOR_FLAG_INSIDE_CULLING_VOLUME;
     } else {
         s32 csAction;
 

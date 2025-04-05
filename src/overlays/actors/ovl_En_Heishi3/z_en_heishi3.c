@@ -5,9 +5,18 @@
  */
 
 #include "z_en_heishi3.h"
-#include "assets/objects/object_sd/object_sd.h"
+
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "sfx.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#include "assets/objects/object_sd/object_sd.h"
 
 #define FLAGS 0
 
@@ -136,7 +145,7 @@ void EnHeishi3_StandSentinelInGrounds(EnHeishi3* this, PlayState* play) {
         PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 発見！ ☆☆☆☆☆ \n" VT_RST); // "Discovered!"
         Player_SetCsActionWithHaltedActors(play, &this->actor, PLAYER_CSACTION_1);
 #if OOT_PAL_N64
-        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_4;
+        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 #endif
         this->actionFunc = EnHeishi3_CatchStart;
     }
@@ -167,7 +176,7 @@ void EnHeishi3_StandSentinelInCastle(EnHeishi3* this, PlayState* play) {
         PRINTF(VT_FGCOL(GREEN) "☆☆☆☆☆ 発見！ ☆☆☆☆☆ \n" VT_RST); // "Discovered!"
         Player_SetCsActionWithHaltedActors(play, &this->actor, PLAYER_CSACTION_1);
 #if OOT_PAL_N64
-        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_4;
+        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED;
 #endif
         this->actionFunc = EnHeishi3_CatchStart;
     }

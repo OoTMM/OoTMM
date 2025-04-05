@@ -1,9 +1,15 @@
 #include "z_en_bom_bowl_pit.h"
-#include "terminal.h"
 #include "overlays/actors/ovl_En_Bom_Chu/z_en_bom_chu.h"
-#include "overlays/actors/ovl_En_Ex_Item/z_en_ex_item.h"
 
-#define FLAGS ACTOR_FLAG_4
+#include "regs.h"
+#include "sfx.h"
+#include "terminal.h"
+#include "z_lib.h"
+#include "z64play.h"
+#include "z64player.h"
+#include "z64save.h"
+
+#define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 
 void EnBomBowlPit_Init(Actor* thisx, PlayState* play);
 void EnBomBowlPit_Destroy(Actor* thisx, PlayState* play);
