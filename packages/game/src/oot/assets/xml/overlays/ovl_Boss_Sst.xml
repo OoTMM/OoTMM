@@ -1,0 +1,8 @@
+<Root>
+    <File Name="ovl_Boss_Sst">
+        <DList Name="sBodyStaticDList" Offset="0x0"/>
+        <DList Name="sHandTrailDList" Offset="0x18"/>
+        <DList Name="sIntroVanishDList" Offset="0x478"/>
+        <DList Name="sShadowDList" Offset="0x930"/>
+    </File>
+</Root>
