@@ -15,6 +15,7 @@
 #include "z64effect.h"
 #include "z64play.h"
 #include "z64player.h"
+#include "z64save.h"
 
 #include "assets/objects/object_peehat/object_peehat.h"
 
@@ -89,7 +90,7 @@ static ColliderCylinderInit sCylinderInit = {
     { 50, 160, -70, { 0, 0, 0 } },
 };
 
-static ColliderJntSphElementInit sJntSphElemInit[1] = {
+static ColliderJntSphElementInit sJntSphElementsInit[1] = {
     {
         {
             ELEM_MATERIAL_UNK0,
@@ -113,7 +114,7 @@ static ColliderJntSphInit sJntSphInit = {
         COLSHAPE_JNTSPH,
     },
     1,
-    sJntSphElemInit,
+    sJntSphElementsInit,
 };
 
 static ColliderQuadInit sQuadInit = {

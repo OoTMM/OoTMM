@@ -9,9 +9,9 @@
 #include "gfx.h"
 #include "gfx_setupdl.h"
 #include "ichain.h"
+#include "z64face_reaction.h"
 #include "z64play.h"
-
-#include "global.h"
+#include "z64save.h"
 
 #include "assets/objects/object_ms/object_ms.h"
 

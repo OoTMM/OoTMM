@@ -27,6 +27,7 @@
 #include "z64environment.h"
 #include "z64play.h"
 #include "z64player.h"
+#include "z64save.h"
 
 #include "assets/objects/object_goma/object_goma.h"
 
@@ -89,7 +90,7 @@ ActorProfile Boss_Goma_Profile = {
     /**/ BossGoma_Draw,
 };
 
-static ColliderJntSphElementInit sColliderJntSphElementInit[13] = {
+static ColliderJntSphElementInit sColliderJntSphElementsInit[13] = {
     {
         {
             ELEM_MATERIAL_UNK3,
@@ -245,7 +246,7 @@ static ColliderJntSphInit sColliderJntSphInit = {
         COLSHAPE_JNTSPH,
     },
     13,
-    sColliderJntSphElementInit,
+    sColliderJntSphElementsInit,
 };
 
 static u8 sClearPixelTableFirstPass[16 * 16] = {

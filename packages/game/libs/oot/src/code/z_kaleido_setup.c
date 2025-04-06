@@ -1,4 +1,9 @@
-#include "global.h"
+#include "controller.h"
+#include "letterbox.h"
+#include "regs.h"
+#include "z64audio.h"
+#include "z64play.h"
+#include "z64save.h"
 
 /*
  * The following three arrays are effectively unused.

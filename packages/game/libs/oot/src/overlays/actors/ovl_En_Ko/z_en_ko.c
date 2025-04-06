@@ -14,10 +14,10 @@
 #include "terminal.h"
 #include "versions.h"
 #include "z_lib.h"
+#include "z64face_reaction.h"
 #include "z64play.h"
 #include "z64player.h"
-
-#include "global.h"
+#include "z64save.h"
 
 #include "assets/objects/object_fa/object_fa.h"
 #include "assets/objects/object_os_anime/object_os_anime.h"

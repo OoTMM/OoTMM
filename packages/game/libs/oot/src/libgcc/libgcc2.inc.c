@@ -28,7 +28,7 @@ Boston, MA 02111-1307, USA.  */
 
 /* Modified by ZeldaRET to keep only the parts that are relevant to the iQue build of OoT.  */
 
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 
 typedef u8 UQItype;
 typedef s32 SItype;

@@ -4,7 +4,7 @@
 #include "libc/stdbool.h"
 #include "libc/stddef.h"
 #include "libc/stdint.h"
-#include "ultra64/ultratypes.h"
+#include "PR/ultratypes.h"
 
 #include "libaudio_abi.h"
 

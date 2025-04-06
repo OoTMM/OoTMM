@@ -1,8 +1,10 @@
 #include "file_select.h"
+#include "file_select_state.h"
 
 #include "controller.h"
 #include "gfx.h"
 #include "gfx_setupdl.h"
+#include "regs.h"
 #include "rumble.h"
 #include "sfx.h"
 #include "sys_matrix.h"
@@ -1257,7 +1259,7 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         this->configMode = CM_OPTIONS_TO_MAIN;
         SaveRaw_OptionsWrite();
-        func_800F6700(gSaveOptions.audioSetting);
+        Audio_SetSoundMode(gSaveOptions.audioSetting);
         return;
     }
 
@@ -1270,7 +1272,7 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
 
             // because audio setting is unsigned, can't check for < 0
             if (gSaveOptions.audioSetting > 0xF0) {
-                gSaveOptions.audioSetting = FS_AUDIO_SURROUND;
+                gSaveOptions.audioSetting = SOUND_SETTING_SURROUND;
             }
         } else {
 #if !OOT_PAL_N64
@@ -1293,8 +1295,8 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
         if (sSelectedSetting == FS_SETTING_AUDIO) {
             gSaveOptions.audioSetting++;
 
-            if (gSaveOptions.audioSetting > FS_AUDIO_SURROUND) {
-                gSaveOptions.audioSetting = FS_AUDIO_STEREO;
+            if (gSaveOptions.audioSetting > SOUND_SETTING_SURROUND) {
+                gSaveOptions.audioSetting = SOUND_SETTING_STEREO;
             }
         } else {
 #if !OOT_PAL_N64

@@ -1,4 +1,8 @@
 #include <combo.h>
+#include "regs.h"
+#include "console_logo_state.h"
+#include "setup_state.h"
+
 #include "global.h"
 
 void Setup_InitImpl(SetupState* this) {

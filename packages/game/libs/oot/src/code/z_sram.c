@@ -1,6 +1,15 @@
-#include "global.h"
+#include "file_select_state.h"
+#include "controller.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z64game.h"
+#include "z64message.h"
+#include "z64save.h"
+#include "z64scene.h"
+#include "z64sram.h"
+#include "z64ss_sram.h"
+
+#include "global.h"
 
 static OotSavePlayerData sDebugSavePlayerData = {
     { 'Z', 'E', 'L', 'D', 'A', 'Z' }, // newf
@@ -210,7 +219,7 @@ void Sram_InitSram(void) {
         SaveRaw_OptionsWrite();
     }
 
-    func_800F6700(gSaveOptions.audioSetting);
+    Audio_SetSoundMode(gSaveOptions.audioSetting);
 }
 
 void Sram_OnLoad(void)

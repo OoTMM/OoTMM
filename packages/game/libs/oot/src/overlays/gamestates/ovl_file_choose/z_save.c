@@ -1,6 +1,7 @@
 #include <string.h>
 #include <combo.h>
 #include "file_select.h"
+#include "file_select_state.h"
 #include "z64.h"
 #include "z64message.h"
 #include "z64scene.h"

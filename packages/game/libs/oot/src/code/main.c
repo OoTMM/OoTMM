@@ -12,18 +12,28 @@ extern struct Scheduler gScheduler;
 extern struct PadMgr gPadMgr;
 extern struct IrqMgr gIrqMgr;
 
-#include "global.h"
+#include "libc64/malloc.h"
+#include "audiomgr.h"
+#include "debug_arena.h"
 #include "fault.h"
+#include "padmgr.h"
+#include "prenmi_buff.h"
+#include "regs.h"
 #include "segmented_address.h"
 #include "stack.h"
+#include "stackcheck.h"
 #include "terminal.h"
 #include "versions.h"
 #if PLATFORM_N64
 #include "cic6105.h"
 #endif
+#include "z64debug.h"
+#include "z64thread.h"
 
-#pragma increment_block_number "gc-eu:144 gc-eu-mq:144 gc-jp:144 gc-jp-ce:144 gc-jp-mq:144 gc-us:144 gc-us-mq:144" \
-                               "ique-cn:160 ntsc-1.0:137 ntsc-1.1:137 ntsc-1.2:137 pal-1.0:135 pal-1.1:135"
+#include "global.h"
+
+#pragma increment_block_number "gc-eu:32 gc-eu-mq:32 gc-jp:32 gc-jp-ce:32 gc-jp-mq:32 gc-us:32 gc-us-mq:32 ique-cn:32" \
+                               "ntsc-1.0:13 ntsc-1.1:13 ntsc-1.2:13 pal-1.0:11 pal-1.1:11"
 
 extern u8 _buffersSegmentEnd[];
 
