@@ -1,0 +1,12 @@
+# Output files
+*.exe
+elf2rom
+makeromfs
+mkdmadata
+mkldscript
+preprocess_pragmas
+reloc_prereq
+vtxdis
+yaz0
+
+graphovl/
