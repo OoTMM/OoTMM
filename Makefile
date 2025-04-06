@@ -214,7 +214,7 @@ else ifeq ($(PLATFORM),GC)
   LIBULTRA_VERSION := L
   LIBULTRA_PATCH := 0
 else ifeq ($(PLATFORM),IQUE)
-  CPP_DEFINES += -DPLATFORM_N64=0 -DPLATFORM_GC=0 -DPLATFORM_IQUE=1 -DBBPLAYER
+  CPP_DEFINES += -DPLATFORM_N64=0 -DPLATFORM_GC=0 -DPLATFORM_IQUE=1
   LIBULTRA_VERSION := L
   LIBULTRA_PATCH := 0
 else
@@ -225,7 +225,6 @@ endif
 VERSION_MACRO := $(shell echo $(VERSION) | tr a-z-. A-Z__)
 CPP_DEFINES += -DOOT_VERSION=$(VERSION_MACRO) -DOOT_REVISION=$(REVISION)
 CPP_DEFINES += -DOOT_REGION=REGION_$(REGION)
-CPP_DEFINES += -DBUILD_CREATOR="\"$(BUILD_CREATOR)\"" -DBUILD_DATE="\"$(BUILD_DATE)\"" -DBUILD_TIME="\"$(BUILD_TIME)\""
 CPP_DEFINES += -DLIBULTRA_VERSION=LIBULTRA_VERSION_$(LIBULTRA_VERSION)
 CPP_DEFINES += -DLIBULTRA_PATCH=$(LIBULTRA_PATCH)
 ifeq ($(PLATFORM),IQUE)
@@ -377,10 +376,10 @@ else
   # compiler does support but warns for their usage).
   CFLAGS += $(CPP_DEFINES) $(GBI_DEFINES) -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(INC) -Wab,-r4300_mul -woff 516,609,649,838,712,807
   CCASFLAGS += $(CPP_DEFINES) $(GBI_DEFINES) -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(INC) -Wab,-r4300_mul -woff 516,609,649,838,712,807 -o32
-  EGCS_CFLAGS += $(CPP_DEFINES) $(GBI_DEFINES) -G 0 -nostdinc $(INC) -mcpu=vr4300 -mabi=32 -mgp32 -mfp32 -fno-PIC
   MIPS_VERSION := -mips2
 
-  EGCS_CCASFLAGS := -Wall -nostdinc $(CPP_DEFINES) $(INC) -c -G 0 -Wa,-irix-symtab -D_ABIO32=1 -D_ABI64=3 -D_MIPS_SIM_ABI64=_ABI64 -D_MIPS_SIM_ABI32=_ABIO32 -DMIPSEB -D_LANGUAGE_ASSEMBLY -mabi=32 -fno-PIC -non_shared -mcpu=4300 -mfix4300
+  EGCS_CFLAGS += $(CPP_DEFINES) $(GBI_DEFINES) -DEGCS -G 0 -nostdinc $(INC) -mcpu=vr4300 -mabi=32 -mgp32 -mfp32 -fno-PIC
+  EGCS_CCASFLAGS := -Wall -nostdinc $(CPP_DEFINES) -DEGCS $(INC) -c -G 0 -Wa,-irix-symtab -D_ABIO32=1 -D_ABI64=3 -D_MIPS_SIM_ABI64=_ABI64 -D_MIPS_SIM_ABI32=_ABIO32 -DMIPSEB -D_LANGUAGE_ASSEMBLY -mabi=32 -fno-PIC -non_shared -mcpu=4300 -mfix4300
   EGCS_ASOPTFLAGS :=
 endif
 
@@ -409,14 +408,13 @@ ROMC     := $(ROM:.z64=-compressed.z64)
 ELF      := $(ROM:.z64=.elf)
 MAP      := $(ROM:.z64=.map)
 LDSCRIPT := $(ROM:.z64=.ld)
+
 # description of ROM segments
 SPEC := spec
+SPEC_INCLUDES := $(wildcard spec_includes/*.inc)
 
-ifeq ($(COMPILER),ido)
-SRC_DIRS := $(shell find src -type d -not -path src/gcc_fix)
-else
 SRC_DIRS := $(shell find src -type d)
-endif
+UNDECOMPILED_DATA_DIRS := $(shell find data -type d)
 
 ifneq ($(wildcard $(EXTRACTED_DIR)/assets/audio),)
   SAMPLE_EXTRACT_DIRS := $(shell find $(EXTRACTED_DIR)/assets/audio/samples -type d)
@@ -492,32 +490,18 @@ ASSET_BIN_DIRS := $(ASSET_BIN_DIRS_EXTRACTED) $(ASSET_BIN_DIRS_COMMITTED)
 ASSET_FILES_BIN_EXTRACTED := $(foreach dir,$(ASSET_BIN_DIRS_EXTRACTED),$(wildcard $(dir)/*.bin))
 ASSET_FILES_BIN_COMMITTED := $(foreach dir,$(ASSET_BIN_DIRS_COMMITTED),$(wildcard $(dir)/*.bin))
 ASSET_FILES_OUT := $(foreach f,$(ASSET_FILES_BIN_EXTRACTED:.bin=.bin.inc.c),$(f:$(EXTRACTED_DIR)/%=$(BUILD_DIR)/%)) \
-                   $(foreach f,$(ASSET_FILES_BIN_COMMITTED:.bin=.bin.inc.c),$(BUILD_DIR)/$f) \
-                   $(foreach f,$(wildcard assets/text/*.c),$(BUILD_DIR)/$(f:.c=.o))
+                   $(foreach f,$(ASSET_FILES_BIN_COMMITTED:.bin=.bin.inc.c),$(BUILD_DIR)/$f)
 
-UNDECOMPILED_DATA_DIRS := $(shell find data -type d)
+# Find all .o files included in the spec
+SPEC_O_FILES := $(shell $(CPP) $(CPPFLAGS) $(SPEC) | $(BUILD_DIR_REPLACE) | sed -n -E 's/^[ \t]*include[ \t]*"([a-zA-Z0-9/_.-]+\.o)"/\1/p')
 
-BASEROM_BIN_FILES := $(wildcard $(EXTRACTED_DIR)/baserom/*)
-
-# source files
-ASSET_C_FILES_EXTRACTED := $(filter-out %.inc.c,$(foreach dir,$(ASSET_BIN_DIRS_EXTRACTED),$(wildcard $(dir)/*.c)))
-ASSET_C_FILES_COMMITTED := $(filter-out %.inc.c,$(foreach dir,$(ASSET_BIN_DIRS_COMMITTED),$(wildcard $(dir)/*.c)))
-SRC_C_FILES   := $(filter-out %.inc.c,$(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)))
-S_FILES       := $(foreach dir,$(SRC_DIRS) $(UNDECOMPILED_DATA_DIRS),$(wildcard $(dir)/*.s))
-O_FILES       := $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
-                 $(foreach f,$(SRC_C_FILES:.c=.o),$(BUILD_DIR)/$f) \
-                 $(foreach f,$(ASSET_C_FILES_EXTRACTED:.c=.o),$(f:$(EXTRACTED_DIR)/%=$(BUILD_DIR)/%)) \
-                 $(foreach f,$(ASSET_C_FILES_COMMITTED:.c=.o),$(BUILD_DIR)/$f) \
-                 $(foreach f,$(BASEROM_BIN_FILES),$(BUILD_DIR)/baserom/$(notdir $f).o) \
-                 $(BUILD_DIR)/src/code/z_message_z_game_over.o \
-                 $(BUILD_DIR)/src/makerom/ipl3.o
-
-OVL_RELOC_FILES := $(shell $(CPP) $(CPPFLAGS) $(SPEC) | $(BUILD_DIR_REPLACE) | grep -o '[^"]*_reloc.o' )
+# Split out reloc files
+O_FILES := $(filter-out %_reloc.o,$(SPEC_O_FILES))
+OVL_RELOC_FILES := $(filter %_reloc.o,$(SPEC_O_FILES))
 
 # Automatic dependency files
 # (Only asm_processor dependencies and reloc dependencies are handled for now)
 DEP_FILES := $(O_FILES:.o=.asmproc.d) $(OVL_RELOC_FILES:.o=.d)
-
 
 TEXTURE_FILES_PNG_EXTRACTED := $(foreach dir,$(ASSET_BIN_DIRS_EXTRACTED),$(wildcard $(dir)/*.png))
 TEXTURE_FILES_PNG_COMMITTED := $(foreach dir,$(ASSET_BIN_DIRS_COMMITTED),$(wildcard $(dir)/*.png))
@@ -550,6 +534,8 @@ $(shell mkdir -p $(foreach dir, \
                       $(ASSET_BIN_DIRS_EXTRACTED), \
                     $(dir:$(EXTRACTED_DIR)/%=$(BUILD_DIR)/%)))
 endif
+
+$(BUILD_DIR)/src/boot/build.o: CPP_DEFINES += -DBUILD_CREATOR="\"$(BUILD_CREATOR)\"" -DBUILD_DATE="\"$(BUILD_DATE)\"" -DBUILD_TIME="\"$(BUILD_TIME)\""
 
 ifeq ($(COMPILER),ido)
 $(BUILD_DIR)/src/boot/driverominit.o: OPTFLAGS := -O2
@@ -585,16 +571,17 @@ ifeq ($(PLATFORM),IQUE)
 # Some files are compiled with EGCS on iQue
 EGCS_O_FILES += $(BUILD_DIR)/src/boot/boot_main.o
 EGCS_O_FILES += $(BUILD_DIR)/src/boot/idle.o
+EGCS_O_FILES += $(BUILD_DIR)/src/boot/inflate.o
+EGCS_O_FILES += $(BUILD_DIR)/src/boot/is_debug_ique.o
 EGCS_O_FILES += $(BUILD_DIR)/src/boot/z_locale.o
 EGCS_O_FILES += $(BUILD_DIR)/src/boot/z_std_dma.o
-EGCS_O_FILES += $(BUILD_DIR)/src/boot/zlib.o
-# EGCS_O_FILES += $(BUILD_DIR)/src/code/z_actor.o
+EGCS_O_FILES += $(BUILD_DIR)/src/code/z_actor.o
 EGCS_O_FILES += $(BUILD_DIR)/src/code/z_common_data.o
 EGCS_O_FILES += $(BUILD_DIR)/src/code/z_construct.o
-# EGCS_O_FILES += $(BUILD_DIR)/src/code/z_kanfont.o
-# EGCS_O_FILES += $(BUILD_DIR)/src/code/z_message.o
+EGCS_O_FILES += $(BUILD_DIR)/src/code/z_kanfont.o
+EGCS_O_FILES += $(BUILD_DIR)/src/code/z_message.o
 EGCS_O_FILES += $(BUILD_DIR)/src/code/z_parameter.o
-# EGCS_O_FILES += $(BUILD_DIR)/src/code/z_sram.o
+EGCS_O_FILES += $(BUILD_DIR)/src/code/z_sram.o
 EGCS_O_FILES += $(BUILD_DIR)/src/overlays/actors/ovl_En_Mag/z_en_mag.o
 EGCS_O_FILES += $(BUILD_DIR)/src/overlays/actors/ovl_End_Title/z_end_title.o
 EGCS_O_FILES += $(BUILD_DIR)/src/overlays/actors/ovl_Fishing/z_fishing.o
@@ -647,6 +634,11 @@ $(BUILD_DIR)/src/libultra/%.o: CCAS := $(EGCS_CCAS)
 $(BUILD_DIR)/src/libultra/%.o: CFLAGS := $(EGCS_CFLAGS) -mno-abicalls
 $(BUILD_DIR)/src/libultra/%.o: CCASFLAGS := $(EGCS_CCASFLAGS)
 $(BUILD_DIR)/src/libultra/%.o: ASOPTFLAGS := $(EGCS_ASOPTFLAGS)
+
+$(BUILD_DIR)/src/libultra/reg/_%.o: OPTFLAGS := -O0
+$(BUILD_DIR)/src/libultra/reg/_%.o: MIPS_VERSION := -mgp64 -mfp64 -mips3
+
+$(BUILD_DIR)/src/libultra/audio/%.o: OPTFLAGS := -O2
 
 $(BUILD_DIR)/src/libultra/libc/ll.o: OPTFLAGS := -O0
 $(BUILD_DIR)/src/libultra/libc/llcvt.o: OPTFLAGS := -O0
@@ -715,7 +707,11 @@ else
 $(BUILD_DIR)/src/libultra/gu/%.o: OPTFLAGS := -O2
 $(BUILD_DIR)/src/libultra/io/%.o: OPTFLAGS := -O2
 $(BUILD_DIR)/src/libultra/libc/%.o: OPTFLAGS := -O2
+ifeq ($(PLATFORM),IQUE)
+$(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O0
+else
 $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1
+endif
 endif
 
 $(BUILD_DIR)/src/libleo/%.o: CC := $(CC_OLD)
@@ -849,7 +845,7 @@ $(O_FILES): | asset_files
 
 .PHONY: o_files asset_files
 
-$(BUILD_DIR)/$(SPEC): $(SPEC)
+$(BUILD_DIR)/$(SPEC): $(SPEC) $(SPEC_INCLUDES)
 	$(CPP) $(CPPFLAGS) $< | $(BUILD_DIR_REPLACE) > $@
 
 $(LDSCRIPT): $(BUILD_DIR)/$(SPEC)
