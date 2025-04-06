@@ -32,7 +32,6 @@
 #include "z64math.h"
 #include "z64map_mark.h"
 #include "z64message.h"
-#include "z64olib.h"
 #include "one_point_cutscene.h"
 #include "z64pause.h"
 #include "z64play.h"
@@ -87,9 +86,6 @@
 #include "libc64/sleep.h"
 #include "libc64/sprintf.h"
 #include "libu64/debug.h"
-#include "z64debug_display.h"
-#include "z64draw.h"
-#include "z_en_item00.h"
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
