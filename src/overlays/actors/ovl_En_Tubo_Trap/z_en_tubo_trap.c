@@ -9,8 +9,6 @@
 
 #define FLAGS 0x00000000
 
-#define THIS ((EnTuboTrap*)thisx)
-
 void EnTuboTrap_Init(Actor* thisx, PlayState* play);
 void EnTuboTrap_Destroy(Actor* thisx, PlayState* play);
 void EnTuboTrap_Update(Actor* thisx, PlayState* play);
@@ -53,13 +51,13 @@ ActorProfile En_Tubo_Trap_Profile = {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 197, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 4000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 4000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
 void EnTuboTrap_Init(Actor* thisx, PlayState* play) {
-    EnTuboTrap* this = THIS;
+    EnTuboTrap* this = (EnTuboTrap*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->actor.shape.rot.z = 0;
@@ -71,7 +69,7 @@ void EnTuboTrap_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnTuboTrap_Destroy(Actor* thisx, PlayState* play) {
-    EnTuboTrap* this = THIS;
+    EnTuboTrap* this = (EnTuboTrap*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
 }
@@ -238,7 +236,8 @@ void EnTuboTrap_Idle(EnTuboTrap* this, PlayState* play) {
         if ((startingRotation == 0) || (this->actor.playerHeightRel <= (startingRotation * 10.0f))) {
             Actor_ChangeCategory(play, &play->actorCtx, &this->actor, ACTORCAT_ENEMY);
             currentHeight = this->actor.world.pos.y;
-            this->actor.flags |= (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_10); // always update and can target
+            this->actor.flags |=
+                (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED); // always update and can target
 
             transformationHeight = sTransformationHeight[player->transformation];
 
@@ -270,11 +269,12 @@ void EnTuboTrap_FlyAtPlayer(EnTuboTrap* this, PlayState* play) {
     f32 dY = this->originPos.y - this->actor.world.pos.y;
     f32 dZ = this->originPos.z - this->actor.world.pos.z;
 
-    //! @bug should be NA_SE_EN_TUBOOCK_FLY - SFX_FLAG
-    // In OoT, NA_SE_EN_TUBOOCK_FLY is the value 0x3837
-    // But in MM, certain sfxIds got reordered and devs forgot to update:
-    // In MM, NA_SE_EN_MIZUBABA2_ATTACK is the old value 0x3837
-    // In MM, NA_SE_EN_TUBOOCK_FLY is the new value 0x3AE0
+    //! @bug Incorrect sfx
+    //! This should be NA_SE_EN_TUBOOCK_FLY - SFX_FLAG
+    //! In OoT, NA_SE_EN_TUBOOCK_FLY is the value 0x3837
+    //! But in MM, certain sfxIds got reordered this was not updated:
+    //! In MM, NA_SE_EN_MIZUBABA2_ATTACK is the old value 0x3837
+    //! In MM, NA_SE_EN_TUBOOCK_FLY is the new value 0x3AE0
     Actor_PlaySfx(&this->actor, NA_SE_EN_MIZUBABA2_ATTACK - SFX_FLAG);
 
     if ((SQ(dX) + SQ(dY) + SQ(dZ) > SQ(240.0f))) {
@@ -286,7 +286,7 @@ void EnTuboTrap_FlyAtPlayer(EnTuboTrap* this, PlayState* play) {
 }
 
 void EnTuboTrap_Update(Actor* thisx, PlayState* play) {
-    EnTuboTrap* this = THIS;
+    EnTuboTrap* this = (EnTuboTrap*)thisx;
     s32 padding;
 
     this->actionFunc(this, play);

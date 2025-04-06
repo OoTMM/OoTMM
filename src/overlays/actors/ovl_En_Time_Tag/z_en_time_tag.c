@@ -11,9 +11,7 @@
 #include "z_en_time_tag.h"
 #include "overlays/actors/ovl_En_Elf/z_en_elf.h"
 
-#define FLAGS (ACTOR_FLAG_10)
-
-#define THIS ((EnTimeTag*)thisx)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EnTimeTag_Init(Actor* thisx, PlayState* play);
 void EnTimeTag_Destroy(Actor* thisx, PlayState* play);
@@ -50,7 +48,7 @@ ActorProfile En_Time_Tag_Profile = {
 };
 
 void EnTimeTag_Init(Actor* thisx, PlayState* play) {
-    EnTimeTag* this = THIS;
+    EnTimeTag* this = (EnTimeTag*)thisx;
 
     this->actionFunc = EnTimeTag_KickOut_WaitForTime;
 
@@ -264,12 +262,12 @@ void EnTimeTag_Diary_Wait(EnTimeTag* this, PlayState* play) {
                 Message_StartTextbox(play, 0x122B, &this->actor);
             }
             TIMETAG_DIARY_TIMER(&this->actor) = 1;
+
+            //! FAKE:
+            if (1) {}
         } else {
             // unable to read Zora script
             Message_StartTextbox(play, 0x122A, &this->actor);
-
-            //! FAKE: https://decomp.me/scratch/AHRNe
-            if (0) {}
 
             ((EnElf*)GET_PLAYER(play)->tatlActor)->unk_264 |= 4;
             Actor_ChangeFocus(&this->actor, play, GET_PLAYER(play)->tatlActor);
@@ -341,7 +339,7 @@ void EnTimeTag_KickOut_WaitForTime(EnTimeTag* this, PlayState* play) {
 }
 
 void EnTimeTag_Update(Actor* thisx, PlayState* play) {
-    EnTimeTag* this = THIS;
+    EnTimeTag* this = (EnTimeTag*)thisx;
 
     this->actionFunc(this, play);
 }

@@ -8,9 +8,8 @@
 #include "attributes.h"
 #include "overlays/actors/ovl_En_Aob_01/z_en_aob_01.h"
 
-#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_10 | ACTOR_FLAG_THROW_ONLY)
-
-#define THIS ((EnDg*)thisx)
+#define FLAGS \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_THROW_ONLY)
 
 void EnDg_Init(Actor* thisx, PlayState* play);
 void EnDg_Destroy(Actor* thisx, PlayState* play);
@@ -206,7 +205,7 @@ static AnimationInfoS sAnimationInfo[DOG_ANIM_MAX] = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneForward, 1000, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 1000, ICHAIN_STOP),
 };
 
 void EnDg_ChangeAnim(SkelAnime* skelAnime, AnimationInfoS* animInfo, s32 animIndex) {
@@ -415,6 +414,14 @@ void EnDg_SetupIdleMove(EnDg* this, PlayState* play) {
         } else if (play->sceneId == SCENE_CLOCKTOWER) {
             EnDg_ChangeAnim(&this->skelAnime, sAnimationInfo, DOG_ANIM_RUN);
         } else if (sRacetrackDogInfo[this->index].textId & 0x11) {
+            //! @bug: There is no bounds check on sRacetrackDogInfo access.
+            //! The dog in the Romani Ranch credits uses params of 0x03FF which means an index equal to
+            //! `ENDG_INDEX_SOUTH_CLOCK_TOWN`. Since the above condition just checks the scene not the index, this
+            //! results in an OOB access of `sRacetrackDogInfo` in this condition. With IDO, the OOB access results in
+            //! this condition evaluating as true and the dog uses the walking animation with morph frames. Due to this,
+            //! and since the dog doesn't update in the credits due to being considered an enemy, it ends up being
+            //! upside down. It isn't certain but it is speculated its default pose is upside down as well, so when
+            //! morphing from no animation it gets drawn upside down.
             EnDg_ChangeAnim(&this->skelAnime, sAnimationInfo, DOG_ANIM_WALK);
         } else {
             EnDg_ChangeAnim(&this->skelAnime, sAnimationInfo, DOG_ANIM_RUN);
@@ -1302,7 +1309,7 @@ void EnDg_Talk(EnDg* this, PlayState* play) {
 }
 
 void EnDg_Init(Actor* thisx, PlayState* play) {
-    EnDg* this = THIS;
+    EnDg* this = (EnDg*)thisx;
     s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 24.0f);
@@ -1332,13 +1339,13 @@ void EnDg_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnDg_Destroy(Actor* thisx, PlayState* play) {
-    EnDg* this = THIS;
+    EnDg* this = (EnDg*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
 }
 
 void EnDg_Update(Actor* thisx, PlayState* play) {
-    EnDg* this = THIS;
+    EnDg* this = (EnDg*)thisx;
     Player* player = GET_PLAYER(play);
     s32 pad;
     Vec3f floorRot = { 0.0f, 0.0f, 0.0f };
@@ -1371,7 +1378,7 @@ s32 EnDg_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* po
 }
 
 void EnDg_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* thisx) {
-    EnDg* this = THIS;
+    EnDg* this = (EnDg*)thisx;
     Vec3f sFocusOffset = { 0.0f, 20.0f, 0.0f };
 
     if (limbIndex == DOG_LIMB_HEAD) {
@@ -1385,7 +1392,7 @@ void EnDg_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, 
 }
 
 void EnDg_Draw(Actor* thisx, PlayState* play) {
-    EnDg* this = THIS;
+    EnDg* this = (EnDg*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 

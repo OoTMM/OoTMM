@@ -26,7 +26,7 @@ def ExtractFile(xmlPath, outputPath, outputSourcePath):
             generateSourceFile = "0"
             break
 
-    execStr = f"tools/ZAPD/ZAPD.out e -eh -i {xmlPath} -b {globalBaseromSegmentsDir} -o {outputPath} -osf {outputSourcePath} -gsf {generateSourceFile} -rconf tools/ZAPDConfigs/MM/Config.xml {ZAPDArgs}"
+    execStr = f"tools/ZAPD/ZAPD.out e -eh -i {xmlPath} -b {globalBaseromSegmentsDir} -o {outputPath} -osf {outputSourcePath} -gsf {generateSourceFile} -rconf tools/ZAPDConfigs/MM/Config.xml --cs-float both {ZAPDArgs}"
 
     if globalUnaccounted:
         execStr += " -Wunaccounted"
@@ -152,7 +152,8 @@ def main():
         for currentPath, _, files in os.walk(os.path.join("assets", "xml")):
             for file in files:
                 fullPath = os.path.join(currentPath, file)
-                if file.endswith(".xml"):
+                # ZAPD can't handle audio, skip those XMLs.
+                if file.endswith(".xml") and (fullPath.find("audio") == -1):
                     xmlFiles.append(fullPath)
 
         try:

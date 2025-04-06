@@ -3,13 +3,10 @@
  * Overlay: ovl_Eff_Kamejima_Wave
  * Description: Wave Created by Turtle Awakening
  */
-#include "prevent_bss_reordering.h"
 #include "z_eff_kamejima_wave.h"
 #include "assets/objects/object_kamejima/object_kamejima.h"
 
-#define FLAGS (ACTOR_FLAG_10)
-
-#define THIS ((EffKamejimaWave*)thisx)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void EffKamejimaWave_Init(Actor* thisx, PlayState* play);
 void EffKamejimaWave_Destroy(Actor* thisx, PlayState* play);
@@ -45,7 +42,7 @@ s16 sVtxAlpha;
 AnimatedMaterial* D_80BCF1C4;
 
 void EffKamejimaWave_Init(Actor* thisx, PlayState* play) {
-    EffKamejimaWave* this = THIS;
+    EffKamejimaWave* this = (EffKamejimaWave*)thisx;
 
     Actor_SetScale(&this->actor, 0.2f);
     this->actor.scale.y = 0.0f;
@@ -131,7 +128,7 @@ void func_80BCEDE0(EffKamejimaWave* this, PlayState* play) {
 }
 
 void EffKamejimaWave_Update(Actor* thisx, PlayState* play) {
-    EffKamejimaWave* this = THIS;
+    EffKamejimaWave* this = (EffKamejimaWave*)thisx;
 
     this->actionFunc(this, play);
 }

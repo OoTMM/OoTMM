@@ -7,9 +7,7 @@
 #include "z_obj_hamishi.h"
 #include "assets/objects/gameplay_field_keep/gameplay_field_keep.h"
 
-#define FLAGS (ACTOR_FLAG_10)
-
-#define THIS ((ObjHamishi*)thisx)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
 void ObjHamishi_Init(Actor* thisx, PlayState* play);
 void ObjHamishi_Destroy(Actor* thisx, PlayState* play2);
@@ -56,13 +54,13 @@ s16 D_809A1AD4[] = {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 400, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 250, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 500, ICHAIN_STOP),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 250, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 500, ICHAIN_STOP),
 };
 
 void func_809A0F20(Actor* thisx, PlayState* play) {
-    ObjHamishi* this = THIS;
+    ObjHamishi* this = (ObjHamishi*)thisx;
 
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
@@ -126,7 +124,7 @@ void func_809A10F4(ObjHamishi* this, PlayState* play) {
         }
 
         EffectSsKakera_Spawn(play, &spBC, &spC8, &this->actor.world.pos, gravity, phi_v0, 30, 5, 0, D_809A1AD4[i], 3, 0,
-                             70, 1, GAMEPLAY_FIELD_KEEP, gameplay_field_keep_DL_006420);
+                             70, 1, GAMEPLAY_FIELD_KEEP, gFieldSilverBoulderDebrisDL);
     }
 
     func_800BBFB0(play, &this->actor.world.pos, 140.0f, 6, 180, 90, 1);
@@ -161,12 +159,12 @@ s32 ObjHamishi_IsUnderwater(ObjHamishi* this, PlayState* play) {
 }
 
 void ObjHamishi_Init(Actor* thisx, PlayState* play) {
-    ObjHamishi* this = THIS;
+    ObjHamishi* this = (ObjHamishi*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (play->csCtx.state != CS_STATE_IDLE) {
-        this->actor.uncullZoneForward += 1000.0f;
+        this->actor.cullingVolumeDistance += 1000.0f;
     }
 
     if (this->actor.shape.rot.y == 0) {
@@ -194,14 +192,14 @@ void ObjHamishi_Init(Actor* thisx, PlayState* play) {
 
 void ObjHamishi_Destroy(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
-    ObjHamishi* this = THIS;
+    ObjHamishi* this = (ObjHamishi*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
 }
 
 void ObjHamishi_Update(Actor* thisx, PlayState* play) {
     s32 pad;
-    ObjHamishi* this = THIS;
+    ObjHamishi* this = (ObjHamishi*)thisx;
     s32 sp24 = (this->collider.base.acFlags & AC_HIT) != 0;
 
     func_809A0F78(this);
@@ -250,7 +248,7 @@ void ObjHamishi_Update(Actor* thisx, PlayState* play) {
 
         if (this->unk_1A0 > 0) {
             this->unk_1A0--;
-        } else if ((this->actor.flags & ACTOR_FLAG_40) && (this->actor.xzDistToPlayer < 1000.0f)) {
+        } else if ((this->actor.flags & ACTOR_FLAG_INSIDE_CULLING_VOLUME) && (this->actor.xzDistToPlayer < 1000.0f)) {
             CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider.base);
         }
 
@@ -261,7 +259,7 @@ void ObjHamishi_Update(Actor* thisx, PlayState* play) {
 }
 
 void ObjHamishi_Draw(Actor* thisx, PlayState* play) {
-    ObjHamishi* this = THIS;
+    ObjHamishi* this = (ObjHamishi*)thisx;
 
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -272,7 +270,7 @@ void ObjHamishi_Draw(Actor* thisx, PlayState* play) {
         gSPSegment(POLY_OPA_DISP++, 0x08, D_801AEFA0);
         MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 170, 130, 255);
-        gSPDisplayList(POLY_OPA_DISP++, gameplay_field_keep_DL_0061E8);
+        gSPDisplayList(POLY_OPA_DISP++, gFieldSilverBoulderDL);
     } else if (thisx->projectedPos.z < 2250.0f) {
         f32 sp20 = (2250.0f - thisx->projectedPos.z) * 2.55f;
 
@@ -282,7 +280,7 @@ void ObjHamishi_Draw(Actor* thisx, PlayState* play) {
         gSPSegment(POLY_XLU_DISP++, 0x08, D_801AEF88);
         MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 170, 130, (s32)sp20);
-        gSPDisplayList(POLY_XLU_DISP++, gameplay_field_keep_DL_0061E8);
+        gSPDisplayList(POLY_XLU_DISP++, gFieldSilverBoulderDL);
     } else {
         thisx->shape.shadowAlpha = 0;
     }

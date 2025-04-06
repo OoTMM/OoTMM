@@ -468,7 +468,7 @@ void Fault_PrintThreadContext(OSThread* thread) {
     }
 }
 
-void osSyncPrintfThreadContext(OSThread* thread) {
+void Fault_LogThreadContext(OSThread* thread) {
     __OSThreadContext* threadCtx;
     s16 causeStrIndex = _SHIFTR((u32)thread->context.cause, 2, 5);
 
@@ -1035,7 +1035,7 @@ void Fault_ThreadEntry(void* arg) {
         do {
             // Thread context page
             Fault_PrintThreadContext(faultedThread);
-            osSyncPrintfThreadContext(faultedThread);
+            Fault_LogThreadContext(faultedThread);
             Fault_WaitForInput();
 
             // Stack trace page
@@ -1114,19 +1114,23 @@ void Fault_HangupFaultClient(const char* exp1, const char* exp2) {
  * error occurs. The parameters specify two messages detailing the error, one
  * or both may be NULL.
  */
-void Fault_AddHungupAndCrashImpl(const char* exp1, const char* exp2) {
+NORETURN void Fault_AddHungupAndCrashImpl(const char* exp1, const char* exp2) {
     FaultClient client;
     s32 pad;
 
     Fault_AddClient(&client, (void*)Fault_HangupFaultClient, (void*)exp1, (void*)exp2);
     *(u32*)0x11111111 = 0; // trigger an exception via unaligned memory access
+
+    // Since the above line triggers an exception and transfers execution to the fault handler
+    // this function does not return and the rest of the function is unreachable.
+    UNREACHABLE();
 }
 
 /**
  * Like `Fault_AddHungupAndCrashImpl`, however provides a fixed message containing
  * file and line number
  */
-void Fault_AddHungupAndCrash(const char* file, s32 line) {
+NORETURN void Fault_AddHungupAndCrash(const char* file, s32 line) {
     char msg[0x100];
 
     sprintf(msg, "HungUp %s:%d", file, line);
