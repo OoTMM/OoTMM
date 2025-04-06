@@ -24,7 +24,7 @@
 #include "stack.h"
 #include "terminal.h"
 #pragma increment_block_number "gc-eu:128 gc-eu-mq:128 gc-jp:128 gc-jp-ce:128 gc-jp-mq:128 gc-us:128 gc-us-mq:128" \
-                               "ntsc-1.2:88 pal-1.0:86 pal-1.1:86"
+                               "ntsc-1.2:82 pal-1.0:80 pal-1.1:80"
 
 StackEntry sDmaMgrStackInfo;
 OSMesgQueue sDmaMgrMsgQueue;
@@ -285,14 +285,9 @@ NORETURN void DmaMgr_Error(DmaRequest* req, const char* filename, const char* er
     Fault_AddHungupAndCrashImpl(buff1, buff2);
 }
 
-#define DMA_ERROR(req, filename, errorName, errorDesc, file, line1, line2, line3) \
-    DmaMgr_Error(req, filename, errorName, errorDesc)
-#elif OOT_VERSION < NTSC_1_1
-#define DMA_ERROR(req, filename, errorName, errorDesc, file, line1, line2, line3) Fault_AddHungupAndCrash(file, line1)
-#elif OOT_VERSION < GC_JP
-#define DMA_ERROR(req, filename, errorName, errorDesc, file, line1, line2, line3) Fault_AddHungupAndCrash(file, line2)
+#define DMA_ERROR(req, filename, errorName, errorDesc, file, line) DmaMgr_Error(req, filename, errorName, errorDesc)
 #else
-#define DMA_ERROR(req, filename, errorName, errorDesc, file, line1, line2, line3) Fault_AddHungupAndCrash(file, line3)
+#define DMA_ERROR(req, filename, errorName, errorDesc, file, line) Fault_AddHungupAndCrash(file, line)
 #endif
 
 const char* DmaMgr_GetFileName(uintptr_t vrom) {
