@@ -18,8 +18,8 @@
 #include "z64effect.h"
 #include "z64play.h"
 #include "z64player.h"
+#include "z64save.h"
 
-#include "z64.h"
 #include "assets/objects/object_niw/object_niw.h"
 
 #define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
