@@ -130,14 +130,25 @@ typedef struct ActorShape {
 // What actually matters is the presence or lack of `ACTOR_FLAG_HOSTILE`.
 #define ACTOR_FLAG_FRIENDLY (1 << 3)
 
-//
-#define ACTOR_FLAG_4 (1 << 4)
+// Culling of the actor's update process is disabled.
+// In other words, the actor will keep updating even if the actor is outside its own culling volume.
+// See `Actor_CullingCheck` for more information about culling.
+// See `Actor_CullingVolumeTest` for more information on the test used to determine if an actor should be culled.
+#define ACTOR_FLAG_UPDATE_CULLING_DISABLED (1 << 4)
 
-//
-#define ACTOR_FLAG_5 (1 << 5)
+// Culling of the actor's draw process is disabled.
+// In other words, the actor will keep drawing even if the actor is outside its own culling volume.
+// See `Actor_CullingCheck` for more information about culling.
+// See `Actor_CullingVolumeTest` for more information on the test used to determine if an actor should be culled.
+// (The original name for this flag is `NO_CULL_DRAW`, known from the Majora's Mask Debug ROM)
+#define ACTOR_FLAG_DRAW_CULLING_DISABLED (1 << 5)
 
-//
-#define ACTOR_FLAG_6 (1 << 6)
+// Set if the actor is currently within the bounds of its culling volume.
+// In most cases, this flag can be used to determine whether or not an actor is currently culled.
+// However this flag still updates even if `ACTOR_FLAG_UPDATE_CULLING_DISABLED` or `ACTOR_FLAG_DRAW_CULLING_DISABLED`
+// are set. Meaning, the flag can still have a value of "false" even if it is not actually culled.
+// (The original name for this flag is `NO_CULL_FLAG`, known from the Majora's Mask Debug ROM)
+#define ACTOR_FLAG_INSIDE_CULLING_VOLUME (1 << 6)
 
 // hidden or revealed by Lens of Truth (depending on room lensMode)
 #define ACTOR_FLAG_REACT_TO_LENS (1 << 7)
@@ -277,9 +288,9 @@ typedef struct Actor {
     /* 0x0B4 */ ActorShape shape; // Variables related to the physical shape of the actor
     /* 0x0E4 */ Vec3f projectedPos; // Position of the actor in projected space
     /* 0x0F0 */ f32 projectedW; // w component of the projected actor position
-    /* 0x0F4 */ f32 uncullZoneForward; // Amount to increase the uncull zone forward by (in projected space)
-    /* 0x0F8 */ f32 uncullZoneScale; // Amount to increase the uncull zone scale by (in projected space)
-    /* 0x0FC */ f32 uncullZoneDownward; // Amount to increase uncull zone downward by (in projected space)
+    /* 0x0F4 */ f32 cullingVolumeDistance; // Forward distance of the culling volume (in projected space). See `Actor_CullingCheck` and `Actor_CullingVolumeTest` for more information.
+    /* 0x0F8 */ f32 cullingVolumeScale; // Scale of the culling volume (in projected space). See `Actor_CullingCheck` and `Actor_CullingVolumeTest` for more information.
+    /* 0x0FC */ f32 cullingVolumeDownward; // Downward height of the culling volume (in projected space). See `Actor_CullingCheck` and `Actor_CullingVolumeTest` for more information.
     /* 0x100 */ Vec3f prevPos; // World position from the previous update cycle
     /* 0x10C */ u8 isLockedOn; // Set to true if the actor is currently locked-on by Player
     /* 0x10D */ u8 attentionPriority; // Lower values have higher priority. Resets to 0 when lock-on is released.
@@ -857,7 +868,7 @@ s32 Actor_OfferTalkExchangeEquiCylinder(Actor* actor, struct PlayState* play, f3
 s32 Actor_OfferTalk(Actor* actor, struct PlayState* play, f32 radius);
 s32 Actor_OfferTalkNearColChkInfoCylinder(Actor* actor, struct PlayState* play);
 u32 Actor_TextboxIsClosing(Actor* actor, struct PlayState* play);
-s8 func_8002F368(struct PlayState* play);
+s8 Actor_GetPlayerExchangeItemId(struct PlayState* play);
 void Actor_GetScreenPos(struct PlayState* play, Actor* actor, s16* x, s16* y);
 u32 Actor_HasParent(Actor* actor, struct PlayState* play);
 s32 Actor_OfferGetItem(Actor* actor, struct PlayState* play, s32 getItemId, f32 xzRange, f32 yRange);
@@ -886,7 +897,7 @@ s32 func_8002F9EC(struct PlayState* play, Actor* actor, struct CollisionPoly* po
 void Actor_DisableLens(struct PlayState* play);
 void Actor_InitContext(struct PlayState* play, ActorContext* actorCtx, struct ActorEntry* playerEntry);
 void Actor_UpdateAll(struct PlayState* play, ActorContext* actorCtx);
-s32 func_800314D4(struct PlayState* play, Actor* actor, Vec3f* arg2, f32 arg3);
+s32 Actor_CullingVolumeTest(struct PlayState* play, Actor* actor, Vec3f* projPos, f32 projW);
 void func_800315AC(struct PlayState* play, ActorContext* actorCtx);
 void Actor_KillAllWithMissingObject(struct PlayState* play, ActorContext* actorCtx);
 void func_80031B14(struct PlayState* play, ActorContext* actorCtx);
@@ -936,7 +947,7 @@ void func_80034BA0(struct PlayState* play, SkelAnime* skelAnime, OverrideLimbDra
                    PostLimbDraw postLimbDraw, Actor* actor, s16 alpha);
 void func_80034CC4(struct PlayState* play, SkelAnime* skelAnime, OverrideLimbDraw overrideLimbDraw,
                    PostLimbDraw postLimbDraw, Actor* actor, s16 alpha);
-s16 func_80034DD4(Actor* actor, struct PlayState* play, s16 arg2, f32 arg3);
+s16 Actor_UpdateAlphaByDistance(Actor* actor, struct PlayState* play, s16 alpha, f32 radius);
 void Actor_UpdateFidgetTables(struct PlayState* play, s16* fidgetTableY, s16* fidgetTableZ, s32 tableLen);
 void Actor_Noop(Actor* actor, struct PlayState* play);
 
