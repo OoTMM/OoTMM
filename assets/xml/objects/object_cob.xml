@@ -1,0 +1,46 @@
+<Root>
+    <File Name="object_cob" Segment="6">
+        <!-- Textures-->
+        <Texture Name="gHylianWoman3TLUT" OutName="tlut" Format="rgba16" Width="16" Height="16" Offset="0x0"/>
+        <Texture Name="gHylianWoman3FaceTex" OutName="face" Format="ci8" Width="8" Height="16" Offset="0x200" TlutOffset="0x0"/>
+        <Texture Name="gHylianWoman3HairTex" OutName="hair" Format="ci8" Width="8" Height="8" Offset="0x280" TlutOffset="0x0"/>
+        <Texture Name="gHylianWoman3FingersTex" OutName="fingers" Format="ci8" Width="8" Height="8" Offset="0x2C0" TlutOffset="0x0"/>
+        <Texture Name="gHylianWoman3DressSleevesTex" OutName="dress_sleeves" Format="ci8" Width="8" Height="8" Offset="0x300" TlutOffset="0x0"/>
+        <Texture Name="gHylianWoman3ShirtTex" OutName="shirt" Format="ci8" Width="8" Height="16" Offset="0x340" TlutOffset="0x0"/>
+
+        <!-- DLs -->
+        <DList Name="gHylianWoman3HeadDL" Offset="0x1300"/>
+        <DList Name="gHylianWoman3RightHandDL" Offset="0x1678"/>
+        <DList Name="gHylianWoman3RightForearmDL" Offset="0x1780"/>
+        <DList Name="gHylianWoman3RightUpperArmDL" Offset="0x1898"/>
+        <DList Name="gHylianWoman3LeftHandDL" Offset="0x19B0"/>
+        <DList Name="gHylianWoman3LeftForearmDL" Offset="0x1AB8"/>
+        <DList Name="gHylianWoman3LeftUpperArmDL" Offset="0x1BD0"/>
+        <DList Name="gHylianWoman3TorsoDL" Offset="0x1CE8"/>
+        <DList Name="gHylianWoman3RightFootDL" Offset="0x1E40"/>
+        <DList Name="gHylianWoman3RightShinDL" Offset="0x1E90"/>
+        <DList Name="gHylianWoman3RightThighDL" Offset="0x1EE0"/>
+        <DList Name="gHylianWoman3LeftFootDL" Offset="0x1F30"/>
+        <DList Name="gHylianWoman3LeftShinDL" Offset="0x1F80"/>
+        <DList Name="gHylianWoman3LeftThighDL" Offset="0x1FD0"/>
+        <DList Name="gHylianWoman3PelvisDL" Offset="0x2020"/>
+
+        <!-- Skeleton -->
+        <Limb Name="gHylianWoman3PelvisLimb" LimbType="Standard" Offset="0x2108"/>
+        <Limb Name="gHylianWoman3LeftThighLimb" LimbType="Standard" Offset="0x2114"/>
+        <Limb Name="gHylianWoman3LeftShinLimb" LimbType="Standard" Offset="0x2120"/>
+        <Limb Name="gHylianWoman3LeftFootLimb" LimbType="Standard" Offset="0x212C"/>
+        <Limb Name="gHylianWoman3RightThighLimb" LimbType="Standard" Offset="0x2138"/>
+        <Limb Name="gHylianWoman3RightShinLimb" LimbType="Standard" Offset="0x2144"/>
+        <Limb Name="gHylianWoman3RightFootLimb" LimbType="Standard" Offset="0x2150"/>
+        <Limb Name="gHylianWoman3TorsoLimb" LimbType="Standard" Offset="0x215C"/>
+        <Limb Name="gHylianWoman3LeftUpperArmLimb" LimbType="Standard" Offset="0x2168"/>
+        <Limb Name="gHylianWoman3LeftForearmLimb" LimbType="Standard" Offset="0x2174"/>
+        <Limb Name="gHylianWoman3LeftHandLimb" LimbType="Standard" Offset="0x2180"/>
+        <Limb Name="gHylianWoman3RightUpperArmLimb" LimbType="Standard" Offset="0x218C"/>
+        <Limb Name="gHylianWoman3RightForearmLimb" LimbType="Standard" Offset="0x2198"/>
+        <Limb Name="gHylianWoman3RightHandLimb" LimbType="Standard" Offset="0x21A4"/>
+        <Limb Name="gHylianWoman3HeadLimb" LimbType="Standard" Offset="0x21B0"/>
+        <Skeleton Name="gHylianWoman3Skel" Type="Flex" LimbType="Standard" Offset="0x21F8"/>
+    </File>
+</Root>

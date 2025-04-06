@@ -1,0 +1,8 @@
+<Root>
+    <File Name="ovl_En_St">
+        <Array Name="sSkulltulaUnusedVtx" Count="4" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="sSkulltulaUnusedDL" Offset="0x40"/>
+    </File>
+</Root>
