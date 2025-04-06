@@ -1,3 +1,4 @@
+#include <combo.h>
 #include "ultra64.h"
 #include "stack.h"
 
@@ -87,6 +88,8 @@ void Main(void* arg) {
     PadMgr_Init(&sSerialEventQueue, &gIrqMgr, Z_THREAD_ID_PADMGR, Z_PRIORITY_PADMGR, STACK_TOP(sPadMgrStack));
 
     AudioMgr_Unlock(&sAudioMgr);
+
+    Combo_Init();
 
     StackCheck_Init(&sGraphStackInfo, sGraphStack, STACK_TOP(sGraphStack), 0, 0x100, "graph");
     osCreateThread(&gGraphThread, Z_THREAD_ID_GRAPH, Graph_ThreadEntry, arg, STACK_TOP(sGraphStack), Z_PRIORITY_GRAPH);
