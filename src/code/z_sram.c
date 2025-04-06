@@ -1,5 +1,6 @@
 #include "file_select_state.h"
 #include "controller.h"
+#include "memory_utils.h"
 #include "terminal.h"
 #include "versions.h"
 #include "z64game.h"
@@ -1058,7 +1059,7 @@ void Sram_InitSram(GameState* gameState, SramContext* sramCtx) {
     PRINTF("Na_SetSoundOutputMode = %d\n", gSaveContext.soundSetting);
     PRINTF("Na_SetSoundOutputMode = %d\n", gSaveContext.soundSetting);
     PRINTF_RST();
-    Audio_SetSoundMode(gSaveContext.soundSetting);
+    Audio_SetSoundOutputMode(gSaveContext.soundSetting);
 }
 
 void Sram_Alloc(GameState* gameState, SramContext* sramCtx) {

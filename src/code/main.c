@@ -1,3 +1,4 @@
+#include "sys_cfb.h"
 #include "ultra64.h"
 #include "versions.h"
 
@@ -13,9 +14,12 @@ extern struct PadMgr gPadMgr;
 extern struct IrqMgr gIrqMgr;
 
 #include "libc64/malloc.h"
+#include "libu64/rcp_utils.h"
+#include "libu64/runtime.h"
 #include "audiomgr.h"
 #include "debug_arena.h"
 #include "fault.h"
+#include "gfx.h"
 #include "padmgr.h"
 #include "prenmi_buff.h"
 #include "regs.h"
@@ -34,7 +38,7 @@ extern struct IrqMgr gIrqMgr;
 #include "global.h"
 
 #pragma increment_block_number "gc-eu:32 gc-eu-mq:32 gc-jp:32 gc-jp-ce:32 gc-jp-mq:32 gc-us:32 gc-us-mq:32 ique-cn:32" \
-                               "ntsc-1.0:13 ntsc-1.1:13 ntsc-1.2:13 pal-1.0:11 pal-1.1:11"
+                               "ntsc-1.0:0 ntsc-1.1:0 ntsc-1.2:0 pal-1.0:254 pal-1.1:254"
 
 extern u8 _buffersSegmentEnd[];
 
@@ -108,7 +112,7 @@ void Main(void* arg) {
     gSystemHeapSize = fb - systemHeapStart;
     PRINTF(T("システムヒープ初期化 %08x-%08x %08x\n", "System heap initialization %08x-%08x %08x\n"), systemHeapStart,
            fb, gSystemHeapSize);
-    SystemHeap_Init((void*)systemHeapStart, gSystemHeapSize); // initializes the system heap
+    Runtime_Init((void*)systemHeapStart, gSystemHeapSize);
 
 #if DEBUG_FEATURES
     {
