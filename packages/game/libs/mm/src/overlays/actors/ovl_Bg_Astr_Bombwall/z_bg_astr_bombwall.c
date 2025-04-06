@@ -9,8 +9,6 @@
 
 #define FLAGS 0x00000000
 
-#define THIS ((BgAstrBombwall*)thisx)
-
 void BgAstrBombwall_Init(Actor* thisx, PlayState* play);
 void BgAstrBombwall_Destroy(Actor* thisx, PlayState* play);
 void BgAstrBombwall_Update(Actor* thisx, PlayState* play);
@@ -88,9 +86,7 @@ void BgAstrBombwall_InitCollider(ColliderTrisInit* init, Vec3f* pos, Vec3s* rot,
 
     for (i = 0; i < init->count; i++) {
         for (j = 0; j < 3; j++) {
-            //! FAKE:
-            // https://decomp.me/scratch/JrEnl
-            Matrix_MultVec3f(&(init->elements + i)->dim.vtx[j], &sp54[j]);
+            Matrix_MultVec3f(init->elements[i].dim.vtx + j, &sp54[j]);
             Math_Vec3f_Sum(&sp54[j], pos, &sp54[j]);
         }
         Collider_SetTrisVertices(collider, i, &sp54[0], &sp54[1], &sp54[2]);
@@ -99,7 +95,7 @@ void BgAstrBombwall_InitCollider(ColliderTrisInit* init, Vec3f* pos, Vec3s* rot,
 
 void BgAstrBombwall_Init(Actor* thisx, PlayState* play) {
     s32 pad;
-    BgAstrBombwall* this = THIS;
+    BgAstrBombwall* this = (BgAstrBombwall*)thisx;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     DynaPolyActor_Init(&this->dyna, DYNA_TRANSFORM_POS);
@@ -120,7 +116,7 @@ void BgAstrBombwall_Init(Actor* thisx, PlayState* play) {
 }
 
 void BgAstrBombwall_Destroy(Actor* thisx, PlayState* play) {
-    BgAstrBombwall* this = THIS;
+    BgAstrBombwall* this = (BgAstrBombwall*)thisx;
 
     DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
 }
@@ -194,7 +190,7 @@ void func_80C0A4BC(BgAstrBombwall* this, PlayState* play) {
 }
 
 void BgAstrBombwall_Update(Actor* thisx, PlayState* play) {
-    BgAstrBombwall* this = THIS;
+    BgAstrBombwall* this = (BgAstrBombwall*)thisx;
 
     this->actionFunc(this, play);
 }

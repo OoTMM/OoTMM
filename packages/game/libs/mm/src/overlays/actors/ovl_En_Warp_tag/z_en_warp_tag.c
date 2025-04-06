@@ -8,10 +8,9 @@
 #include "z_en_warp_tag.h"
 #include "assets/objects/gameplay_dangeon_keep/gameplay_dangeon_keep.h"
 
-#define FLAGS \
-    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_10 | ACTOR_FLAG_UPDATE_DURING_OCARINA | ACTOR_FLAG_LOCK_ON_DISABLED)
-
-#define THIS ((EnWarptag*)thisx)
+#define FLAGS                                                                                               \
+    (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_UPDATE_DURING_OCARINA | \
+     ACTOR_FLAG_LOCK_ON_DISABLED)
 
 void EnWarptag_Init(Actor* thisx, PlayState* play);
 void EnWarptag_Destroy(Actor* thisx, PlayState* play);
@@ -49,7 +48,7 @@ static InitChainEntry sInitChain[] = {
 };
 
 void EnWarptag_Init(Actor* thisx, PlayState* play) {
-    EnWarptag* this = THIS;
+    EnWarptag* this = (EnWarptag*)thisx;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     Actor_SetFocus(&this->dyna.actor, 0.0f);
@@ -75,7 +74,7 @@ void EnWarptag_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnWarptag_Destroy(Actor* thisx, PlayState* play) {
-    EnWarptag* this = THIS;
+    EnWarptag* this = (EnWarptag*)thisx;
     if (this->dyna.actor.draw != NULL) {
         DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
     }
@@ -250,7 +249,7 @@ void EnWarpTag_GrottoReturn(EnWarptag* this, PlayState* play) {
 }
 
 void EnWarptag_Update(Actor* thisx, PlayState* play) {
-    EnWarptag* this = THIS;
+    EnWarptag* this = (EnWarptag*)thisx;
     this->actionFunc(this, play);
 }
 

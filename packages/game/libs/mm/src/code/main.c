@@ -1,6 +1,7 @@
-#include "prevent_bss_reordering.h"
 #include "ultra64.h"
 #include "stack.h"
+
+#pragma increment_block_number "n64-us:128"
 
 // Variables are put before most headers as a hacky way to bypass bss reordering
 OSMesgQueue sSerialEventQueue;
@@ -59,7 +60,7 @@ void Main(void* arg) {
     Check_RegionIsSupported();
     Check_ExpansionPak();
 
-    sysHeap = (uintptr_t)SEGMENT_START(system_heap);
+    sysHeap = (uintptr_t)SEGMENT_END(buffers);
     gSystemHeapSize = (uintptr_t)(OS_PHYSICAL_TO_K0(osMemSize)) - sysHeap;
     SystemHeap_Init((void*)sysHeap, gSystemHeapSize);
 

@@ -7,9 +7,7 @@
 #include "z_bg_tobira01.h"
 #include "assets/objects/object_spot11_obj/object_spot11_obj.h"
 
-#define FLAGS (ACTOR_FLAG_10 | ACTOR_FLAG_20)
-
-#define THIS ((BgTobira01*)thisx)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 void BgTobira01_Init(Actor* thisx, PlayState* play);
 void BgTobira01_Destroy(Actor* thisx, PlayState* play);
@@ -72,7 +70,7 @@ void BgTobira01_Action(BgTobira01* this, PlayState* play) {
 }
 
 void BgTobira01_Init(Actor* thisx, PlayState* play) {
-    BgTobira01* this = THIS;
+    BgTobira01* this = (BgTobira01*)thisx;
 
     DynaPolyActor_Init(&this->dyna, DYNA_TRANSFORM_POS);
     DynaPolyActor_LoadMesh(play, &this->dyna, &gGoronDoorCol);
@@ -84,13 +82,13 @@ void BgTobira01_Init(Actor* thisx, PlayState* play) {
 }
 
 void BgTobira01_Destroy(Actor* thisx, PlayState* play) {
-    BgTobira01* this = THIS;
+    BgTobira01* this = (BgTobira01*)thisx;
 
     DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
 }
 
 void BgTobira01_Update(Actor* thisx, PlayState* play) {
-    BgTobira01* this = THIS;
+    BgTobira01* this = (BgTobira01*)thisx;
 
     this->actionFunc(this, play);
 }

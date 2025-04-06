@@ -58,7 +58,7 @@ oot: codegen setup loader
 mm: codegen setup loader
 	@mkdir -p dist
 	$(MAKE) $(MAKEARGS) $(MAKEARGS_MM) -C $(LIBS_DIR_MM)
-	tsx ./spec2fs.ts $(LIBS_DIR_MM)/spec $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).elf dist/mm.json
+	tsx ./spec2fs.ts $(LIBS_DIR_MM)/spec/spec $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).elf dist/mm.json
 	cp $(LIBS_DIR_MM)/build/$(MM_VERSION)/mm-$(MM_VERSION).z64 dist/mm.z64
 
 .PHONY: loader
