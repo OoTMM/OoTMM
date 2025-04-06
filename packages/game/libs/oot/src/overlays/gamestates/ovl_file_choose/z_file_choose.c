@@ -1,8 +1,27 @@
 #include <string.h>
 #include <combo.h>
 #include "file_select.h"
+
+#include "attributes.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "letterbox.h"
+#include "macros.h"
+#include "regs.h"
+#include "seqcmd.h"
+#include "sequence.h"
+#include "sfx.h"
+#include "sys_matrix.h"
 #include "terminal.h"
 #include "versions.h"
+#include "z64audio.h"
+#include "z64environment.h"
+#include "z64save.h"
+#include "z64skybox.h"
+#include "z64view.h"
+
+#include "global.h"
+
 #if OOT_PAL_N64
 #include "assets/objects/object_mag/object_mag.h"
 #endif
@@ -828,7 +847,7 @@ static s16 sQuestItemFlags[] = {
     QUEST_MEDALLION_WATER, QUEST_MEDALLION_SPIRIT, QUEST_MEDALLION_SHADOW, QUEST_MEDALLION_LIGHT,
 };
 
-#if OOT_NTSC && OOT_VERSION < GC_JP_CE
+#if (OOT_NTSC && OOT_VERSION < GC_JP_CE) || PLATFORM_IQUE
 static void* sSaveXTextures[] = { gFileSelSaveXJPNTex, gFileSelSaveXENGTex };
 #endif
 

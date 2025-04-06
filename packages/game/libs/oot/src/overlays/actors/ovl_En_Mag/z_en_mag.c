@@ -5,9 +5,20 @@
  */
 
 #include "z_en_mag.h"
+
+#include "controller.h"
+#include "gfx.h"
+#include "gfx_setupdl.h"
+#include "gfxalloc.h"
+#include "regs.h"
+#include "sfx.h"
 #include "versions.h"
+#include "z64audio.h"
+#include "z64play.h"
+
+#include "global.h"
+
 #include "assets/objects/object_mag/object_mag.h"
-#include "versions.h"
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 

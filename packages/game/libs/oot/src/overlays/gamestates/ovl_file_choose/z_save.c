@@ -1,6 +1,11 @@
 #include <string.h>
-#include "file_select.h"
 #include <combo.h>
+#include "file_select.h"
+#include "z64.h"
+#include "z64message.h"
+#include "z64scene.h"
+#include "z64save.h"
+#include "z_lib.h"
 
 static OotSavePlayerData sNewSavePlayerDataOot = {
     { '\0', '\0', '\0', '\0', '\0', '\0' }, // newf

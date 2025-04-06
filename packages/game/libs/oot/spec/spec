@@ -28,6 +28,9 @@ beginseg
 #endif
     include "$(BUILD_DIR)/src/boot/carthandle.o"
     include "$(BUILD_DIR)/src/boot/z_std_dma.o"
+#if PLATFORM_IQUE
+    include "*$(BUILD_DIR)/boot_bss_z_std_dma.o"
+#endif
 #if !PLATFORM_IQUE
     include "$(BUILD_DIR)/src/boot/yaz0.o"
 #else
@@ -99,6 +102,10 @@ beginseg
     include "$(BUILD_DIR)/src/libultra/libc/xldtob.o"
     include "$(BUILD_DIR)/src/libultra/libc/xlitob.o"
     include "$(BUILD_DIR)/src/libultra/libc/xprintf.o"
+#endif
+
+#if PLATFORM_IQUE
+    include "*$(BUILD_DIR)/boot_bss_2.o"
 #endif
 
     // Functions that GCC-compiled code may depend on, placed in boot so they will always be loaded
@@ -502,6 +509,9 @@ beginseg
     after "dmadata"
     align 0x20
 
+#if PLATFORM_IQUE
+    include "*$(BUILD_DIR)/code_bss_1.o"
+#endif
     include "$(BUILD_DIR)/src/code/z_en_a_keep.o"
     include "$(BUILD_DIR)/src/code/z_en_item00.o"
     include "$(BUILD_DIR)/src/code/z_eff_blure.o"
@@ -515,6 +525,9 @@ beginseg
     include "$(BUILD_DIR)/src/code/flg_set.o"
     include "$(BUILD_DIR)/src/code/z_DLF.o"
     include "$(BUILD_DIR)/src/code/z_actor.o"
+#if PLATFORM_IQUE
+    include "*$(BUILD_DIR)/code_bss_z_actor.o"
+#endif
     include "$(BUILD_DIR)/src/code/z_actor_dlftbls.o"
     include "$(BUILD_DIR)/src/code/z_bgcheck.o"
     include "$(BUILD_DIR)/src/code/z_bg_collect.o"
@@ -765,6 +778,11 @@ beginseg
     include "$(BUILD_DIR)/src/libc/sqrt.o"
 #endif
 
+#if PLATFORM_IQUE
+    include "*$(BUILD_DIR)/code_bss_2.o"
+    include "*$(BUILD_DIR)/code_bss_3.o"
+#endif
+
     // For some reason, the data sections of z_message and z_game_over are
     // placed near the rodata sections of other files, so we first build this
     // combined object before the final link.
@@ -799,7 +817,6 @@ beginseg
     include "$(BUILD_DIR)/src/libultra/mgu/mtxl2f.o"
 #endif
 #endif
-
 endseg
 
 beginseg

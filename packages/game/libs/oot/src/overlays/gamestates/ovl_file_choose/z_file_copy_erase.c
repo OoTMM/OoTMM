@@ -1,5 +1,16 @@
 #include "file_select.h"
 
+#include "controller.h"
+#include "regs.h"
+#include "sfx.h"
+#include "z64save.h"
+
+#include "macros.h"
+#include "global.h"
+
+// In iQue versions, this file contains many workarounds for EGCS internal
+// compiler errors (see docs/compilers.md)
+
 // when choosing a file to copy or erase, the 6 main menu buttons are placed at these offsets
 static s16 sChooseFileYOffsets[] = { -48, -48, -48, -24, -24, 0 };
 
@@ -19,7 +30,11 @@ void FileSelect_SetupCopySource(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 yStep;
     s16 i;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 5; i++) {
         yStep = (ABS(this->buttonYOffsets[i] - sChooseFileYOffsets[i])) / this->actionTimer;
 
@@ -29,6 +44,18 @@ void FileSelect_SetupCopySource(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 5; i++) {
+        yStep = (ABS(array[i] - sChooseFileYOffsets[i])) / this->actionTimer;
+
+        if (array[i] >= sChooseFileYOffsets[i]) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
 
     this->actionButtonAlpha[FS_BTN_ACTION_COPY] -= 25;
     this->actionButtonAlpha[FS_BTN_ACTION_ERASE] -= 25;
@@ -123,27 +150,65 @@ void FileSelect_SetupCopyDest1(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 yStep;
     s16 i;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         yStep = ABS(this->buttonYOffsets[i] - D_8081248C[this->buttonIndex][i]) / this->actionTimer;
 
-        if (D_8081248C[this->buttonIndex][i] >= this->buttonYOffsets[i]) {
+        if (this->buttonYOffsets[i] <= D_8081248C[this->buttonIndex][i]) {
             this->buttonYOffsets[i] += yStep;
         } else {
             this->buttonYOffsets[i] -= yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 3; i++) {
+        yStep = ABS(array[i] - D_8081248C[this->buttonIndex][i]) / this->actionTimer;
 
+        if (array[i] <= D_8081248C[this->buttonIndex][i]) {
+            array[i] += yStep;
+        } else {
+            array[i] -= yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
     this->nameBoxAlpha[this->buttonIndex] -= 25;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+    array = this->nameBoxAlpha;
+    array[this->buttonIndex] -= 25;
+#endif
 
     this->actionTimer--;
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         this->buttonYOffsets[this->buttonIndex] = D_8081248C[this->buttonIndex][this->buttonIndex];
+#else
+        array = this->buttonYOffsets;
+        array[this->buttonIndex] = D_8081248C[this->buttonIndex][this->buttonIndex];
+#endif
+
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->actionTimer = 8;
         this->configMode++;
     }
@@ -155,14 +220,33 @@ void FileSelect_SetupCopyDest1(GameState* thisx) {
  */
 void FileSelect_SetupCopyDest2(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->nameBoxAlpha[this->buttonIndex] -= 25;
     this->fileInfoAlpha[this->buttonIndex] += 25;
+#else
+    array = this->nameBoxAlpha;
+    array[this->buttonIndex] -= 25;
+    array = this->fileInfoAlpha;
+    array[this->buttonIndex] += 25;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         this->nameBoxAlpha[this->buttonIndex] = 0;
         this->fileInfoAlpha[this->buttonIndex] = 200;
+#else
+        array = this->nameBoxAlpha;
+        array[this->buttonIndex] = 0;
+        array = this->fileInfoAlpha;
+        array[this->buttonIndex] = 200;
+#endif
+
         this->buttonIndex = FS_BTN_COPY_QUIT;
         this->actionTimer = 8;
         this->configMode = CM_SELECT_COPY_DEST;
@@ -248,15 +332,35 @@ void FileSelect_SelectCopyDest(GameState* thisx) {
  */
 void FileSelect_ExitToCopySource1(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->fileInfoAlpha[this->buttonIndex] -= 25;
     this->nameBoxAlpha[this->buttonIndex] += 25;
+#else
+    array = this->fileInfoAlpha;
+    array[this->buttonIndex] -= 25;
+    array = this->nameBoxAlpha;
+    array[this->buttonIndex] += 25;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->nextTitleLabel = FS_TITLE_COPY_FROM;
+
+#if !PLATFORM_IQUE
         this->nameBoxAlpha[this->buttonIndex] = 200;
         this->fileInfoAlpha[this->buttonIndex] = 0;
+#else
+        array = this->nameBoxAlpha;
+        array[this->buttonIndex] = 200;
+        array = this->fileInfoAlpha;
+        array[this->buttonIndex] = 0;
+#endif
+
         this->actionTimer = 8;
         this->configMode++;
     }
@@ -270,7 +374,11 @@ void FileSelect_ExitToCopySource2(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         yStep = ABS(this->buttonYOffsets[i] - sChooseFileYOffsets[i]) / this->actionTimer;
 
@@ -280,15 +388,42 @@ void FileSelect_ExitToCopySource2(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 3; i++) {
+        yStep = ABS(array[i] - sChooseFileYOffsets[i]) / this->actionTimer;
 
+        if (array[i] >= sChooseFileYOffsets[i]) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->buttonIndex = FS_BTN_COPY_QUIT;
         this->configMode = CM_SELECT_COPY_SOURCE;
     }
@@ -303,10 +438,20 @@ void FileSelect_SetupCopyConfirm1(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         if ((i != this->copyDestFileIndex) && (i != this->selectedFileIndex)) {
             this->fileButtonAlpha[i] -= 25;
@@ -314,25 +459,59 @@ void FileSelect_SetupCopyConfirm1(GameState* thisx) {
             if (this->valid[i]) {
                 this->connectorAlpha[i] -= 31;
                 this->nameBoxAlpha[i] = this->nameAlpha[i] = this->fileButtonAlpha[i];
+                this->connectorAlpha[i] -= 31;
             }
-        } else {
-            if (this->copyDestFileIndex == i) {
-                yStep = ABS(this->buttonYOffsets[i] - D_808124A4[i]) / this->actionTimer;
-                this->buttonYOffsets[i] += yStep;
+        } else if (i == this->copyDestFileIndex) {
+            yStep = ABS(this->buttonYOffsets[i] - D_808124A4[i]) / this->actionTimer;
+            this->buttonYOffsets[i] += yStep;
 
-                if (this->buttonYOffsets[i] >= D_808124A4[i]) {
-                    this->buttonYOffsets[i] = D_808124A4[i];
-                }
+            if (this->buttonYOffsets[i] >= D_808124A4[i]) {
+                this->buttonYOffsets[i] = D_808124A4[i];
             }
         }
     }
+#else
+    for (i = 0; i < 3; i++) {
+        if ((i != this->copyDestFileIndex) && (i != this->selectedFileIndex)) {
+            array = this->fileButtonAlpha;
+            array[i] -= 25;
+
+            if (SLOT_OCCUPIED(sramCtx, i)) {
+                s16* nameBoxAlpha = this->nameBoxAlpha;
+                s16* nameAlpha = this->nameAlpha;
+                s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                array = this->connectorAlpha;
+                array[i] -= 31;
+            }
+        } else if (i == this->copyDestFileIndex) {
+            array = this->buttonYOffsets;
+            yStep = ABS(array[i] - D_808124A4[i]) / this->actionTimer;
+            array[i] += yStep;
+
+            if (array[i] >= D_808124A4[i]) {
+                array[i] = D_808124A4[i];
+            }
+        }
+    }
+#endif
 
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->actionTimer = 8;
         this->configMode++;
     }
@@ -419,11 +598,23 @@ void FileSelect_ReturnToCopyDest(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
     this->actionButtonAlpha[FS_BTN_ACTION_YES] -= 25;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_YES] -= 25;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         if ((i != this->copyDestFileIndex) && (i != this->selectedFileIndex)) {
             this->fileButtonAlpha[i] += 25;
@@ -436,19 +627,55 @@ void FileSelect_ReturnToCopyDest(GameState* thisx) {
 
         yStep = ABS(this->buttonYOffsets[i] - D_8081248C[this->selectedFileIndex][i]) / this->actionTimer;
 
-        if (D_8081248C[this->selectedFileIndex][i] >= this->buttonYOffsets[i]) {
+        if (this->buttonYOffsets[i] <= D_8081248C[this->selectedFileIndex][i]) {
             this->buttonYOffsets[i] += yStep;
         } else {
             this->buttonYOffsets[i] -= yStep;
         }
     }
+#else
+    for (i = 0; i < 3; i++) {
+        if ((i != this->copyDestFileIndex) && (i != this->selectedFileIndex)) {
+            array = this->fileButtonAlpha;
+            array[i] += 25;
+
+            if (SLOT_OCCUPIED(sramCtx, i)) {
+                s16* nameBoxAlpha = this->nameBoxAlpha;
+                s16* nameAlpha = this->nameAlpha;
+                s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                array = this->connectorAlpha;
+                array[i] += 31;
+            }
+        }
+
+        array = this->buttonYOffsets;
+        yStep = ABS(array[i] - D_8081248C[this->selectedFileIndex][i]) / this->actionTimer;
+
+        if (array[i] <= D_8081248C[this->selectedFileIndex][i]) {
+            array[i] += yStep;
+        } else {
+            array[i] -= yStep;
+        }
+    }
+#endif
 
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->actionTimer = 8;
         this->buttonIndex = FS_BTN_COPY_QUIT;
         this->configMode = CM_SELECT_COPY_DEST;
@@ -483,24 +710,55 @@ void FileSelect_CopyAnim1(GameState* thisx) {
 void FileSelect_CopyAnim2(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->fileInfoAlpha[this->copyDestFileIndex] += 25;
     this->nameAlpha[this->copyDestFileIndex] += 25;
     this->titleAlpha[1] += 31;
-    yStep = ABS(this->fileNamesY[this->copyDestFileIndex] + 56) / this->actionTimer;
+#else
+    array = this->fileInfoAlpha;
+    array[this->copyDestFileIndex] += 25;
+    array = this->nameAlpha;
+    array[this->copyDestFileIndex] += 25;
+    array = this->titleAlpha;
+    array[1] += 31;
+#endif
+
+#if !PLATFORM_IQUE
+    yStep = ABS(this->fileNamesY[this->copyDestFileIndex] - -56) / this->actionTimer;
     this->fileNamesY[this->copyDestFileIndex] -= yStep;
 
     if (this->fileNamesY[this->copyDestFileIndex] <= -56) {
         this->fileNamesY[this->copyDestFileIndex] = -56;
     }
+#else
+    array = this->fileNamesY;
+    yStep = ABS(array[this->copyDestFileIndex] - -56) / this->actionTimer;
+    array[this->copyDestFileIndex] -= yStep;
+
+    if (array[this->copyDestFileIndex] <= -56) {
+        array[this->copyDestFileIndex] = -56;
+    }
+#endif
 
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->actionTimer = 90;
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->configMode++;
     }
 }
@@ -539,16 +797,36 @@ void FileSelect_CopyAnim3(GameState* thisx) {
  */
 void FileSelect_CopyAnim4(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
+    s16* array;
 
+#if !PLATFORM_IQUE
     this->fileInfoAlpha[this->selectedFileIndex] -= 25;
     this->fileInfoAlpha[this->copyDestFileIndex] -= 25;
     this->nameBoxAlpha[this->selectedFileIndex] += 25;
     this->nameBoxAlpha[this->copyDestFileIndex] += 25;
     this->titleAlpha[0] -= 31;
+#else
+    array = this->fileInfoAlpha;
+    array[this->selectedFileIndex] -= 25;
+    array[this->copyDestFileIndex] -= 25;
+    array = this->nameBoxAlpha;
+    array[this->selectedFileIndex] += 25;
+    array[this->copyDestFileIndex] += 25;
+    array = this->titleAlpha;
+    array[0] -= 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         this->fileNamesY[this->copyDestFileIndex] = this->buttonYOffsets[3] = 0;
+#else
+        array = this->fileNamesY;
+        array[this->copyDestFileIndex] = 0;
+        this->buttonYOffsets[3] = 0;
+#endif
+
         this->actionTimer = 8;
         this->titleAlpha[0] = 0;
         this->configMode++;
@@ -563,7 +841,11 @@ void FileSelect_CopyAnim5(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 5; i++) {
         yStep = ABS(this->buttonYOffsets[i]) / this->actionTimer;
 
@@ -573,7 +855,20 @@ void FileSelect_CopyAnim5(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 5; i++) {
+        yStep = ABS(array[i]) / this->actionTimer;
 
+        if (array[i] >= 0) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         if (i != this->buttonIndex) {
             this->fileButtonAlpha[i] += 25;
@@ -584,32 +879,99 @@ void FileSelect_CopyAnim5(GameState* thisx) {
             }
         }
     }
+#else
+    for (i = 0; i < 3; i++) {
+        if (i != this->buttonIndex) {
+            array = this->fileButtonAlpha;
+            array[i] += 25;
 
+            if (SLOT_OCCUPIED(sramCtx, i)) {
+                s16* nameBoxAlpha = this->nameBoxAlpha;
+                s16* nameAlpha = this->nameAlpha;
+                s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                array = this->connectorAlpha;
+                array[i] += 31;
+            }
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->actionButtonAlpha[FS_BTN_ACTION_COPY] += 25;
     this->actionButtonAlpha[FS_BTN_ACTION_ERASE] += 25;
     this->optionButtonAlpha += 25;
     this->titleAlpha[1] += 31;
+#else
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_COPY] += 25;
+    array[FS_BTN_ACTION_ERASE] += 25;
+    this->optionButtonAlpha += 25;
+    array = this->titleAlpha;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         for (i = 0; i < 3; i++) {
-            this->connectorAlpha[i] = 0;
             this->fileButtonAlpha[i] = 200;
-            this->nameBoxAlpha[i] = this->nameAlpha[i] = this->connectorAlpha[i];
+            this->nameBoxAlpha[i] = this->nameAlpha[i] = this->connectorAlpha[i] = 0;
 
             if (this->valid[i]) {
                 this->connectorAlpha[i] = 255;
                 this->nameBoxAlpha[i] = this->nameAlpha[i] = this->fileButtonAlpha[i];
+                this->connectorAlpha[i] = 255;
             }
         }
+#else
+        for (i = 0; i < 3; i++) {
+            array = this->fileButtonAlpha;
+            array[i] = 200;
+            array = this->nameBoxAlpha;
+            array[i] = 0;
+            array = this->nameAlpha;
+            array[i] = 0;
+            array = this->connectorAlpha;
+            array[i] = 0;
 
+            if (SLOT_OCCUPIED(sramCtx, i)) {
+                s16* nameBoxAlpha = this->nameBoxAlpha;
+                s16* nameAlpha = this->nameAlpha;
+                s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                array = this->connectorAlpha;
+                array[i] = 255;
+            }
+        }
+#endif
+
+#if !PLATFORM_IQUE
         this->fileNamesY[this->selectedFileIndex] = 0;
+#else
+        array = this->fileNamesY;
+        array[this->selectedFileIndex] = 0;
+#endif
+
         this->highlightColor[3] = 70;
         this->highlightPulseDir = 1;
         XREG(35) = XREG(36);
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->configMode = CM_MAIN_MENU;
     }
 }
@@ -622,7 +984,11 @@ void FileSelect_ExitCopyToMain(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 5; i++) {
         yStep = ABS(this->buttonYOffsets[i]) / this->actionTimer;
 
@@ -632,24 +998,66 @@ void FileSelect_ExitCopyToMain(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 5; i++) {
+        yStep = ABS(array[i]) / this->actionTimer;
 
+        if (array[i] >= 0) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->actionButtonAlpha[FS_BTN_ACTION_COPY] += 25;
     this->actionButtonAlpha[FS_BTN_ACTION_QUIT] -= 25;
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_COPY] += 25;
+    array[FS_BTN_ACTION_QUIT] -= 25;
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         this->actionButtonAlpha[FS_BTN_ACTION_COPY] = 200;
         this->actionButtonAlpha[FS_BTN_ACTION_QUIT] = 0;
+#else
+        array = this->actionButtonAlpha;
+        array[FS_BTN_ACTION_COPY] = 200;
+        array[FS_BTN_ACTION_QUIT] = 0;
+#endif
+
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->configMode = CM_MAIN_MENU;
     }
 
+#if !PLATFORM_IQUE
     this->optionButtonAlpha = this->actionButtonAlpha[FS_BTN_ACTION_ERASE] =
         this->actionButtonAlpha[FS_BTN_ACTION_COPY];
+#else
+    array = this->actionButtonAlpha;
+    this->optionButtonAlpha = array[FS_BTN_ACTION_ERASE] = array[FS_BTN_ACTION_COPY];
+#endif
 }
 
 /**
@@ -660,7 +1068,11 @@ void FileSelect_SetupEraseSelect(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 5; i++) {
         yStep = ABS(this->buttonYOffsets[i] - sChooseFileYOffsets[i]) / this->actionTimer;
 
@@ -670,19 +1082,46 @@ void FileSelect_SetupEraseSelect(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 5; i++) {
+        yStep = ABS(array[i] - sChooseFileYOffsets[i]) / this->actionTimer;
 
+        if (array[i] >= sChooseFileYOffsets[i]) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->actionButtonAlpha[FS_BTN_ACTION_COPY] -= 50;
     this->actionButtonAlpha[FS_BTN_ACTION_ERASE] -= 50;
     this->optionButtonAlpha -= 50;
     this->actionButtonAlpha[FS_BTN_ACTION_QUIT] += 25;
+#else
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_COPY] -= 50;
+    array[FS_BTN_ACTION_ERASE] -= 50;
+    this->optionButtonAlpha -= 50;
+    array[FS_BTN_ACTION_QUIT] += 25;
+#endif
 
     if (this->actionButtonAlpha[FS_BTN_ACTION_COPY] <= 0) {
         this->actionButtonAlpha[FS_BTN_ACTION_COPY] = this->actionButtonAlpha[FS_BTN_ACTION_ERASE] =
             this->optionButtonAlpha = 0;
     }
 
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
@@ -691,10 +1130,25 @@ void FileSelect_SetupEraseSelect(GameState* thisx) {
         XREG(35) = XREG(36);
         this->actionButtonAlpha[FS_BTN_ACTION_COPY] = this->actionButtonAlpha[FS_BTN_ACTION_ERASE] =
             this->optionButtonAlpha = 0;
+
+#if !PLATFORM_IQUE
         this->actionButtonAlpha[FS_BTN_ACTION_QUIT] = 200;
+#else
+        array = this->actionButtonAlpha;
+        array[FS_BTN_ACTION_QUIT] = 200;
+#endif
+
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->buttonIndex = FS_BTN_ERASE_QUIT;
         this->configMode++;
     }
@@ -770,7 +1224,11 @@ void FileSelect_SetupEraseConfirm1(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         if (i != this->buttonIndex) {
             this->fileButtonAlpha[i] -= 25;
@@ -778,14 +1236,45 @@ void FileSelect_SetupEraseConfirm1(GameState* thisx) {
             if (this->valid[i]) {
                 this->connectorAlpha[i] -= 31;
                 this->nameBoxAlpha[i] = this->nameAlpha[i] = this->fileButtonAlpha[i];
+                this->connectorAlpha[i] -= 31;
             }
         } else {
             this->nameBoxAlpha[i] -= 25;
         }
     }
+#else
+    for (i = 0; i < 3; i++) {
+        if (i != this->buttonIndex) {
+            array = this->fileButtonAlpha;
+            array[i] -= 25;
+
+            if (SLOT_OCCUPIED(sramCtx, i)) {
+                s16* nameBoxAlpha = this->nameBoxAlpha;
+                s16* nameAlpha = this->nameAlpha;
+                s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                array = this->connectorAlpha;
+                array[i] -= 31;
+            }
+        } else {
+            array = this->nameBoxAlpha;
+            array[i] -= 25;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 15;
     this->titleAlpha[1] += 15;
+#else
+    array = this->titleAlpha;
+    array[0] -= 15;
+    array[1] += 15;
+#endif
 
+#if !PLATFORM_IQUE
     yStep = ABS(this->buttonYOffsets[this->buttonIndex] - D_808124AC[this->buttonIndex]) / this->actionTimer;
 
     if (this->buttonYOffsets[this->buttonIndex] >= D_808124AC[this->buttonIndex]) {
@@ -793,24 +1282,62 @@ void FileSelect_SetupEraseConfirm1(GameState* thisx) {
     } else {
         this->buttonYOffsets[this->buttonIndex] += yStep;
     }
+#else
+    array = this->buttonYOffsets;
+    yStep = ABS(array[this->buttonIndex] - D_808124AC[this->buttonIndex]) / this->actionTimer;
+
+    if (array[this->buttonIndex] >= D_808124AC[this->buttonIndex]) {
+        array[this->buttonIndex] -= yStep;
+    } else {
+        array[this->buttonIndex] += yStep;
+    }
+#endif
 
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         for (i = 0; i < 3; i++) {
             if (i != this->buttonIndex) {
                 this->fileButtonAlpha[i] = 0;
 
                 if (this->valid[i]) {
                     this->connectorAlpha[i] = 0;
-                    this->nameBoxAlpha[i] = this->nameAlpha[i] = this->fileButtonAlpha[i] = 0;
                 }
             } else {
                 this->nameBoxAlpha[i] = 0;
             }
         }
+#else
+        for (i = 0; i < 3; i++) {
+            if (i != this->buttonIndex) {
+                array = this->fileButtonAlpha;
+                array[i] = 0;
 
+                if (SLOT_OCCUPIED(sramCtx, i)) {
+                    s16* nameBoxAlpha = this->nameBoxAlpha;
+                    s16* nameAlpha = this->nameAlpha;
+                    s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                    nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                    array = this->connectorAlpha;
+                    array[i] = 0;
+                }
+            } else {
+                array = this->nameBoxAlpha;
+                array[i] = 0;
+            }
+        }
+#endif
+
+#if !PLATFORM_IQUE
         this->buttonYOffsets[this->buttonIndex] = D_808124AC[this->buttonIndex];
+#else
+        array = this->buttonYOffsets;
+        array[this->buttonIndex] = D_808124AC[this->buttonIndex];
+#endif
+
         this->actionTimer = 8;
         this->configMode++;
     }
@@ -822,19 +1349,43 @@ void FileSelect_SetupEraseConfirm1(GameState* thisx) {
  */
 void FileSelect_SetupEraseConfirm2(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->actionButtonAlpha[FS_BTN_ACTION_YES] += 25;
     this->titleAlpha[0] -= 15;
     this->titleAlpha[1] += 15;
     this->fileInfoAlpha[this->buttonIndex] += 25;
+#else
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_YES] += 25;
+    array = this->titleAlpha;
+    array[0] -= 15;
+    array[1] += 15;
+    array = this->fileInfoAlpha;
+    array[this->buttonIndex] += 25;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->actionTimer = 8;
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->fileInfoAlpha[this->buttonIndex] = this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
         this->actionButtonAlpha[FS_BTN_ACTION_YES] = 200;
+#else
+        array = this->titleAlpha;
+        this->fileInfoAlpha[this->buttonIndex] = array[0] = 255;
+        array[1] = 0;
+        array = this->actionButtonAlpha;
+        array[FS_BTN_ACTION_YES] = 200;
+#endif
+
         this->buttonIndex = FS_BTN_CONFIRM_QUIT;
         this->configMode = CM_ERASE_CONFIRM;
     }
@@ -878,15 +1429,35 @@ void FileSelect_EraseConfirm(GameState* thisx) {
  */
 void FileSelect_ExitToEraseSelect1(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     this->fileInfoAlpha[this->buttonIndex] -= 25;
     this->nameBoxAlpha[this->buttonIndex] += 25;
     this->actionButtonAlpha[FS_BTN_ACTION_YES] -= 25;
+#else
+    array = this->fileInfoAlpha;
+    array[this->buttonIndex] -= 25;
+    array = this->nameBoxAlpha;
+    array[this->buttonIndex] += 25;
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_YES] -= 25;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->actionTimer = 8;
+
+#if !PLATFORM_IQUE
         this->fileInfoAlpha[this->buttonIndex] = 0;
+#else
+        array = this->fileInfoAlpha;
+        array[this->buttonIndex] = 0;
+#endif
+
         this->configMode++;
     }
 }
@@ -899,7 +1470,11 @@ void FileSelect_ExitToEraseSelect2(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     yStep = ABS(this->buttonYOffsets[this->buttonIndex] - sChooseFileYOffsets[this->buttonIndex]) / this->actionTimer;
 
     if (this->buttonYOffsets[this->buttonIndex] >= sChooseFileYOffsets[this->buttonIndex]) {
@@ -907,7 +1482,18 @@ void FileSelect_ExitToEraseSelect2(GameState* thisx) {
     } else {
         this->buttonYOffsets[this->buttonIndex] += yStep;
     }
+#else
+    array = this->buttonYOffsets;
+    yStep = ABS(array[this->buttonIndex] - sChooseFileYOffsets[this->buttonIndex]) / this->actionTimer;
 
+    if (array[this->buttonIndex] >= sChooseFileYOffsets[this->buttonIndex]) {
+        array[this->buttonIndex] -= yStep;
+    } else {
+        array[this->buttonIndex] += yStep;
+    }
+#endif
+
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         if (i != this->buttonIndex) {
             this->fileButtonAlpha[i] += 25;
@@ -918,18 +1504,58 @@ void FileSelect_ExitToEraseSelect2(GameState* thisx) {
             }
         }
     }
+#else
+    for (i = 0; i < 3; i++) {
+        if (i != this->buttonIndex) {
+            array = this->fileButtonAlpha;
+            array[i] += 25;
 
+            if (SLOT_OCCUPIED(sramCtx, i)) {
+                s16* nameBoxAlpha = this->nameBoxAlpha;
+                s16* nameAlpha = this->nameAlpha;
+                s16* fileButtonAlpha = this->fileButtonAlpha;
+
+                nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+                array = this->connectorAlpha;
+                array[i] += 31;
+            }
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         this->buttonYOffsets[this->buttonIndex] = sChooseFileYOffsets[this->buttonIndex];
+#else
+        array = this->buttonYOffsets;
+        array[this->buttonIndex] = sChooseFileYOffsets[this->buttonIndex];
+#endif
+
         this->actionTimer = 8;
         this->buttonIndex = FS_BTN_ERASE_QUIT;
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->configMode = CM_ERASE_SELECT;
     }
 }
@@ -956,25 +1582,54 @@ void FileSelect_EraseAnim1(GameState* thisx) {
         }
 
         if (this->actionTimer != 0) {
+#if !PLATFORM_IQUE
             this->titleAlpha[0] -= 31;
             this->titleAlpha[1] += 31;
             this->fileInfoAlpha[this->selectedFileIndex] -= 25;
             this->actionButtonAlpha[FS_BTN_ACTION_YES] -= 25;
             this->actionButtonAlpha[FS_BTN_ACTION_QUIT] -= 25;
+#else
+            array = this->titleAlpha;
+            array[0] -= 31;
+            array[1] += 31;
+            array = this->fileInfoAlpha;
+            array[this->selectedFileIndex] -= 25;
+            array = this->actionButtonAlpha;
+            array[FS_BTN_ACTION_YES] -= 25;
+            array[FS_BTN_ACTION_QUIT] -= 25;
+#endif
         }
 
+#if !PLATFORM_IQUE
         this->fileNamesY[this->selectedFileIndex] -= D_80813800;
-        this->actionTimer--;
+#else
+        array = this->fileNamesY;
+        array[this->selectedFileIndex] -= D_80813800;
+#endif
+
         D_80813800 += 2;
+        this->actionTimer--;
 
         if (this->actionTimer == 0) {
             Sram_EraseSave(this);
             this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
             this->titleAlpha[0] = 255;
             this->titleAlpha[1] = this->connectorAlpha[this->selectedFileIndex] = 0;
-
             this->fileInfoAlpha[this->selectedFileIndex] = this->nameBoxAlpha[this->selectedFileIndex] =
                 this->actionButtonAlpha[FS_BTN_ACTION_YES] = this->actionButtonAlpha[FS_BTN_ACTION_QUIT] = 0;
+#else
+            array = this->titleAlpha;
+            array[0] = 255;
+            array[1] = this->connectorAlpha[this->selectedFileIndex] = 0;
+            array = this->fileInfoAlpha;
+            array[this->selectedFileIndex] = 0;
+            array = this->nameBoxAlpha;
+            array[this->selectedFileIndex] = 0;
+            array = this->actionButtonAlpha;
+            array[FS_BTN_ACTION_YES] = array[FS_BTN_ACTION_QUIT] = 0;
+#endif
 
             this->configMode++;
             this->actionTimer = 90;
@@ -1015,7 +1670,11 @@ void FileSelect_EraseAnim3(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 5; i++) {
         yStep = ABS(this->buttonYOffsets[i]) / this->actionTimer;
 
@@ -1025,7 +1684,20 @@ void FileSelect_EraseAnim3(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 5; i++) {
+        yStep = ABS(array[i]) / this->actionTimer;
 
+        if (array[i] >= 0) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     for (i = 0; i < 3; i++) {
         this->fileButtonAlpha[i] += 25;
 
@@ -1034,30 +1706,88 @@ void FileSelect_EraseAnim3(GameState* thisx) {
             this->connectorAlpha[i] += 31;
         }
     }
+#else
+    for (i = 0; i < 3; i++) {
+        array = this->fileButtonAlpha;
+        array[i] += 25;
 
+        if (SLOT_OCCUPIED(sramCtx, i)) {
+            s16* nameBoxAlpha = this->nameBoxAlpha;
+            s16* nameAlpha = this->nameAlpha;
+            s16* fileButtonAlpha = this->fileButtonAlpha;
+
+            nameBoxAlpha[i] = nameAlpha[i] = fileButtonAlpha[i];
+
+            array = this->connectorAlpha;
+            array[i] += 31;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     if (this->fileButtonAlpha[this->selectedFileIndex] >= 200) {
         this->fileButtonAlpha[this->selectedFileIndex] = 200;
     }
+#else
+    array = this->fileButtonAlpha;
+    if (array[this->selectedFileIndex] >= 200) {
+        array[this->selectedFileIndex] = 200;
+    }
+#endif
 
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
+#if !PLATFORM_IQUE
         this->fileNamesY[this->selectedFileIndex] = 0;
+#else
+        array = this->fileNamesY;
+        array[this->selectedFileIndex] = 0;
+#endif
+
         this->highlightColor[3] = 70;
         this->highlightPulseDir = 1;
         XREG(35) = XREG(36);
+
+#if !PLATFORM_IQUE
         this->actionButtonAlpha[FS_BTN_ACTION_COPY] = 200;
         this->actionButtonAlpha[FS_BTN_ACTION_YES] = this->actionButtonAlpha[FS_BTN_ACTION_QUIT] = 0;
+#else
+        array = this->actionButtonAlpha;
+        array[FS_BTN_ACTION_COPY] = 200;
+        array[FS_BTN_ACTION_YES] = array[FS_BTN_ACTION_QUIT] = 0;
+#endif
+
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->configMode = CM_MAIN_MENU;
     }
 
+#if !PLATFORM_IQUE
     this->optionButtonAlpha = this->actionButtonAlpha[FS_BTN_ACTION_ERASE] =
         this->actionButtonAlpha[FS_BTN_ACTION_COPY];
+#else
+    array = this->actionButtonAlpha;
+    this->optionButtonAlpha = array[FS_BTN_ACTION_ERASE] = array[FS_BTN_ACTION_COPY];
+#endif
 }
 
 /**
@@ -1068,7 +1798,11 @@ void FileSelect_ExitEraseToMain(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     s16 i;
     s16 yStep;
+#if PLATFORM_IQUE
+    s16* array;
+#endif
 
+#if !PLATFORM_IQUE
     for (i = 0; i < 5; i++) {
         yStep = ABS(this->buttonYOffsets[i]) / this->actionTimer;
 
@@ -1078,7 +1812,20 @@ void FileSelect_ExitEraseToMain(GameState* thisx) {
             this->buttonYOffsets[i] += yStep;
         }
     }
+#else
+    array = this->buttonYOffsets;
+    for (i = 0; i < 5; i++) {
+        yStep = ABS(array[i]) / this->actionTimer;
 
+        if (array[i] >= 0) {
+            array[i] -= yStep;
+        } else {
+            array[i] += yStep;
+        }
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->actionButtonAlpha[FS_BTN_ACTION_COPY] += 25;
     this->actionButtonAlpha[FS_BTN_ACTION_ERASE] += 25;
     this->optionButtonAlpha += 25;
@@ -1087,23 +1834,62 @@ void FileSelect_ExitEraseToMain(GameState* thisx) {
     if (this->actionButtonAlpha[FS_BTN_ACTION_QUIT] <= 0) {
         this->actionButtonAlpha[FS_BTN_ACTION_QUIT] = 0;
     }
+#else
+    array = this->actionButtonAlpha;
+    array[FS_BTN_ACTION_COPY] += 25;
+    array[FS_BTN_ACTION_ERASE] += 25;
+    this->optionButtonAlpha += 25;
+    array[FS_BTN_ACTION_QUIT] -= 50;
 
+    if (array[FS_BTN_ACTION_QUIT] <= 0) {
+        array[FS_BTN_ACTION_QUIT] = 0;
+    }
+#endif
+
+#if !PLATFORM_IQUE
     this->titleAlpha[0] -= 31;
     this->titleAlpha[1] += 31;
+#else
+    array = this->titleAlpha;
+    array[0] -= 31;
+    array[1] += 31;
+#endif
+
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->highlightColor[3] = 70;
         this->highlightPulseDir = 1;
         XREG(35) = XREG(36);
+
+#if !PLATFORM_IQUE
         this->actionButtonAlpha[FS_BTN_ACTION_COPY] = 200;
         this->actionButtonAlpha[FS_BTN_ACTION_QUIT] = 0;
+#else
+        array = this->actionButtonAlpha;
+        array[FS_BTN_ACTION_COPY] = 200;
+        array[FS_BTN_ACTION_QUIT] = 0;
+#endif
+
         this->titleLabel = this->nextTitleLabel;
+
+#if !PLATFORM_IQUE
         this->titleAlpha[0] = 255;
         this->titleAlpha[1] = 0;
+#else
+        array = this->titleAlpha;
+        array[0] = 255;
+        array[1] = 0;
+#endif
+
         this->configMode = CM_MAIN_MENU;
     }
 
+#if !PLATFORM_IQUE
     this->optionButtonAlpha = this->actionButtonAlpha[FS_BTN_ACTION_ERASE] =
         this->actionButtonAlpha[FS_BTN_ACTION_COPY];
+#else
+    array = this->actionButtonAlpha;
+    this->optionButtonAlpha = array[FS_BTN_ACTION_ERASE] = array[FS_BTN_ACTION_COPY];
+#endif
 }

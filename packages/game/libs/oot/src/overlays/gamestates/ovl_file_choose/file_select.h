@@ -3,8 +3,9 @@
 
 #include "libc/stddef.h"
 #include "ultra64.h"
-#include "global.h"
+#include "gfx.h"
 #include "versions.h"
+#include "z64game.h"
 
 // Init mode: Loads saves from SRAM, handles initial language selection in PAL N64 versions
 // Config mode: Handles the bulk of the file select, various configuration tasks like picking a file, copy/erase, and the options menu
@@ -216,6 +217,7 @@ void FileSelect_DrawOptions(GameState* thisx);
 void FileSelect_DrawNameEntry(GameState* thisx);
 void FileSelect_DrawCharacter(GraphicsContext* gfxCtx, void* texture, s16 vtx);
 
+typedef struct FileSelectState FileSelectState;
 void FileSelect_CreateSave(FileSelectState* this, int index);
 
 #if OOT_VERSION == PAL_1_1
