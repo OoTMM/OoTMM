@@ -260,7 +260,7 @@ NORETURN void DmaMgr_Error(DmaRequest* req, const char* filename, const char* er
     char buff2[80];
 
     PRINTF("%c", BEL);
-    PRINTF(VT_FGCOL(RED));
+    PRINTF_COLOR_RED();
     PRINTF(T("DMA致命的エラー(%s)\nROM:%X RAM:%X SIZE:%X %s\n", "DMA Fatal Error (%s)\nROM:%X RAM:%X SIZE:%X %s\n"),
            errorDesc != NULL ? errorDesc : (errorName != NULL ? errorName : "???"), vrom, ram, size,
            filename != NULL ? filename : "???");
@@ -271,7 +271,7 @@ NORETURN void DmaMgr_Error(DmaRequest* req, const char* filename, const char* er
         PRINTF("DMA ERROR: %s %d", sDmaMgrCurFileName, sDmaMgrCurFileLine);
     }
 
-    PRINTF(VT_RST);
+    PRINTF_RST();
 
     if (req->filename != NULL) {
         sprintf(buff1, "DMA ERROR: %s %d", req->filename, req->line);

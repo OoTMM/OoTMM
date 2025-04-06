@@ -129,7 +129,7 @@ static void CreateSaveOot(void) {
     gOotSave.info.horseData.pos.z = 5497;
     gOotSave.info.horseData.angle = -0x6AD9;
     gOotSave.info.playerData.magicLevel = 0;
-    gOotSave.info.infTable[INFTABLE_1DX_INDEX] = 1;
+    gOotSave.info.infTable[INFTABLE_INDEX_1DX] = 1;
     gOotSave.info.sceneFlags[SCENE_WATER_TEMPLE].swch = 0x40000000;
 
     /* Skip Saria and Mido */

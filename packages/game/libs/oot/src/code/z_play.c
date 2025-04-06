@@ -445,7 +445,7 @@ static void Play_InitImpl(PlayState* this) {
     Environment_PlaySceneSequence(this);
     gSaveContext.seqId = this->sceneSequences.seqId;
     gSaveContext.natureAmbienceId = this->sceneSequences.natureAmbienceId;
-    func_8002DF18(this, GET_PLAYER(this));
+    Actor_InitPlayerHorse(this, GET_PLAYER(this));
     AnimTaskQueue_Update(this, &this->animTaskQueue);
     gSaveContext.respawnFlag = 0;
 
@@ -1808,6 +1808,7 @@ void Play_LoadToLastEntrance(PlayState* this) {
                (gOotSave.entranceIndex == ENTR_HYRULE_FIELD_12) ||
                (gOotSave.entranceIndex == ENTR_HYRULE_FIELD_13) ||
                (gOotSave.entranceIndex == ENTR_HYRULE_FIELD_15)) {
+        // Avoid re-triggering the hop over Lon Lon fence cutscenes
         this->nextEntranceIndex = ENTR_HYRULE_FIELD_6;
 #endif
     } else {

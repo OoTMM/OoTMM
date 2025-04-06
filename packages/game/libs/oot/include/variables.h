@@ -14,6 +14,8 @@ extern s32 osCicId;
 extern u32 osMemSize;
 extern u8 osAppNMIBuffer[0x40];
 
+extern u32 __osBbIsBb;
+
 extern s8 D_80009430;
 extern vu8 gViConfigBlack;
 extern u8 gViConfigAdditionalScanLines;
@@ -132,8 +134,8 @@ extern s32 gSystemArenaLogSeverity;
 extern u8 __osPfsInodeCacheBank;
 extern s32 __osPfsLastChannel;
 
-extern const TempoData gTempoData;
-extern const AudioHeapInitSizes gAudioHeapInitSizes;
+extern TempoData gTempoData;
+extern AudioHeapInitSizes gAudioHeapInitSizes;
 extern s16 gOcarinaSongItemMap[];
 extern AudioTable gSoundFontTable;
 extern u8 gSequenceFontTable[];
