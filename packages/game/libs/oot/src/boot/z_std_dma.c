@@ -24,7 +24,7 @@
 #include "stack.h"
 #include "terminal.h"
 #pragma increment_block_number "gc-eu:128 gc-eu-mq:128 gc-jp:128 gc-jp-ce:128 gc-jp-mq:128 gc-us:128 gc-us-mq:128" \
-                               "ntsc-1.2:82 pal-1.0:80 pal-1.1:80"
+                               "ntsc-1.2:62 pal-1.0:60 pal-1.1:60"
 
 StackEntry sDmaMgrStackInfo;
 OSMesgQueue sDmaMgrMsgQueue;
@@ -49,11 +49,20 @@ const char* sDmaMgrFileNames[] = {
 #include "tables/dmadata_table.h"
 };
 
-#endif
-
 #undef DEFINE_DMA_ENTRY
 
-#if PLATFORM_N64 || DEBUG_FEATURES
+#endif
+
+#define SET_IOMSG(ioMsg, queue, rom, ram, buffSize) \
+    do {                                            \
+        (ioMsg).hdr.pri = OS_MESG_PRI_NORMAL;       \
+        (ioMsg).hdr.retQueue = (queue);             \
+        (ioMsg).devAddr = (rom);                    \
+        (ioMsg).dramAddr = (ram);                   \
+        (ioMsg).size = (buffSize);                  \
+    } while (0)
+
+#if !PLATFORM_GC || DEBUG_FEATURES
 /**
  * Compares `str1` and `str2`.
  *
@@ -62,7 +71,7 @@ const char* sDmaMgrFileNames[] = {
  *  -1 if the first character that does not match has a smaller value in str1 than str2,
  *  +1 if the first character that does not match has a greater value in str1 than str2
  */
-s32 DmaMgr_StrCmp(const char* str1, const char* str2) {
+s32 DmaMgr_StrCmp(const u8* str1, const u8* str2) {
     while (*str1 != '\0') {
         if (*str1 > *str2) {
             return 1;
@@ -99,6 +108,9 @@ s32 DmaMgr_DmaRomToRam(uintptr_t rom, void* ram, size_t size) {
     OSMesg msg;
     s32 ret;
     size_t buffSize = gDmaMgrDmaBuffSize;
+#if DEBUG_FEATURES
+    UNUSED s32 pad;
+#endif
 
     if (buffSize == 0) {
         buffSize = DMAMGR_DEFAULT_BUFSIZE;
@@ -112,13 +124,7 @@ s32 DmaMgr_DmaRomToRam(uintptr_t rom, void* ram, size_t size) {
         // The system avoids large DMAs as these would stall the PI for too long, potentially causing issues with
         // audio. To allow audio to continue to DMA whenever it needs to, other DMAs are split into manageable chunks.
 
-        if (1) {} // Necessary to match
-
-        ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
-        ioMsg.hdr.retQueue = &queue;
-        ioMsg.devAddr = rom;
-        ioMsg.dramAddr = ram;
-        ioMsg.size = buffSize;
+        SET_IOMSG(ioMsg, &queue, rom, ram, buffSize);
 
         if (gDmaMgrVerbose == 10) {
             PRINTF(T("%10lld ノーマルＤＭＡ %08x %08x %08x (%d)\n", "%10lld Normal DMA %08x %08x %08x (%d)\n"),
@@ -147,15 +153,9 @@ s32 DmaMgr_DmaRomToRam(uintptr_t rom, void* ram, size_t size) {
         ram = (u8*)ram + buffSize;
     }
 
-    if (1) { // Also necessary to match
-        s32 pad[2];
-    }
+    SET_IOMSG(ioMsg, &queue, rom, ram, size);
 
-    ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
-    ioMsg.hdr.retQueue = &queue;
-    ioMsg.devAddr = rom;
-    ioMsg.dramAddr = ram;
-    ioMsg.size = size;
+    { UNUSED s32 pad2; }
 
     if (gDmaMgrVerbose == 10) {
         PRINTF(T("%10lld ノーマルＤＭＡ %08x %08x %08x (%d)\n", "%10lld Normal DMA %08x %08x %08x (%d)\n"),
@@ -230,11 +230,7 @@ void DmaMgr_DmaFromDriveRom(void* ram, uintptr_t rom, size_t size) {
     osInvalDCache(ram, size);
     osCreateMesgQueue(&queue, &msg, 1);
 
-    ioMsg.hdr.retQueue = &queue;
-    ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
-    ioMsg.devAddr = rom;
-    ioMsg.dramAddr = ram;
-    ioMsg.size = size;
+    SET_IOMSG(ioMsg, &queue, rom, ram, size);
     handle->transferInfo.cmdType = 2;
 
     osEPiStartDma(handle, &ioMsg, OS_READ);
@@ -298,7 +294,8 @@ const char* DmaMgr_GetFileName(uintptr_t vrom) {
         return "(unknown)";
     }
 
-    if (DmaMgr_StrCmp(ret, "kanji") == 0 || DmaMgr_StrCmp(ret, "link_animetion") == 0) {
+    if (DmaMgr_StrCmp((const u8*)ret, (const u8*)"kanji") == 0 ||
+        DmaMgr_StrCmp((const u8*)ret, (const u8*)"link_animetion") == 0) {
         // This check may be related to these files being too large to be loaded all at once, however a NULL filename
         // does not prevent them from being loaded.
         return NULL;
@@ -306,7 +303,7 @@ const char* DmaMgr_GetFileName(uintptr_t vrom) {
     return ret;
 #elif PLATFORM_GC
     return "";
-#elif PLATFORM_N64
+#else
     return "??";
 #endif
 }

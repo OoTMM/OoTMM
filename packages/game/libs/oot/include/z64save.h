@@ -310,8 +310,8 @@ typedef enum LinkAge {
 #define CUR_EQUIP_VALUE(equip) ((s32)(gOotSave.info.equips.equipment & gEquipMasks[equip]) >> gEquipShifts[equip])
 #define OWNED_EQUIP_FLAG(equip, value) (gBitFlags[value] << gEquipShifts[equip])
 #define OWNED_EQUIP_FLAG_ALT(equip, value) ((1 << (value)) << gEquipShifts[equip])
-#define CHECK_OWNED_EQUIP(equip, value) (OWNED_EQUIP_FLAG(equip, value) & gOotSave.info.inventory.equipment)
-#define CHECK_OWNED_EQUIP_ALT(equip, value) (gBitFlags[(value) + (equip) * 4] & gOotSave.info.inventory.equipment)
+#define CHECK_OWNED_EQUIP(equip, value) (gOotSave.info.inventory.equipment & OWNED_EQUIP_FLAG(equip, value))
+#define CHECK_OWNED_EQUIP_ALT(equip, value) (gOotSave.info.inventory.equipment & gBitFlags[(value) + (equip) * 4])
 
 #define SWORD_EQUIP_TO_PLAYER(swordEquip) (swordEquip)
 #define SHIELD_EQUIP_TO_PLAYER(shieldEquip) (shieldEquip)
@@ -322,7 +322,7 @@ typedef enum LinkAge {
 #define CAPACITY(upg, value) gUpgradeCapacities[upg][value]
 #define CUR_CAPACITY(upg) CAPACITY(upg, CUR_UPG_VALUE(upg))
 
-#define CHECK_QUEST_ITEM(item) (gBitFlags[item] & gOotSave.info.inventory.questItems)
+#define CHECK_QUEST_ITEM(item) (gOotSave.info.inventory.questItems & gBitFlags[item])
 #define CHECK_DUNGEON_ITEM(item, dungeonIndex) (gOotSave.info.inventory.dungeonItems[dungeonIndex] & gBitFlags[item])
 
 #define GET_GS_FLAGS(index) \
@@ -854,12 +854,26 @@ typedef enum IngoRaceState {
 #define EVENTINF_MARATHON_ACTIVE 0x10
 
 // EVENTINF 0x20-0x24
-#define EVENTINF_INDEX_20_21_22_23_24 2
-#define EVENTINF_20_MASK (1 << 0)
-#define EVENTINF_21_MASK (1 << 1)
-#define EVENTINF_22_MASK (1 << 2)
-#define EVENTINF_23_MASK (1 << 3)
-#define EVENTINF_24_MASK (1 << 4)
+#define EVENTINF_INDEX_HAGGLING_TOWNSFOLK 0x2
+#define EVENTINF_HAGGLING_TOWNSFOLK_MESG_0 0x20
+#define EVENTINF_HAGGLING_TOWNSFOLK_MESG_1 0x21
+#define EVENTINF_HAGGLING_TOWNSFOLK_MESG_2 0x22
+#define EVENTINF_HAGGLING_TOWNSFOLK_MESG_3 0x23
+#define EVENTINF_HAGGLING_TOWNSFOLK_MESG_4 0x24
+
+#define EVENTINF_HAGGLING_TOWNSFOLK_MASK                                                                     \
+    (EVENTINF_MASK(EVENTINF_HAGGLING_TOWNSFOLK_MESG_0) | EVENTINF_MASK(EVENTINF_HAGGLING_TOWNSFOLK_MESG_1) | \
+     EVENTINF_MASK(EVENTINF_HAGGLING_TOWNSFOLK_MESG_2) | EVENTINF_MASK(EVENTINF_HAGGLING_TOWNSFOLK_MESG_3) | \
+     EVENTINF_MASK(EVENTINF_HAGGLING_TOWNSFOLK_MESG_4))
+
+#define GET_EVENTINF_ENMU_TALK_FLAGS() \
+    gSaveContext.eventInf[EVENTINF_INDEX_HAGGLING_TOWNSFOLK] & EVENTINF_HAGGLING_TOWNSFOLK_MASK
+
+#define SET_EVENTINF_ENMU_TALK_FLAGS(talkFlags) \
+    gSaveContext.eventInf[EVENTINF_INDEX_HAGGLING_TOWNSFOLK] |= (talkFlags);
+
+#define RESET_EVENTINF_ENMU_TALK_FLAGS() \
+    gSaveContext.eventInf[EVENTINF_INDEX_HAGGLING_TOWNSFOLK] &= ~(EVENTINF_HAGGLING_TOWNSFOLK_MASK);
 
 #define EVENTINF_30 0x30
 

@@ -9,7 +9,7 @@
 #ifndef BB_SKAPI_H
 #define BB_SKAPI_H
 
-#include "ultratypes.h"
+#include "PR/ultratypes.h"
 
 #define SKC_OK                     0
 #define SKC_RECRYPT_INVALID        1

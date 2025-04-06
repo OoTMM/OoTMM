@@ -4,13 +4,13 @@
 #include <PR/ultratypes.h>
 #include <math_structs.h>
 
-typedef struct ItemEquips {
+typedef struct OotItemEquips {
     /* 0x00 */ u8 buttonItems[4];
     /* 0x04 */ u8 cButtonSlots[3];
     /* 0x08 */ u16 equipment; // a mask where each nibble corresponds to a type of equipment `EquipmentType`, and each nibble is a piece `EquipValue*`
 } OotItemEquips; // size = 0x0A
 
-typedef struct Inventory {
+typedef struct OotInventory {
     /* 0x00 */ u8 items[24];
     /* 0x18 */ s8 ammo[16];
     /* 0x28 */ u16 equipment; // a mask where each nibble corresponds to a type of equipment `EquipmentType`, and each bit to an owned piece `EquipInv*`
@@ -22,7 +22,7 @@ typedef struct Inventory {
     /* 0x5C */ s16 gsTokens;
 } OotInventory; // size = 0x5E
 
-typedef struct SavedSceneFlags {
+typedef struct OotSavedSceneFlags {
     /* 0x00 */ u32 chest;
     /* 0x04 */ u32 swch;
     /* 0x08 */ u32 clear;
@@ -32,16 +32,16 @@ typedef struct SavedSceneFlags {
     /* 0x18 */ u32 floors;
 } OotSavedSceneFlags; // size = 0x1C
 
-typedef struct HorseData {
+typedef struct OotHorseData {
     /* 0x00 */ s16 sceneId;
     /* 0x02 */ Vec3s pos;
     /* 0x08 */ s16 angle;
 } OotHorseData; // size = 0x0A
 
-typedef struct SavePlayerData {
+typedef struct OotSavePlayerData {
     /* 0x00  0x001C */ char newf[6]; // string "ZELDAZ"
     /* 0x06  0x0022 */ u16 deaths;
-    /* 0x08  0x0024 */ char playerName[8];
+    /* 0x08  0x0024 */ u8 playerName[8];
     /* 0x10  0x002C */ s16 n64ddFlag;
     /* 0x12  0x002E */ s16 healthCapacity; // "max_life"
     /* 0x14  0x0030 */ s16 health; // "now_life"
@@ -74,8 +74,11 @@ typedef struct FaroresWindData {
     /* 0x24 */ s32 tempCollectFlags;
 } OotFaroresWindData; // size = 0x28
 
-// offsets in SaveInfo and SaveContext/Save
-typedef struct SaveInfo {
+typedef struct OotChecksum {
+    u16 value;
+} OotChecksum; // size = 0x02
+
+typedef struct OotSaveInfo {
     /* 0x0000  0x001C */ OotSavePlayerData playerData; // "S_Private"
     /* 0x004C  0x0068 */ OotItemEquips equips;
     /* 0x0058  0x0074 */ OotInventory inventory;
@@ -98,10 +101,10 @@ typedef struct SaveInfo {
     /* 0x12AA  0x12C6 */ u8 scarecrowSpawnSong[0x80];
     /* 0x132A  0x1346 */ char unk_1346[0x02];
     /* 0x132C  0x1348 */ OotHorseData horseData;
-    /* 0x1336  0x1352 */ u16 checksum; // "check_sum"
+    /* 0x1336  0x1352 */ OotChecksum checksum; // "check_sum"
 } OotSaveInfo;
 
-typedef struct Save {
+typedef struct OotSave {
     /* 0x00 */ s32 entranceIndex;
     /* 0x04 */ s32 linkAge; // 0: Adult; 1: Child (see enum `LinkAge`)
     /* 0x08 */ s32 cutsceneIndex;

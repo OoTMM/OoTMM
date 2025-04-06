@@ -39,7 +39,7 @@ void ConsoleLogo_PrintBuildInfo(Gfx** gfxP) {
 #endif
 
 void ConsoleLogo_Calc(ConsoleLogoState* this) {
-#if PLATFORM_N64
+#if !PLATFORM_GC
     if ((this->coverAlpha == 0) && (this->visibleDuration != 0)) {
         this->unk_1D4--;
         this->visibleDuration--;
@@ -73,8 +73,8 @@ void ConsoleLogo_SetupView(ConsoleLogoState* this, f32 x, f32 y, f32 z) {
     eye.y = y;
     eye.z = z;
     up.x = up.z = 0.0f;
-    lookAt.x = lookAt.y = lookAt.z = 0.0f;
     up.y = 1.0f;
+    lookAt.x = lookAt.y = lookAt.z = 0.0f;
 
     View_SetPerspective(view, 30.0f, 10.0f, 12800.0f);
     View_LookAt(view, &eye, &lookAt, &up);
@@ -91,7 +91,8 @@ void ConsoleLogo_Draw(ConsoleLogoState* this) {
     Vec3f v3;
     Vec3f v1;
     Vec3f v2;
-    s32 pad2[2];
+    s32 pad2;
+    s32 pad3;
 
     OPEN_DISPS(this->state.gfxCtx, "../z_title.c", 395);
 
@@ -164,6 +165,10 @@ void ConsoleLogo_Main(GameState* thisx) {
     }
 #endif
 
+#if PLATFORM_IQUE
+    this->exit = true;
+#endif
+
     if (this->exit) {
         gSaveContext.seqId = (u8)NA_BGM_DISABLED;
         gSaveContext.natureAmbienceId = 0xFF;
@@ -199,7 +204,7 @@ void ConsoleLogo_Init(GameState* thisx) {
     this->state.destroy = ConsoleLogo_Destroy;
     this->exit = false;
 
-#if OOT_VERSION < GC_US
+#if OOT_VERSION < GC_US || PLATFORM_IQUE
     if (!(gPadMgr.validCtrlrsMask & 1)) {
         gSaveFileNum = -2;
     } else {

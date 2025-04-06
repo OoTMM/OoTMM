@@ -133,7 +133,7 @@ static OotInventory sDebugSaveInventory = {
     0,                                                              // gsTokens
 };
 
-static u16 sDebugSaveChecksum = 0;
+static OotChecksum sDebugSaveChecksum = { 0 };
 
 /**
  *  Initialize debug save. This is also used on the Title Screen
@@ -279,8 +279,11 @@ void Sram_OnLoad(void)
 
         default:
             if (gOotSave.info.playerData.savedSceneId != SCENE_LINKS_HOUSE) {
-                gOotSave.entranceIndex =
-                    (LINK_AGE_IN_YEARS == YEARS_CHILD) ? ENTR_LINKS_HOUSE_0 : ENTR_TEMPLE_OF_TIME_7;
+                if (LINK_AGE_IN_YEARS == YEARS_CHILD) {
+                    gOotSave.entranceIndex = ENTR_LINKS_HOUSE_0;
+                } else {
+                    gOotSave.entranceIndex = ENTR_TEMPLE_OF_TIME_7;
+                }
             } else {
                 gOotSave.entranceIndex = ENTR_LINKS_HOUSE_0;
             }
