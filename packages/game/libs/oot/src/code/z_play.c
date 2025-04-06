@@ -22,6 +22,11 @@
 #include "sys_matrix.h"
 #include "terminal.h"
 #include "title_setup_state.h"
+#include "transition_circle.h"
+#include "transition_fade.h"
+#include "transition_tile.h"
+#include "transition_triforce.h"
+#include "transition_wipe.h"
 #include "versions.h"
 #include "z_actor_dlftbls.h"
 #include "zelda_arena.h"
@@ -38,7 +43,7 @@
 #include "global.h"
 
 #pragma increment_block_number "gc-eu:0 gc-eu-mq:0 gc-jp:0 gc-jp-ce:0 gc-jp-mq:0 gc-us:0 gc-us-mq:0 ique-cn:0" \
-                               "ntsc-1.0:224 ntsc-1.1:224 ntsc-1.2:224 pal-1.0:224 pal-1.1:224"
+                               "ntsc-1.0:240 ntsc-1.1:240 ntsc-1.2:240 pal-1.0:240 pal-1.1:240"
 
 TransitionTile gTransitionTile;
 s32 gTransitionTileState;

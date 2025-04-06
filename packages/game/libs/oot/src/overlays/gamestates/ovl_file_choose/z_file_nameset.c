@@ -1259,7 +1259,7 @@ void FileSelect_UpdateOptionsMenu(GameState* thisx) {
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         this->configMode = CM_OPTIONS_TO_MAIN;
         SaveRaw_OptionsWrite();
-        Audio_SetSoundMode(gSaveOptions.audioSetting);
+        Audio_SetSoundOutputMode(gSaveOptions.audioSetting);
         return;
     }
 

@@ -4,6 +4,7 @@
 #include "gfx.h"
 #include "gfx_setupdl.h"
 #include "gfxalloc.h"
+#include "memory_utils.h"
 #include "message_data_static.h"
 #include "segment_symbols.h"
 #include "sequence.h"

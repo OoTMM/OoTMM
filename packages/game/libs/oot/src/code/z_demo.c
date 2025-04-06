@@ -6,6 +6,7 @@
 #include "gfx.h"
 #include "gfxalloc.h"
 #include "letterbox.h"
+#include "memory_utils.h"
 #include "regs.h"
 #include "rumble.h"
 #include "quake.h"

@@ -11,6 +11,7 @@
 #include "macros.h"
 #include "main.h"
 #include "map_select_state.h"
+#include "memory_utils.h"
 #include "regs.h"
 #include "rumble.h"
 #include "segment_symbols.h"

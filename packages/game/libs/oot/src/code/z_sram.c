@@ -1,5 +1,6 @@
 #include "file_select_state.h"
 #include "controller.h"
+#include "memory_utils.h"
 #include "terminal.h"
 #include "versions.h"
 #include "z64game.h"
@@ -219,7 +220,7 @@ void Sram_InitSram(void) {
         SaveRaw_OptionsWrite();
     }
 
-    Audio_SetSoundMode(gSaveOptions.audioSetting);
+    Audio_SetSoundOutputMode(gSaveOptions.audioSetting);
 }
 
 void Sram_OnLoad(void)

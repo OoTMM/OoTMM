@@ -40,6 +40,7 @@
  * @see irqmgr.c
  */
 #include "libu64/debug.h"
+#include "libu64/rcp_utils.h"
 #include "fault.h"
 #include "irqmgr.h"
 #include "main.h"
@@ -47,6 +48,7 @@
 #include "sched.h"
 #include "speed_meter.h"
 #include "versions.h"
+#include "vi_mode.h"
 #include "z64thread.h"
 
 #include "macros.h"

@@ -881,6 +881,7 @@ typedef enum IngoRaceState {
 
 #define EVENTINF_30 0x30
 
+void SaveContext_Init(void);
 
 extern SaveContext gSaveContext;
 
