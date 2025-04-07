@@ -1,5 +1,6 @@
 #include <ultra64.h>
 #include <combo.h>
+#include "z64dma.h"
 
 extern OSPiHandle* gCartHandle;
 
@@ -141,8 +142,6 @@ void File_CacheTick(void)
     }
 }
 
-int DmaMgr_DmaRomToRam(u32 romAddr, void* ramAddr, u32 size);
-
 void* File_CacheLoad(u32 id)
 {
     int firstEmpty;
@@ -169,13 +168,13 @@ void* File_CacheLoad(u32 id)
     /* Load the file */
     fileIndex = File_IndexFromID(id);
     if (fileIndex < 0)
-        return NULL;
-    data = CustomHeap_Alloc(File_SizeDecompressed(fileIndex));
+    return NULL;
+    fileSize = File_SizeDecompressed(fileIndex);
+    data = CustomHeap_Alloc(fileSize);
     if (data == NULL)
         return NULL;
 
-    fileSize = File_SizeDecompressed(fileIndex);
-    DmaMgr_DmaRomToRam(File_Offset(fileIndex), data, fileSize);
+    DmaMgr_RequestIndexSync(data, fileIndex, 0, fileSize);
 
     sFileCacheId[firstEmpty] = id;
     sFileCacheData[firstEmpty] = data;

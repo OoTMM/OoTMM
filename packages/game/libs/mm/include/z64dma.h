@@ -31,6 +31,8 @@ extern size_t gDmaMgrDmaBuffSize;
 // Standard DMA Requests
 s32 DmaMgr_RequestAsync(DmaRequest* req, void* ram, uintptr_t vrom, size_t size, int unused, OSMesgQueue* queue, void* msg);
 s32 DmaMgr_RequestSync(void* ram, uintptr_t vrom, size_t size);
+s32 DmaMgr_RequestIndexAsync(DmaRequest* req, void* ram, int fileIndex, u32 offset, u32 size, OSMesgQueue* queue, OSMesg msg);
+s32 DmaMgr_RequestIndexSync(void* ram, int fileIndex, u32 offset, u32 size);
 
 // Special-purpose DMA Requests
 

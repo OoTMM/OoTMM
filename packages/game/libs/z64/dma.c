@@ -109,3 +109,35 @@ s32 DmaMgr_RequestSync(void* ram, uintptr_t vrom, size_t size) {
 
     return 0;
 }
+
+s32 DmaMgr_RequestIndexAsync(DmaRequest* req, void* ram, int fileIndex, u32 offset, u32 size, OSMesgQueue* queue, OSMesg msg)
+{
+    req->fileIndex = fileIndex;
+    req->offset = offset;
+    req->size = size;
+    req->dst = ram;
+    req->notifyQueue = queue;
+    req->notifyMsg = msg;
+
+    osSendMesg(&gDmaMgrMsgQueue, (OSMesg)req, OS_MESG_BLOCK);
+    return 0;
+}
+
+s32 DmaMgr_RequestIndexSync(void* ram, int fileIndex, u32 offset, u32 size)
+{
+    DmaRequest req;
+    OSMesgQueue queue;
+    OSMesg msg[1];
+    s32 ret;
+
+    osCreateMesgQueue(&queue, msg, 1);
+
+    ret = DmaMgr_RequestIndexAsync(&req, ram, fileIndex, offset, size, &queue, NULL);
+    if (ret == -1) { // DmaMgr_RequestAsync does not return -1
+        return ret;
+    }
+
+    osRecvMesg(&queue, NULL, OS_MESG_BLOCK);
+
+    return 0;
+}
