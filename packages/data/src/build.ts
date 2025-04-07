@@ -110,6 +110,7 @@ emit('data-hints', loadYaml('defs/hints.yml'));
 emit('data-entrances', loadYaml('defs/entrances.yml'));
 emit('data-gi', loadYaml('defs/gi.yml'));
 emit('data-drawgi', loadYaml('defs/drawgi.yml'));
+emit('data-drawgifuncs', loadYaml('defs/drawgifuncs.yml'));
 emit('data-files', DATA_FILES);
 emit('data-macros', MACROS);
 emit('data-pool', POOL);

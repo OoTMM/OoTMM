@@ -89,9 +89,41 @@ async function genGI() {
   await cg.emit();
 }
 
+async function genDrawGiFuncs() {
+  const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'drawgi_funcs.h'), "GENERATED_DRAWGI_FUNCS_H");
+
+  for (let i = 0; i < DATA.RAW_DRAWGI_FUNCS.length; i++) {
+    const d = DATA.RAW_DRAWGI_FUNCS[i];
+    cgHeader.define(`GIDF_${d.id}`, i);
+  }
+
+  cgHeader.raw('typedef struct PlayState PlayState;');
+  cgHeader.raw('typedef void (*GetItemDrawFunc)(PlayState*, int, int);');
+  cgHeader.raw('extern GetItemDrawFunc kGetItemDrawFuncs[];')
+  for (let i = 0; i < DATA.RAW_DRAWGI_FUNCS.length; i++) {
+    const d = DATA.RAW_DRAWGI_FUNCS[i];
+    cgHeader.raw(`void GetItem_Draw${d.name}(PlayState* state, int index, int param);`);
+  }
+
+  const cgSource = new CodeGen(path.resolve('build', 'src', 'z64', 'drawgi_funcs.c'));
+  cgSource.include('combo/drawgi_funcs.h');
+  cgSource.raw('GetItemDrawFunc kGetItemDrawFuncs[] = {');
+  for (let i = 0; i < DATA.RAW_DRAWGI_FUNCS.length; i++) {
+    const d = DATA.RAW_DRAWGI_FUNCS[i];
+    cgSource.raw(`  GetItem_Draw${d.name},`);
+  }
+  cgSource.raw('};');
+
+  return Promise.all([
+    cgHeader.emit(),
+    cgSource.emit(),
+  ]);
+}
+
 async function run() {
   await Promise.all([
     genGI(),
+    genDrawGiFuncs(),
   ]);
 }
 
