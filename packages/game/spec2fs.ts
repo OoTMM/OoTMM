@@ -18,6 +18,9 @@ async function getSymbols(elfFilename: string): Promise<Map<string, number>> {
     if (parts.length === 3) {
       const addr = parseInt(parts[0], 16);
       const name = parts[2];
+      if (name.indexOf(".") !== -1 || name.indexOf("$") !== -1) {
+        continue;
+      }
       symbols.set(name, addr);
     }
   }
@@ -85,7 +88,7 @@ async function run() {
     ram: bootram,
   };
 
-  await fs.writeFile(outFilename, JSON.stringify({ game, loaderOffsets, files: segs }));
+  await fs.writeFile(outFilename, JSON.stringify({ game, symbols: Object.fromEntries(symbols), loaderOffsets, files: segs }));
 }
 
 run().catch((err) => {
