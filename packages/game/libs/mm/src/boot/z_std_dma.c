@@ -124,40 +124,8 @@ s32 DmaMgr_TranslateVromToRom(uintptr_t vrom) {
 const char* func_800809F4(uintptr_t vrom) {
     return "??";
 }
-void DmaMgr_ProcessRequest(DmaRequest* req) {
-    uintptr_t vrom = req->vromAddr;
-    void* ram = req->dramAddr;
-    size_t size = req->size;
-    FileDmaData dma;
-    int fileIndex;
-    u32 fileOffset;
-    u32 fileFlags;
-    u32 fileSize;
 
-    if (!File_DmaData(FILEID_MM_DMADATA, vrom, &dma))
-        for (;;) {}
-
-    fileIndex = File_IndexFromID(dma.id);
-    if (fileIndex == -1)
-        for (;;) {}
-    fileOffset = File_Offset(fileIndex);
-    fileFlags = File_Flags(fileIndex);
-
-    if (fileFlags & 1)
-    {
-        /* Compressed */
-        fileSize = File_Size(fileIndex);
-        osSetThreadPri(NULL, Z_PRIORITY_DMAMGR_LOW);
-        Yaz0_Decompress(fileOffset, ram, fileSize);
-        osSetThreadPri(NULL, Z_PRIORITY_DMAMGR);
-    }
-    else
-    {
-        /* Uncompressed */
-        fileOffset += req->vromAddr - dma.vstart;
-        DmaMgr_DmaRomToRam(fileOffset, ram, size);
-    }
-}
+void DmaMgr_ProcessRequest(DmaRequest* req);
 
 void DmaMgr_ThreadEntry(void* arg) {
     OSMesg msg;

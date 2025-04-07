@@ -114,21 +114,24 @@ class RomBuilder {
 
   private injectFileTable() {
     const filesSorted = Array.from(this.fileSystem.files).sort((a, b) => a.id - b.id);
-    const fileTable = new Uint8Array(filesSorted.length * 4 * 4);
+    const fileTable = new Uint8Array(filesSorted.length * 4 * 5);
 
     for (let i = 0; i < filesSorted.length; ++i) {
       const f = filesSorted[i];
       let flags = 0;
       let data = f.data!;
+      const sizeDecompressed = data.length;
       if (f.compressed) {
         flags |= 1;
         data = this.compressed.get(f)!;
       }
 
-      bufWriteU32BE(fileTable, i * 16 + 0, f.id);
-      bufWriteU32BE(fileTable, i * 16 + 4, this.offsets.get(f)!);
-      bufWriteU32BE(fileTable, i * 16 + 8, data.length);
-      bufWriteU32BE(fileTable, i * 16 + 12, flags);
+
+      bufWriteU32BE(fileTable, i * 20 + 0, f.id);
+      bufWriteU32BE(fileTable, i * 20 + 4, this.offsets.get(f)!);
+      bufWriteU32BE(fileTable, i * 20 + 8, data.length);
+      bufWriteU32BE(fileTable, i * 20 + 12, sizeDecompressed);
+      bufWriteU32BE(fileTable, i * 20 + 16, flags);
     }
 
     /* Inject the file table */

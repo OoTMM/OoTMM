@@ -17,6 +17,7 @@ beginseg
     name "boot"
     include "$(BUILD_DIR)/src/boot/boot_main.o"
     include "$(BUILD_DIR)/src/z64/init.o"
+    include "$(BUILD_DIR)/src/z64/dma.o"
     include "$(BUILD_DIR)/src/z64/draw.o"
     include "$(BUILD_DIR)/src/z64/file.o"
     include "$(BUILD_DIR)/src/z64/save.o"

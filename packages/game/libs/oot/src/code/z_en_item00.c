@@ -1,3 +1,4 @@
+#include <combo/z64/draw.h>
 #include "z_en_item00.h"
 #include "overlays/actors/ovl_En_Elf/z_en_elf.h"
 #include "overlays/effects/ovl_Effect_Ss_Dead_Sound/z_eff_ss_dead_sound.h"
@@ -1025,7 +1026,7 @@ void EnItem00_Draw(Actor* thisx, PlayState* play) {
                     } else {
                         mtxScale = 16.0f;
                         Matrix_Scale(mtxScale, mtxScale, mtxScale, MTXMODE_APPLY);
-                        GetItem_Draw(play, GID_RECOVERY_HEART);
+                        GetItem_DrawEx(play, GID_RECOVERY_HEART);
                     }
                     break;
                 }

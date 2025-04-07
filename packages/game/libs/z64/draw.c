@@ -39,10 +39,9 @@ void GetItem_DrawEx(PlayState* play, s16 gi)
     gSPSegment(POLY_XLU_DISP++, 0x06, data);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     XMATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, 0);
+    gSPDisplayList(POLY_OPA_DISP++, 0x06000f20);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     XMATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
-    gSPDisplayList(POLY_XLU_DISP++, 0);
+    //gSPDisplayList(POLY_XLU_DISP++, 0x06000b50);
     XCLOSE_DISPS(play->state.gfxCtx);
-
 }

@@ -7,15 +7,23 @@ u32 File_Offset(int index)
 {
     u32 data;
 
-    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 16 + 4, &data);
+    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 20 + 4, &data);
     return data;
 }
 
-u32 File_Size(int index)
+u32 File_SizeCompressed(int index)
 {
     u32 data;
 
-    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 16 + 8, &data);
+    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 20 + 8, &data);
+    return data;
+}
+
+u32 File_SizeDecompressed(int index)
+{
+    u32 data;
+
+    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 20 + 12, &data);
     return data;
 }
 
@@ -23,7 +31,7 @@ u32 File_Flags(int index)
 {
     u32 data;
 
-    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 16 + 12, &data);
+    osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 20 + 16, &data);
     return data;
 }
 
@@ -45,7 +53,7 @@ int File_IndexFromID(u32 id)
         }
 
         index = (min + max) >> 1;
-        osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 16, &tmp);
+        osEPiReadIo(gCartHandle, kLoaderFileConfig.tableOffset + index * 20, &tmp);
 
         if (tmp == id)
         {
@@ -162,11 +170,11 @@ void* File_CacheLoad(u32 id)
     fileIndex = File_IndexFromID(id);
     if (fileIndex < 0)
         return NULL;
-    data = CustomHeap_Alloc(File_Size(fileIndex));
+    data = CustomHeap_Alloc(File_SizeDecompressed(fileIndex));
     if (data == NULL)
         return NULL;
 
-    fileSize = File_Size(fileIndex);
+    fileSize = File_SizeDecompressed(fileIndex);
     DmaMgr_DmaRomToRam(File_Offset(fileIndex), data, fileSize);
 
     sFileCacheId[firstEmpty] = id;
