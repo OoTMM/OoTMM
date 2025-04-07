@@ -6,12 +6,11 @@
 #include "romfile.h"
 
 typedef struct DmaRequest {
-    /* 0x00 */ uintptr_t    vromAddr; // VROM address (source)
-    /* 0x04 */ void*        dramAddr; // DRAM address (destination)
-    /* 0x08 */ size_t       size;     // File Transfer size
-    /* 0x0C */ const char*  filename; // Filename for debugging
-    /* 0x10 */ int          line;     // Line number for debugging
-    /* 0x14 */ s32          unk_14;
+    int     fileIndex;
+    void*   dst;
+    u32     size;
+    u32     offset;
+
     /* 0x18 */ OSMesgQueue* notifyQueue; // Message queue for the notification message
     /* 0x1C */ OSMesg       notifyMsg;   // Completion notification message
 } DmaRequest; // size = 0x20
@@ -29,8 +28,7 @@ extern size_t gDmaMgrDmaBuffSize;
 
 // Standard DMA Requests
 
-s32 DmaMgr_RequestAsync(DmaRequest* req, void* ram, uintptr_t vrom, size_t size, u32 unk5, OSMesgQueue* queue,
-                        OSMesg msg);
+s32 DmaMgr_RequestAsync(DmaRequest* req, void* ram, uintptr_t vrom, size_t size, int unk5, OSMesgQueue* queue, OSMesg msg);
 s32 DmaMgr_RequestSync(void* ram, uintptr_t vrom, size_t size);
 #if DEBUG_FEATURES
 s32 DmaMgr_RequestAsyncDebug(DmaRequest* req, void* ram, uintptr_t vrom, size_t size, u32 unk5, OSMesgQueue* queue,

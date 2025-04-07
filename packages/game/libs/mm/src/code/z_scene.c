@@ -79,7 +79,7 @@ void Object_UpdateEntries(ObjectContext* objectCtx) {
         if (entry->id < 0) {
             s32 id = -entry->id;
 
-            if (entry->dmaReq.vromAddr == 0) {
+            if (entry->dmaReq.fileIndex == -1) {
                 objectFile = &gObjectTable[id];
                 size = objectFile->vromEnd - objectFile->vromStart;
 
@@ -142,7 +142,7 @@ void* func_8012F73C(ObjectContext* objectCtx, s32 slot, s16 id) {
     RomFile* fileTableEntry;
 
     objectCtx->slots[slot].id = -id;
-    objectCtx->slots[slot].dmaReq.vromAddr = 0;
+    objectCtx->slots[slot].dmaReq.fileIndex = -1;
 
     fileTableEntry = &gObjectTable[id];
     vromSize = fileTableEntry->vromEnd - fileTableEntry->vromStart;

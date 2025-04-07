@@ -117,7 +117,7 @@ void Object_UpdateEntries(ObjectContext* objectCtx) {
 
     for (i = 0; i < objectCtx->numEntries; i++) {
         if (entry->id < 0) {
-            if (entry->dmaRequest.vromAddr == 0) {
+            if (entry->dmaRequest.fileIndex == -1) {
                 osCreateMesgQueue(&entry->loadQueue, &entry->loadMsg, 1);
                 objectFile = &gObjectTable[-entry->id];
                 size = objectFile->vromEnd - objectFile->vromStart;
@@ -176,7 +176,7 @@ void* func_800982FC(ObjectContext* objectCtx, s32 slot, s16 objectId) {
     void* nextPtr;
 
     entry->id = -objectId;
-    entry->dmaRequest.vromAddr = 0;
+    entry->dmaRequest.fileIndex = -1;
 
     size = objectFile->vromEnd - objectFile->vromStart;
     PRINTF("OBJECT EXCHANGE NO=%2d BANK=%3d SIZE=%8.3fK\n", slot, objectId, size / 1024.0f);
