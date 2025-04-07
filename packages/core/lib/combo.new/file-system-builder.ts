@@ -46,6 +46,11 @@ export class RandoFileSystemBuilder {
     rfs.deleteFile('oot/dmadata');
     rfs.deleteFile('mm/dmadata');
 
+    /* WIP */
+    const gi_mask_deku = rfs.findFile('objects/object_gi_nutsmask')!;
+    gi_mask_deku.name = 'common/gi/mask_deku';
+    gi_mask_deku.id = 0x100;
+
     return rfs;
   }
 }

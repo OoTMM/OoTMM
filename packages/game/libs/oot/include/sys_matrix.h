@@ -59,7 +59,7 @@ Mtx* Matrix_ToMtx(Mtx* dest);
 Mtx* Matrix_Finalize(struct GraphicsContext* gfxCtx);
 
 #define MATRIX_TO_MTX(gfxCtx, file, line) Matrix_ToMtx(gfxCtx)
-#define MATRIX_FINALIZE(gfxCtx, file, line) Matrix_Finalize(gfxCtx)
+#define MATRIX_FINALIZE(gfxCtx, ...) Matrix_Finalize(gfxCtx)
 #define MATRIX_CHECK_FLOATS(mtx, file, line) (mtx)
 
 #endif
