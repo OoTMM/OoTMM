@@ -97,3 +97,81 @@ int File_DmaData(u32 dmaId, u32 vaddr, FileDmaData* out)
 
     return 0;
 }
+
+#define FILE_CACHE_TTL      4
+#define FILE_CACHE_ENTRIES  128
+
+static u32 sFileCacheId[FILE_CACHE_ENTRIES];
+static void* sFileCacheData[FILE_CACHE_ENTRIES];
+static u8 sFileCacheTtl[FILE_CACHE_ENTRIES];
+
+void File_CacheReset(void)
+{
+    for (int i = 0; i < FILE_CACHE_ENTRIES; ++i)
+    {
+        sFileCacheId[i] = 0;
+        CustomHeap_Free(sFileCacheData[i]);
+        sFileCacheData[i] = NULL;
+        sFileCacheTtl[i] = 0;
+    }
+}
+
+void File_CacheTick(void)
+{
+    for (int i = 0; i < FILE_CACHE_ENTRIES; ++i)
+    {
+        if (sFileCacheTtl[i] > 0)
+        {
+            sFileCacheTtl[i]--;
+        }
+        else if (sFileCacheData[i] != NULL)
+        {
+            CustomHeap_Free(sFileCacheData[i]);
+            sFileCacheData[i] = NULL;
+            sFileCacheId[i] = 0;
+        }
+    }
+}
+
+int DmaMgr_DmaRomToRam(u32 romAddr, void* ramAddr, u32 size);
+
+void* File_CacheLoad(u32 id)
+{
+    int firstEmpty;
+    void* data;
+    int fileIndex;
+    u32 fileSize;
+
+    firstEmpty = -1;
+    for (int i = 0; i < FILE_CACHE_ENTRIES; ++i)
+    {
+        if (sFileCacheData[i] == NULL && firstEmpty == -1)
+            firstEmpty = i;
+        else if (sFileCacheId[i] == id)
+        {
+            sFileCacheTtl[i] = FILE_CACHE_TTL;
+            return sFileCacheData[i];
+        }
+    }
+
+    /* No hit and no space left */
+    if (firstEmpty == -1)
+        return NULL;
+
+    /* Load the file */
+    fileIndex = File_IndexFromID(id);
+    if (fileIndex < 0)
+        return NULL;
+    data = CustomHeap_Alloc(File_Size(fileIndex));
+    if (data == NULL)
+        return NULL;
+
+    fileSize = File_Size(fileIndex);
+    DmaMgr_DmaRomToRam(File_Offset(fileIndex), data, fileSize);
+
+    sFileCacheId[firstEmpty] = id;
+    sFileCacheData[firstEmpty] = data;
+    sFileCacheTtl[firstEmpty] = FILE_CACHE_TTL;
+
+    return data;
+}
