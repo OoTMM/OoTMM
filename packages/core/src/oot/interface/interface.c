@@ -37,7 +37,7 @@ void comboLoadMmIcon(void* dst, u32 iconBank, int iconId)
         return;
     lookupMmIcon(entry.pstart, iconId, &iconAddr, &iconSize);
     if (iconSize)
-        DmaCompressed(iconAddr, dst, iconSize);
+        Yaz0_Decompress(iconAddr, dst, iconSize);
 }
 
 void LoadIconItem24Oot(void* dst, int iconId)

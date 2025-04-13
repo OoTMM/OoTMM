@@ -353,7 +353,7 @@ DrawHUD = 0x800756f0;
 gDmaData = 0x8000b140;
 
 Sleep_Usec = 0x80001c7c;
-_DmaCompressed = 0x80001254;
+_Yaz0_Decompress = 0x80001254;
 osSetThreadPri = 0x80004480;
 osSetTimer = 0x80005a70;
 

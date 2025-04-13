@@ -126,9 +126,9 @@ void Audio_PlayFanfare(int fanfareId);
 void Actor_ProcessInitChain(Actor* this, void* data);
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
-void DmaCompressed(u32 pstart, void* dst, u32 size);
+void Yaz0_Decompress(u32 pstart, void* dst, u32 size);
 #if defined(GAME_OOT)
-void _DmaCompressed(u32 pstart, void* dst, u32 size);
+void _Yaz0_Decompress(u32 pstart, void* dst, u32 size);
 #endif
 s32 RequestDma(DmaRequest* request, void* vramStart, u32 vromStart, size_t size, u32 unused, OSMesgQueue* queue, OSMesg msg);
 
