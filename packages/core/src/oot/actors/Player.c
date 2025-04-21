@@ -935,7 +935,7 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
 void Player_RumbleAgony(void)
 {
     Interface_AgonyIconTick();
-    Rumble_Request(120, 20, 10, 0);
+    Rumble_Request(0, 120, 20, 10);
 }
 
 void Player_ChargeSword(Player* this)

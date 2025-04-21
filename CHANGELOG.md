@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Stone of Agony not rumbling controllers that support it.
 - Fix the twinmold blue warp item being gigantic when giant mask is equipped.
 - Fix a vanilla bug where the frozen link effect would sometimes get distorded.
 - Fix FD mask item having weird colors sometimes.
