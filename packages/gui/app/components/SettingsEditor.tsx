@@ -1,5 +1,5 @@
 import Select, { MultiValue } from 'react-select';
-import { SETTINGS } from '@ootmm/core';
+import { SETTINGS, SUBCATEGORIES } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
@@ -226,6 +226,28 @@ export function SettingsEditor({ name, category }: SettingsEditorProps) {
     <main>
       <h1>{name}</h1>
       <SettingsPanel category={category}/>
+    </main>
+  )
+}
+
+type MultipleSettingsEditorProps = {
+  name: string;
+};
+export function MultipleSettingsEditor({ name }: MultipleSettingsEditorProps) {
+  const categoriesData = SUBCATEGORIES.find((x) => x.key === name)?.categories;
+
+  if (!categoriesData) {
+    return null;
+  }
+
+  return (
+    <main>
+      {categoriesData.map((x) =>
+        <>
+        <h1>{x.key}</h1>
+        <SettingsPanel category={x.category}/>
+        </>
+      )}
     </main>
   )
 }

@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Comfort option to reduce the shine time needed on Sun Block for them to go away.
+- Cutscene skip for Sun Blocks going away.
 - Add Ice Traps.
 - Add the ability to shuffle extra merchants in OoT.
 - Add the ability to shuffle merchant prices in OoT.
@@ -22,6 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Layout of the settings in the Misc. tab.
 - Progressive shields will now remove as many regular shields from the pool as possible.
 - Progressive shields are now re-obtained on every scene transition, thus making them permanent logically.
 - Progressive shields now have a flame effect to differentiate them from the regular shields.

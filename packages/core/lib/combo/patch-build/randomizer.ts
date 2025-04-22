@@ -1047,6 +1047,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     REGION_STATE_DUNGEONS: settings.regionState === 'dungeonBeaten',
     REGION_STATE_REWARDS: settings.regionState === 'reward',
     REGION_STATE_FREE: settings.regionState === 'free',
+    MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
   };
 
   for (const v in exprs) {

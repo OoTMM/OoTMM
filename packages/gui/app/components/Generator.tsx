@@ -1,7 +1,7 @@
 import { useIsPatch, useRandomSettings, useSettings } from '../contexts/GeneratorContext';
 import { RomConfig } from './RomConfig';
 import { Tab, Tabs } from './Tab';
-import { SettingsEditor } from './SettingsEditor';
+import { MultipleSettingsEditor, SettingsEditor, SettingsPanel } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
@@ -17,6 +17,14 @@ type TabSettingsEditorProps = {
 };
 function TabSettingsEditor({ name, category, disabled }: TabSettingsEditorProps) {
   return <Tab name={name} disabled={disabled}><SettingsEditor name={name} category={category}/></Tab>;
+}
+
+type TabMultipleSettingsEditorProps = {
+  name: string;
+  disabled?: boolean;
+};
+function TabMultipleSettingsEditor({ name, disabled }: TabMultipleSettingsEditorProps) {
+  return <Tab name={name} disabled={disabled}><MultipleSettingsEditor name={name}/></Tab>;
 }
 
 export function Generator() {
@@ -36,8 +44,7 @@ export function Generator() {
         <TabSettingsEditor name="Cross-Game" disabled={settings.games !== 'ootmm'} category="main.cross" />
         <TabSettingsEditor name="World" category="main.world"/>
         <Tab name="Special Conditions"><SpecialConds/></Tab>
-        <Tab name="Starting Items"><StartingItems/></Tab>
-        <TabSettingsEditor name="Misc." category="main.misc"/>
+        <TabMultipleSettingsEditor name="Misc."/>
       </Tabs>
     </Tab>
     <Tab name="Items" disabled={isPatch || isRandom}>
@@ -46,6 +53,7 @@ export function Generator() {
         <TabSettingsEditor name="Shared" disabled={settings.games !== 'ootmm'} category="items.shared"/>
         <TabSettingsEditor name="Extensions" category="items.extensions"/>
         <TabSettingsEditor name="Ageless" disabled={settings.games === 'mm'} category="items.ageless"/>
+        <Tab name="Starting Items"><StartingItems/></Tab>
       </Tabs>
     </Tab>
     <Tab name="Logic" disabled={isPatch}>

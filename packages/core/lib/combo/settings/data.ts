@@ -1288,14 +1288,6 @@ export const SETTINGS = [{
   default: 0,
   cond: (s: any) => hasMM(s) && s.preCompletedDungeons,
 }, {
-  key: 'openMaskShop',
-  name: 'Open Mask Shop at night',
-  category: 'main.events',
-  type: 'boolean',
-  description: 'Makes the Mask Shop in Market open during the night',
-  default: false,
-  cond: hasOoTMM,
-}, {
   key: 'ootPreplantedBeans',
   name: 'Pre-Planted Beans (OoT)',
   category: 'main.events',
@@ -1363,7 +1355,7 @@ export const SETTINGS = [{
 }, {
   key: 'csmc',
   name: 'Container Appearance Matches Content',
-  category: 'main.misc',
+  category: 'main.camc',
   type: 'enum',
   values: [
     { value: 'never',  name: 'Never', description: 'Containers will be vanilla' },
@@ -1375,7 +1367,7 @@ export const SETTINGS = [{
 }, {
   key: 'csmcHearts',
   name: 'CAMC for Heart Pieces/Containers',
-  category: 'main.misc',
+  category: 'main.camc',
   type: 'boolean',
   default: true,
   description: 'Use a specific texture for Heart Pieces/Containers',
@@ -1383,7 +1375,7 @@ export const SETTINGS = [{
 }, {
   key: 'csmcMapCompass',
   name: 'CAMC for Maps/Compasses',
-  category: 'main.misc',
+  category: 'main.camc',
   type: 'boolean',
   default: true,
   description: 'Use a specific texture for Maps/Compasses',
@@ -1391,7 +1383,7 @@ export const SETTINGS = [{
 }, {
   key: 'csmcSkulltula',
   name: 'Skulltula CAMC',
-  category: 'main.misc',
+  category: 'main.camc',
   type: 'boolean',
   default: false,
   description: 'Enables CAMC for shuffled Gold, Swamp, and Ocean Skulltulas',
@@ -1399,7 +1391,7 @@ export const SETTINGS = [{
 }, {
   key: 'csmcCow',
   name: 'Cow CAMC',
-  category: 'main.misc',
+  category: 'main.camc',
   type: 'boolean',
   default: false,
   description: 'Enables CAMC for shuffled Cows',
@@ -1443,35 +1435,6 @@ export const SETTINGS = [{
     { value: 'superfast', name: 'Super Fast', description: 'USE AT OWN RISK!! - The clock speed will be 6x faster than usual, even on inverted' },
   ],
   default: 'default',
-  cond: hasMM,
-}, {
-  key: 'autoInvert',
-  name: 'Auto-Invert Time (MM)',
-  category: 'main.misc',
-  type: 'enum',
-  description: 'Auto-inverts time at the start of a cycle',
-  values: [
-    { value: 'never', name: 'Never' },
-    { value: 'firstCycle', name: 'First Cycle' },
-    { value: 'always', name: 'Always' },
-  ],
-  default: 'never',
-  cond: hasMM,
-}, {
-  key: 'keepItemsReset',
-  name: 'Keep Items on Cycle Reset',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Keeps items through a cycle reset',
-  default: false,
-  cond: hasMM,
-}, {
-  key: 'fastMasks',
-  name: 'Fast Form Transitions',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Makes the mask transitions very fast',
-  default: false,
   cond: hasMM,
 }, {
   key: 'fierceDeityAnywhere',
@@ -1529,21 +1492,6 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
-  key: 'fastBunnyHood',
-  name: 'Fast Bunny Hood',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Modifies the Bunny Hood in OoT to give a speed increase',
-  default: true,
-  cond: hasOoT,
-}, {
-  key: 'critWiggleDisable',
-  name: 'Disable Crit Wiggle',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Disables the camera zoom-in and weird movements when low on health',
-  default: true
-}, {
   key: 'restoreBrokenActors',
   name: 'Restore Broken Actors',
   category: 'main.misc',
@@ -1567,14 +1515,6 @@ export const SETTINGS = [{
   description: 'In vanilla OoT, various code only checks for transitionTrigger, but in MM it also checks for transitionMode.<br>When this is on, MM will no longer check transitionMode in those circumstances, allowing you to perform the Void Warp glitch in MM.',
   default: false,
   cond: hasMM,
-}, {
-  key: 'shadowFastBoat',
-  name: 'Fast Shadow Temple Boat',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Speeds up the Shadow Temple Boat before the last part of the dungeon',
-  default: false,
-  cond: hasOoT,
 }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
@@ -2024,14 +1964,6 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Add items representing every Majora\'s Mask day and night into the pool. The moon will crash early unless you collect these items.',
   default: false,
-  cond: hasMM,
-}, {
-  key: 'lenientSpikes',
-  name: 'Lenient Goron Spikes',
-  category: 'items.extensions',
-  type: 'boolean',
-  description: 'Goron Spikes can charge midair and keep their charge. Minimum speed for Goron Spikes is removed.',
-  default: true,
   cond: hasMM,
 }, {
   key: 'menuNotebook',
@@ -2978,4 +2910,89 @@ export const SETTINGS = [{
   ],
   default: 'none',
   cond: hasMM,
+}, {
+  key: 'mmEasierLightblock',
+  name: 'Easier Sun Blocks',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Makes the sun blocks slightly easier to remove.',
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'shadowFastBoat',
+  name: 'Fast Shadow Temple Boat',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Speeds up the Shadow Temple Boat before the last part of the dungeon',
+  default: false,
+  cond: hasOoT,
+}, {
+  key: 'openMaskShop',
+  name: 'Open Mask Shop at night',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Makes the Mask Shop in Market open during the night',
+  default: false,
+  cond: hasOoTMM,
+}, {
+  key: 'lenientSpikes',
+  name: 'Lenient Goron Spikes',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Goron Spikes can charge midair and keep their charge. Minimum speed for Goron Spikes is removed.',
+  default: true,
+  cond: hasMM,
+}, {
+  key: 'fastBunnyHood',
+  name: 'Fast Bunny Hood',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Modifies the Bunny Hood in OoT to give a speed increase',
+  default: true,
+  cond: hasOoT,
+}, {
+  key: 'critWiggleDisable',
+  name: 'Disable Crit Wiggle',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Disables the camera zoom-in and weird movements when low on health',
+  default: true
+}, {
+  key: 'fastMasks',
+  name: 'Fast Form Transitions',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Makes the mask transitions very fast',
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'keepItemsReset',
+  name: 'Keep Items on Cycle Reset',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Keeps items through a cycle reset',
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'autoInvert',
+  name: 'Auto-Invert Time (MM)',
+  category: 'main.qol',
+  type: 'enum',
+  description: 'Auto-inverts time at the start of a cycle',
+  values: [
+    { value: 'never', name: 'Never' },
+    { value: 'firstCycle', name: 'First Cycle' },
+    { value: 'always', name: 'Always' },
+  ],
+  default: 'never',
+  cond: hasMM,
+}] as const;
+
+export const SUBCATEGORIES = [{
+  key: "Misc.",
+  categories: [
+    { key: "CAMC", category: "main.camc" },
+    { key: "Quality of Life", category: "main.qol" },
+    { key: "Miscellaneous", category: "main.misc" }
+  ]
 }] as const;

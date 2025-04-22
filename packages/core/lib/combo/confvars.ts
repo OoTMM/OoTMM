@@ -220,6 +220,7 @@ export const CONFVARS = [
   'REGION_STATE_DUNGEONS',
   'REGION_STATE_REWARDS',
   'REGION_STATE_FREE',
+  'MM_EASY_LIGHTBLOCKS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
