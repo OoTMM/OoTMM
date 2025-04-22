@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix being able to stay as Fierce Deity when returning to dungeon entrance from the boss lairs without Fierce Deity anywhere turned on.
 - Fix Milk bar performance not requiring Gorman Soul.
 - Fix adult link being invisible in the Milk Bar performance.
 - Fix a bug where Kotake would check for an empty bottle in subsequent cycles even when giving "nothing", causing logic issues.
