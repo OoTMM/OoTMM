@@ -516,6 +516,10 @@ class MusicInjector {
     let customBankId: number | null = null;
 
     if (music.bankCustom) {
+      /* Kaepora Gaebora's theme is one of a few special cases where BGM use the fanfare sequence player */
+      if (slot === "OOT_KAEPORA_GAEBORA") {
+        music.bankCustom.meta[1] = 0x01
+      }
       customBankId = this.addCustomBank(music.bankCustom.meta, music.bankCustom.data);
     }
 
