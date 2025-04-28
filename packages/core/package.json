@@ -10,7 +10,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@alttiri/base85": "^1.8.0",
     "@ootmm/data": "*",
     "@ootmm/tools": "*",
     "crc-32": "^1.2.2",
