@@ -8,12 +8,6 @@
 # define ADDR_HANDLER_POST_SPAWN 0x8098f680
 #endif
 
-void ObjMure3_InitHijack(Actor_ObjMure3* this, void* data)
-{
-    Actor_ProcessInitChain(&this->base, data);
-    this->actorIndex = g.actorIndex;
-}
-
 void ObjMure3_SetPostSpawnHandler(Actor_ObjMure3* this)
 {
     int count;

@@ -57,7 +57,7 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
     /* Clear some flags */
     g.silverRupee = 0;
     g.roomEnemyLackSoul = 0;
-    g.xflagOverride = 0;
+    g.xflagOverride = FALSE;
 
     /* Update the scene setup */
     updateSceneSetup(play);
@@ -69,7 +69,7 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
 static void ZeroActor(Actor* this, int size)
 {
     memset(this, 0, size);
-    this->actorIndex = g.actorIndex;
+    this->actorIndex = gCurrentSpawnActorNum;
 }
 
 PATCH_CALL(0x800baf54, ZeroActor);

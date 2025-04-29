@@ -10,11 +10,6 @@ PATCH_START 0x8098f7c4
 .int 0
 PATCH_END
 
-/* Use our init handler */
-PATCH_START 0x8098f568
-  jal ObjMure3_InitHijack
-PATCH_END
-
 /* Use our post spawn handler */
 PATCH_START 0x8098f654
   jal ObjMure3_SetPostSpawnHandler

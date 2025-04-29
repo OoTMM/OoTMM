@@ -125,7 +125,14 @@ int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
     if (g.xflagOverride)
     {
         memcpy(xf, &g.xflag, sizeof(*xf));
-        return false;
+        return FALSE;
+    }
+
+    /* Check for an actor index of 0xff, meaning NO XFLAG */
+    if (actor->actorIndex == 0xff)
+    {
+        Xflag_Clear(xf);
+        return FALSE;
     }
 
     xf->sceneId = play->sceneId;
@@ -189,4 +196,13 @@ int Xflag_IsValid(Xflag* xf)
 int Xflag_IsShuffled(Xflag* xf)
 {
     return Xflag_IsValid(xf) && !comboXflagsGet(xf);
+}
+
+void Xflag_Clear(Xflag* xf)
+{
+    xf->sceneId = 0xff;
+    xf->setupId = 0;
+    xf->roomId = 0;
+    xf->sliceId = 0;
+    xf->id = 0;
 }
