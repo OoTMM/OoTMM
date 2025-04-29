@@ -80,18 +80,6 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
     _ParseSceneRoomHeaders_ActorsList(play, cmd);
 }
 
-Actor* SpawnRoomActor(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
-{
-    Actor* a;
-
-    a = Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
-    if (a != NULL && actorId == ACTOR_EN_ITEM00)
-        EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, gCurrentSpawnActorNum, 0);
-    return a;
-}
-
-PATCH_CALL(0x8002562c, SpawnRoomActor);
-
 void Actor_SpawnEntryFromRoomActorList(ActorContext* actorCtx, ActorEntry* entry, PlayState* play)
 {
     gCurrentSpawnActorNum = (u8)(entry - play->actorEntryList);

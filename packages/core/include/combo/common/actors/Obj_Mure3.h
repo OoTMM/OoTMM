@@ -1,6 +1,7 @@
 #ifndef COMBO_COMMON_ACTOR_OBJ_MURE3_H
 #define COMBO_COMMON_ACTOR_OBJ_MURE3_H
 
+#if 0
 #include <combo/xflags.h>
 #include <combo/actor.h>
 #include <combo/common/actors/En_Item00.h>
@@ -18,5 +19,6 @@ typedef struct ALIGNED(4)
 Actor_ObjMure3;
 
 _Static_assert(sizeof(Actor_ObjMure3) == (sizeof(Actor) + 0x28), "Actor_ObjMure3 size is wrong");
+#endif
 
 #endif

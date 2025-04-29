@@ -68,7 +68,7 @@
 
 typedef struct ALIGNED(4) Actor_EnItem00
 {
-    Actor   base;
+    Actor   actor;
     void*   handler;
     u16     collectibleFlag;
     char    unk_142[0x8];
@@ -99,8 +99,6 @@ void EnItem00_CollectedHandler(Actor_EnItem00* this, PlayState* play);
 void EnItem00_SetHandler(Actor_EnItem00* this, void* handler);
 int  EnItem00_FixDrop(int drop);
 
-void            EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag);
-void            EnItem00_XflagInitFreestanding(Actor_EnItem00* this, PlayState* play, u8 actorIndex, u8 slice);
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 

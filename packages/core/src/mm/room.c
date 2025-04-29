@@ -73,15 +73,3 @@ static void ZeroActor(Actor* this, int size)
 }
 
 PATCH_CALL(0x800baf54, ZeroActor);
-
-Actor* SpawnRoomActorEx(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
-{
-    Actor* a;
-
-    a = Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
-    if (a != NULL && actorId == ACTOR_EN_ITEM00)
-        EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, gCurrentSpawnActorNum, 0);
-    return a;
-}
-
-PATCH_CALL(0x800bb47c, SpawnRoomActorEx);

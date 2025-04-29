@@ -99,7 +99,7 @@
     "Kokiri Shop": "true"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "can_bypass_mido"
-    "Kokiri Forest Adult Rupees": "can_ride_bean(BEAN_KOKIRI_FOREST) || (is_adult && (has_hover_boots || hookshot_anywhere || climb_anywhere))"
+    "Kokiri Forest Adult Rupees": "is_adult && (can_ride_bean(BEAN_KOKIRI_FOREST) || has_hover_boots || hookshot_anywhere || climb_anywhere)"
   events:
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"

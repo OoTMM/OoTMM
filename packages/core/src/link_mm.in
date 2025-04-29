@@ -366,6 +366,7 @@ Actor_OfferCarry = 0x800B8BB0;
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;
 Item_DropCollectible = 0x800a7730;
+Item_DropCollectible2 = 0x800a7ad4;
 Item_DropCollectibleRandom = 0x800a7d28;
 Item_CanDropBigFairy = 0x800a81a4;
 

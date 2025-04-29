@@ -403,6 +403,7 @@ int Item_CollectibleDropTable2(u32 index);
 #endif
 
 Actor_EnItem00* Item_DropCollectible(PlayState* play, const Vec3f* pos, s16 params);
+Actor_EnItem00* Item_DropCollectible2(PlayState* play, const Vec3f* pos, s16 params);
 void Item_DropCollectibleRandom(PlayState* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(PlayState* play, s32 index, s32 collectibleFlag);
 
