@@ -94,7 +94,7 @@ PATCH_CALL(0x8002562c, SpawnRoomActor);
 
 void Actor_SpawnEntryFromRoomActorList(ActorContext* actorCtx, ActorEntry* entry, PlayState* play)
 {
-    gCurrentSpawnActorNum = (u8)(((unsigned int)(entry - play->actorEntryList)) / sizeof(ActorEntry));
+    gCurrentSpawnActorNum = (u8)(entry - play->actorEntryList);
     Actor_SpawnEntry(actorCtx, entry, play);
     gCurrentSpawnActorNum = 0xff;
 }
