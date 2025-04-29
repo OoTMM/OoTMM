@@ -2,7 +2,7 @@
 #include <combo/global.h>
 #include <combo/actor.h>
 
-u8 gActorNum;
+u8 gCurrentSpawnActorNum = 0xff;
 
 typedef struct
 {
@@ -52,21 +52,18 @@ static void SpawnRoomActors_Wrapper(PlayState* play, int id)
 PATCH_CALL(0x8012eb18, SpawnRoomActors_Wrapper);
 PATCH_CALL(0x8012ec30, SpawnRoomActors_Wrapper);
 
-void OnRoomChange(PlayState* play, void* arg2)
+void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
 {
-    void (*OnRoomChangeOriginal)(PlayState*, void*);
-
     /* Clear some flags */
     g.silverRupee = 0;
     g.roomEnemyLackSoul = 0;
-    g.actorIndex = 0;
     g.xflagOverride = 0;
 
     /* Update the scene setup */
     updateSceneSetup(play);
 
-    OnRoomChangeOriginal = (void*)0x8012f90c;
-    OnRoomChangeOriginal(play, arg2);
+    /* Forward */
+    _ParseSceneRoomHeaders_ActorsList(play, cmd);
 }
 
 static void ZeroActor(Actor* this, int size)
@@ -81,10 +78,9 @@ Actor* SpawnRoomActorEx(ActorContext* actorCtx, PlayState *play, short actorId, 
 {
     Actor* a;
 
-    g.actorIndex = gActorNum;
     a = Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
     if (a != NULL && actorId == ACTOR_EN_ITEM00)
-        EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, g.actorIndex, 0);
+        EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, gCurrentSpawnActorNum, 0);
     return a;
 }
 

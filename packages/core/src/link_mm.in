@@ -322,6 +322,7 @@ DrawHUD = 0x8011f0e0;
 
 gDmaData = 0x8009f8b0;
 
+_ParseSceneRoomHeaders_ActorsList = 0x8012f90c;
 Yaz0_Decompress = 0x80081178;
 osSetThreadPri = 0x8008fc00;
 SetRoomClear = 0x800b5d30;
