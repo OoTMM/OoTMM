@@ -1361,8 +1361,6 @@ function actorHandlerMmEnItem00(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerCommonObjMure3(checks: Check[], ra: RoomActor) {
-  console.log(ra.actor.params.toString(16));
-
   let items: string[] = [];
   switch (ra.actor.params & 0xe000) {
   case 0x0000:

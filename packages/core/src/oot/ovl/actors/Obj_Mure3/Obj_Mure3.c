@@ -28,7 +28,7 @@ void func_80B9A9D0(Actor_ObjMure3* this, PlayState* play) {
     Math_Vec3f_Copy(&spawnPos, &this->actor.world.pos);
     for (i = 0; i < 5; i++, spawnPos.y += 20.0f) {
         if (!((this->unk_16C >> i) & 1)) {
-            this->unk_150[i] = Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_BLUE);
+            this->unk_150[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_BLUE);
             if (this->unk_150[i] != NULL) {
                 this->unk_150[i]->actor.room = this->actor.room;
             }
@@ -49,7 +49,7 @@ void func_80B9AA90(Actor_ObjMure3* this, PlayState* play) {
         if (!((this->unk_16C >> i) & 1)) {
             spawnPos.x = this->actor.world.pos.x + (sn * radius);
             spawnPos.z = this->actor.world.pos.z + (cos * radius);
-            this->unk_150[i] = Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_GREEN);
+            this->unk_150[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_GREEN);
             if (this->unk_150[i] != NULL) {
                 this->unk_150[i]->actor.room = this->actor.room;
             }
@@ -68,7 +68,7 @@ void func_80B9ABA0(Actor_ObjMure3* this, PlayState* play) {
         if (!((this->unk_16C >> i) & 1)) {
             spawnPos.x = (Math_SinS(yRot) * 40.0f) + this->actor.world.pos.x;
             spawnPos.z = (Math_CosS(yRot) * 40.0f) + this->actor.world.pos.z;
-            this->unk_150[i] = Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_GREEN);
+            this->unk_150[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_GREEN);
             if (this->unk_150[i] != NULL) {
                 this->unk_150[i]->actor.room = this->actor.room;
             }
@@ -78,7 +78,7 @@ void func_80B9ABA0(Actor_ObjMure3* this, PlayState* play) {
     if (!((this->unk_16C >> 6) & 1)) {
         spawnPos.x = this->actor.world.pos.x;
         spawnPos.z = this->actor.world.pos.z;
-        this->unk_150[6] = Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_RED);
+        this->unk_150[6] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_RED);
         if (this->unk_150[6] != NULL) {
             this->unk_150[6]->actor.room = this->actor.room;
         }
@@ -95,7 +95,7 @@ void func_80B9ACE4(Actor_ObjMure3* this, PlayState* play)
         collectible = &this->unk_150[i];
 
         if (!((this->unk_16C >> i) & 1) && (*collectible != NULL)) {
-            if (Actor_HasParent(&(*collectible)->actor, play) || ((*collectible)->actor.update == NULL)) {
+            if (Actor_HasParentZ(&(*collectible)->actor) || ((*collectible)->actor.update == NULL)) {
                 this->unk_16C |= (1 << i);
             } else {
                 Actor_Kill(&(*collectible)->actor);

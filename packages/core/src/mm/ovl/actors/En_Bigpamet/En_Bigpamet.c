@@ -631,7 +631,7 @@ void func_80A28B98(Actor_EnBigpamet* this, PlayState* play) {
         this->actor.parent->params = GEKKO_CUTSCENE;
     }
 
-    collectible = Item_DropCollectible(play, &this->actor.world.pos, ITEM00_ARROWS_10);
+    collectible = (Actor_EnItem00*)Item_DropCollectible(play, &this->actor.world.pos, ITEM00_ARROWS_10);
     if (collectible != NULL) {
         collectible->actor.velocity.y = 15.0f;
         collectible->actor.world.rot.y = Actor_WorldYawTowardPoint(&this->actor, &this->actor.home.pos);

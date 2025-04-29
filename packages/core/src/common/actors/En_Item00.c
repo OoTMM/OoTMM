@@ -196,7 +196,7 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
     /* Spawn the item */
     memcpy(&g.xflag, xflag, sizeof(Xflag));
     g.xflagOverride = TRUE;
-    item = Item_DropCollectible(play, pos, 0x0000);
+    item = (Actor_EnItem00*)Item_DropCollectible(play, pos, 0x0000);
     g.xflagOverride = FALSE;
     if (!item)
         return NULL;
