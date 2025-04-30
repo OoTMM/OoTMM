@@ -43,7 +43,6 @@
 # include <combo/interface.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
-# include <combo/common/actors/Obj_Mure3.h>
 # include <combo/common/actors/En_Tubo_Trap.h>
 
 # if defined(GAME_OOT)
