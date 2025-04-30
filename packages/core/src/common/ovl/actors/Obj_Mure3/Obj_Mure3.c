@@ -2,6 +2,18 @@
 
 #define FLAGS 0
 
+#if defined(GAME_OOT)
+# define ARG_RUPEE_GREEN (0x4000 | ITEM00_RUPEE_GREEN)
+# define ARG_RUPEE_BLUE  (0x4000 | ITEM00_RUPEE_BLUE)
+# define ARG_RUPEE_RED   (0x4000 | ITEM00_RUPEE_RED)
+#endif
+
+#if defined(GAME_MM)
+# define ARG_RUPEE_GREEN (0x4000)
+# define ARG_RUPEE_BLUE  (0x10001)
+# define ARG_RUPEE_RED   (0x4002)
+#endif
+
 static s16 sRupeeCounts[] = { 5, 5, 7, 0 };
 
 static InitChainEntry sInitChain[] = {
@@ -18,85 +30,57 @@ void ObjMure3_DespawnChildren(Actor_ObjMure3* this, PlayState* play);
 void ObjMure3_SetActionWatchDespawn(Actor_ObjMure3* this);
 void ObjMure3_WatchDespawn(Actor_ObjMure3* this, PlayState* play);
 
-#if defined(GAME_OOT)
+int ObjMure3_IsAnyShuffled(Actor_ObjMure3* this, PlayState* play)
+{
+    s16 count;
+    Xflag xf;
+    Xflag xf2;
+
+    comboXflagInit(&xf, &this->actor, play);
+    count = sRupeeCounts[OBJMURE3_PARAM_RUPEEINDEX(&this->actor)];
+
+    for (s16 i = 0; i < count; ++i)
+    {
+        memcpy(&xf2, &xf, sizeof(Xflag));
+        xf2.sliceId = i;
+        if (Xflag_IsShuffled(&xf2))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void ObjMure3_SpawnRupee(Actor_ObjMure3* this, PlayState* play, Vec3f* pos, int index, int params)
+{
+    Actor_EnItem00* item;
+
+    if (this->childrenBits & (1 << index))
+        return;
+
+    /* Get the matching xflag */
+    comboXflagInit(&g.xflag, &this->actor, play);
+    g.xflag.sliceId = (u8)index;
+
+    /* Spawn the item */
+    g.xflagOverride = TRUE;
+    item = (Actor_EnItem00*)Item_DropCollectible2(play, pos, params);
+    g.xflagOverride = FALSE;
+
+    /* Original stuff */
+    this->children[index] = item;
+    if (item)
+        item->actor.room = this->actor.room;
+}
+
 void ObjMure3_SpawnFunc0(Actor_ObjMure3* this, PlayState* play) {
     s32 i;
     Vec3f spawnPos;
 
     Math_Vec3f_Copy(&spawnPos, &this->actor.world.pos);
     for (i = 0; i < 5; i++, spawnPos.y += 20.0f) {
-        if (!((this->childrenBits >> i) & 1)) {
-            this->children[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_BLUE);
-            if (this->children[i] != NULL) {
-                this->children[i]->actor.room = this->actor.room;
-            }
-        }
-    }
-}
-
-void ObjMure3_SpawnFunc1(Actor_ObjMure3* this, PlayState* play) {
-    s32 i;
-    Vec3f spawnPos;
-    f32 sn = Math_SinS(this->actor.world.rot.y);
-    f32 cos = Math_CosS(this->actor.world.rot.y);
-    f32 radius;
-
-    spawnPos.y = this->actor.world.pos.y;
-
-    for (i = 0, radius = -40.0f; i < 5; i++, radius += 20.0f) {
-        if (!((this->childrenBits >> i) & 1)) {
-            spawnPos.x = this->actor.world.pos.x + (sn * radius);
-            spawnPos.z = this->actor.world.pos.z + (cos * radius);
-            this->children[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_GREEN);
-            if (this->children[i] != NULL) {
-                this->children[i]->actor.room = this->actor.room;
-            }
-        }
-    }
-}
-
-void ObjMure3_SpawnFunc2(Actor_ObjMure3* this, PlayState* play) {
-    s32 i;
-    Vec3f spawnPos;
-    s16 yRot;
-
-    spawnPos.y = this->actor.world.pos.y;
-    yRot = this->actor.world.rot.y;
-    for (i = 0; i < 6; i++) {
-        if (!((this->childrenBits >> i) & 1)) {
-            spawnPos.x = (Math_SinS(yRot) * 40.0f) + this->actor.world.pos.x;
-            spawnPos.z = (Math_CosS(yRot) * 40.0f) + this->actor.world.pos.z;
-            this->children[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_GREEN);
-            if (this->children[i] != NULL) {
-                this->children[i]->actor.room = this->actor.room;
-            }
-        }
-        yRot += 0x2AAA;
-    }
-    if (!((this->childrenBits >> 6) & 1)) {
-        spawnPos.x = this->actor.world.pos.x;
-        spawnPos.z = this->actor.world.pos.z;
-        this->children[6] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000 | ITEM00_RUPEE_RED);
-        if (this->children[6] != NULL) {
-            this->children[6]->actor.room = this->actor.room;
-        }
-    }
-}
-#endif
-
-#if defined(GAME_MM)
-void ObjMure3_SpawnFunc0(Actor_ObjMure3* this, PlayState* play) {
-    s32 i;
-    Vec3f spawnPos;
-
-    Math_Vec3f_Copy(&spawnPos, &this->actor.world.pos);
-    for (i = 0; i < 5; i++, spawnPos.y += 20.0f) {
-        if (!((this->childrenBits >> i) & 1)) {
-            this->children[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x10001);
-            if (this->children[i] != NULL) {
-                this->children[i]->actor.room = this->actor.room;
-            }
-        }
+        ObjMure3_SpawnRupee(this, play, &spawnPos, i, ARG_RUPEE_BLUE);
     }
 }
 
@@ -110,14 +94,9 @@ void ObjMure3_SpawnFunc1(Actor_ObjMure3* this, PlayState* play) {
     spawnPos.y = this->actor.world.pos.y;
 
     for (i = 0, dist = -40.0f; i < 5; i++, dist += 20.0f) {
-        if (!((this->childrenBits >> i) & 1)) {
-            spawnPos.x = this->actor.world.pos.x + (sin * dist);
-            spawnPos.z = this->actor.world.pos.z + (cos * dist);
-            this->children[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000);
-            if (this->children[i] != NULL) {
-                this->children[i]->actor.room = this->actor.room;
-            }
-        }
+        spawnPos.x = this->actor.world.pos.x + (sin * dist);
+        spawnPos.z = this->actor.world.pos.z + (cos * dist);
+        ObjMure3_SpawnRupee(this, play, &spawnPos, i, ARG_RUPEE_GREEN);
     }
 }
 
@@ -130,27 +109,16 @@ void ObjMure3_SpawnFunc2(Actor_ObjMure3* this, PlayState* play) {
     yRot = this->actor.world.rot.y;
 
     for (i = 0; i < 6; i++) {
-        if (!((this->childrenBits >> i) & 1)) {
-            spawnPos.x = (Math_SinS(yRot) * 40.0f) + this->actor.world.pos.x;
-            spawnPos.z = (Math_CosS(yRot) * 40.0f) + this->actor.world.pos.z;
-            this->children[i] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4000);
-            if (this->children[i] != NULL) {
-                this->children[i]->actor.room = this->actor.room;
-            }
-        }
+        spawnPos.x = (Math_SinS(yRot) * 40.0f) + this->actor.world.pos.x;
+        spawnPos.z = (Math_CosS(yRot) * 40.0f) + this->actor.world.pos.z;
+        ObjMure3_SpawnRupee(this, play, &spawnPos, i, ARG_RUPEE_GREEN);
         yRot += 0x2AAA;
     }
 
-    if (!((this->childrenBits >> 6) & 1)) {
-        spawnPos.x = this->actor.world.pos.x;
-        spawnPos.z = this->actor.world.pos.z;
-        this->children[6] = (Actor_EnItem00*)Item_DropCollectible2(play, &spawnPos, 0x4002);
-        if (this->children[6] != NULL) {
-            this->children[6]->actor.room = this->actor.room;
-        }
-    }
+    spawnPos.x = this->actor.world.pos.x;
+    spawnPos.z = this->actor.world.pos.z;
+    ObjMure3_SpawnRupee(this, play, &spawnPos, 6, ARG_RUPEE_RED);
 }
-#endif
 
 void ObjMure3_MonitorChildren(Actor_ObjMure3* this, PlayState* play) {
     s16 count = sRupeeCounts[OBJMURE3_PARAM_RUPEEINDEX(&this->actor)];
@@ -207,7 +175,7 @@ void ObjMure3_DespawnChildren(Actor_ObjMure3* this, PlayState* play)
 void ObjMure3_Init(Actor* thisx, PlayState* play) {
     Actor_ObjMure3* this = (Actor_ObjMure3*)thisx;
 
-    if (Flags_GetSwitch(play, OBJMURE3_GET_SWITCH_FLAG(&this->actor))) {
+    if (!ObjMure3_IsAnyShuffled(this, play) && Flags_GetSwitch(play, OBJMURE3_GET_SWITCH_FLAG(&this->actor))) {
         Actor_Kill(&this->actor);
         return;
     }
