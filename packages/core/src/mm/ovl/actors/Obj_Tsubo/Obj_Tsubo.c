@@ -295,23 +295,13 @@ void func_8092788C(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
 {
-    ComboItemOverride o;
     s32 type;
     s32 sp2C;
 
     /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->actor.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    /* Fix the aliases */
-    ObjTsubo_Alias(this);
-
-    /* Detect xflags */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    if (comboXflagInit(&this->xflag, &this->actor, play))
+        ObjTsubo_Alias(this);
+    this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     type = OBJ_TSUBO_GET_TYPE(&this->actor);
     sp2C = OBJ_TSUBO_ZROT(&this->actor);

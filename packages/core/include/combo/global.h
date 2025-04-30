@@ -28,7 +28,6 @@ typedef struct
     u8                      menuCursorMax;
     u8                      maxKeysOot[0x11];
     u8                      maxKeysMm[4];
-    u8                      actorIndex;
     u8                      sceneSetupId;
     u32                     nextEntrance;
     s8                      prevRoom;

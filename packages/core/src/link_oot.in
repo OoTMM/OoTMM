@@ -352,6 +352,7 @@ DrawHUD = 0x800756f0;
 
 gDmaData = 0x8000b140;
 
+_ParseSceneRoomHeaders_ActorsList = 0x80081900;
 Sleep_Usec = 0x80001c7c;
 _Yaz0_Decompress = 0x80001254;
 osSetThreadPri = 0x80004480;
@@ -361,6 +362,7 @@ ParseSceneRoomHeaders_SoundSettings = 0x80082478;
 
 EnItem00_Init = 0x80011b4c;
 Item_DropCollectible = 0x80013678;
+Item_DropCollectible2 = 0x800138b0;
 Item_DropCollectibleRandom = 0x80013a84;
 EnItem00_DrawRupee = 0x80013150;
 EnItem00_Update = 0x80012938;
@@ -383,6 +385,7 @@ gRegEditor = 0x8011ba00;
 
 Magic_Reset = 0x80072548;
 Actor_SpawnAsChild = 0x800253f0;
+Actor_SpawnEntry = 0x800255c4;
 Play_InCsMode = 0x8009cb08;
 Gfx_SetupDL_25Xlu = 0x8007e2c0;
 Gfx_TwoTexScroll = 0x8007eb84;

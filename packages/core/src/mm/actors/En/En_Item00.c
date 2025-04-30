@@ -8,7 +8,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
 {
     memset(q, 0, sizeof(*q));
 
-    if (this->base.params == 0x06)
+    if (this->actor.params == 0x06)
     {
         q->ovType = OV_COLLECTIBLE;
         q->sceneId = comboSceneKey(play->sceneId);
@@ -44,12 +44,12 @@ void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play, s16 gi, float a, f
 
     if (itemId >= 0)
     {
-        this->base.parent = &link->actor;
+        this->actor.parent = &link->actor;
         AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         return;
     }
 
-    comboGiveItem(&this->base, play, &q, a, b);
+    comboGiveItem(&this->actor, play, &q, a, b);
 }
 
 PATCH_CALL(0x800a700c, EnItem00_GiveItem);
@@ -65,7 +65,7 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, PlayState* play)
     EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE);
     comboItemOverride(&o, &q);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->base, o.gi, o.cloakGi, 0);
+    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);

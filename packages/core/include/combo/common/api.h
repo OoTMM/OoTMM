@@ -402,7 +402,8 @@ int Item_CollectibleDropTable(u32 index);
 int Item_CollectibleDropTable2(u32 index);
 #endif
 
-Actor_EnItem00* Item_DropCollectible(PlayState* play, const Vec3f* pos, s16 params);
+Actor* Item_DropCollectible(PlayState* play, const Vec3f* pos, int params);
+Actor* Item_DropCollectible2(PlayState* play, const Vec3f* pos, int params);
 void Item_DropCollectibleRandom(PlayState* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(PlayState* play, s32 index, s32 collectibleFlag);
 
@@ -767,3 +768,8 @@ Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32
 void AnimatedMat_Draw(PlayState* play, void* arg);
 
 void ComboPlay_SpawnExtraSigns(PlayState* play);
+
+void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
+void _ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
+
+void Actor_SpawnEntry(ActorContext* actorCtx, ActorEntry* entry, PlayState* play);

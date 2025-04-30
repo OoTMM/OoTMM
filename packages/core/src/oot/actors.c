@@ -299,14 +299,6 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
     }
 }
 
-static void ZeroActor(Actor* this, int size)
-{
-    memset(this, 0, size);
-    this->actorIndex = g.actorIndex;
-}
-
-PATCH_CALL(0x800252f8, ZeroActor);
-
 Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
