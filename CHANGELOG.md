@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a bug where a fairy could turn into a shuffled snowball check in specific circumstances.
 - Fix Stone of Agony not rumbling controllers that support it.
 - Fix the twinmold blue warp item being gigantic when giant mask is equipped.
 - Fix a vanilla bug where the frozen link effect would sometimes get distorded.
