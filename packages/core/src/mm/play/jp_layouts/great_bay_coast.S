@@ -9,6 +9,8 @@ PATCH_VROM \addr
 PATCH_END
 .endm
 
+PATCH_GROUP PG_MM_JP_LAYOUT_GREAT_BAY_COAST
+
 /* Patch the collision vertices */
 PATCH_U16 SCENE + 0x8b56 + 6 * 0, -20
 PATCH_U16 SCENE + 0x8b56 + 6 * 1, -20
@@ -75,3 +77,5 @@ PATCH_U16 ROOM + 0x12bca + 0x10 * 0, -20
 PATCH_U16 ROOM + 0x12bca + 0x10 * 1, -20
 PATCH_U16 ROOM + 0x12bca + 0x10 * 2, -20
 PATCH_U16 ROOM + 0x12bca + 0x10 * 3, -20
+
+PATCH_GROUP_END
