@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the Japanese version of Great Bay Coast.
 - Comfort option to reduce the shine time needed on Sun Block for them to go away.
 - Cutscene skip for Sun Blocks going away.
 - Add Ice Traps.

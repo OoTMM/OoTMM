@@ -137,7 +137,7 @@
 "Owl Great Bay":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "can_reset_time"
+    "Great Bay Coast Platform": "can_reset_time"
     "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && has_arrows"
   events:
     PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
@@ -2571,16 +2571,15 @@
 "Great Bay Coast":
   region: GREAT_BAY_COAST
   exits:
+    "Great Bay Coast Platform": "!setting(jpLayouts, GreatBayCoast) || has_mask_zora"
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
     "Great Bay Coast Fortress": "underwater_walking"
     "Great Bay Coast Near Pinnacle": "true"
-    "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
-    "Owl Great Bay": "true"
     "Great Bay Coast Water Void": "true"
     "Great Bay Coast Butterflies": "has_sticks"
   events:
@@ -2618,6 +2617,12 @@
     "Great Bay Coast Grass 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
+"Great Bay Coast Platform":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "true"
+    "Laboratory": "true"
+    "Owl Great Bay": "true"
 "Great Bay Coast Butterflies":
   region: GREAT_BAY_COAST
   locations:
@@ -2815,7 +2820,7 @@
 "Laboratory":
   region: ENTRANCE
   exits:
-    "Great Bay Coast": "true"
+    "Great Bay Coast Platform": "true"
   locations:
     "Laboratory Zora Song": "soul_scientist && has_all_zora_eggs && has_mask_zora && has_ocarina"
     "Laboratory Fish HP": "has_fish"

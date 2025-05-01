@@ -80,6 +80,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     MM_JP_LAYOUT_DEKU_PALACE: world.resolvedFlags.jpLayouts.has('DekuPalace'),
     MM_JP_LAYOUT_STONE_TOWER: world.resolvedFlags.jpLayouts.has('StoneTower') && !world.resolvedFlags.openDungeonsMm.has('ST'),
     MM_JP_LAYOUT_STONE_TOWER_TEMPLE: world.resolvedFlags.jpLayouts.has('ST'),
+    MM_JP_LAYOUT_GREAT_BAY_COAST: world.resolvedFlags.jpLayouts.has('GreatBayCoast'),
     MM_KEG_STRENGTH_3: settings.kegStrength3,
   };
   const keys = Object.keys(groups) as PatchGroup[];
