@@ -50,19 +50,6 @@ static void ComboPlay_JpLayoutDekuPalace(PlayState* play)
     }
 }
 
-static void ComboPlay_JpLayoutGreatBayCoast(PlayState* play)
-{
-    void* ptr;
-    Vtx* vtx;
-
-    /* Raise the platform by 25 units (gfx) */
-    ptr = play->roomCtx.activeRoomVram;
-    vtx = (Vtx*)((char*)ptr + 0x12008);
-
-    for (int i = 0; i < 0x2f; ++i)
-        vtx[i].v.ob[1] += 25;
-}
-
 void ComboPlay_JpLayout(PlayState* play)
 {
     switch (play->sceneId)
@@ -70,9 +57,6 @@ void ComboPlay_JpLayout(PlayState* play)
     case SCE_MM_DEKU_PALACE:
         if (Config_Flag(CFG_MM_JP_LAYOUT_DEKU_PALACE))
             ComboPlay_JpLayoutDekuPalace(play);
-        break;
-    case SCE_MM_GREAT_BAY_COAST:
-        ComboPlay_JpLayoutGreatBayCoast(play);
         break;
     }
 }
