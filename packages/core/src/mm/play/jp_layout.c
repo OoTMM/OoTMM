@@ -52,12 +52,12 @@ static void ComboPlay_JpLayoutDekuPalace(PlayState* play)
 
 static void ComboPlay_JpLayoutGreatBayCoast(PlayState* play)
 {
-    void* room;
+    void* ptr;
     Vtx* vtx;
 
     /* Raise the platform by 25 units (gfx) */
-    room = play->roomCtx.activeRoomVram;
-    vtx = (Vtx*)((char*)room + 0x12008);
+    ptr = play->roomCtx.activeRoomVram;
+    vtx = (Vtx*)((char*)ptr + 0x12008);
 
     for (int i = 0; i < 0x2f; ++i)
         vtx[i].v.ob[1] += 25;
