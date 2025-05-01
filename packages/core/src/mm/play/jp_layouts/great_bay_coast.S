@@ -78,4 +78,8 @@ PATCH_U16 ROOM + 0x12bca + 0x10 * 1, -20
 PATCH_U16 ROOM + 0x12bca + 0x10 * 2, -20
 PATCH_U16 ROOM + 0x12bca + 0x10 * 3, -20
 
+/* Patch the statue */
+PATCH_U16 ROOM + 0x0424, 40
+PATCH_U16 ROOM + 0x1598, 40
+
 PATCH_GROUP_END
