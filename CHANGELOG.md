@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a bug where Kotake would check for an empty bottle in subsequent cycles even when giving "nothing", causing logic issues.
 - Fix a vanilla bug where the Ikana Fairy Fountain has the wrong color.
 - Fix a bug where a fairy could turn into a shuffled snowball check in specific circumstances.
 - Fix Stone of Agony not rumbling controllers that support it.
