@@ -43,15 +43,6 @@ void updateSceneSetup(PlayState* play)
     g.sceneSetupId = 0;
 }
 
-static void SpawnRoomActors_Wrapper(PlayState* play, int id)
-{
-    /* Spawn the normal room actors */
-    SpawnRoomActors(play, id);
-}
-
-PATCH_CALL(0x8012eb18, SpawnRoomActors_Wrapper);
-PATCH_CALL(0x8012ec30, SpawnRoomActors_Wrapper);
-
 void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
 {
     /* Clear some flags */
