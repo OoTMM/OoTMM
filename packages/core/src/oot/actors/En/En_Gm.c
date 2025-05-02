@@ -13,9 +13,9 @@ static void EnGm_ItemQuery(ComboItemQuery* q)
     q->id = NPC_OOT_MEDIGORON;
 }
 
-static void EnGm_Reset(Actor* this)
+static void EnGm_Reset(Actor* this, u32 addr)
 {
-    SET_HANDLER(this, actorAddr(ACTOR_EN_GM, 0x80a9fd5c));
+    SET_HANDLER(this, actorAddr(ACTOR_EN_GM, addr));
 }
 
 static void EnGm_GiveItemHandler2(Actor* this, PlayState* play)
@@ -26,7 +26,7 @@ static void EnGm_GiveItemHandler2(Actor* this, PlayState* play)
     if (Actor_HasParentZ(this))
     {
         BITMAP16_SET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON);
-        EnGm_Reset(this);
+        EnGm_Reset(this, 0x80a9fd5c);
         return;
     }
 
@@ -42,7 +42,7 @@ static void EnGm_GiveItemHandler(Actor* this, PlayState* play)
     if (gSave.info.playerData.rupees < PRICE)
     {
         DisplayTextBox2(play, 200);
-        EnGm_Reset(this);
+        EnGm_Reset(this, 0x80a9fe98);
         return;
     }
 
