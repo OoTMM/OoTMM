@@ -1252,6 +1252,27 @@ void comboTextMessageCantBuy(PlayState* play, int flags)
     comboTextAutoLineBreaks(start);
 }
 
+
+void comboTextMessageNoRupees(PlayState* play, int flags)
+{
+    char* b;
+    char* start;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.font.msgBuf;
+#else
+    b = play->msgCtx.font.textBuffer.schar;
+#endif
+
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "You don't have enough Rupees!");
+    if (flags & TF_SIGNAL)
+        comboTextAppendStr(&b, TEXT_SIGNAL);
+    comboTextAppendStr(&b, TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+
 static int shouldItemBeHintedWithImportance(s16 gi)
 {
     if (!Config_Flag(CFG_HINT_IMPORTANCE))

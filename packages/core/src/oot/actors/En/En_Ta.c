@@ -79,6 +79,7 @@ static void EnTa_BuyMilkHandler(Actor* this, PlayState* play)
 
     if (Actor_HasParentZ(this))
     {
+        this->parent = NULL;
         BITMAP8_SET(gSharedCustomSave.oot.npc, NPC_OOT_TALON_MILK);
         EnTa_Reset(this);
         return;
@@ -110,6 +111,8 @@ static void EnTa_BuyMilk(Actor* this, PlayState* play)
         DisplayTextBox2(play, 0x85);
         if (ret != SC_ERR_NORUPEES)
             comboTextMessageCantBuy(play, 0);
+        else
+            comboTextMessageNoRupees(play, 0);
         EnTa_Reset(this);
     }
 }
