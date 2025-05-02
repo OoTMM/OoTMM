@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Milk bar performance not requiring Gorman Soul.
 - Fix adult link being invisible in the Milk Bar performance.
 - Fix a bug where Kotake would check for an empty bottle in subsequent cycles even when giving "nothing", causing logic issues.
 - Fix a vanilla bug where the Ikana Fairy Fountain has the wrong color.
