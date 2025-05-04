@@ -75,10 +75,6 @@ const SCENES_BY_ID = {
   mm: scenesById('mm'),
 }
 
-const MM_EXTRA_SCENES = {
-  0x71: 5,
-};
-
 const MM_POTS_SET_DROPS = [
   'NOTHING',
   'RUPEE_GREEN',
