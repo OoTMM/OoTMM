@@ -1306,7 +1306,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "((event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din) && (has(MASK_DEKU) || (can_swim && (has_hover_boots || can_use_nayru)) || is_adult || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots))) || has_mask_zora"
+    "Swamp Back": "((event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din) && (has(MASK_DEKU) || has_hover_boots || can_use_nayru || is_adult)) || is_swamp_cleared || has_mask_zora"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
@@ -1362,8 +1362,8 @@
     "Southern Swamp Grass Near Witch Pack 2 Grass 09": "true"
     "Southern Swamp Grass Near Witch 1": "true"
     "Southern Swamp Grass Near Witch 2": "true"
-    "Southern Swamp Rupee 1": "has(MASK_DEKU) || is_tall || short_hook_anywhere || (has_hover_boots && can_swim)"
-    "Southern Swamp Rupee 2": "has(MASK_DEKU) || is_tall || short_hook_anywhere || (has_hover_boots && can_swim)"
+    "Southern Swamp Rupee 1": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
+    "Southern Swamp Rupee 2": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
     "Southern Swamp Hive": "is_swamp_poisoned && (has_mask_zora || can_use_deku_bubble || has_arrows || can_hookshot || ((is_adult || has_hover_boots) && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU)))))"
   gossip:
     "Southern Swamp Gossip": "true"
@@ -1373,10 +1373,10 @@
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
   exits:
-    "Swamp Front": "((event(BOAT_RIDE) || has_arrows) && (has(MASK_DEKU) || (can_swim && (has_hover_boots || can_use_nayru) || is_tall || has_mask_goron)) || (has_hover_boots && (can_hookshot_short || can_use_din)) || (is_adult && (can_use_din || (can_use_nayru && can_hookshot_short))) || (has_mask_zora && can_use_nayru) || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots)))" # TODO: With good timing, Zora can use the rangs in poison water.
+    "Swamp Front": "((event(BOAT_RIDE) || has_arrows) && (has(MASK_DEKU) || has_hover_boots || can_use_nayru || is_tall || has_mask_goron)) || (has_hover_boots && (can_hookshot_short || can_use_din)) || (is_adult && (can_use_din || (can_use_nayru && can_hookshot_short))) || (has_mask_zora && can_use_nayru) || is_swamp_cleared" # TODO: With good timing, Zora can use the rangs in poison water.
     "Deku Palace Front": "true"
-    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || (can_swim && (has_hover_boots || can_use_nayru) || is_swamp_cleared && (can_swim || short_hook_anywhere || is_tall"
-    "Swamp Canopy Back": "(is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots))) || short_hook_anywhere"
+    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
+    "Swamp Canopy Back": "is_swamp_cleared || short_hook_anywhere"
     "Swamp Canopy Front": "short_hook_anywhere"
   locations:
     "Southern Swamp Song of Soaring": "has_mask_zora && has_explosives && trick(MM_SOARING_ZORA)" # add adult to this trick?
@@ -1384,16 +1384,16 @@
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Spider House": "has_sticks || has_arrows"
-    "Swamp Back": "has(MASK_DEKU) || is_tall || short_hook_anywhere || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots)))"
-    "Near Swamp Grotto": "has(MASK_DEKU) || is_tall || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots)))"
+    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
+    "Near Swamp Grotto": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Grotto":
   region: SOUTHERN_SWAMP
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
-    "Swamp Front": "((has_arrows || can_hookshot || event(BOAT_RIDE)) && (has_mask_goron || is_tall || (can_use_nayru && can_swim))) || (is_adult && can_use_din)"
-    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || can_hookshot_short || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots)))"
+    "Swamp Front": "((has_arrows || can_hookshot || event(BOAT_RIDE)) && (has_mask_goron || is_tall || can_use_nayru)) || (is_adult && can_use_din)"
+    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_hookshot_short || can_use_nayru || has_hover_boots"
     "Southern Swamp Grotto": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Southern Swamp Grotto":
@@ -1528,9 +1528,9 @@
   exits:
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
-    "Near Deku Shrine": "(is_cleared_swamp && (can_swim || is_tall) || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
+    "Near Deku Shrine": "is_swamp_cleared || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
-    "Deku Palace Upper": "(is_swamp_cleared && (can_swim || is_tall || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
+    "Deku Palace Upper": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
     NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || ((is_swamp_cleared || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short || can_hammer)))"
 "Deku Palace Main":
@@ -1640,21 +1640,21 @@
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "has(MASK_DEKU) || (is_swamp_cleared && (can_swim || is_tall || (is_child && has_iron_boots))) || short_hook_anywhere || (can_use_nayru && can_swim) || has_hover_boots"
+    "Deku Palace Front": "has(MASK_DEKU) || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
     "Swamp Canopy Front": "true"
 "Swamp Canopy Front":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Back": "short_hook_anywhere || has(MASK_DEKU) || is_tall || (has_hover_boots && can_swim)"
-    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || is_tall || (has_hover_boots && can_swim)"
+    "Swamp Back": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
+    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
     "Near Swamp Grotto": "true"
     "Deku Palace Cliff": "true"
     "Swamp Canopy Back": "has(MASK_DEKU) || short_hook_anywhere"
 "Swamp Canopy Back":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || (can swim && (has_hover boots || can_use nayru)) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
-    "Swamp Back": "has(MASK_DEKU) || is_tall || (can_swim && (has_hover_boots || can_use_nayru)) || is_swamp_cleared && (can_swim || is_tall)"
+    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || has_hover_boots || can_use_nayru) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
+    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_use_nayru || has_hover_boots"
     "Woodfall": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
   locations:
@@ -1667,9 +1667,9 @@
     "Swamp Canopy Back": "true"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere"
     "Woodfall Temple Princess Jail": "is_swamp_cleared && woodfall_raised"
-    "Woodfall Near Fairy Fountain": "(can_use_nayru && can_swim) || (is_swamp_cleared && (can_swim || is_tall)) && short_hook_anywhere"
+    "Woodfall Near Fairy Fountain": "(is_swamp_cleared || can_use_nayru) && short_hook_anywhere"
   locations:
-    "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || is_swamp_cleared && (can_swim || is_tall) || (can_swim && (can_use_nayru || has_hover_boots))"
+    "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || is_swamp_cleared || can_use_nayru || has_hover_boots"
     "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || can_hookshot || (is_adult && can_hookshot_short && (is_swamp_cleared || can_use_nayru))"
     "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || (is_swamp_cleared && can_hookshot) || (is_adult && can_hookshot_short && (is_swamp_cleared || can_use_nayru)) || hookshot_anywhere"
     "Woodfall Grass 1": "true"
@@ -1684,7 +1684,7 @@
   exits:
     "Woodfall Temple": "woodfall_raised"
     "Woodfall Shrine": "cond(setting(openDungeonsMm, WF) || setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both), has(MASK_DEKU) || hookshot_anywhere, true)"
-    "Woodfall": "(is_swamp_cleared && (can_swim || is_tall)) || (can_use_nayru && can_swim)"
+    "Woodfall": "is_swamp_cleared || can_use_nayru"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
@@ -1699,7 +1699,7 @@
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || (is_swamp_cleared && (can_swim || is_tall)) || hookshot_anywhere || (can_use_nayru && can_swim)"
+    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || is_swamp_cleared || hookshot_anywhere || can_use_nayru"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere"
     "Woodfall Fairy Fountain": "true"
   locations:
@@ -1713,7 +1713,7 @@
 "Near Deku Shrine":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "(is_swamp_cleared && (can_swim || is_tall)) || has(MASK_DEKU) || (can_swim && (can_use_nayru || has_hover_boots))"
+    "Deku Palace Front": "is_swamp_cleared || has(MASK_DEKU) || can_use_nayru || has_hover_boots"
     "Deku Shrine": "true"
 "Deku Shrine":
   region: BUTLER_RACE
