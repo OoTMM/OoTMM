@@ -695,3 +695,6 @@ D_801AEFA0 = 0x801aefa0;
 D_801AEF88 = 0x801aef88;
 
 BgCheck_EntityRaycastFloor1 = 0x800c3fa0;
+
+Math3D_LineSegVsPlane = 0x8017d2fc;
+EffectSsDeadDb_Spawn = 0x800b2f80;

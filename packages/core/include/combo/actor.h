@@ -66,6 +66,7 @@
 #define ACTOR_FLAG_UPDATE_DURING_OCARINA        (1 << 25)
 #define ACTOR_FLAG_CAN_PRESS_SWITCHES           (1 << 26)
 #define ACTOR_FLAG_LOCK_ON_DISABLED             (1 << 27)
+#define ACTOR_FLAG_UCODE_POINT_LIGHT_ENABLED    (1 << 28)
 
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01

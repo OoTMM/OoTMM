@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Skip the cutscene of burning spider webs in MM.
 - Skip the cutscene of melting ice blocks in MM.
 - Skip the cutscene of breaking keg boulders.
 - Layout of the settings in the Shared and Extensions tabs.
