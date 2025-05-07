@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Skip the cutscene of burning spider webs in MM.
+- Skip the cutscene of melting ice blocks in MM.
+- Skip the cutscene of breaking keg boulders.
 - Add the Japanese version of Great Bay Coast.
 - Comfort option to reduce the shine time needed on Sun Block for them to go away.
 - Cutscene skip for Sun Blocks going away.
@@ -25,9 +28,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Skip the cutscene of burning spider webs in MM.
-- Skip the cutscene of melting ice blocks in MM.
-- Skip the cutscene of breaking keg boulders.
+
 - Layout of the settings in the Shared and Extensions tabs.
 - Layout of the settings in the Misc. tab.
 - Progressive shields will now remove as many regular shields from the pool as possible.
