@@ -693,3 +693,5 @@ gPlayerFormItemRestrictions = 0x801c2410;
 
 D_801AEFA0 = 0x801aefa0;
 D_801AEF88 = 0x801aef88;
+
+BgCheck_EntityRaycastFloor1 = 0x800c3fa0;
