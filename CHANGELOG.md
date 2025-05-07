@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Skip the cutscene of breaking keg boulders.
+- Layout of the settings in the Shared and Extensions tabs.
 - Layout of the settings in the Misc. tab.
 - Progressive shields will now remove as many regular shields from the pool as possible.
 - Progressive shields are now re-obtained on every scene transition, thus making them permanent logically.
