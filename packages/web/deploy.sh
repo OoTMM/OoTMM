@@ -6,4 +6,4 @@ function die() {
 }
 
 # Deploy to Netlify
-netlify deploy -d "$PWD/dist" --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID_WEB --prod || die "Failed to deploy"
+../../node_modules/.bin/netlify deploy -d "$PWD/dist" --site $NETLIFY_SITE_ID_WEB --prod || die "Failed to deploy"

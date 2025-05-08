@@ -63,9 +63,6 @@ jobs:
       - name: Build
         run: npx nx affected -t build --prod
 
-      - name: Install netlify CLI
-        run: npm install -g netlify-cli
-
       - name: Configure AWS
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
         uses: aws-actions/configure-aws-credentials@v4
@@ -83,6 +80,6 @@ jobs:
         run: npx nx affected -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}
-          NETLIFY_SITE_ID_WEB: ${{ vars.NETLIFY_SITE_ID_WEB }}
-          NETLIFY_SITE_ID_STATIC: ${{ vars.NETLIFY_SITE_ID_STATIC }}
+          NETLIFY_SITE_ID_WEB: ${{ secrets.NETLIFY_SITE_ID_WEB }}
+          NETLIFY_SITE_ID_STATIC: ${{ secrets.NETLIFY_SITE_ID_STATIC }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
