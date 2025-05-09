@@ -40,14 +40,16 @@ export function exportSettings(settings: Settings): string {
 
   const j = JSON.stringify(diff);
   const compressed = deflateRaw(j, { level: 9 });
-  const str = uint8ArrayToBase64(compressed);
-  return `v1.${str}`;
+  const str = uint8ArrayToBase64(compressed, { urlSafe: true });
+  return `v2.${str}`;
 }
 
 export function importSettingsRaw(str: string): PartialDeep<Settings> {
   let data: any;
 
-  if (str.startsWith('v1.')) {
+  if (str.startsWith('v2.')) {
+    data = importSettingsV2(str);
+  } else if (str.startsWith('v1.')) {
     data = importSettingsV1(str);
   } else {
     data = importSettingsV0(str);
@@ -58,6 +60,14 @@ export function importSettingsRaw(str: string): PartialDeep<Settings> {
 
 export function importSettings(str: string): Settings {
   return makeSettings(importSettingsRaw(str));
+}
+
+function importSettingsV2(str: string): any {
+  const data = str.slice(3);
+  const buf = base64ToUint8Array(data);
+  const decompressed = inflateRaw(buf, { to: 'string' });
+  const partial = JSON.parse(decompressed);
+  return partial;
 }
 
 function importSettingsV1(str: string): any {
