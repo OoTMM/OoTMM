@@ -19,6 +19,7 @@ jobs:
           echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
           echo "NX_CMD=run-many" >> $GITHUB_ENV
+          echo "DEPLOY_STABLE=1" >> $GITHUB_ENV
 
       - name: Extract Version (Commit)
         if: ${{ !contains(github.ref, 'refs/tags/') }}
@@ -28,6 +29,7 @@ jobs:
           echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
           echo "ENV_KEYS=dev" >> $GITHUB_ENV
           echo "NX_CMD=affected" >> $GITHUB_ENV
+          echo "DEPLOY_DEV=1" >> $GITHUB_ENV
 
       - name: Add n64 toolchain repo
         uses: myci-actions/add-deb-repo@10
