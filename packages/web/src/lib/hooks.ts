@@ -1,14 +1,31 @@
-import { useState, useEffect } from 'preact/hooks';
-import { getManifestForVersion } from './manifest';
+import { useState, useEffect, useMemo } from 'preact/hooks';
+import { getManifest, Manifest } from './api';
+import { manifestEntry } from './util';
 
-export function useManifestVersion(version: string) {
-  const [state, setState] = useState<{ data: any | null, isReady: boolean, error: Error | null }>({ data: null, isReady: false, error: null });
+export function useManifest() {
+  const [state, setState] = useState<{ data: Manifest | null, error: Error | null }>({ data: null, error: null });
 
   useEffect(() => {
-    getManifestForVersion(version)
-      .then((data) => setState({ data, isReady: true, error: null }))
-      .catch((error) => setState({ data: null, isReady: false, error }));
-  }, [version]);
+    getManifest()
+      .then((data) => setState({ data, error: null }))
+      .catch((error) => setState({ data: null, error }));
+  }, []);
 
   return state;
+}
+
+export function useManifestEntry(version: string) {
+  const manifestState = useManifest();
+  const derived = useMemo(() => {
+    if (!manifestState.data) {
+      return { data: null, error: manifestState.error };
+    }
+    try {
+      const entry = manifestEntry(manifestState.data, version);
+      return { data: entry, error: null };
+    } catch (error) {
+      return { data: null, error: error as Error };
+    }
+  }, [manifestState.data, version]);
+  return derived;
 }
