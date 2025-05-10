@@ -91,17 +91,17 @@
 "Gerudo Training Grounds Water":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Underwater": "can_play_time && has_tunic_zora && has_iron_boots"
+    "Gerudo Training Grounds Underwater": "can_play_time && has_iron_boots && has_tunic_zora"
   locations:
     "Gerudo Training Water": "silver_rupees_gtg_water"
 "Gerudo Training Grounds Underwater":
   dungeon: GTG
   locations:
     "Gerudo Training Grounds SR Water 1": "true"
-    "Gerudo Training Grounds SR Water 2": "true"
+    "Gerudo Training Grounds SR Water 2": "can_swim || can_hookshot"
     "Gerudo Training Grounds SR Water 3": "true"
-    "Gerudo Training Grounds SR Water 4": "true"
-    "Gerudo Training Grounds SR Water 5": "true"
+    "Gerudo Training Grounds SR Water 4": "can_swim || can_hookshot"
+    "Gerudo Training Grounds SR Water 5": "can_swim || hookshot_anywhere"
 "Gerudo Training Grounds Hammer":
   dungeon: GTG
   exits:
