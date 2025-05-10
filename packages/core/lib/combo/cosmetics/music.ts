@@ -345,6 +345,17 @@ class MusicInjector {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;
         }
+
+        /* Fix songs not using the correct sequence player for their type */
+        /* array = [ Sample Medium, Sequence Player, Audio Table, Font ID, Number of Instruments, Number of Drums, Number of Sound Effects MSB, Number of Sound Effects LSB ]
+        /* OOT: 0x02 is BGM & Ambience, 0x01 is Fanfares; MM: 0x02 is BGM, 0x01 is Fanfares */
+        if (type === 'bgm' && bankmeta[1] !== 0x02) {
+          bankmeta[1] = 0x02;
+        }
+        else if (type === 'fanfare' && bankmeta[1] !== 0x01) {
+          bankmeta[1] = 0x01;
+        }
+        
         bankCustom = { meta: bankmeta, data: bank };
         games.push('mm');
       } else {
@@ -443,6 +454,17 @@ class MusicInjector {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;
         }
+
+        /* Fix songs not using the correct sequence player for their type */
+        /* array = [ Sample Medium, Sequence Player, Audio Table, Font ID, Number of Instruments, Number of Drums, Number of Sound Effects MSB, Number of Sound Effects LSB ]
+        /* OOT: 0x02 is BGM & Ambience, 0x01 is Fanfares; MM: 0x02 is BGM, 0x01 is Fanfares */
+        if (type === 'bgm' && bankmeta[1] !== 0x02) {
+          bankmeta[1] = 0x02;
+        }
+        else if (type === 'fanfare' && bankmeta[1] !== 0x01) {
+          bankmeta[1] = 0x01;
+        }
+        
         const sampleBank1 = mmrSampleBank(bankmeta[0x02]);
         const sampleBank2 = mmrSampleBank(bankmeta[0x03]);
         const sampleBanks = new Uint8Array([sampleBank1, sampleBank2]);
@@ -494,6 +516,10 @@ class MusicInjector {
     let customBankId: number | null = null;
 
     if (music.bankCustom) {
+      /* Kaepora Gaebora's theme is one of a few special cases where BGM use the fanfare sequence player */
+      if (slot === "OOT_KAEPORA_GAEBORA") {
+        music.bankCustom.meta[1] = 0x01
+      }
       customBankId = this.addCustomBank(music.bankCustom.meta, music.bankCustom.data);
     }
 
