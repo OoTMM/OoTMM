@@ -58,3 +58,8 @@ PATCH_START 0x80930364
 .int 0
 .int 0
 PATCH_END
+
+/* Always use the child update function for the stones */
+PATCH_START 0x8092ad4c
+  li t7,1
+PATCH_END

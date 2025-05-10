@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- The spiritual stones won't display on the altar as adult if ToT door is closed.
+
 ### Fixed
 
+- Fixed the ruto/big octo cutscene looking weird as adult.
 - Fixed rare ice-trap related softlocks in MM.
 
 ## [28.0] - 2025-05-09
