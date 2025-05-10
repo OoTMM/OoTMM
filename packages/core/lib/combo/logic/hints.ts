@@ -167,6 +167,7 @@ export class LogicPassHints {
       analysis: Analysis;
       fixedLocations: Set<Location>;
       startingItems: PlayerItems;
+      plandoLocations: Map<Location, PlayerItem>;
     },
   ){
     this.ignoredRegions = new Set;
@@ -299,7 +300,7 @@ export class LogicPassHints {
     }
 
     /* Not shuffled */
-    if (!isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, loc, {
+    if (!isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, this.state.plandoLocations, loc, {
       noPlando: this.state.settings.noPlandoHints,
       songs: klass === 'path',
     })) {
@@ -428,7 +429,7 @@ export class LogicPassHints {
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
     const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
-    if ((!isMoon && this.state.settings.noPlandoHints && locations.every(l => this.state.settings.plando.locations[locationData(l).id])) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
+    if ((!isMoon && this.state.settings.noPlandoHints && locations.every(l => this.state.plandoLocations.has(l))) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);

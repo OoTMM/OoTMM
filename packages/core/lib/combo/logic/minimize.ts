@@ -1,4 +1,4 @@
-import { ItemHelpers, Items, PlayerItems, makePlayerItem } from '../items';
+import { ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
 import { Settings } from '../settings';
 import { Pathfinder } from './pathfind';
 import { Location, isLocationFullyShuffled, locationData, makeLocation } from './locations';
@@ -20,6 +20,7 @@ export class LogicPassMinimize {
       items: ItemPlacement;
       random: Random;
       monitor: Monitor;
+      plandoLocations: Map<Location, PlayerItem>;
     }
   ) {
   }
@@ -37,7 +38,7 @@ export class LogicPassMinimize {
     /* Extract locs to test */
     let locsToTest: Location[] = [];
     for (const loc of this.locations) {
-      if (isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, loc, { songs: true, noPlando: true })) {
+      if (isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, this.state.plandoLocations, loc, { songs: true, noPlando: true })) {
         if (!ItemHelpers.isTriforcePiece(this.state.items.get(loc)!.item)) {
           locsToTest.push(loc);
         }

@@ -483,7 +483,7 @@ function makeCloakGi(key: number, seed: string, settings: Settings, logic: Logic
 
     if (!ItemHelpers.isItemMajor(item.item) && !ItemHelpers.isSilverRupee(item.item) && !ItemHelpers.isKey(item.item) && !ItemHelpers.isBossKey(item.item)) continue;
     if (ItemGroups.JUNK.has(item.item)) continue;
-    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, loc, { songs: true, noPlando: true })) continue;
+    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, logic.plandoLocations, loc, { songs: true, noPlando: true })) continue;
 
     return gi(settings, 'oot', item.item, false);
   }

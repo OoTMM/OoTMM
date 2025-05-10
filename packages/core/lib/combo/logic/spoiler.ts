@@ -37,6 +37,7 @@ export class LogicPassSpoiler {
       hints: Hints,
       monitor: Monitor,
       startingItems: PlayerItems;
+      plandoLocations: Map<Location, PlayerItem>;
     }
   ) {
     this.writer = new LogWriter();
@@ -263,13 +264,23 @@ export class LogicPassSpoiler {
   }
 
   private writePlando() {
-    const { plando } = this.state.settings;
-    if (Object.keys(plando.locations).length >= 1) {
+    if (this.state.plandoLocations.size >= 1) {
       this.writer.indent('Plando');
-      for (let loc in plando.locations) {
-        let item = plando.locations[loc];
-        if (item)
-          this.writer.write(`${loc}: ${itemName(item)}`)
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        if (this.state.worlds.length > 1) {
+          this.writer.indent(`World ${i + 1}`);
+        }
+        for (const [loc, pi] of this.state.plandoLocations) {
+          let locD = locationData(loc);
+          if (locD.world !== i) {
+            continue;
+          }
+          const pi = this.state.plandoLocations.get(loc)!;
+          this.writer.write(`${locD.id}: ${itemName(pi.item.id)}`)
+        }
+        if (this.state.worlds.length > 1) {
+          this.writer.unindent('');
+        }
       }
       this.writer.unindent('');
     }
