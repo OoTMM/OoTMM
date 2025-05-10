@@ -1,7 +1,7 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "Lake Hylia": "true"
+    "Lake Hylia Near Water Temple": "true"
     "Water Temple Main": "true"
 "Water Temple Main":
   dungeon: Water

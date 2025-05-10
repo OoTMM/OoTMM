@@ -309,8 +309,8 @@
     ARROWS: "is_adult"
     MAGIC: "true"
   locations:
-    "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
-    "Hyrule Field Song of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
+    "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA) && can_swim_or_sink"
+    "Hyrule Field Song of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA) && can_swim_or_sink"
     "Hyrule Field Sell Bunny Mask": "is_child && has_spiritual_stones && has_mask_bunny && soul_citizen"
     "Hyrule Field River Big Fairy": "can_play_storms"
     "Hyrule Field Wonder Item 1": "is_child"
@@ -834,18 +834,18 @@
     # Two broken actors
     "Hyrule Castle Pot 1": "true"
     "Hyrule Castle Pot 2": "true"
-    "Hyrule Castle Wonder Item Torch 1": "can_use_slingshot"
-    "Hyrule Castle Wonder Item Torch 2": "can_use_slingshot"
-    "Hyrule Castle Wonder Item Moat 01": "true"
-    "Hyrule Castle Wonder Item Moat 02": "true"
-    "Hyrule Castle Wonder Item Moat 03": "true"
-    "Hyrule Castle Wonder Item Moat 04": "true"
-    "Hyrule Castle Wonder Item Moat 05": "true"
-    "Hyrule Castle Wonder Item Moat 06": "true"
-    "Hyrule Castle Wonder Item Moat 07": "true"
-    "Hyrule Castle Wonder Item Moat 08": "true"
-    "Hyrule Castle Wonder Item Moat 09": "true"
-    "Hyrule Castle Wonder Item Moat 10": "true"
+    "Hyrule Castle Wonder Item Torch 1": "can_use_slingshot && can_swim_or_sink"
+    "Hyrule Castle Wonder Item Torch 2": "can_use_slingshot && can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 01": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 02": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 03": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 04": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 05": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 06": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 07": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 08": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 09": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 10": "can_swim_or_sink"
     "Hyrule Castle Butterfly Pack 1 Butterfly 1": "can_use_sticks"
     "Hyrule Castle Butterfly Pack 1 Butterfly 2": "can_use_sticks"
     "Hyrule Castle Butterfly Pack 2 Butterfly 1": "can_use_sticks"
@@ -1754,10 +1754,10 @@
     "Zora River Grass Pack Bush 10": "can_cut_grass"
     "Zora River Grass Pack Bush 11": "can_cut_grass"
     "Zora River Grass Pack Bush 12": "can_cut_grass"
-    "Zora River Wonder Item Front 1": "is_child"
-    "Zora River Wonder Item Front 2": "is_child"
-    "Zora River Wonder Item Front 3": "is_child"
-    "Zora River Wonder Item Front 4": "is_child"
+    "Zora River Wonder Item Front 1": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Front 2": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Front 3": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Front 4": "is_child && can_swim_or_sink"
 "Zora River":
   region: ZORA_RIVER
   time: flow
@@ -1789,37 +1789,37 @@
     "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
     "Zora River GS Near Bridge": "is_adult && gs_night && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
     "Zora River Grass": "(is_child || has_hover_boots || hookshot_anywhere || climb_anywhere) && can_cut_grass"
-    "Zora River Rupee 1": "is_adult"
-    "Zora River Rupee 2": "is_adult"
-    "Zora River Rupee 3": "is_adult"
-    "Zora River Rupee 4": "is_adult"
-    "Zora River Wonder Item Back 01": "is_child"
-    "Zora River Wonder Item Back 02": "is_child"
-    "Zora River Wonder Item Back 03": "is_child"
-    "Zora River Wonder Item Back 04": "is_child"
-    "Zora River Wonder Item Back 05": "is_child"
-    "Zora River Wonder Item Back 06": "is_child"
-    "Zora River Wonder Item Back 07": "is_child"
-    "Zora River Wonder Item Back 08": "is_child"
-    "Zora River Wonder Item Back 09": "is_child"
-    "Zora River Wonder Item Back 10": "is_child"
-    "Zora River Wonder Item Back 11": "is_child"
-    "Zora River Wonder Item Back 12": "is_child"
-    "Zora River Wonder Item Back 13": "is_child"
-    "Zora River Wonder Item Back 14": "is_child"
-    "Zora River Wonder Item Back 15": "is_child"
-    "Zora River Wonder Item Back 16": "is_child"
-    "Zora River Wonder Item Back 17": "is_child"
-    "Zora River Wonder Item Back 18": "is_child"
-    "Zora River Wonder Item Back 19": "is_child"
-    "Zora River Wonder Item Back 20": "is_child"
-    "Zora River Wonder Item Back 21": "is_child"
-    "Zora River Wonder Item Back 22": "is_child"
-    "Zora River Wonder Item Back 23": "is_child"
-    "Zora River Wonder Item Back 24": "is_child"
-    "Zora River Wonder Item Back 25": "is_child"
-    "Zora River Wonder Item Back 26": "is_child"
-    "Zora River Wonder Item Back 27": "is_child"
+    "Zora River Rupee 1": "is_adult && can_swim_or_sink"
+    "Zora River Rupee 2": "is_adult && can_swim_or_sink"
+    "Zora River Rupee 3": "is_adult && can_swim_or_sink"
+    "Zora River Rupee 4": "is_adult && can_swim_or_sink"
+    "Zora River Wonder Item Back 01": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 02": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 03": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 04": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 05": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 06": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 07": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 08": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 09": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 10": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 11": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 12": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 13": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 14": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 15": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 16": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 17": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 18": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 19": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 20": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 21": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 22": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 23": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 24": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 25": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 26": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 27": "is_child && can_swim_or_sink"
     "Zora River Butterfly Near Beans 1": "is_child && can_use_sticks"
     "Zora River Butterfly Near Beans 2": "is_child && can_use_sticks"
     "Zora River Butterfly Near Waterfall 1": "is_child && can_use_sticks"
@@ -1891,12 +1891,12 @@
     FISH: "is_child && has_bottle"
   locations:
     "Zora Domain Waterfall Chest": "is_child"
-    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_zora"
-    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
     "Zora Domain Tunic": "is_adult && has_blue_fire && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION) && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || (has_magic && can_use_sword) || has_explosives)"
@@ -1917,8 +1917,8 @@
 "Zora Domain Shortcut":
   region: ZORA_DOMAIN
   exits:
-    "Zora Domain Underwater": "true"
-    "Lake Hylia": "true"
+    "Zora Domain Underwater": "is_adult || can_swim"
+    "Lake Hylia Near Shortcut": "can_swim"
 "Zora Domain Back":
   region: ZORA_DOMAIN
   exits:
@@ -1959,10 +1959,10 @@
   exits:
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
-    "Zora Domain Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
+    "Lake Hylia Near Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_raw(2))"
-    "Fishing Pond": "is_child || lake_water_control || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
+    "Lake Hylia Near Pond": "(can_swim && (is_child || lake_water_control)) || (is_adult && (scarecrow_hookshot || hookshot_anywhere || climb_anywhere)) || can_ride_bean(BEAN_LAKE_HYLIA)"
     "Lake Hylia Grotto": "true"
   events:
     CLEAR_STATE_LAKE: "is_adult && (wisp_enabled(BOSS_MORPHA, MEDALLION_WATER) || event(WISP_CLEAR_STATE_LAKE))"
@@ -1976,14 +1976,14 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
   locations:
-    "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
+    "Lake Hylia Underwater Bottle": "is_child && can_dive_small && can_swim"
     "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (lake_water_control || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
-    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
+    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
-    "Lake Hylia Island Big Fairy": "can_play_sun && (is_child || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
+    "Lake Hylia Island Big Fairy": "can_play_sun && ((is_child && (can_swim || (has_iron_boots && longshot_anywhere))) || (is_adult && ((lake_water_control && can_swim) || scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     # These pots do exist in the vanilla game but they fail to load
     "Lake Hylia Pot 1": "is_child"
     "Lake Hylia Pot 2": "is_child"
@@ -2030,7 +2030,7 @@
     "Lake Hylia Grass Pack 3 Bush 10": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 11": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 12": "can_cut_grass"
-    "Lake Hylia Rupee 1": "is_child" #this rupee can be gotten with base dive distance
+    "Lake Hylia Rupee 1": "is_child && can_swim_or_sink" #this rupee can be gotten with base dive distance
     "Lake Hylia Rupee 2": "is_child && can_dive_small"
     "Lake Hylia Rupee 3": "is_child && can_dive_small"
     "Lake Hylia Butterfly 1": "is_child && can_use_sticks"
@@ -2040,12 +2040,28 @@
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
     "Lake Hylia Gossip Southwest Lake": "true"
+"Lake Hylia Near Shortcut":
+  region: LAKE_HYLIA
+  age_change: false
+  exits:
+    "Lake Hylia": "is_adult || can_swim"
+    "Zora Domain Shortcut": "is_adult || can_swim"
+"Lake Hylia Near Pond":
+  region: LAKE_HYLIA
+  time: flow
+  exits:
+    "Fishing Pond": "true"
+    "Lake Hylia": "is_adult || can_swim_or_sink"
+"Lake Hylia Near Water Temple":
+  region: LAKE_HYLIA
+  exits:
+    "Lake Hylia": "can_swim"
 "Laboratory":
   region: ENTRANCE
   exits:
     "Lake Hylia": "true"
   locations:
-    "Laboratory Dive": "soul_scientist && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot))"
+    "Laboratory Dive": "soul_scientist && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot && can_swim))"
     "Laboratory Eye Drops": "soul_scientist && adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "gs && has_iron_boots && can_hookshot"
     "Laboratory Rupee 1": "can_dive_big"
@@ -2055,7 +2071,7 @@
   region: ENTRANCE
   age_change: false
   exits:
-    "Lake Hylia": "true"
+    "Lake Hylia Near Pond": "true"
   locations:
     "Fishing Pond Child": "is_child && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(CHILD_FISH, 7, 14) || has_pond_fish(CHILD_LOACH, 14, 19))"
     "Fishing Pond Adult": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(ADULT_FISH, 8, 25) || has_pond_fish(ADULT_LOACH, 29, 36))"
@@ -2312,7 +2328,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Gerudo Valley Falls": "true"
+    "Gerudo Valley Falls": "is_child || can_swim_or_sink"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || can_hookshot)) || time_travel_at_will"
     "Octorok Grotto Ledge": "true"
@@ -2324,7 +2340,7 @@
     BUGS: "is_child && has_bottle"
   locations:
     "Gerudo Valley Crate HP": "is_child || can_longshot || climb_anywhere"
-    "Gerudo Valley Waterfall HP": "true"
+    "Gerudo Valley Waterfall HP": "is_child || can_swim || can_longshot || (has_iron_boots && can_hookshot)" ##Grab the PoH with Cucco as child. The Hookshot can attach to the ladder.
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && can_play_epona"
@@ -2366,7 +2382,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Gerudo Valley Falls": "true"
+    "Gerudo Valley Falls": "can_swim_or_sink"
     "Gerudo Valley": "climb_anywhere"
     "Octorok Grotto": "can_lift_silver"
   locations:
@@ -2379,14 +2395,14 @@
   events:
     RUPEES: "true"
   locations:
-    "Gerudo Valley Octorok Grotto Rupee 1": "true"
-    "Gerudo Valley Octorok Grotto Rupee 2": "true"
-    "Gerudo Valley Octorok Grotto Rupee 3": "true"
-    "Gerudo Valley Octorok Grotto Rupee 4": "true"
-    "Gerudo Valley Octorok Grotto Rupee 5": "true"
-    "Gerudo Valley Octorok Grotto Rupee 6": "true"
-    "Gerudo Valley Octorok Grotto Rupee 7": "true"
-    "Gerudo Valley Octorok Grotto Rupee 8": "true"
+    "Gerudo Valley Octorok Grotto Rupee 1": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 2": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 3": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 4": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 5": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 6": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 7": "can_swim_or_sink || can_boomerang"
+    "Gerudo Valley Octorok Grotto Rupee 8": "can_swim_or_sink || can_boomerang"
 "Gerudo Valley Falls":
   region: GERUDO_VALLEY
   time: flow
@@ -2585,14 +2601,14 @@
 "Desert Colossus Oasis":
   region: DESERT_COLOSSUS
   locations:
-    "Desert Colossus Oasis Fairy 1": "true"
-    "Desert Colossus Oasis Fairy 2": "true"
-    "Desert Colossus Oasis Fairy 3": "true"
-    "Desert Colossus Oasis Fairy 4": "true"
-    "Desert Colossus Oasis Fairy 5": "true"
-    "Desert Colossus Oasis Fairy 6": "true"
-    "Desert Colossus Oasis Fairy 7": "true"
-    "Desert Colossus Oasis Fairy 8": "true"
+    "Desert Colossus Oasis Fairy 1": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 2": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 3": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 4": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 5": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 6": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 7": "can_swim_or_sink"
+    "Desert Colossus Oasis Fairy 8": "can_swim_or_sink"
 "Desert Colossus Spirit Exit":
   region: DESERT_COLOSSUS
   time: flow
