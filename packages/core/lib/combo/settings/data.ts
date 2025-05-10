@@ -1666,7 +1666,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Add an extra scale item, that is required to enter deep water.',
   default: false,
-  cond: (s: any) => (hasOoT(s) || s.scalesMm) && false, /* TODO: Enable once logic is ready */
+  cond: (s: any) => (hasOoT(s) || s.scalesMm) && s.logic === 'none', /* TODO: Enable once logic is ready */
 }, {
   key: 'childWallets',
   name: 'Child Wallets',
