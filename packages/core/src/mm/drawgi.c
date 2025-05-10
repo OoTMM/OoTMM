@@ -58,21 +58,6 @@ void DrawGi_Spell(PlayState* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Scale(PlayState* play, s16 index)
-{
-    s32 fc = play->state.frameCount;
-
-    OPEN_DISPS(play->state.gfxCtx);
-    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->state.gfxCtx, 0, fc * 2, fc * -2, 0x40, 0x40, 1, fc * 4, fc * -4, 0x20, 0x20));
-    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[2]);
-    gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[3]);
-    gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
-    gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[0]);
-    CLOSE_DISPS();
-}
-
 void DrawGi_MirrorShield(PlayState* play, s16 index)
 {
     s32 fc = play->state.frameCount;

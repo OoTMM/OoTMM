@@ -276,6 +276,7 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
 
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
+    Player_HandleBronzeScale(this, play);
     Ocarina_HandleCustomSongs(this, play);
     Dpad_Update(play);
     Dpad_Use(play, DPF_EQUIP);

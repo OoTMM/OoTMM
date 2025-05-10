@@ -105,6 +105,8 @@ DrawGi_Scale            = 0x80058b34;
 DrawGi_SoldOut          = 0x8005719c;
 DrawGi_Spell            = 0x80058698;
 
+Play_SetRespawnData     = 0x8009d8dc;
+
 Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;

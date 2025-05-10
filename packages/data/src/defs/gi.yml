@@ -52,8 +52,8 @@
 - { id: OOT_BOMB_BAG3, item: OOT_BOMB_BAG3, type: MAJOR, add: [OOT_BOMB_BAG, 3], flags: 0x80, draw: BOMB_BAG3, object: [oot, 0x00bf], name: "the <C1>Biggest Bomb Bag" }
 - { id: OOT_SILVER_GAUNTLETS, item: OOT_SILVER_GAUNTLETS, type: MAJOR, add: [OOT_STRENGTH, 2], flags: 0x80, draw: OOT_GAUNTLETS_SILVER, object: [oot, 0x012d], name: "the <C1>Silver Gauntlets" }
 - { id: OOT_GOLDEN_GAUNTLETS, item: OOT_GOLDEN_GAUNTLETS, type: MAJOR, add: [OOT_STRENGTH, 3], flags: 0x80, draw: OOT_GAUNTLETS_GOLD, object: [oot, 0x012d], name: "the <C1>Golden Gauntlets" }
-- { id: OOT_SCALE_SILVER, item: OOT_SILVER_SCALE, type: MAJOR, add: [OOT_SCALE, 1], flags: 0x80, draw: OOT_SCALE_SILVER, object: [oot, 0x00db], name: "the <C1>Silver Scale" }
-- { id: OOT_SCALE_GOLDEN, item: OOT_GOLDEN_SCALE, type: MAJOR, add: [OOT_SCALE, 2], flags: 0x80, draw: OOT_SCALE_GOLD, object: [oot, 0x00db], name: "the <C1>Golden Scale" }
+- { id: OOT_SCALE_SILVER, item: OOT_SILVER_SCALE, type: MAJOR, add: [OOT_SCALE, 2], flags: 0x80, draw: [SCALE, 2], object: [oot, 0x00db], name: "the <C1>Silver Scale" }
+- { id: OOT_SCALE_GOLDEN, item: OOT_GOLDEN_SCALE, type: MAJOR, add: [OOT_SCALE, 3], flags: 0x80, draw: [SCALE, 3], object: [oot, 0x00db], name: "the <C1>Golden Scale" }
 - { id: OOT_STONE_OF_AGONY, item: OOT_STONE_OF_AGONY, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_STONE_AGONY], flags: 0x80, draw: STONE_OF_AGONY, object: [oot, 0x00c8], name: "the <C1>Stone of Agony" }
 - { id: OOT_GERUDO_CARD, item: OOT_GERUDO_CARD, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_GERUDO_CARD], flags: 0x80, draw: OOT_GERUDO_CARD, object: [oot, 0x00d7], name: "the <C1>Gerudo's Card" }
 - { id: OOT_OCARINA_FAIRY, item: OOT_OCARINA_FAIRY, type: MAJOR, add: [OOT_OCARINA, 1], flags: 0x80, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
@@ -432,6 +432,7 @@
 - { id: OOT_MASK_STONE, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_STONE], flags: 0x80, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
 - { id: OOT_TRAP_RUPOOR, type: RUPEE, add: [OOT_RUPEE, -10], flags: 0x80, draw: [RUPEE, 0], object: [mm, 0x013f], name: "a <COLOR_BLUE>Rupoor" }
 - { id: OOT_SONG_EMPTINESS, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: [NOTE, 0x84], object: [oot, 0x00b6], name: "the <C2>Elegy of Emptiness" }
+- { id: OOT_SCALE_BRONZE, type: MAJOR, add: [OOT_SCALE, 1], flags: 0x80, draw: [SCALE, 1], object: [oot, 0x00db], name: "the <C1>Bronze Scale" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
@@ -753,8 +754,9 @@
 - { id: MM_BOOTS_HOVER, item: MM_BOOTS_HOVER, type: MAJOR, add: [MM_TRADE3, XITEM_MM_TRADE3_BOOTS_HOVER], flags: 0x80, draw: OOT_BOOTS_HOVER, object: [oot, 0x0157], name: "the <C1>Hover Boots" }
 - { id: MM_TUNIC_GORON, item: MM_TUNIC_GORON, type: MAJOR, add: [MM_TRADE2, XITEM_MM_TRADE2_TUNIC_GORON], flags: 0xa0, draw: OOT_TUNIC_GORON, object: [oot, 0x00f2], name: "the <C1>Goron Tunic" }
 - { id: MM_TUNIC_ZORA, item: MM_TUNIC_ZORA, type: MAJOR, add: [MM_TRADE3, XITEM_MM_TRADE3_TUNIC_ZORA], flags: 0xa0, draw: OOT_TUNIC_ZORA, object: [oot, 0x00f2], name: "the <C1>Zora Tunic" }
-- { id: MM_SCALE_SILVER, type: MAJOR, add: [MM_SCALE, 1], flags: 0x80, draw: OOT_SCALE_SILVER, object: [oot, 0x00db], name: "the <C1>Silver Scale" }
-- { id: MM_SCALE_GOLDEN, type: MAJOR, add: [MM_SCALE, 2], flags: 0x80, draw: OOT_SCALE_GOLD, object: [oot, 0x00db], name: "the <C1>Golden Scale" }
+- { id: MM_SCALE_BRONZE, type: MAJOR, add: [MM_SCALE, 1], flags: 0x80, draw: [SCALE, 1], object: [oot, 0x00db], name: "the <C1>Bronze Scale" }
+- { id: MM_SCALE_SILVER, type: MAJOR, add: [MM_SCALE, 2], flags: 0x80, draw: [SCALE, 2], object: [oot, 0x00db], name: "the <C1>Silver Scale" }
+- { id: MM_SCALE_GOLDEN, type: MAJOR, add: [MM_SCALE, 3], flags: 0x80, draw: [SCALE, 3], object: [oot, 0x00db], name: "the <C1>Golden Scale" }
 - { id: MM_GORON_BRACELET, type: MAJOR, add: [MM_STRENGTH, 1], flags: 0x80, draw: OOT_GORON_BRACELET, object: [oot, 0x0147], name: "the <C1>Goron's Bracelet" }
 - { id: MM_SILVER_GAUNTLETS, type: MAJOR, add: [MM_STRENGTH, 2], flags: 0x80, draw: OOT_GAUNTLETS_SILVER, object: [oot, 0x012d], name: "the <C1>Silver Gauntlets" }
 - { id: MM_GOLDEN_GAUNTLETS, type: MAJOR, add: [MM_STRENGTH, 3], flags: 0x80, draw: OOT_GAUNTLETS_GOLD, object: [oot, 0x012d], name: "the <C1>Golden Gauntlets" }
