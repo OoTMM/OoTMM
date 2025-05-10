@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+
+- Fixed rare ice-trap related softlocks in MM.
+
 ## [28.0] - 2025-05-09
 
 ### Jokes
