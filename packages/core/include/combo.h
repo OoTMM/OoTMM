@@ -183,10 +183,6 @@ extern PlayState* gPlay;
 void Ocarina_HandleWarp(Player* player, PlayState* ctxt);
 #endif
 
-#if defined(GAME_MM)
-extern int gNoTimeFlow;
-#endif
-
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 

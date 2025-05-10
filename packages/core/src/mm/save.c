@@ -26,9 +26,6 @@ void Sram_AfterOpenSave(void)
 
 void Sram_SaveEndOfCycle(PlayState* play)
 {
-    /* Re-enable time */
-    gNoTimeFlow = 0;
-
     /* Disable sirloin */
     gSharedCustomSave.storedSirloin = 0;
 

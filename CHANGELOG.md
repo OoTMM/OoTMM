@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fixed a time bug related to voiding in Twinmold coming from OoT.
 - Fixed the ruto/big octo cutscene looking weird as adult.
 - Fixed rare ice-trap related softlocks in MM.
 
