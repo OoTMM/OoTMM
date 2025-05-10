@@ -1,6 +1,6 @@
 #include <combo.h>
 
-/* Hook OnRoomChange */
+/* Hook ParseSceneRoomHeaders_ActorsList */
 PATCH_START 0x800f8f74
-.int OnRoomChange
+.int ParseSceneRoomHeaders_ActorsList
 PATCH_END

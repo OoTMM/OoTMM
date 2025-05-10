@@ -402,7 +402,7 @@ MM_HONEY_AND_DARLING_GAME:                      { game: mm, id: 0x0800, type: in
 MM_MAYORS_OFFICE:                               { game: mm, id: 0x0000, type: indoors, areas: ["MM Clock Town East Main", "MM Mayor's Office"], reverse: MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE, debug: [INTERIOR, 'Mayors Office'] }
 MM_TOWN_ARCHERY:                                { game: mm, id: 0x3a00, type: indoors, areas: ["MM Clock Town East Main", "MM Town Archery"], reverse: MM_CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY }
 MM_MILK_BAR:                                    { game: mm, id: 0x2400, type: indoors, areas: ["MM Clock Town East Main", "MM Milk Bar"], reverse: MM_CLOCK_TOWN_EAST_FROM_MILK_BAR, debug: [INTERIOR, 'Milk Bar'] }
-MM_FAIRY_FOUNTAIN_TOWN:                         { game: mm, id: 0x4600, type: indoors, areas: ["MM Clock Town North", "MM Clock Town Fairy Fountain"], reverse: MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN }
+MM_FAIRY_FOUNTAIN_TOWN:                         { game: mm, id: 0x4600, type: indoors, areas: ["MM Clock Town North", "MM Clock Town Fairy Fountain"], reverse: MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN, debug: [MM_GROTTO, 'Fairy Fountain Town'] }
 MM_SWORDSMAN_SCHOOL:                            { game: mm, id: 0xa200, type: indoors, areas: ["MM Clock Town West", "MM Swordsman School"], reverse: MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL }
 MM_CURIOSITY_SHOP:                              { game: mm, id: 0x0e00, type: indoors, areas: ["MM Clock Town West", "MM Curiosity Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP }
 MM_TRADING_POST:                                { game: mm, id: 0x6200, type: indoors, areas: ["MM Clock Town West", "MM Trading Post"], reverse: MM_CLOCK_TOWN_WEST_FROM_TRADING_POST }
@@ -414,7 +414,7 @@ MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: in
 MM_DEKU_SHRINE:                                 { game: mm, id: 0x9e00, type: indoors, areas: ["MM Near Deku Shrine", "MM Deku Shrine"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE }
 MM_GORON_SHOP:                                  { game: mm, id: 0x7400, type: indoors, areas: ["MM Goron Shrine", "MM Goron Shop"], reverse: MM_GORON_SHRINE_FROM_SHOP }
 MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: indoors, areas: ["MM Great Bay Coast", "MM Fisher's Hut"], reverse: MM_GREAT_BAY_COAST_FROM_FISHER_HUT }
-MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY, debug: [INTERIOR, 'Great Bay Laboratory'] }
+MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast Platform", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY, debug: [INTERIOR, 'Great Bay Laboratory'] }
 MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS, debug: [INTERIOR, "Evan"] }
 MM_ROOM_JAPAS:                                  { game: mm, id: 0x9210, type: indoors, areas: ["MM Zora Hall", "MM Japas' Room"], reverse: MM_ZORA_HALL_FROM_JAPAS }
 MM_ROOM_TIJO:                                   { game: mm, id: 0x9200, type: indoors, areas: ["MM Zora Hall", "MM Tijo's Room"], reverse: MM_ZORA_HALL_FROM_TIJO }
@@ -422,11 +422,11 @@ MM_ROOM_LULU:                                   { game: mm, id: 0x9220, type: in
 MM_ZORA_SHOP:                                   { game: mm, id: 0x9250, type: indoors, areas: ["MM Zora Hall", "MM Zora Shop"], reverse: MM_ZORA_HALL_FROM_SHOP }
 MM_GHOST_HUT:                                   { game: mm, id: 0x9c00, type: indoors, areas: ["MM Ikana Canyon", "MM Ghost Hut"], reverse: MM_IKANA_CANYON_FROM_GHOST_HUT }
 MM_MUSIC_BOX_HOUSE:                             { game: mm, id: 0xa400, type: indoors, areas: ["MM Ikana Canyon", "MM Music Box House"], reverse: MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE, debug: [INTERIOR, "Music House"] }
-MM_FAIRY_FOUNTAIN_IKANA:                        { game: mm, id: 0x4640, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Fairy Fountain"], reverse: MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN }
+MM_FAIRY_FOUNTAIN_IKANA:                        { game: mm, id: 0x4640, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Fairy Fountain"], reverse: MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN, debug: [MM_GROTTO, 'Fairy Fountain Ikana'] }
 MM_IKANA_CAVERN:                                { game: mm, id: 0x20e0, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Spring Water Cave"], reverse: MM_IKANA_CANYON_FROM_CAVERN }
-MM_FAIRY_FOUNTAIN_GREAT_BAY:                    { game: mm, id: 0x4630, type: indoors, areas: ["MM Great Bay Near Fairy Fountain", "MM Great Bay Fairy Fountain"], reverse: MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN }
-MM_FAIRY_FOUNTAIN_SNOWHEAD:                     { game: mm, id: 0x4620, type: indoors, areas: ["MM Snowhead Near Fairy Fountain", "MM Snowhead Fairy Fountain"], reverse: MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN }
-MM_FAIRY_FOUNTAIN_WOODFALL:                     { game: mm, id: 0x4610, type: indoors, areas: ["MM Woodfall Near Fairy Fountain", "MM Woodfall Fairy Fountain"], reverse: MM_WOODFALL_FROM_FAIRY_FOUNTAIN }
+MM_FAIRY_FOUNTAIN_GREAT_BAY:                    { game: mm, id: 0x4630, type: indoors, areas: ["MM Great Bay Near Fairy Fountain", "MM Great Bay Fairy Fountain"], reverse: MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN, debug: [MM_GROTTO, 'Fairy Fountain Great Bay'] }
+MM_FAIRY_FOUNTAIN_SNOWHEAD:                     { game: mm, id: 0x4620, type: indoors, areas: ["MM Snowhead Near Fairy Fountain", "MM Snowhead Fairy Fountain"], reverse: MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN, debug: [MM_GROTTO, 'Fairy Fountain Snowhead'] }
+MM_FAIRY_FOUNTAIN_WOODFALL:                     { game: mm, id: 0x4610, type: indoors, areas: ["MM Woodfall Near Fairy Fountain", "MM Woodfall Fairy Fountain"], reverse: MM_WOODFALL_FROM_FAIRY_FOUNTAIN, debug: [MM_GROTTO, 'Fairy Fountain Woodfall'] }
 MM_GORON_GRAVEYARD:                             { game: mm, id: 0x9600, type: indoors, areas: ["MM Mountain Village Cliff", "MM Goron Graveyard"], reverse: MM_MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD }
 MM_BLACKSMITH:                                  { game: mm, id: 0x5200, type: indoors, areas: ["MM Mountain Village", "MM Blacksmith"], reverse: MM_MOUNTAIN_VILLAGE_FROM_BLACKSMITH }
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
@@ -462,7 +462,7 @@ MM_SWAMP_FROM_POTION_SHOP:                      { game: mm, id: 0x8450, type: in
 MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE:            { game: mm, id: 0x5040, type: indoors-exit, maps: [NONE, MM_DEKU_PALACE], areas: ["MM Deku Shrine", "MM Near Deku Shrine"], reverse: MM_DEKU_SHRINE }
 MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, maps: [NONE, MM_GORON_SHRINE], areas: ["MM Goron Shop", "MM Goron Shrine From Shop"], reverse: MM_GORON_SHOP }
 MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
-MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
+MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Laboratory", "MM Great Bay Coast Platform"], reverse: MM_LABORATORY }
 MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, maps: [NONE, MM_ZORA_HALL], areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }
 MM_ZORA_HALL_FROM_JAPAS:                        { game: mm, id: 0x6050, type: indoors-exit, maps: [NONE, MM_ZORA_HALL], areas: ["MM Japas' Room", "MM Zora Hall"], reverse: MM_ROOM_JAPAS }
 MM_ZORA_HALL_FROM_TIJO:                         { game: mm, id: 0x6060, type: indoors-exit, maps: [NONE, MM_ZORA_HALL], areas: ["MM Tijo's Room", "MM Zora Hall"], reverse: MM_ROOM_TIJO }

@@ -68,27 +68,10 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
-static void BgIcicle_Alias(Actor_BgIcicle* this)
-{
-}
-
 static void BgIcicle_InitXflag(Actor_BgIcicle* this, PlayState* play)
 {
-    ComboItemOverride   o;
-    Xflag*              xflag;
-
-    /* Set the extended properties */
-    xflag = &this->xflag;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->dyna.actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->dyna.actor.actorIndex;
-
-    BgIcicle_Alias(this);
-
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    comboXflagInit(&this->xflag, &this->dyna.actor, play);
+    this->isExtended = Xflag_IsShuffled(&this->xflag);
 }
 
 static int BgIcicle_IsShuffled(Actor_BgIcicle* this)

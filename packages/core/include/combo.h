@@ -43,7 +43,6 @@
 # include <combo/interface.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
-# include <combo/common/actors/Obj_Mure3.h>
 # include <combo/common/actors/En_Tubo_Trap.h>
 
 # if defined(GAME_OOT)
@@ -182,10 +181,6 @@ extern PlayState* gPlay;
 
 #if defined(GAME_MM)
 void Ocarina_HandleWarp(Player* player, PlayState* ctxt);
-#endif
-
-#if defined(GAME_MM)
-extern int gNoTimeFlow;
 #endif
 
 /* Ocarina */

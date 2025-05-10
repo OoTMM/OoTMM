@@ -85,7 +85,6 @@ void Object_LoadAllCustom(ObjectContext* objectCtx)
     for (i = 0; i < objectCtx->num; i++)
     {
         id = objectCtx->slots[i].id;
-
         comboLoadObject(objectCtx->slots[i].segment, id);
     }
 
@@ -99,6 +98,10 @@ void* Object_AllocateSlotCustom(ObjectContext* objectCtx, s32 slot, s16 id)
     u32 addr;
     u32 vromSize;
     const ObjectData* fileTableEntry;
+
+    /* Patch for adult link */
+    if (comboIsLinkAdult() && id == OBJECT_LINK_CHILD)
+        id = CUSTOM_OBJECT_ID_MM_ADULT_LINK;
 
     objectCtx->slots[slot].id = -id;
     objectCtx->slots[slot].dmaRequest.vromAddr = 0;

@@ -1660,6 +1660,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'bronzeScale',
+  name: 'Bronze Scale',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add an extra scale item, that is required to enter deep water.',
+  default: false,
+  cond: (s: any) => (hasOoT(s) || s.scalesMm) && false, /* TODO: Enable once logic is ready */
+}, {
   key: 'childWallets',
   name: 'Child Wallets',
   category: 'items.extensions',
@@ -2904,9 +2912,10 @@ export const SETTINGS = [{
   type: 'set',
   description: 'Choose which parts of Majora\'s Mask use their Japanese version, when different.',
   values: [
-    { value: 'DekuPalace',  name: 'Deku Palace' },
-    { value: 'StoneTower',  name: 'Stone Tower' },
-    { value: 'ST',          name: 'Stone Tower Temple' },
+    { value: 'DekuPalace',    name: 'Deku Palace' },
+    { value: 'StoneTower',    name: 'Stone Tower' },
+    { value: 'ST',            name: 'Stone Tower Temple' },
+    { value: 'GreatBayCoast', name: 'Great Bay Coast' },
   ],
   default: 'none',
   cond: hasMM,

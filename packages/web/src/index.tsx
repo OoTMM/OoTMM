@@ -4,17 +4,19 @@ import { LocationProvider, Router, Route } from 'preact-iso';
 import { Header } from './components/Header';
 import { Home } from './pages/Home';
 import { Generator } from './pages/Generator';
+import { GeneratorVersions } from './pages/GeneratorVersions';
 import { NotFound } from './pages/NotFound';
 import Faq from './pages/Faq.mdx';
 import Multiplayer from './pages/Multiplayer.mdx';
 
-import './styles/index.css';
+import './index.css';
 
 export function App() {
 	return (
 		<LocationProvider>
 			<Header />
       <Router>
+        <Route path="/gen/old" component={GeneratorVersions} />
         <Route path="/gen/:id" component={Generator} />
         <main path="/"><Home/></main>
         <main path="*">

@@ -1,8 +1,7 @@
 import { isEqual } from 'lodash';
 import { deflateRaw, inflate, inflateRaw } from 'pako';
 import { PartialDeep } from 'type-fest';
-import { encode as encode85, decode as decode85 } from '@alttiri/base85';
-import { base64ToUint8Array } from 'uint8array-extras';
+import { uint8ArrayToBase64, base64ToUint8Array } from 'uint8array-extras';
 
 import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
 
@@ -41,8 +40,8 @@ export function exportSettings(settings: Settings): string {
 
   const j = JSON.stringify(diff);
   const compressed = deflateRaw(j, { level: 9 });
-  const str = encode85(compressed, 'z85');
-  return `v2.z${str}`;
+  const str = uint8ArrayToBase64(compressed, { urlSafe: true });
+  return `v2.${str}`;
 }
 
 export function importSettingsRaw(str: string): PartialDeep<Settings> {
@@ -64,14 +63,8 @@ export function importSettings(str: string): Settings {
 }
 
 function importSettingsV2(str: string): any {
-  let data = str.slice(3);
-  let charset = "ascii85";
-  if (data[0] == 'z') {
-    data = data.slice(1);
-    charset = "z85";
-  }
-
-  const buf = decode85(data, charset);
+  const data = str.slice(3);
+  const buf = base64ToUint8Array(data);
   const decompressed = inflateRaw(buf, { to: 'string' });
   const partial = JSON.parse(decompressed);
   return partial;

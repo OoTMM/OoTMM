@@ -1069,15 +1069,27 @@ static int addItemStrengthMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemScaleOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param > gOotSave.info.inventory.upgrades.dive)
-        gOotSave.info.inventory.upgrades.dive = param;
+    if (param == 1)
+        gSharedCustomSave.bronzeScaleOot = 1;
+    else
+    {
+        param--;
+        if (param > gOotSave.info.inventory.upgrades.dive)
+            gOotSave.info.inventory.upgrades.dive = param;
+    }
     return 0;
 }
 
 static int addItemScaleMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param > gMmSave.info.inventory.upgrades.scale)
-        gMmSave.info.inventory.upgrades.scale = param;
+    if (param == 1)
+        gSharedCustomSave.bronzeScaleMm = 1;
+    else
+    {
+        param--;
+        if (param > gMmSave.info.inventory.upgrades.scale)
+            gMmSave.info.inventory.upgrades.scale = param;
+    }
     return 0;
 }
 
@@ -2074,6 +2086,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_TUNIC_ZORA, GI_OOT_TUNIC_ZORA, GI_MM_TUNIC_ZORA },
     { CFG_SHARED_MASK_BLAST, GI_OOT_MASK_BLAST, GI_MM_MASK_BLAST },
     { CFG_SHARED_MASK_STONE, GI_OOT_MASK_STONE, GI_MM_MASK_STONE },
+    { CFG_SHARED_SCALES, GI_OOT_SCALE_BRONZE, GI_MM_SCALE_BRONZE },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_SILVER, GI_MM_SCALE_SILVER },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_GOLDEN, GI_MM_SCALE_GOLDEN },
     { CFG_SHARED_STRENGTH, GI_OOT_GORON_BRACELET, GI_MM_GORON_BRACELET },

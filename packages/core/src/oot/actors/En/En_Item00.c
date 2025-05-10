@@ -8,7 +8,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
 {
     memset(q, 0, sizeof(*q));
 
-    switch (this->base.params)
+    switch (this->actor.params)
     {
     case 0x06:
         q->ovType = OV_COLLECTIBLE;
@@ -48,12 +48,12 @@ void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, PlayState* play, s16 gi
 
     if (itemId >= 0)
     {
-        this->base.parent = &link->actor;
+        this->actor.parent = &link->actor;
         AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         return;
     }
 
-     comboGiveItem(&this->base, play, &q, 50.f, 10.f);
+     comboGiveItem(&this->actor, play, &q, 50.f, 10.f);
 }
 
 PATCH_CALL(0x80012e4c, EnItem00_GiveItemDefaultRange);
@@ -64,7 +64,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
     ComboItemOverride o;
     float scale;
 
-    switch (this->base.params)
+    switch (this->actor.params)
     {
     case 0x06:
         scale = 17.5f;
@@ -79,7 +79,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
     EnItem00_ItemQuery(&q, this, play, -1);
     comboItemOverride(&o, &q);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->base, o.gi, o.cloakGi, 0);
+    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
@@ -198,13 +198,6 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
         {
             xflag->setupId = 0;
             xflag->id = 4;
-        }
-        break;
-    case SCE_OOT_KOKIRI_FOREST:
-        if (xflag->setupId == 3)
-        {
-            xflag->setupId = 2;
-            xflag->id += 2;
         }
         break;
     }

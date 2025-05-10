@@ -2,7 +2,7 @@
 #include <combo/global.h>
 #include <combo/actor.h>
 
-u8 gActorNum;
+u8 gCurrentSpawnActorNum = 0xff;
 
 typedef struct
 {
@@ -43,49 +43,24 @@ void updateSceneSetup(PlayState* play)
     g.sceneSetupId = 0;
 }
 
-static void SpawnRoomActors_Wrapper(PlayState* play, int id)
+void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
 {
-    /* Spawn the normal room actors */
-    SpawnRoomActors(play, id);
-}
-
-PATCH_CALL(0x8012eb18, SpawnRoomActors_Wrapper);
-PATCH_CALL(0x8012ec30, SpawnRoomActors_Wrapper);
-
-void OnRoomChange(PlayState* play, void* arg2)
-{
-    void (*OnRoomChangeOriginal)(PlayState*, void*);
-
     /* Clear some flags */
     g.silverRupee = 0;
     g.roomEnemyLackSoul = 0;
-    g.actorIndex = 0;
-    g.xflagOverride = 0;
+    g.xflagOverride = FALSE;
 
     /* Update the scene setup */
     updateSceneSetup(play);
 
-    OnRoomChangeOriginal = (void*)0x8012f90c;
-    OnRoomChangeOriginal(play, arg2);
+    /* Forward */
+    _ParseSceneRoomHeaders_ActorsList(play, cmd);
 }
 
 static void ZeroActor(Actor* this, int size)
 {
     memset(this, 0, size);
-    this->actorIndex = g.actorIndex;
+    this->actorIndex = gCurrentSpawnActorNum;
 }
 
 PATCH_CALL(0x800baf54, ZeroActor);
-
-Actor* SpawnRoomActorEx(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
-{
-    Actor* a;
-
-    g.actorIndex = gActorNum;
-    a = Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
-    if (a != NULL && actorId == ACTOR_EN_ITEM00)
-        EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, g.actorIndex, 0);
-    return a;
-}
-
-PATCH_CALL(0x800bb47c, SpawnRoomActorEx);

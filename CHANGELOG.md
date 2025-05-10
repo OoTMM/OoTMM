@@ -4,12 +4,29 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- In Indoor ER, the deku shrine warp now maps to the shrine exit.
+- The spiritual stones won't display on the altar as adult if ToT door is closed.
+
+### Fixed
+
+- Fixed a time bug related to voiding in Twinmold coming from OoT.
+- Fixed the ruto/big octo cutscene looking weird as adult.
+- Fixed rare ice-trap related softlocks in MM.
+
+## [28.0] - 2025-05-09
+
 ### Jokes
 
 - (**April Fools**) Add a Misc. soul for Trees.
 
 ### Added
 
+- Skip the cutscene of burning spider webs in MM.
+- Skip the cutscene of melting ice blocks in MM.
+- Skip the cutscene of breaking keg boulders.
+- Add the Japanese version of Great Bay Coast.
 - Comfort option to reduce the shine time needed on Sun Block for them to go away.
 - Cutscene skip for Sun Blocks going away.
 - Add Ice Traps.
@@ -24,6 +41,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+
+- Layout of the settings in the Shared and Extensions tabs.
 - Layout of the settings in the Misc. tab.
 - Progressive shields will now remove as many regular shields from the pool as possible.
 - Progressive shields are now re-obtained on every scene transition, thus making them permanent logically.
@@ -44,6 +63,12 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix being able to stay as Fierce Deity when returning to dungeon entrance from the boss lairs without Fierce Deity anywhere turned on.
+- Fix Milk bar performance not requiring Gorman Soul.
+- Fix adult link being invisible in the Milk Bar performance.
+- Fix a bug where Kotake would check for an empty bottle in subsequent cycles even when giving "nothing", causing logic issues.
+- Fix a vanilla bug where the Ikana Fairy Fountain has the wrong color.
+- Fix a bug where a fairy could turn into a shuffled snowball check in specific circumstances.
 - Fix Stone of Agony not rumbling controllers that support it.
 - Fix the twinmold blue warp item being gigantic when giant mask is equipped.
 - Fix a vanilla bug where the frozen link effect would sometimes get distorded.
@@ -1511,7 +1536,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v27.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v28.0...HEAD
+[28.0]: https://github.com/OoTMM/OoTMM/compare/v27.0...v28.0
 [27.0]: https://github.com/OoTMM/OoTMM/compare/v26.1...v27.0
 [26.1]: https://github.com/OoTMM/OoTMM/compare/v26.0...v26.1
 [26.0]: https://github.com/OoTMM/OoTMM/compare/v25.0...v26.0

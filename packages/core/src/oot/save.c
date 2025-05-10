@@ -277,6 +277,13 @@ void comboCreateSave(void* unk, void* buffer)
     if (Config_Flag(CFG_MM_DEKU_SHIELD))
         gSharedCustomSave.mmShieldIsDeku = 1;
 
+    /* Apply bronze scale flag */
+    if (!Config_Flag(CFG_BRONZE_SCALE))
+    {
+        gSharedCustomSave.bronzeScaleOot = 1;
+        gSharedCustomSave.bronzeScaleMm = 1;
+    }
+
     /* Apply ocarina buttons */
     if (!Config_Flag(CFG_OOT_OCARINA_BUTTONS))
         gSharedCustomSave.ocarinaButtonMaskOot = 0xffff;

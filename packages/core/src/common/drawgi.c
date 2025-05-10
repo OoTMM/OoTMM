@@ -1557,3 +1557,51 @@ void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
     gSPDisplayList(POLY_XLU_DISP++, gEffIceFragment3DL);
     CLOSE_DISPS();
 }
+
+struct CustomScaleColorDlists
+{
+    const void* l1;
+    const void* l2;
+};
+
+static const Gfx kBronzeScaleList1[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x60, 255, 255, 255, 255),
+    gsDPSetEnvColor(255, 145, 0, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kBronzeScaleList2[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x80, 255, 200, 100, 255),
+    gsDPSetEnvColor(150, 100, 50, 255),
+    gsSPEndDisplayList(),
+};
+
+
+void DrawGi_CustomScale(PlayState* play, s16 index, u8 param)
+{
+    static const struct CustomScaleColorDlists kColors[] = {
+        { kBronzeScaleList1, kBronzeScaleList2 },
+        { (void*)0x06000a20, (void*)0x06000a60 },
+        { (void*)0x06000a40, (void*)0x06000a80 },
+    };
+
+    s32 fc;
+    const DrawGi* drawGi;
+    const struct CustomScaleColorDlists* l;
+
+    fc = play->state.frameCount;
+    drawGi = &kDrawGi[index];
+    l = &kColors[param - 1];
+
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+    gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->state.gfxCtx, 0, fc * 2, fc * -2, 0x40, 0x40, 1, fc * 4, fc * -4, 0x20, 0x20));
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, l->l2);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, l->l1);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
+    CLOSE_DISPS();
+}
