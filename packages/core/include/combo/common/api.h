@@ -371,6 +371,8 @@ extern int gHorseIsMounted;
 s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 #endif
 
+void Scene_SetExitFade(PlayState* play);
+
 void DrawHUD(PlayState* play);
 
 int IsSceneValidEpona(int sceneId);

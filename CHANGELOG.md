@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- In Indoor ER, the deku shrine warp now maps to the shrine exit.
 - The spiritual stones won't display on the altar as adult if ToT door is closed.
 
 ### Fixed
