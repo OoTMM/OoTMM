@@ -775,3 +775,5 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
 void _ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
 
 void Actor_SpawnEntry(ActorContext* actorCtx, ActorEntry* entry, PlayState* play);
+
+s32 Math3D_TriChkPointParaYSlopedY(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 z, f32 x);

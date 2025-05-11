@@ -45,10 +45,12 @@ ASSERT_SIZE(BgCamInfo, 0x8);
 
 typedef struct WaterBox
 {
-    Vec3s   minPos;
-    s16     xLength;
-    s16     zLength;
-    u32     properties;
+    s16 xMin;
+    s16 ySurface;
+    s16 zMin;
+    s16 xLength;
+    s16 zLength;
+    u32 properties;
 }
 WaterBox;
 
