@@ -314,6 +314,7 @@ gMaxRupees = 0x801c1e2c;
 
 Inventory_SetWorldMapCloudVisibility = 0x8012ef0c;
 
+Scene_SetExitFade = 0x801306a4;
 ActorCutscene_StartAndSetFlag = 0x800f1ce0;
 
 gWalletDigits = 0x801bfd24;

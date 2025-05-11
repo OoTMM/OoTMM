@@ -208,13 +208,13 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SWORD_GORON: "OOT_SWORD_KNIFE",
   OOT_OCARINA: "OOT_OCARINA_FAIRY",
   OOT_STRENGTH: "OOT_GORON_BRACELET",
-  OOT_SCALE: "OOT_SCALE_SILVER",
+  OOT_SCALE: "OOT_SCALE_BRONZE",
   OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
   //OOT_TRAP_ICE: "OOT_RUPEE_BLUE",
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_DEKU",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
-  MM_SCALE: "MM_SCALE_SILVER",
+  MM_SCALE: "MM_SCALE_BRONZE",
   MM_STRENGTH: "MM_GORON_BRACELET",
   MM_CLOCK: "MM_CLOCK1",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
@@ -483,7 +483,7 @@ function makeCloakGi(key: number, seed: string, settings: Settings, logic: Logic
 
     if (!ItemHelpers.isItemMajor(item.item) && !ItemHelpers.isSilverRupee(item.item) && !ItemHelpers.isKey(item.item) && !ItemHelpers.isBossKey(item.item)) continue;
     if (ItemGroups.JUNK.has(item.item)) continue;
-    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, loc, { songs: true, noPlando: true })) continue;
+    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, logic.plandoLocations, loc, { songs: true, noPlando: true })) continue;
 
     return gi(settings, 'oot', item.item, false);
   }
@@ -1014,6 +1014,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_TIME_TRAVEL_REQUIRES_MS: settings.timeTravelSword,
     OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
     MM_DEKU_SHIELD: settings.dekuShieldMm,
+    BRONZE_SCALE: settings.bronzeScale,
     ONLY_OOT: settings.games === 'oot',
     ONLY_MM: settings.games === 'mm',
     OOT_PLANTED_BEANS: settings.ootPreplantedBeans,

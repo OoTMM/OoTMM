@@ -371,6 +371,8 @@ extern int gHorseIsMounted;
 s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 #endif
 
+void Scene_SetExitFade(PlayState* play);
+
 void DrawHUD(PlayState* play);
 
 int IsSceneValidEpona(int sceneId);
@@ -773,3 +775,5 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
 void _ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
 
 void Actor_SpawnEntry(ActorContext* actorCtx, ActorEntry* entry, PlayState* play);
+
+s32 Math3D_TriChkPointParaYSlopedY(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 z, f32 x);

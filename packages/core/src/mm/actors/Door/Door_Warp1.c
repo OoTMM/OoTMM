@@ -195,3 +195,18 @@ static void DoorWarp1_TriggerBossWarpPad(Actor* this, PlayState* play)
 }
 
 PATCH_FUNC(0x808b9524, DoorWarp1_TriggerBossWarpPad);
+
+static void DoorWarp1_SetExitFadeHook(PlayState* play)
+{
+    Scene_SetExitFade(play);
+
+    /* In ER, this warp just exits */
+    if (Config_Flag(CFG_ER_INDOORS) && play->sceneId == SCE_MM_DEKU_SHRINE)
+    {
+        play->nextEntrance = ENTR_MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE;
+        gSaveContext.respawnFlag = 0;
+        gIsEntranceOverride = 1;
+    }
+}
+
+PATCH_FUNC(0x808ba518, DoorWarp1_SetExitFadeHook);

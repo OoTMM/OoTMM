@@ -778,10 +778,16 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_TUNIC_ZORA);
     }
 
+    if (settings.bronzeScale) {
+      this.addItem(Items.OOT_SCALE, 1);
+    }
     if (settings.sharedScales) {
       this.replaceItem(Items.OOT_SCALE, Items.SHARED_SCALE);
     } else if (settings.scalesMm) {
       this.addItem(Items.MM_SCALE, 2);
+      if (settings.bronzeScale) {
+        this.addItem(Items.MM_SCALE, 1);
+      }
     }
 
     if (settings.sharedStrength) {
@@ -1692,9 +1698,30 @@ export class LogicPassWorldTransform {
       countMapAdd(allItems, pi);
     }
 
+    /* Handle plando */
+    const plandoAllowedItems = new Set<PlayerItem>(this.pool.keys());
+    const plandoLocations: Map<Location, PlayerItem> = new Map();
+    for (const [k, v] of Object.entries(settings.plando.locations)) {
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        if (v === null) {
+          continue;
+        }
+        const loc = makeLocation(k, i);
+        if (this.fixedLocations.has(loc)) {
+          continue;
+        }
+        const pi = makePlayerItem(itemByID(v), i);
+        if (!plandoAllowedItems.has(pi)) {
+          continue;
+        }
+        this.removePlayerItem(pi, 1);
+        plandoLocations.set(loc, pi);
+      }
+    }
+
     /* Optimize the world */
     const worlds = this.state.worlds.map((world, i) => optimizeWorldStartingAndPool(world, i, this.state.startingItems, allItems));
 
-    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations, worlds };
+    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations, worlds, plandoLocations };
   }
 }

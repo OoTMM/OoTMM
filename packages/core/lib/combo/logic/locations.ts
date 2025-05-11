@@ -1,4 +1,4 @@
-import { ItemHelpers } from '../items';
+import { ItemHelpers, PlayerItem } from '../items';
 import { isDungeonStrayFairy } from '../items/helpers';
 import { Settings } from '../settings';
 import { ItemPlacement } from './solve';
@@ -156,16 +156,15 @@ export function isLocationInDungeon(scene: string) {
   return DUNGEON_SCENES.includes(scene);
 }
 
-export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<Location>, items: ItemPlacement,  loc: Location, opts: IsLocationFullyShuffledOptions): boolean {
+export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<Location>, items: ItemPlacement, plandoLocations: Map<Location, PlayerItem>, loc: Location, opts: IsLocationFullyShuffledOptions): boolean {
   if (fixedLocations.has(loc)) {
     return false;
   }
 
-  const locD = locationData(loc);
   const item = items.get(loc)!;
 
   /* Plando */
-  if (opts.noPlando && settings.plando.locations[locD.id]) {
+  if (opts.noPlando && plandoLocations.has(loc)) {
     return false;
   }
 

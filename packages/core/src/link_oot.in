@@ -105,6 +105,8 @@ DrawGi_Scale            = 0x80058b34;
 DrawGi_SoldOut          = 0x8005719c;
 DrawGi_Spell            = 0x80058698;
 
+Play_SetRespawnData     = 0x8009d8dc;
+
 Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;
@@ -141,6 +143,7 @@ DynaPoly_SetBgActor = 0x800313a4;
 DynaPoly_DisableCollision = 0x800314d8;
 DynaPolyActor_Init = 0x80035260;
 
+Math3D_TriChkPointParaYSlopedY = 0x800a6d8c;
 CollisionHeader_GetVirtual = 0x80033ef4;
 IsSceneValidEpona = 0x8005a3c0;
 Actor_Spawn = 0x80025110;

@@ -52,6 +52,7 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     ArrowCycle_Handle(this, play);
     Player_HandleBurningDekuShield(this, play);
     Player_Update(this, play);
+    Player_HandleBronzeScale(this, play);
     Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
 }
@@ -429,7 +430,6 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
             play->transitionTrigger = TRANS_TRIGGER_START;
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
-            gNoTimeFlow = 0;
 
             /* Restore Game Over / Soar to Entrance respawn data. */
             memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[gOotSave.age], sizeof(RespawnData));

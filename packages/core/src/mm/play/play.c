@@ -54,7 +54,6 @@ void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem)
 }
 
 PlayState* gPlay;
-int gNoTimeFlow;
 
 static u32 entranceForOverride(u32 entrance)
 {
@@ -475,10 +474,19 @@ static void Play_AfterInit(PlayState* play)
         }
     }
 
-    if (gNoTimeFlow)
+    /* In ER, MM bosses in OoT dungeons don't require song of time */
+    if (gSave.entrance == g.initialEntrance)
     {
-        play->envCtx.sceneTimeSpeed = 0;
-        R_TIME_SPEED = 0;
+        switch (gSave.entrance)
+        {
+        case ENTR_MM_BOSS_TEMPLE_WOODFALL:
+        case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
+        case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
+        case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
+            play->envCtx.sceneTimeSpeed = 0;
+            R_TIME_SPEED = 0;
+            break;
+        }
     }
 
     switch (play->sceneId)
@@ -528,6 +536,8 @@ static void Play_AfterInit(PlayState* play)
     }
 }
 
+u32 gGameEntrance;
+
 void hookPlay_Init(PlayState* play)
 {
     u32 entrance;
@@ -539,6 +549,8 @@ void hookPlay_Init(PlayState* play)
     g.prevRoom = -1;
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
+    g.bronzeScaleSolidGround = 0;
+    g.bronzeScaleTimer = 0;
     isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
@@ -706,7 +718,6 @@ void hookPlay_Init(PlayState* play)
     if ((gSave.entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entrance == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
-        gNoTimeFlow = 0;
         entrance = g.initialEntrance;
         applyCustomEntrance(&entrance);
         gSave.entrance = entrance;
@@ -911,6 +922,8 @@ void CutsceneTransitionHook(PlayState* play)
     }
 }
 
+
+
 void Play_FastInit(GameState* gs)
 {
     u32 entrance;
@@ -976,17 +989,6 @@ void Play_FastInit(GameState* gs)
 
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();
-
-    /* Handle shuffled entrance */
-    switch (gSave.entrance)
-    {
-    case ENTR_MM_BOSS_TEMPLE_WOODFALL:
-    case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
-    case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
-    case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
-        gNoTimeFlow = 1;
-        break;
-    }
 
     /* Finished */
     gComboCtx.valid = 0;
