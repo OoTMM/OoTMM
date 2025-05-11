@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [28.1] - 2025-05-11
 
 ### Changed
 
@@ -1538,7 +1538,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v28.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v28.1...HEAD
+[28.1]: https://github.com/OoTMM/OoTMM/compare/v28.0...v28.1
 [28.0]: https://github.com/OoTMM/OoTMM/compare/v27.0...v28.0
 [27.0]: https://github.com/OoTMM/OoTMM/compare/v26.1...v27.0
 [26.1]: https://github.com/OoTMM/OoTMM/compare/v26.0...v26.1
