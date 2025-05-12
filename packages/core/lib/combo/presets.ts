@@ -51,6 +51,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   spellLoveMm: true,
   hammerMm: true,
   spinUpgradeOot: true,
+  sharedNutsSticks: true,
   sharedBows: true,
   sharedBombBags: true,
   sharedMagic: true,
