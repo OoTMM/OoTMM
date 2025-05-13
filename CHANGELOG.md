@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+
+- Fix a logic issue where players could be rarely expected to do illogical MM checks in heavy ER.
+
 ## [28.1] - 2025-05-11
 
 ### Changed
