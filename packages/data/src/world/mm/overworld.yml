@@ -2649,7 +2649,7 @@
 "Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "can_reset_time && underwater_walking"
+    "Great Bay Coast": "underwater_walking"
     "Pirate Fortress": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
