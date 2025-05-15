@@ -884,12 +884,17 @@ const PRESET_BEGINNER = makeSettings({
 
 const PRESET_CROSSKEYS = makeSettings({
   goal: 'any',
+  preCompletedDungeons: true,
+  preCompletedDungeonsMajor: 3,
+  hintPathEndBoss: true,
+  hintPathEvents: true,
   noPlandoHints: false,
   extraHintRegions: true,
   hintImportance: true,
+  cloakIceTraps: false,
   songs: 'anywhere',
   tingleShuffle: 'starting',
-  mapCompassShuffle: 'starting',
+  mapCompassShuffle: 'anywhere',
   smallKeyShuffleOot: 'anywhere',
   smallKeyShuffleMm: 'anywhere',
   smallKeyShuffleHideout: 'anywhere',
@@ -907,7 +912,7 @@ const PRESET_CROSSKEYS = makeSettings({
     values: ["dekuTreeAdult", "wellAdult", "fireChild"]
   },
   kakarikoGate: 'open',
-  openZdShortcut: true,
+  openZdShortcut: false,
   zoraKing: 'open',
   gerudoFortress: 'single',
   skipZelda: true,
@@ -920,7 +925,7 @@ const PRESET_CROSSKEYS = makeSettings({
   crossAge: true,
   crossWarpOot: true,
   crossWarpMm: 'full',
-  crossGameFw: true,
+  crossGameFw: false,
   restoreBrokenActors: true,
   fillWallets: true,
   progressiveGoronLullaby: 'single',
@@ -929,8 +934,8 @@ const PRESET_CROSSKEYS = makeSettings({
   blueFireArrows: true,
   sunlightArrows: true,
   shortHookshotMm: true,
-  bombchuBehaviorOot: 'bagSeparate',
-  bombchuBehaviorMm: 'bagSeparate',
+  bombchuBehaviorOot: 'bagFirst',
+  bombchuBehaviorMm: 'bagFirst',
   spellFireMm: true,
   spellWindMm: true,
   spellLoveMm: true,
@@ -940,6 +945,7 @@ const PRESET_CROSSKEYS = makeSettings({
   tunicZoraMm: true,
   scalesMm: true,
   strengthMm: true,
+  kegStrength3: true,
   hammerMm: true,
   spinUpgradeOot: true,
   blastMaskOot: true,
@@ -1064,7 +1070,7 @@ const PRESET_CROSSKEYS = makeSettings({
   ],
   specialConds: {
     BRIDGE: {
-      count: 5,
+      count: 8,
       stones: true,
       medallions: true,
       remains: true,
@@ -1152,7 +1158,7 @@ const PRESET_CROSSKEYS = makeSettings({
       coinsYellow: false
     },
     MAJORA: {
-      count: 5,
+      count: 8,
       stones: true,
       medallions: true,
       remains: true,
@@ -1183,9 +1189,8 @@ const PRESET_CROSSKEYS = makeSettings({
     { type: 'item', amount: 1, extra: 1, item: 'SHARED_SONG_TIME' },
     { type: 'item', amount: 1, extra: 1, item: 'MM_MASK_CAPTAIN' },
     { type: 'item', amount: 1, extra: 1, item: 'SHARED_SONG_STORMS' },
-    { type: 'item', amount: 2, extra: 1, item: 'SHARED_OCARINA' },
     { type: 'woth', amount: 10, extra: 1 },
-    { type: 'sometimes', amount: 'max', extra: 1 },
+    { type: 'playthrough', amount: 'max', extra: 1 },
   ]
 });
 
