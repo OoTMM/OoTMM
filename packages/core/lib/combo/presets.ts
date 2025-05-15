@@ -106,7 +106,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   startingItems: {
     SHARED_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
-    SHARED_STICKS: 10,
+    SHARED_STICK: 10,
     MM_SONG_EPONA: 1,
     SHARED_SHIELD_HYLIAN: 1,
     MM_OCARINA: 1,
