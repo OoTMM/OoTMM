@@ -355,11 +355,11 @@ class MusicInjector {
         else if (type === 'fanfare' && bankmeta[1] !== 0x01) {
           bankmeta[1] = 0x01;
         }
-        
+
         bankCustom = { meta: bankmeta, data: bank };
         games.push('mm');
       } else {
-        bankIdOot = Number(meta[1]);
+        bankIdOot = parseInt(meta[1], 16);
         if (bankIdOot >= 2) {
           bankIdMm = bankIdOot + 0x30;
           games.push('mm');
@@ -464,7 +464,7 @@ class MusicInjector {
         else if (type === 'fanfare' && bankmeta[1] !== 0x01) {
           bankmeta[1] = 0x01;
         }
-        
+
         const sampleBank1 = mmrSampleBank(bankmeta[0x02]);
         const sampleBank2 = mmrSampleBank(bankmeta[0x03]);
         const sampleBanks = new Uint8Array([sampleBank1, sampleBank2]);
