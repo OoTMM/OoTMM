@@ -79,6 +79,5 @@ void Player_HandleBronzeScale(Player* this, PlayState* play)
     PlaySound(NA_SE_EV_WATER_CONVECTION);
     Play_SetRespawnData(play, RESPAWN_MODE_DOWN, gSave.entrance, sBronzeScaleGroundRoom, 0xdff, &sBronzeScaleGroundPos, sBronzeScaleGroundRot);
     gSaveContext.respawnFlag = 1;
-    gSaveContext.nextCutscene = 0;
     comboTransition(gPlay, gSave.entrance);
 }
