@@ -1662,10 +1662,10 @@ export const SETTINGS = [{
   cond: hasMM,
 }, {
   key: 'bronzeScale',
-  name: 'Bronze Scale',
+  name: 'Bronze Scale (WIP)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add an extra scale item, that is required to enter deep water.',
+  description: 'Add an extra scale item, that is required to enter deep water. WORK IN PROGRESS, MIGHT BREAK.',
   default: false,
   cond: (s: any) => (hasOoT(s) || s.scalesMm) && s.logic === 'none', /* TODO: Enable once logic is ready */
 }, {
