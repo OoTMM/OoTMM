@@ -313,6 +313,18 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId
     {
         if (ret == 0)
             g.roomEnemyLackSoul = 1;
+
+        switch (actorId)
+        {
+        case ACTOR_BOSS_MO:
+            play->roomCtx.drawParams[0] = 0xff;
+            play->colCtx.colHeader->waterBoxes[0].ySurface = -500;
+            break;
+        case ACTOR_BOSS_SST:
+            Actor_Spawn(&play->actorCtx, play, ACTOR_BG_SST_FLOOR, -50.f, 0.f, 0.f, 0, 0, 0, 0);
+            break;
+        }
+
         return NULL;
     }
 

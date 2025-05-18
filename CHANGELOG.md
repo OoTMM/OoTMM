@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Made Water and Shadow boss rooms play a little better when not having the boss soul.
+
 ### Fixed
 
 - Fixed ice traps always cloaking to the same item in a given seed.
