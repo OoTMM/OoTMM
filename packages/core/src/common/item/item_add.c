@@ -928,10 +928,29 @@ static int addItemSwordOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         gOotSave.info.playerData.swordHealth = 8;
         gOotSave.info.inventory.equipment.swords &= ~EQ_OOT_SWORD_KNIFE_BROKEN;
     }
-    if (param >= 4)
-        gOotSave.info.isBiggoronSword = 1;
     if (param == 2)
         gSharedCustomSave.foundMasterSword = 1;
+
+    if (param >= 4)
+    {
+        gOotSave.info.isBiggoronSword = 1;
+
+        /* Update B button */
+        if (gOotSave.info.equips.buttonItems[0] == ITEM_OOT_SWORD_KNIFE_BROKEN)
+        {
+            gOotSave.info.equips.buttonItems[0] = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+#if defined(GAME_OOT)
+            if (play)
+                Interface_LoadItemIconImpl(play, 0);
+#endif
+        }
+
+        /* Update saved B buttons */
+        if (gOotSave.info.childEquips.buttonItems[0] == ITEM_OOT_SWORD_KNIFE_BROKEN)
+            gOotSave.info.childEquips.buttonItems[0] = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+        if (gOotSave.info.adultEquips.buttonItems[0] == ITEM_OOT_SWORD_KNIFE_BROKEN)
+            gOotSave.info.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+    }
     return 0;
 }
 

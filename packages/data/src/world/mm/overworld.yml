@@ -3237,10 +3237,9 @@
   exits:
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
-    "Secret Shrine": "true"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
-    "Ikana Valley Grotto": "true"
-    "Swamp Front": "true"
+    "Ikana Valley Near Secret Shrine": "can_swim"
+    "Swamp Front": "underwater_walking || can_swim"
   locations:
     "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
     "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
@@ -3248,10 +3247,16 @@
   gossip:
     "Ikana Valley Gossip Lower": "true"
     "Ikana Valley Gossip Scrub": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
+"Ikana Valley Near Secret Shrine":
+  region: IKANA_CANYON
+  exits:
+    "Secret Shrine": "true"
+    "Ikana Valley Grotto": "true"
+    "Ikana Valley": "can_swim"
 "Ikana Valley Grotto":
   region: ENTRANCE
   exits:
-    "Ikana Valley": "true"
+    "Ikana Valley Near Secret Shrine": "true"
   events:
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
