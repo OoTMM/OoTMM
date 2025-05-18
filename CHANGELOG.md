@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix upgrading broken giant knife to biggoron sometimes not working until the sword is re-equipped.
 - Fix a crash when exiting deku shrine through the blue warp.
 - Fixed a small bug in how the .meta files were parsed for .ootrs file.
 - Fix a logic issue where players could be rarely expected to do illogical MM checks in heavy ER.
