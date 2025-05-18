@@ -223,7 +223,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       }
     }
 
-    patchRandomizer(world, args.logic, args.opts, args.settings, p);
+    await patchRandomizer(world, args.logic, args.opts, args.settings, p);
 
     patches.push(p);
   }

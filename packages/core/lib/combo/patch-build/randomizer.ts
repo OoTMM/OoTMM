@@ -472,9 +472,9 @@ function checkKey(check: WorldCheck): number {
   return key;
 }
 
-function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): number {
+async function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): Promise<number> {
   const random = new Random();
-  random.seed(key.toString(16) + '\x00' + seed);
+  await random.seed(key.toString(16) + '\x00' + seed);
 
   for (;;) {
     const locs = [...logic.items.keys()];
@@ -489,7 +489,7 @@ function makeCloakGi(key: number, seed: string, settings: Settings, logic: Logic
   }
 }
 
-const gameChecks = (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Uint8Array => {
+const gameChecks = async (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Promise<Uint8Array> => {
   const buffers: Uint8Array[] = [];
   const world = logic.worlds[worldId];
   for (const locId in world.checks) {
@@ -513,7 +513,7 @@ const gameChecks = (worldId: number, opts: Options, settings: Settings, game: Ga
     bufWriteU16BE(b, 6, itemGi);
     let cloakGi = 0;
     if (item.item === Items.OOT_TRAP_ICE && settings.cloakIceTraps) {
-      cloakGi = makeCloakGi(key, opts.seed, settings, logic);
+      cloakGi = await makeCloakGi(key, opts.seed, settings, logic);
     }
     bufWriteU16BE(b, 8, cloakGi);
     buffers.push(b);
@@ -1209,11 +1209,11 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
   return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
-export function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
+export async function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
   patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(worldId, logic), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(worldId, logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0400000, data: gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0500000, data: gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0500000, data: await gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
   patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(settings, 'oot', logic.hints[worldId]), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(settings, 'mm', logic.hints[worldId]), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(worldId, 'oot', logic), compressed: true });
