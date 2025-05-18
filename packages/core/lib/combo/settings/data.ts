@@ -1095,10 +1095,11 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls the behavior of the gate in Kakariko blocking Death Mountain as Child',
   values: [
-    { value: 'closed', name: 'Closed', description: 'The gate will be closed until you show Zelda\'s Letter to the guard' },
+    { value: 'closed', name: 'Closed', description: 'The gate will be closed until you show Zelda\'s Letter to the guard, even as an adult' },
+    { value: 'vanilla', name: 'Vanilla', description: 'The gate will be closed until you show Zelda\'s Letter to the guard' },
     { value: 'open', name: 'Open', description: 'The gate will be open from the start' },
   ],
-  default: 'closed',
+  default: 'vanilla',
   cond: hasOoT,
 }, {
   key: 'openZdShortcut',

@@ -889,6 +889,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_HOOKSHOT_SHORT: settings.shortHookshotMm,
     MM_SONG_SUN: settings.sunSongMm,
     OOT_SKIP_ZELDA: settings.skipZelda,
+    OOT_ADULT_KAKARIKO_GATE: settings.kakarikoGate === 'closed',
     OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
     OOT_LACS_CUSTOM: settings.lacs === 'custom',
     OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',

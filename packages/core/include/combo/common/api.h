@@ -770,6 +770,7 @@ Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32
 void AnimatedMat_Draw(PlayState* play, void* arg);
 
 void ComboPlay_SpawnExtraSigns(PlayState* play);
+void ComboPlay_SpawnExtraActors(PlayState* play);
 
 void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
 void _ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);

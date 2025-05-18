@@ -394,7 +394,7 @@ const PRESET_ALLSANITY = makeSettings({
     values: ["dekuTreeAdult", "wellAdult", "fireChild"]
   },
   beneathWell: 'remorseless',
-  kakarikoGate: 'closed',
+  kakarikoGate: 'vanilla',
   openZdShortcut: true,
   zoraKing: 'vanilla',
   skipZelda: true,

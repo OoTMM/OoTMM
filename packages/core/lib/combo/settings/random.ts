@@ -287,7 +287,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.openMaskShop = false;
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
-    base.kakarikoGate = 'closed';
+    base.kakarikoGate = 'vanilla';
     base.zoraKing = 'vanilla';
     base.gerudoFortress = 'vanilla';
     base.beneathWell = 'vanilla';
@@ -303,7 +303,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
-    base.kakarikoGate = sampleWeighted(random, { closed: 10, open: 7 });
+    base.kakarikoGate = sampleWeighted(random, { vanilla: 10, open: 5, closed: 5 });
     base.zoraKing = sampleWeighted(random, { vanilla: 10, open: 5, adult: 5 });
     base.gerudoFortress = sampleWeighted(random, { vanilla: 1, single: 1, open: 1 });
     base.beneathWell = sampleWeighted(random, { vanilla: 1, remorseless: 1, open: 1 });

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Add a setting to make kakariko gate closed as adult too.
+
 ## [28.2] - 2025-05-18
 
 ### Changed

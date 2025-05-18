@@ -1183,7 +1183,7 @@
     MAGIC: "can_cut_grass"
   exits:
     "Hyrule Field": "true"
-    "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || climb_anywhere || hookshot_anywhere"
+    "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || (is_adult && !setting(kakarikoGate, closed)) || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
     "Kakariko Well": "is_adult || has_iron_boots || longshot_anywhere || event(WELL_DRAIN) || setting(openDungeonsOot, BotW)"
     "Skulltula House": "true"
@@ -1261,7 +1261,7 @@
 "Kakariko Trail Start":
   region: KAKARIKO
   exits:
-    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || trick(OOT_PASS_COLLISION) || climb_anywhere || hookshot_anywhere"
+    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || (is_adult && !setting(kakarikoGate, closed)) || trick(OOT_PASS_COLLISION) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
 "Kakariko Back":
   region: KAKARIKO
