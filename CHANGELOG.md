@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Add a setting to make kakariko gate closed as adult too.
 
+### Changed
+
+- Fire Arrows are no longer required for Great Bay Temple's wheel room after reversing the water direction, due to the revamped save system.
+
 ## [28.2] - 2025-05-18
 
 ### Changed

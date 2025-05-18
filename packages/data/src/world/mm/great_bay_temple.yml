@@ -232,11 +232,11 @@
 "Great Bay Temple Green Pipe 2":
   dungeon: GB
   exits:
-    "Great Bay Temple Green Pipe 3": "(can_use_ice_arrows && (can_use_fire_arrows || short_hook_anywhere || trick(MM_GBT_FIRELESS))) || hookshot_anywhere"
+    "Great Bay Temple Green Pipe 3": "can_use_ice_arrows || hookshot_anywhere"
     "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot || (can_use_ice_arrows && can_hookshot_short) || has_hover_boots" #can just jump to the alcove after riding the platform, new trick?
-    "Great Bay Temple Green Pipe 2 Upper Chest": "(can_hookshot && can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || (has_hover_boots && trick(MM_GBT_GREEN2_UPPER_HOVERS))"
+    "Great Bay Temple Green Pipe 2 Upper Chest": "(can_hookshot && can_use_ice_arrows) || short_hook_anywhere || (has_hover_boots && trick(MM_GBT_GREEN2_UPPER_HOVERS))"
     "Great Bay Temple Pot Green Pipe 2 1": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 2 2": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 2 3": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
