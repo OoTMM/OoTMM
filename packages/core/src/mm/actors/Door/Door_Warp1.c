@@ -209,4 +209,4 @@ static void DoorWarp1_SetExitFadeHook(PlayState* play)
     }
 }
 
-PATCH_FUNC(0x808ba518, DoorWarp1_SetExitFadeHook);
+PATCH_CALL(0x808ba518, DoorWarp1_SetExitFadeHook);

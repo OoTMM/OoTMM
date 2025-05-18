@@ -38,10 +38,10 @@
     "targets": {
       "build": {
         "inputs": [
+          { "dependentTasksOutputFiles": "**/*" },
           "ts",
           "{workspaceRoot}/third_party/**/*",
           "{workspaceRoot}/roms/**/*",
-          "{projectRoot}/node_modules/**/*",
           "{projectRoot}/data/**/*",
           "{projectRoot}/include/**/*",
           "{projectRoot}/src/**/*",
