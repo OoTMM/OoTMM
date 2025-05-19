@@ -56,7 +56,7 @@ void Player_HandleBronzeScale(Player* this, PlayState* play)
 #endif
 
 #if defined(GAME_OOT)
-    if (this->currentBoots == 2)
+    if (this->currentBoots == 1)
         return;
 #endif
 
