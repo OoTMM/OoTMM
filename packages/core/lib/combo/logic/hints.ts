@@ -181,10 +181,10 @@ export class LogicPassHints {
         this.ignoredRegions.add(region);
       }
       if (world.preCompleted.has('ST')) {
-        this.ignoredRegions.add(makeRegion('IST', worldId));
+        this.ignoredRegions.add(makeRegion(DUNGEONS_REGIONS.IST, worldId));
       }
       if (world.preCompleted.has('BtW')) {
-        this.ignoredRegions.add(makeRegion('BtWE', worldId));
+        this.ignoredRegions.add(makeRegion(DUNGEONS_REGIONS.BtWE, worldId));
       }
     }
 

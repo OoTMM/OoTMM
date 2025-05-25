@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix some pre-completed dungeons having foolish hints.
 - Fix kokiri forest rupees not being shuffled correctly after beating Phantom Ganon.
 
 ## [28.2] - 2025-05-18
