@@ -29,19 +29,19 @@
 "Moon Butterflies":
   region: MOON
   locations:
-    "Moon Butterfly 01": "true"
-    "Moon Butterfly 02": "true"
-    "Moon Butterfly 03": "true"
-    "Moon Butterfly 04": "true"
-    "Moon Butterfly 05": "true"
-    "Moon Butterfly 06": "true"
-    "Moon Butterfly 07": "true"
-    "Moon Butterfly 08": "true"
-    "Moon Butterfly 09": "true"
-    "Moon Butterfly 10": "true"
-    "Moon Butterfly 11": "true"
-    "Moon Butterfly 12": "true"
-    "Moon Butterfly 13": "true"
+    "Moon Butterfly 01": "can_reset_time_on_moon"
+    "Moon Butterfly 02": "can_reset_time_on_moon"
+    "Moon Butterfly 03": "can_reset_time_on_moon"
+    "Moon Butterfly 04": "can_reset_time_on_moon"
+    "Moon Butterfly 05": "can_reset_time_on_moon"
+    "Moon Butterfly 06": "can_reset_time_on_moon"
+    "Moon Butterfly 07": "can_reset_time_on_moon"
+    "Moon Butterfly 08": "can_reset_time_on_moon"
+    "Moon Butterfly 09": "can_reset_time_on_moon"
+    "Moon Butterfly 10": "can_reset_time_on_moon"
+    "Moon Butterfly 11": "can_reset_time_on_moon"
+    "Moon Butterfly 12": "can_reset_time_on_moon"
+    "Moon Butterfly 13": "can_reset_time_on_moon"
 "Moon Trial Deku Entrance":
   region: MOON
   exits:
