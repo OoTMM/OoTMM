@@ -234,10 +234,10 @@ static int isItemAmbiguous(s16 gi)
         return !Config_Flag(CFG_SHARED_SONG_TIME);
     case GI_OOT_SONG_SUN:
     case GI_MM_SONG_SUN:
-        return !(Config_Flag(CFG_SHARED_SONG_SUN) || !Config_Flag(CFG_MM_SONG_SUN));
+        return !Config_Flag(CFG_SHARED_SONG_SUN) && Config_Flag(CFG_MM_SONG_SUN);
     case GI_OOT_SONG_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
-        return !(Config_Flag(CFG_SHARED_SONG_EMPTINESS) || !Config_Flag(CFG_OOT_SONG_EMPTINESS));
+        return !Config_Flag(CFG_SHARED_SONG_EMPTINESS) && Config_Flag(CFG_OOT_SONG_EMPTINESS);
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
     case GI_MM_STICK_UPGRADE:

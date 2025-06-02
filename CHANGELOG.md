@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix shared songs having the game name as a suffix in some very specific cases.
 - Fix some pre-completed dungeons having foolish hints.
 - Fix kokiri forest rupees not being shuffled correctly after beating Phantom Ganon.
 
