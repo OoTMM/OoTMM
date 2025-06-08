@@ -234,22 +234,31 @@ void Draw_Blit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, floa
 
 static const Vtx kGlitterVtx[] = {
     {{ { -10, -10, 0 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ {  10, -10, 0 }, 0, { 0x200, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ {  10,  10, 0 }, 0, { 0x200, 0x200 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { -10,  10, 0 }, 0, { 0, 0x200 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ {  10, -10, 0 }, 0, { 0x400, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ {  10,  10, 0 }, 0, { 0x400, 0x400 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { -10,  10, 0 }, 0, { 0, 0x400 }, { 0xff, 0xff, 0xff, 0xff } }},
 };
+
+#define G_CC_CUSTOM 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0
 
 static const Gfx kDlistGlitter[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock_4b(0x06000000, G_IM_FMT_IA, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_PASS2),
+    gsDPLoadTextureBlock_4b(0x06000000, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineMode(G_CC_CUSTOM, G_CC_PASS2),
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_SURF2),
     gsSPClearGeometryMode(G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
     gsSPVertex(&kGlitterVtx, 4, 0),
     gsSP2Triangles(0, 2, 1, 0, 0, 3, 2, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kDlistGlitterNoZ[] = {
+    gsSPClearGeometryMode(G_ZBUFFER),
+    gsSPDisplayList(kDlistGlitter),
+    gsSPSetGeometryMode(G_ZBUFFER),
     gsSPEndDisplayList(),
 };
 
@@ -279,6 +288,7 @@ static u32 Draw_GetGlitterColor(s16 gi, s16 cloakGi)
 
 void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi, s16 giCloak)
 {
+    static const u8 kGlitterFrames[] = { 0, 1, 2, 3, 4, 3, 2, 1 };
     void* tex;
     float alpha;
     float alphaNoZ;
@@ -312,8 +322,7 @@ void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi, s16 giCloak)
     tex = comboCacheGetFile(CUSTOM_GLITTER_ADDR);
     if (!tex)
         return;
-    if (play->state.frameCount & 4)
-        tex = (void*)((u32)tex + 16 * 8);
+    tex = (void*)((u32)tex + 32 * 16 * kGlitterFrames[play->state.frameCount & 7]);
 
     /* Prepare the Matrix */
     Matrix_Translate(actor->world.pos.x, actor->world.pos.y, actor->world.pos.z, MTXMODE_NEW);
@@ -329,9 +338,7 @@ void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi, s16 giCloak)
     if (alphaNoZ > 0.f)
     {
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alphaNoZ * 0.25f) * 255);
-        gSPClearGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
-        gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
-        gSPSetGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
+        gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitterNoZ - 0x80000000);
     }
     CLOSE_DISPS();
 }

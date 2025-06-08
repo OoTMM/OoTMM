@@ -48,6 +48,12 @@
     "MQ Ice Cavern Icicle Main Room 3": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Main Room 4": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Main Room 5": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Red Ice Main Room 1": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Main Room 2": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Main Room 3": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Main Room 4": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Main Room 5": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Main Room 6": "has_blue_fire"
 "Ice Cavern Map Room":
   dungeon: IC
   exits:
@@ -68,6 +74,7 @@
     "MQ Ice Cavern Icicle Map Room 7": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Map Room 8": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Map Room 9": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Red Ice Map Room": "has_blue_fire"
 "Ice Cavern Compass Room":
   dungeon: IC
   exits:
@@ -84,6 +91,7 @@
     "MQ Ice Cavern Icicle Compass Room 2": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Compass Room 3": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Compass Room 4": "break_icicle_ice_cavern"
+    "MQ Ice Cavern Red Ice Compass Room": "has_blue_fire"
 "Ice Cavern Vanilla Push Block Room":
   dungeon: IC
   exits:
@@ -95,6 +103,9 @@
     ICE_MQ_SECOND_CRYSTAL: "has_ranged_weapon || has_explosives || (is_adult && (has(SWORD_BIGGORON) || can_use_mask_blast))" #Biggoron Jump Slash as Adult hits it, so does Adult Blast Mask.
   locations:
     "MQ Ice Cavern GS Clear Blocks": "gs && event(ICE_MQ_SECOND_CRYSTAL) && can_damage_skull"
+    "MQ Ice Cavern Red Ice Block Room 1": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Block Room 2": "has_blue_fire"
+    "MQ Ice Cavern Red Ice Block Room 3": "has_blue_fire"
 "Ice Cavern Vanilla Push Block Room Scarecrow Ledge":
   dungeon: IC
   exits:

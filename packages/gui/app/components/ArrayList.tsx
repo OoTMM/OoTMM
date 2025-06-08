@@ -30,7 +30,8 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
   return (
     <div>
       <Select
-        className='select'
+        className="react-select-container"
+        classNamePrefix="react-select"
         filterOption={createFilter({ignoreAccents: false})}
         components={{ Option: CustomOption } as any}
         options={remaining}

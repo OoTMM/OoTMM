@@ -318,6 +318,7 @@ export class LogicPassSolver {
       renewableJunks: PlayerItems;
       startingItems: PlayerItems;
       itemProperties: ItemProperties;
+      plandoLocations: Map<Location, PlayerItem>;
     }
   ) {
     this.monitor = this.input.monitor;
@@ -443,19 +444,8 @@ export class LogicPassSolver {
   }
 
   private placePlando() {
-    for (const loc in this.input.settings.plando.locations) {
-      const plandoItemId = this.input.settings.plando.locations[loc];
-      if (plandoItemId) {
-        const plandoItem = itemByID(plandoItemId);
-        for (let player = 0; player < this.input.settings.players; ++player) {
-          const l = makeLocation(loc, player);
-          if (!this.locations.includes(l))
-            continue;
-          const item = makePlayerItem(plandoItem, player);
-          this.place(l, item);
-          removeItemPools(this.state.pools, item);
-        }
-      }
+    for (const [loc, pi] of this.input.plandoLocations) {
+      this.place(loc, pi);
     }
   }
 

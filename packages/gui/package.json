@@ -26,6 +26,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@ootmm/core": "*",
+    "modern-normalize": "^3.0.1",
     "preact": "^10.24.3",
     "react-ga4": "^2.1.0",
     "react-select": "^5.8.1",
@@ -38,7 +39,6 @@
     "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.0.8",
-    "reset-css": "^5.0.2",
     "rollup-plugin-visualizer": "^5.12.0"
   },
   "nx": {
@@ -47,9 +47,15 @@
         "{projectRoot}/**/*"
       ],
       "env": [
-        {"env": "VERSION"},
-        {"env": "VERSION_SUFFIX"},
-        {"env": "STATIC_URL"}
+        {
+          "env": "VERSION"
+        },
+        {
+          "env": "VERSION_SUFFIX"
+        },
+        {
+          "env": "STATIC_URL"
+        }
       ]
     },
     "targets": {

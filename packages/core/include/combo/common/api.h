@@ -126,9 +126,9 @@ void Audio_PlayFanfare(int fanfareId);
 void Actor_ProcessInitChain(Actor* this, void* data);
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
-void DmaCompressed(u32 pstart, void* dst, u32 size);
+void Yaz0_Decompress(u32 pstart, void* dst, u32 size);
 #if defined(GAME_OOT)
-void _DmaCompressed(u32 pstart, void* dst, u32 size);
+void _Yaz0_Decompress(u32 pstart, void* dst, u32 size);
 #endif
 s32 RequestDma(DmaRequest* request, void* vramStart, u32 vromStart, size_t size, u32 unused, OSMesgQueue* queue, OSMesg msg);
 
@@ -371,6 +371,8 @@ extern int gHorseIsMounted;
 s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 #endif
 
+void Scene_SetExitFade(PlayState* play);
+
 void DrawHUD(PlayState* play);
 
 int IsSceneValidEpona(int sceneId);
@@ -402,7 +404,8 @@ int Item_CollectibleDropTable(u32 index);
 int Item_CollectibleDropTable2(u32 index);
 #endif
 
-Actor_EnItem00* Item_DropCollectible(PlayState* play, const Vec3f* pos, s16 params);
+Actor* Item_DropCollectible(PlayState* play, const Vec3f* pos, int params);
+Actor* Item_DropCollectible2(PlayState* play, const Vec3f* pos, int params);
 void Item_DropCollectibleRandom(PlayState* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(PlayState* play, s32 index, s32 collectibleFlag);
 
@@ -767,3 +770,11 @@ Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32
 void AnimatedMat_Draw(PlayState* play, void* arg);
 
 void ComboPlay_SpawnExtraSigns(PlayState* play);
+void ComboPlay_SpawnExtraActors(PlayState* play);
+
+void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
+void _ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd);
+
+void Actor_SpawnEntry(ActorContext* actorCtx, ActorEntry* entry, PlayState* play);
+
+s32 Math3D_TriChkPointParaYSlopedY(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 z, f32 x);

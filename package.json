@@ -25,6 +25,7 @@
     "@types/pako": "^2.0.3",
     "glob": "^11.0.0",
     "microtime": "^3.1.1",
+    "netlify-cli": "^21.2.0",
     "nx": "^20.0.5",
     "tslib": "^2.8.0",
     "tsx": "^4.19.1",
@@ -33,5 +34,5 @@
     "vitest": "^2.1.4",
     "yaml": "^2.6.0"
   },
-  "packageManager": "pnpm@9.14.4+sha512.c8180b3fbe4e4bca02c94234717896b5529740a6cbadf19fa78254270403ea2f27d4e1d46a08a0f56c89b63dc8ebfd3ee53326da720273794e6200fcf0d184ab"
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
 }

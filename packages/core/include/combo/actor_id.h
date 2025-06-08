@@ -796,6 +796,7 @@
 # define ACTOR_BG_MARKET_STEP      0x1cc
 # define ACTOR_OBJ_LUPYGAMELIFT    0x1cd
 # define ACTOR_EN_TEST7            0x1ce
+# define ACTOR_OBJ_LIGHTBLOCK      0x1cf
 # define ACTOR_MIR_RAY2            0x1d0
 # define ACTOR_EN_WDHAND           0x1d1
 # define ACTOR_EN_GAMELUPY         0x1d2

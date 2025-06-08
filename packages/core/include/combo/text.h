@@ -84,6 +84,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags);
 int  comboTextAppendCheckName(char** b, u8 checkId, u8 world);
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi, int importance);
 void comboTextMessageCantBuy(PlayState* play, int flags);
+void comboTextMessageNoRupees(PlayState* play, int flags);
 void comboTextAppendDungeonName(char** buffer, u8 dungeonId, const char* prefix);
 void comboTextAppendBossName(char** buffer, u8 bossId, const char* prefix);
 void comboTextAppendOrd(char** b, int num);

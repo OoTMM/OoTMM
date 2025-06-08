@@ -299,14 +299,6 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
     }
 }
 
-static void ZeroActor(Actor* this, int size)
-{
-    memset(this, 0, size);
-    this->actorIndex = g.actorIndex;
-}
-
-PATCH_CALL(0x800252f8, ZeroActor);
-
 Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
@@ -321,6 +313,18 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId
     {
         if (ret == 0)
             g.roomEnemyLackSoul = 1;
+
+        switch (actorId)
+        {
+        case ACTOR_BOSS_MO:
+            play->roomCtx.drawParams[0] = 0xff;
+            play->colCtx.colHeader->waterBoxes[0].ySurface = -500;
+            break;
+        case ACTOR_BOSS_SST:
+            Actor_Spawn(&play->actorCtx, play, ACTOR_BG_SST_FLOOR, -50.f, 0.f, 0.f, 0, 0, 0, 0);
+            break;
+        }
+
         return NULL;
     }
 

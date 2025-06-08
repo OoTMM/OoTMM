@@ -56,7 +56,8 @@ export const PresetSelector = () => {
   return <label>
     Preset
     <CreatableSelect
-      className="select"
+      className="react-select-container"
+      classNamePrefix="react-select"
       isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
       options={options as any[]}
       onChange={(x) => onInput(x)}

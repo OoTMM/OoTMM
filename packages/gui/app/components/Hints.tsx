@@ -106,7 +106,7 @@ export function HintEditor({ index }: HintEditorProps) {
       </td>
       <td>
         {hint.type === 'item' && (
-          <Select className="select" options={itemOptions} onChange={(v) => onInputItem(v?.value)} value={selectedItem}/>
+          <Select className="react-select-container" classNamePrefix="react-select" options={itemOptions} onChange={(v) => onInputItem(v?.value)} value={selectedItem}/>
         )}
       </td>
       <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onInput={onInputAmount} />}</td>

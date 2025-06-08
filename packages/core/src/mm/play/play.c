@@ -54,7 +54,6 @@ void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem)
 }
 
 PlayState* gPlay;
-int gNoTimeFlow;
 
 static u32 entranceForOverride(u32 entrance)
 {
@@ -475,10 +474,19 @@ static void Play_AfterInit(PlayState* play)
         }
     }
 
-    if (gNoTimeFlow)
+    /* In ER, MM bosses in OoT dungeons don't require song of time */
+    if (gSave.entrance == g.initialEntrance)
     {
-        play->envCtx.sceneTimeSpeed = 0;
-        R_TIME_SPEED = 0;
+        switch (gSave.entrance)
+        {
+        case ENTR_MM_BOSS_TEMPLE_WOODFALL:
+        case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
+        case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
+        case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
+            play->envCtx.sceneTimeSpeed = 0;
+            R_TIME_SPEED = 0;
+            break;
+        }
     }
 
     switch (play->sceneId)
@@ -528,6 +536,8 @@ static void Play_AfterInit(PlayState* play)
     }
 }
 
+u32 gGameEntrance;
+
 void hookPlay_Init(PlayState* play)
 {
     u32 entrance;
@@ -539,6 +549,8 @@ void hookPlay_Init(PlayState* play)
     g.prevRoom = -1;
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
+    g.bronzeScaleSolidGround = 0;
+    g.bronzeScaleTimer = 0;
     isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
@@ -706,7 +718,6 @@ void hookPlay_Init(PlayState* play)
     if ((gSave.entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entrance == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
-        gNoTimeFlow = 0;
         entrance = g.initialEntrance;
         applyCustomEntrance(&entrance);
         gSave.entrance = entrance;
@@ -911,6 +922,8 @@ void CutsceneTransitionHook(PlayState* play)
     }
 }
 
+
+
 void Play_FastInit(GameState* gs)
 {
     u32 entrance;
@@ -977,18 +990,47 @@ void Play_FastInit(GameState* gs)
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();
 
-    /* Handle shuffled entrance */
-    switch (gSave.entrance)
-    {
-    case ENTR_MM_BOSS_TEMPLE_WOODFALL:
-    case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
-    case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
-    case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
-        gNoTimeFlow = 1;
-        break;
-    }
-
     /* Finished */
     gComboCtx.valid = 0;
     sNeedsScreenClear = 2;
+}
+
+int Play_GetInstance(PlayState* play)
+{
+    switch (play->sceneId)
+    {
+    case SCE_MM_GROTTOS:
+        switch (play->roomCtx.curRoom.num)
+        {
+        case 0x04:
+            /* Generic Grottos */
+            switch (gGrottoData & 0x1f)
+            {
+            case 0x13: return INSTANCE_MM_GROTTO_GENERIC_PATH_TO_SNOWHEAD;
+            case 0x14: return INSTANCE_MM_GROTTO_GENERIC_IKANA_VALLEY;
+            case 0x15: return INSTANCE_MM_GROTTO_GENERIC_ZORA_CAPE;
+            case 0x16: return INSTANCE_MM_GROTTO_GENERIC_ROAD_TO_IKANA;
+            case 0x17: return INSTANCE_MM_GROTTO_GENERIC_GREAT_BAY_COAST;
+            case 0x18: return INSTANCE_MM_GROTTO_GENERIC_IKANA_GRAVEYARD;
+            case 0x19: return INSTANCE_MM_GROTTO_GENERIC_TWIN_ISLANDS;
+            case 0x1a: return INSTANCE_MM_GROTTO_GENERIC_TERMINA_FIELD_PILLAR;
+            case 0x1b: return INSTANCE_MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE;
+            case 0x1c: return INSTANCE_MM_GROTTO_GENERIC_WOODS_OF_MYSTERY;
+            case 0x1d: return INSTANCE_MM_GROTTO_GENERIC_SOUTHERN_SWAMP;
+            case 0x1e: return INSTANCE_MM_GROTTO_GENERIC_ROAD_TO_SOUTHERN_SWAMP;
+            case 0x1f: return INSTANCE_MM_GROTTO_GENERIC_TERMINA_FIELD_TALL_GRASS;
+            }
+            break;
+        case 0x0a:
+            switch (gLastScene)
+            {
+            case SCE_MM_TERMINA_FIELD: return INSTANCE_MM_GROTTO_COW_TERMINA_FIELD;
+            case SCE_MM_GREAT_BAY_COAST: return INSTANCE_MM_GROTTO_COW_GREAT_BAY_COAST;
+            }
+            break;
+        }
+        break;
+    }
+
+    return INSTANCE_NONE;
 }

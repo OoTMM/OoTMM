@@ -1439,6 +1439,17 @@ Ice Cavern Icicle Compass 10,                               icicle,         NONE
 Ice Cavern Icicle Compass 11,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b0f,                    NOTHING
 Ice Cavern Icicle Compass 12,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b10,                    NOTHING
 Ice Cavern Icicle Compass 13,                               icicle,         NONE,                 ICE_CAVERN,                     0x00b11,                    NOTHING
+Ice Cavern Red Ice Entrance,                                redice,         NONE,                 ICE_CAVERN,                     0x00005,                    NOTHING
+Ice Cavern Red Ice Freezard 1,                              redice,         NONE,                 ICE_CAVERN,                     0x00108,                    NOTHING
+Ice Cavern Red Ice Freezard 2,                              redice,         NONE,                 ICE_CAVERN,                     0x00109,                    NOTHING
+Ice Cavern Red Ice Block,                                   redice,         NONE,                 ICE_CAVERN,                     0x00513,                    NOTHING
+Ice Cavern Red Ice After Block 1,                           redice,         NONE,                 ICE_CAVERN,                     0x0060e,                    NOTHING
+Ice Cavern Red Ice After Block 2,                           redice,         NONE,                 ICE_CAVERN,                     0x0060f,                    NOTHING
+Ice Cavern Red Ice After Block 3,                           redice,         NONE,                 ICE_CAVERN,                     0x00610,                    NOTHING
+Ice Cavern Red Ice Map 1,                                   redice,         NONE,                 ICE_CAVERN,                     0x0090b,                    NOTHING
+Ice Cavern Red Ice Map 2,                                   redice,         NONE,                 ICE_CAVERN,                     0x0090c,                    NOTHING
+Ice Cavern Red Ice Compass 1,                               redice,         NONE,                 ICE_CAVERN,                     0x00b1a,                    NOTHING
+Ice Cavern Red Ice Compass 2,                               redice,         NONE,                 ICE_CAVERN,                     0x00b1b,                    NOTHING
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
@@ -2207,6 +2218,17 @@ MQ Ice Cavern Icicle Map Room 6,                            icicle,         NONE
 MQ Ice Cavern Icicle Map Room 7,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b08,                    NOTHING
 MQ Ice Cavern Icicle Map Room 8,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b09,                    NOTHING
 MQ Ice Cavern Icicle Map Room 9,                            icicle,         NONE,                 ICE_CAVERN,                     0x00b0a,                    NOTHING
+MQ Ice Cavern Red Ice Main Room 1,                          redice,         NONE,                 ICE_CAVERN,                     0x00309,                    NOTHING
+MQ Ice Cavern Red Ice Main Room 2,                          redice,         NONE,                 ICE_CAVERN,                     0x0030a,                    NOTHING
+MQ Ice Cavern Red Ice Main Room 3,                          redice,         NONE,                 ICE_CAVERN,                     0x0030b,                    NOTHING
+MQ Ice Cavern Red Ice Main Room 4,                          redice,         NONE,                 ICE_CAVERN,                     0x0030e,                    NOTHING
+MQ Ice Cavern Red Ice Main Room 5,                          redice,         NONE,                 ICE_CAVERN,                     0x00310,                    NOTHING
+MQ Ice Cavern Red Ice Main Room 6,                          redice,         NONE,                 ICE_CAVERN,                     0x00311,                    NOTHING
+MQ Ice Cavern Red Ice Block Room 1,                         redice,         NONE,                 ICE_CAVERN,                     0x0050e,                    NOTHING
+MQ Ice Cavern Red Ice Block Room 2,                         redice,         NONE,                 ICE_CAVERN,                     0x0050f,                    NOTHING
+MQ Ice Cavern Red Ice Block Room 3,                         redice,         NONE,                 ICE_CAVERN,                     0x00510,                    NOTHING
+MQ Ice Cavern Red Ice Map Room,                             redice,         NONE,                 ICE_CAVERN,                     0x00912,                    NOTHING
+MQ Ice Cavern Red Ice Compass Room,                         redice,         NONE,                 ICE_CAVERN,                     0x00b00,                    NOTHING
 MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
 MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
 MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
@@ -2790,3 +2812,16 @@ MQ Ganon Castle Icicle Water 5,                             icicle,         NONE
 MQ Ganon Castle Icicle Water 6,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x00209,                    NOTHING
 MQ Ganon Castle Icicle Water 7,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020a,                    NOTHING
 MQ Ganon Castle Icicle Water 8,                             icicle,         NONE,                 INSIDE_GANON_CASTLE,            0x0020b,                    NOTHING
+MQ Ganon Castle Red Ice Water 1,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00213,                    NOTHING
+MQ Ganon Castle Red Ice Water 2,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00214,                    NOTHING
+MQ Ganon Castle Red Ice Water 3,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00215,                    NOTHING
+MQ Ganon Castle Red Ice Water 4,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00217,                    NOTHING
+MQ Ganon Castle Red Ice Water 5,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00218,                    NOTHING
+MQ Ganon Castle Red Ice Water 6,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00219,                    NOTHING
+MQ Ganon Castle Red Ice Water 7,                            redice,         NONE,                 INSIDE_GANON_CASTLE,            0x0021a,                    NOTHING
+MQ Ganon Castle Red Ice Block Silver Rupee Room 1,          redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00306,                    NOTHING
+MQ Ganon Castle Red Ice Block Silver Rupee Room 2,          redice,         NONE,                 INSIDE_GANON_CASTLE,            0x0030d,                    NOTHING
+MQ Ganon Castle Red Ice Block Silver Rupee Room 3,          redice,         NONE,                 INSIDE_GANON_CASTLE,            0x0030e,                    NOTHING
+MQ Ganon Castle Red Ice Block Silver Rupee Room 4,          redice,         NONE,                 INSIDE_GANON_CASTLE,            0x0030f,                    NOTHING
+MQ Ganon Castle Red Ice Block Silver Rupee Room 5,          redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00310,                    NOTHING
+MQ Ganon Castle Red Ice Block Silver Rupee Room 6,          redice,         NONE,                 INSIDE_GANON_CASTLE,            0x00311,                    NOTHING

@@ -6,6 +6,61 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to make kakariko gate closed as adult too.
+
+### Changed
+
+- Fire Arrows are no longer required for Great Bay Temple's wheel room after reversing the water direction, due to the revamped save system.
+
+### Fixed
+
+- Fix shared songs having the game name as a suffix in some very specific cases.
+- Fix some pre-completed dungeons having foolish hints.
+- Fix kokiri forest rupees not being shuffled correctly after beating Phantom Ganon.
+
+## [28.2] - 2025-05-18
+
+### Changed
+
+- Made Water and Shadow boss rooms play a little better when not having the boss soul.
+
+### Fixed
+
+- Fixed ice traps always cloaking to the same item in a given seed.
+- Fixed upgrading broken giant knife to biggoron sometimes not working until the sword is re-equipped.
+- Fixed a crash when exiting deku shrine through the blue warp.
+- Fixed a small bug in how the .meta files were parsed for .ootrs file.
+- Fixed a logic issue where players could be rarely expected to do illogical MM checks in heavy ER.
+
+## [28.1] - 2025-05-11
+
+### Changed
+
+- Can no longer plando items that aren't in the pool to begin with.
+- In Indoor ER, the deku shrine warp now maps to the shrine exit.
+- The spiritual stones won't display on the altar as adult if ToT door is closed.
+
+### Fixed
+
+- Fixed desert colossus fairies not being shuffled correctly.
+- Fixed a time bug related to voiding in Twinmold coming from OoT.
+- Fixed the ruto/big octo cutscene looking weird as adult.
+- Fixed rare ice-trap related softlocks in MM.
+
+## [28.0] - 2025-05-09
+
+### Jokes
+
+- (**April Fools**) Add a Misc. soul for Trees.
+
+### Added
+
+- Skip the cutscene of burning spider webs in MM.
+- Skip the cutscene of melting ice blocks in MM.
+- Skip the cutscene of breaking keg boulders.
+- Add the Japanese version of Great Bay Coast.
+- Comfort option to reduce the shine time needed on Sun Block for them to go away.
+- Cutscene skip for Sun Blocks going away.
 - Add Ice Traps.
 - Add the ability to shuffle extra merchants in OoT.
 - Add the ability to shuffle merchant prices in OoT.
@@ -14,9 +69,13 @@ All notable changes to this project will be documented in this file.
 - Add the ability to shuffle the drops from Red Boulders in OoT and MM.
 - Add the ability to shuffle the Purple Rupees from the OoT Frogs.
 - Add the ability to shuffle the drops from Icicles (**stalagmites** only) in OoT and MM.
+- Add the ability to shuffle the drops from thawing Red Ice in OoT.
 
 ### Changed
 
+
+- Layout of the settings in the Shared and Extensions tabs.
+- Layout of the settings in the Misc. tab.
 - Progressive shields will now remove as many regular shields from the pool as possible.
 - Progressive shields are now re-obtained on every scene transition, thus making them permanent logically.
 - Progressive shields now have a flame effect to differentiate them from the regular shields.
@@ -30,9 +89,19 @@ All notable changes to this project will be documented in this file.
 - Rename some of the Silver Rupee checks in OoT Shadow Temple MQ for clarity.
 - Add "Broken Deku Stick (OoT)" glitch, which can now be logical for grass shuffle.
 - Add Deku Stick as a logical possibility for obtaining bugs from grass in OoT.
+- Using a Bombchu to destroy the Dexihands blocking the path to the Bio Baba room in Great Bay Temple is now a trick.
+- Using a Bombchu to defeat the Like Like on top of the Piece of Heart in Zora Cape is now a trick.
+- The Gerudo Fortress wall GS can now be gotten by defeating it from above then jumping to it.
 
 ### Fixed
 
+- Fix being able to stay as Fierce Deity when returning to dungeon entrance from the boss lairs without Fierce Deity anywhere turned on.
+- Fix Milk bar performance not requiring Gorman Soul.
+- Fix adult link being invisible in the Milk Bar performance.
+- Fix a bug where Kotake would check for an empty bottle in subsequent cycles even when giving "nothing", causing logic issues.
+- Fix a vanilla bug where the Ikana Fairy Fountain has the wrong color.
+- Fix a bug where a fairy could turn into a shuffled snowball check in specific circumstances.
+- Fix Stone of Agony not rumbling controllers that support it.
 - Fix the twinmold blue warp item being gigantic when giant mask is equipped.
 - Fix a vanilla bug where the frozen link effect would sometimes get distorded.
 - Fix FD mask item having weird colors sometimes.
@@ -42,6 +111,10 @@ All notable changes to this project will be documented in this file.
 - Fix Ganondorf and Ganon fight not allowing Return to Dungeon Entrance.
 - Fix logic for pots in upper Deku Palace.
 - Fix snowballs in Snowhead (spring) not being paired with their winter counterpart.
+- Fix spoiler log including Hint Importance even if the setting is off.
+- Fix the Seahorse event not checking for Great Bay cursed state.
+- Fix Shadow Trial logic not accounting for the Like Like Soul when using Longshot to cross the room.
+- Fix logic in Gerudo Training Grounds not accounting for defeating the enemies in the hammer room to get one of the lava Silver Rupees.
 
 ## [27.0] - 2025-01-04
 
@@ -1495,7 +1568,10 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v27.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v28.2...HEAD
+[28.2]: https://github.com/OoTMM/OoTMM/compare/v28.1...v28.2
+[28.1]: https://github.com/OoTMM/OoTMM/compare/v28.0...v28.1
+[28.0]: https://github.com/OoTMM/OoTMM/compare/v27.0...v28.0
 [27.0]: https://github.com/OoTMM/OoTMM/compare/v26.1...v27.0
 [26.1]: https://github.com/OoTMM/OoTMM/compare/v26.0...v26.1
 [26.0]: https://github.com/OoTMM/OoTMM/compare/v25.0...v26.0

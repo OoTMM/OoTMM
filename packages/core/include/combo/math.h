@@ -32,6 +32,7 @@
 #define M_SQRT2 1.41421356237309504880f
 #define MAXFLOAT 3.40282347e+38f
 #define SHT_MAX 32767.0f
+#define FLT_MAX 3.40282347e+38f
 #define SHT_MINV (1.0f / SHT_MAX)
 
 #define VEC3F_LERPIMPDST(dst, v0, v1, t)                \
@@ -75,6 +76,7 @@ s16     Math_Vec3f_Pitch(Vec3f* origin, Vec3f* point);
 f32     Math_FAcosF(f32 angle);
 f32     Math_SinF(f32 rad);
 f32     Math_Vec3f_DistXZ(Vec3f* a, Vec3f* b);
+s32     Math3D_LineSegVsPlane(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* linePointA, Vec3f* linePointB, Vec3f* intersect, s32 fromFront);
 
 
 #endif

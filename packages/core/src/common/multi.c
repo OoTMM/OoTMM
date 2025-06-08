@@ -430,6 +430,73 @@ int Multi_IsMarkedMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     return 0;
 }
 
+#if defined(GAME_OOT)
+static u16 GetSceneKey(PlayState* play)
+{
+    u16 sceneKey;
+    int instanceId;
+
+    instanceId = Play_GetInstance(play);
+    if (instanceId)
+        return 0x100 + ((u16)instanceId - 1);
+
+    sceneKey = play->sceneId;
+    switch (sceneKey)
+    {
+    case SCE_OOT_MARKET_CHILD_DAY:
+    case SCE_OOT_MARKET_CHILD_NIGHT:
+        sceneKey = SCE_OOT_MARKET_ADULT;
+        break;
+    case SCE_OOT_MARKET_ENTRANCE_CHILD_DAY:
+    case SCE_OOT_MARKET_ENTRANCE_CHILD_NIGHT:
+        sceneKey = SCE_OOT_MARKET_ENTRANCE_ADULT;
+        break;
+    case SCE_OOT_BACK_ALLEY_NIGHT:
+        sceneKey = SCE_OOT_BACK_ALLEY_DAY;
+        break;
+    case SCE_OOT_HYRULE_CASTLE:
+        if (gSave.age == AGE_ADULT)
+            sceneKey = 0x80;
+        break;
+    }
+    return play->sceneId;
+}
+#endif
+
+#if defined(GAME_MM)
+static u16 GetSceneKey(PlayState* play)
+{
+    u16 sceneKey;
+    int instanceId;
+
+    instanceId = Play_GetInstance(play);
+    if (instanceId)
+        return (0x100 + ((u16)instanceId - 1)) | 0x8000;
+
+    sceneKey = play->sceneId;
+    switch (sceneKey)
+    {
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+        sceneKey = SCE_MM_TEMPLE_STONE_TOWER;
+        break;
+    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+        sceneKey = SCE_MM_SOUTHERN_SWAMP;
+        break;
+    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+        sceneKey = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+        break;
+    case SCE_MM_GORON_VILLAGE_SPRING:
+        sceneKey = SCE_MM_GORON_VILLAGE_WINTER;
+        break;
+    case SCE_MM_TWIN_ISLANDS_SPRING:
+        sceneKey = SCE_MM_TWIN_ISLANDS_WINTER;
+        break;
+    }
+
+    return sceneKey | 0x8000;
+}
+#endif
+
 static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
 {
     Player* link;
@@ -457,13 +524,14 @@ static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
     msg = &net->msgBuffer[index];
     msg->op = NETMSG_PLAYER_POS;
     msg->playerPos.frameCount = play->state.frameCount;
-    msg->playerPos.sceneKey = play->sceneId;
-#if defined(GAME_MM)
-    msg->playerPos.sceneKey |= 0x8000;
-#endif
     msg->playerPos.x = (s16)link->actor.world.pos.x;
     msg->playerPos.y = (s16)link->actor.world.pos.y;
     msg->playerPos.z = (s16)link->actor.world.pos.z;
+    msg->playerPos.sceneKey = GetSceneKey(play);
+#if defined(GAME_MM)
+    if (play->sceneId == SCE_MM_TEMPLE_STONE_TOWER_INVERTED)
+        msg->playerPos.y *= -1;
+#endif
     net->msgOutSize[index] = 0x10;
 }
 
@@ -496,12 +564,14 @@ static void processMessageInPlayerPos(PlayState* play, NetContext* net, NetMsgPl
     u16 sceneKey;
     int freeIndex;
 
-    sceneKey = play->sceneId;
-#if defined(GAME_MM)
-    sceneKey |= 0x8000;
-#endif
+    sceneKey = GetSceneKey(play);
     if (playerPos->sceneKey != sceneKey)
         return;
+
+#if defined(GAME_MM)
+    if (play->sceneId == SCE_MM_TEMPLE_STONE_TOWER_INVERTED)
+        playerPos->y *= -1;
+#endif
 
     freeIndex = -1;
     for (int i = 0; i < ARRAY_COUNT(sPlayerWisps); ++i)
