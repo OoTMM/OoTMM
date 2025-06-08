@@ -22,17 +22,16 @@
 # define EN_ELF_SFX_ICE_TRAP     0x31a4
 #endif
 
-void EnElf_Aliases(Actor_EnElf* this, PlayState* play)
+void EnElf_Aliases(Xflag* xf)
 {
-    /* Set the extended properties */
-    comboXflagInit(&this->xflag, &this->base, play);
-
 #if defined(GAME_OOT)
-    switch (this->xflag.sceneId)
+    u8 fairyFountainIndex;
+
+    switch (xf->sceneId)
     {
     case SCE_OOT_FAIRY_FOUNTAIN:
-        u8 fairyFountainIndex = 0xFF;
-        switch (gLastScene) {
+        switch (gLastScene)
+        {
         case SCE_OOT_HYRULE_FIELD:
             fairyFountainIndex = 0;
             break;
@@ -48,12 +47,14 @@ void EnElf_Aliases(Actor_EnElf* this, PlayState* play)
         case SCE_OOT_GERUDO_FORTRESS:
             fairyFountainIndex = 4;
             break;
+        default:
+            UNREACHABLE();
         }
-        this->xflag.roomId = 0x20 | fairyFountainIndex;
+        xf->roomId = 0x20 | fairyFountainIndex;
         break;
     case SCE_OOT_DESERT_COLOSSUS:
-        this->xflag.id = 1;
-        this->xflag.setupId = 0;
+        xf->id = 1;
+        xf->setupId = 0;
         break;
     }
 #endif
@@ -206,8 +207,15 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
 
     type = this->base.params & 0xf;
     memset(&this->xflag, 0, sizeof(Xflag));
-    if (type >= 2)
-        EnElf_Aliases(this, play);
+    if (type < 2)
+    {
+        Xflag_Clear(&this->xflag);
+    }
+    else
+    {
+        if (comboXflagInit(&this->xflag, &this->base, play))
+            EnElf_Aliases(&this->xflag);
+    }
 
     init = actorAddr(ACTOR_EN_ELF, EN_ELF_INIT_VROM);
     init(&this->base, play);
@@ -235,29 +243,11 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
 
 void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, u8 count)
 {
-    ComboItemQuery q;
-    ComboItemOverride o;
-    Actor_EnElf* fairy = (Actor_EnElf*)Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
-
-    if (!fairy)
-    {
-        return;
-    }
-
-    /* Copy the extended flag */
-    memcpy(&fairy->xflag, &spawner->xflag, sizeof(Xflag));
-    fairy->xflag.sliceId = count;
-
-    /* Query the item */
-    EnElf_ItemQuery(&q, fairy);
-    comboItemOverride(&o, &q);
-
-    if (o.gi != fairy->extendedGi)
-    {
-        fairy->itemGiven = 0;
-        fairy->extendedGiDraw = o.gi;
-        fairy->base.draw = EnElf_Draw;
-    }
+    memcpy(&g.xflag, &spawner->xflag, sizeof(Xflag));
+    g.xflag.sliceId = count;
+    g.xflagOverride = TRUE;
+    Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    g.xflagOverride = FALSE;
 }
 
 void EnElf_PlayItemSfx(Actor_EnElf* this, PlayState* play)

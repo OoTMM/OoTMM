@@ -85,7 +85,6 @@ osInvalDCache = 0x8008f2f0;
 osInvalICache = 0x8008f270;
 osWritebackDCache = 0x8008a5e0;
 osWritebackDCacheAll = 0x800955c0;
-EnItem00_FixDrop = 0x800a7650;
 
 AudioLoad_InitTable = 0x8018f478;
 
@@ -315,6 +314,7 @@ gMaxRupees = 0x801c1e2c;
 
 Inventory_SetWorldMapCloudVisibility = 0x8012ef0c;
 
+Scene_SetExitFade = 0x801306a4;
 ActorCutscene_StartAndSetFlag = 0x800f1ce0;
 
 gWalletDigits = 0x801bfd24;
@@ -323,7 +323,8 @@ DrawHUD = 0x8011f0e0;
 
 gDmaData = 0x8009f8b0;
 
-DmaCompressed = 0x80081178;
+_ParseSceneRoomHeaders_ActorsList = 0x8012f90c;
+Yaz0_Decompress = 0x80081178;
 osSetThreadPri = 0x8008fc00;
 SetRoomClear = 0x800b5d30;
 
@@ -366,6 +367,7 @@ Actor_OfferCarry = 0x800B8BB0;
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;
 Item_DropCollectible = 0x800a7730;
+Item_DropCollectible2 = 0x800a7ad4;
 Item_DropCollectibleRandom = 0x800a7d28;
 Item_CanDropBigFairy = 0x800a81a4;
 
@@ -692,3 +694,8 @@ gPlayerFormItemRestrictions = 0x801c2410;
 
 D_801AEFA0 = 0x801aefa0;
 D_801AEF88 = 0x801aef88;
+
+BgCheck_EntityRaycastFloor1 = 0x800c3fa0;
+
+Math3D_LineSegVsPlane = 0x8017d2fc;
+EffectSsDeadDb_Spawn = 0x800b2f80;

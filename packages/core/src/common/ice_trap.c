@@ -19,10 +19,17 @@ void Play_UpdateIceTrap(PlayState* play)
         return;
 
     player = GET_PLAYER(play);
-    if (player->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GET_ITEM))
+    if (player->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_TALKING | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GET_ITEM))
         return;
     if (player->invincibilityTimer)
         return;
+
+#if defined(GAME_MM)
+    /* Shops safety */
+    if (player->gi && player->interactRangeActor && (player->interactRangeActor->id == ACTOR_EN_OSSAN || player->interactRangeActor->id == ACTOR_EN_TRT || player->interactRangeActor->id == ACTOR_EN_SOB1))
+        return;
+#endif
+
 
     Player_ApplyDamage = OverlayAddr(APPLY_DAMAGE_ADDR);
     player->actor.colChkInfo.damage = 0;

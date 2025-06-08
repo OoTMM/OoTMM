@@ -35,8 +35,8 @@ export function Plando() {
     <main>
       <h1>Plando</h1>
       <nav className="toolbar">
-        <Select className="select" options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)} />
-        <Select className="select" options={itemOptions} onChange={(v) => setSelectedItem(v?.value)} />
+        <Select className="react-select-container" classNamePrefix="react-select" options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)} />
+        <Select className="react-select-container" classNamePrefix="react-select" options={itemOptions} onChange={(v) => setSelectedItem(v?.value)} />
         <button className="btn" onClick={placeItem}>Add</button>
         <button className="btn btn-danger" onClick={removeAll}>Remove All</button>
       </nav>

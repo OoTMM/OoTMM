@@ -4,8 +4,8 @@
 #include <combo/io.h>
 
 #if defined(GAME_OOT)
-/* OoT doesn't have reentrancy in DmaCompressed, implement it */
-void DmaCompressed(u32 pstart, void* dst, u32 size)
+/* OoT doesn't have reentrancy in Yaz0_Decompress, implement it */
+void Yaz0_Decompress(u32 pstart, void* dst, u32 size)
 {
     static volatile u32 sDecompressInProgress;
 
@@ -16,7 +16,7 @@ void DmaCompressed(u32 pstart, void* dst, u32 size)
         Sleep_Usec(10);
     }
     sDecompressInProgress = 1;
-    _DmaCompressed(pstart, dst, size);
+    _Yaz0_Decompress(pstart, dst, size);
     sDecompressInProgress = 0;
 }
 #endif
@@ -123,7 +123,7 @@ void DmaManagerRunRequest(const DmaRequest* dma)
     {
         /* File is compressed */
         osSetThreadPri(NULL, 0x0a);
-        DmaCompressed(e.pstart, dma->dramAddr, e.pend - e.pstart);
+        Yaz0_Decompress(e.pstart, dma->dramAddr, e.pend - e.pstart);
 #if defined(GAME_OOT)
         osSetThreadPri(NULL, 0x10);
 #else

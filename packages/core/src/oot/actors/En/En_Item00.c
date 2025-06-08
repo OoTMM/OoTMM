@@ -8,7 +8,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
 {
     memset(q, 0, sizeof(*q));
 
-    switch (this->base.params)
+    switch (this->actor.params)
     {
     case 0x06:
         q->ovType = OV_COLLECTIBLE;
@@ -48,12 +48,12 @@ void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, PlayState* play, s16 gi
 
     if (itemId >= 0)
     {
-        this->base.parent = &link->actor;
+        this->actor.parent = &link->actor;
         AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         return;
     }
 
-     comboGiveItem(&this->base, play, &q, 50.f, 10.f);
+     comboGiveItem(&this->actor, play, &q, 50.f, 10.f);
 }
 
 PATCH_CALL(0x80012e4c, EnItem00_GiveItemDefaultRange);
@@ -64,7 +64,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
     ComboItemOverride o;
     float scale;
 
-    switch (this->base.params)
+    switch (this->actor.params)
     {
     case 0x06:
         scale = 17.5f;
@@ -79,12 +79,12 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
     EnItem00_ItemQuery(&q, this, play, -1);
     comboItemOverride(&o, &q);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->base, o.gi, o.cloakGi, 0);
+    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
 
-static s16 bombDrop(s16 dropId)
+static int fixDropBomb(int dropId)
 {
     int hasChuBag;
     int hasBombBag;
@@ -122,29 +122,72 @@ static s16 bombDrop(s16 dropId)
     return dropId;
 }
 
+static int fixDropArrowSeeds(int size)
+{
+    static const s8 kDrops[] = { ITEM00_ARROWS_5, ITEM00_ARROWS_10, ITEM00_ARROWS_30, ITEM00_SEEDS, ITEM00_SEEDS, ITEM00_SEEDS };
+
+    int isAllowedArrows;
+    int isAllowedSeeds;
+    int index;
+
+    isAllowedArrows = TRUE;
+    isAllowedSeeds = TRUE;
+
+    if ((gSave.age == AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_BOW)) || gSave.info.inventory.upgrades.quiver == 0)
+        isAllowedArrows = FALSE;
+    if ((gSave.age == AGE_ADULT && !Config_Flag(CFG_OOT_AGELESS_SLINGSHOT)) || gSave.info.inventory.upgrades.bulletBag == 0)
+        isAllowedSeeds = FALSE;
+
+    if (!isAllowedArrows && !isAllowedSeeds)
+        return -1;
+
+    if (!isAllowedSeeds)
+        index = 0;
+    else if (!isAllowedArrows)
+        index = 1;
+    else
+        index = (Rand_ZeroOne() < 0.5f) ? 0 : 1;
+
+    return kDrops[index * 3 + size];
+}
+
 /* TODO: Flexible drops would ideally need to be patched on top of this */
-static s16 EnItem00_FixDropWrapper(s16 dropId)
+int EnItem00_FixDrop(int dropId)
 {
     switch (dropId)
     {
+    case ITEM00_STICK:
+        if (gSave.age == AGE_ADULT && !Config_Flag(CFG_OOT_AGELESS_STICKS))
+            dropId = ITEM00_RUPEE_GREEN;
+        break;
     case ITEM00_BOMB:
     case ITEM00_BOMBS_5:
     case ITEM00_BOMBS_5_ALT:
-        dropId = bombDrop(dropId);
+        dropId = fixDropBomb(dropId);
+        break;
+    case ITEM00_ARROWS_5: dropId = fixDropArrowSeeds(0); break;
+    case ITEM00_ARROWS_10: dropId = fixDropArrowSeeds(1); break;
+    case ITEM00_ARROWS_30: dropId = fixDropArrowSeeds(2); break;
+    case ITEM00_SEEDS: dropId = fixDropArrowSeeds(0); break;
+    case ITEM00_RECOVERY_HEART:
+        if (gSave.info.playerData.health >= gSave.info.playerData.healthCapacity)
+            dropId = ITEM00_RUPEE_GREEN;
+        break;
+    case ITEM00_MAGIC_SMALL:
+    case ITEM00_MAGIC_LARGE:
+        if (!gSave.info.playerData.isMagicAcquired)
+            dropId = -1;
         break;
     default:
         break;
     }
 
-    if (dropId == ITEM00_BOMBCHU)
-        return dropId;
-
-    return EnItem00_FixDrop(dropId);
+    return dropId;
 }
 
-PATCH_CALL(0x8001376c, EnItem00_FixDropWrapper);
-PATCH_CALL(0x80013998, EnItem00_FixDropWrapper);
-PATCH_CALL(0x80013dec, EnItem00_FixDropWrapper);
+PATCH_CALL(0x8001376c, EnItem00_FixDrop);
+PATCH_CALL(0x80013998, EnItem00_FixDrop);
+PATCH_CALL(0x80013dec, EnItem00_FixDrop);
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 {
@@ -155,13 +198,6 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
         {
             xflag->setupId = 0;
             xflag->id = 4;
-        }
-        break;
-    case SCE_OOT_KOKIRI_FOREST:
-        if (xflag->setupId == 3)
-        {
-            xflag->setupId = 2;
-            xflag->id += 2;
         }
         break;
     }

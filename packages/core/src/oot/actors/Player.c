@@ -276,6 +276,7 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
 
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
+    Player_HandleBronzeScale(this, play);
     Ocarina_HandleCustomSongs(this, play);
     Dpad_Update(play);
     Dpad_Use(play, DPF_EQUIP);
@@ -935,7 +936,7 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
 void Player_RumbleAgony(void)
 {
     Interface_AgonyIconTick();
-    Rumble_Request(120, 20, 10, 0);
+    Rumble_Request(0, 120, 20, 10);
 }
 
 void Player_ChargeSword(Player* this)

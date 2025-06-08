@@ -167,11 +167,26 @@
     "MQ Ganon Castle Icicle Water 6": "break_icicle"
     "MQ Ganon Castle Icicle Water 7": "break_icicle"
     "MQ Ganon Castle Icicle Water 8": "break_icicle"
+    "MQ Ganon Castle Red Ice Water 1": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 2": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 3": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 4": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 5": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 6": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 7": "has_blue_fire"
 "Ganon Castle Water Trial Entrance Room Behind Red Ice":
   dungeon: Ganon
   exits:
     "Ganon Castle Water Trial Entrance": "has_blue_fire || climb_anywhere"
     "Ganon Castle Water Trial Silver Rupee Room": "small_keys_ganon(3)"
+  locations:
+    "MQ Ganon Castle Red Ice Water 1": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 2": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 3": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 4": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 5": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 6": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Water 7": "has_blue_fire"
 "Ganon Castle Water Trial Silver Rupee Room":
   dungeon: Ganon
   exits:
@@ -183,11 +198,25 @@
     "MQ Ganon Castle SR Water Alcove": "has_blue_fire && (is_adult || climb_anywhere || hookshot_anywhere)"
     "MQ Ganon Castle SR Water Deep Hole": "true"
     "MQ Ganon Castle SR Water Under Alcove": "true"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 1": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 2": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 3": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 4": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 5": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 6": "has_blue_fire"
 "Ganon Castle Water Trial Silver Rupee Room Behind Red Ice":
   dungeon: Ganon
   exits:
     "Ganon Castle Water Trial Silver Rupee Room": "has_blue_fire || climb_anywhere || hookshot_anywhere"
     "Ganon Castle Water Trial Ending Room": "silver_rupees_ganon_water"
+  locations:
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 1": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 2": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 3": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 4": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 5": "has_blue_fire"
+    "MQ Ganon Castle Red Ice Block Silver Rupee Room 6": "has_blue_fire"
+
 "Ganon Castle Water Trial Ending Room":
   dungeon: Ganon
   exits:

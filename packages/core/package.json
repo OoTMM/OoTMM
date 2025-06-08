@@ -38,16 +38,20 @@
     "targets": {
       "build": {
         "inputs": [
+          { "dependentTasksOutputFiles": "**/*" },
           "ts",
           "{workspaceRoot}/third_party/**/*",
           "{workspaceRoot}/roms/**/*",
-          "{projectRoot}/node_modules/**/*",
           "{projectRoot}/data/**/*",
           "{projectRoot}/include/**/*",
           "{projectRoot}/src/**/*",
           "{projectRoot}/CMakeLists.txt",
-          { "env": "VERSION" },
-          { "env": "NODE_ENV" }
+          {
+            "env": "VERSION"
+          },
+          {
+            "env": "NODE_ENV"
+          }
         ],
         "outputs": [
           "{projectRoot}/dist/**/*",
@@ -63,8 +67,16 @@
           "build"
         ]
       },
-      "start": {"dependsOn": ["build"]},
-      "start:config": {"dependsOn": ["build"]}
+      "start": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start:config": {
+        "dependsOn": [
+          "build"
+        ]
+      }
     }
   }
 }

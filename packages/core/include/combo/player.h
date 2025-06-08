@@ -14,6 +14,7 @@
 #define PLAYER_ACTOR_STATE_TRANSITION           0x00000001
 #define PLAYER_ACTOR_STATE_TRANSFORM            0x00000002
 #define PLAYER_ACTOR_STATE_CLIMB                0x00000004
+#define PLAYER_ACTOR_STATE_TALKING              0x00000040
 #define PLAYER_ACTOR_STATE_DEATH                0x00000080
 #define PLAYER_ACTOR_STATE_FROZEN               0x00000200
 #define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
@@ -48,5 +49,8 @@ void Player_DrawHookshotReticle(PlayState* play, Player* player, f32 distance);
 void Player_UpdateForm(Player* this, PlayState* play);
 void Player_TryUpdateForm(Player* this, PlayState* play);
 #endif
+
+/* Custom stuff */
+void Player_HandleBronzeScale(Player* this, PlayState* play);
 
 #endif

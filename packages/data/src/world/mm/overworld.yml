@@ -137,7 +137,7 @@
 "Owl Great Bay":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "can_reset_time"
+    "Great Bay Coast Platform": "can_reset_time"
     "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && has_arrows"
   events:
     PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
@@ -2571,16 +2571,15 @@
 "Great Bay Coast":
   region: GREAT_BAY_COAST
   exits:
+    "Great Bay Coast Platform": "!setting(jpLayouts, GreatBayCoast) || has_mask_zora"
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
     "Great Bay Coast Fortress": "underwater_walking"
     "Great Bay Coast Near Pinnacle": "true"
-    "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
-    "Owl Great Bay": "true"
     "Great Bay Coast Water Void": "true"
     "Great Bay Coast Butterflies": "has_sticks"
   events:
@@ -2618,6 +2617,12 @@
     "Great Bay Coast Grass 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
+"Great Bay Coast Platform":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "true"
+    "Laboratory": "true"
+    "Owl Great Bay": "true"
 "Great Bay Coast Butterflies":
   region: GREAT_BAY_COAST
   locations:
@@ -2775,7 +2780,7 @@
   exits:
     "Great Bay Coast": "true"
   events:
-    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle"
+    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle && is_ocean_cursed"
 "Pinnacle Rock Entrance":
   region: PINNACLE_ROCK
   exits:
@@ -2790,7 +2795,7 @@
     "Pinnacle Rock Water Void": "true"
     "Pinnacle Rock Entrance": "true"
   events:
-    ZORA_EGGS_PINNACLE_ROCK: "true"
+    ZORA_EGGS_PINNACLE_ROCK: "has_mask_zora || can_hookshot_short"
     MAGIC: "true"
     FISH: "true"
   locations:
@@ -2815,7 +2820,7 @@
 "Laboratory":
   region: ENTRANCE
   exits:
-    "Great Bay Coast": "true"
+    "Great Bay Coast Platform": "true"
   locations:
     "Laboratory Zora Song": "soul_scientist && has_all_zora_eggs && has_mask_zora && has_ocarina"
     "Laboratory Fish HP": "has_fish"
@@ -2837,7 +2842,7 @@
     "Zora Cape Water Void": "true"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
-    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"
+    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || (has_bombchu && trick(MM_CAPE_LIKE_LIKE_BOMBCHU)) || has_mask_blast))"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
   gossip:
@@ -3232,10 +3237,9 @@
   exits:
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
-    "Secret Shrine": "true"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
-    "Ikana Valley Grotto": "true"
-    "Swamp Front": "true"
+    "Ikana Valley Near Secret Shrine": "can_swim"
+    "Swamp Front": "underwater_walking || can_swim"
   locations:
     "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
     "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
@@ -3243,10 +3247,16 @@
   gossip:
     "Ikana Valley Gossip Lower": "true"
     "Ikana Valley Gossip Scrub": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
+"Ikana Valley Near Secret Shrine":
+  region: IKANA_CANYON
+  exits:
+    "Secret Shrine": "true"
+    "Ikana Valley Grotto": "true"
+    "Ikana Valley": "can_swim"
 "Ikana Valley Grotto":
   region: ENTRANCE
   exits:
-    "Ikana Valley": "true"
+    "Ikana Valley Near Secret Shrine": "true"
   events:
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"

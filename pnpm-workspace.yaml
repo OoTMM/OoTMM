@@ -1,2 +1,7 @@
 packages:
-  - 'packages/*'
+  - packages/*
+onlyBuiltDependencies:
+  - esbuild
+  - microtime
+  - nx
+  - yaz0

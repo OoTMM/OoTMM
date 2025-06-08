@@ -10,7 +10,7 @@ export type { Items } from './item-pool';
 export type { OptionsInput, Options } from './options';
 
 export { PRESETS } from './presets';
-export { SETTINGS, TRICKS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, makeSettings, mergeSettings, DEFAULT_SETTINGS } from './settings';
+export { SETTINGS, TRICKS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, makeSettings, mergeSettings, DEFAULT_SETTINGS, SUBCATEGORIES } from './settings';
 export { COSMETICS, makeCosmetics } from './cosmetics';
 export { COLORS } from './cosmetics/color';
 export { makeRandomSettings } from './settings/random';

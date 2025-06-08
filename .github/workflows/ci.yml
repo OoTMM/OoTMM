@@ -18,6 +18,8 @@ jobs:
         run: |
           echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
+          echo "NX_CMD=run-many" >> $GITHUB_ENV
+          echo "DEPLOY_STABLE=1" >> $GITHUB_ENV
 
       - name: Extract Version (Commit)
         if: ${{ !contains(github.ref, 'refs/tags/') }}
@@ -26,6 +28,8 @@ jobs:
           echo "VERSION=dev" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
           echo "ENV_KEYS=dev" >> $GITHUB_ENV
+          echo "NX_CMD=affected" >> $GITHUB_ENV
+          echo "DEPLOY_DEV=1" >> $GITHUB_ENV
 
       - name: Add n64 toolchain repo
         uses: myci-actions/add-deb-repo@10
@@ -53,18 +57,16 @@ jobs:
         run: pnpm i
 
       - name: Find references for NX
+        if: ${{ !contains(github.ref, 'refs/tags/') }}
         uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: master
 
       - name: Test
-        run: npx nx affected -t test --prod
+        run: npx nx ${NX_CMD} -t test --prod
 
       - name: Build
-        run: npx nx affected -t build --prod
-
-      - name: Install netlify CLI
-        run: npm install -g netlify-cli
+        run: npx nx ${NX_CMD} -t build --prod
 
       - name: Configure AWS
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
@@ -80,9 +82,9 @@ jobs:
 
       - name: Deploy
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
-        run: npx nx affected -t deploy --prod
+        run: npx nx ${NX_CMD} -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}
-          NETLIFY_SITE_ID_WEB: ${{ vars.NETLIFY_SITE_ID_WEB }}
-          NETLIFY_SITE_ID_STATIC: ${{ vars.NETLIFY_SITE_ID_STATIC }}
+          NETLIFY_SITE_ID_WEB: ${{ secrets.NETLIFY_SITE_ID_WEB }}
+          NETLIFY_SITE_ID_STATIC: ${{ secrets.NETLIFY_SITE_ID_STATIC }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
