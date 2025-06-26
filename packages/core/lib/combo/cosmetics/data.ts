@@ -13,11 +13,11 @@ export const COSMETICS = [{
   name: 'Display Music Names',
   type: 'boolean',
   default: true,
-}, {
-  key: 'nightBgm',
-  name: 'Enable Nighttime BGM',
-  type: 'boolean',
-  default: false,
+// }, {
+//   key: 'nightBgm',
+//   name: 'Enable Nighttime BGM',
+//   type: 'boolean',
+//   default: false,
 }, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',

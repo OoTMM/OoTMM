@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Cosmetics setting to enable BGM during night time.
+<!-- - Cosmetics setting to enable BGM during night time. -->
 - Add a setting to make kakariko gate closed as adult too.
 
 ### Changed
