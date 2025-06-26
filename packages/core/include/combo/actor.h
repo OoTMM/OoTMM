@@ -409,10 +409,12 @@ ASSERT_OFFSET(Actor, ovl,       X(0x138));
 #undef X
 
 #if defined(GAME_OOT)
+ASSERT_OFFSET(Actor, sfx, 0x020);
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 #endif
 
 #if defined(GAME_MM)
+ASSERT_OFFSET(Actor, sfx, 0x050);
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif

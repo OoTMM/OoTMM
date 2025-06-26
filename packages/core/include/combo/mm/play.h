@@ -419,8 +419,12 @@ _Static_assert(sizeof(RoomContext) == 0x80, "MM RoomContext size is wrong");
 
 typedef struct {
     /* 0x0 */ u8   seqId;
+#if defined(GAME_OOT)
+    /* 0x1 */ u8   natureAmbienceId;
+#else
     /* 0x1 */ u8   ambienceId;
-} SequenceContext; /* size = 0x2 */
+#endif
+} SceneSequences; /* size = 0x2 */
 
 typedef struct {
     /* 0x000 */ GameState state;
@@ -464,7 +468,7 @@ typedef struct PlayState
     Camera*             cameraPtrs[4];
     s16                 activeCamId;
     s16                 nextCamera;
-    SequenceContext     sequenceCtx;
+    SceneSequences      sceneSequences;
     LightContext        lightCtx;
     char                unk_00828[0x08];
     CollisionContext    colCtx;

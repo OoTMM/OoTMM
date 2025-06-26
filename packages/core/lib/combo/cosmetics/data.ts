@@ -14,6 +14,11 @@ export const COSMETICS = [{
   type: 'boolean',
   default: true,
 }, {
+  key: 'nightBgm',
+  name: 'Enable Nighttime BGM',
+  type: 'boolean',
+  default: false,
+}, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
   type: 'color',

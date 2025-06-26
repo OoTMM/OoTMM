@@ -400,6 +400,10 @@ class CosmeticsPass {
       this.patchSymbol('DPAD_COLOR', colorBufferRGB(colorDpad));
     }
 
+    if(c.nightBgm) {
+      this.patchSymbol('NIGHT_BGM', new Uint8Array([0x01]));
+    }
+
     /* Patch models */
     await this.patchOotChildModel();
     await this.patchOotAdultModel();

@@ -20,6 +20,7 @@ const ENTRANCES_DEBUG_CATEGORIES = {
   OOT_GROTTO: 'Grottos (OoT)',
   MM_GROTTO: 'Grottos (MM)',
   SPECIAL: 'Special',
+  EXTRA: 'Extra',
 };
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {

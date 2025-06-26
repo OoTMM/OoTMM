@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Cosmetics setting to enable BGM during night time.
 - Add a setting to make kakariko gate closed as adult too.
 
 ### Changed
@@ -72,7 +73,6 @@ All notable changes to this project will be documented in this file.
 - Add the ability to shuffle the drops from thawing Red Ice in OoT.
 
 ### Changed
-
 
 - Layout of the settings in the Shared and Extensions tabs.
 - Layout of the settings in the Misc. tab.

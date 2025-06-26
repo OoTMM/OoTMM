@@ -44,3 +44,8 @@ PATCH_START 0x80baa6d0 + 0x2ee0
   addiu   a0, s0, 0x0070
   lui     a1, 0x4080
 PATCH_END
+
+/* Replaces the call to AudioSeq_QueueSeqCmd in the EnSuttari_Destroy function */
+PATCH_START 0x80baa6d0 + 0x3a0c
+  nop
+PATCH_END

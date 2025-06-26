@@ -596,3 +596,4 @@ MM_GORMAN_TRACK_UNK5:                           { game: mm, id: 0xce40, type: no
 MM_GORMAN_TRACK_UNK6:                           { game: mm, id: 0xce50, type: none }
 MM_GORON_RACETRACK_ALT:                         { game: mm, id: 0xd010, type: none }
 MM_INTERNAL_EXIT_GROTTO:                        { game: mm, id: 0xffff, type: none }
+MM_LOST_WOODS:                                  { game: mm, id: 0xc400, type: none, debug: ['EXTRA', 'MM Lost Woods'] }

@@ -699,3 +699,5 @@ BgCheck_EntityRaycastFloor1 = 0x800c3fa0;
 
 Math3D_LineSegVsPlane = 0x8017d2fc;
 EffectSsDeadDb_Spawn = 0x800b2f80;
+
+Audio_SetSpec = 0x801a400c;
