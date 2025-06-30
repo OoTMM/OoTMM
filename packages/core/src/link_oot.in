@@ -719,3 +719,5 @@ DynaPoly_EnableCollision = 0x80031530;
 func_8002ED80 = 0x80022554;
 
 Actor_PlaySfx_FlaggedCentered2 = 0x80023108;
+
+Actor_SetObjectDependency = 0x80020fa4;

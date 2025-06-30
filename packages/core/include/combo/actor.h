@@ -608,6 +608,7 @@ typedef struct NpcInteractInfo {
 #if defined(GAME_OOT)
 void func_80033480(struct PlayState* play, Vec3f* posBase, f32 randRangeDiameter, s32 amountMinusOne, s16 scaleBase,
                    s16 scaleStep, u8 arg6);
+void Actor_SetObjectDependency(struct PlayState* play, Actor* actor);
 #else
 extern Gfx D_801AEFA0[];
 extern Gfx D_801AEF88[];

@@ -283,6 +283,7 @@ OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f, type: no
 OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d, type: none } # Multiple uses
 OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc, type: none } # Multiple uses
 OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4, type: none } # Multiple uses
+OOT_SHADOW_TEMPLE_FROM_LAIR:                    { game: oot, id: 0x2b2, type: none, debug: ['EXTRA', 'Bongo-Bongo Lair Exit']}
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
 MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, maps: [MM_TEMPLE_WOODFALL, MM_TEMPLE_WOODFALL_BOSS], flags: [no-sot, no-global], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"], debug: ['BOSS', 'Odolwa'] }
 MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, maps: [MM_TEMPLE_SNOWHEAD, MM_TEMPLE_SNOWHEAD_BOSS], flags: [no-sot, no-global], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"], debug: ['BOSS', 'Goht'] }
