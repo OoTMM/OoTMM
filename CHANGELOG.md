@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
+- Permanently remove the sandstorm in Haunted Wastelands.
 - Add a setting to make kakariko gate closed as adult too.
 
 ### Changed
