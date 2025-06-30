@@ -74,7 +74,8 @@ void ObjMure3_SpawnRupee(Actor_ObjMure3* this, PlayState* play, Vec3f* pos, int 
         return;
 
     /* Get the matching xflag */
-    comboXflagInit(&g.xflag, &this->actor, play);
+    if (comboXflagInit(&g.xflag, &this->actor, play))
+        ObjMure3_Alias(&g.xflag);
     g.xflag.sliceId = (u8)index;
 
     /* Spawn the item */
