@@ -108,6 +108,14 @@ export const SETTINGS = [{
   min: 1,
   max: 999,
 }, {
+  key: 'triforceSharedMulti',
+  name: 'Shared Multiworld Triforce Pieces',
+  category: 'main',
+  type: 'boolean',
+  description: 'If enabled, triforce pieces are shared between players. If disabled, each player has it\'s own set of triforce pieces.',
+  default: false,
+  cond: (s: any) => (s.goal === 'triforce' || s.goal === 'triforce3') && s.mode === 'multi',
+}, {
   key: 'logic',
   name: 'Logic',
   category: 'main',

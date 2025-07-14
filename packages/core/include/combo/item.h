@@ -252,4 +252,6 @@ extern u8 gMaxBombchuMm;
 
 void Inventory_UpdateMaxBombchu(void);
 
+int Item_IsPlayerSelf(u8 playerId);
+
 #endif

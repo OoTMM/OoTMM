@@ -962,17 +962,27 @@ export class LogicPassWorldTransform {
 
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, i), settings.triforcePieces);
+      if (settings.triforceSharedMulti) {
+        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, 'all'), settings.triforcePieces);
+      } else {
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, i), settings.triforcePieces);
+        }
       }
     }
 
     /* Triforce quest */
     if (settings.goal === 'triforce3') {
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_POWER, i), 1);
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, i), 1);
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, i), 1);
+      if (settings.triforceSharedMulti) {
+        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_POWER, 'all'), 1);
+        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, 'all'), 1);
+        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, 'all'), 1);
+      } else {
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_POWER, i), 1);
+          this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, i), 1);
+          this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, i), 1);
+        }
       }
     }
 

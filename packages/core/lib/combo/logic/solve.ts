@@ -613,52 +613,61 @@ export class LogicPassSolver {
     this.placeNamedTriforce();
   }
 
+  private placeNamedTriforceWorld(worldId: number | 'all') {
+    let locs: Map<Location, number>;
+    if (this.input.settings.logic !== 'none') {
+      locs = this.getSpheres();
+    } else {
+      locs = new Map(this.locations.map(x => [x, 1] as const));
+    }
+    locs = new Map(Array.from(locs.entries()).filter(x => (worldId === 'all' || locationData(x[0]).world === worldId) && !this.state.items.has(x[0])));
+    const medianSphere = Array.from(locs.values()).sort((a, b) => a - b)[Math.floor(locs.size / 2)];
+    const underMedian = Array.from(locs.keys()).filter(x => locs.get(x)! < medianSphere);
+    for (const l of underMedian) {
+      locs.delete(l);
+    }
+    let locsArray = shuffle(this.input.random, countMapArray(locs));
+    const triforces = [
+      makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId),
+      makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, worldId),
+      makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, worldId),
+    ];
+
+    for (;;) {
+      const candidates = shuffle(this.input.random, triforces);
+      let pi: PlayerItem | undefined;
+      for (;;) {
+        pi = candidates.pop();
+        if (!pi)
+          break;
+        if (this.state.pools.extra.has(pi))
+          break;
+      }
+      if (!pi)
+        break;
+      const l = locsArray.pop();
+      if (!l)
+        throw new LogicSeedError('Failed to place extra triforce');
+      const locWorld = locationData(l).world!;
+      const region = this.worlds[locWorld].regions[locationData(l).id];
+      if (region !== 'NONE') {
+        locsArray = locsArray.filter(x => locationData(x).world !== locWorld || this.worlds[locWorld].regions[locationData(x).id] !== region);
+      }
+      this.place(l, pi);
+      removeItemPools(this.state.pools, pi);
+    }
+  }
+
   private placeNamedTriforce() {
     if (this.input.settings.goal !== 'triforce3')
       return;
 
     this.retry(() => {
-      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-        let locs: Map<Location, number>;
-        if (this.input.settings.logic !== 'none') {
-          locs = this.getSpheres();
-        } else {
-          locs = new Map(this.locations.map(x => [x, 1] as const));
-        }
-        locs = new Map(Array.from(locs.entries()).filter(x => locationData(x[0]).world === worldId && !this.state.items.has(x[0])));
-        const medianSphere = Array.from(locs.values()).sort((a, b) => a - b)[Math.floor(locs.size / 2)];
-        const underMedian = Array.from(locs.keys()).filter(x => locs.get(x)! < medianSphere);
-        for (const l of underMedian) {
-          locs.delete(l);
-        }
-        let locsArray = shuffle(this.input.random, countMapArray(locs));
-        const triforces = [
-          makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId),
-          makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, worldId),
-          makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, worldId),
-        ];
-
-        for (;;) {
-          const candidates = shuffle(this.input.random, triforces);
-          let pi: PlayerItem | undefined;
-          for (;;) {
-            pi = candidates.pop();
-            if (!pi)
-              break;
-            if (this.state.pools.extra.has(pi))
-              break;
-          }
-          if (!pi)
-            break;
-          const l = locsArray.pop();
-          if (!l)
-            throw new LogicSeedError('Failed to place extra triforce');
-          const region = this.worlds[worldId].regions[locationData(l).id];
-          if (region !== 'NONE') {
-            locsArray = locsArray.filter(x => this.worlds[worldId].regions[locationData(x).id] !== region);
-          }
-          this.place(l, pi);
-          removeItemPools(this.state.pools, pi);
+      if (this.input.settings.triforceSharedMulti) {
+        this.placeNamedTriforceWorld('all');
+      } else {
+        for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+          this.placeNamedTriforceWorld(worldId);
         }
       }
     });
@@ -876,7 +885,7 @@ export class LogicPassSolver {
       for (const [item, fairy] of fairies) {
         for (const pi of items) {
           if (pi.item === item) {
-            const loc = makeLocation(fairy, pi.player);
+            const loc = makeLocation(fairy, pi.player as number);
             greatFairyLocs.add(loc);
           }
         }

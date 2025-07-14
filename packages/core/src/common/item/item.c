@@ -22,9 +22,9 @@ const u8 kMaxBombs[] = { 0, 20, 30, 40 };
 const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
 
-static int isPlayerSelf(u8 playerId)
+int Item_IsPlayerSelf(u8 playerId)
 {
-    if (playerId == PLAYER_SELF || playerId == gComboConfig.playerId)
+    if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == gComboConfig.playerId)
         return 1;
     return 0;
 }
@@ -104,7 +104,7 @@ int comboItemPrecond(const ComboItemQuery* q, s16 price)
     if (o.gi == GI_NOTHING)
         return SC_ERR_CANNOTBUY;
 
-    if (isPlayerSelf(o.player) && ((!Config_Flag(CFG_MULTIPLAYER) && !isItemBuyable(o.gi)) || !isItemLicensed(o.gi)))
+    if (Item_IsPlayerSelf(o.player) && ((!Config_Flag(CFG_MULTIPLAYER) && !isItemBuyable(o.gi)) || !isItemLicensed(o.gi)))
         return SC_ERR_CANNOTBUY;
 
     if (gSave.info.playerData.rupees < price)
@@ -328,7 +328,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
     dst->giRaw = gi;
 
-    if (isPlayerSelf(dst->player))
+    if (Item_IsPlayerSelf(dst->player))
         gi = comboProgressive(gi, q->ovFlags);
 
     if (neg)
@@ -349,7 +349,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     count = 0;
 
     /* Add the item if it's for us */
-    if (isPlayerSelf(o.player))
+    if (Item_IsPlayerSelf(o.player))
         count = comboAddItemRaw(play, o.gi);
 
     /* Update text */
@@ -359,7 +359,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     if (Config_Flag(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
     {
         /* Mark the item */
-        if (isPlayerSelf(o.player))
+        if (Item_IsPlayerSelf(o.player))
         {
 #if defined(GAME_OOT)
             Multi_SetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
