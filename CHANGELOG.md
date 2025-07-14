@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- In Co-op, item buy logic is relaxed a little to let the player buy items for their partner(s).
 - Fire Arrows are no longer required for Great Bay Temple's wheel room after reversing the water direction, due to the revamped save system.
 
 ### Fixed
