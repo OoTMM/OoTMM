@@ -43,7 +43,7 @@ static int EnIn_CanBuy(void)
     int ret;
 
     EnIn_ItemQuery(&q, GI_MM_MILK);
-    ret = comboItemPrecondEx(&q, 50);
+    ret = comboItemPrecond(&q, 50);
     if (ret == SC_OK || ret == SC_OK_NOCUTSCENE)
         return 1;
     return 0;

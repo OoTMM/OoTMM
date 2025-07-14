@@ -96,7 +96,7 @@ static int EnAkindonuts_Precond(Actor* this)
 
     id = EnAkindonuts_ShopID(this);
     EnAkindonuts_ShopItemQuery(&q, id);
-    sc = comboItemPrecondEx(&q, kPrices[id]);
+    sc = comboItemPrecond(&q, kPrices[id]);
 
     switch (sc)
     {

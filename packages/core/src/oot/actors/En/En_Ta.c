@@ -99,7 +99,7 @@ static void EnTa_BuyMilk(Actor* this, PlayState* play)
     int ret;
 
     EnTa_BuyItemQuery(&q);
-    ret = comboItemPrecondEx(&q, PRICE);
+    ret = comboItemPrecond(&q, PRICE);
 
     if (ret == SC_OK || ret == SC_OK_NOCUTSCENE)
     {

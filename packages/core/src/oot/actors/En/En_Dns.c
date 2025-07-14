@@ -174,7 +174,7 @@ static int EnDns_CanBuy(Actor* this)
     price = EnDns_GetPrice(this);
     EnDns_PatchPrice(this, price);
 
-    switch (comboItemPrecondEx(&q, price))
+    switch (comboItemPrecond(&q, price))
     {
     case SC_OK:
     case SC_OK_NOCUTSCENE:

@@ -93,7 +93,7 @@ void comboSyncItems(void)
     }
 }
 
-int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
+int comboItemPrecond(const ComboItemQuery* q, s16 price)
 {
     ComboItemOverride o;
 
