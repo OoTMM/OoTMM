@@ -962,9 +962,11 @@ export class LogicPassWorldTransform {
 
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, i), settings.triforcePieces);
+      let player: number | 'all' = 0;
+      if (this.state.worlds.length > 1) {
+        player = 'all';
       }
+      this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, player), settings.triforcePieces);
     }
 
     /* Triforce quest */
