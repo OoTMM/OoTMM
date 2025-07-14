@@ -53,10 +53,10 @@ static int ObjKibako_CsmcType(Actor_ObjKibako* this)
     ComboItemOverride o;
 
     if (!ObjKibako_IsExtended(this))
-        o.gi = GI_NONE;
-    else
-        comboXflagItemOverride(&o, &this->xflag, 0);
+        return CSMC_NORMAL;
 
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    
     if (!csmcEnabled())
         return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
 
