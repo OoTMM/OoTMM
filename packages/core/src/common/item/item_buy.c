@@ -167,8 +167,6 @@ int isItemBuyable(s16 gi)
         return canBuyShieldMm(0);
     case GI_MM_SHIELD_HERO:
         return canBuyShieldMm(1);
-    case GI_NOTHING:
-        return 0;
     default:
         return 1;
     }

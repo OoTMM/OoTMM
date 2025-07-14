@@ -99,7 +99,12 @@ int comboItemPrecond(const ComboItemQuery* q, s16 price)
 
     comboSyncItems();
     comboItemOverride(&o, q);
-    if (isPlayerSelf(o.player) && (!isItemBuyable(o.gi) || !isItemLicensed(o.gi)))
+
+    /* Nothing can never be bought */
+    if (o.gi == GI_NOTHING)
+        return SC_ERR_CANNOTBUY;
+
+    if (isPlayerSelf(o.player) && ((!Config_Flag(CFG_MULTIPLAYER) && !isItemBuyable(o.gi)) || !isItemLicensed(o.gi)))
         return SC_ERR_CANNOTBUY;
 
     if (gSave.info.playerData.rupees < price)
