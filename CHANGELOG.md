@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
+- Add an option to share triforce pieces in multiworld (including triforce quest).
 - Speed up the fall down of the Shadow Temple Big Bird Statue.
 - Speed up Bottom of the Well water drainage by 500%.
 - Permanently remove the sandstorm in Haunted Wastelands.
