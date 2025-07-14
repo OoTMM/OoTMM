@@ -489,6 +489,12 @@ async function makeCloakGi(key: number, seed: string, settings: Settings, logic:
   }
 }
 
+function playerId(player: number | 'all'): number {
+  if (player === 'all')
+    return 0xff;
+  return player + 1;
+}
+
 const gameChecks = async (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Promise<Uint8Array> => {
   const buffers: Uint8Array[] = [];
   const world = logic.worlds[worldId];
@@ -509,7 +515,7 @@ const gameChecks = async (worldId: number, opts: Options, settings: Settings, ga
     const itemGi = gi(settings, game, item.item, true);
     const b = new Uint8Array(16);
     bufWriteU32BE(b, 0, key);
-    bufWriteU16BE(b, 4, item.player + 1);
+    bufWriteU16BE(b, 4, playerId(item.player));
     bufWriteU16BE(b, 6, itemGi);
     let cloakGi = 0;
     if (item.item === Items.OOT_TRAP_ICE && settings.cloakIceTraps) {
@@ -635,16 +641,16 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       bufWriteU8(data, HINT_OFFSETS.REGION, check);
       bufWriteU8(data, HINT_OFFSETS.WORLD, hint.world + 1);
       bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemsGI[0]);
-      bufWriteU8(data, HINT_OFFSETS.PLAYER, items[0].player + 1);
+      bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(items[0].player));
       bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importances[0]);
       if (items.length > 1) {
         bufWriteU16BE(data, HINT_OFFSETS.ITEM2, itemsGI[1]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER2, items[1].player + 1);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER2, playerId(items[1].player));
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE2, hint.importances[1]);
       }
       if (items.length > 2) {
         bufWriteU16BE(data, HINT_OFFSETS.ITEM3, itemsGI[2]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER3, items[2].player + 1);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER3, playerId(items[2].player));
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE3, hint.importances[2]);
       }
     }
@@ -663,7 +669,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         bufWriteU8(data, HINT_OFFSETS.REGION, region);
         bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
         bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemGI);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER, item.player + 1);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(item.player));
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importance);
       }
       break;

@@ -876,7 +876,7 @@ export class LogicPassSolver {
       for (const [item, fairy] of fairies) {
         for (const pi of items) {
           if (pi.item === item) {
-            const loc = makeLocation(fairy, pi.player);
+            const loc = makeLocation(fairy, pi.player as number);
             greatFairyLocs.add(loc);
           }
         }

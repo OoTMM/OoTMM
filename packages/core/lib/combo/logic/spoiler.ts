@@ -414,7 +414,7 @@ export class LogicPassSpoiler {
   }
 
   private itemName(item: PlayerItem) {
-    if (this.isMulti) {
+    if (this.isMulti && item.player !== 'all') {
       return `${this.strPad("Player", item.player + 1)} ${itemName(item.item.id)}`;
     } else {
       return itemName(item.item.id);

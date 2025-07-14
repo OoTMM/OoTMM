@@ -479,16 +479,31 @@ export class Pathfinder {
     const globalLoc = makeLocation(loc, worldId);
     const playerItem = this.opts.items?.get(globalLoc);
     if (playerItem) {
-      const otherWs = this.state.ws[playerItem.player];
+      const otherWss = playerItem.player === 'all' ? this.state.ws : [this.state.ws[playerItem.player]];
       ws.uncollectedLocations.delete(loc);
       ws.collectedLocations.add(loc);
-      countMapAdd(otherWs.items, playerItem.item);
-      if (isLocationRenewable(world, globalLoc)) {
-        countMapAdd(otherWs.renewables, playerItem.item);
+      for (const otherWs of otherWss) {
+        countMapAdd(otherWs.items, playerItem.item);
       }
-      if (isLocationLicenseGranting(world, globalLoc))
-        countMapAdd(otherWs.licenses, playerItem.item);
-      this.requeueItem(playerItem.player, playerItem.item);
+      if (isLocationRenewable(world, globalLoc)) {
+        for (const otherWs of otherWss) {
+          countMapAdd(otherWs.renewables, playerItem.item);
+        }
+      }
+      if (isLocationLicenseGranting(world, globalLoc)) {
+        for (const otherWs of otherWss) {
+          countMapAdd(otherWs.licenses, playerItem.item);
+        }
+      }
+
+      if (playerItem.player === 'all') {
+        for (let i = 0; i < this.worlds.length; ++i) {
+          this.requeueItem(i, playerItem.item);
+        }
+      } else {
+        this.requeueItem(playerItem.player, playerItem.item);
+      }
+
       if (isTriforcePiece(playerItem.item)) {
         this.updateGoalFlags();
       }
@@ -792,14 +807,22 @@ export class Pathfinder {
         const amountPrev = this.state.previousAssumedItems.get(playerItem) || 0;
 
         if (amount > amountPrev) {
-          const ws = this.state.ws[playerItem.player];
-          const delta = amount - amountPrev;
-
-          countMapAdd(ws.items, playerItem.item, delta);
-          countMapAdd(ws.renewables, playerItem.item, delta);
-          countMapAdd(ws.licenses, playerItem.item, delta);
-          this.requeueItem(playerItem.player, playerItem.item);
-          this.state.previousAssumedItems.set(playerItem, amount);
+          const wss = playerItem.player === 'all' ? this.state.ws : [this.state.ws[playerItem.player]];
+          for (const ws of wss) {
+            const delta = amount - amountPrev;
+  
+            countMapAdd(ws.items, playerItem.item, delta);
+            countMapAdd(ws.renewables, playerItem.item, delta);
+            countMapAdd(ws.licenses, playerItem.item, delta);
+            this.state.previousAssumedItems.set(playerItem, amount);
+          }
+          
+          if (playerItem.player === 'all') {
+            for (let i = 0; i < this.worlds.length; ++i)
+              this.requeueItem(i, playerItem.item);
+          } else {
+            this.requeueItem(playerItem.player, playerItem.item);
+          }
         }
       }
     }
