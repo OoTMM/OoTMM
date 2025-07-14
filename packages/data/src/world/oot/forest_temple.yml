@@ -193,7 +193,11 @@
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:
-    "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
+    "Forest Temple Antichamber Room Hallway Before Boss": "true"
   locations:
     "Forest Temple Antichamber": "true"
     "Forest Temple GS Antichamber": "gs && (can_collect_distance || climb_anywhere)"
+"Forest Temple Antichamber Room Hallway Before Boss":
+  dungeon: Forest
+  exits:
+    "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
