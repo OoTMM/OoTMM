@@ -771,9 +771,12 @@ static void Multi_ReceiveItem(PlayState* play, NetContext* net)
 
 static void Multi_ProcessItems(PlayState* play, NetContext* net)
 {
+    u8 playerTo;
+
     if (net->cmdIn.op == NET_OP_ITEM_RECV)
     {
-        if (net->cmdIn.itemRecv.playerTo != gComboConfig.playerId)
+        playerTo = net->cmdIn.itemRecv.playerTo;
+        if (playerTo != gComboConfig.playerId && playerTo != PLAYER_ALL)
         {
             bzero(&net->cmdIn, sizeof(net->cmdIn));
             gSaveLedgerBase++;

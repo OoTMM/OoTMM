@@ -1035,14 +1035,14 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
         gi = o->cloakGi;
 
     comboTextAppendItemNameEx(b, gi, flags, importance);
-    if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboConfig.playerId)
+    if (!Item_IsPlayerSelf(o->player))
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->player);
         comboTextAppendClearColor(b);
     }
 
-    if (o->playerFrom != PLAYER_SELF && o->playerFrom != PLAYER_ALL && o->playerFrom != gComboConfig.playerId)
+    if (!Item_IsPlayerSelf(o->playerFrom))
     {
         comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->playerFrom);
@@ -1324,9 +1324,6 @@ void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o)
 {
     char* b;
     char* start;
-    int isSelf;
-
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
     b = play->msgCtx.font.msgBuf;
 
@@ -1335,10 +1332,8 @@ void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o)
     comboTextAppendStr(&b, "You caught ");
     comboTextAppendItemNameOverride(&b, o, TF_NONE);
     comboTextAppendStr(&b, "!");
-    if (isSelf)
-    {
+    if (Item_IsPlayerSelf(o->player))
         comboTextExtra(&b, play, o->gi);
-    }
     comboTextAppendStr(&b, TEXT_BB TEXT_CZ);
     comboTextAppendStr(&b, "Do you want to keep it?");
     comboTextAppendStr(&b, TEXT_NL " " TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN);
