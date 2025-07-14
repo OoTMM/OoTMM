@@ -167,9 +167,6 @@ void comboTextHijackItemEx(PlayState* play, const ComboItemOverride* o, int coun
 {
     char* b;
     char* start;
-    int isSelf;
-
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
 #if defined(GAME_OOT)
     b = play->msgCtx.font.msgBuf;
@@ -181,7 +178,7 @@ void comboTextHijackItemEx(PlayState* play, const ComboItemOverride* o, int coun
     comboTextAppendStr(&b, "You got ");
     comboTextAppendItemNameOverride(&b, o, TF_NOCLOAK);
     comboTextAppendStr(&b, "!");
-    if (isSelf)
+    if (Item_IsPlayerSelf(o->player))
     {
         if (count)
         {
