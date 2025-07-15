@@ -1,15 +1,12 @@
-import { DoubleList } from './DoubleList';
+import { useCallback, useMemo } from 'react';
+import { FaYoutube, FaFileLines } from 'react-icons/fa6';
 import { TRICKS } from '@ootmm/core';
 import { TrickKey } from '@ootmm/core/lib/combo/settings';
-import { FaYoutube, FaFileLines } from 'react-icons/fa6';
-import { useSettings } from '../contexts/GeneratorContext';
+
+import { DoubleList } from './DoubleList';
 import { Tooltip } from './Tooltip';
 import { GameName } from './GameName';
-
-const GAMES_NAMES = {
-  oot: "Ocarina of Time",
-  mm: "Majora's Mask",
-};
+import { usePatchSettings, useSetting } from '../contexts/SettingsContext';
 
 function trickExtra(trick: TrickKey) {
   const t = TRICKS[trick];
@@ -27,27 +24,28 @@ type GameTricksProps = {
   game: 'oot' | 'mm';
 }
 function GameTricks({ glitches, game }: GameTricksProps) {
-  const [settings, setSettings] = useSettings();
-  const tricks = Object.keys(TRICKS).filter((x) => TRICKS[x].game === game && !!(TRICKS[x].glitch) === !!glitches);
-  const selectedTricks = tricks.filter((x) => settings.tricks.includes(x));
-  const options = tricks.map((trickKey) => ({ key: trickKey, label: TRICKS[trickKey].name, extra: trickExtra(trickKey) }));
+  const tricks = useSetting('tricks');
+  const trickKeys = useMemo(() => Object.keys(TRICKS).filter((x) => TRICKS[x].game === game && !!(TRICKS[x].glitch) === !!glitches), [game, glitches]);
+  const selectedTrickKeys = trickKeys.filter((x) => tricks.includes(x));
+  const options = trickKeys.map((trickKey) => ({ key: trickKey, label: TRICKS[trickKey].name, extra: trickExtra(trickKey) }));
+  const patchSettings = usePatchSettings();
 
-  const add = (t: string[]) => {
-    setSettings({ tricks: { add: t } });
-  };
+  const add = useCallback((t: string[]) => {
+    patchSettings({ tricks: { add: t } });
+  }, []);
 
-  const remove = (t: string[]) => {
-    setSettings({ tricks: { remove: t } });
-  };
+  const remove = useCallback((t: string[]) => {
+    patchSettings({ tricks: { remove: t } });
+  }, []);
 
-  const reset = () => {
-    setSettings({ tricks: { remove: tricks } });
-  };
+  const reset = useCallback(() => {
+    patchSettings({ tricks: { remove: trickKeys } });
+  }, []);
 
   return (
     <div>
       <GameName game={game}/>
-      <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedTricks}/>
+      <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedTrickKeys}/>
     </div>
   );
 }
