@@ -1,14 +1,15 @@
 import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 
+import { useCosmetics, useSetCosmetic } from '../contexts/CosmeticsContext';
 import { Dropdown } from './Dropdown';
-import { useCosmetics } from '../contexts/GeneratorContext';
 import { FileSelect } from './FileSelect';
 import { Checkbox } from './Checkbox';
 
 const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
 function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
-  const [cosmetics, setCosmetic] = useCosmetics();
+  const cosmetics = useCosmetics();
+  const setCosmetic = useSetCosmetic();
   const data = COSMETICS.find(x => x.key === cosmetic)!;
 
   switch (data.type) {

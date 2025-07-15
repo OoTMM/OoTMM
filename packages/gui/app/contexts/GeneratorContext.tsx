@@ -1,12 +1,13 @@
 import { ComponentChildren, createContext } from 'preact';
 import { useContext, useEffect, useState, StateUpdater, Dispatch } from 'preact/hooks';
-import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
-import { mergeSettings, makeSettings, COSMETICS } from '@ootmm/core';
+import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch } from '@ootmm/core';
+import { mergeSettings, makeSettings } from '@ootmm/core';
 import { merge } from 'lodash';
 
 import * as API from '../api';
-import { loadFile, loadFileLocal, saveFile, saveFileLocal } from '../db';
+import { loadFile, saveFile } from '../db';
 import { localStoragePrefixedSet } from '../util';
+import { useCosmetics } from './CosmeticsContext';
 
 let settingsTicket = 0;
 
@@ -31,7 +32,6 @@ type GeneratorState = {
   isPatch: boolean;
   settings: Settings;
   random: OptionRandomSettings;
-  cosmetics: Cosmetics;
   itemPool: Items;
   locations: string[];
 }
@@ -43,7 +43,6 @@ type GeneratorContext = {
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: SettingsPatch) => Settings;
-  setCosmetic: (key: string, value: any) => Cosmetics;
   overrideSettings: (settings: Settings) => Settings;
   setRandomSettings: (random: Partial<OptionRandomSettings>) => OptionRandomSettings;
 }
@@ -53,7 +52,6 @@ export const GeneratorContext = createContext<GeneratorContext>(null as any);
 function createState(): GeneratorState {
   const settings = API.initialSettings();
   const random = API.initialRandomSettings();
-  const cosmetics = API.initialCosmetics();
 
   return {
     romConfig: {
@@ -67,7 +65,6 @@ function createState(): GeneratorState {
     isPatch: false,
     settings,
     random,
-    cosmetics,
     itemPool: {},
     locations: [],
     generator: {
@@ -130,34 +127,6 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     return overrideSettings(newSettings);
   };
 
-  const setCosmeticRaw = (key: string, value: any) => {
-    const newCosmetics = merge({}, state.cosmetics, { [key]: value });
-    setState(state => ({ ...state, cosmetics: newCosmetics }));
-    return newCosmetics;
-  };
-
-  const setCosmetic = (key: string, value: any) => {
-    const newCosmetics = setCosmeticRaw(key, value);
-
-    /* Save to localStorage */
-    const savedCosmetics = { ...newCosmetics };
-    for (const key of Object.keys(savedCosmetics)) {
-      const v = (savedCosmetics as any)[key];
-      if (v instanceof File) {
-        delete (savedCosmetics as any)[key];
-      }
-    }
-    localStoragePrefixedSet('cosmetics', savedCosmetics);
-
-    /* Save new file */
-    const cosmeticData = COSMETICS.find(c => c.key === key);
-    if (cosmeticData && (cosmeticData.type === 'file')) {
-      saveFileLocal(`cosmetics:${key}`, value).catch(console.error);
-    }
-
-    return newCosmetics;
-  };
-
   const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
     const random = merge({}, state.random, patch);
     setState(state => ({ ...state, random }));
@@ -172,17 +141,10 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     /* Roms */
     loadFile('oot').then(x => setRomConfigFileRaw('oot', x)).catch(console.error);
     loadFile('mm').then(x => setRomConfigFileRaw('mm', x)).catch(console.error);
-
-    /* Cosmetics */
-    for (const c of COSMETICS) {
-      if (c.type === 'file') {
-        loadFileLocal(`cosmetics:${c.key}`).then(x => setCosmeticRaw(c.key, x)).catch(console.error);
-      }
-    }
   }, []);
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetic, setRandomSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings, setRandomSettings }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -200,6 +162,7 @@ export function useIsPatch() {
 }
 
 export function useGenerator() {
+  const cosmetics = useCosmetics();
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
   const { isGenerating, message, progress, error, result, archive, warnings } = generator;
@@ -207,7 +170,7 @@ export function useGenerator() {
   const generate = async () => {
     setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
     const { oot, mm, patch } = state.romConfig.files;
-    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics, random: state.random };
+    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, random: state.random, cosmetics };
     try {
       const onMessage = (message: string) => {
         console.log(message);
@@ -296,11 +259,4 @@ export function useStartingItems() {
 
 
   return { startingItems, itemPool, alterItem, reset };
-}
-
-export function useCosmetics() {
-  const ctx = useContext(GeneratorContext);
-  const { cosmetics } = ctx.state;
-  const { setCosmetic } = ctx;
-  return [cosmetics, setCosmetic] as const;
 }
