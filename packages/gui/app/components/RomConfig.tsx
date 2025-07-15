@@ -1,6 +1,7 @@
 import ReactGA from 'react-ga4';
 
-import { useGenerator, useIsPatch, useRandomSettings, useRomConfig, useSettings } from '../contexts/GeneratorContext';
+import { useGenerator, useIsPatch, useRomConfig, useSettings } from '../contexts/GeneratorContext';
+import { useRandomSettings, usePatchRandomSettings } from '../contexts/RandomSettingsContext';
 import { Checkbox } from './Checkbox';
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
@@ -12,7 +13,8 @@ export function RomConfig() {
   const { romConfig, setRomConfigFile, setSeed } = useRomConfig();
   const [isPatch, setIsPatch] = useIsPatch();
   const { error, result, warnings, archive, generate } = useGenerator();
-  const [randomSettings, setRandomSettings] = useRandomSettings();
+  const randomSettings = useRandomSettings();
+  const patchRandomSettings = usePatchRandomSettings();
   const [settings] = useSettings();
 
   const isRandomSettings = randomSettings.enabled;
@@ -57,17 +59,17 @@ export function RomConfig() {
               <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />
             )}
           </div>
-          {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onInput={(x) => setRandomSettings({ enabled: x })} />}
+          {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onInput={(x) => patchRandomSettings({ enabled: x })} />}
             {isRandomSettings && (
               <>
                 <Setting setting='games'/>
                 <Setting setting='mode'/>
                 <Setting setting='players'/>
                 <Setting setting='teams'/>
-                {settings.games !== 'mm' && <Checkbox label="Random Settings: Master Quest" checked={randomSettings.mq} onInput={(x) => setRandomSettings({ mq: x })} />}
-                {settings.games !== 'oot' && <Checkbox label="Random Settings: MM JP Layouts" checked={randomSettings.jp} onInput={(x) => setRandomSettings({ jp: x })} />}
-                <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onInput={(x) => setRandomSettings({ er: x })} />
-                <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onInput={(x) => setRandomSettings({ extraShuffles: x })} />
+                {settings.games !== 'mm' && <Checkbox label="Random Settings: Master Quest" checked={randomSettings.mq} onInput={(x) => patchRandomSettings({ mq: x })} />}
+                {settings.games !== 'oot' && <Checkbox label="Random Settings: MM JP Layouts" checked={randomSettings.jp} onInput={(x) => patchRandomSettings({ jp: x })} />}
+                <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onInput={(x) => patchRandomSettings({ er: x })} />
+                <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onInput={(x) => patchRandomSettings({ extraShuffles: x })} />
               </>
             )}
             {!isPatch && !isRandomSettings && (

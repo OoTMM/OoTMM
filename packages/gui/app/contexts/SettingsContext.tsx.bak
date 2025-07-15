@@ -1,0 +1,21 @@
+import { createContext, useState } from 'react';
+
+import { Settings } from '@ootmm/core';
+import * as API from '../api';
+
+type SettingsContext = {
+  settings: Settings;
+  setSettings: (settings: Settings) => void;
+};
+
+const SettingsContext = createContext<SettingsContext>(null as any);
+
+export function SettingsProvider({ children }: { children: React.ReactNode }) {
+  const [settings, setSettings] = useState(API.initialSettings());
+
+  return (
+    <SettingsContext.Provider value={{ settings, setSettings }}>
+      {children}
+    </SettingsContext.Provider>
+  );
+}

@@ -35,7 +35,7 @@ type CosmeticsContext = {
 const CosmeticsContext = createContext<CosmeticsContext>(null as any);
 
 export function CosmeticsProvider({ children }: { children: ReactNode }) {
-  const [cosmetics, setCosmetics] = useState(API.initialCosmetics());
+  const [cosmetics, setCosmetics] = useState(() => API.initialCosmetics());
   const prevCosmetics = useRef(cosmetics);
   const filesLoaded = useRef(false);
 

@@ -5,10 +5,12 @@ import { Generator } from './Generator';
 import { Progress } from './Progress';
 import { composeProviders } from '../utils/composeProviders';
 import { CosmeticsProvider } from '../contexts/CosmeticsContext';
+import { RandomSettingsProvider } from '../contexts/RandomSettingsContext';
 
 ReactGA.initialize('G-4S4Y8RTZ7T');
 
 const AppProviders = composeProviders([
+  RandomSettingsProvider,
   CosmeticsProvider,
   GeneratorContextProvider,
 ]);

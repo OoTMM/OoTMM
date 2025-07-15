@@ -1,7 +1,8 @@
-import { useIsPatch, useRandomSettings, useSettings } from '../contexts/GeneratorContext';
+import { useIsPatch, useSettings } from '../contexts/GeneratorContext';
+import { useRandomSettings } from '../contexts/RandomSettingsContext';
 import { RomConfig } from './RomConfig';
 import { Tab, Tabs } from './Tab';
-import { MultipleSettingsEditor, SettingsEditor, SettingsPanel } from './SettingsEditor';
+import { MultipleSettingsEditor, SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
@@ -30,7 +31,7 @@ function TabMultipleSettingsEditor({ name, disabled }: TabMultipleSettingsEditor
 export function Generator() {
   const [settings] = useSettings();
   const [isPatch] = useIsPatch();
-  const [randomSettings] = useRandomSettings();
+  const randomSettings = useRandomSettings();
   const isRandom = randomSettings.enabled;
 
   return <Tabs>

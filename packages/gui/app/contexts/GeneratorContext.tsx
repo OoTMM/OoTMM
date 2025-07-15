@@ -1,6 +1,6 @@
 import { ComponentChildren, createContext } from 'preact';
 import { useContext, useEffect, useState, StateUpdater, Dispatch } from 'preact/hooks';
-import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch } from '@ootmm/core';
+import type { GeneratorOutput, Items, Settings, OptionsInput, SettingsPatch } from '@ootmm/core';
 import { mergeSettings, makeSettings } from '@ootmm/core';
 import { merge } from 'lodash';
 
@@ -8,6 +8,7 @@ import * as API from '../api';
 import { loadFile, saveFile } from '../db';
 import { localStoragePrefixedSet } from '../util';
 import { useCosmetics } from './CosmeticsContext';
+import { useRandomSettings } from './RandomSettingsContext';
 
 let settingsTicket = 0;
 
@@ -31,7 +32,6 @@ type GeneratorState = {
   },
   isPatch: boolean;
   settings: Settings;
-  random: OptionRandomSettings;
   itemPool: Items;
   locations: string[];
 }
@@ -44,14 +44,12 @@ type GeneratorContext = {
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: SettingsPatch) => Settings;
   overrideSettings: (settings: Settings) => Settings;
-  setRandomSettings: (random: Partial<OptionRandomSettings>) => OptionRandomSettings;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
 
 function createState(): GeneratorState {
   const settings = API.initialSettings();
-  const random = API.initialRandomSettings();
 
   return {
     romConfig: {
@@ -64,7 +62,6 @@ function createState(): GeneratorState {
     },
     isPatch: false,
     settings,
-    random,
     itemPool: {},
     locations: [],
     generator: {
@@ -127,12 +124,6 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     return overrideSettings(newSettings);
   };
 
-  const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
-    const random = merge({}, state.random, patch);
-    setState(state => ({ ...state, random }));
-    return random;
-  };
-
   /* Async init */
   useEffect(() => {
     /* Setting */
@@ -144,7 +135,7 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
   }, []);
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings, setRandomSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -163,6 +154,7 @@ export function useIsPatch() {
 
 export function useGenerator() {
   const cosmetics = useCosmetics();
+  const randomSettings = useRandomSettings();
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
   const { isGenerating, message, progress, error, result, archive, warnings } = generator;
@@ -170,7 +162,7 @@ export function useGenerator() {
   const generate = async () => {
     setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
     const { oot, mm, patch } = state.romConfig.files;
-    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, random: state.random, cosmetics };
+    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, random: randomSettings, cosmetics };
     try {
       const onMessage = (message: string) => {
         console.log(message);
@@ -203,16 +195,6 @@ export function useGenerator() {
 export function useSettings() {
   const ctx = useContext(GeneratorContext);
   return [ctx.state.settings, ctx.setSettings] as const;
-}
-
-export function useRandomSettings() {
-  const ctx = useContext(GeneratorContext);
-  const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
-    const newRandomSettings = ctx.setRandomSettings(patch);
-    localStoragePrefixedSet('randomSettings', newRandomSettings);
-    return newRandomSettings;
-  };
-  return [ctx.state.random, setRandomSettings] as const;
 }
 
 export function useOverrideSettings() {
