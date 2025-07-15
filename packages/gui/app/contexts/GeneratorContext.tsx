@@ -1,16 +1,12 @@
 import { ComponentChildren, createContext } from 'preact';
 import { useContext, useEffect, useState, StateUpdater, Dispatch } from 'preact/hooks';
-import type { GeneratorOutput, Items, Settings, OptionsInput, SettingsPatch } from '@ootmm/core';
-import { mergeSettings, makeSettings } from '@ootmm/core';
-import { merge } from 'lodash';
+import type { GeneratorOutput, OptionsInput } from '@ootmm/core';
 
 import * as API from '../api';
 import { loadFile, saveFile } from '../db';
-import { localStoragePrefixedSet } from '../util';
 import { useCosmetics } from './CosmeticsContext';
 import { useRandomSettings } from './RandomSettingsContext';
-
-let settingsTicket = 0;
+import { useSettings } from './SettingsContext';
 
 type GeneratorState = {
   romConfig: {
@@ -31,9 +27,6 @@ type GeneratorState = {
     warnings: string[];
   },
   isPatch: boolean;
-  settings: Settings;
-  itemPool: Items;
-  locations: string[];
 }
 
 type GeneratorContext = {
@@ -42,8 +35,6 @@ type GeneratorContext = {
   setRomConfigFile: (key: keyof GeneratorState['romConfig']['files'], file: File | null) => void;
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
-  setSettings: (settings: SettingsPatch) => Settings;
-  overrideSettings: (settings: Settings) => Settings;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
@@ -61,9 +52,6 @@ function createState(): GeneratorState {
       seed: '',
     },
     isPatch: false,
-    settings,
-    itemPool: {},
-    locations: [],
     generator: {
       isGenerating: false,
       message: null,
@@ -98,44 +86,15 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     setState(state => ({ ...state, isPatch }));
   };
 
-  const overrideSettings = (settings: Settings) => {
-    const ticket = ++settingsTicket;
-    setState(state => ({ ...state, settings }));
-    localStoragePrefixedSet('settings', settings);
-    Promise.all([
-      API.itemPool(settings),
-      API.locationList(settings),
-    ]).then(([itemPool, locations]) => {
-      if (ticket !== settingsTicket) {
-        return;
-      }
-      setState((state) => {
-        const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
-        const newSettings = { ...state.settings, startingItems };
-        localStoragePrefixedSet('settings', newSettings);
-        return { ...state, settings: makeSettings(newSettings), itemPool, locations };
-      });
-    });
-    return settings;
-  };
-
-  const setSettings = (patch: SettingsPatch) => {
-    const newSettings = mergeSettings(state.settings, patch);
-    return overrideSettings(newSettings);
-  };
-
   /* Async init */
   useEffect(() => {
-    /* Setting */
-    overrideSettings(state.settings);
-
     /* Roms */
     loadFile('oot').then(x => setRomConfigFileRaw('oot', x)).catch(console.error);
     loadFile('mm').then(x => setRomConfigFileRaw('mm', x)).catch(console.error);
   }, []);
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -153,8 +112,9 @@ export function useIsPatch() {
 }
 
 export function useGenerator() {
+  const settings = useSettings();
   const cosmetics = useCosmetics();
-  const randomSettings = useRandomSettings();
+  const random = useRandomSettings();
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
   const { isGenerating, message, progress, error, result, archive, warnings } = generator;
@@ -162,7 +122,7 @@ export function useGenerator() {
   const generate = async () => {
     setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
     const { oot, mm, patch } = state.romConfig.files;
-    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, random: randomSettings, cosmetics };
+    const options: OptionsInput = { seed: state.romConfig.seed, settings, random, cosmetics };
     try {
       const onMessage = (message: string) => {
         console.log(message);
@@ -190,55 +150,4 @@ export function useGenerator() {
   };
 
   return { isGenerating, message, error, result, archive, generate, progress, warnings };
-}
-
-export function useSettings() {
-  const ctx = useContext(GeneratorContext);
-  return [ctx.state.settings, ctx.setSettings] as const;
-}
-
-export function useOverrideSettings() {
-  const ctx = useContext(GeneratorContext);
-  return ctx.overrideSettings;
-}
-
-export function useItemPool() {
-  const { state } = useContext(GeneratorContext);
-  return state.itemPool;
-}
-
-export function useLocations() {
-  const { state } = useContext(GeneratorContext);
-  return state.locations;
-}
-
-export function useStartingItems() {
-  const { state, setState } = useContext(GeneratorContext);
-  const { itemPool, settings } = state;
-  const { startingItems } = settings;
-
-  const alterItem = (item: string, value: number) => {
-    setState((state) => {
-      const newStartingItems = { ...state.settings.startingItems };
-      if (value <= 0) {
-        delete newStartingItems[item];
-      } else if (value > state.itemPool[item]) {
-        newStartingItems[item] = state.itemPool[item];
-      } else {
-        newStartingItems[item] = value;
-      }
-      const newSettings = { ...state.settings, startingItems: newStartingItems };
-      localStoragePrefixedSet('settings', newSettings);
-      return { ...state, settings: newSettings };
-    });
-  };
-
-  const reset = () => {
-    const newSettings = { ...state.settings, startingItems: {} };
-    localStoragePrefixedSet('settings', newSettings);
-    setState(state => ({ ...state, settings: newSettings }));
-  };
-
-
-  return { startingItems, itemPool, alterItem, reset };
 }
