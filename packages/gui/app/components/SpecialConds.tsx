@@ -1,6 +1,6 @@
 import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
-import { useSettings } from '../contexts/GeneratorContext';
+import { useSettings, usePatchSettings } from '../contexts/SettingsContext';
 import { Checkbox } from './Checkbox';
 import { InputNumber } from './InputNumber';
 
@@ -8,7 +8,8 @@ type SpecialCondsPanelProps = {
   cond: string;
 };
 function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
-  const [settings, setSettings] = useSettings();
+  const settings = useSettings();
+  const patchSettings = usePatchSettings();
   const { specialConds } = settings;
   const c = specialConds[cond as keyof typeof SPECIAL_CONDS];
   const enableCond = SPECIAL_CONDS[cond].cond || (() => true);
@@ -43,11 +44,11 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
             key={key}
             label={(SPECIAL_CONDS_FIELDS as any)[key].name}
             checked={(c as any)[key]}
-            onInput={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
+            onInput={x => patchSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
           />
         )}
       </>
-      <InputNumber max={max} label={label} value={c.count} onInput={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
+      <InputNumber max={max} label={label} value={c.count} onInput={x => patchSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
     </form>
   );
 }
