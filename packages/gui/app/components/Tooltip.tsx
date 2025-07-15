@@ -3,8 +3,7 @@ import { useState } from 'preact/hooks';
 import { createPortal } from 'preact/compat';
 import { uniqueId } from 'lodash';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { FaCircleQuestion } from 'react-icons/fa6';
 
 type TooltipProps = {
   children: ComponentChildren;
@@ -16,6 +15,6 @@ export function Tooltip({ children }: TooltipProps) {
 
   return <>
     {tooltip}
-    <span className="tooltip-link" data-tooltip-id={id}><FontAwesomeIcon icon={faQuestionCircle}/></span>
+    <span className="tooltip-link" data-tooltip-id={id}><FaCircleQuestion/></span>
   </>;
 }

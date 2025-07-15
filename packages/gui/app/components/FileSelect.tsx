@@ -1,10 +1,8 @@
-import { useState } from 'preact/hooks';
+import { FaXmark } from 'react-icons/fa6';
 
 import logoOot from '../assets/oot.png';
 import logoMm from '../assets/mm.png';
 import logoOotMm from '../assets/logo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const LOGOS = {
   oot: logoOot,
@@ -32,7 +30,7 @@ export const FileSelect = ({ logo, label, accept, onInput, file }: FileSelectPro
         {!file && <>No file selected</>}
         {file && <>
           {file.name}
-          <span className="file-select-box-delete" onClick={(e) => { onInput(null); e.preventDefault(); }}><FontAwesomeIcon icon={faXmark} /></span>
+          <span className="file-select-box-delete" onClick={(e) => { onInput(null); e.preventDefault(); }}><FaXmark/></span>
         </>}
       </div>
     </label>

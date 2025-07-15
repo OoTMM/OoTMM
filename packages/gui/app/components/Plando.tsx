@@ -1,8 +1,7 @@
 import { useState } from 'preact/hooks';
 import Select from 'react-select';
+import { FaXmark } from 'react-icons/fa6';
 import { itemName } from '@ootmm/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { useItemPool, useLocations, useSettings } from '../contexts/GeneratorContext';
 
@@ -46,7 +45,7 @@ export function Plando() {
           .map(([loc, item]) => (
             <li key={loc}>
               <span className="list-remove" onClick={() => removeItem(loc)}>
-                <FontAwesomeIcon icon={faXmark} />
+                <FaXmark/>
               </span>
               <span className="list-item">
                 {loc}: {itemName(item!)}

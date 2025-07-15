@@ -1,6 +1,5 @@
 import Select from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
 import { useItemPool, useSettings } from '../contexts/GeneratorContext';
 import { Dropdown } from './Dropdown';
@@ -92,13 +91,13 @@ export function HintEditor({ index }: HintEditorProps) {
     <tr className="dashboard-table">
       <td>
         <span className="list-remove" onClick={onRemove}>
-          <FontAwesomeIcon icon={faXmark} />
+          <FaXmark/>
         </span>
         <span className="list-action" onClick={onMoveUp}>
-          <FontAwesomeIcon icon={faArrowUp} />
+          <FaArrowUp/>
         </span>
         <span className="list-action" onClick={onMoveDown}>
-          <FontAwesomeIcon icon={faArrowDown} />
+          <FaArrowDown/>
         </span>
       </td>
       <td>

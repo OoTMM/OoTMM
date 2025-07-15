@@ -1,7 +1,6 @@
 import { ComponentChildren } from 'preact';
 import Select, { createFilter, components } from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FaXmark } from 'react-icons/fa6';
 
 const CustomOption = ({ children, ...props }: { children: ComponentChildren, props: any }) => {
   const { onMouseMove, onMouseOver, ...rest } = (props as any).innerProps;
@@ -41,7 +40,7 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
       <ul>
         {selected.map(v => (
           <li key={v}>
-            <span className="list-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
+            <span className="list-remove" onClick={() => remove(v)}><FaXmark/></span>
             <span className="list-item">{options.find(x => x.value === v)?.label || v}</span>
           </li>
         ))}
