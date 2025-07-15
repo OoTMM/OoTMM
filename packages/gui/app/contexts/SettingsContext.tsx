@@ -9,7 +9,7 @@ type SettingsContext = {
   settings: Settings;
   itemPool: Items;
   locations: string[];
-  setSettings: (settings: Settings) => void;
+  setSettings: (newSettings: Settings | ((s: Settings) => Settings)) => void;
   patchSettings: (patch: SettingsPatch) => void;
 };
 

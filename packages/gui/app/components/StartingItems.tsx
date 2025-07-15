@@ -1,6 +1,8 @@
+import { useCallback } from 'react';
 import { itemName } from '@ootmm/core';
-import { useStartingItems } from '../contexts/GeneratorContext';
+
 import { InputNumber } from './InputNumber';
+import { useItemPool, useSetting, useSetSettings } from '../contexts/SettingsContext';
 
 const NAMES = {
   MM: "Majora's Mask",
@@ -9,7 +11,25 @@ const NAMES = {
 }
 
 export function StartingItems() {
-  const { startingItems, itemPool, alterItem, reset } = useStartingItems();
+  const startingItems = useSetting('startingItems');
+  const itemPool = useItemPool();
+  const setSettings = useSetSettings();
+
+  const alterItem = useCallback((item: string, count: number) => {
+    if (count > 0) {
+      setSettings((s) => ({ ...s, startingItems: { ...s.startingItems, [item]: count } }));
+    } else {
+      setSettings((s) => {
+        const newStartingItems = { ...s.startingItems };
+        delete newStartingItems[item];
+        return { ...s, startingItems: newStartingItems };
+      });
+    }
+  }, []);
+
+  const reset = useCallback(() => {
+    setSettings((s) => ({ ...s, startingItems: {} }));
+  }, []);
 
   const buildSingleTable = (gamePrefix: 'OOT' | 'MM' | 'SHARED') => {
     const items = Object.keys(itemPool).filter((item) => item.startsWith(gamePrefix));
