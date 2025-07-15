@@ -1,9 +1,9 @@
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
-
 import { PRESETS, Settings } from '@ootmm/core';
-import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
+
 import { localStoragePrefixedGet, localStoragePrefixedSet } from '../util';
+import { useSetSettings, useSettings } from '../contexts/SettingsContext';
 
 const NO_PRESET = "-----";
 
@@ -15,8 +15,9 @@ type Option = {
 const customPresets = localStoragePrefixedGet("customPresets", {});
 
 export const PresetSelector = () => {
-  const overrideSettings = useOverrideSettings();
-  const [settings] = useSettings();
+  const settings = useSettings();
+  const setSettings = useSetSettings();
+
   const makePresetOptions = () => {
     const options: Option[] = [];
     options.push({ label: NO_PRESET, value: null });
@@ -40,7 +41,7 @@ export const PresetSelector = () => {
       return;
     }
     setValue(o);
-    overrideSettings(o.value);
+    setSettings(o.value);
   };
 
   const onCreate = (x: string) => {
