@@ -1,7 +1,8 @@
 import ReactGA from 'react-ga4';
 
-import { useGenerator, useIsPatch, useRomConfig, useSettings } from '../contexts/GeneratorContext';
+import { useSettings } from '../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../contexts/RandomSettingsContext';
+import { useGenerator, useIsPatch, useRomConfig } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
@@ -15,7 +16,7 @@ export function RomConfig() {
   const { error, result, warnings, archive, generate } = useGenerator();
   const randomSettings = useRandomSettings();
   const patchRandomSettings = usePatchRandomSettings();
-  const [settings] = useSettings();
+  const settings = useSettings();
 
   const isRandomSettings = randomSettings.enabled;
   let isReady = !!romConfig.files.oot && !!romConfig.files.mm;
