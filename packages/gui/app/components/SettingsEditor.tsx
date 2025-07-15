@@ -3,8 +3,8 @@ import { SETTINGS, SUBCATEGORIES } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
-import { useSettings } from '../contexts/GeneratorContext';
 import { InputNumber } from './InputNumber';
+import { usePatchSettings, useSettings } from '../contexts/SettingsContext';
 
 const SET_OPTIONS = [
   { value: 'none', name: 'None' },
@@ -15,7 +15,7 @@ const SET_OPTIONS = [
 ];
 
 function SettingTooltip({ setting }: { setting: string }) {
-  const [settings] = useSettings();
+  const settings = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
   const description = (data as any).description;
 
@@ -71,7 +71,8 @@ function SettingTooltip({ setting }: { setting: string }) {
 }
 
 function SettingSet({ setting }: { setting: string }) {
-  const [settings, setSettings] = useSettings();
+  const settings = useSettings();
+  const patchSettings = usePatchSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
   const s = settings[data.key] as any;
 
@@ -93,17 +94,17 @@ function SettingSet({ setting }: { setting: string }) {
 
   const handleChangeSpecific = (v: MultiValue<{ value: string, label: string }>) => {
     const newValues = Array.from(new Set(v.map(x => x.value)));
-    setSettings({ [data.key]: { type: 'specific', values: newValues } as any });
+    patchSettings({ [data.key]: { type: 'specific', values: newValues } as any });
   };
 
   const handleChangeRandomMixedSet = (v: MultiValue<{ value: string, label: string }>) => {
     const newValues = Array.from(new Set(v.map(x => x.value)));
-    setSettings({ [data.key]: { type: 'random-mixed', set: newValues, unset: valuesUnset.map(x => x.value) } as any });
+    patchSettings({ [data.key]: { type: 'random-mixed', set: newValues, unset: valuesUnset.map(x => x.value) } as any });
   };
 
   const handleChangeRandomMixedUnset = (v: MultiValue<{ value: string, label: string }>) => {
     const newValues = Array.from(new Set(v.map(x => x.value)));
-    setSettings({ [data.key]: { type: 'random-mixed', set: valuesSet.map(x => x.value), unset: newValues } as any });
+    patchSettings({ [data.key]: { type: 'random-mixed', set: valuesSet.map(x => x.value), unset: newValues } as any });
   };
 
   return (
@@ -113,7 +114,7 @@ function SettingSet({ setting }: { setting: string }) {
         label={data.name}
         options={SET_OPTIONS}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        onInput={(v) => setSettings({ [data.key]: { type: v, values: s.values } as any })}
+        onInput={(v) => patchSettings({ [data.key]: { type: v, values: s.values } as any })}
       />
       {s.type === 'specific' &&
         <Select
@@ -147,7 +148,8 @@ function SettingSet({ setting }: { setting: string }) {
 }
 
 export function Setting({ setting }: { setting: string }) {
-  const [settings, setSettings] = useSettings();
+  const settings = useSettings();
+  const patchSettings = usePatchSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
   const cond = (data as any).cond;
 
@@ -163,7 +165,7 @@ export function Setting({ setting }: { setting: string }) {
         label={data.name}
         options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
         tooltip={data.description && <SettingTooltip setting={data.key}/>}
-        onInput={(v) => setSettings({ [data.key]: v })}
+        onInput={(v) => patchSettings({ [data.key]: v })}
       />
     );
   case 'set': return <SettingSet setting={setting}/>;
@@ -173,7 +175,7 @@ export function Setting({ setting }: { setting: string }) {
         label={data.name}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         checked={settings[data.key] as boolean}
-        onInput={(v) => setSettings({ [data.key]: v })}
+        onInput={(v) => patchSettings({ [data.key]: v })}
       />
     );
   case 'number':
@@ -194,7 +196,7 @@ export function Setting({ setting }: { setting: string }) {
         label={data.name}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         value={settings[data.key] as number}
-        onInput={(v) => setSettings({ [data.key]: v })}
+        onInput={(v) => patchSettings({ [data.key]: v })}
         min={minValue}
         max={maxValue}
       />
