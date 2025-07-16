@@ -47,15 +47,11 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       API.locationList(settings),
     ]).then(([newItemPool, newLocations]) => {
       if (ticket.current !== currentTicket) return;
-
       setItemPool(newItemPool);
       setLocations(newLocations);
-      setSettings((state) => {
-        const startingItems = API.restrictItemsByPool(state.startingItems, newItemPool);
-        if (isEqual(state.startingItems, startingItems)) return state;
-
-        return makeSettings({ ...state, startingItems });
-      });
+      const startingItems = API.restrictItemsByPool(settings.startingItems, newItemPool);
+      if (isEqual(settings.startingItems, startingItems)) return;
+      setSettings(state => makeSettings({ ...state, startingItems }));
     });
   }, [settings]);
 
