@@ -1,6 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        let theme;
+        const themeQueryParam = new URLSearchParams(window.location.search).get('theme');
+        if (themeQueryParam === 'light' || themeQueryParam === 'dark') {
+          theme = themeQueryParam;
+        } else {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        const root = document.documentElement;
+        root.style.colorScheme = theme;
+        root.classList.remove('light', 'dark');
+        root.classList.add(theme);
+      })();
+    </script>
     <meta charset="utf-8">
     <meta name="color-scheme" content="light dark">
     <title>OoTMM Web Generator</title>
