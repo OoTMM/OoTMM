@@ -40,8 +40,6 @@ type GeneratorContext = {
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
 
 function createState(): GeneratorState {
-  const settings = API.initialSettings();
-
   return {
     romConfig: {
       files: {
