@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 import mdx from '@mdx-js/rollup';
 import MultipleAssets from 'vite-multiple-assets';
+import tailwind from '@tailwindcss/vite';
 
 const env = process.env.NODE_ENV || 'development';
 const STATIC_URL = process.env.STATIC_URL || '';
@@ -15,7 +16,12 @@ if (!isProd) {
 // https://vitejs.dev/config/
 export default defineConfig({
   publicDir: false,
-	plugins: [MultipleAssets(assetsDirs, { ssr: false }), preact(), mdx()],
+	plugins: [
+    MultipleAssets(assetsDirs, { ssr: false }),
+    preact(),
+    mdx(),
+    tailwind(),
+  ],
   define: {
     '__STATIC_URL__': JSON.stringify(STATIC_URL),
   }
