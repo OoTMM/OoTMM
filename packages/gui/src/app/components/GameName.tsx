@@ -1,5 +1,5 @@
-import imgTriforce from '../assets/blacktriforce.png';
-import imgMajora from '../assets/blackmask.png';
+import imgTriforce from '../../assets/blacktriforce.png';
+import imgMajora from '../../assets/blackmask.png';
 
 const GAME_PROPERTIES = {
   oot: { name: "Ocarina of Time", img: imgTriforce },

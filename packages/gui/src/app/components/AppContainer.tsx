@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'preact/compat';
+import { lazy, Suspense } from 'react';
 
 import AppSkeleton from './AppSkeleton';
 const App = lazy(() => import('./App'));

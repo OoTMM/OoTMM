@@ -1,8 +1,8 @@
 import { FaXmark } from 'react-icons/fa6';
 
-import logoOot from '../assets/oot.png';
-import logoMm from '../assets/mm.png';
-import logoOotMm from '../assets/logo.png';
+import logoOot from '../../assets/oot.png';
+import logoMm from '../../assets/mm.png';
+import logoOotMm from '../../assets/logo.png';
 
 const LOGOS = {
   oot: logoOot,

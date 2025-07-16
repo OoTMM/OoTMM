@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The graphical OoTMM generator widget",
   "type": "module",
-  "main": "app/index.ts",
+  "main": "src/app/index.ts",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && tsx ./post-build.ts",
