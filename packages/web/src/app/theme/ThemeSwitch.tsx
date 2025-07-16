@@ -9,6 +9,9 @@ export function ThemeSwitch() {
     setTheme(theme === 'light' ? 'dark' : 'light');
   }, [theme]);
 
+  /* Debug - not ready yet */
+  return null;
+
   return (
     <button onClick={toggle}>{theme === 'light' ? 'Dark' : 'Light'} Mode</button>
   );
