@@ -1,4 +1,5 @@
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
+import { ThemeSwitch } from '../theme/ThemeSwitch';
 
 export function Header() {
 	return (
@@ -11,6 +12,7 @@ export function Header() {
         <a href="/faq">FAQ</a>
         <a target="_blank" href="https://discord.gg/4QdtPBP6wf">Discord</a>
         <a href="/multiplayer">Multiplayer Guide</a>
+        <ThemeSwitch/>
       </nav>
     </header>
 	);
