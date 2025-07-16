@@ -13,18 +13,14 @@ export function App() {
 	return (
     <ThemeProvider>
       <LocationProvider>
-        <Header />
+        <Header/>
         <Router>
           <Route path="/gen/old" component={GeneratorVersions} />
           <Route path="/gen/:id" component={Generator} />
-          <main path="/"><Home/></main>
-          <main path="*">
-            <Router>
-              <Route path="/faq" component={Faq} />
-              <Route path="/multiplayer" component={Multiplayer} />
-              <Route default component={NotFound} />
-            </Router>
-          </main>
+          <Route path="/" component={Home} />
+          <Route path="/faq" component={() => <main><Faq/></main>} />
+          <Route path="/multiplayer" component={() => <main><Multiplayer/></main>} />
+          <Route default component={NotFound} />
         </Router>
       </LocationProvider>
     </ThemeProvider>
