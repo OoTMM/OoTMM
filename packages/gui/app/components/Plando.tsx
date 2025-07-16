@@ -1,35 +1,35 @@
-import { useState } from 'preact/hooks';
+import { useCallback, useMemo, useState } from 'react';
 import Select from 'react-select';
+import { FaXmark } from 'react-icons/fa6';
 import { itemName } from '@ootmm/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import { useItemPool, useLocations, useSettings } from '../contexts/GeneratorContext';
+import { useItemPool, useLocations, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 
 export function Plando() {
+  const plando = useSetting('plando');
   const [selectedLoc, setSelectedLoc] = useState<string>();
   const [selectedItem, setSelectedItem] = useState<string>();
-  const [settings, setSettings] = useSettings();
   const itemPool = useItemPool();
-  const locs = useLocations();
-  const locsOptions = locs.map((loc) => ({ value: loc, label: loc }));
-  const itemOptions = Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) }));
+  const locations = useLocations();
+  const locsOptions = useMemo(() => locations.map((loc) => ({ value: loc, label: loc })), [locations]);
+  const itemOptions = useMemo(() => Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) })), [itemPool]);
+  const patchSettings = usePatchSettings();
 
-  const placeItem = () => {
-    if (selectedItem && selectedLoc) {
-      setSettings({ plando: { locations: { [selectedLoc]: selectedItem } } });
+  const placeItem = useCallback(() => {
+    if (selectedLoc && selectedItem) {
+      patchSettings({ plando: { locations: { [selectedLoc]: selectedItem } } });
     }
-  };
+  }, [selectedLoc, selectedItem]);
 
-  const removeItem = (loc: string) => {
+  const removeItem = useCallback((loc: string) => {
     if (loc) {
-      setSettings({ plando: { locations: { [loc]: null } } });
+      patchSettings({ plando: { locations: { [loc]: null } } });
     }
-  };
+  }, []);
 
-  const removeAll = () => {
-    setSettings({ plando: { locations: null } });
-  };
+  const removeAll = useCallback(() => {
+    patchSettings({ plando: { locations: null } });
+  }, []);
 
   return (
     <main>
@@ -41,12 +41,12 @@ export function Plando() {
         <button className="btn btn-danger" onClick={removeAll}>Remove All</button>
       </nav>
       <ul>
-        {Object.entries(settings.plando.locations || {})
+        {Object.entries(plando.locations || {})
           .filter((x) => x[1])
           .map(([loc, item]) => (
             <li key={loc}>
               <span className="list-remove" onClick={() => removeItem(loc)}>
-                <FontAwesomeIcon icon={faXmark} />
+                <FaXmark/>
               </span>
               <span className="list-item">
                 {loc}: {itemName(item!)}

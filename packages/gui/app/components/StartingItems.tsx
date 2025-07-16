@@ -1,6 +1,8 @@
-import { itemName } from '@ootmm/core';
-import { useStartingItems } from '../contexts/GeneratorContext';
+import { useCallback, useEffect, useState } from 'react';
+import { itemName, Items } from '@ootmm/core';
+
 import { InputNumber } from './InputNumber';
+import { useItemPool, useSetting, useSetSettings } from '../contexts/SettingsContext';
 
 const NAMES = {
   MM: "Majora's Mask",
@@ -9,7 +11,42 @@ const NAMES = {
 }
 
 export function StartingItems() {
-  const { startingItems, itemPool, alterItem, reset } = useStartingItems();
+  const startingItems = useSetting('startingItems');
+  const [startingItemsCache, setStartingItemsCache] = useState(startingItems);
+  const itemPool = useItemPool();
+  const setSettings = useSetSettings();
+
+  const alterItem = useCallback((item: string, count: number) => {
+    /* Sanitize count */
+    const countMax = itemPool[item] || 0;
+    if (count < 0) count = 0;
+    if (count > countMax) count = countMax;
+
+    /* Create an update func */
+    const updater = (s: Items) => {
+      if (count > 0) {
+        return { ...s, [item]: count };
+      } else {
+        const newS = { ...s };
+        delete newS[item];
+        return newS;
+      }
+    };
+
+    /* Update */
+    setStartingItemsCache(updater);
+    setSettings((s) => ({ ...s, startingItems: updater(s.startingItems) }));
+  }, [itemPool]);
+
+  const reset = useCallback(() => {
+    setStartingItemsCache({});
+    setSettings((s) => ({ ...s, startingItems: {} }));
+  }, []);
+
+  /* Keep the cache in sync */
+  useEffect(() => {
+    setStartingItemsCache(startingItems);
+  }, [startingItems]);
 
   const buildSingleTable = (gamePrefix: 'OOT' | 'MM' | 'SHARED') => {
     const items = Object.keys(itemPool).filter((item) => item.startsWith(gamePrefix));
@@ -23,7 +60,7 @@ export function StartingItems() {
       {items.map((item) => (
         <InputNumber
           key={item}
-          value={startingItems[item] || 0}
+          value={startingItemsCache[item] || 0}
           onInput={e => alterItem(item, e)}
           min={0}
           label={itemName(item)}

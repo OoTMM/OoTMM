@@ -1,7 +1,9 @@
-import { useIsPatch, useRandomSettings, useSettings } from '../contexts/GeneratorContext';
+import { useIsPatch } from '../contexts/GeneratorContext';
+import { useRandomSettings } from '../contexts/RandomSettingsContext';
+import { useSetting } from '../contexts/SettingsContext';
 import { RomConfig } from './RomConfig';
 import { Tab, Tabs } from './Tab';
-import { MultipleSettingsEditor, SettingsEditor, SettingsPanel } from './SettingsEditor';
+import { MultipleSettingsEditor, SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
@@ -28,9 +30,9 @@ function TabMultipleSettingsEditor({ name, disabled }: TabMultipleSettingsEditor
 }
 
 export function Generator() {
-  const [settings] = useSettings();
+  const games = useSetting('games');
   const [isPatch] = useIsPatch();
-  const [randomSettings] = useRandomSettings();
+  const randomSettings = useRandomSettings();
   const isRandom = randomSettings.enabled;
 
   return <Tabs>
@@ -41,7 +43,7 @@ export function Generator() {
         <TabSettingsEditor name="Shuffle" category="main.shuffle"/>
         <TabSettingsEditor name="Price" category="main.prices"/>
         <TabSettingsEditor name="Events" category="main.events"/>
-        <TabSettingsEditor name="Cross-Game" disabled={settings.games !== 'ootmm'} category="main.cross" />
+        <TabSettingsEditor name="Cross-Game" disabled={games !== 'ootmm'} category="main.cross" />
         <TabSettingsEditor name="World" category="main.world"/>
         <Tab name="Special Conditions"><SpecialConds/></Tab>
         <TabMultipleSettingsEditor name="Misc."/>
@@ -50,9 +52,9 @@ export function Generator() {
     <Tab name="Items" disabled={isPatch || isRandom}>
       <Tabs>
         <TabSettingsEditor name="Progressive" category="items.progressive"/>
-        <TabSettingsEditor name="Shared" disabled={settings.games !== 'ootmm'} category="items.shared"/>
+        <TabSettingsEditor name="Shared" disabled={games !== 'ootmm'} category="items.shared"/>
         <TabSettingsEditor name="Extensions" category="items.extensions"/>
-        <TabSettingsEditor name="Ageless" disabled={settings.games === 'mm'} category="items.ageless"/>
+        <TabSettingsEditor name="Ageless" disabled={games === 'mm'} category="items.ageless"/>
         <Tab name="Starting Items"><StartingItems/></Tab>
       </Tabs>
     </Tab>

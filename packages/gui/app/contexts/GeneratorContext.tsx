@@ -1,14 +1,12 @@
 import { ComponentChildren, createContext } from 'preact';
 import { useContext, useEffect, useState, StateUpdater, Dispatch } from 'preact/hooks';
-import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
-import { mergeSettings, makeSettings, COSMETICS } from '@ootmm/core';
-import { merge } from 'lodash';
+import type { GeneratorOutput, OptionsInput } from '@ootmm/core';
 
 import * as API from '../api';
-import { loadFile, loadFileLocal, saveFile, saveFileLocal } from '../db';
-import { localStoragePrefixedSet } from '../util';
-
-let settingsTicket = 0;
+import { loadFile, saveFile } from '../db';
+import { useCosmetics } from './CosmeticsContext';
+import { useRandomSettings } from './RandomSettingsContext';
+import { useSettings } from './SettingsContext';
 
 type GeneratorState = {
   romConfig: {
@@ -29,11 +27,6 @@ type GeneratorState = {
     warnings: string[];
   },
   isPatch: boolean;
-  settings: Settings;
-  random: OptionRandomSettings;
-  cosmetics: Cosmetics;
-  itemPool: Items;
-  locations: string[];
 }
 
 type GeneratorContext = {
@@ -42,19 +35,11 @@ type GeneratorContext = {
   setRomConfigFile: (key: keyof GeneratorState['romConfig']['files'], file: File | null) => void;
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
-  setSettings: (settings: SettingsPatch) => Settings;
-  setCosmetic: (key: string, value: any) => Cosmetics;
-  overrideSettings: (settings: Settings) => Settings;
-  setRandomSettings: (random: Partial<OptionRandomSettings>) => OptionRandomSettings;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
 
 function createState(): GeneratorState {
-  const settings = API.initialSettings();
-  const random = API.initialRandomSettings();
-  const cosmetics = API.initialCosmetics();
-
   return {
     romConfig: {
       files: {
@@ -65,11 +50,6 @@ function createState(): GeneratorState {
       seed: '',
     },
     isPatch: false,
-    settings,
-    random,
-    cosmetics,
-    itemPool: {},
-    locations: [],
     generator: {
       isGenerating: false,
       message: null,
@@ -104,85 +84,15 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     setState(state => ({ ...state, isPatch }));
   };
 
-  const overrideSettings = (settings: Settings) => {
-    const ticket = ++settingsTicket;
-    setState(state => ({ ...state, settings }));
-    localStoragePrefixedSet('settings', settings);
-    Promise.all([
-      API.itemPool(settings),
-      API.locationList(settings),
-    ]).then(([itemPool, locations]) => {
-      if (ticket !== settingsTicket) {
-        return;
-      }
-      setState((state) => {
-        const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
-        const newSettings = { ...state.settings, startingItems };
-        localStoragePrefixedSet('settings', newSettings);
-        return { ...state, settings: makeSettings(newSettings), itemPool, locations };
-      });
-    });
-    return settings;
-  };
-
-  const setSettings = (patch: SettingsPatch) => {
-    const newSettings = mergeSettings(state.settings, patch);
-    return overrideSettings(newSettings);
-  };
-
-  const setCosmeticRaw = (key: string, value: any) => {
-    const newCosmetics = merge({}, state.cosmetics, { [key]: value });
-    setState(state => ({ ...state, cosmetics: newCosmetics }));
-    return newCosmetics;
-  };
-
-  const setCosmetic = (key: string, value: any) => {
-    const newCosmetics = setCosmeticRaw(key, value);
-
-    /* Save to localStorage */
-    const savedCosmetics = { ...newCosmetics };
-    for (const key of Object.keys(savedCosmetics)) {
-      const v = (savedCosmetics as any)[key];
-      if (v instanceof File) {
-        delete (savedCosmetics as any)[key];
-      }
-    }
-    localStoragePrefixedSet('cosmetics', savedCosmetics);
-
-    /* Save new file */
-    const cosmeticData = COSMETICS.find(c => c.key === key);
-    if (cosmeticData && (cosmeticData.type === 'file')) {
-      saveFileLocal(`cosmetics:${key}`, value).catch(console.error);
-    }
-
-    return newCosmetics;
-  };
-
-  const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
-    const random = merge({}, state.random, patch);
-    setState(state => ({ ...state, random }));
-    return random;
-  };
-
   /* Async init */
   useEffect(() => {
-    /* Setting */
-    overrideSettings(state.settings);
-
     /* Roms */
     loadFile('oot').then(x => setRomConfigFileRaw('oot', x)).catch(console.error);
     loadFile('mm').then(x => setRomConfigFileRaw('mm', x)).catch(console.error);
-
-    /* Cosmetics */
-    for (const c of COSMETICS) {
-      if (c.type === 'file') {
-        loadFileLocal(`cosmetics:${c.key}`).then(x => setCosmeticRaw(c.key, x)).catch(console.error);
-      }
-    }
   }, []);
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetic, setRandomSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -200,6 +110,9 @@ export function useIsPatch() {
 }
 
 export function useGenerator() {
+  const settings = useSettings();
+  const cosmetics = useCosmetics();
+  const random = useRandomSettings();
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
   const { isGenerating, message, progress, error, result, archive, warnings } = generator;
@@ -207,7 +120,7 @@ export function useGenerator() {
   const generate = async () => {
     setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
     const { oot, mm, patch } = state.romConfig.files;
-    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics, random: state.random };
+    const options: OptionsInput = { seed: state.romConfig.seed, settings, random, cosmetics };
     try {
       const onMessage = (message: string) => {
         console.log(message);
@@ -235,72 +148,4 @@ export function useGenerator() {
   };
 
   return { isGenerating, message, error, result, archive, generate, progress, warnings };
-}
-
-export function useSettings() {
-  const ctx = useContext(GeneratorContext);
-  return [ctx.state.settings, ctx.setSettings] as const;
-}
-
-export function useRandomSettings() {
-  const ctx = useContext(GeneratorContext);
-  const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
-    const newRandomSettings = ctx.setRandomSettings(patch);
-    localStoragePrefixedSet('randomSettings', newRandomSettings);
-    return newRandomSettings;
-  };
-  return [ctx.state.random, setRandomSettings] as const;
-}
-
-export function useOverrideSettings() {
-  const ctx = useContext(GeneratorContext);
-  return ctx.overrideSettings;
-}
-
-export function useItemPool() {
-  const { state } = useContext(GeneratorContext);
-  return state.itemPool;
-}
-
-export function useLocations() {
-  const { state } = useContext(GeneratorContext);
-  return state.locations;
-}
-
-export function useStartingItems() {
-  const { state, setState } = useContext(GeneratorContext);
-  const { itemPool, settings } = state;
-  const { startingItems } = settings;
-
-  const alterItem = (item: string, value: number) => {
-    setState((state) => {
-      const newStartingItems = { ...state.settings.startingItems };
-      if (value <= 0) {
-        delete newStartingItems[item];
-      } else if (value > state.itemPool[item]) {
-        newStartingItems[item] = state.itemPool[item];
-      } else {
-        newStartingItems[item] = value;
-      }
-      const newSettings = { ...state.settings, startingItems: newStartingItems };
-      localStoragePrefixedSet('settings', newSettings);
-      return { ...state, settings: newSettings };
-    });
-  };
-
-  const reset = () => {
-    const newSettings = { ...state.settings, startingItems: {} };
-    localStoragePrefixedSet('settings', newSettings);
-    setState(state => ({ ...state, settings: newSettings }));
-  };
-
-
-  return { startingItems, itemPool, alterItem, reset };
-}
-
-export function useCosmetics() {
-  const ctx = useContext(GeneratorContext);
-  const { cosmetics } = ctx.state;
-  const { setCosmetic } = ctx;
-  return [cosmetics, setCosmetic] as const;
 }

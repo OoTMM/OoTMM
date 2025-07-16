@@ -1,13 +1,13 @@
+import { useCallback, useMemo } from 'react';
 import Select from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
-import { useItemPool, useSettings } from '../contexts/GeneratorContext';
 import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
 import { Checkbox } from './Checkbox';
 import { SettingsPanel } from './SettingsEditor';
+import { useItemPool, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 
 const hintOptions: { name: string; value: string }[] = [];
 for (const k in HINT_TYPES) {
@@ -18,19 +18,21 @@ type HintEditorProps = {
   index: number;
 };
 export function HintEditor({ index }: HintEditorProps) {
-  const [settings, setSettings] = useSettings();
+  const hints = useSetting('hints');
+  const hint = hints[index];
   const itemPool = useItemPool();
+  const patchSettings = usePatchSettings();
 
-  const itemOptions = Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) }));
-  const hint = settings.hints[index];
+  const itemOptions = useMemo(() => Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) })), [itemPool]);
+  const selectedItem = itemOptions.find((x) => x.value === hint.item);
 
-  const updateHint = (h: SettingHint) => {
-    const newArray = [...settings.hints];
+  const updateHint = useCallback((h: SettingHint) => {
+    const newArray = [...hints];
     newArray[index] = h;
-    setSettings({ hints: { set: newArray } });
-  };
+    patchSettings({ hints: { set: newArray } });
+  }, [hints, index]);
 
-  const onInputType = (type: keyof typeof HINT_TYPES) => {
+  const onInputType = useCallback((type: keyof typeof HINT_TYPES) => {
     const newHint = { ...hint, type };
     if (type === 'item') {
       newHint.item = 'MM_SONG_SOARING';
@@ -38,67 +40,65 @@ export function HintEditor({ index }: HintEditorProps) {
       delete newHint.item;
     }
     updateHint(newHint);
-  };
+  }, [hint, updateHint]);
 
-  const onInputAmount = (amount: number) => {
+  const onInputAmount = useCallback((amount: number) => {
     const newHint = { ...hint, amount };
     updateHint(newHint);
-  };
+  }, [hint, updateHint]);
 
-  const onInputExtra = (extra: number) => {
+  const onInputExtra = useCallback((extra: number) => {
     const newHint = { ...hint, extra };
     updateHint(newHint);
-  };
+  }, [hint, updateHint]);
 
-  const onInputMax = (max: boolean) => {
+  const onInputMax = useCallback((max: boolean) => {
     const newHint = { ...hint };
     newHint.amount = max ? 'max' : 1;
     updateHint(newHint);
-  };
+  }, [hint, updateHint]);
 
-  const onInputItem = (item?: string) => {
+  const onInputItem = useCallback((item?: string) => {
     if (!item) return;
     const newHint = { ...hint, item };
     updateHint(newHint);
-  };
+  }, [hint, updateHint]);
 
-  const onRemove = () => {
-    const newArray = [...settings.hints];
+  const onRemove = useCallback(() => {
+    const newArray = [...hints];
     newArray.splice(index, 1);
-    setSettings({ hints: { set: newArray } });
-  };
+    patchSettings({ hints: { set: newArray } });
+  }, [hints, index]);
 
-  const onMoveUp = () => {
+  const onMoveUp = useCallback(() => {
     if (index === 0) return;
-    const newArray = [...settings.hints];
+    const newArray = [...hints];
     const temp = newArray[index - 1];
     newArray[index - 1] = newArray[index];
     newArray[index] = temp;
-    setSettings({ hints: { set: newArray } });
-  };
+    patchSettings({ hints: { set: newArray } });
+  }, [hints, index]);
 
-  const onMoveDown = () => {
-    if (index === settings.hints.length - 1) return;
-    const newArray = [...settings.hints];
+  const onMoveDown = useCallback(() => {
+    if (index === hints.length - 1) return;
+    const newArray = [...hints];
     const temp = newArray[index + 1];
     newArray[index + 1] = newArray[index];
     newArray[index] = temp;
-    setSettings({ hints: { set: newArray } });
-  };
-
-  const selectedItem = itemOptions.find((x) => x.value === hint.item);
+    patchSettings({ hints: { set: newArray } });
+  }, [hints, index]);
 
   return (
     <tr className="dashboard-table">
       <td>
         <span className="list-remove" onClick={onRemove}>
-          <FontAwesomeIcon icon={faXmark} />
+          <FaXmark/>
         </span>
         <span className="list-action" onClick={onMoveUp}>
-          <FontAwesomeIcon icon={faArrowUp} />
+          <FaArrowUp/>
         </span>
         <span className="list-action" onClick={onMoveDown}>
-          <FontAwesomeIcon icon={faArrowDown} />
+          <FaArrowDown/>
         </span>
       </td>
       <td>
@@ -121,13 +121,14 @@ export function HintEditor({ index }: HintEditorProps) {
 }
 
 export function Hints() {
-  const [settings, setSettings] = useSettings();
+  const hints = useSetting('hints');
+  const patchSettings = usePatchSettings();
 
-  const onNew = () => {
-    const newArray = [...settings.hints];
+  const onNew = useCallback(() => {
+    const newArray = [...hints];
     newArray.push({ type: 'junk', amount: 1, extra: 0 });
-    setSettings({ hints: { set: newArray } });
-  };
+    patchSettings({ hints: { set: newArray } });
+  }, [hints]);
 
   return (
     <main>
@@ -137,10 +138,10 @@ export function Hints() {
         <button className="btn" onClick={onNew}>
           New
         </button>
-        <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>
+        <button className="btn-danger" onClick={() => patchSettings({ hints: { set: [] } })}>
           Remove All
         </button>
-        <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>
+        <button className="btn-danger" onClick={() => patchSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>
           Reset
         </button>
       </>
@@ -157,7 +158,7 @@ export function Hints() {
           </tr>
         </thead>
         <tbody>
-          {settings.hints.map((_, i) => (
+          {hints.map((_, i) => (
             <HintEditor key={i} index={i} />
           ))}
         </tbody>
