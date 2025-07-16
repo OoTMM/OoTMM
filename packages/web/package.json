@@ -9,8 +9,10 @@
     "deploy": "./deploy.sh"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "preact": "^10.26.9",
     "preact-iso": "^2.9.2",
+    "react-icons": "^5.5.0",
     "reset-css": "^5.0.2",
     "tailwindcss": "^4.1.11"
   },

@@ -11,6 +11,6 @@ export function Generator() {
   } else if (data === null) {
     return <div>Loading...</div>;
   } else {
-    return <iframe className="generator" src={`${__STATIC_URL__}/${data.generator.iframe.path}`}></iframe>;
+    return <iframe className="h-full" src={`${__STATIC_URL__}/${data.generator.iframe.path}`}></iframe>;
   }
 }

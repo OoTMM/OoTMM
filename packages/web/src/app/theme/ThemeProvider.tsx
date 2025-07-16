@@ -8,7 +8,7 @@ type ThemeContext = {
 const ThemeContext = createContext(null as ThemeContext);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const defaultTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  const defaultTheme = document.documentElement.style.colorScheme as 'light' | 'dark';
   const [theme, setTheme] = useState<'light' | 'dark'>(defaultTheme);
   const isMounted = useRef(false);
 
