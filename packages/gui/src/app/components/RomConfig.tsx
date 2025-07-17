@@ -9,6 +9,7 @@ import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
 import { Result } from './Result';
 import { Setting } from './SettingsEditor';
+import { Button } from '../ui';
 
 export function RomConfig() {
   const { romConfig, setRomConfigFile, setSeed } = useRomConfig();
@@ -86,7 +87,7 @@ export function RomConfig() {
                 <input type="text" value={romConfig.seed} onInput={(e) => setSeed(e.currentTarget.value)} />
               </label>
             )}
-            <button disabled={!isReady} className="btn btn-primary" type="submit" style={{ width: '105px' }}>Generate</button>
+            <Button type="submit" disabled={!isReady}>Generate</Button>
         </form>
       </div>
     </main>

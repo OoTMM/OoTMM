@@ -1,6 +1,6 @@
 import { VNode } from 'preact';
 import { useState } from 'preact/hooks';
-import { Button } from './Button';
+import { Button } from '../ui';
 
 type DoubleListOption = {
   key: string;
@@ -68,7 +68,7 @@ export function DoubleList({ onAdd, onRemove, onReset, options, selected }: Doub
     <div className="double-list">
       <div className="double-list-tools">
         <Button onClick={add}>Add</Button>
-        {reset && <Button type="danger" onClick={reset}>Reset</Button>}
+        {reset && <Button variant="danger" onClick={reset}>Reset</Button>}
         <Button onClick={remove}>Remove</Button>
       </div>
       <div className="double-list-content">
