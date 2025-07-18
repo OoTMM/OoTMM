@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 
-import { Generator } from './Generator';
+import { Generator } from './generator/Generator';
 import { Progress } from './Progress';
 import { composeProviders } from '../utils/composeProviders';
 import { SettingsProvider } from '../contexts/SettingsContext';

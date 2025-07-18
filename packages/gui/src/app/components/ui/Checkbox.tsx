@@ -10,18 +10,19 @@ type CheckboxProps = {
 
 export function Checkbox({ checked, onChange, className, ...props }: CheckboxProps) {
   return (
-    <div className="relative w-6 h-6">
+    <div className="relative w-6 h-6 min-w-6 min-h-6">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.currentTarget.checked)}
         className={clsx(
-          'w-full h-full appearance-none',
+          'w-full h-full appearance-none cursor-pointer',
           'bg-white dark:bg-gray-600',
           'border-2 rounded border-gray-300 dark:border-gray-500',
           'hover:bg-gray-100 dark:hover:bg-gray-700',
           'focus:outline-none',
           'focus:border-blue-500 dark:focus:border-blue-400',
+          'disabled:opacity-50 disabled:cursor-not-allowed',
           className
         )}
         {...props}
