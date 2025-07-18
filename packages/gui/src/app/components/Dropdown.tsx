@@ -1,5 +1,5 @@
 import { VNode } from 'preact';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from './ui/Tooltip';
 
 type DropdownProps = {
   label?: string;

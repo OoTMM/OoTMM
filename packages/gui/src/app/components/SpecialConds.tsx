@@ -1,7 +1,7 @@
 import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { useSettings, usePatchSettings } from '../contexts/SettingsContext';
-import { Checkbox } from './Checkbox';
+import { CheckboxField } from './ui/CheckboxField';
 import { InputNumber } from './InputNumber';
 
 type SpecialCondsPanelProps = {
@@ -40,11 +40,11 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
       <h2>{SPECIAL_CONDS[cond].name}</h2>
       <>
         {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
-          <Checkbox
+          <CheckboxField
             key={key}
             label={(SPECIAL_CONDS_FIELDS as any)[key].name}
             checked={(c as any)[key]}
-            onInput={x => patchSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
+            onChange={x => patchSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
           />
         )}
       </>

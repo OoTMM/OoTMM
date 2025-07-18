@@ -4,7 +4,7 @@ import { TRICKS } from '@ootmm/core';
 import { TrickKey } from '@ootmm/core/lib/combo/settings';
 
 import { DoubleList } from './DoubleList';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from './ui/Tooltip';
 import { GameName } from './GameName';
 import { usePatchSettings, useSetting } from '../contexts/SettingsContext';
 

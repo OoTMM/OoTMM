@@ -2,7 +2,7 @@ import Select, { MultiValue } from 'react-select';
 import { SETTINGS, SUBCATEGORIES } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
-import { Checkbox } from './Checkbox';
+import { CheckboxField } from './ui/CheckboxField';
 import { InputNumber } from './InputNumber';
 import { usePatchSettings, useSettings } from '../contexts/SettingsContext';
 
@@ -171,11 +171,11 @@ export function Setting({ setting }: { setting: string }) {
   case 'set': return <SettingSet setting={setting}/>;
   case 'boolean':
     return (
-      <Checkbox
+      <CheckboxField
         label={data.name}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         checked={settings[data.key] as boolean}
-        onInput={(v) => patchSettings({ [data.key]: v })}
+        onChange={(v) => patchSettings({ [data.key]: v })}
       />
     );
   case 'number':

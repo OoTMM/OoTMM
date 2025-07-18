@@ -1,6 +1,6 @@
 import { VNode } from 'preact';
 import { useState } from 'preact/hooks';
-import { Button } from '../ui';
+import { Button } from './ui';
 
 type DoubleListOption = {
   key: string;

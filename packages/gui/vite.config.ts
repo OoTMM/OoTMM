@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 import tailwindcss from '@tailwindcss/vite';
@@ -24,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       lodash: 'lodash-es',
+      '@': path.resolve(__dirname, 'src'),
     }
   },
   optimizeDeps: {

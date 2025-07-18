@@ -3,7 +3,7 @@ import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 import { useCosmetics, useSetCosmetic } from '../contexts/CosmeticsContext';
 import { Dropdown } from './Dropdown';
 import { FileSelect } from './FileSelect';
-import { Checkbox } from './Checkbox';
+import { CheckboxField } from './ui/CheckboxField';
 
 const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
@@ -35,10 +35,10 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
     );
   case 'boolean':
     return (
-      <Checkbox
+      <CheckboxField
         label={data.name}
         checked={!!(cosmetics[cosmetic])}
-        onInput={(v) => setCosmetic(cosmetic, v)}
+        onChange={(v) => setCosmetic(cosmetic, v)}
       />
     );
   default:

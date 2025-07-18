@@ -5,7 +5,7 @@ import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
-import { Checkbox } from './Checkbox';
+import { CheckboxField } from './ui/CheckboxField';
 import { SettingsPanel } from './SettingsEditor';
 import { useItemPool, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 
@@ -111,7 +111,7 @@ export function HintEditor({ index }: HintEditorProps) {
       </td>
       <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onInput={onInputAmount} />}</td>
       <td>
-        <Checkbox checked={hint.amount === 'max'} onInput={onInputMax} />
+        <CheckboxField checked={hint.amount === 'max'} onChange={onInputMax} />
       </td>
       <td>
         <InputNumber value={hint.extra} onInput={onInputExtra} />

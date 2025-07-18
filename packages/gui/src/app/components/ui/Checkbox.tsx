@@ -1,0 +1,37 @@
+import { ComponentProps } from 'react';
+import { ImCheckmark } from 'react-icons/im';
+import clsx from 'clsx';
+
+type CheckboxProps = {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  className?: string;
+} & Omit<ComponentProps<'input'>, 'onChange' | 'checked'>;
+
+export function Checkbox({ checked, onChange, className, ...props }: CheckboxProps) {
+  return (
+    <div className="relative w-6 h-6">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.currentTarget.checked)}
+        className={clsx(
+          'w-full h-full appearance-none',
+          'bg-white dark:bg-gray-600',
+          'border-2 rounded border-gray-300 dark:border-gray-500',
+          'hover:bg-gray-100 dark:hover:bg-gray-700',
+          'focus:outline-none',
+          'focus:border-blue-500 dark:focus:border-blue-400',
+          className
+        )}
+        {...props}
+      />
+      <div className={clsx(
+        "absolute top-0 left-0 w-full h-full grid place-items-center pointer-events-none transition-all",
+        checked ? 'scale-100' : 'scale-0'
+      )}>
+        <ImCheckmark/>
+      </div>
+    </div>
+  );
+}
