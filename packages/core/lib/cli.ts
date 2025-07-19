@@ -49,7 +49,7 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       opts.seed = args[++i];
       break;
     case '--random':
-      opts.random = { enabled: true };
+      opts.mode = 'random';
       break;
     case '--config': {
       const configFile = await fs.readFile(args[++i]);
@@ -73,6 +73,7 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
     case '--patch': {
       const patch = await readFileUint8(args[++i]);
       opts.patch = patch;
+      opts.mode = 'patch';
       break;
     }
     case '--settings': {

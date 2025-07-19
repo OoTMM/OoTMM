@@ -4,7 +4,6 @@ import { IconType } from 'react-icons';
 import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';
-import { useIsPatch } from '../../contexts/GeneratorContext';
 import { useRandomSettings } from '../../contexts/RandomSettingsContext';
 import { GeneratorGeneral } from './GeneratorGeneral';
 import { CosmeticsEditor } from '../Cosmetics';
@@ -13,6 +12,7 @@ import { GeneratorItems } from './GeneratorItems';
 import { GeneratorLogic } from './GeneratorLogic';
 import { GeneratorEntrances } from './GeneratorEntrances';
 import { GeneratorAdvanced } from './GeneratorAdvanced';
+import { useRomConfig } from '@/app/contexts/GeneratorContext';
 
 type GeneratorRoute = {
   name: string;
@@ -22,9 +22,9 @@ type GeneratorRoute = {
 };
 
 export function Generator() {
-  const [isPatch] = useIsPatch();
-  const randomSettings = useRandomSettings();
-  const isRandom = randomSettings.enabled;
+  const { romConfig } = useRomConfig();
+  const isPatch = romConfig.mode === 'patch';
+  const isRandom = romConfig.mode === 'random';
 
   const router = useRouter<GeneratorRoute>([
     { name: 'General', icon: LuSettings, component: GeneratorGeneral },
