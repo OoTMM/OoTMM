@@ -48,7 +48,7 @@ export function Select<T>({ options, value, placeholder, clearable, creatable, o
 
   return (
     <div ref={containerRef}>
-      <div className="flex items-center bg-white dark:bg-gray-600 p-1 pl-2 rounded border dark:border-gray-500" onClick={() => setOpen(!open)}>
+      <div className="ux-bg ux-border ux-hover flex items-center p-2" onClick={() => setOpen(!open)}>
         <input
           readOnly={!creatable}
           placeholder={placeholder}
@@ -57,15 +57,15 @@ export function Select<T>({ options, value, placeholder, clearable, creatable, o
           onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); setOpen(true); }}
           onKeyDown={onInputKeyDown}
         />
-        {clearable && value && <div className="p-1 mr-1 dark:hover:text-gray-400 cursor-pointer" onClick={onClear}><FaXmark/></div>}
-        <div className="border-l dark:border-gray-500 p-1">
+        {clearable && value && <div className="mr-1 dark:hover:text-gray-400 cursor-pointer" onClick={onClear}><FaXmark/></div>}
+        <div className="border-l dark:border-gray-500 pl-1">
           <LuChevronDown size={20}/>
         </div>
       </div>
       <div className="relative">
-        {open && !inputValue && <div className="z-10 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
+        {open && !inputValue && <div className="ux-bg ux-border z-10 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
           {options.map((opt, i) =>
-            <div key={i} className="p-2 dark:hover:bg-gray-700" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen(false); setInputValue(''); onSelect(opt.value); }}>
+            <div key={i} className="ux-hover p-2" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen(false); setInputValue(''); onSelect(opt.value); }}>
               {opt.label}
             </div>
           )}

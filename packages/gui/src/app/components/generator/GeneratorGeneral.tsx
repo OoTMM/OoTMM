@@ -1,7 +1,7 @@
 import { useSettings } from '../../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
 import { useGenerator, useIsPatch, useRomConfig } from '../../contexts/GeneratorContext';
-import { CheckboxField, FileSelectField } from '../ui';
+import { CheckboxField, FileSelectField, InputField } from '../ui';
 import { PresetSelector } from '../PresetSelector';
 import { SettingsImportExport } from '../SettingsImportExport';
 import { Result } from '../Result';
@@ -27,7 +27,7 @@ export function GeneratorGeneral() {
   }
 
   return (
-    <main className="m-1 flex flex-col items-center">
+    <main className="mt-8 flex flex-col items-center">
       <div className="bg-gray-100 dark:bg-gray-800 w-[1024px] mt-4 p-4 rounded border dark:border-slate-700 flex flex-col gap-4">
         <div className="m-auto text-center">
           <div className="font-bold text-2xl">OoTMM Web Generator</div>
@@ -36,23 +36,9 @@ export function GeneratorGeneral() {
         {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
         {result && <Result archive={archive} warnings={warnings}/>}
         <div className="m-auto flex gap-8">
-          <FileSelectField
-            imageSrc={logoOot}
-            label="Ocarina of Time (1.0, U or J)"
-            accept=".z64, .n64, .v64"
-            file={romConfig.files.oot}
-            onInput={(f) => setRomConfigFile('oot', f)}
-          />
-          <FileSelectField
-            imageSrc={logoMm}
-            label="Majora's Mask (U only)"
-            accept=".z64, .n64, .v64"
-            file={romConfig.files.mm}
-            onInput={(f) => setRomConfigFile('mm', f)}
-          />
-          {isPatch && (
-            <FileSelectField imageSrc={logoOotmm} label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />
-          )}
+          <FileSelectField imageSrc={logoOot} label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" file={romConfig.files.oot} onInput={(f) => setRomConfigFile('oot', f)}/>
+          <FileSelectField imageSrc={logoMm} label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onInput={(f) => setRomConfigFile('mm', f)}/>
+          {isPatch && (<FileSelectField imageSrc={logoOotmm} label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />)}
         </div>
         {!isPatch && <CheckboxField label="Random Settings" checked={isRandomSettings} onChange={(x) => patchRandomSettings({ enabled: x })} />}
           {isRandomSettings && (
@@ -75,10 +61,7 @@ export function GeneratorGeneral() {
           )}
           {!isRandomSettings && <CheckboxField label="Use a patch file" checked={isPatch} onChange={setIsPatch} />}
           {!isPatch && !isRandomSettings && (
-            <label>
-              Seed (leave blank to auto-generate)
-              <input type="text" value={romConfig.seed} onInput={(e) => setSeed(e.currentTarget.value)} />
-            </label>
+            <InputField type="text" label="Seed" placeholder="Leave blank to auto-generate" value={romConfig.seed} onInput={(e) => setSeed(e.currentTarget.value)}/>
           )}
           <Button disabled={!isReady}>Generate</Button>
       </div>

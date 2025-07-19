@@ -16,9 +16,8 @@ export function Checkbox({ checked, onChange, className, ...props }: CheckboxPro
         checked={checked}
         onChange={() => onChange(!checked)}
         className={clsx(
+          'ux-bg ux-border ux-hover ux-outline',
           'w-full h-full appearance-none cursor-pointer',
-          'bg-white dark:bg-gray-600',
-          'border-2 rounded border-gray-300 dark:border-gray-500',
           'hover:bg-gray-100 dark:hover:bg-gray-700',
           'focus:outline-none',
           'focus:border-blue-500 dark:focus:border-blue-400',

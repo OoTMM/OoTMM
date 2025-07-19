@@ -6,3 +6,5 @@ export * from './Tooltip';
 export * from './FileSelect';
 export * from './FileSelectField';
 export * from './Select';
+export * from './Input';
+export * from './InputField';
