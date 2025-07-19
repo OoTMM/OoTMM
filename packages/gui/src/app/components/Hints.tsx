@@ -6,7 +6,7 @@ import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
 import { CheckboxField } from './ui/CheckboxField';
-import { SettingsPanel } from './SettingsEditor';
+import { SettingsPanel } from './settings/SettingsEditor';
 import { useItemPool, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 
 const hintOptions: { name: string; value: string }[] = [];

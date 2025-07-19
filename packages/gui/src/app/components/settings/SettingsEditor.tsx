@@ -1,10 +1,10 @@
 import Select, { MultiValue } from 'react-select';
 import { SETTINGS, SUBCATEGORIES } from '@ootmm/core';
 
-import { Dropdown } from './Dropdown';
-import { CheckboxField } from './ui/CheckboxField';
-import { InputNumber } from './InputNumber';
-import { usePatchSettings, useSettings } from '../contexts/SettingsContext';
+import { Dropdown } from '../Dropdown';
+import { CheckboxField } from '../ui/CheckboxField';
+import { InputNumber } from '../InputNumber';
+import { usePatchSettings, useSettings } from '../../contexts/SettingsContext';
 
 const SET_OPTIONS = [
   { value: 'none', name: 'None' },

@@ -1,4 +1,6 @@
 import clsx from 'clsx';
+import { IconType } from 'react-icons';
+import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { useSettings } from '../../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
@@ -7,11 +9,34 @@ import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, Rad
 import { PresetSelector } from '../PresetSelector';
 import { SettingsImportExport } from '../SettingsImportExport';
 import { Result } from '../Result';
-import { Setting } from '../SettingsEditor';
+import { Setting } from '../settings/SettingsEditor';
 
 import logoOot from '../../../assets/oot.png';
 import logoMm from '../../../assets/mm.png';
 import logoOotmm from '../../../assets/logo.png';
+
+type ModeCardProps = {
+  selected: boolean;
+  onSelect: () => void;
+  title: string;
+  description: string;
+  icon?: IconType;
+};
+function ModeCard({ selected, onSelect, title, description, icon: Icon }: ModeCardProps) {
+  return (
+    <RadioCard selected={selected} onSelect={onSelect}>
+      <div className="flex items-center">
+        <div className="flex-1 flex flex-col">
+          <span className="font-bold">{title}</span>
+          <span className="text-sm">{description}</span>
+        </div>
+        {Icon && <div className="opacity-20 mr-2">
+          <Icon size={24}/>
+        </div>}
+      </div>
+    </RadioCard>
+  );
+}
 
 export function GeneratorGeneral() {
   const { romConfig, setRomConfigFile, setSeed, setMode } = useRomConfig();
@@ -32,8 +57,8 @@ export function GeneratorGeneral() {
 
   return (
     <main className="mt-8 flex flex-col items-center">
-      <div className="bg-gray-100 dark:bg-gray-800 w-[1024px] mt-4 p-4 rounded border dark:border-slate-700 flex flex-col gap-4">
-        <div className="m-auto text-center">
+      <div className="bg-gray-100 dark:bg-gray-800 w-[1024px] mt-4 p-8 rounded border dark:border-slate-700 flex flex-col gap-4">
+        <div className="m-auto mb-8 text-center">
           <div className="font-bold text-2xl">OoTMM Web Generator</div>
           <div>{process.env.VERSION}</div>
         </div>
@@ -43,22 +68,13 @@ export function GeneratorGeneral() {
           <FileSelectField imageSrc={logoOot} label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" file={romConfig.files.oot} onInput={(f) => setRomConfigFile('oot', f)}/>
           <FileSelectField imageSrc={logoMm} label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onInput={(f) => setRomConfigFile('mm', f)}/>
         </div>
-        <div className="mt-8 flex flex-col gap-4">
+        <div className="mt-8 flex flex-col gap-6">
           <div>
-            <span>Mode</span>
+            <span>Generator Mode</span>
             <RadioCardGroup>
-              <RadioCard selected={isModeCreate} onSelect={() => setMode('create')}>
-                <span className="font-bold">New Seed</span>
-                <span className="text-xs">Create a new seed with custom settings.</span>
-              </RadioCard>
-              <RadioCard selected={isModeRandom} onSelect={() => setMode('random')}>
-                <span className="font-bold">Random Settings</span>
-                <span className="text-xs">Play a seed where the settings themselves are random.</span>
-              </RadioCard>
-              <RadioCard selected={isModePatch} onSelect={() => setMode('patch')}>
-                <span className="font-bold">Patch</span>
-                <span className="text-xs">Recreate an existing seed using a patch file.</span>
-              </RadioCard>
+              <ModeCard selected={isModeCreate} onSelect={() => setMode('create')} title="New Seed" description="Create a new seed with custom settings." icon={LuHammer}/>
+              <ModeCard selected={isModeRandom} onSelect={() => setMode('random')} title="Random Settings" description="Play a seed where the settings themselves are random." icon={LuDices}/>
+              <ModeCard selected={isModePatch} onSelect={() => setMode('patch')} title="Patch" description="Recreate an existing seed using a patch file." icon={LuFileDiff}/>
             </RadioCardGroup>
           </div>
 
@@ -83,7 +99,7 @@ export function GeneratorGeneral() {
 
           {isModePatch && <FileSelectField imageSrc={logoOotmm} label="Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />}
 
-          <Button disabled={!isReady} onClick={generate}>Generate</Button>
+          <Button variant="submit" disabled={!isReady} onClick={generate}>Generate</Button>
         </div>
       </div>
     </main>

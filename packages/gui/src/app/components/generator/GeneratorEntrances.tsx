@@ -1,4 +1,4 @@
-import { SettingsEditor } from '../SettingsEditor';
+import { SettingsEditor } from '../settings/SettingsEditor';
 
 export function GeneratorEntrances() {
   return (

@@ -1,6 +1,6 @@
 import { ComponentType } from "preact";
 import { Tab } from "../nav";
-import { MultipleSettingsEditor, SettingsEditor } from "../SettingsEditor";
+import { MultipleSettingsEditor, SettingsEditor } from "../settings/SettingsEditor";
 
 type TabSettingsEditorProps = {
   name: string;
