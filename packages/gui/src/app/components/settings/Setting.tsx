@@ -1,18 +1,16 @@
 import Select, { MultiValue } from 'react-select';
 import { SETTINGS } from '@ootmm/core';
 
-import { Dropdown } from '../Dropdown';
 import { CheckboxField } from '../ui/CheckboxField';
-import { InputNumber } from '../InputNumber';
 import { usePatchSettings, useSettings } from '../../contexts/SettingsContext';
 import { InputField, SelectField } from '../ui';
 
 const SET_OPTIONS = [
-  { value: 'none', name: 'None' },
-  { value: 'all', name: 'All' },
-  { value: 'specific', name: 'Specific' },
-  { value: 'random', name: 'Random' },
-  { value: 'random-mixed', name: 'Mixed Random' },
+  { value: 'none', label: 'None' },
+  { value: 'all', label: 'All' },
+  { value: 'specific', label: 'Specific' },
+  { value: 'random', label: 'Random' },
+  { value: 'random-mixed', label: 'Mixed Random' },
 ];
 
 function SettingTooltip({ setting }: { setting: string }) {
@@ -110,12 +108,12 @@ function SettingSet({ setting }: { setting: string }) {
 
   return (
     <span>
-      <Dropdown
+      <SelectField
         value={(settings[data.key] as any).type as string}
         label={data.name}
         options={SET_OPTIONS}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        onInput={(v) => patchSettings({ [data.key]: { type: v, values: s.values } as any })}
+        onSelect={(v) => patchSettings({ [data.key]: { type: v, values: s.values } as any })}
       />
       {s.type === 'specific' &&
         <Select
