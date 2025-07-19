@@ -14,3 +14,16 @@
 .gutter-stable {
   scrollbar-gutter: stable;
 }
+
+.reserve-semibold {
+  @apply relative;
+}
+
+.reserve-semibold > * {
+  @apply absolute left-0;
+}
+
+.reserve-semibold::before {
+  content: attr(data-text);
+  @apply font-semibold invisible whitespace-nowrap pointer-events-none select-none;
+}
