@@ -1,68 +1,67 @@
-import { useState } from 'react';
-import CreatableSelect from 'react-select/creatable';
+import { isEqual } from 'lodash';
 import { PRESETS, Settings } from '@ootmm/core';
 
 import { localStoragePrefixedGet, localStoragePrefixedSet } from '../util';
 import { useSetSettings, useSettings } from '../contexts/SettingsContext';
-
-const NO_PRESET = "-----";
+import { Select } from './ui';
+import { useState } from 'preact/hooks';
 
 type Option = {
   label: string;
-  value: Settings | null;
+  value: Settings;
+  custom: boolean;
 };
 
 const customPresets = localStoragePrefixedGet("customPresets", {});
 
+const makePresetOptions = () => {
+  const options: Option[] = [];
+  for (const preset of Object.keys(PRESETS)) {
+    options.push({ label: preset, value: PRESETS[preset], custom: false });
+  }
+  for (const preset of Object.keys(customPresets)) {
+    options.push({ label: preset, value: customPresets[preset], custom: true });
+  }
+  return options;
+};
+
 export const PresetSelector = () => {
+  const [options, setOptions] = useState(makePresetOptions);
   const settings = useSettings();
   const setSettings = useSetSettings();
+  const selectedOption = options.find(opt => isEqual(opt.value, settings));
+  const value = selectedOption ? selectedOption.value : null;
 
-  const makePresetOptions = () => {
-    const options: Option[] = [];
-    options.push({ label: NO_PRESET, value: null });
-    for (const preset of Object.keys(PRESETS)) {
-      options.push({ label: preset, value: PRESETS[preset] });
-    }
-    for (const preset of Object.keys(customPresets)) {
-      options.push({ label: preset, value: customPresets[preset] });
-    }
-    return options;
+  const onClear = () => {
+    delete customPresets[selectedOption?.label || ''];
+    localStoragePrefixedSet("customPresets", customPresets);
+    setOptions(makePresetOptions());
+    setSettings(PRESETS['Default']);
   };
-  const options = makePresetOptions();
-  const [value, setValue] = useState<Option>(options[0]);
 
-  const onInput = (o: Option | null) => {
-    if (!o || o.value === null) {
-      /* Clear */
-      delete customPresets[value.label];
-      localStoragePrefixedSet("customPresets", customPresets);
-      setValue(options[0]);
-      return;
+  const onSelect = (v: Settings | null) => {
+    if (v) {
+      setSettings(v);
     }
-    setValue(o);
-    setSettings(o.value);
   };
 
   const onCreate = (x: string) => {
     const newOptionLabel = "Custom: " + x;
-    const newOption = { label: newOptionLabel, value: settings };
-
-    /* Also triggers a redraw */
     customPresets[newOptionLabel] = settings;
     localStoragePrefixedSet("customPresets", customPresets);
-    setValue(newOption);
+    setOptions(makePresetOptions());
   }
 
   return <label>
     Preset
-    <CreatableSelect
-      className="react-select-container"
-      classNamePrefix="react-select"
-      isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
-      options={options as any[]}
-      onChange={(x) => onInput(x)}
-      onCreateOption={(x) => onCreate(x)}
+    <Select
+      placeholder='Select a preset, or type to create a new one'
+      options={options}
+      onSelect={onSelect}
+      onCreate={onCreate}
+      onClear={onClear}
+      clearable={selectedOption?.custom}
+      creatable={!selectedOption}
       value={value}
     />
   </label>;

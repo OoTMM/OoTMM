@@ -6,7 +6,7 @@ import { PresetSelector } from '../PresetSelector';
 import { SettingsImportExport } from '../SettingsImportExport';
 import { Result } from '../Result';
 import { Setting } from '../SettingsEditor';
-import { Button } from '../ui';
+import { Button, Select } from '../ui';
 
 import logoOot from '../../../assets/oot.png';
 import logoMm from '../../../assets/mm.png';

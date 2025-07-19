@@ -61,7 +61,7 @@ export function Generator() {
           </a>
         )}
       </nav>
-      <div className="h-full w-full overflow-y-auto">
+      <div className="h-full w-full min-h-screen overflow-y-auto">
         {<router.currentRoute.component/>}
       </div>
     </div>
