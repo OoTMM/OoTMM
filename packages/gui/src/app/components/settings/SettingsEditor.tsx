@@ -8,7 +8,7 @@ export function SettingsPanel({ category }: SettingsPanelProps) {
   const settingsData = SETTINGS.filter((s) => s.category === category);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
       {settingsData.map(x => <Setting key={x.key} setting={x.key}/>)}
     </div>
   );
