@@ -13,8 +13,8 @@ export function InputField({ label, tooltip, ...props }: InputFieldProps) {
   const id = useId();
 
   return (
-    <div className="flex flex-col">
-      <span><Label htmlFor={id}>{label}</Label>{tooltip && <Tooltip>{tooltip}</Tooltip>}</span>
+    <div className="flex flex-col gap-2">
+      <span className="flex items-center gap-2"><Label htmlFor={id}>{label}</Label>{tooltip && <Tooltip>{tooltip}</Tooltip>}</span>
       <Input id={id} {...props} />
     </div>
   );

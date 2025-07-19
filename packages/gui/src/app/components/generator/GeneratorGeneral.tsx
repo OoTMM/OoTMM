@@ -81,7 +81,7 @@ export function GeneratorGeneral() {
           {isModeCreate && <>
             <PresetSelector />
             <SettingsImportExport />
-            <InputField className={clsx(romConfig.seed ? 'font-mono' : '')} type="text" label="Seed" placeholder="Leave blank to auto-generate" value={romConfig.seed} onInput={(e) => setSeed(e.currentTarget.value)}/>
+            <InputField className={clsx(romConfig.seed ? 'font-mono' : '')} type="text" label="Seed" placeholder="Leave blank to auto-generate" value={romConfig.seed} onChange={setSeed}/>
           </>}
 
           {isModeRandom && (

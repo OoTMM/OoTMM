@@ -5,7 +5,7 @@ import { Dropdown } from '../Dropdown';
 import { CheckboxField } from '../ui/CheckboxField';
 import { InputNumber } from '../InputNumber';
 import { usePatchSettings, useSettings } from '../../contexts/SettingsContext';
-import { SelectField } from '../ui';
+import { InputField, SelectField } from '../ui';
 
 const SET_OPTIONS = [
   { value: 'none', name: 'None' },
@@ -194,11 +194,12 @@ export function Setting({ setting }: { setting: string }) {
     }
 
     return (
-      <InputNumber
+      <InputField
+        type="number"
         label={data.name}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        value={settings[data.key] as number}
-        onInput={(v) => patchSettings({ [data.key]: v })}
+        value={settings[data.key].toString()}
+        onChange={(v) => patchSettings({ [data.key]: Number(v) })}
         min={minValue}
         max={maxValue}
       />
