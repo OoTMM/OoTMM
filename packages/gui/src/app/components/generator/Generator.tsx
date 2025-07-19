@@ -37,7 +37,7 @@ export function Generator() {
   ]);
 
   return (
-    <div className="flex flex-row h-full w-full min-h-screen">
+    <div className="flex flex-row h-full w-full min-h-screen overflow-hidden">
       <nav className="w-[200px] flex flex-col dark:bg-gray-950 border-r dark:border-gray-800">
         {router.routes.map((route, i) =>
           <a
@@ -61,7 +61,7 @@ export function Generator() {
           </a>
         )}
       </nav>
-      <div className="h-full w-full min-h-screen overflow-y-auto">
+      <div className="h-full w-full min-h-screen max-h-screen overflow-y-auto gutter-stable">
         {<router.currentRoute.component/>}
       </div>
     </div>

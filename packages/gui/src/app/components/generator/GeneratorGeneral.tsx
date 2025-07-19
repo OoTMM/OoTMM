@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
+import { Setting } from '@/app/components/settings';
 import { useSettings } from '../../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
 import { useGenerator, useRomConfig } from '../../contexts/GeneratorContext';
@@ -9,7 +10,6 @@ import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, Rad
 import { PresetSelector } from '../PresetSelector';
 import { SettingsImportExport } from '../SettingsImportExport';
 import { Result } from '../Result';
-import { Setting } from '../settings/SettingsEditor';
 
 import logoOot from '../../../assets/oot.png';
 import logoMm from '../../../assets/mm.png';
@@ -57,7 +57,7 @@ export function GeneratorGeneral() {
 
   return (
     <main className="mt-8 flex flex-col items-center">
-      <div className="bg-gray-100 dark:bg-gray-800 w-[1024px] mt-4 p-8 rounded border dark:border-slate-700 flex flex-col gap-4">
+      <div className="bg-gray-100 dark:bg-gray-800 w-[1024px] m-4 p-8 rounded border dark:border-slate-700 flex flex-col gap-4">
         <div className="m-auto mb-8 text-center">
           <div className="font-bold text-2xl">OoTMM Web Generator</div>
           <div>{process.env.VERSION}</div>
@@ -85,7 +85,7 @@ export function GeneratorGeneral() {
           </>}
 
           {isModeRandom && (
-            <div>
+            <>
               <Setting setting='games'/>
               <Setting setting='mode'/>
               <Setting setting='players'/>
@@ -94,7 +94,7 @@ export function GeneratorGeneral() {
               {settings.games !== 'oot' && <CheckboxField label="Random Settings: MM JP Layouts" checked={randomSettings.jp} onChange={(x) => patchRandomSettings({ jp: x })} />}
               <CheckboxField label="Random Settings: Entrances" checked={randomSettings.er} onChange={(x) => patchRandomSettings({ er: x })} />
               <CheckboxField label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onChange={(x) => patchRandomSettings({ extraShuffles: x })} />
-            </div>
+            </>
           )}
 
           {isModePatch && <FileSelectField imageSrc={logoOotmm} label="Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />}

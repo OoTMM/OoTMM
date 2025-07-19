@@ -3,10 +3,14 @@
 @import "tailwindcss";
 
 :root {
-  @apply bg-white dark:bg-gray-900 w-screen h-screen min-h-screen min-w-screen;
+  @apply bg-white dark:bg-gray-900 w-screen h-screen min-h-screen min-w-screen overflow-hidden;
 }
 
 .ux-bg { @apply bg-white dark:bg-gray-700; }
 .ux-border { @apply rounded border dark:border-gray-600 border-gray-300; }
 .ux-hover { @apply hover:bg-gray-100 dark:hover:bg-gray-600; }
 .ux-outline { @apply focus:outline-none focus:border-blue-500 }
+
+.gutter-stable {
+  scrollbar-gutter: stable;
+}
