@@ -14,6 +14,8 @@ export function Button({ className, variant, children, ...props }: ButtonProps) 
         'p-2 border rounded cursor-pointer',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         'hover:opacity-90',
+        (variant === 'primary' || !variant) && 'bg-blue-600 text-white border-blue-500',
+        variant === 'danger' && 'bg-red-700 text-white border-red-600',
         (variant === 'submit' && 'bg-green-600 text-white border-green-500'),
         className,
       )}
