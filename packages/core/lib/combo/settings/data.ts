@@ -3007,7 +3007,7 @@ export const SETTINGS = [{
 }] as const;
 
 export const SUBCATEGORIES = [{
-  key: "Misc.",
+  key: "misc",
   categories: [
     { key: "CAMC", category: "main.camc" },
     { key: "Quality of Life", category: "main.qol" },

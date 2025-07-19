@@ -3,7 +3,7 @@ import { Tab } from "../nav";
 import { MultipleSettingsEditor, SettingsEditor } from "../settings/SettingsEditor";
 
 type TabSettingsEditorProps = {
-  name: string;
+  name?: string;
   icon?: ComponentType;
   category: string;
   disabled?: boolean;

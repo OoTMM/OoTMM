@@ -1,15 +1,17 @@
-import { NavTop, Tab } from '../nav';
+import { TabView, TabViewRoute } from '../nav';
 import { Hints } from '../Hints';
-import { useRandomSettings } from '@/app/contexts/RandomSettingsContext';
 import { Plando } from '../Plando';
+import { useRomConfig } from '@/app/contexts/GeneratorContext';
 
 export function GeneratorAdvanced() {
-  const randSettings = useRandomSettings();
+  const { romConfig } = useRomConfig();
+  const isRandom = romConfig.mode === 'random';
+  const routes: TabViewRoute[] = [
+    { name: 'Hints', component: Hints },
+    { name: 'Plando', component: Plando, disabled: isRandom },
+  ];
 
   return (
-    <NavTop>
-      <Tab name="Hints"><Hints/></Tab>
-      <Tab name="Plando" disabled={randSettings.enabled}><Plando/></Tab>
-    </NavTop>
+    <TabView routes={routes}/>
   );
 }

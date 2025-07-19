@@ -15,7 +15,7 @@ export function SettingsPanel({ category }: SettingsPanelProps) {
 };
 
 type SettingsEditorProps = {
-  name: string;
+  name?: string;
   category: string;
 };
 export function SettingsEditor({ name, category }: SettingsEditorProps) {
@@ -37,12 +37,12 @@ export function MultipleSettingsEditor({ name }: MultipleSettingsEditorProps) {
   }
 
   return (
-    <main>
+    <main className="flex flex-col gap-16">
       {categoriesData.map((x) =>
-        <>
-        <h1>{x.key}</h1>
-        <SettingsPanel category={x.category}/>
-        </>
+        <div>
+          <h1 className="font-bold text-xl mb-4">{x.key}</h1>
+          <SettingsPanel category={x.category}/>
+        </div>
       )}
     </main>
   )

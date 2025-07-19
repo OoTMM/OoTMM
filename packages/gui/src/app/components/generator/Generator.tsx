@@ -4,7 +4,6 @@ import { IconType } from 'react-icons';
 import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';
-import { useRandomSettings } from '../../contexts/RandomSettingsContext';
 import { GeneratorGeneral } from './GeneratorGeneral';
 import { CosmeticsEditor } from '../Cosmetics';
 import { GeneratorSettings } from './GeneratorSettings';

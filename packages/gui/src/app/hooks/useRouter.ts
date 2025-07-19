@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-type Router<T> = {
+export type Router<T> = {
   routes: T[];
   currentIndex: number;
   currentRoute: T;

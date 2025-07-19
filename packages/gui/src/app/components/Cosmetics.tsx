@@ -1,8 +1,6 @@
 import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 
 import { useCosmetics, useSetCosmetic } from '../contexts/CosmeticsContext';
-import { Dropdown } from './Dropdown';
-import { FileSelect } from './ui/FileSelect';
 import { CheckboxField } from './ui/CheckboxField';
 
 import ootmmLogo from '../../assets/logo.png';
