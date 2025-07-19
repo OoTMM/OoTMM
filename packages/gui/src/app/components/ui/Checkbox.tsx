@@ -14,7 +14,7 @@ export function Checkbox({ checked, onChange, className, ...props }: CheckboxPro
       <input
         type="checkbox"
         checked={checked}
-        onChange={(e) => onChange(e.currentTarget.checked)}
+        onChange={() => onChange(!checked)}
         className={clsx(
           'w-full h-full appearance-none cursor-pointer',
           'bg-white dark:bg-gray-600',

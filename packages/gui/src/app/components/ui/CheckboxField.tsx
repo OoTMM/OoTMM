@@ -15,7 +15,7 @@ export function CheckboxField({ label, checked, tooltip, onChange }: CheckboxFie
   const id = useId();
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       <Checkbox id={id} checked={checked} onChange={onChange}/>
       <Label htmlFor={id}>{label}</Label>
       {tooltip && <Tooltip>{tooltip}</Tooltip>}

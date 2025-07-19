@@ -1,7 +1,6 @@
 @charset "utf-8";
 
 @import "tailwindcss";
-/*@import "react-tooltip/dist/react-tooltip.css";*/
 
 :root {
   @apply bg-white dark:bg-gray-900 w-screen h-screen min-h-screen min-w-screen;

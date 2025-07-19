@@ -27,7 +27,6 @@
     "react-ga4": "^2.1.0",
     "react-icons": "^5.5.0",
     "react-select": "^5.10.2",
-    "react-tooltip": "^5.29.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   },
