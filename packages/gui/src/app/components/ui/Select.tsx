@@ -17,7 +17,7 @@ type SelectProps<T> = {
   creatable?: boolean;
   searcheable?: boolean;
   multi?: boolean;
-  onSelect: (value: T | null) => void;
+  onSelect: (value: T) => void;
   onUnselect?: (value: T) => void;
   onClear?: () => void;
   onCreate?: (label: string) => void;

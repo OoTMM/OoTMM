@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { useRouter } from '@/app/hooks/useRouter';
 import { ComponentType } from 'preact';
 import { IconType } from 'react-icons';
-import { useEffect } from 'preact/hooks';
 
 export type TabViewRoute = {
   name: string;
@@ -15,7 +14,7 @@ export function TabView({ routes }: { routes: TabViewRoute[] }) {
   const router = useRouter(routes);
 
   return (
-    <div className="p-4 flex flex-col gap-4">
+    <div className="p-4 flex flex-col gap-4 h-full">
       <nav className="mx-auto ux-bg ux-border inline-flex justify-center max-w-full">
         {router.routes.map((route, i) =>
           <button
@@ -39,7 +38,7 @@ export function TabView({ routes }: { routes: TabViewRoute[] }) {
           </button>
         )}
       </nav>
-      <div>
+      <div className="h-full w-full">
         {<router.currentRoute.component/>}
       </div>
     </div>
