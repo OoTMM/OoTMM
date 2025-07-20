@@ -20,6 +20,9 @@ importers:
       pako:
         specifier: ^2.1.0
         version: 2.1.0
+      tailwind-merge:
+        specifier: ^3.3.1
+        version: 3.3.1
     devDependencies:
       '@types/lodash':
         specifier: ^4.17.12
@@ -7787,7 +7790,7 @@ snapshots:
       '@prefresh/vite': 2.4.6(preact@10.26.9)(vite@5.4.11(@types/node@22.8.1)(lightningcss@1.30.1))
       '@rollup/pluginutils': 4.2.1
       babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.26.0)
-      debug: 4.4.0
+      debug: 4.4.0(supports-color@9.4.0)
       picocolors: 1.1.1
       vite: 5.4.11(@types/node@22.8.1)(lightningcss@1.30.1)
       vite-prerender-plugin: 0.5.11(vite@5.4.11(@types/node@22.8.1)(lightningcss@1.30.1))
@@ -8969,10 +8972,6 @@ snapshots:
       ms: 2.0.0
 
   debug@4.3.7:
-    dependencies:
-      ms: 2.1.3
-
-  debug@4.4.0:
     dependencies:
       ms: 2.1.3
 
