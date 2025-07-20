@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useRouter } from '@/app/hooks/useRouter';
 import { ComponentType } from 'preact';
 import { IconType } from 'react-icons';
+import { useEffect } from 'preact/hooks';
 
 export type TabViewRoute = {
   name: string;

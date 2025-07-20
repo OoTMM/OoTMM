@@ -2,9 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { Select, Input, Checkbox } from './ui';
 import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
-import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
-import { CheckboxField } from './ui/CheckboxField';
 import { SettingsPanel } from './settings/SettingsEditor';
 import { useItemPool, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 import { Button } from './ui';

@@ -2,13 +2,12 @@ import clsx from 'clsx';
 import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
-import { Setting } from '@/app/components/settings';
+import { Setting, SettingsImportExport } from '@/app/components/settings';
 import { useSettings } from '../../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
 import { useGenerator, useRomConfig } from '../../contexts/GeneratorContext';
 import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label } from '../ui';
 import { PresetSelector } from '../PresetSelector';
-import { SettingsImportExport } from '../SettingsImportExport';
 import { Result } from '../Result';
 
 import logoOot from '../../../assets/oot.png';

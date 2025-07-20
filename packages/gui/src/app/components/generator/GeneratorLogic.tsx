@@ -4,10 +4,13 @@ import { TabView, TabViewRoute } from '../nav';
 import { Tricks } from '../Tricks';
 import { JunkLocations } from '../JunkLocations';
 
+const PageTricks = () => <Tricks glitches={false}/>;
+const PageGlitches = () => <Tricks glitches={true}/>;
+
 export function GeneratorLogic() {
   const routes: TabViewRoute[] = [
-    { name: 'Tricks', icon: LuZap, component: () => <Tricks glitches={false}/> },
-    { name: 'Glitches', icon: LuBug, component: () => <Tricks glitches={true}/> },
+    { name: 'Tricks', icon: LuZap, component: PageTricks },
+    { name: 'Glitches', icon: LuBug, component: PageGlitches },
     { name: 'Junk Locations', icon: LuTrash2, component: JunkLocations },
   ];
 

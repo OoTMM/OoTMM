@@ -51,8 +51,10 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
 
   /* Detect when we click somewhere else */
   useEffect(() => {
+    if (!open) return;
     const onClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        console.log('Click outside');
         setOpen(false);
       }
     };
@@ -60,7 +62,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
     return () => {
       document.removeEventListener('mousedown', onClickOutside);
     };
-  }, []);
+  }, [open]);
 
   const filteredOptions = options.filter(filterFunc);
 
@@ -74,7 +76,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
           id={id}
           readOnly={!creatable && !searcheable}
           placeholder={placeholder}
-          className="outline-none flex-1 text-left"
+          className="outline-none flex-1 text-left select-none"
           value={(open && (creatable || searcheable)) ? inputValue : currentLabel}
           onFocus={onFocus}
           onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); }}

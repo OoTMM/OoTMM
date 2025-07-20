@@ -1,7 +1,7 @@
 import { useCallback, useId, useMemo } from 'react';
 import { importSettings, exportSettings } from '@ootmm/core';
-import { useSetSettings, useSettings } from '../contexts/SettingsContext';
-import { Input, Label } from './ui';
+import { useSetSettings, useSettings } from '@/app/contexts/SettingsContext';
+import { Input, Label } from '@/app/components/ui';
 
 export const SettingsImportExport = () => {
   const id = useId();
