@@ -92,7 +92,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
             id={id}
             readOnly={!creatable && !searcheable}
             placeholder={placeholder}
-            className={clsx("outline-none text-left select-none", (multi && Array.isArray(value) && value.length > 0) && 'sr-only')}
+            className={clsx("outline-none text-left select-none", (multi && Array.isArray(value) && value.length > 0) ? 'sr-only' : 'w-full')}
             value={(open && (creatable || searcheable)) ? inputValue : currentLabel}
             onFocus={onFocus}
             onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); }}

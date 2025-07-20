@@ -1,19 +1,29 @@
 import { useCallback, useMemo, useState } from 'react';
-import Select from 'react-select';
 import { FaXmark } from 'react-icons/fa6';
 import { itemName } from '@ootmm/core';
+import { Select, Button } from './ui';
 
 import { useItemPool, useLocations, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 
 export function Plando() {
   const plando = useSetting('plando');
-  const [selectedLoc, setSelectedLoc] = useState<string>();
-  const [selectedItem, setSelectedItem] = useState<string>();
+  const [selectedLoc, setSelectedLocRaw] = useState<string | null>(null);
+  const [selectedItem, setSelectedItemRaw] = useState<string | null>(null);
   const itemPool = useItemPool();
   const locations = useLocations();
   const locsOptions = useMemo(() => locations.map((loc) => ({ value: loc, label: loc })), [locations]);
   const itemOptions = useMemo(() => Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) })), [itemPool]);
   const patchSettings = usePatchSettings();
+
+  const setSelectedLoc = (loc: string | null) => {
+    if (!loc) return;
+    setSelectedLocRaw(loc);
+  };
+
+  const setSelectedItem = (item: string | null) => {
+    if (!item) return;
+    setSelectedItemRaw(item);
+  };
 
   const placeItem = useCallback(() => {
     if (selectedLoc && selectedItem) {
@@ -33,24 +43,19 @@ export function Plando() {
 
   return (
     <main>
-      <h1>Plando</h1>
-      <nav className="toolbar">
-        <Select className="react-select-container" classNamePrefix="react-select" options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)} />
-        <Select className="react-select-container" classNamePrefix="react-select" options={itemOptions} onChange={(v) => setSelectedItem(v?.value)} />
-        <button className="btn" onClick={placeItem}>Add</button>
-        <button className="btn btn-danger" onClick={removeAll}>Remove All</button>
+      <nav className="flex gap-2">
+        <div className="flex-1"><Select searcheable placeholder="Location" options={locsOptions} onSelect={setSelectedLoc} value={selectedLoc}/></div>
+        <div className="flex-1"><Select searcheable placeholder="Item" options={itemOptions} onSelect={setSelectedItem} value={selectedItem}/></div>
+        <Button onClick={placeItem}>Add</Button>
+        <Button variant="danger" onClick={removeAll}>Remove All</Button>
       </nav>
-      <ul>
+      <ul className="mt-4">
         {Object.entries(plando.locations || {})
           .filter((x) => x[1])
           .map(([loc, item]) => (
-            <li key={loc}>
-              <span className="list-remove" onClick={() => removeItem(loc)}>
-                <FaXmark/>
-              </span>
-              <span className="list-item">
-                {loc}: {itemName(item!)}
-              </span>
+            <li key={loc} className="flex items-center gap-1">
+              <span className="hover:text-gray-500 cursor-pointer" onClick={() => removeItem(loc)}><FaXmark/></span>
+              <span>{loc}: {itemName(item!)}</span>
             </li>
           ))}
       </ul>
