@@ -57,7 +57,7 @@ export function CosmeticsEditor() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {nonFiles.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
     </div>
-    <div className="flex gap-8 mt-8">
+    <div className="flex gap-16 mt-16 justify-center">
       {files.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
     </div>
   </main>;

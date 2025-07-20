@@ -11,7 +11,7 @@ export function FileSelectField({ label, ...props }: FileSelectFieldProps) {
   const id = useId();
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-2">
       <Label htmlFor={id}>{label}</Label>
       <FileSelect id={id} {...props}/>
     </div>

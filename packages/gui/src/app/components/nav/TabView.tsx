@@ -24,9 +24,9 @@ export function TabView({ routes }: { routes: TabViewRoute[] }) {
               "p-2 w-[200px] flex items-center justify-center gap-2",
               "cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
               i === router.currentIndex
-                ? "font-semibold dark:bg-gray-800"
-                : "hover:dark:bg-gray-900",
-              i !== 0 && "border-l dark:border-gray-600"
+                ? "font-semibold text-white bg-neutral-400 dark:bg-gray-800"
+                : "hover:bg-neutral-300 hover:dark:bg-gray-900",
+              i !== 0 && "border-l border-gray-400 dark:border-gray-600"
             )}
             key={i}
             onClick={() => router.navigate(i)}

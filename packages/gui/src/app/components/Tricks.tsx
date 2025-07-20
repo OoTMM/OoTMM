@@ -5,9 +5,7 @@ import { TrickKey } from '@ootmm/core/lib/combo/settings';
 
 import { DoubleList } from './DoubleList';
 import { Tooltip } from './ui/Tooltip';
-import { GameName } from './GameName';
 import { usePatchSettings, useSetting } from '../contexts/SettingsContext';
-import { useRouter } from '../hooks/useRouter';
 import { TabView, TabViewRoute } from './nav';
 
 function trickExtra(trick: TrickKey) {

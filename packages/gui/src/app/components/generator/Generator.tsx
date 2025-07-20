@@ -37,7 +37,7 @@ export function Generator() {
 
   return (
     <div className="flex flex-row h-full w-full overflow-hidden">
-      <nav className="w-[200px] flex flex-col dark:bg-gray-950 border-r dark:border-gray-800">
+      <nav className="w-[200px] flex flex-col bg-gray-950 text-white border-r border-gray-800">
         {router.routes.map((route, i) =>
           <a
             key={i}
@@ -45,7 +45,7 @@ export function Generator() {
             tabIndex={route.disabled ? -1 : 0}
             className={clsx(
               "inline-flex items-center gap-3 [font-variant:small-caps] m-2 p-2 transition-all rounded",
-              i == router.currentIndex ? 'font-semibold dark:bg-gray-800' : 'hover:dark:bg-gray-900',
+              i == router.currentIndex ? 'font-semibold bg-gray-800' : 'hover:bg-gray-900',
               route.disabled && 'opacity-50 cursor-not-allowed',
             )}
             href="#"
