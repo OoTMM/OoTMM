@@ -1,15 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { itemName, Items } from '@ootmm/core';
 
-import { InputNumber } from './InputNumber';
 import { useItemPool, useSetting, useSetSettings } from '../contexts/SettingsContext';
 import { Button, Card, InputField, Select } from './ui';
-
-const NAMES = {
-  MM: "Majora's Mask",
-  OOT: 'Ocarina of Time',
-  SHARED: 'Shared',
-}
 
 function itemNameSort(a: string, b: string) {
   const nameA = itemName(a);
