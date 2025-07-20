@@ -56,13 +56,13 @@ export function GeneratorGeneral() {
 
   return (
     <main className="mt-8 flex flex-col items-center">
+      {result && <Result archive={archive} warnings={warnings}/>}
       <Card className="w-[1024px] m-4 p-8 gap-4">
         <div className="m-auto mb-8 text-center">
           <div className="font-bold text-2xl">OoTMM Web Generator</div>
           <div>{process.env.VERSION}</div>
         </div>
         {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
-        {result && <Result archive={archive} warnings={warnings}/>}
         <div className="m-auto flex gap-8">
           <FileSelectField imageSrc={logoOot} label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" file={romConfig.files.oot} onInput={(f) => setRomConfigFile('oot', f)}/>
           <FileSelectField imageSrc={logoMm} label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onInput={(f) => setRomConfigFile('mm', f)}/>
