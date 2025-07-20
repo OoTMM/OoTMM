@@ -118,8 +118,12 @@ export function useGenerator() {
 
   const generate = async () => {
     setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
-    const { oot, mm, patch } = state.romConfig.files;
-    const options: OptionsInput = { seed: state.romConfig.seed, settings, random, cosmetics };
+    const { oot, mm } = state.romConfig.files;
+    let { patch } = state.romConfig.files;
+    if (state.romConfig.mode !== 'patch') {
+      patch = null;
+    }
+    const options: OptionsInput = { mode: state.romConfig.mode, seed: state.romConfig.seed, settings, random, cosmetics };
     try {
       const onMessage = (message: string) => {
         console.log(message);
