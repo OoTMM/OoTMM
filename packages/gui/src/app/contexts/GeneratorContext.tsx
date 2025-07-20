@@ -10,6 +10,7 @@ import { useSettings } from './SettingsContext';
 
 type GeneratorState = {
   romConfig: {
+    mode: 'create' | 'random' | 'patch',
     files: {
       oot: File | null;
       mm: File | null;
@@ -26,7 +27,6 @@ type GeneratorState = {
     archive: API.ResultFile | null;
     warnings: string[];
   },
-  isPatch: boolean;
 }
 
 type GeneratorContext = {
@@ -34,7 +34,7 @@ type GeneratorContext = {
   setState: Dispatch<StateUpdater<GeneratorState>>;
   setRomConfigFile: (key: keyof GeneratorState['romConfig']['files'], file: File | null) => void;
   setSeed: (seed: string) => void;
-  setIsPatch: (isPatch: boolean) => void;
+  setMode: (mode: 'create' | 'random' | 'patch') => void;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
@@ -42,6 +42,7 @@ export const GeneratorContext = createContext<GeneratorContext>(null as any);
 function createState(): GeneratorState {
   return {
     romConfig: {
+      mode: 'create',
       files: {
         oot: null,
         mm: null,
@@ -49,7 +50,6 @@ function createState(): GeneratorState {
       },
       seed: '',
     },
-    isPatch: false,
     generator: {
       isGenerating: false,
       message: null,
@@ -80,6 +80,10 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     setState(state => ({ ...state, romConfig: { ...state.romConfig, seed } }));
   };
 
+  const setMode = (mode: 'create' | 'random' | 'patch') => {
+    setState(state => ({ ...state, romConfig: { ...state.romConfig, mode } }));
+  };
+
   const setIsPatch = (isPatch: boolean) => {
     setState(state => ({ ...state, isPatch }));
   };
@@ -92,21 +96,16 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
   }, []);
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch }}>
+    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setMode }}>
       {children}
     </GeneratorContext.Provider>
   );
 }
 
 export function useRomConfig() {
-  const { state, setRomConfigFile, setSeed } = useContext(GeneratorContext);
+  const { state, setRomConfigFile, setSeed, setMode } = useContext(GeneratorContext);
   const { romConfig } = state;
-  return { romConfig, setRomConfigFile, setSeed };
-}
-
-export function useIsPatch() {
-  const { state, setIsPatch } = useContext(GeneratorContext);
-  return [state.isPatch, setIsPatch] as const;
+  return { romConfig, setRomConfigFile, setSeed, setMode };
 }
 
 export function useGenerator() {

@@ -1,6 +1,6 @@
 import { VNode } from 'preact';
 import { useState } from 'preact/hooks';
-import { Button } from './Button';
+import { Button, Card, Checkbox } from './ui';
 
 type DoubleListOption = {
   key: string;
@@ -9,20 +9,28 @@ type DoubleListOption = {
 };
 
 type DoubleListColProps = {
+  name: string;
   values: DoubleListOption[];
   selected: string[];
   onSelect: (k: string, v: boolean) => void;
 }
-function DoubleListCol({ values, selected, onSelect }: DoubleListColProps) {
+function DoubleListCol({ name, values, selected, onSelect }: DoubleListColProps) {
   return (
-    <ul className="double-list-col">
-      {values.map(x =>
-        <li className="double-list-row" key={x.key}>
-          <input type="checkbox" checked={selected.includes(x.key)} onInput={e => onSelect(x.key, e.currentTarget.checked)}/>{x.label}
-          {x.extra && <span className="double-list-row-extra">{x.extra}</span>}
-        </li>
-      )}
-    </ul>
+    <Card className="flex-[1_1_0]">
+      <div className="text-center text-xl border-b pb-4 dark:border-gray-600">
+        {name}
+      </div>
+      <div className="h-full overflow-y-auto flex flex-col gap-2">
+        {values.map(x =>
+          <div className="flex items-center gap-2" key={x.key}>
+            <Checkbox checked={selected.includes(x.key)} onChange={v => onSelect(x.key, v)}/>
+            {x.label}
+            <span className="flex-1"/>
+            {x.extra && <span className="flex gap-2 mr-4">{x.extra}</span>}
+          </div>
+        )}
+      </div>
+    </Card>
   );
 }
 
@@ -65,15 +73,16 @@ export function DoubleList({ onAdd, onRemove, onReset, options, selected }: Doub
 
 
   return (
-    <div className="double-list">
-      <div className="double-list-tools">
+    <div className="h-full flex flex-col gap-4">
+      <div className="flex gap-2">
         <Button onClick={add}>Add</Button>
-        {reset && <Button type="danger" onClick={reset}>Reset</Button>}
         <Button onClick={remove}>Remove</Button>
+        <span className="flex-1"/>
+        {reset && <Button variant="danger" onClick={reset}>Reset</Button>}
       </div>
-      <div className="double-list-content">
-        <DoubleListCol values={optionsLeft} selected={selectedLeft} onSelect={selectLeft}/>
-        <DoubleListCol values={optionsRight} selected={selectedRight} onSelect={selectRight}/>
+      <div className="min-h-0 flex flex-[1_1_0] gap-4">
+        <DoubleListCol name="Disabled" values={optionsLeft} selected={selectedLeft} onSelect={selectLeft}/>
+        <DoubleListCol name="Enabled" values={optionsRight} selected={selectedRight} onSelect={selectRight}/>
       </div>
     </div>
   );

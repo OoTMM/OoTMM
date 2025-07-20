@@ -135,7 +135,8 @@ export async function archive(result: GeneratorOutput): Promise<ResultFile> {
 export function restrictItemsByPool(items: Items, pool: Items) {
   const newItems: Items = {};
   for (const item in pool) {
-    if (items[item]) {
+    const prev = items[item];
+    if (prev) {
       newItems[item] = Math.min(items[item], pool[item]);
     }
   }

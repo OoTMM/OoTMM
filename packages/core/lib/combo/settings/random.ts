@@ -3,7 +3,6 @@ import { Settings } from './type';
 import { makeSettings, validateSettings } from './util';
 
 export const DEFAULT_RANDOM_SETTINGS = {
-  enabled: false,
   mq: false,
   jp: false,
   er: false,
@@ -41,10 +40,6 @@ function booleanWeighted(rng: Random, chance: number): boolean {
 }
 
 export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Settings): Promise<Settings> {
-  if (!rnd.enabled) {
-    return oldSettings;
-  }
-
   /* Get a new RNG */
   const random = new Random();
   await random.seed(randString());

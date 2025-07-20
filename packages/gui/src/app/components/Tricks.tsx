@@ -4,9 +4,9 @@ import { TRICKS } from '@ootmm/core';
 import { TrickKey } from '@ootmm/core/lib/combo/settings';
 
 import { DoubleList } from './DoubleList';
-import { Tooltip } from './Tooltip';
-import { GameName } from './GameName';
+import { Tooltip } from './ui/Tooltip';
 import { usePatchSettings, useSetting } from '../contexts/SettingsContext';
+import { TabView, TabViewRoute } from './nav';
 
 function trickExtra(trick: TrickKey) {
   const t = TRICKS[trick];
@@ -42,25 +42,30 @@ function GameTricks({ glitches, game }: GameTricksProps) {
     patchSettings({ tricks: { remove: trickKeys } });
   }, []);
 
-  return (
-    <div>
-      <GameName game={game}/>
-      <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedTrickKeys}/>
-    </div>
-  );
+  return <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedTrickKeys}/>;
 }
+
+const OotTricks = () => <GameTricks glitches={false} game="oot"/>;
+const MmTricks = () => <GameTricks glitches={false} game="mm"/>
+const OotGlitches = () => <GameTricks glitches={true} game="oot"/>;
+const MmGlitches = () => <GameTricks glitches={true} game="mm"/>
 
 type TricksProps = {
   glitches?: boolean;
 }
 export function Tricks({ glitches }: TricksProps) {
-  return (
-    <main>
-      <h1>{glitches ? "Glitches" : "Tricks"}</h1>
-      <div className="dual-panels">
-        <GameTricks glitches={glitches} game="oot"/>
-        <GameTricks glitches={glitches} game="mm"/>
-      </div>
-    </main>
-  );
+  const games = useSetting('games');
+
+  if (games === 'oot') {
+    return glitches ? <OotGlitches/> : <OotTricks/>;
+  } else if (games === 'mm') {
+    return glitches ? <MmGlitches/> : <MmTricks/>;
+  }
+
+  const routes: TabViewRoute[] = [
+    { name: 'Ocarina of Time', component: glitches ? OotGlitches : OotTricks },
+    { name: 'Majora\'s Mask', component: glitches ? MmGlitches : MmTricks },
+  ];
+
+  return <TabView routes={routes}/>;
 }

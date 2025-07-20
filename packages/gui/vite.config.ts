@@ -1,5 +1,7 @@
+import path from 'path';
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
+import tailwindcss from '@tailwindcss/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 const VERSION = process.env.VERSION || 'XXX';
@@ -10,7 +12,11 @@ const STATIC_URL = process.env.STATIC_URL || '/';
 
 export default defineConfig({
   base: STATIC_URL,
-  plugins: [preact(),visualizer({ open: true, filename: 'bundle-visualization.html' })],
+  plugins: [
+    preact(),
+    tailwindcss(),
+    //visualizer({ open: true, filename: 'bundle-visualization.html' })
+  ],
   define: {
     'process.env.VERSION': JSON.stringify(VERSION_FULL),
     'process.env.__IS_BROWSER__': JSON.stringify(true),
@@ -19,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       lodash: 'lodash-es',
+      '@': path.resolve(__dirname, 'src'),
     }
   },
   optimizeDeps: {

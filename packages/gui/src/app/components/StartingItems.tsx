@@ -1,13 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { itemName, Items } from '@ootmm/core';
 
-import { InputNumber } from './InputNumber';
 import { useItemPool, useSetting, useSetSettings } from '../contexts/SettingsContext';
+import { Button, Card, InputField, Select } from './ui';
 
-const NAMES = {
-  MM: "Majora's Mask",
-  OOT: 'Ocarina of Time',
-  SHARED: 'Shared',
+function itemNameSort(a: string, b: string) {
+  const nameA = itemName(a);
+  const nameB = itemName(b);
+  if (nameA < nameB) return -1;
+  if (nameA > nameB) return 1;
+  return 0;
 }
 
 export function StartingItems() {
@@ -15,6 +17,7 @@ export function StartingItems() {
   const [startingItemsCache, setStartingItemsCache] = useState(startingItems);
   const itemPool = useItemPool();
   const setSettings = useSetSettings();
+  const options = useMemo(() => Object.keys(itemPool).filter(x => !startingItemsCache[x]).sort(itemNameSort).map(item => ({ label: itemName(item), value: item })), [itemPool, startingItemsCache]);
 
   const alterItem = useCallback((item: string, count: number) => {
     /* Sanitize count */
@@ -48,38 +51,31 @@ export function StartingItems() {
     setStartingItemsCache(startingItems);
   }, [startingItems]);
 
-  const buildSingleTable = (gamePrefix: 'OOT' | 'MM' | 'SHARED') => {
-    const items = Object.keys(itemPool).filter((item) => item.startsWith(gamePrefix));
-
-    if (items.length === 0) {
-      return null;
-    }
-
-    return <form className="vertical">
-      <h1>{NAMES[gamePrefix]}</h1>
-      {items.map((item) => (
-        <InputNumber
-          key={item}
-          value={startingItemsCache[item] || 0}
-          onInput={e => alterItem(item, e)}
-          min={0}
-          label={itemName(item)}
-        />
-      ))}
-    </form>;
-  };
-
-  return <main>
-    <h1>Starting Items</h1>
-    <div>
-      <button className="btn-danger" onClick={reset} style={{width: '200px'}}>
-        Reset Starting Items
-      </button>
-      <div className="dual-panels">
-        {buildSingleTable('OOT')}
-        {buildSingleTable('MM')}
-        {buildSingleTable('SHARED')}
-      </div>
+  return (
+    <div className="h-full flex flex-col">
+      <Card className="flex-1 p-4 gap-4">
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <Select searcheable placeholder="Search for items" value={null} options={options} onSelect={(item) => alterItem(item, 1)} />
+          </div>
+          <Button className="w-[200px]" variant="danger" onClick={reset}>Reset Starting Items</Button>
+        </div>
+        <Card className="flex-[1_1_0] overflow-y-auto">
+          {Object.keys(startingItemsCache).length === 0 ? (
+            <div className="text-gray-500 text-3xl flex items-center justify-center h-full">
+              No starting items
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {Object.keys(startingItemsCache).sort(itemNameSort).map(item => (
+                <div key={item}>
+                  <InputField label={itemName(item)} type="number" min="0" max={itemPool[item]} value={startingItemsCache[item].toString()} onChange={v => alterItem(item, Number(v))}/>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
+      </Card>
     </div>
-  </main>;
+  );
 }

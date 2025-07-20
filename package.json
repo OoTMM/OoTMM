@@ -16,7 +16,8 @@
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
-    "pako": "^2.1.0"
+    "pako": "^2.1.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.12",

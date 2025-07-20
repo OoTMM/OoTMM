@@ -1,17 +1,15 @@
 import { useCallback, useMemo } from 'react';
-import Select from 'react-select';
+import { Select, Input, Checkbox, Card } from './ui';
 import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
-import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
-import { InputNumber } from './InputNumber';
-import { Checkbox } from './Checkbox';
-import { SettingsPanel } from './SettingsEditor';
+import { SettingsPanel } from './settings/SettingsEditor';
 import { useItemPool, usePatchSettings, useSetting } from '../contexts/SettingsContext';
+import { Button } from './ui';
 
-const hintOptions: { name: string; value: string }[] = [];
-for (const k in HINT_TYPES) {
-  hintOptions.push({ name: HINT_TYPES[k as keyof typeof HINT_TYPES], value: k });
+const hintOptions: { label: string; value: keyof typeof HINT_TYPES }[] = [];
+for (const k of Object.keys(HINT_TYPES)) {
+  hintOptions.push({ label: HINT_TYPES[k as keyof typeof HINT_TYPES], value: k as keyof typeof HINT_TYPES });
 }
 
 type HintEditorProps = {
@@ -32,7 +30,9 @@ export function HintEditor({ index }: HintEditorProps) {
     patchSettings({ hints: { set: newArray } });
   }, [hints, index]);
 
-  const onInputType = useCallback((type: keyof typeof HINT_TYPES) => {
+  const onInputType = useCallback((type: keyof typeof HINT_TYPES | null) => {
+    if (!type) return;
+
     const newHint = { ...hint, type };
     if (type === 'item') {
       newHint.item = 'MM_SONG_SOARING';
@@ -42,13 +42,13 @@ export function HintEditor({ index }: HintEditorProps) {
     updateHint(newHint);
   }, [hint, updateHint]);
 
-  const onInputAmount = useCallback((amount: number) => {
-    const newHint = { ...hint, amount };
+  const onInputAmount = useCallback((amount: string) => {
+    const newHint = { ...hint, amount: Number(amount) };
     updateHint(newHint);
   }, [hint, updateHint]);
 
-  const onInputExtra = useCallback((extra: number) => {
-    const newHint = { ...hint, extra };
+  const onInputExtra = useCallback((extra: string) => {
+    const newHint = { ...hint, extra: Number(extra) };
     updateHint(newHint);
   }, [hint, updateHint]);
 
@@ -58,7 +58,7 @@ export function HintEditor({ index }: HintEditorProps) {
     updateHint(newHint);
   }, [hint, updateHint]);
 
-  const onInputItem = useCallback((item?: string) => {
+  const onInputItem = useCallback((item: string | null) => {
     if (!item) return;
     const newHint = { ...hint, item };
     updateHint(newHint);
@@ -89,32 +89,20 @@ export function HintEditor({ index }: HintEditorProps) {
   }, [hints, index]);
 
   return (
-    <tr className="dashboard-table">
+    <tr>
       <td>
-        <span className="list-remove" onClick={onRemove}>
-          <FaXmark/>
-        </span>
-        <span className="list-action" onClick={onMoveUp}>
-          <FaArrowUp/>
-        </span>
-        <span className="list-action" onClick={onMoveDown}>
-          <FaArrowDown/>
-        </span>
+        <div className="flex justify-center">
+          <span className="hover:text-gray-500 cursor-pointer" onClick={onRemove}><FaXmark/></span>
+          <span className="hover:text-gray-500 cursor-pointer" onClick={onMoveUp}><FaArrowUp/></span>
+          <span className="hover:text-gray-500 cursor-pointer" onClick={onMoveDown}><FaArrowDown/></span>
+        </div>
       </td>
+      <td><Select options={hintOptions} value={hint.type} onSelect={onInputType} /></td>
+      <td>{hint.type === 'item' && <Select searcheable placeholder="Search..." options={itemOptions} onSelect={onInputItem} value={selectedItem?.value ?? null}/>}</td>
+      <td>{hint.amount !== 'max' && <Input type="number" min="1" max="99" className="w-full" value={hint.amount.toString()} onChange={onInputAmount} />}</td>
+      <td><div className="flex justify-center"><Checkbox checked={hint.amount === 'max'} onChange={onInputMax} /></div></td>
       <td>
-        <Dropdown options={hintOptions} value={hint.type} onInput={onInputType as any} />
-      </td>
-      <td>
-        {hint.type === 'item' && (
-          <Select className="react-select-container" classNamePrefix="react-select" options={itemOptions} onChange={(v) => onInputItem(v?.value)} value={selectedItem}/>
-        )}
-      </td>
-      <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onInput={onInputAmount} />}</td>
-      <td>
-        <Checkbox checked={hint.amount === 'max'} onInput={onInputMax} />
-      </td>
-      <td>
-        <InputNumber value={hint.extra} onInput={onInputExtra} />
+        <Input type="number" min="0" max="99" className="w-full" value={hint.extra.toString()} onChange={onInputExtra} />
       </td>
     </tr>
   );
@@ -132,37 +120,32 @@ export function Hints() {
 
   return (
     <main>
-      <h1>Hints</h1>
       <SettingsPanel category='hints'/>
-      <>
-        <button className="btn" onClick={onNew}>
-          New
-        </button>
-        <button className="btn-danger" onClick={() => patchSettings({ hints: { set: [] } })}>
-          Remove All
-        </button>
-        <button className="btn-danger" onClick={() => patchSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>
-          Reset
-        </button>
-      </>
+      <div className="mt-8 mb-4 flex gap-2">
+        <Button onClick={onNew}>New</Button>
+        <Button variant="danger" onClick={() => patchSettings({ hints: { set: [] } })}>Remove All</Button>
+        <Button variant="danger" onClick={() => patchSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>Reset</Button>
+      </div>
 
-      <table className="hints">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Type</th>
-            <th>Item</th>
-            <th>Amount</th>
-            <th>Unlimited</th>
-            <th>Extra Copies</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hints.map((_, i) => (
-            <HintEditor key={i} index={i} />
-          ))}
-        </tbody>
-      </table>
+      <Card>
+        <table className="w-full border-separate border-spacing-y-2 border-spacing-x-2">
+          <thead>
+            <tr>
+              <th>Actions</th>
+              <th>Type</th>
+              <th>Item</th>
+              <th>Amount</th>
+              <th>Unlimited</th>
+              <th>Extra Copies</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hints.map((_, i) => (
+              <HintEditor key={i} index={i} />
+            ))}
+          </tbody>
+        </table>
+      </Card>
     </main>
   );
 }
