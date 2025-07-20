@@ -1,9 +1,8 @@
-import Select, { MultiValue } from 'react-select';
 import { SETTINGS } from '@ootmm/core';
 
-import { CheckboxField } from '../ui/CheckboxField';
 import { usePatchSettings, useSettings } from '../../contexts/SettingsContext';
-import { InputField, SelectField } from '../ui';
+import { InputField, SelectField, CheckboxField, Select } from '@/app/components/ui';
+import { xor } from 'lodash';
 
 const SET_OPTIONS = [
   { value: 'none', label: 'None' },
@@ -54,7 +53,7 @@ function SettingTooltip({ setting }: { setting: string }) {
     def = data.default.toString();
     break;
   case 'set':
-    def = SET_OPTIONS.find(x => x.value == data.default)!.name;
+    def = SET_OPTIONS.find(x => x.value == data.default)!.label;
     break;
   }
 
@@ -75,36 +74,73 @@ function SettingSet({ setting }: { setting: string }) {
   const data = SETTINGS.find(x => x.key === setting)!;
   const s = settings[data.key] as any;
 
-  let valuesSet: typeof options = [];
-  let valuesUnset: typeof options = [];
+  let valuesSet: string[];
+  let valuesUnset: string[];
 
   const options: { value: string, label: string }[] = (data as any).values.map((x: any) => ({ value: x.value, label: x.name }));
+  const values = options.map(x => x.value);
 
   if (s.type === 'specific') {
-    valuesSet = options.filter(x => s.values.includes(x.value));
+    valuesSet = values.filter(x => s.values.includes(x));
     valuesUnset = [];
   } else if (s.type === 'random-mixed') {
-    valuesSet = options.filter(x => s.set.includes(x.value));
-    valuesUnset = options.filter(x => s.unset.includes(x.value));
+    valuesSet = values.filter(x => s.set.includes(x));
+    valuesUnset = values.filter(x => s.unset.includes(x));
+  } else {
+    valuesSet = [];
+    valuesUnset = [];
   }
 
-  const optionsSet = options.filter(x => !valuesUnset.map(x => x.value).includes(x.value));
-  const optionsUnset = options.filter(x => !valuesSet.map(x => x.value).includes(x.value));
+  const optionsSet = options.filter(x => !valuesUnset.includes(x.value));
+  const optionsUnset = options.filter(x => !valuesSet.includes(x.value));
 
-  const handleChangeSpecific = (v: MultiValue<{ value: string, label: string }>) => {
-    const newValues = Array.from(new Set(v.map(x => x.value)));
-    patchSettings({ [data.key]: { type: 'specific', values: newValues } as any });
+  const onToggleSpecific = (v: string | null) => {
+    if (!v) return;
+    const newValue = xor(s.values, [v]);
+    patchSettings({ [data.key]: { type: 'specific', values: newValue }});
   };
 
-  const handleChangeRandomMixedSet = (v: MultiValue<{ value: string, label: string }>) => {
-    const newValues = Array.from(new Set(v.map(x => x.value)));
-    patchSettings({ [data.key]: { type: 'random-mixed', set: newValues, unset: valuesUnset.map(x => x.value) } as any });
+  const onClearSpecific = () => {
+    patchSettings({ [data.key]: { type: 'specific', values: [] }});
   };
 
-  const handleChangeRandomMixedUnset = (v: MultiValue<{ value: string, label: string }>) => {
-    const newValues = Array.from(new Set(v.map(x => x.value)));
-    patchSettings({ [data.key]: { type: 'random-mixed', set: valuesSet.map(x => x.value), unset: newValues } as any });
+  const onToggleRandomSet = (v: string | null) => {
+    if (!v) return;
+    const newValues = xor(s.set, [v]);
+    patchSettings({ [data.key]: { type: 'random-mixed', set: newValues, unset: s.unset } as any });
   };
+
+  const onToggleRandomUnset = (v: string | null) => {
+    if (!v) return;
+    const newValues = xor(s.unset, [v]);
+    patchSettings({ [data.key]: { type: 'random-mixed', set: s.set, unset: newValues } as any });
+  };
+
+  const onClearRandomSet = () => {
+    patchSettings({ [data.key]: { type: 'random-mixed', set: [], unset: s.unset } as any });
+  };
+
+  const onClearRandomUnset = () => {
+    patchSettings({ [data.key]: { type: 'random-mixed', set: s.set, unset: [] } as any });
+  };
+
+  const onTypeChange = (type: typeof SET_OPTIONS[number]['value']) => {
+    if (s.type === type) return;
+
+    switch (type) {
+    case 'none':
+    case 'all':
+    case 'random':
+      patchSettings({ [data.key]: { type }});
+      break;
+    case 'specific':
+      patchSettings({ [data.key]: { type: 'specific', values: [] }});
+      break;
+    case 'random-mixed':
+      patchSettings({ [data.key]: { type: 'random-mixed', set: [], unset: [] }});
+      break;
+    }
+  }
 
   return (
     <span>
@@ -113,33 +149,37 @@ function SettingSet({ setting }: { setting: string }) {
         label={data.name}
         options={SET_OPTIONS}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        onSelect={(v) => patchSettings({ [data.key]: { type: v, values: s.values } as any })}
+        onSelect={onTypeChange as any}
       />
       {s.type === 'specific' &&
         <Select
-          className="react-select-container"
-          classNamePrefix="react-select"
-          isMulti
-          options={options} value={valuesSet}
-          onChange={(v) => handleChangeSpecific(v)}
+          multi
+          clearable
+          options={options}
+          value={valuesSet}
+          onSelect={onToggleSpecific}
+          onUnselect={onToggleSpecific}
+          onClear={onClearSpecific}
         />
       }
       {s.type === 'random-mixed' && <>
         <label>Disabled</label>
         <Select
-          className="react-select-container"
-          classNamePrefix="react-select"
-          isMulti
+          multi
+          clearable
           options={optionsUnset} value={valuesUnset}
-          onChange={(v) => handleChangeRandomMixedUnset(v)}
+          onSelect={onToggleRandomUnset}
+          onUnselect={onToggleRandomUnset}
+          onClear={onClearRandomUnset}
         />
         <label>Enabled</label>
         <Select
-          className="react-select-container"
-          classNamePrefix="react-select"
-          isMulti
+          multi
+          clearable
           options={optionsSet} value={valuesSet}
-          onChange={(v) => handleChangeRandomMixedSet(v)}
+          onSelect={onToggleRandomSet}
+          onUnselect={onToggleRandomSet}
+          onClear={onClearRandomSet}
         />
       </>}
     </span>

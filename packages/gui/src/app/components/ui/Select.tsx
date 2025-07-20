@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
 import { FaXmark } from 'react-icons/fa6';
+import clsx from 'clsx';
 
 export type SelectOption<T> = {
   value: T;
@@ -10,17 +11,20 @@ export type SelectOption<T> = {
 type SelectProps<T> = {
   id?: string;
   options: SelectOption<T>[];
-  value: T | null;
+  value: T | T[] | null;
   placeholder?: string;
   clearable?: boolean;
   creatable?: boolean;
   searcheable?: boolean;
+  multi?: boolean;
   onSelect: (value: T | null) => void;
+  onUnselect?: (value: T) => void;
   onClear?: () => void;
   onCreate?: (label: string) => void;
 }
-export function Select<T>({ id, options, value, placeholder, clearable, creatable, searcheable, onSelect, onClear, onCreate }: SelectProps<T>) {
+export function Select<T>({ id, options, value, placeholder, clearable, creatable, searcheable, multi, onSelect, onUnselect, onClear, onCreate }: SelectProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   placeholder = placeholder ?? '-----';
@@ -54,7 +58,6 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
     if (!open) return;
     const onClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        console.log('Click outside');
         setOpen(false);
       }
     };
@@ -64,25 +67,39 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
     };
   }, [open]);
 
-  const filteredOptions = options.filter(filterFunc);
+  let filteredOptions = options.filter(filterFunc);
+  if (multi && Array.isArray(value)) {
+    filteredOptions = filteredOptions.filter(opt => !value.includes(opt.value));
+  }
 
   return (
     <div ref={containerRef}>
-      <div className="ux-bg ux-border ux-hover flex items-center p-2">
-        <input
-          type="text"
-          autoComplete="off"
-          autoCorrect="off"
-          id={id}
-          readOnly={!creatable && !searcheable}
-          placeholder={placeholder}
-          className="outline-none flex-1 text-left select-none"
-          value={(open && (creatable || searcheable)) ? inputValue : currentLabel}
-          onFocus={onFocus}
-          onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); }}
-          onKeyDown={onInputKeyDown}
-        />
-        {clearable && value && <div className="mr-1 dark:hover:text-gray-400 cursor-pointer" onClick={onClear}><FaXmark/></div>}
+      <div className="ux-bg ux-border ux-hover flex items-center p-2" onClick={() => inputRef.current?.focus()}>
+        <div className="flex-1">
+          <div className="flex flex-wrap gap-1">
+            {multi && Array.isArray(value) && value.map((x, i) => (
+              <span key={i} className="text-xs bg-gray-500 p-1 rounded select-none whitespace-nowrap inline-flex items-center gap-1">
+                <span>{options.find(opt => opt.value === x)?.label}</span>
+                <span onClick={(e) => { e.stopPropagation(); onUnselect?.(x); }}><FaXmark/></span>
+              </span>
+            ))}
+          </div>
+          <input
+            ref={inputRef}
+            type="text"
+            autoComplete="off"
+            autoCorrect="off"
+            id={id}
+            readOnly={!creatable && !searcheable}
+            placeholder={placeholder}
+            className={clsx("outline-none text-left select-none", (multi && Array.isArray(value) && value.length > 0) && 'sr-only')}
+            value={(open && (creatable || searcheable)) ? inputValue : currentLabel}
+            onFocus={onFocus}
+            onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); }}
+            onKeyDown={onInputKeyDown}
+          />
+        </div>
+        {clearable && value && (!multi || (Array.isArray(value) && value.length > 0)) && <div className="mr-1 dark:hover:text-gray-400 cursor-pointer" onClick={onClear}><FaXmark/></div>}
         <div className="border-l dark:border-gray-500 pl-1">
           <LuChevronDown size={20}/>
         </div>

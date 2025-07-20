@@ -9,9 +9,8 @@ export const SettingsImportExport = () => {
   const setSettings = useSetSettings();
   const settingsString = useMemo(() => exportSettings(settings), [settings]);
 
-  const onInput = useCallback((e: Event) => {
-    const target = e.currentTarget as HTMLInputElement;
-    const newSettings = importSettings(target.value);
+  const onChange = useCallback((data: string) => {
+    const newSettings = importSettings(data);
     setSettings(newSettings);
   }, []);
 
@@ -28,7 +27,7 @@ export const SettingsImportExport = () => {
           e.currentTarget.focus();
           e.currentTarget.select();
         }}
-        onInput={onInput}
+        onChange={onChange}
       />
     </div>
   );
