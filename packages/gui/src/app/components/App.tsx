@@ -21,7 +21,11 @@ function AppContent() {
   const { isGenerating, message, progress } = useGenerator();
 
   if (isGenerating) {
-    return <div className="container"><Progress message={message || ''} progress={progress}/></div>;
+    return (
+      <div className="h-full -wfull flex items-center justify-center">
+        <Progress message={message || ''} progress={progress}/>
+      </div>
+    );
   }
 
   return <Generator/>;
