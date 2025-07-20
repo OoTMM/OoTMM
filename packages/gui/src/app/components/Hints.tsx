@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Select, Input, Checkbox } from './ui';
+import { Select, Input, Checkbox, Card } from './ui';
 import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
@@ -127,7 +127,7 @@ export function Hints() {
         <Button variant="danger" onClick={() => patchSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>Reset</Button>
       </div>
 
-      <div className="ux-bg ux-border">
+      <Card>
         <table className="w-full border-separate border-spacing-y-2 border-spacing-x-2">
           <thead>
             <tr>
@@ -145,7 +145,7 @@ export function Hints() {
             ))}
           </tbody>
         </table>
-      </div>
+      </Card>
     </main>
   );
 }

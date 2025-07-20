@@ -6,7 +6,7 @@ import { Setting, SettingsImportExport } from '@/app/components/settings';
 import { useSettings } from '../../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
 import { useGenerator, useRomConfig } from '../../contexts/GeneratorContext';
-import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label } from '../ui';
+import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label, Card } from '../ui';
 import { PresetSelector } from '../PresetSelector';
 import { Result } from '../Result';
 
@@ -56,7 +56,7 @@ export function GeneratorGeneral() {
 
   return (
     <main className="mt-8 flex flex-col items-center">
-      <div className="bg-gray-100 dark:bg-gray-800 w-[1024px] m-4 p-8 rounded border dark:border-slate-700 flex flex-col gap-4">
+      <Card className="w-[1024px] m-4 p-8 gap-4">
         <div className="m-auto mb-8 text-center">
           <div className="font-bold text-2xl">OoTMM Web Generator</div>
           <div>{process.env.VERSION}</div>
@@ -100,7 +100,7 @@ export function GeneratorGeneral() {
 
           <Button variant="submit" disabled={!isReady} onClick={generate}>Generate</Button>
         </div>
-      </div>
+      </Card>
     </main>
   );
 }

@@ -1,7 +1,7 @@
 import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { useSettings, usePatchSettings } from '../contexts/SettingsContext';
-import { InputField, CheckboxField } from './ui';
+import { InputField, CheckboxField, Card } from './ui';
 
 type SpecialCondsPanelProps = {
   cond: string;
@@ -35,7 +35,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   c.count = c.count > max ? max : c.count;
 
   return (
-    <div className="ux-bg ux-border p-4 flex flex-col gap-2">
+    <Card>
       <h2 className="mx-auto font-bold text-xl">{SPECIAL_CONDS[cond].name}</h2>
       {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
         <CheckboxField
@@ -46,7 +46,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
         />
       )}
       <InputField type="number" min="0" max={max} label={label} value={c.count.toString()} onChange={x => patchSettings({ specialConds: { [cond]: { count: Number(x) } }})}/>
-    </div>
+    </Card>
   );
 }
 
