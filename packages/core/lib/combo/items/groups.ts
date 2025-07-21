@@ -218,6 +218,7 @@ export const SONGS = new Set([
 
 export const TRAPS_CLOAKED = new Set([
   Items.OOT_TRAP_ICE,
+  Items.OOT_TRAP_FIRE,
 ]);
 
 export const TRAPS = new Set([

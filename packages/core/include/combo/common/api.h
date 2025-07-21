@@ -18,6 +18,7 @@ typedef enum PlayerItemAction PlayerItemAction;
 typedef enum BombersNotebookPerson BombersNotebookPerson;
 typedef enum BombersNotebookEvent BombersNotebookEvent;
 typedef void (*ActorShadowFunc)(struct Actor* actor, struct Lights* mapper, PlayState* play);
+int Player_IsGoronOrGoronTunic(Player* player);
 #endif
 
 int TitleCard_Clear(PlayState* play, TitleCardContext* titleCtx);

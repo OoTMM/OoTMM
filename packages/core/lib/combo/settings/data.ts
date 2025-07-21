@@ -2037,6 +2037,13 @@ export const SETTINGS = [{
   description: 'Add Ice Traps to the item pool. They freeze you when collected.',
   default: true
 }, {
+  key: 'trapFire',
+  name: 'Fire Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Fire Traps to the item pool. They burn you when collected.',
+  default: false
+}, {
   key: 'trapRupoor',
   name: 'Rupoors',
   category: 'items.extensions',

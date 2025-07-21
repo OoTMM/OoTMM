@@ -84,6 +84,7 @@ void DrawGi_Rupee(PlayState*, s16 index, u8 param);
 void DrawGi_PondFish(PlayState*, s16 index, u8 param);
 void DrawGi_CustomShield(PlayState* play, s16 drawGiId, u8 param);
 void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param);
+void DrawGi_TrapFire(PlayState* play, s16 drawGiId, u8 param);
 
 #endif
 

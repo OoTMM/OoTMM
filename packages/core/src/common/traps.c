@@ -32,8 +32,29 @@ static int Play_UpdateTrapsIce(PlayState* play, Player* player)
     return 1;
 }
 
+static int Play_UpdateTrapsFire(PlayState* play, Player* player)
+{
+#if defined(GAME_OOT)
+    if (player->currentTunic == 2)
+        return 1;
+#endif
+
+#if defined(GAME_MM)
+    if (Player_IsGoronOrGoronTunic(player))
+        return 1;
+#endif
+
+    player->actor.colChkInfo.damage = 0;
+    Player_ApplyDamage(play, player, 0, 0, 0, 0, 20);
+    player->isBurning = 1;
+    for (int i = 0; i < PLAYER_BODYPART_MAX; ++i)
+        player->flameTimers[i] = Rand_S16Offset(0, 200);
+    return 1;
+}
+
 static const TrapHandler kTrapHandlers[] = {
     [TRAP_ICE] = Play_UpdateTrapsIce,
+    [TRAP_FIRE] = Play_UpdateTrapsFire,
 };
 
 void Play_UpdateTraps(PlayState* play)
@@ -60,6 +81,6 @@ void Play_UpdateTraps(PlayState* play)
 #endif
 
     Player_ApplyDamage = OverlayAddr(APPLY_DAMAGE_ADDR);
-    if (kTrapHandlers[type])
+    if (kTrapHandlers[type](play, player))
         gSharedCustomSave.traps[type]--;
 }
