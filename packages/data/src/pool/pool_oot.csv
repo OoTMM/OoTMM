@@ -1690,7 +1690,7 @@ Spirit Temple Sun Block Room Torches,                       chest,          NONE
 Spirit Temple Adult Silver Rupees,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       SMALL_KEY_SPIRIT
 Spirit Temple Adult Lullaby,                                chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       COMPASS_SPIRIT
 Spirit Temple Adult Suns on Wall 1,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x0d,                       RECOVERY_HEART
-Spirit Temple Adult Suns on Wall 2,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x0e,                       TRAP_ICE
+Spirit Temple Adult Suns on Wall 2,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x0e,                       ICE_TRAP
 Spirit Temple Adult Invisible 1,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x14,                       RECOVERY_HEART
 Spirit Temple Adult Invisible 2,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x15,                       RECOVERY_HEART
 Spirit Temple Adult Late Sun on Wall,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       SMALL_KEY_SPIRIT
@@ -1761,7 +1761,7 @@ Gerudo Training Grounds Entrance 2,                         chest,          NONE
 Gerudo Training Grounds Stalfos,                            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       SMALL_KEY_GTG
 Gerudo Training Grounds Near Block,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x11,                       ARROWS_30
 Gerudo Training Grounds Behind Block Invisible,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x14,                       SMALL_KEY_GTG
-Gerudo Training Grounds Behind Block Visible,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       TRAP_ICE
+Gerudo Training Grounds Behind Block Visible,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       ICE_TRAP
 Gerudo Training Grounds Behind Block Enemy Back,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       RUPEE_BLUE
 Gerudo Training Grounds Behind Block Enemy Front,           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0f,                       RUPEE_HUGE
 Gerudo Training Grounds Eye Statue,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x03,                       SMALL_KEY_GTG
@@ -1800,15 +1800,15 @@ Gerudo Training Grounds Wonder Item Eye Statue Room,        wonder,         NONE
 Gerudo Training Grounds Wonder Item Torch Slugs Room,       wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00510,                    RUPEE_RED
 Gerudo Training Grounds Wonder Item Beamos Room,            wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x0070c,                    FLEXIBLE
 Ganon Castle Water Chest 1,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       RECOVERY_HEART
-Ganon Castle Water Chest 2,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       TRAP_ICE
+Ganon Castle Water Chest 2,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       ICE_TRAP
 Ganon Castle Forest Chest,                                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RUPEE_BLUE
 Ganon Castle Light Chest Center,                            chest,          NONE,                 INSIDE_GANON_CASTLE,            0x10,                       SMALL_KEY_GANON
 Ganon Castle Light Chest Around 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0a,                       ARROWS_30
-Ganon Castle Light Chest Around 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0b,                       TRAP_ICE
+Ganon Castle Light Chest Around 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0b,                       ICE_TRAP
 Ganon Castle Light Chest Around 3,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0c,                       RUPEE_BLUE
 Ganon Castle Light Chest Around 4,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0d,                       RECOVERY_HEART
-Ganon Castle Light Chest Around 5,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0e,                       TRAP_ICE
-Ganon Castle Light Chest Around 6,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0f,                       TRAP_ICE
+Ganon Castle Light Chest Around 5,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0e,                       ICE_TRAP
+Ganon Castle Light Chest Around 6,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0f,                       ICE_TRAP
 Ganon Castle Light Chest Lullaby,                           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x11,                       SMALL_KEY_GANON
 Ganon Castle Shadow Chest 1,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       RUPEE_BLUE
 Ganon Castle Shadow Chest 2,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       STRENGTH
@@ -2641,7 +2641,7 @@ MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE
 MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       RUPEE_PURPLE
 MQ Spirit Temple Symphony Room Chest,                       chest,          MQ_SPIRIT_SYMPHONY,   TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
 MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x19,                       ARROWS_30
-MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x18,                       TRAP_ICE
+MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x18,                       ICE_TRAP
 MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       BOSS_KEY_SPIRIT
 MQ Spirit Temple Topmost Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x12,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple GS Sun Block Room,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
