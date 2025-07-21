@@ -1406,14 +1406,6 @@ export const SETTINGS = [{
   description: 'Enables CAMC for shuffled Cows',
   cond: (x: any) => x.csmc !== 'never',
 }, {
-  key: 'cloakIceTraps',
-  name: 'Cloak Ice Traps',
-  category: 'main.misc',
-  type: 'boolean',
-  default: true,
-  description: 'Makes Ice Traps look like different items.',
-  cond: hasOoT,
-}, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
   category: 'main.misc',
@@ -2038,12 +2030,50 @@ export const SETTINGS = [{
   min: 0,
   max: 999,
 }, {
+  key: 'trapIce',
+  name: 'Ice Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Ice Traps to the item pool. They freeze you when collected.',
+  default: true
+}, {
+  key: 'trapFire',
+  name: 'Fire Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Fire Traps to the item pool. They burn you when collected.',
+  default: false
+}, {
   key: 'trapRupoor',
   name: 'Rupoors',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add Rupoors to the item pool. They remove 10 rupees when collected',
+  description: 'Add Rupoors to the item pool. They remove 10 rupees when collected.',
   default: false
+}, {
+  key: 'cloakTraps',
+  name: 'Cloak Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  default: true,
+  description: 'Makes traps look like different items (except rupoors).',
+}, {
+  key: 'trapsQuantity',
+  name: 'Traps Quantity',
+  category: 'items.extensions',
+  type: 'enum',
+  values: [
+    { value: 'small', name: 'Small', description: '10 traps per 100 junk items' },
+    { value: 'medium', name: 'Medium', description: '30 traps per 100 junk items' },
+    { value: 'large', name: 'Large', description: '50 traps per 100 junk items' },
+    { value: 'verylarge', name: 'Very Large', description: '100 traps per 100 junk items' },
+    { value: 'extreme', name: 'Extreme', description: '200 traps per 100 junk items' },
+    { value: 'insane', name: 'Insane', description: '500 traps per 100 junk items' },
+    { value: 'obnoxious', name: 'Obnoxious', description: '1000 traps per 100 junk items' },
+    { value: 'absurd', name: 'Absurd', description: '5000 traps per 100 junk items' },
+  ],
+  description: 'Controls the number of traps relative to the number of junk items in the pool.',
+  default: 'small',
 }, {
   key: 'songOfDoubleTimeOot',
   name: 'Song of Double Time (OoT)',

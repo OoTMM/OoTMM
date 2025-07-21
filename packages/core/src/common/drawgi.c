@@ -1558,6 +1558,14 @@ void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
+void DrawGi_TrapFire(PlayState* play, s16 drawGiId, u8 param)
+{
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+    shaderFlameEffect(play, 2, 1.f, 0.f);
+    CLOSE_DISPS();
+}
+
 struct CustomScaleColorDlists
 {
     const void* l1;

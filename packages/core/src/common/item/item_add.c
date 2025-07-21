@@ -1481,10 +1481,17 @@ static int addItemGsTokenOcean(PlayState* play, u8 itemId, s16 gi, u16 param)
     return ++gMmSave.info.skullCountOcean;
 }
 
-static int addItemIceTrap(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemTrap(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gSharedCustomSave.pendingIceTraps++;
-    return 0;
+    u8 amount;
+
+    amount = gSharedCustomSave.traps[param];
+    if (amount < 255)
+        amount++;
+    gSharedCustomSave.traps[param] = amount;
+
+    /* If the player gets a couple in sequence, tell them */
+    return amount < 2 ? 0 : amount;
 }
 
 static void fillMagicOot(PlayState* play)
@@ -1992,7 +1999,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemNutsUpgradeMm,
     addItemStoneAgonyMm,
     addItemSpinUpgradeOot,
-    addItemIceTrap,
+    addItemTrap,
 };
 
 extern const u8 kAddItemFuncs[];

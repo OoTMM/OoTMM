@@ -315,8 +315,8 @@ typedef struct Player
     Vec3f           bodyPartsPos[PLAYER_BODYPART_MAX];
     MtxF            mf_9d0;
     MtxF            shieldMf;
-    u8              bodyIsBurning;
-    u8              bodyFlameTimers[PLAYER_BODYPART_MAX];
+    u8              isBurning;
+    u8              flameTimers[PLAYER_BODYPART_MAX];
     u8              unk_a73;
     void*           afterPutAwayFunc;
     s8              invincibilityTimer;

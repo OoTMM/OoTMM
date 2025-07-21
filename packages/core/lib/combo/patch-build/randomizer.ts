@@ -210,7 +210,6 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_STRENGTH: "OOT_GORON_BRACELET",
   OOT_SCALE: "OOT_SCALE_BRONZE",
   OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
-  //OOT_TRAP_ICE: "OOT_RUPEE_BLUE",
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_DEKU",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
@@ -518,7 +517,7 @@ const gameChecks = async (worldId: number, opts: Options, settings: Settings, ga
     bufWriteU16BE(b, 4, playerId(item.player));
     bufWriteU16BE(b, 6, itemGi);
     let cloakGi = 0;
-    if (item.item === Items.OOT_TRAP_ICE && settings.cloakIceTraps) {
+    if (settings.cloakTraps && ItemGroups.TRAPS_CLOAKED.has(item.item)) {
       cloakGi = await makeCloakGi(key, opts.seed, settings, logic);
     }
     bufWriteU16BE(b, 8, cloakGi);

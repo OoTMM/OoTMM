@@ -216,12 +216,17 @@ export const SONGS = new Set([
   Items.SHARED_SONG_EMPTINESS,
 ]);
 
+export const TRAPS_CLOAKED = new Set([
+  Items.OOT_TRAP_ICE,
+  Items.OOT_TRAP_FIRE,
+]);
+
 export const TRAPS = new Set([
   Items.OOT_TRAP_RUPOOR,
   Items.MM_TRAP_RUPOOR,
   Items.SHARED_TRAP_RUPOOR,
-  Items.OOT_TRAP_ICE,
-])
+  ...TRAPS_CLOAKED,
+]);
 
 export const JUNK = new Set([
   ...TRAPS,

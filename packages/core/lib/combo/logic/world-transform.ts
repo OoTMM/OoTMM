@@ -570,11 +570,31 @@ export class LogicPassWorldTransform {
   }
 
   private setupExtraTraps() {
+    const trapAmounts: Record<Settings['trapsQuantity'], number> = {
+      small: 10,
+      medium: 30,
+      large: 50,
+      verylarge: 100,
+      extreme: 200,
+      insane: 500,
+      obnoxious: 1000,
+      absurd: 5000,
+    };
+    const amountFactor = trapAmounts[this.state.settings.trapsQuantity];
+
     let extraTraps: Item[] = [];
 
     if (this.state.settings.trapRupoor) {
       if (['ootmm', 'oot'].includes(this.state.settings.games)) extraTraps.push(Items.OOT_TRAP_RUPOOR);
       if (['ootmm', 'mm'].includes(this.state.settings.games)) extraTraps.push(Items.MM_TRAP_RUPOOR);
+    }
+
+    if (this.state.settings.trapIce) {
+      extraTraps.push(Items.OOT_TRAP_ICE);
+    }
+
+    if (this.state.settings.trapFire) {
+      extraTraps.push(Items.OOT_TRAP_FIRE);
     }
 
     if (extraTraps.length === 0)
@@ -583,7 +603,7 @@ export class LogicPassWorldTransform {
     const junkCount = Array.from(this.pool.entries())
       .filter(([pi, _]) => this.state.itemProperties.junk.has(pi.item))
       .reduce((acc, [_, count]) => acc + count, 0);
-    const trapCount = (junkCount * 20) / (this.state.worlds.length * extraTraps.length * 100);
+    const trapCount = (junkCount * amountFactor) / (this.state.worlds.length * extraTraps.length * 100);
     this.addItems(extraTraps, trapCount);
   }
 

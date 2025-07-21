@@ -1465,7 +1465,7 @@ s32 Player_IsFloorSlippery(Player* player, s32 floorType)
     /* End displaced code */
 }
 
-s32 Player_IsGoronOrGoronTunic(Player* player)
+int Player_IsGoronOrGoronTunic(Player* player)
 {
     return player->transformation == MM_PLAYER_FORM_GORON || gSaveContext.save.info.itemEquips.tunic == PLAYER_TUNIC_GORON;
 }

@@ -19,6 +19,9 @@ export function itemByID(id: string): Item {
   if (['MM_ARROWS_20'].includes(id)) {
     id = 'MM_ARROWS_30';
   }
+  if (['OOT_ICE_TRAP'].includes(id)) {
+    id = 'OOT_RUPEE_BLUE';
+  }
   if (Object.hasOwn(Items, id)) {
     return Items[id as keyof typeof Items];
   }
