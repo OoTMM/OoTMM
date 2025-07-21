@@ -99,6 +99,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   shadowFastBoat: true,
   songOfDoubleTimeOot: true,
   sharedSpinUpgrade: true,
+  trapIce: false,
   mmPreActivatedOwls: {
     type: 'specific',
     values: ["clocktown"]
