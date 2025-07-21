@@ -1,6 +1,6 @@
 import { VNode } from 'preact';
 import { useState } from 'preact/hooks';
-import { Button, Card, Checkbox } from './ui';
+import { Button, Card, CheckboxField } from './ui';
 
 type DoubleListOption = {
   key: string;
@@ -23,8 +23,7 @@ function DoubleListCol({ name, values, selected, onSelect }: DoubleListColProps)
       <div className="h-full overflow-y-auto flex flex-col gap-2">
         {values.map(x =>
           <div className="flex items-center gap-2" key={x.key}>
-            <Checkbox checked={selected.includes(x.key)} onChange={v => onSelect(x.key, v)}/>
-            {x.label}
+            <CheckboxField label={x.label} checked={selected.includes(x.key)} onChange={v => onSelect(x.key, v)}/>
             <span className="flex-1"/>
             {x.extra && <span className="flex gap-2 mr-4">{x.extra}</span>}
           </div>
