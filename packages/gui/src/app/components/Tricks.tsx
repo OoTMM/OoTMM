@@ -7,6 +7,7 @@ import { DoubleList } from './DoubleList';
 import { Tooltip } from './ui/Tooltip';
 import { usePatchSettings, useSetting } from '../contexts/SettingsContext';
 import { TabView, TabViewRoute } from './nav';
+import { IconMaskMajora, IconTriforce } from './icons';
 
 function trickExtra(trick: TrickKey) {
   const t = TRICKS[trick];
@@ -63,8 +64,8 @@ export function Tricks({ glitches }: TricksProps) {
   }
 
   const routes: TabViewRoute[] = [
-    { name: 'Ocarina of Time', component: glitches ? OotGlitches : OotTricks },
-    { name: 'Majora\'s Mask', component: glitches ? MmGlitches : MmTricks },
+    { name: 'Ocarina of Time', icon: IconTriforce, component: glitches ? OotGlitches : OotTricks },
+    { name: 'Majora\'s Mask', icon: IconMaskMajora, component: glitches ? MmGlitches : MmTricks },
   ];
 
   return <TabView routes={routes}/>;
