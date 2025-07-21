@@ -12,7 +12,8 @@
 
 /* Patch the audio heap */
 PATCH_START 0x800b87c4
-  la t9,AUDIO_HEAP_START
+  lui t9,%HI(AUDIO_HEAP_START)
+  addiu t9,%LO(AUDIO_HEAP_START)
 PATCH_END
 
 PATCH_START 0x8010a1b4
