@@ -13,7 +13,6 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   tingleShuffle: 'starting',
   openMaskShop: true,
   hintImportance: true,
-  cloakTraps: false,
   strayFairyChestShuffle: 'starting',
   mapCompassShuffle: 'starting',
   smallKeyShuffleMm: 'removed',
