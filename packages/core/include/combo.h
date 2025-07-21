@@ -201,9 +201,6 @@ void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 void LoadMmItemIcon(void* dst, int iconId);
 int  Play_GetInstance(PlayState* play);
 
-/* Ice Traps */
-void Play_UpdateIceTrap(PlayState* play);
-
 #else
 # include <combo/asm.h>
 #endif

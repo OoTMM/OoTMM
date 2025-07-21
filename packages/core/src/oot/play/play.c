@@ -589,7 +589,7 @@ void Play_MainWrapper(PlayState* play)
     if (play->pauseCtx.state == 0)
     {
         DrawGiSystem_Update(play);
-        Play_UpdateIceTrap(play);
+        Play_UpdateTraps(play);
     }
 
     Debug_Update();
