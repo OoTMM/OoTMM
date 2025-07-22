@@ -1,15 +1,20 @@
-import { ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
+import { ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
 import { Settings } from '../settings';
 import { Pathfinder } from './pathfind';
 import { Location, isLocationFullyShuffled, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { ItemPlacement } from './solve';
-import { Random, shuffle } from '../random';
+import { Random, randomFloat, sample, shuffle } from '../random';
 import { Monitor } from '../monitor';
+import { JUNK } from '../items/groups';
+import { countMapAdd, countMapArray } from '../util';
+import { TRAP_AMOUNTS } from './traps';
 
 export class LogicPassMinimize {
   private pathfinder!: Pathfinder;
   private locations!: Location[];
+  private traps: PlayerItem[];
+  private trapDensity: number;
 
   constructor(
     private readonly state: {
@@ -21,8 +26,23 @@ export class LogicPassMinimize {
       random: Random;
       monitor: Monitor;
       plandoLocations: Map<Location, PlayerItem>;
+      pool: PlayerItems;
     }
   ) {
+    const trapPool = new Map();
+    for (const [pi, count] of this.state.pool) {
+      if (ItemGroups.TRAPS.has(pi.item)) {
+        trapPool.set(pi, count);
+      }
+    }
+    if (trapPool.size === 0) {
+      this.trapDensity = -1;
+      this.traps = [];
+    } else {
+      const trapAmount = TRAP_AMOUNTS[this.state.settings.trapsQuantity];
+      this.trapDensity = (trapAmount / (trapAmount + 100));
+      this.traps = countMapArray(trapPool);
+    }
   }
 
   run() {
@@ -69,6 +89,13 @@ export class LogicPassMinimize {
 
       if (!result) {
         this.state.items.set(l, item);
+      } else {
+        /* Roll for trap */
+        const trapRoll = randomFloat(this.state.random);
+        if (trapRoll < this.trapDensity) {
+          const trap = sample(this.state.random, this.traps);
+          this.state.items.set(l, trap);
+        }
       }
     }
 

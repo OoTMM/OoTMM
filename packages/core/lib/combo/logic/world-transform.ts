@@ -14,6 +14,7 @@ import { ItemProperties } from './item-properties';
 import { CLOCKS } from '../items/groups';
 import { mustStartWithMasterSword } from '../settings/util';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
+import { TRAP_AMOUNTS } from './traps';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
@@ -570,17 +571,7 @@ export class LogicPassWorldTransform {
   }
 
   private setupExtraTraps() {
-    const trapAmounts: Record<Settings['trapsQuantity'], number> = {
-      small: 10,
-      medium: 30,
-      large: 50,
-      verylarge: 100,
-      extreme: 200,
-      insane: 500,
-      obnoxious: 1000,
-      absurd: 5000,
-    };
-    const amountFactor = trapAmounts[this.state.settings.trapsQuantity];
+    const amountFactor = TRAP_AMOUNTS[this.state.settings.trapsQuantity];
 
     let extraTraps: Item[] = [];
 
