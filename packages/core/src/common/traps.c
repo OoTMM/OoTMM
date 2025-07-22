@@ -59,10 +59,38 @@ static int Play_UpdateTrapsShock(PlayState* play, Player* player)
     return 1;
 }
 
+static int Play_UpdateTrapsDrain(PlayState* play, Player* player)
+{
+    gSave.info.playerData.health = 1;
+    player->actor.colChkInfo.damage = 0;
+    Player_ApplyDamage(play, player, 0x00, 0, 0, 0, 20);
+    return 1;
+}
+
+static int Play_UpdateTrapsAntiMagic(PlayState* play, Player* player)
+{
+    gSave.info.playerData.magic = 0;
+    if (comboIsChateauActive())
+        MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+    player->actor.colChkInfo.damage = 0;
+    Player_ApplyDamage(play, player, 0x00, 0, 0, 0, 20);
+    return 1;
+}
+
+static int Play_UpdateTrapsKnockback(PlayState* play, Player* player)
+{
+    player->actor.colChkInfo.damage = 0;
+    Player_ApplyDamage(play, player, 0x01, Rand_ZeroFloat(20.f), Rand_ZeroFloat(15.f) , Rand_Next() & 0xffff, 20);
+    return 1;
+}
+
 static const TrapHandler kTrapHandlers[] = {
     [TRAP_ICE] = Play_UpdateTrapsIce,
     [TRAP_FIRE] = Play_UpdateTrapsFire,
     [TRAP_SHOCK] = Play_UpdateTrapsShock,
+    [TRAP_DRAIN] = Play_UpdateTrapsDrain,
+    [TRAP_ANTI_MAGIC] = Play_UpdateTrapsAntiMagic,
+    [TRAP_KNOCKBACK] = Play_UpdateTrapsKnockback,
 };
 
 void Play_UpdateTraps(PlayState* play)

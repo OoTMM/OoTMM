@@ -592,17 +592,12 @@ export class LogicPassWorldTransform {
       if (['ootmm', 'mm'].includes(this.state.settings.games)) extraTraps.push(Items.MM_TRAP_RUPOOR);
     }
 
-    if (this.state.settings.trapIce) {
-      extraTraps.push(Items.OOT_TRAP_ICE);
-    }
-
-    if (this.state.settings.trapFire) {
-      extraTraps.push(Items.OOT_TRAP_FIRE);
-    }
-
-    if (this.state.settings.trapShock) {
-      extraTraps.push(Items.OOT_TRAP_SHOCK);
-    }
+    if (this.state.settings.trapIce) extraTraps.push(Items.OOT_TRAP_ICE);
+    if (this.state.settings.trapFire) extraTraps.push(Items.OOT_TRAP_FIRE);
+    if (this.state.settings.trapShock) extraTraps.push(Items.OOT_TRAP_SHOCK);
+    if (this.state.settings.trapDrain) extraTraps.push(Items.OOT_TRAP_DRAIN);
+    if (this.state.settings.trapAntiMagic) extraTraps.push(Items.OOT_TRAP_ANTI_MAGIC);
+    if (this.state.settings.trapKnockback) extraTraps.push(Items.OOT_TRAP_KNOCKBACK);
 
     if (extraTraps.length === 0)
       return;

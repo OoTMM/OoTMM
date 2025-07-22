@@ -220,6 +220,9 @@ export const TRAPS_CLOAKED = new Set([
   Items.OOT_TRAP_ICE,
   Items.OOT_TRAP_FIRE,
   Items.OOT_TRAP_SHOCK,
+  Items.OOT_TRAP_DRAIN,
+  Items.OOT_TRAP_ANTI_MAGIC,
+  Items.OOT_TRAP_KNOCKBACK,
 ]);
 
 export const TRAPS = new Set([

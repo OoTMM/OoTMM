@@ -435,6 +435,9 @@
 - { id: OOT_TRAP_ICE, type: MINOR, add: [TRAP, 0x00], flags: 0x80, draw: [TRAP, 0x01], name: "an <COLOR_BLUE>Ice Trap" }
 - { id: OOT_TRAP_FIRE, type: MINOR, add: [TRAP, 0x01], flags: 0x80, draw: [TRAP, 0x01], name: "a <COLOR_BLUE>Fire Trap" }
 - { id: OOT_TRAP_SHOCK, type: MINOR, add: [TRAP, 0x02], flags: 0x80, object: EFFECT_SHOCK, draw: [TRAP, 0x02], name: "a <COLOR_BLUE>Shock Trap" }
+- { id: OOT_TRAP_DRAIN, type: MINOR, add: [TRAP, 0x03], flags: 0x80, object: [oot, 0x00b7], draw: [TRAP, 0x03], name: "a <COLOR_BLUE>Drain Trap" }
+- { id: OOT_TRAP_ANTI_MAGIC, type: MINOR, add: [TRAP, 0x04], flags: 0x80, object: [oot, 0x00cd], draw: [TRAP, 0x04], name: "an <COLOR_BLUE>Anti-Magic Trap" }
+- { id: OOT_TRAP_KNOCKBACK, type: MINOR, add: [TRAP, 0x05], flags: 0x80, object: [oot, 0x085], draw: [TRAP, 0x05], name: "a <COLOR_BLUE>Knockback Trap" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
