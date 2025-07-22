@@ -284,6 +284,7 @@ Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
 Math_StepToS = 0x800637d4;
 Rand_S16Offset = 0x80063bf0;
+Rand_Next = 0x800cdc90;
 Math_Vec3f_Copy = 0x80063cac;
 gSegments = 0x80120c38;
 osSetIntMask = 0x80003cc0;

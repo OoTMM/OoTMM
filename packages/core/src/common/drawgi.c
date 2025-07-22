@@ -1590,6 +1590,9 @@ void DrawGi_Trap(PlayState* play, s16 drawGiId, u8 param)
         DrawGi_TrapIce,
         DrawGi_TrapFire,
         DrawGi_TrapShock,
+        DrawGi_TrapIce,
+        DrawGi_TrapIce,
+        DrawGi_TrapIce,
     };
 
     kHandlers[param](play, drawGiId, param);
