@@ -606,7 +606,7 @@ export class LogicPassWorldTransform {
     const junkCount = Array.from(this.pool.entries())
       .filter(([pi, _]) => this.state.itemProperties.junk.has(pi.item))
       .reduce((acc, [_, count]) => acc + count, 0);
-    const trapCount = (junkCount * amountFactor) / (this.state.worlds.length * extraTraps.length * 100);
+    const trapCount = (junkCount * amountFactor) / ((this.state.settings.trapsLink ? 1 : this.state.worlds.length) * extraTraps.length * 100);
     addTraps(extraTraps, trapCount);
   }
 
