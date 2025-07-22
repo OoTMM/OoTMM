@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
 - Add a setting to link traps in multiworld.
-- Add Fire traps.
+- Add Fire & Shock traps.
 - Add settings to control the amount of traps.
 - Add an option to share triforce pieces in multiworld (including triforce quest).
 - Speed up the fall down of the Shadow Temple Big Bird Statue.
