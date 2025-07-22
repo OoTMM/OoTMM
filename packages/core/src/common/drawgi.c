@@ -1543,7 +1543,7 @@ void DrawGi_CustomShield(PlayState* play, s16 index, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
+static void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
 {
     static const float scale = 0.5f;
 
@@ -1558,12 +1558,41 @@ void DrawGi_TrapIce(PlayState* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_TrapFire(PlayState* play, s16 drawGiId, u8 param)
+static void DrawGi_TrapFire(PlayState* play, s16 drawGiId, u8 param)
 {
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     shaderFlameEffect(play, 2, 1.f, 0.f);
     CLOSE_DISPS();
+}
+
+static void DrawGi_TrapShock(PlayState* play, s16 drawGiId, u8 param)
+{
+    static const float scale = 3.f;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+    Matrix_ReplaceRotation(&play->billboardMtxF);
+    gDPSetRenderMode(POLY_XLU_DISP++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
+    gDPPipeSync(POLY_XLU_DISP++);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(POLY_XLU_DISP++, 0, 255, 155, 0);
+    Matrix_RotateZ(Rand_ZeroOne() * M_PI, MTXMODE_APPLY);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_EFFECT_SHOCK_0);
+    CLOSE_DISPS();
+}
+
+void DrawGi_Trap(PlayState* play, s16 drawGiId, u8 param)
+{
+    static const void (*kHandlers[])(PlayState*, s16, u8) = {
+        DrawGi_TrapIce,
+        DrawGi_TrapFire,
+        DrawGi_TrapShock,
+    };
+
+    kHandlers[param](play, drawGiId, param);
 }
 
 struct CustomScaleColorDlists

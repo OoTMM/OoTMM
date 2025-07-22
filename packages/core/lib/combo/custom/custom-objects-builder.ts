@@ -377,6 +377,16 @@ export class CustomObjectsBuilder {
     return { name: 'STRAY_FAIRY', ...editor.build() };
   }
 
+  private async makeEffectShock(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const ovl = await this.getFile('oot', 'actors/ovl_Effect_Ss_Fhg_Flash');
+    editor.loadFile(0x80b33550, ovl);
+    const dlist = editor.processListAddr(0x80b33f80);
+    editor.submitOut(dlist);
+
+    return { name: 'EFFECT_SHOCK', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -403,6 +413,7 @@ export class CustomObjectsBuilder {
       await this.makeEqSlingshot(),
       await this.makeEqBow(),
       await this.makeStrayFairy(),
+      await this.makeEffectShock(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

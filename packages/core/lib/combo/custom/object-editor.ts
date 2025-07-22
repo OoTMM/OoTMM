@@ -7,6 +7,7 @@ export type ObjectEditorOut = {
 };
 
 export class ObjectEditor {
+  private virtualMemory: Map<number, Uint8Array> = new Map();
   private segments: Map<number, Uint8Array> = new Map();
   private seen: Map<number, number> = new Map();
   private out: Uint8Array[] = [];
@@ -210,17 +211,46 @@ export class ObjectEditor {
     }
   }
 
+  loadFile(vaddr: number, data: Uint8Array | null) {
+    if (data === null) {
+      this.virtualMemory.delete(vaddr);
+    } else {
+      this.virtualMemory.set(vaddr, data);
+    }
+  }
+
+  lookupFile(vaddr: number): Uint8Array | null {
+    for (const [addr, data] of this.virtualMemory) {
+      if (addr === vaddr) {
+        return data;
+      }
+
+      if (addr < vaddr && ((addr + data.length) >>> 0) > vaddr) {
+        return data.subarray((vaddr - addr) >>> 0);
+      }
+    }
+
+    return null;
+  }
+
   segData(addr: number, size?: number) {
-    const seg = (addr >>> 24);
-    addr &= 0xffffff;
-    const data = this.segments.get(seg);
+    let data: Uint8Array | null;
+
+    if (addr >= 0x80000000) {
+      data = this.lookupFile(addr);
+      addr = 0;
+    } else {
+      const seg = (addr >>> 24);
+      addr &= 0xffffff;
+      data = this.segments.get(seg) ?? null;
+    }
     if (!data) {
       return null;
     }
     if (size === undefined) {
       return data.subarray(addr);
     }
-    return data.subarray(addr, addr + size);
+    return data.subarray(addr, (addr + size) >>> 0);
   }
 
   listSize(addr: number) {

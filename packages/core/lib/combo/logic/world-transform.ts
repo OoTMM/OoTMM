@@ -600,6 +600,10 @@ export class LogicPassWorldTransform {
       extraTraps.push(Items.OOT_TRAP_FIRE);
     }
 
+    if (this.state.settings.trapShock) {
+      extraTraps.push(Items.OOT_TRAP_SHOCK);
+    }
+
     if (extraTraps.length === 0)
       return;
 

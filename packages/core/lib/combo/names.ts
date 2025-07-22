@@ -821,6 +821,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_TRAP_RUPOOR: "Rupoor",
   OOT_TRAP_ICE: "Ice Trap",
   OOT_TRAP_FIRE: "Fire Trap",
+  OOT_TRAP_SHOCK: "Shock Trap",
   OOT_SOUL_MISC_GS: "Soul of Gold Skulltulas (OoT)",
   OOT_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs (OoT)",
   MM_SOUL_MISC_GS: "Soul of Gold Skulltulas (MM)",
