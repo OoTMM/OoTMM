@@ -54,6 +54,8 @@ static int Play_UpdateTrapsFire(PlayState* play, Player* player)
 
 static int Play_UpdateTrapsShock(PlayState* play, Player* player)
 {
+    player->actor.colChkInfo.damage = 0;
+    Player_ApplyDamage(play, player, 0x04, 0, 0, 0, 20);
     return 1;
 }
 
