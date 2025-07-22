@@ -52,9 +52,15 @@ static int Play_UpdateTrapsFire(PlayState* play, Player* player)
     return 1;
 }
 
+static int Play_UpdateTrapsShock(PlayState* play, Player* player)
+{
+    return 1;
+}
+
 static const TrapHandler kTrapHandlers[] = {
     [TRAP_ICE] = Play_UpdateTrapsIce,
     [TRAP_FIRE] = Play_UpdateTrapsFire,
+    [TRAP_SHOCK] = Play_UpdateTrapsShock,
 };
 
 void Play_UpdateTraps(PlayState* play)

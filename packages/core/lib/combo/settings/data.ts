@@ -2044,6 +2044,13 @@ export const SETTINGS = [{
   description: 'Add Fire Traps to the item pool. They burn you when collected.',
   default: false
 }, {
+  key: 'trapShock',
+  name: 'Shock Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Shock Traps to the item pool. They shock you when collected.',
+  default: false
+}, {
   key: 'trapRupoor',
   name: 'Rupoors',
   category: 'items.extensions',
