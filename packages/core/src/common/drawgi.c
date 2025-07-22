@@ -1630,6 +1630,17 @@ static void DrawGi_TrapAntiMagic(PlayState* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
+static void DrawGi_TrapKnockback(PlayState* play, s16 drawGiId, u8 param)
+{
+    static const float scale = 0.1f;
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, 0x06001400);
+    CLOSE_DISPS();
+}
+
 void DrawGi_Trap(PlayState* play, s16 drawGiId, u8 param)
 {
     static const void (*kHandlers[])(PlayState*, s16, u8) = {
@@ -1638,7 +1649,7 @@ void DrawGi_Trap(PlayState* play, s16 drawGiId, u8 param)
         DrawGi_TrapShock,
         DrawGi_TrapDrain,
         DrawGi_TrapAntiMagic,
-        DrawGi_TrapIce,
+        DrawGi_TrapKnockback,
     };
 
     kHandlers[param](play, drawGiId, param);
