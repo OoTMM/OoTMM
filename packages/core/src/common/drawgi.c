@@ -1036,6 +1036,12 @@ static const Gfx kMagicJarColorGold[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kMagicJarColorBlack[] = {
+    gsDPSetPrimColor(0x00, 0x00, 30, 30, 30, 255),
+    gsDPSetEnvColor(10, 10, 10, 255),
+    gsSPEndDisplayList(),
+};
+
 void DrawGi_MagicJar(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
@@ -1584,6 +1590,17 @@ static void DrawGi_TrapShock(PlayState* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
+static void DrawGi_TrapAntiMagic(PlayState* play, s16 drawGiId, u8 param)
+{
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
+    gSPSegment(POLY_OPA_DISP++, 0x08, kMagicJarColorBlack);
+    gSPSegment(POLY_OPA_DISP++, 0x09, kMagicJarColorSilver);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, 0x06000580);
+    CLOSE_DISPS();
+}
+
 void DrawGi_Trap(PlayState* play, s16 drawGiId, u8 param)
 {
     static const void (*kHandlers[])(PlayState*, s16, u8) = {
@@ -1591,7 +1608,7 @@ void DrawGi_Trap(PlayState* play, s16 drawGiId, u8 param)
         DrawGi_TrapFire,
         DrawGi_TrapShock,
         DrawGi_TrapIce,
-        DrawGi_TrapIce,
+        DrawGi_TrapAntiMagic,
         DrawGi_TrapIce,
     };
 
