@@ -2051,6 +2051,27 @@ export const SETTINGS = [{
   description: 'Add Shock Traps to the item pool. They shock you when collected.',
   default: false
 }, {
+  key: 'trapDrain',
+  name: 'Drain Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Drain Traps to the item pool. They drain your life when collected.',
+  default: false
+}, {
+  key: 'trapAntiMagic',
+  name: 'Anti-Magic Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Anti-Magic Traps to the item pool. They drain magic from you when collected.',
+  default: false
+}, {
+  key: 'trapKnockback',
+  name: 'Knockback Traps',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Knockback Traps to the item pool. They throw you in a random direction.',
+  default: false
+}, {
   key: 'trapRupoor',
   name: 'Rupoors',
   category: 'items.extensions',
