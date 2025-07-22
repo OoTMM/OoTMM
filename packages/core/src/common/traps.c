@@ -69,6 +69,11 @@ static int Play_UpdateTrapsDrain(PlayState* play, Player* player)
 
 static int Play_UpdateTrapsAntiMagic(PlayState* play, Player* player)
 {
+    gSave.info.playerData.magic = 0;
+    if (comboIsChateauActive())
+        MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+    player->actor.colChkInfo.damage = 0;
+    Player_ApplyDamage(play, player, 0x00, 0, 0, 0, 20);
     return 1;
 }
 
