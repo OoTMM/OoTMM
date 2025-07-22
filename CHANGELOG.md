@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
+- Add Fire traps.
+- Add settings to control the amount of traps.
 - Add an option to share triforce pieces in multiworld (including triforce quest).
 - Speed up the fall down of the Shadow Temple Big Bird Statue.
 - Speed up Bottom of the Well water drainage by 500%.
@@ -15,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make barren item pool include traps.
+- Reworked the web generator.
 - In Co-op, item buy logic is relaxed a little to let the player buy items for their partner(s).
 - Fire Arrows are no longer required for Great Bay Temple's wheel room after reversing the water direction, due to the revamped save system.
 
