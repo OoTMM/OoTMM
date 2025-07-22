@@ -2075,6 +2075,14 @@ export const SETTINGS = [{
   description: 'Controls the number of traps relative to the number of junk items in the pool.',
   default: 'small',
 }, {
+  key: 'trapsLink',
+  name: 'Linked Multiworld Traps',
+  category: 'main',
+  type: 'boolean',
+  description: 'If enabled, traps are shared between players. If disabled, each player has it\'s own set of traps.',
+  default: false,
+  cond: (s: any) => s.mode === 'multi',
+}, {
   key: 'songOfDoubleTimeOot',
   name: 'Song of Double Time (OoT)',
   category: 'items.extensions',

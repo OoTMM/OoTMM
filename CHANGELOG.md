@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
+- Add a setting to link traps in multiworld.
 - Add Fire traps.
 - Add settings to control the amount of traps.
 - Add an option to share triforce pieces in multiworld (including triforce quest).
