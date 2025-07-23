@@ -59,6 +59,10 @@ export const COSMETICS = [{
   name: 'D-Pad',
   type: 'color',
 }, {
+  key: 'fileSelect',
+  name: 'File Select',
+  type: 'color',
+}, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'file',
