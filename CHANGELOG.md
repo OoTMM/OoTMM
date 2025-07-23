@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
+- Cosmetic setting to alter the File Select color.
 - Add a setting to link traps in multiworld.
 - Add Fire, Shock, Drain, Anti-Magic & Knockback traps.
 - Add settings to control the amount of traps.
