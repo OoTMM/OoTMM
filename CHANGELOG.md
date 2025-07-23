@@ -23,6 +23,10 @@ All notable changes to this project will be documented in this file.
 - In Co-op, item buy logic is relaxed a little to let the player buy items for their partner(s).
 - Fire Arrows are no longer required for Great Bay Temple's wheel room after reversing the water direction, due to the revamped save system.
 
+### Changed
+
+- Grass and Pot CAMC is now its own setting and separated from the rest.
+
 ### Fixed
 
 - Fix Red Ice despawning in MQ Ganon's Castle when shuffled.

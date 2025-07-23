@@ -220,7 +220,7 @@ static int csmcPotId(s16 gi, s16 cloakGi, int def)
 
     if (gi == 0)
         return def;
-    if (!csmcEnabled())
+    if (!csmcEnabledGrassPot())
         return CSMC_POT_MAJOR;
 
     csmcId = csmcFromItemCloaked(gi, cloakGi);
