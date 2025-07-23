@@ -61,7 +61,7 @@ function TooltipContent({ targetRef, children }: TooltipContentProps) {
   }, [targetRef.current]);
 
   return (
-    <div ref={tooltipRef} style={style} className="absolute z-50 bg-neutral-900 p-4 text-white rounded pointer-events-none max-w-[768px]">
+    <div ref={tooltipRef} style={style} className="absolute z-100 bg-neutral-900 p-4 text-white rounded pointer-events-none max-w-[768px]">
       {children}
     </div>
   );
