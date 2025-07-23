@@ -204,8 +204,7 @@ void BgIceShelter_Init(Actor_BgIceShelter* this, PlayState* play) {
     this->dyna.actor.colChkInfo.mass = MASS_IMMOVABLE;
 
     // The only red ice actor in the game that doesn't use a switch flag is the one for King Zora
-    if (!BGICESHELTER_NO_SWITCH_FLAG(&this->dyna.actor) &&
-        (Flags_GetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6)))) {
+    if (!BgIceShelter_IsShuffled(this) && !BGICESHELTER_NO_SWITCH_FLAG(&this->dyna.actor) && Flags_GetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6))) {
         Actor_Kill(&this->dyna.actor);
         return;
     }

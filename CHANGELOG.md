@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Red Ice despawning in MQ Ganon's Castle when shuffled.
 - Fix a bug that caused CSMC textures to be sometimes applied to unshuffled crates.
 - Fix shared songs having the game name as a suffix in some very specific cases.
 - Fix some pre-completed dungeons having foolish hints.
