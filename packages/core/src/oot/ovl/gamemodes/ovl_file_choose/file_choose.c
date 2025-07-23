@@ -3,6 +3,12 @@
 #include <assets/oot/textures/title_static.h>
 #include <assets/oot/textures/parameter_static.h>
 
+static u8 sColors[] = { 100, 150, 255 };
+EXPORT_SYMBOL(COLOR_FILE_SELECT, sColors);
+
+static u8 sHighlightColor[] = { 155, 255, 255 };
+EXPORT_SYMBOL(COLOR_FILE_SELECT_HIGHLIGHT, sHighlightColor);
+
 static s16 sScreenFillAlpha = 255;
 
 static Gfx sScreenFillSetupDL[] = {
@@ -17,11 +23,6 @@ static Gfx sScreenFillSetupDL[] = {
 };
 
 static s16 sFileInfoBoxPartWidths[] = { 36, 36, 36, 36, 24 };
-
-static s16 sWindowContentColors[2][3] = {
-    { 100, 150, 255 }, // blue
-    { 100, 100, 100 }, // gray
-};
 
 void FileSelect_SetView(FileSelectState* this, f32 eyeX, f32 eyeY, f32 eyeZ) {
     Vec3f eye;
@@ -947,18 +948,16 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
         // draw file button
         gSPVertex(POLY_OPA_DISP++, &this->windowContentVtx[temp], 20, 0);
 
-        isActive = ((this->n64ddFlag == this->n64ddFlags[i]) || (this->nameBoxAlpha[i] == 0)) ? 0 : 1;
-
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sWindowContentColors[isActive][0], sWindowContentColors[isActive][1],
-                        sWindowContentColors[isActive][2], this->fileButtonAlpha[i]);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1],
+                        this->windowColor[2], this->fileButtonAlpha[i]);
         gDPLoadTextureBlock(POLY_OPA_DISP++, sFileButtonTextures[gSaveContext.language][i], G_IM_FMT_IA, G_IM_SIZ_16b,
                             64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
         gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
 
         // draw file name box
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sWindowContentColors[isActive][0], sWindowContentColors[isActive][1],
-                        sWindowContentColors[isActive][2], this->nameBoxAlpha[i]);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1],
+                        this->windowColor[2], this->nameBoxAlpha[i]);
         gDPLoadTextureBlock(POLY_OPA_DISP++, gFileSelNameBoxTex, G_IM_FMT_IA, G_IM_SIZ_16b, 108, 16, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
@@ -966,8 +965,8 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
 
         // draw disk label for 64DD
         if (this->n64ddFlags[i]) {
-            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sWindowContentColors[isActive][0], sWindowContentColors[isActive][1],
-                            sWindowContentColors[isActive][2], this->nameAlpha[i]);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1],
+                            this->windowColor[2], this->nameAlpha[i]);
             gDPLoadTextureBlock(POLY_OPA_DISP++, gFileSelDISKButtonTex, G_IM_FMT_IA, G_IM_SIZ_16b, 44, 16, 0,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
@@ -975,8 +974,8 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
         }
 
         // draw connectors
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sWindowContentColors[isActive][0], sWindowContentColors[isActive][1],
-                        sWindowContentColors[isActive][2], this->connectorAlpha[i]);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1],
+                        this->windowColor[2], this->connectorAlpha[i]);
         gDPLoadTextureBlock(POLY_OPA_DISP++, gFileSelConnectorTex, G_IM_FMT_IA, G_IM_SIZ_8b, 24, 16, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
@@ -1093,7 +1092,6 @@ void FileSelect_ConfigModeDraw(GameState* thisx) {
     Skybox_Draw(&this->skyboxCtx, this->state.gfxCtx, 1, this->envCtx.skyboxBlend, eyeX, eyeY, eyeZ);
     gDPSetTextureLUT(POLY_OPA_DISP++, G_TT_NONE);
     ZREG(11) += ZREG(10);
-    Environment_UpdateSkybox(SKYBOX_NORMAL_SKY, &this->envCtx, &this->skyboxCtx);
     gDPPipeSync(POLY_OPA_DISP++);
     Gfx_SetupDL_42Opa(this->state.gfxCtx);
     FileSelect_SetView(this, 0.0f, 0.0f, 64.0f);
@@ -1477,7 +1475,7 @@ void FileSelect_SelectModeDraw(GameState* thisx) {
     Skybox_Draw(&this->skyboxCtx, this->state.gfxCtx, 1, this->envCtx.skyboxBlend, eyeX, eyeY, eyeZ);
     gDPSetTextureLUT(POLY_OPA_DISP++, G_TT_NONE);
     ZREG(11) += ZREG(10);
-    Environment_UpdateSkybox(SKYBOX_NORMAL_SKY, &this->envCtx, &this->skyboxCtx);
+    //Environment_UpdateSkybox(SKYBOX_NORMAL_SKY, &this->envCtx, &this->skyboxCtx);
     gDPPipeSync(POLY_OPA_DISP++);
     Gfx_SetupDL_42Opa(this->state.gfxCtx);
     FileSelect_SetView(this, 0.0f, 0.0f, 64.0f);
@@ -1625,6 +1623,15 @@ void FileSelect_Main(GameState* thisx) {
     CLOSE_DISPS();
 }
 
+static void FileSelect_CustomSkybox(SkyboxContext* ctx)
+{
+    DmaEntry dma;
+
+    if (!comboDmaLookup(&dma, COMBO_VROM_TITLE_SCREEN_PAL))
+        return;
+    comboDmaLoadFile(ctx->palettes, COMBO_VROM_TITLE_SCREEN_PAL);
+}
+
 void FileSelect_InitContext(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     EnvironmentContext* envCtx = &this->envCtx;
@@ -1715,9 +1722,9 @@ void FileSelect_InitContext(GameState* thisx) {
     this->nextTitleLabel = FS_TITLE_OPEN_FILE;
     this->highlightPulseDir = 1;
     this->unk_1CAAC = 0xC;
-    this->highlightColor[0] = 155;
-    this->highlightColor[1] = 255;
-    this->highlightColor[2] = 255;
+    this->highlightColor[0] = sHighlightColor[0];
+    this->highlightColor[1] = sHighlightColor[1];
+    this->highlightColor[2] = sHighlightColor[2];
     this->highlightColor[3] = 70;
     this->configMode = CM_FADE_IN_START;
     this->windowRot = 0.0f;
@@ -1726,9 +1733,9 @@ void FileSelect_InitContext(GameState* thisx) {
     this->kbdX = this->kbdY = this->charIndex = 0;
     this->kbdButton = FS_KBD_BTN_NONE;
 
-    this->windowColor[0] = 100;
-    this->windowColor[1] = 150;
-    this->windowColor[2] = 255;
+    this->windowColor[0] = sColors[0];
+    this->windowColor[1] = sColors[1];
+    this->windowColor[2] = sColors[2];
 
     this->windowAlpha = this->titleAlpha[0] = this->titleAlpha[1] = this->fileButtonAlpha[0] =
         this->fileButtonAlpha[1] = this->fileButtonAlpha[2] = this->nameBoxAlpha[0] = this->nameBoxAlpha[1] =
@@ -1759,6 +1766,7 @@ void FileSelect_InitContext(GameState* thisx) {
     gSaveContext.save.dayTime = CLOCK_TIME(0, 0);
 
     Skybox_Init(&this->state, &this->skyboxCtx, SKYBOX_NORMAL_SKY);
+    FileSelect_CustomSkybox(&this->skyboxCtx);
 
     gTimeSpeed = 10;
 
@@ -1778,7 +1786,7 @@ void FileSelect_InitContext(GameState* thisx) {
     envCtx->glareAlpha = 0.0f;
     envCtx->lensFlareAlphaScale = 0.0f;
 
-    Environment_UpdateSkybox(SKYBOX_NORMAL_SKY, &this->envCtx, &this->skyboxCtx);
+    //Environment_UpdateSkybox(SKYBOX_NORMAL_SKY, &this->envCtx, &this->skyboxCtx);
 
     gSaveContext.buttonStatus[0] = gSaveContext.buttonStatus[1] = gSaveContext.buttonStatus[2] =
         gSaveContext.buttonStatus[3] = gSaveContext.buttonStatus[4] = BTN_ENABLED;

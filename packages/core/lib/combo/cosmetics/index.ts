@@ -37,10 +37,14 @@ function colorBufferRGB(color: number) {
   return buffer;
 }
 
+function clamp8(value: number): number {
+  return Math.max(0, Math.min(255, value));
+}
+
 function brightness(color: number, bright: number): number {
-  const r = (color >>> 16) * bright;
-  const g = ((color >>> 8) & 0xff) * bright;
-  const b = (color & 0xff) * bright;
+  const r = clamp8((color >>> 16) * bright);
+  const g = clamp8(((color >>> 8) & 0xff) * bright);
+  const b = clamp8((color & 0xff) * bright);
   return (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
 }
 
@@ -343,6 +347,17 @@ class CosmeticsPass {
     }
   }
 
+  patchFileSelect(color: number) {
+    /* Patch the skybox */
+    const basePal = this.builder.fileByNameRequired('oot/misc/vr_fine3_pal_static');
+    const newPal = recolorImage('rgba16', basePal.data, null, 0x0000ff, color);
+    this.builder.addFile({ game: 'custom', type: 'uncompressed', vaddr: 0xf1100000, data: newPal });
+
+    /* Patch the file select color */
+    this.patchSymbol('COLOR_FILE_SELECT', colorBufferRGB(color));
+    this.patchSymbol('COLOR_FILE_SELECT_HIGHLIGHT', colorBufferRGB(brightness(color, 1.2)));
+  }
+
   async run(): Promise<string | null> {
     const c = this.opts.cosmetics;
 
@@ -361,6 +376,7 @@ class CosmeticsPass {
     const colorMmTunicFierceDeity = resolveColor(random, c.mmTunicFierceDeity);
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
     const colorDpad = resolveColor(random, c.dpad);
+    const colorFileSelect = resolveColor(random, c.fileSelect);
 
     /* Patch hold target */
     if (c.defaultHold) {
@@ -399,6 +415,8 @@ class CosmeticsPass {
     if (colorDpad !== null) {
       this.patchSymbol('DPAD_COLOR', colorBufferRGB(colorDpad));
     }
+
+    if (colorFileSelect !== null) this.patchFileSelect(colorFileSelect);
 
     // if(c.nightBgm) {
     //   this.patchSymbol('NIGHT_BGM', new Uint8Array([0x01]));
