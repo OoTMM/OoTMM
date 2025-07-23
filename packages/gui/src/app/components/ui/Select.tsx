@@ -105,7 +105,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
         </div>
       </div>
       <div className="relative select-none">
-        {open && (searcheable || !inputValue) && <div className="ux-bg ux-border z-1000 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
+        {open && (searcheable || !inputValue) && <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
           {filteredOptions.length > 0 && filteredOptions.map((opt, i) =>
             <div key={i} className="ux-hover p-2" onClick={(e) => { setOpen(false); onSelect(opt.value); e.preventDefault(); e.stopPropagation(); setInputValue(''); }}>
               {opt.label}
