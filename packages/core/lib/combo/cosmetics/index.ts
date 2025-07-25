@@ -358,6 +358,26 @@ class CosmeticsPass {
     this.patchSymbol('COLOR_FILE_SELECT_HIGHLIGHT', colorBufferRGB(brightness(color, 1.2)));
   }
 
+  patchCButtons(color: number) {
+    /* Generic symbol patch */
+    const colorBuffer = colorBufferRGB(color);
+    this.patchSymbol('COLOR_C_BUTTONS', colorBuffer);
+    this.patchSymbol('COLOR_C_BUTTONS_R', colorBuffer.subarray(0, 1));
+    this.patchSymbol('COLOR_C_BUTTONS_G', colorBuffer.subarray(1, 2));
+    this.patchSymbol('COLOR_C_BUTTONS_B', colorBuffer.subarray(2, 3));
+
+    /* Highlight */
+    const colorHighlightBuffer = colorBufferRGB(brightness(color, 1.2));
+    this.patchSymbol('COLOR_C_BUTTONS_HIGHLIGHT', colorHighlightBuffer);
+    this.patchSymbol('COLOR_C_BUTTONS_HIGHLIGHT_R', colorHighlightBuffer.subarray(0, 1));
+    this.patchSymbol('COLOR_C_BUTTONS_HIGHLIGHT_G', colorHighlightBuffer.subarray(1, 2));
+    this.patchSymbol('COLOR_C_BUTTONS_HIGHLIGHT_B', colorHighlightBuffer.subarray(2, 3));
+
+    /* OoT icon_item_static */
+    const ootIconItemStatic = this.builder.fileByNameRequired('oot/icon_item_static');
+    ootIconItemStatic.data.set(colorBuffer, 0x886fc);
+  }
+
   async run(): Promise<string | null> {
     const c = this.opts.cosmetics;
 
@@ -377,6 +397,7 @@ class CosmeticsPass {
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
     const colorDpad = resolveColor(random, c.dpad);
     const colorFileSelect = resolveColor(random, c.fileSelect);
+    const colorCButtons = resolveColor(random, c.cButtons);
 
     /* Patch hold target */
     if (c.defaultHold) {
@@ -410,6 +431,9 @@ class CosmeticsPass {
 
     /* Patch OoT Mirror Shield */
     if (colorOotShieldMirror !== null) this.patchOotShieldMirror(colorOotShieldMirror);
+
+    /* Patch button colors */
+    if (colorCButtons !== null) this.patchCButtons(colorCButtons);
 
     /* Patch D-Pad */
     if (colorDpad !== null) {

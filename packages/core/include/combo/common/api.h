@@ -19,6 +19,10 @@ typedef enum BombersNotebookPerson BombersNotebookPerson;
 typedef enum BombersNotebookEvent BombersNotebookEvent;
 typedef void (*ActorShadowFunc)(struct Actor* actor, struct Lights* mapper, PlayState* play);
 int Player_IsGoronOrGoronTunic(Player* player);
+Gfx* Gfx_DrawTexRectIA8_DropShadow(Gfx* gfx, void* texture, s16 textureWidth, s16 textureHeight, s16 rectLeft,
+                                   s16 rectTop, s16 rectWidth, s16 rectHeight, u16 dsdx, u16 dtdy, s16 r, s16 g, s16 b,
+                                   s16 a);
+Gfx* Gfx_DrawRect_DropShadow(Gfx* gfx, s16 rectLeft, s16 rectTop, s16 rectWidth, s16 rectHeight, u16 dsdx, u16 dtdy, s16 r, s16 g, s16 b, s16 a);
 #endif
 
 int TitleCard_Clear(PlayState* play, TitleCardContext* titleCtx);

@@ -60,6 +60,22 @@ const ALIASES_OOT = [
   'dummy/bump_texture_static',
 ];
 
+const KNOWN_VRAM: {[k: string]: { oot: [number, number] } | { mm: [number, number] }} = {
+  'oot/boot': { oot: [0x80000460, 0x80006830] },
+  'oot/code': { oot: [0x800110a0, 0x80114dd0] },
+  'oot/ovl_title': { oot: [0x80800000, 0x808009c0] },
+  'oot/ovl_file_choose': { oot: [0x80803880, 0x8081379f] },
+  'oot/ovl_player_actor': { oot: [0x808301c0, 0x80856720] },
+  'oot/ovl_kaleido_scope': { oot: [0x808137c0, 0x8083014f] },
+  'mm/boot': { mm: [0x80080060, 0x8009b110] },
+  'mm/code': { mm: [0x800a5ac0, 0x801e3fa0] },
+  'mm/ovl_title': { mm: [0x80800000, 0x80800910] },
+  'mm/ovl_opening': { mm: [0x80803df0, 0x80804010] },
+  'mm/ovl_file_choose': { mm: [0x80804010, 0x80814e80] },
+  'mm/ovl_player_actor': { mm: [0x8082da90, 0x80862af0] },
+  'mm/ovl_kaleido_scope': { mm: [0x808160a0, 0x8082da50] },
+};
+
 function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder) {
   const config = CONFIG[game];
   const rom = roms[game].rom;
@@ -76,7 +92,8 @@ function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder
     }
     const data = rom.subarray(uncompressedEntry.virtStart, uncompressedEntry.virtEnd);
     const type = compressedEntry.physEnd === 0 ? 'uncompressed' : 'compressed';
-    romBuilder.addFile({ type, data, name, game, index: i, vaddr: uncompressedEntry.virtStart });
+    const vram = KNOWN_VRAM[name];
+    romBuilder.addFile({ type, data, name, game, index: i, vram, vaddr: uncompressedEntry.virtStart });
   }
 }
 

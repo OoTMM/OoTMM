@@ -41,3 +41,17 @@ PATCH_END
 PATCH_START 0x80120f88
   j Interface_AfterDraw
 PATCH_END
+
+/* Patch the C button arrows colors */
+LoadColorCButtonsArrow:
+  la t2,kColorCButtons
+  jr ra
+   lw t2,0(t2)
+
+PATCH_START 0x8011787c
+  jal LoadColorCButtonsArrow
+PATCH_END
+
+PATCH_START 0x801179ec
+  jal LoadColorCButtonsArrow
+PATCH_END

@@ -51,3 +51,16 @@ void Interface_SkipMoonCrash(PlayState* play)
 }
 
 PATCH_CALL(0x8011d3f4, Interface_SkipMoonCrash)
+
+ALIGNED(4) u8 kColorCButtons[4] = { 255, 240, 0, 0 };
+EXPORT_SYMBOL(COLOR_C_BUTTONS, kColorCButtons);
+
+Gfx* Interface_DrawCButton(Gfx* gfx, s16 rectLeft, s16 rectTop, s16 rectWidth, s16 rectHeight, u16 dsdx, u16 dtdy, s16 r, s16 g, s16 b, s16 a)
+{
+    return Gfx_DrawRect_DropShadow(gfx, rectLeft, rectTop, rectWidth, rectHeight, dsdx, dtdy, kColorCButtons[0], kColorCButtons[1], kColorCButtons[2], a);
+}
+
+PATCH_CALL(0x8011725c, Interface_DrawCButton);
+PATCH_CALL(0x801172bc, Interface_DrawCButton);
+PATCH_CALL(0x8011731c, Interface_DrawCButton);
+PATCH_CALL(0x80117674, Interface_DrawCButton);

@@ -109,6 +109,7 @@ Actor_OfferGetItem = 0x800b8a1c;
 
 DisplayTextBox2 = 0x80151938;
 DisplayTextBox3 = 0x800e8ea0;
+Gfx_DrawRect_DropShadow = 0x8010d2d4;
 
 DrawGi_Opa0_Xlu1            = 0x800ef0f0;
 DrawGi_Opa0_Xlu12           = 0x800ef780;

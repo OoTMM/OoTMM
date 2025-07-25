@@ -55,6 +55,10 @@ export const COSMETICS = [{
   name: 'MM Fierce Deity Tunic',
   type: 'color',
 }, {
+  key: 'cButtons',
+  name: 'C-Buttons',
+  type: 'color',
+}, {
   key: 'dpad',
   name: 'D-Pad',
   type: 'color',
