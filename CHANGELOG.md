@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a small logic issue with Talon's House access.
 - Fix Red Ice despawning in MQ Ganon's Castle when shuffled.
 - Fix a bug that caused CSMC textures to be sometimes applied to unshuffled crates.
 - Fix shared songs having the game name as a suffix in some very specific cases.

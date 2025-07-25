@@ -747,7 +747,7 @@
     "Lon Lon Ranch Pots": "is_child"
     "Lon Lon Ranch Silo": "true"
     "Lon Lon Ranch Stables": "true"
-    "Lon Lon Ranch House": "is_day"
+    "Lon Lon Ranch House": "is_adult || is_day"
     "Lon Lon Ranch Grotto": "is_child"
   events:
     #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
