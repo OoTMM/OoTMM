@@ -376,6 +376,11 @@ class CosmeticsPass {
     /* OoT icon_item_static */
     const ootIconItemStatic = this.builder.fileByNameRequired('oot/icon_item_static');
     ootIconItemStatic.data.set(colorBuffer, 0x886fc);
+
+    /* GI */
+    if (this.opts.cosmetics.applyFreestandings) {
+      this.patchSymbol('COLOR_C_BUTTONS_GI', colorBuffer);
+    }
   }
 
   async run(): Promise<string | null> {

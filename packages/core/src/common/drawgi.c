@@ -1255,6 +1255,9 @@ void DrawGi_Wallet(PlayState* play, s16 index)
     CLOSE_DISPS();
 }
 
+static u8 sButtonColorC[] = { 255, 255, 0 };
+EXPORT_SYMBOL(COLOR_C_BUTTONS_GI, sButtonColorC);
+
 void DrawGi_Button(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
@@ -1267,7 +1270,7 @@ void DrawGi_Button(PlayState* play, s16 index)
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     if (drawGi->lists[0])
     {
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 0, 255);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, sButtonColorC[0], sButtonColorC[1], sButtonColorC[2], 255);
     }
     else
     {
