@@ -2094,7 +2094,7 @@
     "Front of Lone Peak Shrine": "is_winter"
     "Goron Shrine": "(soul_goron && first_day) || has_mask_goron || can_hammer"
   events:
-    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && can_carry_keg && (has_mask_goron || scarecrow_hookshot)"
+    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && can_carry_keg && (has_mask_goron || scarecrow_hookshot && has_mask_bunny || has_hover_boots && has_mask_bunny)"
     BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
