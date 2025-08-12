@@ -724,6 +724,18 @@ export const TRICKS: Tricks = {
     name: 'Powder Keg Trial without Thawing Ice using Hookshot Anywhere',
     tooltip: "With Hookshot Anywhere, it is possible to hookshot through the little gap in the left bottom corner.",
   },
+  MM_KEG_HOOKBUNNY: {
+    game: 'mm',
+    name: 'Powder Keg Trial with only Long Hookshot and Bunny Hood',
+    tooltip: "With the Strength 3 for MM and Keg usable by Human Settings enabled; you can carry the keg from Medigoron to the Racetrack Boulder with Long Hookshot via the scarecrows in both areas and throwing the keg up the slopes.",
+    linkVideo: 'https://youtu.be/4dl9OHdXMnY',
+  },
+  MM_KEG_HOVERBUNNY: {
+    game: 'mm',
+    name: 'Powder Keg Trial with only Hoverboots and Bunny Hood',
+    tooltip: "With the Strength 3 for MM and Keg usable by Human Settings enabled; you can side hop up the slopes in both areas while throwing the keg up the slopes as you go.",
+    linkVideo: 'https://youtu.be/la4GsyXEPJc?si=YKvpyWUpxi3cc7QZ',
+  },
   MM_STT_LAVA_SWITCH_HAMMER: {
     game: 'mm',
     name: 'Stone Tower Temple Lava Room switch without Goron',
