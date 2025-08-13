@@ -11,8 +11,13 @@ RUN apt-get update \
     ninja-build \
     mips64-ultra-elf-gcc \
     git \
-    zsh \
-    tig \
-    tree \
+    zip \
     inotify-tools \
-  && corepack enable
+    curl \
+    wget \
+  && corepack enable \
+  && curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip \
+  && mkdir -p /tmp/aws \
+  && unzip /tmp/awscliv2.zip -d /tmp/aws \
+  && /tmp/aws/aws/install \
+  && rm -rf /tmp/awscliv2.zip /tmp/aws
