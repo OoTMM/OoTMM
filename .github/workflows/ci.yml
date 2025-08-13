@@ -2,16 +2,17 @@ name: Continuous Integration Workflow
 
 on: [push, pull_request, workflow_dispatch]
 
-env:
-  GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-
 jobs:
   ci:
     runs-on: ubuntu-latest
+    container: ghcr.io/ootmm/ootmm-ci:1.0.0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Mark the directory as safe
+        run: git config --global --add safe.directory $PWD
 
       - name: Extract Version (Tag)
         if: ${{ contains(github.ref, 'refs/tags/') }}
@@ -30,25 +31,6 @@ jobs:
           echo "ENV_KEYS=dev" >> $GITHUB_ENV
           echo "NX_CMD=affected" >> $GITHUB_ENV
           echo "DEPLOY_DEV=1" >> $GITHUB_ENV
-
-      - name: Add n64 toolchain repo
-        uses: myci-actions/add-deb-repo@10
-        with:
-          repo: deb http://practicerom.com/public/packages/debian staging main
-          repo-name: practicerom
-          keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
-
-      - name: Install system dependencies
-        run: sudo apt-get install n64-ultra cmake ninja-build
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: 'pnpm'
 
       - name: Install Third Party dependencies
         run: ./scripts/install-deps.sh
