@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Random Settings not taking all hints settings into account, and only using default settings for the ignored ones.
 - Fix a small logic issue with Talon's House access.
 - Fix Red Ice despawning in MQ Ganon's Castle when shuffled.
 - Fix a bug that caused CSMC textures to be sometimes applied to unshuffled crates.

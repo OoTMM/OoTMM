@@ -53,6 +53,14 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.mode = oldSettings.mode;
   base.players = oldSettings.players;
   base.teams = oldSettings.teams;
+  base.probabilisticFoolish = oldSettings.probabilisticFoolish;
+  base.noPlandoHints = oldSettings.noPlandoHints;
+  base.extraHintRegions = oldSettings.extraHintRegions;
+  base.hintPathDungeons = oldSettings.hintPathDungeons;
+  base.hintPathBoss = oldSettings.hintPathBoss;
+  base.hintPathEndBoss = oldSettings.hintPathEndBoss;
+  base.hintPathEvents = oldSettings.hintPathEvents;
+  base.hintImportance = oldSettings.hintImportance;
 
   /* Main Settings */
   base.goal = sampleWeighted(random, { both: 10, triforce: 3, triforce3: 3 });
