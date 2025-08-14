@@ -2075,7 +2075,7 @@
     "Goron Race": "event(TRIAL_BOULDER) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
     "Near Ramp Grotto": "true"
   events:
-    TRIAL_BOULDER: "can_use_keg || (setting(erOverworld, none) && event(POWDER_KEG_TRIAL) && (has_mask_goron || has_mask_bunny))"
+    TRIAL_BOULDER: "can_use_keg || (setting(erOverworld, none) && event(POWDER_KEG_TRIAL))"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
   events:
@@ -2094,7 +2094,7 @@
     "Front of Lone Peak Shrine": "is_winter"
     "Goron Shrine": "(soul_goron && first_day) || has_mask_goron || can_hammer"
   events:
-    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && can_carry_keg && (has_mask_goron || scarecrow_hookshot)"
+    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && can_carry_keg && (has_mask_goron || (trick(MM_KEG_HOOKBUNNY) && scarecrow_hookshot && has_mask_bunny)  || (trick(MM_KEG_HOVERBUNNY) && has_hover_boots && has_mask_bunny))"
     BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
