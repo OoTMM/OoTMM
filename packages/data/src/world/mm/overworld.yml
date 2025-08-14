@@ -2074,6 +2074,8 @@
     "Twin Islands": "true"
     "Goron Race": "event(TRIAL_BOULDER) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
     "Near Ramp Grotto": "true"
+  events:
+    TRIAL_BOULDER: "can_use_keg || (setting(erOverworld, none) && event(POWDER_KEG_TRIAL))"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
   events:
