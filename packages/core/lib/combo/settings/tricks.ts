@@ -488,6 +488,12 @@ export const TRICKS: Tricks = {
     tooltip: "Use Goron's ground pound in front of the Tourist Center door to land on the roof and reach the heart piece",
     linkVideo: 'https://www.youtube.com/watch?v=HvH5NaTsf5w&list=PLuteuW9RqeG0NfhzoiZlJ1HQM2BdHftzg&index=5&ab_channel=Pokemongenius88',
   },
+  MM_GBC_COW_LIKELIKE_ELEVATOR: {
+    game: 'mm',
+    name: 'Great Bay Coast Cow Grotto LikeLike Elevator',
+    tooltip: "At night time draw a LikeLike lose to the Cow Grotto ledge to be shot on top of the ledge",
+    linkVideo: 'https://youtu.be/AJpoSs5t_qQ'
+  },
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: {
     game: 'mm',
     name: 'Zora Hall Scrub HP without Deku',
