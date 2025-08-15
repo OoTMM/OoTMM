@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [29.0] - 2025-08-15
+
 ### Added
 
 <!-- - Cosmetics setting to enable BGM during night time. -->
@@ -1583,7 +1585,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v28.2...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v29.0...HEAD
+[29.0]: https://github.com/OoTMM/OoTMM/compare/v28.2...v29.0
 [28.2]: https://github.com/OoTMM/OoTMM/compare/v28.1...v28.2
 [28.1]: https://github.com/OoTMM/OoTMM/compare/v28.0...v28.1
 [28.0]: https://github.com/OoTMM/OoTMM/compare/v27.0...v28.0
