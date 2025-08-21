@@ -95,7 +95,7 @@ static void applyStartingItems(void)
                 return;
             for (u16 j = 0; j < count; ++j)
             {
-                gi = comboProgressive(gi, 0);
+                gi = Item_Progressive(gi, 0);
                 comboAddItemRaw(NULL, gi);
             }
         }

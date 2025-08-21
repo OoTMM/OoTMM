@@ -385,7 +385,7 @@ static s16 progressiveExtraSwordOot(void)
     return GI_OOT_SWORD_GILDED;
 }
 
-s16 comboProgressive(s16 gi, int ovflags)
+s16 Item_Progressive(s16 gi, int ovflags)
 {
     if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
     {

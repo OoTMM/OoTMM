@@ -235,7 +235,7 @@ void comboPlayItemFanfare(s16 gi, int isShort);
 
 s16 comboItemResolve(PlayState* play, s16 gi);
 
-s16 comboProgressive(s16 gi, int ovflags);
+s16 Item_Progressive(s16 gi, int ovflags);
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q);
 

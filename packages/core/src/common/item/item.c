@@ -329,7 +329,10 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     dst->giRaw = gi;
 
     if (Item_IsPlayerSelf(dst->player))
-        gi = comboProgressive(gi, q->ovFlags);
+    {
+        gi = Item_Progressive(gi, q->ovFlags);
+        dst->cloakGi = Item_Progressive(dst->cloakGi, q->ovFlags);
+    }
 
     if (neg)
         gi = -gi;
