@@ -98,13 +98,20 @@ static float Draw_GetCurrentRotationY(void)
 
 void Draw_GiCloaked(PlayState* play, Actor* actor, s16 gi, s16 cloakGi, int flags)
 {
+    /* TODO: I don't fully understand why this works */
+#if defined(GAME_MM)
+    static const int kRotFactor = 1;
+#else
+    static const int kRotFactor = 2;
+#endif
+
     float rot;
 
     if (cloakGi && gi != GI_MM_SOLD_OUT)
     {
         gi = cloakGi;
         rot = Draw_GetCurrentRotationY();
-        Matrix_RotateY(-rot * 2, MTXMODE_APPLY);
+        Matrix_RotateY(-rot * kRotFactor, MTXMODE_APPLY);
     }
 
     Draw_Gi(play, actor, gi, flags);

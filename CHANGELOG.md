@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Cloaked items are now progressive when relevant.
 
+### Fixed
+
+- Fix cloaked items rotation in MM.
+
 ## [29.0] - 2025-08-15
 
 ### Added
