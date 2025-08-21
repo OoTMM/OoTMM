@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Cloaked items are now progressive when relevant.
+
 ## [29.0] - 2025-08-15
 
 ### Added
