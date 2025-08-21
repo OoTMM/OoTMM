@@ -2579,7 +2579,7 @@
     "Zora Cape": "true"
     "Ocean Spider House": "true"
     "Great Bay Grotto": "true"
-    "GBC Near Cow Grotto": "can_hookshot"
+    "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
     "Great Bay Coast Water Void": "true"
     "Great Bay Coast Butterflies": "has_sticks"
   events:
