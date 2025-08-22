@@ -1,0 +1,18 @@
+"Temple of Time":
+  region: TEMPLE_OF_TIME
+  exits:
+    "Temple of Time Entryway": "true"
+    "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
+  events:
+    DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play_time"
+    TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && (has_sword_master || !setting(timeTravelSword))"
+    TIME_TRAVEL_AT_WILL: "!setting(ageChange, none) && event(TIME_TRAVEL) && can_play_time && (!setting(ageChange, oot) || has_ocarina_of_time)"
+  locations:
+    "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
+    "Temple of Time Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK) && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
+    "Temple of Time Light Arrows": "is_adult && soul_npc(SOUL_NPC_SHEIK) && soul_npc(SOUL_NPC_ZELDA) && ((setting(lacs, vanilla) && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)) || (setting(lacs, custom) && special(LACS)))"
+
+"Sacred Realm":
+  region: SACRED_REALM
+  locations:
+    "Temple of Time Medallion": "true"
