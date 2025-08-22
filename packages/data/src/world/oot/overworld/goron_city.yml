@@ -5,6 +5,7 @@
     "Goron City": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
   events:
     GORON_CITY_SHORTCUT: "has_explosives_or_hammer || can_use_din"
+
 "Goron City":
   region: GORON_CITY
   exits:
@@ -38,6 +39,7 @@
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+
 "Goron City Red Boulders":
   region: GORON_CITY
   age_change: false
@@ -47,6 +49,7 @@
     "Goron City Red Boulder 3": "true"
     "Goron City Red Boulder 4": "true"
     "Goron City Red Boulder 5": "true"
+
 "Darunia Chamber":
   region: GORON_CITY
   exits:
@@ -61,6 +64,7 @@
     "Goron City Pot Darunia Room 1": "true"
     "Goron City Pot Darunia Room 2": "true"
     "Goron City Pot Darunia Room 3": "true"
+
 "Goron Shop":
   region: ENTRANCE
   exits:
@@ -74,6 +78,7 @@
     "Goron Shop Item 6": "shop_price(0x1d) && soul_goron_shopkeeper"
     "Goron Shop Item 7": "shop_price(0x1e) && soul_goron_shopkeeper"
     "Goron Shop Item 8": "shop_price(0x1f) && soul_goron_shopkeeper"
+
 "Goron City Grotto":
   region: ENTRANCE
   age_change: false
