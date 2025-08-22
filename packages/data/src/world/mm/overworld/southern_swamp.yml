@@ -166,3 +166,22 @@
     "Southern Swamp Owl Statue": "has_sticks || has_sword"
     "Southern Swamp Grass Owl 1": "true"
     "Southern Swamp Grass Owl 2": "true"
+
+"Swamp Canopy Front":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Back": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
+    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
+    "Near Swamp Grotto": "true"
+    "Deku Palace Cliff": "true"
+    "Swamp Canopy Back": "has(MASK_DEKU) || short_hook_anywhere"
+
+"Swamp Canopy Back":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || has_hover_boots || can_use_nayru) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
+    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_use_nayru || has_hover_boots"
+    "Woodfall": "true"
+    "Swamp Canopy Front": "short_hook_anywhere"
+  locations:
+    "Southern Swamp Song of Soaring": "has(MASK_DEKU) || short_hook_anywhere || (has_hover_boots && has_mask_bunny && (has_weapon || has_explosives) && trick(MM_SOARING_HOVERS)) || (has_mask_zora && has_explosives && trick(MM_SOARING_ZORA))"
