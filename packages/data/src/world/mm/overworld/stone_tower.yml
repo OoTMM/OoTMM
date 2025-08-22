@@ -1,0 +1,116 @@
+"Stone Tower":
+  region: STONE_TOWER
+  exits:
+    "Ikana Canyon": "true"
+    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || (setting(openDungeonsMm, ST) && (can_hookshot || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))))"
+    "Stone Tower Lower Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot) || hookshot_anywhere"
+    "Stone Tower Upper Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere) || hookshot_anywhere"
+  locations:
+    "Stone Tower Pot Climb 1": "can_hookshot_short"
+    "Stone Tower Pot Climb 2": "can_hookshot_short"
+
+"Stone Tower Top":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+    "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || setting(openDungeonsMm, ST)"
+    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || scarecrow_hookshot || hookshot_anywhere"
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere || (has_hover_boots && has_weapon)"
+    "Owl Stone Tower": "true"
+
+"Stone Tower Front of Temple":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+    "Stone Tower Top": "(!setting(jpLayouts, StoneTower) && (can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere))) || can_hookshot || setting(openDungeonsMm, ST)"
+    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows && !setting(jpLayouts, StoneTower)) || setting(openDungeonsMm, ST)"
+    "Stone Tower Temple": "true"
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || is_tall || scarecrow_hookshot || hookshot_anywhere || has_hover_boots || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
+
+"Stone Tower Lower Scarecrow Ledge":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+  events:
+    MAGIC: "true"
+    FAIRY: "true"
+    RUPEES: "(can_use_light_arrows && soul_keese) || (can_fight && soul_redead_gibdo)"
+  locations:
+    "Stone Tower Pot Lower Scarecrow 01": "true"
+    "Stone Tower Pot Lower Scarecrow 02": "true"
+    "Stone Tower Pot Lower Scarecrow 03": "true"
+    "Stone Tower Pot Lower Scarecrow 04": "true"
+    "Stone Tower Pot Lower Scarecrow 05": "true"
+    "Stone Tower Pot Lower Scarecrow 06": "true"
+    "Stone Tower Pot Lower Scarecrow 07": "true"
+    "Stone Tower Pot Lower Scarecrow 08": "true"
+    "Stone Tower Pot Lower Scarecrow 09": "true"
+    "Stone Tower Pot Lower Scarecrow 10": "true"
+    "Stone Tower Pot Lower Scarecrow 11": "true"
+    "Stone Tower Pot Lower Scarecrow 12": "true"
+
+"Stone Tower Upper Scarecrow Ledge":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+    "Stone Tower Front of Temple": "short_hook_anywhere && trick(MM_OOB_MOVEMENT)"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    FAIRY: "true"
+  locations:
+    "Stone Tower Pot Higher Scarecrow 1": "true"
+    "Stone Tower Pot Higher Scarecrow 2": "true"
+    "Stone Tower Pot Higher Scarecrow 3": "true"
+    "Stone Tower Pot Higher Scarecrow 4": "true"
+    "Stone Tower Pot Higher Scarecrow 5": "true"
+    "Stone Tower Pot Higher Scarecrow 6": "true"
+    "Stone Tower Pot Higher Scarecrow 7": "true"
+    "Stone Tower Pot Higher Scarecrow 8": "true"
+    "Stone Tower Pot Higher Scarecrow 9": "true"
+
+"Stone Tower Top Inverted":
+  region: STONE_TOWER
+  events:
+    BUGS: "true"
+  exits:
+    "Stone Tower Temple Inverted": "true"
+    "Stone Tower Top": "can_use_light_arrows || setting(openDungeonsMm, ST)"
+    "Stone Tower Top Inverted Upper": "can_use_beans || hookshot_anywhere"
+
+"Stone Tower Top Inverted Upper":
+  region: STONE_TOWER
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "true"
+    FAIRY: "true"
+  exits:
+    "Stone Tower Top Inverted": "true"
+  locations:
+    "Stone Tower Inverted Chest 1": "true"
+    "Stone Tower Inverted Chest 2": "true"
+    "Stone Tower Inverted Chest 3": "true"
+    "Stone Tower Inverted Pot 1": "true"
+    "Stone Tower Inverted Pot 2": "true"
+    "Stone Tower Inverted Pot 3": "true"
+    "Stone Tower Inverted Pot 4": "true"
+    "Stone Tower Inverted Pot 5": "true"
+
+"Owl Stone Tower":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower Top": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    FAIRY: "true"
+  locations:
+    "Stone Tower Owl Statue": "has_sticks || has_sword"
+    "Stone Tower Pot Owl Statue 1": "true"
+    "Stone Tower Pot Owl Statue 2": "true"
+    "Stone Tower Pot Owl Statue 3": "true"
+    "Stone Tower Pot Owl Statue 4": "true"
