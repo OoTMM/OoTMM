@@ -31,19 +31,7 @@
     "Milk Road Grass 1": "true"
     "Milk Road Grass 2": "true"
     "Milk Road Grass 3": "true"
-"Owl Swamp":
-  region: SOUTHERN_SWAMP
-  exits:
-    "Swamp Front": "can_reset_time"
-  events:
-    STICKS: "true"
-    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
-    FAIRY: "true"
-    WATER: "true"
-  locations:
-    "Southern Swamp Owl Statue": "has_sticks || has_sword"
-    "Southern Swamp Grass Owl 1": "true"
-    "Southern Swamp Grass Owl 2": "true"
+
 "Owl Woodfall":
   region: WOODFALL
   exits:

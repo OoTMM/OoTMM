@@ -152,3 +152,17 @@
     "Swamp Potion Shop Item 2": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0e) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 3": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0f) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Rupee": "true"
+
+"Owl Swamp":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "can_reset_time"
+  events:
+    STICKS: "true"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    FAIRY: "true"
+    WATER: "true"
+  locations:
+    "Southern Swamp Owl Statue": "has_sticks || has_sword"
+    "Southern Swamp Grass Owl 1": "true"
+    "Southern Swamp Grass Owl 2": "true"
