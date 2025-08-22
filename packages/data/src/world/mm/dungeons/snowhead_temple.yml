@@ -4,6 +4,7 @@
     "WARP_SONGS": "true"
     "Snowhead": "can_reset_time"
     "Snowhead Temple Entrance": "can_reset_time_dungeon"
+
 "Snowhead Temple Entrance":
   dungeon: SH
   exits:
@@ -17,6 +18,7 @@
     "Snowhead Temple Icicle Entrance 3": "break_icicle"
     "Snowhead Temple Icicle Entrance 4": "break_icicle"
     "Snowhead Temple Icicle Entrance 5": "break_icicle"
+
 "Snowhead Temple Main":
   dungeon: SH
   events:
@@ -34,6 +36,7 @@
     "Snowhead Temple Pot Entrance 2": "true"
     "Snowhead Temple Icicle Entrance After Block 1": "break_icicle"
     "Snowhead Temple Icicle Entrance After Block 2": "break_icicle"
+
 "Snowhead Temple Bridge Front":
   dungeon: SH
   events:
@@ -55,6 +58,7 @@
     "Snowhead Temple Pot Bridge Room 5": "true"
     "Snowhead Temple Small Snowball Bridge Room 1": "true"
     "Snowhead Temple Small Snowball Bridge Room 2": "true"
+
 "Snowhead Temple Bridge Back":
   dungeon: SH
   exits:
@@ -68,6 +72,7 @@
     "Snowhead Temple Pot Bridge Room After 1": "true"
     "Snowhead Temple Pot Bridge Room After 2": "true"
     "Snowhead Temple Crate Bridge": "true"
+
 "Snowhead Temple Map Room":
   dungeon: SH
   exits:
@@ -82,6 +87,7 @@
     "Snowhead Temple Crate Map Room 3": "true"
     "Snowhead Temple Crate Map Room 4": "true"
     "Snowhead Temple Crate Map Room 5": "true"
+
 "Snowhead Temple Map Room Upper":
   dungeon: SH
   exits:
@@ -99,6 +105,7 @@
     "Snowhead Temple Pot Central Room Scarecrow 2": "true"
     "Snowhead Temple Pot Central Room Level 2 1": "true"
     "Snowhead Temple Pot Central Room Level 2 2": "true"
+
 "Snowhead Temple Center Level 1":
   dungeon: SH
   exits:
@@ -111,6 +118,7 @@
   locations:
     "Snowhead Temple Pot Central Room Scarecrow 1": "scarecrow_hookshot || short_hook_anywhere"
     "Snowhead Temple Pot Central Room Scarecrow 2": "scarecrow_hookshot || short_hook_anywhere"
+
 "Snowhead Temple Pillars Room Upper":
   dungeon: SH
   exits:
@@ -127,6 +135,7 @@
     "Snowhead Temple Pot Pillars Room Upper 4": "true"
     "Snowhead Temple Pot Pillars Room Upper 5": "true"
     "Snowhead Temple Pot Pillars Room Upper 6": "true"
+
 "Snowhead Temple Pillars Room Lower":
   dungeon: SH
   exits:
@@ -140,6 +149,7 @@
     "Snowhead Temple Pot Pillars Room Lower 5": "true"
     "Snowhead Temple Pot Pillars Room Lower 6": "true"
     "Snowhead Temple Pot Pillars Room Lower 7": "true"
+
 "Snowhead Temple Center Level 0":
   dungeon: SH
   exits:
@@ -162,6 +172,7 @@
     "Snowhead Temple Grass 08": "true"
     "Snowhead Temple Grass 09": "true"
     "Snowhead Temple Grass 10": "true"
+
 "Snowhead Temple Block Room":
   dungeon: SH
   exits:
@@ -174,6 +185,7 @@
     "Snowhead Temple Block Room": "true"
     "Snowhead Temple Pot Block Room 1": "true"
     "Snowhead Temple Pot Block Room 2": "true"
+
 "Snowhead Temple Block Room Upper":
   dungeon: SH
   exits:
@@ -184,6 +196,7 @@
     "Snowhead Temple Block Room Ledge": "event(SNOWHEAD_PUSH_BLOCK)"
     "Snowhead Temple Flying Pot 1": "soul_flying_pot"
     "Snowhead Temple Flying Pot 2": "soul_flying_pot"
+
 "Snowhead Temple Compass Room":
   dungeon: SH
   exits:
@@ -200,6 +213,7 @@
     "Snowhead Temple Pot Compass Room 3": "true"
     "Snowhead Temple Pot Compass Room 4": "true"
     "Snowhead Temple Pot Compass Room 5": "true"
+
 "Snowhead Temple Icicles":
   dungeon: SH
   exits:
@@ -218,6 +232,7 @@
     "Snowhead Temple Small Snowball Icicles Room 3": "is_tall || has_arrows || short_hook_anywhere"
     "Snowhead Temple Small Snowball Icicles Room 4": "true"
     "Snowhead Temple Small Snowball Icicles Room 5": "true"
+
 "Snowhead Temple Dual Switches Locked":
   dungeon: SH
   exits:
@@ -228,6 +243,7 @@
     "Snowhead Temple SF Dual Switches": "can_use_lens && (((has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)) || hookshot_anywhere)"
     "Snowhead Temple Pot Dual Switches 1": "true"
     "Snowhead Temple Pot Dual Switches 2": "true"
+
 "Snowhead Temple Dual Switches Unlocked":
   dungeon: SH
   exits:
@@ -238,6 +254,7 @@
     "Snowhead Temple SF Dual Switches": "can_use_lens && ((has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY))"
     "Snowhead Temple Crate Dual Switches 1": "true"
     "Snowhead Temple Crate Dual Switches 2": "true"
+
 "Snowhead Temple Center Level 2 Dual":
   dungeon: SH
   exits:
@@ -248,6 +265,7 @@
   locations:
     "Snowhead Temple Pot Central Room Scarecrow 1": "true"
     "Snowhead Temple Pot Central Room Scarecrow 2": "true"
+
 "Snowhead Temple Fire Arrow":
   dungeon: SH
   exits:
@@ -258,6 +276,7 @@
   locations:
     "Snowhead Temple Fire Arrow": "soul_enemy(SOUL_ENEMY_WIZZROBE)"
     "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon)) && can_use_lens"
+
 "Snowhead Temple Center Level 3 Snow":
   dungeon: SH
   exits:
@@ -274,6 +293,7 @@
     "Snowhead Temple Small Snowball Central Room 1": "true"
     "Snowhead Temple Small Snowball Central Room 2": "true"
     "Snowhead Temple Small Snowball Central Room 3": "true"
+
 "Snowhead Temple Center Level 3 Iced":
   dungeon: SH
   events:
@@ -290,6 +310,7 @@
     "Snowhead Temple Small Snowball Central Room 4": "true"
     "Snowhead Temple Small Snowball Central Room 5": "true"
     "Snowhead Temple Small Snowball Central Room 6": "true"
+
 "Snowhead Temple Snow Room":
   dungeon: SH
   exits:
@@ -309,6 +330,7 @@
     "Snowhead Temple Icicle Snow Room 1": "break_icicle"
     "Snowhead Temple Icicle Snow Room 2": "break_icicle"
     "Snowhead Temple Icicle Snow Room 3": "break_icicle"
+
 "Snowhead Temple Dinolfos Room":
   dungeon: SH
   exits:
@@ -321,6 +343,7 @@
   locations:
     "Snowhead Temple SF Dinolfos 1": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
     "Snowhead Temple SF Dinolfos 2": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
+
 "Snowhead Temple Boss Key Room":
   dungeon: SH
   exits:
@@ -340,6 +363,7 @@
     "Snowhead Temple Pot Wizzrobe 5": "true"
     "Snowhead Temple Icicle Central Room Near Boss Key 1": "break_icicle"
     "Snowhead Temple Icicle Central Room Near Boss Key 2": "break_icicle"
+
 "Snowhead Temple Center Level 4":
   dungeon: SH
   exits:
@@ -358,43 +382,8 @@
     "Snowhead Temple Icicle Central Room Near Boss 2": "(goron_fast_roll || hookshot_anywhere) && break_icicle"
     "Snowhead Temple Icicle Central Room Near Boss 3": "(goron_fast_roll || hookshot_anywhere) && break_icicle"
     "Snowhead Temple Icicle Central Room Near Boss 4": "(goron_fast_roll || hookshot_anywhere) && break_icicle"
+
 "Snowhead Temple Boss Access":
   dungeon: SH
   exits:
-    "Snowhead Temple Boss": "true"
-"Snowhead Temple Boss":
-  boss: true
-  dungeon: SH
-  events:
-    MAGIC: "true"
-    ARROWS: "true"
-    BOSS_GOHT: "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range"
-  exits:
-    "Snowhead Temple After Boss": "event(BOSS_GOHT)"
-    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
-  locations:
-    "Snowhead Temple Boss Pot Early 1": "true"
-    "Snowhead Temple Boss Pot Early 2": "true"
-    "Snowhead Temple Boss Pot Early 3": "true"
-    "Snowhead Temple Boss Pot Early 4": "true"
-    "Snowhead Temple Boss Pot 01": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 02": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 03": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 04": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 05": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 06": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 07": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 08": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 09": "can_use_fire_short_range || short_hook_anywhere"
-    "Snowhead Temple Boss Pot 10": "can_use_fire_short_range || short_hook_anywhere"
-"Snowhead Temple After Boss":
-  boss: true
-  dungeon: SH
-  exits:
-    "Oath to Order": "true"
-  events:
-    MAGIC: "true"
-    ARROWS: "true"
-  locations:
-    "Snowhead Temple Boss HC": "true"
     "Snowhead Temple Boss": "true"

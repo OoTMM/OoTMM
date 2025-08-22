@@ -4,6 +4,7 @@
     "WARP_SONGS": "true"
     "Woodfall Front of Temple": "can_reset_time"
     "Woodfall Temple Entrance": "can_reset_time_dungeon"
+
 "Woodfall Temple Entrance":
   dungeon: WF
   events:
@@ -25,6 +26,7 @@
     "Woodfall Temple Grass Entrance Ledge 1": "has(MASK_DEKU) || can_hookshot_short"
     "Woodfall Temple Grass Entrance Ledge 2": "has(MASK_DEKU) || can_hookshot_short"
     "Woodfall Temple Hive Entrance": "break_hive"
+
 "Woodfall Temple Main":
   dungeon: WF
   exits:
@@ -51,6 +53,7 @@
     "Woodfall Temple Grass Main Room 1": "true"
     "Woodfall Temple Grass Main Room 2": "true"
     "Woodfall Temple Grass Main Room 3": "true"
+
 "Woodfall Temple Water Room":
   dungeon: WF
   exits:
@@ -63,6 +66,7 @@
     "Woodfall Temple SF Water Room Beehive": "has_arrows || can_use_deku_bubble || (has(MASK_GREAT_FAIRY) && (has_bombchu || has_mask_zora || can_hookshot))"
     "Woodfall Temple Grass Water Room 1": "true"
     "Woodfall Temple Grass Water Room 2": "true"
+
 "Woodfall Temple Map Room":
   dungeon: WF
   exits:
@@ -75,6 +79,7 @@
     "Woodfall Temple Grass Map Room 3": "true"
     "Woodfall Temple Grass Map Room 4": "true"
     "Woodfall Temple Grass Map Room 5": "true"
+
 "Woodfall Temple Maze":
   dungeon: WF
   exits:
@@ -89,6 +94,7 @@
     "Woodfall Temple Pot Maze 1": "true"
     "Woodfall Temple Pot Maze 2": "true"
     "Woodfall Temple Hive Maze": "break_hive"
+
 "Woodfall Temple Compass Room":
   dungeon: WF
   exits:
@@ -99,6 +105,7 @@
     "Woodfall Temple Grass Compass Room 1": "true"
     "Woodfall Temple Grass Compass Room 2": "true"
     "Woodfall Temple Grass Compass Room 3": "true"
+
 "Woodfall Temple Dark Room":
   dungeon: WF
   exits:
@@ -107,6 +114,7 @@
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Dark Chest": "soul_enemy(SOUL_ENEMY_BOE)"
+
 "Woodfall Temple Pits Room":
   dungeon: WF
   events:
@@ -128,6 +136,7 @@
     "Woodfall Temple Grass Pits Room 09": "true"
     "Woodfall Temple Grass Pits Room 10": "true"
     "Woodfall Temple Grass Pits Room 11": "true"
+
 "Woodfall Temple Main Ledge":
   dungeon: WF
   exits:
@@ -144,6 +153,7 @@
     "Woodfall Temple SF Main Bubble": "true"
     "Woodfall Temple Pot Main Room Upper 1": "true"
     "Woodfall Temple Pot Main Room Upper 2": "true"
+
 "Woodfall Temple Water Room Upper":
   dungeon: WF
   exits:
@@ -158,6 +168,7 @@
     "Woodfall Temple Pot Water Room 2": "true"
     "Woodfall Temple Pot Water Room 3": "true"
     "Woodfall Temple Pot Water Room 4": "true"
+
 "Woodfall Temple Bow Room":
   dungeon: WF
   exits:
@@ -165,11 +176,13 @@
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Bow": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
+
 "Woodfall Temple Boss Key Room":
   dungeon: WF
   exits:
     "Woodfall Temple Boss Key Room Cage": "soul_enemy(SOUL_ENEMY_GEKKO) && has_arrows && (has(MASK_DEKU) || has_mask_goron || can_hammer || has_explosives)"
     "WARP_SONGS": "true"
+
 "Woodfall Temple Boss Key Room Cage":
   dungeon: WF
   exits:
@@ -182,6 +195,7 @@
     "Woodfall Temple Pot Miniboss Room 2": "true"
     "Woodfall Temple Pot Miniboss Room 3": "true"
     "Woodfall Temple Pot Miniboss Room 4": "true"
+
 "Woodfall Temple Pre-Boss":
   dungeon: WF
   exits:
@@ -201,6 +215,7 @@
     "Woodfall Temple Rupee Lower 2": "true"
     "Woodfall Temple Rupee Lower 3": "true"
     "Woodfall Temple Rupee Lower 4": "true"
+
 "Woodfall Temple Pre-Boss Ledge":
   dungeon: WF
   exits:
@@ -211,6 +226,7 @@
     "Woodfall Temple Pot Pre-Boss 2": "true"
     "Woodfall Temple Rupee Upper Left": "has_mask_zora || short_hook_anywhere || (can_use_ice_arrows && trick(MM_WFT_RUPEES_ICE)) || has_hover_boots"
     "Woodfall Temple Rupee Upper Right": "has(MASK_DEKU) || has_mask_zora || hookshot_anywhere || (can_use_ice_arrows && trick(MM_WFT_RUPEES_ICE)) || has_hover_boots"
+
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:
@@ -218,40 +234,8 @@
   exits:
     "Woodfall": "true"
     "WARP_SONGS": "true"
+
 "Woodfall Temple Boss Access":
   dungeon: WF
   exits:
-    "Woodfall Temple Boss": "true"
-"Woodfall Temple Boss":
-  boss: true
-  dungeon: WF
-  events:
-    BOSS_ODOLWA: "soul_boss(SOUL_BOSS_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"
-  exits:
-    "Woodfall Temple After Boss": "event(BOSS_ODOLWA)"
-    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
-  locations:
-    "Woodfall Temple Boss Grass 01": "true"
-    "Woodfall Temple Boss Grass 02": "true"
-    "Woodfall Temple Boss Grass 03": "true"
-    "Woodfall Temple Boss Grass 04": "true"
-    "Woodfall Temple Boss Grass 05": "true"
-    "Woodfall Temple Boss Grass 06": "true"
-    "Woodfall Temple Boss Grass 07": "true"
-    "Woodfall Temple Boss Grass 08": "true"
-    "Woodfall Temple Boss Grass 09": "true"
-    "Woodfall Temple Boss Grass 10": "true"
-    "Woodfall Temple Boss Grass 11": "true"
-    "Woodfall Temple Boss Grass 12": "true"
-    "Woodfall Temple Boss Grass 13": "true"
-    "Woodfall Temple Boss Grass 14": "true"
-    "Woodfall Temple Boss Grass 15": "true"
-    "Woodfall Temple Boss Grass 16": "true"
-"Woodfall Temple After Boss":
-  boss: true
-  dungeon: WF
-  exits:
-    "Oath to Order": "true"
-  locations:
-    "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"

@@ -4,6 +4,7 @@
     "WARP_SONGS": "true"
     "Zora Cape Peninsula": "can_reset_time && (can_hookshot || short_hook_anywhere)"
     "Great Bay Temple Entrance": "can_reset_time_dungeon"
+
 "Great Bay Temple Entrance":
   dungeon: GB
   events:
@@ -26,6 +27,7 @@
     "Great Bay Temple Barrel Entrance 6": "true"
     "Great Bay Temple Barrel Entrance 7": "true"
     "Great Bay Temple Barrel Entrance 8": "true"
+
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:
@@ -42,6 +44,7 @@
     "Great Bay Temple Rupee Entrance 3": "true"
     "Great Bay Temple Rupee Entrance 4": "true"
     "Great Bay Temple Rupee Entrance 5": "true"
+
 "Great Bay Temple Central Room":
   dungeon: GB
   exits:
@@ -59,6 +62,7 @@
     "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || (underwater_walking_strict && has_mask_blast))) || (underwater_walking_strict && (has_mask_blast || has_arrows) && trick(MM_GBT_CENTER_POT_IRONS))"
     "Great Bay Temple Pot Central Room 1": "true"
     "Great Bay Temple Pot Central Room 2": "true"
+
 "Great Bay Temple Map Room":
   dungeon: GB
   events:
@@ -82,6 +86,7 @@
     "Great Bay Temple Pot Map Room Water 6": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 7": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 8": "underwater_walking || hookshot_anywhere"
+
 "Great Bay Temple Baba Room":
   dungeon: GB
   exits:
@@ -89,6 +94,7 @@
     "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Baba Chest": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has_mask_blast && short_hook_anywhere))"
+
 "Great Bay Temple Compass Room":
   dungeon: GB
   events:
@@ -118,6 +124,7 @@
     "Great Bay Temple Icicle Compass Room 3": "can_use_ice_arrows && break_icicle"
     "Great Bay Temple Icicle Compass Room 4": "can_use_ice_arrows && break_icicle"
     "Great Bay Temple Icicle Compass Room 5": "can_use_ice_arrows && break_icicle"
+
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:
@@ -131,6 +138,7 @@
     "Great Bay Temple Pot Red Pipe Before Wart 2": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Red Pipe Before Wart 3": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Red Pipe Before Wart 4": "underwater_walking || hookshot_anywhere"
+
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
@@ -160,6 +168,7 @@
     "Great Bay Temple Pot Before Wart 10": "true"
     "Great Bay Temple Pot Before Wart 11": "true"
     "Great Bay Temple Pot Before Wart 12": "true"
+
 "Great Bay Temple Red Pipe 2":
   dungeon: GB
   exits:
@@ -179,6 +188,7 @@
     "Great Bay Temple Barrel Chu Room 3": "true"
     "Great Bay Temple Barrel Chu Room 4": "true"
     "Great Bay Temple Barrel Chu Room 5": "true"
+
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
@@ -203,6 +213,7 @@
     "Great Bay Temple Crate Before Boss Key 14": "true"
     "Great Bay Temple Crate Before Boss Key 15": "true"
     "Great Bay Temple Crate Before Boss Key 16": "true"
+
 "Great Bay Temple After Boss Key":
   dungeon: GB
   exits:
@@ -211,6 +222,7 @@
     "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Boss Key": "true"
+
 "Great Bay Temple Green Pipe 1":
   dungeon: GB
   exits:
@@ -229,6 +241,7 @@
     "Great Bay Temple Barrel Green Pipe 1 3": "can_use_ice_arrows"
     "Great Bay Temple Rupee Hookshot 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Temple Rupee Hookshot 2": "can_hookshot || short_hook_anywhere"
+
 "Great Bay Temple Green Pipe 2":
   dungeon: GB
   exits:
@@ -247,6 +260,7 @@
     "Great Bay Temple Pot Green Pipe 2 8": "(can_dive_small && (has_arrows || has_bombchu)) || underwater_walking || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Barrel Green Pipe 2 1": "true"
     "Great Bay Temple Barrel Green Pipe 2 2": "true"
+
 "Great Bay Temple Green Pipe 3":
   dungeon: GB
   exits:
@@ -268,6 +282,7 @@
     "Great Bay Temple Crate Green Pipe 5": "true"
     "Great Bay Temple Crate Green Pipe 6": "true"
     "Great Bay Temple Crate Green Pipe 7": "true"
+
 "Great Bay Temple Pre-Boss":
   dungeon: GB
   exits:
@@ -284,36 +299,8 @@
     "Great Bay Temple Pot Pre-Boss 6": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Pre-Boss 7": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Pre-Boss 8": "underwater_walking || hookshot_anywhere"
+
 "Great Bay Temple Boss Access":
   dungeon: GB
   exits:
     "Great Bay Temple Boss": "true"
-"Great Bay Temple Boss":
-  boss: true
-  dungeon: GB
-  events:
-    BOSS_GYORG: "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
-  exits:
-    "Great Bay Temple After Boss": "event(BOSS_GYORG)"
-    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
-  locations:
-    "Great Bay Temple Boss Pot 1": "true"
-    "Great Bay Temple Boss Pot 2": "true"
-    "Great Bay Temple Boss Pot 3": "true"
-    "Great Bay Temple Boss Pot 4": "true"
-    "Great Bay Temple Boss Pot Underwater 1": "underwater_walking"
-    "Great Bay Temple Boss Pot Underwater 2": "underwater_walking"
-    "Great Bay Temple Boss Pot Underwater 3": "underwater_walking"
-    "Great Bay Temple Boss Pot Underwater 4": "underwater_walking"
-"Great Bay Temple After Boss":
-  boss: true
-  dungeon: GB
-  exits:
-    "Oath to Order": "true"
-  locations:
-    "Great Bay Temple Boss HC": "true"
-    "Great Bay Temple Boss": "true"
-    "Great Bay Temple Boss Pot Underwater 1": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"
-    "Great Bay Temple Boss Pot Underwater 2": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"
-    "Great Bay Temple Boss Pot Underwater 3": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"
-    "Great Bay Temple Boss Pot Underwater 4": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"

@@ -81,6 +81,7 @@ const DATA_WORLD = {
   },
   mm: {
     overworld: loadYaml('world/mm/overworld/**/*.yml'),
+    boss: loadYaml('world/mm/boss/**/*.yml'),
     WF: loadYaml('world/mm/dungeons/woodfall_temple.yml'),
     SH: loadYaml('world/mm/dungeons/snowhead_temple.yml'),
     GB: loadYaml('world/mm/dungeons/great_bay_temple.yml'),
