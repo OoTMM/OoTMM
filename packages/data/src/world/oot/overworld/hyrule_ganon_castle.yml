@@ -1,0 +1,155 @@
+"Hyrule Castle":
+  region: HYRULE_CASTLE
+  age_change: false
+  time: flow
+  exits:
+    "Market Castle Entry": "true"
+    "Near Fairy Fountain Din": "has_explosives_or_hammer"
+    "Hyrule Castle Courtyard": "woke_talon_child || (has_hover_boots && (soul_talon || setting(skipZelda))) || climb_anywhere || hookshot_anywhere"
+    "Hyrule Castle Near Grotto": "true"
+  events:
+    MALON: "soul_malon"
+    TALON_CHILD: "has(CHICKEN) && soul_talon"
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "true"
+    SEEDS: "is_child"
+    MAGIC: "true"
+    BUGS: "has_bottle"
+  locations:
+    "Malon Egg": "event(MALON)"
+    "Hyrule Castle GS Tree": "gs && can_damage_skull"
+    "Hyrule Castle Grass 1": "can_cut_grass"
+    "Hyrule Castle Grass 2": "can_cut_grass"
+    # Two broken actors
+    "Hyrule Castle Pot 1": "true"
+    "Hyrule Castle Pot 2": "true"
+    "Hyrule Castle Wonder Item Torch 1": "can_use_slingshot && can_swim_or_sink"
+    "Hyrule Castle Wonder Item Torch 2": "can_use_slingshot && can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 01": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 02": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 03": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 04": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 05": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 06": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 07": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 08": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 09": "can_swim_or_sink"
+    "Hyrule Castle Wonder Item Moat 10": "can_swim_or_sink"
+    "Hyrule Castle Butterfly Pack 1 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 1 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 2 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 2 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 3 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 3 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 3 Butterfly 3": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 3": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 4": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 5": "can_use_sticks"
+  gossip:
+    "Hyrule Castle Gossip After Climb": "true"
+    "Hyrule Castle Gossip Before Moat": "true"
+
+"Hyrule Castle Near Grotto":
+  region: HYRULE_CASTLE
+  age_change: false
+  exits:
+    "Hyrule Castle": "is_child"
+    "Hyrule Castle Grotto": "is_child && hidden_grotto_storms"
+    "Ganon Castle Exterior": "is_adult"
+
+"Hyrule Castle Courtyard":
+  region: HYRULE_CASTLE
+  age_change: false
+  time: flow
+  exits:
+    "Hyrule Castle": "true"
+  events:
+    MEET_ZELDA: "soul_npc(SOUL_NPC_ZELDA)"
+  locations:
+    "Zelda's Letter": "met_zelda"
+    "Zelda's Song": "met_zelda"
+    "Castle Courtyard Wonder Item": "can_use_slingshot"
+
+"Near Fairy Fountain Din":
+  region: HYRULE_CASTLE
+  age_change: false
+  exits:
+    "Hyrule Castle": "is_child"
+    "Fairy Fountain Din": "is_child && has_explosives_or_hammer"
+    "Near Fairy Fountain Defense": "is_adult"
+
+"Fairy Fountain Din":
+  region: ENTRANCE
+  exits:
+    "Near Fairy Fountain Din": "true"
+  events:
+    MAGIC: "can_play_zelda"
+  locations:
+    "Great Fairy Din's Fire": "can_play_zelda"
+
+"Hyrule Castle Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Hyrule Castle Near Grotto": "true"
+  events:
+    RUPEES: "has_explosives_or_hammer"
+    NUTS: "has_explosives_or_hammer"
+    SEEDS: "has_explosives_or_hammer && is_child"
+    ARROWS: "has_explosives_or_hammer && is_adult"
+    BOMBS_OR_BOMBCHU: "can_hammer"
+    BUGS: "has_explosives_or_hammer && has_bottle"
+  locations:
+    "Hyrule Castle GS Grotto": "gs && has_explosives_or_hammer && can_collect_distance"
+    "Hyrule Castle Grotto Pot 1": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Pot 2": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Pot 3": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Pot 4": "has_explosives_or_hammer"
+  gossip:
+    "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
+
+"Ganon Castle Exterior":
+  region: GANON_CASTLE_EXTERIOR
+  age_change: false
+  time: night
+  events:
+    BRIDGE_OPEN: "rainbow_bridge"
+  exits:
+    "Market Castle Entry": "true"
+    "Ganon Castle Exterior After Bridge": "event(BRIDGE_OPEN) || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
+    "Near Fairy Fountain Defense": "can_lift_gold"
+  locations:
+    "Ganon Castle Exterior GS": "gs && (has_ranged_weapon || can_use_sword)"
+    "Ganon Castle Exterior Red Boulder 1": "can_hammer"
+    "Ganon Castle Exterior Red Boulder 2": "can_hammer"
+    "Ganon Castle Exterior Red Boulder 3": "can_hammer"
+
+"Ganon Castle Exterior After Bridge":
+  region: GANON_CASTLE_EXTERIOR
+  age_change: false
+  events:
+    BRIDGE_OPEN: "is_adult && rainbow_bridge"
+  exits:
+    "Ganon Castle Exterior": "is_adult && event(BRIDGE_OPEN)"
+    "Hyrule Castle Courtyard": "is_child && trick(OOT_COURTYARD_FROM_GANON)"
+    "Hyrule Castle": "is_child"
+    "Ganon Castle": "is_adult"
+
+"Near Fairy Fountain Defense":
+  region: GANON_CASTLE_EXTERIOR
+  age_change: false
+  exits:
+    "Ganon Castle Exterior": "is_adult"
+    "Fairy Fountain Defense": "is_adult && (can_lift_gold || (!setting(erIndoorsMajor) && trick(OOT_GANON_FAIRY_TT)))"
+    "Near Fairy Fountain Din": "is_child"
+
+"Fairy Fountain Defense":
+  region: ENTRANCE
+  exits:
+    "Near Fairy Fountain Defense": "true"
+  events:
+    MAGIC: "can_play_zelda"
+  locations:
+    "Great Fairy Defense Upgrade": "can_play_zelda"
