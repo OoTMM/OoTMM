@@ -1,0 +1,39 @@
+
+"Pinnacle Rock Entrance":
+  region: PINNACLE_ROCK
+  exits:
+    "Pinnacle Rock": "underwater_walking_strict && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
+    "Great Bay Coast Near Pinnacle": "true"
+    "Pinnacle Rock Water Void": "true"
+    "SOARING": "has_mask_zora && can_play_soaring"
+    "WARP_SONGS": "has_mask_zora"
+
+"Pinnacle Rock":
+  region: PINNACLE_ROCK
+  exits:
+    "Pinnacle Rock Water Void": "true"
+    "Pinnacle Rock Entrance": "true"
+  events:
+    ZORA_EGGS_PINNACLE_ROCK: "has_mask_zora || can_hookshot_short"
+    MAGIC: "true"
+    FISH: "true"
+  locations:
+    "Pinnacle Rock Chest 1": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock Chest 2": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock HP": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && event(SEAHORSE) && (has_mask_zora || can_hookshot_short)"
+    "Pinnacle Rock Pot 01": "true"
+    "Pinnacle Rock Pot 02": "true"
+    "Pinnacle Rock Pot 03": "true"
+    "Pinnacle Rock Pot 04": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock Pot 05": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock Pot 06": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock Pot 07": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock Pot 08": "has_mask_zora || can_hookshot_short"
+    "Pinnacle Rock Pot 09": "true"
+    "Pinnacle Rock Pot 10": "true"
+    "Pinnacle Rock Pot 11": "true"
+
+"Pinnacle Rock Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
