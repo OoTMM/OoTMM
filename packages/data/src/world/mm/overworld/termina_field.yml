@@ -603,3 +603,9 @@
   exits:
     "Termina Field": "has_arrows || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn || has_hot_water_er || short_hook_anywhere || can_use_din"
     "Mountain Village Path Lower": "true"
+
+"Great Bay Fence":
+  region: TERMINA_FIELD
+  exits:
+    "Termina Field": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
+    "Great Bay Coast": "true"
