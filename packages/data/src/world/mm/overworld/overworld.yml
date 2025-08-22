@@ -32,20 +32,6 @@
     "Milk Road Grass 2": "true"
     "Milk Road Grass 3": "true"
 
-"Owl Woodfall":
-  region: WOODFALL
-  exits:
-    "Woodfall Shrine": "can_reset_time"
-  events:
-    STICKS: "true"
-    NUTS: "true"
-    FAIRY: "true"
-  locations:
-    "Woodfall Owl Statue": "has_sticks || has_sword"
-    "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
-    "Woodfall Pot 1": "true"
-    "Woodfall Pot 2": "true"
-    "Woodfall Pot 3": "true"
 "Owl Mountain":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -127,108 +113,6 @@
     "Stone Tower Pot Owl Statue 3": "true"
     "Stone Tower Pot Owl Statue 4": "true"
 
-"Woodfall":
-  region: WOODFALL
-  events:
-    MAGIC: "true"
-  exits:
-    "Swamp Canopy Back": "true"
-    "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere"
-    "Woodfall Temple Princess Jail": "is_swamp_cleared && woodfall_raised"
-    "Woodfall Near Fairy Fountain": "(is_swamp_cleared || can_use_nayru) && short_hook_anywhere"
-  locations:
-    "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || is_swamp_cleared || can_use_nayru || has_hover_boots"
-    "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || can_hookshot || (is_adult && can_hookshot_short && (is_swamp_cleared || can_use_nayru))"
-    "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || (is_swamp_cleared && can_hookshot) || (is_adult && can_hookshot_short && (is_swamp_cleared || can_use_nayru)) || hookshot_anywhere"
-    "Woodfall Grass 1": "true"
-    "Woodfall Grass 2": "true"
-    "Woodfall Grass 3": "true"
-    "Woodfall Grass 4": "true"
-    "Woodfall Grass 5": "true"
-    "Woodfall Grass 6": "true"
-    "Woodfall Rupee": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere || has_hover_boots"
-"Woodfall Front of Temple":
-  region: WOODFALL
-  exits:
-    "Woodfall Temple": "woodfall_raised"
-    "Woodfall Shrine": "cond(setting(openDungeonsMm, WF) || setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both), has(MASK_DEKU) || hookshot_anywhere, true)"
-    "Woodfall": "is_swamp_cleared || can_use_nayru"
-"Woodfall Shrine":
-  region: WOODFALL
-  exits:
-    "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || is_swamp_cleared || hookshot_anywhere || can_use_nayru"
-    "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared || short_hook_anywhere)) || hookshot_anywhere"
-    "Woodfall Front of Temple": "woodfall_raised && (has(MASK_DEKU) || hookshot_anywhere)"
-    "Owl Woodfall": "true"
-  events:
-    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play_awakening"
-  locations:
-    "Woodfall Near Owl Chest": "short_hook_anywhere || (has_hover_boots && has_mask_bunny && has_weapon && trick(MM_WF_SHRINE_HOVERS))"
-"Woodfall Near Fairy Fountain":
-  region: WOODFALL
-  exits:
-    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || is_swamp_cleared || hookshot_anywhere || can_use_nayru"
-    "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere"
-    "Woodfall Fairy Fountain": "true"
-  locations:
-    "Woodfall Near Owl Chest": "can_hookshot || (is_adult && can_hookshot_short && (is_swamp_cleared || can_use_nayru))"
-"Woodfall Fairy Fountain":
-  region: ENTRANCE
-  exits:
-    "Woodfall Near Fairy Fountain": "true"
-  locations:
-    "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, var(STRAY_FAIRY_COUNT))"
-"Near Deku Shrine":
-  region: DEKU_PALACE
-  exits:
-    "Deku Palace Front": "is_swamp_cleared || has(MASK_DEKU) || can_use_nayru || has_hover_boots"
-    "Deku Shrine": "true"
-"Deku Shrine":
-  region: BUTLER_RACE
-  exits:
-    "Near Deku Shrine": "true"
-    "Deku Shrine Main": "soul_npc(SOUL_NPC_BUTLER_DEKU) && event(RETURN_PRINCESS)"
-"Deku Shrine Main":
-  region: BUTLER_RACE
-  exits:
-    "Deku Shrine End": "true" # You can just jump to the crystal and spin it as deku
-  locations:
-    "Deku Shrine Pot 1": "true"
-    "Deku Shrine Pot 2": "true"
-    "Deku Shrine Rupee Main 01": "true"
-    "Deku Shrine Rupee Main 02": "true"
-    "Deku Shrine Rupee Main 03": "true"
-    "Deku Shrine Rupee Main 04": "true"
-    "Deku Shrine Rupee Main 05": "true"
-    "Deku Shrine Rupee Main 06": "true"
-    "Deku Shrine Rupee Main 07": "true"
-    "Deku Shrine Rupee Main 08": "true"
-    "Deku Shrine Rupee Main 09": "true"
-    "Deku Shrine Rupee Main 10": "true"
-    "Deku Shrine Rupee Main 11": "true"
-    "Deku Shrine Rupee Main 12": "true"
-    "Deku Shrine Rupee Main 13": "true"
-    "Deku Shrine Rupee Main 14": "true"
-    "Deku Shrine Rupee Main 15": "true"
-    "Deku Shrine Rupee Main 16": "true"
-    "Deku Shrine Rupee Main 17": "true"
-    "Deku Shrine Rupee Main 18": "true"
-    "Deku Shrine Rupee Main 19": "true"
-    "Deku Shrine Rupee Main 20": "true"
-"Deku Shrine End":
-  region: BUTLER_RACE
-  locations:
-    "Deku Shrine Mask of Scents": "true"
-    "Deku Shrine Rupee End 01": "true"
-    "Deku Shrine Rupee End 02": "true"
-    "Deku Shrine Rupee End 03": "true"
-    "Deku Shrine Rupee End 04": "true"
-    "Deku Shrine Rupee End 05": "true"
-    "Deku Shrine Rupee End 06": "true"
-    "Deku Shrine Rupee End 07": "true"
-    "Deku Shrine Rupee End 08": "true"
-    "Deku Shrine Rupee End 09": "true"
-    "Deku Shrine Rupee End 10": "true"
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:

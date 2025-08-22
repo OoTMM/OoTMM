@@ -125,3 +125,9 @@
   exits:
     "Deku Palace Front": "has(MASK_DEKU) || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
     "Swamp Canopy Front": "true"
+
+"Near Deku Shrine":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Front": "is_swamp_cleared || has(MASK_DEKU) || can_use_nayru || has_hover_boots"
+    "Deku Shrine": "true"
