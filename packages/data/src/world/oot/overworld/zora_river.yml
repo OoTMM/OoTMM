@@ -1,0 +1,152 @@
+"Zora River Front":
+  region: ZORA_RIVER
+  time: flow
+  exits:
+    "Hyrule Field": "true"
+    "Zora River": "is_adult || has_explosives_or_hammer || has_hover_boots || climb_anywhere || hookshot_anywhere"
+  events:
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
+    RUPEES: "can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
+    MAGIC: "can_cut_grass"
+  locations:
+    "Zora River GS Tree": "gs && is_child && can_damage_skull"
+    "Zora River Grass Pack Bush 01": "can_cut_grass"
+    "Zora River Grass Pack Bush 02": "can_cut_grass"
+    "Zora River Grass Pack Bush 03": "can_cut_grass"
+    "Zora River Grass Pack Bush 04": "can_cut_grass"
+    "Zora River Grass Pack Bush 05": "can_cut_grass"
+    "Zora River Grass Pack Bush 06": "can_cut_grass"
+    "Zora River Grass Pack Bush 07": "can_cut_grass"
+    "Zora River Grass Pack Bush 08": "can_cut_grass"
+    "Zora River Grass Pack Bush 09": "can_cut_grass"
+    "Zora River Grass Pack Bush 10": "can_cut_grass"
+    "Zora River Grass Pack Bush 11": "can_cut_grass"
+    "Zora River Grass Pack Bush 12": "can_cut_grass"
+    "Zora River Wonder Item Front 1": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Front 2": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Front 3": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Front 4": "is_child && can_swim_or_sink"
+
+"Zora River":
+  region: ZORA_RIVER
+  time: flow
+  exits:
+    "Zora River Front": "true"
+    "Zora River Behind Falls": "can_play_zelda || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
+    "Lost Woods": "can_dive_small || hookshot_anywhere"
+    "Zora River Storms Grotto": "hidden_grotto_storms"
+    "Zora River Open Grotto": "true"
+    "Zora River Boulder Grotto": "has_explosives_or_hammer"
+  events:
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "true"
+    SEEDS: "is_child"
+    ARROWS: "is_adult"
+    MAGIC: "true"
+  locations:
+    "Zora River Bean Seller": "is_child && can_use_wallet(1) && soul_bean_salesman"
+    "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
+    "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
+    "Zora River Frogs Storms": "is_child && can_play_storms"
+    "Zora River Frogs Zeldas Lullaby": "is_child && can_play_zelda"
+    "Zora River Frogs Eponas Song": "is_child && can_play_epona"
+    "Zora River Frogs Sarias Song": "is_child && can_play_saria"
+    "Zora River Frogs Suns Song": "is_child && can_play_sun"
+    "Zora River Frogs Song of Time": "is_child && can_play_time"
+    "Zora River Frogs Game": "is_child && can_play_zelda && can_play_saria && can_play_epona && can_play_sun && can_play_time && can_play_storms && can_play_minigame"
+    "Zora River GS Ladder": "is_child && gs_night && can_damage"
+    "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
+    "Zora River GS Near Bridge": "is_adult && gs_night && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
+    "Zora River Grass": "(is_child || has_hover_boots || hookshot_anywhere || climb_anywhere) && can_cut_grass"
+    "Zora River Rupee 1": "is_adult && can_swim_or_sink"
+    "Zora River Rupee 2": "is_adult && can_swim_or_sink"
+    "Zora River Rupee 3": "is_adult && can_swim_or_sink"
+    "Zora River Rupee 4": "is_adult && can_swim_or_sink"
+    "Zora River Wonder Item Back 01": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 02": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 03": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 04": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 05": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 06": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 07": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 08": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 09": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 10": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 11": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 12": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 13": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 14": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 15": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 16": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 17": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 18": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 19": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 20": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 21": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 22": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 23": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 24": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 25": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 26": "is_child && can_swim_or_sink"
+    "Zora River Wonder Item Back 27": "is_child && can_swim_or_sink"
+    "Zora River Butterfly Near Beans 1": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Beans 2": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Waterfall 1": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Waterfall 2": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Waterfall 3": "is_child && can_use_sticks"
+  gossip:
+    "Zora River Gossip High Pillar": "true"
+    "Zora River Gossip Near Domain": "true"
+
+"Zora River Behind Falls":
+  region: ZORA_RIVER
+  time: flow
+  exits:
+    "Zora River": "true"
+    "Zora Domain": "true"
+
+"Zora River Storms Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Zora River": "true"
+  locations:
+    "Zora River Storms Grotto Front Scrub": "business_scrub(0x12)"
+    "Zora River Storms Grotto Back Scrub": "business_scrub(0x13)"
+    "Zora River Storms Grotto Hive": "break_hive_high"
+
+"Zora River Open Grotto":
+  region: ENTRANCE
+  exits:
+    "GENERIC_GROTTO_EVENTS": "true"
+    "Zora River": "true"
+  locations:
+    "Zora River Grotto": "true"
+    "Zora River Grotto Grass 1": "can_cut_grass"
+    "Zora River Grotto Grass 2": "can_cut_grass"
+    "Zora River Grotto Grass 3": "can_cut_grass"
+    "Zora River Grotto Grass 4": "can_cut_grass"
+    "Zora River Grotto Hive 1": "break_hive_low"
+    "Zora River Grotto Hive 2": "break_hive_low"
+    "Zora River Grotto Butterfly 1": "can_use_sticks"
+    "Zora River Grotto Butterfly 2": "can_use_sticks"
+    "Zora River Grotto Butterfly 3": "can_use_sticks"
+  gossip:
+    "Zora River Gossip Grotto": "true"
+
+"Zora River Boulder Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Zora River": "true"
+  locations:
+    "Zora River Fairy Fountain Fairy 1": "true"
+    "Zora River Fairy Fountain Fairy 2": "true"
+    "Zora River Fairy Fountain Fairy 3": "true"
+    "Zora River Fairy Fountain Fairy 4": "true"
+    "Zora River Fairy Fountain Fairy 5": "true"
+    "Zora River Fairy Fountain Fairy 6": "true"
+    "Zora River Fairy Fountain Fairy 7": "true"
+    "Zora River Fairy Fountain Fairy 8": "true"
