@@ -1,0 +1,247 @@
+"Great Bay Coast":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast Platform": "!setting(jpLayouts, GreatBayCoast) || has_mask_zora"
+    "Fisher's Hut": "true"
+    "Great Bay Fence": "true"
+    "Great Bay Coast Fortress": "underwater_walking"
+    "Great Bay Coast Near Pinnacle": "true"
+    "Zora Cape": "true"
+    "Ocean Spider House": "true"
+    "Great Bay Grotto": "true"
+    "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
+    "Great Bay Coast Water Void": "true"
+    "Great Bay Coast Butterflies": "has_sticks"
+  events:
+    CLEAR_STATE_GREAT_BAY: "wisp_enabled(BOSS_GYORG, REMAINS_GYORG) || event(WISP_CLEAR_STATE_GREAT_BAY)"
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    BUGS: "true"
+    FISH: "true"
+    FAIRY: "true"
+  locations:
+    "Great Bay Coast Zora Mask": "can_play_healing"
+    "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
+    "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
+    "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot 01": "true"
+    "Great Bay Coast Pot 02": "true"
+    "Great Bay Coast Pot 03": "true"
+    "Great Bay Coast Pot 04": "true"
+    "Great Bay Coast Pot 05": "true"
+    "Great Bay Coast Pot 06": "true"
+    "Great Bay Coast Pot 07": "true"
+    "Great Bay Coast Pot 08": "true"
+    "Great Bay Coast Pot 09": "true"
+    "Great Bay Coast Pot 10": "true"
+    "Great Bay Coast Pot 11": "true"
+    "Great Bay Coast Pot 12": "true"
+    "Great Bay Coast Grass 1": "true"
+    "Great Bay Coast Grass 2": "true"
+    "Great Bay Coast Grass 3": "true"
+    "Great Bay Coast Grass 4": "true"
+    "Great Bay Coast Grass 5": "true"
+  gossip:
+    "Great Bay Coast Gossip": "true"
+
+"Great Bay Coast Platform":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "true"
+    "Laboratory": "true"
+    "Owl Great Bay": "true"
+
+"Great Bay Coast Butterflies":
+  region: GREAT_BAY_COAST
+  locations:
+    "Great Bay Coast Common Butterfly 1": "true"
+    "Great Bay Coast Common Butterfly 2": "true"
+    "Great Bay Coast Cleared Butterfly 1": "is_ocean_cleared"
+    "Great Bay Coast Cleared Butterfly 2": "is_ocean_cleared"
+
+"Great Bay Coast Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
+
+"Great Bay Coast Near Pinnacle":
+  region: GREAT_BAY_COAST
+  exits:
+    "Pinnacle Rock Entrance": "true"
+    "Great Bay Coast": "true"
+    "Great Bay Coast Near Pinnacle Water Void": "true"
+    "SOARING": "has_mask_zora && can_play_soaring"
+    "WARP_SONGS": "has_mask_zora"
+
+"Great Bay Coast Near Pinnacle Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
+
+"Great Bay Coast Fortress":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "underwater_walking"
+    "Pirate Fortress": "true"
+    "SOARING": "has_mask_zora && can_play_soaring"
+    "WARP_SONGS": "has_mask_zora"
+
+"Great Bay Grotto":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    BUGS: "true"
+    FISH: "true"
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Great Bay Coast Fisherman Grotto": "true"
+    "Great Bay Coast Fisherman Grotto Grass 01": "true"
+    "Great Bay Coast Fisherman Grotto Grass 02": "true"
+    "Great Bay Coast Fisherman Grotto Grass 03": "true"
+    "Great Bay Coast Fisherman Grotto Grass 04": "true"
+    "Great Bay Coast Fisherman Grotto Grass 05": "true"
+    "Great Bay Coast Fisherman Grotto Grass 06": "true"
+    "Great Bay Coast Fisherman Grotto Grass 07": "true"
+    "Great Bay Coast Fisherman Grotto Grass 08": "true"
+    "Great Bay Coast Fisherman Grotto Grass 09": "true"
+    "Great Bay Coast Fisherman Grotto Grass 10": "true"
+    "Great Bay Coast Fisherman Grotto Grass 11": "true"
+    "Great Bay Coast Fisherman Grotto Grass 12": "true"
+    "Great Bay Coast Fisherman Grotto Grass 13": "true"
+    "Great Bay Coast Fisherman Grotto Grass 14": "true"
+
+"GBC Near Cow Grotto":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "true"
+    "Great Bay Cow Grotto": "true"
+
+"Great Bay Cow Grotto":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+  exits:
+    "GBC Near Cow Grotto": "true"
+  locations:
+    "Great Bay Coast Cow Front": "can_play_epona"
+    "Great Bay Coast Cow Back": "can_play_epona"
+    "Great Bay Cow Grotto Grass 01": "true"
+    "Great Bay Cow Grotto Grass 02": "true"
+    "Great Bay Cow Grotto Grass 03": "true"
+    "Great Bay Cow Grotto Grass 04": "true"
+    "Great Bay Cow Grotto Grass 05": "true"
+    "Great Bay Cow Grotto Grass 06": "true"
+    "Great Bay Cow Grotto Grass 07": "true"
+    "Great Bay Cow Grotto Grass 08": "true"
+    "Great Bay Cow Grotto Grass 09": "true"
+    "Great Bay Cow Grotto Grass 10": "true"
+    "Great Bay Cow Grotto Grass 11": "true"
+    "Great Bay Cow Grotto Grass 12": "true"
+    "Great Bay Cow Grotto Grass 13": "true"
+    "Great Bay Cow Grotto Grass 14": "true"
+    "Great Bay Cow Grotto Grass 15": "true"
+    "Great Bay Cow Grotto Grass 16": "true"
+    "Great Bay Cow Grotto Grass 17": "true"
+    "Great Bay Cow Grotto Grass 18": "true"
+    "Great Bay Cow Grotto Grass 19": "true"
+    "Great Bay Cow Grotto Grass 20": "true"
+    "Great Bay Cow Grotto Grass 21": "true"
+    "Great Bay Cow Grotto Grass 22": "true"
+    "Great Bay Cow Grotto Grass 23": "true"
+    "Great Bay Cow Grotto Grass 24": "true"
+    "Great Bay Cow Grotto Grass 25": "true"
+    "Great Bay Cow Grotto Grass 26": "true"
+    "Great Bay Cow Grotto Grass 27": "true"
+    "Great Bay Cow Grotto Grass 28": "true"
+    "Great Bay Cow Grotto Grass 29": "true"
+    "Great Bay Cow Grotto Grass 30": "true"
+    "Great Bay Cow Grotto Grass 31": "true"
+    "Great Bay Cow Grotto Grass 32": "true"
+    "Great Bay Cow Grotto Grass 33": "true"
+    "Great Bay Cow Grotto Grass 34": "true"
+    "Great Bay Cow Grotto Grass 35": "true"
+    "Great Bay Cow Grotto Grass 36": "true"
+    "Great Bay Cow Grotto Grass 37": "true"
+    "Great Bay Cow Grotto Grass 38": "true"
+    "Great Bay Cow Grotto Grass 39": "true"
+    "Great Bay Cow Grotto Grass 40": "true"
+    "Great Bay Cow Grotto Grass 41": "true"
+    "Great Bay Cow Grotto Grass 42": "true"
+    "Great Bay Cow Grotto Grass 43": "true"
+    "Great Bay Cow Grotto Grass 44": "true"
+    "Great Bay Cow Grotto Grass 45": "true"
+    "Great Bay Cow Grotto Grass 46": "true"
+    "Great Bay Cow Grotto Grass 47": "true"
+    "Great Bay Cow Grotto Grass 48": "true"
+    "Great Bay Cow Grotto Grass 49": "true"
+    "Great Bay Cow Grotto Grass 50": "true"
+    "Great Bay Cow Grotto Grass 51": "true"
+    "Great Bay Cow Grotto Grass 52": "true"
+    "Great Bay Cow Grotto Grass 53": "true"
+    "Great Bay Cow Grotto Grass 54": "true"
+    "Great Bay Cow Grotto Grass 55": "true"
+    "Great Bay Cow Grotto Grass 56": "true"
+    "Great Bay Cow Grotto Grass 57": "true"
+    "Great Bay Cow Grotto Grass 58": "true"
+    "Great Bay Cow Grotto Grass 59": "true"
+    "Great Bay Cow Grotto Grass 60": "true"
+    "Great Bay Cow Grotto Grass 61": "true"
+    "Great Bay Cow Grotto Grass 62": "true"
+    "Great Bay Cow Grotto Grass 63": "true"
+    "Great Bay Cow Grotto Grass 64": "true"
+    "Great Bay Cow Grotto Grass 65": "true"
+    "Great Bay Cow Grotto Grass 66": "true"
+    "Great Bay Cow Grotto Grass 67": "true"
+    "Great Bay Cow Grotto Grass 68": "true"
+    "Great Bay Cow Grotto Grass 69": "true"
+    "Great Bay Cow Grotto Grass 70": "true"
+    "Great Bay Cow Grotto Grass 71": "true"
+    "Great Bay Cow Grotto Grass 72": "true"
+    "Great Bay Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
+    "Great Bay Cow Grotto Butterfly 1": "has_sticks"
+    "Great Bay Cow Grotto Butterfly 2": "has_sticks"
+    "Great Bay Cow Grotto Butterfly 3": "has_sticks"
+
+"Fisher's Hut":
+  region: ENTRANCE
+  exits:
+    "Great Bay Coast": "true"
+  events:
+    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle && is_ocean_cursed"
+
+"Laboratory":
+  region: ENTRANCE
+  exits:
+    "Great Bay Coast Platform": "true"
+  locations:
+    "Laboratory Zora Song": "soul_scientist && has_all_zora_eggs && has_mask_zora && has_ocarina"
+    "Laboratory Fish HP": "has_fish"
+
+"Tingle Great Bay":
+  region: TINGLE
+  locations:
+    "Tingle Map Great Bay": "tingle_price(0x08)"
+    "Tingle Map Ikana": "tingle_price(0x09)"
+
+"Owl Great Bay":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast Platform": "can_reset_time"
+    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && has_arrows"
+  events:
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+  locations:
+    "Great Bay Coast Owl Statue": "has_sticks || has_sword"

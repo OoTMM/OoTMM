@@ -1,0 +1,49 @@
+
+"Deku Shrine":
+  region: BUTLER_RACE
+  exits:
+    "Near Deku Shrine": "true"
+    "Deku Shrine Main": "soul_npc(SOUL_NPC_BUTLER_DEKU) && event(RETURN_PRINCESS)"
+
+"Deku Shrine Main":
+  region: BUTLER_RACE
+  exits:
+    "Deku Shrine End": "true" # You can just jump to the crystal and spin it as deku
+  locations:
+    "Deku Shrine Pot 1": "true"
+    "Deku Shrine Pot 2": "true"
+    "Deku Shrine Rupee Main 01": "true"
+    "Deku Shrine Rupee Main 02": "true"
+    "Deku Shrine Rupee Main 03": "true"
+    "Deku Shrine Rupee Main 04": "true"
+    "Deku Shrine Rupee Main 05": "true"
+    "Deku Shrine Rupee Main 06": "true"
+    "Deku Shrine Rupee Main 07": "true"
+    "Deku Shrine Rupee Main 08": "true"
+    "Deku Shrine Rupee Main 09": "true"
+    "Deku Shrine Rupee Main 10": "true"
+    "Deku Shrine Rupee Main 11": "true"
+    "Deku Shrine Rupee Main 12": "true"
+    "Deku Shrine Rupee Main 13": "true"
+    "Deku Shrine Rupee Main 14": "true"
+    "Deku Shrine Rupee Main 15": "true"
+    "Deku Shrine Rupee Main 16": "true"
+    "Deku Shrine Rupee Main 17": "true"
+    "Deku Shrine Rupee Main 18": "true"
+    "Deku Shrine Rupee Main 19": "true"
+    "Deku Shrine Rupee Main 20": "true"
+
+"Deku Shrine End":
+  region: BUTLER_RACE
+  locations:
+    "Deku Shrine Mask of Scents": "true"
+    "Deku Shrine Rupee End 01": "true"
+    "Deku Shrine Rupee End 02": "true"
+    "Deku Shrine Rupee End 03": "true"
+    "Deku Shrine Rupee End 04": "true"
+    "Deku Shrine Rupee End 05": "true"
+    "Deku Shrine Rupee End 06": "true"
+    "Deku Shrine Rupee End 07": "true"
+    "Deku Shrine Rupee End 08": "true"
+    "Deku Shrine Rupee End 09": "true"
+    "Deku Shrine Rupee End 10": "true"

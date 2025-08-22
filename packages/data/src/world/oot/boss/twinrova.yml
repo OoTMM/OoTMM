@@ -1,0 +1,16 @@
+"Spirit Temple Boss":
+  boss: true
+  age_change: false
+  dungeon: Spirit
+  events:
+    BOSS_TWINROVA: "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && can_use_sword"
+  exits:
+    "Spirit Temple After Boss": "event(BOSS_TWINROVA)"
+
+"Spirit Temple After Boss":
+  boss: true
+  age_change: false
+  dungeon: Spirit
+  locations:
+    "Spirit Temple Boss HC": "true"
+    "Spirit Temple Boss": "true"

@@ -1,0 +1,187 @@
+
+"Swamp Front":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Road to Southern Swamp": "true"
+    "Tourist Information": "true"
+    "Swamp Back": "((event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din) && (has(MASK_DEKU) || has_hover_boots || can_use_nayru || is_adult)) || is_swamp_cleared || has_mask_zora"
+    "Swamp Potion Shop": "true"
+    "Woods of Mystery": "true"
+    "Owl Swamp": "true"
+  events:
+    CLEAR_STATE_WOODFALL: "wisp_enabled(BOSS_ODOLWA, REMAINS_ODOLWA) || event(WISP_CLEAR_STATE_WOODFALL)"
+    FROG_3: "has(MASK_DON_GERO)"
+    PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
+    PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
+    STICKS: "true"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    RUPEES: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    MAGIC: "true"
+    WATER: "true"
+    FAIRY: "true"
+  locations:
+    "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron) || short_hook_anywhere"
+    "Southern Swamp Scrub Deed": "soul_business_scrub && has(DEED_LAND)"
+    "Southern Swamp Scrub Shop": "soul_business_scrub && has(MASK_DEKU) && can_use_wallet(1)"
+    "Southern Swamp Pot 1": "true"
+    "Southern Swamp Pot 2": "true"
+    "Southern Swamp Pot 3": "true"
+    "Southern Swamp Grass Front 01": "true"
+    "Southern Swamp Grass Front 02": "true"
+    "Southern Swamp Grass Front 03": "true"
+    "Southern Swamp Grass Front 04": "true"
+    "Southern Swamp Grass Front 05": "true"
+    "Southern Swamp Grass Front 06": "true"
+    "Southern Swamp Grass Front 07": "true"
+    "Southern Swamp Grass Front 08": "true"
+    "Southern Swamp Grass Front 09": "true"
+    "Southern Swamp Grass Front 10": "true"
+    "Southern Swamp Grass Front 11": "true"
+    "Southern Swamp Grass Front 12": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 01": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 02": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 03": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 04": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 05": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 06": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 07": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 08": "true"
+    "Southern Swamp Grass Near Witch Pack 1 Grass 09": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 01": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 02": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 03": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 04": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 05": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 06": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 07": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 08": "true"
+    "Southern Swamp Grass Near Witch Pack 2 Grass 09": "true"
+    "Southern Swamp Grass Near Witch 1": "true"
+    "Southern Swamp Grass Near Witch 2": "true"
+    "Southern Swamp Rupee 1": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
+    "Southern Swamp Rupee 2": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
+    "Southern Swamp Hive": "is_swamp_poisoned && (has_mask_zora || can_use_deku_bubble || has_arrows || can_hookshot || ((is_adult || has_hover_boots) && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU)))))"
+  gossip:
+    "Southern Swamp Gossip": "true"
+
+"Swamp Back":
+  region: SOUTHERN_SWAMP
+  events:
+    PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
+    PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
+  exits:
+    "Swamp Front": "((event(BOAT_RIDE) || has_arrows) && (has(MASK_DEKU) || has_hover_boots || can_use_nayru || is_tall || has_mask_goron)) || (has_hover_boots && (can_hookshot_short || can_use_din)) || (is_adult && (can_use_din || (can_use_nayru && can_hookshot_short))) || (has_mask_zora && can_use_nayru) || is_swamp_cleared" # TODO: With good timing, Zora can use the rangs in poison water.
+    "Deku Palace Front": "true"
+    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
+    "Swamp Canopy Back": "is_swamp_cleared || short_hook_anywhere"
+    "Swamp Canopy Front": "short_hook_anywhere"
+  locations:
+    "Southern Swamp Song of Soaring": "has_mask_zora && has_explosives && trick(MM_SOARING_ZORA)" # add adult to this trick?
+
+"Near Swamp Spider House":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Spider House": "has_sticks || has_arrows"
+    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
+    "Near Swamp Grotto": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || has_hover_boots"
+    "Swamp Canopy Front": "short_hook_anywhere"
+
+"Near Swamp Grotto":
+  region: SOUTHERN_SWAMP
+  events:
+    MUSHROOM: "has(MASK_SCENTS)"
+  exits:
+    "Swamp Front": "((has_arrows || can_hookshot || event(BOAT_RIDE)) && (has_mask_goron || is_tall || can_use_nayru)) || (is_adult && can_use_din)"
+    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_hookshot_short || can_use_nayru || has_hover_boots"
+    "Southern Swamp Grotto": "true"
+    "Swamp Canopy Front": "short_hook_anywhere"
+
+"Southern Swamp Grotto":
+  region: ENTRANCE
+  events:
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    MAGIC: "true"
+    RUPEES: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    FISH: "true"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
+  exits:
+    "Near Swamp Grotto": "true"
+  locations:
+    "Southern Swamp Grotto": "true"
+    "Southern Swamp Grotto Grass 01": "true"
+    "Southern Swamp Grotto Grass 02": "true"
+    "Southern Swamp Grotto Grass 03": "true"
+    "Southern Swamp Grotto Grass 04": "true"
+    "Southern Swamp Grotto Grass 05": "true"
+    "Southern Swamp Grotto Grass 06": "true"
+    "Southern Swamp Grotto Grass 07": "true"
+    "Southern Swamp Grotto Grass 08": "true"
+    "Southern Swamp Grotto Grass 09": "true"
+    "Southern Swamp Grotto Grass 10": "true"
+    "Southern Swamp Grotto Grass 11": "true"
+    "Southern Swamp Grotto Grass 12": "true"
+    "Southern Swamp Grotto Grass 13": "true"
+    "Southern Swamp Grotto Grass 14": "true"
+
+"Tourist Information":
+  region: ENTRANCE
+  exits:
+    "Swamp Front": "true"
+    "Swamp Back": "event(BOAT_RIDE)"
+  events:
+     BOAT_RIDE: "((soul_npc(SOUL_NPC_TOURIST_CENTER) && event(PICTURE_SWAMP)) || (event(KOUME) && (!setting(erIndoorsExtra) || can_use_wallet(1)))) && is_swamp_poisoned"
+  locations:
+    "Tourist Information Pictobox": "event(KOUME) && is_swamp_poisoned"
+    "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared"
+    "Tourist Information Tingle Picture": "soul_npc(SOUL_NPC_TOURIST_CENTER) && (event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)) && is_swamp_poisoned"
+#    "Tourist Information Big Octo Picture": "event(PICTURE_BIG_OCTO) && is_swamp_poisoned"
+#    "Tourist Information Consolation Prize": "event(PICTURE_SWAMP) && is_swamp_poisoned"
+
+"Swamp Potion Shop":
+  region: ENTRANCE
+  exits:
+    "Swamp Front": "true"
+  locations:
+    "Swamp Potion Shop Item 1": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 2": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0e) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 3": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0f) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Rupee": "true"
+
+"Owl Swamp":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "can_reset_time"
+  events:
+    STICKS: "true"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    FAIRY: "true"
+    WATER: "true"
+  locations:
+    "Southern Swamp Owl Statue": "has_sticks || has_sword"
+    "Southern Swamp Grass Owl 1": "true"
+    "Southern Swamp Grass Owl 2": "true"
+
+"Swamp Canopy Front":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Back": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
+    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
+    "Near Swamp Grotto": "true"
+    "Deku Palace Cliff": "true"
+    "Swamp Canopy Back": "has(MASK_DEKU) || short_hook_anywhere"
+
+"Swamp Canopy Back":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || has_hover_boots || can_use_nayru) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
+    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_use_nayru || has_hover_boots"
+    "Woodfall": "true"
+    "Swamp Canopy Front": "short_hook_anywhere"
+  locations:
+    "Southern Swamp Song of Soaring": "has(MASK_DEKU) || short_hook_anywhere || (has_hover_boots && has_mask_bunny && (has_weapon || has_explosives) && trick(MM_SOARING_HOVERS)) || (has_mask_zora && has_explosives && trick(MM_SOARING_ZORA))"

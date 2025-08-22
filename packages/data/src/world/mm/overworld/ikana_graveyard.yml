@@ -1,0 +1,149 @@
+"Ikana Graveyard":
+  region: IKANA_GRAVEYARD
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+  exits:
+    "Road to Ikana Center": "true"
+    "Ikana Graveyard Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
+    "Beneath The Graveyard Night 1": "soul_stalchild && has(MASK_CAPTAIN) && is_night1"
+    "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
+    "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
+  locations:
+    "Ikana Graveyard Captain Mask": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
+    "Ikana Graveyard Grass 1": "true"
+    "Ikana Graveyard Grass 2": "true"
+    "Ikana Graveyard Grass 3": "true"
+    "Ikana Graveyard Grass 4": "true"
+    "Ikana Graveyard Grass 5": "true"
+    "Ikana Graveyard Grass Pack Grass 1": "true"
+    "Ikana Graveyard Grass Pack Grass 2": "true"
+    "Ikana Graveyard Grass Pack Grass 3": "true"
+    "Ikana Graveyard Grass Pack Grass 4": "true"
+    "Ikana Graveyard Grass Pack Grass 5": "true"
+    "Ikana Graveyard Grass Pack Grass 6": "true"
+    "Ikana Graveyard Grass Pack Grass 7": "true"
+    "Ikana Graveyard Grass Pack Grass 8": "true"
+    "Ikana Graveyard Grass Pack Grass 9": "true"
+    "Ikana Graveyard Wonder Item 01": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 02": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 03": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 04": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 05": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 06": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 07": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 08": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 09": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 10": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 11": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 12": "hit_target_range_close"
+
+"Ikana Graveyard Grotto":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    FISH: "true"
+    BUGS: "true"
+  exits:
+    "Ikana Graveyard": "true"
+  locations:
+    "Ikana Graveyard Grotto": "true"
+    "Ikana Graveyard Grotto Grass 01": "true"
+    "Ikana Graveyard Grotto Grass 02": "true"
+    "Ikana Graveyard Grotto Grass 03": "true"
+    "Ikana Graveyard Grotto Grass 04": "true"
+    "Ikana Graveyard Grotto Grass 05": "true"
+    "Ikana Graveyard Grotto Grass 06": "true"
+    "Ikana Graveyard Grotto Grass 07": "true"
+    "Ikana Graveyard Grotto Grass 08": "true"
+    "Ikana Graveyard Grotto Grass 09": "true"
+    "Ikana Graveyard Grotto Grass 10": "true"
+    "Ikana Graveyard Grotto Grass 11": "true"
+    "Ikana Graveyard Grotto Grass 12": "true"
+    "Ikana Graveyard Grotto Grass 13": "true"
+    "Ikana Graveyard Grotto Grass 14": "true"
+
+"Beneath The Graveyard Night 1":
+  region: ENTRANCE
+  events:
+    ARROWS: "true"
+  exits:
+    "Ikana Graveyard": "true"
+    "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
+  locations:
+    "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
+    "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
+    "Beneath The Graveyard Pot Night 1 Early 1": "true"
+    "Beneath The Graveyard Pot Night 1 Early 2": "true"
+    "Beneath The Graveyard Pot Night 1 Bats 1": "true"
+    "Beneath The Graveyard Pot Night 1 Bats 2": "true"
+    "Beneath The Graveyard Pot Night 1 Bats 3": "true"
+
+"Beneath The Graveyard Night 1/2 Exchange":
+  region: NONE
+  exits:
+    "Beneath The Graveyard Night 1": "true"
+    "Beneath The Graveyard Night 2": "true"
+
+"Beneath The Graveyard Night 2":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+  exits:
+    "Ikana Graveyard": "true"
+    "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
+  locations:
+    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives)"
+    "Beneath The Graveyard Pot Night 2 Early": "true"
+    "Beneath The Graveyard Pot Night 2 Before Pit 1": "can_use_lens"
+    "Beneath The Graveyard Pot Night 2 Before Pit 2": "can_use_lens"
+    "Beneath The Graveyard Pot Night 2 After Pit 1": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 2": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 3": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 4": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Rupee 1": "true"
+    "Beneath The Graveyard Rupee 2": "true"
+    "Beneath The Graveyard Rupee 3": "true"
+    "Beneath The Graveyard Rupee 4": "true"
+    "Beneath The Graveyard Rupee 5": "true"
+    "Beneath The Graveyard Rupee 6": "true"
+    "Beneath The Graveyard Rupee 7": "true"
+
+"Beneath The Graveyard Night 3 Fake Exit":
+  region: NONE
+  exits:
+    "Ikana Graveyard": "true"
+
+"Beneath The Graveyard Night 3":
+  region: ENTRANCE
+  events:
+    ARROWS: "true"
+    RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
+    DAMPE_BIG_POE: "soul_dampe && can_kill_big_poe && is_night3"
+  exits:
+    "Ikana Graveyard": "true"
+    "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"
+  locations:
+    "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3 && soul_dampe"
+    "Beneath The Graveyard Pot Dampe 01": "true"
+    "Beneath The Graveyard Pot Dampe 02": "true"
+    "Beneath The Graveyard Pot Dampe 03": "true"
+    "Beneath The Graveyard Pot Dampe 04": "true"
+    "Beneath The Graveyard Pot Dampe 05": "true"
+    "Beneath The Graveyard Pot Dampe 06": "true"
+    "Beneath The Graveyard Pot Dampe 07": "true"
+    "Beneath The Graveyard Pot Dampe 08": "true"
+    "Beneath The Graveyard Pot Dampe 09": "true"
+    "Beneath The Graveyard Pot Dampe 10": "true"
+
+"Beneath The Graveyard Night 3 Wallmaster":
+  region: BUFFER_DELAYED
+  exits:
+    "VOID": "true"

@@ -1,0 +1,16 @@
+"Water Temple Boss":
+  boss: true
+  age_change: false
+  dungeon: Water
+  events:
+    BOSS_MORPHA: "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && can_use_sword"
+  exits:
+    "Water Temple After Boss": "event(BOSS_MORPHA)"
+
+"Water Temple After Boss":
+  boss: true
+  age_change: false
+  dungeon: Water
+  locations:
+    "Water Temple Boss HC": "true"
+    "Water Temple Boss": "true"

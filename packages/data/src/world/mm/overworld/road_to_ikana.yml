@@ -1,0 +1,64 @@
+"Road to Ikana Front":
+  region: ROAD_TO_IKANA
+  events:
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+  exits:
+    "Termina Field": "true"
+    "Road to Ikana Grotto": "can_break_red_boulders"
+    "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+  locations:
+    "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT))"
+    "Road to Ikana Red Boulder": "can_break_red_boulders"
+
+"Road to Ikana Grotto":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    FISH: "true"
+    BUGS: "true"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+  exits:
+    "Road to Ikana Front": "true"
+  locations:
+    "Road to Ikana Grotto": "true"
+    "Road to Ikana Grotto Grass 01": "true"
+    "Road to Ikana Grotto Grass 02": "true"
+    "Road to Ikana Grotto Grass 03": "true"
+    "Road to Ikana Grotto Grass 04": "true"
+    "Road to Ikana Grotto Grass 05": "true"
+    "Road to Ikana Grotto Grass 06": "true"
+    "Road to Ikana Grotto Grass 07": "true"
+    "Road to Ikana Grotto Grass 08": "true"
+    "Road to Ikana Grotto Grass 09": "true"
+    "Road to Ikana Grotto Grass 10": "true"
+    "Road to Ikana Grotto Grass 11": "true"
+    "Road to Ikana Grotto Grass 12": "true"
+    "Road to Ikana Grotto Grass 13": "true"
+    "Road to Ikana Grotto Grass 14": "true"
+
+"Road to Ikana Center":
+  region: ROAD_TO_IKANA
+  events:
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+    FAIRY: "can_get_gossip_fairy || scarecrow_hookshot || short_hook_anywhere"
+  exits:
+    "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+    "Road to Ikana Top": "(soul_poe_collector && (has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && (trick(MM_HARD_HOOKSHOT) || is_adult)))) || short_hook_anywhere"
+    "Ikana Graveyard": "true"
+  locations:
+    "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
+    "Road to Ikana Pot": "scarecrow_hookshot || short_hook_anywhere"
+  gossip:
+    "Road to Ikana Gossip": "true"
+
+"Road to Ikana Top":
+  region: ROAD_TO_IKANA
+  events:
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+  exits:
+    "Road to Ikana Center": "true"
+    "Ikana Valley": "true"

@@ -1,0 +1,91 @@
+"Goron City Shortcut":
+  region: GORON_CITY
+  exits:
+    "Lost Woods": "true"
+    "Goron City": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
+  events:
+    GORON_CITY_SHORTCUT: "has_explosives_or_hammer || can_use_din"
+
+"Goron City":
+  region: GORON_CITY
+  exits:
+    "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
+    "Death Mountain": "true"
+    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child) || (is_child && can_play_zelda)"
+    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will)) || (has_blue_fire_arrows_mudwall && (is_child || time_travel_at_will))"
+    "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
+    "Goron City Red Boulders": "can_hammer"
+  events:
+    GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
+    STICKS: "is_child"
+    ARROWS: "is_adult"
+    BUGS: "has_bottle && (has_explosives_or_hammer || can_lift_silver)"
+  locations:
+    "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
+    "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
+    "Goron City Maze Left": "can_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
+    "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
+    "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child"
+    "Goron City Bomb Bag": "is_child && has_explosives && soul_goron"
+    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && merchant_price(0x00) && soul_medigoron"
+    "Goron City GS Platform": "gs && is_adult && can_damage_skull"
+    "Goron City GS Maze": "gs && is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
+    "Goron City Pot Stairs 1": "true"
+    "Goron City Pot Stairs 2": "true"
+    "Goron City Pot Stairs 3": "true"
+    "Goron City Pot Stairs 4": "true"
+    "Goron City Pot Stairs 5": "true"
+    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+  gossip:
+    "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
+    "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+
+"Goron City Red Boulders":
+  region: GORON_CITY
+  age_change: false
+  locations:
+    "Goron City Red Boulder 1": "true"
+    "Goron City Red Boulder 2": "true"
+    "Goron City Red Boulder 3": "true"
+    "Goron City Red Boulder 4": "true"
+    "Goron City Red Boulder 5": "true"
+
+"Darunia Chamber":
+  region: GORON_CITY
+  exits:
+    "Death Mountain Crater Bottom": "is_adult || time_travel_at_will"
+    "Goron City": "true"
+  events:
+    DARUNIA_TORCH: "is_child && can_use_sticks"
+    STICKS: "is_child"
+    RUPEES: "is_adult"
+  locations:
+    "Darunia": "is_child && can_play_saria && soul_npc(SOUL_NPC_DARUNIA)"
+    "Goron City Pot Darunia Room 1": "true"
+    "Goron City Pot Darunia Room 2": "true"
+    "Goron City Pot Darunia Room 3": "true"
+
+"Goron Shop":
+  region: ENTRANCE
+  exits:
+    "Goron City": "true"
+  locations:
+    "Goron Shop Item 1": "shop_price(0x18) && soul_goron_shopkeeper"
+    "Goron Shop Item 2": "shop_price(0x19) && soul_goron_shopkeeper"
+    "Goron Shop Item 3": "shop_price(0x1a) && soul_goron_shopkeeper"
+    "Goron Shop Item 4": "shop_price(0x1b) && soul_goron_shopkeeper"
+    "Goron Shop Item 5": "shop_price(0x1c) && soul_goron_shopkeeper"
+    "Goron Shop Item 6": "shop_price(0x1d) && soul_goron_shopkeeper"
+    "Goron Shop Item 7": "shop_price(0x1e) && soul_goron_shopkeeper"
+    "Goron Shop Item 8": "shop_price(0x1f) && soul_goron_shopkeeper"
+
+"Goron City Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Goron City": "true"
+  locations:
+    "Goron City Grotto Left Scrub": "business_scrub(0x0b)"
+    "Goron City Grotto Center Scrub": "business_scrub(0x0c)"
+    "Goron City Grotto Right Scrub": "business_scrub(0x0d)"
+    "Goron City Grotto Hive": "break_hive_high"
