@@ -3,11 +3,13 @@
   exits:
     "Ganon Castle Stairs": "true"
     "Ganon Castle Tower Lobby": "true"
+
 "Ganon Castle Tower Lobby":
   dungeon: Tower
   exits:
     "Ganon Castle Tower": "true"
     "Ganon Castle Tower Dinalfos Room": "true"
+
 "Ganon Castle Tower Dinalfos Room":
   dungeon: Tower
   exits:
@@ -15,11 +17,13 @@
     "Ganon Castle Tower First Transitional Staircase": "event(GANON_TOWER_LIZALFOS_CLEAR)"
   events:
     GANON_TOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+
 "Ganon Castle Tower First Transitional Staircase":
   dungeon: Tower
   exits:
     "Ganon Castle Tower Dinalfos Room": "true"
     "Ganon Castle Tower Stalfos Room": "true"
+
 "Ganon Castle Tower Stalfos Room":
   dungeon: Tower
   exits:
@@ -29,11 +33,13 @@
     GANON_TOWER_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "Ganon Castle Boss Key": "event(GANON_TOWER_STALFOS_CLEAR)"
+
 "Ganon Castle Tower Second Transitional Staircase":
   dungeon: Tower
   exits:
     "Ganon Castle Tower Stalfos Room": "true"
     "Ganon Castle Tower Iron Knuckle Room": "true"
+
 "Ganon Castle Tower Iron Knuckle Room":
   dungeon: Tower
   exits:
@@ -41,11 +47,13 @@
     "Ganon Castle Tower Staircase Before Boss Door": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
   events:
     GANON_TOWER_IRON_KNUCKLE_CLEAR: "soul_iron_knuckle && has_weapon"
+
 "Ganon Castle Tower Staircase Before Boss Door":
   dungeon: Tower
   exits:
     "Ganon Castle Tower Iron Knuckle Room": "true"
     "Ganon Castle Tower Lower Arena": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
+
 "Ganon Castle Tower Lower Arena":
   dungeon: Tower
   exits:
@@ -72,11 +80,13 @@
     "Ganon Tower Pot 16": "true"
     "Ganon Tower Pot 17": "true"
     "Ganon Tower Pot 18": "true"
+
 "Ganon Castle Tower Final Staircase":
   dungeon: Tower
   exits:
     "Ganon Castle Tower Lower Arena": "false"
     "Ganon Castle Tower Boss": "true"
+
 "Ganon Castle Tower Boss":
   dungeon: Tower
   age_change: false

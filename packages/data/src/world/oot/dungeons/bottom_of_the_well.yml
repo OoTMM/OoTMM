@@ -3,10 +3,12 @@
   exits:
     "Kakariko Well": "true"
     "Bottom of the Well Main": "(is_child && (has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din)) || time_travel_at_will"
+
 "Bottom of the Well Wallmaster Main":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Bottom of the Well Main":
   dungeon: BotW
   exits:
@@ -75,6 +77,7 @@
     "Bottom of the Well Heart 1": "can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere)"
     "Bottom of the Well Heart 2": "can_swim || can_play_zelda || (has_iron_boots && hookshot_anywhere)"
     "Bottom of the Well Basement Big Fairy": "can_play_sun"
+
 "Bottom of the Well Basement Platform":
   dungeon: BotW
   locations:

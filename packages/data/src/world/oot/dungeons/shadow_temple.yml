@@ -3,10 +3,12 @@
   exits:
     "Graveyard Upper": "true"
     "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere || glitch_megaflip"
+
 "Shadow Temple Wallmaster":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Shadow Temple Pit":
   dungeon: Shadow
   exits:
@@ -26,6 +28,7 @@
     "Shadow Temple Pot Map Room 1": "has_lens"
     "Shadow Temple Pot Map Room 2": "has_lens"
     "Shadow Temple Flying Pot Early Maze": "has_lens && soul_flying_pot"
+
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
@@ -34,6 +37,7 @@
   locations:
     "Shadow Temple Compass": "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
     "Shadow Temple Beamos Big Fairy": "can_play_storms"
+
 "Shadow Temple Scythe Silver Rupees":
   dungeon: Shadow
   exits:
@@ -46,6 +50,7 @@
     "Shadow Temple SR Scythe 4": "true"
     "Shadow Temple SR Scythe 5": "true"
     "Shadow Temple Silver Rupees": "silver_rupees_shadow_scythe"
+
 "Shadow Temple Open":
   dungeon: Shadow
   events:
@@ -66,6 +71,7 @@
     "Shadow Temple Stalfos Big Fairy": "can_play_storms"
     "Shadow Temple Heart Scythe 1": "(can_play_time && is_adult) || can_boomerang || hookshot_anywhere || climb_anywhere"
     "Shadow Temple Heart Scythe 2": "(can_play_time && is_adult) || can_boomerang || hookshot_anywhere || climb_anywhere"
+
 "Shadow Temple Falling Spikes":
   dungeon: Shadow
   locations:
@@ -77,6 +83,7 @@
     "Shadow Temple Pot Falling Spikes Bottom 2": "true"
     "Shadow Temple Pot Falling Spikes Top 1": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
     "Shadow Temple Pot Falling Spikes Top 2": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
+
 "Shadow Temple Invisible Spikes":
   dungeon: Shadow
   exits:
@@ -90,16 +97,19 @@
     "Shadow Temple SR Spikes Front Left": "can_hookshot || climb_anywhere"
     "Shadow Temple SR Spikes Midair": "has_lens && (can_hookshot || climb_anywhere) && (can_use_sword || can_use_sticks || can_hammer || has_hover_boots || longshot_anywhere)"
     "Shadow Temple Invisible Spike Room": "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
+
 "Shadow Temple Skull Pot":
   dungeon: Shadow
   locations:
     "Shadow Temple Skull": "has_bombflowers"
     "Shadow Temple GS Skull Pot": "gs && (can_damage_skull || has_goron_bracelet)"
+
 "Shadow Temple Wind Front":
   dungeon: Shadow
   exits:
     "Shadow Temple Wind Back": "true"
     "Shadow Temple Invisible Spikes": "small_keys_shadow(4)"
+
 "Shadow Temple Wind Back":
   dungeon: Shadow
   exits:
@@ -107,6 +117,7 @@
     "Shadow Temple Wind Front": "climb_anywhere || can_hookshot"
   locations:
     "Shadow Temple Wind Room Hint": "true"
+
 "Shadow Temple Wind Gibdo":
   dungeon: Shadow
   exits:
@@ -120,6 +131,7 @@
     "Shadow Temple Flying Pot After Wind 1": "soul_flying_pot"
     "Shadow Temple Flying Pot After Wind 2": "soul_flying_pot"
     "Shadow Temple Big Fairy After Wind": "can_play_sun"
+
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
@@ -132,6 +144,7 @@
     "Shadow Temple GS Near Boat": "gs && (can_longshot || hookshot_anywhere || (climb_anywhere && (can_use_sword || has_ranged_weapon || has_explosives || can_use_din)))"
     "Shadow Temple Heart Shortcut 1": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
     "Shadow Temple Heart Shortcut 2": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
+
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:
@@ -154,6 +167,7 @@
     "Shadow Temple Heart Pre-Boss 2": "scarecrow_longshot || climb_anywhere"
     "Shadow Temple Heart Pre-Boss 3": "scarecrow_longshot || climb_anywhere"
     "Shadow Temple Wonder Item": "can_use_bow"
+
 "Shadow Temple Pre-Boss":
   dungeon: Shadow
   exits:

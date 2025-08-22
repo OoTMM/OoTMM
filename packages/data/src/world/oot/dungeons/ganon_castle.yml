@@ -10,14 +10,17 @@
     "Ganon Castle Shadow": "true"
     "Ganon Castle Stairs": "true"
     "Ganon Castle Fairy Fountain": "has_lens"
+
 "Ganon Castle Spirit Wallmaster":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Ganon Castle Light Wallmaster":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Ganon Castle Fairy Fountain":
   dungeon: Ganon
   locations:
@@ -33,6 +36,7 @@
     "Ganon Castle Fairy Fountain Fairy 6": "true"
     "Ganon Castle Fairy Fountain Fairy 7": "true"
     "Ganon Castle Fairy Fountain Fairy 8": "true"
+
 "Ganon Castle Light":
   dungeon: Ganon
   exits:
@@ -46,6 +50,7 @@
     "Ganon Castle Light Chest Around 6": "true"
     "Ganon Castle Light Chest Center": "soul_keese && soul_skulltula && has_lens && (can_use_sword || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
     "Ganon Castle Light Chest Lullaby": "small_keys_ganon(1) && can_play_zelda"
+
 "Ganon Castle Light 2":
   dungeon: Ganon
   exits:
@@ -57,6 +62,7 @@
     "Ganon Castle SR Light Center Right": "true"
     "Ganon Castle SR Light Center Left": "true"
     "Ganon Castle Pot Light": "true"
+
 "Ganon Castle Light End":
   dungeon: Ganon
   exits:
@@ -66,12 +72,14 @@
   locations:
     "Ganon Castle Pot Light End 1": "true"
     "Ganon Castle Pot Light End 2": "true"
+
 "Ganon Castle Forest":
   dungeon: Ganon
   exits:
     "Ganon Castle Forest 2": "has_fire_arrows || (can_use_din && (has_ranged_weapon_adult || climb_anywhere))"
   locations:
     "Ganon Castle Forest Chest": "soul_wolfos && (can_use_sword || has_explosives_or_hammer || can_hit_triggers_distance || can_use_sticks || can_use_din)"
+
 "Ganon Castle Forest 2":
   dungeon: Ganon
   exits:
@@ -82,6 +90,7 @@
     "Ganon Castle SR Forest Back Right": "true"
     "Ganon Castle SR Forest Back Middle": "true"
     "Ganon Castle SR Forest Center Left": "is_adult || climb_anywhere || can_hookshot"
+
 "Ganon Castle Forest End":
   dungeon: Ganon
   events:
@@ -89,6 +98,7 @@
   locations:
     "Ganon Castle Pot Forest End 1": "true"
     "Ganon Castle Pot Forest End 2": "true"
+
 "Ganon Castle Fire":
   dungeon: Ganon
   exits:
@@ -100,6 +110,7 @@
     "Ganon Castle SR Fire Front Right": "has_tunic_goron"
     "Ganon Castle SR Fire Black Pillar": "has_tunic_goron && can_lift_gold"
     "Ganon Castle Heart Fire": "has_tunic_goron"
+
 "Ganon Castle Fire End":
   dungeon: Ganon
   events:
@@ -107,6 +118,7 @@
   locations:
     "Ganon Castle Pot Fire End 1": "true"
     "Ganon Castle Pot Fire End 2": "true"
+
 "Ganon Castle Water":
   dungeon: Ganon
   events:
@@ -130,12 +142,14 @@
     "Ganon Castle Icicle Water 12": "break_icicle"
     "Ganon Castle Icicle Water 13": "break_icicle"
     "Ganon Castle Icicle Water 14": "break_icicle"
+
 "Ganon Castle Water 2":
   dungeon: Ganon
   locations:
     "Ganon Castle Pot Water": "true"
   exits:
     "Ganon Castle Water End": "can_hammer && (is_adult || climb_anywhere || hookshot_anywhere)"
+
 "Ganon Castle Water End":
   dungeon: Ganon
   events:
@@ -143,6 +157,7 @@
   locations:
     "Ganon Castle Pot Water End 1": "true"
     "Ganon Castle Pot Water End 2": "true"
+
 "Ganon Castle Spirit":
   dungeon: Ganon
   exits:
@@ -155,6 +170,7 @@
     "Ganon Castle SR Spirit Back Right": "true"
     "Ganon Castle Heart Spirit": "true"
     "Ganon Castle Spirit Big Fairy": "can_play_sun"
+
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   exits:
@@ -163,6 +179,7 @@
   locations:
     "Ganon Castle Spirit Chest 1": "can_use_sticks || can_use_sword || has_bombchu || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_explosives))"
     "Ganon Castle Spirit Chest 2": "(has_bombchu || climb_anywhere || hookshot_anywhere) && has_lens"
+
 "Ganon Castle Spirit End":
   dungeon: Ganon
   events:
@@ -170,6 +187,7 @@
   locations:
     "Ganon Castle Pot Spirit End 1": "true"
     "Ganon Castle Pot Spirit End 2": "true"
+
 "Ganon Castle Shadow":
   dungeon: Ganon
   exits:
@@ -182,6 +200,7 @@
     "Ganon Castle Heart Shadow 1": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
     "Ganon Castle Heart Shadow 2": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
     "Ganon Castle Heart Shadow 3": "((((can_longshot && soul_like_like) || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
+
 "Ganon Castle Shadow End":
   dungeon: Ganon
   events:
@@ -189,6 +208,7 @@
   locations:
     "Ganon Castle Pot Shadow End 1": "true"
     "Ganon Castle Pot Shadow End 2": "true"
+
 "Ganon Castle Stairs":
   region: GANON_CASTLE
   exits:

@@ -17,11 +17,13 @@
     "Thieves Hideout Crate Jail 1": "true"
     "Gerudo Fortress Wonder Item Jail 1 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 1 2": "can_use_bow"
+
 "Gerudo Fortress Carpenter 1 Right":
   dungeon: GF
   exits:
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Carpenter 1 Left": "true"
+
 "Gerudo Fortress Carpenter 2 Bottom":
   dungeon: GF
   exits:
@@ -44,16 +46,19 @@
     "Thieves Hideout Crate Jail 2 2": "true"
     "Gerudo Fortress Wonder Item Jail 2 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 2 2": "can_use_bow"
+
 "Gerudo Fortress Carpenter 2 Top":
   dungeon: GF
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Carpenter 2 Bottom": "true"
+
 "Gerudo Fortress Carpenter 4 Bottom":
   dungeon: GF
   exits:
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Carpenter 4 Top": "true"
+
 "Gerudo Fortress Carpenter 4 Top":
   dungeon: GF
   exits:
@@ -67,11 +72,13 @@
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Wonder Item Jail 4 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 4 2": "can_use_bow"
+
 "Gerudo Fortress Kitchen Tunnel End":
   dungeon: GF
   exits:
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Kitchen Tunnel Mid": "true"
+
 "Gerudo Fortress Kitchen Tunnel Mid":
   dungeon: GF
   exits:
@@ -83,6 +90,7 @@
     "Thieves Hideout Crate Kitchen Corridor 2": "true"
     "Thieves Hideout Crate Kitchen Corridor 3": "true"
     "Thieves Hideout Crate Kitchen Corridor 4": "true"
+
 "Gerudo Fortress Kitchen Bottom":
   dungeon: GF
   exits:
@@ -96,18 +104,21 @@
     "Gerudo Fortress Kitchen Big Fairy": "can_play_sun"
     "Gerudo Fortress Wonder Item Kitchen Skull": "can_use_bow"
     "Gerudo Fortress Wonder Item Kitchen Soup": "evade_gerudo"
+
 "Gerudo Fortress Kitchen Ledge Near Tunnel":
   dungeon: GF
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
     "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
+
 "Gerudo Fortress Kitchen Ledge Away from Tunnel":
   dungeon: GF
   exits:
     "Gerudo Fortress Upper-Center Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
     "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
+
 "Gerudo Fortress Carpenter 3":
   dungeon: GF
   exits:
@@ -122,6 +133,7 @@
     "Thieves Hideout Crate Jail 3": "true"
     "Gerudo Fortress Wonder Item Jail 3 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 3 2": "can_use_bow"
+
 "Gerudo Fortress Break Room Bottom":
   dungeon: GF
   exits:
@@ -139,6 +151,7 @@
     "Thieves Hideout Crate Break Room 2": "true"
     "Thieves Hideout Crate Break Room 3": "true"
     "Thieves Hideout Crate Break Room 4": "true"
+
 "Gerudo Fortress Break Room Top":
   dungeon: GF
   exits:

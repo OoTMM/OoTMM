@@ -13,10 +13,12 @@
     "Gerudo Training Grounds Heart 2": "true"
     "Gerudo Training Grounds Entrance Big Fairy": "can_play_storms"
     "Gerudo Training Grounds Wonder Item Beamos Room": "can_use_bow"
+
 "Gerudo Training Grounds Wallmaster":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Gerudo Training Grounds Slopes":
   dungeon: GTG
   exits:
@@ -29,11 +31,13 @@
     "Gerudo Training Grounds SR Slope Front Above": "(is_adult && can_hookshot) || can_longshot"
     "Gerudo Training Grounds SR Slope Center": "true"
     "Gerudo Training Grounds SR Slope Back": "true"
+
 "Gerudo Training Grounds Slopes End":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Slopes": "can_hookshot || climb_anywhere"
     "Gerudo Training Grounds Left Side": "silver_rupees_gtg_slopes"
+
 "Gerudo Training Grounds Left Side":
   dungeon: GTG
   exits:
@@ -42,6 +46,7 @@
     "Gerudo Training Grounds Upper": "(can_hookshot || climb_anywhere) && has_lens"
   locations:
     "Gerudo Training Grounds Near Block": "soul_wolfos && (can_use_sword || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance || can_use_din)"
+
 "Gerudo Training Grounds After Block":
   dungeon: GTG
   locations:
@@ -49,6 +54,7 @@
     "Gerudo Training Grounds Behind Block Visible": "true"
     "Gerudo Training Grounds Behind Block Enemy Back": "soul_like_like && (can_use_sword || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance)"
     "Gerudo Training Grounds Behind Block Enemy Front": "soul_like_like && (can_use_sword || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance)"
+
 "Gerudo Training Grounds Upper":
   dungeon: GTG
   exits:
@@ -59,12 +65,14 @@
   locations:
     "Gerudo Training Maze Upper Cage": "can_use_bow"
     "Gerudo Training Grounds Wonder Item Eye Statue Room": "has_hover_boots"
+
 "Gerudo Training Grounds Right Side":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Lava": "true"
   locations:
     "Gerudo Training Grounds Lizalfos": "true"
+
 "Gerudo Training Grounds Lava":
   dungeon: GTG
   exits:
@@ -77,6 +85,7 @@
     "Gerudo Training Grounds SR Lava Back Left": "has_hover_boots || can_play_time || climb_anywhere || hookshot_anywhere || is_child"
     "Gerudo Training Grounds SR Lava Back Center": "(can_hookshot && (can_longshot || has_hover_boots || can_play_time || hookshot_anywhere || is_child)) || climb_anywhere"
     "Gerudo Training Grounds SR Lava Back Right": "can_longshot || has_hover_boots || can_play_time || is_child || climb_anywhere || hookshot_anywhere"
+
 "Gerudo Training Grounds Maze Side":
   dungeon: GTG
   exits:
@@ -88,12 +97,14 @@
     "Gerudo Training Maze Side Chest 2": "true"
     "Gerudo Training Grounds SR Lava Back Center": "can_hookshot"
     "Gerudo Training Grounds SR Lava Back Right": "true"
+
 "Gerudo Training Grounds Water":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Underwater": "can_play_time && has_iron_boots && has_tunic_zora"
   locations:
     "Gerudo Training Water": "silver_rupees_gtg_water"
+
 "Gerudo Training Grounds Underwater":
   dungeon: GTG
   locations:
@@ -102,6 +113,7 @@
     "Gerudo Training Grounds SR Water 3": "true"
     "Gerudo Training Grounds SR Water 4": "can_swim || can_hookshot"
     "Gerudo Training Grounds SR Water 5": "can_swim || hookshot_anywhere"
+
 "Gerudo Training Grounds Hammer":
   dungeon: GTG
   exits:
@@ -113,6 +125,7 @@
     "Gerudo Training Grounds SR Lava Back Center": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
     "Gerudo Training Grounds SR Lava Back Right": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
     "Gerudo Training Grounds Wonder Item Torch Slugs Room": "can_use_bow"
+
 "Gerudo Training Grounds Statue":
   dungeon: GTG
   exits:
@@ -120,6 +133,7 @@
     "Gerudo Training Grounds Upper": "climb_anywhere || hookshot_anywhere"
   locations:
     "Gerudo Training Grounds Eye Statue": "can_use_bow"
+
 "Gerudo Training Grounds Maze":
   dungeon: GTG
   exits:

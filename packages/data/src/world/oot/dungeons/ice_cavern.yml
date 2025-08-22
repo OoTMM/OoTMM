@@ -16,6 +16,7 @@
     "Ice Cavern Red Ice Entrance": "has_blue_fire"
     "Ice Cavern Red Ice Freezard 1": "has_blue_fire"
     "Ice Cavern Red Ice Freezard 2": "has_blue_fire"
+
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
@@ -42,6 +43,7 @@
     "Ice Cavern Icicle Scythe 1": "break_icicle_ice_cavern"
     "Ice Cavern Icicle Scythe 2": "break_icicle_ice_cavern"
     "Ice Cavern Icicle Scythe 3": "break_icicle_ice_cavern"
+
 "Ice Cavern HP Room":
   dungeon: IC
   events:
@@ -65,6 +67,7 @@
     "Ice Cavern Icicle Compass 13": "break_icicle_ice_cavern"
     "Ice Cavern Red Ice Compass 1": "has_blue_fire"
     "Ice Cavern Red Ice Compass 2": "has_blue_fire"
+
 "Ice Cavern First Fire Room":
   dungeon: IC
   events:
@@ -80,6 +83,7 @@
     "Ice Cavern Icicle Before Map 3": "break_icicle_ice_cavern"
     "Ice Cavern Red Ice Map 1": "has_blue_fire"
     "Ice Cavern Red Ice Map 2": "has_blue_fire"
+
 "Ice Cavern Block Room":
   dungeon: IC
   exits:
@@ -105,6 +109,7 @@
     "Ice Cavern Icicle Before Block 4": "break_icicle_ice_cavern"
     "Ice Cavern Icicle Before Block 5": "break_icicle_ice_cavern"
     "Ice Cavern Red Ice Block": "has_blue_fire"
+
 "Ice Cavern End":
   dungeon: IC
   exits:

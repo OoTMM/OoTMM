@@ -5,6 +5,7 @@
     "Treasure Chest Game Room 1": "small_keys_tcg(1)"
   locations:
     "Treasure Chest Game Buy Key": "can_use_wallet(1) && soul_chest_game_owner"
+
 "Treasure Chest Game Room 1":
   dungeon: TCG
   exits:
@@ -12,6 +13,7 @@
   locations:
     "Treasure Chest Game Room 1 Chest Left": "true"
     "Treasure Chest Game Room 1 Chest Right": "true"
+
 "Treasure Chest Game Room 2":
   dungeon: TCG
   exits:
@@ -19,6 +21,7 @@
   locations:
     "Treasure Chest Game Room 2 Chest Left": "true"
     "Treasure Chest Game Room 2 Chest Right": "true"
+
 "Treasure Chest Game Room 3":
   dungeon: TCG
   exits:
@@ -26,6 +29,7 @@
   locations:
     "Treasure Chest Game Room 3 Chest Left": "true"
     "Treasure Chest Game Room 3 Chest Right": "true"
+
 "Treasure Chest Game Room 4":
   dungeon: TCG
   exits:
@@ -33,6 +37,7 @@
   locations:
     "Treasure Chest Game Room 4 Chest Left": "true"
     "Treasure Chest Game Room 4 Chest Right": "true"
+
 "Treasure Chest Game Room 5":
   dungeon: TCG
   exits:
@@ -40,6 +45,7 @@
   locations:
     "Treasure Chest Game Room 5 Chest Left": "true"
     "Treasure Chest Game Room 5 Chest Right": "true"
+
 "Treasure Chest Game Room 6":
   dungeon: TCG
   locations:

@@ -5,6 +5,7 @@
     "Fire Temple Lava Room": "small_keys_fire(1)"
     "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_fire(7), true) && can_hammer"
     "Fire Temple Pre-Boss": "true"
+
 "Fire Temple Pre-Boss":
   dungeon: Fire
   exits:
@@ -18,11 +19,13 @@
     "Fire Temple Pot Pre-Boss Room 2": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
+
 "Fire Temple Boss Key Loop Start":
   dungeon: Fire
   exits:
     "Fire Temple": "true"
     "Fire Temple Boss Key Loop Floor Tiles": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG)"
+
 "Fire Temple Boss Key Loop Floor Tiles":
   dungeon: Fire
   exits:
@@ -30,6 +33,7 @@
     "Fire Temple Boss Key Loop Flare Dancer": "true"
   locations:
     "Fire Temple GS Hammer Statues": "gs"
+
 "Fire Temple Boss Key Loop Flare Dancer":
   dungeon: Fire
   exits:
@@ -37,10 +41,12 @@
     "Fire Temple Boss Key Loop End": "soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
   locations:
     "Fire Temple Boss Key Side Chest": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (is_adult || can_hookshot || climb_anywhere)"
+
 "Fire Temple Boss Key Loop End":
   dungeon: Fire
   locations:
     "Fire Temple Boss Key Chest": "true"
+
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
@@ -55,6 +61,7 @@
     "Fire Temple Heart Elevator 1": "small_keys_fire(2) && has_tunic_goron_strict"
     "Fire Temple Heart Elevator 2": "small_keys_fire(2) && has_tunic_goron_strict"
     "Fire Temple Heart Elevator 3": "small_keys_fire(2) && has_tunic_goron_strict"
+
 "Fire Temple Maze":
   dungeon: Fire
   exits:
@@ -65,12 +72,14 @@
     "Fire Temple Maze Jail Chest": "true"
     "Fire Temple GS Maze": "gs && has_explosives && (climb_anywhere || can_collect_distance)"
     "Fire Temple Map": "can_hit_triggers_distance && small_keys_fire(4)"
+
 "Fire Temple Ledge Above Main":
   dungeon: Fire
   locations:
     "Fire Temple Heart Ledge Above Main 1": "true"
     "Fire Temple Heart Ledge Above Main 2": "true"
     "Fire Temple Heart Ledge Above Main 3": "true"
+
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
@@ -83,12 +92,14 @@
     "Fire Temple Heart Map Room 1": "is_adult || climb_anywhere || hookshot_anywhere || can_boomerang"
     "Fire Temple Heart Map Room 2": "is_adult || climb_anywhere || hookshot_anywhere || can_boomerang"
     "Fire Temple Heart Map Room 3": "true"
+
 "Fire Temple Scarecrow":
   dungeon: Fire
   locations:
     "Fire Temple Scarecrow Chest": "true"
     "Fire Temple GS Scarecrow Wall": "gs && (can_use_sword || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din)"
     "Fire Temple GS Scarecrow Top": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+
 "Fire Temple Ring":
   dungeon: Fire
   exits:
@@ -100,6 +111,7 @@
     "Fire Temple Pot Ring 2": "true"
     "Fire Temple Pot Ring 3": "true"
     "Fire Temple Pot Ring 4": "true"
+
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
@@ -111,6 +123,7 @@
     "Fire Temple Pot Before Miniboss 2": "true"
     "Fire Temple Pot Before Miniboss 3": "true"
     "Fire Temple Pot Before Miniboss 4": "true"
+
 "Fire Temple Pillar Ledge":
   dungeon: Fire
   exits:
@@ -120,6 +133,7 @@
     FIRE_TEMPLE_PILLAR_HAMMER: "can_hammer"
   locations:
     "Fire Temple Ring Jail": "can_hammer && trick(OOT_HAMMER_WALLS)"
+
 "Fire Temple After Miniboss":
   dungeon: Fire
   exits:

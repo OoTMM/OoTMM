@@ -13,14 +13,17 @@
     "Spirit Temple Pot Lobby 2": "true"
     "Spirit Temple Flying Pot Lobby 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Lobby 2": "soul_flying_pot"
+
 "Spirit Temple Wallmaster Child Rupees":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Spirit Temple Wallmaster Adult Climb":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Spirit Temple Child Entrance":
   dungeon: Spirit
   exits:
@@ -28,11 +31,13 @@
     "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (can_use_sword || can_use_slingshot)) || time_travel_at_will)"
     "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (can_use_sword || can_use_slingshot)) || time_travel_at_will)"
     "Spirit Temple Child Crawlspace": "is_child"
+
 "Spirit Temple Child Left":
   dungeon: Spirit
   exits:
     "Spirit Temple Child Entrance": "true"
     "Spirit Temple Child Back Left": "has_ranged_weapon_child || hookshot_anywhere || climb_anywhere || (can_hookshot && can_jump_slash) || can_longshot"
+
 "Spirit Temple Child Right":
   dungeon: Spirit
   events:
@@ -42,6 +47,7 @@
     "Spirit Temple Child Back Right": "silver_rupees_spirit_child"
   locations:
     "Spirit Temple GS Child Fence": "gs && (can_collect_distance || (climb_anywhere && (can_use_din || has_ranged_weapon || has_explosives)))"
+
 "Spirit Temple Child Back Left":
   dungeon: Spirit
   events:
@@ -56,6 +62,7 @@
     "Spirit Temple Pot Child Anubis Room 2": "true"
     "Spirit Temple Pot Child Anubis Room 3": "true"
     "Spirit Temple Pot Child Anubis Room 4": "true"
+
 "Spirit Temple Child Back Right":
   dungeon: Spirit
   exits:
@@ -73,6 +80,7 @@
     "Spirit Temple Pot Child Anubis Room 2": "true"
     "Spirit Temple Pot Child Anubis Room 3": "true"
     "Spirit Temple Pot Child Anubis Room 4": "true"
+
 "Spirit Temple Child Crawlspace":
   dungeon: Spirit
   exits:
@@ -81,6 +89,7 @@
   locations:
     "Spirit Temple Crate 1": "is_child"
     "Spirit Temple Crate 2": "is_child"
+
 "Spirit Temple Child Climb":
   dungeon: Spirit
   exits:
@@ -91,6 +100,7 @@
     "Spirit Temple Child Climb 2": "has_ranged_weapon_both || (climb_anywhere && (can_use_sword || can_use_sticks || can_hammer)) || (event(SPIRIT_CHILD_DOOR) && (has_ranged_weapon_child || can_hookshot)) || (event(SPIRIT_ADULT_DOOR) && (has_ranged_weapon_adult || can_boomerang))"
     "Spirit Temple GS Child Climb": "gs && (can_use_sword || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din || (has_hover_boots && can_hammer))"
     "Spirit Temple Pot Child Climb": "true"
+
 "Spirit Temple Child Upper":
   dungeon: Spirit
   exits:
@@ -106,6 +116,7 @@
     "Spirit Temple GS Iron Knuckle": "gs && ((event(SPIRIT_CHILD_DOOR) && has_explosives && can_collect_distance) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || cond(!setting(climbMostSurfacesOot, off), ((has_explosives && can_reflect_light && small_keys_spirit(1)) || small_keys_spirit(3)) && (can_collect_distance || has_ranged_weapon || has_explosives || can_use_din), can_collect_ageless && (has_explosives || small_keys_spirit(2))))"
     "Spirit Temple Pot Child Hand Stairway 1": "true"
     "Spirit Temple Pot Child Hand Stairway 2": "true"
+
 "Spirit Temple Child Hand":
   dungeon: Spirit
   exits:
@@ -115,6 +126,7 @@
     "Spirit Temple": "true"
   locations:
     "Spirit Temple Silver Gauntlets": "true"
+
 "Spirit Temple Adult Entrance":
   dungeon: Spirit
   exits:
@@ -122,6 +134,7 @@
     "Spirit Temple Adult Boulders": "has_ranged_weapon || can_boomerang || has_bombchu"
   locations:
     "Spirit Temple Adult Lullaby": "can_play_zelda && (can_hookshot || climb_anywhere)"
+
 "Spirit Temple Adult Boulders":
   dungeon: Spirit
   locations:
@@ -133,6 +146,7 @@
     "Spirit Temple SR Boulders 3": "true"
     "Spirit Temple SR Boulders 4": "true"
     "Spirit Temple SR Boulders 5": "true"
+
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:
@@ -144,6 +158,7 @@
     "Spirit Temple Adult Suns on Wall 2": "cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER)))))"
     "Spirit Temple Flying Pot Adult Climb 1": "soul_flying_pot && cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER)))))"
     "Spirit Temple Flying Pot Adult Climb 2": "soul_flying_pot && cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER)))))"
+
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
@@ -163,6 +178,7 @@
     "Spirit Temple Pot Statue Room 6": "true"
     "Spirit Temple Flying Pot Statue Room 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Statue Room 2": "soul_flying_pot"
+
 "Spirit Temple Statue Adult":
   dungeon: Spirit
   exits:
@@ -173,6 +189,7 @@
     "Spirit Temple Statue Hands": "cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER))))) && can_play_zelda"
     "Spirit Temple Statue Upper Right": "cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || has_hookshot(1))) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER))))) && can_play_zelda"
     "Spirit Temple Pot Adult Upper": "small_keys_spirit(4)"
+
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
@@ -181,6 +198,7 @@
     "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS) && ((small_keys_spirit(1) && can_reflect_light) || small_keys_spirit(2))"
   locations:
     "Spirit Temple Pot Adult Upper": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS)"
+
 "Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:
@@ -191,6 +209,7 @@
     "Spirit Temple Adult Invisible 1": "has_lens && (soul_armos || can_play_elegy)"
     "Spirit Temple Adult Invisible 2": "has_lens && (soul_armos || can_play_elegy)"
     "Spirit Temple Adult Sunlight Big Fairy": "can_play_sun"
+
 "Spirit Temple Adult Hand":
   dungeon: Spirit
   exits:
@@ -200,6 +219,7 @@
     "Spirit Temple": "true"
   locations:
     "Spirit Temple Mirror Shield": "true"
+
 "Spirit Temple Adult Climb 2":
   dungeon: Spirit
   events:
