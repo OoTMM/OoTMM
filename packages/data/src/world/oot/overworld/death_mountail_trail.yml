@@ -1,0 +1,116 @@
+"Death Mountain":
+  region: DEATH_MOUNTAIN_TRAIL
+  time: flow
+  exits:
+    "Goron City": "true"
+    "Dodongo Cavern": "has_bombflowers || is_adult || (trick(OOT_DC_BOULDER) && hookshot_anywhere) || time_travel_at_will || setting(openDungeonsOot, DC)"
+    "Kakariko Trail Start": "true"
+    "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN) || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Storms Grotto": "hidden_grotto_storms"
+    "Death Mountain Cow Grotto": "has_explosives_or_hammer"
+    "Death Mountain Trail Red Boulders Lower": "is_adult && can_hammer"
+  events:
+    BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"
+    BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
+    RUPEES: "true"
+  locations:
+    "Death Mountain Trail Chest": "has_explosives_or_hammer"
+    "Death Mountain Trail HP": "true"
+    "Death Mountain Trail GS Entrance": "gs && (has_explosives || (can_hammer && (can_use_sticks || can_use_sword_master || can_use_sword_gilded || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon || can_use_din)))"
+    "Death Mountain Trail GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
+    "Death Mountain Trail GS Above Dodongo":  "gs_night && is_adult && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
+    "Death Mountain Trail Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
+    "Death Mountain Trail Rupee Lower": "is_child && has_explosives_or_hammer"
+    "Death Mountain Trail Big Fairy": "can_play_sun"
+
+"Death Mountain Trail Red Boulders Lower":
+  region: DEATH_MOUNTAIN_TRAIL
+  age_change: false
+  locations:
+    "Death Mountain Trail Red Boulder Lower 1": "true"
+    "Death Mountain Trail Red Boulder Lower 2": "true"
+    "Death Mountain Trail Red Boulder Lower 3": "true"
+    "Death Mountain Trail Red Boulder Lower 4": "true"
+    "Death Mountain Trail Red Boulder Lower 5": "true"
+    "Death Mountain Trail Red Boulder Lower 6": "true"
+    "Death Mountain Trail Red Boulder Lower 7": "true"
+    "Death Mountain Trail Red Boulder Near Lower GS": "true"
+
+"Death Mountain Summit":
+  region: DEATH_MOUNTAIN_TRAIL
+  time: flow
+  exits:
+    "Death Mountain": "true"
+    "Kakariko Rooftop": "is_child"
+    "Death Mountain Crater Top": "true"
+    "Fairy Fountain Magic": "has_explosives_or_hammer"
+    "Death Mountain Trail Red Boulders Upper": "is_adult && can_hammer"
+  locations:
+    "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_biggoron"
+    "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_biggoron"
+    "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_biggoron"
+    "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
+  gossip:
+    "Death Mountain Trail Gossip on Climb": "true"
+
+"Death Mountain Trail Red Boulders Upper":
+  region: DEATH_MOUNTAIN_TRAIL
+  age_change: false
+  locations:
+    "Death Mountain Trail Red Boulder Near Upper GS": "true"
+    "Death Mountain Trail Red Boulder Upper 1": "true"
+    "Death Mountain Trail Red Boulder Upper 2": "true"
+
+"Death Mountain Storms Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "GENERIC_GROTTO_EVENTS": "true"
+    "Death Mountain": "true"
+  locations:
+    "Death Mountain Trail Grotto": "true"
+    "Death Mountain Trail Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Trail Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Trail Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Trail Grotto Grass 4": "can_cut_grass"
+    "Death Mountain Trail Grotto Hive 1": "break_hive_low"
+    "Death Mountain Trail Grotto Hive 2": "break_hive_low"
+    "Death Mountain Trail Grotto Butterfly 1": "can_use_sticks"
+    "Death Mountain Trail Grotto Butterfly 2": "can_use_sticks"
+    "Death Mountain Trail Grotto Butterfly 3": "can_use_sticks"
+  gossip:
+    "Death Mountain Trail Gossip Grotto": "true"
+
+"Death Mountain Cow Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Death Mountain": "true"
+  events:
+    RUPEES: "true"
+  locations:
+    "Death Mountain Trail Cow": "can_play_epona"
+    "Death Mountain Trail Cow Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Trail Cow Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Trail Cow Grotto Rupee 1": "true"
+    "Death Mountain Trail Cow Grotto Rupee 2": "true"
+    "Death Mountain Trail Cow Grotto Rupee 3": "true"
+    "Death Mountain Trail Cow Grotto Rupee 4": "true"
+    "Death Mountain Trail Cow Grotto Rupee 5": "true"
+    "Death Mountain Trail Cow Grotto Rupee 6": "true"
+    "Death Mountain Trail Cow Grotto Rupee 7": "true"
+    "Death Mountain Trail Cow Grotto Heart 1": "true"
+    "Death Mountain Trail Cow Grotto Heart 2": "true"
+    "Death Mountain Trail Cow Grotto Heart 3": "true"
+    "Death Mountain Trail Cow Grotto Heart 4": "true"
+    "Death Mountain Trail Cow Grotto Big Fairy": "can_play_storms"
+    "Death Mountain Trail Cow Grotto Hive": "break_hive_high"
+
+"Fairy Fountain Magic":
+  region: ENTRANCE
+  exits:
+    "Death Mountain Summit": "true"
+  events:
+    MAGIC: "can_play_zelda"
+  locations:
+    "Great Fairy Magic Upgrade": "can_play_zelda"
