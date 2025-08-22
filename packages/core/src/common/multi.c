@@ -6,6 +6,7 @@
 #include <combo/item.h>
 #include <combo/actor.h>
 #include <combo/global.h>
+#include <combo/instances.h>
 
 #if defined(GAME_OOT)
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART
@@ -436,7 +437,7 @@ static u16 GetSceneKey(PlayState* play)
     u16 sceneKey;
     int instanceId;
 
-    instanceId = Play_GetInstance(play);
+    instanceId = Instance_Get(play);
     if (instanceId)
         return 0x100 + ((u16)instanceId - 1);
 
@@ -469,7 +470,7 @@ static u16 GetSceneKey(PlayState* play)
     u16 sceneKey;
     int instanceId;
 
-    instanceId = Play_GetInstance(play);
+    instanceId = Instance_Get(play);
     if (instanceId)
         return (0x100 + ((u16)instanceId - 1)) | 0x8000;
 

@@ -1,3 +1,4 @@
+#include <combo/instances.h>
 #include "En_Kanban.h"
 #include "assets/mm/objects/object_kanban.h"
 #include "assets/mm/objects/gameplay_keep.h"
@@ -127,7 +128,7 @@ static const char* EnKanban_LocName(PlayState* play)
 {
     int instanceId;
 
-    instanceId = Play_GetInstance(play);
+    instanceId = Instance_Get(play);
     switch (instanceId)
     {
     case INSTANCE_MM_GROTTO_GENERIC_PATH_TO_SNOWHEAD: return "Path to Snowhead Generic Grotto";

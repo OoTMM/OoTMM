@@ -1,10 +1,5 @@
-/*
- * File: z_en_kanban.c
- * Overlay: ovl_En_Kanban
- * Description: Cuttable square sign
- */
-
 #include "En_Kanban.h"
+#include <combo/instances.h>
 #include <assets/oot/objects/gameplay_keep.h>
 #include <assets/oot/objects/object_kanban.h>
 
@@ -202,7 +197,7 @@ static const char* EnKanban_LocName(PlayState* play)
     if (play->sceneId == SCE_OOT_GROTTOS && play->roomCtx.curRoom.num == 0x06)
         return "Lost Woods Scrub Grotto";
 
-    instanceId = Play_GetInstance(play);
+    instanceId = Instance_Get(play);
     switch (instanceId)
     {
     case INSTANCE_OOT_GROTTO_GENERIC_HYRULE_FIELD_MARKET: return "Hyrule Field Market Generic Grotto";

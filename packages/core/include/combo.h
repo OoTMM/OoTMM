@@ -199,7 +199,6 @@ void comboHandleAutoInvertClockSpeed(void);
 void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
-int  Play_GetInstance(PlayState* play);
 
 #else
 # include <combo/asm.h>

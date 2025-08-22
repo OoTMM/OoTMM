@@ -50,4 +50,9 @@
 #define INSTANCE_MM_GROTTO_COW_TERMINA_FIELD                                0x0e
 #define INSTANCE_MM_GROTTO_COW_GREAT_BAY_COAST                              0x0f
 
+#if !defined(__ASSEMBLER__)
+typedef struct PlayState PlayState;
+int Instance_Get(PlayState* play);
+#endif
+
 #endif
