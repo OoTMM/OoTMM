@@ -3,29 +3,18 @@
   locations:
     "Tingle Map Ranch": "tingle_price(0x06)"
     "Tingle Map Great Bay": "tingle_price(0x07)"
+
 "Tingle Great Bay":
   region: TINGLE
   locations:
     "Tingle Map Great Bay": "tingle_price(0x08)"
     "Tingle Map Ikana": "tingle_price(0x09)"
+
 "Tingle Ikana":
   region: TINGLE
   locations:
     "Tingle Map Ikana": "tingle_price(0x0a)"
     "Tingle Map Clock Town": "tingle_price(0x0b)"
-"Owl Milk Road":
-  region: MILK_ROAD
-  exits:
-    "Milk Road": "can_reset_time"
-  events:
-    MAGIC: "true"
-    ARROWS: "true"
-    FAIRY: "true"
-  locations:
-    "Milk Road Owl Statue": "has_sticks || has_sword"
-    "Milk Road Grass 1": "true"
-    "Milk Road Grass 2": "true"
-    "Milk Road Grass 3": "true"
 
 "Owl Great Bay":
   region: GREAT_BAY_COAST
@@ -82,45 +71,6 @@
     "Stone Tower Pot Owl Statue 3": "true"
     "Stone Tower Pot Owl Statue 4": "true"
 
-"Milk Road":
-  region: MILK_ROAD
-  exits:
-    "Termina Field": "true"
-    "Gorman Track Front": "true"
-    "Owl Milk Road": "true"
-    "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
-    "Tingle Ranch": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
-    "Milk Road Keaton": "true"
-  events:
-    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
-    RUPEES: "true"
-    MAGIC: "true"
-    ARROWS: "true"
-    FAIRY: "true"
-  gossip:
-    "Milk Road Gossip": "true"
-  locations:
-    "Milk Road Keaton Grass Reward 1": "true"
-    "Milk Road Keaton Grass Reward 2": "keaton_grass_easy"
-    "Milk Road Keaton Grass Reward 3": "keaton_grass_easy"
-    "Milk Road Keaton Grass Reward 4": "keaton_grass_easy"
-    "Milk Road Keaton Grass Reward 5": "keaton_grass_easy"
-    "Milk Road Keaton Grass Reward 6": "keaton_grass_hard"
-    "Milk Road Keaton Grass Reward 7": "keaton_grass_hard"
-    "Milk Road Keaton Grass Reward 8": "keaton_grass_hard"
-    "Milk Road Keaton Grass Reward 9": "keaton_grass_hard"
-"Milk Road Keaton":
-  region: NONE
-  exits:
-    "Milk Road": "true"
-  locations:
-    "Clock Town Keaton HP": "soul_npc(SOUL_NPC_KEATON) && has_mask_keaton"
-"Near Romani Ranch":
-  region: MILK_ROAD
-  exits:
-    "Milk Road": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Romani Ranch": "true"
 "Romani Ranch":
   region: ROMANI_RANCH
   events:
@@ -674,55 +624,7 @@
   region: NONE
   exits:
     "VOID": "true"
-"Behind Gorman Fence":
-  region: MILK_ROAD
-  exits:
-    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
-    "Gorman Track Back": "true"
-"Gorman Track Front":
-  region: MILK_ROAD
-  exits:
-    "Milk Road": "true"
-    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
-  locations:
-    "Gorman Track Garo Mask": "soul_gorman && can_play_epona && can_use_wallet(1) && is_day"
-    "Gorman Track Milk Purchase": "soul_gorman && can_use_wallet(1) && is_day"
-"Gorman Track Back":
-  region: MILK_ROAD
-  exits:
-    "Behind Gorman Fence": "true"
-    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
-"Gorman Track":
-  region: MILK_ROAD
-  exits:
-    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
-    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
-  locations:
-    "Gorman Track Grass Pack 1 Grass 01": "true"
-    "Gorman Track Grass Pack 1 Grass 02": "true"
-    "Gorman Track Grass Pack 1 Grass 03": "true"
-    "Gorman Track Grass Pack 1 Grass 04": "true"
-    "Gorman Track Grass Pack 1 Grass 05": "true"
-    "Gorman Track Grass Pack 1 Grass 06": "true"
-    "Gorman Track Grass Pack 1 Grass 07": "true"
-    "Gorman Track Grass Pack 1 Grass 08": "true"
-    "Gorman Track Grass Pack 1 Grass 09": "true"
-    "Gorman Track Grass Pack 1 Grass 10": "true"
-    "Gorman Track Grass Pack 1 Grass 11": "true"
-    "Gorman Track Grass Pack 1 Grass 12": "true"
-    "Gorman Track Grass Pack 2 Grass 01": "true"
-    "Gorman Track Grass Pack 2 Grass 02": "true"
-    "Gorman Track Grass Pack 2 Grass 03": "true"
-    "Gorman Track Grass Pack 2 Grass 04": "true"
-    "Gorman Track Grass Pack 2 Grass 05": "true"
-    "Gorman Track Grass Pack 2 Grass 06": "true"
-    "Gorman Track Grass Pack 2 Grass 07": "true"
-    "Gorman Track Grass Pack 2 Grass 08": "true"
-    "Gorman Track Grass Pack 2 Grass 09": "true"
-    "Gorman Track Grass Pack 2 Grass 10": "true"
-    "Gorman Track Grass Pack 2 Grass 11": "true"
-    "Gorman Track Grass Pack 2 Grass 12": "true"
-    "Gorman Track Crate": "true"
+
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
   events:
