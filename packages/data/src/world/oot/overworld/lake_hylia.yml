@@ -1,0 +1,171 @@
+"Lake Hylia":
+  region: LAKE_HYLIA
+  time: flow
+  exits:
+    "Hyrule Field": "true"
+    "Hyrule Field Drawbridge": "is_child"
+    "Lake Hylia Near Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
+    "Laboratory": "true"
+    "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_raw(2))"
+    "Lake Hylia Near Pond": "(can_swim && (is_child || lake_water_control)) || (is_adult && (scarecrow_hookshot || hookshot_anywhere || climb_anywhere)) || can_ride_bean(BEAN_LAKE_HYLIA)"
+    "Lake Hylia Grotto": "true"
+  events:
+    CLEAR_STATE_LAKE: "is_adult && (wisp_enabled(BOSS_MORPHA, MEDALLION_WATER) || event(WISP_CLEAR_STATE_LAKE))"
+    SCARECROW_CHILD: "is_child && can_play_scarecrow"
+    SCARECROW: "is_adult && event(SCARECROW_CHILD)"
+    BEAN_LAKE_HYLIA: "can_use_beans"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
+    RUPEES: "can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
+    MAGIC: "can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
+  locations:
+    "Lake Hylia Underwater Bottle": "is_child && can_dive_small && can_swim"
+    "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (lake_water_control || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
+    "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
+    "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
+    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
+    "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
+    "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
+    "Lake Hylia Island Big Fairy": "can_play_sun && ((is_child && (can_swim || (has_iron_boots && longshot_anywhere))) || (is_adult && ((lake_water_control && can_swim) || scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
+    # These pots do exist in the vanilla game but they fail to load
+    "Lake Hylia Pot 1": "is_child"
+    "Lake Hylia Pot 2": "is_child"
+    "Lake Hylia Grass 1": "can_cut_grass"
+    "Lake Hylia Grass 2": "can_cut_grass"
+    "Lake Hylia Grass Child 1": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 2": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 3": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 4": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 5": "is_child && can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 01": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 02": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 03": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 04": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 05": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 06": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 07": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 08": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 09": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 10": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 11": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 12": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 01": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 02": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 03": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 04": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 05": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 06": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 07": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 08": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 09": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 10": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 11": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 12": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 01": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 02": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 03": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 04": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 05": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 06": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 07": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 08": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 09": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 10": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 11": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 12": "can_cut_grass"
+    "Lake Hylia Rupee 1": "is_child && can_swim_or_sink" #this rupee can be gotten with base dive distance
+    "Lake Hylia Rupee 2": "is_child && can_dive_small"
+    "Lake Hylia Rupee 3": "is_child && can_dive_small"
+    "Lake Hylia Butterfly 1": "is_child && can_use_sticks"
+    "Lake Hylia Butterfly 2": "is_child && can_use_sticks"
+    "Lake Hylia Butterfly 3": "is_child && can_use_sticks"
+  gossip:
+    "Lake Hylia Gossip Near River": "true"
+    "Lake Hylia Gossip Southeast Lake": "true"
+    "Lake Hylia Gossip Southwest Lake": "true"
+
+"Lake Hylia Near Shortcut":
+  region: LAKE_HYLIA
+  age_change: false
+  exits:
+    "Lake Hylia": "is_adult || can_swim"
+    "Zora Domain Shortcut": "is_adult || can_swim"
+
+"Lake Hylia Near Pond":
+  region: LAKE_HYLIA
+  time: flow
+  exits:
+    "Fishing Pond": "true"
+    "Lake Hylia": "is_adult || can_swim_or_sink"
+
+"Lake Hylia Near Water Temple":
+  region: LAKE_HYLIA
+  exits:
+    "Lake Hylia": "can_swim"
+
+"Laboratory":
+  region: ENTRANCE
+  exits:
+    "Lake Hylia": "true"
+  locations:
+    "Laboratory Dive": "soul_scientist && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot && can_swim))"
+    "Laboratory Eye Drops": "soul_scientist && adult_trade(EYEBALL_FROG)"
+    "Laboratory GS Crate": "gs && has_iron_boots && can_hookshot"
+    "Laboratory Rupee 1": "can_dive_big"
+    "Laboratory Rupee 2": "can_dive_big"
+    "Laboratory Rupee 3": "can_dive_big"
+
+"Fishing Pond":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Lake Hylia Near Pond": "true"
+  locations:
+    "Fishing Pond Child": "is_child && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(CHILD_FISH, 7, 14) || has_pond_fish(CHILD_LOACH, 14, 19))"
+    "Fishing Pond Adult": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(ADULT_FISH, 8, 25) || has_pond_fish(ADULT_LOACH, 29, 36))"
+    "Fishing Pond Child Fish 1": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 2": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 3": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 4": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 5": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 6": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 7": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 8": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 9": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 10": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 11": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 12": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 13": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 14": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 15": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Loach 1": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Loach 2": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 1": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 2": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 3": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 4": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 5": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 6": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 7": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 8": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 9": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 10": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 11": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 12": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 13": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 14": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 15": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Loach": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+
+"Lake Hylia Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Lake Hylia": "true"
+  locations:
+    "Lake Hylia Grotto Left Scrub": "business_scrub(0x14)"
+    "Lake Hylia Grotto Center Scrub": "business_scrub(0x15)"
+    "Lake Hylia Grotto Right Scrub": "business_scrub(0x16)"
+    "Lake Hylia Grotto Hive": "break_hive_high"
