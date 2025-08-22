@@ -11,9 +11,9 @@ static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSet
     u16 setupIndex;
     u16 roomIndex;
 
-    setupIndex = comboReadPhysU16(paddrTableScenes + xf->sceneId * 2) + xf->setupId;
-    roomIndex = comboReadPhysU16(paddrTableSetups + setupIndex * 2) + (xf->roomId * 12) + xf->sliceId;
-    return comboReadPhysI16(paddrTableRooms + roomIndex * 2) + xf->id;
+    setupIndex = IO_ReadPhysU16(paddrTableScenes + xf->sceneId * 2) + xf->setupId;
+    roomIndex = IO_ReadPhysU16(paddrTableSetups + setupIndex * 2) + (xf->roomId * 12) + xf->sliceId;
+    return IO_ReadPhysI16(paddrTableRooms + roomIndex * 2) + xf->id;
 }
 
 static u16 bitPosLookupOot(const Xflag* xf)

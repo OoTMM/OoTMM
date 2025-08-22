@@ -80,8 +80,8 @@ int comboDmaLookup(DmaEntry* buf, u32 vromAddr)
     if (vromAddr >= 0x08000000)
     {
         /* Extra DMA */
-        extraDmaAddr = comboReadPhysU32(COMBO_META_ROM + 0x00);
-        extraDmaCount = comboReadPhysU32(COMBO_META_ROM + 0x04);
+        extraDmaAddr = IO_ReadPhysU32(COMBO_META_ROM + 0x00);
+        extraDmaCount = IO_ReadPhysU32(COMBO_META_ROM + 0x04);
         return dmaLookupAlt(buf, extraDmaAddr, extraDmaCount, 0, vromAddr);
     }
     else if (vromAddr & VROM_FOREIGN_OFFSET)
