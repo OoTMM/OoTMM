@@ -1,24 +1,3 @@
-"VOID":
-  region: NONE
-"GLOBAL":
-  region: NONE
-  exits:
-    "ACCESS": "true"
-    "WARP_SONGS": "true"
-    "SOARING": "can_play_soaring"
-"ACCESS":
-  region: NONE
-  events:
-    ACCESS: "can_reset_time_impl"
-"WARP_SONGS":
-  region: NONE
-  exits:
-    "OOT SONG_TP_FOREST": "can_play_cross_tp_forest"
-    "OOT SONG_TP_FIRE": "can_play_cross_tp_fire"
-    "OOT SONG_TP_WATER": "can_play_cross_tp_water"
-    "OOT SONG_TP_SHADOW": "can_play_cross_tp_shadow"
-    "OOT SONG_TP_SPIRIT": "can_play_cross_tp_spirit"
-    "OOT SONG_TP_LIGHT": "can_play_cross_tp_light"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -49,19 +28,6 @@
   locations:
     "Tingle Map Ikana": "tingle_price(0x0a)"
     "Tingle Map Clock Town": "tingle_price(0x0b)"
-"SOARING":
-  region: NONE
-  exits:
-    "Owl Clock Town": "has(OWL_CLOCK_TOWN)"
-    "Owl Milk Road": "has(OWL_MILK_ROAD)"
-    "Owl Swamp": "has(OWL_SOUTHERN_SWAMP)"
-    "Owl Woodfall": "has(OWL_WOODFALL)"
-    "Owl Mountain": "has(OWL_MOUNTAIN_VILLAGE)"
-    "Owl Snowhead": "has(OWL_SNOWHEAD)"
-    "Owl Great Bay": "has(OWL_GREAT_BAY)"
-    "Owl Zora Cape": "has(OWL_ZORA_CAPE)"
-    "Owl Ikana": "has(OWL_IKANA_CANYON)"
-    "Owl Stone Tower": "has(OWL_STONE_TOWER)"
 "Owl Clock Town":
   region: CLOCK_TOWN_SOUTH
   exits:
@@ -188,10 +154,6 @@
     "Stone Tower Pot Owl Statue 2": "true"
     "Stone Tower Pot Owl Statue 3": "true"
     "Stone Tower Pot Owl Statue 4": "true"
-"Oath to Order":
-  region: GIANT_DREAM
-  locations:
-    "Oath to Order": "true"
 "Clock Tower":
   region: ENTRANCE
   exits:
