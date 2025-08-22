@@ -1,0 +1,83 @@
+"Zora Domain":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora River Behind Falls": "true"
+    "Zora Domain Shortcut": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
+    "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP)) || climb_anywhere || hookshot_anywhere"
+    "Zora Shop": "is_child || has_blue_fire"
+    "Zora Domain Grotto": "hidden_grotto_storms"
+  events:
+    KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
+    STICKS: "is_child"
+    NUTS: "true"
+    RUPEES: "true"
+    FISH: "is_child && has_bottle"
+  locations:
+    "Zora Domain Waterfall Chest": "is_child"
+    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora && can_swim_or_sink"
+    "Zora Domain Tunic": "is_adult && has_blue_fire && soul_npc(SOUL_NPC_KING_ZORA)"
+    "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION) && soul_npc(SOUL_NPC_KING_ZORA)"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || (has_magic && can_use_sword) || has_explosives)"
+    "Zora Domain Pot 1": "true"
+    "Zora Domain Pot 2": "true"
+    "Zora Domain Pot 3": "true"
+    "Zora Domain Pot 4": "true"
+    "Zora Domain Pot 5": "true"
+    "Zora Domain Hive Front 1": "is_child && break_hive_high"
+    "Zora Domain Hive Front 2": "is_child && break_hive_high"
+  gossip:
+    "Zora Domain Gossip": "true"
+
+"Zora Domain Underwater":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Domain": "true"
+    "Zora Domain Shortcut": "has_iron_boots"
+
+"Zora Domain Shortcut":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Domain Underwater": "is_adult || can_swim"
+    "Lake Hylia Near Shortcut": "can_swim"
+
+"Zora Domain Back":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Fountain": "true"
+    "Zora Domain": "king_zora_moved || climb_anywhere || hookshot_anywhere"
+  locations:
+    "Zora Domain Hive Back": "is_child && break_hive_high"
+
+"Zora Shop":
+  region: ENTRANCE
+  exits:
+    "Zora Domain": "true"
+  locations:
+    "Zora Shop Item 1": "shop_price(0x10) && soul_zora_shopkeeper"
+    "Zora Shop Item 2": "shop_price(0x11) && soul_zora_shopkeeper"
+    "Zora Shop Item 3": "shop_price(0x12) && soul_zora_shopkeeper"
+    "Zora Shop Item 4": "shop_price(0x13) && soul_zora_shopkeeper"
+    "Zora Shop Item 5": "shop_price(0x14) && soul_zora_shopkeeper"
+    "Zora Shop Item 6": "shop_price(0x15) && soul_zora_shopkeeper"
+    "Zora Shop Item 7": "shop_price(0x16) && soul_zora_shopkeeper"
+    "Zora Shop Item 8": "shop_price(0x17) && soul_zora_shopkeeper"
+
+"Zora Domain Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Zora Domain": "true"
+  locations:
+    "Zora Domain Fairy Fountain Fairy 1": "true"
+    "Zora Domain Fairy Fountain Fairy 2": "true"
+    "Zora Domain Fairy Fountain Fairy 3": "true"
+    "Zora Domain Fairy Fountain Fairy 4": "true"
+    "Zora Domain Fairy Fountain Fairy 5": "true"
+    "Zora Domain Fairy Fountain Fairy 6": "true"
+    "Zora Domain Fairy Fountain Fairy 7": "true"
+    "Zora Domain Fairy Fountain Fairy 8": "true"
