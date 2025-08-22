@@ -1,0 +1,25 @@
+"Deku Tree Boss":
+  boss: true
+  age_change: false
+  dungeon: DT
+  events:
+    BOSS_GOHMA: "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
+  exits:
+    "Deku Tree After Boss": "event(BOSS_GOHMA)"
+  locations:
+    "Deku Tree Boss Grass 1": "can_cut_grass"
+    "Deku Tree Boss Grass 2": "can_cut_grass"
+    "Deku Tree Boss Grass 3": "can_cut_grass"
+    "Deku Tree Boss Grass 4": "can_cut_grass"
+    "Deku Tree Boss Grass 5": "can_cut_grass"
+    "Deku Tree Boss Grass 6": "can_cut_grass"
+    "Deku Tree Boss Grass 7": "can_cut_grass"
+    "Deku Tree Boss Grass 8": "can_cut_grass"
+
+"Deku Tree After Boss":
+  boss: true
+  age_change: false
+  dungeon: DT
+  locations:
+    "Deku Tree Boss Container": "true"
+    "Deku Tree Boss": "true"

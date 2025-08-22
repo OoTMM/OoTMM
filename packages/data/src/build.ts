@@ -48,7 +48,7 @@ function loadCsv(name: string): any[] {
 const DATA_WORLD = {
   oot: {
     overworld: loadYaml('world/oot/overworld/**/*.yml'),
-    boss: loadYaml('world/oot/boss.yml'),
+    boss: loadYaml('world/oot/boss/**/*.yml'),
     DT: loadYaml('world/oot/dungeons/deku_tree.yml'),
     DC: loadYaml('world/oot/dungeons/dodongo_cavern.yml'),
     JJ: loadYaml('world/oot/dungeons/jabu_jabu.yml'),
