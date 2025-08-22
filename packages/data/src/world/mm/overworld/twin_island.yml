@@ -119,3 +119,42 @@
   locations:
     "Tingle Map Snowhead": "tingle_price(0x04)"
     "Tingle Map Ranch": "tingle_price(0x05)"
+
+"Goron Race":
+  region: GORON_RACETRACK
+  events:
+    MAGIC: "true"
+  exits:
+    "Near Goron Race": "true"
+  locations:
+    "Goron Race Reward": "is_spring && soul_goron_child && goron_fast_roll"
+    "Goron Race Pot 01": "true"
+    "Goron Race Pot 02": "true"
+    "Goron Race Pot 03": "true"
+    "Goron Race Pot 04": "true"
+    "Goron Race Pot 05": "true"
+    "Goron Race Pot 06": "true"
+    "Goron Race Pot 07": "true"
+    "Goron Race Pot 08": "true"
+    "Goron Race Pot 09": "true"
+    "Goron Race Pot 10": "true"
+    "Goron Race Pot 11": "true"
+    "Goron Race Pot 12": "true"
+    "Goron Race Pot 13": "true"
+    "Goron Race Pot 14": "true"
+    "Goron Race Pot 15": "true"
+    "Goron Race Pot 16": "true"
+    "Goron Race Pot 17": "true"
+    "Goron Race Pot 18": "true"
+    "Goron Race Pot 19": "true"
+    "Goron Race Pot 20": "true"
+    "Goron Race Pot 21": "true"
+    "Goron Race Pot 22": "true"
+    "Goron Race Pot 23": "true"
+    "Goron Race Pot 24": "true"
+    "Goron Race Pot 25": "true"
+    "Goron Race Pot 26": "true"
+    "Goron Race Pot 27": "true"
+    "Goron Race Pot 28": "true"
+    "Goron Race Pot 29": "true"
+    "Goron Race Pot 30": "true"

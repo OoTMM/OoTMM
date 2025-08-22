@@ -1,0 +1,66 @@
+
+"Path to Snowhead Front":
+  region: PATH_TO_SNOWHEAD
+  exits:
+    "Mountain Village": "true"
+    "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
+
+"Path to Snowhead Middle":
+  region: PATH_TO_SNOWHEAD
+  exits:
+    "Path to Snowhead Front": "true"
+    "Path to Snowhead Back": "true"
+  locations:
+    "Path to Snowhead HP": "can_use_lens && (scarecrow_hookshot || hookshot_anywhere)"
+    "Path to Snowhead Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Snowhead Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Snowhead Small Snowball Spring Middle 1": "is_spring"
+    "Path to Snowhead Small Snowball Spring Middle 2": "is_spring"
+
+"Path to Snowhead Back":
+  region: PATH_TO_SNOWHEAD
+  events:
+    MAGIC: "can_break_boulders"
+  exits:
+    "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
+    "Snowhead Entrance": "true"
+    "Path to Snowhead Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
+  locations:
+    "Path to Snowhead Big Snowball Back 1": "is_winter && can_break_snowballs"
+    "Path to Snowhead Big Snowball Back 2": "is_winter && can_break_snowballs"
+    "Path to Snowhead Small Snowball Back 1": "true"
+    "Path to Snowhead Small Snowball Back 2": "true"
+    "Path to Snowhead Small Snowball Back 3": "true"
+    "Path to Snowhead Small Snowball Spring Back 1": "is_spring"
+    "Path to Snowhead Small Snowball Spring Back 2": "is_spring"
+
+"Path to Snowhead Grotto":
+  region: ENTRANCE
+  exits:
+    "Path to Snowhead Back": "true"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "true"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    BUGS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
+  locations:
+    "Path to Snowhead Grotto": "true"
+    "Path to Snowhead Grotto Grass 01": "true"
+    "Path to Snowhead Grotto Grass 02": "true"
+    "Path to Snowhead Grotto Grass 03": "true"
+    "Path to Snowhead Grotto Grass 04": "true"
+    "Path to Snowhead Grotto Grass 05": "true"
+    "Path to Snowhead Grotto Grass 06": "true"
+    "Path to Snowhead Grotto Grass 07": "true"
+    "Path to Snowhead Grotto Grass 08": "true"
+    "Path to Snowhead Grotto Grass 09": "true"
+    "Path to Snowhead Grotto Grass 10": "true"
+    "Path to Snowhead Grotto Grass 11": "true"
+    "Path to Snowhead Grotto Grass 12": "true"
+    "Path to Snowhead Grotto Grass 13": "true"
+    "Path to Snowhead Grotto Grass 14": "true"

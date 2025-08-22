@@ -170,6 +170,44 @@
     "Blacksmith Potted Plant 2 Pot": "is_night"
     "Blacksmith Potted Plant 2 Grass": "is_night"
 
+"Mountain Village Cliff":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village": "true"
+    "Goron Graveyard": "true"
+    "Near Village Grotto": "is_spring"
+  events:
+    MAGIC: "true"
+    ARROWS: "is_spring"
+  locations:
+    "Mountain Village Small Snowball Cliff 1": "is_winter"
+    "Mountain Village Small Snowball Cliff 2": "is_winter"
+
+"Near Goron Graveyard":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village Cliff": "true"
+  events:
+    MAGIC: "true"
+    GORON_GRAVE_FARORE: "can_use_farore"
+
+"Goron Graveyard":
+  region: ENTRANCE
+  exits:
+    "Near Goron Graveyard": "true"
+    "Goron Graveyard Water": "has_mask_goron || can_lift_gold"
+  locations:
+    "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
+
+"Goron Graveyard Water":
+  region: ENTRANCE
+  exits:
+    "Goron Graveyard": "true"
+  events:
+    WATER: "true"
+    HOT_WATER_NORTH_WINTER: "is_winter"
+    HOT_WATER_NORTH_SPRING: "is_spring"
+
 "Owl Mountain":
   region: MOUNTAIN_VILLAGE
   exits:
