@@ -1,0 +1,93 @@
+
+"Road to Southern Swamp":
+  region: ROAD_TO_SWAMP
+  events:
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    MAGIC: "true"
+    RUPEES: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
+    WATER: "true"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+    FAIRY: "can_get_gossip_fairy"
+  exits:
+    "Swamp Front": "true"
+    "Termina Field": "true"
+    "Swamp Archery": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
+    "Road to Southern Swamp Grotto": "true"
+    "Tingle Swamp": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
+  locations:
+    "Road to Southern Swamp HP": "has_weapon_range || has_bombchu"
+    "Road to Southern Swamp Grass Pack 1 Grass 01": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 02": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 03": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 04": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 05": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 06": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 07": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 08": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 09": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 01": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 02": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 03": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 04": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 05": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 06": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 07": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 08": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 09": "true"
+    "Road to Southern Swamp Grass 1": "true"
+    "Road to Southern Swamp Grass 2": "true"
+    "Road to Southern Swamp Potted Plant 1 Pot": "true"
+    "Road to Southern Swamp Potted Plant 1 Grass": "true"
+    "Road to Southern Swamp Potted Plant 2 Pot": "true"
+    "Road to Southern Swamp Potted Plant 2 Grass": "true"
+  gossip:
+    "Road to Southern Swamp Gossip": "true"
+
+"Swamp Archery":
+  region: ENTRANCE
+  exits:
+    "Road to Southern Swamp": "true"
+  locations:
+    "Swamp Archery Reward 1": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Swamp Archery Reward 2": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+
+"Road to Southern Swamp Grotto":
+  region: ENTRANCE
+  events:
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    MAGIC: "true"
+    RUPEES: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
+  exits:
+    "Road to Southern Swamp": "true"
+  locations:
+    "Road to Southern Swamp Grotto": "true"
+    "Road to Southern Swamp Grotto Grass 01": "true"
+    "Road to Southern Swamp Grotto Grass 02": "true"
+    "Road to Southern Swamp Grotto Grass 03": "true"
+    "Road to Southern Swamp Grotto Grass 04": "true"
+    "Road to Southern Swamp Grotto Grass 05": "true"
+    "Road to Southern Swamp Grotto Grass 06": "true"
+    "Road to Southern Swamp Grotto Grass 07": "true"
+    "Road to Southern Swamp Grotto Grass 08": "true"
+    "Road to Southern Swamp Grotto Grass 09": "true"
+    "Road to Southern Swamp Grotto Grass 10": "true"
+    "Road to Southern Swamp Grotto Grass 11": "true"
+    "Road to Southern Swamp Grotto Grass 12": "true"
+    "Road to Southern Swamp Grotto Grass 13": "true"
+    "Road to Southern Swamp Grotto Grass 14": "true"
+
+"Tingle Swamp":
+  region: TINGLE
+  locations:
+    "Tingle Map Woodfall": "tingle_price(0x02)"
+    "Tingle Map Snowhead": "tingle_price(0x03)"
