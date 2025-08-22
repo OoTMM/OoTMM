@@ -1,0 +1,168 @@
+"Lost Woods Lost North":
+  region: NONE
+  exits:
+    "Lost Woods": "true"
+
+"Lost Woods Lost East":
+  region: NONE
+  exits:
+    "Lost Woods": "true"
+
+"Lost Woods Lost South":
+  region: NONE
+  exits:
+    "Lost Woods": "true"
+
+"Lost Woods Lost West":
+  region: NONE
+  exits:
+    "Lost Woods": "true"
+
+"Lost Woods Lost Forest":
+  region: LOST_WOODS
+  exits:
+    "Kokiri Forest": "true"
+
+"Lost Woods":
+  region: LOST_WOODS
+  exits:
+    "Lost Woods Lost Forest": "true"
+    "Lost Woods Bridge": "can_longshot || has_hover_boots || can_ride_bean(BEAN_LOST_WOODS_EARLY) || climb_anywhere || hookshot_anywhere"
+    "Lost Woods Deep": "is_child || can_play_saria || trick_mido || hookshot_anywhere || climb_anywhere"
+    "Lost Woods Generic Grotto": "has_explosives_or_hammer"
+    "Goron City Shortcut": "true"
+    "Zora River": "can_dive_small || hookshot_anywhere"
+    "Lost Woods Rupee Arrow": "is_child && (can_dive_small || hookshot_anywhere || can_boomerang)"
+    "Lost Woods Lost North": "setting(alterLostWoodsExits)"
+    "Lost Woods Lost South": "setting(alterLostWoodsExits)"
+    "Lost Woods Lost West": "setting(alterLostWoodsExits)"
+  events:
+    BEAN_LOST_WOODS_EARLY: "can_use_beans"
+    RUPEES: "true"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
+    MAGIC: "can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
+  locations:
+    "Lost Woods Target": "is_child && (can_use_slingshot || can_use_bow)"
+    "Lost Woods Skull Kid": "is_child && can_play_saria"
+    "Lost Woods Sell Skull Mask": "is_child && can_play_saria && has(MASK_SKULL)"
+    "Lost Woods Memory Game": "is_child && can_play_minigame"
+    "Lost Woods Scrub Sticks Upgrade": "is_child && business_scrub(0x00)"
+    "Lost Woods Odd Mushroom": "soul_grog && adult_trade(COJIRO)"
+    "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION) && soul_npc(SOUL_NPC_KOKIRI)"
+    "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
+    "Lost Woods Grass 1": "can_cut_grass"
+    "Lost Woods Grass 2": "can_cut_grass"
+    "Lost Woods Grass 3": "can_cut_grass"
+    "Lost Woods Pool Big Fairy": "can_play_storms"
+    "Lost Woods Wonder Item 1": "is_child"
+    "Lost Woods Wonder Item 2": "is_child"
+    "Lost Woods Wonder Item 3": "is_child"
+  gossip:
+    "Lost Woods Gossip Under Bridge": "true"
+
+"Lost Woods Rupee Arrow":
+  region: LOST_WOODS
+  locations:
+    "Lost Woods Rupee Arrow 1": "true"
+    "Lost Woods Rupee Arrow 2": "true"
+    "Lost Woods Rupee Arrow 3": "true"
+    "Lost Woods Rupee Arrow 4": "true"
+    "Lost Woods Rupee Arrow 5": "true"
+    "Lost Woods Rupee Arrow 6": "true"
+    "Lost Woods Rupee Arrow 7": "true"
+    "Lost Woods Rupee Arrow 8": "true"
+
+"Lost Woods Generic Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "GENERIC_GROTTO_EVENTS": "true"
+    "Lost Woods": "true"
+  locations:
+    "Lost Woods Grotto Generic": "true"
+    "Lost Woods Grotto Generic Grass 1": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 2": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 3": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 4": "can_cut_grass"
+    "Lost Woods Grotto Generic Hive 1": "break_hive_low"
+    "Lost Woods Grotto Generic Hive 2": "break_hive_low"
+    "Lost Woods Grotto Generic Butterfly 1": "can_use_sticks"
+    "Lost Woods Grotto Generic Butterfly 2": "can_use_sticks"
+    "Lost Woods Grotto Generic Butterfly 3": "can_use_sticks"
+  gossip:
+    "Lost Woods Gossip Grotto": "true"
+
+"Lost Woods Bridge":
+  region: LOST_WOODS
+  exits:
+    "Kokiri Forest": "true"
+    "Hyrule Field": "true"
+    "Lost Woods": "can_longshot || hookshot_anywhere"
+
+"Lost Woods Bridge from Forest":
+  region: LOST_WOODS
+  exits:
+    "Lost Woods Bridge": "true"
+  locations:
+    "Lost Woods Gift from Saria": "soul_npc(SOUL_NPC_SARIA)"
+
+"Lost Woods Deep":
+  region: LOST_WOODS
+  exits:
+    "Lost Woods": "is_child || can_play_saria || (climb_anywhere && has_hover_boots) || hookshot_anywhere"
+    "Sacred Meadow Entryway": "true"
+    "Deku Theater": "true"
+    "Lost Woods Scrub Grotto": "has_explosives_or_hammer"
+    "Lost Woods Lost Forest": "!setting(alterLostWoodsExits)"
+    "Lost Woods Lost North": "setting(alterLostWoodsExits)"
+    "Lost Woods Lost East": "setting(alterLostWoodsExits)"
+    "Lost Woods Lost South": "setting(alterLostWoodsExits)"
+    "Lost Woods Lost West": "setting(alterLostWoodsExits)"
+  events:
+    BEAN_LOST_WOODS_LATE: "can_use_beans"
+    RUPEES: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
+    MAGIC: "can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
+  locations:
+    "Lost Woods Scrub Near Theater Left": "is_child && business_scrub(0x01)"
+    "Lost Woods Scrub Near Theater Right": "is_child && business_scrub(0x02)"
+    "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
+    "Lost Woods GS Bean Ride": "is_adult && gs_night && (((can_ride_bean(BEAN_LOST_WOODS_LATE) || climb_anywhere) && can_damage_skull) || hookshot_anywhere || (trick(OOT_LOST_WOODS_ADULT_GS) && can_collect_distance && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
+    "Lost Woods Grass Deep 1": "can_cut_grass"
+    "Lost Woods Grass Deep 2": "can_cut_grass"
+    "Lost Woods Grass Deep 3": "can_cut_grass"
+    "Lost Woods Grass Deep 4": "can_cut_grass"
+    "Lost Woods Grass Deep 5": "can_cut_grass"
+    "Lost Woods Grass Deep 6": "can_cut_grass"
+    "Lost Woods Rupee Boulder": "has_explosives_or_hammer"
+    "Lost Woods Butterfly 1": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 2": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 3": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 4": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 5": "is_child && can_use_sticks"
+
+"Deku Theater":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Lost Woods Deep": "true"
+  locations:
+    "Deku Theater Sticks Upgrade": "age_child_trade && has(MASK_SKULL)"
+    "Deku Theater Nuts Upgrade": "age_child_trade && has_mask_truth"
+
+"Lost Woods Scrub Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Lost Woods Deep": "true"
+  locations:
+    "Lost Woods Grotto Scrub Nuts Upgrade": "business_scrub(0x03)"
+    "Lost Woods Grotto Scrub Back": "business_scrub(0x04)"
+    "Lost Woods Grotto Scrub Big Fairy": "can_play_sun"
+    "Lost Woods Grotto Scrub Hive": "break_hive_high"
