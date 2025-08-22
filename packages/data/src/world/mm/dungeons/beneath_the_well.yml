@@ -4,18 +4,22 @@
     "Ikana Canyon": "can_reset_time"
     "Beneath The Well North Section": "(setting(beneathWell, open) || (can_pass_gibdo && has_blue_potion)) && can_reset_time_dungeon"
     "Beneath The Well East Section": "(setting(beneathWell, open) || (can_pass_gibdo && has_beans)) && can_reset_time_dungeon"
+
 "Beneath The Well Wallmaster Near Entrance":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Beneath The Well Wallmaster Near Fountain":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Beneath The Well Wallmaster Near Exit":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Beneath The Well North Section":
   dungeon: BtW
   events:
@@ -24,6 +28,7 @@
   exits:
     "Beneath The Well Hot Spring Water": "(setting(beneathWell, open) || can_pass_gibdo && has_fish)"
     "Beneath The Well Near Fountain": "(setting(beneathWell, open) || can_pass_gibdo && has_water)"
+
 "Beneath The Well Hot Spring Water":
   dungeon: BtW
   events:
@@ -33,6 +38,7 @@
     WATER: "true"
   exits:
     "Beneath The Well North Section": "true"
+
 "Beneath The Well Near Fountain":
   dungeon: BtW
   events:
@@ -52,6 +58,7 @@
     "Beneath The Well Pot Left Side 5": "has_fire_sticks"   # No longer valid in door rando
     "Beneath The Well Grass Left Side 1": "has_fire_sticks" # No longer valid in door rando
     "Beneath The Well Grass Left Side 2": "has_fire_sticks" # No longer valid in door rando
+
 "Beneath The Well Fairy Fountain":
   dungeon: BtW
   events:
@@ -67,6 +74,7 @@
     "Beneath The Well Fairy Fountain Fairy 6": "true"
     "Beneath The Well Fairy Fountain Fairy 7": "true"
     "Beneath The Well Fairy Fountain Fairy 8": "true"
+
 "Beneath The Well Keese":
   dungeon: BtW
   exits:
@@ -75,6 +83,7 @@
     RUPEES: "soul_keese && can_use_light_arrows"
   locations:
     "Beneath The Well Keese Chest": "can_use_lens"
+
 "Beneath The Well East Section":
   dungeon: BtW
   exits:
@@ -86,6 +95,7 @@
     STICKS: "can_kill_baba_sticks"
     WATER: "true"
     RUPEES: "((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (can_use_light_arrows && soul_keese)"
+
 "Beneath The Well Cow Hall":
   dungeon: BtW
   events:
@@ -99,6 +109,7 @@
     "Beneath The Well Grass Before Poe 2": "true"
     "Beneath The Well Grass Before Poe 3": "true"
     "Beneath The Well Grass Before Poe 4": "true"
+
 "Beneath The Well Cow Room":
   dungeon: BtW
   exits:
@@ -108,6 +119,7 @@
     "Beneath The Well Grass Cow 1": "true"
     "Beneath The Well Grass Cow 2": "true"
     "Beneath The Well Grass Cow 3": "true"
+
 "Beneath The Well Big Poe Room":
   dungeon: BtW
   events:
@@ -119,6 +131,7 @@
     "Beneath The Well Pot Big Poe 2": "true"
     "Beneath The Well Pot Big Poe 3": "true"
     "Beneath The Well Pot Big Poe 4": "true"
+
 "Beneath The Well Middle Section":
   dungeon: BtW
   exits:
@@ -139,12 +152,14 @@
     "Beneath The Well Pot Middle 08": "true"
     "Beneath The Well Pot Middle 09": "true"
     "Beneath The Well Pot Middle 10": "true"
+
 "Beneath The Well Skulltulla Room":
   dungeon: BtW
   exits:
     "Beneath The Well Middle Section": "true"
   locations:
     "Beneath The Well Skulltulla Chest": "has_fire_sticks"
+
 "Beneath The Well Final Hall":
   dungeon: BtW
   exits:
@@ -160,6 +175,7 @@
     "Beneath The Well Grass Near End 3": "can_use_fire_short_range || (has_sticks && (setting(beneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
     "Beneath The Well Grass Near End 4": "can_use_fire_short_range || (has_sticks && (setting(beneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
     "Beneath The Well Grass Near End 5": "can_use_fire_short_range || (has_sticks && (setting(beneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
+
 "Beneath The Well Sun Block":
   dungeon: BtW
   exits:
@@ -167,6 +183,7 @@
     "Beneath The Well End": "setting(beneathWell, open) || has_mirror_shield || can_use_light_arrows"
   locations:
     "Beneath The Well Mirror Shield": "can_use_fire_short_range || (has_sticks && (setting(beneathWell, open) || (has_big_poe && has_milk && can_pass_gibdo)))" # No longer valid in door rando
+
 "Beneath The Well End":
   dungeon: BtWE
   exits:

@@ -3,6 +3,7 @@
   exits:
     "Great Bay Coast Fortress": "can_reset_time && (underwater_walking || can_dive_small)"
     "Pirate Fortress Entrance": "can_reset_time_dungeon"
+
 "Pirate Fortress Entrance":
   dungeon: PF
   exits:
@@ -16,12 +17,14 @@
     "Pirate Fortress Entrance Chest 1": "underwater_walking"
     "Pirate Fortress Entrance Chest 2": "underwater_walking"
     "Pirate Fortress Entrance Chest 3": "underwater_walking"
+
 "Pirate Fortress Entrance Balcony":
   dungeon: PF
   exits:
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers End": "true"
     "Pirate Fortress Interior": "true"
+
 "Pirate Fortress Sewers":
   region: PIRATE_FORTRESS_SEWERS
   exits:
@@ -31,6 +34,7 @@
     "WARP_SONGS": "has_mask_zora"
   locations:
     "Pirate Fortress Sewers Chest 1": "underwater_walking_strict"
+
 "Pirate Fortress Sewers Cage Room":
   region: PIRATE_FORTRESS_SEWERS
   exits:
@@ -64,6 +68,7 @@
     "Pirate Fortress Sewers Barrel Cage Room 14": "true"
     "Pirate Fortress Sewers Barrel Cage Room 15": "true"
     "Pirate Fortress Sewers Barrel Cage Room 16": "true"
+
 "Pirate Fortress Sewers After Gate":
   region: PIRATE_FORTRESS_SEWERS
   exits:
@@ -72,6 +77,7 @@
   locations:
     "Pirate Fortress Sewers Pot Waterway 1": "true"
     "Pirate Fortress Sewers Pot Waterway 2": "true"
+
 "Pirate Fortress Sewers End":
   region: PIRATE_FORTRESS_SEWERS
   events:
@@ -93,12 +99,14 @@
     "Pirate Fortress Sewers Barrel End 3": "true"
     "Pirate Fortress Sewers Barrel End 4": "true"
     "Pirate Fortress Sewers Barrel End 5": "true"
+
 "Pirate Fortress Sewers Entrance":
   dungeon: PF
   exits:
     "Pirate Fortress Entrance": "can_reset_time"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
+
 "Pirate Fortress Interior":
   region: PIRATE_FORTRESS_INTERIOR
   events:
@@ -128,6 +136,7 @@
     "Pirate Fortress Interior Wonder Item Skull Eyes 4": "hit_target_range_close"
     "Pirate Fortress Interior Wonder Item Skull Eyes 5": "hit_target_range_close"
     "Pirate Fortress Interior Wonder Item Skull Eyes 6": "hit_target_range_close"
+
 "Pirate Fortress Hookshot Room Upper":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -138,6 +147,7 @@
   locations:
     "Pirate Fortress Interior Pot Beehive 1": "true"
     "Pirate Fortress Interior Pot Beehive 2": "true"
+
 "Pirate Fortress Hookshot Room Lower":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -152,12 +162,14 @@
     "Pirate Fortress Interior Wonder Item Skull Forehead 3": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
     "Pirate Fortress Interior Barrel Hookshot Room 1": "event(FORTRESS_BEEHIVE)"
     "Pirate Fortress Interior Barrel Hookshot Room 2": "event(FORTRESS_BEEHIVE)"
+
 "Pirate Fortress Barrel Maze Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Entrance Lookout": "true"
     "Pirate Fortress Barrel Maze": "true"
+
 "Pirate Fortress Entrance Lookout":
   dungeon: PF
   exits:
@@ -165,6 +177,7 @@
     "Pirate Fortress Entrance": "true"
   locations:
     "Pirate Fortress Entrance Barrel": "true"
+
 "Pirate Fortress Barrel Maze":
   region: PIRATE_FORTRESS_INTERIOR
   events:
@@ -174,6 +187,7 @@
     "Pirate Fortress Barrel Maze Aquarium": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
+
 "Pirate Fortress Barrel Maze Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -187,17 +201,20 @@
     "Pirate Fortress Interior Pot Barrel Maze 1": "true"
     "Pirate Fortress Interior Pot Barrel Maze 2": "true"
     "Pirate Fortress Interior Pot Barrel Maze 3": "true"
+
 "Pirate Fortress Barrel Maze Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Barrel Maze Aquarium": "true"
     "Pirate Fortress Interior": "true"
+
 "Pirate Fortress Lone Guard Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Lone Guard": "true"
     "Pirate Fortress Treasure Room Entry": "can_hookshot || short_hook_anywhere"
+
 "Pirate Fortress Lone Guard":
   region: PIRATE_FORTRESS_INTERIOR
   events:
@@ -218,11 +235,13 @@
     "Pirate Fortress Interior Pot Chest Aquarium 1": "true"
     "Pirate Fortress Interior Pot Chest Aquarium 2": "true"
     "Pirate Fortress Interior Pot Chest Aquarium 3": "true"
+
 "Pirate Fortress Lone Guard Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Lone Guard Aquarium": "true"
     "Pirate Fortress Interior": "true"
+
 "Pirate Fortress Treasure Room Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -230,6 +249,7 @@
     "Pirate Fortress Treasure Room": "true"
   locations:
     "Pirate Fortress Interior Barrel Outside": "true"
+
 "Pirate Fortress Treasure Room":
   region: PIRATE_FORTRESS_INTERIOR
   events:
@@ -239,6 +259,7 @@
     "Pirate Fortress Treasure Room Entry": "true"
   locations:
     "Pirate Fortress Interior Silver Rupee Chest": "can_evade_gerudo"
+
 "Pirate Fortress Treasure Room Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -252,6 +273,7 @@
     "Pirate Fortress Interior Pot Guarded 1": "true"
     "Pirate Fortress Interior Pot Guarded 2": "true"
     "Pirate Fortress Interior Barrel Aquarium": "true"
+
 "Pirate Fortress Treasure Room Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:

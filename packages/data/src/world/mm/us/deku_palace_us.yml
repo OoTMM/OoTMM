@@ -3,6 +3,7 @@
   exits:
     "Deku Palace Near Beans Grotto": "true"
     "Deku Palace Main": "true"
+
 "Deku Palace Near Beans Grotto":
   region: DEKU_PALACE
   exits:

@@ -5,6 +5,7 @@
     "Swamp Spider House Main": "can_reset_time_dungeon"
   locations:
     "Swamp Spider House Mask of Truth": "soul_citizen && has(GS_TOKEN_SWAMP, 30)"
+
 "Swamp Spider House Main":
   dungeon: SSH
   events:

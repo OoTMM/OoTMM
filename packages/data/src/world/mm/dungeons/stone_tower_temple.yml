@@ -4,6 +4,7 @@
     "WARP_SONGS": "true"
     "Stone Tower Front of Temple": "can_reset_time"
     "Stone Tower Temple Entrance": "can_reset_time_dungeon"
+
 "Stone Tower Temple Entrance":
   dungeon: ST
   events:
@@ -25,6 +26,7 @@
     "Stone Tower Temple Grass Entrance 3": "true"
     "Stone Tower Temple Crate Entrance 1": "true"
     "Stone Tower Temple Crate Entrance 2": "true"
+
 "Stone Tower Temple West":
   dungeon: ST
   exits:
@@ -39,6 +41,7 @@
     "Stone Tower Temple Crate Maze Large 5": "has_explosives || trick_keg_explosives"
     "Stone Tower Temple Crate Maze Small 1": "has_explosives || trick_keg_explosives"
     "Stone Tower Temple Crate Maze Small 2": "has_explosives || trick_keg_explosives"
+
 "Stone Tower Temple West Garden":
   dungeon: ST
   exits:
@@ -54,6 +57,7 @@
     "Stone Tower Temple Grass Garden 4": "true"
     "Stone Tower Temple Grass Garden 5": "true"
     "Stone Tower Temple Grass Garden 6": "true"
+
 "Stone Tower Temple Under West Garden":
   dungeon: ST
   exits:
@@ -66,6 +70,7 @@
     "Stone Tower Temple Pot Lava Room 2": "true"
     "Stone Tower Temple Pot Lava Room 3": "true"
     "Stone Tower Temple Pot Lava Room 4": "true"
+
 "Stone Tower Temple Under West Garden After Block":
   dungeon: ST
   exits:
@@ -77,6 +82,7 @@
     "Stone Tower Temple Pot Lava Room After Block 2": "true"
     "Stone Tower Temple Pot Lava Room After Block 3": "true"
     "Stone Tower Temple Pot Lava Room After Block 4": "true"
+
 "Stone Tower Temple Center Ledge":
   dungeon: ST
   exits:
@@ -89,6 +95,7 @@
     "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_use_light_arrows && ((can_goron_bomb_jump && can_use_ice_arrows) || event(ST_WATER_CRYSTAL)))"
     "Stone Tower Temple Rupee Center Room Left": "can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Rupee Center Room Right": "can_goron_bomb_jump && can_use_ice_arrows"
+
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
@@ -105,6 +112,7 @@
     "Stone Tower Temple Crate Water 1": "true"
     "Stone Tower Temple Crate Water 2": "true"
     "Stone Tower Temple Crate Water 3": "true"
+
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
@@ -126,6 +134,7 @@
     "Stone Tower Temple Pot Water Room Underwater Upper 2": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu)))"
     "Stone Tower Temple Pot Water Room Bridge 1": "true"
     "Stone Tower Temple Pot Water Room Bridge 2": "true"
+
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
   exits:
@@ -138,6 +147,7 @@
     "Stone Tower Temple Pot Mirror Room 2": "true"
     "Stone Tower Temple Crate Mirrors 1": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Crate Mirrors 2": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:
@@ -156,6 +166,7 @@
     "Stone Tower Temple Rupee Wind Room 4": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
     "Stone Tower Temple Rupee Wind Room 5": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
     "Stone Tower Temple Rupee Wind Room 6": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
+
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
@@ -163,6 +174,7 @@
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Light Arrow": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
+
 "Stone Tower Temple Before Water Bridge":
   dungeon: ST
   exits:
@@ -188,6 +200,7 @@
     "Stone Tower Temple Rupee Before Water Bridge 6": "true"
     "Stone Tower Temple Rupee Before Water Bridge 7": "true"
     "Stone Tower Temple Rupee Before Water Bridge 8": "true"
+
 "Stone Tower Temple Water Bridge":
   dungeon: ST
   exits:

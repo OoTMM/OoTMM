@@ -13,6 +13,7 @@
     "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
     "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
     "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+
 "Moon":
   region: MOON
   events:
@@ -26,6 +27,7 @@
     "Moon Boss": "soul_npc(SOUL_NPC_MOON_CHILDREN) && (setting(majoraChild, none) || (setting(majoraChild, custom) && special(MAJORA)))"
   locations:
     "Moon Fierce Deity Mask": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
+
 "Moon Butterflies":
   region: MOON
   locations:
@@ -42,6 +44,7 @@
     "Moon Butterfly 11": "can_reset_time_on_moon"
     "Moon Butterfly 12": "can_reset_time_on_moon"
     "Moon Butterfly 13": "can_reset_time_on_moon"
+
 "Moon Trial Deku Entrance":
   region: MOON
   exits:
@@ -55,6 +58,7 @@
     "Moon Trial Deku Gossip Mid-Left": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Moon Trial Deku Gossip Mid-Right": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Moon Trial Deku Gossip Back": "has(MASK_DEKU) || hookshot_anywhere"
+
 "Moon Trial Deku Exit":
   region: MOON
   exits:
@@ -62,6 +66,7 @@
     "Moon Trial Deku Entrance": "has(MASK_DEKU)"
   events:
     MOON_TRIAL_DEKU: "true"
+
 "Moon Trial Goron Entrance":
   region: MOON
   exits:
@@ -90,6 +95,7 @@
     "Moon Trial Goron Gossip West Left": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Gossip West Right": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Gossip By Heart Piece": "goron_fast_roll || hookshot_anywhere"
+
 "Moon Trial Goron Exit":
   region: MOON
   exits:
@@ -102,6 +108,7 @@
     "Moon Trial Goron Icicle 2": "break_icicle"
     "Moon Trial Goron Icicle 3": "break_icicle"
     "Moon Trial Goron Icicle 4": "break_icicle"
+
 "Moon Trial Zora":
   region: MOON
   exits:
@@ -116,6 +123,7 @@
     "Moon Trial Zora Gossip Inner Right": "underwater_walking || can_dive_small"
     "Moon Trial Zora Gossip Middle Right": "underwater_walking || can_dive_small"
     "Moon Trial Zora Gossip Outer Right": "underwater_walking || can_dive_small"
+
 "Moon Trial Link Entrance":
   region: MOON
   exits:
@@ -130,11 +138,13 @@
     "Moon Trial Link Pot 6": "true"
     "Moon Trial Link Pot 7": "true"
     "Moon Trial Link Pot 8": "true"
+
 "Moon Trial Link Dinalfos Fight":
   region: MOON
   exits:
     "Moon Trial Link Entrance": "soul_lizalfos_dinalfos && (can_fight || can_use_deku_bubble || has_arrows)"
     "Moon Trial Link Rest 1": "soul_lizalfos_dinalfos && (can_fight || can_use_deku_bubble || has_arrows)"
+
 "Moon Trial Link Rest 1":
   region: MOON
   exits:
@@ -142,6 +152,7 @@
     "Moon Trial Link Garo Fight": "true"
   gossip:
     "Moon Trial Link Gossip 1": "true"
+
 "Moon Trial Link Garo Fight":
   region: MOON
   exits:
@@ -149,6 +160,7 @@
     "Moon Trial Link Rest 2": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
   locations:
     "Moon Trial Link Garo Master Chest": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
+
 "Moon Trial Link Rest 2":
   region: MOON
   exits:
@@ -156,6 +168,7 @@
     "Moon Trial Link Iron Knuckle Fight": "true"
   gossip:
     "Moon Trial Link Gossip 2": "true"
+
 "Moon Trial Link Iron Knuckle Fight":
   region: MOON
   exits:
@@ -166,6 +179,7 @@
   gossip:
     "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && has_arrows)"
     "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && has_arrows)"
+
 "Moon Trial Link Rest 3":
   region: MOON
   exits:
@@ -175,6 +189,7 @@
     "Moon Trial Link HP": "true"
   gossip:
     "Moon Trial Link Gossip Last": "true"
+
 "Moon Trial Link Exit":
   region: MOON
   exits:
@@ -182,6 +197,7 @@
     "Moon": "true"
   events:
     MOON_TRIAL_LINK: "true"
+
 "Moon Boss":
   region: MOON
   events:

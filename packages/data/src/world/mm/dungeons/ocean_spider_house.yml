@@ -5,6 +5,7 @@
     "Ocean Spider House Front": "can_reset_time_dungeon && (has_explosives || trick_keg_explosives)"
   locations:
     "Ocean Spider House Wallet": "soul_citizen && has(GS_TOKEN_OCEAN, 30)"
+
 "Ocean Spider House Front":
   dungeon: OSH
   events:
@@ -21,6 +22,7 @@
     "Ocean Spider House Pot Entrance 2": "true"
     "Ocean Spider House Pot Entrance 3": "true"
     "Ocean Spider House Pot Entrance 4": "true"
+
 "Ocean Spider House Back":
   dungeon: OSH
   locations:
