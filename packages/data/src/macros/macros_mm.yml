@@ -147,6 +147,8 @@
 "has_sword": "has_b_sword || has(GREAT_FAIRY_SWORD)"
 "has_weapon": "has_sword || can_hammer"
 
+"kill_big_octo_close": "has_mask_zora || (can_use_nayru && can_hookshot_short) || can_use_din || has_arrows"
+
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU) || license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
 "bombchu_license_bag_separate": "has(BOMBCHU_BAG) || has(SHARED_BOMBCHU_BAG)"

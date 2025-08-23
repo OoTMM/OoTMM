@@ -45,7 +45,7 @@
 "Woods of Mystery Lost":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "true"
+    "Swamp Near Potion Shop": "true"
 
 "Woods of Mystery Grotto":
   region: ENTRANCE
