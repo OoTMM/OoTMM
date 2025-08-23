@@ -70,6 +70,7 @@
     "Near Swamp Grotto": "is_tall || short_hook_anywhere"
     "Swamp Front Water": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_RIGHT) && can_use_nayru)"
     "Swamp Middle Water": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_BACK) && can_use_nayru)"
+    "Swamp Canopy Back": "is_swamp_cleared && can_swim_or_sink"
     "Swamp Back": "true"
   events:
     SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
