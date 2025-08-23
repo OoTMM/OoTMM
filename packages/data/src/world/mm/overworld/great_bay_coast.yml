@@ -1,19 +1,16 @@
 "Great Bay Coast":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast Platform": "!setting(jpLayouts, GreatBayCoast) || has_mask_zora"
+    "Great Bay Coast Water": "can_swim_or_sink"
+    "Great Bay Coast Ledge": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
+    "Great Bay Coast Platform": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
-    "Great Bay Coast Fortress": "underwater_walking"
-    "Great Bay Coast Near Pinnacle": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
     "Great Bay Grotto": "true"
-    "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
-    "Great Bay Coast Water Void": "true"
     "Great Bay Coast Butterflies": "has_sticks"
   events:
-    CLEAR_STATE_GREAT_BAY: "wisp_enabled(BOSS_GYORG, REMAINS_GYORG) || event(WISP_CLEAR_STATE_GREAT_BAY)"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
@@ -23,11 +20,7 @@
     FAIRY: "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play_healing"
-    "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
     "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
-    "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
-    "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
-    "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot 01": "true"
     "Great Bay Coast Pot 02": "true"
     "Great Bay Coast Pot 03": "true"
@@ -48,12 +41,42 @@
   gossip:
     "Great Bay Coast Gossip": "true"
 
+"Great Bay Coast Ledge":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast Water": "can_swim_or_sink"
+    "Great Bay Coast": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
+    "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
+  locations:
+    "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
+
+"Great Bay Coast Water":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast Water Void": "true"
+    "Great Bay Coast": "true"
+    "Great Bay Coast Ledge": "true"
+    "Great Bay Coast Platform": "can_swim && (!setting(jpLayouts, GreatBayCoast) || has_mask_zora)"
+    "Great Bay Coast Fortress": "underwater_walking"
+    "Great Bay Coast Near Pinnacle": "true"
+
+"Great Bay Coast Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
+
 "Great Bay Coast Platform":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "true"
+    "Great Bay Coast": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
+    "Great Bay Coast Water": "can_swim_or_sink"
     "Laboratory": "true"
     "Owl Great Bay": "true"
+  events:
+    CLEAR_STATE_GREAT_BAY: "wisp_enabled(BOSS_GYORG, REMAINS_GYORG) || event(WISP_CLEAR_STATE_GREAT_BAY)"
 
 "Great Bay Coast Butterflies":
   region: GREAT_BAY_COAST
@@ -63,17 +86,12 @@
     "Great Bay Coast Cleared Butterfly 1": "is_ocean_cleared"
     "Great Bay Coast Cleared Butterfly 2": "is_ocean_cleared"
 
-"Great Bay Coast Water Void":
-  region: NONE
-  exits:
-    "VOID": "true"
-
 "Great Bay Coast Near Pinnacle":
   region: GREAT_BAY_COAST
   exits:
     "Pinnacle Rock Entrance": "true"
-    "Great Bay Coast": "true"
-    "Great Bay Coast Near Pinnacle Water Void": "true"
+    "Great Bay Coast Water": "can_swim_or_sink"
+    "Great Bay Coast Near Pinnacle Water Void": "can_swim_or_sink"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
 
@@ -85,7 +103,7 @@
 "Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "underwater_walking"
+    "Great Bay Coast Water": "underwater_walking"
     "Pirate Fortress": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
@@ -123,7 +141,7 @@
 "GBC Near Cow Grotto":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "true"
+    "Great Bay Coast Ledge": "true"
     "Great Bay Cow Grotto": "true"
 
 "Great Bay Cow Grotto":
