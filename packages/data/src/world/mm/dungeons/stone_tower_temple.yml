@@ -14,7 +14,7 @@
   exits:
     "Stone Tower Temple": "true"
     "Stone Tower Temple West": "true"
-    "Stone Tower Temple Water Room": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
+    "Stone Tower Temple East": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Entrance Chest": "has_arrows"
@@ -46,7 +46,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Under West Garden": "true"
-    "Stone Tower Temple Center Ledge": "small_keys_st(4) || (small_keys_st(3) && (has_mask_zora || short_hook_anywhere))"
+    "Stone Tower Temple Center West": "small_keys_st(4) || (small_keys_st(3) && (has_mask_zora || (short_hook_anywhere && can_enter_water)))"
     "WARP_SONGS": "true"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
@@ -83,12 +83,11 @@
     "Stone Tower Temple Pot Lava Room After Block 3": "true"
     "Stone Tower Temple Pot Lava Room After Block 4": "true"
 
-"Stone Tower Temple Center Ledge":
+"Stone Tower Temple Center West":
   dungeon: ST
   exits:
+    "Stone Tower Temple Center Water": "can_swim_or_sink"
     "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play_emptiness)"
-    "Stone Tower Temple Center": "has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND) || (has_tunic_zora && has_iron_boots && can_hookshot)"
-    "Stone Tower Temple Water Room": "underwater_walking || can_dive_small"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
@@ -96,11 +95,11 @@
     "Stone Tower Temple Rupee Center Room Left": "can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Rupee Center Room Right": "can_goron_bomb_jump && can_use_ice_arrows"
 
-"Stone Tower Temple Center":
+"Stone Tower Temple Center East":
   dungeon: ST
   exits:
-    "Stone Tower Temple Water Room": "underwater_walking || short_hook_anywhere || can_dive_small"
-    "Stone Tower Temple Center Ledge": "has_mask_zora"
+    "Stone Tower Temple Center Water": "can_swim_or_sink"
+    "Stone Tower Temple East": "underwater_walking || short_hook_anywhere || can_dive_small"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
     "WARP_SONGS": "true"
   events:
@@ -113,27 +112,47 @@
     "Stone Tower Temple Crate Water 2": "true"
     "Stone Tower Temple Crate Water 3": "true"
 
-"Stone Tower Temple Water Room":
+"Stone Tower Temple Center Water":
   dungeon: ST
   exits:
-    "Stone Tower Temple Center": "has_mask_zora || (soul_enemy(SOUL_ENEMY_DEXIHAND) && (short_hook_anywhere || can_dive_small || (has_tunic_zora && has_iron_boots))) || (has_tunic_zora && has_iron_boots && (can_hookshot || short_hook_anywhere))"
+    "Stone Tower Temple Center West": "has_mask_zora"
+    "Stone Tower Temple Center East": "has_mask_zora || (soul_enemy(SOUL_ENEMY_DEXIHAND) && can_swim)"
+    "Stone Tower Temple East Water": "has_mask_zora"
+
+"Stone Tower Temple East":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple East Water": "can_swim_or_sink"
     "Stone Tower Temple Mirrors Room": "small_keys_st(4)"
     "Stone Tower Temple Entrance": "event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
     "WARP_SONGS": "true"
   events:
-    STONE_TOWER_WATER_CHEST_SWITCH: "underwater_walking"
     STONE_TOWER_EAST_ENTRY_BLOCK: "has_mirror_shield || can_use_light_arrows"
     STONE_TOWER_WATER_CHEST_SUN: "can_use_ice_arrows && can_use_light_arrows"
   locations:
     "Stone Tower Temple Compass": "event(STONE_TOWER_EAST_ENTRY_BLOCK)"
-    "Stone Tower Temple Water Sun Switch Chest": "underwater_walking && event(STONE_TOWER_WATER_CHEST_SUN)"
-    "Stone Tower Temple Pot Water Room Underwater Lower 1": "underwater_walking || (hookshot_anywhere && can_use_ice_arrows)"
-    "Stone Tower Temple Pot Water Room Underwater Lower 2": "underwater_walking || (hookshot_anywhere && can_use_ice_arrows)"
-    "Stone Tower Temple Pot Water Room Underwater Lower 3": "underwater_walking || (hookshot_anywhere && can_use_ice_arrows)"
-    "Stone Tower Temple Pot Water Room Underwater Upper 1": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu)))"
-    "Stone Tower Temple Pot Water Room Underwater Upper 2": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu)))"
     "Stone Tower Temple Pot Water Room Bridge 1": "true"
     "Stone Tower Temple Pot Water Room Bridge 2": "true"
+    "Stone Tower Temple Pot Water Room Underwater Lower 1": "can_enter_water && hookshot_anywhere && can_use_ice_arrows"
+    "Stone Tower Temple Pot Water Room Underwater Lower 2": "can_enter_water && hookshot_anywhere && can_use_ice_arrows"
+    "Stone Tower Temple Pot Water Room Underwater Lower 3": "can_enter_water && hookshot_anywhere && can_use_ice_arrows"
+    "Stone Tower Temple Pot Water Room Underwater Upper 1": "can_enter_water && (hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu))))"
+    "Stone Tower Temple Pot Water Room Underwater Upper 2": "can_enter_water && (hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu))))"
+
+"Stone Tower Temple East Water":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple East": "can_swim"
+    "Stone Tower Temple Center Water": "has_mask_zora || can_dive_small || (has_tunic_zora && has_iron_boots)" # Might involve getting thrown by the dexihand, but the player can immediately go back inside water so it's fine
+  events:
+    STONE_TOWER_WATER_CHEST_SWITCH: "underwater_walking"
+  locations:
+    "Stone Tower Temple Water Sun Switch Chest": "underwater_walking && event(STONE_TOWER_WATER_CHEST_SUN)"
+    "Stone Tower Temple Pot Water Room Underwater Lower 1": "underwater_walking"
+    "Stone Tower Temple Pot Water Room Underwater Lower 2": "underwater_walking"
+    "Stone Tower Temple Pot Water Room Underwater Lower 3": "underwater_walking"
+    "Stone Tower Temple Pot Water Room Underwater Upper 1": "underwater_walking"
+    "Stone Tower Temple Pot Water Room Underwater Upper 2": "underwater_walking"
 
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
@@ -205,8 +224,9 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Entrance": "true"
-    "Stone Tower Temple Center": "(can_goron_bomb_jump && (can_use_ice_arrows || soul_enemy(SOUL_ENEMY_DEXIHAND) || has_mask_zora || can_hookshot)) || short_hook_anywhere"
-    "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (can_use_ice_arrows || has_mask_zora)) || short_hook_anywhere"
+    "Stone Tower Temple Center Water": "(short_hook_anywhere || can_goron_bomb_jump) && can_swim_or_sink"
+    "Stone Tower Temple Center East": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows)"
+    "Stone Tower Temple Center West": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows)"
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Water Bridge Chest": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron || can_hammer)"
