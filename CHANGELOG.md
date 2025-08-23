@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add bronze scale, an extra scale item required to enter deep water (logic is experimental).
+
 ### Changed
 
 - Cloaked items are now progressive when relevant.
