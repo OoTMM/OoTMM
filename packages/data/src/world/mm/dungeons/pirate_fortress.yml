@@ -29,7 +29,7 @@
   region: PIRATE_FORTRESS_SEWERS
   exits:
     "Pirate Fortress Sewers Entrance": "true"
-    "Pirate Fortress Sewers Cage Room": "can_reset_time && (has_mask_zora || (underwater_walking_strict && can_lift_silver))"
+    "Pirate Fortress Sewers Cage Room": "can_reset_time && (has_mask_zora || (underwater_walking_strict && can_lift_silver)) && can_swim"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
   locations:
