@@ -66,6 +66,8 @@
 "Swamp Back Water":
   region: SOUTHERN_SWAMP
   exits:
+    "Near Swamp Spider House": "true"
+    "Near Swamp Grotto": "is_tall || short_hook_anywhere"
     "Swamp Front Water": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_RIGHT) && can_use_nayru)"
     "Swamp Middle Water": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_BACK) && can_use_nayru)"
     "Swamp Back": "true"
@@ -136,9 +138,10 @@
 "Near Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
+    "Swamp Back Water": "can_swim_or_sink"
     "Swamp Spider House": "has_sticks || has_arrows"
-    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
-    "Near Swamp Grotto": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || has_hover_boots"
+    "Swamp Back": "has(MASK_DEKU) || has_hover_boots"
+    "Near Swamp Grotto": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Front": "short_hook_anywhere"
 
 "Near Swamp Grotto":
@@ -146,8 +149,8 @@
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
-    "Swamp Front": "((has_arrows || can_hookshot || event(BOAT_RIDE)) && (has_mask_goron || is_tall || can_use_nayru)) || (is_adult && can_use_din)"
-    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_hookshot_short || can_use_nayru || has_hover_boots"
+    "Swamp Back Water": "can_swim_or_sink"
+    "Near Swamp Spider House": "has(MASK_DEKU) || can_hookshot_short || has_hover_boots"
     "Southern Swamp Grotto": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
 
@@ -197,7 +200,6 @@
 "Boat Ride":
   region: NONE
   events:
-    BOAT_RIDE: "true"
     SWAMP_OCTO_LEFT: "true"
     SWAMP_OCTO_BACK: "true"
     SWAMP_OCTO_RIGHT: "true"
@@ -231,8 +233,9 @@
 "Swamp Canopy Front":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Back": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
-    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || is_tall || has_hover_boots"
+    "Swamp Back Water": "can_swim_or_sink"
+    "Swamp Back": "has(MASK_DEKU) || has_hover_boots"
+    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || has_hover_boots"
     "Near Swamp Grotto": "true"
     "Deku Palace Cliff": "true"
     "Swamp Canopy Back": "has(MASK_DEKU) || short_hook_anywhere"
@@ -240,8 +243,8 @@
 "Swamp Canopy Back":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || has_hover_boots || can_use_nayru) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
-    "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_use_nayru || has_hover_boots"
+    "Swamp Back": "has(MASK_DEKU) || has_hover_boots"
+    "Swamp Back Water": "can_swim_or_sink"
     "Woodfall": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
   locations:
