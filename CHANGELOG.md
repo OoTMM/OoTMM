@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
 
 - Cloaked items are now progressive when relevant.
 
+### Changed
+
+- Grass and Pot CAMC is now its own setting and separated from the rest.
+
 ### Fixed
 
 - Fix cloaked items rotation in MM.

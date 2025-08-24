@@ -73,6 +73,7 @@ int     csmcFromItemCloaked(s16 gi, s16 cloakGi);
 int     csmcEnabled(void);
 int     csmcEnabledSkulltula(void);
 int     csmcEnabledCow(void);
+int     csmcEnabledGrassPot(void);
 
 /* Chest */
 void    csmcChestInit(Actor* this, PlayState* play, s16 gi, s16 cloakGi);
