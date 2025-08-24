@@ -113,7 +113,7 @@
   region: KAKARIKO
   exits:
     "Kakariko": "true"
-    "Bottom of the Well": "is_child || (setting(openDungeonsOot, wellAdult) && event(WELL_DRAIN)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
+    "Bottom of the Well": "is_child && can_swim || (setting(openDungeonsOot, wellAdult) && event(WELL_DRAIN)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
 
 "Kakariko Bazaar":
   region: ENTRANCE
