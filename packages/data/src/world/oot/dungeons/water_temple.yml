@@ -1,8 +1,8 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "Lake Hylia Near Water Temple": "true"
-    "Water Temple Main": "true"
+    "Lake Hylia Near Water Temple": "can_swim_or_sink"
+    "Water Temple Main": "can_swim"
 
 "Water Temple Main":
   dungeon: Water
