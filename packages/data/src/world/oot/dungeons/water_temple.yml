@@ -2,7 +2,7 @@
   dungeon: Water
   exits:
     "Lake Hylia Near Water Temple": "can_swim_or_sink"
-    "Water Temple Main": "can_swim"
+    "Water Temple Main": "can_swim || (hookshot_anywhere && has_iron_boots)"
 
 "Water Temple Main":
   dungeon: Water
