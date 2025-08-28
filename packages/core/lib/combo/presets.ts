@@ -1508,6 +1508,266 @@ const PRESET_ONLY_MM = makeSettings({
   ]
 });
 
+const PRESET_BEGINNER_COOP = makeSettings({
+  autoInvert: 'firstCycle',
+  mode: 'coop',
+  clearStateDungeonsMm: 'both',
+  hintImportance: true,
+  tingleShuffle: 'starting',
+  mapCompassShuffle: 'starting',
+  smallKeyShuffleMm: 'removed',
+  smallKeyShuffleHideout: 'vanilla',
+  strayFairyChestShuffle: 'starting',
+  shuffleGerudoCard: false,
+  startingAge: 'random',
+  doorOfTime: 'open',
+  dekuTree: 'closed',
+  kakarikoGate: 'open',
+  gerudoFortress: 'single',
+  skipZelda: true,
+  rainbowBridge: 'medallions',
+  bossWarpPads: 'remains',
+  freeScarecrowOot: true,
+  freeScarecrowMm: true,
+  openMaskShop: true,
+  crossWarpOot: true,
+  crossWarpMm: 'full',
+  bottleContentShuffle: true,
+  bombchuBehaviorOot: 'bagSeparate',
+  bombchuBehaviorMm: 'bagSeparate',
+  sharedBows: true,
+  sharedBombBags: true,
+  sharedMagic: true,
+  sharedMagicArrowFire: true,
+  sharedMagicArrowIce: true,
+  sharedMagicArrowLight: true,
+  sharedSongEpona: true,
+  sharedSongStorms: true,
+  sharedHookshot: true,
+  sharedLens: true,
+  sharedMaskGoron: true,
+  sharedMaskZora: true,
+  sharedMaskBunny: true,
+  sharedMaskKeaton: true,
+  sharedMaskTruth: true,
+  sharedWallets: true,
+  sharedHealth: true,
+  sharedShields: true,
+  sharedBombchu: true,
+  startingItems: {
+    OOT_NUTS_10: 2,
+    OOT_SHIELD_DEKU: 1,
+    OOT_STICK: 10,
+    SHARED_SHIELD_HYLIAN: 1,
+    MM_OCARINA: 1,
+    OOT_OCARINA: 1,
+    MM_SWORD: 2,
+    MM_SONG_SOARING: 1
+  },
+  junkLocations: [
+    'MM Beneath The Graveyard Dampe Chest',
+    'MM Deku Playground Reward All Days',
+    'MM Goron Race Reward',
+    'MM Great Bay Great Fairy',
+    'MM Honey & Darling Reward All Days',
+    'MM Ikana Great Fairy',
+    'MM Laboratory Zora Song',
+    'MM Moon Fierce Deity Mask',
+    'MM Mountain Village Frog Choir HP',
+    'MM Ocean Spider House Wallet',
+    'MM Pinnacle Rock HP',
+    'MM Snowhead Great Fairy',
+    "MM Stock Pot Inn Couple's Mask",
+    'MM Swamp Spider House Mask of Truth',
+    'MM Town Archery Reward 2',
+    'MM Waterfall Rapids Beaver Race 2',
+    'MM Woodfall Great Fairy',
+    'OOT Skulltula House 40 Tokens',
+    'OOT Skulltula House 50 Tokens'
+  ],
+  plando: {
+    locations: {
+      'OOT Zora River Bean Seller': 'OOT_MAGIC_BEAN',
+      "OOT Zelda's Letter": 'OOT_OCARINA',
+      "OOT Zelda's Song": 'OOT_SONG_TP_LIGHT',
+      'MM Initial Song of Healing': 'MM_SONG_TIME'
+    }
+  },
+  hints: [
+    { type: 'foolish', amount: 8, extra: 1 },
+    { type: 'always', amount: 'max', extra: 1 },
+    { type: 'sometimes', amount: 4, extra: 1 },
+    { type: 'item', amount: 1, extra: 1, item: 'SHARED_SHIELD_MIRROR' },
+    { type: 'item', amount: 1, extra: 1, item: 'MM_POWDER_KEG' },
+    { type: 'item', amount: 1, extra: 1, item: 'MM_MASK_CAPTAIN' },
+    { type: 'playthrough', amount: 1, extra: 1 },
+    { type: 'woth', amount: 9, extra: 1 },
+    { type: 'sometimes', amount: 'max', extra: 1 }
+  ]
+});
+
+const PRESET_BLITZ_COOP = makeBlitz({
+  rainbowBridge: 'custom',
+  mode: 'coop',
+  specialConds: {
+    BRIDGE: {
+      count: 5,
+      stones: true,
+      medallions: true
+    },
+    MOON: {
+      count: 4,
+      stones: true,
+      remains: true
+    }
+  },
+  junkLocations: [
+    'MM Deku Playground Reward All Days',
+    'MM Beneath The Graveyard Dampe Chest',
+    'MM Goron Race Reward',
+    'MM Great Bay Great Fairy',
+    'MM Honey & Darling Reward All Days',
+    'MM Ikana Great Fairy',
+    'MM Laboratory Zora Song',
+    'MM Moon Fierce Deity Mask',
+    'MM Mountain Village Frog Choir HP',
+    'MM Ocean Spider House Wallet',
+    'MM Pinnacle Rock HP',
+    'MM Snowhead Great Fairy',
+    'MM Stock Pot Inn Couple\'s Mask',
+    'MM Swamp Spider House Mask of Truth',
+    'MM Town Archery Reward 2',
+    'MM Waterfall Rapids Beaver Race 2',
+    'MM Woodfall Great Fairy',
+    'OOT Hyrule Field Ocarina of Time',
+    'OOT Kakariko Song Shadow',
+    'OOT Skulltula House 40 Tokens',
+    'OOT Skulltula House 50 Tokens'
+  ],
+  hints: [
+    { type: "foolish", amount: 8, extra: 1 },
+    { type: "always", amount: "max", extra: 1 },
+    { type: "sometimes", amount: 4, extra: 1 },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
+    { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
+    { type: "item", amount: 1, extra: 1, item: "MM_POWDER_KEG" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_ICE" },
+    { type: "playthrough", amount: 1, extra: 1 },
+    { type: "woth", amount: 9, extra: 1 },
+    { type: "sometimes", amount: "max", extra: 1 }
+  ]
+});
+
+const PRESET_BLITZ_PRECOMPLETED_COOP = makeBlitz({
+  rainbowBridge: 'custom',
+  mode: 'coop',
+  preCompletedDungeons: true,
+  preCompletedDungeonsMajor: 6,
+  preCompletedDungeonsStones: 2,
+  preCompletedDungeonsMedallions: 2,
+  preCompletedDungeonsRemains: 2,
+  junkLocations: [
+    "MM Beneath The Graveyard Dampe Chest",
+    "MM Deku Playground Reward All Days",
+    "MM Goron Race Reward",
+    "MM Great Bay Great Fairy",
+    "MM Honey & Darling Reward All Days",
+    "MM Ikana Great Fairy",
+    "MM Laboratory Zora Song",
+    "MM Moon Fierce Deity Mask",
+    "MM Mountain Village Frog Choir HP",
+    "MM Ocean Spider House Wallet",
+    "MM Pinnacle Rock HP",
+    "MM Snowhead Great Fairy",
+    "MM Stock Pot Inn Couple's Mask",
+    "MM Swamp Spider House Mask of Truth",
+    "MM Town Archery Reward 2",
+    "MM Waterfall Rapids Beaver Race 2",
+    "MM Woodfall Great Fairy",
+    "OOT Skulltula House 40 Tokens",
+    "OOT Skulltula House 50 Tokens",
+  ],
+  specialConds: {
+    BRIDGE: {
+      count: 9,
+      stones: true,
+      medallions: true,
+      remains: false,
+    },
+    MOON: {
+      count: 7,
+      stones: true,
+      medallions: false,
+      remains: true,
+    }
+  },
+  hints: [
+    { type: "foolish", amount: 8, extra: 1 },
+    { type: "always", amount: "max", extra: 1 },
+    { type: "sometimes", amount: 4, extra: 1 },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
+    { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
+    { type: "item", amount: 1, extra: 1, item: "MM_POWDER_KEG" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_ICE" },
+    { type: "woth", amount: 9, extra: 1 },
+    { type: "sometimes", amount: "max", extra: 1 }
+  ]
+});
+
+const PRESET_TRIFORCE_BLITZ = makeBlitz({
+  goal: "triforce3",
+  strayFairyChestShuffle: "starting",
+  rainbowBridge: 'custom',
+  preCompletedDungeons: true,
+  preCompletedDungeonsMajor: 6,
+  preCompletedDungeonsStones: 2,
+  preCompletedDungeonsMedallions: 2,
+  preCompletedDungeonsRemains: 2,
+  junkLocations: [
+    "MM Beneath The Graveyard Dampe Chest",
+    "MM Deku Playground Reward All Days",
+    "MM Goron Race Reward",
+    "MM Great Bay Great Fairy",
+    "MM Honey & Darling Reward All Days",
+    "MM Ikana Great Fairy",
+    "MM Laboratory Zora Song",
+    "MM Moon Fierce Deity Mask",
+    "MM Mountain Village Frog Choir HP",
+    "MM Ocean Spider House Wallet",
+    "MM Pinnacle Rock HP",
+    "MM Snowhead Great Fairy",
+    "MM Stock Pot Inn Couple's Mask",
+    "MM Swamp Spider House Mask of Truth",
+    "MM Town Archery Reward 2",
+    "MM Waterfall Rapids Beaver Race 2",
+    "MM Woodfall Great Fairy",
+    "OOT Skulltula House 40 Tokens",
+    "OOT Skulltula House 50 Tokens"
+  ],
+  specialConds: {
+    BRIDGE: {
+      count: 10,
+      stones: true,
+      medallions: true,
+      remains: true
+    },
+    MOON: {
+      count: 0
+    }
+  },
+  hints: [
+    { type: "foolish", amount: 8, extra: 1 },
+    { type: "always", amount: "max", extra: 1 },
+    { type: "sometimes", amount: 4, extra: 1 },
+    { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
+    { type: "item", amount: 1, extra: 1, item: "MM_POWDER_KEG" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_LIGHT" },
+    { type: "woth", amount: 9, extra: 1 },
+    { type: "sometimes", amount: "max", extra: 1 }
+  ]
+});
+
 export const PRESETS: Presets = {
   'Default': PRESET_DEFAULT,
   'Beginner': PRESET_BEGINNER,
@@ -1519,4 +1779,9 @@ export const PRESETS: Presets = {
   'Hell': PRESET_HELL,
   'Only OoT': PRESET_ONLY_OOT,
   'Only MM': PRESET_ONLY_MM,
+  'Coop Begginer': PRESET_BEGINNER_COOP,
+  'Coop Blitz':PRESET_BLITZ_COOP,
+  'Coop Blitz (pre-completed dungeons)':PRESET_BLITZ_PRECOMPLETED_COOP,
+  'Coop Triforce Blitz': PRESET_TRIFORCE_BLITZ,
 };
+
