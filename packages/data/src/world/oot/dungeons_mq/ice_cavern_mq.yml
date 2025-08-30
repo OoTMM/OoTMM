@@ -133,7 +133,7 @@
 "Ice Cavern Serenade Room Inside Pit of Water":
   dungeon: IC
   exits:
-    "Ice Cavern Serenade Room": "can_swim"
+    "Ice Cavern Serenade Room": "can_swim" #Might be able to use irons + hookshot anywhere too, rather than needing to float.
     "Ice Cavern Ledge After Shiek Water Section": "has_iron_boots"
 "Ice Cavern Ledge After Shiek Water Section":
   dungeon: IC
