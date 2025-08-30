@@ -124,14 +124,24 @@
   dungeon: IC
   exits:
     "Ice Cavern Past Red Ice Before Shiek": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
-    "Ice Cavern Ledge After Shiek": "event(ICE_MQ_FINAL_ROOM_CLEAR) && has_iron_boots"
+    "Ice Cavern Serenade Room Inside Pit of Water": "event(ICE_MQ_FINAL_ROOM_CLEAR) && can_swim_or_sink"    
   events:
     ICE_MQ_FINAL_ROOM_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "MQ Ice Cavern Iron Boots": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
     "MQ Ice Cavern Sheik Song": "event(ICE_MQ_FINAL_ROOM_CLEAR) && soul_npc(SOUL_NPC_SHEIK)"
+"Ice Cavern Serenade Room Inside Pit of Water":
+  dungeon: IC
+  exits:
+    "Ice Cavern Serenade Room": "can_swim" #Might be able to use irons + hookshot anywhere too, rather than needing to float.
+    "Ice Cavern Ledge After Shiek Water Section": "has_iron_boots"
+"Ice Cavern Ledge After Shiek Water Section":
+  dungeon: IC
+  exits:
+    "Ice Cavern Serenade Room Inside Pit of Water": "has_iron_boots"
+    "Ice Cavern Ledge After Shiek": "can_swim_or_sink"
 "Ice Cavern Ledge After Shiek":
   dungeon: IC
   exits:
     "Ice Cavern Room After Entrance Boulder": "true"
-    "Ice Cavern Serenade Room": "has_iron_boots"
+    "Ice Cavern Ledge After Shiek Water Section": "can_swim_or_sink"
