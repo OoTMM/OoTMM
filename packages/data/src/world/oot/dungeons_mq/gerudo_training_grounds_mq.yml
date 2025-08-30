@@ -182,9 +182,9 @@
     "Gerudo Training Grounds Lava Room Ledge Before Water Room": "true"
   locations:
     "MQ Gerudo Training Grounds Water Room Chest": "silver_rupees_gtg_water_mq"
-    "MQ Gerudo Training Grounds SR Water Top-Left": "has_iron_boots && has_tunic_zora && has_fire"
-    "MQ Gerudo Training Grounds SR Water Center": "has_iron_boots && has_tunic_zora && has_fire"
-    "MQ Gerudo Training Grounds SR Water Bottom-Right": "has_iron_boots && has_tunic_zora && has_fire"
+    "MQ Gerudo Training Grounds SR Water Top-Left": "has_iron_boots && can_swim && has_tunic_zora && has_fire"
+    "MQ Gerudo Training Grounds SR Water Center": "has_iron_boots && can_swim && has_tunic_zora && has_fire"
+    "MQ Gerudo Training Grounds SR Water Bottom-Right": "has_iron_boots && can_swim && has_tunic_zora && has_fire"
 "Gerudo Training Grounds Left Path First Room":
   dungeon: GTG
   events:
