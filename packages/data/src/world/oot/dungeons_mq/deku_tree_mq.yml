@@ -302,7 +302,7 @@
     "MQ Deku Tree Basement Ledge": "hookshot_anywhere || climb_anywhere"
     "MQ Deku Tree Pre-Boss Room Water Section": "can_swim_or_sink"
     "Deku Tree Boss": "event(DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE)"
-  event:
+  events:
     DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE: "has_shield_for_scrubs && soul_deku_scrub"
   locations:
     "MQ Deku Tree Grass Room Before Boss 1": "can_cut_grass"
