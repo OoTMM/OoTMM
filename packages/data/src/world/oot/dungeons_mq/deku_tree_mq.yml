@@ -299,7 +299,7 @@
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
-    "MQ Deku Tree Basement Ledge": "hookshot_anywhere"
+    "MQ Deku Tree Basement Ledge": "hookshot_anywhere || climb_anywhere"
     "MQ Deku Tree Pre-Boss Room Water Section": "can_swim_or_sink"
     "Deku Tree Boss": "event(DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE)"
   event:
