@@ -180,7 +180,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Water Room Door to Room Before Water Room": "true"
-    "MQ Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL)"
+    "MQ Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots) || climb_anywhere || hookshot_anywhere || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL)"
   events:
     MQ_DEKU_WATER_TORCHES: "(is_child && has_shield && can_use_sticks) || (can_use_bow && can_play_elegy) || (can_use_sticks && trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL))"
   locations:
@@ -191,7 +191,7 @@
 "MQ Deku Tree Water Room Back":
   dungeon: DT
   exits:
-    "MQ Deku Tree Water Room Front": "true"
+    "MQ Deku Tree Water Room Front": "can_swim || (is_child && has_shield) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL) || hookshot_anywhere"
     "MQ Deku Tree Water Room Door to Room After Water Room": "climb_anywhere || hookshot_anywhere || can_damage" #Need to kill the skultulla blocking the way.
   events:
     MQ_DEKU_WATER_TORCHES: "has_fire"
