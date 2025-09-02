@@ -93,35 +93,30 @@
     "MQ Jabu-Jabu Grass Main Room Bottom 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 2": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 3": "can_cut_grass"
-
-
-    
 "Jabu Jabu Basement Loop to Main Elevator West Side":
   dungeon: JJ
   exits:
     "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)" #We are going to need a buffer region here for behind the water spout. You can use Hover Boots with Bunny Hood or backwalking to get through the spout, or climb anywhere. There is not another one blocking the door on this side. It should also probably be a trick, even with climb anywhere.
-    "Jabu Jabu Basement Loop to Main Elevator East Side":
+    "Jabu Jabu Basement Loop to Main Elevator East Side": "can_swim || can_hookshot || climb_anywhere"
   events:
     JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
   locations:
     "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
-    "MQ Jabu-Jabu SoT Room Lower Chest": "true"
-    "MQ Jabu-Jabu Pot Boomerang Room 1": "true"
-    "MQ Jabu-Jabu Pot Boomerang Room 2": "true"
     "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
-    "MQ Jabu-Jabu Grass Boomerang Room": "can_cut_grass"
-
-
-
 "Jabu Jabu Basement Loop to Main Elevator East Side":
   dungeon: JJ
   exits:
-    "Jabu Jabu Basement Loop to Main Elevator West Side": "true" #Can climb the vines on the wall and jump to west side as child, no items
+    "Jabu Jabu Basement Loop to Main Elevator West Side": "true" #Can climb the vines on the wall from SoT block, and jump to west side as child, no items
     "Jabu-Jabu Ruto Section Bottom Floor": "true"
-
-
-
-    
+  events:
+    JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
+  locations:
+    "MQ Jabu-Jabu SoT Room Lower Chest": "true"
+    "MQ Jabu-Jabu Pot Boomerang Room 1": "true"
+    "MQ Jabu-Jabu Pot Boomerang Room 2": "true"
+    "MQ Jabu-Jabu Grass Boomerang Room": "can_cut_grass"
+    "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
+    "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
 "Jabu-Jabu Basement Ledge Before Big Octo":
   dungeon: JJ
   exits:
