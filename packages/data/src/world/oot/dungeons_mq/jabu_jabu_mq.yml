@@ -84,7 +84,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Vanilla Ruto Falling Room": "true"
-    "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
+    "Jabu-Jabu Basement Side Room Entrance Side": "event(JABU_TENTACLE_RED)"
     "Jabu Jabu Basement Loop to Main Elevator East Side": "soul_ruto || can_play_elegy"
     "Jabu-Jabu Basement Ledge Before Big Octo": "climb_anywhere"
   locations:
@@ -241,15 +241,37 @@
     "Jabu-Jabu Back Forked Paths": "true"
   locations:
     "MQ Jabu-Jabu GS Back": "gs && ((climb_anywhere && (can_hammer || can_use_mask_blast)) || (has_explosives && can_collect_distance))"
-"Jabu-Jabu Basement Side Room":
+
+
+
+
+"Jabu-Jabu Basement Side Room Entrance Side":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Ruto Section Bottom Floor": "event(JABU_MQ_BASEMENT_SIDE_BUTTON)"
+    "Jabu-Jabu Ruto Section Bottom Floor": "can_swim && event(JABU_MQ_BASEMENT_SIDE_BUTTON)"
+    "Jabu-Jabu Basement Side Room GS Side": "has_hover boots || (JABU_MQ_BASEMENT_SIDE_PLATFORM && (can_hookshot || can_swim)) || climb_anywhere"
   events:
     JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
-    JABU_MQ_BASEMENT_SIDE_BUTTON: "true" #Listed here for action shuffle
+    JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
   locations:
     "MQ Jabu-Jabu GS Basement Side Room": "gs && ((event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && can_collect_distance) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot) || (climb_anywhere && can_damage_skull))"
+
+
+"Jabu-Jabu Basement Side Room GS Side":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Basement Side Room Entrance Side": "can_swim || climb_anywhere" #Hovers cannot make it back, it seems
+  events:
+    JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
+    JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
+  locations:
+    "MQ Jabu-Jabu GS Basement Side Room": "gs &&
+
+
+
+
+
+
 "Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
