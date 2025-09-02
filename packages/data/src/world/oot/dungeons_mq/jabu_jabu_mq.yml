@@ -34,7 +34,7 @@
     "Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge": "can_swim && (is_child || (is_adult && can_dive_small))" #Adult cannot dive to the alcove without a scale. However, can hookshot through Jabu's flesh to the compass chest without bronze scale (only irons, and zora tunic?). Can be a trick.
     "Jabu Jabu Basement Loop to Main Elevator": "event(JABU_MQ_WATER_SPOUTS)"
   events:
-    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || can_hookshot || has_bombchu"
+    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || has_bombchu || can_longshot || (has_iron_boots && can_hookshot)"
   locations:
     "MQ Jabu-Jabu Second Room B1 Chest": "true"
     "MQ Jabu-Jabu Wonder Item Elevator Cow": "can_use_slingshot"
