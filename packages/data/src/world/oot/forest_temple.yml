@@ -6,14 +6,17 @@
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "gs && (has_ranged_weapon || has_explosives || can_use_din)"
+
 "Forest Temple Wallmaster West":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Forest Temple Wallmaster East":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Forest Temple Main":
   dungeon: Forest
   exits:
@@ -34,12 +37,14 @@
     "Forest Temple Pot Main Room 4": "true"
     "Forest Temple Pot Main Room 5": "true"
     "Forest Temple Pot Main Room 6": "true"
+
 "Forest Temple Mini-Boss":
   dungeon: Forest
   locations:
     "Forest Temple Mini-Boss Key": "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Forest Temple Pot Miniboss Lower 1": "true"
     "Forest Temple Pot Miniboss Lower 2": "true"
+
 "Forest Temple Garden West":
   dungeon: Forest
   exits:
@@ -52,6 +57,7 @@
     NUTS: "soul_deku_baba && (can_use_sword || has_explosives || can_use_slingshot)"
   locations:
     "Forest Temple GS Garden West": "gs && ((can_longshot || (climb_anywhere && has_bombchu)) || (event(FOREST_LEDGE_REACHED) && (can_collect_distance || (climb_anywhere && has_ranged_weapon))))"
+
 "Forest Temple Garden West Ledge":
   dungeon: Forest
   exits:
@@ -64,10 +70,12 @@
   locations:
     "Forest Temple Heart Garden 1": "true"
     "Forest Temple Heart Garden 2": "true"
+
 "Forest Temple Floormaster":
   dungeon: Forest
   locations:
     "Forest Temple Floormaster": "soul_floormaster && (can_use_sword || can_use_sticks)"
+
 "Forest Temple Map Room":
   dungeon: Forest
   exits:
@@ -75,6 +83,7 @@
     "Forest Temple Garden East Ledge": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
   locations:
     "Forest Temple Map": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
+
 "Forest Temple Garden East Ledge":
   dungeon: Forest
   exits:
@@ -82,6 +91,7 @@
     "Forest Temple Map Room": "true"
   events:
     FOREST_WELL: "true"
+
 "Forest Temple Garden East":
   dungeon: Forest
   exits:
@@ -94,6 +104,7 @@
   locations:
     "Forest Temple Garden": "can_hookshot || climb_anywhere"
     "Forest Temple GS Garden East": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots))))"
+
 "Forest Temple Well":
   dungeon: Forest
   exits:
@@ -103,6 +114,7 @@
     "Forest Temple Well": "event(FOREST_WELL)"
     "Forest Temple Heart Well 1": "event(FOREST_WELL) || has_iron_boots"
     "Forest Temple Heart Well 2": "event(FOREST_WELL) || has_iron_boots"
+
 "Forest Temple Maze":
   dungeon: Forest
   exits:
@@ -114,11 +126,13 @@
     FOREST_TWISTED_HALL: "(((is_adult || time_travel_at_will) && has_goron_bracelet) || climb_anywhere || hookshot_anywhere) && can_hit_triggers_distance"
   locations:
     "Forest Temple Maze": "(has_goron_bracelet || climb_anywhere || hookshot_anywhere) && can_hit_triggers_distance"
+
 "Forest Temple Twisted 1 Normal":
   dungeon: Forest
   exits:
     "Forest Temple Wallmaster West": "soul_wallmaster"
     "Forest Temple Poe 1": "cond(!setting(hookshotAnywhereOot, off) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(3))"
+
 "Forest Temple Twisted 1 Alt":
   dungeon: Forest
   exits:
@@ -126,6 +140,7 @@
     "Forest Temple Garden West Ledge": "soul_bubble && (can_use_bow || can_hammer || has_explosives || has_nuts || can_collect_distance || has_shield)"
   locations:
     "Forest Temple Boss Key": "true"
+
 "Forest Temple Poe 1":
   dungeon: Forest
   exits:
@@ -134,6 +149,7 @@
     FOREST_POE_1: "can_use_bow"
   locations:
     "Forest Temple Poe Key": "event(FOREST_POE_1)"
+
 "Forest Temple Mini-Boss 2":
   dungeon: Forest
   exits:
@@ -144,6 +160,7 @@
     "Forest Temple Pot Miniboss Upper 2": "true"
     "Forest Temple Pot Miniboss Upper 3": "true"
     "Forest Temple Pot Miniboss Upper 4": "true"
+
 "Forest Temple Poe 2":
   dungeon: Forest
   exits:
@@ -155,11 +172,13 @@
     "Forest Temple Pot Blue Poe 1": "true"
     "Forest Temple Pot Blue Poe 2": "true"
     "Forest Temple Pot Blue Poe 3": "true"
+
 "Forest Temple Twisted 2 Normal":
   dungeon: Forest
   exits:
     "Forest Temple Wallmaster East": "soul_wallmaster"
     "Forest Temple Rotating Room": "small_keys_forest(5)"
+
 "Forest Temple Rotating Room":
   dungeon: Forest
   exits:
@@ -167,11 +186,13 @@
   locations:
     "Forest Temple Pot Rotating Room 1": "true"
     "Forest Temple Pot Rotating Room 2": "true"
+
 "Forest Temple Twisted 2 Alt":
   dungeon: Forest
   exits:
     "Forest Temple Wallmaster East": "soul_wallmaster"
     "Forest Temple Checkerboard": "true"
+
 "Forest Temple Checkerboard":
   dungeon: Forest
   exits:
@@ -181,6 +202,7 @@
     "Forest Temple Checkerboard": "true"
     "Forest Temple Garden": "true"
     "Forest Temple GS Garden East": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots))))"
+
 "Forest Temple Poe 3":
   dungeon: Forest
   exits:
@@ -190,6 +212,7 @@
   locations:
     "Forest Temple Pot Green Poe Pot 1": "true"
     "Forest Temple Pot Green Poe Pot 2": "true"
+
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:
