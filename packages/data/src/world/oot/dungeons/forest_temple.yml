@@ -220,6 +220,7 @@
   locations:
     "Forest Temple Antichamber": "true"
     "Forest Temple GS Antichamber": "gs && (can_collect_distance || climb_anywhere)"
+
 "Forest Temple Antichamber Room Hallway Before Boss":
   dungeon: Forest
   exits:
