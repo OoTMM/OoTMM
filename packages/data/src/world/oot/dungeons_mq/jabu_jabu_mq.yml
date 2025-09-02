@@ -241,10 +241,6 @@
     "Jabu-Jabu Back Forked Paths": "true"
   locations:
     "MQ Jabu-Jabu GS Back": "gs && ((climb_anywhere && (can_hammer || can_use_mask_blast)) || (has_explosives && can_collect_distance))"
-
-
-
-
 "Jabu-Jabu Basement Side Room Entrance Side":
   dungeon: JJ
   exits:
@@ -264,12 +260,6 @@
     JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
   locations:
     "MQ Jabu-Jabu GS Basement Side Room": "gs && (can_collect_distance || (climb_anywhere && can_damage_skull))"
-
-
-
-
-
-
 "Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
