@@ -3,13 +3,13 @@ import { Item } from './defs';
 
 export type PlayerItem = {
   item: Item;
-  player: number;
+  player: number | 'all';
   __brand: 'PlayerItem';
 };
 
 const playerItemMemo = createMemo<PlayerItem>();
 
-export function makePlayerItem(item: Item, player: number): PlayerItem {
+export function makePlayerItem(item: Item, player: number | 'all'): PlayerItem {
   return playerItemMemo(`${item.id}@${player}`, () => ({ item, player } as PlayerItem));
 }
 

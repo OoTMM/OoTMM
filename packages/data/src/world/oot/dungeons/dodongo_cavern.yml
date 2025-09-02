@@ -1,0 +1,184 @@
+"Dodongo Cavern":
+  dungeon: DC
+  exits:
+    "Death Mountain": "true"
+    "Dodongo Cavern Main": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+
+"Dodongo Cavern Main":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern": "true"
+    "Dodongo Cavern Right Corridor": "true"
+    "Dodongo Cavern Main Ledge": "is_adult || climb_anywhere || hookshot_anywhere"
+    "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
+    "Dodongo Cavern Pre-Boss Lobby": "event(DC_BOMB_EYES)"
+  locations:
+    "Dodongo Cavern Map Chest": "true"
+    "Dodongo Cavern Lobby Scrub": "business_scrub(0x1f)"
+  gossip:
+    "Dodongo Cavern Gossip": "true"
+
+"Dodongo Cavern Right Corridor":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (can_use_sword || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Miniboss 1": "true"
+  locations:
+    "Dodongo Cavern GS Scarecrow": "gs && ((is_adult && scarecrow_hookshot) || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
+    "Dodongo Cavern Pot Right Corridor Pot 1": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 2": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 3": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 4": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 5": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 6": "true"
+
+"Dodongo Cavern Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Right Corridor": "true"
+  locations:
+    "Dodongo Cavern GS Side Room": "gs && can_damage_skull"
+    # Normally fails to load
+    "Dodongo Cavern Grass East Corridor Side Room": "can_cut_grass"
+
+"Dodongo Cavern Miniboss 1":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Miniboss 2": "time_travel_at_will && (climb_anywhere || (is_adult && hookshot_anywhere) || longshot_anywhere)"
+  locations:
+    "Dodongo Cavern Pot Miniboss 1": "true"
+    "Dodongo Cavern Pot Miniboss 2": "true"
+    "Dodongo Cavern Pot Miniboss 3": "true"
+    "Dodongo Cavern Pot Miniboss 4": "true"
+    "Dodongo Cavern Heart Miniboss Lava": "true"
+
+"Dodongo Cavern Green Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Miniboss 1": "true"
+    "Dodongo Cavern Green Side Room": "true"
+    "Dodongo Cavern Main Ledge": "has_fire_or_sticks"
+  locations:
+    "Dodongo Cavern Pot Green Room Pot 1": "true"
+    "Dodongo Cavern Pot Green Room Pot 2": "true"
+    "Dodongo Cavern Pot Green Room Pot 3": "true"
+    "Dodongo Cavern Pot Green Room Pot 4": "true"
+
+"Dodongo Cavern Green Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Green Room": "true"
+  locations:
+    "Dodongo Cavern Green Side Room Scrub": "business_scrub(0x1d)"
+
+"Dodongo Cavern Main Ledge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Green Room": "true"
+  events:
+    DC_MAIN_SWITCH: "true"
+
+"Dodongo Cavern Stairs":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Compass Room": "true"
+    "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din || climb_anywhere || hookshot_anywhere"
+
+"Dodongo Cavern Stairs Top":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs": "true"
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+  locations:
+    "Dodongo Cavern GS Stairs Vines": "gs"
+    "Dodongo Cavern GS Stairs Top": "gs && ((can_collect_distance && event(DC_SHORTCUT)) || hookshot_anywhere || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
+    "Dodongo Cavern Pot Stairs Pot 1": "true"
+    "Dodongo Cavern Pot Stairs Pot 2": "true"
+    "Dodongo Cavern Pot Stairs Pot 3": "true"
+    "Dodongo Cavern Pot Stairs Pot 4": "true"
+    "Dodongo Cavern Grass Lobby": "can_cut_grass"
+
+"Dodongo Cavern Compass Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs": "soul_armos"
+  locations:
+    "Dodongo Cavern Compass Chest": "true"
+
+"Dodongo Cavern Bomb Bag Room 1":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs Top": "true"
+    "Dodongo Cavern Bomb Bag Room 2": "can_longshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere || hookshot_anywhere"
+    "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance || climb_anywhere || hookshot_anywhere"
+    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+  locations:
+    "Dodongo Cavern Bomb Bag Side Chest": "true"
+    "Dodongo Cavern Pot Room Before Miniboss 1": "true"
+    "Dodongo Cavern Pot Room Before Miniboss 2": "true"
+    "Dodongo Cavern Grass Bomb Bag Room": "can_cut_grass"
+    "Dodongo Cavern Grass Pre-Miniboss": "can_cut_grass"
+    "Dodongo Cavern Heart Bomb Bag Room": "true"
+
+"Dodongo Cavern Bomb Bag Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+  locations:
+    "Dodongo Cavern Bomb Bag Side Room Left Scrub": "business_scrub(0x1e)"
+    "Dodongo Cavern Bomb Bag Side Room Right Scrub": "business_scrub(0x1c)"
+
+"Dodongo Cavern Miniboss 2":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Miniboss 1": "time_travel_at_will"
+  locations:
+    "Dodongo Cavern Pot Miniboss 1": "true"
+    "Dodongo Cavern Pot Miniboss 2": "true"
+    "Dodongo Cavern Pot Miniboss 3": "true"
+    "Dodongo Cavern Pot Miniboss 4": "true"
+    "Dodongo Cavern Heart Miniboss Upper 1": "true"
+    "Dodongo Cavern Heart Miniboss Upper 2": "true"
+
+"Dodongo Cavern Bomb Bag Room 2":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Miniboss 2": "true"
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+    "Dodongo Cavern Main Bridge": "true"
+  locations:
+    "Dodongo Cavern Bomb Bag Chest": "true"
+    "Dodongo Cavern Pot Bomb Bag Room 1": "true"
+    "Dodongo Cavern Pot Bomb Bag Room 2": "true"
+    "Dodongo Cavern Pot Room After Miniboss 1": "true"
+    "Dodongo Cavern Pot Room After Miniboss 2": "true"
+
+"Dodongo Cavern Main Bridge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 2": "true"
+  events:
+    DC_SHORTCUT: "true"
+    DC_BOMB_EYES: "has_explosives"
+  locations:
+    "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+
+"Dodongo Cavern Pre-Boss Lobby":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Boss": "true"
+  locations:
+    "Dodongo Cavern GS Near Boss": "gs"
+    "Dodongo Cavern Pot Skull 1": "true"
+    "Dodongo Cavern Pot Skull 2": "true"
+    "Dodongo Cavern Pot Skull 3": "true"
+    "Dodongo Cavern Pot Skull 4": "true"
+    "Dodongo Cavern Grass Pre-Boss": "can_cut_grass"

@@ -41,9 +41,9 @@
 # define ITEM00_ARROWS_10       0x05
 # define ITEM00_HEART_PIECE     0x06
 # define ITEM00_HEART_CONTAINER 0x07
-# define ITEM00_ARROWS_20       0x08
-# define ITEM00_ARROWS_30       0x09
-# define ITEM00_ARROWS_30_ALT   0x0a
+# define ITEM00_ARROWS_30       0x08
+# define ITEM00_ARROWS_40       0x09
+# define ITEM00_ARROWS_50       0x0a
 # define ITEM00_BOMBS_5         0x0b
 # define ITEM00_NUT             0x0c
 # define ITEM00_STICK           0x0d
@@ -68,7 +68,7 @@
 
 typedef struct ALIGNED(4) Actor_EnItem00
 {
-    Actor   base;
+    Actor   actor;
     void*   handler;
     u16     collectibleFlag;
     char    unk_142[0x8];
@@ -97,10 +97,8 @@ void EnItem00_Update(Actor_EnItem00* this, PlayState* play);
 void EnItem00_DrawRupee(Actor_EnItem00* this, PlayState* play);
 void EnItem00_CollectedHandler(Actor_EnItem00* this, PlayState* play);
 void EnItem00_SetHandler(Actor_EnItem00* this, void* handler);
-s16  EnItem00_FixDrop(s16 dropType);
+int  EnItem00_FixDrop(int drop);
 
-void            EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag);
-void            EnItem00_XflagInitFreestanding(Actor_EnItem00* this, PlayState* play, u8 actorIndex, u8 slice);
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 

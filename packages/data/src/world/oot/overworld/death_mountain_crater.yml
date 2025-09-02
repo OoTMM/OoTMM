@@ -1,0 +1,131 @@
+"Death Mountain Crater Top":
+  region: DEATH_MOUNTAIN_CRATER
+  exits:
+    "Death Mountain Summit": "true"
+    "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (can_use_sword || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
+    "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
+    "Fairy Fountain Double Magic": "glitch_megaflip"
+    "Death Mountain Crater Bottom Adult Rupees": "is_adult"
+  events:
+    #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
+    BOMBS_OR_BOMBCHU: "has_tunic_goron_strict || can_hammer"
+    RUPEES: "has_tunic_goron_strict || has_explosives_or_hammer"
+    ARROWS: "has_tunic_goron_strict || has_explosives_or_hammer"
+    MAGIC: "has_tunic_goron_strict || has_explosives_or_hammer"
+  locations:
+    "Death Mountain Crater GS Crate": "gs && is_child && can_damage_skull"
+    "Death Mountain Crater Alcove HP": "true"
+    "Death Mountain Crater Scrub Child": "is_child && business_scrub(0x0e)"
+  gossip:
+    "Death Mountain Crater Gossip Wall": "has_explosives"
+
+"Death Mountain Crater Bottom":
+  region: DEATH_MOUNTAIN_CRATER
+  exits:
+    "Darunia Chamber": "true"
+    "Death Mountain Crater Warp": "(can_hookshot || has_hover_boots) && (is_adult || has_tunic_goron_strict || can_hammer || hookshot_anywhere || climb_anywhere)" #child cannot do anything at the warp from the top within 24 seconds
+    "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
+    "Death Mountain Crater Scrub Grotto": "can_hammer"
+    "Fairy Fountain Double Magic": "can_hammer || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Crater Red Boulders": "can_hammer"
+  events:
+    RED_BOULDER_BROKEN: "is_adult && can_hammer"
+  locations:
+    "Death Mountain Crater Volcano HP": "(trick(OOT_VOLCANO_HOVERS) && (has_hover_boots || hookshot_anywhere)) || glitch_megaflip"
+    "Death Mountain Crater Pot 1": "true"
+    "Death Mountain Crater Pot 2": "true"
+    "Death Mountain Crater Pot 3": "true"
+    "Death Mountain Crater Pot 4": "true"
+
+"Death Mountain Crater Red Boulders":
+  region: DEATH_MOUNTAIN_CRATER
+  age_change: false
+  locations:
+    "Death Mountain Crater Red Boulder Grotto": "true"
+    "Death Mountain Crater Red Boulder Great Fairy 1": "true"
+    "Death Mountain Crater Red Boulder Great Fairy 2": "true"
+    "Death Mountain Crater Red Boulder Shortcut": "true"
+
+"Death Mountain Crater Bottom Child":
+  region: DEATH_MOUNTAIN_CRATER
+  locations:
+    "Death Mountain Crater Rupee Child 1": "true"
+    "Death Mountain Crater Rupee Child 2": "true"
+    "Death Mountain Crater Rupee Child 3": "true"
+    "Death Mountain Crater Rupee Child 4": "true"
+    "Death Mountain Crater Rupee Child 5": "true"
+    "Death Mountain Crater Rupee Child 6": "true"
+    "Death Mountain Crater Rupee Child 7": "true"
+    "Death Mountain Crater Rupee Child 8": "true"
+
+"Death Mountain Crater Bottom Adult Rupees":
+  region: DEATH_MOUNTAIN_CRATER
+  locations:
+    "Death Mountain Crater Rupee Adult 1": "true"
+    "Death Mountain Crater Rupee Adult 2": "true"
+    "Death Mountain Crater Rupee Adult 3": "true"
+    "Death Mountain Crater Rupee Adult 4": "true"
+    "Death Mountain Crater Rupee Adult 5": "true"
+    "Death Mountain Crater Rupee Adult 6": "true"
+    "Death Mountain Crater Rupee Adult 7": "true"
+
+"Death Mountain Crater Warp":
+  region: DEATH_MOUNTAIN_CRATER
+  exits:
+    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
+    "Death Mountain Crater Bottom Child": "is_child"
+    "Death Mountain Crater Bottom Adult Rupees": "is_adult && scarecrow_longshot"
+  events:
+    BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
+  locations:
+    "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER) || climb_anywhere"
+    "Death Mountain Crater Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
+    "Death Mountain Crater GS Soil": "gs_soil && can_damage_skull"
+
+"Death Mountain Crater Near Temple":
+  region: DEATH_MOUNTAIN_CRATER
+  exits:
+    "Fire Temple": "true"
+    "Death Mountain Crater Warp": "has_tunic_goron_strict && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+
+"Death Mountain Crater Generic Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "GENERIC_GROTTO_EVENTS": "true"
+    "Death Mountain Crater Top": "true"
+  locations:
+    "Death Mountain Crater Grotto": "true"
+    "Death Mountain Crater Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 4": "can_cut_grass"
+    "Death Mountain Crater Grotto Hive 1": "break_hive_low"
+    "Death Mountain Crater Grotto Hive 2": "break_hive_low"
+    "Death Mountain Crater Grotto Butterfly 1": "can_use_sticks"
+    "Death Mountain Crater Grotto Butterfly 2": "can_use_sticks"
+    "Death Mountain Crater Grotto Butterfly 3": "can_use_sticks"
+  gossip:
+    "Death Mountain Crater Gossip Grotto": "true"
+
+"Death Mountain Crater Scrub Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Death Mountain Crater Bottom": "true"
+  locations:
+    "Death Mountain Crater Grotto Left Scrub": "business_scrub(0x0f)"
+    "Death Mountain Crater Grotto Center Scrub": "business_scrub(0x10)"
+    "Death Mountain Crater Grotto Right Scrub": "business_scrub(0x11)"
+    "Death Mountain Crater Scrub Grotto Hive": "break_hive_high"
+
+"Fairy Fountain Double Magic":
+  region: ENTRANCE
+  exits:
+    "Death Mountain Crater Bottom": "true"
+  events:
+    MAGIC: "can_play_zelda"
+  locations:
+    "Great Fairy Magic Upgrade 2": "can_play_zelda"

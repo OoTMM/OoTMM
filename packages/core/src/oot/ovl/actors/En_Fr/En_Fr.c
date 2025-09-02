@@ -764,11 +764,15 @@ void EnFr_CheckOcarinaInputFrogSong(u8 ocarinaNote) {
             break;
         case OCARINA_BTN_C_UP:
             frogIndexButterfly = FROG_WHITE;
+            break;
+        default:
+            frogIndexButterfly = -1;
     }
+
     // Turn on or off butterfly above frog
     for (frogIndex = 0; frogIndex < ARRAY_COUNT(sEnFrPointers.frogs); frogIndex++) {
         frog = sEnFrPointers.frogs[frogIndex];
-        frog->isButterflyDrawn = frogIndex == frogIndexButterfly ? true : false;
+        frog->isButterflyDrawn = (frogIndex == frogIndexButterfly);
     }
 }
 

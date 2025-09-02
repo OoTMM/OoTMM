@@ -14,6 +14,7 @@ import { ItemProperties } from './item-properties';
 import { CLOCKS } from '../items/groups';
 import { mustStartWithMasterSword } from '../settings/util';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
+import { TRAP_AMOUNTS } from './traps';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
@@ -387,9 +388,19 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private addItemGlobal(item: Item, amount?: number) {
+    this.addPlayerItem(makePlayerItem(item, 'all'), amount);
+  }
+
   private addItems(items: Iterable<Item>, amount?: number) {
     for (const item of items) {
       this.addItem(item, amount);
+    }
+  }
+
+  private addItemsGlobal(items: Iterable<Item>, amount?: number) {
+    for (const item of items) {
+      this.addItemGlobal(item, amount);
     }
   }
 
@@ -570,6 +581,10 @@ export class LogicPassWorldTransform {
   }
 
   private setupExtraTraps() {
+    const amountFactor = TRAP_AMOUNTS[this.state.settings.trapsQuantity];
+
+    const addTraps = (this.state.settings.trapsLink ? this.addItemsGlobal : this.addItems).bind(this);
+
     let extraTraps: Item[] = [];
 
     if (this.state.settings.trapRupoor) {
@@ -577,14 +592,21 @@ export class LogicPassWorldTransform {
       if (['ootmm', 'mm'].includes(this.state.settings.games)) extraTraps.push(Items.MM_TRAP_RUPOOR);
     }
 
+    if (this.state.settings.trapIce) extraTraps.push(Items.OOT_TRAP_ICE);
+    if (this.state.settings.trapFire) extraTraps.push(Items.OOT_TRAP_FIRE);
+    if (this.state.settings.trapShock) extraTraps.push(Items.OOT_TRAP_SHOCK);
+    if (this.state.settings.trapDrain) extraTraps.push(Items.OOT_TRAP_DRAIN);
+    if (this.state.settings.trapAntiMagic) extraTraps.push(Items.OOT_TRAP_ANTI_MAGIC);
+    if (this.state.settings.trapKnockback) extraTraps.push(Items.OOT_TRAP_KNOCKBACK);
+
     if (extraTraps.length === 0)
       return;
 
     const junkCount = Array.from(this.pool.entries())
       .filter(([pi, _]) => this.state.itemProperties.junk.has(pi.item))
       .reduce((acc, [_, count]) => acc + count, 0);
-    const trapCount = (junkCount * 20) / (this.state.worlds.length * extraTraps.length * 100);
-    this.addItems(extraTraps, trapCount);
+    const trapCount = (junkCount * amountFactor) / ((this.state.settings.trapsLink ? 1 : this.state.worlds.length) * extraTraps.length * 100);
+    addTraps(extraTraps, trapCount);
   }
 
   /**
@@ -778,10 +800,16 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_TUNIC_ZORA);
     }
 
+    if (settings.bronzeScale) {
+      this.addItem(Items.OOT_SCALE, 1);
+    }
     if (settings.sharedScales) {
       this.replaceItem(Items.OOT_SCALE, Items.SHARED_SCALE);
     } else if (settings.scalesMm) {
       this.addItem(Items.MM_SCALE, 2);
+      if (settings.bronzeScale) {
+        this.addItem(Items.MM_SCALE, 1);
+      }
     }
 
     if (settings.sharedStrength) {
@@ -954,20 +982,19 @@ export class LogicPassWorldTransform {
       this.addItem(Items.OOT_SPIN_UPGRADE);
     }
 
+    /* Triforce helper */
+    const addTriforce = (settings.triforceSharedMulti ? this.addItemGlobal : this.addItem).bind(this);
+
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, i), settings.triforcePieces);
-      }
+      addTriforce(Items.SHARED_TRIFORCE, settings.triforcePieces);
     }
 
     /* Triforce quest */
     if (settings.goal === 'triforce3') {
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_POWER, i), 1);
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, i), 1);
-        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, i), 1);
-      }
+      addTriforce(Items.SHARED_TRIFORCE_POWER, 1);
+      addTriforce(Items.SHARED_TRIFORCE_COURAGE, 1);
+      addTriforce(Items.SHARED_TRIFORCE_WISDOM, 1);
     }
 
     /* Coins */
@@ -1214,6 +1241,11 @@ export class LogicPassWorldTransform {
 
     if(!settings.shuffleIciclesMm) {
       const data = POOL.mm.filter((x: any) => x.type === 'icicle').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(data);
+    }
+
+    if(!settings.shuffleRedIceOot) {
+      const data = POOL.oot.filter((x: any) => x.type === 'redice').map((x: any) => gameId('oot', x.location, ' ')) as string[];
       this.removeLocations(data);
     }
 
@@ -1687,9 +1719,30 @@ export class LogicPassWorldTransform {
       countMapAdd(allItems, pi);
     }
 
+    /* Handle plando */
+    const plandoAllowedItems = new Set<PlayerItem>(this.pool.keys());
+    const plandoLocations: Map<Location, PlayerItem> = new Map();
+    for (const [k, v] of Object.entries(settings.plando.locations)) {
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        if (v === null) {
+          continue;
+        }
+        const loc = makeLocation(k, i);
+        if (this.fixedLocations.has(loc)) {
+          continue;
+        }
+        const pi = makePlayerItem(itemByID(v), i);
+        if (!plandoAllowedItems.has(pi)) {
+          continue;
+        }
+        this.removePlayerItem(pi, 1);
+        plandoLocations.set(loc, pi);
+      }
+    }
+
     /* Optimize the world */
     const worlds = this.state.worlds.map((world, i) => optimizeWorldStartingAndPool(world, i, this.state.startingItems, allItems));
 
-    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations, worlds };
+    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations, worlds, plandoLocations };
   }
 }

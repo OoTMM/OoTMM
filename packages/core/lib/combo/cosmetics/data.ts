@@ -9,6 +9,16 @@ export const COSMETICS = [{
   type: 'boolean',
   default: true,
 }, {
+  key: 'musicNames',
+  name: 'Display Music Names',
+  type: 'boolean',
+  default: true,
+// }, {
+//   key: 'nightBgm',
+//   name: 'Enable Nighttime BGM',
+//   type: 'boolean',
+//   default: false,
+}, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
   type: 'color',
@@ -49,6 +59,10 @@ export const COSMETICS = [{
   name: 'D-Pad',
   type: 'color',
 }, {
+  key: 'fileSelect',
+  name: 'File Select',
+  type: 'color',
+}, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'file',
@@ -63,9 +77,4 @@ export const COSMETICS = [{
   name: 'Custom Music ZIP',
   type: 'file',
   ext: 'zip',
-}, {
-  key: 'musicNames',
-  name: 'Display Music Names',
-  type: 'boolean',
-  default: true,
 },] as const;

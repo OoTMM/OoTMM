@@ -234,10 +234,10 @@ static int isItemAmbiguous(s16 gi)
         return !Config_Flag(CFG_SHARED_SONG_TIME);
     case GI_OOT_SONG_SUN:
     case GI_MM_SONG_SUN:
-        return !(Config_Flag(CFG_SHARED_SONG_SUN) || !Config_Flag(CFG_MM_SONG_SUN));
+        return !Config_Flag(CFG_SHARED_SONG_SUN) && Config_Flag(CFG_MM_SONG_SUN);
     case GI_OOT_SONG_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
-        return !(Config_Flag(CFG_SHARED_SONG_EMPTINESS) || !Config_Flag(CFG_OOT_SONG_EMPTINESS));
+        return !Config_Flag(CFG_SHARED_SONG_EMPTINESS) && Config_Flag(CFG_OOT_SONG_EMPTINESS);
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
     case GI_MM_STICK_UPGRADE:
@@ -527,8 +527,10 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_TUNIC_ZORA:
     case GI_MM_TUNIC_ZORA:
         return (Config_Flag(CFG_MM_TUNIC_ZORA) && !Config_Flag(CFG_SHARED_TUNIC_ZORA));
+    case GI_OOT_SCALE_BRONZE:
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
+    case GI_MM_SCALE_BRONZE:
     case GI_MM_SCALE_SILVER:
     case GI_MM_SCALE_GOLDEN:
         return (Config_Flag(CFG_MM_SCALES) && !Config_Flag(CFG_SHARED_SCALES));
@@ -936,8 +938,8 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_MM_SONG_GORON_HALF:
             itemName = "a " TEXT_C2 "Progressive Goron Lullaby";
             break;
-        case GI_OOT_SCALE_SILVER:
-        case GI_MM_SCALE_SILVER:
+        case GI_OOT_SCALE_BRONZE:
+        case GI_MM_SCALE_BRONZE:
             itemName = "a " TEXT_C1 "Progressive Scale";
             ambiguous = !Config_Flag(CFG_SHARED_SCALES) && Config_Flag(CFG_MM_SCALES);
             break;
@@ -1033,14 +1035,14 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
         gi = o->cloakGi;
 
     comboTextAppendItemNameEx(b, gi, flags, importance);
-    if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboConfig.playerId)
+    if (!Item_IsPlayerSelf(o->player))
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->player);
         comboTextAppendClearColor(b);
     }
 
-    if (o->playerFrom != PLAYER_SELF && o->playerFrom != PLAYER_ALL && o->playerFrom != gComboConfig.playerId)
+    if (!Item_IsPlayerSelf(o->playerFrom))
     {
         comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->playerFrom);
@@ -1252,6 +1254,27 @@ void comboTextMessageCantBuy(PlayState* play, int flags)
     comboTextAutoLineBreaks(start);
 }
 
+
+void comboTextMessageNoRupees(PlayState* play, int flags)
+{
+    char* b;
+    char* start;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.font.msgBuf;
+#else
+    b = play->msgCtx.font.textBuffer.schar;
+#endif
+
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "You don't have enough Rupees!");
+    if (flags & TF_SIGNAL)
+        comboTextAppendStr(&b, TEXT_SIGNAL);
+    comboTextAppendStr(&b, TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+
 static int shouldItemBeHintedWithImportance(s16 gi)
 {
     if (!Config_Flag(CFG_HINT_IMPORTANCE))
@@ -1301,9 +1324,6 @@ void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o)
 {
     char* b;
     char* start;
-    int isSelf;
-
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
     b = play->msgCtx.font.msgBuf;
 
@@ -1312,10 +1332,8 @@ void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o)
     comboTextAppendStr(&b, "You caught ");
     comboTextAppendItemNameOverride(&b, o, TF_NONE);
     comboTextAppendStr(&b, "!");
-    if (isSelf)
-    {
+    if (Item_IsPlayerSelf(o->player))
         comboTextExtra(&b, play, o->gi);
-    }
     comboTextAppendStr(&b, TEXT_BB TEXT_CZ);
     comboTextAppendStr(&b, "Do you want to keep it?");
     comboTextAppendStr(&b, TEXT_NL " " TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN);

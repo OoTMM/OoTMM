@@ -3,7 +3,6 @@ import { Settings } from './type';
 import { makeSettings, validateSettings } from './util';
 
 export const DEFAULT_RANDOM_SETTINGS = {
-  enabled: false,
   mq: false,
   jp: false,
   er: false,
@@ -41,10 +40,6 @@ function booleanWeighted(rng: Random, chance: number): boolean {
 }
 
 export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Settings): Promise<Settings> {
-  if (!rnd.enabled) {
-    return oldSettings;
-  }
-
   /* Get a new RNG */
   const random = new Random();
   await random.seed(randString());
@@ -58,6 +53,14 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.mode = oldSettings.mode;
   base.players = oldSettings.players;
   base.teams = oldSettings.teams;
+  base.probabilisticFoolish = oldSettings.probabilisticFoolish;
+  base.noPlandoHints = oldSettings.noPlandoHints;
+  base.extraHintRegions = oldSettings.extraHintRegions;
+  base.hintPathDungeons = oldSettings.hintPathDungeons;
+  base.hintPathBoss = oldSettings.hintPathBoss;
+  base.hintPathEndBoss = oldSettings.hintPathEndBoss;
+  base.hintPathEvents = oldSettings.hintPathEvents;
+  base.hintImportance = oldSettings.hintImportance;
 
   /* Main Settings */
   base.goal = sampleWeighted(random, { both: 10, triforce: 3, triforce3: 3 });
@@ -287,7 +290,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.openMaskShop = false;
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
-    base.kakarikoGate = 'closed';
+    base.kakarikoGate = 'vanilla';
     base.zoraKing = 'vanilla';
     base.gerudoFortress = 'vanilla';
     base.beneathWell = 'vanilla';
@@ -303,7 +306,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
-    base.kakarikoGate = sampleWeighted(random, { closed: 10, open: 7 });
+    base.kakarikoGate = sampleWeighted(random, { vanilla: 10, open: 5, closed: 5 });
     base.zoraKing = sampleWeighted(random, { vanilla: 10, open: 5, adult: 5 });
     base.gerudoFortress = sampleWeighted(random, { vanilla: 1, single: 1, open: 1 });
     base.beneathWell = sampleWeighted(random, { vanilla: 1, remorseless: 1, open: 1 });

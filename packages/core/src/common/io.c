@@ -3,41 +3,41 @@
 
 extern OSPiHandle* gCartHandle;
 
-u8 comboReadPhysU8(u32 paddr)
+u8 IO_ReadPhysU8(u32 paddr)
 {
     u32 paddrAligned;
     u32 value;
 
     paddrAligned = paddr & ~3;
-    value = comboReadPhysU32(paddrAligned);
+    value = IO_ReadPhysU32(paddrAligned);
     value >>= ((3 - (paddr & 3)) * 8);
     value &= 0xff;
     return (u8)value;
 }
 
-s8 comboReadPhysI8(u32 paddr)
+s8 IO_ReadPhysI8(u32 paddr)
 {
-    return (s8)comboReadPhysU8(paddr);
+    return (s8)IO_ReadPhysU8(paddr);
 }
 
-u16 comboReadPhysU16(u32 paddr)
+u16 IO_ReadPhysU16(u32 paddr)
 {
     u32 paddrAligned;
     u32 value;
 
     paddrAligned = paddr & ~3;
-    value = comboReadPhysU32(paddrAligned);
+    value = IO_ReadPhysU32(paddrAligned);
     value >>= ((2 - (paddr & 2)) * 8);
     value &= 0xffff;
     return (u16)value;
 }
 
-s16 comboReadPhysI16(u32 paddr)
+s16 IO_ReadPhysI16(u32 paddr)
 {
-    return (s16)comboReadPhysU16(paddr);
+    return (s16)IO_ReadPhysU16(paddr);
 }
 
-u32 comboReadPhysU32(u32 paddr)
+u32 IO_ReadPhysU32(u32 paddr)
 {
     u32 tmp;
 
@@ -45,7 +45,7 @@ u32 comboReadPhysU32(u32 paddr)
     return tmp;
 }
 
-s32 comboReadPhysI32(u32 paddr)
+s32 IO_ReadPhysI32(u32 paddr)
 {
-    return (s32)comboReadPhysU32(paddr);
+    return (s32)IO_ReadPhysU32(paddr);
 }

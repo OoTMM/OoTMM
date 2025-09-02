@@ -1,0 +1,16 @@
+"Forest Temple Boss":
+  boss: true
+  age_change: false
+  dungeon: Forest
+  events:
+    BOSS_PHANTOM_GANON: "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword"
+  exits:
+    "Forest Temple After Boss": "event(BOSS_PHANTOM_GANON)"
+
+"Forest Temple After Boss":
+  boss: true
+  age_change: false
+  dungeon: Forest
+  locations:
+    "Forest Temple Boss": "true"
+    "Forest Temple Boss Container": "true"

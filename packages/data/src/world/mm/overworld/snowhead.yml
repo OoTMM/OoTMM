@@ -1,0 +1,67 @@
+
+"Snowhead Entrance":
+  region: SNOWHEAD
+  exits:
+    "Path to Snowhead Back": "true"
+    "Snowhead": "(blizzard_stopped || (has_iron_boots && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
+    "Snowhead Near Fairy Fountain": "(blizzard_stopped || (has_iron_boots && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
+    "Owl Snowhead": "true"
+  events:
+    OPEN_SNOWHEAD_TEMPLE: "soul_biggoron && can_lullaby && has_mask_goron"
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    FAIRY: "true"
+
+"Snowhead":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "(can_lullaby && has_mask_goron) || blizzard_stopped || has_iron_boots"
+    "Snowhead Temple": "true"
+    "Snowhead Near Fairy Fountain": "blizzard_stopped || has_iron_boots"
+
+"Snowhead Near Fairy Fountain":
+  region: SNOWHEAD
+  events:
+    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_snowballs) || is_spring"
+    RUPEES: "blizzard_stopped && can_use_light_arrows && soul_wolfos"
+  exits:
+    "Snowhead Entrance": "blizzard_stopped || has_iron_boots"
+    "Snowhead": "blizzard_stopped || has_iron_boots"
+    "Snowhead Fairy Fountain": "true"
+  locations:
+    "Snowhead Big Snowball 1": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 2": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 3": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 4": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 5": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 6": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Small Snowball Spring 1": "is_spring"
+    "Snowhead Small Snowball Spring 2": "is_spring"
+    "Snowhead Small Snowball Spring 3": "is_spring"
+    "Snowhead Small Snowball Spring 4": "is_spring"
+    "Snowhead Small Snowball Spring 5": "is_spring"
+    # "Snowhead Small Snowball Spring Out of Bounds": "is_spring"
+
+"Snowhead Fairy Fountain":
+  region: ENTRANCE
+  exits:
+    "Snowhead Near Fairy Fountain": "true"
+  locations:
+    "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, var(STRAY_FAIRY_COUNT))"
+
+"Owl Snowhead":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    FAIRY: "true"
+  locations:
+    "Snowhead Owl Statue": "has_sticks || has_sword"
+    "Snowhead Small Snowball 1": "true"
+    "Snowhead Small Snowball 2": "true"
+    "Snowhead Small Snowball 3": "true"
+    "Snowhead Small Snowball 4": "true"

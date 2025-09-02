@@ -110,7 +110,7 @@
 #define IA_MM_NUT_UPGRADE       0x65
 #define IA_MM_STONE_AGONY       0x66
 #define IA_OOT_SPIN_UPGRADE     0x67
-#define IA_TRAP_ICE             0x68
+#define IA_TRAP                 0x68
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -218,7 +218,7 @@ int isItemLicensed(s16 gi);
 int isItemFastBuy(s16 gi);
 int isItemBuyable(s16 gi);
 
-int comboItemPrecondEx(const ComboItemQuery* q, s16 price);
+int comboItemPrecond(const ComboItemQuery* q, s16 price);
 s16 comboRenewable(s16 gi, s16 def);
 
 #define ITEM_QUERY_INIT { 0 }
@@ -235,7 +235,7 @@ void comboPlayItemFanfare(s16 gi, int isShort);
 
 s16 comboItemResolve(PlayState* play, s16 gi);
 
-s16 comboProgressive(s16 gi, int ovflags);
+s16 Item_Progressive(s16 gi, int ovflags);
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q);
 
@@ -251,5 +251,7 @@ extern u8 gMaxBombchuMm;
 #endif
 
 void Inventory_UpdateMaxBombchu(void);
+
+int Item_IsPlayerSelf(u8 playerId);
 
 #endif

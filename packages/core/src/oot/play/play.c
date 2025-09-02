@@ -488,6 +488,12 @@ static void Play_AfterInit(PlayState* play)
     /* Signs */
     ComboPlay_SpawnExtraSigns(play);
 
+    /* Adult kakariko gate */
+    if (Config_Flag(CFG_OOT_ADULT_KAKARIKO_GATE) && play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.age == AGE_ADULT)
+    {
+        Actor_Spawn(&play->actorCtx, play, ACTOR_BG_GATE_SHUTTER, 91, 400, -1350, 0, 0xf99a, 0, 0xffff);
+    }
+
     switch (play->sceneId)
     {
     case SCE_OOT_DEKU_TREE:
@@ -537,6 +543,8 @@ void hookPlay_Init(PlayState* play)
     /* Init */
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
+    g.bronzeScaleSolidGround = 0;
+    g.bronzeScaleTimer = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
     gMultiMarkCollectibles = 0;
@@ -581,7 +589,7 @@ void Play_MainWrapper(PlayState* play)
     if (play->pauseCtx.state == 0)
     {
         DrawGiSystem_Update(play);
-        Play_UpdateIceTrap(play);
+        Play_UpdateTraps(play);
     }
 
     Debug_Update();
@@ -878,3 +886,4 @@ void Play_FastInit(GameState* gs)
     /* Done */
     gComboCtx.valid = 0;
 }
+

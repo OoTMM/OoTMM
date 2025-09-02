@@ -4,6 +4,7 @@ import { Cosmetics, makeCosmetics } from './cosmetics';
 import { makeRandomSettings, OptionRandomSettings } from './settings/random';
 
 export type Options = {
+  mode: 'create' | 'random' | 'patch';
   seed: string;
   settings: Settings;
   cosmetics: Cosmetics;
@@ -13,7 +14,7 @@ export type Options = {
 
 export type OptionsInput =
   Partial<
-    Pick<Options, 'seed' | 'patch'>
+    Pick<Options, 'mode' | 'seed' | 'patch'>
     & { settings: Partial<Settings> }
     & { cosmetics: Partial<Cosmetics> }
     & { random: Partial<OptionRandomSettings> }
@@ -22,6 +23,7 @@ export type OptionsInput =
 export const options = (opts: OptionsInput): Options => {
   const newOpts: Partial<Options> = {};
 
+  newOpts.mode = opts.mode || 'create';
   newOpts.patch = opts.patch;
 
   if (opts.seed) {

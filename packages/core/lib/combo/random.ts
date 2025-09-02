@@ -52,6 +52,10 @@ export const randomInt = (random: Random, max: number) => {
   }
 };
 
+export function randomFloat(random: Random) {
+  return (random.next() >>> 8) / 0x01000000;
+}
+
 export const sample = <T>(random: Random, aList: Iterable<T>): T => {
   const arr = [...aList];
   if (arr.length === 0) {

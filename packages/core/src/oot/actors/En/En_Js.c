@@ -69,7 +69,7 @@ static void EnJs_HandleBuy(Actor* this, PlayState* play)
     int ret;
 
     EnJs_ItemQuery(&q);
-    ret = comboItemPrecondEx(&q, PRICE);
+    ret = comboItemPrecond(&q, PRICE);
 
     if (ret == SC_OK || ret == SC_OK_NOCUTSCENE)
     {

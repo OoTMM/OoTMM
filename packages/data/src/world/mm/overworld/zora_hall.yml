@@ -1,0 +1,53 @@
+"Zora Hall Entrance":
+  region: ZORA_HALL
+  exits:
+    "Zora Cape Near Hall": "underwater_walking || can_dive_small"
+    "Zora Hall": "true"
+
+"Zora Hall":
+  region: ZORA_HALL
+  exits:
+    "Zora Hall Entrance": "true"
+    "Zora Cape Peninsula": "true"
+    "Zora Shop": "true"
+    "Tijo's Room": "can_enter_zora_door"
+    "Japas' Room": "can_enter_zora_door"
+    "Evan's Room": "can_enter_zora_door"
+    "Lulu's Room": "can_enter_zora_door"
+  locations:
+    "Zora Hall Scene Lights": "soul_zora && (can_use_fire_arrows || (trick(MM_STAGE_LIGHTS_DIN) && has_arrows && can_use_din && can_hookshot))"
+
+"Zora Shop":
+  region: ENTRANCE
+  exits:
+    "Zora Hall": "true"
+  locations:
+    "Zora Shop Item 1": "soul_zora_shopkeeper && shop_price(0x13)"
+    "Zora Shop Item 2": "soul_zora_shopkeeper && shop_price(0x14)"
+    "Zora Shop Item 3": "soul_zora_shopkeeper && shop_price(0x15)"
+
+"Tijo's Room":
+  region: ENTRANCE
+  exits:
+    "Zora Hall": "true"
+
+"Japas' Room":
+  region: ENTRANCE
+  exits:
+    "Zora Hall": "true"
+
+"Evan's Room":
+  region: ENTRANCE
+  exits:
+    "Zora Hall": "true"
+  locations:
+    "Zora Hall Evan HP": "soul_npc(SOUL_NPC_ZORA_MUSICIANS) && can_play_evan && (is_ocean_cursed || (trick(MM_EVAN_FARORE) && can_use_farore))"
+
+"Lulu's Room":
+  region: ENTRANCE
+  exits:
+    "Zora Hall": "true"
+  locations:
+    "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has_mask_goron || is_tall)) || (has_mask_goron && has(MASK_DEKU) && has(DEED_MOUNTAIN)) || short_hook_anywhere"
+    "Zora Hall Scrub Shop": "soul_business_scrub && has_mask_zora && can_use_wallet(1)"
+    "Zora Hall Scrub Deed": "soul_business_scrub && has(DEED_MOUNTAIN) && has_mask_goron"

@@ -1,0 +1,221 @@
+
+"Mountain Village":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village Path Upper": "true"
+    "Twin Islands": "true"
+    "Mountain Village Cliff": "(is_winter && (can_use_lens_strict || trick(MM_DARMANI_WALL))) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || can_hookshot || short_hook_anywhere))"
+    "Path to Snowhead Front": "true"
+    "Blacksmith": "true"
+    "Near Village Grotto": "is_spring && (has_mask_goron || short_hook_anywhere)"
+    "Owl Mountain": "true"
+    "Mountain Village Elder": "true"
+    "Mountain Village Keaton": "true"
+    "Mountain Village Butterflies": "is_spring && has_sticks && is_day"
+  gossip:
+    "Mountain Village Gossip Outside": "is_spring"
+    "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
+  events:
+    CLEAR_STATE_SNOWHEAD: "wisp_enabled(BOSS_GOHT, REMAINS_GOHT) || event(WISP_CLEAR_STATE_SNOWHEAD)"
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "is_spring || (can_break_snowballs && (second_day || final_day)) || (can_break_snowballs && can_use_light_arrows && first_day && soul_tektite)"
+    FAIRY: "true"
+  locations:
+    "Mountain Village Waterfall Chest": "is_spring && can_use_lens"
+    "Mountain Village Don Gero Mask": "is_winter && soul_goron && event(GORON_FOOD)"
+    "Mountain Village Frog Choir HP": "is_spring && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
+    "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
+    "Mountain Village Grass 1": "is_spring"
+    "Mountain Village Grass 2": "is_spring"
+    "Mountain Village Grass 3": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 1": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 2": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 3": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 4": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 5": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 6": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 7": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 8": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 9": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 1": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 2": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 3": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 4": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 5": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 6": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 7": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 8": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 9": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 1": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 2": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 3": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 4": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 5": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 6": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 7": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 8": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 9": "is_spring"
+    "Mountain Village Keaton Grass Reward 1": "is_spring"
+    "Mountain Village Keaton Grass Reward 2": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 3": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 4": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 5": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 6": "is_spring && keaton_grass_hard"
+    "Mountain Village Keaton Grass Reward 7": "is_spring && keaton_grass_hard"
+    "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
+    "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
+    "Mountain Village Rupee": "is_spring && (has_mask_goron || can_hammer)"
+    "Mountain Village Hive": "is_spring && (break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU)))"
+    "Mountain Village Potted Plant 1 Pot": "is_day"
+    "Mountain Village Potted Plant 1 Grass": "is_day"
+    "Mountain Village Potted Plant 2 Pot": "is_day"
+    "Mountain Village Potted Plant 2 Grass": "is_day"
+    "Mountain Village Big Snowball 1": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 2": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 3": "(first_day || second_day) && is_winter && can_break_snowballs" # Goron Elder is in this snowball in Final day
+    "Mountain Village Big Snowball 4": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 5": "is_winter && can_break_snowballs"
+    "Mountain Village Small Snowball 1": "true"
+    "Mountain Village Small Snowball 2": "true"
+    "Mountain Village Small Snowball 3": "true"
+    "Mountain Village Small Snowball 4": "true"
+    "Mountain Village Small Snowball 5": "true"
+    "Mountain Village Small Snowball Winter 1": "is_winter"
+    "Mountain Village Small Snowball Winter 2": "is_winter"
+    "Mountain Village Small Snowball Winter 3": "is_winter"
+    "Mountain Village Small Snowball Winter 4": "is_winter"
+    "Mountain Village Spring Red Boulder 1": "is_spring && can_break_red_boulders"
+    "Mountain Village Spring Red Boulder 2": "is_spring && can_break_red_boulders"
+    "Mountain Village Spring Red Boulder 3": "is_spring && can_break_red_boulders"
+
+"Mountain Village Butterflies":
+  region: MOUNTAIN_VILLAGE
+  locations:
+    "Mountain Village Butterfly Pack 1 Butterfly 1": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 2": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 3": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 4": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 1": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 2": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 3": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 4": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 5": "true"
+
+"Mountain Village Elder":
+  region: NONE
+  exits:
+    "Mountain Village": "true"
+  locations:
+    "Goron Elder": "soul_npc(SOUL_NPC_GORON_ELDER) && is_winter && final_day && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
+
+"Mountain Village Keaton":
+  region: NONE
+  exits:
+    "Mountain Village": "true"
+  locations:
+    "Clock Town Keaton HP": "is_spring && soul_npc(SOUL_NPC_KEATON) && has_mask_keaton"
+
+"Near Village Grotto":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village Grotto": "is_spring"
+    "Mountain Village": "true"
+    "Mountain Village Cliff": "is_spring && (has_mask_goron || short_hook_anywhere)"
+
+"Mountain Village Grotto":
+  region: ENTRANCE
+  exits:
+    "Near Village Grotto": "true"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "true"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    BUGS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
+  locations:
+    "Mountain Village Tunnel Grotto": "true"
+    "Mountain Village Tunnel Grotto Grass 01": "true"
+    "Mountain Village Tunnel Grotto Grass 02": "true"
+    "Mountain Village Tunnel Grotto Grass 03": "true"
+    "Mountain Village Tunnel Grotto Grass 04": "true"
+    "Mountain Village Tunnel Grotto Grass 05": "true"
+    "Mountain Village Tunnel Grotto Grass 06": "true"
+    "Mountain Village Tunnel Grotto Grass 07": "true"
+    "Mountain Village Tunnel Grotto Grass 08": "true"
+    "Mountain Village Tunnel Grotto Grass 09": "true"
+    "Mountain Village Tunnel Grotto Grass 10": "true"
+    "Mountain Village Tunnel Grotto Grass 11": "true"
+    "Mountain Village Tunnel Grotto Grass 12": "true"
+    "Mountain Village Tunnel Grotto Grass 13": "true"
+    "Mountain Village Tunnel Grotto Grass 14": "true"
+
+"Blacksmith":
+  region: ENTRANCE
+  exits:
+    "Mountain Village": "true"
+  events:
+    BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
+    GOLD_DUST_USED: "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
+  locations:
+    "Blacksmith Razor Blade": "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
+    "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
+    "Blacksmith Potted Plant 1 Pot": "is_night"
+    "Blacksmith Potted Plant 1 Grass": "is_night"
+    "Blacksmith Potted Plant 2 Pot": "is_night"
+    "Blacksmith Potted Plant 2 Grass": "is_night"
+
+"Mountain Village Cliff":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village": "true"
+    "Goron Graveyard": "true"
+    "Near Village Grotto": "is_spring"
+  events:
+    MAGIC: "true"
+    ARROWS: "is_spring"
+  locations:
+    "Mountain Village Small Snowball Cliff 1": "is_winter"
+    "Mountain Village Small Snowball Cliff 2": "is_winter"
+
+"Near Goron Graveyard":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village Cliff": "true"
+  events:
+    MAGIC: "true"
+    GORON_GRAVE_FARORE: "can_use_farore"
+
+"Goron Graveyard":
+  region: ENTRANCE
+  exits:
+    "Near Goron Graveyard": "true"
+    "Goron Graveyard Water": "has_mask_goron || can_lift_gold"
+  locations:
+    "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
+
+"Goron Graveyard Water":
+  region: ENTRANCE
+  exits:
+    "Goron Graveyard": "true"
+  events:
+    WATER: "true"
+    HOT_WATER_NORTH_WINTER: "is_winter"
+    HOT_WATER_NORTH_SPRING: "is_spring"
+
+"Owl Mountain":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    FAIRY: "true"
+  locations:
+    "Mountain Village Owl Statue": "has_sticks || has_sword"

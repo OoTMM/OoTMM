@@ -95,7 +95,7 @@ static void applyStartingItems(void)
                 return;
             for (u16 j = 0; j < count; ++j)
             {
-                gi = comboProgressive(gi, 0);
+                gi = Item_Progressive(gi, 0);
                 comboAddItemRaw(NULL, gi);
             }
         }
@@ -276,6 +276,13 @@ void comboCreateSave(void* unk, void* buffer)
     /* Apply deku shield flag */
     if (Config_Flag(CFG_MM_DEKU_SHIELD))
         gSharedCustomSave.mmShieldIsDeku = 1;
+
+    /* Apply bronze scale flag */
+    if (!Config_Flag(CFG_BRONZE_SCALE))
+    {
+        gSharedCustomSave.bronzeScaleOot = 1;
+        gSharedCustomSave.bronzeScaleMm = 1;
+    }
 
     /* Apply ocarina buttons */
     if (!Config_Flag(CFG_OOT_OCARINA_BUTTONS))

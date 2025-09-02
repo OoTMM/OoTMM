@@ -208,13 +208,12 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SWORD_GORON: "OOT_SWORD_KNIFE",
   OOT_OCARINA: "OOT_OCARINA_FAIRY",
   OOT_STRENGTH: "OOT_GORON_BRACELET",
-  OOT_SCALE: "OOT_SCALE_SILVER",
+  OOT_SCALE: "OOT_SCALE_BRONZE",
   OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
-  //OOT_TRAP_ICE: "OOT_RUPEE_BLUE",
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_DEKU",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
-  MM_SCALE: "MM_SCALE_SILVER",
+  MM_SCALE: "MM_SCALE_BRONZE",
   MM_STRENGTH: "MM_GORON_BRACELET",
   MM_CLOCK: "MM_CLOCK1",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
@@ -427,6 +426,7 @@ function checkKey(check: WorldCheck): number {
   case 'butterfly':
   case 'redboulder':
   case 'icicle':
+  case 'redice':
     /* xflag */
     typeId = 0x10 + ((id >> 16) & 0xf);
     break;
@@ -452,6 +452,7 @@ function checkKey(check: WorldCheck): number {
   case 'butterfly':
   case 'redboulder':
   case 'icicle':
+  case 'redice':
     sceneId = (SCENES as any)[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
@@ -470,9 +471,9 @@ function checkKey(check: WorldCheck): number {
   return key;
 }
 
-function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): number {
+async function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): Promise<number> {
   const random = new Random();
-  random.seed(key.toString(16) + '\x00' + seed);
+  await random.seed(key.toString(16) + '\x00' + seed);
 
   for (;;) {
     const locs = [...logic.items.keys()];
@@ -481,13 +482,19 @@ function makeCloakGi(key: number, seed: string, settings: Settings, logic: Logic
 
     if (!ItemHelpers.isItemMajor(item.item) && !ItemHelpers.isSilverRupee(item.item) && !ItemHelpers.isKey(item.item) && !ItemHelpers.isBossKey(item.item)) continue;
     if (ItemGroups.JUNK.has(item.item)) continue;
-    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, loc, { songs: true, noPlando: true })) continue;
+    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, logic.plandoLocations, loc, { songs: true, noPlando: true })) continue;
 
     return gi(settings, 'oot', item.item, false);
   }
 }
 
-const gameChecks = (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Uint8Array => {
+function playerId(player: number | 'all'): number {
+  if (player === 'all')
+    return 0xff;
+  return player + 1;
+}
+
+const gameChecks = async (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Promise<Uint8Array> => {
   const buffers: Uint8Array[] = [];
   const world = logic.worlds[worldId];
   for (const locId in world.checks) {
@@ -507,11 +514,11 @@ const gameChecks = (worldId: number, opts: Options, settings: Settings, game: Ga
     const itemGi = gi(settings, game, item.item, true);
     const b = new Uint8Array(16);
     bufWriteU32BE(b, 0, key);
-    bufWriteU16BE(b, 4, item.player + 1);
+    bufWriteU16BE(b, 4, playerId(item.player));
     bufWriteU16BE(b, 6, itemGi);
     let cloakGi = 0;
-    if (item.item === Items.OOT_TRAP_ICE && settings.cloakIceTraps) {
-      cloakGi = makeCloakGi(key, opts.seed, settings, logic);
+    if (settings.cloakTraps && ItemGroups.TRAPS_CLOAKED.has(item.item)) {
+      cloakGi = await makeCloakGi(key, opts.seed, settings, logic);
     }
     bufWriteU16BE(b, 8, cloakGi);
     buffers.push(b);
@@ -633,16 +640,16 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       bufWriteU8(data, HINT_OFFSETS.REGION, check);
       bufWriteU8(data, HINT_OFFSETS.WORLD, hint.world + 1);
       bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemsGI[0]);
-      bufWriteU8(data, HINT_OFFSETS.PLAYER, items[0].player + 1);
+      bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(items[0].player));
       bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importances[0]);
       if (items.length > 1) {
         bufWriteU16BE(data, HINT_OFFSETS.ITEM2, itemsGI[1]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER2, items[1].player + 1);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER2, playerId(items[1].player));
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE2, hint.importances[1]);
       }
       if (items.length > 2) {
         bufWriteU16BE(data, HINT_OFFSETS.ITEM3, itemsGI[2]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER3, items[2].player + 1);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER3, playerId(items[2].player));
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE3, hint.importances[2]);
       }
     }
@@ -661,7 +668,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         bufWriteU8(data, HINT_OFFSETS.REGION, region);
         bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
         bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemGI);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER, item.player + 1);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(item.player));
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importance);
       }
       break;
@@ -887,6 +894,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_HOOKSHOT_SHORT: settings.shortHookshotMm,
     MM_SONG_SUN: settings.sunSongMm,
     OOT_SKIP_ZELDA: settings.skipZelda,
+    OOT_ADULT_KAKARIKO_GATE: settings.kakarikoGate === 'closed',
     OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
     OOT_LACS_CUSTOM: settings.lacs === 'custom',
     OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',
@@ -902,6 +910,9 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_ADULT_WELL: world.resolvedFlags.openDungeonsOot.has('wellAdult'),
     COLOSSAL_WALLET: settings.colossalWallets,
     BOTTOMLESS_WALLET: settings.bottomlessWallets,
+    OOT_AGELESS_STICKS: settings.agelessSticks,
+    OOT_AGELESS_BOW: settings.agelessBow,
+    OOT_AGELESS_SLINGSHOT: settings.agelessSlingshot,
     OOT_AGELESS_BOOTS: settings.agelessBoots,
     OOT_AGELESS_STRENGTH: settings.agelessStrength,
     OOT_AGELESS_SWORDS: settings.agelessSwords,
@@ -1009,6 +1020,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_TIME_TRAVEL_REQUIRES_MS: settings.timeTravelSword,
     OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
     MM_DEKU_SHIELD: settings.dekuShieldMm,
+    BRONZE_SCALE: settings.bronzeScale,
     ONLY_OOT: settings.games === 'oot',
     ONLY_MM: settings.games === 'mm',
     OOT_PLANTED_BEANS: settings.ootPreplantedBeans,
@@ -1042,6 +1054,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     REGION_STATE_DUNGEONS: settings.regionState === 'dungeonBeaten',
     REGION_STATE_REWARDS: settings.regionState === 'reward',
     REGION_STATE_FREE: settings.regionState === 'free',
+    MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
   };
 
   for (const v in exprs) {
@@ -1202,11 +1215,11 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
   return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
-export function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
+export async function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
   patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(worldId, logic), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(worldId, logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0400000, data: gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0500000, data: gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0500000, data: await gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
   patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(settings, 'oot', logic.hints[worldId]), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(settings, 'mm', logic.hints[worldId]), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(worldId, 'oot', logic), compressed: true });

@@ -46,6 +46,11 @@ GameOverContext;
 
 ASSERT_SIZE(GameOverContext, 0x4);
 
+typedef struct SceneSequences {
+    /* 0x00 */ u8 seqId;
+    /* 0x01 */ u8 natureAmbienceId;
+} SceneSequences; // size = 0x2
+
 typedef struct PlayState
 {
     GameState              state;
@@ -58,7 +63,7 @@ typedef struct PlayState
     Camera*                cameraPtrs[4];
     s16                    activeCamId;
     s16                    nextCamId;
-    char                   unk_007a4[4];
+    SceneSequences         sceneSequences;
     LightContext           lightCtx;
     char                   unk_007b8[0x08];
     CollisionContext       colCtx;

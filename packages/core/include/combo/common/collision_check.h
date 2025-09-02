@@ -111,6 +111,22 @@ typedef enum ElementMaterial {
     /* 7 */ ELEM_MATERIAL_UNK7
 } ElementMaterial;
 
+typedef enum HitSpecialEffect {
+    HIT_SPECIAL_EFFECT_NONE,
+    HIT_SPECIAL_EFFECT_FIRE,
+    HIT_SPECIAL_EFFECT_ICE,
+    HIT_SPECIAL_EFFECT_ELECTRIC,
+    HIT_SPECIAL_EFFECT_KNOCKBACK,
+    HIT_SPECIAL_EFFECT_7 = 7, // Same effect as `HIT_SPECIAL_EFFECT_NONE`
+    HIT_SPECIAL_EFFECT_8, // Same effect as `HIT_SPECIAL_EFFECT_NONE`
+    HIT_SPECIAL_EFFECT_9 // Same effect as `HIT_SPECIAL_EFFECT_NONE`
+} HitSpecialEffect;
+
+typedef enum HitBacklash {
+    HIT_BACKLASH_NONE,
+    HIT_BACKLASH_ELECTRIC
+} HitBacklash;
+
 typedef struct Collider {
     /* 0x00 */ struct Actor* actor; // Attached actor
     /* 0x04 */ struct Actor* at; // Actor attached to what it collided with as an AT collider.

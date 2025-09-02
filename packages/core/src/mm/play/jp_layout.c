@@ -2,21 +2,15 @@
 
 static void ComboPlay_SpawnLayoutDependantRupee(PlayState* play, float x, float y, float z, s16 params, u8 actorIndex)
 {
-    Actor_EnItem00* item;
-    Xflag xflag;
-
-    item = (Actor_EnItem00*)Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ITEM00, x, y, z, 0, 0, 0, params);
-    if (item)
-    {
-        memset(&xflag, 0, sizeof(xflag));
-        xflag.sceneId = play->sceneId;
-        xflag.roomId = 0x02;
-        xflag.sliceId = 0;
-        xflag.setupId = 0;
-        xflag.id = actorIndex;
-
-        EnItem00_XflagInit(item, &xflag);
-    }
+    Xflag_Clear(&g.xflag);
+    g.xflag.sceneId = play->sceneId;
+    g.xflag.roomId = 0x02;
+    g.xflag.sliceId = 0;
+    g.xflag.setupId = 0;
+    g.xflag.id = actorIndex;
+    g.xflagOverride = TRUE;
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ITEM00, x, y, z, 0, 0, 0, params);
+    g.xflagOverride = FALSE;
 }
 
 static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float y, float z)
@@ -30,7 +24,7 @@ static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float 
     Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_SYOKUDAI, x, y, z, 0, 0, 0, params);
 }
 
-void ComboPlay_JpLayout(PlayState* play)
+static void ComboPlay_JpLayoutDekuPalace(PlayState* play)
 {
     if (!Config_Flag(CFG_MM_JP_LAYOUT_DEKU_PALACE) || play->sceneId != SCE_MM_DEKU_PALACE)
         return;
@@ -52,6 +46,17 @@ void ComboPlay_JpLayout(PlayState* play)
     case 0x02:
         ComboPlay_SpawnLayoutDependantTorch(play, -1040, 0, 656);
         ComboPlay_SpawnLayoutDependantTorch(play, -420, 0, 1295);
+        break;
+    }
+}
+
+void ComboPlay_JpLayout(PlayState* play)
+{
+    switch (play->sceneId)
+    {
+    case SCE_MM_DEKU_PALACE:
+        if (Config_Flag(CFG_MM_JP_LAYOUT_DEKU_PALACE))
+            ComboPlay_JpLayoutDekuPalace(play);
         break;
     }
 }

@@ -1,0 +1,266 @@
+
+"Market Entryway":
+  region: MARKET
+  age_change: false
+  exits:
+    "Hyrule Field": "is_day || is_adult"
+    "Market": "true"
+    "Market Pot House": "true"
+
+"Market Mask Shop":
+  region: ENTRANCE
+  exits:
+    "Market": "true"
+
+"Market":
+  region: MARKET
+  age_change: false
+  exits:
+    "Market Entryway": "true"
+    "Market Grass": "is_child && can_cut_grass_no_c_button"
+    "Back Alley": "is_child"
+    "Market Castle Entry": "true"
+    "Temple of Time Entryway": "true"
+    "Bombchu Bowling": "is_child"
+    "Treasure Chest Game": "is_night && is_child"
+    "Shooting Gallery Child": "is_day && is_child"
+    "Market Bazaar": "is_day && is_child"
+    "Market Potion Shop": "is_day && is_child"
+    "Market Mask Shop": "is_child && (is_day || setting(openMaskShop))"
+  events:
+    RICHARD: "is_night && is_child"
+    RUPEES: "is_child"
+  locations:
+    "Market Wonder Item Day 1": "is_child && is_day"
+    "Market Wonder Item Day 2": "is_child && is_day"
+    "Market Wonder Item Day 3": "is_child && is_day"
+    "Market Wonder Item Day 4": "is_child && is_day"
+    "Market Wonder Item Day 5": "is_child && is_day"
+    "Market Wonder Item Night 1": "is_child && is_night"
+    "Market Wonder Item Night 2": "is_child && is_night"
+    "Market Crate 1": "is_child"
+    "Market Crate 2": "is_child"
+    "Market Crate 3": "is_child"
+    "Market Crate 4": "is_child"
+
+"Market Grass":
+  region: MARKET
+  age_change: false
+  locations:
+    "Market Grass 1": "true"
+    "Market Grass 2": "true"
+    "Market Grass 3": "true"
+    "Market Grass 4": "true"
+    "Market Grass 5": "true"
+    "Market Grass 6": "true"
+    "Market Grass 7": "true"
+    "Market Grass 8": "true"
+
+"Market Castle Entry":
+  region: NONE
+  age_change: false
+  exits:
+    "Market": "true"
+    "Hyrule Castle": "is_child"
+    "Ganon Castle Exterior": "is_adult"
+
+"Market Bazaar":
+  region: ENTRANCE
+  exits:
+    "Market": "true"
+    "Market Bazaar Items": "soul_bazaar_shopkeeper"
+
+"Market Bazaar Items":
+  region: ENTRANCE
+  age_change: false
+  locations:
+    "Market Bazaar Item 1": "shop_price(0x20)"
+    "Market Bazaar Item 2": "shop_price(0x21)"
+    "Market Bazaar Item 3": "shop_price(0x22)"
+    "Market Bazaar Item 4": "shop_price(0x23)"
+    "Market Bazaar Item 5": "shop_price(0x24)"
+    "Market Bazaar Item 6": "shop_price(0x25)"
+    "Market Bazaar Item 7": "shop_price(0x26)"
+    "Market Bazaar Item 8": "shop_price(0x27)"
+
+"Market Potion Shop":
+  region: ENTRANCE
+  exits:
+    "Market": "true"
+    "Market Potion Shop Items": "soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+
+"Market Potion Shop Items":
+  region: ENTRANCE
+  age_change: false
+  locations:
+    "Market Potion Shop Item 1": "shop_price(0x28)"
+    "Market Potion Shop Item 2": "shop_price(0x29)"
+    "Market Potion Shop Item 3": "shop_price(0x2a)"
+    "Market Potion Shop Item 4": "shop_price(0x2b)"
+    "Market Potion Shop Item 5": "shop_price(0x2c)"
+    "Market Potion Shop Item 6": "shop_price(0x2d)"
+    "Market Potion Shop Item 7": "shop_price(0x2e)"
+    "Market Potion Shop Item 8": "shop_price(0x2f)"
+
+"Market Bombchu Shop":
+  region: ENTRANCE
+  exits:
+    "Back Alley": "true"
+    "Market Bombchu Shop Items": "soul_bombchu_shopkeeper"
+
+"Market Bombchu Shop Items":
+  region: ENTRANCE
+  age_change: false
+  locations:
+    "Market Bombchu Shop Item 1": "shop_price(0x08)"
+    "Market Bombchu Shop Item 2": "shop_price(0x09)"
+    "Market Bombchu Shop Item 3": "shop_price(0x0a)"
+    "Market Bombchu Shop Item 4": "shop_price(0x0b)"
+    "Market Bombchu Shop Item 5": "shop_price(0x0c)"
+    "Market Bombchu Shop Item 6": "shop_price(0x0d)"
+    "Market Bombchu Shop Item 7": "shop_price(0x0e)"
+    "Market Bombchu Shop Item 8": "shop_price(0x0f)"
+
+"Market Pot House":
+  region: ENTRANCE
+  exits:
+    "Market Entryway": "true"
+    "Market Pot House Child": "is_child"
+    "Market Pot House Adult": "is_adult"
+  events:
+    RUPEES: "true"
+
+"Market Pot House Child":
+  region: ENTRANCE
+  exits:
+    "Market Pot House": "true"
+  locations:
+    "Market Pot House GS": "gs"
+    "Market Pot House Child Pot Ground 1": "true"
+    "Market Pot House Child Pot Ground 2": "true"
+    "Market Pot House Child Pot Ground 3": "true"
+    "Market Pot House Child Pot Ground 4": "true"
+    "Market Pot House Child Pot Ground 5": "true"
+    "Market Pot House Child Pot Ground 6": "true"
+    "Market Pot House Child Pot Ground 7": "true"
+    "Market Pot House Child Pot Ground 8": "true"
+    "Market Pot House Child Pot Ground 9": "true"
+    "Market Pot House Child Pot Ground 10": "true"
+    "Market Pot House Child Pot Ground 11": "true"
+    "Market Pot House Child Pot Ground 12": "true"
+    "Market Pot House Child Pot Ground 13": "true"
+    "Market Pot House Child Pot Ground 14": "true"
+    "Market Pot House Child Pot Ground 15": "true"
+    "Market Pot House Child Pot Ground 16": "true"
+    "Market Pot House Child Pot Ground 17": "true"
+    "Market Pot House Child Pot Ground 18": "true"
+    "Market Pot House Child Pot Ground 19": "true"
+    "Market Pot House Child Pot Ground 20": "true"
+    "Market Pot House Child Pot Ground 21": "true"
+    "Market Pot House Child Pot Ground 22": "true"
+    "Market Pot House Child Pot Ground 23": "true"
+    "Market Pot House Child Pot Ground 24": "true"
+    "Market Pot House Child Pot Ground 25": "true"
+    "Market Pot House Child Pot Ground 26": "true"
+    "Market Pot House Child Pot Ground 27": "true"
+    "Market Pot House Child Pot Ground 28": "true"
+    "Market Pot House Child Pot Ground 29": "true"
+    "Market Pot House Child Pot Ground 30": "true"
+    "Market Pot House Child Pot Ground 31": "true"
+    "Market Pot House Child Pot Ground 32": "true"
+    "Market Pot House Child Pot Ground 33": "true"
+    "Market Pot House Child Pot Ground 34": "true"
+    "Market Pot House Child Pot Ground 35": "true"
+    "Market Pot House Child Pot Ground 36": "true"
+    "Market Pot House Child Pot Ground 37": "true"
+    "Market Pot House Child Pot Ground 38": "true"
+    "Market Pot House Child Pot Ground 39": "true"
+    "Market Pot House Child Pot Ground 40": "true"
+    "Market Pot House Child Pot Ground 41": "true"
+    "Market Pot House Child Pot Ground 42": "true"
+    "Market Pot House Child Pot Above 1": "true"
+    "Market Pot House Child Pot Above 2": "true"
+    "Market Pot House Crate 1": "true"
+    "Market Pot House Crate 2": "true"
+    "Market Pot House Crate 3": "true"
+    "Market Pot House Crate 4": "true"
+
+"Market Pot House Adult":
+  region: ENTRANCE
+  exits:
+    "Market Pot House": "true"
+  locations:
+    "Market Pot House Big Poes": "has_big_poe && soul_poe_collector"
+    "Market Pot House Adult Pot 1": "true"
+    "Market Pot House Adult Pot 2": "true"
+    "Market Pot House Adult Pot 3": "true"
+    "Market Pot House Adult Pot 4": "true"
+    "Market Pot House Adult Pot 5": "true"
+    "Market Pot House Adult Pot 6": "true"
+    "Market Pot House Adult Pot 7": "true"
+    "Market Pot House Adult Pot 8": "true"
+    "Market Pot House Adult Pot 9": "true"
+    "Market Pot House Adult Pot 10": "true"
+    "Market Pot House Adult Pot 11": "true"
+
+"Back Alley":
+  region: MARKET
+  age_change: false
+  exits:
+    "Market": "true"
+    "Dog Lady House": "true"
+    "Market Bombchu Shop": "is_night"
+    "Market Back Alley East Home": "is_night"
+
+"Dog Lady House":
+  region: ENTRANCE
+  exits:
+    "Back Alley": "true"
+  locations:
+    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
+    "Market Dog Lady Crate": "true"
+
+"Market Back Alley East Home":
+  region: ENTRANCE
+  exits:
+    "Back Alley": "true"
+  locations:
+    "Market Back Alley East House Pot 1": "true"
+    "Market Back Alley East House Pot 2": "true"
+    "Market Back Alley East House Pot 3": "true"
+
+"Bombchu Bowling":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Market": "true"
+    "Bombchu Bowling Rewards": "(has_bomb_bag || bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
+
+"Bombchu Bowling Rewards":
+  region: ENTRANCE
+  age_change: false
+  events:
+    BOMBCHU: "true"
+    BOMBS: "can_use_wallet(2)"
+  locations:
+    "Bombchu Bowling Reward 1": "true"
+    "Bombchu Bowling Reward 2": "true"
+
+"Shooting Gallery Child":
+  region: ENTRANCE
+  exits:
+    "Market": "true"
+  locations:
+    "Shooting Gallery Child": "is_child && can_use_wallet(1) && soul_shooting_gallery_owner"
+
+"Temple of Time Entryway":
+  region: MARKET
+  age_change: false
+  exits:
+    "Market": "true"
+    "Temple of Time": "true"
+  gossip:
+    "Market Gossip Outside Temple Leftmost": "true"
+    "Market Gossip Outside Temple Left-Center": "true"
+    "Market Gossip Outside Temple Right-Center": "true"
+    "Market Gossip Outside Temple Rightmost": "true"

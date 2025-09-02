@@ -114,6 +114,7 @@
 #define EV_MM_WEEK_TOWN_GUARDS                              MM_EV(12, 5)
 #define EV_MM_WEEK_DRANK_CHATEAU_ROMANI                     MM_EV(14, 3)
 #define EV_MM_WEEK_FOREST_WITCH                             MM_EV(16, 4)
+#define EV_MM_WEEK_TWIN_ISLANDS_KEG_BOULDER_DESTROYED       MM_EV(19, 1)
 #define EV_MM_WEEK_WOODFALL_TEMPLE_RISE                     MM_EV(20, 0)
 #define EV_MM_WEEK_DUNGEON_WF                               MM_EV(20, 1)
 #define EV_MM_WEEK_SPIN_UPGRADE                             MM_EV(23, 1)

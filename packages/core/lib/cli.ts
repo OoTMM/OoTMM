@@ -49,22 +49,31 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       opts.seed = args[++i];
       break;
     case '--random':
-      opts.random = { enabled: true };
+      opts.mode = 'random';
       break;
     case '--config': {
       const configFile = await fs.readFile(args[++i]);
       const config = YAML.parse(configFile.toString());
-      if (config.settings) {
-        opts.settings = parseSettings(config.settings);
+      const settingsVal = config.settings;
+      if (settingsVal) {
+        if (typeof settingsVal === 'string') {
+          opts.settings = importSettings(settingsVal);
+        } else {
+          opts.settings = parseSettings(config.settings);
+        }
       }
       if (config.cosmetics) {
         opts.cosmetics = config.cosmetics;
+      }
+      if (config.seed) {
+        opts.seed = config.seed.toString().trim();
       }
       break;
     }
     case '--patch': {
       const patch = await readFileUint8(args[++i]);
       opts.patch = patch;
+      opts.mode = 'patch';
       break;
     }
     case '--settings': {

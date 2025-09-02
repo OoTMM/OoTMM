@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Helvetica', 'Arial', sans-serif;
+}
+
+:root {
+  @apply min-h-screen;
+}
+
+.nav-link {
+  @apply  hover:text-gray-300 hover:underline;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.link {
+  @apply text-blue-500 hover:text-blue-700;
+}

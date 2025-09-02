@@ -14,20 +14,6 @@
 void EnItem00_AliasFreestandingRupee(Xflag* xflag);
 void EnItem00_AliasFreestandingHeart(Xflag* xflag);
 
-
-void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
-{
-    /* Forward */
-    EnItem00_Init(this, play);
-
-    /* Set extended fields */
-    bzero(&this->xflag, sizeof(this->xflag));
-    this->xflagGi = 0;
-    this->isExtended = 0;
-    this->isExtendedCollected = 0;
-    this->isExtendedMajor = 0;
-}
-
 static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
     ComboItemOverride o;
@@ -47,10 +33,50 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
         this->xflagGi = gi;
     }
 
-    Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MTXMODE_NEW);
+    Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + 20.f, this->actor.world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
-    Matrix_RotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->base, gi, cloakGi, 0);
+    Matrix_RotateY(this->actor.shape.rot.y * ((M_PI * 2.f) / 32767.f), MTXMODE_APPLY);
+    Draw_GiCloaked(play, &this->actor, gi, cloakGi, 0);
+}
+
+void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    /* Forward */
+    EnItem00_Init(this, play);
+
+    /* Zero the extended flags */
+    this->xflagGi = 0;
+    this->isExtended = 0;
+    this->isExtendedCollected = 0;
+    this->isExtendedMajor = 0;
+
+    /* Init the xflag */
+    if (comboXflagInit(&this->xflag, &this->actor, play))
+    {
+        switch (this->actor.params & 0xff)
+        {
+        case ITEM00_RUPEE_GREEN:
+        case ITEM00_RUPEE_BLUE:
+        case ITEM00_RUPEE_RED:
+            EnItem00_AliasFreestandingRupee(&this->xflag);
+            break;
+        case ITEM00_RECOVERY_HEART:
+            EnItem00_AliasFreestandingHeart(&this->xflag);
+            break;
+        }
+    }
+
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        comboXflagItemOverride(&o, &this->xflag, 0);
+        this->isExtended = 1;
+        this->xflagGi = o.gi;
+
+        this->actor.params = 0;
+        this->actor.draw = EnItem00_DrawXflag;
+    }
 }
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, PlayState* play)
@@ -72,7 +98,7 @@ static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, PlayState* play)
 {
     /* Artifically disable collisions if the items shouldn't be collected */
     if (!EnItem00_XflagCanCollect(this, play))
-        this->base.xzDistToPlayer = 100.f;
+        this->actor.xzDistToPlayer = 100.f;
 
     /* Item permanence */
     if (!this->isExtendedCollected)
@@ -115,63 +141,11 @@ void EnItem00_PlaySoundXflag(Actor_EnItem00* this)
     PlaySound(0x4803);
 }
 
-void EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag)
-{
-    ComboItemOverride o;
-
-    /* Query */
-    comboXflagItemOverride(&o, xflag, 0);
-
-    /* Check if there is an override */
-    if (o.gi == 0)
-        return;
-    if (comboXflagsGet(xflag))
-        return;
-
-    /* It's an actual item - mark it as such */
-    memcpy(&this->xflag, xflag, sizeof(*xflag));
-    this->xflagGi = o.gi;
-    this->isExtended = 1;
-
-    /* Use our draw func */
-    this->base.draw = EnItem00_DrawXflag;
-    this->base.params = 0;
-}
-
-void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, PlayState* play, u8 actorIndex, u8 slice)
-{
-    Xflag xflag;
-
-    /* Setup the xflag */
-    bzero(&xflag, sizeof(xflag));
-    xflag.sceneId = play->sceneId;
-    xflag.setupId = g.sceneSetupId;
-    xflag.roomId = this->base.room;
-    xflag.sliceId = slice;
-    xflag.id = actorIndex;
-
-    /* Alias as required */
-    switch (this->base.params & 0xff)
-    {
-    case ITEM00_RUPEE_GREEN:
-    case ITEM00_RUPEE_BLUE:
-    case ITEM00_RUPEE_RED:
-        EnItem00_AliasFreestandingRupee(&xflag);
-        break;
-    case ITEM00_RECOVERY_HEART:
-        EnItem00_AliasFreestandingHeart(&xflag);
-        break;
-    }
-
-    /* Init */
-    EnItem00_XflagInit(this, &xflag);
-}
-
 static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, PlayState* play)
 {
     this->timer = 1;
     EnItem00_CollectedHandler(this, play);
-    if (Message_IsClosed(&this->base, play))
+    if (Message_IsClosed(&this->actor, play))
     {
         Player_Unfreeze(play);
         this->handler = EnItem00_CollectedHandler;
@@ -189,7 +163,7 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
     }
 
 #if defined(GAME_MM)
-    this->base.flags |= 0x100000;
+    this->actor.flags |= 0x100000;
 #endif
 
     this->handler = EnItem00_XflagCollectedHandler;
@@ -220,14 +194,15 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
     }
 
     /* Spawn the item */
-    item = Item_DropCollectible(play, pos, 0x0000);
-
+    memcpy(&g.xflag, xflag, sizeof(Xflag));
+    g.xflagOverride = TRUE;
+    item = (Actor_EnItem00*)Item_DropCollectible(play, pos, 0x0000);
+    g.xflagOverride = FALSE;
     if (!item)
         return NULL;
 
-    /* Init the custom fields */
-    EnItem00_XflagInit(item, xflag);
-    item->base.update = EnItem00_UpdateXflagDrop;
+    /* Persist the drop */
+    item->actor.update = EnItem00_UpdateXflagDrop;
 
     return item;
 }
@@ -239,9 +214,9 @@ Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, 
     item = EnItem00_DropCustom(play, pos, xflag);
     if (!item)
         return NULL;
-    item->base.speed = 0.f;
-    item->base.velocity.x = 0.f;
-    item->base.velocity.y = 0.f;
-    item->base.velocity.z = 0.f;
+    item->actor.speed = 0.f;
+    item->actor.velocity.x = 0.f;
+    item->actor.velocity.y = 0.f;
+    item->actor.velocity.z = 0.f;
     return item;
 }

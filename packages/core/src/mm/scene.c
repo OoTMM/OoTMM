@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/common/scene.h>
+#include <combo/common/cosmetics.h>
 
 static EntranceTableEntry defaultEntrance = {
     0, /* Southern Swamp (Clear) */
@@ -85,7 +87,6 @@ void Object_LoadAllCustom(ObjectContext* objectCtx)
     for (i = 0; i < objectCtx->num; i++)
     {
         id = objectCtx->slots[i].id;
-
         comboLoadObject(objectCtx->slots[i].segment, id);
     }
 
@@ -99,6 +100,10 @@ void* Object_AllocateSlotCustom(ObjectContext* objectCtx, s32 slot, s16 id)
     u32 addr;
     u32 vromSize;
     const ObjectData* fileTableEntry;
+
+    /* Patch for adult link */
+    if (comboIsLinkAdult() && id == OBJECT_LINK_CHILD)
+        id = CUSTOM_OBJECT_ID_MM_ADULT_LINK;
 
     objectCtx->slots[slot].id = -id;
     objectCtx->slots[slot].dmaRequest.vromAddr = 0;
@@ -162,3 +167,25 @@ void Object_AfterInitContext(void)
 {
     UpdateGameplayKeepForAdult(&gPlay->objectCtx);
 }
+
+u8 gNightBgm;
+EXPORT_SYMBOL(NIGHT_BGM, gNightBgm);
+
+void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd) {
+    u8 ambienceId;
+
+    ambienceId = cmd->soundSettings.ambienceId;
+    if(gNightBgm)
+        ambienceId = 0x13;
+
+    play->sceneSequences.seqId = cmd->soundSettings.seqId;
+    play->sceneSequences.ambienceId = ambienceId;
+
+    if (gSaveContext.seqId == (u8)NA_BGM_DISABLED ||
+        // Should be AudioSeq_GetActiveSeqId(u8), but apparently we've defined it as Audio_GetActiveSeqId
+        Audio_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN) == NA_BGM_FINAL_HOURS) {
+        Audio_SetSpec(cmd->soundSettings.specId);
+    }
+}
+
+PATCH_FUNC(0x801303e0, Scene_CommandSoundSettings);

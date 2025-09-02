@@ -2,6 +2,7 @@
 #define COMBO_UTIL_H
 
 #include <combo/types.h>
+#include "stddef.h"
 
 #define NORETURN    __attribute__((noreturn))
 #define PACKED      __attribute__((packed))

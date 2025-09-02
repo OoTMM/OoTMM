@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/player.h>
 #include <combo/item.h>
+#include <combo/souls.h>
 
 static void EnToto_GiveTroupeLeaderMask(Actor* this, PlayState* play)
 {
@@ -34,3 +35,16 @@ void EnToto_UpdateWrapper(Actor* this, PlayState* play)
         EnToto_Update(this, play);
     }
 }
+
+int EnToto_MessageAdvanceCheckGorman(PlayState* play)
+{
+    if (!Message_ShouldAdvance(play))
+        return 0;
+
+    /* Force a "NO" answer if lacking gorman soul */
+    if (!comboHasSoulMm(GI_MM_SOUL_NPC_GORMAN))
+        play->msgCtx.choiceIndex = 1;
+    return 1;
+}
+
+PATCH_CALL(0x80ba4184, EnToto_MessageAdvanceCheckGorman);

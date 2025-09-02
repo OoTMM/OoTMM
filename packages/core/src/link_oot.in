@@ -46,7 +46,6 @@ Audio_SetFileSelectSettings = 0x800c7420;
 Magic_Refill = 0x80072500;
 
 ActorRemove = 0x80025648;
-EnItem00_FixDrop = 0x80013530;
 
 Play_InitEnvironment = 0x8009cda0;
 gFogState = 0x800f1640;
@@ -96,7 +95,7 @@ DrawGi_Fairy            = 0x800575d0;
 DrawGi_Fish             = 0x80058120;
 DrawGi_GiantKnife       = 0x80057dec;
 DrawGi_GS               = 0x80057918;
-DrawGi_Heart            = 0x80058008;
+_DrawGi_Heart            = 0x80058008;
 DrawGi_Medallion        = 0x80057a80;
 DrawGi_MirrorShield     = 0x800577a8;
 DrawGi_Poe              = 0x800573dc;
@@ -105,6 +104,8 @@ DrawGi_VanillaRupee     = 0x800589f8;
 DrawGi_Scale            = 0x80058b34;
 DrawGi_SoldOut          = 0x8005719c;
 DrawGi_Spell            = 0x80058698;
+
+Play_SetRespawnData     = 0x8009d8dc;
 
 Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
@@ -142,6 +143,7 @@ DynaPoly_SetBgActor = 0x800313a4;
 DynaPoly_DisableCollision = 0x800314d8;
 DynaPolyActor_Init = 0x80035260;
 
+Math3D_TriChkPointParaYSlopedY = 0x800a6d8c;
 CollisionHeader_GetVirtual = 0x80033ef4;
 IsSceneValidEpona = 0x8005a3c0;
 Actor_Spawn = 0x80025110;
@@ -282,6 +284,7 @@ Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
 Math_StepToS = 0x800637d4;
 Rand_S16Offset = 0x80063bf0;
+Rand_Next = 0x800cdc90;
 Math_Vec3f_Copy = 0x80063cac;
 gSegments = 0x80120c38;
 osSetIntMask = 0x80003cc0;
@@ -353,8 +356,9 @@ DrawHUD = 0x800756f0;
 
 gDmaData = 0x8000b140;
 
+_ParseSceneRoomHeaders_ActorsList = 0x80081900;
 Sleep_Usec = 0x80001c7c;
-_DmaCompressed = 0x80001254;
+_Yaz0_Decompress = 0x80001254;
 osSetThreadPri = 0x80004480;
 osSetTimer = 0x80005a70;
 
@@ -362,6 +366,7 @@ ParseSceneRoomHeaders_SoundSettings = 0x80082478;
 
 EnItem00_Init = 0x80011b4c;
 Item_DropCollectible = 0x80013678;
+Item_DropCollectible2 = 0x800138b0;
 Item_DropCollectibleRandom = 0x80013a84;
 EnItem00_DrawRupee = 0x80013150;
 EnItem00_Update = 0x80012938;
@@ -384,6 +389,7 @@ gRegEditor = 0x8011ba00;
 
 Magic_Reset = 0x80072548;
 Actor_SpawnAsChild = 0x800253f0;
+Actor_SpawnEntry = 0x800255c4;
 Play_InCsMode = 0x8009cb08;
 Gfx_SetupDL_25Xlu = 0x8007e2c0;
 Gfx_TwoTexScroll = 0x8007eb84;
@@ -711,3 +717,8 @@ Sfx_PlaySfxCentered = 0x800646f0;
 AudioOcarina_SetInstrument = 0x800c2c90;
 
 DynaPoly_EnableCollision = 0x80031530;
+func_8002ED80 = 0x80022554;
+
+Actor_PlaySfx_FlaggedCentered2 = 0x80023108;
+
+Actor_SetObjectDependency = 0x80020fa4;

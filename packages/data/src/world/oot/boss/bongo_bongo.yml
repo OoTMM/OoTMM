@@ -1,0 +1,16 @@
+"Shadow Temple Boss":
+  boss: true
+  age_change: false
+  dungeon: Shadow
+  events:
+    BOSS_BONGO_BONGO: "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_use_slingshot)"
+  exits:
+    "Shadow Temple After Boss": "event(BOSS_BONGO_BONGO)"
+
+"Shadow Temple After Boss":
+  boss: true
+  age_change: false
+  dungeon: Shadow
+  locations:
+    "Shadow Temple Boss HC": "true"
+    "Shadow Temple Boss": "true"
