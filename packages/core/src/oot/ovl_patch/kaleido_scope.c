@@ -548,7 +548,7 @@ static void LoadMapName(void* dst, u32 mapNameId)
 
     u32 romAddr = dma.pstart;
 
-    DmaCompressed(romAddr + headerSize + offsets[0], dst, size);
+    Yaz0_Decompress(romAddr + headerSize + offsets[0], dst, size);
 }
 
 static void KaleidoScope_UpdateOwlWarpNamePanel(PlayState* play)

@@ -253,3 +253,33 @@ PATCH_END
 PATCH_START 0x808554c4
 .int 0
 PATCH_END
+
+/* Show the "Open" action in front of underwater chests */
+PATCH_START 0x8084564c
+  nop
+PATCH_END
+
+/* Allow opening underwater chests */
+CheckUnderwaterChestPreventOpen:
+  /* Check for underwater */
+  lw t1,0x670(s0)
+  andi t1,0x400
+  beqz t1,CheckUnderwaterChestPreventOpenGood
+   nop
+
+  /* Check for iron boots */
+  lb t1,0x13f(s0)
+  addiu t1,-1
+  beqz t1,CheckUnderwaterChestPreventOpenGood
+   nop
+  jr ra
+   li t2,1
+
+CheckUnderwaterChestPreventOpenGood:
+  jr ra
+   li t2,0
+
+PATCH_START 0x8083c7e8
+  jal CheckUnderwaterChestPreventOpen
+   nop
+PATCH_END

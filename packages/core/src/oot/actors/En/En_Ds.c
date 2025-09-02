@@ -66,7 +66,7 @@ static int EnDs_CanBuy(void)
     int ret;
 
     EnDs_BluePotionItemQuery(&q);
-    ret = comboItemPrecondEx(&q, PRICE);
+    ret = comboItemPrecond(&q, PRICE);
     switch (ret)
     {
     case SC_ERR_NORUPEES:

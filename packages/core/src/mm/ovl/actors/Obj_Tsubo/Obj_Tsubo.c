@@ -106,25 +106,6 @@ static void ObjTsubo_Alias(Actor_ObjTsubo* this)
     Xflag* xflag;
 
     xflag = &this->xflag;
-
-    /* Check for zora game pots */
-    if (xflag->sceneId == SCE_MM_ZORA_CAPE && this->actor.params == 0x13f)
-    {
-        xflag->sceneId = SCE_MM_EXTRA;
-        xflag->setupId = 0;
-        xflag->roomId = 0;
-        switch ((s16)(this->actor.home.pos.x))
-        {
-        case 0x04D0: xflag->id = 0; break;
-        case 0x0560: xflag->id = 1; break;
-        case 0x05BD: xflag->id = 2; break;
-        case 0x056F: xflag->id = 3; break;
-        case 0x0543: xflag->id = 4; break;
-        default: UNREACHABLE(); break;
-        }
-        return;
-    }
-
     switch (xflag->sceneId)
     {
     case SCE_MM_SOUTHERN_SWAMP_CLEAR:
@@ -295,23 +276,31 @@ void func_8092788C(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
 {
-    ComboItemOverride o;
     s32 type;
     s32 sp2C;
 
-    /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->actor.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    /* Fix the aliases */
-    ObjTsubo_Alias(this);
-
-    /* Detect xflags */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    /* TODO: Inelegant, should use an xflag override on the spawner instead */
+    if (play->sceneId == SCE_MM_ZORA_CAPE && this->actor.params == 0x13f)
+    {
+        Xflag_Clear(&this->xflag);
+        this->xflag.sceneId = SCE_MM_EXTRA;
+        switch ((s16)(this->actor.home.pos.x))
+        {
+        case 0x04D0: this->xflag.id = 0; break;
+        case 0x0560: this->xflag.id = 1; break;
+        case 0x05BD: this->xflag.id = 2; break;
+        case 0x056F: this->xflag.id = 3; break;
+        case 0x0543: this->xflag.id = 4; break;
+        default: UNREACHABLE(); break;
+        }
+    }
+    else
+    {
+        /* Set the extended properties */
+        if (comboXflagInit(&this->xflag, &this->actor, play))
+            ObjTsubo_Alias(this);
+    }
+    this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     type = OBJ_TSUBO_GET_TYPE(&this->actor);
     sp2C = OBJ_TSUBO_ZROT(&this->actor);

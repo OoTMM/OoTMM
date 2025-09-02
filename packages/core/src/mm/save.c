@@ -26,15 +26,15 @@ void Sram_AfterOpenSave(void)
 
 void Sram_SaveEndOfCycle(PlayState* play)
 {
-    /* Re-enable time */
-    gNoTimeFlow = 0;
-
     /* Disable sirloin */
     gSharedCustomSave.storedSirloin = 0;
 
     /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
     gOotSave.info.sceneId = SCE_OOT_TEMPLE_OF_TIME;
     gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
+
+    /* Erase dungeon respawn data */
+    bzero(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
 
     Save_DoSave(play, SF_NOCOMMIT);
     _Sram_SaveEndOfCycle(play);

@@ -30,7 +30,7 @@ typedef struct
     char            dmaRequest[0x20];
     OSMesgQueue     loadQueue;
     OSMesg          loadMsg;
-    s16             unk_74[2]; /* context-specific data used by the current scene draw config */
+    s16             drawParams[2]; /* context-specific data used by the current scene draw config */
 }
 RoomContext;
 

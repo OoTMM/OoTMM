@@ -22,13 +22,14 @@ typedef struct
     u8                      spawnExtended:1;
     u8                      xflagOverride:1;
     u8                      isNextEntranceInitialSong:1;
+    u8                      bronzeScaleSolidGround:1;
+    u8                      bronzeScaleTimer;
     u8                      decoysCount;
     u8                      menuScreen;
     u8                      menuCursor;
     u8                      menuCursorMax;
     u8                      maxKeysOot[0x11];
     u8                      maxKeysMm[4];
-    u8                      actorIndex;
     u8                      sceneSetupId;
     u32                     nextEntrance;
     s8                      prevRoom;

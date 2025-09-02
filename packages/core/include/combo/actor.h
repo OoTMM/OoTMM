@@ -54,6 +54,7 @@
 #define ACTOR_FLAG_HOSTILE                      (1 << 2)
 #define ACTOR_FLAG_FRIENDLY                     (1 << 3)
 #define ACTOR_FLAG_UPDATE_CULLING_DISABLED      (1 << 4)
+#define ACTOR_FLAG_DRAW_CULLING_DISABLED        (1 << 5)
 #define ACTOR_FLAG_REACT_TO_LENS                (1 << 7)
 #define ACTOR_FLAG_TALK                         (1 << 8)
 #define ACTOR_FLAG_IGNORE_QUAKE                 (1 << 12)
@@ -66,6 +67,7 @@
 #define ACTOR_FLAG_UPDATE_DURING_OCARINA        (1 << 25)
 #define ACTOR_FLAG_CAN_PRESS_SWITCHES           (1 << 26)
 #define ACTOR_FLAG_LOCK_ON_DISABLED             (1 << 27)
+#define ACTOR_FLAG_UCODE_POINT_LIGHT_ENABLED    (1 << 28)
 
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01
@@ -408,10 +410,12 @@ ASSERT_OFFSET(Actor, ovl,       X(0x138));
 #undef X
 
 #if defined(GAME_OOT)
+ASSERT_OFFSET(Actor, sfx, 0x020);
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 #endif
 
 #if defined(GAME_MM)
+ASSERT_OFFSET(Actor, sfx, 0x050);
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif
@@ -604,6 +608,7 @@ typedef struct NpcInteractInfo {
 #if defined(GAME_OOT)
 void func_80033480(struct PlayState* play, Vec3f* posBase, f32 randRangeDiameter, s32 amountMinusOne, s16 scaleBase,
                    s16 scaleStep, u8 arg6);
+void Actor_SetObjectDependency(struct PlayState* play, Actor* actor);
 #else
 extern Gfx D_801AEFA0[];
 extern Gfx D_801AEF88[];

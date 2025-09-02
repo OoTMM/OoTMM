@@ -1,0 +1,43 @@
+"VOID":
+  region: NONE
+
+"GLOBAL":
+  region: NONE
+  exits:
+    "ACCESS": "true"
+    "WARP_SONGS": "true"
+    "SOARING": "can_play_soaring"
+
+"ACCESS":
+  region: NONE
+  events:
+    ACCESS: "can_reset_time_impl"
+
+"WARP_SONGS":
+  region: NONE
+  exits:
+    "OOT SONG_TP_FOREST": "can_play_cross_tp_forest"
+    "OOT SONG_TP_FIRE": "can_play_cross_tp_fire"
+    "OOT SONG_TP_WATER": "can_play_cross_tp_water"
+    "OOT SONG_TP_SHADOW": "can_play_cross_tp_shadow"
+    "OOT SONG_TP_SPIRIT": "can_play_cross_tp_spirit"
+    "OOT SONG_TP_LIGHT": "can_play_cross_tp_light"
+
+"SOARING":
+  region: NONE
+  exits:
+    "Owl Clock Town": "has(OWL_CLOCK_TOWN)"
+    "Owl Milk Road": "has(OWL_MILK_ROAD)"
+    "Owl Swamp": "has(OWL_SOUTHERN_SWAMP)"
+    "Owl Woodfall": "has(OWL_WOODFALL)"
+    "Owl Mountain": "has(OWL_MOUNTAIN_VILLAGE)"
+    "Owl Snowhead": "has(OWL_SNOWHEAD)"
+    "Owl Great Bay": "has(OWL_GREAT_BAY)"
+    "Owl Zora Cape": "has(OWL_ZORA_CAPE)"
+    "Owl Ikana": "has(OWL_IKANA_CANYON)"
+    "Owl Stone Tower": "has(OWL_STONE_TOWER)"
+
+"Oath to Order":
+  region: GIANT_DREAM
+  locations:
+    "Oath to Order": "true"

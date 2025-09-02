@@ -1,0 +1,49 @@
+
+"Mountain Village Path Lower":
+  region: PATH_TO_MOUNTAIN_VILLAGE
+  events:
+    RUPEES: "can_use_light_arrows && soul_tektite && (is_day || (can_break_snowballs))"
+    MAGIC: "is_spring"
+    FAIRY: "can_get_gossip_fairy"
+  exits:
+    "Behind Large Icicles": "true"
+    "Mountain Village Path Upper": "can_break_snowballs || is_spring || short_hook_anywhere"
+  gossip:
+    "Mountain Village Path Gossip": "true"
+  locations:
+    "Path to Mountain Village Big Snowball Lower 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Small Snowball Lower Winter 1": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Winter 2": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Winter 3": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Spring 1": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 2": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 3": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 4": "is_spring"
+
+"Mountain Village Path Upper":
+  region: PATH_TO_MOUNTAIN_VILLAGE
+  events:
+    MAGIC: "true"
+    RUPEES: "can_use_light_arrows && soul_tektite && is_day"
+  exits:
+    "Mountain Village Path Lower": "true"
+    "Mountain Village": "true"
+  locations:
+    "Path to Mountain Village Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Small Snowball Upper Winter": "is_winter"
+    "Path to Mountain Village Small Snowball Upper Spring 1": "is_spring"
+    "Path to Mountain Village Small Snowball Upper Spring 2": "is_spring"
+    "Path to Mountain Village Small Snowball Upper Spring 3": "is_spring"

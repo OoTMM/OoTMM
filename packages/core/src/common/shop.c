@@ -16,7 +16,7 @@ int Shop_Precond(PlayState* play, Actor_EnGirlA* girlA)
     ComboItemQuery q;
 
     EnGirlA_ItemQuery(&q, girlA);
-    return comboItemPrecondEx(&q, girlA->price);
+    return comboItemPrecond(&q, girlA->price);
 }
 
 void Shop_AfterBuy(PlayState* play, Actor_EnGirlA* girlA)

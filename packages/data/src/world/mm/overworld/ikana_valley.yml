@@ -1,0 +1,176 @@
+"Ikana Valley":
+  region: IKANA_CANYON
+  events:
+    FAIRY: "can_get_gossip_fairy"
+  exits:
+    "Road to Ikana Top": "true"
+    "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
+    "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
+    "Ikana Valley Near Secret Shrine": "can_swim"
+    "Swamp Front": "underwater_walking || can_swim"
+  locations:
+    "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
+    "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
+    "Ikana Valley Scrub Shop": "soul_business_scrub && can_use_wallet(2)"
+  gossip:
+    "Ikana Valley Gossip Lower": "true"
+    "Ikana Valley Gossip Scrub": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
+
+"Ikana Valley Near Secret Shrine":
+  region: IKANA_CANYON
+  exits:
+    "Secret Shrine": "true"
+    "Ikana Valley Grotto": "true"
+    "Ikana Valley": "can_swim"
+
+"Ikana Valley Grotto":
+  region: ENTRANCE
+  exits:
+    "Ikana Valley Near Secret Shrine": "true"
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
+    FISH: "true"
+    BUGS: "true"
+  locations:
+    "Ikana Valley Grotto": "true"
+    "Ikana Valley Grotto Grass 01": "true"
+    "Ikana Valley Grotto Grass 02": "true"
+    "Ikana Valley Grotto Grass 03": "true"
+    "Ikana Valley Grotto Grass 04": "true"
+    "Ikana Valley Grotto Grass 05": "true"
+    "Ikana Valley Grotto Grass 06": "true"
+    "Ikana Valley Grotto Grass 07": "true"
+    "Ikana Valley Grotto Grass 08": "true"
+    "Ikana Valley Grotto Grass 09": "true"
+    "Ikana Valley Grotto Grass 10": "true"
+    "Ikana Valley Grotto Grass 11": "true"
+    "Ikana Valley Grotto Grass 12": "true"
+    "Ikana Valley Grotto Grass 13": "true"
+    "Ikana Valley Grotto Grass 14": "true"
+
+"Sakon Hideout":
+  region: ENTRANCE
+  exits:
+    "Ikana Valley": "true"
+  events:
+    SUN_MASK: "(can_fight || has_explosives || has_arrows) && soul_deku_baba && soul_wolfos"
+  locations:
+    "Sakon Hideout Pot First Room 1": "true"
+    "Sakon Hideout Pot First Room 2": "true"
+    "Sakon Hideout Pot Second Room 1": "soul_deku_baba"
+    "Sakon Hideout Pot Second Room 2": "soul_deku_baba"
+    "Sakon Hideout Pot Third Room": "soul_deku_baba"
+
+"Ikana Canyon":
+  region: IKANA_CANYON
+  exits:
+    "Ikana Valley": "true"
+    "Ikana Fairy Fountain": "true"
+    "Ikana Spring Water Cave": "true"
+    "Music Box House": "(event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared"
+    "Ghost Hut": "true"
+    "Beneath The Well Entrance": "true"
+    "Ikana Castle Entrance": "true"
+    "Stone Tower": "true"
+    "Tingle Ikana": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
+    "Owl Ikana": "true"
+  events:
+    CLEAR_STATE_IKANA: "wisp_enabled(BOSS_TWINMOLD, REMAINS_TWINMOLD) || event(WISP_CLEAR_STATE_IKANA)"
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    ARROWS: "true"
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+    FAIRY: "true"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+  gossip:
+    "Ikana Canyon Gossip Upper": "true"
+
+"Ikana Fairy Fountain":
+  region: ENTRANCE
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Ikana Great Fairy": "has(STRAY_FAIRY_ST, var(STRAY_FAIRY_COUNT))"
+
+"Ikana Spring Water Cave":
+  region: ENTRANCE
+  exits:
+    "Ikana Canyon": "true"
+  events:
+    IKANA_CURSE_LIFTED: "soul_composer_bros && is_valley_cursed && can_play_storms"
+
+"Music Box House":
+  region: ENTRANCE
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Music Box House Gibdo Mask": "is_valley_cursed && can_play_healing"
+
+"Ghost Hut":
+  region: ENTRANCE
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Ghost Hut HP": "soul_poe_collector && (has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
+
+"Ikana Castle Entrance":
+  region: IKANA_CASTLE
+  exits:
+    "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows || short_hook_anywhere"
+    "Ikana Canyon": "true"
+  events:
+    IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
+
+"Ikana Castle Exterior":
+  region: IKANA_CASTLE
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    FAIRY: "true"
+  exits:
+    "Beneath The Well End": "true"
+    "Ikana Castle Entrance": "can_use_light_arrows || short_hook_anywhere"
+    "Ancient Castle of Ikana": "true"
+    "Ancient Castle of Ikana Roof Exterior": "short_hook_anywhere"
+  locations:
+    "Ancient Castle of Ikana Pot Exterior": "true"
+    "Ancient Castle of Ikana Grass 01": "true"
+    "Ancient Castle of Ikana Grass 02": "true"
+    "Ancient Castle of Ikana Grass 03": "true"
+    "Ancient Castle of Ikana Grass 04": "true"
+    "Ancient Castle of Ikana Grass 05": "true"
+    "Ancient Castle of Ikana Grass 06": "true"
+    "Ancient Castle of Ikana Grass 07": "true"
+    "Ancient Castle of Ikana Grass 08": "true"
+    "Ancient Castle of Ikana Grass 09": "true"
+    "Ancient Castle of Ikana Grass 10": "true"
+    "Ancient Castle of Ikana Grass 11": "true"
+    "Ancient Castle of Ikana Grass 12": "true"
+
+"Tingle Ikana":
+  region: TINGLE
+  locations:
+    "Tingle Map Ikana": "tingle_price(0x0a)"
+    "Tingle Map Clock Town": "tingle_price(0x0b)"
+
+"Owl Ikana":
+  region: IKANA_CANYON
+  exits:
+    "Ikana Canyon": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    FAIRY: "true"
+  locations:
+    "Ikana Canyon Owl Statue": "has_sticks || has_sword"
+    "Ikana Canyon Grass 1": "true"
+    "Ikana Canyon Grass 2": "true"
+    "Ikana Canyon Grass 3": "true"
+    "Ikana Canyon Grass 4": "true"

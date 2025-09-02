@@ -92,26 +92,19 @@ PATCH_CALL(0x80be215c, EnHitTag_ItemDropCollectible);
 void EnHitTag_InitWrapper(Actor_EnHitTag* this, PlayState* play)
 {
     int switchFlag;
-    ComboItemOverride o;
     EnHitTagFunc init;
     Xflag x;
 
     /* Setup the xflag */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    this->isExtended = 0;
+    comboXflagInit(&this->xflag, &this->base, play);
+    this->isExtended = FALSE;
     memcpy(&x, &this->xflag, sizeof(Xflag));
     for (int i = 0; i < 3; ++i)
     {
         x.sliceId = i;
-        comboXflagItemOverride(&o, &x, 0);
-        if (o.gi && !comboXflagsGet(&x))
+        if (Xflag_IsShuffled(&x))
         {
-            this->isExtended = 1;
+            this->isExtended = TRUE;
             break;
         }
     }

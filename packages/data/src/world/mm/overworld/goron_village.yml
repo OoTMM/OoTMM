@@ -1,0 +1,123 @@
+"Goron Village":
+  region: GORON_VILLAGE
+  exits:
+    "Twin Islands": "true"
+    "Front of Lone Peak Shrine": "is_winter"
+    "Goron Shrine": "(soul_goron && first_day) || has_mask_goron || can_hammer"
+  events:
+    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && can_carry_keg && (has_mask_goron || (trick(MM_KEG_HOOKBUNNY) && scarecrow_hookshot && has_mask_bunny)  || (trick(MM_KEG_HOVERBUNNY) && has_hover_boots && has_mask_bunny))"
+    BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    NUTS: "true"
+    STICKS: "true"
+    RUPEES: "can_break_snowballs || (can_use_light_arrows && soul_tektite)"
+  locations:
+    "Goron Village HP": "(has(DEED_SWAMP) && has(MASK_DEKU)) || short_hook_anywhere"
+    "Goron Village Scrub Deed": "soul_business_scrub && has(DEED_SWAMP) && has(MASK_DEKU)"
+    "Goron Village Scrub Bomb Bag": "soul_business_scrub && has_mask_goron && can_use_wallet(2)"
+#    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
+    "Goron Powder Keg": "event(TRIAL_BOULDER) && (event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS)))"
+    "Goron Village Crate": "is_spring || can_use_fire_short_range || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS))"
+    "Goron Village Big Snowball 1": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 2": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 3": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 4": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 5": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 6": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 7": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 8": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 9": "is_winter && can_break_snowballs"
+    "Goron Village Small Snowball 01": "is_winter"
+    "Goron Village Small Snowball 02": "is_winter"
+    "Goron Village Small Snowball 03": "is_winter"
+    "Goron Village Small Snowball 04": "is_winter"
+    "Goron Village Small Snowball 05": "is_winter"
+    "Goron Village Small Snowball 06": "is_winter"
+    "Goron Village Small Snowball 07": "is_winter"
+    "Goron Village Small Snowball 08": "is_winter"
+    "Goron Village Small Snowball 09": "is_winter"
+    "Goron Village Small Snowball 10": "is_winter"
+    "Goron Village Small Snowball 11": "is_winter"
+    "Goron Village Small Snowball 12": "is_winter"
+
+"Front of Lone Peak Shrine":
+  region: GORON_VILLAGE
+  exits:
+    "Goron Village": "(is_winter && can_use_lens)" # || is_spring // for when the cave is shuffled and the spawn changed
+    "Lone Peak Shrine": "true"
+
+"Lone Peak Shrine":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "true"
+    BUGS: "true"
+  exits:
+    "Front of Lone Peak Shrine": "true"
+  locations:
+    "Lone Peak Shrine Lens Chest": "true"
+    "Lone Peak Shrine Boulder Chest": "has_explosives || trick_keg_explosives"
+    "Lone Peak Shrine Invisible Chest": "can_use_lens"
+    "Lone Peak Shrine Grass Pack 1 Grass 01": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 02": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 03": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 04": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 05": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 06": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 07": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 08": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 09": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 10": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 11": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 12": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 01": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 02": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 03": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 04": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 05": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 06": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 07": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 08": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 09": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 10": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 11": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 12": "true"
+
+"Goron Shrine":
+  region: ENTRANCE
+  exits:
+    "Goron Village": "true"
+    "Goron Shop": "true"
+  events:
+    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || (can_lullaby_half && soul_goron_child))"
+    STICKS: "true"
+    MAGIC: "true"
+  locations:
+    "Goron Baby": "is_winter && soul_goron_child && has_mask_goron && can_lullaby_half"
+    "Goron Shrine Pot 01": "true"
+    "Goron Shrine Pot 02": "true"
+    "Goron Shrine Pot 03": "true"
+    "Goron Shrine Pot 04": "true"
+    "Goron Shrine Pot 05": "true"
+    "Goron Shrine Pot 06": "true"
+    "Goron Shrine Pot 07": "true"
+    "Goron Shrine Pot 08": "true"
+    "Goron Shrine Pot 09": "true"
+    "Goron Shrine Pot 10": "true"
+    "Goron Shrine Pot 11": "true"
+
+"Goron Shrine From Shop":
+  region: NONE
+  exits:
+    "Goron Shrine": "true"
+
+"Goron Shop":
+  region: ENTRANCE
+  exits:
+    "Goron Shrine From Shop": "true"
+  locations:
+    "Goron Shop Item 1": "soul_goron_shopkeeper && shop_price(0x10)"
+    "Goron Shop Item 2": "soul_goron_shopkeeper && shop_price(0x11)"
+    "Goron Shop Item 3": "soul_goron_shopkeeper && shop_price(0x12)"

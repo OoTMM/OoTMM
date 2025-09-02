@@ -22,9 +22,9 @@ const u8 kMaxBombs[] = { 0, 20, 30, 40 };
 const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
 
-static int isPlayerSelf(u8 playerId)
+int Item_IsPlayerSelf(u8 playerId)
 {
-    if (playerId == PLAYER_SELF || playerId == gComboConfig.playerId)
+    if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == gComboConfig.playerId)
         return 1;
     return 0;
 }
@@ -93,13 +93,18 @@ void comboSyncItems(void)
     }
 }
 
-int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
+int comboItemPrecond(const ComboItemQuery* q, s16 price)
 {
     ComboItemOverride o;
 
     comboSyncItems();
     comboItemOverride(&o, q);
-    if (isPlayerSelf(o.player) && (!isItemBuyable(o.gi) || !isItemLicensed(o.gi)))
+
+    /* Nothing can never be bought */
+    if (o.gi == GI_NOTHING)
+        return SC_ERR_CANNOTBUY;
+
+    if (Item_IsPlayerSelf(o.player) && ((!Config_Flag(CFG_MULTIPLAYER) && !isItemBuyable(o.gi)) || !isItemLicensed(o.gi)))
         return SC_ERR_CANNOTBUY;
 
     if (gSave.info.playerData.rupees < price)
@@ -264,12 +269,12 @@ static int overrideData(ComboOverrideData* data, u32 key)
 
         /* Read from cart */
         /* TODO: Have a generic helper for this */
-        ovData[0] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x00);
+        ovData[0] = IO_ReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x00);
         if (ovData[0] == key)
         {
-            ovData[1] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x04);
-            ovData[2] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x08);
-            ovData[3] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x0c);
+            ovData[1] = IO_ReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x04);
+            ovData[2] = IO_ReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x08);
+            ovData[3] = IO_ReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x0c);
 
             /* Copy and add to cache */
             memcpy(data, ovData, sizeof(*data));
@@ -323,8 +328,11 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
     dst->giRaw = gi;
 
-    if (isPlayerSelf(dst->player))
-        gi = comboProgressive(gi, q->ovFlags);
+    if (Item_IsPlayerSelf(dst->player))
+    {
+        gi = Item_Progressive(gi, q->ovFlags);
+        dst->cloakGi = Item_Progressive(dst->cloakGi, q->ovFlags);
+    }
 
     if (neg)
         gi = -gi;
@@ -344,7 +352,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     count = 0;
 
     /* Add the item if it's for us */
-    if (isPlayerSelf(o.player))
+    if (Item_IsPlayerSelf(o.player))
         count = comboAddItemRaw(play, o.gi);
 
     /* Update text */
@@ -354,7 +362,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     if (Config_Flag(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
     {
         /* Mark the item */
-        if (isPlayerSelf(o.player))
+        if (Item_IsPlayerSelf(o.player))
         {
 #if defined(GAME_OOT)
             Multi_SetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);

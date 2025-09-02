@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The graphical OoTMM generator widget",
   "type": "module",
-  "main": "app/index.ts",
+  "main": "src/app/index.ts",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && tsx ./post-build.ts",
@@ -21,25 +21,18 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.2",
     "@ootmm/core": "*",
-    "preact": "^10.24.3",
+    "clsx": "^2.1.1",
+    "preact": "^10.26.9",
     "react-ga4": "^2.1.0",
-    "react-select": "^5.8.1",
-    "react-tooltip": "^5.28.0"
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.9.1",
-    "cssnano": "^7.0.6",
-    "postcss": "^8.4.47",
-    "postcss-import": "^16.1.0",
-    "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.0.8",
-    "reset-css": "^5.0.2",
-    "rollup-plugin-visualizer": "^5.12.0"
+    "@preact/preset-vite": "^2.10.2",
+    "@tailwindcss/vite": "^4.1.11",
+    "rollup-plugin-visualizer": "^6.0.3"
   },
   "nx": {
     "namedInputs": {
@@ -47,9 +40,15 @@
         "{projectRoot}/**/*"
       ],
       "env": [
-        {"env": "VERSION"},
-        {"env": "VERSION_SUFFIX"},
-        {"env": "STATIC_URL"}
+        {
+          "env": "VERSION"
+        },
+        {
+          "env": "VERSION_SUFFIX"
+        },
+        {
+          "env": "STATIC_URL"
+        }
       ]
     },
     "targets": {

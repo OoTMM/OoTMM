@@ -2,22 +2,25 @@ name: Continuous Integration Workflow
 
 on: [push, pull_request, workflow_dispatch]
 
-env:
-  GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-
 jobs:
   ci:
     runs-on: ubuntu-latest
+    container: ghcr.io/ootmm/ootmm-ci:1.0.0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Mark the directory as safe
+        run: git config --global --add safe.directory $PWD
 
       - name: Extract Version (Tag)
         if: ${{ contains(github.ref, 'refs/tags/') }}
         run: |
           echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
+          echo "NX_CMD=run-many" >> $GITHUB_ENV
+          echo "DEPLOY_STABLE=1" >> $GITHUB_ENV
 
       - name: Extract Version (Commit)
         if: ${{ !contains(github.ref, 'refs/tags/') }}
@@ -26,25 +29,8 @@ jobs:
           echo "VERSION=dev" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
           echo "ENV_KEYS=dev" >> $GITHUB_ENV
-
-      - name: Add n64 toolchain repo
-        uses: myci-actions/add-deb-repo@10
-        with:
-          repo: deb http://practicerom.com/public/packages/debian staging main
-          repo-name: practicerom
-          keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
-
-      - name: Install system dependencies
-        run: sudo apt-get install n64-ultra cmake ninja-build
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: 'pnpm'
+          echo "NX_CMD=affected" >> $GITHUB_ENV
+          echo "DEPLOY_DEV=1" >> $GITHUB_ENV
 
       - name: Install Third Party dependencies
         run: ./scripts/install-deps.sh
@@ -53,18 +39,16 @@ jobs:
         run: pnpm i
 
       - name: Find references for NX
+        if: ${{ !contains(github.ref, 'refs/tags/') }}
         uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: master
 
       - name: Test
-        run: npx nx affected -t test --prod
+        run: npx nx ${NX_CMD} -t test --prod
 
       - name: Build
-        run: npx nx affected -t build --prod
-
-      - name: Install netlify CLI
-        run: npm install -g netlify-cli
+        run: npx nx ${NX_CMD} -t build --prod
 
       - name: Configure AWS
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
@@ -80,9 +64,9 @@ jobs:
 
       - name: Deploy
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
-        run: npx nx affected -t deploy --prod
+        run: npx nx ${NX_CMD} -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}
-          NETLIFY_SITE_ID_WEB: ${{ vars.NETLIFY_SITE_ID_WEB }}
-          NETLIFY_SITE_ID_STATIC: ${{ vars.NETLIFY_SITE_ID_STATIC }}
+          NETLIFY_SITE_ID_WEB: ${{ secrets.NETLIFY_SITE_ID_WEB }}
+          NETLIFY_SITE_ID_STATIC: ${{ secrets.NETLIFY_SITE_ID_STATIC }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

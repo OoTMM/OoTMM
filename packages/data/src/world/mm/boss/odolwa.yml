@@ -1,0 +1,34 @@
+"Woodfall Temple Boss":
+  boss: true
+  dungeon: WF
+  events:
+    BOSS_ODOLWA: "soul_boss(SOUL_BOSS_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"
+  exits:
+    "Woodfall Temple After Boss": "event(BOSS_ODOLWA)"
+    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
+  locations:
+    "Woodfall Temple Boss Grass 01": "true"
+    "Woodfall Temple Boss Grass 02": "true"
+    "Woodfall Temple Boss Grass 03": "true"
+    "Woodfall Temple Boss Grass 04": "true"
+    "Woodfall Temple Boss Grass 05": "true"
+    "Woodfall Temple Boss Grass 06": "true"
+    "Woodfall Temple Boss Grass 07": "true"
+    "Woodfall Temple Boss Grass 08": "true"
+    "Woodfall Temple Boss Grass 09": "true"
+    "Woodfall Temple Boss Grass 10": "true"
+    "Woodfall Temple Boss Grass 11": "true"
+    "Woodfall Temple Boss Grass 12": "true"
+    "Woodfall Temple Boss Grass 13": "true"
+    "Woodfall Temple Boss Grass 14": "true"
+    "Woodfall Temple Boss Grass 15": "true"
+    "Woodfall Temple Boss Grass 16": "true"
+
+"Woodfall Temple After Boss":
+  boss: true
+  dungeon: WF
+  exits:
+    "Oath to Order": "true"
+  locations:
+    "Woodfall Temple Boss Container": "true"
+    "Woodfall Temple Boss": "true"

@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+@import "tailwindcss";
+
+:root {
+  @apply bg-gray-300 dark:bg-gray-900 h-screen min-h-screen w-full overflow-hidden;
+}
+
+body, #root {
+  @apply w-full h-full;
+}
+
+.ux-bg { @apply bg-gray-100 dark:bg-gray-700; }
+.ux-border { @apply rounded border border-gray-400 dark:border-gray-600 }
+.ux-hover { @apply hover:bg-gray-100 dark:hover:bg-gray-600; }
+.ux-outline { @apply focus:outline-none focus:border-blue-500 }
+
+.gutter-stable {
+  scrollbar-gutter: stable;
+}
+
+.reserve-semibold {
+  @apply relative;
+}
+
+.reserve-semibold > * {
+  @apply absolute left-0;
+}
+
+.reserve-semibold::before {
+  content: attr(data-text);
+  @apply font-semibold invisible whitespace-nowrap pointer-events-none select-none;
+}

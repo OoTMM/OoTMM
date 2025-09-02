@@ -8,63 +8,59 @@
 
 static Actor_EnWonderItem* sWonderItem;
 
-static void EnWonderItem_Alias(Actor_EnWonderItem* this)
+static void EnWonderItem_Alias(Xflag* xf)
 {
-    Xflag* xflag;
-
-    xflag = &this->xflag;
-
-    switch (xflag->sceneId)
+    switch (xf->sceneId)
     {
     case SCE_OOT_SACRED_FOREST_MEADOW:
-        if (xflag->setupId == 2)
+        if (xf->setupId == 2)
         {
-            xflag->setupId = 0;
-            xflag->id -= 3;
+            xf->setupId = 0;
+            xf->id -= 3;
         }
         break;
     case SCE_OOT_HYRULE_FIELD:
-        if (xflag->setupId == 1)
+        if (xf->setupId == 1)
         {
-            xflag->setupId = 0;
-            xflag->id += 2;
+            xf->setupId = 0;
+            xf->id += 2;
         }
         break;
     case SCE_OOT_LON_LON_RANCH:
-        if (xflag->setupId == 3)
+        if (xf->setupId == 3)
         {
-            xflag->setupId = 2;
-            xflag->id += 16;
+            xf->setupId = 2;
+            xf->id += 16;
         }
         break;
     case SCE_OOT_GERUDO_FORTRESS:
-        if (xflag->setupId != 0)
+        if (xf->setupId != 0)
         {
-            xflag->setupId = 0;
-            if (xflag->id == 5)
-                xflag->id = 8;
+            xf->setupId = 0;
+            if (xf->id == 5)
+                xf->id = 8;
             else
-                xflag->id = 7;
+                xf->id = 7;
         }
         break;
     case SCE_OOT_DESERT_COLOSSUS:
-        if (xflag->setupId == 2)
+        if (xf->setupId == 2)
         {
-            xflag->setupId = 0;
-            switch (xflag->id)
+            xf->setupId = 0;
+            switch (xf->id)
             {
-            case 22: xflag->id = 19; break;
-            case 23: xflag->id = 21; break;
-            case 24: xflag->id = 20; break;
-            case 25: xflag->id = 23; break;
+            case 22: xf->id = 19; break;
+            case 23: xf->id = 21; break;
+            case 24: xf->id = 20; break;
+            case 25: xf->id = 23; break;
             }
         }
         break;
     case SCE_OOT_KAKARIKO_VILLAGE:
-        if (xflag->setupId == 1)
+        if (xf->setupId == 1)
         {
-            xflag->setupId = 0;
-            xflag->id += 7;
+            xf->setupId = 0;
+            xf->id += 7;
         }
         break;
     }
@@ -129,26 +125,16 @@ PATCH_CALL(0x80a66358, EnWonderItem_ItemDropCollectibleRandom);
 void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, PlayState* play)
 {
     int switchFlag;
-    ComboItemOverride o;
     Actor_EnWonderItem_Func EnWonderItem_Init;
 
     /* Setup the xflag */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-    EnWonderItem_Alias(this);
+    if (comboXflagInit(&this->xflag, &this->base, play))
+        EnWonderItem_Alias(&this->xflag);
 
     if (play->sceneId == SCE_OOT_CASTLE_COURTYARD && Config_Flag(CFG_OOT_SKIP_ZELDA))
-    {
-        this->isExtended = 0;
-    }
+        this->isExtended = FALSE;
     else
-    {
-        comboXflagItemOverride(&o, &this->xflag, 0);
-        this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
-    }
+        this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     /* Check the collectible flag */
     switchFlag = this->base.params & 0x3f;

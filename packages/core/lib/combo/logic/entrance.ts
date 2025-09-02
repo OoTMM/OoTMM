@@ -1081,7 +1081,8 @@ export class LogicPassEntrances {
     }
 
     /* Validate using the solver */
-    const solver = new LogicPassSolver({ ...this.input, worlds: this.worlds });
+    /* TODO: Recheck the typing of this */
+    const solver = new LogicPassSolver({ ...this.input, worlds: this.worlds } as any);
     solver.validate();
   }
 

@@ -571,10 +571,9 @@ static int ObjKibako2_CsmcType(Actor_ObjKibako2* this)
     ComboItemOverride o;
 
     if (!ObjKibako2_IsShuffled(this))
-        o.gi = GI_NONE;
-    else
-        comboXflagItemOverride(&o, &this->xflag, 0);
-
+        return CSMC_NORMAL;
+    
+    comboXflagItemOverride(&o, &this->xflag, 0);
     if (!csmcEnabled())
         return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
 

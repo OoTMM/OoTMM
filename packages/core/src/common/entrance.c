@@ -58,7 +58,6 @@ void comboTransition(PlayState* play, u32 entrance)
 #endif
 
 #if defined(GAME_MM)
-    gNoTimeFlow = 0;
     if (gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY && !Config_Flag(CFG_MM_FD_ANYWHERE))
     {
         switch (play->sceneId)

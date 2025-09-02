@@ -1,0 +1,23 @@
+"Jabu-Jabu Boss":
+  boss: true
+  age_change: false
+  dungeon: JJ
+  events:
+    BOSS_BARINADE: "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
+  exits:
+    "Jabu-Jabu After Boss": "event(BOSS_BARINADE)"
+  locations:
+    "Jabu-Jabu Boss Pot 1": "true"
+    "Jabu-Jabu Boss Pot 2": "true"
+    "Jabu-Jabu Boss Pot 3": "true"
+    "Jabu-Jabu Boss Pot 4": "true"
+    "Jabu-Jabu Boss Pot 5": "true"
+    "Jabu-Jabu Boss Pot 6": "true"
+
+"Jabu-Jabu After Boss":
+  boss: true
+  age_change: false
+  dungeon: JJ
+  locations:
+    "Jabu-Jabu Boss Container": "true"
+    "Jabu-Jabu Boss": "true"

@@ -50,18 +50,11 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* pl
 void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, PlayState* play)
 {
     int switchFlag;
-    ComboItemOverride o;
     EnInvisibleRuppeFunc init;
 
     /* Setup the xflag */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    comboXflagInit(&this->xflag, &this->base, play);
+    this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     switchFlag = (this->base.params & 0x1fc) >> 2;
     if (this->isExtended && switchFlag != 0x7f && Flags_GetSwitch(play, switchFlag))

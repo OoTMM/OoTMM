@@ -198,6 +198,11 @@ s32 KaleidoScope_Update(PlayState* play)
                             gSaveContext.respawnFlag = 2;
                         }
 #else
+                        if(!Config_Flag(CFG_MM_FD_ANYWHERE) && gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
+                        {
+                            gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+                            gSave.equippedMask = 0;
+                        }
                         if (!(dungeonEntranceRespawn->data & 0x80))
                         {
                             play->nextEntrance = ENTR_CROSS_RESPAWN;

@@ -225,6 +225,7 @@ s32 CollisionCheck_LineOCCheck(PlayState* play, CollisionCheckContext* colChkCtx
 /* Unsure if that same function exists in OoT */
 #if defined(GAME_MM)
 void CollisionCheck_SpawnShieldParticles(PlayState* play, Vec3f* v);
+f32 BgCheck_EntityRaycastFloor1(CollisionContext* colCtx, CollisionPoly** outPoly, Vec3f* pos);
 f32 BgCheck_EntityRaycastFloor5(CollisionContext* colCtx, CollisionPoly** outPoly, s32* outBgId, Actor* actor, Vec3f* pos);
 s32 SurfaceType_IsIgnoredByEntities(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 SurfaceMaterial SurfaceType_GetMaterial(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);

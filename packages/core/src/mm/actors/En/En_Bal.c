@@ -113,7 +113,7 @@ static int EnBal_AlreadyBoughtItemWrapper(Actor* this, PlayState* play)
         return 1;
 
     /* Check for preconds (rupees are checked separately) */
-    precond = comboItemPrecondEx(&q, 0);
+    precond = comboItemPrecond(&q, 0);
     if (precond == SC_OK || precond == SC_OK_NOCUTSCENE)
         return 0;
     return 1;

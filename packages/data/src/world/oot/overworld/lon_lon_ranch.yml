@@ -1,0 +1,75 @@
+
+"Lon Lon Ranch":
+  region: LON_LON_RANCH
+  exits:
+    "Hyrule Field": "true"
+    "Lon Lon Ranch Pots": "is_child"
+    "Lon Lon Ranch Silo": "true"
+    "Lon Lon Ranch Stables": "true"
+    "Lon Lon Ranch House": "is_adult || is_day"
+    "Lon Lon Ranch Grotto": "is_child"
+  events:
+    #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
+    EPONA: "true" #If fast Epona becomes a setting, we need a check here... this is "Ingo deposed".
+    MALON_COW: "can_ride_epona && event(EPONA) && is_day && soul_malon"
+    RUPEES: "is_child"
+  locations:
+    "Lon Lon Ranch Malon Song": "is_child && has_ocarina && event(MALON) && is_day"
+    "Lon Lon Ranch GS Tree": "gs && is_child"
+    "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
+    "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
+    "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Lon Lon Ranch Crate": "is_child"
+    "Lon Lon Ranch Wonder Item 1": "is_adult && can_ride_epona"
+    "Lon Lon Ranch Wonder Item 2": "is_adult && can_ride_epona"
+
+"Lon Lon Ranch Pots":
+  region: LON_LON_RANCH
+  age_change: false
+  locations:
+    "Lon Lon Ranch Pot 1": "true"
+    "Lon Lon Ranch Pot 2": "true"
+    "Lon Lon Ranch Pot 3": "true"
+    "Lon Lon Ranch Pot 4": "true"
+    "Lon Lon Ranch Pot 5": "true"
+    "Lon Lon Ranch Pot 6": "true"
+    "Lon Lon Ranch Pot 7": "true"
+
+"Lon Lon Ranch Stables":
+  region: ENTRANCE
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Stables Cow Left": "can_play_epona"
+    "Lon Lon Ranch Stables Cow Right": "can_play_epona"
+
+"Lon Lon Ranch Silo":
+  region: ENTRANCE
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Silo HP": "is_child"
+    "Lon Lon Ranch Silo Cow Front": "can_play_epona"
+    "Lon Lon Ranch Silo Cow Back": "can_play_epona"
+
+"Lon Lon Ranch House":
+  region: ENTRANCE
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon"
+    "Lon Lon Ranch Talon Buy Milk": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && merchant_price(0x03)"
+    "Lon Lon Ranch Talon House Pot 1": "true"
+    "Lon Lon Ranch Talon House Pot 2": "true"
+    "Lon Lon Ranch Talon House Pot 3": "true"
+
+"Lon Lon Ranch Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Grotto Left Scrub": "is_child && business_scrub(0x08)"
+    "Lon Lon Ranch Grotto Center Scrub": "is_child && business_scrub(0x09)"
+    "Lon Lon Ranch Grotto Right Scrub": "is_child && business_scrub(0x0a)"
+    "Lon Lon Ranch Grotto Hive": "break_hive_high"

@@ -18,19 +18,11 @@
 
 void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, PlayState* play)
 {
-    ComboItemOverride o;
     ActorFunc EnTuboTrap_Init;
 
-    /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    /* Check for an override */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    /* Xflag init */
+    comboXflagInit(&this->xflag, &this->base, play);
+    this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     /* Forward init */
     EnTuboTrap_Init = actorAddr(ACTOR_EN_TUBO_TRAP, ADDR_FUNC_INIT);

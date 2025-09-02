@@ -43,7 +43,7 @@
 # include <combo/interface.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
-# include <combo/common/actors/Obj_Mure3.h>
+# include <combo/common/cosmetics.h>
 # include <combo/common/actors/En_Tubo_Trap.h>
 
 # if defined(GAME_OOT)
@@ -90,6 +90,7 @@
 #include <combo/object_id.h>
 #include <combo/save.h>
 #include <combo/gi.h>
+#include <combo/instances.h>
 #include <combo/data/items.h>
 #include <combo/entrances.h>
 #include <combo/common/events.h>
@@ -183,10 +184,6 @@ extern PlayState* gPlay;
 void Ocarina_HandleWarp(Player* player, PlayState* ctxt);
 #endif
 
-#if defined(GAME_MM)
-extern int gNoTimeFlow;
-#endif
-
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
@@ -202,9 +199,6 @@ void comboHandleAutoInvertClockSpeed(void);
 void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
-
-/* Ice Traps */
-void Play_UpdateIceTrap(PlayState* play);
 
 #else
 # include <combo/asm.h>

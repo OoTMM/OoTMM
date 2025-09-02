@@ -34,8 +34,7 @@
 - { id: ARROW3, func: Opa0, params: [0x6001830] }
 - { id: BOMBCHU, func: BombchuMask, params: [0x60004b0] }
 - { id: OOT_EGG, func: Medallion, params: [0x6000fd0, 0x6001008] }
-- { id: OOT_SCALE_SILVER, func: Scale, params: [0x6000aa0, 0x6000a20, 0x6000a60, 0x6000cc8] }
-- { id: OOT_SCALE_GOLD, func: Scale, params: [0x6000aa0, 0x6000a40, 0x6000a80, 0x6000cc8] }
+- { id: SCALE, func: CustomScale, params: [0x6000aa0, 0x6000cc8] }
 - { id: OOT_HOOKSHOT, func: Opa0, params: [0x6000750] }
 - { id: OOT_LONGSHOT, func: Opa0, params: [0x6001240] }
 - { id: OCARINA_TIME, func: Opa0_Xlu1, params: [0x60008c0, 0x6000af8] }
@@ -212,4 +211,4 @@
 - { id: BOTTLE_BLUE_FIRE, func: BottleBlueFire, params: [0x6000670, 0x6000750] }
 - { id: CLOCK, func: Clock, params: [GI_CLOCK_0, GI_CLOCK_1, GI_CLOCK_2, GI_CLOCK_3] }
 - { id: POND_FISH, func: PondFish, params: [GI_POND_FISH_0] }
-- { id: TRAP_ICE, func: TrapIce, params: [0] }
+- { id: TRAP, func: Trap, params: [0] }

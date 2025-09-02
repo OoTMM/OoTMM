@@ -1,0 +1,16 @@
+"Fire Temple Boss":
+  boss: true
+  age_change: false
+  dungeon: Fire
+  events:
+    BOSS_VOLVAGIA: "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
+  exits:
+    "Fire Temple After Boss": "event(BOSS_VOLVAGIA)"
+
+"Fire Temple After Boss":
+  boss: true
+  age_change: false
+  dungeon: Fire
+  locations:
+    "Fire Temple Boss Container": "true"
+    "Fire Temple Boss": "true"

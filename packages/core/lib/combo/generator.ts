@@ -74,9 +74,11 @@ export class Generator {
     let log: string | null = null;
 
     /* Apply random settings (if enabled) */
-    this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
+    if (this.opts.mode === 'random') {
+      this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
+    }
 
-    if (!this.opts.patch) {
+    if (this.opts.mode !== 'patch') {
       if (!process.env.__IS_BROWSER__) {
         await codegen(this.monitor);
       }
@@ -97,6 +99,9 @@ export class Generator {
       });
       log = logicResult.log;
     } else {
+      if (!this.opts.patch) {
+        throw new Error('Patch mode requires a patch file');
+      }
       const patchfile = new Patchfile;
       await patchfile.deserialize(this.opts.patch);
       patchfiles = [patchfile];
