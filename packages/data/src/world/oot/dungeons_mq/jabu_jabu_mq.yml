@@ -31,27 +31,30 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Main Elevator Room Upper": "true"
-    "Jabu-Jabu Main Elevator Room Lower Switch Alcove": "can_swim && (is_child || (is_adult && can_dive_small))" #Adult cannot dive to the alcove without a scale. However, can hookshot through Jabu's flesh to the compass chest without bronze scale (only irons, and zora tunic?). Can be a trick.
+    "Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge": "can_swim && (is_child || (is_adult && can_dive_small))" #Adult cannot dive to the alcove without a scale. However, can hookshot through Jabu's flesh to the compass chest without bronze scale (only irons, and zora tunic?). Can be a trick.
     "Jabu Jabu Basement Loop to Main Elevator": "event(JABU_MQ_WATER_SPOUTS)"
   events:
-    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHESTCOW_SWITCH: "can_hit_triggers_distance || can_hookshot || has_bombchu"
+    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || can_hookshot || has_bombchu"
   locations:
     "MQ Jabu-Jabu Second Room B1 Chest": "true"
     "MQ Jabu-Jabu Wonder Item Elevator Cow": "can_use_slingshot"
-"Jabu-Jabu Main Elevator Room Lower Switch Alcove":
+    "MQ Jabu-Jabu Rupee Bottom": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+    "MQ Jabu-Jabu Rupee Middle": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+    "MQ Jabu-Jabu Rupee Top": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+"Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge":
   dungeon: JJ
   exits:
     "Jabu-Jabu Main Elevator Room Lower": "is_child || (is_adult && can_dive_small)" #Adult cannot dive to the alcove without a scale.
   events:
     JABU_MQ_UNDERWATER_ALCOVE_SWITCH: "true"
-    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHESTCOW_SWITCH: "can_hit_triggers_distance || can_hookshot || has_bombchu"
+    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || can_hookshot || has_bombchu"
   locations:
-    "MQ Jabu-Jabu Compass Chest": "event(JABU_MQ_MAIN_ELEVATOR_COMPASS_CHESTCOW_SWITCH)"
+    "MQ Jabu-Jabu Compass Chest": "event(JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH)"
     "MQ Jabu-Jabu Pot Underwater Alcove 1": "true"
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "true"
-    "MQ Jabu-Jabu Rupee Bottom": "can_dive_big"
-    "MQ Jabu-Jabu Rupee Middle": "can_dive_small"
-    "MQ Jabu-Jabu Rupee Top": "is_child || can_dive_small"
+    "MQ Jabu-Jabu Rupee Bottom": "(can_swim && can_dive_big) || can_boomerang"
+    "MQ Jabu-Jabu Rupee Middle": "(can_swim && can_dive_small) || can_boomerang"
+    "MQ Jabu-Jabu Rupee Top": "(can_swim && (is_child || can_dive_small)) || can_boomerang"
 "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss":
   dungeon: JJ
   exits:
