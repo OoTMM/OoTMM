@@ -1,8 +1,8 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "Lake Hylia Near Water Temple": "true"
-    "Water Temple Entrance": "true"
+    "Lake Hylia Near Water Temple": "can_swim_or_sink"
+    "Water Temple Entrance": "can_swim || (hookshot_anywhere && has_iron_boots)"
 "Water Temple Entrance":
   dungeon: Water
   exits:
