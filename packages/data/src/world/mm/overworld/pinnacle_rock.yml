@@ -3,8 +3,8 @@
   region: PINNACLE_ROCK
   exits:
     "Pinnacle Rock": "underwater_walking_strict && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
-    "Great Bay Coast Near Pinnacle": "can_sink_or_swim"
-    "Pinnacle Rock Water Void": "can_sink_or_swim"
+    "Great Bay Coast Near Pinnacle": "can_swim_or_sink"
+    "Pinnacle Rock Water Void": "can_swim_or_sink"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
 
