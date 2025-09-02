@@ -245,7 +245,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Ruto Section Bottom Floor": "can_swim && event(JABU_MQ_BASEMENT_SIDE_BUTTON)"
-    "Jabu-Jabu Basement Side Room GS Side": "has_hover boots || (JABU_MQ_BASEMENT_SIDE_PLATFORM && (can_hookshot || can_swim)) || climb_anywhere"
+    "Jabu-Jabu Basement Side Room GS Side": "has_hover_boots || (JABU_MQ_BASEMENT_SIDE_PLATFORM && (can_hookshot || can_swim)) || climb_anywhere"
   events:
     JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
     JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
