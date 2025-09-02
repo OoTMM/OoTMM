@@ -32,7 +32,7 @@
   exits:
     "Jabu-Jabu Main Elevator Room Upper": "true"
     "Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge": "can_swim && (is_child || (is_adult && can_dive_small))" #Adult cannot dive to the alcove without a scale. However, can hookshot through Jabu's flesh to the compass chest without bronze scale (only irons, and zora tunic?). Can be a trick.
-    "Jabu Jabu Basement Loop to Main Elevator": "event(JABU_MQ_WATER_SPOUTS)"
+    "Jabu Jabu Basement Loop to Main Elevator West Side": "event(JABU_MQ_WATER_SPOUTS)"
   events:
     JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || has_bombchu || can_longshot || (has_iron_boots && can_hookshot)"
   locations:
@@ -85,7 +85,7 @@
   exits:
     "Jabu-Jabu Vanilla Ruto Falling Room": "true"
     "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
-    "Jabu Jabu Basement Loop to Main Elevator": "soul_ruto || can_play_elegy"
+    "Jabu Jabu Basement Loop to Main Elevator East Side": "soul_ruto || can_play_elegy"
     "Jabu-Jabu Basement Ledge Before Big Octo": "climb_anywhere"
   locations:
     "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot"
@@ -93,11 +93,14 @@
     "MQ Jabu-Jabu Grass Main Room Bottom 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 2": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 3": "can_cut_grass"
-"Jabu Jabu Basement Loop to Main Elevator":
+
+
+    
+"Jabu Jabu Basement Loop to Main Elevator West Side":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Ruto Section Bottom Floor": "true"
     "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)" #We are going to need a buffer region here for behind the water spout. You can use Hover Boots with Bunny Hood or backwalking to get through the spout, or climb anywhere. There is not another one blocking the door on this side. It should also probably be a trick, even with climb anywhere.
+    "Jabu Jabu Basement Loop to Main Elevator East Side":
   events:
     JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
   locations:
@@ -107,6 +110,18 @@
     "MQ Jabu-Jabu Pot Boomerang Room 2": "true"
     "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
     "MQ Jabu-Jabu Grass Boomerang Room": "can_cut_grass"
+
+
+
+"Jabu Jabu Basement Loop to Main Elevator East Side":
+  dungeon: JJ
+  exits:
+    "Jabu Jabu Basement Loop to Main Elevator West Side": "true" #Can climb the vines on the wall and jump to west side as child, no items
+    "Jabu-Jabu Ruto Section Bottom Floor": "true"
+
+
+
+    
 "Jabu-Jabu Basement Ledge Before Big Octo":
   dungeon: JJ
   exits:
