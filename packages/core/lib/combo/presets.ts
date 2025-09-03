@@ -1714,7 +1714,7 @@ const PRESET_BLITZ_PRECOMPLETED_COOP = makeBlitz({
   ]
 });
 
-const PRESET_TRIFORCE_BLITZ = makeBlitz({
+const PRESET_TRIFORCE_BLITZ_COOP = makeBlitz({
   goal: "triforce3",
   strayFairyChestShuffle: "starting",
   rainbowBridge: 'custom',
@@ -1782,6 +1782,6 @@ export const PRESETS: Presets = {
   'Coop Begginer': PRESET_BEGINNER_COOP,
   'Coop Blitz':PRESET_BLITZ_COOP,
   'Coop Blitz (pre-completed dungeons)':PRESET_BLITZ_PRECOMPLETED_COOP,
-  'Coop Triforce Blitz': PRESET_TRIFORCE_BLITZ,
+  'Coop Triforce Blitz': PRESET_TRIFORCE_BLITZ_COOP,
 };
 
