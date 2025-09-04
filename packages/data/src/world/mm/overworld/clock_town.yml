@@ -208,7 +208,7 @@
     MAGIC: "true"
     RUPEES: "true"
   locations:
-    "Astral Observatory Passage Chest": "has_explosives || trick_keg_explosives"
+    "Astral Observatory Passage Chest": "(has_explosives || trick_keg_explosives) && (can_swim || is_tall)"
     "Astral Observatory Passage Pot 1": "true"
     "Astral Observatory Passage Pot 2": "true"
     "Astral Observatory Passage Pot 3": "true"
