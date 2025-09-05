@@ -27,7 +27,7 @@
 
 "has_ocarina": "glitch_ocarina_items || has(OCARINA) || has(SHARED_OCARINA)"
 "has_ocarina_of_time": "has(OCARINA, 2) || has(SHARED_OCARINA, 2)"
-"can_play(x)": "has_ocarina && (hasNotes(x) || has(x))"
+"can_play(x)": "has_ocarina && has(x)"
 "can_play_cross(x)": "can_play(x) && (setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child))"
 
 "can_play_sun": "(can_play(SONG_SUN) || can_play(SHARED_SONG_SUN)) && ocarina_button_right && ocarina_button_down && ocarina_button_up"

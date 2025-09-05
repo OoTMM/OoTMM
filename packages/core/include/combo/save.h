@@ -15,7 +15,6 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
-# include <combo/common/song_notes.h>
 
 typedef struct ALIGNED(16)
 {
@@ -47,7 +46,6 @@ typedef struct ALIGNED(16)
     u8              bronzeScaleOot:1;
     u8              bronzeScaleMm:1;
     u8              pendingIceTraps;
-    SongNotes       songNotes;
 #if defined(DEBUG)
     u8              cheats[4];
 #endif

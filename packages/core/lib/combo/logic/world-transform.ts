@@ -467,16 +467,6 @@ export class LogicPassWorldTransform {
       items = [...items, ...ItemGroups.SONGS];
     }
 
-
-    if (settings.songs === 'notes') {
-      for (const songNotes of ItemGroups.PROGRESSIVE_SONG_NOTE_MAP) {
-        for (let songNote = 0; songNote < songNotes[1][1]; songNote++) {
-          items.push(songNotes[1][0]);
-        }
-      }
-    }
-
-
     if (settings.dungeonRewardShuffle === 'anywhere' || settings.dungeonRewardShuffle === 'dungeonsLimited') {
       items = [...items, ...ItemGroups.DUNGEON_REWARDS];
     }
@@ -694,54 +684,21 @@ export class LogicPassWorldTransform {
     }
 
     if (settings.sharedSongEpona) {
-      if (settings.songs === 'notes') {
-        this.removeItem(Items.OOT_SONG_EPONA_PROGRESSIVE_NOTE, 6);
-        this.removeItem(Items.MM_SONG_EPONA_PROGRESSIVE_NOTE, 6);
-      } else {
-        this.replaceItem(Items.OOT_SONG_EPONA,   Items.SHARED_SONG_EPONA);
-        this.replaceItem(Items.MM_SONG_EPONA,    Items.SHARED_SONG_EPONA);
-        this.removeItem(Items.SHARED_SONG_EPONA, 1);
-      }
-    } else if(!settings.sharedSongEpona && settings.songs === 'notes') {
-      this.removeItem(Items.SHARED_SONG_EPONA_PROGRESSIVE_NOTE, 6);
+      this.replaceItem(Items.OOT_SONG_EPONA,   Items.SHARED_SONG_EPONA);
+      this.replaceItem(Items.MM_SONG_EPONA,    Items.SHARED_SONG_EPONA);
+      this.removeItem(Items.SHARED_SONG_EPONA, 1);
     }
 
     if (settings.sharedSongStorms) {
-      if (settings.songs === 'notes') {
-        this.removeItem(Items.OOT_SONG_STORMS_PROGRESSIVE_NOTE, 6);
-        this.removeItem(Items.MM_SONG_STORMS_PROGRESSIVE_NOTE, 6);
-      } else {
-        this.replaceItem(Items.OOT_SONG_STORMS,  Items.SHARED_SONG_STORMS);
-        this.replaceItem(Items.MM_SONG_STORMS,   Items.SHARED_SONG_STORMS);
-        this.removeItem(Items.SHARED_SONG_STORMS, 1);
-      }
-    } else if(!settings.sharedSongStorms && settings.songs === 'notes') {
-      this.removeItem(Items.SHARED_SONG_STORMS_PROGRESSIVE_NOTE, 6);
+      this.replaceItem(Items.OOT_SONG_STORMS,  Items.SHARED_SONG_STORMS);
+      this.replaceItem(Items.MM_SONG_STORMS,   Items.SHARED_SONG_STORMS);
+      this.removeItem(Items.SHARED_SONG_STORMS, 1);
     }
 
     if (settings.sharedSongTime) {
-      if (settings.songs === 'notes') {
-        this.removeItem(Items.OOT_SONG_TIME_PROGRESSIVE_NOTE, 6);
-        this.removeItem(Items.MM_SONG_TIME_PROGRESSIVE_NOTE, 6);
-      } else {
-        this.replaceItem(Items.OOT_SONG_TIME,    Items.SHARED_SONG_TIME);
-        this.replaceItem(Items.MM_SONG_TIME,     Items.SHARED_SONG_TIME);
-        this.removeItem(Items.SHARED_SONG_TIME, 1);
-      }
-    } else if(!settings.sharedSongTime && settings.songs === 'notes') {
-      this.removeItem(Items.SHARED_SONG_TIME_PROGRESSIVE_NOTE, 6);
-    }
-
-    if (settings.songs === 'notes') {
-      if (settings.sharedSongSun) {
-        this.removeItem(Items.OOT_SONG_SUN_PROGRESSIVE_NOTE, 6);
-        this.removeItem(Items.MM_SONG_SUN_PROGRESSIVE_NOTE, 6);
-      } else {
-        this.removeItem(Items.SHARED_SONG_SUN_PROGRESSIVE_NOTE, 6);
-        if (!settings.sunSongMm) {
-          this.removeItem(Items.MM_SONG_SUN_PROGRESSIVE_NOTE, 6);
-        }
-      }
+      this.replaceItem(Items.OOT_SONG_TIME,    Items.SHARED_SONG_TIME);
+      this.replaceItem(Items.MM_SONG_TIME,     Items.SHARED_SONG_TIME);
+      this.removeItem(Items.SHARED_SONG_TIME, 1);
     }
 
     if (settings.sharedSongSun && settings.sunSongMm) {
@@ -852,21 +809,9 @@ export class LogicPassWorldTransform {
     }
 
     if (settings.sharedSongElegy) {
-      if (settings.songs === 'notes') {
-        this.removeItem(Items.MM_SONG_EMPTINESS_PROGRESSIVE_NOTE, 7);
-        this.removeItem(Items.OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE, 7);
-      } else {
-        this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
-      }
-    } else {
-      if (settings.songs === 'notes') {
-        this.removeItem(Items.SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE, 7);
-        if (!settings.elegyOot) {
-          this.removeItem(Items.OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE, 7);
-        }
-      } else if (settings.elegyOot) {
-        this.addItem(Items.OOT_SONG_EMPTINESS);
-      }
+      this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
+    } else if (settings.elegyOot) {
+      this.addItem(Items.OOT_SONG_EMPTINESS);
     }
 
     if (settings.sharedLens) {
@@ -1434,11 +1379,6 @@ export class LogicPassWorldTransform {
       this.addItem(Items.OOT_SWORD, 2);
     }
 
-    if (settings.songs === 'notes') {
-      this.removeItems(ItemGroups.SONGS);
-      ItemGroups.PROGRESSIVE_SONG_NOTE_MAP.forEach(songNotes => this.addItem(songNotes[0], songNotes[1]));
-    }
-
     /* Setup extra traps */
     this.setupExtraTraps();
 
@@ -1577,19 +1517,11 @@ export class LogicPassWorldTransform {
 
     /* Handle MM Lullaby */
     if (settings.progressiveGoronLullaby === 'progressive') {
-      if (settings.songs !== 'notes') {
-        this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
-      } else {
-        this.removeItem(Items.MM_SONG_GORON_PROGRESSIVE_NOTE, 8);
-      }
+      this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
     } else {
-      if (settings.songs === 'notes') {
-        this.removeItem(Items.MM_SONG_GORON_HALF_PROGRESSIVE_NOTE, 8);
-      } else {
-        this.removeItem(Items.MM_SONG_GORON_HALF);
-        for (let i = 0; i < this.state.worlds.length; ++i) {
-          this.state.worlds[i].songLocations.delete('MM Goron Baby');
-        }
+      this.removeItem(Items.MM_SONG_GORON_HALF);
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        this.state.worlds[i].songLocations.delete('MM Goron Baby');
       }
     }
 

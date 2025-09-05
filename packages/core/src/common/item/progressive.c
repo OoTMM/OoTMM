@@ -560,7 +560,7 @@ s16 comboProgressive(s16 gi, int ovflags)
         break;
     case GI_MM_SONG_GORON:
     case GI_MM_SONG_GORON_HALF:
-        if (Config_Flag(CFG_MM_PROGRESSIVE_LULLABY) && !Config_Flag(CFG_IS_NOTE_SHUFFLE))
+        if (Config_Flag(CFG_MM_PROGRESSIVE_LULLABY))
             gi = progressiveSongLullaby();
         break;
     case GI_MM_HOOKSHOT_SHORT:

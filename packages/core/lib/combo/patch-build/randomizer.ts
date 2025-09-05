@@ -41,171 +41,161 @@ const DUNGEON_REWARD_LOCATIONS = [
 ];
 
 const SHARED_ITEMS_OOT = new Map([
-  ['SHARED_SWORD',               'OOT_SWORD_KOKIRI'],
-  ['SHARED_BOW',                 'OOT_BOW'],
-  ['SHARED_BOMB_BAG',            'OOT_BOMB_BAG'],
-  ['SHARED_ARROWS_5',            'OOT_ARROWS_5'],
-  ['SHARED_ARROWS_10',           'OOT_ARROWS_10'],
-  ['SHARED_ARROWS_30',           'OOT_ARROWS_30'],
-  ['SHARED_ARROWS_40',           'MM_ARROWS_40'],  /* OoT lacks 40 pack */
-  ['SHARED_BOMB',                'OOT_BOMB'],
-  ['SHARED_BOMBS_5',             'OOT_BOMBS_5'],
-  ['SHARED_BOMBS_10',            'OOT_BOMBS_10'],
-  ['SHARED_BOMBS_20',            'OOT_BOMBS_20'],
-  ['SHARED_BOMBS_30',            'OOT_BOMBS_30'],
-  ['SHARED_MAGIC_UPGRADE',       'OOT_MAGIC_UPGRADE'],
-  ['SHARED_ARROW_FIRE',          'OOT_ARROW_FIRE'],
-  ['SHARED_ARROW_ICE',           'OOT_ARROW_ICE'],
-  ['SHARED_ARROW_LIGHT',         'OOT_ARROW_LIGHT'],
-  ['SHARED_SONG_TIME',           'OOT_SONG_TIME'],
-  ['SHARED_SONG_EPONA',          'OOT_SONG_EPONA'],
-  ['SHARED_SONG_STORMS',         'OOT_SONG_STORMS'],
-  ['SHARED_SONG_SUN',            'OOT_SONG_SUN'],
-  ['SHARED_NUT',                 'MM_NUT'],  /* OoT lacks single nut */
-  ['SHARED_NUTS_5',              'OOT_NUTS_5'],
-  ['SHARED_NUTS_10',             'OOT_NUTS_10'],
-  ['SHARED_STICK',               'OOT_STICK'],
-  ['SHARED_STICKS_5',            'OOT_STICKS_5'],
-  ['SHARED_STICKS_10',           'OOT_STICKS_10'],
-  ['SHARED_HOOKSHOT',            'OOT_HOOKSHOT'],
-  ['SHARED_LENS',                'OOT_LENS'],
-  ['SHARED_OCARINA',             'OOT_OCARINA'],
-  ['SHARED_MASK_KEATON',         'OOT_MASK_KEATON'],
-  ['SHARED_MASK_BUNNY',          'OOT_MASK_BUNNY'],
-  ['SHARED_MASK_TRUTH',          'OOT_MASK_TRUTH'],
-  ['SHARED_MASK_GORON',          'OOT_MASK_GORON'],
-  ['SHARED_MASK_ZORA',           'OOT_MASK_ZORA'],
-  ['SHARED_WALLET',              'OOT_WALLET'],
-  ['SHARED_RUPEE_GREEN',         'OOT_RUPEE_GREEN'],
-  ['SHARED_RUPEE_BLUE',          'OOT_RUPEE_BLUE'],
-  ['SHARED_RUPEE_RED',           'OOT_RUPEE_RED'],
-  ['SHARED_RUPEE_PURPLE',        'OOT_RUPEE_PURPLE'],
-  ['SHARED_RUPEE_SILVER',        'MM_RUPEE_SILVER'], /* OoT lacks silver rupee */
-  ['SHARED_RUPEE_GOLD',          'OOT_RUPEE_HUGE'],  /* Equivalent */
-  ['SHARED_RUPEE_RAINBOW',       'OOT_RUPEE_RAINBOW'],
-  ['SHARED_HEART_PIECE',         'OOT_HEART_PIECE'],
-  ['SHARED_HEART_CONTAINER',     'OOT_HEART_CONTAINER'],
-  ['SHARED_RECOVERY_HEART',      'OOT_RECOVERY_HEART'],
-  ['SHARED_DEFENSE_UPGRADE',     'OOT_DEFENSE_UPGRADE'],
-  ['SHARED_SHIELD_DEKU',         'OOT_SHIELD_DEKU'],
-  ['SHARED_SHIELD_HYLIAN',       'OOT_SHIELD_HYLIAN'],
-  ['SHARED_SHIELD_MIRROR',       'OOT_SHIELD_MIRROR'],
-  ['SHARED_SHIELD',              'OOT_SHIELD'],
-  ['SHARED_MAGIC_JAR_SMALL',     'OOT_MAGIC_JAR_SMALL'],
-  ['SHARED_MAGIC_JAR_LARGE',     'OOT_MAGIC_JAR_LARGE'],
-  ['SHARED_BOMBCHU',             'MM_BOMBCHU'],  /* OoT lacks single bombchu */
-  ['SHARED_BOMBCHU_5',           'OOT_BOMBCHU_5'],
-  ['SHARED_BOMBCHU_10',          'OOT_BOMBCHU_10'],
-  ['SHARED_BOMBCHU_20',          'OOT_BOMBCHU_20'],
-  ['SHARED_FAIRY_BIG',           'OOT_FAIRY_BIG'],
-  ['SHARED_SPELL_FIRE',          'OOT_SPELL_FIRE'],
-  ['SHARED_SPELL_WIND',          'OOT_SPELL_WIND'],
-  ['SHARED_SPELL_LOVE',          'OOT_SPELL_LOVE'],
-  ['SHARED_BOOTS_IRON',          'OOT_BOOTS_IRON'],
-  ['SHARED_BOOTS_HOVER',         'OOT_BOOTS_HOVER'],
-  ['SHARED_TUNIC_GORON',         'OOT_TUNIC_GORON'],
-  ['SHARED_TUNIC_ZORA',          'OOT_TUNIC_ZORA'],
-  ['SHARED_MASK_BLAST',          'OOT_MASK_BLAST'],
-  ['SHARED_MASK_STONE',          'OOT_MASK_STONE'],
-  ['SHARED_SCALE',               'OOT_SCALE'],
-  ['SHARED_STRENGTH',            'OOT_STRENGTH'],
-  ['SHARED_TRAP_RUPOOR',         'OOT_TRAP_RUPOOR'],
-  ['SHARED_SONG_EMPTINESS',      'OOT_SONG_EMPTINESS'],
-  ['SHARED_HAMMER',              'OOT_HAMMER'],
-  ['SHARED_STICK_UPGRADE',       'OOT_STICK_UPGRADE'],
-  ['SHARED_NUT_UPGRADE',         'OOT_NUT_UPGRADE'],
-  ['SHARED_STONE_OF_AGONY',      'OOT_STONE_OF_AGONY'],
-  ['SHARED_SPIN_UPGRADE',        'OOT_SPIN_UPGRADE'],
-  ['SHARED_BOMBCHU_BAG',         'OOT_BOMBCHU_BAG'],
-  ['SHARED_SONG_EPONA_PROGRESSIVE_NOTE',   'OOT_SONG_EPONA_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_STORMS_PROGRESSIVE_NOTE',     'OOT_SONG_STORMS_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_SUN_PROGRESSIVE_NOTE',  'OOT_SONG_SUN_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_TIME_PROGRESSIVE_NOTE', 'OOT_SONG_TIME_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE', 'MM_SONG_EMPTINESS_PROGRESSIVE_NOTE'],
+  ['SHARED_SWORD',            'OOT_SWORD_KOKIRI'],
+  ['SHARED_BOW',              'OOT_BOW'],
+  ['SHARED_BOMB_BAG',         'OOT_BOMB_BAG'],
+  ['SHARED_ARROWS_5',         'OOT_ARROWS_5'],
+  ['SHARED_ARROWS_10',        'OOT_ARROWS_10'],
+  ['SHARED_ARROWS_30',        'OOT_ARROWS_30'],
+  ['SHARED_ARROWS_40',        'MM_ARROWS_40'], /* OoT lacks 40 pack */
+  ['SHARED_BOMB',             'OOT_BOMB'],
+  ['SHARED_BOMBS_5',          'OOT_BOMBS_5'],
+  ['SHARED_BOMBS_10',         'OOT_BOMBS_10'],
+  ['SHARED_BOMBS_20',         'OOT_BOMBS_20'],
+  ['SHARED_BOMBS_30',         'OOT_BOMBS_30'],
+  ['SHARED_MAGIC_UPGRADE',    'OOT_MAGIC_UPGRADE'],
+  ['SHARED_ARROW_FIRE',       'OOT_ARROW_FIRE'],
+  ['SHARED_ARROW_ICE',        'OOT_ARROW_ICE'],
+  ['SHARED_ARROW_LIGHT',      'OOT_ARROW_LIGHT'],
+  ['SHARED_SONG_TIME',        'OOT_SONG_TIME'],
+  ['SHARED_SONG_EPONA',       'OOT_SONG_EPONA'],
+  ['SHARED_SONG_STORMS',      'OOT_SONG_STORMS'],
+  ['SHARED_SONG_SUN',         'OOT_SONG_SUN'],
+  ['SHARED_NUT',              'MM_NUT'] /* OoT lacks single nut */,
+  ['SHARED_NUTS_5',           'OOT_NUTS_5'],
+  ['SHARED_NUTS_10',          'OOT_NUTS_10'],
+  ['SHARED_STICK',            'OOT_STICK'],
+  ['SHARED_STICKS_5',         'OOT_STICKS_5'],
+  ['SHARED_STICKS_10',        'OOT_STICKS_10'],
+  ['SHARED_HOOKSHOT',         'OOT_HOOKSHOT'],
+  ['SHARED_LENS',             'OOT_LENS'],
+  ['SHARED_OCARINA',          'OOT_OCARINA'],
+  ['SHARED_MASK_KEATON',      'OOT_MASK_KEATON'],
+  ['SHARED_MASK_BUNNY',       'OOT_MASK_BUNNY'],
+  ['SHARED_MASK_TRUTH',       'OOT_MASK_TRUTH'],
+  ['SHARED_MASK_GORON',       'OOT_MASK_GORON'],
+  ['SHARED_MASK_ZORA',        'OOT_MASK_ZORA'],
+  ['SHARED_WALLET',           'OOT_WALLET'],
+  ['SHARED_RUPEE_GREEN',      'OOT_RUPEE_GREEN'],
+  ['SHARED_RUPEE_BLUE',       'OOT_RUPEE_BLUE'],
+  ['SHARED_RUPEE_RED',        'OOT_RUPEE_RED'],
+  ['SHARED_RUPEE_PURPLE',     'OOT_RUPEE_PURPLE'],
+  ['SHARED_RUPEE_SILVER',     'MM_RUPEE_SILVER'], /* OoT lacks silver rupee */
+  ['SHARED_RUPEE_GOLD',       'OOT_RUPEE_HUGE'], /* Equivalent */
+  ['SHARED_RUPEE_RAINBOW',    'OOT_RUPEE_RAINBOW'],
+  ['SHARED_HEART_PIECE',      'OOT_HEART_PIECE'],
+  ['SHARED_HEART_CONTAINER',  'OOT_HEART_CONTAINER'],
+  ['SHARED_RECOVERY_HEART',   'OOT_RECOVERY_HEART'],
+  ['SHARED_DEFENSE_UPGRADE',  'OOT_DEFENSE_UPGRADE'],
+  ['SHARED_SHIELD_DEKU',      'OOT_SHIELD_DEKU'],
+  ['SHARED_SHIELD_HYLIAN',    'OOT_SHIELD_HYLIAN'],
+  ['SHARED_SHIELD_MIRROR',    'OOT_SHIELD_MIRROR'],
+  ['SHARED_SHIELD',           'OOT_SHIELD'],
+  ['SHARED_MAGIC_JAR_SMALL',  'OOT_MAGIC_JAR_SMALL'],
+  ['SHARED_MAGIC_JAR_LARGE',  'OOT_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU',          'MM_BOMBCHU'], /* OoT lacks single bombchu */
+  ['SHARED_BOMBCHU_5',        'OOT_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10',       'OOT_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20',       'OOT_BOMBCHU_20'],
+  ['SHARED_FAIRY_BIG',        'OOT_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE',       'OOT_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND',       'OOT_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE',       'OOT_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON',       'OOT_BOOTS_IRON'],
+  ['SHARED_BOOTS_HOVER',      'OOT_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON',      'OOT_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
+  ['SHARED_MASK_STONE',       'OOT_MASK_STONE'],
+  ['SHARED_SCALE',            'OOT_SCALE'],
+  ['SHARED_STRENGTH',         'OOT_STRENGTH'],
+  ['SHARED_TRAP_RUPOOR',      'OOT_TRAP_RUPOOR'],
+  ['SHARED_SONG_EMPTINESS',   'OOT_SONG_EMPTINESS'],
+  ['SHARED_HAMMER',           'OOT_HAMMER'],
+  ['SHARED_STICK_UPGRADE',    'OOT_STICK_UPGRADE'],
+  ['SHARED_NUT_UPGRADE',      'OOT_NUT_UPGRADE'],
+  ['SHARED_STONE_OF_AGONY',   'OOT_STONE_OF_AGONY'],
+  ['SHARED_SPIN_UPGRADE',     'OOT_SPIN_UPGRADE'],
+  ['SHARED_BOMBCHU_BAG',      'OOT_BOMBCHU_BAG'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
-  ['SHARED_SWORD',                'MM_SWORD_KOKIRI'],
-  ['SHARED_BOW',                  'MM_BOW'],
-  ['SHARED_BOMB_BAG',             'MM_BOMB_BAG'],
-  ['SHARED_ARROWS_5',             'OOT_ARROWS_5'], /* MM lacks 5 pack */
-  ['SHARED_ARROWS_10',            'MM_ARROWS_10'],
-  ['SHARED_ARROWS_30',            'MM_ARROWS_30'],
-  ['SHARED_ARROWS_40',            'MM_ARROWS_40'],
-  ['SHARED_BOMB',                 'MM_BOMB'],
-  ['SHARED_BOMBS_5',              'MM_BOMBS_5'],
-  ['SHARED_BOMBS_10',             'MM_BOMBS_10'],
-  ['SHARED_BOMBS_20',             'MM_BOMBS_20'],
-  ['SHARED_BOMBS_30',             'MM_BOMBS_30'],
-  ['SHARED_MAGIC_UPGRADE',        'MM_MAGIC_UPGRADE'],
-  ['SHARED_ARROW_FIRE',           'MM_ARROW_FIRE'],
-  ['SHARED_ARROW_ICE',            'MM_ARROW_ICE'],
-  ['SHARED_ARROW_LIGHT',          'MM_ARROW_LIGHT'],
-  ['SHARED_SONG_TIME',            'MM_SONG_TIME'],
-  ['SHARED_SONG_EPONA',           'MM_SONG_EPONA'],
-  ['SHARED_SONG_STORMS',          'MM_SONG_STORMS'],
-  ['SHARED_SONG_SUN',             'MM_SONG_SUN'],
-  ['SHARED_NUT',                  'MM_NUT'],
-  ['SHARED_NUTS_5',               'MM_NUTS_5'],
-  ['SHARED_NUTS_10',              'MM_NUTS_10'],
-  ['SHARED_STICK',                'MM_STICK'],
-  ['SHARED_STICKS_5',             'OOT_STICKS_5'],  /* MM lacks 5 pack */
-  ['SHARED_STICKS_10',            'OOT_STICKS_10'], /* MM lacks 10 pack */
-  ['SHARED_HOOKSHOT',             'MM_HOOKSHOT'],
-  ['SHARED_LENS',                 'MM_LENS'],
-  ['SHARED_OCARINA',              'OOT_OCARINA'], /* Progressive */
-  ['SHARED_MASK_KEATON',          'MM_MASK_KEATON'],
-  ['SHARED_MASK_BUNNY',           'MM_MASK_BUNNY'],
-  ['SHARED_MASK_TRUTH',           'MM_MASK_TRUTH'],
-  ['SHARED_MASK_GORON',           'MM_MASK_GORON'],
-  ['SHARED_MASK_ZORA',            'MM_MASK_ZORA'],
-  ['SHARED_WALLET',               'MM_WALLET'],
-  ['SHARED_RUPEE_GREEN',          'MM_RUPEE_GREEN'],
-  ['SHARED_RUPEE_BLUE',           'MM_RUPEE_BLUE'],
-  ['SHARED_RUPEE_RED',            'MM_RUPEE_RED'],
-  ['SHARED_RUPEE_PURPLE',         'MM_RUPEE_PURPLE'],
-  ['SHARED_RUPEE_SILVER',         'MM_RUPEE_SILVER'],
-  ['SHARED_RUPEE_GOLD',           'MM_RUPEE_GOLD'],
-  ['SHARED_RUPEE_RAINBOW',        'OOT_RUPEE_RAINBOW'], /* No MM equivalent */
-  ['SHARED_HEART_PIECE',          'MM_HEART_PIECE'],
-  ['SHARED_HEART_CONTAINER',      'MM_HEART_CONTAINER'],
-  ['SHARED_RECOVERY_HEART',       'MM_RECOVERY_HEART'],
-  ['SHARED_DEFENSE_UPGRADE',      'MM_DEFENSE_UPGRADE'],
-  ['SHARED_SHIELD_DEKU',          'MM_SHIELD_DEKU'],
-  ['SHARED_SHIELD_HYLIAN',        'MM_SHIELD_HERO'],
-  ['SHARED_SHIELD_MIRROR',        'MM_SHIELD_MIRROR'],
-  ['SHARED_SHIELD',               'MM_SHIELD'], /* Progressive */
-  ['SHARED_MAGIC_JAR_SMALL',      'MM_MAGIC_JAR_SMALL'],
-  ['SHARED_MAGIC_JAR_LARGE',      'MM_MAGIC_JAR_LARGE'],
-  ['SHARED_BOMBCHU',              'MM_BOMBCHU'],
-  ['SHARED_BOMBCHU_5',            'MM_BOMBCHU_5'],
-  ['SHARED_BOMBCHU_10',           'MM_BOMBCHU_10'],
-  ['SHARED_BOMBCHU_20',           'MM_BOMBCHU_20'],
-  ['SHARED_FAIRY_BIG',            'MM_FAIRY_BIG'],
-  ['SHARED_SPELL_FIRE',           'MM_SPELL_FIRE'],
-  ['SHARED_SPELL_WIND',           'MM_SPELL_WIND'],
-  ['SHARED_SPELL_LOVE',           'MM_SPELL_LOVE'],
-  ['SHARED_BOOTS_IRON',           'MM_BOOTS_IRON'],
-  ['SHARED_BOOTS_HOVER',          'MM_BOOTS_HOVER'],
-  ['SHARED_TUNIC_GORON',          'MM_TUNIC_GORON'],
-  ['SHARED_TUNIC_ZORA',           'MM_TUNIC_ZORA'],
-  ['SHARED_MASK_BLAST',           'MM_MASK_BLAST'],
-  ['SHARED_MASK_STONE',           'MM_MASK_STONE'],
-  ['SHARED_SCALE',                'MM_SCALE'],
-  ['SHARED_STRENGTH',             'MM_STRENGTH'],
-  ['SHARED_TRAP_RUPOOR',          'MM_TRAP_RUPOOR'],
-  ['SHARED_SONG_EMPTINESS',       'MM_SONG_EMPTINESS'],
-  ['SHARED_HAMMER',               'MM_HAMMER'],
-  ['SHARED_STICK_UPGRADE',        'MM_STICK_UPGRADE'],
-  ['SHARED_NUT_UPGRADE',          'MM_NUT_UPGRADE'],
-  ['SHARED_STONE_OF_AGONY',       'MM_STONE_OF_AGONY'],
-  ['SHARED_SPIN_UPGRADE',         'MM_SPIN_UPGRADE'],
-  ['SHARED_BOMBCHU_BAG',          'MM_BOMBCHU_BAG'],
-  ['SHARED_SONG_EPONA_PROGRESSIVE_NOTE',   'OOT_SONG_EPONA_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_STORMS_PROGRESSIVE_NOTE',     'OOT_SONG_STORMS_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_SUN_PROGRESSIVE_NOTE',  'OOT_SONG_SUN_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_TIME_PROGRESSIVE_NOTE', 'OOT_SONG_TIME_PROGRESSIVE_NOTE'],
-  ['SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE', 'MM_SONG_EMPTINESS_PROGRESSIVE_NOTE'],
+  ['SHARED_SWORD',            'MM_SWORD_KOKIRI'],
+  ['SHARED_BOW',              'MM_BOW'],
+  ['SHARED_BOMB_BAG',         'MM_BOMB_BAG'],
+  ['SHARED_ARROWS_5',         'OOT_ARROWS_5'], /* MM lacks 5 pack */
+  ['SHARED_ARROWS_10',        'MM_ARROWS_10'],
+  ['SHARED_ARROWS_30',        'MM_ARROWS_30'],
+  ['SHARED_ARROWS_40',        'MM_ARROWS_40'],
+  ['SHARED_BOMB',             'MM_BOMB'],
+  ['SHARED_BOMBS_5',          'MM_BOMBS_5'],
+  ['SHARED_BOMBS_10',         'MM_BOMBS_10'],
+  ['SHARED_BOMBS_20',         'MM_BOMBS_20'],
+  ['SHARED_BOMBS_30',         'MM_BOMBS_30'],
+  ['SHARED_MAGIC_UPGRADE',    'MM_MAGIC_UPGRADE'],
+  ['SHARED_ARROW_FIRE',       'MM_ARROW_FIRE'],
+  ['SHARED_ARROW_ICE',        'MM_ARROW_ICE'],
+  ['SHARED_ARROW_LIGHT',      'MM_ARROW_LIGHT'],
+  ['SHARED_SONG_TIME',        'MM_SONG_TIME'],
+  ['SHARED_SONG_EPONA',       'MM_SONG_EPONA'],
+  ['SHARED_SONG_STORMS',      'MM_SONG_STORMS'],
+  ['SHARED_SONG_SUN',         'MM_SONG_SUN'],
+  ['SHARED_NUT',              'MM_NUT'],
+  ['SHARED_NUTS_5',           'MM_NUTS_5'],
+  ['SHARED_NUTS_10',          'MM_NUTS_10'],
+  ['SHARED_STICK',            'MM_STICK'],
+  ['SHARED_STICKS_5',         'OOT_STICKS_5'],  /* MM lacks 5 pack */
+  ['SHARED_STICKS_10',        'OOT_STICKS_10'], /* MM lacks 10 pack */
+  ['SHARED_HOOKSHOT',         'MM_HOOKSHOT'],
+  ['SHARED_LENS',             'MM_LENS'],
+  ['SHARED_OCARINA',          'OOT_OCARINA'], /* Progressive */
+  ['SHARED_MASK_KEATON',      'MM_MASK_KEATON'],
+  ['SHARED_MASK_BUNNY',       'MM_MASK_BUNNY'],
+  ['SHARED_MASK_TRUTH',       'MM_MASK_TRUTH'],
+  ['SHARED_MASK_GORON',       'MM_MASK_GORON'],
+  ['SHARED_MASK_ZORA',        'MM_MASK_ZORA'],
+  ['SHARED_WALLET',           'MM_WALLET'],
+  ['SHARED_RUPEE_GREEN',      'MM_RUPEE_GREEN'],
+  ['SHARED_RUPEE_BLUE',       'MM_RUPEE_BLUE'],
+  ['SHARED_RUPEE_RED',        'MM_RUPEE_RED'],
+  ['SHARED_RUPEE_PURPLE',     'MM_RUPEE_PURPLE'],
+  ['SHARED_RUPEE_SILVER',     'MM_RUPEE_SILVER'],
+  ['SHARED_RUPEE_GOLD',       'MM_RUPEE_GOLD'],
+  ['SHARED_RUPEE_RAINBOW',    'OOT_RUPEE_RAINBOW'], /* No MM equivalent */
+  ['SHARED_HEART_PIECE',      'MM_HEART_PIECE'],
+  ['SHARED_HEART_CONTAINER',  'MM_HEART_CONTAINER'],
+  ['SHARED_RECOVERY_HEART',   'MM_RECOVERY_HEART'],
+  ['SHARED_DEFENSE_UPGRADE',  'MM_DEFENSE_UPGRADE'],
+  ['SHARED_SHIELD_DEKU',      'MM_SHIELD_DEKU'],
+  ['SHARED_SHIELD_HYLIAN',    'MM_SHIELD_HERO'],
+  ['SHARED_SHIELD_MIRROR',    'MM_SHIELD_MIRROR'],
+  ['SHARED_SHIELD',           'MM_SHIELD'], /* Progressive */
+  ['SHARED_MAGIC_JAR_SMALL',  'MM_MAGIC_JAR_SMALL'],
+  ['SHARED_MAGIC_JAR_LARGE',  'MM_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU',          'MM_BOMBCHU'],
+  ['SHARED_BOMBCHU_5',        'MM_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10',       'MM_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20',       'MM_BOMBCHU_20'],
+  ['SHARED_FAIRY_BIG',        'MM_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE',       'MM_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND',       'MM_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE',       'MM_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON',       'MM_BOOTS_IRON'],
+  ['SHARED_BOOTS_HOVER',      'MM_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON',      'MM_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
+  ['SHARED_MASK_STONE',       'MM_MASK_STONE'],
+  ['SHARED_SCALE',            'MM_SCALE'],
+  ['SHARED_STRENGTH',         'MM_STRENGTH'],
+  ['SHARED_TRAP_RUPOOR',      'MM_TRAP_RUPOOR'],
+  ['SHARED_SONG_EMPTINESS',   'MM_SONG_EMPTINESS'],
+  ['SHARED_HAMMER',           'MM_HAMMER'],
+  ['SHARED_STICK_UPGRADE',    'MM_STICK_UPGRADE'],
+  ['SHARED_NUT_UPGRADE',      'MM_NUT_UPGRADE'],
+  ['SHARED_STONE_OF_AGONY',   'MM_STONE_OF_AGONY'],
+  ['SHARED_SPIN_UPGRADE',     'MM_SPIN_UPGRADE'],
+  ['SHARED_BOMBCHU_BAG',      'MM_BOMBCHU_BAG'],
 ]);
 
 const SHARED_ITEMS = {
@@ -218,13 +208,13 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SWORD_GORON: "OOT_SWORD_KNIFE",
   OOT_OCARINA: "OOT_OCARINA_FAIRY",
   OOT_STRENGTH: "OOT_GORON_BRACELET",
-  OOT_SCALE: "OOT_SCALE_BRONZE",
+  OOT_SCALE: "OOT_SCALE_SILVER",
   OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
   //OOT_TRAP_ICE: "OOT_RUPEE_BLUE",
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_DEKU",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
-  MM_SCALE: "MM_SCALE_BRONZE",
+  MM_SCALE: "MM_SCALE_SILVER",
   MM_STRENGTH: "MM_GORON_BRACELET",
   MM_CLOCK: "MM_CLOCK1",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
@@ -437,7 +427,6 @@ function checkKey(check: WorldCheck): number {
   case 'butterfly':
   case 'redboulder':
   case 'icicle':
-  case 'redice':
     /* xflag */
     typeId = 0x10 + ((id >> 16) & 0xf);
     break;
@@ -463,7 +452,6 @@ function checkKey(check: WorldCheck): number {
   case 'butterfly':
   case 'redboulder':
   case 'icicle':
-  case 'redice':
     sceneId = (SCENES as any)[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
@@ -482,9 +470,9 @@ function checkKey(check: WorldCheck): number {
   return key;
 }
 
-async function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): Promise<number> {
+function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): number {
   const random = new Random();
-  await random.seed(key.toString(16) + '\x00' + seed);
+  random.seed(key.toString(16) + '\x00' + seed);
 
   for (;;) {
     const locs = [...logic.items.keys()];
@@ -493,13 +481,13 @@ async function makeCloakGi(key: number, seed: string, settings: Settings, logic:
 
     if (!ItemHelpers.isItemMajor(item.item) && !ItemHelpers.isSilverRupee(item.item) && !ItemHelpers.isKey(item.item) && !ItemHelpers.isBossKey(item.item)) continue;
     if (ItemGroups.JUNK.has(item.item)) continue;
-    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, logic.plandoLocations, loc, { songs: true, noPlando: true })) continue;
+    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, loc, { songs: true, noPlando: true })) continue;
 
     return gi(settings, 'oot', item.item, false);
   }
 }
 
-const gameChecks = async (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Promise<Uint8Array> => {
+const gameChecks = (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Uint8Array => {
   const buffers: Uint8Array[] = [];
   const world = logic.worlds[worldId];
   for (const locId in world.checks) {
@@ -523,7 +511,7 @@ const gameChecks = async (worldId: number, opts: Options, settings: Settings, ga
     bufWriteU16BE(b, 6, itemGi);
     let cloakGi = 0;
     if (item.item === Items.OOT_TRAP_ICE && settings.cloakIceTraps) {
-      cloakGi = await makeCloakGi(key, opts.seed, settings, logic);
+      cloakGi = makeCloakGi(key, opts.seed, settings, logic);
     }
     bufWriteU16BE(b, 8, cloakGi);
     buffers.push(b);
@@ -863,13 +851,9 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_MAGIC_ARROW_ICE: settings.sharedMagicArrowIce,
     SHARED_MAGIC_ARROW_LIGHT: settings.sharedMagicArrowLight,
     SHARED_SONG_EPONA: settings.sharedSongEpona,
-    SHARED_SONG_EPONA_PROGRESSIVE_NOTE: settings.sharedSongEpona,
     SHARED_SONG_STORMS: settings.sharedSongStorms,
-    SHARED_SONG_STORMS_PROGRESSIVE_NOTE: settings.sharedSongStorms,
     SHARED_SONG_TIME: settings.sharedSongTime,
-    SHARED_SONG_TIME_PROGRESSIVE_NOTE: settings.sharedSongTime,
     SHARED_SONG_SUN: settings.sharedSongSun,
-    SHARED_SONG_SUN_PROGRESSIVE_NOTE: settings.sharedSongSun,
     SHARED_NUTS_STICKS: settings.sharedNutsSticks,
     SHARED_HOOKSHOT: settings.sharedHookshot,
     SHARED_LENS: settings.sharedLens,
@@ -902,9 +886,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_OCARINA_FAIRY: settings.fairyOcarinaMm,
     MM_HOOKSHOT_SHORT: settings.shortHookshotMm,
     MM_SONG_SUN: settings.sunSongMm,
-    MM_SONG_SUN_PROGRESSIVE_NOTE: settings.sunSongMm,
     OOT_SKIP_ZELDA: settings.skipZelda,
-    OOT_ADULT_KAKARIKO_GATE: settings.kakarikoGate === 'closed',
     OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
     OOT_LACS_CUSTOM: settings.lacs === 'custom',
     OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',
@@ -920,9 +902,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_ADULT_WELL: world.resolvedFlags.openDungeonsOot.has('wellAdult'),
     COLOSSAL_WALLET: settings.colossalWallets,
     BOTTOMLESS_WALLET: settings.bottomlessWallets,
-    OOT_AGELESS_STICKS: settings.agelessSticks,
-    OOT_AGELESS_BOW: settings.agelessBow,
-    OOT_AGELESS_SLINGSHOT: settings.agelessSlingshot,
     OOT_AGELESS_BOOTS: settings.agelessBoots,
     OOT_AGELESS_STRENGTH: settings.agelessStrength,
     OOT_AGELESS_SWORDS: settings.agelessSwords,
@@ -1004,9 +983,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_MASK_STONE: settings.stoneMaskOot,
     SHARED_MASK_STONE: settings.sharedMaskStone,
     OOT_SONG_EMPTINESS: settings.elegyOot,
-    OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE: settings.elegyOot,
     SHARED_SONG_EMPTINESS: settings.sharedSongElegy,
-    SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE: settings.sharedSongElegy,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
     MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',
@@ -1032,7 +1009,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_TIME_TRAVEL_REQUIRES_MS: settings.timeTravelSword,
     OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
     MM_DEKU_SHIELD: settings.dekuShieldMm,
-    BRONZE_SCALE: settings.bronzeScale,
     ONLY_OOT: settings.games === 'oot',
     ONLY_MM: settings.games === 'mm',
     OOT_PLANTED_BEANS: settings.ootPreplantedBeans,
@@ -1066,8 +1042,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     REGION_STATE_DUNGEONS: settings.regionState === 'dungeonBeaten',
     REGION_STATE_REWARDS: settings.regionState === 'reward',
     REGION_STATE_FREE: settings.regionState === 'free',
-    IS_NOTE_SHUFFLE: settings.songs === 'notes',
-    MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock
   };
 
   for (const v in exprs) {
@@ -1228,11 +1202,11 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
   return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
-export async function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
+export function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
   patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(worldId, logic), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(worldId, logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0500000, data: await gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0400000, data: gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0500000, data: gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
   patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(settings, 'oot', logic.hints[worldId]), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(settings, 'mm', logic.hints[worldId]), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(worldId, 'oot', logic), compressed: true });
