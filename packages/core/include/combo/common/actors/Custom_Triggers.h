@@ -22,8 +22,15 @@ typedef struct
 }
 Actor_CustomTriggers;
 
+typedef struct {
+    int* array;
+    size_t size;
+    size_t capacity;
+} TriggerArray;
+
 extern Actor_CustomTriggers* gActorCustomTriggers;
 extern ComboTriggersData gComboTriggersData;
+extern TriggerArray gCustomTriggers;
 
 typedef struct PlayState PlayState;
 typedef struct ComboItemQuery ComboItemQuery;
@@ -34,5 +41,6 @@ int CustomTriggers_GiveItem(Actor_CustomTriggers* this, PlayState* play, const C
 int CustomTriggers_GiveItemNpc(Actor_CustomTriggers* this, PlayState* play, s16 gi, int npc);
 int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, PlayState* play, s16 gi);
 int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, PlayState* play);
+void CustomTriggers_AddTrigger(TriggerArray* triggers, int value);
 
 #endif

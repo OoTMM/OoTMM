@@ -241,6 +241,9 @@ export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<
     if (ItemHelpers.isSong(item.item) && settings.songs !== 'anywhere') {
       return false;
     }
+    if (ItemHelpers.isSongNote(item.item) && settings.songs !== 'notes') {
+      return false;
+    }
   }
 
   /* Rewards */

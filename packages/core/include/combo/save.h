@@ -16,6 +16,7 @@
 # include <combo/traps.h>
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
+# include <combo/common/song_notes.h>
 
 typedef struct ALIGNED(16)
 {
@@ -44,6 +45,8 @@ typedef struct ALIGNED(16)
     u8              bombchuBagMm:2;
     u8              mmShieldIsDeku:1;
     u8              mmProgressiveShields:2;
+    u8              pendingIceTraps;
+    SongNotes       songNotes;
     u8              bronzeScaleOot:1;
     u8              bronzeScaleMm:1;
     u8              traps[TRAP_MAX];

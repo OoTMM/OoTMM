@@ -422,6 +422,30 @@ export class ExprHas extends Expr {
   }
 }
 
+export class ExprHasNotes extends Expr {
+  readonly item: Item;
+  readonly note: Item;
+  readonly count: number;
+  private readonly resultFalse: ExprResultFalse;
+
+  constructor(item: Item, progressiveNote: Item, count: number) {
+    const key = `HAS_NOTES(${item.id},${count})`;
+    super(key);
+    this.item = item;
+    this.note = progressiveNote;
+    this.count = count;
+    this.resultFalse = { result: false, depItems: [progressiveNote], depEvents: [] };
+  }
+
+  eval(state: State): ExprResult {
+    if (itemCount(state, this.note) >= this.count) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
+  }
+}
+
 export class ExprRenewable extends Expr {
   readonly item: Item;
   readonly resultFalse: ExprResultFalse;
@@ -720,6 +744,14 @@ export const exprHas = (item: Item, count: number): Expr => {
   }
 
   return exprMemo(new ExprHas(item, count));
+};
+
+export const exprHasNotes = (song: Item, progressiveNote: Item, count: number): Expr => {
+  if (count <= 0) {
+    return EXPR_TRUE;
+  }
+
+  return exprMemo(new ExprHasNotes(song, progressiveNote, count));
 };
 
 export const exprRenewable = (item: Item): Expr => {
