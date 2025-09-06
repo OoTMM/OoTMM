@@ -1497,7 +1497,7 @@ static int addItemTrap(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     switch (param) {
-        case 0:
+        case QUEST_OOT_SONG_TP_FOREST_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTpForest++;
             if (gOotSave.info.inventory.quest.songTpForest != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTpForest >= 6) {
@@ -1507,7 +1507,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTpForest;
 
-        case 1:
+        case QUEST_OOT_SONG_TP_FIRE_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTpFire++;
             if (gOotSave.info.inventory.quest.songTpFire != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTpFire >= 8) {
@@ -1517,7 +1517,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTpFire;
 
-        case 2:
+        case QUEST_OOT_SONG_TP_WATER_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTpWater++;
             if (gOotSave.info.inventory.quest.songTpWater != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTpWater >= 5) {
@@ -1527,7 +1527,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTpWater;
 
-        case 3:
+        case QUEST_OOT_SONG_TP_SHADOW_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTpShadow++;
             if (gOotSave.info.inventory.quest.songTpShadow != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTpShadow >= 7) {
@@ -1537,7 +1537,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTpShadow;
 
-        case 4:
+        case QUEST_OOT_SONG_TP_SPIRIT_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTpSpirit++;
             if (gOotSave.info.inventory.quest.songTpSpirit != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTpSpirit >= 6) {
@@ -1547,7 +1547,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTpSpirit;
 
-        case 5:
+        case QUEST_OOT_SONG_TP_LIGHT_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTpLight++;
             if (gOotSave.info.inventory.quest.songTpLight != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTpLight >= 6) {
@@ -1557,7 +1557,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTpLight;
 
-        case 6:
+        case QUEST_OOT_SONG_ZELDA_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songZelda++;
             if (gOotSave.info.inventory.quest.songZelda != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songZelda >= 6) {
@@ -1567,7 +1567,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songZelda;
 
-        case 7:
+        case QUEST_OOT_SONG_EPONA_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songEpona++;
             if (gOotSave.info.inventory.quest.songEpona != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songEpona >= 6) {
@@ -1577,7 +1577,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songEpona;
 
-        case 8:
+        case QUEST_OOT_SONG_SARIA_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songSaria++;
             if (gOotSave.info.inventory.quest.songSaria != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songSaria >= 6) {
@@ -1587,7 +1587,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songSaria;
 
-        case 9:
+        case QUEST_OOT_SONG_SUN_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songSun++;
             if (gOotSave.info.inventory.quest.songSun != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songSun >= 6) {
@@ -1597,7 +1597,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songSun;
 
-        case 10:
+        case QUEST_OOT_SONG_TIME_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songTime++;
             if (gOotSave.info.inventory.quest.songTime != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songTime >= 6) {
@@ -1608,7 +1608,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songTime;
 
-        case 11:
+        case QUEST_OOT_SONG_STORMS_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songStorms++;
             if (gOotSave.info.inventory.quest.songStorms != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songStorms >= 6) {
@@ -1618,7 +1618,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.ootSongNotes.songStorms;
 
-        case 12:
+        case QUEST_OOT_SONG_EMPTY_NOTE:
             gSharedCustomSave.songNotes.ootSongNotes.songEmpty++;
             if (gSharedCustomSave.oot.hasElegy != 1
                 && gSharedCustomSave.songNotes.ootSongNotes.songEmpty >= 7) {
@@ -1634,7 +1634,7 @@ static int addItemOotSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     switch (param) {
-        case 0:
+        case QUEST_MM_SONG_AWAKENING_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songAwakening++;
             if (gMmSave.info.inventory.quest.songAwakening != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songAwakening >= 6) {
@@ -1644,7 +1644,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songAwakening;
 
-        case 1:
+        case QUEST_MM_SONG_EMPTY_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songEmpty++;
             if (gMmSave.info.inventory.quest.songEmpty != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songEmpty >= 7) {
@@ -1654,7 +1654,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songEmpty;
 
-        case 2:
+        case QUEST_MM_SONG_GORON_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songGoron++;
             if (gMmSave.info.inventory.quest.songLullaby != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songGoron >= 8) {
@@ -1664,7 +1664,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songGoron;
 
-        case 3:
+        case QUEST_MM_SONG_GORON_HALF_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf++;
 
             if (gMmSave.info.inventory.quest.songLullabyIntro != 1
@@ -1683,7 +1683,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songGoronHalf;
 
-        case 4:
+        case QUEST_MM_SONG_EPONA_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songEpona++;
             if (gMmSave.info.inventory.quest.songEpona != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songEpona >= 6) {
@@ -1693,7 +1693,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songEpona;
 
-        case 5:
+        case QUEST_MM_SONG_ZORA_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songZora++;
             if (gMmSave.info.inventory.quest.songNewWave != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songZora >= 7) {
@@ -1703,7 +1703,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songZora;
 
-        case 6:
+        case QUEST_MM_SONG_HEALING_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songHealing++;
             if (gMmSave.info.inventory.quest.songHealing != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songHealing >= 6) {
@@ -1713,7 +1713,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songHealing;
 
-        case 7:
+        case QUEST_MM_SONG_ORDER_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songOrder++;
             if (gMmSave.info.inventory.quest.songOrder != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songOrder >= 6) {
@@ -1723,7 +1723,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songOrder;
 
-        case 8:
+        case QUEST_MM_SONG_TIME_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songTime++;
             if (gMmSave.info.inventory.quest.songTime != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songTime >= 6) {
@@ -1733,7 +1733,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songTime;
 
-        case 9:
+        case QUEST_MM_SONG_SOARING_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songSoaring++;
             if (gMmSave.info.inventory.quest.songSoaring != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songSoaring >= 6) {
@@ -1743,7 +1743,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songSoaring;
 
-        case 10:
+        case QUEST_MM_SONG_STORMS_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songStorms++;
             if (gMmSave.info.inventory.quest.songStorms != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songStorms >= 6) {
@@ -1753,7 +1753,7 @@ static int addItemMmSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
             }
             return gSharedCustomSave.songNotes.MmSongNotes.songStorms;
 
-        case 11:
+        case QUEST_MM_SONG_SUN_NOTE:
             gSharedCustomSave.songNotes.MmSongNotes.songSun++;
             if (gMmSave.info.inventory.quest.songSun != 1
                 && gSharedCustomSave.songNotes.MmSongNotes.songSun >= 6) {
