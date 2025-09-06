@@ -214,6 +214,7 @@ export const SETTINGS = [{
   values: [
     { value: 'songLocations', name: 'Song Locations', description: 'Only locations that contain songs in the vanilla games will have songs.' },
     { value: 'anywhere', name: 'Anywhere', description: 'Songs can be placed anywhere.' },
+    { value: 'notes', name: 'Shuffle Notes', description: 'Song Notes are shuffled and must be found to unlock song.'},
   ],
   default: 'songLocations'
 }, {

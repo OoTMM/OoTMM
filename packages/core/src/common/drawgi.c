@@ -87,40 +87,6 @@ void DrawGi_Xlu0(PlayState* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
-{
-    static const u32 kColors[] = {
-        0x8000ffff /* Purple */,
-        0x0000ffff /* Blue */,
-        0x00ff00ff /* Green */,
-        0xffff00ff /* Yellow */,
-        0xff8000ff /* Orange */,
-        0xff0000ff /* Red */,
-    };
-
-    const DrawGi* drawGi;
-    float angle;
-    u8 r;
-    u8 g;
-    u8 b;
-    u8 a;
-
-    drawGi = &kDrawGi[drawGiId];
-    angle = M_PI / 16;
-    if (param & 0x80)
-        angle += M_PI;
-    color4(&r, &g, &b, &a, kColors[param & 0xf]);
-
-    Matrix_RotateZ(angle, MTXMODE_APPLY);
-
-    OPEN_DISPS(play->state.gfxCtx);
-    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
-    CLOSE_DISPS();
-}
-
 void DrawGi_CustomHeartContainer(PlayState* play, s16 drawGiId)
 {
     static const u32 colors[] = {
@@ -269,6 +235,7 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
         0xff00ffc0,
         0xff0000c0,
         0x00ff00c0,
+        0x00ffff80,
     };
 
     static const u32 kEnvColors[] = {
@@ -276,6 +243,7 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
         0xff0000c0,
         0xffff00c0,
         0x44ff44c0,
+        0x44ff4480,
     };
 
     u8 r;
@@ -307,6 +275,48 @@ static const u32 kNutStickEnvColors[] = {
     0x505050ff,
     0xaaaa00ff,
 };
+
+void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
+{
+    const DrawGi* drawGi;
+    int isProgressive;
+
+    static const u32 kColors[] = {
+        0x8000ffff /* Purple */,
+        0x0000ffff /* Blue */,
+        0x00ff00ff /* Green */,
+        0xffff00ff /* Yellow */,
+        0xff8000ff /* Orange */,
+        0xff0000ff /* Red */,
+    };
+    drawGi = &kDrawGi[drawGiId];
+    isProgressive = drawGi->lists[1];
+
+    float angle;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    angle = M_PI / 16;
+    if (param & 0x80)
+        angle += M_PI;
+    color4(&r, &g, &b, &a, kColors[param & 0xf]);
+
+    Matrix_RotateZ(angle, MTXMODE_APPLY);
+
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
+
+    if (Config_Flag(CFG_IS_NOTE_SHUFFLE) && isProgressive != 1) {
+        shaderFlameEffect(play, 4, 2.f, 30.f);
+    }
+
+    CLOSE_DISPS();
+}
 
 void DrawGi_CustomStick(PlayState* play, s16 drawGiId)
 {

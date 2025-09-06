@@ -226,18 +226,30 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_SONG_EPONA:
     case GI_MM_SONG_EPONA:
         return !Config_Flag(CFG_SHARED_SONG_EPONA);
+    case GI_OOT_SONG_EPONA_PROGRESSIVE_NOTE:
+        return !Config_Flag(CFG_SHARED_SONG_EPONA_PROGRESSIVE_NOTE);
     case GI_OOT_SONG_STORMS:
     case GI_MM_SONG_STORMS:
         return !Config_Flag(CFG_SHARED_SONG_STORMS);
+    case GI_OOT_SONG_STORMS_PROGRESSIVE_NOTE:
+        return !Config_Flag(CFG_SHARED_SONG_STORMS_PROGRESSIVE_NOTE);
     case GI_OOT_SONG_TIME:
     case GI_MM_SONG_TIME:
         return !Config_Flag(CFG_SHARED_SONG_TIME);
+    case GI_OOT_SONG_TIME_PROGRESSIVE_NOTE:
+        return !Config_Flag(CFG_SHARED_SONG_TIME_PROGRESSIVE_NOTE);
     case GI_OOT_SONG_SUN:
     case GI_MM_SONG_SUN:
+        return !(Config_Flag(CFG_SHARED_SONG_SUN) || !Config_Flag(CFG_MM_SONG_SUN));
+    case GI_OOT_SONG_SUN_PROGRESSIVE_NOTE:
+        return !(Config_Flag(CFG_SHARED_SONG_SUN_PROGRESSIVE_NOTE) || !Config_Flag(CFG_MM_SONG_SUN_PROGRESSIVE_NOTE));
         return !Config_Flag(CFG_SHARED_SONG_SUN) && Config_Flag(CFG_MM_SONG_SUN);
     case GI_OOT_SONG_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
         return !Config_Flag(CFG_SHARED_SONG_EMPTINESS) && Config_Flag(CFG_OOT_SONG_EMPTINESS);
+        return !(Config_Flag(CFG_SHARED_SONG_EMPTINESS) || !Config_Flag(CFG_OOT_SONG_EMPTINESS));
+    case GI_OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE:
+        return !(Config_Flag(CFG_SHARED_SONG_EMPTINESS_PROGRESSIVE_NOTE) || !Config_Flag(CFG_OOT_SONG_EMPTINESS_PROGRESSIVE_NOTE));
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
     case GI_MM_STICK_UPGRADE:
