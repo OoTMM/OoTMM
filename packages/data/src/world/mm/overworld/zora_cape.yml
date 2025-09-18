@@ -7,10 +7,11 @@
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Great Bay Coast": "true"
-    "Zora Cape Water": "can_swim_or_sink"
+    "Zora Cape Peninsula": "(can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))) || (can_use_ice_arrows && has_chateau)"
+    "Zora Cape Water Void": "can_swim_or_sink"
     "Zora Cape Near Hall": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Waterfall Cliffs": "can_hookshot"
-    "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
+    "Great Bay Near Fairy Fountain": "(can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)) || (can_use_ice_arrows && (is_tall || can_hookshot_short))" 
     "Zora Cape Grotto": "can_break_boulders"
     "Zora Cape Pot Game": "soul_zora && is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
   locations:
@@ -29,14 +30,6 @@
     "Zora Cape Pot Game 3": "true"
     "Zora Cape Pot Game 4": "true"
     "Zora Cape Pot Game 5": "true"
-
-"Zora Cape Water":
-  region: ZORA_CAPE
-  exits:
-    "Zora Cape Peninsula": "can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))"
-    "Zora Cape": "underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN)"
-    "Zora Cape Near Hall": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
-    "Zora Cape Water Void": "true"
 
 "Zora Cape Grotto":
   region: ENTRANCE
@@ -73,7 +66,7 @@
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "(has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)) && (can_hookshot || can_swim_or_sink)"
+    "Zora Cape": "(has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)) && (can_swim_or_sink || can_use_ice_arrows)"
     "Great Bay Fairy Fountain": "true"
 
 "Great Bay Fairy Fountain":
@@ -103,18 +96,19 @@
 "Zora Cape Near Hall":
   region: ZORA_CAPE
   exits:
-    "Zora Cape Water": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Zora Hall Entrance": "underwater_walking || can_dive_small"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
+    "Zora Cape": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
 
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
-    "Zora Cape Water": "can_swim_or_sink"
     "Zora Hall": "true"
+    "Zora Cape": "(can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))) || (can_use_ice_arrows && has_chateau)"
     "Great Bay Temple": "turtle_woken && can_hookshot"
     "Owl Zora Cape": "true"
+    "Zora Cape Water Void": "can_swim_or_sink"
 
 "Zora Cape Water Void":
   region: NONE

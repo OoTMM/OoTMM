@@ -35,7 +35,7 @@
   exits:
     "Zora River Front": "true"
     "Zora River Behind Falls": "can_play_zelda || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
-    "Lost Woods": "can_dive_small || hookshot_anywhere"
+    "Zora River Lost Woods Shortcut": "can_dive_small || hookshot_anywhere"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
     "Zora River Boulder Grotto": "has_explosives_or_hammer"
@@ -99,6 +99,21 @@
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
+
+"Zora River Shortcut Underwater":
+  region: ZORA_RIVER
+  age_change: false
+  time: flow
+  exits:
+    "Zora River": "can_swim || (has_iron_boots && hookshot_anywhere)"
+    "Zora River Lost Woods Shortcut": "has_iron_boots"
+
+"Zora River Lost Woods Shortcut":
+  region: ZORA_RIVER
+  age_change: false
+  time: flow
+  exits:
+    "Lost Woods Shortcut Underwater": "true"
 
 "Zora River Behind Falls":
   region: ZORA_RIVER

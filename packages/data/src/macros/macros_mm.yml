@@ -58,7 +58,7 @@
 # Age
 "is_child": "!setting(crossAge) || age(child)"
 "is_adult": "setting(crossAge) && age(adult)"
-"is_tall": "has_mask_zora || is_adult"
+"is_tall": "has_mask_zora || is_adult" #add Fierce Deity or a new macro to include FD
 "is_short": "has(MASK_DEKU) || is_child"
 
 # Spells
