@@ -180,7 +180,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Water Room Door to Room Before Water Room": "true"
-    "MQ Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL)"
+    "MQ Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots) || climb_anywhere || hookshot_anywhere || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL)"
   events:
     MQ_DEKU_WATER_TORCHES: "(is_child && has_shield && can_use_sticks) || (can_use_bow && can_play_elegy) || (can_use_sticks && trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL))"
   locations:
@@ -191,7 +191,7 @@
 "MQ Deku Tree Water Room Back":
   dungeon: DT
   exits:
-    "MQ Deku Tree Water Room Front": "true"
+    "MQ Deku Tree Water Room Front": "can_swim || (is_child && has_shield) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL) || hookshot_anywhere || climb_anywhere"
     "MQ Deku Tree Water Room Door to Room After Water Room": "climb_anywhere || hookshot_anywhere || can_damage" #Need to kill the skultulla blocking the way.
   events:
     MQ_DEKU_WATER_TORCHES: "has_fire"
@@ -276,7 +276,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Basement": "true"
-    "Deku Tree Before Boss": "(can_use_sticks && (is_adult || (is_child && (has_hover_boots || event(DEKU_BLOCK))))) || has_fire"
+    "MQ Deku Tree Pre-Boss Room Water Section": "((can_use_sticks && (is_adult || (is_child && (has_hover_boots || event(DEKU_BLOCK))))) || has_fire) && can_swim_or_sink"
     "MQ Deku Tree MQ Grave Room": "is_child"
   events:
     DEKU_BLOCK: "true"
@@ -287,18 +287,27 @@
     "MQ Deku Tree Grass Basement Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"
+"MQ Deku Tree Pre-Boss Room Water Section":
+  dungeon: DT
+  exits:
+    "MQ Deku Tree Basement Ledge": "can_swim || (has_iron_boots && hookshot_anywhere)"
+    "Deku Tree Before Boss": "can_swim_or_sink"
+  locations:
+    "MQ Deku Tree Heart Before Boss 1": "can_swim_or_sink"
+    "MQ Deku Tree Heart Before Boss 2": "can_swim_or_sink"
+    "MQ Deku Tree Heart Before Boss 3": "can_swim_or_sink"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
-    "MQ Deku Tree Basement Ledge": "true"
-    "Deku Tree Boss": "has_shield_for_scrubs && soul_deku_scrub"
+    "MQ Deku Tree Basement Ledge": "hookshot_anywhere || climb_anywhere"
+    "MQ Deku Tree Pre-Boss Room Water Section": "can_swim_or_sink"
+    "Deku Tree Boss": "event(DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE)"
+  events:
+    DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE: "has_shield_for_scrubs && soul_deku_scrub"
   locations:
     "MQ Deku Tree Grass Room Before Boss 1": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Boss 2": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Boss 3": "can_cut_grass"
-    "MQ Deku Tree Heart Before Boss 1": "true"
-    "MQ Deku Tree Heart Before Boss 2": "true"
-    "MQ Deku Tree Heart Before Boss 3": "true"
 #The below is for later on. Keeping here as a backup.
 #"MQ Deku Tree MQ Compass Room Entrance":
   #dungeon: DT
