@@ -66,7 +66,7 @@
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "(has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)) && (can_hookshot || can_swim_or_sink)"
+    "Zora Cape": "(has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)) && (can_swim_or_sink || can_use_ice_arrows)"
     "Great Bay Fairy Fountain": "true"
 
 "Great Bay Fairy Fountain":
@@ -105,7 +105,7 @@
   region: ZORA_CAPE
   exits:
     "Zora Hall": "true"
-    "Zora Cape Peninsula": "(can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))) || (can_use_ice_arrows && has_chateau)"
+    "Zora Cape": "(can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))) || (can_use_ice_arrows && has_chateau)"
     "Great Bay Temple": "turtle_woken && can_hookshot"
     "Owl Zora Cape": "true"
     "Zora Cape Water Void": "can_swim_or_sink"
