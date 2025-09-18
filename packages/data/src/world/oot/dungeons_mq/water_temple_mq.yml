@@ -1,16 +1,18 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "Lake Hylia Near Water Temple": "true"
-    "Water Temple Entrance": "true"
+    "Lake Hylia Near Water Temple": "can_swim_or_sink"
+    "Water Temple Entrance": "can_swim || (hookshot_anywhere && has_iron_boots)"
+  events:
+    WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION: "can_swim" #This is solely for the fact Water MQ can cause softlocks in its current state. Yes, while it might falsely flag a scale as being required for some checks that might not otherwise need it, it at least makes it playable.
 "Water Temple Entrance":
   dungeon: Water
   exits:
-    "Water Temple": "true"
-    "Water Temple Main Room Top Floor": "event(WATER_LEVEL_HIGH) || has_hover_boots || hookshot_anywhere"
-    "Water Temple Main Room Middle Floor": "event(WATER_LEVEL_MID) || (has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && hookshot_anywhere)"
-    "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || (has_iron_boots && has_tunic_zora)"
-    "Water Temple High Water Level Ledge": "longshot_anywhere"
+    "Water Temple": "can_swim_or_sink"
+    "Water Temple Main Room Top Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_HIGH) || has_hover_boots || hookshot_anywhere)"
+    "Water Temple Main Room Middle Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_MID) || (has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && hookshot_anywhere))"
+    "Water Temple Main Room Bottom Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_LOW) || (has_iron_boots && has_tunic_zora))"
+    "Water Temple High Water Level Ledge": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && longshot_anywhere"
 "Water Temple Main Room Top Floor":
   dungeon: Water
   exits:
