@@ -102,6 +102,7 @@
 
 "Zora River Shortcut Underwater":
   region: ZORA_RIVER
+  age_change: false
   time: flow
   exits:
     "Zora River": "can_swim || (has_iron_boots && hookshot_anywhere)"
