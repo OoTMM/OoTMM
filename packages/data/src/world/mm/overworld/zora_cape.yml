@@ -10,7 +10,7 @@
     "Zora Cape Water": "can_swim_or_sink"
     "Zora Cape Near Hall": "underwater_walking || (can_use_ice_arrows && has_chateau) || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Waterfall Cliffs": "can_hookshot"
-    "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere) || (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))"
+    "Great Bay Near Fairy Fountain": "can_hookshot && ((has_explosives || trick_keg_explosives || short_hook_anywhere) || (can_use_ice_arrows && (is_tall || can_hookshot_short))) 
     "Zora Cape Grotto": "can_break_boulders"
     "Zora Cape Pot Game": "soul_zora && is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
   locations:
