@@ -66,14 +66,14 @@
 "Lost Woods Underwater":
   region: LOST_WOODS
   exits:
-  "Lost Woods Zora River Shortcut": "has_iron_boots"
-  "Lost Woods Rupee Arrow": "is_child && has_iron_boots"
-  "Lost Woods": "can_swim || (has_iron_boots && hookshot_anywhere)"
+    "Lost Woods Zora River Shortcut": "has_iron_boots"
+    "Lost Woods Rupee Arrow": "is_child && has_iron_boots"
+    "Lost Woods": "can_swim || (has_iron_boots && hookshot_anywhere)"
 
 "Lost Woods Zora River Shortcut":
   region: LOST_WOODS
   exits:
-  "Zora River Shortcut Underwater": "true"
+    "Zora River Shortcut Underwater": "true"
 
 "Lost Woods Rupee Arrow":
   region: LOST_WOODS
