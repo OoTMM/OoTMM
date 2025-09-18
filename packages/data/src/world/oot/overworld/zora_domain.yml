@@ -36,13 +36,13 @@
 "Zora Domain Underwater":
   region: ZORA_DOMAIN
   exits:
-    "Zora Domain": "true"
-    "Zora Domain Shortcut": "has_iron_boots"
+    "Zora Domain": "can_swim_or_sink"
+    "Zora Domain Shortcut": "can_swim_or_sink"
 
 "Zora Domain Shortcut":
   region: ZORA_DOMAIN
   exits:
-    "Zora Domain Underwater": "is_adult || can_swim"
+    "Lake Hylia Underwater": "true"
     "Lake Hylia Near Shortcut": "can_swim"
 
 "Zora Domain Back":

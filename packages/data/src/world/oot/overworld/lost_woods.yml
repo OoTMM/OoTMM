@@ -31,7 +31,7 @@
     "Lost Woods Deep": "is_child || can_play_saria || trick_mido || hookshot_anywhere || climb_anywhere"
     "Lost Woods Generic Grotto": "has_explosives_or_hammer"
     "Goron City Shortcut": "true"
-    "Zora River": "can_dive_small || hookshot_anywhere"
+    "Lost Woods Zora River Shortcut": "can_dive_small || hookshot_anywhere"
     "Lost Woods Rupee Arrow": "is_child && (can_dive_small || hookshot_anywhere || can_boomerang)"
     "Lost Woods Lost North": "setting(alterLostWoodsExits)"
     "Lost Woods Lost South": "setting(alterLostWoodsExits)"
@@ -62,6 +62,18 @@
     "Lost Woods Wonder Item 3": "is_child"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
+
+"Lost Woods Underwater":
+region: LOST_WOODS
+exits:
+  "Lost Woods Zora River Shortcut": "has_iron_boots"
+  "Lost Woods Rupee Arrow": "is_child && has_iron_boots"
+  "Lost Woods": "can_swim || (has_iron_boots && hookshot_anywhere)"
+
+"Lost Woods Zora River Shortcut":
+region: LOST_WOODS
+exits:
+  "Zora River Shortcut Underwater": "true"
 
 "Lost Woods Rupee Arrow":
   region: LOST_WOODS
