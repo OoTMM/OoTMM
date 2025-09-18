@@ -110,6 +110,7 @@
 
 "Zora River Lost Woods Shortcut":
   region: ZORA_RIVER
+  age_change: false
   time: flow
   exits:
     "Lost Woods Shortcut Underwater": "true"

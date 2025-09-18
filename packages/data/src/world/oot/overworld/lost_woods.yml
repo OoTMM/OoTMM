@@ -65,6 +65,7 @@
 
 "Lost Woods Shortcut Underwater":
   region: LOST_WOODS
+  age_change: false
   exits:
     "Lost Woods Zora River Shortcut": "has_iron_boots"
     "Lost Woods Rupee Arrow": "is_child && has_iron_boots"
@@ -72,6 +73,7 @@
 
 "Lost Woods Zora River Shortcut":
   region: LOST_WOODS
+  age_change: false
   exits:
     "Zora River Shortcut Underwater": "true"
 
