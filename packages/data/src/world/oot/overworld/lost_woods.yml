@@ -71,8 +71,8 @@ exits:
   "Lost Woods": "can_swim || (has_iron_boots && hookshot_anywhere)"
 
 "Lost Woods Zora River Shortcut":
-region: LOST_WOODS
-exits:
+  region: LOST_WOODS
+  exits:
   "Zora River Shortcut Underwater": "true"
 
 "Lost Woods Rupee Arrow":

@@ -108,9 +108,9 @@
     "Zora River LW Shortcut": "has_iron_boots"
 
 "Zora River Lost Woods Shortcut":
-region: ZORA_RIVER
-time: flow
-exits:
+  region: ZORA_RIVER
+  time: flow
+  exits:
   "Lost Woods Underwater": "true"
 
 "Zora River Behind Falls":
