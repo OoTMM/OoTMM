@@ -93,10 +93,10 @@
     "Zora Domain Underwater": "true"
 
 "Lake Hylia Underwater":
-region: LAKE_HYLIA
-age_change: false
-exits:
-"Lake Hylia": "is_adult || can_swim_or_sink"
+  region: LAKE_HYLIA
+  age_change: false
+  exits:
+    "Lake Hylia": "is_adult || can_swim_or_sink"
 
 "Lake Hylia Near Pond":
   region: LAKE_HYLIA
