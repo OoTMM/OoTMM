@@ -63,7 +63,7 @@
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 
-"Lost Woods Underwater":
+"Lost Woods Shortcut Underwater":
   region: LOST_WOODS
   exits:
     "Lost Woods Zora River Shortcut": "has_iron_boots"
