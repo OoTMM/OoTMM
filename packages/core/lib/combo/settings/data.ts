@@ -1108,9 +1108,9 @@ export const SETTINGS = [{
   values: [
     { value: 'none', name: 'None', description: 'Cannot change age by playing Song of Time.' },
     { value: 'oot', name: 'Ocarina of Time', description: 'Can change age by playing Song of Time with the Ocarina of Time specifically.' },
-    { value: 'always', name: 'Always', description: 'Can always change age by playing Song of Time.' },
+    { value: 'always', name: 'Always', description: 'Can change age by playing Song of Time using any means.' },
   ],
-  description: 'Allows you to switch ages by playing Song of Time if you\'ve been to Temple of Time as both ages.<br>Preserves your current position on the scene, which logic can expect you to take advantage of.',
+  description: 'Allows you to switch ages by playing Song of Time after you\'ve switched ages once in Temple of Time.<br>Preserves your current position on the scene, which logic can expect you to take advantage of.',
   default: 'none',
   cond: hasOoT,
 }, {
@@ -1835,8 +1835,8 @@ export const SETTINGS = [{
   values: [
     { value: 'free', name: 'Vanilla (OoT)', description: 'Bombchu can be used as soon as a pack is obtained. No bombchu drops. Max ammo is 50.' },
     { value: 'bombBag', name: 'Vanilla (MM)', description: 'Bombchu can be used when you have the Bomb Bag. No bombchu drops. Max ammo is the Bomb Bag maximum.' },
-    { value: 'bagFirst', name: 'Bombchu Bag (First Pack)', description: 'The first non-renewable pack you find will turn into a Bombchu Bag, which adds bombchu drops alongside non-randomized ammo drops. Makes Bombchu logical. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag (Separate Items)', description: 'Bombchu Bags separate from bombchu packs are added to the item pool, which add bombchu drops alongside non-randomized ammo drops. Bombchu cannot be used without the Bombchu Bag. Makes Bombchu logical. Max ammo is 20/30/40 each.' },
+    { value: 'bagFirst', name: 'Bombchu Bag (First Pack)', description: 'The first non-purchased pack you find will turn into a Bombchu Bag, which adds bombchu drops alongside non-randomized ammo drops. Bombchu Bags make bombchu logical, replacing Bomb Bags. Max ammo is 50.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag (Separate Items)', description: 'Bombchu Bags separate from bombchu packs are added to the item pool, which add bombchu drops alongside non-randomized ammo drops. Bombchu are only usable with a Bombchu Bag, replacing Bomb Bags in logic. Max ammo is 20/30/40 each.' },
   ],
   description: 'Controls the behavior of bombchu.',
   default: 'free',
@@ -1849,8 +1849,8 @@ export const SETTINGS = [{
   values: [
     { value: 'free', name: 'Vanilla (OoT)', description: 'Bombchu can be used as soon as a pack is obtained. No bombchu drops. Max ammo is 50.' },
     { value: 'bombBag', name: 'Vanilla (MM)', description: 'Bombchu can be used when you have the Bomb Bag. No bombchu drops. Max ammo is the Bomb Bag maximum.' },
-    { value: 'bagFirst', name: 'Bombchu Bag (First Pack)', description: 'The first non-renewable pack you find will turn into a Bombchu Bag, which adds bombchu drops alongside non-randomized ammo drops. Makes Bombchu logical. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag (Separate Items)', description: 'Bombchu Bags separate from bombchu packs are added to the item pool, which add bombchu drops alongside non-randomized ammo drops. Bombchu cannot be used without the Bombchu Bag. Makes Bombchu logical. Max ammo is 20/30/40 each.' },
+    { value: 'bagFirst', name: 'Bombchu Bag (First Pack)', description: 'The first non-purchased pack you find will turn into a Bombchu Bag, which adds bombchu drops alongside non-randomized ammo drops. Bombchu Bags make bombchu logical, replacing Bomb Bags. Max ammo is 50.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag (Separate Items)', description: 'Bombchu Bags separate from bombchu packs are added to the item pool, which add bombchu drops alongside non-randomized ammo drops. Bombchu are only usable with a Bombchu Bag, replacing Bomb Bags in logic. Max ammo is 20/30/40 each.' },
   ],
   description: 'Controls the behavior of bombchu.',
   default: 'bombBag',
