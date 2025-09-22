@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="OoTMM Logo" with="256" height="256" src="https://raw.githubusercontent.com/OoTMM/OoTMM/master/packages/gui/app/assets/logo.png"/>
+  <img alt="OoTMM Logo" with="256" height="256" src="https://raw.githubusercontent.com/OoTMM/OoTMM/master/packages/web/src/assets/logo.png"/>
   <p align="center">The Ocarina of Time/Majora's Mask Combo Randomizer</p>
 </p>
 
