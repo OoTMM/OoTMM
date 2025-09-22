@@ -5,7 +5,7 @@
 
 ![badge-version](https://img.shields.io/github/v/tag/OoTMM/OoTMM?label=version&sort=semver)
 ![badge-license](https://img.shields.io/github/license/OoTMM/OoTMM)
-![badge-build](https://img.shields.io/github/actions/workflow/status/OoTMM/OoTMM/ci.yml?branch=develop)
+![badge-build](https://img.shields.io/github/actions/workflow/status/OoTMM/OoTMM/ci.yml?branch=master)
 ![badge-stars](https://img.shields.io/github/stars/OoTMM/OoTMM)
 ![badge-discord](https://discordapp.com/api/guilds/1004394204992118935/widget.png?style=shield)
 
