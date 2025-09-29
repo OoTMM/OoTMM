@@ -177,7 +177,7 @@
     "Dodongo Cavern Boss": "true"
     "Dodongo Cavern GS Near Boss": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
   locations:
-    "Dodongo Cavern GS Near Boss": "gs && (has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast || can_damage_skull)" ## Blast mask entry will need to be adjusted later when Macros are updated. 
+    "Dodongo Cavern GS Near Boss": "gs && can_damage_skull" ## Blast mask entry will need to be adjusted later when Macros are updated. 
     "Dodongo Cavern Pot Skull 1": "true"
     "Dodongo Cavern Pot Skull 2": "true"
     "Dodongo Cavern Pot Skull 3": "true"
