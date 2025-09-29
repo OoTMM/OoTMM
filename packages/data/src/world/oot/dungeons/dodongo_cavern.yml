@@ -2,13 +2,13 @@
   dungeon: DC
   exits:
     "Death Mountain": "true"
-    "Dodongo Cavern Main": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Main": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated.
 
 "Dodongo Cavern Main":
   dungeon: DC
   exits:
     "Dodongo Cavern": "true"
-    "Dodongo Cavern Right Corridor": "true"
+    "Dodongo Cavern Right Corridor": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
     "Dodongo Cavern Main Ledge": "is_adult || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
     "Dodongo Cavern Pre-Boss Lobby": "event(DC_BOMB_EYES)"
@@ -22,7 +22,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
-    "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (can_use_sword || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (can_use_sword || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated."
     "Dodongo Cavern Miniboss 1": "true"
   locations:
     "Dodongo Cavern GS Scarecrow": "gs && ((is_adult && scarecrow_hookshot) || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
@@ -86,7 +86,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
-    "Dodongo Cavern Compass Room": "true"
+    "Dodongo Cavern Compass Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
     "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din || climb_anywhere || hookshot_anywhere"
 
 "Dodongo Cavern Stairs Top":
@@ -95,7 +95,7 @@
     "Dodongo Cavern Stairs": "true"
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
-    "Dodongo Cavern GS Stairs Vines": "gs"
+    "Dodongo Cavern GS Stairs Vines": "gs && can_damage_skull"
     "Dodongo Cavern GS Stairs Top": "gs && ((can_collect_distance && event(DC_SHORTCUT)) || hookshot_anywhere || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
     "Dodongo Cavern Pot Stairs Pot 1": "true"
     "Dodongo Cavern Pot Stairs Pot 2": "true"
@@ -116,7 +116,7 @@
     "Dodongo Cavern Stairs Top": "true"
     "Dodongo Cavern Bomb Bag Room 2": "can_longshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance || climb_anywhere || hookshot_anywhere"
-    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. "
   locations:
     "Dodongo Cavern Bomb Bag Side Chest": "true"
     "Dodongo Cavern Pot Room Before Miniboss 1": "true"
@@ -168,15 +168,16 @@
     DC_SHORTCUT: "true"
     DC_BOMB_EYES: "has_explosives"
   locations:
-    "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
 
 "Dodongo Cavern Pre-Boss Lobby":
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Boss": "true"
+    "Dodongo Cavern GS Near Boss": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
   locations:
-    "Dodongo Cavern GS Near Boss": "gs"
+    "Dodongo Cavern GS Near Boss": "gs && (has_explosives_or_hammer || has_blue_fire_arrows_mudwall ||  has_mask_blast || can_damage_skull)" ## Blast mask entry will need to be adjusted later when Macros are updated. 
     "Dodongo Cavern Pot Skull 1": "true"
     "Dodongo Cavern Pot Skull 2": "true"
     "Dodongo Cavern Pot Skull 3": "true"
