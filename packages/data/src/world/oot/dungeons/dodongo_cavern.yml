@@ -183,7 +183,7 @@
     "Dodongo Cavern Pot Skull 4": "true"
     "Dodongo Cavern Grass Pre-Boss": "can_cut_grass"
 
-"Dondogo Cavern GS Near Boss":
+"Dodogo Cavern GS Near Boss":
     dungeon: DC
     exits: 
       "Dodongo Cavern Pre-Boss Lobby": "true"
