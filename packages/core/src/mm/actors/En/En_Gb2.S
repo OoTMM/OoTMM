@@ -24,3 +24,8 @@ PATCH_END
 PATCH_START 0x80b10978
   li at,GI_MM_HEART_PIECE
 PATCH_END
+
+/* Fix a vanilla bug where the actor would not spawn if the player voids/leaves without going in the center room */
+PATCH_START 0x80b11614
+  li v0, 0
+PATCH_END
