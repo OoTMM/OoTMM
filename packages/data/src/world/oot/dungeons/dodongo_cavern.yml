@@ -95,7 +95,7 @@
     "Dodongo Cavern Stairs": "true"
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
-    "Dodongo Cavern GS Stairs Vines": "gs && (can_collect_distance || has_ranged_weapon_child || has_ranged_weapon_adult || (is_adult && can_damage_skull) || has_explosives)" ## Check if biggoron and child can kill 
+    "Dodongo Cavern GS Stairs Vines": "gs" ## Needs to be changed when Action Rando is enabled
     "Dodongo Cavern GS Stairs Top": "gs && ((can_collect_distance && event(DC_SHORTCUT)) || hookshot_anywhere || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
     "Dodongo Cavern Pot Stairs Pot 1": "true"
     "Dodongo Cavern Pot Stairs Pot 2": "true"
