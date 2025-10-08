@@ -7,8 +7,9 @@
 #include <combo/actor.h>
 
 #define TRIGGER_NONE            0x00
-#define TRIGGER_GANON_BK        0x01
-#define TRIGGER_TRIFORCE        0x02
+#define TRIGGER_SONG            0x01
+#define TRIGGER_GANON_BK        0x02
+#define TRIGGER_TRIFORCE        0x03
 
 #if defined(GAME_OOT)
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART
@@ -21,6 +22,65 @@ void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, PlayState* play
 
 Actor_CustomTriggers* gActorCustomTriggers;
 ComboTriggersData gComboTriggersData;
+
+s16 CustomTriggers_NextGivenSong(Actor_CustomTriggers* this)
+{
+    const u8* notes = gSharedCustomSave.notes;
+
+    if (notes[NOTES_SONG_OOT_TP_FOREST] >= 6 && !gOotSave.info.inventory.quest.songTpForest)
+        return GI_OOT_SONG_TP_FOREST;
+    if (notes[NOTES_SONG_OOT_TP_FIRE] >= 8 && !gOotSave.info.inventory.quest.songTpFire)
+        return GI_OOT_SONG_TP_FIRE;
+    if (notes[NOTES_SONG_OOT_TP_WATER] >= 5 && !gOotSave.info.inventory.quest.songTpWater)
+        return GI_OOT_SONG_TP_WATER;
+    if (notes[NOTES_SONG_OOT_TP_SPIRIT] >= 6 && !gOotSave.info.inventory.quest.songTpSpirit)
+        return GI_OOT_SONG_TP_SPIRIT;
+    if (notes[NOTES_SONG_OOT_TP_SHADOW] >= 7 && !gOotSave.info.inventory.quest.songTpShadow)
+        return GI_OOT_SONG_TP_SHADOW;
+    if (notes[NOTES_SONG_OOT_TP_LIGHT] >= 6 && !gOotSave.info.inventory.quest.songTpLight)
+        return GI_OOT_SONG_TP_LIGHT;
+    if (notes[NOTES_SONG_OOT_ZELDA] >= 6 && !gOotSave.info.inventory.quest.songZelda)
+        return GI_OOT_SONG_ZELDA;
+    if (notes[NOTES_SONG_OOT_EPONA] >= 6 && !gOotSave.info.inventory.quest.songEpona)
+        return GI_OOT_SONG_EPONA;
+    if (notes[NOTES_SONG_OOT_SARIA] >= 6 && !gOotSave.info.inventory.quest.songSaria)
+        return GI_OOT_SONG_SARIA;
+    if (notes[NOTES_SONG_OOT_SUN] >= 6 && !gOotSave.info.inventory.quest.songSun)
+        return GI_OOT_SONG_SUN;
+    if (notes[NOTES_SONG_OOT_TIME] >= 6 && !gOotSave.info.inventory.quest.songTime)
+        return GI_OOT_SONG_TIME;
+    if (notes[NOTES_SONG_OOT_STORMS] >= 6 && !gOotSave.info.inventory.quest.songStorms)
+        return GI_OOT_SONG_STORMS;
+    if (notes[NOTES_SONG_OOT_EMPTINESS] >= 7 && !gSharedCustomSave.oot.hasElegy)
+        return GI_OOT_SONG_EMPTINESS;
+
+    if (notes[NOTES_SONG_MM_AWAKENING] >= 7 && !gMmSave.info.inventory.quest.songAwakening)
+        return GI_MM_SONG_AWAKENING;
+    if (notes[NOTES_SONG_MM_GORON] >= 8 && !gMmSave.info.inventory.quest.songLullaby)
+        return GI_MM_SONG_GORON;
+    if (notes[NOTES_SONG_MM_GORON] >= 6 && !gMmSave.info.inventory.quest.songLullabyIntro && Config_Flag(CFG_MM_PROGRESSIVE_LULLABY))
+        return GI_MM_SONG_GORON_HALF;
+    if (notes[NOTES_SONG_MM_ZORA] >= 7 && !gMmSave.info.inventory.quest.songNewWave)
+        return GI_MM_SONG_ZORA;
+    if (notes[NOTES_SONG_MM_EMPTINESS] >= 7 && !gMmSave.info.inventory.quest.songEmpty)
+        return GI_MM_SONG_EMPTINESS;
+    if (notes[NOTES_SONG_MM_ORDER] >= 6 && !gMmSave.info.inventory.quest.songOrder)
+        return GI_MM_SONG_ORDER;
+    if (notes[NOTES_SONG_MM_TIME] >= 6 && !gMmSave.info.inventory.quest.songTime)
+        return GI_MM_SONG_TIME;
+    if (notes[NOTES_SONG_MM_HEALING] >= 6 && !gMmSave.info.inventory.quest.songHealing)
+        return GI_MM_SONG_HEALING;
+    if (notes[NOTES_SONG_MM_EPONA] >= 6 && !gMmSave.info.inventory.quest.songEpona)
+        return GI_MM_SONG_EPONA;
+    if (notes[NOTES_SONG_MM_SOARING] >= 6 && !gMmSave.info.inventory.quest.songSoaring)
+        return GI_MM_SONG_SOARING;
+    if (notes[NOTES_SONG_MM_STORMS] >= 6 && !gMmSave.info.inventory.quest.songStorms)
+        return GI_MM_SONG_STORMS;
+    if (notes[NOTES_SONG_MM_SUN] >= 6 && !gMmSave.info.inventory.quest.songSun)
+        return GI_MM_SONG_SUN;
+
+    return GI_NONE;
+}
 
 int CustomTriggers_GiveItem(Actor_CustomTriggers* this, PlayState* play, const ComboItemQuery* q)
 {
@@ -82,8 +142,15 @@ int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, PlayState* play)
 
 static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, PlayState* play)
 {
+    s16 gi;
+
     switch (gComboTriggersData.trigger)
     {
+    case TRIGGER_SONG:
+        gi = CustomTriggers_NextGivenSong(this);
+        if (gi == GI_NONE || (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, gi)))
+            gComboTriggersData.trigger = TRIGGER_NONE;
+        break;
     case TRIGGER_GANON_BK:
         if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT_BOSS_KEY_GANON))
         {
@@ -106,6 +173,17 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, PlayState* 
 
 static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, PlayState* play)
 {
+    s16 gi;
+
+    /* Songs */
+    gi = CustomTriggers_NextGivenSong(this);
+    if (gi != GI_NONE)
+    {
+        gComboTriggersData.acc = 0;
+        gComboTriggersData.trigger = TRIGGER_SONG;
+        return;
+    }
+
     /* Ganon BK */
     if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && Config_SpecialCond(SPECIAL_GANON_BK))
     {
@@ -164,9 +242,13 @@ static void CustomTriggers_Update(Actor_CustomTriggers* this, PlayState* play)
     }
 
     if (gComboTriggersData.trigger == TRIGGER_NONE)
+    {
         CustomTriggers_CheckTrigger(this, play);
-    if (gComboTriggersData.trigger != TRIGGER_NONE)
+    }
+    else
+    {
         CustomTriggers_HandleTrigger(this, play);
+    }
 }
 
 void CustomTriggers_Spawn(PlayState* play)
