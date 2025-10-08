@@ -1894,6 +1894,11 @@ static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    return ++gSharedCustomSave.notes[param];
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -2000,6 +2005,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStoneAgonyMm,
     addItemSpinUpgradeOot,
     addItemTrap,
+    addItemSongNote,
 };
 
 extern const u8 kAddItemFuncs[];

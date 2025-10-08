@@ -111,6 +111,7 @@
 #define IA_MM_STONE_AGONY       0x66
 #define IA_OOT_SPIN_UPGRADE     0x67
 #define IA_TRAP                 0x68
+#define IA_SONG_NOTE            0x69
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

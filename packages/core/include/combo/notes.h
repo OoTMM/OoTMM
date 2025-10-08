@@ -27,6 +27,6 @@
 #define NOTES_SONG_MM_STORMS        0x16
 #define NOTES_SONG_MM_SUN           0x17
 
-#define NOTES_SONG_MAX              0x18
+#define NOTES_MAX                   0x18
 
 #endif

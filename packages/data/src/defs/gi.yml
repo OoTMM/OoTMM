@@ -139,19 +139,19 @@
 - { id: OOT_SONG_TIME, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: [NOTE, 0x01], object: [oot, 0x00b6], name: "the <C2>Song of Time" }
 - { id: OOT_SONG_STORMS, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_STORMS], flags: 0x80, draw: [NOTE, 0x00], object: [oot, 0x00b6], name: "the <C2>Song of Storms" }
 - { id: OOT_SONG_EMPTINESS, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: [NOTE, 0x84], object: [oot, 0x00b6], name: "the <C2>Elegy of Emptiness" }
-- { id: OOT_SONG_NOTE_TP_FOREST, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FOREST], flags: 0x80, draw: [NOTE, 0xc2], object: [oot, 0x00b6], name: "a <C2>Minuet of Forest Note" }
-- { id: OOT_SONG_NOTE_TP_FIRE, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FIRE], flags: 0x80, draw: [NOTE, 0xc5], object: [oot, 0x00b6], name: "a <C2>Bolero of Fire Note" }
-- { id: OOT_SONG_NOTE_TP_WATER, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_WATER], flags: 0x80, draw: [NOTE, 0xc1], object: [oot, 0x00b6], name: "a <C2>Serenade of Water Note" }
-- { id: OOT_SONG_NOTE_TP_SPIRIT, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SPIRIT], flags: 0x80, draw: [NOTE, 0xc4], object: [oot, 0x00b6], name: "a <C2>Requiem of Spirit Note" }
-- { id: OOT_SONG_NOTE_TP_SHADOW, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: [NOTE, 0xc0], object: [oot, 0x00b6], name: "a <C2>Nocturne of Shadow Note" }
-- { id: OOT_SONG_NOTE_TP_LIGHT, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_LIGHT], flags: 0x80, draw: [NOTE, 0xc3], object: [oot, 0x00b6], name: "a <C2>Prelude of Light Note" }
-- { id: OOT_SONG_NOTE_ZELDA, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_ZELDA], flags: 0x80, draw: [NOTE, 0x45], object: [oot, 0x00b6], name: "a <C2>Zelda's Lullaby Note" }
-- { id: OOT_SONG_NOTE_EPONA, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_EPONA], flags: 0x80, draw: [NOTE, 0x44], object: [oot, 0x00b6], name: "a <C2>Epona's Song Note" }
-- { id: OOT_SONG_NOTE_SARIA, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_SARIA], flags: 0x80, draw: [NOTE, 0x42], object: [oot, 0x00b6], name: "a <C2>Saria's Song Note" }
-- { id: OOT_SONG_NOTE_SUN, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_SUN], flags: 0x80, draw: [NOTE, 0x43], object: [oot, 0x00b6], name: "a <C2>Sun's Song Note" }
-- { id: OOT_SONG_NOTE_TIME, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: [NOTE, 0x41], object: [oot, 0x00b6], name: "a <C2>Song of Time Note" }
-- { id: OOT_SONG_NOTE_STORMS, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_STORMS], flags: 0x80, draw: [NOTE, 0x40], object: [oot, 0x00b6], name: "a <C2>Song of Storms Note" }
-- { id: OOT_SONG_NOTE_EMPTINESS, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: [NOTE, 0xc4], object: [oot, 0x00b6], name: "a <C2>Elegy of Emptiness Note" }
+- { id: OOT_SONG_NOTE_TP_FOREST, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TP_FOREST], flags: 0x80, draw: [NOTE, 0xc2], object: [oot, 0x00b6], name: "a <C2>Minuet of Forest Note" }
+- { id: OOT_SONG_NOTE_TP_FIRE, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TP_FIRE], flags: 0x80, draw: [NOTE, 0xc5], object: [oot, 0x00b6], name: "a <C2>Bolero of Fire Note" }
+- { id: OOT_SONG_NOTE_TP_WATER, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TP_WATER], flags: 0x80, draw: [NOTE, 0xc1], object: [oot, 0x00b6], name: "a <C2>Serenade of Water Note" }
+- { id: OOT_SONG_NOTE_TP_SPIRIT, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TP_SPIRIT], flags: 0x80, draw: [NOTE, 0xc4], object: [oot, 0x00b6], name: "a <C2>Requiem of Spirit Note" }
+- { id: OOT_SONG_NOTE_TP_SHADOW, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TP_SHADOW], flags: 0x80, draw: [NOTE, 0xc0], object: [oot, 0x00b6], name: "a <C2>Nocturne of Shadow Note" }
+- { id: OOT_SONG_NOTE_TP_LIGHT, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TP_LIGHT], flags: 0x80, draw: [NOTE, 0xc3], object: [oot, 0x00b6], name: "a <C2>Prelude of Light Note" }
+- { id: OOT_SONG_NOTE_ZELDA, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_ZELDA], flags: 0x80, draw: [NOTE, 0x45], object: [oot, 0x00b6], name: "a <C2>Zelda's Lullaby Note" }
+- { id: OOT_SONG_NOTE_EPONA, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_EPONA], flags: 0x80, draw: [NOTE, 0x44], object: [oot, 0x00b6], name: "a <C2>Epona's Song Note" }
+- { id: OOT_SONG_NOTE_SARIA, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_SARIA], flags: 0x80, draw: [NOTE, 0x42], object: [oot, 0x00b6], name: "a <C2>Saria's Song Note" }
+- { id: OOT_SONG_NOTE_SUN, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_SUN], flags: 0x80, draw: [NOTE, 0x43], object: [oot, 0x00b6], name: "a <C2>Sun's Song Note" }
+- { id: OOT_SONG_NOTE_TIME, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_TIME], flags: 0x80, draw: [NOTE, 0x41], object: [oot, 0x00b6], name: "a <C2>Song of Time Note" }
+- { id: OOT_SONG_NOTE_STORMS, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_STORMS], flags: 0x80, draw: [NOTE, 0x40], object: [oot, 0x00b6], name: "a <C2>Song of Storms Note" }
+- { id: OOT_SONG_NOTE_EMPTINESS, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_OOT_EMPTINESS], flags: 0x80, draw: [NOTE, 0xc4], object: [oot, 0x00b6], name: "a <C2>Elegy of Emptiness Note" }
 - { id: OOT_SWORD_MASTER, type: MAJOR, add: [OOT_SWORD, 2], flags: 0x80, draw: OOT_SWORD_MASTER, object: GI_MASTER_SWORD, name: "the <C1>Master Sword" }
 - { id: OOT_STONE_EMERALD, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_STONE_EMERALD], flags: 0x80, draw: OOT_STONE_EMERALD, object: GI_STONE_EMERALD, name: "the <C3>Kokiri's Emerald" }
 - { id: OOT_STONE_RUBY, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_STONE_RUBY], flags: 0x80, draw: OOT_STONE_RUBY, object: GI_STONE_RUBY, name: "the <C3>Goron's Ruby" }
@@ -590,17 +590,17 @@
 - { id: MM_SONG_STORMS, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_STORMS], flags: 0xa0, draw: [NOTE, 0x00], object: [mm, 0x008f], name: "the <C2>Song of Storms" }
 - { id: MM_SONG_SUN, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SUN], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
 - { id: MM_SONG_GORON_HALF, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_GORON_HALF], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Lullaby Intro" }
-- { id: MM_SONG_NOTE_AWAKENING, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_AWAKENING], flags: 0xa0, draw: [NOTE, 0x82], object: [mm, 0x008f], name: "a <C2>Sonata of Awakening Note" }
-- { id: MM_SONG_NOTE_GORON, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_GORON], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "a <C2>Goron Lullaby Note" }
-- { id: MM_SONG_NOTE_ZORA, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_ZORA], flags: 0xa0, draw: [NOTE, 0x81], object: [mm, 0x008f], name: "a <C2>New Wave Bossa Nova Note" }
-- { id: MM_SONG_NOTE_EMPTINESS, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_EMPTINESS], flags: 0xa0, draw: [NOTE, 0x84], object: [mm, 0x008f], name: "a <C2>Elegy of Emptiness Note" }
-- { id: MM_SONG_NOTE_ORDER, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_ORDER], flags: 0xa0, draw: [NOTE, 0x80], object: [mm, 0x008f], name: "a <C2>Oath to Order Note" }
-- { id: MM_SONG_NOTE_TIME, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_TIME], flags: 0xa0, draw: [NOTE, 0x01], object: [mm, 0x008f], name: "a <C2>Song of Time Note" }
-- { id: MM_SONG_NOTE_HEALING, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_HEALING], flags: 0xa0, draw: [NOTE, 0x02], object: [mm, 0x008f], name: "a <C2>Song of Healing Note" }
-- { id: MM_SONG_NOTE_EPONA, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_EPONA], flags: 0xa0, draw: [NOTE, 0x04], object: [mm, 0x008f], name: "a <C2>Epona's Song Note" }
-- { id: MM_SONG_NOTE_SOARING, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SOARING], flags: 0xa0, draw: [NOTE, 0x05], object: [mm, 0x008f], name: "a <C2>Song of Soaring Note" }
-- { id: MM_SONG_NOTE_STORMS, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_STORMS], flags: 0xa0, draw: [NOTE, 0x00], object: [mm, 0x008f], name: "a <C2>Song of Storms Note" }
-- { id: MM_SONG_NOTE_SUN, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_SUN], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "a <C2>Sun's Song Note" }
+- { id: MM_SONG_NOTE_AWAKENING, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_AWAKENING], flags: 0xa0, draw: [NOTE, 0xc2], object: [mm, 0x008f], name: "a <C2>Sonata of Awakening Note" }
+- { id: MM_SONG_NOTE_GORON, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_GORON], flags: 0xa0, draw: [NOTE, 0xc5], object: [mm, 0x008f], name: "a <C2>Goron Lullaby Note" }
+- { id: MM_SONG_NOTE_ZORA, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_ZORA], flags: 0xa0, draw: [NOTE, 0xc1], object: [mm, 0x008f], name: "a <C2>New Wave Bossa Nova Note" }
+- { id: MM_SONG_NOTE_EMPTINESS, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_EMPTINESS], flags: 0xa0, draw: [NOTE, 0xc4], object: [mm, 0x008f], name: "a <C2>Elegy of Emptiness Note" }
+- { id: MM_SONG_NOTE_ORDER, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_ORDER], flags: 0xa0, draw: [NOTE, 0xc0], object: [mm, 0x008f], name: "a <C2>Oath to Order Note" }
+- { id: MM_SONG_NOTE_TIME, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_TIME], flags: 0xa0, draw: [NOTE, 0x41], object: [mm, 0x008f], name: "a <C2>Song of Time Note" }
+- { id: MM_SONG_NOTE_HEALING, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_HEALING], flags: 0xa0, draw: [NOTE, 0x42], object: [mm, 0x008f], name: "a <C2>Song of Healing Note" }
+- { id: MM_SONG_NOTE_EPONA, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_EPONA], flags: 0xa0, draw: [NOTE, 0x44], object: [mm, 0x008f], name: "a <C2>Epona's Song Note" }
+- { id: MM_SONG_NOTE_SOARING, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_SOARING], flags: 0xa0, draw: [NOTE, 0x45], object: [mm, 0x008f], name: "a <C2>Song of Soaring Note" }
+- { id: MM_SONG_NOTE_STORMS, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_STORMS], flags: 0xa0, draw: [NOTE, 0x40], object: [mm, 0x008f], name: "a <C2>Song of Storms Note" }
+- { id: MM_SONG_NOTE_SUN, type: MAJOR, add: [SONG_NOTE, NOTES_SONG_MM_SUN], flags: 0xa0, draw: [NOTE, 0x43], object: [mm, 0x008f], name: "a <C2>Sun's Song Note" }
 - { id: MM_REMAINS_ODOLWA, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_ODOLWA], flags: 0xa0, draw: MM_REMAINS_ODOLWA, object: GI_REMAINS_ODOLWA, name: "<C3>Odolwa's Remains" }
 - { id: MM_REMAINS_GOHT, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_GOHT], flags: 0xa0, draw: MM_REMAINS_GOHT, object: GI_REMAINS_GOHT, name: "<C3>Goht's Remains" }
 - { id: MM_REMAINS_GYORG, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_GYORG], flags: 0xa0, draw: MM_REMAINS_GYORG, object: GI_REMAINS_GYORG, name: "<C3>Gyorg's Remains" }
