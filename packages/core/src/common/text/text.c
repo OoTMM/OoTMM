@@ -224,19 +224,29 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_ARROW_LIGHT:
         return !Config_Flag(CFG_SHARED_MAGIC_ARROW_LIGHT);
     case GI_OOT_SONG_EPONA:
+    case GI_OOT_SONG_NOTE_EPONA:
     case GI_MM_SONG_EPONA:
+    case GI_MM_SONG_NOTE_EPONA:
         return !Config_Flag(CFG_SHARED_SONG_EPONA);
     case GI_OOT_SONG_STORMS:
+    case GI_OOT_SONG_NOTE_STORMS:
     case GI_MM_SONG_STORMS:
+    case GI_MM_SONG_NOTE_STORMS:
         return !Config_Flag(CFG_SHARED_SONG_STORMS);
     case GI_OOT_SONG_TIME:
+    case GI_OOT_SONG_NOTE_TIME:
     case GI_MM_SONG_TIME:
+    case GI_MM_SONG_NOTE_TIME:
         return !Config_Flag(CFG_SHARED_SONG_TIME);
     case GI_OOT_SONG_SUN:
+    case GI_OOT_SONG_NOTE_SUN:
     case GI_MM_SONG_SUN:
+    case GI_MM_SONG_NOTE_SUN:
         return !Config_Flag(CFG_SHARED_SONG_SUN) && Config_Flag(CFG_MM_SONG_SUN);
     case GI_OOT_SONG_EMPTINESS:
+    case GI_OOT_SONG_NOTE_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
+    case GI_MM_SONG_NOTE_EMPTINESS:
         return !Config_Flag(CFG_SHARED_SONG_EMPTINESS) && Config_Flag(CFG_OOT_SONG_EMPTINESS);
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
