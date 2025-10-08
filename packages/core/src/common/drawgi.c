@@ -89,6 +89,8 @@ void DrawGi_Xlu0(PlayState* play, s16 drawGiId)
 
 void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
 {
+    static const float kSmallScale = 0.6f;
+
     static const u32 kColors[] = {
         0x8000ffff /* Purple */,
         0x0000ffff /* Blue */,
@@ -112,6 +114,8 @@ void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
     color4(&r, &g, &b, &a, kColors[param & 0xf]);
 
     Matrix_RotateZ(angle, MTXMODE_APPLY);
+    if (param & 0x40)
+        Matrix_Scale(kSmallScale, kSmallScale, kSmallScale, MTXMODE_APPLY);
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
