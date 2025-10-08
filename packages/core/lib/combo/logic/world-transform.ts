@@ -16,6 +16,39 @@ import { mustStartWithMasterSword } from '../settings/util';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
 import { TRAP_AMOUNTS } from './traps';
 
+const SONG_NOTES = new Map<Item, [Item, number]>([
+  [Items.OOT_SONG_EPONA, [Items.OOT_SONG_NOTE_EPONA, 6]],
+  [Items.OOT_SONG_SARIA, [Items.OOT_SONG_NOTE_SARIA, 6]],
+  [Items.OOT_SONG_STORMS, [Items.OOT_SONG_NOTE_STORMS, 6]],
+  [Items.OOT_SONG_SUN, [Items.OOT_SONG_NOTE_SUN, 6]],
+  [Items.OOT_SONG_TIME, [Items.OOT_SONG_NOTE_TIME, 6]],
+  [Items.OOT_SONG_ZELDA, [Items.OOT_SONG_NOTE_ZELDA, 6]],
+  [Items.OOT_SONG_TP_FIRE, [Items.OOT_SONG_NOTE_TP_FIRE, 8]],
+  [Items.OOT_SONG_TP_FOREST, [Items.OOT_SONG_NOTE_TP_FOREST, 6]],
+  [Items.OOT_SONG_TP_LIGHT, [Items.OOT_SONG_NOTE_TP_LIGHT, 6]],
+  [Items.OOT_SONG_TP_SHADOW, [Items.OOT_SONG_NOTE_TP_SHADOW, 7]],
+  [Items.OOT_SONG_TP_SPIRIT, [Items.OOT_SONG_NOTE_TP_SPIRIT, 6]],
+  [Items.OOT_SONG_TP_WATER, [Items.OOT_SONG_NOTE_TP_WATER, 5]],
+  [Items.OOT_SONG_EMPTINESS, [Items.OOT_SONG_NOTE_EMPTINESS, 7]],
+  [Items.MM_SONG_AWAKENING, [Items.MM_SONG_NOTE_AWAKENING, 7]],
+  [Items.MM_SONG_EMPTINESS, [Items.MM_SONG_NOTE_EMPTINESS, 7]],
+  [Items.MM_SONG_EPONA, [Items.MM_SONG_NOTE_EPONA, 6]],
+  [Items.MM_SONG_GORON, [Items.MM_SONG_NOTE_GORON, 6]],
+  [Items.MM_SONG_GORON_HALF, [Items.MM_SONG_NOTE_GORON, 6]],
+  [Items.MM_SONG_HEALING, [Items.MM_SONG_NOTE_HEALING, 6]],
+  [Items.MM_SONG_ORDER, [Items.MM_SONG_NOTE_ORDER, 6]],
+  [Items.MM_SONG_SOARING, [Items.MM_SONG_NOTE_SOARING, 6]],
+  [Items.MM_SONG_STORMS, [Items.MM_SONG_NOTE_STORMS, 6]],
+  [Items.MM_SONG_SUN, [Items.MM_SONG_NOTE_SUN, 6]],
+  [Items.MM_SONG_TIME, [Items.MM_SONG_NOTE_TIME, 6]],
+  [Items.MM_SONG_ZORA, [Items.MM_SONG_NOTE_ZORA, 7]],
+  [Items.SHARED_SONG_EPONA, [Items.SHARED_SONG_NOTE_EPONA, 6]],
+  [Items.SHARED_SONG_TIME, [Items.SHARED_SONG_NOTE_TIME, 6]],
+  [Items.SHARED_SONG_STORMS, [Items.SHARED_SONG_NOTE_STORMS, 6]],
+  [Items.SHARED_SONG_SUN, [Items.SHARED_SONG_NOTE_SUN, 6]],
+  [Items.SHARED_SONG_EMPTINESS, [Items.SHARED_SONG_NOTE_EMPTINESS, 7]],
+]);
+
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
   'OOT Lake Hylia Pot 1',
@@ -1549,6 +1582,21 @@ export class LogicPassWorldTransform {
     /* Handle MM sun song */
     if (settings.sunSongMm && !settings.sharedSongSun) {
       this.addItem(Items.MM_SONG_SUN);
+    }
+
+    /* Handle song notes */
+    if (settings.songs === 'notes') {
+      for (const [src, dst] of SONG_NOTES.entries()) {
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          const piSrc = makePlayerItem(src, i);
+          const piDst = makePlayerItem(dst[0], i);
+
+          if (this.pool.has(piSrc)) {
+            this.removePlayerItem(piSrc);
+            this.addPlayerItem(piDst, dst[1]);
+          }
+        }
+      }
     }
 
     /* Handle MM other fairies */
