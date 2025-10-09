@@ -1,3 +1,33 @@
+# Util
+"has_shared_count(a, b, n)": "has(a, n) || has(b, n)"
+
+# Songs
+"has_song_sun": "has(SONG_SUN) || has(SHARED_SONG_SUN) || has_shared_count(SONG_NOTE_SUN, SHARED_SONG_NOTE_SUN, 6)"
+"has_song_time": "has(SONG_TIME) || has(SHARED_SONG_TIME) || has_shared_count(SONG_NOTE_TIME, SHARED_SONG_NOTE_TIME, 6)"
+"has_song_epona": "has(SONG_EPONA) || has(SHARED_SONG_EPONA) || has_shared_count(SONG_NOTE_EPONA, SHARED_SONG_NOTE_EPONA, 6)"
+"has_song_storms": "has(SONG_STORMS) || has(SHARED_SONG_STORMS) || has_shared_count(SONG_NOTE_STORMS, SHARED_SONG_NOTE_STORMS, 6)"
+"has_song_emptiness": "has(SONG_EMPTINESS) || has(SHARED_SONG_EMPTINESS) || has_shared_count(SONG_NOTE_EMPTINESS, SHARED_SONG_NOTE_EMPTINESS, 7)"
+"has_song_soaring": "has(MM_SONG_SOARING) || has(MM_SONG_NOTE_SOARING, 6)"
+"has_song_tp_light": "has(OOT_SONG_TP_LIGHT) || has(OOT_SONG_NOTE_TP_LIGHT, 6)"
+"has_song_tp_forest": "has(OOT_SONG_TP_FOREST) || has(OOT_SONG_NOTE_TP_FOREST, 6)"
+"has_song_tp_fire": "has(OOT_SONG_TP_FIRE) || has(OOT_SONG_NOTE_TP_FIRE, 8)"
+"has_song_tp_water": "has(OOT_SONG_TP_WATER) || has(OOT_SONG_NOTE_TP_WATER, 5)"
+"has_song_tp_shadow": "has(OOT_SONG_TP_SHADOW) || has(OOT_SONG_NOTE_TP_SHADOW, 7)"
+"has_song_tp_spirit": "has(OOT_SONG_TP_SPIRIT) || has(OOT_SONG_NOTE_TP_SPIRIT, 6)"
+
+"can_play_sun": "has_song_sun && has_ocarina && ocarina_button_right && ocarina_button_down && ocarina_button_up"
+"can_play_time": "has_song_time && has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down"
+"can_play_epona": "has_song_epona && has_ocarina && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_storms": "has_song_storms && has_ocarina && ocarina_button_a && ocarina_button_down && ocarina_button_up"
+"can_play_emptiness_raw": "has_song_emptiness && has_ocarina && ocarina_button_left && ocarina_button_right && ocarina_button_up && ocarina_button_down"
+"can_play_soaring_raw": "has_song_soaring && has_ocarina && ocarina_button_down && ocarina_button_up && ocarina_button_left"
+"can_play_tp_light_raw": "has_song_tp_light && has_ocarina && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_tp_forest_raw": "has_song_tp_forest && has_ocarina && ocarina_button_a && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_tp_fire_raw": "has_song_tp_fire && has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down"
+"can_play_tp_water_raw": "has_song_tp_water && has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"
+"can_play_tp_shadow_raw": "has_song_tp_shadow && has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"
+"can_play_tp_spirit_raw": "has_song_tp_spirit && has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down"
+
 # Misc
 "has_magic_jar": "cond(setting(sharedMagic), renewable(SHARED_MAGIC_JAR_SMALL) || renewable(SHARED_MAGIC_JAR_LARGE), renewable(MAGIC_JAR_SMALL) || renewable(MAGIC_JAR_LARGE))"
 

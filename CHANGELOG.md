@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the ability to split songs into invividually shuffled notes (thanks @ebrown38).
 - Add bronze scale, an extra scale item required to enter deep water (logic is experimental).
 
 ### Changed

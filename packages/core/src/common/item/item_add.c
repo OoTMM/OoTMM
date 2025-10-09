@@ -1894,6 +1894,40 @@ static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    static const u8 kMaxNotes[] = {
+        6, // NOTES_SONG_OOT_TP_FOREST
+        8, // NOTES_SONG_OOT_TP_FIRE
+        5, // NOTES_SONG_OOT_TP_WATER
+        6, // NOTES_SONG_OOT_TP_SPIRIT
+        7, // NOTES_SONG_OOT_TP_SHADOW
+        6, // NOTES_SONG_OOT_TP_LIGHT
+        6, // NOTES_SONG_OOT_ZELDA
+        6, // NOTES_SONG_OOT_EPONA
+        6, // NOTES_SONG_OOT_SARIA
+        6, // NOTES_SONG_OOT_SUN
+        6, // NOTES_SONG_OOT_TIME
+        6, // NOTES_SONG_OOT_STORMS
+        7, // NOTES_SONG_OOT_EMPTINESS
+        7, // NOTES_SONG_MM_AWAKENING
+        8, // NOTES_SONG_MM_GORON
+        7, // NOTES_SONG_MM_ZORA
+        7, // NOTES_SONG_MM_EMPTINESS
+        6, // NOTES_SONG_MM_ORDER
+        6, // NOTES_SONG_MM_TIME
+        6, // NOTES_SONG_MM_HEALING
+        6, // NOTES_SONG_MM_EPONA
+        6, // NOTES_SONG_MM_SOARING
+        6, // NOTES_SONG_MM_STORMS
+        6, // NOTES_SONG_MM_SUN
+    };
+
+    if (gSharedCustomSave.notes[param] >= kMaxNotes[param])
+        return 0;
+    return ++gSharedCustomSave.notes[param];
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -2000,6 +2034,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStoneAgonyMm,
     addItemSpinUpgradeOot,
     addItemTrap,
+    addItemSongNote,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -2025,9 +2060,15 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_MASK_GORON, GI_OOT_MASK_GORON, GI_MM_MASK_GORON },
     { CFG_SHARED_MASK_ZORA, GI_OOT_MASK_ZORA, GI_MM_MASK_ZORA },
     { CFG_SHARED_SONG_EPONA, GI_OOT_SONG_EPONA, GI_MM_SONG_EPONA },
+    { CFG_SHARED_SONG_EPONA, GI_OOT_SONG_NOTE_EPONA, GI_MM_SONG_NOTE_EPONA },
     { CFG_SHARED_SONG_TIME, GI_OOT_SONG_TIME, GI_MM_SONG_TIME },
+    { CFG_SHARED_SONG_TIME, GI_OOT_SONG_NOTE_TIME, GI_MM_SONG_NOTE_TIME },
     { CFG_SHARED_SONG_STORMS, GI_OOT_SONG_STORMS, GI_MM_SONG_STORMS },
+    { CFG_SHARED_SONG_STORMS, GI_OOT_SONG_NOTE_STORMS, GI_MM_SONG_NOTE_STORMS },
     { CFG_SHARED_SONG_SUN, GI_OOT_SONG_SUN, GI_MM_SONG_SUN },
+    { CFG_SHARED_SONG_SUN, GI_OOT_SONG_NOTE_SUN, GI_MM_SONG_NOTE_SUN },
+    { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_EMPTINESS, GI_MM_SONG_EMPTINESS },
+    { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_NOTE_EMPTINESS, GI_MM_SONG_NOTE_EMPTINESS },
     { CFG_SHARED_SKELETON_KEY, GI_OOT_SKELETON_KEY, GI_MM_SKELETON_KEY },
     { CFG_SHARED_MAGIC, GI_OOT_MAGIC_UPGRADE, GI_MM_MAGIC_UPGRADE },
     { CFG_SHARED_MAGIC, GI_OOT_MAGIC_UPGRADE2, GI_MM_MAGIC_UPGRADE2 },
@@ -2118,7 +2159,6 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_STRENGTH, GI_OOT_GORON_BRACELET, GI_MM_GORON_BRACELET },
     { CFG_SHARED_STRENGTH, GI_OOT_SILVER_GAUNTLETS, GI_MM_SILVER_GAUNTLETS },
     { CFG_SHARED_STRENGTH, GI_OOT_GOLDEN_GAUNTLETS, GI_MM_GOLDEN_GAUNTLETS },
-    { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_EMPTINESS, GI_MM_SONG_EMPTINESS },
     { CFG_SHARED_SWORDS, GI_OOT_SWORD_KOKIRI, GI_MM_SWORD_KOKIRI },
     { CFG_SHARED_SWORDS, GI_OOT_SWORD_RAZOR, GI_MM_SWORD_RAZOR },
     { CFG_SHARED_SWORDS, GI_OOT_SWORD_GILDED, GI_MM_SWORD_GILDED },
