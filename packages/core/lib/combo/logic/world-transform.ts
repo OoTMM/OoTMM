@@ -115,6 +115,7 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
 
 const ITEM_POOL_PLENTIFUL = new Set([
   ...CLOCKS,
+  ...ItemGroups.SONG_NOTES,
   Items.MM_CLOCK,
   Items.OOT_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
