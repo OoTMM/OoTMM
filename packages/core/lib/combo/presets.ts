@@ -560,7 +560,7 @@ const PRESET_HELL = makeSettings({
   itemPool: 'barren',
   extraHintRegions: true,
   hintImportance: true,
-  songs: 'anywhere',
+  songs: 'notes',
   goldSkulltulaTokens: 'all',
   housesSkulltulaTokens: 'all',
   tingleShuffle: 'anywhere',
