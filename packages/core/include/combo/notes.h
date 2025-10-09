@@ -14,7 +14,6 @@
 #define NOTES_SONG_OOT_TIME         0x0a
 #define NOTES_SONG_OOT_STORMS       0x0b
 #define NOTES_SONG_OOT_EMPTINESS    0x0c
-
 #define NOTES_SONG_MM_AWAKENING     0x0d
 #define NOTES_SONG_MM_GORON         0x0e
 #define NOTES_SONG_MM_ZORA          0x0f
