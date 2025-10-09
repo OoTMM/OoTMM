@@ -317,9 +317,10 @@ export class LogicPassHints {
       return false;
     }
 
-    /* Triforce Piece - never hinted outside of location */
-    if (ItemHelpers.isTriforcePiece(item.item) && klass !== 'location') {
-      return false;
+    /* Don't hint specific items, except for locations */
+    if (klass !== 'location') {
+      if (ItemHelpers.isTriforcePiece(item.item) || ItemHelpers.isSongNote(item.item))
+        return false;
     }
 
     /* Additional restrictions for WotH */

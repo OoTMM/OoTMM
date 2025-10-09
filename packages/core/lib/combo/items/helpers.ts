@@ -44,3 +44,4 @@ export const isTriforcePiece = (item: Item) => ItemGroups.TRIFORCE.has(item);
 export const isSilverRupee = (item: Item) => ItemGroups.RUPEES_SILVER.has(item);
 export const isNamedTriforce = (item: Item) => ItemGroups.NAMED_TRIFORCE.has(item);
 export const isFishingPondFish = (item: Item) => ItemGroups.FISHING_POND_FISH.has(item);
+export const isSongNote = (item: Item) => ItemGroups.SONG_NOTES.has(item);
