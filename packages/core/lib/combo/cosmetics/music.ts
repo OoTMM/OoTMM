@@ -437,7 +437,13 @@ class MusicInjector {
       const bankIdRaw = zseqFilename.split('.')[0];
 
       /* Add the music */
-      const seq = await zseqFiles[0].async('uint8array');
+      let seq = await zseqFiles[0].async('uint8array');
+      if (seq.length & 0xf) {
+        const pad = new Uint8Array(16 - (seq.length & 0xf));
+        pad.fill(0x00);
+        seq = concatUint8Arrays([seq, pad]);
+      }
+
       const games: Game[] = ['mm'];
       let type: MusicType;
       if (['8', '9', '10'].some(x => categories.includes(x))) {
