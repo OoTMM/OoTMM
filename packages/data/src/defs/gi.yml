@@ -290,7 +290,7 @@
 - { id: OOT_KEY_RING_BOTW, type: KEY, add: [OOT_KEY_RING, SCE_OOT_BOTTOM_OF_THE_WELL], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Well)" }
 - { id: OOT_KEY_RING_GF, type: KEY, add: [OOT_KEY_RING, SCE_OOT_THIEVES_HIDEOUT], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Hideout)" }
 - { id: OOT_KEY_RING_GTG, type: KEY, add: [OOT_KEY_RING, SCE_OOT_GERUDO_TRAINING_GROUND], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (GTG)" }
-- { id: OOT_SKELETON_KEY, type: MAJOR, add: OOT_SKELETON_KEY, flags: 0x80, draw: SKELETON_KEY, object: [oot, 0x00aa], name: "the <C1>Skeleton Key" }
+- { id: OOT_SKELETON_KEY, type: MAJOR, add: OOT_SKELETON_KEY, flags: 0x80, draw: SKELETON_KEY, object: SKELETON_KEY, name: "the <C1>Skeleton Key" }
 - { id: OOT_COIN_RED, type: MAJOR, add: [COIN, 0], flags: 0x80, draw: COIN_RED, object: [oot, 0x012e], name: "a <C1>Red Coin" }
 - { id: OOT_COIN_GREEN, type: MAJOR, add: [COIN, 1], flags: 0x80, draw: COIN_GREEN, object: [oot, 0x012e], name: "a <C1>Green Coin" }
 - { id: OOT_COIN_BLUE, type: MAJOR, add: [COIN, 2], flags: 0x80, draw: COIN_BLUE, object: [oot, 0x012e], name: "a <C1>Blue Coin" }
@@ -756,7 +756,7 @@
 - { id: MM_KEY_RING_SH, type: KEY, add: [MM_KEY_RING, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Snowhead)" }
 - { id: MM_KEY_RING_GB, type: KEY, add: [MM_KEY_RING, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Great Bay)" }
 - { id: MM_KEY_RING_ST, type: KEY, add: [MM_KEY_RING, 3], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Stone Tower)" }
-- { id: MM_SKELETON_KEY, type: MAJOR, add: MM_SKELETON_KEY, flags: 0xa0, draw: SKELETON_KEY, object: [mm, 0x0086], name: "the <C1>Skeleton Key" }
+- { id: MM_SKELETON_KEY, type: MAJOR, add: MM_SKELETON_KEY, flags: 0xa0, draw: SKELETON_KEY, object: SKELETON_KEY, name: "the <C1>Skeleton Key" }
 - { id: MM_BUTTON_A, type: MAJOR, add: [MM_BUTTON, 0], flags: 0xa0, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
 - { id: MM_BUTTON_C_RIGHT, type: MAJOR, add: [MM_BUTTON, 1], flags: 0xa0, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
 - { id: MM_BUTTON_C_LEFT, type: MAJOR, add: [MM_BUTTON, 2], flags: 0xa0, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
