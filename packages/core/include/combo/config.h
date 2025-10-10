@@ -27,7 +27,7 @@ typedef struct
 {
     ItemHint dungeonRewards[13];
     ItemHint lightArrows;
-    ItemHint oathToOrder;
+    ItemHint oathToOrder[6];
     ItemHint ganonBossKey;
 }
 ComboDataHints;

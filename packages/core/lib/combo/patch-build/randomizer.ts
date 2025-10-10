@@ -1099,7 +1099,7 @@ export const randomizerHints = (world: number, logic: LogicResult): Uint8Array =
   const h = logic.hints[world];
   buffers.push(regionsBuffer(h.dungeonRewards));
   buffers.push(regionsBuffer([h.lightArrow]));
-  buffers.push(regionsBuffer([h.oathToOrder]));
+  buffers.push(regionsBuffer(h.oathToOrder));
   buffers.push(regionsBuffer([h.ganonBossKey]));
   return concatUint8Arrays(buffers);
 };
