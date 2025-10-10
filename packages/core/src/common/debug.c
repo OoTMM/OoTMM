@@ -556,6 +556,11 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.songSun = 1;
     gSave.info.inventory.quest.songSaria = 1;
 
+    gSave.info.inventory.quest.remainsGoht = 1;
+    gSave.info.inventory.quest.remainsGyorg = 1;
+    gSave.info.inventory.quest.remainsTwinmold = 1;
+    gSave.info.inventory.quest.remainsOdolwa = 1;
+
     gMmSave.info.playerData.isMagicAcquired = 1;
     gMmSave.info.playerData.isDoubleMagicAcquired = 1;
     gMmSave.info.playerData.magic = 2 * 0x30;

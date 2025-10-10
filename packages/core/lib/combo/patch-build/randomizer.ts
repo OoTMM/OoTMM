@@ -1065,6 +1065,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     REGION_STATE_REWARDS: settings.regionState === 'reward',
     REGION_STATE_FREE: settings.regionState === 'free',
     MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
+    SONG_NOTES: settings.songs === 'notes',
   };
 
   for (const v in exprs) {
@@ -1099,7 +1100,7 @@ export const randomizerHints = (world: number, logic: LogicResult): Uint8Array =
   const h = logic.hints[world];
   buffers.push(regionsBuffer(h.dungeonRewards));
   buffers.push(regionsBuffer([h.lightArrow]));
-  buffers.push(regionsBuffer([h.oathToOrder]));
+  buffers.push(regionsBuffer(h.oathToOrder));
   buffers.push(regionsBuffer([h.ganonBossKey]));
   return concatUint8Arrays(buffers);
 };
