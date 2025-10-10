@@ -593,13 +593,6 @@ void Play_MainWrapper(PlayState* play)
     }
 
     Debug_Update();
-
-    /* DEBUG */
-    if (play->state.input->press.button == R_TRIG)
-    {
-        Player* link = GET_PLAYER(play);
-        Actor_Spawn(&play->actorCtx, play, ACTOR_BG_ICEFLOE, link->actor.world.pos.x, link->actor.world.pos.y, link->actor.world.pos.z, 0, 0, 0, 0);
-    }
 }
 
 static void Play_LoadKaleidoScopeHook(void* unk)
