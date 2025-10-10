@@ -378,6 +378,7 @@ ActorFind = 0x80025b0c;
 sqrtf = 0x800D0DC0;
 
 EffectSsIceSmoke_Spawn = 0x8001e560;
+SkinMatrix_Vec3fMtxFMultXYZW = 0x8008ec20;
 
 CollisionCheck_SetOC = 0x8004c130;
 Collider_InitCylinder = 0x8004ab7c;

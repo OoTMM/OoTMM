@@ -3,6 +3,19 @@
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
+#if defined(GAME_OOT)
+# define OBJECT                     (0x1e7 | MASK_FOREIGN_OBJECT)
+# define NA_SE_EV_ICE_MELT_LEVEL    NA_SE_EV_ICE_MELT
+# define NA_SE_EV_ICE_STAND_APPEAR  NA_SE_EV_ICE_MELT
+#endif
+
+#if defined(GAME_MM)
+# define OBJECT OBJECT_ICEFLOE
+#endif
+
+#define OBJ_ICEFLOE_COL (0x06000c90)
+#define OBJ_ICEFLOE_DL  (0x060001e0)
+
 void BgIcefloe_Init(Actor* thisx, PlayState* play);
 void BgIcefloe_Destroy(Actor* thisx, PlayState* play);
 void BgIcefloe_Update(Actor* thisx, PlayState* play);
@@ -28,7 +41,7 @@ void BgIcefloe_Init(Actor* thisx, PlayState* play) {
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     DynaPolyActor_Init(&this->dyna, 0);
-    DynaPolyActor_LoadMesh(play, &this->dyna, (void*)&gIcefloePlatformCol);
+    DynaPolyActor_LoadMesh(play, &this->dyna, (void*)OBJ_ICEFLOE_COL);
     if (numberSpawned >= ARRAY_COUNT(sSpawnedInstances)) {
         s32 i;
 
@@ -71,22 +84,30 @@ void func_80AC4A80(BgIcefloe* this, PlayState* play) {
     this->actionFunc = BgIcefloe_Grow;
 }
 
+#if defined(GAME_MM)
 static Vec3f sIceBlockAccel = { 0.0f, -0.5f, 0.0f };
+#endif
 
 void BgIcefloe_Grow(BgIcefloe* this, PlayState* play) {
+#if defined(GAME_MM)
     Vec3f velocity;
     Vec3f position;
+#endif
 
-    velocity.x = Rand_CenteredFloat(6.0f);
-    velocity.z = Rand_CenteredFloat(6.0f);
-    velocity.y = Rand_ZeroFloat(4.0f) + 4.0f;
     this->dyna.actor.scale.x += (0.65f * 0.01f);
     this->dyna.actor.scale.z += (0.65f * 0.01f);
     this->dyna.actor.scale.y += (0.65f * 0.01f);
+
+#if defined(GAME_MM)
+    velocity.x = Rand_CenteredFloat(6.0f);
+    velocity.z = Rand_CenteredFloat(6.0f);
+    velocity.y = Rand_ZeroFloat(4.0f) + 4.0f;
     position.x = this->dyna.actor.world.pos.x + (velocity.x * this->dyna.actor.scale.x * 75.0f);
     position.z = this->dyna.actor.world.pos.z + (velocity.z * this->dyna.actor.scale.z * 75.0f);
     position.y = this->dyna.actor.world.pos.y + (300.0f * this->dyna.actor.scale.y);
     EffectSsIceBlock_Spawn(play, &position, &velocity, &sIceBlockAccel, Rand_S16Offset(10, 10));
+#endif
+
     this->timer--;
     if (this->timer == 0) {
         func_80AC4C18(this);
@@ -152,14 +173,14 @@ void BgIcefloe_Update(Actor* thisx, PlayState* play) {
 }
 
 void BgIcefloe_Draw(Actor* thisx, PlayState* play) {
-    Gfx_DrawDListOpa(play, gIcefloeIcePlatformDL);
+    Gfx_DrawDListOpa(play, (Gfx*)OBJ_ICEFLOE_DL);
 }
 
 ActorProfile Bg_Icefloe_Profile = {
     /**/ ACTOR_BG_ICEFLOE,
     /**/ ACTORCAT_BG,
     /**/ FLAGS,
-    /**/ OBJECT_ICEFLOE,
+    /**/ OBJECT,
     /**/ sizeof(BgIcefloe),
     /**/ BgIcefloe_Init,
     /**/ BgIcefloe_Destroy,

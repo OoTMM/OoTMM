@@ -485,9 +485,14 @@ EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
 extern u8 gWeatherMode;
 
+void SkinMatrix_Vec3fMtxFMultXYZW(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDest);
+
+#if defined(GAME_OOT)
+# define WaterBox_GetSurface1_2 WaterBox_GetSurface1
+#endif
+
 #if defined(GAME_MM)
 # define func_800A8150 Item_CollectibleDropTable
-void SkinMatrix_Vec3fMtxFMultXYZW(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDest);
 void func_800B1210(struct PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep);
 #endif
 
@@ -508,10 +513,11 @@ s32 DynaPolyActor_TransformCarriedActor(CollisionContext* colCtx, s32 bgId, Acto
 s32 WaterBox_GetSurface1(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
 f32 Math3D_Vec3fMagnitude(Vec3f* vec);
 
+void DynaPolyActor_LoadMesh(PlayState* play, DynaPolyActor* dynaActor, CollisionHeader* meshHeader);
+extern Vec3f gZeroVec3f;
 
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
-extern Vec3f gZeroVec3f;
 
 Actor* SubS_FindActor(PlayState* play, Actor* actorListStart, u8 actorCategory, s16 actorId);
 void SubS_TimePathing_FillKnots(f32 knots[], s32 order, s32 numPoints);
@@ -521,7 +527,6 @@ void Environment_StartTime(void);
 void Environment_StopTime(void);
 void Audio_PlaySfx_MessageCancel(void);
 void Audio_PlaySfx_MessageDecide(void);
-void DynaPolyActor_LoadMesh(PlayState* play, DynaPolyActor* dynaActor, CollisionHeader* meshHeader);
 Path* SubS_GetAdditionalPath(PlayState* play, u8 pathIndex, s32 limit);
 void Math_Vec3s_ToVec3f(Vec3f* dest, Vec3s* src);
 void Interface_InitMinigame(PlayState* play);
