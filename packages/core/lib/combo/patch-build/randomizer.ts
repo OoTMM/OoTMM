@@ -1065,6 +1065,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     REGION_STATE_REWARDS: settings.regionState === 'reward',
     REGION_STATE_FREE: settings.regionState === 'free',
     MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
+    SONG_NOTES: settings.songs === 'notes',
   };
 
   for (const v in exprs) {

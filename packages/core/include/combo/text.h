@@ -102,7 +102,6 @@ void comboTextHijackLightArrows(PlayState* play);
 void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o);
 #else
 void comboTextHijackDungeonRewardHints(PlayState* play, int hint);
-void comboTextHijackOathToOrder(PlayState* play);
 #endif
 
 #endif

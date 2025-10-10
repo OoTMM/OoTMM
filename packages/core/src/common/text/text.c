@@ -656,10 +656,16 @@ void comboTextAutoLineBreaks(char* buffer)
         {
             lastSpace = i;
         }
-        if (c == (u8)(TEXT_NL[0]) || c == (u8)(TEXT_BB[0]))
+        if (c == (u8)(TEXT_NL[0]))
+        {
+            lastSpace = i;
+            lineLength = 999;
+        }
+        if (c == (u8)(TEXT_BB[0]))
         {
             lastSpace = -1;
             lineLength = 0;
+            lineCount = 0;
         }
         i += comboMultibyteCharSize(c);
     }
@@ -1212,25 +1218,6 @@ void comboTextHijackLightArrows(PlayState* play)
     comboTextAppendRegionName(&b, gComboConfig.hints.lightArrows.region, gComboConfig.hints.lightArrows.world, TF_PREPOS);
     comboTextAppendStr(&b, "?" TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.font.msgBuf);
-}
-#endif
-
-#if defined(GAME_MM)
-void comboTextHijackOathToOrder(PlayState* play)
-{
-    char* b;
-    char* start;
-
-    b = play->msgCtx.font.textBuffer.schar;
-    comboTextAppendHeader(&b);
-    start = b;
-    comboTextAppendStr(&b,
-        "Have you found the " TEXT_COLOR_PINK "Oath to Order "
-    );
-    comboTextAppendClearColor(&b);
-    comboTextAppendRegionName(&b, gComboConfig.hints.oathToOrder.region, gComboConfig.hints.oathToOrder.world, TF_PREPOS);
-    comboTextAppendStr(&b, "?" TEXT_END);
-    comboTextAutoLineBreaks(start);
 }
 #endif
 
