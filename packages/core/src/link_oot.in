@@ -588,7 +588,6 @@ EffectSsDeadDs_Spawn = 0x8001e3b0;
 EffectSsDeadDs_SpawnStationary = 0x8001e428;
 EffectSsDeadSound_Spawn = 0x8001e478;
 EffectSsDeadSound_SpawnStationary = 0x8001e510;
-EffectSsIceSmoke_Spawn = 0x8001e560;
 
 Collider_InitBase = 0x80049e70;
 Collider_DestroyBase = 0x80049eb8;
