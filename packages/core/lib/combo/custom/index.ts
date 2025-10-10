@@ -439,6 +439,7 @@ class CustomAssetsBuilder {
 
     /* Load custom objects */
     await this.addObjectFile('TRIFORCE', 'triforce.zobj', [0x06000a30]);
+    await this.addObjectFile('SKELETON_KEY', 'skeleton_key.zobj', [0x06001f70]);
     await this.addObjectFile('BTN_A', 'btn_a.zobj', [0x06000da0]);
     await this.addObjectFile('BTN_C_HORIZONTAL', 'btn_c_horizontal.zobj', [0x06000e10]);
     await this.addObjectFile('BTN_C_VERTICAL', 'btn_c_vertical.zobj', [0x06000960]);

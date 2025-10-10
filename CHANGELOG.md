@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- The Skeleton key has a new, custom model (thanks Dahni).
 - Cloaked items are now progressive when relevant.
 
 ### Fixed
