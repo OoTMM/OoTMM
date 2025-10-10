@@ -27,7 +27,7 @@ void initHeap(void)
 #endif
 }
 
-void* malloc(size_t size)
+static void* _malloc(size_t size)
 {
     HeapBlockHeader* best;
     HeapBlockHeader* block;
@@ -106,7 +106,7 @@ static void mergeFreeBlocks(HeapBlockHeader* block)
     }
 }
 
-void free(void* data)
+static void _free(void* data)
 {
     HeapBlockHeader* block;
 
@@ -215,7 +215,7 @@ static void* _realloc_grow(HeapBlockHeader* block, size_t size)
     }
 }
 
-void* realloc(void* data, size_t size)
+static void* _realloc(void* data, size_t size)
 {
     size_t internalSize;
     HeapBlockHeader* block;
@@ -287,3 +287,34 @@ void malloc_check(void)
     }
 }
 #endif
+
+void* malloc(size_t size)
+{
+    void* ptr;
+    u64 mask;
+
+    mask = osSetIntMask(1);
+    ptr = _malloc(size);
+    osSetIntMask(mask);
+    return ptr;
+}
+
+void free(void* ptr)
+{
+    u64 mask;
+
+    mask = osSetIntMask(1);
+    _free(ptr);
+    osSetIntMask(mask);
+}
+
+void* realloc(void* ptr, size_t size)
+{
+    void* newPtr;
+    u64 mask;
+
+    mask = osSetIntMask(1);
+    newPtr = _realloc(ptr, size);
+    osSetIntMask(mask);
+    return newPtr;
+}
