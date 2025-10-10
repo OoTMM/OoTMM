@@ -367,7 +367,12 @@ class MusicInjector {
       }
 
       /* Add the music */
-      const seq = await seqFiles[0].async('uint8array');
+      let seq = await seqFiles[0].async('uint8array');
+      if (seq.length & 0xf) {
+        const pad = new Uint8Array(16 - (seq.length & 0xf));
+        pad.fill(0x00);
+        seq = concatUint8Arrays([seq, pad]);
+      }
       const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
       this.musics.push(music);
     }
