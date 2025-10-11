@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Separate settings for keeping ammo/rupees and bottle contents through cycle resets in MM.
 - The Skeleton key has a new, custom model (thanks Dahni).
 - Cloaked items are now progressive when relevant.
 

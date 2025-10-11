@@ -3071,7 +3071,15 @@ export const SETTINGS = [{
   name: 'Keep Items on Cycle Reset',
   category: 'main.qol',
   type: 'boolean',
-  description: 'Keeps items through a cycle reset',
+  description: 'Keeps ammo & rupees through a cycle reset',
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'keepBottlesReset',
+  name: 'Keep Bottles on Cycle Reset',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Keeps bottle contents through a cycle reset',
   default: false,
   cond: hasMM,
 }, {

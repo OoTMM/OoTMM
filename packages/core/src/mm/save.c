@@ -85,7 +85,10 @@ void Sram_SaveEndOfCycle(PlayState* play)
         /* Reset rupees */
         gSave.info.playerData.rupees = 0;
         gSave.rupeesDelta = 0;
+    }
 
+    if (!Config_Flag(CFG_MM_KEEP_BOTTLES_RESET))
+    {
         /* Reset chateau */
         MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     }
@@ -102,7 +105,7 @@ void Sram_SaveEndOfCycle(PlayState* play)
         case ITEM_MM_GOLD_DUST:
             break;
         case ITEM_MM_SPRING_WATER_HOT:
-            if (!Config_Flag(CFG_MM_KEEP_ITEMS_RESET))
+            if (!Config_Flag(CFG_MM_KEEP_BOTTLES_RESET))
                 *slot = ITEM_MM_BOTTLE_EMPTY;
             else
                 *slot = ITEM_MM_SPRING_WATER;
@@ -117,7 +120,7 @@ void Sram_SaveEndOfCycle(PlayState* play)
             *slot = ITEM_MM_BOTTLE_EMPTY;
             break;
         default:
-            if (!Config_Flag(CFG_MM_KEEP_ITEMS_RESET))
+            if (!Config_Flag(CFG_MM_KEEP_BOTTLES_RESET))
                 *slot = ITEM_MM_BOTTLE_EMPTY;
             break;
         }
