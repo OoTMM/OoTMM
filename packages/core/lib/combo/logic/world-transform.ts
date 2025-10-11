@@ -1073,7 +1073,7 @@ export class LogicPassWorldTransform {
 
   private filterLocations(
     value: "none" | "all" | "overworld" | "dungeons",
-    type: "grass" | "snowball" | "rupee" | "heart" | "crate" | "wonder" | "barrel",
+    type: "grass" | "snowball" | "rupee" | "heart" | "crate" | "wonder" | "barrel" | "rock",
     game: "oot" | "mm") {
     if (value === 'all') {
       return;
@@ -1220,6 +1220,8 @@ export class LogicPassWorldTransform {
 
     /* Grasssanity */
     this.filterLocations(settings.shuffleGrassOot, 'grass', 'oot');
+
+    this.filterLocations(settings.shuffleRocksOot ? 'all' : 'none', 'rock', 'oot');
 
     if (settings.shuffleGrassMm === 'none') {
       const grass = POOL.mm.filter((x: any) => x.type === 'grass').map((x: any) => gameId('mm', x.location, ' ')) as string[];
