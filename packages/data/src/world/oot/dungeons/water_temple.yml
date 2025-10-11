@@ -23,8 +23,8 @@
   locations:
     "Water Temple Pot Main Room Near Block 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
     "Water Temple Pot Main Room Near Block 2": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
-    "Water Temple Pot Main Room Near Boss 1": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
-    "Water Temple Pot Main Room Near Boss 2": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
+    "Water Temple Pot Main Room Near Boss 1": "((can_longshot || can_use_ice_arrow_platforms) && event(WATER_LEVEL_RESET)) || climb_anywhere"
+    "Water Temple Pot Main Room Near Boss 2": "((can_longshot || can_use_ice_arrow_platforms) && event(WATER_LEVEL_RESET)) || climb_anywhere"
 
 "Water Temple Main Ledge":
   dungeon: Water
