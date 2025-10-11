@@ -35,7 +35,8 @@ static void EnArrow_ActionFlyHook(Actor* this)
     /* Original call */
     Actor_MoveXZGravity(this);
 
-    EnArrow_CheckIcePlatform(this, gPlay);
+    if (Config_Flag(CFG_OOT_ICE_ARROW_PLATFORMS))
+        EnArrow_CheckIcePlatform(this, gPlay);
 }
 
 PATCH_CALL(0x80884e24, EnArrow_ActionFlyHook);
