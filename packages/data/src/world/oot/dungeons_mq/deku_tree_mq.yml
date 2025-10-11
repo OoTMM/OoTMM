@@ -132,7 +132,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Lobby": "true"
-    "MQ Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || has_hover_boots || hookshot_anywhere || climb_anywhere"
+    "MQ Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || can_use_ice_arrow_platforms ||  has_hover_boots || hookshot_anywhere || climb_anywhere"
     "MQ Deku Tree Room Before Water Room Entry Door": "true"
   events:
     DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event.

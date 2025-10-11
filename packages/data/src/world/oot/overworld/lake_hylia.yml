@@ -7,7 +7,7 @@
     "Lake Hylia Near Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || (time_travel_at_will && can_swim) || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_gold)"
-    "Lake Hylia Near Pond": "(can_swim && (is_child || lake_water_control)) || (is_adult && (scarecrow_hookshot || hookshot_anywhere || climb_anywhere)) || can_ride_bean(BEAN_LAKE_HYLIA)"
+    "Lake Hylia Near Pond": "((can_swim || can_use_ice_arrow_platforms) && (is_child || lake_water_control)) || (is_adult && (scarecrow_hookshot || hookshot_anywhere || climb_anywhere)) || can_ride_bean(BEAN_LAKE_HYLIA)"
     "Lake Hylia Grotto": "true"
   events:
     CLEAR_STATE_LAKE: "is_adult && (wisp_enabled(BOSS_MORPHA, MEDALLION_WATER) || event(WISP_CLEAR_STATE_LAKE))"
@@ -22,13 +22,13 @@
     BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
   locations:
     "Lake Hylia Underwater Bottle": "is_child && can_dive_small && can_swim"
-    "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (lake_water_control || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
+    "Lake Hylia Fire Arrow": "is_adult && can_use_bow && ((lake_water_control && (can_swim || can_use_ice_arrow_platforms)) || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
-    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && (can_swim || (has_iron_boots && can_longshot) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
+    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull && (can_swim || (has_iron_boots && can_longshot) || (can_use_ice_arrow_platforms) || (time_travel_at_will && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
-    "Lake Hylia Island Big Fairy": "can_play_sun && ((is_child && (can_swim || (has_iron_boots && longshot_anywhere))) || (is_adult && ((lake_water_control && can_swim) || scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
+    "Lake Hylia Island Big Fairy": "can_play_sun && (((can_swim || can_use_ice_arrow_platforms) && (lake_water_control || is_child)) || (has_iron_boots && longshot_anywhere) || (is_adult && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)))"
     # These pots do exist in the vanilla game but they fail to load
     "Lake Hylia Pot 1": "is_child"
     "Lake Hylia Pot 2": "is_child"
