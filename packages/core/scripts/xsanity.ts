@@ -165,6 +165,7 @@ const ACTORS_OOT = {
   OBJ_HAMISHI: 0x1d2,
   BG_ICICLE: 0x1c7,
   BG_ICE_SHELTER: 0x0ef,
+  EN_ISHI: 0x14e,
 };
 
 const ACTORS_MM = {
@@ -1343,6 +1344,13 @@ function actorHandlerOotEnItem00(checks: Check[], ra: RoomActor) {
   }
 }
 
+function actorHandlerOotEnIshi(checks: Check[], ra: RoomActor) {
+  const type = (ra.actor.params & 1);
+  if (type !== 0) return;
+  const item = 'RANDOM';
+  checks.push({ roomActor: ra, item, name: 'Rock', type: 'rock' });
+}
+
 function actorHandlerMmEnItem00(checks: Check[], ra: RoomActor) {
   const item00arg = ra.actor.params & 0xff;
   if (item00arg >= ITEM00_DROPS_MM.length) {
@@ -1393,6 +1401,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_OOT.BG_ICICLE]: actorHandlerOotBgIcicle,
   [ACTORS_OOT.BG_ICE_SHELTER]: actorHandlerOotBgIceShelter,
+  [ACTORS_OOT.EN_ISHI]: actorHandlerOotEnIshi,
 };
 
 const ACTORS_HANDLERS_MM = {
