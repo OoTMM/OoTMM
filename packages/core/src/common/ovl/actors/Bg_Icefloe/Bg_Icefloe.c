@@ -128,6 +128,7 @@ void func_80AC4C34(BgIcefloe* this, PlayState* play) {
                                 &this->dyna.actor.home.pos.y, &waterBox)) {
         func_80AC4CF0(this);
     } else {
+        this->dyna.actor.scale.y = comboIsLinkAdult() ? 0.20f : 0.13f;
         this->dyna.actor.world.pos.y =
             (Math_SinF(this->timer * (M_PIf / 30)) * 3.0f) + (this->dyna.actor.home.pos.y + 10.0f);
     }
@@ -135,6 +136,7 @@ void func_80AC4C34(BgIcefloe* this, PlayState* play) {
 
 void func_80AC4CF0(BgIcefloe* this) {
     this->timer = 50;
+    this->dyna.actor.scale.y = 0.13f;
     Actor_PlaySfx(&this->dyna.actor, NA_SE_EV_ICE_MELT_LEVEL);
     this->actionFunc = func_80AC4D2C;
 }
