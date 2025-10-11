@@ -244,7 +244,7 @@
   dungeon: Water
   exits:
     "Water Temple Main Room Bottom Floor": "event(WATER_GATES) && has_iron_boots && has_tunic_zora"
-    "Water Temple Leading To Side Loop After Spikes": "can_longshot || hookshot_anywhere || climb_anywhere"
+    "Water Temple Leading To Side Loop After Spikes": "can_longshot || can_use_ice_arrow_platforms || hookshot_anywhere || climb_anywhere"
 "Water Temple Leading To Side Loop After Spikes":
   dungeon: Water
   exits:
