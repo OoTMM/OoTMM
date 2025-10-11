@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a transcendent fairy item, which counts as every stray fairy at once.
 - Add a setting to make OoT Ice Arrow behave like in MM, creating walkable ice platforms on water (no logic yet).
 - Add the ability to split songs into invividually shuffled notes (thanks @ebrown38).
 - Add bronze scale, an extra scale item required to enter deep water (logic is experimental).
