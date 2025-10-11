@@ -1141,18 +1141,25 @@ function actorHandlerOotObjHana(checks: Check[], ra: RoomActor) {
 
 function actorHandlerOotObjMure2(checks: Check[], ra: RoomActor) {
   const type = (ra.actor.params) & 3;
+  let checkType: string;
+  let checkName: string;
+  let checkName2: string;
   let count: number;
-  if (type > 1) {
-    return;
-  }
-  if (type == 0) {
-    count = 9;
+  if (type >= 2) {
+    count = 8;
+    checkType = 'rock';
+    checkName = 'Rock Circle';
+    checkName2 = 'Rock';
   } else {
-    count = 12;
+    count = (type === 0) ? 9 : 12;
+    checkType = 'grass';
+    checkName = 'Grass Pack';
+    checkName2 = 'Grass';
   }
+
   const item = 'RANDOM';
   for (let i = 0; i < count; ++i) {
-    checks.push({ roomActor: ra, item, name: 'Grass Pack', type: 'grass', sliceId: i, name2: `Grass ${i + 1}` });
+    checks.push({ roomActor: ra, item, name: checkName, type: checkType, sliceId: i, name2: `${checkName2} ${i + 1}` });
   }
 }
 
