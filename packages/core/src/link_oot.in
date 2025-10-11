@@ -427,6 +427,7 @@ Gfx_SetupDL_25Opa = 0x8007e298;
 Math_SmoothStepToS = 0x80064508;
 Math_FAcosF = 0x800cd890;
 Math_Vec3f_DistXZ = 0x80063eb8;
+Math_Vec3f_Diff = 0x80063d48;
 Math3D_Vec3fMagnitude = 0x800a5510;
 Math_SinF = 0x800a45fc;
 Player_IsBurningStickInRange = 0x80079a20;
