@@ -693,7 +693,7 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId, u8 param)
         u32 color2;
         Gfx* rainbow;
 
-        h = (play->state.frameCount % 60) * (1.f/60.f);
+        h = (play->state.frameCount & 0x1f) * (1.f/32.f);
         color = hsla(h, 1.f, 0.5f, 1.f);
         color2 = hsla(h, 1.f, 0.3f, 1.f);
 

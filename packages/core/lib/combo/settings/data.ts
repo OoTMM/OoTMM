@@ -1732,6 +1732,14 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
+  key: 'transcendantFairy',
+  name: 'Transcendant Fairy',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Transcendant Fairy that counts as every Stray Fairy in MM.',
+  default: false,
+  cond: (s: any) => hasMM(s)
+}, {
   key: 'bombchuBehaviorOot',
   name: 'Bombchu Behavior (OoT)',
   category: 'items.extensions',
