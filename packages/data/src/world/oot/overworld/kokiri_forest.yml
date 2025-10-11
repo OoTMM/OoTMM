@@ -62,6 +62,10 @@
     "Kokiri Forest Wonder Item Platforms 1": "true"
     "Kokiri Forest Wonder Item Platforms 2": "true"
     "Kokiri Forest Wonder Item Sign": "can_use_sword"
+    "Kokiri Forest Rock Child 1": "true"
+    "Kokiri Forest Rock Child 2": "true"
+    "Kokiri Forest Rock Child 3": "true"
+    "Kokiri Forest Rock Child 4": "true"
 
 "Kokiri Forest Grass":
   region: KOKIRI_FOREST

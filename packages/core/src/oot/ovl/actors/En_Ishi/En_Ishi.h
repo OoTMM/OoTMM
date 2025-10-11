@@ -2,6 +2,7 @@
 #define OVL_EN_ISHI_H
 
 #include <combo.h>
+#include <combo/xflags.h>
 
 #define ISHI_GET_SWITCH_FLAG_UPPER(thisx)  ((((thisx)->params) >> (12 - 2)) & (NBITS_TO_MASK(4) << 2))
 #define ISHI_GET_SWITCH_FLAG_LOWER(thisx)  PARAMS_GET_U((thisx)->params, 6, 2)
@@ -19,9 +20,10 @@ typedef void (*EnIshiEffectSpawnFunc)(struct EnIshi*, struct PlayState*);
 typedef void (*EnIshiDrawFunc)(struct EnIshi*, struct PlayState*);
 
 typedef struct EnIshi {
-    /* 0x0000 */ Actor actor;
-    /* 0x014C */ EnIshiActionFunc actionFunc;
-    /* 0x0150 */ ColliderCylinder collider;
+    Actor               actor;
+    EnIshiActionFunc    actionFunc;
+    ColliderCylinder    collider;
+    Xflag               xflag;
 } EnIshi; // size = 0x019C
 
 #endif

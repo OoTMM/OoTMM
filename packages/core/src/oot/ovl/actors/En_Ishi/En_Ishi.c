@@ -232,6 +232,12 @@ void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play) {
 void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
     s16 dropParams;
 
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        return;
+    }
+
     if (PARAMS_GET_U(this->actor.params, 0, 1) == ROCK_SMALL) {
         dropParams = PARAMS_GET_U(this->actor.params, 8, 4);
 
@@ -289,9 +295,16 @@ static InitChainEntry sInitChains[][5] = {
     },
 };
 
+static void EnIshi_Alias(Xflag* xflag) {
+}
+
 void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
+
+    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+        EnIshi_Alias(&this->xflag);
+    }
 
     Actor_ProcessInitChain(&this->actor, sInitChains[type]);
     if (play->csCtx.state != CS_STATE_IDLE) {

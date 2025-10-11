@@ -453,6 +453,7 @@ function checkKey(check: WorldCheck): number {
   case 'crate':
   case 'barrel':
   case 'grass':
+  case 'rock':
   case 'fairy':
   case 'snowball':
   case 'hive':
