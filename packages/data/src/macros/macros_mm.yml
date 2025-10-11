@@ -137,6 +137,14 @@
 "can_play_tp_shadow": "setting(crossWarpOot) && can_play_tp_shadow_raw"
 "can_play_tp_spirit": "setting(crossWarpOot) && can_play_tp_spirit_raw"
 
+# Stray fairies
+"sf_town": "has(TRANSCENDENT_FAIRY) || has(STRAY_FAIRY_TOWN)"
+"sf_dungeon(item)": "has(TRANSCENDENT_FAIRY) || has(item, var(STRAY_FAIRY_COUNT))"
+"sf_woodfall": "sf_dungeon(STRAY_FAIRY_WF)"
+"sf_snowhead": "sf_dungeon(STRAY_FAIRY_SH)"
+"sf_great_bay": "sf_dungeon(STRAY_FAIRY_GB)"
+"sf_stone_tower": "sf_dungeon(STRAY_FAIRY_ST)"
+
 # Misc
 "has_spin_upgrade": "cond(setting(sharedSpinUpgrade), has(SHARED_SPIN_UPGRADE), has(SPIN_UPGRADE))"
 "keaton_grass_easy": "has_sword && has_magic"

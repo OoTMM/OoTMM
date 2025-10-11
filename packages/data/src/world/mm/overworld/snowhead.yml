@@ -48,7 +48,7 @@
   exits:
     "Snowhead Near Fairy Fountain": "true"
   locations:
-    "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, var(STRAY_FAIRY_COUNT))"
+    "Snowhead Great Fairy": "sf_snowhead"
 
 "Owl Snowhead":
   region: SNOWHEAD

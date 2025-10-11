@@ -1732,11 +1732,11 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
-  key: 'transcendantFairy',
-  name: 'Transcendant Fairy',
+  key: 'transcendentFairy',
+  name: 'Transcendent Fairy',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a Transcendant Fairy that counts as every Stray Fairy in MM.',
+  description: 'Adds a Transcendent Fairy that counts as every Stray Fairy in MM.',
   default: false,
   cond: (s: any) => hasMM(s)
 }, {

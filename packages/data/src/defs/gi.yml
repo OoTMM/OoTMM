@@ -471,7 +471,7 @@
 - { id: MM_STRAY_FAIRY_GB, type: FAIRY, add: [STRAY_FAIRY, 2], flags: 0x80, draw: [STRAY_FAIRY, 3], name: "a <C0>Stray Fairy (Great Bay)" }
 - { id: MM_STRAY_FAIRY_ST, type: FAIRY, add: [STRAY_FAIRY, 3], flags: 0x80, draw: [STRAY_FAIRY, 4], name: "a <C0>Stray Fairy (Stone Tower)" }
 - { id: MM_STRAY_FAIRY_TOWN, type: FAIRY, add: [STRAY_FAIRY, 4], flags: 0x80, draw: [STRAY_FAIRY, 5], name: "a <C0>Stray Fairy (Town)" }
-- { id: MM_TRANSCENDANT_FAIRY, type: MAJOR, add: TRANSCENDANT_FAIRY, flags: 0x80, draw: [STRAY_FAIRY, 6], name: "the <C1>Transcendant Fairy" }
+- { id: MM_TRANSCENDENT_FAIRY, type: MAJOR, add: TRANSCENDENT_FAIRY, flags: 0x80, draw: [STRAY_FAIRY, 6], name: "the <C1>Transcendent Fairy" }
 - { id: MM_BOMB, item: MM_BOMB, type: MINOR, add: [MM_BOMBS, 1], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "a <C1>Bomb" }
 - { id: MM_BOMBS_5, item: MM_BOMBS_5, type: MINOR, add: [MM_BOMBS, 5], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>5 Bombs" }
 - { id: MM_BOMBS_10, item: MM_BOMBS_10, type: MINOR, add: [MM_BOMBS, 10], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>10 Bombs" }

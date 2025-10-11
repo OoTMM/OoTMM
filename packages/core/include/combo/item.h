@@ -112,7 +112,7 @@
 #define IA_OOT_SPIN_UPGRADE     0x67
 #define IA_TRAP                 0x68
 #define IA_SONG_NOTE            0x69
-#define IA_TRANSCENDANT_FAIRY   0x6a
+#define IA_TRANSCENDENT_FAIRY   0x6a
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

@@ -247,8 +247,8 @@
   exits:
     "Clock Town North": "true"
   locations:
-    "Clock Town Great Fairy": "has(STRAY_FAIRY_TOWN)"
-    "Clock Town Great Fairy Alt": "has(STRAY_FAIRY_TOWN) && (has(MASK_DEKU) || has_mask_goron || has_mask_zora)"
+    "Clock Town Great Fairy": "sf_town"
+    "Clock Town Great Fairy Alt": "sf_town && (has(MASK_DEKU) || has_mask_goron || has_mask_zora)"
 
 "Bomb Shop":
   region: ENTRANCE

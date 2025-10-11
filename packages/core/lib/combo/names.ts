@@ -377,7 +377,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_POUCH_SILVER_SPIRIT_LOBBY: "Silver Rupee Pouch (Spirit Temple - Lobby)",
   OOT_POUCH_SILVER_SPIRIT_SUN: "Silver Rupee Pouch (Spirit Temple - Sun Block)",
   OOT_RUPEE_MAGICAL: "Magical Silver Rupee",
-  MM_TRANSCENDANT_FAIRY: "Transcendent Fairy",
+  MM_TRANSCENDENT_FAIRY: "Transcendent Fairy",
   OOT_RUTO_LETTER: "Ruto's Letter",
   OOT_SCALE: "Progressive Scale (Oot)",
   OOT_SHIELD_DEKU: "Deku Shield (OoT)",

@@ -1930,7 +1930,7 @@ static int addItemSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
     return ++gSharedCustomSave.notes[param];
 }
 
-static int addItemTranscendantFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemTranscendentFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHealthMm(play, 20);
     MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
@@ -2048,7 +2048,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSpinUpgradeOot,
     addItemTrap,
     addItemSongNote,
-    addItemTranscendantFairy,
+    addItemTranscendentFairy,
 };
 
 extern const u8 kAddItemFuncs[];

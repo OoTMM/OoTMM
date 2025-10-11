@@ -597,7 +597,7 @@ static const Gfx kStrayFairyDlistColorTownBg[] = {
     gsSPEndDisplayList(),
 };
 
-static const Gfx kStrayFairyDlistColorTranscendant[] = {
+static const Gfx kStrayFairyDlistColorTranscendent[] = {
     gsDPSetPrimColor(0, 0, 0xff, 0xff, 0xff, 255),
     gsDPSetEnvColor(0xcc, 0xcc, 0xcc, 255),
     gsSPEndDisplayList(),
@@ -652,7 +652,7 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId, u8 param)
         kStrayFairyDlistColorGreatBay,
         kStrayFairyDlistColorStoneTower,
         kStrayFairyDlistColorTown,
-        kStrayFairyDlistColorTranscendant,
+        kStrayFairyDlistColorTranscendent,
     };
 
     static const Gfx* const kColorsBg[] = {
