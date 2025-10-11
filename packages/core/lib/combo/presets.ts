@@ -37,6 +37,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   bottleContentShuffle: true,
   sticksNutsUpgradesMm: true,
   blueFireArrows: true,
+  iceArrowPlatformsOot: true,
   sunlightArrows: true,
   progressiveGoronLullaby: 'single',
   freeScarecrowOot: true,
@@ -91,6 +92,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   agelessChildTrade: true,
   scalesMm: true,
   strengthMm: true,
+  kegStrength3: true,
   sharedScales: true,
   sharedStrength: true,
   keepItemsReset: true,
@@ -261,9 +263,9 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
   strayFairyChestShuffle: "starting",
   rainbowBridge: 'custom',
   preCompletedDungeons: true,
-  preCompletedDungeonsMajor: 6,
+  preCompletedDungeonsMajor: 8,
   preCompletedDungeonsStones: 2,
-  preCompletedDungeonsMedallions: 2,
+  preCompletedDungeonsMedallions: 4,
   preCompletedDungeonsRemains: 2,
   junkLocations: [
     "MM Beneath The Graveyard Dampe Chest",
@@ -278,7 +280,6 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
     "MM Ocean Spider House Wallet",
     "MM Pinnacle Rock HP",
     "MM Snowhead Great Fairy",
-    "MM Stock Pot Inn Couple's Mask",
     "MM Swamp Spider House Mask of Truth",
     "MM Town Archery Reward 2",
     "MM Waterfall Rapids Beaver Race 2",
@@ -288,13 +289,12 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
   ],
   specialConds: {
     BRIDGE: {
-      count: 10,
-      stones: true,
-      medallions: true,
-      remains: true
+      count: 0
     },
     MOON: {
-      count: 0
+      count: 7,
+      stones: true,
+      remains: true
     }
   },
   hints: [
