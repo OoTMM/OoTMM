@@ -3,6 +3,7 @@
 
 #if defined(GAME_OOT)
 # define ACTOR_PLAYER                  0x000
+# define ACTOR_BG_ICEFLOE              0x001
 # define ACTOR_EN_TEST                 0x002
 # define ACTOR_EN_GIRLA                0x004
 # define ACTOR_CUSTOM_WARP             0x005

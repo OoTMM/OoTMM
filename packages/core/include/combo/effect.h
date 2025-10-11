@@ -69,7 +69,6 @@ void func_800B0F18(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, C
 
 void EffectSsDeadDb_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* prim, Color_RGBA8* env, s16 scale, s16 scaleStep, s32 life);
 
-
 #define EFFECT_BLURE_COLOR_COUNT 4
 
 #define EFFECT_BLURE_FLAG_2         (1 << 1)

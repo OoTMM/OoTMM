@@ -1066,6 +1066,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     REGION_STATE_FREE: settings.regionState === 'free',
     MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
     SONG_NOTES: settings.songs === 'notes',
+    OOT_ICE_ARROW_PLATFORMS: settings.iceArrowPlatformsOot,
   };
 
   for (const v in exprs) {

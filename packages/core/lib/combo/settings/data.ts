@@ -1646,6 +1646,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'iceArrowPlatformsOot',
+  name: 'Ice Arrow Platforms (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Allow ice arrows in OoT to create walkable ice platforms on water',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'sunlightArrows',
   name: 'Sunlight Arrows',
   category: 'items.extensions',

@@ -378,6 +378,7 @@ ActorFind = 0x80025b0c;
 sqrtf = 0x800D0DC0;
 
 EffectSsIceSmoke_Spawn = 0x8001e560;
+SkinMatrix_Vec3fMtxFMultXYZW = 0x8008ec20;
 
 CollisionCheck_SetOC = 0x8004c130;
 Collider_InitCylinder = 0x8004ab7c;
@@ -426,6 +427,7 @@ Gfx_SetupDL_25Opa = 0x8007e298;
 Math_SmoothStepToS = 0x80064508;
 Math_FAcosF = 0x800cd890;
 Math_Vec3f_DistXZ = 0x80063eb8;
+Math_Vec3f_Diff = 0x80063d48;
 Math3D_Vec3fMagnitude = 0x800a5510;
 Math_SinF = 0x800a45fc;
 Player_IsBurningStickInRange = 0x80079a20;
@@ -588,7 +590,6 @@ EffectSsDeadDs_Spawn = 0x8001e3b0;
 EffectSsDeadDs_SpawnStationary = 0x8001e428;
 EffectSsDeadSound_Spawn = 0x8001e478;
 EffectSsDeadSound_SpawnStationary = 0x8001e510;
-EffectSsIceSmoke_Spawn = 0x8001e560;
 
 Collider_InitBase = 0x80049e70;
 Collider_DestroyBase = 0x80049eb8;

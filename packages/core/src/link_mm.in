@@ -420,6 +420,7 @@ Matrix_MultVec3f = 0x80181a98;
 Rand_CenteredFloat = 0x801795C0;
 
 EffectSsIceSmoke_Spawn = 0x800B320C;
+EffectSsIceBlock_Spawn = 0x800B326C;
 EffectSsKiraKira_SpawnDispersed = 0x800B16F4;
 EffectSsGSplash_Spawn = 0x800b1f4c;
 EffectSsGRipple_Spawn = 0x800b1ef4;
