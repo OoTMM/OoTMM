@@ -1578,6 +1578,8 @@ static int addItemStrayFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
     }
     else
     {
+        if (gMmSave.info.inventory.strayFairies[param] >= 15)
+            return 0;
         gMmSave.info.inventory.strayFairies[param]++;
         return gMmSave.info.inventory.strayFairies[param];
     }
@@ -1928,6 +1930,17 @@ static int addItemSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
     return ++gSharedCustomSave.notes[param];
 }
 
+static int addItemTranscendentFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    addHealthMm(play, 20);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
+    for (int i = 0; i < 4; ++i)
+    {
+        gMmSave.info.inventory.strayFairies[i] = 15;
+    }
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -2035,6 +2048,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSpinUpgradeOot,
     addItemTrap,
     addItemSongNote,
+    addItemTranscendentFairy,
 };
 
 extern const u8 kAddItemFuncs[];

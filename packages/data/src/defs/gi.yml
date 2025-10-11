@@ -465,7 +465,13 @@
 - { id: MM_HEART_CONTAINER, item: MM_HEART_CONTAINER, type: HEART, add: [MM_HEART_PIECE, 4], flags: 0xa0, draw: HEART_CONTAINER, object: [mm, 0x0096], name: "a <C0>Heart Container" }
 - { id: MM_MAGIC_JAR_SMALL, item: MM_MAGIC_JAR_SMALL, type: MINOR, add: [MM_MAGIC, 1], flags: 0x6f, draw: MAGIC_SMALL, object: [mm, 0x00a4], name: "a <C0>Small Magic Jar" }
 - { id: MM_MAGIC_JAR_LARGE, item: MM_MAGIC_JAR_LARGE, type: MINOR, add: [MM_MAGIC, 2], flags: 0x6e, draw: MAGIC_LARGE, object: [mm, 0x00a4], name: "a <C0>Large Magic Jar" }
-- { id: MM_STRAY_FAIRY, item: MM_STRAY_FAIRY, type: FAIRY, add: [STRAY_FAIRY, 0xffff], flags: 0x80, draw: MM_STRAY_FAIRY, name: "a <C0>Stray Fairy" }
+- { id: MM_STRAY_FAIRY, item: MM_STRAY_FAIRY, type: FAIRY, add: [STRAY_FAIRY, 0xffff], flags: 0x80, draw: [STRAY_FAIRY, 0], name: "a <C0>Stray Fairy" }
+- { id: MM_STRAY_FAIRY_WF, type: FAIRY, add: [STRAY_FAIRY, 0], flags: 0x80, draw: [STRAY_FAIRY, 1], name: "a <C0>Stray Fairy (Woodfall)" }
+- { id: MM_STRAY_FAIRY_SH, type: FAIRY, add: [STRAY_FAIRY, 1], flags: 0x80, draw: [STRAY_FAIRY, 2], name: "a <C0>Stray Fairy (Snowhead)" }
+- { id: MM_STRAY_FAIRY_GB, type: FAIRY, add: [STRAY_FAIRY, 2], flags: 0x80, draw: [STRAY_FAIRY, 3], name: "a <C0>Stray Fairy (Great Bay)" }
+- { id: MM_STRAY_FAIRY_ST, type: FAIRY, add: [STRAY_FAIRY, 3], flags: 0x80, draw: [STRAY_FAIRY, 4], name: "a <C0>Stray Fairy (Stone Tower)" }
+- { id: MM_STRAY_FAIRY_TOWN, type: FAIRY, add: [STRAY_FAIRY, 4], flags: 0x80, draw: [STRAY_FAIRY, 5], name: "a <C0>Stray Fairy (Town)" }
+- { id: MM_TRANSCENDENT_FAIRY, type: MAJOR, add: TRANSCENDENT_FAIRY, flags: 0x80, draw: [STRAY_FAIRY, 6], name: "the <C1>Transcendent Fairy" }
 - { id: MM_BOMB, item: MM_BOMB, type: MINOR, add: [MM_BOMBS, 1], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "a <C1>Bomb" }
 - { id: MM_BOMBS_5, item: MM_BOMBS_5, type: MINOR, add: [MM_BOMBS, 5], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>5 Bombs" }
 - { id: MM_BOMBS_10, item: MM_BOMBS_10, type: MINOR, add: [MM_BOMBS, 10], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>10 Bombs" }
@@ -615,11 +621,6 @@
 - { id: MM_BOSS_KEY_SH, type: BOSS_KEY, add: [MM_BOSS_KEY, 1], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Snowhead)" }
 - { id: MM_BOSS_KEY_GB, type: BOSS_KEY, add: [MM_BOSS_KEY, 2], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Great Bay)" }
 - { id: MM_BOSS_KEY_ST, type: BOSS_KEY, add: [MM_BOSS_KEY, 3], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Stone Tower)" }
-- { id: MM_STRAY_FAIRY_WF, type: FAIRY, add: [STRAY_FAIRY, 0], flags: 0x80, draw: MM_STRAY_FAIRY_WF, name: "a <C0>Stray Fairy (Woodfall)" }
-- { id: MM_STRAY_FAIRY_SH, type: FAIRY, add: [STRAY_FAIRY, 1], flags: 0x80, draw: MM_STRAY_FAIRY_SH, name: "a <C0>Stray Fairy (Snowhead)" }
-- { id: MM_STRAY_FAIRY_GB, type: FAIRY, add: [STRAY_FAIRY, 2], flags: 0x80, draw: MM_STRAY_FAIRY_GB, name: "a <C0>Stray Fairy (Great Bay)" }
-- { id: MM_STRAY_FAIRY_ST, type: FAIRY, add: [STRAY_FAIRY, 3], flags: 0x80, draw: MM_STRAY_FAIRY_ST, name: "a <C0>Stray Fairy (Stone Tower)" }
-- { id: MM_STRAY_FAIRY_TOWN, type: FAIRY, add: [STRAY_FAIRY, 4], flags: 0x80, draw: MM_STRAY_FAIRY_TOWN, name: "a <C0>Stray Fairy (Town)" }
 - { id: MM_MAP_WF, type: MAP_COMPASS, add: [MM_MAP, 0], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Woodfall)" }
 - { id: MM_MAP_SH, type: MAP_COMPASS, add: [MM_MAP, 1], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Snowhead)" }
 - { id: MM_MAP_GB, type: MAP_COMPASS, add: [MM_MAP, 2], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Great Bay)" }

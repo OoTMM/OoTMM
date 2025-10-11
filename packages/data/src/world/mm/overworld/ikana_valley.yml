@@ -95,7 +95,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ikana Great Fairy": "has(STRAY_FAIRY_ST, var(STRAY_FAIRY_COUNT))"
+    "Ikana Great Fairy": "sf_stone_tower"
 
 "Ikana Spring Water Cave":
   region: ENTRANCE

@@ -53,7 +53,7 @@
   exits:
     "Woodfall Near Fairy Fountain": "true"
   locations:
-    "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, var(STRAY_FAIRY_COUNT))"
+    "Woodfall Great Fairy": "sf_woodfall"
 
 "Owl Woodfall":
   region: WOODFALL

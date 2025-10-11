@@ -972,6 +972,7 @@ export const REQUIRED = new Set([
   ...MM_BOMBCHU,
   ...SHARED_BOMBCHU,
   ...CLOCKS,
+  Items.MM_TRANSCENDENT_FAIRY,
   Items.OOT_BOMBCHU_BAG,
   Items.MM_BOMBCHU_BAG,
   Items.SHARED_BOMBCHU_BAG,
