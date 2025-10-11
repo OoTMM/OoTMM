@@ -3,7 +3,7 @@
   time: flow
   exits:
     "Hyrule Field": "true"
-    "Zora River": "is_adult || has_explosives_or_hammer || has_hover_boots || climb_anywhere || hookshot_anywhere"
+    "Zora River": "is_adult || has_explosives_or_hammer || has_hover_boots || can_use_ice_arrow_platforms || climb_anywhere || hookshot_anywhere"
   events:
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"

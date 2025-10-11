@@ -46,7 +46,7 @@
   exits:
     "Deku Tree Lobby": "true"
     "Deku Tree Basement Back Room": "can_hit_triggers_distance && event(DEKU_BURN_WEB) && (can_swim || longshot_anywhere || (has_iron_boots && hookshot_anywhere))" #longshot can reach the other side of the spike room
-    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult || has_hover_boots || climb_anywhere || hookshot_anywhere"
+    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || can_use_ice_arrow_platforms || is_adult || has_hover_boots || climb_anywhere || hookshot_anywhere"
   locations:
     "Deku Tree Basement Chest": "true"
     "Deku Tree GS Basement Gate": "gs && can_damage_skull"
