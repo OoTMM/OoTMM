@@ -1063,6 +1063,12 @@ Twin Islands Grass 09,                                  grass,          NONE,   
 Twin Islands Grass 10,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x9000b,                    RANDOM
 Twin Islands Grass 11,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xa000b,                    RANDOM
 Twin Islands Grass 12,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xb000b,                    RANDOM
+Twin Islands Snow Tree Island 1,                        tree,           NONE,                   TWIN_ISLANDS_WINTER,          0x00007,                    NOTHING
+Twin Islands Snow Tree Island 2,                        tree,           NONE,                   TWIN_ISLANDS_WINTER,          0x00008,                    NOTHING
+Twin Islands Snow Tree Ramp,                            tree,           NONE,                   TWIN_ISLANDS_WINTER,          0x00009,                    NOTHING
+Twin Islands Tree Island 1,                             tree,           NONE,                   TWIN_ISLANDS_SPRING,          0x00007,                    NOTHING
+Twin Islands Tree Island 2,                             tree,           NONE,                   TWIN_ISLANDS_SPRING,          0x00008,                    NOTHING
+Twin Islands Tree Ramp,                                 tree,           NONE,                   TWIN_ISLANDS_SPRING,          0x00009,                    NOTHING
 Twin Islands Rupee 1,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000e,                    RUPEE_BLUE
 Twin Islands Rupee 2,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000f,                    RUPEE_BLUE
 Twin Islands Rupee 3,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00010,                    RUPEE_BLUE
