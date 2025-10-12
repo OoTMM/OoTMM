@@ -1450,6 +1450,32 @@ Zora Cape Ledge Chest 2,                                chest,          NONE,   
 Zora Cape Underwater Chest,                             chest,          NONE,                   ZORA_CAPE,                    0x00,                       RUPEE_PURPLE
 Zora Cape Waterfall HP,                                 collectible,    NONE,                   ZORA_CAPE,                    0x07,                       HEART_PIECE
 Zora Cape Owl Statue,                                   npc,            NONE,                   ZORA_CAPE,                    OWL_ZORA_CAPE,              OWL_ZORA_CAPE
+Zora Cape Rock Island 1,                                rock,           NONE,                   ZORA_CAPE,                    0x00020,                    RANDOM
+Zora Cape Rock Island 2,                                rock,           NONE,                   ZORA_CAPE,                    0x00021,                    RANDOM
+Zora Cape Rock Island 3,                                rock,           NONE,                   ZORA_CAPE,                    0x00022,                    RANDOM
+Zora Cape Rock Island 4,                                rock,           NONE,                   ZORA_CAPE,                    0x00023,                    RANDOM
+Zora Cape Rock Island 5,                                rock,           NONE,                   ZORA_CAPE,                    0x00024,                    RANDOM
+Zora Cape Rock Water 1,                                 rock,           NONE,                   ZORA_CAPE,                    0x00025,                    RANDOM
+Zora Cape Rock Water 2,                                 rock,           NONE,                   ZORA_CAPE,                    0x00026,                    RANDOM
+Zora Cape Rock Water 3,                                 rock,           NONE,                   ZORA_CAPE,                    0x00027,                    RANDOM
+Zora Cape Rock Water 4,                                 rock,           NONE,                   ZORA_CAPE,                    0x00028,                    RANDOM
+Zora Cape Rock Water 5,                                 rock,           NONE,                   ZORA_CAPE,                    0x00029,                    RANDOM
+Zora Cape Rock Sand 1,                                  rock,           NONE,                   ZORA_CAPE,                    0x00035,                    RANDOM
+Zora Cape Rock Sand 2,                                  rock,           NONE,                   ZORA_CAPE,                    0x00036,                    RANDOM
+Zora Cape Rock Sand 3,                                  rock,           NONE,                   ZORA_CAPE,                    0x00037,                    RANDOM
+Zora Cape Rock Sand 4,                                  rock,           NONE,                   ZORA_CAPE,                    0x00038,                    RANDOM
+Zora Cape Rock Sand 5,                                  rock,           NONE,                   ZORA_CAPE,                    0x00039,                    RANDOM
+Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
+Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
+Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
+Zora Cape Pot Near Owl Statue 2,                        pot,            NONE,                   ZORA_CAPE,                    0x0046,                     FAIRY
+Zora Cape Pot Near Owl Statue 3,                        pot,            NONE,                   ZORA_CAPE,                    0x0047,                     BOMBS_5
+Zora Cape Pot Near Owl Statue 4,                        pot,            NONE,                   ZORA_CAPE,                    0x0048,                     ARROWS_20
+Zora Cape Pot Game 1,                                   pot,            NONE,                   EXTRA,                        0x0000,                     NOTHING
+Zora Cape Pot Game 2,                                   pot,            NONE,                   EXTRA,                        0x0001,                     NOTHING
+Zora Cape Pot Game 3,                                   pot,            NONE,                   EXTRA,                        0x0002,                     NOTHING
+Zora Cape Pot Game 4,                                   pot,            NONE,                   EXTRA,                        0x0003,                     NOTHING
+Zora Cape Pot Game 5,                                   pot,            NONE,                   EXTRA,                        0x0004,                     NOTHING
 Zora Cape Grotto,                                       chest,          NONE,                   GROTTOS,                      0x15,                       BOMBCHU
 Zora Cape Grotto Grass 01,                              grass,          NONE,                   GROTTOS,                      0x03500,                    RANDOM
 Zora Cape Grotto Grass 02,                              grass,          NONE,                   GROTTOS,                      0x03501,                    RANDOM
@@ -1465,17 +1491,6 @@ Zora Cape Grotto Grass 11,                              grass,          NONE,   
 Zora Cape Grotto Grass 12,                              grass,          NONE,                   GROTTOS,                      0x03511,                    RANDOM
 Zora Cape Grotto Grass 13,                              grass,          NONE,                   GROTTOS,                      0x03512,                    RANDOM
 Zora Cape Grotto Grass 14,                              grass,          NONE,                   GROTTOS,                      0x03513,                    RANDOM
-Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
-Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
-Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
-Zora Cape Pot Near Owl Statue 2,                        pot,            NONE,                   ZORA_CAPE,                    0x0046,                     FAIRY
-Zora Cape Pot Near Owl Statue 3,                        pot,            NONE,                   ZORA_CAPE,                    0x0047,                     BOMBS_5
-Zora Cape Pot Near Owl Statue 4,                        pot,            NONE,                   ZORA_CAPE,                    0x0048,                     ARROWS_20
-Zora Cape Pot Game 1,                                   pot,            NONE,                   EXTRA,                        0x0000,                     NOTHING
-Zora Cape Pot Game 2,                                   pot,            NONE,                   EXTRA,                        0x0001,                     NOTHING
-Zora Cape Pot Game 3,                                   pot,            NONE,                   EXTRA,                        0x0002,                     NOTHING
-Zora Cape Pot Game 4,                                   pot,            NONE,                   EXTRA,                        0x0003,                     NOTHING
-Zora Cape Pot Game 5,                                   pot,            NONE,                   EXTRA,                        0x0004,                     NOTHING
 Great Bay Great Fairy,                                  npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_OCEAN,          DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                                   npc,            NONE,                   ZORA_HALL_ROOMS,              SCRUB_OCEAN,                DEED_OCEAN
 Zora Hall Scrub Shop,                                   npc,            NONE,                   ZORA_HALL_ROOMS,              SCRUB_SHOP_POTION_GREEN,    POTION_GREEN

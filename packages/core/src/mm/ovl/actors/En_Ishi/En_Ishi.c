@@ -425,6 +425,9 @@ static void EnIshi_Alias(Xflag* xf)
             xf->id -= 5;
         }
         break;
+    case SCE_MM_ZORA_CAPE:
+        xf->setupId = 0;
+        break;
     }
 }
 
