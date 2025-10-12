@@ -399,11 +399,11 @@ type RawRoom = {
 type Actor = {
   actorId: number;
   typeId: number;
-  pos: [number, number, number];
   rx: number;
   ry: number;
   rz: number;
   params: number;
+  pos: [number, number, number];
 }
 
 type RoomActors = {
@@ -435,6 +435,7 @@ type Check = {
   item: string;
   roomActor: RoomActor;
   sliceId?: number;
+  letter?: string;
 }
 
 function sliceOverrideOot(a: Actor) {
@@ -1429,6 +1430,42 @@ const ACTORS_HANDLERS = {
   mm: ACTORS_HANDLERS_MM,
 };
 
+function letterChecks(checks: Check[]) {
+  const perScene: { [sceneId: number]: Check[] } = {};
+
+  /* Cluster by scene */
+  for (const c of checks) {
+    if (!perScene[c.roomActor.sceneId]) {
+      perScene[c.roomActor.sceneId] = [];
+    }
+    perScene[c.roomActor.sceneId].push(c);
+  }
+
+  /* Every cluster */
+  for (const cluster of Object.values(perScene)) {
+    let letterValue = 1;
+    for (const c1 of cluster) {
+      for (const c2 of cluster) {
+        if (c1 === c2) continue;
+        if (c1.roomActor.setupId === c2.roomActor.setupId) continue;
+        if (c1.roomActor.roomId !== c2.roomActor.roomId) continue;
+        if (c1.type !== c2.type) continue;
+        if (c1.subtype !== c2.subtype) continue;
+        if (c1.roomActor.actor.pos[0] !== c2.roomActor.actor.pos[0]) continue;
+        if (c1.roomActor.actor.pos[1] !== c2.roomActor.actor.pos[1]) continue;
+        if (c1.roomActor.actor.pos[2] !== c2.roomActor.actor.pos[2]) continue;
+
+        /* We found a match */
+        if (c1.letter === undefined) {
+          c1.letter = letterValue.toString();
+          letterValue++;
+        }
+        c2.letter = c1.letter;
+      }
+    }
+  }
+}
+
 function makeChecks(rooms: RoomActors[], handlers: ActorHandlers): Check[] {
   const checks: Check[] = [];
   for (const r of rooms) {
@@ -1440,6 +1477,8 @@ function makeChecks(rooms: RoomActors[], handlers: ActorHandlers): Check[] {
       }
     }
   }
+
+  letterChecks(checks);
   return checks;
 }
 
@@ -1467,7 +1506,8 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filt
     }
 
     const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
-    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
+    const letterData = check.letter ? ` [${check.letter.padEnd(2)}]` : '';
+    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId, 2)} ${check.name}${letterData} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
     if (check.name2) {
       name = `${name} ${check.name2}`;
     }

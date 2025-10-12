@@ -428,6 +428,53 @@ static void EnIshi_Alias(Xflag* xf)
     case SCE_MM_ZORA_CAPE:
         xf->setupId = 0;
         break;
+    case SCE_MM_GREAT_BAY_COAST:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            switch (xf->id)
+            {
+            case 73: xf->id = 77; break;
+            case 74: xf->id = 70; break;
+            case 75: xf->id = 86; break;
+            case 76: xf->id = 78; break;
+            case 77: xf->id = 71; break;
+            case 78: xf->id = 74; break;
+            case 79: xf->id = 72; break;
+            case 80: xf->id = 94; break;
+            case 81: xf->id = 72; break;
+            case 82: xf->id = 76; break;
+            case 83: xf->id = 79; break;
+            case 84: xf->id = 75; break;
+            case 85: xf->id = 89; break;
+            case 86: xf->id = 69; break;
+            case 87: xf->id = 91; break;
+            case 88: xf->id = 90; break;
+            case 89: xf->id = 66; break;
+            case 90: xf->id = 80; break;
+            case 91: xf->id = 88; break;
+            case 92: xf->id = 92; break;
+            case 93: xf->id = 68; break;
+            case 94: xf->id = 93; break;
+            case 95: xf->id = 67; break;
+            case 96: xf->id = 81; break;
+            case 97: xf->id = 84; break;
+            case 98: xf->id = 85; break;
+            case 99: xf->id = 83; break;
+            case 100: xf->id = 87; break;
+            case 101: xf->id = 103; break;
+            case 102: xf->id = 82; break;
+            case 103: xf->id = 99; break;
+            case 104: xf->id = 97; break;
+            case 105: xf->id = 95; break;
+            case 106: xf->id = 98; break;
+            case 107: xf->id = 96; break;
+            case 108: xf->id = 102; break;
+            case 109: xf->id = 101; break;
+            case 110: xf->id = 100; break;
+            }
+        }
+        break;
     }
 }
 

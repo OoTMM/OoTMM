@@ -1365,6 +1365,44 @@ Great Bay Coast Grass 2,                                grass,          NONE,   
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
 Great Bay Coast Grass 4,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
 Great Bay Coast Grass 5,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
+Great Bay Coast Rock Water Cleared 1,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00045,                    RANDOM
+Great Bay Coast Rock Water Cleared 2,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00042,                    RANDOM
+Great Bay Coast Rock Water 01,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00043,                    RANDOM
+Great Bay Coast Rock Water 02,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00044,                    RANDOM
+Great Bay Coast Rock Water 03,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00046,                    RANDOM
+Great Bay Coast Rock Water 04,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00047,                    RANDOM
+Great Bay Coast Rock Water 05,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00048,                    RANDOM
+Great Bay Coast Rock Water 06,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00049,                    RANDOM
+Great Bay Coast Rock Water 07,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004a,                    RANDOM
+Great Bay Coast Rock Water 08,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004b,                    RANDOM
+Great Bay Coast Rock Water 09,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004c,                    RANDOM
+Great Bay Coast Rock Water 10,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004d,                    RANDOM
+Great Bay Coast Rock Water 11,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004e,                    RANDOM
+Great Bay Coast Rock Water 12,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004f,                    RANDOM
+Great Bay Coast Rock Water 13,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00050,                    RANDOM
+Great Bay Coast Rock Water 14,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00051,                    RANDOM
+Great Bay Coast Rock Water 15,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00052,                    RANDOM
+Great Bay Coast Rock Water 16,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00053,                    RANDOM
+Great Bay Coast Rock Water 17,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00054,                    RANDOM
+Great Bay Coast Rock Water 18,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00055,                    RANDOM
+Great Bay Coast Rock Water 19,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00056,                    RANDOM
+Great Bay Coast Rock Water 20,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00057,                    RANDOM
+Great Bay Coast Rock Water 21,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00058,                    RANDOM
+Great Bay Coast Rock Water 22,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00059,                    RANDOM
+Great Bay Coast Rock Water 23,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005a,                    RANDOM
+Great Bay Coast Rock Water 24,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005b,                    RANDOM
+Great Bay Coast Rock Water 25,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005c,                    RANDOM
+Great Bay Coast Rock Water 26,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005d,                    RANDOM
+Great Bay Coast Rock Water 27,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005e,                    RANDOM
+Great Bay Coast Rock Water 28,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00067,                    RANDOM
+Great Bay Coast Rock Sand 1,                            rock,           NONE,                   GREAT_BAY_COAST,              0x0005f,                    RANDOM
+Great Bay Coast Rock Sand 2,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00060,                    RANDOM
+Great Bay Coast Rock Sand 3,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00061,                    RANDOM
+Great Bay Coast Rock Sand 4,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00062,                    RANDOM
+Great Bay Coast Rock Sand 5,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00063,                    RANDOM
+Great Bay Coast Rock Ledge 1,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00064,                    RANDOM
+Great Bay Coast Rock Ledge 2,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00065,                    RANDOM
+Great Bay Coast Rock Ledge 3,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00066,                    RANDOM
 Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x04085,                    FAIRY
 Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
 Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
