@@ -1,5 +1,6 @@
 #include "En_Ishi.h"
 #include <combo/quake.h>
+#include <combo/custom.h>
 #include <assets/oot/objects/gameplay_field_keep.h>
 
 #define FLAGS ACTOR_FLAG_THROW_ONLY
@@ -19,6 +20,8 @@ void EnIshi_SpawnFragmentsSmall(EnIshi* this, PlayState* play);
 void EnIshi_SpawnFragmentsLarge(EnIshi* this, PlayState* play);
 void EnIshi_SpawnDustSmall(EnIshi* this, PlayState* play);
 void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play);
+
+extern Gfx gOriginalFieldKakeraDL[];
 
 static s16 sRotSpeedX = 0;
 static s16 sRotSpeedY = 0;
@@ -147,7 +150,7 @@ void EnIshi_SpawnFragmentsSmall(EnIshi* this, PlayState* play) {
             phi_v0 = 33;
         }
         EffectSsKakera_Spawn(play, &pos, &velocity, &pos, -420, phi_v0, 30, 5, 0, scales[i], 3, 10, 40,
-                             KAKERA_COLOR_NONE, OBJECT_GAMEPLAY_FIELD_KEEP, gFieldKakeraDL);
+                             KAKERA_COLOR_NONE, OBJECT_GAMEPLAY_FIELD_KEEP, gOriginalFieldKakeraDL);
     }
 }
 
@@ -467,8 +470,49 @@ void EnIshi_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
+int EnIshi_CAMC(EnIshi* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+static Gfx sCustomRockDL[] = {
+    gsDPLoadTextureBlock(0x0500a940/*0*/ , G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gFieldKakeraDL),
+};
+
 void EnIshi_DrawSmall(EnIshi* this, PlayState* play) {
-    Gfx_DrawDListOpa(play, gFieldKakeraDL);
+    int csmc;
+    void* tex;
+    const Color_RGB8* color;
+    Gfx* dlist;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    csmc = EnIshi_CAMC(this, play);
+    if (csmc == CSMC_NORMAL)
+    {
+        dlist = gOriginalFieldKakeraDL;
+    }
+    else
+    {
+        tex = comboCacheGetFile(CUSTOM_ROCK_ADDR);
+        if (!tex)
+            return;
+        sCustomRockDL[0].words.w1 = ((u32)tex - 0x80000000);
+        color = csmcTypeColor(csmc);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, color->r, color->g, color->b, 255);
+        dlist = sCustomRockDL;
+    }
+    Gfx_DrawDListOpa(play, dlist);
+    CLOSE_DISPS();
 }
 
 void EnIshi_DrawLarge(EnIshi* this, PlayState* play) {

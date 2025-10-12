@@ -125,6 +125,7 @@ export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k:
   GRASS_ALT: await extractFileData(roms, 'oot', 'objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   HIVE: await extractFileData(roms, 'mm', 'objects/object_comb', 0x0000, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   BUTTERFLY: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0x2680, 32 * 64 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+  ROCK: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0xa940, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
 });
 
 export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({

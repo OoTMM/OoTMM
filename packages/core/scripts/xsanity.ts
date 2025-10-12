@@ -1133,10 +1133,12 @@ function actorHandlerMmEnKusa2(checks: Check[], ra: RoomActor) {
 
 function actorHandlerOotObjHana(checks: Check[], ra: RoomActor) {
   const type = ra.actor.params & 3;
-  if (type !== 2)
-    return;
-  const item = 'NOTHING';
-  checks.push({ roomActor: ra, item, name: 'Grass Weird', type: 'grass' });
+  if (type === 2) {
+    checks.push({ roomActor: ra, item: 'NOTHING', name: 'Grass Weird', type: 'grass' });
+  }
+  if (type === 1) {
+    checks.push({ roomActor: ra, item: 'NOTHING', name: 'Rock Weird', type: 'rock' });
+  }
 }
 
 function actorHandlerOotObjMure2(checks: Check[], ra: RoomActor) {
