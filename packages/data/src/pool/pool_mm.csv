@@ -895,6 +895,10 @@ Path to Mountain Village Small Snowball Lower Spring 4, snowball,       NONE,   
 Path to Mountain Village Small Snowball Upper Spring 1, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400d,                    MAGIC_JAR_SMALL
 Path to Mountain Village Small Snowball Upper Spring 2, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400b,                    RECOVERY_HEART
 Path to Mountain Village Small Snowball Upper Spring 3, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400e,                    RECOVERY_HEART
+Path to Mountain Village Snow Tree Lower 1,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0000e,                    NOTHING
+Path to Mountain Village Snow Tree Lower 2,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0000f,                    NOTHING
+Path to Mountain Village Snow Tree Upper 1,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00010,                    NOTHING
+Path to Mountain Village Snow Tree Upper 2,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00011,                    NOTHING
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
