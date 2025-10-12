@@ -1255,9 +1255,9 @@ export class LogicPassWorldTransform {
     this.filterLocations(settings.shuffleGrassOot, 'grass', 'oot');
 
     this.filterLocations(settings.shuffleRocksOot ? 'all' : 'none', 'rock', 'oot');
-    this.filterLocations(settings.shuffleRocksMm ? 'all' : 'none', 'rock', 'mm');
+    this.filterLocations(settings.shuffleRocksMm, 'rock', 'mm');
     this.filterLocations(settings.shuffleTreesOot ? 'all' : 'none', 'tree', 'oot');
-    this.filterLocations(settings.shuffleTreesMm ? 'all' : 'none', 'tree', 'mm');
+    this.filterLocations(settings.shuffleTreesMm, 'tree', 'mm');
 
     if (!settings.bootsIronMm) {
       /* Remove water rocks if iron boots are not available */
