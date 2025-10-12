@@ -537,7 +537,7 @@ export class ExprParser {
   private peek<T extends TokenType>(t: T): TokenValue<T> | undefined {
     const next = this.nextToken();
     if (next.type === t) {
-      return (next as any).value === undefined ? true : (next as any).value;
+      return (next as any).value === undefined ? true as TokenValue<T> : (next as any).value;
     }
     return undefined;
   }

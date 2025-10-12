@@ -14,6 +14,6 @@ export const makeTestSeed = async (seed: string, settings: Optional<Settings>) =
   const s = merge({}, DEFAULT_SETTINGS, settings, {
     probabilisticFoolish: false,
   });
-  const ws = await solvedWorldState(monitor, { cosmetics, seed, settings: s, random });
+  const ws = await solvedWorldState(monitor, { cosmetics, seed, settings: s, random, mode: 'create' });
   return ws;
 }
