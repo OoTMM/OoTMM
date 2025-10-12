@@ -48,5 +48,19 @@ void ObjMure2_AliasGrass(Xflag* xf)
 
 void ObjMure2_AliasRocks(Xflag* xf)
 {
-
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_KOKIRI_FOREST:
+        switch (xf->setupId)
+        {
+        case 2:
+            xf->id += 36;
+            break;
+        case 3:
+            xf->id += 33;
+            break;
+        }
+        xf->setupId = 0;
+        break;
+    }
 }
