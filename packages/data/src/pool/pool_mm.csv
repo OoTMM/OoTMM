@@ -813,6 +813,9 @@ Swamp Skulltula Pot Room Pot 1,                         chest,          NONE,   
 Swamp Skulltula Pot Room Pot 2,                         chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x11,                       GS_TOKEN_SWAMP
 Swamp Skulltula Pot Room Jar,                           chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x05,                       GS_TOKEN_SWAMP
 Swamp Skulltula Pot Room Wall,                          chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x16,                       GS_TOKEN_SWAMP
+Swamp Spider House Rock Entrance 1,                     rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00003,                    RANDOM
+Swamp Spider House Rock Entrance 2,                     rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00004,                    RANDOM
+Swamp Spider House Rock Pots Room,                      rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00405,                    RANDOM
 Swamp Spider House Pot Main Upper Left 1,               pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0103,                     MAGIC_JAR_SMALL
 Swamp Spider House Pot Main Upper Left 2,               pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0104,                     MAGIC_JAR_SMALL
 Swamp Spider House Pot Main Lower 1,                    pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0105,                     RUPEE_GREEN
