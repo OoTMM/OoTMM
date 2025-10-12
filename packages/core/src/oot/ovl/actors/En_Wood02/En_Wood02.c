@@ -153,6 +153,10 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
     }
 }
 
+static void EnWood02_Alias(Xflag* xf)
+{
+}
+
 void EnWood02_Init(Actor* thisx, PlayState* play2) {
     s16 spawnType;
     f32 actorScale;
@@ -162,6 +166,9 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
     s32 bgId;
     f32 floorY;
     s16 extraRot;
+
+    if (comboXflagInit(&this->xflag, thisx, play))
+        EnWood02_Alias(&this->xflag);
 
     spawnType = WOOD_SPAWN_NORMAL;
     actorScale = 1.0f;
@@ -298,6 +305,16 @@ void EnWood02_Destroy(Actor* thisx, PlayState* play) {
     }
 }
 
+static int EnWood02_DropCustom(EnWood02* this, PlayState* play)
+{
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        return true;
+    }
+    return false;
+}
+
 void EnWood02_Update(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
     EnWood02* this = (EnWood02*)thisx;
@@ -332,7 +349,7 @@ void EnWood02_Update(Actor* thisx, PlayState* play2) {
 
             dropsSpawnPt.y += 200.0f;
 
-            if ((this->unk_14C >= 0) && (this->unk_14C < 0x64)) {
+            if (!EnWood02_DropCustom(this, play) && (this->unk_14C >= 0) && (this->unk_14C < 0x64)) {
                 Item_DropCollectibleRandom(play, &this->actor, &dropsSpawnPt, this->unk_14C << 4);
             } else {
                 if (this->actor.home.rot.z != 0) {
@@ -377,7 +394,7 @@ void EnWood02_Update(Actor* thisx, PlayState* play2) {
                  (player->speedXZ != 0.0f)) ||
                 ((player->rideActor != NULL) && (sqrtf(this->actor.xyzDistToPlayerSq) < 60.f) &&
                  (player->rideActor->speed != 0.0f))) {
-                if ((this->unk_14C >= 0) && (this->unk_14C < 0x64)) {
+                if (!EnWood02_DropCustom(this, play) && (this->unk_14C >= 0) && (this->unk_14C < 0x64)) {
                     Item_DropCollectibleRandom(play, &this->actor, &this->actor.world.pos,
                                                ((this->unk_14C << 4) | 0x8000));
                 }
