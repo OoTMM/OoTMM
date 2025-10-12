@@ -2,6 +2,7 @@
 #define OVL_EN_WOOD02_H
 
 #include <combo.h>
+#include <combo/xflags.h>
 
 struct EnWood02;
 
@@ -17,6 +18,7 @@ typedef struct EnWood02 {
     /* 0x150 */ u8 drawType;
     /* 0x151 */ u8 unk_151;
     /* 0x154 */ ColliderCylinder collider;
+    Xflag xflag;
 } EnWood02; // size = 0x1A0
 
 // Types with SPAWNED in the name are those that can be managed by a spawner, however the actor allows you to spawn them

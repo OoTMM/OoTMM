@@ -160,6 +160,10 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
     }
 }
 
+static void EnWood02_Alias(Xflag* xf)
+{
+}
+
 void EnWood02_Init(Actor* thisx, PlayState* play) {
     s16 spawnType = 0;
     f32 actorScale = 1.0f;
@@ -168,6 +172,9 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
     s32 bgId;
     f32 floorY;
     s16 extraRot;
+
+    if (comboXflagInit(&this->xflag, thisx, play))
+        EnWood02_Alias(&this->xflag);
 
     this->actor.world.rot.z = 0;
     this->unk_144 = ENWOOD02_GET_FF00(&this->actor);
@@ -281,6 +288,10 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
         this->drawType = WOOD_DRAW_LEAF_YELLOW;
     }
 
+    /* Override tree type */
+    if (Xflag_IsValid(&this->xflag))
+        this->drawType = WOOD_DRAW_TREE_OVAL;
+
     Actor_SetScale(&this->actor, actorScale);
     this->spawnType = spawnType;
 
@@ -326,8 +337,21 @@ void EnWood02_Destroy(Actor* thisx, PlayState* play) {
     }
 }
 
+static int EnWood02_DropCustom(EnWood02* this, PlayState* play)
+{
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        return true;
+    }
+    return false;
+}
+
 void func_808C4458(EnWood02* this, PlayState* play, Vec3f* arg2, u16 arg3) {
     s32 sp24;
+
+    if (EnWood02_DropCustom(this, play))
+        return;
 
     if (this->unk_148 != 0) {
         if ((this->unk_144 == -1) || !Flags_GetCollectible(play, this->unk_144)) {
@@ -457,6 +481,20 @@ void EnWood02_Update(Actor* thisx, PlayState* play2) {
     }
 }
 
+int EnWood02_CAMC(EnWood02* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
 void EnWood02_Draw(Actor* thisx, PlayState* play) {
     EnWood02* this = (EnWood02*)thisx;
     GraphicsContext* gfxCtx = play->state.gfxCtx;
@@ -478,6 +516,25 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         blue = 0;
     } else {
         red = green = blue = 255;
+    }
+
+    if (Xflag_IsValid(&this->xflag))
+    {
+        int csmc = EnWood02_CAMC(this, play);
+        if (csmc == CSMC_NORMAL)
+        {
+            red = 50;
+            green = 170;
+            blue = 70;
+        }
+        else
+        {
+            const Color_RGB8* color;
+            color = csmcTypeColor(csmc);
+            red = color->r;
+            green = color->g;
+            blue = color->b;
+        }
     }
 
     Gfx_SetupDL25_Xlu(gfxCtx);
