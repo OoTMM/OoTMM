@@ -831,7 +831,7 @@ static int EnIshi_CAMC(EnIshi* this, PlayState* play) {
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
-        return CSMC_NORMAL;
+        return CSMC_MAJOR;
 
     comboXflagItemOverride(&o, &this->xflag, 0);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
