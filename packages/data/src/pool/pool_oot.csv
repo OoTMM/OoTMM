@@ -418,6 +418,7 @@ Goron City Pot Stairs 2,                                    pot,            NONE
 Goron City Pot Stairs 3,                                    pot,            NONE,                 GORON_CITY,                     0x032b,                     RUPEE_GREEN
 Goron City Pot Stairs 4,                                    pot,            NONE,                 GORON_CITY,                     0x032c,                     RUPEE_BLUE
 Goron City Pot Stairs 5,                                    pot,            NONE,                 GORON_CITY,                     0x032d,                     RECOVERY_HEART
+Goron City Rock,                                            rock,           NONE,                 GORON_CITY,                     0x0002f,                    RANDOM
 Goron Shop Item 1,                                          shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
 Goron Shop Item 2,                                          shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
 Goron Shop Item 3,                                          shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED

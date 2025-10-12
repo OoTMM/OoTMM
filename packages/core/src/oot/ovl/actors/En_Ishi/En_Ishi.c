@@ -298,19 +298,23 @@ static InitChainEntry sInitChains[][5] = {
     },
 };
 
-static void EnIshi_Alias(Xflag* xflag) {
-    switch (xflag->sceneId)
+static void EnIshi_Alias(Xflag* xf) {
+    switch (xf->sceneId)
     {
     case SCE_OOT_LAKE_HYLIA:
-        xflag->setupId = 0;
-        xflag->id = 22;
+        xf->setupId = 0;
+        xf->id = 22;
         break;
     case SCE_OOT_DESERT_COLOSSUS:
-        if (xflag->setupId == 2)
+        if (xf->setupId == 2)
         {
-            xflag->setupId = 0;
-            xflag->id -= 2;
+            xf->setupId = 0;
+            xf->id -= 2;
         }
+        break;
+    case SCE_OOT_GORON_CITY:
+        xf->setupId = 0;
+        xf->id = 47;
         break;
     }
 }
