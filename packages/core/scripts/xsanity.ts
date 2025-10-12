@@ -193,6 +193,7 @@ const ACTORS_MM = {
   //DOOR_ANA: 0x55,
   OBJ_HAMISHI: 0x0fc,
   BG_ICICLE: 0x11f,
+  EN_ISHI: 0x0b0,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -1141,7 +1142,7 @@ function actorHandlerOotObjHana(checks: Check[], ra: RoomActor) {
   }
 }
 
-function actorHandlerOotObjMure2(checks: Check[], ra: RoomActor) {
+function actorHandlerObjMure2(checks: Check[], ra: RoomActor) {
   const type = (ra.actor.params) & 3;
   let checkType: string;
   let checkName: string;
@@ -1162,23 +1163,6 @@ function actorHandlerOotObjMure2(checks: Check[], ra: RoomActor) {
   const item = 'RANDOM';
   for (let i = 0; i < count; ++i) {
     checks.push({ roomActor: ra, item, name: checkName, type: checkType, sliceId: i, name2: `${checkName2} ${i + 1}` });
-  }
-}
-
-function actorHandlerMmObjMure2(checks: Check[], ra: RoomActor) {
-  const type = (ra.actor.params) & 3;
-  let count: number;
-  if (type > 1) {
-    return;
-  }
-  if (type == 0) {
-    count = 9;
-  } else {
-    count = 12;
-  }
-  const item = 'RANDOM';
-  for (let i = 0; i < count; ++i) {
-    checks.push({ roomActor: ra, item, name: 'Grass Pack', type: 'grass', subtype: 'pack', sliceId: i, name2: `Grass ${i + 1}` });
   }
 }
 
@@ -1353,7 +1337,7 @@ function actorHandlerOotEnItem00(checks: Check[], ra: RoomActor) {
   }
 }
 
-function actorHandlerOotEnIshi(checks: Check[], ra: RoomActor) {
+function actorHandlerEnIshi(checks: Check[], ra: RoomActor) {
   const type = (ra.actor.params & 1);
   if (type !== 0) return;
   const item = 'RANDOM';
@@ -1406,11 +1390,11 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_BUTTE]: actorHandlerOotEnButte,
   [ACTORS_OOT.OBJ_MURE]: actorHandlerOotObjMure,
   [ACTORS_OOT.OBJ_HANA]: actorHandlerOotObjHana,
-  [ACTORS_OOT.OBJ_MURE2]: actorHandlerOotObjMure2,
+  [ACTORS_OOT.OBJ_MURE2]: actorHandlerObjMure2,
   [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_OOT.BG_ICICLE]: actorHandlerOotBgIcicle,
   [ACTORS_OOT.BG_ICE_SHELTER]: actorHandlerOotBgIceShelter,
-  [ACTORS_OOT.EN_ISHI]: actorHandlerOotEnIshi,
+  [ACTORS_OOT.EN_ISHI]: actorHandlerEnIshi,
 };
 
 const ACTORS_HANDLERS_MM = {
@@ -1425,10 +1409,11 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_SNOWBALL2]: actorHandlerMmObjSnowball2,
   [ACTORS_MM.EN_BUTTE]: actorHandlerMmEnButte,
   [ACTORS_MM.OBJ_MURE]: actorHandlerMmObjMure,
-  [ACTORS_MM.OBJ_MURE2]: actorHandlerMmObjMure2,
+  [ACTORS_MM.OBJ_MURE2]: actorHandlerObjMure2,
   [ACTORS_MM.OBJ_GRASS_UNIT]: actorHandlerMmObjGrassUnit,
   [ACTORS_MM.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_MM.BG_ICICLE]: actorHandlerMmBgIcicle,
+  [ACTORS_MM.EN_ISHI]: actorHandlerEnIshi,
 };
 
 const ACTORS_HANDLERS = {
