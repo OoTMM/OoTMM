@@ -1704,6 +1704,31 @@ Gorman Track Grass Pack 2 Grass 09,                     grass,          NONE,   
 Gorman Track Grass Pack 2 Grass 10,                     grass,          NONE,                   GORMAN_TRACK,                 0x90025,                    RANDOM
 Gorman Track Grass Pack 2 Grass 11,                     grass,          NONE,                   GORMAN_TRACK,                 0xa0025,                    RANDOM
 Gorman Track Grass Pack 2 Grass 12,                     grass,          NONE,                   GORMAN_TRACK,                 0xb0025,                    RANDOM
+Gorman Track Tree 01,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000b,                    NOTHING
+Gorman Track Tree 02,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000c,                    NOTHING
+Gorman Track Tree 03,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000d,                    NOTHING
+Gorman Track Tree 04,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000e,                    NOTHING
+Gorman Track Tree 05,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000f,                    NOTHING
+Gorman Track Tree 06,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00010,                    NOTHING
+Gorman Track Tree 07,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00011,                    NOTHING
+Gorman Track Tree 08,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00012,                    NOTHING
+Gorman Track Tree 09,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00013,                    NOTHING
+Gorman Track Tree 10,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00014,                    NOTHING
+Gorman Track Tree 11,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00015,                    NOTHING
+Gorman Track Tree 12,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00016,                    NOTHING
+Gorman Track Tree 13,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00017,                    NOTHING
+Gorman Track Tree 14,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00018,                    NOTHING
+Gorman Track Tree 15,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00019,                    NOTHING
+Gorman Track Tree 16,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001a,                    NOTHING
+Gorman Track Tree 17,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001b,                    NOTHING
+Gorman Track Tree 18,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001c,                    NOTHING
+Gorman Track Tree 19,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001d,                    NOTHING
+Gorman Track Tree 20,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001e,                    NOTHING
+Gorman Track Tree 21,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001f,                    NOTHING
+Gorman Track Tree 22,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00020,                    NOTHING
+Gorman Track Tree 23,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00021,                    NOTHING
+Gorman Track Tree 24,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00022,                    NOTHING
+Gorman Track Tree 25,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00023,                    NOTHING
 Ikana Graveyard Captain Mask,                           chest,          NONE,                   IKANA_GRAVEYARD,              0x00,                       MASK_CAPTAIN
 Ikana Graveyard Grass 1,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0001f,                    RANDOM
 Ikana Graveyard Grass 2,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00027,                    RANDOM
