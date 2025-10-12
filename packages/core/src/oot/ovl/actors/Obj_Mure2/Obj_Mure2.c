@@ -88,5 +88,9 @@ void ObjMure2_AliasRocks(Xflag* xf)
         xf->setupId = 0;
         xf->id = 33;
         break;
+    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
+        xf->setupId = 0;
+        xf->id = 32;
+        break;
     }
 }

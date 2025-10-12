@@ -452,6 +452,21 @@ Goron City Red Boulder 5,                                   redboulder,     NONE
 Death Mountain Crater Alcove HP,                            collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
 Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
+Death Mountain Crater Rock Child 1,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011e,                    RANDOM
+Death Mountain Crater Rock Child 2,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011f,                    RANDOM
+Death Mountain Crater Rock Adult 1,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08121,                    RANDOM
+Death Mountain Crater Rock Adult 2,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08122,                    RANDOM
+Death Mountain Crater Rock Adult 3,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08123,                    RANDOM
+Death Mountain Crater Rock Adult 4,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08124,                    RANDOM
+Death Mountain Crater Rock Adult 5,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08125,                    RANDOM
+Death Mountain Crater Rock Circle Rock 1,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x00120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 2,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x10120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 3,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x20120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 4,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x30120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 5,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x40120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 6,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x50120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 7,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x60120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 8,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x70120,                    RANDOM
 Death Mountain Crater Grotto,                               chest,          NONE,                 GROTTOS,                        0x1a,                       BOMBS_20
 Death Mountain Crater Grotto Grass 1,                       grass,          NONE,                 GROTTOS,                        0x03a02,                    RANDOM
 Death Mountain Crater Grotto Grass 2,                       grass,          NONE,                 GROTTOS,                        0x03a03,                    RANDOM
