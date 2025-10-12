@@ -1,4 +1,5 @@
 #include "Obj_Yasi.h"
+#include <combo/draw.h>
 #include <assets/mm/objects/object_obj_yasi.h>
 
 #define FLAGS 0x00000000
@@ -118,6 +119,16 @@ void ObjYasi_Update(Actor* thisx, PlayState* play) {
         BINANG_SUB(this->dyna.actor.home.rot.x, TRUNCF_BINANG(this->dyna.actor.shape.rot.x * 0.08f));
 }
 
+static Gfx sDisplayListNuts[] = {
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPLoadTextureBlock(0x06000e50, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, 0, 0),
+    gsSPLoadGeometryMode(G_TEXTURE_ENABLE | G_ZBUFFER | G_SHADE | G_FOG | G_LIGHTING | G_SHADING_SMOOTH),
+    gsSPVertex(0x060000F0, 9, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP1Triangle(6, 7, 8, 0),
+    gsSPEndDisplayList(),
+};
+
 void ObjYasi_Draw(Actor* thisx, PlayState* play) {
     ObjYasi* this = (ObjYasi*)thisx;
 
@@ -134,4 +145,21 @@ void ObjYasi_Draw(Actor* thisx, PlayState* play) {
 
     Matrix_Scale(0.1f, 0.1f, 0.1f, MTXMODE_APPLY);
     Gfx_DrawDListOpa(play, gPalmTreeDL);
+
+    OPEN_DISPS(play->state.gfxCtx);
+    if (!Xflag_IsShuffled(&this->xflag))
+    {
+        gSPDisplayList(POLY_OPA_DISP++, sDisplayListNuts);
+    }
+    else
+    {
+        ComboItemOverride o;
+
+        comboXflagItemOverride(&o, &this->xflag, 0);
+        Matrix_Translate(this->dyna.actor.world.pos.x + 5.f, this->dyna.actor.world.pos.y + 290.f, this->dyna.actor.world.pos.z, MTXMODE_NEW);
+        Matrix_Scale(0.5f, 0.5f, 0.5f, MTXMODE_APPLY);
+        Matrix_RotateY(this->dyna.actor.shape.rot.y * (M_PI / 0x8000), MTXMODE_APPLY);
+        Draw_Gi(play, &this->dyna.actor, o.cloakGi ? o.cloakGi : o.gi, 0);
+    }
+    CLOSE_DISPS();
 }
