@@ -67,6 +67,7 @@
   exits:
     "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
     "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track Trees": "before(NIGHT2_PM_06_00) || after(DAY3_AM_06_00)"
   locations:
     "Gorman Track Grass Pack 1 Grass 01": "true"
     "Gorman Track Grass Pack 1 Grass 02": "true"
@@ -92,6 +93,11 @@
     "Gorman Track Grass Pack 2 Grass 10": "true"
     "Gorman Track Grass Pack 2 Grass 11": "true"
     "Gorman Track Grass Pack 2 Grass 12": "true"
+    "Gorman Track Crate": "true"
+
+"Gorman Track Trees":
+  region: MILK_ROAD
+  locations:
     "Gorman Track Tree 01": "true"
     "Gorman Track Tree 02": "true"
     "Gorman Track Tree 03": "true"
@@ -117,7 +123,6 @@
     "Gorman Track Tree 23": "true"
     "Gorman Track Tree 24": "true"
     "Gorman Track Tree 25": "true"
-    "Gorman Track Crate": "true"
 
 "Owl Milk Road":
   region: MILK_ROAD
