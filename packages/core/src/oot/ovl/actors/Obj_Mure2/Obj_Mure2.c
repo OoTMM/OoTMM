@@ -66,5 +66,9 @@ void ObjMure2_AliasRocks(Xflag* xf)
         }
         xf->setupId = 0;
         break;
+    case SCE_OOT_ZORA_DOMAIN:
+        xf->setupId = 0;
+        xf->id = 10;
+        break;
     }
 }

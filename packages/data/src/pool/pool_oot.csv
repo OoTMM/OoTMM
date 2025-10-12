@@ -572,6 +572,14 @@ Zora Domain Diving Game Huge Rupee,                         collectible,    NONE
 Zora Domain Tunic,                                          npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
 Zora Domain Eyeball Frog,                                   npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                                   gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
+Zora Domain Rock Circle Rock 1,                             rock,           NONE,                 ZORA_DOMAIN,                    0x0010a,                    RANDOM
+Zora Domain Rock Circle Rock 2,                             rock,           NONE,                 ZORA_DOMAIN,                    0x1010a,                    RANDOM
+Zora Domain Rock Circle Rock 3,                             rock,           NONE,                 ZORA_DOMAIN,                    0x2010a,                    RANDOM
+Zora Domain Rock Circle Rock 4,                             rock,           NONE,                 ZORA_DOMAIN,                    0x3010a,                    RANDOM
+Zora Domain Rock Circle Rock 5,                             rock,           NONE,                 ZORA_DOMAIN,                    0x4010a,                    RANDOM
+Zora Domain Rock Circle Rock 6,                             rock,           NONE,                 ZORA_DOMAIN,                    0x5010a,                    RANDOM
+Zora Domain Rock Circle Rock 7,                             rock,           NONE,                 ZORA_DOMAIN,                    0x6010a,                    RANDOM
+Zora Domain Rock Circle Rock 8,                             rock,           NONE,                 ZORA_DOMAIN,                    0x7010a,                    RANDOM
 Zora Domain Pot 1,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0115,                     RUPEE_BLUE
 Zora Domain Pot 2,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0116,                     RECOVERY_HEART
 Zora Domain Pot 3,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0117,                     RECOVERY_HEART
