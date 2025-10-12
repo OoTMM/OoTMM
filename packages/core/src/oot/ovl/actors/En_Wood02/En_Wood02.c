@@ -260,6 +260,10 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
         this->drawType = WOOD_DRAW_LEAF_YELLOW;
     }
 
+    /* Override tree type */
+    if (Xflag_IsValid(&this->xflag))
+        this->drawType = WOOD_DRAW_TREE_OVAL;
+
     Actor_SetScale(&this->actor, actorScale);
     this->spawnType = spawnType;
 
@@ -424,6 +428,20 @@ void EnWood02_Update(Actor* thisx, PlayState* play2) {
     }
 }
 
+int EnWood02_CAMC(EnWood02* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
 void EnWood02_Draw(Actor* thisx, PlayState* play) {
     EnWood02* this = (EnWood02*)thisx;
     s16 type;
@@ -449,6 +467,24 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         red = green = blue = 255;
     }
 
+    if (Xflag_IsValid(&this->xflag))
+    {
+        int csmc = EnWood02_CAMC(this, play);
+        if (csmc == CSMC_NORMAL)
+        {
+            red = 50;
+            green = 170;
+            blue = 70;
+        }
+        else
+        {
+            Color_RGB8* color;
+            color = csmcTypeColor(csmc);
+            red = color->r;
+            green = color->g;
+            blue = color->b;
+        }
+    }
     Gfx_SetupDL_25Xlu(gfxCtx);
 
     if ((this->actor.params == WOOD_LEAF_GREEN) || (this->actor.params == WOOD_LEAF_YELLOW)) {
