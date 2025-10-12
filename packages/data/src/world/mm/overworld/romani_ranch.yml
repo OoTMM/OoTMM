@@ -74,6 +74,13 @@
     "Romani Ranch Grass Pack 5 Grass 07": "true"
     "Romani Ranch Grass Pack 5 Grass 08": "true"
     "Romani Ranch Grass Pack 5 Grass 09": "true"
+    "Romani Ranch Tree 1": "true"
+    "Romani Ranch Tree 2": "true"
+    "Romani Ranch Tree 3": "true"
+    "Romani Ranch Tree 4": "true"
+    "Romani Ranch Tree 5": "true"
+    "Romani Ranch Tree 6": "true"
+    "Romani Ranch Tree 7": "true"
     "Romani Ranch Wonder Item Fence 1": "true"
     "Romani Ranch Wonder Item Fence 2": "true"
     "Romani Ranch Wonder Item Fence 3": "true"
@@ -107,6 +114,7 @@
     "Cucco Shack Potted Plant 1 Grass": "true"
     "Cucco Shack Potted Plant 2 Pot": "true"
     "Cucco Shack Potted Plant 2 Grass": "true"
+    "Cucco Shack Tree": "true"
   gossip:
     "Cucco Shack Gossip": "true"
 
