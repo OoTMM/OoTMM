@@ -1054,6 +1054,9 @@ Hyrule Castle Pot 1,                                        pot,            NONE
 Hyrule Castle Pot 2,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0009,                     RUPEE_BLUE
 Hyrule Castle Grass 1,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002e,                    NOTHING
 Hyrule Castle Grass 2,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002f,                    NOTHING
+Hyrule Castle Rock 1,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002a,                    RANDOM
+Hyrule Castle Rock 2,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002b,                    RANDOM
+Hyrule Castle Rock 3,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002c,                    RANDOM
 Hyrule Castle Wonder Item Torch 1,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x0000c,                    MAGIC_JAR_LARGE
 Hyrule Castle Wonder Item Torch 2,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x0000d,                    RUPEE_RED
 Hyrule Castle Wonder Item Moat 01,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00020,                    RUPEE_GREEN

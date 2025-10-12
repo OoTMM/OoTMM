@@ -47,6 +47,9 @@
     "Hyrule Castle Butterfly Pack 4 Butterfly 3": "can_use_sticks"
     "Hyrule Castle Butterfly Pack 4 Butterfly 4": "can_use_sticks"
     "Hyrule Castle Butterfly Pack 4 Butterfly 5": "can_use_sticks"
+    "Hyrule Castle Rock 1": "true"
+    "Hyrule Castle Rock 2": "true"
+    "Hyrule Castle Rock 3": "true"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
