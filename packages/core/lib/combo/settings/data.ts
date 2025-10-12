@@ -708,6 +708,14 @@ export const SETTINGS = [{
   cond: (s: any) => hasMM(s) && (s.shuffleGrassMm === 'overworld' || s.shuffleGrassMm === 'all'),
   default: false
 }, {
+  key: 'shuffleTreesOot',
+  name: 'Tree Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the trees are shuffled (OoT)',
+  default: false,
+  cond: hasOoT,
+},{
   key: 'shuffleFreeRupeesOot',
   name: 'Freestanding Rupees Shuffle (OoT)',
   category: 'main.shuffle',

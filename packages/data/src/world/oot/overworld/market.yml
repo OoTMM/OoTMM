@@ -42,6 +42,7 @@
     "Market Crate 2": "is_child"
     "Market Crate 3": "is_child"
     "Market Crate 4": "is_child"
+    "Market Tree": "is_child"
 
 "Market Grass":
   region: MARKET
