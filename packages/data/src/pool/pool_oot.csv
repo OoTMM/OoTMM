@@ -1140,7 +1140,7 @@ Hyrule Castle Tree 5,                                       tree,           NONE
 Hyrule Castle Tree 6,                                       tree,           NONE,                 HYRULE_CASTLE,                  0x00015,                    RANDOM
 Hyrule Castle Tree 7,                                       tree,           NONE,                 HYRULE_CASTLE,                  0x00031,                    RANDOM
 Hyrule Castle Tree 8,                                       tree,           NONE,                 HYRULE_CASTLE,                  0x00032,                    RANDOM
-Hyrule Castle Tree Unreachable,                             tree,           NONE,                 HYRULE_CASTLE,                  0x00014,                    RANDOM
+Hyrule Castle Tree Guarded,                                 tree,           NONE,                 HYRULE_CASTLE,                  0x00014,                    RANDOM
 Hyrule Castle Rock 1,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002a,                    RANDOM
 Hyrule Castle Rock 2,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002b,                    RANDOM
 Hyrule Castle Rock 3,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002c,                    RANDOM

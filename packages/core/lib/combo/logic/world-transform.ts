@@ -1241,6 +1241,11 @@ export class LogicPassWorldTransform {
   private filterChecksTrees() {
     this.filterLocationsBool(this.state.settings.shuffleTreesOot, 'tree', 'oot');
     this.filterLocations(this.state.settings.shuffleTreesMm, 'tree', 'mm');
+
+    if (!this.state.settings.stoneMaskOot) {
+      /* Can't reach this tree */
+      this.removeLocations(['OOT Hyrule Castle Tree Guarded']);
+    }
   }
 
   private filterChecksWonder() {

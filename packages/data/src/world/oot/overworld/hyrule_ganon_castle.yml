@@ -58,6 +58,7 @@
     "Hyrule Castle Tree 6": "true"
     "Hyrule Castle Tree 7": "true"
     "Hyrule Castle Tree 8": "true"
+    "Hyrule Castle Tree Guarded": "can_use_mask_stone"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
