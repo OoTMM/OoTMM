@@ -1100,6 +1100,16 @@ Gerudo Valley GS Wall,                                      gs,             NONE
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
 Gerudo Valley GS Pillar,                                    gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
 Gerudo Valley Cow,                                          cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
+Gerudo Valley Rock Entrance Ground 1,                       rock,           NONE,                 GERUDO_VALLEY,                  0x0802a,                    RANDOM
+Gerudo Valley Rock Entrance Ground 2,                       rock,           NONE,                 GERUDO_VALLEY,                  0x0802b,                    RANDOM
+Gerudo Valley Rock Entrance Ground 3,                       rock,           NONE,                 GERUDO_VALLEY,                  0x0802c,                    RANDOM
+Gerudo Valley Rock Entrance Water 1,                        rock,           NONE,                 GERUDO_VALLEY,                  0x08021,                    RANDOM
+Gerudo Valley Rock Entrance Water 2,                        rock,           NONE,                 GERUDO_VALLEY,                  0x08022,                    RANDOM
+Gerudo Valley Rock Entrance Water 3,                        rock,           NONE,                 GERUDO_VALLEY,                  0x08023,                    RANDOM
+Gerudo Valley Rock Adult 1,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08024,                    RANDOM
+Gerudo Valley Rock Adult 2,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08025,                    RANDOM
+Gerudo Valley Rock Adult 3,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08026,                    RANDOM
+Gerudo Valley Rock Adult 4,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08027,                    RANDOM
 Gerudo Valley Crate Child Unreachable 1,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00021,                    RUPEE_GREEN
 Gerudo Valley Crate Child Unreachable 2,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00022,                    RUPEE_GREEN
 Gerudo Valley Crate Child Unreachable 3,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00023,                    RUPEE_GREEN

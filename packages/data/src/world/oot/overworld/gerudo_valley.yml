@@ -24,6 +24,12 @@
     "Gerudo Valley Wonder Item Upper": "is_adult"
     "Gerudo Valley Red Boulder Before Bridge 1": "is_adult && can_hammer"
     "Gerudo Valley Red Boulder Before Bridge 2": "is_adult && can_hammer"
+    "Gerudo Valley Rock Entrance Ground 1": "true"
+    "Gerudo Valley Rock Entrance Ground 2": "true"
+    "Gerudo Valley Rock Entrance Ground 3": "true"
+    "Gerudo Valley Rock Entrance Water 1": "true"
+    "Gerudo Valley Rock Entrance Water 2": "true"
+    "Gerudo Valley Rock Entrance Water 3": "true"
   gossip:
     "Gerudo Valley Gossip": "true"
 
@@ -48,6 +54,10 @@
     "Gerudo Valley Red Boulder Around Chest 2": "is_adult && can_hammer"
     "Gerudo Valley Red Boulder Around Chest 3": "is_adult && can_hammer"
     "Gerudo Valley Red Boulder Around Chest 4": "is_adult && can_hammer"
+    "Gerudo Valley Rock Adult 1": "is_adult"
+    "Gerudo Valley Rock Adult 2": "is_adult"
+    "Gerudo Valley Rock Adult 3": "is_adult"
+    "Gerudo Valley Rock Adult 4": "is_adult"
     # Unreachable with some settings, need a way to detect that
     #"Gerudo Valley Crate Child Unreachable 1": "is_child"
     #"Gerudo Valley Crate Child Unreachable 2": "is_child"

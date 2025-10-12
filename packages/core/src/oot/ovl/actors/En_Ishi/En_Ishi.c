@@ -336,6 +336,21 @@ static void EnIshi_Alias(Xflag* xf) {
             xf->id += 29;
         }
         break;
+    case SCE_OOT_GERUDO_VALLEY:
+        if (xf->setupId == 0)
+        {
+            xf->setupId = 2;
+            switch (xf->id)
+            {
+            case 23: xf->id = 42; break;
+            case 24: xf->id = 43; break;
+            case 25: xf->id = 33; break;
+            case 26: xf->id = 34; break;
+            case 27: xf->id = 35; break;
+            case 28: xf->id = 44; break;
+            }
+        }
+        break;
     }
 }
 
