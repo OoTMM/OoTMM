@@ -2377,6 +2377,7 @@ Beneath The Well Grass Near End 5,                      grass,          NONE,   
 Beneath The Well Grass Cow 1,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00906,                    RANDOM
 Beneath The Well Grass Cow 2,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00907,                    RANDOM
 Beneath The Well Grass Cow 3,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00908,                    RANDOM
+Beneath The Well Tree,                                  tree,           NONE,                   BENEATH_THE_WELL,             0x00903,                    NOTHING
 Beneath The Well Fairy Fountain Fairy 1,                fairy,          NONE,                   BENEATH_THE_WELL,             0x00b04,                    FAIRY
 Beneath The Well Fairy Fountain Fairy 2,                fairy,          NONE,                   BENEATH_THE_WELL,             0x10b04,                    FAIRY
 Beneath The Well Fairy Fountain Fairy 3,                fairy,          NONE,                   BENEATH_THE_WELL,             0x20b04,                    FAIRY
