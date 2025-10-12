@@ -126,8 +126,10 @@ export type WorldArea = {
   region: string;
 };
 
+export type WorldCheckType = 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'barrel' | 'grass' | 'tree' | 'rock' | 'wonder' | 'fish' | 'fairy' | 'snowball' | 'hive' | 'rupee' | 'heart' | 'fairy_spot' | 'butterfly' | 'redboulder' | 'icicle' | 'redice';
+
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'barrel' | 'grass' | 'tree' | 'rock' | 'wonder' | 'fish' | 'fairy' | 'snowball' | 'hive' | 'rupee' | 'heart' | 'fairy_spot' | 'butterfly' | 'redboulder' | 'icicle' | 'redice';
+  type: WorldCheckType;
   id: number;
 };
 
