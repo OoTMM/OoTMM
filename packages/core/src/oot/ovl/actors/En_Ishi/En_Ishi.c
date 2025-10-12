@@ -329,6 +329,13 @@ static void EnIshi_Alias(Xflag* xf) {
         xf->setupId = 0;
         xf->id = 14;
         break;
+    case SCE_OOT_ZORA_RIVER:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id += 29;
+        }
+        break;
     }
 }
 

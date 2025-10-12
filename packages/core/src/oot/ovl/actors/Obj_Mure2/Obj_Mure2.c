@@ -77,5 +77,12 @@ void ObjMure2_AliasRocks(Xflag* xf)
             xf->id -= 2;
         }
         break;
+    case SCE_OOT_ZORA_RIVER:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id += 29;
+        }
+        break;
     }
 }
