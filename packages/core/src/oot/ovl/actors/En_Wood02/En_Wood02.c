@@ -478,7 +478,7 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         }
         else
         {
-            Color_RGB8* color;
+            const Color_RGB8* color;
             color = csmcTypeColor(csmc);
             red = color->r;
             green = color->g;
