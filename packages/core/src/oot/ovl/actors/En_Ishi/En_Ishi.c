@@ -316,6 +316,15 @@ static void EnIshi_Alias(Xflag* xf) {
         xf->setupId = 0;
         xf->id = 47;
         break;
+    case SCE_OOT_KAKARIKO_VILLAGE:
+        switch (xf->setupId)
+        {
+        case 1: xf->id += 5; break;
+        case 2: xf->id += 11; break;
+        case 3: xf->id += 12; break;
+        }
+        xf->setupId = 0;
+        break;
     }
 }
 

@@ -263,6 +263,8 @@ Kakariko Grass 8,                                           grass,          NONE
 Kakariko Wonder Item,                                       wonder,         NONE,                 KAKARIKO_VILLAGE,               0x00037,                    RUPEE_RED
 Kakariko Butterfly 1,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x0002e,                    FAIRY
 Kakariko Butterfly 2,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x1002e,                    NOTHING
+Kakariko Rock Near Gate,                                    rock,           NONE,                 KAKARIKO_VILLAGE,               0x00020,                    RANDOM
+Kakariko Rock Near Spider House,                            rock,           NONE,                 KAKARIKO_VILLAGE,               0x00021,                    RANDOM
 Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Potion Shop Buy Blue Potion,                       npc,            NONE,                 KAKARIKO_POTION_SHOP,           WITCH_BLUE_POTION,          POTION_BLUE
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5

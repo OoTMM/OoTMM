@@ -72,6 +72,8 @@
     # TODO: Too restrictive, we need a pseudo-region to represent the top of the watchtower
     "Kakariko Butterfly 1": "is_day && is_child && can_use_sticks"
     "Kakariko Butterfly 2": "is_day && is_child && can_use_sticks"
+    "Kakariko Rock Near Gate": "true"
+    "Kakariko Rock Near Spider House": "true"
 
 "Kakariko Balcony":
   region: KAKARIKO
