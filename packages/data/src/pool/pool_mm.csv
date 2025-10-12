@@ -1536,6 +1536,17 @@ Ocean Spider House Wonder Item Masks 9,                 wonder,         NONE,   
 Waterfall Rapids Beaver Race 1,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_1,                   BOTTLE_EMPTY
 Waterfall Rapids Beaver Race 2,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                                    chest,          NONE,                   ROAD_IKANA,                   0x00,                       RUPEE_RED
+Road to Ikana Stone Mask,                               npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
+Road to Ikana Rock Circle Rock 1,                       rock,           NONE,                   ROAD_IKANA,                   0x00023,                    RANDOM
+Road to Ikana Rock Circle Rock 2,                       rock,           NONE,                   ROAD_IKANA,                   0x10023,                    RANDOM
+Road to Ikana Rock Circle Rock 3,                       rock,           NONE,                   ROAD_IKANA,                   0x20023,                    RANDOM
+Road to Ikana Rock Circle Rock 4,                       rock,           NONE,                   ROAD_IKANA,                   0x30023,                    RANDOM
+Road to Ikana Rock Circle Rock 5,                       rock,           NONE,                   ROAD_IKANA,                   0x40023,                    RANDOM
+Road to Ikana Rock Circle Rock 6,                       rock,           NONE,                   ROAD_IKANA,                   0x50023,                    RANDOM
+Road to Ikana Rock Circle Rock 7,                       rock,           NONE,                   ROAD_IKANA,                   0x60023,                    RANDOM
+Road to Ikana Rock Circle Rock 8,                       rock,           NONE,                   ROAD_IKANA,                   0x70023,                    RANDOM
+Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
+Road to Ikana Red Boulder,                              redboulder,     NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Road to Ikana Grotto,                                   chest,          NONE,                   GROTTOS,                      0x16,                       BOMBCHU
 Road to Ikana Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x03600,                    RANDOM
 Road to Ikana Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x03601,                    RANDOM
@@ -1551,9 +1562,6 @@ Road to Ikana Grotto Grass 11,                          grass,          NONE,   
 Road to Ikana Grotto Grass 12,                          grass,          NONE,                   GROTTOS,                      0x03611,                    RANDOM
 Road to Ikana Grotto Grass 13,                          grass,          NONE,                   GROTTOS,                      0x03612,                    RANDOM
 Road to Ikana Grotto Grass 14,                          grass,          NONE,                   GROTTOS,                      0x03613,                    RANDOM
-Road to Ikana Stone Mask,                               npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
-Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
-Road to Ikana Red Boulder,                              redboulder,     NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Gorman Track Garo Mask,                                 npc,            NONE,                   GORMAN_TRACK,                 MASK_GARO,                  MASK_GARO
 Gorman Track Milk Purchase,                             npc,            NONE,                   GORMAN_TRACK,                 GORMAN_MILK,                MILK
 Gorman Track Crate,                                     crate,          NONE,                   GORMAN_TRACK,                 0x00049,                    NOTHING
