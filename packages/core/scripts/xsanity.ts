@@ -195,6 +195,9 @@ const ACTORS_MM = {
   OBJ_HAMISHI: 0x0fc,
   BG_ICICLE: 0x11f,
   EN_ISHI: 0x0b0,
+  EN_WOOD02: 0x041,
+  OBJ_YASI: 0x23c,
+  EN_SNOWWD: 0x1d4,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -1155,6 +1158,64 @@ function actorHandlerOotEnWood02(checks: Check[], ra: RoomActor) {
     checks.push({ roomActor: ra, item, name: 'Tree', type: 'tree', sliceId: i, name2: `Tree ${i + 1}` });
 }
 
+function actorHandlerMmEnWood02(checks: Check[], ra: RoomActor) {
+  const { actor } = ra;
+  const type = (actor.params) & 0xff;
+  if (type >= 0x0b) return;
+  let count = 1;
+  if (type === 3 || type === 6 || type === 8)
+    count = 6;
+  let item: string;
+  switch ((ra.actor.params >>> 8) & 0xff) {
+  case 0x00:
+  case 0x01:
+  case 0x02:
+  case 0x03:
+  case 0x04:
+  case 0x05:
+  case 0x06:
+  case 0x07:
+  case 0x0d:
+  case 0x0e:
+    item = 'RANDOM';
+    break;
+  case 0x08:
+    item = 'DEKU_SEEDS_5/ARROWS_5';
+    break;
+  case 0x09:
+    item = 'MAGIC_JAR_SMALL';
+    break;
+  case 0x0a:
+    item = 'BOMBS_5';
+    break;
+  case 0x0b:
+    item = 'RUPEE_GREEN';
+    break;
+  case 0x0c:
+    item = 'RUPEE_BLUE';
+    break;
+  default:
+    item = 'NOTHING';
+    break;
+  }
+
+  if (count > 1) {
+    for (let i = 0; i < count; ++i) {
+      checks.push({ roomActor: ra, item, name: 'Tree Cluster', type: 'tree', sliceId: i, name2: `Tree ${i + 1}` });
+    }
+  } else {
+    checks.push({ roomActor: ra, item, name: 'Tree', type: 'tree' });
+  }
+}
+
+function actorHandlerMmObjYasi(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Palm Tree', type: 'tree' });
+}
+
+function actorHandlerMmEnSnowwd(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Snow Tree', type: 'tree' });
+}
+
 function actorHandlerMmEnKusa(checks: Check[], ra: RoomActor) {
   const grassType = (ra.actor.params) & 3;
   let item: string;
@@ -1472,6 +1533,9 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_MM.BG_ICICLE]: actorHandlerMmBgIcicle,
   [ACTORS_MM.EN_ISHI]: actorHandlerMmEnIshi,
+  [ACTORS_MM.EN_WOOD02]: actorHandlerMmEnWood02,
+  [ACTORS_MM.OBJ_YASI]: actorHandlerMmObjYasi,
+  [ACTORS_MM.EN_SNOWWD]: actorHandlerMmEnSnowwd,
 };
 
 const ACTORS_HANDLERS = {
