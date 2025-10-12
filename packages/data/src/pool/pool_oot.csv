@@ -916,6 +916,54 @@ Hyrule Field Grass Pack 4 Bush 09,                          grass,          NONE
 Hyrule Field Grass Pack 4 Bush 10,                          grass,          NONE,                 HYRULE_FIELD,                   0x9003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 11,                          grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 12,                          grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    RANDOM
+Hyrule Field Tree 01,                                       tree,           NONE,                 HYRULE_FIELD,                   0x0401d,                    RUPEE_GREEN
+Hyrule Field Tree 02,                                       tree,           NONE,                 HYRULE_FIELD,                   0x0401e,                    RUPEE_GREEN
+Hyrule Field Tree 03,                                       tree,           NONE,                 HYRULE_FIELD,                   0x0401f,                    RANDOM
+Hyrule Field Tree 04,                                       tree,           NONE,                 HYRULE_FIELD,                   0x1401f,                    RANDOM
+Hyrule Field Tree 05,                                       tree,           NONE,                 HYRULE_FIELD,                   0x2401f,                    RANDOM
+Hyrule Field Tree 06,                                       tree,           NONE,                 HYRULE_FIELD,                   0x3401f,                    RANDOM
+Hyrule Field Tree 07,                                       tree,           NONE,                 HYRULE_FIELD,                   0x4401f,                    RANDOM
+Hyrule Field Tree 08,                                       tree,           NONE,                 HYRULE_FIELD,                   0x5401f,                    RANDOM
+Hyrule Field Tree 09,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04020,                    RANDOM
+Hyrule Field Tree 10,                                       tree,           NONE,                 HYRULE_FIELD,                   0x14020,                    RANDOM
+Hyrule Field Tree 11,                                       tree,           NONE,                 HYRULE_FIELD,                   0x24020,                    RANDOM
+Hyrule Field Tree 12,                                       tree,           NONE,                 HYRULE_FIELD,                   0x34020,                    RANDOM
+Hyrule Field Tree 13,                                       tree,           NONE,                 HYRULE_FIELD,                   0x44020,                    RANDOM
+Hyrule Field Tree 14,                                       tree,           NONE,                 HYRULE_FIELD,                   0x54020,                    RANDOM
+Hyrule Field Tree 15,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04021,                    RANDOM
+Hyrule Field Tree 16,                                       tree,           NONE,                 HYRULE_FIELD,                   0x14021,                    RANDOM
+Hyrule Field Tree 17,                                       tree,           NONE,                 HYRULE_FIELD,                   0x24021,                    RANDOM
+Hyrule Field Tree 18,                                       tree,           NONE,                 HYRULE_FIELD,                   0x34021,                    RANDOM
+Hyrule Field Tree 19,                                       tree,           NONE,                 HYRULE_FIELD,                   0x44021,                    RANDOM
+Hyrule Field Tree 20,                                       tree,           NONE,                 HYRULE_FIELD,                   0x54021,                    RANDOM
+Hyrule Field Tree 21,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04022,                    RANDOM
+Hyrule Field Tree 22,                                       tree,           NONE,                 HYRULE_FIELD,                   0x14022,                    RANDOM
+Hyrule Field Tree 23,                                       tree,           NONE,                 HYRULE_FIELD,                   0x24022,                    RANDOM
+Hyrule Field Tree 24,                                       tree,           NONE,                 HYRULE_FIELD,                   0x34022,                    RANDOM
+Hyrule Field Tree 25,                                       tree,           NONE,                 HYRULE_FIELD,                   0x44022,                    RANDOM
+Hyrule Field Tree 26,                                       tree,           NONE,                 HYRULE_FIELD,                   0x54022,                    RANDOM
+Hyrule Field Tree 27,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04023,                    RANDOM
+Hyrule Field Tree 28,                                       tree,           NONE,                 HYRULE_FIELD,                   0x14023,                    RANDOM
+Hyrule Field Tree 29,                                       tree,           NONE,                 HYRULE_FIELD,                   0x24023,                    RANDOM
+Hyrule Field Tree 30,                                       tree,           NONE,                 HYRULE_FIELD,                   0x34023,                    RANDOM
+Hyrule Field Tree 31,                                       tree,           NONE,                 HYRULE_FIELD,                   0x44023,                    RANDOM
+Hyrule Field Tree 32,                                       tree,           NONE,                 HYRULE_FIELD,                   0x54023,                    RANDOM
+Hyrule Field Tree 33,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04024,                    RANDOM
+Hyrule Field Tree 34,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04025,                    RANDOM
+Hyrule Field Tree 35,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04031,                    RANDOM
+Hyrule Field Tree 36,                                       tree,           NONE,                 HYRULE_FIELD,                   0x0403d,                    RUPEE_GREEN
+Hyrule Field Tree 37,                                       tree,           NONE,                 HYRULE_FIELD,                   0x0403e,                    RUPEE_GREEN
+Hyrule Field Tree 38,                                       tree,           NONE,                 HYRULE_FIELD,                   0x0403f,                    RUPEE_GREEN
+Hyrule Field Tree 39,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04040,                    RANDOM
+Hyrule Field Tree 40,                                       tree,           NONE,                 HYRULE_FIELD,                   0x04041,                    RUPEE_GREEN
+Hyrule Field Tree Child Near Lake 1,                        tree,           NONE,                 HYRULE_FIELD,                   0x0401c,                    RANDOM
+Hyrule Field Tree Child Near Lake 2,                        tree,           NONE,                 HYRULE_FIELD,                   0x1401c,                    RANDOM
+Hyrule Field Tree Child Near Lake 3,                        tree,           NONE,                 HYRULE_FIELD,                   0x2401c,                    RANDOM
+Hyrule Field Tree Child Near Lake 4,                        tree,           NONE,                 HYRULE_FIELD,                   0x3401c,                    RANDOM
+Hyrule Field Tree Child Near Lake 5,                        tree,           NONE,                 HYRULE_FIELD,                   0x4401c,                    RANDOM
+Hyrule Field Tree Child Near Lake 6,                        tree,           NONE,                 HYRULE_FIELD,                   0x5401c,                    RANDOM
+Hyrule Field Tree Child Near Valley,                        tree,           NONE,                 HYRULE_FIELD,                   0x0403c,                    RUPEE_GREEN
+Hyrule Field Tree Adult,                                    tree,           NONE,                 HYRULE_FIELD,                   0x08042,                    RUPEE_GREEN
 Hyrule Field Rock Circle Rock 1,                            rock,           NONE,                 HYRULE_FIELD,                   0x00037,                    RANDOM
 Hyrule Field Rock Circle Rock 2,                            rock,           NONE,                 HYRULE_FIELD,                   0x10037,                    RANDOM
 Hyrule Field Rock Circle Rock 3,                            rock,           NONE,                 HYRULE_FIELD,                   0x20037,                    RANDOM

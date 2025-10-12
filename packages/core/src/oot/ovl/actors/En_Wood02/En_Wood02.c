@@ -138,9 +138,15 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
                 } else {
                     childParams = (((this->drawType & 0xF0) << 4) | (this->actor.params + 1));
                 }
+
+                memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+                g.xflag.sliceId = i + 1;
+                g.xflagOverride = TRUE;
                 childWood = (EnWood02*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_WOOD02,
                                                           childPos.x, childPos.y, childPos.z, this->actor.world.rot.x,
                                                           *childSpawnAngle, 0, childParams);
+                g.xflagOverride = FALSE;
+
                 if (childWood != NULL) {
                     childWood->unk_14E[0] = i;
                     this->unk_14E[i] |= 1;
@@ -160,6 +166,30 @@ static void EnWood02_Alias(Xflag* xf)
     case SCE_OOT_MARKET_CHILD_NIGHT:
         xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
         xf->id = 14;
+        break;
+    case SCE_OOT_HYRULE_FIELD:
+        if (xf->setupId == 2 && xf->id != 66)
+        {
+            switch (xf->id)
+            {
+            case 38: xf->id = 33; break;
+            case 39: xf->id = 34; break;
+            case 40: xf->id = 35; break;
+            case 41: xf->id = 32; break;
+            case 42: xf->id = 31; break;
+            case 43: xf->id = 29; break;
+            case 44: xf->id = 36; break;
+            case 45: xf->id = 37; break;
+            case 46: xf->id = 49; break;
+            case 60: xf->id = 30; break;
+            case 61: xf->id = 62; break;
+            case 62: xf->id = 63; break;
+            case 63: xf->id = 64; break;
+            case 64: xf->id = 65; break;
+            case 65: xf->id = 61; break;
+            }
+            xf->setupId = 1;
+        }
         break;
     }
 }

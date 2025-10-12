@@ -203,7 +203,7 @@ const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
   [ACTORS_OOT.OBJ_MURE3]: 7,
   [ACTORS_OOT.OBJ_MURE]: 5,
-  [ACTORS_OOT.EN_WOOD02]: 5,
+  [ACTORS_OOT.EN_WOOD02]: 6,
 }
 
 const ACTOR_SLICES_MM = {
@@ -1116,7 +1116,7 @@ function actorHandlerOotEnWood02(checks: Check[], ra: RoomActor) {
   if (ra.actor.rz & 0xff) return;
   let count = 1;
   if (type === 3 || type === 6 || type === 8)
-    count = 5;
+    count = 6;
   let item: string;
   switch ((ra.actor.params >>> 8) & 0xff) {
   case 0x00:
