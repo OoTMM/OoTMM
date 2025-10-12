@@ -1168,6 +1168,23 @@ Desert Colossus Wonder Item Oasis 2,                        wonder,         NONE
 Desert Colossus Wonder Item Oasis Child,                    wonder,         NONE,                 DESERT_COLOSSUS,                0x00016,                    RUPEE_BLUE
 Desert Colossus Wonder Item Fountain 1,                     wonder,         NONE,                 DESERT_COLOSSUS,                0x00014,                    RUPEE_BLUE
 Desert Colossus Wonder Item Fountain 2,                     wonder,         NONE,                 DESERT_COLOSSUS,                0x00017,                    RUPEE_RED
+Desert Colossus Rock,                                       rock,           NONE,                 DESERT_COLOSSUS,                0x00019,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 1,                       rock,           NONE,                 DESERT_COLOSSUS,                0x0001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 2,                       rock,           NONE,                 DESERT_COLOSSUS,                0x1001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 3,                       rock,           NONE,                 DESERT_COLOSSUS,                0x2001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 4,                       rock,           NONE,                 DESERT_COLOSSUS,                0x3001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 5,                       rock,           NONE,                 DESERT_COLOSSUS,                0x4001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001a,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 1,                       rock,           NONE,                 DESERT_COLOSSUS,                0x0001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 2,                       rock,           NONE,                 DESERT_COLOSSUS,                0x1001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 3,                       rock,           NONE,                 DESERT_COLOSSUS,                0x2001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 4,                       rock,           NONE,                 DESERT_COLOSSUS,                0x3001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 5,                       rock,           NONE,                 DESERT_COLOSSUS,                0x4001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001b,                    RANDOM
 Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET

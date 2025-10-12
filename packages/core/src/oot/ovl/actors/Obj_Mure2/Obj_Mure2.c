@@ -70,5 +70,12 @@ void ObjMure2_AliasRocks(Xflag* xf)
         xf->setupId = 0;
         xf->id = 10;
         break;
+    case SCE_OOT_DESERT_COLOSSUS:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id -= 2;
+        }
+        break;
     }
 }

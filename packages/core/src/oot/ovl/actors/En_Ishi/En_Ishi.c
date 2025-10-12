@@ -305,6 +305,13 @@ static void EnIshi_Alias(Xflag* xflag) {
         xflag->setupId = 0;
         xflag->id = 22;
         break;
+    case SCE_OOT_DESERT_COLOSSUS:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            xflag->id -= 2;
+        }
+        break;
     }
 }
 
