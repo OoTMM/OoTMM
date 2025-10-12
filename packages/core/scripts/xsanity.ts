@@ -166,6 +166,7 @@ const ACTORS_OOT = {
   BG_ICICLE: 0x1c7,
   BG_ICE_SHELTER: 0x0ef,
   EN_ISHI: 0x14e,
+  EN_WOOD02: 0x077,
 };
 
 const ACTORS_MM = {
@@ -202,6 +203,7 @@ const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
   [ACTORS_OOT.OBJ_MURE3]: 7,
   [ACTORS_OOT.OBJ_MURE]: 5,
+  [ACTORS_OOT.EN_WOOD02]: 5,
 }
 
 const ACTOR_SLICES_MM = {
@@ -1107,6 +1109,52 @@ function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Grass', type: 'grass' });
 }
 
+function actorHandlerOotEnWood02(checks: Check[], ra: RoomActor) {
+  const { actor } = ra;
+  const type = (actor.params) & 0xff;
+  if (type >= 0x0b) return;
+  if (ra.actor.rz & 0xff) return;
+  let count = 1;
+  if (type === 3 || type === 6 || type === 8)
+    count = 5;
+  let item: string;
+  switch ((ra.actor.params >>> 8) & 0xff) {
+  case 0x00:
+  case 0x01:
+  case 0x02:
+  case 0x03:
+  case 0x04:
+  case 0x05:
+  case 0x06:
+  case 0x07:
+  case 0x0d:
+  case 0x0e:
+    item = 'RANDOM';
+    break;
+  case 0x08:
+    item = 'DEKU_SEEDS_5/ARROWS_5';
+    break;
+  case 0x09:
+    item = 'MAGIC_JAR_SMALL';
+    break;
+  case 0x0a:
+    item = 'BOMBS_5';
+    break;
+  case 0x0b:
+    item = 'RUPEE_GREEN';
+    break;
+  case 0x0c:
+    item = 'RUPEE_BLUE';
+    break;
+  default:
+    item = 'NOTHING';
+    break;
+  }
+
+  for (let i = 0; i < count; ++i)
+    checks.push({ roomActor: ra, item, name: 'Tree', type: 'tree', sliceId: i, name2: `Tree ${i + 1}` });
+}
+
 function actorHandlerMmEnKusa(checks: Check[], ra: RoomActor) {
   const grassType = (ra.actor.params) & 3;
   let item: string;
@@ -1404,6 +1452,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.BG_ICICLE]: actorHandlerOotBgIcicle,
   [ACTORS_OOT.BG_ICE_SHELTER]: actorHandlerOotBgIceShelter,
   [ACTORS_OOT.EN_ISHI]: actorHandlerOotEnIshi,
+  [ACTORS_OOT.EN_WOOD02]: actorHandlerOotEnWood02,
 };
 
 const ACTORS_HANDLERS_MM = {

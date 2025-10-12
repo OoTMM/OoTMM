@@ -366,7 +366,7 @@ void ObjHamishi_Update(Actor_ObjHamishi* this, PlayState* play) {
 
         if (this->unk_1A0 > 0) {
             this->unk_1A0--;
-        } else if ((this->actor.flags & ACTOR_FLAG_MM_INSIDE_CULLING_VOLUME) && (this->actor.xzDistToPlayer < 1000.0f)) {
+        } else if ((this->actor.flags & ACTOR_FLAG_INSIDE_CULLING_VOLUME) && (this->actor.xzDistToPlayer < 1000.0f)) {
             CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider.base);
         }
 
