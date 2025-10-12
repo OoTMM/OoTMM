@@ -66,6 +66,11 @@
     "Mountain Village Keaton Grass Reward 7": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
+    "Mountain Village Rock Ground 1": "is_spring"
+    "Mountain Village Rock Ground 2": "is_spring"
+    "Mountain Village Rock Ground 3": "is_spring"
+    "Mountain Village Rock Ground 4": "is_spring"
+    "Mountain Village Rock Ground 5": "is_spring"
     "Mountain Village Rupee": "is_spring && (has_mask_goron || can_hammer)"
     "Mountain Village Hive": "is_spring && (break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU)))"
     "Mountain Village Potted Plant 1 Pot": "is_day"
@@ -182,6 +187,8 @@
   locations:
     "Mountain Village Small Snowball Cliff 1": "is_winter"
     "Mountain Village Small Snowball Cliff 2": "is_winter"
+    "Mountain Village Rock Cliff 1": "is_spring"
+    "Mountain Village Rock Cliff 2": "is_spring"
 
 "Near Goron Graveyard":
   region: MOUNTAIN_VILLAGE

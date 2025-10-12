@@ -581,6 +581,7 @@ Actor_TextboxIsClosing = 0x800b867c;
 func_800B0E48 = 0x800b0e48;
 BgCheck_EntityRaycastFloor5 = 0x800c411c;
 Matrix_RotateZYX = 0x8018103c;
+Math3D_Cos = 0x80179e88;
 Math3D_CosOut = 0x80179eac;
 func_800C0094 = 0x800c0094;
 

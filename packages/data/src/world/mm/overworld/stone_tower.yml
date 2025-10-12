@@ -79,6 +79,9 @@
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Top": "can_use_light_arrows || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted Upper": "can_use_beans || hookshot_anywhere"
+  locations:
+    "Stone Tower Inverted Rock 1": "true"
+    "Stone Tower Inverted Rock 2": "true"
 
 "Stone Tower Top Inverted Upper":
   region: STONE_TOWER

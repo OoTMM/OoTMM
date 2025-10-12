@@ -38,6 +38,11 @@
     "Great Bay Coast Grass 3": "true"
     "Great Bay Coast Grass 4": "true"
     "Great Bay Coast Grass 5": "true"
+    "Great Bay Coast Rock Sand 1": "true"
+    "Great Bay Coast Rock Sand 2": "true"
+    "Great Bay Coast Rock Sand 3": "true"
+    "Great Bay Coast Rock Sand 4": "true"
+    "Great Bay Coast Rock Sand 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
 
@@ -52,6 +57,9 @@
     "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Rock Ledge 1": "true"
+    "Great Bay Coast Rock Ledge 2": "true"
+    "Great Bay Coast Rock Ledge 3": "true"
 
 "Great Bay Coast Water":
   region: GREAT_BAY_COAST
@@ -62,6 +70,38 @@
     "Great Bay Coast Platform": "can_swim && (!setting(jpLayouts, GreatBayCoast) || has_mask_zora)"
     "Great Bay Coast Fortress": "underwater_walking"
     "Great Bay Coast Near Pinnacle": "true"
+  locations:
+    "Great Bay Coast Rock Water 01": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 02": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 03": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 04": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 05": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 06": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 07": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 08": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 09": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 10": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 11": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 12": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 13": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 14": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 15": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 16": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 17": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 18": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 19": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 20": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 21": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 22": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 23": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 24": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 25": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 26": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 27": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water 28": "has_mask_blast && has_iron_boots"
+    "Great Bay Coast Rock Water Cleared 1": "has_mask_blast && has_iron_boots && is_ocean_cleared"
+    "Great Bay Coast Rock Water Cleared 2": "has_mask_blast && has_iron_boots && is_ocean_cleared"
+
 
 "Great Bay Coast Water Void":
   region: NONE

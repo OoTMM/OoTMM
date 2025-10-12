@@ -34,10 +34,10 @@
         <Texture Name="gFieldWoodDoorTex" OutName="wood_door" Format="i4" Width="64" Height="128" Offset="0x4800" />
         <Texture Name="gameplay_field_keep_TLUT_005800" OutName="tlut_005800" Format="rgba16" Width="4" Height="4" Offset="0x5800" />
         <Texture Name="gameplay_field_keep_Tex_005828" OutName="tex_005828" Format="ci4" Width="64" Height="64" Offset="0x5828" />
-        <DList Name="gameplay_field_keep_DL_0061E8" Offset="0x61E8" />
-        <DList Name="gameplay_field_keep_DL_006420" Offset="0x6420" />
-        <DList Name="gameplay_field_keep_DL_0066B0" Offset="0x66B0" />
-        <DList Name="gameplay_field_keep_DL_006760" Offset="0x6760" />
+        <DList Name="gFieldSilverBoulderDL" Offset="0x61E8" />
+        <DList Name="gFieldSilverBoulderDebrisDL" Offset="0x6420" />
+        <DList Name="gFieldSmallRockOpaDL" Offset="0x66B0" />
+        <DList Name="gFieldSmallRockXluDL" Offset="0x6760" />
         <Texture Name="gameplay_field_keep_Tex_006810" OutName="tex_006810" Format="rgba16" Width="32" Height="32" Offset="0x6810" />
         <Texture Name="gameplay_field_keep_Tex_007010" OutName="tex_007010" Format="rgba16" Width="32" Height="32" Offset="0x7010" />
 

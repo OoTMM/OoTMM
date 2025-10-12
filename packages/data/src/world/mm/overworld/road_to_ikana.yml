@@ -52,6 +52,14 @@
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
     "Road to Ikana Pot": "scarecrow_hookshot || short_hook_anywhere"
+    "Road to Ikana Rock Circle Rock 1": "true"
+    "Road to Ikana Rock Circle Rock 2": "true"
+    "Road to Ikana Rock Circle Rock 3": "true"
+    "Road to Ikana Rock Circle Rock 4": "true"
+    "Road to Ikana Rock Circle Rock 5": "true"
+    "Road to Ikana Rock Circle Rock 6": "true"
+    "Road to Ikana Rock Circle Rock 7": "true"
+    "Road to Ikana Rock Circle Rock 8": "true"
   gossip:
     "Road to Ikana Gossip": "true"
 

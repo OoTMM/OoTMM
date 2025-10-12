@@ -19,6 +19,22 @@
     "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || (has_bombchu && trick(MM_CAPE_LIKE_LIKE_BOMBCHU)) || has_mask_blast))"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
+    "Zora Cape Rock Water 1": "true"
+    "Zora Cape Rock Water 2": "true"
+    "Zora Cape Rock Water 3": "true"
+    "Zora Cape Rock Water 4": "true"
+    "Zora Cape Rock Water 5": "true"
+    "Zora Cape Rock Sand 1": "is_ocean_cursed"
+    "Zora Cape Rock Sand 2": "is_ocean_cursed"
+    "Zora Cape Rock Sand 3": "is_ocean_cursed"
+    "Zora Cape Rock Sand 4": "is_ocean_cursed"
+    "Zora Cape Rock Sand 5": "is_ocean_cursed"
+    "Zora Cape Rock Island 1": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Rock Island 2": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Rock Island 3": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Rock Island 4": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Rock Island 5": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+
   gossip:
     "Zora Cape Gossip": "true"
 

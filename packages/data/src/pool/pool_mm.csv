@@ -381,6 +381,27 @@ Termina Field Grass Pack 18 Grass 09,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,                   TERMINA_FIELD,                0x900bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
+Termina Field Rock Near Ocean,                          rock,           NONE,                 TERMINA_FIELD,                  0x0007f,                    RANDOM
+Termina Field Rock Wall Mountain 1,                     rock,           NONE,                 TERMINA_FIELD,                  0x00080,                    RANDOM
+Termina Field Rock Wall Mountain 2,                     rock,           NONE,                 TERMINA_FIELD,                  0x00082,                    RANDOM
+Termina Field Rock Wall Mountain 3,                     rock,           NONE,                 TERMINA_FIELD,                  0x00083,                    RANDOM
+Termina Field Rock Wall Mountain 4,                     rock,           NONE,                 TERMINA_FIELD,                  0x00086,                    RANDOM
+Termina Field Rock Wall Mountain 5,                     rock,           NONE,                 TERMINA_FIELD,                  0x00087,                    RANDOM
+Termina Field Rock Wall Mountain 6,                     rock,           NONE,                 TERMINA_FIELD,                  0x00088,                    RANDOM
+Termina Field Rock Wall Mountain 7,                     rock,           NONE,                 TERMINA_FIELD,                  0x0008b,                    RANDOM
+Termina Field Rock Wall Ocean 1,                        rock,           NONE,                 TERMINA_FIELD,                  0x00081,                    RANDOM
+Termina Field Rock Wall Ocean 2,                        rock,           NONE,                 TERMINA_FIELD,                  0x00084,                    RANDOM
+Termina Field Rock Wall Ocean 3,                        rock,           NONE,                 TERMINA_FIELD,                  0x00085,                    RANDOM
+Termina Field Rock Wall Ocean 4,                        rock,           NONE,                 TERMINA_FIELD,                  0x00089,                    RANDOM
+Termina Field Rock Wall Ocean 5,                        rock,           NONE,                 TERMINA_FIELD,                  0x0008a,                    RANDOM
+Termina Field Rock Circle Rock 1,                       rock,           NONE,                 TERMINA_FIELD,                  0x0008c,                    RANDOM
+Termina Field Rock Circle Rock 2,                       rock,           NONE,                 TERMINA_FIELD,                  0x1008c,                    RANDOM
+Termina Field Rock Circle Rock 3,                       rock,           NONE,                 TERMINA_FIELD,                  0x2008c,                    RANDOM
+Termina Field Rock Circle Rock 4,                       rock,           NONE,                 TERMINA_FIELD,                  0x3008c,                    RANDOM
+Termina Field Rock Circle Rock 5,                       rock,           NONE,                 TERMINA_FIELD,                  0x4008c,                    RANDOM
+Termina Field Rock Circle Rock 6,                       rock,           NONE,                 TERMINA_FIELD,                  0x5008c,                    RANDOM
+Termina Field Rock Circle Rock 7,                       rock,           NONE,                 TERMINA_FIELD,                  0x6008c,                    RANDOM
+Termina Field Rock Circle Rock 8,                       rock,           NONE,                 TERMINA_FIELD,                  0x7008c,                    RANDOM
 Termina Field Rupee,                                    rupee,          NONE,                   TERMINA_FIELD,                0x00004,                    RUPEE_RED
 Termina Field Wonder Item Grass 1,                      wonder,         NONE,                   TERMINA_FIELD,                0x00059,                    RUPEE_GREEN
 Termina Field Wonder Item Grass 2,                      wonder,         NONE,                   TERMINA_FIELD,                0x0005a,                    RUPEE_GREEN
@@ -495,6 +516,7 @@ Canyon Gossip Grotto Grass 4,                           grass,          NONE,   
 Canyon Gossip Grotto Grass 5,                           grass,          NONE,                   GROTTOS,                      0x00204,                    RANDOM
 Bio Baba Grotto Grass 1,                                grass,          NONE,                   GROTTOS,                      0x00b00,                    RANDOM
 Bio Baba Grotto Grass 2,                                grass,          NONE,                   GROTTOS,                      0x00b03,                    RANDOM
+Bio Baba Grotto Rock,                                   rock,           NONE,                   GROTTOS,                      0x00b01,                    RANDOM
 Peahat Grotto Grass 01,                                 grass,          NONE,                   GROTTOS,                      0x00d01,                    RANDOM
 Peahat Grotto Grass 02,                                 grass,          NONE,                   GROTTOS,                      0x10d01,                    RANDOM
 Peahat Grotto Grass 03,                                 grass,          NONE,                   GROTTOS,                      0x20d01,                    RANDOM
@@ -792,6 +814,9 @@ Swamp Skulltula Pot Room Pot 1,                         chest,          NONE,   
 Swamp Skulltula Pot Room Pot 2,                         chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x11,                       GS_TOKEN_SWAMP
 Swamp Skulltula Pot Room Jar,                           chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x05,                       GS_TOKEN_SWAMP
 Swamp Skulltula Pot Room Wall,                          chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x16,                       GS_TOKEN_SWAMP
+Swamp Spider House Rock Entrance 1,                     rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00003,                    RANDOM
+Swamp Spider House Rock Entrance 2,                     rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00004,                    RANDOM
+Swamp Spider House Rock Pots Room,                      rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00405,                    RANDOM
 Swamp Spider House Pot Main Upper Left 1,               pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0103,                     MAGIC_JAR_SMALL
 Swamp Spider House Pot Main Upper Left 2,               pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0104,                     MAGIC_JAR_SMALL
 Swamp Spider House Pot Main Lower 1,                    pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0105,                     RUPEE_GREEN
@@ -963,6 +988,13 @@ Mountain Village Butterfly Pack 2 Butterfly 5,          butterfly,      NONE,   
 Mountain Village Spring Red Boulder 1,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00000,                    NOTHING
 Mountain Village Spring Red Boulder 2,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00001,                    NOTHING
 Mountain Village Spring Red Boulder 3,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00002,                    NOTHING
+Mountain Village Rock Cliff 1,                          rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0000e,                    RANDOM
+Mountain Village Rock Cliff 2,                          rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0000f,                    RANDOM
+Mountain Village Rock Ground 1,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00010,                    RANDOM
+Mountain Village Rock Ground 2,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00011,                    RANDOM
+Mountain Village Rock Ground 3,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00012,                    RANDOM
+Mountain Village Rock Ground 4,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00013,                    RANDOM
+Mountain Village Rock Ground 5,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00014,                    RANDOM
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
@@ -1050,8 +1082,27 @@ Twin Islands Small Snowball 3,                          snowball,       NONE,   
 Twin Islands Small Snowball Ramp 1,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00041,                    MAGIC_JAR_SMALL
 Twin Islands Small Snowball Ramp 2,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00042,                    RECOVERY_HEART
 Twin Islands Small Snowball Ramp 3,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00043,                    RECOVERY_HEART
+Twin Islands Rock 1,                                    rock,           NONE,                   TWIN_ISLANDS_SPRING,          0x00018,                    RANDOM
+Twin Islands Rock 2,                                    rock,           NONE,                   TWIN_ISLANDS_SPRING,          0x00019,                    RANDOM
+Twin Islands Rock 3,                                    rock,           NONE,                   TWIN_ISLANDS_SPRING,          0x0001a,                    RANDOM
 Goron Elder,                                            npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                             npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
+Goron Shrine Rock 01,                                   rock,           NONE,                   GORON_SHRINE,                 0x00002,                    RANDOM
+Goron Shrine Rock 02,                                   rock,           NONE,                   GORON_SHRINE,                 0x00003,                    RANDOM
+Goron Shrine Rock 03,                                   rock,           NONE,                   GORON_SHRINE,                 0x00004,                    RANDOM
+Goron Shrine Rock 04,                                   rock,           NONE,                   GORON_SHRINE,                 0x00005,                    RANDOM
+Goron Shrine Rock 05,                                   rock,           NONE,                   GORON_SHRINE,                 0x00006,                    RANDOM
+Goron Shrine Rock 06,                                   rock,           NONE,                   GORON_SHRINE,                 0x00007,                    RANDOM
+Goron Shrine Rock 07,                                   rock,           NONE,                   GORON_SHRINE,                 0x00008,                    RANDOM
+Goron Shrine Rock 08,                                   rock,           NONE,                   GORON_SHRINE,                 0x00009,                    RANDOM
+Goron Shrine Rock 09,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000a,                    RANDOM
+Goron Shrine Rock 10,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000b,                    RANDOM
+Goron Shrine Rock 11,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000c,                    RANDOM
+Goron Shrine Rock 12,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000d,                    RANDOM
+Goron Shrine Rock 13,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000e,                    RANDOM
+Goron Shrine Rock 14,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000f,                    RANDOM
+Goron Shrine Rock 15,                                   rock,           NONE,                   GORON_SHRINE,                 0x00010,                    RANDOM
+Goron Shrine Rock 16,                                   rock,           NONE,                   GORON_SHRINE,                 0x00011,                    RANDOM
 Goron Shrine Pot 01,                                    pot,            NONE,                   GORON_SHRINE,                 0x0023,                     STICK
 Goron Shrine Pot 02,                                    pot,            NONE,                   GORON_SHRINE,                 0x0024,                     MAGIC_JAR_SMALL
 Goron Shrine Pot 03,                                    pot,            NONE,                   GORON_SHRINE,                 0x0025,                     MAGIC_JAR_SMALL
@@ -1314,6 +1365,44 @@ Great Bay Coast Grass 2,                                grass,          NONE,   
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
 Great Bay Coast Grass 4,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
 Great Bay Coast Grass 5,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
+Great Bay Coast Rock Water Cleared 1,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00045,                    RANDOM
+Great Bay Coast Rock Water Cleared 2,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00042,                    RANDOM
+Great Bay Coast Rock Water 01,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00043,                    RANDOM
+Great Bay Coast Rock Water 02,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00044,                    RANDOM
+Great Bay Coast Rock Water 03,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00046,                    RANDOM
+Great Bay Coast Rock Water 04,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00047,                    RANDOM
+Great Bay Coast Rock Water 05,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00048,                    RANDOM
+Great Bay Coast Rock Water 06,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00049,                    RANDOM
+Great Bay Coast Rock Water 07,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004a,                    RANDOM
+Great Bay Coast Rock Water 08,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004b,                    RANDOM
+Great Bay Coast Rock Water 09,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004c,                    RANDOM
+Great Bay Coast Rock Water 10,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004d,                    RANDOM
+Great Bay Coast Rock Water 11,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004e,                    RANDOM
+Great Bay Coast Rock Water 12,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0004f,                    RANDOM
+Great Bay Coast Rock Water 13,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00050,                    RANDOM
+Great Bay Coast Rock Water 14,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00051,                    RANDOM
+Great Bay Coast Rock Water 15,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00052,                    RANDOM
+Great Bay Coast Rock Water 16,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00053,                    RANDOM
+Great Bay Coast Rock Water 17,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00054,                    RANDOM
+Great Bay Coast Rock Water 18,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00055,                    RANDOM
+Great Bay Coast Rock Water 19,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00056,                    RANDOM
+Great Bay Coast Rock Water 20,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00057,                    RANDOM
+Great Bay Coast Rock Water 21,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00058,                    RANDOM
+Great Bay Coast Rock Water 22,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00059,                    RANDOM
+Great Bay Coast Rock Water 23,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005a,                    RANDOM
+Great Bay Coast Rock Water 24,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005b,                    RANDOM
+Great Bay Coast Rock Water 25,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005c,                    RANDOM
+Great Bay Coast Rock Water 26,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005d,                    RANDOM
+Great Bay Coast Rock Water 27,                          rock,           NONE,                   GREAT_BAY_COAST,              0x0005e,                    RANDOM
+Great Bay Coast Rock Water 28,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00067,                    RANDOM
+Great Bay Coast Rock Sand 1,                            rock,           NONE,                   GREAT_BAY_COAST,              0x0005f,                    RANDOM
+Great Bay Coast Rock Sand 2,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00060,                    RANDOM
+Great Bay Coast Rock Sand 3,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00061,                    RANDOM
+Great Bay Coast Rock Sand 4,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00062,                    RANDOM
+Great Bay Coast Rock Sand 5,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00063,                    RANDOM
+Great Bay Coast Rock Ledge 1,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00064,                    RANDOM
+Great Bay Coast Rock Ledge 2,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00065,                    RANDOM
+Great Bay Coast Rock Ledge 3,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00066,                    RANDOM
 Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x04085,                    FAIRY
 Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
 Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
@@ -1399,6 +1488,32 @@ Zora Cape Ledge Chest 2,                                chest,          NONE,   
 Zora Cape Underwater Chest,                             chest,          NONE,                   ZORA_CAPE,                    0x00,                       RUPEE_PURPLE
 Zora Cape Waterfall HP,                                 collectible,    NONE,                   ZORA_CAPE,                    0x07,                       HEART_PIECE
 Zora Cape Owl Statue,                                   npc,            NONE,                   ZORA_CAPE,                    OWL_ZORA_CAPE,              OWL_ZORA_CAPE
+Zora Cape Rock Island 1,                                rock,           NONE,                   ZORA_CAPE,                    0x00020,                    RANDOM
+Zora Cape Rock Island 2,                                rock,           NONE,                   ZORA_CAPE,                    0x00021,                    RANDOM
+Zora Cape Rock Island 3,                                rock,           NONE,                   ZORA_CAPE,                    0x00022,                    RANDOM
+Zora Cape Rock Island 4,                                rock,           NONE,                   ZORA_CAPE,                    0x00023,                    RANDOM
+Zora Cape Rock Island 5,                                rock,           NONE,                   ZORA_CAPE,                    0x00024,                    RANDOM
+Zora Cape Rock Water 1,                                 rock,           NONE,                   ZORA_CAPE,                    0x00025,                    RANDOM
+Zora Cape Rock Water 2,                                 rock,           NONE,                   ZORA_CAPE,                    0x00026,                    RANDOM
+Zora Cape Rock Water 3,                                 rock,           NONE,                   ZORA_CAPE,                    0x00027,                    RANDOM
+Zora Cape Rock Water 4,                                 rock,           NONE,                   ZORA_CAPE,                    0x00028,                    RANDOM
+Zora Cape Rock Water 5,                                 rock,           NONE,                   ZORA_CAPE,                    0x00029,                    RANDOM
+Zora Cape Rock Sand 1,                                  rock,           NONE,                   ZORA_CAPE,                    0x00035,                    RANDOM
+Zora Cape Rock Sand 2,                                  rock,           NONE,                   ZORA_CAPE,                    0x00036,                    RANDOM
+Zora Cape Rock Sand 3,                                  rock,           NONE,                   ZORA_CAPE,                    0x00037,                    RANDOM
+Zora Cape Rock Sand 4,                                  rock,           NONE,                   ZORA_CAPE,                    0x00038,                    RANDOM
+Zora Cape Rock Sand 5,                                  rock,           NONE,                   ZORA_CAPE,                    0x00039,                    RANDOM
+Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
+Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
+Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
+Zora Cape Pot Near Owl Statue 2,                        pot,            NONE,                   ZORA_CAPE,                    0x0046,                     FAIRY
+Zora Cape Pot Near Owl Statue 3,                        pot,            NONE,                   ZORA_CAPE,                    0x0047,                     BOMBS_5
+Zora Cape Pot Near Owl Statue 4,                        pot,            NONE,                   ZORA_CAPE,                    0x0048,                     ARROWS_20
+Zora Cape Pot Game 1,                                   pot,            NONE,                   EXTRA,                        0x0000,                     NOTHING
+Zora Cape Pot Game 2,                                   pot,            NONE,                   EXTRA,                        0x0001,                     NOTHING
+Zora Cape Pot Game 3,                                   pot,            NONE,                   EXTRA,                        0x0002,                     NOTHING
+Zora Cape Pot Game 4,                                   pot,            NONE,                   EXTRA,                        0x0003,                     NOTHING
+Zora Cape Pot Game 5,                                   pot,            NONE,                   EXTRA,                        0x0004,                     NOTHING
 Zora Cape Grotto,                                       chest,          NONE,                   GROTTOS,                      0x15,                       BOMBCHU
 Zora Cape Grotto Grass 01,                              grass,          NONE,                   GROTTOS,                      0x03500,                    RANDOM
 Zora Cape Grotto Grass 02,                              grass,          NONE,                   GROTTOS,                      0x03501,                    RANDOM
@@ -1414,17 +1529,6 @@ Zora Cape Grotto Grass 11,                              grass,          NONE,   
 Zora Cape Grotto Grass 12,                              grass,          NONE,                   GROTTOS,                      0x03511,                    RANDOM
 Zora Cape Grotto Grass 13,                              grass,          NONE,                   GROTTOS,                      0x03512,                    RANDOM
 Zora Cape Grotto Grass 14,                              grass,          NONE,                   GROTTOS,                      0x03513,                    RANDOM
-Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
-Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
-Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
-Zora Cape Pot Near Owl Statue 2,                        pot,            NONE,                   ZORA_CAPE,                    0x0046,                     FAIRY
-Zora Cape Pot Near Owl Statue 3,                        pot,            NONE,                   ZORA_CAPE,                    0x0047,                     BOMBS_5
-Zora Cape Pot Near Owl Statue 4,                        pot,            NONE,                   ZORA_CAPE,                    0x0048,                     ARROWS_20
-Zora Cape Pot Game 1,                                   pot,            NONE,                   EXTRA,                        0x0000,                     NOTHING
-Zora Cape Pot Game 2,                                   pot,            NONE,                   EXTRA,                        0x0001,                     NOTHING
-Zora Cape Pot Game 3,                                   pot,            NONE,                   EXTRA,                        0x0002,                     NOTHING
-Zora Cape Pot Game 4,                                   pot,            NONE,                   EXTRA,                        0x0003,                     NOTHING
-Zora Cape Pot Game 5,                                   pot,            NONE,                   EXTRA,                        0x0004,                     NOTHING
 Great Bay Great Fairy,                                  npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_OCEAN,          DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                                   npc,            NONE,                   ZORA_HALL_ROOMS,              SCRUB_OCEAN,                DEED_OCEAN
 Zora Hall Scrub Shop,                                   npc,            NONE,                   ZORA_HALL_ROOMS,              SCRUB_SHOP_POTION_GREEN,    POTION_GREEN
@@ -1437,6 +1541,8 @@ Zora Shop Item 3,                                       shop,           NONE,   
 Pinnacle Rock Chest 1,                                  chest,          NONE,                   PINNACLE_ROCK,                0x01,                       RUPEE_RED
 Pinnacle Rock Chest 2,                                  chest,          NONE,                   PINNACLE_ROCK,                0x02,                       RUPEE_RED
 Pinnacle Rock HP,                                       npc,            PINNACLE_ROCK_HP,       PINNACLE_ROCK,                SEAHORSE_HEART_PIECE,       HEART_PIECE
+Pinnacle Rock Rock Unreachable 1,                       rock,           NONE,                   PINNACLE_ROCK,                0x0001c,                    RANDOM
+Pinnacle Rock Rock Unreachable 2,                       rock,           NONE,                   PINNACLE_ROCK,                0x0001d,                    RANDOM
 Pinnacle Rock Pot 01,                                   pot,            NONE,                   PINNACLE_ROCK,                0x0003,                     MAGIC_JAR_SMALL
 Pinnacle Rock Pot 02,                                   pot,            NONE,                   PINNACLE_ROCK,                0x0004,                     RECOVERY_HEART
 Pinnacle Rock Pot 03,                                   pot,            NONE,                   PINNACLE_ROCK,                0x0005,                     RECOVERY_HEART
@@ -1512,6 +1618,17 @@ Ocean Spider House Wonder Item Masks 9,                 wonder,         NONE,   
 Waterfall Rapids Beaver Race 1,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_1,                   BOTTLE_EMPTY
 Waterfall Rapids Beaver Race 2,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                                    chest,          NONE,                   ROAD_IKANA,                   0x00,                       RUPEE_RED
+Road to Ikana Stone Mask,                               npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
+Road to Ikana Rock Circle Rock 1,                       rock,           NONE,                   ROAD_IKANA,                   0x00023,                    RANDOM
+Road to Ikana Rock Circle Rock 2,                       rock,           NONE,                   ROAD_IKANA,                   0x10023,                    RANDOM
+Road to Ikana Rock Circle Rock 3,                       rock,           NONE,                   ROAD_IKANA,                   0x20023,                    RANDOM
+Road to Ikana Rock Circle Rock 4,                       rock,           NONE,                   ROAD_IKANA,                   0x30023,                    RANDOM
+Road to Ikana Rock Circle Rock 5,                       rock,           NONE,                   ROAD_IKANA,                   0x40023,                    RANDOM
+Road to Ikana Rock Circle Rock 6,                       rock,           NONE,                   ROAD_IKANA,                   0x50023,                    RANDOM
+Road to Ikana Rock Circle Rock 7,                       rock,           NONE,                   ROAD_IKANA,                   0x60023,                    RANDOM
+Road to Ikana Rock Circle Rock 8,                       rock,           NONE,                   ROAD_IKANA,                   0x70023,                    RANDOM
+Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
+Road to Ikana Red Boulder,                              redboulder,     NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Road to Ikana Grotto,                                   chest,          NONE,                   GROTTOS,                      0x16,                       BOMBCHU
 Road to Ikana Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x03600,                    RANDOM
 Road to Ikana Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x03601,                    RANDOM
@@ -1527,9 +1644,6 @@ Road to Ikana Grotto Grass 11,                          grass,          NONE,   
 Road to Ikana Grotto Grass 12,                          grass,          NONE,                   GROTTOS,                      0x03611,                    RANDOM
 Road to Ikana Grotto Grass 13,                          grass,          NONE,                   GROTTOS,                      0x03612,                    RANDOM
 Road to Ikana Grotto Grass 14,                          grass,          NONE,                   GROTTOS,                      0x03613,                    RANDOM
-Road to Ikana Stone Mask,                               npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
-Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
-Road to Ikana Red Boulder,                              redboulder,     NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Gorman Track Garo Mask,                                 npc,            NONE,                   GORMAN_TRACK,                 MASK_GARO,                  MASK_GARO
 Gorman Track Milk Purchase,                             npc,            NONE,                   GORMAN_TRACK,                 GORMAN_MILK,                MILK
 Gorman Track Crate,                                     crate,          NONE,                   GORMAN_TRACK,                 0x00049,                    NOTHING
@@ -1558,6 +1672,45 @@ Gorman Track Grass Pack 2 Grass 10,                     grass,          NONE,   
 Gorman Track Grass Pack 2 Grass 11,                     grass,          NONE,                   GORMAN_TRACK,                 0xa0025,                    RANDOM
 Gorman Track Grass Pack 2 Grass 12,                     grass,          NONE,                   GORMAN_TRACK,                 0xb0025,                    RANDOM
 Ikana Graveyard Captain Mask,                           chest,          NONE,                   IKANA_GRAVEYARD,              0x00,                       MASK_CAPTAIN
+Ikana Graveyard Grass 1,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0001f,                    RANDOM
+Ikana Graveyard Grass 2,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00027,                    RANDOM
+Ikana Graveyard Grass 3,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00028,                    RANDOM
+Ikana Graveyard Grass 4,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00029,                    RANDOM
+Ikana Graveyard Grass 5,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0002a,                    RANDOM
+Ikana Graveyard Grass Pack Grass 1,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x0012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 2,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x1012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 3,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x2012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 4,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x3012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 5,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x4012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 6,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x5012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 7,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x6012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 8,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x7012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 9,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x8012f,                    RANDOM
+Ikana Graveyard Rock Wall 1,                            rock,           NONE,                   IKANA_GRAVEYARD,              0x00122,                    RANDOM
+Ikana Graveyard Rock Wall 2,                            rock,           NONE,                   IKANA_GRAVEYARD,              0x00123,                    RANDOM
+Ikana Graveyard Rock Wall 3,                            rock,           NONE,                   IKANA_GRAVEYARD,              0x00124,                    RANDOM
+Ikana Graveyard Rock Wall 4,                            rock,           NONE,                   IKANA_GRAVEYARD,              0x00125,                    RANDOM
+Ikana Graveyard Rock Wall 5,                            rock,           NONE,                   IKANA_GRAVEYARD,              0x00126,                    RANDOM
+Ikana Graveyard Rock Circle Rock 1,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x0012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 2,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x1012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 3,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x2012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 4,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x3012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 5,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x4012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 6,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x5012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 7,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x6012c,                    RANDOM
+Ikana Graveyard Rock Circle Rock 8,                     rock,           NONE,                   IKANA_GRAVEYARD,              0x7012c,                    RANDOM
+Ikana Graveyard Wonder Item 01,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 02,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 03,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 04,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 05,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 06,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 07,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 08,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 09,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 10,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x00109,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 11,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x10109,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 12,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x20109,                    RUPEE_GREEN
 Ikana Graveyard Grotto,                                 chest,          NONE,                   GROTTOS,                      0x18,                       BOMBCHU_5
 Ikana Graveyard Grotto Grass 01,                        grass,          NONE,                   GROTTOS,                      0x03800,                    RANDOM
 Ikana Graveyard Grotto Grass 02,                        grass,          NONE,                   GROTTOS,                      0x03801,                    RANDOM
@@ -1573,32 +1726,6 @@ Ikana Graveyard Grotto Grass 11,                        grass,          NONE,   
 Ikana Graveyard Grotto Grass 12,                        grass,          NONE,                   GROTTOS,                      0x03811,                    RANDOM
 Ikana Graveyard Grotto Grass 13,                        grass,          NONE,                   GROTTOS,                      0x03812,                    RANDOM
 Ikana Graveyard Grotto Grass 14,                        grass,          NONE,                   GROTTOS,                      0x03813,                    RANDOM
-Ikana Graveyard Grass 1,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0001f,                    RANDOM
-Ikana Graveyard Grass 2,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00027,                    RANDOM
-Ikana Graveyard Grass 3,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00028,                    RANDOM
-Ikana Graveyard Grass 4,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00029,                    RANDOM
-Ikana Graveyard Grass 5,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0002a,                    RANDOM
-Ikana Graveyard Grass Pack Grass 1,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x0012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 2,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x1012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 3,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x2012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 4,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x3012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 5,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x4012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 6,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x5012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 7,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x6012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 8,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x7012f,                    RANDOM
-Ikana Graveyard Grass Pack Grass 9,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x8012f,                    RANDOM
-Ikana Graveyard Wonder Item 01,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000a,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 02,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000a,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 03,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000a,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 04,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000b,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 05,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000b,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 06,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000b,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 07,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000c,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 08,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000c,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 09,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000c,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 10,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x00109,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 11,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x10109,                    RUPEE_GREEN
-Ikana Graveyard Wonder Item 12,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x20109,                    RUPEE_GREEN
 Beneath The Graveyard Chest,                            chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x03,                       RUPEE_PURPLE
 Beneath The Graveyard Song of Storms,                   npc,            NONE,                   BENEATH_THE_GRAVEYARD,        SONG_STORMS,                SONG_STORMS
 Beneath The Graveyard HP,                               chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x00,                       HEART_PIECE
@@ -1689,6 +1816,8 @@ Stone Tower Pot Owl Statue 4,                           pot,            NONE,   
 Stone Tower Inverted Chest 1,                           chest,          NONE,                   STONE_TOWER_INVERTED,         0x1d,                       RUPEE_SILVER
 Stone Tower Inverted Chest 2,                           chest,          NONE,                   STONE_TOWER_INVERTED,         0x1e,                       BOMBCHU_10
 Stone Tower Inverted Chest 3,                           chest,          NONE,                   STONE_TOWER_INVERTED,         0x1f,                       MAGIC_BEAN
+Stone Tower Inverted Rock 1,                            rock,           NONE,                   STONE_TOWER_INVERTED,         0x00015,                    RANDOM
+Stone Tower Inverted Rock 2,                            rock,           NONE,                   STONE_TOWER_INVERTED,         0x00016,                    RANDOM
 Stone Tower Inverted Pot 1,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x0008,                     RECOVERY_HEART
 Stone Tower Inverted Pot 2,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x0009,                     MAGIC_JAR_LARGE
 Stone Tower Inverted Pot 3,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000a,                     FAIRY

@@ -318,6 +318,39 @@ const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
   },
 }
 
+const MM_WATER_ROCKS = [
+  'MM Great Bay Coast Rock Water Cleared 1',
+  'MM Great Bay Coast Rock Water Cleared 2',
+  'MM Great Bay Coast Rock Water 01',
+  'MM Great Bay Coast Rock Water 02',
+  'MM Great Bay Coast Rock Water 03',
+  'MM Great Bay Coast Rock Water 04',
+  'MM Great Bay Coast Rock Water 05',
+  'MM Great Bay Coast Rock Water 06',
+  'MM Great Bay Coast Rock Water 07',
+  'MM Great Bay Coast Rock Water 08',
+  'MM Great Bay Coast Rock Water 09',
+  'MM Great Bay Coast Rock Water 10',
+  'MM Great Bay Coast Rock Water 11',
+  'MM Great Bay Coast Rock Water 12',
+  'MM Great Bay Coast Rock Water 13',
+  'MM Great Bay Coast Rock Water 14',
+  'MM Great Bay Coast Rock Water 15',
+  'MM Great Bay Coast Rock Water 16',
+  'MM Great Bay Coast Rock Water 17',
+  'MM Great Bay Coast Rock Water 18',
+  'MM Great Bay Coast Rock Water 19',
+  'MM Great Bay Coast Rock Water 20',
+  'MM Great Bay Coast Rock Water 21',
+  'MM Great Bay Coast Rock Water 22',
+  'MM Great Bay Coast Rock Water 23',
+  'MM Great Bay Coast Rock Water 24',
+  'MM Great Bay Coast Rock Water 25',
+  'MM Great Bay Coast Rock Water 26',
+  'MM Great Bay Coast Rock Water 27',
+  'MM Great Bay Coast Rock Water 28',
+];
+
 export class LogicPassWorldTransform {
   private pool: PlayerItems = new Map;
   private locsByItem = new Map<PlayerItem, Set<Location>>();
@@ -1222,6 +1255,11 @@ export class LogicPassWorldTransform {
     this.filterLocations(settings.shuffleGrassOot, 'grass', 'oot');
 
     this.filterLocations(settings.shuffleRocksOot ? 'all' : 'none', 'rock', 'oot');
+    this.filterLocations(settings.shuffleRocksMm ? 'all' : 'none', 'rock', 'mm');
+    if (!settings.bootsIronMm) {
+      /* Remove water rocks if iron boots are not available */
+      this.removeLocations(MM_WATER_ROCKS);
+    }
 
     if (settings.shuffleGrassMm === 'none') {
       const grass = POOL.mm.filter((x: any) => x.type === 'grass').map((x: any) => gameId('mm', x.location, ' ')) as string[];

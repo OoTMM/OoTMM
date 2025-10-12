@@ -18,8 +18,8 @@
 # define OBJHAMISHI_GET_SWITCH_FLAG(thisx) ((thisx)->params & 0x7F)
 # define FLAGS ACTOR_FLAG_UPDATE_CULLING_DISABLED
 # define DAMAGE (DMG_POWDER_KEG | DMG_GORON_POUND | DMG_GORON_PUNCH)
-# define SILVER_ROCK_FRAGMENTS_DL gameplay_field_keep_DL_006420
-# define SILVER_ROCK_DL gameplay_field_keep_DL_0061E8
+# define SILVER_ROCK_FRAGMENTS_DL   gFieldSilverBoulderDebrisDL
+# define SILVER_ROCK_DL             gFieldSilverBoulderDL
 #endif
 
 void ObjHamishi_Init(Actor_ObjHamishi* this, PlayState* play);

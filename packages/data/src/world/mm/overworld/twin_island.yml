@@ -113,6 +113,9 @@
     "Twin Islands Small Snowball Ramp 1": "is_winter"
     "Twin Islands Small Snowball Ramp 2": "is_winter"
     "Twin Islands Small Snowball Ramp 3": "is_winter"
+    "Twin Islands Rock 1": "is_spring"
+    "Twin Islands Rock 2": "is_spring"
+    "Twin Islands Rock 3": "is_spring"
 
 "Tingle Mountain":
   region: TINGLE

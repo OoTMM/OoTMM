@@ -5,6 +5,8 @@
     "Swamp Spider House Main": "can_reset_time_dungeon"
   locations:
     "Swamp Spider House Mask of Truth": "soul_citizen && has(GS_TOKEN_SWAMP, 30)"
+    "Swamp Spider House Rock Entrance 1": "true"
+    "Swamp Spider House Rock Entrance 2": "true"
 
 "Swamp Spider House Main":
   dungeon: SSH
@@ -46,6 +48,7 @@
     "Swamp Skulltula Pot Room Pot 2": "gs"
     "Swamp Skulltula Pot Room Jar": "gs"
     "Swamp Skulltula Pot Room Wall": "gs"
+    "Swamp Spider House Rock Pots Room": "true"
     "Swamp Spider House Pot Main Lower 1": "true"
     "Swamp Spider House Pot Main Lower 2": "true"
     "Swamp Spider House Pot Main Lower 3": "true"
