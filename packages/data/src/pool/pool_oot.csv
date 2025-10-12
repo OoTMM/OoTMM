@@ -354,6 +354,20 @@ Death Mountain Trail HP,                                    collectible,    NONE
 Death Mountain Trail Prescription,                          npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
 Death Mountain Trail Claim Check,                           npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
 Death Mountain Trail Biggoron Sword,                        npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
+Death Mountain Trail Rock 1,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001b,                    RANDOM
+Death Mountain Trail Rock 2,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001c,                    RANDOM
+Death Mountain Trail Rock 3,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001d,                    RANDOM
+Death Mountain Trail Rock 4,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001e,                    RANDOM
+Death Mountain Trail Rock 5,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001f,                    RANDOM
+Death Mountain Trail Rock Child,                            rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00020,                    RANDOM
+Death Mountain Trail Rock Circle Rock 1,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 2,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x10021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 3,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x20021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 4,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x30021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 5,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x40021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 6,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x50021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 7,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x60021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 8,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x70021,                    RANDOM
 Death Mountain Trail Grotto,                                chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
 Death Mountain Trail Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x03702,                    RANDOM
 Death Mountain Trail Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x03703,                    RANDOM

@@ -84,5 +84,9 @@ void ObjMure2_AliasRocks(Xflag* xf)
             xf->id += 29;
         }
         break;
+    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+        xf->setupId = 0;
+        xf->id = 33;
+        break;
     }
 }

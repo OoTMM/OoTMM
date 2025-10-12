@@ -351,6 +351,13 @@ static void EnIshi_Alias(Xflag* xf) {
             }
         }
         break;
+    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id -= 8;
+        }
+        break;
     }
 }
 
