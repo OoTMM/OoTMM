@@ -1082,6 +1082,9 @@ Twin Islands Small Snowball 3,                          snowball,       NONE,   
 Twin Islands Small Snowball Ramp 1,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00041,                    MAGIC_JAR_SMALL
 Twin Islands Small Snowball Ramp 2,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00042,                    RECOVERY_HEART
 Twin Islands Small Snowball Ramp 3,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00043,                    RECOVERY_HEART
+Twin Islands Rock 1,                                    rock,           NONE,                   TWIN_ISLANDS_SPRING,          0x00018,                    RANDOM
+Twin Islands Rock 2,                                    rock,           NONE,                   TWIN_ISLANDS_SPRING,          0x00019,                    RANDOM
+Twin Islands Rock 3,                                    rock,           NONE,                   TWIN_ISLANDS_SPRING,          0x0001a,                    RANDOM
 Goron Elder,                                            npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                             npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
 Goron Shrine Rock 01,                                   rock,           NONE,                   GORON_SHRINE,                 0x00002,                    RANDOM
