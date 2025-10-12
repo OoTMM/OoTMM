@@ -516,6 +516,7 @@ Canyon Gossip Grotto Grass 4,                           grass,          NONE,   
 Canyon Gossip Grotto Grass 5,                           grass,          NONE,                   GROTTOS,                      0x00204,                    RANDOM
 Bio Baba Grotto Grass 1,                                grass,          NONE,                   GROTTOS,                      0x00b00,                    RANDOM
 Bio Baba Grotto Grass 2,                                grass,          NONE,                   GROTTOS,                      0x00b03,                    RANDOM
+Bio Baba Grotto Rock,                                   rock,           NONE,                   GROTTOS,                      0x00b01,                    RANDOM
 Peahat Grotto Grass 01,                                 grass,          NONE,                   GROTTOS,                      0x00d01,                    RANDOM
 Peahat Grotto Grass 02,                                 grass,          NONE,                   GROTTOS,                      0x10d01,                    RANDOM
 Peahat Grotto Grass 03,                                 grass,          NONE,                   GROTTOS,                      0x20d01,                    RANDOM
