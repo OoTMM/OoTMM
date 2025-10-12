@@ -299,6 +299,13 @@ static InitChainEntry sInitChains[][5] = {
 };
 
 static void EnIshi_Alias(Xflag* xflag) {
+    switch (xflag->sceneId)
+    {
+    case SCE_OOT_LAKE_HYLIA:
+        xflag->setupId = 0;
+        xflag->id = 22;
+        break;
+    }
 }
 
 void EnIshi_Init(Actor* thisx, PlayState* play) {
