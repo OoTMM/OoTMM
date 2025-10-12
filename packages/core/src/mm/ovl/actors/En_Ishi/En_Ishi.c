@@ -729,28 +729,56 @@ void EnIshi_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
-void EnIshi_DrawGameplayKeepSmallRock(EnIshi* this, PlayState* play) {
+static void EnIshi_DrawSmallRock(EnIshi* this, PlayState* play, int isObject)
+{
     s32 alpha;
+    Gfx* dlist;
+    Gfx** ptr;
 
-    if ((this->actor.projectedPos.z <= 1200.0f) ||
-        ((this->flags & ISHI_FLAG_UNDERWATER) && (this->actor.projectedPos.z < 1300.0f))) {
-        Gfx_DrawDListOpa(play, gFieldSmallRockOpaDL);
-        return;
+    /* Alpha and dlist selection */
+    if (isObject)
+    {
+        alpha = 255;
+        dlist = gSmallRockDL;
+    }
+    else
+    {
+        if (this->actor.projectedPos.z >= 1300.0f)
+            return;
+        if ((this->actor.projectedPos.z <= 1200.0f) || ((this->flags & ISHI_FLAG_UNDERWATER) && (this->actor.projectedPos.z < 1300.0f)))
+        {
+            alpha = 255;
+            dlist = gFieldSmallRockOpaDL;
+        }
+        else
+        {
+            alpha = (1300.0f - this->actor.projectedPos.z) * 2.55f;
+            dlist = gFieldSmallRockXluDL;
+        }
     }
 
-    if (this->actor.projectedPos.z < 1300.0f) {
-        OPEN_DISPS(play->state.gfxCtx);
-
-        Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-
-        alpha = (1300.0f - this->actor.projectedPos.z) * 2.55f; // lower alpha as the object falls toward the core
-
-        MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
-        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (s32)alpha);
-        gSPDisplayList(POLY_XLU_DISP++, gFieldSmallRockXluDL);
-
-        CLOSE_DISPS();
+    /* Draw */
+    OPEN_DISPS(play->state.gfxCtx);
+    if (alpha >= 255)
+    {
+        alpha = 255;
+        ptr = &POLY_OPA_DISP;
     }
+    else
+    {
+        ptr = &POLY_XLU_DISP;
+    }
+    gDPSetPrimColor((*ptr)++, 0, 0, 255, 255, 255, alpha);
+    if (alpha < 255)
+        Gfx_DrawDListXlu(play, dlist);
+    else
+        Gfx_DrawDListOpa(play, dlist);
+    CLOSE_DISPS();
+
+}
+
+void EnIshi_DrawGameplayKeepSmallRock(EnIshi* this, PlayState* play) {
+    EnIshi_DrawSmallRock(this, play, false);
 }
 
 void EnIshi_DrawGameplayKeepBoulder(EnIshi* this, PlayState* play) {
@@ -793,5 +821,5 @@ void EnIshi_DrawGameplayKeepObject(Actor* thisx, PlayState* play) {
 }
 
 void EnIshi_DrawIshiObject(Actor* thisx, PlayState* play) {
-    Gfx_DrawDListOpa(play, gSmallRockDL);
+    EnIshi_DrawSmallRock((EnIshi*)thisx, play, true);
 }
