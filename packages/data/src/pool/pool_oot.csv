@@ -1000,6 +1000,14 @@ Hyrule Castle Grotto Pot 1,                                 pot,            NONE
 Hyrule Castle Grotto Pot 2,                                 pot,            NONE,                 GROTTOS,                        0x0807,                     BOMB
 Hyrule Castle Grotto Pot 3,                                 pot,            NONE,                 GROTTOS,                        0x0809,                     ARROWS_5
 Hyrule Castle Grotto Pot 4,                                 pot,            NONE,                 GROTTOS,                        0x080b,                     NUTS_5
+Hyrule Castle Grotto Rock Circle Rock 1,                    rock,           NONE,                 GROTTOS,                        0x00802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 2,                    rock,           NONE,                 GROTTOS,                        0x10802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 3,                    rock,           NONE,                 GROTTOS,                        0x20802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 4,                    rock,           NONE,                 GROTTOS,                        0x30802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 5,                    rock,           NONE,                 GROTTOS,                        0x40802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 6,                    rock,           NONE,                 GROTTOS,                        0x50802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 7,                    rock,           NONE,                 GROTTOS,                        0x60802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 8,                    rock,           NONE,                 GROTTOS,                        0x70802,                    RANDOM
 Hyrule Castle Pot 1,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0008,                     RUPEE_GREEN
 Hyrule Castle Pot 2,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0009,                     RUPEE_BLUE
 Hyrule Castle Grass 1,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002e,                    NOTHING
