@@ -381,6 +381,27 @@ Termina Field Grass Pack 18 Grass 09,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,                   TERMINA_FIELD,                0x900bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
+Termina Field Rock Near Ocean,                          rock,           NONE,                 TERMINA_FIELD,                  0x0007f,                    RANDOM
+Termina Field Rock Wall Mountain 1,                     rock,           NONE,                 TERMINA_FIELD,                  0x00080,                    RANDOM
+Termina Field Rock Wall Mountain 2,                     rock,           NONE,                 TERMINA_FIELD,                  0x00082,                    RANDOM
+Termina Field Rock Wall Mountain 3,                     rock,           NONE,                 TERMINA_FIELD,                  0x00083,                    RANDOM
+Termina Field Rock Wall Mountain 4,                     rock,           NONE,                 TERMINA_FIELD,                  0x00086,                    RANDOM
+Termina Field Rock Wall Mountain 5,                     rock,           NONE,                 TERMINA_FIELD,                  0x00087,                    RANDOM
+Termina Field Rock Wall Mountain 6,                     rock,           NONE,                 TERMINA_FIELD,                  0x00088,                    RANDOM
+Termina Field Rock Wall Mountain 7,                     rock,           NONE,                 TERMINA_FIELD,                  0x0008b,                    RANDOM
+Termina Field Rock Wall Ocean 1,                        rock,           NONE,                 TERMINA_FIELD,                  0x00081,                    RANDOM
+Termina Field Rock Wall Ocean 2,                        rock,           NONE,                 TERMINA_FIELD,                  0x00084,                    RANDOM
+Termina Field Rock Wall Ocean 3,                        rock,           NONE,                 TERMINA_FIELD,                  0x00085,                    RANDOM
+Termina Field Rock Wall Ocean 4,                        rock,           NONE,                 TERMINA_FIELD,                  0x00089,                    RANDOM
+Termina Field Rock Wall Ocean 5,                        rock,           NONE,                 TERMINA_FIELD,                  0x0008a,                    RANDOM
+Termina Field Rock Circle Rock 1,                       rock,           NONE,                 TERMINA_FIELD,                  0x0008c,                    RANDOM
+Termina Field Rock Circle Rock 2,                       rock,           NONE,                 TERMINA_FIELD,                  0x1008c,                    RANDOM
+Termina Field Rock Circle Rock 3,                       rock,           NONE,                 TERMINA_FIELD,                  0x2008c,                    RANDOM
+Termina Field Rock Circle Rock 4,                       rock,           NONE,                 TERMINA_FIELD,                  0x3008c,                    RANDOM
+Termina Field Rock Circle Rock 5,                       rock,           NONE,                 TERMINA_FIELD,                  0x4008c,                    RANDOM
+Termina Field Rock Circle Rock 6,                       rock,           NONE,                 TERMINA_FIELD,                  0x5008c,                    RANDOM
+Termina Field Rock Circle Rock 7,                       rock,           NONE,                 TERMINA_FIELD,                  0x6008c,                    RANDOM
+Termina Field Rock Circle Rock 8,                       rock,           NONE,                 TERMINA_FIELD,                  0x7008c,                    RANDOM
 Termina Field Rupee,                                    rupee,          NONE,                   TERMINA_FIELD,                0x00004,                    RUPEE_RED
 Termina Field Wonder Item Grass 1,                      wonder,         NONE,                   TERMINA_FIELD,                0x00059,                    RUPEE_GREEN
 Termina Field Wonder Item Grass 2,                      wonder,         NONE,                   TERMINA_FIELD,                0x0005a,                    RUPEE_GREEN

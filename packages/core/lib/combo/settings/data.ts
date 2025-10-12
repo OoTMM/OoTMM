@@ -678,6 +678,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'shuffleRocksMm',
+  name: 'Rock Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the rocks are shuffled (MM)',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'shuffleGrassMm',
   name: 'Grass Shuffle (MM)',
   category: 'main.shuffle',

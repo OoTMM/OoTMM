@@ -1222,6 +1222,7 @@ export class LogicPassWorldTransform {
     this.filterLocations(settings.shuffleGrassOot, 'grass', 'oot');
 
     this.filterLocations(settings.shuffleRocksOot ? 'all' : 'none', 'rock', 'oot');
+    this.filterLocations(settings.shuffleRocksMm ? 'all' : 'none', 'rock', 'mm');
 
     if (settings.shuffleGrassMm === 'none') {
       const grass = POOL.mm.filter((x: any) => x.type === 'grass').map((x: any) => gameId('mm', x.location, ' ')) as string[];

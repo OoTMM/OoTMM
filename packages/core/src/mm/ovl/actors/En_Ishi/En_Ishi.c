@@ -314,7 +314,7 @@ int EnIshi_DropCustom(EnIshi* this, PlayState* play)
 {
     if (Xflag_IsShuffled(&this->xflag))
     {
-        EnItem00_DropCustom(play, &this->actor, this->xflag.id);
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
         return true;
     }
 
