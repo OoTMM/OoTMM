@@ -157,13 +157,51 @@ void EnSnowwd_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
-void EnSnowwd_Draw(Actor* thisx, PlayState* play) {
-    OPEN_DISPS(play->state.gfxCtx);
+int EnSnowwd_CAMC(EnSnowwd* this, PlayState* play) {
+    ComboItemOverride o;
 
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+void EnSnowwd_Color(EnSnowwd* this, PlayState* play, Color_RGB8* out)
+{
+    int csmc;
+
+    csmc = EnSnowwd_CAMC(this, play);
+    switch (csmc)
+    {
+    case CSMC_NORMAL:
+        out->r = 0xff;
+        out->g = 0xff;
+        out->b = 0xff;
+        break;
+    case CSMC_SPIDER:
+        out->r = 0x90;
+        out->g = 0x90;
+        out->b = 0x90;
+        break;
+    default:
+        *out = *csmcTypeColor(csmc);
+        break;
+    }
+}
+
+void EnSnowwd_Draw(Actor* thisx, PlayState* play) {
+    Color_RGB8 color;
+
+    EnSnowwd_Color((EnSnowwd*)thisx, play, &color);
+    OPEN_DISPS(play->state.gfxCtx);
     MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0xff, color.r, color.g, color.b, 255);
     gSPSegment(POLY_OPA_DISP++, 0x08, Lib_SegmentedToVirtual(gSnowTreeSnowLeavesTex));
     gSPDisplayList(POLY_OPA_DISP++, gSnowTreeDL);
-
     CLOSE_DISPS();
 }
