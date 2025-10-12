@@ -1042,6 +1042,7 @@ Market Grass 5,                                             grass,          NONE
 Market Grass 6,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001c,                    RANDOM
 Market Grass 7,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001d,                    RANDOM
 Market Grass 8,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001e,                    RANDOM
+Market Tree,                                                tree,           NONE,                 MARKET_CHILD_DAY,               0x0000e,                    NOTHING
 Market Wonder Item Day 1,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x0000f,                    RUPEE_GREEN
 Market Wonder Item Day 2,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x00010,                    RUPEE_GREEN
 Market Wonder Item Day 3,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x00011,                    RUPEE_GREEN

@@ -155,6 +155,13 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
 
 static void EnWood02_Alias(Xflag* xf)
 {
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_MARKET_CHILD_NIGHT:
+        xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
+        xf->id = 14;
+        break;
+    }
 }
 
 void EnWood02_Init(Actor* thisx, PlayState* play2) {
