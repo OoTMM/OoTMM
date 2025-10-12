@@ -34,6 +34,11 @@
     "Zora Cape Rock Island 3": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Rock Island 4": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Rock Island 5": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Palm Tree Beach 1": "true"
+    "Zora Cape Palm Tree Beach 2": "true"
+    "Zora Cape Palm Tree Island Near Fountain": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Palm Tree Island Near Beach": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Palm Tree Island Center": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
 
   gossip:
     "Zora Cape Gossip": "true"

@@ -381,6 +381,8 @@ Termina Field Grass Pack 18 Grass 09,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,                   TERMINA_FIELD,                0x900bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
+Termina Field Tree 1,                                   tree,           NONE,                 TERMINA_FIELD,                  0x000a8,                    NOTHING
+Termina Field Tree 2,                                   tree,           NONE,                 TERMINA_FIELD,                  0x000a9,                    NOTHING
 Termina Field Rock Near Ocean,                          rock,           NONE,                 TERMINA_FIELD,                  0x0007f,                    RANDOM
 Termina Field Rock Wall Mountain 1,                     rock,           NONE,                 TERMINA_FIELD,                  0x00080,                    RANDOM
 Termina Field Rock Wall Mountain 2,                     rock,           NONE,                 TERMINA_FIELD,                  0x00082,                    RANDOM
@@ -895,6 +897,10 @@ Path to Mountain Village Small Snowball Lower Spring 4, snowball,       NONE,   
 Path to Mountain Village Small Snowball Upper Spring 1, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400d,                    MAGIC_JAR_SMALL
 Path to Mountain Village Small Snowball Upper Spring 2, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400b,                    RECOVERY_HEART
 Path to Mountain Village Small Snowball Upper Spring 3, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400e,                    RECOVERY_HEART
+Path to Mountain Village Snow Tree Lower 1,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0000e,                    NOTHING
+Path to Mountain Village Snow Tree Lower 2,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0000f,                    NOTHING
+Path to Mountain Village Snow Tree Upper 1,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00010,                    NOTHING
+Path to Mountain Village Snow Tree Upper 2,             tree,           NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00011,                    NOTHING
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
@@ -1059,6 +1065,12 @@ Twin Islands Grass 09,                                  grass,          NONE,   
 Twin Islands Grass 10,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x9000b,                    RANDOM
 Twin Islands Grass 11,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xa000b,                    RANDOM
 Twin Islands Grass 12,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xb000b,                    RANDOM
+Twin Islands Snow Tree Island 1,                        tree,           NONE,                   TWIN_ISLANDS_WINTER,          0x00007,                    NOTHING
+Twin Islands Snow Tree Island 2,                        tree,           NONE,                   TWIN_ISLANDS_WINTER,          0x00008,                    NOTHING
+Twin Islands Snow Tree Ramp,                            tree,           NONE,                   TWIN_ISLANDS_WINTER,          0x00009,                    NOTHING
+Twin Islands Tree Island 1,                             tree,           NONE,                   TWIN_ISLANDS_SPRING,          0x00007,                    NOTHING
+Twin Islands Tree Island 2,                             tree,           NONE,                   TWIN_ISLANDS_SPRING,          0x00008,                    NOTHING
+Twin Islands Tree Ramp,                                 tree,           NONE,                   TWIN_ISLANDS_SPRING,          0x00009,                    NOTHING
 Twin Islands Rupee 1,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000e,                    RUPEE_BLUE
 Twin Islands Rupee 2,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000f,                    RUPEE_BLUE
 Twin Islands Rupee 3,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00010,                    RUPEE_BLUE
@@ -1155,6 +1167,10 @@ Path to Snowhead Small Snowball Spring Middle 1,        snowball,       NONE,   
 Path to Snowhead Small Snowball Spring Middle 2,        snowball,       NONE,                   PATH_SNOWHEAD,                0x04006,                    MAGIC_JAR_LARGE
 Path to Snowhead Small Snowball Spring Back 1,          snowball,       NONE,                   PATH_SNOWHEAD,                0x04007,                    MAGIC_JAR_LARGE
 Path to Snowhead Small Snowball Spring Back 2,          snowball,       NONE,                   PATH_SNOWHEAD,                0x04008,                    MAGIC_JAR_LARGE
+Path to Snowhead Snow Tree End 1,                       tree,           NONE,                   PATH_SNOWHEAD,                0x00016,                    NOTHING
+Path to Snowhead Snow Tree End 2,                       tree,           NONE,                   PATH_SNOWHEAD,                0x00017,                    NOTHING
+Path to Snowhead Snow Tree End 3,                       tree,           NONE,                   PATH_SNOWHEAD,                0x00018,                    NOTHING
+Path to Snowhead Snow Tree Entrance,                    tree,           NONE,                   PATH_SNOWHEAD,                0x00019,                    NOTHING
 Path to Snowhead Grotto,                                chest,          NONE,                   GROTTOS,                      0x13,                       RUPEE_RED
 Path to Snowhead Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03300,                    RANDOM
 Path to Snowhead Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03301,                    RANDOM
@@ -1298,6 +1314,13 @@ Romani Ranch Grass Pack 5 Grass 06,                     grass,          NONE,   
 Romani Ranch Grass Pack 5 Grass 07,                     grass,          NONE,                   ROMANI_RANCH,                 0x60020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 08,                     grass,          NONE,                   ROMANI_RANCH,                 0x70020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 09,                     grass,          NONE,                   ROMANI_RANCH,                 0x80020,                    RANDOM
+Romani Ranch Tree 1,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00014,                    NOTHING
+Romani Ranch Tree 2,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00015,                    NOTHING
+Romani Ranch Tree 3,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00016,                    NOTHING
+Romani Ranch Tree 4,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00017,                    NOTHING
+Romani Ranch Tree 5,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00018,                    NOTHING
+Romani Ranch Tree 6,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00019,                    NOTHING
+Romani Ranch Tree 7,                                    tree,           NONE,                 ROMANI_RANCH,                   0x0001a,                    NOTHING
 Romani Ranch Wonder Item Fence 1,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002a,                    RUPEE_BLUE
 Romani Ranch Wonder Item Fence 2,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002b,                    RUPEE_BLUE
 Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002c,                    RUPEE_GREEN
@@ -1318,6 +1341,7 @@ Cucco Shack Potted Plant 1 Pot,                         pot,            NONE,   
 Cucco Shack Potted Plant 1 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x1000d,                    NOTHING
 Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    NOTHING
 Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    RUPEE_BLUE
+Cucco Shack Tree,                                       tree,           NONE,                   CUCCO_SHACK,                  0x0000c,                    NOTHING
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
@@ -1365,6 +1389,10 @@ Great Bay Coast Grass 2,                                grass,          NONE,   
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
 Great Bay Coast Grass 4,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
 Great Bay Coast Grass 5,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
+Great Bay Coast Palm Tree Island,                       tree,           NONE,                   GREAT_BAY_COAST,              0x0000a,                    NUT
+Great Bay Coast Palm Tree Beach 1,                      tree,           NONE,                   GREAT_BAY_COAST,              0x0000b,                    NUT
+Great Bay Coast Palm Tree Beach 2,                      tree,           NONE,                   GREAT_BAY_COAST,              0x0000c,                    NUT
+Great Bay Coast Palm Tree Beach 3,                      tree,           NONE,                   GREAT_BAY_COAST,              0x0000d,                    NUT
 Great Bay Coast Rock Water Cleared 1,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00045,                    RANDOM
 Great Bay Coast Rock Water Cleared 2,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00042,                    RANDOM
 Great Bay Coast Rock Water 01,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00043,                    RANDOM
@@ -1503,6 +1531,11 @@ Zora Cape Rock Sand 2,                                  rock,           NONE,   
 Zora Cape Rock Sand 3,                                  rock,           NONE,                   ZORA_CAPE,                    0x00037,                    RANDOM
 Zora Cape Rock Sand 4,                                  rock,           NONE,                   ZORA_CAPE,                    0x00038,                    RANDOM
 Zora Cape Rock Sand 5,                                  rock,           NONE,                   ZORA_CAPE,                    0x00039,                    RANDOM
+Zora Cape Palm Tree Beach 1,                            tree,           NONE,                   ZORA_CAPE,                    0x00018,                    NUT
+Zora Cape Palm Tree Beach 2,                            tree,           NONE,                   ZORA_CAPE,                    0x00019,                    NUT
+Zora Cape Palm Tree Island Near Fountain,               tree,           NONE,                   ZORA_CAPE,                    0x0001a,                    NUT
+Zora Cape Palm Tree Island Near Beach,                  tree,           NONE,                   ZORA_CAPE,                    0x0001b,                    NUT
+Zora Cape Palm Tree Island Center,                      tree,           NONE,                   ZORA_CAPE,                    0x0001c,                    NUT
 Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
 Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
 Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
@@ -1671,6 +1704,31 @@ Gorman Track Grass Pack 2 Grass 09,                     grass,          NONE,   
 Gorman Track Grass Pack 2 Grass 10,                     grass,          NONE,                   GORMAN_TRACK,                 0x90025,                    RANDOM
 Gorman Track Grass Pack 2 Grass 11,                     grass,          NONE,                   GORMAN_TRACK,                 0xa0025,                    RANDOM
 Gorman Track Grass Pack 2 Grass 12,                     grass,          NONE,                   GORMAN_TRACK,                 0xb0025,                    RANDOM
+Gorman Track Tree 01,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000b,                    NOTHING
+Gorman Track Tree 02,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000c,                    NOTHING
+Gorman Track Tree 03,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000d,                    NOTHING
+Gorman Track Tree 04,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000e,                    NOTHING
+Gorman Track Tree 05,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0000f,                    NOTHING
+Gorman Track Tree 06,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00010,                    NOTHING
+Gorman Track Tree 07,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00011,                    NOTHING
+Gorman Track Tree 08,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00012,                    NOTHING
+Gorman Track Tree 09,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00013,                    NOTHING
+Gorman Track Tree 10,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00014,                    NOTHING
+Gorman Track Tree 11,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00015,                    NOTHING
+Gorman Track Tree 12,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00016,                    NOTHING
+Gorman Track Tree 13,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00017,                    NOTHING
+Gorman Track Tree 14,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00018,                    NOTHING
+Gorman Track Tree 15,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00019,                    NOTHING
+Gorman Track Tree 16,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001a,                    NOTHING
+Gorman Track Tree 17,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001b,                    NOTHING
+Gorman Track Tree 18,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001c,                    NOTHING
+Gorman Track Tree 19,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001d,                    NOTHING
+Gorman Track Tree 20,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001e,                    NOTHING
+Gorman Track Tree 21,                                   tree,           NONE,                   GORMAN_TRACK,                 0x0001f,                    NOTHING
+Gorman Track Tree 22,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00020,                    NOTHING
+Gorman Track Tree 23,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00021,                    NOTHING
+Gorman Track Tree 24,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00022,                    NOTHING
+Gorman Track Tree 25,                                   tree,           NONE,                   GORMAN_TRACK,                 0x00023,                    NOTHING
 Ikana Graveyard Captain Mask,                           chest,          NONE,                   IKANA_GRAVEYARD,              0x00,                       MASK_CAPTAIN
 Ikana Graveyard Grass 1,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0001f,                    RANDOM
 Ikana Graveyard Grass 2,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00027,                    RANDOM
@@ -2344,6 +2402,7 @@ Beneath The Well Grass Near End 5,                      grass,          NONE,   
 Beneath The Well Grass Cow 1,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00906,                    RANDOM
 Beneath The Well Grass Cow 2,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00907,                    RANDOM
 Beneath The Well Grass Cow 3,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00908,                    RANDOM
+Beneath The Well Tree,                                  tree,           NONE,                   BENEATH_THE_WELL,             0x00903,                    NOTHING
 Beneath The Well Fairy Fountain Fairy 1,                fairy,          NONE,                   BENEATH_THE_WELL,             0x00b04,                    FAIRY
 Beneath The Well Fairy Fountain Fairy 2,                fairy,          NONE,                   BENEATH_THE_WELL,             0x10b04,                    FAIRY
 Beneath The Well Fairy Fountain Fairy 3,                fairy,          NONE,                   BENEATH_THE_WELL,             0x20b04,                    FAIRY

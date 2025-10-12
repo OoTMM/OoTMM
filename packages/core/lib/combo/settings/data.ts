@@ -715,7 +715,15 @@ export const SETTINGS = [{
   description: 'Controls whether or not the trees are shuffled (OoT)',
   default: false,
   cond: hasOoT,
-},{
+}, {
+  key: 'shuffleTreesMm',
+  name: 'Tree Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the trees are shuffled (MM)',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'shuffleFreeRupeesOot',
   name: 'Freestanding Rupees Shuffle (OoT)',
   category: 'main.shuffle',

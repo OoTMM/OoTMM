@@ -16,6 +16,7 @@
     "Path to Snowhead Big Snowball Middle 2": "is_winter && can_break_snowballs"
     "Path to Snowhead Small Snowball Spring Middle 1": "is_spring"
     "Path to Snowhead Small Snowball Spring Middle 2": "is_spring"
+    "Path to Snowhead Snow Tree Entrance": "true"
 
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
@@ -33,6 +34,9 @@
     "Path to Snowhead Small Snowball Back 3": "true"
     "Path to Snowhead Small Snowball Spring Back 1": "is_spring"
     "Path to Snowhead Small Snowball Spring Back 2": "is_spring"
+    "Path to Snowhead Snow Tree End 1": "true"
+    "Path to Snowhead Snow Tree End 2": "true"
+    "Path to Snowhead Snow Tree End 3": "true"
 
 "Path to Snowhead Grotto":
   region: ENTRANCE
