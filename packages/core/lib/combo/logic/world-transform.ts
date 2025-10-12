@@ -1106,7 +1106,7 @@ export class LogicPassWorldTransform {
 
   private filterLocations(
     value: "none" | "all" | "overworld" | "dungeons",
-    type: "grass" | "snowball" | "rupee" | "heart" | "crate" | "wonder" | "barrel" | "rock",
+    type: "grass" | "snowball" | "rupee" | "heart" | "crate" | "wonder" | "barrel" | "rock" | "tree",
     game: "oot" | "mm") {
     if (value === 'all') {
       return;
@@ -1256,6 +1256,7 @@ export class LogicPassWorldTransform {
 
     this.filterLocations(settings.shuffleRocksOot ? 'all' : 'none', 'rock', 'oot');
     this.filterLocations(settings.shuffleRocksMm ? 'all' : 'none', 'rock', 'mm');
+    this.filterLocations(settings.shuffleTreesOot ? 'all' : 'none', 'tree', 'oot');
     if (!settings.bootsIronMm) {
       /* Remove water rocks if iron boots are not available */
       this.removeLocations(MM_WATER_ROCKS);
