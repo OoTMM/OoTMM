@@ -50,6 +50,10 @@ void ObjMure2_AliasRocks(Xflag* xf)
 {
     switch (xf->sceneId)
     {
+    case SCE_OOT_HYRULE_FIELD:
+        xf->setupId = 0;
+        xf->id = 55;
+        break;
     case SCE_OOT_KOKIRI_FOREST:
         switch (xf->setupId)
         {

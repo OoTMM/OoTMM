@@ -853,6 +853,14 @@ Hyrule Field Grass Pack 4 Bush 09,                          grass,          NONE
 Hyrule Field Grass Pack 4 Bush 10,                          grass,          NONE,                 HYRULE_FIELD,                   0x9003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 11,                          grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 12,                          grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    RANDOM
+Hyrule Field Rock Circle Rock 1,                            rock,           NONE,                 HYRULE_FIELD,                   0x00037,                    RANDOM
+Hyrule Field Rock Circle Rock 2,                            rock,           NONE,                 HYRULE_FIELD,                   0x10037,                    RANDOM
+Hyrule Field Rock Circle Rock 3,                            rock,           NONE,                 HYRULE_FIELD,                   0x20037,                    RANDOM
+Hyrule Field Rock Circle Rock 4,                            rock,           NONE,                 HYRULE_FIELD,                   0x30037,                    RANDOM
+Hyrule Field Rock Circle Rock 5,                            rock,           NONE,                 HYRULE_FIELD,                   0x40037,                    RANDOM
+Hyrule Field Rock Circle Rock 6,                            rock,           NONE,                 HYRULE_FIELD,                   0x50037,                    RANDOM
+Hyrule Field Rock Circle Rock 7,                            rock,           NONE,                 HYRULE_FIELD,                   0x60037,                    RANDOM
+Hyrule Field Rock Circle Rock 8,                            rock,           NONE,                 HYRULE_FIELD,                   0x70037,                    RANDOM
 Hyrule Field River Big Fairy,                               fairy_spot,     NONE,                 HYRULE_FIELD,                   0x00048,                    FAIRY_BIG
 Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
 Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
