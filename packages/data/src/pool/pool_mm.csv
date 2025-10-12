@@ -1507,6 +1507,11 @@ Zora Cape Rock Sand 2,                                  rock,           NONE,   
 Zora Cape Rock Sand 3,                                  rock,           NONE,                   ZORA_CAPE,                    0x00037,                    RANDOM
 Zora Cape Rock Sand 4,                                  rock,           NONE,                   ZORA_CAPE,                    0x00038,                    RANDOM
 Zora Cape Rock Sand 5,                                  rock,           NONE,                   ZORA_CAPE,                    0x00039,                    RANDOM
+Zora Cape Palm Tree Beach 1,                            tree,           NONE,                   ZORA_CAPE,                    0x00018,                    NUT
+Zora Cape Palm Tree Beach 2,                            tree,           NONE,                   ZORA_CAPE,                    0x00019,                    NUT
+Zora Cape Palm Tree Island Near Fountain,               tree,           NONE,                   ZORA_CAPE,                    0x0001a,                    NUT
+Zora Cape Palm Tree Island Near Beach,                  tree,           NONE,                   ZORA_CAPE,                    0x0001b,                    NUT
+Zora Cape Palm Tree Island Center,                      tree,           NONE,                   ZORA_CAPE,                    0x0001c,                    NUT
 Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
 Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
 Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
