@@ -381,6 +381,8 @@ Termina Field Grass Pack 18 Grass 09,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,                   TERMINA_FIELD,                0x900bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
+Termina Field Tree 1,                                   tree,           NONE,                 TERMINA_FIELD,                  0x000a8,                    NOTHING
+Termina Field Tree 2,                                   tree,           NONE,                 TERMINA_FIELD,                  0x000a9,                    NOTHING
 Termina Field Rock Near Ocean,                          rock,           NONE,                 TERMINA_FIELD,                  0x0007f,                    RANDOM
 Termina Field Rock Wall Mountain 1,                     rock,           NONE,                 TERMINA_FIELD,                  0x00080,                    RANDOM
 Termina Field Rock Wall Mountain 2,                     rock,           NONE,                 TERMINA_FIELD,                  0x00082,                    RANDOM
