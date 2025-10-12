@@ -1337,11 +1337,19 @@ function actorHandlerOotEnItem00(checks: Check[], ra: RoomActor) {
   }
 }
 
-function actorHandlerEnIshi(checks: Check[], ra: RoomActor) {
+function actorHandlerOotEnIshi(checks: Check[], ra: RoomActor) {
   const type = (ra.actor.params & 1);
   if (type !== 0) return;
   const item = 'RANDOM';
   checks.push({ roomActor: ra, item, name: 'Rock', type: 'rock' });
+}
+
+function actorHandlerMmEnIshi(checks: Check[], ra: RoomActor) {
+  const type = (ra.actor.params & 1);
+  const isWall = (ra.actor.params & 4) !== 0;
+  if (type !== 0) return;
+  const item = 'RANDOM';
+  checks.push({ roomActor: ra, item, name: isWall ? 'Rock Wall' : 'Rock', type: 'rock' });
 }
 
 function actorHandlerMmEnItem00(checks: Check[], ra: RoomActor) {
@@ -1394,7 +1402,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_OOT.BG_ICICLE]: actorHandlerOotBgIcicle,
   [ACTORS_OOT.BG_ICE_SHELTER]: actorHandlerOotBgIceShelter,
-  [ACTORS_OOT.EN_ISHI]: actorHandlerEnIshi,
+  [ACTORS_OOT.EN_ISHI]: actorHandlerOotEnIshi,
 };
 
 const ACTORS_HANDLERS_MM = {
@@ -1413,7 +1421,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_GRASS_UNIT]: actorHandlerMmObjGrassUnit,
   [ACTORS_MM.OBJ_HAMISHI]: actorHandlerObjHamishi,
   [ACTORS_MM.BG_ICICLE]: actorHandlerMmBgIcicle,
-  [ACTORS_MM.EN_ISHI]: actorHandlerEnIshi,
+  [ACTORS_MM.EN_ISHI]: actorHandlerMmEnIshi,
 };
 
 const ACTORS_HANDLERS = {

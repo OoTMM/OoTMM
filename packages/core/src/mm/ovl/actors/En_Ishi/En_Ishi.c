@@ -310,7 +310,21 @@ void EnIshi_SpawnDustBoulder(Actor* thisx, PlayState* play) {
     func_800BBFB0(play, &pos, 140.0f, 10, 180, 90, true);
 }
 
+int EnIshi_DropCustom(EnIshi* this, PlayState* play)
+{
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        EnItem00_DropCustom(play, &this->actor, this->xflag.id);
+        return true;
+    }
+
+    return false;
+}
+
 void EnIshi_DropItem(EnIshi* this, PlayState* play) {
+    if (EnIshi_DropCustom(this, play))
+        return;
+
     if ((ENISHI_GET_SIZE_FLAG(&this->actor) == ISHI_SIZE_SMALL_ROCK) &&
         !ENISHI_GET_IGNORE_DROP_TABLE_FLAG(&this->actor)) {
         Item_DropCollectibleRandom(play, NULL, &this->actor.world.pos, ENISHI_GET_DROP_TABLE(&this->actor) * 0x10);
@@ -324,6 +338,9 @@ void EnIshi_DropCollectable(EnIshi* this, PlayState* play) {
     f32 cosResult;
     f32 verticalVelMagnitude;
     s16 temp_v1_2;
+
+    if (EnIshi_DropCustom(this, play))
+        return;
 
     if (collectableItem00Id >= ITEM00_RUPEE_GREEN) { // not ITEM00_NO_DROP, the 0 index of the list
         item = Item_DropCollectible(play, &this->actor.world.pos,
@@ -396,6 +413,10 @@ s32 EnIshi_IsUnderwater(EnIshi* this, PlayState* play) {
     }
 }
 
+static void EnIshi_Alias(Xflag* xflag)
+{
+}
+
 void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s32 rockSize = ENISHI_GET_SIZE_FLAG(&this->actor);
@@ -405,6 +426,9 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
         this->flags |= ISHI_FLAG_CUTSCENE_ROCK;
     }
 
+    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+        EnIshi_Alias(&this->xflag);
+    }
     Actor_ProcessInitChain(&this->actor, sInitChain[rockSize]);
 
     if (play->csCtx.state != CS_STATE_IDLE) {
