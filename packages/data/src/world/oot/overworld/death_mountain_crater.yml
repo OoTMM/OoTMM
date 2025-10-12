@@ -17,6 +17,16 @@
     "Death Mountain Crater GS Crate": "gs && is_child && can_damage_skull"
     "Death Mountain Crater Alcove HP": "true"
     "Death Mountain Crater Scrub Child": "is_child && business_scrub(0x0e)"
+    "Death Mountain Crater Rock Child 1": "is_child"
+    "Death Mountain Crater Rock Child 2": "is_child"
+    "Death Mountain Crater Rock Circle Rock 1": "true"
+    "Death Mountain Crater Rock Circle Rock 2": "true"
+    "Death Mountain Crater Rock Circle Rock 3": "true"
+    "Death Mountain Crater Rock Circle Rock 4": "true"
+    "Death Mountain Crater Rock Circle Rock 5": "true"
+    "Death Mountain Crater Rock Circle Rock 6": "true"
+    "Death Mountain Crater Rock Circle Rock 7": "true"
+    "Death Mountain Crater Rock Circle Rock 8": "true"
   gossip:
     "Death Mountain Crater Gossip Wall": "has_explosives"
 
@@ -83,6 +93,11 @@
     "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER) || climb_anywhere"
     "Death Mountain Crater Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
     "Death Mountain Crater GS Soil": "gs_soil && can_damage_skull"
+    "Death Mountain Crater Rock Adult 1": "is_adult"
+    "Death Mountain Crater Rock Adult 2": "is_adult"
+    "Death Mountain Crater Rock Adult 3": "is_adult"
+    "Death Mountain Crater Rock Adult 4": "is_adult"
+    "Death Mountain Crater Rock Adult 5": "is_adult"
 
 "Death Mountain Crater Near Temple":
   region: DEATH_MOUNTAIN_CRATER

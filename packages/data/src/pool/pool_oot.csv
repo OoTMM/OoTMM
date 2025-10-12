@@ -51,6 +51,22 @@ Kokiri Forest Grass Adult Near Crawl 5,                     grass,          NONE
 Kokiri Forest Grass Adult Near Crawl 6,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08014,                    RANDOM
 Kokiri Forest Grass Adult Near Crawl 7,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08015,                    RANDOM
 Kokiri Forest Grass Adult Near Crawl 8,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08016,                    RANDOM
+Kokiri Forest Rock Child 1,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x0002a,                    NOTHING
+Kokiri Forest Rock Child 2,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x0002b,                    NOTHING
+Kokiri Forest Rock Child 3,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x0002c,                    NOTHING
+Kokiri Forest Rock Child 4,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x0002d,                    NOTHING
+Kokiri Forest Rock Child 5,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x0002e,                    RANDOM
+Kokiri Forest Rock Child 6,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x0002f,                    RANDOM
+Kokiri Forest Rock Child 7,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x00030,                    RANDOM
+Kokiri Forest Rock Child 8,                                 rock,           NONE,                 KOKIRI_FOREST,                  0x00031,                    RANDOM
+Kokiri Forest Rock Circle Rock 1,                           rock,           NONE,                 KOKIRI_FOREST,                  0x00032,                    RANDOM
+Kokiri Forest Rock Circle Rock 2,                           rock,           NONE,                 KOKIRI_FOREST,                  0x10032,                    RANDOM
+Kokiri Forest Rock Circle Rock 3,                           rock,           NONE,                 KOKIRI_FOREST,                  0x20032,                    RANDOM
+Kokiri Forest Rock Circle Rock 4,                           rock,           NONE,                 KOKIRI_FOREST,                  0x30032,                    RANDOM
+Kokiri Forest Rock Circle Rock 5,                           rock,           NONE,                 KOKIRI_FOREST,                  0x40032,                    RANDOM
+Kokiri Forest Rock Circle Rock 6,                           rock,           NONE,                 KOKIRI_FOREST,                  0x50032,                    RANDOM
+Kokiri Forest Rock Circle Rock 7,                           rock,           NONE,                 KOKIRI_FOREST,                  0x60032,                    RANDOM
+Kokiri Forest Rock Circle Rock 8,                           rock,           NONE,                 KOKIRI_FOREST,                  0x70032,                    RANDOM
 Kokiri Forest Cow,                                          cow,            COW_LINK,             KOKIRI_FOREST,                  0x00,                       MILK
 Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x02c02,                    RANDOM
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM
@@ -247,6 +263,8 @@ Kakariko Grass 8,                                           grass,          NONE
 Kakariko Wonder Item,                                       wonder,         NONE,                 KAKARIKO_VILLAGE,               0x00037,                    RUPEE_RED
 Kakariko Butterfly 1,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x0002e,                    FAIRY
 Kakariko Butterfly 2,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x1002e,                    NOTHING
+Kakariko Rock Near Gate,                                    rock,           NONE,                 KAKARIKO_VILLAGE,               0x00020,                    RANDOM
+Kakariko Rock Near Spider House,                            rock,           NONE,                 KAKARIKO_VILLAGE,               0x00021,                    RANDOM
 Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Potion Shop Buy Blue Potion,                       npc,            NONE,                 KAKARIKO_POTION_SHOP,           WITCH_BLUE_POTION,          POTION_BLUE
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
@@ -267,6 +285,7 @@ Kakariko Potion Shop Item 7,                                shop,           NONE
 Kakariko Potion Shop Item 8,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                       collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
 Graveyard Sell Spooky Mask,                                 npc,            NONE,                 GRAVEYARD,                      MASK_SELL_SPOOKY,           RUPEE_RED
+Graveyard Rock,                                             rock,           NONE,                 GRAVEYARD,                      0x0010e,                    RANDOM
 Graveyard Butterfly 1,                                      butterfly,      NONE,                 GRAVEYARD,                      0x00111,                    FAIRY
 Graveyard Butterfly 2,                                      butterfly,      NONE,                 GRAVEYARD,                      0x10111,                    NOTHING
 Graveyard Butterfly 3,                                      butterfly,      NONE,                 GRAVEYARD,                      0x20111,                    NOTHING
@@ -335,6 +354,20 @@ Death Mountain Trail HP,                                    collectible,    NONE
 Death Mountain Trail Prescription,                          npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
 Death Mountain Trail Claim Check,                           npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
 Death Mountain Trail Biggoron Sword,                        npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
+Death Mountain Trail Rock 1,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001b,                    RANDOM
+Death Mountain Trail Rock 2,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001c,                    RANDOM
+Death Mountain Trail Rock 3,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001d,                    RANDOM
+Death Mountain Trail Rock 4,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001e,                    RANDOM
+Death Mountain Trail Rock 5,                                rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0001f,                    RANDOM
+Death Mountain Trail Rock Child,                            rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00020,                    RANDOM
+Death Mountain Trail Rock Circle Rock 1,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 2,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x10021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 3,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x20021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 4,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x30021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 5,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x40021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 6,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x50021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 7,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x60021,                    RANDOM
+Death Mountain Trail Rock Circle Rock 8,                    rock,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x70021,                    RANDOM
 Death Mountain Trail Grotto,                                chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
 Death Mountain Trail Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x03702,                    RANDOM
 Death Mountain Trail Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x03703,                    RANDOM
@@ -402,6 +435,7 @@ Goron City Pot Stairs 2,                                    pot,            NONE
 Goron City Pot Stairs 3,                                    pot,            NONE,                 GORON_CITY,                     0x032b,                     RUPEE_GREEN
 Goron City Pot Stairs 4,                                    pot,            NONE,                 GORON_CITY,                     0x032c,                     RUPEE_BLUE
 Goron City Pot Stairs 5,                                    pot,            NONE,                 GORON_CITY,                     0x032d,                     RECOVERY_HEART
+Goron City Rock,                                            rock,           NONE,                 GORON_CITY,                     0x0002f,                    RANDOM
 Goron Shop Item 1,                                          shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
 Goron Shop Item 2,                                          shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
 Goron Shop Item 3,                                          shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED
@@ -418,6 +452,21 @@ Goron City Red Boulder 5,                                   redboulder,     NONE
 Death Mountain Crater Alcove HP,                            collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
 Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
+Death Mountain Crater Rock Child 1,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011e,                    RANDOM
+Death Mountain Crater Rock Child 2,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011f,                    RANDOM
+Death Mountain Crater Rock Adult 1,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08121,                    RANDOM
+Death Mountain Crater Rock Adult 2,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08122,                    RANDOM
+Death Mountain Crater Rock Adult 3,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08123,                    RANDOM
+Death Mountain Crater Rock Adult 4,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08124,                    RANDOM
+Death Mountain Crater Rock Adult 5,                         rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x08125,                    RANDOM
+Death Mountain Crater Rock Circle Rock 1,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x00120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 2,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x10120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 3,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x20120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 4,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x30120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 5,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x40120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 6,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x50120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 7,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x60120,                    RANDOM
+Death Mountain Crater Rock Circle Rock 8,                   rock,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x70120,                    RANDOM
 Death Mountain Crater Grotto,                               chest,          NONE,                 GROTTOS,                        0x1a,                       BOMBS_20
 Death Mountain Crater Grotto Grass 1,                       grass,          NONE,                 GROTTOS,                        0x03a02,                    RANDOM
 Death Mountain Crater Grotto Grass 2,                       grass,          NONE,                 GROTTOS,                        0x03a03,                    RANDOM
@@ -493,6 +542,27 @@ Zora River Grass Pack Bush 09,                              grass,          NONE
 Zora River Grass Pack Bush 10,                              grass,          NONE,                 ZORA_RIVER,                     0x90035,                    RANDOM
 Zora River Grass Pack Bush 11,                              grass,          NONE,                 ZORA_RIVER,                     0xa0035,                    RANDOM
 Zora River Grass Pack Bush 12,                              grass,          NONE,                 ZORA_RIVER,                     0xb0035,                    RANDOM
+Zora River Rock Ground,                                     rock,           NONE,                 ZORA_RIVER,                     0x0002d,                    RANDOM
+Zora River Rock Water 1,                                    rock,           NONE,                 ZORA_RIVER,                     0x0002e,                    RANDOM
+Zora River Rock Water 2,                                    rock,           NONE,                 ZORA_RIVER,                     0x0002f,                    RANDOM
+Zora River Rock Water 3,                                    rock,           NONE,                 ZORA_RIVER,                     0x00030,                    RANDOM
+Zora River Rock Water 4,                                    rock,           NONE,                 ZORA_RIVER,                     0x00031,                    RANDOM
+Zora River Rock Circle Upper Rock 1,                        rock,           NONE,                 ZORA_RIVER,                     0x00032,                    RANDOM
+Zora River Rock Circle Upper Rock 2,                        rock,           NONE,                 ZORA_RIVER,                     0x10032,                    RANDOM
+Zora River Rock Circle Upper Rock 3,                        rock,           NONE,                 ZORA_RIVER,                     0x20032,                    RANDOM
+Zora River Rock Circle Upper Rock 4,                        rock,           NONE,                 ZORA_RIVER,                     0x30032,                    RANDOM
+Zora River Rock Circle Upper Rock 5,                        rock,           NONE,                 ZORA_RIVER,                     0x40032,                    RANDOM
+Zora River Rock Circle Upper Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50032,                    RANDOM
+Zora River Rock Circle Upper Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60032,                    RANDOM
+Zora River Rock Circle Upper Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70032,                    RANDOM
+Zora River Rock Circle Lower Rock 1,                        rock,           NONE,                 ZORA_RIVER,                     0x00033,                    RANDOM
+Zora River Rock Circle Lower Rock 2,                        rock,           NONE,                 ZORA_RIVER,                     0x10033,                    RANDOM
+Zora River Rock Circle Lower Rock 3,                        rock,           NONE,                 ZORA_RIVER,                     0x20033,                    RANDOM
+Zora River Rock Circle Lower Rock 4,                        rock,           NONE,                 ZORA_RIVER,                     0x30033,                    RANDOM
+Zora River Rock Circle Lower Rock 5,                        rock,           NONE,                 ZORA_RIVER,                     0x40033,                    RANDOM
+Zora River Rock Circle Lower Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50033,                    RANDOM
+Zora River Rock Circle Lower Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60033,                    RANDOM
+Zora River Rock Circle Lower Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70033,                    RANDOM
 Zora River Butterfly Near Beans 1,                          butterfly,      NONE,                 ZORA_RIVER,                     0x00037,                    FAIRY
 Zora River Butterfly Near Beans 2,                          butterfly,      NONE,                 ZORA_RIVER,                     0x10037,                    NOTHING
 Zora River Butterfly Near Waterfall 1,                      butterfly,      NONE,                 ZORA_RIVER,                     0x0010a,                    FAIRY
@@ -556,6 +626,14 @@ Zora Domain Diving Game Huge Rupee,                         collectible,    NONE
 Zora Domain Tunic,                                          npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
 Zora Domain Eyeball Frog,                                   npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                                   gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
+Zora Domain Rock Circle Rock 1,                             rock,           NONE,                 ZORA_DOMAIN,                    0x0010a,                    RANDOM
+Zora Domain Rock Circle Rock 2,                             rock,           NONE,                 ZORA_DOMAIN,                    0x1010a,                    RANDOM
+Zora Domain Rock Circle Rock 3,                             rock,           NONE,                 ZORA_DOMAIN,                    0x2010a,                    RANDOM
+Zora Domain Rock Circle Rock 4,                             rock,           NONE,                 ZORA_DOMAIN,                    0x3010a,                    RANDOM
+Zora Domain Rock Circle Rock 5,                             rock,           NONE,                 ZORA_DOMAIN,                    0x4010a,                    RANDOM
+Zora Domain Rock Circle Rock 6,                             rock,           NONE,                 ZORA_DOMAIN,                    0x5010a,                    RANDOM
+Zora Domain Rock Circle Rock 7,                             rock,           NONE,                 ZORA_DOMAIN,                    0x6010a,                    RANDOM
+Zora Domain Rock Circle Rock 8,                             rock,           NONE,                 ZORA_DOMAIN,                    0x7010a,                    RANDOM
 Zora Domain Pot 1,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0115,                     RUPEE_BLUE
 Zora Domain Pot 2,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0116,                     RECOVERY_HEART
 Zora Domain Pot 3,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0117,                     RECOVERY_HEART
@@ -668,6 +746,7 @@ Lake Hylia Grass Pack 3 Bush 09,                            grass,          NONE
 Lake Hylia Grass Pack 3 Bush 10,                            grass,          NONE,                 LAKE_HYLIA,                     0x90020,                    RANDOM
 Lake Hylia Grass Pack 3 Bush 11,                            grass,          NONE,                 LAKE_HYLIA,                     0xa0020,                    RANDOM
 Lake Hylia Grass Pack 3 Bush 12,                            grass,          NONE,                 LAKE_HYLIA,                     0xb0020,                    RANDOM
+Lake Hylia Rock,                                            rock,           NONE,                 LAKE_HYLIA,                     0x00016,                    RANDOM
 Lake Hylia Rupee 1,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00031,                    RUPEE_GREEN
 Lake Hylia Rupee 2,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00032,                    RUPEE_GREEN
 Lake Hylia Rupee 3,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00033,                    RUPEE_GREEN
@@ -837,6 +916,14 @@ Hyrule Field Grass Pack 4 Bush 09,                          grass,          NONE
 Hyrule Field Grass Pack 4 Bush 10,                          grass,          NONE,                 HYRULE_FIELD,                   0x9003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 11,                          grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 12,                          grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    RANDOM
+Hyrule Field Rock Circle Rock 1,                            rock,           NONE,                 HYRULE_FIELD,                   0x00037,                    RANDOM
+Hyrule Field Rock Circle Rock 2,                            rock,           NONE,                 HYRULE_FIELD,                   0x10037,                    RANDOM
+Hyrule Field Rock Circle Rock 3,                            rock,           NONE,                 HYRULE_FIELD,                   0x20037,                    RANDOM
+Hyrule Field Rock Circle Rock 4,                            rock,           NONE,                 HYRULE_FIELD,                   0x30037,                    RANDOM
+Hyrule Field Rock Circle Rock 5,                            rock,           NONE,                 HYRULE_FIELD,                   0x40037,                    RANDOM
+Hyrule Field Rock Circle Rock 6,                            rock,           NONE,                 HYRULE_FIELD,                   0x50037,                    RANDOM
+Hyrule Field Rock Circle Rock 7,                            rock,           NONE,                 HYRULE_FIELD,                   0x60037,                    RANDOM
+Hyrule Field Rock Circle Rock 8,                            rock,           NONE,                 HYRULE_FIELD,                   0x70037,                    RANDOM
 Hyrule Field River Big Fairy,                               fairy_spot,     NONE,                 HYRULE_FIELD,                   0x00048,                    FAIRY_BIG
 Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
 Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
@@ -984,10 +1071,21 @@ Hyrule Castle Grotto Pot 1,                                 pot,            NONE
 Hyrule Castle Grotto Pot 2,                                 pot,            NONE,                 GROTTOS,                        0x0807,                     BOMB
 Hyrule Castle Grotto Pot 3,                                 pot,            NONE,                 GROTTOS,                        0x0809,                     ARROWS_5
 Hyrule Castle Grotto Pot 4,                                 pot,            NONE,                 GROTTOS,                        0x080b,                     NUTS_5
+Hyrule Castle Grotto Rock Circle Rock 1,                    rock,           NONE,                 GROTTOS,                        0x00802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 2,                    rock,           NONE,                 GROTTOS,                        0x10802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 3,                    rock,           NONE,                 GROTTOS,                        0x20802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 4,                    rock,           NONE,                 GROTTOS,                        0x30802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 5,                    rock,           NONE,                 GROTTOS,                        0x40802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 6,                    rock,           NONE,                 GROTTOS,                        0x50802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 7,                    rock,           NONE,                 GROTTOS,                        0x60802,                    RANDOM
+Hyrule Castle Grotto Rock Circle Rock 8,                    rock,           NONE,                 GROTTOS,                        0x70802,                    RANDOM
 Hyrule Castle Pot 1,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0008,                     RUPEE_GREEN
 Hyrule Castle Pot 2,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0009,                     RUPEE_BLUE
 Hyrule Castle Grass 1,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002e,                    NOTHING
 Hyrule Castle Grass 2,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002f,                    NOTHING
+Hyrule Castle Rock 1,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002a,                    RANDOM
+Hyrule Castle Rock 2,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002b,                    RANDOM
+Hyrule Castle Rock 3,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002c,                    RANDOM
 Hyrule Castle Wonder Item Torch 1,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x0000c,                    MAGIC_JAR_LARGE
 Hyrule Castle Wonder Item Torch 2,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x0000d,                    RUPEE_RED
 Hyrule Castle Wonder Item Moat 01,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00020,                    RUPEE_GREEN
@@ -1034,6 +1132,16 @@ Gerudo Valley GS Wall,                                      gs,             NONE
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
 Gerudo Valley GS Pillar,                                    gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
 Gerudo Valley Cow,                                          cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
+Gerudo Valley Rock Entrance Ground 1,                       rock,           NONE,                 GERUDO_VALLEY,                  0x0802a,                    RANDOM
+Gerudo Valley Rock Entrance Ground 2,                       rock,           NONE,                 GERUDO_VALLEY,                  0x0802b,                    RANDOM
+Gerudo Valley Rock Entrance Ground 3,                       rock,           NONE,                 GERUDO_VALLEY,                  0x0802c,                    RANDOM
+Gerudo Valley Rock Entrance Water 1,                        rock,           NONE,                 GERUDO_VALLEY,                  0x08021,                    RANDOM
+Gerudo Valley Rock Entrance Water 2,                        rock,           NONE,                 GERUDO_VALLEY,                  0x08022,                    RANDOM
+Gerudo Valley Rock Entrance Water 3,                        rock,           NONE,                 GERUDO_VALLEY,                  0x08023,                    RANDOM
+Gerudo Valley Rock Adult 1,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08024,                    RANDOM
+Gerudo Valley Rock Adult 2,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08025,                    RANDOM
+Gerudo Valley Rock Adult 3,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08026,                    RANDOM
+Gerudo Valley Rock Adult 4,                                 rock,           NONE,                 GERUDO_VALLEY,                  0x08027,                    RANDOM
 Gerudo Valley Crate Child Unreachable 1,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00021,                    RUPEE_GREEN
 Gerudo Valley Crate Child Unreachable 2,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00022,                    RUPEE_GREEN
 Gerudo Valley Crate Child Unreachable 3,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00023,                    RUPEE_GREEN
@@ -1127,6 +1235,23 @@ Desert Colossus Wonder Item Oasis 2,                        wonder,         NONE
 Desert Colossus Wonder Item Oasis Child,                    wonder,         NONE,                 DESERT_COLOSSUS,                0x00016,                    RUPEE_BLUE
 Desert Colossus Wonder Item Fountain 1,                     wonder,         NONE,                 DESERT_COLOSSUS,                0x00014,                    RUPEE_BLUE
 Desert Colossus Wonder Item Fountain 2,                     wonder,         NONE,                 DESERT_COLOSSUS,                0x00017,                    RUPEE_RED
+Desert Colossus Rock,                                       rock,           NONE,                 DESERT_COLOSSUS,                0x00019,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 1,                       rock,           NONE,                 DESERT_COLOSSUS,                0x0001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 2,                       rock,           NONE,                 DESERT_COLOSSUS,                0x1001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 3,                       rock,           NONE,                 DESERT_COLOSSUS,                0x2001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 4,                       rock,           NONE,                 DESERT_COLOSSUS,                0x3001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 5,                       rock,           NONE,                 DESERT_COLOSSUS,                0x4001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001a,                    RANDOM
+Desert Colossus Rock Circle 1 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001a,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 1,                       rock,           NONE,                 DESERT_COLOSSUS,                0x0001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 2,                       rock,           NONE,                 DESERT_COLOSSUS,                0x1001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 3,                       rock,           NONE,                 DESERT_COLOSSUS,                0x2001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 4,                       rock,           NONE,                 DESERT_COLOSSUS,                0x3001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 5,                       rock,           NONE,                 DESERT_COLOSSUS,                0x4001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001b,                    RANDOM
+Desert Colossus Rock Circle 2 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001b,                    RANDOM
 Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET

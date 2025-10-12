@@ -22,6 +22,19 @@
     "Death Mountain Trail Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
     "Death Mountain Trail Rupee Lower": "is_child && has_explosives_or_hammer"
     "Death Mountain Trail Big Fairy": "can_play_sun"
+    "Death Mountain Trail Rock 1": "true"
+    "Death Mountain Trail Rock 2": "true"
+    "Death Mountain Trail Rock 3": "true"
+    "Death Mountain Trail Rock 4": "true"
+    "Death Mountain Trail Rock 5": "true"
+    "Death Mountain Trail Rock Circle Rock 1": "true"
+    "Death Mountain Trail Rock Circle Rock 2": "true"
+    "Death Mountain Trail Rock Circle Rock 3": "true"
+    "Death Mountain Trail Rock Circle Rock 4": "true"
+    "Death Mountain Trail Rock Circle Rock 5": "true"
+    "Death Mountain Trail Rock Circle Rock 6": "true"
+    "Death Mountain Trail Rock Circle Rock 7": "true"
+    "Death Mountain Trail Rock Circle Rock 8": "true"
 
 "Death Mountain Trail Red Boulders Lower":
   region: DEATH_MOUNTAIN_TRAIL
@@ -50,6 +63,7 @@
     "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_biggoron"
     "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_biggoron"
     "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
+    "Death Mountain Trail Rock Child": "is_child"
   gossip:
     "Death Mountain Trail Gossip on Climb": "true"
 

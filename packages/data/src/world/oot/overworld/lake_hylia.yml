@@ -104,6 +104,8 @@
   exits:
     "Fishing Pond": "true"
     "Lake Hylia": "is_adult || can_swim_or_sink"
+  locations:
+    "Lake Hylia Rock": "true"
 
 "Lake Hylia Near Water Temple":
   region: LAKE_HYLIA

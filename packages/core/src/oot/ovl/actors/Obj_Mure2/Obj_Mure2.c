@@ -48,5 +48,49 @@ void ObjMure2_AliasGrass(Xflag* xf)
 
 void ObjMure2_AliasRocks(Xflag* xf)
 {
-
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_HYRULE_FIELD:
+        xf->setupId = 0;
+        xf->id = 55;
+        break;
+    case SCE_OOT_KOKIRI_FOREST:
+        switch (xf->setupId)
+        {
+        case 2:
+            xf->id += 36;
+            break;
+        case 3:
+            xf->id += 33;
+            break;
+        }
+        xf->setupId = 0;
+        break;
+    case SCE_OOT_ZORA_DOMAIN:
+        xf->setupId = 0;
+        xf->id = 10;
+        break;
+    case SCE_OOT_DESERT_COLOSSUS:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id -= 2;
+        }
+        break;
+    case SCE_OOT_ZORA_RIVER:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id += 29;
+        }
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+        xf->setupId = 0;
+        xf->id = 33;
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
+        xf->setupId = 0;
+        xf->id = 32;
+        break;
+    }
 }

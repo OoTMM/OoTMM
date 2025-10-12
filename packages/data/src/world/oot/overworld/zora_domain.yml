@@ -30,6 +30,14 @@
     "Zora Domain Pot 5": "true"
     "Zora Domain Hive Front 1": "is_child && break_hive_high"
     "Zora Domain Hive Front 2": "is_child && break_hive_high"
+    "Zora Domain Rock Circle Rock 1": "true"
+    "Zora Domain Rock Circle Rock 2": "true"
+    "Zora Domain Rock Circle Rock 3": "true"
+    "Zora Domain Rock Circle Rock 4": "true"
+    "Zora Domain Rock Circle Rock 5": "true"
+    "Zora Domain Rock Circle Rock 6": "true"
+    "Zora Domain Rock Circle Rock 7": "true"
+    "Zora Domain Rock Circle Rock 8": "true"
   gossip:
     "Zora Domain Gossip": "true"
 

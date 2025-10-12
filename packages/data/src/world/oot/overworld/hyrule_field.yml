@@ -36,6 +36,14 @@
     "Hyrule Field Wonder Item 1": "is_child"
     "Hyrule Field Wonder Item 2": "is_child"
     "Hyrule Field Wonder Item 3": "is_child"
+    "Hyrule Field Rock Circle Rock 1": "true"
+    "Hyrule Field Rock Circle Rock 2": "true"
+    "Hyrule Field Rock Circle Rock 3": "true"
+    "Hyrule Field Rock Circle Rock 4": "true"
+    "Hyrule Field Rock Circle Rock 5": "true"
+    "Hyrule Field Rock Circle Rock 6": "true"
+    "Hyrule Field Rock Circle Rock 7": "true"
+    "Hyrule Field Rock Circle Rock 8": "true"
 
 "Hyrule Field Grass":
   region: HYRULE_FIELD

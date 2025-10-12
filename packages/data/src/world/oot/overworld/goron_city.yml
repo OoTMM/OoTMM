@@ -36,6 +36,7 @@
     "Goron City Pot Stairs 4": "true"
     "Goron City Pot Stairs 5": "true"
     "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+    "Goron City Rock": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
