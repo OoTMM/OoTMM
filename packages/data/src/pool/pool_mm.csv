@@ -988,6 +988,13 @@ Mountain Village Butterfly Pack 2 Butterfly 5,          butterfly,      NONE,   
 Mountain Village Spring Red Boulder 1,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00000,                    NOTHING
 Mountain Village Spring Red Boulder 2,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00001,                    NOTHING
 Mountain Village Spring Red Boulder 3,                  redboulder,     NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00002,                    NOTHING
+Mountain Village Rock Cliff 1,                          rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0000e,                    RANDOM
+Mountain Village Rock Cliff 2,                          rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0000f,                    RANDOM
+Mountain Village Rock Ground 1,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00010,                    RANDOM
+Mountain Village Rock Ground 2,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00011,                    RANDOM
+Mountain Village Rock Ground 3,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00012,                    RANDOM
+Mountain Village Rock Ground 4,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00013,                    RANDOM
+Mountain Village Rock Ground 5,                         rock,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00014,                    RANDOM
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
