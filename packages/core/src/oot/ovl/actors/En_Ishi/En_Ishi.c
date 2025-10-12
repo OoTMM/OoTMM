@@ -325,6 +325,10 @@ static void EnIshi_Alias(Xflag* xf) {
         }
         xf->setupId = 0;
         break;
+    case SCE_OOT_GRAVEYARD:
+        xf->setupId = 0;
+        xf->id = 14;
+        break;
     }
 }
 

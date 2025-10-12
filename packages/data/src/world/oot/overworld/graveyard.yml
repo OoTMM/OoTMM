@@ -36,6 +36,7 @@
     "Graveyard Grass 10": "can_cut_grass"
     "Graveyard Grass 11": "can_cut_grass"
     "Graveyard Grass 12": "can_cut_grass"
+    "Graveyard Rock": "true"
     "Graveyard Butterfly 1": "is_child && can_use_sticks"
     "Graveyard Butterfly 2": "is_child && can_use_sticks"
     "Graveyard Butterfly 3": "is_child && can_use_sticks"

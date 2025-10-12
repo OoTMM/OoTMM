@@ -285,6 +285,7 @@ Kakariko Potion Shop Item 7,                                shop,           NONE
 Kakariko Potion Shop Item 8,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                       collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
 Graveyard Sell Spooky Mask,                                 npc,            NONE,                 GRAVEYARD,                      MASK_SELL_SPOOKY,           RUPEE_RED
+Graveyard Rock,                                             rock,           NONE,                 GRAVEYARD,                      0x0010e,                    RANDOM
 Graveyard Butterfly 1,                                      butterfly,      NONE,                 GRAVEYARD,                      0x00111,                    FAIRY
 Graveyard Butterfly 2,                                      butterfly,      NONE,                 GRAVEYARD,                      0x10111,                    NOTHING
 Graveyard Butterfly 3,                                      butterfly,      NONE,                 GRAVEYARD,                      0x20111,                    NOTHING
