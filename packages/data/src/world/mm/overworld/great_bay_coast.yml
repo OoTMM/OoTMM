@@ -21,6 +21,7 @@
   locations:
     "Great Bay Coast Zora Mask": "can_play_healing"
     "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
+    "Great Bay Coast Palm Tree Island": "(can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared" # Likely too restrictive
     "Great Bay Coast Pot 01": "true"
     "Great Bay Coast Pot 02": "true"
     "Great Bay Coast Pot 03": "true"
@@ -43,6 +44,9 @@
     "Great Bay Coast Rock Sand 3": "true"
     "Great Bay Coast Rock Sand 4": "true"
     "Great Bay Coast Rock Sand 5": "true"
+    "Great Bay Coast Palm Tree Beach 1": "true"
+    "Great Bay Coast Palm Tree Beach 2": "true"
+    "Great Bay Coast Palm Tree Beach 3": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
 

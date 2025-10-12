@@ -31,8 +31,39 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 800, ICHAIN_STOP),
 };
 
+static void ObjYasi_Alias(Xflag* xf)
+{
+    switch (xf->sceneId)
+    {
+    case SCE_MM_ZORA_CAPE:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            xf->id -= 1;
+        }
+        break;
+    case SCE_MM_GREAT_BAY_COAST:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            switch (xf->id)
+            {
+            case 31: xf->id = 10; break;
+            case 32: xf->id = 13; break;
+            case 33: xf->id = 11; break;
+            case 34: xf->id = 12; break;
+            }
+        }
+        break;
+    }
+}
+
 void ObjYasi_Init(Actor* thisx, PlayState* play) {
     ObjYasi* this = (ObjYasi*)thisx;
+
+    if (comboXflagInit(&this->xflag, thisx, play)) {
+        ObjYasi_Alias(&this->xflag);
+    }
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     DynaPolyActor_Init(&this->dyna, 0);
@@ -52,13 +83,24 @@ void ObjYasi_Destroy(Actor* thisx, PlayState* play) {
     DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
 }
 
+static int ObjYasi_DropCustom(ObjYasi* this, PlayState* play)
+{
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+        return true;
+    }
+
+    return false;
+}
+
 void ObjYasi_Update(Actor* thisx, PlayState* play) {
     ObjYasi* this = (ObjYasi*)thisx;
     s16 temp;
     Vec3f dropPos;
 
     if (this->dyna.actor.home.rot.z != 0) {
-        if (CAN_DROP_NUT(thisx)) {
+        if (!ObjYasi_DropCustom(this, play) && CAN_DROP_NUT(thisx)) {
             if (Rand_ZeroOne() < 0.5f) {
                 dropPos.x = this->dyna.actor.world.pos.x;
                 dropPos.y = this->dyna.actor.world.pos.y + 280.0f;

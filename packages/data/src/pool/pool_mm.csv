@@ -1365,6 +1365,10 @@ Great Bay Coast Grass 2,                                grass,          NONE,   
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
 Great Bay Coast Grass 4,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
 Great Bay Coast Grass 5,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
+Great Bay Coast Palm Tree Island,                       tree,           NONE,                   GREAT_BAY_COAST,              0x0000a,                    NUT
+Great Bay Coast Palm Tree Beach 1,                      tree,           NONE,                   GREAT_BAY_COAST,              0x0000b,                    NUT
+Great Bay Coast Palm Tree Beach 2,                      tree,           NONE,                   GREAT_BAY_COAST,              0x0000c,                    NUT
+Great Bay Coast Palm Tree Beach 3,                      tree,           NONE,                   GREAT_BAY_COAST,              0x0000d,                    NUT
 Great Bay Coast Rock Water Cleared 1,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00045,                    RANDOM
 Great Bay Coast Rock Water Cleared 2,                   rock,           NONE,                   GREAT_BAY_COAST,              0x00042,                    RANDOM
 Great Bay Coast Rock Water 01,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00043,                    RANDOM
