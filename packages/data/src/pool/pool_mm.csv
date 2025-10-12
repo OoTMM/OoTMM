@@ -1165,6 +1165,10 @@ Path to Snowhead Small Snowball Spring Middle 1,        snowball,       NONE,   
 Path to Snowhead Small Snowball Spring Middle 2,        snowball,       NONE,                   PATH_SNOWHEAD,                0x04006,                    MAGIC_JAR_LARGE
 Path to Snowhead Small Snowball Spring Back 1,          snowball,       NONE,                   PATH_SNOWHEAD,                0x04007,                    MAGIC_JAR_LARGE
 Path to Snowhead Small Snowball Spring Back 2,          snowball,       NONE,                   PATH_SNOWHEAD,                0x04008,                    MAGIC_JAR_LARGE
+Path to Snowhead Snow Tree End 1,                       tree,           NONE,                   PATH_SNOWHEAD,                0x00016,                    NOTHING
+Path to Snowhead Snow Tree End 2,                       tree,           NONE,                   PATH_SNOWHEAD,                0x00017,                    NOTHING
+Path to Snowhead Snow Tree End 3,                       tree,           NONE,                   PATH_SNOWHEAD,                0x00018,                    NOTHING
+Path to Snowhead Snow Tree Entrance,                    tree,           NONE,                   PATH_SNOWHEAD,                0x00019,                    NOTHING
 Path to Snowhead Grotto,                                chest,          NONE,                   GROTTOS,                      0x13,                       RUPEE_RED
 Path to Snowhead Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03300,                    RANDOM
 Path to Snowhead Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03301,                    RANDOM

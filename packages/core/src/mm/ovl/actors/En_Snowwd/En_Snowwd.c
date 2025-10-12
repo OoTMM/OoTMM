@@ -55,6 +55,19 @@ static void EnSnowwd_Alias(Xflag* xf)
             xf->id -= 5;
         }
         break;
+    case SCE_MM_PATH_SNOWHEAD:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            switch (xf->id)
+            {
+            case 00: xf->id = 24; break;
+            case 01: xf->id = 23; break;
+            case 02: xf->id = 22; break;
+            case 03: xf->id = 25; break;
+            }
+        }
+        break;
     }
 }
 
