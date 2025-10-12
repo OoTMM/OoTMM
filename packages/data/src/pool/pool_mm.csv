@@ -1077,6 +1077,22 @@ Twin Islands Small Snowball Ramp 2,                     snowball,       NONE,   
 Twin Islands Small Snowball Ramp 3,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00043,                    RECOVERY_HEART
 Goron Elder,                                            npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                             npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
+Goron Shrine Rock 01,                                   rock,           NONE,                   GORON_SHRINE,                 0x00002,                    RANDOM
+Goron Shrine Rock 02,                                   rock,           NONE,                   GORON_SHRINE,                 0x00003,                    RANDOM
+Goron Shrine Rock 03,                                   rock,           NONE,                   GORON_SHRINE,                 0x00004,                    RANDOM
+Goron Shrine Rock 04,                                   rock,           NONE,                   GORON_SHRINE,                 0x00005,                    RANDOM
+Goron Shrine Rock 05,                                   rock,           NONE,                   GORON_SHRINE,                 0x00006,                    RANDOM
+Goron Shrine Rock 06,                                   rock,           NONE,                   GORON_SHRINE,                 0x00007,                    RANDOM
+Goron Shrine Rock 07,                                   rock,           NONE,                   GORON_SHRINE,                 0x00008,                    RANDOM
+Goron Shrine Rock 08,                                   rock,           NONE,                   GORON_SHRINE,                 0x00009,                    RANDOM
+Goron Shrine Rock 09,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000a,                    RANDOM
+Goron Shrine Rock 10,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000b,                    RANDOM
+Goron Shrine Rock 11,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000c,                    RANDOM
+Goron Shrine Rock 12,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000d,                    RANDOM
+Goron Shrine Rock 13,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000e,                    RANDOM
+Goron Shrine Rock 14,                                   rock,           NONE,                   GORON_SHRINE,                 0x0000f,                    RANDOM
+Goron Shrine Rock 15,                                   rock,           NONE,                   GORON_SHRINE,                 0x00010,                    RANDOM
+Goron Shrine Rock 16,                                   rock,           NONE,                   GORON_SHRINE,                 0x00011,                    RANDOM
 Goron Shrine Pot 01,                                    pot,            NONE,                   GORON_SHRINE,                 0x0023,                     STICK
 Goron Shrine Pot 02,                                    pot,            NONE,                   GORON_SHRINE,                 0x0024,                     MAGIC_JAR_SMALL
 Goron Shrine Pot 03,                                    pot,            NONE,                   GORON_SHRINE,                 0x0025,                     MAGIC_JAR_SMALL
@@ -1462,6 +1478,8 @@ Zora Shop Item 3,                                       shop,           NONE,   
 Pinnacle Rock Chest 1,                                  chest,          NONE,                   PINNACLE_ROCK,                0x01,                       RUPEE_RED
 Pinnacle Rock Chest 2,                                  chest,          NONE,                   PINNACLE_ROCK,                0x02,                       RUPEE_RED
 Pinnacle Rock HP,                                       npc,            PINNACLE_ROCK_HP,       PINNACLE_ROCK,                SEAHORSE_HEART_PIECE,       HEART_PIECE
+Pinnacle Rock Rock Unreachable 1,                       rock,           NONE,                   PINNACLE_ROCK,                0x0001c,                    RANDOM
+Pinnacle Rock Rock Unreachable 2,                       rock,           NONE,                   PINNACLE_ROCK,                0x0001d,                    RANDOM
 Pinnacle Rock Pot 01,                                   pot,            NONE,                   PINNACLE_ROCK,                0x0003,                     MAGIC_JAR_SMALL
 Pinnacle Rock Pot 02,                                   pot,            NONE,                   PINNACLE_ROCK,                0x0004,                     RECOVERY_HEART
 Pinnacle Rock Pot 03,                                   pot,            NONE,                   PINNACLE_ROCK,                0x0005,                     RECOVERY_HEART

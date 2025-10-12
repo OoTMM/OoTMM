@@ -414,8 +414,18 @@ s32 EnIshi_IsUnderwater(EnIshi* this, PlayState* play) {
     }
 }
 
-static void EnIshi_Alias(Xflag* xflag)
+static void EnIshi_Alias(Xflag* xf)
 {
+    switch (xf->sceneId)
+    {
+    case SCE_MM_GORON_SHRINE:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            xf->id -= 5;
+        }
+        break;
+    }
 }
 
 void EnIshi_Init(Actor* thisx, PlayState* play) {
