@@ -1,5 +1,6 @@
 #include "En_Ishi.h"
 #include <combo/quake.h>
+#include <combo/custom.h>
 #include <assets/mm/objects/gameplay_field_keep.h>
 #include <assets/mm/objects/gameplay_keep.h>
 #include <assets/mm/objects/object_ishi.h>
@@ -753,17 +754,76 @@ void EnIshi_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
+static int EnIshi_CAMC(EnIshi* this, PlayState* play) {
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_NORMAL;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+static Gfx sNormalDlistKeepOpa[] = {
+    gsDPLoadTextureBlock(0x05006810, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gFieldSmallRockOpaDL),
+};
+
+static Gfx sNormalDlistKeepXlu[] = {
+    gsDPLoadTextureBlock(0x05006810, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gFieldSmallRockXluDL),
+};
+
+static Gfx sNormalDlistObject[] = {
+    gsDPLoadTextureBlock(0x060001b0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gSmallRockDL),
+};
+
+static Gfx sCustomDlistKeepOpa[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gFieldSmallRockOpaDL),
+};
+
+static Gfx sCustomDlistKeepXlu[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gFieldSmallRockXluDL),
+};
+
+static Gfx sCustomDlistObject[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPBranchList(gSmallRockDL),
+};
+
+static Gfx* sNormalDlists[] = {
+    sNormalDlistKeepOpa,
+    sNormalDlistKeepXlu,
+    sNormalDlistObject,
+};
+
+static Gfx* sCustomDlists[] = {
+    sCustomDlistKeepOpa,
+    sCustomDlistKeepXlu,
+    sCustomDlistObject,
+};
+
 static void EnIshi_DrawSmallRock(EnIshi* this, PlayState* play, int isObject)
 {
     s32 alpha;
+    Color_RGB8 color;
     Gfx* dlist;
     Gfx** ptr;
+    int csmc;
+    int dlistIndex;
+    void* tex;
 
     /* Alpha and dlist selection */
     if (isObject)
     {
         alpha = 255;
-        dlist = gSmallRockDL;
+        dlistIndex = 2;
     }
     else
     {
@@ -772,13 +832,32 @@ static void EnIshi_DrawSmallRock(EnIshi* this, PlayState* play, int isObject)
         if ((this->actor.projectedPos.z <= 1200.0f) || ((this->flags & ISHI_FLAG_UNDERWATER) && (this->actor.projectedPos.z < 1300.0f)))
         {
             alpha = 255;
-            dlist = gFieldSmallRockOpaDL;
+            dlistIndex = 0;
         }
         else
         {
             alpha = (1300.0f - this->actor.projectedPos.z) * 2.55f;
-            dlist = gFieldSmallRockXluDL;
+            dlistIndex = 1;
         }
+    }
+
+    /* CSMC */
+    csmc = EnIshi_CAMC(this, play);
+    if (csmc == CSMC_NORMAL)
+    {
+        dlist = sNormalDlists[dlistIndex];
+        color.r = 255;
+        color.g = 255;
+        color.b = 255;
+    }
+    else
+    {
+        dlist = sCustomDlists[dlistIndex];
+        tex = comboCacheGetFile(CUSTOM_ROCK_ADDR);
+        if (!tex)
+            return;
+        dlist[0].words.w1 = ((u32)tex - 0x80000000);
+        color = *csmcTypeColor(csmc);
     }
 
     /* Draw */
@@ -792,7 +871,7 @@ static void EnIshi_DrawSmallRock(EnIshi* this, PlayState* play, int isObject)
     {
         ptr = &POLY_XLU_DISP;
     }
-    gDPSetPrimColor((*ptr)++, 0, 0, 255, 255, 255, alpha);
+    gDPSetPrimColor((*ptr)++, 0, 0, color.r, color.g, color.b, alpha);
     if (alpha < 255)
         Gfx_DrawDListXlu(play, dlist);
     else
