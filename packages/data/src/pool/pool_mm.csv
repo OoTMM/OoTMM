@@ -1763,6 +1763,8 @@ Stone Tower Pot Owl Statue 4,                           pot,            NONE,   
 Stone Tower Inverted Chest 1,                           chest,          NONE,                   STONE_TOWER_INVERTED,         0x1d,                       RUPEE_SILVER
 Stone Tower Inverted Chest 2,                           chest,          NONE,                   STONE_TOWER_INVERTED,         0x1e,                       BOMBCHU_10
 Stone Tower Inverted Chest 3,                           chest,          NONE,                   STONE_TOWER_INVERTED,         0x1f,                       MAGIC_BEAN
+Stone Tower Inverted Rock 1,                            rock,           NONE,                   STONE_TOWER_INVERTED,         0x00015,                    RANDOM
+Stone Tower Inverted Rock 2,                            rock,           NONE,                   STONE_TOWER_INVERTED,         0x00016,                    RANDOM
 Stone Tower Inverted Pot 1,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x0008,                     RECOVERY_HEART
 Stone Tower Inverted Pot 2,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x0009,                     MAGIC_JAR_LARGE
 Stone Tower Inverted Pot 3,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000a,                     FAIRY
