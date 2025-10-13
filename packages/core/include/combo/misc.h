@@ -321,14 +321,6 @@ typedef enum
 }
 DoorWarp1Param;
 
-/* TODO: Move to Item_B_Heart once ported */
-typedef enum
-{
-    BHEART_PARAM_NORMAL,
-    BHEART_PARAM_SMALL = 35
-}
-ItemBHeartParam;
-
 typedef enum
 {
     CLEAR_TAG_SMALL_EXPLOSION,

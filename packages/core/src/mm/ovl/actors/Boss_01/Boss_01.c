@@ -10,6 +10,7 @@
 
 #include "../src/mm/actors.h"
 #include "Boss_01.h"
+#include "../Item_B_Heart/Item_B_Heart.h"
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20)
 
