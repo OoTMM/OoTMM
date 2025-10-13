@@ -83,7 +83,7 @@ export class Generator {
         await codegen(this.monitor);
       }
       const patchfile = new Patchfile;
-      await custom(this.monitor, roms, patchfile);
+      await custom(this.monitor, roms, patchfile, this.opts);
 
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);

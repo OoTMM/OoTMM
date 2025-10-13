@@ -128,9 +128,16 @@ export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k:
   ROCK: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0xa940, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
 });
 
-export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
-  CHEST_MAJOR_FRONT: await png('chests/major_front', 'rgba16'),
-  CHEST_MAJOR_SIDE: await png('chests/major_side', 'rgba16'),
+function getSeasonalPrefix(opts?: Options) {
+  if (opts?.cosmetics.halloween) {
+    return 'halloween/';
+  }
+  return '';
+}
+
+export const customFiles = async (opts?: Options): Promise<{[k: string]: Uint8Array}> => ({
+  CHEST_MAJOR_FRONT: await png(`${getSeasonalPrefix(opts)}chests/major_front`, 'rgba16'),
+  CHEST_MAJOR_SIDE: await png(`${getSeasonalPrefix(opts)}chests/major_side`, 'rgba16'),
   CHEST_KEY_FRONT: await png('chests/key_front', 'rgba16'),
   CHEST_KEY_SIDE: await png('chests/key_side', 'rgba16'),
   CHEST_SPIDER_FRONT: await png('chests/spider_front', 'rgba16'),
@@ -144,14 +151,15 @@ export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
   CHEST_MAP_FRONT: await png('chests/map_front', 'rgba16'),
   CHEST_MAP_SIDE: await png('chests/map_side', 'rgba16'),
   CRATE_BOSS_KEY: await png('crates/boss_key', 'rgba16'),
-  POT_MAJOR_SIDE: await png('pots/major_side', 'rgba16'),
+  CRATE_MAJOR: await png(`${getSeasonalPrefix(opts)}crates/major`, 'rgba16'),
+  POT_MAJOR_SIDE: await png(`${getSeasonalPrefix(opts)}pots/major_side`, 'rgba16'),
   POT_MAJOR_TOP: await png('pots/major_top', 'rgba16'),
-  POT_SPIDER_SIDE: await png('pots/spider_side', 'rgba16'),
+  POT_SPIDER_SIDE: await png(`${getSeasonalPrefix(opts)}pots/spider_side`, 'rgba16'),
   POT_SPIDER_TOP: await png('pots/spider_top', 'rgba16'),
-  POT_KEY_SIDE: await png('pots/key_side', 'rgba16'),
-  POT_FAIRY_SIDE: await png('pots/fairy_side', 'rgba16'),
+  POT_KEY_SIDE: await png(`${getSeasonalPrefix(opts)}pots/key_side`, 'rgba16'),
+  POT_FAIRY_SIDE: await png(`${getSeasonalPrefix(opts)}pots/fairy_side`, 'rgba16'),
   POT_FAIRY_TOP: await png('pots/fairy_top', 'rgba16'),
-  POT_HEART_SIDE: await png('pots/heart_side', 'rgba16'),
+  POT_HEART_SIDE: await png(`${getSeasonalPrefix(opts)}pots/heart_side`, 'rgba16'),
   POT_HEART_TOP: await png('pots/heart_top', 'rgba16'),
   POT_BOSSKEY_SIDE: await png('pots/bosskey_side', 'rgba16'),
   POT_BOSSKEY_TOP: await png('pots/bosskey_top', 'rgba16'),
@@ -214,6 +222,7 @@ class CustomAssetsBuilder {
     private monitor: Monitor,
     private roms: DecompressedRoms,
     private patch: Patchfile,
+    private opts?: Options,
   ) {
     this.defines = new Map();
     const cgPath = process.env.__IS_BROWSER__ ? '' : path.resolve('include', 'combo', 'custom.h');
@@ -278,7 +287,7 @@ class CustomAssetsBuilder {
   }
 
   async addCustomFiles() {
-    const cfiles = await customFiles();
+    const cfiles = await customFiles(this.opts);
     for (const [name, data] of Object.entries(cfiles)) {
       const vrom = this.addRawData(null, data, true);
       this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
@@ -472,7 +481,7 @@ class CustomAssetsBuilder {
   }
 }
 
-export function custom(monitor: Monitor, roms: DecompressedRoms, patch: Patchfile) {
-  const builder = new CustomAssetsBuilder(monitor, roms, patch);
+export function custom(monitor: Monitor, roms: DecompressedRoms, patch: Patchfile, opts?: Options) {
+  const builder = new CustomAssetsBuilder(monitor, roms, patch, opts);
   return builder.run();
 }

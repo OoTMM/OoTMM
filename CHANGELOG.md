@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Some seasonal textures, for Halloween.
 - Add tree shuffle in Ocarina of Time and Majora's Mask.
 - Add rock shuffle in Ocarina of Time and Majora's Mask.
 - Add a transcendent fairy item, which counts as every stray fairy at once.

@@ -19,6 +19,11 @@ export const COSMETICS = [{
 //   type: 'boolean',
 //   default: false,
 }, {
+  key: 'halloween',
+  name: 'Enable Halloween Textures',
+  type: 'boolean',
+  default: false,
+  }, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
   type: 'color',

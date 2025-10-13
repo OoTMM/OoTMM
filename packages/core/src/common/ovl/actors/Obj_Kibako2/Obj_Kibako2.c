@@ -572,7 +572,7 @@ static int ObjKibako2_CsmcType(Actor_ObjKibako2* this)
 
     if (!ObjKibako2_IsShuffled(this))
         return CSMC_NORMAL;
-    
+
     comboXflagItemOverride(&o, &this->xflag, 0);
     if (!csmcEnabled())
         return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
@@ -630,7 +630,7 @@ static void ObjKibako2_Draw(Actor_ObjKibako2* this, PlayState* play)
     switch (type)
     {
     case CSMC_BOSS_KEY: customVrom = CUSTOM_CRATE_BOSS_KEY_ADDR; break; /* TODO: Need a texture */
-    case CSMC_MAJOR: customVrom = CUSTOM_CHEST_MAJOR_FRONT_ADDR; break;
+    case CSMC_MAJOR: customVrom = CUSTOM_CRATE_MAJOR_ADDR; break;
     case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
     case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
     case CSMC_FAIRY: customVrom = CUSTOM_CHEST_FAIRY_FRONT_ADDR; break;
