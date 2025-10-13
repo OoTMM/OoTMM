@@ -369,6 +369,9 @@ void Audio_DisplayMusicName(PlayState* play)
     static u8 sIsInitialized;
     DmaEntry e;
 
+    if (gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
     if (!sDisplayMusicNames)
         return;
 
