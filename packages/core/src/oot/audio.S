@@ -20,47 +20,53 @@ PATCH_START 0x8010a1b4
 .int AUDIO_HEAP_SIZE - 0x100
 PATCH_END
 
+/* Patch the audio thread info */
+AudioThreadInfo:
+.int FANFARE_AUDIOSEQ_SIZE
+.int FANFARE_AUDIOBANK_SIZE
+.int FANFARE_UNK_SIZE
+.int BGM_AUDIOSEQ_SIZE
+.int BGM_AUDIOBANK_SIZE
+.int BGM_UNK_SIZE
+
+PATCH_START 0x800B5590
+  la      a0,0x80128A50
+  la      a1,AudioThreadInfo
+  jal     memcpy
+   li     a2,0x18
+  la      a0,0x80128A50
+  jal     0x800B3D18
+   nop
+  la      a0,0x80128A5C
+  jal     0x800B3DDC
+   nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+AudioGetSizes:
+  li  t9,FANFARE_AUDIOSEQ_SIZE
+  li  t2,FANFARE_AUDIOBANK_SIZE
+  li  t5,FANFARE_UNK_SIZE
+  li  t4,BGM_AUDIOSEQ_SIZE
+  li  t6,BGM_AUDIOBANK_SIZE
+  jr  ra
+    li t8,BGM_UNK_SIZE
+
+PATCH_START 0x800B5528
+  jal AudioGetSizes
+   nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
 /* Fix a vanilla bug that can cause a crash with some custom songs */
 PATCH_START 0x800c03bc
   move t6,t5
 PATCH_END
-
-/* Patch the audio setups */
-.macro PATCH_AUDIO_SPEC i
-/* Patch num notes & seq players & reverb */
-PATCH_START 0x80104778 + (\i) * 0x38 + 0x05
-.byte 28
-.byte 4
-.byte 0
-.byte 0
-.byte 2
-PATCH_END
-
-PATCH_START 0x80104778 + (\i) * 0x38 + 0x18
-.int 0xe000
-.int 0x4800
-.int 0
-.int 0x2000
-.int 0x4800
-.int 0
-PATCH_END
-.endm
-
-PATCH_AUDIO_SPEC 0
-PATCH_AUDIO_SPEC 1
-PATCH_AUDIO_SPEC 2
-PATCH_AUDIO_SPEC 3
-PATCH_AUDIO_SPEC 4
-PATCH_AUDIO_SPEC 5
-PATCH_AUDIO_SPEC 6
-PATCH_AUDIO_SPEC 7
-PATCH_AUDIO_SPEC 8
-PATCH_AUDIO_SPEC 9
-PATCH_AUDIO_SPEC 10
-PATCH_AUDIO_SPEC 11
-PATCH_AUDIO_SPEC 12
-PATCH_AUDIO_SPEC 13
-PATCH_AUDIO_SPEC 14
-PATCH_AUDIO_SPEC 15
-PATCH_AUDIO_SPEC 16
-PATCH_AUDIO_SPEC 17
