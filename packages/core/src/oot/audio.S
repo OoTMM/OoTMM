@@ -1,6 +1,6 @@
 #include <combo.h>
 
-#define AUDIO_HEAP_START  0x80500000
+#define AUDIO_HEAP_START  0x80600000
 #define AUDIO_HEAP_SIZE   0x100000
 
 #define FANFARE_AUDIOSEQ_SIZE   0x1000
