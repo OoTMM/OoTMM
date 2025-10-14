@@ -1248,6 +1248,11 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private filterChecksBushes() {
+    this.filterLocationsBool(this.state.settings.shuffleBushOot, 'bush', 'oot');
+    this.filterLocations(this.state.settings.shuffleBushMm, 'bush', 'mm');
+  }
+
   private filterChecksWonder() {
     this.filterLocations(this.state.settings.shuffleWonderItemsOot, 'wonder', 'oot');
     this.filterLocationsBool(this.state.settings.shuffleWonderItemsMm, 'wonder', 'mm');
@@ -1309,6 +1314,7 @@ export class LogicPassWorldTransform {
     this.filterChecksGrass();
     this.filterChecksRocks();
     this.filterChecksTrees();
+    this.filterChecksBushes();
     this.filterChecksWonder();
     this.filterChecksButterflies();
     this.filterChecksRedBoulders();

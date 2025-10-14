@@ -427,6 +427,7 @@ function checkKey(check: WorldCheck): number {
   case 'barrel':
   case 'grass':
   case 'tree':
+  case 'bush':
   case 'rock':
   case 'fairy':
   case 'snowball':
@@ -455,6 +456,7 @@ function checkKey(check: WorldCheck): number {
   case 'barrel':
   case 'grass':
   case 'tree':
+  case 'bush':
   case 'rock':
   case 'fairy':
   case 'snowball':

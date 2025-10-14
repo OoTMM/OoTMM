@@ -736,6 +736,28 @@ export const SETTINGS = [{
   default: 'none',
   cond: hasMM,
 }, {
+  key: 'shuffleBushOot',
+  name: 'Bush Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the bushes are shuffled (OoT)',
+  default: false,
+  cond: hasOoT,
+}, {
+  key: 'shuffleBushMm',
+  name: 'Bush Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls whether or not the bushes are shuffled (MM)',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'all', name: 'All' },
+    { value: 'overworld', name: 'Overworld' },
+    { value: 'dungeons', name: 'Dungeons only' },
+  ],
+  default: 'none',
+  cond: hasMM,
+}, {
   key: 'shuffleFreeRupeesOot',
   name: 'Freestanding Rupees Shuffle (OoT)',
   category: 'main.shuffle',
