@@ -620,6 +620,9 @@ static int ObjKibako2_PreDrawCustomTexture(Actor_ObjKibako2* this, PlayState* pl
     return TRUE;
 }
 
+u8 gHalloweenTexturesCrates;
+EXPORT_SYMBOL(HALLOWEEN_TEXTURES, gHalloweenTexturesCrates);
+
 static void ObjKibako2_Draw(Actor_ObjKibako2* this, PlayState* play)
 {
     int type;
@@ -630,7 +633,7 @@ static void ObjKibako2_Draw(Actor_ObjKibako2* this, PlayState* play)
     switch (type)
     {
     case CSMC_BOSS_KEY: customVrom = CUSTOM_CRATE_BOSS_KEY_ADDR; break; /* TODO: Need a texture */
-    case CSMC_MAJOR: customVrom = CUSTOM_CRATE_MAJOR_ADDR; break;
+    case CSMC_MAJOR: customVrom = gHalloweenTexturesCrates ? CUSTOM_CRATE_HALLOWEEN_MAJOR_ADDR : CUSTOM_CRATE_MAJOR_ADDR; break;
     case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
     case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
     case CSMC_FAIRY: customVrom = CUSTOM_CHEST_FAIRY_FRONT_ADDR; break;

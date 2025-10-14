@@ -63,6 +63,9 @@ static int ObjKibako_CsmcType(Actor_ObjKibako* this)
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
+u8 gHalloweenTexturesCrates2;
+EXPORT_SYMBOL(HALLOWEEN_TEXTURES, gHalloweenTexturesCrates2);
+
 static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, PlayState* play, u32 dlist, u32 baseTex)
 {
     int type;
@@ -73,7 +76,7 @@ static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, PlayState* play, u3
     switch (type)
     {
     case CSMC_BOSS_KEY: customVrom = CUSTOM_CRATE_BOSS_KEY_ADDR; break; /* TODO: Need a texture */
-    case CSMC_MAJOR: customVrom = CUSTOM_CRATE_MAJOR_ADDR; break;
+    case CSMC_MAJOR: customVrom = gHalloweenTexturesCrates2 ? CUSTOM_CRATE_HALLOWEEN_MAJOR_ADDR : CUSTOM_CRATE_MAJOR_ADDR; break;
     case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
     case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
     case CSMC_FAIRY: customVrom = CUSTOM_CHEST_FAIRY_FRONT_ADDR; break;
