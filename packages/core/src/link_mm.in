@@ -86,6 +86,9 @@ osInvalICache = 0x8008f270;
 osWritebackDCache = 0x8008a5e0;
 osWritebackDCacheAll = 0x800955c0;
 
+CollisionCheck_SetInfo2 = 0x800e755c;
+CollisionHeader_GetVirtual = 0x800c9564;
+DynaPoly_SetBgActor = 0x800c6188;
 AudioLoad_InitTable = 0x8018f478;
 
 PictoUpdateFlags = 0x8013a240;
