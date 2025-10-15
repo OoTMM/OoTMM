@@ -12,6 +12,7 @@
     SEEDS: "is_child"
     MAGIC: "is_child"
     BUGS: "is_child && has_bottle"
+    BEAN_GERUDO_VALLEY: "can_use_beans"
   locations:
     "Gerudo Valley Crate HP": "is_child || can_longshot || climb_anywhere"
     "Gerudo Valley Waterfall HP": "is_child || can_swim || can_longshot || (has_iron_boots && can_hookshot)" ##Grab the PoH with Cucco as child. The Hookshot can attach to the ladder.
@@ -21,7 +22,7 @@
     "Gerudo Valley Crate Ledge": "is_child || can_longshot || climb_anywhere"
     "Gerudo Valley Crate Child Bottom": "is_child"
     "Gerudo Valley Wonder Item Lower": "is_adult"
-    "Gerudo Valley Wonder Item Upper": "can_swim || can_use_beans || can_longshot || time_travel_at_will || can_use_ice_arrow_platforms || (has_iron_boots && can_hookshot)"
+    "Gerudo Valley Wonder Item Upper": "can_swim || can_ride_bean(BEAN_GERUDO_VALLEY) || can_longshot || time_travel_at_will || can_use_ice_arrow_platforms || (has_iron_boots && can_hookshot)"
     "Gerudo Valley Red Boulder Before Bridge 1": "is_adult && can_hammer"
     "Gerudo Valley Red Boulder Before Bridge 2": "is_adult && can_hammer"
     "Gerudo Valley Rock Entrance Ground 1": "true"
