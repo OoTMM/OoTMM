@@ -1,3 +1,4 @@
+#include <combo/custom.h>
 #include "Obj_Tree.h"
 #include <assets/mm/objects/object_tree.h>
 
@@ -205,19 +206,62 @@ void ObjTree_Update(Actor* thisx, PlayState* play) {
     ObjTree_UpdateCollision(this, play);
 }
 
+static int ObjTree_CAMC(ObjTree* this, PlayState* play) {
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+static Gfx sLeavesDlistNormal[] = {
+    gsDPLoadTextureBlock(0x060010B8, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, 0, 0),
+    gsDPSetPrimColor(0x00, 0x80, 255, 255, 255, 255),
+    gsSPBranchList(gTreeLeavesDL),
+};
+
+static Gfx sLeavesDlistColored[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, 0, 0),
+    gsSPBranchList(gTreeLeavesDL),
+};
+
 void ObjTree_Draw(Actor* thisx, PlayState* play) {
     s16 xRot = (f32)thisx->shape.rot.x;
     s16 zRot = (f32)thisx->shape.rot.z;
+    void* dlist;
+    int csmc;
+    Color_RGB8 color;
+
+    csmc = ObjTree_CAMC((ObjTree*)thisx, play);
+    if (csmc == CSMC_NORMAL)
+    {
+        dlist = sLeavesDlistNormal;
+    }
+    else
+    {
+        void* tex = comboCacheGetFile(CUSTOM_FORKED_TREE_LEAVES_ADDR);
+        if (!tex)
+            return;
+        sLeavesDlistColored[0].words.w1 = ((u32)tex - 0x80000000);
+        dlist = sLeavesDlistColored;
+        color = *csmcTypeColor(csmc);
+    }
 
     OPEN_DISPS(play->state.gfxCtx);
-
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, gTreeBodyDL);
 
     Matrix_RotateZYX(xRot, 0, zRot, MTXMODE_APPLY);
     MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, gTreeLeavesDL);
+    if (csmc != CSMC_NORMAL)
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, color.r, color.g, color.b, 255);
+    gSPDisplayList(POLY_OPA_DISP++, dlist);
 
     CLOSE_DISPS();
 }
