@@ -670,6 +670,7 @@ const PRESET_HELL = makeSettings({
   fairyOcarinaMm: true,
   blueFireArrows: true,
   sunlightArrows: true,
+  iceArrowPlatformsOot: true,
   shortHookshotMm: true,
   childWallets: true,
   colossalWallets: true,
