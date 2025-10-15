@@ -177,6 +177,13 @@ void ObjTree_Sway(ObjTree* this, PlayState* play) {
     this->timer++;
 }
 
+void ObjTree_DropCustom(ObjTree* this, PlayState* play) {
+    Player* player = GET_PLAYER(play);
+    if (!Xflag_IsShuffled(&this->xflag))
+        return;
+    EnItem00_DropCustom(play, &((Actor*)player)->world.pos, &this->xflag);
+}
+
 void ObjTree_UpdateCollision(ObjTree* this, PlayState* play) {
     Collider_UpdateCylinder(&this->dyna.actor, &this->collider);
     CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
@@ -185,6 +192,7 @@ void ObjTree_UpdateCollision(ObjTree* this, PlayState* play) {
         CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider.base);
         if (this->dyna.actor.home.rot.y == 1) {
             this->dyna.actor.home.rot.y = 0;
+            ObjTree_DropCustom(this, play);
             ObjTree_SetupSway(this);
         }
     }
