@@ -1241,6 +1241,16 @@ Goron Race Pot 27,                                      pot,            NONE,   
 Goron Race Pot 28,                                      pot,            NONE,                   GORON_RACETRACK,              0x001d,                     MAGIC_JAR_LARGE
 Goron Race Pot 29,                                      pot,            NONE,                   GORON_RACETRACK,              0x001e,                     MAGIC_JAR_LARGE
 Goron Race Pot 30,                                      pot,            NONE,                   GORON_RACETRACK,              0x001f,                     MAGIC_JAR_LARGE
+Goron Race Forked Tree 1,                               tree,           NONE,                   GORON_RACETRACK,              0x0003b,                    NOTHING
+Goron Race Forked Tree 2,                               tree,           NONE,                   GORON_RACETRACK,              0x0003c,                    NOTHING
+Goron Race Forked Tree 3,                               tree,           NONE,                   GORON_RACETRACK,              0x0003d,                    NOTHING
+Goron Race Forked Tree 4,                               tree,           NONE,                   GORON_RACETRACK,              0x0003e,                    NOTHING
+Goron Race Forked Tree 5,                               tree,           NONE,                   GORON_RACETRACK,              0x0003f,                    NOTHING
+Goron Race Forked Tree 6,                               tree,           NONE,                   GORON_RACETRACK,              0x00040,                    NOTHING
+Goron Race Forked Tree 7,                               tree,           NONE,                   GORON_RACETRACK,              0x00041,                    NOTHING
+Goron Race Forked Tree 8,                               tree,           NONE,                   GORON_RACETRACK,              0x00042,                    NOTHING
+Goron Race Forked Tree 9,                               tree,           NONE,                   GORON_RACETRACK,              0x00043,                    NOTHING
+Goron Race Forked Tree 10,                              tree,           NONE,                   GORON_RACETRACK,              0x00044,                    NOTHING
 Milk Road Owl Statue,                                   npc,            NONE,                   MILK_ROAD,                    OWL_MILK_ROAD,              OWL_MILK_ROAD
 Milk Road Grass 1,                                      grass,          NONE,                   MILK_ROAD,                    0x00011,                    RANDOM
 Milk Road Grass 2,                                      grass,          NONE,                   MILK_ROAD,                    0x00012,                    RANDOM
