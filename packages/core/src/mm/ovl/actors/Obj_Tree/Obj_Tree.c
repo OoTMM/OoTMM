@@ -83,10 +83,35 @@ static DamageTable sDamageTable = {
 
 static CollisionCheckInfoInit2 sColchkInfoInit = { 8, 0, 0, 0, MASS_HEAVY };
 
+static void ObjTree_Alias(Xflag* xf)
+{
+    switch (xf->sceneId)
+    {
+    case SCE_MM_GORON_RACETRACK:
+        xf->setupId = 0;
+        break;
+    case SCE_MM_CLOCK_TOWN_NORTH:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            switch (xf->id)
+            {
+            case 11: xf->id = 7; break;
+            case 12: xf->id = 21; break;
+            }
+        }
+        break;
+    }
+}
+
 void ObjTree_Init(Actor* thisx, PlayState* play) {
     s32 pad;
     ObjTree* this = (ObjTree*)thisx;
     CollisionHeader* colHeader = NULL;
+
+    if (comboXflagInit(&this->xflag, thisx, play)) {
+        ObjTree_Alias(&this->xflag);
+    }
 
     if (OBJTREE_ISLARGE(&this->dyna.actor)) {
         Actor_SetScale(&this->dyna.actor, 0.15f);
