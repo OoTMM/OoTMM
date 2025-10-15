@@ -46,7 +46,7 @@ static ColliderCylinderInit sCylinderInit = {
     { 28, 120, 0, { 0, 0, 0 } },
 };
 
-static DamageTable sDamageTable = {
+static DamageTable sDamageTable = {{
     /* Deku Nut       */ DMG_ENTRY(0, 0x0),
     /* Deku Stick     */ DMG_ENTRY(0, 0xF),
     /* Horse trample  */ DMG_ENTRY(0, 0x0),
@@ -79,7 +79,7 @@ static DamageTable sDamageTable = {
     /* Unblockable    */ DMG_ENTRY(0, 0x0),
     /* UNK_DMG_0x1E   */ DMG_ENTRY(0, 0x0),
     /* Powder Keg     */ DMG_ENTRY(0, 0x0),
-};
+}};
 
 static CollisionCheckInfoInit2 sColchkInfoInit = { 8, 0, 0, 0, MASS_HEAVY };
 
@@ -105,7 +105,6 @@ static void ObjTree_Alias(Xflag* xf)
 }
 
 void ObjTree_Init(Actor* thisx, PlayState* play) {
-    s32 pad;
     ObjTree* this = (ObjTree*)thisx;
     CollisionHeader* colHeader = NULL;
 
