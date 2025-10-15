@@ -43,7 +43,7 @@ void Player_HandleBronzeScale(Player* this, PlayState* play)
     if (this->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_FROZEN))
         return;
 
-    if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_WATER | PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2 | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_JUMPING) || (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) || !(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)))
+    if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_WATER | PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2 | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_JUMPING) || (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) || !(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)) && (this->actor.floorBgId == BGCHECK_SCENE))
     {
         BronzeScale_CopyPos(this, play);
         g.bronzeScaleSolidGround = 1;
