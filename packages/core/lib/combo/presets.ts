@@ -310,7 +310,15 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
   ]
 })
 
+const ALLSANITY_HELL: PartialDeep<Settings> = {
+  blueFireArrows: true,
+  iceArrowPlatformsOot: true,
+  sunlightArrows: true,
+};
+
+
 const PRESET_ALLSANITY = makeSettings({
+  ...ALLSANITY_HELL,
   goal: 'both',
   logic: 'beatable',
   extraHintRegions: true,
@@ -433,8 +441,6 @@ const PRESET_ALLSANITY = makeSettings({
   sticksNutsUpgradesMm: true,
   sunSongMm: true,
   fairyOcarinaMm: true,
-  blueFireArrows: true,
-  sunlightArrows: true,
   shortHookshotMm: true,
   childWallets: true,
   colossalWallets: true,
@@ -559,6 +565,7 @@ const PRESET_ALLSANITY = makeSettings({
 const allTricks = Object.keys(TRICKS).filter(k => !TRICKS[k].glitch);
 
 const PRESET_HELL = makeSettings({
+  ...ALLSANITY_HELL,
   goal: 'both',
   logic: 'beatable',
   itemPool: 'barren',
@@ -668,9 +675,6 @@ const PRESET_HELL = makeSettings({
   sticksNutsUpgradesMm: true,
   sunSongMm: true,
   fairyOcarinaMm: true,
-  blueFireArrows: true,
-  sunlightArrows: true,
-  iceArrowPlatformsOot: true,
   shortHookshotMm: true,
   childWallets: true,
   colossalWallets: true,
