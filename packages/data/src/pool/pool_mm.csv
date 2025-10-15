@@ -28,6 +28,8 @@ Clock Town Keaton Grass Reward 6,                       grass,          NONE,   
 Clock Town Keaton Grass Reward 7,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x60010,                    RUPEE_GREEN
 Clock Town Keaton Grass Reward 8,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x70010,                    RUPEE_GREEN
 Clock Town Keaton Grass Reward 9,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x80010,                    RUPEE_RED
+Clock Town North Forked Tree 1,                         tree,           NONE,                   CLOCK_TOWN_NORTH,             0x00007,                    NOTHING
+Clock Town North Forked Tree 2,                         tree,           NONE,                   CLOCK_TOWN_NORTH,             0x00015,                    NOTHING
 Clock Town Silver Rupee Chest,                          chest,          NONE,                   CLOCK_TOWN_EAST,              0x0a,                       RUPEE_SILVER
 Clock Town Postman Hat,                                 npc,            NONE,                   CLOCK_TOWN_EAST,              MASK_POSTMAN,               MASK_POSTMAN
 Clock Town East Small Crate 1,                          crate,          NONE,                   CLOCK_TOWN_EAST,              0x0000a,                    RUPEE_GREEN
@@ -571,6 +573,12 @@ Road to Southern Swamp Potted Plant 1 Pot,              pot,            NONE,   
 Road to Southern Swamp Potted Plant 1 Grass,            grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10028,                    RECOVERY_HEART
 Road to Southern Swamp Potted Plant 2 Pot,              pot,            NONE,                   ROAD_SOUTHERN_SWAMP,          0x00029,                    NOTHING
 Road to Southern Swamp Potted Plant 2 Grass,            grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10029,                    RECOVERY_HEART
+Road to Southern Swanp Forked Tree 1,                   tree,           NONE,                   ROAD_SOUTHERN_SWAMP,          0x0001a,                    NOTHING
+Road to Southern Swanp Forked Tree 2,                   tree,           NONE,                   ROAD_SOUTHERN_SWAMP,          0x0001b,                    NOTHING
+Road to Southern Swanp Forked Tree 3,                   tree,           NONE,                   ROAD_SOUTHERN_SWAMP,          0x0001c,                    NOTHING
+Road to Southern Swanp Forked Tree 4,                   tree,           NONE,                   ROAD_SOUTHERN_SWAMP,          0x0001d,                    NOTHING
+Road to Southern Swanp Forked Tree 5,                   tree,           NONE,                   ROAD_SOUTHERN_SWAMP,          0x0001e,                    NOTHING
+Road to Southern Swanp Forked Tree 6,                   tree,           NONE,                   ROAD_SOUTHERN_SWAMP,          0x0001f,                    NOTHING
 Southern Swamp HP,                                      collectible,    NONE,                   SOUTHERN_SWAMP,               0x1e,                       HEART_PIECE
 Southern Swamp Scrub Deed,                              npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SWAMP,                DEED_SWAMP
 Southern Swamp Scrub Shop,                              npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SHOP_BEANS,           MAGIC_BEAN
@@ -1235,6 +1243,16 @@ Goron Race Pot 27,                                      pot,            NONE,   
 Goron Race Pot 28,                                      pot,            NONE,                   GORON_RACETRACK,              0x001d,                     MAGIC_JAR_LARGE
 Goron Race Pot 29,                                      pot,            NONE,                   GORON_RACETRACK,              0x001e,                     MAGIC_JAR_LARGE
 Goron Race Pot 30,                                      pot,            NONE,                   GORON_RACETRACK,              0x001f,                     MAGIC_JAR_LARGE
+Goron Race Forked Tree 1,                               tree,           NONE,                   GORON_RACETRACK,              0x0003b,                    NOTHING
+Goron Race Forked Tree 2,                               tree,           NONE,                   GORON_RACETRACK,              0x0003c,                    NOTHING
+Goron Race Forked Tree 3,                               tree,           NONE,                   GORON_RACETRACK,              0x0003d,                    NOTHING
+Goron Race Forked Tree 4,                               tree,           NONE,                   GORON_RACETRACK,              0x0003e,                    NOTHING
+Goron Race Forked Tree 5,                               tree,           NONE,                   GORON_RACETRACK,              0x0003f,                    NOTHING
+Goron Race Forked Tree 6,                               tree,           NONE,                   GORON_RACETRACK,              0x00040,                    NOTHING
+Goron Race Forked Tree 7,                               tree,           NONE,                   GORON_RACETRACK,              0x00041,                    NOTHING
+Goron Race Forked Tree 8,                               tree,           NONE,                   GORON_RACETRACK,              0x00042,                    NOTHING
+Goron Race Forked Tree 9,                               tree,           NONE,                   GORON_RACETRACK,              0x00043,                    NOTHING
+Goron Race Forked Tree 10,                              tree,           NONE,                   GORON_RACETRACK,              0x00044,                    NOTHING
 Milk Road Owl Statue,                                   npc,            NONE,                   MILK_ROAD,                    OWL_MILK_ROAD,              OWL_MILK_ROAD
 Milk Road Grass 1,                                      grass,          NONE,                   MILK_ROAD,                    0x00011,                    RANDOM
 Milk Road Grass 2,                                      grass,          NONE,                   MILK_ROAD,                    0x00012,                    RANDOM

@@ -198,6 +198,7 @@ const ACTORS_MM = {
   EN_WOOD02: 0x041,
   OBJ_YASI: 0x23c,
   EN_SNOWWD: 0x1d4,
+  OBJ_TREE: 0x229,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -1216,6 +1217,10 @@ function actorHandlerMmEnSnowwd(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Snow Tree', type: 'tree' });
 }
 
+function actorHandlerMmObjTree(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Forked Tree', type: 'tree' });
+}
+
 function actorHandlerMmEnKusa(checks: Check[], ra: RoomActor) {
   const grassType = (ra.actor.params) & 3;
   let item: string;
@@ -1536,6 +1541,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.EN_WOOD02]: actorHandlerMmEnWood02,
   [ACTORS_MM.OBJ_YASI]: actorHandlerMmObjYasi,
   [ACTORS_MM.EN_SNOWWD]: actorHandlerMmEnSnowwd,
+  [ACTORS_MM.OBJ_TREE]: actorHandlerMmObjTree,
 };
 
 const ACTORS_HANDLERS = {
