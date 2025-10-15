@@ -28,6 +28,8 @@ Clock Town Keaton Grass Reward 6,                       grass,          NONE,   
 Clock Town Keaton Grass Reward 7,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x60010,                    RUPEE_GREEN
 Clock Town Keaton Grass Reward 8,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x70010,                    RUPEE_GREEN
 Clock Town Keaton Grass Reward 9,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x80010,                    RUPEE_RED
+Clock Town North Forked Tree 1,                         tree,           NONE,                   CLOCK_TOWN_NORTH,             0x00007,                    NOTHING
+Clock Town North Forked Tree 2,                         tree,           NONE,                   CLOCK_TOWN_NORTH,             0x00015,                    NOTHING
 Clock Town Silver Rupee Chest,                          chest,          NONE,                   CLOCK_TOWN_EAST,              0x0a,                       RUPEE_SILVER
 Clock Town Postman Hat,                                 npc,            NONE,                   CLOCK_TOWN_EAST,              MASK_POSTMAN,               MASK_POSTMAN
 Clock Town East Small Crate 1,                          crate,          NONE,                   CLOCK_TOWN_EAST,              0x0000a,                    RUPEE_GREEN
