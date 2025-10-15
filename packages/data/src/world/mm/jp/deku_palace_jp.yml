@@ -75,7 +75,7 @@
   exits:
     "Deku Palace Near Beans Grotto": "true"
     "Deku Palace Corner Ledge Bottom": "true"
-    "Deku Palace Corner Ledge Top": "can_hookshot_short"
+    "Deku Palace Corner Ledge Top": "can_hookshot_short || is_tall"
   locations:
     "Deku Palace Rupee Layout-Dependant 1": "true"
     "Deku Palace Rupee Layout-Dependant 2": "true"
@@ -83,7 +83,7 @@
   region: DEKU_PALACE
   exits:
     "Deku Palace Main": "true"
-    "Deku Palace Corner Ledge Middle": "can_hookshot_short"
+    "Deku Palace Corner Ledge Middle": "can_hookshot_short || is_tall"
 
 # US stubs
 "Deku Palace Near US Beans Grotto":
