@@ -868,7 +868,7 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_TUNIC_ZORA);
     }
 
-    if (settings.bronzeScale) {
+    if (settings.bronzeScale && settings.games !== 'mm') {
       this.addItem(Items.OOT_SCALE, 1);
     }
     if (settings.sharedScales) {
