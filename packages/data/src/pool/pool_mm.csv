@@ -1364,6 +1364,13 @@ Cucco Shack Potted Plant 1 Grass,                       grass,          NONE,   
 Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    NOTHING
 Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    RUPEE_BLUE
 Cucco Shack Tree,                                       tree,           NONE,                   CUCCO_SHACK,                  0x0000c,                    NOTHING
+Cucco Shack Bush 1,                                     bush,           NONE,                   CUCCO_SHACK,                  0x0000b,                    NOTHING
+Cucco Shack Bush 2,                                     bush,           NONE,                   CUCCO_SHACK,                  0x1000b,                    NOTHING
+Cucco Shack Bush 3,                                     bush,           NONE,                   CUCCO_SHACK,                  0x2000b,                    NOTHING
+Cucco Shack Bush 4,                                     bush,           NONE,                   CUCCO_SHACK,                  0x3000b,                    NOTHING
+Cucco Shack Bush 5,                                     bush,           NONE,                   CUCCO_SHACK,                  0x4000b,                    NOTHING
+Cucco Shack Bush 6,                                     bush,           NONE,                   CUCCO_SHACK,                  0x5000b,                    NOTHING
+Cucco Shack Bush 7,                                     bush,           NONE,                   CUCCO_SHACK,                  0x00013,                    NOTHING
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
