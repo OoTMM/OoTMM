@@ -1,0 +1,5 @@
+#include <combo.h>
+
+PATCH_OBJECT OBJECT_WOOD02, 0x0100
+.quad 0
+PATCH_END

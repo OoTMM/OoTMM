@@ -281,6 +281,10 @@
     "Trading Post Items": "(soul_fishing_pond_owner && (before(NIGHT1_PM_09_00) || between(DAY2_AM_06_00, NIGHT2_PM_09_00))) || (soul_rooftop_man && (between(NIGHT1_PM_09_00, DAY2_AM_06_00) || between(NIGHT2_PM_09_00, NIGHT3_PM_09_00)))"
   locations:
     "Trading Post Pot": "true"
+    "Trading Post Bush 1": "true"
+    "Trading Post Bush 2": "true"
+    "Trading Post Bush 3": "true"
+    "Trading Post Bush 4": "true"
 "Trading Post Items":
   region: ENTRANCE
   locations:

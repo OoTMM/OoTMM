@@ -69,8 +69,17 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(targetArrowOffset, 5600, ICHAIN_STOP),
 };
 
+static Gfx sNormalBushDlist[] = {
+    gsDPSetPrimColor(0, 0, 102, 152, 112, 255),
+    gsSPBranchList(object_wood02_DL_000090),
+};
+
+static Gfx sColoredBushDlist[] = {
+    gsSPBranchList(object_wood02_DL_000090),
+};
+
 static Gfx* D_80B3BF54[] = {
-    object_wood02_DL_0078D0, object_wood02_DL_007CA0, object_wood02_DL_0080D0, object_wood02_DL_000090,
+    object_wood02_DL_0078D0, object_wood02_DL_007CA0, object_wood02_DL_0080D0, sNormalBushDlist,
     object_wood02_DL_000340, object_wood02_DL_000340, object_wood02_DL_000700,
 };
 
@@ -92,6 +101,11 @@ static Gfx* D_80B3BF70[] = {
 static f32 sSpawnCos;
 
 static f32 sSpawnSin;
+
+static int EnWood02_IsTree(EnWood02* this)
+{
+    return !!(this->actor.params <= WOOD_TREE_KAKARIKO_ADULT);
+}
 
 s32 EnWood02_SpawnZoneCheck(EnWood02* this, PlayState* play, Vec3f* pos) {
     f32 phi_f12;
@@ -159,7 +173,33 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
     }
 }
 
-static void EnWood02_Alias(Xflag* xf)
+static void EnWood02_AliasBush(Xflag* xf)
+{
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_HYRULE_FIELD:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 1;
+            switch (xf->id)
+            {
+            case 54: xf->id = 38; break;
+            case 55: xf->id = 39; break;
+            case 56: xf->id = 40; break;
+            case 57: xf->id = 45; break;
+            case 58: xf->id = 46; break;
+            case 59: xf->id = 43; break;
+            default: Xflag_Clear(xf); break;
+            }
+        }
+        break;
+    case SCE_OOT_ZORA_FOUNTAIN:
+        xf->setupId = 0;
+        break;
+    }
+}
+
+static void EnWood02_AliasTree(Xflag* xf)
 {
     switch (xf->sceneId)
     {
@@ -170,6 +210,7 @@ static void EnWood02_Alias(Xflag* xf)
     case SCE_OOT_HYRULE_FIELD:
         if (xf->setupId == 2 && xf->id != 66)
         {
+            xf->setupId = 1;
             switch (xf->id)
             {
             case 38: xf->id = 33; break;
@@ -187,8 +228,8 @@ static void EnWood02_Alias(Xflag* xf)
             case 63: xf->id = 64; break;
             case 64: xf->id = 65; break;
             case 65: xf->id = 61; break;
+            default: Xflag_Clear(xf); break;
             }
-            xf->setupId = 1;
         }
         break;
     }
@@ -205,7 +246,12 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
     s16 extraRot;
 
     if (comboXflagInit(&this->xflag, thisx, play))
-        EnWood02_Alias(&this->xflag);
+    {
+        if (EnWood02_IsTree(this))
+            EnWood02_AliasTree(&this->xflag);
+        else
+            EnWood02_AliasBush(&this->xflag);
+    }
 
     spawnType = WOOD_SPAWN_NORMAL;
     actorScale = 1.0f;
@@ -299,7 +345,12 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
 
     /* Override tree type */
     if (Xflag_IsValid(&this->xflag))
-        this->drawType = WOOD_DRAW_TREE_OVAL;
+    {
+        if (EnWood02_IsTree(this))
+            this->drawType = WOOD_DRAW_TREE_OVAL;
+        else
+            this->drawType = WOOD_DRAW_BUSH_GREEN;
+    }
 
     Actor_SetScale(&this->actor, actorScale);
     this->spawnType = spawnType;
@@ -483,6 +534,7 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     EnWood02* this = (EnWood02*)thisx;
     s16 type;
     GraphicsContext* gfxCtx = play->state.gfxCtx;
+    int csmc;
     u8 red;
     u8 green;
     u8 blue;
@@ -504,9 +556,10 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         red = green = blue = 255;
     }
 
+    csmc = -1;
     if (Xflag_IsValid(&this->xflag))
     {
-        int csmc = EnWood02_CAMC(this, play);
+        csmc = EnWood02_CAMC(this, play);
         if (csmc == CSMC_NORMAL)
         {
             red = 50;
@@ -536,7 +589,12 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     } else {
         Gfx_SetupDL_25Xlu(gfxCtx);
         MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, gfxCtx);
-        gSPDisplayList(POLY_XLU_DISP++, D_80B3BF54[this->drawType & 0xF]);
+        if ((this->drawType & 0xf) == WOOD_DRAW_BUSH_GREEN && csmc != -1 && csmc != CSMC_NORMAL) {
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, red, green, blue, 255);
+            gSPDisplayList(POLY_XLU_DISP++, sColoredBushDlist);
+        } else {
+            gSPDisplayList(POLY_XLU_DISP++, D_80B3BF54[this->drawType & 0xF]);
+        }
     }
 
     CLOSE_DISPS();

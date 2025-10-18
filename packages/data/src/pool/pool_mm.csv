@@ -104,6 +104,10 @@ Trading Post Item 6,                                    shop,           NONE,   
 Trading Post Item 7,                                    shop,           NONE,                   TRADING_POST,                 0x0b,                       NUTS_10
 Trading Post Item 8,                                    shop,           NONE,                   TRADING_POST,                 0x0c,                       ARROWS_30
 Trading Post Pot,                                       pot,            NONE,                   TRADING_POST,                 0x0008,                     RECOVERY_HEART
+Trading Post Bush 1,                                    bush,           NONE,                   TRADING_POST,                 0x00002,                    NOTHING
+Trading Post Bush 2,                                    bush,           NONE,                   TRADING_POST,                 0x00003,                    NOTHING
+Trading Post Bush 3,                                    bush,           NONE,                   TRADING_POST,                 0x00004,                    NOTHING
+Trading Post Bush 4,                                    bush,           NONE,                   TRADING_POST,                 0x00005,                    NOTHING
 Bomb Shop Item 1,                                       shop,           NONE,                   BOMB_SHOP,                    0x00,                       BOMBS_10
 Bomb Shop Item 2,                                       shop,           NONE,                   BOMB_SHOP,                    0x01,                       BOMBCHU_10
 Bomb Shop Bomb Bag,                                     shop,           NONE,                   BOMB_SHOP,                    0x02,                       BOMB_BAG
@@ -1332,13 +1336,17 @@ Romani Ranch Grass Pack 5 Grass 06,                     grass,          NONE,   
 Romani Ranch Grass Pack 5 Grass 07,                     grass,          NONE,                   ROMANI_RANCH,                 0x60020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 08,                     grass,          NONE,                   ROMANI_RANCH,                 0x70020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 09,                     grass,          NONE,                   ROMANI_RANCH,                 0x80020,                    RANDOM
-Romani Ranch Tree 1,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00014,                    NOTHING
-Romani Ranch Tree 2,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00015,                    NOTHING
-Romani Ranch Tree 3,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00016,                    NOTHING
-Romani Ranch Tree 4,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00017,                    NOTHING
-Romani Ranch Tree 5,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00018,                    NOTHING
-Romani Ranch Tree 6,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00019,                    NOTHING
-Romani Ranch Tree 7,                                    tree,           NONE,                 ROMANI_RANCH,                   0x0001a,                    NOTHING
+Romani Ranch Tree 1,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00014,                    NOTHING
+Romani Ranch Tree 2,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00015,                    NOTHING
+Romani Ranch Tree 3,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00016,                    NOTHING
+Romani Ranch Tree 4,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00017,                    NOTHING
+Romani Ranch Tree 5,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00018,                    NOTHING
+Romani Ranch Tree 6,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00019,                    NOTHING
+Romani Ranch Tree 7,                                    tree,           NONE,                   ROMANI_RANCH,                 0x0001a,                    NOTHING
+Romani Ranch Bush 1,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00010,                    NOTHING
+Romani Ranch Bush 2,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00011,                    NOTHING
+Romani Ranch Bush 3,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00012,                    NOTHING
+Romani Ranch Bush 4,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00013,                    NOTHING
 Romani Ranch Wonder Item Fence 1,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002a,                    RUPEE_BLUE
 Romani Ranch Wonder Item Fence 2,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002b,                    RUPEE_BLUE
 Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002c,                    RUPEE_GREEN
@@ -1360,6 +1368,13 @@ Cucco Shack Potted Plant 1 Grass,                       grass,          NONE,   
 Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    NOTHING
 Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    RUPEE_BLUE
 Cucco Shack Tree,                                       tree,           NONE,                   CUCCO_SHACK,                  0x0000c,                    NOTHING
+Cucco Shack Bush 1,                                     bush,           NONE,                   CUCCO_SHACK,                  0x0000b,                    NOTHING
+Cucco Shack Bush 2,                                     bush,           NONE,                   CUCCO_SHACK,                  0x1000b,                    NOTHING
+Cucco Shack Bush 3,                                     bush,           NONE,                   CUCCO_SHACK,                  0x2000b,                    NOTHING
+Cucco Shack Bush 4,                                     bush,           NONE,                   CUCCO_SHACK,                  0x3000b,                    NOTHING
+Cucco Shack Bush 5,                                     bush,           NONE,                   CUCCO_SHACK,                  0x4000b,                    NOTHING
+Cucco Shack Bush 6,                                     bush,           NONE,                   CUCCO_SHACK,                  0x5000b,                    NOTHING
+Cucco Shack Bush 7,                                     bush,           NONE,                   CUCCO_SHACK,                  0x00013,                    NOTHING
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
@@ -2421,6 +2436,8 @@ Beneath The Well Grass Cow 1,                           grass,          NONE,   
 Beneath The Well Grass Cow 2,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00907,                    RANDOM
 Beneath The Well Grass Cow 3,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00908,                    RANDOM
 Beneath The Well Tree,                                  tree,           NONE,                   BENEATH_THE_WELL,             0x00903,                    NOTHING
+Beneath The Well Bush 1,                                bush,           NONE,                   BENEATH_THE_WELL,             0x00901,                    NOTHING
+Beneath The Well Bush 2,                                bush,           NONE,                   BENEATH_THE_WELL,             0x00902,                    NOTHING
 Beneath The Well Fairy Fountain Fairy 1,                fairy,          NONE,                   BENEATH_THE_WELL,             0x00b04,                    FAIRY
 Beneath The Well Fairy Fountain Fairy 2,                fairy,          NONE,                   BENEATH_THE_WELL,             0x10b04,                    FAIRY
 Beneath The Well Fairy Fountain Fairy 3,                fairy,          NONE,                   BENEATH_THE_WELL,             0x20b04,                    FAIRY

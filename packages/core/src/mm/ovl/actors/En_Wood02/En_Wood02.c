@@ -72,8 +72,17 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(targetArrowOffset, 5600, ICHAIN_STOP),
 };
 
+static Gfx sNormalBushDlist[] = {
+    gsDPSetPrimColor(0, 0, 102, 152, 112, 255),
+    gsSPBranchList(object_wood02_DL_000090),
+};
+
+static Gfx sColoredBushDlist[] = {
+    gsSPBranchList(object_wood02_DL_000090),
+};
+
 Gfx* D_808C4D54[] = {
-    object_wood02_DL_0078D0, object_wood02_DL_007CA0, object_wood02_DL_008160, object_wood02_DL_000090,
+    object_wood02_DL_0078D0, object_wood02_DL_007CA0, object_wood02_DL_008160, sNormalBushDlist,
     object_wood02_DL_000340, object_wood02_DL_000340, object_wood02_DL_000700,
 };
 
@@ -91,6 +100,11 @@ Gfx* D_808C4D70[] = {
     object_wood02_DL_000440,
     object_wood02_DL_000700,
 };
+
+static int EnWood02_IsTree(EnWood02* this)
+{
+    return !!((this->actor.params <= WOOD_TREE_KAKARIKO_ADULT) || (this->actor.params == WOOD_TREE_SPECIAL));
+}
 
 s32 EnWood02_SpawnZoneCheck(EnWood02* this, PlayState* play, Vec3f* arg2) {
     f32 phi_f12;
@@ -144,10 +158,14 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
                     unk = this->actor.home.rot.z;
                 }
 
+                memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+                g.xflag.sliceId = i + 1;
+                g.xflagOverride = TRUE;
                 childParams = ((this->unk_144 << 8) & 0xFF00) | (this->actor.params + 1);
                 child = (EnWood02*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_WOOD02, childPos.x,
                                                       childPos.y, childPos.z, this->actor.world.rot.x,
                                                       sWood02SpawnAngle[i], unk, childParams);
+                g.xflagOverride = FALSE;
                 if (child != NULL) {
                     child->unk_14A[0] = i;
                     this->unk_14A[i] |= 1;
@@ -160,10 +178,6 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
     }
 }
 
-static void EnWood02_Alias(Xflag* xf)
-{
-}
-
 void EnWood02_Init(Actor* thisx, PlayState* play) {
     s16 spawnType = 0;
     f32 actorScale = 1.0f;
@@ -173,8 +187,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
     f32 floorY;
     s16 extraRot;
 
-    if (comboXflagInit(&this->xflag, thisx, play))
-        EnWood02_Alias(&this->xflag);
+    comboXflagInit(&this->xflag, thisx, play);
 
     this->actor.world.rot.z = 0;
     this->unk_144 = ENWOOD02_GET_FF00(&this->actor);
@@ -290,7 +303,12 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
 
     /* Override tree type */
     if (Xflag_IsValid(&this->xflag))
-        this->drawType = WOOD_DRAW_TREE_OVAL;
+    {
+        if (EnWood02_IsTree(this))
+            this->drawType = WOOD_DRAW_TREE_OVAL;
+        else
+            this->drawType = WOOD_DRAW_BUSH_GREEN;
+    }
 
     Actor_SetScale(&this->actor, actorScale);
     this->spawnType = spawnType;
@@ -501,6 +519,7 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     u8 red;
     u8 green;
     u8 blue;
+    int csmc;
 
     OPEN_DISPS(gfxCtx);
 
@@ -518,9 +537,10 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         red = green = blue = 255;
     }
 
+    csmc = -1;
     if (Xflag_IsValid(&this->xflag))
     {
-        int csmc = EnWood02_CAMC(this, play);
+        csmc = EnWood02_CAMC(this, play);
         if (csmc == CSMC_NORMAL)
         {
             red = 50;
@@ -553,9 +573,13 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         gSPDisplayList(POLY_XLU_DISP++, D_808C4D70[this->drawType & 0xF]);
     } else {
         Gfx_SetupDL25_Xlu(gfxCtx);
-
         MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, gfxCtx);
-        gSPDisplayList(POLY_XLU_DISP++, D_808C4D54[this->drawType & 0xF]);
+        if ((this->drawType & 0xf) == WOOD_DRAW_BUSH_GREEN && csmc != -1 && csmc != CSMC_NORMAL) {
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, red, green, blue, 255);
+            gSPDisplayList(POLY_XLU_DISP++, sColoredBushDlist);
+        } else {
+            gSPDisplayList(POLY_XLU_DISP++, D_808C4D54[this->drawType & 0xF]);
+        }
     }
 
     CLOSE_DISPS();

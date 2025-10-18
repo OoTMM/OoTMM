@@ -219,6 +219,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.EN_HIT_TAG]: 3,
   [ACTORS_MM.OBJ_FLOWERPOT]: 2,
   [ACTORS_MM.OBJ_MURE]: 5,
+  [ACTORS_MM.EN_WOOD02]: 6,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -1113,100 +1114,76 @@ function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Grass', type: 'grass' });
 }
 
-function actorHandlerOotEnWood02(checks: Check[], ra: RoomActor) {
+function handleWood02(checks: Check[], ra: RoomActor, game: Game) {
   const { actor } = ra;
+  let checkType: 'bush' | 'tree';
   const type = (actor.params) & 0xff;
-  if (type >= 0x0b) return;
-  if (ra.actor.rz & 0xff) return;
+  if (type > 0x16) return;
+  if (type <= 0x0a)
+    checkType = 'tree';
+  else
+    checkType = 'bush';
+
+  if (game === 'oot' && (ra.actor.rz & 0xff)) return;
   let count = 1;
-  if (type === 3 || type === 6 || type === 8)
+  if (type === 3 || type === 6 || type === 8 || type === 0x0d || type === 0x0f || type === 0x13 || type === 0x15)
     count = 6;
   let item: string;
-  switch ((ra.actor.params >>> 8) & 0xff) {
-  case 0x00:
-  case 0x01:
-  case 0x02:
-  case 0x03:
-  case 0x04:
-  case 0x05:
-  case 0x06:
-  case 0x07:
-  case 0x0d:
-  case 0x0e:
-    item = 'RANDOM';
-    break;
-  case 0x08:
-    item = 'DEKU_SEEDS_5/ARROWS_5';
-    break;
-  case 0x09:
-    item = 'MAGIC_JAR_SMALL';
-    break;
-  case 0x0a:
-    item = 'BOMBS_5';
-    break;
-  case 0x0b:
-    item = 'RUPEE_GREEN';
-    break;
-  case 0x0c:
-    item = 'RUPEE_BLUE';
-    break;
-  default:
+
+  if (checkType === 'tree') {
+    switch ((ra.actor.params >>> 8) & 0xff) {
+    case 0x00:
+    case 0x01:
+    case 0x02:
+    case 0x03:
+    case 0x04:
+    case 0x05:
+    case 0x06:
+    case 0x07:
+    case 0x0d:
+    case 0x0e:
+      item = 'RANDOM';
+      break;
+    case 0x08:
+      item = 'DEKU_SEEDS_5/ARROWS_5';
+      break;
+    case 0x09:
+      item = 'MAGIC_JAR_SMALL';
+      break;
+    case 0x0a:
+      item = 'BOMBS_5';
+      break;
+    case 0x0b:
+      item = 'RUPEE_GREEN';
+      break;
+    case 0x0c:
+      item = 'RUPEE_BLUE';
+      break;
+    default:
+      item = 'NOTHING';
+      break;
+    }
+  } else {
     item = 'NOTHING';
-    break;
   }
 
-  for (let i = 0; i < count; ++i)
-    checks.push({ roomActor: ra, item, name: 'Tree', type: 'tree', sliceId: i, name2: `Tree ${i + 1}` });
+  let name = checkType === 'tree' ? 'Tree' : 'Bush';
+  let nameCluster = checkType === 'tree' ? 'Tree Cluster' : 'Bush Cluster';
+
+  if (count > 1) {
+    for (let i = 0; i < count; ++i)
+      checks.push({ roomActor: ra, item, name: nameCluster, type: checkType, sliceId: i, name2: `${name} ${i + 1}` });
+  } else {
+    checks.push({ roomActor: ra, item, name, type: checkType });
+  }
+}
+
+function actorHandlerOotEnWood02(checks: Check[], ra: RoomActor) {
+  handleWood02(checks, ra, 'oot');
 }
 
 function actorHandlerMmEnWood02(checks: Check[], ra: RoomActor) {
-  const { actor } = ra;
-  const type = (actor.params) & 0xff;
-  if (type >= 0x0b) return;
-  let count = 1;
-  if (type === 3 || type === 6 || type === 8)
-    count = 6;
-  let item: string;
-  switch ((ra.actor.params >>> 8) & 0xff) {
-  case 0x00:
-  case 0x01:
-  case 0x02:
-  case 0x03:
-  case 0x04:
-  case 0x05:
-  case 0x06:
-  case 0x07:
-  case 0x0d:
-  case 0x0e:
-    item = 'RANDOM';
-    break;
-  case 0x08:
-    item = 'DEKU_SEEDS_5/ARROWS_5';
-    break;
-  case 0x09:
-    item = 'MAGIC_JAR_SMALL';
-    break;
-  case 0x0a:
-    item = 'BOMBS_5';
-    break;
-  case 0x0b:
-    item = 'RUPEE_GREEN';
-    break;
-  case 0x0c:
-    item = 'RUPEE_BLUE';
-    break;
-  default:
-    item = 'NOTHING';
-    break;
-  }
-
-  if (count > 1) {
-    for (let i = 0; i < count; ++i) {
-      checks.push({ roomActor: ra, item, name: 'Tree Cluster', type: 'tree', sliceId: i, name2: `Tree ${i + 1}` });
-    }
-  } else {
-    checks.push({ roomActor: ra, item, name: 'Tree', type: 'tree' });
-  }
+  handleWood02(checks, ra, 'mm');
 }
 
 function actorHandlerMmObjYasi(checks: Check[], ra: RoomActor) {
