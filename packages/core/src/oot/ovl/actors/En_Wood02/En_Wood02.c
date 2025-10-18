@@ -93,6 +93,11 @@ static f32 sSpawnCos;
 
 static f32 sSpawnSin;
 
+static int EnWood02_IsTree(EnWood02* this)
+{
+    return !!(this->actor.params <= WOOD_TREE_KAKARIKO_ADULT);
+}
+
 s32 EnWood02_SpawnZoneCheck(EnWood02* this, PlayState* play, Vec3f* pos) {
     f32 phi_f12;
 
@@ -159,7 +164,17 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
     }
 }
 
-static void EnWood02_Alias(Xflag* xf)
+static void EnWood02_AliasBush(Xflag* xf)
+{
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_ZORA_FOUNTAIN:
+        xf->setupId = 0;
+        break;
+    }
+}
+
+static void EnWood02_AliasTree(Xflag* xf)
 {
     switch (xf->sceneId)
     {
@@ -205,7 +220,12 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
     s16 extraRot;
 
     if (comboXflagInit(&this->xflag, thisx, play))
-        EnWood02_Alias(&this->xflag);
+    {
+        if (EnWood02_IsTree(this))
+            EnWood02_AliasTree(&this->xflag);
+        else
+            EnWood02_AliasBush(&this->xflag);
+    }
 
     spawnType = WOOD_SPAWN_NORMAL;
     actorScale = 1.0f;
@@ -299,7 +319,12 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
 
     /* Override tree type */
     if (Xflag_IsValid(&this->xflag))
-        this->drawType = WOOD_DRAW_TREE_OVAL;
+    {
+        if (EnWood02_IsTree(this))
+            this->drawType = WOOD_DRAW_TREE_OVAL;
+        else
+            this->drawType = WOOD_DRAW_BUSH_GREEN;
+    }
 
     Actor_SetScale(&this->actor, actorScale);
     this->spawnType = spawnType;

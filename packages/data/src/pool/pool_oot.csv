@@ -690,6 +690,12 @@ Zora Fountain Rupee 17,                                     rupee,          NONE
 Zora Fountain Rupee 18,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08011,                    RUPEE_GREEN
 Zora Fountain Butterfly 1,                                  butterfly,      NONE,                 ZORA_FOUNTAIN,                  0x0000e,                    FAIRY
 Zora Fountain Butterfly 2,                                  butterfly,      NONE,                 ZORA_FOUNTAIN,                  0x1000e,                    NOTHING
+Zora Fountain Bush 1,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00006,                    NOTHING
+Zora Fountain Bush 2,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00007,                    NOTHING
+Zora Fountain Bush 3,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00008,                    NOTHING
+Zora Fountain Bush 4,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00009,                    NOTHING
+Zora Fountain Bush 5,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000a,                    NOTHING
+Zora Fountain Bush 6,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000b,                    NOTHING
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
