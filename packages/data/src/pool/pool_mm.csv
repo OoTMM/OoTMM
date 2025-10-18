@@ -1332,13 +1332,17 @@ Romani Ranch Grass Pack 5 Grass 06,                     grass,          NONE,   
 Romani Ranch Grass Pack 5 Grass 07,                     grass,          NONE,                   ROMANI_RANCH,                 0x60020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 08,                     grass,          NONE,                   ROMANI_RANCH,                 0x70020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 09,                     grass,          NONE,                   ROMANI_RANCH,                 0x80020,                    RANDOM
-Romani Ranch Tree 1,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00014,                    NOTHING
-Romani Ranch Tree 2,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00015,                    NOTHING
-Romani Ranch Tree 3,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00016,                    NOTHING
-Romani Ranch Tree 4,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00017,                    NOTHING
-Romani Ranch Tree 5,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00018,                    NOTHING
-Romani Ranch Tree 6,                                    tree,           NONE,                 ROMANI_RANCH,                   0x00019,                    NOTHING
-Romani Ranch Tree 7,                                    tree,           NONE,                 ROMANI_RANCH,                   0x0001a,                    NOTHING
+Romani Ranch Tree 1,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00014,                    NOTHING
+Romani Ranch Tree 2,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00015,                    NOTHING
+Romani Ranch Tree 3,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00016,                    NOTHING
+Romani Ranch Tree 4,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00017,                    NOTHING
+Romani Ranch Tree 5,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00018,                    NOTHING
+Romani Ranch Tree 6,                                    tree,           NONE,                   ROMANI_RANCH,                 0x00019,                    NOTHING
+Romani Ranch Tree 7,                                    tree,           NONE,                   ROMANI_RANCH,                 0x0001a,                    NOTHING
+Romani Ranch Bush 1,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00010,                    NOTHING
+Romani Ranch Bush 2,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00011,                    NOTHING
+Romani Ranch Bush 3,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00012,                    NOTHING
+Romani Ranch Bush 4,                                    bush,           NONE,                   ROMANI_RANCH,                 0x00013,                    NOTHING
 Romani Ranch Wonder Item Fence 1,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002a,                    RUPEE_BLUE
 Romani Ranch Wonder Item Fence 2,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002b,                    RUPEE_BLUE
 Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002c,                    RUPEE_GREEN
