@@ -104,6 +104,10 @@ Trading Post Item 6,                                    shop,           NONE,   
 Trading Post Item 7,                                    shop,           NONE,                   TRADING_POST,                 0x0b,                       NUTS_10
 Trading Post Item 8,                                    shop,           NONE,                   TRADING_POST,                 0x0c,                       ARROWS_30
 Trading Post Pot,                                       pot,            NONE,                   TRADING_POST,                 0x0008,                     RECOVERY_HEART
+Trading Post Bush 1,                                    bush,           NONE,                   TRADING_POST,                 0x00002,                    NOTHING
+Trading Post Bush 2,                                    bush,           NONE,                   TRADING_POST,                 0x00003,                    NOTHING
+Trading Post Bush 3,                                    bush,           NONE,                   TRADING_POST,                 0x00004,                    NOTHING
+Trading Post Bush 4,                                    bush,           NONE,                   TRADING_POST,                 0x00005,                    NOTHING
 Bomb Shop Item 1,                                       shop,           NONE,                   BOMB_SHOP,                    0x00,                       BOMBS_10
 Bomb Shop Item 2,                                       shop,           NONE,                   BOMB_SHOP,                    0x01,                       BOMBCHU_10
 Bomb Shop Bomb Bag,                                     shop,           NONE,                   BOMB_SHOP,                    0x02,                       BOMB_BAG
