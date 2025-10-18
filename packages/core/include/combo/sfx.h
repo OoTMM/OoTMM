@@ -30,6 +30,7 @@ void Audio_PlaySfx_SwordCharge(Vec3f* pos, u8 chargeLevel);
 
 #if defined(GAME_OOT)
 void Sfx_PlaySfxCentered(u16 sfxId);
+# define Sfx_PlaySfxCentered2 Sfx_PlaySfxCentered
 #endif
 
 #endif

@@ -67,6 +67,9 @@ void            DynaPoly_UpdateBgActorTransforms(PlayState* play, DynaCollisionC
 void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
 void    Interface_UpdateButtonsPart2(PlayState* play);
 
+u32 SurfaceType_GetConveyorSpeed(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+u32 SurfaceType_GetConveyorDirection(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
 void    Actor_Noop(Actor* actor, PlayState* play);
@@ -116,7 +119,6 @@ u32     Flags_GetSwitch(PlayState* play, int flag);
 u32     Flags_SetSwitch(PlayState* play, int flag);
 void    ClearSwitchFlag(PlayState* play, int flag);
 void    SetRoomClear(PlayState* play, int flag);
-u32     GetRoomClearFlag(PlayState* play, int flag);
 s32     Flags_GetClear(PlayState* play, s32 roomNumber);
 
 

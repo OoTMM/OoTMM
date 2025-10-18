@@ -613,4 +613,6 @@ extern Gfx D_801AEFA0[];
 extern Gfx D_801AEF88[];
 #endif
 
+void Actor_WorldToActorCoords(Actor* actor, Vec3f* dest, Vec3f* pos);
+
 #endif

@@ -38,8 +38,9 @@ Audio_GetActiveSeqId = 0x800cab18;
 
 Actor_ProcessInitChain = 0x80063f7c;
 Actor_Angle = 0x800213b4;
-
-GetRoomClearFlag = 0x80020640;
+Flags_GetClear = 0x80020640;
+func_800F4E30 = 0x800c5b70;
+Audio_PlaySariaBgm = 0x800c5fe0;
 
 AudioLoad_InitTable = 0x800b70c8;
 Audio_SetFileSelectSettings = 0x800c7420;
@@ -230,6 +231,16 @@ Flags_GetCollectible = 0x800206e8;
 Flags_GetSwitch = 0x8002049c;
 Flags_SetSwitch = 0x800204d0;
 ClearSwitchFlag = 0x80020510;
+
+Audio_ClearSariaBgmAtPos = 0x800c5e2c;
+Audio_PlaySfxRiver = 0x800c5374;
+Audio_SetGanonsTowerBgmVolumeLevel = 0x800c55b0;
+SurfaceType_GetConveyorSpeed = 0x80034778;
+Audio_ClearSariaBgm2 = 0x800c6258;
+Audio_LowerMainBgmVolume = 0x800c5794;
+Audio_PlayNatureAmbienceSequence = 0x800c7c90;
+Math_Vec3f_DistXYZ = 0x80063e18;
+Actor_WorldToActorCoords = 0x8002154c;
 
 DisplaceTexture = 0x8007eb84;
 ConvertMatrix = 0x800ab6bc;
