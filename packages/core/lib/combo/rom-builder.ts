@@ -3,45 +3,102 @@ import { CONFIG, Game } from './config';
 import { DmaData, DmaDataRecord } from './dma';
 import { bufReadU32BE, bufWriteU32BE } from './util/buffer';
 
-const rol = (v: number, b: number) => (((v << b) | (v >>> (32 - b))) & 0xffffffff) >>> 0;
-
-function checksum(rom: Uint8Array) {
-  const seed = 0xdf26f436;
-  let t1 = seed;
-  let t2 = seed;
-  let t3 = seed;
-  let t4 = seed;
-  let t5 = seed;
-  let t6 = seed;
-
-  for (let i = 0; i < 0x100000 / 4; ++i) {
-    const offset = 0x1000 + i * 4;
-    const d = bufReadU32BE(rom, offset);
-    if ((((t6 + d) & 0xffffffff) >>> 0) < t6) {
-      t4 = ((t4 + 1) & 0xffffffff) >>> 0;
-    }
-    t6 = ((t6 + d) & 0xffffffff) >>> 0;
-    t3 = ((t3 ^ d) & 0xffffffff) >>> 0;
-    const r = rol(d, ((d & 0x1f) >>> 0));
-    t5 = ((t5 + r) & 0xffffffff) >>> 0;
-    if (t2 > d) {
-      t2 = (t2 ^ r) >>> 0;
-    } else {
-      t2 = (t2 ^ t6 ^ d) >>> 0;
-    }
-    const offset2 = 0x750 + ((i * 4) & 0xff);
-    const x = bufReadU32BE(rom, offset2);
-    t1 = ((t1 + ((x ^ d) >>> 0)) & 0xffffffff) >>> 0;
-  }
-
-  return [(t6 ^ t4 ^ t3) >>> 0, (t5 ^ t2 ^ t1) >>> 0];
+function u32(v: number) {
+  return v >>> 0;
 }
 
-type RomFileRange = [number, number];
+function checksum(rom: Uint8Array): [number, number] {
+  const INI_PC = 0x80000400;
+  const seed_ipl3 = 0x91;
+  let s6: number;
+  let a0: number;
+  let a1: number;
+  let at: number;
+  let lo: number;
+  let ra: number;
+  let t0: number;
+  let t1: number;
+  let v0: number;
+  let a3: number;
+  let t2: number;
+  let t3: number;
+  let s0: number;
+  let a2: number;
+  let t4: number;
+  let t5: number;
+  let v1: number;
+  let t6: number;
+  let t7: number;
+  let t8: number;
+  let t9: number;
 
-type RomFileVram = {
-  oot?: RomFileRange;
-  mm?: RomFileRange;
+  s6 = seed_ipl3;
+  a0 = INI_PC;
+
+  a1 = s6;
+  at = 0x5D588B65;
+  lo = u32(a1 * at);
+
+  s6 = 0xA0000200;
+  ra = 0x100000;
+
+  t0 = 0;
+  t1 = a0;
+  v0 = lo;
+  v0 += 1;
+  a3 = v0;
+  t2 = v0;
+  t3 = v0;
+  s0 = v0;
+  a2 = v0;
+  t4 = v0;
+  t5 = 0x20;
+
+  do {
+    v0 = bufReadU32BE(rom, (t1 - INI_PC + 0x1000));
+    v1 = u32(a3 + v0);
+    at = v1 < a3 ? 1 : 0;
+
+    a1 = v1;
+    if (at !== 0) {
+      t2 = u32(t2 + 1);
+    }
+
+    v1 = v0 & 0x1f;
+    t7 = u32(t5 - v1);
+    t8 = v0 >>> t7;
+    t6 = u32(v0 << v1);
+    a0 = u32(t6 | t8);
+    at = a2 < v0 ? 1 : 0;
+    a3 = a1;
+    t3 = u32(t3 ^ v0);
+
+    s0 = u32(s0 + a0);
+    if (at === 0) {
+      a2 = u32(a2 ^ a0);
+    } else {
+      t9 = u32(a3 ^ v0);
+      a2 = u32(a2 ^ t9);
+    }
+
+    t7 = bufReadU32BE(rom, (s6 - 0xA0000004 + 0x000514 + 0x40));
+    t0 = u32(t0 + 4);
+    s6 = u32(s6 + 4);
+    t7 = u32(t7 ^ v0);
+    t4 = u32(t4 + t7);
+    t7 = 0xA00002FF;
+    t1 = u32(t1 + 4);
+
+    s6 = u32(s6 & t7);
+  } while (t0 != ra);
+
+  t6 = u32(a3 ^ t2);
+  a3 = u32(t6 ^ t3);
+
+  t8 = u32(s0 ^ a2);
+  s0 = u32(t8 ^ t4);
+
+  return [a3, s0];
 }
 
 export type RomFile = {
