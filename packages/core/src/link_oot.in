@@ -41,6 +41,8 @@ Actor_Angle = 0x800213b4;
 Flags_GetClear = 0x80020640;
 func_800F4E30 = 0x800c5b70;
 Audio_PlaySariaBgm = 0x800c5fe0;
+Audio_UpdateMalonSinging = 0x800c6f9c;
+Audio_ToggleMalonSinging = 0x800c72a4;
 
 AudioLoad_InitTable = 0x800b70c8;
 Audio_SetFileSelectSettings = 0x800c7420;

@@ -51,6 +51,8 @@ void Audio_ClearSariaBgmAtPos(Vec3f* pos);
 void Audio_PlaySariaBgm(Vec3f* pos, u16 seqId, u16 distMax);
 void Audio_PlaySfxRiver(Vec3f* pos, f32 freqScale);
 void Audio_LowerMainBgmVolume(u8 volume);
+void Audio_UpdateMalonSinging(f32 dist, u16 seqId);
+void Audio_ToggleMalonSinging(u8 malonSingingDisabled);
 extern u8* gFrogsSongPtr;
 #endif
 

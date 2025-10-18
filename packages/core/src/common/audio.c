@@ -32,6 +32,8 @@
 # define CUSTOM_BANK_TABLE_FOREIGN_VROM     CUSTOM_BANK_TABLE_OOT_VROM
 #endif
 
+static u8 sMusicCustom;
+EXPORT_SYMBOL(MUSIC_CUSTOM, sMusicCustom);
 static u8 sDisplayMusicNames;
 EXPORT_SYMBOL(MUSIC_NAMES, sDisplayMusicNames);
 ALIGNED(16) static char sAudioNameBuffer[49];
@@ -392,3 +394,29 @@ void Audio_DisplayMusicName(PlayState* play)
     /* Draw the music name */
     Audio_DrawMusicName(play);
 }
+
+#if defined(GAME_OOT)
+void Audio_UpdateMalonSingingWrapper(f32 dist, u16 seqId)
+{
+    if (sMusicCustom)
+        return;
+    Audio_UpdateMalonSinging(dist, seqId);
+}
+
+PATCH_CALL(0x809ce6a0, Audio_UpdateMalonSingingWrapper);
+PATCH_CALL(0x809f18a0, Audio_UpdateMalonSingingWrapper);
+PATCH_CALL(0x80b771b0, Audio_UpdateMalonSingingWrapper);
+
+void Audio_ToggleMalonSingingWrapper(u8 malonSingingDisabled)
+{
+    if (sMusicCustom)
+        return;
+    Audio_ToggleMalonSinging(malonSingingDisabled);
+}
+
+PATCH_CALL(0x809cddf4, Audio_ToggleMalonSingingWrapper);
+PATCH_CALL(0x809cde18, Audio_ToggleMalonSingingWrapper);
+PATCH_CALL(0x809f0f44, Audio_ToggleMalonSingingWrapper);
+PATCH_CALL(0x809f0f68, Audio_ToggleMalonSingingWrapper);
+
+#endif
