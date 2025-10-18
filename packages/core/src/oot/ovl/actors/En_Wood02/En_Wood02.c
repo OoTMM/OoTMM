@@ -177,6 +177,21 @@ static void EnWood02_AliasBush(Xflag* xf)
 {
     switch (xf->sceneId)
     {
+    case SCE_OOT_HYRULE_FIELD:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 1;
+            switch (xf->id)
+            {
+            case 54: xf->id = 38; break;
+            case 55: xf->id = 39; break;
+            case 56: xf->id = 40; break;
+            case 57: xf->id = 45; break;
+            case 58: xf->id = 46; break;
+            case 59: xf->id = 43; break;
+            }
+        }
+        break;
     case SCE_OOT_ZORA_FOUNTAIN:
         xf->setupId = 0;
         break;
