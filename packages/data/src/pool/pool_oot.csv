@@ -989,47 +989,45 @@ Hyrule Field Bush 16,                                       bush,           NONE
 Hyrule Field Bush 17,                                       bush,           NONE,                 HYRULE_FIELD,                   0x44028,                    NOTHING
 Hyrule Field Bush 18,                                       bush,           NONE,                 HYRULE_FIELD,                   0x54028,                    NOTHING
 Hyrule Field Bush 19,                                       bush,           NONE,                 HYRULE_FIELD,                   0x0402b,                    NOTHING
-Hyrule Field Bush 20,                                       bush,           NONE,                 HYRULE_FIELD,                   0x1402b,                    NOTHING
-Hyrule Field Bush 21,                                       bush,           NONE,                 HYRULE_FIELD,                   0x2402b,                    NOTHING
-Hyrule Field Bush 22,                                       bush,           NONE,                 HYRULE_FIELD,                   0x3402b,                    NOTHING
-Hyrule Field Bush 23,                                       bush,           NONE,                 HYRULE_FIELD,                   0x4402b,                    NOTHING
-Hyrule Field Bush 24,                                       bush,           NONE,                 HYRULE_FIELD,                   0x5402b,                    NOTHING
-Hyrule Field Bush 25,                                       bush,           NONE,                 HYRULE_FIELD,                   0x0402d,                    NOTHING
-Hyrule Field Bush 26,                                       bush,           NONE,                 HYRULE_FIELD,                   0x1402d,                    NOTHING
-Hyrule Field Bush 27,                                       bush,           NONE,                 HYRULE_FIELD,                   0x2402d,                    NOTHING
-Hyrule Field Bush 28,                                       bush,           NONE,                 HYRULE_FIELD,                   0x3402d,                    NOTHING
-Hyrule Field Bush 29,                                       bush,           NONE,                 HYRULE_FIELD,                   0x4402d,                    NOTHING
-Hyrule Field Bush 30,                                       bush,           NONE,                 HYRULE_FIELD,                   0x5402d,                    NOTHING
-Hyrule Field Bush 31,                                       bush,           NONE,                 HYRULE_FIELD,                   0x0402e,                    NOTHING
-Hyrule Field Bush 32,                                       bush,           NONE,                 HYRULE_FIELD,                   0x1402e,                    NOTHING
-Hyrule Field Bush 33,                                       bush,           NONE,                 HYRULE_FIELD,                   0x2402e,                    NOTHING
-Hyrule Field Bush 34,                                       bush,           NONE,                 HYRULE_FIELD,                   0x3402e,                    NOTHING
-Hyrule Field Bush 35,                                       bush,           NONE,                 HYRULE_FIELD,                   0x4402e,                    NOTHING
-Hyrule Field Bush 36,                                       bush,           NONE,                 HYRULE_FIELD,                   0x5402e,                    NOTHING
+Hyrule Field Bush 20,                                       bush,           NONE,                 HYRULE_FIELD,                   0x2402b,                    NOTHING
+Hyrule Field Bush 21,                                       bush,           NONE,                 HYRULE_FIELD,                   0x3402b,                    NOTHING
+Hyrule Field Bush 22,                                       bush,           NONE,                 HYRULE_FIELD,                   0x4402b,                    NOTHING
+Hyrule Field Bush 23,                                       bush,           NONE,                 HYRULE_FIELD,                   0x5402b,                    NOTHING
+Hyrule Field Bush 24,                                       bush,           NONE,                 HYRULE_FIELD,                   0x0402d,                    NOTHING
+Hyrule Field Bush 25,                                       bush,           NONE,                 HYRULE_FIELD,                   0x1402d,                    NOTHING
+Hyrule Field Bush 26,                                       bush,           NONE,                 HYRULE_FIELD,                   0x2402d,                    NOTHING
+Hyrule Field Bush 27,                                       bush,           NONE,                 HYRULE_FIELD,                   0x3402d,                    NOTHING
+Hyrule Field Bush 28,                                       bush,           NONE,                 HYRULE_FIELD,                   0x4402d,                    NOTHING
+Hyrule Field Bush 29,                                       bush,           NONE,                 HYRULE_FIELD,                   0x5402d,                    NOTHING
+Hyrule Field Bush 30,                                       bush,           NONE,                 HYRULE_FIELD,                   0x0402e,                    NOTHING
+Hyrule Field Bush 31,                                       bush,           NONE,                 HYRULE_FIELD,                   0x1402e,                    NOTHING
+Hyrule Field Bush 32,                                       bush,           NONE,                 HYRULE_FIELD,                   0x2402e,                    NOTHING
+Hyrule Field Bush 33,                                       bush,           NONE,                 HYRULE_FIELD,                   0x3402e,                    NOTHING
+Hyrule Field Bush 34,                                       bush,           NONE,                 HYRULE_FIELD,                   0x4402e,                    NOTHING
+Hyrule Field Bush 35,                                       bush,           NONE,                 HYRULE_FIELD,                   0x5402e,                    NOTHING
 Hyrule Field Bush Child 01,                                 bush,           NONE,                 HYRULE_FIELD,                   0x04029,                    NOTHING
-Hyrule Field Bush Child 02,                                 bush,           NONE,                 HYRULE_FIELD,                   0x14029,                    NOTHING
-Hyrule Field Bush Child 03,                                 bush,           NONE,                 HYRULE_FIELD,                   0x24029,                    NOTHING
-Hyrule Field Bush Child 04,                                 bush,           NONE,                 HYRULE_FIELD,                   0x34029,                    NOTHING
-Hyrule Field Bush Child 05,                                 bush,           NONE,                 HYRULE_FIELD,                   0x44029,                    NOTHING
-Hyrule Field Bush Child 06,                                 bush,           NONE,                 HYRULE_FIELD,                   0x54029,                    NOTHING
-Hyrule Field Bush Child 07,                                 bush,           NONE,                 HYRULE_FIELD,                   0x0402a,                    NOTHING
-Hyrule Field Bush Child 08,                                 bush,           NONE,                 HYRULE_FIELD,                   0x1402a,                    NOTHING
-Hyrule Field Bush Child 09,                                 bush,           NONE,                 HYRULE_FIELD,                   0x2402a,                    NOTHING
-Hyrule Field Bush Child 10,                                 bush,           NONE,                 HYRULE_FIELD,                   0x3402a,                    NOTHING
-Hyrule Field Bush Child 11,                                 bush,           NONE,                 HYRULE_FIELD,                   0x4402a,                    NOTHING
-Hyrule Field Bush Child 12,                                 bush,           NONE,                 HYRULE_FIELD,                   0x5402a,                    NOTHING
-Hyrule Field Bush Child 13,                                 bush,           NONE,                 HYRULE_FIELD,                   0x0402c,                    NOTHING
-Hyrule Field Bush Child 14,                                 bush,           NONE,                 HYRULE_FIELD,                   0x1402c,                    NOTHING
-Hyrule Field Bush Child 15,                                 bush,           NONE,                 HYRULE_FIELD,                   0x2402c,                    NOTHING
-Hyrule Field Bush Child 16,                                 bush,           NONE,                 HYRULE_FIELD,                   0x3402c,                    NOTHING
-Hyrule Field Bush Child 17,                                 bush,           NONE,                 HYRULE_FIELD,                   0x4402c,                    NOTHING
-Hyrule Field Bush Child 18,                                 bush,           NONE,                 HYRULE_FIELD,                   0x5402c,                    NOTHING
-Hyrule Field Bush Child 19,                                 bush,           NONE,                 HYRULE_FIELD,                   0x0402f,                    NOTHING
-Hyrule Field Bush Child 20,                                 bush,           NONE,                 HYRULE_FIELD,                   0x1402f,                    NOTHING
-Hyrule Field Bush Child 21,                                 bush,           NONE,                 HYRULE_FIELD,                   0x2402f,                    NOTHING
-Hyrule Field Bush Child 22,                                 bush,           NONE,                 HYRULE_FIELD,                   0x3402f,                    NOTHING
-Hyrule Field Bush Child 23,                                 bush,           NONE,                 HYRULE_FIELD,                   0x4402f,                    NOTHING
-Hyrule Field Bush Child 24,                                 bush,           NONE,                 HYRULE_FIELD,                   0x5402f,                    NOTHING
+Hyrule Field Bush Child 02,                                 bush,           NONE,                 HYRULE_FIELD,                   0x24029,                    NOTHING
+Hyrule Field Bush Child 03,                                 bush,           NONE,                 HYRULE_FIELD,                   0x34029,                    NOTHING
+Hyrule Field Bush Child 04,                                 bush,           NONE,                 HYRULE_FIELD,                   0x44029,                    NOTHING
+Hyrule Field Bush Child 05,                                 bush,           NONE,                 HYRULE_FIELD,                   0x54029,                    NOTHING
+Hyrule Field Bush Child 06,                                 bush,           NONE,                 HYRULE_FIELD,                   0x0402a,                    NOTHING
+Hyrule Field Bush Child 07,                                 bush,           NONE,                 HYRULE_FIELD,                   0x1402a,                    NOTHING
+Hyrule Field Bush Child 08,                                 bush,           NONE,                 HYRULE_FIELD,                   0x2402a,                    NOTHING
+Hyrule Field Bush Child 09,                                 bush,           NONE,                 HYRULE_FIELD,                   0x3402a,                    NOTHING
+Hyrule Field Bush Child 10,                                 bush,           NONE,                 HYRULE_FIELD,                   0x4402a,                    NOTHING
+Hyrule Field Bush Child 11,                                 bush,           NONE,                 HYRULE_FIELD,                   0x5402a,                    NOTHING
+Hyrule Field Bush Child 12,                                 bush,           NONE,                 HYRULE_FIELD,                   0x0402c,                    NOTHING
+Hyrule Field Bush Child 13,                                 bush,           NONE,                 HYRULE_FIELD,                   0x1402c,                    NOTHING
+Hyrule Field Bush Child 14,                                 bush,           NONE,                 HYRULE_FIELD,                   0x2402c,                    NOTHING
+Hyrule Field Bush Child 15,                                 bush,           NONE,                 HYRULE_FIELD,                   0x3402c,                    NOTHING
+Hyrule Field Bush Child 16,                                 bush,           NONE,                 HYRULE_FIELD,                   0x4402c,                    NOTHING
+Hyrule Field Bush Child 17,                                 bush,           NONE,                 HYRULE_FIELD,                   0x5402c,                    NOTHING
+Hyrule Field Bush Child 18,                                 bush,           NONE,                 HYRULE_FIELD,                   0x0402f,                    NOTHING
+Hyrule Field Bush Child 19,                                 bush,           NONE,                 HYRULE_FIELD,                   0x1402f,                    NOTHING
+Hyrule Field Bush Child 20,                                 bush,           NONE,                 HYRULE_FIELD,                   0x2402f,                    NOTHING
+Hyrule Field Bush Child 21,                                 bush,           NONE,                 HYRULE_FIELD,                   0x3402f,                    NOTHING
+Hyrule Field Bush Child 22,                                 bush,           NONE,                 HYRULE_FIELD,                   0x4402f,                    NOTHING
+Hyrule Field Bush Child 23,                                 bush,           NONE,                 HYRULE_FIELD,                   0x5402f,                    NOTHING
 Hyrule Field Rock Circle Rock 1,                            rock,           NONE,                 HYRULE_FIELD,                   0x00037,                    RANDOM
 Hyrule Field Rock Circle Rock 2,                            rock,           NONE,                 HYRULE_FIELD,                   0x10037,                    RANDOM
 Hyrule Field Rock Circle Rock 3,                            rock,           NONE,                 HYRULE_FIELD,                   0x20037,                    RANDOM

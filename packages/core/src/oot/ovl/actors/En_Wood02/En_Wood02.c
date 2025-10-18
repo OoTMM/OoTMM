@@ -189,6 +189,7 @@ static void EnWood02_AliasBush(Xflag* xf)
             case 57: xf->id = 45; break;
             case 58: xf->id = 46; break;
             case 59: xf->id = 43; break;
+            default: Xflag_Clear(xf); break;
             }
         }
         break;
@@ -209,6 +210,7 @@ static void EnWood02_AliasTree(Xflag* xf)
     case SCE_OOT_HYRULE_FIELD:
         if (xf->setupId == 2 && xf->id != 66)
         {
+            xf->setupId = 1;
             switch (xf->id)
             {
             case 38: xf->id = 33; break;
@@ -226,8 +228,8 @@ static void EnWood02_AliasTree(Xflag* xf)
             case 63: xf->id = 64; break;
             case 64: xf->id = 65; break;
             case 65: xf->id = 61; break;
+            default: Xflag_Clear(xf); break;
             }
-            xf->setupId = 1;
         }
         break;
     }
