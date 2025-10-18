@@ -57,6 +57,7 @@ void BgIcefloe_Init(Actor* thisx, PlayState* play) {
         sSpawnedInstances[numberSpawned] = this;
     }
     numberSpawned++;
+    this->dyna.actor.room = (u8)-1;
     this->dyna.actor.world.pos.y = this->dyna.actor.home.pos.y + 10.0f;
     func_80AC4A80(this, play);
 }
