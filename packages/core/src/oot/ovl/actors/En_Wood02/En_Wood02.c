@@ -69,8 +69,17 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(targetArrowOffset, 5600, ICHAIN_STOP),
 };
 
+static Gfx sNormalBushDlist[] = {
+    gsDPSetPrimColor(0, 0, 102, 152, 112, 255),
+    gsSPBranchList(object_wood02_DL_000090),
+};
+
+static Gfx sColoredBushDlist[] = {
+    gsSPBranchList(object_wood02_DL_000090),
+};
+
 static Gfx* D_80B3BF54[] = {
-    object_wood02_DL_0078D0, object_wood02_DL_007CA0, object_wood02_DL_0080D0, object_wood02_DL_000090,
+    object_wood02_DL_0078D0, object_wood02_DL_007CA0, object_wood02_DL_0080D0, sNormalBushDlist,
     object_wood02_DL_000340, object_wood02_DL_000340, object_wood02_DL_000700,
 };
 
@@ -508,6 +517,7 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     EnWood02* this = (EnWood02*)thisx;
     s16 type;
     GraphicsContext* gfxCtx = play->state.gfxCtx;
+    int csmc;
     u8 red;
     u8 green;
     u8 blue;
@@ -529,9 +539,10 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
         red = green = blue = 255;
     }
 
+    csmc = -1;
     if (Xflag_IsValid(&this->xflag))
     {
-        int csmc = EnWood02_CAMC(this, play);
+        csmc = EnWood02_CAMC(this, play);
         if (csmc == CSMC_NORMAL)
         {
             red = 50;
@@ -561,7 +572,12 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     } else {
         Gfx_SetupDL_25Xlu(gfxCtx);
         MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, gfxCtx);
-        gSPDisplayList(POLY_XLU_DISP++, D_80B3BF54[this->drawType & 0xF]);
+        if ((this->drawType & 0xf) == WOOD_DRAW_BUSH_GREEN && csmc != -1 && csmc != CSMC_NORMAL) {
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, red, green, blue, 255);
+            gSPDisplayList(POLY_XLU_DISP++, sColoredBushDlist);
+        } else {
+            gSPDisplayList(POLY_XLU_DISP++, D_80B3BF54[this->drawType & 0xF]);
+        }
     }
 
     CLOSE_DISPS();

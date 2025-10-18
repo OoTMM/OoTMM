@@ -1,6 +1,6 @@
 import { bufReadU16BE, bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from "./util/buffer";
 
-type ImageFormat = 'rgba32' | 'rgba16';
+type ImageFormat = 'rgba32' | 'rgba16' | 'ia8';
 
 function packToRgb(color: number) {
   const r = (color >> 16) & 0xff;
@@ -116,11 +116,42 @@ function fromRgba16(image: Uint8Array) {
   return newBuf;
 }
 
-function fromFormat(image: Uint8Array, format: 'rgba32' | 'rgba16') {
+function fromIA8(image: Uint8Array) {
+  const newBuf = new Uint8Array(image.length * 4);
+  for (let i = 0; i < image.length; ++i) {
+    const src = image[i];
+    const r = src;
+    const g = src;
+    const b = src;
+    const a = (src ? 0xff : 0x00);
+    const dstIndex = i * 4;
+    newBuf[dstIndex + 0] = r;
+    newBuf[dstIndex + 1] = g;
+    newBuf[dstIndex + 2] = b;
+    newBuf[dstIndex + 3] = a;
+  }
+  return newBuf;
+}
+
+function toIA8(image: Uint8Array) {
+  const newBuf = new Uint8Array(image.length / 4);
+  for (let i = 0; i < newBuf.length; ++i) {
+    const srcIndex = i * 4;
+    const r = image[srcIndex + 0];
+    const a = image[srcIndex + 3];
+    const value = (a ? (r ? r : 1) : 0);
+    newBuf[i] = value;
+  }
+  return newBuf;
+}
+
+function fromFormat(image: Uint8Array, format: ImageFormat) {
   if (format === 'rgba32') {
     return image;
-  } else {
+  } else if (format === 'rgba16') {
     return fromRgba16(image);
+  } else {
+    return fromIA8(image);
   }
 }
 
@@ -146,8 +177,10 @@ function toRgba16(image: Uint8Array) {
 function toFormat(image: Uint8Array, format: ImageFormat) {
   if (format === 'rgba32') {
     return new Uint8Array(image);
-  } else {
+  } else if (format === 'rgba16') {
     return toRgba16(image);
+  } else {
+    return toIA8(image);
   }
 }
 
