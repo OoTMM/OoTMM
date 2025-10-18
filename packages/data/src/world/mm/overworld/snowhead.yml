@@ -3,8 +3,8 @@
   region: SNOWHEAD
   exits:
     "Path to Snowhead Back": "true"
-    "Snowhead": "(blizzard_stopped || (has_iron_boots && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
-    "Snowhead Near Fairy Fountain": "(blizzard_stopped || (has_iron_boots && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
+    "Snowhead": "(blizzard_stopped || (has_iron_boots && has_magic && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
+    "Snowhead Near Fairy Fountain": "(blizzard_stopped || (has_iron_boots && has_magic && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
     "Owl Snowhead": "true"
   events:
     OPEN_SNOWHEAD_TEMPLE: "soul_biggoron && can_lullaby && has_mask_goron"
