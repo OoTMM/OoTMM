@@ -1,4 +1,5 @@
 #include "En_River_Sound.h"
+#include <combo/souls.h>
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
@@ -36,7 +37,7 @@ void EnRiverSound_Init(Actor* thisx, PlayState* play) {
         Audio_PlayNatureAmbienceSequence(NATURE_ID_KOKIRI_REGION);
         Actor_Kill(&this->actor);
     } else if (this->actor.params == RS_LOST_WOODS_SARIAS_SONG) {
-        if (!CHECK_QUEST_ITEM(QUEST_SONG_LULLABY) || CHECK_QUEST_ITEM(QUEST_SONG_SARIA)) {
+        if (GetEventChk(EV_OOT_CHK_SONG_SARIA) || !GetEventChk(EV_OOT_CHK_ZELDA_LETTER) || !comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA)) {
             Actor_Kill(&this->actor);
         }
     }
