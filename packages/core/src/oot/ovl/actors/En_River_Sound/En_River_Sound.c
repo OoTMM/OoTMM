@@ -22,12 +22,27 @@ ActorProfile En_River_Sound_Profile = {
 
 OVL_INFO_ACTOR(ACTOR_EN_RIVER_SOUND, En_River_Sound_Profile);
 
+static u8 sMusicCustom;
+EXPORT_SYMBOL(MUSIC_CUSTOM, sMusicCustom);
+
 void EnRiverSound_Init(Actor* thisx, PlayState* play) {
     EnRiverSound* this = (EnRiverSound*)thisx;
 
     this->playSfx = false;
     this->pathIndex = PARAMS_GET_U(this->actor.params, 8, 8);
     this->actor.params = PARAMS_GET_U(this->actor.params, 0, 8);
+
+    if (sMusicCustom)
+    {
+        switch (this->actor.params)
+        {
+        case RS_LOST_WOODS_SARIAS_SONG:
+        case RS_GORON_CITY_SARIAS_SONG:
+        case RS_GREAT_FAIRY:
+            Actor_Kill(&this->actor);
+            return;
+        }
+    }
 
     if (this->actor.params >= RS_GANON_TOWER_0) {
         // Incrementally increase volume of NA_BGM_GANON_TOWER for each new room during the climb of Ganon's Tower
