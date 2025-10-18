@@ -363,7 +363,7 @@ static int GetRoomClearFlagForActor(PlayState* play, int flag)
 {
     int res;
 
-    res = GetRoomClearFlag(play, flag);
+    res = Flags_GetClear(play, flag);
     if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == ACTOR_EN_WALLMAS)
         res = 0;
     return res;

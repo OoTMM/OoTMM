@@ -149,7 +149,7 @@ OotSaveQuest;
 # define QUEST_SONG_REQUIEM          QUEST_OOT_SONG_TP_SPIRIT
 # define QUEST_SONG_NOCTURNE         QUEST_OOT_SONG_TP_SHADOW
 # define QUEST_SONG_PRELUDE          QUEST_OOT_SONG_PRELUDE
-# define QUEST_SONG_LULLABY          QUEST_OOT_SONG_LULLABY
+# define QUEST_SONG_LULLABY          QUEST_OOT_SONG_ZELDA
 # define QUEST_SONG_EPONA            QUEST_OOT_SONG_EPONA
 # define QUEST_SONG_SARIA            QUEST_OOT_SONG_SARIA
 # define QUEST_SONG_SUN              QUEST_OOT_SONG_SUN
@@ -161,6 +161,8 @@ OotSaveQuest;
 # define QUEST_STONE_OF_AGONY        QUEST_OOT_STONE_AGONY
 # define QUEST_GERUDOS_CARD          QUEST_OOT_GERUDO_CARD
 #endif
+
+#define CHECK_QUEST_ITEM(item) (gSaveContext.save.info.inventory.questItems & (1 << (item)))
 
 typedef struct
 {
@@ -179,7 +181,12 @@ typedef struct
     OotEquipment            equipment;
     u16                     unk_9e;
     OotSaveUpgrades         upgrades;
-    OotSaveQuest            quest;
+    union
+    {
+        OotSaveQuest        quest;
+        u32                 questItems;
+    };
+
     OotDungeonItems         dungeonItems[0x14];
     s8                      dungeonKeys[0x13];
     u8                      doubleDefenseHearts;

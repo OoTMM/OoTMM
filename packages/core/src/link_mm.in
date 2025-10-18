@@ -48,7 +48,6 @@ Magic_RequestChange = 0x80115db4;
 Magic_Reset = 0x80115D5C;
 Interface_SetBButtonInterfaceDoAction = 0x80115844;
 Health_ChangeBy = 0x80115908;
-GetRoomClearFlag = 0x800b5cc4;
 
 osCreateMesgQueue = 0x8008f240;
 osEPiStartDma = 0x8008ee30;
