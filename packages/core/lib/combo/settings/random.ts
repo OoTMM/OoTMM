@@ -795,6 +795,8 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleRocksMm = 'all';
       base.shuffleTreesOot = true;
       base.shuffleTreesMm = 'all';
+      base.shuffleBushOot = true;
+      base.shuffleBushMm = 'all';
       base.shuffleFreeHeartsOot = 'all';
       base.shuffleFreeHeartsMm = true;
       base.shuffleFreeRupeesOot = 'all';
@@ -824,6 +826,8 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleRocksMm = 'overworld';
       base.shuffleTreesOot = true;
       base.shuffleTreesMm = 'overworld';
+      base.shuffleBushOot = true;
+      base.shuffleBushMm = 'overworld';
       base.shuffleFreeHeartsOot = 'overworld';
       base.shuffleFreeRupeesOot = 'overworld';
       base.shuffleFreeRupeesMm = 'overworld';
@@ -849,6 +853,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleGrassMm = 'dungeons';
       base.shuffleRocksMm = 'dungeons';
       base.shuffleTreesMm = 'dungeons';
+      base.shuffleBushMm = 'dungeons';
       base.shuffleFreeHeartsOot = 'dungeons';
       base.shuffleFreeHeartsMm = true;
       base.shuffleFreeRupeesOot = 'dungeons';
@@ -869,6 +874,8 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleRocksMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleTreesOot = booleanWeighted(random, 0.5);
       base.shuffleTreesMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
+      base.shuffleBushOot = booleanWeighted(random, 0.5);
+      base.shuffleBushMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleFreeHeartsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleFreeHeartsMm = booleanWeighted(random, 0.5);
       base.shuffleFreeRupeesOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
