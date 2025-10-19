@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import YAML from 'yaml';
 
-import { SETTINGS, generate, importSettings, makeSettings } from './combo';
+import { PRESETS, SETTINGS, generate, importSettings, makeSettings } from './combo';
 import { OptionsInput } from './combo/options';
 
 function readFileUint8(path: string): Promise<Uint8Array> {
@@ -78,6 +78,15 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
     }
     case '--settings': {
       opts.settings = makeSettings(importSettings(args[++i]));
+      break;
+    }
+    case '--preset': {
+      const presetName = args[++i];
+      const preset = PRESETS[presetName];
+      if (!preset) {
+        throw new Error(`Unknown preset: ${presetName}`);
+      }
+      opts.settings = preset;
       break;
     }
     default:
