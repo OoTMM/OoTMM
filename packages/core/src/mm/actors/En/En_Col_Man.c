@@ -33,10 +33,17 @@ void EnColMan_DrawHeartPiece(Actor* this, PlayState* play)
 {
     static const float scale = 35.f;
     ComboItemOverride o;
+    s16 gi;
 
     EnColMan_ItemOverride(&o);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, this, gi, 0);
 }
 
 PATCH_FUNC(0x80afe414, EnColMan_DrawHeartPiece);

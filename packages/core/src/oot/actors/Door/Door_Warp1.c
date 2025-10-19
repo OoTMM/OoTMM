@@ -141,6 +141,7 @@ void DoorWarp1_AfterDrawWarp(Actor* this, PlayState* play)
     float angle;
     const BlueWarpData* data;
     ComboItemOverride o;
+    s16 gi;
 
     data = DoorWarp1_GetData(play);
     if (!data)
@@ -153,6 +154,12 @@ void DoorWarp1_AfterDrawWarp(Actor* this, PlayState* play)
 
     Matrix_Translate(this->world.pos.x, this->world.pos.y + 35.f, this->world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        angle = -angle;
+    }
     Matrix_RotateY(angle, MTXMODE_APPLY);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, DRAW_RAW);
+    Draw_Gi(play, this, gi, DRAW_RAW);
 }

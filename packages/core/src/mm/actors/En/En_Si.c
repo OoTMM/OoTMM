@@ -56,9 +56,16 @@ PATCH_FUNC(0x8098cad0, EnSi_AddItem);
 void EnSi_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
+    s16 gi;
 
     EnSi_ItemOverride(&o, this, play);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, this, gi, 0);
 }
 
 PATCH_FUNC(0x8098cd0c, EnSi_Draw);

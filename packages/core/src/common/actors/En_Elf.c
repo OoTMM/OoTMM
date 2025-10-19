@@ -88,6 +88,7 @@ void EnElf_Draw(Actor_EnElf* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
+    s16 gi;
     s16 cloakGi;
 
     if (!this->itemGiven) {
@@ -103,7 +104,13 @@ void EnElf_Draw(Actor_EnElf* this, PlayState* play)
     static const float scale = 25.0f;
 
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->base, this->extendedGiDraw, cloakGi, 0);
+    gi = this->extendedGiDraw;
+    if (cloakGi)
+    {
+        gi = cloakGi;
+        Matrix_RotateYS(-this->base.shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, &this->base, gi, 0);
 }
 
 #if defined(GAME_OOT)
