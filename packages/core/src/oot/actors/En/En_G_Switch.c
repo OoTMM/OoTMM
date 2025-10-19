@@ -150,10 +150,17 @@ void EnGSwitch_DrawSilverRupee(Actor* this, PlayState* play)
 {
     static const float scale = 12.5f;
     ComboItemOverride o;
+    s16 gi;
 
     EnGSwitch_ItemOverride(&o, this, play);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->shape.rot.y * 2, MTXMODE_APPLY);
+    }
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    Draw_Gi(play, this, gi, 0);
 }
 
 static const Gfx kPotDrawListNormalTop[] = {

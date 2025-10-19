@@ -73,48 +73,6 @@ void Draw_Gi(PlayState* play, Actor* actor, s16 gi, int flags)
     drawGiParam(play, gi);
 }
 
-static float Draw_GetCurrentRotationY(void)
-{
-    Vec3f pointOrigin = { 0.f, 0.f, 0.f };
-    Vec3f point = { 1.f, 0.f, 0.f };
-    Vec3f resultOrigin;
-    Vec3f result;
-    float length;
-    float lengthInv;
-
-    Matrix_MultVec3f(&point, &result);
-    Matrix_MultVec3f(&pointOrigin, &resultOrigin);
-    result.x -= resultOrigin.x;
-    result.z -= resultOrigin.z;
-    result.y = 0;
-    length = Math3D_Vec3fMagnitude(&result);
-    if (length < 0.00001f)
-        return 0.f;
-    lengthInv = 1.f / length;
-    result.x *= lengthInv;
-    result.y *= lengthInv;
-    result.z *= lengthInv;
-
-    return Math_Atan2F(result.z, result.x);
-}
-
-void Draw_GiCloaked(PlayState* play, Actor* actor, s16 gi, s16 cloakGi, int flags)
-{
-    float rot;
-
-    if (cloakGi && gi != GI_MM_SOLD_OUT)
-    {
-        gi = cloakGi;
-        rot = Draw_GetCurrentRotationY();
-#if defined(GAME_MM)
-        rot = -rot;
-#endif
-        Matrix_RotateY(-rot * 2, MTXMODE_APPLY);
-    }
-
-    Draw_Gi(play, actor, gi, flags);
-}
-
 void comboPlayerDrawGI(PlayState* play, int drawGiMinusOne)
 {
     drawGiParamDrawId(play, (u8)(drawGiMinusOne + 1), playerDrawGiParam);

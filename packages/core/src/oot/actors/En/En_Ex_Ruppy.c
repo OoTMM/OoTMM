@@ -54,11 +54,18 @@ void EnExRuppy_Draw(Actor_EnExRuppy* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
+    s16 gi;
 
     EnExRuppy_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->actor.shape.rot.y * 2, MTXMODE_APPLY);
+    }
     Matrix_Scale(25.0f, 25.0f, 25.0f, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
+    Draw_Gi(play, &this->actor, gi, 0);
 }
 
 void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, PlayState* play)

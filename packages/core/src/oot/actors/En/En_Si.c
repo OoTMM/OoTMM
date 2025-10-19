@@ -39,9 +39,16 @@ void EnSi_ItemOverride(ComboItemOverride* o, Actor* this)
 void EnSi_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
+    s16 gi;
 
     EnSi_ItemOverride(&o, this);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, this, gi, 0);
 }
 
 PATCH_CALL(0x80b4b3f8, EnSi_Draw);

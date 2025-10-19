@@ -81,6 +81,7 @@ static void Fishing_Fish_ItemOverride(PlayState* playOrNull, ComboItemOverride* 
 void Fishing_DrawFish_SkelAnime(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
                            void* overrideLimbDraw, void* postLimbDraw, Actor* this) {
     ComboItemOverride o;
+    s16 gi;
 
     Fishing_Fish_ItemOverride(play, &o, this->params);
     if (o.gi >= GI_OOT_FISHING_POND_CHILD_FISH_2LBS && o.gi <= GI_OOT_FISHING_POND_ADULT_LOACH_36LBS)
@@ -92,9 +93,11 @@ void Fishing_DrawFish_SkelAnime(PlayState* play, void** skeleton, Vec3s* jointTa
     Vec3f mouthOffset = { 0.0f, 0.0f, 0.0f };
     Vec3f* fishMouthPos = (Vec3f*)(((u8*)this) + 0x1B0);
     Matrix_MultVec3f(&mouthOffset, fishMouthPos);
-
     Matrix_Scale(56.0f, 56.0f, 56.0f, MTXMODE_APPLY);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    gi = o.gi;
+    if (o.cloakGi)
+        gi = o.cloakGi;
+    Draw_Gi(play, this, gi, 0);
 }
 
 PATCH_CALL(0x80a405d8, Fishing_DrawFish_SkelAnime);

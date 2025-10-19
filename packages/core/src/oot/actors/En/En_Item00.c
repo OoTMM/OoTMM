@@ -63,6 +63,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
     float scale;
+    s16 gi;
 
     switch (this->actor.params)
     {
@@ -78,8 +79,14 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
 
     EnItem00_ItemQuery(&q, this, play, -1);
     comboItemOverride(&o, &q);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->actor.shape.rot.y * 2, MTXMODE_APPLY);
+    }
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
+    Draw_Gi(play, &this->actor, gi, 0);
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
