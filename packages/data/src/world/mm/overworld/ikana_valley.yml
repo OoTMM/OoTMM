@@ -6,7 +6,7 @@
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
-    "Ikana Valley Near Secret Shrine": "can_swim"
+    "Ikana Valley Near Secret Shrine": "can_swim || (can_use_ice_arrows && has_chateau)"
     "Swamp Front": "underwater_walking || can_swim"
   locations:
     "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
@@ -21,7 +21,7 @@
   exits:
     "Secret Shrine": "true"
     "Ikana Valley Grotto": "true"
-    "Ikana Valley": "can_swim"
+    "Ikana Valley": "can_swim || (can_use_ice_arrows && has_chateau)"
 
 "Ikana Valley Grotto":
   region: ENTRANCE
