@@ -37,20 +37,28 @@ static void EnElforg_Draw(Actor* this, PlayState* play)
     ActorCallback draw;
     static const int kRotDivisor = 100;
     float angle;
+    s16 gi;
 
     EnElforg_ItemOverride(&o, this, play);
-    if (o.gi == GI_MM_STRAY_FAIRY)
+    angle = (play->state.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        angle = -angle;
+    }
+
+    if (gi == GI_MM_STRAY_FAIRY)
     {
         draw = actorAddr(0x1b0, 0x80acd8c0);
         draw(this, play);
         return;
     }
 
-    angle = (play->state.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
     Matrix_Translate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
     Matrix_RotateY(angle, MTXMODE_APPLY);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    Draw_Gi(play, this, gi, 0);
 }
 
 void EnElforg_DrawWrapper(Actor* this, PlayState* play)

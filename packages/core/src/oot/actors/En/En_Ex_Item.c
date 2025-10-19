@@ -77,12 +77,20 @@ void EnExItem_Draw(Actor* actor, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
     float scale;
+    s16 gi;
 
     EnExItem_Reward(&q, actor);
     comboItemOverride(&o, &q);
     scale = *(float*)(((char*)actor) + 0x154);
     Actor_SetScale(actor, scale);
-    Draw_GiCloaked(play, actor, o.gi, o.cloakGi, 0);
+
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-actor->shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, actor, gi, 0);
 }
 
 void EnExItem_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)

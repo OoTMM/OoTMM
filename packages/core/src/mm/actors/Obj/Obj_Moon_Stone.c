@@ -22,10 +22,14 @@ void ObjMoonStone_Draw(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
+    s16 gi;
 
     ObjMoonStone_ItemQuery(&q, play);
     comboItemOverride(&o, &q);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    gi = o.gi;
+    if (o.cloakGi)
+        gi = o.cloakGi;
+    Draw_Gi(play, this, gi, 0);
 }
 
 PATCH_FUNC(0x80c06910, ObjMoonStone_Draw);

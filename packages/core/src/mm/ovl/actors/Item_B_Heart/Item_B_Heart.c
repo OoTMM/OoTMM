@@ -101,8 +101,16 @@ void ItemBHeart_Draw(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
+    s16 gi;
 
     ItemBHeart_ItemQuery(&q, play);
     comboItemOverride(&o, &q);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, DRAW_RAW);
+
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, this, gi, DRAW_RAW);
 }

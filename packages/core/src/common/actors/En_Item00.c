@@ -19,6 +19,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
     ComboItemOverride o;
     s16 gi;
     s16 cloakGi;
+    s16 angle;
 
     if (this->isExtendedCollected)
     {
@@ -33,10 +34,16 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
         this->xflagGi = gi;
     }
 
+    angle = this->actor.shape.rot.y;
+    if (cloakGi)
+    {
+        gi = cloakGi;
+        angle = -angle;
+    }
     Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + 20.f, this->actor.world.pos.z, MTXMODE_NEW);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
-    Matrix_RotateY(this->actor.shape.rot.y * ((M_PI * 2.f) / 32767.f), MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->actor, gi, cloakGi, 0);
+    Matrix_RotateYS(angle, MTXMODE_APPLY);
+    Draw_Gi(play, &this->actor, gi, 0);
 }
 
 void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
