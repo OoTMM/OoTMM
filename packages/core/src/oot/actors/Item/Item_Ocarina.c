@@ -80,9 +80,11 @@ void ItemOcarina_Handler(Actor* this, PlayState* play)
 void ItemOcarina_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
+    s16 gi;
 
     ItemOcarina_ItemOverride(&o, 0);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, 0);
+    gi = o.cloakGi ? o.cloakGi : o.gi;
+    Draw_Gi(play, this, gi, 0);
 }
 
 PATCH_FUNC(0x80a2b7c0, ItemOcarina_Handler);

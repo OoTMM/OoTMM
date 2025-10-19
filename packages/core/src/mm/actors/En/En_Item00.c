@@ -61,11 +61,18 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, PlayState* play)
 
     ComboItemQuery q;
     ComboItemOverride o;
+    s16 gi;
 
     EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE);
     comboItemOverride(&o, &q);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    Draw_GiCloaked(play, &this->actor, o.gi, o.cloakGi, 0);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        Matrix_RotateYS(-this->actor.shape.rot.y * 2, MTXMODE_APPLY);
+    }
+    Draw_Gi(play, &this->actor, gi, 0);
 }
 
 PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);

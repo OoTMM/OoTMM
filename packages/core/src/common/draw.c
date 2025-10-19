@@ -62,6 +62,8 @@ void Draw_Gi(PlayState* play, Actor* actor, s16 gi, int flags)
     if (objectId & ~MASK_FOREIGN_OBJECT)
     {
         giObjectSegment = comboGetObject(objectId);
+        if (!giObjectSegment)
+            return;
         Draw_SetObjectSegment(play->state.gfxCtx, giObjectSegment);
     }
     if (!(flags & DRAW_NO_PRE1))

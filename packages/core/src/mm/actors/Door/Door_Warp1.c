@@ -143,6 +143,7 @@ void DoorWarp1_AfterDraw(Actor* this, PlayState* play)
     float angle;
     float scale;
     float giantScale;
+    s16 gi;
 
     player = GET_PLAYER(play);
     data = DoorWarp1_GetData(this, play);
@@ -157,8 +158,14 @@ void DoorWarp1_AfterDraw(Actor* this, PlayState* play)
     scale = 0.35f * giantScale;
     Matrix_Translate(this->world.pos.x, this->world.pos.y + 35.f * giantScale, this->world.pos.z, MTXMODE_NEW);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
+    gi = o.gi;
+    if (o.cloakGi)
+    {
+        gi = o.cloakGi;
+        angle = -angle;
+    }
     Matrix_RotateY(angle, MTXMODE_APPLY);
-    Draw_GiCloaked(play, this, o.gi, o.cloakGi, DRAW_RAW);
+    Draw_Gi(play, this, gi, DRAW_RAW);
 }
 
 PATCH_FUNC(0x808b866c, DoorWarp1_ShouldTrigger);
