@@ -1,11 +1,13 @@
 export const COSMETICS = [{
   key: 'defaultHold',
   name: 'Default Hold Target',
+  description: 'If enabled the targetting setting will be set to "Hold"',
   type: 'boolean',
   default: false,
 }, {
   key: 'applyFreestandings',
   name: 'Apply Cosmetics to Freestanding Items',
+  description: 'If enabled, items that are modified by cosmetics will also appear modified when they are freestanding in the world.<br>Currently only applies to tunics and mirror shield.',
   type: 'boolean',
   default: true,
 }, {
@@ -13,14 +15,16 @@ export const COSMETICS = [{
   name: 'Display Music Names',
   type: 'boolean',
   default: true,
-// }, {
-//   key: 'nightBgm',
-//   name: 'Enable Nighttime BGM',
-//   type: 'boolean',
-//   default: false,
+}, {
+  key: 'nightBgm',
+  name: 'Enable Nighttime BGM',
+  description: 'Enable the background music at night time.<br>May cause crashes on Everdrive.',
+  type: 'boolean',
+  default: false,
 }, {
   key: 'halloween',
   name: 'Enable Halloween Textures',
+  description: 'Enable Halloween-themed textures for chests, pots, crates and barrels during the month of October.<br>Will do nothing without CAMC enabled.',
   type: 'boolean',
   default: false,
   }, {
