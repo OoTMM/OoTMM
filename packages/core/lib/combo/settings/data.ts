@@ -758,6 +758,14 @@ export const SETTINGS = [{
   default: 'none',
   cond: hasMM,
 }, {
+  key: 'shuffleSoilOot',
+  name: 'Soil Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the fairies from bean soil spots are shuffled (OoT)',
+  default: false,
+  cond: hasOoT,
+},{
   key: 'shuffleFreeRupeesOot',
   name: 'Freestanding Rupees Shuffle (OoT)',
   category: 'main.shuffle',
