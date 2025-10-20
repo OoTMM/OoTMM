@@ -6,6 +6,7 @@
 #include <combo/souls.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/notes.h>
 
 #define VTX_COUNT 2048
 
@@ -111,6 +112,65 @@ static void addDefs(const DungeonDef* defs, int count)
     gDungeonDefCount += count;
 }
 
+static u8 gSongNotesOot[16] = {
+    NOTES_SONG_OOT_ZELDA,
+    NOTES_SONG_OOT_EPONA,
+    NOTES_SONG_OOT_SARIA,
+    NOTES_SONG_OOT_SUN,
+    NOTES_SONG_OOT_TIME,
+    NOTES_SONG_OOT_STORMS,
+    NOTES_SONG_OOT_TP_FOREST,
+    NOTES_SONG_OOT_TP_FIRE,
+    NOTES_SONG_OOT_TP_WATER,
+    NOTES_SONG_OOT_TP_SHADOW,
+    NOTES_SONG_OOT_TP_SPIRIT,
+    NOTES_SONG_OOT_TP_LIGHT,
+};
+
+static u8 gSongNotesCountOot = 12;
+
+static u8 gSongNotesMm[16] = {
+    NOTES_SONG_MM_TIME,
+    NOTES_SONG_MM_HEALING,
+    NOTES_SONG_MM_EPONA,
+    NOTES_SONG_MM_SOARING,
+    NOTES_SONG_MM_STORMS,
+    NOTES_SONG_MM_AWAKENING,
+    NOTES_SONG_MM_GORON,
+    NOTES_SONG_MM_ZORA,
+    NOTES_SONG_MM_EMPTINESS,
+    NOTES_SONG_MM_ORDER,
+};
+
+static u8 gSongNotesCountMm = 10;
+
+static const char* kSongNames[] = {
+    "Minuet of Forest", // NOTES_SONG_OOT_TP_FOREST
+    "Bolero of Fire", // NOTES_SONG_OOT_TP_FIRE
+    "Serenade of Water", // NOTES_SONG_OOT_TP_WATER
+    "Requiem of Spirit", // NOTES_SONG_OOT_TP_SPIRIT
+    "Nocturne of Shadow", // NOTES_SONG_OOT_TP_SHADOW
+    "Prelude of Light", // NOTES_SONG_OOT_TP_LIGHT
+    "Zelda's Lullaby", // NOTES_SONG_OOT_ZELDA
+    "Epona's Song", // NOTES_SONG_OOT_EPONA
+    "Saria's Song", // NOTES_SONG_OOT_SARIA
+    "Sun's Song", // NOTES_SONG_OOT_SUN
+    "Song of Time", // NOTES_SONG_OOT_TIME
+    "Song of Storms", // NOTES_SONG_OOT_STORMS
+    "Elegy of Emptiness", // NOTES_SONG_OOT_EMPTINESS
+    "Sonata of Awakening", // NOTES_SONG_MM_AWAKENING
+    "Goron's Lullaby", // NOTES_SONG_MM_GORON
+    "New Wave Bossa Nova", // NOTES_SONG_MM_ZORA
+    "Elegy of Emptiness", // NOTES_SONG_MM_EMPTINESS
+    "Oath to Order", // NOTES_SONG_MM_ORDER
+    "Song of Time", // NOTES_SONG_MM_TIME
+    "Song of Healing", // NOTES_SONG_MM_HEALING
+    "Epona's Song", // NOTES_SONG_MM_EPONA
+    "Song of Soaring", // NOTES_SONG_MM_SOARING
+    "Song of Storms", // NOTES_SONG_MM_STORMS
+    "Sun's Song", // NOTES_SONG_MM_SUN
+};
+
 void menuInit()
 {
     gDungeonDefCount = 0;
@@ -130,6 +190,12 @@ void menuInit()
         if (gComboConfig.maxCoins[i])
             addDefs(kDungeonDefsCoins + i, 1);
     }
+
+    if (Config_Flag(CFG_MM_SONG_SUN))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_SUN;
+
+    if (Config_Flag(CFG_OOT_SONG_EMPTINESS))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_EMPTINESS;
 }
 
 static const char* const kSoulsEnemyOot[] = {
@@ -730,6 +796,33 @@ static void printDungeonSilverRupees(PlayState* play, float x, float y, int srBa
     CLOSE_DISPS();
 }
 
+static void printSongNote(PlayState* play, int offset, u8 note)
+{
+    float x;
+    float y;
+    u8 count;
+    u8 max;
+
+    x = -110.f;
+    y = 42.f - 12.f * offset;
+    count = gSharedCustomSave.notes[note];
+    max = kMaxSongNotes[note];
+
+    OPEN_DISPS(play->state.gfxCtx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    printStr(play, kSongNames[note], x, y);
+    if (count == 0)
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 127, 127, 127, 255);
+    }
+    else if (count >= max)
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 200, 100, 100, 255);
+    }
+    printNum(play, count, max, 1, x + 8.f * 24, y, 0);
+    CLOSE_DISPS();
+}
+
 static void printSoul(PlayState* play, const char* const* names, int soulBase, int base, int index, int mm)
 {
     const char* name;
@@ -1006,6 +1099,12 @@ void comboMenuUpdate(PlayState* play)
     case MENU_INFO:
         g.menuCursorMax = gDungeonDefCount;
         break;
+    case MENU_SONG_NOTES_OOT:
+        g.menuCursorMax = gSongNotesCountOot;
+        break;
+    case MENU_SONG_NOTES_MM:
+        g.menuCursorMax = gSongNotesCountMm;
+        break;
     case MENU_SOULS_OOT_ENEMY:
         g.menuCursorMax = ARRAY_COUNT(kSoulsEnemyOot);
         break;
@@ -1038,6 +1137,16 @@ void comboMenuUpdate(PlayState* play)
 static int min(int a, int b)
 {
     return a < b ? a : b;
+}
+
+static void drawMenuSongNotes(PlayState* play, const char* title, const u8* notes)
+{
+    OPEN_DISPS(play->state.gfxCtx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, title, -110.f, 54.f);
+    for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
+        printSongNote(play, i, notes[g.menuCursor + i]);
+    CLOSE_DISPS();
 }
 
 static void drawMenuSouls(PlayState* play, const char* title, const char* const* names, int soulBase, int mm)
@@ -1100,6 +1209,12 @@ void comboMenuDraw(PlayState* play)
     case MENU_INFO:
         drawMenuInfo(play);
         break;
+    case MENU_SONG_NOTES_OOT:
+        drawMenuSongNotes(play, "OoT Song Notes", gSongNotesOot);
+        break;
+    case MENU_SONG_NOTES_MM:
+        drawMenuSongNotes(play, "MM Song Notes", gSongNotesMm);
+        break;
     case MENU_SOULS_OOT_ENEMY:
         drawMenuSouls(play, "OoT Enemy Souls", kSoulsEnemyOot, GI_OOT_SOUL_ENEMY_STALFOS, 0);
         break;
@@ -1140,6 +1255,10 @@ void comboMenuNext(void)
     g.menuCursor = 0;
     g.menuCursorMax = 0;
 
+    if (g.menuScreen == MENU_SONG_NOTES_OOT && (!Config_Flag(CFG_SONG_NOTES) || Config_Flag(CFG_ONLY_MM)))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SONG_NOTES_MM && (!Config_Flag(CFG_SONG_NOTES) || Config_Flag(CFG_ONLY_OOT)))
+        g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_OOT_ENEMY && !Config_Flag(CFG_OOT_SOULS_ENEMY))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_OOT_BOSS && !Config_Flag(CFG_OOT_SOULS_BOSS))
