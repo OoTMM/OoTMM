@@ -13,6 +13,33 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
+const u8 kMaxSongNotes[] = {
+    6, // NOTES_SONG_OOT_TP_FOREST
+    8, // NOTES_SONG_OOT_TP_FIRE
+    5, // NOTES_SONG_OOT_TP_WATER
+    6, // NOTES_SONG_OOT_TP_SPIRIT
+    7, // NOTES_SONG_OOT_TP_SHADOW
+    6, // NOTES_SONG_OOT_TP_LIGHT
+    6, // NOTES_SONG_OOT_ZELDA
+    6, // NOTES_SONG_OOT_EPONA
+    6, // NOTES_SONG_OOT_SARIA
+    6, // NOTES_SONG_OOT_SUN
+    6, // NOTES_SONG_OOT_TIME
+    6, // NOTES_SONG_OOT_STORMS
+    7, // NOTES_SONG_OOT_EMPTINESS
+    7, // NOTES_SONG_MM_AWAKENING
+    8, // NOTES_SONG_MM_GORON
+    7, // NOTES_SONG_MM_ZORA
+    7, // NOTES_SONG_MM_EMPTINESS
+    6, // NOTES_SONG_MM_ORDER
+    6, // NOTES_SONG_MM_TIME
+    6, // NOTES_SONG_MM_HEALING
+    6, // NOTES_SONG_MM_EPONA
+    6, // NOTES_SONG_MM_SOARING
+    6, // NOTES_SONG_MM_STORMS
+    6, // NOTES_SONG_MM_SUN
+};
+
 static const u16 kButtonMasks[] = {
     A_BUTTON,
     R_CBUTTONS,
@@ -1898,34 +1925,7 @@ static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSongNote(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    static const u8 kMaxNotes[] = {
-        6, // NOTES_SONG_OOT_TP_FOREST
-        8, // NOTES_SONG_OOT_TP_FIRE
-        5, // NOTES_SONG_OOT_TP_WATER
-        6, // NOTES_SONG_OOT_TP_SPIRIT
-        7, // NOTES_SONG_OOT_TP_SHADOW
-        6, // NOTES_SONG_OOT_TP_LIGHT
-        6, // NOTES_SONG_OOT_ZELDA
-        6, // NOTES_SONG_OOT_EPONA
-        6, // NOTES_SONG_OOT_SARIA
-        6, // NOTES_SONG_OOT_SUN
-        6, // NOTES_SONG_OOT_TIME
-        6, // NOTES_SONG_OOT_STORMS
-        7, // NOTES_SONG_OOT_EMPTINESS
-        7, // NOTES_SONG_MM_AWAKENING
-        8, // NOTES_SONG_MM_GORON
-        7, // NOTES_SONG_MM_ZORA
-        7, // NOTES_SONG_MM_EMPTINESS
-        6, // NOTES_SONG_MM_ORDER
-        6, // NOTES_SONG_MM_TIME
-        6, // NOTES_SONG_MM_HEALING
-        6, // NOTES_SONG_MM_EPONA
-        6, // NOTES_SONG_MM_SOARING
-        6, // NOTES_SONG_MM_STORMS
-        6, // NOTES_SONG_MM_SUN
-    };
-
-    if (gSharedCustomSave.notes[param] >= kMaxNotes[param])
+    if (gSharedCustomSave.notes[param] >= kMaxSongNotes[param])
         return 0;
     return ++gSharedCustomSave.notes[param];
 }
