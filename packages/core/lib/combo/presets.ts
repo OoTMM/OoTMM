@@ -314,6 +314,10 @@ const ALLSANITY_HELL: PartialDeep<Settings> = {
   blueFireArrows: true,
   iceArrowPlatformsOot: true,
   sunlightArrows: true,
+  childWallets: true,
+  colossalWallets: true,
+  bottomlessWallets: true,
+  rupeeScaling: true,
 };
 
 
@@ -444,10 +448,6 @@ const PRESET_ALLSANITY = makeSettings({
   sunSongMm: true,
   fairyOcarinaMm: true,
   shortHookshotMm: true,
-  childWallets: true,
-  colossalWallets: true,
-  bottomlessWallets: true,
-  rupeeScaling: true,
   bombchuBehaviorOot: 'bagSeparate',
   bombchuBehaviorMm: 'bagSeparate',
   spellFireMm: true,
@@ -680,9 +680,6 @@ const PRESET_HELL = makeSettings({
   sunSongMm: true,
   fairyOcarinaMm: true,
   shortHookshotMm: true,
-  childWallets: true,
-  colossalWallets: true,
-  bottomlessWallets: true,
   bombchuBehaviorOot: 'bagSeparate',
   bombchuBehaviorMm: 'bagSeparate',
   spellFireMm: true,
