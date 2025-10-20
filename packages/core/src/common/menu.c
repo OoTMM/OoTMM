@@ -6,6 +6,7 @@
 #include <combo/souls.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/notes.h>
 
 #define VTX_COUNT 2048
 
@@ -110,6 +111,40 @@ static void addDefs(const DungeonDef* defs, int count)
     }
     gDungeonDefCount += count;
 }
+
+static u8 gSongNotesOot[16] = {
+    NOTES_SONG_OOT_ZELDA,
+    NOTES_SONG_OOT_EPONA,
+    NOTES_SONG_OOT_SARIA,
+    NOTES_SONG_OOT_SUN,
+    NOTES_SONG_OOT_TIME,
+    NOTES_SONG_OOT_STORMS,
+    NOTES_SONG_OOT_TP_FOREST,
+    NOTES_SONG_OOT_TP_FIRE,
+    NOTES_SONG_OOT_TP_WATER,
+    NOTES_SONG_OOT_TP_SHADOW,
+    NOTES_SONG_OOT_TP_SPIRIT,
+    NOTES_SONG_OOT_TP_LIGHT,
+};
+
+static u8 gSongNotesCountOot = 12;
+
+static u8 gSongNotesMm[16] = {
+    NOTES_SONG_OOT_ZELDA,
+    NOTES_SONG_OOT_EPONA,
+    NOTES_SONG_OOT_SARIA,
+    NOTES_SONG_OOT_SUN,
+    NOTES_SONG_OOT_TIME,
+    NOTES_SONG_OOT_STORMS,
+    NOTES_SONG_OOT_TP_FOREST,
+    NOTES_SONG_OOT_TP_FIRE,
+    NOTES_SONG_OOT_TP_WATER,
+    NOTES_SONG_OOT_TP_SHADOW,
+    NOTES_SONG_OOT_TP_SPIRIT,
+    NOTES_SONG_OOT_TP_LIGHT,
+};
+
+static u8 gSongNotesCountMm = 10;
 
 void menuInit()
 {
@@ -1006,6 +1041,9 @@ void comboMenuUpdate(PlayState* play)
     case MENU_INFO:
         g.menuCursorMax = gDungeonDefCount;
         break;
+    case MENU_SONG_NOTES_OOT:
+        g.menuCursorMax = gSongNotesCountOot;
+        break;
     case MENU_SOULS_OOT_ENEMY:
         g.menuCursorMax = ARRAY_COUNT(kSoulsEnemyOot);
         break;
@@ -1038,6 +1076,16 @@ void comboMenuUpdate(PlayState* play)
 static int min(int a, int b)
 {
     return a < b ? a : b;
+}
+
+static void drawMenuSongNotes(PlayState* play, const char* title, const u8* notes)
+{
+    OPEN_DISPS(play->state.gfxCtx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, title, -110.f, 54.f);
+    for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
+        printSoul(play, names, soulBase, g.menuCursor, i, mm);
+    CLOSE_DISPS();
 }
 
 static void drawMenuSouls(PlayState* play, const char* title, const char* const* names, int soulBase, int mm)
@@ -1100,6 +1148,12 @@ void comboMenuDraw(PlayState* play)
     case MENU_INFO:
         drawMenuInfo(play);
         break;
+    case MENU_SONG_NOTES_OOT:
+        drawMenuSongNotes(play, "OoT Song Notes", 0);
+        break;
+    case MENU_SONG_NOTES_MM:
+        drawMenuSongNotes(play, "MM Song Notes", 1);
+        break;
     case MENU_SOULS_OOT_ENEMY:
         drawMenuSouls(play, "OoT Enemy Souls", kSoulsEnemyOot, GI_OOT_SOUL_ENEMY_STALFOS, 0);
         break;
@@ -1140,6 +1194,10 @@ void comboMenuNext(void)
     g.menuCursor = 0;
     g.menuCursorMax = 0;
 
+    if (g.menuScreen == MENU_SONG_NOTES_OOT && (!Config_Flag(CFG_SONG_NOTES) || Config_Flag(CFG_ONLY_MM)))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SONG_NOTES_MM && (!Config_Flag(CFG_SONG_NOTES) || Config_Flag(CFG_ONLY_OOT)))
+        g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_OOT_ENEMY && !Config_Flag(CFG_OOT_SOULS_ENEMY))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_OOT_BOSS && !Config_Flag(CFG_OOT_SOULS_BOSS))
