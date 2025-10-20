@@ -2167,7 +2167,7 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   default: true,
-  description: 'Makes traps look like different items (except rupoors).',
+  description: 'Makes traps look like different items.',
 }, {
   key: 'trapsQuantity',
   name: 'Traps Quantity',
