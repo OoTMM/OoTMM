@@ -104,7 +104,7 @@ static f32 sSpawnSin;
 
 static int EnWood02_IsTree(EnWood02* this)
 {
-    return !!(this->actor.params <= WOOD_TREE_KAKARIKO_ADULT);
+    return !!((this->actor.params & 0xff) <= WOOD_TREE_KAKARIKO_ADULT);
 }
 
 s32 EnWood02_SpawnZoneCheck(EnWood02* this, PlayState* play, Vec3f* pos) {

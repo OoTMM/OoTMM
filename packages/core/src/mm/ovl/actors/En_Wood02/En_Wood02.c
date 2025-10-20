@@ -103,7 +103,10 @@ Gfx* D_808C4D70[] = {
 
 static int EnWood02_IsTree(EnWood02* this)
 {
-    return !!((this->actor.params <= WOOD_TREE_KAKARIKO_ADULT) || (this->actor.params == WOOD_TREE_SPECIAL));
+    u8 type;
+
+    type = this->actor.params & 0xff;
+    return !!((type <= WOOD_TREE_KAKARIKO_ADULT) || (type == WOOD_TREE_SPECIAL));
 }
 
 s32 EnWood02_SpawnZoneCheck(EnWood02* this, PlayState* play, Vec3f* arg2) {
