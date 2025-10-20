@@ -6,8 +6,7 @@ import { World } from './world';
 import { ItemPlacement } from './solve';
 import { Random, randomFloat, sample, shuffle } from '../random';
 import { Monitor } from '../monitor';
-import { JUNK } from '../items/groups';
-import { countMapAdd, countMapArray } from '../util';
+import { countMapArray } from '../util';
 import { TRAP_AMOUNTS } from './traps';
 
 export class LogicPassMinimize {

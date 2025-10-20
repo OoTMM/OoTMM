@@ -7,7 +7,8 @@
 #define TRAP_DRAIN      0x03
 #define TRAP_ANTI_MAGIC 0x04
 #define TRAP_KNOCKBACK  0x05
-#define TRAP_MAX        0x06
+#define TRAP_RUPOOR     0x06
+#define TRAP_MAX        0x07
 
 typedef struct PlayState PlayState;
 void Play_UpdateTraps(PlayState* play);

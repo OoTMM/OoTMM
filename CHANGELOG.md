@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Made rupoors behave like other traps.
 - Remove some vanilla BGM mixing when custom music is enabled.
 - Separate settings for keeping ammo/rupees and bottle contents through cycle resets in MM.
 - The Skeleton key has a new, custom model (thanks Dahni).

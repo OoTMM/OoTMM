@@ -248,20 +248,14 @@ export const SONG_NOTES = new Set([
   Items.SHARED_SONG_NOTE_EMPTINESS,
 ]);
 
-export const TRAPS_CLOAKED = new Set([
+export const TRAPS = new Set([
   Items.OOT_TRAP_ICE,
   Items.OOT_TRAP_FIRE,
   Items.OOT_TRAP_SHOCK,
   Items.OOT_TRAP_DRAIN,
   Items.OOT_TRAP_ANTI_MAGIC,
   Items.OOT_TRAP_KNOCKBACK,
-]);
-
-export const TRAPS = new Set([
   Items.OOT_TRAP_RUPOOR,
-  Items.MM_TRAP_RUPOOR,
-  Items.SHARED_TRAP_RUPOOR,
-  ...TRAPS_CLOAKED,
 ]);
 
 export const JUNK = new Set([

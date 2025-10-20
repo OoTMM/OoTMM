@@ -84,6 +84,12 @@ static int Play_UpdateTrapsKnockback(PlayState* play, Player* player)
     return 1;
 }
 
+static int Play_UpdateTrapsRupoor(PlayState* play, Player* player)
+{
+    AddRupees(-10);
+    return 1;
+}
+
 static const TrapHandler kTrapHandlers[] = {
     [TRAP_ICE] = Play_UpdateTrapsIce,
     [TRAP_FIRE] = Play_UpdateTrapsFire,
@@ -91,6 +97,7 @@ static const TrapHandler kTrapHandlers[] = {
     [TRAP_DRAIN] = Play_UpdateTrapsDrain,
     [TRAP_ANTI_MAGIC] = Play_UpdateTrapsAntiMagic,
     [TRAP_KNOCKBACK] = Play_UpdateTrapsKnockback,
+    [TRAP_RUPOOR] = Play_UpdateTrapsRupoor,
 };
 
 void Play_UpdateTraps(PlayState* play)
