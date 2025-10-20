@@ -83,5 +83,8 @@ f32     Math_Vec3f_DistXZ(Vec3f* a, Vec3f* b);
 f32     Math_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
 f32     Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 s32     Math3D_LineSegVsPlane(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* linePointA, Vec3f* linePointB, Vec3f* intersect, s32 fromFront);
+void    Math_Vec3s_ToVec3f(Vec3f* dest, Vec3s* src);
+void    Math_Vec3s_DiffToVec3f(Vec3f* dest, Vec3s* a, Vec3s* b);
+void    Math_Vec3f_Scale(Vec3f* vec, f32 scaleF);
 
 #endif

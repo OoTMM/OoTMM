@@ -442,6 +442,11 @@ void* actorAddr(u16 actorId, u32 addr);
 #define DYNA_INTERACT_ACTOR_ON_HEAVY_SWITCH (1 << 4) // Like the ACTOR_ON_TOP flag but only actors with ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCHES
 
 void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 transformFlags);
+s32 DynaPolyActor_IsActorOnTop(struct DynaPolyActor* dynaActor);
+s32 DynaPolyActor_IsPlayerOnTop(struct DynaPolyActor* dynaActor);
+s32 DynaPolyActor_IsPlayerAbove(struct DynaPolyActor* dynaActor);
+s32 DynaPolyActor_IsSwitchPressed(struct DynaPolyActor* dynaActor);
+
 void Actor_UpdatePos(Actor *actor);
 
 #if defined(GAME_MM)

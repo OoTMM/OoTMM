@@ -29,6 +29,7 @@
 # include <combo/effect.h>
 # include <combo/equipment.h>
 # include <combo/math.h>
+# include <combo/camera.h>
 # include <combo/item.h>
 # include <combo/npc.h>
 # include <combo/object.h>

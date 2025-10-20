@@ -102,7 +102,7 @@ void    Actor_SetScale(Actor* actor, float scale);
 void    Actor_SetFocus(Actor* actor, float height);
 void    Actor_OfferCarry(Actor* actor, PlayState* play);
 void    ActorEnableTalk(Actor* actor, PlayState* play, float range);
-void    ActorEnableTalkEx(Actor* actor, PlayState* play, float range, u32 unk);
+void    Actor_OfferTalkExchangeEquiCylinder(Actor* actor, PlayState* play, float range, u32 unk);
 void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 void    Actor_MoveWithGravity(Actor* actor);
 #define Actor_MoveXZGravity Actor_MoveWithGravity
@@ -186,7 +186,7 @@ void SpawnSomeDust(PlayState* play, Vec3f* pos, float unk1, int unk2, int unk3, 
 
 f32 Rand_CenteredFloat(f32 scale);
 
-int GetActiveItem(PlayState* play);
+s8 Actor_GetPlayerExchangeItemId(PlayState* play);
 
 #if defined(GAME_MM)
 void AddMagic(PlayState* play, s16 amount);

@@ -259,13 +259,22 @@ PreDraw2 = 0x80022554;
 LoadObjectGi = 0x80838f6c;
 Actor_OfferCarry = 0x80022d20;
 ActorEnableTalk = 0x80022a68;
-ActorEnableTalkEx = 0x80022a34;
+Actor_OfferTalkExchangeEquiCylinder = 0x80022a34;
 ActorTalkedTo = 0x80022930;
 PlayerDisplayTextBox = 0x800dce14;
 Message_Close = 0x800d6218;
 Message_GetState = 0x800dd464;
 Message_IsClosed = 0x80022ad0;
+DynaPolyActor_IsPlayerOnTop = 0x80035364;
+DynaPolyActor_IsPlayerAbove = 0x80035388;
+Math3D_Vec3fDistSq = 0x800a5538;
+Math_Vec3s_ToVec3f = 0x80063ccc;
+Actor_PlaySfx_Flagged = 0x8002313c;
+Math_Vec3s_DiffToVec3f = 0x80063d80;
+Math3D_CosOut = 0x800a4ee0;
+Math_Vec3f_Scale = 0x80063ddc;
 
+Camera_RequestSetting = 0x800495bc;
 OcarinaAction =  0x800dd400;
 OcarinaAction2 = 0x800dd430;
 
@@ -285,7 +294,7 @@ SpawnSomeDust = 0x80026308;
 Rand_ZeroOne = 0x800cdccc;
 Flags_GetTreasure = 0x8002060c;
 SetChestFlag = 0x80020624;
-GetActiveItem = 0x80022b04;
+Actor_GetPlayerExchangeItemId = 0x80022b04;
 
 AddItem = 0x8006fdcc;
 Player_AddItemWithIcon = 0x8083c590;
