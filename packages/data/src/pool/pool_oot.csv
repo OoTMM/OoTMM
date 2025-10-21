@@ -1389,6 +1389,9 @@ Desert Colossus Rock Circle 2 Rock 5,                       rock,           NONE
 Desert Colossus Rock Circle 2 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001b,                    RANDOM
+Desert Colossus Soil 1,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x0001d,                    FAIRY
+Desert Colossus Soil 2,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x1001d,                    FAIRY
+Desert Colossus Soil 3,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x2001d,                    FAIRY
 Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET
