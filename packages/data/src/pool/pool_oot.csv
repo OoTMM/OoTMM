@@ -769,6 +769,9 @@ Lake Hylia Island Big Fairy,                                fairy_spot,     NONE
 Lake Hylia Butterfly 1,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x00021,                    FAIRY
 Lake Hylia Butterfly 2,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x10021,                    NOTHING
 Lake Hylia Butterfly 3,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x20021,                    NOTHING
+Lake Hylia Soil 1,                                          soil,           NONE,                 LAKE_HYLIA,                     0x00027,                    FAIRY
+Lake Hylia Soil 2,                                          soil,           NONE,                 LAKE_HYLIA,                     0x10027,                    FAIRY
+Lake Hylia Soil 3,                                          soil,           NONE,                 LAKE_HYLIA,                     0x20027,                    FAIRY
 Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
