@@ -57,7 +57,7 @@ void EnGo2_SetBiggoronMessageId(Actor* this, PlayState* play, Actor* dst)
     msgId = 0x3053;
     gi = -1;
 
-    switch (GetActiveItem(play))
+    switch (Actor_GetPlayerExchangeItemId(play))
     {
     case 0xb: /* Broken Goron Sword */
         gi = GI_OOT_PRESCRIPTION;

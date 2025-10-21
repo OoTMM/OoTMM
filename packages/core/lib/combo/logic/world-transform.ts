@@ -1247,6 +1247,10 @@ export class LogicPassWorldTransform {
     this.filterLocations(this.state.settings.shuffleBushMm, 'bush', 'mm');
   }
 
+  private filterChecksSoil() {
+    this.filterLocationsBool(this.state.settings.shuffleSoilOot, 'soil', 'oot');
+  }
+
   private filterChecksWonder() {
     this.filterLocations(this.state.settings.shuffleWonderItemsOot, 'wonder', 'oot');
     this.filterLocationsBool(this.state.settings.shuffleWonderItemsMm, 'wonder', 'mm');
@@ -1317,6 +1321,7 @@ export class LogicPassWorldTransform {
     this.filterChecksRedIce();
     this.filterChecksFairyFountain();
     this.filterChecksFairySpots();
+    this.filterChecksSoil();
 
     /* Carpenters */
     if (['open', 'single'].includes(settings.gerudoFortress)) {

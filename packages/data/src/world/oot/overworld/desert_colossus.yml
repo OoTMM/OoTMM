@@ -10,6 +10,7 @@
     "Spirit Temple Adult Hand": "climb_anywhere"
     "Spirit Temple Child Hand": "climb_anywhere"
     "Desert Colossus Oasis": "can_play_storms"
+    "Desert Colossus Soil Fairies": "soil_fairies(BEAN_DESERT_COLOSSUS)"
   events:
     BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:
@@ -41,6 +42,14 @@
     "Desert Colossus Rock Circle 2 Rock 8": "true"
   gossip:
     "Desert Colossus Gossip": "true"
+
+"Desert Colossus Soil Fairies":
+  region: DESERT_COLOSSUS
+  age_change: false
+  locations:
+    "Desert Colossus Soil 1": "true"
+    "Desert Colossus Soil 2": "true"
+    "Desert Colossus Soil 3": "true"
 
 "Desert Colossus Oasis":
   region: DESERT_COLOSSUS

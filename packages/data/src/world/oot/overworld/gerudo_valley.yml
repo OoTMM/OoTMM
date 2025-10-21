@@ -6,6 +6,7 @@
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || can_hookshot)) || time_travel_at_will"
     "Octorok Grotto Ledge": "true"
+    "Gerudo Valley Soil Fairies": "soil_fairies(BEAN_GERUDO_VALLEY)"
   events:
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "is_child"
@@ -33,6 +34,14 @@
     "Gerudo Valley Rock Entrance Water 3": "true"
   gossip:
     "Gerudo Valley Gossip": "true"
+
+"Gerudo Valley Soil Fairies":
+  region: GERUDO_VALLEY
+  age_change: false
+  locations:
+    "Gerudo Valley Soil 1": "true"
+    "Gerudo Valley Soil 2": "true"
+    "Gerudo Valley Soil 3": "true"
 
 "Gerudo Valley After Bridge":
   region: GERUDO_VALLEY

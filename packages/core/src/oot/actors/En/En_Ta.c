@@ -10,7 +10,7 @@ int EnTa_GetActiveItem_Chicken(Actor* this, PlayState* play)
 {
     int item;
 
-    item = GetActiveItem(play);
+    item = Actor_GetPlayerExchangeItemId(play);
     if (item == 3)
         comboRemoveTradeItemChild(XITEM_OOT_CHILD_CHICKEN);
     return item;

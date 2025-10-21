@@ -797,6 +797,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleTreesMm = 'all';
       base.shuffleBushOot = true;
       base.shuffleBushMm = 'all';
+      base.shuffleSoilOot = true;
       base.shuffleFreeHeartsOot = 'all';
       base.shuffleFreeHeartsMm = true;
       base.shuffleFreeRupeesOot = 'all';
@@ -828,6 +829,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleTreesMm = 'overworld';
       base.shuffleBushOot = true;
       base.shuffleBushMm = 'overworld';
+      base.shuffleSoilOot = true;
       base.shuffleFreeHeartsOot = 'overworld';
       base.shuffleFreeRupeesOot = 'overworld';
       base.shuffleFreeRupeesMm = 'overworld';
@@ -876,6 +878,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleTreesMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleBushOot = booleanWeighted(random, 0.5);
       base.shuffleBushMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
+      base.shuffleSoilOot = booleanWeighted(random, 0.5);
       base.shuffleFreeHeartsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleFreeHeartsMm = booleanWeighted(random, 0.5);
       base.shuffleFreeRupeesOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });

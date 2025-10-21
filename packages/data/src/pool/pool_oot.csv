@@ -103,6 +103,9 @@ Kokiri Forest Wonder Item Crawl 1,                          wonder,         NONE
 Kokiri Forest Wonder Item Crawl 2,                          wonder,         NONE,                 KOKIRI_FOREST,                  0x00206,                    RUPEE_GREEN
 Kokiri Forest Wonder Item Platforms 1,                      wonder,         NONE,                 KOKIRI_FOREST,                  0x00021,                    RUPEE_BLUE
 Kokiri Forest Wonder Item Platforms 2,                      wonder,         NONE,                 KOKIRI_FOREST,                  0x00026,                    RUPEE_BLUE
+Kokiri Forest Soil 1,                                       soil,           NONE,                 KOKIRI_FOREST,                  0x00049,                    FAIRY
+Kokiri Forest Soil 2,                                       soil,           NONE,                 KOKIRI_FOREST,                  0x10049,                    FAIRY
+Kokiri Forest Soil 3,                                       soil,           NONE,                 KOKIRI_FOREST,                  0x20049,                    FAIRY
 Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x00,                       RECOVERY_HEART
 Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x01,                       ARROWS_10
 Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x02,                       ARROWS_30
@@ -174,6 +177,12 @@ Lost Woods Butterfly 2,                                     butterfly,      NONE
 Lost Woods Butterfly 3,                                     butterfly,      NONE,                 LOST_WOODS,                     0x20601,                    NOTHING
 Lost Woods Butterfly 4,                                     butterfly,      NONE,                 LOST_WOODS,                     0x30601,                    NOTHING
 Lost Woods Butterfly 5,                                     butterfly,      NONE,                 LOST_WOODS,                     0x40601,                    NOTHING
+Lost Woods Soil Early 1,                                    soil,           NONE,                 LOST_WOODS,                     0x00503,                    FAIRY
+Lost Woods Soil Early 2,                                    soil,           NONE,                 LOST_WOODS,                     0x10503,                    FAIRY
+Lost Woods Soil Early 3,                                    soil,           NONE,                 LOST_WOODS,                     0x20503,                    FAIRY
+Lost Woods Soil Late 1,                                     soil,           NONE,                 LOST_WOODS,                     0x00605,                    FAIRY
+Lost Woods Soil Late 2,                                     soil,           NONE,                 LOST_WOODS,                     0x10605,                    FAIRY
+Lost Woods Soil Late 3,                                     soil,           NONE,                 LOST_WOODS,                     0x20605,                    FAIRY
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
@@ -289,6 +298,25 @@ Graveyard Rock,                                             rock,           NONE
 Graveyard Butterfly 1,                                      butterfly,      NONE,                 GRAVEYARD,                      0x00111,                    FAIRY
 Graveyard Butterfly 2,                                      butterfly,      NONE,                 GRAVEYARD,                      0x10111,                    NOTHING
 Graveyard Butterfly 3,                                      butterfly,      NONE,                 GRAVEYARD,                      0x20111,                    NOTHING
+Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
+Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
+Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
+Graveyard Crate,                                            crate,          NONE,                 GRAVEYARD,                      0x00115,                    NOTHING
+Graveyard Grass 01,                                         grass,          NONE,                 GRAVEYARD,                      0x00110,                    RANDOM
+Graveyard Grass 02,                                         grass,          NONE,                 GRAVEYARD,                      0x10110,                    RANDOM
+Graveyard Grass 03,                                         grass,          NONE,                 GRAVEYARD,                      0x20110,                    RANDOM
+Graveyard Grass 04,                                         grass,          NONE,                 GRAVEYARD,                      0x30110,                    RANDOM
+Graveyard Grass 05,                                         grass,          NONE,                 GRAVEYARD,                      0x40110,                    RANDOM
+Graveyard Grass 06,                                         grass,          NONE,                 GRAVEYARD,                      0x50110,                    RANDOM
+Graveyard Grass 07,                                         grass,          NONE,                 GRAVEYARD,                      0x60110,                    RANDOM
+Graveyard Grass 08,                                         grass,          NONE,                 GRAVEYARD,                      0x70110,                    RANDOM
+Graveyard Grass 09,                                         grass,          NONE,                 GRAVEYARD,                      0x80110,                    RANDOM
+Graveyard Grass 10,                                         grass,          NONE,                 GRAVEYARD,                      0x90110,                    RANDOM
+Graveyard Grass 11,                                         grass,          NONE,                 GRAVEYARD,                      0xa0110,                    RANDOM
+Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
+Graveyard Soil 1,                                           soil,           NONE,                 GRAVEYARD,                      0x00112,                    FAIRY
+Graveyard Soil 2,                                           soil,           NONE,                 GRAVEYARD,                      0x10112,                    FAIRY
+Graveyard Soil 3,                                           soil,           NONE,                 GRAVEYARD,                      0x20112,                    FAIRY
 Graveyard ReDead Tomb,                                      chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
 Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
@@ -333,22 +361,6 @@ Graveyard Dampe Tomb Wonder Item 12,                        wonder,         NONE
 Graveyard Dampe Tomb Wonder Item 13,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030a,                    RUPEE_GREEN
 Graveyard Dampe Tomb Wonder Item 14,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030b,                    RUPEE_GREEN
 Graveyard Dampe Tomb Wonder Item 15,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030c,                    RUPEE_GREEN
-Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
-Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
-Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
-Graveyard Crate,                                            crate,          NONE,                 GRAVEYARD,                      0x00115,                    NOTHING
-Graveyard Grass 01,                                         grass,          NONE,                 GRAVEYARD,                      0x00110,                    RANDOM
-Graveyard Grass 02,                                         grass,          NONE,                 GRAVEYARD,                      0x10110,                    RANDOM
-Graveyard Grass 03,                                         grass,          NONE,                 GRAVEYARD,                      0x20110,                    RANDOM
-Graveyard Grass 04,                                         grass,          NONE,                 GRAVEYARD,                      0x30110,                    RANDOM
-Graveyard Grass 05,                                         grass,          NONE,                 GRAVEYARD,                      0x40110,                    RANDOM
-Graveyard Grass 06,                                         grass,          NONE,                 GRAVEYARD,                      0x50110,                    RANDOM
-Graveyard Grass 07,                                         grass,          NONE,                 GRAVEYARD,                      0x60110,                    RANDOM
-Graveyard Grass 08,                                         grass,          NONE,                 GRAVEYARD,                      0x70110,                    RANDOM
-Graveyard Grass 09,                                         grass,          NONE,                 GRAVEYARD,                      0x80110,                    RANDOM
-Graveyard Grass 10,                                         grass,          NONE,                 GRAVEYARD,                      0x90110,                    RANDOM
-Graveyard Grass 11,                                         grass,          NONE,                 GRAVEYARD,                      0xa0110,                    RANDOM
-Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
 Death Mountain Trail Chest,                                 chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
 Death Mountain Trail HP,                                    collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
 Death Mountain Trail Prescription,                          npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
@@ -412,6 +424,9 @@ Death Mountain Trail Red Boulder Lower 7,                   redboulder,     NONE
 Death Mountain Trail Red Boulder Near Upper GS,             redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08011,                    NOTHING
 Death Mountain Trail Red Boulder Upper 1,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08013,                    NOTHING
 Death Mountain Trail Red Boulder Upper 2,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08012,                    NOTHING
+Death Mountain Trail Soil 1,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0002b,                    FAIRY
+Death Mountain Trail Soil 2,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1002b,                    FAIRY
+Death Mountain Trail Soil 3,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x2002b,                    FAIRY
 Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
 Goron City Maze Center 1,                                   chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
 Goron City Maze Center 2,                                   chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE
@@ -507,6 +522,9 @@ Death Mountain Crater Red Boulder Grotto,                   redboulder,     NONE
 Death Mountain Crater Red Boulder Great Fairy 1,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
 Death Mountain Crater Red Boulder Great Fairy 2,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING
 Death Mountain Crater Red Boulder Shortcut,                 redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010e,                    NOTHING
+Death Mountain Crater Soil 1,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x00121,                    FAIRY
+Death Mountain Crater Soil 2,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x10121,                    FAIRY
+Death Mountain Crater Soil 3,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x20121,                    FAIRY
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
 Zora River HP Platform,                                     collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
 Zora River Bean Seller,                                     npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
@@ -576,6 +594,9 @@ Zora River Fairy Fountain Fairy 5,                          fairy,          NONE
 Zora River Fairy Fountain Fairy 6,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52100,                    FAIRY
 Zora River Fairy Fountain Fairy 7,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62100,                    FAIRY
 Zora River Fairy Fountain Fairy 8,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72100,                    FAIRY
+Zora River Soil 1,                                          soil,           NONE,                 ZORA_RIVER,                     0x00038,                    FAIRY
+Zora River Soil 2,                                          soil,           NONE,                 ZORA_RIVER,                     0x10038,                    FAIRY
+Zora River Soil 3,                                          soil,           NONE,                 ZORA_RIVER,                     0x20038,                    FAIRY
 Zora River Rupee 1,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08101,                    RUPEE_RED
 Zora River Rupee 2,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08102,                    RUPEE_RED
 Zora River Rupee 3,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08103,                    RUPEE_RED
@@ -760,6 +781,9 @@ Lake Hylia Island Big Fairy,                                fairy_spot,     NONE
 Lake Hylia Butterfly 1,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x00021,                    FAIRY
 Lake Hylia Butterfly 2,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x10021,                    NOTHING
 Lake Hylia Butterfly 3,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x20021,                    NOTHING
+Lake Hylia Soil 1,                                          soil,           NONE,                 LAKE_HYLIA,                     0x00027,                    FAIRY
+Lake Hylia Soil 2,                                          soil,           NONE,                 LAKE_HYLIA,                     0x10027,                    FAIRY
+Lake Hylia Soil 3,                                          soil,           NONE,                 LAKE_HYLIA,                     0x20027,                    FAIRY
 Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
@@ -1280,6 +1304,9 @@ Gerudo Valley Red Boulder Around Chest 1,                   redboulder,     NONE
 Gerudo Valley Red Boulder Around Chest 2,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08014,                    NOTHING
 Gerudo Valley Red Boulder Around Chest 3,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08015,                    NOTHING
 Gerudo Valley Red Boulder Around Chest 4,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08016,                    NOTHING
+Gerudo Valley Soil 1,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x0001f,                    FAIRY
+Gerudo Valley Soil 2,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x1001f,                    FAIRY
+Gerudo Valley Soil 3,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x2001f,                    FAIRY
 Gerudo Valley Octorok Grotto Rupee 1,                       rupee,          NONE,                 GROTTOS,                        0x00501,                    RUPEE_BLUE
 Gerudo Valley Octorok Grotto Rupee 2,                       rupee,          NONE,                 GROTTOS,                        0x00502,                    RUPEE_BLUE
 Gerudo Valley Octorok Grotto Rupee 3,                       rupee,          NONE,                 GROTTOS,                        0x00503,                    RUPEE_BLUE
@@ -1374,6 +1401,9 @@ Desert Colossus Rock Circle 2 Rock 5,                       rock,           NONE
 Desert Colossus Rock Circle 2 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001b,                    RANDOM
+Desert Colossus Soil 1,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x0001d,                    FAIRY
+Desert Colossus Soil 2,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x1001d,                    FAIRY
+Desert Colossus Soil 3,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x2001d,                    FAIRY
 Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET

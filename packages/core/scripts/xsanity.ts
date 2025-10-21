@@ -167,6 +167,7 @@ const ACTORS_OOT = {
   BG_ICE_SHELTER: 0x0ef,
   EN_ISHI: 0x14e,
   EN_WOOD02: 0x077,
+  OBJ_BEAN: 0x126,
 };
 
 const ACTORS_MM = {
@@ -208,6 +209,7 @@ const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.OBJ_MURE3]: 7,
   [ACTORS_OOT.OBJ_MURE]: 5,
   [ACTORS_OOT.EN_WOOD02]: 6,
+  [ACTORS_OOT.OBJ_BEAN]: 3,
 }
 
 const ACTOR_SLICES_MM = {
@@ -1101,6 +1103,12 @@ type ActorHandlers = { [actorId: number]: ActorHandler };
 
 let altGrassAcc = 0;
 
+function actorHandlerOotObjBean(checks: Check[], ra: RoomActor) {
+  for (let i = 0; i < 3; ++i) {
+    checks.push({ roomActor: ra, item: 'FAIRY', name: `Soil ${i + 1}`, type: 'soil', sliceId: i });
+  }
+}
+
 function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
   const { actor } = ra;
   const grassType = (actor.params) & 3;
@@ -1496,6 +1504,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.BG_ICE_SHELTER]: actorHandlerOotBgIceShelter,
   [ACTORS_OOT.EN_ISHI]: actorHandlerOotEnIshi,
   [ACTORS_OOT.EN_WOOD02]: actorHandlerOotEnWood02,
+  [ACTORS_OOT.OBJ_BEAN]: actorHandlerOotObjBean,
 };
 
 const ACTORS_HANDLERS_MM = {
