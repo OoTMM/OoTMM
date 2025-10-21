@@ -516,6 +516,9 @@ Death Mountain Crater Red Boulder Grotto,                   redboulder,     NONE
 Death Mountain Crater Red Boulder Great Fairy 1,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
 Death Mountain Crater Red Boulder Great Fairy 2,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING
 Death Mountain Crater Red Boulder Shortcut,                 redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010e,                    NOTHING
+Death Mountain Crater Soil 1,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x00121,                    FAIRY
+Death Mountain Crater Soil 2,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x10121,                    FAIRY
+Death Mountain Crater Soil 3,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x20121,                    FAIRY
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
 Zora River HP Platform,                                     collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
 Zora River Bean Seller,                                     npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN

@@ -87,6 +87,7 @@
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
     "Death Mountain Crater Bottom Child": "is_child"
     "Death Mountain Crater Bottom Adult Rupees": "is_adult && scarecrow_longshot"
+    "Death Mountain Crater Soil Fairies": "soil_fairies(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
@@ -98,6 +99,14 @@
     "Death Mountain Crater Rock Adult 3": "is_adult"
     "Death Mountain Crater Rock Adult 4": "is_adult"
     "Death Mountain Crater Rock Adult 5": "is_adult"
+
+"Death Mountain Crater Soil Fairies":
+  region: DEATH_MOUNTAIN_CRATER
+  age_change: false
+  locations:
+    "Death Mountain Crater Soil 1": "true"
+    "Death Mountain Crater Soil 2": "true"
+    "Death Mountain Crater Soil 3": "true"
 
 "Death Mountain Crater Near Temple":
   region: DEATH_MOUNTAIN_CRATER
