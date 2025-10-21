@@ -9,6 +9,7 @@
     "Dampe Grave": "is_adult"
     "Dampe House": "is_adult || is_dusk"
     "Graveyard Upper": "climb_anywhere || hookshot_anywhere"
+    "Graveyard Soil Fairies": "soil_fairies(BEAN_GRAVEYARD)"
   events:
     BEAN_GRAVEYARD: "can_use_beans"
     BUGS: "has_bottle"
@@ -40,6 +41,14 @@
     "Graveyard Butterfly 1": "is_child && can_use_sticks"
     "Graveyard Butterfly 2": "is_child && can_use_sticks"
     "Graveyard Butterfly 3": "is_child && can_use_sticks"
+
+"Graveyard Soil Fairies":
+  region: GRAVEYARD
+  age_change: false
+  locations:
+    "Graveyard Soil 1": "true"
+    "Graveyard Soil 2": "true"
+    "Graveyard Soil 3": "true"
 
 "Graveyard Upper":
   region: GRAVEYARD

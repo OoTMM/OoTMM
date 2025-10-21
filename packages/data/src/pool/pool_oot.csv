@@ -289,6 +289,25 @@ Graveyard Rock,                                             rock,           NONE
 Graveyard Butterfly 1,                                      butterfly,      NONE,                 GRAVEYARD,                      0x00111,                    FAIRY
 Graveyard Butterfly 2,                                      butterfly,      NONE,                 GRAVEYARD,                      0x10111,                    NOTHING
 Graveyard Butterfly 3,                                      butterfly,      NONE,                 GRAVEYARD,                      0x20111,                    NOTHING
+Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
+Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
+Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
+Graveyard Crate,                                            crate,          NONE,                 GRAVEYARD,                      0x00115,                    NOTHING
+Graveyard Grass 01,                                         grass,          NONE,                 GRAVEYARD,                      0x00110,                    RANDOM
+Graveyard Grass 02,                                         grass,          NONE,                 GRAVEYARD,                      0x10110,                    RANDOM
+Graveyard Grass 03,                                         grass,          NONE,                 GRAVEYARD,                      0x20110,                    RANDOM
+Graveyard Grass 04,                                         grass,          NONE,                 GRAVEYARD,                      0x30110,                    RANDOM
+Graveyard Grass 05,                                         grass,          NONE,                 GRAVEYARD,                      0x40110,                    RANDOM
+Graveyard Grass 06,                                         grass,          NONE,                 GRAVEYARD,                      0x50110,                    RANDOM
+Graveyard Grass 07,                                         grass,          NONE,                 GRAVEYARD,                      0x60110,                    RANDOM
+Graveyard Grass 08,                                         grass,          NONE,                 GRAVEYARD,                      0x70110,                    RANDOM
+Graveyard Grass 09,                                         grass,          NONE,                 GRAVEYARD,                      0x80110,                    RANDOM
+Graveyard Grass 10,                                         grass,          NONE,                 GRAVEYARD,                      0x90110,                    RANDOM
+Graveyard Grass 11,                                         grass,          NONE,                 GRAVEYARD,                      0xa0110,                    RANDOM
+Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
+Graveyard Soil 1,                                           soil,           NONE,                 GRAVEYARD,                      0x00112,                    FAIRY
+Graveyard Soil 2,                                           soil,           NONE,                 GRAVEYARD,                      0x10112,                    FAIRY
+Graveyard Soil 3,                                           soil,           NONE,                 GRAVEYARD,                      0x20112,                    FAIRY
 Graveyard ReDead Tomb,                                      chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
 Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
@@ -333,22 +352,6 @@ Graveyard Dampe Tomb Wonder Item 12,                        wonder,         NONE
 Graveyard Dampe Tomb Wonder Item 13,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030a,                    RUPEE_GREEN
 Graveyard Dampe Tomb Wonder Item 14,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030b,                    RUPEE_GREEN
 Graveyard Dampe Tomb Wonder Item 15,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030c,                    RUPEE_GREEN
-Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
-Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
-Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
-Graveyard Crate,                                            crate,          NONE,                 GRAVEYARD,                      0x00115,                    NOTHING
-Graveyard Grass 01,                                         grass,          NONE,                 GRAVEYARD,                      0x00110,                    RANDOM
-Graveyard Grass 02,                                         grass,          NONE,                 GRAVEYARD,                      0x10110,                    RANDOM
-Graveyard Grass 03,                                         grass,          NONE,                 GRAVEYARD,                      0x20110,                    RANDOM
-Graveyard Grass 04,                                         grass,          NONE,                 GRAVEYARD,                      0x30110,                    RANDOM
-Graveyard Grass 05,                                         grass,          NONE,                 GRAVEYARD,                      0x40110,                    RANDOM
-Graveyard Grass 06,                                         grass,          NONE,                 GRAVEYARD,                      0x50110,                    RANDOM
-Graveyard Grass 07,                                         grass,          NONE,                 GRAVEYARD,                      0x60110,                    RANDOM
-Graveyard Grass 08,                                         grass,          NONE,                 GRAVEYARD,                      0x70110,                    RANDOM
-Graveyard Grass 09,                                         grass,          NONE,                 GRAVEYARD,                      0x80110,                    RANDOM
-Graveyard Grass 10,                                         grass,          NONE,                 GRAVEYARD,                      0x90110,                    RANDOM
-Graveyard Grass 11,                                         grass,          NONE,                 GRAVEYARD,                      0xa0110,                    RANDOM
-Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
 Death Mountain Trail Chest,                                 chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
 Death Mountain Trail HP,                                    collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
 Death Mountain Trail Prescription,                          npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION

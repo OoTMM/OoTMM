@@ -1,6 +1,7 @@
 #include "Obj_Bean.h"
 #include <assets/oot/objects/gameplay_keep.h>
 #include <assets/oot/objects/object_mamenoki.h>
+#include <combo/xflags.h>
 
 #define FLAGS ACTOR_FLAG_IGNORE_POINT_LIGHTS
 
@@ -294,6 +295,47 @@ s32 ObjBean_CheckForHorseTrample(ObjBean* this, PlayState* play) {
     return false;
 }
 
+static Xflag sXflag;
+
+static void ObjBean_Alias(void)
+{
+    switch (sXflag.sceneId)
+    {
+    case SCE_OOT_KOKIRI_FOREST:
+        sXflag.setupId = 0;
+        sXflag.id = 73;
+        break;
+    case SCE_OOT_GRAVEYARD:
+        sXflag.setupId = 0;
+        sXflag.id = 18;
+        break;
+    case SCE_OOT_ZORA_RIVER:
+        sXflag.setupId = 0;
+        sXflag.id = 56;
+        break;
+    case SCE_OOT_LOST_WOODS:
+        sXflag.setupId = 0;
+        sXflag.id = (sXflag.roomId == 5) ? 3 : 5;
+        break;
+    case SCE_OOT_DESERT_COLOSSUS:
+        sXflag.setupId = 0;
+        sXflag.id = 29;
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+        sXflag.setupId = 0;
+        sXflag.id = 43;
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
+        sXflag.setupId = 0;
+        sXflag.id = 33;
+        break;
+    case SCE_OOT_GERUDO_VALLEY:
+    case SCE_OOT_LAKE_HYLIA:
+        sXflag.setupId = 0;
+        break;
+    }
+}
+
 void ObjBean_Break(ObjBean* this, PlayState* play) {
     Vec3f pos;
     Vec3f velocity;
@@ -418,7 +460,6 @@ void ObjBean_Grow(ObjBean* this) {
     Math_StepToS(&this->leafRotFactor, 0x33E9, 0x168);
     this->dyna.actor.scale.y = Math_SinS(this->leafRotFactor) * 0.17434467f;
     this->dyna.actor.scale.x = this->dyna.actor.scale.z = Math_CosS(this->leafRotFactor) * 0.12207746f;
-    ;
 }
 
 void ObjBean_SetupFlattenLeaves(ObjBean* this) {
@@ -461,6 +502,10 @@ void ObjBean_Grown(ObjBean* this) {
 void ObjBean_Init(Actor* thisx, PlayState* play) {
     s32 path;
     ObjBean* this = (ObjBean*)thisx;
+
+    if (comboXflagInit(&sXflag, thisx, play)) {
+        ObjBean_Alias();
+    }
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     if (gOotSave.age == AGE_ADULT) {
@@ -672,6 +717,7 @@ void ObjBean_SetupGrowWaterPhase3(ObjBean* this) {
 void ObjBean_GrowWaterPhase3(ObjBean* this, PlayState* play) {
     s32 i;
     Vec3f itemDropPos;
+    Xflag xflag;
 
     this->transformFunc(this);
     if (this->timer == 40) {
@@ -681,9 +727,15 @@ void ObjBean_GrowWaterPhase3(ObjBean* this, PlayState* play) {
             itemDropPos.x = this->dyna.actor.world.pos.x;
             itemDropPos.y = this->dyna.actor.world.pos.y - 25.0f;
             itemDropPos.z = this->dyna.actor.world.pos.z;
+
+            memcpy(&xflag, &sXflag, sizeof(Xflag));
             for (i = 0; i < 3; i++) {
-                Item_DropCollectible(play, &itemDropPos, ITEM00_FLEXIBLE);
+                xflag.sliceId = i;
+                if (!EnItem00_DropCustom(play, &itemDropPos, &xflag)) {
+                    Item_DropCollectible(play, &itemDropPos, ITEM00_FLEXIBLE);
+                }
             }
+
             this->stateFlags |= BEAN_STATE_BEEN_WATERED;
             Actor_PlaySfx(&this->dyna.actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
             Sfx_PlaySfxCentered(NA_SE_SY_TRE_BOX_APPEAR);

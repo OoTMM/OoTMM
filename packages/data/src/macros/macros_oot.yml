@@ -45,6 +45,8 @@
 "can_play_minigame": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left && ocarina_button_up"
 "can_play_scarecrow": "has_ocarina && ocarina_button_any2"
 
+"soil_fairies(x)": "is_child && can_play_storms && event(x)"
+
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
 "bombchu_license_bag_separate": "has(BOMBCHU_BAG) || has(SHARED_BOMBCHU_BAG)"
