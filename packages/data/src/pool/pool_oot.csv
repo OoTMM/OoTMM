@@ -1292,6 +1292,9 @@ Gerudo Valley Red Boulder Around Chest 1,                   redboulder,     NONE
 Gerudo Valley Red Boulder Around Chest 2,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08014,                    NOTHING
 Gerudo Valley Red Boulder Around Chest 3,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08015,                    NOTHING
 Gerudo Valley Red Boulder Around Chest 4,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08016,                    NOTHING
+Gerudo Valley Soil 1,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x0001f,                    FAIRY
+Gerudo Valley Soil 2,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x1001f,                    FAIRY
+Gerudo Valley Soil 3,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x2001f,                    FAIRY
 Gerudo Valley Octorok Grotto Rupee 1,                       rupee,          NONE,                 GROTTOS,                        0x00501,                    RUPEE_BLUE
 Gerudo Valley Octorok Grotto Rupee 2,                       rupee,          NONE,                 GROTTOS,                        0x00502,                    RUPEE_BLUE
 Gerudo Valley Octorok Grotto Rupee 3,                       rupee,          NONE,                 GROTTOS,                        0x00503,                    RUPEE_BLUE
