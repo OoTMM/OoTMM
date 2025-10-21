@@ -418,6 +418,9 @@ Death Mountain Trail Red Boulder Lower 7,                   redboulder,     NONE
 Death Mountain Trail Red Boulder Near Upper GS,             redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08011,                    NOTHING
 Death Mountain Trail Red Boulder Upper 1,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08013,                    NOTHING
 Death Mountain Trail Red Boulder Upper 2,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08012,                    NOTHING
+Death Mountain Trail Soil 1,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0002b,                    FAIRY
+Death Mountain Trail Soil 2,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1002b,                    FAIRY
+Death Mountain Trail Soil 3,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x2002b,                    FAIRY
 Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
 Goron City Maze Center 1,                                   chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
 Goron City Maze Center 2,                                   chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE

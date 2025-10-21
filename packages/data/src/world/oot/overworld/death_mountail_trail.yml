@@ -9,6 +9,7 @@
     "Death Mountain Storms Grotto": "hidden_grotto_storms"
     "Death Mountain Cow Grotto": "has_explosives_or_hammer"
     "Death Mountain Trail Red Boulders Lower": "is_adult && can_hammer"
+    "Death Mountain Trail Soil Fairies": "soil_fairies(BEAN_DEATH_MOUNTAIN)"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"
     BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
@@ -35,6 +36,14 @@
     "Death Mountain Trail Rock Circle Rock 6": "true"
     "Death Mountain Trail Rock Circle Rock 7": "true"
     "Death Mountain Trail Rock Circle Rock 8": "true"
+
+"Death Mountain Trail Soil Fairies":
+  region: DEATH_MOUNTAIN_TRAIL
+  age_change: false
+  locations:
+    "Death Mountain Trail Soil 1": "true"
+    "Death Mountain Trail Soil 2": "true"
+    "Death Mountain Trail Soil 3": "true"
 
 "Death Mountain Trail Red Boulders Lower":
   region: DEATH_MOUNTAIN_TRAIL
