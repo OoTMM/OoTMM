@@ -36,6 +36,7 @@
     "Lost Woods Lost North": "setting(alterLostWoodsExits)"
     "Lost Woods Lost South": "setting(alterLostWoodsExits)"
     "Lost Woods Lost West": "setting(alterLostWoodsExits)"
+    "Lost Woods Soil Early Fairies": "soil_fairies(BEAN_LOST_WOODS_EARLY)"
   events:
     BEAN_LOST_WOODS_EARLY: "can_use_beans"
     RUPEES: "true"
@@ -62,6 +63,14 @@
     "Lost Woods Wonder Item 3": "is_child"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
+
+"Lost Woods Soil Early Fairies":
+  region: LOST_WOODS
+  age_change: false
+  locations:
+    "Lost Woods Soil Early 1": "true"
+    "Lost Woods Soil Early 2": "true"
+    "Lost Woods Soil Early 3": "true"
 
 "Lost Woods Shortcut Underwater":
   region: LOST_WOODS
@@ -135,6 +144,7 @@
     "Lost Woods Lost East": "setting(alterLostWoodsExits)"
     "Lost Woods Lost South": "setting(alterLostWoodsExits)"
     "Lost Woods Lost West": "setting(alterLostWoodsExits)"
+    "Lost Woods Soil Late Fairies": "soil_fairies(BEAN_LOST_WOODS_LATE)"
   events:
     BEAN_LOST_WOODS_LATE: "can_use_beans"
     RUPEES: "can_cut_grass"
@@ -160,6 +170,14 @@
     "Lost Woods Butterfly 3": "is_child && can_use_sticks"
     "Lost Woods Butterfly 4": "is_child && can_use_sticks"
     "Lost Woods Butterfly 5": "is_child && can_use_sticks"
+
+"Lost Woods Soil Late Fairies":
+  region: LOST_WOODS
+  age_change: false
+  locations:
+    "Lost Woods Soil Late 1": "true"
+    "Lost Woods Soil Late 2": "true"
+    "Lost Woods Soil Late 3": "true"
 
 "Deku Theater":
   region: ENTRANCE

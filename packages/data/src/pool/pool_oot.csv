@@ -177,6 +177,12 @@ Lost Woods Butterfly 2,                                     butterfly,      NONE
 Lost Woods Butterfly 3,                                     butterfly,      NONE,                 LOST_WOODS,                     0x20601,                    NOTHING
 Lost Woods Butterfly 4,                                     butterfly,      NONE,                 LOST_WOODS,                     0x30601,                    NOTHING
 Lost Woods Butterfly 5,                                     butterfly,      NONE,                 LOST_WOODS,                     0x40601,                    NOTHING
+Lost Woods Soil Early 1,                                    soil,           NONE,                 LOST_WOODS,                     0x00503,                    FAIRY
+Lost Woods Soil Early 2,                                    soil,           NONE,                 LOST_WOODS,                     0x10503,                    FAIRY
+Lost Woods Soil Early 3,                                    soil,           NONE,                 LOST_WOODS,                     0x20503,                    FAIRY
+Lost Woods Soil Late 1,                                     soil,           NONE,                 LOST_WOODS,                     0x00605,                    FAIRY
+Lost Woods Soil Late 2,                                     soil,           NONE,                 LOST_WOODS,                     0x10605,                    FAIRY
+Lost Woods Soil Late 3,                                     soil,           NONE,                 LOST_WOODS,                     0x20605,                    FAIRY
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
