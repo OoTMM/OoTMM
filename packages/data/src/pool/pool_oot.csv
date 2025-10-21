@@ -579,6 +579,9 @@ Zora River Fairy Fountain Fairy 5,                          fairy,          NONE
 Zora River Fairy Fountain Fairy 6,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52100,                    FAIRY
 Zora River Fairy Fountain Fairy 7,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62100,                    FAIRY
 Zora River Fairy Fountain Fairy 8,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72100,                    FAIRY
+Zora River Soil 1,                                          soil,           NONE,                 ZORA_RIVER,                     0x00038,                    FAIRY
+Zora River Soil 2,                                          soil,           NONE,                 ZORA_RIVER,                     0x10038,                    FAIRY
+Zora River Soil 3,                                          soil,           NONE,                 ZORA_RIVER,                     0x20038,                    FAIRY
 Zora River Rupee 1,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08101,                    RUPEE_RED
 Zora River Rupee 2,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08102,                    RUPEE_RED
 Zora River Rupee 3,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08103,                    RUPEE_RED

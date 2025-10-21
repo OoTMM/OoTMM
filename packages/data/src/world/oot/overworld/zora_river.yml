@@ -39,7 +39,9 @@
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
     "Zora River Boulder Grotto": "has_explosives_or_hammer"
+    "Zora River Soil Fairies": "soil_fairies(BEAN_ZORA_RIVER)"
   events:
+    BEAN_ZORA_RIVER: "can_use_beans"
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     SEEDS: "is_child"
@@ -121,6 +123,14 @@
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
+
+"Zora River Soil Fairies":
+  region: ZORA_RIVER
+  age_change: false
+  locations:
+    "Zora River Soil 1": "true"
+    "Zora River Soil 2": "true"
+    "Zora River Soil 3": "true"
 
 "Zora River Shortcut Underwater":
   region: ZORA_RIVER
