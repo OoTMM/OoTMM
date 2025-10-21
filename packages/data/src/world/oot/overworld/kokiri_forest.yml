@@ -23,6 +23,7 @@
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "can_bypass_mido"
     "Kokiri Forest Adult Rupees": "is_adult && (can_ride_bean(BEAN_KOKIRI_FOREST) || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "Kokiri Forest Soil Fairies": "soil_fairies(BEAN_KOKIRI_FOREST)"
   events:
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
@@ -44,6 +45,14 @@
     "Kokiri Forest Rock Circle Rock 8": "true"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
+
+"Kokiri Forest Soil Fairies":
+  region: KOKIRI_FOREST
+  age_change: false
+  locations:
+    "Kokiri Forest Soil 1": "true"
+    "Kokiri Forest Soil 2": "true"
+    "Kokiri Forest Soil 3": "true"
 
 "Kokiri Forest Child":
   region: KOKIRI_FOREST
