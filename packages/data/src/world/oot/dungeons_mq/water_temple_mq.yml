@@ -32,7 +32,7 @@
     "Water Temple Main Room Top Floor": "event(WATER_LEVEL_HIGH)"
     "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || ((event(WATER_LEVEL_MID) || event(WATER_LEVEL_HIGH)) && has_iron_boots && has_tunic_zora)"
     "Water Temple Storage Room": "((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (can_hookshot || climb_anywhere)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && can_hookshot && has_tunic_zora)"
-    "Water Temple Blue Switch Path": "event(WATER_LEVEL_MID) && (can_hookshot || can_play_elegy)"
+    "Water Temple Blue Switch Path": "event(WATER_LEVEL_MID) && (can_play_elegy || hookshot_anywhere || (can_hookshot && event(WATER_MQ_CARRY_SMALL_CRATE) && (is_adult || has_hover_boots || can_use_ice_arrow_platforms)))"
     "Water Temple Central Tower Middle Door": "event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
     "Water Temple Lizalfos Hallway": "((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (hookshot_anywhere || has_hover_boots)) || (has_iron_boots && has_tunic_zora_strict && event(WATER_LEVEL_HIGH))"
     "Water Temple Main Room Antichamber Ledge": "(event(WATER_LEVEL_HIGH) && can_longshot) || longshot_anywhere"
@@ -93,9 +93,11 @@
 "Water Temple Storage Room":
   dungeon: Water
   exits:
-    "Water Temple Main Room Middle Floor": "(event(WATER_LEVEL_MID) || event(WATER_LEVEL_LOW)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "Water Temple Main Room Middle Floor": "((event(WATER_LEVEL_MID) || event(WATER_LEVEL_LOW)) && (is_adult || (is_child && (can_swim || has_hover_boots || hookshot_anywhere))))  || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
     "Water Temple Main Room Top Floor": "(can_hookshot && (event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID))) || (has_iron_boots && has_tunic_zora && event(WATER_LEVEL_HIGH))"
     "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || (has_iron_boots && has_tunic_zora && (event(WATER_LEVEL_MID) || event(WATER_LEVEL_HIGH)))"
+  events:
+    WATER_MQ_CARRY_SMALL_CRATE: "true" #For ease of reading, and action shuffle.
   locations:
     "MQ Water Temple Pot Storage Room 1": "true"
     "MQ Water Temple Pot Storage Room 2": "true"
