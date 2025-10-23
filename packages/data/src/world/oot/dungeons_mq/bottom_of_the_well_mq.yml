@@ -27,7 +27,7 @@
     "Bottom of the Well Main Room Center": "event(BOTW_MQ_CENTER_GATES_LOWERED)"
     "Bottom of the Well Main Room Center Switch Corner": "has_explosives_or_hammer || climb_anywhere || hookshot_anywhere"
     "Bottom of the Well Basement": "true"
-    "Bottom of the Well Coffin Room": "(event(BOTW_MQ_DRAIN_WATER) || can_dive_small || can_hookshot) && small_keys_botw(2)"
+    "Bottom of the Well Coffin Room": "(event(BOTW_MQ_DRAIN_WATER) || (can_swim && (can_dive_small || hookshot_anywhere))) && small_keys_botw(2)"
     "Bottom of the Well Before Dead Hand": "event(BOTW_MQ_DRAIN_WATER) && is_child"
     "Bottom of the Well Main Side Room Before Pit": "is_child"
   events:
@@ -113,7 +113,7 @@
 "Bottom of the Well Coffin Room":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "(event(BOTW_MQ_DRAIN_WATER) || can_dive_small || can_hookshot) && small_keys_botw(2)"
+    "Bottom of the Well Main": "(event(BOTW_MQ_DRAIN_WATER) || (can_swim && (can_dive_small || hookshot_anywhere))) && small_keys_botw(2)"
   locations:
     "MQ Bottom of the Well GS Coffin Room": "gs && can_damage_skull"
     "MQ Bottom of the Well Heart Coffin 1": "has_fire_or_sticks"
