@@ -731,9 +731,10 @@ void ObjBean_GrowWaterPhase3(ObjBean* this, PlayState* play) {
             memcpy(&xflag, &sXflag, sizeof(Xflag));
             for (i = 0; i < 3; i++) {
                 xflag.sliceId = i;
-                if (!EnItem00_DropCustom(play, &itemDropPos, &xflag)) {
+                if (Xflag_IsShuffled(&xflag))
+                    EnItem00_DropCustom(play, &itemDropPos, &xflag);
+                else
                     Item_DropCollectible(play, &itemDropPos, ITEM00_FLEXIBLE);
-                }
             }
 
             this->stateFlags |= BEAN_STATE_BEEN_WATERED;
