@@ -140,7 +140,7 @@
     "Swamp Near Frog": "has(MASK_DEKU) || has_hover_boots || is_tall || has_iron_boots || (can_swim && can_use_nayru) || (is_swamp_cleared && can_swim)"
     "Deku Palace Front": "true"
     "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
-    "Swamp Canopy Back": (is_swamp_cleared && (can_swim_or_sink || is_tall || has_hover_boots || has_mask_goron || has(MASK_DEKU))) || short_hook_anywhere"
+    "Swamp Canopy Back": "(is_swamp_cleared && (can_swim_or_sink || is_tall || has_hover_boots || has_mask_goron || has(MASK_DEKU))) || short_hook_anywhere"
     "Swamp Canopy Front": "short_hook_anywhere"
   locations:
     "Southern Swamp Song of Soaring": "has_mask_zora && has_explosives && trick(MM_SOARING_ZORA)" # add adult to this trick?
