@@ -172,6 +172,8 @@ typedef struct DamageTable DamageTable;
 typedef struct CollisionCheckInfoInit2 CollisionCheckInfoInit2;
 typedef struct DynaPolyActor DynaPolyActor;
 
+void func_80038A28(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
+
 void    BgCheck_Allocate(CollisionContext* colCtx, PlayState* play, CollisionHeader* colHeader);
 float   BgCheck_EntityRaycastDown1(CollisionContext* colCtx, CollisionPoly** outGroundPoly, Vec3f* pos);
 float   BgCheck_EntityRaycastDown2(PlayState* play, CollisionContext* colCtx, CollisionPoly** outGroundPoly, Vec3f* pos);

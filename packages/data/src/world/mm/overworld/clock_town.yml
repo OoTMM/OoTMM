@@ -304,9 +304,9 @@
     "Curiosity Shop 2": "true"
   locations:
     "Curiosity Shop All-Night Mask": "(event(SAKON_BOMB_BAG) || event(SAKON_BOOM)) && shop_price(0x04) && is_night3"
-    #"Curiostiy Shop 5r Trade": "(has_milk || event(MUSHROOM)) && is_night"
-    #"Curiostiy Shop 20r Trade": "(event(WATER) || event(BUGS) || event(FISH) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg) && is_night"
-    #"Curiostiy Shop 50r Trade": "(event(POE)) && is_night"
+    #"Curiostiy Shop 5r Trade": "(has_milk || has_mushroom) && is_night"
+    #"Curiostiy Shop 20r Trade": "(has_water || has_bugs || has_fish || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg) && is_night"
+    #"Curiostiy Shop 50r Trade": "(has_poe || has_blue_fire_in_bottle) && is_night"
     #"Curiostiy Shop 200r Trade": "(has_chateau || has_big_poe)) && is_night"
 
 "Curiosity Shop 2":
@@ -435,6 +435,8 @@
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
+    TOILET_HAND: "midnight && soul_npc(SOUL_NPC_TOILET_HAND) && (setting(erIndoorsExtra) || clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT))"
+    TOILET_RUTO_LETTER: "has_ruto_letter && event(TOILET_HAND)"
   locations:
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
@@ -443,7 +445,7 @@
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "soul_old_hag && has(MASK_ALL_NIGHT) && grandma_story_1"
     "Stock Pot Inn Grandma HP 2": "soul_old_hag && has(MASK_ALL_NIGHT) && grandma_story_2"
-    "Stock Pot Inn ??? HP": "soul_npc(SOUL_NPC_TOILET_HAND) && cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    "Stock Pot Inn ??? HP": "has_paper && event(TOILET_HAND)"
     "Stock Pot Inn Wonder Item 1": "has_mask_zora && has_magic"
     "Stock Pot Inn Wonder Item 2": "has_mask_zora && has_magic"
     "Stock Pot Inn Wonder Item 3": "has_mask_zora && has_magic"

@@ -9,6 +9,7 @@
 #include <combo/global.h>
 #include <combo/multi.h>
 #include <combo/actor.h>
+#include <combo/inventory.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -29,6 +30,102 @@ int Item_IsPlayerSelf(u8 playerId)
     return 0;
 }
 
+static u8 getForeignBottle(u8 itemId)
+{
+    switch (itemId)
+    {
+#if defined(GAME_OOT)
+    case ITEM_OOT_BOTTLE_EMPTY:
+        return ITEM_MM_BOTTLE_EMPTY;
+    case ITEM_OOT_POTION_RED:
+        return ITEM_MM_POTION_RED;
+    case ITEM_OOT_POTION_GREEN:
+        return ITEM_MM_POTION_GREEN;
+    case ITEM_OOT_POTION_BLUE:
+        return ITEM_MM_POTION_BLUE;
+    case ITEM_OOT_FAIRY:
+        return ITEM_MM_FAIRY;
+    case ITEM_OOT_FISH:
+        return ITEM_MM_FISH;
+    case ITEM_OOT_MILK:
+        return ITEM_MM_MILK;
+    case ITEM_OOT_RUTO_LETTER:
+        return ITEM_MM_RUTO_LETTER;
+    case ITEM_OOT_BLUE_FIRE:
+        return ITEM_MM_BLUE_FIRE;
+    case ITEM_OOT_BUGS:
+        return ITEM_MM_BUGS;
+    case ITEM_OOT_BIG_POE:
+        return ITEM_MM_BIG_POE;
+    case ITEM_OOT_MILK_HALF:
+        return ITEM_MM_MILK_HALF;
+    case ITEM_OOT_POE:
+        return ITEM_MM_POE;
+    case ITEM_OOT_MAGIC_MUSHROOM:
+        return ITEM_MM_MAGIC_MUSHROOM;
+    case ITEM_OOT_CHATEAU:
+        return ITEM_MM_CHATEAU;
+    case ITEM_OOT_GOLD_DUST:
+        return ITEM_MM_GOLD_DUST;
+    case ITEM_OOT_SEAHORSE:
+        return ITEM_MM_SEAHORSE;
+    case ITEM_OOT_DEKU_PRINCESS:
+        return ITEM_MM_DEKU_PRINCESS;
+    case ITEM_OOT_SPRING_WATER:
+        return ITEM_MM_SPRING_WATER;
+    case ITEM_OOT_SPRING_WATER_HOT:
+        return ITEM_MM_SPRING_WATER_HOT;
+    case ITEM_OOT_ZORA_EGG:
+        return ITEM_MM_ZORA_EGG;
+#else
+    case ITEM_MM_BOTTLE_EMPTY:
+        return ITEM_OOT_BOTTLE_EMPTY;
+    case ITEM_MM_POTION_RED:
+        return ITEM_OOT_POTION_RED;
+    case ITEM_MM_POTION_GREEN:
+        return ITEM_OOT_POTION_GREEN;
+    case ITEM_MM_POTION_BLUE:
+        return ITEM_OOT_POTION_BLUE;
+    case ITEM_MM_FAIRY:
+        return ITEM_OOT_FAIRY;
+    case ITEM_MM_DEKU_PRINCESS:
+        return ITEM_OOT_DEKU_PRINCESS;
+    case ITEM_MM_MILK:
+        return ITEM_OOT_MILK;
+    case ITEM_MM_MILK_HALF:
+        return ITEM_OOT_MILK_HALF;
+    case ITEM_MM_FISH:
+        return ITEM_OOT_FISH;
+    case ITEM_MM_BUGS:
+        return ITEM_OOT_BUGS;
+    case ITEM_MM_BLUE_FIRE:
+        return ITEM_OOT_BLUE_FIRE;
+    case ITEM_MM_POE:
+        return ITEM_OOT_POE;
+    case ITEM_MM_BIG_POE:
+        return ITEM_OOT_BIG_POE;
+    case ITEM_MM_SPRING_WATER:
+        return ITEM_OOT_SPRING_WATER;
+    case ITEM_MM_SPRING_WATER_HOT:
+        return ITEM_OOT_SPRING_WATER_HOT;
+    case ITEM_MM_ZORA_EGG:
+        return ITEM_OOT_ZORA_EGG;
+    case ITEM_MM_GOLD_DUST:
+        return ITEM_OOT_GOLD_DUST;
+    case ITEM_MM_MAGIC_MUSHROOM:
+        return ITEM_OOT_MAGIC_MUSHROOM;
+    case ITEM_MM_SEAHORSE:
+        return ITEM_OOT_SEAHORSE;
+    case ITEM_MM_CHATEAU:
+        return ITEM_OOT_CHATEAU;
+    case ITEM_MM_RUTO_LETTER:
+        return ITEM_OOT_RUTO_LETTER;
+#endif
+    default:
+        return ITEM_NONE;
+    }
+}
+
 void comboSyncItems(void)
 {
     if (Config_Flag(CFG_SHARED_BOWS))
@@ -41,7 +138,28 @@ void comboSyncItems(void)
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBCHU];
 
     if (Config_Flag(CFG_SHARED_MAGIC))
-       gForeignSave.info.playerData.magic = gSave.info.playerData.magic;
+    {
+        gForeignSave.info.playerData.magic = gSave.info.playerData.magic;
+#if defined(GAME_OOT)
+        if (gCustomSave.chateauActive)
+        {
+            MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+        }
+        else
+        {
+            MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+        }
+#else
+        if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
+        {
+            gSharedCustomSave.oot.chateauActive = 1;
+        }
+        else
+        {
+            gSharedCustomSave.oot.chateauActive = 0;
+        }
+#endif
+    }
 
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
     {
@@ -57,6 +175,55 @@ void comboSyncItems(void)
         gForeignSave.info.playerData.healthCapacity = gSave.info.playerData.healthCapacity;
         gForeignSave.info.playerData.health = gSave.info.playerData.health;
         gForeignSave.info.inventory.quest.heartPieces = gSave.info.inventory.quest.heartPieces;
+    }
+
+    if (Config_Flag(CFG_SHARED_BOTTLES))
+    {
+        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE]);
+        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE2] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE2]);
+        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE3] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE3]);
+        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE4] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE4]);
+#if defined (GAME_OOT)
+        if (gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE))
+        {
+            if (comboIsTradeBottleOot(gSave.info.inventory.items[ITS_OOT_TRADE_ADULT]))
+            {
+                gOotExtraItems.bottleAdultSlot = gSave.info.inventory.items[ITS_OOT_TRADE_ADULT];
+            }
+            gForeignSave.info.inventory.items[ITS_MM_BOTTLE5] = getForeignBottle(gOotExtraItems.bottleAdultSlot);
+        }
+        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE))
+        {
+            if (comboIsTradeBottleOot(gSave.info.inventory.items[ITS_OOT_TRADE_CHILD]))
+            {
+                gOotExtraItems.bottleChildSlot = gSave.info.inventory.items[ITS_OOT_TRADE_CHILD];
+            }
+            gForeignSave.info.inventory.items[ITS_MM_BOTTLE6] = getForeignBottle(gOotExtraItems.bottleChildSlot);
+        }
+        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE);
+        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE2);
+        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE3);
+        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE4);
+        reloadSlotMm(NULL, ITS_MM_BOTTLE5);
+        reloadSlotMm(NULL, ITS_MM_BOTTLE6);
+#else
+        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE);
+        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE2);
+        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE3);
+        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE4);
+        gOotExtraItems.bottleAdultSlot = getForeignBottle(gSave.info.inventory.items[ITS_MM_BOTTLE5]);
+        gOotExtraItems.bottleChildSlot = getForeignBottle(gSave.info.inventory.items[ITS_MM_BOTTLE6]);
+        if (comboIsTradeBottleOot(gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT]))
+        {
+            gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = gOotExtraItems.bottleAdultSlot;
+            reloadSlotOot(NULL, ITS_OOT_TRADE_ADULT);
+        }
+        if (comboIsTradeBottleOot(gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD]))
+        {
+            gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = gOotExtraItems.bottleChildSlot;
+            reloadSlotOot(NULL, ITS_OOT_TRADE_CHILD);
+        }
+#endif
     }
 
     if (Config_Flag(CFG_CROSS_GAME_FW))

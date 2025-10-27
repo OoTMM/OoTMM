@@ -117,7 +117,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...CLOCKS,
   ...ItemGroups.SONG_NOTES,
   Items.MM_CLOCK,
-  Items.OOT_RUTO_LETTER,
+  Items.OOT_BOTTLE_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
   Items.OOT_POCKET_EGG,
   Items.OOT_ARROW_FIRE,
@@ -1044,6 +1044,39 @@ export class LogicPassWorldTransform {
       this.addItem(Items.OOT_SPIN_UPGRADE);
     }
 
+    if (settings.sharedBottles) {
+      this.replaceItem(Items.MM_BOTTLE_POTION_RED, Items.SHARED_BOTTLE_POTION_RED);
+      this.replaceItem(Items.MM_BOTTLED_GOLD_DUST, Items.SHARED_BOTTLED_GOLD_DUST);
+      this.replaceItem(Items.MM_BOTTLE_MILK, Items.SHARED_BOTTLE_MILK);
+      this.replaceItem(Items.MM_BOTTLE_CHATEAU, Items.SHARED_BOTTLE_CHATEAU);
+      if (settings.itemPool === 'plentiful') {
+        this.removeItem(Items.MM_BOTTLE_EMPTY, 2);
+      } else {
+        this.removeItem(Items.MM_BOTTLE_EMPTY, 1);
+      }
+      this.replaceItem(Items.MM_BOTTLE_EMPTY, Items.SHARED_BOTTLE_EMPTY);
+      this.replaceItem(Items.OOT_BOTTLE_RUTO_LETTER, Items.SHARED_BOTTLE_RUTO_LETTER);
+      this.removeItem(Items.OOT_BOTTLE_EMPTY);
+      this.removeItem(Items.OOT_BOTTLE_MILK);
+
+      this.replaceItem(Items.MM_POTION_RED, Items.SHARED_POTION_RED)
+      this.replaceItem(Items.MM_POTION_GREEN, Items.SHARED_POTION_GREEN)
+      this.replaceItem(Items.MM_POTION_BLUE, Items.SHARED_POTION_BLUE)
+      this.replaceItem(Items.MM_FAIRY, Items.SHARED_FAIRY)
+      this.replaceItem(Items.MM_MILK, Items.SHARED_MILK)
+      this.replaceItem(Items.MM_CHATEAU, Items.SHARED_CHATEAU)
+
+      this.replaceItem(Items.OOT_POTION_RED, Items.SHARED_POTION_RED)
+      this.replaceItem(Items.OOT_POTION_GREEN, Items.SHARED_POTION_GREEN)
+      this.replaceItem(Items.OOT_POTION_BLUE, Items.SHARED_POTION_BLUE)
+      this.replaceItem(Items.OOT_FAIRY, Items.SHARED_FAIRY)
+      this.replaceItem(Items.OOT_POE, Items.SHARED_POE)
+      this.replaceItem(Items.OOT_BLUE_FIRE, Items.SHARED_BLUE_FIRE)
+      this.replaceItem(Items.OOT_MILK, Items.SHARED_MILK)
+      this.replaceItem(Items.OOT_BUGS, Items.SHARED_BUGS)
+      this.replaceItem(Items.OOT_FISH, Items.SHARED_FISH)
+    }
+
     /* Triforce helper */
     const addTriforce = (settings.triforceSharedMulti ? this.addItemGlobal : this.addItem).bind(this);
 
@@ -1573,9 +1606,10 @@ export class LogicPassWorldTransform {
       if (srp.has('Ganon_Spirit')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_SPIRIT, Items.OOT_POUCH_SILVER_GANON_SPIRIT);
     }
 
-    if (settings.zoraKing === 'open') {
-      this.removeItem(Items.OOT_RUTO_LETTER);
-      this.addItem(Items.OOT_BOTTLE_EMPTY);
+    if (settings.zoraKing === 'open' && !settings.sharedBottles) {
+      this.replaceItem(Items.OOT_BOTTLE_RUTO_LETTER, Items.OOT_BOTTLE_EMPTY);
+      this.replaceItem(Items.MM_BOTTLE_RUTO_LETTER, Items.MM_BOTTLE_EMPTY);
+      this.replaceItem(Items.SHARED_BOTTLE_RUTO_LETTER, Items.SHARED_BOTTLE_EMPTY);
     }
 
     /* Handle OoT swords */
@@ -1676,6 +1710,7 @@ export class LogicPassWorldTransform {
     if (settings.bottleContentShuffle) {
       this.randomizeGroup(ItemGroups.BOTTLES_OOT);
       this.randomizeGroup(ItemGroups.BOTTLES_MM);
+      this.randomizeGroup(ItemGroups.BOTTLES_SHARED);
     }
 
     if (settings.pondFishShuffle) {

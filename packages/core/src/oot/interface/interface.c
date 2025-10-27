@@ -65,6 +65,30 @@ void comboItemIcon(void* dst, int itemId)
     case ITEM_OOT_MASK_STONE:
         LoadMmItemIcon(dst, ITEM_MM_MASK_STONE);
         break;
+    case ITEM_OOT_MAGIC_MUSHROOM:
+        LoadMmItemIcon(dst, ITEM_MM_MAGIC_MUSHROOM);
+        break;
+    case ITEM_OOT_CHATEAU:
+        LoadMmItemIcon(dst, ITEM_MM_CHATEAU);
+        break;
+    case ITEM_OOT_GOLD_DUST:
+        LoadMmItemIcon(dst, ITEM_MM_GOLD_DUST);
+        break;
+    case ITEM_OOT_SEAHORSE:
+        LoadMmItemIcon(dst, ITEM_MM_SEAHORSE);
+        break;
+    case ITEM_OOT_DEKU_PRINCESS:
+        LoadMmItemIcon(dst, ITEM_MM_DEKU_PRINCESS);
+        break;
+    case ITEM_OOT_SPRING_WATER:
+        LoadMmItemIcon(dst, ITEM_MM_SPRING_WATER);
+        break;
+    case ITEM_OOT_SPRING_WATER_HOT:
+        LoadMmItemIcon(dst, ITEM_MM_SPRING_WATER_HOT);
+        break;
+    case ITEM_OOT_ZORA_EGG:
+        LoadMmItemIcon(dst, ITEM_MM_ZORA_EGG);
+        break;
     default:
         LoadFile(dst, 0x7bd000 + itemId * 0x1000, 0x1000);
         break;

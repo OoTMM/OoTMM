@@ -2562,6 +2562,14 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.hammerMm,
 }, {
+  key: 'sharedBottles',
+  name: 'Shared Bottles',
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the bottles from OoT and MM into six items for both games. The six bottles are: Red Potion, Gold Dust, Chateau, Milk, Ruto\'s Letter and an Empty Bottle. Bottle refills are also shared.',
+  default: false,
+  cond: (s: any) => hasOoTMM(s),
+}, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
   category: 'items.ageless',

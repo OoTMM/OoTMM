@@ -13,7 +13,8 @@ const u8 kOotTradeAdult[] = {
     ITEM_OOT_PRESCRIPTION,
     ITEM_OOT_EYEBALL_FROG,
     ITEM_OOT_EYE_DROPS,
-    ITEM_OOT_CLAIM_CHECK
+    ITEM_OOT_CLAIM_CHECK,
+    ITEM_OOT_BOTTLE_EMPTY,
 };
 
 const u8 kOotTradeChild[] = {
@@ -30,6 +31,7 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_MASK_OF_TRUTH,
     ITEM_OOT_MASK_BLAST,
     ITEM_OOT_MASK_STONE,
+    ITEM_OOT_BOTTLE_EMPTY,
 };
 
 const u8 kOotOcarina[] = {
@@ -161,6 +163,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         u32 tableSize = *outTableSize;
         const u8* table = *outTable;
         u8 item = **outItemPtr;
+#if defined (GAME_OOT)
+        if ((slot == ITS_OOT_TRADE_ADULT || slot == ITS_OOT_TRADE_CHILD) && comboIsTradeBottleOot(item))
+        {
+            item = ITEM_OOT_BOTTLE_EMPTY;
+        }
+#endif
         for (int i = 0; i < tableSize; i++)
         {
             if (table[i] == item)
@@ -198,6 +206,13 @@ u8 comboGetNextTrade(u8 currentItem, u32 flags, const u8* table, u32 tableSize)
     int initialBitPos;
     /* We need to get the bit index of the current item */
 
+#if defined (GAME_OOT)
+    if (comboIsTradeBottleOot(currentItem))
+    {
+        currentItem = ITEM_OOT_BOTTLE_EMPTY;
+    }
+#endif
+
     bitPos = -1;
     for (u32 i = 0; i < tableSize; ++i)
     {
@@ -219,12 +234,40 @@ u8 comboGetNextTrade(u8 currentItem, u32 flags, const u8* table, u32 tableSize)
             bitPos = 0;
         if (flags & (1 << bitPos) || bitPos == initialBitPos)
         {
-            return table[bitPos];
+            u8 result = table[bitPos];
+#if defined (GAME_OOT)
+            if (comboIsTradeBottleOot(result))
+            {
+                result = table == kOotTradeAdult ? gOotExtraItems.bottleAdultSlot : gOotExtraItems.bottleChildSlot;
+            }
+#endif
+            return result;
         }
     }
 }
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 {
-    *slot = comboGetNextTrade(*slot, flags, table, tableSize);
+#if defined (GAME_OOT)
+    u8 oldItem = *slot;
+    if (comboIsTradeBottleOot(oldItem))
+    {
+        if (table == kOotTradeAdult)
+        {
+            gOotExtraItems.bottleAdultSlot = oldItem;
+        }
+        else
+        {
+            gOotExtraItems.bottleChildSlot = oldItem;
+        }
+    }
+#endif
+    u8 newItem = comboGetNextTrade(*slot, flags, table, tableSize);
+    if (newItem != ITEM_NONE)
+        *slot = newItem;
+}
+
+s32 comboIsTradeBottleOot(u8 itemId)
+{
+    return (itemId >= ITEM_OOT_BOTTLE_EMPTY && itemId <= ITEM_OOT_POE) || (itemId >= ITEM_OOT_MAGIC_MUSHROOM && itemId <= ITEM_OOT_ZORA_EGG);
 }

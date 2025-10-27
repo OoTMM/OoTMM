@@ -1355,3 +1355,42 @@ PATCH_START 0x80129e30
   b .+0x30
     nop
 PATCH_END
+
+/* Custom Blue Fire Drop */
+PATCH_START 0x8085d824
+  .short 0x0030 /* ACTOR_CUSTOM_ICE_HONO */
+  .short 0
+PATCH_END
+
+PATCH_START 0x8085c9b8
+  .byte 0x1C
+PATCH_END
+
+Player_IsBottleUnusable_Hook:
+  or      v0, zero, zero
+  beq     a1, at, returntrue
+   addiu   at, zero, 0x001c
+  beq     a1, at, return
+   slti    at, a1, 0x0019
+  bnez    at, return
+   slti    at, a1, 0x0020
+  beqz    at, return
+   nop
+returntrue:
+  addiu   v0, zero, 0x0001
+return:
+  jr      ra
+  nop
+
+PATCH_START 0x80838c54
+  jal   Player_IsBottleUnusable_Hook
+   nop
+  bnez  v0, .+0x5c
+   nop
+  nop
+PATCH_END
+
+/* Reloc for Player_ShowItem */
+PATCH_START 0x8085F510
+  .int 0
+PATCH_END

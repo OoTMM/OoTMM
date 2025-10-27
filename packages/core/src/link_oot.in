@@ -136,6 +136,7 @@ CollisionCheck_SetOC = 0x8004c130;
 CollisionCheck_SetAT = 0x8004bd50;
 CollisionCheck_SetAC = 0x8004bf40;
 
+func_80038A28           = 0x8002b668;
 BgCheck_EntityRaycastDown4 = 0x8002f4b8;
 
 Math_Vec3f_Sum = 0x80063d10;
@@ -299,6 +300,7 @@ Actor_GetPlayerExchangeItemId = 0x80022b04;
 AddItem = 0x8006fdcc;
 Player_AddItemWithIcon = 0x8083c590;
 GetItemCollectBehavior = 0x80071420;
+Inventory_ReplaceItem = 0x800719e0;
 Interface_SetDoAction = 0x80071E6C;
 Interface_LoadActionLabelB = 0x80071FF8;
 
@@ -327,9 +329,12 @@ Player_InCsMode = 0x8007943c;
 
 UpdateEquipment = 0x80079764;
 
-Player_ActionToModelGroup = 0x800794b0;
+Player_CheckHostileLockOn = 0x80079478;
+Player_IsChildWithHylianShield = 0x80079488;
 Player_SetModels = 0x800795e8;
+Player_GetMask = 0x80079b44;
 Player_UsingItem = 0x80079bf8;
+Player_ActionToBottle = 0x80079cfc;
 
 Enemy_StartFinishingBlow = 0x80025b4c;
 Interface_LoadItemIconImpl = 0x8006fb50;

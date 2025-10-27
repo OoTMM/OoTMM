@@ -902,6 +902,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_TUNIC_ZORA: settings.sharedTunicZora,
     SHARED_SCALES: settings.sharedScales,
     SHARED_STRENGTH: settings.sharedStrength,
+    SHARED_BOTTLES: settings.sharedBottles,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',

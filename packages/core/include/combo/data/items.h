@@ -30,7 +30,7 @@
 #define ITEM_OOT_MILK                   0x1a
 #define ITEM_OOT_RUTO_LETTER            0x1b
 #define ITEM_OOT_BLUE_FIRE              0x1c
-#define ITEM_OOT_BUG                    0x1d
+#define ITEM_OOT_BUGS                   0x1d
 #define ITEM_OOT_BIG_POE                0x1e
 #define ITEM_OOT_MILK_HALF              0x1f
 #define ITEM_OOT_POE                    0x20
@@ -151,8 +151,18 @@
 #define ITEM_OOT_NUT_UPGRADE2           0x9b
 
 /* Custom */
+#define ITEM_OOT_CUSTOM_MIN             0x9c
 #define ITEM_OOT_MASK_BLAST             0x9c
 #define ITEM_OOT_MASK_STONE             0x9d
+#define ITEM_OOT_MAGIC_MUSHROOM         0x9e
+#define ITEM_OOT_CHATEAU                0x9f
+#define ITEM_OOT_GOLD_DUST              0xa0
+#define ITEM_OOT_SEAHORSE               0xa1
+#define ITEM_OOT_DEKU_PRINCESS          0xa2
+#define ITEM_OOT_SPRING_WATER           0xa3
+#define ITEM_OOT_SPRING_WATER_HOT       0xa4
+#define ITEM_OOT_ZORA_EGG               0xa5
+#define ITEM_OOT_CUSTOM_MAX             0xa6
 
 #if defined(GAME_OOT)
 # define ITEM_STICK                     ITEM_OOT_STICK
@@ -184,7 +194,7 @@
 # define ITEM_MILK                      ITEM_OOT_MILK
 # define ITEM_RUTO_LETTER               ITEM_OOT_RUTO_LETTER
 # define ITEM_BLUE_FIRE                 ITEM_OOT_BLUE_FIRE
-# define ITEM_BUG                       ITEM_OOT_BUG
+# define ITEM_BUG                       ITEM_OOT_BUGS
 # define ITEM_BIG_POE                   ITEM_OOT_BIG_POE
 # define ITEM_MILK_HALF                 ITEM_OOT_MILK_HALF
 # define ITEM_POE                       ITEM_OOT_POE
@@ -333,7 +343,7 @@
 #define ITEM_MM_MILK                        0x18
 #define ITEM_MM_MILK_HALF                   0x19
 #define ITEM_MM_FISH                        0x1a
-#define ITEM_MM_BUG                         0x1b
+#define ITEM_MM_BUGS                        0x1b
 #define ITEM_MM_BLUE_FIRE                   0x1c
 #define ITEM_MM_POE                         0x1d
 #define ITEM_MM_BIG_POE                     0x1e
@@ -460,7 +470,8 @@
 #define ITEM_MM_TUNIC_GORON                 0xb3
 #define ITEM_MM_TUNIC_ZORA                  0xb4
 #define ITEM_MM_HAMMER                      0xb5
-#define ITEM_MM_CUSTOM_MAX                  0xb6
+#define ITEM_MM_RUTO_LETTER                 0xb6
+#define ITEM_MM_CUSTOM_MAX                  0xb7
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 
@@ -555,6 +566,7 @@
 #define XITEM_OOT_CHILD_MASK_OF_TRUTH   0xa
 #define XITEM_OOT_CHILD_MASK_BLAST      0xb
 #define XITEM_OOT_CHILD_MASK_STONE      0xc
+#define XITEM_OOT_CHILD_BOTTLE          0xd
 
 #define XITEM_OOT_ADULT_POCKET_EGG              0x0
 #define XITEM_OOT_ADULT_POCKET_CUCCO            0x1
@@ -567,6 +579,7 @@
 #define XITEM_OOT_ADULT_EYEBALL_FROG            0x8
 #define XITEM_OOT_ADULT_EYE_DROPS               0x9
 #define XITEM_OOT_ADULT_CLAIM_CHECK             0xa
+#define XITEM_OOT_ADULT_BOTTLE                  0xb
 
 #define XITEM_MM_TRADE1_SPELL_FIRE          0x0
 #define XITEM_MM_TRADE1_MOON_TEAR           0x1
@@ -594,11 +607,19 @@
 # define ITS_NATIVE_STICKS          ITS_OOT_STICKS
 # define ITS_NATIVE_NUTS            ITS_OOT_NUTS
 # define ITS_NATIVE_BOMBCHU         ITS_OOT_BOMBCHU
+# define ITS_NATIVE_BOTTLE          ITS_OOT_BOTTLE
+# define ITS_NATIVE_BOTTLE2         ITS_OOT_BOTTLE2
+# define ITS_NATIVE_BOTTLE3         ITS_OOT_BOTTLE3
+# define ITS_NATIVE_BOTTLE4         ITS_OOT_BOTTLE4
 # define ITS_FOREIGN_BOW            ITS_MM_BOW
 # define ITS_FOREIGN_BOMBS          ITS_MM_BOMBS
 # define ITS_FOREIGN_STICKS         ITS_MM_STICKS
 # define ITS_FOREIGN_NUTS           ITS_MM_NUTS
 # define ITS_FOREIGN_BOMBCHU        ITS_MM_BOMBCHU
+# define ITS_FOREIGN_BOTTLE         ITS_MM_BOTTLE
+# define ITS_FOREIGN_BOTTLE2        ITS_MM_BOTTLE2
+# define ITS_FOREIGN_BOTTLE3        ITS_MM_BOTTLE3
+# define ITS_FOREIGN_BOTTLE4        ITS_MM_BOTTLE4
 #endif
 
 #if defined(GAME_MM)
@@ -607,11 +628,19 @@
 # define ITS_NATIVE_STICKS          ITS_MM_STICKS
 # define ITS_NATIVE_NUTS            ITS_MM_NUTS
 # define ITS_NATIVE_BOMBCHU         ITS_MM_BOMBCHU
+# define ITS_NATIVE_BOTTLE          ITS_MM_BOTTLE
+# define ITS_NATIVE_BOTTLE2         ITS_MM_BOTTLE2
+# define ITS_NATIVE_BOTTLE3         ITS_MM_BOTTLE3
+# define ITS_NATIVE_BOTTLE4         ITS_MM_BOTTLE4
 # define ITS_FOREIGN_BOW            ITS_OOT_BOW
 # define ITS_FOREIGN_BOMBS          ITS_OOT_BOMBS
 # define ITS_FOREIGN_STICKS         ITS_OOT_STICKS
 # define ITS_FOREIGN_NUTS           ITS_OOT_NUTS
 # define ITS_FOREIGN_BOMBCHU        ITS_OOT_BOMBCHU
+# define ITS_FOREIGN_BOTTLE         ITS_OOT_BOTTLE
+# define ITS_FOREIGN_BOTTLE2        ITS_OOT_BOTTLE2
+# define ITS_FOREIGN_BOTTLE3        ITS_OOT_BOTTLE3
+# define ITS_FOREIGN_BOTTLE4        ITS_OOT_BOTTLE4
 #endif
 
 /* Common aliases */

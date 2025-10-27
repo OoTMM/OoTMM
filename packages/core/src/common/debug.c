@@ -714,6 +714,8 @@ static void cheatAllItems(PlayState* play)
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
+    gOotExtraItems.bottleAdultSlot = ITEM_OOT_CHATEAU;
+    gOotExtraItems.bottleChildSlot = ITEM_OOT_SPRING_WATER;
     gSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
     gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_BUNNY_HOOD;
 

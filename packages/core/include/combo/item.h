@@ -4,6 +4,7 @@
 #include <combo/types.h>
 #include <combo/data/items.h>
 #include <combo/common/actors/Item_Decoy.h>
+#include <combo/oot/save.h>
 
 /* Add funcs */
 #define IA_OOT_RUPEE            0x00
@@ -209,6 +210,8 @@ extern const u8 kMmGFSHammer[];
 
 void comboSyncItems(void);
 
+int isSlotEquippedOot(OotItemEquips* equips, int slot);
+int isSlotEquippedAnyOot(int slot);
 void reloadSlotOot(PlayState* play, int slot);
 void reloadSlotMm(PlayState* play, int slot);
 
@@ -288,7 +291,17 @@ typedef enum ExchangeItemID {
     /* 0x1B */ EXCH_ITEM_BOTTLE_POE,
     /* 0x1C */ EXCH_ITEM_BOTTLE_BIG_POE,
     /* 0x1D */ EXCH_ITEM_BOTTLE_RUTOS_LETTER,
-    /* 0x1E */ EXCH_ITEM_MAX
+    /* 0x1E */ EXCH_ITEM_MAX,
+    /* 0x1E */ EXCH_CUSTOM_ITEM_MIN = 0x1e,
+    /* 0x1E */ EXCH_CUSTOM_ITEM_MAGIC_MUSHROOM = 0x1e,
+    /* 0x1F */ EXCH_CUSTOM_ITEM_CHATEAU,
+    /* 0x20 */ EXCH_CUSTOM_ITEM_GOLD_DUST,
+    /* 0x21 */ EXCH_CUSTOM_ITEM_SEAHORSE,
+    /* 0x22 */ EXCH_CUSTOM_ITEM_DEKU_PRINCESS,
+    /* 0x23 */ EXCH_CUSTOM_ITEM_SPRING_WATER,
+    /* 0x24 */ EXCH_CUSTOM_ITEM_SPRING_WATER_HOT,
+    /* 0x25 */ EXCH_CUSTOM_ITEM_ZORA_EGG,
+    /* 0x26 */ EXCH_CUSTOM_ITEM_CUSTOM_MAX,
 } ExchangeItemID;
 #endif
 

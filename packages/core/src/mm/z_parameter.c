@@ -38,6 +38,9 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_HAMMER:
             id = ITEM_OOT_HAMMER;
             break;
+        case ITEM_MM_RUTO_LETTER:
+            id = ITEM_OOT_RUTO_LETTER;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);
@@ -69,7 +72,7 @@ u32 Interface_GetCustomIconTexture(PlayState* play, PauseContext* pauseCtx)
     return texture;
 }
 
-extern s8 gPlayerFormCustomItemRestrictions[5][8];
+extern s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN];
 
 /* button and item are stored in SP10 and SP14 by HOOK_SAVE */
 s8 Interface_GetItemRestriction(u8 playerForm, PlayState* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)

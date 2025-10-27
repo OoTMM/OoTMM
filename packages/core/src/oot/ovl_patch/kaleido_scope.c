@@ -10,6 +10,18 @@
 #include <combo/dpad.h>
 #include <combo/inventory.h>
 
+static void removeButtonItem(OotItemEquips* equips, u16 itemId)
+{
+    for (int i = 1; i < 4; ++i)
+    {
+        if (equips->buttonItems[i] == itemId)
+        {
+            equips->buttonItems[i] = ITEM_NONE;
+            equips->cButtonSlots[i - 1] = 0xff;
+        }
+    }
+}
+
 static int checkItemToggle(PlayState* play)
 {
     PauseContext* p;
@@ -49,12 +61,33 @@ static int checkItemToggle(PlayState* play)
         ret = 1;
         if (press)
         {
-            comboToggleSlot(itemCursor);
-            if (itemCursor == ITS_OOT_TRADE_CHILD)
+            if (((itemCursor == ITS_OOT_TRADE_CHILD && gSave.age != AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE))
+                || (itemCursor == ITS_OOT_TRADE_ADULT && gSave.age != AGE_ADULT))
+                && comboIsTradeBottleOot(*itemPtr) && isSlotEquippedOot(&gOotSave.info.equips, itemCursor))
             {
-                link = GET_PLAYER(play);
-                link->mask = 0;
-                Interface_LoadItemIconImpl(play, 0);
+                PlaySound(0x4806); /* NA_SE_SY_ERROR */
+            }
+            else
+            {
+                comboToggleSlot(itemCursor);
+                if (itemCursor == ITS_OOT_TRADE_ADULT
+                    && isSlotEquippedOot(&gOotSave.info.childEquips, itemCursor)
+                    && !comboIsTradeBottleOot(*itemPtr))
+                {
+                    removeButtonItem(&gOotSave.info.childEquips, *itemPtr);
+                }
+                if (itemCursor == ITS_OOT_TRADE_CHILD
+                    && isSlotEquippedOot(&gOotSave.info.adultEquips, itemCursor)
+                    && !comboIsTradeBottleOot(*itemPtr))
+                {
+                    removeButtonItem(&gOotSave.info.adultEquips, *itemPtr);
+                }
+                if (itemCursor == ITS_OOT_TRADE_CHILD)
+                {
+                    link = GET_PLAYER(play);
+                    link->mask = 0;
+                    Interface_LoadItemIconImpl(play, 0);
+                }
             }
         }
     }
@@ -1604,29 +1637,68 @@ s32 KaleidoScope_BeforeDraw(PlayState* play)
     return 0;
 }
 
+#define CUSTOM_ICON_SLOT_MAX 6
+
 u32 GetItemTexture(u32 slotId, u8 item, u32 index)
 {
-    static void* sExtraIconTradeChild[2];
-    static u8 sExtraIconTradeChildItem[2];
+    static void* sExtraIconTradeChild[CUSTOM_ICON_SLOT_MAX][2];
+    static u8 sExtraIconTradeChildItem[CUSTOM_ICON_SLOT_MAX][2];
     u32* itemToIcon = (u32*)0x800f8d2c;
 
-    if (slotId == ITS_OOT_TRADE_CHILD)
+    s8 iconSlot;
+
+    switch (slotId)
     {
-        if (!sExtraIconTradeChild[index])
+    case ITS_OOT_TRADE_CHILD:
+        iconSlot = 0;
+        break;
+    case ITS_OOT_TRADE_ADULT:
+        iconSlot = 1;
+        break;
+    case ITS_OOT_BOTTLE:
+        iconSlot = 2;
+        break;
+    case ITS_OOT_BOTTLE2:
+        iconSlot = 3;
+        break;
+    case ITS_OOT_BOTTLE3:
+        iconSlot = 4;
+        break;
+    case ITS_OOT_BOTTLE4:
+        iconSlot = 5;
+        break;
+    default:
+        iconSlot = -1;
+        break;
+    }
+
+    if (item >= ITEM_OOT_CUSTOM_MIN && iconSlot >= 0 && iconSlot < CUSTOM_ICON_SLOT_MAX)
+    {
+        if (!sExtraIconTradeChild[iconSlot][index])
         {
-            sExtraIconTradeChild[index] = malloc(0x1000);
-            sExtraIconTradeChildItem[index] = ITEM_NONE;
+            sExtraIconTradeChild[iconSlot][index] = malloc(0x1000);
+            sExtraIconTradeChildItem[iconSlot][index] = ITEM_NONE;
         }
-        if (sExtraIconTradeChild[index])
+        if (sExtraIconTradeChild[iconSlot][index])
         {
-            if (sExtraIconTradeChildItem[index] != item)
+            if (sExtraIconTradeChildItem[iconSlot][index] != item)
             {
-                sExtraIconTradeChildItem[index] = item;
-                comboItemIcon(sExtraIconTradeChild[index], sExtraIconTradeChildItem[index]);
-                if (!Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE) && gSave.age != AGE_CHILD)
-                    Grayscale(sExtraIconTradeChild[index], 0x400);
+                sExtraIconTradeChildItem[iconSlot][index] = item;
+                comboItemIcon(sExtraIconTradeChild[iconSlot][index], sExtraIconTradeChildItem[iconSlot][index]);
+                s32 isBottle = (item >= ITEM_OOT_BOTTLE_EMPTY && item <= ITEM_OOT_POE) || (item >= ITEM_OOT_MAGIC_MUSHROOM && item <= ITEM_OOT_ZORA_EGG);
+                if (!isBottle)
+                {
+                    if (slotId == ITS_OOT_TRADE_CHILD && !Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE) && gSave.age != AGE_CHILD)
+                    {
+                        Grayscale(sExtraIconTradeChild[iconSlot][index], 0x400);
+                    }
+                    else if (slotId == ITS_OOT_TRADE_ADULT && gSave.age != AGE_ADULT)
+                    {
+                        Grayscale(sExtraIconTradeChild[iconSlot][index], 0x400);
+                    }
+                }
             }
-            return (u32)sExtraIconTradeChild[index] & 0x00ffffff;
+            return (u32)sExtraIconTradeChild[iconSlot][index] & 0x00ffffff;
         }
     }
 
@@ -1754,6 +1826,38 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
         /* Fixes 1.0 spelling mistake */
         comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_KEATON);
     }
+    else if (itemId == ITEM_OOT_MAGIC_MUSHROOM)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MAGIC_MUSHROOM);
+    }
+    else if (itemId == ITEM_OOT_CHATEAU)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_CHATEAU);
+    }
+    else if (itemId == ITEM_OOT_GOLD_DUST)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_GOLD_DUST);
+    }
+    else if (itemId == ITEM_OOT_SEAHORSE)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SEAHORSE);
+    }
+    else if (itemId == ITEM_OOT_DEKU_PRINCESS)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_DEKU_PRINCESS);
+    }
+    else if (itemId == ITEM_OOT_SPRING_WATER)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SPRING_WATER);
+    }
+    else if (itemId == ITEM_OOT_SPRING_WATER_HOT)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SPRING_WATER_HOT);
+    }
+    else if (itemId == ITEM_OOT_ZORA_EGG    )
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_ZORA_EGG);
+    }
     else
     {
         LoadFile(dst, 0x880000 + 0x400 * id, 0x400);
@@ -1800,4 +1904,17 @@ void KaleidoScope_DrawQuadEquipment(PlayState* play, u32 dlist, int w, int h, in
 
     KaleidoScope_DrawQuadTextureRGBA32 = OverlayAddr(0x8081f1e8);
     KaleidoScope_DrawQuadTextureRGBA32(play, dlist, w, h, flags);
+}
+
+u8 KaleidoScope_GetSlotAgeRequirement(u16 item, u8 vanillaAgeRequirement)
+{
+    if (item >= 0xff)
+    {
+        return 0xff;
+    }
+    if (comboIsTradeBottleOot(item))
+    {
+        return 9; /* AGE_REQ_NONE */
+    }
+    return vanillaAgeRequirement;
 }

@@ -58,7 +58,7 @@
 - { id: OOT_MEGATON_HAMMER, func: Opa0, params: [0x60009d0] }
 - { id: OOT_BIGGORON_SWORD, func: GiantKnife, params: [0x6000600] }
 - { id: OOT_CHICKEN, func: Opa10_Xlu2, params: [0x6001630, 0x60015f0, 0x6001948] }
-- { id: OOT_RUTO_LETTER, func: RutosLetter, params: [0x60008e0, 0x6000ae0] }
+- { id: OOT_BOTTLE_RUTO_LETTER, func: BottleRutosLetter, params: [0x60008e0, 0x6000ae0] }
 - { id: OOT_OCARINA_FAIRY, func: Opa0_Xlu1, params: [0x60008e0, 0x6000b58] }
 - { id: OOT_BOOTS_IRON, func: Opa0_Xlu1, params: [0x6001630, 0x6001a98] }
 - { id: OOT_SEEDS, func: Opa0, params: [0x6000810] }

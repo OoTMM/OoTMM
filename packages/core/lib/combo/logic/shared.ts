@@ -97,5 +97,32 @@ const SHIELDS: ItemSharedDef[] = [
   { shared: Items.SHARED_SHIELD_MIRROR,  oot: Items.OOT_SHIELD_MIRROR,  mm: Items.MM_SHIELD_MIRROR },
 ];
 
+const BOTTLES: ItemSharedDef[] = [
+  { shared: Items.SHARED_BOTTLE_EMPTY, oot: Items.OOT_BOTTLE_EMPTY, mm: Items.MM_BOTTLE_EMPTY },
+  { shared: Items.SHARED_BOTTLE_POTION_RED, oot: Items.OOT_BOTTLE_POTION_RED, mm: Items.MM_BOTTLE_POTION_RED },
+  { shared: Items.SHARED_BOTTLE_POTION_GREEN, oot: Items.OOT_BOTTLE_POTION_GREEN, mm: Items.MM_BOTTLE_POTION_GREEN },
+  { shared: Items.SHARED_BOTTLE_POTION_BLUE, oot: Items.OOT_BOTTLE_POTION_BLUE, mm: Items.MM_BOTTLE_POTION_BLUE },
+  { shared: Items.SHARED_BOTTLE_FAIRY, oot: Items.OOT_BOTTLE_FAIRY, mm: Items.MM_BOTTLE_FAIRY },
+  { shared: Items.SHARED_BOTTLE_POE, oot: Items.OOT_BOTTLE_POE, mm: Items.MM_BOTTLE_POE },
+  { shared: Items.SHARED_BOTTLE_BIG_POE, oot: Items.OOT_BOTTLE_BIG_POE, mm: Items.MM_BOTTLE_BIG_POE },
+  { shared: Items.SHARED_BOTTLE_BLUE_FIRE, oot: Items.OOT_BOTTLE_BLUE_FIRE, mm: Items.MM_BOTTLE_BLUE_FIRE },
+  { shared: Items.SHARED_BOTTLE_MILK, oot: Items.OOT_BOTTLE_MILK, mm: Items.MM_BOTTLE_MILK },
+  { shared: Items.SHARED_BOTTLE_CHATEAU, oot: Items.OOT_BOTTLE_CHATEAU, mm: Items.MM_BOTTLE_CHATEAU },
+  { shared: Items.SHARED_BOTTLED_GOLD_DUST, oot: Items.OOT_BOTTLED_GOLD_DUST, mm: Items.MM_BOTTLED_GOLD_DUST },
+  { shared: Items.SHARED_BOTTLE_RUTO_LETTER, oot: Items.OOT_BOTTLE_RUTO_LETTER, mm: Items.MM_BOTTLE_RUTO_LETTER },
 
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS };
+  { shared: Items.SHARED_POTION_RED, oot: Items.OOT_POTION_RED, mm: Items.MM_POTION_RED },
+  { shared: Items.SHARED_POTION_GREEN, oot: Items.OOT_POTION_GREEN, mm: Items.MM_POTION_GREEN },
+  { shared: Items.SHARED_POTION_BLUE, oot: Items.OOT_POTION_BLUE, mm: Items.MM_POTION_BLUE },
+  { shared: Items.SHARED_FAIRY, oot: Items.OOT_FAIRY, mm: Items.MM_FAIRY },
+  { shared: Items.SHARED_POE, oot: Items.OOT_POE, mm: Items.MM_POE },
+  { shared: Items.SHARED_BIG_POE, oot: Items.OOT_BIG_POE, mm: Items.MM_BIG_POE },
+  { shared: Items.SHARED_BLUE_FIRE, oot: Items.OOT_BLUE_FIRE, mm: Items.MM_BLUE_FIRE },
+  { shared: Items.SHARED_MILK, oot: Items.OOT_MILK, mm: Items.MM_MILK },
+  { shared: Items.SHARED_CHATEAU, oot: Items.OOT_CHATEAU, mm: Items.MM_CHATEAU },
+  { shared: Items.SHARED_BUGS, oot: Items.OOT_BUGS, mm: Items.MM_BUGS },
+  { shared: Items.SHARED_FISH, oot: Items.OOT_FISH, mm: Items.MM_FISH },
+]
+
+
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS, BOTTLES };

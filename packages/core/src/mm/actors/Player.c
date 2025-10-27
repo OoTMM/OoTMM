@@ -99,6 +99,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_TUNIC_GORON,
     PLAYER_CUSTOM_IA_TUNIC_ZORA,
     PLAYER_CUSTOM_IA_HAMMER,
+    PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER,
 };
 
 static u8 sMagicSpellCosts[] =
@@ -2255,3 +2256,109 @@ void Player_RumbleAgony(void)
     Interface_AgonyIconTick();
     Rumble_Request(0, 120, 20, 10);
 }
+
+s32 Player_ShowItem(PlayState* play, Player* this, PlayerAnimationHeader* anim)
+{
+    if (this->exchangeItemAction == PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER)
+    {
+        this->csId = play->playerActorCsIds[2]; /* PLAYER_CS_ID_ITEM_BOTTLE */
+        PlayerAnimation_PlayOnce(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400d4e0); /* &gPlayerAnim_link_bottle_read */
+    }
+    else
+    {
+        PlayerAnimation_PlayOnce(play, &this->skelAnime, anim);
+    }
+    return 1;
+}
+
+PATCH_CALL(0x80838eb0, Player_ShowItem)
+
+static void rutoLetterMessage(PlayState* play)
+{
+    char* b;
+
+    b = &play->msgCtx.font.textBuffer.schar[0];
+
+    comboTextAppendHeader(&b);
+
+    comboTextAppendStr(&b, "...Huh?" TEXT_BB);
+    comboTextAppendStr(&b, "It looks like there is something" TEXT_NL);
+    comboTextAppendStr(&b, "already inside this bottle." TEXT_NL "It's a " TEXT_COLOR_RED "letter");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, ":" TEXT_BB);
+    comboTextAppendStr(&b, TEXT_SPACE("\x03") "\"" TEXT_COLOR_PINK "Help me." TEXT_NL);
+    comboTextAppendStr(&b, TEXT_SPACE("\x03") "I'm waiting for you inside" TEXT_NL);
+    comboTextAppendStr(&b, TEXT_SPACE("\x03") TEXT_COLOR_YELLOW "Lord Jabu-Jabu's" TEXT_COLOR_PINK " belly." TEXT_NL);
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, TEXT_SPACE("\x06") "--" TEXT_COLOR_YELLOW "Ruto");
+    comboTextAppendStr(&b, TEXT_BB);
+    comboTextAppendStr(&b, TEXT_SPACE("\x03") TEXT_COLOR_PINK "PS: Don't tell my father!" TEXT_NL);
+    comboTextAppendStr(&b, TEXT_SPACE("\x03") TEXT_COLOR_PINK "PPS: Don't flush this letter!");
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, "\"" TEXT_FAST_END TEXT_END);
+}
+
+void Player_StartExchangeItemTextbox(PlayState* play, u16 textId, Player* player)
+{
+    PlayerDisplayTextBox(play, textId, player);
+
+    switch (textId)
+    {
+    case 0xfe:
+        if (player->exchangeItemAction == PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER)
+        {
+            rutoLetterMessage(play);
+        }
+        break;
+    }
+}
+
+PATCH_CALL(0x80853b80, Player_StartExchangeItemTextbox)
+
+u8 Player_AfterItemExchange(MessageContext* msgCtx)
+{
+    PlayState* play = gPlay;
+    Player* player = GET_PLAYER(play);
+    u8 result = Message_GetState(msgCtx);
+
+    if (result == TEXT_STATE_CLOSING && player->exchangeItemAction == PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER)
+    {
+        Player_StopCutscene Player_StopCutscene;
+        Player_StopCutscene = OverlayAddr(0x80838760);
+        Player_StopCutscene(player);
+
+        player->drawGiId = 0;
+        player->actor.flags &= ~ACTOR_FLAG_TALK;
+        player->unk_B5E = 10;
+
+        PlayerAnimation_PlayOnce(play, &player->skelAnime, (PlayerAnimationHeader*)0x0400d4e8); /* & gPlayerAnim_link_bottle_read_end */
+        player->av2.actionVar2 = -1;
+
+        return 0;
+    }
+
+    return result;
+}
+
+PATCH_CALL(0x80853b94, Player_AfterItemExchange)
+
+typedef void (*Player_func_80839E74)(Player*, PlayState*);
+
+s32 Player_ItemExchangeAnimate(PlayState* play, SkelAnime* skelAnime)
+{
+    if (PlayerAnimation_Update(play, skelAnime))
+    {
+        Player* player = GET_PLAYER(play);
+        if (player->av2.actionVar2 < 0)
+        {
+            Player_func_80839E74 Player_func_80839E74;
+            Player_func_80839E74 = OverlayAddr(0x80839E74);
+            Player_func_80839E74(player, play);
+            return 0;
+        }
+        return 1;
+    }
+    return 0;
+}
+
+PATCH_CALL(0x80853a9c, Player_ItemExchangeAnimate)

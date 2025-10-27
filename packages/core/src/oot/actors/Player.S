@@ -283,3 +283,107 @@ PATCH_START 0x8083c7e8
   jal CheckUnderwaterChestPreventOpen
    nop
 PATCH_END
+
+PATCH_START 0x8083179c
+  j     Player_CustomItemToItemAction
+   or   a1, v0, zero
+PATCH_END
+
+Player_ActionToCutsceneItem_Hook:
+  addiu   t5, a1, -0x2b
+  slti    at, a1, PLAYER_CUSTOM_IA_MIN
+  beqzl   at, .+0x8
+   li     t5, -1
+  jr      ra
+   nop
+
+PATCH_START 0x8083920c
+  jal   Player_ActionToCutsceneItem_Hook
+   lb   a1, 0x0144 (s0)
+PATCH_END
+
+PATCH_START 0x80839224
+  addiu   v1, v0, 0
+PATCH_END
+
+PATCH_START 0x80839230
+  slti    at, v1, 0xe
+PATCH_END
+
+Player_ShouldAlwaysExchangeBottle_Hook:
+  addiu   sp, sp, -0x18
+  sw      ra, 0x0014 (sp)
+  jal     Player_ShouldAlwaysExchangeBottle
+   lb     a0, 0x0144 (s0)
+  or      at, v0, zero
+  lb      a1, 0x0144 (sp)
+  or      a0, s0, zero
+  lw      ra, 0x0014 (sp)
+  jr      ra
+   addiu  sp, sp, 0x18
+
+PATCH_START 0x8083923c
+  jal   Player_ShouldAlwaysExchangeBottle_Hook
+   nop
+  bnez  at, .+0x44
+PATCH_END
+
+PATCH_START 0x8007B974
+  or      a0, s0, zero
+  lui     a2, 0x800f
+  jal     Player_ActionToBottleColor
+   addiu   a2, 0x7bd0
+  or      a3, v0, zero
+  nop
+  nop
+PATCH_END
+
+Player_ActionToDrinkType_Hook:
+  addiu   sp, sp, -0x18
+  sw      ra, 0x0014 (sp)
+  or      a0, s0, zero
+  jal     Player_ActionToDrinkType
+   or     a1, v1, zero
+  or      v1, v0, zero
+  lw      ra, 0x0014 (sp)
+  li      t0, 0x140
+  lui     at, 0x8012
+  jr      ra
+   addiu  sp, sp, 0x18
+
+PATCH_START 0x8084cc64
+  jal     Player_ActionToDrinkType_Hook
+   nop
+PATCH_END
+
+Player_IsActionMask:
+  slti    at, a2, 0x3a
+  bnezl   at, return
+   li     v0, 0
+  slti    at, a2, PLAYER_CUSTOM_IA_MIN
+  beqzl   at, return
+   li     v0, 0
+  li      v0, 1
+return:
+  jr      ra
+   or     a0, a3, zero
+
+PATCH_START 0x80834300
+  jal     Player_IsActionMask
+   nop
+  beqz    v0, .+0x30
+PATCH_END
+
+Player_IsActionNotGetItem:
+  slti    at, t5, PLAYER_CUSTOM_IA_MIN
+  beqz    at, return2
+   li     at, 1
+  slti    at, t5, 0x2b
+return2:
+  jr      ra
+   addiu  t3, t2, -0x6
+
+PATCH_START 0x8084d2b4
+  jal     Player_IsActionNotGetItem
+   nop
+PATCH_END

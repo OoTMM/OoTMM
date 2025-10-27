@@ -99,6 +99,7 @@
 #include <combo/drawgi.h>
 #if defined (GAME_OOT)
 # include <combo/oot/pause_state_defs.h>
+# include <combo/oot/asm_defs.h>
 #else
 # include <combo/mm/asm_defs.h>
 #endif

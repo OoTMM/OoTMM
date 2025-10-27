@@ -163,8 +163,8 @@
   exits:
     "Kakariko Back": "true"
   locations:
-    "Kakariko Potion Shop Odd Potion": "soul_old_hag && adult_trade(ODD_MUSHROOM)"
-    "Kakariko Potion Shop Buy Blue Potion": "soul_old_hag && adult_trade(ODD_MUSHROOM) && merchant_price(0x02)"
+    "Kakariko Potion Shop Odd Potion": "soul_old_hag && (adult_trade(ODD_MUSHROOM) || has_mushroom)"
+    "Kakariko Potion Shop Buy Blue Potion": "soul_old_hag && (adult_trade(ODD_MUSHROOM) || has_mushroom) && merchant_price(0x02)"
 
 "Shooting Gallery Adult":
   region: ENTRANCE
