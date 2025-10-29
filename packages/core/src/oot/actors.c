@@ -71,7 +71,7 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_PEEHAT:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_PEAHAT);
     case ACTOR_EN_ZF:
-        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_LIZALFOS_DINALFOS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_LIZALFOS_DINOLFOS);
     case ACTOR_EN_GOMA:
         if (play->sceneId == SCE_OOT_LAIR_GOHMA)
             return 1;

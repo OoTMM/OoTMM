@@ -13,7 +13,7 @@ const SOULS_ENEMY: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_ENEMY_KEESE,              oot: Items.OOT_SOUL_ENEMY_KEESE,              mm: Items.MM_SOUL_ENEMY_KEESE },
   { shared: Items.SHARED_SOUL_ENEMY_TEKTITE,            oot: Items.OOT_SOUL_ENEMY_TEKTITE,            mm: Items.MM_SOUL_ENEMY_TEKTITE },
   { shared: Items.SHARED_SOUL_ENEMY_PEAHAT,             oot: Items.OOT_SOUL_ENEMY_PEAHAT,             mm: Items.MM_SOUL_ENEMY_PEAHAT },
-  { shared: Items.SHARED_SOUL_ENEMY_LIZALFOS_DINALFOS,  oot: Items.OOT_SOUL_ENEMY_LIZALFOS_DINALFOS,  mm: Items.MM_SOUL_ENEMY_LIZALFOS_DINALFOS },
+  { shared: Items.SHARED_SOUL_ENEMY_LIZALFOS_DINOLFOS,  oot: Items.OOT_SOUL_ENEMY_LIZALFOS_DINOLFOS,  mm: Items.MM_SOUL_ENEMY_LIZALFOS_DINOLFOS },
   { shared: Items.SHARED_SOUL_ENEMY_SKULLTULA,          oot: Items.OOT_SOUL_ENEMY_SKULLTULA,          mm: Items.MM_SOUL_ENEMY_SKULLTULA },
   { shared: Items.SHARED_SOUL_ENEMY_ARMOS,              oot: Items.OOT_SOUL_ENEMY_ARMOS,              mm: Items.MM_SOUL_ENEMY_ARMOS },
   { shared: Items.SHARED_SOUL_ENEMY_DEKU_BABA,          oot: Items.OOT_SOUL_ENEMY_DEKU_BABA,          mm: Items.MM_SOUL_ENEMY_DEKU_BABA },

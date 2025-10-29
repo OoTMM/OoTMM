@@ -45,7 +45,7 @@
     "Ganon Castle Main Room": "true"
     "Ganon Castle Light Trial Lullaby Hallway": "event(GANON_MQ_LIGHT_ENEMIES)"
   events:
-    GANON_MQ_LIGHT_ENEMIES: "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || (can_hammer && can_use_sticks))"
+    GANON_MQ_LIGHT_ENEMIES: "soul_lizalfos_dinolfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || (can_hammer && can_use_sticks))"
 "Ganon Castle Light Trial Lullaby Hallway":
   dungeon: Ganon
   exits:

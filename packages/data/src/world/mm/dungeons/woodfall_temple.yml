@@ -175,7 +175,7 @@
     "Woodfall Temple Water Room Upper": "can_fight || has_arrows"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Bow": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
+    "Woodfall Temple Bow": "soul_lizalfos_dinolfos && (can_fight || has_arrows)"
 
 "Woodfall Temple Boss Key Room":
   dungeon: WF

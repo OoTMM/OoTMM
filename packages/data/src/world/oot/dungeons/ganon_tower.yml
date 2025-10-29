@@ -8,20 +8,20 @@
   dungeon: Tower
   exits:
     "Ganon Castle Tower": "true"
-    "Ganon Castle Tower Dinalfos Room": "true"
+    "Ganon Castle Tower Dinolfos Room": "true"
 
-"Ganon Castle Tower Dinalfos Room":
+"Ganon Castle Tower Dinolfos Room":
   dungeon: Tower
   exits:
     "Ganon Castle Tower Lobby": "event(GANON_TOWER_LIZALFOS_CLEAR)"
     "Ganon Castle Tower First Transitional Staircase": "event(GANON_TOWER_LIZALFOS_CLEAR)"
   events:
-    GANON_TOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    GANON_TOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinolfos && (can_use_sticks || has_weapon || can_use_slingshot)"
 
 "Ganon Castle Tower First Transitional Staircase":
   dungeon: Tower
   exits:
-    "Ganon Castle Tower Dinalfos Room": "true"
+    "Ganon Castle Tower Dinolfos Room": "true"
     "Ganon Castle Tower Stalfos Room": "true"
 
 "Ganon Castle Tower Stalfos Room":

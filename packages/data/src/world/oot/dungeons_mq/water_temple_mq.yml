@@ -63,7 +63,7 @@
   exits:
     "Water Temple Ruto Column Bottom": "true"
   events:
-    RUTO_COLUMN_HOOKSHOTS: "soul_enemy(SOUL_ENEMY_SPIKE) && soul_lizalfos_dinalfos && can_damage"
+    RUTO_COLUMN_HOOKSHOTS: "soul_enemy(SOUL_ENEMY_SPIKE) && soul_lizalfos_dinolfos && can_damage"
   locations:
     "MQ Water Temple Compass Chest": "event(RUTO_COLUMN_HOOKSHOTS)"
     "MQ Water Temple Wonder Item Lizalfos Room": "can_hookshot"

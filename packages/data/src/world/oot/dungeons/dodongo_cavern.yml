@@ -8,7 +8,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern": "true"
-    "Dodongo Cavern Right Corridor": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
+    "Dodongo Cavern Right Corridor": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated.
     "Dodongo Cavern Main Ledge": "is_adult || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
     "Dodongo Cavern Pre-Boss Lobby": "event(DC_BOMB_EYES)"
@@ -45,8 +45,8 @@
 "Dodongo Cavern Miniboss 1":
   dungeon: DC
   exits:
-    "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
-    "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Right Corridor": "soul_lizalfos_dinolfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Green Room": "soul_lizalfos_dinolfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
     "Dodongo Cavern Miniboss 2": "time_travel_at_will && (climb_anywhere || (is_adult && hookshot_anywhere) || longshot_anywhere)"
   locations:
     "Dodongo Cavern Pot Miniboss 1": "true"
@@ -86,7 +86,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
-    "Dodongo Cavern Compass Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
+    "Dodongo Cavern Compass Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated.
     "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din || climb_anywhere || hookshot_anywhere"
 
 "Dodongo Cavern Stairs Top":
@@ -136,8 +136,8 @@
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
-    "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
-    "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinolfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinolfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
     "Dodongo Cavern Miniboss 1": "time_travel_at_will"
   locations:
     "Dodongo Cavern Pot Miniboss 1": "true"
@@ -168,14 +168,14 @@
     DC_SHORTCUT: "true"
     DC_BOMB_EYES: "has_explosives"
   locations:
-    "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
+    "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated.
 
 "Dodongo Cavern Pre-Boss Lobby":
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Boss": "true"
-    "Dodongo Cavern GS Near Boss": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated. 
+    "Dodongo Cavern GS Near Boss": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated.
   locations:
     "Dodongo Cavern Pot Skull 1": "true"
     "Dodongo Cavern Pot Skull 2": "true"
@@ -185,7 +185,7 @@
 
 "Dodongo Cavern GS Near Boss":
     dungeon: DC
-    exits: 
+    exits:
       "Dodongo Cavern Pre-Boss Lobby": "true"
     locations:
-      "Dodongo Cavern GS Near Boss": "gs && can_damage_skull" ## Blast mask entry will need to be adjusted later when Macros are updated. 
+      "Dodongo Cavern GS Near Boss": "gs && can_damage_skull" ## Blast mask entry will need to be adjusted later when Macros are updated.

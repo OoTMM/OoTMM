@@ -341,8 +341,8 @@
     "Snowhead Temple Center Level 4": "(trick(MM_SHT_PILLARLESS) && (can_use_fire_arrows || has_bombs)) || (short_hook_anywhere && (has_bombs || can_use_fire_arrows)) || hookshot_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Snowhead Temple SF Dinolfos 1": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
-    "Snowhead Temple SF Dinolfos 2": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
+    "Snowhead Temple SF Dinolfos 1": "soul_lizalfos_dinolfos && (can_fight || has_arrows)"
+    "Snowhead Temple SF Dinolfos 2": "soul_lizalfos_dinolfos && (can_fight || has_arrows)"
 
 "Snowhead Temple Boss Key Room":
   dungeon: SH

@@ -236,7 +236,7 @@
 - { id: OOT_SOUL_ENEMY_TEKTITE, type: SOUL, add: [OOT_SOUL, 0x0005], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Tektites" }
 - { id: OOT_SOUL_ENEMY_LEEVER, type: SOUL, add: [OOT_SOUL, 0x0006], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Leevers" }
 - { id: OOT_SOUL_ENEMY_PEAHAT, type: SOUL, add: [OOT_SOUL, 0x0007], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Peahats" }
-- { id: OOT_SOUL_ENEMY_LIZALFOS_DINALFOS, type: SOUL, add: [OOT_SOUL, 0x0008], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Lizalfos/Dinalfos" }
+- { id: OOT_SOUL_ENEMY_LIZALFOS_DINOLFOS, type: SOUL, add: [OOT_SOUL, 0x0008], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Lizalfos/Dinolfos" }
 - { id: OOT_SOUL_ENEMY_GOHMA_LARVA, type: SOUL, add: [OOT_SOUL, 0x0009], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Gohma Larvae" }
 - { id: OOT_SOUL_ENEMY_SHABOM, type: SOUL, add: [OOT_SOUL, 0x000a], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Shaboms" }
 - { id: OOT_SOUL_ENEMY_BABY_DODONGO, type: SOUL, add: [OOT_SOUL, 0x000b], flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Baby Dodongos" }
@@ -657,7 +657,7 @@
 - { id: MM_SOUL_ENEMY_KEESE, type: SOUL, add: [MM_SOUL, 0x0003], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Keeses" }
 - { id: MM_SOUL_ENEMY_TEKTITE, type: SOUL, add: [MM_SOUL, 0x0004], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Tektites" }
 - { id: MM_SOUL_ENEMY_PEAHAT, type: SOUL, add: [MM_SOUL, 0x0005], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Peahats" }
-- { id: MM_SOUL_ENEMY_LIZALFOS_DINALFOS, type: SOUL, add: [MM_SOUL, 0x0006], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Lizalfos/Dinalfos" }
+- { id: MM_SOUL_ENEMY_LIZALFOS_DINOLFOS, type: SOUL, add: [MM_SOUL, 0x0006], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Lizalfos/Dinolfos" }
 - { id: MM_SOUL_ENEMY_SKULLTULA, type: SOUL, add: [MM_SOUL, 0x0007], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Skulltulas" }
 - { id: MM_SOUL_ENEMY_ARMOS, type: SOUL, add: [MM_SOUL, 0x0008], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Armos" }
 - { id: MM_SOUL_ENEMY_DEKU_BABA, type: SOUL, add: [MM_SOUL, 0x0009], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Deku Babas" }

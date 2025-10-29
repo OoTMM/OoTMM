@@ -93,7 +93,7 @@
     "Jabu-Jabu Ruto Section Bottom Floor": "true"
     "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)" #We are going to need a buffer region here for behind the water spout. You can use Hover Boots with Bunny Hood or backwalking to get through the spout, or climb anywhere. There is not another one blocking the door on this side. It should also probably be a trick, even with climb anywhere.
   events:
-    JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
+    JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinolfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
   locations:
     "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
     "MQ Jabu-Jabu SoT Room Lower Chest": "true"

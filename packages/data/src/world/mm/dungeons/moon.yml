@@ -128,7 +128,7 @@
   region: MOON
   exits:
     "Moon": "true"
-    "Moon Trial Link Dinalfos Fight": "true"
+    "Moon Trial Link Dinolfos Fight": "true"
   locations:
     "Moon Trial Link Pot 1": "true"
     "Moon Trial Link Pot 2": "true"
@@ -139,16 +139,16 @@
     "Moon Trial Link Pot 7": "true"
     "Moon Trial Link Pot 8": "true"
 
-"Moon Trial Link Dinalfos Fight":
+"Moon Trial Link Dinolfos Fight":
   region: MOON
   exits:
-    "Moon Trial Link Entrance": "soul_lizalfos_dinalfos && (can_fight || can_use_deku_bubble || has_arrows)"
-    "Moon Trial Link Rest 1": "soul_lizalfos_dinalfos && (can_fight || can_use_deku_bubble || has_arrows)"
+    "Moon Trial Link Entrance": "soul_lizalfos_dinolfos && (can_fight || can_use_deku_bubble || has_arrows)"
+    "Moon Trial Link Rest 1": "soul_lizalfos_dinolfos && (can_fight || can_use_deku_bubble || has_arrows)"
 
 "Moon Trial Link Rest 1":
   region: MOON
   exits:
-    "Moon Trial Link Dinalfos Fight": "true"
+    "Moon Trial Link Dinolfos Fight": "true"
     "Moon Trial Link Garo Fight": "true"
   gossip:
     "Moon Trial Link Gossip 1": "true"

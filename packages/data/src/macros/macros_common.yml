@@ -57,7 +57,7 @@
 "soul_keese": "shared_soul_enemy(SOUL_ENEMY_KEESE, SHARED_SOUL_ENEMY_KEESE)"
 "soul_tektite": "shared_soul_enemy(SOUL_ENEMY_TEKTITE, SHARED_SOUL_ENEMY_TEKTITE)"
 "soul_peahat": "shared_soul_enemy(SOUL_ENEMY_PEAHAT, SHARED_SOUL_ENEMY_PEAHAT)"
-"soul_lizalfos_dinalfos": "shared_soul_enemy(SOUL_ENEMY_LIZALFOS_DINALFOS, SHARED_SOUL_ENEMY_LIZALFOS_DINALFOS)"
+"soul_lizalfos_dinolfos": "shared_soul_enemy(SOUL_ENEMY_LIZALFOS_DINOLFOS, SHARED_SOUL_ENEMY_LIZALFOS_DINOLFOS)"
 "soul_skulltula": "shared_soul_enemy(SOUL_ENEMY_SKULLTULA, SHARED_SOUL_ENEMY_SKULLTULA)"
 "soul_armos": "shared_soul_enemy(SOUL_ENEMY_ARMOS, SHARED_SOUL_ENEMY_ARMOS)"
 "soul_deku_baba": "shared_soul_enemy(SOUL_ENEMY_DEKU_BABA, SHARED_SOUL_ENEMY_DEKU_BABA)"

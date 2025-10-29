@@ -3,7 +3,7 @@
   exits:
     "Gerudo Fortress Exterior": "true"
     "Gerudo Training Grounds Slopes": "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
-    "Gerudo Training Grounds Right Side": "has_explosives && can_use_sword && soul_beamos && soul_lizalfos_dinalfos"
+    "Gerudo Training Grounds Right Side": "has_explosives && can_use_sword && soul_beamos && soul_lizalfos_dinolfos"
     "Gerudo Training Grounds Maze": "true"
   locations:
     "Gerudo Training Grounds Entrance 1": "can_hit_triggers_distance"
