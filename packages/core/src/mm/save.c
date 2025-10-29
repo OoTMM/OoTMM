@@ -93,7 +93,7 @@ void Sram_SaveEndOfCycle(PlayState* play)
         MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     }
 
-    /* Empty bottles (except gold dust) */
+    /* Empty bottles (except gold dust and ruto's letter) */
     for (int i = 0; i < 6; ++i)
     {
         u8* slot;
@@ -103,6 +103,7 @@ void Sram_SaveEndOfCycle(PlayState* play)
         {
         case ITEM_NONE:
         case ITEM_MM_GOLD_DUST:
+        case ITEM_MM_RUTO_LETTER:
             break;
         case ITEM_MM_SPRING_WATER_HOT:
             if (!Config_Flag(CFG_MM_KEEP_BOTTLES_RESET))
