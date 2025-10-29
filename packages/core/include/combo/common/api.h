@@ -195,6 +195,7 @@ void AddMagic(PlayState* play, s16 amount);
 u8 AddItem(PlayState* play, u8 itemId);
 u8 AddItemWithIcon(PlayState* play, Player* link, const GetItem* giEntry);
 u8 GetItemCollectBehavior(s16 itemId);
+void Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem);
 void Interface_SetDoAction(PlayState* play, u16 action);
 void Interface_LoadActionLabelB(PlayState* play, u16 action);
 
@@ -220,6 +221,7 @@ void ActorCutscene_Stop(s16 cutsceneId);
 void Cutscene_End(PlayState* play, void* unk);
 
 void RemoveItem(s16 item, s16 slot);
+void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 btn);
 
 void* ActorAlloc(u32 size);
 void  ActorFree(void* data);

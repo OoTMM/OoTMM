@@ -285,7 +285,7 @@ Kakariko Bazaar Item 6,                                     shop,           NONE
 Kakariko Bazaar Item 7,                                     shop,           NONE,                 BAZAAR,                         0x36,                       NUTS_5
 Kakariko Bazaar Item 8,                                     shop,           NONE,                 BAZAAR,                         0x37,                       SHIELD_HYLIAN
 Kakariko Potion Shop Item 1,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x38,                       FISH
-Kakariko Potion Shop Item 2,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x39,                       BUG
+Kakariko Potion Shop Item 2,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x39,                       BUGS
 Kakariko Potion Shop Item 3,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3a,                       POE
 Kakariko Potion Shop Item 4,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3b,                       NUTS_5
 Kakariko Potion Shop Item 5,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3c,                       BLUE_FIRE
@@ -717,7 +717,7 @@ Zora Fountain Bush 3,                                       bush,           NONE
 Zora Fountain Bush 4,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00009,                    NOTHING
 Zora Fountain Bush 5,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000a,                    NOTHING
 Zora Fountain Bush 6,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000b,                    NOTHING
-Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
+Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                BOTTLE_RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
 Lake Hylia Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x14,                       NUTS_5
@@ -1151,7 +1151,7 @@ Market Bazaar Item 6,                                       shop,           NONE
 Market Bazaar Item 7,                                       shop,           NONE,                 BAZAAR,                         0x26,                       NUTS_5
 Market Bazaar Item 8,                                       shop,           NONE,                 BAZAAR,                         0x27,                       SHIELD_HYLIAN
 Market Potion Shop Item 1,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x28,                       FISH
-Market Potion Shop Item 2,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x29,                       BUG
+Market Potion Shop Item 2,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x29,                       BUGS
 Market Potion Shop Item 3,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2a,                       POE
 Market Potion Shop Item 4,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2b,                       NUTS_5
 Market Potion Shop Item 5,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2c,                       BLUE_FIRE

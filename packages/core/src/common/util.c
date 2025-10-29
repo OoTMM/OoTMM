@@ -65,11 +65,10 @@ int comboMmDungeonIndex(void)
 int comboIsChateauActive(void)
 {
 #if defined(GAME_OOT)
-    if (!Config_Flag(CFG_SHARED_MAGIC))
-        return 0;
-#endif
-
+    return gCustomSave.chateauActive;
+#else
     return !!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+#endif
 }
 
 int comboIsLinkAdult(void)

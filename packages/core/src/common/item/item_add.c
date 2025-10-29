@@ -125,6 +125,25 @@ static const u8 kItemSlotsMasksMm[] = {
     ITS_MM_MASK_GIANT,
 };
 
+int isSlotEquippedOot(OotItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[i] == slot)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int isSlotEquippedAnyOot(int slot)
+{
+    return isSlotEquippedOot(&gOotSave.info.equips, slot) ||
+        isSlotEquippedOot(&gOotSave.info.childEquips, slot) ||
+        isSlotEquippedOot(&gOotSave.info.adultEquips, slot);
+}
+
 typedef int (*AddItemFunc)(PlayState* play, u8 itemId, s16 gi, u16 param);
 
 static void reloadSlotEquipsOot(OotItemEquips* equips, int slot)
@@ -876,8 +895,22 @@ static int addItemBottleNewOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         if (gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
         {
             gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
-            break;
+            return 0;
         }
+    }
+
+    if (!(gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE)))
+    {
+        gOotExtraItems.bottleAdultSlot = itemId;
+        addItemTradeOotAdult(play, itemId, gi, XITEM_OOT_ADULT_BOTTLE);
+        return 0;
+    }
+
+    if (!(gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE)))
+    {
+        gOotExtraItems.bottleChildSlot = itemId;
+        addItemTradeOotChild(play, itemId, gi, XITEM_OOT_CHILD_BOTTLE);
+        return 0;
     }
 
     return 0;
@@ -891,8 +924,22 @@ static int addItemBottleRefillOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         {
             gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
             reloadSlotOot(play, ITS_OOT_BOTTLE + i);
-            break;
+            return 0;
         }
+    }
+
+    if (gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE) && gOotExtraItems.bottleAdultSlot == ITEM_OOT_BOTTLE_EMPTY)
+    {
+        gOotExtraItems.bottleAdultSlot = itemId;
+        reloadSlotOot(play, ITS_OOT_TRADE_ADULT);
+        return 0;
+    }
+
+    if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE) && gOotExtraItems.bottleChildSlot == ITEM_OOT_BOTTLE_EMPTY)
+    {
+        gOotExtraItems.bottleChildSlot = itemId;
+        reloadSlotOot(play, ITS_OOT_TRADE_CHILD);
+        return 0;
     }
 
     return 0;
@@ -2185,6 +2232,32 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE2, GI_MM_NUT_UPGRADE2 },
     { CFG_SHARED_STONE_OF_AGONY, GI_OOT_STONE_OF_AGONY, GI_MM_STONE_OF_AGONY },
     { CFG_SHARED_SPIN_UPGRADE, GI_OOT_SPIN_UPGRADE, GI_MM_SPIN_UPGRADE },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_EMPTY, GI_MM_BOTTLE_EMPTY },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_MILK, GI_MM_BOTTLE_MILK },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_RUTO_LETTER, GI_MM_BOTTLE_RUTO_LETTER },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_POTION_RED, GI_MM_BOTTLE_POTION_RED },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_POTION_GREEN, GI_MM_BOTTLE_POTION_GREEN },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_POTION_BLUE, GI_MM_BOTTLE_POTION_BLUE },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_FAIRY, GI_MM_BOTTLE_FAIRY },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_POE, GI_MM_BOTTLE_POE },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_BIG_POE, GI_MM_BOTTLE_BIG_POE },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_BLUE_FIRE, GI_MM_BOTTLE_BLUE_FIRE },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLED_GOLD_DUST, GI_MM_BOTTLED_GOLD_DUST },
+    { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_CHATEAU, GI_MM_BOTTLE_CHATEAU },
+    { CFG_SHARED_BOTTLES, GI_OOT_POTION_RED, GI_MM_POTION_RED },
+    { CFG_SHARED_BOTTLES, GI_OOT_POTION_GREEN, GI_MM_POTION_GREEN },
+    { CFG_SHARED_BOTTLES, GI_OOT_POTION_BLUE, GI_MM_POTION_BLUE },
+    { CFG_SHARED_BOTTLES, GI_OOT_FAIRY, GI_MM_FAIRY },
+    { CFG_SHARED_BOTTLES, GI_OOT_MILK, GI_MM_MILK },
+    { CFG_SHARED_BOTTLES, GI_OOT_FISH, GI_MM_FISH },
+    { CFG_SHARED_BOTTLES, GI_OOT_BUGS, GI_MM_BUGS },
+    { CFG_SHARED_BOTTLES, GI_OOT_BLUE_FIRE, GI_MM_BLUE_FIRE },
+    { CFG_SHARED_BOTTLES, GI_OOT_POE, GI_MM_POE },
+    { CFG_SHARED_BOTTLES, GI_OOT_BIG_POE, GI_MM_BIG_POE },
+    { CFG_SHARED_BOTTLES, GI_OOT_WEIRD_MUSHROOM, GI_MM_WEIRD_MUSHROOM } ,
+    { CFG_SHARED_BOTTLES, GI_OOT_CHATEAU, GI_MM_CHATEAU } ,
+    { CFG_SHARED_BOTTLES, GI_OOT_GOLD_DUST, GI_MM_GOLD_DUST } ,
+    { CFG_SHARED_BOTTLES, GI_OOT_SEAHORSE2, GI_MM_SEAHORSE2 } ,
 };
 
 static int addItem(PlayState* play, s16 gi)

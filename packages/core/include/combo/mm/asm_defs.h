@@ -15,6 +15,8 @@
 
 #define PLAYER_CUSTOM_IA_MAX         0x56
 
+#define PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER 0x1f /* Replaces Hylian Loach */
+
 #define PLAYER_MAGIC_SPELL_MIN  0
 #define PLAYER_MAGIC_SPELL_WIND 0
 #define PLAYER_MAGIC_SPELL_LOVE 1

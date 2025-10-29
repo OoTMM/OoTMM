@@ -67,6 +67,7 @@ void DrawGi_CustomGS(PlayState* play, s16 index);
 void DrawGi_CustomPotion(PlayState* play, s16 index);
 void DrawGi_SilverRupee(PlayState* play, s16 index);
 void DrawGi_MagicalRupee(PlayState* play, s16 index);
+void DrawGi_BottleRutosLetter(PlayState* play, s16 index);
 void DrawGi_RutosLetter(PlayState* play, s16 index);
 void DrawGi_CustomSmallKey(PlayState* play, s16 index);
 void DrawGi_Coin(PlayState* play, s16 index);

@@ -782,7 +782,7 @@ static void TimeTravelUpdateEquipment(void)
     for (int i = 0; i < 3; ++i)
     {
         item = gSave.info.equips.buttonItems[i + 1];
-        if (item >= ITEM_OOT_BOTTLE_EMPTY && item <= ITEM_OOT_POE)
+        if ((item >= ITEM_OOT_BOTTLE_EMPTY && item <= ITEM_OOT_POE) || comboIsTradeBottleOot(item))
             item = gSave.info.inventory.items[gSave.info.equips.cButtonSlots[i]];
         gSave.info.equips.buttonItems[i + 1] = item;
     }

@@ -2,14 +2,28 @@
 #include <combo/item.h>
 #include <combo/config.h>
 
-static s16 progressiveRutoLetter(void)
+static s16 progressiveRutoLetterOot(void)
 {
     if (gOotExtraItems.rutoLetter)
         return GI_OOT_BOTTLE_EMPTY;
-    return GI_OOT_RUTO_LETTER;
+    return GI_OOT_BOTTLE_RUTO_LETTER;
 }
 
-static s16 progressiveGoldDustBottle(void)
+static s16 progressiveRutoLetterMm(void)
+{
+    if (gOotExtraItems.rutoLetter)
+        return GI_MM_BOTTLE_EMPTY;
+    return GI_MM_BOTTLE_RUTO_LETTER;
+}
+
+static s16 progressiveGoldDustBottleOot(void)
+{
+    if (gMmExtraItems.goldDust)
+        return GI_OOT_BOTTLE_EMPTY;
+    return GI_OOT_BOTTLED_GOLD_DUST;
+}
+
+static s16 progressiveGoldDustBottleMm(void)
 {
     if (gMmExtraItems.goldDust)
         return GI_MM_BOTTLE_EMPTY;
@@ -495,8 +509,11 @@ s16 Item_Progressive(s16 gi, int ovflags)
     case GI_MM_STICK_UPGRADE2:
         gi = progressiveUpgradeStickMm();
         break;
-    case GI_OOT_RUTO_LETTER:
-        gi = progressiveRutoLetter();
+    case GI_OOT_BOTTLE_RUTO_LETTER:
+        gi = progressiveRutoLetterOot();
+        break;
+    case GI_MM_BOTTLE_RUTO_LETTER:
+        gi = progressiveRutoLetterMm();
         break;
     case GI_MM_BOMBCHU:
     case GI_MM_BOMBCHU_5:
@@ -505,7 +522,10 @@ s16 Item_Progressive(s16 gi, int ovflags)
         gi = progressiveBombchuBagFirstMm(gi, ovflags);
         break;
     case GI_MM_BOTTLED_GOLD_DUST:
-        gi = progressiveGoldDustBottle();
+        gi = progressiveGoldDustBottleMm();
+        break;
+    case GI_OOT_BOTTLED_GOLD_DUST:
+        gi = progressiveGoldDustBottleOot();
         break;
     case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
@@ -615,7 +635,7 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_OOT_POTION_BLUE:
     case GI_OOT_FAIRY:
     case GI_OOT_FISH:
-    case GI_OOT_BUG:
+    case GI_OOT_BUGS:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_POE:
     case GI_OOT_MAGIC_JAR_SMALL:

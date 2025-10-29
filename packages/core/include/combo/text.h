@@ -5,6 +5,7 @@
 
 #if defined(GAME_OOT)
 # define TEXT_FAST           "\x08"
+# define TEXT_FAST_END       "\x09"
 # define TEXT_CZ             "\x05\x40"
 # define TEXT_COLOR_RED      "\x05\x41"
 # define TEXT_COLOR_GREEN    "\x05\x42"
@@ -13,6 +14,7 @@
 # define TEXT_COLOR_PINK     "\x05\x45"
 # define TEXT_COLOR_YELLOW   "\x05\x46"
 # define TEXT_COLOR_ORANGE   TEXT_COLOR_YELLOW
+# define TEXT_SPACE(amount)  "\x06" amount
 # define TEXT_END            "\x02"
 # define TEXT_CHOICE2        "\x1b"
 # define TEXT_CHOICE3        "\x1c"
@@ -22,8 +24,10 @@
 # define TEXT_ICON           "\x13"
 # define TEXT_BB             "\x04"
 # define TEXT_FADE(frames)   "\x0e" frames
+# define TEXT_NO_SKIP        "\x1a"
 #else
 # define TEXT_FAST           "\x17"
+# define TEXT_FAST_END       "\x18"
 # define TEXT_CZ             "\x00"
 # define TEXT_COLOR_RED      "\x01"
 # define TEXT_COLOR_GREEN    "\x02"
@@ -33,12 +37,14 @@
 # define TEXT_COLOR_PINK     "\x06"
 # define TEXT_COLOR_SILVER   "\x07"
 # define TEXT_COLOR_ORANGE   "\x08"
+# define TEXT_NO_SKIP        "\x19"
 # define TEXT_END            "\xbf"
 # define TEXT_CHOICE2        "\xc2"
 # define TEXT_CHOICE3        "\xc3"
 # define TEXT_BOX_BREAK      "\x10"
 # define TEXT_NL             "\x11"
 # define TEXT_BOX_BREAK_2    "\x12"
+# define TEXT_SPACE(amount)  "\x14" amount
 # define TEXT_NOCLOSE        "\x1a"
 # define TEXT_SIGNAL         "\xe0"
 # define TEXT_ICON           ""

@@ -108,6 +108,10 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_HAMMER;
         break;
+    case ITEM_MM_RUTO_LETTER:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_RUTO_LETTER;
+        break;
     }
     if (isForeign)
     {
@@ -231,6 +235,22 @@ void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, " to smash and break " TEXT_NL "junk! It's so heavy, you need to " TEXT_NL "use two hands to swing it!" TEXT_END);
         break;
+    case ITEM_MM_BLUE_FIRE:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Blue Fire" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "This is a cool flame you can" TEXT_NL "use with \xB2." TEXT_END);
+        break;
+    case ITEM_MM_RUTO_LETTER:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Letter" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "It looks like there is something" TEXT_NL "already inside this bottle." TEXT_END);
+        break;
     }
 }
 
@@ -328,15 +348,16 @@ static u32 sCustomIcons[] = {
     ITEM_MM_TUNIC_GORON,
     ITEM_MM_TUNIC_ZORA,
     ITEM_MM_HAMMER,
+    ITEM_MM_RUTO_LETTER,
 };
 
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN] =
 {
-    { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 1, 1, 1, -1, -1, -1, -1, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 1, 1, -1, -1, -1, -1, 1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -384,6 +405,9 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
             break;
         case ITEM_MM_HAMMER:
             foreignIcon = ITEM_OOT_HAMMER;
+            break;
+        case ITEM_MM_RUTO_LETTER:
+            foreignIcon = ITEM_OOT_RUTO_LETTER;
             break;
         default:
             continue;

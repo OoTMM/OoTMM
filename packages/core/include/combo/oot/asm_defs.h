@@ -1,0 +1,10 @@
+#define PLAYER_CUSTOM_IA_MIN                0x43
+#define PLAYER_CUSTOM_IA_MAGIC_MUSHROOM     0x43
+#define PLAYER_CUSTOM_IA_CHATEAU            0x44
+#define PLAYER_CUSTOM_IA_GOLD_DUST          0x45
+#define PLAYER_CUSTOM_IA_SEAHORSE           0x46
+#define PLAYER_CUSTOM_IA_DEKU_PRINCESS      0x47
+#define PLAYER_CUSTOM_IA_SPRING_WATER       0x48
+#define PLAYER_CUSTOM_IA_SPRING_WATER_HOT   0x49
+#define PLAYER_CUSTOM_IA_ZORA_EGG           0x4a
+#define PLAYER_IA_MAX                       0x4b

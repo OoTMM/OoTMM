@@ -428,6 +428,42 @@ void Player_DrawDekuStick(void)
     CLOSE_DISPS();
 }
 
+static u8* sActionModelGroups = (u8*)0x800f7714;
+
+static u8 sCustomActionModelGroups[] = {
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_MAGIC_MUSHROOM */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_CHATEAU */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_GOLD_DUST */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_SEAHORSE */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_DEKU_PRINCESS */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_SPRING_WATER */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_SPRING_WATER_HOT */
+    0xe, /* PLAYER_MODELGROUP_BOTTLE, PLAYER_CUSTOM_IA_ZORA_EGG */
+};
+
+s32 Player_ActionToModelGroup(Player* this, s32 itemAction) {
+    s32 modelGroup;
+    s8 customItemAction = itemAction - PLAYER_CUSTOM_IA_MIN;
+    if (customItemAction >= 0 && customItemAction < ARRAY_COUNT(sCustomActionModelGroups))
+    {
+        modelGroup = sCustomActionModelGroups[customItemAction];
+    }
+    else
+    {
+        modelGroup = sActionModelGroups[itemAction];
+    }
+
+    /* PLAYER_MODELGROUP_SWORD_AND_SHIELD */
+    if ((modelGroup == 2) && Player_IsChildWithHylianShield(this)) {
+        // child, using kokiri sword with hylian shield equipped
+        return 1; /* PLAYER_MODELGROUP_CHILD_HYLIAN_SHIELD */
+    } else {
+        return modelGroup;
+    }
+}
+
+PATCH_FUNC(0x800794b0, Player_ActionToModelGroup);
+
 void Player_AfterSetEquipmentData(PlayState* play)
 {
     Player* player = GET_PLAYER(play);
@@ -987,3 +1023,275 @@ void Player_SetupMatrixFrozenEffect(float scale)
 }
 
 PATCH_CALL(0x80848b10, Player_SetupMatrixFrozenEffect);
+
+static s32 sCustomItemActions[] =
+{
+    0,                                  /* ITEM_OOT_MASK_BLAST */
+    0,                                  /* ITEM_OOT_MASK_STONE */
+    PLAYER_CUSTOM_IA_MAGIC_MUSHROOM,    /* ITEM_OOT_MAGIC_MUSHROOM */
+    PLAYER_CUSTOM_IA_CHATEAU,           /* ITEM_OOT_CHATEAU */
+    PLAYER_CUSTOM_IA_GOLD_DUST,         /* ITEM_OOT_GOLD_DUST */
+    PLAYER_CUSTOM_IA_SEAHORSE,          /* ITEM_OOT_SEAHORSE */
+    PLAYER_CUSTOM_IA_DEKU_PRINCESS,     /* ITEM_OOT_DEKU_PRINCESS */
+    PLAYER_CUSTOM_IA_SPRING_WATER,      /* ITEM_OOT_SPRING_WATER */
+    PLAYER_CUSTOM_IA_SPRING_WATER_HOT,  /* ITEM_OOT_SPRING_WATER_HOT */
+    PLAYER_CUSTOM_IA_ZORA_EGG,          /* ITEM_OOT_ZORA_EGG */
+};
+
+s32 Player_CustomItemToItemAction(s32 item, s32 itemAction)
+{
+    s32 customItem = item - ITEM_OOT_CUSTOM_MIN;
+    if (customItem < 0)
+    {
+        return itemAction;
+    }
+    if (customItem >= ARRAY_COUNT(sCustomItemActions))
+    {
+        return 0;
+    }
+    return sCustomItemActions[customItem];
+}
+
+s32 Player_ShouldNotHandleCutsceneItem(Player* player, s32 _unused, s8 itemAction)
+{
+    if (itemAction >= PLAYER_CUSTOM_IA_MAGIC_MUSHROOM && itemAction <= PLAYER_CUSTOM_IA_ZORA_EGG)
+    {
+        return 0;
+    }
+    return Player_CheckHostileLockOn(player);
+}
+
+PATCH_CALL(0x80834358, Player_ShouldNotHandleCutsceneItem)
+
+static Color_RGB8 sCustomBottleColors[] = {
+    { 131, 0, 174 },    /* PLAYER_CUSTOM_IA_MAGIC_MUSHROOM */
+    { 255, 255, 255 },  /* PLAYER_CUSTOM_IA_CHATEAU */
+    { 255, 180, 0 },    /* PLAYER_CUSTOM_IA_GOLD_DUST */
+    { 252, 238, 0 },    /* PLAYER_CUSTOM_IA_SEAHORSE */
+    { 248, 200, 0 },    /* PLAYER_CUSTOM_IA_DEKU_PRINCESS */
+    { 136, 192, 255 },  /* PLAYER_CUSTOM_IA_SPRING_WATER */
+    { 136, 192, 255 },  /* PLAYER_CUSTOM_IA_SPRING_WATER_HOT */
+    { 184, 232, 232 },  /* PLAYER_CUSTOM_IA_ZORA_EGG     */
+};
+
+Color_RGB8* Player_ActionToBottleColor(Player* this, s32 itemAction, Color_RGB8* vanillaColors)
+{
+    s32 customBottleIndex = itemAction - PLAYER_CUSTOM_IA_MIN;
+    if (customBottleIndex >= 0 && customBottleIndex < ARRAY_COUNT(sCustomBottleColors))
+    {
+        return &sCustomBottleColors[customBottleIndex];
+    }
+    return &vanillaColors[Player_ActionToBottle(this, itemAction)];
+}
+
+s32 Player_CustomActionToBottleExchange(Player* this, s32 itemAction)
+{
+    s32 customBottle = itemAction - PLAYER_CUSTOM_IA_MIN;
+    if (customBottle >= 0 && customBottle <= 8)
+    {
+        return customBottle + 6;
+    }
+    s32 bottleExchange = Player_ActionToBottle(this, itemAction) - 1;
+    if (bottleExchange >= 6)
+    {
+        return -1;
+    }
+    return bottleExchange;
+}
+
+PATCH_CALL(0x8083921c, Player_CustomActionToBottleExchange)
+
+s32 Player_ShouldAlwaysExchangeBottle(s8 itemAction)
+{
+    switch (itemAction)
+    {
+    case 0x23: /* PLAYER_IA_BOTTLE_BIG_POE */
+    case 0x24: /* PLAYER_IA_BOTTLE_RUTOS_LETTER */
+    case PLAYER_CUSTOM_IA_MAGIC_MUSHROOM:
+    case PLAYER_CUSTOM_IA_GOLD_DUST:
+    case PLAYER_CUSTOM_IA_SEAHORSE:
+    case PLAYER_CUSTOM_IA_DEKU_PRINCESS:
+    case PLAYER_CUSTOM_IA_ZORA_EGG:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+s32 Player_CustomActionToBottleType(Player* this, s32 itemAction)
+{
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_MAGIC_MUSHROOM:
+    case PLAYER_CUSTOM_IA_CHATEAU:
+    case PLAYER_CUSTOM_IA_GOLD_DUST:
+    case PLAYER_CUSTOM_IA_SEAHORSE:
+    case PLAYER_CUSTOM_IA_DEKU_PRINCESS:
+    case PLAYER_CUSTOM_IA_ZORA_EGG:
+        return 0; /* Drink bottle. Non-chateau should never reach here anyway. */
+    case PLAYER_CUSTOM_IA_SPRING_WATER:
+    case PLAYER_CUSTOM_IA_SPRING_WATER_HOT:
+        return 1; /* Drop an actor out of the bottle */
+    default:
+        return Player_ActionToBottle(this, itemAction);
+    }
+}
+
+PATCH_CALL(0x808394b8, Player_CustomActionToBottleType)
+
+s32 Player_ActionToDrinkType(Player* this, s32 drinkType)
+{
+    if (this->heldItemAction == PLAYER_CUSTOM_IA_CHATEAU)
+    {
+        gCustomSave.chateauActive = 1;
+        return 3; /* Refill health and magic */
+    }
+    return drinkType;
+}
+
+void Player_SpawnBottleDropActor(ActorContext* actorCtx, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+{
+    Player* player = GET_PLAYER(play);
+    switch (player->heldItemAction)
+    {
+    case PLAYER_CUSTOM_IA_SPRING_WATER:
+        actorId = ACTOR_CUSTOM_OBJ_AQUA;
+        variable = 0;
+        break;
+    case PLAYER_CUSTOM_IA_SPRING_WATER_HOT:
+        variable = 1;
+        actorId = ACTOR_CUSTOM_OBJ_AQUA;
+        break;
+    }
+    Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+}
+
+PATCH_CALL(0x8084d1bc, Player_SpawnBottleDropActor)
+
+static void itemExchangeMessage(PlayState* play, s8 exchangeItemId)
+{
+    char* b;
+
+    b = play->msgCtx.font.msgBuf;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "Oh, ");
+    switch (exchangeItemId)
+    {
+        case EXCH_ITEM_BOTTLE_FISH:
+            comboTextAppendStr(&b, "a " TEXT_COLOR_PINK "Fish" TEXT_CZ "!" TEXT_NL);
+            break;
+        case EXCH_ITEM_BOTTLE_BLUE_FIRE:
+            comboTextAppendStr(&b, "that's " TEXT_COLOR_TEAL "Blue Fire" TEXT_CZ "!" TEXT_NL);
+            break;
+        case EXCH_ITEM_BOTTLE_BUG:
+            comboTextAppendStr(&b, "it's a cute little " TEXT_COLOR_GREEN "Bug" TEXT_CZ "!" TEXT_NL);
+            break;
+        case EXCH_CUSTOM_ITEM_MAGIC_MUSHROOM:
+            comboTextAppendStr(&b, "an exotic " TEXT_COLOR_GREEN "Mushroom" TEXT_CZ "!" TEXT_NL);
+            break;
+        case EXCH_CUSTOM_ITEM_CHATEAU:
+            comboTextAppendStr(&b, "the forbidden " TEXT_COLOR_YELLOW "Chateau Romani" TEXT_CZ "!" TEXT_NL);
+            break;
+        /*
+        case EXCH_CUSTOM_ITEM_GOLD_DUST:
+            comboTextAppendStr(&b, "top quality " TEXT_COLOR_TEAL "Gold Dust" TEXT_CZ "!" TEXT_NL);
+            break;
+        */
+        case EXCH_CUSTOM_ITEM_SPRING_WATER:
+            comboTextAppendStr(&b, "fresh " TEXT_COLOR_TEAL "Spring Water" TEXT_CZ "!" TEXT_NL);
+            break;
+        case EXCH_CUSTOM_ITEM_SPRING_WATER_HOT:
+            comboTextAppendStr(&b, "refreshing " TEXT_COLOR_TEAL "Hot Spring Water" TEXT_CZ "!" TEXT_NL);
+            break;
+        case EXCH_CUSTOM_ITEM_ZORA_EGG:
+            comboTextAppendStr(&b, "isn't this a " TEXT_COLOR_TEAL "Zora Egg" TEXT_CZ "!" TEXT_NL);
+            break;
+    }
+    comboTextAppendStr(&b, "I'll buy it for " TEXT_COLOR_RED);
+    switch (exchangeItemId)
+    {
+        case EXCH_ITEM_BOTTLE_FISH:
+            comboTextAppendStr(&b, "100");
+            break;
+        case EXCH_ITEM_BOTTLE_BLUE_FIRE:
+            comboTextAppendStr(&b, "150");
+            break;
+        case EXCH_ITEM_BOTTLE_BUG:
+            comboTextAppendStr(&b, "50");
+            break;
+        case EXCH_CUSTOM_ITEM_MAGIC_MUSHROOM:
+            comboTextAppendStr(&b, "5");
+            break;
+        /* case EXCH_CUSTOM_ITEM_GOLD_DUST:  */
+        case EXCH_CUSTOM_ITEM_CHATEAU:
+            comboTextAppendStr(&b, "200");
+            break;
+        case EXCH_CUSTOM_ITEM_SPRING_WATER:
+        case EXCH_CUSTOM_ITEM_SPRING_WATER_HOT:
+        case EXCH_CUSTOM_ITEM_ZORA_EGG:
+            comboTextAppendStr(&b, "20");
+            break;
+    }
+    comboTextAppendStr(&b, " Rupees" TEXT_CZ "!" TEXT_NL);
+    comboTextAppendStr(&b, "All sales final, OK?" TEXT_END);
+}
+
+static void kingRutoLetterReturn(PlayState* play)
+{
+    char* b;
+
+    b = &play->msgCtx.font.msgBuf[0x1b3];
+    comboTextAppendStr(&b, "Keep this letter and the " TEXT_COLOR_RED "bottle" TEXT_CZ TEXT_NL);
+    comboTextAppendStr(&b, "it was in, in case you need it." TEXT_NL );
+    comboTextAppendStr(&b, "Take it respectfully!\x07\x40\x1c" TEXT_END);
+}
+
+static void alterRutosLetter(PlayState* play)
+{
+    char* b;
+
+    b = &play->msgCtx.font.msgBuf[0xe4];
+    comboTextAppendStr(&b, TEXT_NL TEXT_CZ TEXT_SPACE("\x0c") TEXT_COLOR_PINK "PPS: Don't flush this letter!" TEXT_CZ "\"" TEXT_FAST_END TEXT_END);
+}
+
+void Player_StartExchangeItemTextbox(PlayState* play, u16 textId, Player* player)
+{
+    PlayerDisplayTextBox(play, textId, player);
+
+    switch (textId)
+    {
+    case 0x4005:
+        if (Config_Flag(CFG_SHARED_BOTTLES))
+        {
+            alterRutosLetter(play);
+        }
+        break;
+    case 0x70f0:
+        itemExchangeMessage(play, player->exchangeItemId);
+        break;
+    case 0x401B:
+        if (!(gOotExtraFlags.rutoLetterUsed & 2) && Config_Flag(CFG_SHARED_BOTTLES))
+        {
+            kingRutoLetterReturn(play);
+        }
+        break;
+    }
+}
+
+PATCH_CALL(0x8084d2f4, Player_StartExchangeItemTextbox)
+
+void Inventory_AfterUpdateBottleItem(PlayState* play, u16 button)
+{
+    Interface_LoadItemIconImpl(play, button);
+    u8 slot = gSaveContext.save.info.equips.cButtonSlots[button - 1];
+    if (slot == ITS_OOT_TRADE_ADULT && (gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE)))
+    {
+        gOotExtraItems.bottleAdultSlot = gSave.info.inventory.items[slot];
+    }
+    if (slot == ITS_OOT_TRADE_CHILD && (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE)))
+    {
+        gOotExtraItems.bottleChildSlot = gSave.info.inventory.items[slot];
+    }
+}
+
+PATCH_CALL(0x80071be0, Inventory_AfterUpdateBottleItem)

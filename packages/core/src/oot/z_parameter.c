@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/magic.h>
+#include <combo/inventory.h>
 
 void Magic_FlashMeterBorder(void)
 {
@@ -113,3 +114,41 @@ PATCH_CALL(0x80832578, Magic_RequestChangeCustom) /* Player - Magic Arrows */
 // PATCH_CALL(0x808FF258, Magic_RequestChangeCustom) /* Spin Attack - Weird Check in Initializer */
 
 PATCH_CALL(0x80078B78, Magic_UpdateCustom)
+
+s32 Interface_CustomIsRestrictionCategoryAll(u8 item)
+{
+    if (item != ITEM_OOT_OCARINA_FAIRY &&
+        item != ITEM_OOT_OCARINA_TIME &&
+        !comboIsTradeBottleOot(item) &&
+        !(item >= ITEM_OOT_WEIRD_EGG && item <= ITEM_OOT_CLAIM_CHECK))
+    {
+        return 1;
+    }
+    return 0;
+}
+
+s32 Interface_CustomIsRestrictionCategoryAll2(u8 item)
+{
+    if (item != ITEM_OOT_SPELL_FIRE &&
+        item != ITEM_OOT_HOOKSHOT &&
+        item != ITEM_OOT_LONGSHOT &&
+        item != ITEM_OOT_SPELL_WIND &&
+        item != ITEM_OOT_SPELL_LOVE &&
+        item != ITEM_OOT_OCARINA_FAIRY &&
+        item != ITEM_OOT_OCARINA_TIME &&
+        !comboIsTradeBottleOot(item) &&
+        !(item >= ITEM_OOT_WEIRD_EGG && item <= ITEM_OOT_CLAIM_CHECK))
+    {
+        return 1;
+    }
+    return 0;
+}
+
+s32 Interface_CustomIsRestrictionCategoryBottle(u8 item)
+{
+    if (comboIsTradeBottleOot(item))
+    {
+        return 1;
+    }
+    return 0;
+}

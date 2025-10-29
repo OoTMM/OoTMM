@@ -62,3 +62,14 @@ void EnKz_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 }
 
 PATCH_CALL(0x80ad6cc8, EnKz_GiveItem);
+
+void EnKz_TakeRutoLetter(PlayState* play, u16 oldItem, u16 newItem)
+{
+    gOotExtraFlags.rutoLetterUsed |= 1;
+    if (!Config_Flag(CFG_SHARED_BOTTLES) || (gOotExtraFlags.rutoLetterUsed & 3) == 3)
+    {
+        Inventory_ReplaceItem(play, oldItem, newItem);
+    }
+}
+
+PATCH_CALL(0x80ad6afc, EnKz_TakeRutoLetter)

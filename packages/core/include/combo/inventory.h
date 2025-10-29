@@ -7,6 +7,7 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
 u8 comboGetNextTrade(u8 currentItem, u32 flags, const u8* table, u32 tableSize);
 void comboToggleSlot(u32 slot);
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
+s32 comboIsTradeBottleOot(u8 itemId);
 
 #if defined(GAME_OOT)
 void comboRemoveTradeItemAdult(u16 xitemId);

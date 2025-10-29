@@ -984,7 +984,7 @@ void DrawGi_MagicalRupee(PlayState* play, s16 index)
     drawColoredRupee(play, color);
 }
 
-void DrawGi_RutosLetter(PlayState* play, s16 index)
+void DrawGi_BottleRutosLetter(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[index];

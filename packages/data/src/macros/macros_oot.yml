@@ -45,7 +45,7 @@
 "can_play_minigame": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left && ocarina_button_up"
 "can_play_scarecrow": "has_ocarina && ocarina_button_any2"
 
-"soil_fairies(x)": "is_child && can_play_storms && (setting(ootPreplantedBeans) || event(x))"
+"soil_fairies(x)": "is_child && (can_play_storms || has_water) && (setting(ootPreplantedBeans) || event(x))"
 
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
@@ -72,8 +72,6 @@
 "can_longshot": "can_hookshot_n(2)"
 "can_boomerang": "age_boomerang && has(BOOMERANG)"
 "can_hammer": "age_hammer && has_hammer_raw"
-"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || (event(KING_ZORA_LETTER) && soul_npc(SOUL_NPC_KING_ZORA)) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE) || has(BOTTLE_BLUE_FIRE)"
-"has_big_poe": "has_bottle && (event(BIG_POE) || renewable(BOTTLE_BIG_POE) || renewable(BIG_POE))"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
 
 # Age macros
@@ -140,8 +138,6 @@
 "can_lift_gold": "(is_adult || setting(agelessStrength)) && has_strength_raw(3)"
 
 #Magic Item Macros
-"has_green_potion": "has_bottle && (renewable(POTION_GREEN) || renewable(BOTTLE_POTION_GREEN))"
-"has_blue_potion": "has_bottle && (renewable(POTION_BLUE) || renewable(BOTTLE_POTION_BLUE))"
 "has_magic": "(has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)) && (event(MAGIC) || has_magic_jar || (setting(sharedMagic) && event(MM_MAGIC)) || has_green_potion || has_blue_potion)"
 "has_light_arrow": "cond(setting(sharedMagicArrowLight), has(SHARED_ARROW_LIGHT), has(ARROW_LIGHT))"
 "has_ice_arrow": "cond(setting(sharedMagicArrowIce), has(SHARED_ARROW_ICE), has(ARROW_ICE))"
@@ -185,10 +181,6 @@
 "can_dive_small": "has_scale_silver || has_iron_boots"
 "can_dive_big": "has_scale_gold || has_iron_boots"
 
-# Bottle contents
-"has_bugs": "has_bottle && (renewable(BUG) || event(BUGS))"
-"has_fish": "has_bottle && (renewable(FISH) || event(FISH))"
-
 # GS
 "gs": "soul_gs"
 "gs_soil": "gs && is_child && has_bugs"
@@ -197,7 +189,7 @@
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play_epona"
 "adult_trade(x)": "is_adult && has(x)"
-"has_blue_fire": "has_blue_fire_arrows || (has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE) || renewable(BOTTLE_BLUE_FIRE)))"
+"has_blue_fire": "has_blue_fire_arrows || has_blue_fire_in_bottle"
 "can_ride_bean(x)": "is_adult && (setting(ootPreplantedBeans) || event(x))"
 "can_damage": "can_use_sword || can_use_sticks || has_explosives || has_ranged_weapon || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance || can_hammer"

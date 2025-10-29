@@ -18,7 +18,7 @@
 - { id: OOT_POTION_BLUE, item: OOT_POTION_BLUE, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: POTION_BLUE, object: [oot, 0x00eb], name: "a <C0>Blue Potion" }
 - { id: OOT_FAIRY, item: OOT_FAIRY, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: FAIRY, object: [oot, 0x0177], name: "a <C0>Fairy" }
 - { id: OOT_BOTTLE_MILK, item: OOT_MILK, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_MILK, object: [oot, 0x00df], name: "a <C1>bottle of Lon Lon Milk" }
-- { id: OOT_RUTO_LETTER, item: OOT_RUTO_LETTER, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: OOT_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
+- { id: OOT_BOTTLE_RUTO_LETTER, item: OOT_RUTO_LETTER, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: OOT_BOTTLE_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
 - { id: OOT_MAGIC_BEAN, item: OOT_MAGIC_BEAN, type: MAJOR, add: [OOT_BEANS, 10], flags: 0x80, draw: MAGIC_BEAN, object: [oot, 0x00f3], name: "a <C0>Magic Bean" }
 - { id: OOT_MASK_SKULL, item: OOT_SKULL_MASK, type: MASK, add: [OOT_TRADE_CHILD, 4], flags: 0x80, draw: OOT_MASK_SKULL, object: [oot, 0x0136], name: "the <C1>Skull Mask" }
 - { id: OOT_MASK_SPOOKY, item: OOT_SPOOKY_MASK, type: MASK, add: [OOT_TRADE_CHILD, 5], flags: 0x80, draw: OOT_MASK_SPOOKY, object: [oot, 0x0135], name: "the <C1>Spooky Mask" }
@@ -106,7 +106,7 @@
 - { id: OOT_BOMBCHU_5, item: OOT_BOMBCHU_5, type: NORMAL, add: [OOT_BOMBCHU, 5], flags: 0x80, draw: BOMBCHU, object: [oot, 0x00d9], name: "<C0>5 Bombchu" }
 - { id: OOT_BOMBCHU_20, item: OOT_BOMBCHU_20, type: NORMAL, add: [OOT_BOMBCHU, 20], flags: 0x80, draw: BOMBCHU, object: [oot, 0x00d9], name: "<C0>20 Bombchu" }
 - { id: OOT_FISH, item: OOT_FISH, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C0>Fish" }
-- { id: OOT_BUG, item: OOT_BUG, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: BUG, object: [oot, 0x0174], name: "a <C0>Bug" }
+- { id: OOT_BUGS, item: OOT_BUGS, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: BUG, object: [oot, 0x0174], name: "a <C0>Bug" }
 - { id: OOT_BLUE_FIRE, item: OOT_BLUE_FIRE, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: OOT_BLUE_FIRE, object: [oot, 0x0173], name: "some <C0>Blue Fire" }
 - { id: OOT_POE, item: OOT_POE, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
 - { id: OOT_BIG_POE, item: OOT_BIG_POE, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: BIG_POE, object: [oot, 0x0176], name: "a <C0>Big Poe" }
@@ -444,6 +444,12 @@
 - { id: OOT_MASK_BLAST, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_BLAST], flags: 0x80, draw: MM_MASK_BLAST, object: [mm, 0x026d], name: "the <C1>Blast Mask" }
 - { id: OOT_MASK_STONE, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_STONE], flags: 0x80, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
 - { id: OOT_SCALE_BRONZE, type: MAJOR, add: [OOT_SCALE, 1], flags: 0x80, draw: [SCALE, 1], object: [oot, 0x00db], name: "the <C1>Bronze Scale" }
+- { id: OOT_WEIRD_MUSHROOM, item: OOT_MAGIC_MUSHROOM, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_MAGIC_MUSHROOM, object: [mm, 0x021d], name: "a <C0>Magic Mushroom" }
+- { id: OOT_CHATEAU, item: OOT_CHATEAU, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_CHATEAU, object: [mm, 0x00c1], name: "some <C0>Chateau Romani" }
+- { id: OOT_GOLD_DUST, item: OOT_GOLD_DUST, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }
+- { id: OOT_SEAHORSE2, item: OOT_SEAHORSE, type: NORMAL, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
+- { id: OOT_BOTTLED_GOLD_DUST, item: OOT_GOLD_DUST, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C1>bottle of Gold Dust" }
+- { id: OOT_BOTTLE_CHATEAU, item: OOT_CHATEAU, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLE_CHATEAU, object: [mm, 0x0227], name: "a bottle of <C0>Chateau Romani" }
 - { id: OOT_TRAP_ICE, type: MINOR, add: [TRAP, 0x00], flags: 0x80, draw: [TRAP, 0x00], name: "an <COLOR_BLUE>Ice Trap" }
 - { id: OOT_TRAP_FIRE, type: MINOR, add: [TRAP, 0x01], flags: 0x80, draw: [TRAP, 0x01], name: "a <COLOR_BLUE>Fire Trap" }
 - { id: OOT_TRAP_SHOCK, type: MINOR, add: [TRAP, 0x02], flags: 0x80, object: EFFECT_SHOCK, draw: [TRAP, 0x02], name: "a <COLOR_BLUE>Shock Trap" }
@@ -532,7 +538,7 @@
 - { id: MM_FAIRY, item: MM_FAIRY, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: FAIRY, object: [oot, 0x0177], name: "a <C0>Fairy" }
 - { id: MM_BOTTLE_MILK, item: MM_MILK, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_MILK, object: [mm, 0x00b6], name: "a <C1>bottle of Milk" }
 - { id: MM_FISH, item: MM_FISH, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: FISH, object: [mm, 0x00c7], name: "a <C0>Fish" }
-- { id: MM_BUGS, item: MM_BUG, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: BUG, object: [mm, 0x0137], name: "a <C0>Bug" }
+- { id: MM_BUGS, item: MM_BUGS, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: BUG, object: [mm, 0x0137], name: "a <C0>Bug" }
 - { id: MM_BIG_POE, item: MM_BIG_POE, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: BIG_POE, object: [mm, 0x0139], name: "a <C0>Big Poe" }
 - { id: MM_BOTTLED_GOLD_DUST, item: MM_GOLD_DUST, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C1>bottle of Gold Dust" }
 - { id: MM_WEIRD_MUSHROOM, item: MM_MAGIC_MUSHROOM, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_MAGIC_MUSHROOM, object: [mm, 0x021d], name: "a <C0>Magic Mushroom" }
@@ -802,6 +808,9 @@
 - { id: MM_NUT_UPGRADE, type: MAJOR, add: [MM_NUT_UPGRADE, 2], flags: 0x80, draw: OOT_NUT_UPGRADE, object: [oot, 0x00bb], name: "the <C1>Deku Nut Upgrade" }
 - { id: MM_NUT_UPGRADE2, type: MAJOR, add: [MM_NUT_UPGRADE, 3], flags: 0x80, draw: OOT_NUT_UPGRADE2, object: [oot, 0x00bb], name: "the <C1>Second Deku Nut Upgrade" }
 - { id: MM_STONE_OF_AGONY, type: MAJOR, add: MM_STONE_AGONY, flags: 0x80, draw: STONE_OF_AGONY, object: [oot, 0x00c8], name: "the <C1>Stone of Agony" }
+- { id: MM_BOTTLE_RUTO_LETTER, item: MM_RUTO_LETTER, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: OOT_BOTTLE_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
+- { id: MM_BOTTLE_BLUE_FIRE, item: MM_BLUE_FIRE, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_BLUE_FIRE, object: [oot, 0x00c6], name: "a <C1>Bottle of Blue Fire" }
+- { id: MM_BLUE_FIRE, item: MM_BLUE_FIRE, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: OOT_BLUE_FIRE, object: [oot, 0x0173], name: "some <C0>Blue Fire" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }

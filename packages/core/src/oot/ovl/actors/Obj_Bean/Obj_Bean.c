@@ -14,7 +14,7 @@ void ObjBean_WaitForPlayer(ObjBean* this, PlayState* play);
 void ObjBean_Fly(ObjBean* this, PlayState* play);
 void ObjBean_SetupFly(ObjBean* this);
 void ObjBean_WaitForWater(ObjBean* this, PlayState* play);
-void ObjBean_SetupWaitForWater(ObjBean* this);
+void ObjBean_SetupWaitForWater(ObjBean* this, PlayState* play);
 void ObjBean_SetupGrowWaterPhase1(ObjBean* this);
 void ObjBean_GrowWaterPhase1(ObjBean* this, PlayState* play);
 void ObjBean_GrowWaterPhase2(ObjBean* this, PlayState* play);
@@ -98,6 +98,26 @@ static ColliderCylinderInit sCylinderInit = {
         OCELEM_ON,
     },
     { 64, 30, -31, { 0, 0, 0 } },
+};
+
+static ColliderCylinderInit sCylinderInit2 = {
+    {
+        COL_MATERIAL_NONE,
+        AT_NONE,
+        AC_ON | AC_TYPE_OTHER,
+        OC1_NONE,
+        OC2_TYPE_2,
+        COLSHAPE_CYLINDER,
+    },
+    {
+        ELEM_MATERIAL_UNK0,
+        { 0x00000000, 0x00, 0x00 },
+        { 0xFFCFFFFF, 0x00, 0x00 },
+        ATELEM_NONE | ATELEM_SFX_NORMAL,
+        ACELEM_ON,
+        OCELEM_NONE,
+    },
+    { 10, 10, 0, { 0, 0, 0 } },
 };
 
 typedef struct BeenSpeedInfo {
@@ -537,7 +557,7 @@ void ObjBean_Init(Actor* thisx, PlayState* play) {
             return;
         }
     } else if ((Flags_GetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6)) != 0)) {
-        ObjBean_SetupWaitForWater(this);
+        ObjBean_SetupWaitForWater(this, play);
     } else {
         ObjBean_SetupWaitForBean(this);
     }
@@ -645,27 +665,33 @@ void func_80B90050(ObjBean* this, PlayState* play) {
     this->dyna.actor.scale.y = Math_SinS(temp_a0) * 0.17434467f;
     this->dyna.actor.scale.x = this->dyna.actor.scale.z = Math_CosS(temp_a0) * 0.12207746f;
     if (this->unk_1B6.y < 0) {
-        ObjBean_SetupWaitForWater(this);
+        ObjBean_SetupWaitForWater(this, play);
     }
 }
 
-void ObjBean_SetupWaitForWater(ObjBean* this) {
+void ObjBean_SetupWaitForWater(ObjBean* this, PlayState* play) {
     this->actionFunc = ObjBean_WaitForWater;
     ObjBean_SetDrawMode(this, BEAN_STATE_DRAW_LEAVES | BEAN_STATE_DRAW_SOIL);
     Actor_SetScale(&this->dyna.actor, 0.1f);
     ObjBean_SetupLeavesStill(this);
+    Collider_SetCylinder(play, &this->collider, &this->dyna.actor, &sCylinderInit2);
+    Collider_UpdateCylinder(&this->dyna.actor, &this->collider);
 }
 
 void ObjBean_WaitForWater(ObjBean* this, PlayState* play) {
     this->transformFunc(this);
 
-    if (!(this->stateFlags & BEAN_STATE_BEEN_WATERED) && CutsceneFlags_Get(play, 5) && (D_80B90E30 == NULL) &&
-        (this->dyna.actor.xzDistToPlayer < 50.0f)) {
+    if (!(this->stateFlags & BEAN_STATE_BEEN_WATERED) && ((CutsceneFlags_Get(play, 5) && (D_80B90E30 == NULL) &&
+        (this->dyna.actor.xzDistToPlayer < 50.0f)) || ((this->collider.base.acFlags & AC_HIT) && this->collider.base.ac != NULL && this->collider.base.ac->id == ACTOR_CUSTOM_OBJ_AQUA))) {
         ObjBean_SetupGrowWaterPhase1(this);
         D_80B90E30 = this;
         OnePointCutscene_Init(play, 2210, -99, &this->dyna.actor, CAM_ID_MAIN);
         this->dyna.actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
         return;
+    }
+
+    if (this->dyna.actor.xzDistToPlayer < 150.0f) {
+        CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider.base);
     }
 
     if ((D_80B90E30 == this) && !CutsceneFlags_Get(play, 5)) {

@@ -34,3 +34,89 @@ PATCH_START 0x80072E00
   b       .+0x2AC
    nop
 PATCH_END
+
+Interface_CustomIsRestrictionCategoryAll_Hook:
+  HOOK_CALL_RET Interface_CustomIsRestrictionCategoryAll
+  jr ra
+   nop
+
+PATCH_START 0x8006f0ec
+  addiu   a1, a1, 0x0001
+  jal     Interface_CustomIsRestrictionCategoryAll_Hook
+   lbu    a0, 0x0068 (v1)
+  beqz    v0, .+0x74
+   addiu  a0, zero, 0x10
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+Interface_CustomIsRestrictionCategoryAll2_Hook:
+  HOOK_CALL_RET Interface_CustomIsRestrictionCategoryAll2
+  jr ra
+   nop
+
+PATCH_START 0x8006f190
+  addiu   a1, a1, 0x0001
+  jal     Interface_CustomIsRestrictionCategoryAll2_Hook
+   lbu    a0, 0x0068 (v1)
+  beqz    v0, .+0x6c
+   nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+Interface_CustomIsRestrictionCategoryBottle_Hook:
+  HOOK_CALL_RET Interface_CustomIsRestrictionCategoryBottle
+  jr ra
+   nop
+
+PATCH_START 0x8006ecc0
+  addiu   a1, a1, 0x0001
+  jal     Interface_CustomIsRestrictionCategoryBottle_Hook
+   lbu    a0, 0x0068 (v1)
+  beqz    v0, .+0x2c
+   nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x8006ed18
+  addiu   a1, a1, 0x0001
+  jal     Interface_CustomIsRestrictionCategoryBottle_Hook
+   lbu    a0, 0x0068 (v1)
+  beqz    v0, .+0x2c
+   nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END

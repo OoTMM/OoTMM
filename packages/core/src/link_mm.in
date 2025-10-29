@@ -23,6 +23,8 @@ EnItem00_Update = 0x800a6b98;
 
 gAudioLoadStatusFontSample = 0x80204fd8;
 Player_UpdateForm = 0x8012301c;
+func_80123810 = 0x80123810;
+Player_UpdateBottleHeld = 0x80123d50;
 
 Fault_AddHungupAndCrashImpl = 0x80083df4;
 Interface_NewDay = 0x8010ee74;
@@ -248,6 +250,7 @@ Flags_SetSwitch = 0x800b5bf4;
 ClearSwitchFlag = 0x800b5c34;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
+Inventory_UpdateBottleItem = 0x80114fd0;
 
 Interface_SetDoAction = 0x8011552c;
 Interface_StartMoonCrash = 0x8011c808;

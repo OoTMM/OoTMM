@@ -112,3 +112,16 @@ static int EnDs_AfterBuy(Actor* this, PlayState* play)
 }
 
 PATCH_CALL(0x80aabfc8, EnDs_AfterBuy);
+
+static int EnDs_GetPlayerExchangingItemId(PlayState* play)
+{
+    s8 exchangingItemId = Actor_GetPlayerExchangeItemId(play);
+    if (exchangingItemId == EXCH_CUSTOM_ITEM_MAGIC_MUSHROOM)
+    {
+        /* Treat MM Mushroom as odd potion */
+        return EXCH_ITEM_ODD_MUSHROOM;
+    }
+    return exchangingItemId;
+}
+
+PATCH_CALL(0x80aac188, EnDs_GetPlayerExchangingItemId)

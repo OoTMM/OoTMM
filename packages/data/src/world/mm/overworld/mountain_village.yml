@@ -166,7 +166,7 @@
     "Mountain Village": "true"
   events:
     BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
-    GOLD_DUST_USED: "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
+    GOLD_DUST_USED: "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && has_gold_dust && event(BLACKSMITH_ENABLED)"
   locations:
     "Blacksmith Razor Blade": "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
     "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"

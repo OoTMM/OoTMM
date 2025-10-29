@@ -9,6 +9,14 @@ static int hasFreeBottleOot(void)
         if (gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
             return 1;
     }
+    if ((gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE)) && gOotExtraItems.bottleAdultSlot == ITEM_OOT_BOTTLE_EMPTY)
+    {
+        return 1;
+    }
+    if ((gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE)) && gOotExtraItems.bottleChildSlot == ITEM_OOT_BOTTLE_EMPTY)
+    {
+        return 1;
+    }
     return 0;
 }
 
@@ -106,12 +114,13 @@ int isItemBuyable(s16 gi)
     case GI_OOT_POTION_GREEN:
     case GI_OOT_POTION_BLUE:
     case GI_OOT_FISH:
-    case GI_OOT_BUG:
+    case GI_OOT_BUGS:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_POE:
     case GI_OOT_BIG_POE:
     case GI_OOT_FAIRY:
     case GI_OOT_MILK:
+    case GI_OOT_CHATEAU:
         return hasFreeBottleOot();
     case GI_OOT_SHIELD_DEKU:
         return canBuyShieldOot(0);
@@ -162,6 +171,7 @@ int isItemBuyable(s16 gi)
     case GI_MM_FISH:
     case GI_MM_POE:
     case GI_MM_BIG_POE:
+    case GI_MM_BLUE_FIRE:
         return hasFreeBottleMm();
     case GI_MM_SHIELD_DEKU:
         return canBuyShieldMm(0);

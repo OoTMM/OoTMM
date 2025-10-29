@@ -1,14 +1,25 @@
 #include <combo.h>
 
 ItemPreventEmptyEquip:
-  sge at,t1,0xff
-  beqz at,.Lret
-  lbu v0,0x00(s1)
-  li  v0,0xff
+  addiu   sp, sp, -0x20
+  sw      ra, 0x1c (sp)
+  sw      a1, 0x24 (sp)
+  sw      a0, 0x20 (sp)
+  sw      t1, 0x18 (sp)
+  sw      v1, 0x14 (sp)
 
-.Lret:
-  jr    ra
-   ori   at,zero,9
+  or      a0, t1, zero
+  jal     KaleidoScope_GetSlotAgeRequirement
+   lbu    a1, 0x00(s1)
+
+  ori     at,zero,9
+  lw      v1, 0x14 (sp)
+  lw      t1, 0x18 (sp)
+  lw      a0, 0x20 (sp)
+  lw      a1, 0x24 (sp)
+  lw      ra, 0x1c (sp)
+  jr      ra
+   addiu  sp, sp, 0x20
 
 /* Item Menu - Left Check */
 PATCH_START 0x80819d94

@@ -22,6 +22,7 @@ void EnTab_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
 typedef void (*TextBoxCallback)(Actor*, PlayState*, s16);
 void EnGo_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
 void EnTab_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
+void EnBjt_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
@@ -212,6 +213,9 @@ static void Actor_ByteCode_DispatchTextBox(PlayState* play, s16 messageId)
         break;
     case ACTOR_EN_TAB:
         cb = EnTab_AfterTextBox;
+        break;
+    case ACTOR_EN_BJT:
+        cb = EnBjt_AfterTextBox;
         break;
     }
     if (cb)

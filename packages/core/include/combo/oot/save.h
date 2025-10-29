@@ -427,6 +427,8 @@ typedef struct
     u8 hookshot;
     u8 shield;
     u8 ocarina;
+    u8 bottleAdultSlot;
+    u8 bottleChildSlot;
 }
 OotExtraItems;
 
@@ -448,7 +450,8 @@ typedef struct
     u32 bottomlessWallet:1;
     u32 chestGameKey:1;
     u32 spinUpgrade:1;
-    u32 unused:5;
+    u32 rutoLetterUsed:2;
+    u32 unused:3;
 }
 OotExtraFlags;
 
@@ -461,6 +464,7 @@ typedef struct ALIGNED(16)
     u8  sr[16];
     OotRespawnData fwRespawnDungeonEntrance[2];
     u8  hasElegy:1;
+    u8  chateauActive:1;
 }
 OotCustomSave;
 
