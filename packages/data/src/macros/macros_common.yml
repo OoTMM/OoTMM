@@ -131,7 +131,7 @@
 "has_bottle_blue": "shared_bottle(BOTTLE_POTION_BLUE, SHARED_BOTTLE_POTION_BLUE)"
 "has_bottle_milk": "shared_bottle(BOTTLE_MILK, SHARED_BOTTLE_MILK)"
 "has_bottle_gold": "shared_bottle_event(GOLD_DUST_USED, OOT_GOLD_DUST_USED, MM_GOLD_DUST_USED)"
-"has_bottle_letter": "(shared_bottle_event(KING_ZORA_LETTER, OOT_KING_ZORA_LETTER, MM_KING_ZORA_LETTER) || setting(zoraKing, open)) && (!setting(sharedBottles) || shared_bottle_event(TOILET_RUTO_LETTER, OOT_TOILET_RUTO_LETTER, MM_TOILET_RUTO_LETTER))"
+"has_bottle_letter": "((shared_bottle_event(KING_ZORA_LETTER, OOT_KING_ZORA_LETTER, MM_KING_ZORA_LETTER) && soul_npc(SOUL_NPC_KING_ZORA)) || setting(zoraKing, open)) && (!setting(sharedBottles) || shared_bottle_event(TOILET_RUTO_LETTER, OOT_TOILET_RUTO_LETTER, MM_TOILET_RUTO_LETTER))"
 "has_bottle_chateau": "shared_bottle(BOTTLE_CHATEAU, SHARED_BOTTLE_CHATEAU)"
 "has_bottle_fairy": "shared_bottle(BOTTLE_FAIRY, SHARED_BOTTLE_FAIRY)"
 "has_bottle_poe": "shared_bottle(BOTTLE_POE, SHARED_BOTTLE_POE)"

@@ -7,7 +7,7 @@
     "Zora Shop": "is_child || has_blue_fire"
     "Zora Domain Grotto": "hidden_grotto_storms"
   events:
-    KING_ZORA_LETTER: "is_child && has_ruto_letter && soul_npc(SOUL_NPC_KING_ZORA)"
+    KING_ZORA_LETTER: "is_child && has_ruto_letter"
     STICKS: "is_child"
     NUTS: "true"
     RUPEES: "true"
