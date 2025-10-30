@@ -17,7 +17,7 @@
     "Water Temple Corridor": "(can_longshot || can_use_ice_arrow_platforms || has_hover_boots || hookshot_anywhere) && can_hit_triggers_distance && event(WATER_LEVEL_LOW)"
     "Water Temple Waterfalls": "has_tunic_zora && small_keys_water(4) && (can_longshot || can_use_ice_arrow_platforms || climb_anywhere || hookshot_anywhere) && (has_iron_boots || event(WATER_LEVEL_LOW))"
     "Water Temple Large Pit": "small_keys_water(4) && event(WATER_LEVEL_RESET)"
-    "Water Temple Antichamber Room": "((can_longshot || can_use_ice_arrow_platforms) && event(WATER_LEVEL_RESET)) || climb_anywhere"
+    "Water Temple Antichamber Room": "((can_longshot || can_use_ice_arrow_platforms || (trick(OOT_WATER_BOSSBOOTS) && is_adult && has_iron_boots)) && event(WATER_LEVEL_RESET)) || climb_anywhere || longshot_anywhere"
     "Water Temple Cage Room": "has_tunic_zora && event(WATER_LEVEL_LOW) && has_explosives && can_dive_small"
     "Water Temple Main Ledge": "(is_adult && has_hover_boots) || hookshot_anywhere"
   locations:
