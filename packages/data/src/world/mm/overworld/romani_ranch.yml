@@ -91,6 +91,10 @@
     "Romani Ranch Wonder Item Fence 4": "true"
     "Romani Ranch Wonder Item Fence 5": "true"
     "Romani Ranch Wonder Item Fence 6": "true"
+    "Romani Ranch Soil Days 2-3 Item 1": "has_bugs && after(DAY2_AM_06_00)"
+    "Romani Ranch Soil Days 2-3 Item 2": "has_bugs && after(DAY2_AM_06_00)"
+    "Romani Ranch Soil Days 2-3 Item 3": "has_bugs && after(DAY2_AM_06_00)"
+    "Romani Ranch Soil Day 1": "has_bugs && before(DAY2_AM_06_00)"
   gossip:
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"

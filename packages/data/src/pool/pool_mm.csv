@@ -1371,6 +1371,10 @@ Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,   
 Romani Ranch Wonder Item Fence 4,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002d,                    RUPEE_GREEN
 Romani Ranch Wonder Item Fence 5,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002e,                    RUPEE_GREEN
 Romani Ranch Wonder Item Fence 6,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002f,                    RUPEE_GREEN
+Romani Ranch Soil Days 2-3 Item 1,                      soil,           NONE,                   ROMANI_RANCH,                 0x00030,                    RUPEE_BLUE
+Romani Ranch Soil Days 2-3 Item 2,                      soil,           NONE,                   ROMANI_RANCH,                 0x10030,                    RUPEE_BLUE
+Romani Ranch Soil Days 2-3 Item 3,                      soil,           NONE,                   ROMANI_RANCH,                 0x20030,                    RUPEE_BLUE
+Romani Ranch Soil Day 1,                                soil,           NONE,                   ROMANI_RANCH,                 0x00031,                    ARROWS_30
 Cucco Shack Bunny Mask,                                 npc,            CUCCOS,                 CUCCO_SHACK,                  MASK_BUNNY,                 MASK_BUNNY
 Cucco Shack Wonder Item 1,                              wonder,         NONE,                   CUCCO_SHACK,                  0x00011,                    RUPEE_GREEN
 Cucco Shack Wonder Item 2,                              wonder,         NONE,                   CUCCO_SHACK,                  0x10011,                    RUPEE_GREEN

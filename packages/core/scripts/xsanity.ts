@@ -409,6 +409,7 @@ type RawRoom = {
 
 type Actor = {
   actorId: number;
+  halfDays: number;
   typeId: number;
   rx: number;
   ry: number;
@@ -620,11 +621,22 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
       const posy = rom.readInt16BE(actorVromBase + 0x04);
       const posz = rom.readInt16BE(actorVromBase + 0x06);
       const rshift = (game === 'mm') ? 7 : 0;
-      const rx = rom.readUInt16BE(actorVromBase + 0x08) >>> rshift;
-      const ry = rom.readUInt16BE(actorVromBase + 0x0a) >>> rshift;
-      const rz = rom.readUInt16BE(actorVromBase + 0x0c) >>> rshift;
+      const rxRaw = rom.readUInt16BE(actorVromBase + 0x08);
+      const ryRaw = rom.readUInt16BE(actorVromBase + 0x0a);
+      const rzRaw = rom.readUInt16BE(actorVromBase + 0x0c);
+      const rx = rxRaw >>> rshift;
+      const ry = ryRaw >>> rshift;
+      const rz = rzRaw >>> rshift;
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
-      actors.push({ actorId, typeId, pos: [posx, posy, posz], rx, ry, rz, params });
+      let halfDays: number;
+      if (game === 'mm') {
+        const hi = rxRaw & 7;
+        const lo = rzRaw & 0x7f;
+        halfDays = (hi << 7) | lo;
+      } else {
+        halfDays = 0x3ff;
+      }
+      actors.push({ actorId, halfDays, typeId, pos: [posx, posy, posz], rx, ry, rz, params });
     }
   }
   actors = filterActors(actors, game);
@@ -801,6 +813,11 @@ function outputPotsPoolOot(roomActors: RoomActors[]) {
 function hexPad(n: number, width: number) {
   const s = n.toString(16);
   return '0x' + '0'.repeat(width - s.length) + s;
+}
+
+function binPad(n: number, width: number) {
+  const s = n.toString(2);
+  return '0b' + '0'.repeat(width - s.length) + s;
 }
 
 function decPad(n: number, width: number) {
@@ -1082,11 +1099,11 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
       roomId: 0x00,
       setupId: 0x00,
       actors: [
-        { actorId: 0, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 1, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 2, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 3, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 4, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 0, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 1, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 2, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 3, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 4, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
       ]
     });
   }
@@ -1628,12 +1645,23 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filt
       lastSetupId = ra.setupId;
     }
 
-    const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
-    const letterData = check.letter ? ` [${check.letter.padEnd(2)}]` : '';
-    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId, 2)} ${check.name}${letterData} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
-    if (check.name2) {
-      name = `${name} ${check.name2}`;
+    const frags: string[] = [];
+    frags.push(`Scene ${ra.sceneId.toString(16)}`);
+    frags.push(`Setup ${ra.setupId}`);
+    frags.push(`Room ${decPad(ra.roomId, 2)}`);
+    frags.push(check.name);
+    if (check.roomActor.actor.halfDays !== 0x3ff) {
+      frags.push(`(HD:${binPad(check.roomActor.actor.halfDays, 10)})`);
     }
+    if (check.letter) {
+      frags.push(`[${check.letter.padEnd(2)}]`);
+    }
+    frags.push(`${decPad(ra.actor.actorId + 1, 2)}`);
+    if (check.name2) {
+      frags.push(check.name2);
+    }
+    const name = frags.join(' ');
+    const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
     const components: string[] = [];
     components.push(`${name},`.padEnd(60));
     components.push(`${check.type},`.padEnd(16));
