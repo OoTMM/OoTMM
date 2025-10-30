@@ -1933,6 +1933,8 @@ Stone Tower Inverted Pot 2,                             pot,            NONE,   
 Stone Tower Inverted Pot 3,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000a,                     FAIRY
 Stone Tower Inverted Pot 4,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000b,                     BOMBS_5
 Stone Tower Inverted Pot 5,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000c,                     RECOVERY_HEART
+Stone Tower Inverted Soil Lower,                        soil,           NONE,                   STONE_TOWER_INVERTED,         0x00000,                    ARROWS_30
+Stone Tower Inverted Soil Upper,                        soil,           NONE,                   STONE_TOWER_INVERTED,         0x00001,                    ARROWS_30
 Oath to Order,                                          npc,            NONE,                   LAIR_ODOLWA,                  SONG_ORDER,                 SONG_ORDER
 Woodfall Temple Entrance Chest,                         chest,          NONE,                   TEMPLE_WOODFALL,              0x18,                       STRAY_FAIRY_WF
 Woodfall Temple Water Chest,                            chest,          NONE,                   TEMPLE_WOODFALL,              0x01,                       SMALL_KEY_WF

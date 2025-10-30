@@ -82,6 +82,7 @@
   locations:
     "Stone Tower Inverted Rock 1": "true"
     "Stone Tower Inverted Rock 2": "true"
+    "Stone Tower Inverted Soil Lower": "has_bugs"
 
 "Stone Tower Top Inverted Upper":
   region: STONE_TOWER
@@ -101,6 +102,7 @@
     "Stone Tower Inverted Pot 3": "true"
     "Stone Tower Inverted Pot 4": "true"
     "Stone Tower Inverted Pot 5": "true"
+    "Stone Tower Inverted Soil Upper": "has_bugs"
 
 "Owl Stone Tower":
   region: STONE_TOWER
