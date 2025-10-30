@@ -200,6 +200,7 @@ const ACTORS_MM = {
   OBJ_YASI: 0x23c,
   EN_SNOWWD: 0x1d4,
   OBJ_TREE: 0x229,
+  OBJ_SWPRIZE: 0x2ae,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -222,6 +223,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_FLOWERPOT]: 2,
   [ACTORS_MM.OBJ_MURE]: 5,
   [ACTORS_MM.EN_WOOD02]: 6,
+  [ACTORS_MM.OBJ_SWPRIZE]: 3,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -1109,6 +1111,21 @@ function actorHandlerOotObjBean(checks: Check[], ra: RoomActor) {
   }
 }
 
+function actorHandlerMmObjSwprize(checks: Check[], ra: RoomActor) {
+  const type = ((ra.actor.params) >> 8) & 3;
+  const COUNTS = [1, 1, 3, 1];
+  const ITEMS = ['RUPEE_RED', 'RUPEE_PURPLE', 'RUPEE_BLUE', 'ARROWS_30'];
+  const count = COUNTS[type];
+  const item = ITEMS[type];
+
+  if (count > 1) {
+    for (let i = 0; i < count; ++i)
+      checks.push({ roomActor: ra, item, name: `Soil`, type: 'soil', sliceId: i, name2: `Item ${i + 1}` });
+  } else {
+    checks.push({ roomActor: ra, item, name: `Soil`, type: 'soil' });
+  }
+}
+
 function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
   const { actor } = ra;
   const grassType = (actor.params) & 3;
@@ -1528,6 +1545,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_YASI]: actorHandlerMmObjYasi,
   [ACTORS_MM.EN_SNOWWD]: actorHandlerMmEnSnowwd,
   [ACTORS_MM.OBJ_TREE]: actorHandlerMmObjTree,
+  [ACTORS_MM.OBJ_SWPRIZE]: actorHandlerMmObjSwprize,
 };
 
 const ACTORS_HANDLERS = {
