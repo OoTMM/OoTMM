@@ -433,6 +433,14 @@ Termina Field Wonder Item Graffiti 2,                   wonder,         NONE,   
 Termina Field Wonder Item Graffiti 3,                   wonder,         NONE,                   TERMINA_FIELD,                0x20066,                    RUPEE_GREEN
 Termina Field Butterfly 1,                              butterfly,      NONE,                   TERMINA_FIELD,                0x000ab,                    FAIRY
 Termina Field Butterfly 2,                              butterfly,      NONE,                   TERMINA_FIELD,                0x100ab,                    NOTHING
+Termina Field Soil Tree Stump,                          soil,           NONE,                   TERMINA_FIELD,                0x00005,                    RUPEE_RED
+Termina Field Soil Observatory Item 1,                  soil,           NONE,                   TERMINA_FIELD,                0x00006,                    RUPEE_BLUE
+Termina Field Soil Observatory Item 2,                  soil,           NONE,                   TERMINA_FIELD,                0x10006,                    RUPEE_BLUE
+Termina Field Soil Observatory Item 3,                  soil,           NONE,                   TERMINA_FIELD,                0x20006,                    RUPEE_BLUE
+Termina Field Soil Wall Item 1,                         soil,           NONE,                   TERMINA_FIELD,                0x00007,                    RUPEE_BLUE
+Termina Field Soil Wall Item 2,                         soil,           NONE,                   TERMINA_FIELD,                0x10007,                    RUPEE_BLUE
+Termina Field Soil Wall Item 3,                         soil,           NONE,                   TERMINA_FIELD,                0x20007,                    RUPEE_BLUE
+Termina Field Soil Pillar,                              soil,           NONE,                   TERMINA_FIELD,                0x00008,                    ARROWS_30
 Termina Field Cow Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x00a00,                    RANDOM
 Termina Field Cow Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x10a00,                    RANDOM
 Termina Field Cow Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x20a00,                    RANDOM
@@ -692,6 +700,9 @@ Tourist Information Pictobox,                           npc,            NONE,   
 Tourist Information Boat Archery,                       npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,          KOUME_HEART_PIECE,          HEART_PIECE
 Tourist Information Tingle Picture,                     npc,            NONE,                   TOURIST_INFORMATION,          TOUR_GUIDE_HEART_PIECE,     HEART_PIECE
 Deku Palace HP,                                         collectible,    NONE,                   DEKU_PALACE,                  0x1e,                       HEART_PIECE
+Deku Palace Soil Item 1,                                soil,           NONE,                   DEKU_PALACE,                  0x00000,                    RUPEE_BLUE
+Deku Palace Soil Item 2,                                soil,           NONE,                   DEKU_PALACE,                  0x10000,                    RUPEE_BLUE
+Deku Palace Soil Item 3,                                soil,           NONE,                   DEKU_PALACE,                  0x20000,                    RUPEE_BLUE
 Deku Palace Sonata of Awakening,                        npc,            NONE,                   DEKU_KING_CHAMBER,            SONG_AWAKENING,             SONG_AWAKENING
 Deku Palace Grotto Chest,                               chest,          NONE,                   GROTTOS,                      0x05,                       RUPEE_RED
 Deku Palace Pot 1,                                      pot,            NONE,                   DEKU_PALACE,                  0x010f,                     MAGIC_JAR_SMALL
@@ -712,6 +723,9 @@ Deku Palace Grotto Butterfly 1,                         butterfly,      NONE,   
 Deku Palace Grotto Butterfly 2,                         butterfly,      NONE,                   GROTTOS,                      0x10c04,                    NOTHING
 Deku Palace Grotto Butterfly 3,                         butterfly,      NONE,                   GROTTOS,                      0x20c04,                    NOTHING
 Deku Palace Grotto Butterfly 4,                         butterfly,      NONE,                   GROTTOS,                      0x30c04,                    NOTHING
+Beans Grotto Soil Item 1,                               soil,           NONE,                   GROTTOS,                      0x00c09,                    RUPEE_BLUE
+Beans Grotto Soil Item 2,                               soil,           NONE,                   GROTTOS,                      0x10c09,                    RUPEE_BLUE
+Beans Grotto Soil Item 3,                               soil,           NONE,                   GROTTOS,                      0x20c09,                    RUPEE_BLUE
 Deku Palace JP Line Grotto Grass 1,                     grass,          NONE,                   GROTTOS,                      0x00600,                    RANDOM
 Deku Palace JP Line Grotto Grass 2,                     grass,          NONE,                   GROTTOS,                      0x00601,                    RANDOM
 Deku Palace JP Line Grotto Grass 3,                     grass,          NONE,                   GROTTOS,                      0x00604,                    RANDOM
@@ -828,9 +842,9 @@ Swamp Skulltula Pot Room Pot 1,                         chest,          NONE,   
 Swamp Skulltula Pot Room Pot 2,                         chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x11,                       GS_TOKEN_SWAMP
 Swamp Skulltula Pot Room Jar,                           chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x05,                       GS_TOKEN_SWAMP
 Swamp Skulltula Pot Room Wall,                          chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x16,                       GS_TOKEN_SWAMP
-Swamp Spider House Rock Entrance 1,                     rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00003,                    RANDOM
-Swamp Spider House Rock Entrance 2,                     rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00004,                    RANDOM
-Swamp Spider House Rock Pots Room,                      rock,           NONE,                 SPIDER_HOUSE_SWAMP,             0x00405,                    RANDOM
+Swamp Spider House Rock Entrance 1,                     rock,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00003,                    RANDOM
+Swamp Spider House Rock Entrance 2,                     rock,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00004,                    RANDOM
+Swamp Spider House Rock Pots Room,                      rock,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00405,                    RANDOM
 Swamp Spider House Pot Main Upper Left 1,               pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0103,                     MAGIC_JAR_SMALL
 Swamp Spider House Pot Main Upper Left 2,               pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0104,                     MAGIC_JAR_SMALL
 Swamp Spider House Pot Main Lower 1,                    pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0105,                     RUPEE_GREEN
@@ -887,6 +901,10 @@ Swamp Spider House Hive Jars Room 3,                    hive,           NONE,   
 Swamp Spider House Hive Tree Room 1,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00506,                    RECOVERY_HEART
 Swamp Spider House Hive Tree Room 2,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00507,                    MAGIC_JAR_SMALL
 Swamp Spider House Hive Tree Room 3,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00509,                    NOTHING
+Swamp Spider House Soil Gold,                           soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0020d,                    ARROWS_30
+Swamp Spider House Soil Monument Item 1,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0030e,                    RUPEE_BLUE
+Swamp Spider House Soil Monument Item 2,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x1030e,                    RUPEE_BLUE
+Swamp Spider House Soil Monument Item 3,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x2030e,                    RUPEE_BLUE
 Path to Mountain Village Big Snowball Lower 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001a,                    NOTHING
 Path to Mountain Village Big Snowball Lower 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002a,                    NOTHING
 Path to Mountain Village Big Snowball Lower 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001e,                    RECOVERY_HEART
@@ -1353,6 +1371,10 @@ Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,   
 Romani Ranch Wonder Item Fence 4,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002d,                    RUPEE_GREEN
 Romani Ranch Wonder Item Fence 5,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002e,                    RUPEE_GREEN
 Romani Ranch Wonder Item Fence 6,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002f,                    RUPEE_GREEN
+Romani Ranch Soil Days 2-3 Item 1,                      soil,           NONE,                   ROMANI_RANCH,                 0x00030,                    RUPEE_BLUE
+Romani Ranch Soil Days 2-3 Item 2,                      soil,           NONE,                   ROMANI_RANCH,                 0x10030,                    RUPEE_BLUE
+Romani Ranch Soil Days 2-3 Item 3,                      soil,           NONE,                   ROMANI_RANCH,                 0x20030,                    RUPEE_BLUE
+Romani Ranch Soil Day 1,                                soil,           NONE,                   ROMANI_RANCH,                 0x00031,                    ARROWS_30
 Cucco Shack Bunny Mask,                                 npc,            CUCCOS,                 CUCCO_SHACK,                  MASK_BUNNY,                 MASK_BUNNY
 Cucco Shack Wonder Item 1,                              wonder,         NONE,                   CUCCO_SHACK,                  0x00011,                    RUPEE_GREEN
 Cucco Shack Wonder Item 2,                              wonder,         NONE,                   CUCCO_SHACK,                  0x10011,                    RUPEE_GREEN
@@ -1381,6 +1403,7 @@ Doggy Racetrack Pot 1,                                  pot,            NONE,   
 Doggy Racetrack Pot 2,                                  pot,            NONE,                   DOG_RACETRACK,                0x000a,                     RUPEE_BLUE
 Doggy Racetrack Pot 3,                                  pot,            NONE,                   DOG_RACETRACK,                0x000c,                     RUPEE_BLUE
 Doggy Racetrack Pot 4,                                  pot,            NONE,                   DOG_RACETRACK,                0x000d,                     RUPEE_BLUE
+Doggy Racetrack Soil,                                   soil,           NONE,                   DOG_RACETRACK,                0x00008,                    RUPEE_RED
 Great Bay Coast Zora Mask,                              npc,            NONE,                   GREAT_BAY_COAST,              MASK_ZORA,                  MASK_ZORA
 Great Bay Coast HP,                                     collectible,    NONE,                   GREAT_BAY_COAST,              0x05,                       HEART_PIECE
 Great Bay Coast Fisherman HP,                           npc,            FISHERMAN_GAME,         GREAT_BAY_COAST,              FISHERMAN_HEART_PIECE,      HEART_PIECE
@@ -1468,6 +1491,7 @@ Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,   
 Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
 Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
 Great Bay Coast Cleared Butterfly 2,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x34085,                    NOTHING
+Great Bay Coast Soil,                                   soil,           NONE,                   GREAT_BAY_COAST,              0x00000,                    RUPEE_RED
 Great Bay Cow Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x00f00,                    RANDOM
 Great Bay Cow Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x10f00,                    RANDOM
 Great Bay Cow Grotto Grass 03,                          grass,          NONE,                   GROTTOS,                      0x20f00,                    RANDOM
@@ -1914,6 +1938,8 @@ Stone Tower Inverted Pot 2,                             pot,            NONE,   
 Stone Tower Inverted Pot 3,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000a,                     FAIRY
 Stone Tower Inverted Pot 4,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000b,                     BOMBS_5
 Stone Tower Inverted Pot 5,                             pot,            NONE,                   STONE_TOWER_INVERTED,         0x000c,                     RECOVERY_HEART
+Stone Tower Inverted Soil Lower,                        soil,           NONE,                   STONE_TOWER_INVERTED,         0x00000,                    ARROWS_30
+Stone Tower Inverted Soil Upper,                        soil,           NONE,                   STONE_TOWER_INVERTED,         0x00001,                    ARROWS_30
 Oath to Order,                                          npc,            NONE,                   LAIR_ODOLWA,                  SONG_ORDER,                 SONG_ORDER
 Woodfall Temple Entrance Chest,                         chest,          NONE,                   TEMPLE_WOODFALL,              0x18,                       STRAY_FAIRY_WF
 Woodfall Temple Water Chest,                            chest,          NONE,                   TEMPLE_WOODFALL,              0x01,                       SMALL_KEY_WF
@@ -2697,6 +2723,9 @@ Secret Shrine Rupee 14,                                 rupee,          NONE,   
 Secret Shrine Rupee 15,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000e,                    RUPEE_GREEN
 Secret Shrine Rupee 16,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000f,                    RUPEE_GREEN
 Secret Shrine Rupee 17,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00010,                    RUPEE_GREEN
+Secret Shrine Soil Item 1,                              soil,           NONE,                   SECRET_SHRINE,                0x00013,                    RUPEE_BLUE
+Secret Shrine Soil Item 2,                              soil,           NONE,                   SECRET_SHRINE,                0x10013,                    RUPEE_BLUE
+Secret Shrine Soil Item 3,                              soil,           NONE,                   SECRET_SHRINE,                0x20013,                    RUPEE_BLUE
 Sakon Hideout Pot Second Room 1,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0127,                     RECOVERY_HEART
 Sakon Hideout Pot Second Room 2,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0128,                     RECOVERY_HEART
 Sakon Hideout Pot First Room 1,                         pot,            NONE,                   SAKON_HIDEOUT,                0x0129,                     RECOVERY_HEART

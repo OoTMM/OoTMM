@@ -309,6 +309,14 @@
     "Termina Field Wonder Item Graffiti 1": "true" # Can simply roll into the graffiti
     "Termina Field Wonder Item Graffiti 2": "true"
     "Termina Field Wonder Item Graffiti 3": "true"
+    "Termina Field Soil Tree Stump": "has_bugs"
+    "Termina Field Soil Observatory Item 1": "has_bugs"
+    "Termina Field Soil Observatory Item 2": "has_bugs"
+    "Termina Field Soil Observatory Item 3": "has_bugs"
+    "Termina Field Soil Wall Item 1": "has_bugs"
+    "Termina Field Soil Wall Item 2": "has_bugs"
+    "Termina Field Soil Wall Item 3": "has_bugs"
+    "Termina Field Soil Pillar": "has_bugs"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
