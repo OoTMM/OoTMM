@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Cosmetics setting to enable BGM during night time.
 - Some seasonal textures, for Halloween.
-- Add soft soil shuffle to Ocarina of Time.
+- Add soft soil shuffle to Ocarina of Time and Majora's Mask.
 - Add bush shuffle in Ocarina of Time and Majora's Mask.
 - Add tree shuffle in Ocarina of Time and Majora's Mask.
 - Add rock shuffle in Ocarina of Time and Majora's Mask.
