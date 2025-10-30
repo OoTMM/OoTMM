@@ -1282,6 +1282,7 @@ export class LogicPassWorldTransform {
 
   private filterChecksSoil() {
     this.filterLocationsBool(this.state.settings.shuffleSoilOot, 'soil', 'oot');
+    this.filterLocations(this.state.settings.shuffleSoilMm, 'soil', 'mm');
   }
 
   private filterChecksWonder() {

@@ -765,6 +765,20 @@ export const SETTINGS = [{
   description: 'Controls whether or not the fairies from bean soil spots are shuffled (OoT)',
   default: false,
   cond: hasOoT,
+}, {
+  key: 'shuffleSoilMm',
+  name: 'Soil Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls whether or not the items from bean soil spots are shuffled (MM)',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'all', name: 'All' },
+    { value: 'overworld', name: 'Overworld' },
+    { value: 'dungeons', name: 'Dungeons only' },
+  ],
+  default: 'none',
+  cond: hasMM,
 },{
   key: 'shuffleFreeRupeesOot',
   name: 'Freestanding Rupees Shuffle (OoT)',
