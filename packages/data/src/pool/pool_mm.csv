@@ -692,6 +692,9 @@ Tourist Information Pictobox,                           npc,            NONE,   
 Tourist Information Boat Archery,                       npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,          KOUME_HEART_PIECE,          HEART_PIECE
 Tourist Information Tingle Picture,                     npc,            NONE,                   TOURIST_INFORMATION,          TOUR_GUIDE_HEART_PIECE,     HEART_PIECE
 Deku Palace HP,                                         collectible,    NONE,                   DEKU_PALACE,                  0x1e,                       HEART_PIECE
+Deku Palace Soil Item 1,                                soil,           NONE,                   DEKU_PALACE,                  0x00000,                    RUPEE_BLUE
+Deku Palace Soil Item 2,                                soil,           NONE,                   DEKU_PALACE,                  0x10000,                    RUPEE_BLUE
+Deku Palace Soil Item 3,                                soil,           NONE,                   DEKU_PALACE,                  0x20000,                    RUPEE_BLUE
 Deku Palace Sonata of Awakening,                        npc,            NONE,                   DEKU_KING_CHAMBER,            SONG_AWAKENING,             SONG_AWAKENING
 Deku Palace Grotto Chest,                               chest,          NONE,                   GROTTOS,                      0x05,                       RUPEE_RED
 Deku Palace Pot 1,                                      pot,            NONE,                   DEKU_PALACE,                  0x010f,                     MAGIC_JAR_SMALL

@@ -8,6 +8,10 @@
     "Deku Palace Upper": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
     NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || ((is_swamp_cleared || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short || can_hammer)))"
+  locations:
+    "Deku Palace Soil Item 1": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && has_bugs"
+    "Deku Palace Soil Item 2": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && has_bugs"
+    "Deku Palace Soil Item 3": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && has_bugs"
 
 "Deku Palace Main":
   region: DEKU_PALACE
