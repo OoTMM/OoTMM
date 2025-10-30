@@ -246,6 +246,12 @@ export const TRICKS: Tricks = {
     name: 'Water Temple Large Pit GS with Bombchu and Climb Anywhere',
     tooltip: 'It is possible to kill the Gold Skulltula using a Bombchu with a precise angle and timing. This is only relevant if Climb Anywhere is logical.',
   },
+  OOT_WATER_BOSSBOOTS: {
+    game: 'oot',
+    name: 'Water Temple Boss Door with Only Iron Boots',
+    tooltip: 'READ - FRAME PERFECT TRICK. Must equip Iron Boots Frame Perfect while leaving the Dive Animation for Link to grab the ledge',
+    linkVideo: 'https://www.youtube.com/watch?v=x8k3XJHiMOs',
+  },
   OOT_SHADOW_BOAT_EARLY: {
     game: 'oot',
     name: 'Reach Shadow Temple Boat with Climb Anywhere',
