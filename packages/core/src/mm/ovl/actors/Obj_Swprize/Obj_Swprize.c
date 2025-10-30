@@ -52,8 +52,12 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
 
     func_80C25360(this, &sp78);
 
+    g.xflagOverride = TRUE;
+    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+
     if (type == 2) {
         for (i = 0; i < 3; i++) {
+            g.xflag.sliceId = i;
             collectible = Item_DropCollectible(play, &thisx->world.pos, temp_s0);
             if (collectible != NULL) {
                 if (sp78.y < 0.98f) {
@@ -73,10 +77,20 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
             collectible->world.rot.y = Math_Atan2S_XY(sp78.z, sp78.x);
         }
     }
+
+    g.xflagOverride = FALSE;
+}
+
+static void ObjSzprize_Alias(Xflag* xf)
+{
 }
 
 void ObjSwprize_Init(Actor* thisx, PlayState* play) {
     ObjSwprize* this = (ObjSwprize*)thisx;
+
+    if (comboXflagInit(&this->xflag, thisx, play)) {
+        ObjSzprize_Alias(&this->xflag);
+    }
 
     if (Flags_GetSwitch(play, OBJ_SWPRIZE_GET_SWITCH_FLAG(&this->actor))) {
         ObjSwprize_SetupDoNothing(this);
