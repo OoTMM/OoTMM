@@ -105,5 +105,9 @@
     "Swamp Spider House Hive Tree Room 1": "break_hive || has_bombchu"
     "Swamp Spider House Hive Tree Room 2": "break_hive || has_bombchu"
     "Swamp Spider House Hive Tree Room 3": "break_hive || has_bombchu"
+    "Swamp Spider House Soil Gold": "has_bugs"
+    "Swamp Spider House Soil Monument Item 1": "has_bugs"
+    "Swamp Spider House Soil Monument Item 2": "has_bugs"
+    "Swamp Spider House Soil Monument Item 3": "has_bugs"
   gossip:
     "Swamp Spider House Gossip": "true"
