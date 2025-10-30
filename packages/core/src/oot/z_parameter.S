@@ -46,8 +46,8 @@ PATCH_START 0x8006f0ec
    lbu    a0, 0x0068 (v1)
   beqz    v0, .+0x74
    addiu  a0, zero, 0x10
-  nop
-  nop
+  lbu     v0, 0x0068 (v1)
+  lw      t7, 0x0038 (sp)
   nop
   nop
   nop
