@@ -2697,6 +2697,9 @@ Secret Shrine Rupee 14,                                 rupee,          NONE,   
 Secret Shrine Rupee 15,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000e,                    RUPEE_GREEN
 Secret Shrine Rupee 16,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000f,                    RUPEE_GREEN
 Secret Shrine Rupee 17,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00010,                    RUPEE_GREEN
+Secret Shrine Soil Item 1,                              soil,           NONE,                   SECRET_SHRINE,                0x00013,                    RUPEE_BLUE
+Secret Shrine Soil Item 2,                              soil,           NONE,                   SECRET_SHRINE,                0x10013,                    RUPEE_BLUE
+Secret Shrine Soil Item 3,                              soil,           NONE,                   SECRET_SHRINE,                0x20013,                    RUPEE_BLUE
 Sakon Hideout Pot Second Room 1,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0127,                     RECOVERY_HEART
 Sakon Hideout Pot Second Room 2,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0128,                     RECOVERY_HEART
 Sakon Hideout Pot First Room 1,                         pot,            NONE,                   SAKON_HIDEOUT,                0x0129,                     RECOVERY_HEART
