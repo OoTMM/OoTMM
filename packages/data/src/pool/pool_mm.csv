@@ -1487,6 +1487,7 @@ Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,   
 Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
 Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
 Great Bay Coast Cleared Butterfly 2,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x34085,                    NOTHING
+Great Bay Coast Soil,                                   soil,           NONE,                   GREAT_BAY_COAST,              0x00000,                    RUPEE_RED
 Great Bay Cow Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x00f00,                    RANDOM
 Great Bay Cow Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x10f00,                    RANDOM
 Great Bay Cow Grotto Grass 03,                          grass,          NONE,                   GROTTOS,                      0x20f00,                    RANDOM

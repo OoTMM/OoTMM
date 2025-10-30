@@ -64,6 +64,7 @@
     "Great Bay Coast Rock Ledge 1": "true"
     "Great Bay Coast Rock Ledge 2": "true"
     "Great Bay Coast Rock Ledge 3": "true"
+    "Great Bay Coast Soil": "(can_hookshot || short_hook_anywhere) && has_bugs"
 
 "Great Bay Coast Water":
   region: GREAT_BAY_COAST
