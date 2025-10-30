@@ -109,6 +109,9 @@
     "Deku Palace Grotto Grass 10": "true"
     "Deku Palace Grotto Grass 11": "true"
     "Deku Palace Grotto Grass 12": "true"
+    "Beans Grotto Soil Item 1": "has_bugs"
+    "Beans Grotto Soil Item 2": "has_bugs"
+    "Beans Grotto Soil Item 3": "has_bugs"
 #    "Deku Palace Free Bean": "true"
 #    "Deku Palace Bean Purchase": "can_use_wallet(1)"
 

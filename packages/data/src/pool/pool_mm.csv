@@ -712,6 +712,9 @@ Deku Palace Grotto Butterfly 1,                         butterfly,      NONE,   
 Deku Palace Grotto Butterfly 2,                         butterfly,      NONE,                   GROTTOS,                      0x10c04,                    NOTHING
 Deku Palace Grotto Butterfly 3,                         butterfly,      NONE,                   GROTTOS,                      0x20c04,                    NOTHING
 Deku Palace Grotto Butterfly 4,                         butterfly,      NONE,                   GROTTOS,                      0x30c04,                    NOTHING
+Beans Grotto Soil Item 1,                               soil,           NONE,                   GROTTOS,                      0x00c09,                    RUPEE_BLUE
+Beans Grotto Soil Item 2,                               soil,           NONE,                   GROTTOS,                      0x10c09,                    RUPEE_BLUE
+Beans Grotto Soil Item 3,                               soil,           NONE,                   GROTTOS,                      0x20c09,                    RUPEE_BLUE
 Deku Palace JP Line Grotto Grass 1,                     grass,          NONE,                   GROTTOS,                      0x00600,                    RANDOM
 Deku Palace JP Line Grotto Grass 2,                     grass,          NONE,                   GROTTOS,                      0x00601,                    RANDOM
 Deku Palace JP Line Grotto Grass 3,                     grass,          NONE,                   GROTTOS,                      0x00604,                    RANDOM
