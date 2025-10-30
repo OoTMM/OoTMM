@@ -146,14 +146,14 @@ export const SETTINGS = [{
   name: 'Generate Spoiler Log',
   category: 'main',
   type: 'boolean',
-  description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other information. It is recommended to enable this option.',
+  description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other information. It is strongly recommended to leave this option enabled.',
   default: true
 }, {
   key: 'probabilisticFoolish',
   name: 'Probabilistic Foolish Hints',
   category: 'hints',
   type: 'boolean',
-  description: 'If you don\'t know what this is, leave it ON',
+  description: 'Adds extra calculations during the generation of the seed to refine Foolish Hints and Hint Importance, making them more useful. It is strongly recommended to leave this option enabled.',
   default: true
 }, {
   key: 'noPlandoHints',
@@ -1108,9 +1108,9 @@ export const SETTINGS = [{
   values: [
     { value: 'none', name: 'None', description: 'Cannot change age by playing Song of Time.' },
     { value: 'oot', name: 'Ocarina of Time', description: 'Can change age by playing Song of Time with the Ocarina of Time specifically.' },
-    { value: 'always', name: 'Always', description: 'Can always change age by playing Song of Time.' },
+    { value: 'always', name: 'Always', description: 'Can change age by playing Song of Time using any means.' },
   ],
-  description: 'Allows you to switch ages by playing Song of Time, if you\'ve been to Temple of Time as both ages',
+  description: 'Allows you to switch ages by playing Song of Time after you\'ve switched ages once in Temple of Time.<br>Preserves your current position on the scene, which logic can expect you to take advantage of.',
   default: 'none',
   cond: hasOoT,
 }, {
@@ -1833,12 +1833,12 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'enum',
   values: [
-    { value: 'free', name: 'Free', description: 'Bombchu can be used as soon as they are obtained. Max ammo is 50.' },
-    { value: 'bombBag', name: 'Bomb Bag', description: 'Bombchu can be used when you have the Bomb Bag. Max ammo is the Bomb Bag maximum.' },
-    { value: 'bagFirst', name: 'Bombchu Bag - First Pack', description: 'The first out-of-shop bombchu you find will turn into a Bombchu Bag. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Bombchu Bags separate from bombchu are added to the item pool. Without the Bombchu Bag, bombchu cannot be used. Max ammo is 20/30/40 each.' },
+    { value: 'free', name: 'Vanilla (OoT)', description: 'Bombchu can be used as soon as a pack is obtained. No bombchu drops. Max ammo is 50.' },
+    { value: 'bombBag', name: 'Vanilla (MM)', description: 'Bombchu can be used when you have the Bomb Bag. No bombchu drops. Max ammo is the Bomb Bag maximum.' },
+    { value: 'bagFirst', name: 'Bombchu Bag (First Pack)', description: 'The first non-purchased pack you find will turn into a Bombchu Bag, which adds bombchu drops alongside non-randomized ammo drops. Bombchu Bags make bombchu logical, replacing Bomb Bags. Max ammo is 50.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag (Separate Items)', description: 'Bombchu Bags separate from bombchu packs are added to the item pool, which add bombchu drops alongside non-randomized ammo drops. Bombchu are only usable with a Bombchu Bag, replacing Bomb Bags in logic. Max ammo is 20/30/40 each.' },
   ],
-  description: 'Controls the behavior of bombchu.<br>Bombchu Bags allow bombchu refills to drop from item refill locations such as grass and pots, making bombchu logical.<br>With Bombchu Bags disabled, access to a renewable source of bombchu is required in order for bombchu to be logical.',
+  description: 'Controls the behavior of bombchu.',
   default: 'free',
   cond: hasOoT,
 }, {
@@ -1847,12 +1847,12 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'enum',
   values: [
-    { value: 'free', name: 'Free', description: 'Bombchu can be used as soon as they are obtained. Max ammo is 50.' },
-    { value: 'bombBag', name: 'Bomb Bag', description: 'Bombchu can be used when you have the Bomb Bag. Max ammo is the Bomb Bag maximum.' },
-    { value: 'bagFirst', name: 'Bombchu Bag - First Pack', description: 'The first out-of-shop bombchu you find will turn into a Bombchu Bag. Max ammo is 50.' },
-    { value: 'bagSeparate', name: 'Bombchu Bag - Separate Items', description: 'Bombchu Bags separate from bombchu are added to the item pool. Without the Bombchu Bag, bombchu cannot be used. Max ammo is 20/30/40 each.' },
+    { value: 'free', name: 'Vanilla (OoT)', description: 'Bombchu can be used as soon as a pack is obtained. No bombchu drops. Max ammo is 50.' },
+    { value: 'bombBag', name: 'Vanilla (MM)', description: 'Bombchu can be used when you have the Bomb Bag. No bombchu drops. Max ammo is the Bomb Bag maximum.' },
+    { value: 'bagFirst', name: 'Bombchu Bag (First Pack)', description: 'The first non-purchased pack you find will turn into a Bombchu Bag, which adds bombchu drops alongside non-randomized ammo drops. Bombchu Bags make bombchu logical, replacing Bomb Bags. Max ammo is 50.' },
+    { value: 'bagSeparate', name: 'Bombchu Bag (Separate Items)', description: 'Bombchu Bags separate from bombchu packs are added to the item pool, which add bombchu drops alongside non-randomized ammo drops. Bombchu are only usable with a Bombchu Bag, replacing Bomb Bags in logic. Max ammo is 20/30/40 each.' },
   ],
-  description: 'Controls the behavior of bombchu.<br>Bombchu Bags allow bombchu refills to drop from item refill locations such as grass and pots, making bombchu logical.<br>With Bombchu Bags disabled, access to a renewable source of bombchu is required in order for bombchu to be logical.',
+  description: 'Controls the behavior of bombchu.',
   default: 'bombBag',
   cond: hasMM,
 }, {
