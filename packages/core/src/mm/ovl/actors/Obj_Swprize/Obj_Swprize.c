@@ -88,6 +88,12 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
 
 static void ObjSzprize_Alias(Xflag* xf)
 {
+    switch (xf->sceneId)
+    {
+    case SCE_MM_GREAT_BAY_COAST:
+        xf->setupId = 0;
+        break;
+    }
 }
 
 void ObjSwprize_Init(Actor* thisx, PlayState* play) {

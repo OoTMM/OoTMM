@@ -1381,6 +1381,7 @@ Doggy Racetrack Pot 1,                                  pot,            NONE,   
 Doggy Racetrack Pot 2,                                  pot,            NONE,                   DOG_RACETRACK,                0x000a,                     RUPEE_BLUE
 Doggy Racetrack Pot 3,                                  pot,            NONE,                   DOG_RACETRACK,                0x000c,                     RUPEE_BLUE
 Doggy Racetrack Pot 4,                                  pot,            NONE,                   DOG_RACETRACK,                0x000d,                     RUPEE_BLUE
+Doggy Racetrack Soil,                                   soil,           NONE,                   DOG_RACETRACK,                0x00008,                    RUPEE_RED
 Great Bay Coast Zora Mask,                              npc,            NONE,                   GREAT_BAY_COAST,              MASK_ZORA,                  MASK_ZORA
 Great Bay Coast HP,                                     collectible,    NONE,                   GREAT_BAY_COAST,              0x05,                       HEART_PIECE
 Great Bay Coast Fisherman HP,                           npc,            FISHERMAN_GAME,         GREAT_BAY_COAST,              FISHERMAN_HEART_PIECE,      HEART_PIECE
