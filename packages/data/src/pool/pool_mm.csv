@@ -433,6 +433,14 @@ Termina Field Wonder Item Graffiti 2,                   wonder,         NONE,   
 Termina Field Wonder Item Graffiti 3,                   wonder,         NONE,                   TERMINA_FIELD,                0x20066,                    RUPEE_GREEN
 Termina Field Butterfly 1,                              butterfly,      NONE,                   TERMINA_FIELD,                0x000ab,                    FAIRY
 Termina Field Butterfly 2,                              butterfly,      NONE,                   TERMINA_FIELD,                0x100ab,                    NOTHING
+Termina Field Soil Tree Stump,                          soil,           NONE,                   TERMINA_FIELD,                0x00005,                    RUPEE_RED
+Termina Field Soil Observatory Item 1,                  soil,           NONE,                   TERMINA_FIELD,                0x00006,                    RUPEE_BLUE
+Termina Field Soil Observatory Item 2,                  soil,           NONE,                   TERMINA_FIELD,                0x10006,                    RUPEE_BLUE
+Termina Field Soil Observatory Item 3,                  soil,           NONE,                   TERMINA_FIELD,                0x20006,                    RUPEE_BLUE
+Termina Field Soil Wall Item 1,                         soil,           NONE,                   TERMINA_FIELD,                0x00007,                    RUPEE_BLUE
+Termina Field Soil Wall Item 2,                         soil,           NONE,                   TERMINA_FIELD,                0x10007,                    RUPEE_BLUE
+Termina Field Soil Wall Item 3,                         soil,           NONE,                   TERMINA_FIELD,                0x20007,                    RUPEE_BLUE
+Termina Field Soil Pillar,                              soil,           NONE,                   TERMINA_FIELD,                0x00008,                    ARROWS_30
 Termina Field Cow Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x00a00,                    RANDOM
 Termina Field Cow Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x10a00,                    RANDOM
 Termina Field Cow Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x20a00,                    RANDOM
