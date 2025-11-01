@@ -6,7 +6,7 @@
     "Gorman Track Front": "true"
     "Owl Milk Road": "true"
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
+    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || gorman_gates_moved || final_day || short_hook_anywhere"
     "Tingle Ranch": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
     "Milk Road Keaton": "true"
   events:
@@ -44,14 +44,14 @@
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
-    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
+    "Milk Road": "(can_goron_bomb_jump && has_bombs) || gorman_gates_moved || final_day || short_hook_anywhere"
     "Gorman Track Back": "true"
 
 "Gorman Track Front":
   region: MILK_ROAD
   exits:
     "Milk Road": "true"
-    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || gorman_gates_moved || short_hook_anywhere"
   locations:
     "Gorman Track Garo Mask": "soul_gorman && can_play_epona && can_use_wallet(1) && is_day"
     "Gorman Track Milk Purchase": "soul_gorman && can_use_wallet(1) && is_day"
@@ -60,13 +60,15 @@
   region: MILK_ROAD
   exits:
     "Behind Gorman Fence": "true"
-    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || gorman_gates_moved || short_hook_anywhere"
 
 "Gorman Track":
   region: MILK_ROAD
+  stay:
+    NIGHT2_AM_05_30: "false"
   exits:
-    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
-    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || gorman_gates_moved || short_hook_anywhere"
+    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || gorman_gates_moved || short_hook_anywhere"
     "Gorman Track Trees": "before(NIGHT2_PM_06_00) || after(DAY3_AM_06_00)"
   locations:
     "Gorman Track Grass Pack 1 Grass 01": "true"

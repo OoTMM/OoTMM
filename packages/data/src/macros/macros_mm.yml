@@ -158,6 +158,7 @@
 "has_weapon": "has_sword || can_hammer"
 
 "kill_big_octo_close": "has_mask_zora || can_use_nayru || can_use_din || has_arrows || can_hookshot_short"
+"gorman_gates_moved": "event(ALIENS) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_05_30)"
 
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU) || license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
