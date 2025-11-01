@@ -4,7 +4,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Water Near Tourist": "can_swim_or_sink"
+    "Swamp Water Near Tourist": "can_swim_or_sink || is_tall || has_mask_goron"
     "Swamp Near Potion Shop": "has(MASK_DEKU) || has_hover_boots" # Other cases accounted by the water path
     "Swamp Near Frog": "(event(SWAMP_OCTO_LEFT) || is_swamp_cleared) && (has(MASK_DEKU) || has_hover_boots || is_tall)"
     "Owl Swamp": "true"
@@ -20,8 +20,7 @@
     MAGIC: "true"
     WATER: "true"
     FAIRY: "true"
-    SWAMP_OCTO_LEFT: "is_swamp_poisoned && has_arrows"
-    SWAMP_OCTO_RIGHT: "is_swamp_poisoned && has_arrows"
+    SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
   locations:
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron) || short_hook_anywhere"
     "Southern Swamp Scrub Deed": "soul_business_scrub && has(DEED_LAND)"
@@ -48,7 +47,7 @@
   exits:
     "Swamp Front": "true"
     "Swamp Water Near Witch": "true"
-    "Swamp Water Near Spider House": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_RIGHT) && (can_use_nayru || is_tall))"
+    "Swamp Water Near Spider House": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && cross_poison_swamp)"
   events:
     SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
 
@@ -57,31 +56,31 @@
   exits:
     "Swamp Near Potion Shop": "true"
     "Swamp Water Near Tourist": "true"
-    "Swamp Water Near Frog": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_LEFT) && (can_use_nayru || is_tall))"
+    "Swamp Water Near Frog": "can_swim_or_sink || is_tall || has_mask_goron"
   events:
     SWAMP_OCTO_LEFT: "is_swamp_poisoned && kill_big_octo_close"
 
 "Swamp Water Near Frog":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Water Near Witch": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_LEFT) && (can_use_nayru || is_tall))"
-    "Swamp Water Near Deku Palace": "is_swamp_cleared || is_tall || can_use_nayru"
+    "Swamp Water Near Witch": "can_swim_or_sink || is_tall || has_mask_goron"
+    "Swamp Water Near Deku Palace": "cross_poison_swamp"
   events:
     SWAMP_OCTO_LEFT: "is_swamp_poisoned && kill_big_octo_close"
 
 "Swamp Water Near Deku Palace":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Water Near Frog": "is_swamp_cleared || is_tall || can_use_nayru"
-    "Swamp Water Near Spider House": "is_swamp_cleared || is_tall || can_use_nayru"
+    "Swamp Water Near Frog": "cross_poison_swamp"
+    "Swamp Water Near Spider House": "cross_poison_swamp"
     "Swamp Back": "true"
 
 "Swamp Water Near Spider House":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Water Near Deku Palace": "is_swamp_cleared || is_tall || can_use_nayru"
-    "Swamp Water Near Tourist": "is_swamp_cleared || has_mask_zora || (event(SWAMP_OCTO_RIGHT) && (can_use_nayru || has_mask_goron || is_tall))"
-    "Near Swamp Spider House": "is_tall || can_use_nayru"
+    "Swamp Water Near Deku Palace": "cross_poison_swamp"
+    "Swamp Water Near Tourist": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && cross_poison_swamp)"
+    "Near Swamp Spider House": "is_tall || can_use_nayru || (has_mask_goron && has(MASK_DEKU))"
     "Near Swamp Grotto": "is_tall"
   events:
     SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
@@ -91,16 +90,16 @@
   exits:
     "Swamp Front": "(event(SWAMP_OCTO_LEFT) || is_swamp_cleared) && (has(MASK_DEKU) || has_hover_boots || (is_tall && (can_use_nayru || is_swamp_cleared)))"
     "Swamp Back": "has(MASK_DEKU) || has_hover_boots || (is_tall && (can_use_nayru || is_swamp_cleared))"
-    "Swamp Water Near Frog": "can_swim_or_sink"
+    "Swamp Water Near Frog": "cross_poison_swamp"
   events:
     FROG_3: "has(MASK_DON_GERO)"
-    SWAMP_OCTO_LEFT: "has_arrows"
+    SWAMP_OCTO_LEFT: "is_swamp_poisoned && kill_big_octo_close"
 
 "Swamp Near Potion Shop":
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Front": "has(MASK_DEKU) || has_hover_boots" # Other cases accounted by the water path
-    "Swamp Water Near Witch": "can_swim_or_sink"
+    "Swamp Water Near Witch": "can_swim_or_sink || is_tall || has_mask_goron"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   locations:
@@ -136,7 +135,7 @@
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "is_swamp_poisoned && has(PICTOGRAPH_BOX) && soul_octorok"
   exits:
-    "Swamp Water Near Deku Palace": "is_swamp_cleared || is_tall || has_iron_boots || can_use_nayru"
+    "Swamp Water Near Deku Palace": "cross_poison_swamp"
     "Swamp Near Frog": "has(MASK_DEKU) || has_hover_boots || is_tall || has_iron_boots || (can_swim && can_use_nayru) || (is_swamp_cleared && can_swim)"
     "Deku Palace Front": "true"
     "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
@@ -148,7 +147,7 @@
 "Near Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Water Near Spider House": "is_tall || has_iron_boots || is_swamp_cleared || can_use_nayru"
+    "Swamp Water Near Spider House": "cross_poison_swamp"
     "Swamp Spider House": "has_sticks || has_arrows"
     "Swamp Back": "has(MASK_DEKU) || has_hover_boots"
     "Near Swamp Grotto": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
@@ -159,7 +158,7 @@
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
-    "Swamp Water Near Spider House": "is_tall || has_iron_boots || is_swamp_cleared || can_use_nayru"
+    "Swamp Water Near Spider House": "cross_poison_swamp"
     "Near Swamp Spider House": "has(MASK_DEKU) || can_hookshot_short || has_hover_boots"
     "Southern Swamp Grotto": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
@@ -199,7 +198,7 @@
   region: ENTRANCE
   exits:
     "Swamp Front": "true"
-    "Boat Ride": "((soul_npc(SOUL_NPC_TOURIST_CENTER) && event(PICTURE_SWAMP)) || (event(KOUME) && (!setting(erIndoorsExtra) || can_use_wallet(1)))) && is_swamp_poisoned"
+    "Boat Ride": "((soul_npc(SOUL_NPC_TOURIST_CENTER) && event(PICTURE_SWAMP)) || (event(KOUME) && !setting(erIndoorsExtra) && can_use_wallet(1))) && is_swamp_poisoned"
   locations:
     "Tourist Information Pictobox": "event(KOUME) && is_swamp_poisoned"
     "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared"
