@@ -47,7 +47,7 @@
   exits:
     "Swamp Front": "true"
     "Swamp Water Near Witch": "true"
-    "Swamp Water Near Spider House": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && cross_poison_swamp)"
+    "Swamp Water Near Spider House": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && (cross_poison_swamp)"
   events:
     SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
 
@@ -79,7 +79,7 @@
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Water Near Deku Palace": "cross_poison_swamp"
-    "Swamp Water Near Tourist": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && cross_poison_swamp)"
+    "Swamp Water Near Tourist": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && (cross_poison_swamp)"
     "Near Swamp Spider House": "is_tall || can_use_nayru || (has_mask_goron && has(MASK_DEKU))"
     "Near Swamp Grotto": "is_tall"
   events:
