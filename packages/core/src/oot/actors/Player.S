@@ -328,9 +328,14 @@ PATCH_START 0x8083923c
   bnez  at, .+0x44
 PATCH_END
 
+Player_ShouldInitiateItemExchangeHook:
+  HOOK_CALL_RET Player_ShouldInitiateItemExchange
+  jr ra
+    nop
+
 PATCH_START 0x80839320
   lw      a1, 0x002c (sp)
-  jal     Player_ShouldInitiateItemExchange
+  jal     Player_ShouldInitiateItemExchangeHook
    or     a0, s0, zero
   beqzl   v0, .+0xd4
    lw     t4, 0x002c (sp)
