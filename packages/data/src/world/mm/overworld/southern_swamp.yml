@@ -80,7 +80,7 @@
     "Swamp Water Near Deku Palace": "cross_poison_swamp"
     "Swamp Water Near Tourist": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && cross_poison_swamp"
     "Near Swamp Spider House": "is_tall || (can_swim && (is_swamp_cleared || can_use_nayru)) || (has_mask_goron && has(MASK_DEKU))"
-    "Near Swamp Grotto": "is_tall || has_mask_goron && has(MASK_DEKU) || is_swamp_cleared && (can_swim || has_mask_goron || has_iron_boots)"
+    "Near Swamp Grotto": "is_tall || has_mask_goron && has(MASK_DEKU) || (is_swamp_cleared && (can_swim || has_mask_goron || has_iron_boots))"
   events:
     SWAMP_OCTO_RIGHT: "is_swamp_poisoned && can_use_nayru || is_tall || has_mask_goron"
 
