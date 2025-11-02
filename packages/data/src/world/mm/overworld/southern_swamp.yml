@@ -72,7 +72,7 @@
   exits:
     "Swamp Water Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (cross_poison_swamp)"
     "Swamp Water Near Spider House": "cross_poison_swamp"
-    "Swamp Back": "is_tall || (can_swim && can_use_nayru) || (has_mask_goron && has(MASK_DEKU)) || (can_swim && (is_swamp_cleared) || has_iron_boots || has_mask_goron))"
+    "Swamp Back": "is_tall || (can_swim && can_use_nayru) || (has_mask_goron && has(MASK_DEKU)) || (can_swim && is_swamp_cleared || has_iron_boots || has_mask_goron))"
 
 "Swamp Water Near Spider House":
   region: SOUTHERN_SWAMP
@@ -97,8 +97,8 @@
     SOUTHERN_SWAMP_HIVE: "can_hookshot || has_arrows || can_use_deku_bubble || (has_hover_boots && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU))))"
   locations:
   "Southern Swamp Hive": "is_swamp_poisoned && event(SOUTHERN_SWAMP_HIVE) && (can_swim_or_sink || is_tall || has_mask_goron)"
-  "Southern Swamp Rupee 1": "true"
-  "Southern Swamp Rupee 2": "true"
+  "Southern Swamp Rupee 1": "is_swamp_poisoned"
+  "Southern Swamp Rupee 2": "is_swamp_poisoned"
 
 "Swamp Near Potion Shop":
   region: SOUTHERN_SWAMP
