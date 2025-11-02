@@ -9,7 +9,7 @@
     MEET_KOUME: "soul_npc(SOUL_NPC_KOUME_KOTAKE)"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
-    "Swamp Potion Shop Kotake": "soul_npc(SOUL_NPC_KOUME_KOTAKE)"
+    "Swamp Potion Shop Kotake": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && event(SWAMP_KOTAKE) && (second_day || final_day)"
     "Woods of Mystery Grass SW 1": "first_day"
     "Woods of Mystery Grass SW 2": "first_day"
     "Woods of Mystery Grass S 1": "true"

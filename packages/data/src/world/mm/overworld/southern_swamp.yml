@@ -36,8 +36,6 @@
     "Southern Swamp Grass Front 10": "true"
     "Southern Swamp Grass Front 11": "true"
     "Southern Swamp Grass Front 12": "true"
-    "Southern Swamp Rupee 1": "can_swim || has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
-    "Southern Swamp Rupee 2": "can_swim || has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
 
 
 "Swamp Water Near Tourist":
@@ -110,6 +108,7 @@
     "Woods of Mystery": "true"
   events:
     SOUTHERN_SWAMP_HIVE: "can_use_deku_bubble || (has_hover_boots && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU))))"
+    SWAMP_KOTAKE: "(second_day || final_day)"
   locations:
     "Southern Swamp Pot 1": "true"
     "Southern Swamp Pot 2": "true"
@@ -227,11 +226,17 @@
   region: ENTRANCE
   exits:
     "Swamp Near Potion Shop": "true"
+    "Kotake Reward": "event(MEET_KOUME) && first_day"
   locations:
     "Swamp Potion Shop Item 1": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 2": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0e) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 3": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0f) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Rupee": "true"
+
+"Kotake Reward":
+  region: NONE
+  locations:
+   "Swamp Potion Shop Kotake": "true"
 
 "Owl Swamp":
   region: SOUTHERN_SWAMP
