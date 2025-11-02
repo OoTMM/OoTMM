@@ -72,7 +72,7 @@
   exits:
     "Swamp Water Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (cross_poison_swamp)"
     "Swamp Water Near Spider House": "cross_poison_swamp"
-    "Swamp Back": "is_tall || (can_swim && can_use_nayru) || (has_mask_goron && has(MASK_DEKU)) || (can_swim && is_swamp_cleared || has_iron_boots || has_mask_goron))"
+    "Swamp Back": "is_tall || (can_swim && can_use_nayru) || (has_mask_goron && has(MASK_DEKU)) || (can_swim && is_swamp_cleared) || has_iron_boots || has_mask_goron))"
 
 "Swamp Water Near Spider House":
   region: SOUTHERN_SWAMP
