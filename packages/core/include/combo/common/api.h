@@ -142,6 +142,7 @@ void DisplayTextBox(PlayState* play, u16 textId);
 void DisplayTextBox2(PlayState* play, u16 textId);
 void DisplayTextBox3(PlayState* play, Actor* actor, u16 textId);
 
+void Player_UpdateBottleHeld(PlayState* play, Player* this, s32 item, s32 itemAction);
 void DrawLink(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data);
 
 int Actor_OfferGetItem(Actor* actor, PlayState* play, s16 itemId, float a, float b);
@@ -196,6 +197,7 @@ u8 AddItem(PlayState* play, u8 itemId);
 u8 AddItemWithIcon(PlayState* play, Player* link, const GetItem* giEntry);
 u8 GetItemCollectBehavior(s16 itemId);
 void Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem);
+void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 button);
 void Interface_SetDoAction(PlayState* play, u16 action);
 void Interface_LoadActionLabelB(PlayState* play, u16 action);
 

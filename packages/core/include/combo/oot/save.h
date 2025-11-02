@@ -451,7 +451,8 @@ typedef struct
     u32 chestGameKey:1;
     u32 spinUpgrade:1;
     u32 rutoLetterUsed:2;
-    u32 unused:3;
+    u32 oddPotion:1;
+    u32 unused:2;
 }
 OotExtraFlags;
 

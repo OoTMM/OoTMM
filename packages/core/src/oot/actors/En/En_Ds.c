@@ -6,12 +6,43 @@
 
 #define PRICE (gComboConfig.prices[PRICES_OOT_MERCHANTS + 0x02])
 
+static s32 sGaveMagicMushroom = 0;
+
+int EnDs_HasGivenItem(Actor* this)
+{
+    if (Actor_HasParentZ(this))
+    {
+        gOotExtraFlags.oddPotion = 1;
+        return 1;
+    }
+    return 0;
+}
+
+PATCH_CALL(0x80aabc28, EnDs_HasGivenItem);
+
 void EnDs_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
-    if (!(GET_PLAYER(play)->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
+    Player* player = GET_PLAYER(play);
+    if (!(player->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
-    comboRemoveTradeItemAdult(XITEM_OOT_ADULT_ODD_MUSHROOM);
-    comboGiveItemNpc(actor, play, gi, NPC_OOT_TRADE_ODD_POTION, a, b);
+    if (sGaveMagicMushroom)
+    {
+        Inventory_UpdateBottleItem(play, ITEM_BOTTLE_EMPTY, player->heldItemButton);
+    }
+    else
+    {
+        comboRemoveTradeItemAdult(XITEM_OOT_ADULT_ODD_MUSHROOM);
+    }
+
+
+    int npcId = NPC_OOT_TRADE_ODD_POTION;
+    if (gOotExtraFlags.oddPotion)
+    {
+        gi = GI_OOT_RUPEE_PURPLE;
+        npcId = -1;
+    }
+
+    comboGiveItemNpc(actor, play, gi, npcId, a, b);
 }
 
 PATCH_CALL(0x80aabcec, EnDs_GiveItem);
@@ -119,8 +150,10 @@ static int EnDs_GetPlayerExchangingItemId(PlayState* play)
     if (exchangingItemId == EXCH_CUSTOM_ITEM_MAGIC_MUSHROOM)
     {
         /* Treat MM Mushroom as odd potion */
+        sGaveMagicMushroom = 1;
         return EXCH_ITEM_ODD_MUSHROOM;
     }
+    sGaveMagicMushroom = 0;
     return exchangingItemId;
 }
 

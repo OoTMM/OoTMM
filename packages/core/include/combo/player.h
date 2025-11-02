@@ -51,7 +51,6 @@ s32 Player_SetCsAction(PlayState* play, Actor* csActor, u8 csAction);
 void Player_DrawHookshotReticle(PlayState* play, Player* player, f32 distance);
 void Player_UpdateForm(Player* this, PlayState* play);
 s32 func_80123810(PlayState* play);
-void Player_UpdateBottleHeld(PlayState* play, Player* this, u8 itemId, s8 itemAction);
 void Player_TryUpdateForm(Player* this, PlayState* play);
 #endif
 

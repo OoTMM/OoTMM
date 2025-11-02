@@ -328,6 +328,37 @@ PATCH_START 0x8083923c
   bnez  at, .+0x44
 PATCH_END
 
+PATCH_START 0x80839320
+  lw      a1, 0x002c (sp)
+  jal     Player_ShouldInitiateItemExchange
+   or     a0, s0, zero
+  beqzl   v0, .+0xd4
+   lw     t4, 0x002c (sp)
+  lb      v0, 0x0683 (s0)
+  addiu   a0, zero, 0x0004
+  lw      v1, 0x0684 (s0)
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
 PATCH_START 0x8007B974
   or      a0, s0, zero
   lui     a2, 0x800f
