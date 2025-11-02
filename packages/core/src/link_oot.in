@@ -32,6 +32,7 @@ Gfx_SetupDL_39Ptr = 0x8007e63c;
 Gfx_SetupDL_56Ptr = 0x8007e9c8;
 
 CutsceneFlags_Get = 0x8005991c;
+Player_UpdateBottleHeld = 0x80079854;
 DrawLink = 0x80079f48;
 Audio_SetCutsceneFlag = 0x800c75dc;
 Audio_GetActiveSeqId = 0x800cab18;
@@ -301,6 +302,7 @@ AddItem = 0x8006fdcc;
 Player_AddItemWithIcon = 0x8083c590;
 GetItemCollectBehavior = 0x80071420;
 Inventory_ReplaceItem = 0x800719e0;
+Inventory_UpdateBottleItem = 0x80071b7c;
 Interface_SetDoAction = 0x80071E6C;
 Interface_LoadActionLabelB = 0x80071FF8;
 

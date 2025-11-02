@@ -1118,6 +1118,47 @@ s32 Player_ShouldAlwaysExchangeBottle(s8 itemAction)
     }
 }
 
+s32 Player_ShouldInitiateItemExchange(Player* this, s32 exchangingItemId)
+{
+    if (this->talkActor == NULL)
+    {
+        return 0;
+    }
+
+    if (this->exchangeItemId == EXCH_ITEM_MAGIC_BEAN && this->itemAction != 0x2e) /* PLAYER_IA_MAGIC_BEAN */
+    {
+        return 0;
+    }
+
+    if (this->exchangeItemId == exchangingItemId)
+    {
+        return 1;
+    }
+
+    if (this->exchangeItemId == EXCH_ITEM_BOTTLE_BLUE_FIRE)
+    {
+        return 1;
+    }
+
+    if (this->exchangeItemId == EXCH_ITEM_BOTTLE_POE && this->itemAction == 0x23) /* PLAYER_IA_BOTTLE_BIG_POE */
+    {
+        return 1;
+    }
+
+    /* why? doesn't this already return false above? */
+    if (this->exchangeItemId == EXCH_ITEM_MAGIC_BEAN && this->itemAction == 0x21) /* PLAYER_IA_BOTTLE_BUG */
+    {
+        return 1;
+    }
+
+    if (this->exchangeItemId == EXCH_ITEM_ODD_MUSHROOM && exchangingItemId == EXCH_CUSTOM_ITEM_MAGIC_MUSHROOM)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
 s32 Player_CustomActionToBottleType(Player* this, s32 itemAction)
 {
     switch (itemAction)

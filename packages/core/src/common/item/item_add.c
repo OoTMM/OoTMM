@@ -931,14 +931,22 @@ static int addItemBottleRefillOot(PlayState* play, u8 itemId, s16 gi, u16 param)
     if (gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE) && gOotExtraItems.bottleAdultSlot == ITEM_OOT_BOTTLE_EMPTY)
     {
         gOotExtraItems.bottleAdultSlot = itemId;
-        reloadSlotOot(play, ITS_OOT_TRADE_ADULT);
+        if (gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_OOT_BOTTLE_EMPTY)
+        {
+            gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = gOotExtraItems.bottleAdultSlot;
+            reloadSlotOot(play, ITS_OOT_TRADE_ADULT);
+        }
         return 0;
     }
 
     if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE) && gOotExtraItems.bottleChildSlot == ITEM_OOT_BOTTLE_EMPTY)
     {
         gOotExtraItems.bottleChildSlot = itemId;
-        reloadSlotOot(play, ITS_OOT_TRADE_CHILD);
+        if (gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_OOT_BOTTLE_EMPTY)
+        {
+            gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = gOotExtraItems.bottleChildSlot;
+            reloadSlotOot(play, ITS_OOT_TRADE_CHILD);
+        }
         return 0;
     }
 
