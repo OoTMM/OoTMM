@@ -1125,9 +1125,9 @@ s32 Player_ShouldInitiateItemExchange(Player* this, s32 exchangingItemId)
         return 0;
     }
 
-    if (this->exchangeItemId == EXCH_ITEM_MAGIC_BEAN && this->itemAction == 0x21)
+    if (this->exchangeItemId == EXCH_ITEM_MAGIC_BEAN && this->heldItemAction != 0x2e) /* PLAYER_IA_MAGIC_BEAN */
     {
-        return 1;
+        return 0;
     }
 
     if (this->exchangeItemId == exchangingItemId)
@@ -1140,12 +1140,13 @@ s32 Player_ShouldInitiateItemExchange(Player* this, s32 exchangingItemId)
         return 1;
     }
 
-    if (this->exchangeItemId == EXCH_ITEM_BOTTLE_POE && this->itemAction == 0x23) /* PLAYER_IA_BOTTLE_BIG_POE */
+    if (this->exchangeItemId == EXCH_ITEM_BOTTLE_POE && this->heldItemAction == 0x23) /* PLAYER_IA_BOTTLE_BIG_POE */
     {
         return 1;
     }
 
-    if (this->exchangeItemId != EXCH_ITEM_MAGIC_BEAN && this->itemAction == 0x2e)
+    /* why? doesn't this already return false above? */
+    if (this->exchangeItemId == EXCH_ITEM_MAGIC_BEAN && this->heldItemAction == 0x21) /* PLAYER_IA_BOTTLE_BUG */
     {
         return 1;
     }
