@@ -63,12 +63,14 @@
   exits:
     "Swamp Near Frog": "can_swim || is_tall"
     "Swamp Water Near Witch": "can_swim_or_sink || is_tall || has_mask_goron"
-    "Swamp Water Near Deku Palace": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (cross_poison_swamp)"
+    "Swamp Water Near Deku Palace": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && cross_poison_swamp"
 
 "Swamp Water Near Deku Palace":
   region: SOUTHERN_SWAMP
+  events:
+  SWAMP_OCTO_LEFT: "(can_use_nayru && (is_tall || has_mask_goron)) || (can_use_din_raw && (is_tall || has_mask_goron))"
   exits:
-    "Swamp Water Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (cross_poison_swamp)"
+    "Swamp Water Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && cross_poison_swamp"
     "Swamp Water Near Spider House": "cross_poison_swamp"
     "Swamp Back": "is_tall || (can_swim && can_use_nayru) || (has_mask_goron && has(MASK_DEKU)) || (is_swamp_cleared && (can_swim_or_sink || has_mask_goron))"
 
@@ -78,23 +80,22 @@
     "Swamp Water Near Deku Palace": "cross_poison_swamp"
     "Swamp Water Near Tourist": "(is_swamp_cleared || event(SWAMP_OCTO_RIGHT)) && cross_poison_swamp"
     "Near Swamp Spider House": "is_tall || (can_swim && (is_swamp_cleared || can_use_nayru)) || (has_mask_goron && has(MASK_DEKU))"
-    "Near Swamp Grotto": "(can_swim && is_swamp_cleared) || is_tall || has_mask_goron || has_iron_boots"
+    "Near Swamp Grotto": "is_tall || has_mask_goron && has(MASK_DEKU) || is_swamp_cleared && (can_swim || has_mask_goron || has_iron_boots)"
   events:
-    SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
+    SWAMP_OCTO_RIGHT: "is_swamp_poisoned && can_use_nayru || is_tall || has_mask_goron"
 
 "Swamp Near Frog":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "(event(SWAMP_OCTO_LEFT) || is_swamp_cleared) && (has(MASK_DEKU) || has_hover_boots || (is_tall && (can_use_nayru || is_swamp_cleared)))"
     "Swamp Near Potion Shop": "has(MASK_DEKU) || has_hover_boots"
-    "Swamp Back": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) || has(MASK_DEKU) || has_hover_boots"
-    "Swamp Water Near Frog": "can_swim_or_sink || is_tall || has_mask_goron || cross_poison_swamp"
+    "Swamp Back": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (has(MASK_DEKU) || has_hover_boots)"
+    "Swamp Water Near Frog": "can_swim_or_sink || is_tall || has_mask_goron"
   events:
     FROG_3: "has(MASK_DON_GERO)"
     SWAMP_OCTO_LEFT: "is_swamp_poisoned && kill_big_octo_close"
     SOUTHERN_SWAMP_HIVE: "can_hookshot || has_arrows || can_use_deku_bubble || (has_hover_boots && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU))))"
   locations:
-  "Southern Swamp Hive": "is_swamp_poisoned && event(SOUTHERN_SWAMP_HIVE) && (can_swim_or_sink || is_tall || has_mask_goron)"
+  "Southern Swamp Hive": "is_swamp_poisoned && event(SOUTHERN_SWAMP_HIVE) && (has(MASK_DEKU) || has_hover_boots)"
   "Southern Swamp Rupee 1": "is_swamp_poisoned"
   "Southern Swamp Rupee 2": "is_swamp_poisoned"
 
@@ -142,11 +143,12 @@
   events:
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "is_swamp_poisoned && has(PICTOGRAPH_BOX) && soul_octorok"
+    SWAMP_OCTO_LEFT: "has_arrows || can_use_nayru || can_hookshot_short && has_hover_boots"
   exits:
     "Swamp Water Near Deku Palace": "cross_poison_swamp"
-    "Swamp Near Frog": "has(MASK_DEKU) || has_hover_boots || is_tall || has_iron_boots || (can_swim && can_use_nayru) || (is_swamp_cleared && can_swim)"
+    "Swamp Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) || has(MASK_DEKU) || has_hover_boots"
     "Deku Palace Front": "true"
-    "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
+    "Near Swamp Spider House": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Back": "(is_swamp_cleared && (can_swim_or_sink || is_tall || has_hover_boots || has_mask_goron || has(MASK_DEKU))) || short_hook_anywhere"
     "Swamp Canopy Front": "short_hook_anywhere"
   locations:
@@ -165,6 +167,7 @@
   region: SOUTHERN_SWAMP
   events:
     MUSHROOM: "has(MASK_SCENTS)"
+    SWAMP_OCTO_RIGHT: "has_arrows || can_use_nayru"
   exits:
     "Swamp Water Near Spider House": "cross_poison_swamp"
     "Near Swamp Spider House": "has(MASK_DEKU) || can_hookshot_short || has_hover_boots"
