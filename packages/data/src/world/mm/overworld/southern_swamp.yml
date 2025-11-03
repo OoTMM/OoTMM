@@ -229,7 +229,7 @@
   region: ENTRANCE
   exits:
     "Swamp Near Potion Shop": "true"
-    "Kotake Reward": "event(MEET_KOUME) && first_day"
+    "Kotake Reward": "event(MEET_KOUME_DAY1) && first_day"
   locations:
     "Swamp Potion Shop Item 1": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 2": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0e) && (first_day || event(MEET_KOUME))"
