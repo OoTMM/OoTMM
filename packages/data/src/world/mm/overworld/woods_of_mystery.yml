@@ -6,10 +6,11 @@
     "Near Woods of Mystery Grotto": "second_day"
   events:
     KOUME: "soul_npc(SOUL_NPC_KOUME_KOTAKE) && has_red_or_blue_potion"
+    MEET_KOUME_DAY1: "soul_npc(SOUL_NPC_KOUME_KOTAKE) && first_day"
     MEET_KOUME: "soul_npc(SOUL_NPC_KOUME_KOTAKE)"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
-    "Swamp Potion Shop Kotake": "soul_npc(SOUL_NPC_KOUME_KOTAKE)"
+    "Swamp Potion Shop Kotake": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && event(SWAMP_KOTAKE) && (second_day || final_day)"
     "Woods of Mystery Grass SW 1": "first_day"
     "Woods of Mystery Grass SW 2": "first_day"
     "Woods of Mystery Grass S 1": "true"

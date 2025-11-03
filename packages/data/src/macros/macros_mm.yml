@@ -157,7 +157,7 @@
 "has_sword": "has_b_sword || has(GREAT_FAIRY_SWORD)"
 "has_weapon": "has_sword || can_hammer"
 
-"kill_big_octo_close": "has_mask_zora || (can_use_nayru && can_hookshot_short) || can_use_din || has_arrows"
+"kill_big_octo_close": "has_mask_zora || can_use_nayru || can_use_din || has_arrows || can_hookshot_short"
 "gorman_gates_moved": "event(ALIENS) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_05_30)"
 
 # Bombchu
@@ -235,8 +235,11 @@
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && is_ocean_cleared)"
 
+#Terrain
+
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
+"cross_poison_swamp": "is_tall || has_mask_goron || (can_swim && (is_swamp_cleared || can_use_nayru)) || has_iron_boots"
 
 # Hot water
 "OLD_hot_water(winter, spring)": "has_bottle && ((event(winter) && event(spring)) || (is_winter && event(winter)) || (is_spring && event(spring)))"
