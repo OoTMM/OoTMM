@@ -68,7 +68,7 @@
 "Swamp Water Near Deku Palace":
   region: SOUTHERN_SWAMP
   events:
-  SWAMP_OCTO_LEFT: "is_swamp_poisoned && has_mask_zora || (is_adult && (can_use_nayru || can_use_din_raw)
+  SWAMP_OCTO_LEFT: "is_swamp_poisoned && has_mask_zora || (is_adult && (can_use_nayru || can_use_din_raw)"
   exits:
     "Swamp Water Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && cross_poison_swamp"
     "Swamp Water Near Spider House": "cross_poison_swamp"
