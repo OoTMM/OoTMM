@@ -82,7 +82,7 @@
     "Near Swamp Spider House": "is_tall || (can_swim && (is_swamp_cleared || can_use_nayru)) || (has_mask_goron && has(MASK_DEKU))"
     "Near Swamp Grotto": "is_tall || (has_mask_goron && has(MASK_DEKU)) || (is_swamp_cleared && (can_swim || has_mask_goron || has_iron_boots))"
   events:
-    SWAMP_OCTO_RIGHT: "is_swamp_poisoned && (has_mask_zora || (is_adult && (has_nayru || can_use_din_raw)))"
+    SWAMP_OCTO_RIGHT: "is_swamp_poisoned && (has_mask_zora || (is_adult && (has_nayru || can_use_din_raw))"
 
 "Swamp Near Frog":
   region: SOUTHERN_SWAMP
