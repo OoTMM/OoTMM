@@ -191,7 +191,7 @@
 "MQ Deku Tree Water Room Back":
   dungeon: DT
   exits:
-    "MQ Deku Tree Water Room Front": "can_swim || (is_child && has_shield) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL) || (is_adult && can_longshot) hookshot_anywhere || climb_anywhere" #Can longshot the chest as both child and adult, but child cannot see the chest through the spike thing but can still longshot it. Adult can see it just fine. So for now, putting adult in as logic but can easily just make can_longshot if we want child to be able to cross without seeing the chest.
+    "MQ Deku Tree Water Room Front": "can_swim || (is_child && has_shield) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL) || (is_adult && can_longshot) || hookshot_anywhere || climb_anywhere" #Can longshot the chest as both child and adult, but child cannot see the chest through the spike thing but can still longshot it. Adult can see it just fine. So for now, putting adult in as logic but can easily just make can_longshot if we want child to be able to cross without seeing the chest.
     "MQ Deku Tree Water Room Door to Room After Water Room": "climb_anywhere || hookshot_anywhere || can_damage" #Need to kill the skultulla blocking the way.
   events:
     MQ_DEKU_WATER_TORCHES: "has_fire"
@@ -290,7 +290,7 @@
 "MQ Deku Tree Pre-Boss Room Water Section":
   dungeon: DT
   exits:
-    "MQ Deku Tree Basement Ledge": "can_swim || (has_iron_boots && hookshot_anywhere)"
+    "MQ Deku Tree Basement Ledge": "can_swim || (has_iron_boots && can_hookshot)" #These vines are hookshot-able.
     "Deku Tree Before Boss": "can_swim_or_sink"
   locations:
     "MQ Deku Tree Heart Before Boss 1": "can_swim_or_sink"
@@ -299,7 +299,7 @@
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
-    "MQ Deku Tree Basement Ledge": "hookshot_anywhere || climb_anywhere"
+    "MQ Deku Tree Basement Ledge": "can_hookshot || climb_anywhere" #These vines are hookshot-able.
     "MQ Deku Tree Pre-Boss Room Water Section": "can_swim_or_sink"
     "Deku Tree Boss": "event(DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE)"
   events:
