@@ -113,7 +113,7 @@
 "Bottom of the Well Coffin Room":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "(event(BOTW_MQ_DRAIN_WATER) || can_swim || (has_iron_boots && hookshot_anywhere)) && small_keys_botw(2)" #Swimming needs normal dive for this direction, noting for action shuffle. Hookshot does not reach the vines.
+    "Bottom of the Well Main": "(event(BOTW_MQ_DRAIN_WATER) || (has_iron_boots && hookshot_anywhere) || (can_swim && (is_child || can_dive_small || hookshot_anywhere))) && small_keys_botw(2)" #Swimming needs normal dive OR hookshot anywhere only for this direction as adult, noting for action shuffle. Hookshot does not reach the vines.
   locations:
     "MQ Bottom of the Well GS Coffin Room": "gs && can_damage_skull"
     "MQ Bottom of the Well Heart Coffin 1": "has_fire_or_sticks"
