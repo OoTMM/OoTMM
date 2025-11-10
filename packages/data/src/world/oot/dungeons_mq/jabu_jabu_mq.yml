@@ -244,7 +244,7 @@
 "Jabu-Jabu Basement Side Room Entrance Side":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Ruto Section Bottom Floor": "can_swim && event(JABU_MQ_BASEMENT_SIDE_BUTTON)"
+    "Jabu-Jabu Ruto Section Bottom Floor": "(can_swim || (is_adult && event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && climb_anywhere)) && event(JABU_MQ_BASEMENT_SIDE_BUTTON)" #Button is temporary flag. Need to swim or climb hookshot platform (and get to other side again with climb anywhere) as adult to get out.
     "Jabu-Jabu Basement Side Room GS Side": "has_hover_boots || (event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && (can_hookshot || can_swim)) || climb_anywhere"
   events:
     JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
