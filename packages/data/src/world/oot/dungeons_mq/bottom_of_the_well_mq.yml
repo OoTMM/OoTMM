@@ -27,7 +27,7 @@
     "Bottom of the Well Main Room Center": "event(BOTW_MQ_CENTER_GATES_LOWERED)"
     "Bottom of the Well Main Room Center Switch Corner": "has_explosives_or_hammer || climb_anywhere || hookshot_anywhere"
     "Bottom of the Well Basement": "true"
-    "Bottom of the Well Coffin Room": "(event(BOTW_MQ_DRAIN_WATER) || can_swim || (has_iron_boots && hookshot_anywhere)) && small_keys_botw(2)" #Swimming needs normal dive OR hookshot only for this direction, noting for action shuffle.
+    "Bottom of the Well Coffin Room": "(event(BOTW_MQ_DRAIN_WATER) || (has_iron_boots && hookshot_anywhere) || (can_swim && (is_child || can_dive_small || can_hookshot))) && small_keys_botw(2)" #Swimming needs normal dive OR hookshot only for this direction as adult, noting for action shuffle.
     "Bottom of the Well Before Dead Hand": "event(BOTW_MQ_DRAIN_WATER) && is_child"
     "Bottom of the Well Main Side Room Before Pit": "is_child"
   events:
