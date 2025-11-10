@@ -31,24 +31,30 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Main Elevator Room Upper": "true"
-    "Jabu-Jabu Main Elevator Room Lower Switch Alcove": "is_child || (is_adult && can_dive_small)" #Adult cannot dive to the alcove without a scale.
-    "Jabu Jabu Basement Loop to Main Elevator": "event(JABU_MQ_WATER_SPOUTS)"
+    "Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge": "can_swim && (is_child || (is_adult && can_dive_small))" #Adult cannot dive to the alcove without a scale. However, can hookshot through Jabu's flesh to the compass chest without bronze scale (only irons, and zora tunic?). Can be added as a glitch.
+    "Jabu Jabu Basement Loop to Main Elevator West Side": "event(JABU_MQ_WATER_SPOUTS)"
+  events:
+    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || has_bombchu || can_longshot || (has_iron_boots && can_hookshot)"
   locations:
     "MQ Jabu-Jabu Second Room B1 Chest": "true"
     "MQ Jabu-Jabu Wonder Item Elevator Cow": "can_use_slingshot"
-"Jabu-Jabu Main Elevator Room Lower Switch Alcove":
+    "MQ Jabu-Jabu Rupee Bottom": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+    "MQ Jabu-Jabu Rupee Middle": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+    "MQ Jabu-Jabu Rupee Top": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+"Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main Elevator Room Lower": "is_child || (is_adult && can_dive_small)" #Adult cannot dive to the alcove without a scale.
+    "Jabu-Jabu Main Elevator Room Lower": "(is_child && can_swim) || (is_adult && can_dive_small)" #Adult cannot dive to the alcove without a scale.
   events:
     JABU_MQ_UNDERWATER_ALCOVE_SWITCH: "true"
+    JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH: "can_hit_triggers_distance || can_hookshot || has_bombchu"
   locations:
-    "MQ Jabu-Jabu Compass Chest": "can_hit_triggers_distance || can_hookshot || has_bombchu"
+    "MQ Jabu-Jabu Compass Chest": "event(JABU_MQ_MAIN_ELEVATOR_COMPASS_CHEST_COW_SWITCH)"
     "MQ Jabu-Jabu Pot Underwater Alcove 1": "true"
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "true"
-    "MQ Jabu-Jabu Rupee Bottom": "can_dive_big"
-    "MQ Jabu-Jabu Rupee Middle": "can_dive_small"
-    "MQ Jabu-Jabu Rupee Top": "is_child || can_dive_small"
+    "MQ Jabu-Jabu Rupee Bottom": "(can_swim && can_dive_big) || can_boomerang"
+    "MQ Jabu-Jabu Rupee Middle": "(can_swim && can_dive_small) || can_boomerang"
+    "MQ Jabu-Jabu Rupee Top": "(can_swim && (is_child || can_dive_small)) || can_boomerang"
 "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss":
   dungeon: JJ
   exits:
@@ -78,8 +84,8 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Vanilla Ruto Falling Room": "true"
-    "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
-    "Jabu Jabu Basement Loop to Main Elevator": "soul_ruto || can_play_elegy"
+    "Jabu-Jabu Basement Side Room Entrance Side": "event(JABU_TENTACLE_RED)"
+    "Jabu Jabu Basement Loop to Main Elevator East Side": "soul_ruto || can_play_elegy"
     "Jabu-Jabu Basement Ledge Before Big Octo": "climb_anywhere"
   locations:
     "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot"
@@ -87,20 +93,30 @@
     "MQ Jabu-Jabu Grass Main Room Bottom 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 2": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 3": "can_cut_grass"
-"Jabu Jabu Basement Loop to Main Elevator":
+"Jabu Jabu Basement Loop to Main Elevator West Side":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Ruto Section Bottom Floor": "true"
     "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)" #We are going to need a buffer region here for behind the water spout. You can use Hover Boots with Bunny Hood or backwalking to get through the spout, or climb anywhere. There is not another one blocking the door on this side. It should also probably be a trick, even with climb anywhere.
+    "Jabu Jabu Basement Loop to Main Elevator East Side": "can_swim || can_hookshot || climb_anywhere || has_hover_boots"
   events:
     JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinolfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
   locations:
     "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
+    "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
+"Jabu Jabu Basement Loop to Main Elevator East Side":
+  dungeon: JJ
+  exits:
+    "Jabu Jabu Basement Loop to Main Elevator West Side": "true" #Can climb the vines on the wall from SoT block, and jump to west side as child, no items
+    "Jabu-Jabu Ruto Section Bottom Floor": "true"
+  events:
+    JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinolfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
+  locations:
     "MQ Jabu-Jabu SoT Room Lower Chest": "true"
     "MQ Jabu-Jabu Pot Boomerang Room 1": "true"
     "MQ Jabu-Jabu Pot Boomerang Room 2": "true"
-    "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
     "MQ Jabu-Jabu Grass Boomerang Room": "can_cut_grass"
+    "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
+    "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
 "Jabu-Jabu Basement Ledge Before Big Octo":
   dungeon: JJ
   exits:
@@ -225,15 +241,25 @@
     "Jabu-Jabu Back Forked Paths": "true"
   locations:
     "MQ Jabu-Jabu GS Back": "gs && ((climb_anywhere && (can_hammer || can_use_mask_blast)) || (has_explosives && can_collect_distance))"
-"Jabu-Jabu Basement Side Room":
+"Jabu-Jabu Basement Side Room Entrance Side":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Ruto Section Bottom Floor": "event(JABU_MQ_BASEMENT_SIDE_BUTTON)"
+    "Jabu-Jabu Ruto Section Bottom Floor": "(can_swim || (is_adult && event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && climb_anywhere)) && event(JABU_MQ_BASEMENT_SIDE_BUTTON)" #Button is temporary flag. Need to swim or climb hookshot platform (and get to other side again with climb anywhere) as adult to get out.
+    "Jabu-Jabu Basement Side Room GS Side": "has_hover_boots || (event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && (can_hookshot || can_swim)) || climb_anywhere"
   events:
     JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
-    JABU_MQ_BASEMENT_SIDE_BUTTON: "true" #Listed here for action shuffle
+    JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
   locations:
-    "MQ Jabu-Jabu GS Basement Side Room": "gs && ((event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && can_collect_distance) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot) || (climb_anywhere && can_damage_skull))"
+    "MQ Jabu-Jabu GS Basement Side Room": "gs && has_fire_arrows && can_longshot"
+"Jabu-Jabu Basement Side Room GS Side":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Basement Side Room Entrance Side": "can_swim || climb_anywhere" #Hovers cannot make it back, it seems
+  events:
+    JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
+    JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
+  locations:
+    "MQ Jabu-Jabu GS Basement Side Room": "gs && (can_collect_distance || (climb_anywhere && can_damage_skull))"
 "Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
