@@ -758,8 +758,6 @@ static const Gfx sListLoaderPotCustom[] = {
     gsSPEndDisplayList(),
 };
 
-u8 gHalloweenTexturesFlowerPots;
-EXPORT_SYMBOL(HALLOWEEN_TEXTURES, gHalloweenTexturesFlowerPots);
 
 static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, PlayState* play)
 {
@@ -778,11 +776,11 @@ static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, PlayState* play)
         switch (type)
         {
         case CSMC_BOSS_KEY: customTextureAddr = CUSTOM_POT_BOSSKEY_SIDE_ADDR; break;
-        case CSMC_MAJOR: customTextureAddr = gHalloweenTexturesFlowerPots ? CUSTOM_POT_MAJOR_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_MAJOR_SIDE_ADDR; break;
-        case CSMC_KEY: customTextureAddr = gHalloweenTexturesFlowerPots ? CUSTOM_POT_KEY_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_KEY_SIDE_ADDR; break;
-        case CSMC_SPIDER: customTextureAddr = gHalloweenTexturesFlowerPots ? CUSTOM_POT_SPIDER_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_SPIDER_SIDE_ADDR; break;
-        case CSMC_FAIRY: customTextureAddr = gHalloweenTexturesFlowerPots ? CUSTOM_POT_FAIRY_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_FAIRY_SIDE_ADDR; break;
-        case CSMC_HEART: customTextureAddr = gHalloweenTexturesFlowerPots ? CUSTOM_POT_HEART_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_HEART_SIDE_ADDR; break;
+        case CSMC_MAJOR: customTextureAddr = CUSTOM_POT_MAJOR_SIDE_ADDR; break;
+        case CSMC_KEY: customTextureAddr = CUSTOM_POT_KEY_SIDE_ADDR; break;
+        case CSMC_SPIDER: customTextureAddr = CUSTOM_POT_SPIDER_SIDE_ADDR; break;
+        case CSMC_FAIRY: customTextureAddr = CUSTOM_POT_FAIRY_SIDE_ADDR; break;
+        case CSMC_HEART: customTextureAddr = CUSTOM_POT_HEART_SIDE_ADDR; break;
         case CSMC_SOUL: customTextureAddr = CUSTOM_POT_SOUL_SIDE_ADDR; break;
         case CSMC_MAP_COMPASS: customTextureAddr = CUSTOM_POT_MAP_SIDE_ADDR; break;
         default: UNREACHABLE(); break;

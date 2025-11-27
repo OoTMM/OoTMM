@@ -422,10 +422,6 @@ class CosmeticsPass {
       this.patchSymbol('NIGHT_BGM', new Uint8Array([0x01]));
     }
 
-    if(c.halloween) {
-      this.patchSymbol('HALLOWEEN_TEXTURES', new Uint8Array([0x01]));
-    }
-
     /* Patch models */
     await this.patchOotChildModel();
     await this.patchOotAdultModel();
