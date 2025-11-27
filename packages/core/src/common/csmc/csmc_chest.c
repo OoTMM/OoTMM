@@ -13,7 +13,6 @@
 #define CSMC_CHEST_HEART            0x06
 #define CSMC_CHEST_SOUL             0x07
 #define CSMC_CHEST_MAP_COMPASS      0x08
-#define CSMC_CHEST_HALLOWEEN        0x09
 
 #if defined(GAME_OOT)
 # define CHEST_TEX_NORMAL_FRONT     0x06001798
@@ -35,9 +34,6 @@ typedef struct
 }
 ChestCsmcData;
 
-u8 gHalloweenTexturesChests;
-EXPORT_SYMBOL(HALLOWEEN_TEXTURES, gHalloweenTexturesChests);
-
 static const ChestCsmcData kCsmcData[] = {
     { 0, CHEST_TEX_NORMAL_FRONT, CHEST_TEX_NORMAL_SIDE },
     { 0, CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
@@ -48,7 +44,6 @@ static const ChestCsmcData kCsmcData[] = {
     { 1, CUSTOM_CHEST_HEART_FRONT_ADDR, CUSTOM_CHEST_HEART_SIDE_ADDR },
     { 1, CUSTOM_CHEST_SOUL_FRONT_ADDR, CUSTOM_CHEST_SOUL_SIDE_ADDR },
     { 1, CUSTOM_CHEST_MAP_FRONT_ADDR, CUSTOM_CHEST_MAP_SIDE_ADDR },
-    { 1, CUSTOM_CHEST_HALLOWEEN_FRONT_ADDR, CUSTOM_CHEST_HALLOWEEN_SIDE_ADDR },
 };
 
 static int csmcChestId(s16 gi, s16 cloakGi)
@@ -58,7 +53,7 @@ static int csmcChestId(s16 gi, s16 cloakGi)
     csmcId = csmcFromItemCloaked(gi, cloakGi);
     switch (csmcId)
     {
-    case CSMC_NORMAL:       return gHalloweenTexturesChests ? CSMC_CHEST_HALLOWEEN : CSMC_CHEST_NORMAL;
+    case CSMC_NORMAL:       return CSMC_CHEST_NORMAL;
     case CSMC_BOSS_KEY:     return CSMC_CHEST_BOSS_KEY;
     case CSMC_MAJOR:        return CSMC_CHEST_MAJOR;
     case CSMC_KEY:          return CSMC_CHEST_KEY;

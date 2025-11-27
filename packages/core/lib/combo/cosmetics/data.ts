@@ -22,12 +22,6 @@ export const COSMETICS = [{
   type: 'boolean',
   default: false,
 }, {
-  key: 'halloween',
-  name: 'Enable Halloween Textures',
-  description: 'Enable Halloween-themed textures for chests, pots, crates and barrels during the month of October.<br>Will do nothing without CAMC enabled.',
-  type: 'boolean',
-  default: false,
-  }, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
   type: 'color',

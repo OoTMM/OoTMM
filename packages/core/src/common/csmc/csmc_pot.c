@@ -175,31 +175,29 @@ static void patchTextureList(Gfx* gfx, u32 vaddr)
     gfx->words.w1 = addr;
 }
 
-u8 gHalloweenTexturesPots;
-EXPORT_SYMBOL(HALLOWEEN_TEXTURES, gHalloweenTexturesPots);
 
 static void loadTexture(int csmcPotId)
 {
     switch (csmcPotId)
     {
     case CSMC_POT_MAJOR:
-        patchTextureList(kTexMajorSide, gHalloweenTexturesPots ? CUSTOM_POT_MAJOR_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_MAJOR_SIDE_ADDR);
+        patchTextureList(kTexMajorSide, CUSTOM_POT_MAJOR_SIDE_ADDR);
         patchTextureList(kTexMajorTop, CUSTOM_POT_MAJOR_TOP_ADDR);
         break;
     case CSMC_POT_SPIDER:
-        patchTextureList(kTexSpiderSide, gHalloweenTexturesPots ? CUSTOM_POT_SPIDER_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_SPIDER_SIDE_ADDR);
+        patchTextureList(kTexSpiderSide, CUSTOM_POT_SPIDER_SIDE_ADDR);
         patchTextureList(kTexSpiderTop, CUSTOM_POT_SPIDER_TOP_ADDR);
         break;
     case CSMC_POT_FAIRY:
-        patchTextureList(kTexFairySide, gHalloweenTexturesPots ? CUSTOM_POT_FAIRY_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_FAIRY_SIDE_ADDR);
+        patchTextureList(kTexFairySide, CUSTOM_POT_FAIRY_SIDE_ADDR);
         patchTextureList(kTexFairyTop, CUSTOM_POT_FAIRY_TOP_ADDR);
         break;
     case CSMC_POT_KEY:
-        patchTextureList(kTexKeySide, gHalloweenTexturesPots ? CUSTOM_POT_KEY_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_KEY_SIDE_ADDR);
+        patchTextureList(kTexKeySide, CUSTOM_POT_KEY_SIDE_ADDR);
         patchTextureList(kTexKeyTop, CUSTOM_POT_SPIDER_TOP_ADDR);
         break;
     case CSMC_POT_HEART:
-        patchTextureList(kTexHeartSide, gHalloweenTexturesPots ? CUSTOM_POT_HEART_HALLOWEEN_SIDE_ADDR : CUSTOM_POT_HEART_SIDE_ADDR);
+        patchTextureList(kTexHeartSide, CUSTOM_POT_HEART_SIDE_ADDR);
         patchTextureList(kTexHeartTop, CUSTOM_POT_HEART_TOP_ADDR);
         break;
     case CSMC_POT_BOSSKEY:
