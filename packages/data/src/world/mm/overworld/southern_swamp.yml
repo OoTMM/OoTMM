@@ -62,6 +62,7 @@
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Near Frog": "can_swim || is_tall"
+    "Swamp Rupee Flowers": "is_tall"
     "Swamp Water Near Witch": "can_swim_or_sink || is_tall || has_mask_goron"
     "Swamp Water Near Deku Palace": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && cross_poison_swamp"
 
@@ -88,14 +89,26 @@
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Near Potion Shop": "has(MASK_DEKU) || has_hover_boots"
-    "Swamp Back": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (has(MASK_DEKU) || has_hover_boots)"
     "Swamp Water Near Frog": "can_swim_or_sink || is_tall || has_mask_goron"
+    "Swamp Rupee Flowers": "has(MASK_DEKU) || has_hover_boots || short_hook_anywhere"
   events:
     FROG_3: "has(MASK_DON_GERO)"
     SWAMP_OCTO_LEFT: "is_swamp_poisoned && kill_big_octo_close"
     SOUTHERN_SWAMP_HIVE: "can_hookshot || has_arrows || can_use_deku_bubble || (has_hover_boots && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU))))"
   locations:
     "Southern Swamp Hive": "is_swamp_poisoned && event(SOUTHERN_SWAMP_HIVE) && (has(MASK_DEKU) || has_hover_boots)"
+    "Southern Swamp Rupee 1": "is_swamp_poisoned"
+    "Southern Swamp Rupee 2": "is_swamp_poisoned"
+
+"Swamp Rupee Flowers":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Near Frog": "has(MASK_DEKU) || has_hover_boots || short_hook_anywhere"
+    "Swamp Back": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (has(MASK_DEKU) || has_hover_boots)"
+    "Swamp Water Near Frog": "can_swim_or_sink || is_tall || has_mask_goron"
+  events:
+    SWAMP_OCTO_LEFT: "is_swamp_poisoned && kill_big_octo_close"
+  locations:
     "Southern Swamp Rupee 1": "is_swamp_poisoned"
     "Southern Swamp Rupee 2": "is_swamp_poisoned"
 
@@ -146,7 +159,7 @@
     SWAMP_OCTO_LEFT: "is_swamp_poisoned && (has_arrows || can_use_nayru || (can_hookshot_short && has_hover_boots))"
   exits:
     "Swamp Water Near Deku Palace": "cross_poison_swamp"
-    "Swamp Near Frog": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (has(MASK_DEKU) || has_hover_boots)"
+    "Swamp Rupee Flowers": "(is_swamp_cleared || event(SWAMP_OCTO_LEFT)) && (has(MASK_DEKU) || has_hover_boots)"
     "Deku Palace Front": "true"
     "Near Swamp Spider House": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Back": "(is_swamp_cleared && (can_swim_or_sink || is_tall || has_hover_boots || has_mask_goron || has(MASK_DEKU))) || short_hook_anywhere"

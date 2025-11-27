@@ -33,6 +33,9 @@ All notable changes to this project will be documented in this file.
 - Fix a vanilla bug causing the final chest in Secret Shrine to sometimes not spawn.
 - Fix a bug that could cause the player to be stuck on the Moon in ER.
 - Fix cloaked items rotation in MM.
+- Fix Woodfall Temple Pre-Boss logic for the lower rupees.
+- Fix Southern Swamp logic to properly account for Bronze Scale.
+- Fix Deku Tree, Bottom of the Well, and Jabu-Jabu Master Quest logic to properly account for Bronze Scale.
 
 ## [29.0] - 2025-08-15
 
