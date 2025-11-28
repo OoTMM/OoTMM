@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Separate settings for keeping ammo/rupees and bottle contents through cycle resets in MM.
 - The Skeleton key has a new, custom model (thanks Dahni).
 - Cloaked items are now progressive when relevant.
+- Fix an oversight by adding climb and hookshot anywhere logic to traverse the rolling log room in Deku Tree MQ.
 
 ### Fixed
 
@@ -34,8 +35,7 @@ All notable changes to this project will be documented in this file.
 - Fix a bug that could cause the player to be stuck on the Moon in ER.
 - Fix cloaked items rotation in MM.
 - Fix Woodfall Temple Pre-Boss logic for the lower rupees.
-- Fix Southern Swamp logic to properly account for Bronze Scale.
-- Fix Deku Tree, Bottom of the Well, and Jabu-Jabu Master Quest logic to properly account for Bronze Scale.
+- Fix Water Temple MQ logic for using the blue switch on the second floor of the lobby.
 
 ## [29.0] - 2025-08-15
 
