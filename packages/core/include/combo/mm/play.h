@@ -10,6 +10,7 @@
 #include <combo/common/ocarina.h>
 #include <combo/mm/object.h>
 #include <combo/mm/message.h>
+#include <combo/mm/interface.h>
 #include <combo/play/collision_context.h>
 
 #define ACTORCTX_FLAG_0             (1 << 0)
@@ -36,54 +37,6 @@ typedef struct
 SramContext;
 
 _Static_assert(sizeof(SramContext) == 0x28, "MM SramContext size is wrong");
-
-typedef struct PACKED
-{
-    char unk_000[0x174];
-    u8* doActionSegment;
-    char unk_178[0xaa];
-    s16 bButtonInterfaceDoActionActive;
-    char unk_224[0x40];
-    struct PACKED
-    {
-        s16 screenFill;
-        s16 buttonA;
-        s16 buttonB;
-        s16 buttonCLeft;
-        s16 buttonCDown;
-        s16 buttonCRight;
-        s16 health;
-        s16 magic;
-        s16 minimap;
-        s16 start;
-    }
-    alpha;
-    char unk_278[0x096];
-    struct PACKED {
-        u8 hGauge;
-        u8 bButton;
-        u8 aButton;
-        u8 tradeItems;
-        u8 songOfTime;
-        u8 songOfDoubleTime;
-        u8 invSongOfTime;
-        u8 songOfSoaring;
-        u8 songOfStorms;
-        u8 masks;
-        u8 pictoBox;
-        u8 all;
-    } restrictions;
-    char unk_31a[0x02e];
-}
-InterfaceContext;
-
-ASSERT_OFFSET(InterfaceContext, unk_000,                        0x000);
-ASSERT_OFFSET(InterfaceContext, doActionSegment,                0x174);
-ASSERT_OFFSET(InterfaceContext, bButtonInterfaceDoActionActive, 0x222);
-ASSERT_OFFSET(InterfaceContext, alpha,                          0x264);
-ASSERT_OFFSET(InterfaceContext, unk_278,                        0x278);
-ASSERT_OFFSET(InterfaceContext, restrictions,                   0x30e);
-ASSERT_OFFSET(InterfaceContext, unk_31a,                        0x31a);
 
 typedef struct
 {
