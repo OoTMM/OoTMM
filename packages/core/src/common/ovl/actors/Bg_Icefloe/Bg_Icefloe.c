@@ -145,7 +145,6 @@ void func_80AC4CF0(BgIcefloe* this) {
 void func_80AC4D2C(BgIcefloe* this, PlayState* play) {
     this->timer--;
     if ((this->timer >= 38) && !(this->timer % 2)) {
-#if defined(GAME_MM)
         Vec3f velocity;
         Vec3f position;
 
@@ -157,7 +156,6 @@ void func_80AC4D2C(BgIcefloe* this, PlayState* play) {
         position.z = this->dyna.actor.world.pos.z + (2.0f * velocity.z);
         position.y = this->dyna.actor.world.pos.y + 3.0f;
         EffectSsIceSmoke_Spawn(play, &position, &velocity, &gZeroVec3f, 200);
-#endif
     }
     if (this->timer < 25) {
         this->dyna.actor.scale.x -= 0.0052f;
