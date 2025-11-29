@@ -5,6 +5,11 @@
 #include <combo/util.h>
 #include <combo/common/actor_init.h>
 
+typedef struct EffectSsProfile {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ void* init;
+} EffectSsProfile; // size = 0x08
+
 typedef struct PACKED ALIGNED(0x4)
 {
     u32     vromStart;
@@ -38,6 +43,7 @@ _Static_assert(sizeof(PlayerOverlay) == 0x1C, "PlayerOverlay size is wrong");
 
 #define OVL_TYPE_ACTOR      0x01
 #define OVL_TYPE_GAMEMODE   0x02
+#define OVL_TYPE_EFFECT_SS  0x03
 
 typedef struct
 {
@@ -55,6 +61,14 @@ OvlInfoMetaActor;
 
 typedef struct
 {
+    OvlInfoMeta             base;
+    u32                     id;
+    const EffectSsProfile*  init;
+}
+OvlInfoMetaEffectSs;
+
+typedef struct
+{
     OvlInfoMeta         base;
     u32                 id;
     const void*         ctor;
@@ -64,6 +78,7 @@ typedef struct
 OvlInfoMetaGamemode;
 
 #define OVL_INFO_ACTOR(id, init)                    __attribute__((section(".meta"),used)) static OvlInfoMetaActor __meta = { { OVL_TYPE_ACTOR }, (id), (void*)(u32)&(init) };
+#define OVL_INFO_EFFECT_SS(id, init)                __attribute__((section(".meta"),used)) static OvlInfoMetaEffectSs __meta = { { OVL_TYPE_EFFECT_SS }, (id), (void*)(u32)&(init) };
 #define OVL_INFO_GAMEMODE(id, ctor, dtor, size)     __attribute__((section(".meta"),used)) static OvlInfoMetaGamemode __meta = { { OVL_TYPE_GAMEMODE }, (id), (void*)(u32)&(ctor), (void*)(u32)&(dtor), (size) };
 
 #endif

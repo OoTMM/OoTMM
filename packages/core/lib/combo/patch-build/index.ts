@@ -147,6 +147,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
 
         const type = bufReadU32BE(header, 0x00);
 
+        /* TODO: Refactor this mess */
         if (type === 0x01) {
           /* Actor */
           const actorId = bufReadU32BE(header, 0x04);
@@ -169,6 +170,31 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
           }
 
           const fileAddr = args.addresses[game].fileFromROM(gc.actorsOvlAddr + actorId * 0x20);
+          p.addPatch(fileAddr.name, fileAddr.offset, patch);
+        }
+
+        if (type === 0x03) {
+          /* Effect_Ss */
+          const effectSsId = bufReadU32BE(header, 0x04);
+          const vramInit = bufReadU32BE(header, 0x08);
+
+          const patch = new Uint8Array(4 * 6);
+          bufWriteU32BE(patch, 0x00, vromStart);
+          bufWriteU32BE(patch, 0x04, vromEnd);
+          bufWriteU32BE(patch, 0x08, vramStart);
+          bufWriteU32BE(patch, 0x0c, vramEnd);
+          bufWriteU32BE(patch, 0x10, 0);
+          bufWriteU32BE(patch, 0x14, vramInit);
+
+          /* Delete the old overlay if possible */
+          const oldHeader = rom.subarray(gc.effectsSsOvlAddr + effectSsId * 0x1c, gc.effectsSsOvlAddr + effectSsId * 0x1c + 0x1c);
+          const oldVramStart = bufReadU32BE(oldHeader, 0x08);
+          if (oldVramStart !== 0) {
+            const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
+            p.removedFiles.push(oldFile.name);
+          }
+
+          const fileAddr = args.addresses[game].fileFromROM(gc.effectsSsOvlAddr + effectSsId * 0x1c);
           p.addPatch(fileAddr.name, fileAddr.offset, patch);
         }
 
