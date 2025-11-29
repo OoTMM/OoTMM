@@ -86,8 +86,8 @@ export class Addresses {
     }
 
     /* Resolve effects */
-    addr = meta.effectsOvlAddr;
-    for (let i = 0; i < meta.effectsOvlCount; ++i) {
+    addr = meta.effectsSsOvlAddr;
+    for (let i = 0; i < meta.effectsSsOvlCount; ++i) {
       const base = bufReadU32BE(this.rom, addr + 0x00);
       const vstart = bufReadU32BE(this.rom, addr + 0x08);
       const vend = bufReadU32BE(this.rom, addr + 0x0c);

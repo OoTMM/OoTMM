@@ -629,8 +629,8 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
     gSave.info.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
     gSave.info.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
-    gSave.info.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-    gSave.info.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
+    gSave.info.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_SPRING_WATER_HOT;
+    gSave.info.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_SPRING_WATER;
     gSave.info.inventory.items[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
     gSave.info.inventory.items[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
     gSave.info.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
