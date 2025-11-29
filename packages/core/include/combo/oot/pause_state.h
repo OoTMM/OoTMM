@@ -45,7 +45,7 @@ typedef enum {
     /* 0x06 */ PAUSE_MAIN_STATE_SONG_PROMPT_DONE,
     /* 0x07 */ PAUSE_MAIN_STATE_SONG_PROMPT_UNUSED,
     /* 0x08 */ PAUSE_MAIN_STATE_IDLE_CURSOR_ON_SONG, /* Await input but the cursor is on a song */
-    /* 0x09 */ PAUSE_MAIN_STATE_SONG_PLAYBACK_INIT,
+    /* 0x09 */ PAUSE_MAIN_STATE_SONG_PLAYBACK_START,
     /* 0x0F */ PAUSE_MAIN_STATE_EQUIP_MASK = 0xF,
     /* 0x10 */ PAUSE_MAIN_STATE_BOMBERS_NOTEBOOK_OPEN,
     /* 0x11 */ PAUSE_MAIN_STATE_UNK
@@ -84,5 +84,28 @@ typedef enum {
     /* 4 */ PAUSE_QUAD_CURSOR_4,
     /* 5 */ PAUSE_QUAD_CURSOR_MAX
 } PauseCursorQuad;
+
+typedef enum PauseState {
+    /*  0 */ PAUSE_STATE_OFF,
+    /*  1 */ PAUSE_STATE_WAIT_LETTERBOX, // Request no letterboxing and wait for it.
+    /*  2 */ PAUSE_STATE_WAIT_BG_PRERENDER, // Wait for the pause background prerender to be done.
+    /*  3 */ PAUSE_STATE_INIT, // Load data and initialize/setup various things.
+    /*  4 */ PAUSE_STATE_OPENING_1, // Animate the pause menu coming together with rotations and other animations.
+    /*  5 */ PAUSE_STATE_OPENING_2, // Finish some animations for opening the menu.
+    /*  6 */ PAUSE_STATE_MAIN, // Pause menu ready for player inputs.
+    /*  7 */ PAUSE_STATE_SAVE_PROMPT,  // Save prompt in the pause menu
+    /*  8 */ PAUSE_STATE_GAME_OVER_START,
+    /*  9 */ PAUSE_STATE_GAME_OVER_WAIT_BG_PRERENDER,
+    /* 10 */ PAUSE_STATE_GAME_OVER_INIT,
+    /* 11 */ PAUSE_STATE_GAME_OVER_SHOW_MESSAGE,
+    /* 12 */ PAUSE_STATE_GAME_OVER_WINDOW_DELAY,
+    /* 13 */ PAUSE_STATE_GAME_OVER_SHOW_WINDOW, // Show background and animate
+    /* 14 */ PAUSE_STATE_GAME_OVER_SAVE_PROMPT, // Ask "Would you like to save?", apply the choice
+    /* 15 */ PAUSE_STATE_GAME_OVER_SAVED, // Show "Game saved.", wait for the delay or input
+    /* 16 */ PAUSE_STATE_GAME_OVER_CONTINUE_PROMPT, // Ask "Continue playing?"
+    /* 17 */ PAUSE_STATE_GAME_OVER_FINISH, // Fade out, then apply the choice
+    /* 18 */ PAUSE_STATE_CLOSING, // Animate the pause menu closing
+    /* 19 */ PAUSE_STATE_RESUME_GAMEPLAY // Handles returning to normal gameplay once the pause menu is visually closed
+} PauseState;
 
 #endif

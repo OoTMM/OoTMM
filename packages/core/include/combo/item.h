@@ -303,6 +303,7 @@ typedef enum ExchangeItemID {
     /* 0x25 */ EXCH_CUSTOM_ITEM_ZORA_EGG,
     /* 0x26 */ EXCH_CUSTOM_ITEM_CUSTOM_MAX,
 } ExchangeItemID;
+
 #endif
 
 #endif

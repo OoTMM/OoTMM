@@ -286,7 +286,7 @@ static void PrepareSoaringScreen(PlayState* play)
     /* Set eye position and pageIndex such that scrolling left brings to the desired page */
     pauseCtx->eye.x = -64.0f; /* sKaleidoSetupEyeX1[pauseCtx->pageIndex]; */
     pauseCtx->eye.z = 0.0f; /* sKaleidoSetupEyeZ1[pauseCtx->pageIndex]; */
-    pauseCtx->screen_idx = 1 ; /* sKaleidoSetupKscpPos1[pauseCtx->pageIndex]; */
+    pauseCtx->pageIndex = 1 ; /* sKaleidoSetupKscpPos1[pauseCtx->pageIndex]; */
     pauseCtx->infoPanelOffsetY = -40;
 
     for (i = 0; i < ARRAY_COUNT(pauseCtx->worldMapPoints); i++) {
@@ -327,12 +327,12 @@ static void SetupSoaring(PlayState* play)
         }
         else
         {
-            gPrevPageIndex = pauseCtx->screen_idx;
+            gPrevPageIndex = pauseCtx->pageIndex;
             gPrevCursorPoint = pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
-            pauseCtx->screen_idx = 0;
+            pauseCtx->pageIndex = 0;
             pauseCtx->state = PAUSE_STATE_OWLWARP_0;
             PrepareSoaringScreen(play);
-            pauseCtx->screen_idx = 1;
+            pauseCtx->pageIndex = 1;
             gSaveContext.prevHudVisibilityMode = gSaveContext.hudVisibilityMode;
             gSaveContext.nextHudVisibilityMode = 0x1; /* HUD_VISIBILITY_NOTHING; */
             R_UPDATE_RATE = 2;

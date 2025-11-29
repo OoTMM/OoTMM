@@ -55,7 +55,7 @@ function(build game)
   # Overlays
   set(OVL_OBJECTS "")
   set(OVL_NAMES "")
-  foreach(ovl_category actors effects gamemodes)
+  foreach(ovl_category actors effects gamemodes kaleido_mgr)
     # Extract the list of OVLs for the current category
     set(ovls "")
     file(GLOB ovl_dirs "src/${game}/ovl/${ovl_category}/*" "src/common/ovl/${ovl_category}/*")
