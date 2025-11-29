@@ -46,7 +46,36 @@ typedef struct
     u8                      mapPalette[32];
     DmaRequest              dmaRequest_160;
     DmaRequest              dmaRequest_180;
-    char                    unk_1a0[0x9e];
+    /* 0x01A0 */ char   unk_1a0[0x20];
+    /* 0x01C0 */ OSMesgQueue loadQueue;
+    /* 0x01D8 */ OSMesg loadMsg;
+    /* 0x01DC */ Viewport viewport;
+    /* 0x01EC */ s16    unk_1ec;
+    /* 0x01EE */ u16    unk_1ee;
+    /* 0x01F0 */ u16    unk_1f0;
+    /* 0x01F4 */ f32    unk_1f4;
+    /* 0x01F8 */ s16    naviCalling;
+    /* 0x01FA */ s16    unk_1fa;
+    /* 0x01FC */ s16    unk_1fc;
+    /* 0x01FE */ s16    heartColorOscillator;
+    /* 0x0200 */ s16    heartColorOscillatorDirection;
+    /* 0x0202 */ s16    beatingHeartPrim[3];
+    /* 0x0208 */ s16    beatingHeartEnv[3];
+    /* 0x020E */ s16    heartsPrimR[2];
+    /* 0x0212 */ s16    heartsPrimG[2];
+    /* 0x0216 */ s16    heartsPrimB[2];
+    /* 0x021A */ s16    heartsEnvR[2];
+    /* 0x021E */ s16    heartsEnvG[2];
+    /* 0x0222 */ s16    heartsEnvB[2];
+    /* 0x0226 */ s16    unk_226; // Used only in unused functions
+    /* 0x0228 */ s16    unk_228; // Used only in unused functions
+    /* 0x022A */ s16    beatingHeartOscillator;
+    /* 0x022C */ s16    beatingHeartOscillatorDirection;
+    /* 0x022E */ s16    unk_22e;
+    /* 0x0230 */ s16    lensMagicConsumptionTimer; // When lens is active, 1 unit of magic is consumed every time the timer reaches 0
+    /* 0x0232 */ s16    counterDigits[4]; // used for key and rupee counters
+    /* 0x023A */ u8     numHorseBoosts;
+    /* 0x023C */ u16    unk_23C;
     u16                     hbaAmmo;
     u16                     unk_240;
     u16                     unk_242;
@@ -60,7 +89,12 @@ typedef struct
     u16                     magicAlpha;     /* also Rupee and Key counters alpha */
     u16                     minimapAlpha;
     s16                     startAlpha;
-    char                    unk_258[0x0a];
+    s16                     unk_258;
+    /* 0x025A */ s16    unk_25a;
+    /* 0x025C */ s16    mapRoomNum;
+    /* 0x025E */ s16    mapPaletteIndex; // "map_palete_no"
+    /* 0x0260 */ u8     unk_260;
+    /* 0x0261 */ u8     unk_261;
     InterfaceRestrictions   restrictions;
     char                    unk_26e[0x002];
 }
