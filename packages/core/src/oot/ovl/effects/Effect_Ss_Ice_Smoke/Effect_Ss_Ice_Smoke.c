@@ -1,0 +1,102 @@
+#include "Effect_Ss_Ice_Smoke.h"
+#include <combo/oot/effect_ss.h>
+#include <assets/oot/objects/object_fz.h>
+
+#define rObjectSlot regs[0]
+#define rAlpha regs[1]
+#define rScale regs[2]
+
+extern void* gExObjectsAddr[];
+
+u32 EffectSsIceSmoke_Init(PlayState* play, u32 index, EffectSs* this, void* initParamsx);
+void EffectSsIceSmoke_Draw(PlayState* play, u32 index, EffectSs* this);
+void EffectSsIceSmoke_Update(PlayState* play, u32 index, EffectSs* this);
+
+EffectSsProfile Effect_Ss_Ice_Smoke_Profile = {
+    EFFECT_SS_ICE_SMOKE,
+    EffectSsIceSmoke_Init,
+};
+
+OVL_INFO_EFFECT_SS(EFFECT_SS_ICE_SMOKE, Effect_Ss_Ice_Smoke_Profile);
+
+u32 EffectSsIceSmoke_Init(PlayState* play, u32 index, EffectSs* this, void* initParamsx) {
+    EffectSsIceSmokeInitParams* initParams = (EffectSsIceSmokeInitParams*)initParamsx;
+    s32 objectSlot;
+
+    objectSlot = Object_GetSlot(&play->objectCtx, OBJECT_FZ);
+
+    if ((objectSlot >= 0) && Object_IsLoaded(&play->objectCtx, objectSlot)) {
+        uintptr_t prevSeg6 = gSegments[6];
+
+        gSegments[6] = OS_K0_TO_PHYSICAL(gExObjectsAddr[objectSlot]);
+        Math_Vec3f_Copy(&this->pos, &initParams->pos);
+        Math_Vec3f_Copy(&this->velocity, &initParams->velocity);
+        Math_Vec3f_Copy(&this->accel, &initParams->accel);
+        this->rObjectSlot = objectSlot;
+        this->rAlpha = 0;
+        this->rScale = initParams->scale;
+        this->life = 50;
+        this->draw = EffectSsIceSmoke_Draw;
+        this->update = EffectSsIceSmoke_Update;
+        gSegments[6] = prevSeg6;
+
+        return 1;
+    }
+
+    return 0;
+}
+
+void EffectSsIceSmoke_Draw(PlayState* play, u32 index, EffectSs* this) {
+    PlayState* play2 = (PlayState*)play;
+    void* objectPtr;
+    Mtx* mtx;
+    f32 scale;
+    s32 objectSlot;
+
+    objectPtr = gExObjectsAddr[this->rObjectSlot];
+    objectSlot = Object_GetSlot(&play2->objectCtx, OBJECT_FZ);
+
+    OPEN_DISPS(play->state.gfxCtx);
+    if ((objectSlot >= 0) && Object_IsLoaded(&play2->objectCtx, objectSlot)) {
+        gDPPipeSync(POLY_XLU_DISP++);
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        gSegments[6] = OS_K0_TO_PHYSICAL(objectPtr);
+        gSPSegment(POLY_XLU_DISP++, 0x06, objectPtr);
+        gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(gFreezardSteamStartDL));
+        gDPPipeSync(POLY_XLU_DISP++);
+        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 195, 235, 235, this->rAlpha);
+        gSPSegment(POLY_XLU_DISP++, 0x08,
+                   Gfx_TwoTexScroll(play->state.gfxCtx, G_TX_RENDERTILE, this->life * 3, this->life * 15, 32, 64, 1, 0,
+                                    0, 32, 32));
+        Matrix_Translate(this->pos.x, this->pos.y, this->pos.z, MTXMODE_NEW);
+        Matrix_ReplaceRotation(&play2->billboardMtxF);
+        scale = this->rScale * 0.0001f;
+        Matrix_Scale(scale, scale, 1.0f, MTXMODE_APPLY);
+
+        mtx = MATRIX_FINALIZE(play->state.gfxCtx);
+
+        if (mtx != NULL) {
+            if (1) {}
+            gSPMatrix(POLY_XLU_DISP++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(gFreezardSteamDL));
+        }
+    } else {
+        this->life = -1;
+    }
+
+    CLOSE_DISPS();
+}
+
+void EffectSsIceSmoke_Update(PlayState* play, u32 index, EffectSs* this) {
+    s32 objectSlot;
+
+    objectSlot = Object_GetSlot(&play->objectCtx, OBJECT_FZ);
+
+    if ((objectSlot >= 0) && Object_IsLoaded(&play->objectCtx, objectSlot)) {
+        if (this->rAlpha < 100) {
+            this->rAlpha += 10;
+        }
+    } else {
+        this->life = -1;
+    }
+}
