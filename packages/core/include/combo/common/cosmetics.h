@@ -4,5 +4,6 @@
 #include <combo/types.h>
 
 extern u8 gNightBgm;
+extern u8 gNoLowHealthBeep;
 
 #endif

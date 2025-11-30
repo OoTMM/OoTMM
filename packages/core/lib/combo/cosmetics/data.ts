@@ -22,6 +22,12 @@ export const COSMETICS = [{
   type: 'boolean',
   default: false,
 }, {
+  key: 'noLowHealthBeep',
+  name: 'Remove Low Health Beep',
+  description: 'Disable the low health warning beep sound.',
+  type: 'boolean',
+  default: false,
+}, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
   type: 'color',

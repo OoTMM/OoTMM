@@ -775,3 +775,4 @@ func_8002ED80 = 0x80022554;
 Actor_PlaySfx_FlaggedCentered2 = 0x80023108;
 
 Actor_SetObjectDependency = 0x80020fa4;
+Health_IsCritical = 0x80065b00;
