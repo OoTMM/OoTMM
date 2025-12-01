@@ -2056,6 +2056,22 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'soulsAnimalOot',
+  name: 'Animal Souls (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Souls for OoT animals into the item pool. They won\'t spawn unless their Soul is obtained.',
+  default: false,
+  cond: hasOoT,
+}, {
+  key: 'soulsAnimalMm',
+  name: 'Animal Souls (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add Souls for MM animals into the item pool. They won\'t spawn unless their Soul is obtained.',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'soulsMiscOot',
   name: 'Misc. Souls (OoT)',
   category: 'items.extensions',
@@ -2463,6 +2479,14 @@ export const SETTINGS = [{
   description: 'Combines the OoT and MM Souls for a specific NPC into one item, for all NPCs present in both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.soulsNpcOot && s.soulsNpcMm,
+}, {
+  key: 'sharedSoulsAnimal',
+  name: 'Shared Animal Souls',
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the OoT and MM Souls for a specific animal into one item, for all animals present in both games',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.soulsAnimalOot && s.soulsAnimalMm,
 }, {
   key: 'sharedSoulsMisc',
   name: 'Shared Misc. Souls',
