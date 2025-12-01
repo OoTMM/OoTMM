@@ -18,7 +18,7 @@ void LifeMeter_UpdateSizeAndBeep(PlayState* play) {
             interfaceCtx->lifeSizeChangeDirection = 0;
             if (!gNoLowHealthBeep && !Player_InCsMode(play) && !IS_PAUSED(&play->pauseCtx) && LifeMeter_IsCritical() &&
                 !Play_InCsMode(play)) {
-                Audio_PlaySfx(NA_SE_SY_WIN_OPEN);
+                Audio_PlaySfx(NA_SE_SY_HITPOINT_ALARM);
             }
         }
     } else {
