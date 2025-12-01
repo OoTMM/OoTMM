@@ -32,6 +32,8 @@ typedef struct ALIGNED(16)
     u8              soulsBossMm[1];
     u8              soulsNpcOot[8];
     u8              soulsNpcMm[8];
+    u8              soulsAnimalsOot[2];
+    u8              soulsAnimalsMm[2];
     u8              soulsMiscOot[1];
     u8              soulsMiscMm[1];
     u8              caughtChildFishWeight[20]; /* first item is length. should this be in OotCustomSave? */
