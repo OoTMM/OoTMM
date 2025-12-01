@@ -192,6 +192,13 @@ void Dpad_Update(PlayState* play)
     }
     else if(Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE))
         sDpadItems[DPAD_UP] = gSave.info.inventory.items[ITS_OOT_TRADE_CHILD];
+
+    /* Ban bottles */
+    for (int i = 0; i < 4; ++i)
+    {
+        if (comboIsTradeBottleOot(sDpadItems[i]))
+            sDpadItems[i] = ITEM_NONE;
+    }
 }
 #endif
 
