@@ -6,6 +6,7 @@
 #include <combo/dpad.h>
 #include <combo/global.h>
 #include <combo/draw.h>
+#include <combo/inventory.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
