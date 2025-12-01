@@ -756,19 +756,19 @@ void DrawGi_CustomBottlePotion(PlayState* play, s16 index, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomGS(PlayState* play, s16 index)
+void DrawGi_CustomGS(PlayState* play, s16 index, u8 param)
 {
     static const GsColors kColors[] = {
         { 0x967800ff, 0xffffaaff, 0xffd86eff, 0xffd86eff }, /* GS Token */
         { 0x967800ff, 0xffffaaff, 0x82ff80ff, 0x82ff80ff }, /* Swamp Token */
         { 0x967800ff, 0xffffaaff, 0x7d83ffff, 0x7d83ffff }, /* Ocean Token */
-        { 0xaaaaaaff, 0xffffffff, 0xff0000ff, 0xff0000ff }, /* Soul */
+        { 0xaaaaaaff, 0xffffffff, 0xff0000ff, 0xff0000ff }, /* Enemy Soul */
         { 0xaaaaaaff, 0xffffffff, 0x8800ffff, 0x8800ffff }, /* Boss Soul */
         { 0xaaaaaaff, 0xffffffff, 0x00ff00ff, 0x00ff00ff }, /* NPC Soul */
+        { 0xaaaaaaff, 0xffffffff, 0x2222ffff, 0x2222ffff }, /* Animal Soul */
         { 0xaaaaaaff, 0xffffffff, 0x888888ff, 0x888888ff }, /* Misc. Soul */
     };
 
-    const DrawGi* drawGi;
     const GsColors* gsc;
     float fc;
     u8 r;
@@ -776,8 +776,7 @@ void DrawGi_CustomGS(PlayState* play, s16 index)
     u8 b;
     u8 a;
 
-    drawGi = &kDrawGi[index];
-    gsc = &kColors[drawGi->lists[0]];
+    gsc = &kColors[param];
     fc = play->state.frameCount;
 
     OPEN_DISPS(play->state.gfxCtx);
