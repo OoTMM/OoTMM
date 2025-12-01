@@ -84,7 +84,6 @@
 - { id: ARROW_FIRE, func: Opa0_Xlu12, params: [0x6000ae0, 0x6000ca0, 0x6000d00] }
 - { id: ARROW_ICE, func: Opa0_Xlu12, params: [0x6000ae0, 0x6000cc0, 0x6000d00] }
 - { id: ARROW_LIGHT, func: Opa0_Xlu12, params: [0x6000ae0, 0x6000ce0, 0x6000d00] }
-- { id: OOT_GS_TOKEN, func: CustomGS, params: [0] }
 - { id: OOT_SPELL_FIRE, func: Spell, params: [0x6000920, 0x60009e0, 0x6000a40] }
 - { id: OOT_SPELL_WIND, func: Spell, params: [0x6000920, 0x6000a00, 0x6000a40] }
 - { id: OOT_SPELL_LOVE, func: Spell, params: [0x6000920, 0x6000a20, 0x6000a40] }
@@ -171,8 +170,6 @@
 - { id: OOT_NUT_UPGRADE2, func: CustomNut, params: [0x6000e90, 2] }
 - { id: SPIN_UPGRADE, func: CustomSpin, params: [0x6000998, 0x6000850, 0x6000960] }
 - { id: STRAY_FAIRY, func: CustomStrayFairy, params: [0] }
-- { id: MM_GS_TOKEN_SWAMP, func: CustomGS, params: [1] }
-- { id: MM_GS_TOKEN_OCEAN, func: CustomGS, params: [2] }
 - { id: MILK, func: CustomPotion, params: [3] }
 - { id: MM_CHATEAU, func: CustomPotion, params: [4] }
 - { id: MM_OWL, func: CustomOwl, params: [0x6003770] }
@@ -181,14 +178,13 @@
 - { id: SKELETON_KEY, func: Opa0, params: [SKELETON_KEY_0] }
 - { id: MASK_MAJORA, func: MaskMajora, params: [GI_MASK_MAJORA_0] }
 - { id: OOT_RUPEE_SILVER, func: SilverRupee, params: [0] }
-- { id: SOUL, func: CustomGS, params: [3] }
+- { id: GS_SOUL, func: CustomGS, params: [0] }
 - { id: COIN_YELLOW, func: Coin, params: [0x060005e0, 0x06000560, 0x06000768] }
 - { id: COIN_RED, func: Coin, params: [0x060005e0, 0x06000580, 0x06000768] }
 - { id: COIN_GREEN, func: Coin, params: [0x060005e0, 0x060005a0, 0x06000768] }
 - { id: COIN_BLUE, func: Coin, params: [0x060005e0, 0x060005c0, 0x06000768] }
 - { id: MAGIC_UPGRADE, func: MagicJar, params: [0x6000580, 1, 0] }
 - { id: MAGIC_UPGRADE2, func: MagicJar, params: [0x6000ee0, 1, 1] }
-- { id: SOUL_BOSS, func: CustomGS, params: [4] }
 - { id: WALLET3, func: Wallet, params: [0x6001850, 0, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 2, 0x6001ad8] }
 - { id: WALLET4, func: Wallet, params: [0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 3, 0x6001ad8] }
 - { id: WALLET5, func: Wallet, params: [0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 4, 0x6001ad8] }
@@ -199,8 +195,6 @@
 - { id: BUTTON_C_LEFT, func: Button, params: [1, 1, BTN_C_HORIZONTAL_0] }
 - { id: BUTTON_C_UP, func: Button, params: [1, 0, BTN_C_VERTICAL_0] }
 - { id: BUTTON_C_DOWN, func: Button, params: [1, 1, BTN_C_VERTICAL_0] }
-- { id: SOUL_NPC, func: CustomGS, params: [5] }
-- { id: SOUL_MISC, func: CustomGS, params: [6] }
 - { id: BOMBCHU_BAG, func: BombchuBag, params: [BOMBCHU_BAG_0, BOMBCHU_BAG_1, BOMBCHU_BAG_2] }
 - { id: FAIRY_BIG, func: BigFairy, params: [0x6000bd0, 0x6000db8, 0x6000ef0] }
 - { id: BOTTLE_BLUE_FIRE, func: BottleBlueFire, params: [0x6000670, 0x6000750] }
