@@ -141,7 +141,7 @@
     "Romani Ranch": "true"
   locations:
     "Doggy Racetrack Chest": "can_use_beans || is_tall || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)"
-    "Doggy Racetrack HP": "soul_dog_lady && can_use_wallet(1) && has_mask_truth"
+    "Doggy Racetrack HP": "soul_dog_lady && soul_dog && can_use_wallet(1) && has_mask_truth"
     "Doggy Racetrack Pot 1": "true"
     "Doggy Racetrack Pot 2": "true"
     "Doggy Racetrack Pot 3": "true"
