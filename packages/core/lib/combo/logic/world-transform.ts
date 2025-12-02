@@ -1004,6 +1004,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SOULS_NPC, 'max');
     }
 
+    if (settings.sharedSoulsAnimal) {
+      this.shareItems(SharedItemGroups.SOULS_ANIMAL, 'max');
+    }
+
     if (settings.sharedSoulsMisc) {
       this.shareItems(SharedItemGroups.SOULS_MISC, 'max');
     }
