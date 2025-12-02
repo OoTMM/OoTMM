@@ -128,6 +128,9 @@
 "soul_dog": "shared_soul_animal(SOUL_ANIMAL_DOG, SHARED_SOUL_ANIMAL_DOG)"
 "soul_butterfly": "shared_soul_animal(SOUL_ANIMAL_BUTTERFLY, SHARED_SOUL_ANIMAL_BUTTERFLY)"
 
+"butterfly": "can_use_sticks && soul_butterfly"
+"cow": "can_play_epona && soul_cow"
+
 # Bottles
 "shared_bottle(a, b)": "cond(setting(sharedBottles), has(b), has(a))"
 "shared_bottle_renewable(a, b)": "cond(setting(sharedBottles), renewable(b), renewable(a))"

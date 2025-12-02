@@ -126,10 +126,10 @@
 "Great Bay Coast Butterflies":
   region: GREAT_BAY_COAST
   locations:
-    "Great Bay Coast Common Butterfly 1": "true"
-    "Great Bay Coast Common Butterfly 2": "true"
-    "Great Bay Coast Cleared Butterfly 1": "is_ocean_cleared"
-    "Great Bay Coast Cleared Butterfly 2": "is_ocean_cleared"
+    "Great Bay Coast Common Butterfly 1": "butterfly"
+    "Great Bay Coast Common Butterfly 2": "butterfly"
+    "Great Bay Coast Cleared Butterfly 1": "is_ocean_cleared && butterfly"
+    "Great Bay Coast Cleared Butterfly 2": "is_ocean_cleared && butterfly"
 
 "Great Bay Coast Near Pinnacle":
   region: GREAT_BAY_COAST
@@ -199,8 +199,8 @@
   exits:
     "GBC Near Cow Grotto": "true"
   locations:
-    "Great Bay Coast Cow Front": "can_play_epona"
-    "Great Bay Coast Cow Back": "can_play_epona"
+    "Great Bay Coast Cow Front": "cow"
+    "Great Bay Coast Cow Back": "cow"
     "Great Bay Cow Grotto Grass 01": "true"
     "Great Bay Cow Grotto Grass 02": "true"
     "Great Bay Cow Grotto Grass 03": "true"
@@ -274,9 +274,9 @@
     "Great Bay Cow Grotto Grass 71": "true"
     "Great Bay Cow Grotto Grass 72": "true"
     "Great Bay Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
-    "Great Bay Cow Grotto Butterfly 1": "has_sticks"
-    "Great Bay Cow Grotto Butterfly 2": "has_sticks"
-    "Great Bay Cow Grotto Butterfly 3": "has_sticks"
+    "Great Bay Cow Grotto Butterfly 1": "butterfly"
+    "Great Bay Cow Grotto Butterfly 2": "butterfly"
+    "Great Bay Cow Grotto Butterfly 3": "butterfly"
 
 "Fisher's Hut":
   region: ENTRANCE

@@ -234,6 +234,7 @@
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && is_swamp_cleared)"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && is_ocean_cleared)"
+"can_use_sticks": "has_sticks" # Compat
 
 #Terrain
 

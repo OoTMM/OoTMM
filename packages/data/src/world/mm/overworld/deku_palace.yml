@@ -92,7 +92,7 @@
   region: ENTRANCE
   exits:
     "Deku Palace Near Beans Grotto": "true"
-    "Deku Palace Beans Grotto Butterflies": "has_sticks"
+    "Deku Palace Beans Grotto Butterflies": "butterfly"
   events:
     MAGIC_BEANS_PALACE: "soul_bean_salesman && can_use_wallet(1)"
     ARROWS: "true"
