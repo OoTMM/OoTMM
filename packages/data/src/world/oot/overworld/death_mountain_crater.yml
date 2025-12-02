@@ -128,9 +128,9 @@
     "Death Mountain Crater Grotto Grass 4": "can_cut_grass"
     "Death Mountain Crater Grotto Hive 1": "break_hive_low"
     "Death Mountain Crater Grotto Hive 2": "break_hive_low"
-    "Death Mountain Crater Grotto Butterfly 1": "can_use_sticks"
-    "Death Mountain Crater Grotto Butterfly 2": "can_use_sticks"
-    "Death Mountain Crater Grotto Butterfly 3": "can_use_sticks"
+    "Death Mountain Crater Grotto Butterfly 1": "butterfly"
+    "Death Mountain Crater Grotto Butterfly 2": "butterfly"
+    "Death Mountain Crater Grotto Butterfly 3": "butterfly"
   gossip:
     "Death Mountain Crater Gossip Grotto": "true"
 

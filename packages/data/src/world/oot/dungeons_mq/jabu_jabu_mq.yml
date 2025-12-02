@@ -157,7 +157,7 @@
   events:
     MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES: "can_use_slingshot"
   locations:
-    "MQ Jabu-Jabu Cow": "can_play_epona && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
+    "MQ Jabu-Jabu Cow": "cow && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
     "MQ Jabu-Jabu Grass Room After Big Octo": "can_cut_grass"
     "MQ Jabu-Jabu Wonder Item Platforms Cow": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
     "MQ Jabu-Jabu Room After Above Big Octo Small Crate 1": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"

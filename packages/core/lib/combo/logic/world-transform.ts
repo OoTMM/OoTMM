@@ -1004,6 +1004,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SOULS_NPC, 'max');
     }
 
+    if (settings.sharedSoulsAnimal) {
+      this.shareItems(SharedItemGroups.SOULS_ANIMAL, 'max');
+    }
+
     if (settings.sharedSoulsMisc) {
       this.shareItems(SharedItemGroups.SOULS_MISC, 'max');
     }
@@ -1410,10 +1414,12 @@ export class LogicPassWorldTransform {
     if (settings.soulsEnemyOot) this.addItems(ItemGroups.OOT_SOULS_ENEMY);
     if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
     if (settings.soulsNpcOot) this.addItems(ItemGroups.OOT_SOULS_NPC);
+    if (settings.soulsAnimalOot) this.addItems(ItemGroups.OOT_SOULS_ANIMAL);
     if (settings.soulsMiscOot) this.addItems(ItemGroups.OOT_SOULS_MISC);
     if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
     if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
     if (settings.soulsNpcMm) this.addItems(ItemGroups.MM_SOULS_NPC);
+    if (settings.soulsAnimalMm) this.addItems(ItemGroups.MM_SOULS_ANIMAL);
     if (settings.soulsMiscMm) this.addItems(ItemGroups.MM_SOULS_MISC);
 
     /* Add skeleton keys */

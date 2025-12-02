@@ -268,6 +268,10 @@ void comboCreateSave(void* unk, void* buffer)
         memset(gSharedCustomSave.soulsNpcOot, 0xff, sizeof(gSharedCustomSave.soulsNpcOot));
     if (!Config_Flag(CFG_MM_SOULS_NPC))
         memset(gSharedCustomSave.soulsNpcMm, 0xff, sizeof(gSharedCustomSave.soulsNpcMm));
+    if (!Config_Flag(CFG_OOT_SOULS_ANIMAL))
+        memset(gSharedCustomSave.soulsAnimalsOot, 0xff, sizeof(gSharedCustomSave.soulsAnimalsOot));
+    if (!Config_Flag(CFG_MM_SOULS_ANIMAL))
+        memset(gSharedCustomSave.soulsAnimalsMm, 0xff, sizeof(gSharedCustomSave.soulsAnimalsMm));
     if (!Config_Flag(CFG_OOT_SOULS_MISC))
         memset(gSharedCustomSave.soulsMiscOot, 0xff, sizeof(gSharedCustomSave.soulsMiscOot));
     if (!Config_Flag(CFG_MM_SOULS_MISC))

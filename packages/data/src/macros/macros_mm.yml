@@ -234,6 +234,7 @@
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && is_swamp_cleared)"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && is_ocean_cleared)"
+"can_use_sticks": "has_sticks" # Compat
 
 #Terrain
 
@@ -290,6 +291,7 @@
 "soul_enemy(x)": "(!setting(soulsEnemyMm)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossMm)) || has(x)"
 "soul_npc(x)": "(!setting(soulsNpcMm)) || has(x)"
+"soul_animal(x)": "(!setting(soulsAnimalMm)) || has(x)"
 "soul_misc(x)": "(!setting(soulsMiscMm)) || has(x)"
 "short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm, logical)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm, logical)"

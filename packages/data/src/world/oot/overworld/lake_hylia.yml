@@ -79,9 +79,9 @@
     "Lake Hylia Rupee 1": "is_child && can_swim_or_sink" #this rupee can be gotten with base dive distance
     "Lake Hylia Rupee 2": "is_child && can_dive_small"
     "Lake Hylia Rupee 3": "is_child && can_dive_small"
-    "Lake Hylia Butterfly 1": "is_child && can_use_sticks"
-    "Lake Hylia Butterfly 2": "is_child && can_use_sticks"
-    "Lake Hylia Butterfly 3": "is_child && can_use_sticks"
+    "Lake Hylia Butterfly 1": "is_child && butterfly"
+    "Lake Hylia Butterfly 2": "is_child && butterfly"
+    "Lake Hylia Butterfly 3": "is_child && butterfly"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"

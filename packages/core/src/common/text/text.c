@@ -462,6 +462,15 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SOUL_NPC_OLD_HAG:
     case GI_MM_SOUL_NPC_BANKER:
         return !Config_Flag(CFG_SHARED_SOULS_NPC);
+    case GI_OOT_SOUL_ANIMAL_CUCCO:
+    case GI_OOT_SOUL_ANIMAL_COW:
+    case GI_OOT_SOUL_ANIMAL_DOG:
+    case GI_OOT_SOUL_ANIMAL_BUTTERFLY:
+    case GI_MM_SOUL_ANIMAL_CUCCO:
+    case GI_MM_SOUL_ANIMAL_COW:
+    case GI_MM_SOUL_ANIMAL_DOG:
+    case GI_MM_SOUL_ANIMAL_BUTTERFLY:
+        return !Config_Flag(CFG_SHARED_SOULS_ANIMAL);
     case GI_OOT_SOUL_MISC_GS:
     case GI_OOT_SOUL_MISC_BUSINESS_SCRUB:
     case GI_MM_SOUL_MISC_GS:

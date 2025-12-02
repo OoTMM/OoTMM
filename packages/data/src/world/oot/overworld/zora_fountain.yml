@@ -6,7 +6,7 @@
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
     "Zora Fountain Deep": "is_adult && has_tunic_zora && has_iron_boots"
-    "Zora Fountain Butterflies": "is_child && can_use_sticks && is_day"
+    "Zora Fountain Butterflies": "is_child && is_day && butterfly"
   events:
     SEEDS: "is_child"
   locations:

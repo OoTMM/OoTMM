@@ -270,6 +270,15 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_THIEVES));
     case ACTOR_EN_GELDB:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_THIEVES);
+    case ACTOR_EN_NIW:
+    case ACTOR_EN_NWC:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_ANIMAL_CUCCO));
+    case ACTOR_EN_COW:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_ANIMAL_COW));
+    case ACTOR_EN_DOG:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_ANIMAL_DOG));
+    case ACTOR_EN_BUTTE:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_ANIMAL_BUTTERFLY));
     default:
         return 1;
     }

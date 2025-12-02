@@ -243,9 +243,9 @@
     "Hyrule Field Grotto Open Grass 4": "can_cut_grass"
     "Hyrule Field Grotto Open Hive 1": "break_hive_low"
     "Hyrule Field Grotto Open Hive 2": "break_hive_low"
-    "Hyrule Field Grotto Open Butterfly 1": "can_use_sticks"
-    "Hyrule Field Grotto Open Butterfly 2": "can_use_sticks"
-    "Hyrule Field Grotto Open Butterfly 3": "can_use_sticks"
+    "Hyrule Field Grotto Open Butterfly 1": "butterfly"
+    "Hyrule Field Grotto Open Butterfly 2": "butterfly"
+    "Hyrule Field Grotto Open Butterfly 3": "butterfly"
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 
@@ -263,9 +263,9 @@
     "Hyrule Field Grotto Southeast Grass 4": "can_cut_grass"
     "Hyrule Field Grotto Southeast Hive 1": "break_hive_low"
     "Hyrule Field Grotto Southeast Hive 2": "break_hive_low"
-    "Hyrule Field Grotto Southeast Butterfly 1": "can_use_sticks"
-    "Hyrule Field Grotto Southeast Butterfly 2": "can_use_sticks"
-    "Hyrule Field Grotto Southeast Butterfly 3": "can_use_sticks"
+    "Hyrule Field Grotto Southeast Butterfly 1": "butterfly"
+    "Hyrule Field Grotto Southeast Butterfly 2": "butterfly"
+    "Hyrule Field Grotto Southeast Butterfly 3": "butterfly"
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 
@@ -283,9 +283,9 @@
     "Hyrule Field Grotto Market Grass 4": "can_cut_grass"
     "Hyrule Field Grotto Market Hive 1": "break_hive_low"
     "Hyrule Field Grotto Market Hive 2": "break_hive_low"
-    "Hyrule Field Grotto Market Butterfly 1": "can_use_sticks"
-    "Hyrule Field Grotto Market Butterfly 2": "can_use_sticks"
-    "Hyrule Field Grotto Market Butterfly 3": "can_use_sticks"
+    "Hyrule Field Grotto Market Butterfly 1": "butterfly"
+    "Hyrule Field Grotto Market Butterfly 2": "butterfly"
+    "Hyrule Field Grotto Market Butterfly 3": "butterfly"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 
@@ -307,7 +307,7 @@
     BUGS: "has_fire && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Near Gerudo GS": "gs && (can_collect_distance || climb_anywhere) && has_fire"
-    "Hyrule Field Cow": "has_fire && can_play_epona"
+    "Hyrule Field Cow": "has_fire && cow"
     "Hyrule Field Cow Grotto Pot 1": "has_fire"
     "Hyrule Field Cow Grotto Pot 2": "has_fire"
     "Hyrule Field Grotto Near Gerudo Grass 1": "has_fire && can_cut_grass"

@@ -4,7 +4,7 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play_epona"
+    "Kokiri Forest Cow": "is_adult && event(MALON_COW) && cow"
     "Link's House Pot": "true"
 
 "Kokiri Forest":
@@ -235,8 +235,8 @@
     "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
     "Kokiri Forest Storms Grotto Hive 1": "break_hive_low"
     "Kokiri Forest Storms Grotto Hive 2": "break_hive_low"
-    "Kokiri Forest Storms Grotto Butterfly 1": "can_use_sticks"
-    "Kokiri Forest Storms Grotto Butterfly 2": "can_use_sticks"
-    "Kokiri Forest Storms Grotto Butterfly 3": "can_use_sticks"
+    "Kokiri Forest Storms Grotto Butterfly 1": "butterfly"
+    "Kokiri Forest Storms Grotto Butterfly 2": "butterfly"
+    "Kokiri Forest Storms Grotto Butterfly 3": "butterfly"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"

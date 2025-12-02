@@ -121,6 +121,16 @@
 "soul_old_hag": "shared_soul_npc(SOUL_NPC_OLD_HAG, SHARED_SOUL_NPC_OLD_HAG)"
 "soul_thief_guard": "shared_soul_npc(SOUL_NPC_THIEVES, SHARED_SOUL_NPC_THIEVES)"
 
+# Animal Souls
+"shared_soul_animal(a, b)": "cond(setting(sharedSoulsAnimal), soul_animal(b), soul_animal(a))"
+"soul_cucco": "shared_soul_animal(SOUL_ANIMAL_CUCCO, SHARED_SOUL_ANIMAL_CUCCO)"
+"soul_cow": "shared_soul_animal(SOUL_ANIMAL_COW, SHARED_SOUL_ANIMAL_COW)"
+"soul_dog": "shared_soul_animal(SOUL_ANIMAL_DOG, SHARED_SOUL_ANIMAL_DOG)"
+"soul_butterfly": "shared_soul_animal(SOUL_ANIMAL_BUTTERFLY, SHARED_SOUL_ANIMAL_BUTTERFLY)"
+
+"butterfly": "can_use_sticks && soul_butterfly"
+"cow": "can_play_epona && soul_cow"
+
 # Bottles
 "shared_bottle(a, b)": "cond(setting(sharedBottles), has(b), has(a))"
 "shared_bottle_renewable(a, b)": "cond(setting(sharedBottles), renewable(b), renewable(a))"

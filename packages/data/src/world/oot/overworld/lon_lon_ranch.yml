@@ -40,8 +40,8 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Stables Cow Left": "can_play_epona"
-    "Lon Lon Ranch Stables Cow Right": "can_play_epona"
+    "Lon Lon Ranch Stables Cow Left": "cow"
+    "Lon Lon Ranch Stables Cow Right": "cow"
 
 "Lon Lon Ranch Silo":
   region: ENTRANCE
@@ -49,16 +49,16 @@
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Silo HP": "is_child"
-    "Lon Lon Ranch Silo Cow Front": "can_play_epona"
-    "Lon Lon Ranch Silo Cow Back": "can_play_epona"
+    "Lon Lon Ranch Silo Cow Front": "cow"
+    "Lon Lon Ranch Silo Cow Back": "cow"
 
 "Lon Lon Ranch House":
   region: ENTRANCE
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon"
-    "Lon Lon Ranch Talon Buy Milk": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && merchant_price(0x03)"
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco"
+    "Lon Lon Ranch Talon Buy Milk": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco && merchant_price(0x03)"
     "Lon Lon Ranch Talon House Pot 1": "true"
     "Lon Lon Ranch Talon House Pot 2": "true"
     "Lon Lon Ranch Talon House Pot 3": "true"
