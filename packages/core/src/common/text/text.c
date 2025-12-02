@@ -465,9 +465,11 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_SOUL_ANIMAL_CUCCO:
     case GI_OOT_SOUL_ANIMAL_COW:
     case GI_OOT_SOUL_ANIMAL_DOG:
+    case GI_OOT_SOUL_ANIMAL_BUTTERFLY:
     case GI_MM_SOUL_ANIMAL_CUCCO:
     case GI_MM_SOUL_ANIMAL_COW:
     case GI_MM_SOUL_ANIMAL_DOG:
+    case GI_MM_SOUL_ANIMAL_BUTTERFLY:
         return !Config_Flag(CFG_SHARED_SOULS_ANIMAL);
     case GI_OOT_SOUL_MISC_GS:
     case GI_OOT_SOUL_MISC_BUSINESS_SCRUB:

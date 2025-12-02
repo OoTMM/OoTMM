@@ -418,15 +418,17 @@ static const char* const kSoulsNpcMm[] = {
 };
 
 static const char* const kSoulsAnimalOot[] = {
-    "Cucco",
-    "Cow",
-    "Dog",
+    "Cuccos",
+    "Cows",
+    "Dogs",
+    "Butterflies",
 };
 
 static const char* const kSoulsAnimalMm[] = {
-    "Cucco",
-    "Cow",
-    "Dog",
+    "Cuccos",
+    "Cows",
+    "Dogs",
+    "Butterflies",
 };
 
 static const char* const kSoulsMiscOot[] = {
