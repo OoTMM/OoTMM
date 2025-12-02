@@ -6,7 +6,7 @@
 u8 gNoLowHealthBeep;
 EXPORT_SYMBOL(NO_LOW_HEALTH_BEEP, gNoLowHealthBeep);
 
-#define FRAME_TO_BEEP 5
+#define FRAME_TO_BEEP 10
 
 void LifeMeter_UpdateSizeAndBeep(PlayState* play) {
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
