@@ -115,7 +115,7 @@
   exits:
     "Beneath The Well Cow Hall": "true"
   locations:
-    "Beneath The Well Cow": "can_play_epona"
+    "Beneath The Well Cow": "cow"
     "Beneath The Well Grass Cow 1": "true"
     "Beneath The Well Grass Cow 2": "true"
     "Beneath The Well Grass Cow 3": "true"

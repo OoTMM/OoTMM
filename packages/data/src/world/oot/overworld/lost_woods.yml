@@ -112,9 +112,9 @@
     "Lost Woods Grotto Generic Grass 4": "can_cut_grass"
     "Lost Woods Grotto Generic Hive 1": "break_hive_low"
     "Lost Woods Grotto Generic Hive 2": "break_hive_low"
-    "Lost Woods Grotto Generic Butterfly 1": "can_use_sticks"
-    "Lost Woods Grotto Generic Butterfly 2": "can_use_sticks"
-    "Lost Woods Grotto Generic Butterfly 3": "can_use_sticks"
+    "Lost Woods Grotto Generic Butterfly 1": "butterfly"
+    "Lost Woods Grotto Generic Butterfly 2": "butterfly"
+    "Lost Woods Grotto Generic Butterfly 3": "butterfly"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 
@@ -165,11 +165,11 @@
     "Lost Woods Grass Deep 5": "can_cut_grass"
     "Lost Woods Grass Deep 6": "can_cut_grass"
     "Lost Woods Rupee Boulder": "has_explosives_or_hammer"
-    "Lost Woods Butterfly 1": "is_child && can_use_sticks"
-    "Lost Woods Butterfly 2": "is_child && can_use_sticks"
-    "Lost Woods Butterfly 3": "is_child && can_use_sticks"
-    "Lost Woods Butterfly 4": "is_child && can_use_sticks"
-    "Lost Woods Butterfly 5": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 1": "is_child && butterfly"
+    "Lost Woods Butterfly 2": "is_child && butterfly"
+    "Lost Woods Butterfly 3": "is_child && butterfly"
+    "Lost Woods Butterfly 4": "is_child && butterfly"
+    "Lost Woods Butterfly 5": "is_child && butterfly"
 
 "Lost Woods Soil Late Fairies":
   region: LOST_WOODS

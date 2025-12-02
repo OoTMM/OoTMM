@@ -40,8 +40,8 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Stables Cow Left": "can_play_epona"
-    "Lon Lon Ranch Stables Cow Right": "can_play_epona"
+    "Lon Lon Ranch Stables Cow Left": "cow"
+    "Lon Lon Ranch Stables Cow Right": "cow"
 
 "Lon Lon Ranch Silo":
   region: ENTRANCE
@@ -49,8 +49,8 @@
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Silo HP": "is_child"
-    "Lon Lon Ranch Silo Cow Front": "can_play_epona"
-    "Lon Lon Ranch Silo Cow Back": "can_play_epona"
+    "Lon Lon Ranch Silo Cow Front": "cow"
+    "Lon Lon Ranch Silo Cow Back": "cow"
 
 "Lon Lon Ranch House":
   region: ENTRANCE

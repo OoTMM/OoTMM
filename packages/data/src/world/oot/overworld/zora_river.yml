@@ -178,9 +178,9 @@
     "Zora River Grotto Grass 4": "can_cut_grass"
     "Zora River Grotto Hive 1": "break_hive_low"
     "Zora River Grotto Hive 2": "break_hive_low"
-    "Zora River Grotto Butterfly 1": "can_use_sticks"
-    "Zora River Grotto Butterfly 2": "can_use_sticks"
-    "Zora River Grotto Butterfly 3": "can_use_sticks"
+    "Zora River Grotto Butterfly 1": "butterfly"
+    "Zora River Grotto Butterfly 2": "butterfly"
+    "Zora River Grotto Butterfly 3": "butterfly"
   gossip:
     "Zora River Gossip Grotto": "true"
 

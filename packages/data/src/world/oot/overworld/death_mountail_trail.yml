@@ -98,9 +98,9 @@
     "Death Mountain Trail Grotto Grass 4": "can_cut_grass"
     "Death Mountain Trail Grotto Hive 1": "break_hive_low"
     "Death Mountain Trail Grotto Hive 2": "break_hive_low"
-    "Death Mountain Trail Grotto Butterfly 1": "can_use_sticks"
-    "Death Mountain Trail Grotto Butterfly 2": "can_use_sticks"
-    "Death Mountain Trail Grotto Butterfly 3": "can_use_sticks"
+    "Death Mountain Trail Grotto Butterfly 1": "butterfly"
+    "Death Mountain Trail Grotto Butterfly 2": "butterfly"
+    "Death Mountain Trail Grotto Butterfly 3": "butterfly"
   gossip:
     "Death Mountain Trail Gossip Grotto": "true"
 
@@ -112,7 +112,7 @@
   events:
     RUPEES: "true"
   locations:
-    "Death Mountain Trail Cow": "can_play_epona"
+    "Death Mountain Trail Cow": "cow"
     "Death Mountain Trail Cow Grotto Grass 1": "can_cut_grass"
     "Death Mountain Trail Cow Grotto Grass 2": "can_cut_grass"
     "Death Mountain Trail Cow Grotto Rupee 1": "true"

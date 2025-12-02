@@ -43,7 +43,7 @@
     "Mountain Gossip Grotto": "true"
     "Ocean Gossip Grotto": "can_break_boulders"
     "Canyon Gossip Grotto": "true"
-    "Termina Field Butterflies": "has_sticks"
+    "Termina Field Butterflies": "butterfly"
   locations:
     "Termina Field Water Chest": "underwater_walking"
     "Termina Field Tall Grass Chest": "true"
@@ -458,8 +458,8 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Cow Front": "can_play_epona"
-    "Termina Field Cow Back": "can_play_epona"
+    "Termina Field Cow Front": "cow"
+    "Termina Field Cow Back": "cow"
     "Termina Field Cow Grotto Grass 01": "true"
     "Termina Field Cow Grotto Grass 02": "true"
     "Termina Field Cow Grotto Grass 03": "true"
@@ -533,9 +533,9 @@
     "Termina Field Cow Grotto Grass 71": "true"
     "Termina Field Cow Grotto Grass 72": "true"
     "Termina Field Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
-    "Termina Field Cow Grotto Butterfly 1": "has_sticks"
-    "Termina Field Cow Grotto Butterfly 2": "has_sticks"
-    "Termina Field Cow Grotto Butterfly 3": "has_sticks"
+    "Termina Field Cow Grotto Butterfly 1": "butterfly"
+    "Termina Field Cow Grotto Butterfly 2": "butterfly"
+    "Termina Field Cow Grotto Butterfly 3": "butterfly"
 
 "Swamp Gossip Grotto":
   region: ENTRANCE
@@ -594,8 +594,8 @@
     "Ocean Gossip Grotto Grass 4": "true"
     "Ocean Gossip Grotto Grass 5": "true"
     "Ocean Gossip Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
-    "Ocean Gossip Grotto Butterfly 1": "has_sticks"
-    "Ocean Gossip Grotto Butterfly 2": "has_sticks"
+    "Ocean Gossip Grotto Butterfly 1": "butterfly"
+    "Ocean Gossip Grotto Butterfly 2": "butterfly"
   gossip:
     "Termina Field Gossip Grotto Leftmost": "true"
     "Termina Field Gossip Grotto Left-Center": "true"

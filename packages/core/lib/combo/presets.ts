@@ -326,8 +326,8 @@ const ALLSANITY_HELL: PartialDeep<Settings> = {
   soulsBossMm: true,
   soulsNpcOot: true,
   soulsNpcMm: true,
-  soulsAnimalOot: true,
-  soulsAnimalMm: true,
+  //soulsAnimalOot: true,
+  //soulsAnimalMm: true,
   soulsMiscOot: true,
   soulsMiscMm: true,
 };
