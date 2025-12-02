@@ -902,7 +902,16 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_CHATEAU: "Chateau Romani Refill",
   MM_BOTTLE_RUTO_LETTER: "Ruto's Letter",
   OOT_BOTTLED_GOLD_DUST: "Bottle of Gold Dust",
-  MM_BOTTLE_BLUE_FIRE: "Bottle of Blue Fire"
+  MM_BOTTLE_BLUE_FIRE: "Bottle of Blue Fire",
+  OOT_SOUL_ANIMAL_CUCCO: 'Soul of Cuccos (OoT)',
+  OOT_SOUL_ANIMAL_COW: 'Soul of Cows (OoT)',
+  OOT_SOUL_ANIMAL_DOG: 'Soul of Dogs (OoT)',
+  MM_SOUL_ANIMAL_CUCCO: 'Soul of Cuccos (MM)',
+  MM_SOUL_ANIMAL_COW: 'Soul of Cows (MM)',
+  MM_SOUL_ANIMAL_DOG: 'Sould of Dogs (MM)',
+  SHARED_SOUL_ANIMAL_CUCCO: 'Soul of Cuccos',
+  SHARED_SOUL_ANIMAL_COW: 'Soul of Cows',
+  SHARED_SOUL_ANIMAL_DOG: 'Soul of Dogs',
 };
 
 export function itemName(item: string) {

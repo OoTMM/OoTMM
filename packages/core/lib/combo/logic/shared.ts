@@ -74,6 +74,12 @@ const SOULS_NPC: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_NPC_THIEVES,                 oot: Items.OOT_SOUL_NPC_THIEVES,                 mm: Items.MM_SOUL_NPC_THIEVES },
 ];
 
+const SOULS_ANIMAL: ItemSharedDef[] = [
+  { shared: Items.SHARED_SOUL_ANIMAL_CUCCO,         oot: Items.OOT_SOUL_ANIMAL_CUCCO,         mm: Items.MM_SOUL_ANIMAL_CUCCO },
+  { shared: Items.SHARED_SOUL_ANIMAL_COW,           oot: Items.OOT_SOUL_ANIMAL_COW,           mm: Items.MM_SOUL_ANIMAL_COW },
+  { shared: Items.SHARED_SOUL_ANIMAL_DOG,           oot: Items.OOT_SOUL_ANIMAL_DOG,           mm: Items.MM_SOUL_ANIMAL_DOG },
+];
+
 const SOULS_MISC: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_MISC_GS,              oot: Items.OOT_SOUL_MISC_GS,              mm: Items.MM_SOUL_MISC_GS },
   { shared: Items.SHARED_SOUL_MISC_BUSINESS_SCRUB,  oot: Items.OOT_SOUL_MISC_BUSINESS_SCRUB,  mm: Items.MM_SOUL_MISC_BUSINESS_SCRUB },
@@ -125,4 +131,4 @@ const BOTTLES: ItemSharedDef[] = [
 ]
 
 
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS, BOTTLES };
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS, BOTTLES };
