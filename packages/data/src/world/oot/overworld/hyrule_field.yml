@@ -21,7 +21,7 @@
     "Hyrule Field Fairy Grotto": "has_explosives_or_hammer"
     "Hyrule Field Red Boulders": "is_adult && can_hammer"
   events:
-    BIG_POE: "can_ride_epona && can_use_bow && has_bottle"
+    BIG_POE: "can_ride_epona && can_use_bow && has_bottle && soul_poe"
     #There are rocks near Gerudo Valley you can farm for drops
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"

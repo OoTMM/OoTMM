@@ -139,7 +139,7 @@
   events:
     ARROWS: "true"
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
-    DAMPE_BIG_POE: "soul_dampe && can_kill_big_poe && is_night3"
+    DAMPE_BIG_POE: "soul_dampe && can_kill_big_poe && is_night3 && soul_poe"
   exits:
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"

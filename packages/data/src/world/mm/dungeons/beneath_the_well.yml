@@ -126,7 +126,7 @@
 "Beneath The Well Big Poe Room":
   dungeon: BtW
   events:
-    WELL_BIG_POE: "can_kill_big_poe"
+    WELL_BIG_POE: "can_kill_big_poe && soul_poe"
   exits:
     "Beneath The Well Cow Hall": "true"
   locations:

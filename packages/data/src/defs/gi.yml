@@ -270,6 +270,7 @@
 - { id: OOT_SOUL_ENEMY_STALCHILD, type: SOUL, add: [OOT_SOUL, 0x0027], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Stalchildren" }
 - { id: OOT_SOUL_ENEMY_GUAY, type: SOUL, add: [OOT_SOUL, 0x0028], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Guays" }
 - { id: OOT_SOUL_ENEMY_THIEVES, type: SOUL, add: [OOT_SOUL, 0x0029], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of the Fighting Gerudos" }
+- { id: OOT_SOUL_ENEMY_POE, type: SOUL, add: [OOT_SOUL, 0x002a], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Poes" }
 - { id: OOT_SOUL_BOSS_QUEEN_GOHMA, type: SOUL, add: [OOT_SOUL, 0x1000], flags: 0x80, draw: [GS_SOUL, 4], object: [oot, 0x015c], name: "the <C1>Soul of Queen Gohma" }
 - { id: OOT_SOUL_BOSS_KING_DODONGO, type: SOUL, add: [OOT_SOUL, 0x1001], flags: 0x80, draw: [GS_SOUL, 4], object: [oot, 0x015c], name: "the <C1>Soul of King Dodongo" }
 - { id: OOT_SOUL_BOSS_BARINADE, type: SOUL, add: [OOT_SOUL, 0x1002], flags: 0x80, draw: [GS_SOUL, 4], object: [oot, 0x015c], name: "the <C1>Soul of Barinade" }
@@ -702,6 +703,7 @@
 - { id: MM_SOUL_ENEMY_WART, type: SOUL, add: [MM_SOUL, 0x002c], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Warts" }
 - { id: MM_SOUL_ENEMY_CAPTAIN_KEETA, type: SOUL, add: [MM_SOUL, 0x002d], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Captain Keeta" }
 - { id: MM_SOUL_ENEMY_THIEVES, type: SOUL, add: [MM_SOUL, 0x002e], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of the Fighting Pirates" }
+- { id: MM_SOUL_ENEMY_POE, type: SOUL, add: [MM_SOUL, 0x002f], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Poes" }
 - { id: MM_SOUL_BOSS_ODOLWA, type: SOUL, add: [MM_SOUL, 0x1000], flags: 0xa0, draw: [GS_SOUL, 4], object: [mm, 0x0125], name: "the <C1>Soul of Odolwa" }
 - { id: MM_SOUL_BOSS_GOHT, type: SOUL, add: [MM_SOUL, 0x1001], flags: 0xa0, draw: [GS_SOUL, 4], object: [mm, 0x0125], name: "the <C1>Soul of Goht" }
 - { id: MM_SOUL_BOSS_GYORG, type: SOUL, add: [MM_SOUL, 0x1002], flags: 0xa0, draw: [GS_SOUL, 4], object: [mm, 0x0125], name: "the <C1>Soul of Gyorg" }

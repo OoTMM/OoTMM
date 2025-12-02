@@ -77,6 +77,7 @@
 "soul_leever": "shared_soul_enemy(SOUL_ENEMY_LEEVER, SHARED_SOUL_ENEMY_LEEVER)"
 "soul_stalchild": "shared_soul_enemy(SOUL_ENEMY_STALCHILD, SHARED_SOUL_ENEMY_STALCHILD)"
 "soul_thief_fighter": "shared_soul_enemy(SOUL_ENEMY_THIEVES, SHARED_SOUL_ENEMY_THIEVES)"
+"soul_poe": "shared_soul_enemy(SOUL_ENEMY_POE, SHARED_SOUL_ENEMY_POE)"
 
 "shared_soul_misc(a,b)": "cond(setting(sharedSoulsMisc), soul_misc(b), soul_misc(a))"
 "soul_gs": "shared_soul_misc(SOUL_MISC_GS, SHARED_SOUL_MISC_GS)"

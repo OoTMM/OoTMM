@@ -33,6 +33,7 @@ const SOULS_ENEMY: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_ENEMY_LEEVER,             oot: Items.OOT_SOUL_ENEMY_LEEVER,             mm: Items.MM_SOUL_ENEMY_LEEVER },
   { shared: Items.SHARED_SOUL_ENEMY_STALCHILD,          oot: Items.OOT_SOUL_ENEMY_STALCHILD,          mm: Items.MM_SOUL_ENEMY_STALCHILD },
   { shared: Items.SHARED_SOUL_ENEMY_THIEVES,            oot: Items.OOT_SOUL_ENEMY_THIEVES,            mm: Items.MM_SOUL_ENEMY_THIEVES },
+  { shared: Items.SHARED_SOUL_ENEMY_POE,                oot: Items.OOT_SOUL_ENEMY_POE,                mm: Items.MM_SOUL_ENEMY_POE },
 ];
 
 const SOULS_NPC: ItemSharedDef[] = [

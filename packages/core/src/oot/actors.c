@@ -46,8 +46,12 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
         case 3:
             return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_COMPOSER_BROS));
         default:
-            return 1;
+            return comboHasSoulOot(GI_OOT_SOUL_ENEMY_POE);
         }
+    case ACTOR_EN_PO_SISTERS:
+    case ACTOR_EN_PO_FIELD:
+    case ACTOR_EN_PO_DESERT:
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_POE);
     case ACTOR_EN_DNS:
     case ACTOR_EN_SHOPNUTS:
         return opt(comboHasSoulOot(GI_OOT_SOUL_MISC_BUSINESS_SCRUB));
