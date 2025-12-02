@@ -108,7 +108,7 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Cucco Shack Bunny Mask": "soul_grog && has(MASK_BREMEN)"
+    "Cucco Shack Bunny Mask": "soul_grog && has(MASK_BREMEN) && soul_cucco"
     "Cucco Shack Wonder Item 1": "true"
     "Cucco Shack Wonder Item 2": "true"
     "Cucco Shack Wonder Item 3": "true"

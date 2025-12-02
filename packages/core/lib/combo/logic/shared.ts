@@ -78,6 +78,7 @@ const SOULS_ANIMAL: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_ANIMAL_CUCCO,         oot: Items.OOT_SOUL_ANIMAL_CUCCO,         mm: Items.MM_SOUL_ANIMAL_CUCCO },
   { shared: Items.SHARED_SOUL_ANIMAL_COW,           oot: Items.OOT_SOUL_ANIMAL_COW,           mm: Items.MM_SOUL_ANIMAL_COW },
   { shared: Items.SHARED_SOUL_ANIMAL_DOG,           oot: Items.OOT_SOUL_ANIMAL_DOG,           mm: Items.MM_SOUL_ANIMAL_DOG },
+  { shared: Items.SHARED_SOUL_ANIMAL_BUTTERFLY,     oot: Items.OOT_SOUL_ANIMAL_BUTTERFLY,     mm: Items.MM_SOUL_ANIMAL_BUTTERFLY },
 ];
 
 const SOULS_MISC: ItemSharedDef[] = [

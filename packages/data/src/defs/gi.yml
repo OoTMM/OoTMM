@@ -327,6 +327,7 @@
 - { id: OOT_SOUL_ANIMAL_CUCCO, type: SOUL, add: [OOT_SOUL, 0x3000], flags: 0x80, draw: [GS_SOUL, 6], object: [oot, 0x015c], name: "the <C1>Soul of Cuccos" }
 - { id: OOT_SOUL_ANIMAL_COW, type: SOUL, add: [OOT_SOUL, 0x3001], flags: 0x80, draw: [GS_SOUL, 6], object: [oot, 0x015c], name: "the <C1>Soul of Cows" }
 - { id: OOT_SOUL_ANIMAL_DOG, type: SOUL, add: [OOT_SOUL, 0x3002], flags: 0x80, draw: [GS_SOUL, 6], object: [oot, 0x015c], name: "the <C1>Soul of Dogs" }
+- { id: OOT_SOUL_ANIMAL_BUTTERFLY, type: SOUL, add: [OOT_SOUL, 0x3003], flags: 0x80, draw: [GS_SOUL, 6], object: [oot, 0x015c], name: "the <C1>Soul of Butterflies" }
 - { id: OOT_SOUL_MISC_GS, type: SOUL, add: [OOT_SOUL, 0x4000], flags: 0x80, draw: [GS_SOUL, 7], object: [oot, 0x015c], name: "the <C1>Soul of Gold Skulltulas" }
 - { id: OOT_SOUL_MISC_BUSINESS_SCRUB, type: SOUL, add: [OOT_SOUL, 0x4001], flags: 0x80, draw: [GS_SOUL, 7], object: [oot, 0x015c], name: "the <C1>Soul of Business Scrubs" }
 - { id: OOT_KEY_RING, type: KEY, add: [OOT_KEY_RING, 0xffff], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring" }
@@ -762,6 +763,7 @@
 - { id: MM_SOUL_ANIMAL_CUCCO, type: SOUL, add: [MM_SOUL, 0x3000], flags: 0x80, draw: [GS_SOUL, 6], object: [mm, 0x0125], name: "the <C1>Soul of Cuccos" }
 - { id: MM_SOUL_ANIMAL_COW, type: SOUL, add: [MM_SOUL, 0x3001], flags: 0x80, draw: [GS_SOUL, 6], object: [mm, 0x0125], name: "the <C1>Soul of Cows" }
 - { id: MM_SOUL_ANIMAL_DOG, type: SOUL, add: [MM_SOUL, 0x3002], flags: 0x80, draw: [GS_SOUL, 6], object: [mm, 0x0125], name: "the <C1>Soul of Dogs" }
+- { id: MM_SOUL_ANIMAL_BUTTERFLY, type: SOUL, add: [MM_SOUL, 0x3003], flags: 0x80, draw: [GS_SOUL, 6], object: [mm, 0x0125], name: "the <C1>Soul of Butterflies" }
 - { id: MM_SOUL_MISC_GS, type: SOUL, add: [MM_SOUL, 0x4000], flags: 0xa0, draw: [GS_SOUL, 7], object: [mm, 0x0125], name: "the <C1>Soul of Gold Skulltulas" }
 - { id: MM_SOUL_MISC_BUSINESS_SCRUB, type: SOUL, add: [MM_SOUL, 0x4001], flags: 0xa0, draw: [GS_SOUL, 7], object: [mm, 0x0125], name: "the <C1>Soul of Business Scrubs" }
 - { id: MM_KEY_RING, type: KEY, add: [MM_KEY_RING, 0xffff], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring" }

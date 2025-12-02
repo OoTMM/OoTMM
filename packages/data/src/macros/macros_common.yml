@@ -126,6 +126,7 @@
 "soul_cucco": "shared_soul_animal(SOUL_ANIMAL_CUCCO, SHARED_SOUL_ANIMAL_CUCCO)"
 "soul_cow": "shared_soul_animal(SOUL_ANIMAL_COW, SHARED_SOUL_ANIMAL_COW)"
 "soul_dog": "shared_soul_animal(SOUL_ANIMAL_DOG, SHARED_SOUL_ANIMAL_DOG)"
+"soul_butterfly": "shared_soul_animal(SOUL_ANIMAL_BUTTERFLY, SHARED_SOUL_ANIMAL_BUTTERFLY)"
 
 # Bottles
 "shared_bottle(a, b)": "cond(setting(sharedBottles), has(b), has(a))"

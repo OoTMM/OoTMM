@@ -906,12 +906,15 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SOUL_ANIMAL_CUCCO: 'Soul of Cuccos (OoT)',
   OOT_SOUL_ANIMAL_COW: 'Soul of Cows (OoT)',
   OOT_SOUL_ANIMAL_DOG: 'Soul of Dogs (OoT)',
+  OOT_SOUL_ANIMAL_BUTTERFLY: 'Soul of Butterflies (OoT)',
   MM_SOUL_ANIMAL_CUCCO: 'Soul of Cuccos (MM)',
   MM_SOUL_ANIMAL_COW: 'Soul of Cows (MM)',
   MM_SOUL_ANIMAL_DOG: 'Sould of Dogs (MM)',
+  MM_SOUL_ANIMAL_BUTTERFLY: 'Soul of Butterflies (MM)',
   SHARED_SOUL_ANIMAL_CUCCO: 'Soul of Cuccos',
   SHARED_SOUL_ANIMAL_COW: 'Soul of Cows',
   SHARED_SOUL_ANIMAL_DOG: 'Soul of Dogs',
+  SHARED_SOUL_ANIMAL_BUTTERFLY: 'Soul of Butterflies',
 };
 
 export function itemName(item: string) {
