@@ -241,6 +241,7 @@ static const char* const kSoulsEnemyOot[] = {
     "Stalchildren",
     "Guays",
     "Gerudo Fighters",
+    "Poes",
 };
 
 static const char* const kSoulsBossOot[] = {
@@ -351,6 +352,7 @@ static const char* const kSoulsEnemyMm[] = {
     "Warts",
     "Captain Keeta",
     "Pirate Fighters",
+    "Poes",
 };
 
 static const char* const kSoulsBossMm[] = {

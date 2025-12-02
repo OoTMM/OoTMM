@@ -116,7 +116,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ghost Hut HP": "soul_poe_collector && (has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
+    "Ghost Hut HP": "soul_poe_collector && soul_poe && (has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
 
 "Ikana Castle Entrance":
   region: IKANA_CASTLE

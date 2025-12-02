@@ -90,7 +90,7 @@
     "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU) || hookshot_anywhere"
     "WARP_SONGS": "true"
   events:
-    POE: "true"
+    POE: "soul_poe"
   locations:
     "Stone Tower Temple Inverted Wizzrobe Chest": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows)"
     "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1": "true"
@@ -103,7 +103,7 @@
     "Stone Tower Temple Inverted Wizzrobe Ledge": "has(MASK_DEKU) || hookshot_anywhere"
     "WARP_SONGS": "true"
   events:
-    POE: "true"
+    POE: "soul_poe"
   locations:
     "Stone Tower Temple Inverted Death Armos Chest": "can_use_elegy"
     "Stone Tower Temple Inverted Pot Poe Maze Side 1": "true"

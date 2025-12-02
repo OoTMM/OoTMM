@@ -23,7 +23,7 @@
     "Forest Temple West Garden": "can_hit_triggers_distance"
     "Forest Temple East Garden": "can_hit_triggers_distance"
   events:
-    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
+    FOREST_POE_4: "soul_poe && event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
     "MQ Forest Temple Wolfos Chest": "soul_wolfos && can_play_time && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
     "MQ Forest Temple Pot Main Room 1": "true"
@@ -113,8 +113,8 @@
     "Forest Temple Wallmaster East": "soul_wallmaster && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5)"
     "Forest Temple Falling Ceiling": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
   events:
-    FOREST_POE_1: "can_use_bow"
-    FOREST_POE_2: "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && can_use_bow"
+    FOREST_POE_1: "soul_poe && can_use_bow"
+    FOREST_POE_2: "soul_poe && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && can_use_bow"
   locations:
     "MQ Forest Temple Map Chest": "event(FOREST_POE_1)"
     "MQ Forest Temple Bow Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon"
@@ -132,7 +132,7 @@
 "Forest Temple Falling Ceiling":
   dungeon: Forest
   events:
-    FOREST_POE_3: "small_keys_forest(6) && can_use_bow"
+    FOREST_POE_3: "soul_poe && small_keys_forest(6) && can_use_bow"
   locations:
     "MQ Forest Temple Falling Ceiling Chest": "true"
     "MQ Forest Temple East Garden Ledge Chest": "true"

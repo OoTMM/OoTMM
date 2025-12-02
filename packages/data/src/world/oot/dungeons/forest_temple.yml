@@ -28,7 +28,7 @@
     "Forest Temple Antichamber": "event(FOREST_POE_4)"
     "Forest Temple Poe 3": "climb_anywhere || hookshot_anywhere"
   events:
-    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
+    FOREST_POE_4: "soul_poe && event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
     "Forest Temple GS Main": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
     "Forest Temple Pot Main Room 1": "true"
@@ -146,7 +146,7 @@
   exits:
     "Forest Temple Mini-Boss 2": "true"
   events:
-    FOREST_POE_1: "can_use_bow"
+    FOREST_POE_1: "soul_poe && can_use_bow"
   locations:
     "Forest Temple Poe Key": "event(FOREST_POE_1)"
 
@@ -166,7 +166,7 @@
   exits:
     "Forest Temple Twisted 2 Normal": "small_keys_forest(4)"
   events:
-    FOREST_POE_2: "can_use_bow"
+    FOREST_POE_2: "soul_poe && can_use_bow"
   locations:
     "Forest Temple Compass": "event(FOREST_POE_2)"
     "Forest Temple Pot Blue Poe 1": "true"
@@ -208,7 +208,7 @@
   exits:
     "Forest Temple Checkerboard": "true"
   events:
-    FOREST_POE_3: "can_use_bow"
+    FOREST_POE_3: "soul_poe && can_use_bow"
   locations:
     "Forest Temple Pot Green Poe Pot 1": "true"
     "Forest Temple Pot Green Poe Pot 2": "true"
