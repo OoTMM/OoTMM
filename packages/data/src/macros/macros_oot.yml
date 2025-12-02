@@ -306,6 +306,7 @@
 "soul_boss(x)": "(!setting(soulsBossOot)) || has(x)"
 "soul_npc(x)": "(!setting(soulsNpcOot)) || has(x)"
 "soul_misc(x)": "(!setting(soulsMiscOot)) || has(x)"
+"soul_animal(x)": "(!setting(soulsAnimalOot)) || has(x)"
 "climb_anywhere": "setting(climbMostSurfacesOot, logical)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot, logical)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot, logical)"
