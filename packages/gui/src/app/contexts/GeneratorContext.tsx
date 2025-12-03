@@ -4,7 +4,6 @@ import type { GeneratorOutput, OptionsInput } from '@ootmm/core';
 
 import * as API from '../api';
 import { loadFile, saveFile } from '../db';
-import { useCosmetics } from './CosmeticsContext';
 import { useStore } from '../store';
 
 type GeneratorState = {
@@ -109,7 +108,7 @@ export function useRomConfig() {
 
 export function useGenerator() {
   const settings = useStore(state => state.settings);
-  const cosmetics = useCosmetics();
+  const cosmetics = useStore(state => state.cosmetics);
   const random = useStore(state => state.randomSettings);
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
