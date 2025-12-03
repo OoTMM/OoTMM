@@ -3,7 +3,6 @@ import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { Setting, SettingsImportExport } from '@/app/components/settings';
-import { useGenerator } from '../../contexts/GeneratorContext';
 import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label, Card } from '../ui';
 import { PresetSelector } from '../PresetSelector';
 import { Result } from '../Result';
@@ -43,7 +42,8 @@ export function GeneratorGeneral() {
   const setRomConfigFile = useStore(state => state.setRomConfigFile);
 
   const { mode } = config;
-  const { error, result, warnings, archive, generate } = useGenerator();
+  const generate = useStore(state => state.generate);
+  const { error, result, warnings, archive } = useStore(state => state.generator);
   const randomSettings = useStore(state => state.randomSettings);
   const patchRandomSettings = useStore(state => state.patchRandomSettings);
   const settings = useStore(state => state.settings);
