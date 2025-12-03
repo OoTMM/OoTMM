@@ -3,7 +3,6 @@ import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { Setting, SettingsImportExport } from '@/app/components/settings';
-import { useSettings } from '../../contexts/SettingsContext';
 import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
 import { useGenerator, useRomConfig } from '../../contexts/GeneratorContext';
 import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label, Card } from '../ui';
@@ -13,6 +12,7 @@ import { Result } from '../Result';
 import logoOot from '../../../assets/oot.png';
 import logoMm from '../../../assets/mm.png';
 import logoOotmm from '../../../assets/logo.png';
+import { useStore } from '@/app/store';
 
 type ModeCardProps = {
   selected: boolean;
@@ -43,7 +43,7 @@ export function GeneratorGeneral() {
   const { error, result, warnings, archive, generate } = useGenerator();
   const randomSettings = useRandomSettings();
   const patchRandomSettings = usePatchRandomSettings();
-  const settings = useSettings();
+  const settings = useStore(state => state.settings.settings);
 
   const isModeCreate = mode === 'create';
   const isModeRandom = mode === 'random';

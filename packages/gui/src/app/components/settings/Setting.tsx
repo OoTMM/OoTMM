@@ -1,8 +1,8 @@
 import { SETTINGS } from '@ootmm/core';
 
-import { usePatchSettings, useSettings } from '../../contexts/SettingsContext';
 import { InputField, SelectField, CheckboxField, Select } from '@/app/components/ui';
 import { xor } from 'lodash';
+import { useStore } from '@/app/store';
 
 const SET_OPTIONS = [
   { value: 'none', label: 'None' },
@@ -13,7 +13,7 @@ const SET_OPTIONS = [
 ];
 
 function SettingTooltip({ setting }: { setting: string }) {
-  const settings = useSettings();
+  const settings = useStore(state => state.settings.settings);
   const data = SETTINGS.find(x => x.key === setting)!;
   const description = (data as any).description;
 
@@ -69,8 +69,8 @@ function SettingTooltip({ setting }: { setting: string }) {
 }
 
 function SettingSet({ setting }: { setting: string }) {
-  const settings = useSettings();
-  const patchSettings = usePatchSettings();
+  const settings = useStore(state => state.settings.settings);
+  const patchSettings = useStore(state => state.settings.patchSettings);
   const data = SETTINGS.find(x => x.key === setting)!;
   const s = settings[data.key] as any;
 
@@ -187,8 +187,8 @@ function SettingSet({ setting }: { setting: string }) {
 }
 
 export function Setting({ setting }: { setting: string }) {
-  const settings = useSettings();
-  const patchSettings = usePatchSettings();
+  const settings = useStore(state => state.settings.settings);
+  const patchSettings = useStore(state => state.settings.patchSettings);
   const data = SETTINGS.find(x => x.key === setting)!;
   const cond = (data as any).cond;
   const isDisabled = cond && !cond(settings);

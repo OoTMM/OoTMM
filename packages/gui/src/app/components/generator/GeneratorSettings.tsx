@@ -1,9 +1,9 @@
 import { LuGlobe, LuLink, LuSettings, LuShuffle, LuTag, LuStar, LuTriangleAlert, LuFlaskConical } from 'react-icons/lu';
 
-import { useSetting } from '@/app/contexts/SettingsContext';
 import { TabView, TabViewRoute } from '../nav';
 import { SpecialConds } from '../SpecialConds';
 import { MultipleSettingsEditor, SettingsEditor } from '../settings';
+import { useStore } from '@/app/store';
 
 const PageMain = () => <SettingsEditor category='main'/>;
 const PageShuffle = () => <SettingsEditor category='main.shuffle'/>;
@@ -14,7 +14,8 @@ const PageWorld = () => <SettingsEditor category='main.world'/>;
 const PageMisc = () => <MultipleSettingsEditor name="misc"/>;
 
 export function GeneratorSettings() {
-  const games = useSetting('games');
+  const games = useStore(state => state.settings.settings.games);
+
   const routes: TabViewRoute[] = [
     { name: 'Main', icon: LuSettings, component: PageMain },
     { name: 'Shuffle', icon: LuShuffle, component: PageShuffle },

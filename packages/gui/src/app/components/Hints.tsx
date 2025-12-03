@@ -4,8 +4,8 @@ import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { SettingsPanel } from './settings/SettingsEditor';
-import { useItemPool, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 import { Button } from './ui';
+import { useStore } from '../store';
 
 const hintOptions: { label: string; value: keyof typeof HINT_TYPES }[] = [];
 for (const k of Object.keys(HINT_TYPES)) {
@@ -16,10 +16,9 @@ type HintEditorProps = {
   index: number;
 };
 export function HintEditor({ index }: HintEditorProps) {
-  const hints = useSetting('hints');
+  const { settings, patchSettings, itemPool } = useStore(state => state.settings);
+  const hints = settings.hints;
   const hint = hints[index];
-  const itemPool = useItemPool();
-  const patchSettings = usePatchSettings();
 
   const itemOptions = useMemo(() => Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) })), [itemPool]);
   const selectedItem = itemOptions.find((x) => x.value === hint.item);
@@ -109,8 +108,8 @@ export function HintEditor({ index }: HintEditorProps) {
 }
 
 export function Hints() {
-  const hints = useSetting('hints');
-  const patchSettings = usePatchSettings();
+  const { settings, patchSettings } = useStore(state => state.settings);
+  const hints = settings.hints;
 
   const onNew = useCallback(() => {
     const newArray = [...hints];
