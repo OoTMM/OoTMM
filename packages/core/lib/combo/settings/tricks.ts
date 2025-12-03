@@ -354,6 +354,11 @@ export const TRICKS: Tricks = {
     name: "Use Deku Sticks to Break Ice Cavern Stalagmite Icicles",
     tooltip: "Logic can expect you to use Deku Sticks to break the stalagmite icicles for their item drops in Ice Cavern (Ordinary and MQ) when Icicle Shuffle is active (thus potentially needing multiple revisits with more sticks). This does not affect other checks or dungeon progression.",
   },
+  OOT_MQ_JABU_WITHOUT_COW_SOUL: {
+    game: 'oot',
+    name: "MQ Jabu without cow soul",
+    tooltip: "Logic can expect you to hit the switches in MQ Jabu-Jabu without needing to possess the cow soul.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
