@@ -61,7 +61,7 @@
     "Zora River GS Ladder": "is_child && gs_night && can_damage"
     "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
     "Zora River GS Near Bridge": "is_adult && gs_night && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
-    "Zora River Grass": "(is_child || has_hover_boots || hookshot_anywhere || climb_anywhere) && can_cut_grass"
+    "Zora River Grass": "((is_child && soul_cucco) || has_hover_boots || hookshot_anywhere || climb_anywhere) && can_cut_grass"
     "Zora River Rupee 1": "is_adult && can_swim_or_sink"
     "Zora River Rupee 2": "is_adult && can_swim_or_sink"
     "Zora River Rupee 3": "is_adult && can_swim_or_sink"
