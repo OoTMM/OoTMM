@@ -397,7 +397,7 @@
     "MQ Forest Temple Pot Green Poe 1": "true"
     "MQ Forest Temple Pot Green Poe 2": "true"
   events:
-    FOREST_MQ_AMY_CLEAR: "soul_poe && can_use_bow && has_weapon" #PLACEHOLDER
+    FOREST_MQ_AMY_CLEAR: "soul_poe && can_use_bow"
 "Forest Temple Hallway Between Amy Room And Lobby":
   dungeon: Forest
   exits:

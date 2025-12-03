@@ -352,7 +352,7 @@ export const TRICKS: Tricks = {
   OOT_FOREST_MQ_CLIMBING_BLOCK_ROOM_TWIST_SWITCH_EARLY: {
     game: 'oot',
     name: "Hit/Reach the Forest MQ Twisting Switch While It Is Blocked",
-    tooltip: "This trick makes hitting/reaching this switch, through a variety of means, while the Ice Blocks are still covering the alcove.",
+    tooltip: "This trick makes hitting/reaching this switch logical early, through a variety of means, while the Ice Blocks are still covering the alcove.",
   },
   OOT_ICE_CAVERN_ICICLES_STICKS: {
     game: 'oot',
