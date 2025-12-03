@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { itemName, Items } from '@ootmm/core';
 
-import { useItemPool, useSetting, useSetSettings } from '../contexts/SettingsContext';
 import { Button, Card, InputField, Select } from './ui';
+import { useStore } from '../store';
 
 function itemNameSort(a: string, b: string) {
   const nameA = itemName(a);
@@ -13,10 +13,10 @@ function itemNameSort(a: string, b: string) {
 }
 
 export function StartingItems() {
-  const startingItems = useSetting('startingItems');
+  const startingItems = useStore(state => state.settings.startingItems);
+  const setSettings = useStore(state => state.setSettings);
+  const itemPool = useStore(state => state.itemPool);
   const [startingItemsCache, setStartingItemsCache] = useState(startingItems);
-  const itemPool = useItemPool();
-  const setSettings = useSetSettings();
   const options = useMemo(() => Object.keys(itemPool).filter(x => !startingItemsCache[x]).sort(itemNameSort).map(item => ({ label: itemName(item), value: item })), [itemPool, startingItemsCache]);
 
   const alterItem = useCallback((item: string, count: number) => {

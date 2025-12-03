@@ -2,9 +2,9 @@ import { isEqual } from 'lodash';
 import { PRESETS, Settings } from '@ootmm/core';
 
 import { localStoragePrefixedGet, localStoragePrefixedSet } from '../util';
-import { useSetSettings, useSettings } from '../contexts/SettingsContext';
 import { Select } from './ui';
 import { useState } from 'preact/hooks';
+import { useStore } from '../store';
 
 type Option = {
   label: string;
@@ -27,8 +27,8 @@ const makePresetOptions = () => {
 
 export const PresetSelector = () => {
   const [options, setOptions] = useState(makePresetOptions);
-  const settings = useSettings();
-  const setSettings = useSetSettings();
+  const settings = useStore(state => state.settings);
+  const setSettings = useStore(state => state.setSettings);
   const selectedOption = options.find(opt => isEqual(opt.value, settings));
   const value = selectedOption ? selectedOption.value : null;
 

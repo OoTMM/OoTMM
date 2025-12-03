@@ -2,18 +2,18 @@ import { useCallback, useMemo, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 import { itemName } from '@ootmm/core';
 import { Select, Button, Card } from './ui';
-
-import { useItemPool, useLocations, usePatchSettings, useSetting } from '../contexts/SettingsContext';
+import { useStore } from '../store';
 
 export function Plando() {
-  const plando = useSetting('plando');
+  const plando = useStore(state => state.settings.plando);
+  const patchSettings = useStore(state => state.patchSettings);
+  const itemPool = useStore(state => state.itemPool);
+  const locations = useStore(state => state.locations);
+
   const [selectedLoc, setSelectedLocRaw] = useState<string | null>(null);
   const [selectedItem, setSelectedItemRaw] = useState<string | null>(null);
-  const itemPool = useItemPool();
-  const locations = useLocations();
   const locsOptions = useMemo(() => locations.map((loc) => ({ value: loc, label: loc })), [locations]);
   const itemOptions = useMemo(() => Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) })), [itemPool]);
-  const patchSettings = usePatchSettings();
 
   const setSelectedLoc = (loc: string | null) => {
     if (!loc) return;

@@ -11,7 +11,7 @@ import { GeneratorItems } from './GeneratorItems';
 import { GeneratorLogic } from './GeneratorLogic';
 import { GeneratorEntrances } from './GeneratorEntrances';
 import { GeneratorAdvanced } from './GeneratorAdvanced';
-import { useRomConfig } from '@/app/contexts/GeneratorContext';
+import { useStore } from '@/app/store';
 
 type GeneratorRoute = {
   name: string;
@@ -21,9 +21,9 @@ type GeneratorRoute = {
 };
 
 export function Generator() {
-  const { romConfig } = useRomConfig();
-  const isPatch = romConfig.mode === 'patch';
-  const isRandom = romConfig.mode === 'random';
+  const mode = useStore(state => state.config.mode);
+  const isPatch = mode === 'patch';
+  const isRandom = mode === 'random';
 
   const router = useRouter<GeneratorRoute>([
     { name: 'General', icon: LuSettings, component: GeneratorGeneral },

@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { useLocations, usePatchSettings, useSetting } from '../contexts/SettingsContext';
 import { Button, Card, Select } from './ui';
 import { FaXmark } from 'react-icons/fa6';
+import { useStore } from '../store';
 
 export function JunkLocations() {
-  const junkLocations = useSetting('junkLocations');
+  const junkLocations = useStore(state => state.settings.junkLocations);
+  const patchSettings = useStore(state => state.patchSettings);
+  const locations = useStore(state => state.locations);
   const [junkLocationsCache, setJunkLocationsCache] = useState(junkLocations);
-  const locations = useLocations();
   const options = useMemo(() => locations.filter(x => !junkLocationsCache.includes(x)).sort().map(loc => ({ value: loc, label: loc })), [locations, junkLocationsCache]);
-  const patchSettings = usePatchSettings();
 
   useEffect(() => {
     setJunkLocationsCache(junkLocations);

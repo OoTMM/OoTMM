@@ -1,10 +1,10 @@
 import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 
-import { useCosmetics, useSetCosmetic } from '../contexts/CosmeticsContext';
 import { CheckboxField } from './ui/CheckboxField';
+import { FileSelectField, SelectField } from './ui';
 
 import ootmmLogo from '../../assets/logo.png';
-import { FileSelectField, SelectField } from './ui';
+import { useStore } from '../store';
 
 const COLOR_OPTIONS: { label: string, value: string }[] = [{ value: 'default', label: 'Default' }, { value: 'auto', label: 'Auto' }, { value: 'random', label: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ label: x.name, value: key }))];
 
@@ -36,8 +36,8 @@ function CosmeticTooltips({ cosmetic }: { cosmetic: string }) {
 }
 
 function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
-  const cosmetics = useCosmetics();
-  const setCosmetic = useSetCosmetic();
+  const cosmetics = useStore(state => state.cosmetics);
+  const setCosmetic = useStore(state => state.setCosmetic);
   const data = COSMETICS.find(x => x.key === cosmetic)!;
 
   switch (data.type) {

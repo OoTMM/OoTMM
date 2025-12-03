@@ -1,14 +1,14 @@
 import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
-import { useSettings, usePatchSettings } from '../contexts/SettingsContext';
 import { InputField, CheckboxField, Card } from './ui';
+import { useStore } from '../store';
 
 type SpecialCondsPanelProps = {
   cond: string;
 };
 function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
-  const settings = useSettings();
-  const patchSettings = usePatchSettings();
+  const settings = useStore(state => state.settings);
+  const patchSettings = useStore(state => state.patchSettings);
   const { specialConds } = settings;
   const c = specialConds[cond as keyof typeof SPECIAL_CONDS];
   const enableCond = SPECIAL_CONDS[cond].cond || (() => true);

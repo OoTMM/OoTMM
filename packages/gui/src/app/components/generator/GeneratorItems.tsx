@@ -1,6 +1,6 @@
 import { LuPackage, LuUsers, LuPuzzle, LuClock, LuTrendingUp } from 'react-icons/lu';
 
-import { useSetting } from '@/app/contexts/SettingsContext';
+import { useStore } from '@/app/store';
 import { TabView, TabViewRoute } from '../nav';
 import { StartingItems } from '../StartingItems';
 import { SettingsEditor } from '../settings';
@@ -11,7 +11,8 @@ const PageExtensions = () => <SettingsEditor category='items.extensions'/>;
 const PageAgeless = () => <SettingsEditor category='items.ageless'/>;
 
 export function GeneratorItems() {
-  const games = useSetting('games');
+  const games = useStore(state => state.settings.games);
+
   const routes: TabViewRoute[] = [
     { name: 'Progressive', icon: LuTrendingUp, component: PageProgressive },
     { name: 'Shared', icon: LuUsers, component: PageShared, disabled: games !== 'ootmm' },
