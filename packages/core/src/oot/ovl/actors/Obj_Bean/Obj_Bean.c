@@ -831,6 +831,7 @@ void ObjBean_SetupFly(ObjBean* this) {
 
 void ObjBean_Fly(ObjBean* this, PlayState* play) {
     Camera* mainCam;
+    Player* player;
 
     ObjBean_FollowPath(this, play);
     if (this->currentPointIndex == this->pathCount) {
@@ -862,7 +863,9 @@ void ObjBean_Fly(ObjBean* this, PlayState* play) {
         }
     }
 
-    ObjBean_UpdatePosition(this);
+    player = GET_PLAYER(play);
+    if (!(player->stateFlags1 & PLAYER_ACTOR_STATE_FROZEN))
+        ObjBean_UpdatePosition(this);
 }
 
 void ObjBean_SetupWaitForStepOff(ObjBean* this) {
