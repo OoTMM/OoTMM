@@ -2,17 +2,12 @@ import ReactGA from 'react-ga4';
 
 import { Generator } from './generator/Generator';
 import { Progress } from './Progress';
-import { composeProviders } from '../utils/composeProviders';
-import { GeneratorContextProvider, useGenerator } from '../contexts/GeneratorContext';
+import { useStore } from '../store';
 
 ReactGA.initialize('G-4S4Y8RTZ7T');
 
-const AppProviders = composeProviders([
-  GeneratorContextProvider,
-]);
-
-function AppContent() {
-  const { isGenerating, message, progress } = useGenerator();
+function App() {
+  const { isGenerating, message, progress } = useStore(state => state.generator);
 
   if (isGenerating) {
     return (
@@ -24,10 +19,5 @@ function AppContent() {
 
   return <Generator/>;
 }
-
-const App = () =>
-  <AppProviders>
-    <AppContent/>
-  </AppProviders>;
 
 export default App;

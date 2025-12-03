@@ -8,14 +8,16 @@ import { createRandomSettingsSlice, RandomSettingsSlice } from './randomSettings
 import { CosmeticsSlice, createCosmeticsSlice } from './cosmetics';
 import { loadFile, loadFileLocal, saveFileLocal } from '../db';
 import { ConfigSlice, createConfigSlice } from './config';
+import { createGeneratorSlice, GeneratorSlice } from './generator';
 
-export type Store = SettingsSlice & RandomSettingsSlice & CosmeticsSlice & ConfigSlice;
+export type Store = SettingsSlice & RandomSettingsSlice & CosmeticsSlice & ConfigSlice & GeneratorSlice;
 
 export const useStore = create<Store>((...a) => ({
   ...createSettingsSlice(...a),
   ...createRandomSettingsSlice(...a),
   ...createCosmeticsSlice(...a),
   ...createConfigSlice(...a),
+  ...createGeneratorSlice(...a),
 }));
 
 let settingsUpdateTicket = 0;
