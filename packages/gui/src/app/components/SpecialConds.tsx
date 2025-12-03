@@ -7,7 +7,8 @@ type SpecialCondsPanelProps = {
   cond: string;
 };
 function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
-  const { settings, patchSettings } = useStore(state => state.settings);
+  const settings = useStore(state => state.settings);
+  const patchSettings = useStore(state => state.patchSettings);
   const { specialConds } = settings;
   const c = specialConds[cond as keyof typeof SPECIAL_CONDS];
   const enableCond = SPECIAL_CONDS[cond].cond || (() => true);

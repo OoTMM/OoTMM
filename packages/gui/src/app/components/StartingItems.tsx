@@ -13,8 +13,9 @@ function itemNameSort(a: string, b: string) {
 }
 
 export function StartingItems() {
-  const { settings, setSettings, itemPool } = useStore(state => state.settings);
-  const startingItems = settings.startingItems;
+  const startingItems = useStore(state => state.settings.startingItems);
+  const setSettings = useStore(state => state.setSettings);
+  const itemPool = useStore(state => state.itemPool);
   const [startingItemsCache, setStartingItemsCache] = useState(startingItems);
   const options = useMemo(() => Object.keys(itemPool).filter(x => !startingItemsCache[x]).sort(itemNameSort).map(item => ({ label: itemName(item), value: item })), [itemPool, startingItemsCache]);
 

@@ -3,7 +3,6 @@ import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { Setting, SettingsImportExport } from '@/app/components/settings';
-import { useRandomSettings, usePatchRandomSettings } from '../../contexts/RandomSettingsContext';
 import { useGenerator, useRomConfig } from '../../contexts/GeneratorContext';
 import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label, Card } from '../ui';
 import { PresetSelector } from '../PresetSelector';
@@ -41,9 +40,9 @@ export function GeneratorGeneral() {
   const { romConfig, setRomConfigFile, setSeed, setMode } = useRomConfig();
   const { mode, seed } = romConfig;
   const { error, result, warnings, archive, generate } = useGenerator();
-  const randomSettings = useRandomSettings();
-  const patchRandomSettings = usePatchRandomSettings();
-  const settings = useStore(state => state.settings.settings);
+  const randomSettings = useStore(state => state.randomSettings);
+  const patchRandomSettings = useStore(state => state.patchRandomSettings);
+  const settings = useStore(state => state.settings);
 
   const isModeCreate = mode === 'create';
   const isModeRandom = mode === 'random';

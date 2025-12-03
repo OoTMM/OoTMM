@@ -1,7 +1,7 @@
 import { Items, makeSettings, mergeSettings, Settings, SettingsPatch } from '@ootmm/core';
 import { StateCreator } from 'zustand';
 
-import type { Store } from './types';
+import type { Store } from './';
 import * as API from '../api';
 
 export interface SettingsSlice {
@@ -18,11 +18,11 @@ export const createSettingsSlice: StateCreator<Store, [], [], SettingsSlice> = (
   locations: [] as string[],
   setSettings: (newSettings) => {
     if (typeof newSettings === 'function') {
-      newSettings = newSettings(get().settings.settings);
+      newSettings = newSettings(get().settings);
     }
-    set({ settings: { ...(get().settings), settings: makeSettings(newSettings) }});
+    set({ settings: makeSettings(newSettings) });
   },
   patchSettings: (patch) => {
-    set({ settings: { ...(get().settings), settings: mergeSettings(get().settings.settings, patch) }});
+    set({ settings: mergeSettings(get().settings, patch) });
   }
 });

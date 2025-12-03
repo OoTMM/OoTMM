@@ -11,7 +11,7 @@ const PageExtensions = () => <SettingsEditor category='items.extensions'/>;
 const PageAgeless = () => <SettingsEditor category='items.ageless'/>;
 
 export function GeneratorItems() {
-  const games = useStore(state => state.settings.settings.games);
+  const games = useStore(state => state.settings.games);
 
   const routes: TabViewRoute[] = [
     { name: 'Progressive', icon: LuTrendingUp, component: PageProgressive },

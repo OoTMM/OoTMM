@@ -16,9 +16,10 @@ type HintEditorProps = {
   index: number;
 };
 export function HintEditor({ index }: HintEditorProps) {
-  const { settings, patchSettings, itemPool } = useStore(state => state.settings);
-  const hints = settings.hints;
+  const hints = useStore(state => state.settings.hints);
   const hint = hints[index];
+  const patchSettings = useStore(state => state.patchSettings);
+  const itemPool = useStore(state => state.itemPool);
 
   const itemOptions = useMemo(() => Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) })), [itemPool]);
   const selectedItem = itemOptions.find((x) => x.value === hint.item);
@@ -108,8 +109,8 @@ export function HintEditor({ index }: HintEditorProps) {
 }
 
 export function Hints() {
-  const { settings, patchSettings } = useStore(state => state.settings);
-  const hints = settings.hints;
+  const hints = useStore(state => state.settings.hints);
+  const patchSettings = useStore(state => state.patchSettings);
 
   const onNew = useCallback(() => {
     const newArray = [...hints];

@@ -5,8 +5,8 @@ import { useStore } from '@/app/store';
 
 export const SettingsImportExport = () => {
   const id = useId();
-  const settings = useStore(state => state.settings.settings);
-  const setSettings = useStore(state => state.settings.setSettings);
+  const settings = useStore(state => state.settings);
+  const setSettings = useStore(state => state.setSettings);
   const settingsString = useMemo(() => exportSettings(settings), [settings]);
 
   const onChange = useCallback((data: string) => {
