@@ -1,12 +1,12 @@
 import { useCallback, useId, useMemo } from 'react';
 import { importSettings, exportSettings } from '@ootmm/core';
-import { useSetSettings, useSettings } from '@/app/contexts/SettingsContext';
 import { Input, Label } from '@/app/components/ui';
+import { useStore } from '@/app/store';
 
 export const SettingsImportExport = () => {
   const id = useId();
-  const settings = useSettings();
-  const setSettings = useSetSettings();
+  const settings = useStore(state => state.settings.settings);
+  const setSettings = useStore(state => state.settings.setSettings);
   const settingsString = useMemo(() => exportSettings(settings), [settings]);
 
   const onChange = useCallback((data: string) => {

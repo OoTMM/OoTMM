@@ -6,7 +6,7 @@ import * as API from '../api';
 import { loadFile, saveFile } from '../db';
 import { useCosmetics } from './CosmeticsContext';
 import { useRandomSettings } from './RandomSettingsContext';
-import { useSettings } from './SettingsContext';
+import { useStore } from '../store';
 
 type GeneratorState = {
   romConfig: {
@@ -109,7 +109,7 @@ export function useRomConfig() {
 }
 
 export function useGenerator() {
-  const settings = useSettings();
+  const settings = useStore(state => state.settings.settings);
   const cosmetics = useCosmetics();
   const random = useRandomSettings();
   const { state, setState } = useContext(GeneratorContext);
