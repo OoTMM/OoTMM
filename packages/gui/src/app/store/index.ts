@@ -6,14 +6,16 @@ import { Cosmetics, COSMETICS, makeSettings } from '@ootmm/core';
 import { localStoragePrefixedSet } from '../util';
 import { createRandomSettingsSlice, RandomSettingsSlice } from './randomSettings';
 import { CosmeticsSlice, createCosmeticsSlice } from './cosmetics';
-import { loadFileLocal, saveFileLocal } from '../db';
+import { loadFile, loadFileLocal, saveFileLocal } from '../db';
+import { ConfigSlice, createConfigSlice } from './config';
 
-export type Store = SettingsSlice & RandomSettingsSlice & CosmeticsSlice;
+export type Store = SettingsSlice & RandomSettingsSlice & CosmeticsSlice & ConfigSlice;
 
 export const useStore = create<Store>((...a) => ({
   ...createSettingsSlice(...a),
   ...createRandomSettingsSlice(...a),
   ...createCosmeticsSlice(...a),
+  ...createConfigSlice(...a),
 }));
 
 let settingsUpdateTicket = 0;
@@ -87,3 +89,7 @@ onCosmeticsUpdate(useStore.getState().cosmetics, useStore.getState().cosmetics);
 /* Initial load of cosmetic files */
 const cosmeticsFiles = COSMETICS_FILE_KEYS.map(c => loadFileLocal(`cosmetics:${c}`).then(x => useStore.getState().setCosmetic(c, x)).catch(console.error));
 Promise.allSettled(cosmeticsFiles).finally(() => cosmeticFilesLoaded = true);
+
+/* Initial load of config */
+loadFile('oot').then(x => useStore.getState().setRomConfigFile('oot', x)).catch(console.error);
+loadFile('mm').then(x => useStore.getState().setRomConfigFile('mm', x)).catch(console.error);

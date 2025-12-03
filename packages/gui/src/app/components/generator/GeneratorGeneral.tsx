@@ -3,7 +3,7 @@ import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { Setting, SettingsImportExport } from '@/app/components/settings';
-import { useGenerator, useRomConfig } from '../../contexts/GeneratorContext';
+import { useGenerator } from '../../contexts/GeneratorContext';
 import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label, Card } from '../ui';
 import { PresetSelector } from '../PresetSelector';
 import { Result } from '../Result';
@@ -37,8 +37,12 @@ function ModeCard({ selected, onSelect, title, description, icon: Icon }: ModeCa
 }
 
 export function GeneratorGeneral() {
-  const { romConfig, setRomConfigFile, setSeed, setMode } = useRomConfig();
-  const { mode, seed } = romConfig;
+  const config = useStore(state => state.config);
+  const setSeed = useStore(state => state.setSeed);
+  const setMode = useStore(state => state.setMode);
+  const setRomConfigFile = useStore(state => state.setRomConfigFile);
+
+  const { mode } = config;
   const { error, result, warnings, archive, generate } = useGenerator();
   const randomSettings = useStore(state => state.randomSettings);
   const patchRandomSettings = useStore(state => state.patchRandomSettings);
@@ -48,9 +52,9 @@ export function GeneratorGeneral() {
   const isModeRandom = mode === 'random';
   const isModePatch = mode === 'patch';
 
-  let isReady = !!romConfig.files.oot && !!romConfig.files.mm;
+  let isReady = !!config.files.oot && !!config.files.mm;
   if (isModePatch) {
-    isReady = isReady && !!romConfig.files.patch;
+    isReady = isReady && !!config.files.patch;
   }
 
   return (
@@ -63,8 +67,8 @@ export function GeneratorGeneral() {
         </div>
         {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
         <div className="m-auto flex gap-8">
-          <FileSelectField imageSrc={logoOot} label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" file={romConfig.files.oot} onInput={(f) => setRomConfigFile('oot', f)}/>
-          <FileSelectField imageSrc={logoMm} label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onInput={(f) => setRomConfigFile('mm', f)}/>
+          <FileSelectField imageSrc={logoOot} label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" file={config.files.oot} onInput={(f) => setRomConfigFile('oot', f)}/>
+          <FileSelectField imageSrc={logoMm} label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={config.files.mm} onInput={(f) => setRomConfigFile('mm', f)}/>
         </div>
         <div className="mt-8 flex flex-col gap-6">
           <div>
@@ -79,7 +83,7 @@ export function GeneratorGeneral() {
           {isModeCreate && <>
             <PresetSelector />
             <SettingsImportExport />
-            <InputField className={clsx(romConfig.seed ? 'font-mono' : '')} type="text" label="Seed" placeholder="Leave blank to auto-generate" value={romConfig.seed} onChange={setSeed}/>
+            <InputField className={clsx(config.seed ? 'font-mono' : '')} type="text" label="Seed" placeholder="Leave blank to auto-generate" value={config.seed} onChange={setSeed}/>
           </>}
 
           {isModeRandom && (
@@ -95,7 +99,7 @@ export function GeneratorGeneral() {
             </>
           )}
 
-          {isModePatch && <FileSelectField imageSrc={logoOotmm} label="Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />}
+          {isModePatch && <FileSelectField imageSrc={logoOotmm} label="Patch File" accept=".ootmm" file={config.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />}
 
           <Button variant="submit" disabled={!isReady} onClick={generate}>Generate</Button>
         </div>

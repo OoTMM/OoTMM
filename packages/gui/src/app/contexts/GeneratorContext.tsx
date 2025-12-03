@@ -7,15 +7,6 @@ import { loadFile, saveFile } from '../db';
 import { useStore } from '../store';
 
 type GeneratorState = {
-  romConfig: {
-    mode: 'create' | 'random' | 'patch',
-    files: {
-      oot: File | null;
-      mm: File | null;
-      patch: File | null;
-    },
-    seed: string;
-  },
   generator: {
     isGenerating: boolean;
     message: string | null;
@@ -30,24 +21,12 @@ type GeneratorState = {
 type GeneratorContext = {
   state: GeneratorState;
   setState: Dispatch<StateUpdater<GeneratorState>>;
-  setRomConfigFile: (key: keyof GeneratorState['romConfig']['files'], file: File | null) => void;
-  setSeed: (seed: string) => void;
-  setMode: (mode: 'create' | 'random' | 'patch') => void;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
 
 function createState(): GeneratorState {
   return {
-    romConfig: {
-      mode: 'create',
-      files: {
-        oot: null,
-        mm: null,
-        patch: null,
-      },
-      seed: '',
-    },
     generator: {
       isGenerating: false,
       message: null,
@@ -63,65 +42,30 @@ function createState(): GeneratorState {
 export function GeneratorContextProvider({ children }: { children: ComponentChildren }) {
   const [state, setState] = useState(createState);
 
-  const setRomConfigFileRaw = (key: keyof GeneratorState['romConfig']['files'], file: File | null) => {
-    setState(state => ({ ...state, romConfig: { ...state.romConfig, files: { ...state.romConfig.files, [key]: file } }}));
-  }
-
-  const setRomConfigFile = (key: keyof GeneratorState['romConfig']['files'], file: File | null) => {
-    setRomConfigFileRaw(key, file);
-    if (key !== 'patch') {
-      saveFile(key, file).catch(console.error);
-    }
-  };
-
-  const setSeed = (seed: string) => {
-    setState(state => ({ ...state, romConfig: { ...state.romConfig, seed } }));
-  };
-
-  const setMode = (mode: 'create' | 'random' | 'patch') => {
-    setState(state => ({ ...state, romConfig: { ...state.romConfig, mode } }));
-  };
-
-  const setIsPatch = (isPatch: boolean) => {
-    setState(state => ({ ...state, isPatch }));
-  };
-
-  /* Async init */
-  useEffect(() => {
-    /* Roms */
-    loadFile('oot').then(x => setRomConfigFileRaw('oot', x)).catch(console.error);
-    loadFile('mm').then(x => setRomConfigFileRaw('mm', x)).catch(console.error);
-  }, []);
-
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setMode }}>
+    <GeneratorContext.Provider value={{ state, setState }}>
       {children}
     </GeneratorContext.Provider>
   );
-}
-
-export function useRomConfig() {
-  const { state, setRomConfigFile, setSeed, setMode } = useContext(GeneratorContext);
-  const { romConfig } = state;
-  return { romConfig, setRomConfigFile, setSeed, setMode };
 }
 
 export function useGenerator() {
   const settings = useStore(state => state.settings);
   const cosmetics = useStore(state => state.cosmetics);
   const random = useStore(state => state.randomSettings);
+  const config = useStore(state => state.config);
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
   const { isGenerating, message, progress, error, result, archive, warnings } = generator;
 
   const generate = async () => {
     setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
-    const { oot, mm } = state.romConfig.files;
-    let { patch } = state.romConfig.files;
-    if (state.romConfig.mode !== 'patch') {
+    const { oot, mm } = config.files;
+    let { patch } = config.files;
+    if (config.mode !== 'patch') {
       patch = null;
     }
-    const options: OptionsInput = { mode: state.romConfig.mode, seed: state.romConfig.seed, settings, random, cosmetics };
+    const options: OptionsInput = { mode: config.mode, seed: config.seed, settings, random, cosmetics };
     try {
       const onMessage = (message: string) => {
         console.log(message);
