@@ -35,11 +35,10 @@
   time: flow
   exits:
     "Zora River Front": "true"
+    "Zora River Upper": "is_adult || soul_cucco"
     "Zora River Behind Falls": "can_play_zelda || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && soul_cucco && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
     "Zora River Lost Woods Shortcut": "can_dive_small || hookshot_anywhere"
     "Zora River Storms Grotto": "hidden_grotto_storms"
-    "Zora River Open Grotto": "true"
-    "Zora River Boulder Grotto": "has_explosives_or_hammer"
     "Zora River Soil Fairies": "soil_fairies(BEAN_ZORA_RIVER)"
   events:
     BEAN_ZORA_RIVER: "can_use_beans"
@@ -113,6 +112,17 @@
     "Zora River Rock Circle Lower Rock 6": "true"
     "Zora River Rock Circle Lower Rock 7": "true"
     "Zora River Rock Circle Lower Rock 8": "true"
+  gossip:
+    "Zora River Gossip Near Domain": "true"
+
+"Zora River Upper":
+  region: ZORA_RIVER
+  time: flow
+  exits:
+    "Zora River": "true"
+    "Zora River Open Grotto": "true"
+    "Zora River Boulder Grotto": "has_explosives_or_hammer"
+  locations:
     "Zora River Rock Circle Upper Rock 1": "true"
     "Zora River Rock Circle Upper Rock 2": "true"
     "Zora River Rock Circle Upper Rock 3": "true"
@@ -123,7 +133,6 @@
     "Zora River Rock Circle Upper Rock 8": "true"
   gossip:
     "Zora River Gossip High Pillar": "true"
-    "Zora River Gossip Near Domain": "true"
 
 "Zora River Soil Fairies":
   region: ZORA_RIVER
@@ -169,7 +178,7 @@
   region: ENTRANCE
   exits:
     "GENERIC_GROTTO_EVENTS": "true"
-    "Zora River": "true"
+    "Zora River Upper": "true"
   locations:
     "Zora River Grotto": "true"
     "Zora River Grotto Grass 1": "can_cut_grass"
@@ -188,7 +197,7 @@
   region: ENTRANCE
   age_change: false
   exits:
-    "Zora River": "true"
+    "Zora River Upper": "true"
   locations:
     "Zora River Fairy Fountain Fairy 1": "true"
     "Zora River Fairy Fountain Fairy 2": "true"
