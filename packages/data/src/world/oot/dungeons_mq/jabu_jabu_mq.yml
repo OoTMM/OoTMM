@@ -4,16 +4,16 @@
     "Zora Fountain": "true"
     "Jabu-Jabu Main Elevator Room Upper": "event(JABU_MQ_START)"
   events:
-    JABU_MQ_START: "can_use_slingshot"
+    JABU_MQ_START: "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
   locations:
     "MQ Jabu-Jabu Map Chest": "has_explosives_or_hammer"
-    "MQ Jabu-Jabu Entry Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Entry Chest": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
     "MQ Jabu-Jabu Pot Entrance 1": "true"
     "MQ Jabu-Jabu Pot Entrance 2": "true"
     "MQ Jabu-Jabu Grass Entrance 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
-    "MQ Jabu-Jabu Wonder Item Entrance Left Cow": "can_use_slingshot"
-    "MQ Jabu-Jabu Wonder Item Entrance Right Cow": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Entrance Left Cow": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
+    "MQ Jabu-Jabu Wonder Item Entrance Right Cow": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
 "Jabu-Jabu Main Elevator Room Upper":
   dungeon: JJ
   exits:
