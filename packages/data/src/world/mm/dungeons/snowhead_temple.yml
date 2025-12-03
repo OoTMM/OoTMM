@@ -126,7 +126,7 @@
     "Snowhead Temple Pillars Room Lower": "true"
     "WARP_SONGS": "true"
   events:
-    SNOWHEAD_RAISE_PILLAR: "(has_mask_goron || can_hammer) && (can_use_fire_short_range || (event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN)) || trick_sht_hot_water_er)"
+    SNOWHEAD_RAISE_PILLAR: "(has_mask_goron || can_hammer) && (can_use_fire_short_range || ((event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN) && trick_sht_hot_water_er)))"
   locations:
     "Snowhead Temple Pillars Room": "soul_freezard && can_kill_freezard_short_range"
     "Snowhead Temple Pot Pillars Room Upper 1": "true"
