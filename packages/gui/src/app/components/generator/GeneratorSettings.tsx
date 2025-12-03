@@ -14,7 +14,7 @@ const PageWorld = () => <SettingsEditor category='main.world'/>;
 const PageMisc = () => <MultipleSettingsEditor name="misc"/>;
 
 export function GeneratorSettings() {
-  const games = useStore(state => state.settings.settings.games);
+  const games = useStore(state => state.settings.games);
 
   const routes: TabViewRoute[] = [
     { name: 'Main', icon: LuSettings, component: PageMain },

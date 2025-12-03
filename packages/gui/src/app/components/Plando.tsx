@@ -5,8 +5,11 @@ import { Select, Button, Card } from './ui';
 import { useStore } from '../store';
 
 export function Plando() {
-  const { settings, patchSettings, itemPool, locations } = useStore(state => state.settings);
-  const plando = settings.plando;
+  const plando = useStore(state => state.settings.plando);
+  const patchSettings = useStore(state => state.patchSettings);
+  const itemPool = useStore(state => state.itemPool);
+  const locations = useStore(state => state.locations);
+
   const [selectedLoc, setSelectedLocRaw] = useState<string | null>(null);
   const [selectedItem, setSelectedItemRaw] = useState<string | null>(null);
   const locsOptions = useMemo(() => locations.map((loc) => ({ value: loc, label: loc })), [locations]);

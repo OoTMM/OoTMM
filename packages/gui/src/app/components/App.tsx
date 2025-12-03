@@ -3,14 +3,12 @@ import ReactGA from 'react-ga4';
 import { Generator } from './generator/Generator';
 import { Progress } from './Progress';
 import { composeProviders } from '../utils/composeProviders';
-import { RandomSettingsProvider } from '../contexts/RandomSettingsContext';
 import { CosmeticsProvider } from '../contexts/CosmeticsContext';
 import { GeneratorContextProvider, useGenerator } from '../contexts/GeneratorContext';
 
 ReactGA.initialize('G-4S4Y8RTZ7T');
 
 const AppProviders = composeProviders([
-  RandomSettingsProvider,
   CosmeticsProvider,
   GeneratorContextProvider,
 ]);

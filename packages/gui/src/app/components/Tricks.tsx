@@ -25,8 +25,8 @@ type GameTricksProps = {
   game: 'oot' | 'mm';
 }
 function GameTricks({ glitches, game }: GameTricksProps) {
-  const tricks = useStore(state => state.settings.settings.tricks);
-  const patchSettings = useStore(state => state.settings.patchSettings);
+  const tricks = useStore(state => state.settings.tricks);
+  const patchSettings = useStore(state => state.patchSettings);
   const trickKeys = useMemo(() => Object.keys(TRICKS).filter((x) => TRICKS[x].game === game && !!(TRICKS[x].glitch) === !!glitches), [game, glitches]);
   const selectedTrickKeys = trickKeys.filter((x) => tricks.includes(x));
   const options = trickKeys.map((trickKey) => ({ key: trickKey, label: TRICKS[trickKey].name, extra: trickExtra(trickKey) }));
@@ -55,7 +55,7 @@ type TricksProps = {
   glitches?: boolean;
 }
 export function Tricks({ glitches }: TricksProps) {
-  const games = useStore(state => state.settings.settings.games);
+  const games = useStore(state => state.settings.games);
 
   if (games === 'oot') {
     return glitches ? <OotGlitches/> : <OotTricks/>;
