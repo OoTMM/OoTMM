@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Add animal souls in OoT and MM (Experimental).
+- Add animal souls in OoT and MM.
 - Cosmetics setting to enable BGM during night time.
 - Add soft soil shuffle to Ocarina of Time and Majora's Mask.
 - Add bush shuffle in Ocarina of Time and Majora's Mask.

@@ -256,8 +256,8 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.soulsBossMm = true;
     base.soulsNpcOot = true;
     base.soulsNpcMm = true;
-    //base.soulsAnimalOot = true;
-    //base.soulsAnimalMm = true;
+    base.soulsAnimalOot = true;
+    base.soulsAnimalMm = true;
     base.soulsMiscOot = true;
     base.soulsMiscMm = true;
     break;
@@ -268,8 +268,8 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.soulsBossMm = booleanWeighted(random, 0.5);
     base.soulsNpcOot = booleanWeighted(random, 0.5);
     base.soulsNpcMm = booleanWeighted(random, 0.5);
-    //base.soulsAnimalOot = booleanWeighted(random, 0.5);
-    //base.soulsAnimalMm = booleanWeighted(random, 0.5);
+    base.soulsAnimalOot = booleanWeighted(random, 0.5);
+    base.soulsAnimalMm = booleanWeighted(random, 0.5);
     base.soulsMiscOot = booleanWeighted(random, 0.5);
     base.soulsMiscMm = booleanWeighted(random, 0.5);
   }
