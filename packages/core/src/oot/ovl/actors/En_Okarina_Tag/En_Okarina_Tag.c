@@ -37,12 +37,12 @@ void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
 
     this->actor.draw = EnOkarinaTag_DrawCustom;
-    this->actor.scale.x = 1.f;
-    this->actor.scale.y = 1.f;
-    this->actor.scale.z = 1.f;
-    this->actor.cullingVolumeDistance = 2000;
-    this->actor.cullingVolumeScale = 250;
-    this->actor.cullingVolumeDownward = 500;
+    //this->actor.scale.x = 1.f;
+    //this->actor.scale.y = 1.f;
+    //this->actor.scale.z = 1.f;
+    //this->actor.cullingVolumeDistance = 2000;
+    //this->actor.cullingVolumeScale = 250;
+    //this->actor.cullingVolumeDownward = 500;
 
     this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->type = PARAMS_GET_U(this->actor.params, 10, 6);
@@ -281,38 +281,53 @@ void EnOkarinaTag_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
-static Gfx kGfxLoadTextureLullaby[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_I, G_IM_SIZ_8b, 32, 64, 0,
-                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
-                         5, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
 static Vtx kQuad[] = {
-    {{ { -32, 32, -32 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { -32, 32, 32 }, 0, { 1024, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { 32, 32, 32 }, 0, { 1024, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { 32, 32, -32 }, 0, { 0, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { -26, 0, -26 }, 0, { 2048, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { -26, 0, 26 }, 0, { 2048, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { 26, 0, 26 }, 0, { 0, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { 26, 0, -26 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
 };
 
-static Gfx kGfxDrawLullaby[] = {
+static const Gfx kDlistSongTag[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsSPBranchList(kGfxLoadTextureLullaby),
-    gsSPVertex(&kQuad[0], 4, 0),
-    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsDPLoadTextureBlock(0x06000000, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineMode(G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM),
+    gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_SURF2),
+    gsSPClearGeometryMode(G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPVertex(&kQuad, 4, 0),
+    gsSP2Triangles(0, 2, 1, 0, 0, 3, 2, 0),
     gsSPEndDisplayList(),
 };
 
-void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
+void EnOkarinaTag_DrawCustom(Actor* actor, PlayState* play)
 {
-    EnOkarinaTag* this = (EnOkarinaTag*)thisx;
     void* tex;
+    u32 color;
+    u8 r;
+    u8 g;
+    u8 b;
 
+    /* Get color */
+    color = 0xffff00;
+    r = (color >> 16) & 0xff;
+    g = (color >>  8) & 0xff;
+    b = (color >>  0) & 0xff;
+
+    /* Compute the texture */
     tex = comboCacheGetFile(CUSTOM_SONG_TAG_LULLABY_ADDR);
     if (!tex)
         return;
-    kGfxLoadTextureLullaby[0].words.w1 = ((u32)tex - 0x80000000);
-    Gfx_DrawDListOpa(play, kGfxDrawLullaby);
+
+    /* Prepare the Matrix */
+    Matrix_Translate(actor->world.pos.x, actor->world.pos.y + 0.1f, actor->world.pos.z, MTXMODE_NEW);
+
+    /* Draw the display list */
+    OPEN_DISPS(play->state.gfxCtx);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_OPA_DISP++, 0x06, (u32)tex);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 255);
+    gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistSongTag);
+    CLOSE_DISPS();
 }
