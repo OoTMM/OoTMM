@@ -1,5 +1,7 @@
 #include "En_Okarina_Tag.h"
 #include <combo/custom.h>
+#include <combo/config.h>
+#include <combo/data/song_events.h>
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_UPDATE_DURING_OCARINA)
 
@@ -33,16 +35,76 @@ OVL_INFO_ACTOR(ACTOR_EN_OKARINA_TAG, En_Okarina_Tag_Profile);
 void EnOkarinaTag_Destroy(Actor* thisx, PlayState* play) {
 }
 
+static int EnOkarinaTag_GetShuffledSongId(Actor* thisx, PlayState* play)
+{
+    switch (play->sceneId)
+    {
+    case SCE_OOT_TEMPLE_OF_TIME:
+        return SONG_EVENT_TEMPLE_OF_TIME;
+    case SCE_OOT_TOMB_DAMPE_WINDMILL:
+        return SONG_EVENT_WINDMILL;
+    case SCE_OOT_GRAVEYARD:
+        return SONG_EVENT_GRAVEYARD;
+    case SCE_OOT_ZORA_RIVER:
+        return SONG_EVENT_ZORA_RIVER;
+    case SCE_OOT_GORON_CITY:
+        return SONG_EVENT_GORON_CITY;
+    case SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS:
+        switch (play->spawn)
+        {
+        case 0:
+            return SONG_EVENT_GREAT_FAIRY_SPELL_WIND;
+        case 1:
+            return SONG_EVENT_GREAT_FAIRY_SPELL_FIRE;
+        case 2:
+            return SONG_EVENT_GREAT_FAIRY_SPELL_LOVE;
+        default:
+            return -1;
+        }
+    case SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES:
+        switch (play->spawn)
+        {
+        case 0:
+            return SONG_EVENT_GREAT_FAIRY_UPGRADE_MAGIC;
+        case 1:
+            return SONG_EVENT_GREAT_FAIRY_UPGRADE_MAGIC2;
+        case 2:
+            return SONG_EVENT_GREAT_FAIRY_UPGRADE_DEFENSE;
+        default:
+            return -1;
+        }
+    case SCE_OOT_TEMPLE_WATER:
+        return SONG_EVENT_TEMPLE_WATER;
+    case SCE_OOT_TEMPLE_SHADOW:
+        return SONG_EVENT_TEMPLE_SHADOW;
+    case SCE_OOT_TEMPLE_SPIRIT:
+        switch (thisx->room)
+        {
+            case 5:
+                return SONG_EVENT_TEMPLE_SPIRIT_1;
+            case 14:
+                return SONG_EVENT_TEMPLE_SPIRIT_2;
+            case 24:
+                return SONG_EVENT_TEMPLE_SPIRIT_3;
+            default:
+                return -1;
+        }
+    case SCE_OOT_BOTTOM_OF_THE_WELL:
+        return SONG_EVENT_TEMPLE_BOTW;
+    case SCE_OOT_INSIDE_GANON_CASTLE:
+        return SONG_EVENT_TEMPLE_GANON;
+    }
+
+    return -1;
+}
+
 void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
 
-    this->actor.draw = EnOkarinaTag_DrawCustom;
-    //this->actor.scale.x = 1.f;
-    //this->actor.scale.y = 1.f;
-    //this->actor.scale.z = 1.f;
-    //this->actor.cullingVolumeDistance = 2000;
-    //this->actor.cullingVolumeScale = 250;
-    //this->actor.cullingVolumeDownward = 500;
+    this->shuffledSongId = (s8)EnOkarinaTag_GetShuffledSongId(thisx, play);
+    if (this->shuffledSongId >= 0 && Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
+        this->actor.draw = EnOkarinaTag_DrawCustom;
+    }
 
     this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->type = PARAMS_GET_U(this->actor.params, 10, 6);

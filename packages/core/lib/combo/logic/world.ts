@@ -182,6 +182,7 @@ export type World = {
   songLocations: Set<string>;
   warpLocations: Set<string>;
   prices: number[];
+  songEvents: number[];
   bossIds: number[];
   entranceOverrides: Map<string, string>;
   entranceOverridesRev: Map<string, readonly string[]>;
@@ -268,6 +269,7 @@ export function cloneWorld(world: World): World {
     songLocations: new Set(world.songLocations),
     warpLocations: new Set(world.warpLocations),
     prices: [...world.prices],
+    songEvents: [...world.songEvents],
     preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
     entranceOverrides: new Map(world.entranceOverrides),
@@ -353,6 +355,9 @@ export class LogicPassWorld {
     /* Prices */
     const prices = defaultPrices(resolvedFlags);
 
+    /* Song events */
+    const songEvents = [5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
     return {
       areas: {},
       checks: {},
@@ -365,6 +370,7 @@ export class LogicPassWorld {
       songLocations: new Set(),
       warpLocations: new Set(),
       prices,
+      songEvents,
       preCompleted: new Set(),
       bossIds: Object.values(BOSS_INDEX_BY_DUNGEON),
       entranceOverrides: new Map,
