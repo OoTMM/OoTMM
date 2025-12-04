@@ -1,0 +1,6 @@
+#ifndef COMBO_DATA_SONG_EVENTS_H
+#define COMBO_DATA_SONG_EVENTS_H
+
+#define SONG_EVENT_DARUNIA_ROOM 0x00
+
+#endif
