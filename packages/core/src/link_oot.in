@@ -20,6 +20,7 @@ osInvalICache = 0x800041a0;
 osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
+Audio_SetMainBgmTempoFreqAfterFanfare = 0x800c64a0;
 
 gAudioLoadStatusFontSample = 0x80128a68;
 
