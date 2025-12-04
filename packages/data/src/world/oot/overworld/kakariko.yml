@@ -195,7 +195,7 @@
     "Kakariko": "true"
     "Windmill Exit": "climb_anywhere || hookshot_anywhere || (is_adult && trick(OOT_WINDMILL_HP_NOTHING))"
   events:
-    WELL_DRAIN: "is_child && can_play_storms"
+    WELL_DRAIN: "is_child && song_event(1)"
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING)) || climb_anywhere || hookshot_anywhere"
     "Windmill Song of Storms": "is_adult && has_ocarina && soul_guru_guru"

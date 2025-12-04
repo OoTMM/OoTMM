@@ -16,6 +16,7 @@ import { LogicPassPrice } from './price';
 import { LogicPassItemProperties } from './item-properties';
 import { LogicPassMinimize } from './minimize';
 import { LogicPassAnalysisPaths } from './analysis-path';
+import { LogicPassSongEvents } from './song-events';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -61,6 +62,7 @@ export const solvedWorldState = async (monitor: Monitor, opts: Options) => {
   let state = await worldState(monitor, opts);
   return pipeline(state)
     .apply(LogicPassPrice)
+    .apply(LogicPassSongEvents)
     .apply(LogicPassEntrances)
     .apply(LogicPassSolver)
     .apply(LogicPassMinimize)

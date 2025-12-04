@@ -4,7 +4,7 @@
     "Temple of Time Entryway": "true"
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
-    DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play_time"
+    DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || song_event(0)"
     TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && (has_sword_master || !setting(timeTravelSword))"
     TIME_TRAVEL_AT_WILL: "!setting(ageChange, none) && event(TIME_TRAVEL) && can_play_time && (!setting(ageChange, oot) || has_ocarina_of_time)"
   locations:

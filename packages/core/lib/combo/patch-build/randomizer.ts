@@ -1175,6 +1175,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array 
   buffers.push(toU8Buffer([logic.settings.strayFairyRewardCount]));
   buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorOot));
   buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorMm));
+  buffers.push(toU8Buffer(logic.worlds[worldId].songEvents));
   return concatUint8Arrays(buffers);
 };
 
