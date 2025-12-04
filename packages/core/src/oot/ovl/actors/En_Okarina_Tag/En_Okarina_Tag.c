@@ -366,11 +366,68 @@ static Vtx kQuad[] = {
     {{ { 26, 0, -26 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
 };
 
+static Gfx kDlistLoadTextureLullaby[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kDlistLoadTextureEpona[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kDlistLoadTextureSaria[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kDlistLoadTextureStorms[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kDlistLoadTextureSun[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0, G_TX_MIRROR, G_TX_MIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kDlistLoadTextureTime[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Gfx* kDlistsLoadTextures[] = {
+    kDlistLoadTextureLullaby,
+    kDlistLoadTextureEpona,
+    kDlistLoadTextureSaria,
+    kDlistLoadTextureStorms,
+    kDlistLoadTextureSun,
+    kDlistLoadTextureTime,
+};
+
+static const u32 kSongTagColors[] = {
+    0xffff00,
+    0xffff00,
+    0x22ff44,
+    0xffff00,
+    0xee2222,
+    0xffff00,
+};
+
+static const u32 kSongTagTextureAddrs[] = {
+    CUSTOM_SONG_TAG_LULLABY_ADDR,
+    CUSTOM_SONG_TAG_LULLABY_ADDR,
+    CUSTOM_SONG_TAG_SARIA_ADDR,
+    CUSTOM_SONG_TAG_LULLABY_ADDR,
+    CUSTOM_SONG_TAG_SUN_ADDR,
+    CUSTOM_SONG_TAG_LULLABY_ADDR,
+};
+
 static const Gfx kDlistSongTag[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(0x06000000, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPDisplayList(0x06000000),
     gsDPSetCombineMode(G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM),
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_SURF2),
     gsSPClearGeometryMode(G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
@@ -379,32 +436,37 @@ static const Gfx kDlistSongTag[] = {
     gsSPEndDisplayList(),
 };
 
-void EnOkarinaTag_DrawCustom(Actor* actor, PlayState* play)
+void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
 {
+    EnOkarinaTag* this = (EnOkarinaTag*)thisx;
+    int song;
+    Gfx* loader;
     void* tex;
     u32 color;
     u8 r;
     u8 g;
     u8 b;
 
-    /* Get color */
-    color = 0xffff00;
+    song = gComboConfig.songEvents[this->shuffledSongId];
+    loader = kDlistsLoadTextures[song];
+    color = kSongTagColors[song];
     r = (color >> 16) & 0xff;
     g = (color >>  8) & 0xff;
     b = (color >>  0) & 0xff;
 
     /* Compute the texture */
-    tex = comboCacheGetFile(CUSTOM_SONG_TAG_LULLABY_ADDR);
+    tex = comboCacheGetFile(kSongTagTextureAddrs[song]);
     if (!tex)
         return;
+    loader[0].words.w1 = (u32)tex;
 
     /* Prepare the Matrix */
-    Matrix_Translate(actor->world.pos.x, actor->world.pos.y + 0.1f, actor->world.pos.z, MTXMODE_NEW);
+    Matrix_Translate(thisx->world.pos.x, thisx->world.pos.y + 0.1f, thisx->world.pos.z, MTXMODE_NEW);
 
     /* Draw the display list */
     OPEN_DISPS(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPSegment(POLY_OPA_DISP++, 0x06, (u32)tex);
+    gSPSegment(POLY_OPA_DISP++, 0x06, (u32)loader);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 255);
     gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistSongTag);
     CLOSE_DISPS();
