@@ -98,6 +98,22 @@ static int EnOkarinaTag_GetShuffledSongId(Actor* thisx, PlayState* play)
     return -1;
 }
 
+static u8 kOcarinaActions[] = {
+    OCARINA_ACTION_CHECK_LULLABY,
+    OCARINA_ACTION_CHECK_EPONA,
+    OCARINA_ACTION_CHECK_SARIA,
+    OCARINA_ACTION_CHECK_STORMS,
+    OCARINA_ACTION_CHECK_SUNS,
+    OCARINA_ACTION_CHECK_TIME,
+};
+
+static int EnOkarinaTag_OcarinaAction(EnOkarinaTag* this, int vanilla)
+{
+    if (this->shuffledSongId < 0)
+        return vanilla;
+    return kOcarinaActions[gComboConfig.songEvents[this->shuffledSongId]];
+}
+
 void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
 
@@ -169,7 +185,7 @@ void func_80ABEF2C(EnOkarinaTag* this, PlayState* play) {
                         ocarinaSong = 0xA;
                     }
                     player->stateFlags2 |= PLAYER_STATE2_23;
-                    Message_StartOcarina(play, ocarinaSong + OCARINA_ACTION_CHECK_SARIA);
+                    Message_StartOcarina(play, EnOkarinaTag_OcarinaAction(this, ocarinaSong + OCARINA_ACTION_CHECK_SARIA));
                     this->actionFunc = func_80ABF0CC;
                 } else if ((this->actor.xzDistToPlayer < (50.0f + this->interactRange) &&
                             ((fabsf(player->actor.world.pos.y - this->actor.world.pos.y) < 40.0f)))) {
@@ -236,16 +252,16 @@ void func_80ABF28C(EnOkarinaTag* this, PlayState* play) {
             if (player->stateFlags2 & PLAYER_STATE2_24) {
                 switch (this->type) {
                     case 1:
-                        Message_StartOcarina(play, OCARINA_ACTION_CHECK_LULLABY);
+                        Message_StartOcarina(play, EnOkarinaTag_OcarinaAction(this, OCARINA_ACTION_CHECK_LULLABY));
                         break;
                     case 2:
-                        Message_StartOcarina(play, OCARINA_ACTION_CHECK_STORMS);
+                        Message_StartOcarina(play, EnOkarinaTag_OcarinaAction(this, OCARINA_ACTION_CHECK_STORMS));
                         break;
                     case 4:
-                        Message_StartOcarina(play, OCARINA_ACTION_CHECK_TIME);
+                        Message_StartOcarina(play, EnOkarinaTag_OcarinaAction(this, OCARINA_ACTION_CHECK_TIME));
                         break;
                     case 6:
-                        Message_StartOcarina(play, OCARINA_ACTION_CHECK_LULLABY);
+                        Message_StartOcarina(play, EnOkarinaTag_OcarinaAction(this, OCARINA_ACTION_CHECK_LULLABY));
                         break;
                     default:
                         Actor_Kill(&this->actor);

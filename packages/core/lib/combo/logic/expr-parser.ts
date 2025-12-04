@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEvent } from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -333,6 +333,19 @@ export class ExprParser {
     return exprPrice(range, id, max);
   }
 
+  private parseExprSongEvent(): Expr | undefined {
+    if (this.peek('identifier') !== '_song_event') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const id = this.expect('number');
+    this.expect(',');
+    const cmp = this.expect('number');
+    this.expect(')');
+    return exprSongEvent(id, cmp);
+  }
+
   private parseExprFish(): Expr | undefined {
     if (this.peek('identifier') !== 'has_pond_fish') {
       return undefined;
@@ -446,6 +459,7 @@ export class ExprParser {
       || this.parseExprOotTime()
       || this.parseExprMmTime()
       || this.parseExprPrice()
+      || this.parseExprSongEvent()
       || this.parseExprFish()
       || this.parseExprFlagOn()
       || this.parseExprFlagOff()
