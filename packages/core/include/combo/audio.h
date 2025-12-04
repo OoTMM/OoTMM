@@ -53,6 +53,7 @@ void Audio_PlaySfxRiver(Vec3f* pos, f32 freqScale);
 void Audio_LowerMainBgmVolume(u8 volume);
 void Audio_UpdateMalonSinging(f32 dist, u16 seqId);
 void Audio_ToggleMalonSinging(u8 malonSingingDisabled);
+void Audio_SetMainBgmTempoFreqAfterFanfare(float scaleTempoAndFreq, u8 duration);
 extern u8* gFrogsSongPtr;
 #endif
 
