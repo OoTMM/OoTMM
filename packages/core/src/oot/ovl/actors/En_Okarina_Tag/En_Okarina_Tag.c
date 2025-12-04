@@ -1,6 +1,9 @@
 #include "En_Okarina_Tag.h"
+#include <combo/custom.h>
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_UPDATE_DURING_OCARINA)
+
+void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play);
 
 void EnOkarinaTag_Init(Actor* thisx, PlayState* play);
 void EnOkarinaTag_Destroy(Actor* thisx, PlayState* play);
@@ -32,6 +35,14 @@ void EnOkarinaTag_Destroy(Actor* thisx, PlayState* play) {
 
 void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
+
+    this->actor.draw = EnOkarinaTag_DrawCustom;
+    this->actor.scale.x = 1.f;
+    this->actor.scale.y = 1.f;
+    this->actor.scale.z = 1.f;
+    this->actor.cullingVolumeDistance = 2000;
+    this->actor.cullingVolumeScale = 250;
+    this->actor.cullingVolumeDownward = 500;
 
     this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->type = PARAMS_GET_U(this->actor.params, 10, 6);
@@ -268,4 +279,40 @@ void func_80ABF708(EnOkarinaTag* this, PlayState* play) {
 void EnOkarinaTag_Update(Actor* thisx, PlayState* play) {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
     this->actionFunc(this, play);
+}
+
+static Gfx kGfxLoadTextureLullaby[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_I, G_IM_SIZ_8b, 32, 64, 0,
+                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                         5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
+static Vtx kQuad[] = {
+    {{ { -32, 32, -32 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { -32, 32, 32 }, 0, { 1024, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { 32, 32, 32 }, 0, { 1024, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { 32, 32, -32 }, 0, { 0, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+};
+
+static Gfx kGfxDrawLullaby[] = {
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsSPBranchList(kGfxLoadTextureLullaby),
+    gsSPVertex(&kQuad[0], 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsSPEndDisplayList(),
+};
+
+void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
+{
+    EnOkarinaTag* this = (EnOkarinaTag*)thisx;
+    void* tex;
+
+    tex = comboCacheGetFile(CUSTOM_SONG_TAG_LULLABY_ADDR);
+    if (!tex)
+        return;
+    kGfxLoadTextureLullaby[0].words.w1 = ((u32)tex - 0x80000000);
+    Gfx_DrawDListOpa(play, kGfxDrawLullaby);
 }

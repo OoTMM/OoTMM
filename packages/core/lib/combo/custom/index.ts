@@ -162,6 +162,7 @@ export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
   POT_SOUL_TOP: await png('pots/soul_top', 'rgba16'),
   POT_MAP_SIDE: await png('pots/map_side', 'rgba16'),
   GLITTER: await png('glitter', 'i4'),
+  SONG_TAG_LULLABY: await png('song_tags/lullaby', 'ia8'),
 });
 
 export const customAssetsKeep = async (): Promise<{[k: string]: Uint8Array}> => ({
