@@ -1032,6 +1032,15 @@ export const SETTINGS = [{
 { ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shop Prices', description: 'Sets the price of items sold inside MM shops', cond: hasMM },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle', cond: hasMM },
 {
+  key: 'songEventsShuffleOot',
+  name: 'Song Events Shuffle (OoT)',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Shuffle the various events requiring songs to trigger them (OoT)',
+  cond: hasOoT,
+  default: false
+},
+{
   key: 'ganonTrials',
   name: 'Ganon Trials',
   category: 'main.events',

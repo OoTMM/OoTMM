@@ -47,6 +47,15 @@
 
 "soil_fairies(x)": "is_child && (can_play_storms || has_water) && (setting(ootPreplantedBeans) || event(x))"
 
+# Song events
+"song_event_zelda(x)": "_song_event(x, 0) && can_play_zelda"
+"song_event_epona(x)": "_song_event(x, 1) && can_play_epona"
+"song_event_saria(x)": "_song_event(x, 2) && can_play_saria"
+"song_event_storms(x)": "_song_event(x, 3) && can_play_storms"
+"song_event_sun(x)": "_song_event(x, 4) && can_play_sun"
+"song_event_time(x)": "_song_event(x, 5) && can_play_time"
+"song_event(x)": "song_event_zelda(x) || song_event_epona(x) || song_event_saria(x) || song_event_storms(x) || song_event_sun(x) || song_event_time(x)"
+
 # Bombchu
 "bombchu_license_bag_first": "license(BOMBCHU_5) || license(BOMBCHU_10) || license(BOMBCHU_20) || license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
 "bombchu_license_bag_separate": "has(BOMBCHU_BAG) || has(SHARED_BOMBCHU_BAG)"

@@ -1078,6 +1078,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
     SONG_NOTES: settings.songs === 'notes',
     OOT_ICE_ARROW_PLATFORMS: settings.iceArrowPlatformsOot,
+    OOT_SONG_EVENTS_SHUFFLE: settings.songEventsShuffleOot,
   };
 
   for (const v in exprs) {
@@ -1174,6 +1175,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array 
   buffers.push(toU8Buffer([logic.settings.strayFairyRewardCount]));
   buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorOot));
   buffers.push(configBombchuBehavior(logic.settings.bombchuBehaviorMm));
+  buffers.push(toU8Buffer(logic.worlds[worldId].songEvents));
   return concatUint8Arrays(buffers);
 };
 

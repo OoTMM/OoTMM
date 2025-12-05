@@ -619,6 +619,8 @@ static void cheatAllItems(PlayState* play)
 
     gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
     gSave.info.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
+    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_SPIRIT] = 9;
+    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_SHADOW] = 9;
     gSave.info.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
     gSave.info.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
     gSave.info.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;

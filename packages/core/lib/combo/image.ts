@@ -139,7 +139,7 @@ function toIA8(image: Uint8Array) {
     const srcIndex = i * 4;
     const r = image[srcIndex + 0];
     const a = image[srcIndex + 3];
-    const value = (a ? (r ? r : 1) : 0);
+    const value = (a >>> 4) | (r & 0xf0);
     newBuf[i] = value;
   }
   return newBuf;
@@ -174,7 +174,7 @@ function toRgba16(image: Uint8Array) {
   return newBuf;
 }
 
-function toFormat(image: Uint8Array, format: ImageFormat) {
+export function toFormat(image: Uint8Array, format: ImageFormat) {
   if (format === 'rgba32') {
     return new Uint8Array(image);
   } else if (format === 'rgba16') {

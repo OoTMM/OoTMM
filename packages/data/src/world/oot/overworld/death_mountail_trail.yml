@@ -134,6 +134,6 @@
   exits:
     "Death Mountain Summit": "true"
   events:
-    MAGIC: "can_play_zelda"
+    MAGIC: "song_event(8)"
   locations:
-    "Great Fairy Magic Upgrade": "can_play_zelda"
+    "Great Fairy Magic Upgrade": "song_event(8)"

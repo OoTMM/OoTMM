@@ -76,9 +76,9 @@
   exits:
     "Desert Colossus": "true"
   events:
-    MAGIC: "can_play_zelda"
+    MAGIC: "song_event(7)"
   locations:
-    "Great Fairy Nayru's Love": "can_play_zelda"
+    "Great Fairy Nayru's Love": "song_event(7)"
 
 "Desert Colossus Grotto":
   region: ENTRANCE

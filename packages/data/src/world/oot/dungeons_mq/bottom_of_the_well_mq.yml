@@ -31,7 +31,7 @@
     "Bottom of the Well Before Dead Hand": "event(BOTW_MQ_DRAIN_WATER) && is_child"
     "Bottom of the Well Main Side Room Before Pit": "is_child"
   events:
-    BOTW_MQ_CENTER_GATES_LOWERED: "can_play_zelda"
+    BOTW_MQ_CENTER_GATES_LOWERED: "song_event(0x10)"
     BOTW_MQ_DRAIN_WATER: "has_ranged_weapon || has_explosives_or_hammer || can_use_sticks || can_use_sword"
     BOTW_MQ_EYE_GATE: "has_explosives_or_hammer && can_hit_triggers_distance"
   locations:

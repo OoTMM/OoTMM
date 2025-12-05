@@ -230,6 +230,7 @@ export const CONFVARS = [
   'MM_EASY_LIGHTBLOCKS',
   'SONG_NOTES',
   'OOT_ICE_ARROW_PLATFORMS',
+  'OOT_SONG_EVENTS_SHUFFLE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

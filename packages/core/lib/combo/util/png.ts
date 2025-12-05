@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { bufReadU32BE, bufWriteU16BE } from './buffer';
 import { FileResolver } from '../file-resolver';
+import { toFormat } from '../image';
 
 // import { PNG } from 'pngjs'
 
@@ -77,7 +78,7 @@ const parsePngBitmask = async (data: Uint8Array) => {
   return bitmask;
 };
 
-export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
+export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'ia8' | 'bitmask') => {
   if (process.env.__IS_BROWSER__) {
     return new FileResolver().fetch(`${filename}.bin`);
   } else {
@@ -92,6 +93,10 @@ export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | '
       break;
     case 'i4':
       pngBuffer = await parsePngI4(data);
+      break;
+    case 'ia8':
+      pngBuffer = await parsePngRgba32(data);
+      pngBuffer = toFormat(pngBuffer, 'ia8');
       break;
     case 'bitmask':
       pngBuffer = await parsePngBitmask(data);

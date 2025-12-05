@@ -574,6 +574,21 @@ class ExprPrice extends Expr {
   }
 }
 
+class ExprSongEvent extends Expr {
+  readonly id: number;
+  readonly cmp: number;
+
+  constructor(id: number, cmp: number) {
+    super(`SONG_EVENT(${id},${cmp})`);
+    this.id = id;
+    this.cmp = cmp;
+  }
+
+  eval(state: State): ExprResult {
+    return state.world.songEvents[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
+  }
+}
+
 class ExprFlagOn extends Expr {
   readonly result: ExprResult;
   readonly flagBit: number;
@@ -875,6 +890,10 @@ export const exprMmTime = (operator: string, sliceNames: string[]): Expr => {
 export const exprPrice = (range: string, id: number, max: number): Expr => {
   const slot = id + PRICE_RANGES[range];
   return exprMemo(new ExprPrice(slot, max));
+};
+
+export const exprSongEvent = (id: number, cmp: number): Expr => {
+  return exprMemo(new ExprSongEvent(id, cmp));
 };
 
 export const exprFish = (ageAndType: string, minPounds: number, maxPounds: number): Expr => {
