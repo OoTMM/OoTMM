@@ -1078,7 +1078,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_EASY_LIGHTBLOCKS: settings.mmEasierLightblock,
     SONG_NOTES: settings.songs === 'notes',
     OOT_ICE_ARROW_PLATFORMS: settings.iceArrowPlatformsOot,
-    OOT_SONG_EVENTS_SHUFFLE: settings.songEventsShuffle,
+    OOT_SONG_EVENTS_SHUFFLE: settings.songEventsShuffleOot,
   };
 
   for (const v in exprs) {

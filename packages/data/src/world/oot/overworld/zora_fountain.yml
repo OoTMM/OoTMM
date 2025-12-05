@@ -72,6 +72,6 @@
   exits:
     "Zora Fountain": "true"
   events:
-    MAGIC: "can_play_zelda"
+    MAGIC: "song_event(5)"
   locations:
-    "Great Fairy Farore's Wind": "can_play_zelda"
+    "Great Fairy Farore's Wind": "song_event(5)"

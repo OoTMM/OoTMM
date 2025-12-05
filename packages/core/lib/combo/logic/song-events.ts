@@ -20,7 +20,7 @@ export class LogicPassSongEvents {
   }
 
   run() {
-    if (this.state.settings.songEventsShuffle) {
+    if (this.state.settings.songEventsShuffleOot) {
       for (const world of this.state.worlds) {
         this.shuffleSongEvents(world);
       }

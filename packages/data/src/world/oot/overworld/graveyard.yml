@@ -3,7 +3,7 @@
   region: GRAVEYARD
   exits:
     "Kakariko": "true"
-    "Graveyard Royal Tomb": "can_play_zelda"
+    "Graveyard Royal Tomb": "song_event(2)"
     "Graveyard Shield Grave": "is_adult || is_night"
     "Graveyard ReDead Grave": "is_adult || is_night"
     "Dampe Grave": "is_adult"

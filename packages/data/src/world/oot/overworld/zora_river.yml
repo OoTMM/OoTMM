@@ -36,7 +36,7 @@
   exits:
     "Zora River Front": "true"
     "Zora River Upper": "is_adult || soul_cucco"
-    "Zora River Behind Falls": "can_play_zelda || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && soul_cucco && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
+    "Zora River Behind Falls": "song_event(3) || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && soul_cucco && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
     "Zora River Lost Woods Shortcut": "can_dive_small || hookshot_anywhere"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Soil Fairies": "soil_fairies(BEAN_ZORA_RIVER)"

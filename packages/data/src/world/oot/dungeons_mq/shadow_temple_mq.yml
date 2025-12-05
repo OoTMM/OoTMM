@@ -354,7 +354,7 @@
     "Shadow Temple Area Above Shortcut Enclosure": "hookshot_anywhere || scarecrow_longshot"
     "Shadow Temple Area After Boat Initial Landing": "event(SHADOW_MQ_ACTIVATE_BOAT_RIDE)"
   events:
-    SHADOW_MQ_ACTIVATE_BOAT_RIDE: "can_play_zelda"
+    SHADOW_MQ_ACTIVATE_BOAT_RIDE: "song_event(0x0c)"
 "Shadow Temple Area After Boat Initial Landing":
   dungeon: Shadow
   exits:

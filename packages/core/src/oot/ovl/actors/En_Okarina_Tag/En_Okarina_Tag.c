@@ -81,11 +81,11 @@ static int EnOkarinaTag_GetShuffledSongId(Actor* thisx, PlayState* play)
         switch (thisx->room)
         {
             case 5:
-                return SONG_EVENT_TEMPLE_SPIRIT_1;
+                return SONG_EVENT_TEMPLE_SPIRIT_STATUE;
             case 14:
-                return SONG_EVENT_TEMPLE_SPIRIT_2;
+                return SONG_EVENT_TEMPLE_SPIRIT_LOWER;
             case 24:
-                return SONG_EVENT_TEMPLE_SPIRIT_3;
+                return SONG_EVENT_TEMPLE_SPIRIT_HIGHER;
             default:
                 return -1;
         }
