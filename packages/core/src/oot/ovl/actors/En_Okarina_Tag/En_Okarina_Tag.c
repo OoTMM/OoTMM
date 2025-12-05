@@ -197,6 +197,14 @@ void func_80ABEF2C(EnOkarinaTag* this, PlayState* play) {
     }
 }
 
+static void EnOkarinaTag_InhibitSongEffect(PlayState* play)
+{
+    if (Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
+        play->msgCtx.ocarinaAction = OCARINA_ACTION_CHECK_NOWARP_DONE;
+        play->msgCtx.disableSunsSong = 1;
+    }
+}
+
 void func_80ABF0CC(EnOkarinaTag* this, PlayState* play) {
     Player* player = GET_PLAYER(play);
 
@@ -204,9 +212,7 @@ void func_80ABF0CC(EnOkarinaTag* this, PlayState* play) {
         this->actionFunc = func_80ABEF2C;
     } else {
         if (play->msgCtx.ocarinaMode == OCARINA_MODE_03) {
-            if (Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
-                play->msgCtx.ocarinaAction = OCARINA_ACTION_CHECK_NOWARP_DONE;
-            }
+            EnOkarinaTag_InhibitSongEffect(play);
             if (this->switchFlag >= 0) {
                 Flags_SetSwitch(play, this->switchFlag);
             }
@@ -287,10 +293,7 @@ void func_80ABF4C8(EnOkarinaTag* this, PlayState* play) {
     if (play->msgCtx.ocarinaMode == OCARINA_MODE_04) {
         this->actionFunc = func_80ABF28C;
     } else if (play->msgCtx.ocarinaMode == OCARINA_MODE_03) {
-        if (Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
-            play->msgCtx.ocarinaAction = OCARINA_ACTION_CHECK_NOWARP_DONE;
-        }
-
+        EnOkarinaTag_InhibitSongEffect(play);
         Sfx_PlaySfxCentered(NA_SE_SY_CORRECT_CHIME);
         if (this->switchFlag >= 0) {
             Flags_SetSwitch(play, this->switchFlag);
@@ -379,7 +382,7 @@ static Gfx kDlistLoadTextureLullaby[] = {
 };
 
 static Gfx kDlistLoadTextureEpona[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_NOMIRROR, G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
@@ -389,7 +392,7 @@ static Gfx kDlistLoadTextureSaria[] = {
 };
 
 static Gfx kDlistLoadTextureStorms[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_NOMIRROR, G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
@@ -399,7 +402,7 @@ static Gfx kDlistLoadTextureSun[] = {
 };
 
 static Gfx kDlistLoadTextureTime[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_NOMIRROR, G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
@@ -414,20 +417,20 @@ static Gfx* kDlistsLoadTextures[] = {
 
 static const u32 kSongTagColors[] = {
     0xffff00,
-    0xffff00,
+    0xff8800,
     0x22ff44,
-    0xffff00,
+    0x9000ff,
     0xee2222,
-    0xffff00,
+    0x0000ff,
 };
 
 static const u32 kSongTagTextureAddrs[] = {
     CUSTOM_SONG_TAG_LULLABY_ADDR,
-    CUSTOM_SONG_TAG_LULLABY_ADDR,
+    CUSTOM_SONG_TAG_DUMMY_ADDR,
     CUSTOM_SONG_TAG_SARIA_ADDR,
-    CUSTOM_SONG_TAG_LULLABY_ADDR,
+    CUSTOM_SONG_TAG_DUMMY_ADDR,
     CUSTOM_SONG_TAG_SUN_ADDR,
-    CUSTOM_SONG_TAG_LULLABY_ADDR,
+    CUSTOM_SONG_TAG_DUMMY_ADDR,
 };
 
 static const Gfx kDlistSongTag[] = {
