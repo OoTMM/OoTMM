@@ -452,9 +452,9 @@ static const Gfx kDlistSongTag[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsSPDisplayList(0x06000000),
-    gsDPSetCombineMode(G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM),
-    gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_SURF2),
-    gsSPClearGeometryMode(G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsDPSetCombineMode(G_CC_MODULATEIDECALA_PRIM, G_CC_PASS2),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2),
+    gsSPClearGeometryMode(G_CULL_BACK | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
     gsSPVertex(&kQuad, 4, 0),
     gsSP2Triangles(0, 2, 1, 0, 0, 3, 2, 0),
     gsSPEndDisplayList(),
@@ -473,6 +473,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     u8 b;
     Vec3f pos;
     float rot;
+    u8 vertical;
 
     song = gComboConfig.songEvents[this->shuffledSongId];
     loader = kDlistsLoadTextures[song];
@@ -493,6 +494,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     pos.z = thisx->world.pos.z;
     rot = 0.f;
     padScale = 0.f;
+    vertical = 0;
 
     switch (play->sceneId)
     {
@@ -524,6 +526,25 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
         pos.y = -239.9f;
         padScale = 1.2f;
         break;
+    case SCE_OOT_TEMPLE_WATER:
+        vertical = 1;
+        padScale = 1.2f;
+        switch (thisx->room)
+        {
+        case 0:
+            pos.y = 928.f;
+            pos.z = 350.f;
+            break;
+        case 1:
+            pos.y = 432.f;
+            pos.z = 0.f;
+            break;
+        case 17:
+            pos.y = 859.f;
+            pos.z = 340.f;
+            break;
+        }
+        break;
     }
 
     if (padScale)
@@ -535,15 +556,18 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     }
 
     Matrix_Translate(pos.x, pos.y, pos.z, MTXMODE_NEW);
+    if (vertical)
+        Matrix_RotateX(M_PI_2, MTXMODE_APPLY);
     if (rot)
         Matrix_RotateY(rot, MTXMODE_APPLY);
 
     /* Draw the display list */
     OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     if (padScale)
     {
         Matrix_Push();
-        Matrix_Translate(0, -0.05f, 0, MTXMODE_APPLY);
+        Matrix_Translate(0.f, vertical ? 0.f : -0.05f, vertical ? -0.05f : 0.f, MTXMODE_APPLY);
         Matrix_Scale(padScale, 1.f, padScale, MTXMODE_APPLY);
         gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPSegment(POLY_XLU_DISP++, 0x06, (u32)kDlistLoadTexturePad);
