@@ -460,6 +460,22 @@ static const Gfx kDlistSongTag[] = {
     gsSPEndDisplayList(),
 };
 
+Actor* EnOkarinaTag_FindShadowShip(PlayState* play)
+{
+    Actor* actor = play->actorCtx.actors[ACTORCAT_BG].first;
+
+    while (actor != NULL)
+    {
+        if (actor->id == ACTOR_BG_HAKA_SHIP)
+        {
+            return actor;
+        }
+        actor = actor->next;
+    }
+
+    return NULL;
+}
+
 void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
 {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
@@ -474,6 +490,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     Vec3f pos;
     float rot;
     u8 vertical;
+    Actor* actor;
 
     song = gComboConfig.songEvents[this->shuffledSongId];
     loader = kDlistsLoadTextures[song];
@@ -544,6 +561,18 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
             pos.z = 340.f;
             break;
         }
+        break;
+    case SCE_OOT_TEMPLE_SHADOW:
+        /* Does't work perfectly, will need to find a solution */
+        actor = EnOkarinaTag_FindShadowShip(play);
+        this->actor.flags |= ACTOR_FLAG_DRAW_CULLING_DISABLED;
+        if (!actor)
+            return;
+        padScale = 4.f;
+        rot = M_PI_2;
+        pos.x = actor->world.pos.x - 85.f;
+        pos.y = actor->world.pos.y + 150.f;
+        pos.z = actor->world.pos.z;
         break;
     }
 
