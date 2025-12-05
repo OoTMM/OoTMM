@@ -574,6 +574,20 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
         pos.y = actor->world.pos.y + 150.f;
         pos.z = actor->world.pos.z;
         break;
+    case SCE_OOT_TEMPLE_SPIRIT:
+        padScale = 1.2f;
+        switch (thisx->room)
+        {
+        case 5:
+            rot = M_PI;
+            pos.y = 667.f;
+            pos.z = -1250.f;
+            break;
+        case 24:
+            pos.z = -800.f;
+            break;
+        }
+        break;
     }
 
     if (padScale)
