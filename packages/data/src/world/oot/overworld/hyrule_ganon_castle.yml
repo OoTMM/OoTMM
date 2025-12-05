@@ -97,9 +97,9 @@
   exits:
     "Near Fairy Fountain Din": "true"
   events:
-    MAGIC: "can_play_zelda"
+    MAGIC: "song_event(6)"
   locations:
-    "Great Fairy Din's Fire": "can_play_zelda"
+    "Great Fairy Din's Fire": "song_event(6)"
 
 "Hyrule Castle Grotto":
   region: ENTRANCE
@@ -170,6 +170,6 @@
   exits:
     "Near Fairy Fountain Defense": "true"
   events:
-    MAGIC: "can_play_zelda"
+    MAGIC: "song_event(0x0a)"
   locations:
-    "Great Fairy Defense Upgrade": "can_play_zelda"
+    "Great Fairy Defense Upgrade": "song_event(0x0a)"

@@ -14,9 +14,9 @@
 #define SONG_EVENT_GREAT_FAIRY_UPGRADE_DEFENSE  0x0a
 #define SONG_EVENT_TEMPLE_WATER                 0x0b
 #define SONG_EVENT_TEMPLE_SHADOW                0x0c
-#define SONG_EVENT_TEMPLE_SPIRIT_1              0x0d
-#define SONG_EVENT_TEMPLE_SPIRIT_2              0x0e
-#define SONG_EVENT_TEMPLE_SPIRIT_3              0x0f
+#define SONG_EVENT_TEMPLE_SPIRIT_STATUE         0x0d
+#define SONG_EVENT_TEMPLE_SPIRIT_LOWER          0x0e
+#define SONG_EVENT_TEMPLE_SPIRIT_HIGHER         0x0f
 #define SONG_EVENT_TEMPLE_BOTW                  0x10
 #define SONG_EVENT_TEMPLE_GANON                 0x11
 

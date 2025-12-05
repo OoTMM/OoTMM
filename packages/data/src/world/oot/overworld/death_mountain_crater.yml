@@ -150,6 +150,6 @@
   exits:
     "Death Mountain Crater Bottom": "true"
   events:
-    MAGIC: "can_play_zelda"
+    MAGIC: "song_event(9)"
   locations:
-    "Great Fairy Magic Upgrade 2": "can_play_zelda"
+    "Great Fairy Magic Upgrade 2": "song_event(9)"
