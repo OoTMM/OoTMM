@@ -514,6 +514,11 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     case SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES:
         padScale = 1.2f;
         break;
+    case SCE_OOT_BOTTOM_OF_THE_WELL:
+        pos.x = 0.f;
+        pos.z = -1480.f;
+        padScale = 3.f;
+        break;
     }
 
     if (padScale)
