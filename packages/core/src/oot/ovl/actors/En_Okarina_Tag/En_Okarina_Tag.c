@@ -519,6 +519,11 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
         pos.z = -1480.f;
         padScale = 3.f;
         break;
+    case SCE_OOT_INSIDE_GANON_CASTLE:
+        rot = M_PI_2;
+        pos.y = -239.9f;
+        padScale = 1.2f;
+        break;
     }
 
     if (padScale)
