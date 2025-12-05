@@ -406,6 +406,11 @@ static Gfx kDlistLoadTextureTime[] = {
     gsSPEndDisplayList(),
 };
 
+static Gfx kDlistLoadTexturePad[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0, G_TX_MIRROR, G_TX_MIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPEndDisplayList(),
+};
+
 static Gfx* kDlistsLoadTextures[] = {
     kDlistLoadTextureLullaby,
     kDlistLoadTextureEpona,
@@ -450,6 +455,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
 {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
     int song;
+    float padScale;
     Gfx* loader;
     void* tex;
     u32 color;
@@ -457,6 +463,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     u8 g;
     u8 b;
     Vec3f pos;
+    float rot;
 
     song = gComboConfig.songEvents[this->shuffledSongId];
     loader = kDlistsLoadTextures[song];
@@ -475,21 +482,48 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     pos.x = thisx->world.pos.x;
     pos.y = thisx->world.pos.y + 0.1f;
     pos.z = thisx->world.pos.z;
+    rot = 0.f;
+    padScale = 0.f;
 
     switch (play->sceneId)
     {
     case SCE_OOT_TEMPLE_OF_TIME:
         pos.z += 15.f;
         break;
+    case SCE_OOT_GRAVEYARD:
+        rot = M_PI_2 * 3;
+        padScale = 2.3f;
+        break;
+    }
+
+    if (padScale)
+    {
+        tex = comboCacheGetFile(CUSTOM_SONG_TAG_PAD_ADDR);
+        if (!tex)
+            return;
+        kDlistLoadTexturePad[0].words.w1 = (u32)tex;
     }
 
     Matrix_Translate(pos.x, pos.y, pos.z, MTXMODE_NEW);
+    if (rot)
+        Matrix_RotateY(rot, MTXMODE_APPLY);
 
     /* Draw the display list */
     OPEN_DISPS(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPSegment(POLY_OPA_DISP++, 0x06, (u32)loader);
-    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 255);
-    gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistSongTag);
+    if (padScale)
+    {
+        Matrix_Push();
+        Matrix_Translate(0, -0.05f, 0, MTXMODE_APPLY);
+        Matrix_Scale(padScale, 1.f, padScale, MTXMODE_APPLY);
+        gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPSegment(POLY_XLU_DISP++, 0x06, (u32)kDlistLoadTexturePad);
+        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 200, 200, 200, 255);
+        gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistSongTag);
+        Matrix_Pop();
+    }
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_XLU_DISP++, 0x06, (u32)loader);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, 255);
+    gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistSongTag);
     CLOSE_DISPS();
 }
