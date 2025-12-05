@@ -204,6 +204,9 @@ void func_80ABF0CC(EnOkarinaTag* this, PlayState* play) {
         this->actionFunc = func_80ABEF2C;
     } else {
         if (play->msgCtx.ocarinaMode == OCARINA_MODE_03) {
+            if (Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
+                play->msgCtx.ocarinaAction = OCARINA_ACTION_CHECK_NOWARP_DONE;
+            }
             if (this->switchFlag >= 0) {
                 Flags_SetSwitch(play, this->switchFlag);
             }
