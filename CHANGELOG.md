@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to shuffle the required songs for various events in OoT (experimental).
 - Add animal souls in OoT and MM.
 - Cosmetics setting to enable BGM during night time.
 - Add soft soil shuffle to Ocarina of Time and Majora's Mask.
