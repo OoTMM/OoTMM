@@ -510,6 +510,10 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
         padScale = 1.2f;
         rot = M_PI_2;
         break;
+    case SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS:
+    case SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES:
+        padScale = 1.2f;
+        break;
     }
 
     if (padScale)
