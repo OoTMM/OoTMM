@@ -453,6 +453,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     u8 r;
     u8 g;
     u8 b;
+    Vec3f pos;
 
     song = gComboConfig.songEvents[this->shuffledSongId];
     loader = kDlistsLoadTextures[song];
@@ -468,7 +469,18 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     loader[0].words.w1 = (u32)tex;
 
     /* Prepare the Matrix */
-    Matrix_Translate(thisx->world.pos.x, thisx->world.pos.y + 0.1f, thisx->world.pos.z, MTXMODE_NEW);
+    pos.x = thisx->world.pos.x;
+    pos.y = thisx->world.pos.y + 0.1f;
+    pos.z = thisx->world.pos.z;
+
+    switch (play->sceneId)
+    {
+    case SCE_OOT_TEMPLE_OF_TIME:
+        pos.z += 15.f;
+        break;
+    }
+
+    Matrix_Translate(pos.x, pos.y, pos.z, MTXMODE_NEW);
 
     /* Draw the display list */
     OPEN_DISPS(play->state.gfxCtx);
