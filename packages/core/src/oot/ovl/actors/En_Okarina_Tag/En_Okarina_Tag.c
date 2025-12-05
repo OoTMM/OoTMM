@@ -114,6 +114,15 @@ static int EnOkarinaTag_OcarinaAction(EnOkarinaTag* this, int vanilla)
     return kOcarinaActions[gComboConfig.songEvents[this->shuffledSongId]];
 }
 
+void EnOkarinaTag_Disable(EnOkarinaTag* this)
+{
+    if (Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
+        this->actionFunc = (void*)Actor_Noop;
+    } else {
+        Actor_Kill(&this->actor);
+    }
+}
+
 void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
     EnOkarinaTag* this = (EnOkarinaTag*)thisx;
 
@@ -139,7 +148,7 @@ void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
     }
 
     if ((this->switchFlag >= 0) && (Flags_GetSwitch(play, this->switchFlag))) {
-        Actor_Kill(&this->actor);
+        EnOkarinaTag_Disable(this);
     } else {
         switch (this->type) {
             case 7:
@@ -147,7 +156,7 @@ void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
                 break;
             case 2:
                 if (gSave.age== AGE_ADULT) {
-                    Actor_Kill(&this->actor);
+                    EnOkarinaTag_Disable(this);
                     break;
                 }
                 /* FALLTHROUGH */
@@ -161,7 +170,7 @@ void EnOkarinaTag_Init(Actor* thisx, PlayState* play) {
                 this->actionFunc = func_80ABF708;
                 break;
             default:
-                Actor_Kill(&this->actor);
+                EnOkarinaTag_Disable(this);
                 break;
         }
     }
