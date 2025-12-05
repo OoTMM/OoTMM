@@ -31,6 +31,7 @@
 
 #define IS_ZERO(f) (fabsf(f) < 0.008f)
 
+#define M_PI_2      (3.14159265358979323846 * 0.5)
 #define M_PIf 3.14159265358979323846f
 #define M_SQRT2 1.41421356237309504880f
 #define MAXFLOAT 3.40282347e+38f
