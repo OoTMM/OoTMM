@@ -494,6 +494,9 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
         rot = M_PI_2 * 3;
         padScale = 2.3f;
         break;
+    case SCE_OOT_TOMB_DAMPE_WINDMILL:
+        pos.z += 250.f;
+        break;
     }
 
     if (padScale)
