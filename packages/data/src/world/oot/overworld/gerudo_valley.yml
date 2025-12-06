@@ -2,7 +2,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Gerudo Valley Falls": "is_child || can_swim_or_sink"
+    "Gerudo Valley Falls": "(is_child && soul_cucco) || can_swim_or_sink"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || can_hookshot)) || time_travel_at_will"
     "Octorok Grotto Ledge": "true"
@@ -15,15 +15,15 @@
     BUGS: "is_child && has_bottle"
     BEAN_GERUDO_VALLEY: "can_use_beans"
   locations:
-    "Gerudo Valley Crate HP": "is_child || can_longshot || climb_anywhere"
-    "Gerudo Valley Waterfall HP": "is_child || can_swim || can_longshot || climb_anywhere || (has_iron_boots && can_hookshot)" ##Grab the PoH with Cucco as child. The Hookshot can attach to the ladder.
+    "Gerudo Valley Crate HP": "(is_child && soul_cucco) || can_longshot || climb_anywhere"
+    "Gerudo Valley Waterfall HP": "(is_child && soul_cucco) || can_swim || can_longshot || climb_anywhere || (has_iron_boots && can_hookshot)" ##Grab the PoH with Cucco as child. The Hookshot can attach to the ladder.
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && cow"
-    "Gerudo Valley Crate Ledge": "is_child || can_longshot || climb_anywhere"
+    "Gerudo Valley Crate Ledge": "(is_child && soul_cucco) || can_longshot || climb_anywhere"
     "Gerudo Valley Crate Child Bottom": "is_child"
     "Gerudo Valley Wonder Item Lower": "is_adult"
-    "Gerudo Valley Wonder Item Upper": "(is_adult && (can_swim || can_longshot || climb_anywhere || can_use_ice_arrow_platforms || (has_iron_boots && can_hookshot))) || time_travel_at_will || can_ride_bean(BEAN_GERUDO_VALLEY)"
+    "Gerudo Valley Wonder Item Upper": "(is_adult && (can_swim || can_longshot || climb_anywhere || can_use_ice_arrow_platforms || (has_iron_boots && can_hookshot))) || (time_travel_at_will && soul_cucco) || can_ride_bean(BEAN_GERUDO_VALLEY)"
     "Gerudo Valley Red Boulder Before Bridge 1": "is_adult && can_hammer"
     "Gerudo Valley Red Boulder Before Bridge 2": "is_adult && can_hammer"
     "Gerudo Valley Rock Entrance Ground 1": "true"
@@ -47,7 +47,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Gerudo Valley Falls": "true"
+    "Gerudo Valley Falls": "can_swim_or_sink"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Valley": "is_child || can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || climb_anywhere"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
