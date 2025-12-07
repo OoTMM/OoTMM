@@ -23,7 +23,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     canSongtest: true,
     seqOot: [0x57],
@@ -34,8 +34,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x02],
   },
@@ -45,7 +45,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x18],
   },
@@ -55,8 +55,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Outdoors,
-        MusicGroup.Towns,
+      MusicGroup.Outdoors,
+      MusicGroup.Towns,
     ],
     seqOot: [0x19],
   },
@@ -66,7 +66,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqOot: [0x1A],
   },
@@ -76,7 +76,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqOot: [0x1B],
   },
@@ -86,7 +86,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x1C],
   },
@@ -96,8 +96,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Outdoors,
+      MusicGroup.Towns,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x1D],
   },
@@ -107,7 +107,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x1E],
   },
@@ -117,7 +117,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x1F],
   },
@@ -127,7 +127,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x26],
   },
@@ -137,8 +137,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Outdoors,
+      MusicGroup.Towns,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x27],
   },
@@ -148,8 +148,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x28],
   },
@@ -159,7 +159,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x29],
   },
@@ -169,7 +169,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x2A],
   },
@@ -179,7 +179,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x2C],
   },
@@ -189,7 +189,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqOot: [0x2D],
   },
@@ -199,7 +199,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x2E],
   },
@@ -209,8 +209,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Outdoors,
+      MusicGroup.Towns,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x2F],
   },
@@ -220,8 +220,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Indoors,
+      MusicGroup.Towns,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x30],
   },
@@ -231,7 +231,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqOot: [0x38],
   },
@@ -241,8 +241,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x3A],
   },
@@ -252,8 +252,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Outdoors,
+      MusicGroup.Towns,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x3C],
   },
@@ -263,9 +263,9 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Towns,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Towns,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x3E],
   },
@@ -275,7 +275,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x3F],
   },
@@ -285,7 +285,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqOot: [0x40],
   },
@@ -295,7 +295,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x42],
   },
@@ -305,8 +305,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.ActionThemes,
-        MusicGroup.CalmThemes,
+      MusicGroup.ActionThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x4A],
   },
@@ -316,7 +316,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x4B],
   },
@@ -326,8 +326,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x4C],
   },
@@ -337,8 +337,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.Minigames,
+      MusicGroup.Indoors,
+      MusicGroup.Minigames,
     ],
     seqOot: [0x4E],
   },
@@ -348,7 +348,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x4F],
   },
@@ -358,8 +358,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Indoors,
+      MusicGroup.Towns,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x50],
   },
@@ -369,7 +369,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x55],
   },
@@ -379,8 +379,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x56]
   },
@@ -390,8 +390,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
-        MusicGroup.CalmThemes,
+      MusicGroup.Dungeons,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x58],
   },
@@ -401,7 +401,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x5A],
   },
@@ -411,7 +411,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x5B],
   },
@@ -421,7 +421,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x5C],
   },
@@ -431,8 +431,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqOot: [0x5F],
   },
@@ -442,7 +442,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x60],
   },
@@ -452,8 +452,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqOot: [0x61],
   },
@@ -463,8 +463,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.ActionThemes,
-        MusicGroup.Fights,
+      MusicGroup.ActionThemes,
+      MusicGroup.Fights,
     ],
     seqOot: [0x62],
   },
@@ -474,7 +474,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqOot: [0x63],
   },
@@ -484,7 +484,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqOot: [0x64],
   },
@@ -494,7 +494,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqOot: [0x65],
   },
@@ -504,7 +504,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqOot: [0x6B],
   },
@@ -514,7 +514,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqOot: [0x6C],
   },
@@ -524,8 +524,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
-        MusicGroup.Indoors,
+      MusicGroup.Dungeons,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x6E],
   },
@@ -535,8 +535,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
-        MusicGroup.Indoors,
+      MusicGroup.Dungeons,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x6F],
   },
@@ -546,8 +546,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
-        MusicGroup.Indoors,
+      MusicGroup.Dungeons,
+      MusicGroup.Indoors,
     ],
     seqOot: [0x70],
   },
@@ -559,8 +559,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x02],
   },
@@ -570,7 +570,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x06],
   },
@@ -580,7 +580,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x07],
   },
@@ -590,8 +590,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x0C],
   },
@@ -601,7 +601,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.ActionThemes,
+      MusicGroup.ActionThemes,
     ],
     seqMm: [0x0D],
   },
@@ -611,7 +611,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqMm: [0x0E],
   },
@@ -621,7 +621,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.ActionThemes,
+      MusicGroup.ActionThemes,
     ],
     seqMm: [0x0F],
   },
@@ -631,8 +631,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x10],
   },
@@ -642,8 +642,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x11],
   },
@@ -653,7 +653,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
+      MusicGroup.Towns,
     ],
     seqMm: [0x12],
   },
@@ -663,8 +663,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x13],
   },
@@ -674,7 +674,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x14],
   },
@@ -684,7 +684,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
+      MusicGroup.Towns,
     ],
     seqMm: [0x15, 0x1D],
   },
@@ -694,7 +694,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
+      MusicGroup.Towns,
     ],
     seqMm: [0x16, 0x23],
   },
@@ -704,7 +704,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
+      MusicGroup.Towns,
     ],
     seqMm: [0x17],
   },
@@ -714,7 +714,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqMm: [0x1B],
   },
@@ -724,7 +724,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x1C],
   },
@@ -734,7 +734,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
+      MusicGroup.Indoors,
     ],
     seqMm: [0x1F],
   },
@@ -744,7 +744,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqMm: [0x25],
   },
@@ -754,7 +754,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqMm: [0x26],
   },
@@ -764,8 +764,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x27],
   },
@@ -775,8 +775,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x28], /* 0x18 = File Select */
   },
@@ -786,7 +786,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
+      MusicGroup.Indoors,
     ],
     seqMm: [0x2C],
   },
@@ -797,8 +797,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Outdoors,
+      MusicGroup.Towns,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x2F],
   },
@@ -808,8 +808,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Indoors,
+      MusicGroup.Towns,
+      MusicGroup.Indoors,
     ],
     seqMm: [0x30],
   },
@@ -819,8 +819,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.ActionThemes,
+      MusicGroup.Indoors,
+      MusicGroup.ActionThemes,
     ],
     seqMm: [0x31],
   },
@@ -830,8 +830,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Towns,
-        MusicGroup.Indoors,
+      MusicGroup.Towns,
+      MusicGroup.Indoors,
     ],
     seqMm: [0x36],
   },
@@ -841,7 +841,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqMm: [0x38],
   },
@@ -851,8 +851,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x3A],
   },
@@ -862,8 +862,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
-        MusicGroup.Indoors,
+      MusicGroup.Dungeons,
+      MusicGroup.Indoors,
     ],
     seqMm: [0x3B],
   },
@@ -873,8 +873,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x3C, 0x56],
   },
@@ -884,8 +884,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fields,
-        MusicGroup.Outdoors,
+      MusicGroup.Fields,
+      MusicGroup.Outdoors,
     ],
     seqMm: [0x3E],
   },
@@ -895,7 +895,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqMm: [0x40],
   },
@@ -905,7 +905,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x42],
   },
@@ -915,8 +915,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.CalmThemes,
+      MusicGroup.Indoors,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x43],
   },
@@ -926,7 +926,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
+      MusicGroup.Indoors,
     ],
     seqMm: [0x44],
   },
@@ -936,7 +936,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Minigames,
+      MusicGroup.Minigames,
     ],
     seqMm: [0x46],
   },
@@ -946,8 +946,8 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Indoors,
-        MusicGroup.ActionThemes,
+      MusicGroup.Indoors,
+      MusicGroup.ActionThemes,
     ],
     seqMm: [0x50],
   },
@@ -957,7 +957,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.CalmThemes,
+      MusicGroup.CalmThemes,
     ],
     seqMm: [0x57, 0x60], /*0x60 = Majora's Boss Room (Pointer: 0x57) */
   },
@@ -967,7 +967,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x65],
   },
@@ -977,7 +977,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x66],
   },
@@ -987,7 +987,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqMm: [0x69],
   },
@@ -997,7 +997,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqMm: [0x6A],
   },
@@ -1007,7 +1007,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Fights,
+      MusicGroup.Fights,
     ],
     seqMm: [0x6B],
   },
@@ -1017,7 +1017,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Bgm,
     bankCacheType: CacheLoad.TEMPORARY,
     musicGroups: [
-        MusicGroup.Dungeons,
+      MusicGroup.Dungeons,
     ],
     seqMm: [0x6F],
   },
@@ -1029,7 +1029,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [0x22],
     seqMm: [0x22],
@@ -1040,7 +1040,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [0x39],
     seqMm: [0x39],
@@ -1051,7 +1051,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [0x24],
     seqMm: [0x24],
@@ -1062,7 +1062,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [],
     seqMm: [0x37],
@@ -1073,7 +1073,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [0x32],
     seqMm: [],
@@ -1084,7 +1084,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [0x43],
     seqMm: [],
@@ -1095,7 +1095,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ItemFanfares,
+      MusicGroup.ItemFanfares,
     ],
     seqOot: [0x3D],
     seqMm: [0x52],
@@ -1108,7 +1108,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.EventFanfares,
+      MusicGroup.EventFanfares,
     ],
     seqOot: [0x20],
   },
@@ -1118,7 +1118,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare,
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ClearFanfares,
+      MusicGroup.ClearFanfares,
     ],
     seqOot: [0x21],
   },
@@ -1130,7 +1130,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare, // Was originally BGM, why? It's fanfare in MMR
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ClearFanfares,
+      MusicGroup.ClearFanfares,
     ],
     seqMm: [0x78],
   },
@@ -1140,7 +1140,7 @@ export const SEQS: {[k: string]: MusicEntry} = {
     songType: SongType.Fanfare, // Was originally BGM, why? It's fanfare in MMR
     bankCacheType: CacheLoad.PERSISTENT,
     musicGroups: [
-        MusicGroup.ClearFanfares,
+      MusicGroup.ClearFanfares,
     ],
     seqMm: [0x79],
   },
