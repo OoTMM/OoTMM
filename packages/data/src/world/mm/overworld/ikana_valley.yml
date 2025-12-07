@@ -4,7 +4,7 @@
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Road to Ikana Top": "true"
-    "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
+    "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || (has_iron_boots && can_hookshot) || short_hook_anywhere"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Ikana Valley Near Secret Shrine": "can_swim || (can_use_ice_arrows && has_chateau)"
     "Swamp Front": "underwater_walking || can_swim"
