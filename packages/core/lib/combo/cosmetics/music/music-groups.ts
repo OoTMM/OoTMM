@@ -527,8 +527,7 @@ export class MusicGroup {
   // #endregion
 
   // #region Default Lists
-  static readonly DefaultBgmGroups: readonly MusicGroup[] =
-  [
+  static readonly DefaultBgmGroups: readonly MusicGroup[] = [
     MusicGroup.Fields,
     MusicGroup.Towns,
     MusicGroup.Dungeons,
@@ -540,8 +539,7 @@ export class MusicGroup {
     MusicGroup.Fights,
   ] as const;
 
-  static readonly DefaultFanfareGroups: readonly MusicGroup[] =
-  [
+  static readonly DefaultFanfareGroups: readonly MusicGroup[] = [
     MusicGroup.ItemFanfares,
     MusicGroup.EventFanfares,
     MusicGroup.ClearFanfares,
@@ -549,8 +547,7 @@ export class MusicGroup {
   // #endregion
 
   // #region All Music Group Lists
-  static readonly AllGroups: readonly MusicGroup[] =
-  [
+  static readonly AllGroups: readonly MusicGroup[] = [
     MusicGroup.Fields,
     MusicGroup.Towns,
     MusicGroup.Dungeons,
@@ -566,8 +563,7 @@ export class MusicGroup {
     MusicGroup.Cutscenes,
   ] as const;
 
-  static readonly AllBgmGroups: readonly MusicGroup[] =
-  [
+  static readonly AllBgmGroups: readonly MusicGroup[] = [
     MusicGroup.Fields,
     MusicGroup.Towns,
     MusicGroup.Dungeons,
