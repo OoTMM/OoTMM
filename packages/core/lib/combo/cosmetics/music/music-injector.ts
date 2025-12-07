@@ -478,6 +478,8 @@ class MusicInjector {
     while (musics.size > 0 && slots.length > 0) {
         const slot = slots.pop()!;
 
+        // TODO: If out of possible songs to assign during loop,
+        //       assign songs to remaining slots disregarding categories
         let candidates = Array.from(musics).filter(x => isMusicSuitable(SEQS[slot], x));
         if (this.isMaxBank()) {
             candidates = candidates.filter(x => x.bankCustom === null);
