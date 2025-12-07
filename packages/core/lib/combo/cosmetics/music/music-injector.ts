@@ -95,11 +95,22 @@ function saneName(name: string) {
   return name;
 }
 
-function isMusicSuitable(entry: MusicEntry, file: MusicFile) {
+function isValidSongReplacement(entry: MusicEntry, file: MusicFile) {
+  /* See if song works for slot by checking type, game, and category */
   return entry.songType === file.songType
     && (entry.seqOot === undefined || file.games.includes('oot'))
     && (entry.seqMm === undefined || file.games.includes('mm'))
     && entry.musicGroups.some(eg => file.musicGroups.some(fg => fg === eg)); // Categorization~
+}
+
+function isValidBackupPlacement(entry: MusicEntry, file: MusicFile) {
+  /*
+   * If a song can not find a suitable slot when running out of music,
+   * then ignore categories altogether like they originally did
+   */
+  return entry.songType === file.songType
+    && (entry.seqOot === undefined || file.games.includes('oot'))
+    && (entry.seqMm === undefined || file.games.includes('mm'))
 }
 
 function mmrSampleBank(sb: number) {
@@ -450,49 +461,67 @@ class MusicInjector {
   }
 
   private async shuffleMusics() {
-    const slots = shuffle(this.random, Object.keys(SEQS));
+    const shuffledSlots = shuffle(this.random, Object.keys(SEQS));
     const songtestSlots = Object.entries(SEQS).filter(([_, entry]) => entry.canSongtest === true);
     const musics = new Set(this.musics);
+
+    let unassignedSlots = [...shuffledSlots];
     let musics_name = new Array();
 
     this.writer.indent('Music');
 
-    // Handle songtest
+    /* Assign songtest song to all songtest-able song slots */
     const songtestSongs = Array.from(musics).filter(x => x.isSongtest === true);
     if (songtestSongs.length === 1) {
         const songtestSong = songtestSongs[0];
-        musics.delete(songtestSong); // Remove song from pool music files
+        musics.delete(songtestSong); // Remove song from pool of files
 
-        // Loop through every possible slot, and assign the song to it
         for (const [slot, _] of songtestSlots) {
-            await this.injectMusic(slot, songtestSong);
-            slots.splice(slots.indexOf(slot), 1); // Remove slot from pool of seqs
-            const entry = SEQS[slot];
-            musics_name.push(`${entry.name} (Songtest): ${songtestSong.name} (${songtestSong.filename})`);
+          unassignedSlots = unassignedSlots.filter(s => s !== slot); // Remove slot from unassigned
+
+          await this.injectMusic(slot, songtestSong);
+
+          const entry = SEQS[slot];
+          musics_name.push(`${entry.name} (Songtest): ${songtestSong.name} (${songtestSong.filename})`);
         }
     } else if (songtestSongs.length > 1) {
         this.monitor.warn(`Skipping songtest assigment: multiple songtest files found`);
     }
 
-    // Handle other songs
-    while (musics.size > 0 && slots.length > 0) {
-        const slot = slots.pop()!;
+    /* Assign music to all remaining unassigned song slots */
+    while (musics.size > 0 && unassignedSlots.length > 0) {
+      /* Figure out the candidates for remaining slots */
+      const slotCandidates = new Map<string, MusicFile[]>();
 
-        // TODO: If out of possible songs to assign during loop,
-        //       assign songs to remaining slots disregarding categories
-        let candidates = Array.from(musics).filter(x => isMusicSuitable(SEQS[slot], x));
-        if (this.isMaxBank()) {
-            candidates = candidates.filter(x => x.bankCustom === null);
-        }
+      for (const slot of unassignedSlots) {
+        const bankCheck = (x: MusicFile) => !this.isMaxBank() || x.bankCustom === null;
+        const mainCheck = (x: MusicFile) => isValidSongReplacement(SEQS[slot], x) && bankCheck(x);
+        const backupCheck = (x: MusicFile) => isValidBackupPlacement(SEQS[slot], x) && bankCheck(x);
 
-        if (candidates.length === 0) continue;
+        // Size cond. might need to change (96 BGM, 11 Fanfares available in SEQS)
+        const candidates = Array.from(musics).filter(musics.size > 30 ? mainCheck : backupCheck);
+        slotCandidates.set(slot, candidates);
+      }
 
-        const music = sample(this.random, candidates);
-        musics.delete(music);
-        await this.injectMusic(slot, music);
+      /* Check if all remaining slots have zero candidates (true dead-end situation) */
+      const allZero = [...slotCandidates.values()].every(c => c.length === 0);
+      if (allZero) {
+        this.monitor.warn(`No valid candidates found for any remaining ${unassignedSlots.length} slots with ${musics.size} music files left!`);
+        break; // In this situation, we may end up in an infinite loop, so we have to break
+      }
 
-        const entry = SEQS[slot];
-        musics_name.push(`${entry.name}: ${music.name} (${music.filename})`);
+      /* Pick a slot with candidates */
+      const [slot, candidates] = [...slotCandidates.entries()].find(([_, c]) => c.length > 0)!;
+
+      /* Assign a random music file from the candidates */
+      const music = sample(this.random, candidates);
+      musics.delete(music);
+      unassignedSlots = unassignedSlots.filter(s => s !== slot); // remove slot from unassigned
+
+      await this.injectMusic(slot, music);
+
+      const entry = SEQS[slot];
+      musics_name.push(`${entry.name}: ${music.name} (${music.filename})`);
     }
 
     for(let entry of musics_name.sort()) {
