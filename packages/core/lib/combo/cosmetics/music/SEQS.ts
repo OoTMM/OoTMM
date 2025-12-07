@@ -791,7 +791,6 @@ export const SEQS: {[k: string]: MusicEntry} = {
     seqMm: [0x2C],
   },
 
-  // DQWPOKQWPODKPQWKDOKQWPDKPOQWKDPOQWKDPOKQW
   MM_ROMANI_RANCH: {
     name: 'MM - Romani Ranch',
     songType: SongType.Bgm,
