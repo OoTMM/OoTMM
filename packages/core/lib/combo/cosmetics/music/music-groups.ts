@@ -564,7 +564,7 @@ export class MusicGroup {
     MusicGroup.EventFanfares,
     MusicGroup.ClearFanfares,
     MusicGroup.Cutscenes,
-  ];
+  ] as const;
 
   static readonly AllBgmGroups: readonly MusicGroup[] =
   [
