@@ -9,7 +9,7 @@
     SEEDS: "is_child"
     CARPENTER_1: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 1": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+    "Gerudo Fortress Jail 1": "(can_use_sword || can_hammer || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 1 1": "true"
     "Gerudo Fortress Pot Jail 1 2": "true"

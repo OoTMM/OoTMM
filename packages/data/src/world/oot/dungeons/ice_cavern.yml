@@ -2,7 +2,7 @@
   dungeon: IC
   exits:
     "Zora Fountain Frozen": "true"
-    "Ice Cavern Scythe": "soul_freezard && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
+    "Ice Cavern Scythe": "soul_freezard && (can_use_sword_master || can_use_sword_goron || can_hammer || can_use_sticks || has_fire || has_explosives)"
     "Ice Cavern End": "has_iron_boots && (climb_anywhere || hookshot_anywhere)"
   locations:
     "Ice Cavern Rupee Ice": "has_blue_fire"
