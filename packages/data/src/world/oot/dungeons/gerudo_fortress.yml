@@ -33,7 +33,7 @@
     RUPEES: "true"
     CARPENTER_2: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 2": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+    "Gerudo Fortress Jail 2": "(can_use_sword || can_hammer || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 2 1": "true"
     "Gerudo Fortress Pot Jail 2 2": "true"
@@ -68,7 +68,7 @@
     RUPEES: "true"
     CARPENTER_4: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 4": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+    "Gerudo Fortress Jail 4": "(can_use_sword || can_hammer || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Wonder Item Jail 4 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 4 2": "can_use_bow"
@@ -126,7 +126,7 @@
   events:
     CARPENTER_3: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 3": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+    "Gerudo Fortress Jail 3": "(can_use_sword || can_hammer || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 3 1": "true"
     "Gerudo Fortress Pot Jail 3 2": "true"
