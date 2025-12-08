@@ -379,39 +379,24 @@ void EnOkarinaTag_Update(Actor* thisx, PlayState* play) {
 }
 
 static Vtx kQuad[] = {
-    {{ { -26, 0, -26 }, 0, { 2048, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { -26, 0, 26 }, 0, { 2048, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { 26, 0, 26 }, 0, { 0, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
-    {{ { 26, 0, -26 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { -26, 0, -26 }, 0, { 0, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { -26, 0, 26 }, 0, { 0, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { 26, 0, 26 }, 0, { 2048, 2048 }, { 0xff, 0xff, 0xff, 0xff } }},
+    {{ { 26, 0, -26 }, 0, { 2048, 0 }, { 0xff, 0xff, 0xff, 0xff } }},
 };
 
-static Gfx kDlistLoadTextureLullaby[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-static Gfx kDlistLoadTextureEpona[] = {
+static Gfx kDlistLoadTexture[] = {
     gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_NOMIRROR, G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-static Gfx kDlistLoadTextureSaria[] = {
+static Gfx kDlistLoadTextureH[] = {
     gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-static Gfx kDlistLoadTextureStorms[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_NOMIRROR, G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-static Gfx kDlistLoadTextureSun[] = {
+static Gfx kDlistLoadTextureHV[] = {
     gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0, G_TX_MIRROR, G_TX_MIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-static Gfx kDlistLoadTextureTime[] = {
-    gsDPLoadTextureBlock(0, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_NOMIRROR, G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
@@ -421,30 +406,30 @@ static Gfx kDlistLoadTexturePad[] = {
 };
 
 static Gfx* kDlistsLoadTextures[] = {
-    kDlistLoadTextureLullaby,
-    kDlistLoadTextureEpona,
-    kDlistLoadTextureSaria,
-    kDlistLoadTextureStorms,
-    kDlistLoadTextureSun,
-    kDlistLoadTextureTime,
+    kDlistLoadTextureH,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTextureHV,
+    kDlistLoadTexture,
 };
 
 static const u32 kSongTagColors[] = {
     0xffff00,
     0xff8800,
-    0x22ff44,
-    0x9000ff,
+    0x3da81d,
+    0xa3a300,
     0xee2222,
-    0x0000ff,
+    0x8888ff,
 };
 
 static const u32 kSongTagTextureAddrs[] = {
     CUSTOM_SONG_TAG_LULLABY_ADDR,
-    CUSTOM_SONG_TAG_DUMMY_ADDR,
+    CUSTOM_SONG_TAG_EPONA_ADDR,
     CUSTOM_SONG_TAG_SARIA_ADDR,
-    CUSTOM_SONG_TAG_DUMMY_ADDR,
+    CUSTOM_SONG_TAG_STORMS_ADDR,
     CUSTOM_SONG_TAG_SUN_ADDR,
-    CUSTOM_SONG_TAG_DUMMY_ADDR,
+    CUSTOM_SONG_TAG_TIME_ADDR,
 };
 
 static const Gfx kDlistSongTag[] = {
