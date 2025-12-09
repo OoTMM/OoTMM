@@ -15,9 +15,7 @@ export class LogicPassSongEvents {
   private shuffleSongEvents(world: World) {
     for (let i = 0; i < world.songEvents.length; ++i) {
       const v = randomInt(this.state.random, 6);
-      /* DEBUG */
-      world.songEvents[i] = 5;
-      //world.songEvents[i] = v;
+      world.songEvents[i] = v;
     }
   }
 
