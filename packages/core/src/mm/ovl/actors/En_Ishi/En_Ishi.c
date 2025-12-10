@@ -173,15 +173,8 @@ s32 EnIshi_SnapToFloor(EnIshi* this, PlayState* play, f32 yOffset) {
     }
 }
 
-static Gfx sOriginalKeepDL[] = {
-    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
-    gsSPBranchList(gFieldSmallRockOpaDL),
-};
-
-static Gfx sOriginalObjectDL[] = {
-    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
-    gsSPBranchList(gSmallRockDL),
-};
+extern Gfx gOriginalFieldSmallRockOpaDL[];
+extern Gfx gOriginalSmallRockDL[];
 
 void EnIshi_SpawnDebrisSmallRock(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
@@ -192,9 +185,9 @@ void EnIshi_SpawnDebrisSmallRock(Actor* thisx, PlayState* play) {
     Vec3f pos;
 
     if (!ENISHI_GET_USE_OBJECT(&this->actor)) {
-        debrisModel = sOriginalKeepDL;
+        debrisModel = gOriginalFieldSmallRockOpaDL;
     } else {
-        debrisModel = sOriginalObjectDL;
+        debrisModel = gOriginalSmallRockDL;
     }
 
     objectId = sObjectIds[ENISHI_GET_USE_OBJECT(&this->actor)];
