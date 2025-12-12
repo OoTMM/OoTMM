@@ -370,6 +370,8 @@ static void DeathWarpWrapper(PlayState* play)
         else
         {
             memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(OotRespawnData));
+            /* Copy to the void respawn */
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_DOWN], &gSaveContext.respawn[RESPAWN_MODE_RETURN], sizeof(OotRespawnData));
             play->nextEntranceIndex = dungeonEntranceRespawn->entrance;
             gSaveContext.respawnFlag = 2;
         }
