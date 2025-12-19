@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
 - Fix Woodfall Temple Pre-Boss logic for the lower rupees.
 - Fix Water Temple MQ logic for using the blue switch on the second floor of the lobby.
 - Fix voiding after dying in an OoT dungeon respawning link at the place of death.
+- Fixed Spirit Temple logic not accounting for a way to fight the Iron Knuckles to access the hands.
 
 ## [29.0] - 2025-08-15
 

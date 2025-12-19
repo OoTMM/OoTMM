@@ -105,7 +105,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Statue": "true"
-    "Spirit Temple Child Hand": "small_keys_spirit(5) && soul_iron_knuckle"
+    "Spirit Temple Child Hand": "small_keys_spirit(5) && soul_iron_knuckle && (can_use_sword || has_explosives || can_use_sticks)"
   locations:
     "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && silver_rupees_spirit_sun) || (has_fire_spirit && silver_rupees_spirit_sun) || can_use_din || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
     "Spirit Temple SR Sun 1": "true"
@@ -203,7 +203,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Adult Upper": "true"
-    "Spirit Temple Adult Hand": "(soul_armos || can_play_elegy) && soul_iron_knuckle"
+    "Spirit Temple Adult Hand": "(soul_armos || can_play_elegy) && soul_iron_knuckle && (can_use_sword || has_explosives || can_use_sticks)"
   locations:
     "Spirit Temple Adult Late Sun on Wall": "can_reflect_light"
     "Spirit Temple Adult Invisible 1": "has_lens && (soul_armos || can_play_elegy)"
