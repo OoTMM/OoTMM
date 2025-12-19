@@ -339,10 +339,10 @@ export const TRICKS: Tricks = {
     name: "Destroy Beehives using Bombchu (OoT)",
     tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Hyrule.",
   },
-  OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL: {
+  OOT_DEKU_WATER_ROOM_SPIKE_NOTHING: {
     game: 'oot',
-    name: "Roll Under Deku Tree MQ Water Room's Rotating Spike.",
-    tooltip: "Puts crossing the Water Room in Deku Tree MQ in logic with no items, as any age.",
+    name: "Get Past Deku Tree Water Room's Rotating Spike with Nothing",
+    tooltip: "Puts crossing the Water Room in Deku Tree (both Vanilla and MQ) in logic with no items, as any age. Vanilla requires a backflip and MQ requires a roll.",
   },
   OOT_BOTW_MQ_BACKFLIP: {
     game: 'oot',
