@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - The Skeleton key has a new, custom model (thanks Dahni).
 - Cloaked items are now progressive when relevant.
 - Fix an oversight by adding climb and hookshot anywhere logic to traverse the rolling log room in Deku Tree MQ.
+- Change the trick "Roll Under Deku Tree MQ Water Room's Rotating Spike" to also consider backflipping over it in the vanilla version.
 
 ### Fixed
 
