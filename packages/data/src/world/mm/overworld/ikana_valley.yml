@@ -69,7 +69,7 @@
 "Ikana Canyon":
   region: IKANA_CANYON
   exits:
-    "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has(MASK_DEKU) || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
+    "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has(MASK_DEKU) || has_hover_boots || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "(event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared"
