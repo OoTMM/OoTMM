@@ -395,7 +395,7 @@ MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE:          { game: mm, id: 0xb400, type: ov
 MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS:          { game: mm, id: 0x9a20, type: overworld, maps: [MM_TWIN_ISLANDS, MM_MOUNTAIN_VILLAGE], areas: ["MM Twin Islands", "MM Mountain Village"], reverse: MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE }
 MM_TWIN_ISLANDS_FROM_GORON_VILLAGE:             { game: mm, id: 0xb410, type: overworld, maps: [MM_GORON_VILLAGE, MM_TWIN_ISLANDS], areas: ["MM Goron Village", "MM Twin Islands"], reverse: MM_GORON_VILLAGE_FROM_TWIN_ISLANDS }
 MM_GORON_VILLAGE_FROM_TWIN_ISLANDS:             { game: mm, id: 0x9400, type: overworld, maps: [MM_TWIN_ISLANDS, MM_GORON_VILLAGE], areas: ["MM Twin Islands", "MM Goron Village"], reverse: MM_TWIN_ISLANDS_FROM_GORON_VILLAGE, debug: [REGION, 'Goron Village'] }
-MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
+MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Near Potion Shop"] }
 MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
 MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
 MM_CHEST_GAME:                                  { game: mm, id: 0x2800, type: indoors, areas: ["MM Clock Town East Main", "MM Chest Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_CHEST_GAME }

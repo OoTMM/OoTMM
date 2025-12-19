@@ -7,7 +7,7 @@
     "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || (has_iron_boots && can_hookshot) || short_hook_anywhere"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Ikana Valley Near Secret Shrine": "can_swim || (can_use_ice_arrows && has_chateau)"
-    "Swamp Front": "underwater_walking || can_swim"
+    "Swamp Near Potion Shop": "true" #You can jump into the cave from sakon's hideout fairly easily
   locations:
     "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
     "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
@@ -69,7 +69,7 @@
 "Ikana Canyon":
   region: IKANA_CANYON
   exits:
-    "Ikana Valley": "true"
+    "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has(MASK_DEKU) || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "(event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared"
