@@ -1,5 +1,24 @@
-import { CacheLoad, SongType } from "./enums";
-import { MusicGroup } from "./music-groups";
+/*
+ * SEQS
+ *
+ * This file contains the const that determines what audio
+ * sequences are added into the pool of ranomized sequences
+ * that custom music can be assigned to.
+ *
+ * The music groups for each entry determine what music files
+ * can be assigned to the slot while categorization is enabled.
+ *
+ * The "canSongtest" bool for each entry determines if the slot
+ * is assigned a songtest song during randomization.
+ *
+ * NOTE:
+ * This could potentially be split into multiple files, one for
+ * Ocarina of Time and one for Majora's Mask. It's quite a long
+ * file, which makes it harder to edit.
+ */
+
+import { CacheLoad, SongType } from './enums';
+import { MusicGroup } from './music-groups';
 
 export type MusicEntry = {
   name: string;
@@ -16,7 +35,7 @@ export type MusicEntry = {
  * Instead of MUSIC, this is renamed to SEQS
  * because it almost basically mirrors MMR's SEQS file
  */
-export const SEQS: {[k: string]: MusicEntry} = {
+export const SEQS: { [k: string]: MusicEntry } = {
   // #region Ocarina of Time BGM
   OOT_FILE_SELECT: {
     name: 'OoT - File Select',

@@ -1,4 +1,5 @@
 import JSZip from 'jszip';
+import { concatUint8Arrays } from 'uint8array-extras';
 
 import { Random, sample, shuffle } from '../../random';
 import { toU32Buffer } from '../../util';
@@ -6,95 +7,11 @@ import { Game } from '../../config';
 import { RomBuilder } from '../../rom-builder';
 import { Monitor } from '../../monitor';
 import { LogWriter } from '../../util/log-writer';
-import { concatUint8Arrays } from 'uint8array-extras';
 
-import { SongType } from './enums';
-import { MusicGroup } from './music-groups';
 import { MusicEntry, SEQS } from './SEQS';
+import { OotrsParser, MmrsParser, MusicFile } from './music-files';
 
-type MusicFile = {
-  songType: SongType;
-  seq: Uint8Array;
-  bankIdOot: number | null;
-  bankIdMm: number | null;
-  bankCustom: { meta: Uint8Array, data: Uint8Array } | null;
-  filename: string;
-  name: string;
-  games: Game[];
-  musicGroups: MusicGroup[];
-  isSongtest?: boolean;
-};
-
-const DIACRITICS_BASES = {
-  'á': 'a',
-  'à': 'a',
-  'â': 'a',
-  'ä': 'a',
-  'Á': 'A',
-  'À': 'A',
-  'Â': 'A',
-  'Ä': 'A',
-  'é': 'e',
-  'è': 'e',
-  'ê': 'e',
-  'ë': 'e',
-  'É': 'E',
-  'È': 'E',
-  'Ê': 'E',
-  'Ë': 'E',
-  'í': 'i',
-  'ì': 'i',
-  'î': 'i',
-  'ï': 'i',
-  'Í': 'I',
-  'Ì': 'I',
-  'Î': 'I',
-  'Ï': 'I',
-  'ó': 'o',
-  'ò': 'o',
-  'ô': 'o',
-  'ö': 'o',
-  'Ó': 'O',
-  'Ò': 'O',
-  'Ô': 'O',
-  'Ö': 'O',
-  'ú': 'u',
-  'ù': 'u',
-  'û': 'u',
-  'ü': 'u',
-  'Ú': 'U',
-  'Ù': 'U',
-  'Û': 'U',
-  'Ü': 'U',
-  'ý': 'y',
-  'ÿ': 'y',
-  'Ý': 'Y',
-  'Ÿ': 'Y',
-  'ç': 'c',
-  'Ç': 'C',
-  'ñ': 'n',
-  'Ñ': 'N',
-  'æ': 'ae',
-  'Æ': 'AE',
-  'œ': 'oe',
-  'Œ': 'OE',
-};
-
-function saneName(name: string) {
-  /* Force NFC */
-  name = name.normalize('NFC');
-
-  /* Remove diacritics */
-  for (const [base, repl] of Object.entries(DIACRITICS_BASES)) {
-    name = name.replaceAll(base, repl);
-  }
-
-  /* Remove every other non-ascii */
-  name = name.replace(/[^ -~]/g, '');
-
-  return name;
-}
-
+// #region Categorization Helpers
 function isValidSongReplacement(entry: MusicEntry, file: MusicFile) {
   /* See if song works for slot by checking type, game, and category */
   return entry.songType === file.songType
@@ -104,7 +21,7 @@ function isValidSongReplacement(entry: MusicEntry, file: MusicFile) {
 }
 
 function isValidBackupPlacement(entry: MusicEntry, file: MusicFile) {
-  /*
+  /**
    * If a song can not find a suitable slot when running out of music,
    * then ignore categories altogether like they originally did
    */
@@ -112,14 +29,9 @@ function isValidBackupPlacement(entry: MusicEntry, file: MusicFile) {
     && (entry.seqOot === undefined || file.games.includes('oot'))
     && (entry.seqMm === undefined || file.games.includes('mm'))
 }
+// #endregion
 
-function mmrSampleBank(sb: number) {
-  if (sb === 0xff) {
-    return 0xff;
-  }
-  return sb + 8;
-}
-
+// #region Music Injector
 class MusicInjector {
   private musics: MusicFile[];
   private namesBuffer: Uint8Array;
@@ -164,237 +76,38 @@ class MusicInjector {
   }
 
   private async loadMusicsOotrs(files: JSZip.JSZipObject[]) {
+    /* Create an .ootrs parser, storing only the monitor */
+    const songParser = new OotrsParser(this.monitor);
+
+    /**
+     * Loop through .ootrs files in the music ZIP.
+     * If a file fails to parse, it sends a warning and
+     * returns null, all the way up. If it succeeds, then
+     * the music file is added to the music list.
+     */
     for (const f of files) {
-      /* Get the music zip */
-      const musicZipBuffer = await f.async('uint8array');
-      let musicZip: JSZip;
-      try {
-        musicZip = await JSZip.loadAsync(musicZipBuffer);
-      } catch (e) {
-        this.monitor.warn(`Skipped music file ${f.name}: invalid zip file`);
-        continue;
-      }
+      const song = await songParser.parse(f);
+      if (!song) continue;
 
-      /* Look for custom bank data */
-      const filesBank = musicZip.file(/\.z?bank$/);
-      if (filesBank.length > 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple bank files`);
-        continue;
-      }
-      const filesBankmeta = musicZip.file(/\.z?bankmeta$/);
-      if (filesBankmeta.length > 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple bankmeta files`);
-        continue;
-      }
-
-      if (filesBank.length !== filesBankmeta.length) {
-        this.monitor.warn(`Skipped music file ${f.name}: bank and bankmeta mismatch`);
-        continue;
-      }
-
-      const badFiles = musicZip.file(/\.z?sound$/);
-      if (badFiles.length > 0) {
-        this.monitor.warn(`Skipped music file ${f.name}: unsupported files found`);
-        continue;
-      }
-
-      /* Find the meta file */
-      const metaFile = musicZip.file(/\.meta$/);
-      if (metaFile.length !== 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple metadata files`);
-        continue;
-      }
-
-      /* Find the seq file */
-      const seqFiles = musicZip.file(/\.seq$/);
-      if (seqFiles.length !== 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple sequence files`);
-        continue;
-      }
-
-      /* Parse the metadata */
-      const metaRaw = await metaFile[0].async('text');
-      const meta = metaRaw.split(/\r?\n/);
-      if (meta.length < 3) {
-        this.monitor.warn(`Skipped music file ${f.name}: metadata must have at least 3 lines`);
-        continue;
-      }
-
-      const filename = f.name.split('/').pop()!;
-      const isSongtest = filename.toLowerCase().includes('songtest');
-      const name = saneName(meta[0]);
-
-      let songType: SongType;
-      songType = (meta[2] === 'fanfare' || meta[2] === 'f') ? SongType.Fanfare : SongType.Bgm;
-
-      let rawGroups: string[];
-      let musicGroups: MusicGroup[];
-
-      /*
-       * Handle music groups, if there is 4 lines
-       * grab the music groups the creator added,
-       * otherwise use defaults from MusicGroup
-       */
-      if (meta.length >= 4) {
-        rawGroups = meta[3].split(',').map(x => x.trim());
-
-        const typeAndGroups = MusicGroup.matchGroups(rawGroups, f.name, this.monitor);
-        if (!typeAndGroups) continue; // warn sent and null return, so continue to the next song
-
-        musicGroups = typeAndGroups.groups;
-
-      } else {
-        musicGroups = (songType === SongType.Fanfare)
-                    ? [...MusicGroup.AllFanfareGroups]
-                    : [...MusicGroup.AllBgmGroups];
-      }
-
-      const games: Game[] = ['oot'];
-
-      let bankCustom: { meta: Uint8Array, data: Uint8Array } | null = null;
-      let bankIdOot: number | null = null;
-      let bankIdMm: number | null = null;
-
-      if (filesBank.length) {
-        const bank = await filesBank[0].async('uint8array');
-        const bankmeta = await filesBankmeta[0].async('uint8array');
-        if (bankmeta.length !== 0x08) {
-          this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
-          continue;
-        }
-
-        bankCustom = { meta: bankmeta, data: bank };
-        games.push('mm');
-      } else {
-        bankIdOot = parseInt(meta[1], 16);
-        if (bankIdOot >= 2) {
-          bankIdMm = bankIdOot + 0x30;
-          games.push('mm');
-        }
-      }
-
-      /* Add the music */
-      let seq = await seqFiles[0].async('uint8array');
-      if (seq.length & 0xf) {
-        const pad = new Uint8Array(16 - (seq.length & 0xf));
-        pad.fill(0x00);
-        seq = concatUint8Arrays([seq, pad]);
-      }
-      const music: MusicFile = { songType, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, musicGroups, isSongtest };
-      this.musics.push(music);
+      this.musics.push(song);
     }
   }
 
   private async loadMusicsMmrs(files: JSZip.JSZipObject[]) {
+    /* Create an .mmrs parser, storing only the monitor */
+    const songParser = new MmrsParser(this.monitor);
+
+    /**
+     * Loop through .mmrs files in the music ZIP.
+     * If a file fails to parse, it sends a warning and
+     * returns null, all the way up. If it succeeds, then
+     * the music file is added to the music list.
+     */
     for (const f of files) {
-      /* Get the music zip */
-      const musicZipBuffer = await f.async('uint8array');
-      let musicZip: JSZip;
-      try {
-        musicZip = await JSZip.loadAsync(musicZipBuffer);
-      } catch (e) {
-        this.monitor.warn(`Skipped music file ${f.name}: invalid zip file`);
-        continue;
-      }
+      const song = await songParser.parse(f);
+      if (!song) continue;
 
-      /* Look for custom bank data */
-      const filesBank = musicZip.file(/\.z?bank$/);
-      if (filesBank.length > 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple bank files`);
-        continue;
-      }
-      const filesBankmeta = musicZip.file(/\.z?bankmeta$/);
-      if (filesBankmeta.length > 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple bankmeta files`);
-        continue;
-      }
-
-      if (filesBank.length !== filesBankmeta.length) {
-        this.monitor.warn(`Skipped music file ${f.name}: bank and bankmeta mismatch`);
-        continue;
-      }
-
-      const badFiles = musicZip.file(/\.z?sound$/);
-      if (badFiles.length > 0) {
-        this.monitor.warn(`Skipped music file ${f.name}: unsupported files found`);
-        continue;
-      }
-
-      /* Find the zseq file */
-      const zseqFiles = musicZip.file(/\.zseq$/);
-      if (zseqFiles.length !== 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple sequence files`);
-        continue;
-      }
-
-      /* Get the categories.txt file */
-      const categoriesTxt = musicZip.file('categories.txt');
-      if (!categoriesTxt) {
-        this.monitor.warn(`Skipped music file ${f.name}: categories.txt not found`);
-        continue;
-      }
-      const categoriesData = await categoriesTxt.async('text');
-      const rawGroups = categoriesData.split(/[,-]/).map(x => x.trim());
-
-      /* Extract the bank ID from the zseq filename */
-      let zseqFilename = zseqFiles[0].name;
-      if (zseqFilename.includes('/')) {
-        zseqFilename = zseqFilename.split('/').pop()!;
-      }
-      const bankIdRaw = zseqFilename.split('.')[0];
-
-      /* Add the music */
-      let seq = await zseqFiles[0].async('uint8array');
-      if (seq.length & 0xf) {
-        const pad = new Uint8Array(16 - (seq.length & 0xf));
-        pad.fill(0x00);
-        seq = concatUint8Arrays([seq, pad]);
-      }
-
-      const games: Game[] = ['mm'];
-
-      /* Extract the song type and music groups from the categories.txt file */
-      let songType: SongType;
-      let musicGroups: MusicGroup[];
-
-      const typeAndGroups = MusicGroup.matchGroups(rawGroups, f.name, this.monitor);
-      if (!typeAndGroups) continue; // warn sent and null return, so continue to the next song
-
-      songType = typeAndGroups.type;
-      musicGroups = typeAndGroups.groups;
-
-      const filename = f.name.split('/').pop()!;
-      const isSongtest = filename.toLowerCase().includes('songtest');
-      const name = saneName(filename.replace('.mmrs', ''));
-
-      let bankCustom: { meta: Uint8Array, data: Uint8Array } | null = null;
-      let bankIdOot: number | null = null;
-      let bankIdMm: number | null = null;
-
-      if (filesBank.length) {
-        const bank = await filesBank[0].async('uint8array');
-        const bankmeta = await filesBankmeta[0].async('uint8array');
-        if (bankmeta.length !== 0x08) {
-          this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
-          continue;
-        }
-
-        const sampleBank1 = mmrSampleBank(bankmeta[0x02]);
-        const sampleBank2 = mmrSampleBank(bankmeta[0x03]);
-        const sampleBanks = new Uint8Array([sampleBank1, sampleBank2]);
-        bankmeta.set(sampleBanks, 0x02);
-        bankCustom = { meta: bankmeta, data: bank };
-        games.push('oot');
-      } else {
-        bankIdMm = parseInt(bankIdRaw, 16);
-        if (bankIdMm >= 2) {
-          bankIdOot = bankIdMm + 0x30;
-          games.push('oot');
-        }
-      }
-
-      const music: MusicFile = { songType, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, musicGroups, isSongtest };
-      this.musics.push(music);
+      this.musics.push(song);
     }
   }
 
@@ -430,7 +143,13 @@ class MusicInjector {
     let customBankId: number | null = null;
 
     if (music.bankCustom) {
-        /* Ensure custom music bankmeta has the correct cache load type. */
+        /**
+         * Temporary band-aid fix for custom music files.
+         * Custom music files may use a vanilla bank, or
+         * build onto a vanilla bank that uses an incorrect
+         * audio cache load type. This sets it to the proper
+         * type based on the sequence it will replace.
+         */
         if (entry.bankCacheType !== undefined){
           music.bankCustom.meta[1] = entry.bankCacheType;
         }
@@ -470,14 +189,23 @@ class MusicInjector {
 
     this.writer.indent('Music');
 
-    /* Assign songtest song to all songtest-able song slots */
+    /**
+     * Assigns songtest song to all songtest-able song slots.
+     * Only one songtest song file is allowed, if multiple are
+     * detected, this block is skipped.
+     */
     const songtestSongs = Array.from(musics).filter(x => x.isSongtest === true);
     if (songtestSongs.length === 1) {
+        /* Get the songtest song, then delete it from the song list */
         const songtestSong = songtestSongs[0];
-        musics.delete(songtestSong); // Remove song from pool of files
+        musics.delete(songtestSong);
 
+        /**
+         * Assign the songtest song to all songtest slots, then
+         * remove the slot from the pool of available slots.
+         */
         for (const [slot, _] of songtestSlots) {
-          unassignedSlots = unassignedSlots.filter(s => s !== slot); // Remove slot from unassigned
+          unassignedSlots = unassignedSlots.filter(s => s !== slot);
 
           await this.injectMusic(slot, songtestSong);
 
@@ -488,35 +216,53 @@ class MusicInjector {
         this.monitor.warn(`Skipping songtest assigment: multiple songtest files found`);
     }
 
-    /* Assign music to all remaining unassigned song slots */
+    /**
+     * Loops through the remaining song slots after songtest runs.
+     * Using while is volatile, so there are multiple candidacy checks
+     * with categorization. It if runs out of candidates, it places
+     * remaining songs without any regard to their music groups.
+     * (Songs cannot be placed across type, e.g. no fanfares in BGM slots)
+     */
     while (musics.size > 0 && unassignedSlots.length > 0) {
-      /* Figure out the candidates for remaining slots */
       const slotCandidates = new Map<string, MusicFile[]>();
 
+      /* Run through unassigned song slots and assign their candidates */
       for (const slot of unassignedSlots) {
         const bankCheck = (x: MusicFile) => !this.isMaxBank() || x.bankCustom === null;
         const mainCheck = (x: MusicFile) => isValidSongReplacement(SEQS[slot], x) && bankCheck(x);
         const backupCheck = (x: MusicFile) => isValidBackupPlacement(SEQS[slot], x) && bankCheck(x);
 
-        // Size cond. might need to change (96 BGM, 11 Fanfares available in SEQS)
+        /**
+         * Get the candidates based on the main and backup conditions.
+         * If there are less than 30 song slots remaining, fallback to
+         * completely random assignment.
+         * (Size may need to be tuned for OOTMM's amount of songs available)
+         */
         const candidates = Array.from(musics).filter(musics.size > 30 ? mainCheck : backupCheck);
         slotCandidates.set(slot, candidates);
       }
 
-      /* Check if all remaining slots have zero candidates (true dead-end situation) */
+      /**
+       * If we've gotten to this point, we've hit a true dead end.
+       * When this happens, break out of the loop because there is not
+       * enough songs to fit the slots available.
+       */
       const allZero = [...slotCandidates.values()].every(c => c.length === 0);
       if (allZero) {
         this.monitor.warn(`No valid candidates found for any remaining ${unassignedSlots.length} slots with ${musics.size} music files left!`);
-        break; // In this situation, we may end up in an infinite loop, so we have to break
+        break;
       }
 
-      /* Pick a slot with candidates */
+      /* Pick a song slot that has candidates */
       const [slot, candidates] = [...slotCandidates.entries()].find(([_, c]) => c.length > 0)!;
 
-      /* Assign a random music file from the candidates */
+      /**
+       * Assign a random candidate to the slot,
+       * then remove the song and slot from the pool.
+       */
       const music = sample(this.random, candidates);
       musics.delete(music);
-      unassignedSlots = unassignedSlots.filter(s => s !== slot); // remove slot from unassigned
+      unassignedSlots = unassignedSlots.filter(s => s !== slot);
 
       await this.injectMusic(slot, music);
 
@@ -546,8 +292,11 @@ class MusicInjector {
     this.builder.addFile({ game: 'custom', type: 'uncompressed', vaddr: 0xf1000000, data: this.namesBuffer });
   }
 }
+// #endregion
 
+// #region Randomization Call
 export async function randomizeMusic(writer: LogWriter, monitor: Monitor, builder: RomBuilder, random: Random, data: Uint8Array) {
   const injector = new MusicInjector(writer, monitor, builder, random, data);
   await injector.run();
 }
+// #endregion

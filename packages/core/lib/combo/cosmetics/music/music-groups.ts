@@ -1,11 +1,26 @@
-import { SongType } from "./enums";
+/**
+ * Music Groups
+ *
+ * This file contains the smart enum that handles
+ * music groups for categorizing music.
+ *
+ * This is based off of my smart enum for MMR's "new system":
+ * https://github.com/crinuleiroz/mm-rando/blob/a0d2618448ff7aee1aeb9d022959cb233d767317/MMR.Randomizer/Audio/Enums/MusicGroup.cs
+ *
+ * Currently, only has group categorization, but it
+ * can be expanded for individual slot categorization.
+ * However, indivdual slot categorization is a lot harder
+ * to implement and maintain across two games.
+ */
+
+import { SongType } from './enums';
 
 type MusicGroupOpts = {
   type: SongType;
   aliases: string[];
 }
 
-/*
+/**
  * All MMR categories are assumed to be hex, even without the prefix
  * Returns a decimal int string!
  */
@@ -24,14 +39,7 @@ function normalizeLegacy(v: string | number): string {
   return v.toString().toLowerCase().trim();
 }
 
-/*
- * Based off my smart enum for MMR's new system:
- * https://github.com/crinuleiroz/mm-rando/blob/a0d2618448ff7aee1aeb9d022959cb233d767317/MMR.Randomizer/Audio/Enums/MusicGroup.cs
- *
- * Currently only has group categorization, but
- * could be expanded for individuals. Though individuals
- * are harder when split between games (lots of work and lines...).
- *
+/**
  * IMPORTANT:
  * Remove the numbered entries in aliases if MMR updates
  * to the new system the number IDs will be made
@@ -70,7 +78,7 @@ export class MusicGroup {
     return this._all;
   }
 
-  /*
+  /**
    * Just typing monitor as any to avoid required import
    * could add the import, but bleh...
    * It could be part of music-injector, but it is tightly
@@ -101,7 +109,7 @@ export class MusicGroup {
     };
   }
 
-  /*
+  /**
    * OOTR's specificity system is a PITA to support.
    * Why not just do groups and singles like MMR?
    * Also, who decided on inconsistent plurality?
@@ -526,6 +534,11 @@ export class MusicGroup {
   })
   // #endregion
 
+  /**
+   * Default music group lists in the case that
+   * a music file requires defaults to prevent it
+   * from just being skipped.
+   */
   // #region Default Lists
   static readonly DefaultBgmGroups: readonly MusicGroup[] = [
     MusicGroup.Fields,
