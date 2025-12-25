@@ -41,169 +41,169 @@ const DUNGEON_REWARD_LOCATIONS = [
 ];
 
 const SHARED_ITEMS_OOT = new Map([
-  ['SHARED_SWORD',                  'OOT_SWORD_KOKIRI'],
-  ['SHARED_BOW',                    'OOT_BOW'],
-  ['SHARED_BOMB_BAG',               'OOT_BOMB_BAG'],
-  ['SHARED_ARROWS_5',               'OOT_ARROWS_5'],
-  ['SHARED_ARROWS_10',              'OOT_ARROWS_10'],
-  ['SHARED_ARROWS_30',              'OOT_ARROWS_30'],
-  ['SHARED_ARROWS_40',              'MM_ARROWS_40'], /* OoT lacks 40 pack */
-  ['SHARED_BOMB',                   'OOT_BOMB'],
-  ['SHARED_BOMBS_5',                'OOT_BOMBS_5'],
-  ['SHARED_BOMBS_10',               'OOT_BOMBS_10'],
-  ['SHARED_BOMBS_20',               'OOT_BOMBS_20'],
-  ['SHARED_BOMBS_30',               'OOT_BOMBS_30'],
-  ['SHARED_MAGIC_UPGRADE',          'OOT_MAGIC_UPGRADE'],
-  ['SHARED_ARROW_FIRE',             'OOT_ARROW_FIRE'],
-  ['SHARED_ARROW_ICE',              'OOT_ARROW_ICE'],
-  ['SHARED_ARROW_LIGHT',            'OOT_ARROW_LIGHT'],
-  ['SHARED_SONG_TIME',              'OOT_SONG_TIME'],
-  ['SHARED_SONG_EPONA',             'OOT_SONG_EPONA'],
-  ['SHARED_SONG_STORMS',            'OOT_SONG_STORMS'],
-  ['SHARED_SONG_SUN',               'OOT_SONG_SUN'],
-  ['SHARED_SONG_EMPTINESS',         'OOT_SONG_EMPTINESS'],
-  ['SHARED_SONG_NOTE_TIME',         'OOT_SONG_NOTE_TIME'],
-  ['SHARED_SONG_NOTE_EPONA',        'OOT_SONG_NOTE_EPONA'],
-  ['SHARED_SONG_NOTE_STORMS',       'OOT_SONG_NOTE_STORMS'],
-  ['SHARED_SONG_NOTE_SUN',          'OOT_SONG_NOTE_SUN'],
-  ['SHARED_SONG_NOTE_EMPTINESS',    'OOT_SONG_NOTE_EMPTINESS'],
-  ['SHARED_NUT',                    'MM_NUT'] /* OoT lacks single nut */,
-  ['SHARED_NUTS_5',                 'OOT_NUTS_5'],
-  ['SHARED_NUTS_10',                'OOT_NUTS_10'],
-  ['SHARED_STICK',                  'OOT_STICK'],
-  ['SHARED_STICKS_5',               'OOT_STICKS_5'],
-  ['SHARED_STICKS_10',              'OOT_STICKS_10'],
-  ['SHARED_HOOKSHOT',               'OOT_HOOKSHOT'],
-  ['SHARED_LENS',                   'OOT_LENS'],
-  ['SHARED_OCARINA',                'OOT_OCARINA'],
-  ['SHARED_MASK_KEATON',            'OOT_MASK_KEATON'],
-  ['SHARED_MASK_BUNNY',             'OOT_MASK_BUNNY'],
-  ['SHARED_MASK_TRUTH',             'OOT_MASK_TRUTH'],
-  ['SHARED_MASK_GORON',             'OOT_MASK_GORON'],
-  ['SHARED_MASK_ZORA',              'OOT_MASK_ZORA'],
-  ['SHARED_WALLET',                 'OOT_WALLET'],
-  ['SHARED_RUPEE_GREEN',            'OOT_RUPEE_GREEN'],
-  ['SHARED_RUPEE_BLUE',             'OOT_RUPEE_BLUE'],
-  ['SHARED_RUPEE_RED',              'OOT_RUPEE_RED'],
-  ['SHARED_RUPEE_PURPLE',           'OOT_RUPEE_PURPLE'],
-  ['SHARED_RUPEE_SILVER',           'MM_RUPEE_SILVER'], /* OoT lacks silver rupee */
-  ['SHARED_RUPEE_GOLD',             'OOT_RUPEE_HUGE'], /* Equivalent */
-  ['SHARED_RUPEE_RAINBOW',          'OOT_RUPEE_RAINBOW'],
-  ['SHARED_HEART_PIECE',            'OOT_HEART_PIECE'],
-  ['SHARED_HEART_CONTAINER',        'OOT_HEART_CONTAINER'],
-  ['SHARED_RECOVERY_HEART',         'OOT_RECOVERY_HEART'],
-  ['SHARED_DEFENSE_UPGRADE',        'OOT_DEFENSE_UPGRADE'],
-  ['SHARED_SHIELD_DEKU',            'OOT_SHIELD_DEKU'],
-  ['SHARED_SHIELD_HYLIAN',          'OOT_SHIELD_HYLIAN'],
-  ['SHARED_SHIELD_MIRROR',          'OOT_SHIELD_MIRROR'],
-  ['SHARED_SHIELD',                 'OOT_SHIELD'],
-  ['SHARED_MAGIC_JAR_SMALL',        'OOT_MAGIC_JAR_SMALL'],
-  ['SHARED_MAGIC_JAR_LARGE',        'OOT_MAGIC_JAR_LARGE'],
-  ['SHARED_BOMBCHU',                'MM_BOMBCHU'], /* OoT lacks single bombchu */
-  ['SHARED_BOMBCHU_5',              'OOT_BOMBCHU_5'],
-  ['SHARED_BOMBCHU_10',             'OOT_BOMBCHU_10'],
-  ['SHARED_BOMBCHU_20',             'OOT_BOMBCHU_20'],
-  ['SHARED_FAIRY_BIG',              'OOT_FAIRY_BIG'],
-  ['SHARED_SPELL_FIRE',             'OOT_SPELL_FIRE'],
-  ['SHARED_SPELL_WIND',             'OOT_SPELL_WIND'],
-  ['SHARED_SPELL_LOVE',             'OOT_SPELL_LOVE'],
-  ['SHARED_BOOTS_IRON',             'OOT_BOOTS_IRON'],
-  ['SHARED_BOOTS_HOVER',            'OOT_BOOTS_HOVER'],
-  ['SHARED_TUNIC_GORON',            'OOT_TUNIC_GORON'],
-  ['SHARED_TUNIC_ZORA',             'OOT_TUNIC_ZORA'],
-  ['SHARED_MASK_BLAST',             'OOT_MASK_BLAST'],
-  ['SHARED_MASK_STONE',             'OOT_MASK_STONE'],
-  ['SHARED_SCALE',                  'OOT_SCALE'],
-  ['SHARED_STRENGTH',               'OOT_STRENGTH'],
-  ['SHARED_HAMMER',                 'OOT_HAMMER'],
-  ['SHARED_STICK_UPGRADE',          'OOT_STICK_UPGRADE'],
-  ['SHARED_NUT_UPGRADE',            'OOT_NUT_UPGRADE'],
-  ['SHARED_STONE_OF_AGONY',         'OOT_STONE_OF_AGONY'],
-  ['SHARED_SPIN_UPGRADE',           'OOT_SPIN_UPGRADE'],
-  ['SHARED_BOMBCHU_BAG',            'OOT_BOMBCHU_BAG'],
+  ['SHARED_SWORD', 'OOT_SWORD_KOKIRI'],
+  ['SHARED_BOW', 'OOT_BOW'],
+  ['SHARED_BOMB_BAG', 'OOT_BOMB_BAG'],
+  ['SHARED_ARROWS_5', 'OOT_ARROWS_5'],
+  ['SHARED_ARROWS_10', 'OOT_ARROWS_10'],
+  ['SHARED_ARROWS_30', 'OOT_ARROWS_30'],
+  ['SHARED_ARROWS_40', 'MM_ARROWS_40'], /* OoT lacks 40 pack */
+  ['SHARED_BOMB', 'OOT_BOMB'],
+  ['SHARED_BOMBS_5', 'OOT_BOMBS_5'],
+  ['SHARED_BOMBS_10', 'OOT_BOMBS_10'],
+  ['SHARED_BOMBS_20', 'OOT_BOMBS_20'],
+  ['SHARED_BOMBS_30', 'OOT_BOMBS_30'],
+  ['SHARED_MAGIC_UPGRADE', 'OOT_MAGIC_UPGRADE'],
+  ['SHARED_ARROW_FIRE', 'OOT_ARROW_FIRE'],
+  ['SHARED_ARROW_ICE', 'OOT_ARROW_ICE'],
+  ['SHARED_ARROW_LIGHT', 'OOT_ARROW_LIGHT'],
+  ['SHARED_SONG_TIME', 'OOT_SONG_TIME'],
+  ['SHARED_SONG_EPONA', 'OOT_SONG_EPONA'],
+  ['SHARED_SONG_STORMS', 'OOT_SONG_STORMS'],
+  ['SHARED_SONG_SUN', 'OOT_SONG_SUN'],
+  ['SHARED_SONG_EMPTINESS', 'OOT_SONG_EMPTINESS'],
+  ['SHARED_SONG_NOTE_TIME', 'OOT_SONG_NOTE_TIME'],
+  ['SHARED_SONG_NOTE_EPONA', 'OOT_SONG_NOTE_EPONA'],
+  ['SHARED_SONG_NOTE_STORMS', 'OOT_SONG_NOTE_STORMS'],
+  ['SHARED_SONG_NOTE_SUN', 'OOT_SONG_NOTE_SUN'],
+  ['SHARED_SONG_NOTE_EMPTINESS', 'OOT_SONG_NOTE_EMPTINESS'],
+  ['SHARED_NUT', 'MM_NUT'] /* OoT lacks single nut */,
+  ['SHARED_NUTS_5', 'OOT_NUTS_5'],
+  ['SHARED_NUTS_10', 'OOT_NUTS_10'],
+  ['SHARED_STICK', 'OOT_STICK'],
+  ['SHARED_STICKS_5', 'OOT_STICKS_5'],
+  ['SHARED_STICKS_10', 'OOT_STICKS_10'],
+  ['SHARED_HOOKSHOT', 'OOT_HOOKSHOT'],
+  ['SHARED_LENS', 'OOT_LENS'],
+  ['SHARED_OCARINA', 'OOT_OCARINA'],
+  ['SHARED_MASK_KEATON', 'OOT_MASK_KEATON'],
+  ['SHARED_MASK_BUNNY', 'OOT_MASK_BUNNY'],
+  ['SHARED_MASK_TRUTH', 'OOT_MASK_TRUTH'],
+  ['SHARED_MASK_GORON', 'OOT_MASK_GORON'],
+  ['SHARED_MASK_ZORA', 'OOT_MASK_ZORA'],
+  ['SHARED_WALLET', 'OOT_WALLET'],
+  ['SHARED_RUPEE_GREEN', 'OOT_RUPEE_GREEN'],
+  ['SHARED_RUPEE_BLUE', 'OOT_RUPEE_BLUE'],
+  ['SHARED_RUPEE_RED', 'OOT_RUPEE_RED'],
+  ['SHARED_RUPEE_PURPLE', 'OOT_RUPEE_PURPLE'],
+  ['SHARED_RUPEE_SILVER', 'MM_RUPEE_SILVER'], /* OoT lacks silver rupee */
+  ['SHARED_RUPEE_GOLD', 'OOT_RUPEE_HUGE'], /* Equivalent */
+  ['SHARED_RUPEE_RAINBOW', 'OOT_RUPEE_RAINBOW'],
+  ['SHARED_HEART_PIECE', 'OOT_HEART_PIECE'],
+  ['SHARED_HEART_CONTAINER', 'OOT_HEART_CONTAINER'],
+  ['SHARED_RECOVERY_HEART', 'OOT_RECOVERY_HEART'],
+  ['SHARED_DEFENSE_UPGRADE', 'OOT_DEFENSE_UPGRADE'],
+  ['SHARED_SHIELD_DEKU', 'OOT_SHIELD_DEKU'],
+  ['SHARED_SHIELD_HYLIAN', 'OOT_SHIELD_HYLIAN'],
+  ['SHARED_SHIELD_MIRROR', 'OOT_SHIELD_MIRROR'],
+  ['SHARED_SHIELD', 'OOT_SHIELD'],
+  ['SHARED_MAGIC_JAR_SMALL', 'OOT_MAGIC_JAR_SMALL'],
+  ['SHARED_MAGIC_JAR_LARGE', 'OOT_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU', 'MM_BOMBCHU'], /* OoT lacks single bombchu */
+  ['SHARED_BOMBCHU_5', 'OOT_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10', 'OOT_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20', 'OOT_BOMBCHU_20'],
+  ['SHARED_FAIRY_BIG', 'OOT_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE', 'OOT_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND', 'OOT_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE', 'OOT_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON', 'OOT_BOOTS_IRON'],
+  ['SHARED_BOOTS_HOVER', 'OOT_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON', 'OOT_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA', 'OOT_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST', 'OOT_MASK_BLAST'],
+  ['SHARED_MASK_STONE', 'OOT_MASK_STONE'],
+  ['SHARED_SCALE', 'OOT_SCALE'],
+  ['SHARED_STRENGTH', 'OOT_STRENGTH'],
+  ['SHARED_HAMMER', 'OOT_HAMMER'],
+  ['SHARED_STICK_UPGRADE', 'OOT_STICK_UPGRADE'],
+  ['SHARED_NUT_UPGRADE', 'OOT_NUT_UPGRADE'],
+  ['SHARED_STONE_OF_AGONY', 'OOT_STONE_OF_AGONY'],
+  ['SHARED_SPIN_UPGRADE', 'OOT_SPIN_UPGRADE'],
+  ['SHARED_BOMBCHU_BAG', 'OOT_BOMBCHU_BAG'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
-  ['SHARED_SWORD',                  'MM_SWORD_KOKIRI'],
-  ['SHARED_BOW',                    'MM_BOW'],
-  ['SHARED_BOMB_BAG',               'MM_BOMB_BAG'],
-  ['SHARED_ARROWS_5',               'OOT_ARROWS_5'], /* MM lacks 5 pack */
-  ['SHARED_ARROWS_10',              'MM_ARROWS_10'],
-  ['SHARED_ARROWS_30',              'MM_ARROWS_30'],
-  ['SHARED_ARROWS_40',              'MM_ARROWS_40'],
-  ['SHARED_BOMB',                   'MM_BOMB'],
-  ['SHARED_BOMBS_5',                'MM_BOMBS_5'],
-  ['SHARED_BOMBS_10',               'MM_BOMBS_10'],
-  ['SHARED_BOMBS_20',               'MM_BOMBS_20'],
-  ['SHARED_BOMBS_30',               'MM_BOMBS_30'],
-  ['SHARED_MAGIC_UPGRADE',          'MM_MAGIC_UPGRADE'],
-  ['SHARED_ARROW_FIRE',             'MM_ARROW_FIRE'],
-  ['SHARED_ARROW_ICE',              'MM_ARROW_ICE'],
-  ['SHARED_ARROW_LIGHT',            'MM_ARROW_LIGHT'],
-  ['SHARED_SONG_TIME',              'MM_SONG_TIME'],
-  ['SHARED_SONG_EPONA',             'MM_SONG_EPONA'],
-  ['SHARED_SONG_STORMS',            'MM_SONG_STORMS'],
-  ['SHARED_SONG_SUN',               'MM_SONG_SUN'],
-  ['SHARED_SONG_EMPTINESS',         'MM_SONG_EMPTINESS'],
-  ['SHARED_SONG_NOTE_TIME',         'MM_SONG_NOTE_TIME'],
-  ['SHARED_SONG_NOTE_EPONA',        'MM_SONG_NOTE_EPONA'],
-  ['SHARED_SONG_NOTE_STORMS',       'MM_SONG_NOTE_STORMS'],
-  ['SHARED_SONG_NOTE_SUN',          'MM_SONG_NOTE_SUN'],
-  ['SHARED_SONG_NOTE_EMPTINESS',    'MM_SONG_NOTE_EMPTINESS'],
-  ['SHARED_NUT',                    'MM_NUT'],
-  ['SHARED_NUTS_5',                 'MM_NUTS_5'],
-  ['SHARED_NUTS_10',                'MM_NUTS_10'],
-  ['SHARED_STICK',                  'MM_STICK'],
-  ['SHARED_STICKS_5',               'OOT_STICKS_5'],  /* MM lacks 5 pack */
-  ['SHARED_STICKS_10',              'OOT_STICKS_10'], /* MM lacks 10 pack */
-  ['SHARED_HOOKSHOT',               'MM_HOOKSHOT'],
-  ['SHARED_LENS',                   'MM_LENS'],
-  ['SHARED_OCARINA',                'OOT_OCARINA'], /* Progressive */
-  ['SHARED_MASK_KEATON',            'MM_MASK_KEATON'],
-  ['SHARED_MASK_BUNNY',             'MM_MASK_BUNNY'],
-  ['SHARED_MASK_TRUTH',             'MM_MASK_TRUTH'],
-  ['SHARED_MASK_GORON',             'MM_MASK_GORON'],
-  ['SHARED_MASK_ZORA',              'MM_MASK_ZORA'],
-  ['SHARED_WALLET',                 'MM_WALLET'],
-  ['SHARED_RUPEE_GREEN',            'MM_RUPEE_GREEN'],
-  ['SHARED_RUPEE_BLUE',             'MM_RUPEE_BLUE'],
-  ['SHARED_RUPEE_RED',              'MM_RUPEE_RED'],
-  ['SHARED_RUPEE_PURPLE',           'MM_RUPEE_PURPLE'],
-  ['SHARED_RUPEE_SILVER',           'MM_RUPEE_SILVER'],
-  ['SHARED_RUPEE_GOLD',             'MM_RUPEE_GOLD'],
-  ['SHARED_RUPEE_RAINBOW',          'OOT_RUPEE_RAINBOW'], /* No MM equivalent */
-  ['SHARED_HEART_PIECE',            'MM_HEART_PIECE'],
-  ['SHARED_HEART_CONTAINER',        'MM_HEART_CONTAINER'],
-  ['SHARED_RECOVERY_HEART',         'MM_RECOVERY_HEART'],
-  ['SHARED_DEFENSE_UPGRADE',        'MM_DEFENSE_UPGRADE'],
-  ['SHARED_SHIELD_DEKU',            'MM_SHIELD_DEKU'],
-  ['SHARED_SHIELD_HYLIAN',          'MM_SHIELD_HERO'],
-  ['SHARED_SHIELD_MIRROR',          'MM_SHIELD_MIRROR'],
-  ['SHARED_SHIELD',                 'MM_SHIELD'], /* Progressive */
-  ['SHARED_MAGIC_JAR_SMALL',        'MM_MAGIC_JAR_SMALL'],
-  ['SHARED_MAGIC_JAR_LARGE',        'MM_MAGIC_JAR_LARGE'],
-  ['SHARED_BOMBCHU',                'MM_BOMBCHU'],
-  ['SHARED_BOMBCHU_5',              'MM_BOMBCHU_5'],
-  ['SHARED_BOMBCHU_10',             'MM_BOMBCHU_10'],
-  ['SHARED_BOMBCHU_20',             'MM_BOMBCHU_20'],
-  ['SHARED_FAIRY_BIG',              'MM_FAIRY_BIG'],
-  ['SHARED_SPELL_FIRE',             'MM_SPELL_FIRE'],
-  ['SHARED_SPELL_WIND',             'MM_SPELL_WIND'],
-  ['SHARED_SPELL_LOVE',             'MM_SPELL_LOVE'],
-  ['SHARED_BOOTS_IRON',             'MM_BOOTS_IRON'],
-  ['SHARED_BOOTS_HOVER',            'MM_BOOTS_HOVER'],
-  ['SHARED_TUNIC_GORON',            'MM_TUNIC_GORON'],
-  ['SHARED_TUNIC_ZORA',             'MM_TUNIC_ZORA'],
-  ['SHARED_MASK_BLAST',             'MM_MASK_BLAST'],
-  ['SHARED_MASK_STONE',             'MM_MASK_STONE'],
-  ['SHARED_SCALE',                  'MM_SCALE'],
-  ['SHARED_STRENGTH',               'MM_STRENGTH'],
-  ['SHARED_HAMMER',                 'MM_HAMMER'],
-  ['SHARED_STICK_UPGRADE',          'MM_STICK_UPGRADE'],
-  ['SHARED_NUT_UPGRADE',            'MM_NUT_UPGRADE'],
-  ['SHARED_STONE_OF_AGONY',         'MM_STONE_OF_AGONY'],
-  ['SHARED_SPIN_UPGRADE',           'MM_SPIN_UPGRADE'],
-  ['SHARED_BOMBCHU_BAG',            'MM_BOMBCHU_BAG'],
+  ['SHARED_SWORD', 'MM_SWORD_KOKIRI'],
+  ['SHARED_BOW', 'MM_BOW'],
+  ['SHARED_BOMB_BAG', 'MM_BOMB_BAG'],
+  ['SHARED_ARROWS_5', 'OOT_ARROWS_5'], /* MM lacks 5 pack */
+  ['SHARED_ARROWS_10', 'MM_ARROWS_10'],
+  ['SHARED_ARROWS_30', 'MM_ARROWS_30'],
+  ['SHARED_ARROWS_40', 'MM_ARROWS_40'],
+  ['SHARED_BOMB', 'MM_BOMB'],
+  ['SHARED_BOMBS_5', 'MM_BOMBS_5'],
+  ['SHARED_BOMBS_10', 'MM_BOMBS_10'],
+  ['SHARED_BOMBS_20', 'MM_BOMBS_20'],
+  ['SHARED_BOMBS_30', 'MM_BOMBS_30'],
+  ['SHARED_MAGIC_UPGRADE', 'MM_MAGIC_UPGRADE'],
+  ['SHARED_ARROW_FIRE', 'MM_ARROW_FIRE'],
+  ['SHARED_ARROW_ICE', 'MM_ARROW_ICE'],
+  ['SHARED_ARROW_LIGHT', 'MM_ARROW_LIGHT'],
+  ['SHARED_SONG_TIME', 'MM_SONG_TIME'],
+  ['SHARED_SONG_EPONA', 'MM_SONG_EPONA'],
+  ['SHARED_SONG_STORMS', 'MM_SONG_STORMS'],
+  ['SHARED_SONG_SUN', 'MM_SONG_SUN'],
+  ['SHARED_SONG_EMPTINESS', 'MM_SONG_EMPTINESS'],
+  ['SHARED_SONG_NOTE_TIME', 'MM_SONG_NOTE_TIME'],
+  ['SHARED_SONG_NOTE_EPONA', 'MM_SONG_NOTE_EPONA'],
+  ['SHARED_SONG_NOTE_STORMS', 'MM_SONG_NOTE_STORMS'],
+  ['SHARED_SONG_NOTE_SUN', 'MM_SONG_NOTE_SUN'],
+  ['SHARED_SONG_NOTE_EMPTINESS', 'MM_SONG_NOTE_EMPTINESS'],
+  ['SHARED_NUT', 'MM_NUT'],
+  ['SHARED_NUTS_5', 'MM_NUTS_5'],
+  ['SHARED_NUTS_10', 'MM_NUTS_10'],
+  ['SHARED_STICK', 'MM_STICK'],
+  ['SHARED_STICKS_5', 'OOT_STICKS_5'],  /* MM lacks 5 pack */
+  ['SHARED_STICKS_10', 'OOT_STICKS_10'], /* MM lacks 10 pack */
+  ['SHARED_HOOKSHOT', 'MM_HOOKSHOT'],
+  ['SHARED_LENS', 'MM_LENS'],
+  ['SHARED_OCARINA', 'OOT_OCARINA'], /* Progressive */
+  ['SHARED_MASK_KEATON', 'MM_MASK_KEATON'],
+  ['SHARED_MASK_BUNNY', 'MM_MASK_BUNNY'],
+  ['SHARED_MASK_TRUTH', 'MM_MASK_TRUTH'],
+  ['SHARED_MASK_GORON', 'MM_MASK_GORON'],
+  ['SHARED_MASK_ZORA', 'MM_MASK_ZORA'],
+  ['SHARED_WALLET', 'MM_WALLET'],
+  ['SHARED_RUPEE_GREEN', 'MM_RUPEE_GREEN'],
+  ['SHARED_RUPEE_BLUE', 'MM_RUPEE_BLUE'],
+  ['SHARED_RUPEE_RED', 'MM_RUPEE_RED'],
+  ['SHARED_RUPEE_PURPLE', 'MM_RUPEE_PURPLE'],
+  ['SHARED_RUPEE_SILVER', 'MM_RUPEE_SILVER'],
+  ['SHARED_RUPEE_GOLD', 'MM_RUPEE_GOLD'],
+  ['SHARED_RUPEE_RAINBOW', 'OOT_RUPEE_RAINBOW'], /* No MM equivalent */
+  ['SHARED_HEART_PIECE', 'MM_HEART_PIECE'],
+  ['SHARED_HEART_CONTAINER', 'MM_HEART_CONTAINER'],
+  ['SHARED_RECOVERY_HEART', 'MM_RECOVERY_HEART'],
+  ['SHARED_DEFENSE_UPGRADE', 'MM_DEFENSE_UPGRADE'],
+  ['SHARED_SHIELD_DEKU', 'MM_SHIELD_DEKU'],
+  ['SHARED_SHIELD_HYLIAN', 'MM_SHIELD_HERO'],
+  ['SHARED_SHIELD_MIRROR', 'MM_SHIELD_MIRROR'],
+  ['SHARED_SHIELD', 'MM_SHIELD'], /* Progressive */
+  ['SHARED_MAGIC_JAR_SMALL', 'MM_MAGIC_JAR_SMALL'],
+  ['SHARED_MAGIC_JAR_LARGE', 'MM_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU', 'MM_BOMBCHU'],
+  ['SHARED_BOMBCHU_5', 'MM_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10', 'MM_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20', 'MM_BOMBCHU_20'],
+  ['SHARED_FAIRY_BIG', 'MM_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE', 'MM_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND', 'MM_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE', 'MM_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON', 'MM_BOOTS_IRON'],
+  ['SHARED_BOOTS_HOVER', 'MM_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON', 'MM_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA', 'MM_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST', 'MM_MASK_BLAST'],
+  ['SHARED_MASK_STONE', 'MM_MASK_STONE'],
+  ['SHARED_SCALE', 'MM_SCALE'],
+  ['SHARED_STRENGTH', 'MM_STRENGTH'],
+  ['SHARED_HAMMER', 'MM_HAMMER'],
+  ['SHARED_STICK_UPGRADE', 'MM_STICK_UPGRADE'],
+  ['SHARED_NUT_UPGRADE', 'MM_NUT_UPGRADE'],
+  ['SHARED_STONE_OF_AGONY', 'MM_STONE_OF_AGONY'],
+  ['SHARED_SPIN_UPGRADE', 'MM_SPIN_UPGRADE'],
+  ['SHARED_BOMBCHU_BAG', 'MM_BOMBCHU_BAG'],
 ]);
 
 const SHARED_ITEMS = {
@@ -211,7 +211,7 @@ const SHARED_ITEMS = {
   mm: SHARED_ITEMS_MM,
 };
 
-const SUBSTITUTIONS: {[k: string]: string} = {
+const SUBSTITUTIONS: { [k: string]: string } = {
   OOT_SWORD: "OOT_SWORD_KOKIRI",
   OOT_SWORD_GORON: "OOT_SWORD_KNIFE",
   OOT_OCARINA: "OOT_OCARINA_FAIRY",
@@ -390,92 +390,92 @@ function checkKey(check: WorldCheck): number {
   /* Extract the type */
   let typeId: number;
   switch (check.type) {
-  case 'chest':
-    typeId = 0x01;
-    break;
-  case 'collectible':
-    typeId = 0x02;
-    break;
-  case 'npc':
-    typeId = 0x03;
-    break;
-  case 'gs':
-    typeId = 0x04;
-    break;
-  case 'sf':
-    typeId = 0x05;
-    break;
-  case 'cow':
-    typeId = 0x06;
-    break;
-  case 'shop':
-    typeId = 0x07;
-    break;
-  case 'scrub':
-    typeId = 0x08;
-    break;
-  case 'sr':
-    typeId = 0x09;
-    break;
-  case 'fish':
-    typeId = 0x0A;
-    break;
-  case 'pot':
-  case 'crate':
-  case 'barrel':
-  case 'grass':
-  case 'tree':
-  case 'bush':
-  case 'rock':
-  case 'soil':
-  case 'fairy':
-  case 'snowball':
-  case 'hive':
-  case 'rupee':
-  case 'heart':
-  case 'fairy_spot':
-  case 'wonder':
-  case 'butterfly':
-  case 'redboulder':
-  case 'icicle':
-  case 'redice':
-    /* xflag */
-    typeId = 0x10 + ((id >> 16) & 0xf);
-    break;
+    case 'chest':
+      typeId = 0x01;
+      break;
+    case 'collectible':
+      typeId = 0x02;
+      break;
+    case 'npc':
+      typeId = 0x03;
+      break;
+    case 'gs':
+      typeId = 0x04;
+      break;
+    case 'sf':
+      typeId = 0x05;
+      break;
+    case 'cow':
+      typeId = 0x06;
+      break;
+    case 'shop':
+      typeId = 0x07;
+      break;
+    case 'scrub':
+      typeId = 0x08;
+      break;
+    case 'sr':
+      typeId = 0x09;
+      break;
+    case 'fish':
+      typeId = 0x0A;
+      break;
+    case 'pot':
+    case 'crate':
+    case 'barrel':
+    case 'grass':
+    case 'tree':
+    case 'bush':
+    case 'rock':
+    case 'soil':
+    case 'fairy':
+    case 'snowball':
+    case 'hive':
+    case 'rupee':
+    case 'heart':
+    case 'fairy_spot':
+    case 'wonder':
+    case 'butterfly':
+    case 'redboulder':
+    case 'icicle':
+    case 'redice':
+      /* xflag */
+      typeId = 0x10 + ((id >> 16) & 0xf);
+      break;
   }
 
   /* Extract the scene ID */
   let sceneId = 0;
   switch (check.type) {
-  case 'chest':
-  case 'collectible':
-  case 'sf':
-  case 'pot':
-  case 'crate':
-  case 'barrel':
-  case 'grass':
-  case 'tree':
-  case 'bush':
-  case 'rock':
-  case 'soil':
-  case 'fairy':
-  case 'snowball':
-  case 'hive':
-  case 'rupee':
-  case 'heart':
-  case 'fairy_spot':
-  case 'wonder':
-  case 'butterfly':
-  case 'redboulder':
-  case 'icicle':
-  case 'redice':
-    sceneId = (SCENES as any)[check.scene];
-    if (sceneId === undefined) {
-      throw new Error(`Unknown scene ${check.scene}`);
-    }
-    break;
-  default:
-    break;
+    case 'chest':
+    case 'collectible':
+    case 'sf':
+    case 'pot':
+    case 'crate':
+    case 'barrel':
+    case 'grass':
+    case 'tree':
+    case 'bush':
+    case 'rock':
+    case 'soil':
+    case 'fairy':
+    case 'snowball':
+    case 'hive':
+    case 'rupee':
+    case 'heart':
+    case 'fairy_spot':
+    case 'wonder':
+    case 'butterfly':
+    case 'redboulder':
+    case 'icicle':
+    case 'redice':
+      sceneId = (SCENES as any)[check.scene];
+      if (sceneId === undefined) {
+        throw new Error(`Unknown scene ${check.scene}`);
+      }
+      break;
+    default:
+      break;
   }
 
   /* Build the key */
@@ -491,7 +491,7 @@ async function makeCloakGi(key: number, seed: string, settings: Settings, logic:
   const random = new Random();
   await random.seed(key.toString(16) + '\x00' + seed);
 
-  for (;;) {
+  for (; ;) {
     const locs = [...logic.items.keys()];
     const loc = sample(random, locs);
     const item = logic.items.get(loc)!;
@@ -572,105 +572,105 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   }
   let id = null;
   switch (gossipData.type) {
-  case 'gossip':
-    id = gossipData.id;
-    break;
-  case 'gossip-grotto':
-    id = gossipData.id | 0x20;
-    break;
-  case 'gossip-moon':
-    id = gossipData.id | 0x40;
-    break;
+    case 'gossip':
+      id = gossipData.id;
+      break;
+    case 'gossip-grotto':
+      id = gossipData.id | 0x20;
+      break;
+    case 'gossip-moon':
+      id = gossipData.id | 0x40;
+      break;
   }
   switch (hint.type) {
-  case 'path':
-    {
-      const { path } = hint;
-      const player = path.player === 'all' ? 0xff : path.player + 1;
-      let pathId: number;
-      let pathSubId: number;
-      const regionD = regionData(hint.region);
-      const region = (REGIONS as any)[regionD.id];
-      if (region === undefined) {
-        throw new Error(`Unknown region ${hint.region}`);
-      }
-      switch (path.type) {
-      case 'woth':
-        pathId = 0;
-        pathSubId = 0;
-        break;
-      case 'triforce':
-        pathId = 1;
-        pathSubId = { 'Power': 0, 'Courage': 1, 'Wisdom': 2 }[path.triforce];
-        break;
-      case 'dungeon':
-        pathId = 2;
-        pathSubId = DUNGEONS_BY_KEY.get(path.dungeon)!.id;
-        break;
-      case 'boss':
-        pathId = 3;
-        pathSubId = BOSS_INDEX_BY_DUNGEON[path.boss];
-        break;
-      case 'end-boss':
-        pathId = 4;
-        pathSubId = END_BOSS_METADATA.findIndex((e) => e.name === path.boss);
-        break;
-      case 'event':
-        pathId = 5;
-        pathSubId = PATH_EVENT_DATA.findIndex((e) => e.key === path.event);
-        break;
-      }
+    case 'path':
+      {
+        const { path } = hint;
+        const player = path.player === 'all' ? 0xff : path.player + 1;
+        let pathId: number;
+        let pathSubId: number;
+        const regionD = regionData(hint.region);
+        const region = (REGIONS as any)[regionD.id];
+        if (region === undefined) {
+          throw new Error(`Unknown region ${hint.region}`);
+        }
+        switch (path.type) {
+          case 'woth':
+            pathId = 0;
+            pathSubId = 0;
+            break;
+          case 'triforce':
+            pathId = 1;
+            pathSubId = { 'Power': 0, 'Courage': 1, 'Wisdom': 2 }[path.triforce];
+            break;
+          case 'dungeon':
+            pathId = 2;
+            pathSubId = DUNGEONS_BY_KEY.get(path.dungeon)!.id;
+            break;
+          case 'boss':
+            pathId = 3;
+            pathSubId = BOSS_INDEX_BY_DUNGEON[path.boss];
+            break;
+          case 'end-boss':
+            pathId = 4;
+            pathSubId = END_BOSS_METADATA.findIndex((e) => e.name === path.boss);
+            break;
+          case 'event':
+            pathId = 5;
+            pathSubId = PATH_EVENT_DATA.findIndex((e) => e.key === path.event);
+            break;
+        }
 
-      bufWriteU8(data, HINT_OFFSETS.KEY, id);
-      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x00);
-      bufWriteU8(data, HINT_OFFSETS.REGION, region);
-      bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
-      bufWriteU16BE(data, HINT_OFFSETS.ITEM, pathId);
-      bufWriteU16BE(data, HINT_OFFSETS.ITEM2, pathSubId);
-      bufWriteU8(data, HINT_OFFSETS.PLAYER, player);
-    }
-    break;
-  case 'foolish':
-    {
-      const regionD = regionData(hint.region);
-      const region = (REGIONS as any)[regionD.id];
-      if (region === undefined) {
-        throw new Error(`Unknown region ${hint.region}`);
+        bufWriteU8(data, HINT_OFFSETS.KEY, id);
+        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x00);
+        bufWriteU8(data, HINT_OFFSETS.REGION, region);
+        bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM, pathId);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM2, pathSubId);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER, player);
       }
-      bufWriteU8(data, HINT_OFFSETS.KEY, id);
-      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x01);
-      bufWriteU8(data, HINT_OFFSETS.REGION, region);
-      bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
-    }
-    break;
-  case 'item-exact':
-    {
-      const check = (HINTS as any)[hint.check];
-      if (check === undefined) {
-        throw new Error(`Unknown named check: ${hint.check}`);
+      break;
+    case 'foolish':
+      {
+        const regionD = regionData(hint.region);
+        const region = (REGIONS as any)[regionD.id];
+        if (region === undefined) {
+          throw new Error(`Unknown region ${hint.region}`);
+        }
+        bufWriteU8(data, HINT_OFFSETS.KEY, id);
+        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x01);
+        bufWriteU8(data, HINT_OFFSETS.REGION, region);
+        bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
       }
-      const items = hint.items;
-      const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, false));
-      bufWriteU8(data, HINT_OFFSETS.KEY, id);
-      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x02);
-      bufWriteU8(data, HINT_OFFSETS.REGION, check);
-      bufWriteU8(data, HINT_OFFSETS.WORLD, hint.world + 1);
-      bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemsGI[0]);
-      bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(items[0].player));
-      bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importances[0]);
-      if (items.length > 1) {
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM2, itemsGI[1]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER2, playerId(items[1].player));
-        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE2, hint.importances[1]);
+      break;
+    case 'item-exact':
+      {
+        const check = (HINTS as any)[hint.check];
+        if (check === undefined) {
+          throw new Error(`Unknown named check: ${hint.check}`);
+        }
+        const items = hint.items;
+        const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, false));
+        bufWriteU8(data, HINT_OFFSETS.KEY, id);
+        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x02);
+        bufWriteU8(data, HINT_OFFSETS.REGION, check);
+        bufWriteU8(data, HINT_OFFSETS.WORLD, hint.world + 1);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemsGI[0]);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(items[0].player));
+        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importances[0]);
+        if (items.length > 1) {
+          bufWriteU16BE(data, HINT_OFFSETS.ITEM2, itemsGI[1]);
+          bufWriteU8(data, HINT_OFFSETS.PLAYER2, playerId(items[1].player));
+          bufWriteI8(data, HINT_OFFSETS.IMPORTANCE2, hint.importances[1]);
+        }
+        if (items.length > 2) {
+          bufWriteU16BE(data, HINT_OFFSETS.ITEM3, itemsGI[2]);
+          bufWriteU8(data, HINT_OFFSETS.PLAYER3, playerId(items[2].player));
+          bufWriteI8(data, HINT_OFFSETS.IMPORTANCE3, hint.importances[2]);
+        }
       }
-      if (items.length > 2) {
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM3, itemsGI[2]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER3, playerId(items[2].player));
-        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE3, hint.importances[2]);
-      }
-    }
-    break;
-  case 'item-region':
+      break;
+    case 'item-region':
       {
         const regionD = regionData(hint.region);
         const region = (REGIONS as any)[regionD.id];
@@ -688,13 +688,13 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importance);
       }
       break;
-  case 'junk':
-    {
-      bufWriteU8(data, HINT_OFFSETS.KEY, id);
-      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x04);
-      bufWriteU16BE(data, HINT_OFFSETS.ITEM, hint.id);
-    }
-    break;
+    case 'junk':
+      {
+        bufWriteU8(data, HINT_OFFSETS.KEY, id);
+        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x04);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM, hint.id);
+      }
+      break;
   }
   return data;
 }
@@ -846,7 +846,7 @@ function randomizerWarps(worldId: number, logic: LogicResult): Uint8Array {
 function worldConfig(world: World, settings: Settings): Set<Confvar> {
   const config = new Set<Confvar>;
 
-  const exprs: {[k in Confvar]: boolean} = {
+  const exprs: { [k in Confvar]: boolean } = {
     GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
     SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
     CSMC: settings.csmc === 'always',
@@ -1079,6 +1079,14 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SONG_NOTES: settings.songs === 'notes',
     OOT_ICE_ARROW_PLATFORMS: settings.iceArrowPlatformsOot,
     OOT_SONG_EVENTS_SHUFFLE: settings.songEventsShuffleOot,
+    OOT_DMG_MULT_2: settings.damageMultiplierOot === 'double',
+    OOT_DMG_MULT_4: settings.damageMultiplierOot === 'quadruple',
+    OOT_DMG_MULT_8: settings.damageMultiplierOot === 'octuple',
+    OOT_DMG_MULT_OHKO: settings.damageMultiplierOot === 'ohko',
+    MM_DMG_MULT_2: settings.damageMultiplierMm === 'double',
+    MM_DMG_MULT_4: settings.damageMultiplierMm === 'quadruple',
+    MM_DMG_MULT_8: settings.damageMultiplierMm === 'octuple',
+    MM_DMG_MULT_OHKO: settings.damageMultiplierMm === 'ohko',
   };
 
   for (const v in exprs) {
