@@ -259,8 +259,17 @@ void ObjBean_FollowPath(ObjBean* this, PlayState* play) {
     Vec3f pathPointsFloat;
     f32 mag;
     Vec3s* nextPathPoint;
+    float multiplier;
 
-    Math_StepToF(&this->dyna.actor.speed, sBeanSpeeds[this->unk_1F6].velocity, sBeanSpeeds[this->unk_1F6].accel);
+    multiplier = 1.0f;
+
+    if(!DynaPolyActor_IsPlayerOnTop(&this->dyna)) {
+        multiplier = 10.0f;
+    }
+
+
+    Math_StepToF(&this->dyna.actor.speed, sBeanSpeeds[this->unk_1F6].velocity * multiplier,
+        sBeanSpeeds[this->unk_1F6].accel * (multiplier / 2.f));
     path = &play->pathList[PARAMS_GET_U(this->dyna.actor.params, 8, 5)];
     nextPathPoint = &((Vec3s*)SEGMENTED_TO_VIRTUAL(path->points))[this->nextPointIndex];
 
