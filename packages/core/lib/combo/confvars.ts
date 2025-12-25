@@ -231,11 +231,19 @@ export const CONFVARS = [
   'SONG_NOTES',
   'OOT_ICE_ARROW_PLATFORMS',
   'OOT_SONG_EVENTS_SHUFFLE',
+  'OOT_DMG_MULT_2',
+  'OOT_DMG_MULT_4',
+  'OOT_DMG_MULT_8',
+  'OOT_DMG_MULT_OHKO',
+  'MM_DMG_MULT_2',
+  'MM_DMG_MULT_4',
+  'MM_DMG_MULT_8',
+  'MM_DMG_MULT_OHKO',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
 
-export const CONFVARS_VALUES: {[k in Confvar]: number} = {} as any;
+export const CONFVARS_VALUES: { [k in Confvar]: number } = {} as any;
 for (let i = 0; i < CONFVARS.length; ++i) {
   CONFVARS_VALUES[CONFVARS[i]] = i;
 }
