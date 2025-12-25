@@ -294,6 +294,69 @@
 "silver_rupees_spirit_lobby": "silver_rupees(Spirit_Lobby, RUPEE_SILVER_SPIRIT_LOBBY, POUCH_SILVER_SPIRIT_LOBBY, 5)"
 "silver_rupees_spirit_adult": "silver_rupees(Spirit_Adult, RUPEE_SILVER_SPIRIT_ADULT, POUCH_SILVER_SPIRIT_ADULT, 5)"
 
+# Enemies
+"can_kill_stalfos": "soul_enemy(SOUL_ENEMY_STALFOS) && can_use_sword || can_hammer"
+"can_kill_octoroks": "soul_octorok && can_use_slingshot || has_bomb_bag || can_use_bow || can_hookshot || can_boomerang || has_shield_for_scrubs"
+"can_kill_big_octo": "soul_octorok && (can_boomerang && (has_sword_kokiri || has_sword_master || can_use_sticks))"
+"can_kill_wallmasters": "soul_wallmaster && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_bombchu || can_use_din"
+"can_kill_floormasters": "soul_floormaster && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_bombchu || can_use_din"
+"can_kill_dodongos": "soul_dodongo && can_use_sword_or_sticks || can_hammer || can_use_bow || has_explosives"
+"can_kill_baby_dodongos": "soul_baby_dodongo && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow"
+"can_kill_keese": "soul_keese && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_boomerang || can_use_bow || can_hookshot"
+"can_kill_guays": "soul_guay && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_boomerang || can_use_bow || can_hookshot || can_use_din"
+"can_kill_tektites": "soul_tektite && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din"
+"can_kill_leevers": "soul_leever && has_sword || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din"
+"can_kill_peahats_ground": "soul_peahat && (can_use_sword_or_sticks || can_use_slingshot) || (is_night && has_explosives))"
+"can_kill_peahats_high": "soul_peahat && (can_use_slingshot || is_night && has_explosives)"
+"can_kill_lizalfos_dinalfos": "soul_lizalfos_dinalfos && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow"
+"can_kill_larvae_eggs": "has_ranged_weapon || has_nuts"    #Can be used for clear rooms, but doesn't give enemy drops in OoTR.
+"can_kill_larvae_hatched": "soul_gohma_larvae && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || can_hookshot || has_explosives || can_use_din"
+"can_kill_shaboms": "soul_shaboms && can_use_sword || can_boomerang || has_nuts || has_explosives || can_use_din"
+"can_kill_dark_link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && can_use_sword || can_hammer || can_use_din && has_chateau" #Double magic may be enough but due to Dark Link matching player health chateau as a mercy? Din's is weird here.
+"can_kill_biris_baris": "soul_biris_baris && can_use_sword || (has_nuts && can_use_sticks) || can_boomerang || has_explosives || can_use_din"
+"can_kill_tailpasarans": "soul_tailpasarans && can_boomerang" #Unsure on what else kills them, hookshot doesn't and their hitboxes are very weird. Ruto can kill them, however.
+"can_kill_jabu_parasites": "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang" #Can have glitches or tricks for bombchu later on.
+"can_kill_torch_slugs": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && can_use_sword_razor || can_use_sword_master || can_use_sword_biggoron || can_hammer || cam_use_bow || has_explosives || has_sticks"
+"can_kill_moblins": "soul_moblins && can_use_sword_or_sticks || can_hammer || can_use_bow || can_hookshot"
+"can_kill_armos": "soul_armos && can_use_sword_razor || can_use_sword_master || can_use_sword_biggoron || can_hammer || (can_use_slingshot && (has_nuts || can_boomerang))"
+#"can_kill_small_babas": "soul_deku_baba &&"       #No enemy drops currently in OoTR.
+#"can_kill_big_babas": "soul_deku_baba &&"       #Enemy drops in OoTR only awarded when defeated with elemental arrows.
+"can_kill_mad_scrubs": "soul_deku_scrub && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_boomerang || can_use_bow || can_hookshot || has_shield_for_scrubs"
+"can_kill_yellow_scrubs": "soul_deku_scrub && (has_shield_for_scrubs || can_hammer)"
+"can_kill_bubbles": "soul_bubble && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || (has_bombchu && can_boomerang || has_nuts)"
+"can_kill_beamos": "soul_beamos && has_explosives || can_use_mask_blast"
+"can_kill_zombies": "soul_redead_gibdo && can_use_sword_or_sticks || can_hammer || can_use_din"
+"can_kill_zombies_no_c_button": "soul_redead_gibdo && can_use_sword"
+"can_kill_skulwalltulas": "soul_skullwalltula && can_use_slingshot || can_boomerang || can_use_bow || can_hookshot || can_hammer"
+"can_kill_flare_dancer": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && can_use_sword || can_hammer || can_use_bow || has_bomb_bag"
+"can_kill_dead_hand": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && (can_use_sword || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+"can_kill_shell_blades": "soul_shell_blade && can_use_sword || can_use_bow || can_hookshot || can_use_din"
+"can_kill_shell_blades_underwater": "soul_shell_blade && can_hookshot"
+"can_kill_like_like": "soul_like_like && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din"
+"can_kill_spike_enemies": "soul_spike_enemy && can_use_sword_master || can_use_sword_razor || can_use_sword_biggoron || can_hammer || can_use_bow || can_hookshot || has_explosives"
+"can_kill_spike_enemies_underwater": "soul_spike_enemy && can_hookshot
+"can_kill_anubis": "soul_enemy(SOUL_ENEMY_ANUBIS) && has_fire"
+"can_kill_iron_knuckles": "soul_iron_knuckle && can_use_sword || can_hammer || has_explosives"
+"can_kill_skull_kids": "soul_skull_kids && can_use_sword_master || can_use_sword_biggoron || can_use_sword_gilded"
+"can_kill_flying_pots": "soul_flying_pot" #They break themselves.
+"can_kill_freezards": "soul_freezard && can_use_sword_master || can_use_sword_razor || can_use_sword_biggoron || can_hammer || can_hookshot || has_explosives || has_fire"
+"can_kill_stingers": "soul_stingers && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || can_hookshot || can_use_din"
+"can_kill_stingers_underwater": "soul_stingers && can_hookshot"
+"can_kill_wolfos": "soul_wolfos && can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din"
+#"can_kill_stalchildren": "soul_stalchild" #Don't need to define combat, as they probably won't have enemy drops anyway, and they aren't in dungeons. Should be listed if ever part of enemizer.
+"can_kill_invisible_enemies": "has_lens" #Enemizer or Actorizer might make this macro relevant for switching enemies.
+
+#OoT Bosses:
+"can_kill_gohma": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
+"can_kill_king_dodongo": "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_hammer || can_use_sword)"
+"can_kill_barinade": "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
+"can_kill_phantom_ganon": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword" #Trick for bottle reflection maybe, depending on what can damage.
+"can_kill_volvagia": "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
+"can_kill_morpha": "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && (can_hammer || can_use_sword)"
+"can_kill_bongo": "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_use_slingshot)"
+"can_kill_twinrova": "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && (can_hammer || can_use_sword)"
+
+
 # Masks
 "has_mask_keaton": "has(MASK_KEATON) || has(SHARED_MASK_KEATON)"
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
