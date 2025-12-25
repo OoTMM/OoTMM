@@ -3,7 +3,7 @@
   age_change: false
   dungeon: Forest
   events:
-    BOSS_PHANTOM_GANON: "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword"
+    BOSS_PHANTOM_GANON: "soul_boss(SOUL_BOSS_PHANTOM_GANON) &&  (has_ranged_weapon_adult || can_use_slingshot) && (can_use_sword || can_boomerang)"
   exits:
     "Forest Temple After Boss": "event(BOSS_PHANTOM_GANON)"
 
