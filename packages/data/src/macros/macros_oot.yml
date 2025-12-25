@@ -351,7 +351,7 @@
 "can_kill_gohma": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
 "can_kill_king_dodongo": "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_hammer || can_use_sword)"
 "can_kill_barinade": "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
-"can_kill_phantom_ganon": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (can_use_sword && (has_ranged_weapon_adult || can_use_slingshot)) || can_boomerang" #Trick for bottle reflection maybe, depending on what can damage.
+"can_kill_phantom_ganon": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword" #Trick for bottle reflection maybe, depending on what can damage.
 "can_kill_volvagia": "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
 "can_kill_morpha": "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && (can_hammer || can_use_sword)"
 "can_kill_bongo": "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_hookshot || can_use_slingshot)"
