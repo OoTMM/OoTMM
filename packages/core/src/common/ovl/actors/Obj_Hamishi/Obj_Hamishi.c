@@ -141,6 +141,8 @@ static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
 
 static void ObjHamishi_InitXflag(Actor_ObjHamishi* this, PlayState* play)
 {
+    if(play->sceneId == SCE_OOT_GERUDO_VALLEY && g.sceneSetupId != 1) return;
+
     ComboItemOverride   o;
     Xflag*              xflag;
 
