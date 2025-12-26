@@ -381,8 +381,9 @@ void func_808834D8(BgHakaZou* this, PlayState* play) {
         this->timer--;
     }
 
-    moveDist = MULT((this->timer % 2) ? 15.0f : -15.0f);
-    this->dyna.actor.world.pos.y += ((this->timer & 0xFE) * 0.04f * moveDist);
+    // moveDist = (this->timer % 2) ? 15.0f : -15.0f;
+    // this->dyna.actor.world.pos.y += ((this->timer & 0xFE) * 0.04f * moveDist);
+    this->dyna.actor.world.pos.y -= 14.4f;
 
     if (this->timer == 0) {
         this->actionFunc = BgHakaZou_DoNothing;
