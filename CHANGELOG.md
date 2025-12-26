@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file.
 - Fixed Spirit Temple logic not accounting for a way to fight the Iron Knuckles to access the hands.
 - Fix some mystery lag.
 - Fix silver boulder in Gerudo Valley wrongly flagged as a red boulder when being there as child under some circumstances.
+- Fix Shadow Temple Bird Statue being too high after getting blown up.
 
 ## [29.0] - 2025-08-15
 
