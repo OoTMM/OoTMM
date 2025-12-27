@@ -133,7 +133,7 @@
 "Water Temple Room Before Dark Link Lower":
   dungeon: Water
   exits:
-    "Water Temple Room Before Dark Link Upper": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hookshot) || hookshot_anywhere || climb_anywhere"
+    "Water Temple Room Before Dark Link Upper": "(soul_enemy(SOUL_ENEMY_STALFOS) && is_adult && has_weapon && can_hookshot) || hookshot_anywhere || ((is_adult || can_swim || has_hover_boots) && climb_anywhere)"
     "Water Temple Hookshot Staircase Before Dark Link": "true"
   locations:
     "MQ Water Temple Pot Before Dark Link Ledge 1": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hookshot) || has_hover_boots || hookshot_anywhere || climb_anywhere"

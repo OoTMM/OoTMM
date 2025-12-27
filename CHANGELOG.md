@@ -46,6 +46,7 @@ All notable changes to this project will be documented in this file.
 - Fix some mystery lag.
 - Fix silver boulder in Gerudo Valley wrongly flagged as a red boulder when being there as child under some circumstances.
 - Fix Shadow Temple Bird Statue being too high after getting blown up.
+- Fix Water Temple MQ's Stalfos before Dark Link expecting child to be able to fight.
 
 ## [29.0] - 2025-08-15
 
