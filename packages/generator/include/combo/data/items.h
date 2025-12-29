@@ -163,7 +163,16 @@
 #define ITEM_OOT_SPRING_WATER           0xa4
 #define ITEM_OOT_SPRING_WATER_HOT       0xa5
 #define ITEM_OOT_ZORA_EGG               0xa6
-#define ITEM_OOT_CUSTOM_MAX             0xa7
+#define ITEM_OOT_POWDER_KEG             0xa7
+#define ITEM_OOT_BOMB_MM                0xa8
+#define ITEM_OOT_BOMB_BAG_MM            0xa9
+#define ITEM_OOT_BOMB_BAG2_MM           0xaa
+#define ITEM_OOT_BOMB_BAG3_MM           0xab
+#define ITEM_OOT_BOMBS_MM_5             0xac
+#define ITEM_OOT_BOMBS_MM_10            0xad
+#define ITEM_OOT_BOMBS_MM_20            0xae
+#define ITEM_OOT_BOMBS_MM_30            0xaf
+#define ITEM_OOT_CUSTOM_MAX             0xb0
 
 #if defined(GAME_OOT)
 # define ITEM_STICK                     ITEM_OOT_STICK
@@ -450,6 +459,7 @@
 #define ITEM_MM_ARROWS_10                   0x93
 #define ITEM_MM_ARROWS_30                   0x94
 #define ITEM_MM_ARROWS_40                   0x95
+#define ITEM_MM_ARROWS_50                   0x96
 #define ITEM_MM_BOMBCHU_20                  0x97
 #define ITEM_MM_BOMBCHU_10                  0x98
 #define ITEM_MM_BOMBCHU_ALT                 0x99
@@ -473,7 +483,15 @@
 #define ITEM_MM_TUNIC_ZORA                  0xb4
 #define ITEM_MM_HAMMER                      0xb5
 #define ITEM_MM_RUTO_LETTER                 0xb6
-#define ITEM_MM_CUSTOM_MAX                  0xb7
+#define ITEM_MM_BOMB_OOT                    0xb7
+#define ITEM_MM_BOMB_BAG_OOT                0xb8
+#define ITEM_MM_BOMB_BAG2_OOT               0xb9
+#define ITEM_MM_BOMB_BAG3_OOT               0xba
+#define ITEM_MM_BOMBS_OOT_5                 0xbb
+#define ITEM_MM_BOMBS_OOT_10                0xbc
+#define ITEM_MM_BOMBS_OOT_20                0xbd
+#define ITEM_MM_BOMBS_OOT_30                0xbe
+#define ITEM_MM_CUSTOM_MAX                  0xbf
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 
@@ -660,6 +678,7 @@
 # define ITEM_RUPEE_BLUE       ITEM_MM_RUPEE_BLUE
 # define ITEM_RUPEE_RED        ITEM_MM_RUPEE_RED
 # define ITEM_RUPEE_PURPLE     ITEM_MM_RUPEE_PURPLE
+# define ITEM_RUPEE_GOLD       ITEM_MM_RUPEE_GOLD
 # define ITEM_RECOVERY_HEART   ITEM_MM_RECOVERY_HEART
 #endif
 

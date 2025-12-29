@@ -157,8 +157,31 @@ void comboSyncItems(void)
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBS];
 
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS_OOT))
+#if defined (GAME_OOT)
+        gMmExtraAmmo.ootBombAmmo = gSave.info.inventory.ammo[ITS_NATIVE_BOMBS];
+#else
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBS] = gMmExtraAmmo.ootBombAmmo;
+#endif
+
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS_MM))
+#if defined (GAME_OOT)
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBS] = gOotExtraAmmo.mmBombAmmo;
+#else
+        gOotExtraAmmo.mmBombAmmo = gSave.info.inventory.ammo[ITS_NATIVE_BOMBS];
+#endif
+
     if (Config_Flag(CFG_SHARED_BOMBCHU))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBCHU];
+
+    if (Config_Flag(CFG_SHARED_POWDER_KEG))
+    {
+#if defined(GAME_OOT)
+        gForeignSave.info.inventory.ammo[ITS_MM_KEG] = gOotExtraAmmo.kegAmmo;
+#else
+        gOotExtraAmmo.kegAmmo = gSave.info.inventory.ammo[ITS_MM_KEG];
+#endif
+    }
 
     if (Config_Flag(CFG_SHARED_MAGIC))
     {

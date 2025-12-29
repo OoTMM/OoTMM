@@ -8,8 +8,23 @@
 #include <assets/oot/objects/gameplay_keep.h>
 #include <combo/math.h>
 
+#if defined(GAME_OOT)
+# include "assets/oot/objects/gameplay_keep.h"
+# define ACTOR ACTOR_EN_BOM
+# define light1Color play->envCtx.adjLight1Color
+# define ambientColor play->envCtx.adjAmbientColor
+# define STATE1_ACTOR_CARRY PLAYER_STATE1_ACTOR_CARRY
+# define DAMAGE 0x08
+#else
+# include "assets/mm/objects/gameplay_keep.h"
+# define ACTOR ACTOR_EN_BOM_OOT
+# define light1Color play->envCtx.adjLightSettings.light1Color
+# define ambientColor play->envCtx.adjLightSettings.ambientColor
+# define STATE1_ACTOR_CARRY PLAYER_STATE1_MM_CARRYING_ACTOR
+# define DAMAGE 0x02
+#endif
 
-#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_OOT_5)
+#define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED)
 
 void EnBom_Init(EnBom* this, PlayState* play);
 void EnBom_Destroy(EnBom* this, PlayState* play);
@@ -43,7 +58,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[1] = {
     {
         {
             ELEM_MATERIAL_UNK0,
-            { 0x00000008, 0x00, 0x08 },
+            { 0x00000008, 0x00, DAMAGE },
             { 0x00000000, 0x00, 0x00 },
             ATELEM_ON | ATELEM_SFX_NONE,
             ACELEM_NONE,
@@ -132,7 +147,11 @@ void EnBom_Move(EnBom* this, PlayState* play) {
     } else {
         Math_StepToF(&this->actor.speed, 0.0f, 1.0f);
         if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND_TOUCH) && (this->actor.velocity.y < -3.0f)) {
+#if defined (GAME_OOT)
             Actor_PlaySfx_SurfaceBomb(play, &this->actor);
+#else
+            Actor_PlaySfx(&this->actor, NA_SE_EV_BOMB_BOUND);
+#endif
             this->actor.velocity.y *= -0.3f;
             this->actor.bgCheckFlags &= ~BGCHECKFLAG_GROUND_TOUCH;
         } else if (this->timer >= 4) {
@@ -165,34 +184,34 @@ void EnBom_Explode(EnBom* this, PlayState* play) {
         CollisionCheck_SetAT(play, &play->colChkCtx, &this->explosionCollider.base);
     }
 
-    if (play->envCtx.adjLight1Color[0] != 0) {
-        play->envCtx.adjLight1Color[0] -= 25;
+    if (light1Color[0] != 0) {
+        light1Color[0] -= 25;
     }
 
-    if (play->envCtx.adjLight1Color[1] != 0) {
-        play->envCtx.adjLight1Color[1] -= 25;
+    if (light1Color[1] != 0) {
+        light1Color[1] -= 25;
     }
 
-    if (play->envCtx.adjLight1Color[2] != 0) {
-        play->envCtx.adjLight1Color[2] -= 25;
+    if (light1Color[2] != 0) {
+        light1Color[2] -= 25;
     }
 
-    if (play->envCtx.adjAmbientColor[0] != 0) {
-        play->envCtx.adjAmbientColor[0] -= 25;
+    if (ambientColor[0] != 0) {
+        ambientColor[0] -= 25;
     }
 
-    if (play->envCtx.adjAmbientColor[1] != 0) {
-        play->envCtx.adjAmbientColor[1] -= 25;
+    if (ambientColor[1] != 0) {
+        ambientColor[1] -= 25;
     }
 
-    if (play->envCtx.adjAmbientColor[2] != 0) {
-        play->envCtx.adjAmbientColor[2] -= 25;
+    if (ambientColor[2] != 0) {
+        ambientColor[2] -= 25;
     }
 
     if (this->timer == 0) {
         player = GET_PLAYER(play);
 
-        if ((player->stateFlags1 & PLAYER_STATE1_ACTOR_CARRY) && (player->heldActor == &this->actor)) {
+        if ((player->stateFlags1 & STATE1_ACTOR_CARRY) && (player->heldActor == &this->actor)) {
             player->heldActor = NULL;
             // Emtpy bomb fix
             player->heldItemAction = 0;
@@ -200,7 +219,7 @@ void EnBom_Explode(EnBom* this, PlayState* play) {
             player->itemAction = 0;
             player->actor.child = NULL;
             player->interactRangeActor = NULL;
-            player->stateFlags1 &= ~PLAYER_STATE1_ACTOR_CARRY;
+            player->stateFlags1 &= ~STATE1_ACTOR_CARRY;
         }
 
         Actor_Kill(&this->actor);
@@ -250,7 +269,11 @@ void EnBom_Update(EnBom* this, PlayState* play) {
             Actor_PlaySfx(&this->actor, NA_SE_IT_BOMB_IGNIT - SFX_FLAG);
 
             effPos.y += 3.0f;
+#if defined (GAME_OOT)
             func_8002829C(play, &effPos, &effVelocity, &dustAccel, &dustColor, &dustColor, 50, 5);
+#else
+            func_800B0DE0(play, &effPos, &effVelocity, &dustAccel, &dustColor, &dustColor, 50, 5);
+#endif
         }
 
         if ((this->bombCollider.base.acFlags & AC_HIT) || ((this->bombCollider.base.ocFlags1 & OC1_HIT) &&
@@ -302,11 +325,15 @@ void EnBom_Update(EnBom* this, PlayState* play) {
 
             Actor_PlaySfx(&this->actor, NA_SE_IT_BOMB_EXPLOSION);
 
-            play->envCtx.adjLight1Color[0] = play->envCtx.adjLight1Color[1] = play->envCtx.adjLight1Color[2] = 250;
+            light1Color[0] = light1Color[1] = light1Color[2] = 250;
 
-            play->envCtx.adjAmbientColor[0] = play->envCtx.adjAmbientColor[1] = play->envCtx.adjAmbientColor[2] = 250;
+            ambientColor[0] = ambientColor[1] = ambientColor[2] = 250;
 
+#if defined (GAME_OOT)
             Camera_RequestQuake(&play->mainCamera, 2, 11, 8);
+#else
+            Camera_AddQuake(&play->mainCamera, 2, 11, 8);
+#endif
             this->actor.params = BOMB_EXPLOSION;
             this->timer = 10;
             this->actor.flags |= ACTOR_FLAG_OOT_5;
@@ -329,8 +356,12 @@ void EnBom_Update(EnBom* this, PlayState* play) {
 
     if ((this->actor.scale.x >= 0.01f) && (this->actor.params != BOMB_EXPLOSION)) {
         if (this->actor.depthInWater >= 20.0f) {
+#if defined (GAME_OOT)
             EffectSsDeadSound_SpawnStationary(play, &this->actor.projectedPos, NA_SE_IT_BOMB_UNEXPLOSION, true,
                                               DEADSOUND_REPEAT_MODE_OFF, 10);
+#else
+            SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 30, NA_SE_IT_BOMB_UNEXPLOSION);
+#endif
             Actor_Kill(&this->actor);
             return;
         }
@@ -345,7 +376,11 @@ void EnBom_Draw(EnBom* this, PlayState* play) {
     OPEN_DISPS(play->state.gfxCtx);
 
     if (this->actor.params == BOMB_BODY) {
+#if defined (GAME_OOT)
         Gfx_SetupDL_25Opa(play->state.gfxCtx);
+#else
+        Gfx_SetupDL25_Opa(play->state.gfxCtx);
+#endif
         Matrix_ReplaceRotation(&play->billboardMtxF);
         PreDraw1(&this->actor, play, 0);
 
@@ -364,7 +399,7 @@ void EnBom_Draw(EnBom* this, PlayState* play) {
 }
 
 ActorProfile En_Bom_Profile = {
-    ACTOR_EN_BOM,
+    ACTOR,
     ACTORCAT_EXPLOSIVE,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
@@ -375,4 +410,4 @@ ActorProfile En_Bom_Profile = {
     (ActorFunc)EnBom_Draw,
 };
 
-OVL_INFO_ACTOR(ACTOR_EN_BOM, En_Bom_Profile);
+OVL_INFO_ACTOR(ACTOR, En_Bom_Profile);

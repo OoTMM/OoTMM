@@ -9,6 +9,7 @@
 
 #if defined(GAME_OOT)
 # include "assets/oot/objects/gameplay_field_keep.h"
+# include "actors/Custom_En_Bom/Custom_En_Bom.h"
 # define FLAGS 0
 # define DAMAGE DMG_HAMMER
 # define SILVER_ROCK_FRAGMENTS_DL gSilverRockFragmentsDL
@@ -330,6 +331,15 @@ void ObjHamishi_Update(Actor_ObjHamishi* this, PlayState* play) {
             if(this->collider.elem.acHitElem->atDmgInfo.dmgFlags & DMG_POWDER_KEG)
             {
                 this->hitCount = 1;
+            }
+#else
+            if (this->collider.base.ac != NULL && this->collider.base.ac->id == ACTOR_CUSTOM_EN_BOM)
+            {
+                EnBomMM* bomb = (EnBomMM*) this->collider.base.ac;
+                if (bomb->isPowderKeg)
+                {
+                    this->hitCount = 1;
+                }
             }
 #endif
             this->hitCount++;

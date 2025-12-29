@@ -87,7 +87,7 @@
 #define IA_COIN                 0x4d
 #define IA_OOT_BUTTON           0x4e
 #define IA_MM_BUTTON            0x4f
-#define IA_KEG                  0x50
+#define IA_MM_KEG               0x50
 #define IA_MM_SPIN_UPGRADE      0x51
 #define IA_OOT_SOUL             0x52
 #define IA_MM_SOUL              0x53
@@ -124,7 +124,12 @@
 #define IA_MM_SONG_OOT          0x72
 #define IA_OOT_PLATINUM_TOKEN   0x73
 #define IA_MM_PLATINUM_TOKEN    0x74
-#define IA_MAX                  0x75
+#define IA_OOT_KEG              0x75
+#define IA_OOT_BOMB_BAG_MM      0x76
+#define IA_MM_BOMB_BAG_OOT      0x77
+#define IA_OOT_BOMBS_MM         0x78
+#define IA_MM_BOMBS_OOT         0x79
+#define IA_MAX                  0x7a
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

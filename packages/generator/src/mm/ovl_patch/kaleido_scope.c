@@ -112,6 +112,10 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_RUTO_LETTER;
         break;
+    case ITEM_MM_BOMB_OOT:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_BOMB;
+        break;
     }
     if (isForeign)
     {
@@ -157,8 +161,11 @@ void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
     {
         messageId = 0x170f; /* Use Hookshot message instead of broken OoT Hookshot message */
     }
-    Message_ShowMessageAtYPosition(play, messageId, yPosition);
     s16 itemId = messageId - 0x1700;
+    if (itemId == ITEM_MM_BOMB_OOT) {
+        messageId = 0x1700 + ITEM_MM_BOMB;
+    }
+    Message_ShowMessageAtYPosition(play, messageId, yPosition);
     switch (itemId)
     {
     case ITEM_MM_OCARINA_FAIRY:
@@ -349,15 +356,16 @@ static u32 sCustomIcons[] = {
     ITEM_MM_TUNIC_ZORA,
     ITEM_MM_HAMMER,
     ITEM_MM_RUTO_LETTER,
+    ITEM_MM_BOMB_OOT,
 };
 
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN] =
 {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 1, 1, 1, -1, -1, -1, -1, 1, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
+    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -380,6 +388,7 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
     {
         u32 icon = sCustomIcons[i];
         u32 foreignIcon;
+        float hueShift = 0.0f;
         switch (icon)
         {
         case ITEM_MM_SPELL_FIRE:
@@ -409,12 +418,20 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         case ITEM_MM_RUTO_LETTER:
             foreignIcon = ITEM_OOT_RUTO_LETTER;
             break;
+        case ITEM_MM_BOMB_OOT:
+            foreignIcon = ITEM_OOT_BOMB;
+            hueShift = 50.0f;
+            break;
         default:
             continue;
         }
         u32 textureOffset = customIconSize * foreignIcon;
         u32 customDestination = gCustomIconAddr + (i * customIconSize);
         DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, (void*)customDestination, customIconSize);
+
+        if (hueShift) {
+            change_hue((Color_RGBA8*)customDestination, 0x1000 / sizeof(Color_RGBA8), hueShift);
+        }
 
         u8 customItemIndex = icon - ITEM_MM_CUSTOM_MIN;
         if (customItemIndex >= (ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
@@ -461,16 +478,17 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 6) * 2];
+static Vtx gVertexBufs[(4 * 7) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[6] = {
+static Vtx* gVertex[7] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
     &gVertexBufs[(4 * 3) * 2],
     &gVertexBufs[(4 * 4) * 2],
     &gVertexBufs[(4 * 5) * 2],
+    &gVertexBufs[(4 * 6) * 2],
 };
 
 static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
@@ -548,3 +566,104 @@ void KaleidoScope_SetSaveButton(PlayState* play, s16 bButtonDoAction)
 }
 
 PATCH_CALL(0x80828908, KaleidoScope_SetSaveButton);
+
+typedef void (*KaleidoScope_DrawAmmoCount)(PauseContext*, GraphicsContext*, s16, u16);
+
+const static u8* gAmmoDigit0Tex = (u8*)0x02004aa0;
+
+static s16 sAmmoRectLeft[] = {
+    95,  // SLOT_BOW
+    62,  // SLOT_BOMB
+    95,  // SLOT_BOMBCHU
+    128, // SLOT_DEKU_STICK
+    161, // SLOT_DEKU_NUT
+    194, // SLOT_MAGIC_BEANS
+    62,  // SLOT_POWDER_KEG
+    95,  // SLOT_PICTOGRAPH_BOX
+};
+
+static s16 sAmmoRectHeight[] = {
+    85,  // SLOT_BOW
+    117, // SLOT_BOMB
+    117, // SLOT_BOMBCHU
+    117, // SLOT_DEKU_STICK
+    117, // SLOT_DEKU_NUT
+    117, // SLOT_MAGIC_BEANS
+    150, // SLOT_POWDER_KEG
+    150, // SLOT_PICTOGRAPH_BOX
+};
+
+void KaleidoScope_CustomDrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* gfxCtx, s16 item, u16 ammoIndex)
+{
+    s16 ammo;
+    s16 ammoTens;
+    s16 maxAmmo;
+    s32 canEquip = 0;
+
+    OPEN_DISPS(gfxCtx);
+
+    switch (item)
+    {
+    case ITEM_MM_BOMBCHU:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BOMBCHU];
+        maxAmmo = gMaxBombchuMm;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item];
+        break;
+    case ITEM_MM_BOMB_OOT:
+        ammo = gMmExtraAmmo.ootBombAmmo;
+        maxAmmo = kMaxBombs[gMmExtraItems.ootBombBagUpgrade];
+        canEquip = gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][item - ITEM_MM_CUSTOM_MIN];
+        break;
+    default:
+        return;
+    }
+
+    gDPPipeSync(POLY_OPA_DISP++);
+
+    if (!canEquip) {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 100, 100, 100, pauseCtx->itemAlpha);
+    } else {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, pauseCtx->itemAlpha);
+
+        if (ammo == 0) {
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 130, 130, 130, pauseCtx->itemAlpha);
+        } else if (ammo == maxAmmo) {
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 120, 255, 0, pauseCtx->itemAlpha);
+        }
+    }
+
+    for (ammoTens = 0; ammo >= 10; ammoTens++) {
+        ammo -= 10;
+    }
+
+    gDPPipeSync(POLY_OPA_DISP++);
+
+    if (ammoTens != 0) {
+        POLY_OPA_DISP =
+            Gfx_TextureIA8(POLY_OPA_DISP, ((u8*)gAmmoDigit0Tex + (8 * 8 * ammoTens)), 8, 8,
+                               sAmmoRectLeft[ammoIndex], sAmmoRectHeight[ammoIndex], 8, 8, 1 << 10, 1 << 10);
+    }
+
+    POLY_OPA_DISP =
+        Gfx_TextureIA8(POLY_OPA_DISP, ((u8*)gAmmoDigit0Tex + (8 * 8 * ammo)), 8, 8, sAmmoRectLeft[ammoIndex] + 6,
+                           sAmmoRectHeight[ammoIndex], 8, 8, 1 << 10, 1 << 10);
+
+    CLOSE_DISPS();
+}
+
+void KaleidoScope_DrawAmmoCountWrapper(PauseContext* pauseCtx, GraphicsContext* gfxCtx, s16 item, u16 ammoIndex)
+{
+    switch (item)
+    {
+    case ITEM_MM_BOMBCHU:
+    case ITEM_MM_BOMB_OOT:
+        KaleidoScope_CustomDrawAmmoCount(pauseCtx, gfxCtx, item, ammoIndex);
+        break;
+    default:
+        KaleidoScope_DrawAmmoCount KaleidoScope_DrawAmmoCount = OverlayAddr(0x8081b240);
+        KaleidoScope_DrawAmmoCount(pauseCtx, gfxCtx, item, ammoIndex);
+        break;
+    }
+}
+
+PATCH_CALL(0x8081bc4c, KaleidoScope_DrawAmmoCountWrapper)

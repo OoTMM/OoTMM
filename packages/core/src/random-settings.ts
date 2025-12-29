@@ -485,6 +485,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedMaskBlast = true;
     base.sharedMaskStone = true;
     base.sharedMaskKamaro = true;
+    base.sharedPowderKeg = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
     base.sharedSoulsEnemy = true;
@@ -506,6 +507,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedBows = booleanWeighted(random, 0.5);
     base.sharedBombBags = booleanWeighted(random, 0.5);
     base.sharedBombchu = booleanWeighted(random, 0.5);
+    base.sharedPowderKeg = booleanWeighted(random, 0.5);
     base.sharedMagic = booleanWeighted(random, 0.5);
     base.sharedHookshot = booleanWeighted(random, 0.5);
     base.sharedLens = booleanWeighted(random, 0.5);
@@ -655,6 +657,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.blastMaskOot = booleanWeighted(random, 0.25);
   base.stoneMaskOot = booleanWeighted(random, 0.25);
   base.kamaroMaskOot = booleanWeighted(random, 0.25);
+  base.powderKegOot = booleanWeighted(random, 0.25);
   base.hammerMm = booleanWeighted(random, 0.25);
   base.sticksNutsUpgradesMm = booleanWeighted(random, 0.5);
   base.stoneAgonyMm = booleanWeighted(random, 0.5);

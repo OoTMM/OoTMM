@@ -422,15 +422,26 @@ OotExtraTrade;
 
 typedef struct
 {
-    u8 rutoLetter:1;
-    u8 unused:7;
-    u8 hookshot;
-    u8 shield;
-    u8 ocarina;
+    u16 rutoLetter:1;
+    u16 hookshot:2;
+    u16 shield:2;
+    u16 ocarina:2;
+    u16 bombSlot:3;
+    u16 mmBombBagUpgrade:2;
+    u16 unused:4;
     u8 bottleAdultSlot;
     u8 bottleChildSlot;
 }
 OotExtraItems;
+
+typedef struct
+{
+    s8 kegAmmo;
+    s8 mmBombAmmo;
+    s8 unused1;
+    s8 unused2;
+}
+OotExtraAmmo;
 
 typedef struct
 {
@@ -464,6 +475,7 @@ typedef struct ALIGNED(16)
     u8  scrubs[8];
     u8  sr[16];
     OotRespawnData fwRespawnDungeonEntrance[2];
+    s16 powderKegTimer;
     u8  hasElegy:1;
     u8  chateauActive:1;
     u8  hasSongHealing:1;

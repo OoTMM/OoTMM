@@ -152,3 +152,85 @@ s32 Interface_CustomIsRestrictionCategoryBottle(u8 item)
     }
     return 0;
 }
+
+const static u8* gAmmoDigit0Tex = (u8*)0x020035c0;
+
+void Interface_CustomDrawAmmoCount(PlayState* play, s16 button, s16 alpha) {
+    s16 i;
+    s16 ammo;
+    s16 maxAmmo;
+
+    OPEN_DISPS(play->state.gfxCtx);
+
+    i = gSaveContext.save.info.equips.buttonItems[button];
+
+    switch (i)
+    {
+    case ITEM_OOT_POWDER_KEG:
+        ammo = gOotExtraAmmo.kegAmmo;
+        maxAmmo = 1;
+        break;
+    case ITEM_OOT_BOMBCHU_10:
+        ammo = gSave.info.inventory.ammo[ITS_OOT_BOMBCHU];
+        maxAmmo = gMaxBombchuOot;
+        break;
+    case ITEM_OOT_BOMB_MM:
+        ammo = gOotExtraAmmo.mmBombAmmo;
+        maxAmmo = kMaxBombs[gOotExtraItems.mmBombBagUpgrade];
+        break;
+    default:
+        return;
+    }
+
+    gDPPipeSync(OVERLAY_DISP++);
+
+    if (button == 0 && play->sceneId == SCE_OOT_BOMBCHU_BOWLING_ALLEY && Flags_GetSwitch(play, 0x38)) {
+        ammo = play->bombchuBowlingStatus;
+        if (ammo < 0) {
+            ammo = 0;
+        }
+    } else if (ammo == maxAmmo) {
+        gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 120, 255, 0, alpha);
+    }
+
+    if (ammo == 0) {
+        gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 100, 100, 100, alpha);
+    }
+
+    i = 0;
+    while (ammo >= 10) {
+        i++;
+        ammo -= 10;
+    }
+
+    if (i != 0) {
+        OVERLAY_DISP = Gfx_TextureIA8(OVERLAY_DISP, ((u8*)gAmmoDigit0Tex + ((8 * 8) * i)), 8, 8,
+                                        R_ITEM_AMMO_X(button), R_ITEM_AMMO_Y(button), 8, 8, 1 << 10, 1 << 10);
+    }
+
+    OVERLAY_DISP = Gfx_TextureIA8(OVERLAY_DISP, ((u8*)gAmmoDigit0Tex + ((8 * 8) * ammo)), 8, 8,
+                                    R_ITEM_AMMO_X(button) + 6, R_ITEM_AMMO_Y(button), 8, 8, 1 << 10, 1 << 10);
+
+    CLOSE_DISPS();
+}
+
+void Interface_DrawAmmoCountWrapper(PlayState* play, s16 button, s16 alpha)
+{
+    s16 item = gSaveContext.save.info.equips.buttonItems[button];
+    switch (item)
+    {
+    case ITEM_OOT_POWDER_KEG:
+    case ITEM_OOT_BOMBCHU_10:
+    case ITEM_OOT_BOMB_MM:
+        Interface_CustomDrawAmmoCount(play, button, alpha);
+        break;
+    default:
+        Interface_DrawAmmoCount(play, button, alpha);
+        break;
+    }
+}
+
+PATCH_CALL(0x80075ea0, Interface_DrawAmmoCountWrapper)
+PATCH_CALL(0x800761c0, Interface_DrawAmmoCountWrapper)
+PATCH_CALL(0x80076284, Interface_DrawAmmoCountWrapper)
+PATCH_CALL(0x80076348, Interface_DrawAmmoCountWrapper)

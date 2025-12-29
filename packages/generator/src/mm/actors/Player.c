@@ -101,6 +101,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_TUNIC_ZORA,
     PLAYER_CUSTOM_IA_HAMMER,
     PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER,
+    PLAYER_CUSTOM_IA_BOMB_OOT,
 };
 
 static u8 sMagicSpellCosts[] =
@@ -1796,7 +1797,13 @@ void Player_UseItem(PlayState* play, Player* this, s16 itemId)
 /* Hammer Stuff */
 
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
-    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
+        return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        return 7; /* PLAYER_MODELGROUP_EXPLOSIVES */
+    }
 
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
     s32 modelGroup = sActionModelGroups[itemAction];
@@ -1818,8 +1825,14 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     void (*Player_SetUpperAction)(PlayState* play, Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
     s8 upperItemAction = player->heldItemAction;
 
-    if (upperItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    switch (upperItemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
         upperItemAction = PLAYER_IA_SWORD_TWO_HANDED;
+        break;
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        upperItemAction = PLAYER_IA_BOMB;
+        break;
     }
 
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
@@ -1829,8 +1842,14 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
 void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 itemAction) {
     PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
 
-    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
         itemAction = PLAYER_IA_SWORD_TWO_HANDED;
+        break;
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        itemAction = PLAYER_IA_BOMB;
+        break;
     }
 
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerItemActionInitFuncs array */
@@ -2361,3 +2380,114 @@ s32 Player_ItemExchangeAnimate(PlayState* play, SkelAnime* skelAnime)
 }
 
 PATCH_CALL(0x80853a9c, Player_ItemExchangeAnimate)
+
+Actor* Player_SpawnExplosive(ActorContext* actorCtx, Player* player, PlayState* play, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params)
+{
+    switch (player->heldItemAction)
+    {
+    case 0xe: /* PLAYER_IA_BOMB */
+        actorId = ACTOR_EN_BOM;
+        break;
+    case 0xf: /* PLAYER_IA_POWDER_KEG */
+        actorId = ACTOR_EN_BOM;
+        if (gSaveContext.powderKegTimer == 0)
+        {
+            gSaveContext.powderKegTimer = 200;
+        }
+        rotX = 1;
+        break;
+    case 0x10: /* PLAYER_IA_BOMBCHU */
+        actorId = ACTOR_EN_BOM_CHU;
+        break;
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        actorId = ACTOR_EN_BOM_OOT;
+        break;
+    }
+    return Actor_SpawnAsChild(actorCtx, &player->actor, play, actorId, posX, posY, posZ, rotX, rotY, rotZ, params);
+}
+
+PATCH_CALL(0x8082f700, Player_SpawnExplosive)
+
+s32 Player_ShouldExplosiveError(Player* this, s32 itemAction)
+{
+    s32 ammo;
+    switch (itemAction)
+    {
+    case 0xe: /* PLAYER_IA_BOMB */
+        ammo = gSaveContext.save.info.inventory.ammo[ITS_MM_BOMBS];
+        break;
+    case 0xf: /* PLAYER_IA_POWDER_KEG */
+        ammo = gSaveContext.save.info.inventory.ammo[ITS_MM_KEG];
+        break;
+    case 0x10: /* PLAYER_IA_BOMBCHU */
+        ammo = gSaveContext.save.info.inventory.ammo[ITS_MM_BOMBCHU];
+        break;
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        ammo = gMmExtraAmmo.ootBombAmmo;
+        break;
+    default:
+        return 0;
+    }
+    return ammo == 0 || gPlay->actorCtx.actors[ACTORCAT_EXPLOSIVE].count >= 3;
+}
+
+/* Original is no longer uses the return value the same way. */
+s32 Player_ActionToExplosive(Player* this, s32 itemAction)
+{
+    switch (itemAction)
+    {
+    case 0xe: /* PLAYER_IA_BOMB */
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        return 0;
+    case 0xf: /* PLAYER_IA_POWDER_KEG */
+        return 1;
+    case 0x10: /* PLAYER_IA_BOMBCHU */
+        return 2;
+    default:
+        return -1;
+    }
+}
+
+PATCH_FUNC(0x8012422c, Player_ActionToExplosive)
+
+void Player_DeductExplosiveAmmo(Player* player)
+{
+    switch (player->itemAction)
+    {
+    case 0xe: /* PLAYER_IA_BOMB */
+        Inventory_ChangeAmmo(ITEM_MM_BOMB, -1);
+        break;
+    case 0xf: /* PLAYER_IA_POWDER_KEG */
+        Inventory_ChangeAmmo(ITEM_MM_POWDER_KEG, -1);
+        break;
+    case 0x10: /* PLAYER_IA_BOMBCHU */
+        Inventory_ChangeAmmo(ITEM_MM_BOMBCHU, -1);
+        break;
+    case PLAYER_CUSTOM_IA_BOMB_OOT:
+        DECR(gMmExtraAmmo.ootBombAmmo);
+        break;
+    }
+}
+
+s32 Player_ShouldDamageRecoil(Player* this)
+{
+    if (this->shieldQuad.base.acFlags & AC_BOUNCED || this->shieldCylinder.base.acFlags & AC_BOUNCED)
+    {
+        return 1;
+    }
+
+    if (this->invincibilityTimer < 0 && this->cylinder.base.acFlags & AC_HIT)
+    {
+        if (this->cylinder.base.ac != NULL && this->cylinder.base.ac->id == ACTOR_EN_BOM_OOT)
+        {
+            return (this->cylinder.elem.atHit != NULL && (this->cylinder.elem.atHit->atFlags & DMG_UNBLOCKABLE));
+        }
+
+        if (this->cylinder.elem.acHitElem != NULL && this->cylinder.elem.acHitElem->atDmgInfo.dmgFlags != DMG_UNBLOCKABLE)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}

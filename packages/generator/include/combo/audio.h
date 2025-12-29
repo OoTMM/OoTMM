@@ -50,12 +50,15 @@ void Audio_ClearSariaBgm(void);
 void Audio_ClearSariaBgm2(void);
 void Audio_ClearSariaBgmAtPos(Vec3f* pos);
 void Audio_PlaySariaBgm(Vec3f* pos, u16 seqId, u16 distMax);
+void Audio_PlaySfx_AtPosWithReverb(Vec3f* pos, u16 sfxId, s8 reverbAdd);
 void Audio_PlaySfxRiver(Vec3f* pos, f32 freqScale);
 void Audio_LowerMainBgmVolume(u8 volume);
 void Audio_UpdateMalonSinging(f32 dist, u16 seqId);
 void Audio_ToggleMalonSinging(u8 malonSingingDisabled);
 void Audio_SetMainBgmTempoFreqAfterFanfare(float scaleTempoAndFreq, u8 duration);
+void Audio_PlaySfx_AtPosWithChannelIO(Vec3f* pos, u16 sfxId, u8 ioData);
 extern u8* gFrogsSongPtr;
+#define AudioSfx_SetChannelIO func_800F4C58
 #endif
 
 #endif

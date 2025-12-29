@@ -3,17 +3,18 @@
   exits:
     "GLOBAL": "true"
     "Death Mountain Summit": "true"
-    "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (can_use_sword || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && can_jump_slash) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
     "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
     "Fairy Fountain Double Magic": "glitch_megaflip"
     "Death Mountain Crater Bottom Adult Rupees": "is_adult"
   events:
     #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
-    BOMBS_OR_BOMBCHU: "has_tunic_goron_strict || can_hammer"
+    BOMBS_OR_BOMBCHU: "has_tunic_goron_strict || can_hammer_or_keg"
     RUPEES: "has_tunic_goron_strict || has_explosives_or_hammer"
     ARROWS: "has_tunic_goron_strict || has_explosives_or_hammer"
     MAGIC: "has_tunic_goron_strict || has_explosives_or_hammer"
+    RED_BOULDER_BROKEN: "can_use_keg"
   locations:
     "Death Mountain Crater GS Crate": "gs && is_child && can_damage_skull"
     "Death Mountain Crater Alcove HP": "true"
@@ -36,13 +37,13 @@
   exits:
     "GLOBAL": "true"
     "Darunia Chamber": "true"
-    "Death Mountain Crater Warp": "(can_hookshot || has_hover_boots) && (is_adult || has_tunic_goron_strict || can_hammer || hookshot_anywhere || climb_anywhere)" #child cannot do anything at the warp from the top within 24 seconds
+    "Death Mountain Crater Warp": "(can_hookshot || has_hover_boots) && (is_adult || has_tunic_goron_strict || can_hammer_or_keg || hookshot_anywhere || climb_anywhere)" #child cannot do anything at the warp from the top within 24 seconds
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
-    "Death Mountain Crater Scrub Grotto": "can_hammer"
-    "Fairy Fountain Double Magic": "can_hammer || climb_anywhere || hookshot_anywhere"
-    "Death Mountain Crater Red Boulders": "can_hammer"
+    "Death Mountain Crater Scrub Grotto": "can_hammer_or_keg"
+    "Fairy Fountain Double Magic": "can_hammer_or_keg || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Crater Red Boulders": "can_hammer_or_keg"
   events:
-    RED_BOULDER_BROKEN: "is_adult && can_hammer"
+    RED_BOULDER_BROKEN: "is_adult && can_hammer_or_keg"
   locations:
     "Death Mountain Crater Volcano HP": "(trick(OOT_VOLCANO_HOVERS) && (has_hover_boots || hookshot_anywhere)) || glitch_megaflip"
     "Death Mountain Crater Pot 1": "true"

@@ -45,6 +45,12 @@ const u8 kOotHookshot[] = {
     ITEM_OOT_LONGSHOT,
 };
 
+const u8 kOotBomb[] = {
+    ITEM_OOT_BOMB,
+    ITEM_OOT_POWDER_KEG,
+    ITEM_OOT_BOMB_MM,
+};
+
 const u8 kMmTrade1[] = {
     ITEM_MM_SPELL_FIRE,
     ITEM_MM_MOON_TEAR,
@@ -83,6 +89,11 @@ const u8 kMmOcarina[] = {
 const u8 kMmGFSHammer[] = {
     ITEM_MM_GREAT_FAIRY_SWORD,
     ITEM_MM_HAMMER,
+};
+
+const u8 kMmBomb[] = {
+    ITEM_MM_BOMB,
+    ITEM_MM_BOMB_OOT,
 };
 
 /* Return value is used to index gVertex */
@@ -129,6 +140,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTableSize = ARRAY_COUNT(kMmGFSHammer);
         result = 5;
         break;
+    case ITS_MM_BOMBS:
+        *outFlags = gMmExtraItems.bombSlot;
+        *outTable = kMmBomb;
+        *outTableSize = ARRAY_COUNT(kMmBomb);
+        result = 6;
+        break;
 #else
     case ITS_OOT_TRADE_ADULT:
         *outFlags = gOotExtraTrade.adult;
@@ -153,6 +170,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kOotOcarina;
         *outTableSize = ARRAY_COUNT(kOotOcarina);
         result = 3;
+        break;
+    case ITS_OOT_BOMBS:
+        *outFlags = gOotExtraItems.bombSlot;
+        *outTable = kOotBomb;
+        *outTableSize = ARRAY_COUNT(kOotBomb);
+        result = 4;
         break;
 #endif
     default:

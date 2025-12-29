@@ -19,6 +19,7 @@ DrawGi;
 extern const DrawGi kDrawGi[];
 
 /* Vanilla draw funcs */
+void DrawGi_Table(PlayState*, s16);
 void DrawGi_Opa0_Xlu1(PlayState*, s16);
 void DrawGi_Opa0_Xlu12(PlayState*, s16);
 void DrawGi_Opa0(PlayState*, s16);

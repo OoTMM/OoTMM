@@ -469,6 +469,23 @@
 - { id: OOT_SEAHORSE2, item: OOT_SEAHORSE, type: NORMAL, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
 - { id: OOT_BOTTLED_GOLD_DUST, item: OOT_GOLD_DUST, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C1>bottle of Gold Dust" }
 - { id: OOT_BOTTLE_CHATEAU, item: OOT_CHATEAU, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLE_CHATEAU, object: [mm, 0x0227], name: "a bottle of <C0>Chateau Romani" }
+- { id: OOT_POWDER_KEG, item: OOT_POWDER_KEG, type: MAJOR, add: [OOT_KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
+- { id: OOT_BOMB_BAG_MM, item: OOT_BOMB_BAG_MM, type: MAJOR, add: [OOT_BOMB_BAG_MM, 1], flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag (MM)" }
+- { id: OOT_BOMB_BAG2_MM, item: OOT_BOMB_BAG2_MM, type: MAJOR, add: [OOT_BOMB_BAG_MM, 2], flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag (MM)" }
+- { id: OOT_BOMB_BAG3_MM, item: OOT_BOMB_BAG3_MM, type: MAJOR, add: [OOT_BOMB_BAG_MM, 3], flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag (MM)" }
+- { id: OOT_BOMB_MM, item: OOT_BOMB_MM, type: MINOR, add: [OOT_BOMBS_MM, 1], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "a <C0>Bomb (MM)" }
+- { id: OOT_BOMBS_MM_5, item: OOT_BOMBS_MM_5, type: MINOR, add: [OOT_BOMBS_MM, 5], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>5 Bombs (MM)" }
+- { id: OOT_BOMBS_MM_10, item: OOT_BOMBS_MM_10, type: MINOR, add: [OOT_BOMBS_MM, 10], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>10 Bombs (MM)" }
+- { id: OOT_BOMBS_MM_20, item: OOT_BOMBS_MM_20, type: MINOR, add: [OOT_BOMBS_MM, 20], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>20 Bombs (MM)" }
+- { id: OOT_BOMBS_MM_30, item: OOT_BOMBS_MM_30, type: MINOR, add: [OOT_BOMBS_MM, 30], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>30 Bombs (MM)" }
+- { id: OOT_BOMB_BAG_OOT, item: OOT_BOMB_BAG, type: MAJOR, add: [OOT_BOMB_BAG, 1], flags: 0x80, draw: BOMB_BAG, object: [oot, 0x00bf], name: "the <C1>Bomb Bag (OoT)" }
+- { id: OOT_BOMB_BAG2_OOT, item: OOT_BOMB_BAG2, type: MAJOR, add: [OOT_BOMB_BAG, 2], flags: 0x80, draw: BOMB_BAG2, object: [oot, 0x00bf], name: "the <C1>Big Bomb Bag (OoT)" }
+- { id: OOT_BOMB_BAG3_OOT, item: OOT_BOMB_BAG3, type: MAJOR, add: [OOT_BOMB_BAG, 3], flags: 0x80, draw: BOMB_BAG3, object: [oot, 0x00bf], name: "the <C1>Biggest Bomb Bag (OoT)" }
+- { id: OOT_BOMB_OOT, item: OOT_BOMB, type: MINOR, add: [OOT_BOMBS, 1], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "a <C0>Bomb (OoT)" }
+- { id: OOT_BOMBS_OOT_5, item: OOT_BOMBS_5, type: MINOR, add: [OOT_BOMBS, 5], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>5 Bombs (OoT)" }
+- { id: OOT_BOMBS_OOT_10, item: OOT_BOMBS_10, type: MINOR, add: [OOT_BOMBS, 10], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>10 Bombs (OoT)" }
+- { id: OOT_BOMBS_OOT_20, item: OOT_BOMBS_20, type: MINOR, add: [OOT_BOMBS, 20], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>20 Bombs (OoT)" }
+- { id: OOT_BOMBS_OOT_30, item: OOT_BOMBS_30, type: MINOR, add: [OOT_BOMBS, 30], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>30 Bombs (OoT)" }
 - { id: OOT_TRAP_ICE, type: MINOR, add: [TRAP, 0x00], flags: 0x80, draw: [TRAP, 0x00], name: "an <COLOR_BLUE>Ice Trap" }
 - { id: OOT_TRAP_FIRE, type: MINOR, add: [TRAP, 0x01], flags: 0x80, draw: [TRAP, 0x01], name: "a <COLOR_BLUE>Fire Trap" }
 - { id: OOT_TRAP_SHOCK, type: MINOR, add: [TRAP, 0x02], flags: 0x80, object: EFFECT_SHOCK, draw: [TRAP, 0x02], name: "a <COLOR_BLUE>Shock Trap" }
@@ -505,9 +522,9 @@
 - { id: MM_BOMBS_30, item: MM_BOMBS_30, type: MINOR, add: [MM_BOMBS, 30], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>30 Bombs" }
 - { id: MM_STICK, item: MM_STICK, type: MINOR, add: [MM_STICKS, 1], flags: 0x0d, draw: DEKU_STICK, object: [mm, 0x009f], name: "a <C0>Deku Stick" }
 - { id: MM_BOMBCHU_10, item: MM_BOMBCHU_10, type: NORMAL, add: [MM_BOMBCHU, 10], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>10 Bombchu" }
-- { id: MM_BOMB_BAG, item: MM_BOMB_BAG, type: MAJOR, add: [MM_BOMB_BAG, 1], flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag" }
-- { id: MM_BOMB_BAG2, item: MM_BOMB_BAG2, type: MAJOR, add: [MM_BOMB_BAG, 2], flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag" }
-- { id: MM_BOMB_BAG3, item: MM_BOMB_BAG3, type: MAJOR, add: [MM_BOMB_BAG, 3], flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag" }
+- { id: MM_BOMB_BAG, item: MM_BOMB_BAG, type: MAJOR, add: [MM_BOMB_BAG, 1], flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag (MM)" }
+- { id: MM_BOMB_BAG2, item: MM_BOMB_BAG2, type: MAJOR, add: [MM_BOMB_BAG, 2], flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag (MM)" }
+- { id: MM_BOMB_BAG3, item: MM_BOMB_BAG3, type: MAJOR, add: [MM_BOMB_BAG, 3], flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag (MM)" }
 - { id: MM_ARROWS_10, item: MM_ARROWS_10, type: MINOR, add: [MM_ARROWS, 10], flags: 0x48, draw: ARROW, object: [mm, 0x00af], name: "<C0>10 Arrows" }
 - { id: MM_ARROWS_30, item: MM_ARROWS_30, type: MINOR, add: [MM_ARROWS, 30], flags: 0x49, draw: ARROW2, object: [mm, 0x00af], name: "<C0>30 Arrows" }
 - { id: MM_ARROWS_40, item: MM_ARROWS_40, type: MINOR, add: [MM_ARROWS, 40], flags: 0x4a, draw: ARROW3, object: [mm, 0x00af], name: "<C0>40 Arrows" }
@@ -533,7 +550,7 @@
 - { id: MM_SHIELD_MIRROR, item: MM_SHIELD_MIRROR, type: MAJOR, add: [MM_SHIELD, 3], flags: 0xa0, draw: MM_SHIELD_MIRROR, object: [mm, 0x00c3], name: "the <C1>Mirror Shield" }
 - { id: MM_PROGRESSIVE_SHIELD_DEKU, type: MAJOR, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: [OOT_SHIELD_DEKU, 1], object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
 - { id: MM_PROGRESSIVE_SHIELD_HERO, type: MAJOR, add: [MM_SHIELD, 0x102], flags: 0xa0, draw: [MM_SHIELD_HERO, 1], object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
-- { id: MM_POWDER_KEG, item: MM_POWDER_KEG, type: MAJOR, add: [KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
+- { id: MM_POWDER_KEG, item: MM_POWDER_KEG, type: MAJOR, add: [MM_KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
 - { id: MM_MAGIC_BEAN, item: MM_MAGIC_BEAN, type: MAJOR, add: [MM_BEANS, 1], flags: 0x80, draw: MAGIC_BEAN, object: [mm, 0x00c6], name: "a <C0>Magic Bean" }
 - { id: MM_BOMBCHU, item: MM_BOMBCHU_ALT, type: NORMAL, add: [MM_BOMBCHU, 1], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "a <C1>Bombchu" }
 - { id: MM_SWORD_KOKIRI, item: MM_SWORD_KOKIRI, type: MAJOR, add: [MM_SWORD, 1], flags: 0xa0, draw: MM_SWORD_KOKIRI, object: [mm, 0x0148], name: "the <C1>Kokiri Sword" }
@@ -853,6 +870,22 @@
 - { id: MM_BOTTLE_RUTO_LETTER, item: MM_RUTO_LETTER, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: OOT_BOTTLE_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
 - { id: MM_BOTTLE_BLUE_FIRE, item: MM_BLUE_FIRE, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_BLUE_FIRE, object: [oot, 0x00c6], name: "a <C1>Bottle of Blue Fire" }
 - { id: MM_BLUE_FIRE, item: MM_BLUE_FIRE, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: OOT_BLUE_FIRE, object: [oot, 0x0173], name: "some <C0>Blue Fire" }
+- { id: MM_BOMB_BAG_MM, item: MM_BOMB_BAG, type: MAJOR, add: [MM_BOMB_BAG, 1], flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag (MM)" }
+- { id: MM_BOMB_BAG2_MM, item: MM_BOMB_BAG2, type: MAJOR, add: [MM_BOMB_BAG, 2], flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag (MM)" }
+- { id: MM_BOMB_BAG3_MM, item: MM_BOMB_BAG3, type: MAJOR, add: [MM_BOMB_BAG, 3], flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag (MM)" }
+- { id: MM_BOMB_MM, item: MM_BOMB, type: MINOR, add: [MM_BOMBS, 1], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "a <C0>Bomb (MM)" }
+- { id: MM_BOMBS_MM_5, item: MM_BOMBS_5, type: MINOR, add: [MM_BOMBS, 5], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>5 Bombs (MM)" }
+- { id: MM_BOMBS_MM_10, item: MM_BOMBS_10, type: MINOR, add: [MM_BOMBS, 10], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>10 Bombs (MM)" }
+- { id: MM_BOMBS_MM_20, item: MM_BOMBS_20, type: MINOR, add: [MM_BOMBS, 20], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>20 Bombs (MM)" }
+- { id: MM_BOMBS_MM_30, item: MM_BOMBS_30, type: MINOR, add: [MM_BOMBS, 30], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>30 Bombs (MM)" }
+- { id: MM_BOMB_BAG_OOT, item: MM_BOMB_BAG_OOT, type: MAJOR, add: [MM_BOMB_BAG_OOT, 1], flags: 0x80, draw: BOMB_BAG, object: [oot, 0x00bf], name: "the <C1>Bomb Bag (OoT)" }
+- { id: MM_BOMB_BAG2_OOT, item: MM_BOMB_BAG2_OOT, type: MAJOR, add: [MM_BOMB_BAG_OOT, 2], flags: 0x80, draw: BOMB_BAG2, object: [oot, 0x00bf], name: "the <C1>Big Bomb Bag (OoT)" }
+- { id: MM_BOMB_BAG3_OOT, item: MM_BOMB_BAG3_OOT, type: MAJOR, add: [MM_BOMB_BAG_OOT, 3], flags: 0x80, draw: BOMB_BAG3, object: [oot, 0x00bf], name: "the <C1>Biggest Bomb Bag (OoT)" }
+- { id: MM_BOMB_OOT, item: MM_BOMB_OOT, type: MINOR, add: [MM_BOMBS_OOT, 1], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "a <C0>Bomb (OoT)" }
+- { id: MM_BOMBS_OOT_5, item: MM_BOMBS_OOT_5, type: MINOR, add: [MM_BOMBS_OOT, 5], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>5 Bombs (OoT)" }
+- { id: MM_BOMBS_OOT_10, item: MM_BOMBS_OOT_10, type: MINOR, add: [MM_BOMBS_OOT, 10], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>10 Bombs (OoT)" }
+- { id: MM_BOMBS_OOT_20, item: MM_BOMBS_OOT_20, type: MINOR, add: [MM_BOMBS_OOT, 20], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>20 Bombs (OoT)" }
+- { id: MM_BOMBS_OOT_30, item: MM_BOMBS_OOT_30, type: MINOR, add: [MM_BOMBS_OOT, 30], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "<C0>30 Bombs (OoT)" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }

@@ -137,5 +137,19 @@ const BOTTLES: ItemSharedDef[] = [
   { shared: Items.SHARED_FISH, oot: Items.OOT_FISH, mm: Items.MM_FISH },
 ]
 
+const SEPARATE_BOMBS: ItemSharedDef[] = [
+  { shared: Items.SHARED_BOMB_BAG_MM,   oot: Items.OOT_BOMB_BAG_MM,   mm: Items.MM_BOMB_BAG_MM },
+  { shared: Items.SHARED_BOMB_BAG_OOT,  oot: Items.OOT_BOMB_BAG_OOT,  mm: Items.MM_BOMB_BAG_OOT },
+  { shared: Items.SHARED_BOMB_MM,       oot: Items.OOT_BOMB_MM,       mm: Items.MM_BOMB_MM },
+  { shared: Items.SHARED_BOMBS_MM_5,    oot: Items.OOT_BOMBS_MM_5,    mm: Items.MM_BOMBS_MM_5 },
+  { shared: Items.SHARED_BOMBS_MM_10,   oot: Items.OOT_BOMBS_MM_10,   mm: Items.MM_BOMBS_MM_10 },
+  { shared: Items.SHARED_BOMBS_MM_20,   oot: Items.OOT_BOMBS_MM_20,   mm: Items.MM_BOMBS_MM_20 },
+  { shared: Items.SHARED_BOMBS_MM_30,   oot: Items.OOT_BOMBS_MM_30,   mm: Items.MM_BOMBS_MM_30 },
+  { shared: Items.SHARED_BOMB_OOT,      oot: Items.OOT_BOMB_OOT,      mm: Items.MM_BOMB_OOT },
+  { shared: Items.SHARED_BOMBS_OOT_5,   oot: Items.OOT_BOMBS_OOT_5,   mm: Items.MM_BOMBS_OOT_5 },
+  { shared: Items.SHARED_BOMBS_OOT_10,  oot: Items.OOT_BOMBS_OOT_10,  mm: Items.MM_BOMBS_OOT_10 },
+  { shared: Items.SHARED_BOMBS_OOT_20,  oot: Items.OOT_BOMBS_OOT_20,  mm: Items.MM_BOMBS_OOT_20 },
+  { shared: Items.SHARED_BOMBS_OOT_30,  oot: Items.OOT_BOMBS_OOT_30,  mm: Items.MM_BOMBS_OOT_30 },
+]
 
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES };
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES, SEPARATE_BOMBS };

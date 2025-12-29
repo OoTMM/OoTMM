@@ -340,6 +340,10 @@ PATCH_START 0x8082886c
   nop
 PATCH_END
 
+PATCH_START 0x8082f170
+.int 0
+PATCH_END
+
 PATCH_START 0x8009a0a0
   jal   KaleidoScope_UpdateWrapper
    move a1, t9

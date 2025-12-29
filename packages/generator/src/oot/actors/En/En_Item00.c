@@ -95,37 +95,72 @@ static int fixDropBomb(int dropId)
 {
     int hasChuBag;
     int hasBombBag;
+    int hasBombBagMm;
     u8  bombCount;
+    u8  bombCountMm;
     u8  bombchuCount;
 
     hasChuBag = (gSharedCustomSave.bombchuBagOot > 0);
-    hasBombBag = (gOotSave.info.inventory.upgrades.bombBag > 0);
+    hasBombBag = (gSave.info.inventory.upgrades.bombBag > 0);
+    hasBombBagMm = (gOotExtraItems.bombSlot & 4);
 
-    if (!hasChuBag)
+    if (!hasChuBag && !hasBombBagMm)
     {
         if (!hasBombBag)
             return -1;
         return dropId;
     }
 
-    if (!hasBombBag)
+    if (!hasBombBag && !hasBombBagMm)
         return ITEM00_BOMBCHU;
 
-    /* We have both, check for ammo */
-    bombCount = gOotSave.info.inventory.ammo[ITS_OOT_BOMBS];
-    bombchuCount = gOotSave.info.inventory.ammo[ITS_OOT_BOMBCHU];
+    if (!hasBombBag && !hasChuBag)
+        return ITEM00_BOMBS_5_ALT;
+
+    /* We have at least two, check for ammo */
+    bombCount = hasBombBag ? gSave.info.inventory.ammo[ITS_OOT_BOMBS] : 15;
+    bombchuCount = hasChuBag ? gSave.info.inventory.ammo[ITS_OOT_BOMBCHU] : 15;
+    bombCountMm = hasBombBagMm ? gOotExtraAmmo.mmBombAmmo : 15;
 
     /* Low on ammo */
-    if (bombCount < 15 || bombchuCount < 15)
+    if (bombCount < 15 || bombchuCount < 15 || bombCountMm < 15)
     {
-        if (bombchuCount < bombCount)
+        if (bombchuCount < bombCount && bombchuCount < bombCountMm)
             return ITEM00_BOMBCHU;
+        if (bombCountMm < bombCount && bombCountMm < bombchuCount)
+            return ITEM00_BOMBS_5_ALT;
         return dropId;
     }
 
     /* Not low, return at random */
-    if (Rand_ZeroOne() < 0.5f)
+
+    if (!hasBombBag)
+    {
+        if (Rand_ZeroOne() < 0.5f)
+            return ITEM00_BOMBCHU;
+        return ITEM00_BOMBS_5_ALT;
+    }
+
+    if (!hasChuBag)
+    {
+        if (Rand_ZeroOne() < 0.5f)
+            return ITEM00_BOMBS_5_ALT;
+        return dropId;
+    }
+
+    if (!hasBombBagMm)
+    {
+        if (Rand_ZeroOne() < 0.5f)
+            return ITEM00_BOMBCHU;
+        return dropId;
+    }
+
+    f32 rand = Rand_ZeroFloat(3.0f);
+
+    if (rand < 1.0f)
         return ITEM00_BOMBCHU;
+    if (rand < 2.0f)
+        return ITEM00_BOMBS_5_ALT;
     return dropId;
 }
 
@@ -227,3 +262,8 @@ void EnItem00_DrawShieldHylian(PlayState* play)
 }
 
 PATCH_CALL(0x80013110, EnItem00_DrawShieldHylian);
+
+void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play)
+{
+    comboAddItemRaw(play, GI_OOT_BOMBS_MM_5);
+}

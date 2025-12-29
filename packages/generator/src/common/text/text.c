@@ -206,6 +206,43 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOMBS_20:
     case GI_MM_BOMBS_30:
         return !Config_Flag(CFG_SHARED_BOMB_BAGS);
+    case GI_OOT_BOMB_BAG_OOT:
+    case GI_OOT_BOMB_BAG2_OOT:
+    case GI_OOT_BOMB_BAG3_OOT:
+    case GI_OOT_BOMB_OOT:
+    case GI_OOT_BOMBS_OOT_5:
+    case GI_OOT_BOMBS_OOT_10:
+    case GI_OOT_BOMBS_OOT_20:
+    case GI_OOT_BOMBS_OOT_30:
+    case GI_MM_BOMB_BAG_OOT:
+    case GI_MM_BOMB_BAG2_OOT:
+    case GI_MM_BOMB_BAG3_OOT:
+    case GI_MM_BOMB_OOT:
+    case GI_MM_BOMBS_OOT_5:
+    case GI_MM_BOMBS_OOT_10:
+    case GI_MM_BOMBS_OOT_20:
+    case GI_MM_BOMBS_OOT_30:
+        return !Config_Flag(CFG_SHARED_BOMB_BAGS_OOT);
+    case GI_OOT_BOMB_BAG_MM:
+    case GI_OOT_BOMB_BAG2_MM:
+    case GI_OOT_BOMB_BAG3_MM:
+    case GI_OOT_BOMB_MM:
+    case GI_OOT_BOMBS_MM_5:
+    case GI_OOT_BOMBS_MM_10:
+    case GI_OOT_BOMBS_MM_20:
+    case GI_OOT_BOMBS_MM_30:
+    case GI_MM_BOMB_BAG_MM:
+    case GI_MM_BOMB_BAG2_MM:
+    case GI_MM_BOMB_BAG3_MM:
+    case GI_MM_BOMB_MM:
+    case GI_MM_BOMBS_MM_5:
+    case GI_MM_BOMBS_MM_10:
+    case GI_MM_BOMBS_MM_20:
+    case GI_MM_BOMBS_MM_30:
+        return !Config_Flag(CFG_SHARED_BOMB_BAGS_MM);
+    case GI_MM_POWDER_KEG:
+    case GI_OOT_POWDER_KEG:
+        return !Config_Flag(CFG_SHARED_POWDER_KEG);
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
     case GI_OOT_MAGIC_JAR_SMALL:

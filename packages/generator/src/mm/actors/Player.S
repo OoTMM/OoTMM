@@ -1394,3 +1394,54 @@ PATCH_END
 PATCH_START 0x8085F510
   .int 0
 PATCH_END
+
+PATCH_START 0x80831c5c
+  jal     Player_ShouldExplosiveError
+   sw     a2, 0x003c (sp)
+  beqz    v0, .+0x5c
+   lw     a2, 0x003c (sp)
+  b       .+0x44
+   nop
+PATCH_END
+
+PATCH_START 0x8082f7b0
+  or      a0, s0, zero
+  jal     Player_DeductExplosiveAmmo
+PATCH_END
+
+Player_ShouldDamageRecoil_Hook:
+  addiu   sp, sp, -0x18
+  sw      ra, 0x0014 (sp)
+  sw      a0, 0x0018 (sp)
+  jal     Player_ShouldDamageRecoil
+   or     a0, s0, zero
+  lw      a0, 0x0018 (sp)
+  lw      ra, 0x0014 (sp)
+  jr      ra
+  addiu   sp, sp, 0x18
+
+PATCH_START 0x808347d0
+  jal     Player_ShouldDamageRecoil_Hook
+   nop
+  lb      v1, 0x0d5c (s0)
+  beqzl   v0, .+0x198
+   lbu    t1, 0x0d6b (s0)
+  or      a1, s0, zero
+  addiu   a2, zero, 0x00b4
+  addiu   a3, zero, 0x0014
+  addiu   t8, zero, 0x0064
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END

@@ -415,6 +415,39 @@ export class CustomObjectsBuilder {
     return { name: 'OCEFF_WIPE5', ...editor.build() };
   }
 
+  private async makePowderKeg(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const ovl = await this.getFile('mm', 'actors/ovl_En_Bom');
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+    editor.loadFile(0x80870DB0, ovl);
+    editor.submitListAddr(0x80870DB0 + 0x21e8); /* gPowderKegFuseMaterialDL */
+    editor.submitListAddr(0x80870DB0 + 0x2270); /* gPowderKegFuseModel1DL */
+    editor.submitListAddr(0x80870DB0 + 0x2290); /* gPowderKegFuseModel2DL */
+    editor.submitListAddr(0x80870DB0 + 0x2ef0); /* gPowderKegBarrelDL */
+    editor.submitListAddr(0x80870DB0 + 0x3548); /* gPowderKegGoronSkullDL */
+
+    return { name: 'POWDER_KEG', ...editor.build() }
+  }
+
+  private async makeClearTag(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const ovl = await this.getFile('mm', 'actors/ovl_En_Clear_Tag');
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+    editor.loadFile(0x80947F60, ovl);
+    editor.submitListAddr(0x80947F60 + 0x3130); /* gClearTagDebrisEffectMaterialDL */
+    editor.submitListAddr(0x80947F60 + 0x31b0); /* gClearTagDebrisEffectDL */
+    editor.submitListAddr(0x80947F60 + 0x37f8); /* gClearTagFireEffectMaterialDL */
+    editor.submitListAddr(0x80947F60 + 0x38a0); /* gClearTagFireEffectDL */
+    editor.submitListAddr(0x80947F60 + 0x4900); /* gClearTagFlashEffectDL */
+    editor.submitListAddr(0x80947F60 + 0x4bb0); /* gClearTagFlashEffectGroundDL */
+    editor.submitListAddr(0x80947F60 + 0x5c78); /* gClearTagLightRayEffectMaterialDL */
+    editor.submitListAddr(0x80947F60 + 0x5ce8); /* gClearTagLightRayEffectDL */
+
+    return { name: 'CLEAR_TAG', ...editor.build() }
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -444,6 +477,8 @@ export class CustomObjectsBuilder {
       await this.makeEffectShock(),
       await this.makeSongOfHealingEffect(),
       await this.makeSongEffect(),
+      await this.makePowderKeg(),
+      await this.makeClearTag(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

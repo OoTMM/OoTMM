@@ -87,3 +87,20 @@ PATCH_START 0x80012ee0
   jal EnItem00_PlaySoundXflag
    move a0,s0
 PATCH_END
+
+EnItem00_DropHook:
+  or      a0, s0, zero
+  jal     EnItem00_GiveItem
+   or     a1, s1, zero
+  lui     t7, 0x8001
+  addiu   t7, t7, 0x2e28
+  j       t7
+   nop
+
+PATCH_START 0x80105ecc
+  .int EnItem00_DropHook
+PATCH_END
+
+PATCH_START 0x80105f4c
+  .int EnItem00_DropHook
+PATCH_END

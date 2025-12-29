@@ -751,6 +751,76 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.MM_BOMBS_10,   Items.SHARED_BOMBS_10);
       this.replaceItem(Items.MM_BOMBS_20,   Items.SHARED_BOMBS_20);
       this.replaceItem(Items.MM_BOMBS_30,   Items.SHARED_BOMBS_30);
+    } else if (settings.sharedBombBagsMm || settings.bombBagMmOot || settings.sharedBombBagsOot || settings.bombBagOotMm) {
+      const splitItem = (item: Item, newItem1: Item, newItem2: Item) => {
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          const playerItem = makePlayerItem(item, i);
+          const newPlayerItem1 = makePlayerItem(newItem1, i);
+          const newPlayerItem2 = makePlayerItem(newItem2, i);
+          const count = this.pool.get(playerItem);
+          if (count) {
+            const half = Math.floor(count / 2);
+            this.pool.delete(playerItem);
+            this.pool.set(newPlayerItem1, count - half);
+            this.pool.set(newPlayerItem2, half);
+          }
+        }
+      }
+      /* Bomb Bags */
+      this.replaceItem(Items.MM_BOMB_BAG, Items.MM_BOMB_BAG_MM);
+      this.replaceItem(Items.OOT_BOMB_BAG, Items.OOT_BOMB_BAG_OOT);
+
+        /* Bombs */
+      splitItem(Items.OOT_BOMB,       Items.OOT_BOMB_MM,      Items.OOT_BOMB_OOT);
+      splitItem(Items.OOT_BOMBS_5,    Items.OOT_BOMBS_MM_5,   Items.OOT_BOMBS_OOT_5);
+      splitItem(Items.OOT_BOMBS_10,   Items.OOT_BOMBS_MM_10,  Items.OOT_BOMBS_OOT_10);
+      splitItem(Items.OOT_BOMBS_20,   Items.OOT_BOMBS_MM_20,  Items.OOT_BOMBS_OOT_20);
+      splitItem(Items.OOT_BOMBS_30,   Items.OOT_BOMBS_MM_30,  Items.OOT_BOMBS_OOT_30);
+      splitItem(Items.MM_BOMB,        Items.MM_BOMB_OOT,      Items.MM_BOMB_MM);
+      splitItem(Items.MM_BOMBS_5,     Items.MM_BOMBS_OOT_5,   Items.MM_BOMBS_MM_5);
+      splitItem(Items.MM_BOMBS_10,    Items.MM_BOMBS_OOT_10,  Items.MM_BOMBS_MM_10);
+      splitItem(Items.MM_BOMBS_20,    Items.MM_BOMBS_OOT_20,  Items.MM_BOMBS_MM_20);
+      splitItem(Items.MM_BOMBS_30,    Items.MM_BOMBS_OOT_30,  Items.MM_BOMBS_MM_30);
+
+      if (settings.sharedBombBagsMm) {
+        /* Bomb Bags */
+        this.replaceItem(Items.MM_BOMB_BAG_MM, Items.SHARED_BOMB_BAG_MM);
+
+        /* Bombs */
+        this.replaceItem(Items.MM_BOMB_MM,      Items.SHARED_BOMB_MM);
+        this.replaceItem(Items.MM_BOMBS_MM_5,   Items.SHARED_BOMBS_MM_5);
+        this.replaceItem(Items.MM_BOMBS_MM_10,  Items.SHARED_BOMBS_MM_10);
+        this.replaceItem(Items.MM_BOMBS_MM_20,  Items.SHARED_BOMBS_MM_20);
+        this.replaceItem(Items.MM_BOMBS_MM_30,  Items.SHARED_BOMBS_MM_30);
+        this.replaceItem(Items.OOT_BOMB_MM,     Items.SHARED_BOMB_MM);
+        this.replaceItem(Items.OOT_BOMBS_MM_5,  Items.SHARED_BOMBS_MM_5);
+        this.replaceItem(Items.OOT_BOMBS_MM_10, Items.SHARED_BOMBS_MM_10);
+        this.replaceItem(Items.OOT_BOMBS_MM_20, Items.SHARED_BOMBS_MM_20);
+        this.replaceItem(Items.OOT_BOMBS_MM_30, Items.SHARED_BOMBS_MM_30);
+      } else if (settings.bombBagMmOot) {
+        /* Bomb Bags */
+        this.addItem(Items.OOT_BOMB_BAG_MM, 3);
+      }
+
+      if (settings.sharedBombBagsOot) {
+        /* Bomb Bags */
+        this.replaceItem(Items.OOT_BOMB_BAG_OOT, Items.SHARED_BOMB_BAG_OOT);
+
+        /* Bombs */
+        this.replaceItem(Items.OOT_BOMB_OOT,      Items.SHARED_BOMB_OOT);
+        this.replaceItem(Items.OOT_BOMBS_OOT_5,   Items.SHARED_BOMBS_OOT_5);
+        this.replaceItem(Items.OOT_BOMBS_OOT_10,  Items.SHARED_BOMBS_OOT_10);
+        this.replaceItem(Items.OOT_BOMBS_OOT_20,  Items.SHARED_BOMBS_OOT_20);
+        this.replaceItem(Items.OOT_BOMBS_OOT_30,  Items.SHARED_BOMBS_OOT_30);
+        this.replaceItem(Items.MM_BOMB_OOT,       Items.SHARED_BOMB_OOT);
+        this.replaceItem(Items.MM_BOMBS_OOT_5,    Items.SHARED_BOMBS_OOT_5);
+        this.replaceItem(Items.MM_BOMBS_OOT_10,   Items.SHARED_BOMBS_OOT_10);
+        this.replaceItem(Items.MM_BOMBS_OOT_20,   Items.SHARED_BOMBS_OOT_20);
+        this.replaceItem(Items.MM_BOMBS_OOT_30,   Items.SHARED_BOMBS_OOT_30);
+      } else if (settings.bombBagOotMm) {
+        /* Bomb Bags */
+        this.addItem(Items.MM_BOMB_BAG_OOT, 3);
+      }
     }
 
     if (settings.sharedBombchu) {
@@ -1052,6 +1122,12 @@ class LogicPassWorldTransform {
       this.addItem(Items.MM_SONG_TP_LIGHT);
     }
 
+
+    if (settings.sharedPowderKeg) {
+      this.replaceItem(Items.MM_POWDER_KEG, Items.SHARED_POWDER_KEG);
+    } else if (settings.powderKegOot) {
+      this.addItem(Items.OOT_POWDER_KEG);
+    }
 
     if (settings.sharedLens) {
       this.replaceItem(Items.OOT_LENS, Items.SHARED_LENS);
