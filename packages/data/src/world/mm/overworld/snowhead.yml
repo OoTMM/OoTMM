@@ -7,7 +7,7 @@
     "Snowhead Near Fairy Fountain": "(blizzard_stopped || (has_iron_boots && has_magic && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
     "Owl Snowhead": "true"
   events:
-    OPEN_SNOWHEAD_TEMPLE: "soul_biggoron && can_lullaby && has_mask_goron"
+    OPEN_SNOWHEAD_TEMPLE: "can_lullaby && has_mask_goron"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"

@@ -47,6 +47,7 @@ All notable changes to this project will be documented in this file.
 - Fix silver boulder in Gerudo Valley wrongly flagged as a red boulder when being there as child under some circumstances.
 - Fix Shadow Temple Bird Statue being too high after getting blown up.
 - Fix Water Temple MQ's Stalfos before Dark Link expecting child to be able to fight.
+- Fix Snowhead logic wrongly requiring the soul of Biggoron to get access to the locations and entrances past it.
 
 ## [29.0] - 2025-08-15
 
