@@ -317,6 +317,7 @@ gOcarinaSongBufferCursor = 0x801d7028;
 
 gMaxRupees = 0x801c1e2c;
 
+Room_StartRoomTransition = 0x8012e96c;
 Inventory_SetWorldMapCloudVisibility = 0x8012ef0c;
 
 Scene_SetExitFade = 0x801306a4;

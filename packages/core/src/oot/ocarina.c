@@ -423,6 +423,11 @@ static void SetupSongOfDoubleTime(PlayState* play)
     }
 }
 
+extern Vec3f gPlayerLastSafePos;
+extern s16 gPlayerLastSafeRot;
+extern s8 gPlayerLastSafeRoom;
+extern s32 gPlayerLastSafeExists;
+
 static void HandleSongOfDoubleTime(PlayState* play)
 {
     int msgState;
@@ -474,7 +479,9 @@ static void HandleSongOfDoubleTime(PlayState* play)
                     gSaveContext.nextTransitionType = TRANS_GFX_SANDSTORM_SLOW;
                 }
 
-                gSaveContext.respawnFlag = -2;
+                Play_SetRespawnData(play, RESPAWN_MODE_DOWN, gSaveContext.save.entrance, gPlayerLastSafeRoom, 0xdff, &gPlayerLastSafePos, gPlayerLastSafeRot);
+
+                gSaveContext.respawnFlag = -4;
                 play->nextEntranceIndex = gSaveContext.save.entrance;
                 play->transitionTrigger = TRANS_TRIGGER_START;
                 gSaveContext.sunSongState = 0; /* SUNSSONG_INACTIVE */

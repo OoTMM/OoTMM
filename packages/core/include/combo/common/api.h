@@ -63,6 +63,7 @@ void            DynaPoly_InvalidateLookup(PlayState* play, DynaCollisionContext*
 void            DynaPoly_UnsetAllInteractFlags(PlayState* play, DynaCollisionContext* dyna, Actor* actor);
 void            DynaPoly_UpdateContext(PlayState* play, DynaCollisionContext* dyna);
 void            DynaPoly_UpdateBgActorTransforms(PlayState* play, DynaCollisionContext* dyna);
+void            DynaPoly_SetPlayerOnTop(CollisionContext* colCtx, s32 bgId);
 
 void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
 void    Interface_UpdateButtonsPart2(PlayState* play);
@@ -106,6 +107,7 @@ void    Actor_OfferTalkExchangeEquiCylinder(Actor* actor, PlayState* play, float
 void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 void    Actor_MoveWithGravity(Actor* actor);
 #define Actor_MoveXZGravity Actor_MoveWithGravity
+void    Actor_RequestHorseCameraSetting(PlayState* play, Player* player);
 
 int     ActorTalkedTo(Actor* actor);
 
@@ -356,6 +358,8 @@ u32 Letterbox_GetSizeTarget(void);
 
 void Play_LoadKaleidoOverlay(void*);
 void LoadMapMark(void*);
+
+void Room_StartRoomTransition(PlayState* play, RoomContext* roomCtx, s32 roomNum);
 
 #define TINGLE_MAP_CLOCK_TOWN       0
 #define TINGLE_MAP_WOODFALL         1
