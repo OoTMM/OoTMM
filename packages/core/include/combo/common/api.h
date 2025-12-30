@@ -126,6 +126,7 @@ s32     Flags_GetClear(PlayState* play, s32 roomNumber);
 
 void Sleep_Usec(u32 delay);
 
+void Audio_PlayFanfareWithPlayerIOPort7(u16 seqId, u8 ioData);
 void Audio_PlayFanfare(int fanfareId);
 
 void Actor_ProcessInitChain(Actor* this, void* data);
@@ -172,6 +173,7 @@ int  Message_GetState(void* ctx);
 void Message_Close(PlayState* play);
 int  Message_ShouldAdvance(PlayState* play);
 int  Message_IsClosed(Actor* actor, PlayState* play);
+void Message_SpawnSongEffect(PlayState* play);
 
 void OcarinaAction(PlayState *play, u16 ocarinaAction);
 void OcarinaAction2(PlayState *play, u16 ocarinaAction);
@@ -300,6 +302,7 @@ s16 Animation_GetLength(void* animation);
 s16 Animation_GetLastFrame(void* animation);
 
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+void AudioOcarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState);
 #if defined(GAME_MM)
 s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
