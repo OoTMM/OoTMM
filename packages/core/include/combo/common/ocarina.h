@@ -15,6 +15,28 @@ typedef enum
 }
 OcarinaButtonIndex;
 
+/* Uses scientific pitch notation relative to middle C */
+/* https://en.wikipedia.org/wiki/Scientific_pitch_notation */
+typedef enum OcarinaPitch {
+    /* 0x0 */ OCARINA_PITCH_C4,
+    /* 0x1 */ OCARINA_PITCH_DFLAT4,
+    /* 0x2 */ OCARINA_PITCH_D4,
+    /* 0x3 */ OCARINA_PITCH_EFLAT4,
+    /* 0x4 */ OCARINA_PITCH_E4,
+    /* 0x5 */ OCARINA_PITCH_F4,
+    /* 0x6 */ OCARINA_PITCH_GFLAT4,
+    /* 0x7 */ OCARINA_PITCH_G4,
+    /* 0x8 */ OCARINA_PITCH_AFLAT4,
+    /* 0x9 */ OCARINA_PITCH_A4,
+    /* 0xA */ OCARINA_PITCH_BFLAT4,
+    /* 0xB */ OCARINA_PITCH_B4,
+    /* 0xC */ OCARINA_PITCH_C5,
+    /* 0xD */ OCARINA_PITCH_DFLAT5,
+    /* 0xE */ OCARINA_PITCH_D5,
+    /* 0xF */ OCARINA_PITCH_EFLAT5,
+    /* 0xFF */ OCARINA_PITCH_NONE = 0xFF
+} OcarinaPitch;
+
 typedef struct
 {
     u8 numButtons;
@@ -29,6 +51,15 @@ typedef struct OcarinaStaff
     u8 pos;
 }
 OcarinaStaff;
+
+typedef struct {
+    /* 0x0 */ u8 pitch; // number of semitones above middle C
+    /* 0x2 */ u16 length; // number of frames the note is sustained
+    /* 0x4 */ u8 volume;
+    /* 0x5 */ u8 vibrato;
+    /* 0x6 */ s8 bend; // frequency multiplicative offset from the pitch defined by pitch
+    /* 0x7 */ u8 bFlat4Flag; // See note above
+} OcarinaNote;  // size = 0x8
 
 typedef enum OcarinaMode {
     /* 0x00 */ OCARINA_MODE_00,

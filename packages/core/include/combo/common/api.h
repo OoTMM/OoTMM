@@ -63,6 +63,7 @@ void            DynaPoly_InvalidateLookup(PlayState* play, DynaCollisionContext*
 void            DynaPoly_UnsetAllInteractFlags(PlayState* play, DynaCollisionContext* dyna, Actor* actor);
 void            DynaPoly_UpdateContext(PlayState* play, DynaCollisionContext* dyna);
 void            DynaPoly_UpdateBgActorTransforms(PlayState* play, DynaCollisionContext* dyna);
+void            DynaPoly_SetPlayerOnTop(CollisionContext* colCtx, s32 bgId);
 
 void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
 void    Interface_UpdateButtonsPart2(PlayState* play);
@@ -106,6 +107,7 @@ void    Actor_OfferTalkExchangeEquiCylinder(Actor* actor, PlayState* play, float
 void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 void    Actor_MoveWithGravity(Actor* actor);
 #define Actor_MoveXZGravity Actor_MoveWithGravity
+void    Actor_RequestHorseCameraSetting(PlayState* play, Player* player);
 
 int     ActorTalkedTo(Actor* actor);
 
@@ -124,6 +126,7 @@ s32     Flags_GetClear(PlayState* play, s32 roomNumber);
 
 void Sleep_Usec(u32 delay);
 
+void Audio_PlayFanfareWithPlayerIOPort7(u16 seqId, u8 ioData);
 void Audio_PlayFanfare(int fanfareId);
 
 void Actor_ProcessInitChain(Actor* this, void* data);
@@ -170,6 +173,8 @@ int  Message_GetState(void* ctx);
 void Message_Close(PlayState* play);
 int  Message_ShouldAdvance(PlayState* play);
 int  Message_IsClosed(Actor* actor, PlayState* play);
+void Message_SpawnSongEffect(PlayState* play);
+void Message_ResetOcarinaNoteState();
 
 void OcarinaAction(PlayState *play, u16 ocarinaAction);
 void OcarinaAction2(PlayState *play, u16 ocarinaAction);
@@ -200,6 +205,7 @@ void Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem);
 void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 button);
 void Interface_SetDoAction(PlayState* play, u16 action);
 void Interface_LoadActionLabelB(PlayState* play, u16 action);
+void Interface_ChangeHudVisibilityMode(u16 hudVisibilityMode);
 
 #if defined(GAME_MM)
 void PrepareSave(SramContext* sram);
@@ -298,6 +304,7 @@ s16 Animation_GetLength(void* animation);
 s16 Animation_GetLastFrame(void* animation);
 
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+void AudioOcarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState);
 #if defined(GAME_MM)
 s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
@@ -356,6 +363,8 @@ u32 Letterbox_GetSizeTarget(void);
 
 void Play_LoadKaleidoOverlay(void*);
 void LoadMapMark(void*);
+
+void Room_StartRoomTransition(PlayState* play, RoomContext* roomCtx, s32 roomNum);
 
 #define TINGLE_MAP_CLOCK_TOWN       0
 #define TINGLE_MAP_WOODFALL         1

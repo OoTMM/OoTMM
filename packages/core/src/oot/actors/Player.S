@@ -423,3 +423,18 @@ PATCH_START 0x8084d2b4
   jal     Player_IsActionNotGetItem
    nop
 PATCH_END
+
+PATCH_START 0x808465fc
+  lw      a2, 0x00c0 (sp)
+  lw      a0, 0x00c8 (sp)
+  jal     Player_UpdateBgId
+   or     a1, s0, zero
+PATCH_END
+
+PATCH_START 0x80844f90
+  or      a0, s1, zero
+  jal     Player_HandleRespawnFlag
+   or     a1, s0, zero
+  b       .+0xf4
+   or     t0, v0, zero
+PATCH_END

@@ -88,3 +88,14 @@ void Actor_SpawnEntryFromRoomActorList(ActorContext* actorCtx, ActorEntry* entry
 }
 
 PATCH_CALL(0x80023de8, Actor_SpawnEntryFromRoomActorList);
+
+void Room_LoadInitialRoom(PlayState* play, RoomContext* roomCtx, s32 roomNum)
+{
+    if (gSaveContext.respawnFlag == -4)
+    {
+        roomNum = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
+    }
+    Room_StartRoomTransition(play, roomCtx, roomNum);
+}
+
+PATCH_CALL(0x80080a1c, Room_LoadInitialRoom);
