@@ -220,7 +220,7 @@ void Ocarina_SpawnSongEffect(PlayState* play)
 
 PATCH_CALL(0x80155180, Ocarina_SpawnSongEffect)
 
-OcarinaNote sOcarinaWarpSongNotes[6][20] = {
+static OcarinaNote sOcarinaWarpSongNotes[6][20] = {
     // OCARINA_SONG_MINUET
     {
         { OCARINA_PITCH_D4, 18, 86, 0, 0, 0 },

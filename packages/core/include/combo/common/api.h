@@ -174,6 +174,7 @@ void Message_Close(PlayState* play);
 int  Message_ShouldAdvance(PlayState* play);
 int  Message_IsClosed(Actor* actor, PlayState* play);
 void Message_SpawnSongEffect(PlayState* play);
+void Message_ResetOcarinaNoteState();
 
 void OcarinaAction(PlayState *play, u16 ocarinaAction);
 void OcarinaAction2(PlayState *play, u16 ocarinaAction);
@@ -204,6 +205,7 @@ void Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem);
 void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 button);
 void Interface_SetDoAction(PlayState* play, u16 action);
 void Interface_LoadActionLabelB(PlayState* play, u16 action);
+void Interface_ChangeHudVisibilityMode(u16 hudVisibilityMode);
 
 #if defined(GAME_MM)
 void PrepareSave(SramContext* sram);

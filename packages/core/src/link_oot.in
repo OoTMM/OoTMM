@@ -308,6 +308,7 @@ Inventory_ReplaceItem = 0x800719e0;
 Inventory_UpdateBottleItem = 0x80071b7c;
 Interface_SetDoAction = 0x80071E6C;
 Interface_LoadActionLabelB = 0x80071FF8;
+Interface_ChangeHudVisibilityMode = 0x8006d8e0;
 
 Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
@@ -773,8 +774,10 @@ Message_Draw = 0x800e0a18;
 Message_Update = 0x800e0aa4;
 Message_SetTables = 0x800e162c;
 Message_Init = 0x800e2008;
+Message_ResetOcarinaNoteState = 0x800d5ef0;
 Sfx_PlaySfxCentered = 0x800646f0;
 AudioOcarina_SetInstrument = 0x800c2c90;
+AudioOcarina_SetPlaybackSong = 0x800c2d74;
 
 DynaPoly_EnableCollision = 0x80031530;
 func_8002ED80 = 0x80022554;
