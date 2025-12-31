@@ -342,6 +342,7 @@
 "can_kill_spike_enemies_underwater": "soul_spike_enemy && can_hookshot"
 "can_kill_anubis": "soul_enemy(SOUL_ENEMY_ANUBIS) && has_fire"
 "can_kill_iron_knuckles": "soul_iron_knuckle && can_use_sword || can_hammer || has_explosives"
+"can_kill_gerudo_fighter": "soul_thief_fighter && (can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks))"
 "can_kill_skull_kids": "soul_skull_kids && can_use_sword_master || can_use_sword_biggoron || can_use_sword_gilded"
 "can_kill_flying_pots": "soul_flying_pot" #They break themselves.
 "can_kill_freezards": "soul_freezard && can_use_sword_master || can_use_sword_razor || can_use_sword_biggoron || can_hammer || can_hookshot || has_explosives || has_fire"
