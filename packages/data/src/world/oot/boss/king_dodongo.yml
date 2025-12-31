@@ -3,7 +3,7 @@
   age_change: false
   dungeon: DC
   events:
-    BOSS_KING_DODONGO: "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_use_sword)"
+    BOSS_KING_DODONGO: "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_hammer || can_use_sword)"
   exits:
     "Dodongo Cavern After Boss": "event(BOSS_KING_DODONGO)"
   locations:
