@@ -141,9 +141,11 @@ static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
 
 static void ObjHamishi_InitXflag(Actor_ObjHamishi* this, PlayState* play)
 {
+    #if defined(GAME_OOT)
     // prevent init of boulders in child gerudo valley
     if(play->sceneId == SCE_OOT_GERUDO_VALLEY && g.sceneSetupId == 0) return;
-
+    #endif
+    
     ComboItemOverride   o;
     Xflag*              xflag;
 
