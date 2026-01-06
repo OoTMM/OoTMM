@@ -1336,3 +1336,116 @@ void Inventory_AfterUpdateBottleItem(PlayState* play, u16 button)
 }
 
 PATCH_CALL(0x80071be0, Inventory_AfterUpdateBottleItem)
+
+Vec3f gPlayerLastSafePos;
+s16 gPlayerLastSafeRot;
+s8 gPlayerLastSafeRoom;
+s32 gPlayerLastSafeExists;
+
+void Player_SetLastSafePos(PlayState* play, Player* this)
+{
+    if ((play->roomCtx.curRoom.num >= 0) && (play->roomCtx.prevRoom.num < 0))
+    {
+        Math_Vec3f_Copy(&gPlayerLastSafePos, &this->actor.world.pos);
+        gPlayerLastSafeRot = this->actor.shape.rot.y;
+        gPlayerLastSafeRoom = play->roomCtx.curRoom.num;
+        gPlayerLastSafeExists = 1;
+    }
+}
+
+void Player_UpdateBgId(PlayState* play, Player* this, CollisionPoly* floorPoly)
+{
+    if (this->actor.floorBgId != BGCHECK_SCENE)
+    {
+        DynaPoly_SetPlayerOnTop(&play->colCtx, this->actor.floorBgId);
+    }
+    else if (!(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND_TOUCH) && this->actor.depthInWater <= 24.0f)
+    {
+        f32 floorPolyNormalY = COLPOLY_GET_NORMAL(floorPoly->normal.y);
+        if (floorPolyNormalY > 0.5f)
+        {
+            s32 sFloorType = *(s32*)OverlayAddr(0x808514a4);
+            if (sFloorType != 1 /* FLOOR_EFFECT_1 */)
+            {
+                s32 sConveyorSpeed = *(u32*)OverlayAddr(0x808514b4);
+                if (sConveyorSpeed == 0 /* CONVEYOR_SPEED_DISABLED */)
+                {
+                    /* if (CutsceneManager_GetCurrentCsId() != play->playerCsIds[PLAYER_CS_ID_SONG_WARP]) */
+                    {
+                        Player_SetLastSafePos(play, this);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Player_Actor_RequestHorseCameraSetting(PlayState* play, Player* this)
+{
+    if (this->rideActor->bgCheckFlags & BGCHECKFLAG_GROUND)
+    {
+        Player_SetLastSafePos(play, this);
+    }
+    Actor_RequestHorseCameraSetting(play, this);
+}
+
+PATCH_CALL(0x8084ae6c, Player_Actor_RequestHorseCameraSetting)
+
+s32 Player_HandleRespawnFlag(PlayState* play, Player* player)
+{
+    s32 respawnFlag = gSaveContext.respawnFlag;
+    s32 respawnMode;
+
+    if (respawnFlag != 0)
+    {
+        if (respawnFlag == -3)
+        {
+            player->actor.params = gSaveContext.respawn[RESPAWN_MODE_RETURN].playerParams;
+        }
+        else
+        {
+            if ((respawnFlag == 1) || (respawnFlag == -1))
+            {
+                player->unk_a86 = -2;
+            }
+
+            if (respawnFlag == -4)
+            {
+                respawnFlag = 1;
+            }
+
+            if (respawnFlag < 0)
+            {
+                respawnMode = RESPAWN_MODE_DOWN;
+            }
+            else
+            {
+                respawnMode = respawnFlag - 1;
+                Math_Vec3f_Copy(&player->actor.world.pos, &gSaveContext.respawn[respawnMode].pos);
+                Math_Vec3f_Copy(&player->actor.home.pos, &player->actor.world.pos);
+                Math_Vec3f_Copy(&player->actor.prevPos, &player->actor.world.pos);
+                player->fallStartHeight = player->actor.world.pos.y;
+                player->yaw = player->actor.shape.rot.y = gSaveContext.respawn[respawnMode].yaw;
+                player->actor.params = gSaveContext.respawn[respawnMode].playerParams;
+            }
+
+            play->actorCtx.flags.tempSwch = gSaveContext.respawn[respawnMode].tempSwitchFlags & 0xFFFFFF;
+            play->actorCtx.flags.tempCollect = gSaveContext.respawn[respawnMode].tempCollectFlags;
+        }
+    }
+
+    return respawnFlag;
+}
+
+void Player_AfterInit(PlayState* play)
+{
+    /* Displaced code: */
+    Map_SetAreaEntrypoint(play);
+
+    Player* player = GET_PLAYER(play);
+
+    Player_SetLastSafePos(play, player);
+    gPlayerLastSafeExists = 0;
+}
+
+PATCH_CALL(0x808452cc, Player_AfterInit);
