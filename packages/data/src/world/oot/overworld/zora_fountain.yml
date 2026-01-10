@@ -64,7 +64,7 @@
 "Zora Fountain Frozen":
   region: ZORA_FOUNTAIN
   exits:
-    "Zora Fountain": "has_iron_boots || longshot_anywhere || climb_anywhere || (is_adult && has_hover_boots)"
+    "Zora Fountain": "can_swim_or_sink || longshot_anywhere || climb_anywhere || (is_adult && has_hover_boots)"
     "Ice Cavern": "true"
   locations:
     "Zora Fountain Iceberg HP": "is_adult"
