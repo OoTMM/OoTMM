@@ -48,7 +48,7 @@
     "Forest Temple Hallway Before Lower Section Of Stalfos Battle Room": "true"
     "Forest Temple Main Lobby Upper East Ledge": "climb_anywhere || hookshot_anywhere"
   events:
-    FOREST_MQ_MEG_CLEAR: "(event(FOREST_MQ_JOELLE_CLEAR) && event(FOREST_MQ_BETH_CLEAR) && event(FOREST_MQ_AMY_CLEAR)) && (can_use_bow || can_hookshot || has_explosives || can_use_mask_blast)
+    FOREST_MQ_MEG_CLEAR: "(event(FOREST_MQ_JOELLE_CLEAR) && event(FOREST_MQ_BETH_CLEAR) && event(FOREST_MQ_AMY_CLEAR)) && (can_use_bow || can_hookshot || has_explosives || can_use_mask_blast)"
     FOREST_MQ_LOBBY_WEST_GARDEN_EYE: "can_hit_triggers_distance"
     FOREST_MQ_LOBBY_EAST_GARDEN_EYE: "can_hit_triggers_distance"
   locations:
