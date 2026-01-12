@@ -15,27 +15,28 @@
     "Kakariko Well": "is_adult || has_iron_boots || longshot_anywhere || event(WELL_DRAIN) || setting(openDungeonsOot, BotW)"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
-    "Kakariko Balcony": "(is_child && is_day) || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
+    "Kakariko Balcony": "(is_child && is_day && soul_cucco) || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
     "Kakariko Rooftop": "can_hookshot || climb_anywhere"
-    "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || is_day || (trick(OOT_MAN_ON_ROOF) && (can_use_slingshot || has_bombchu)) || climb_anywhere"
+    "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || (is_day && soul_cucco) || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day"
     "Kakariko Potion Shop": "is_day"
     "Windmill": "true"
     "Kakariko Carpenter House": "true"
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
+    "Watchtower": "is_day || is_adult || can_use_slingshot || can_use_bow || can_longshot || has_bombchu || climb_anywhere"
   locations:
     "Kakariko Anju Bottle": "is_child && is_day && soul_anju && soul_cucco"
     "Kakariko Anju Egg": "is_adult && is_day && soul_anju"
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_anju"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_rooftop_man"
+    "Kakariko Man on Roof": "(can_hookshot || (is_adult && trick(OOT_MAN_ON_ROOF)) || climb_anywhere) && soul_rooftop_man"
     "Kakariko Sell Keaton Mask": "soul_npc(SOUL_NPC_HYLIAN_GUARD) && is_child && (setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)) && has_mask_keaton"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
-    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || can_longshot || (climb_anywhere && ((can_use_sword || can_use_sticks) || can_use_din)) || (time_travel_at_will && can_use_din))"
+    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || can_use_bow || has_bombchu || can_longshot || (climb_anywhere && (can_use_sword || can_use_sticks)))"
     # TODO: Some of these pots and crates should be in the Kakariko Back region
     "Kakariko Pot 01": "is_child"
     "Kakariko Pot 02": "is_child"
@@ -251,3 +252,11 @@
     "Kakariko Grotto Butterfly 3": "butterfly"
   gossip:
     "Kakariko Gossip Grotto": "true"
+
+"Watchtower":
+  region: KAKARIKO
+  exits:
+    "Kakariko Back": "trick(OOT_MAN_ON_ROOF)"
+  locations:
+    "Kakariko Man on Roof": "trick(OOT_MAN_ON_ROOF) && soul_rooftop_man"
+    "Kakariko GS Ladder": "gs_night && is_child && can_use_din"
