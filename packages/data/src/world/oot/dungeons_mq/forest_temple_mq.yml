@@ -111,7 +111,7 @@
   exits:
     "Forest Temple Climbing Block Puzzle Room Ground Floor": "true"
     "Forest Temple Climbing Block Puzzle Room First Block Floor Outer Ledge": "event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || has_hover_boots || hookshot_anywhere || climb_anywhere"
-    "Forest Temple Climbing Block Puzzle Room Second Block Floor": "(event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || hookshot_anywhere || climb_anywhere" #Also ground jump gltich.
+    "Forest Temple Climbing Block Puzzle Room Second Block Floor": "event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || hookshot_anywhere || climb_anywhere" #Also ground jump gltich.
   events:
     FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR: "has_goron_bracelet"
 "Forest Temple Climbing Block Puzzle Room First Block Floor Outer Ledge":
