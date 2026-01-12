@@ -20,7 +20,7 @@
     FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH: "longshot_anywhere || climb_anywhere || (has_nuts || can_hit_triggers_distance || can_hookshot || has_hover_boots || can_use_din || has_bomb_bag || can_use_mask_stone || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))))" #Many ways to deal with the Skulltula in the way.
   locations:
     "MQ Forest Temple First Room Chest": "event(FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH)"
-"Forest Temple Initial Front:
+"Forest Temple Initial Front":
   dungeon: Forest
   exits:
     "Forest Temple Entrance Room": "true"
