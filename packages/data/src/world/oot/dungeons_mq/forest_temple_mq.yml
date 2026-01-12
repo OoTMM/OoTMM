@@ -15,12 +15,12 @@
   dungeon: Forest
   exits: #Maybe make the upper branches where the event takes place its own region?
     "Forest Temple": "true"
-    "Forest Temple Initial Hallway With Skultullas Facing Player": "true"
+    "Forest Temple Initial Hallway Front": "true"
   events: #longshot_anywhere is for action shuffle and not being able to climb; redundant currently with can_hookshot
     FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH: "longshot_anywhere || climb_anywhere || (has_nuts || can_hit_triggers_distance || can_hookshot || has_hover_boots || can_use_din || has_bomb_bag || can_use_mask_stone || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))))" #Many ways to deal with the Skulltula in the way.
   locations:
     "MQ Forest Temple First Room Chest": "event(FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH)"
-"Forest Temple Initial Front":
+"Forest Temple Initial Hallway Front":
   dungeon: Forest
   exits:
     "Forest Temple Entrance Room": "true"
@@ -28,8 +28,8 @@
 "Forest Temple Initial Hallway Navigation": #Even more ways to get past the skultulas. Region exists for enemy drops rando, and for ease of placing the door regions for door rando.
   dungeon: Forest
   exits:
-    "Forest Temple Initial Front": "get_past_skultullas"
-    "Forest Temple Initial Back": "get_past_skultullas"
+    "Forest Temple Initial Hallway Front": "get_past_skultullas"
+    "Forest Temple Initial Hallway Back": "get_past_skultullas"
 "Forest Temple Initial Hallway Back":
   dungeon: Forest
   exits:
@@ -40,7 +40,7 @@
 "Forest Temple Main Lobby":
   dungeon: Forest
   exits: #TODO: Regions for the pot ledges for Action Shuffle
-    "Forest Temple Initial Hallway With Skultullas Not Facing Player": "small_keys_forest(1)"
+    "Forest Temple Initial Hallway Back": "small_keys_forest(1)"
     "Forest Temple Antichamber Center": "event(FOREST_MQ_MEG_CLEAR)"
     "Forest Temple Hallway Before Climbing Block Puzzle Room": "true"
     "Forest Temple West Garden Ground Area": "event(FOREST_MQ_LOBBY_WEST_GARDEN_EYE)"
