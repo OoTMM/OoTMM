@@ -3,15 +3,15 @@
   exits:
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
-    "Near Deku Shrine": "is_swamp_cleared || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
+    "Near Deku Shrine": "(is_swamp_cleared && can_swim) || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
-    "Deku Palace Upper": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
+    "Deku Palace Upper": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && can_use_beans"
   events:
-    NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || ((is_swamp_cleared || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short || can_hammer)))"
+    NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || (((is_swamp_cleared && can_swim) || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short || can_hammer)))"
   locations:
-    "Deku Palace Soil Item 1": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && has_bugs"
-    "Deku Palace Soil Item 2": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && has_bugs"
-    "Deku Palace Soil Item 3": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && has_bugs"
+    "Deku Palace Soil Item 1": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && has_bugs"
+    "Deku Palace Soil Item 2": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && has_bugs"
+    "Deku Palace Soil Item 3": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && has_bugs"
 
 "Deku Palace Main":
   region: DEKU_PALACE
@@ -130,11 +130,11 @@
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "has(MASK_DEKU) || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
+    "Deku Palace Front": "has(MASK_DEKU) || ((is_swamp_cleared || can_use_nayru) && can_swim) || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Front": "true"
 
 "Near Deku Shrine":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "is_swamp_cleared || has(MASK_DEKU) || can_use_nayru || has_hover_boots"
+    "Deku Palace Front": "((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU) || has_hover_boots"
     "Deku Shrine": "true"
