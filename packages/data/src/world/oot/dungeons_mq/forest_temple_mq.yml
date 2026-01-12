@@ -20,7 +20,7 @@
     FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH: "longshot_anywhere || climb_anywhere || (has_nuts || can_hit_triggers_distance || can_hookshot || has_hover_boots || can_use_din || has_bomb_bag || can_use_mask_stone || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))))" #Many ways to deal with the Skulltula in the way.
   locations:
     "MQ Forest Temple First Room Chest": "event(FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH)"
-"Forest Temple Initial Hallway With Skultullas Facing Player":
+"Forest Temple Initial Front:
   dungeon: Forest
   exits:
     "Forest Temple Entrance Room": "true"
@@ -28,9 +28,9 @@
 "Forest Temple Initial Hallway Navigation": #Even more ways to get past the skultulas. Region exists for enemy drops rando, and for ease of placing the door regions for door rando.
   dungeon: Forest
   exits:
-    "Forest Temple Initial Hallway With Skultullas Facing Player": "get_past_skultullas"
-    "Forest Temple Initial Hallway With Skultullas Not Facing Player": "get_past_skultullas"
-"Forest Temple Initial Hallway With Skultullas Not Facing Player":
+    "Forest Temple Initial Front": "get_past_skultullas"
+    "Forest Temple Initial Back": "get_past_skultullas"
+"Forest Temple Initial Hallway Back":
   dungeon: Forest
   exits:
     "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
@@ -48,7 +48,7 @@
     "Forest Temple Hallway Before Lower Section Of Stalfos Battle Room": "true"
     "Forest Temple Main Lobby Upper East Ledge": "climb_anywhere || hookshot_anywhere"
   events:
-    FOREST_MQ_MEG_CLEAR: "soul_poe && (event(FOREST_MQ_JOELLE_CLEAR) && event(FOREST_MQ_BETH_CLEAR) && event(FOREST_MQ_AMY_CLEAR)) && can_use_bow && has_weapon"
+    FOREST_MQ_MEG_CLEAR: "(event(FOREST_MQ_JOELLE_CLEAR) && event(FOREST_MQ_BETH_CLEAR) && event(FOREST_MQ_AMY_CLEAR)) && (can_use_bow || can_hookshot || has_explosives || can_use_mask_blast)
     FOREST_MQ_LOBBY_WEST_GARDEN_EYE: "can_hit_triggers_distance"
     FOREST_MQ_LOBBY_EAST_GARDEN_EYE: "can_hit_triggers_distance"
   locations:
@@ -96,7 +96,7 @@
     "Forest Temple Climbing Block Puzzle Room Second Block Floor": "climb_anywhere || longshot_anywhere"
     "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "climb_anywhere || longshot_anywhere || (can_hookshot && event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT))"
   events:
-    FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_HIT: "trick(OOT_FOREST_MQ_CLIMBING_BLOCK_ROOM_TWIST_SWITCH_EARLY) && (has_bombchu || can_boomerang)" #FILL THIS IN WITH MORE.
+    FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_HIT: "trick(OOT_FOREST_MQ_CLIMBING_BLOCK_ROOM_TWIST_SWITCH_EARLY) && (has_bombchu || can_boomerang)" #FILL THIS IN WITH MORE. only thing left to add is possible MM bomb bag and OOT Powder Keg being able to be used after testing
   locations:
     "MQ Forest Temple GS Climb Room": "gs && can_damage_skull"
 "Forest Temple Climbing Block Puzzle Room Crystal Switch Alcove":
@@ -111,7 +111,7 @@
   exits:
     "Forest Temple Climbing Block Puzzle Room Ground Floor": "true"
     "Forest Temple Climbing Block Puzzle Room First Block Floor Outer Ledge": "event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || has_hover_boots || hookshot_anywhere || climb_anywhere"
-    "Forest Temple Climbing Block Puzzle Room Second Block Floor": "(event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) && is_adult) || hookshot_anywhere || climb_anywhere" #Also ground jump gltich.
+    "Forest Temple Climbing Block Puzzle Room Second Block Floor": "(event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || hookshot_anywhere || climb_anywhere" #Also ground jump gltich.
   events:
     FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR: "has_goron_bracelet"
 "Forest Temple Climbing Block Puzzle Room First Block Floor Outer Ledge":
@@ -125,10 +125,10 @@
 "Forest Temple Climbing Block Puzzle Room Second Block Floor":
   dungeon: Forest
   exits:
-    "Forest Temple Climbing Block Puzzle Room Ground Floor": "true"
-    "Forest Temple Climbing Block Puzzle Room First Block Floor": "true"
-    "Forest Temple Climbing Block Puzzle Room First Block Floor Outer Ledge": "hookshot_anywhere || can_jump_slash"
-    "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "(event(FOREST_MQ_SECOND_PUSH_BLOCK_PUZZLE_CLEAR) && (is_adult || hookshot_anywhere || climb_anywhere)) || (event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT) && can_hookshot)"
+	  "Forest Temple Climbing Block Puzzle Room Crystal Switch Alcove": "event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_HIT) && (has_hover_boots || can_longshot || hookshot_anywhere)"
+    "Forest Temple Climbing Block Puzzle Room First Block Floor": "event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || has_hover_boots || hookshot_anywhere || climb_anywhere"
+    "Forest Temple Climbing Block Puzzle Room Second Block Floor": "(event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) && (is_adult || climb_anywhere)) || hookshot_anywhere"
+    "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "(event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT) && can_hookshot) || hookshot_anywhere || climb_anywhere"
   events:
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT: "event(FOREST_MQ_SECOND_PUSH_BLOCK_PUZZLE_CLEAR) && (can_hit_triggers_distance || has_bombchu || can_longshot)" #Can hit it if you stand near the guard rails, and can use chu to go up the block after it is in place.
     FOREST_MQ_SECOND_PUSH_BLOCK_PUZZLE_CLEAR: "has_goron_bracelet && event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) && (is_adult || hookshot_anywhere || climb_anywhere)" #A little redundant, yes, but it is a separate flag. Also ground jump gltich?
