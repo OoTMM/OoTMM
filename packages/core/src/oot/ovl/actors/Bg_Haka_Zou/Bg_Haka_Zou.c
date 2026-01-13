@@ -375,7 +375,7 @@ void func_80883328(BgHakaZou* this, PlayState* play) {
 }
 
 void func_808834D8(BgHakaZou* this, PlayState* play) {
-    f32 moveDist;
+    // f32 moveDist;
 
     if (this->timer != 0) {
         this->timer--;

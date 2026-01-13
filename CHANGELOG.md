@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a vanilla bug that cause minimap corruption when pausing, sometimes cascading into other issues.
 - Fix a checksum issue that could very rarely produce invalid ROMs.
 - Fix a vanilla bug causing the final chest in Secret Shrine to sometimes not spawn.
 - Fix a bug that could cause the player to be stuck on the Moon in ER.
