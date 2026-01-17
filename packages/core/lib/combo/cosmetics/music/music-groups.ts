@@ -4,9 +4,6 @@
  * This file contains the smart enum that handles
  * music groups for categorizing music.
  *
- * This is based off of my smart enum for MMR's "new system":
- * https://github.com/crinuleiroz/mm-rando/blob/a0d2618448ff7aee1aeb9d022959cb233d767317/MMR.Randomizer/Audio/Enums/MusicGroup.cs
- *
  * Currently, only has group categorization, but it
  * can be expanded for individual slot categorization.
  * However, indivdual slot categorization is a lot harder
@@ -39,18 +36,6 @@ function normalizeLegacy(v: string | number): string {
   return v.toString().toLowerCase().trim();
 }
 
-/**
- * IMPORTANT:
- * Remove the numbered entries in aliases if MMR updates
- * to the new system the number IDs will be made
- * inaccurate and deprecated for string-based music groups!
- *
- * NOTE:
- * Only canon music groups are supported, for MMR I decided to
- * add support for "proper" naming because end-users who
- * want to edit it may use proper naming, etc. Do not add
- * support for non-canon music groups!
- */
 export class MusicGroup {
   readonly type: SongType;
   readonly aliases: readonly string[];
@@ -137,14 +122,6 @@ export class MusicGroup {
       'HyruleField',
       'LostWoods',
       'GerudoValley',
-      // MMR
-      'TerminaField',
-      'SouthernSwamp',
-      'GreatBay',
-      'IkanaCanyon',
-      'Snowhead',
-      'WoodsOfMystery',
-      'MysteryWoods',
     ]
   });
 
@@ -169,15 +146,6 @@ export class MusicGroup {
       'LonLonRanch',
       'GoronCity',
       'ZorasDomain',
-      // MMR
-      'Towns',
-      'ClockTown1',
-      'ClockTown2',
-      'ClockTown3',
-      'DekuPalace',
-      'RomaniRanch',
-      'GoronShrine',
-      'ZoraHall',
     ]
   })
 
@@ -211,16 +179,6 @@ export class MusicGroup {
       'WaterTemple',
       'ShadowTemple',
       'SpiritTemple',
-      // MMR
-      'Dungeons',
-      'SecretGrotto',
-      'WoodfallTemple',
-      'SnowheadTemple',
-      'PiratesFortress',
-      'GreatBayTemple',
-      'IkanaCastle',
-      'StoneTower',
-      'InvertedStoneTower',
     ]
   })
 
@@ -228,7 +186,7 @@ export class MusicGroup {
     type: SongType.Bgm,
     aliases: [
       // SHARED
-      'Outdoors' // Not in MMR 1.16 and below
+      'Outdoors' // Not in MMR
     ]
   })
 
@@ -261,18 +219,6 @@ export class MusicGroup {
       'PotionShop',
       'TempleOfTime',
       'ChamberofTheSages',
-      // MMR
-      'ClockTower',
-      'CuriosityShop',
-      'MarineResearchLab',
-      'MayorsOffice',
-      'AstralObservatory',
-      'MilkBar',
-      'MinigameShop',
-      'SwordSchool',
-      'JapasRoom',
-      'TijosRoom',
-      'EvansRoom',
     ]
   })
 
@@ -291,12 +237,6 @@ export class MusicGroup {
       'Fun',
       'CastleCourtyard',
       'Mini-game',
-      // MMR
-      'Minigames',
-      'Mini-games',
-      'BoatCruise',
-      'MinigameTheme',
-      'GoronRace',
     ]
   })
 
@@ -313,12 +253,6 @@ export class MusicGroup {
       'HeroTheme',
       'VillainTheme',
       'CastleEscape',
-      // MMR
-      'ActionThemes',
-      'PursuitTheme',
-      'AliensTheme',
-      'SharpsCurse',
-      'MoonEnraged',
     ]
   })
 
@@ -356,28 +290,6 @@ export class MusicGroup {
       'KotakeAndKoume',
       'FairyFlying',
       'KaeporaGaebora',
-      // MMR
-      'CalmThemes',
-      'FileSelect',
-      'MajorasTheme',
-      'HealingTheme',
-      'MusicBoxHouse',
-      'GreatFairysFountain',
-      'FairysFountain',
-      'ZeldasTheme',
-      'RosaSistersTheme',
-      'GiantsTheme',
-      'GuruGurusTheme',
-      'GormanBrosTheme',
-      'WitchesTheme',
-      'KoumeAndKotakesTheme',
-      'OwlsTheme',
-      'KaeporaGaeborasTheme',
-      'FinalHours',
-      'KamarosTheme',
-      'CremiasTheme',
-      'KeatonsTheme',
-      'ReunionTheme',
     ]
   })
 
@@ -403,15 +315,6 @@ export class MusicGroup {
       'GanondorfBattle',
       'GanonBattle',
       'FinalFight',
-      // MMR
-      'Fights',
-      'SmallEnemy',
-      'BigEnemy',
-      'BossEnemy',
-      'BossBattle',
-      'MajorasWrath',
-      'MajorasIncarnation',
-      'MajorasMask',
     ]
   })
   // #endregion
@@ -439,10 +342,6 @@ export class MusicGroup {
       'UtilitySong',
       'BigFanfare',
       'TreasureChest',
-      // MMR
-      'ItemFanfares',
-      'OpenChest',
-      'MaskGet',
     ]
   })
 
@@ -481,15 +380,6 @@ export class MusicGroup {
       'WarpSong',
       'MasterSword',
       'DoorOfTime',
-      // MMR
-      'EventFanfares',
-      'EventFail1',
-      'EventFail2',
-      'EventSuccess',
-      'TruthRevealed',
-      'SoaringTheme',
-      'TempleAppears',
-      'GiantsLeave',
     ]
   })
 
@@ -511,25 +401,6 @@ export class MusicGroup {
       'EponaGoal',
       'SpiritStoneGet',
       'MedallionGet',
-      // MMR
-      'ClearFanfares',
-      'GoronRaceWin',
-      'HorseRaceWin',
-      'TempleClearShort',
-      'TempleClearLong',
-      'MoonDestroyed',
-    ]
-  })
-  // #endregion
-
-  // #region Group Cutscenes
-  public static readonly Cutscenes = new MusicGroup({
-    type: SongType.Cutscene,
-    aliases: [
-      'Cutscenes',
-      'GiantsAppear',
-      'TitleDemo',
-      'TitleTheme',
     ]
   })
   // #endregion
@@ -573,7 +444,6 @@ export class MusicGroup {
     MusicGroup.ItemFanfares,
     MusicGroup.EventFanfares,
     MusicGroup.ClearFanfares,
-    MusicGroup.Cutscenes,
   ] as const;
 
   static readonly AllBgmGroups: readonly MusicGroup[] = [
