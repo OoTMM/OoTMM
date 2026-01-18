@@ -307,7 +307,7 @@
 "Forest Temple Red Poe Paintings Room":
   dungeon: Forest
   exits:
-    "Forest Temple Western Twisting Hallways Red Poe Side": "small_keys_forest(4)"
+    "Forest Temple Western Twisting Hallway Red Poe Side": "small_keys_forest(4)"
     "Forest Temple Upper Section Of Stalfos Battle Room": "true"
   locations:
     "MQ Forest Temple Map Chest": "event(FOREST_MQ_JOELLE_CLEAR)"
