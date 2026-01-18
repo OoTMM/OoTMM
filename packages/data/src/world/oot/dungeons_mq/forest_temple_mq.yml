@@ -162,7 +162,7 @@
     "Forest Temple West Garden Upper Ledge Hallway": "event(FOREST_MQ_FLOORMASTER_BATTLE_BELOW_HALLWAY_CLEAR)"
     "Forest Temple Wallmaster West": "hookshot_anywhere && climb_anywhere && soul_wallmaster"
   locations:
-    "MQ Forest Temple Boss Key Chest": "hookshot_anywhere && climb_anywhere" #This and an exit to the Push Block Side will need looked at again once door rando is being implemented.
+    "MQ Forest Temple Boss Key Chest": "hookshot_anywhere && climb_anywhere" #This and an exit to the Block Push Side will need looked at again once door rando is being implemented.
   events:
     FOREST_MQ_FLOORMASTER_BATTLE_BELOW_HALLWAY_CLEAR: "soul_floormaster && has_weapon" #Placeholder for now.
 "Forest Temple West Garden Upper Ledge Hallway":
@@ -302,7 +302,7 @@
 "Forest Temple Western Twisting Hallway Red Poe Side":
   dungeon: Forest
   exits:
-    "Forest Temple Western Twisting Hallway Push Block Side": "event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE) || event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_EARLY)"
+    "Forest Temple Western Twisting Hallway Block Push Side": "event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE) || event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_EARLY)"
     "Forest Temple Red Poe Paintings Room": "small_keys_forest(4)"
 "Forest Temple Red Poe Paintings Room":
   dungeon: Forest
