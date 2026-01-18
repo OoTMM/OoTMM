@@ -36,7 +36,7 @@
     "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
     "Forest Temple Main Lobby": "small_keys_forest(1)"
   locations:
-    "MQ Forest Temple GS Entryway": "gs && (can_collect_distance || ((has_weapon_ranged || has_explosives) && climb_anywhere))" #Blast mask too? Need to have separate macros for close vs far-range explosives...
+    "MQ Forest Temple GS Entryway": "gs && (can_collect_distance || ((has_ranged_weapon || has_explosives) && climb_anywhere))" #Blast mask too? Need to have separate macros for close vs far-range explosives...
 "Forest Temple Main Lobby":
   dungeon: Forest
   exits: #TODO: Regions for the pot ledges for Action Shuffle
@@ -96,7 +96,7 @@
     "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "climb_anywhere || longshot_anywhere || (can_hookshot && event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT))"
   events:
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_EARLY: "trick(OOT_FOREST_MQ_CLIMBING_BLOCK_ROOM_TWIST_SWITCH_EARLY) && (has_bombchu || can_boomerang || can_hookshot || (climb_anywhere && has_mask_blast))" #FILL THIS IN WITH MORE. only thing left to add is possible MM bomb bag and OOT Powder Keg being able to be used after testing
-    FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_FAR: "has_weapon_ranged || has_bombchu || (is_adult && has_bombs) || (event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE) && event(FOREST_MQ_HALLWAY_BEFORE_CLIMBING_BLOCKS_STALFOS_CLEAR))" #Added due to possibility of the alcove being the only way into the room, rendering the initial hall unreachable; door rando will make this more complicated.
+    FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_FAR: "has_ranged_weapon || has_bombchu || (is_adult && has_bombs) || (event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE) && event(FOREST_MQ_HALLWAY_BEFORE_CLIMBING_BLOCKS_STALFOS_CLEAR))" #Added due to possibility of the alcove being the only way into the room, rendering the initial hall unreachable; door rando will make this more complicated.
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT: "has_bombchu"
   locations:
     "MQ Forest Temple GS Climb Room": "gs && can_damage_skull"
