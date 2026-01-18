@@ -296,7 +296,7 @@
   locations:
     "MQ Forest Temple GS East Garden": "gs && can_collect_distance"
   events:
-    STICKS: "soul_deku_baba && (can_boomerang || (has_nuts && has_weapon)"
+    STICKS: "soul_deku_baba && (can_boomerang || (has_nuts && has_weapon))"
     NUTS: "soul_deku_baba && (has_weapon || can_hookshot || can_hammer || has_mask_blast || has_explosives || can_hit_triggers_distance)"
     FOREST_MQ_DRAIN_WELL: "can_hit_triggers_distance"
 "Forest Temple Western Twisting Hallway Red Poe Side":
