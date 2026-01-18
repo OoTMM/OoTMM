@@ -218,7 +218,7 @@
   dungeon: Forest
   exits:
     "Forest Temple West Garden Ground Area": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)"
-    "Forest Temple Linking Room Between Gardens": "true"
+    "Forest Temple Linking Room Between Gardens Behind Web": "true"
   events:
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire"
 "Forest Temple Linking Room Between Gardens Behind Web":
