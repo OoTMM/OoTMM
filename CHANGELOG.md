@@ -32,6 +32,9 @@ All notable changes to this project will be documented in this file.
 - Fix an oversight by adding climb and hookshot anywhere logic to traverse the rolling log room in Deku Tree MQ.
 - Change the trick "Roll Under Deku Tree MQ Water Room's Rotating Spike" to also consider backflipping over it in the vanilla version.
 - Greatly increase the speed of grown Bean Plants in OoT when you are not standing on it.
+- Song of Double Time in Ocarina of Time will now keep your position if it needs to reload the scene.
+- Ocarina of Time warp songs in Majora's Mask now include the song playback, fanfare and song effect.
+- Song of Soaring and Song of Double Time in Ocarina of Time now include the song playback, fanfare and song effect.
 
 ### Fixed
 

@@ -197,6 +197,7 @@ ModelViewMult = 0x80180244;
 
 PrepareSave = 0x8014546c;
 AudioOcarina_SetInstrument = 0x8019C300;
+AudioOcarina_SetPlaybackSong = 0x8019c398;
 PlaySound = 0x8019f0c8;
 Player_PlaySfx = 0x800B8E58;
 Actor_PlaySfx = 0x800b8ec8;
@@ -264,6 +265,7 @@ DisplayTextBox = 0x80150d08;
 Message_IsClosed = 0x800b867c;
 Message_GetState = 0x80152498;
 Message_ShouldAdvance = 0x80147624;
+Message_SpawnSongEffect = 0x80152ec0;
 
 Interface_LoadItemIconImpl = 0x80112b40;
 UpdateEquipment = 0x80123c90;
@@ -288,6 +290,7 @@ Player_GetEnvironmentalHazard = 0x801242dc;
 Player_DrawHookshotReticle = 0x80124cc4;
 Flags_GetTreasure = 0x800b5c78;
 SetChestFlag = 0x800b5c90;
+Audio_PlayFanfareWithPlayerIOPort7 = 0x801a3000;
 Audio_PlayFanfare = 0x801a3098;
 
 Actor_RunByteCode = 0x8010bf58;
@@ -317,6 +320,7 @@ gOcarinaSongBufferCursor = 0x801d7028;
 
 gMaxRupees = 0x801c1e2c;
 
+Room_StartRoomTransition = 0x8012e96c;
 Inventory_SetWorldMapCloudVisibility = 0x8012ef0c;
 
 Scene_SetExitFade = 0x801306a4;

@@ -8,7 +8,7 @@ const char* warpTexts[6] = {
     TEXT_COLOR_GREEN "Warp to the Lost Woods?",
     TEXT_COLOR_RED "Warp to the Death Mountain" TEXT_NL "Crater?",
     TEXT_COLOR_BLUE "Warp to Lake Hylia?",
-    TEXT_COLOR_ORANGE "Warp to the Desert Colossus?",
+    TEXT_COLOR_YELLOW "Warp to the Desert Colossus?",
     TEXT_COLOR_PINK "Warp to the graveyard?",
     TEXT_COLOR_TEAL "Warp to the Temple of Time?",
 };
@@ -99,7 +99,6 @@ static u8 sWarpSongPlayed = 0xff;
 
 u8 Ocarina_BeforeSongPlayingProcessed(PlayState* ctxt)
 {
-    char* b;
     u8 songPlayed = ctxt->msgCtx.songInfo->frameInfo[0].storedSong;
 
     if (songPlayed >= 0x80 && songPlayed <= 0x85)
@@ -109,24 +108,11 @@ u8 Ocarina_BeforeSongPlayingProcessed(PlayState* ctxt)
         u8 songIndex = songPlayed - 0x80;
         sWarpSongPlayed = songIndex;
 
-        if (ctxt->interfaceCtx.restrictions.songOfSoaring)
-        {
-            PlayerDisplayTextBox(ctxt, 0x1B95, NULL);
-            ctxt->msgCtx.ocarinaMode = 0x27; /* OCARINA_MODE_PROCESS_RESTRICTED_SONG */
-            return 0xFE;
-        }
+        DisplayTextBox2(ctxt, 0x1b5b);
+        ctxt->msgCtx.msgMode = 18; /* MSGMODE_SONG_PLAYED */
+        ctxt->msgCtx.textBoxType = 3; /* TEXTBOX_TYPE_3 */
+        ctxt->msgCtx.stateTimer = 10;
 
-        PlayerDisplayTextBox(ctxt, 0x1B93, NULL); /* Soar to X? */
-        b = ctxt->msgCtx.font.textBuffer.schar;
-        b += 11;
-        comboTextAppendStr(&b, warpTexts[songIndex]);
-        if (songIndex != 1)
-        {
-            comboTextAppendStr(&b, TEXT_NL " ");
-        }
-        comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "     OK" TEXT_NL "     No" TEXT_END);
-
-        ctxt->msgCtx.ocarinaMode = 1; /* OCARINA_MODE_ACTIVE */
         return 0xfe;
     }
 
@@ -209,4 +195,206 @@ void OcarinaMaskButtons(void)
     mask = ~(A_BUTTON | U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS);
     mask |= gSharedCustomSave.ocarinaButtonMaskMm;
     gOcarinaPressedButtons &= mask;
+}
+
+void Ocarina_SpawnSongEffect(PlayState* play)
+{
+    if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    {
+        Player* player = GET_PLAYER(play);
+        play->msgCtx.ocarinaSongEffectActive = 1;
+        if (sWarpSongPlayed < 5)
+        {
+            Actor_Spawn(&play->actorCtx, play, ACTOR_OCEFF_WIPE5, player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, 0, 0, 0, sWarpSongPlayed);
+        }
+        else
+        {
+            Actor_Spawn(&play->actorCtx, play, ACTOR_OCEFF_WIPE, player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, 0, 0, 0, 1);
+        }
+    }
+    else
+    {
+        Message_SpawnSongEffect(play);
+    }
+}
+
+PATCH_CALL(0x80155180, Ocarina_SpawnSongEffect)
+
+static OcarinaNote sOcarinaWarpSongNotes[6][20] = {
+    // OCARINA_SONG_MINUET
+    {
+        { OCARINA_PITCH_D4, 18, 86, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 18, 92, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 72, 86, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 18, 80, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 18, 88, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 144, 86, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 86, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_BOLERO
+    {
+        { OCARINA_PITCH_F4, 15, 80, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 15, 72, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 15, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 15, 76, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 15, 84, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 15, 74, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 15, 78, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 135, 66, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 66, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_SERENADE
+    {
+        { OCARINA_PITCH_D4, 36, 60, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 36, 78, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 33, 82, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 82, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 36, 84, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 144, 90, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_REQUIEM
+    {
+        { OCARINA_PITCH_D4, 45, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 23, 86, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 22, 84, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 45, 86, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 45, 94, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 180, 94, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 94, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_NOCTURNE
+    {
+        { OCARINA_PITCH_B4, 36, 88, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 33, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 18, 82, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 18, 60, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 18, 90, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 18, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 144, 96, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 96, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_PRELUDE
+    {
+        { OCARINA_PITCH_D5, 15, 84, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 45, 88, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 15, 88, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 15, 82, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 15, 86, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 60, 90, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 75, 90, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
+    },
+};
+
+void Ocarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState)
+{
+    if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    {
+        OcarinaNote** sPlaybackSong = (OcarinaNote**)0x801d84f0;
+        AudioOcarina_SetPlaybackSong(1, playbackState);
+        *sPlaybackSong = sOcarinaWarpSongNotes[sWarpSongPlayed];
+    }
+    else
+    {
+        AudioOcarina_SetPlaybackSong(songIndexPlusOne, playbackState);
+    }
+}
+
+PATCH_CALL(0x80155248, Ocarina_SetPlaybackSong);
+
+static u16 sOcarinaWarpSongFanfares[] = {
+    FANFARE_SONG_TP_FOREST,
+    FANFARE_SONG_TP_FIRE,
+    FANFARE_SONG_TP_WATER,
+    FANFARE_SONG_TP_SPIRIT,
+    FANFARE_SONG_TP_SHADOW,
+    FANFARE_SONG_TP_LIGHT,
+};
+
+void Ocarina_PlayFanfareWithPlayerIOPort7(u16 seqId, u8 ioData)
+{
+    if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    {
+        Audio_PlayFanfare(sOcarinaWarpSongFanfares[sWarpSongPlayed]);
+    }
+    else
+    {
+        Audio_PlayFanfareWithPlayerIOPort7(seqId, ioData);
+    }
+}
+
+PATCH_CALL(0x80155294, Ocarina_PlayFanfareWithPlayerIOPort7)
+
+const char* sWarpSongPlayedText[6] = {
+    TEXT_COLOR_GREEN "Minuet of Forest",
+    TEXT_COLOR_RED "Bolero of Fire",
+    TEXT_COLOR_BLUE "Serenade of Water",
+    TEXT_COLOR_YELLOW "Requiem of Spirit",
+    TEXT_COLOR_PINK "Nocturne of Shadow",
+    TEXT_COLOR_TEAL "Prelude of Light",
+};
+
+void Ocarina_DisplaySongPlayedTextbox(PlayState* play, u16 textId)
+{
+    char* b;
+    if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    {
+        DisplayTextBox2(play, 0x1b78);
+        b = play->msgCtx.font.textBuffer.schar;
+        b += 11;
+        comboTextAppendStr(&b, "You played the ");
+        comboTextAppendStr(&b, sWarpSongPlayedText[sWarpSongPlayed]);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "!" TEXT_END);
+    }
+    else if (textId == 0x1b7d)
+    {
+        DisplayTextBox2(play, 0x1b78);
+        b = play->msgCtx.font.textBuffer.schar;
+        b += 11;
+        comboTextAppendStr(&b, "You played the " TEXT_COLOR_YELLOW "Sun's Song");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "!" TEXT_END);
+    }
+    else
+    {
+        DisplayTextBox2(play, textId);
+    }
+}
+
+PATCH_CALL(0x80155334, Ocarina_DisplaySongPlayedTextbox)
+
+s16 Ocarina_HandleLastPlayedSong(s16 lastPlayedSong)
+{
+    char* b;
+    if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    {
+        if (gPlay->interfaceCtx.restrictions.songOfSoaring)
+        {
+            PlayerDisplayTextBox(gPlay, 0x1B95, NULL);
+            gPlay->msgCtx.ocarinaMode = 0x27; /* OCARINA_MODE_PROCESS_RESTRICTED_SONG */
+            return -1;
+        }
+
+        PlayerDisplayTextBox(gPlay, 0x1B93, NULL); /* Soar to X? */
+        b = gPlay->msgCtx.font.textBuffer.schar;
+        b += 11;
+        comboTextAppendStr(&b, warpTexts[sWarpSongPlayed]);
+        if (sWarpSongPlayed != 1)
+        {
+            comboTextAppendStr(&b, TEXT_NL " ");
+        }
+        comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "     OK" TEXT_NL "     No" TEXT_END);
+
+        gPlay->msgCtx.ocarinaMode = 1; /* OCARINA_MODE_ACTIVE */
+        return -1;
+    }
+    return lastPlayedSong;
 }

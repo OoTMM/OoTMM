@@ -213,10 +213,10 @@ typedef struct MessageContext
     char                        unk_11ef8[0x8];
     SongInfo*                   songInfo;
     u16                         currentTextId;
-    char                        unk_11f06[0x2];
+    u16                         choiceTextId;
     u16                         unk_11f08;
-    s8                          unk_11f0a;
-    s8                          unk_11f0b;
+    s8                          textBoxType;
+    s8                          textBoxPos;
     s8                          unk_11f0c;
     char                        unk_11f0d[0x3];
     s32                         msgLength;
@@ -302,7 +302,7 @@ typedef struct MessageContext
     char                        unk_1209e[0x2];
     s32                         unk_120a0;
     s16                         unk_120a4[6];
-    u8                          unk_120b0;
+    u8                          ocarinaSongEffectActive;
     u8                          bombersNotebookEventQueueCount;
     u8                          bombersNotebookEventQueue[10];
     u16                         unk_120bc;

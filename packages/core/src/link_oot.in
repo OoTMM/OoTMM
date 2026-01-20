@@ -147,6 +147,7 @@ Math_Vec3f_Yaw = 0x80063f00;
 DynaPoly_DeleteBgActor = 0x80031638;
 DynaPoly_SetBgActor = 0x800313a4;
 DynaPoly_DisableCollision = 0x800314d8;
+DynaPoly_SetPlayerOnTop = 0x800352b8;
 DynaPolyActor_Init = 0x80035260;
 
 Math3D_TriChkPointParaYSlopedY = 0x800a6d8c;
@@ -227,6 +228,7 @@ Actor_Kill = 0x80020eb4;
 Actor_UpdatePos = 0x80021124;
 Actor_MoveWithGravity = 0x8002121c;
 Actor_UpdateBgCheckInfo = 0x80021e6c;
+Actor_RequestHorseCameraSetting = 0x80021800;
 
 GetEventChk = 0x800288b4;
 SetEventChk = 0x800288e0;
@@ -306,6 +308,7 @@ Inventory_ReplaceItem = 0x800719e0;
 Inventory_UpdateBottleItem = 0x80071b7c;
 Interface_SetDoAction = 0x80071E6C;
 Interface_LoadActionLabelB = 0x80071FF8;
+Interface_ChangeHudVisibilityMode = 0x8006d8e0;
 
 Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
@@ -415,6 +418,10 @@ Collider_InitCylinder = 0x8004ab7c;
 Collider_SetCylinder = 0x8004acec;
 Collider_UpdateCylinder = 0x80050b00;
 Collider_DestroyCylinder = 0x8004abcc;
+
+Room_StartRoomTransition = 0x80080a3c;
+
+Map_SetAreaEntrypoint = 0x8006bc70;
 
 gRegEditor = 0x8011ba00;
 
@@ -767,8 +774,10 @@ Message_Draw = 0x800e0a18;
 Message_Update = 0x800e0aa4;
 Message_SetTables = 0x800e162c;
 Message_Init = 0x800e2008;
+Message_ResetOcarinaNoteState = 0x800d5ef0;
 Sfx_PlaySfxCentered = 0x800646f0;
 AudioOcarina_SetInstrument = 0x800c2c90;
+AudioOcarina_SetPlaybackSong = 0x800c2d74;
 
 DynaPoly_EnableCollision = 0x80031530;
 func_8002ED80 = 0x80022554;
