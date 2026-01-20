@@ -78,6 +78,10 @@
     "MQ Forest Temple Wolfos Chest": "event(FOREST_MQ_UNDER_STALFOS_BATTLE_WOLFOS_CLEAR)"
     "MQ Forest Temple Pot Bow Room Lower 1": "true"
     "MQ Forest Temple Pot Bow Room Lower 2": "true"
+    "MQ Forest Temple Pot Bow Room Upper 1": "hookshot_anywhere"
+    "MQ Forest Temple Pot Bow Room Upper 2": "hookshot_anywhere"
+    "MQ Forest Temple Pot Bow Room Upper 3": "hookshot_anywhere"
+    "MQ Forest Temple Pot Bow Room Upper 4": "hookshot_anywhere"
 "Forest Temple Hallway Before Climbing Block Puzzle Room":
   dungeon: Forest
   exits:
