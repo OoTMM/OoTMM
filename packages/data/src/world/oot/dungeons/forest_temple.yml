@@ -44,6 +44,10 @@
     "Forest Temple Mini-Boss Key": "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Forest Temple Pot Miniboss Lower 1": "true"
     "Forest Temple Pot Miniboss Lower 2": "true"
+    "Forest Temple Pot Miniboss Upper 1": "hookshot_anywhere && can_use_sword"
+    "Forest Temple Pot Miniboss Upper 2": "hookshot_anywhere && can_use_sword"
+    "Forest Temple Pot Miniboss Upper 3": "hookshot_anywhere && can_use_sword"
+    "Forest Temple Pot Miniboss Upper 4": "hookshot_anywhere && can_use_sword"
 
 "Forest Temple Garden West":
   dungeon: Forest
@@ -216,7 +220,12 @@
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:
-    "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
+    "Forest Temple Antichamber Room Hallway Before Boss": "true"
   locations:
     "Forest Temple Antichamber": "true"
     "Forest Temple GS Antichamber": "gs && (can_collect_distance || climb_anywhere)"
+
+"Forest Temple Antichamber Room Hallway Before Boss":
+  dungeon: Forest
+  exits:
+    "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
