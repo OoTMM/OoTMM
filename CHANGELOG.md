@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Add a setting to enable shared bottles.
 - Cosmetics setting to remove the low HP beeping sfx.
 - Add double, quadruple, octuple and OHKO damage multipliers (no logic for any of them yet).
+- Add Song of Double Time logic for passing time in Ocarina of Time.
 
 ### Changed
 

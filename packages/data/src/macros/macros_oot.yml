@@ -1,8 +1,8 @@
 #Generic Utility Macros
 "is_child": "age(child)"
 "is_adult": "age(adult)"
-"is_day": "oot_time(day) || can_play_sun"
-"is_night": "oot_time(night) || can_play_sun"
+"is_day": "oot_time(day) || can_play_sun || can_play_double_time"
+"is_night": "oot_time(night) || can_play_sun || can_play_double_time"
 "is_dusk": "oot_time(day) && oot_time(night)" # If day and night can be true at the same time, then you have access to a local time-flow zone
 "time_travel_at_will": "!setting(ageChange, none) && event(TIME_TRAVEL_AT_WILL)"
 
@@ -41,6 +41,7 @@
 "can_play_tp_spirit": "can_play_tp_spirit_raw"
 "can_play_elegy": "setting(elegyOot) && can_play_emptiness_raw"
 "can_play_soaring": "(setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child)) && can_play_soaring_raw"
+"can_play_double_time": "setting(songOfDoubleTimeOot) && can_play_time"
 
 "can_play_minigame": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left && ocarina_button_up"
 "can_play_scarecrow": "has_ocarina && ocarina_button_any2"
@@ -193,7 +194,7 @@
 # GS
 "gs": "soul_gs"
 "gs_soil": "gs && is_child && has_bugs"
-"gs_night": "gs && is_night && (trick(OOT_NIGHT_GS) || can_play_sun)"
+"gs_night": "gs && is_night && (trick(OOT_NIGHT_GS) || can_play_sun || can_play_double_time)"
 
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play_epona"
