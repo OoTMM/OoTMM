@@ -18,8 +18,15 @@ type MusicGroupOpts = {
 }
 
 /**
- * All MMR categories are assumed to be hex, even without the prefix
- * Returns a decimal int string!
+ * Attempts to normalize MMR category values from hex string into decimal strings.
+ * If the input is not a valid MMR category (or is an OOTR music group), the function
+ * returns the input string in lowercase.
+ *
+ * MMR categories are expected to be hex-formatted strings, optionally prefixed with "0x".
+ *
+ * @param v The raw string or number representing a music group.
+ * @returns A decimal string representation of the input if it is a valid hex number
+ *          for MMR categories, otherwise the input string in lowercase for OOTR music groups.
  */
 function normalizeLegacy(v: string | number): string {
   let n: number;
@@ -36,6 +43,28 @@ function normalizeLegacy(v: string | number): string {
   return v.toString().toLowerCase().trim();
 }
 
+/**
+ * A "smart-enum" representingmusic groups used for categorizing music and
+ * sequence slots in OOTMM.
+ *
+ * @constant all - An array of all available MusicGroup instances.
+ * @constant Fields - A MusicGroup instance representing "field" BGM music.
+ * @constant Towns - A MusicGroup instance representing "town" BGM music.
+ * @constant Dungeons - A MusicGroup instance representing "dungeon" BGM music.
+ * @constant Outdoors - A MusicGroup instance representing "outdoor" BGM music.
+ * @constant Indoors - A MusicGroup instance representing "indoor" BGM music.
+ * @constant Minigames - A MusicGroup instance representing "minigame" BGM music.
+ * @constant ActionThemes - A MusicGroup instance representing "action" BGM music.
+ * @constant CalmThemes - A MusicGroup instance representing "calm" BGM music.
+ * @constant ItemFanfares - A MusicGroup instance representing "item" fanfare music.
+ * @constant EventFanfares - A MusicGroup instance representing "event" fanfare music.
+ * @constant ClearFanfares - A MusicGroup instance representing "clear" fanfare music.
+ * @constant DefaultBgmGroups - An array of default BGM MusicGroup instances.
+ * @constant DefaultFanfareGroups - An array of defaul fanfare MusicGroup instances.
+ * @constant AllGroups - An array of all MusicGroup instances.
+ * @constant AllBgmGroups - An array of all BGM MusicGroup instances.
+ * @constant AllFanfareGroups - An array of all fanfare MusicGroup instances.
+ */
 export class MusicGroup {
   readonly type: SongType;
   readonly aliases: readonly string[];
@@ -49,6 +78,12 @@ export class MusicGroup {
     MusicGroup._register(this);
   }
 
+  /**
+   * Determines if the input value matches an alias in one of the available
+   * MusicGroup instances.
+   * @param v The value to search for.
+   * @returns `true` if the value matches an alias in a MusicGroup instance, otherwise `false`.
+   */
   matches(v: string | number): boolean {
     return this._aliases.has(normalizeLegacy(v));
   }
@@ -64,10 +99,13 @@ export class MusicGroup {
   }
 
   /**
-   * Just typing monitor as any to avoid required import
-   * could add the import, but bleh...
-   * It could be part of music-injector, but it is tightly
-   * coupled with music groups
+   * Builds a MusicGroup array for matches with the given raw music group string array.
+   * This function matches raw group names to MusicGroup instances.
+   * @param rawGroups A string array containing raw group names.
+   * @param filename The name of the file.
+   * @param monitor A monitor object used for warnings or logs.
+   * @returns An object literal with `type` (song type) and `groups` (matched MusicGroup instances),
+   *          or `null` if no matches are found or there are conflicting song types.
    */
   static matchGroups(rawGroups: string[], filename: string, monitor: any) : { type: SongType, groups: MusicGroup[] } | null {
     const matchedGroups: MusicGroup[] = [];
@@ -84,6 +122,7 @@ export class MusicGroup {
 
     const distinctTypes = new Set(matchedGroups.map(g => g.type));
     if (distinctTypes.size > 1) {
+      // OOTRS files are not actually skipped... maybe add file type aware conditional?
       monitor.warn(`Skipped music file ${filename}: conflicting bgm and fanfare music groups`);
       return null;
     }
@@ -107,17 +146,16 @@ export class MusicGroup {
   static readonly Fields = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '0',
-      '258',
-      '268',
-      '272',
-      '273',
-      '275',
-      '318',
-      // SHARED
-      'Fields',
+      // MMR
+      '0',   // Fields
+      '258', // Termina Field
+      '268', // Southern Swamp
+      '272', // Great Bay
+      '273', // Ikana Canyon
+      '275', // Snowhead Mountains
+      '318', // Woods of Mystery
       // OOTR
+      'Fields',
       'Overworld',
       'HyruleField',
       'LostWoods',
@@ -128,15 +166,15 @@ export class MusicGroup {
   static readonly Towns = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '1',
-      '274',
-      '277',
-      '278',
-      '279',
-      '303',
-      '304',
-      '310',
+      // MMR
+      '1',   // Towns
+      '274', // Deku Palace
+      '277', // Clock Town 1
+      '278', // Clock Town 2
+      '279', // Clock Town 3
+      '303', // Romani Ranch
+      '304', // Goron Shrine
+      '310', // Zora Hall
       // OOTR
       'Town',
       'Market',
@@ -152,16 +190,16 @@ export class MusicGroup {
   static readonly Dungeons = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '2',
-      '262',
-      '263',
-      '276',
-      '284',
-      '315',
-      '357',
-      '358',
-      '367',
+      // MMR
+      '2',   // Dungeons
+      '262', // Stone Tower
+      '263', // Inverted Stone Tower
+      '276', // Pirates' Fortress
+      '284', // Woodfall Temple
+      '315', // Secret Grotto
+      '357', // Snowhead Temple
+      '358', // Great Bay Temple
+      '367', // Ancient Castle of Ikana
       // OOTR
       'Dungeon',
       'ChildDungeon',
@@ -185,7 +223,7 @@ export class MusicGroup {
   static readonly Outdoors = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // SHARED
+      // OOTR
       'Outdoors' // Not in MMR
     ]
   })
@@ -193,24 +231,23 @@ export class MusicGroup {
   static readonly Indoors = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '3',
-      '261',
-      '287',
-      '300',
-      '305',
-      '314',
-      '316',
-      '324',
-      '326',
-      '336',
-      '364',
-      '365',
-      '366',
-      // SHARED
+      // MMR
+      '3',   // Indoors
+      '261', // Clock Tower Interior
+      '287', // House
+      '300', // Curiosity Shop & Marine Research Lab
+      '305', // Mayor Dotour's Office
+      '314', // Astral Observatory
+      '316', // Milk Bar
+      '324', // Item Shop
+      '326', // Minigame Shop
+      '336', // Swordsman's School
+      '364', // Japas' Room
+      '365', // Tijo's Room
+      '366', // Evan's Room
+      // OOTR
       'Indoors',
       'House',
-      // OOTR
       'ItemShop',
       'SalesArea',
       'Shop',
@@ -225,15 +262,14 @@ export class MusicGroup {
   static readonly Minigames = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '4',
-      '270',
-      '293',
-      '294',
-      '320',
-      // SHARED
-      'HorseRace',
+      // MMR
+      '4',   // Minigames
+      '270', // Old Koume's Boat Cruise
+      '293', // Minigame Theme
+      '294', // Goron Race
+      '320', // Horse Race
       // OOTR
+      'HorseRace',
       'Fun',
       'CastleCourtyard',
       'Mini-game',
@@ -243,12 +279,12 @@ export class MusicGroup {
   static readonly ActionThemes = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '5',
-      '259',
-      '269',
-      '271',
-      '379',
+      // MMR
+      '5',   // Action Themes
+      '259', // Pursuit Theme
+      '269', // Aliens' Theme
+      '271', // Sharp's Curse
+      '379', // The Moon Enraged
       // OOTR
       'HeroTheme',
       'VillainTheme',
@@ -259,25 +295,26 @@ export class MusicGroup {
   static readonly CalmThemes = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '6',
-      '260',
-      '267',
-      '280',
-      '295',
-      '296',
-      '297',
-      '298',
-      '301',
-      '302',
-      '322',
-      '323',
-      '325',
-      '343',
-      '369',
-      '370',
-      '371',
-      '381',
+      // MMR
+      '6',   // Calm Themes & Character Themes
+      '22',  // Cutscenes
+      '260', // Majora's Theme
+      '267', // Song of Healing Theme
+      '280', // File Select
+      '295', // Music-Box House
+      '296', // Great Fairy's Fountain (Pointer: 0x18)
+      '297', // Zelda's Theme
+      '298', // Rosa Sisters' Theme
+      '301', // Giants' Theme
+      '302', // Guru-Guru's Theme
+      '322', // Gorman Bros.' Theme
+      '323', // Koume & Kotake's Theme
+      '325', // Kaepora Gaebora's Theme
+      '343', // Final Hours
+      '369', // Kamaro's Theme
+      '370', // Cremia's Theme
+      '371', // Keaton's Theme
+      '381', // Reunion Theme
       // OOTR
       'CharacterTheme',
       'MagicalPlace',
@@ -296,14 +333,14 @@ export class MusicGroup {
   static readonly Fights = new MusicGroup({
     type: SongType.Bgm,
     aliases: [
-      // MMR LEGACY
-      '7',
-      '282',
-      '283',
-      '312',
-      '361',
-      '362',
-      '363',
+      // MMR
+      '7',   // Fights
+      '282', // Small Enemy
+      '283', // Boss Enemy
+      '312', // Big Enemy
+      '361', // Majora's Wrath
+      '362', // Majora's Incarnation
+      '363', // Majora's Mask
       // OOTR
       'Fight',
       'SmallFight',
@@ -323,20 +360,19 @@ export class MusicGroup {
   static readonly ItemFanfares = new MusicGroup({
     type: SongType.Fanfare,
     aliases: [
-      // MMR LEGACY
-      '8',
-      '290',
-      '292',
-      '299',
-      '311',
-      '313',
-      '338',
-      // SHARED
+      // MMR
+      '8',   // Item Fanfares
+      '290', // Item Get
+      '292', // Heart Container Get
+      '299', // Large Treasure Chest
+      '311', // Mask Get
+      '313', // Heart Piece Get
+      '338', // Song Get
+      // OOTR
       'ItemGet',
       'HeartContainerGet',
       'HeartPieceGet',
       'SongGet',
-      // OOTR
       'SongFanfare',
       'ItemFanfare',
       'UtilitySong',
@@ -348,19 +384,18 @@ export class MusicGroup {
   static readonly EventFanfares = new MusicGroup({
     type: SongType.Fanfare,
     aliases: [
-      // MMR LEGACY
-      '9',
-      '264',
-      '265',
-      '281',
-      '288',
-      '317',
-      '341',
-      '375',
-      '380',
-      // SHARED
-      'GameOver',
+      // MMR
+      '9',   // Event Fanfares
+      '264', // Event Fail 1
+      '265', // Event Fail 2
+      '281', // Event Success
+      '288', // Game over
+      '317', // Truth Revealed
+      '341', // Song of Soaring Theme
+      '375', // Temple Appears
+      '380', // Giants Leave
       // OOTR
+      'GameOver',
       'EventFanfare',
       'GanondorfAppears',
       'PreludeOfLight',
@@ -386,17 +421,16 @@ export class MusicGroup {
   static readonly ClearFanfares = new MusicGroup({
     type: SongType.Fanfare,
     aliases: [
-      // MMR LEGACY
-      '16',
-      '289',
-      '319',
-      '321',
-      '376',
-      '377',
-      '382',
-      // SHARED
-      'BossDefeated',
+      // MMR
+      '16',  // Clear Fanfares
+      '289', // Boss Defeated
+      '319', // Goron Race Win
+      '321', // Horse Race Win
+      '376', // Temple Clear (Short)
+      '377', // Temple Clear (Long)
+      '382', // Moon Destroyed
       // OOTR
+      'BossDefeated',
       'SuccessFanfare',
       'EponaGoal',
       'SpiritStoneGet',

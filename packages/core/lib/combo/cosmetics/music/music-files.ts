@@ -256,7 +256,11 @@ export class OotrsParser extends MusicParser {
     const rawTxt = await files.metadata.async('text');
     const meta = rawTxt.split(/\r?\n/);
 
-    /* Probably unneeded, songs can default to bgm easily with music groups */
+    /**
+     * Probably unneeded, songs can default to bgm easily with music groups.
+     * Also, might need more concrete validation, though annoying to add, malformed
+     * .meta files could slip through in some areas.
+     */
     if (meta.length < 3) {
       this.monitor.warn(`Skipped music file ${zipName}: OOTRS metadata must have at least 3 lines`);
       return null;
@@ -264,7 +268,9 @@ export class OotrsParser extends MusicParser {
 
     const name = saneName(meta[0]);
     const instrumentSet = parseInt(meta[1], 16);
-    const songType = meta[2] === 'fanfare' ? SongType.Fanfare : SongType.Bgm; // just 'f' is not valid
+    const songType = meta[2] === 'fanfare' // Just 'f' is not valid
+      ? SongType.Fanfare
+      : SongType.Bgm;
 
     if (isNaN(instrumentSet)) {
       this.monitor.warn(`Skipped music file ${zipName}: meta instrument set "${instrumentSet}" is not a valid hex number`);

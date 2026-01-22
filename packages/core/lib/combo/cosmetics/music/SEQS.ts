@@ -1,4 +1,4 @@
-/*
+/**
  * SEQS
  *
  * This file contains the const that determines what audio

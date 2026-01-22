@@ -145,10 +145,12 @@ class MusicInjector {
     if (music.bankCustom) {
         /**
          * Temporary band-aid fix for custom music files.
-         * Custom music files may use a vanilla bank, or
-         * build onto a vanilla bank that uses an incorrect
-         * audio cache load type. This sets it to the proper
-         * type based on the sequence it will replace.
+         * Custom music files using a custom instrument bank
+         * may build on top of a vanilla bank that uses an
+         * incorrect audio cache load type for the intended
+         * audio sequence or area. This sets the audio cache
+         * load type to the correct audio cache type for the
+         * corresponding sequence slot.
          */
         if (entry.bankCacheType !== undefined){
           music.bankCustom.meta[1] = entry.bankCacheType;
@@ -185,7 +187,7 @@ class MusicInjector {
     const musics = new Set(this.musics);
 
     let unassignedSlots = [...shuffledSlots];
-    let musics_name = new Array();
+    let musicsName = new Array();
 
     this.writer.indent('Music');
 
@@ -210,7 +212,7 @@ class MusicInjector {
           await this.injectMusic(slot, songtestSong);
 
           const entry = SEQS[slot];
-          musics_name.push(`${entry.name} (Songtest): ${songtestSong.name} (${songtestSong.filename})`);
+          musicsName.push(`${entry.name} (Songtest): ${songtestSong.name} (${songtestSong.filename})`);
         }
     } else if (songtestSongs.length > 1) {
         this.monitor.warn(`Skipping songtest assigment: multiple songtest files found`);
@@ -267,10 +269,10 @@ class MusicInjector {
       await this.injectMusic(slot, music);
 
       const entry = SEQS[slot];
-      musics_name.push(`${entry.name}: ${music.name} (${music.filename})`);
+      musicsName.push(`${entry.name}: ${music.name} (${music.filename})`);
     }
 
-    for(let entry of musics_name.sort()) {
+    for(let entry of musicsName.sort()) {
       this.writer.write(entry);
     }
 

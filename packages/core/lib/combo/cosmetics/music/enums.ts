@@ -6,23 +6,24 @@
  * to avoid using more volatile data types.
  */
 
+/**
+ * Represents the possible in-game song types.
+ */
 export enum SongType {
   Bgm,
   Fanfare,
-  Cutscene,
+  Cutscene, // Unused
 }
 
 /**
- * Everything loaded into the audio pool is given a cache
- * load type that determines which cache it goes to when
- * it is called. For audio sequences and instrument banks,
- * most entries will use persistent and temporary.
+ * Represents one of the possible audio cache load types
+ * in Ocarina of Time and Majora's Mask.
  *
- * PERMANENT is reserved for sound effects.
- * PERSISTENT is generally used for fanfares.
- * TEMPORARY is generally used for bgm.
- * EITHER is generally used for audio samples.
- * EITHER_NOSYNC is generally used for audio samples.
+ * - PERMANENT: reserved for sound effects.
+ * - PERSISTENT: generally used for fanfares.
+ * - TEMPORARY: generally used for bgm.
+ * - EITHER: generally used for audio samples.
+ * - EITHER_NOSYNC: generally used for audio samples.
  */
 export enum CacheLoad {
   PERMANENT,
