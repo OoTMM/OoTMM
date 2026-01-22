@@ -361,7 +361,7 @@ export class MmrsParser extends MusicParser {
     const metadata = await this.extractMetadata(zip.name, songFiles);
     if (!metadata) return null;
 
-    return await this.buildMusicFile(zip, songFiles, metadata, 'oot');
+    return await this.buildMusicFile(zip, songFiles, metadata, 'mm');
   }
 }
 // #endregion
