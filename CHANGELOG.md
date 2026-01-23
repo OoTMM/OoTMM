@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 - Song of Double Time in Ocarina of Time will now keep your position if it needs to reload the scene.
 - Ocarina of Time warp songs in Majora's Mask now include the song playback, fanfare and song effect.
 - Song of Soaring and Song of Double Time in Ocarina of Time now include the song playback, fanfare and song effect.
+- Rework of Forest Temple MQ logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
 
 ### Fixed
 
