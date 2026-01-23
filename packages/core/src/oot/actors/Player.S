@@ -337,7 +337,7 @@ PATCH_START 0x80839320
   lw      a1, 0x002c (sp)
   jal     Player_ShouldInitiateItemExchangeHook
    or     a0, s0, zero
-  beqzl   v0, .+0xd4
+  beqzl   v0, .+0xd0
    lw     t4, 0x002c (sp)
   lb      v0, 0x0683 (s0)
   addiu   a0, zero, 0x0004
