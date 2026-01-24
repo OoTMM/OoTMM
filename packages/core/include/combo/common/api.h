@@ -461,6 +461,7 @@ s16     Camera_GetCamDirPitch(Camera* camera);
 s16     Camera_GetCamDirYaw(Camera* camera);
 void    Camera_SetCameraData(Camera* camera, s16 setDataFlags, void* data0, void* data1, s16 data2, s16 data3, s32 arg6);
 s32     Camera_RequestQuake(Camera* camera, s32 unused, s16 y, s32 duration);
+Vec3f   Camera_GetQuakeOffset(Camera* camera);
 
 s32 Collider_InitCylinder(struct PlayState* play, ColliderCylinder* collider);
 s32 Collider_SetCylinder(struct PlayState* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);

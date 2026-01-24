@@ -450,6 +450,7 @@ Actor_SpawnFloorDustRing = 0x800260e8;
 ActorShape_Init = 0x8001ec20;
 ActorShadow_DrawCircle = 0x8001eff4;
 Camera_RequestQuake = 0x800497a4;
+Camera_GetQuakeOffset = 0x80049d34;
 Effect_Add = 0x8001aa5c;
 Effect_Delete = 0x8001ae04;
 EffectSsBlast_SpawnWhiteShockwave = 0x8001cb1c;

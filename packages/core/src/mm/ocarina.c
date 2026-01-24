@@ -112,6 +112,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(PlayState* ctxt)
         ctxt->msgCtx.msgMode = 18; /* MSGMODE_SONG_PLAYED */
         ctxt->msgCtx.textBoxType = 3; /* TEXTBOX_TYPE_3 */
         ctxt->msgCtx.stateTimer = 10;
+        Interface_SetHudVisibility(1); /* HUD_VISIBILITY_NONE */
 
         return 0xfe;
     }
