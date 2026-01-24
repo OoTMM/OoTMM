@@ -323,8 +323,8 @@
 #"can_kill_baba_big": "soul_deku_baba" #Unused actor in MM.
 "can_kill_scrubs_woodfall": "soul_deku_scrub && (has_arrows || can_hookshot || can_use_deku_bubble || (has(MASK_DEKU) && has_nuts))" #Deku flying can drop nuts to kill them; relevant for action shuffle when you can’t spin.
 "can_kill_scrubs_anywhere": "soul_deku_scrub && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot || can_use_din || can_use_deku_bubble || has_nuts)"
-"can_kill_bubbles": "soul_bubble && (can_fight || has_arrows || can_use_deku_bubble || has_explosives || trick_keg_explosives)"
-"can_kill_beamos": "soul_beamos && (has_explosives || trick_keg_explosives)"
+"can_kill_bubbles": "soul_bubble && (can_fight || has_arrows || can_use_deku_bubble || has_explosives)"
+"can_kill_beamos": "soul_beamos && (has_explosives)"
 "can_kill_redead_gibdo": "soul_redead_gibdo && (can_fight || has_fire || has_light_arrow || has_explosives)"
 #"can_kill_zombies_popsicles": "soul_redead_gibdo && can_kill_zombies && can_use_fire_short_range" #Unused actor variant. Name is from MMR Actorizer community.
 "can_kill_poes": "soul_poe && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives)"
@@ -337,10 +337,10 @@
 "can_kill_guays": "soul_guay && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives)"
 "can_kill_guays_distance": "soul_guay && (has_arrows || can_hookshot || can_use_deku_bubble || has_mask_zora)"
 "can_kill_flying_pots": "soul_flying_pot" #They break themselves.
-"can_kill_chuchu": "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_arrows || has_mask_zora || has(MASK_DEKU) || has_explosives || trick_keg_explosives)"
+"can_kill_chuchu": "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_arrows || has_mask_zora || has(MASK_DEKU) || has_explosives)"
 "can_kill_deep_python": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && can_swim && (has_mask_zora || can_hookshot_short)"
-"can_kill_stalchildren": "soul_stalchild && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives || trick_keg_explosives)"
-"can_kill_leevers": "soul_leever && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives || trick_keg_explosives)"
+"can_kill_stalchildren": "soul_stalchild && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives)"
+"can_kill_leevers": "soul_leever && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives)"
 #"can_kill_shaboms": #Unused actor.
 "can_kill_skullfish": "soul_skull_fish && (has_mask_zora || (has_iron_boots && can_hookshot))"
 "can_kill_dexihands": "soul_enemy(SOUL_ENEMY_DEXIHAND) && (has_mask_zora || has_explosives)"
@@ -349,8 +349,8 @@
 "can_kill_eenos": "soul_eenos && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || has_explosives)"
 "can_kill_eyegore": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_arrows || can_hookshot_short || has_explosives)"
 "can_kill_eyegore_distance": soul_enemy(SOUL_ENEMY_EYEGORE) && can_use_light_arrows"
-"can_kill_hiploops": "soul_hiploop && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || has_explosives || trick_keg_explosives)"
-"can_kill_hiploops_masked": "soul_hiploop && (can_hookshot || has_mask_goron || has_explosives || trick_keg_explosives)"
+"can_kill_hiploops": "soul_hiploop && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || has_explosives)"
+"can_kill_hiploops_masked": "soul_hiploop && (can_hookshot || has_mask_goron || has_explosives)"
 "can_kill_real_bombchu": "soul_real_bombchu && (has(MASK_DEKU) || can_fight || has_shield || has_arrows || can_use_deku_bubble || has_explosives)" #can be rolled into without taking damage, may matter for Action shuffle in the future
 "can_kill_takkuri": "soul_takkuri && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot || has_explosives)"
 "can_kill_boes": "soul_enemy(SOUL_ENEMY_BOE) && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot || has_nuts || has_explosives)"
@@ -380,4 +380,4 @@
 
 "can_kill_twinmold": "soul_boss(SOUL_BOSS_TWINMOLD) && ((has_arrows && trick(MM_TWINMOLD_BOW)) || (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY))))"
 
-"can_kill_igos": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && (can_use_fire_arrows || (trick(MM_IGOS_DINS) && can_use_din)) && (can_fight || can_use_deku_bubble))" #If action shuffle is ever a thing, this needs to be adjusted since Deku won't be able to spin to stun. We currently assume if they can deku bubble, they can spin to stun.
+"can_kill_igos": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && (can_use_fire_arrows || (trick(MM_IGOS_DINS) && can_use_din)) && (can_fight || can_use_deku_bubble)))" #If action shuffle is ever a thing, this needs to be adjusted since Deku won't be able to spin to stun. We currently assume if they can deku bubble, they can spin to stun.
