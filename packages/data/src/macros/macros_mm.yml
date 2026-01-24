@@ -380,4 +380,4 @@
 
 "can_kill_twinmold": "soul_boss(SOUL_BOSS_TWINMOLD) && ((has_arrows && trick(MM_TWINMOLD_BOW)) || (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY))))"
 
-"can_kill_igos": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && (can_use_fire_arrows || (trick(MM_IGOS_DINS) && can_use_din)) && (can_fight || can_use_deku_bubble)))" #If action shuffle is ever a thing, this needs to be adjusted since Deku won't be able to spin to stun. We currently assume if they can deku bubble, they can spin to stun.
+"can_kill_igos": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && (can_use_fire_arrows || (trick(MM_IGOS_DINS) && can_use_din)) && ((can_fight || can_use_deku_bubble))" #If action shuffle is ever a thing, this needs to be adjusted since Deku won't be able to spin to stun. We currently assume if they can deku bubble, they can spin to stun.
