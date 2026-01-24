@@ -49,6 +49,7 @@
 # define ACTOR_DOOR_SHUTTER            0x02e
 # define ACTOR_EN_DODOJR               0x02f
 # define ACTOR_EN_BDFIRE               0x030
+# define ACTOR_CUSTOM_OCEFF_WIPE6      0x031
 # define ACTOR_EN_BOOM                 0x032
 # define ACTOR_EN_TORCH2               0x033
 # define ACTOR_EN_BILI                 0x034

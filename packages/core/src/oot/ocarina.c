@@ -560,7 +560,7 @@ void Ocarina_HandleCustomSongs(Player* player, PlayState* play)
 }
 
 static s16 sCustomSongActorEffectIds[] = {
-    ACTOR_OCEFF_WIPE3, /* TODO Song of Soaring effect actor*/
+    ACTOR_CUSTOM_OCEFF_WIPE6,
     ACTOR_OCEFF_WIPE,
     -1,
     ACTOR_OCEFF_WIPE,
