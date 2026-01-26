@@ -447,7 +447,7 @@ To set up the environment natively, follow these steps:
 > ```
 
 <h3 id="building-a-rom">
-1. Building a ROM
+5. Building a ROM
 </h3>
 
 Once the setup is complete, you can create a randomized ROM using the following command:
