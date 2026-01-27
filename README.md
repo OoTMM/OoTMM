@@ -73,6 +73,20 @@
     </li>
     <li>
       <a href="#features">Features</a>
+      <ul>
+        <li>
+          <a href="#cross-game-age-and-songs">Cross-Game Age and Songs</a>
+        </li>
+        <li>
+          <a href="#shared-items">Shared Items</a>
+        </li>
+        <li>
+          <a href="#ocarina-of-time-items-in-majoras-mask">Ocarina of Time Items in Majora's Mask</a>
+        </li>
+        <li>
+          <a href="#custom-music">Custom Music</a>
+        </li>
+      </ul>
     </li>
     <li>
       <a href="#local-setup">Local Setup</a>
@@ -218,16 +232,16 @@ The tables below list the OoTMM-compatible ROMs, along with their byte order, ve
 
 ### ROM Byte Order
 
-OoTMM does not require ROMs to be in big-endian byte order. However, using ROMs in other byte orders can negatively impact seed generation performance, as the randomizer must correct the byte order internally. For best performance, it is recommended to use ROMs in big-endian byte order.
+OoTMM does *not* require ROMs to be in big-endian byte order. However, using ROMs in other byte orders can negatively impact seed generation performance, as the randomizer must correct the byte order internally. For best performance, it is recommended to use ROMs in big-endian byte order.
 
 A ROM's byte order can often be inferred at a glance by its file extension:
 
-- `📄.z64` — Typically big-endian.
-- `📄.n64` — Typically little-endian.
-- `📄.v64` — Typically byteswapped.
+- **`📄.z64`** — Typically big-endian.
+- **`📄.n64`** — Typically little-endian.
+- **`📄.v64`** — Typically byteswapped.
 
 > [!WARNING]
-> The file extension *does not* guarantee a ROM's byte order is correct. Renaming the file *does not* change its byte order. To correctly verify or convert a ROM's byte order, use <a href="https://www.zophar.net/download_file/2854" target="_blank" title="Click to Download Tool64">Tool64</a>.
+> The file extension does *not* guarantee a ROM's byte order is correct. Renaming the file does *not* change its byte order. To correctly verify or convert a ROM's byte order, use <a href="https://www.zophar.net/download_file/2854" target="_blank" title="Click to Download Tool64">Tool64</a>.
 
 > [!TIP]
 > To convert a ROM to big-endian with Tool64, follow these steps:
@@ -261,10 +275,10 @@ For a list of changes between stable release versions, see [CHANGELOG.md][change
 
 To get help with the randomizer or your playthrough, join the community's [Discord server][ootmm-discord] and ask in one of the following channels:
 
-- `#tech-support` — Help with emulators or other technical issues.
-- `#playthrough-help` — Assistance with an OoTMM playthrough.
-- `#settings-help` — For questions about specific randomizer settings.
-- `#tracker-support` — Support for tracker-related issues.
+- **`#tech-support`** — Help with emulators or other technical issues.
+- **`#playthrough-help`** — Assistance with an OoTMM playthrough.
+- **`#settings-help`** — For questions about specific randomizer settings.
+- **`#tracker-support`** — Support for tracker-related issues.
 
 <p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
@@ -278,14 +292,74 @@ To get help with the randomizer or your playthrough, join the community's [Disco
 
 Along with randomizing items across both games, the randomizer includes several additional features to enhance your experience.
 
+> [!TIP]
+> More information about specific settings is available via the tooltips in the OoTMM web generator or on the project's [wiki][ootmm-randomizer-wiki].
+
 <!--
     Potential features to add/list:
     -
 -->
 
+### Cross-Game Age and Songs
+
+OoTMM allows Link's age, the warp songs from *The Legend of Zelda: Ocarina of Time*, and the Song of Soaring from *The Legend of Zelda: Majora's Mask* to function seamlessly across both games when the following settings are enabled:
+
+- **Cross-Games Age** — Link's age persists between games. If Link is an adult in OoT, he will be an adult in MM.
+- **Cross-Games OoT Warp Songs** — OoT warp songs can be played in MM, warping Link to their corresponding locations.
+- **Cross-Games MM Song of Soaring** — The Song of Soaring can be used in OoT, warping Link to the selected Owl Statue destination.
+
+### Shared Items
+
+OoTMM allows certain items, masks, equipment, upgrades, and songs to be shared between games:
+
+- Bow
+- Bomb Bag
+- Fire Arrow
+- Ice Arrow
+- Light Arrow
+- Hookshot
+- Lens of Truth
+- Bottles
+- Ocarinas
+- Bunny Hood
+- Keaton's Mask
+- Mask of Truth
+- Goron Mask
+- Zora Mask
+- Shields
+- Magic Power
+- Health Items and Upgrades
+- Wallets
+- Epona's Song
+- Song of Storms
+- Song of Time
+
+> [!IMPORTANT]
+> Enabling a shared item setting merges individual game checks into shared checks, reducing the number of those items in the randomized item pool.
+
+### Ocarina of Time Items in Majora's Mask
+
+OoTMM allows certain items, equipment, upgrades, and songs from *The Legend of Zelda: Ocarina of Time* to be added to *The Legend of Zelda: Majora's Mask*:
+
+- Fairy Ocarina
+- Megaton Hammer
+- Din's Fire
+- Farore's Wind
+- Nayru's Love
+- Stone of Agony
+- Deku Shield
+- Iron Boots
+- Hover Boots
+- Goron Tunic
+- Zora Tunic
+- Deku Stick & Deku Nut Upgrades
+- Strength Upgrades
+- Diving Upgrades
+- Sun's Song
+
 ### Custom Music
 
-Beyond randomizing the original songs, OoTMM supports adding custom music not included in *The Legend of Zelda: Ocarina of Time* and *The Legend of Zelda: Majora's Mask*.
+OoTMM supports custom music, allowing you to replace the original music of *The Legend of Zelda: Ocarina of Time* and *The Legend of Zelda: Majora's Mask*.
 
 #### Adding Music to OoTMM
 
@@ -345,14 +419,13 @@ To use custom music with the web generator, follow these steps:
 
 If you do not already have any custom music, you can download custom music files from any of the resources below:
 
-- [OoTMM Discord Server][ootmm-discord] — Found in the `#music-releases` channel of the server.
-- [Darunia's Joy Repository][darunias-joy] — A community resource of Ocarina of Time Randomizer custom music files.
-- [MMR Discord Server][mmr-discord] — Found in the `#music-releases` channel of the server.
-- [Majora's Music-Box House Repository][majoras-music-box-house] — A community resource of Majora's Mask Randomizer custom music files.
+- **[OoTMM Discord Server][ootmm-discord]** — Found in the `#music-releases` channel of the server.
+- **[Darunia's Joy Repository][darunias-joy]** — A community resource of Ocarina of Time Randomizer custom music files.
+- **[MMR Discord Server][mmr-discord]** — Found in the `#music-releases` channel of the server.
+- **[Majora's Music-Box House Repository][majoras-music-box-house]** — A community resource of Majora's Mask Randomizer custom music files.
 
 > [!IMPORTANT]
 > For Majora's Mask Randomizer custom music files, standalone sequence files (`📄.zseq`) are not supported by OoTMM.
-
 
 <p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
