@@ -50,6 +50,9 @@
   </h2>
   <ul>
     <li>
+     <a href="#changelog">Changelog</a>
+    </li>
+    <li>
       <a href="#usage">Usage</a>
     </li>
     <ul>
@@ -68,9 +71,6 @@
         <a href="#rom-byte-order">ROM Byte Order</a>
       </li>
     </ul>
-    <li>
-     <a href="#changelog">Changelog</a>
-    </li>
     <li>
       <a href="#features">Features</a>
       <ul>
@@ -113,6 +113,18 @@
     </li>
   </ul>
 </p>
+
+
+
+
+<!-- CHANGELOG -->
+<h2 id="changelog">
+  📝 Changelog
+</h2>
+
+For a list of changes between stable release versions, see [CHANGELOG.md][changelog].
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
 
 
@@ -254,17 +266,6 @@ A ROM's byte order can often be inferred at a glance by its file extension:
 
 <p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
-
-
-
-<!-- CHANGELOG -->
-<h2 id="changelog">
-  📝 Changelog
-</h2>
-
-For a list of changes between stable release versions, see [CHANGELOG.md][changelog].
-
-<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
 
 
