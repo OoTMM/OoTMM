@@ -497,7 +497,7 @@ To clone the project with Git, follow these steps:
 > ```
 
 <h3 id="adding-the-roms">
-1. Adding the ROMs
+3. Adding the ROMs
 </h3>
 
 To prepare the ROMs for seed generation, follow these steps:
@@ -525,7 +525,7 @@ To set up the environment natively, follow these steps:
 > 1. Open a terminal in the project's root directory.
 > 2. Run the setup script:
 > ```
-> ./setup.sh
+> scripts/setup.sh
 > ```
 
 <h3 id="building-a-rom">
