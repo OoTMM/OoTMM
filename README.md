@@ -296,6 +296,8 @@ Along with randomizing items across both games, the randomizer includes several 
 > [!TIP]
 > More information about specific settings is available via the tooltips in the OoTMM web generator or on the project's [wiki][ootmm-randomizer-wiki].
 
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
 <!--
     Potential features to add/list:
     -
@@ -308,6 +310,8 @@ OoTMM allows Link's age, the warp songs from *The Legend of Zelda: Ocarina of Ti
 - **Cross-Games Age** — Link's age persists between games. If Link is an adult in OoT, he will be an adult in MM.
 - **Cross-Games OoT Warp Songs** — OoT warp songs can be played in MM, warping Link to their corresponding locations.
 - **Cross-Games MM Song of Soaring** — The Song of Soaring can be used in OoT, warping Link to the selected Owl Statue destination.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
 ### Shared Items
 
@@ -338,6 +342,8 @@ OoTMM allows certain items, masks, equipment, upgrades, and songs to be shared b
 > [!IMPORTANT]
 > Enabling a shared item setting merges individual game checks into shared checks, reducing the number of those items in the randomized item pool.
 
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
 ### Ocarina of Time Items in Majora's Mask
 
 OoTMM allows certain items, equipment, upgrades, and songs from *The Legend of Zelda: Ocarina of Time* to be added to *The Legend of Zelda: Majora's Mask*:
@@ -357,6 +363,8 @@ OoTMM allows certain items, equipment, upgrades, and songs from *The Legend of Z
 - Strength Upgrades
 - Diving Upgrades
 - Sun's Song
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
 ### Custom Music
 
