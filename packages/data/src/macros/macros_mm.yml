@@ -369,6 +369,7 @@
 "can_kill_warts": "soul_enemy(SOUL_ENEMY_WART) && has_weapon && (has_mask_zora || has_explosives || has_arrows || can_hookshot || can_use_din || has_nuts)" #the () is for ways to clear the bubbles
 "can_kill_keeta": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && has_arrows && can_fight"
 “can_fight_pirates”: "soul_thief_fighter && can_fight"
+"can_kill_aliens": "has_arrows" # This is specifically for enemy drops. While Din's can kill, the actual aliens check does not allow for Din's to be logical so sticking to the same logic. No soul currently.
 #"can_kill_invisible_enemies": "can_use_lens" #Enemizer or Actorizer might make this macro relevant for switching enemies.
 
 #MM Bosses:
