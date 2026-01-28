@@ -369,6 +369,11 @@ export const TRICKS: Tricks = {
     name: 'Fewer Tunic Requirements (MM)',
     tooltip: 'Most things that would normally require Zora Tunic no longer will. Pirate Fortress Sewers and Pinnacle Rock will still require it.',
   },
+  MM_DEKU_STICK_FIGHTING: {
+    game: 'mm',
+    name: 'Deku Stick Fighting',
+    tooltip: 'Use Deku Sticks to defeat enemies instead of other weapons or a sword.',
+  },
   MM_PALACE_BEAN_SKIP: {
     game: 'mm',
     name: 'Skip Planting Beans in Deku Palace',
