@@ -327,7 +327,7 @@ OoTMM allows certain items, masks, equipment, upgrades, and songs to be shared b
 - Bottles
 - Ocarinas
 - Bunny Hood
-- Keaton's Mask
+- Keaton Mask
 - Mask of Truth
 - Goron Mask
 - Zora Mask
@@ -445,7 +445,7 @@ If you do not already have any custom music, you can download custom music files
   🛠️ Local Setup
 </h2>
 
-OoTMM can be built and run locally using either a **Dev Container** (recommended) or your **native environment** by following the stepd detailed below.
+OoTMM can be built and run locally using either a **Dev Container** (recommended) or your **native environment** by following the steps detailed below.
 
 <h3 id="installing-the-required-tools">
   1. Installing the Required Tools
