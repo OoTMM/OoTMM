@@ -276,7 +276,7 @@ typedef struct MessageContext
     s16                         unk_1203e;
     struct Actor*               unkActor;
     s16                         unk_12044;
-    s16                         unk_12046;
+    s16                         blockSunsSong;
     u8                          unk_12048; /* EnKakasi */
     char                        unk_12049[0x1];
     s16                         unk_1204a[0x5];

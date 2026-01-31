@@ -4,6 +4,7 @@
 #include <combo/types.h>
 #include <combo/math/vec.h>
 #include <combo/gi.h>
+#include <combo/common/z_anim_mat.h>
 
 typedef struct Font Font;
 typedef struct PlayState PlayState;
@@ -28,6 +29,7 @@ float Actor_HeightDiff(Actor* a, Actor* b);
 u16   Actor_Angle(Actor* a, Actor* b);
 void Actor_DrawDoorLock(PlayState* play, s32 frame, s32 type);
 
+Gfx* Graph_Alloc(GraphicsContext* gfxCtx, u32 size);
 Gfx* Gfx_Open(Gfx* gfx);
 void Gfx_Close(Gfx* gfxRef, Gfx* gfx);
 
@@ -305,6 +307,7 @@ s16 Animation_GetLastFrame(void* animation);
 
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
 void AudioOcarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState);
+void AudioOcarina_CheckIfStartedSong();
 #if defined(GAME_MM)
 s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
@@ -560,6 +563,7 @@ void Sram_IncrementDay(void);
 s32 Play_IsDebugCamEnabled(void);
 u16 Entrance_CreateFromSpawn(s32 spawn);
 void Audio_PlaySfx_BigBells(Vec3f* pos, u8 volumeIndex);
+void Audio_PlaySequenceAtPos(u8 seqPlayerIndex, Vec3f* pos, u16 seqId, f32 maxDist);
 s16 CutsceneManager_IsNext(s16 csId);
 void CutsceneManager_Queue(s16 csId);
 s16 CutsceneManager_Start(s16 csId, Actor* actor);
@@ -774,11 +778,13 @@ typedef enum {
 
 // TODO: rename
 void func_800BE5CC(Actor* actor, ColliderJntSph* jntSph, s32 elemIndex);
+void Actor_MatchFloorRotation(Actor* actor, s16 angle, Vec3s* rot);
 void func_800AE930(CollisionContext* colCtx, void* this, Vec3f* pos, f32 arg3, s16 angle, CollisionPoly* colPoly, s32 bgId);
 void func_800AEF44(void* this);
 void func_80169EFC(PlayState* play);
 void func_800B0EB0(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
 void func_80169AFC(PlayState* play, s16 camId, s16 timer);
+void func_800B8D10(PlayState* play, Actor* actor, f32 arg2, s16 yaw, f32 arg4, s32 arg5, u32 arg6);
 void func_800B8D50(PlayState* play, Actor* actor, f32 arg2, s16 yaw, f32 arg4, u32 arg5);
 void func_800B4AEC(PlayState* play, Actor* actor, f32 y);
 void func_800B3030(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep, s32 colorIndex);
@@ -790,7 +796,7 @@ void func_800C0094(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
 #endif
 
 Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, struct Actor* actor, Gfx* gfx);
-void AnimatedMat_Draw(PlayState* play, void* arg);
+void AnimatedMat_Draw(PlayState* play, AnimatedMaterial* matAnim);
 
 void ComboPlay_SpawnExtraSigns(PlayState* play);
 void ComboPlay_SpawnExtraActors(PlayState* play);

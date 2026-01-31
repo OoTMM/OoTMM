@@ -16,12 +16,12 @@
 "WARP_SONGS":
   region: NONE
   exits:
-    "OOT SONG_TP_FOREST": "can_play_tp_forest"
-    "OOT SONG_TP_FIRE": "can_play_tp_fire"
-    "OOT SONG_TP_WATER": "can_play_tp_water"
-    "OOT SONG_TP_SHADOW": "can_play_tp_shadow"
-    "OOT SONG_TP_SPIRIT": "can_play_tp_spirit"
-    "OOT SONG_TP_LIGHT": "can_play_tp_light"
+    "OOT SONG_TP_FOREST": "can_play_tp_forest && setting(games, ootmm)"
+    "OOT SONG_TP_FIRE": "can_play_tp_fire && setting(games, ootmm)"
+    "OOT SONG_TP_WATER": "can_play_tp_water && setting(games, ootmm)"
+    "OOT SONG_TP_SHADOW": "can_play_tp_shadow && setting(games, ootmm)"
+    "OOT SONG_TP_SPIRIT": "can_play_tp_spirit && setting(games, ootmm)"
+    "OOT SONG_TP_LIGHT": "can_play_tp_light && setting(games, ootmm)"
 
 "SOARING":
   region: NONE

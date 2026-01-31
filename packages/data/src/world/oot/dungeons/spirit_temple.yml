@@ -169,7 +169,7 @@
   locations:
     "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || can_use_din || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
     "Spirit Temple GS Statue": "gs && ((event(SPIRIT_ADULT_DOOR) && ((is_adult && scarecrow_hookshot) || has_hover_boots || can_longshot || climb_anywhere)) || (event(SPIRIT_CHILD_DOOR) && has_explosives && (has_hover_boots || can_hookshot || climb_anywhere)) || (climb_anywhere && can_damage_skull))"
-    "Spirit Temple Silver Gauntlets": "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_ANUBIS) && soul_beamos && (soul_armos || can_play_elegy)"
+    "Spirit Temple Silver Gauntlets": "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_ANUBIS) && soul_beamos && (soul_armos || can_play_emptiness)"
     "Spirit Temple Pot Statue Room 1": "true"
     "Spirit Temple Pot Statue Room 2": "true"
     "Spirit Temple Pot Statue Room 3": "true"
@@ -203,11 +203,11 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Adult Upper": "true"
-    "Spirit Temple Adult Hand": "(soul_armos || can_play_elegy) && soul_iron_knuckle && (can_use_sword || has_explosives || can_use_sticks)"
+    "Spirit Temple Adult Hand": "(soul_armos || can_play_emptiness) && soul_iron_knuckle && (can_use_sword || has_explosives || can_use_sticks)"
   locations:
     "Spirit Temple Adult Late Sun on Wall": "can_reflect_light"
-    "Spirit Temple Adult Invisible 1": "has_lens && (soul_armos || can_play_elegy)"
-    "Spirit Temple Adult Invisible 2": "has_lens && (soul_armos || can_play_elegy)"
+    "Spirit Temple Adult Invisible 1": "has_lens && (soul_armos || can_play_emptiness)"
+    "Spirit Temple Adult Invisible 2": "has_lens && (soul_armos || can_play_emptiness)"
     "Spirit Temple Adult Sunlight Big Fairy": "can_play_sun"
 
 "Spirit Temple Adult Hand":

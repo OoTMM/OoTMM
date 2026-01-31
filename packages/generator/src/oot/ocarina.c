@@ -11,6 +11,12 @@ typedef enum {
     CUSTOM_SONG_TIME,
     CUSTOM_SONG_ELEGY,
     CUSTOM_SONG_DOUBLE_TIME,
+    CUSTOM_SONG_HEALING,
+    CUSTOM_SONG_AWAKENING,
+    CUSTOM_SONG_GORON,
+    CUSTOM_SONG_GORON_HALF,
+    CUSTOM_SONG_ZORA,
+    CUSTOM_SONG_ORDER,
     CUSTOM_SONG_MAX,
 } CustomOcarinaSong;
 
@@ -55,11 +61,86 @@ static OcarinaSongButtons sSongDoubleTime = {
     }
 };
 
+static OcarinaSongButtons sSongHealing = {
+    6,
+    {
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_DOWN,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_DOWN,
+    }
+};
+
+static OcarinaSongButtons sSongAwakening = {
+    7,
+    {
+        OCARINA_BTN_C_UP,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_UP,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_A,
+    }
+};
+
+static OcarinaSongButtons sSongGoron = {
+    8,
+    {
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_A,
+    }
+};
+
+static OcarinaSongButtons sSongGoronHalf = {
+    6,
+    {
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_LEFT,
+    }
+};
+
+static OcarinaSongButtons sSongZora = {
+    7,
+    {
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_UP,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_DOWN,
+        OCARINA_BTN_C_LEFT,
+        OCARINA_BTN_C_RIGHT,
+    }
+};
+
+static OcarinaSongButtons sSongOrder = {
+    6,
+    {
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_DOWN,
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_DOWN,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_UP,
+    }
+};
+
 void Ocarina_CheckCustomSongs(void)
 {
-    if (gMmSave.info.inventory.quest.songSoaring
-        && Config_Flag(CFG_MM_CROSS_WARP)
-        && (Config_Flag(CFG_MM_CROSS_WARP_ADULT) || gSave.age == AGE_CHILD))
+    if (gCustomSave.hasSongSoaring
+        && (Config_Flag(CFG_OOT_AGELESS_SOARING) || gSave.age == AGE_CHILD))
     {
         comboCheckSong(&sSongSoaring, CUSTOM_SONG_SOARING);
     }
@@ -73,7 +154,416 @@ void Ocarina_CheckCustomSongs(void)
     {
         comboCheckSong(&sSongDoubleTime, CUSTOM_SONG_DOUBLE_TIME);
     }
+
+    if (gCustomSave.hasSongHealing)
+    {
+        comboCheckSong(&sSongHealing, CUSTOM_SONG_HEALING);
+    }
+
+    if (gCustomSave.hasSongAwakening)
+    {
+        comboCheckSong(&sSongAwakening, CUSTOM_SONG_AWAKENING);
+    }
+
+    if (gCustomSave.hasSongGoron)
+    {
+        comboCheckSong(&sSongGoron, CUSTOM_SONG_GORON);
+    }
+    else if (gCustomSave.hasSongGoronHalf)
+    {
+        comboCheckSong(&sSongGoronHalf, CUSTOM_SONG_GORON_HALF);
+    }
+
+    if (gCustomSave.hasSongZora)
+    {
+        comboCheckSong(&sSongZora, CUSTOM_SONG_ZORA);
+    }
+
+    if (gCustomSave.hasSongOrder)
+    {
+        comboCheckSong(&sSongOrder, CUSTOM_SONG_ORDER);
+    }
 }
+
+#define OCARINA_SONG_MAX 14
+extern u8 sOcarinaHasStartedSong;
+extern s8 sCurOcarinaBendIndex;
+extern u32 sOcarinaFlags;
+extern u8 sPrevOcarinaPitch;
+extern u8 sCurOcarinaPitch;
+extern u8 sFirstOcarinaSongIndex;
+extern u8 sLastOcarinaSongIndex;
+extern u16 sAvailOcarinaSongFlags;
+extern u16 sMusicStaffCurHeldLength[OCARINA_SONG_MAX];
+extern u16 sMusicStaffExpectedLength[OCARINA_SONG_MAX];
+extern OcarinaNote sOcarinaSongNotes[OCARINA_SONG_MAX][20];
+extern u16 sMusicStaffPos[OCARINA_SONG_MAX];
+extern u8 sMusicStaffPrevPitch;
+extern u8 sMusicStaffExpectedPitch[OCARINA_SONG_MAX];
+extern u8 sIsOcarinaInputEnabled;
+extern u8 sStaffOcarinaPlayingPos;
+extern u8 sMusicStaffNumNotesPerTest;
+extern u16 sPrevOcarinaWithMusicStaffFlags;
+
+static u16 sMusicStaffCurHeldLengthCustom[CUSTOM_SONG_MAX - 1];
+static u16 sMusicStaffExpectedLengthCustom[CUSTOM_SONG_MAX - 1];
+static u16 sMusicStaffPosCustom[CUSTOM_SONG_MAX - 1];
+static u8 sMusicStaffExpectedPitchCustom[CUSTOM_SONG_MAX - 1];
+static u16 sAvailOcarinaSongFlagsCustom;
+
+static OcarinaNote sOcarinaCustomSongNotes[CUSTOM_SONG_MAX - 1][20] = {
+    // OCARINA_SONG_SOARING
+    {
+        { OCARINA_PITCH_F4, 18, 84, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 18, 80, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 36, 94, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 18, 73, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 18, 76, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 108, 96, 2, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_TIME
+    {
+        { OCARINA_PITCH_A4, 32, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 65, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 33, 80, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 32, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 65, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 99, 80, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_ELEGY
+    {
+        { OCARINA_PITCH_A4, 85, 93, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 43, 91, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 43, 93, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 21, 88, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 21, 88, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 43, 101, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 85, 95, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 94, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_DOUBLE_TIME
+    {
+        { OCARINA_PITCH_A4, 29, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 30, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 29, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 30, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 29, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 99, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 0, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_HEALING
+    {
+        { OCARINA_PITCH_B4, 32, 88, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 33, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 33, 69, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 32, 94, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 33, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 121, 86, 2, 0, 0 },
+        { OCARINA_PITCH_NONE, 10, 84, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_SONATA
+    {
+        { OCARINA_PITCH_D5, 19, 92, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 19, 90, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 19, 90, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 38, 90, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 39, 92, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 76, 89, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 77, 82, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 86, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_GORON_LULLABY
+    {
+        { OCARINA_PITCH_D4, 41, 80, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 40, 72, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 39, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 42, 76, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 40, 84, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 39, 76, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 41, 84, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 80, 76, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 40, 76, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 66, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_GORON_LULLABY_INTRO
+    {
+        { OCARINA_PITCH_D4, 32, 78, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 33, 90, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 33, 87, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 32, 92, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 33, 86, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 130, 80, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 66, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_NEW_WAVE
+    {
+        { OCARINA_PITCH_B4, 64, 74, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 13, 88, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 12, 90, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 78, 88, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 12, 76, 0, 0, 0 },
+        { OCARINA_PITCH_B4, 13, 76, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 114, 76, 6, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
+    },
+
+    // OCARINA_SONG_OATH
+    {
+        { OCARINA_PITCH_A4, 97, 104, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 48, 88, 0, 0, 0 },
+        { OCARINA_PITCH_D4, 49, 78, 0, 0, 0 },
+        { OCARINA_PITCH_F4, 49, 78, 0, 0, 0 },
+        { OCARINA_PITCH_A4, 48, 94, 0, 0, 0 },
+        { OCARINA_PITCH_D5, 97, 100, 0, 0, 0 },
+        { OCARINA_PITCH_NONE, 0, 96, 0, 0, 0 },
+
+    },
+};
+
+void Ocarina_AfterStart()
+{
+    sAvailOcarinaSongFlagsCustom = 0;
+    for (u8 i = 0; i < CUSTOM_SONG_MAX - 1; i++) {
+        sMusicStaffPosCustom[i] = 0;
+        sMusicStaffCurHeldLengthCustom[i] = 0;
+        sMusicStaffExpectedLengthCustom[i] = 0;
+        sMusicStaffExpectedPitchCustom[i] = 0;
+
+        u8 check = 0;
+        u8 songIndex = i + 1;
+        switch (songIndex)
+        {
+            case CUSTOM_SONG_SOARING:
+                check = gCustomSave.hasSongSoaring
+                    && (Config_Flag(CFG_OOT_AGELESS_SOARING) || gSave.age == AGE_CHILD);
+                break;
+            case CUSTOM_SONG_HEALING:
+                check = gCustomSave.hasSongHealing;
+                break;
+            case CUSTOM_SONG_AWAKENING:
+                check = gCustomSave.hasSongAwakening;
+                break;
+            case CUSTOM_SONG_GORON:
+                check = gCustomSave.hasSongGoron;
+                if (gPlay->msgCtx.ocarinaAction == OCARINA_ACTION_CHECK_CUSTOM_SONG_GORON_HALF)
+                {
+                    check = 0;
+                }
+                break;
+            case CUSTOM_SONG_GORON_HALF:
+                check = gCustomSave.hasSongGoronHalf && (!gCustomSave.hasSongGoron || gPlay->msgCtx.ocarinaAction == OCARINA_ACTION_CHECK_CUSTOM_SONG_GORON_HALF);
+                break;
+            case CUSTOM_SONG_ZORA:
+                check = gCustomSave.hasSongZora;
+                break;
+            case CUSTOM_SONG_ELEGY:
+                check = gCustomSave.hasElegy;
+                break;
+            case CUSTOM_SONG_ORDER:
+                check = gCustomSave.hasSongOrder;
+                break;
+        }
+
+        if (check)
+        {
+            sAvailOcarinaSongFlagsCustom |= (1 << songIndex);
+        }
+    }
+    sCustomSongPlayed = CUSTOM_SONG_NONE;
+}
+
+PATCH_FUNC(0x800c22d4, Ocarina_AfterStart)
+
+void Ocarina_PlayStaffAppearSound(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* vol, s8* reverbAdd)
+{
+    u16 ocarinaAction = gPlay->msgCtx.ocarinaAction;
+    if (ocarinaAction >= OCARINA_ACTION_CHECK_MINUET && ocarinaAction <= OCARINA_ACTION_CHECK_STORMS)
+    {
+        Audio_PlaySfxGeneral(sfxId, pos, token, freqScale, vol, reverbAdd);
+    }
+    if (ocarinaAction >= OCARINA_ACTION_CHECK_CUSTOM_SONG_SOARING && ocarinaAction < OCARINA_ACTION_CHECK_MAX)
+    {
+        Audio_PlaySfxGeneral(sfxId, pos, token, freqScale, vol, reverbAdd);
+    }
+}
+
+PATCH_CALL(0x800dd128, Ocarina_PlayStaffAppearSound)
+
+static s32 checkSong(u8 songIndex, u8 noNewValidInput, OcarinaNote ocarinaSongNotes[][20], u16 musicStaffCurHeldLength[], u16 musicStaffExpectedLength[], u16 musicStaffPos[], u8 musicStaffExpectedPitch[], s32 isScarecrow)
+{
+    OcarinaNote* curNote;
+    OcarinaNote* nextNote;
+    u32 result = 0;
+
+    musicStaffCurHeldLength[songIndex] = musicStaffExpectedLength[songIndex] + 18;
+
+    if (noNewValidInput)
+    {
+        if ((musicStaffCurHeldLength[songIndex] >= musicStaffExpectedLength[songIndex] - 18) &&
+            (musicStaffCurHeldLength[songIndex] >= musicStaffExpectedLength[songIndex] + 18) &&
+            (ocarinaSongNotes[songIndex][musicStaffPos[songIndex]].length == 0) &&
+            (sMusicStaffPrevPitch == musicStaffExpectedPitch[songIndex]))
+        {
+            result = 1;
+        }
+    }
+    else if (musicStaffCurHeldLength[songIndex] >= (musicStaffExpectedLength[songIndex] - 18))
+    {
+        // This else-if statement always holds true, taken if a new note is played
+        if (sMusicStaffPrevPitch != OCARINA_PITCH_NONE)
+        {
+            // New note is played
+            if (sMusicStaffPrevPitch == musicStaffExpectedPitch[songIndex])
+            {
+                // Note is part of expected song
+                if (isScarecrow)
+                {
+                    musicStaffCurHeldLength[songIndex] = 0;
+                }
+            }
+            else
+            {
+                // Note is not part of expected song, so this song is no longer available as an option in this
+                // playback
+                result = -1;
+            }
+        }
+
+        curNote = &ocarinaSongNotes[songIndex][musicStaffPos[songIndex]];
+        nextNote = &ocarinaSongNotes[songIndex][++musicStaffPos[songIndex]];
+        musicStaffExpectedLength[songIndex] = curNote->length;
+        musicStaffExpectedPitch[songIndex] = curNote->pitch;
+
+        // The current note is not the expected note.
+        if (sCurOcarinaPitch != musicStaffExpectedPitch[songIndex])
+        {
+            result = -1;
+        }
+
+        while (curNote->pitch == nextNote->pitch ||
+                (nextNote->pitch == OCARINA_BTN_INVALID && nextNote->length != 0))
+        {
+            musicStaffExpectedLength[songIndex] += nextNote->length;
+            curNote = &ocarinaSongNotes[songIndex][musicStaffPos[songIndex]];
+            nextNote = &ocarinaSongNotes[songIndex][musicStaffPos[songIndex] + 1];
+            musicStaffPos[songIndex]++;
+        }
+    }
+    return result;
+}
+
+void Ocarina_CheckSongsWithMusicStaff()
+{
+    u16 curOcarinaSongFlag;
+    u8 noNewValidInput = false;
+    s8 staffOcarinaPlayingPosOffset = 0;
+    u8 songIndex;
+
+    AudioOcarina_CheckIfStartedSong();
+
+    if (!sOcarinaHasStartedSong)
+    {
+        return;
+    }
+
+    if (ABS_ALT(sCurOcarinaBendIndex) > 20)
+    {
+        sOcarinaFlags = 0;
+        return;
+    }
+
+    if (sPrevOcarinaPitch == sCurOcarinaPitch || sCurOcarinaPitch == OCARINA_PITCH_NONE)
+    {
+        noNewValidInput = true;
+    }
+
+    for (songIndex = 1; songIndex < CUSTOM_SONG_MAX; songIndex++)
+    {
+        curOcarinaSongFlag = 1 << songIndex;
+
+        if (sAvailOcarinaSongFlagsCustom & curOcarinaSongFlag)
+        {
+            s32 result = checkSong(songIndex - 1,
+                noNewValidInput,
+                sOcarinaCustomSongNotes,
+                sMusicStaffCurHeldLengthCustom,
+                sMusicStaffExpectedLengthCustom,
+                sMusicStaffPosCustom,
+                sMusicStaffExpectedPitchCustom,
+                0);
+            if (result > 0)
+            {
+                gPlayedOcarinaSong = songIndex + 0x80 + 1;
+                sIsOcarinaInputEnabled = false;
+                sOcarinaFlags = 0;
+            }
+            else if (result < 0)
+            {
+                sAvailOcarinaSongFlagsCustom ^= curOcarinaSongFlag;
+            }
+        }
+    }
+
+    for (songIndex = sFirstOcarinaSongIndex; songIndex < sLastOcarinaSongIndex; songIndex++)
+    {
+        curOcarinaSongFlag = 1 << songIndex;
+
+        if (sAvailOcarinaSongFlags & curOcarinaSongFlag)
+        {
+            s32 result = checkSong(songIndex,
+                noNewValidInput,
+                sOcarinaSongNotes,
+                sMusicStaffCurHeldLength,
+                sMusicStaffExpectedLength,
+                sMusicStaffPos,
+                sMusicStaffExpectedPitch,
+                songIndex == OCARINA_SONG_SCARECROW_SPAWN);
+            if (result > 0)
+            {
+                gPlayedOcarinaSong = songIndex + 1;
+                sIsOcarinaInputEnabled = false;
+                sOcarinaFlags = 0;
+            }
+            else if (result < 0)
+            {
+                sAvailOcarinaSongFlags ^= curOcarinaSongFlag;
+            }
+        }
+
+        // if a note is played that doesn't match a song, the song bit in sAvailOcarinaSongFlags is turned off
+        // if there are no more songs remaining that it could be and the maximum position has been exceeded, then
+        if (sAvailOcarinaSongFlags == 0 && sStaffOcarinaPlayingPos >= sMusicStaffNumNotesPerTest)
+        {
+            sIsOcarinaInputEnabled = false;
+            sOcarinaFlags = 0;
+            return;
+        }
+    }
+
+    if (!noNewValidInput)
+    {
+        sMusicStaffPrevPitch = sCurOcarinaPitch;
+        sStaffOcarinaPlayingPos += staffOcarinaPlayingPosOffset + 1;
+    }
+}
+
+PATCH_FUNC(0x800c2318, Ocarina_CheckSongsWithMusicStaff)
 
 void OcarinaMaskButtons(void)
 {
@@ -259,12 +749,21 @@ static void HandleElegy(PlayState* play)
     Message_Close(play);
 }
 
+void Ocarina_ClearLastPlayedSong(PlayState* play)
+{
+    sCustomSongPlayed = CUSTOM_SONG_NONE;
+}
+
 void Ocarina_HandleLastPlayedSong(PlayState* play, Player* player, s16 lastPlayedSong)
 {
     if (sCustomSongPlayed > CUSTOM_SONG_NONE && sCustomSongPlayed < CUSTOM_SONG_MAX)
     {
         sInCustomSong = sCustomSongPlayed;
         sCustomSongPlayed = CUSTOM_SONG_NONE;
+        if (sInCustomSong == CUSTOM_SONG_SOARING && play->msgCtx.ocarinaAction == OCARINA_ACTION_CHECK_CUSTOM_SONG_SOARING)
+        {
+            sInCustomSong = CUSTOM_SONG_NONE;
+        }
         switch (sInCustomSong)
         {
         case CUSTOM_SONG_SOARING:
@@ -275,6 +774,15 @@ void Ocarina_HandleLastPlayedSong(PlayState* play, Player* player, s16 lastPlaye
             break;
         case CUSTOM_SONG_DOUBLE_TIME:
             SetupSongOfDoubleTime(play);
+            break;
+        case CUSTOM_SONG_HEALING:
+        case CUSTOM_SONG_AWAKENING:
+        case CUSTOM_SONG_GORON:
+        case CUSTOM_SONG_GORON_HALF:
+        case CUSTOM_SONG_ZORA:
+        case CUSTOM_SONG_ORDER:
+            play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
+            Message_Close(play);
             break;
         }
         return;
@@ -506,8 +1014,8 @@ static void HandleSongOfDoubleTime(PlayState* play)
                 play->nextEntranceIndex = gSaveContext.save.entrance;
                 play->transitionTrigger = TRANS_TRIGGER_START;
                 gSaveContext.sunSongState = 0; /* SUNSSONG_INACTIVE */
-                gSaveContext.seqId = 0xff; /* NA_BGM_DISABLED */
-                gSaveContext.natureAmbienceId = 0xff; /* NATURE_ID_DISABLED */
+                gSaveContext.seqId = (u8)NA_BGM_DISABLED;
+                gSaveContext.natureAmbienceId = NATURE_ID_DISABLED;
             }
         }
     }
@@ -517,24 +1025,40 @@ u8 Ocarina_BeforeSongPlayingProcessed(PlayState* play)
 {
     u8 songPlayed = play->msgCtx.ocarinaStaff->state;
 
-    if (songPlayed >= 0x81 && songPlayed <= 0x84)
+    if (songPlayed > 0x80 && songPlayed < 0x80 + CUSTOM_SONG_MAX)
     {
-        PlaySound(0x4807); /* NA_SE_SY_TRE_BOX_APPEAR */
-
         sCustomSongPlayed = songPlayed - 0x80;
 
-        switch (sCustomSongPlayed)
+        if (sCustomSongPlayed == CUSTOM_SONG_ELEGY && play->msgCtx.ocarinaAction != OCARINA_ACTION_CHECK_CUSTOM_SONG_ELEGY)
         {
-        case CUSTOM_SONG_ELEGY:
+            PlaySound(NA_SE_SY_TRE_BOX_APPEAR);
             HandleElegy(play);
-            break;
-        default:
-            Message_ContinueTextbox(play, 0x86f);
-            play->msgCtx.msgMode = 17; /* MSGMODE_SONG_PLAYED */
-            play->msgCtx.textBoxType = 3; /* TEXTBOX_TYPE_OCARINA */
-            play->msgCtx.stateTimer = 10;
-            Interface_ChangeHudVisibilityMode(1); /* HUD_VISIBILITY_NOTHING */
-            break;
+        }
+        else
+        {
+            if (play->msgCtx.ocarinaAction == OCARINA_ACTION_CHECK_SCARECROW_SPAWN)
+            {
+                AudioOcarina_SetInstrument(OCARINA_INSTRUMENT_OFF);
+                PlaySound(NA_SE_SY_OCARINA_ERROR);
+                play->msgCtx.stateTimer = 10;
+                play->msgCtx.msgMode = MSGMODE_OCARINA_FAIL;
+            }
+            else if (play->msgCtx.ocarinaAction == OCARINA_ACTION_FREE_PLAY)
+            {
+                Message_ContinueTextbox(play, 0x86f);
+                play->msgCtx.msgMode = MSGMODE_SONG_PLAYED;
+                play->msgCtx.textBoxType = 3; /* TEXTBOX_TYPE_OCARINA */
+                play->msgCtx.stateTimer = 10;
+                PlaySound(NA_SE_SY_TRE_BOX_APPEAR);
+                Interface_ChangeHudVisibilityMode(1); /* HUD_VISIBILITY_NOTHING */
+            }
+            else
+            {
+                play->msgCtx.msgMode = MSGMODE_OCARINA_CORRECT_PLAYBACK;
+                play->msgCtx.stateTimer = 20;
+                PlaySound(NA_SE_SY_TRE_BOX_APPEAR);
+                Interface_ChangeHudVisibilityMode(1); /* HUD_VISIBILITY_NOTHING */
+            }
         }
 
         return 0xfe;
@@ -559,18 +1083,30 @@ void Ocarina_HandleCustomSongs(Player* player, PlayState* play)
     }
 }
 
-static s16 sCustomSongActorEffectIds[] = {
+static s16 sCustomSongActorEffectIds[CUSTOM_SONG_MAX - 1] = {
     ACTOR_CUSTOM_OCEFF_WIPE6,
     ACTOR_OCEFF_WIPE,
-    -1,
+    ACTOR_CUSTOM_OCEFF_WIPE5,
     ACTOR_OCEFF_WIPE,
+    ACTOR_CUSTOM_OCEFF_WIPE7,
+    ACTOR_CUSTOM_OCEFF_WIPE5,
+    ACTOR_CUSTOM_OCEFF_WIPE5,
+    ACTOR_CUSTOM_OCEFF_WIPE5,
+    ACTOR_CUSTOM_OCEFF_WIPE5,
+    ACTOR_CUSTOM_OCEFF_WIPE5,
 };
 
-static u16 sCustomSongActorEffectParams[] = {
+static u16 sCustomSongActorEffectParams[CUSTOM_SONG_MAX - 1] = {
     0,
     1,
+    3,
+    1,
     0,
-    1
+    0,
+    1,
+    1,
+    2,
+    4
 };
 
 void Ocarina_ResetOcarinaNoteState()
@@ -587,62 +1123,11 @@ void Ocarina_ResetOcarinaNoteState()
             u16 actorParams = sCustomSongActorEffectParams[sCustomSongPlayed - 1];
             Actor_Spawn(&play->actorCtx, play, actorId, player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, 0, 0, 0, actorParams);
         }
+        play->msgCtx.unk_e3f2 = play->msgCtx.lastPlayedSong = OCARINA_SONG_CUSTOM_START + sCustomSongPlayed;
     }
 }
 
 PATCH_CALL(0x800dee00, Ocarina_ResetOcarinaNoteState)
-
-static OcarinaNote sOcarinaWarpSongNotes[][20] = {
-    // OCARINA_SONG_SOARING
-    {
-        { OCARINA_PITCH_F4, 18, 84, 0, 0, 0 },
-        { OCARINA_PITCH_B4, 18, 80, 0, 0, 0 },
-        { OCARINA_PITCH_D5, 36, 94, 0, 0, 0 },
-        { OCARINA_PITCH_F4, 18, 73, 0, 0, 0 },
-        { OCARINA_PITCH_B4, 18, 76, 0, 0, 0 },
-        { OCARINA_PITCH_D5, 108, 96, 2, 0, 0 },
-        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
-    },
-
-    // OCARINA_SONG_TIME
-    {
-        { OCARINA_PITCH_A4, 32, 84, 0, 0, 0 },
-        { OCARINA_PITCH_D4, 65, 88, 0, 0, 0 },
-        { OCARINA_PITCH_F4, 33, 80, 0, 0, 0 },
-        { OCARINA_PITCH_A4, 32, 84, 0, 0, 0 },
-        { OCARINA_PITCH_D4, 65, 88, 0, 0, 0 },
-        { OCARINA_PITCH_F4, 99, 80, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 0, 90, 0, 0, 0 },
-    },
-
-    // OCARINA_SONG_ELEGY
-    {
-        { OCARINA_PITCH_A4, 85, 93, 0, 0, 0 },
-        { OCARINA_PITCH_B4, 43, 91, 0, 0, 0 },
-        { OCARINA_PITCH_A4, 43, 93, 0, 0, 0 },
-        { OCARINA_PITCH_F4, 21, 88, 0, 0, 0 },
-        { OCARINA_PITCH_A4, 21, 88, 0, 0, 0 },
-        { OCARINA_PITCH_D5, 43, 101, 0, 0, 0 },
-        { OCARINA_PITCH_B4, 85, 95, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 0, 94, 0, 0, 0 },
-    },
-
-    // OCARINA_SONG_DOUBLE_TIME
-    {
-        { OCARINA_PITCH_A4, 29, 84, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
-        { OCARINA_PITCH_A4, 30, 84, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
-        { OCARINA_PITCH_D4, 29, 84, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
-        { OCARINA_PITCH_D4, 30, 84, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
-        { OCARINA_PITCH_F4, 29, 84, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 3, 84, 0, 0, 0 },
-        { OCARINA_PITCH_F4, 99, 84, 0, 0, 0 },
-        { OCARINA_PITCH_NONE, 0, 0, 0, 0, 0 },
-    },
-};
 
 void Ocarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState)
 {
@@ -650,7 +1135,7 @@ void Ocarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState)
     {
         OcarinaNote** sPlaybackSong = (OcarinaNote**)0x80102b3c;
         AudioOcarina_SetPlaybackSong(1, playbackState);
-        *sPlaybackSong = sOcarinaWarpSongNotes[sCustomSongPlayed - 1];
+        *sPlaybackSong = sOcarinaCustomSongNotes[sCustomSongPlayed - 1];
     }
     else
     {
@@ -660,18 +1145,24 @@ void Ocarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState)
 
 PATCH_CALL(0x800deec8, Ocarina_SetPlaybackSong);
 
-static u16 sOcarinaWarpSongFanfares[] = {
+static u16 sOcarinaCustomSongFanfares[CUSTOM_SONG_MAX - 1] = {
     FANFARE_SONG_SOARING,
     FANFARE_SONG_TIME,
     FANFARE_SONG_EMPTINESS,
     FANFARE_SONG_DOUBLE_TIME,
+    FANFARE_SONG_HEALING,
+    FANFARE_SONG_AWAKENING,
+    FANFARE_SONG_GORON,
+    FANFARE_SONG_GORON_HALF,
+    FANFARE_SONG_ZORA,
+    FANFARE_SONG_ORDER,
 };
 
 void Ocarina_PlayFanfare(u16 seqId, u8 ioData)
 {
     if (sCustomSongPlayed > CUSTOM_SONG_NONE && sCustomSongPlayed < CUSTOM_SONG_MAX)
     {
-        Audio_PlayFanfare(sOcarinaWarpSongFanfares[sCustomSongPlayed - 1]);
+        Audio_PlayFanfare(sOcarinaCustomSongFanfares[sCustomSongPlayed - 1]);
     }
     else
     {
@@ -681,11 +1172,17 @@ void Ocarina_PlayFanfare(u16 seqId, u8 ioData)
 
 PATCH_CALL(0x800deee8, Ocarina_PlayFanfare)
 
-const char* sWarpSongPlayedText[] = {
+const char* sCustomSongPlayedText[CUSTOM_SONG_MAX - 1] = {
     TEXT_COLOR_RED "Song of Soaring",
     TEXT_COLOR_RED "Song of Time",
     TEXT_COLOR_RED "Elegy of Emptiness",
     TEXT_COLOR_RED "Song of Double Time",
+    TEXT_COLOR_RED "Song of Healing",
+    TEXT_COLOR_RED "Sonata of Awakening",
+    TEXT_COLOR_RED "Goron Lullaby",
+    TEXT_COLOR_RED "Goron Lullaby Intro",
+    TEXT_COLOR_RED "New Wave Bossa Nova",
+    TEXT_COLOR_RED "Oath to Order",
 };
 
 void Ocarina_DisplaySongPlayedTextbox(PlayState* play, u16 textId)
@@ -697,7 +1194,7 @@ void Ocarina_DisplaySongPlayedTextbox(PlayState* play, u16 textId)
         b = play->msgCtx.font.msgBuf;
         comboTextAppendHeader(&b);
         comboTextAppendStr(&b, "You played the ");
-        comboTextAppendStr(&b, sWarpSongPlayedText[sCustomSongPlayed - 1]);
+        comboTextAppendStr(&b, sCustomSongPlayedText[sCustomSongPlayed - 1]);
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "." TEXT_NL TEXT_NL TEXT_NL TEXT_END);
     }

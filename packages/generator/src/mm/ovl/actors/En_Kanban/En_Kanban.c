@@ -874,7 +874,7 @@ void EnKanban_Update(Actor* thisx, PlayState* play) {
 
                 case 1:
                     if ((play->msgCtx.ocarinaMode == OCARINA_MODE_END) &&
-                        (play->msgCtx.ocarinaSong == OCARINA_SONG_HEALING)) {
+                        (play->msgCtx.ocarinaSong == OCARINA_SONG_HEALING || play->msgCtx.ocarinaSong == OCARINA_SONG_ZELDAS_LULLABY)) {
                         this->actionState = ENKANBAN_REPAIR;
                         this->bounceX = 1;
                         Audio_PlaySfx(NA_SE_SY_TRE_BOX_APPEAR);

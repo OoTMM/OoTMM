@@ -9,7 +9,14 @@ All notable changes to this project will be documented in this file.
 - Add a platinum token item, which counts as every skulltula token at once.
 - Add colored squares next to settings in the cosmetics tab when they have a color associated with them.
 - Add a setting to shuffle the Lottery in Majora's Mask, with all nights having a different item.
-- Add a setting to shuffle the required songs for various events in OoT (thanks Mizu Aoyuki for the icons).
+- Add a setting to shuffle the required songs for various events in OoT and MM (thanks Mizu Aoyuki for the icons).
+- Add Song of Soaring (OoT) and Ageless Song of Soaring to replace Cross-Games MM Song of Soaring.
+- Add Sonata of Awakening (OoT), Goron Lullaby (OoT), New Wave Bossa Nova (OoT), Oath to Order (OoT), which do nothing unless Song Events Shuffle is on.
+- Add Song of Healing (OoT), which heals signs and summons fairies at gossip stones.
+- Add Zelda's Lullaby (MM), which heals signs and summons fairies at gossip stones.
+- Add Saria's Song (MM), which makes some redeads dance and summons fairies at gossip stones.
+- Add Minuet of Forest (MM), Bolero of Fire (MM), Serenade of Water (MM), Requiem of Spirit (MM), Nocturne of Shadow (MM) and Prelude of Light (MM) to replace Cross-Games OoT Warp Songs.
+- Add Shared settings variants of each song above.
 - Add animal souls in OoT and MM.
 - Cosmetics setting to enable BGM during night time.
 - Add soft soil shuffle to Ocarina of Time and Majora's Mask.
@@ -46,6 +53,7 @@ All notable changes to this project will be documented in this file.
 - Song of Soaring and Song of Double Time in Ocarina of Time now include the song playback, fanfare and song effect.
 - Rework of Forest Temple MQ logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
 - The trick to enter Bariande's room in vanilla Jabu-Jabu without Boomerang now looks for Hookshot instead of Longshot.
+- Rename Sun's Song in MM to Sun's Song (MM) to be consistent.
 
 ### Fixed
 

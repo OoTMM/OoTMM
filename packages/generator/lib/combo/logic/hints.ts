@@ -305,9 +305,9 @@ export class LogicPassHints {
 
   private locRegionOath(playerId: number): LocRegion[] {
     if (this.state.settings.songs === 'notes') {
-      return this.findItemMulti(makePlayerItem(Items.MM_SONG_NOTE_ORDER, playerId), 6);
+      return this.findItemMulti([makePlayerItem(Items.MM_SONG_NOTE_ORDER, playerId), makePlayerItem(Items.SHARED_SONG_NOTE_ORDER, playerId)], 6);
     } else {
-      const oath = [this.findItem(makePlayerItem(Items.MM_SONG_ORDER, playerId))];
+      const oath = [this.findItem([makePlayerItem(Items.MM_SONG_ORDER, playerId), makePlayerItem(Items.SHARED_SONG_ORDER, playerId)])];
       for (let i = 0; i < 5; ++i) {
         oath.push({ loc: null, region: makeRegion('NONE', playerId) });
       }

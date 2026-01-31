@@ -37,6 +37,7 @@ void    Audio_SetCutsceneFlag(int flag);
 u16     Audio_GetActiveSeqId(int channel);
 void    Audio_DisplayMusicName(PlayState* play);
 void    Audio_PlaySequenceWithSeqPlayerIO(u8 seqPlayerIndex, u16 seqId, u8 fadeInDuration, s8 ioPort, s8 ioData);
+void    Audio_PlaySubBgm(u16 seqId);
 
 #if defined(GAME_OOT)
 void Audio_PlaySfxTransposed(Vec3f* pos, u16 sfxId, s8 semitone);

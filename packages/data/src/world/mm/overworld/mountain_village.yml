@@ -204,7 +204,7 @@
     "Near Goron Graveyard": "true"
     "Goron Graveyard Water": "has_mask_goron || can_lift_gold"
   locations:
-    "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
+    "Goron Graveyard Mask": "can_use_lens_strict && song_event(4)"
 
 "Goron Graveyard Water":
   region: ENTRANCE

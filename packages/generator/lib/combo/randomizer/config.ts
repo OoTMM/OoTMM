@@ -116,7 +116,8 @@ export class RandomizerPatcherConfig {
     buffers.push(toU8Buffer([this.ctx.settings.strayFairyRewardCount]));
     buffers.push(toU8Buffer([BOMBCHU_BEHAVIORS[this.ctx.settings.bombchuBehaviorOot]]));
     buffers.push(toU8Buffer([BOMBCHU_BEHAVIORS[this.ctx.settings.bombchuBehaviorMm]]));
-    buffers.push(toU8Buffer(this.world.songEvents));
+    buffers.push(toU8Buffer(this.world.songEventsOot));
+    buffers.push(toU8Buffer(this.world.songEventsMm));
     return concatUint8Arrays(buffers);
   }
 

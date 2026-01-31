@@ -63,7 +63,8 @@ typedef struct
     u8              strayFairyRewardCount;
     u8              bombchuBehaviorOot;
     u8              bombchuBehaviorMm;
-    u8              songEvents[0x12];
+    u8              songEventsOot[0x12];
+    u8              songEventsMm[0xd];
 }
 ComboConfig;
 

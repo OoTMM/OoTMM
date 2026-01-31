@@ -350,26 +350,32 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.strayFairyRewardCount = randomInt(random, 16);
   base.crossAge = booleanWeighted(random, 0.5);
 
-  /* Cross warp & FW - 25% disabled, 25% enabled, 50% individual */
+  /* Cross FW - 25% disabled, 25% enabled, 50% individual */
   switch (randomInt(random, 4)) {
   case 0:
-    base.crossWarpOot = false;
-    base.crossWarpMm = 'none';
     base.crossGameFw = false;
     break;
   case 1:
-    base.crossWarpOot = true;
-    base.crossWarpMm = 'full';
     base.crossGameFw = true;
     break;
   default:
-    base.crossWarpOot = booleanWeighted(random, 0.5);
-    base.crossWarpMm = sampleWeighted(random, { none: 10, full: 7, childOnly: 3 });
     base.crossGameFw = booleanWeighted(random, 0.5);
   }
 
-  base.sunSongMm = booleanWeighted(random, 0.5);
+  base.songSunMm = booleanWeighted(random, 0.5);
   base.elegyOot = booleanWeighted(random, 0.5);
+  base.songHealingOot = booleanWeighted(random, 0.5);
+  base.songSoaringOot = booleanWeighted(random, 0.5);
+  base.songAwakeningOot = booleanWeighted(random, 0.5);
+  base.songGoronOot = booleanWeighted(random, 0.5);
+  base.songZoraOot = booleanWeighted(random, 0.5);
+  base.songOrderOot = booleanWeighted(random, 0.5);
+  base.songMinuetMm = booleanWeighted(random, 0.5);
+  base.songBoleroMm = booleanWeighted(random, 0.5);
+  base.songSerenadeMm = booleanWeighted(random, 0.5);
+  base.songRequiemMm = booleanWeighted(random, 0.5);
+  base.songNocturneMm = booleanWeighted(random, 0.5);
+  base.songPreludeMm = booleanWeighted(random, 0.5);
   base.csmc = sampleWeighted(random, { always: 18, agony: 1, never: 1 });
   if (base.csmc !== 'never') {
     base.csmcHearts = booleanWeighted(random, 0.75);
@@ -392,6 +398,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.agelessSwords = true;
     base.agelessShields = true;
     base.agelessBoots = true;
+    base.agelessSoaring = true;
     break;
   default:
     base.agelessBoomerang = booleanWeighted(random, 0.1);
@@ -402,6 +409,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.agelessSwords = booleanWeighted(random, 0.1);
     base.agelessShields = booleanWeighted(random, 0.1);
     base.agelessBoots = booleanWeighted(random, 0.1);
+    base.agelessSoaring = booleanWeighted(random, 0.1);
   }
 
   base.blastMaskCooldown = sampleWeighted(random, { default: 10, instant: 2, veryshort: 3, short: 3, long: 2, verylong: 2 });
@@ -415,19 +423,22 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.progressiveShieldsOot = 'separate';
     base.progressiveSwordsOot = 'separate';
     base.progressiveShieldsMm = 'separate';
-    base.progressiveGoronLullaby = 'single';
+    base.progressiveGoronLullabyMm = 'single';
+    base.progressiveGoronLullabyOot = 'single';
     break;
   case 1:
     base.progressiveShieldsOot = 'progressive';
     base.progressiveSwordsOot = 'progressive';
     base.progressiveShieldsMm = 'progressive';
-    base.progressiveGoronLullaby = 'progressive';
+    base.progressiveGoronLullabyMm = 'progressive';
+    base.progressiveGoronLullabyOot = 'progressive';
     break;
   default:
     base.progressiveShieldsOot = sampleWeighted(random, { separate: 10, progressive: 10 });
     base.progressiveSwordsOot = sampleWeighted(random, { separate: 10, progressive: 10, goron: 5 });
     base.progressiveShieldsMm = sampleWeighted(random, { separate: 10, progressive: 10 });
-    base.progressiveGoronLullaby = sampleWeighted(random, { progressive: 10, single: 10 });
+    base.progressiveGoronLullabyMm = sampleWeighted(random, { progressive: 10, single: 10 });
+    base.progressiveGoronLullabyOot = sampleWeighted(random, { progressive: 10, single: 10 });
   }
 
   /* Shared items - 25% disabled, 25% enabled, 50% individual */
@@ -449,6 +460,18 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedSongTime = true;
     base.sharedSongSun = true;
     base.sharedSongElegy = true;
+    base.sharedSongHealing = true;
+    base.sharedSongSoaring = true;
+    base.sharedSongAwakening = true;
+    base.sharedSongGoron = true;
+    base.sharedSongZora = true;
+    base.sharedSongOrder = true;
+    base.sharedSongMinuet = true;
+    base.sharedSongBolero = true;
+    base.sharedSongSerenade = true;
+    base.sharedSongRequiem = true;
+    base.sharedSongNocturne = true;
+    base.sharedSongPrelude = true;
     base.sharedHookshot = true;
     base.sharedLens = true;
     base.sharedOcarina = true;
@@ -571,6 +594,18 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.sharedSongTime = true;
       base.sharedSongSun = true;
       base.sharedSongElegy = true;
+      base.sharedSongHealing = true;
+      base.sharedSongSoaring = true;
+      base.sharedSongAwakening = true;
+      base.sharedSongGoron = true;
+      base.sharedSongZora = true;
+      base.sharedSongOrder = true;
+      base.sharedSongMinuet = true;
+      base.sharedSongBolero = true;
+      base.sharedSongSerenade = true;
+      base.sharedSongRequiem = true;
+      base.sharedSongNocturne = true;
+      base.sharedSongPrelude = true;
       break;
     default:
       base.sharedSongEpona = booleanWeighted(random, 0.5);
@@ -578,6 +613,18 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.sharedSongTime = booleanWeighted(random, 0.5);
       base.sharedSongSun = booleanWeighted(random, 0.5);
       base.sharedSongElegy = booleanWeighted(random, 0.5);
+      base.sharedSongHealing = booleanWeighted(random, 0.5);
+      base.sharedSongSoaring = booleanWeighted(random, 0.5);
+      base.sharedSongAwakening = booleanWeighted(random, 0.5);
+      base.sharedSongGoron = booleanWeighted(random, 0.5);
+      base.sharedSongZora = booleanWeighted(random, 0.5);
+      base.sharedSongOrder = booleanWeighted(random, 0.5);
+      base.sharedSongMinuet = booleanWeighted(random, 0.5);
+      base.sharedSongBolero = booleanWeighted(random, 0.5);
+      base.sharedSongSerenade = booleanWeighted(random, 0.5);
+      base.sharedSongRequiem = booleanWeighted(random, 0.5);
+      base.sharedSongNocturne = booleanWeighted(random, 0.5);
+      base.sharedSongPrelude = booleanWeighted(random, 0.5);
       break;
     }
 
