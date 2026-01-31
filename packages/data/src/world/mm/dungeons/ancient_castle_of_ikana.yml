@@ -72,8 +72,8 @@
 "Ancient Castle of Ikana Wizzrobe":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior South": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows)"
-    "Ancient Castle of Ikana South Last": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows)"
+    "Ancient Castle of Ikana Interior South": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows || deku_stick_fighting)"
+    "Ancient Castle of Ikana South Last": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows || deku_stick_fighting)"
 
 "Ancient Castle of Ikana South Last":
   dungeon: ACoI

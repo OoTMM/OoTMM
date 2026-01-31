@@ -321,7 +321,8 @@
 "can_kill_torch_slugs": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword_razor || can_use_sword_master || can_use_sword_biggoron || can_hammer || cam_use_bow || can_use_mask_blast || has_explosives || has_sticks)"
 "can_kill_moblins": "soul_moblins && (can_use_sword_or_sticks || can_hammer || can_use_bow || can_hookshot)"
 "can_kill_poes": "soul_poe && (can_use_sword || can_hammer || can_use_slingshot || can_use_bow || can_hookshot)"
-"can_kill_poe_sisters": "soul_poe && can_use_bow"
+"can_kill_poe_sisters": soul_poe && (can_use_sword || can_hammer || can_use_bow || can_hookshot)
+"can_kill_poe_meg": "soul_poe && (can_use_bow || can_hookshot)"
 "can_kill_armos": "soul_armos && (can_use_sword_razor || can_use_sword_master || can_use_sword_biggoron || can_hammer || can_use_mask_blast || has_explosives || (can_use_slingshot && (has_nuts || can_boomerang)))"
 #"can_kill_small_babas": "soul_deku_baba &&"       #No enemy drops currently in OoTR.
 #"can_kill_big_babas": "soul_deku_baba &&"       #Enemy drops in OoTR only awarded when defeated with elemental arrows.

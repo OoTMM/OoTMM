@@ -339,7 +339,7 @@
 "can_kill_guays_distance": "soul_guay && (has_arrows || can_hookshot || can_use_deku_bubble || has_mask_zora)"
 "can_kill_flying_pots": "soul_flying_pot" #They break themselves.
 "can_kill_chuchu": "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_arrows || has_mask_zora || has(MASK_DEKU) || has_explosives || deku_stick_fighting)"
-"can_kill_deep_python": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && can_swim && (has_mask_zora || can_hookshot_short)"
+"can_kill_deep_python": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && (has_mask_zora || can_hookshot_short) && can_swim"
 "can_kill_stalchildren": "soul_stalchild && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives || deku_stick_fighting)"
 "can_kill_leevers": "soul_leever && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_din || has_explosives)"
 #"can_kill_shaboms": #Unused actor.
