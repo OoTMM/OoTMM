@@ -26,7 +26,13 @@ const u8 kMaxSongNotes[] = {
     6, // NOTES_SONG_OOT_SUN
     6, // NOTES_SONG_OOT_TIME
     6, // NOTES_SONG_OOT_STORMS
+    6, // NOTES_SONG_OOT_HEALING
+    6, // NOTES_SONG_OOT_SOARING
+    7, // NOTES_SONG_OOT_AWAKENING
+    8, // NOTES_SONG_OOT_GORON
+    7, // NOTES_SONG_OOT_ZORA
     7, // NOTES_SONG_OOT_EMPTINESS
+    6, // NOTES_SONG_OOT_ORDER
     7, // NOTES_SONG_MM_AWAKENING
     8, // NOTES_SONG_MM_GORON
     7, // NOTES_SONG_MM_ZORA
@@ -37,6 +43,14 @@ const u8 kMaxSongNotes[] = {
     6, // NOTES_SONG_MM_EPONA
     6, // NOTES_SONG_MM_SOARING
     6, // NOTES_SONG_MM_STORMS
+    6, // NOTES_SONG_MM_TP_FOREST
+    8, // NOTES_SONG_MM_TP_FIRE
+    5, // NOTES_SONG_MM_TP_WATER
+    6, // NOTES_SONG_MM_TP_SPIRIT
+    7, // NOTES_SONG_MM_TP_SHADOW
+    6, // NOTES_SONG_MM_TP_LIGHT
+    6, // NOTES_SONG_MM_ZELDA
+    6, // NOTES_SONG_MM_SARIA
     6, // NOTES_SONG_MM_SUN
 };
 
@@ -1957,6 +1971,54 @@ static int addElegyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addSongHealingOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongHealing = 1;
+    return 0;
+}
+
+static int addSongSoaringOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongSoaring = 1;
+    return 0;
+}
+
+static int addSongAwakeningOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongAwakening = 1;
+    return 0;
+}
+
+static int addSongGoronHalfOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongGoronHalf = 1;
+    return 0;
+}
+
+static int addSongGoronOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongGoron = 1;
+    return 0;
+}
+
+static int addSongZoraOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongZora = 1;
+    return 0;
+}
+
+static int addSongOrderOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasSongOrder = 1;
+    return 0;
+}
+
+static int addSongOotMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.mm.ootSongs.value |= (1 << param);
+    return 0;
+}
+
 static int addItemSwordExtraOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gSharedCustomSave.extraSwordsOot < param)
@@ -2123,9 +2185,19 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemTrap,
     addItemSongNote,
     addItemTranscendentFairy,
+    addSongHealingOot,
+    addSongSoaringOot,
+    addSongAwakeningOot,
+    addSongGoronHalfOot,
+    addSongGoronOot,
+    addSongZoraOot,
+    addSongOrderOot,
+    addSongOotMm,
     addItemGsTokenPlatinumOot,
     addItemGsTokenPlatinumMm,
 };
+
+_Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");
 
 extern const u8 kAddItemFuncs[];
 extern const u16 kAddItemParams[];
@@ -2155,10 +2227,38 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SONG_TIME, GI_OOT_SONG_NOTE_TIME, GI_MM_SONG_NOTE_TIME },
     { CFG_SHARED_SONG_STORMS, GI_OOT_SONG_STORMS, GI_MM_SONG_STORMS },
     { CFG_SHARED_SONG_STORMS, GI_OOT_SONG_NOTE_STORMS, GI_MM_SONG_NOTE_STORMS },
-    { CFG_SHARED_SONG_SUN, GI_OOT_SONG_SUN, GI_MM_SONG_SUN },
-    { CFG_SHARED_SONG_SUN, GI_OOT_SONG_NOTE_SUN, GI_MM_SONG_NOTE_SUN },
     { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_EMPTINESS, GI_MM_SONG_EMPTINESS },
     { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_NOTE_EMPTINESS, GI_MM_SONG_NOTE_EMPTINESS },
+    { CFG_SHARED_SONG_HEALING, GI_OOT_SONG_HEALING, GI_MM_SONG_HEALING },
+    { CFG_SHARED_SONG_HEALING, GI_OOT_SONG_NOTE_HEALING, GI_MM_SONG_NOTE_HEALING },
+    { CFG_SHARED_SONG_SOARING, GI_OOT_SONG_SOARING, GI_MM_SONG_SOARING },
+    { CFG_SHARED_SONG_SOARING, GI_OOT_SONG_NOTE_SOARING, GI_MM_SONG_NOTE_SOARING },
+    { CFG_SHARED_SONG_AWAKENING, GI_OOT_SONG_AWAKENING, GI_MM_SONG_AWAKENING },
+    { CFG_SHARED_SONG_AWAKENING, GI_OOT_SONG_NOTE_AWAKENING, GI_MM_SONG_NOTE_AWAKENING },
+    { CFG_SHARED_SONG_GORON, GI_OOT_SONG_GORON, GI_MM_SONG_GORON },
+    { CFG_SHARED_SONG_GORON, GI_OOT_SONG_NOTE_GORON, GI_MM_SONG_NOTE_GORON },
+    { CFG_SHARED_SONG_ZORA, GI_OOT_SONG_ZORA, GI_MM_SONG_ZORA },
+    { CFG_SHARED_SONG_ZORA, GI_OOT_SONG_NOTE_ZORA, GI_MM_SONG_NOTE_ZORA },
+    { CFG_SHARED_SONG_ORDER, GI_OOT_SONG_ORDER, GI_MM_SONG_ORDER },
+    { CFG_SHARED_SONG_ORDER, GI_OOT_SONG_NOTE_ORDER, GI_MM_SONG_NOTE_ORDER },
+    { CFG_SHARED_SONG_ZELDA, GI_OOT_SONG_ZELDA, GI_MM_SONG_ZELDA },
+    { CFG_SHARED_SONG_ZELDA, GI_OOT_SONG_NOTE_ZELDA, GI_MM_SONG_NOTE_ZELDA },
+    { CFG_SHARED_SONG_SARIA, GI_OOT_SONG_SARIA, GI_MM_SONG_SARIA },
+    { CFG_SHARED_SONG_SARIA, GI_OOT_SONG_NOTE_SARIA, GI_MM_SONG_NOTE_SARIA },
+    { CFG_SHARED_SONG_SUN, GI_OOT_SONG_SUN, GI_MM_SONG_SUN },
+    { CFG_SHARED_SONG_SUN, GI_OOT_SONG_NOTE_SUN, GI_MM_SONG_NOTE_SUN },
+    { CFG_SHARED_SONG_TP_FIRE, GI_OOT_SONG_TP_FIRE, GI_MM_SONG_TP_FIRE },
+    { CFG_SHARED_SONG_TP_FIRE, GI_OOT_SONG_NOTE_TP_FIRE, GI_MM_SONG_NOTE_TP_FIRE },
+    { CFG_SHARED_SONG_TP_FOREST, GI_OOT_SONG_TP_FOREST, GI_MM_SONG_TP_FOREST },
+    { CFG_SHARED_SONG_TP_FOREST, GI_OOT_SONG_NOTE_TP_FOREST, GI_MM_SONG_NOTE_TP_FOREST },
+    { CFG_SHARED_SONG_TP_LIGHT, GI_OOT_SONG_TP_LIGHT, GI_MM_SONG_TP_LIGHT },
+    { CFG_SHARED_SONG_TP_LIGHT, GI_OOT_SONG_NOTE_TP_LIGHT, GI_MM_SONG_NOTE_TP_LIGHT },
+    { CFG_SHARED_SONG_TP_SHADOW, GI_OOT_SONG_TP_SHADOW, GI_MM_SONG_TP_SHADOW },
+    { CFG_SHARED_SONG_TP_SHADOW, GI_OOT_SONG_NOTE_TP_SHADOW, GI_MM_SONG_NOTE_TP_SHADOW },
+    { CFG_SHARED_SONG_TP_SPIRIT, GI_OOT_SONG_TP_SPIRIT, GI_MM_SONG_TP_SPIRIT },
+    { CFG_SHARED_SONG_TP_SPIRIT, GI_OOT_SONG_NOTE_TP_SPIRIT, GI_MM_SONG_NOTE_TP_SPIRIT },
+    { CFG_SHARED_SONG_TP_WATER, GI_OOT_SONG_TP_WATER, GI_MM_SONG_TP_WATER },
+    { CFG_SHARED_SONG_TP_WATER, GI_OOT_SONG_NOTE_TP_WATER, GI_MM_SONG_NOTE_TP_WATER },
     { CFG_SHARED_SKELETON_KEY, GI_OOT_SKELETON_KEY, GI_MM_SKELETON_KEY },
     { CFG_SHARED_PLATINUM_TOKEN, GI_OOT_PLATINUM_TOKEN, GI_MM_PLATINUM_TOKEN },
     { CFG_SHARED_MAGIC, GI_OOT_MAGIC_UPGRADE, GI_MM_MAGIC_UPGRADE },

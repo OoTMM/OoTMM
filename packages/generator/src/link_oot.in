@@ -26,6 +26,7 @@ gAudioLoadStatusFontSample = 0x80128a68;
 
 Player_GetHeight = 0x80021600;
 
+Graph_Alloc = 0x800a1a2c;
 Gfx_Open = 0x800a1aa0;
 Gfx_Close = 0x800a1aac;
 
@@ -779,6 +780,7 @@ Message_ResetOcarinaNoteState = 0x800d5ef0;
 Sfx_PlaySfxCentered = 0x800646f0;
 AudioOcarina_SetInstrument = 0x800c2c90;
 AudioOcarina_SetPlaybackSong = 0x800c2d74;
+AudioOcarina_CheckIfStartedSong = 0x800c22dc;
 
 DynaPoly_EnableCollision = 0x80031530;
 func_8002ED80 = 0x80022554;
@@ -787,3 +789,22 @@ Actor_PlaySfx_FlaggedCentered2 = 0x80023108;
 
 Actor_SetObjectDependency = 0x80020fa4;
 Health_IsCritical = 0x80065b00;
+
+sOcarinaHasStartedSong = 0x80121f41;
+sCurOcarinaBendIndex = 0x80102228;
+sOcarinaFlags = 0x80102238;
+sPrevOcarinaPitch = 0x80102214;
+sCurOcarinaPitch = 0x80102210;
+sFirstOcarinaSongIndex = 0x80121f42;
+sLastOcarinaSongIndex = 0x80121f43;
+sAvailOcarinaSongFlags = 0x80121f44;
+sMusicStaffCurHeldLength = 0x80121f68;
+sMusicStaffExpectedLength = 0x80121f88;
+sOcarinaSongNotes = 0x8010227c;
+sMusicStaffPos = 0x80121f48;
+sMusicStaffPrevPitch = 0x8010221c;
+sMusicStaffExpectedPitch = 0x80121fa8;
+sIsOcarinaInputEnabled = 0x80102208;
+sStaffOcarinaPlayingPos = 0x80121f46;
+sMusicStaffNumNotesPerTest = 0x80102b78;
+sPrevOcarinaWithMusicStaffFlags = 0x80102248;

@@ -112,7 +112,7 @@ static void addDefs(const DungeonDef* defs, int count)
     gDungeonDefCount += count;
 }
 
-static u8 gSongNotesOot[16] = {
+static u8 gSongNotesOot[19] = {
     NOTES_SONG_OOT_ZELDA,
     NOTES_SONG_OOT_EPONA,
     NOTES_SONG_OOT_SARIA,
@@ -129,7 +129,7 @@ static u8 gSongNotesOot[16] = {
 
 static u8 gSongNotesCountOot = 12;
 
-static u8 gSongNotesMm[16] = {
+static u8 gSongNotesMm[19] = {
     NOTES_SONG_MM_TIME,
     NOTES_SONG_MM_HEALING,
     NOTES_SONG_MM_EPONA,
@@ -157,7 +157,13 @@ static const char* kSongNames[] = {
     "Sun's Song", // NOTES_SONG_OOT_SUN
     "Song of Time", // NOTES_SONG_OOT_TIME
     "Song of Storms", // NOTES_SONG_OOT_STORMS
+    "Song of Healing", // NOTES_SONG_OOT_HEALING
+    "Song of Soaring", // NOTES_SONG_OOT_SOARING
+    "Sonata of Awakening", // NOTES_SONG_OOT_AWAKENING
+    "Goron Lullaby", // NOTES_SONG_OOT_GORON
+    "New Wave Bossa Nova", // NOTES_SONG_OOT_ZORA
     "Elegy of Emptiness", // NOTES_SONG_OOT_EMPTINESS
+    "Oath to Order", // NOTES_SONG_OOT_ORDER
     "Sonata of Awakening", // NOTES_SONG_MM_AWAKENING
     "Goron's Lullaby", // NOTES_SONG_MM_GORON
     "New Wave Bossa Nova", // NOTES_SONG_MM_ZORA
@@ -168,6 +174,14 @@ static const char* kSongNames[] = {
     "Epona's Song", // NOTES_SONG_MM_EPONA
     "Song of Soaring", // NOTES_SONG_MM_SOARING
     "Song of Storms", // NOTES_SONG_MM_STORMS
+    "Minuet of Forest", // NOTES_SONG_MM_TP_FOREST
+    "Bolero of Fire", // NOTES_SONG_MM_TP_FIRE
+    "Serenade of Water", // NOTES_SONG_MM_TP_WATER
+    "Requiem of Spirit", // NOTES_SONG_MM_TP_SPIRIT
+    "Nocturne of Shadow", // NOTES_SONG_MM_TP_SHADOW
+    "Prelude of Light", // NOTES_SONG_MM_TP_LIGHT
+    "Zelda's Lullaby", // NOTES_SONG_MM_ZELDA
+    "Saria's Song", // NOTES_SONG_MM_SARIA
     "Sun's Song", // NOTES_SONG_MM_SUN
 };
 
@@ -191,11 +205,53 @@ void menuInit()
             addDefs(kDungeonDefsCoins + i, 1);
     }
 
+    if (Config_Flag(CFG_MM_SONG_ZELDA))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_ZELDA;
+
+    if (Config_Flag(CFG_MM_SONG_SARIA))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_SARIA;
+
     if (Config_Flag(CFG_MM_SONG_SUN))
         gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_SUN;
 
+    if (Config_Flag(CFG_MM_SONG_TP_FOREST))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_TP_FOREST;
+
+    if (Config_Flag(CFG_MM_SONG_TP_FIRE))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_TP_FIRE;
+
+    if (Config_Flag(CFG_MM_SONG_TP_WATER))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_TP_WATER;
+
+    if (Config_Flag(CFG_MM_SONG_TP_SPIRIT))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_TP_SPIRIT;
+
+    if (Config_Flag(CFG_MM_SONG_TP_SHADOW))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_TP_SHADOW;
+
+    if (Config_Flag(CFG_MM_SONG_TP_LIGHT))
+        gSongNotesMm[gSongNotesCountMm++] = NOTES_SONG_MM_TP_LIGHT;
+
+    if (Config_Flag(CFG_OOT_SONG_HEALING))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_HEALING;
+
+    if (Config_Flag(CFG_OOT_SONG_SOARING))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_SOARING;
+
+    if (Config_Flag(CFG_OOT_SONG_AWAKENING))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_AWAKENING;
+
+    if (Config_Flag(CFG_OOT_SONG_GORON))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_GORON;
+
+    if (Config_Flag(CFG_OOT_SONG_ZORA))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_ZORA;
+
     if (Config_Flag(CFG_OOT_SONG_EMPTINESS))
         gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_EMPTINESS;
+
+    if (Config_Flag(CFG_OOT_SONG_ORDER))
+        gSongNotesOot[gSongNotesCountOot++] = NOTES_SONG_OOT_ORDER;
 }
 
 static const char* const kSoulsEnemyOot[] = {

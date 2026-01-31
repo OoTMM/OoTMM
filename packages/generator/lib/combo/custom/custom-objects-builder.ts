@@ -387,6 +387,34 @@ export class CustomObjectsBuilder {
     return { name: 'EFFECT_SHOCK', ...editor.build() };
   }
 
+  private async makeSongOfHealingEffect(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const ovl = await this.getFile('mm', 'actors/ovl_Oceff_Wipe7');
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+    editor.loadFile(0x80bcdcb0, ovl);
+    editor.submitListAddr(0x80bce950); /* Display List */
+    editor.submitListAddr(0xbce7f0); /* Vtx */
+    const matAnim = editor.processAnimatedMaterialAddr(0x80bce7e8, 1);
+    editor.submitOut(matAnim);
+
+    return { name: 'OCEFF_WIPE7', ...editor.build() };
+  }
+
+  private async makeSongEffect(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const ovl = await this.getFile('mm', 'actors/ovl_Oceff_Wipe5');
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+    editor.loadFile(0x80bc7ad0, ovl);
+    editor.submitListAddr(0x80bc9080); /* Display List */
+    editor.submitListAddr(0xbc8f20); /* Vtx */
+    const matAnim = editor.processAnimatedMaterialAddr(0x80bc7f18, 1);
+    editor.submitOut(matAnim);
+
+    return { name: 'OCEFF_WIPE5', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -414,6 +442,8 @@ export class CustomObjectsBuilder {
       await this.makeEqBow(),
       await this.makeStrayFairy(),
       await this.makeEffectShock(),
+      await this.makeSongOfHealingEffect(),
+      await this.makeSongEffect(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

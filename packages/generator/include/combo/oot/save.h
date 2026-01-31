@@ -466,6 +466,13 @@ typedef struct ALIGNED(16)
     OotRespawnData fwRespawnDungeonEntrance[2];
     u8  hasElegy:1;
     u8  chateauActive:1;
+    u8  hasSongHealing:1;
+    u8  hasSongSoaring:1;
+    u8  hasSongAwakening:1;
+    u8  hasSongGoronHalf:1;
+    u8  hasSongGoron:1;
+    u8  hasSongZora:1;
+    u8  hasSongOrder:1;
 }
 OotCustomSave;
 

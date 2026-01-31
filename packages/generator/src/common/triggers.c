@@ -117,6 +117,20 @@ static s16 Triggers_NextGivenSong(void)
         return GI_OOT_SONG_STORMS;
     if (notes[NOTES_SONG_OOT_EMPTINESS] >= 7 && !gSharedCustomSave.oot.hasElegy)
         return GI_OOT_SONG_EMPTINESS;
+    if (notes[NOTES_SONG_OOT_HEALING] >= 6 && !gSharedCustomSave.oot.hasSongHealing)
+        return GI_OOT_SONG_HEALING;
+    if (notes[NOTES_SONG_OOT_SOARING] >= 6 && !gSharedCustomSave.oot.hasSongSoaring)
+        return GI_OOT_SONG_SOARING;
+    if (notes[NOTES_SONG_OOT_AWAKENING] >= 7 && !gSharedCustomSave.oot.hasSongAwakening)
+        return GI_OOT_SONG_AWAKENING;
+    if (notes[NOTES_SONG_OOT_GORON] >= 8 && !gSharedCustomSave.oot.hasSongGoron)
+        return GI_OOT_SONG_GORON;
+    if (notes[NOTES_SONG_OOT_GORON] >= 6 && !gSharedCustomSave.oot.hasSongGoronHalf && Config_Flag(CFG_OOT_PROGRESSIVE_LULLABY))
+        return GI_OOT_SONG_GORON_HALF;
+    if (notes[NOTES_SONG_OOT_ZORA] >= 7 && !gSharedCustomSave.oot.hasSongZora)
+        return GI_OOT_SONG_ZORA;
+    if (notes[NOTES_SONG_OOT_ORDER] >= 6 && !gSharedCustomSave.oot.hasSongOrder)
+        return GI_OOT_SONG_ORDER;
 
     if (notes[NOTES_SONG_MM_AWAKENING] >= 7 && !gMmSave.info.inventory.quest.songAwakening)
         return GI_MM_SONG_AWAKENING;
@@ -142,6 +156,22 @@ static s16 Triggers_NextGivenSong(void)
         return GI_MM_SONG_STORMS;
     if (notes[NOTES_SONG_MM_SUN] >= 6 && !gMmSave.info.inventory.quest.songSun)
         return GI_MM_SONG_SUN;
+    if (notes[NOTES_SONG_MM_TP_FOREST] >= 6 && !gSharedCustomSave.mm.ootSongs.songTpForest)
+        return GI_MM_SONG_TP_FOREST;
+    if (notes[NOTES_SONG_MM_TP_FIRE] >= 8 && !gSharedCustomSave.mm.ootSongs.songTpFire)
+        return GI_MM_SONG_TP_FIRE;
+    if (notes[NOTES_SONG_MM_TP_WATER] >= 5 && !gSharedCustomSave.mm.ootSongs.songTpWater)
+        return GI_MM_SONG_TP_WATER;
+    if (notes[NOTES_SONG_MM_TP_SPIRIT] >= 6 && !gSharedCustomSave.mm.ootSongs.songTpSpirit)
+        return GI_MM_SONG_TP_SPIRIT;
+    if (notes[NOTES_SONG_MM_TP_SHADOW] >= 7 && !gSharedCustomSave.mm.ootSongs.songTpShadow)
+        return GI_MM_SONG_TP_SHADOW;
+    if (notes[NOTES_SONG_MM_TP_LIGHT] >= 6 && !gSharedCustomSave.mm.ootSongs.songTpLight)
+        return GI_MM_SONG_TP_LIGHT;
+    if (notes[NOTES_SONG_MM_ZELDA] >= 6 && !gSharedCustomSave.mm.ootSongs.songZelda)
+        return GI_MM_SONG_ZELDA;
+    if (notes[NOTES_SONG_MM_SARIA] >= 6 && !gSharedCustomSave.mm.ootSongs.songSaria)
+        return GI_MM_SONG_SARIA;
 
     return GI_NONE;
 }

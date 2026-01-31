@@ -25,7 +25,8 @@ import {
   exprFlagOn,
   exprFlagOff,
   exprAgeString,
-  exprSongEvent
+  exprSongEventOot,
+  exprSongEventMm
 } from './builder';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -355,8 +356,8 @@ export class ExprParser {
     return exprPrice(range, id, max);
   }
 
-  private parseExprSongEvent(): Expr | undefined {
-    if (this.peek('identifier') !== '_song_event') {
+  private parseExprSongEventOot(): Expr | undefined {
+    if (this.peek('identifier') !== '_song_event_oot') {
       return undefined;
     }
     this.accept('identifier');
@@ -365,7 +366,20 @@ export class ExprParser {
     this.expect(',');
     const cmp = this.expect('number');
     this.expect(')');
-    return exprSongEvent(id, cmp);
+    return exprSongEventOot(id, cmp);
+  }
+
+  private parseExprSongEventMm(): Expr | undefined {
+    if (this.peek('identifier') !== '_song_event_mm') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const id = this.expect('number');
+    this.expect(',');
+    const cmp = this.expect('number');
+    this.expect(')');
+    return exprSongEventMm(id, cmp);
   }
 
   private parseExprFish(): Expr | undefined {
@@ -481,7 +495,8 @@ export class ExprParser {
       || this.parseExprOotTime()
       || this.parseExprMmTime()
       || this.parseExprPrice()
-      || this.parseExprSongEvent()
+      || this.parseExprSongEventOot()
+      || this.parseExprSongEventMm()
       || this.parseExprFish()
       || this.parseExprFlagOn()
       || this.parseExprFlagOff()

@@ -36,7 +36,8 @@ export type LogicResultWorld = {
   prices: number[];
   entranceOverrides: Map<string, string>;
   bossIds: number[];
-  songEvents: number[];
+  songEventsOot: number[];
+  songEventsMm: number[];
   dungeonsEntrances: Map<string, DungeonEntrance>;
   preCompleted: Set<string>;
   locations: Set<string>;
@@ -103,7 +104,8 @@ export async function logic(monitor: Monitor, opts: Options): Promise<LogicResul
       prices: w.prices,
       entranceOverrides: w.entranceOverrides,
       bossIds: w.bossIds,
-      songEvents: w.songEvents,
+      songEventsOot: w.songEventsOot,
+      songEventsMm: w.songEventsMm,
       dungeonsEntrances: w.dungeonsEntrances,
       preCompleted: w.preCompleted,
       locations: w.locations,

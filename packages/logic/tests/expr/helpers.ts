@@ -11,7 +11,7 @@ export function makeState(overrides: Partial<ExprState> = {}): ExprState {
     events: new Set(),
     areaData: { ootTime: 0, mmTime: 0, mmTime2: 0, flagsOn: 0, flagsOff: 0 },
     settings: {} as Settings,
-    world: { songEvents: [], prices: [] },
+    world: { songEventsOot: [], songEventsMm: [], prices: [] },
     ...overrides,
   };
 }

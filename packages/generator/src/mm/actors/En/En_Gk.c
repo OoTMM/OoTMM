@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/mm/ocarina.h>
+#include <combo/data/song_events.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1d4) = (h); } while (0)
 
@@ -28,23 +30,21 @@ void EnGk_LearnSongLullaby(Actor* this, PlayState* play)
 
 void EnGk_CheckLullaby(Actor* this, PlayState* play)
 {
-    if (play->msgCtx.ocarinaMode == 3 && gSave.playerForm == MM_PLAYER_FORM_GORON)
+    if (play->msgCtx.ocarinaMode == OCARINA_MODE_EVENT && gSave.playerForm == MM_PLAYER_FORM_GORON)
     {
-        switch (play->msgCtx.ocarinaSong)
+        if (Ocarina_CheckSongEventSong(play->msgCtx.ocarinaSong, SONG_EVENT_LULLABY_KID))
         {
-        case 0x01:
-        case 0x0e:
+            Ocarina_ClearLastPlayedSong(play);
             if (gMmExtraFlags.songGoron)
             {
-                play->msgCtx.ocarinaSong = 0x01;
+                play->msgCtx.ocarinaSong = OCARINA_SONG_GORON_LULLABY;
             }
             else
             {
-                play->msgCtx.ocarinaSong = 0x0e;
+                play->msgCtx.ocarinaSong = OCARINA_SONG_GORON_LULLABY_INTRO;
                 SET_HANDLER(this, EnGk_LearnSongLullaby);
                 Flags_SetSwitch(play, 0x14);
             }
-            break;
         }
     }
 }

@@ -103,7 +103,7 @@
   events:
     GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE: "has_fire"
     GANON_CASTLE_MQ_FOREST_WIND_OPEN_EYE: "can_hit_triggers_distance"
-    GANON_MQ_FOREST_SWITCH: "can_play_time || can_play_elegy"
+    GANON_MQ_FOREST_SWITCH: "can_play_time || can_play_emptiness"
   locations:
     "MQ Ganon Castle Forest Trial Second Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE)"
 "Ganon Castle Forest Trial Ending Room":

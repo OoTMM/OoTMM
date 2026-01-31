@@ -572,8 +572,31 @@ typedef struct ALIGNED(16)
     RespawnData fw[2];
     RespawnData fwRespawnTop[2];
     RespawnData fwRespawnDungeonEntrance[2];
+    union
+    {
+        struct {
+            u8 songSaria:1;
+            u8 songZelda:1;
+            u8 songTpLight:1;
+            u8 songTpShadow:1;
+            u8 songTpSpirit:1;
+            u8 songTpWater:1;
+            u8 songTpFire:1;
+            u8 songTpForest:1;
+        };
+        u8 value;
+    } ootSongs;
 }
 MmCustomSave;
+
+#define MM_SONG_OOT_TP_FOREST    0
+#define MM_SONG_OOT_TP_FIRE      1
+#define MM_SONG_OOT_TP_WATER     2
+#define MM_SONG_OOT_TP_SPIRIT    3
+#define MM_SONG_OOT_TP_SHADOW    4
+#define MM_SONG_OOT_TP_LIGHT     5
+#define MM_SONG_OOT_ZELDA        6
+#define MM_SONG_OOT_SARIA        7
 
 #define CURRENT_DAY (((void)0, gSaveContext.save.day) % 5)
 

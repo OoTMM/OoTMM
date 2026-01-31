@@ -1,5 +1,5 @@
 import { concatUint8Arrays } from 'uint8array-extras';
-import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE } from '../util/buffer';
+import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE, bufWriteU8, bufWriteU16BE } from '../util/buffer';
 
 export type ObjectEditorOut = {
   data: Uint8Array;
@@ -200,6 +200,81 @@ export class ObjectEditor {
     const newData = new Uint8Array(data);
     const newLimbs = this.processSkeletonLimbsAddr(bufReadU32BE(data, 0), bufReadU8(data, 0x08));
     bufWriteU32BE(newData, 0, newLimbs);
+    return this.emitData(newData);
+  }
+
+  private processAnimatedMatColorParamsAddr(addr: number) {
+    const data = this.segData(addr, 0x10);
+    if (!data)
+      return addr;
+    const newData = new Uint8Array(data);
+    const keyFrameLength = bufReadU16BE(data, 0x00);
+    const keyFrameCount = bufReadU16BE(data, 0x02);
+    const primColorsAddr = bufReadU32BE(data, 0x04);
+    const envColorsAddr = bufReadU32BE(data, 0x08);
+    const keyFramesAddr = bufReadU32BE(data, 0x10);
+    bufWriteU32BE(newData, 0x00, keyFrameLength);
+    bufWriteU32BE(newData, 0x02, keyFrameCount);
+    bufWriteU32BE(newData, 0x04, this.copy(primColorsAddr, 5));
+    bufWriteU32BE(newData, 0x08, this.copy(envColorsAddr, 4));
+    bufWriteU32BE(newData, 0x0c, this.copy(keyFramesAddr, 2 * keyFrameCount));
+    return this.emitData(newData);
+  }
+
+  private processAnimatedMatTexCycleParamsAddr(addr: number) {
+    const data = this.segData(addr, 0xc);
+    if (!data)
+      return addr;
+    const newData = new Uint8Array(data);
+    const keyFrameLength = bufReadU16BE(data, 0x00);
+    const textureListAddr = bufReadU32BE(data, 0x04);
+    const textureIndexListAddr = bufReadU32BE(data, 0x08);
+    const textureIndices = this.segData(textureIndexListAddr, keyFrameLength);
+    let textureListCount = 0;
+    if (textureIndices) {
+      for (const textureIndex of textureIndices) {
+        if (textureIndex + 1 > textureListCount) {
+          textureListCount = textureIndex + 1;
+        }
+      }
+    }
+    bufWriteU32BE(newData, 0x00, keyFrameLength);
+    /* TODO figure out how to copy the textures at this point */
+    bufWriteU32BE(newData, 0x08, this.copy(textureIndexListAddr, keyFrameLength));
+    return this.emitData(newData);
+  }
+
+  processAnimatedMaterialAddr(addr: number, count: number) {
+    const data = this.segData(addr, 8 * count);
+    if (!data)
+      return addr;
+    const newData = new Uint8Array(data);
+
+    for (let i = 0; i < count; ++i) {
+      const segment = bufReadU8(data, i * 8 + 0x00);
+      const type = bufReadU16BE(data, i * 8 + 0x02);
+      const paramsAddr = bufReadU32BE(data, i * 8 + 0x04);
+      bufWriteU8(newData, i * 8 + 0x00, segment);
+      bufWriteU16BE(newData, i * 8 + 0x02, type);
+      let newAddr = paramsAddr;
+      switch (type) {
+        case 0:
+          newAddr = this.copy(paramsAddr, 4);
+          break;
+        case 1:
+          newAddr = this.copy(paramsAddr, 8);
+          break;
+        case 2:
+        case 3:
+        case 4:
+          newAddr = this.processAnimatedMatColorParamsAddr(paramsAddr);
+          break;
+        case 5:
+          newAddr = this.processAnimatedMatTexCycleParamsAddr(paramsAddr);
+          break;
+      }
+      bufWriteU32BE(newData, i * 8 + 0x04, newAddr);
+    }
     return this.emitData(newData);
   }
 
