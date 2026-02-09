@@ -308,7 +308,7 @@
 "can_kill_tektites": "soul_tektite && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din)"
 "can_kill_tektites_distance": "soul_tektite && (can_use_slingshot || can_use_bow)"
 "can_kill_leevers": "soul_leever && (has_sword || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din)"
-"can_kill_peahats_ground": "soul_peahat && ((can_use_sword_or_sticks || can_use_slingshot) || (is_night && has_explosives))"
+"can_kill_peahats_ground": "soul_peahat && (can_use_sword_or_sticks || has_arrows || can_hammer || can_hookshot || can_use_slingshot) || (is_night && has_explosives))"
 "can_kill_peahats_high": "soul_peahat && (can_use_slingshot || (is_night && has_explosives))"
 "can_kill_lizalfos_dinalfos": "soul_lizalfos_dinalfos && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow)"
 "can_kill_larvae_eggs_low": "has_ranged_weapon || has_nuts"    #Can be used for clear rooms, but doesn't give enemy drops in OoTR.
@@ -316,7 +316,7 @@
 "can_kill_larvae_hatched": "soul_gohma_larvae && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || can_hookshot || has_explosives || can_use_din)"
 "can_kill_shaboms": "soul_shaboms && (can_use_sword || can_boomerang || has_nuts || has_explosives || can_use_din)"
 "can_kill_dark_link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && (can_use_sword || can_hammer || (can_use_din && has_chateau))" #Double magic may be enough but due to Dark Link matching player health chateau as a mercy? Din's is weird here.
-"can_kill_biris_baris": "soul_biris_baris && (can_use_sword_or_sticks) || can_boomerang || has_explosives || can_use_din))"
+"can_kill_biris_baris": "soul_biris_baris && (can_use_sword_or_sticks || can_boomerang || has_explosives || can_use_din))"
 "can_kill_tailpasarans": "soul_tailpasarans && (can_boomerang || can_use_sword_or_sticks || can_hammer)" #It should be noted that Ruto can kill them but most players wouldn't know this.
 "can_kill_jabu_parasites": "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang" #Can have glitches or tricks for bombchu later on.
 "can_kill_torch_slugs": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword_or_sticks || can_hammer || cam_use_bow || can_use_mask_blast || has_explosives || has_sticks)"
@@ -324,7 +324,7 @@
 "can_kill_poes": "soul_poe && (can_use_sword || can_hammer || can_use_slingshot || can_use_bow || can_hookshot)"
 "can_kill_poe_sisters": soul_poe && (can_use_sword || can_hammer || can_use_bow || can_hookshot)
 "can_kill_poe_meg": "soul_poe && (can_use_bow || can_hookshot)"
-"can_kill_armos": "soul_armos && (can_use_sword_or_sticks || can_hammer || can_use_mask_blast || has_explosives || (can_use_slingshot && (has_nuts || can_boomerang)))"
+"can_kill_armos": "soul_armos && (can_use_sword_kokiri && has_nuts) || (can_use_sword_goron && has_nuts) || can_hammer || can_use_mask_blast || has_explosives || (can_use_slingshot && (has_nuts || can_boomerang)))"
 #"can_kill_small_babas": "soul_deku_baba &&"       #No enemy drops currently in OoTR.
 #"can_kill_big_babas": "soul_deku_baba &&"       #Enemy drops in OoTR only awarded when defeated with elemental arrows.
 "can_kill_mad_scrubs": "soul_deku_scrub && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_boomerang || can_use_bow || can_hookshot || has_shield_for_scrubs)"
@@ -340,7 +340,7 @@
 "can_kill_shell_blades": "soul_shell_blade && (can_use_sword || can_use_bow || can_hookshot || can_use_din)"
 "can_kill_shell_blades_underwater": "soul_shell_blade && can_hookshot"
 "can_kill_like_like": "soul_like_like && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din)"
-"can_kill_spike_enemies": "soul_spike_enemy && (can_use_sword_or_sticks || can_hammer || can_use_bow || can_hookshot || has_explosives)"
+"can_kill_spike_enemies": "soul_spike_enemy && (can_use_sticks || can_hammer || can_use_bow || can_hookshot || has_explosives)"
 "can_kill_spike_enemies_underwater": "soul_spike_enemy && can_hookshot"
 "can_kill_anubis": "soul_enemy(SOUL_ENEMY_ANUBIS) && has_fire"
 "can_kill_iron_knuckles": "soul_iron_knuckle && (can_use_sword || can_hammer || has_explosives)"

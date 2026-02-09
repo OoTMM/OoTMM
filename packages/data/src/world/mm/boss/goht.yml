@@ -5,7 +5,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOSS_GOHT: "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range && (has_arrows || has_mask_goron || has_weapon || has(MASK_FIERCE_DEITY))"
+    BOSS_GOHT: "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range && (has_arrows || has_mask_goron || has(MASK_FIERCE_DEITY))"
   exits:
     "Snowhead Temple After Boss": "event(BOSS_GOHT)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.

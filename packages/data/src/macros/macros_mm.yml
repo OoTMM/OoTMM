@@ -307,12 +307,13 @@
 "can_kill_big_poe": "has_arrows || has_mask_zora || can_use_deku_bubble"
 "can_kill_octoroks": "soul_octorok && (has_arrows || can_hookshot || can_use_deku_bubble || has_mask_zora)"
 "can_kill_big_octos": "soul_octorok && (has_arrows || can_hookshot || has_mask_zora)"
-"can_kill_big_octos_close": "soul_octorok && (has_arrows || can_hookshot_short || has_mask_zora || can_use_din)"
+#"can_kill_big_octos_close": "soul_octorok && (has_arrows || can_hookshot_short || has_mask_zora || can_use_din)"
 "can_kill_wallmasters": "soul_wallmaster && (has_arrows || can_fight || can_use_din || has_explosives || deku_stick_fighting)" # unsure if Deku Spins damage
 "can_kill_floormasters": "soul_floormaster && (has_arrows || can_fight || can_use_din || has_explosives || deku_stick_fighting)" # unsure if Deku Spins damage
 #"can_kill_walllmaster_popsicles": "soul_wallmaster && can_kill_wallmasters && can_use_fire_short_range" #Unused actor variant. Name is from MMR Actorizer community.
 "can_kill_dodongos": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows || deku_stick_fighting)"
-"can_kill_keese": "soul_keese && (has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_din)"
+"can_kill_keese_distance": "soul_keese && (has_arrows)"
+"can_kill_keese_close": "soul_keese && (has_weapon || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_din)"
 "can_kill_tektites": "soul_tektite && (has_arrows || can_fight || has_explosives || deku_stick_fighting)" # unsure if Deku Spins or hookshot damage
 "can_kill_peahats": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU)) && is_day"
 "can_kill_lizalfos_dinalfos": "soul_lizalfos_dinalfos && (has_weapon || has_mask_goron || has_arrows)"
@@ -377,7 +378,7 @@
 #MM Bosses:
 "can_kill_odolwa": "soul_boss(SOUL_BOSS_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"  # Add trick for without arrows to stun. Add a trick for bomb flowers to stun.
 
-"can_kill_goht": "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range && (has_arrows || has_mask_goron || has_weapon || has(MASK_FIERCE_DEITY))"
+"can_kill_goht": "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range && (has_arrows || has_mask_goron || has(MASK_FIERCE_DEITY))"
 
 "can_kill_gyorg": "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
 
