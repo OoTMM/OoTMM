@@ -340,7 +340,7 @@
 "can_kill_shell_blades": "soul_shell_blade && (can_use_sword || can_use_bow || can_hookshot || can_use_din)"
 "can_kill_shell_blades_underwater": "soul_shell_blade && can_hookshot"
 "can_kill_like_like": "soul_like_like && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din)"
-"can_kill_spike_enemies": "soul_spike_enemy && (can_use_sticks || can_hammer || can_use_bow || can_hookshot || has_explosives)"
+"can_kill_spike_enemies": "soul_spike_enemy && (can_use_sticks || can_use_sword_master || can_use_sword_biggoron || can_hammer || can_use_bow || can_hookshot || has_explosives)"
 "can_kill_spike_enemies_underwater": "soul_spike_enemy && can_hookshot"
 "can_kill_anubis": "soul_enemy(SOUL_ENEMY_ANUBIS) && has_fire"
 "can_kill_iron_knuckles": "soul_iron_knuckle && (can_use_sword || can_hammer || has_explosives)"
