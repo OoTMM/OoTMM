@@ -1,5 +1,4 @@
 #include <combo.h>
-#include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
 #include <combo/time.h>
@@ -103,7 +102,7 @@ static u32 entranceForOverride(u32 entrance)
 
 static void sendSelfMajorasMask(void)
 {
-    NetContext* net;
+    MultiEntryItem entry;
     int npc;
     s16 gi;
 
@@ -113,17 +112,14 @@ static void sendSelfMajorasMask(void)
     gi = GI_MM_MASK_MAJORA;
     npc = NPC_MM_MAJORA;
 
-    net = netMutexLock();
-    netWaitCmdClear();
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
-    net->cmdOut.itemSend.game = 1;
-    net->cmdOut.itemSend.gi = gi;
-    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
-    net->cmdOut.itemSend.flags = 0;
-    netMutexUnlock();
+    /* Send the entry */
+    bzero(&entry, sizeof(entry));
+    entry.playerFrom = gComboConfig.playerId;
+    entry.playerTo = gComboConfig.playerId;
+    entry.game = GAME_ID;
+    entry.gi = gi;
+    entry.key = ((u32)OV_NPC << 24) | npc;
+    MultiEx_SendEntryItem(&entry);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
@@ -815,7 +811,7 @@ void Play_MainWrapper(PlayState* play)
     comboObjectsGC();
     link = GET_PLAYER(play);
     Player_TryUpdateForm(link, play);
-    Multi_Update(play);
+    MultiEx_Update(play);
     Play_Main(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);
@@ -921,8 +917,6 @@ void CutsceneTransitionHook(PlayState* play)
         return;
     }
 }
-
-
 
 void Play_FastInit(GameState* gs)
 {

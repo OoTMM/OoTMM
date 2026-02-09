@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/multi.h>

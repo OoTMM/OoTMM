@@ -1,16 +1,16 @@
 #include <combo.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/actor.h>
 #include <combo/time.h>
+#include <combo/multi.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
 
-static void sendNetOwl(PlayState* play, int owlId)
+static void ObjWarpstone_SendOwlItemEntry(PlayState* play, int owlId)
 {
-    NetContext* net;
+    MultiEntryItem entry;
     int npc;
     s16 gi;
 
@@ -28,17 +28,14 @@ static void sendNetOwl(PlayState* play, int owlId)
         npc = NPC_MM_OWL_GREAT_BAY + owlId;
     }
 
-    net = netMutexLock();
-    netWaitCmdClear();
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
-    net->cmdOut.itemSend.game = 1;
-    net->cmdOut.itemSend.gi = gi;
-    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
-    net->cmdOut.itemSend.flags = 0;
-    netMutexUnlock();
+    /* Make and send the entry */
+    bzero(&entry, sizeof(entry));
+    entry.playerFrom = gComboConfig.playerId;
+    entry.playerTo = gComboConfig.playerId;
+    entry.game = GAME_ID;
+    entry.gi = gi;
+    entry.key = ((u32)OV_NPC << 24) | npc;
+    MultiEx_SendEntryItem(&entry);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
@@ -63,7 +60,7 @@ void ObjWarpstone_GiveItem(Actor* this, PlayState* play)
     if (!Config_Flag(CFG_MM_OWL_SHUFFLE) || (id == 0xf))
     {
         gMmOwlFlags |= ((u32)1 << id);
-        sendNetOwl(play, id);
+        ObjWarpstone_SendOwlItemEntry(play, id);
         next = actorAddr(ACTOR_OBJ_WARPSTONE, 0x80b92c48);
         SET_HANDLER(this, next);
         next(this, play);

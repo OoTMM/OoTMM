@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/multi.h>
-#include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/item.h>
@@ -498,6 +497,7 @@ static u16 GetSceneKey(PlayState* play)
 }
 #endif
 
+#if 0
 static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
 {
     Player* link;
@@ -789,16 +789,4 @@ static void Multi_ProcessItems(PlayState* play, NetContext* net)
         }
     }
 }
-
-void Multi_Update(PlayState* play)
-{
-    NetContext* ctx;
-
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
-    ctx = netMutexLock();
-    Multi_ProcessMessages(play, ctx);
-    Multi_ProcessItems(play, ctx);
-    netMutexUnlock();
-}
+#endif

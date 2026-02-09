@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/souls.h>
-#include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
 #include <combo/debug.h>
@@ -122,7 +121,7 @@ static void eventFixes(PlayState* play)
 
 static void sendSelfTriforce(void)
 {
-    NetContext* net;
+    MultiEntryItem entry;
     int npc;
     s16 gi;
 
@@ -132,17 +131,14 @@ static void sendSelfTriforce(void)
     gi = GI_OOT_TRIFORCE_FULL;
     npc = NPC_OOT_GANON;
 
-    net = netMutexLock();
-    netWaitCmdClear();
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
-    net->cmdOut.itemSend.game = 0;
-    net->cmdOut.itemSend.gi = gi;
-    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
-    net->cmdOut.itemSend.flags = 0;
-    netMutexUnlock();
+    /* Send the entry */
+    bzero(&entry, sizeof(entry));
+    entry.playerFrom = gComboConfig.playerId;
+    entry.playerTo = gComboConfig.playerId;
+    entry.game = GAME_ID;
+    entry.gi = gi;
+    entry.key = ((u32)OV_NPC << 24) | npc;
+    MultiEx_SendEntryItem(&entry);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.oot.npc, npc);
@@ -581,7 +577,7 @@ void Play_MainWrapper(PlayState* play)
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    Multi_Update(play);
+    MultiEx_Update(play);
     Play_Main(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
@@ -886,4 +882,3 @@ void Play_FastInit(GameState* gs)
     /* Done */
     gComboCtx.valid = 0;
 }
-
