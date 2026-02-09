@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/dungeon.h>
 #include <combo/dma.h>
 #include <combo/time.h>
@@ -391,9 +390,6 @@ void PrepareAndSave(void)
 
 void Save_DoSave(PlayState* play, int saveFlags)
 {
-    /* Wait for net */
-    netWaitSave();
-
     gComboCtx.saveIndex = gSaveContext.fileNum;
     if (!(saveFlags & SF_PASSIVE))
     {

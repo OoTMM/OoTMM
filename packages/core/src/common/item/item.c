@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/dma.h>
 #include <combo/entrance.h>
 #include <combo/io.h>
@@ -512,7 +511,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
-    NetContext* net;
+    MultiEntryItem entry;
     int count;
 
     comboItemOverride(&o, q);
@@ -526,47 +525,22 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     if (updateText)
         comboTextHijackItemEx(play, &o, count);
 
-    if (Config_Flag(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
+    /* Send entry (API / Multiplayer) */
+    if (q->ovType != OV_NONE)
     {
         /* Mark the item */
         if (Item_IsPlayerSelf(o.player))
-        {
-#if defined(GAME_OOT)
-            Multi_SetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
-#else
-            Multi_SetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
-#endif
-
-            /* If the item was a renewable, add it to the GI skips */
-            if (q->ovFlags & OVF_RENEW)
-            {
-                for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
-                {
-                    if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
-                    {
-                        gSharedCustomSave.netGiSkip[i] = o.gi;
-                        break;
-                    }
-                }
-            }
-        }
+            Multi_SetMarked(play, q->ovType, q->sceneId, q->roomId, q->id);
 
         /* Send the item on the network */
-        net = netMutexLock();
-        netWaitCmdClear();
-        bzero(&net->cmdOut, sizeof(net->cmdOut));
-        net->cmdOut.op = NET_OP_ITEM_SEND;
-        net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-        net->cmdOut.itemSend.playerTo = o.player;
-#if defined(GAME_OOT)
-        net->cmdOut.itemSend.game = 0;
-#else
-        net->cmdOut.itemSend.game = 1;
-#endif
-        net->cmdOut.itemSend.gi = comboItemResolve(play, o.gi);
-        net->cmdOut.itemSend.key = makeOverrideKey(q);
-        net->cmdOut.itemSend.flags = (s16)q->ovFlags;
-        netMutexUnlock();
+        bzero(&entry, sizeof(entry));
+        entry.playerFrom = o.playerFrom;
+        entry.playerTo = o.player;
+        entry.game = GAME_ID;
+        entry.gi = comboItemResolve(play, o.gi);
+        entry.key = makeOverrideKey(q);
+        if (q->ovFlags & OVF_RENEW) entry.flags |= MULTI_FLAGS_ITEM_NONCE;
+        MultiEx_SendEntryItem(&entry);
     }
 
     return count;

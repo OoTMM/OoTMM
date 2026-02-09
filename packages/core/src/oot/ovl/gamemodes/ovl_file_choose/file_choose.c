@@ -2,6 +2,7 @@
 #include <combo/config.h>
 #include <assets/oot/textures/title_static.h>
 #include <assets/oot/textures/parameter_static.h>
+#include <combo/multi.h>
 
 static u8 sColors[] = { 100, 150, 255 };
 EXPORT_SYMBOL(COLOR_FILE_SELECT, sColors);

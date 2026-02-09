@@ -1,7 +1,6 @@
 #include <combo.h>
 #include <combo/audio.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/time.h>
 #include <combo/magic.h>
 #include <combo/config.h>
@@ -63,21 +62,12 @@ void Save_LoadOptions(void)
 
 void Save_OnLoad(void)
 {
-    NetContext* net;
-
     /* Clear custom trigger data */
     bzero(&gComboTriggersData, sizeof(gComboTriggersData));
 
     /* Clear "next item" */
     g.itemQuery = NULL;
     g.itemQueryBox = NULL;
-
-    /* Clear network */
-    net = netMutexLock();
-    net->ledgerBase = gSaveLedgerBase;
-    bzero(&net->cmdIn, sizeof(net->cmdIn));
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    netMutexUnlock();
 
     comboWalletRefresh();
     Inventory_UpdateMaxBombchu();
@@ -187,16 +177,8 @@ static void saveFixup(void)
 
 void Save_Write(void)
 {
-    NetContext* net;
-
     if (gSaveContext.fileNum == 0xff)
         return;
-
-    /* Save the network part */
-    net = netMutexLock();
-    netWaitCmdClear();
-    net->ledgerBase = gSaveLedgerBase;
-    netMutexUnlock();
 
     saveFixup();
     comboSyncItems();
