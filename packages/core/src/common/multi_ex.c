@@ -2,6 +2,8 @@
 #include <combo/multi.h>
 #include <sys/emu.h>
 
+#define MAX_PACKET_SIZE 512
+
 #define OP_NOP          0x00
 #define OP_ENTRY_PUSH   0x01
 
@@ -10,7 +12,19 @@
 static char sMultiId[16];
 EXPORT_SYMBOL(MULTI_ID, sMultiId);
 
-static char sSocketConnected = 0;
+typedef struct
+{
+    char id[16];
+    u32  token;
+    u32  nextPacketId;
+    char buffer[512];
+    u16  bufferSize;
+    int  socketConnected;
+}
+MultiContext;
+
+static MultiContext sCtx;
+EXPORT_SYMBOL(MULTI_ID, sCtx.id);
 
 static int MultiEx_SendFull(const void* data, u32 size)
 {
@@ -50,6 +64,73 @@ static int MultiEx_RecvFull(void* data, u32 size)
     }
 }
 
+static int MultiEx_SendBufferedPacket(void)
+{
+    char header[10];
+
+    /* Create the packet header */
+    memcpy(&header[0], &sCtx.bufferSize, 2);
+    memcpy(&header[2], &sCtx.token, 4);
+    memcpy(&header[6], &sCtx.nextPacketId, 4);
+
+    /* Send header */
+    if (!MultiEx_SendFull(header, 10))
+        return 0;
+
+    if (sCtx.bufferSize)
+    {
+        /* Send packet data */
+        if (!MultiEx_SendFull(sCtx.buffer, sCtx.bufferSize))
+            return 0;
+    }
+
+    /* Increment next packet id */
+    sCtx.nextPacketId++;
+    return 1;
+}
+
+static int MultiEx_RecvBufferedPacket(void)
+{
+    char header[10];
+    u16 length;
+    u32 token;
+    u32 packetId;
+
+    /* Receive header */
+    if (!MultiEx_RecvFull(header, 10))
+        return 0;
+
+    /* Parse header */
+    memcpy(&length, &header[0], 2);
+    memcpy(&token, &header[2], 4);
+    memcpy(&packetId, &header[6], 4);
+
+    /* Validate packet length */
+    if (length > MAX_PACKET_SIZE)
+        return 0;
+    sCtx.bufferSize = length;
+
+    /* Validate token */
+    if (token != sCtx.token)
+        return 0;
+
+    /* Validate packet id */
+    if (packetId != sCtx.nextPacketId)
+        return 0;
+
+    /* Receive packet data */
+    if (length)
+    {
+        if (!MultiEx_RecvFull(sCtx.buffer, sCtx.bufferSize))
+            return 0;
+    }
+
+    /* Increment next packet id */
+    sCtx.nextPacketId++;
+
+    return 1;
+}
+
 int MultiEx_IsMultiplayer(void)
 {
     return Config_Flag(CFG_MULTIPLAYER);
@@ -78,6 +159,10 @@ static int Multi_InitSession(void)
     if (!MultiEx_RecvFull(buf, 6))
         return 0;
     if (memcmp(buf, "OoTMM\x00", 6) != 0)
+        return 0;
+    if (!MultiEx_RecvFull(&sCtx.token, 4))
+        return 0;
+    if (!MultiEx_RecvFull(&sCtx.nextPacketId, 4))
         return 0;
 
     return 1;
@@ -110,19 +195,19 @@ static int MultiEx_OpenImpl(void)
 
 int MultiEx_Open(void)
 {
-    if (sSocketConnected)
+    if (sCtx.socketConnected)
         return 1;
 
-    sSocketConnected = MultiEx_OpenImpl();
-    return sSocketConnected;
+    sCtx.socketConnected = MultiEx_OpenImpl();
+    return sCtx.socketConnected;
 }
 
 void MultiEx_Close(void)
 {
-    if (sSocketConnected)
+    if (sCtx.socketConnected)
     {
         emuSysSocketClose(0);
-        sSocketConnected = 0;
+        sCtx.socketConnected = 0;
     }
 }
 
@@ -140,54 +225,18 @@ void MultiEx_Update(PlayState* play)
         return;
 }
 
-static u32 crc32(const void* data, u32 size)
-{
-    u32 crc = 0xffffffff;
-    const u8* p = (const u8*)data;
-    for (u32 i = 0; i < size; i++)
-    {
-        crc ^= p[i];
-        for (u8 j = 0; j < 8; j++)
-        {
-            if (crc & 1)
-                crc = (crc >> 1) ^ 0xedb88320;
-            else
-                crc >>= 1;
-        }
-    }
-    return crc ^ 0xffffffff;
-}
-
-static int Multi_SendPacket(const void* data, u16 size)
-{
-    u32 checksum;
-    char header[6];
-
-    checksum = crc32(data, size);
-    memcpy(&header[0], &size, 2);
-    memcpy(&header[2], &checksum, 4);
-    if (!MultiEx_SendFull(header, 6))
-        return 0;
-    if (!MultiEx_SendFull(data, size))
-        return 0;
-    return 1;
-}
-
 static void MultiEx_SendEntry(u8 type, const void* data, u16 size)
 {
-    char buf[64];
-    char retBuf[1];
-
-    if (!sSocketConnected && !MultiEx_IsMultiplayer())
+    if (!sCtx.socketConnected && !MultiEx_IsMultiplayer())
         return;
-
-    buf[0] = OP_ENTRY_PUSH;
-    buf[1] = type;
-    memcpy(&buf[2], data, size);
 
     for (;;)
     {
-        if (Multi_SendPacket(buf, size + 2))
+        sCtx.buffer[0] = type;
+        memcpy(&sCtx.buffer[1], data, size);
+        sCtx.bufferSize = size + 1;
+
+        if (MultiEx_SendBufferedPacket() && MultiEx_RecvBufferedPacket())
             return;
 
         /* There was an error somewhere */
