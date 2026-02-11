@@ -14,122 +14,25 @@ EXPORT_SYMBOL(MULTI_ID, sMultiId);
 
 typedef struct
 {
-    char id[16];
-    u32  token;
-    u32  nextPacketId;
-    char buffer[512];
-    u16  bufferSize;
-    int  socketConnected;
+    u32     token;
+    u32     id;
+    char    data[MAX_PACKET_SIZE - 8];
+    u16     size;
+}
+MultiPacket;
+
+typedef struct
+{
+    u32         token;
+    u32         nextPacketId;
+    char        id[16];
+    int         isConnected;
+    MultiPacket pkt;
 }
 MultiContext;
 
-static MultiContext sCtx;
+MultiContext sCtx;
 EXPORT_SYMBOL(MULTI_ID, sCtx.id);
-
-static int MultiEx_SendFull(const void* data, u32 size)
-{
-    int ret;
-
-    if (size == 0)
-        return 1;
-
-    for (;;)
-    {
-        ret = emuSysSocketSend(0, data, size);
-        if (ret < 0)
-            return 0;
-        if (ret == size)
-            return 1;
-        data = (const char*)data + ret;
-        size -= ret;
-    }
-}
-
-static int MultiEx_RecvFull(void* data, u32 size)
-{
-    int ret;
-
-    if (size == 0)
-        return 1;
-
-    for (;;)
-    {
-        ret = emuSysSocketRecv(0, data, size);
-        if (ret <= 0)
-            return 0;
-        if (ret == size)
-            return 1;
-        data = (char*)data + ret;
-        size -= ret;
-    }
-}
-
-static int MultiEx_SendBufferedPacket(void)
-{
-    char header[10];
-
-    /* Create the packet header */
-    memcpy(&header[0], &sCtx.bufferSize, 2);
-    memcpy(&header[2], &sCtx.token, 4);
-    memcpy(&header[6], &sCtx.nextPacketId, 4);
-
-    /* Send header */
-    if (!MultiEx_SendFull(header, 10))
-        return 0;
-
-    if (sCtx.bufferSize)
-    {
-        /* Send packet data */
-        if (!MultiEx_SendFull(sCtx.buffer, sCtx.bufferSize))
-            return 0;
-    }
-
-    /* Increment next packet id */
-    sCtx.nextPacketId++;
-    return 1;
-}
-
-static int MultiEx_RecvBufferedPacket(void)
-{
-    char header[10];
-    u16 length;
-    u32 token;
-    u32 packetId;
-
-    /* Receive header */
-    if (!MultiEx_RecvFull(header, 10))
-        return 0;
-
-    /* Parse header */
-    memcpy(&length, &header[0], 2);
-    memcpy(&token, &header[2], 4);
-    memcpy(&packetId, &header[6], 4);
-
-    /* Validate packet length */
-    if (length > MAX_PACKET_SIZE)
-        return 0;
-    sCtx.bufferSize = length;
-
-    /* Validate token */
-    if (token != sCtx.token)
-        return 0;
-
-    /* Validate packet id */
-    if (packetId != sCtx.nextPacketId)
-        return 0;
-
-    /* Receive packet data */
-    if (length)
-    {
-        if (!MultiEx_RecvFull(sCtx.buffer, sCtx.bufferSize))
-            return 0;
-    }
-
-    /* Increment next packet id */
-    sCtx.nextPacketId++;
-
-    return 1;
-}
 
 int MultiEx_IsMultiplayer(void)
 {
@@ -138,11 +41,12 @@ int MultiEx_IsMultiplayer(void)
 
 int MultiEx_IsSupported(void)
 {
+
     static char sSupported = -1;
 
     if (sSupported < 0)
     {
-        if (emuSysCount() >= 5)
+        if (emuSysCount() >= 6)
             sSupported = 1;
         else
             sSupported = 0;
@@ -152,18 +56,16 @@ int MultiEx_IsSupported(void)
 
 static int Multi_InitSession(void)
 {
-    char buf[6];
+    char buf[14];
 
-    if (!MultiEx_SendFull("OoTMM\x00", 6))
+    if (emuSysSendIPC("OoTMM\x00", 6) < 0)
         return 0;
-    if (!MultiEx_RecvFull(buf, 6))
+    if (emuSysRecvIPC(buf, 14) < 14)
         return 0;
     if (memcmp(buf, "OoTMM\x00", 6) != 0)
         return 0;
-    if (!MultiEx_RecvFull(&sCtx.token, 4))
-        return 0;
-    if (!MultiEx_RecvFull(&sCtx.nextPacketId, 4))
-        return 0;
+    memcpy(&sCtx.token, &buf[6], 4);
+    memcpy(&sCtx.nextPacketId, &buf[10], 4);
 
     return 1;
 }
@@ -177,17 +79,11 @@ static int MultiEx_OpenImpl(void)
 
         for (;;)
         {
-            if (emuSysSocketIsValid(0) == 0)
+            if (emuSysValidIPC() >= 0)
                 return 1;
-            emuSysSocketClose(0);
-            if (emuSysSocketOpen(0) == 0 && Multi_InitSession())
+            if (emuSysOpenIPC() >= 0 && Multi_InitSession())
                 return 1;
         }
-    } else {
-        if (emuSysSocketIsValid(0) == 0)
-            return 1;
-        if (emuSysSocketOpenAsync(0) == 0)
-            return 1;
     }
 
     return 0;
@@ -195,19 +91,19 @@ static int MultiEx_OpenImpl(void)
 
 int MultiEx_Open(void)
 {
-    if (sCtx.socketConnected)
+    if (sCtx.isConnected)
         return 1;
 
-    sCtx.socketConnected = MultiEx_OpenImpl();
-    return sCtx.socketConnected;
+    sCtx.isConnected = MultiEx_OpenImpl();
+    return sCtx.isConnected;
 }
 
 void MultiEx_Close(void)
 {
-    if (sCtx.socketConnected)
+    if (sCtx.isConnected)
     {
-        emuSysSocketClose(0);
-        sCtx.socketConnected = 0;
+        emuSysCloseIPC();
+        sCtx.isConnected = 0;
     }
 }
 
@@ -225,18 +121,49 @@ void MultiEx_Update(PlayState* play)
         return;
 }
 
+static int MultiEx_ProtocolSend(void)
+{
+    sCtx.pkt.token = sCtx.token;
+    sCtx.pkt.id = sCtx.nextPacketId++;
+
+    if (emuSysSendIPC(&sCtx.pkt, sCtx.pkt.size + 8) < 0)
+        return 0;
+    return 1;
+}
+
+static int MultiEx_ProtocolRecv(void)
+{
+    MultiPacket* pkt;
+    int res;
+
+    pkt = &sCtx.pkt;
+    res = emuSysRecvIPC(pkt, MAX_PACKET_SIZE);
+    if (res < 8)
+        return 0;
+    if (pkt->token != sCtx.token)
+        return 0;
+    if (pkt->id != sCtx.nextPacketId)
+        return 0;
+    sCtx.nextPacketId++;
+    pkt->size = res - 8;
+    return 1;
+}
+
 static void MultiEx_SendEntry(u8 type, const void* data, u16 size)
 {
-    if (!sCtx.socketConnected && !MultiEx_IsMultiplayer())
+    MultiPacket* pkt;
+
+    if (!sCtx.isConnected && !MultiEx_IsMultiplayer())
         return;
 
+    pkt = &sCtx.pkt;
     for (;;)
     {
-        sCtx.buffer[0] = type;
-        memcpy(&sCtx.buffer[1], data, size);
-        sCtx.bufferSize = size + 1;
+        pkt->size = size + 1;
+        pkt->data[0] = type;
+        memcpy(&pkt->data[1], data, size);
 
-        if (MultiEx_SendBufferedPacket() && MultiEx_RecvBufferedPacket())
+        if (MultiEx_ProtocolSend() && MultiEx_ProtocolRecv())
             return;
 
         /* There was an error somewhere */
