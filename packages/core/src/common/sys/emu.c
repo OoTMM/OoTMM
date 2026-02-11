@@ -27,87 +27,68 @@ int emuSysCount(void)
     return buffer[0];
 }
 
-int emuSysSocketOpen(int slot)
+int emuSysValidIPC(void)
 {
-    ALIGNED(16) u32 buffer[2];
+    ALIGNED(16) u32 buffer[1];
 
     if (!_emuSysCheck(1))
         return -1;
 
     buffer[0] = 1;
-    buffer[1] = (u32)slot;
     _emuSysCall(buffer, sizeof(buffer));
-
-    return (int)buffer[0];
+    return buffer[0];
 }
 
-int emuSysSocketClose(int slot)
+int emuSysOpenIPC(void)
 {
-    ALIGNED(16) u32 buffer[2];
+    ALIGNED(16) u32 buffer[1];
 
     if (!_emuSysCheck(2))
         return -1;
 
     buffer[0] = 2;
-    buffer[1] = (u32)slot;
     _emuSysCall(buffer, sizeof(buffer));
-
-    return (int)buffer[0];
+    return buffer[0];
 }
 
-int emuSysSocketSend(int slot, const void* data, u32 size)
+int emuSysCloseIPC(void)
 {
-    ALIGNED(16) u32 buffer[4];
+    ALIGNED(16) u32 buffer[1];
 
     if (!_emuSysCheck(3))
         return -1;
 
     buffer[0] = 3;
-    buffer[1] = (u32)slot;
-    buffer[2] = (u32)data;
-    buffer[3] = size;
     _emuSysCall(buffer, sizeof(buffer));
-
-    return (int)buffer[0];
+    return buffer[0];
 }
 
-int emuSysSocketRecv(int slot, void* data, u32 size)
+int emuSysSendIPC(const void* data, u32 size)
 {
-    ALIGNED(16) u32 buffer[4];
+    ALIGNED(16) u32 buffer[3];
 
     if (!_emuSysCheck(4))
         return -1;
 
     buffer[0] = 4;
-    buffer[1] = (u32)slot;
-    buffer[2] = (u32)data;
-    buffer[3] = size;
+    buffer[1] = (u32)data;
+    buffer[2] = size;
+    osWritebackDCache((void*)data, size);
     _emuSysCall(buffer, sizeof(buffer));
-
-    return (int)buffer[0];
+    return buffer[0];
 }
 
-int emuSysSocketIsValid(int slot)
+int emuSysRecvIPC(void* data, u32 bufSize)
 {
-    ALIGNED(16) u32 buffer[2];
+    ALIGNED(16) u32 buffer[3];
 
     if (!_emuSysCheck(5))
         return -1;
 
     buffer[0] = 5;
-    buffer[1] = (u32)slot;
+    buffer[1] = (u32)data;
+    buffer[2] = bufSize;
+    osInvalDCache(data, bufSize);
     _emuSysCall(buffer, sizeof(buffer));
-
-    return (int)buffer[0];
-}
-
-int emuSysSocketOpenAsync(int slot)
-{
-    ALIGNED(16) u32 buffer[2];
-
-    if (!_emuSysCheck(6))
-        return -1;
-
-    /* Not implemented yet */
-    return -1;
+    return buffer[0];
 }
