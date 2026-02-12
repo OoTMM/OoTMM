@@ -43,7 +43,7 @@ typedef struct PACKED
     u32 key;
     s16 gi;
 }
-MultiEntryItem;
+MultiWriteWalItem;
 
 int MultiEx_IsMultiplayer(void);
 int MultiEx_IsSupported(void);
@@ -51,6 +51,6 @@ int MultiEx_Open(void);
 void MultiEx_Close(void);
 void MultiEx_Update(PlayState* play);
 
-void MultiEx_SendEntryItem(const MultiEntryItem* entry);
+void MultiEx_SendEntryItem(const MultiWriteWalItem* entry);
 
 #endif

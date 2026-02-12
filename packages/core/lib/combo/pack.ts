@@ -156,14 +156,14 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
 
   /* Inject the multi Id */
   for (const game of GAMES) {
-    const addrs = patchfile.symbols[game].get('MULTI_ID');
+    const addrs = patchfile.symbols[game].get('MULTI_SESSION_ID');
     if (addrs === undefined) {
-      throw new Error(`Missing MULTI_ID symbol for ${game}`);
+      throw new Error(`Missing MULTI_SESSION_ID symbol for ${game}`);
     }
     for (const addr of addrs) {
       const file = romBuilder.fileByVRAM(game, addr);
       if (file === null) {
-        throw new Error(`Failed to find file for MULTI_ID in ${game}`);
+        throw new Error(`Failed to find file for MULTI_SESSION_ID in ${game}`);
       }
       const offset = addr - file.vram![game]![0];
       file.data.set(patchfile.multiId, offset);

@@ -10,7 +10,7 @@
 
 static void ObjWarpstone_SendOwlItemEntry(PlayState* play, int owlId)
 {
-    MultiEntryItem entry;
+    MultiWriteWalItem entry;
     int npc;
     s16 gi;
 

@@ -4,13 +4,8 @@
 
 #define MAX_PACKET_SIZE 512
 
-#define OP_NOP          0x00
-#define OP_ENTRY_PUSH   0x01
-
-#define ENTRY_TYPE_ITEM 0x01
-
-static char sMultiId[16];
-EXPORT_SYMBOL(MULTI_ID, sMultiId);
+#define OP_NOP              0x00
+#define OP_WRITE_WAL_ITEM   0x01
 
 typedef struct
 {
@@ -23,16 +18,24 @@ MultiPacket;
 
 typedef struct
 {
+    char        sessionId[16];
+    u32         sessionSecret;
+    u64         playerUniqueId;
+    u8          playerId;
+    u8          teamId;
     u32         token;
     u32         nextPacketId;
-    char        id[16];
     int         isConnected;
     MultiPacket pkt;
 }
 MultiContext;
 
 MultiContext sCtx;
-EXPORT_SYMBOL(MULTI_ID, sCtx.id);
+EXPORT_SYMBOL(MULTI_SESSION_ID, sCtx.sessionId);
+EXPORT_SYMBOL(MULTI_SESSION_SECRET, sCtx.sessionSecret);
+EXPORT_SYMBOL(MULTI_PLAYER_UNIQUE_ID, sCtx.playerUniqueId);
+EXPORT_SYMBOL(MULTI_PLAYER_ID, sCtx.playerId);
+EXPORT_SYMBOL(MULTI_TEAM_ID, sCtx.teamId);
 
 int MultiEx_IsMultiplayer(void)
 {
@@ -58,9 +61,13 @@ static int Multi_InitSession(void)
     char buf[128];
 
     memcpy(buf + 0, "OoTMM\x00", 6);
-    memcpy(buf + 6, sMultiId, 16);
+    memcpy(buf + 6, sCtx.sessionId, 16);
+    memcpy(buf + 22, &sCtx.sessionSecret, 4);
+    memcpy(buf + 26, &sCtx.playerUniqueId, 8);
+    buf[34] = sCtx.playerId;
+    buf[35] = sCtx.teamId;
 
-    if (emuSysSendIPC(buf, 22) < 0)
+    if (emuSysSendIPC(buf, 36) < 0)
         return 0;
     if (emuSysRecvIPC(buf, 14) < 14)
         return 0;
@@ -151,7 +158,7 @@ static int MultiEx_ProtocolRecv(void)
     return 1;
 }
 
-static void MultiEx_SendEntry(u8 type, const void* data, u16 size)
+static void MultiEx_SendWal(u8 op, const void* data, u16 size)
 {
     MultiPacket* pkt;
 
@@ -162,7 +169,7 @@ static void MultiEx_SendEntry(u8 type, const void* data, u16 size)
     for (;;)
     {
         pkt->size = size + 1;
-        pkt->data[0] = type;
+        pkt->data[0] = op;
         memcpy(&pkt->data[1], data, size);
 
         if (MultiEx_ProtocolSend() && MultiEx_ProtocolRecv())
@@ -178,10 +185,10 @@ static void MultiEx_SendEntry(u8 type, const void* data, u16 size)
     }
 }
 
-void MultiEx_SendEntryItem(const MultiEntryItem* blob)
+void MultiEx_SendEntryItem(const MultiWriteWalItem* blob)
 {
     if (!MultiEx_Open())
         return;
 
-    MultiEx_SendEntry(ENTRY_TYPE_ITEM, blob, sizeof(MultiEntryItem));
+    MultiEx_SendWal(OP_WRITE_WAL_ITEM, blob, sizeof(MultiWriteWalItem));
 }
