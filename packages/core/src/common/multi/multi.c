@@ -12,11 +12,12 @@ static void Multi_ExportFilename(char* dst)
     int len;
     u8 c;
 
-    len = 8;
-    for (int i = len - 1; i > 0; --i)
+    len = 7;
+    while (len)
     {
-        if (gSave.info.playerData.playerName[i] != FILENAME_SPACE)
+        if (gSave.info.playerData.playerName[len - 1] != FILENAME_SPACE)
             break;
+        len--;
     }
 
     for (int i = len; i < 8; ++i)

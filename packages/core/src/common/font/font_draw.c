@@ -17,7 +17,8 @@ static const Gfx kDlistLoadIA4_8x12[] = {
     gsSPEndDisplayList(),
 };
 
-static const float kScale = 0.75f;
+//static const float kScale = 0.75f;
+static const float kScale = 1.f;
 static const float kScaleInv = 1.0f / kScale;
 
 void FontCustom_DrawChar(Gfx** gfxP, int x, int y, char c)

@@ -26,6 +26,7 @@ gAudioLoadStatusFontSample = 0x80128a68;
 
 Player_GetHeight = 0x80021600;
 
+Actor_ProjectPos = 0x8001f7a0;
 Gfx_Open = 0x800a1aa0;
 Gfx_Close = 0x800a1aac;
 
