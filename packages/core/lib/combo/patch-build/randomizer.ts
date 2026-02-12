@@ -1249,6 +1249,8 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
 };
 
 export async function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
+  patchfile.addSymbolPatch('MULTI_PLAYER_ID', toU8Buffer([worldId + 1]));
+
   patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(worldId, logic), compressed: true });
   patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(worldId, logic), compressed: false });
   patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(worldId, options, settings, 'oot', logic), compressed: false });

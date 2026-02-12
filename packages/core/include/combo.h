@@ -204,6 +204,10 @@ void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
 
+void FontCustom_Setup(Gfx** gfxP);
+void FontCustom_DrawChar(Gfx** gfxP, int x, int y, char c);
+void FontCustom_DrawStr(Gfx** gfxP, int x, int y, const char* str);
+
 #else
 # include <combo/asm.h>
 #endif

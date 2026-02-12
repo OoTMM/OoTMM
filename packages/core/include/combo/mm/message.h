@@ -1,6 +1,13 @@
 #ifndef COMBO_MM_MESSAGE_H
 #define COMBO_MM_MESSAGE_H
 
+#define FILENAME_DIGIT(c)                   ((c) - '0')
+#define FILENAME_UPPERCASE(c)               ((c) - 'A' + 0x0A)
+#define FILENAME_LOWERCASE(c)               ((c) - 'a' + 0x24)
+#define FILENAME_SPACE                      0x3E
+#define FILENAME_DASH                       0x3F
+#define FILENAME_PERIOD                     0x40
+
 typedef enum TextState {
     /*  0 */ TEXT_STATE_NONE,
     /*  1 */ TEXT_STATE_NEXT,

@@ -2,6 +2,7 @@
 #define COMBO_MULTI_H
 
 #include <combo/types.h>
+
 #define MULTI_FLAGS_ITEM_NONCE 0x01
 
 extern u32 gMultiMarkChests;
@@ -26,13 +27,12 @@ extern u32 gMultiMarkSwitch1;
 
 typedef struct PlayState PlayState;
 
-inline void    Multi_DrawWisps(PlayState* play) {}
-inline void    Multi_ResetWisps(void) {}
-
 void    Multi_SetMarkedOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 void    Multi_SetMarkedMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 int     Multi_IsMarkedOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 int     Multi_IsMarkedMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+
+u16 Multi_SceneKey(PlayState* play);
 
 typedef struct PACKED
 {
@@ -45,12 +45,16 @@ typedef struct PACKED
 }
 MultiWriteWalItem;
 
-int MultiEx_IsMultiplayer(void);
-int MultiEx_IsSupported(void);
-int MultiEx_Open(void);
-void MultiEx_Close(void);
-void MultiEx_Update(PlayState* play);
+int Multi_IsMultiplayer(void);
+int Multi_IsSupported(void);
+int Multi_Open(void);
+void Multi_Close(void);
+void Multi_Update(PlayState* play);
 
-void MultiEx_SendEntryItem(const MultiWriteWalItem* entry);
+void Multi_SendEntryItem(const MultiWriteWalItem* entry);
+
+void Multi_WispsReset(void);
+void Multi_WispsUpdate(PlayState* play);
+void Multi_WispsDraw(PlayState* play);
 
 #endif

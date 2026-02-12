@@ -1,8 +1,8 @@
 import JSZip from 'jszip';
-import { concatUint8Arrays } from 'uint8array-extras';
+import { concatUint8Arrays, base64ToUint8Array, uint8ArrayToBase64 } from 'uint8array-extras';
 import { Game } from '../config';
 
-const VERSION = '1.2';
+const VERSION = '1.3';
 
 class BlobBuilder {
   private parts: Uint8Array[];
@@ -41,21 +41,21 @@ type NewFile = {
 
 export class Patchfile {
   public patches: {[k: string]: Patch[]};
+  public symPatches: Map<string, Uint8Array>;
   public newFiles: NewFile[];
   public removedFiles: string[];
   public hash: string;
   public meta: any;
   public symbols: Record<Game, Map<string, number[]>>;
-  public multiId: Uint8Array;
 
   constructor() {
     this.patches = {};
+    this.symPatches = new Map();
     this.newFiles = [];
     this.removedFiles = [];
     this.hash = 'XXXXXXXX';
     this.meta = {};
     this.symbols = { oot: new Map(), mm: new Map() };
-    this.multiId = new Uint8Array(16);
   }
 
   setHash(hash: string) {
@@ -68,6 +68,10 @@ export class Patchfile {
     this.patches[file] = patches;
   }
 
+  addSymbolPatch(symbol: string, data: Uint8Array) {
+    this.symPatches.set(symbol, data);
+  }
+
   addNewFile(args: NewFile) {
     this.newFiles.push({ ...args, vram: { ...args.vram } });
   }
@@ -76,7 +80,6 @@ export class Patchfile {
     let meta: any;
     let symbols: any;
     let blob: Uint8Array;
-    let multiId: Uint8Array;
 
     try {
       /* Load from the zip */
@@ -84,7 +87,11 @@ export class Patchfile {
       meta = JSON.parse(await zip.file('meta.json')!.async('text'));
       blob = await zip.file('blob.bin')!.async('uint8array');
       symbols = JSON.parse(await zip.file('symbols.json')!.async('text'));
-      multiId = await zip.file('multi-uuid.bin')!.async('uint8array');
+      const symPatches = JSON.parse(await zip.file('symbol-patches.json')!.async('text'));
+      for (const k in symPatches) {
+        const v = symPatches[k];
+        this.symPatches.set(k, base64ToUint8Array(v));
+      }
     } catch (e) {
       throw new Error(`Failed to load patchfile: ${e}`);
     }
@@ -93,17 +100,12 @@ export class Patchfile {
       throw new Error(`Unsupported patchfile version: ${meta.version}`);
     }
 
-    if (multiId.length !== 16) {
-      throw new Error('Invalid multi-id length');
-    }
-
     this.hash = meta.hash;
     this.meta = meta.meta;
     this.removedFiles = meta.removedFiles;
     this.newFiles = [];
     this.patches = {};
     this.symbols = { oot: new Map(), mm: new Map() };
-    this.multiId = multiId;
 
     /* Load new files */
     for (const f of meta.newFiles) {
@@ -171,9 +173,6 @@ export class Patchfile {
     zip.file('meta.json', JSON.stringify(meta));
     zip.file('blob.bin', blobBuilder.concat());
 
-    /* Store multi id */
-    zip.file('multi-uuid.bin', this.multiId);
-
     /* Store symbols */
     const symbols: any = { oot: {}, mm: {} };
     for (const [k, v] of this.symbols.oot) {
@@ -183,6 +182,13 @@ export class Patchfile {
       symbols.mm[k] = v;
     }
     zip.file('symbols.json', JSON.stringify(symbols));
+
+    /* Store symbol patches */
+    const symPatches: any = {};
+    for (const [k, v] of this.symPatches) {
+      symPatches[k] = uint8ArrayToBase64(v);
+    }
+    zip.file('symbol-patches.json', JSON.stringify(symPatches));
 
     return await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' });
   }
@@ -195,9 +201,12 @@ export class Patchfile {
     for (const k in this.patches) {
       ret.patches[k] = [...this.patches[k]];
     }
+    ret.symPatches = new Map();
+    for (const [k, v] of this.symPatches) {
+      ret.symPatches.set(k, v);
+    }
     ret.removedFiles = [...this.removedFiles];
     ret.newFiles = [...this.newFiles];
-    ret.multiId = this.multiId.slice();
     ret.symbols = { oot: new Map(), mm: new Map() };
     for (const [k, v] of this.symbols.oot) {
       ret.symbols.oot.set(k, [...v]);

@@ -35,7 +35,7 @@ static void ObjWarpstone_SendOwlItemEntry(PlayState* play, int owlId)
     entry.game = GAME_ID;
     entry.gi = gi;
     entry.key = ((u32)OV_NPC << 24) | npc;
-    MultiEx_SendEntryItem(&entry);
+    Multi_SendEntryItem(&entry);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

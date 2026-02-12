@@ -119,7 +119,7 @@ static void sendSelfMajorasMask(void)
     entry.game = GAME_ID;
     entry.gi = gi;
     entry.key = ((u32)OV_NPC << 24) | npc;
-    MultiEx_SendEntryItem(&entry);
+    Multi_SendEntryItem(&entry);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
@@ -553,7 +553,7 @@ void hookPlay_Init(PlayState* play)
     gMultiMarkCollectibles = 0;
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
-    Multi_ResetWisps();
+    Multi_WispsReset();
     Inventory_ReobtainProgressiveShields();
 
     if (Config_Flag(CFG_ER_OVERWORLD) || Config_Flag(CFG_ER_INDOORS))
@@ -811,7 +811,7 @@ void Play_MainWrapper(PlayState* play)
     comboObjectsGC();
     link = GET_PLAYER(play);
     Player_TryUpdateForm(link, play);
-    MultiEx_Update(play);
+    Multi_Update(play);
     Play_Main(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);
