@@ -41,7 +41,6 @@ int MultiEx_IsMultiplayer(void)
 
 int MultiEx_IsSupported(void)
 {
-
     static char sSupported = -1;
 
     if (sSupported < 0)
@@ -56,9 +55,12 @@ int MultiEx_IsSupported(void)
 
 static int Multi_InitSession(void)
 {
-    char buf[14];
+    char buf[128];
 
-    if (emuSysSendIPC("OoTMM\x00", 6) < 0)
+    memcpy(buf + 0, "OoTMM\x00", 6);
+    memcpy(buf + 6, sMultiId, 16);
+
+    if (emuSysSendIPC(buf, 22) < 0)
         return 0;
     if (emuSysRecvIPC(buf, 14) < 14)
         return 0;
