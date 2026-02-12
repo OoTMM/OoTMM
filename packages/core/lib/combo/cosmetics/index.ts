@@ -10,7 +10,7 @@ import { COLORS, ColorArg } from './color';
 import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
-import { randomizeMusic } from './music';
+import { randomizeMusic } from './music/music-injector';
 import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
 import { bufReadU32BE } from '../util/buffer';
