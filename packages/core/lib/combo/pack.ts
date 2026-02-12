@@ -150,25 +150,31 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
     romBuilder.alias(`oot/${a}`, `mm/${a}`);
   }
 
+  /* Inject a unique player ID */
+  const uniquePlayerId = new Uint8Array(8);
+  crypto.getRandomValues(uniquePlayerId);
+  patchfile.addSymbolPatch('MULTI_PLAYER_UNIQUE_ID', uniquePlayerId);
+
+  /* Apply sympatches */
+  for (const [sym, data] of patchfile.symPatches.entries()) {
+    for (const game of GAMES) {
+      const addrs = patchfile.symbols[game].get(sym);
+      if (addrs) {
+        for (const addr of addrs) {
+          const file = romBuilder.fileByVRAM(game, addr);
+          if (file === null) {
+            throw new Error(`Failed to find file for symbol ${sym} in ${game}`);
+          }
+          const offset = addr - file.vram![game]![0];
+          file.data.set(data, offset);
+        }
+      }
+    }
+  }
+
   /* Apply cosmetics */
   monitor.log("Pack: Cosmetics");
   const cosmeticLog = await cosmetics(monitor, args.opts, romBuilder, patchfile.symbols);
-
-  /* Inject the multi Id */
-  for (const game of GAMES) {
-    const addrs = patchfile.symbols[game].get('MULTI_SESSION_ID');
-    if (addrs === undefined) {
-      throw new Error(`Missing MULTI_SESSION_ID symbol for ${game}`);
-    }
-    for (const addr of addrs) {
-      const file = romBuilder.fileByVRAM(game, addr);
-      if (file === null) {
-        throw new Error(`Failed to find file for MULTI_SESSION_ID in ${game}`);
-      }
-      const offset = addr - file.vram![game]![0];
-      file.data.set(patchfile.multiId, offset);
-    }
-  }
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");

@@ -70,6 +70,7 @@ export class Generator {
     const startTime = performance.now();
     const roms = await decompressGames(this.monitor, { oot: this.oot, mm: this.mm });
     const addresses = makeAddresses(roms);
+    const teamId = 0; // TODO: support multiple teams
     let patchfiles: Patchfile[];
     let log: string | null = null;
 
@@ -85,6 +86,15 @@ export class Generator {
       const patchfile = new Patchfile;
       await custom(this.monitor, roms, patchfile);
 
+      /* Prepare multi stuff */
+      const sessionId = new Uint8Array(16);
+      const sessionSecret = new Uint8Array(4);
+      if (this.opts.settings.mode !== 'single') {
+        crypto.getRandomValues(sessionId);
+        crypto.getRandomValues(sessionSecret);
+        sessionId[15] = 0;
+      }
+
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
@@ -98,6 +108,10 @@ export class Generator {
         settings: this.opts.settings,
       });
       log = logicResult.log;
+      for (let i = 0; i < patchfiles.length; ++i) {
+        patchfiles[i].addSymbolPatch('MULTI_SESSION_ID', sessionId);
+        patchfiles[i].addSymbolPatch('MULTI_SESSION_SECRET', sessionSecret);
+      }
     } else {
       if (!this.opts.patch) {
         throw new Error('Patch mode requires a patch file');
@@ -111,20 +125,10 @@ export class Generator {
     const hashFileName = isDev ? undefined : hash;
     const files: GeneratorOutputFile[] = [];
     const playerNumber = (id: number) => patchfiles.length === 1 ? undefined : id + 1;
-    const teamNumber = (id: number) => this.opts.settings.teams === 1 ? undefined : id + 1;
-
-    /* Make team UUIDs */
-    const teamsUuids: Uint8Array[] = [];
-    for (let i = 0; i < this.opts.settings.teams; ++i) {
-      teamsUuids.push(crypto.getRandomValues(new Uint8Array(16)));
-    }
 
     /* Build ROM(s) */
-    if ((patchfiles.length === 1 && this.opts.settings.teams === 1) || this.opts.patch || isDev) {
+    if (patchfiles.length === 1 || this.opts.patch || isDev) {
       for (let i = 0; i < patchfiles.length; i++) {
-        if (!this.opts.patch) {
-          patchfiles[i].multiId = teamsUuids[0];
-        }
         const { rom, cosmeticLog } = await pack({ opts: this.opts, monitor: this.monitor, roms, patchfile: patchfiles[i], addresses });
         files.push(makeFile({ hash: hashFileName, data: rom, mime: 'application/octet-stream', world: playerNumber(i), ext: 'z64' }));
         if (cosmeticLog) {
@@ -137,11 +141,8 @@ export class Generator {
     if (!this.opts.patch) {
       for (let i = 0; i < patchfiles.length; i++) {
         const patchfile = patchfiles[i];
-        for (let team = 0; team < this.opts.settings.teams; ++team) {
-          patchfile.multiId = teamsUuids[team];
-          const data = await patchfiles[i].serialize();
-          files.push(makeFile({ name: 'Patch', hash: hashFileName, data, mime: 'application/octet-stream', world: playerNumber(i), team: teamNumber(team), ext: 'ootmm' }));
-        }
+        const data = await patchfiles[i].serialize();
+        files.push(makeFile({ name: 'Patch', hash: hashFileName, data, mime: 'application/octet-stream', world: playerNumber(i), ext: 'ootmm' }));
       }
     }
 

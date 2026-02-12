@@ -146,6 +146,9 @@ Matrix_Put      = 0x8018020c;
 DisplaceTexture = 0x8012cbd0;
 Gfx_SetupDL = 0x8012BF78;
 
+Gfx_Open = 0x80174a40;
+Gfx_Close = 0x80174a4c;
+
 gOcarinaPressedButtons = 0x801fd450;
 
 PreDraw1 = 0x800b8050;

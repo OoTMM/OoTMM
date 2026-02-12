@@ -855,7 +855,7 @@ void Actor_AfterDrawAll(PlayState* play)
     }
 
     Actor_DrawFaroresWindPointer(play);
-    Multi_DrawWisps(play);
+    Multi_WispsDraw(play);
 }
 
 typedef struct

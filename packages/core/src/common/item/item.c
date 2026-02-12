@@ -540,7 +540,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
         entry.gi = comboItemResolve(play, o.gi);
         entry.key = makeOverrideKey(q);
         if (q->ovFlags & OVF_RENEW) entry.flags |= MULTI_FLAGS_ITEM_NONCE;
-        MultiEx_SendEntryItem(&entry);
+        Multi_SendEntryItem(&entry);
     }
 
     return count;

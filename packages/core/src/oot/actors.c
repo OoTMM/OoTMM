@@ -529,5 +529,5 @@ void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
 
 void Actor_AfterDrawAll(void)
 {
-    Multi_DrawWisps(gPlay);
+    Multi_WispsDraw(gPlay);
 }
