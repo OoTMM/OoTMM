@@ -21,7 +21,7 @@
   region: SACRED_MEADOW
   exits:
     "Sacred Meadow Entryway": "true"
-    "Forest Temple": "can_hookshot || (has_hookshot(1) && time_travel_at_will) || climb_anywhere"
+    "Sacred Meadow Forest Platform": "can_hookshot || (has_hookshot(1) && time_travel_at_will) || climb_anywhere"
     "Sacred Meadow Storms Grotto": "hidden_grotto_storms"
     "Sacred Meadow Fairy Grotto": "true"
   locations:
@@ -37,6 +37,12 @@
     "Sacred Meadow Gossip Near Forest Temple": "true"
     "Sacred Meadow Gossip Atop Maze Woods Side": "true"
     "Sacred Meadow Gossip Atop Maze Temple Side": "true"
+
+"Sacred Meadow Forest Platform":
+  region: SACRED_MEADOW
+  exits:
+    "Sacred Meadow": "true"
+    "Forest Temple": "true"
 
 "Sacred Meadow Storms Grotto":
   region: ENTRANCE

@@ -1,7 +1,7 @@
 "Forest Temple":
   dungeon: Forest
   exits:
-    "Sacred Meadow": "true"
+    "Sacred Meadow Forest Platform": "true"
     "Forest Temple Entrance Room": "true"
 "Forest Temple Wallmaster West":
   region: BUFFER_DELAYED

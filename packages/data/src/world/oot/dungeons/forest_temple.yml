@@ -1,7 +1,7 @@
 "Forest Temple":
   dungeon: Forest
   exits:
-    "Sacred Meadow": "true"
+    "Sacred Meadow Forest Platform": "true"
     "Forest Temple Main": "can_damage || can_collect_distance || can_hammer"
   locations:
     "Forest Temple Tree Small Key": "true"
