@@ -1,86 +1,640 @@
+<!-- HEADER -->
 <p align="center">
-  <img alt="OoTMM Logo" with="256" height="256" src="https://raw.githubusercontent.com/OoTMM/OoTMM/master/packages/web/src/assets/logo.png"/>
-  <p align="center">The Ocarina of Time/Majora's Mask Combo Randomizer</p>
+  <a id="readme-top"></a>
+  <a href="https://ootmm.com/">
+    <img alt="OoTMM Logo" with="256" height="256" src="./packages/gui/src/assets/logo-banner-rounded.png"/>
+  </a>
+  <p align="center">
+    A randomizer of <em>The Legend of Zelda: Ocarina of Time</em> and <em>The Legend of Zelda: Majora's Mask</em> for the <em>Nintendo 64</em> that randomizes and combines both games into a single ROM.
+  </p>
+  <p align="center">
+    <em>Created by: <a href="https://github.com/Nax">Maxime Bacoux "Nax"</a></em>
+  </p>
 </p>
 
-![badge-version](https://img.shields.io/github/v/tag/OoTMM/OoTMM?label=version&sort=semver)
-![badge-license](https://img.shields.io/github/license/OoTMM/OoTMM)
-![badge-build](https://img.shields.io/github/actions/workflow/status/OoTMM/OoTMM/ci.yml?branch=master)
-![badge-stars](https://img.shields.io/github/stars/OoTMM/OoTMM)
-![badge-discord](https://discordapp.com/api/guilds/1004394204992118935/widget.png?style=shield)
 
-## Overview
 
-OoTMM is a randomizer for the N64 games Ocarina of Time and Majora's Mask.
-It combines both games into a single rom and randomizes the placement of most items in the games.
-A large number of settings are available to customize the experience.
 
-## What's new?
+<!-- BADGES -->
+<p align="center">
+    <img alt="badge-version" src="https://img.shields.io/github/v/tag/OoTMM/OoTMM?label=version&sort=semver" />
+    <img alt="badge-license" src="https://img.shields.io/github/license/OoTMM/OoTMM" />
+    <img alt="badge-build" src="https://img.shields.io/github/actions/workflow/status/OoTMM/OoTMM/ci.yml?branch=master" />
+    <img alt="badge-stars" src="https://img.shields.io/github/stars/OoTMM/OoTMM" />
+    <img alt="badge-discord" src="https://discordapp.com/api/guilds/1004394204992118935/widget.png?style=shield" />
+</p>
 
-We maintain a comprehensive [changelog](CHANGELOG.md) that details all the changes in each release.
 
-## Usage
 
-We **strongly** recommend that you use the [Web-based generator](https://ootmm.com).
 
-## Support
+<!-- QUICK LINKS -->
+<p align="center">
+  <strong>
+  <a href="https://ootmm.com/gen/stable">Web Generator</a>
+  &nbsp;&bull;&nbsp;
+  <a href="./CHANGELOG.md">Changelog</a>
+  &nbsp;&bull;&nbsp;
+  <a href="https://ootmm.wiki.gg/">Wiki</a>
+  &nbsp;&bull;&nbsp;
+  <a href="https://discord.gg/4QdtPBP6wf">Discord</a>
+  </strong>
+</p>
 
-If you need help, you can ask for help on our [Discord server](https://discord.gg/4QdtPBP6wf).
 
-## Manual Setup
 
-You need the following roms:
 
- * Ocarina of Time (U or J, 1.0)
- * Majora's Mask (U only)
+<!-- TABLE OF CONTENTS -->
+<p>
+  <h2 id="table-of-contents">
+    📑 Table of Contents
+  </h2>
+  <ul>
+    <li>
+     <a href="#changelog">Changelog</a>
+    </li>
+    <li>
+      <a href="#usage">Usage</a>
+    </li>
+    <ul>
+      <li>
+        <a href="#rom-requirements">ROM Requirements</a>
+      </li>
+      <!-- <ul>
+        <li>
+          <a href="#ocarina-of-time">Ocarina of Time</a>
+        </li>
+        <li>
+          <a href="#majoras-mask">Majora's Mask</a>
+        </li>
+      </ul> -->
+      <li>
+        <a href="#rom-byte-order">ROM Byte Order</a>
+      </li>
+    </ul>
+    <li>
+      <a href="#features">Features</a>
+      <ul>
+        <li>
+          <a href="#cross-game-age-and-songs">Cross-Game Age and Songs</a>
+        </li>
+        <li>
+          <a href="#shared-items">Shared Items</a>
+        </li>
+        <li>
+          <a href="#ocarina-of-time-items-in-majoras-mask">Ocarina of Time Items in Majora's Mask</a>
+        </li>
+        <li>
+          <a href="#custom-music">Custom Music</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#local-setup">Local Setup</a>
+    </li>
+    <ol>
+      <li>
+        <a href="#installing-the-required-tools">Installing the Required Tools</a>
+      </li>
+      <li>
+        <a href="#download-or-clone-the-projects-repository">Download or Clone the Project's Repository</a>
+      </li>
+      <li>
+        <a href="#adding-the-roms">Adding the ROMs</a>
+      </li>
+      <li>
+        <a href="#environment-setup">Environment Setup</a>
+      </li>
+      <li>
+        <a href="#building-a-rom">Building a ROM</a>
+      </li>
+    </ol>
+    <li>
+      <a href="#related-projects">Related Projects</a>
+    </li>
+  </ul>
+</p>
 
-The roms need to be in their native byte-order (big endian). You can use programs such as Tool 64 to convert the roms to the correct format.
-The roms need to be named `oot.z64` and `mm.z64` respectively and placed in the `roms` folder.
 
-## Build
 
-You can build OoTMM with either a DevContainer or your native environment.
 
-### DevContainer (recommended)
+<!-- CHANGELOG -->
+<h2 id="changelog">
+  📝 Changelog
+</h2>
 
-You need:
+For a list of changes between stable release versions, see [CHANGELOG.md][changelog].
 
- * Docker
- * Visual Studio Code
- * Remote - Containers extension
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
-Open the project in Visual Studio Code and click on the "Reopen in Container" button that appears in the bottom right corner.
-That's it.
 
-### Native
 
-You need:
 
- * A C/C++ toolchain for your system
- * CMake
- * Ninja
- * [n64-ultra](https://github.com/glankk/n64)
- * Node 22 or newer
- * Git
+<!-- USAGE -->
+<h2 id="usage">
+  ⚙️ Usage
+</h2>
 
-On windows, we recommend using [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) to build OoTMM.
+To generate an OoTMM Randomizer seed, use the [web generator][ootmm-randomizer-gen-stable]. For local generation, see <a href="#local-setup">Local Setup</a>
 
-Install everything you need:
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
 
-    ./setup.sh
+### ROM Requirements
 
-### Using the build
+OoTMM requires clean, unmodified, and internally compressed ROMs for *Ocarina of Time* and *Majora's Mask*. Using unsupported ROMs will prevent the randomizer from generating a randomized ROM.
 
-You can generate a seed:
+The tables below list the OoTMM-compatible ROMs, along with their byte order, version, and MD5 checksum for verification.
 
-    pnpm start:core:config
+#### Ocarina of Time
 
-The output will be `out/OoTMM.z64`.
+<table>
+  <thead>
+    <!-- <tr>
+      <th colspan="5">Ocarina of Time</th>
+    </tr> -->
+    <tr>
+      <th>Region</th>
+      <th>Version</th>
+      <th>Byte Order</th>
+      <th>MD5 Checksum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- NTSC-U -->
+    <tr align="center">
+      <td>NTSC-U</td>
+      <td>1.0</td>
+      <td>Big-endian</td>
+      <td>5BD1FE107BF8106B2AB6650ABECD54D6</td>
+    </tr>
+    <tr align="center">
+      <td>NTSC-U</td>
+      <td>1.0</td>
+      <td>Little-endian</td>
+      <td>AA3911F5D5598E19E0183E15B6719C36</td>
+    </tr>
+    <tr align="center">
+      <td>NTSC-U</td>
+      <td>1.0</td>
+      <td>Byte-swapped</td>
+      <td>6697768A7A7DF2DD27A692A2638EA90B</td>
+    </tr>
+    <!-- NTSC-J -->
+    <tr align="center">
+      <td>NTSC-J</td>
+      <td>1.0</td>
+      <td>Big-endian</td>
+      <td>9F04C8E68534B870F707C247FA4B50FC</td>
+    </tr>
+    <tr align="center">
+      <td>NTSC-J</td>
+      <td>1.0</td>
+      <td>Little-endian</td>
+      <td>ECEF4DD132C4398A6A69F90038303E0A</td>
+    </tr>
+    <tr align="center">
+      <td>NTSC-J</td>
+      <td>1.0</td>
+      <td>Byte-swapped</td>
+      <td>7D44B555E0AF3EEC36319B5E76E31B0C</td>
+    </tr>
+  </tbody>
+</table>
 
-## License
+#### Majora's Mask
 
-This project is licensed under the [MIT license](LICENSE).
+<table>
+  <thead>
+    <!-- <tr>
+      <th colspan="5">Majora's Mask</th>
+    </tr> -->
+    <tr>
+      <th>Region</th>
+      <th>Version</th>
+      <th>Byte Order</th>
+      <th>MD5 Checksum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- NTSC-U -->
+    <tr align="center">
+      <td>NTSC-U</td>
+      <td>1.0</td>
+      <td>Big-endian</td>
+      <td>2A0A8ACB61538235BC1094D297FB6556</td>
+    </tr>
+    <tr align="center">
+      <td>NTSC-U</td>
+      <td>1.0</td>
+      <td>Little-endian</td>
+      <td>FC39208428BCAE70508E633451C11CC0</td>
+    </tr>
+    <tr align="center">
+      <td>NTSC-U</td>
+      <td>1.0</td>
+      <td>Byte-swapped</td>
+      <td>B0CC37A45BC1B6C76CD7F0B71FE2BB1F</td>
+    </tr>
+  </tbody>
+</table>
 
-## Author
+> [!TIP]
+> To verify your ROMs, calculate their MD5 checksums using <a href="https://emn178.github.io/online-tools/md5_checksum.html" target="_blank" title="MD5 Checksum Tool">this MD5 checksum tool</a>. The calculated checksums must match the values listed in the tables above.
 
-This project was created by [Maxime Bacoux "Nax"](https://github.com/Nax).
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+### ROM Byte Order
+
+OoTMM does *not* require ROMs to be in big-endian byte order. However, using ROMs in other byte orders can negatively impact seed generation performance, as the randomizer must correct the byte order internally. For best performance, it is recommended to use ROMs in big-endian byte order.
+
+A ROM's byte order can often be inferred at a glance by its file extension:
+
+- **`📄.z64`** — Typically big-endian.
+- **`📄.n64`** — Typically little-endian.
+- **`📄.v64`** — Typically byteswapped.
+
+> [!WARNING]
+> The file extension does *not* guarantee a ROM's byte order is correct. Renaming the file does *not* change its byte order. To correctly verify or convert a ROM's byte order, use <a href="https://www.zophar.net/download_file/2854" target="_blank" title="Click to Download Tool64">Tool64</a>.
+
+> [!TIP]
+> To convert a ROM to big-endian with Tool64, follow these steps:
+> > 1. Open Tool64.
+> > 2. Select **File > Open...** from the menu bar.
+> > 3. Select the folder containing your ROM file.
+> > 4. Click **OK**.
+> > 5. In the main window, select your ROM file.
+> > 6. Right-click the file and choose **Big Endian** from the context menu.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+
+
+
+<!-- SUPPORT -->
+<h2 id="support">
+  🧩 Support
+</h2>
+
+To get help with the randomizer or your playthrough, join the community's [Discord server][ootmm-discord] and ask in one of the following channels:
+
+- **`#tech-support`** — Help with emulators or other technical issues.
+- **`#playthrough-help`** — Assistance with an OoTMM playthrough.
+- **`#settings-help`** — For questions about specific randomizer settings.
+- **`#tracker-support`** — Support for tracker-related issues.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+
+
+
+<!-- FEATURES -->
+<h2 id="features">
+  ✨ Features
+</h2>
+
+Along with randomizing items across both games, the randomizer includes several additional features to enhance your experience.
+
+> [!TIP]
+> More information about specific settings is available via the tooltips in the OoTMM web generator or on the project's [wiki][ootmm-randomizer-wiki].
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+<!--
+    Potential features to add/list:
+    -
+-->
+
+### Cross-Game Age and Songs
+
+OoTMM allows Link's age, the warp songs from *The Legend of Zelda: Ocarina of Time*, and the Song of Soaring from *The Legend of Zelda: Majora's Mask* to function seamlessly across both games when the following settings are enabled:
+
+- **Cross-Games Age** — Link's age persists between games. If Link is an adult in OoT, he will be an adult in MM.
+- **Cross-Games OoT Warp Songs** — OoT warp songs can be played in MM, warping Link to their corresponding locations.
+- **Cross-Games MM Song of Soaring** — The Song of Soaring can be used in OoT, warping Link to the selected Owl Statue destination.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+### Shared Items
+
+OoTMM allows certain items, masks, equipment, upgrades, and songs to be shared between games:
+
+- Bow
+- Bomb Bag
+- Fire Arrow
+- Ice Arrow
+- Light Arrow
+- Hookshot
+- Lens of Truth
+- Bottles
+- Ocarinas
+- Bunny Hood
+- Keaton Mask
+- Mask of Truth
+- Goron Mask
+- Zora Mask
+- Shields
+- Magic Power
+- Health Items and Upgrades
+- Wallets
+- Epona's Song
+- Song of Storms
+- Song of Time
+
+> [!IMPORTANT]
+> Enabling a shared item setting merges individual game checks into shared checks, reducing the number of those items in the randomized item pool.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+### Ocarina of Time Items in Majora's Mask
+
+OoTMM allows certain items, equipment, upgrades, and songs from *The Legend of Zelda: Ocarina of Time* to be added to *The Legend of Zelda: Majora's Mask*:
+
+- Fairy Ocarina
+- Megaton Hammer
+- Din's Fire
+- Farore's Wind
+- Nayru's Love
+- Stone of Agony
+- Deku Shield
+- Iron Boots
+- Hover Boots
+- Goron Tunic
+- Zora Tunic
+- Deku Stick & Deku Nut Upgrades
+- Strength Upgrades
+- Diving Upgrades
+- Sun's Song
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+### Custom Music
+
+OoTMM supports custom music, allowing you to replace the original music of *The Legend of Zelda: Ocarina of Time* and *The Legend of Zelda: Majora's Mask*.
+
+#### Adding Music to OoTMM
+
+To use custom music with the web generator, follow these steps:
+
+> 1. Compress your music files into a ZIP file.
+> 2. In the generator, select **Cosmetics**.
+> 3. On the cosmetics page, click the **Custom Music ZIP** box.
+> 4. Select the ZIP file containing your music files.
+
+> [!TIP]
+> In Windows 11, Windows Explorer can compress files without additional software. To compress files into a ZIP file, follow these steps:
+> > 1. Select the files you want to compress.
+> > 2. Right-click the files and select **Compress to... > ZIP File**.
+
+#### Feature Support
+
+<table>
+  <thead>
+    <tr>
+      <th>Supported</th>
+      <th>File or Feature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">✅</td>
+      <td>Ocarina of Time Randomizer custom music files (<code>🗃️.ootrs</code>)</td>
+    </tr>
+    <tr>
+      <td align="center">✅</td>
+      <td>Majora's Mask Randomizer custom music files (<code>🗃️.mmrs</code>)</td>
+    </tr>
+    <tr>
+      <td align="center">✅</td>
+      <td>Custom audio sequences</td>
+    </tr>
+    <tr>
+      <td align="center">✅</td>
+      <td>Custom instrument banks</td>
+    </tr>
+    <tr>
+      <td align="center">⛔</td>
+      <td>Custom audio samples</td>
+    </tr>
+    <tr>
+      <td align="center">⛔</td>
+      <td>Formmmask</td>
+    </tr>
+  </tbody>
+</table>
+
+> [!WARNING]
+> Files that do not work with the randomizer will show a warning and be skipped during seed generation.
+
+#### Obtaining Custom Music
+
+If you do not already have any custom music, you can download custom music files from any of the resources below:
+
+- **[OoTMM Discord Server][ootmm-discord]** — Found in the `#music-releases` channel of the server.
+- **[Darunia's Joy Repository][darunias-joy]** — A community resource of Ocarina of Time Randomizer custom music files.
+- **[MMR Discord Server][mmr-discord]** — Found in the `#music-releases` channel of the server.
+- **[Majora's Music-Box House Repository][majoras-music-box-house]** — A community resource of Majora's Mask Randomizer custom music files.
+
+> [!IMPORTANT]
+> For Majora's Mask Randomizer custom music files, standalone sequence files (`📄.zseq`) are not supported by OoTMM.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+
+
+<!-- LOCAL SETUP -->
+<h2 id="local-setup">
+  🛠️ Local Setup
+</h2>
+
+OoTMM can be built and run locally using either a **Dev Container** (recommended) or your **native environment** by following the steps detailed below.
+
+<h3 id="installing-the-required-tools">
+  1. Installing the Required Tools
+</h3>
+
+Before building, ensure the following tools are installed:
+
+#### Dev Container
+
+- [Docker][docker]
+- [Visual Studio Code][visual-studio-code]
+- [Dev Containers Extension][dev-containers-ext]
+
+#### Native Build
+
+- **C/C++ toolchain**:
+    - [GCC][gcc] (Linux, macOS, or Windows via [MSYS2][msys2])
+    - [CLang][clang] (macOS, Linux, or Windows via [LLVM][llvm])
+    - [Visual C++ Build Tools][visual-cpp-build-tools] (Windows)
+- [CMake][cmake]
+- [Ninja][ninja-build]
+- [n64-ultra][n64-ultra]
+- [Node][node-js] (Version 22 or newer)
+- [Git][git]
+
+> [!TIP]
+> On Windows, it is recommended to use [Windows Subsystem for Linux][wsl] for a better build experience.
+
+<h3 id="download-or-clone-the-projects-repository">
+  2. Download or Clone the Project's Repository
+</h3>
+
+#### Downloading Project from GitHub
+
+To download the project from GitHub, follow these steps:
+
+> 1. Click **Code**.
+> 2. Select **Download ZIP** from the menu.
+> 3. Extract the contents of the ZIP file to a folder of your choice.
+
+#### Cloning Project with Git
+
+To clone the project with Git, follow these steps:
+
+> 1. Open a terminal in the folder of your choice.
+> 2. Run the following command:
+> ```
+> git clone https://github.com/OoTMM/OoTMM.git
+> ```
+
+<h3 id="adding-the-roms">
+3. Adding the ROMs
+</h3>
+
+To prepare the ROMs for seed generation, follow these steps:
+
+> 1. Rename your *Ocarina of Time* ROM to: `oot.z64`.
+> 2. Rename your *Majora's Mask* ROM to: `mm.z64`.
+> 3. Place both your ROMs into the `📁/roms` folder in the project's root directory:
+
+<h3 id="environment-setup">
+4. Environment Setup
+</h3>
+
+#### Dev Container
+
+To set up the environment with Docker, follow these steps:
+
+> 1. Open Visual Studio Code.
+> 2. Click **File > Open Folder...** and select the project's folder.
+> 3. When prompted, click **Reopen in Container**.
+
+#### Native
+
+To set up the environment natively, follow these steps:
+
+> 1. Open a terminal in the project's root directory.
+> 2. Run the setup script:
+> ```
+> scripts/setup.sh
+> ```
+
+<h3 id="building-a-rom">
+5. Building a ROM
+</h3>
+
+Once the setup is complete, you can create a randomized ROM using the following command:
+```
+pnpm start:core:config
+```
+
+> [!NOTE]
+> **ROM Output Location**
+>
+> The randomized ROM will be located in the `📁/out` folder.
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+
+
+
+<!-- RELATED PROJECTS -->
+<h2 id="related-projects">
+  🔗 Related Projects
+</h2>
+
+- **Ocarina of Time Randomizer**
+    - [Website][oot-randomizer-site]
+    - [Discord][ootr-discord]
+    - [GitHub][oot-randomizer-github]
+- **Majora's Mask Randomizer**
+    - [Website][mm-randomizer-site]
+    - [Discord][mmr-discord]
+    - [GitHub][mm-randomizer-github]
+
+<p align="right"><sub><a href="#readme-top">Back to Top</a> 🔝</sub></p>
+
+
+
+
+<!-- LINKS -->
+<!--
+    Links here use reference style linking:
+    https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[docker]: https://www.docker.com/
+[visual-studio-code]: https://code.visualstudio.com/
+[dev-containers-ext]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+[gcc]: https://gcc.gnu.org/
+[msys2]: https://www.msys2.org/
+[clang]: https://clang.llvm.org/
+[llvm]: https://releases.llvm.org/download.html
+[visual-cpp-build-tools]: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+[cmake]: https://cmake.org/
+[ninja-build]: https://ninja-build.org/
+[node-js]: https://nodejs.org/en
+[git]: https://git-scm.com/
+[n64-ultra]: https://github.com/glankk/n64
+[wsl]: https://learn.microsoft.com/windows/wsl/install
+
+
+<!-- Local Repo Files -->
+[license]: LICENSE
+[readme]: README.md
+[changelog]: CHANGELOG.md
+
+<!-- OOTMM -->
+[ootmm-randomizer-site]: https://ootmm.com
+[ootmm-randomizer-gen-stable]: https://ootmm.com/gen/stable
+[ootmm-randomizer-gen-dev]: https://ootmm.com/gen/dev
+[ootmm-randomizer-wiki]: https://ootmm.wiki.gg/
+
+<!-- Related Projects -->
+[oot-randomizer-site]: https://ootrandomizer.com/
+[oot-randomizer-github]: github.com/OoTRandomizer/OoT-Randomizer
+[mm-randomizer-site]: https://mmrandomizer.com/
+[mm-randomizer-github]: https://github.com/ZoeyZolotova/mm-rando
+
+<!-- Social Links -->
+[ootmm-discord]: https://discord.gg/4QdtPBP6wf
+[ootr-discord]: https://discord.gg/ootrandomizer
+[mmr-discord]: https://discord.gg/8qbreUM
+
+<!-- Custom Music Link -->
+[darunias-joy]: https://github.com/DaruniasJoy/OoT-Custom-Sequences
+[majoras-music-box-house]: https://github.com/MajorasMusicBoxHouse/Majoras-MusicBox-House
+
+<!-- Contributors -->
+[user-nax]: https://github.com/Nax
+[user-celestialkitsune]: https://github.com/CelestialKitsune
+[user-xenowars]: https://github.com/XenoWars
+[user-zoeyzolotova]: https://github.com/ZoeyZolotova
+[user-joshua8600]: https://github.com/Joshua8600
+[user-amazingampharos]: https://github.com/AmazingAmpharos
+[user-revvenn]: https://github.com/Revvenn
+[user-matthewkirby]: https://github.com/matthewkirby
+[user-ghunzor]: https://github.com/Ghunzor
+[user-lkarvec]: https://github.com/lkarvec
+[user-aegiker]: https://github.com/Aegiker
+[user-eedefeed]: https://github.com/eedefeed
+[user-hamelatoire]: https://github.com/Hamelatoire
+[user-ggkfox]: https://github.com/ggkfox
+[user-zeemaji]: https://github.com/ZeeMaji
+[user-lumineonrl]: https://github.com/LumineonRL
+[user-sciencenerd2240]: https://github.com/ScienceNerd2240
+[user-skyros4]: https://github.com/Skyros4
+[user-itsbirdseed]: https://github.com/itsbirdseed
+[user-demitastes]: https://github.com/demitastes
+[user-matthe815]: https://github.com/matthe815
+[user-jupiter0fire]: https://github.com/jupiter0fire
+[user-kethku]: https://github.com/Kethku
+[user-crinuleiroz]: https://github.com/crinuleiroz
