@@ -121,7 +121,7 @@ static void eventFixes(PlayState* play)
 
 static void sendSelfTriforce(void)
 {
-    MultiEntryItem entry;
+    MultiWriteWalItem entry;
     int npc;
     s16 gi;
 

@@ -511,7 +511,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
-    MultiEntryItem entry;
+    MultiWriteWalItem entry;
     int count;
 
     comboItemOverride(&o, q);

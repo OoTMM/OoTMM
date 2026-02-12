@@ -102,7 +102,7 @@ static u32 entranceForOverride(u32 entrance)
 
 static void sendSelfMajorasMask(void)
 {
-    MultiEntryItem entry;
+    MultiWriteWalItem entry;
     int npc;
     s16 gi;
 
