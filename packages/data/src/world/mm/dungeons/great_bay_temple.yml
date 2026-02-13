@@ -38,7 +38,7 @@
     "WARP_SONGS": "true"
   locations:
     "Great Bay Temple SF Water Wheel Platform": "can_dive_small || underwater_walking || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot)) || (short_hook_anywhere && trick(MM_GBT_FAIRY2_HOOK) && can_swim)"
-    "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives)"
+    "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives || deku_stick_fighting)"
     "Great Bay Temple Rupee Entrance 1": "true"
     "Great Bay Temple Rupee Entrance 2": "true"
     "Great Bay Temple Rupee Entrance 3": "true"

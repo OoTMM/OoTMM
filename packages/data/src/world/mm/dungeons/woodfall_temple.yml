@@ -88,7 +88,7 @@
     "Woodfall Temple Dark Room": "has_sticks || can_use_fire_short_range"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple SF Maze Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives)"
+    "Woodfall Temple SF Maze Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives || deku_stick_fighting)"
     "Woodfall Temple SF Maze Beehive": "has_weapon_range || has_explosives"
     "Woodfall Temple SF Maze Bubble": "(has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot_short)) || event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_use_nayru"
     "Woodfall Temple Pot Maze 1": "true"
