@@ -151,9 +151,9 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   }
 
   /* Inject a unique player ID */
-  const uniquePlayerId = new Uint8Array(8);
-  crypto.getRandomValues(uniquePlayerId);
-  patchfile.addSymbolPatch('MULTI_PLAYER_UNIQUE_ID', uniquePlayerId);
+  const playerId = new Uint8Array(16);
+  crypto.getRandomValues(playerId);
+  patchfile.addSymbolPatch('MULTI_PLAYER_ID', playerId);
 
   /* Apply sympatches */
   for (const [sym, data] of patchfile.symPatches.entries()) {

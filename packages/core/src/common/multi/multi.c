@@ -4,8 +4,8 @@
 MultiContext gMultiCtx;
 EXPORT_SYMBOL(MULTI_SESSION_ID, gMultiCtx.sessionId);
 EXPORT_SYMBOL(MULTI_SESSION_SECRET, gMultiCtx.sessionSecret);
-EXPORT_SYMBOL(MULTI_PLAYER_UNIQUE_ID, gMultiCtx.playerUniqueId);
 EXPORT_SYMBOL(MULTI_PLAYER_ID, gMultiCtx.playerId);
+EXPORT_SYMBOL(MULTI_WORLD_ID, gMultiCtx.worldId);
 
 static void Multi_ExportFilename(char* dst)
 {
@@ -72,10 +72,10 @@ static int Multi_InitSession(void)
     Multi_ExportFilename(buf + 6);
     memcpy(buf + 14, gMultiCtx.sessionId, 16);
     memcpy(buf + 30, &gMultiCtx.sessionSecret, 4);
-    memcpy(buf + 34, &gMultiCtx.playerUniqueId, 8);
-    buf[42] = gMultiCtx.playerId;
+    memcpy(buf + 34, &gMultiCtx.playerId, 16);
+    buf[50] = gMultiCtx.worldId;
 
-    if (emuSysSendIPC(buf, 43) < 0)
+    if (emuSysSendIPC(buf, 51) < 0)
         return 0;
     if (emuSysRecvIPC(buf, 14) < 14)
         return 0;

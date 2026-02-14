@@ -23,8 +23,8 @@ typedef struct
 {
     char        sessionId[16];
     u32         sessionSecret;
-    u64         playerUniqueId;
-    u8          playerId;
+    char        playerId[16];
+    u8          worldId;
     u32         token;
     u32         nextPacketId;
     int         isConnected;
