@@ -123,7 +123,7 @@ int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, PlayState* play)
     Player* link;
 
     link = GET_PLAYER(play);
-    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_GROTTO))
     {
         gComboTriggersData.acc = 0;
         return 0;

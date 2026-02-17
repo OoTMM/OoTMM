@@ -25,6 +25,7 @@
 #define PLAYER_ACTOR_STATE_WATER                0x08000000
 #define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
 #define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
+#define PLAYER_ACTOR_STATE_GROTTO               0x80000000
 
 void Player_Update(Player* this, PlayState* play);
 void Player_SetModels(Player* link, s32 modelGroup);
