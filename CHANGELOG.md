@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Hide D-Pad if there are no items to use with it.
 - Alter the number of traps - seeds should have slightly less traps on the smaller settings now.
 - Made rupoors behave like other traps.
 - Remove some vanilla BGM mixing when custom music is enabled.

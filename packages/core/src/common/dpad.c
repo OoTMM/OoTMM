@@ -30,6 +30,9 @@ EXPORT_SYMBOL(DPAD_COLOR, sDpadColor);
 
 static int canShowDpad(void)
 {
+    if (sDpadItems[DPAD_DOWN] == ITEM_NONE && sDpadItems[DPAD_UP] == ITEM_NONE && sDpadItems[DPAD_LEFT] == ITEM_NONE && sDpadItems[DPAD_RIGHT] == ITEM_NONE)
+        return 0;
+
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
     return 1;
