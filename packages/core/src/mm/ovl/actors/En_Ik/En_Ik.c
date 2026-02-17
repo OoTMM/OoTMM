@@ -726,6 +726,7 @@ void EnIk_Frozen(Actor_EnIk* this, PlayState* play) {
 }
 
 void EnIk_SetupCutscene(Actor_EnIk* this) {
+    this->actor.csId = CS_ID_NONE;
     CutsceneManager_Queue(this->actor.csId);
     this->actor.speed = 0.0f;
     if (this->actor.colChkInfo.health != 0) {
@@ -795,6 +796,7 @@ void EnIk_UpdateDamage(Actor_EnIk* this, PlayState* play) {
                 this->colliderCylinder.base.colMaterial = COL_MATERIAL_HIT3;
                 this->actor.colChkInfo.damageTable = &sDamageTableNoArmor;
                 Actor_PlaySfx(&this->actor, NA_SE_EN_IRONNACK_ARMOR_OFF_DEMO);
+                EnIk_SetupCutscene(this);
             } else if (this->drawArmorFlags != 0) {
                 if (this->actor.colChkInfo.damageEffect == DMG_EFF_ICE) {
                     EnIk_Freeze(this);

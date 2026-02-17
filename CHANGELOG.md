@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Readd the missing step back for Iron Knuckles in MM when transitioning from the first phase to the second phase.
 - Fix a vanilla bug that cause minimap corruption when pausing, sometimes cascading into other issues.
 - Fix a checksum issue that could very rarely produce invalid ROMs.
 - Fix a vanilla bug causing the final chest in Secret Shrine to sometimes not spawn.
