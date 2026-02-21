@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add colored squares next to settings in the cosmetics tab when they have a color associated with them.
 - Add a setting to shuffle the Lottery in Majora's Mask, with all nights having a different item.
 - Add a setting to shuffle the required songs for various events in OoT (thanks Mizu Aoyuki for the icons).
 - Add animal souls in OoT and MM.

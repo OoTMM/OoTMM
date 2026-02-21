@@ -18,7 +18,7 @@ function CosmeticTooltips({ cosmetic }: { cosmetic: string }) {
     return null;
   }
 
-  switch(data.type) {
+  switch (data.type) {
     case 'boolean':
       defaultValue = data.default ? 'true' : 'false';
       break;
@@ -42,11 +42,17 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
 
   switch (data.type) {
     case 'color':
+      const selectedColorKey = cosmetics[cosmetic] as string;
+      const colorValue = selectedColorKey && selectedColorKey !== 'default' && selectedColorKey !== 'auto' && selectedColorKey !== 'random'
+        ? COLORS[selectedColorKey as keyof typeof COLORS]?.value
+        : null;
+
       return (
         <SelectField
           key={cosmetic}
-          value={cosmetics[cosmetic] as string}
+          value={selectedColorKey}
           label={data.name}
+          color={colorValue}
           options={COLOR_OPTIONS}
           tooltip={(data as any).description && <CosmeticTooltips cosmetic={cosmetic} />}
           onSelect={v => setCosmetic(cosmetic, v)}
