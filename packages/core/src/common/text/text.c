@@ -169,6 +169,7 @@ static const CheckName kCheckNamesMm[] = {
     { TEXT_COLOR_TEAL "feeding a freezing Goron", TF_NONE },
     { TEXT_COLOR_PINK "healing Kamaro", TF_NONE },
     { "the " TEXT_COLOR_GREEN "Woodfall Temple Dark Room", TF_NONE },
+    { "winning the " TEXT_COLOR_TEAL "Lottery", TF_NONE },
 };
 
 static int isItemAmbiguous(s16 gi)

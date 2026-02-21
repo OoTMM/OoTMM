@@ -202,6 +202,10 @@ export class LogicPassHints {
       alwaysHints.push('OOT_COW_LINK');
     }
 
+    if(settings.shuffleLotteryMm) {
+      alwaysHints.push('MM_LOTTERY');
+    }
+
     return alwaysHints;
   }
 
