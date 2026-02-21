@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to shuffle the Lottery in Majora's Mask, with all nights having a different item.
 - Add a setting to shuffle the required songs for various events in OoT (thanks Mizu Aoyuki for the icons).
 - Add animal souls in OoT and MM.
 - Cosmetics setting to enable BGM during night time.

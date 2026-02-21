@@ -905,6 +905,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the purple rupees from the Frogs Ocarina Game in Zora\'s River are shuffled',
   cond: hasOoT,
   default: false,
+}, {  key: 'shuffleLotteryMm',
+  name: 'Lottery Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether to shuffle the Lottery. ALL nights will have a different item.',
+  cond: hasMM,
+  default: false,
 }, {
   key: 'shuffleIciclesOot',
   name: 'Icicles Shuffle (OoT)',

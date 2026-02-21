@@ -219,3 +219,6 @@ MM_MILK_BAR_MILK:             0x76
 MM_MILK_BAR_CHATEAU:          0x77
 MM_OWL_HIDDEN:                0x78
 MM_MAJORA:                    0x79
+MM_LOTTERY_NIGHT_1:           0x7a
+MM_LOTTERY_NIGHT_2:           0x7b
+MM_LOTTERY_NIGHT_3:           0x7c

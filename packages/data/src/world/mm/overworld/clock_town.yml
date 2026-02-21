@@ -358,10 +358,15 @@
   region: ENTRANCE
   events:
     PLAY_LOTTERY: "is_day && can_use_wallet(1)"
+    BUY_TICKET_1: "is_day1 && can_use_wallet(1)"
+    BUY_TICKET_2: "is_day2 && can_use_wallet(1)"
+    BUY_TICKET_3: "is_day3 && can_use_wallet(1)"
   exits:
     "Clock Town West": "true"
-#  locations:
-#    "Lottery Prize": "event(PLAY_LOTTERY) && (between(NIGHT1_PM_06_00, NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00))"
+  locations:
+    "Lottery Prize Night 1": "event(BUY_TICKET_1) && between(NIGHT1_PM_06_00, NIGHT1_PM_11_00)"
+    "Lottery Prize Night 2": "event(BUY_TICKET_2) && between(NIGHT2_PM_06_00, NIGHT2_PM_11_00)"
+    "Lottery Prize Night 3": "event(BUY_TICKET_3) && between(NIGHT3_PM_06_00, NIGHT3_PM_11_00)"
 
 "Mayor's Office":
   region: ENTRANCE

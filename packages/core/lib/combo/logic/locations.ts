@@ -71,6 +71,12 @@ export const OOT_FROGS = [
   'OOT Zora River Frogs Song of Time'
 ]
 
+export const MM_LOTTERY = [
+  'MM Lottery Prize Night 1',
+  'MM Lottery Prize Night 2',
+  'MM Lottery Prize Night 3',
+]
+
 export function locationsZelda(settings: Settings) {
   const locs = ['OOT Zelda\'s Letter', 'OOT Zelda\'s Song'];
   if (settings.shuffleWonderItemsOot === 'all' || settings.shuffleWonderItemsOot === 'overworld') {

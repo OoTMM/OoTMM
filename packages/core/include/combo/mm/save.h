@@ -550,7 +550,10 @@ typedef struct
 {
     u32 bottomlessWallet:1;
     u32 stoneAgony:1;
-    u32 unused:30;
+    u32 lottery1:1;
+    u32 lottery2:1;
+    u32 lottery3:1;
+    u32 unused:27;
 }
 MmExtraFlags3;
 

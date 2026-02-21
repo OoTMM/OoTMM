@@ -47,11 +47,11 @@ ActorProfile En_Kujiya_Profile = {
 
 #define HS_GET_LOTTERY_CODE_GUESS() ((gSaveContext.save.info.lotteryCodeGuess))
 
-#define CHECK_LOTTERY_NUMBERS()                                                      \
+#define CHECK_LOTTERY_NUMBERS()                                                  \
     (((u32)((void)0, gSaveContext.save.info.lotteryCodes[CURRENT_DAY - 1][0]) == \
-      ((HS_GET_LOTTERY_CODE_GUESS() & 0xF00) >> 8)) &&                               \
+      ((HS_GET_LOTTERY_CODE_GUESS() & 0xF00) >> 8)) &&                           \
      ((u32)((void)0, gSaveContext.save.info.lotteryCodes[CURRENT_DAY - 1][1]) == \
-      ((HS_GET_LOTTERY_CODE_GUESS() & 0xF0) >> 4)) &&                                \
+      ((HS_GET_LOTTERY_CODE_GUESS() & 0xF0) >> 4)) &&                            \
      ((u32)((void)0, gSaveContext.save.info.lotteryCodes[CURRENT_DAY - 1][2]) == \
       (HS_GET_LOTTERY_CODE_GUESS() & 0xF)))
 
@@ -269,7 +269,35 @@ void EnKujiya_GivePrize(EnKujiya *this, PlayState *play)
     }
     else
     {
-        Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_PURPLE, 500.0f, 100.0f);
+        int npc;
+
+        npc = -1;
+        switch (CURRENT_DAY)
+        {
+        case 1:
+            if (!gMmExtraFlags3.lottery1)
+            {
+                npc = NPC_MM_LOTTERY_NIGHT_1;
+                gMmExtraFlags3.lottery1 = 1;
+            }
+            break;
+        case 2:
+            if (!gMmExtraFlags3.lottery2)
+            {
+                npc = NPC_MM_LOTTERY_NIGHT_2;
+                gMmExtraFlags3.lottery2 = 1;
+            }
+            break;
+        case 3:
+            if (!gMmExtraFlags3.lottery3)
+            {
+                npc = NPC_MM_LOTTERY_NIGHT_3;
+                gMmExtraFlags3.lottery3 = 1;
+            }
+            break;
+        }
+        comboGiveItemNpc(&this->actor, play, GI_MM_RUPEE_PURPLE, npc, 500.0f, 100.0f);
+        // Actor_OfferGetItem(&this->actor, play, GI_MM_RUPEE_PURPLE, 500.0f, 100.0f);
     }
 }
 
@@ -368,6 +396,8 @@ void EnKujiya_SetupTurnToOpen(EnKujiya *this)
     this->actionFunc = EnKujiya_TurnToOpen;
 }
 
+#define ROT_SPEED 5
+
 void EnKujiya_TurnToOpen(EnKujiya *this, PlayState *play)
 {
     if (this->actor.csId != CS_ID_NONE)
@@ -382,9 +412,9 @@ void EnKujiya_TurnToOpen(EnKujiya *this, PlayState *play)
         }
     }
 
-    if (!Math_SmoothStepToS(&this->actor.shape.rot.y, 0x7555, 0xA, 0x16C, 0x16C))
+    if (!Math_SmoothStepToS(&this->actor.shape.rot.y, 0x7555, 0xA, 0x16C * ROT_SPEED, 0x16C * ROT_SPEED))
     {
-        if (this->timer > 20)
+        if (this->timer > (20 / ROT_SPEED))
         {
             if (CutsceneManager_GetCurrentCsId() == this->actor.csId)
             {
@@ -423,9 +453,9 @@ void EnKujiya_TurnToClosed(EnKujiya *this, PlayState *play)
         }
     }
 
-    if (!Math_SmoothStepToS(&this->actor.shape.rot.y, 0, 0xA, 0x16C, 0x16C))
+    if (!Math_SmoothStepToS(&this->actor.shape.rot.y, 0, 0xA, 0x16C * ROT_SPEED, 0x16C * ROT_SPEED))
     {
-        if (this->timer > 20)
+        if (this->timer > (20 / ROT_SPEED))
         {
             if (CutsceneManager_GetCurrentCsId() == this->actor.csId)
             {

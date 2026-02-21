@@ -46,6 +46,9 @@ Clock Town East Wonder Item Basket 3,                   wonder,         NONE,   
 Clock Town Bank Reward 1,                               npc,            NONE,                   CLOCK_TOWN_WEST,              BANK_1,                     WALLET
 Clock Town Bank Reward 2,                               npc,            NONE,                   CLOCK_TOWN_WEST,              BANK_2,                     RUPEE_BLUE
 Clock Town Bank Reward 3,                               npc,            BANK_3,                 CLOCK_TOWN_WEST,              BANK_3,                     HEART_PIECE
+Lottery Prize Night 1, npc, LOTTERY, LOTTERY, LOTTERY_NIGHT_1, RUPEE_PURPLE
+Lottery Prize Night 2, npc, LOTTERY, LOTTERY, LOTTERY_NIGHT_2, RUPEE_PURPLE
+Lottery Prize Night 3, npc, LOTTERY, LOTTERY, LOTTERY_NIGHT_3, RUPEE_PURPLE
 Clock Town Rosa Sisters HP,                             npc,            NONE,                   CLOCK_TOWN_WEST,              ROSA_HEART_PIECE,           HEART_PIECE
 Clock Town Guru Guru Mask Bremen,                       npc,            NONE,                   LAUNDRY_POOL,                 MASK_BREMEN,                MASK_BREMEN
 Clock Town Stray Fairy,                                 npc,            NONE,                   LAUNDRY_POOL,                 STRAY_FAIRY_TOWN,           STRAY_FAIRY_TOWN

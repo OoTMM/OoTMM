@@ -409,7 +409,7 @@ MM_CURIOSITY_SHOP:                              { game: mm, id: 0x0e00, type: in
 MM_TRADING_POST:                                { game: mm, id: 0x6200, type: indoors, areas: ["MM Clock Town West", "MM Trading Post"], reverse: MM_CLOCK_TOWN_WEST_FROM_TRADING_POST }
 MM_BOMB_SHOP:                                   { game: mm, id: 0xca00, type: indoors, areas: ["MM Clock Town West", "MM Bomb Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP }
 MM_POST_OFFICE:                                 { game: mm, id: 0x5600, type: indoors, areas: ["MM Clock Town West", "MM Post Office"], reverse: MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE }
-MM_LOTTERY:                                     { game: mm, id: 0x6c00, type: indoors, areas: ["MM Clock Town West", "MM Lottery"], reverse: MM_CLOCK_TOWN_WEST_FROM_LOTTERY }
+MM_LOTTERY:                                     { game: mm, id: 0x6c00, type: indoors, areas: ["MM Clock Town West", "MM Lottery"], reverse: MM_CLOCK_TOWN_WEST_FROM_LOTTERY, debug: [INTERIOR, 'Lottery'] }
 MM_KAFEI_HIDEOUT:                               { game: mm, id: 0x0e10, type: indoors, maps: [MM_LAUNDRY_POOL, MM_CURIOSITY_SHOP], areas: ["MM Laundry Pool", "MM Kafei Hideout"], reverse: MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT }
 MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: indoors, areas: ["MM Swamp Near Potion Shop", "MM Swamp Potion Shop"], reverse: MM_SWAMP_FROM_POTION_SHOP, debug: [INTERIOR, 'Swamp Potion Shop'] }
 MM_DEKU_SHRINE:                                 { game: mm, id: 0x9e00, type: indoors, areas: ["MM Near Deku Shrine", "MM Deku Shrine"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE, debug: [INTERIOR, 'Deku Shrine'] }
