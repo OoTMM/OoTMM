@@ -363,7 +363,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   }
 
   /* Ageless items - 50% disabled, 10% enabled, 40% individual */
-  switch (randomInt(random, 4)) {
+  switch (randomInt(random, 10)) {
   case 0:
   case 1:
   case 2:
