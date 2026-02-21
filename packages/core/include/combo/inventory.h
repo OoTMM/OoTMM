@@ -18,8 +18,9 @@ void comboRemoveTradeItemChild(u16 xitemId);
 void comboRemoveTradeItem1(u16 xitemId);
 void comboRemoveTradeItem2(u16 xitemId);
 void comboRemoveTradeItem3(u16 xitemId);
+void Inventory_SaveLotteryCodeGuess(PlayState* play);
 #endif
 
-void Inventory_ReobtainProgressiveShields(void);
+    void Inventory_ReobtainProgressiveShields(void);
 
 #endif

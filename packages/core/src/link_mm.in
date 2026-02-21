@@ -714,3 +714,4 @@ EffectSsDeadDb_Spawn = 0x800b2f80;
 Audio_SetSpec = 0x801a400c;
 
 LifeMeter_IsCritical = 0x80101930;
+Inventory_SaveLotteryCodeGuess = 0x8012f278;

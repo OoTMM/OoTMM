@@ -572,4 +572,6 @@ typedef struct ALIGNED(16)
 }
 MmCustomSave;
 
+#define CURRENT_DAY (((void)0, gSaveContext.save.day) % 5)
+
 #endif /* MM_SAVE_H */
