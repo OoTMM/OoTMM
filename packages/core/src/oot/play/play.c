@@ -442,7 +442,7 @@ static void playAdjustEntrance(PlayState* play)
         endGame();
         break;
     case ENTR_OOT_BOSS_GANON2:
-        if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+        if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA) || !gSharedCustomSave.foundMasterSword)
             gSave.entrance = ENTR_OOT_GANON_TOWER;
         break;
     }
@@ -456,7 +456,7 @@ static void masterSwordFix(PlayState* play)
         return;
 
     /* Re-add the Master Sword to the inventory */
-    gSave.info.inventory.equipment.swords |= 2;
+    gSave.info.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
 
     if (Config_Flag(CFG_OOT_SWORDLESS_ADULT))
         return;
@@ -467,7 +467,7 @@ static void masterSwordFix(PlayState* play)
 
     /* We need to force-reequip */
     gSave.info.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
-    gSave.info.equips.equipment.swords = 2;
+    gSave.info.equips.equipment.swords = EQ_OOT_SWORD_MASTER;
     EV_OOT_UNSET_SWORDLESS();
 }
 
