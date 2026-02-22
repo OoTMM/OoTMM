@@ -15,6 +15,7 @@ jobs:
         run: git config --global --add safe.directory $PWD
 
       - name: Determine Deployment Type
+        shell: bash
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             echo "DEPLOY_TYPE=stable" >> $GITHUB_ENV
