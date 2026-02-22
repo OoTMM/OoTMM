@@ -15,6 +15,7 @@ jobs:
         run: git config --global --add safe.directory $PWD
 
       - name: Determine Deployment Type
+        shell: bash
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             echo "DEPLOY_TYPE=stable" >> $GITHUB_ENV
@@ -35,7 +36,7 @@ jobs:
             echo "VERSION=preview-${branch_name}" >> $GITHUB_ENV
             echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
             echo "ENV_KEYS=preview-${branch_name},preview" >> $GITHUB_ENV
-            echo "NX_CMD=affected" >> $GITHUB_ENV
+            echo "NX_CMD=run-many" >> $GITHUB_ENV
           else
             echo "DEPLOY_TYPE=none" >> $GITHUB_ENV
             echo "NX_CMD=affected" >> $GITHUB_ENV
@@ -48,7 +49,7 @@ jobs:
         run: pnpm i
 
       - name: Find references for NX
-        if: ${{ !contains(github.ref, 'refs/tags/') }}
+        if: ${{ env.NX_CMD != 'run-many' }}
         uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: master
