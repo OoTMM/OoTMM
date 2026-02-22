@@ -1,0 +1,42 @@
+name: Cleanup Preview Environments
+
+on:
+  delete:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'Branch name to cleanup (without preview/ prefix)'
+        required: true
+        type: string
+
+jobs:
+  cleanup:
+    # Only run for preview branches
+    if: github.event.ref_type == 'branch' && startsWith(github.event.ref, 'preview/')
+    runs-on: ubuntu-latest
+    container: ghcr.io/ootmm/ootmm-ci:1.0.0
+    steps:
+      - name: Determine version to cleanup
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            branch_name="${{ inputs.branch_name }}"
+          else
+            branch_name=$(echo "${{ github.event.ref }}" | sed 's/preview\///' | sed 's/[^a-zA-Z0-9-]/-/g')
+          fi
+          version="preview-${branch_name}"
+          echo "VERSION=${version}" >> $GITHUB_ENV
+          echo "Cleaning up version: ${version}"
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Delete S3 artifact
+        shell: bash
+        run: |
+          echo "Deleting ${{ env.VERSION }}.zip from S3..."
+          aws s3 rm ${{ vars.S3_BUCKET }}/${{ env.VERSION }}.zip || echo "File not found or already deleted"
