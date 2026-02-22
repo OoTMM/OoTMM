@@ -14,23 +14,32 @@ jobs:
       - name: Mark the directory as safe
         run: git config --global --add safe.directory $PWD
 
-      - name: Extract Version (Tag)
-        if: ${{ contains(github.ref, 'refs/tags/') }}
+      - name: Determine Deployment Type
         run: |
-          echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
-          echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
-          echo "NX_CMD=run-many" >> $GITHUB_ENV
-          echo "DEPLOY_STABLE=1" >> $GITHUB_ENV
-
-      - name: Extract Version (Commit)
-        if: ${{ !contains(github.ref, 'refs/tags/') }}
-        run: |
-          short_sha=$(echo ${{ github.sha }} | cut -c1-7)
-          echo "VERSION=dev" >> $GITHUB_ENV
-          echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
-          echo "ENV_KEYS=dev" >> $GITHUB_ENV
-          echo "NX_CMD=affected" >> $GITHUB_ENV
-          echo "DEPLOY_DEV=1" >> $GITHUB_ENV
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "DEPLOY_TYPE=stable" >> $GITHUB_ENV
+            echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+            echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
+            echo "NX_CMD=run-many" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == refs/heads/master ]]; then
+            echo "DEPLOY_TYPE=dev" >> $GITHUB_ENV
+            short_sha=$(echo ${{ github.sha }} | cut -c1-7)
+            echo "VERSION=dev" >> $GITHUB_ENV
+            echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
+            echo "ENV_KEYS=dev" >> $GITHUB_ENV
+            echo "NX_CMD=affected" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == refs/heads/preview/* ]]; then
+            echo "DEPLOY_TYPE=preview" >> $GITHUB_ENV
+            short_sha=$(echo ${{ github.sha }} | cut -c1-7)
+            branch_name=$(echo "${{ github.ref_name }}" | sed 's/preview\///' | sed 's/[^a-zA-Z0-9-]/-/g')
+            echo "VERSION=preview-${branch_name}" >> $GITHUB_ENV
+            echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
+            echo "ENV_KEYS=preview-${branch_name},preview" >> $GITHUB_ENV
+            echo "NX_CMD=affected" >> $GITHUB_ENV
+          else
+            echo "DEPLOY_TYPE=none" >> $GITHUB_ENV
+            echo "NX_CMD=affected" >> $GITHUB_ENV
+          fi
 
       - name: Install Third Party dependencies
         run: ./scripts/install-deps.sh
@@ -51,7 +60,7 @@ jobs:
         run: npx nx ${NX_CMD} -t build --prod
 
       - name: Configure AWS
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
+        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ vars.AWS_REGION }}
@@ -59,11 +68,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Lock for Deploy
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
+        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
         uses: ahmadnassri/action-workflow-queue@v1
 
       - name: Deploy
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
+        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
         run: npx nx ${NX_CMD} -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}

@@ -5,8 +5,8 @@ function die() {
   exit 1
 }
 
-if [ ! -z "$DEPLOY_STABLE" ]; then
-  echo "No need to deploy web on stable"
+if [ ! "$DEPLOY_TYPE" == "dev" ]; then
+  echo "No need to deploy web"
   exit 0
 fi
 
