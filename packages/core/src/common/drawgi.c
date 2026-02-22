@@ -767,39 +767,68 @@ void DrawGi_CustomGS(PlayState* play, s16 index, u8 param)
         { 0xaaaaaaff, 0xffffffff, 0x00ff00ff, 0x00ff00ff }, /* NPC Soul */
         { 0xaaaaaaff, 0xffffffff, 0x2222ffff, 0x2222ffff }, /* Animal Soul */
         { 0xaaaaaaff, 0xffffffff, 0x888888ff, 0x888888ff }, /* Misc. Soul */
+        { 0x00000000, 0x00000000, 0x00000000, 0x00000000 }, /* Platinum Token (rainbow) */
     };
 
     const GsColors* gsc;
-    float fc;
+    u32 fc;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
+    u32 skullEnv;
+    u32 skullPrim;
+    u32 flameEnv;
+    u32 flamePrim;
 
     gsc = &kColors[param];
     fc = play->state.frameCount;
 
+    /* Platinum token - rainbow skull and flames (unsynchronized) */
+    if (param == 8)
+    {
+        float h_skull;
+        float h_flame;
+
+        /* Skull rainbow - 60 frame cycle */
+        h_skull = (fc % 60) * (1.f/60.f);
+        skullPrim = hsla(h_skull, 1.f, 0.5f, 1.f);
+        skullEnv = hsla(h_skull, 1.f, 0.3f, 1.f);
+
+        /* Flame rainbow - 45 frame cycle (different speed for unsync) */
+        h_flame = (fc % 45) * (1.f/45.f);
+        flamePrim = hsla(h_flame, 1.f, 0.5f, 1.f);
+        flameEnv = hsla(h_flame, 1.f, 0.3f, 1.f);
+    }
+    else
+    {
+        skullEnv = gsc->skullEnv;
+        skullPrim = gsc->skullPrimary;
+        flameEnv = gsc->flameEnv;
+        flamePrim = gsc->flamePrimary;
+    }
+
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, gsc->skullEnv);
+    color4(&r, &g, &b, &a, skullEnv);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, gsc->skullPrimary);
+    color4(&r, &g, &b, &a, skullPrim);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, r, g, b, a);
     gSPDisplayList(POLY_OPA_DISP++, 0x06000330);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, fc * -5, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
-    color4(&r, &g, &b, &a, gsc->flameEnv);
+    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, fc * -5.f, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
+    color4(&r, &g, &b, &a, flameEnv);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, gsc->flamePrimary);
+    color4(&r, &g, &b, &a, flamePrim);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, 0x06000438);
     gDPPipeSync(POLY_XLU_DISP++);
-    color4(&r, &g, &b, &a, gsc->skullEnv);
+    color4(&r, &g, &b, &a, skullEnv);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, gsc->skullPrimary);
+    color4(&r, &g, &b, &a, skullPrim);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, 0x06000508);
     CLOSE_DISPS();

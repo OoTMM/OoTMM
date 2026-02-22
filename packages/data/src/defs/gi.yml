@@ -624,6 +624,7 @@
 - { id: MM_REMAINS_TWINMOLD, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_TWINMOLD], flags: 0xa0, draw: MM_REMAINS_TWINMOLD, object: GI_REMAINS_TWINMOLD, name: "<C3>Twinmold's Remains" }
 - { id: MM_GS_TOKEN_SWAMP, type: SKULL, add: GS_TOKEN_SWAMP, flags: 0x80, draw: [GS_SOUL, 1], object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
 - { id: MM_GS_TOKEN_OCEAN, type: SKULL, add: GS_TOKEN_OCEAN, flags: 0x80, draw: [GS_SOUL, 2], object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
+- { id: MM_PLATINUM_TOKEN, type: MAJOR, add: PLATINUM_TOKEN, flags: 0xa0, draw: [GS_SOUL, 8], object: [mm, 0x0125], name: "the <C0>Platinum Token" }
 - { id: MM_SMALL_KEY_WF, type: KEY, add: [MM_SMALL_KEY, 0], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Woodfall)" }
 - { id: MM_SMALL_KEY_SH, type: KEY, add: [MM_SMALL_KEY, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Snowhead)" }
 - { id: MM_SMALL_KEY_GB, type: KEY, add: [MM_SMALL_KEY, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Great Bay)" }

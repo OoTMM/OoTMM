@@ -114,6 +114,7 @@
 #define IA_TRAP                 0x68
 #define IA_SONG_NOTE            0x69
 #define IA_TRANSCENDENT_FAIRY   0x6a
+#define IA_PLATINUM_TOKEN       0x6b
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

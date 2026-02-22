@@ -178,6 +178,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_SKELETON_KEY,
   Items.OOT_RUPEE_MAGICAL,
   Items.MM_TRANSCENDENT_FAIRY,
+  Items.MM_PLATINUM_TOKEN,
   Items.MM_BOTTLED_GOLD_DUST,
   Items.MM_MASK_DEKU,
   Items.MM_MASK_GORON,
@@ -1439,6 +1440,10 @@ export class LogicPassWorldTransform {
     /* Add transcendent fairy */
     if (settings.transcendentFairy) {
       this.addItem(Items.MM_TRANSCENDENT_FAIRY);
+    }
+
+    if(settings.platinumToken) {
+      this.addItem(Items.MM_PLATINUM_TOKEN);
     }
 
     /* Add ocarina buttons */

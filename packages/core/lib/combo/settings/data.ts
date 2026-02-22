@@ -905,7 +905,8 @@ export const SETTINGS = [{
   description: 'Controls whether or not the purple rupees from the Frogs Ocarina Game in Zora\'s River are shuffled',
   cond: hasOoT,
   default: false,
-}, {  key: 'shuffleLotteryMm',
+}, {
+  key: 'shuffleLotteryMm',
   name: 'Lottery Shuffle',
   category: 'main.shuffle',
   type: 'boolean',
@@ -1873,6 +1874,13 @@ export const SETTINGS = [{
   description: 'Adds a Transcendent Fairy that counts as every Stray Fairy in MM.',
   default: false,
   cond: (s: any) => hasMM(s)
+}, {
+  key: 'platinumToken',
+  name: 'Platinum Token',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Platinum Token that counts as every Skulltula Token.',
+  default: false,
 }, {
   key: 'bombchuBehaviorOot',
   name: 'Bombchu Behavior (OoT)',

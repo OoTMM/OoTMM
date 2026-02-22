@@ -1550,16 +1550,22 @@ static int addItemMagicalRupee(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemGsToken(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.info.inventory.quest.goldToken = 1;
+    if(gOotSave.info.inventory.goldTokens >= 100)
+        return 0;
     return ++gOotSave.info.inventory.goldTokens;
 }
 
 static int addItemGsTokenSwamp(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
+    if(gMmSave.info.skullCountSwamp >= 30)
+        return 0;
     return ++gMmSave.info.skullCountSwamp;
 }
 
 static int addItemGsTokenOcean(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
+    if(gMmSave.info.skullCountOcean >= 30)
+        return 0;
     return ++gMmSave.info.skullCountOcean;
 }
 
@@ -1996,6 +2002,14 @@ static int addItemTranscendentFairy(PlayState* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
+static int addItemGsTokenPlatinum(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmSave.info.skullCountSwamp = 30;
+    gMmSave.info.skullCountOcean = 30;
+    gOotSave.info.inventory.goldTokens = 100;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -2104,6 +2118,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemTrap,
     addItemSongNote,
     addItemTranscendentFairy,
+    addItemGsTokenPlatinum,
 };
 
 extern const u8 kAddItemFuncs[];
