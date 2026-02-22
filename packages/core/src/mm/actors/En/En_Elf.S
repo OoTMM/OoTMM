@@ -108,3 +108,7 @@ Replaces:
 PATCH_START 0x8088D294
   lw      v1, 0x0028 (sp)
 PATCH_END
+
+PATCH_START 0x8088ded4
+  lui a2, 0x41c8
+PATCH_END
