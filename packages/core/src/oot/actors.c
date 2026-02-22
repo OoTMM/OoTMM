@@ -307,6 +307,11 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
         if (param == 0x01)
             return gSave.info.inventory.quest.stoneEmerald && gSave.info.inventory.quest.stoneRuby && gSave.info.inventory.quest.stoneSapphire;
         return 1;
+    case ACTOR_EN_RIVER_SOUND:
+        if (play->sceneId == SCE_OOT_MARKET_CHILD_DAY && PARAMS_GET_U(param, 0, 8) == 0xa)
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
+        else
+            return 1;
     default:
         return 1;
     }

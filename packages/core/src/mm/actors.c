@@ -567,10 +567,17 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 variable)
 {
     switch (actorId)
     {
+    // Remove the sounds of the carpenters without their souls.
+    case ACTOR_OBJ_SOUND:
+        if((play->sceneId == SCE_MM_CLOCK_TOWN_SOUTH || play->sceneId == SCE_MM_CLOCK_TOWN_EAST) && ((variable & 0x7f) == 0x10))
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CARPENTERS));
+        else
+            return 1;
     case ACTOR_EN_SYATEKI_OKUTA:
         if (play->sceneId == SCE_MM_SHOOTING_GALLERY && (gSave.day > 3 || gSave.day < 1))
             return 0;
-        /* Fallthrough */
+        else
+            return 1;
     default:
         return 1;
     }

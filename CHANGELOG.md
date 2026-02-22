@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Mute Market crowd in Ocarina of Time and Carpenters in Majora's Mask if their souls aren't collected.
 - Prevent accessing Ganon Fight without legitimately fining Master Sword.
 - Hide D-Pad if there are no items to use with it.
 - Alter the number of traps - seeds should have slightly less traps on the smaller settings now.
