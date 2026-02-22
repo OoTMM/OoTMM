@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file.
 
 - Make fairies much easier to activate when walking into them.
 - Mute Market crowd in Ocarina of Time and Carpenters in Majora's Mask if their souls aren't collected.
-- Prevent accessing Ganon Fight without legitimately fining Master Sword.
+- Prevent accessing Ganon Fight without legitimately finding Master Sword.
 - Hide D-Pad if there are no items to use with it.
 - Alter the number of traps - seeds should have slightly less traps on the smaller settings now.
 - Made rupoors behave like other traps.
