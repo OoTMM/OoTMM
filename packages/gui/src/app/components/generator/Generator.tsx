@@ -1,7 +1,7 @@
 import { ComponentType } from 'preact';
 import clsx from 'clsx';
 import { IconType } from 'react-icons';
-import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle } from 'react-icons/lu';
+import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';
 import { GeneratorGeneral } from './GeneratorGeneral';
@@ -12,12 +12,14 @@ import { GeneratorLogic } from './GeneratorLogic';
 import { GeneratorEntrances } from './GeneratorEntrances';
 import { GeneratorAdvanced } from './GeneratorAdvanced';
 import { useStore } from '@/app/store';
+import { Save } from '../Save';
 
 type GeneratorRoute = {
   name: string;
   component: ComponentType;
   icon: IconType;
   disabled?: boolean;
+  bottom?: boolean;
 };
 
 export function Generator() {
@@ -33,11 +35,12 @@ export function Generator() {
     { name: 'Entrances', icon: LuCompass, disabled: isPatch || isRandom, component: GeneratorEntrances },
     { name: 'Advanced', icon: LuCpu, disabled: isPatch, component: GeneratorAdvanced },
     { name: 'Cosmetics', icon: LuSparkle, component: CosmeticsEditor },
+    { name: 'Data', icon: LuSave, component: Save, bottom: true },
   ]);
 
   return (
     <div className="flex flex-row h-full w-full overflow-hidden">
-      <nav className="w-[200px] flex flex-col bg-gray-950 text-white border-r border-gray-800">
+      <nav className="w-50 flex flex-col bg-gray-950 text-white border-r border-gray-800">
         {router.routes.map((route, i) =>
           <a
             key={i}
@@ -47,6 +50,7 @@ export function Generator() {
               "inline-flex items-center gap-3 [font-variant:small-caps] m-2 p-2 transition-all rounded",
               i == router.currentIndex ? 'font-semibold bg-gray-800' : 'hover:bg-gray-900',
               route.disabled && 'opacity-50 cursor-not-allowed',
+              route.bottom && 'mt-auto'
             )}
             href="#"
             onClick={(e) => {

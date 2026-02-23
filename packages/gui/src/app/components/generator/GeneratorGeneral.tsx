@@ -60,7 +60,7 @@ export function GeneratorGeneral() {
   return (
     <main className="mt-8 flex flex-col items-center">
       {result && <Result archive={archive} warnings={warnings}/>}
-      <Card className="w-[1024px] m-4 p-8 gap-4">
+      <Card className="w-5xl m-4 p-8 gap-4">
         <div className="m-auto mb-8 text-center">
           <div className="font-bold text-2xl">OoTMM Web Generator</div>
           <div>{process.env.VERSION}</div>

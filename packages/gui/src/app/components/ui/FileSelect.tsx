@@ -24,7 +24,7 @@ export const FileSelect = ({ imageSrc, accept, onInput, file, ...props }: FileSe
   };
 
   return (
-    <div className="ux-bg ux-border w-[200px] h-[200px] min-w-[200px] min-h-[200px] relative">
+    <div className="ux-bg ux-border w-50 h-50 min-w-50 min-h-50 relative">
       <input type="file" accept={accept} className="opacity-0 w-full h-full cursor-pointer" onInput={handleInput} {...props}/>
       <img src={imageSrc} className={clsx("absolute w-full h-full object-contain scale-75 inset-0 pointer-events-none", file ? '' : 'grayscale' )}/>
       <span className="absolute bottom-1 left-0 w-full text-center select-none pointer-events-none overflow-hidden overflow-ellipsis">{file ? file.name : "No file selected"}</span>
