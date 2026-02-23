@@ -539,7 +539,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
     gSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
-    gSave.info.playerData.rupees = 999
+    gSave.info.playerData.rupees = 999;
 
     gSave.info.inventory.quest.notebook = 1;
     gSave.info.inventory.quest.songHealing = 1;

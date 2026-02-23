@@ -1,7 +1,10 @@
 packages:
   - packages/*
+
 onlyBuiltDependencies:
   - esbuild
   - microtime
+  - netlify-cli
   - nx
+  - sharp
   - yaz0
