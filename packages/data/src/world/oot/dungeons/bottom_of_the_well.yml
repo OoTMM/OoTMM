@@ -2,7 +2,7 @@
   dungeon: BotW
   exits:
     "Kakariko Well": "true"
-    "Bottom of the Well Main": "(is_child && (has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din)) || time_travel_at_will"
+    "Bottom of the Well Main": "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
 
 "Bottom of the Well Wallmaster Main":
   region: BUFFER_DELAYED
