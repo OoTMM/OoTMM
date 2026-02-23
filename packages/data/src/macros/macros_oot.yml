@@ -324,7 +324,7 @@
 "can_kill_poes": "soul_poe && (can_use_sword || can_hammer || can_use_slingshot || can_use_bow || can_hookshot)"
 "can_kill_poe_sisters": soul_poe && (can_use_sword || can_hammer || can_use_bow || can_hookshot)
 "can_kill_poe_meg": "soul_poe && (can_use_bow || can_hookshot)"
-"can_kill_armos": "soul_armos && (can_use_sword_kokiri && has_nuts) || (can_use_sword_goron && has_nuts) || can_hammer || can_use_mask_blast || has_explosives || (can_use_slingshot && (has_nuts || can_boomerang)))"
+"can_kill_armos": "soul_armos && (((can_use_sword_kokiri || can_use_sword_goron) && has_nuts) || can_use_sword_razor || can_use_sword_master || can_use_sword_biggoron || can_use_sticks || can_hammer || can_use_mask_blast || has_explosives || (can_use_slingshot && (has_nuts || can_boomerang)))"
 #"can_kill_small_babas": "soul_deku_baba &&"       #No enemy drops currently in OoTR.
 #"can_kill_big_babas": "soul_deku_baba &&"       #Enemy drops in OoTR only awarded when defeated with elemental arrows.
 "can_kill_mad_scrubs": "soul_deku_scrub && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_boomerang || can_use_bow || can_hookshot || has_shield_for_scrubs)"
