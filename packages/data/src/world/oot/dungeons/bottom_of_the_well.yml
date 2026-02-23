@@ -2,17 +2,23 @@
   dungeon: BotW
   exits:
     "Kakariko Well": "true"
-    "Bottom of the Well Main": "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
+    "Bottom of the Well Front Hallway": "is_child"
 
 "Bottom of the Well Wallmaster Main":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 
+"Bottom of the Well Front Hallway":
+  dungeon: BotW
+  exits:
+    "Bottom of the Well": "is_child"
+    "Bottom of the Well Main": "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
+
 "Bottom of the Well Main":
   dungeon: BotW
   exits:
-    "Bottom of the Well": "true"
+    "Bottom of the Well Front Hallway": "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
     "Bottom of the Well Wallmaster Main": "soul_wallmaster && has_lens"
     "Bottom of the Well Basement Platform": "has_lens || climb_anywhere || hookshot_anywhere"
   events:
