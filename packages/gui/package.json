@@ -23,17 +23,17 @@
   "dependencies": {
     "@ootmm/core": "*",
     "clsx": "^2.1.1",
-    "preact": "^10.26.9",
+    "preact": "^10.28.4",
     "react-ga4": "^2.1.0",
     "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.11",
-    "zustand": "^5.0.9"
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.1",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.10.2",
-    "@tailwindcss/vite": "^4.1.11",
-    "rollup-plugin-visualizer": "^6.0.3"
+    "@preact/preset-vite": "^2.10.3",
+    "@tailwindcss/vite": "^4.2.1",
+    "rollup-plugin-visualizer": "^7.0.0"
   },
   "nx": {
     "namedInputs": {

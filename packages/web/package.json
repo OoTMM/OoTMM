@@ -9,20 +9,20 @@
     "deploy": "./deploy.sh"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "preact": "^10.26.9",
-    "preact-iso": "^2.9.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "preact": "^10.28.4",
+    "preact-iso": "^2.11.1",
     "react-icons": "^5.5.0",
     "reset-css": "^5.0.2",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@mdx-js/rollup": "^3.1.0",
+    "@mdx-js/rollup": "^3.1.1",
     "@ootmm/web-components": "*",
-    "@preact/preset-vite": "^2.10.2",
-    "@tailwindcss/vite": "^4.1.11",
-    "typescript": "^5.8.3",
-    "vite-multiple-assets": "^2.2.5"
+    "@preact/preset-vite": "^2.10.3",
+    "@tailwindcss/vite": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite-multiple-assets": "^2.2.6"
   },
   "nx": {
     "targets": {
