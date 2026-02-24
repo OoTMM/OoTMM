@@ -363,7 +363,7 @@ export class Pathfinder {
     as.areas.set(area, newAreaData);
 
     /* Eval locations */
-    for (const l in worldArea.locations) {
+    for (const l of Object.keys(worldArea.locations)) {
       if (ws.restrictedLocations && !this.opts.includeForbiddenReachable && !ws.restrictedLocations.has(l)) {
         continue;
       }
@@ -374,18 +374,18 @@ export class Pathfinder {
     }
 
     /* Eval events */
-    for (const e in worldArea.events) {
+    for (const e of Object.keys(worldArea.events)) {
       this.evalEvent(worldId, age, area, e);
     }
 
     /* Eval exits */
-    for (const e in worldArea.exits) {
+    for (const e of Object.keys(worldArea.exits)) {
       this.evalExit(worldId, age, area, e);
     }
 
     /* Eval gossips */
     if (this.opts.gossips) {
-      for (const g in worldArea.gossip) {
+      for (const g of Object.keys(worldArea.gossip)) {
         this.evalGossip(worldId, age, area, g);
       }
     }
@@ -810,13 +810,13 @@ export class Pathfinder {
           const wss = playerItem.player === 'all' ? this.state.ws : [this.state.ws[playerItem.player]];
           for (const ws of wss) {
             const delta = amount - amountPrev;
-  
+
             countMapAdd(ws.items, playerItem.item, delta);
             countMapAdd(ws.renewables, playerItem.item, delta);
             countMapAdd(ws.licenses, playerItem.item, delta);
             this.state.previousAssumedItems.set(playerItem, amount);
           }
-          
+
           if (playerItem.player === 'all') {
             for (let i = 0; i < this.worlds.length; ++i)
               this.requeueItem(i, playerItem.item);
