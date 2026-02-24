@@ -3,7 +3,7 @@
   age_change: false
   dungeon: Fire
   events:
-    BOSS_VOLVAGIA: "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
+    BOSS_VOLVAGIA: "can_kill_volvagia"
   exits:
     "Fire Temple After Boss": "event(BOSS_VOLVAGIA)"
 

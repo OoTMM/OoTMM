@@ -3,7 +3,7 @@
   age_change: false
   dungeon: JJ
   events:
-    BOSS_BARINADE: "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
+    BOSS_BARINADE: "can_kill_barinade"
   exits:
     "Jabu-Jabu After Boss": "event(BOSS_BARINADE)"
   locations:

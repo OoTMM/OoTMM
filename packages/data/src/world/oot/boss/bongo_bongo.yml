@@ -3,7 +3,7 @@
   age_change: false
   dungeon: Shadow
   events:
-    BOSS_BONGO_BONGO: "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_hookshot || can_use_slingshot)"
+    BOSS_BONGO_BONGO: "can_kill_bongo"
   exits:
     "Shadow Temple After Boss": "event(BOSS_BONGO_BONGO)"
 

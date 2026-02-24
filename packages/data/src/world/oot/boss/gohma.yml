@@ -3,7 +3,7 @@
   age_change: false
   dungeon: DT
   events:
-    BOSS_GOHMA: "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
+    BOSS_GOHMA: "can_kill_gohma"
   exits:
     "Deku Tree After Boss": "event(BOSS_GOHMA)"
   locations:

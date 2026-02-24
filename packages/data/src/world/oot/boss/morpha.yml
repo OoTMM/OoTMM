@@ -3,7 +3,7 @@
   age_change: false
   dungeon: Water
   events:
-    BOSS_MORPHA: "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && (can_hammer || can_use_sword)"
+    BOSS_MORPHA: "can_kill_morpha"
   exits:
     "Water Temple After Boss": "event(BOSS_MORPHA)"
 
