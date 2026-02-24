@@ -3,7 +3,7 @@
   boss: true
   dungeon: GB
   events:
-    BOSS_GYORG: "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
+    BOSS_GYORG: "can_kill_gyorg"
   exits:
     "Great Bay Temple After Boss": "event(BOSS_GYORG)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
