@@ -169,5 +169,9 @@
 "has_ruto_letter": "shared_bottle(BOTTLE_RUTO_LETTER, SHARED_BOTTLE_RUTO_LETTER)"
 "has_gold_dust": "shared_bottle(BOTTLED_GOLD_DUST, SHARED_BOTTLED_GOLD_DUST)"
 
+# Item extensions
+"has_skeleton_key": "has(SKELETON_KEY) || has(SHARED_SKELETON_KEY)"
+"has_platinum_token": "has(PLATINUM_TOKEN) || has(SHARED_PLATINUM_TOKEN)"
+
 # Settings
 "is_goal_triforce": "setting(goal, triforce) || setting(goal, triforce3)"

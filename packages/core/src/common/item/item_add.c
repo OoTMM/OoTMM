@@ -2002,11 +2002,16 @@ static int addItemTranscendentFairy(PlayState* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
-static int addItemGsTokenPlatinum(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemGsTokenPlatinumOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.info.inventory.goldTokens = 100;
+    return 0;
+}
+
+static int addItemGsTokenPlatinumMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmSave.info.skullCountSwamp = 30;
     gMmSave.info.skullCountOcean = 30;
-    gOotSave.info.inventory.goldTokens = 100;
     return 0;
 }
 
@@ -2118,7 +2123,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemTrap,
     addItemSongNote,
     addItemTranscendentFairy,
-    addItemGsTokenPlatinum,
+    addItemGsTokenPlatinumOot,
+    addItemGsTokenPlatinumMm,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -2154,6 +2160,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_EMPTINESS, GI_MM_SONG_EMPTINESS },
     { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_NOTE_EMPTINESS, GI_MM_SONG_NOTE_EMPTINESS },
     { CFG_SHARED_SKELETON_KEY, GI_OOT_SKELETON_KEY, GI_MM_SKELETON_KEY },
+    { CFG_SHARED_PLATINUM_TOKEN, GI_OOT_PLATINUM_TOKEN, GI_MM_PLATINUM_TOKEN },
     { CFG_SHARED_MAGIC, GI_OOT_MAGIC_UPGRADE, GI_MM_MAGIC_UPGRADE },
     { CFG_SHARED_MAGIC, GI_OOT_MAGIC_UPGRADE2, GI_MM_MAGIC_UPGRADE2 },
     { CFG_SHARED_OCARINA_BUTTONS, GI_OOT_BUTTON_A, GI_MM_BUTTON_A },

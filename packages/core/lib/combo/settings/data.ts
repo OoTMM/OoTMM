@@ -1875,12 +1875,21 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => hasMM(s)
 }, {
-  key: 'platinumToken',
-  name: 'Platinum Token',
+  key: 'platinumTokenOot',
+  name: 'Platinum Token (OoT)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a Platinum Token that counts as every Skulltula Token.',
+  description: 'Adds a Platinum Token that counts as every Gold Skulltula Token.',
   default: false,
+  cond: hasOoT,
+}, {
+  key: 'platinumTokenMm',
+  name: 'Platinum Token (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Platinum Token that counts as every House Token.',
+  default: false,
+  cond: hasMM,
 }, {
   key: 'bombchuBehaviorOot',
   name: 'Bombchu Behavior (OoT)',
@@ -2565,6 +2574,14 @@ export const SETTINGS = [{
   description: 'Combines the Skeleton Key from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.skeletonKeyOot && s.skeletonKeyMm,
+}, {
+  key: 'sharedPlatinumToken',
+  name: 'Shared Platinum Token',
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the Platinum Token from OoT and MM into one item for both games',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.platinumTokenOot && s.platinumTokenMm,
 }, {
   key: 'sharedBombchu',
   name: 'Shared Bombchu',

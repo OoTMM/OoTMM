@@ -203,6 +203,20 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.skeletonKeyMm = false;
   }
 
+  /* Platinum token */
+  switch (randomInt(random, 4)) {
+  case 0:
+    break;
+  case 1:
+    base.platinumTokenOot = true;
+    base.platinumTokenMm = true;
+    break;
+  default:
+    base.platinumTokenOot = booleanWeighted(random, 0.5);
+    base.platinumTokenMm = booleanWeighted(random, 0.5);
+    break;
+  }
+
   /* Boss key shuffle */
   base.bossKeyShuffleOot = sampleWeighted(random, { ownDungeon: 10, anywhere: 8, removed: 4 });
   if (booleanWeighted(random, 0.5)) {
@@ -451,6 +465,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedHealth = true;
     base.sharedSoulsEnemy = true;
     base.sharedSkeletonKey = true;
+    base.sharedPlatinumToken = true;
     base.sharedSpellFire = true;
     base.sharedSpellWind = true;
     base.sharedSpellLove = true;
@@ -475,6 +490,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedHealth = booleanWeighted(random, 0.5);
     base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
+    base.sharedPlatinumToken = booleanWeighted(random, 0.5);
     base.sharedHammer = booleanWeighted(random, 0.5);
     base.sharedStoneAgony = booleanWeighted(random, 0.5);
     base.sharedSpinUpgrade = booleanWeighted(random, 0.5);

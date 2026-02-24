@@ -462,6 +462,7 @@
 - { id: OOT_TRAP_ANTI_MAGIC, type: MINOR, add: [TRAP, 0x04], flags: 0x80, object: [oot, 0x00cd], draw: [TRAP, 0x04], name: "an <COLOR_BLUE>Anti-Magic Trap" }
 - { id: OOT_TRAP_KNOCKBACK, type: MINOR, add: [TRAP, 0x05], flags: 0x80, object: [oot, 0x085], draw: [TRAP, 0x05], name: "a <COLOR_BLUE>Knockback Trap" }
 - { id: OOT_TRAP_RUPOOR, type: RUPEE, add: [TRAP, 0x06], flags: 0x80, draw: [RUPEE, 0], object: [mm, 0x013f], name: "a <COLOR_BLUE>Rupoor" }
+- { id: OOT_PLATINUM_TOKEN, type: MAJOR, add: OOT_PLATINUM_TOKEN, flags: 0x80, draw: [GS_SOUL, 8], object: [oot, 0x015c], name: "the <C0>Platinum Token" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
@@ -624,7 +625,7 @@
 - { id: MM_REMAINS_TWINMOLD, type: MAJOR, add: [MM_QUEST, QUEST_MM_REMAINS_TWINMOLD], flags: 0xa0, draw: MM_REMAINS_TWINMOLD, object: GI_REMAINS_TWINMOLD, name: "<C3>Twinmold's Remains" }
 - { id: MM_GS_TOKEN_SWAMP, type: SKULL, add: GS_TOKEN_SWAMP, flags: 0x80, draw: [GS_SOUL, 1], object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
 - { id: MM_GS_TOKEN_OCEAN, type: SKULL, add: GS_TOKEN_OCEAN, flags: 0x80, draw: [GS_SOUL, 2], object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
-- { id: MM_PLATINUM_TOKEN, type: MAJOR, add: PLATINUM_TOKEN, flags: 0xa0, draw: [GS_SOUL, 8], object: [mm, 0x0125], name: "the <C0>Platinum Token" }
+- { id: MM_PLATINUM_TOKEN, type: MAJOR, add: MM_PLATINUM_TOKEN, flags: 0xa0, draw: [GS_SOUL, 8], object: [mm, 0x0125], name: "the <C0>Platinum Token" }
 - { id: MM_SMALL_KEY_WF, type: KEY, add: [MM_SMALL_KEY, 0], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Woodfall)" }
 - { id: MM_SMALL_KEY_SH, type: KEY, add: [MM_SMALL_KEY, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Snowhead)" }
 - { id: MM_SMALL_KEY_GB, type: KEY, add: [MM_SMALL_KEY, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Great Bay)" }

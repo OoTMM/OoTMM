@@ -91,6 +91,10 @@ const SKELETON_KEY: ItemSharedDef[] = [
   { shared: Items.SHARED_SKELETON_KEY, oot: Items.OOT_SKELETON_KEY, mm: Items.MM_SKELETON_KEY },
 ];
 
+const PLATINUM_TOKEN: ItemSharedDef[] = [
+  { shared: Items.SHARED_PLATINUM_TOKEN, oot: Items.OOT_PLATINUM_TOKEN, mm: Items.MM_PLATINUM_TOKEN },
+];
+
 const OCARINA_BUTTONS: ItemSharedDef[] = [
   { shared: Items.SHARED_BUTTON_A,        oot: Items.OOT_BUTTON_A,        mm: Items.MM_BUTTON_A },
   { shared: Items.SHARED_BUTTON_C_RIGHT,  oot: Items.OOT_BUTTON_C_RIGHT,  mm: Items.MM_BUTTON_C_RIGHT },
@@ -133,4 +137,4 @@ const BOTTLES: ItemSharedDef[] = [
 ]
 
 
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS, BOTTLES };
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES };
