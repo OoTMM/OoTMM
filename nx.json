@@ -22,5 +22,8 @@
       ]
     }
   },
-  "defaultBase": "master"
+  "defaultBase": "master",
+  "tui": {
+    "enabled": false
+  }
 }
