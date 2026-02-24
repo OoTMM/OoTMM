@@ -270,7 +270,6 @@
 "tingle_price(id)": "wallet_price(MM_TINGLE, id)"
 
 # Keys
-"has_skeleton_key": "setting(skeletonKeyMm) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"
 "boss_key(x)": "setting(bossKeyShuffleMm, removed) || has(x)"
 "small_keys(type, x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleMm, removed) || cond(setting(smallKeyRingMm, type), has(y), has(x, count)))"
 "small_keys_wf(n)": "small_keys(WF, SMALL_KEY_WF, KEY_RING_WF, n)"

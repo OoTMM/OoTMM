@@ -482,6 +482,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_SKELETON_KEY:
     case GI_MM_SKELETON_KEY:
         return !Config_Flag(CFG_SHARED_SKELETON_KEY);
+    case GI_OOT_PLATINUM_TOKEN:
+    case GI_MM_PLATINUM_TOKEN:
+        return !Config_Flag(CFG_SHARED_PLATINUM_TOKEN);
     case GI_OOT_BUTTON_A:
     case GI_OOT_BUTTON_C_RIGHT:
     case GI_OOT_BUTTON_C_LEFT:

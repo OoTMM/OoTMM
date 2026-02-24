@@ -918,7 +918,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_SOUL_ANIMAL_COW: 'Soul of Cows',
   SHARED_SOUL_ANIMAL_DOG: 'Soul of Dogs',
   SHARED_SOUL_ANIMAL_BUTTERFLY: 'Soul of Butterflies',
-  MM_PLATINUM_TOKEN: "Platinum Token",
+  OOT_PLATINUM_TOKEN: "Platinum Token (OoT)",
+  MM_PLATINUM_TOKEN: "Platinum Token (MM)",
+  SHARED_PLATINUM_TOKEN: "Platinum Token",
 };
 
 export function itemName(item: string) {

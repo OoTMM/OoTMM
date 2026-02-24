@@ -4,7 +4,7 @@
     "Great Bay Coast": "can_reset_time"
     "Ocean Spider House Front": "can_reset_time_dungeon && (has_explosives || trick_keg_explosives)"
   locations:
-    "Ocean Spider House Wallet": "soul_citizen && (has(GS_TOKEN_OCEAN, 30) || has(MM_PLATINUM_TOKEN))"
+    "Ocean Spider House Wallet": "soul_citizen && (has(GS_TOKEN_OCEAN, 30) || has_platinum_token)"
 
 "Ocean Spider House Front":
   dungeon: OSH

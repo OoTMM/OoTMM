@@ -247,7 +247,6 @@
 "merchant_price(id)": "wallet_price(OOT_MERCHANTS, id)"
 
 # Keys
-"has_skeleton_key": "setting(skeletonKeyOot) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"
 "boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"
 "small_keys(type, x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, type), has(y), has(x, count)))"
 "small_keys_extra(type, x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, type), has(y), has(x, count + 1)))"
@@ -315,7 +314,7 @@
 "can_kill_peahats_high": "soul_peahat && (can_use_slingshot || (is_night && has_explosives))"
 "can_kill_lizalfos_dinalfos": "soul_lizalfos_dinalfos && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow)"
 "can_kill_larvae_eggs_low": "has_ranged_weapon || has_nuts"    #Can be used for clear rooms, but doesn't give enemy drops in OoTR.
-"can_kill_larvae_eggs_high": "has_ranged_weapon" 
+"can_kill_larvae_eggs_high": "has_ranged_weapon"
 "can_kill_larvae_hatched": "soul_gohma_larvae && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || can_hookshot || has_explosives || can_use_din)"
 "can_kill_shaboms": "soul_shaboms && (can_use_sword || can_boomerang || has_nuts || has_explosives || can_use_din)"
 "can_kill_dark_link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && (can_use_sword || can_hammer || (can_use_din && has_chateau))" #Double magic may be enough but due to Dark Link matching player health chateau as a mercy? Din's is weird here.

@@ -4,7 +4,7 @@
     "Near Swamp Spider House": "can_reset_time"
     "Swamp Spider House Main": "can_reset_time_dungeon"
   locations:
-    "Swamp Spider House Mask of Truth": "soul_citizen && (has(GS_TOKEN_SWAMP, 30) || has(MM_PLATINUM_TOKEN))"
+    "Swamp Spider House Mask of Truth": "soul_citizen && (has(GS_TOKEN_SWAMP, 30) || has_platinum_token)"
     "Swamp Spider House Rock Entrance 1": "true"
     "Swamp Spider House Rock Entrance 2": "true"
 

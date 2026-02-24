@@ -178,7 +178,9 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_SKELETON_KEY,
   Items.OOT_RUPEE_MAGICAL,
   Items.MM_TRANSCENDENT_FAIRY,
+  Items.OOT_PLATINUM_TOKEN,
   Items.MM_PLATINUM_TOKEN,
+  Items.SHARED_PLATINUM_TOKEN,
   Items.MM_BOTTLED_GOLD_DUST,
   Items.MM_MASK_DEKU,
   Items.MM_MASK_GORON,
@@ -1017,6 +1019,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SKELETON_KEY, 'max');
     }
 
+    if (settings.sharedPlatinumToken) {
+      this.shareItems(SharedItemGroups.PLATINUM_TOKEN, 'max');
+    }
+
     if (settings.sharedOcarinaButtons) {
       this.shareItems(SharedItemGroups.OCARINA_BUTTONS, 'max');
     }
@@ -1432,6 +1438,15 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_SKELETON_KEY);
     }
 
+    /* Add platinum token */
+    if(settings.platinumTokenOot) {
+      this.addItem(Items.OOT_PLATINUM_TOKEN);
+    }
+
+    if(settings.platinumTokenMm) {
+      this.addItem(Items.MM_PLATINUM_TOKEN);
+    }
+
     /* Add magical rupee */
     if (settings.magicalRupee) {
       this.addItem(Items.OOT_RUPEE_MAGICAL);
@@ -1440,10 +1455,6 @@ export class LogicPassWorldTransform {
     /* Add transcendent fairy */
     if (settings.transcendentFairy) {
       this.addItem(Items.MM_TRANSCENDENT_FAIRY);
-    }
-
-    if(settings.platinumToken) {
-      this.addItem(Items.MM_PLATINUM_TOKEN);
     }
 
     /* Add ocarina buttons */
