@@ -1,7 +1,7 @@
 import { cloneDeep } from 'lodash';
 
 import { Settings } from '../settings';
-import { AreaData, Expr, ExprResult, MM_TIME_SLICES, RecursiveArray, isDefaultRestrictions } from './expr';
+import { AreaData, Expr, ExprDependencies, ExprResult, ExprResultWithDeps, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
 import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
@@ -12,16 +12,6 @@ import { isTriforcePiece } from '../items/helpers';
 import { exprPartialEvalAge } from './expr-partial-eval';
 import { Age, AGE_ADULT, AGE_CHILD, AGES } from './constants';
 import { ANALYSIS_EVENTS } from './analysis';
-
-const recursiveForEach = <T>(arr: any, cb: (x: T) => void) => {
-  if (Array.isArray(arr)) {
-    for (const x of arr) {
-      recursiveForEach(x, cb);
-    }
-  } else {
-    cb(arr);
-  }
-}
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
 
@@ -152,10 +142,7 @@ const defaultState = (startingItems: PlayerItems, worldCount: number): Pathfinde
 };
 
 const defaultAreaData = (): AreaData => ({
-  oot: {
-    day: false,
-    night: false,
-  },
+  ootTime: 0,
   mmTime: 0,
   mmTime2: 0,
   flagsOn: 0,
@@ -163,10 +150,7 @@ const defaultAreaData = (): AreaData => ({
 });
 
 const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
-  oot: {
-    day: a.oot.day || b.oot.day,
-    night: a.oot.night || b.oot.night,
-  },
+  ootTime: (a.ootTime | b.ootTime) >>> 0,
   mmTime: (a.mmTime | b.mmTime) >>> 0,
   mmTime2: (a.mmTime2 | b.mmTime2) >>> 0,
   flagsOn: (a.flagsOn & b.flagsOn) >>> 0,
@@ -174,8 +158,7 @@ const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
 });
 
 const coveringAreaData = (a: AreaData, b: AreaData): boolean => {
-  if (!a.oot.day && b.oot.day) return false;
-  if (!a.oot.night && b.oot.night) return false;
+  if (((a.ootTime | b.ootTime) >>> 0) !== a.ootTime) return false;
   if (((a.mmTime | b.mmTime) >>> 0) !== a.mmTime) return false;
   if (((a.mmTime2 | b.mmTime2) >>> 0) !== a.mmTime2) return false;
   if (((a.flagsOn & b.flagsOn) >>> 0) !== a.flagsOn) return false;
@@ -184,10 +167,7 @@ const coveringAreaData = (a: AreaData, b: AreaData): boolean => {
 }
 
 const cloneAreaData = (a: AreaData): AreaData => ({
-  oot: {
-    day: a.oot.day,
-    night: a.oot.night,
-  },
+  ootTime: a.ootTime,
   mmTime: a.mmTime,
   mmTime2: a.mmTime2,
   flagsOn: a.flagsOn,
@@ -287,11 +267,16 @@ export class Pathfinder {
     const worldArea = world.areas[area];
 
     if (worldArea.game === 'oot') {
-      if (['day', 'flow'].includes(worldArea.time)) {
-        newAreaData.oot.day = true;
-      }
-      if (['night', 'flow'].includes(worldArea.time)) {
-        newAreaData.oot.night = true;
+      switch (worldArea.time) {
+      case 'day':
+        newAreaData.ootTime |= OOT_TIME.DAY;
+        break;
+      case 'night':
+        newAreaData.ootTime |= OOT_TIME.NIGHT;
+        break;
+      case 'flow':
+        newAreaData.ootTime |= OOT_TIME_ALL;
+        break;
       }
     } else {
       /* MM: Expand the time range */
@@ -337,7 +322,7 @@ export class Pathfinder {
           } else if (waitMode) {
             const stayExpr = worldArea.stay![i];
             const result = this.evalExpr(worldId, stayExpr, age, area);
-            if (result.result) {
+            if (result.result.result) {
               waitMode = true;
               newAreaData.mmTime = (newAreaData.mmTime | mask1) >>> 0;
               newAreaData.mmTime2 = (newAreaData.mmTime2 | mask2) >>> 0;
@@ -391,7 +376,7 @@ export class Pathfinder {
     }
   }
 
-  private evalExpr(worldId: number, expr: Expr, age: Age, area: string) {
+  private evalExpr(worldId: number, expr: Expr, age: Age, area: string): ExprResultWithDeps {
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
@@ -399,7 +384,12 @@ export class Pathfinder {
     const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
 
     expr = exprPartialEvalAge(expr, age);
-    return expr.eval(state);
+    const deps: ExprDependencies = {
+      items: [],
+      events: [],
+    }
+    const result = expr.eval(state, deps);
+    return { result, deps };
   }
 
   private dependenciesLookup<T>(set: PathfinderDependencySet<T>, dependency: T, areaFrom: string) {
@@ -418,24 +408,24 @@ export class Pathfinder {
     return data2;
   }
 
-  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: RecursiveArray<T>) {
-    recursiveForEach<T>(dependents, dep => {
+  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: T[]) {
+    for (const dep of dependents) {
       const data = this.dependenciesLookup(set, dep, area);
       data[type].add(id);
-    });
+    }
   }
 
   private resultNeedsTracking(result: ExprResult) {
     return (result.result === false || (result.restrictions && !isDefaultRestrictions(result.restrictions)));
   }
 
-  private trackDependencies(type: 'exits' | 'locations' | 'events' | 'gossips', deps: PathfinderDependencies, id: string, area: string, result: ExprResult) {
-    if (!this.resultNeedsTracking(result)) {
+  private trackDependencies(type: 'exits' | 'locations' | 'events' | 'gossips', deps: PathfinderDependencies, id: string, area: string, result: ExprResultWithDeps) {
+    if (!this.resultNeedsTracking(result.result)) {
       return;
     }
 
-    this.addDependencies(type, deps.items, id, area, result.depItems);
-    this.addDependencies(type, deps.events, id, area, result.depEvents);
+    this.addDependencies(type, deps.items, id, area, result.deps.items);
+    this.addDependencies(type, deps.events, id, area, result.deps.events);
   }
 
   private requeueItem(worldId: number, item: Item) {
@@ -582,12 +572,13 @@ export class Pathfinder {
     /* Track dependencies */
     this.trackDependencies('exits', as.dependencies, exit, area, exprResult);
 
-    if (exprResult.result) {
+    if (exprResult.result.result) {
       const areaData = cloneAreaData(as.areas.get(area)!);
-      const r = exprResult.restrictions;
+      const r = exprResult.result.restrictions;
       if (r) {
-        if (r.oot.day) areaData.oot.day = false;
-        if (r.oot.night) areaData.oot.night = false;
+        if (r.ootTime) {
+          areaData.ootTime = (areaData.ootTime & ~(r.ootTime)) >>> 0;
+        }
         if (r.mmTime) {
           areaData.mmTime = (areaData.mmTime & ~(r.mmTime)) >>> 0;
         }
@@ -633,7 +624,7 @@ export class Pathfinder {
 
     /* If the result is true, add the event to the state and queue up everything */
     /* Otherwise, track dependencies */
-    if (result.result) {
+    if (result.result.result) {
       this.addEventDelayed(worldId, event);
     } else {
       /* Track dependencies */
@@ -667,7 +658,7 @@ export class Pathfinder {
 
     /* If the result is true, add the location to the state and queue up everything */
     /* Otherwise, track dependencies */
-    if (result.result) {
+    if (result.result.result) {
       if (isAllowed) {
         this.addLocationDelayed(worldId, location);
       } else {
@@ -695,7 +686,7 @@ export class Pathfinder {
 
     /* If any of the results are true, add the gossip to the state and queue up everything */
     /* Otherwise, track dependencies */
-    if (result.result) {
+    if (result.result.result) {
       this.state.gossips[worldId].add(gossip);
     } else {
       /* Track dependencies */

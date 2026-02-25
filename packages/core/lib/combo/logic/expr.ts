@@ -65,26 +65,25 @@ const CONSTRAINT_FLAGS = [
   'MM_REGION_VALLEY_CLEARED',
 ];
 
-export type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
-
-type ExprDependencies = {
-  items: Set<Item>;
-  events: Set<string>;
+export const OOT_TIME = {
+  DAY:    (1 << 0),
+  NIGHT:  (1 << 1),
+  DUSK:   (1 << 2),
 };
 
-const DEPENDENCIES_EMPTY: ExprDependencies = { items: new Set(), events: new Set() };
+export const OOT_TIME_ALL = OOT_TIME.DAY | OOT_TIME.NIGHT | OOT_TIME.DUSK;
+
+export type ExprDependencies = {
+  items: Item[];
+  events: string[];
+}
 
 type ExprResultFalse = {
   result: false;
-  depItems: RecursiveArray<Item>;
-  depEvents: RecursiveArray<string>;
 };
 
 type ExprRestrictions = {
-  oot: {
-    day: boolean;
-    night: boolean;
-  };
+  ootTime: number;
   mmTime: number;
   mmTime2: number;
   flagsOn: number;
@@ -92,10 +91,7 @@ type ExprRestrictions = {
 };
 
 export const defaultRestrictions = (): ExprRestrictions => ({
-  oot: {
-    day: false,
-    night: false,
-  },
+  ootTime: 0,
   mmTime: 0,
   mmTime2: 0,
   flagsOn: 0,
@@ -103,10 +99,7 @@ export const defaultRestrictions = (): ExprRestrictions => ({
 });
 
 export const maxRestrictions = (): ExprRestrictions => ({
-  oot: {
-    day: true,
-    night: true,
-  },
+  ootTime: OOT_TIME_ALL,
   mmTime: 0xffffffff,
   mmTime2: 0xffffffff,
   flagsOn: 0xffffffff,
@@ -114,8 +107,7 @@ export const maxRestrictions = (): ExprRestrictions => ({
 });
 
 export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
-  return r.oot.day === false &&
-    r.oot.night === false &&
+  return r.ootTime === 0 &&
     r.mmTime === 0 &&
     r.mmTime2 === 0 &&
     r.flagsOn === 0 &&
@@ -123,6 +115,9 @@ export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
 };
 
 function isRestrictionImpossible(r: ExprRestrictions): boolean {
+  if (r.ootTime === OOT_TIME_ALL) {
+    return true;
+  }
   if (r.mmTime === 0xffffffff && r.mmTime2 === 0xffffffff) {
     return true;
   }
@@ -134,18 +129,17 @@ function isRestrictionImpossible(r: ExprRestrictions): boolean {
 
 type ExprResultTrue = {
   result: true;
-  depItems: RecursiveArray<Item>;
-  depEvents: RecursiveArray<string>;
   restrictions?: ExprRestrictions;
 };
 
 export type ExprResult = ExprResultFalse | ExprResultTrue;
+export type ExprResultWithDeps = {
+  result: ExprResult;
+  deps: ExprDependencies;
+};
 
 export type AreaData = {
-  oot: {
-    day: boolean;
-    night: boolean;
-  };
+  ootTime: number;
   mmTime: number;
   mmTime2: number;
   flagsOn: number;
@@ -171,8 +165,7 @@ export const exprRestrictionsAnd = (exprs: ExprResult[]): ExprRestrictions => {
   for (const expr of exprs) {
     if (!expr.result) continue;
     if (!expr.restrictions) continue;
-    restrictions.oot.day = restrictions.oot.day || expr.restrictions.oot.day;
-    restrictions.oot.night = restrictions.oot.night || expr.restrictions.oot.night;
+    restrictions.ootTime = (restrictions.ootTime | expr.restrictions.ootTime) >>> 0;
     restrictions.mmTime = (restrictions.mmTime | expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 | expr.restrictions.mmTime2) >>> 0;
     restrictions.flagsOn = (restrictions.flagsOn | expr.restrictions.flagsOn) >>> 0;
@@ -188,8 +181,7 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
   for (const expr of exprs) {
     if (!expr.result) continue;
     if (!expr.restrictions) return defaultRestrictions();
-    restrictions.oot.day = restrictions.oot.day && expr.restrictions.oot.day;
-    restrictions.oot.night = restrictions.oot.night && expr.restrictions.oot.night;
+    restrictions.ootTime = (restrictions.ootTime & expr.restrictions.ootTime) >>> 0;
     restrictions.mmTime = (restrictions.mmTime & expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 & expr.restrictions.mmTime2) >>> 0;
     restrictions.flagsOn = (restrictions.flagsOn & expr.restrictions.flagsOn) >>> 0;
@@ -234,35 +226,8 @@ function specialCondSets(settings: Settings, special: string) {
   return { items, itemsUnique };
 }
 
-function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
-  const { items, itemsUnique } = specialCondSets(settings, special);
-  const { specialConds } = settings;
-  const cond = specialConds[special as keyof typeof specialConds];
-
-  const countUnique = [...itemsUnique].filter((item) => itemCount(state, item) > 0).length;
-  const result = itemsCount(state, [...items]) + countUnique >= cond.count;
-
-  return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
-}
-
 const exprMap = new Map<string, Expr>();
 const exprKeyId = new Map<string, number>();
-
-function mergeDependencies(deps: ExprDependencies[]): ExprDependencies {
-  const items = new Set<Item>();
-  const events = new Set<string>();
-
-  for (const d of deps) {
-    for (const i of d.items) {
-      items.add(i);
-    }
-    for (const e of d.events) {
-      events.add(e);
-    }
-  }
-
-  return { items, events };
-}
 
 export abstract class Expr {
   readonly key: string;
@@ -272,7 +237,7 @@ export abstract class Expr {
     this.key = k;
     this._cacheAge = [this, this];
   }
-  abstract eval(state: State): ExprResult;
+  abstract eval(state: State, deps: ExprDependencies): ExprResult;
 
   visit(cb: (expr: Expr) => void) {
     cb(this);
@@ -296,15 +261,15 @@ export abstract class ExprContainer extends Expr {
   }
 }
 
-const RESULT_TRUE: ExprResultTrue = { result: true, depItems: [], depEvents: [] };
-const RESULT_FALSE: ExprResultFalse = { result: false, depItems: [], depEvents: [] };
+const RESULT_TRUE: ExprResultTrue = { result: true };
+const RESULT_FALSE: ExprResultFalse = { result: false };
 
 class ExprTrue extends Expr {
   constructor() {
     super('TRUE');
   }
 
-  eval(_state: State): ExprResult {
+  eval(_state: State, deps: ExprDependencies): ExprResult {
     return RESULT_TRUE;
   }
 }
@@ -325,28 +290,33 @@ export class ExprAnd extends ExprContainer {
     super(key, exprs);
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     const results: ExprResult[] = [];
+    const indexItems = deps.items.length;
+    const indexEvents = deps.events.length;
+
     for (const e of this.exprs) {
-      const r = e.eval(state);
+      const r = e.eval(state, deps);
       results.push(r);
 
       /* Early exit */
       if (!r.result) {
-        return { result: false, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents) };
+        return { result: false };
       }
     }
 
     const restrictions = exprRestrictionsAnd(results);
     /* Check for a contradiction (a restriction that prevents everything) */
     if (isRestrictionImpossible(restrictions)) {
-      return { result: false, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents) };
+      return { result: false };
     }
 
     if (isDefaultRestrictions(restrictions)) {
+      deps.items = deps.items.slice(0, indexItems);
+      deps.events = deps.events.slice(0, indexEvents);
       return RESULT_TRUE;
     } else {
-      return { result: true, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents), restrictions };
+      return { result: true, restrictions };
     }
   }
 }
@@ -357,16 +327,21 @@ export class ExprOr extends ExprContainer {
     super(key, exprs);
   }
 
-  eval(state: State) {
+  eval(state: State, deps: ExprDependencies) {
     const results: ExprResult[] = [];
     let result = false;
 
+    const indexItems = deps.items.length;
+    const indexEvents = deps.events.length;
+
     for (const e of this.exprs) {
-      const r = e.eval(state);
+      const r = e.eval(state, deps);
       results.push(r);
       if (r.result) {
         result = true;
         if (!r.restrictions) {
+          deps.items = deps.items.slice(0, indexItems);
+          deps.events = deps.events.slice(0, indexEvents);
           return RESULT_TRUE;
         }
       }
@@ -375,12 +350,14 @@ export class ExprOr extends ExprContainer {
     if (result) {
       const restrictions = exprRestrictionsOr(results);
       if (isDefaultRestrictions(restrictions)) {
+        deps.items = deps.items.slice(0, indexItems);
+        deps.events = deps.events.slice(0, indexEvents);
         return RESULT_TRUE;
       } else {
-        return { result: true, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents), restrictions };
+        return { result: true, restrictions };
       }
     } else {
-      return { result: false, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents) };
+      return { result: false };
     }
   }
 }
@@ -396,7 +373,7 @@ export class ExprAge extends Expr {
     this._cacheAge[age] = EXPR_TRUE;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     return (state.age === this.age) ? RESULT_TRUE : RESULT_FALSE;
   }
 }
@@ -404,99 +381,96 @@ export class ExprAge extends Expr {
 export class ExprHas extends Expr {
   readonly item: Item;
   readonly count: number;
-  private readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item, count: number) {
     const key = `HAS(${item.id},${count})`;
     super(key);
     this.item = item;
     this.count = count;
-    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if (itemCount(state, this.item) >= this.count) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.items.push(this.item);
+      return RESULT_FALSE;
     }
   }
 }
 
 export class ExprRenewable extends Expr {
   readonly item: Item;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item) {
     const key = `RENEWABLE(${item.id})`;
     super(key);
     this.item = item;
-    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if ((state.renewables.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.items.push(this.item);
+      return RESULT_FALSE;
     }
   }
 }
 
 export class ExprLicense extends Expr {
   readonly item: Item;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item) {
     const key = `LICENSE(${item.id})`;
     super(key);
     this.item = item;
-    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if ((state.licenses.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.items.push(this.item);
+      return RESULT_FALSE;
     }
   }
 }
 
 class ExprEvent extends Expr {
   readonly event: string;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(event: string) {
     super(`EVENT(${event})`);
     this.event = event;
-    this.resultFalse = { result: false, depItems: [], depEvents: [event] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if (state.events.has(this.event)) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.events.push(this.event);
+      return RESULT_FALSE;
     }
   }
 }
 
 class ExprMasks extends Expr {
   readonly count: number;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(count: number) {
     super(`MASKS(${count})`);
     this.count = count;
-    this.resultFalse = { result: false, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      for (const item of ItemGroups.MASKS_REGULAR) {
+        deps.items.push(item);
+      }
+      return RESULT_FALSE;
     }
   }
 }
@@ -510,26 +484,35 @@ class ExprSpecial extends Expr {
     this.special = special;
   }
 
-  eval(state: State): ExprResult {
-    return resolveSpecialCond(state.settings, state, this.special);
+  eval(state: State, deps: ExprDependencies): ExprResult {
+    const { items, itemsUnique } = specialCondSets(state.settings, this.special);
+    const { specialConds } = state.settings;
+    const cond = specialConds[this.special as keyof typeof specialConds];
+
+    const countUnique = [...itemsUnique].filter((item) => itemCount(state, item) > 0).length;
+    const result = itemsCount(state, [...items]) + countUnique >= cond.count;
+
+    deps.items = deps.items.concat(...items, ...itemsUnique);
+
+    return { result };
   }
 }
 
 class ExprTimeOot extends Expr {
-  readonly time: 'day' | 'night';
+  readonly flag: number;
+  readonly flagNeg: number;
 
-  constructor(time: 'day' | 'night') {
+  constructor(time: keyof typeof OOT_TIME) {
     super(`TIME-OOT(${time})`);
-    this.time = time;
+    this.flag = OOT_TIME[time];
+    this.flagNeg = OOT_TIME_ALL & ~this.flag;
   }
 
-  eval(state: State): ExprResult {
-    const negation = this.time === 'day' ? 'night' : 'day';
-
-    if (state.areaData.oot[this.time]) {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
+    if (state.areaData.ootTime & this.flag) {
       const restrictions = defaultRestrictions();
-      restrictions.oot[negation] = true;
-      return { result: true, depItems: [], depEvents: [], restrictions };
+      restrictions.ootTime = this.flagNeg;
+      return { result: true, restrictions };
     } else {
       return RESULT_FALSE;
     }
@@ -546,12 +529,12 @@ class ExprTimeMm extends Expr {
     this.value2 = value2;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     if (state.areaData.mmTime & this.value || state.areaData.mmTime2 & this.value2) {
       const restrictions = defaultRestrictions();
       restrictions.mmTime = ~this.value >>> 0;
       restrictions.mmTime2 = ~this.value2 >>> 0;
-      return { result: true, restrictions, depItems: [], depEvents: [] };
+      return { result: true, restrictions };
     } else {
       return RESULT_FALSE;
     }
@@ -568,7 +551,7 @@ class ExprPrice extends Expr {
     this.max = max;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     const price = state.world.prices[this.slot];
     return price <= this.max ? RESULT_TRUE : RESULT_FALSE;
   }
@@ -584,7 +567,7 @@ class ExprSongEvent extends Expr {
     this.cmp = cmp;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     return state.world.songEvents[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
   }
 }
@@ -601,7 +584,7 @@ class ExprFlagOn extends Expr {
     this.result.restrictions.flagsOn = this.flagBit;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     if (state.areaData.flagsOff & this.flagBit) {
       return RESULT_FALSE;
     }
@@ -621,7 +604,7 @@ class ExprFlagOff extends Expr {
     this.result.restrictions.flagsOff = this.flagBit;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     if (state.areaData.flagsOn & this.flagBit) {
       return RESULT_FALSE;
     }
@@ -643,8 +626,9 @@ export const EXPR_TRUE = exprMemo(new ExprTrue());
 export const EXPR_FALSE = exprMemo(new ExprFalse());
 export const EXPR_AGE_CHILD = exprMemo(new ExprAge(AGE_CHILD));
 export const EXPR_AGE_ADULT = exprMemo(new ExprAge(AGE_ADULT));
-export const EXPR_TIME_OOT_DAY = exprMemo(new ExprTimeOot('day'));
-export const EXPR_TIME_OOT_NIGHT = exprMemo(new ExprTimeOot('night'));
+export const EXPR_TIME_OOT_DAY = exprMemo(new ExprTimeOot('DAY'));
+export const EXPR_TIME_OOT_NIGHT = exprMemo(new ExprTimeOot('NIGHT'));
+export const EXPR_TIME_OOT_DUSK = exprMemo(new ExprTimeOot('DUSK'));
 
 export const exprTrue = () => EXPR_TRUE;
 export const exprFalse = () => EXPR_FALSE;
@@ -813,6 +797,8 @@ export const exprOotTime = (time: string): Expr => {
       return EXPR_TIME_OOT_DAY;
     case 'night':
       return EXPR_TIME_OOT_NIGHT;
+    case 'dusk':
+      return EXPR_TIME_OOT_DUSK;
     default:
       throw new Error(`Invalid OoT time: ${time}`);
   }
