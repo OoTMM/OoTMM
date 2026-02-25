@@ -65,19 +65,13 @@ const CONSTRAINT_FLAGS = [
   'MM_REGION_VALLEY_CLEARED',
 ];
 
-export type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
-
-type ExprDependencies = {
+export type ExprDependencies = {
   items: Set<Item>;
   events: Set<string>;
-};
-
-const DEPENDENCIES_EMPTY: ExprDependencies = { items: new Set(), events: new Set() };
+}
 
 type ExprResultFalse = {
   result: false;
-  depItems: RecursiveArray<Item>;
-  depEvents: RecursiveArray<string>;
 };
 
 type ExprRestrictions = {
@@ -134,12 +128,14 @@ function isRestrictionImpossible(r: ExprRestrictions): boolean {
 
 type ExprResultTrue = {
   result: true;
-  depItems: RecursiveArray<Item>;
-  depEvents: RecursiveArray<string>;
   restrictions?: ExprRestrictions;
 };
 
 export type ExprResult = ExprResultFalse | ExprResultTrue;
+export type ExprResultWithDeps = {
+  result: ExprResult;
+  deps: ExprDependencies;
+};
 
 export type AreaData = {
   oot: {
@@ -234,35 +230,8 @@ function specialCondSets(settings: Settings, special: string) {
   return { items, itemsUnique };
 }
 
-function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
-  const { items, itemsUnique } = specialCondSets(settings, special);
-  const { specialConds } = settings;
-  const cond = specialConds[special as keyof typeof specialConds];
-
-  const countUnique = [...itemsUnique].filter((item) => itemCount(state, item) > 0).length;
-  const result = itemsCount(state, [...items]) + countUnique >= cond.count;
-
-  return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
-}
-
 const exprMap = new Map<string, Expr>();
 const exprKeyId = new Map<string, number>();
-
-function mergeDependencies(deps: ExprDependencies[]): ExprDependencies {
-  const items = new Set<Item>();
-  const events = new Set<string>();
-
-  for (const d of deps) {
-    for (const i of d.items) {
-      items.add(i);
-    }
-    for (const e of d.events) {
-      events.add(e);
-    }
-  }
-
-  return { items, events };
-}
 
 export abstract class Expr {
   readonly key: string;
@@ -272,7 +241,7 @@ export abstract class Expr {
     this.key = k;
     this._cacheAge = [this, this];
   }
-  abstract eval(state: State): ExprResult;
+  abstract eval(state: State, deps: ExprDependencies): ExprResult;
 
   visit(cb: (expr: Expr) => void) {
     cb(this);
@@ -296,15 +265,15 @@ export abstract class ExprContainer extends Expr {
   }
 }
 
-const RESULT_TRUE: ExprResultTrue = { result: true, depItems: [], depEvents: [] };
-const RESULT_FALSE: ExprResultFalse = { result: false, depItems: [], depEvents: [] };
+const RESULT_TRUE: ExprResultTrue = { result: true };
+const RESULT_FALSE: ExprResultFalse = { result: false };
 
 class ExprTrue extends Expr {
   constructor() {
     super('TRUE');
   }
 
-  eval(_state: State): ExprResult {
+  eval(_state: State, deps: ExprDependencies): ExprResult {
     return RESULT_TRUE;
   }
 }
@@ -325,28 +294,28 @@ export class ExprAnd extends ExprContainer {
     super(key, exprs);
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     const results: ExprResult[] = [];
     for (const e of this.exprs) {
-      const r = e.eval(state);
+      const r = e.eval(state, deps);
       results.push(r);
 
       /* Early exit */
       if (!r.result) {
-        return { result: false, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents) };
+        return { result: false };
       }
     }
 
     const restrictions = exprRestrictionsAnd(results);
     /* Check for a contradiction (a restriction that prevents everything) */
     if (isRestrictionImpossible(restrictions)) {
-      return { result: false, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents) };
+      return { result: false };
     }
 
     if (isDefaultRestrictions(restrictions)) {
       return RESULT_TRUE;
     } else {
-      return { result: true, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents), restrictions };
+      return { result: true, restrictions };
     }
   }
 }
@@ -357,16 +326,30 @@ export class ExprOr extends ExprContainer {
     super(key, exprs);
   }
 
-  eval(state: State) {
+  eval(state: State, deps: ExprDependencies) {
     const results: ExprResult[] = [];
     let result = false;
 
+    const oldDepsItems = new Set(deps.items);
+    const oldDepsEvents = new Set(deps.events);
+
+    //const oldDeps = {
+    //  items: new Set(deps.items),
+    //  events: new Set(deps.events),
+    //};
+
     for (const e of this.exprs) {
-      const r = e.eval(state);
+      const r = e.eval(state, deps);
       results.push(r);
       if (r.result) {
         result = true;
         if (!r.restrictions) {
+          //deps.items = oldDepsItems;
+          //deps.events = oldDepsEvents;
+          //deps.items = oldDeps.items;
+          //deps.events = oldDeps.events;
+          //deps.items.clear();
+          //deps.events.clear();
           return RESULT_TRUE;
         }
       }
@@ -375,12 +358,16 @@ export class ExprOr extends ExprContainer {
     if (result) {
       const restrictions = exprRestrictionsOr(results);
       if (isDefaultRestrictions(restrictions)) {
+        //deps.items = oldDeps.items;
+        //deps.events = oldDeps.events;
+        //deps.items.clear();
+        //deps.events.clear();
         return RESULT_TRUE;
       } else {
-        return { result: true, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents), restrictions };
+        return { result: true, restrictions };
       }
     } else {
-      return { result: false, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents) };
+      return { result: false };
     }
   }
 }
@@ -396,7 +383,7 @@ export class ExprAge extends Expr {
     this._cacheAge[age] = EXPR_TRUE;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     return (state.age === this.age) ? RESULT_TRUE : RESULT_FALSE;
   }
 }
@@ -404,99 +391,96 @@ export class ExprAge extends Expr {
 export class ExprHas extends Expr {
   readonly item: Item;
   readonly count: number;
-  private readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item, count: number) {
     const key = `HAS(${item.id},${count})`;
     super(key);
     this.item = item;
     this.count = count;
-    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if (itemCount(state, this.item) >= this.count) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.items.add(this.item);
+      return RESULT_FALSE;
     }
   }
 }
 
 export class ExprRenewable extends Expr {
   readonly item: Item;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item) {
     const key = `RENEWABLE(${item.id})`;
     super(key);
     this.item = item;
-    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if ((state.renewables.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.items.add(this.item);
+      return RESULT_FALSE;
     }
   }
 }
 
 export class ExprLicense extends Expr {
   readonly item: Item;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item) {
     const key = `LICENSE(${item.id})`;
     super(key);
     this.item = item;
-    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if ((state.licenses.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.items.add(this.item);
+      return RESULT_FALSE;
     }
   }
 }
 
 class ExprEvent extends Expr {
   readonly event: string;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(event: string) {
     super(`EVENT(${event})`);
     this.event = event;
-    this.resultFalse = { result: false, depItems: [], depEvents: [event] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if (state.events.has(this.event)) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      deps.events.add(this.event);
+      return RESULT_FALSE;
     }
   }
 }
 
 class ExprMasks extends Expr {
   readonly count: number;
-  readonly resultFalse: ExprResultFalse;
 
   constructor(count: number) {
     super(`MASKS(${count})`);
     this.count = count;
-    this.resultFalse = { result: false, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, deps: ExprDependencies): ExprResult {
     if (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count) {
       return RESULT_TRUE;
     } else {
-      return this.resultFalse;
+      for (const item of ItemGroups.MASKS_REGULAR) {
+        deps.items.add(item);
+      }
+      return RESULT_FALSE;
     }
   }
 }
@@ -510,8 +494,18 @@ class ExprSpecial extends Expr {
     this.special = special;
   }
 
-  eval(state: State): ExprResult {
-    return resolveSpecialCond(state.settings, state, this.special);
+  eval(state: State, deps: ExprDependencies): ExprResult {
+    const { items, itemsUnique } = specialCondSets(state.settings, this.special);
+    const { specialConds } = state.settings;
+    const cond = specialConds[this.special as keyof typeof specialConds];
+
+    const countUnique = [...itemsUnique].filter((item) => itemCount(state, item) > 0).length;
+    const result = itemsCount(state, [...items]) + countUnique >= cond.count;
+
+    deps.items = deps.items.union(items);
+    deps.items = deps.items.union(itemsUnique);
+
+    return { result };
   }
 }
 
@@ -523,13 +517,13 @@ class ExprTimeOot extends Expr {
     this.time = time;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     const negation = this.time === 'day' ? 'night' : 'day';
 
     if (state.areaData.oot[this.time]) {
       const restrictions = defaultRestrictions();
       restrictions.oot[negation] = true;
-      return { result: true, depItems: [], depEvents: [], restrictions };
+      return { result: true, restrictions };
     } else {
       return RESULT_FALSE;
     }
@@ -546,12 +540,12 @@ class ExprTimeMm extends Expr {
     this.value2 = value2;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     if (state.areaData.mmTime & this.value || state.areaData.mmTime2 & this.value2) {
       const restrictions = defaultRestrictions();
       restrictions.mmTime = ~this.value >>> 0;
       restrictions.mmTime2 = ~this.value2 >>> 0;
-      return { result: true, restrictions, depItems: [], depEvents: [] };
+      return { result: true, restrictions };
     } else {
       return RESULT_FALSE;
     }
@@ -568,7 +562,7 @@ class ExprPrice extends Expr {
     this.max = max;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     const price = state.world.prices[this.slot];
     return price <= this.max ? RESULT_TRUE : RESULT_FALSE;
   }
@@ -584,7 +578,7 @@ class ExprSongEvent extends Expr {
     this.cmp = cmp;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     return state.world.songEvents[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
   }
 }
@@ -601,7 +595,7 @@ class ExprFlagOn extends Expr {
     this.result.restrictions.flagsOn = this.flagBit;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     if (state.areaData.flagsOff & this.flagBit) {
       return RESULT_FALSE;
     }
@@ -621,7 +615,7 @@ class ExprFlagOff extends Expr {
     this.result.restrictions.flagsOff = this.flagBit;
   }
 
-  eval(state: State): ExprResult {
+  eval(state: State, _deps: ExprDependencies): ExprResult {
     if (state.areaData.flagsOn & this.flagBit) {
       return RESULT_FALSE;
     }
