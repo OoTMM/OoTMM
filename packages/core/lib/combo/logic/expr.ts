@@ -65,6 +65,14 @@ const CONSTRAINT_FLAGS = [
   'MM_REGION_VALLEY_CLEARED',
 ];
 
+export const OOT_TIME = {
+  DAY:    (1 << 0),
+  NIGHT:  (1 << 1),
+  DUSK:   (1 << 2),
+};
+
+export const OOT_TIME_ALL = OOT_TIME.DAY | OOT_TIME.NIGHT | OOT_TIME.DUSK;
+
 export type ExprDependencies = {
   items: Item[];
   events: string[];
@@ -75,10 +83,7 @@ type ExprResultFalse = {
 };
 
 type ExprRestrictions = {
-  oot: {
-    day: boolean;
-    night: boolean;
-  };
+  ootTime: number;
   mmTime: number;
   mmTime2: number;
   flagsOn: number;
@@ -86,10 +91,7 @@ type ExprRestrictions = {
 };
 
 export const defaultRestrictions = (): ExprRestrictions => ({
-  oot: {
-    day: false,
-    night: false,
-  },
+  ootTime: 0,
   mmTime: 0,
   mmTime2: 0,
   flagsOn: 0,
@@ -97,10 +99,7 @@ export const defaultRestrictions = (): ExprRestrictions => ({
 });
 
 export const maxRestrictions = (): ExprRestrictions => ({
-  oot: {
-    day: true,
-    night: true,
-  },
+  ootTime: OOT_TIME_ALL,
   mmTime: 0xffffffff,
   mmTime2: 0xffffffff,
   flagsOn: 0xffffffff,
@@ -108,8 +107,7 @@ export const maxRestrictions = (): ExprRestrictions => ({
 });
 
 export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
-  return r.oot.day === false &&
-    r.oot.night === false &&
+  return r.ootTime === 0 &&
     r.mmTime === 0 &&
     r.mmTime2 === 0 &&
     r.flagsOn === 0 &&
@@ -117,6 +115,9 @@ export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
 };
 
 function isRestrictionImpossible(r: ExprRestrictions): boolean {
+  if (r.ootTime === OOT_TIME_ALL) {
+    return true;
+  }
   if (r.mmTime === 0xffffffff && r.mmTime2 === 0xffffffff) {
     return true;
   }
@@ -138,10 +139,7 @@ export type ExprResultWithDeps = {
 };
 
 export type AreaData = {
-  oot: {
-    day: boolean;
-    night: boolean;
-  };
+  ootTime: number;
   mmTime: number;
   mmTime2: number;
   flagsOn: number;
@@ -167,8 +165,7 @@ export const exprRestrictionsAnd = (exprs: ExprResult[]): ExprRestrictions => {
   for (const expr of exprs) {
     if (!expr.result) continue;
     if (!expr.restrictions) continue;
-    restrictions.oot.day = restrictions.oot.day || expr.restrictions.oot.day;
-    restrictions.oot.night = restrictions.oot.night || expr.restrictions.oot.night;
+    restrictions.ootTime = (restrictions.ootTime | expr.restrictions.ootTime) >>> 0;
     restrictions.mmTime = (restrictions.mmTime | expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 | expr.restrictions.mmTime2) >>> 0;
     restrictions.flagsOn = (restrictions.flagsOn | expr.restrictions.flagsOn) >>> 0;
@@ -184,8 +181,7 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
   for (const expr of exprs) {
     if (!expr.result) continue;
     if (!expr.restrictions) return defaultRestrictions();
-    restrictions.oot.day = restrictions.oot.day && expr.restrictions.oot.day;
-    restrictions.oot.night = restrictions.oot.night && expr.restrictions.oot.night;
+    restrictions.ootTime = (restrictions.ootTime & expr.restrictions.ootTime) >>> 0;
     restrictions.mmTime = (restrictions.mmTime & expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 & expr.restrictions.mmTime2) >>> 0;
     restrictions.flagsOn = (restrictions.flagsOn & expr.restrictions.flagsOn) >>> 0;
@@ -503,19 +499,19 @@ class ExprSpecial extends Expr {
 }
 
 class ExprTimeOot extends Expr {
-  readonly time: 'day' | 'night';
+  readonly flag: number;
+  readonly flagNeg: number;
 
-  constructor(time: 'day' | 'night') {
+  constructor(time: keyof typeof OOT_TIME) {
     super(`TIME-OOT(${time})`);
-    this.time = time;
+    this.flag = OOT_TIME[time];
+    this.flagNeg = OOT_TIME_ALL & ~this.flag;
   }
 
   eval(state: State, _deps: ExprDependencies): ExprResult {
-    const negation = this.time === 'day' ? 'night' : 'day';
-
-    if (state.areaData.oot[this.time]) {
+    if (state.areaData.ootTime & this.flag) {
       const restrictions = defaultRestrictions();
-      restrictions.oot[negation] = true;
+      restrictions.ootTime = this.flagNeg;
       return { result: true, restrictions };
     } else {
       return RESULT_FALSE;
@@ -630,8 +626,9 @@ export const EXPR_TRUE = exprMemo(new ExprTrue());
 export const EXPR_FALSE = exprMemo(new ExprFalse());
 export const EXPR_AGE_CHILD = exprMemo(new ExprAge(AGE_CHILD));
 export const EXPR_AGE_ADULT = exprMemo(new ExprAge(AGE_ADULT));
-export const EXPR_TIME_OOT_DAY = exprMemo(new ExprTimeOot('day'));
-export const EXPR_TIME_OOT_NIGHT = exprMemo(new ExprTimeOot('night'));
+export const EXPR_TIME_OOT_DAY = exprMemo(new ExprTimeOot('DAY'));
+export const EXPR_TIME_OOT_NIGHT = exprMemo(new ExprTimeOot('NIGHT'));
+export const EXPR_TIME_OOT_DUSK = exprMemo(new ExprTimeOot('DUSK'));
 
 export const exprTrue = () => EXPR_TRUE;
 export const exprFalse = () => EXPR_FALSE;
@@ -800,6 +797,8 @@ export const exprOotTime = (time: string): Expr => {
       return EXPR_TIME_OOT_DAY;
     case 'night':
       return EXPR_TIME_OOT_NIGHT;
+    case 'dusk':
+      return EXPR_TIME_OOT_DUSK;
     default:
       throw new Error(`Invalid OoT time: ${time}`);
   }

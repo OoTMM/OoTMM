@@ -1,7 +1,7 @@
 import { cloneDeep } from 'lodash';
 
 import { Settings } from '../settings';
-import { AreaData, Expr, ExprDependencies, ExprResult, ExprResultWithDeps, MM_TIME_SLICES, isDefaultRestrictions } from './expr';
+import { AreaData, Expr, ExprDependencies, ExprResult, ExprResultWithDeps, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
 import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
@@ -142,10 +142,7 @@ const defaultState = (startingItems: PlayerItems, worldCount: number): Pathfinde
 };
 
 const defaultAreaData = (): AreaData => ({
-  oot: {
-    day: false,
-    night: false,
-  },
+  ootTime: 0,
   mmTime: 0,
   mmTime2: 0,
   flagsOn: 0,
@@ -153,10 +150,7 @@ const defaultAreaData = (): AreaData => ({
 });
 
 const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
-  oot: {
-    day: a.oot.day || b.oot.day,
-    night: a.oot.night || b.oot.night,
-  },
+  ootTime: (a.ootTime | b.ootTime) >>> 0,
   mmTime: (a.mmTime | b.mmTime) >>> 0,
   mmTime2: (a.mmTime2 | b.mmTime2) >>> 0,
   flagsOn: (a.flagsOn & b.flagsOn) >>> 0,
@@ -164,8 +158,7 @@ const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
 });
 
 const coveringAreaData = (a: AreaData, b: AreaData): boolean => {
-  if (!a.oot.day && b.oot.day) return false;
-  if (!a.oot.night && b.oot.night) return false;
+  if (((a.ootTime | b.ootTime) >>> 0) !== a.ootTime) return false;
   if (((a.mmTime | b.mmTime) >>> 0) !== a.mmTime) return false;
   if (((a.mmTime2 | b.mmTime2) >>> 0) !== a.mmTime2) return false;
   if (((a.flagsOn & b.flagsOn) >>> 0) !== a.flagsOn) return false;
@@ -174,10 +167,7 @@ const coveringAreaData = (a: AreaData, b: AreaData): boolean => {
 }
 
 const cloneAreaData = (a: AreaData): AreaData => ({
-  oot: {
-    day: a.oot.day,
-    night: a.oot.night,
-  },
+  ootTime: a.ootTime,
   mmTime: a.mmTime,
   mmTime2: a.mmTime2,
   flagsOn: a.flagsOn,
@@ -277,11 +267,16 @@ export class Pathfinder {
     const worldArea = world.areas[area];
 
     if (worldArea.game === 'oot') {
-      if (['day', 'flow'].includes(worldArea.time)) {
-        newAreaData.oot.day = true;
-      }
-      if (['night', 'flow'].includes(worldArea.time)) {
-        newAreaData.oot.night = true;
+      switch (worldArea.time) {
+      case 'day':
+        newAreaData.ootTime |= OOT_TIME.DAY;
+        break;
+      case 'night':
+        newAreaData.ootTime |= OOT_TIME.NIGHT;
+        break;
+      case 'flow':
+        newAreaData.ootTime |= OOT_TIME_ALL;
+        break;
       }
     } else {
       /* MM: Expand the time range */
@@ -581,8 +576,9 @@ export class Pathfinder {
       const areaData = cloneAreaData(as.areas.get(area)!);
       const r = exprResult.result.restrictions;
       if (r) {
-        if (r.oot.day) areaData.oot.day = false;
-        if (r.oot.night) areaData.oot.night = false;
+        if (r.ootTime) {
+          areaData.ootTime = (areaData.ootTime & ~(r.ootTime)) >>> 0;
+        }
         if (r.mmTime) {
           areaData.mmTime = (areaData.mmTime & ~(r.mmTime)) >>> 0;
         }

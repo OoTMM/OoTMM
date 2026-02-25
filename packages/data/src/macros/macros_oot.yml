@@ -3,7 +3,7 @@
 "is_adult": "age(adult)"
 "is_day": "oot_time(day) || can_play_sun || can_play_double_time"
 "is_night": "oot_time(night) || can_play_sun || can_play_double_time"
-"is_dusk": "(oot_time(day) && oot_time(night)) || can_play_double_time" # If day and night can be true at the same time, then you have access to a local time-flow zone
+"is_dusk": "oot_time(dusk) || can_play_sun || can_play_double_time"
 "time_travel_at_will": "!setting(ageChange, none) && event(TIME_TRAVEL_AT_WILL)"
 
 # Spells
