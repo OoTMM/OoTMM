@@ -66,8 +66,8 @@ const CONSTRAINT_FLAGS = [
 ];
 
 export type ExprDependencies = {
-  items: Set<Item>;
-  events: Set<string>;
+  items: Item[];
+  events: string[];
 }
 
 type ExprResultFalse = {
@@ -296,6 +296,9 @@ export class ExprAnd extends ExprContainer {
 
   eval(state: State, deps: ExprDependencies): ExprResult {
     const results: ExprResult[] = [];
+    const indexItems = deps.items.length;
+    const indexEvents = deps.events.length;
+
     for (const e of this.exprs) {
       const r = e.eval(state, deps);
       results.push(r);
@@ -313,6 +316,8 @@ export class ExprAnd extends ExprContainer {
     }
 
     if (isDefaultRestrictions(restrictions)) {
+      deps.items = deps.items.slice(0, indexItems);
+      deps.events = deps.events.slice(0, indexEvents);
       return RESULT_TRUE;
     } else {
       return { result: true, restrictions };
@@ -330,13 +335,8 @@ export class ExprOr extends ExprContainer {
     const results: ExprResult[] = [];
     let result = false;
 
-    const oldDepsItems = new Set(deps.items);
-    const oldDepsEvents = new Set(deps.events);
-
-    //const oldDeps = {
-    //  items: new Set(deps.items),
-    //  events: new Set(deps.events),
-    //};
+    const indexItems = deps.items.length;
+    const indexEvents = deps.events.length;
 
     for (const e of this.exprs) {
       const r = e.eval(state, deps);
@@ -344,12 +344,8 @@ export class ExprOr extends ExprContainer {
       if (r.result) {
         result = true;
         if (!r.restrictions) {
-          //deps.items = oldDepsItems;
-          //deps.events = oldDepsEvents;
-          //deps.items = oldDeps.items;
-          //deps.events = oldDeps.events;
-          //deps.items.clear();
-          //deps.events.clear();
+          deps.items = deps.items.slice(0, indexItems);
+          deps.events = deps.events.slice(0, indexEvents);
           return RESULT_TRUE;
         }
       }
@@ -358,10 +354,8 @@ export class ExprOr extends ExprContainer {
     if (result) {
       const restrictions = exprRestrictionsOr(results);
       if (isDefaultRestrictions(restrictions)) {
-        //deps.items = oldDeps.items;
-        //deps.events = oldDeps.events;
-        //deps.items.clear();
-        //deps.events.clear();
+        deps.items = deps.items.slice(0, indexItems);
+        deps.events = deps.events.slice(0, indexEvents);
         return RESULT_TRUE;
       } else {
         return { result: true, restrictions };
@@ -403,7 +397,7 @@ export class ExprHas extends Expr {
     if (itemCount(state, this.item) >= this.count) {
       return RESULT_TRUE;
     } else {
-      deps.items.add(this.item);
+      deps.items.push(this.item);
       return RESULT_FALSE;
     }
   }
@@ -422,7 +416,7 @@ export class ExprRenewable extends Expr {
     if ((state.renewables.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
-      deps.items.add(this.item);
+      deps.items.push(this.item);
       return RESULT_FALSE;
     }
   }
@@ -441,7 +435,7 @@ export class ExprLicense extends Expr {
     if ((state.licenses.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
-      deps.items.add(this.item);
+      deps.items.push(this.item);
       return RESULT_FALSE;
     }
   }
@@ -459,7 +453,7 @@ class ExprEvent extends Expr {
     if (state.events.has(this.event)) {
       return RESULT_TRUE;
     } else {
-      deps.events.add(this.event);
+      deps.events.push(this.event);
       return RESULT_FALSE;
     }
   }
@@ -478,7 +472,7 @@ class ExprMasks extends Expr {
       return RESULT_TRUE;
     } else {
       for (const item of ItemGroups.MASKS_REGULAR) {
-        deps.items.add(item);
+        deps.items.push(item);
       }
       return RESULT_FALSE;
     }
@@ -502,8 +496,7 @@ class ExprSpecial extends Expr {
     const countUnique = [...itemsUnique].filter((item) => itemCount(state, item) > 0).length;
     const result = itemsCount(state, [...items]) + countUnique >= cond.count;
 
-    deps.items = deps.items.union(items);
-    deps.items = deps.items.union(itemsUnique);
+    deps.items = deps.items.concat(...items, ...itemsUnique);
 
     return { result };
   }

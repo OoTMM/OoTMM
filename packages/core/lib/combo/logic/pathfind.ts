@@ -390,8 +390,8 @@ export class Pathfinder {
 
     expr = exprPartialEvalAge(expr, age);
     const deps: ExprDependencies = {
-      items: new Set(),
-      events: new Set(),
+      items: [],
+      events: [],
     }
     const result = expr.eval(state, deps);
     return { result, deps };
@@ -413,7 +413,7 @@ export class Pathfinder {
     return data2;
   }
 
-  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: Set<T>) {
+  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: T[]) {
     for (const dep of dependents) {
       const data = this.dependenciesLookup(set, dep, area);
       data[type].add(id);
