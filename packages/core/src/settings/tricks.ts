@@ -1,4 +1,4 @@
-import { Game } from '../config';
+import { Game } from '../defines';
 
 /*
  * Each trick should have a user friendly name, a tooltip to explain the trick's function within the logic,

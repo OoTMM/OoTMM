@@ -1,7 +1,8 @@
 import { sortBy } from 'lodash';
+import { SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
+import { ENTRANCES } from '@ootmm/data';
 
 import { Options } from '../options';
-import { SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
@@ -14,8 +15,6 @@ import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
 import { PlayerItem, PlayerItems } from '../items';
-import { exportSettings } from '../settings/string';
-import { ENTRANCES } from '@ootmm/data';
 import { LogWriter } from '../util/log-writer';
 import { BOSS_METADATA_BY_DUNGEON } from './boss';
 import { DUNGEONS_BY_KEY } from './dungeons';

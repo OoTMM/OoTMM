@@ -1,3 +1,4 @@
+import { applyRandomSettings } from './random-settings';
 import { codegen } from './codegen';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
@@ -8,7 +9,6 @@ import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
-import { applyRandomSettings } from './settings/random';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = (env !== 'production');

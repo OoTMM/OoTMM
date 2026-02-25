@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
+import { Settings } from '@ootmm/core';
 
-import { Settings } from '../settings';
 import { AreaData, Expr, ExprDependencies, ExprResult, ExprResultWithDeps, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
 import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';

@@ -1,16 +1,16 @@
-import { Random, sample, shuffle } from '../random';
+import { Settings, Random, sample, shuffle } from '@ootmm/core';
+
 import { countMapAdd, countMapArray, countMapCombine, countMapRemove } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World, cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
 import { ItemProperties } from './item-properties';
 import { isDungeonReward } from '../items/helpers';
-import { mustStartWithMasterSword } from '../settings/util';
+import { mustStartWithMasterSword } from './master-sword';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,

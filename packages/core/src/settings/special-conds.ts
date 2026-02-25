@@ -2,12 +2,6 @@ import type { Settings } from './type';
 
 type SettingCond = (s: Settings) => boolean;
 
-type SpecialCondField = {
-  name: string;
-  cond?: SettingCond;
-  max: Number | ((s: Settings) => Number);
-};
-
 export const SPECIAL_CONDS_FIELDS = {
   stones:           { name: "Spiritual Stones", max: 3 },
   medallions:       { name: "Medallions", max: 6 },

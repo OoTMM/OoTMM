@@ -1,5 +1,5 @@
-import { Random } from '../random';
-import { Settings } from '../settings';
+import { Random, Settings } from '@ootmm/core';
+
 import { cloneWorld, World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';

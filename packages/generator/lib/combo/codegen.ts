@@ -1,12 +1,12 @@
 import path from 'path';
 import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
+import { SETTINGS } from '@ootmm/core';
 
 import { DRAWGI, GI } from './data';
 import { Monitor } from './monitor';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
 import { PRICE_RANGES } from './logic/price';
-import { SETTINGS } from './settings';
 import { CodeGen } from './util/codegen';
 import { COSMETICS } from './cosmetics';
 
@@ -172,7 +172,7 @@ async function genEntrances() {
 }
 
 async function genDefaultConfig() {
-  const defaultConfig = new CodeGen(path.resolve('config_default.yml'));
+  const defaultConfig = new CodeGen(path.resolve('../../config_default.yml'));
   defaultConfig.raw('settings:');
   for (const setting of SETTINGS) {
     defaultConfig.raw(`  ${setting.key}: ${setting.default}`);

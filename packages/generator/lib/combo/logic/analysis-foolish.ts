@@ -1,8 +1,8 @@
-import { Settings } from '../settings';
-import { Location, isLocationRenewable, locationData, makeLocation, makePlayerLocations } from './locations';
+import { Random, sample, Settings } from '@ootmm/core';
+
+import { Location, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
-import { Random, sample } from '../random';
 import { Analysis } from './analysis';
 import { Monitor } from '../monitor';
 import { ItemPlacement } from './solve';

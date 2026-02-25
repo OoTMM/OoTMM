@@ -1,11 +1,11 @@
+import path from 'path';
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
+import { Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
 
 import { LogicResult } from '../logic';
 import { isEntranceShuffle } from '../logic/helpers';
 import { GI, DATA_HINTS_POOL } from '../data';
-import { Game } from '../config';
 import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
-import { SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
@@ -16,13 +16,11 @@ import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
 import { SharedItemGroups } from '../logic/shared';
 import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
-import { mustStartWithMasterSword } from '../settings/util';
+import { mustStartWithMasterSword } from '../logic/master-sword';
 import { DUNGEON_ENTRANCES } from '../logic/entrance';
-import path from 'path';
 import { END_BOSS_METADATA } from '../logic/boss';
 import { PATH_EVENT_DATA } from '../logic/analysis-path';
 import { DUNGEONS, DUNGEONS_BY_KEY } from '../logic/dungeons';
-import { Random, sample } from '../random';
 import { Options } from '../options';
 
 const DUNGEON_REWARD_LOCATIONS = [

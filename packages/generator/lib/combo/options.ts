@@ -1,7 +1,7 @@
-import { makeSettings, Settings } from './settings';
-import { randString } from './random';
+import { makeSettings, Settings, randString } from '@ootmm/core';
+
 import { Cosmetics, makeCosmetics } from './cosmetics';
-import { makeRandomSettings, OptionRandomSettings } from './settings/random';
+import { makeRandomSettings, OptionRandomSettings } from './random-settings';
 
 export type Options = {
   mode: 'create' | 'random' | 'patch';

@@ -1,4 +1,4 @@
-import { bufReadU16BE, bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from "./util/buffer";
+import { bufReadU16BE, bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from './util/buffer';
 
 type ImageFormat = 'rgba32' | 'rgba16' | 'ia8';
 

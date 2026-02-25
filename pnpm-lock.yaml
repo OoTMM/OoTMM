@@ -67,7 +67,18 @@ importers:
         specifier: ^2.8.2
         version: 2.8.2
 
-  packages/core: {}
+  packages/core:
+    dependencies:
+      '@ootmm/data':
+        specifier: '*'
+        version: link:../data
+      uint8array-extras:
+        specifier: ^1.5.0
+        version: 1.5.0
+    devDependencies:
+      type-fest:
+        specifier: ^5.4.4
+        version: 5.4.4
 
   packages/data:
     devDependencies:
@@ -77,6 +88,9 @@ importers:
 
   packages/generator:
     dependencies:
+      '@ootmm/core':
+        specifier: '*'
+        version: link:../core
       '@ootmm/data':
         specifier: '*'
         version: link:../data

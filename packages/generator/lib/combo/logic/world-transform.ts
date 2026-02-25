@@ -1,10 +1,9 @@
 import { POOL } from '@ootmm/data';
+import { Settings, sample, Random, randomInt } from '@ootmm/core';
 
 import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { ItemID } from '../items/defs';
 import { Monitor } from '../monitor';
-import { sample, Random, randomInt } from '../random';
-import { Settings } from '../settings';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
 import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';
@@ -12,7 +11,7 @@ import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World, WorldCheckType } from './world';
 import { ItemProperties } from './item-properties';
 import { CLOCKS } from '../items/groups';
-import { mustStartWithMasterSword } from '../settings/util';
+import { mustStartWithMasterSword } from './master-sword';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
 import { TRAP_AMOUNTS } from './traps';
 

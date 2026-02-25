@@ -1,9 +1,8 @@
 import fs from 'fs';
+import { Game, GAMES, Random, randString, sample } from '@ootmm/core';
 
-import { Game, GAMES } from '../config';
 import { recolorImage } from '../image';
 import { Options } from '../options';
-import { Random, randString, sample } from '../random';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
 import { COLORS, ColorArg } from './color';

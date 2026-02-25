@@ -1,5 +1,6 @@
+import { Random } from '@ootmm/core';
+
 import { Monitor } from '../monitor';
-import { Random } from '../random';
 
 const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 

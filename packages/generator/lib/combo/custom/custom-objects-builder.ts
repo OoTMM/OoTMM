@@ -1,6 +1,6 @@
 import { FILES } from '@ootmm/data';
+import { Game } from '@ootmm/core';
 
-import { Game } from '../config';
 import { DecompressedRoms } from '../decompress';
 import { DmaData } from '../dma';
 import { arrayToIndexMap } from '../util';

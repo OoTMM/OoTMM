@@ -1,6 +1,6 @@
+import { Game } from '@ootmm/core';
 
-import { Options } from '../options';
-import { Game, CONFIG } from '../config';
+import { CONFIG } from '../config';
 import { Patchfile } from './patchfile';
 import { Addresses, FileAddress, GameAddresses } from '../addresses';
 import { PATCH_GROUP_VALUES, PatchGroup } from './group';
@@ -9,7 +9,6 @@ import { bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 export class Patcher {
   private ranges: [number, number][];
   private files: Set<string>;
-  private opts: Options;
   private game: Game;
   private rom: Uint8Array;
   private patches: Uint8Array;
@@ -20,10 +19,9 @@ export class Patcher {
   private patchGroups: Set<number>;
   private enabled: boolean;
 
-  constructor(opts: Options, game: Game, rom: Uint8Array, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Uint8Array, patchfile: Patchfile) {
+  constructor(game: Game, rom: Uint8Array, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Uint8Array, patchfile: Patchfile) {
     this.ranges = [];
     this.files = new Set;
-    this.opts = opts;
     this.game = game;
     this.rom = rom;
     this.patchGroups = new Set(patchGroups.map(x => PATCH_GROUP_VALUES[x]));

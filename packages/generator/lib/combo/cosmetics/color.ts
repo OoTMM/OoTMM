@@ -1,8 +1,3 @@
-type CosmeticColor = {
-  name: string;
-  value: number;
-};
-
 export const COLORS = {
   /* Game colors */
   "kokirigreen":  { name: "Kokiri Green", value: 0x1e691b },

@@ -1,7 +1,7 @@
 import fs from 'fs';
+import { Game } from '@ootmm/core';
 
-import { Game } from './config';
-import { bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU32LE, bufWriteU8 } from './util/buffer';
+import { bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU32LE } from './util/buffer';
 
 export type Optional<T> = T extends {} ? {[K in keyof T]?: T[K]} : T | undefined;
 

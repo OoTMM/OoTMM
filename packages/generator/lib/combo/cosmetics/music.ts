@@ -1,8 +1,7 @@
 import JSZip from 'jszip';
+import { Game, Random, sample, shuffle } from '@ootmm/core';
 
-import { Random, sample, shuffle } from '../random';
 import { toU32Buffer } from '../util';
-import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
 import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';

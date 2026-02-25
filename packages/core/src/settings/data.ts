@@ -1,4 +1,4 @@
-import { Game } from '../config';
+import { Game } from '../defines';
 
 function hasGame(x: any, g: Game) {
   return x.games === g || x.games === 'ootmm';

@@ -1,8 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import { FILES } from '@ootmm/data';
+import { Game } from '@ootmm/core';
 
-import { Game } from '../config';
 import { DmaData } from '../dma';
 import { arrayToIndexMap, toU32Buffer } from '../util';
 import { CodeGen } from '../util/codegen';
@@ -12,7 +12,6 @@ import { KeepFile } from './keep';
 import { png } from '../util/png';
 import { font } from './font';
 import { raw } from './raw';
-import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { grayscale } from '../image';
 import { CustomObjectsBuilder } from './custom-objects-builder';

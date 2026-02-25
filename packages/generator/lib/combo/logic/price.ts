@@ -1,5 +1,5 @@
-import { Random, randomInt } from '../random';
-import { Settings } from '../settings';
+import { Settings, Random, randomInt } from '@ootmm/core';
+
 import { ResolvedWorldFlags, World } from './world';
 
 const OOT_SHOP_KOKIRI = [ 10, 20, 60, 30, 15, 30, 10, 40 ];

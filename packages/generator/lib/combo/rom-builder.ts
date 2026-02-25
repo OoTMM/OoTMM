@@ -1,5 +1,7 @@
+import { Game } from '@ootmm/core';
+
 import { compressFile } from './compress';
-import { CONFIG, Game } from './config';
+import { CONFIG } from './config';
 import { DmaData, DmaDataRecord } from './dma';
 import { bufReadU32BE, bufWriteU32BE } from './util/buffer';
 

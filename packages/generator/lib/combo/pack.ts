@@ -1,6 +1,7 @@
 import { FILES } from '@ootmm/data';
+import { GAMES, Game } from '@ootmm/core';
 
-import { CONFIG, GAMES, Game } from './config';
+import { CONFIG } from './config';
 import { cosmetics } from './cosmetics';
 import { DecompressedRoms } from './decompress';
 import { DmaData } from './dma';

@@ -1,9 +1,10 @@
+import { GAMES, Settings } from '@ootmm/core';
+
+import { CONFIG } from '../config';
 import { GameAddresses } from '../addresses';
-import { CONFIG, GAMES } from '../config';
 import { DecompressedRoms } from '../decompress';
 import { LogicResult } from '../logic';
 import { Monitor } from '../monitor';
-import { Settings } from '../settings';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from './randomizer';
@@ -114,7 +115,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       /* Apply ASM patches */
       const rom = args.roms[game].rom;
       const patches = await fileResolver.fetch(`${game}_patch.bin`);
-      const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, patches, p);
+      const patcher = new Patcher(game, rom, groups, args.addresses, patches, p);
       const { files } = patcher.run();
       for (const f of files) {
         patchedFiles.add(f);

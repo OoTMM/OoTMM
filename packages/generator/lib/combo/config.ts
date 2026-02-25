@@ -1,6 +1,3 @@
-export const GAMES = ['oot', 'mm'] as const;
-export type Game = typeof GAMES[number];
-
 export const CUSTOM_ADDR = 0x03f80000;
 
 type GameConfig = {

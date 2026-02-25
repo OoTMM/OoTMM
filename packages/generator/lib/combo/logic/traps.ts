@@ -1,4 +1,4 @@
-import { Settings } from '../settings';
+import { Settings } from '@ootmm/core';
 
 export const TRAP_AMOUNTS: Record<Settings['trapsQuantity'], number> = {
   small: 5,

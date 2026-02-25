@@ -1,5 +1,6 @@
+import { Settings } from '@ootmm/core';
+
 import { Item, ItemGroups } from '../items';
-import { Settings } from '../settings';
 
 export type ItemProperties = {
   junk: Set<Item>;

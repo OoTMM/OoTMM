@@ -1,4 +1,5 @@
-import { Random } from '../random';
+import { Random } from '@ootmm/core';
+
 import { LogicPassSolver } from './solve';
 import { LogicPassWorld } from './world';
 import { LogicPassSpoiler } from './spoiler';

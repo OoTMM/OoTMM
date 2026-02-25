@@ -1,7 +1,8 @@
 import { Entrance } from '@ootmm/data';
+import type { PartialDeep } from 'type-fest';
+
 import { TrickKey } from './tricks';
 import { Settings } from './type';
-import { PartialDeep } from 'type-fest';
 
 type SettingsArrayAdd<T> = { add: T[] };
 type SettingsArrayRemove<T> = { remove: T[] };

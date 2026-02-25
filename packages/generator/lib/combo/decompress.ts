@@ -1,8 +1,9 @@
 import * as Yaz0 from 'yaz0';
 import CRC32 from 'crc-32';
+import { Game, GAMES } from '@ootmm/core';
 
 import { DmaData } from './dma';
-import { CONFIG, Game, GAMES } from './config';
+import { CONFIG } from './config';
 import { Monitor } from './monitor';
 import { bufReadU16LE, bufReadU32BE, bufReadU32LE, bufWriteU16BE, bufWriteU32BE } from './util/buffer';
 

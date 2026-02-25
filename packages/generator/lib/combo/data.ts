@@ -1,7 +1,7 @@
 import { isArray } from 'lodash';
 import { RAW_GI, RAW_DRAWGI, RAW_HINTS_DATA } from '@ootmm/data';
+import { Game } from '@ootmm/core';
 
-import { Game } from './config';
 import { gameId } from './util';
 
 const mapGossip = (game: Game, data: any[]) => {

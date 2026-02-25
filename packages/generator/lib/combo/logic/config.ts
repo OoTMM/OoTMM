@@ -1,8 +1,8 @@
+import { Settings, Random, sample } from '@ootmm/core';
+
 import { ItemGroups, Items, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
-import { Random, sample } from '../random';
-import { Settings } from '../settings';
-import { mustStartWithMasterSword } from '../settings/util';
+import { mustStartWithMasterSword } from './master-sword';
 import { countMapAdd, countMapRemove } from '../util';
 
 /* This pass pre-computes things from the settings */

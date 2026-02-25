@@ -1,4 +1,5 @@
 import { Entrance } from '@ootmm/data';
+
 import { SETTINGS } from './data';
 import { SettingHint } from './hints';
 import { SpecialConds } from './special-conds';

@@ -1,8 +1,8 @@
 import { XMLParser } from 'fast-xml-parser';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { Game } from '@ootmm/core';
 
-import { Game } from '../combo/config';
 import { CodeGen } from '../combo/util/codegen';
 
 const DIR_OUT_BUILD = path.resolve(__dirname, '../../build');

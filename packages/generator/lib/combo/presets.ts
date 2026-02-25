@@ -1,5 +1,5 @@
 import { PartialDeep } from 'type-fest';
-import { Settings, DEFAULT_SETTINGS, makeSettings, TRICKS } from './settings';
+import { Settings, DEFAULT_SETTINGS, makeSettings, TRICKS } from '@ootmm/core';
 
 export type Presets = { [k: string]: Settings };
 

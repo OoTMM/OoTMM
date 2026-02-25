@@ -1,4 +1,4 @@
-import { Settings } from "../settings";
+import { Settings } from '@ootmm/core';
 
 export function isEntranceShuffle(settings: Settings) {
   if (settings.erBoss !== 'none')

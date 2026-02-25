@@ -1,5 +1,4 @@
-import { Random, randomInt } from '../random';
-import { Settings } from '../settings';
+import { Settings, Random, randomInt } from '@ootmm/core';
 import { World } from './world';
 
 export class LogicPassSongEvents {

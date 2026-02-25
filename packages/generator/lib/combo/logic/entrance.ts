@@ -1,7 +1,6 @@
 import { ENTRANCES } from '@ootmm/data';
+import { Settings, Random, sample } from '@ootmm/core';
 
-import { Random, sample } from '../random';
-import { Settings } from '../settings';
 import { DUNGEONS_REGIONS, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
