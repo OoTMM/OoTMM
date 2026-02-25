@@ -75,6 +75,7 @@ NORETURN void comboGameSwitch4(u32);
 NORETURN void comboGameSwitch(PlayState* play, u32 entrance)
 {
     gComboCtx.entrance = entrance;
+    gComboCtx.saveIndex = gSaveContext.fileNum;
 
     netClose();
     if (play)

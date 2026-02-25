@@ -104,8 +104,8 @@ const main = async () => {
   ]);
   const gen = generate({ oot, mm, opts });
   const { files } = await gen.run();
-  await fs.mkdir('out', { recursive: true });
-  return Promise.all(files.map(x => fs.writeFile(`out/${x.name}`, x.data)));
+  await fs.mkdir('../../out', { recursive: true });
+  return Promise.all(files.map(x => fs.writeFile(`../../out/${x.name}`, x.data)));
 }
 
 main().catch((err) => {

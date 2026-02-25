@@ -394,7 +394,6 @@ void Save_DoSave(PlayState* play, int saveFlags)
     /* Wait for net */
     netWaitSave();
 
-    gComboCtx.saveIndex = gSaveContext.fileNum;
     if (!(saveFlags & SF_PASSIVE))
     {
         if (!(saveFlags & SF_NOCOMMIT))

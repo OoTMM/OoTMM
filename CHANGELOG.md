@@ -48,6 +48,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a save corruption that could occur when playing MM only games on save 2.
 - Put Baby Goron to sleep after playing him the Goron Lullaby.
 - Fix random settings not having the proper weighting for ageless items.
 - Fix possible hardlocks when getting or receiving an item too close to a grotto.
