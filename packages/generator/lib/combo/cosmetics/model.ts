@@ -1,5 +1,6 @@
+import { bufWriteU16BE, bufWriteU32BE } from '@ootmm/core';
+
 import { RomBuilder } from '../rom-builder';
-import { bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
 
 const OOT_LINK_CHILD_OFFSETS = {
   LUT_DL_SHIELD_DEKU: 0x060050D0,

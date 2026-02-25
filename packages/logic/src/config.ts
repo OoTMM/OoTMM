@@ -1,9 +1,9 @@
 import { Settings, Random, sample } from '@ootmm/core';
 
-import { ItemGroups, Items, PlayerItems, itemByID, makePlayerItem } from '../items';
-import { Monitor } from '../monitor';
+import { ItemGroups, Items, PlayerItems, itemByID, makePlayerItem } from '@ootmm/core/src/items';
+import { Monitor } from '../../generator/lib/combo/monitor';
 import { mustStartWithMasterSword } from './master-sword';
-import { countMapAdd, countMapRemove } from '../util';
+import { countMapAdd, countMapRemove } from '@ootmm/core/src/util';
 
 /* This pass pre-computes things from the settings */
 export class LogicPassConfig {

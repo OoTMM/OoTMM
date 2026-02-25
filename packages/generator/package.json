@@ -12,6 +12,7 @@
   "dependencies": {
     "@ootmm/data": "*",
     "@ootmm/core": "*",
+    "@ootmm/logic": "*",
     "@ootmm/tools": "*",
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",

@@ -1,12 +1,12 @@
 import { Settings, Random, randomFloat, sample, shuffle } from '@ootmm/core';
 
-import { ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
+import { ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '@ootmm/core/src/items';
 import { Pathfinder } from './pathfind';
 import { Location, isLocationFullyShuffled, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { ItemPlacement } from './solve';
-import { Monitor } from '../monitor';
-import { countMapArray } from '../util';
+import { Monitor } from '../../generator/lib/combo/monitor';
+import { countMapArray } from '@ootmm/core/src/util';
 import { TRAP_AMOUNTS } from './traps';
 
 export class LogicPassMinimize {

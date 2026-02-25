@@ -4,9 +4,9 @@ import { Location, isLocationRenewable, locationData, makeLocation } from './loc
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { Analysis } from './analysis';
-import { Monitor } from '../monitor';
+import { Monitor } from '../../generator/lib/combo/monitor';
 import { ItemPlacement } from './solve';
-import { ItemHelpers, PlayerItems } from '../items';
+import { ItemHelpers, PlayerItems } from '@ootmm/core/src/items';
 import { ItemProperties } from './item-properties';
 
 type ZigZagState = {

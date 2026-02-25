@@ -1,11 +1,10 @@
+import { concatUint8Arrays } from 'uint8array-extras';
 import { FILES } from '@ootmm/data';
-import { Game } from '@ootmm/core';
+import { Game, arrayToIndexMap } from '@ootmm/core';
 
 import { DecompressedRoms } from '../decompress';
 import { DmaData } from '../dma';
-import { arrayToIndexMap } from '../util';
 import { ObjectEditor } from './object-editor';
-import { concatUint8Arrays } from 'uint8array-extras';
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),

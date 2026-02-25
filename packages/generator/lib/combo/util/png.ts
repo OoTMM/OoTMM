@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { bufReadU32BE, bufWriteU16BE } from '@ootmm/core';
 
-import { bufReadU32BE, bufWriteU16BE } from './buffer';
 import { FileResolver } from '../file-resolver';
 import { toFormat } from '../image';
 

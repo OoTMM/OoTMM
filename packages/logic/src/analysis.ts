@@ -2,10 +2,10 @@ import { Settings, Random, shuffle } from '@ootmm/core';
 
 import { cloneWorld, World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
-import { Monitor } from '../monitor';
+import { Monitor } from '../../generator/lib/combo/monitor';
 import { isLocationRenewable, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
-import { ItemHelpers, PlayerItem, PlayerItems } from '../items';
+import { ItemHelpers, PlayerItem, PlayerItems } from '@ootmm/core/src/items';
 import { ItemProperties } from './item-properties';
 import { AnalysisPath } from './analysis-path';
 

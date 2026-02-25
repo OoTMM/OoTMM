@@ -1,11 +1,13 @@
-import { Settings } from '@ootmm/core';
+import { Settings, ItemHelpers, ItemsCount, makePlayerItem } from '@ootmm/core';
 
 import { makeCosmetics } from './cosmetics';
-import { ItemHelpers, ItemsCount, makePlayerItem } from './items';
-import { worldState } from './logic';
 import { Monitor } from './monitor';
 import { itemName } from './names';
 import { makeRandomSettings } from './random-settings';
+
+/* TODO: Fix this */
+/* This file should likely be in logic too */
+import { worldState } from '../../../logic/src';
 
 export type Items = {[k: string]: number};
 

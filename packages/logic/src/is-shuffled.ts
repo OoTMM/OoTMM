@@ -1,6 +1,6 @@
 import { Settings } from '@ootmm/core';
 
-import { ItemHelpers } from '../items';
+import { ItemHelpers } from '@ootmm/core/src/items';
 import { World } from './world';
 
 // When adding new settings, add in order of how many checks there are to minimize average runtime

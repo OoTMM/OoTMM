@@ -1,5 +1,5 @@
 import { concatUint8Arrays } from 'uint8array-extras';
-import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE } from '../util/buffer';
+import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE } from '@ootmm/core';
 
 export type ObjectEditorOut = {
   data: Uint8Array;

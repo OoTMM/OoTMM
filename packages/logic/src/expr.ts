@@ -1,7 +1,7 @@
 import { SETTINGS, Settings, TRICKS, TrickKey } from '@ootmm/core';
 
-import { Item, ItemGroups, Items, ItemsCount } from '../items';
-import { ItemID } from '../items/defs';
+import { Item, ItemGroups, Items, ItemsCount } from '@ootmm/core/src/items';
+import { ItemID } from '@ootmm/core/src/items/defs';
 import { Age, AGE_ADULT, AGE_CHILD } from './constants';
 import { PRICE_RANGES } from './price';
 import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';

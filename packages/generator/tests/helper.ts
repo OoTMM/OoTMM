@@ -3,7 +3,7 @@ import { PartialDeep } from 'type-fest';
 import { DEFAULT_SETTINGS, Settings } from '@ootmm/core';
 
 import { Monitor } from '../lib/combo/monitor';
-import { solvedWorldState } from '../lib/combo/logic';
+import { solvedWorldState } from '../../logic/src';
 import { makeCosmetics } from '../lib/combo';
 import { makeRandomSettings } from '../lib/combo/random-settings';
 

@@ -1,9 +1,8 @@
-import { Game } from '@ootmm/core';
+import { Game, bufReadU32BE, bufWriteU32BE } from '@ootmm/core';
 
 import { compressFile } from './compress';
 import { CONFIG } from './config';
 import { DmaData, DmaDataRecord } from './dma';
-import { bufReadU32BE, bufWriteU32BE } from './util/buffer';
 
 function u32(v: number) {
   return v >>> 0;

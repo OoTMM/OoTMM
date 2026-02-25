@@ -1,14 +1,13 @@
 import { cloneDeep, mapValues } from 'lodash';
 import { MACROS, WORLD, REGIONS, POOL, Entrance } from '@ootmm/data';
-import { Game, GAMES, SETTINGS, Settings, Random } from '@ootmm/core';
+import { Game, GAMES, SETTINGS, Settings, Random, Item, itemByID, ItemHelpers, Items } from '@ootmm/core';
 
-import { gameId } from '../util';
+import { gameId } from '@ootmm/core/src/util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_HINTS_POOL } from '../data';
-import { Monitor } from '../monitor';
+import { DATA_HINTS_POOL } from '../../generator/lib/combo/data';
+import { Monitor } from '../../generator/lib/combo/monitor';
 import { defaultPrices } from './price';
-import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Region } from './regions';
 
 export const WORLD_FLAGS = [

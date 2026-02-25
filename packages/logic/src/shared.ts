@@ -1,4 +1,4 @@
-import { Item, Items } from '../items/defs';
+import { Item, Items } from '@ootmm/core/src/items/defs';
 
 export type ItemSharedDef = {
   shared: Item,

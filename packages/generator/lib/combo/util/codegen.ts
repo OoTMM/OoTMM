@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { fileExists } from '../util';
+import { fileExists } from '@ootmm/core';
 
 export class CodeGen {
   private data: string[] = [];

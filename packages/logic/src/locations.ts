@@ -1,7 +1,7 @@
 import { Settings } from '@ootmm/core';
 
-import { ItemHelpers, PlayerItem } from '../items';
-import { isDungeonStrayFairy } from '../items/helpers';
+import { ItemHelpers, PlayerItem } from '@ootmm/core/src/items';
+import { isDungeonStrayFairy } from '@ootmm/core/src/items/helpers';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 

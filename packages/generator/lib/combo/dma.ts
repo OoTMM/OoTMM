@@ -1,4 +1,4 @@
-import { bufReadU32BE, bufWriteU32BE } from './util/buffer';
+import { bufReadU32BE, bufWriteU32BE } from '@ootmm/core';
 
 export type DmaDataRecord = {
   virtStart: number;

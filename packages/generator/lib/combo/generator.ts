@@ -1,8 +1,9 @@
+import { logic } from '@ootmm/logic';
+
 import { applyRandomSettings } from './random-settings';
 import { codegen } from './codegen';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
-import { logic } from './logic';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { options, Options, OptionsInput } from './options';
 import { pack } from './pack';

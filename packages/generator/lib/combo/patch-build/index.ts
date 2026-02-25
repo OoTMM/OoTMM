@@ -1,18 +1,18 @@
 import { GAMES, Settings } from '@ootmm/core';
+import { World } from '@ootmm/logic'; /* TODO: Fix this */
 
 import { CONFIG } from '../config';
 import { GameAddresses } from '../addresses';
 import { DecompressedRoms } from '../decompress';
-import { LogicResult } from '../logic';
+import { LogicResult } from '../../../../logic/src';
 import { Monitor } from '../monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from './randomizer';
 import { PatchGroup } from './group';
-import { isEntranceShuffle } from '../logic/helpers';
+import { isEntranceShuffle } from '../../../../logic/src/helpers';
 import { Options } from '../options';
-import { World } from '../logic/world';
-import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
+import { bufReadU32BE, bufWriteU32BE } from '@ootmm/core/src/util/buffer';
 import { FileResolver } from '../file-resolver';
 
 export type BuildPatchfileIn = {

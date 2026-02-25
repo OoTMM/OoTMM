@@ -1,9 +1,8 @@
-export type { Settings, SettingsPatch, SettingHint, SettingHintType, TrickKey } from '@ootmm/core';
+export type { Settings, SettingsPatch, SettingHint, SettingHintType, TrickKey, ItemsCount } from '@ootmm/core';
 
 export type { Presets } from './presets';
 export type { Cosmetics } from './cosmetics';
 export type { OptionRandomSettings } from './random-settings';
-export type { ItemsCount } from './items';
 export type { GeneratorOutput, GeneratorParams } from './generator';
 export type { Items } from './item-pool';
 export type { OptionsInput, Options } from './options';

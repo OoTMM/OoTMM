@@ -1,10 +1,9 @@
-import { Game } from '@ootmm/core';
+import { Game, bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '@ootmm/core';
 
 import { CONFIG } from '../config';
 import { Patchfile } from './patchfile';
 import { Addresses, FileAddress, GameAddresses } from '../addresses';
 import { PATCH_GROUP_VALUES, PatchGroup } from './group';
-import { bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 
 export class Patcher {
   private ranges: [number, number][];

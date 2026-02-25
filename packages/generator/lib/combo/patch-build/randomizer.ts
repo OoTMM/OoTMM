@@ -1,26 +1,26 @@
 import path from 'path';
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
-import { Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
+import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
+import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world'; /* TODO: Fix this */
 
-import { LogicResult } from '../logic';
-import { isEntranceShuffle } from '../logic/helpers';
+/* In fact, fix this whole file */
+import { LogicResult } from '../../../../logic/src';
+import { isEntranceShuffle } from '../../../../logic/src/helpers';
 import { GI, DATA_HINTS_POOL } from '../data';
-import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
-import { HintGossip, WorldHints } from '../logic/hints';
-import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { HintGossip, WorldHints } from '../../../../logic/src/hints';
+import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '@ootmm/core/src/util';
 import { Patchfile } from './patchfile';
-import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../logic/locations';
+import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../../../../logic/src/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
-import { Region, regionData } from '../logic/regions';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
-import { SharedItemGroups } from '../logic/shared';
-import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
+import { Region, regionData } from '../../../../logic/src/regions';
+import { SharedItemGroups } from '../../../../logic/src/shared';
+import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '@ootmm/core/src/util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
-import { mustStartWithMasterSword } from '../logic/master-sword';
-import { DUNGEON_ENTRANCES } from '../logic/entrance';
-import { END_BOSS_METADATA } from '../logic/boss';
-import { PATH_EVENT_DATA } from '../logic/analysis-path';
-import { DUNGEONS, DUNGEONS_BY_KEY } from '../logic/dungeons';
+import { mustStartWithMasterSword } from '../../../../logic/src/master-sword';
+import { DUNGEON_ENTRANCES } from '../../../../logic/src/entrance';
+import { END_BOSS_METADATA } from '../../../../logic/src/boss';
+import { PATH_EVENT_DATA } from '../../../../logic/src/analysis-path';
+import { DUNGEONS, DUNGEONS_BY_KEY } from '../../../../logic/src/dungeons';
 import { Options } from '../options';
 
 const DUNGEON_REWARD_LOCATIONS = [

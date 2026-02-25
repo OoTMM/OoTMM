@@ -1,8 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import * as Yaz0 from 'yaz0';
-
-import { fileExists } from './util';
+import { fileExists } from '@ootmm/core';
 
 function fsRetry<T>(fn: () => Promise<T>, retries = 5): Promise<T> {
   return fn().catch((err) => {

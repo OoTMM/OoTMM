@@ -1,4 +1,4 @@
-import { ItemID } from './items/defs';
+import { ItemID } from '@ootmm/core';
 
 const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_ARROW_FIRE: "Fire Arrows (MM)",
