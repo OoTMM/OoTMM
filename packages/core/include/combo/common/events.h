@@ -117,6 +117,7 @@
 #define EV_MM_WEEK_TWIN_ISLANDS_KEG_BOULDER_DESTROYED       MM_EV(19, 1)
 #define EV_MM_WEEK_WOODFALL_TEMPLE_RISE                     MM_EV(20, 0)
 #define EV_MM_WEEK_DUNGEON_WF                               MM_EV(20, 1)
+#define EV_MM_WEEK_CALMED_GORON_BABY                        MM_EV(22, 2)
 #define EV_MM_WEEK_SPIN_UPGRADE                             MM_EV(23, 1)
 #define EV_MM_WEEK_KEETA_DEAD                               MM_EV(23, 2)
 #define EV_MM_WEEK_PRINCESS_RETURNED                        MM_EV(23, 5)

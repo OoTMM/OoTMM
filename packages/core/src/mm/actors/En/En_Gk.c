@@ -23,6 +23,7 @@ void EnGk_LearnSongLullaby(Actor* this, PlayState* play)
     }
 
     comboGiveItemNpc(this, play, GI_MM_SONG_GORON, NPC_MM_GORON_BABY, 9999.f, 9999.f);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_CALMED_GORON_BABY);
 }
 
 void EnGk_CheckLullaby(Actor* this, PlayState* play)

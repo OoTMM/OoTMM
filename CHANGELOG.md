@@ -47,6 +47,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Put Baby Goron to sleep after playing him the Goron Lullaby.
 - Fix random settings not having the proper weighting for ageless items.
 - Fix possible hardlocks when getting or receiving an item too close to a grotto.
 - Readd the missing step back for Iron Knuckles in MM when transitioning from the first phase to the second phase.
