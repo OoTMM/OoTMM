@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - Ocarina of Time warp songs in Majora's Mask now include the song playback, fanfare and song effect.
 - Song of Soaring and Song of Double Time in Ocarina of Time now include the song playback, fanfare and song effect.
 - Rework of Forest Temple MQ logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
+- The trick to enter Bariande's room in vanilla Jabu-Jabu without Boomerang now looks for Hookshot instead of Longshot.
 
 ### Fixed
 
@@ -66,6 +67,7 @@ All notable changes to this project will be documented in this file.
 - Fix Water Temple MQ's Stalfos before Dark Link expecting child to be able to fight.
 - Fix Snowhead logic wrongly requiring the soul of Biggoron to get access to the locations and entrances past it.
 - Fix Zora Domain logic expecting to go back to Lake Hylia with nothing when coming out of it.
+- Fix Bottom of the Well logic expecting only age swap to get past the first Skulltula.
 
 ## [29.0] - 2025-08-15
 
