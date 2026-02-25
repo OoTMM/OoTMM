@@ -1,7 +1,7 @@
 
 import { Options } from '../options';
 import { Game, CONFIG } from '../config';
-import { Patchfile } from '../patch-build/patchfile';
+import { Patchfile } from './patchfile';
 import { Addresses, FileAddress, GameAddresses } from '../addresses';
 import { PATCH_GROUP_VALUES, PatchGroup } from './group';
 import { bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '../util/buffer';

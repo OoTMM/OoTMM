@@ -1,6 +1,6 @@
 {
-  "name": "@ootmm/core",
-  "version": "0.0.1",
+  "name": "@ootmm/generator",
+  "version": "1.0.0",
   "scripts": {
     "build": "tsx ./lib/build.ts",
     "start": "tsx ./lib/cli.ts",

@@ -3,7 +3,7 @@ import { deflateRaw, inflate, inflateRaw } from 'pako';
 import { PartialDeep } from 'type-fest';
 import { uint8ArrayToBase64, base64ToUint8Array } from 'uint8array-extras';
 
-import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
+import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '.';
 
 export function exportSettings(settings: Settings): string {
   const diff: any = {};

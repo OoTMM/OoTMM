@@ -1,4 +1,4 @@
-import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
+import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/generator';
 
 import { InputField, CheckboxField, Card } from './ui';
 import { useStore } from '../store';

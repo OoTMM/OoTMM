@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-import { itemName } from '@ootmm/core';
+import { itemName } from '@ootmm/generator';
 import { Select, Button, Card } from './ui';
 import { useStore } from '../store';
 

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { createSettingsSlice, SettingsSlice } from './settings';
 import * as API from '../api';
 import { isEqual } from 'lodash';
-import { Cosmetics, COSMETICS, makeSettings } from '@ootmm/core';
+import { Cosmetics, COSMETICS, makeSettings } from '@ootmm/generator';
 import { localStoragePrefixedSet } from '../util';
 import { createRandomSettingsSlice, RandomSettingsSlice } from './randomSettings';
 import { CosmeticsSlice, createCosmeticsSlice } from './cosmetics';

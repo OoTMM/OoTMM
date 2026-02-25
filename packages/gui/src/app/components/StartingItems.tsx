@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { itemName, Items } from '@ootmm/core';
+import { itemName, Items } from '@ootmm/generator';
 
 import { Button, Card, InputField, Select } from './ui';
 import { useStore } from '../store';

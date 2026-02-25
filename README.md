@@ -73,7 +73,7 @@ Install everything you need:
 
 You can generate a seed:
 
-    pnpm start:core:config
+    pnpm start:config
 
 The output will be `out/OoTMM.z64`.
 
