@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { Select, Input, Checkbox, Card } from './ui';
 import { FaXmark, FaArrowUp, FaArrowDown } from 'react-icons/fa6';
 
-import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
+import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/generator';
 import { SettingsPanel } from './settings/SettingsEditor';
 import { Button } from './ui';
 import { useStore } from '../store';

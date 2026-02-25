@@ -1,4 +1,4 @@
-import { Items, Settings, OptionsInput, GeneratorOutput, makeCosmetics, makeSettings, makeRandomSettings } from '@ootmm/core';
+import { Items, Settings, OptionsInput, GeneratorOutput, makeCosmetics, makeSettings, makeRandomSettings } from '@ootmm/generator';
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError } from './worker';
 import Worker from './worker?worker';
 import JSZip from 'jszip';

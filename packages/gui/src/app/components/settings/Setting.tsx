@@ -1,4 +1,4 @@
-import { SETTINGS } from '@ootmm/core';
+import { SETTINGS } from '@ootmm/generator';
 
 import { InputField, SelectField, CheckboxField, Select } from '@/app/components/ui';
 import { xor } from 'lodash';

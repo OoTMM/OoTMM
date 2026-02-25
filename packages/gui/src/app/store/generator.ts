@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { GeneratorOutput, OptionsInput } from '@ootmm/core';
+import { GeneratorOutput, OptionsInput } from '@ootmm/generator';
 
 import type { Store } from './';
 import * as API from '../api';

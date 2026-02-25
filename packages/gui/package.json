@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
-    "@ootmm/core": "*",
+    "@ootmm/generator": "*",
     "clsx": "^2.1.1",
     "preact": "^10.28.4",
     "react-ga4": "^2.1.0",

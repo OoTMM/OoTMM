@@ -1,4 +1,4 @@
-import { Items, makeSettings, mergeSettings, Settings, SettingsPatch } from '@ootmm/core';
+import { Items, makeSettings, mergeSettings, Settings, SettingsPatch } from '@ootmm/generator';
 import { StateCreator } from 'zustand';
 
 import type { Store } from './';

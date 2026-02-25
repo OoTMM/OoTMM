@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "start:core:config",
+			"script": "start:config",
 			"problemMatcher": {
         "base": "$gcc",
       },

@@ -1,4 +1,4 @@
-import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
+import { COLORS, COSMETICS, Cosmetics } from '@ootmm/generator';
 
 import { CheckboxField } from './ui/CheckboxField';
 import { FileSelectField, SelectField } from './ui';

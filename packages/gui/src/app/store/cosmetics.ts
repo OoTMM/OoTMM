@@ -1,4 +1,4 @@
-import { Cosmetics } from '@ootmm/core';
+import { Cosmetics } from '@ootmm/generator';
 import { StateCreator } from 'zustand';
 
 import type { Store } from './';

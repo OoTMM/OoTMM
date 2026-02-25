@@ -1,4 +1,4 @@
-import { SETTINGS, SUBCATEGORIES } from '@ootmm/core';
+import { SETTINGS, SUBCATEGORIES } from '@ootmm/generator';
 import { Setting } from './Setting';
 
 type SettingsPanelProps = {

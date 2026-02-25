@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { FaYoutube, FaFileLines } from 'react-icons/fa6';
-import { TRICKS } from '@ootmm/core';
-import { TrickKey } from '@ootmm/core/lib/combo/settings';
+import { TRICKS, TrickKey } from '@ootmm/generator';
 
 import { DoubleList } from './DoubleList';
 import { Tooltip } from './ui/Tooltip';

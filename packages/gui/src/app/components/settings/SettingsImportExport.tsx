@@ -1,5 +1,5 @@
 import { useCallback, useId, useMemo } from 'react';
-import { importSettings, exportSettings } from '@ootmm/core';
+import { importSettings, exportSettings } from '@ootmm/generator';
 import { Input, Label } from '@/app/components/ui';
 import { useStore } from '@/app/store';
 
