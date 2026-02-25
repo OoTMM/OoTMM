@@ -81,7 +81,11 @@ void ObjMure2_AliasRocks(Xflag* xf)
         if (xf->setupId == 2)
         {
             xf->setupId = 0;
-            xf->id += 29;
+            switch (xf->id)
+            {
+            case 21: xf->id = 51; break;
+            case 22: xf->id = 50; break;
+            }
         }
         break;
     case SCE_OOT_DEATH_MOUNTAIN_TRAIL:

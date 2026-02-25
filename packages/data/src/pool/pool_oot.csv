@@ -565,22 +565,22 @@ Zora River Rock Water 1,                                    rock,           NONE
 Zora River Rock Water 2,                                    rock,           NONE,                 ZORA_RIVER,                     0x0002f,                    RANDOM
 Zora River Rock Water 3,                                    rock,           NONE,                 ZORA_RIVER,                     0x00030,                    RANDOM
 Zora River Rock Water 4,                                    rock,           NONE,                 ZORA_RIVER,                     0x00031,                    RANDOM
-Zora River Rock Circle Upper Rock 1,                        rock,           NONE,                 ZORA_RIVER,                     0x00032,                    RANDOM
-Zora River Rock Circle Upper Rock 2,                        rock,           NONE,                 ZORA_RIVER,                     0x10032,                    RANDOM
-Zora River Rock Circle Upper Rock 3,                        rock,           NONE,                 ZORA_RIVER,                     0x20032,                    RANDOM
-Zora River Rock Circle Upper Rock 4,                        rock,           NONE,                 ZORA_RIVER,                     0x30032,                    RANDOM
-Zora River Rock Circle Upper Rock 5,                        rock,           NONE,                 ZORA_RIVER,                     0x40032,                    RANDOM
-Zora River Rock Circle Upper Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50032,                    RANDOM
-Zora River Rock Circle Upper Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60032,                    RANDOM
-Zora River Rock Circle Upper Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70032,                    RANDOM
-Zora River Rock Circle Lower Rock 1,                        rock,           NONE,                 ZORA_RIVER,                     0x00033,                    RANDOM
-Zora River Rock Circle Lower Rock 2,                        rock,           NONE,                 ZORA_RIVER,                     0x10033,                    RANDOM
-Zora River Rock Circle Lower Rock 3,                        rock,           NONE,                 ZORA_RIVER,                     0x20033,                    RANDOM
-Zora River Rock Circle Lower Rock 4,                        rock,           NONE,                 ZORA_RIVER,                     0x30033,                    RANDOM
-Zora River Rock Circle Lower Rock 5,                        rock,           NONE,                 ZORA_RIVER,                     0x40033,                    RANDOM
-Zora River Rock Circle Lower Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50033,                    RANDOM
-Zora River Rock Circle Lower Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60033,                    RANDOM
-Zora River Rock Circle Lower Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70033,                    RANDOM
+Zora River Rock Circle Lower Rock 1,                        rock,           NONE,                 ZORA_RIVER,                     0x00032,                    RANDOM
+Zora River Rock Circle Lower Rock 2,                        rock,           NONE,                 ZORA_RIVER,                     0x10032,                    RANDOM
+Zora River Rock Circle Lower Rock 3,                        rock,           NONE,                 ZORA_RIVER,                     0x20032,                    RANDOM
+Zora River Rock Circle Lower Rock 4,                        rock,           NONE,                 ZORA_RIVER,                     0x30032,                    RANDOM
+Zora River Rock Circle Lower Rock 5,                        rock,           NONE,                 ZORA_RIVER,                     0x40032,                    RANDOM
+Zora River Rock Circle Lower Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50032,                    RANDOM
+Zora River Rock Circle Lower Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60032,                    RANDOM
+Zora River Rock Circle Lower Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70032,                    RANDOM
+Zora River Rock Circle Upper Rock 1,                        rock,           NONE,                 ZORA_RIVER,                     0x00033,                    RANDOM
+Zora River Rock Circle Upper Rock 2,                        rock,           NONE,                 ZORA_RIVER,                     0x10033,                    RANDOM
+Zora River Rock Circle Upper Rock 3,                        rock,           NONE,                 ZORA_RIVER,                     0x20033,                    RANDOM
+Zora River Rock Circle Upper Rock 4,                        rock,           NONE,                 ZORA_RIVER,                     0x30033,                    RANDOM
+Zora River Rock Circle Upper Rock 5,                        rock,           NONE,                 ZORA_RIVER,                     0x40033,                    RANDOM
+Zora River Rock Circle Upper Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50033,                    RANDOM
+Zora River Rock Circle Upper Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60033,                    RANDOM
+Zora River Rock Circle Upper Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70033,                    RANDOM
 Zora River Butterfly Near Beans 1,                          butterfly,      NONE,                 ZORA_RIVER,                     0x00037,                    FAIRY
 Zora River Butterfly Near Beans 2,                          butterfly,      NONE,                 ZORA_RIVER,                     0x10037,                    NOTHING
 Zora River Butterfly Near Waterfall 1,                      butterfly,      NONE,                 ZORA_RIVER,                     0x0010a,                    FAIRY
