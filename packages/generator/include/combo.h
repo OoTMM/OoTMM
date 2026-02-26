@@ -82,7 +82,6 @@
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
-# include <combo/common/actors/Custom_Triggers.h>
 # include <combo/common/api.h>
 #endif
 
@@ -203,6 +202,9 @@ void comboHandleAutoInvertClockSpeed(void);
 void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
+
+void Triggers_Update(PlayState* play);
+void Triggers_Reset(void);
 
 #else
 # include <combo/asm.h>

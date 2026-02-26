@@ -56,10 +56,10 @@ void Player_UseItem(PlayState* play, Player* link, s16 itemId)
     switch (itemId)
     {
     case ITEM_OOT_WEIRD_EGG:
-        gComboTriggersData.events.weirdEgg = 1;
+        g.triggerWeirdEgg = 1;
         break;
     case ITEM_OOT_POCKET_EGG:
-        gComboTriggersData.events.pocketEgg = 1;
+        g.triggerPocketEgg = 1;
         break;
     case ITEM_OOT_MASK_BLAST:
         maskToggle(play, link, MASK_BLAST);

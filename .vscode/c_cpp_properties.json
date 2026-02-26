@@ -3,9 +3,9 @@
         "myIncludePath": [
             "${workspaceFolder}/third_party/ultralib/include/gcc",
             "${workspaceFolder}/third_party/ultralib/include",
-            "${workspaceFolder}/packages/core/build/include",
-            "${workspaceFolder}/packages/core/include",
-            "${workspaceFolder}/packages/core/src/common/ovl"
+            "${workspaceFolder}/packages/generator/build/include",
+            "${workspaceFolder}/packages/generator/include",
+            "${workspaceFolder}/packages/generator/src/common/ovl"
         ],
         "myDefines": [
             "_LANGUAGE_C=1",
@@ -21,7 +21,7 @@
             "name": "OoT",
             "includePath": [
                 "${myIncludePath}",
-                "${workspaceFolder}/packages/core/src/oot/ovl"
+                "${workspaceFolder}/packages/generator/src/oot/ovl"
             ],
             "defines": [
                 "${myDefines}",
@@ -36,7 +36,7 @@
             "name": "MM",
             "includePath": [
                 "${myIncludePath}",
-                "${workspaceFolder}/packages/core/src/mm/ovl"
+                "${workspaceFolder}/packages/generator/src/mm/ovl"
             ],
             "defines": [
                 "${myDefines}",

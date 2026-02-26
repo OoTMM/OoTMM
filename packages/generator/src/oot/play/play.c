@@ -480,9 +480,6 @@ static void Play_AfterInit(PlayState* play)
     {
         gLastScene = play->sceneId;
     }
-
-    /* Spawn Custom Triggers */
-    CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
 
     /* Signs */
@@ -545,7 +542,6 @@ void hookPlay_Init(PlayState* play)
     g.decoysCount = 0;
     g.bronzeScaleSolidGround = 0;
     g.bronzeScaleTimer = 0;
-    gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
     gMultiMarkCollectibles = 0;
     gMultiMarkSwitch0 = 0;
@@ -590,6 +586,7 @@ void Play_MainWrapper(PlayState* play)
     {
         DrawGiSystem_Update(play);
         Play_UpdateTraps(play);
+        Triggers_Update(play);
     }
 
     Debug_Update();

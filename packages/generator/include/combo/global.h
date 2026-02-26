@@ -34,6 +34,10 @@ typedef struct
     u32                     nextEntrance;
     s8                      prevRoom;
     Xflag                   xflag;
+#if defined(GAME_OOT)
+    u8                      triggerWeirdEgg:1;
+    u8                      triggerPocketEgg:1;
+#endif
 }
 ComboGlobal;
 

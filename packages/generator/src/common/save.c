@@ -65,8 +65,8 @@ void Save_OnLoad(void)
 {
     NetContext* net;
 
-    /* Clear custom trigger data */
-    bzero(&gComboTriggersData, sizeof(gComboTriggersData));
+    /* Reset triggers */
+    Triggers_Reset();
 
     /* Clear "next item" */
     g.itemQuery = NULL;
