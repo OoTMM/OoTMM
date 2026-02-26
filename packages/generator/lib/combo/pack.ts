@@ -5,7 +5,7 @@ import { CONFIG } from './config';
 import { cosmetics } from './cosmetics';
 import { DecompressedRoms } from './decompress';
 import { DmaData } from './dma';
-import { Monitor } from './monitor';
+import { Monitor } from '@ootmm/core/src/monitor';
 import { Patchfile } from './patch-build/patchfile';
 import { RomBuilder } from './rom-builder';
 import { Options } from './options';

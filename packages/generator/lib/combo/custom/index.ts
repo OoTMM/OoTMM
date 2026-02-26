@@ -6,7 +6,7 @@ import { Game, arrayToIndexMap, toU32Buffer, bufReadU32BE, bufWriteU32BE } from 
 import { DmaData } from '../dma';
 import { CodeGen } from '../util/codegen';
 import { DecompressedRoms } from '../decompress';
-import { Monitor } from '../monitor';
+import { Monitor } from '@ootmm/core/src/monitor';
 import { KeepFile } from './keep';
 import { png } from '../util/png';
 import { font } from './font';

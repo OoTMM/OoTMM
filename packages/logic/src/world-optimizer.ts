@@ -1,4 +1,5 @@
-import { PlayerItems, makePlayerItem } from '@ootmm/core/src/items';
+import { PlayerItems, makePlayerItem } from '@ootmm/core';
+
 import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAnd, ExprContainer, ExprHas, ExprLicense, ExprRenewable, exprAnd, exprOr } from './expr';
 import { World } from './world';
 

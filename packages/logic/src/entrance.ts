@@ -1,14 +1,12 @@
 import { ENTRANCES } from '@ootmm/data';
-import { Settings, Random, sample } from '@ootmm/core';
+import { PlayerItems, Monitor, Settings, Random, sample } from '@ootmm/core';
 
 import { DUNGEONS_REGIONS, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
-import { Monitor } from '../../generator/lib/combo/monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
-import { PlayerItems } from '@ootmm/core/src/items';
 import { ItemProperties } from './item-properties';
 import { Region } from './regions';
 import { Age, AGE_ADULT, AGE_CHILD } from './constants';

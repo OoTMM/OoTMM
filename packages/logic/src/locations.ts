@@ -1,7 +1,5 @@
-import { Settings } from '@ootmm/core';
+import { Settings, ItemHelpers, PlayerItem } from '@ootmm/core';
 
-import { ItemHelpers, PlayerItem } from '@ootmm/core/src/items';
-import { isDungeonStrayFairy } from '@ootmm/core/src/items/helpers';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 
@@ -218,7 +216,7 @@ export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<
   }
 
   /* Non shuffled dungeon stray fairy */
-  if (isDungeonStrayFairy(item.item) && settings.strayFairyChestShuffle !== 'anywhere' && settings.strayFairyOtherShuffle !== 'anywhere') {
+  if (ItemHelpers.isDungeonStrayFairy(item.item) && settings.strayFairyChestShuffle !== 'anywhere' && settings.strayFairyOtherShuffle !== 'anywhere') {
     return false;
   }
 

@@ -4,3 +4,5 @@ export * from './random';
 export * from './items';
 export * from './util';
 export * from './util/buffer';
+export * from './monitor';
+export * from './data';

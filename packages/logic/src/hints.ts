@@ -1,15 +1,12 @@
-import { Game, Settings, Random, sample, shuffle, randomInt } from '@ootmm/core';
+import { CountMap, countMapArray, Monitor, Game, Settings, Random, sample, shuffle, randomInt, ItemGroups, ItemHelpers, Items, PlayerItems, PlayerItem, itemByID, makePlayerItem } from '@ootmm/core';
 
 import { DUNGEONS_REGIONS, World } from './world';
 import { Analysis } from './analysis';
 import { AnalysisPath } from './analysis-path';
-import { Monitor } from '../../generator/lib/combo/monitor';
 import { Pathfinder } from './pathfind';
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
-import { CountMap, countMapArray } from '@ootmm/core/src/util';
-import { ItemGroups, ItemHelpers, Items, PlayerItems, PlayerItem, itemByID, makePlayerItem } from '@ootmm/core/src/items';
 import { isLocationFullyShuffled } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [

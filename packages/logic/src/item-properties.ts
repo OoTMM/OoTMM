@@ -1,6 +1,4 @@
-import { Settings } from '@ootmm/core';
-
-import { Item, ItemGroups } from '@ootmm/core/src/items';
+import { Settings, Item, ItemGroups } from '@ootmm/core';
 
 export type ItemProperties = {
   junk: Set<Item>;

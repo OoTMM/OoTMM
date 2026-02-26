@@ -6,7 +6,7 @@ import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world'; /* TO
 /* In fact, fix this whole file */
 import { LogicResult } from '../../../../logic/src';
 import { isEntranceShuffle } from '../../../../logic/src/helpers';
-import { GI, DATA_HINTS_POOL } from '../data';
+import { GI, DATA_HINTS_POOL } from '@ootmm/core/src/data';
 import { HintGossip, WorldHints } from '../../../../logic/src/hints';
 import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '@ootmm/core/src/util';
 import { Patchfile } from './patchfile';

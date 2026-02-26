@@ -1,7 +1,7 @@
 import { Settings, ItemHelpers, ItemsCount, makePlayerItem } from '@ootmm/core';
 
 import { makeCosmetics } from './cosmetics';
-import { Monitor } from './monitor';
+import { Monitor } from '@ootmm/core/src/monitor';
 import { itemName } from './names';
 import { makeRandomSettings } from './random-settings';
 

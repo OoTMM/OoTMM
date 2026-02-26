@@ -5,7 +5,7 @@ import { CONFIG } from '../config';
 import { GameAddresses } from '../addresses';
 import { DecompressedRoms } from '../decompress';
 import { LogicResult } from '../../../../logic/src';
-import { Monitor } from '../monitor';
+import { Monitor } from '@ootmm/core/src/monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from './randomizer';

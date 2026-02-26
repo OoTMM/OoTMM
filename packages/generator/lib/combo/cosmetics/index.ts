@@ -9,7 +9,7 @@ import { COLORS, ColorArg } from './color';
 import { BufferPath } from './type';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
-import { Monitor } from '../monitor';
+import { Monitor } from '@ootmm/core/src/monitor';
 import { LogWriter } from '../util/log-writer';
 
 export { makeCosmetics } from './util';

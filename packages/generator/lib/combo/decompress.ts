@@ -4,7 +4,7 @@ import { Game, GAMES, bufReadU16LE, bufReadU32BE, bufReadU32LE, bufWriteU16BE, b
 
 import { DmaData } from './dma';
 import { CONFIG } from './config';
-import { Monitor } from './monitor';
+import { Monitor } from '@ootmm/core/src/monitor';
 
 export const copyFile = async (src: Uint8Array, dst: Uint8Array, compressed: boolean) => {
   if (compressed) {

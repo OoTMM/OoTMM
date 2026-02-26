@@ -3,8 +3,8 @@ import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
 import { SETTINGS } from '@ootmm/core';
 
 /* TODO: Fix this file (depends on logic) */
-import { DRAWGI, GI } from './data';
-import { Monitor } from './monitor';
+import { DRAWGI, GI } from '@ootmm/core/src/data';
+import { Monitor } from '@ootmm/core/src/monitor';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
 import { PRICE_RANGES } from '../../../logic/src/price';

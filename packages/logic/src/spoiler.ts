@@ -1,21 +1,21 @@
 import { sortBy } from 'lodash';
-import { SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
+import { PlayerItem, PlayerItems, Monitor, SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
 
+/* TODO: Extract this */
 import { Options } from '../../generator/lib/combo/options';
+import { itemName } from '../../generator/lib/combo/names';
+import { regionName } from '../../generator/lib/combo/regions';
+import { LogWriter } from '../../generator/lib/combo/util/log-writer';
+
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World, WORLD_FLAGS } from './world';
-import { itemName } from '../../generator/lib/combo/names';
-import { Monitor } from '../../generator/lib/combo/monitor';
 import { Analysis, ANALYSIS_EVENTS, SphereEntryEvent } from './analysis';
 import { AnalysisPath, PATH_EVENT_DATA } from './analysis-path';
-import { regionName } from '../../generator/lib/combo/regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
-import { PlayerItem, PlayerItems } from '@ootmm/core/src/items';
-import { LogWriter } from '../../generator/lib/combo/util/log-writer';
 import { BOSS_METADATA_BY_DUNGEON } from './boss';
 import { DUNGEONS_BY_KEY } from './dungeons';
 

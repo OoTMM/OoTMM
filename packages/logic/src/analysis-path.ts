@@ -1,11 +1,9 @@
-import { Random, Settings } from '@ootmm/core';
+import { Monitor, Random, Settings, Item, Items, makePlayerItem, PlayerItems } from '@ootmm/core';
 
 import { cloneWorld, World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
-import { Monitor } from '../../generator/lib/combo/monitor';
 import { Location } from './locations';
 import { ItemPlacement } from './solve';
-import { Item, Items, makePlayerItem, PlayerItems } from '@ootmm/core/src/items';
 import { ItemProperties } from './item-properties';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
 import { Analysis } from './analysis';
