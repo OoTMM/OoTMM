@@ -1,12 +1,11 @@
 import { sortBy } from 'lodash';
-import { PlayerItem, PlayerItems, Monitor, SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
+import { LogWriter, PlayerItem, PlayerItems, Monitor, SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
 
 /* TODO: Extract this */
 import { Options } from '../../generator/lib/combo/options';
 import { itemName } from '../../generator/lib/combo/names';
 import { regionName } from '../../generator/lib/combo/regions';
-import { LogWriter } from '../../generator/lib/combo/util/log-writer';
 
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World, WORLD_FLAGS } from './world';

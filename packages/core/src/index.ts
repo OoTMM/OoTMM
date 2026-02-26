@@ -6,3 +6,4 @@ export * from './util';
 export * from './util/buffer';
 export * from './monitor';
 export * from './data';
+export * from './log-writer';

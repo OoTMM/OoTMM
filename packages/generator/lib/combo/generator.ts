@@ -1,10 +1,10 @@
+import { Monitor, MonitorCallbacks } from '@ootmm/core';
 import { logic } from '@ootmm/logic';
 
 import { applyRandomSettings } from './random-settings';
 import { codegen } from './codegen';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
-import { Monitor, MonitorCallbacks } from '@ootmm/core/src/monitor';
 import { options, Options, OptionsInput } from './options';
 import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';

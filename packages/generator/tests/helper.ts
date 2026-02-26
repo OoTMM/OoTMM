@@ -1,9 +1,10 @@
 import { merge } from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { DEFAULT_SETTINGS, Settings } from '@ootmm/core';
+import { Monitor, DEFAULT_SETTINGS, Settings } from '@ootmm/core';
 
-import { Monitor } from '@ootmm/core/src/monitor';
+/* TODO: Fix this */
 import { solvedWorldState } from '../../logic/src';
+
 import { makeCosmetics } from '../lib/combo';
 import { makeRandomSettings } from '../lib/combo/random-settings';
 

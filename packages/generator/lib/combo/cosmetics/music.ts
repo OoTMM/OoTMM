@@ -1,10 +1,8 @@
 import JSZip from 'jszip';
 import { concatUint8Arrays } from 'uint8array-extras';
-import { Game, Random, sample, shuffle, toU32Buffer } from '@ootmm/core';
+import { LogWriter, Monitor, Game, Random, sample, shuffle, toU32Buffer } from '@ootmm/core';
 
 import { RomBuilder } from '../rom-builder';
-import { Monitor } from '@ootmm/core/src/monitor';
-import { LogWriter } from '../util/log-writer';
 
 type MusicType = 'bgm' | 'fanfare';
 

@@ -1,20 +1,16 @@
-import path from 'path';
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
-import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world'; /* TODO: Fix this */
+import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8, countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer, GI, DATA_HINTS_POOL, Item, ItemGroups, ItemHelpers, Items, ItemsCount, Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
+import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../../../../logic/src/world'; /* TODO: Fix this */
 
 /* In fact, fix this whole file */
 import { LogicResult } from '../../../../logic/src';
 import { isEntranceShuffle } from '../../../../logic/src/helpers';
-import { GI, DATA_HINTS_POOL } from '@ootmm/core/src/data';
 import { HintGossip, WorldHints } from '../../../../logic/src/hints';
-import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '@ootmm/core/src/util';
 import { Patchfile } from './patchfile';
 import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../../../../logic/src/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../../../../logic/src/regions';
 import { SharedItemGroups } from '../../../../logic/src/shared';
-import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '@ootmm/core/src/util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
 import { mustStartWithMasterSword } from '../../../../logic/src/master-sword';
 import { DUNGEON_ENTRANCES } from '../../../../logic/src/entrance';

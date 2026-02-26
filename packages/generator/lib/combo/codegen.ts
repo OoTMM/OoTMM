@@ -1,13 +1,12 @@
 import path from 'path';
 import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
-import { SETTINGS } from '@ootmm/core';
+import { SETTINGS, Monitor, DRAWGI, GI } from '@ootmm/core';
 
-/* TODO: Fix this file (depends on logic) */
-import { DRAWGI, GI } from '@ootmm/core/src/data';
-import { Monitor } from '@ootmm/core/src/monitor';
+/* TODO: Fix this */
+import { PRICE_RANGES } from '../../../logic/src/price';
+
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
-import { PRICE_RANGES } from '../../../logic/src/price';
 import { CodeGen } from './util/codegen';
 import { COSMETICS } from './cosmetics';
 

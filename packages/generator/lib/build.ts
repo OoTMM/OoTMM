@@ -3,10 +3,10 @@ import path from 'path';
 import { sync as globSync } from 'glob';
 import JSZip from 'jszip';
 import childProcess from 'child_process';
+import { Monitor } from '@ootmm/core';
 
 import { codegen as comboCodegen } from './combo/codegen';
 import { customAssetsKeep, customFiles } from './combo/custom';
-import { Monitor } from '@ootmm/core/src/monitor';
 import { cosmeticsAssets } from './combo/cosmetics';
 import { custom } from './combo/custom';
 import { decompressGames } from './combo/decompress';
