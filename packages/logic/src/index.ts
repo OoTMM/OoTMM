@@ -20,6 +20,8 @@ import { LogicPassMinimize } from './minimize';
 import { LogicPassAnalysisPaths } from './analysis-path';
 import { LogicPassSongEvents } from './song-events';
 
+export { locationList } from './location-list';
+
 interface LogicPass<Out> {
   run: () => Out;
 }
