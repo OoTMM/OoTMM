@@ -67,7 +67,7 @@ static int Triggers_GiveItemDirect(PlayState* play, s16 gi)
 
 static int Triggers_ItemSafe(Player* player, PlayState* play)
 {
-    if (player->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_GROTTO))
+    if (!Item_SafeToReceive(play))
     {
         sTriggerAcc = 0;
         return 0;

@@ -23,6 +23,21 @@ const u8 kMaxBombs[] = { 0, 20, 30, 40 };
 const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
 
+int Item_SafeToReceive(PlayState* play)
+{
+    Player* link;
+
+    if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
+        return 0;
+    if (Message_GetState(&play->msgCtx) != 0)
+        return 0;
+    link = GET_PLAYER(play);
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GROTTO))
+        return 0;
+
+    return 1;
+}
+
 int Item_IsPlayerSelf(u8 playerId)
 {
     if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == gComboConfig.playerId)

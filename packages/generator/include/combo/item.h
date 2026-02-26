@@ -260,6 +260,7 @@ extern u8 gMaxBombchuMm;
 void Inventory_UpdateMaxBombchu(void);
 
 int Item_IsPlayerSelf(u8 playerId);
+int Item_SafeToReceive(PlayState* play);
 
 #if defined(GAME_OOT)
 typedef enum ExchangeItemID {
