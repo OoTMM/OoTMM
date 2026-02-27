@@ -93,14 +93,13 @@
   exits:
     "Snowhead Temple Map Room": "true"
     "Snowhead Temple Center Level 1": "true"
-    "Snowhead Temple Center Level 2 Dual": "goron_fast_roll || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Fire Arrow": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere || has_hover_boots"
-    "Snowhead Temple Center Level 3 Iced": "can_use_fire_short_range || (trick_sht_hot_water && (scarecrow_hookshot || short_hook_anywhere) && has_mask_goron) || trick_sht_hot_water_er"
-    "Snowhead Temple Center Level 3 Snow": "can_use_lens && scarecrow_hookshot"
+    "Snowhead Temple Center Level 2 Iced": "true"
     "WARP_SONGS": "true"
+  events:
+    SHT_FARORE_MAP: "can_use_farore"
   locations:
     "Snowhead Temple Map Alcove": "can_use_lens || can_hookshot || short_hook_anywhere"
-    "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon) || hookshot_anywhere) && can_use_lens"
     "Snowhead Temple Pot Central Room Scarecrow 1": "true"
     "Snowhead Temple Pot Central Room Scarecrow 2": "true"
     "Snowhead Temple Pot Central Room Level 2 1": "true"
@@ -126,7 +125,7 @@
     "Snowhead Temple Pillars Room Lower": "true"
     "WARP_SONGS": "true"
   events:
-    SNOWHEAD_RAISE_PILLAR: "(has_mask_goron || can_hammer) && (can_use_fire_short_range || ((event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN) && trick_sht_hot_water_er)))"
+    SNOWHEAD_RAISE_PILLAR: "((has_mask_goron || can_hammer) && (can_use_fire_short_range || (event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN) && trick_sht_hot_water_er))) && (can_use_fire_arrows || scarecrow_hookshot || (has_explosives && can_hookshot && small_keys_sh(3)) || (event(SHT_FARORE_MAP) && (has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots)))" #This is very strict right now until the flags for the event are implemented
   locations:
     "Snowhead Temple Pillars Room": "soul_freezard && can_kill_freezard_short_range"
     "Snowhead Temple Pot Pillars Room Upper 1": "true"
@@ -259,28 +258,43 @@
   dungeon: SH
   exits:
     "Snowhead Temple Dual Switches Unlocked": "true"
-    "Snowhead Temple Map Room Upper": "goron_fast_roll || can_hookshot || short_hook_anywhere || has_hover_boots"
+    "Snowhead Temple Center Level 2 Iced": "goron_fast_roll"
+    "Snowhead Temple Map Room Upper": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 1": "true"
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Pot Central Room Scarecrow 1": "true"
     "Snowhead Temple Pot Central Room Scarecrow 2": "true"
 
+"Snowhead Temple Center Level 2 Iced":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 1": "true"
+    "Snowhead Temple Center Level 2 Dual": "goron_fast_roll"
+    "Snowhead Temple Fire Arrow": "(can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere || has_hover_boots"
+    "Snowhead Temple Map Room Upper": "has_mask_goron || short_hook_anywhere || has_hover_boots || can_hookshot"
+    "Snowhead Temple Center Level 3 Iced": "can_use_fire_short_range || (trick_sht_hot_water && (scarecrow_hookshot || short_hook_anywhere) && has_mask_goron) || trick_sht_hot_water_er"
+    "Snowhead Temple Center Level 3 Snow": "can_use_lens && scarecrow_hookshot"
+    "WARP_SONGS": "true"
+  locations:
+    "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon) || hookshot_anywhere) && can_use_lens"
+
 "Snowhead Temple Fire Arrow":
   dungeon: SH
   exits:
-    "Snowhead Temple Map Room Upper": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere || has_hover_boots"
+    "Snowhead Temple Map Room Upper": "goron_fast_roll"
+    "Snowhead Temple Center Level 2 Iced": "(can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 3 Snow": "can_hookshot"
     "Snowhead Temple Center Level 1": "true"
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Fire Arrow": "soul_enemy(SOUL_ENEMY_WIZZROBE)"
-    "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon)) && can_use_lens"
+    "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon) || hookshot_anywhere) && can_use_lens"
 
 "Snowhead Temple Center Level 3 Snow":
   dungeon: SH
   exits:
-    "Snowhead Temple Map Room Upper": "true"
+    "Snowhead Temple Center Level 2 Iced": "true"
     "Snowhead Temple Center Level 2 Dual": "true"
     "Snowhead Temple Center Level 3 Iced": "has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots" # Hovers trick not necessary until other settings call for it
     "Snowhead Temple Snow Room": "small_keys_sh(3)"
@@ -288,6 +302,8 @@
     "Snowhead Temple Center Level 4": "short_hook_anywhere && (can_use_fire_arrows || has_mask_blast || has_bombchu)"
     "Snowhead Temple Dinolfos Room": "hookshot_anywhere"
     "WARP_SONGS": "true"
+  events:
+    SHT_PILLAR_UPPER: "event(SNOWHEAD_RAISE_PILLAR)"
   locations:
     "Snowhead Temple Central Room Alcove": "can_use_lens"
     "Snowhead Temple Small Snowball Central Room 1": "true"
@@ -300,10 +316,11 @@
     SHT_STICK_RUN: "has_sticks"
   exits:
     "Snowhead Temple Map Room Upper": "true"
+    "Snowhead Temple Center Level 2 Iced": "true"
     "Snowhead Temple Center Level 2 Dual": "has_weapon || is_tall || has_mask_goron || has_hover_boots"
     "Snowhead Temple Fire Arrow": "true"
     "Snowhead Temple Center Level 3 Snow": "has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots"
-    "Snowhead Temple Center Level 4": "event(SNOWHEAD_RAISE_PILLAR)"
+    "Snowhead Temple Center Level 4": "event(SHT_PILLAR_UPPER)"
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Central Room Alcove": "can_use_lens"
