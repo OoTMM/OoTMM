@@ -801,13 +801,33 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
   return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
+
+class PatchRandomizer {
+  private world: World;
+
+  constructor(
+    private worldId: number,
+    private logic: LogicResult,
+    private options: Options,
+    private settings: Settings,
+    private patchfile: Patchfile,
+  ) {
+    this.world = logic.worlds[worldId];
+  }
+
+  async run() {
+    this.patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(this.worldId, this.logic), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(this.worldId, this.logic), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(this.worldId, this.options, this.settings, 'oot', this.logic), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0500000, data: await gameChecks(this.worldId, this.options, this.settings, 'mm', this.logic), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(this.settings, 'oot', this.logic.hints[this.worldId]), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(this.settings, 'mm', this.logic.hints[this.worldId]), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(this.worldId, 'oot', this.logic), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0900000, data: gameEntrances(this.worldId, 'mm', this.logic), compressed: true });
+  }
+}
+
 export async function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
-  patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(worldId, logic), compressed: true });
-  patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(worldId, logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(worldId, options, settings, 'oot', logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0500000, data: await gameChecks(worldId, options, settings, 'mm', logic), compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(settings, 'oot', logic.hints[worldId]), compressed: true });
-  patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(settings, 'mm', logic.hints[worldId]), compressed: true });
-  patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(worldId, 'oot', logic), compressed: true });
-  patchfile.addNewFile({ vrom: 0xf0900000, data: gameEntrances(worldId, 'mm', logic), compressed: true });
+  const pr = new PatchRandomizer(worldId, logic, options, settings, patchfile);
+  await pr.run();
 }
