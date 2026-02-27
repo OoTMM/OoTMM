@@ -1,9 +1,8 @@
-import { ENTRANCES, SCENES, NPC } from '@ootmm/data';
+import { SCENES, NPC } from '@ootmm/data';
 import { Game, Settings, Random, sample } from '@ootmm/core';
 
 import { LogicResult } from '../logic';
 import { World, WorldCheck } from '../logic/world';
-import { padBuffer16, toU32Buffer } from '../util';
 import { Patchfile } from '../patch-build/patchfile';
 import { makeLocation, isLocationFullyShuffled } from '../logic/locations';
 import { ItemGroups, ItemHelpers } from '../items';
@@ -14,18 +13,7 @@ import { RandomizerPatcherConfig } from './config';
 import { gi, playerId } from './util';
 import { RandomizerPatcherStartingItems } from './starting-items';
 import { RandomizerPatcherHints } from './hints';
-
-const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
-  const entr = ENTRANCES[name as keyof typeof ENTRANCES];
-  if (entr === undefined) {
-    throw new Error(`Unknown entrance ${name}`);
-  }
-  let data = entr.id;
-  if (srcGame !== dstGame) {
-    data = (data | 0x80000000) >>> 0;
-  }
-  return data;
-}
+import { RandomizerPatcherEntrances } from './entrances';
 
 const checkId = (check: WorldCheck) => {
   if (check.type === 'npc') {
@@ -178,6 +166,8 @@ class PatchRandomizer {
     const bufStartingItems = RandomizerPatcherStartingItems.run({ worldId, logic, settings });
     const bufHintsOot = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'oot' });
     const bufHintsMm = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'mm' });
+    const bufEntrancesOot = RandomizerPatcherEntrances.run({ worldId, logic, settings, game: 'oot' });
+    const bufEntrancesMm = RandomizerPatcherEntrances.run({ worldId, logic, settings, game: 'mm' });
 
     this.patchfile.addNewFile({ vrom: 0xf0200000, data: bufConfig, compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0300000, data: bufStartingItems, compressed: false });
@@ -185,8 +175,8 @@ class PatchRandomizer {
     this.patchfile.addNewFile({ vrom: 0xf0500000, data: await this.gameChecks('mm'), compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0600000, data: bufHintsOot, compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0700000, data: bufHintsMm, compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0800000, data: this.gameEntrances('oot'), compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0900000, data: this.gameEntrances('mm'), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0800000, data: bufEntrancesOot, compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0900000, data: bufEntrancesMm, compressed: true });
   }
 
   private async gameChecks(game: Game): Promise<Uint8Array> {
@@ -224,22 +214,6 @@ class PatchRandomizer {
     end.fill(0xff);
     buffers.push(end);
     return concatUint8Arrays(buffers);
-  }
-
-  private gameEntrances(game: Game) {
-    const data: number[] = [];
-    for (const [src, dst] of this.world.entranceOverrides) {
-      const srcEntrance = ENTRANCES[src as keyof typeof ENTRANCES];
-      const dstEntrance = ENTRANCES[dst as keyof typeof ENTRANCES];
-      if (srcEntrance.game !== game)
-        continue;
-      const srcId = entrance2(srcEntrance.game, srcEntrance.game as Game, src);
-      const dstId = entrance2(srcEntrance.game, dstEntrance.game as Game, dst);
-      data.push(srcId, dstId);
-    }
-    data.push(0xffffffff);
-    data.push(0xffffffff);
-    return padBuffer16(toU32Buffer(data));
   }
 }
 
