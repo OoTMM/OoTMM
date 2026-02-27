@@ -9,6 +9,7 @@ import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
+import { Random, Settings } from '@ootmm/core';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = (env !== 'production');
@@ -48,6 +49,22 @@ function makeFile(opts: { name?: string, data: string | Uint8Array, mime: string
   return { name, data: opts.data, mime: opts.mime };
 }
 
+/* For settings that require randomization always */
+function randomVariants(settings: Settings) {
+  const random = new Random();
+  const randBytes = crypto.getRandomValues(new Uint8Array(32));
+  const randBytesAsHex = Array.from(randBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+  random.seed(randBytesAsHex);
+
+  if (settings.startingAge === 'random') {
+    if (random.next() & 1) {
+      settings.startingAge = 'adult';
+    } else {
+      settings.startingAge = 'child';
+    }
+  }
+}
+
 export class Generator {
   private monitor: Monitor;
   private oot: Uint8Array;
@@ -76,6 +93,8 @@ export class Generator {
     /* Apply random settings (if enabled) */
     if (this.opts.mode === 'random') {
       this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
+    } else if (this.opts.mode === 'create') {
+      randomVariants(this.opts.settings);
     }
 
     if (this.opts.mode !== 'patch') {
@@ -89,7 +108,6 @@ export class Generator {
       const logicResult = await logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
       patchfiles = await buildPatchfiles({
-        opts: this.opts,
         patch: patchfile,
         monitor: this.monitor,
         roms,

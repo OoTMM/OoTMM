@@ -55,23 +55,12 @@ export class LogicPassConfig {
   run() {
     this.state.monitor.log('Logic: Config');
 
-    const settings = { ...this.state.settings };
-
-    /* Handle starting age */
-    if (settings.startingAge === 'random') {
-      if (this.state.random.next() & 1) {
-        settings.startingAge = 'adult';
-      } else {
-        settings.startingAge = 'child';
-      }
-    }
-
     for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
       const piSword = makePlayerItem(Items.OOT_SWORD, playerId);
       const piSwordMaster = makePlayerItem(Items.OOT_SWORD_MASTER, playerId);
 
-      if (mustStartWithMasterSword(settings)) {
-        if (settings.progressiveSwordsOot === 'progressive') {
+      if (mustStartWithMasterSword(this.state.settings)) {
+        if (this.state.settings.progressiveSwordsOot === 'progressive') {
           if ((this.startingItems.get(piSword) || 0) > 1) {
             countMapRemove(this.startingItems, piSword, 1);
           }
@@ -87,7 +76,7 @@ export class LogicPassConfig {
     this.startingFairies();
 
     /* Handle clocks */
-    if (settings.clocks && settings.progressiveClocks === 'separate') {
+    if (this.state.settings.clocks && this.state.settings.progressiveClocks === 'separate') {
       for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
         /* Check if the player already has a clock */
         let hasClock = false;
@@ -109,6 +98,6 @@ export class LogicPassConfig {
       }
     }
 
-    return { settings, startingItems: this.startingItems };
+    return { startingItems: this.startingItems };
   }
 }
