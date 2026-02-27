@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Add 'Twinmold with Fire and Ice Arrows (MM)' trick, allowing to defeat Twinmold using only Fire and Ice Arrows.
 - Make fairies much easier to activate when walking into them.
 - Mute Market crowd in Ocarina of Time and Carpenters in Majora's Mask if their souls aren't collected.
 - Prevent accessing Ganon Fight without legitimately finding Master Sword.

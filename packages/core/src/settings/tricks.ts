@@ -779,6 +779,11 @@ export const TRICKS: Tricks = {
     name: "Twinmold with Bow (MM)",
     tooltip: "Defeat Twinmold using only the Bow.",
   },
+  MM_TWINMOLD_FIRE_AND_ICE: {
+    game: 'mm',
+    name: "Twinmold with Fire and Ice Arrows (MM)",
+    tooltip: "Defeat Twinmold using only Fire and Ice Arrows.",
+  },
   MM_KEG_RED_BOULDER: {
     game: 'mm',
     name: "Break Red Boulders using Powder Keg (MM)",
