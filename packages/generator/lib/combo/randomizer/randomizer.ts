@@ -6,7 +6,7 @@ import { GI, DATA_HINTS_POOL } from '../data';
 import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
 import { HintGossip } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
-import { Patchfile } from './patchfile';
+import { Patchfile } from '../patch-build/patchfile';
 import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../logic/locations';
 import { CONFVARS_VALUES } from '../confvars';
 import { Region, regionData } from '../logic/regions';
