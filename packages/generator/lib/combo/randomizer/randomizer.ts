@@ -1,48 +1,23 @@
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
-import { Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
+import { Game, Settings, Random, sample } from '@ootmm/core';
 
 import { LogicResult } from '../logic';
-import { GI, DATA_HINTS_POOL } from '../data';
+import { DATA_HINTS_POOL } from '../data';
 import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
 import { HintGossip } from '../logic/hints';
-import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { countMapAdd, padBuffer16, toU16Buffer, toU32Buffer } from '../util';
 import { Patchfile } from '../patch-build/patchfile';
 import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../logic/locations';
-import { CONFVARS_VALUES } from '../confvars';
-import { Region, regionData } from '../logic/regions';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
-import { SharedItemGroups } from '../logic/shared';
+import { regionData } from '../logic/regions';
+import { ItemGroups, ItemHelpers, ItemsCount } from '../items';
 import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
-import { DUNGEON_ENTRANCES } from '../logic/entrance';
 import { END_BOSS_METADATA } from '../logic/boss';
 import { PATH_EVENT_DATA } from '../logic/analysis-path';
-import { DUNGEONS, DUNGEONS_BY_KEY } from '../logic/dungeons';
+import { DUNGEONS_BY_KEY } from '../logic/dungeons';
 import { Options } from '../options';
-import { ITEMS_SUBSTITUTIONS, SHARED_ITEMS } from './items';
-import { worldConfig } from './world-config';
-
-const DUNGEON_REWARD_LOCATIONS = [
-  'OOT Deku Tree Boss',
-  'OOT Dodongo Cavern Boss',
-  'OOT Jabu-Jabu Boss',
-  'OOT Forest Temple Boss',
-  'OOT Fire Temple Boss',
-  'OOT Water Temple Boss',
-  'OOT Shadow Temple Boss',
-  'OOT Spirit Temple Boss',
-  'MM Woodfall Temple Boss',
-  'MM Snowhead Temple Boss',
-  'MM Great Bay Temple Boss',
-  'MM Stone Tower Temple Inverted Boss',
-];
-
-const BOMBCHU_BEHAVIORS = {
-  free: 0,
-  bombBag: 1,
-  bagFirst: 2,
-  bagSeparate: 3,
-};
+import { RandomizerPatcherConfig } from './config';
+import { gi } from './gi';
 
 const HINT_OFFSETS = {
   KEY: 0,
@@ -59,112 +34,6 @@ const HINT_OFFSETS = {
   IMPORTANCE2: 14,
   IMPORTANCE3: 15,
 };
-
-const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
-  let itemId = item.id;
-  if (generic) {
-    if (ItemHelpers.isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
-      itemId = gameId(game, 'SMALL_KEY', '_');
-    } else if (ItemHelpers.isKeyRingHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
-      itemId = gameId(game, 'KEY_RING', '_');
-    } else if (ItemHelpers.isSmallKeyTCG(item) && settings.smallKeyShuffleChestGame !== 'anywhere') {
-      itemId = gameId(game, 'SMALL_KEY', '_');
-    } else if (ItemHelpers.isKeyRingTCG(item) && settings.smallKeyShuffleChestGame !== 'anywhere') {
-      itemId = gameId(game, 'KEY_RING', '_');
-    } else if (ItemHelpers.isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'SMALL_KEY', '_');
-    } else if (ItemHelpers.isKeyRingRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'KEY_RING', '_');
-    } else if (ItemHelpers.isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'SMALL_KEY', '_');
-    } else if (ItemHelpers.isKeyRingRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'KEY_RING', '_');
-    } else if (ItemHelpers.isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
-      itemId = gameId(game, 'BOSS_KEY', '_');
-    } else if (ItemHelpers.isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'BOSS_KEY', '_');
-    } else if (ItemHelpers.isRegularBossKeyMm(item) && settings.bossKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'BOSS_KEY', '_');
-    } else if (ItemHelpers.isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
-      itemId = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (ItemHelpers.isDungeonStrayFairy(item) && settings.strayFairyChestShuffle !== 'anywhere' && settings.strayFairyOtherShuffle !== 'anywhere' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (ItemHelpers.isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'MAP', '_');
-    } else if (ItemHelpers.isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
-      itemId = gameId(game, 'COMPASS', '_');
-    }
-  }
-
-  /* Resolve shared item */
-  if (itemId === 'SHARED_OCARINA' && settings.fairyOcarinaMm && game === 'mm') {
-    itemId = 'MM_OCARINA';
-  } else {
-    const sharedItems = SHARED_ITEMS[game];
-    const sharedItem = sharedItems.get(itemId);
-    if (sharedItem) {
-      itemId = sharedItem;
-    }
-  }
-
-  /* Resolve shared items - new system */
-  for (const group of Object.values(SharedItemGroups)) {
-    for (const def of group) {
-      if (def.shared.id === itemId) {
-        itemId = def[game].id;
-        break;
-      }
-    }
-  }
-
-  /* Resolve substitutions */
-  if (itemId === 'MM_OCARINA' && settings.fairyOcarinaMm) {
-    itemId = 'MM_OCARINA_FAIRY';
-  } else if (itemId === 'MM_HOOKSHOT' && settings.shortHookshotMm) {
-    itemId = 'MM_HOOKSHOT_SHORT';
-  } else {
-    const subst = ITEMS_SUBSTITUTIONS[itemId];
-    if (subst) {
-      itemId = subst;
-    }
-  }
-
-  if (!GI.hasOwnProperty(itemId)) {
-    throw new Error(`Unknown item ${itemId}`);
-  }
-  let value = GI[itemId].index;
-
-  return value;
-};
-
-function entrance(srcName: string, world: World) {
-  const dstName = world.entranceOverrides.get(srcName) || srcName;
-  const srcGame: Game = (/^OOT_/.test(srcName) ? 'oot' : 'mm');
-  const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
-  const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
-  if (entr === undefined) {
-    throw new Error(`Unknown entrance ${dstName}`);
-  }
-  let data = entr.id;
-  if (srcGame !== dstGame) {
-    data = (data | 0x80000000) >>> 0;
-  }
-  return data;
-}
-
-function entranceAbs(world: World, name: string) {
-  const dstName = world.entranceOverrides.get(name) || name;
-  const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
-  const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
-  if (entr === undefined) {
-    throw new Error(`Unknown entrance ${dstName}`);
-  }
-  let data = entr.id;
-  if (dstGame === 'mm') {
-    data = (data | 0x80000000) >>> 0;
-  }
-  return data;
-}
 
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
   const entr = ENTRANCES[name as keyof typeof ENTRANCES];
@@ -451,18 +320,6 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   return data;
 }
 
-const regionsBuffer = (regions: Region[]) => {
-  const data = regions.map((region) => {
-    const regionId = (REGIONS as any)[regionData(region).id];
-    if (regionId === undefined) {
-      throw new Error(`Unknown region ${region}`);
-    }
-    const world = regionData(region).world + 1;
-    return [regionId, world];
-  });
-  return toU8Buffer(data.flat());
-};
-
 function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: ItemsCount) {
   const l = makePlayerLocations(logic.settings, locs);
   const i = l.map(x => logic.items.get(x)!);
@@ -516,7 +373,11 @@ class PatchRandomizer {
   }
 
   async run() {
-    this.patchfile.addNewFile({ vrom: 0xf0200000, data: this.randomizerData(), compressed: true });
+    const { worldId, logic, settings } = this;
+
+    const bufferConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
+
+    this.patchfile.addNewFile({ vrom: 0xf0200000, data: bufferConfig, compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0300000, data: this.randomizerStartingItems(), compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0400000, data: await this.gameChecks('oot'), compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0500000, data: await this.gameChecks('mm'), compressed: false });
@@ -524,200 +385,6 @@ class PatchRandomizer {
     this.patchfile.addNewFile({ vrom: 0xf0700000, data: this.gameHints('mm'), compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0800000, data: this.gameEntrances('oot'), compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0900000, data: this.gameEntrances('mm'), compressed: true });
-  }
-
-  private randomizerData(): Uint8Array {
-    const buffers = [];
-    buffers.push(toU8Buffer([this.worldId + 1, 0, 0, 0]));
-    buffers.push(this.dungeonWarpsBuffer());
-    buffers.push(this.dungeonEntrancesBuffer());
-    buffers.push(this.randomizerDungeonsBits());
-    buffers.push(this.randomizerWarps());
-    buffers.push(this.randomizerConfig());
-    buffers.push(this.specialConds());
-    buffers.push(toU16Buffer([this.settings.coinsRed, this.settings.coinsGreen, this.settings.coinsBlue, this.settings.coinsYellow]));
-    buffers.push(toU16Buffer(this.world.prices));
-    buffers.push(toU16Buffer([this.settings.triforcePieces, this.settings.triforceGoal]));
-    buffers.push(this.randomizerHints());
-    buffers.push(toI8Buffer(this.logic.hints[this.worldId].staticHintsImportances));
-    buffers.push(this.zoraSapphireBuffer());
-    buffers.push(toU8Buffer(this.world.bossIds));
-    buffers.push(toU8Buffer([this.settings.strayFairyRewardCount]));
-    buffers.push(toU8Buffer([BOMBCHU_BEHAVIORS[this.settings.bombchuBehaviorOot]]));
-    buffers.push(toU8Buffer([BOMBCHU_BEHAVIORS[this.settings.bombchuBehaviorMm]]));
-    buffers.push(toU8Buffer(this.world.songEvents));
-    return concatUint8Arrays(buffers);
-  }
-
-  private dungeonWarpsBuffer() {
-    const defaultWarps = [
-      'OOT_KOKIRI_FOREST_FROM_DEKU_TREE',
-      'OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN',
-      'OOT_ZORA_FOUNTAIN_FROM_JABU_JABU',
-      'OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST',
-      'OOT_DEATH_CRATER_FROM_TEMPLE_FIRE',
-      'OOT_LAKE_HYLIA_FROM_TEMPLE_WATER',
-      'OOT_GRAVEYARD_FROM_TEMPLE_SHADOW',
-      'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT',
-      'MM_WOODFALL_FROM_TEMPLE',
-      'MM_SNOWHEAD_FROM_TEMPLE',
-      'MM_GREAT_BAY_FROM_TEMPLE',
-      'MM_STONE_TOWER_INVERTED_FROM_TEMPLE',
-    ];
-
-    const entrances = defaultWarps.map((e) => entranceAbs(this.world, e));
-    return toU32Buffer(entrances);
-  }
-
-  private dungeonEntrancesBuffer() {
-    const buffer = new Uint8Array(DUNGEON_ENTRANCES.length * 4);
-
-    for (let i = 0; i < DUNGEON_ENTRANCES.length; ++i) {
-      const entranceName = DUNGEON_ENTRANCES[i];
-      const entranceData = this.world.dungeonsEntrances.get(entranceName) || { type: 'region', region: 'NONE' as Region };
-      let data: number;
-
-      if (entranceData.type === 'replace') {
-        data = DUNGEON_ENTRANCES.indexOf(entranceData.entrance);
-        data = (data | 0x80000000) >>> 0;
-      } else {
-        data = (REGIONS as any)[entranceData.region];
-      }
-
-      bufWriteU32BE(buffer, i * 4, data);
-    }
-
-    return buffer;
-  }
-
-  private randomizerDungeonsBits(): Uint8Array {
-    let mq = 0;
-    let preCompleted = 0;
-    const settingDataMQ = SETTINGS.find(x => x.key === 'mqDungeons')!;
-    for (let i = 0; i < settingDataMQ.values.length; ++i) {
-      const dungeon = settingDataMQ.values[i].value;
-      if (this.world.resolvedFlags.mqDungeons.has(dungeon)) {
-        mq |= 1 << i;
-      }
-    }
-
-    for (let i = 0; i < DUNGEONS.length; ++i) {
-      const dungeon = DUNGEONS[i];
-      if (this.world.preCompleted.has(dungeon.key)) {
-        preCompleted |= 1 << i;
-      }
-    }
-
-    const buffer = new Uint8Array(8);
-    bufWriteU32BE(buffer, 0, mq);
-    bufWriteU32BE(buffer, 4, preCompleted);
-    return buffer;
-  }
-
-  private randomizerWarps(): Uint8Array {
-    const songs = [
-      'OOT_WARP_SONG_MEADOW',
-      'OOT_WARP_SONG_CRATER',
-      'OOT_WARP_SONG_LAKE',
-      'OOT_WARP_SONG_DESERT',
-      'OOT_WARP_SONG_GRAVE',
-      'OOT_WARP_SONG_TEMPLE',
-    ];
-    const warpSongs = toU32Buffer(songs.map(e => entrance(e, this.world)));
-
-    const owlStatues = [
-      'MM_WARP_OWL_GREAT_BAY',
-      'MM_WARP_OWL_ZORA_CAPE',
-      'MM_WARP_OWL_SNOWHEAD',
-      'MM_WARP_OWL_MOUNTAIN_VILLAGE',
-      'MM_WARP_OWL_CLOCK_TOWN',
-      'MM_WARP_OWL_MILK_ROAD',
-      'MM_WARP_OWL_WOODFALL',
-      'MM_WARP_OWL_SOUTHERN_SWAMP',
-      'MM_WARP_OWL_IKANA_CANYON',
-      'MM_WARP_OWL_STONE_TOWER',
-    ];
-    const owlStatuesBuffer = toU32Buffer(owlStatues.map(e => entrance(e, this.world)));
-
-    const spawns = [
-      'OOT_SPAWN_ADULT',
-      'OOT_SPAWN_CHILD'
-    ];
-    const spawnsBuffer = toU32Buffer(spawns.map(e => entrance(e, this.world)));
-
-    return concatUint8Arrays([warpSongs, owlStatuesBuffer, spawnsBuffer]);
-  }
-
-  private randomizerConfig(): Uint8Array {
-    const config = worldConfig(this.world, this.settings);
-    const bits = Array.from(config).map((c) => {
-      const bit = CONFVARS_VALUES[c];
-      if (bit === undefined) {
-        throw new Error(`Unknown config ${c}`);
-      }
-      return bit;
-    });
-    const block = new Uint8Array(0x40);
-    for (const bit of bits) {
-      const byte = Math.floor(bit / 8);
-      const mask = 1 << (bit % 8);
-      block[byte] |= mask;
-    }
-    return block;
-  }
-
-  private specialConds() {
-    const buffers: Uint8Array[] = [];
-    const flagsKeys: keyof typeof SPECIAL_CONDS_FIELDS = Object.keys(SPECIAL_CONDS_FIELDS) as any;
-    for (const special in SPECIAL_CONDS) {
-      const cond = this.settings.specialConds[special as keyof typeof SPECIAL_CONDS];
-      let flags = 0;
-      for (let i = 0; i < flagsKeys.length; ++i) {
-        const key = flagsKeys[i];
-        if ((cond as any)[key]) {
-          flags = (flags | (1 << i)) >>> 0;
-        }
-      }
-      const buffer = new Uint8Array(8);
-      bufWriteU32BE(buffer, 0, flags);
-      bufWriteU16BE(buffer, 4, cond.count);
-      buffers.push(buffer);
-    }
-    return concatUint8Arrays(buffers);
-  }
-
-  private randomizerHints(): Uint8Array {
-    const buffers: Uint8Array[] = [];
-    const h = this.logic.hints[this.worldId];
-    buffers.push(regionsBuffer(h.dungeonRewards));
-    buffers.push(regionsBuffer([h.lightArrow]));
-    buffers.push(regionsBuffer(h.oathToOrder));
-    buffers.push(regionsBuffer([h.ganonBossKey]));
-    return concatUint8Arrays(buffers);
-  }
-
-  private zoraSapphireGI(): number | null {
-    /* Find the dungeon holding the Zora Sapphire */
-    const dungeonId = this.world.bossIds.indexOf(0x02);
-    if (dungeonId === -1)
-      return null;
-
-    /* Find the location */
-    const locId = DUNGEON_REWARD_LOCATIONS[dungeonId];
-    if (!locId)
-      return null;
-    const loc = makeLocation(locId, this.worldId);
-    const item = this.logic.items.get(loc);
-    if (!item)
-      return null;
-    return gi(this.settings, 'oot', item.item, false);
-  }
-
-  private zoraSapphireBuffer(): Uint8Array {
-    let value = this.zoraSapphireGI();
-    if (value === null)
-      value = gi(this.settings, 'oot', Items.OOT_STONE_SAPPHIRE, false);
-    return toU16Buffer([value]);
   }
 
   private randomizerStartingItems(): Uint8Array {

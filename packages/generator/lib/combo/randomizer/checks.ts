@@ -1,4 +1,3 @@
-
 const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SWORD', 'OOT_SWORD_KOKIRI'],
   ['SHARED_BOW', 'OOT_BOW'],
