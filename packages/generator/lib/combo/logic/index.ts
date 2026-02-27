@@ -18,6 +18,7 @@ import { LogicPassItemProperties } from './item-properties';
 import { LogicPassMinimize } from './minimize';
 import { LogicPassAnalysisPaths } from './analysis-path';
 import { LogicPassSongEvents } from './song-events';
+import { LogicPassCloak } from './cloak';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -74,6 +75,7 @@ export const logic = async (monitor: Monitor, opts: Options) => {
   const state = await solvedWorldState(monitor, opts);
 
   const data = pipeline(state)
+    .apply(LogicPassCloak)
     .apply(LogicPassAnalysis)
     .apply(LogicPassAnalysisPaths)
     .apply(LogicPassAnalysisFoolish)

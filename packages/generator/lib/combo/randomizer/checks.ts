@@ -1,13 +1,12 @@
 import { concatUint8Arrays } from 'uint8array-extras';
-import { Game, Random, sample, Settings } from '@ootmm/core';
+import { Game, Settings } from '@ootmm/core';
 import { NPC, SCENES } from '@ootmm/data';
 
 import { World, WorldCheck } from '../logic/world';
 import { LogicResult } from '../logic';
-import { isLocationFullyShuffled, makeLocation } from '../logic/locations';
+import { makeLocation } from '../logic/locations';
 import { gi, playerId } from './util';
 import { bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
-import { ItemGroups, ItemHelpers } from '../items';
 import { Options } from '../options';
 
 const SHARED_ITEMS_OOT = new Map([
@@ -200,23 +199,6 @@ export const ITEMS_SUBSTITUTIONS: { [k: string]: string } = {
   SHARED_TRIFORCE_WISDOM: 'OOT_TRIFORCE_WISDOM',
 };
 
-async function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): Promise<number> {
-  const random = new Random();
-  await random.seed(key.toString(16) + '\x00' + seed);
-
-  for (; ;) {
-    const locs = [...logic.items.keys()];
-    const loc = sample(random, locs);
-    const item = logic.items.get(loc)!;
-
-    if (!ItemHelpers.isItemMajor(item.item) && !ItemHelpers.isSilverRupee(item.item) && !ItemHelpers.isKey(item.item) && !ItemHelpers.isBossKey(item.item)) continue;
-    if (ItemGroups.JUNK.has(item.item)) continue;
-    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, logic.plandoLocations, loc, { songs: true, noPlando: true })) continue;
-
-    return gi(settings, 'oot', item.item, false);
-  }
-}
-
 const checkId = (check: WorldCheck) => {
   if (check.type === 'npc') {
     if (!NPC.hasOwnProperty(check.id)) {
@@ -370,13 +352,14 @@ export class RandomizerPatcherChecks {
       const key = checkKey(c);
       const itemGi = gi(this.ctx.settings, this.ctx.game, item.item, true);
       const b = new Uint8Array(16);
+      const cloakItem = this.ctx.logic.itemCloaks.get(loc);
+      let cloakGi = 0;
+      if (cloakItem) {
+        cloakGi = gi(this.ctx.settings, this.ctx.game, cloakItem, true);
+      }
       bufWriteU32BE(b, 0, key);
       bufWriteU16BE(b, 4, playerId(item.player));
       bufWriteU16BE(b, 6, itemGi);
-      let cloakGi = 0;
-      if (this.ctx.settings.cloakTraps && ItemGroups.TRAPS.has(item.item)) {
-        cloakGi = await makeCloakGi(key, this.ctx.options.seed, this.ctx.settings, this.ctx.logic);
-      }
       bufWriteU16BE(b, 8, cloakGi);
       buffers.push(b);
     }
