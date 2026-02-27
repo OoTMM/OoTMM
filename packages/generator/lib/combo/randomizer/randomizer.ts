@@ -5,9 +5,9 @@ import { LogicResult } from '../logic';
 import { DATA_HINTS_POOL } from '../data';
 import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
 import { HintGossip } from '../logic/hints';
-import { countMapAdd, padBuffer16, toU16Buffer, toU32Buffer } from '../util';
+import { padBuffer16, toU32Buffer } from '../util';
 import { Patchfile } from '../patch-build/patchfile';
-import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../logic/locations';
+import { makeLocation, isLocationFullyShuffled } from '../logic/locations';
 import { regionData } from '../logic/regions';
 import { ItemGroups, ItemHelpers, ItemsCount } from '../items';
 import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
@@ -18,6 +18,7 @@ import { DUNGEONS_BY_KEY } from '../logic/dungeons';
 import { Options } from '../options';
 import { RandomizerPatcherConfig } from './config';
 import { gi } from './gi';
+import { RandomizerPatcherStartingItems } from './starting-items';
 
 const HINT_OFFSETS = {
   KEY: 0,
@@ -320,45 +321,6 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   return data;
 }
 
-function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: ItemsCount) {
-  const l = makePlayerLocations(logic.settings, locs);
-  const i = l.map(x => logic.items.get(x)!);
-
-  for (const item of i) {
-    if (item.player === world) {
-      countMapAdd(items, item.item);
-    }
-  }
-}
-
-const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount => {
-  const { settings } = logic;
-  const itemsCount: ItemsCount = new Map;
-  for (const [pi, count] of logic.startingItems) {
-    if (pi.player === worldId) {
-      itemsCount.set(pi.item, count);
-    }
-  }
-
-  if (settings.tingleShuffle === 'starting') {
-    for (const item of ItemGroups.TINGLE_MAPS) {
-      itemsCount.set(item, 1);
-    }
-  }
-
-  if (settings.mapCompassShuffle === 'starting') {
-    for (const item of [...ItemGroups.MAPS, ...ItemGroups.COMPASSES]) {
-      itemsCount.set(item, 1);
-    }
-  }
-
-  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, locationsZelda(settings), itemsCount);
-  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], itemsCount);
-  if (settings.mmPreActivatedOwls.type !== 'none') addStartingItemLocsWorld(worldId, logic, getPreActivatedOwlsLocations(logic.worlds[worldId]), itemsCount);
-
-  return itemsCount;
-}
-
 class PatchRandomizer {
   private world: World;
 
@@ -376,36 +338,16 @@ class PatchRandomizer {
     const { worldId, logic, settings } = this;
 
     const bufferConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
+    const startingItems = RandomizerPatcherStartingItems.run({ worldId, logic, settings });
 
     this.patchfile.addNewFile({ vrom: 0xf0200000, data: bufferConfig, compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0300000, data: this.randomizerStartingItems(), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0300000, data: startingItems, compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0400000, data: await this.gameChecks('oot'), compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0500000, data: await this.gameChecks('mm'), compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0600000, data: this.gameHints('oot'), compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0700000, data: this.gameHints('mm'), compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0800000, data: this.gameEntrances('oot'), compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0900000, data: this.gameEntrances('mm'), compressed: true });
-  }
-
-  private randomizerStartingItems(): Uint8Array {
-    const ids: number[] = [];
-    const ids2: number[] = [];
-    const items = effectiveStartingItems(this.worldId, this.logic);
-    for (const [item, count] of items.entries()) {
-      const id = gi(this.settings, 'oot', item, false);
-      if (gi === undefined) {
-        throw new Error(`Unknown item ${item.id}`);
-      }
-      /* Consumables need to be added late */
-      if (ItemHelpers.isItemUnlimitedStarting(item)) {
-        ids2.push(id);
-        ids2.push(count);
-      } else {
-        ids.push(id);
-        ids.push(count);
-      }
-    }
-    return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
   }
 
   private async gameChecks(game: Game): Promise<Uint8Array> {
