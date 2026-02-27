@@ -166,31 +166,6 @@ const checkId = (check: WorldCheck) => {
   return check.id;
 }
 
-function zoraSapphireGI(worldId: number, logic: LogicResult): number | null {
-  /* Find the dungeon holding the Zora Sapphire */
-  const world = logic.worlds[worldId];
-  const dungeonId = world.bossIds.indexOf(0x02);
-  if (dungeonId === -1)
-    return null;
-
-  /* Find the location */
-  const locId = DUNGEON_REWARD_LOCATIONS[dungeonId];
-  if (!locId)
-    return null;
-  const loc = makeLocation(locId, worldId);
-  const item = logic.items.get(loc);
-  if (!item)
-    return null;
-  return gi(logic.settings, 'oot', item.item, false);
-}
-
-function zoraSapphireBuffer(world: number, logic: LogicResult): Uint8Array {
-  let value = zoraSapphireGI(world, logic);
-  if (value === null)
-    value = gi(logic.settings, 'oot', Items.OOT_STONE_SAPPHIRE, false);
-  return toU16Buffer([value]);
-}
-
 function checkKey(check: WorldCheck): number {
   /* Extract the ID */
   const id = checkId(check);
@@ -551,43 +526,6 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   return padBuffer16(toU32Buffer(data));
 };
 
-export const randomizerHints = (world: number, logic: LogicResult): Uint8Array => {
-  const buffers: Uint8Array[] = [];
-  const h = logic.hints[world];
-  buffers.push(regionsBuffer(h.dungeonRewards));
-  buffers.push(regionsBuffer([h.lightArrow]));
-  buffers.push(regionsBuffer(h.oathToOrder));
-  buffers.push(regionsBuffer([h.ganonBossKey]));
-  return concatUint8Arrays(buffers);
-};
-
-const randomizerBoss = (worldId: number, logic: LogicResult): Uint8Array => toU8Buffer(logic.worlds[worldId].bossIds);
-const randomizerTriforce = (logic: LogicResult): Uint8Array => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
-
-function specialConds(settings: Settings) {
-  const buffers: Uint8Array[] = [];
-  const flagsKeys: keyof typeof SPECIAL_CONDS_FIELDS = Object.keys(SPECIAL_CONDS_FIELDS) as any;
-  for (const special in SPECIAL_CONDS) {
-    const cond = settings.specialConds[special as keyof typeof SPECIAL_CONDS];
-    let flags = 0;
-    for (let i = 0; i < flagsKeys.length; ++i) {
-      const key = flagsKeys[i];
-      if ((cond as any)[key]) {
-        flags = (flags | (1 << i)) >>> 0;
-      }
-    }
-    const buffer = new Uint8Array(8);
-    bufWriteU32BE(buffer, 0, flags);
-    bufWriteU16BE(buffer, 4, cond.count);
-    buffers.push(buffer);
-  }
-  return concatUint8Arrays(buffers);
-}
-
-export const prices = (worldId: number, logic: LogicResult): Uint8Array => {
-  return toU16Buffer(logic.worlds[worldId].prices);
-};
-
 const BOMBCHU_BEHAVIORS = {
   free: 0,
   bombBag: 1,
@@ -660,7 +598,6 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
   return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
-
 class PatchRandomizer {
   private world: World;
 
@@ -693,17 +630,17 @@ class PatchRandomizer {
     buffers.push(this.randomizerDungeonsBits());
     buffers.push(this.randomizerWarps());
     buffers.push(this.randomizerConfig());
-    buffers.push(specialConds(this.settings));
+    buffers.push(this.specialConds());
     buffers.push(toU16Buffer([this.settings.coinsRed, this.settings.coinsGreen, this.settings.coinsBlue, this.settings.coinsYellow]));
-    buffers.push(prices(this.worldId, this.logic));
-    buffers.push(randomizerTriforce(this.logic));
-    buffers.push(randomizerHints(this.worldId, this.logic));
+    buffers.push(toU16Buffer(this.world.prices));
+    buffers.push(toU16Buffer([this.settings.triforcePieces, this.settings.triforceGoal]));
+    buffers.push(this.randomizerHints());
     buffers.push(toI8Buffer(this.logic.hints[this.worldId].staticHintsImportances));
-    buffers.push(zoraSapphireBuffer(this.worldId, this.logic));
-    buffers.push(randomizerBoss(this.worldId, this.logic));
+    buffers.push(this.zoraSapphireBuffer());
+    buffers.push(toU8Buffer(this.world.bossIds));
     buffers.push(toU8Buffer([this.settings.strayFairyRewardCount]));
-    buffers.push(configBombchuBehavior(this.settings.bombchuBehaviorOot));
-    buffers.push(configBombchuBehavior(this.settings.bombchuBehaviorMm));
+    buffers.push(toU8Buffer([BOMBCHU_BEHAVIORS[this.settings.bombchuBehaviorOot]]));
+    buffers.push(toU8Buffer([BOMBCHU_BEHAVIORS[this.settings.bombchuBehaviorMm]]));
     buffers.push(toU8Buffer(this.world.songEvents));
     return concatUint8Arrays(buffers);
   }
@@ -823,6 +760,60 @@ class PatchRandomizer {
       block[byte] |= mask;
     }
     return block;
+  }
+
+  private specialConds() {
+    const buffers: Uint8Array[] = [];
+    const flagsKeys: keyof typeof SPECIAL_CONDS_FIELDS = Object.keys(SPECIAL_CONDS_FIELDS) as any;
+    for (const special in SPECIAL_CONDS) {
+      const cond = this.settings.specialConds[special as keyof typeof SPECIAL_CONDS];
+      let flags = 0;
+      for (let i = 0; i < flagsKeys.length; ++i) {
+        const key = flagsKeys[i];
+        if ((cond as any)[key]) {
+          flags = (flags | (1 << i)) >>> 0;
+        }
+      }
+      const buffer = new Uint8Array(8);
+      bufWriteU32BE(buffer, 0, flags);
+      bufWriteU16BE(buffer, 4, cond.count);
+      buffers.push(buffer);
+    }
+    return concatUint8Arrays(buffers);
+  }
+
+  private randomizerHints(): Uint8Array {
+    const buffers: Uint8Array[] = [];
+    const h = this.logic.hints[this.worldId];
+    buffers.push(regionsBuffer(h.dungeonRewards));
+    buffers.push(regionsBuffer([h.lightArrow]));
+    buffers.push(regionsBuffer(h.oathToOrder));
+    buffers.push(regionsBuffer([h.ganonBossKey]));
+    return concatUint8Arrays(buffers);
+  }
+
+  private zoraSapphireGI(): number | null {
+    /* Find the dungeon holding the Zora Sapphire */
+    const dungeonId = this.world.bossIds.indexOf(0x02);
+    if (dungeonId === -1)
+      return null;
+
+    /* Find the location */
+    const locId = DUNGEON_REWARD_LOCATIONS[dungeonId];
+    if (!locId)
+      return null;
+    const loc = makeLocation(locId, this.worldId);
+    const item = this.logic.items.get(loc);
+    if (!item)
+      return null;
+    return gi(this.settings, 'oot', item.item, false);
+  }
+
+  private zoraSapphireBuffer(): Uint8Array {
+    let value = this.zoraSapphireGI();
+    if (value === null)
+      value = gi(this.settings, 'oot', Items.OOT_STONE_SAPPHIRE, false);
+    return toU16Buffer([value]);
   }
 }
 
