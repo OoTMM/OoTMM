@@ -1,4 +1,4 @@
-import { Game, Settings } from '@ootmm/core';
+import { Game } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
 
 import { LogicResult } from '../logic';
@@ -21,7 +21,6 @@ type RandomizerPatcherEntrancesContext = {
   game: Game;
   worldId: number;
   logic: LogicResult;
-  settings: Settings;
 };
 
 export class RandomizerPatcherEntrances {

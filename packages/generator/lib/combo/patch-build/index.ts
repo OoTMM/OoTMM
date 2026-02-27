@@ -7,7 +7,7 @@ import { LogicResult } from '../logic';
 import { Monitor } from '../monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
-import { patchRandomizer } from '../randomizer/randomizer';
+import { patchRandomizer } from '../randomizer';
 import { PatchGroup } from './group';
 import { isEntranceShuffle } from '../logic/helpers';
 import { Options } from '../options';

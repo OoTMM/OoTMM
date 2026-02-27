@@ -1,3 +1,15 @@
+import { concatUint8Arrays } from 'uint8array-extras';
+import { Game, Random, sample, Settings } from '@ootmm/core';
+import { NPC, SCENES } from '@ootmm/data';
+
+import { World, WorldCheck } from '../logic/world';
+import { LogicResult } from '../logic';
+import { isLocationFullyShuffled, makeLocation } from '../logic/locations';
+import { gi, playerId } from './util';
+import { bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
+import { ItemGroups, ItemHelpers } from '../items';
+import { Options } from '../options';
+
 const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SWORD', 'OOT_SWORD_KOKIRI'],
   ['SHARED_BOW', 'OOT_BOW'],
@@ -170,20 +182,210 @@ export const SHARED_ITEMS = {
 };
 
 export const ITEMS_SUBSTITUTIONS: { [k: string]: string } = {
-  OOT_SWORD: "OOT_SWORD_KOKIRI",
-  OOT_SWORD_GORON: "OOT_SWORD_KNIFE",
-  OOT_OCARINA: "OOT_OCARINA_FAIRY",
-  OOT_STRENGTH: "OOT_GORON_BRACELET",
-  OOT_SCALE: "OOT_SCALE_BRONZE",
-  OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
-  MM_SWORD: "MM_SWORD_KOKIRI",
-  MM_SHIELD: "MM_PROGRESSIVE_SHIELD_DEKU",
-  MM_OCARINA: "MM_OCARINA_OF_TIME",
-  MM_SCALE: "MM_SCALE_BRONZE",
-  MM_STRENGTH: "MM_GORON_BRACELET",
-  MM_CLOCK: "MM_CLOCK1",
-  SHARED_TRIFORCE: "OOT_TRIFORCE",
-  SHARED_TRIFORCE_POWER: "OOT_TRIFORCE_POWER",
-  SHARED_TRIFORCE_COURAGE: "OOT_TRIFORCE_COURAGE",
-  SHARED_TRIFORCE_WISDOM: "OOT_TRIFORCE_WISDOM",
+  OOT_SWORD: 'OOT_SWORD_KOKIRI',
+  OOT_SWORD_GORON: 'OOT_SWORD_KNIFE',
+  OOT_OCARINA: 'OOT_OCARINA_FAIRY',
+  OOT_STRENGTH: 'OOT_GORON_BRACELET',
+  OOT_SCALE: 'OOT_SCALE_BRONZE',
+  OOT_SHIELD: 'OOT_PROGRESSIVE_SHIELD_DEKU',
+  MM_SWORD: 'MM_SWORD_KOKIRI',
+  MM_SHIELD: 'MM_PROGRESSIVE_SHIELD_DEKU',
+  MM_OCARINA: 'MM_OCARINA_OF_TIME',
+  MM_SCALE: 'MM_SCALE_BRONZE',
+  MM_STRENGTH: 'MM_GORON_BRACELET',
+  MM_CLOCK: 'MM_CLOCK1',
+  SHARED_TRIFORCE: 'OOT_TRIFORCE',
+  SHARED_TRIFORCE_POWER: 'OOT_TRIFORCE_POWER',
+  SHARED_TRIFORCE_COURAGE: 'OOT_TRIFORCE_COURAGE',
+  SHARED_TRIFORCE_WISDOM: 'OOT_TRIFORCE_WISDOM',
 };
+
+async function makeCloakGi(key: number, seed: string, settings: Settings, logic: LogicResult): Promise<number> {
+  const random = new Random();
+  await random.seed(key.toString(16) + '\x00' + seed);
+
+  for (; ;) {
+    const locs = [...logic.items.keys()];
+    const loc = sample(random, locs);
+    const item = logic.items.get(loc)!;
+
+    if (!ItemHelpers.isItemMajor(item.item) && !ItemHelpers.isSilverRupee(item.item) && !ItemHelpers.isKey(item.item) && !ItemHelpers.isBossKey(item.item)) continue;
+    if (ItemGroups.JUNK.has(item.item)) continue;
+    if (!isLocationFullyShuffled(settings, logic.fixedLocations, logic.items, logic.plandoLocations, loc, { songs: true, noPlando: true })) continue;
+
+    return gi(settings, 'oot', item.item, false);
+  }
+}
+
+const checkId = (check: WorldCheck) => {
+  if (check.type === 'npc') {
+    if (!NPC.hasOwnProperty(check.id)) {
+      throw new Error(`Unknown NPC ${check.id}`);
+    }
+    return (NPC as any)[check.id];
+  }
+  return check.id;
+}
+
+function checkKey(check: WorldCheck): number {
+  /* Extract the ID */
+  const id = checkId(check);
+
+  /* Extract the type */
+  let typeId: number;
+  switch (check.type) {
+    case 'chest':
+      typeId = 0x01;
+      break;
+    case 'collectible':
+      typeId = 0x02;
+      break;
+    case 'npc':
+      typeId = 0x03;
+      break;
+    case 'gs':
+      typeId = 0x04;
+      break;
+    case 'sf':
+      typeId = 0x05;
+      break;
+    case 'cow':
+      typeId = 0x06;
+      break;
+    case 'shop':
+      typeId = 0x07;
+      break;
+    case 'scrub':
+      typeId = 0x08;
+      break;
+    case 'sr':
+      typeId = 0x09;
+      break;
+    case 'fish':
+      typeId = 0x0A;
+      break;
+    case 'pot':
+    case 'crate':
+    case 'barrel':
+    case 'grass':
+    case 'tree':
+    case 'bush':
+    case 'rock':
+    case 'soil':
+    case 'fairy':
+    case 'snowball':
+    case 'hive':
+    case 'rupee':
+    case 'heart':
+    case 'fairy_spot':
+    case 'wonder':
+    case 'butterfly':
+    case 'redboulder':
+    case 'icicle':
+    case 'redice':
+      /* xflag */
+      typeId = 0x10 + ((id >> 16) & 0xf);
+      break;
+  }
+
+  /* Extract the scene ID */
+  let sceneId = 0;
+  switch (check.type) {
+    case 'chest':
+    case 'collectible':
+    case 'sf':
+    case 'pot':
+    case 'crate':
+    case 'barrel':
+    case 'grass':
+    case 'tree':
+    case 'bush':
+    case 'rock':
+    case 'soil':
+    case 'fairy':
+    case 'snowball':
+    case 'hive':
+    case 'rupee':
+    case 'heart':
+    case 'fairy_spot':
+    case 'wonder':
+    case 'butterfly':
+    case 'redboulder':
+    case 'icicle':
+    case 'redice':
+      sceneId = (SCENES as any)[check.scene];
+      if (sceneId === undefined) {
+        throw new Error(`Unknown scene ${check.scene}`);
+      }
+      break;
+    default:
+      break;
+  }
+
+  /* Build the key */
+  let key = 0;
+  key = (key | ((typeId & 0xff) << 24)) >>> 0;
+  key = (key | ((sceneId & 0xff) << 16)) >>> 0;
+  key = (key | (id & 0xffff)) >>> 0;
+
+  return key;
+}
+
+type RandomizerPatcherChecksContext = {
+  game: Game;
+  worldId: number;
+  logic: LogicResult;
+  settings: Settings;
+  options: Options;
+};
+
+export class RandomizerPatcherChecks {
+  private ctx: RandomizerPatcherChecksContext;
+  private world: World;
+
+  constructor(ctx: RandomizerPatcherChecksContext) {
+    this.ctx = ctx;
+    this.world = ctx.logic.worlds[ctx.worldId];
+  }
+
+  public static async run(ctx: RandomizerPatcherChecksContext) {
+    return (new RandomizerPatcherChecks(ctx)).execute();
+  }
+
+  private async execute(): Promise<Uint8Array> {
+    const buffers: Uint8Array[] = [];
+    for (const locId in this.world.checks) {
+      const loc = makeLocation(locId, this.ctx.worldId);
+      const c = this.world.checks[locId];
+      const item = this.ctx.logic.items.get(loc)!;
+
+      if (c.game !== this.ctx.game) {
+        continue;
+      }
+
+      /* Skip cows if not shuffled */
+      if (c.game === 'oot' && c.type === 'cow' && !this.ctx.settings.cowShuffleOot) continue;
+      if (c.game === 'mm' && c.type === 'cow' && !this.ctx.settings.cowShuffleMm) continue;
+
+      const key = checkKey(c);
+      const itemGi = gi(this.ctx.settings, this.ctx.game, item.item, true);
+      const b = new Uint8Array(16);
+      bufWriteU32BE(b, 0, key);
+      bufWriteU16BE(b, 4, playerId(item.player));
+      bufWriteU16BE(b, 6, itemGi);
+      let cloakGi = 0;
+      if (this.ctx.settings.cloakTraps && ItemGroups.TRAPS.has(item.item)) {
+        cloakGi = await makeCloakGi(key, this.ctx.options.seed, this.ctx.settings, this.ctx.logic);
+      }
+      bufWriteU16BE(b, 8, cloakGi);
+      buffers.push(b);
+    }
+
+    /* Sort by key ascending */
+    buffers.sort((a, b) => bufReadU32BE(a, 0) < bufReadU32BE(b, 0) ? -1 : 1);
+    const end = new Uint8Array(16);
+    end.fill(0xff);
+    buffers.push(end);
+    return concatUint8Arrays(buffers);
+  }
+}
