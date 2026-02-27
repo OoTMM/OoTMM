@@ -1,11 +1,10 @@
-import path from 'path';
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
 import { Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Random, sample } from '@ootmm/core';
 
 import { LogicResult } from '../logic';
 import { GI, DATA_HINTS_POOL } from '../data';
 import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
-import { HintGossip, WorldHints } from '../logic/hints';
+import { HintGossip } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { locationsZelda, makeLocation, makePlayerLocations, getPreActivatedOwlsLocations, isLocationFullyShuffled } from '../logic/locations';
@@ -37,6 +36,29 @@ const DUNGEON_REWARD_LOCATIONS = [
   'MM Great Bay Temple Boss',
   'MM Stone Tower Temple Inverted Boss',
 ];
+
+const BOMBCHU_BEHAVIORS = {
+  free: 0,
+  bombBag: 1,
+  bagFirst: 2,
+  bagSeparate: 3,
+};
+
+const HINT_OFFSETS = {
+  KEY: 0,
+  TYPE: 1,
+  REGION: 2,
+  WORLD: 3,
+  ITEM: 4,
+  ITEM2: 6,
+  ITEM3: 8,
+  PLAYER: 10,
+  PLAYER2: 11,
+  PLAYER3: 12,
+  IMPORTANCE: 13,
+  IMPORTANCE2: 14,
+  IMPORTANCE3: 15,
+};
 
 const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
   let itemId = item.id;
@@ -293,59 +315,6 @@ function playerId(player: number | 'all'): number {
   return player + 1;
 }
 
-const gameChecks = async (worldId: number, opts: Options, settings: Settings, game: Game, logic: LogicResult): Promise<Uint8Array> => {
-  const buffers: Uint8Array[] = [];
-  const world = logic.worlds[worldId];
-  for (const locId in world.checks) {
-    const loc = makeLocation(locId, worldId);
-    const c = world.checks[locId];
-    const item = logic.items.get(loc)!;
-
-    if (c.game !== game) {
-      continue;
-    }
-
-    /* Skip cows if not shuffled */
-    if (c.game === 'oot' && c.type === 'cow' && !settings.cowShuffleOot) continue;
-    if (c.game === 'mm' && c.type === 'cow' && !settings.cowShuffleMm) continue;
-
-    const key = checkKey(c);
-    const itemGi = gi(settings, game, item.item, true);
-    const b = new Uint8Array(16);
-    bufWriteU32BE(b, 0, key);
-    bufWriteU16BE(b, 4, playerId(item.player));
-    bufWriteU16BE(b, 6, itemGi);
-    let cloakGi = 0;
-    if (settings.cloakTraps && ItemGroups.TRAPS.has(item.item)) {
-      cloakGi = await makeCloakGi(key, opts.seed, settings, logic);
-    }
-    bufWriteU16BE(b, 8, cloakGi);
-    buffers.push(b);
-  }
-  /* Sort by key ascending */
-  buffers.sort((a, b) => bufReadU32BE(a, 0) < bufReadU32BE(b, 0) ? -1 : 1);
-  const end = new Uint8Array(16);
-  end.fill(0xff);
-  buffers.push(end);
-  return concatUint8Arrays(buffers);
-};
-
-const HINT_OFFSETS = {
-  KEY: 0,
-  TYPE: 1,
-  REGION: 2,
-  WORLD: 3,
-  ITEM: 4,
-  ITEM2: 6,
-  ITEM3: 8,
-  PLAYER: 10,
-  PLAYER2: 11,
-  PLAYER3: 12,
-  IMPORTANCE: 13,
-  IMPORTANCE2: 14,
-  IMPORTANCE3: 15,
-};
-
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Uint8Array => {
   const data = new Uint8Array(0x10);
   data.fill(0xff);
@@ -482,21 +451,6 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   return data;
 }
 
-const gameHints = (settings: Settings, game: Game, hints: WorldHints): Uint8Array => {
-  const buffers: Uint8Array[] = [];
-  for (const gossip in hints.gossip) {
-    const h = hints.gossip[gossip];
-    if (h.game !== game) {
-      continue;
-    }
-    buffers.push(hintBuffer(settings, game, gossip, h));
-  }
-  const b = new Uint8Array(0x10);
-  b.fill(0xff);
-  buffers.push(b);
-  return padBuffer16(concatUint8Arrays(buffers));
-}
-
 const regionsBuffer = (regions: Region[]) => {
   const data = regions.map((region) => {
     const regionId = (REGIONS as any)[regionData(region).id];
@@ -508,34 +462,6 @@ const regionsBuffer = (regions: Region[]) => {
   });
   return toU8Buffer(data.flat());
 };
-
-const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
-  const data: number[] = [];
-  const world = logic.worlds[worldId];
-  for (const [src, dst] of world.entranceOverrides) {
-    const srcEntrance = ENTRANCES[src as keyof typeof ENTRANCES];
-    const dstEntrance = ENTRANCES[dst as keyof typeof ENTRANCES];
-    if (srcEntrance.game !== game)
-      continue;
-    const srcId = entrance2(srcEntrance.game, srcEntrance.game as Game, src);
-    const dstId = entrance2(srcEntrance.game, dstEntrance.game as Game, dst);
-    data.push(srcId, dstId);
-  }
-  data.push(0xffffffff);
-  data.push(0xffffffff);
-  return padBuffer16(toU32Buffer(data));
-};
-
-const BOMBCHU_BEHAVIORS = {
-  free: 0,
-  bombBag: 1,
-  bagFirst: 2,
-  bagSeparate: 3,
-};
-
-function configBombchuBehavior(behavior: keyof typeof BOMBCHU_BEHAVIORS): Uint8Array {
-  return new Uint8Array([BOMBCHU_BEHAVIORS[behavior]]);
-}
 
 function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: ItemsCount) {
   const l = makePlayerLocations(logic.settings, locs);
@@ -576,28 +502,6 @@ const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount
   return itemsCount;
 }
 
-const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array => {
-  const { settings } = logic;
-  const ids: number[] = [];
-  const ids2: number[] = [];
-  const items = effectiveStartingItems(world, logic);
-  for (const [item, count] of items.entries()) {
-    const id = gi(settings, 'oot', item, false);
-    if (gi === undefined) {
-      throw new Error(`Unknown item ${item.id}`);
-    }
-    /* Consumables need to be added late */
-    if (ItemHelpers.isItemUnlimitedStarting(item)) {
-      ids2.push(id);
-      ids2.push(count);
-    } else {
-      ids.push(id);
-      ids.push(count);
-    }
-  }
-  return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
-};
-
 class PatchRandomizer {
   private world: World;
 
@@ -613,13 +517,13 @@ class PatchRandomizer {
 
   async run() {
     this.patchfile.addNewFile({ vrom: 0xf0200000, data: this.randomizerData(), compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(this.worldId, this.logic), compressed: false });
-    this.patchfile.addNewFile({ vrom: 0xf0400000, data: await gameChecks(this.worldId, this.options, this.settings, 'oot', this.logic), compressed: false });
-    this.patchfile.addNewFile({ vrom: 0xf0500000, data: await gameChecks(this.worldId, this.options, this.settings, 'mm', this.logic), compressed: false });
-    this.patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(this.settings, 'oot', this.logic.hints[this.worldId]), compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(this.settings, 'mm', this.logic.hints[this.worldId]), compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(this.worldId, 'oot', this.logic), compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0900000, data: gameEntrances(this.worldId, 'mm', this.logic), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0300000, data: this.randomizerStartingItems(), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0400000, data: await this.gameChecks('oot'), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0500000, data: await this.gameChecks('mm'), compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0600000, data: this.gameHints('oot'), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0700000, data: this.gameHints('mm'), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0800000, data: this.gameEntrances('oot'), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0900000, data: this.gameEntrances('mm'), compressed: true });
   }
 
   private randomizerData(): Uint8Array {
@@ -814,6 +718,96 @@ class PatchRandomizer {
     if (value === null)
       value = gi(this.settings, 'oot', Items.OOT_STONE_SAPPHIRE, false);
     return toU16Buffer([value]);
+  }
+
+  private randomizerStartingItems(): Uint8Array {
+    const ids: number[] = [];
+    const ids2: number[] = [];
+    const items = effectiveStartingItems(this.worldId, this.logic);
+    for (const [item, count] of items.entries()) {
+      const id = gi(this.settings, 'oot', item, false);
+      if (gi === undefined) {
+        throw new Error(`Unknown item ${item.id}`);
+      }
+      /* Consumables need to be added late */
+      if (ItemHelpers.isItemUnlimitedStarting(item)) {
+        ids2.push(id);
+        ids2.push(count);
+      } else {
+        ids.push(id);
+        ids.push(count);
+      }
+    }
+    return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
+  }
+
+  private async gameChecks(game: Game): Promise<Uint8Array> {
+    const buffers: Uint8Array[] = [];
+    for (const locId in this.world.checks) {
+      const loc = makeLocation(locId, this.worldId);
+      const c = this.world.checks[locId];
+      const item = this.logic.items.get(loc)!;
+
+      if (c.game !== game) {
+        continue;
+      }
+
+      /* Skip cows if not shuffled */
+      if (c.game === 'oot' && c.type === 'cow' && !this.settings.cowShuffleOot) continue;
+      if (c.game === 'mm' && c.type === 'cow' && !this.settings.cowShuffleMm) continue;
+
+      const key = checkKey(c);
+      const itemGi = gi(this.settings, game, item.item, true);
+      const b = new Uint8Array(16);
+      bufWriteU32BE(b, 0, key);
+      bufWriteU16BE(b, 4, playerId(item.player));
+      bufWriteU16BE(b, 6, itemGi);
+      let cloakGi = 0;
+      if (this.settings.cloakTraps && ItemGroups.TRAPS.has(item.item)) {
+        cloakGi = await makeCloakGi(key, this.options.seed, this.settings, this.logic);
+      }
+      bufWriteU16BE(b, 8, cloakGi);
+      buffers.push(b);
+    }
+
+    /* Sort by key ascending */
+    buffers.sort((a, b) => bufReadU32BE(a, 0) < bufReadU32BE(b, 0) ? -1 : 1);
+    const end = new Uint8Array(16);
+    end.fill(0xff);
+    buffers.push(end);
+    return concatUint8Arrays(buffers);
+  }
+
+  private gameHints(game: Game): Uint8Array {
+    const buffers: Uint8Array[] = [];
+    const hints = this.logic.hints[this.worldId];
+    for (const gossip in hints.gossip) {
+      const h = hints.gossip[gossip];
+      if (h.game !== game) {
+        continue;
+      }
+      buffers.push(hintBuffer(this.settings, game, gossip, h));
+    }
+    const b = new Uint8Array(0x10);
+    b.fill(0xff);
+    buffers.push(b);
+    return padBuffer16(concatUint8Arrays(buffers));
+  }
+
+  private gameEntrances(game: Game) {
+    const data: number[] = [];
+    for (const [src, dst] of this.world.entranceOverrides) {
+      const srcEntrance = ENTRANCES[src as keyof typeof ENTRANCES];
+      const dstEntrance = ENTRANCES[dst as keyof typeof ENTRANCES];
+      if (srcEntrance.game !== game)
+        continue;
+      const srcId = entrance2(srcEntrance.game, srcEntrance.game as Game, src);
+      const dstId = entrance2(srcEntrance.game, dstEntrance.game as Game, dst);
+      data.push(srcId, dstId);
+    }
+    data.push(0xffffffff);
+    data.push(0xffffffff);
+    return padBuffer16(toU32Buffer(data));
   }
 }
 
