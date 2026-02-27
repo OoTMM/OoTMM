@@ -97,8 +97,6 @@
     SOUTHERN_SWAMP_HIVE: "can_hookshot || has_arrows || can_use_deku_bubble || (has_hover_boots && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU))))"
   locations:
     "Southern Swamp Hive": "is_swamp_poisoned && event(SOUTHERN_SWAMP_HIVE) && (has(MASK_DEKU) || has_hover_boots)"
-    "Southern Swamp Rupee 1": "is_swamp_poisoned"
-    "Southern Swamp Rupee 2": "is_swamp_poisoned"
 
 "Swamp Rupee Flowers":
   region: SOUTHERN_SWAMP
