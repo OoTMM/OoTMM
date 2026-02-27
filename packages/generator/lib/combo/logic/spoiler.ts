@@ -14,7 +14,7 @@ import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
-import { PlayerItem, PlayerItems } from '../items';
+import { Item, PlayerItem, PlayerItems } from '../items';
 import { LogWriter } from '../util/log-writer';
 import { BOSS_METADATA_BY_DUNGEON } from './boss';
 import { DUNGEONS_BY_KEY } from './dungeons';
@@ -28,13 +28,14 @@ export class LogicPassSpoiler {
 
   constructor(
     private readonly state: {
-      worlds: World[],
-      items: ItemPlacement,
-      analysis: Analysis,
-      opts: Options,
-      settings: Settings,
-      hints: Hints,
-      monitor: Monitor,
+      worlds: World[];
+      items: ItemPlacement;
+      itemCloaks: Map<Location, Item>;
+      analysis: Analysis;
+      opts: Options;
+      settings: Settings;
+      hints: Hints;
+      monitor: Monitor;
       startingItems: PlayerItems;
       plandoLocations: Map<Location, PlayerItem>;
     }
@@ -420,6 +421,17 @@ export class LogicPassSpoiler {
     }
   }
 
+  private itemNameAt(loc: Location) {
+    const pi = this.state.items.get(loc)!;
+    const cloakItem = this.state.itemCloaks.get(loc);
+
+    let str = this.itemName(pi);
+    if (cloakItem) {
+      str += ` (cloaked as ${itemName(cloakItem.id)})`;
+    }
+    return str;
+  }
+
   private regionName(region: Region) {
     const data = regionData(region);
     if (this.isMulti) {
@@ -452,7 +464,7 @@ export class LogicPassSpoiler {
         const regionalLocations = Object.keys(world.regions)
           .filter(location => world.regions[location] === region)
           .filter(location => isShuffled(settings, world, location, dungeonLocations))
-          .map(loc => `${loc}: ${this.itemName(placement.get(makeLocation(loc, i))!)}`);
+          .map(loc => `${loc}: ${this.itemNameAt(makeLocation(loc, i)!)}`);
         this.writer.indent(`${regionName(region)} (${regionalLocations.length}):`);
         for (const loc of regionalLocations) {
           this.writer.write(loc);
