@@ -7,7 +7,6 @@ import { LogicResult } from '../logic';
 import { makeLocation } from '../logic/locations';
 import { gi, playerId } from './util';
 import { bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
-import { Options } from '../options';
 
 const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SWORD', 'OOT_SWORD_KOKIRI'],
@@ -318,7 +317,6 @@ type RandomizerPatcherChecksContext = {
   worldId: number;
   logic: LogicResult;
   settings: Settings;
-  options: Options;
 };
 
 export class RandomizerPatcherChecks {
@@ -330,11 +328,11 @@ export class RandomizerPatcherChecks {
     this.world = ctx.logic.worlds[ctx.worldId];
   }
 
-  public static async run(ctx: RandomizerPatcherChecksContext) {
+  public static run(ctx: RandomizerPatcherChecksContext) {
     return (new RandomizerPatcherChecks(ctx)).execute();
   }
 
-  private async execute(): Promise<Uint8Array> {
+  private execute(): Uint8Array {
     const buffers: Uint8Array[] = [];
     for (const locId in this.world.checks) {
       const loc = makeLocation(locId, this.ctx.worldId);

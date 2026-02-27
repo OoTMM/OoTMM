@@ -2,18 +2,18 @@ import { Settings } from '@ootmm/core';
 
 import { LogicResult } from '../logic';
 import { Patchfile } from '../patch-build/patchfile';
-import { Options } from '../options';
+
 import { RandomizerPatcherConfig } from './config';
 import { RandomizerPatcherStartingItems } from './starting-items';
 import { RandomizerPatcherHints } from './hints';
 import { RandomizerPatcherEntrances } from './entrances';
 import { RandomizerPatcherChecks } from './checks';
 
-export async function patchRandomizer(worldId: number, logic: LogicResult, options: Options, settings: Settings, patchfile: Patchfile) {
+export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const bufConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
   const bufStartingItems = RandomizerPatcherStartingItems.run({ worldId, logic, settings });
-  const bufChecksOot = await RandomizerPatcherChecks.run({ worldId, logic, settings, options, game: 'oot' });
-  const bufChecksMm = await RandomizerPatcherChecks.run({ worldId, logic, settings, options, game: 'mm' });
+  const bufChecksOot = RandomizerPatcherChecks.run({ worldId, logic, settings, game: 'oot' });
+  const bufChecksMm = RandomizerPatcherChecks.run({ worldId, logic, settings, game: 'mm' });
   const bufHintsOot = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'oot' });
   const bufHintsMm = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'mm' });
   const bufEntrancesOot = RandomizerPatcherEntrances.run({ worldId, logic, game: 'oot' });

@@ -10,13 +10,11 @@ import { Patchfile } from './patchfile';
 import { patchRandomizer } from '../randomizer';
 import { PatchGroup } from './group';
 import { isEntranceShuffle } from '../logic/helpers';
-import { Options } from '../options';
 import { World } from '../logic/world';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { FileResolver } from '../file-resolver';
 
 export type BuildPatchfileIn = {
-  opts: Options;
   patch: Patchfile;
   monitor: Monitor;
   roms: DecompressedRoms;
@@ -250,8 +248,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       }
     }
 
-    await patchRandomizer(world, args.logic, args.opts, args.settings, p);
-
+    patchRandomizer(world, args.logic, args.settings, p);
     patches.push(p);
   }
 

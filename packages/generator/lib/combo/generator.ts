@@ -108,7 +108,6 @@ export class Generator {
       const logicResult = await logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
       patchfiles = await buildPatchfiles({
-        opts: this.opts,
         patch: patchfile,
         monitor: this.monitor,
         roms,
