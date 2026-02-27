@@ -1,40 +1,19 @@
-import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
+import { ENTRANCES, SCENES, NPC } from '@ootmm/data';
 import { Game, Settings, Random, sample } from '@ootmm/core';
 
 import { LogicResult } from '../logic';
-import { DATA_HINTS_POOL } from '../data';
-import { BOSS_INDEX_BY_DUNGEON, World, WorldCheck } from '../logic/world';
-import { HintGossip } from '../logic/hints';
+import { World, WorldCheck } from '../logic/world';
 import { padBuffer16, toU32Buffer } from '../util';
 import { Patchfile } from '../patch-build/patchfile';
 import { makeLocation, isLocationFullyShuffled } from '../logic/locations';
-import { regionData } from '../logic/regions';
-import { ItemGroups, ItemHelpers, ItemsCount } from '../items';
-import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
+import { ItemGroups, ItemHelpers } from '../items';
+import { bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
-import { END_BOSS_METADATA } from '../logic/boss';
-import { PATH_EVENT_DATA } from '../logic/analysis-path';
-import { DUNGEONS_BY_KEY } from '../logic/dungeons';
 import { Options } from '../options';
 import { RandomizerPatcherConfig } from './config';
-import { gi } from './gi';
+import { gi, playerId } from './util';
 import { RandomizerPatcherStartingItems } from './starting-items';
-
-const HINT_OFFSETS = {
-  KEY: 0,
-  TYPE: 1,
-  REGION: 2,
-  WORLD: 3,
-  ITEM: 4,
-  ITEM2: 6,
-  ITEM3: 8,
-  PLAYER: 10,
-  PLAYER2: 11,
-  PLAYER3: 12,
-  IMPORTANCE: 13,
-  IMPORTANCE2: 14,
-  IMPORTANCE3: 15,
-};
+import { RandomizerPatcherHints } from './hints';
 
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
   const entr = ENTRANCES[name as keyof typeof ENTRANCES];
@@ -179,148 +158,6 @@ async function makeCloakGi(key: number, seed: string, settings: Settings, logic:
   }
 }
 
-function playerId(player: number | 'all'): number {
-  if (player === 'all')
-    return 0xff;
-  return player + 1;
-}
-
-const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Uint8Array => {
-  const data = new Uint8Array(0x10);
-  data.fill(0xff);
-  let gossipData = DATA_HINTS_POOL[game][gossip];
-  if (!gossipData) {
-    throw new Error(`Unknown gossip ${gossip} for game ${game}`);
-  }
-  let id = null;
-  switch (gossipData.type) {
-    case 'gossip':
-      id = gossipData.id;
-      break;
-    case 'gossip-grotto':
-      id = gossipData.id | 0x20;
-      break;
-    case 'gossip-moon':
-      id = gossipData.id | 0x40;
-      break;
-  }
-  switch (hint.type) {
-    case 'path':
-      {
-        const { path } = hint;
-        const player = path.player === 'all' ? 0xff : path.player + 1;
-        let pathId: number;
-        let pathSubId: number;
-        const regionD = regionData(hint.region);
-        const region = (REGIONS as any)[regionD.id];
-        if (region === undefined) {
-          throw new Error(`Unknown region ${hint.region}`);
-        }
-        switch (path.type) {
-          case 'woth':
-            pathId = 0;
-            pathSubId = 0;
-            break;
-          case 'triforce':
-            pathId = 1;
-            pathSubId = { 'Power': 0, 'Courage': 1, 'Wisdom': 2 }[path.triforce];
-            break;
-          case 'dungeon':
-            pathId = 2;
-            pathSubId = DUNGEONS_BY_KEY.get(path.dungeon)!.id;
-            break;
-          case 'boss':
-            pathId = 3;
-            pathSubId = BOSS_INDEX_BY_DUNGEON[path.boss];
-            break;
-          case 'end-boss':
-            pathId = 4;
-            pathSubId = END_BOSS_METADATA.findIndex((e) => e.name === path.boss);
-            break;
-          case 'event':
-            pathId = 5;
-            pathSubId = PATH_EVENT_DATA.findIndex((e) => e.key === path.event);
-            break;
-        }
-
-        bufWriteU8(data, HINT_OFFSETS.KEY, id);
-        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x00);
-        bufWriteU8(data, HINT_OFFSETS.REGION, region);
-        bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM, pathId);
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM2, pathSubId);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER, player);
-      }
-      break;
-    case 'foolish':
-      {
-        const regionD = regionData(hint.region);
-        const region = (REGIONS as any)[regionD.id];
-        if (region === undefined) {
-          throw new Error(`Unknown region ${hint.region}`);
-        }
-        bufWriteU8(data, HINT_OFFSETS.KEY, id);
-        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x01);
-        bufWriteU8(data, HINT_OFFSETS.REGION, region);
-        bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
-      }
-      break;
-    case 'item-exact':
-      {
-        const check = (HINTS as any)[hint.check];
-        if (check === undefined) {
-          throw new Error(`Unknown named check: ${hint.check}`);
-        }
-        const items = hint.items;
-        const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, false));
-        bufWriteU8(data, HINT_OFFSETS.KEY, id);
-        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x02);
-        bufWriteU8(data, HINT_OFFSETS.REGION, check);
-        bufWriteU8(data, HINT_OFFSETS.WORLD, hint.world + 1);
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemsGI[0]);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(items[0].player));
-        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importances[0]);
-        if (items.length > 1) {
-          bufWriteU16BE(data, HINT_OFFSETS.ITEM2, itemsGI[1]);
-          bufWriteU8(data, HINT_OFFSETS.PLAYER2, playerId(items[1].player));
-          bufWriteI8(data, HINT_OFFSETS.IMPORTANCE2, hint.importances[1]);
-        }
-        if (items.length > 2) {
-          bufWriteU16BE(data, HINT_OFFSETS.ITEM3, itemsGI[2]);
-          bufWriteU8(data, HINT_OFFSETS.PLAYER3, playerId(items[2].player));
-          bufWriteI8(data, HINT_OFFSETS.IMPORTANCE3, hint.importances[2]);
-        }
-      }
-      break;
-    case 'item-region':
-      {
-        const regionD = regionData(hint.region);
-        const region = (REGIONS as any)[regionD.id];
-        const item = hint.item;
-        if (region === undefined) {
-          throw new Error(`Unknown region ${hint.region}`);
-        }
-        const itemGI = gi(settings, 'oot', item.item, false);
-        bufWriteU8(data, HINT_OFFSETS.KEY, id);
-        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x03);
-        bufWriteU8(data, HINT_OFFSETS.REGION, region);
-        bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemGI);
-        bufWriteU8(data, HINT_OFFSETS.PLAYER, playerId(item.player));
-        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importance);
-      }
-      break;
-    case 'junk':
-      {
-        bufWriteU8(data, HINT_OFFSETS.KEY, id);
-        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x04);
-        bufWriteU16BE(data, HINT_OFFSETS.ITEM, hint.id);
-      }
-      break;
-  }
-  return data;
-}
-
 class PatchRandomizer {
   private world: World;
 
@@ -337,15 +174,17 @@ class PatchRandomizer {
   async run() {
     const { worldId, logic, settings } = this;
 
-    const bufferConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
-    const startingItems = RandomizerPatcherStartingItems.run({ worldId, logic, settings });
+    const bufConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
+    const bufStartingItems = RandomizerPatcherStartingItems.run({ worldId, logic, settings });
+    const bufHintsOot = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'oot' });
+    const bufHintsMm = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'mm' });
 
-    this.patchfile.addNewFile({ vrom: 0xf0200000, data: bufferConfig, compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0300000, data: startingItems, compressed: false });
+    this.patchfile.addNewFile({ vrom: 0xf0200000, data: bufConfig, compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0300000, data: bufStartingItems, compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0400000, data: await this.gameChecks('oot'), compressed: false });
     this.patchfile.addNewFile({ vrom: 0xf0500000, data: await this.gameChecks('mm'), compressed: false });
-    this.patchfile.addNewFile({ vrom: 0xf0600000, data: this.gameHints('oot'), compressed: true });
-    this.patchfile.addNewFile({ vrom: 0xf0700000, data: this.gameHints('mm'), compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0600000, data: bufHintsOot, compressed: true });
+    this.patchfile.addNewFile({ vrom: 0xf0700000, data: bufHintsMm, compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0800000, data: this.gameEntrances('oot'), compressed: true });
     this.patchfile.addNewFile({ vrom: 0xf0900000, data: this.gameEntrances('mm'), compressed: true });
   }
@@ -385,22 +224,6 @@ class PatchRandomizer {
     end.fill(0xff);
     buffers.push(end);
     return concatUint8Arrays(buffers);
-  }
-
-  private gameHints(game: Game): Uint8Array {
-    const buffers: Uint8Array[] = [];
-    const hints = this.logic.hints[this.worldId];
-    for (const gossip in hints.gossip) {
-      const h = hints.gossip[gossip];
-      if (h.game !== game) {
-        continue;
-      }
-      buffers.push(hintBuffer(this.settings, game, gossip, h));
-    }
-    const b = new Uint8Array(0x10);
-    b.fill(0xff);
-    buffers.push(b);
-    return padBuffer16(concatUint8Arrays(buffers));
   }
 
   private gameEntrances(game: Game) {

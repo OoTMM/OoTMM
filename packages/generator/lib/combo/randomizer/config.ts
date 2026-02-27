@@ -12,7 +12,7 @@ import { worldConfig } from './world-config';
 import { CONFVARS_VALUES } from '../confvars';
 import { makeLocation } from '../logic/locations';
 import { Items } from '../items';
-import { gi } from './gi';
+import { gi } from './util';
 import { Region, regionData } from '../logic/regions';
 
 const BOMBCHU_BEHAVIORS = {

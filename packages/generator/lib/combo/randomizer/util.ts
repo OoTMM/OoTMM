@@ -81,3 +81,9 @@ export function gi(settings: Settings, game: Game, item: Item, generic: boolean)
 
   return value;
 }
+
+export function playerId(player: number | 'all'): number {
+  if (player === 'all')
+    return 0xff;
+  return player + 1;
+}

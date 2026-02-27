@@ -4,7 +4,7 @@ import { LogicResult } from '../logic';
 import { World } from '../logic/world';
 import { countMapAdd, toU16Buffer } from '../util';
 import { ItemGroups, ItemHelpers, ItemsCount } from '../items';
-import { gi } from './gi';
+import { gi } from './util';
 import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '../logic/locations';
 
 type RandomizerPatcherStartingItemsContext = {
