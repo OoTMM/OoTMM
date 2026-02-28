@@ -1,9 +1,8 @@
 import { POOL } from '@ootmm/data';
-import { Settings, sample, Random, randomInt } from '@ootmm/core';
+import { Monitor, Settings, sample, Random, randomInt } from '@ootmm/core';
 
 import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { ItemID } from '../items/defs';
-import { Monitor } from '../monitor';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
 import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';

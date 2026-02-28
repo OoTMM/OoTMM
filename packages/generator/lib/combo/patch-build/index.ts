@@ -1,10 +1,9 @@
-import { GAMES, Settings } from '@ootmm/core';
+import { Monitor, GAMES, Settings } from '@ootmm/core';
 
 import { CONFIG } from '../config';
 import { GameAddresses } from '../addresses';
 import { DecompressedRoms } from '../decompress';
 import { LogicResult } from '../logic';
-import { Monitor } from '../monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from '../randomizer';

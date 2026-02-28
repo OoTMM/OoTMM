@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Game, GAMES, Random, randString, sample } from '@ootmm/core';
+import { Monitor, Game, GAMES, Random, randString, sample } from '@ootmm/core';
 
 import { recolorImage } from '../image';
 import { Options } from '../options';
@@ -10,7 +10,6 @@ import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
-import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
 import { bufReadU32BE } from '../util/buffer';
 

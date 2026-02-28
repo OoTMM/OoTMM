@@ -1,4 +1,4 @@
-import { Random } from '@ootmm/core';
+import { Monitor, Random } from '@ootmm/core';
 
 import { LogicPassSolver } from './solve';
 import { LogicPassWorld } from './world';
@@ -6,7 +6,6 @@ import { LogicPassSpoiler } from './spoiler';
 import { Options } from '../options';
 import { LogicPassHints } from './hints';
 import { LogicPassAnalysis } from './analysis';
-import { Monitor } from '../monitor';
 import { LogicPassEntrances } from './entrance';
 import { LogicPassHash } from './hash';
 import { LogicPassConfig } from './config';

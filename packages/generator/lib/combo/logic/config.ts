@@ -1,7 +1,6 @@
-import { Settings, Random, sample } from '@ootmm/core';
+import { Monitor, Settings, Random, sample } from '@ootmm/core';
 
 import { ItemGroups, Items, PlayerItems, itemByID, makePlayerItem } from '../items';
-import { Monitor } from '../monitor';
 import { mustStartWithMasterSword } from './master-sword';
 import { countMapAdd, countMapRemove } from '../util';
 

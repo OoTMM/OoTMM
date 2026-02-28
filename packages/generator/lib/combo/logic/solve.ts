@@ -1,10 +1,9 @@
-import { Settings, Random, sample, shuffle } from '@ootmm/core';
+import { Monitor, Settings, Random, sample, shuffle } from '@ootmm/core';
 
 import { countMapAdd, countMapArray, countMapCombine, countMapRemove } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World, cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';

@@ -1,8 +1,7 @@
 import { merge } from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { DEFAULT_SETTINGS, Settings } from '@ootmm/core';
+import { Monitor, DEFAULT_SETTINGS, Settings } from '@ootmm/core';
 
-import { Monitor } from '../lib/combo/monitor';
 import { solvedWorldState } from '../lib/combo/logic';
 import { makeCosmetics } from '../lib/combo';
 import { makeRandomSettings } from '../lib/combo/random-settings';

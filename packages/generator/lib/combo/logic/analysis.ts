@@ -1,8 +1,7 @@
-import { Settings, Random, shuffle } from '@ootmm/core';
+import { Monitor, Settings, Random, shuffle } from '@ootmm/core';
 
 import { cloneWorld, World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
-import { Monitor } from '../monitor';
 import { isLocationRenewable, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
 import { ItemHelpers, PlayerItem, PlayerItems } from '../items';

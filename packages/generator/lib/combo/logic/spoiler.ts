@@ -1,12 +1,11 @@
 import { sortBy } from 'lodash';
-import { SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
+import { Monitor, SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
 
 import { Options } from '../options';
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
-import { Monitor } from '../monitor';
 import { Analysis, ANALYSIS_EVENTS, SphereEntryEvent } from './analysis';
 import { AnalysisPath, PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';

@@ -1,9 +1,8 @@
-import { Game, Settings, Random, sample, shuffle, randomInt } from '@ootmm/core';
+import { Monitor, Game, Settings, Random, sample, shuffle, randomInt } from '@ootmm/core';
 
 import { DUNGEONS_REGIONS, World } from './world';
 import { Analysis } from './analysis';
 import { AnalysisPath } from './analysis-path';
-import { Monitor } from '../monitor';
 import { Pathfinder } from './pathfind';
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
