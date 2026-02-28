@@ -94,6 +94,9 @@ importers:
       '@ootmm/data':
         specifier: '*'
         version: link:../data
+      '@ootmm/logic':
+        specifier: '*'
+        version: link:../logic
       '@ootmm/tools':
         specifier: '*'
         version: link:../tools
@@ -157,7 +160,14 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0(rollup@4.45.1)
 
-  packages/logic: {}
+  packages/logic:
+    dependencies:
+      '@ootmm/core':
+        specifier: '*'
+        version: link:../core
+      '@ootmm/data':
+        specifier: '*'
+        version: link:../data
 
   packages/tools: {}
 

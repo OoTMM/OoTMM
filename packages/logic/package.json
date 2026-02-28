@@ -4,9 +4,14 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "build": "./build.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.30.1"
+  "packageManager": "pnpm@10.30.1",
+  "dependencies": {
+    "@ootmm/data": "*",
+    "@ootmm/core": "*"
+  }
 }

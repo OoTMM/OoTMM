@@ -1,4 +1,5 @@
 import { Monitor, MonitorCallbacks, Random, Settings } from '@ootmm/core';
+import { logicNew } from '@ootmm/logic';
 
 import { applyRandomSettings } from './random-settings';
 import { codegen } from './codegen';
@@ -103,6 +104,9 @@ export class Generator {
       }
       const patchfile = new Patchfile;
       await custom(this.monitor, roms, patchfile);
+
+      /* NEW LOGIC */
+      const newLogicResult = await logicNew({ settings: this.opts.settings });
 
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);

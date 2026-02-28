@@ -13,6 +13,7 @@
     "@ootmm/data": "*",
     "@ootmm/core": "*",
     "@ootmm/tools": "*",
+    "@ootmm/logic": "*",
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",
     "uint8array-extras": "^1.5.0",
