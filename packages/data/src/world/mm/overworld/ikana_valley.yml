@@ -102,14 +102,14 @@
   exits:
     "Ikana Canyon": "true"
   events:
-    IKANA_CURSE_LIFTED: "soul_composer_bros && is_valley_cursed && can_play_storms"
+    IKANA_CURSE_LIFTED: "soul_composer_bros && is_valley_cursed && song_event(0x0b)"
 
 "Music Box House":
   region: ENTRANCE
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Music Box House Gibdo Mask": "is_valley_cursed && can_play_healing"
+    "Music Box House Gibdo Mask": "is_valley_cursed && song_event(5)"
 
 "Ghost Hut":
   region: ENTRANCE

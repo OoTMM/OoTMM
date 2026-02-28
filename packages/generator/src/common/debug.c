@@ -554,7 +554,6 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.songEmpty = 1;
     gSave.info.inventory.quest.songOrder = 1;
     gSave.info.inventory.quest.songSun = 1;
-    gSave.info.inventory.quest.songSaria = 1;
 
     gSave.info.inventory.quest.remainsGoht = 1;
     gSave.info.inventory.quest.remainsGyorg = 1;
@@ -583,6 +582,7 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.hookshot = 3;
     gMmExtraItems.ocarina = 3;
     gMmExtraItems.hammerGFS = 3;
+    gCustomSave.ootSongs.value = 0xff;
 
     // gCustomSave.halfDays = 0b111111;
 
@@ -728,6 +728,14 @@ static void cheatAllItems(PlayState* play)
     // gSave.info.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
     gCustomSave.hasElegy = 1;
+    gCustomSave.hasSongHealing = 1;
+    gCustomSave.hasSongSoaring = 1;
+
+    gCustomSave.hasSongAwakening = 1;
+    gCustomSave.hasSongGoronHalf = 1;
+    gCustomSave.hasSongGoron = 1;
+    gCustomSave.hasSongZora = 1;
+    gCustomSave.hasSongOrder = 1;
     gOotExtraFlags.spinUpgrade = 1;
 }
 #endif

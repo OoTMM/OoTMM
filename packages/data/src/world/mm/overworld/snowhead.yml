@@ -7,7 +7,7 @@
     "Snowhead Near Fairy Fountain": "(blizzard_stopped || (has_iron_boots && has_magic && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
     "Owl Snowhead": "true"
   events:
-    OPEN_SNOWHEAD_TEMPLE: "can_lullaby && has_mask_goron"
+    OPEN_SNOWHEAD_TEMPLE: "song_event(1) && has_mask_goron"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
@@ -16,7 +16,7 @@
 "Snowhead":
   region: SNOWHEAD
   exits:
-    "Snowhead Entrance": "(can_lullaby && has_mask_goron) || blizzard_stopped || has_iron_boots"
+    "Snowhead Entrance": "(song_event(1) && has_mask_goron) || blizzard_stopped || has_iron_boots"
     "Snowhead Temple": "true"
     "Snowhead Near Fairy Fountain": "blizzard_stopped || has_iron_boots"
 

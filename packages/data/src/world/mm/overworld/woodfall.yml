@@ -35,7 +35,7 @@
     "Woodfall Front of Temple": "woodfall_raised && (has(MASK_DEKU) || hookshot_anywhere)"
     "Owl Woodfall": "true"
   events:
-    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play_awakening"
+    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && song_event(0)"
   locations:
     "Woodfall Near Owl Chest": "short_hook_anywhere || (has_hover_boots && has_mask_bunny && has_weapon && trick(MM_WF_SHRINE_HOVERS))"
 

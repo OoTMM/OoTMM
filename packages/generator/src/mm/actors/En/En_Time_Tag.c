@@ -2,6 +2,8 @@
 #include <combo/item.h>
 #include <combo/config.h>
 #include <combo/actor.h>
+#include <combo/mm/ocarina.h>
+#include <combo/data/song_events.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
@@ -45,24 +47,6 @@ void EnTimeTag_HandlerSoaring(Actor* this, PlayState* play)
 
 PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
 
-void EnTimeTag_MoonCutscene(Actor* this, PlayState* play)
-{
-    if (Config_SpecialCond(SPECIAL_MOON))
-    {
-        /* Skip to Moon */
-        play->nextEntrance = ((SCE_MM_MOON - 3) << 9);
-        play->transitionTrigger = TRANS_TRIGGER_START;
-        play->transitionType = TRANS_TYPE_FADE_BLACK;
-    }
-    else
-    {
-        PlayerDisplayTextBox(play, 0x2039, NULL);
-        SET_HANDLER(this, EnTimeTag_HandlerNull);
-    }
-}
-
-PATCH_FUNC(0x80ac9fe4, EnTimeTag_MoonCutscene);
-
 static void EnTimeTag_AfterKick(void)
 {
     gIsEntranceOverride = 1;
@@ -80,3 +64,28 @@ void EnTimeTag_KickOut_WaitForTime_Wrapper(Actor* this, PlayState* play)
     EnTimeTag_KickOut_WaitForTime = actorAddr(ACTOR_EN_TIME_TAG, 0x80aca840);
     EnTimeTag_KickOut_WaitForTime(this, play);
 }
+
+void EnTimeTag_RooftopOath_Wait(Actor* this, PlayState* play) {
+    if ((play->msgCtx.ocarinaMode == OCARINA_MODE_EVENT) && Ocarina_CheckSongEventSong(play->msgCtx.ocarinaSong, SONG_EVENT_CLOCK_TOWER_ROOF)) {
+        if (this->csId != CS_ID_NONE) {
+            Ocarina_ClearLastPlayedSong(play);
+            if (Config_SpecialCond(SPECIAL_MOON))
+            {
+                /* Skip to Moon */
+                play->nextEntrance = ((SCE_MM_MOON - 3) << 9);
+                play->transitionTrigger = TRANS_TRIGGER_START;
+                play->transitionType = TRANS_TYPE_FADE_BLACK;
+                gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = 0; /* TIMER_STATE_OFF */
+            }
+            else
+            {
+                PlayerDisplayTextBox(play, 0x2039, NULL);
+                SET_HANDLER(this, EnTimeTag_HandlerNull);
+            }
+            CutsceneManager_Queue(this->csId);
+        }
+        play->msgCtx.ocarinaMode = OCARINA_MODE_END;
+    }
+}
+
+PATCH_FUNC(0x80aca0a8, EnTimeTag_RooftopOath_Wait)

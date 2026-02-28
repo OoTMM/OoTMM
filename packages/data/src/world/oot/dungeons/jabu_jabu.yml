@@ -8,7 +8,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Pre-Boss Room": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_elegy)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_elegy))"
+    "Jabu-Jabu Pre-Boss Room": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_emptiness)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_emptiness))"
     "Jabu-Jabu Hole Room": "true"
   locations:
     "Jabu-Jabu Scrub": "(can_swim && (is_child || can_dive_small || time_travel_at_will)) && business_scrub(0x20)"
@@ -30,7 +30,7 @@
   exits:
     "Jabu-Jabu Hole Room": "true"
     "Jabu-Jabu Boomerang Room": "true"
-    "Jabu-Jabu Map Room": "soul_ruto || can_play_elegy"
+    "Jabu-Jabu Map Room": "soul_ruto || can_play_emptiness"
     "Jabu-Jabu Compass Room": "event(RED_PARASITE)"
     "Jabu-Jabu Blue Parasite": "event(RED_PARASITE)"
     "Jabu-Jabu Green Parasite": "event(BLUE_PARASITE)"

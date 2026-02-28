@@ -3,6 +3,8 @@
 #include <combo/mm/bombers_notebook.h>
 #include <assets/mm/objects/object_yb.h>
 #include <assets/mm/objects/gameplay_keep.h>
+#include <combo/mm/ocarina.h>
+#include <combo/data/song_events.h>
 
 #include "En_Yb.h"
 
@@ -349,8 +351,9 @@ void EnYb_Idle(Actor_EnYb* this, PlayState* play) {
 
     EnYb_UpdateAnimation(this, play);
     if ((this->actor.xzDistToPlayer < 180.0f) && (fabsf(this->actor.yDistanceFromLink) < 50.0f) &&
-        (play->msgCtx.ocarinaMode == OCARINA_MODE_EVENT) && (play->msgCtx.ocarinaSong == OCARINA_SONG_HEALING) &&
+        (play->msgCtx.ocarinaMode == OCARINA_MODE_EVENT) && Ocarina_CheckSongEventSong(play->msgCtx.ocarinaSong, SONG_EVENT_HEALING_KAMARO) &&
         (gSave.playerForm == MM_PLAYER_FORM_HUMAN)) {
+        Ocarina_ClearLastPlayedSong(play);
         this->actionFunc = EnYb_TeachingDance;
         this->teachingCutsceneTimer = 0;
         EnYb_ChangeCutscene(this, 0);

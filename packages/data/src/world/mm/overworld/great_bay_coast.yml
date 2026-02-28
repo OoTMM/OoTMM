@@ -19,7 +19,7 @@
     FISH: "true"
     FAIRY: "true"
   locations:
-    "Great Bay Coast Zora Mask": "can_play_healing"
+    "Great Bay Coast Zora Mask": "song_event(7)"
     "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
     "Great Bay Coast Palm Tree Island": "(can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared" # Likely too restrictive
     "Great Bay Coast Pot 01": "true"

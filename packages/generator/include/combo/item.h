@@ -114,8 +114,17 @@
 #define IA_TRAP                 0x68
 #define IA_SONG_NOTE            0x69
 #define IA_TRANSCENDENT_FAIRY   0x6a
-#define IA_OOT_PLATINUM_TOKEN   0x6b
-#define IA_MM_PLATINUM_TOKEN    0x6c
+#define IA_OOT_SONG_HEALING     0x6b
+#define IA_OOT_SONG_SOARING     0x6c
+#define IA_OOT_SONG_AWAKENING   0x6d
+#define IA_OOT_SONG_GORON_HALF  0x6e
+#define IA_OOT_SONG_GORON       0x6f
+#define IA_OOT_SONG_ZORA        0x70
+#define IA_OOT_SONG_ORDER       0x71
+#define IA_MM_SONG_OOT          0x72
+#define IA_OOT_PLATINUM_TOKEN   0x73
+#define IA_MM_PLATINUM_TOKEN    0x74
+#define IA_MAX                  0x75
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

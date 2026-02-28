@@ -2,6 +2,7 @@
 #include <combo/custom.h>
 #include <combo/config.h>
 #include <combo/data/song_events.h>
+#include <combo/oot/ocarina.h>
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_UPDATE_DURING_OCARINA)
 
@@ -105,13 +106,27 @@ static u8 kOcarinaActions[] = {
     OCARINA_ACTION_CHECK_STORMS,
     OCARINA_ACTION_CHECK_SUNS,
     OCARINA_ACTION_CHECK_TIME,
+    OCARINA_ACTION_CHECK_MINUET,
+    OCARINA_ACTION_CHECK_BOLERO,
+    OCARINA_ACTION_CHECK_SERENADE,
+    OCARINA_ACTION_CHECK_REQUIEM,
+    OCARINA_ACTION_CHECK_NOCTURNE,
+    OCARINA_ACTION_CHECK_PRELUDE,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_HEALING,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_SOARING,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_AWAKENING,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_GORON,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_GORON_HALF,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_ZORA,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_ELEGY,
+    OCARINA_ACTION_CHECK_CUSTOM_SONG_ORDER,
 };
 
 static int EnOkarinaTag_OcarinaAction(EnOkarinaTag* this, int vanilla)
 {
     if (this->shuffledSongId < 0)
         return vanilla;
-    return kOcarinaActions[gComboConfig.songEvents[this->shuffledSongId]];
+    return kOcarinaActions[gComboConfig.songEventsOot[this->shuffledSongId]];
 }
 
 void EnOkarinaTag_Disable(EnOkarinaTag* this)
@@ -211,6 +226,7 @@ static void EnOkarinaTag_InhibitSongEffect(PlayState* play)
     if (Config_Flag(CFG_OOT_SONG_EVENTS_SHUFFLE)) {
         play->msgCtx.ocarinaAction = OCARINA_ACTION_CHECK_NOWARP_DONE;
         play->msgCtx.disableSunsSong = 1;
+        Ocarina_ClearLastPlayedSong(play);
     }
 }
 
@@ -412,6 +428,20 @@ static Gfx* kDlistsLoadTextures[] = {
     kDlistLoadTexture,
     kDlistLoadTextureHV,
     kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTextureH,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
+    kDlistLoadTexture,
 };
 
 static const u32 kSongTagColors[] = {
@@ -421,6 +451,20 @@ static const u32 kSongTagColors[] = {
     0xa3a300,
     0xee2222,
     0x8888ff,
+    0x00ff00,
+    0xff0000,
+    0x0000ff,
+    0xff8000,
+    0x8000ff,
+    0xffff00,
+    0xff00ff,
+    0xe1d007,
+    0x00ff00,
+    0x9c8429,
+    0x9c8429,
+    0x84c6c6,
+    0xff8000,
+    0xffffff,
 };
 
 static const u32 kSongTagTextureAddrs[] = {
@@ -430,6 +474,20 @@ static const u32 kSongTagTextureAddrs[] = {
     CUSTOM_SONG_TAG_STORMS_ADDR,
     CUSTOM_SONG_TAG_SUN_ADDR,
     CUSTOM_SONG_TAG_TIME_ADDR,
+    CUSTOM_SONG_TAG_MINUET_ADDR,
+    CUSTOM_SONG_TAG_BOLERO_ADDR,
+    CUSTOM_SONG_TAG_SERENADE_ADDR,
+    CUSTOM_SONG_TAG_REQUIEM_ADDR,
+    CUSTOM_SONG_TAG_NOCTURNE_ADDR,
+    CUSTOM_SONG_TAG_PRELUDE_ADDR,
+    CUSTOM_SONG_TAG_HEALING_ADDR,
+    CUSTOM_SONG_TAG_SOARING_ADDR,
+    CUSTOM_SONG_TAG_AWAKENING_ADDR,
+    CUSTOM_SONG_TAG_GORON_ADDR,
+    CUSTOM_SONG_TAG_GORON_HALF_ADDR,
+    CUSTOM_SONG_TAG_ZORA_ADDR,
+    CUSTOM_SONG_TAG_EMPTINESS_ADDR,
+    CUSTOM_SONG_TAG_ORDER_ADDR,
 };
 
 static const Gfx kDlistSongTag[] = {
@@ -477,7 +535,7 @@ void EnOkarinaTag_DrawCustom(Actor* thisx, PlayState* play)
     u8 vertical;
     Actor* actor;
 
-    song = gComboConfig.songEvents[this->shuffledSongId];
+    song = gComboConfig.songEventsOot[this->shuffledSongId];
     loader = kDlistsLoadTextures[song];
     color = kSongTagColors[song];
     r = (color >> 16) & 0xff;

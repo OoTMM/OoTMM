@@ -91,11 +91,11 @@
     "Goron Village": "true"
     "Goron Shop": "true"
   events:
-    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || (can_lullaby_half && soul_goron_child))"
+    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || (song_event(0x0a) && soul_goron_child))"
     STICKS: "true"
     MAGIC: "true"
   locations:
-    "Goron Baby": "is_winter && soul_goron_child && has_mask_goron && can_lullaby_half"
+    "Goron Baby": "is_winter && soul_goron_child && has_mask_goron && song_event(0x0a)"
     "Goron Shrine Pot 01": "true"
     "Goron Shrine Pot 02": "true"
     "Goron Shrine Pot 03": "true"

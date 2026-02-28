@@ -2,7 +2,7 @@
   dungeon: Moon
   events:
     MAGIC: "true"
-    MM_MOON_OPEN: "(can_play_order || setting(openMoon)) && special(MOON)"
+    MM_MOON_OPEN: "(song_event(0x0c) || setting(openMoon)) && special(MOON)"
   exits:
     "Moon": "event(MM_MOON_OPEN)"
     "Clock Tower Platform": "false"

@@ -2,7 +2,7 @@ import { Game, Settings } from '@ootmm/core';
 
 import { itemByID } from '../items';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEvent } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEventOot, exprSongEventMm } from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -333,8 +333,8 @@ export class ExprParser {
     return exprPrice(range, id, max);
   }
 
-  private parseExprSongEvent(): Expr | undefined {
-    if (this.peek('identifier') !== '_song_event') {
+  private parseExprSongEventOot(): Expr | undefined {
+    if (this.peek('identifier') !== '_song_event_oot') {
       return undefined;
     }
     this.accept('identifier');
@@ -343,7 +343,20 @@ export class ExprParser {
     this.expect(',');
     const cmp = this.expect('number');
     this.expect(')');
-    return exprSongEvent(id, cmp);
+    return exprSongEventOot(id, cmp);
+  }
+
+  private parseExprSongEventMm(): Expr | undefined {
+    if (this.peek('identifier') !== '_song_event_mm') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const id = this.expect('number');
+    this.expect(',');
+    const cmp = this.expect('number');
+    this.expect(')');
+    return exprSongEventMm(id, cmp);
   }
 
   private parseExprFish(): Expr | undefined {
@@ -459,7 +472,8 @@ export class ExprParser {
       || this.parseExprOotTime()
       || this.parseExprMmTime()
       || this.parseExprPrice()
-      || this.parseExprSongEvent()
+      || this.parseExprSongEventOot()
+      || this.parseExprSongEventMm()
       || this.parseExprFish()
       || this.parseExprFlagOn()
       || this.parseExprFlagOff()

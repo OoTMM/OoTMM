@@ -29,6 +29,13 @@ const SONG_NOTES = new Map<Item, [Item, number]>([
   [Items.OOT_SONG_TP_SPIRIT, [Items.OOT_SONG_NOTE_TP_SPIRIT, 6]],
   [Items.OOT_SONG_TP_WATER, [Items.OOT_SONG_NOTE_TP_WATER, 5]],
   [Items.OOT_SONG_EMPTINESS, [Items.OOT_SONG_NOTE_EMPTINESS, 7]],
+  [Items.OOT_SONG_HEALING, [Items.OOT_SONG_NOTE_HEALING, 6]],
+  [Items.OOT_SONG_SOARING, [Items.OOT_SONG_NOTE_SOARING, 6]],
+  [Items.OOT_SONG_AWAKENING, [Items.OOT_SONG_NOTE_AWAKENING, 7]],
+  [Items.OOT_SONG_GORON, [Items.OOT_SONG_NOTE_GORON, 8]],
+  [Items.OOT_SONG_GORON_HALF, [Items.OOT_SONG_NOTE_GORON, 8]],
+  [Items.OOT_SONG_ZORA, [Items.OOT_SONG_NOTE_ZORA, 7]],
+  [Items.OOT_SONG_ORDER, [Items.OOT_SONG_NOTE_ORDER, 6]],
   [Items.MM_SONG_AWAKENING, [Items.MM_SONG_NOTE_AWAKENING, 7]],
   [Items.MM_SONG_EMPTINESS, [Items.MM_SONG_NOTE_EMPTINESS, 7]],
   [Items.MM_SONG_EPONA, [Items.MM_SONG_NOTE_EPONA, 6]],
@@ -44,8 +51,32 @@ const SONG_NOTES = new Map<Item, [Item, number]>([
   [Items.SHARED_SONG_EPONA, [Items.SHARED_SONG_NOTE_EPONA, 6]],
   [Items.SHARED_SONG_TIME, [Items.SHARED_SONG_NOTE_TIME, 6]],
   [Items.SHARED_SONG_STORMS, [Items.SHARED_SONG_NOTE_STORMS, 6]],
-  [Items.SHARED_SONG_SUN, [Items.SHARED_SONG_NOTE_SUN, 6]],
   [Items.SHARED_SONG_EMPTINESS, [Items.SHARED_SONG_NOTE_EMPTINESS, 7]],
+  [Items.SHARED_SONG_HEALING, [Items.SHARED_SONG_NOTE_HEALING, 6]],
+  [Items.SHARED_SONG_SOARING, [Items.SHARED_SONG_NOTE_SOARING, 6]],
+  [Items.SHARED_SONG_AWAKENING, [Items.SHARED_SONG_NOTE_AWAKENING, 7]],
+  [Items.SHARED_SONG_GORON, [Items.SHARED_SONG_NOTE_GORON, 8]],
+  [Items.SHARED_SONG_GORON_HALF, [Items.SHARED_SONG_NOTE_GORON, 8]],
+  [Items.SHARED_SONG_ZORA, [Items.SHARED_SONG_NOTE_ZORA, 7]],
+  [Items.SHARED_SONG_ORDER, [Items.SHARED_SONG_NOTE_ORDER, 6]],
+  [Items.MM_SONG_ZELDA, [Items.MM_SONG_NOTE_ZELDA, 6]],
+  [Items.MM_SONG_SARIA, [Items.MM_SONG_NOTE_SARIA, 6]],
+  [Items.MM_SONG_SUN, [Items.MM_SONG_NOTE_SUN, 6]],
+  [Items.MM_SONG_TP_FIRE, [Items.MM_SONG_NOTE_TP_FIRE, 8]],
+  [Items.MM_SONG_TP_FOREST, [Items.MM_SONG_NOTE_TP_FOREST, 6]],
+  [Items.MM_SONG_TP_LIGHT, [Items.MM_SONG_NOTE_TP_LIGHT, 6]],
+  [Items.MM_SONG_TP_SHADOW, [Items.MM_SONG_NOTE_TP_SHADOW, 7]],
+  [Items.MM_SONG_TP_SPIRIT, [Items.MM_SONG_NOTE_TP_SPIRIT, 6]],
+  [Items.MM_SONG_TP_WATER, [Items.MM_SONG_NOTE_TP_WATER, 5]],
+  [Items.SHARED_SONG_ZELDA, [Items.SHARED_SONG_NOTE_ZELDA, 6]],
+  [Items.SHARED_SONG_SARIA, [Items.SHARED_SONG_NOTE_SARIA, 6]],
+  [Items.SHARED_SONG_SUN, [Items.SHARED_SONG_NOTE_SUN, 6]],
+  [Items.SHARED_SONG_TP_FIRE, [Items.SHARED_SONG_NOTE_TP_FIRE, 8]],
+  [Items.SHARED_SONG_TP_FOREST, [Items.SHARED_SONG_NOTE_TP_FOREST, 6]],
+  [Items.SHARED_SONG_TP_LIGHT, [Items.SHARED_SONG_NOTE_TP_LIGHT, 6]],
+  [Items.SHARED_SONG_TP_SHADOW, [Items.SHARED_SONG_NOTE_TP_SHADOW, 7]],
+  [Items.SHARED_SONG_TP_SPIRIT, [Items.SHARED_SONG_NOTE_TP_SPIRIT, 6]],
+  [Items.SHARED_SONG_TP_WATER, [Items.SHARED_SONG_NOTE_TP_WATER, 5]],
 ]);
 
 const BROKEN_ACTORS_CHECKS = [
@@ -789,7 +820,7 @@ export class LogicPassWorldTransform {
       this.removeItem(Items.SHARED_SONG_TIME, 1);
     }
 
-    if (settings.sharedSongSun && settings.sunSongMm) {
+    if (settings.sharedSongSun && settings.songSunMm) {
       this.replaceItem(Items.OOT_SONG_SUN, Items.SHARED_SONG_SUN);
     }
 
@@ -901,6 +932,120 @@ export class LogicPassWorldTransform {
     } else if (settings.elegyOot) {
       this.addItem(Items.OOT_SONG_EMPTINESS);
     }
+
+    if (settings.sharedSongHealing) {
+      this.replaceItem(Items.MM_SONG_HEALING, Items.SHARED_SONG_HEALING);
+    } else if (settings.songHealingOot) {
+      this.addItem(Items.OOT_SONG_HEALING);
+    }
+
+    if (settings.sharedSongSoaring) {
+      this.replaceItem(Items.MM_SONG_SOARING, Items.SHARED_SONG_SOARING);
+    } else if (settings.songSoaringOot) {
+      this.addItem(Items.OOT_SONG_SOARING);
+    }
+
+    if (settings.sharedSongAwakening) {
+      this.replaceItem(Items.MM_SONG_AWAKENING, Items.SHARED_SONG_AWAKENING);
+    } else if (settings.songAwakeningOot) {
+      this.addItem(Items.OOT_SONG_AWAKENING);
+    }
+
+    if (settings.sharedSongGoron) {
+      this.replaceItem(Items.MM_SONG_GORON, Items.SHARED_SONG_GORON);
+      this.replaceItem(Items.MM_SONG_GORON_HALF, Items.SHARED_SONG_GORON_HALF);
+      if (settings.progressiveGoronLullabyMm === 'progressive') {
+        this.replaceItem(Items.SHARED_SONG_GORON, Items.SHARED_SONG_GORON_HALF);
+      } else {
+        this.removeItem(Items.SHARED_SONG_GORON_HALF);
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          this.state.worlds[i].songLocations.delete('MM Goron Baby');
+        }
+      }
+    } else {
+      if (settings.songGoronOot) {
+        this.addItem(Items.OOT_SONG_GORON);
+        this.addItem(Items.OOT_SONG_GORON_HALF);
+      }
+
+      if (settings.progressiveGoronLullabyOot === 'progressive') {
+        this.replaceItem(Items.OOT_SONG_GORON, Items.OOT_SONG_GORON_HALF);
+      } else {
+        this.removeItem(Items.OOT_SONG_GORON_HALF);
+      }
+
+      /* Handle MM Lullaby */
+      if (settings.progressiveGoronLullabyMm === 'progressive') {
+        this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
+      } else {
+        this.removeItem(Items.MM_SONG_GORON_HALF);
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          this.state.worlds[i].songLocations.delete('MM Goron Baby');
+        }
+      }
+    }
+
+    if (settings.sharedSongZora) {
+      this.replaceItem(Items.MM_SONG_ZORA, Items.SHARED_SONG_ZORA);
+    } else if (settings.songZoraOot) {
+      this.addItem(Items.OOT_SONG_ZORA);
+    }
+
+    if (settings.sharedSongOrder) {
+      this.replaceItem(Items.MM_SONG_ORDER, Items.SHARED_SONG_ORDER);
+    } else if (settings.songOrderOot) {
+      this.addItem(Items.OOT_SONG_ORDER);
+    }
+
+
+    if (settings.sharedSongZeldaLullaby) {
+      this.replaceItem(Items.OOT_SONG_ZELDA, Items.SHARED_SONG_ZELDA);
+    } else if (settings.songZeldaLullabyMm) {
+      this.addItem(Items.MM_SONG_ZELDA);
+    }
+
+    if (settings.sharedSongSarias) {
+      this.replaceItem(Items.OOT_SONG_SARIA, Items.SHARED_SONG_SARIA);
+    } else if (settings.songSariasMm) {
+      this.addItem(Items.MM_SONG_SARIA);
+    }
+
+    if (settings.sharedSongMinuet) {
+      this.replaceItem(Items.OOT_SONG_TP_FOREST, Items.SHARED_SONG_TP_FOREST);
+    } else if (settings.songMinuetMm) {
+      this.addItem(Items.MM_SONG_TP_FOREST);
+    }
+
+    if (settings.sharedSongBolero) {
+      this.replaceItem(Items.OOT_SONG_TP_FIRE, Items.SHARED_SONG_TP_FIRE);
+    } else if (settings.songBoleroMm) {
+      this.addItem(Items.MM_SONG_TP_FIRE);
+    }
+
+    if (settings.sharedSongSerenade) {
+      this.replaceItem(Items.OOT_SONG_TP_WATER, Items.SHARED_SONG_TP_WATER);
+    } else if (settings.songSerenadeMm) {
+      this.addItem(Items.MM_SONG_TP_WATER);
+    }
+
+    if (settings.sharedSongRequiem) {
+      this.replaceItem(Items.OOT_SONG_TP_SPIRIT, Items.SHARED_SONG_TP_SPIRIT);
+    } else if (settings.songRequiemMm) {
+      this.addItem(Items.MM_SONG_TP_SPIRIT);
+    }
+
+    if (settings.sharedSongNocturne) {
+      this.replaceItem(Items.OOT_SONG_TP_SHADOW, Items.SHARED_SONG_TP_SHADOW);
+    } else if (settings.songNocturneMm) {
+      this.addItem(Items.MM_SONG_TP_SHADOW);
+    }
+
+    if (settings.sharedSongPrelude) {
+      this.replaceItem(Items.OOT_SONG_TP_LIGHT, Items.SHARED_SONG_TP_LIGHT);
+    } else if (settings.songPreludeMm) {
+      this.addItem(Items.MM_SONG_TP_LIGHT);
+    }
+
 
     if (settings.sharedLens) {
       this.replaceItem(Items.OOT_LENS, Items.SHARED_LENS);
@@ -1659,18 +1804,14 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.MM_SWORD);
     }
 
-    /* Handle MM Lullaby */
-    if (settings.progressiveGoronLullaby === 'progressive') {
-      this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
-    } else {
-      this.removeItem(Items.MM_SONG_GORON_HALF);
+    if (settings.progressiveGoronLullabyMm === 'single') {
       for (let i = 0; i < this.state.worlds.length; ++i) {
         this.state.worlds[i].songLocations.delete('MM Goron Baby');
       }
     }
 
     /* Handle MM sun song */
-    if (settings.sunSongMm && !settings.sharedSongSun) {
+    if (settings.songSunMm && !settings.sharedSongSun) {
       this.addItem(Items.MM_SONG_SUN);
     }
 

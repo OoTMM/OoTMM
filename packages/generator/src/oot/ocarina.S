@@ -98,3 +98,54 @@ PATCH_START 0x800e157c
   lw      a3, 0x0054 (sp)
   lw      t1, 0x0024 (sp)
 PATCH_END
+
+/* Allow Ocarina_PlayStaffAppearSound to handle staff appearing ocarinaAction range check */
+PATCH_START 0x800dd0f0
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x800dd0dc
+  slti  at, v1, 0x001c
+PATCH_END
+
+PATCH_START 0x800d7aa8
+  slti  at, v0, 0x001c
+PATCH_END
+
+PATCH_START 0x800ddda0
+  slti  at, v0, 0x001c
+PATCH_END
+
+Ocarina_ShouldIgnoreWarpSong:
+  slti    at, v0, 0x000f
+  bnez    at, return
+   addiu  at, zero, 0
+  slti    at, v0, 0x0015
+  bnez    at, return
+   nop
+  slti    at, v0, 0x001c
+  bnez    at, return
+   addiu  at, zero, 0
+  slti    at, v0, 0x0022
+  beqz    at, return
+   nop
+  lhu     at, 0x63ec (s2)
+  addiu   at, at, 0x001c
+  beq     at, v0, return
+   addiu  at, zero, 0x0001
+  addiu   at, zero, 0
+return:
+  jr      ra
+  nop
+
+
+PATCH_START 0x800df1bc
+  jal   Ocarina_ShouldIgnoreWarpSong
+   lhu  v0, 0x63f0 (s2)
+  bnez  at, .+0x9c
+   nop
+  nop
+PATCH_END

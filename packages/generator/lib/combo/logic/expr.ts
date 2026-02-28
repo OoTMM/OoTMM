@@ -558,18 +558,33 @@ class ExprPrice extends Expr {
   }
 }
 
-class ExprSongEvent extends Expr {
+class ExprSongEventOot extends Expr {
   readonly id: number;
   readonly cmp: number;
 
   constructor(id: number, cmp: number) {
-    super(`SONG_EVENT(${id},${cmp})`);
+    super(`SONG_EVENT-OOT(${id},${cmp})`);
     this.id = id;
     this.cmp = cmp;
   }
 
   eval(state: State, _deps: ExprDependencies): ExprResult {
-    return state.world.songEvents[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
+    return state.world.songEventsOot[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
+  }
+}
+
+class ExprSongEventMm extends Expr {
+  readonly id: number;
+  readonly cmp: number;
+
+  constructor(id: number, cmp: number) {
+    super(`SONG_EVENT-MM(${id},${cmp})`);
+    this.id = id;
+    this.cmp = cmp;
+  }
+
+  eval(state: State, _deps: ExprDependencies): ExprResult {
+    return state.world.songEventsMm[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
   }
 }
 
@@ -879,8 +894,12 @@ export const exprPrice = (range: string, id: number, max: number): Expr => {
   return exprMemo(new ExprPrice(slot, max));
 };
 
-export const exprSongEvent = (id: number, cmp: number): Expr => {
-  return exprMemo(new ExprSongEvent(id, cmp));
+export const exprSongEventOot = (id: number, cmp: number): Expr => {
+  return exprMemo(new ExprSongEventOot(id, cmp));
+};
+
+export const exprSongEventMm = (id: number, cmp: number): Expr => {
+  return exprMemo(new ExprSongEventMm(id, cmp));
 };
 
 export const exprFish = (ageAndType: string, minPounds: number, maxPounds: number): Expr => {

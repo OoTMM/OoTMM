@@ -85,7 +85,7 @@
   exits:
     "Jabu-Jabu Vanilla Ruto Falling Room": "true"
     "Jabu-Jabu Basement Side Room Entrance Side": "event(JABU_TENTACLE_RED)"
-    "Jabu Jabu Basement Loop to Main Elevator East Side": "soul_ruto || can_play_elegy"
+    "Jabu Jabu Basement Loop to Main Elevator East Side": "soul_ruto || can_play_emptiness"
     "Jabu-Jabu Basement Ledge Before Big Octo": "climb_anywhere"
   locations:
     "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot"
@@ -153,7 +153,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Above Big Octo Fight": "true"
-    "Jabu-Jabu Main Elevator Room High Ledge": "(can_play_elegy && (climb_anywhere || longshot_anywhere || can_boomerang)) || (can_boomerang && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES))"
+    "Jabu-Jabu Main Elevator Room High Ledge": "(can_play_emptiness && (climb_anywhere || longshot_anywhere || can_boomerang)) || (can_boomerang && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES))"
   events:
     MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES: "can_use_slingshot"
   locations:
@@ -191,7 +191,7 @@
     "Jabu-Jabu Back Forked Paths": "has_explosives_or_hammer || climb_anywhere"
     "Jabu-Jabu Back Forked Paths Center Room": "event(JABU_MQ_BACK_CENTER_SWITCH)"
   events:
-    JABU_MQ_BACK_CENTER_SWITCH: "can_play_elegy" #Event is split up because of the rocks.
+    JABU_MQ_BACK_CENTER_SWITCH: "can_play_emptiness" #Event is split up because of the rocks.
 "Jabu-Jabu Back Forked Paths Center Room":
   dungeon: JJ
   exits:

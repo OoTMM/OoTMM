@@ -48,7 +48,7 @@
     "Termina Field Water Chest": "underwater_walking"
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tree Stump Chest": "can_hookshot_short || can_use_beans"
-    "Termina Field Kamaro Mask": "soul_citizen && can_play_healing && midnight"
+    "Termina Field Kamaro Mask": "soul_citizen && song_event(6) && midnight"
     "Termina Field Pot": "can_use_beans || has_bow"
     "Termina Field Grass Pack 01 Grass 01": "true"
     "Termina Field Grass Pack 01 Grass 02": "true"

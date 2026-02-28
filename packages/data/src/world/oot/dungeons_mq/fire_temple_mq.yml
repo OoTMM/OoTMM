@@ -239,7 +239,7 @@
     "Fire Temple Maze Room Lower": "true" #Might be solid from other side, need to see in door rando.
     "Fire Temple Maze Room Side Room": "event(FIRE_MQ_MAZE_ROOM_BLUE_SWITCH)"
   events:
-   FIRE_MQ_MAZE_ROOM_BLUE_SWITCH: "can_play_elegy"
+   FIRE_MQ_MAZE_ROOM_BLUE_SWITCH: "can_play_emptiness"
 "Fire Temple Maze Room Upper Switch Cage Alcove":
   dungeon: Fire
   exits:

@@ -15,6 +15,7 @@
 #include <combo/inventory.h>
 #include <combo/draw.h>
 #include <actors/Obj_Grass/Obj_Grass.h>
+#include <combo/mm/ocarina.h>
 
 /* Grass hooks */
 ObjGrass* gObjGrass;
@@ -454,6 +455,7 @@ static void Play_AfterInit(PlayState* play)
         gLastScene = play->sceneId;
     }
     comboSpawnCustomWarps(play);
+    comboSpawnCustomSongTags(play);
 
     spawnSirloin(play);
     ComboPlay_SpawnExtraSigns(play);

@@ -20,4 +20,18 @@
 #define SONG_EVENT_TEMPLE_BOTW                  0x10
 #define SONG_EVENT_TEMPLE_GANON                 0x11
 
+#define SONG_EVENT_TEMPLE_WOODFALL              0x00
+#define SONG_EVENT_TEMPLE_SNOWHEAD              0x01
+#define SONG_EVENT_TEMPLE_GREATBAY              0x02
+#define SONG_EVENT_HEALING_POEHUT               0x03
+#define SONG_EVENT_HEALING_DARMANI              0x04
+#define SONG_EVENT_HEALING_PAMELA_FATHER        0x05
+#define SONG_EVENT_HEALING_KAMARO               0x06
+#define SONG_EVENT_HEALING_MIKAU                0x07
+#define SONG_EVENT_AWAKENING_KEETA              0x08
+#define SONG_EVENT_AWAKENING_SCRUB              0x09
+#define SONG_EVENT_LULLABY_KID                  0x0a
+#define SONG_EVENT_STORMS_COMPOSER              0x0b
+#define SONG_EVENT_CLOCK_TOWER_ROOF             0x0c
+
 #endif

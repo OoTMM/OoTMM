@@ -168,6 +168,20 @@ export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
   SONG_TAG_TIME: await png('song_tags/time', 'ia8'),
   SONG_TAG_STORMS: await png('song_tags/storms', 'ia8'),
   SONG_TAG_PAD: await png('song_tags/pad', 'ia8'),
+  SONG_TAG_HEALING: await png('song_tags/healing', 'ia8'),
+  SONG_TAG_SOARING: await png('song_tags/soaring', 'ia8'),
+  SONG_TAG_AWAKENING: await png('song_tags/awakening', 'ia8'),
+  SONG_TAG_GORON: await png('song_tags/goron', 'ia8'),
+  SONG_TAG_GORON_HALF: await png('song_tags/goronHalf', 'ia8'),
+  SONG_TAG_ZORA: await png('song_tags/zora', 'ia8'),
+  SONG_TAG_EMPTINESS: await png('song_tags/emptiness', 'ia8'),
+  SONG_TAG_ORDER: await png('song_tags/order', 'ia8'),
+  SONG_TAG_MINUET: await png('song_tags/minuet', 'ia8'),
+  SONG_TAG_BOLERO: await png('song_tags/bolero', 'ia8'),
+  SONG_TAG_SERENADE: await png('song_tags/serenade', 'ia8'),
+  SONG_TAG_NOCTURNE: await png('song_tags/nocturne', 'ia8'),
+  SONG_TAG_REQUIEM: await png('song_tags/requiem', 'ia8'),
+  SONG_TAG_PRELUDE: await png('song_tags/prelude', 'ia8'),
 });
 
 export const customAssetsKeep = async (): Promise<{[k: string]: Uint8Array}> => ({
