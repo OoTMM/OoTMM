@@ -18,6 +18,13 @@
             "name": "Native"
         },
         {
+            "name": "Logic",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "cppStandard": "c++14",
+            "cStandard": "c11",
+            "compileCommands": "${workspaceFolder}/packages/logic/build/compile_commands.json"
+        },
+        {
             "name": "OoT",
             "includePath": [
                 "${myIncludePath}",
