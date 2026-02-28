@@ -1,4 +1,4 @@
-const ITEM_IDS = [
+export const ITEM_IDS = [
   'OOT_TRAP_ICE',
   'OOT_TRAP_FIRE',
   'OOT_TRAP_SHOCK',
