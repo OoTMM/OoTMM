@@ -50,6 +50,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a logic issue with two red ice checks in MQ Ice Cavern.
 - Fix being kicked from gorman track in ER not sending to the correct location.
 - Fix a save corruption that could occur when playing MM only games on save 2.
 - Put Baby Goron to sleep after playing him the Goron Lullaby.

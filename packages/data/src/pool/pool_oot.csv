@@ -2504,8 +2504,8 @@ MQ Ice Cavern Red Ice Main Room 6,                          redice,         NONE
 MQ Ice Cavern Red Ice Block Room 1,                         redice,         NONE,                 ICE_CAVERN,                     0x0050e,                    NOTHING
 MQ Ice Cavern Red Ice Block Room 2,                         redice,         NONE,                 ICE_CAVERN,                     0x0050f,                    NOTHING
 MQ Ice Cavern Red Ice Block Room 3,                         redice,         NONE,                 ICE_CAVERN,                     0x00510,                    NOTHING
-MQ Ice Cavern Red Ice Map Room,                             redice,         NONE,                 ICE_CAVERN,                     0x00912,                    NOTHING
-MQ Ice Cavern Red Ice Compass Room,                         redice,         NONE,                 ICE_CAVERN,                     0x00b00,                    NOTHING
+MQ Ice Cavern Red Ice Compass Room,                         redice,         NONE,                 ICE_CAVERN,                     0x00912,                    NOTHING
+MQ Ice Cavern Red Ice Map Room,                             redice,         NONE,                 ICE_CAVERN,                     0x00b00,                    NOTHING
 MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
 MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
 MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
