@@ -375,6 +375,15 @@ static void spawnSirloin(PlayState* play)
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
 }
 
+static void spawnCustomBgLonepeak(PlayState* play)
+{
+    //if (play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_SPRING)
+    //    return;
+
+    Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_BG_LONEPEAK, 2407.f, -200.f, -1320.f, 0.f, 0.f, 0.f, 0);
+    //Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_BG_LONEPEAK, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0);
+}
+
 static void Play_FixupSpawnTime(void)
 {
     int firstHalfDay;
@@ -456,6 +465,8 @@ static void Play_AfterInit(PlayState* play)
     comboSpawnCustomWarps(play);
 
     spawnSirloin(play);
+    spawnCustomBgLonepeak(play);
+
     ComboPlay_SpawnExtraSigns(play);
     Play_CheckRoomChangeHook(play);
 
