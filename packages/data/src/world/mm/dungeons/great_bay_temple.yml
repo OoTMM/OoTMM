@@ -147,7 +147,7 @@
     "Great Bay Temple Red Pipe 1": "true"
     "WARP_SONGS": "true"
   locations:
-    "Great Bay Temple Ice Arrow": "soul_enemy(SOUL_ENEMY_WART)"
+    "Great Bay Temple Ice Arrow": "can_kill_warts"
     "Great Bay Temple Pot Wart 1": "true"
     "Great Bay Temple Pot Wart 2": "true"
     "Great Bay Temple Pot Wart 3": "true"
