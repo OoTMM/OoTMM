@@ -49,6 +49,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix being kicked from gorman track in ER not sending to the correct location.
 - Fix a save corruption that could occur when playing MM only games on save 2.
 - Put Baby Goron to sleep after playing him the Goron Lullaby.
 - Fix random settings not having the proper weighting for ageless items.

@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 #include <combo/actor.h>
+#include <combo/entrance.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
@@ -63,9 +64,37 @@ void EnTimeTag_MoonCutscene(Actor* this, PlayState* play)
 
 PATCH_FUNC(0x80ac9fe4, EnTimeTag_MoonCutscene);
 
+static void EnTimeTag_HandleGormanER(void)
+{
+    u32 entrance;
+    s32 override;
+
+    switch (gSave.entrance)
+    {
+    case ENTR_MM_GORMAN_TRACK_FROM_MILK_ROAD:
+    case ENTR_MM_GORMAN_TRACK_UNK2:
+    case ENTR_MM_GORMAN_TRACK_UNK3:
+        entrance = ENTR_MM_MILK_ROAD_FROM_GORMAN_TRACK;
+        break;
+    case ENTR_MM_GORMAN_BACK_FROM_MILK_ROAD:
+    case ENTR_MM_GORMAN_TRACK_UNK5:
+    case ENTR_MM_GORMAN_TRACK_UNK6:
+        entrance = ENTR_MM_MILK_ROAD_FROM_GORMAN_BACK;
+        break;
+    default:
+        return;
+    }
+
+    override = comboEntranceOverride(entrance);
+    if (override != -1)
+        comboTransition(gPlay, (u32)override);
+}
+
 static void EnTimeTag_AfterKick(void)
 {
     gIsEntranceOverride = 1;
+    if (gPlay->sceneId == SCE_MM_GORMAN_TRACK)
+        EnTimeTag_HandleGormanER();
 }
 
 PATCH_FUNC(0x80aca714, EnTimeTag_AfterKick);
