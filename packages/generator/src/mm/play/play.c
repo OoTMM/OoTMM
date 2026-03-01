@@ -377,11 +377,16 @@ static void spawnSirloin(PlayState* play)
 
 static void spawnCustomBgLonepeak(PlayState* play)
 {
-    //if (play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_SPRING)
-    //    return;
+    if (play->sceneId != SCE_MM_GORON_VILLAGE_SPRING)
+        return;
 
-    Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_BG_LONEPEAK, 2407.f, -200.f, -1320.f, 0.f, 0.f, 0.f, 0);
-    //Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_BG_LONEPEAK, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0);
+    Actor_Spawn(
+        &play->actorCtx, play, ACTOR_CUSTOM_BG_LONEPEAK,
+        2407.f + 80.f,
+        -200.f,
+        -1320.f,
+        0.f, 0.f, 0.f, 0
+    );
 }
 
 static void Play_FixupSpawnTime(void)
