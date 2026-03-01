@@ -48,13 +48,12 @@ s32 comboEntranceOverride(u32 entranceId)
     }
 }
 
-void comboTransition(PlayState* play, u32 entrance)
+
+void comboTransitionOverride(PlayState* play, u32 entrance)
 {
 #if defined(GAME_OOT)
     g.nextEntrance = entrance;
     play->nextEntranceIndex = ENTR_EXTENDED;
-    play->transitionTrigger = TRANS_TRIGGER_START;
-    play->transitionType = TRANS_GFX_BLACK;
 #endif
 
 #if defined(GAME_MM)
@@ -76,7 +75,21 @@ void comboTransition(PlayState* play, u32 entrance)
     g.nextEntrance = entrance;
     g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
     play->nextEntrance = ENTR_EXTENDED;
+#endif
+}
+
+
+void comboTransition(PlayState* play, u32 entrance)
+{
     play->transitionTrigger = TRANS_TRIGGER_START;
+
+#if defined(GAME_OOT)
+    play->transitionType = TRANS_GFX_BLACK;
+#endif
+
+#if defined(GAME_MM)
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 #endif
+
+    comboTransitionOverride(play, entrance);
 }

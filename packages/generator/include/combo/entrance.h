@@ -10,6 +10,7 @@
 typedef struct PlayState PlayState;
 
 int  comboIsEntranceValidEpona(u32 entranceId);
+void comboTransitionOverride(PlayState* play, u32 entranceId);
 void comboTransition(PlayState* play, u32 entranceId);
 
 #endif
