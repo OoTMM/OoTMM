@@ -45,7 +45,7 @@
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
-    "Goron Village": "(is_winter && can_use_lens)" # || is_spring // for when the cave is shuffled and the spawn changed
+    "Goron Village": "(is_winter && can_use_lens)"
     "Lone Peak Shrine": "true"
 
 "Lone Peak Shrine":

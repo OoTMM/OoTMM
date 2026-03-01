@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add lone peak shrine to ER.
 - Add deku palace interior to ER.
 - Add a platinum token item, which counts as every skulltula token at once.
 - Add colored squares next to settings in the cosmetics tab when they have a color associated with them.
