@@ -4,7 +4,6 @@
 void EnDns_AfterDetection(void)
 {
     PlayState* play;
-    u32 entrance;
     s32 override;
 
     play = gPlay;
