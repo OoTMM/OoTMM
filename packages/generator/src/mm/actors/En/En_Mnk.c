@@ -1,6 +1,16 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/entrance.h>
+
+static void EnMnk_KickOverride(PlayState* play)
+{
+    s32 override;
+
+    override = comboEntranceOverride(ENTR_MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE);
+    if (override != -1)
+        comboTransitionOverride(play, (u32)override);
+}
 
 /* TODO: Check for repeats */
 static void EnMnk_SongCutscene(Actor* actor, PlayState* play)
@@ -17,6 +27,7 @@ static void EnMnk_SongCutscene(Actor* actor, PlayState* play)
         play->nextEntrance = ((SCE_MM_DEKU_PALACE - 3) << 9) | (1 << 4);
         play->transitionTrigger = TRANS_TRIGGER_START;
         play->transitionType = TRANS_TYPE_FADE_BLACK;
+        EnMnk_KickOverride(play);
         return;
     }
 
@@ -24,3 +35,4 @@ static void EnMnk_SongCutscene(Actor* actor, PlayState* play)
 }
 
 PATCH_FUNC(0x80ab76b0, EnMnk_SongCutscene);
+
