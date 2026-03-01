@@ -65,13 +65,23 @@
     "Deku Palace Pot 2": "has(MASK_DEKU) || short_hook_anywhere"
 
 "Deku Palace Throne":
-  region: DEKU_PALACE
+  region: ENTRANCE
   exits:
     "Deku Palace Main": "true"
-    "Deku Palace Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
+    "Deku Palace Throne To Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
   events:
     PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
     RETURN_PRINCESS: "is_swamp_cleared && has_deku_princess && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
+
+"Deku Palace Throne To Cage":
+  region: BUFFER_DELAYED
+  exits:
+    "Deku Palace Cage": "true"
+
+"Deku Palace Cage To Throne":
+  region: BUFFER_DELAYED
+  exits:
+    "Deku Palace Throne": "true"
 
 "Deku Palace Near Cage":
   region: DEKU_PALACE
@@ -81,10 +91,10 @@
     "Deku Palace Cage": "true"
 
 "Deku Palace Cage":
-  region: DEKU_PALACE
+  region: ENTRANCE
   exits:
     "Deku Palace Near Cage": "true"
-    "Deku Palace Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
+    "Deku Palace Cage To Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
   locations:
     "Deku Palace Sonata of Awakening": "is_swamp_poisoned && has(MASK_DEKU) && has_ocarina"
 
