@@ -1806,10 +1806,10 @@ export const SETTINGS = [{
   cond: hasMM,
 }, {
   key: 'bronzeScale',
-  name: 'Bronze Scale (EXPERIMENTAL)',
+  name: 'Bronze Scale',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add an extra scale item, that is required to enter deep water. EXPERIMENTAL LOGIC - NO LOGIC FOR MQ.',
+  description: 'Add an extra scale item, that is required to enter deep water.',
   default: false,
   cond: (s: any) => (hasOoT(s) || s.scalesMm),
 }, {
