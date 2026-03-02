@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [30.0] - 2026-03-02
+
 ### Added
 
 - Add lone peak shrine to ER.
@@ -1656,7 +1658,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v29.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v30.0...HEAD
+[30.0]: https://github.com/OoTMM/OoTMM/compare/v29.0...v30.0
 [29.0]: https://github.com/OoTMM/OoTMM/compare/v28.2...v29.0
 [28.2]: https://github.com/OoTMM/OoTMM/compare/v28.1...v28.2
 [28.1]: https://github.com/OoTMM/OoTMM/compare/v28.0...v28.1
