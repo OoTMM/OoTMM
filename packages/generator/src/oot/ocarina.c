@@ -500,9 +500,24 @@ static void HandleSongOfDoubleTime(PlayState* play)
                     gSaveContext.nextTransitionType = TRANS_GFX_SANDSTORM_SLOW;
                 }
 
-                Play_SetRespawnData(play, RESPAWN_MODE_DOWN, gSaveContext.save.entrance, gPlayerLastSafeRoom, 0xdff, &gPlayerLastSafePos, gPlayerLastSafeRot);
+                switch (play->sceneId)
+                {
+                case SCE_OOT_MARKET_ENTRANCE_CHILD_DAY:
+                case SCE_OOT_MARKET_ENTRANCE_CHILD_NIGHT:
+                case SCE_OOT_MARKET_ENTRANCE_ADULT:
+                case SCE_OOT_BACK_ALLEY_DAY:
+                case SCE_OOT_BACK_ALLEY_NIGHT:
+                case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY:
+                case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
+                case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
+                    gSaveContext.respawnFlag = -2;
+                    break;
+                default:
+                    Play_SetRespawnData(play, RESPAWN_MODE_DOWN, gSaveContext.save.entrance, gPlayerLastSafeRoom, 0xdff, &gPlayerLastSafePos, gPlayerLastSafeRot);
+                    gSaveContext.respawnFlag = -4;
+                    break;
+                }
 
-                gSaveContext.respawnFlag = -4;
                 play->nextEntranceIndex = gSaveContext.save.entrance;
                 play->transitionTrigger = TRANS_TRIGGER_START;
                 gSaveContext.sunSongState = 0; /* SUNSSONG_INACTIVE */
