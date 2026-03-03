@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Make Song of Double Time (OoT) behave like Sun's Song in scenes where reloading in the same position doesn't work correctly.
+
 ## [30.0] - 2026-03-02
 
 ### Added
