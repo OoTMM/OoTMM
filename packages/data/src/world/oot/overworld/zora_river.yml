@@ -49,8 +49,8 @@
     MAGIC: "true"
   locations:
     "Zora River Bean Seller": "is_child && can_use_wallet(1) && soul_bean_salesman"
-    "Zora River HP Pillar": "(is_child && soul_cucco) || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
-    "Zora River HP Platform": "(is_child && soul_cucco) || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
+    "Zora River HP Pillar": "(is_child && soul_cucco) || can_boomerang || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
+    "Zora River HP Platform": "(is_child && soul_cucco) || can_boomerang || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
     "Zora River Frogs Zeldas Lullaby": "is_child && can_play_zelda"
     "Zora River Frogs Eponas Song": "is_child && can_play_epona"
