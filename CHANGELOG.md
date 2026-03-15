@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix transitions between areas sometimes interfering with the give item routine.
 - Make Song of Double Time (OoT) behave like Sun's Song in scenes where reloading in the same position doesn't work correctly.
 - Fix logic for the underwater rocks in Gerudo Valley.
 - Added Boomerang as logic for collecting both of the Zora's River Heart Pieces as it wasn't relevant until animal souls.
