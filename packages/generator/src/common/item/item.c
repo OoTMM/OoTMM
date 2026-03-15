@@ -32,6 +32,8 @@ int Item_SafeToReceive(PlayState* play)
     if (YREG(31) != 0)
         return 0;
 #endif
+    if (play->transitionTrigger)
+        return 0;
 
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
