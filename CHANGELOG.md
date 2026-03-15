@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [30.1] - 2026-03-15
+
 ### Fixed
 
 - Fix transitions between areas sometimes interfering with the give item routine.
@@ -1665,7 +1667,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v30.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v30.1...HEAD
+[30.1]: https://github.com/OoTMM/OoTMM/compare/v30.0...v30.1
 [30.0]: https://github.com/OoTMM/OoTMM/compare/v29.0...v30.0
 [29.0]: https://github.com/OoTMM/OoTMM/compare/v28.2...v29.0
 [28.2]: https://github.com/OoTMM/OoTMM/compare/v28.1...v28.2
