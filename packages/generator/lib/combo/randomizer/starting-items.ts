@@ -32,7 +32,7 @@ export class RandomizerPatcherStartingItems {
     const items = this.effectiveStartingItems();
     for (const [item, count] of items.entries()) {
       const id = gi(this.ctx.settings, 'oot', item, false);
-      if (gi === undefined) {
+      if (id === undefined) {
         throw new Error(`Unknown item ${item.id}`);
       }
       /* Consumables need to be added late */

@@ -166,7 +166,7 @@ static void Triggers_Check(PlayState* play)
     }
 
     /* Ganon BK */
-    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && Config_SpecialCond(SPECIAL_GANON_BK))
+    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !(gOotSave.info.inventory.dungeonItems[SCE_OOT_GANON_TOWER].bossKey) && Config_SpecialCond(SPECIAL_GANON_BK))
     {
         Trigger_Set(TRIGGER_GANON_BK);
         return;
@@ -266,10 +266,7 @@ static int Triggers_Run(PlayState* play)
         return 0;
     case TRIGGER_GANON_BK:
         if (Triggers_GiveItemDirect(play, GI_OOT_BOSS_KEY_GANON))
-        {
-            gOotExtraFlags.ganonBossKey = 1;
             return 1;
-        }
         return 0;
     case TRIGGER_TRIFORCE:
         gOotExtraFlags.triforceWin = 1;

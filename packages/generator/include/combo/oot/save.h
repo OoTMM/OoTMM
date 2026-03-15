@@ -442,7 +442,7 @@ typedef struct
     u32 biggoron:1;
     u32 tunicZora:1;
     u32 fireArrow:1;
-    u32 ganonBossKey:1;
+    u32 unused3:1;
     u32 childWallet:1;
     u32 triforceWin:1;
     u32 endgameItemIsWin:1;

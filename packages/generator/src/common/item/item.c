@@ -27,6 +27,14 @@ int Item_SafeToReceive(PlayState* play)
 {
     Player* link;
 
+#if defined(GAME_OOT)
+    /* Used to track shop interactions, interferes with the message system */
+    if (YREG(31) != 0)
+        return 0;
+#endif
+    if (play->transitionTrigger)
+        return 0;
+
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
     if (Message_GetState(&play->msgCtx) != 0)

@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [30.1] - 2026-03-15
+
+### Fixed
+
+- Fix transitions between areas sometimes interfering with the give item routine.
+- Make Song of Double Time (OoT) behave like Sun's Song in scenes where reloading in the same position doesn't work correctly.
+- Fix logic for the underwater rocks in Gerudo Valley.
+- Added Boomerang as logic for collecting both of the Zora's River Heart Pieces as it wasn't relevant until animal souls.
+
 ## [30.0] - 2026-03-02
 
 ### Added
@@ -23,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - Add a transcendent fairy item, which counts as every stray fairy at once.
 - Add a setting to make OoT Ice Arrow behave like in MM, creating walkable ice platforms on water (no logic yet).
 - Add the ability to split songs into invividually shuffled notes (thanks @ebrown38).
-- Add bronze scale, an extra scale item required to enter deep water (logic is experimental).
+- Add bronze scale, an extra scale item required to enter deep water.
 - Add a setting to enable shared bottles.
 - Cosmetics setting to remove the low HP beeping sfx.
 - Add double, quadruple, octuple and OHKO damage multipliers (no logic for any of them yet).
@@ -1658,7 +1667,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v30.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v30.1...HEAD
+[30.1]: https://github.com/OoTMM/OoTMM/compare/v30.0...v30.1
 [30.0]: https://github.com/OoTMM/OoTMM/compare/v29.0...v30.0
 [29.0]: https://github.com/OoTMM/OoTMM/compare/v28.2...v29.0
 [28.2]: https://github.com/OoTMM/OoTMM/compare/v28.1...v28.2

@@ -29,9 +29,9 @@
     "Gerudo Valley Rock Entrance Ground 1": "true"
     "Gerudo Valley Rock Entrance Ground 2": "true"
     "Gerudo Valley Rock Entrance Ground 3": "true"
-    "Gerudo Valley Rock Entrance Water 1": "true"
-    "Gerudo Valley Rock Entrance Water 2": "true"
-    "Gerudo Valley Rock Entrance Water 3": "true"
+    "Gerudo Valley Rock Entrance Water 1": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
+    "Gerudo Valley Rock Entrance Water 2": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
+    "Gerudo Valley Rock Entrance Water 3": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
   gossip:
     "Gerudo Valley Gossip": "true"
 
