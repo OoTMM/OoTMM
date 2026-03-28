@@ -171,19 +171,34 @@ void Object_AfterInitContext(void)
 u8 gNightBgm;
 EXPORT_SYMBOL(NIGHT_BGM, gNightBgm);
 
-void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd) {
+void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd)
+{
     u8 ambienceId;
 
     ambienceId = cmd->soundSettings.ambienceId;
-    if(gNightBgm)
-        ambienceId = 0x13;
+    if (gNightBgm)
+    {
+        switch (play->sceneId)
+        {
+        case SCE_MM_MOON:
+        case SCE_MM_MOON_DEKU:
+        case SCE_MM_MOON_GORON:
+        case SCE_MM_MOON_ZORA:
+        case SCE_MM_MOON_LINK:
+        case SCE_MM_IKANA_GRAVEYARD:
+            break;
+        default:
+            ambienceId = 0x13;
+        }
+    }
 
     play->sceneSequences.seqId = cmd->soundSettings.seqId;
     play->sceneSequences.ambienceId = ambienceId;
 
     if (gSaveContext.seqId == (u8)NA_BGM_DISABLED ||
         // Should be AudioSeq_GetActiveSeqId(u8), but apparently we've defined it as Audio_GetActiveSeqId
-        Audio_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN) == NA_BGM_FINAL_HOURS) {
+        Audio_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN) == NA_BGM_FINAL_HOURS)
+    {
         Audio_SetSpec(cmd->soundSettings.specId);
     }
 }

@@ -23,24 +23,40 @@ EntranceTableEntry* Entrance_GetTableEntryCustom(u16 entrance)
 /**
  * Returns the transition effect flags from a given entrance index.
  */
-s32 Entrance_GetTransitionFlags(u16 entrance) {
+s32 Entrance_GetTransitionFlags(u16 entrance)
+{
     return Entrance_GetTableEntryCustom(entrance)->flags;
 }
 
 u8 gNightBgm;
 EXPORT_SYMBOL(NIGHT_BGM, gNightBgm);
 
-void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd) {
+void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd)
+{
     u8 natureAmbienceId;
 
     natureAmbienceId = cmd->soundSettings.natureAmbienceId;
-    if(gNightBgm)
-        natureAmbienceId = 0x13;
+    if (gNightBgm)
+    {
+        switch (play->sceneId)
+        {
+        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
+        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
+        case SCE_OOT_GANON_CASTLE_EXTERIOR:
+        case SCE_OOT_MARKET_CHILD_NIGHT:
+        case SCE_OOT_MARKET_ADULT:
+        case SCE_OOT_GRAVEYARD:
+            break;
+        default:
+            natureAmbienceId = 0x13;
+        }
+    }
 
     play->sceneSequences.seqId = cmd->soundSettings.seqId;
     play->sceneSequences.natureAmbienceId = natureAmbienceId;
 
-    if (gSaveContext.seqId == (u8)NA_BGM_DISABLED) {
+    if (gSaveContext.seqId == (u8)NA_BGM_DISABLED)
+    {
         SEQCMD_RESET_AUDIO_HEAP(0, cmd->soundSettings.specId);
     }
 }

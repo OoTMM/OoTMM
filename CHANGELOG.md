@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Fixed
+
 - Fix Haunted Wasteland Poe Guide being removed when Enemy Souls are on.
+- Fix some areas being dead silent when they should have some ambience noises.
 
 ## [30.1] - 2026-03-15
 
