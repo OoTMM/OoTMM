@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+- Fix Haunted Wasteland Poe Guide being removed when Enemy Souls are on.
+
 ## [30.1] - 2026-03-15
 
 ### Fixed

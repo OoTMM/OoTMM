@@ -50,7 +50,6 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
         }
     case ACTOR_EN_PO_SISTERS:
     case ACTOR_EN_PO_FIELD:
-    case ACTOR_EN_PO_DESERT:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_POE);
     case ACTOR_EN_DNS:
     case ACTOR_EN_SHOPNUTS:
