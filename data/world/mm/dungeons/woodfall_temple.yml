@@ -229,7 +229,7 @@
 "Woodfall Temple Bow Room":
   dungeon: WF
   exits:
-    "Woodfall Temple Water Room Upper Ledge": "can_kill_lizalfos_dinalfos"
+    "Woodfall Temple Water Room Upper Ledge": "can_kill_lizalfos_dinolfos"
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Bow": "can_kill_lizalfos_dinalfos"

@@ -316,7 +316,7 @@
 "can_kill_keese_close": "soul_keese && (has_weapon || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_din)"
 "can_kill_tektites": "soul_tektite && (has_arrows || can_fight || has_explosives || deku_stick_fighting)" # unsure if Deku Spins or hookshot damage
 "can_kill_peahats": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU)) && is_day"
-"can_kill_lizalfos_dinalfos": "soul_lizalfos_dinalfos && (has_weapon || has_mask_goron || has_arrows)"
+"can_kill_lizalfos_dinolfos": "soul_lizalfos_dinolfos && (has_weapon || has_mask_goron || has_arrows)"
 "can_kill_skulltulas": "soul_skulltula && (can_fight || has_arrows || can_hookshot_short || can_use_din || has_explosives || can_use_deku_bubble || deku_stick_fighting)"
 "can_kill_skullwalltulas": soul_skullwalltula && (has_nuts || can_hammer || has_weapon_range || has_explosives)"
 "can_kill_armos": "soul_armos && (can_fight || has_arrows || can_use_din || has_explosives)" # unsure if Deku Bubble works
