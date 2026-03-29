@@ -242,6 +242,7 @@
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
 "cross_poison_swamp": "is_tall || has_mask_goron || (can_swim && (is_swamp_cleared || can_use_nayru)) || has_iron_boots"
+"enter_woodfall_temple_water": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_use_nayru"
 
 # Hot water
 "OLD_hot_water(winter, spring)": "has_bottle && ((event(winter) && event(spring)) || (is_winter && event(winter)) || (is_spring && event(spring)))"
@@ -346,7 +347,7 @@
 "can_kill_skullfish": "soul_skull_fish && (has_mask_zora || (has_iron_boots && can_hookshot))"
 "can_kill_wasp": "soul_wasp && (can_fight || has_arrows || can_hookshot || can_use_din || has(MASK_DEKU))" # currently not used anywhere but created for enemy drops
 "can_kill_dexihands": "soul_enemy(SOUL_ENEMY_DEXIHAND) && (has_mask_zora || has_explosives)"
-"can_kill_dragonflies": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (has(MASK_DEKU) || can_fight || has_nuts || has_arrows || can_use_deku_bubble || can_use_din || has_explosives)"
+"can_kill_dragonflies": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (has(MASK_DEKU) || can_fight || has_nuts || has_arrows || can_use_din || has_explosives)"
 "can_kill_dragonflies_distance": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (can_use_deku_bubble || has_arrows || has_mask_zora)"
 "can_kill_eenos": "soul_eenos && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || has_explosives || deku_stick_fighting)"
 "can_kill_eyegore": "soul_enemy(SOUL_ENEMY_EYEGORE) && (can_fight || has_arrows || can_hookshot_short || can_use_din || has(MASK_DEKU) || has_explosives)"
