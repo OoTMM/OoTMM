@@ -103,7 +103,7 @@
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Water Chest": "has(MASK_DEKU) || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron))) || (has(MASK_GREAT_FAIRY) && (has_arrows || has_bombchu || can_hookshot))"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has(MASK_GREAT_FAIRY) && (has_arrows || has_bombchu || can_hookshot))"
 
 "Woodfall Temple Water Room Map Ledge":
   dungeon: WF
@@ -115,7 +115,7 @@
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Water Chest": "has(MASK_DEKU) || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron))) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
     "Woodfall Temple Grass Water Room 1": "true"
     "Woodfall Temple Grass Water Room 2": "true"
 
@@ -220,7 +220,7 @@
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Water Chest": "has(MASK_DEKU) || has_hover_boots || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron))) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
     "Woodfall Temple Pot Water Room 1": "true"
     "Woodfall Temple Pot Water Room 2": "true"
     "Woodfall Temple Pot Water Room 3": "true"
