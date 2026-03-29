@@ -3,7 +3,7 @@
   exits:
     "WARP_SONGS": "true"
     "Woodfall Front of Temple": "can_reset_time"
-    "Woodfall Temple Entrance": "can_reset_time_dungeon"
+    "Woodfall Temple Entrance Front": "can_reset_time_dungeon"
 
 "Woodfall Temple Entrance Front":
   dungeon: WF
@@ -196,9 +196,10 @@
   dungeon: WF
   exits:
     "Woodfall Temple Main Entrance Ledge": "has(MASK_DEKU) || short_hook_anywhere || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_hover_boots || has_bombs || has_mask_goron || (can_use_nayru && can_swim) || (event(WOODFALL_TEMPLE_MAIN_CHEST) && can_hookshot)"
+    "Woodfall Temple Main Water Room Ledge": "true"
     "Woodfall Temple Pits Room": "true"
     "Woodfall Temple Pre-Boss Main Ledge": "has_arrows || can_use_din"
-    "Woodfall Temple Water Room Upper": "true"
+    "Woodfall Temple Water Room Upper Ledge": "true"
     "WARP_SONGS": "true"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "has_arrows"
