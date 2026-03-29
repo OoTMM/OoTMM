@@ -4,10 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
+
 ### Fixed
 
 - Fix Haunted Wasteland Poe Guide being removed when Enemy Souls are on.
 - Fix some areas being dead silent when they should have some ambience noises.
+- Fixed a lot of broken logic for Woodfall Temple, mostly accounting for Bronze Scale.
 
 ## [30.1] - 2026-03-15
 
