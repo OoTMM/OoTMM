@@ -1034,6 +1034,15 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false
 },
+{
+  key: 'enemyShuffleOot',
+  name: 'Enemy Shuffle (OoT) (EXPERIMENTAL)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Shuffle the various enemies around. EXPERIMENTAL - might cause broken seeds.',
+  cond: hasOoT,
+  default: false
+},
 { ...SETTING_PRICE, key: 'priceOotShops', name: 'OoT Shop Prices', description: 'Sets the price of items inside OoT shops', cond: hasOoT },
 { ...SETTING_PRICE, key: 'priceOotScrubs', name: 'OoT Scrub Prices', description: 'Sets the price of items sold by OoT scrubs', cond: hasOoT },
 { ...SETTING_PRICE, key: 'priceOotMerchants', name: 'OoT Merchants Prices', description: 'Sets the price of items sold by OoT merchants', cond: hasOoT },

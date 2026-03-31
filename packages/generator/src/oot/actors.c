@@ -316,10 +316,70 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
     }
 }
 
+static void Actor_Randomize(short* actorId, u16* variable)
+{
+    if (!Config_Flag(CFG_OOT_ENEMY_SHUFFLE))
+        return;
+
+    switch (*actorId)
+    {
+    case ACTOR_EN_OKUTA:
+    case ACTOR_EN_BIGOKUTA:
+    case ACTOR_EN_WALLMAS:
+    case ACTOR_EN_DODONGO:
+    case ACTOR_EN_FIREFLY:
+    case ACTOR_EN_TITE:
+    case ACTOR_EN_PEEHAT:
+    case ACTOR_EN_ZF:
+    case ACTOR_EN_GOMA:
+    case ACTOR_EN_BUBBLE:
+    case ACTOR_EN_DODOJR:
+    case ACTOR_EN_TORCH2:
+    case ACTOR_EN_BILI:
+    case ACTOR_EN_VALI:
+    case ACTOR_EN_TP:
+    case ACTOR_EN_ST:
+    case ACTOR_EN_BW:
+    case ACTOR_EN_MB:
+    case ACTOR_EN_AM:
+    case ACTOR_EN_DEKUBABA:
+    case ACTOR_EN_KAREBABA:
+    case ACTOR_EN_DEKUNUTS:
+    case ACTOR_EN_HINTNUTS:
+    case ACTOR_EN_BB:
+    case ACTOR_EN_VM:
+    case ACTOR_EN_FLOORMAS:
+    case ACTOR_EN_FD:
+    case ACTOR_EN_DH:
+    case ACTOR_EN_DHA:
+    case ACTOR_EN_SB:
+    case ACTOR_EN_RR:
+    case ACTOR_EN_NY:
+    case ACTOR_EN_ANUBICE_TAG:
+    case ACTOR_EN_ANUBICE:
+    case ACTOR_EN_IK:
+    case ACTOR_EN_SKJ:
+    case ACTOR_EN_TUBO_TRAP:
+    case ACTOR_EN_FZ:
+    case ACTOR_EN_WEIYER:
+    case ACTOR_EN_EIYER:
+    case ACTOR_EN_WF:
+    case ACTOR_EN_CROW:
+    case ACTOR_EN_BA:
+    case ACTOR_EN_REEBA:
+    case ACTOR_EN_SKB:
+        *actorId = ACTOR_EN_RD;
+        *variable = 0x7f00;
+        break;
+    }
+}
+
 Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
     Actor* actor;
+
+    Actor_Randomize(&actorId, &variable);
 
     if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;
