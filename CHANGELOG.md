@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+- Add actor randomization for Ocarina of Time (VERY EXPERIMENTAL)
+
 ### Fixed
 
 - Fix Haunted Wasteland Poe Guide being removed when Enemy Souls are on.
