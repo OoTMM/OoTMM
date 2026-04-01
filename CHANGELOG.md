@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-- Add actor randomization for Ocarina of Time (VERY EXPERIMENTAL)
+### Jokes
+
+- (**April Fools**) Add a fake actor randomizer for OoT, which actually replaces most enemies with very fast redeads.
 
 ### Fixed
 

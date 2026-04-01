@@ -240,7 +240,6 @@ export const CONFVARS = [
   'MM_DMG_MULT_4',
   'MM_DMG_MULT_8',
   'MM_DMG_MULT_OHKO',
-  'OOT_ENEMY_SHUFFLE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
