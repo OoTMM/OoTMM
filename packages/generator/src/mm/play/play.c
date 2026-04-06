@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/mask.h>
 #include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
@@ -756,6 +757,13 @@ void hookPlay_Init(PlayState* play)
         {
             gSave.entrance = ENTR_MM_WARP_OWL_WOODFALL;
         }
+    }
+
+    if (gSave.entrance == ENTR_MM_DEKU_PALACE_THRONE && Config_Flag(CFG_ER_INDOORS) && gSave.info.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU)
+    {
+        /* Force the player to spawn as deku */
+        gSave.playerForm = MM_PLAYER_FORM_DEKU;
+        gSave.equippedMask = MASK_DEKU;
     }
 
     comboCacheClear();

@@ -67,7 +67,7 @@
 "Deku Palace Throne":
   region: ENTRANCE
   exits:
-    "Deku Palace Main": "true"
+    "Deku Palace Main": "has(MASK_DEKU)"
     "Deku Palace Throne To Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
   events:
     PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
