@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - (**April Fools**) Add a fake actor randomizer for OoT, which actually replaces most enemies with very fast redeads.
 
+### Added
+
+- Add a setting to avoid placing multiple playthrough hints for identical items.
+
 ### Fixed
 
 - Auto-equip the deku mask when entering deku palace throne in ER if possible to avoid a potential seed brick.

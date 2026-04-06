@@ -150,6 +150,7 @@ type LocRegion = {
 export class LogicPassHints {
   private hintedLocations = new Set<Location>();
   private stronglyHintedLocations = new Set<Location>();
+  private hintedPlaythroughItems = new Set<PlayerItem>();
   private gossip: {[k: string]: HintGossip}[];
   private pathfinder: Pathfinder;
   private hintsAlways: string[];
@@ -461,14 +462,14 @@ export class LogicPassHints {
     return 2;
   }
 
-  private placeGossipItemExact(worldId: number, checkWorldId: number, checkHint: string, extra: number, isMoon: boolean) {
+  private placeGossipItemExact(worldId: number, checkWorldId: number, checkHint: string, extra: number, context: 'normal' | 'moon' | 'playthrough') {
     if (checkHint === 'NONE') {
       return false;
     }
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
     const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
-    if ((!isMoon && this.state.settings.noPlandoHints && locations.every(l => this.state.plandoLocations.has(l))) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
+    if (((context !== 'moon') && this.state.settings.noPlandoHints && locations.every(l => this.state.plandoLocations.has(l))) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);
@@ -477,7 +478,7 @@ export class LogicPassHints {
       return false;
     }
     let gossip;
-    if (isMoon) {
+    if (context === 'moon') {
       const candidates = Object.keys(world.gossip)
         .filter(x => world.gossip[x].type === 'gossip-moon')
         .filter(x => !this.gossip[worldId][x]);
@@ -519,7 +520,7 @@ export class LogicPassHints {
       if (locations.every(l => this.state.settings.junkLocations.includes(locationData(l).id))) {
         continue;
       }
-      if (this.placeGossipItemExact(worldId, worldId, checkHint, extra, false)) {
+      if (this.placeGossipItemExact(worldId, worldId, checkHint, extra, 'normal')) {
         placed++;
       }
     }
@@ -584,6 +585,7 @@ export class LogicPassHints {
         break;
       }
       const loc = locs.pop()!;
+      const pi = this.state.items.get(loc)!;
       const gossip = this.findValidGossip(worldId, loc);
       if (gossip !== null) {
         const path = this.findPath(loc);
@@ -623,23 +625,26 @@ export class LogicPassHints {
     return placed;
   }
 
-  private placeGossipItemRegion(worldId: number, location: Location | null, extra: number, isMoon: boolean) {
+  private placeGossipItemRegion(worldId: number, location: Location | null, extra: number, context: 'normal' | 'playthrough' | 'moon') {
     const world = this.state.worlds[worldId];
     if (location === null) {
       return false;
     }
     const locD = locationData(location);
     const locWorld = this.state.worlds[locD.world as number];
-    if (this.hintedLocations.has(location) && !isMoon) {
+    if (this.hintedLocations.has(location) && (context !== 'moon')) {
       return false;
     }
     const item = this.state.items.get(location)!;
+    if (this.state.settings.noDuplicatePlaythroughHints && context === 'playthrough' && this.hintedPlaythroughItems.has(item)) {
+      return false;
+    }
     const hint = locWorld.checks[locD.id].hint;
-    if (this.placeGossipItemExact(worldId, locD.world as number, hint, extra, isMoon)) {
+    if (this.placeGossipItemExact(worldId, locD.world as number, hint, extra, context)) {
       return true;
     }
     let gossip;
-    if (isMoon) {
+    if (context === 'moon') {
       const candidates = Object.keys(world.gossip)
         .filter(x => world.gossip[x].type === 'gossip-moon')
         .filter(x => !this.gossip[worldId][x]);
@@ -653,6 +658,9 @@ export class LogicPassHints {
       return false;
     }
     this.hintedLocations.add(location);
+    if (context === 'playthrough') {
+      this.hintedPlaythroughItems.add(item);
+    }
     const importance = this.locImportance(location);
     const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, importance, region: makeRegion(locWorld.regions[locD.id], locD.world as number) };
     this.placeWithExtra(worldId, gossip, h, extra);
@@ -671,7 +679,7 @@ export class LogicPassHints {
       if (placed >= count)
         break;
       const loc = locations[i];
-      if (this.placeGossipItemRegion(world, loc, extra, false)) {
+      if (this.placeGossipItemRegion(world, loc, extra, 'normal')) {
         placed++;
       }
     }
@@ -688,7 +696,7 @@ export class LogicPassHints {
       if (placed >= count) {
         break;
       }
-      if (this.placeGossipItemRegion(world, loc, extra, false)) {
+      if (this.placeGossipItemRegion(world, loc, extra, 'playthrough')) {
         placed++;
       }
     }
@@ -724,7 +732,7 @@ export class LogicPassHints {
   private placeMoonGossip(world: number) {
     for (const mask of ItemGroups.MASKS_REGULAR) {
       const location = this.findItem(makePlayerItem(mask, world)).loc;
-      this.placeGossipItemRegion(world, location, 0, true);
+      this.placeGossipItemRegion(world, location, 0, 'moon');
     }
   }
 

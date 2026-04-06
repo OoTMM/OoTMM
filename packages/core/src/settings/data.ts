@@ -163,6 +163,13 @@ export const SETTINGS = [{
   description: 'Prevents items that are part of a plando from being hinted',
   default: true
 }, {
+  key: 'noDuplicatePlaythroughHints',
+  name: 'No Duplicate Playthrough Hints',
+  category: 'hints',
+  type: 'boolean',
+  description: 'Do not place multiple playthrough hints for the same kind of items (for example - multiple playthrough hints for different gold skulltula tokens).',
+  default: false
+}, {
   key: 'extraHintRegions',
   name: 'Extra Hint Regions',
   category: 'hints',
