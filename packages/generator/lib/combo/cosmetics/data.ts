@@ -16,6 +16,11 @@ export const COSMETICS = [{
   type: 'boolean',
   default: true,
 }, {
+  key: 'musicCategories',
+  name: 'Music Categories',
+  type: 'boolean',
+  default: true,
+}, {
   key: 'nightBgm',
   name: 'Enable Nighttime BGM (Experimental!)',
   description: 'Enable the background music at night time.<br>May cause crashes on Everdrive.',

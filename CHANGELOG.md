@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a basic implementation of music categories.
 - Add a setting to avoid placing multiple playthrough hints for identical items.
 
 ### Fixed

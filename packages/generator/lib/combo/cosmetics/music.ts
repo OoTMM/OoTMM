@@ -6,6 +6,7 @@ import { RomBuilder } from '../rom-builder';
 import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
 import { concatUint8Arrays } from 'uint8array-extras';
+import { Cosmetics } from './type';
 
 type MusicType = 'bgm' | 'fanfare';
 
@@ -14,116 +15,160 @@ type MusicEntry = {
   name: string;
   oot?: number[];
   mm?: number[];
+  categories: MusicCategory[];
+}
+
+enum MusicCategory {
+  NONE = 0,
+  BGM_TITLE_SCREEN,
+  BGM_FILE_SELECT,
+  BGM_CALM,
+  BGM_FIELD,
+  BGM_DUNGEON,
+  BGM_DUNGEON_FINAL,
+  BGM_TOWN,
+  BGM_BATTLE,
+  BGM_ACTION,
+  BGM_MINIGAME,
+  BGM_MINIBOSS,
+  BGM_BOSS,
+  BGM_BOSS_FINAL,
+  BGM_INDOOR,
 }
 
 const MUSIC: {[k: string]: MusicEntry} = {
-  OOT_FILE_SELECT:                      { type: 'bgm',     name: 'OoT - File Select',                     oot: [0x57] },
-  OOT_HYRULE_FIELD:                     { type: 'bgm',     name: 'OoT - Hyrule Field',                    oot: [0x02] },
-  OOT_DODONGO_CAVERN:                   { type: 'bgm',     name: 'OoT - Dodongo Cavern',                  oot: [0x18] },
-  OOT_KAKARIKO_ADULT:                   { type: 'bgm',     name: 'OoT - Kakariko Adult',                  oot: [0x19] },
-  OOT_BATTLE:                           { type: 'bgm',     name: 'OoT - Battle',                          oot: [0x1a] },
-  OOT_BATTLE_BOSS:                      { type: 'bgm',     name: 'OoT - Boss Battle',                     oot: [0x1b] },
-  OOT_DEKU_TREE:                        { type: 'bgm',     name: 'OoT - Deku Tree',                       oot: [0x1c] },
-  OOT_MARKET:                           { type: 'bgm',     name: 'OoT - Market',                          oot: [0x1d] },
-  OOT_TITLE:                            { type: 'bgm',     name: 'OoT - Title Theme',                     oot: [0x1e] },
-  OOT_HOUSES:                           { type: 'bgm',     name: 'OoT - Houses',                          oot: [0x1f] },
-  OOT_JABU_JABU:                        { type: 'bgm',     name: 'OoT - Jabu Jabu',                       oot: [0x26] },
-  OOT_KAKARIKO_CHILD:                   { type: 'bgm',     name: 'OoT - Kakariko Child',                  oot: [0x27] },
-  OOT_FAIRY_FOUNTAIN:                   { type: 'bgm',     name: 'OoT - Fairy Fountain',                  oot: [0x28] },
-  OOT_ZELDA_THEME:                      { type: 'bgm',     name: 'OoT - Zelda Theme',                     oot: [0x29] },
-  OOT_TEMPLE_FIRE:                      { type: 'bgm',     name: 'OoT - Fire Temple',                     oot: [0x2a] },
-  OOT_TEMPLE_FOREST:                    { type: 'bgm',     name: 'OoT - Forest Temple',                   oot: [0x2c] },
-  OOT_CASTLE_COURTYARD:                 { type: 'bgm',     name: 'OoT - Castle Courtyard',                oot: [0x2d] },
-  OOT_GANONDORF_THEME:                  { type: 'bgm',     name: 'OoT - Ganondorf Theme',                 oot: [0x2e] },
-  OOT_LON_LON_RANCH:                    { type: 'bgm',     name: 'OoT - Lon Lon Ranch',                   oot: [0x2f] },
-  OOT_GORON_CITY:                       { type: 'bgm',     name: 'OoT - Goron City',                      oot: [0x30] },
-  OOT_BATTLE_MINIBOSS:                  { type: 'bgm',     name: 'OoT - Miniboss Battle',                 oot: [0x38] },
-  OOT_TEMPLE_OF_TIME:                   { type: 'bgm',     name: 'OoT - Temple of Time',                  oot: [0x3a] },
-  OOT_KOKIRI_FOREST:                    { type: 'bgm',     name: 'OoT - Kokiri Forest',                   oot: [0x3c] },
-  OOT_LOST_WOODS:                       { type: 'bgm',     name: 'OoT - Lost Woods',                      oot: [0x3e] },
-  OOT_TEMPLE_SPIRIT:                    { type: 'bgm',     name: 'OoT - Spirit Temple',                   oot: [0x3f] },
-  OOT_HORSE_RACE:                       { type: 'bgm',     name: 'OoT - Horse Race',                      oot: [0x40] },
-  OOT_INGO_THEME:                       { type: 'bgm',     name: 'OoT - Ingo Theme',                      oot: [0x42] },
-  OOT_FAIRY_FLYING:                     { type: 'bgm',     name: 'OoT - Fairy Flying',                    oot: [0x4a] },
-  OOT_THEME_DEKU_TREE:                  { type: 'bgm',     name: 'OoT - Deku Tree Theme',                 oot: [0x4b] },
-  OOT_WINDMILL_HUT:                     { type: 'bgm',     name: 'OoT - Windmill Hut',                    oot: [0x4c] },
-  OOT_SHOOTING_GALLERY:                 { type: 'bgm',     name: 'OoT - Shooting Gallery',                oot: [0x4e] },
-  OOT_SHEIK_THEME:                      { type: 'bgm',     name: 'OoT - Sheik Theme',                     oot: [0x4f] },
-  OOT_ZORAS_DOMAIN:                     { type: 'bgm',     name: 'OoT - Zoras Domain',                    oot: [0x50] },
-  OOT_SHOP:                             { type: 'bgm',     name: 'OoT - Shop',                            oot: [0x55] },
-  OOT_SAGES:                            { type: 'bgm',     name: 'OoT - Chamber of the Sages',            oot: [0x56] },
-  OOT_ICE_CAVERN:                       { type: 'bgm',     name: 'OoT - Ice Cavern',                      oot: [0x58] },
-  OOT_KAEPORA_GAEBORA:                  { type: 'bgm',     name: 'OoT - Kaepora Gaebora',                 oot: [0x5a] },
-  OOT_TEMPLE_SHADOW:                    { type: 'bgm',     name: 'OoT - Shadow Temple',                   oot: [0x5b] },
-  OOT_TEMPLE_WATER:                     { type: 'bgm',     name: 'OoT - Water Temple',                    oot: [0x5c] },
-  OOT_GERUDO_VALLEY:                    { type: 'bgm',     name: 'OoT - Gerudo Valley',                   oot: [0x5f] },
-  OOT_POTION_SHOP:                      { type: 'bgm',     name: 'OoT - Potion Shop (OoT)',               oot: [0x60] },
-  OOT_KOTAKE_KOUME:                     { type: 'bgm',     name: 'OoT - Kotake and Koume',                oot: [0x61] },
-  OOT_ESCAPE_CASTLE:                    { type: 'bgm',     name: 'OoT - Castle Escape',                   oot: [0x62] },
-  OOT_UNDERGROUND_CASTLE:               { type: 'bgm',     name: 'OoT - Castle Underground',              oot: [0x63] },
-  OOT_BATTLE_GANONDORF:                 { type: 'bgm',     name: 'OoT - Ganondorf Battle',                oot: [0x64] },
-  OOT_BATTLE_GANON:                     { type: 'bgm',     name: 'OoT - Ganon Battle',                    oot: [0x65] },
-  OOT_BATTLE_BOSS_FIRE:                 { type: 'bgm',     name: 'OoT - Fire Temple Boss',                oot: [0x6b] },
-  OOT_MINIGAME:                         { type: 'bgm',     name: 'OoT - Minigame',                        oot: [0x6c] },
-  OOT_GROTTOS:                          { type: 'bgm',     name: 'OoT -  Grottos',                        oot: [0x6e] },
-  OOT_GRAVES:                           { type: 'bgm',     name: 'OoT - Graves',                          oot: [0x6f] },
-  OOT_GERUDO_TRAINING_GROUNDS:          { type: 'bgm',     name: 'OoT - Gerudo Training Grounds',         oot: [0x70] },
-  MM_TERMINA_FIELD:                     { type: 'bgm',     name: 'MM - Termina Field',                    mm: [0x02] },
-  MM_TEMPLE_STONE_TOWER:                { type: 'bgm',     name: 'MM - Stone Tower Temple',               mm: [0x06] },
-  MM_TEMPLE_STONE_TOWER_INVERTED:       { type: 'bgm',     name: 'MM - Stone Tower Temple Inverted',      mm: [0x07] },
-  MM_SOUTHERN_SWAMP:                    { type: 'bgm',     name: 'MM - Southern Swamp',                   mm: [0x0c] },
-  MM_ALIENS:                            { type: 'bgm',     name: 'MM - Aliens',                           mm: [0x0d] },
-  MM_MINIGAME:                          { type: 'bgm',     name: 'MM - Minigame',                         mm: [0x0e] },
-  MM_SHARP_CURSE:                       { type: 'bgm',     name: 'MM - Sharp Curse',                      mm: [0x0f] },
-  MM_GREAT_BAY_COAST:                   { type: 'bgm',     name: 'MM - Great Bay Coast',                  mm: [0x10] },
-  MM_IKANA_VALLEY:                      { type: 'bgm',     name: 'MM - Ikana Valley',                     mm: [0x11] },
-  MM_COURT_DEKU_KING:                   { type: 'bgm',     name: 'MM - Court of the Deku King',           mm: [0x12] },
-  MM_MOUNTAIN_VILLAGE:                  { type: 'bgm',     name: 'MM - Mountain Village',                 mm: [0x13] },
-  MM_PIRATES_FORTRESS:                  { type: 'bgm',     name: 'MM - Pirates Fortress',                 mm: [0x14] },
-  MM_CLOCK_TOWN_DAY_1:                  { type: 'bgm',     name: 'MM - Clock Town Day 1',                 mm: [0x15, 0x1d] },
-  MM_CLOCK_TOWN_DAY_2:                  { type: 'bgm',     name: 'MM - Clock Town Day 2',                 mm: [0x16, 0x23] },
-  MM_CLOCK_TOWN_DAY_3:                  { type: 'bgm',     name: 'MM - Clock Town Day 3',                 mm: [0x17] },
-  MM_BATTLE_BOSS:                       { type: 'bgm',     name: 'MM - Boss Battle',                      mm: [0x1b] },
-  MM_WOODFALL_TEMPLE:                   { type: 'bgm',     name: 'MM - Woodfall Temple',                  mm: [0x1c] },
-  MM_STOCK_POT_INN:                     { type: 'bgm',     name: 'MM - Stock Pot Inn',                    mm: [0x1f] },
-  MM_MINIGAME2:                         { type: 'bgm',     name: 'MM - Minigame 2',                       mm: [0x25] },
-  MM_GORON_RACE:                        { type: 'bgm',     name: 'MM - Goron Race',                       mm: [0x26] },
-  MM_MUSIC_BOX_HOUSE:                   { type: 'bgm',     name: 'MM - Music Box House',                  mm: [0x27] },
-  MM_FAIRYS_FOUNTAIN:                   { type: 'bgm',     name: 'MM - Fairy\'s Fountain',                mm: [0x28] /* 0x18 = File Select */ },
-  MM_MARINE_RESEARCH_LABORATORY:        { type: 'bgm',     name: 'MM - Marine Research Laboratory',       mm: [0x2c] },
-  MM_ROMANI_RANCH:                      { type: 'bgm',     name: 'MM - Romani Ranch',                     mm: [0x2f] },
-  MM_GORON_VILLAGE:                     { type: 'bgm',     name: 'MM - Goron Village',                    mm: [0x30] },
-  MM_MAYOR_DOTOUR:                      { type: 'bgm',     name: 'MM - Mayor Dotour',                     mm: [0x31] },
-  MM_ZORA_HALL:                         { type: 'bgm',     name: 'MM - Zora Hall',                        mm: [0x36] },
-  MM_MINIBOSS:                          { type: 'bgm',     name: 'MM - Mini Boss',                        mm: [0x38] },
-  MM_ASTRAL_OBSERVATORY:                { type: 'bgm',     name: 'MM - Astral Observatory',               mm: [0x3a] },
-  MM_BOMBERS_HIDEOUT:                   { type: 'bgm',     name: 'MM - Bombers Hideout',                  mm: [0x3b] },
-  MM_MILK_BAR:                          { type: 'bgm',     name: 'MM - Milk Bar',                         mm: [0x3c, 0x56] },
-  MM_WOODS_OF_MYSTERY:                  { type: 'bgm',     name: 'MM - Woods of Mystery',                 mm: [0x3e] },
-  MM_GORMAN_RACE:                       { type: 'bgm',     name: 'MM - Gorman Race',                      mm: [0x40] },
-  MM_GORMAN_BROS:                       { type: 'bgm',     name: 'MM - Gorman Bros.',                     mm: [0x42] },
-  MM_KOTAKE_POTION_SHOP:                { type: 'bgm',     name: 'MM - Kotake\'s Potion Shop',            mm: [0x43] },
-  MM_STORE:                             { type: 'bgm',     name: 'MM - Store',                            mm: [0x44] },
-  MM_TARGET_PRACTICE:                   { type: 'bgm',     name: 'MM - Target Practice',                  mm: [0x46] },
-  MM_SWORD_TRAINING:                    { type: 'bgm',     name: 'MM - Sword Training',                   mm: [0x50] },
-  MM_FINAL_HOURS:                       { type: 'bgm',     name: 'MM - Final Hours',                      mm: [0x57, 0x60] /* Not clear why there are two versions */ },
-  MM_TEMPLE_SNOWHEAD:                   { type: 'bgm',     name: 'MM - Snowhead Temple',                  mm: [0x65] },
-  MM_TEMPLE_GREAT_BAY:                  { type: 'bgm',     name: 'MM - Great Bay Temple',                 mm: [0x66] },
-  MM_BATTLE_MAJORA3:                    { type: 'bgm',     name: 'MM - Majora\'s Wrath',                  mm: [0x69] },
-  MM_BATTLE_MAJORA2:                    { type: 'bgm',     name: 'MM - Majora\'s Incarnation',            mm: [0x6a] },
-  MM_BATTLE_MAJORA1:                    { type: 'bgm',     name: 'MM - Majora\'s Mask',                   mm: [0x6b] },
-  MM_IKANA_CASTLE:                      { type: 'bgm',     name: 'MM - Ikana Castle',                     mm: [0x6f] },
-  MM_CLEAR_WOODFALL:                    { type: 'bgm',     name: 'MM - Woodfall Clear',                   mm: [0x78] },
-  MM_CLEAR_SNOWHEAD:                    { type: 'bgm',     name: 'MM - Snowhead Clear',                   mm: [0x79] },
-  FANFARE_SHARED_ITEM_MAJOR:            { type: 'fanfare', name: 'Shared - Fanfare Item Major',           oot: [0x22], mm: [0x22] },
-  FANFARE_SHARED_ITEM_HEART_PIECE:      { type: 'fanfare', name: 'Shared - Fanfare Item Heart Piece',     oot: [0x39], mm: [0x39] },
-  FANFARE_SHARED_ITEM_HEART_CONTAINER:  { type: 'fanfare', name: 'Shared - Fanfare Item Heart Container', oot: [0x24], mm: [0x24] },
-  FANFARE_SHARED_ITEM_MASK:             { type: 'fanfare', name: 'Shared - Fanfare Item Mask',            oot: [], mm: [0x37] },
-  FANFARE_SHARED_ITEM_STONE:            { type: 'fanfare', name: 'Shared - Fanfare Item Stone',           oot: [0x32], mm: [] },
-  FANFARE_SHARED_ITEM_MEDALLION:        { type: 'fanfare', name: 'Shared - Fanfare Item Medallion',       oot: [0x43], mm: [] },
-  FANFARE_SHARED_ITEM_OCARINA:          { type: 'fanfare', name: 'Shared - Fanfare Item Ocarina',         oot: [0x3d], mm: [0x52] },
-  FANFARE_OOT_GAME_OVER:                { type: 'fanfare', name: 'OoT - Fanfare Game Over',               oot: [0x20] },
-  FANFARE_OOT_BOSS_CLEAR:               { type: 'fanfare', name: 'OoT - Fanfare Boss Clear',              oot: [0x21] },
+  OOT_FILE_SELECT:                      { type: 'bgm',     name: 'OoT - File Select',                     oot: [0x57], categories: [MusicCategory.BGM_FILE_SELECT, MusicCategory.BGM_CALM] },
+  OOT_HYRULE_FIELD:                     { type: 'bgm',     name: 'OoT - Hyrule Field',                    oot: [0x02], categories: [MusicCategory.BGM_FIELD] },
+  OOT_DODONGO_CAVERN:                   { type: 'bgm',     name: 'OoT - Dodongo Cavern',                  oot: [0x18], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_KAKARIKO_ADULT:                   { type: 'bgm',     name: 'OoT - Kakariko Adult',                  oot: [0x19], categories: [MusicCategory.BGM_TOWN] },
+  OOT_BATTLE:                           { type: 'bgm',     name: 'OoT - Battle',                          oot: [0x1a], categories: [MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  OOT_BATTLE_BOSS:                      { type: 'bgm',     name: 'OoT - Boss Battle',                     oot: [0x1b], categories: [MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  OOT_DEKU_TREE:                        { type: 'bgm',     name: 'OoT - Deku Tree',                       oot: [0x1c], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_MARKET:                           { type: 'bgm',     name: 'OoT - Market',                          oot: [0x1d], categories: [MusicCategory.BGM_TOWN] },
+  OOT_TITLE:                            { type: 'bgm',     name: 'OoT - Title Theme',                     oot: [0x1e], categories: [MusicCategory.BGM_TITLE_SCREEN, MusicCategory.BGM_CALM] },
+  OOT_HOUSES:                           { type: 'bgm',     name: 'OoT - Houses',                          oot: [0x1f], categories: [MusicCategory.BGM_INDOOR, MusicCategory.BGM_CALM] },
+  OOT_JABU_JABU:                        { type: 'bgm',     name: 'OoT - Jabu Jabu',                       oot: [0x26], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_KAKARIKO_CHILD:                   { type: 'bgm',     name: 'OoT - Kakariko Child',                  oot: [0x27], categories: [MusicCategory.BGM_TOWN] },
+  OOT_FAIRY_FOUNTAIN:                   { type: 'bgm',     name: 'OoT - Fairy Fountain',                  oot: [0x28], categories: [MusicCategory.BGM_CALM] },
+  OOT_ZELDA_THEME:                      { type: 'bgm',     name: 'OoT - Zelda Theme',                     oot: [0x29], categories: [MusicCategory.BGM_CALM] },
+  OOT_TEMPLE_FIRE:                      { type: 'bgm',     name: 'OoT - Fire Temple',                     oot: [0x2a], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_TEMPLE_FOREST:                    { type: 'bgm',     name: 'OoT - Forest Temple',                   oot: [0x2c], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_CASTLE_COURTYARD:                 { type: 'bgm',     name: 'OoT - Castle Courtyard',                oot: [0x2d], categories: [MusicCategory.BGM_CALM] },
+  OOT_GANONDORF_THEME:                  { type: 'bgm',     name: 'OoT - Ganondorf Theme',                 oot: [0x2e], categories: [MusicCategory.BGM_ACTION] },
+  OOT_LON_LON_RANCH:                    { type: 'bgm',     name: 'OoT - Lon Lon Ranch',                   oot: [0x2f], categories: [MusicCategory.BGM_TOWN] },
+  OOT_GORON_CITY:                       { type: 'bgm',     name: 'OoT - Goron City',                      oot: [0x30], categories: [MusicCategory.BGM_TOWN] },
+  OOT_BATTLE_MINIBOSS:                  { type: 'bgm',     name: 'OoT - Miniboss Battle',                 oot: [0x38], categories: [MusicCategory.BGM_MINIBOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  OOT_TEMPLE_OF_TIME:                   { type: 'bgm',     name: 'OoT - Temple of Time',                  oot: [0x3a], categories: [MusicCategory.BGM_CALM] },
+  OOT_KOKIRI_FOREST:                    { type: 'bgm',     name: 'OoT - Kokiri Forest',                   oot: [0x3c], categories: [MusicCategory.BGM_TOWN] },
+  OOT_LOST_WOODS:                       { type: 'bgm',     name: 'OoT - Lost Woods',                      oot: [0x3e], categories: [] /* ??? */ },
+  OOT_TEMPLE_SPIRIT:                    { type: 'bgm',     name: 'OoT - Spirit Temple',                   oot: [0x3f], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_HORSE_RACE:                       { type: 'bgm',     name: 'OoT - Horse Race',                      oot: [0x40], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  OOT_INGO_THEME:                       { type: 'bgm',     name: 'OoT - Ingo Theme',                      oot: [0x42], categories: [MusicCategory.BGM_CALM] },
+  OOT_FAIRY_FLYING:                     { type: 'bgm',     name: 'OoT - Fairy Flying',                    oot: [0x4a], categories: [MusicCategory.BGM_CALM] },
+  OOT_THEME_DEKU_TREE:                  { type: 'bgm',     name: 'OoT - Deku Tree Theme',                 oot: [0x4b], categories: [MusicCategory.BGM_CALM] },
+  OOT_WINDMILL_HUT:                     { type: 'bgm',     name: 'OoT - Windmill Hut',                    oot: [0x4c], categories: [MusicCategory.BGM_CALM] },
+  OOT_SHOOTING_GALLERY:                 { type: 'bgm',     name: 'OoT - Shooting Gallery',                oot: [0x4e], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  OOT_SHEIK_THEME:                      { type: 'bgm',     name: 'OoT - Sheik Theme',                     oot: [0x4f], categories: [MusicCategory.BGM_CALM] },
+  OOT_ZORAS_DOMAIN:                     { type: 'bgm',     name: 'OoT - Zoras Domain',                    oot: [0x50], categories: [MusicCategory.BGM_TOWN] },
+  OOT_SHOP:                             { type: 'bgm',     name: 'OoT - Shop',                            oot: [0x55], categories: [MusicCategory.BGM_CALM] },
+  OOT_SAGES:                            { type: 'bgm',     name: 'OoT - Chamber of the Sages',            oot: [0x56], categories: [MusicCategory.BGM_CALM] },
+  OOT_ICE_CAVERN:                       { type: 'bgm',     name: 'OoT - Ice Cavern',                      oot: [0x58], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_KAEPORA_GAEBORA:                  { type: 'bgm',     name: 'OoT - Kaepora Gaebora',                 oot: [0x5a], categories: [MusicCategory.BGM_CALM] },
+  OOT_TEMPLE_SHADOW:                    { type: 'bgm',     name: 'OoT - Shadow Temple',                   oot: [0x5b], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_TEMPLE_WATER:                     { type: 'bgm',     name: 'OoT - Water Temple',                    oot: [0x5c], categories: [MusicCategory.BGM_DUNGEON] },
+  OOT_GERUDO_VALLEY:                    { type: 'bgm',     name: 'OoT - Gerudo Valley',                   oot: [0x5f], categories: [MusicCategory.BGM_ACTION] },
+  OOT_POTION_SHOP:                      { type: 'bgm',     name: 'OoT - Potion Shop (OoT)',               oot: [0x60], categories: [MusicCategory.BGM_CALM] },
+  OOT_KOTAKE_KOUME:                     { type: 'bgm',     name: 'OoT - Kotake and Koume',                oot: [0x61], categories: [MusicCategory.BGM_CALM] },
+  OOT_ESCAPE_CASTLE:                    { type: 'bgm',     name: 'OoT - Castle Escape',                   oot: [0x62], categories: [MusicCategory.BGM_ACTION] },
+  OOT_UNDERGROUND_CASTLE:               { type: 'bgm',     name: 'OoT - Castle Underground',              oot: [0x63], categories: [MusicCategory.BGM_ACTION] },
+  OOT_BATTLE_GANONDORF:                 { type: 'bgm',     name: 'OoT - Ganondorf Battle',                oot: [0x64], categories: [MusicCategory.BGM_BOSS_FINAL, MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  OOT_BATTLE_GANON:                     { type: 'bgm',     name: 'OoT - Ganon Battle',                    oot: [0x65], categories: [MusicCategory.BGM_BOSS_FINAL, MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  OOT_BATTLE_BOSS_FIRE:                 { type: 'bgm',     name: 'OoT - Fire Temple Boss',                oot: [0x6b], categories: [MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  OOT_MINIGAME:                         { type: 'bgm',     name: 'OoT - Minigame',                        oot: [0x6c], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  OOT_GROTTOS:                          { type: 'bgm',     name: 'OoT - Grottos',                         oot: [0x6e], categories: [MusicCategory.BGM_CALM] },
+  OOT_GRAVES:                           { type: 'bgm',     name: 'OoT - Graves',                          oot: [0x6f], categories: [MusicCategory.BGM_CALM] },
+  OOT_GERUDO_TRAINING_GROUNDS:          { type: 'bgm',     name: 'OoT - Gerudo Training Grounds',         oot: [0x70], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_TERMINA_FIELD:                     { type: 'bgm',     name: 'MM - Termina Field',                    mm: [0x02], categories: [MusicCategory.BGM_FIELD] },
+  MM_TEMPLE_STONE_TOWER:                { type: 'bgm',     name: 'MM - Stone Tower Temple',               mm: [0x06], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_TEMPLE_STONE_TOWER_INVERTED:       { type: 'bgm',     name: 'MM - Stone Tower Temple Inverted',      mm: [0x07], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_SOUTHERN_SWAMP:                    { type: 'bgm',     name: 'MM - Southern Swamp',                   mm: [0x0c], categories: [MusicCategory.BGM_FIELD] },
+  MM_ALIENS:                            { type: 'bgm',     name: 'MM - Aliens',                           mm: [0x0d], categories: [MusicCategory.BGM_ACTION] },
+  MM_MINIGAME:                          { type: 'bgm',     name: 'MM - Minigame',                         mm: [0x0e], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  MM_SHARP_CURSE:                       { type: 'bgm',     name: 'MM - Sharp Curse',                      mm: [0x0f], categories: [MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  MM_GREAT_BAY_COAST:                   { type: 'bgm',     name: 'MM - Great Bay Coast',                  mm: [0x10], categories: [MusicCategory.BGM_FIELD] },
+  MM_IKANA_VALLEY:                      { type: 'bgm',     name: 'MM - Ikana Valley',                     mm: [0x11], categories: [MusicCategory.BGM_FIELD] },
+  MM_COURT_DEKU_KING:                   { type: 'bgm',     name: 'MM - Court of the Deku King',           mm: [0x12], categories: [MusicCategory.BGM_ACTION] },
+  MM_MOUNTAIN_VILLAGE:                  { type: 'bgm',     name: 'MM - Mountain Village',                 mm: [0x13], categories: [MusicCategory.BGM_TOWN] },
+  MM_PIRATES_FORTRESS:                  { type: 'bgm',     name: 'MM - Pirates Fortress',                 mm: [0x14], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_CLOCK_TOWN_DAY_1:                  { type: 'bgm',     name: 'MM - Clock Town Day 1',                 mm: [0x15, 0x1d], categories: [MusicCategory.BGM_TOWN] },
+  MM_CLOCK_TOWN_DAY_2:                  { type: 'bgm',     name: 'MM - Clock Town Day 2',                 mm: [0x16, 0x23], categories: [MusicCategory.BGM_TOWN] },
+  MM_CLOCK_TOWN_DAY_3:                  { type: 'bgm',     name: 'MM - Clock Town Day 3',                 mm: [0x17], categories: [MusicCategory.BGM_TOWN] },
+  MM_BATTLE_BOSS:                       { type: 'bgm',     name: 'MM - Boss Battle',                      mm: [0x1b], categories: [MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  MM_WOODFALL_TEMPLE:                   { type: 'bgm',     name: 'MM - Woodfall Temple',                  mm: [0x1c], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_STOCK_POT_INN:                     { type: 'bgm',     name: 'MM - Stock Pot Inn',                    mm: [0x1f], categories: [MusicCategory.BGM_INDOOR] },
+  MM_MINIGAME2:                         { type: 'bgm',     name: 'MM - Minigame 2',                       mm: [0x25], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  MM_GORON_RACE:                        { type: 'bgm',     name: 'MM - Goron Race',                       mm: [0x26], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  MM_MUSIC_BOX_HOUSE:                   { type: 'bgm',     name: 'MM - Music Box House',                  mm: [0x27], categories: [MusicCategory.BGM_CALM] },
+  MM_FAIRYS_FOUNTAIN:                   { type: 'bgm',     name: 'MM - Fairy\'s Fountain',                mm: [0x28] /* 0x18 = File Select */, categories: [MusicCategory.BGM_CALM] },
+  MM_MARINE_RESEARCH_LABORATORY:        { type: 'bgm',     name: 'MM - Marine Research Laboratory',       mm: [0x2c], categories: [MusicCategory.BGM_INDOOR] },
+  MM_ROMANI_RANCH:                      { type: 'bgm',     name: 'MM - Romani Ranch',                     mm: [0x2f], categories: [MusicCategory.BGM_TOWN] },
+  MM_GORON_VILLAGE:                     { type: 'bgm',     name: 'MM - Goron Village',                    mm: [0x30], categories: [MusicCategory.BGM_TOWN] },
+  MM_MAYOR_DOTOUR:                      { type: 'bgm',     name: 'MM - Mayor Dotour',                     mm: [0x31], categories: [MusicCategory.BGM_CALM] },
+  MM_ZORA_HALL:                         { type: 'bgm',     name: 'MM - Zora Hall',                        mm: [0x36], categories: [MusicCategory.BGM_TOWN] },
+  MM_MINIBOSS:                          { type: 'bgm',     name: 'MM - Mini Boss',                        mm: [0x38], categories: [MusicCategory.BGM_MINIBOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  MM_ASTRAL_OBSERVATORY:                { type: 'bgm',     name: 'MM - Astral Observatory',               mm: [0x3a], categories: [MusicCategory.BGM_CALM] },
+  MM_BOMBERS_HIDEOUT:                   { type: 'bgm',     name: 'MM - Bombers Hideout',                  mm: [0x3b], categories: [MusicCategory.BGM_ACTION] },
+  MM_MILK_BAR:                          { type: 'bgm',     name: 'MM - Milk Bar',                         mm: [0x3c, 0x56], categories: [MusicCategory.BGM_INDOOR] },
+  MM_WOODS_OF_MYSTERY:                  { type: 'bgm',     name: 'MM - Woods of Mystery',                 mm: [0x3e], categories: [MusicCategory.BGM_FIELD] },
+  MM_GORMAN_RACE:                       { type: 'bgm',     name: 'MM - Gorman Race',                      mm: [0x40], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  MM_GORMAN_BROS:                       { type: 'bgm',     name: 'MM - Gorman Bros.',                     mm: [0x42], categories: [MusicCategory.BGM_INDOOR] },
+  MM_KOTAKE_POTION_SHOP:                { type: 'bgm',     name: 'MM - Kotake\'s Potion Shop',            mm: [0x43], categories: [MusicCategory.BGM_INDOOR] },
+  MM_STORE:                             { type: 'bgm',     name: 'MM - Store',                            mm: [0x44], categories: [MusicCategory.BGM_INDOOR] },
+  MM_TARGET_PRACTICE:                   { type: 'bgm',     name: 'MM - Target Practice',                  mm: [0x46], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  MM_SWORD_TRAINING:                    { type: 'bgm',     name: 'MM - Sword Training',                   mm: [0x50], categories: [MusicCategory.BGM_MINIGAME, MusicCategory.BGM_ACTION] },
+  MM_FINAL_HOURS:                       { type: 'bgm',     name: 'MM - Final Hours',                      mm: [0x57, 0x60] /* Not clear why there are two versions */, categories: [MusicCategory.BGM_CALM] },
+  MM_TEMPLE_SNOWHEAD:                   { type: 'bgm',     name: 'MM - Snowhead Temple',                  mm: [0x65], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_TEMPLE_GREAT_BAY:                  { type: 'bgm',     name: 'MM - Great Bay Temple',                 mm: [0x66], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_BATTLE_MAJORA3:                    { type: 'bgm',     name: 'MM - Majora\'s Wrath',                  mm: [0x69], categories: [MusicCategory.BGM_BOSS_FINAL, MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  MM_BATTLE_MAJORA2:                    { type: 'bgm',     name: 'MM - Majora\'s Incarnation',            mm: [0x6a], categories: [MusicCategory.BGM_BOSS_FINAL, MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  MM_BATTLE_MAJORA1:                    { type: 'bgm',     name: 'MM - Majora\'s Mask',                   mm: [0x6b], categories: [MusicCategory.BGM_BOSS_FINAL, MusicCategory.BGM_BOSS, MusicCategory.BGM_BATTLE, MusicCategory.BGM_ACTION] },
+  MM_IKANA_CASTLE:                      { type: 'bgm',     name: 'MM - Ikana Castle',                     mm: [0x6f], categories: [MusicCategory.BGM_DUNGEON] },
+  MM_CLEAR_WOODFALL:                    { type: 'bgm',     name: 'MM - Woodfall Clear',                   mm: [0x78], categories: [MusicCategory.BGM_FIELD] },
+  MM_CLEAR_SNOWHEAD:                    { type: 'bgm',     name: 'MM - Snowhead Clear',                   mm: [0x79], categories: [MusicCategory.BGM_FIELD] },
+  FANFARE_SHARED_ITEM_MAJOR:            { type: 'fanfare', name: 'Shared - Fanfare Item Major',           oot: [0x22], mm: [0x22], categories: [] },
+  FANFARE_SHARED_ITEM_HEART_PIECE:      { type: 'fanfare', name: 'Shared - Fanfare Item Heart Piece',     oot: [0x39], mm: [0x39], categories: [] },
+  FANFARE_SHARED_ITEM_HEART_CONTAINER:  { type: 'fanfare', name: 'Shared - Fanfare Item Heart Container', oot: [0x24], mm: [0x24], categories: [] },
+  FANFARE_SHARED_ITEM_MASK:             { type: 'fanfare', name: 'Shared - Fanfare Item Mask',            oot: [], mm: [0x37], categories: [] },
+  FANFARE_SHARED_ITEM_STONE:            { type: 'fanfare', name: 'Shared - Fanfare Item Stone',           oot: [0x32], mm: [], categories: [] },
+  FANFARE_SHARED_ITEM_MEDALLION:        { type: 'fanfare', name: 'Shared - Fanfare Item Medallion',       oot: [0x43], mm: [], categories: [] },
+  FANFARE_SHARED_ITEM_OCARINA:          { type: 'fanfare', name: 'Shared - Fanfare Item Ocarina',         oot: [0x3d], mm: [0x52], categories: [] },
+  FANFARE_OOT_GAME_OVER:                { type: 'fanfare', name: 'OoT - Fanfare Game Over',               oot: [0x20], categories: [] },
+  FANFARE_OOT_BOSS_CLEAR:               { type: 'fanfare', name: 'OoT - Fanfare Boss Clear',              oot: [0x21], categories: [] },
+};
+
+const OOTRS_CATEGORIES: {[k: string]: MusicCategory[]} = {
+  'Battle': [MusicCategory.BGM_BATTLE],
+  'MinibossBattle': [MusicCategory.BGM_MINIBOSS],
+  'BossBattle': [MusicCategory.BGM_BOSS],
+  'Field': [MusicCategory.BGM_FIELD],
+  'Dungeon': [MusicCategory.BGM_DUNGEON],
+  'Town': [MusicCategory.BGM_TOWN],
+  'Indoor': [MusicCategory.BGM_INDOOR],
+  'Minigame': [MusicCategory.BGM_MINIGAME],
+  'Calm': [MusicCategory.BGM_CALM],
+  'TitleScreen': [MusicCategory.BGM_TITLE_SCREEN],
+};
+
+const MMRS_CATEGORIES: {[k: string]: MusicCategory[]} = {
+  '0': [MusicCategory.BGM_FIELD],
+  '1': [MusicCategory.BGM_TOWN],
+  '2': [MusicCategory.BGM_DUNGEON],
+  '3': [MusicCategory.BGM_INDOOR],
+  '4': [MusicCategory.BGM_MINIGAME],
+  '5': [MusicCategory.BGM_ACTION],
+  '6': [MusicCategory.BGM_CALM],
+  '7': [MusicCategory.BGM_BOSS],
+  '16': [MusicCategory.BGM_TITLE_SCREEN, MusicCategory.BGM_CALM],
 };
 
 type MusicFile = {
@@ -135,6 +180,7 @@ type MusicFile = {
   filename: string;
   name: string;
   games: Game[];
+  categories: Set<MusicCategory>;
 };
 
 const DIACRITICS_BASES = {
@@ -215,6 +261,18 @@ function isMusicSuitable(entry: MusicEntry, file: MusicFile) {
   return true;
 }
 
+function musicPriority(file: MusicFile, categories: MusicCategory[]) {
+  let priority = 0;
+  for (const c of categories) {
+    if (file.categories.has(c)) {
+      return priority;
+    }
+    priority++;
+  }
+
+  return priority;
+}
+
 function mmrSampleBank(sb: number) {
   if (sb === 0xff) {
     return 0xff;
@@ -228,6 +286,7 @@ class MusicInjector {
   private bankId: number;
 
   constructor(
+    private cosmetics: Cosmetics,
     private writer: LogWriter,
     private monitor: Monitor,
     private builder: RomBuilder,
@@ -333,6 +392,18 @@ class MusicInjector {
         continue;
       }
 
+      const categoriesLine = meta[3] || '';
+      const categories = categoriesLine.split(',').map(x => x.trim()).filter(x => x.length > 0);
+      let categoriesSet = new Set<MusicCategory>();
+      for (const c of categories) {
+        const mapped = OOTRS_CATEGORIES[c];
+        if (mapped) {
+          for (const mc of mapped) {
+            categoriesSet.add(mc);
+          }
+        }
+      }
+
       let bankCustom: { meta: Uint8Array, data: Uint8Array } | null = null;
       let bankIdOot: number | null = null;
       let bankIdMm: number | null = null;
@@ -372,7 +443,7 @@ class MusicInjector {
         pad.fill(0x00);
         seq = concatUint8Arrays([seq, pad]);
       }
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, categories: categoriesSet };
       this.musics.push(music);
     }
   }
@@ -450,6 +521,17 @@ class MusicInjector {
       } else {
         type = 'bgm';
       }
+
+      let categoriesSet = new Set<MusicCategory>();
+      for (const c of categories) {
+        const mapped = MMRS_CATEGORIES[c];
+        if (mapped) {
+          for (const mc of mapped) {
+            categoriesSet.add(mc);
+          }
+        }
+      }
+
       const filename = f.name.split('/').pop()!;
       const name = saneName(filename.replace('.mmrs', ''));
 
@@ -489,7 +571,7 @@ class MusicInjector {
         }
       }
 
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, categories: categoriesSet };
       this.musics.push(music);
     }
   }
@@ -576,6 +658,11 @@ class MusicInjector {
         continue;
       }
 
+      if (this.cosmetics.musicCategories) {
+        const minPriority = Math.min(...candidates.map(x => musicPriority(x, MUSIC[slot].categories)));
+        candidates = candidates.filter(x => musicPriority(x, MUSIC[slot].categories) === minPriority);
+      }
+
       const music = sample(this.random, candidates);
       musics.delete(music);
       await this.injectMusic(slot, music);
@@ -604,7 +691,7 @@ class MusicInjector {
   }
 }
 
-export async function randomizeMusic(writer: LogWriter, monitor: Monitor, builder: RomBuilder, random: Random, data: Uint8Array) {
-  const injector = new MusicInjector(writer, monitor, builder, random, data);
+export async function randomizeMusic(cosmetics: Cosmetics, writer: LogWriter, monitor: Monitor, builder: RomBuilder, random: Random, data: Uint8Array) {
+  const injector = new MusicInjector(cosmetics, writer, monitor, builder, random, data);
   await injector.run();
 }
