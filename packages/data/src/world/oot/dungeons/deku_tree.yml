@@ -1,6 +1,7 @@
 "Deku Tree":
   dungeon: DT
   exits:
+    "GLOBAL": "true"
     "Kokiri Forest Near Deku Tree": "true"
     "Deku Tree Lobby": "true"
 

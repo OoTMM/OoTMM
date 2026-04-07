@@ -1,6 +1,7 @@
 "Goron City Shortcut":
   region: GORON_CITY
   exits:
+    "GLOBAL": "true"
     "Lost Woods": "true"
     "Goron City": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
   events:
@@ -9,6 +10,7 @@
 "Goron City":
   region: GORON_CITY
   exits:
+    "GLOBAL": "true"
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
     "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child) || (is_child && song_event(4))"
@@ -54,6 +56,7 @@
 "Darunia Chamber":
   region: GORON_CITY
   exits:
+    "GLOBAL": "true"
     "Death Mountain Crater Bottom": "is_adult || time_travel_at_will"
     "Goron City": "true"
   events:
@@ -69,6 +72,7 @@
 "Goron Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Goron City": "true"
   locations:
     "Goron Shop Item 1": "shop_price(0x18) && soul_goron_shopkeeper"
@@ -84,6 +88,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Goron City": "true"
   locations:
     "Goron City Grotto Left Scrub": "business_scrub(0x0b)"

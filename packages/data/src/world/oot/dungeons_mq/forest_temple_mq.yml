@@ -1,6 +1,7 @@
 "Forest Temple":
   dungeon: Forest
   exits:
+    "GLOBAL": "true"
     "Sacred Meadow Forest Platform": "true"
     "Forest Temple Entrance Room": "true"
 "Forest Temple Wallmaster West":

@@ -3,6 +3,7 @@
   region: MARKET
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "is_day || is_adult"
     "Market": "true"
     "Market Pot House": "true"
@@ -16,6 +17,7 @@
   region: MARKET
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Market Entryway": "true"
     "Market Grass": "is_child && can_cut_grass_no_c_button"
     "Back Alley": "is_child"
@@ -68,6 +70,7 @@
 "Market Bazaar":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Market": "true"
     "Market Bazaar Items": "soul_bazaar_shopkeeper"
 
@@ -87,6 +90,7 @@
 "Market Potion Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Market": "true"
     "Market Potion Shop Items": "soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
 
@@ -106,6 +110,7 @@
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Back Alley": "true"
     "Market Bombchu Shop Items": "soul_bombchu_shopkeeper"
 
@@ -125,6 +130,7 @@
 "Market Pot House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Market Entryway": "true"
     "Market Pot House Child": "is_child"
     "Market Pot House Adult": "is_adult"
@@ -208,6 +214,7 @@
   region: MARKET
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Market": "true"
     "Dog Lady House": "true"
     "Market Bombchu Shop": "is_night"
@@ -216,6 +223,7 @@
 "Dog Lady House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Back Alley": "true"
   locations:
     "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
@@ -224,6 +232,7 @@
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Back Alley": "true"
   locations:
     "Market Back Alley East House Pot 1": "true"
@@ -258,6 +267,7 @@
   region: MARKET
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Market": "true"
     "Temple of Time": "true"
   gossip:

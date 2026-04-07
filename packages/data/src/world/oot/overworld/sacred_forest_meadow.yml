@@ -1,6 +1,7 @@
 "Sacred Meadow Entryway":
   region: SACRED_MEADOW
   exits:
+    "GLOBAL": "true"
     "Lost Woods Deep": "true"
     "Sacred Meadow": "(is_child && (can_damage || can_hammer) && soul_wolfos) || is_adult || climb_anywhere || hookshot_anywhere"
     "Wolfos Grotto": "hidden_grotto_bomb"
@@ -13,6 +14,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Sacred Meadow Entryway": "true"
   locations:
     "Sacred Meadow Grotto": "soul_wolfos && (can_damage || can_hammer)"
@@ -20,6 +22,7 @@
 "Sacred Meadow":
   region: SACRED_MEADOW
   exits:
+    "GLOBAL": "true"
     "Sacred Meadow Entryway": "true"
     "Sacred Meadow Forest Platform": "can_hookshot || (has_hookshot(1) && time_travel_at_will) || climb_anywhere"
     "Sacred Meadow Storms Grotto": "hidden_grotto_storms"
@@ -41,6 +44,7 @@
 "Sacred Meadow Forest Platform":
   region: SACRED_MEADOW
   exits:
+    "GLOBAL": "true"
     "Sacred Meadow": "true"
     "Forest Temple": "true"
 
@@ -48,6 +52,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Sacred Meadow": "true"
   locations:
     "Sacred Meadow Storms Grotto Front Scrub": "business_scrub(0x05)"
@@ -58,6 +63,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Sacred Meadow": "true"
   locations:
     "Sacred Meadow Fairy Fountain Fairy 1": "true"

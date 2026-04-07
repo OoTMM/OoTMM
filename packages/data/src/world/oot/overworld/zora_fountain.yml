@@ -1,6 +1,7 @@
 "Zora Fountain":
   region: ZORA_FOUNTAIN
   exits:
+    "GLOBAL": "true"
     "Zora Domain Back": "true"
     "Jabu-Jabu": "is_child && (setting(openDungeonsOot, JJ) || has_fish || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || can_use_sword || can_use_sticks || time_travel_at_will)))"
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
@@ -64,6 +65,7 @@
 "Zora Fountain Frozen":
   region: ZORA_FOUNTAIN
   exits:
+    "GLOBAL": "true"
     "Zora Fountain": "can_swim_or_sink || longshot_anywhere || climb_anywhere || (is_adult && has_hover_boots)"
     "Ice Cavern": "true"
   locations:
@@ -72,6 +74,7 @@
 "Fairy Fountain Farore":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Fountain": "true"
   events:
     MAGIC: "song_event(5)"

@@ -1,6 +1,7 @@
 "Jabu-Jabu":
   dungeon: JJ
   exits:
+    "GLOBAL": "true"
     "Zora Fountain": "true"
     "Jabu-Jabu Main Elevator Room Upper": "event(JABU_MQ_START)"
   events:

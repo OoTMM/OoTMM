@@ -1,6 +1,7 @@
 "Ice Cavern":
   dungeon: IC
   exits:
+    "GLOBAL": "true"
     "Zora Fountain Frozen": "true"
     "Ice Cavern Room After Entrance Boulder": "true"
   locations:
@@ -124,7 +125,7 @@
   dungeon: IC
   exits:
     "Ice Cavern Past Red Ice Before Shiek": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
-    "Ice Cavern Serenade Room Inside Pit of Water": "event(ICE_MQ_FINAL_ROOM_CLEAR) && can_swim_or_sink"    
+    "Ice Cavern Serenade Room Inside Pit of Water": "event(ICE_MQ_FINAL_ROOM_CLEAR) && can_swim_or_sink"
   events:
     ICE_MQ_FINAL_ROOM_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:

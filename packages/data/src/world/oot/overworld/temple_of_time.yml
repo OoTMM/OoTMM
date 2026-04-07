@@ -1,6 +1,7 @@
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:
+    "GLOBAL": "true"
     "Temple of Time Entryway": "true"
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:

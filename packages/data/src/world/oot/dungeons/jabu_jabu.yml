@@ -1,6 +1,7 @@
 "Jabu-Jabu":
   dungeon: JJ
   exits:
+    "GLOBAL": "true"
     "Zora Fountain": "true"
     "Jabu-Jabu Elevator": "has_ranged_weapon || has_explosives"
 

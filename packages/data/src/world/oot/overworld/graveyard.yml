@@ -2,6 +2,7 @@
 "Graveyard":
   region: GRAVEYARD
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
     "Graveyard Royal Tomb": "song_event(2)"
     "Graveyard Shield Grave": "is_adult || is_night"
@@ -53,6 +54,7 @@
 "Graveyard Upper":
   region: GRAVEYARD
   exits:
+    "GLOBAL": "true"
     "Graveyard": "true"
     "Shadow Temple": "setting(openDungeonsOot, Shadow) || can_use_din || (has_fire_arrows && (trick(OOT_SHADOW_FIRE_ARROW) || (trick(OOT_SHADOW_TEMPLE_STICKS) && can_use_sticks)))"
   gossip:
@@ -61,6 +63,7 @@
 "Graveyard Royal Tomb":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Graveyard": "true"
   locations:
     "Graveyard Royal Tomb Song": "soul_keese && (has_ranged_weapon || can_use_sword || has_explosives || can_hammer || can_use_sticks)"
@@ -70,6 +73,7 @@
 "Graveyard Shield Grave":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Graveyard": "true"
   locations:
     "Graveyard Fairy Tomb": "true"
@@ -85,6 +89,7 @@
 "Graveyard ReDead Grave":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Graveyard": "true"
   locations:
     "Graveyard ReDead Tomb": "can_play_sun"
@@ -144,4 +149,5 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Graveyard": "true"

@@ -1,6 +1,7 @@
 "Shadow Temple":
   dungeon: Shadow
   exits:
+    "GLOBAL": "true"
     "Graveyard Upper": "true"
     "Shadow Temple Entrance": "true"
 "Shadow Temple Entrance":

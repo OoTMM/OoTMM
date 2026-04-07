@@ -1,6 +1,7 @@
 "Gerudo Fortress Exterior":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Carpenter 1 Left": "true"
     "Gerudo Fortress Carpenter 1 Right": "true"
     "Gerudo Fortress Kitchen Tunnel End": "true"
@@ -43,6 +44,7 @@
 "Gerudo Fortress Lower-Right Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Lower-Center Ledge": "true" #This jump is a little tight as kid, but kid has infinite tries.
     "Gerudo Fortress Kitchen Tunnel Mid": "true"
@@ -51,6 +53,7 @@
 "Gerudo Fortress Lower-Center Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Carpenter 2 Top": "true"
@@ -61,6 +64,7 @@
 "Gerudo Fortress Upper-Center Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Kitchen Ledge Away from Tunnel": "true"
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Upper-Right Ledge": "is_adult || trick(OOT_FORTRESS_JUMPS) || climb_anywhere || hookshot_anywhere" #Kid is too short to climb the ledge normally.
@@ -70,6 +74,7 @@
 "Gerudo Fortress Upper-Right Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Upper-Left Ledge": "(is_adult && scarecrow_hookshot) || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
@@ -80,6 +85,7 @@
 "Gerudo Fortress Upper-Left Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Lower-Left Ledge": "true"
     "Gerudo Fortress Center Ledge": "true"
   locations:
@@ -88,12 +94,14 @@
 "Gerudo Fortress Center Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Carpenter 3": "true"
     "Gerudo Fortress Lower-Center Ledge": "true"
 
 "Gerudo Fortress Lower-Left Ledge":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Break Room Bottom": "true"
     "Gerudo Fortress Above Prison": "climb_anywhere || longshot_anywhere"
@@ -101,6 +109,7 @@
 "Gerudo Fortress Above Prison":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Lower-Left Ledge": "true"
   locations:
@@ -110,6 +119,7 @@
 "Fortress Near Wasteland":
   region: GERUDO_FORTRESS
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE) || (is_adult && soul_thief_guard) || climb_anywhere || hookshot_anywhere"
     "Haunted Wasteland Start": "true"
   events:
@@ -119,6 +129,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Gerudo Fortress Exterior": "true"
   locations:
     "Gerudo Fortress Fairy Fountain Fairy 1": "true"

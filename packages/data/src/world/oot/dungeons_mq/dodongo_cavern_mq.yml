@@ -1,6 +1,7 @@
 "Dodongo Cavern":
   dungeon: DC
   exits:
+    "GLOBAL": "true"
     "Death Mountain": "true"
     "Dodongo Cavern Entrance": "true"
 "Dodongo Cavern Entrance":

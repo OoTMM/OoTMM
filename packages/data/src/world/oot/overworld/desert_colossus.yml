@@ -3,6 +3,7 @@
   region: DESERT_COLOSSUS
   time: flow
   exits:
+    "GLOBAL": "true"
     "Spirit Temple": "true"
     "Haunted Wasteland End": "true"
     "Fairy Fountain Nayru": "has_explosives"
@@ -74,6 +75,7 @@
 "Fairy Fountain Nayru":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Desert Colossus": "true"
   events:
     MAGIC: "song_event(7)"
@@ -84,6 +86,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Desert Colossus": "true"
   locations:
     "Desert Colossus Grotto Front Scrub": "business_scrub(0x19)"

@@ -462,11 +462,6 @@ export class LogicPassWorld {
         const time = area.time || 'still';
         let stay: Expr[] | null = null;
 
-        /* Hack to propagate time back to OoT GLOBAL */
-        if (time !== 'still') {
-          exits["OOT GLOBAL"] = exprTrue();
-        }
-
         if (name === undefined) {
           throw new Error(`Area name is undefined`);
         }

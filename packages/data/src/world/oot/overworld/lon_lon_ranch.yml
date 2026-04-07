@@ -2,6 +2,7 @@
 "Lon Lon Ranch":
   region: LON_LON_RANCH
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
     "Lon Lon Ranch Pots": "is_child"
     "Lon Lon Ranch Silo": "true"
@@ -38,6 +39,7 @@
 "Lon Lon Ranch Stables":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Stables Cow Left": "cow"
@@ -46,6 +48,7 @@
 "Lon Lon Ranch Silo":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Silo HP": "is_child"
@@ -55,6 +58,7 @@
 "Lon Lon Ranch House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco"
@@ -67,6 +71,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Grotto Left Scrub": "is_child && business_scrub(0x08)"

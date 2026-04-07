@@ -26,6 +26,7 @@
 "Lost Woods":
   region: LOST_WOODS
   exits:
+    "GLOBAL": "true"
     "Lost Woods Lost Forest": "true"
     "Lost Woods Bridge": "can_longshot || has_hover_boots || can_ride_bean(BEAN_LOST_WOODS_EARLY) || climb_anywhere || hookshot_anywhere"
     "Lost Woods Deep": "is_child || can_play_saria || trick_mido || hookshot_anywhere || climb_anywhere"
@@ -102,6 +103,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Lost Woods": "true"
   locations:
@@ -121,6 +123,7 @@
 "Lost Woods Bridge":
   region: LOST_WOODS
   exits:
+    "GLOBAL": "true"
     "Kokiri Forest": "true"
     "Hyrule Field": "true"
     "Lost Woods": "can_longshot || hookshot_anywhere"
@@ -135,6 +138,7 @@
 "Lost Woods Deep":
   region: LOST_WOODS
   exits:
+    "GLOBAL": "true"
     "Lost Woods": "is_child || can_play_saria || (climb_anywhere && has_hover_boots) || hookshot_anywhere"
     "Sacred Meadow Entryway": "true"
     "Deku Theater": "true"
@@ -183,6 +187,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Lost Woods Deep": "true"
   locations:
     "Deku Theater Sticks Upgrade": "age_child_trade && has(MASK_SKULL)"
@@ -192,6 +197,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Lost Woods Deep": "true"
   locations:
     "Lost Woods Grotto Scrub Nuts Upgrade": "business_scrub(0x03)"

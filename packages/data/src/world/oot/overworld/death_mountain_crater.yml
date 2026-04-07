@@ -1,6 +1,7 @@
 "Death Mountain Crater Top":
   region: DEATH_MOUNTAIN_CRATER
   exits:
+    "GLOBAL": "true"
     "Death Mountain Summit": "true"
     "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (can_use_sword || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
@@ -33,6 +34,7 @@
 "Death Mountain Crater Bottom":
   region: DEATH_MOUNTAIN_CRATER
   exits:
+    "GLOBAL": "true"
     "Darunia Chamber": "true"
     "Death Mountain Crater Warp": "(can_hookshot || has_hover_boots) && (is_adult || has_tunic_goron_strict || can_hammer || hookshot_anywhere || climb_anywhere)" #child cannot do anything at the warp from the top within 24 seconds
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
@@ -83,6 +85,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
+    "GLOBAL": "true"
     "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
     "Death Mountain Crater Bottom Child": "is_child"
@@ -111,6 +114,7 @@
 "Death Mountain Crater Near Temple":
   region: DEATH_MOUNTAIN_CRATER
   exits:
+    "GLOBAL": "true"
     "Fire Temple": "true"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
 
@@ -118,6 +122,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Death Mountain Crater Top": "true"
   locations:
@@ -138,6 +143,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Death Mountain Crater Bottom": "true"
   locations:
     "Death Mountain Crater Grotto Left Scrub": "business_scrub(0x0f)"
@@ -148,6 +154,7 @@
 "Fairy Fountain Double Magic":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Death Mountain Crater Bottom": "true"
   events:
     MAGIC: "song_event(9)"

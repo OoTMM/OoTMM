@@ -9,6 +9,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || (is_adult && !setting(kakarikoGate, closed)) || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
@@ -79,6 +80,7 @@
 "Kakariko Balcony":
   region: KAKARIKO
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
     "Kakariko Rooftop": "climb_anywhere"
     "Impa House Back": "true"
@@ -86,6 +88,7 @@
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
     "Kakariko Balcony": "true"
   locations:
@@ -94,12 +97,14 @@
 "Kakariko Trail Start":
   region: KAKARIKO
   exits:
+    "GLOBAL": "true"
     "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || (is_adult && !setting(kakarikoGate, closed)) || trick(OOT_PASS_COLLISION) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
 
 "Kakariko Back":
   region: KAKARIKO
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
     "Kakariko Potion Shop Back": "is_adult && is_day"
     "Kakariko Granny Shop": "is_adult"
@@ -115,12 +120,14 @@
 "Kakariko Well":
   region: KAKARIKO
   exits:
+    "GLOBAL": "true"
     "Kakariko": "can_swim || is_adult || (is_child && longshot_anywhere)"
     "Bottom of the Well": "is_child || (setting(openDungeonsOot, wellAdult) && event(WELL_DRAIN)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
 
 "Kakariko Bazaar":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
   locations:
     "Kakariko Bazaar Item 1": "shop_price(0x30) && soul_bazaar_shopkeeper"
@@ -135,6 +142,7 @@
 "Kakariko Potion Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
     "Kakariko Potion Shop Junction": "true"
   locations:
@@ -150,12 +158,14 @@
 "Kakariko Potion Shop Junction":
   region: NONE
   exits:
+    "GLOBAL": "true"
     "Kakariko Potion Shop": "true"
     "Kakariko Potion Shop Back": "is_adult || climb_anywhere"
 
 "Kakariko Potion Shop Back":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko Back": "is_adult || climb_anywhere"
     "Kakariko Potion Shop Junction": "true"
 
@@ -177,6 +187,7 @@
 "Impa House Front":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
   locations:
     "Kakariko Cow": "cow"
@@ -185,6 +196,7 @@
 "Impa House Back":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko Balcony": "true"
   locations:
     "Kakariko Cow": "cow"
@@ -210,6 +222,7 @@
 "Kakariko Carpenter House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
   events:
     TALON_AWAKE: "adult_trade(POCKET_CUCCO) && soul_talon"
@@ -217,6 +230,7 @@
 "Skulltula House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
   locations:
     "Skulltula House 10 Tokens": "(has(GS_TOKEN, 10) || has_platinum_token)"
@@ -229,6 +243,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Kakariko": "true"
   locations:
     "Kakariko Grotto Front": "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
@@ -237,6 +252,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Kakariko Back": "true"
   locations:
@@ -256,6 +272,7 @@
 "Watchtower":
   region: KAKARIKO
   exits:
+    "GLOBAL": "true"
     "Kakariko Back": "trick(OOT_MAN_ON_ROOF)"
   locations:
     "Kakariko Man on Roof": "trick(OOT_MAN_ON_ROOF) && soul_rooftop_man"

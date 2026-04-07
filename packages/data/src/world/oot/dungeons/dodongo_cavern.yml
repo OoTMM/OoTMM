@@ -1,6 +1,7 @@
 "Dodongo Cavern":
   dungeon: DC
   exits:
+    "GLOBAL": "true"
     "Death Mountain": "true"
     "Dodongo Cavern Main": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall || has_mask_blast" ## Blast mask entry will need to be adjusted later when Macros are updated.
 

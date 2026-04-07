@@ -1,6 +1,7 @@
 "Fire Temple":
   dungeon: Fire
   exits:
+    "GLOBAL": "true"
     "Death Mountain Crater Near Temple": "true"
     "Fire Temple Lava Room": "small_keys_fire(1)"
     "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_fire(7), true) && can_hammer"

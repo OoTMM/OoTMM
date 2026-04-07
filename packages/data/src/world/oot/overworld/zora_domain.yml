@@ -1,6 +1,7 @@
 "Zora Domain":
   region: ZORA_DOMAIN
   exits:
+    "GLOBAL": "true"
     "Zora River Behind Falls": "true"
     "Zora Domain Shortcut": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
     "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP)) || climb_anywhere || hookshot_anywhere"
@@ -55,6 +56,7 @@
 "Zora Domain Back":
   region: ZORA_DOMAIN
   exits:
+    "GLOBAL": "true"
     "Zora Fountain": "true"
     "Zora Domain": "king_zora_moved || climb_anywhere || hookshot_anywhere"
   locations:
@@ -63,6 +65,7 @@
 "Zora Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Domain": "true"
   locations:
     "Zora Shop Item 1": "shop_price(0x10) && soul_zora_shopkeeper"
@@ -78,6 +81,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Zora Domain": "true"
   locations:
     "Zora Domain Fairy Fountain Fairy 1": "true"

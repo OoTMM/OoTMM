@@ -1,6 +1,7 @@
 "Haunted Wasteland Start":
   region: HAUNTED_WASTELAND
   exits:
+    "GLOBAL": "true"
     "Fortress Near Wasteland": "true"
     "Haunted Wasteland Structure": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
   locations:
@@ -9,6 +10,7 @@
 "Haunted Wasteland Structure":
   region: HAUNTED_WASTELAND
   exits:
+    "GLOBAL": "true"
     "Haunted Wasteland Start": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
     "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   locations:
@@ -26,6 +28,7 @@
 "Haunted Wasteland End":
   region: HAUNTED_WASTELAND
   exits:
+    "GLOBAL": "true"
     "Haunted Wasteland Structure": "trick(OOT_BLIND_WASTELAND)"
     "Desert Colossus": "true"
   locations:

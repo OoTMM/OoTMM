@@ -12,14 +12,12 @@
   region: NONE
   age_change: false
   exits:
-    "GLOBAL": "true"
     "Link's House": "true"
 
 "SPAWN ADULT":
   region: NONE
   age_change: false
   exits:
-    "GLOBAL": "true"
     "Temple of Time": "true"
 
 "GLOBAL":

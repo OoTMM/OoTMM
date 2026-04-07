@@ -1,6 +1,7 @@
 "Fire Temple":
   dungeon: Fire
   exits:
+    "GLOBAL": "true"
     "Death Mountain Crater Near Temple": "true"
     "Fire Temple Entrance": "true"
 "Fire Temple Entrance":

@@ -3,6 +3,7 @@
   region: HYRULE_FIELD
   time: flow
   exits:
+    "GLOBAL": "true"
     "Lost Woods Bridge": "true"
     "Market Entryway": "true"
     "Kakariko": "true"
@@ -217,12 +218,14 @@
   region: HYRULE_FIELD
   time: flow
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
 
 "Hyrule Field Scrub Grotto":
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Scrub HP": "business_scrub(0x07)"
@@ -233,6 +236,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Hyrule Field": "true"
   locations:
@@ -253,6 +257,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Hyrule Field": "true"
   locations:
@@ -273,6 +278,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Hyrule Field": "true"
   locations:
@@ -293,6 +299,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Tektite HP": "can_dive_big"
@@ -301,6 +308,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
   events:
     NUTS: "has_fire"
@@ -319,6 +327,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
   events:
     SEEDS: "is_child && can_use_sword"
@@ -330,6 +339,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Fairy Fountain Fairy 1": "true"

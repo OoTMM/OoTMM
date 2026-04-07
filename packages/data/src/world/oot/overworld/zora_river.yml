@@ -2,6 +2,7 @@
   region: ZORA_RIVER
   time: flow
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
     "Zora River": "is_adult || has_explosives_or_hammer || has_hover_boots || can_use_ice_arrow_platforms || climb_anywhere || hookshot_anywhere"
   events:
@@ -34,6 +35,7 @@
   region: ZORA_RIVER
   time: flow
   exits:
+    "GLOBAL": "true"
     "Zora River Front": "true"
     "Zora River Upper": "is_adult || soul_cucco"
     "Zora River Behind Falls": "song_event(3) || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && soul_cucco && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
@@ -119,6 +121,7 @@
   region: ZORA_RIVER
   time: flow
   exits:
+    "GLOBAL": "true"
     "Zora River": "true"
     "Zora River Open Grotto": "true"
     "Zora River Boulder Grotto": "has_explosives_or_hammer"
@@ -161,6 +164,7 @@
   region: ZORA_RIVER
   time: flow
   exits:
+    "GLOBAL": "true"
     "Zora River": "true"
     "Zora Domain": "true"
 
@@ -168,6 +172,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Zora River": "true"
   locations:
     "Zora River Storms Grotto Front Scrub": "business_scrub(0x12)"
@@ -177,6 +182,7 @@
 "Zora River Open Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Zora River Upper": "true"
   locations:
@@ -197,6 +203,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Zora River Upper": "true"
   locations:
     "Zora River Fairy Fountain Fairy 1": "true"

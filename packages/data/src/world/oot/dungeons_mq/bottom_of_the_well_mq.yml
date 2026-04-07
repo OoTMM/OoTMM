@@ -1,6 +1,7 @@
 "Bottom of the Well":
   dungeon: BotW
   exits:
+    "GLOBAL": "true"
     "Kakariko Well": "true"
     "Bottom of the Well Entrance": "true"
 "Bottom of the Well Entrance":

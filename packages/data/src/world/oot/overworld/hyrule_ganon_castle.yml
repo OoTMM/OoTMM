@@ -3,6 +3,7 @@
   age_change: false
   time: flow
   exits:
+    "GLOBAL": "true"
     "Market Castle Entry": "true"
     "Near Fairy Fountain Din": "has_explosives_or_hammer"
     "Hyrule Castle Courtyard": "woke_talon_child || (has_hover_boots && (soul_talon || setting(skipZelda))) || climb_anywhere || hookshot_anywhere"
@@ -67,6 +68,7 @@
   region: HYRULE_CASTLE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Castle": "is_child"
     "Hyrule Castle Grotto": "is_child && hidden_grotto_storms"
     "Ganon Castle Exterior": "is_adult"
@@ -76,6 +78,7 @@
   age_change: false
   time: flow
   exits:
+    "GLOBAL": "true"
     "Hyrule Castle": "true"
   events:
     MEET_ZELDA: "soul_npc(SOUL_NPC_ZELDA)"
@@ -88,6 +91,7 @@
   region: HYRULE_CASTLE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Castle": "is_child"
     "Fairy Fountain Din": "is_child && has_explosives_or_hammer"
     "Near Fairy Fountain Defense": "is_adult"
@@ -95,6 +99,7 @@
 "Fairy Fountain Din":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Near Fairy Fountain Din": "true"
   events:
     MAGIC: "song_event(6)"
@@ -105,6 +110,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Hyrule Castle Near Grotto": "true"
   events:
     RUPEES: "has_explosives_or_hammer"
@@ -134,12 +140,13 @@
   region: GANON_CASTLE_EXTERIOR
   age_change: false
   time: night
-  events:
-    BRIDGE_OPEN: "rainbow_bridge"
   exits:
+    "GLOBAL": "true"
     "Market Castle Entry": "true"
     "Ganon Castle Exterior After Bridge": "event(BRIDGE_OPEN) || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
     "Near Fairy Fountain Defense": "can_lift_gold"
+  events:
+    BRIDGE_OPEN: "rainbow_bridge"
   locations:
     "Ganon Castle Exterior GS": "gs && (has_ranged_weapon || can_use_sword)"
     "Ganon Castle Exterior Red Boulder 1": "can_hammer"
@@ -149,18 +156,20 @@
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR
   age_change: false
-  events:
-    BRIDGE_OPEN: "is_adult && rainbow_bridge"
   exits:
+    "GLOBAL": "true"
     "Ganon Castle Exterior": "is_adult && event(BRIDGE_OPEN)"
     "Hyrule Castle Courtyard": "is_child && trick(OOT_COURTYARD_FROM_GANON)"
     "Hyrule Castle": "is_child"
     "Ganon Castle": "is_adult"
+  events:
+    BRIDGE_OPEN: "is_adult && rainbow_bridge"
 
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Ganon Castle Exterior": "is_adult"
     "Fairy Fountain Defense": "is_adult && (can_lift_gold || (!setting(erIndoorsMajor) && trick(OOT_GANON_FAIRY_TT)))"
     "Near Fairy Fountain Din": "is_child"
@@ -168,6 +177,7 @@
 "Fairy Fountain Defense":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Near Fairy Fountain Defense": "true"
   events:
     MAGIC: "song_event(0x0a)"

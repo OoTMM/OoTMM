@@ -2,6 +2,7 @@
   region: LAKE_HYLIA
   time: flow
   exits:
+    "GLOBAL": "true"
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
     "Lake Hylia Near Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || (time_travel_at_will && can_swim) || (is_adult && setting(openZdShortcut))"
@@ -111,6 +112,7 @@
   region: LAKE_HYLIA
   time: flow
   exits:
+    "GLOBAL": "true"
     "Fishing Pond": "true"
     "Lake Hylia": "is_adult || can_swim_or_sink"
   locations:
@@ -124,6 +126,7 @@
 "Laboratory":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Lake Hylia": "true"
   locations:
     "Laboratory Dive": "soul_scientist && (has_scale_gold || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot && can_swim))"
@@ -179,6 +182,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Lake Hylia": "true"
   locations:
     "Lake Hylia Grotto Left Scrub": "business_scrub(0x14)"

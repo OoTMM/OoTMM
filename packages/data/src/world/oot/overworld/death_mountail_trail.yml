@@ -2,6 +2,7 @@
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
   exits:
+    "GLOBAL": "true"
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult || (trick(OOT_DC_BOULDER) && hookshot_anywhere) || time_travel_at_will || setting(openDungeonsOot, DC)"
     "Kakariko Trail Start": "true"
@@ -62,6 +63,7 @@
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
   exits:
+    "GLOBAL": "true"
     "Death Mountain": "true"
     "Kakariko Rooftop": "is_child"
     "Death Mountain Crater Top": "true"
@@ -88,6 +90,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "GENERIC_GROTTO_EVENTS": "true"
     "Death Mountain": "true"
   locations:
@@ -108,6 +111,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Death Mountain": "true"
   events:
     RUPEES: "true"
@@ -132,6 +136,7 @@
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Death Mountain Summit": "true"
   events:
     MAGIC: "song_event(8)"

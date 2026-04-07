@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix seeds requiring very early warp songs usage being sometimes unbeatable. (#905)
 - Auto-equip the deku mask when entering deku palace throne in ER if possible to avoid a potential seed brick.
 - Fix Haunted Wasteland Poe Guide being removed when Enemy Souls are on.
 - Fix some areas being dead silent when they should have some ambience noises.

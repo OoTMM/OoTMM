@@ -2,6 +2,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
+    "GLOBAL": "true"
     "Gerudo Valley Falls": "(is_child && soul_cucco) || can_swim_or_sink"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || can_hookshot)) || time_travel_at_will"
@@ -47,6 +48,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
+    "GLOBAL": "true"
     "Gerudo Valley Falls": "can_swim_or_sink"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Valley": "is_child || can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || climb_anywhere"
@@ -78,6 +80,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
+    "GLOBAL": "true"
     "Gerudo Valley Falls": "can_swim_or_sink"
     "Gerudo Valley": "climb_anywhere"
     "Octorok Grotto": "can_lift_silver"
@@ -88,6 +91,7 @@
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Octorok Grotto Ledge": "true"
   events:
     RUPEES: "true"
@@ -106,12 +110,14 @@
   time: flow
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Lake Hylia": "true"
 
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
   age_change: false
   exits:
+    "GLOBAL": "true"
     "Gerudo Valley After Bridge": "true"
   locations:
     "Gerudo Valley Grotto Front Scrub": "business_scrub(0x17)"
@@ -121,4 +127,5 @@
 "Gerudo Valley Tent":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Gerudo Valley After Bridge": "true"
