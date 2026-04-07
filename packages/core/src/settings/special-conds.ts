@@ -33,7 +33,7 @@ export const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_FIELDS).reduce((co
 
 type SpecialCondDefiniton = {
   name: string;
-  cond?: SettingCond;
+  cond: SettingCond;
 };
 
 export const SPECIAL_CONDS: {[k: string]: SpecialCondDefiniton} = {
