@@ -4,8 +4,8 @@
   events:
     BOSS_ODOLWA: "can_kill_odolwa"
   exits:
-    "Woodfall Temple After Boss": "event(BOSS_ODOLWA)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
+    "Woodfall Temple After Boss": "event(BOSS_ODOLWA)"
   locations:
     "Woodfall Temple Boss Grass 01": "true"
     "Woodfall Temple Boss Grass 02": "true"

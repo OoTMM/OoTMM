@@ -1,6 +1,7 @@
 "Goron Village":
   region: GORON_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Twin Islands": "true"
     "Front of Lone Peak Shrine": "is_winter"
     "Goron Shrine": "(soul_goron && first_day) || has_mask_goron || can_hammer"
@@ -45,6 +46,7 @@
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Goron Village": "(is_winter && can_use_lens)"
     "Lone Peak Shrine": "true"
 
@@ -55,6 +57,7 @@
     BOMBS_OR_BOMBCHU: "true"
     BUGS: "true"
   exits:
+    "GLOBAL": "true"
     "Front of Lone Peak Shrine": "true"
   locations:
     "Lone Peak Shrine Lens Chest": "true"
@@ -88,6 +91,7 @@
 "Goron Shrine":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Goron Village": "true"
     "Goron Shop": "true"
   events:
@@ -132,6 +136,7 @@
 "Goron Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Goron Shrine From Shop": "true"
   locations:
     "Goron Shop Item 1": "soul_goron_shopkeeper && shop_price(0x10)"

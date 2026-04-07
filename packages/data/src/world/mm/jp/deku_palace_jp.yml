@@ -2,26 +2,31 @@
 "Deku Palace Near JP Grotto Climb Left":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Climb Left": "true"
     "Deku Palace Main": "true"
 "Deku Palace Near JP Grotto Climb Right":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Climb Right": "true"
     "Deku Palace Main": "true"
 "JP Grotto Climb":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Climb Left": "true"
     "JP Grotto Climb Right": "true"
 "JP Grotto Climb Left":
   region: BUFFER
   exits:
+    "GLOBAL": "true"
     "JP Grotto Climb": "true"
     "Deku Palace Near JP Grotto Climb Left": "true"
 "JP Grotto Climb Right":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Climb": "true"
     "Deku Palace Near JP Grotto Climb Right": "true"
 
@@ -29,11 +34,13 @@
 "Deku Palace Near JP Grotto Line Start":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Line Start": "true"
     "Deku Palace Main": "is_child" # TODO: Refactor Deku Palace
 "JP Grotto Line":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Line Start": "true"
     "JP Grotto Line End": "true"
   locations:
@@ -50,11 +57,13 @@
 "JP Grotto Line Start":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "JP Grotto Line": "true"
     "Deku Palace Near JP Grotto Line Start": "true"
 "JP Grotto Line End":
   region: BUFFER
   exits:
+    "GLOBAL": "true"
     "JP Grotto Line": "true"
     "Deku Palace Corner Ledge Top": "true"
 
@@ -62,17 +71,20 @@
 "Deku Palace Near Beans Grotto":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Corner Ledge Middle": "true"
     "Deku Palace Beans Grotto": "true"
 
 "Deku Palace Corner Ledge Top":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Corner Ledge Middle": "true"
     "JP Grotto Line End": "true"
 "Deku Palace Corner Ledge Middle":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Near Beans Grotto": "true"
     "Deku Palace Corner Ledge Bottom": "true"
     "Deku Palace Corner Ledge Top": "can_hookshot_short || is_tall"
@@ -82,6 +94,7 @@
 "Deku Palace Corner Ledge Bottom":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Main": "true"
     "Deku Palace Corner Ledge Middle": "can_hookshot_short || is_tall"
 

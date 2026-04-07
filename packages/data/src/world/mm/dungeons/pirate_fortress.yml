@@ -7,6 +7,7 @@
 "Pirate Fortress Entrance":
   dungeon: PF
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress": "true"
     "Pirate Fortress Sewers": "underwater_walking && (has_mask_goron || can_hammer)"
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
@@ -21,6 +22,7 @@
 "Pirate Fortress Entrance Balcony":
   dungeon: PF
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers End": "true"
     "Pirate Fortress Interior": "true"
@@ -38,6 +40,7 @@
 "Pirate Fortress Sewers Cage Room":
   region: PIRATE_FORTRESS_SEWERS
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers": "has_mask_zora || (underwater_walking_strict && can_lift_silver)"
     "Pirate Fortress Sewers After Gate": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
@@ -72,6 +75,7 @@
 "Pirate Fortress Sewers After Gate":
   region: PIRATE_FORTRESS_SEWERS
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers End": "has_weapon_range || has_bombs || has_bombchu"
   locations:
@@ -113,6 +117,7 @@
     RUPEES: "has_weapon_range || has_explosives || has_weapon"
     PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && soul_thief_guard"
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Entrance Balcony": "true"
     "Pirate Fortress Hookshot Room Upper": "can_evade_gerudo"
     "Pirate Fortress Hookshot Room Lower": "true"
@@ -140,6 +145,7 @@
 "Pirate Fortress Hookshot Room Upper":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Interior": "true"
   events:
     FORTRESS_BEEHIVE: "has_arrows || can_use_deku_bubble"
@@ -151,6 +157,7 @@
 "Pirate Fortress Hookshot Room Lower":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Interior": "true"
   events:
     FORTRESS_BEEHIVE: "has_mask_stone && can_hookshot_short && (has_arrows || can_use_deku_bubble)"
@@ -166,6 +173,7 @@
 "Pirate Fortress Barrel Maze Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Entrance Lookout": "true"
     "Pirate Fortress Barrel Maze": "true"
@@ -173,6 +181,7 @@
 "Pirate Fortress Entrance Lookout":
   dungeon: PF
   exits:
+    "GLOBAL": "true"
     "Pirate Fortress Barrel Maze Entry": "true"
     "Pirate Fortress Entrance": "true"
   locations:

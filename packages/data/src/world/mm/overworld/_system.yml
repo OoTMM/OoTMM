@@ -16,6 +16,7 @@
 "WARP_SONGS":
   region: NONE
   exits:
+    "ACCESS": "true"
     "OOT SONG_TP_FOREST": "can_play_tp_forest"
     "OOT SONG_TP_FIRE": "can_play_tp_fire"
     "OOT SONG_TP_WATER": "can_play_tp_water"

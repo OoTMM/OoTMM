@@ -7,6 +7,7 @@
 "Clock Town From Clock Tower":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town Near Clock Tower": "true"
   locations:
     "Initial Song of Healing": "true"
@@ -23,6 +24,7 @@
 "Clock Tower Platform":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town Near Clock Tower": "true"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00) && cond(setting(erMoon), can_play_time || (can_reset_time && (trick(MM_CLOCK_TOWER_WAIT) || can_play_sun)), true)"
   locations:
@@ -31,6 +33,7 @@
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town Near Clock Tower": "true"
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
@@ -54,30 +57,35 @@
 "Clock Town South Upper West":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
     "Clock Town South": "true"
 
 "Clock Town South Lower West":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
     "Clock Town South": "true"
 
 "Clock Town South Upper East":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
     "Clock Town South": "true"
 
 "Clock Town South Lower East":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
     "Clock Town South": "true"
 
 "Clock Town North":
   region: CLOCK_TOWN_NORTH
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     "Clock Town South": "true"
     "Clock Town East": "true"
@@ -129,6 +137,7 @@
     BOMBERS_WEST2: "event(HIDE_SEEK2)"
     BOMBERS_WEST3: "event(HIDE_SEEK3)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
     "Clock Town South Lower West": "true"
@@ -147,6 +156,7 @@
 "Clock Town East Main":
   region: CLOCK_TOWN_EAST
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     "Clock Town North": "true"
     "Clock Town South Upper East": "true"
@@ -190,6 +200,7 @@
 "Clock Town East":
   region: CLOCK_TOWN_EAST
   exits:
+    "GLOBAL": "true"
     "Clock Town East Main": "true"
   events:
     GUESS_BOMBER: "soul_bombers && trick(MM_BOMBER_GUESS)"
@@ -197,6 +208,7 @@
 "Clock Town East Near Hideout":
   region: NONE
   exits:
+    "GLOBAL": "true"
     "Clock Town East Main": "true"
   locations:
     "Clock Town Bomber Notebook": "event(GUESS_BOMBER)"
@@ -204,6 +216,7 @@
 "Astral Observatory Passage":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town East Near Hideout": "true"
     "Astral Observatory Junction": "true"
   events:
@@ -222,12 +235,14 @@
 "Astral Observatory Junction":
   region: NONE
   exits:
+    "GLOBAL": "true"
     "Astral Observatory Passage": "true"
     "Astral Observatory": "true"
 
 "Laundry Pool":
   region: LAUNDRY_POOL
   exits:
+    "GLOBAL": "true"
     "Clock Town South": "true"
     "Kafei Hideout": "(event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)) || (event(MEET_KAFEI) && between(DAY3_PM_01_00, NIGHT3_PM_10_00))"
   events:
@@ -247,6 +262,7 @@
 "Clock Town Fairy Fountain":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town North": "true"
   locations:
     "Clock Town Great Fairy": "sf_town"
@@ -257,6 +273,7 @@
   events:
     BUY_KEG: "soul_goron && can_carry_keg && has(POWDER_KEG) && can_use_wallet(1)"
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
   locations:
     "Bomb Shop Item 1": "soul_bombchu_shopkeeper && shop_price(0x00)"
@@ -277,6 +294,7 @@
     SCARECROW: "can_play_scarecrow"
     FISH: "true"
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
     "Trading Post Items": "(soul_fishing_pond_owner && (before(NIGHT1_PM_09_00) || between(DAY2_AM_06_00, NIGHT2_PM_09_00))) || (soul_rooftop_man && (between(NIGHT1_PM_09_00, DAY2_AM_06_00) || between(NIGHT2_PM_09_00, NIGHT3_PM_09_00)))"
   locations:
@@ -300,6 +318,7 @@
 "Curiosity Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
     "Curiosity Shop 2": "true"
   locations:
@@ -323,6 +342,7 @@
     DAY2_AM_06_00: "false"
     DAY3_AM_06_00: "false"
   exits:
+    "GLOBAL": "true"
     "Laundry Pool": "true"
   events:
     MEET_KAFEI: "soul_npc(SOUL_NPC_KAFEI) && event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
@@ -334,6 +354,7 @@
 "Post Office":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
   events:
     POSTMAN_FREEDOM: "soul_citizen && has(LETTER_TO_MAMA) && is_night3"
@@ -343,6 +364,7 @@
 "Swordsman School":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
   stay:
     NIGHT3_PM_11_00: "false"
@@ -362,6 +384,7 @@
     BUY_TICKET_2: "is_day2 && can_use_wallet(1)"
     BUY_TICKET_3: "is_day3 && can_use_wallet(1)"
   exits:
+    "GLOBAL": "true"
     "Clock Town West": "true"
   locations:
     "Lottery Prize Night 1": "event(BUY_TICKET_1) && between(NIGHT1_PM_06_00, NIGHT1_PM_11_00)"
@@ -371,6 +394,7 @@
 "Mayor's Office":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
   locations:
     "Mayor's Office Kafei's Mask": "soul_npc(SOUL_NPC_AROMA) && (between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00))"
@@ -379,6 +403,7 @@
 "Milk Bar":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
   stay:
     NIGHT1_PM_10_00: "false"
@@ -396,6 +421,7 @@
 "Town Archery":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
   locations:
     "Town Archery Reward 1": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
@@ -404,6 +430,7 @@
 "Chest Game":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
   locations:
     "Chest Game HP": "soul_bombchu_bowling_lady && has_mask_goron && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
@@ -418,6 +445,7 @@
     HD_REWARD_2: "soul_honey_darling && has_bomb_bag && between(DAY2_AM_06_00, NIGHT2_PM_10_00)"
     HD_REWARD_3: "soul_honey_darling && (has_bow || can_use_deku_bubble) && is_day3"
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
   locations:
     "Honey & Darling Reward Any Day": "can_use_wallet(1) && (event(HD_REWARD_1) || event(HD_REWARD_2) || event(HD_REWARD_3))"
@@ -426,6 +454,7 @@
 "Stock Pot Inn":
   region: STOCK_POT_INN
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
     "Stock Pot Inn Roof": "true"
   stay:
@@ -458,12 +487,14 @@
 "Clock Town East SPI Roof":
   region: CLOCK_TOWN_EAST
   exits:
+    "GLOBAL": "true"
     "Clock Town East": "true"
     "Stock Pot Inn": "true"
 
 "Stock Pot Inn Roof":
   region: CLOCK_TOWN_EAST
   exits:
+    "GLOBAL": "true"
     "Clock Town East SPI Roof": "true"
   events:
     SPI_ROOF_FARORE: "can_use_farore"
@@ -475,6 +506,7 @@
     DEKU_REWARD_2: "soul_npc(SOUL_NPC_PLAYGROUND_SCRUBS) && between(DAY2_AM_06_00, NIGHT2_AM_12_00)"
     DEKU_REWARD_3: "soul_npc(SOUL_NPC_PLAYGROUND_SCRUBS) && between(DAY3_AM_06_00, NIGHT3_AM_12_00)"
   exits:
+    "GLOBAL": "true"
     "Clock Town North": "true"
   locations:
     "Deku Playground Reward Any Day": "has(MASK_DEKU) && can_use_wallet(1) && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
@@ -483,6 +515,7 @@
 "Astral Observatory":
   region: CLOCK_TOWN_EAST
   exits:
+    "GLOBAL": "true"
     "Astral Observatory Junction": "true"
     "Astral Observatory Balcony": "true"
   events:
@@ -499,6 +532,7 @@
 "Owl Clock Town":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "GLOBAL": "true"
     "Clock Town Near Clock Tower": "true"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_sword"

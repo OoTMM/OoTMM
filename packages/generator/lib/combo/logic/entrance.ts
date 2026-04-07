@@ -206,15 +206,8 @@ class WorldShuffler {
 
     /* Change the world */
     let expr = this.getExpr(original);
-    if (entranceReplacement.game === 'mm') {
-      if (!(entranceReplacement.flags.includes('no-global'))) {
-        areaFrom.exits['MM GLOBAL'] = expr;
-      } else {
-        areaFrom.exits['MM ACCESS'] = expr;
-      }
-      if (!(entranceReplacement.flags.includes('no-sot'))) {
-        expr = this.songOfTime(expr);
-      }
+    if (entranceReplacement.game === 'mm' && !(entranceReplacement.flags.includes('no-sot'))) {
+      expr = this.songOfTime(expr);
     }
     if (areaFrom.exits[entranceReplacement.to]) {
       expr = exprOr([expr, areaFrom.exits[entranceReplacement.to]]);

@@ -2,6 +2,7 @@
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
   exits:
+    "GLOBAL": "true"
     "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Astral Observatory": "true"
   events:
@@ -22,6 +23,7 @@
     ARROWS: "true"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Clock Town South": "true"
     "Clock Town North": "true"
     "Clock Town East": "true"
@@ -343,6 +345,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Tall Grass Grotto": "true"
@@ -366,6 +369,7 @@
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Peahat Grotto": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU)) && is_day"
@@ -388,6 +392,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Bio Baba Grotto": "has_mask_zora || ((underwater_walking || can_dive_big || (trick(MM_BIO_BABA_LUCK) && soul_enemy(SOUL_ENEMY_BIO_BABA))) && (has_weapon_range || (has_bombs && soul_enemy(SOUL_ENEMY_BIO_BABA)) || (has_bombchu && trick(MM_BIO_BABA_CHU))))"
@@ -400,6 +405,7 @@
 "Dodongo Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Dodongo Grotto": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows || deku_stick_fighting)"
@@ -417,6 +423,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Pillar Grotto": "true"
@@ -441,6 +448,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && can_use_wallet(2)"
@@ -456,6 +464,7 @@
     ARROWS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
   locations:
     "Termina Field Cow Front": "cow"
@@ -545,6 +554,7 @@
     SWAMP_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     #"Musical Gossip Stones": "true"
   locations:
@@ -562,6 +572,7 @@
     MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     #"Musical Gossip Stones": "true"
   locations:
@@ -584,6 +595,7 @@
     OCEAN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     #"Musical Gossip Stones": "true"
   locations:
@@ -614,6 +626,7 @@
     CANYON_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Termina Field": "true"
     #"Musical Gossip Stones": "true"
   locations:
@@ -632,12 +645,14 @@
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
+    "GLOBAL": "true"
     "Termina Field": "has_arrows || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn || has_hot_water_er || short_hook_anywhere || can_use_din"
     "Mountain Village Path Lower": "true"
 
 "Great Bay Fence":
   region: TERMINA_FIELD
   exits:
+    "GLOBAL": "true"
     "Termina Field": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Great Bay Coast": "true"
   locations:

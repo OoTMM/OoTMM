@@ -2,6 +2,7 @@
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
     "Mountain Village Cliff": "(is_winter && (can_use_lens_strict || trick(MM_DARMANI_WALL))) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || can_hookshot || short_hook_anywhere))"
@@ -125,6 +126,7 @@
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Mountain Village Grotto": "is_spring"
     "Mountain Village": "true"
     "Mountain Village Cliff": "is_spring && (has_mask_goron || short_hook_anywhere)"
@@ -132,6 +134,7 @@
 "Mountain Village Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Near Village Grotto": "true"
   events:
     MAGIC: "true"
@@ -163,6 +166,7 @@
 "Blacksmith":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Mountain Village": "true"
   events:
     BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
@@ -178,6 +182,7 @@
 "Mountain Village Cliff":
   region: MOUNTAIN_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Mountain Village": "true"
     "Goron Graveyard": "true"
     "Near Village Grotto": "is_spring"
@@ -193,6 +198,7 @@
 "Near Goron Graveyard":
   region: MOUNTAIN_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Mountain Village Cliff": "true"
   events:
     MAGIC: "true"
@@ -201,6 +207,7 @@
 "Goron Graveyard":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Near Goron Graveyard": "true"
     "Goron Graveyard Water": "has_mask_goron || can_lift_gold"
   locations:
@@ -218,6 +225,7 @@
 "Owl Mountain":
   region: MOUNTAIN_VILLAGE
   exits:
+    "GLOBAL": "true"
     "Mountain Village": "can_reset_time"
   events:
     MAGIC: "true"

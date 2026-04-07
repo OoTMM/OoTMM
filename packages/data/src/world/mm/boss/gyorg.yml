@@ -5,8 +5,8 @@
   events:
     BOSS_GYORG: "can_kill_gyorg"
   exits:
-    "Great Bay Temple After Boss": "event(BOSS_GYORG)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
+    "Great Bay Temple After Boss": "event(BOSS_GYORG)"
   locations:
     "Great Bay Temple Boss Pot 1": "true"
     "Great Bay Temple Boss Pot 2": "true"

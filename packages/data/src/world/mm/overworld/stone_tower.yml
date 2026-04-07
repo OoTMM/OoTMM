@@ -1,6 +1,7 @@
 "Stone Tower":
   region: STONE_TOWER
   exits:
+    "GLOBAL": "true"
     "Ikana Canyon": "true"
     "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || (setting(openDungeonsMm, ST) && (can_hookshot || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))))"
     "Stone Tower Lower Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot) || hookshot_anywhere"
@@ -12,6 +13,7 @@
 "Stone Tower Top":
   region: STONE_TOWER
   exits:
+    "GLOBAL": "true"
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
@@ -22,6 +24,7 @@
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   exits:
+    "GLOBAL": "true"
     "Stone Tower": "true"
     "Stone Tower Top": "(!setting(jpLayouts, StoneTower) && (can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere))) || can_hookshot || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows && !setting(jpLayouts, StoneTower)) || setting(openDungeonsMm, ST)"
@@ -32,6 +35,7 @@
 "Stone Tower Lower Scarecrow Ledge":
   region: STONE_TOWER
   exits:
+    "GLOBAL": "true"
     "Stone Tower": "true"
   events:
     MAGIC: "true"
@@ -54,6 +58,7 @@
 "Stone Tower Upper Scarecrow Ledge":
   region: STONE_TOWER
   exits:
+    "GLOBAL": "true"
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "short_hook_anywhere && trick(MM_OOB_MOVEMENT)"
   events:
@@ -76,6 +81,7 @@
   events:
     BUGS: "true"
   exits:
+    "GLOBAL": "true"
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Top": "can_use_light_arrows || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted Upper": "can_use_beans || hookshot_anywhere"
@@ -92,6 +98,7 @@
     RUPEES: "true"
     FAIRY: "true"
   exits:
+    "GLOBAL": "true"
     "Stone Tower Top Inverted": "true"
   locations:
     "Stone Tower Inverted Chest 1": "true"
@@ -107,6 +114,7 @@
 "Owl Stone Tower":
   region: STONE_TOWER
   exits:
+    "GLOBAL": "true"
     "Stone Tower Top": "can_reset_time"
   events:
     MAGIC: "true"

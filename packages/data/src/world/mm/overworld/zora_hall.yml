@@ -7,6 +7,7 @@
 "Zora Hall":
   region: ZORA_HALL
   exits:
+    "GLOBAL": "true"
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
@@ -20,6 +21,7 @@
 "Zora Shop":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Hall": "true"
   locations:
     "Zora Shop Item 1": "soul_zora_shopkeeper && shop_price(0x13)"
@@ -29,16 +31,19 @@
 "Tijo's Room":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Hall": "true"
 
 "Japas' Room":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Hall": "true"
 
 "Evan's Room":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Hall": "true"
   locations:
     "Zora Hall Evan HP": "soul_npc(SOUL_NPC_ZORA_MUSICIANS) && can_play_evan && (is_ocean_cursed || (trick(MM_EVAN_FARORE) && can_use_farore))"
@@ -46,6 +51,7 @@
 "Lulu's Room":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Zora Hall": "true"
   locations:
     "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has_mask_goron || is_tall)) || (has_mask_goron && has(MASK_DEKU) && has(DEED_MOUNTAIN)) || short_hook_anywhere"

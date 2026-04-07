@@ -7,8 +7,8 @@
     ARROWS: "true"
     BOSS_GOHT: "can_kill_goht"
   exits:
-    "Snowhead Temple After Boss": "event(BOSS_GOHT)"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
+    "Snowhead Temple After Boss": "event(BOSS_GOHT)"
   locations:
     "Snowhead Temple Boss Pot Early 1": "true"
     "Snowhead Temple Boss Pot Early 2": "true"

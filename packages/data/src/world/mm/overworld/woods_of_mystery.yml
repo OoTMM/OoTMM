@@ -2,6 +2,7 @@
 "Woods of Mystery":
   region: SOUTHERN_SWAMP
   exits:
+    "GLOBAL": "true"
     "Woods of Mystery Lost": "true"
     "Near Woods of Mystery Grotto": "second_day"
   events:
@@ -37,6 +38,7 @@
 "Near Woods of Mystery Grotto":
   region: SOUTHERN_SWAMP
   exits:
+    "GLOBAL": "true"
     "Woods of Mystery": "second_day"
     "Woods of Mystery Lost": "true"
     "Woods of Mystery Grotto": "true"
@@ -51,6 +53,7 @@
 "Woods of Mystery Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Near Woods of Mystery Grotto": "true"
   events:
     STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"

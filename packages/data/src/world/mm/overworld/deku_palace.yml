@@ -1,6 +1,7 @@
 "Deku Palace Front":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
     "Near Deku Shrine": "(is_swamp_cleared && can_swim) || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
@@ -16,6 +17,7 @@
 "Deku Palace Main":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Near JP Grotto Climb Left": "true"
     "Deku Palace Near JP Grotto Climb Right": "true"
     "Deku Palace Corner Ledge Bottom": "true"
@@ -57,6 +59,7 @@
   events:
     MAGIC: "has(MASK_DEKU) || short_hook_anywhere"
   exits:
+    "GLOBAL": "true"
     "Deku Palace Main": "true"
     "Deku Palace Near Cage": "has(MASK_DEKU) || short_hook_anywhere"
     "Deku Palace Corner Ledge Top": "has(MASK_DEKU)"
@@ -67,6 +70,7 @@
 "Deku Palace Throne":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Main": "has(MASK_DEKU)"
     "Deku Palace Throne To Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
   events:
@@ -93,6 +97,7 @@
 "Deku Palace Cage":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Near Cage": "true"
     "Deku Palace Cage To Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
   locations:
@@ -101,6 +106,7 @@
 "Deku Palace Beans Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Near Beans Grotto": "true"
     "Deku Palace Beans Grotto Butterflies": "butterfly"
   events:
@@ -140,11 +146,13 @@
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Front": "has(MASK_DEKU) || ((is_swamp_cleared || can_use_nayru) && can_swim) || short_hook_anywhere || has_hover_boots"
     "Swamp Canopy Front": "true"
 
 "Near Deku Shrine":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Front": "((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU) || has_hover_boots"
     "Deku Shrine": "true"

@@ -6,6 +6,7 @@
     MAGIC: "true"
     RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || (can_break_snowballs && soul_enemy(SOUL_ENEMY_SNAPPER)))) || is_spring"
   exits:
+    "GLOBAL": "true"
     "Mountain Village": "true"
     "Goron Village": "true"
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
@@ -56,6 +57,7 @@
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Near Ramp Grotto": "true"
   events:
     MAGIC: "true"
@@ -87,6 +89,7 @@
 "Twin Islands Frozen Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Twin Islands": "true"
   events:
     HOT_WATER_NORTH_WINTER: "is_winter"
@@ -100,6 +103,7 @@
 "Near Goron Race":
   region: TWIN_ISLANDS
   exits:
+    "GLOBAL": "true"
     "Twin Islands": "true"
     "Goron Race": "event(TRIAL_BOULDER) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
     "Near Ramp Grotto": "true"
@@ -111,6 +115,7 @@
   events:
     MAGIC: "true"
   exits:
+    "GLOBAL": "true"
     "Twin Islands": "true"
     "Twin Islands Ramp Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none)) || can_hammer)"
   locations:
@@ -134,6 +139,7 @@
   events:
     MAGIC: "true"
   exits:
+    "GLOBAL": "true"
     "Near Goron Race": "true"
   locations:
     "Goron Race Reward": "is_spring && soul_goron_child && goron_fast_roll"

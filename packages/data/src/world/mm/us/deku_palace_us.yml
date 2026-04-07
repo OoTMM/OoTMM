@@ -1,12 +1,14 @@
 "Deku Palace Near US Beans Grotto":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Near Beans Grotto": "true"
     "Deku Palace Main": "true"
 
 "Deku Palace Near Beans Grotto":
   region: DEKU_PALACE
   exits:
+    "GLOBAL": "true"
     "Deku Palace Near US Beans Grotto": "true"
     "Deku Palace Beans Grotto": "true"
 

@@ -5,6 +5,7 @@
     ARROWS: "true"
     RUPEES: "true"
   exits:
+    "GLOBAL": "true"
     "Road to Ikana Center": "true"
     "Ikana Graveyard Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
     "Beneath The Graveyard Night 1": "soul_stalchild && has(MASK_CAPTAIN) && is_night1"
@@ -64,6 +65,7 @@
     FISH: "true"
     BUGS: "true"
   exits:
+    "GLOBAL": "true"
     "Ikana Graveyard": "true"
   locations:
     "Ikana Graveyard Grotto": "true"
@@ -87,6 +89,7 @@
   events:
     ARROWS: "true"
   exits:
+    "GLOBAL": "true"
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
@@ -110,6 +113,7 @@
     MAGIC: "true"
     ARROWS: "true"
   exits:
+    "GLOBAL": "true"
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
@@ -141,6 +145,7 @@
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
     DAMPE_BIG_POE: "soul_dampe && can_kill_big_poe && is_night3 && soul_poe"
   exits:
+    "GLOBAL": "true"
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"
   locations:

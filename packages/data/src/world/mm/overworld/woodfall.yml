@@ -4,6 +4,7 @@
   events:
     MAGIC: "true"
   exits:
+    "GLOBAL": "true"
     "Swamp Canopy Back": "true"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere"
     "Woodfall Temple Princess Jail": "is_swamp_cleared && woodfall_raised"
@@ -30,6 +31,7 @@
 "Woodfall Shrine":
   region: WOODFALL
   exits:
+    "GLOBAL": "true"
     "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || is_swamp_cleared || hookshot_anywhere || can_use_nayru"
     "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared || short_hook_anywhere)) || hookshot_anywhere"
     "Woodfall Front of Temple": "woodfall_raised && (has(MASK_DEKU) || hookshot_anywhere)"
@@ -42,6 +44,7 @@
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
+    "GLOBAL": "true"
     "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || is_swamp_cleared || hookshot_anywhere || can_use_nayru"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || is_swamp_cleared)) || hookshot_anywhere"
     "Woodfall Fairy Fountain": "true"
@@ -51,6 +54,7 @@
 "Woodfall Fairy Fountain":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Woodfall Near Fairy Fountain": "true"
   locations:
     "Woodfall Great Fairy": "sf_woodfall"
@@ -58,6 +62,7 @@
 "Owl Woodfall":
   region: WOODFALL
   exits:
+    "GLOBAL": "true"
     "Woodfall Shrine": "can_reset_time"
   events:
     STICKS: "true"

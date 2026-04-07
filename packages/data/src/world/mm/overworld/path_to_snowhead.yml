@@ -2,6 +2,7 @@
 "Path to Snowhead Front":
   region: PATH_TO_SNOWHEAD
   exits:
+    "GLOBAL": "true"
     "Mountain Village": "true"
     "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
 
@@ -23,6 +24,7 @@
   events:
     MAGIC: "can_break_boulders"
   exits:
+    "GLOBAL": "true"
     "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
     "Snowhead Entrance": "true"
     "Path to Snowhead Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
@@ -41,6 +43,7 @@
 "Path to Snowhead Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Path to Snowhead Back": "true"
   events:
     MAGIC: "true"

@@ -1,6 +1,7 @@
 "Great Bay Coast":
   region: GREAT_BAY_COAST
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast Water": "can_swim_or_sink"
     "Great Bay Coast Ledge": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "Great Bay Coast Platform": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
@@ -53,6 +54,7 @@
 "Great Bay Coast Ledge":
   region: GREAT_BAY_COAST
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast Water": "can_swim_or_sink"
     "Great Bay Coast": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
@@ -116,6 +118,7 @@
 "Great Bay Coast Platform":
   region: GREAT_BAY_COAST
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "Great Bay Coast Water": "can_swim_or_sink"
     "Laboratory": "true"
@@ -165,6 +168,7 @@
     BUGS: "true"
     FISH: "true"
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast": "true"
   locations:
     "Great Bay Coast Fisherman Grotto": "true"
@@ -186,6 +190,7 @@
 "GBC Near Cow Grotto":
   region: GREAT_BAY_COAST
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast Ledge": "true"
     "Great Bay Cow Grotto": "true"
 
@@ -197,6 +202,7 @@
     ARROWS: "true"
     RUPEES: "true"
   exits:
+    "GLOBAL": "true"
     "GBC Near Cow Grotto": "true"
   locations:
     "Great Bay Coast Cow Front": "cow"
@@ -281,6 +287,7 @@
 "Fisher's Hut":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast": "true"
   events:
     SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle && is_ocean_cursed"
@@ -288,6 +295,7 @@
 "Laboratory":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast Platform": "true"
   locations:
     "Laboratory Zora Song": "soul_scientist && has_all_zora_eggs && has_mask_zora && has_ocarina"
@@ -302,6 +310,7 @@
 "Owl Great Bay":
   region: GREAT_BAY_COAST
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast Platform": "can_reset_time"
     "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && has_arrows"
   events:

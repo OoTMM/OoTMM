@@ -2,6 +2,7 @@
 "Deku Shrine":
   region: BUTLER_RACE
   exits:
+    "GLOBAL": "true"
     "Near Deku Shrine": "true"
     "Deku Shrine Main": "soul_npc(SOUL_NPC_BUTLER_DEKU) && event(RETURN_PRINCESS)"
 

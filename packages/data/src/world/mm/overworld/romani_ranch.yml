@@ -7,6 +7,7 @@
     MAGIC: "true"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Near Romani Ranch": "true"
     "Cucco Shack": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
     "Doggy Racetrack": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
@@ -106,6 +107,7 @@
     RUPEES: "has_weapon_range || has_weapon || can_break_boulders"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Romani Ranch": "true"
   locations:
     "Cucco Shack Bunny Mask": "soul_grog && has(MASK_BREMEN) && soul_cucco"
@@ -138,6 +140,7 @@
   events:
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Romani Ranch": "true"
   locations:
     "Doggy Racetrack Chest": "can_use_beans || is_tall || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)"
@@ -153,6 +156,7 @@
 "Stables":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Romani Ranch": "true"
   locations:
     "Romani Ranch Barn Cow Left": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && cow"
@@ -164,6 +168,7 @@
 "Ranch House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Romani Ranch": "true"
 
 "Tingle Ranch":

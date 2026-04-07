@@ -1,6 +1,7 @@
 "Ancient Castle of Ikana":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ikana Castle Exterior": "can_reset_time"
     "Ancient Castle of Ikana Interior": "can_reset_time_dungeon"
 
@@ -9,6 +10,7 @@
   events:
     RUPEES: "true"
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana": "true"
     "Ancient Castle of Ikana Interior North": "can_use_fire_short_range"
     "Ancient Castle of Ikana Interior South": "can_use_fire_short_range"
@@ -20,6 +22,7 @@
 "Ancient Castle of Ikana Interior North":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere || (can_use_nayru && is_tall)"
   locations:
@@ -32,6 +35,7 @@
     MAGIC: "has(MASK_DEKU) || short_hook_anywhere"
     FAIRY: "has(MASK_DEKU) || short_hook_anywhere"
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Interior North": "true"
     "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere || has_hover_boots"
   locations:
@@ -43,6 +47,7 @@
 "Ancient Castle of Ikana Interior North 3":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Interior North 2": "true"
     "Ancient Castle of Ikana Roof Exterior": "true"
   locations:
@@ -52,6 +57,7 @@
 "Ancient Castle of Ikana Roof Exterior":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Interior North 3": "true"
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
@@ -66,6 +72,7 @@
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Wizzrobe": "can_reset_time && (((has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows) || short_hook_anywhere)"
 
@@ -78,6 +85,7 @@
 "Ancient Castle of Ikana South Last":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Wizzrobe": "true"
     "Ancient Castle of Ikana Roof Interior": "true"
   locations:
@@ -97,6 +105,7 @@
 "Ancient Castle of Ikana Behind Block":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Interior": "can_use_light_arrows || short_hook_anywhere"
     "Ancient Castle of Ikana Pre-Boss": "true"
 
@@ -106,6 +115,7 @@
     MAGIC: "true"
     ARROWS: "true"
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana Behind Block": "true"
     "Ancient Castle of Ikana Throne Room": "true"
   locations:
@@ -117,6 +127,7 @@
 "Ancient Castle of Ikana Throne Room":
   dungeon: ACoI
   exits:
+    "GLOBAL": "true"
     "Ancient Castle of Ikana After Boss": "can_kill_igos"
   locations:
     "Ancient Castle of Ikana Boss Pot 5": "true"

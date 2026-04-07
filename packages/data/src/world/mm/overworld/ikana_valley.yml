@@ -3,6 +3,7 @@
   events:
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || (has_iron_boots && can_hookshot) || short_hook_anywhere"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
@@ -19,6 +20,7 @@
 "Ikana Valley Near Secret Shrine":
   region: IKANA_CANYON
   exits:
+    "GLOBAL": "true"
     "Secret Shrine": "true"
     "Ikana Valley Grotto": "true"
     "Ikana Valley": "can_swim || (can_use_ice_arrows && has_chateau)"
@@ -26,6 +28,7 @@
 "Ikana Valley Grotto":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Ikana Valley Near Secret Shrine": "true"
   events:
     MAGIC: "true"
@@ -56,6 +59,7 @@
 "Sakon Hideout":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Ikana Valley": "true"
   events:
     SUN_MASK: "(can_fight || has_explosives || has_arrows) && soul_deku_baba && soul_wolfos"
@@ -69,6 +73,7 @@
 "Ikana Canyon":
   region: IKANA_CANYON
   exits:
+    "GLOBAL": "true"
     "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has(MASK_DEKU) || has_hover_boots || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
@@ -93,6 +98,7 @@
 "Ikana Fairy Fountain":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Ikana Canyon": "true"
   locations:
     "Ikana Great Fairy": "sf_stone_tower"
@@ -100,6 +106,7 @@
 "Ikana Spring Water Cave":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Ikana Canyon": "true"
   events:
     IKANA_CURSE_LIFTED: "soul_composer_bros && is_valley_cursed && can_play_storms"
@@ -107,6 +114,7 @@
 "Music Box House":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Ikana Canyon": "true"
   locations:
     "Music Box House Gibdo Mask": "is_valley_cursed && can_play_healing"
@@ -114,6 +122,7 @@
 "Ghost Hut":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Ikana Canyon": "true"
   locations:
     "Ghost Hut HP": "soul_poe_collector && soul_poe && (has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
@@ -121,6 +130,7 @@
 "Ikana Castle Entrance":
   region: IKANA_CASTLE
   exits:
+    "GLOBAL": "true"
     "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows || short_hook_anywhere"
     "Ikana Canyon": "true"
   events:
@@ -134,6 +144,7 @@
     RUPEES: "true"
     FAIRY: "true"
   exits:
+    "GLOBAL": "true"
     "Beneath The Well End": "true"
     "Ikana Castle Entrance": "can_use_light_arrows || short_hook_anywhere"
     "Ancient Castle of Ikana": "true"
@@ -162,6 +173,7 @@
 "Owl Ikana":
   region: IKANA_CANYON
   exits:
+    "GLOBAL": "true"
     "Ikana Canyon": "can_reset_time"
   events:
     MAGIC: "true"

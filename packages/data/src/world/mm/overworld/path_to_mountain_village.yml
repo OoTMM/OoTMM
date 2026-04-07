@@ -6,6 +6,7 @@
     MAGIC: "is_spring"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Behind Large Icicles": "true"
     "Mountain Village Path Upper": "can_break_snowballs || is_spring || short_hook_anywhere"
   gossip:
@@ -35,6 +36,7 @@
     MAGIC: "true"
     RUPEES: "can_use_light_arrows && soul_tektite && is_day"
   exits:
+    "GLOBAL": "true"
     "Mountain Village Path Lower": "true"
     "Mountain Village": "true"
   locations:

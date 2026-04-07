@@ -6,6 +6,7 @@
     FISH: "true"
     FAIRY: "can_get_gossip_fairy"
   exits:
+    "GLOBAL": "true"
     "Great Bay Coast": "true"
     "Zora Cape Peninsula": "(can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))) || (can_use_ice_arrows && has_chateau)"
     "Zora Cape Water Void": "can_swim_or_sink"
@@ -64,6 +65,7 @@
     FISH: "true"
     BUGS: "true"
   exits:
+    "GLOBAL": "true"
     "Zora Cape": "true"
   locations:
     "Zora Cape Grotto": "true"
@@ -87,12 +89,14 @@
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE
   exits:
+    "GLOBAL": "true"
     "Zora Cape": "(has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)) && (can_swim_or_sink || can_use_ice_arrows)"
     "Great Bay Fairy Fountain": "true"
 
 "Great Bay Fairy Fountain":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Great Bay Near Fairy Fountain": "true"
   locations:
     "Great Bay Great Fairy": "sf_great_bay"
@@ -100,6 +104,7 @@
 "Waterfall Cliffs":
   region: ZORA_CAPE
   exits:
+    "GLOBAL": "true"
     "Zora Cape": "true"
     "Waterfall Rapids": "true"
   locations:
@@ -109,6 +114,7 @@
 "Waterfall Rapids":
   region: ENTRANCE
   exits:
+    "GLOBAL": "true"
     "Waterfall Cliffs": "true"
   locations:
     "Waterfall Rapids Beaver Race 1": "has_mask_zora"
@@ -117,6 +123,7 @@
 "Zora Cape Near Hall":
   region: ZORA_CAPE
   exits:
+    "GLOBAL": "true"
     "Zora Hall Entrance": "underwater_walking || can_dive_small"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
@@ -125,6 +132,7 @@
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
+    "GLOBAL": "true"
     "Zora Hall": "true"
     "Zora Cape": "(can_swim && (underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN))) || (can_use_ice_arrows && has_chateau)"
     "Great Bay Temple": "turtle_woken && can_hookshot"
@@ -139,6 +147,7 @@
 "Owl Zora Cape":
   region: ZORA_CAPE
   exits:
+    "GLOBAL": "true"
     "Zora Cape Peninsula": "can_reset_time"
   events:
     MAGIC: "true"

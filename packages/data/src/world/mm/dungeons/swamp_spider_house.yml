@@ -1,6 +1,7 @@
 "Swamp Spider House":
   dungeon: SSH
   exits:
+    "GLOBAL": "true"
     "Near Swamp Spider House": "can_reset_time"
     "Swamp Spider House Main": "can_reset_time_dungeon"
   locations:
