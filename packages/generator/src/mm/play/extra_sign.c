@@ -15,6 +15,11 @@ static void ComboPlay_SpawnExtraSignLoc(PlayState* play, float x, float y, float
     ComboPlay_SpawnExtraSign(play, x, y, z, ry, ENKANBAN_LOCATION_NAME);
 }
 
+static void ComboPlay_SpawnExtraSignSpecialCond(PlayState* play, float x, float y, float z, s16 ry, int special)
+{
+    ComboPlay_SpawnExtraSign(play, x, y, z, ry, ENKANBAN_SPECIAL_COND | (special & 0xff));
+}
+
 void ComboPlay_SpawnExtraSigns(PlayState* play)
 {
     if (Config_Flag(CFG_ER_GROTTOS))
@@ -35,5 +40,10 @@ void ComboPlay_SpawnExtraSigns(PlayState* play)
             }
             break;
         }
+    }
+
+    if (Config_Flag(CFG_MM_MOON_COND_CUSTOM) && play->sceneId == SCE_MM_CLOCK_TOWER_ROOFTOP && gComboConfig.special[SPECIAL_MOON].count)
+    {
+        ComboPlay_SpawnExtraSignSpecialCond(play, -120.f, 20.f, 150.f, 0x2800, SPECIAL_MOON);
     }
 }

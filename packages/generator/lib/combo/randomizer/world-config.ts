@@ -249,6 +249,9 @@ export function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_DMG_MULT_4: settings.damageMultiplierMm === 'quadruple',
     MM_DMG_MULT_8: settings.damageMultiplierMm === 'octuple',
     MM_DMG_MULT_OHKO: settings.damageMultiplierMm === 'ohko',
+    MM_MOON_COND_OPEN: settings.moon === 'open',
+    MM_MOON_COND_VANILLA: settings.moon === 'vanilla',
+    MM_MOON_COND_CUSTOM: settings.moon === 'custom',
   };
 
   for (const v in exprs) {

@@ -868,4 +868,8 @@ typedef struct {
 #define UPDBGCHECKINFO_FLAG_CEILING     (1 << 1)
 #define UPDBGCHECKINFO_FLAG_FLOOR       (1 << 2)
 
+#if defined(GAME_MM)
+int Misc_IsMoonAccessible(void);
+#endif
+
 #endif /* TYPES_H */

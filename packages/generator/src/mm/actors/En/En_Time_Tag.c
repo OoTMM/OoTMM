@@ -48,7 +48,7 @@ PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
 
 void EnTimeTag_MoonCutscene(Actor* this, PlayState* play)
 {
-    if (SpecialConds_Eval(SPECIAL_MOON))
+    if (Misc_IsMoonAccessible())
     {
         /* Skip to Moon */
         play->nextEntrance = ((SCE_MM_MOON - 3) << 9);

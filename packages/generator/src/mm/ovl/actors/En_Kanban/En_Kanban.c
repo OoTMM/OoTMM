@@ -171,6 +171,8 @@ void EnKanban_TalkedTo(Actor* thisx, PlayState* play)
 {
     if (thisx->params == ENKANBAN_LOCATION_NAME) {
         EnKanban_LocText(play);
+    } else if ((thisx->params & 0xff00) == ENKANBAN_SPECIAL_COND) {
+        SpecialConds_HijackTextRequirements(play, thisx->params & 0xff);
     }
 }
 
