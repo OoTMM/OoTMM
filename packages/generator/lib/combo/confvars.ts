@@ -240,6 +240,9 @@ export const CONFVARS = [
   'MM_DMG_MULT_4',
   'MM_DMG_MULT_8',
   'MM_DMG_MULT_OHKO',
+  'MM_MOON_COND_OPEN',
+  'MM_MOON_COND_VANILLA',
+  'MM_MOON_COND_CUSTOM',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -166,7 +166,7 @@ static void Triggers_Check(PlayState* play)
     }
 
     /* Ganon BK */
-    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !(gOotSave.info.inventory.dungeonItems[SCE_OOT_GANON_TOWER].bossKey) && Config_SpecialCond(SPECIAL_GANON_BK))
+    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !(gOotSave.info.inventory.dungeonItems[SCE_OOT_GANON_TOWER].bossKey) && SpecialConds_Eval(SPECIAL_GANON_BK))
     {
         Trigger_Set(TRIGGER_GANON_BK);
         return;
@@ -221,7 +221,7 @@ static void Triggers_Check(PlayState* play)
     {
         int shouldTrigger;
         if (Config_Flag(CFG_OOT_LACS_CUSTOM))
-            shouldTrigger = Config_SpecialCond(SPECIAL_LACS);
+            shouldTrigger = SpecialConds_Eval(SPECIAL_LACS);
         else
             shouldTrigger = (gSave.info.inventory.quest.medallionSpirit && gSave.info.inventory.quest.medallionShadow);
 

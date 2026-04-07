@@ -15,6 +15,11 @@ static void ComboPlay_SpawnExtraSignLoc(PlayState* play, float x, float y, float
     ComboPlay_SpawnExtraSign(play, x, y, z, ry, ENKANBAN_LOCATION_NAME);
 }
 
+static void ComboPlay_SpawnExtraSignSpecialCond(PlayState* play, float x, float y, float z, s16 ry, int special)
+{
+    ComboPlay_SpawnExtraSign(play, x, y, z, ry, ENKANBAN_SPECIAL_COND | (special & 0xff));
+}
+
 void ComboPlay_SpawnExtraSigns(PlayState* play)
 {
     if (Config_Flag(CFG_ER_GROTTOS))
@@ -57,5 +62,11 @@ void ComboPlay_SpawnExtraSigns(PlayState* play)
             ComboPlay_SpawnExtraSignLoc(play, -90.f, 20.f, -150.f, 0x2000);
             break;
         }
+    }
+
+    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && play->sceneId == SCE_OOT_GANON_CASTLE_EXTERIOR && gComboConfig.special[SPECIAL_BRIDGE].count)
+    {
+        ComboPlay_SpawnExtraSignSpecialCond(play, 0.f, 1358.f, 1530.f, 0x1000, SPECIAL_BRIDGE);
+        ComboPlay_SpawnExtraSignSpecialCond(play, -600.f, 1645.f, 700.f, 0x4800, SPECIAL_BRIDGE);
     }
 }

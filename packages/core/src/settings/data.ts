@@ -1273,6 +1273,19 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'moon',
+  name: 'Moon Access',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls how the Moon is accessed',
+  values: [
+    { value: 'open', name: 'Open', description: 'Moon can be accessed as soon as the oath to order can be played' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Moon can be accessed when all 4 remains are obtained' },
+    { value: 'custom', name: 'Custom', description: 'Moon can be accessed when a special condition is met' },
+  ],
+  default: 'vanilla',
+  cond: hasMM,
+}, {
   key: 'lacs',
   name: 'Light Arrow Cutscene',
   category: 'main.events',

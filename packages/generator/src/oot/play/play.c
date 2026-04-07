@@ -25,7 +25,7 @@ void Play_GoToFileSelect(GameState* gs)
 
 static int isRainbowBridgeOpen(void)
 {
-    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !Config_SpecialCond(SPECIAL_BRIDGE))
+    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !SpecialConds_Eval(SPECIAL_BRIDGE))
         return 0;
 
     if (Config_Flag(CFG_OOT_BRIDGE_VANILLA) && !(

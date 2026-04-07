@@ -98,7 +98,7 @@ void EnJs_TryStartFight(Actor* this)
         if (gOotExtraFlags.triforceWin)
             canFight = 1;
     }
-    else if (!Config_Flag(CFG_MM_MAJORA_CHILD_CUSTOM) || Config_SpecialCond(SPECIAL_MAJORA))
+    else if (!Config_Flag(CFG_MM_MAJORA_CHILD_CUSTOM) || SpecialConds_Eval(SPECIAL_MAJORA))
     {
         canFight = 1;
     }

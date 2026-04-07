@@ -2,7 +2,7 @@
   dungeon: Moon
   events:
     MAGIC: "true"
-    MM_MOON_OPEN: "(can_play_order || setting(openMoon)) && special(MOON)"
+    MM_MOON_OPEN: "(can_play_order || setting(openMoon)) && (setting(moon, open) || (setting(moon, vanilla) && has(REMAINS_ODOLWA) && has(REMAINS_GOHT) && has(REMAINS_GYORG) && has(REMAINS_TWINMOLD)) || (setting(moon, custom) && special(MOON)))"
   exits:
     "Moon": "event(MM_MOON_OPEN)"
     "Clock Tower Platform": "false"
