@@ -27,7 +27,9 @@
 #define SPF_COIN_BLUE               (1 << 17)
 #define SPF_COIN_YELLOW             (1 << 18)
 
+typedef struct PlayState PlayState;
 int SpecialConds_Eval(int special);
+void SpecialConds_HijackTextRequirements(PlayState* play, int special);
 
 #endif
 

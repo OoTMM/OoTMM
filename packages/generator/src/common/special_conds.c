@@ -1,6 +1,193 @@
 #include <combo.h>
 #include <combo/special_conds.h>
 
+#define SPFT_STONES                  (1 <<  0)
+#define SPFT_MEDALLIONS              (1 <<  1)
+#define SPFT_REMAINS                 (1 <<  2)
+#define SPFT_DUNGEON_REWARDS         (1 <<  3)
+#define SPFT_SKULLS_GOLD             (1 <<  4)
+#define SPFT_SKULLS_SWAMP            (1 <<  5)
+#define SPFT_SKULLS_OCEAN            (1 <<  6)
+#define SPFT_SKULLS_HOUSE            (1 <<  7)
+#define SPFT_SKULLS_ALL              (1 <<  8)
+#define SPFT_FAIRIES_WF              (1 <<  9)
+#define SPFT_FAIRIES_SH              (1 << 10)
+#define SPFT_FAIRIES_GB              (1 << 11)
+#define SPFT_FAIRIES_ST              (1 << 12)
+#define SPFT_FAIRIES_DUNGEON         (1 << 13)
+#define SPFT_FAIRY_TOWN              (1 << 14)
+#define SPFT_FAIRIES_ALL             (1 << 15)
+#define SPFT_MASKS_OOT               (1 << 16)
+#define SPFT_MASKS_REGULAR           (1 << 17)
+#define SPFT_MASKS_TRANSFORM         (1 << 18)
+#define SPFT_MASKS_MM                (1 << 19)
+#define SPFT_MASKS_ALL               (1 << 20)
+#define SPFT_TRIFORCE                (1 << 21)
+#define SPFT_COIN_RED                (1 << 22)
+#define SPFT_COIN_GREEN              (1 << 23)
+#define SPFT_COIN_BLUE               (1 << 24)
+#define SPFT_COIN_YELLOW             (1 << 25)
+#define SPFT_COINS_ALL               (1 << 26)
+
+static const char* kSpecialCondNames[] = {
+    "open the" TEXT_COLOR_RED "Bridge",
+    "reach the " TEXT_COLOR_RED "Moon",
+    NULL,
+    NULL,
+    NULL,
+};
+
+static const char* kSpecialCondFieldsStr[] = {
+    TEXT_COLOR_BLUE "Stones",
+    TEXT_COLOR_BLUE "Medallions",
+    TEXT_COLOR_BLUE "Remains",
+    TEXT_COLOR_BLUE "Dungeon Rewards",
+    TEXT_COLOR_YELLOW "Gold Tokens",
+    TEXT_COLOR_YELLOW "Swamp Tokens",
+    TEXT_COLOR_YELLOW "Ocean Tokens",
+    TEXT_COLOR_YELLOW "Spider House Tokens",
+    TEXT_COLOR_YELLOW "Skulltula Tokens",
+    TEXT_COLOR_PINK "Woodfall Fairies",
+    TEXT_COLOR_PINK "Snowhead Fairies",
+    TEXT_COLOR_PINK "Great Bay Fairies",
+    TEXT_COLOR_PINK "Stone Tower Fairies",
+    TEXT_COLOR_PINK "Dungeon Fairies",
+    TEXT_COLOR_PINK "Town Fairy",
+    TEXT_COLOR_PINK "Stray Fairies",
+    TEXT_COLOR_RED "Masks (OoT)",
+    TEXT_COLOR_RED "Regular Masks",
+    TEXT_COLOR_RED "Transformation Masks",
+    TEXT_COLOR_RED "Masks (MM)",
+    TEXT_COLOR_RED "Masks",
+    TEXT_COLOR_YELLOW "Triforce Pieces",
+    TEXT_COLOR_GREEN "Red Coins",
+    TEXT_COLOR_GREEN "Green Coins",
+    TEXT_COLOR_GREEN "Blue Coins",
+    TEXT_COLOR_GREEN "Yellow Coins",
+    TEXT_COLOR_GREEN "Coins"
+};
+
+static void SpecialConds_TextBitsRule(u32* bits, u32 mask, u32 maskRaw, u32 flag)
+{
+    if (mask && ((*bits & mask) == mask))
+    {
+        *bits &= ~maskRaw;
+        *bits |= flag;
+    }
+}
+
+static void SpecialConds_TextBitsRuleOotMm(u32* bits, u32 mmFlags, u32 ootFlags, u32 flag)
+{
+    u32 mask;
+    u32 maskRaw;
+
+    maskRaw = ootFlags | mmFlags;
+    mask = maskRaw;
+
+    if (Config_Flag(CFG_ONLY_OOT))
+        mask &= ~mmFlags;
+    if (Config_Flag(CFG_ONLY_MM))
+        mask &= ~ootFlags;
+
+    SpecialConds_TextBitsRule(bits, mask, maskRaw, flag);
+}
+
+static void SpecialConds_GetTextBits(int special, u32* out)
+{
+    u32 condBits;
+    u32 textBits;
+    u32 coinsMask;
+
+    condBits = gComboConfig.special[special].flags;
+    textBits = 0;
+
+    /* Normal cond bits */
+    if (condBits & SPF_STONES) textBits |= SPFT_STONES;
+    if (condBits & SPF_MEDALLIONS) textBits |= SPFT_MEDALLIONS;
+    if (condBits & SPF_REMAINS) textBits |= SPFT_REMAINS;
+    if (condBits & SPF_SKULLS_GOLD) textBits |= SPFT_SKULLS_GOLD;
+    if (condBits & SPF_SKULLS_SWAMP) textBits |= SPFT_SKULLS_SWAMP;
+    if (condBits & SPF_SKULLS_OCEAN) textBits |= SPFT_SKULLS_OCEAN;
+    if (condBits & SPF_FAIRIES_WF) textBits |= SPFT_FAIRIES_WF;
+    if (condBits & SPF_FAIRIES_SH) textBits |= SPFT_FAIRIES_SH;
+    if (condBits & SPF_FAIRIES_GB) textBits |= SPFT_FAIRIES_GB;
+    if (condBits & SPF_FAIRIES_ST) textBits |= SPFT_FAIRIES_ST;
+    if (condBits & SPF_FAIRY_TOWN) textBits |= SPFT_FAIRY_TOWN;
+    if (condBits & SPF_MASKS_REGULAR) textBits |= SPFT_MASKS_REGULAR;
+    if (condBits & SPF_MASKS_TRANSFORM) textBits |= SPFT_MASKS_TRANSFORM;
+    if (condBits & SPF_MASKS_OOT) textBits |= SPFT_MASKS_OOT;
+    if (condBits & SPF_TRIFORCE) textBits |= SPFT_TRIFORCE;
+    if (condBits & SPF_COIN_RED) textBits |= SPFT_COIN_RED;
+    if (condBits & SPF_COIN_GREEN) textBits |= SPFT_COIN_GREEN;
+    if (condBits & SPF_COIN_BLUE) textBits |= SPFT_COIN_BLUE;
+    if (condBits & SPF_COIN_YELLOW) textBits |= SPFT_COIN_YELLOW;
+
+    SpecialConds_TextBitsRuleOotMm(&textBits, SPFT_STONES | SPFT_MEDALLIONS, SPFT_REMAINS, SPFT_DUNGEON_REWARDS);
+    SpecialConds_TextBitsRuleOotMm(&textBits, SPFT_SKULLS_GOLD, SPFT_SKULLS_SWAMP | SPFT_SKULLS_OCEAN, SPFT_SKULLS_ALL);
+    SpecialConds_TextBitsRuleOotMm(&textBits, 0, SPFT_SKULLS_SWAMP | SPFT_SKULLS_OCEAN, SPFT_SKULLS_HOUSE);
+    SpecialConds_TextBitsRuleOotMm(&textBits, 0, SPFT_FAIRIES_WF | SPFT_FAIRIES_SH | SPFT_FAIRIES_GB | SPFT_FAIRIES_ST | SPFT_FAIRY_TOWN, SPFT_FAIRIES_ALL);
+    SpecialConds_TextBitsRuleOotMm(&textBits, 0, SPFT_FAIRIES_WF | SPFT_FAIRIES_SH | SPFT_FAIRIES_GB | SPFT_FAIRIES_ST, SPFT_FAIRIES_DUNGEON);
+    SpecialConds_TextBitsRuleOotMm(&textBits, SPFT_MASKS_OOT, SPFT_MASKS_TRANSFORM | SPFT_MASKS_REGULAR, SPFT_MASKS_ALL);
+    SpecialConds_TextBitsRuleOotMm(&textBits, 0, SPFT_MASKS_TRANSFORM | SPFT_MASKS_REGULAR, SPFT_MASKS_MM);
+
+    coinsMask = 0;
+    if (gComboConfig.maxCoins[0])
+        coinsMask |= SPFT_COIN_RED;
+    if (gComboConfig.maxCoins[1])
+        coinsMask |= SPFT_COIN_GREEN;
+    if (gComboConfig.maxCoins[2])
+        coinsMask |= SPFT_COIN_BLUE;
+    if (gComboConfig.maxCoins[3])
+        coinsMask |= SPFT_COIN_YELLOW;
+    SpecialConds_TextBitsRule(&textBits, coinsMask, SPFT_COIN_RED | SPFT_COIN_GREEN | SPFT_COIN_BLUE | SPFT_COIN_YELLOW, SPFT_COINS_ALL);
+
+    *out = textBits;
+}
+
+void SpecialConds_HijackTextRequirements(PlayState* play, int special)
+{
+    u32 textBits;
+    u32 textBitsCount;
+    u32 count;
+    char* b;
+    char* start;
+
+    SpecialConds_GetTextBits(special, &textBits);
+    textBitsCount = popcount(textBits);
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.font.msgBuf;
+#else
+    b = play->msgCtx.font.textBuffer.schar;
+#endif
+
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "To ");
+    comboTextAppendStr(&b, kSpecialCondNames[special]);
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, ", you must obtain " TEXT_COLOR_RED);
+    comboTextAppendNum(&b, gComboConfig.special[special].count);
+    comboTextAppendClearColor(&b);
+    comboTextAppendStr(&b, " of the following: ");
+
+    count = 0;
+    for (u32 i = 0; i < 32; ++i)
+    {
+        if (!(textBits & (1 << i)))
+            continue;
+        comboTextAppendStr(&b, kSpecialCondFieldsStr[i]);
+        comboTextAppendClearColor(&b);
+        if (++count < textBitsCount)        {
+            if (count == textBitsCount - 1)
+                comboTextAppendStr(&b, " and ");
+            else
+                comboTextAppendStr(&b, ", ");
+        }
+    }
+    comboTextAppendStr(&b, "." TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
 
 int SpecialConds_Eval(int special)
 {
