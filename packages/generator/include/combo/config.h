@@ -10,12 +10,6 @@
 #define BOMBCHU_BEHAVIOR_BAG_FIRST      2
 #define BOMBCHU_BEHAVIOR_BAG_SEPARATE   3
 
-#define SPECIAL_BRIDGE      0
-#define SPECIAL_MOON        1
-#define SPECIAL_LACS        2
-#define SPECIAL_GANON_BK    3
-#define SPECIAL_MAJORA      4
-
 typedef struct
 {
     u8 region;
@@ -71,7 +65,6 @@ extern ComboConfig gComboConfig;
 
 void Config_Init(void);
 int Config_Flag(int flag);
-int Config_SpecialCond(int special);
 int Config_IsGoal(void);
 int Config_IsMq(int dungeonId);
 

@@ -10,6 +10,7 @@
 # define FISH_WEIGHT_TO_LENGTH(weight) (sqrtf((weight - 0.5f) / 0.0036f) + 1.0f) /* Add 1.0 to prevent errors due to truncating */
 
 # include <ultra64.h>
+# include <combo/special_conds.h>
 # include <combo/seqcmd.h>
 # include <combo/config.h>
 # include <combo/audio.h>

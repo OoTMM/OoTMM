@@ -1,8 +1,11 @@
-#include <combo.h>
-#include <combo/util.h>
-#include <combo/config.h>
-#include <combo/defs.h>
-#include <combo/dma.h>
+#ifndef INCLUDED_COMBO_SPECIAL_CONDS_H
+#define INCLUDED_COMBO_SPECIAL_CONDS_H
+
+#define SPECIAL_BRIDGE      0
+#define SPECIAL_MOON        1
+#define SPECIAL_LACS        2
+#define SPECIAL_GANON_BK    3
+#define SPECIAL_MAJORA      4
 
 #define SPF_STONES                  (1 <<  0)
 #define SPF_MEDALLIONS              (1 <<  1)
@@ -24,28 +27,7 @@
 #define SPF_COIN_BLUE               (1 << 17)
 #define SPF_COIN_YELLOW             (1 << 18)
 
-ALIGNED(8) ComboConfig gComboConfig;
+int SpecialConds_Eval(int special);
 
-void Config_Init(void)
-{
-    comboDmaLoadFile(&gComboConfig, COMBO_VROM_DATA);
-}
+#endif
 
-int Config_Flag(int flag)
-{
-    return BITMAP8_GET(gComboConfig.config, flag);
-}
-
-int Config_IsGoal(void)
-{
-    if (Config_Flag(CFG_GOAL_GANON) && !gOotExtraFlags.ganon)
-        return 0;
-    if (Config_Flag(CFG_GOAL_MAJORA) && !gMmExtraFlags2.majora)
-        return 0;
-    return 1;
-}
-
-int Config_IsMq(int dungeonId)
-{
-    return gComboConfig.mq & (1 << dungeonId);
-}

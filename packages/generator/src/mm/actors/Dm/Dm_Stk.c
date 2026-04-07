@@ -92,7 +92,7 @@ static void hintOathToOrderNotes(PlayState* play)
 
 static void DmStk_Start(Actor* this, PlayState* play)
 {
-    if (Config_SpecialCond(SPECIAL_MOON) && !Config_Flag(CFG_MM_OPEN_MOON))
+    if (SpecialConds_Eval(SPECIAL_MOON) && !Config_Flag(CFG_MM_OPEN_MOON))
     {
         PlayerDisplayTextBox(play, 0x2013, this);
         if (Config_Flag(CFG_SONG_NOTES))
