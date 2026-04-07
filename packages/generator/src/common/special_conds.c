@@ -30,7 +30,7 @@
 #define SPFT_COINS_ALL               (1 << 26)
 
 static const char* kSpecialCondNames[] = {
-    "open the" TEXT_COLOR_RED "Bridge",
+    "open the " TEXT_COLOR_RED "Bridge",
     "reach the " TEXT_COLOR_RED "Moon",
     NULL,
     NULL,
@@ -166,10 +166,10 @@ void SpecialConds_HijackTextRequirements(PlayState* play, int special)
     comboTextAppendStr(&b, "To ");
     comboTextAppendStr(&b, kSpecialCondNames[special]);
     comboTextAppendClearColor(&b);
-    comboTextAppendStr(&b, ", you must obtain " TEXT_COLOR_RED);
+    comboTextAppendStr(&b, ", you must obtain at least " TEXT_COLOR_RED);
     comboTextAppendNum(&b, gComboConfig.special[special].count);
     comboTextAppendClearColor(&b);
-    comboTextAppendStr(&b, " of the following: ");
+    comboTextAppendStr(&b, " of ");
 
     count = 0;
     for (u32 i = 0; i < 32; ++i)
