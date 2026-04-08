@@ -10,6 +10,10 @@
       ],
       "cache": true
     },
+    "build:desktop": {
+      "cache": true,
+      "dependsOn": ["^build"]
+    },
     "test": {},
     "typecheck": {
       "cache": true

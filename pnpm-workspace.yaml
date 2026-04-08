@@ -2,22 +2,25 @@ packages:
   - packages/*
 
 catalog:
-  '@types/lodash-es': ^4.17.12
-  lodash-es: ^4.18.1
-  yaml: ^2.8.3
   '@preact/preset-vite': ^2.10.5
   '@tailwindcss/vite': ^4.2.2
-  tailwindcss: ^4.2.2
+  '@types/lodash-es': ^4.17.12
+  lodash-es: ^4.18.1
   preact: ^10.29.1
   react-icons: ^5.6.0
+  tailwindcss: ^4.2.2
   type-fest: ^5.5.0
+  yaml: ^2.8.3
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
+  - bufferutil
+  - es5-ext
   - esbuild
   - microtime
   - netlify-cli
   - nx
   - sharp
   - unix-dgram
+  - utf-8-validate
   - yaz0

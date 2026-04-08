@@ -12,7 +12,7 @@ async function buildCurrentVersion(dstName: string) {
   let globalConfig = {};
   for (const component of WEB_COMPONENTS) {
     let config: {} | null = null;
-    const src = path.resolve(__dirname, 'node_modules/@ootmm/', component, 'dist');
+    const src = path.resolve(__dirname, 'node_modules/@ootmm/', component, 'dist', 'web');
     const files = await fs.readdir(src, { recursive: true });
     const dirs = files.filter(file => statSync(path.resolve(src, file)).isDirectory());
     const filesNoDirs = files.filter(file => !statSync(path.resolve(src, file)).isDirectory());
