@@ -1,11 +1,12 @@
-import { cloneDeep, isEqual } from 'lodash-es';
 import type { PartialDeep } from 'type-fest';
-
 import type { Settings, SettingsBase } from './type';
+import type { SettingsPatch } from './patch';
+
+import { cloneDeep, isEqual } from 'lodash-es';
 import { SETTINGS } from './data';
 import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
-import { SettingsPatch, patchArray } from './patch';
+import { patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
