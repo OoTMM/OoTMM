@@ -1,7 +1,7 @@
 import { SETTINGS } from '@ootmm/generator';
 
 import { InputField, SelectField, CheckboxField, Select } from '@/app/components/ui';
-import { xor } from 'lodash';
+import { xor } from 'lodash-es';
 import { useStore } from '@/app/store';
 
 const SET_OPTIONS = [

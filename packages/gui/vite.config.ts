@@ -24,7 +24,6 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      lodash: 'lodash-es',
       '@': path.resolve(__dirname, 'src'),
     }
   },

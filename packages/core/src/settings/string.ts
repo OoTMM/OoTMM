@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { deflateRaw, inflate, inflateRaw } from 'pako';
 import { PartialDeep } from 'type-fest';
 import { uint8ArrayToBase64, base64ToUint8Array } from 'uint8array-extras';

@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { PRESETS, Settings } from '@ootmm/generator';
 
 import { localStoragePrefixedGet, localStoragePrefixedSet } from '../util';

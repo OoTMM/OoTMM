@@ -1,4 +1,4 @@
-import { cloneDeep, mapValues } from 'lodash';
+import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL, Entrance } from '@ootmm/data';
 import { Game, GAMES, SETTINGS, Settings, Random } from '@ootmm/core';
 

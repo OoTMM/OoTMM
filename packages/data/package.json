@@ -10,7 +10,8 @@
   "author": "Nax",
   "license": "MIT",
   "devDependencies": {
-    "csv": "^6.4.1"
+    "csv": "^6.5.1",
+    "yaml": "catalog:"
   },
   "nx": {
     "targets": {

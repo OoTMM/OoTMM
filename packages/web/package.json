@@ -10,18 +10,17 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
-    "preact": "^10.28.4",
+    "preact": "catalog:",
     "preact-iso": "^2.11.1",
-    "react-icons": "^5.5.0",
+    "react-icons": "catalog:",
     "reset-css": "^5.0.2",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.1.1",
     "@ootmm/web-components": "*",
-    "@preact/preset-vite": "^2.10.3",
-    "@tailwindcss/vite": "^4.2.1",
-    "typescript": "^5.9.3",
+    "@preact/preset-vite": "catalog:",
+    "@tailwindcss/vite": "catalog:",
     "vite-multiple-assets": "^2.2.6"
   },
   "nx": {

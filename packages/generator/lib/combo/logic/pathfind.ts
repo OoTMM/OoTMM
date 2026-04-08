@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import { Settings } from '@ootmm/core';
 
 import { AreaData, Expr, ExprDependencies, ExprResult, ExprResultWithDeps, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';

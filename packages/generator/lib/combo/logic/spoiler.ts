@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 import { SETTINGS, Settings, TrickKey, TRICKS, exportSettings } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
 
