@@ -1,6 +1,7 @@
-import { Settings, Random, randomInt } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { ResolvedWorldFlags, World } from './world';
 
-import { ResolvedWorldFlags, World } from './world';
+import { Random, randomInt } from '@ootmm/core';
 
 const OOT_SHOP_KOKIRI = [ 10, 20, 60, 30, 15, 30, 10, 40 ];
 const OOT_SHOP_BOMBCHU = [ 180, 180, 180, 180, 100, 100, 100, 100 ];

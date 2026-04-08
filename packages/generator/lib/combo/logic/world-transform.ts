@@ -1,15 +1,20 @@
-import { POOL } from '@ootmm/data';
-import { Settings, sample, Random, randomInt } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { ItemProperties } from './item-properties';
+import type { ItemID } from '../items/defs';
+import type { Item, PlayerItem, PlayerItems } from '../items';
+import type { World, WorldCheckType } from './world';
+import type { ItemSharedDef } from './shared';
+import type { Location } from './locations';
 
-import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
-import { ItemID } from '../items/defs';
+import { POOL } from '@ootmm/data';
+import { sample, Random, randomInt } from '@ootmm/core';
+
+import { ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
-import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';
-import { ItemSharedDef, SharedItemGroups } from './shared';
-import { World, WorldCheckType } from './world';
-import { ItemProperties } from './item-properties';
+import { isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';
+import { SharedItemGroups } from './shared';
 import { CLOCKS } from '../items/groups';
 import { mustStartWithMasterSword } from './master-sword';
 import { optimizeWorldStartingAndPool } from './world-optimizer';

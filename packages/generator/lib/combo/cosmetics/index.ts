@@ -1,12 +1,14 @@
-import fs from 'fs';
-import { Game, GAMES, Random, randString, sample } from '@ootmm/core';
+import type { Game } from '@ootmm/core';
+import type { Options } from '../options';
+import type { ColorArg } from './color';
+import type { BufferPath } from './type';
 
+import fs from 'fs';
+import { GAMES, Random, randString, sample } from '@ootmm/core';
 import { recolorImage } from '../image';
-import { Options } from '../options';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
-import { COLORS, ColorArg } from './color';
-import { BufferPath } from './type';
+import { COLORS } from './color';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';

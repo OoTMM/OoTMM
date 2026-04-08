@@ -1,4 +1,5 @@
-import { Item, Items } from './defs';
+import type { Item } from './defs';
+import { Items } from './defs';
 
 export { Items } from './defs';
 export { makePlayerItem } from './util';

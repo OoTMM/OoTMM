@@ -1,5 +1,7 @@
+import type { Item } from './defs';
+
 import * as ItemGroups from './groups';
-import { Item, Items } from './defs';
+import { Items } from './defs';
 
 export const isCompass = (item: Item) => ItemGroups.COMPASSES.has(item);
 export const isMap = (item: Item) => ItemGroups.MAPS.has(item);

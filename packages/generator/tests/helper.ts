@@ -1,6 +1,8 @@
+import type { PartialDeep } from 'type-fest';
+import type { Settings } from '@ootmm/core';
+
 import { merge } from 'lodash-es';
-import { PartialDeep } from 'type-fest';
-import { DEFAULT_SETTINGS, Settings } from '@ootmm/core';
+import { DEFAULT_SETTINGS } from '@ootmm/core';
 
 import { Monitor } from '../lib/combo/monitor';
 import { solvedWorldState } from '../lib/combo/logic';

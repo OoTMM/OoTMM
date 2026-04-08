@@ -1,15 +1,19 @@
+import type { Settings } from '@ootmm/core';
+import type { Options, OptionsInput } from './options';
+import type { MonitorCallbacks } from './monitor';
+
+import { Random } from '@ootmm/core';
 import { applyRandomSettings } from './random-settings';
 import { codegen } from './codegen';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
 import { logic } from './logic';
-import { Monitor, MonitorCallbacks } from './monitor';
-import { options, Options, OptionsInput } from './options';
+import { Monitor } from './monitor';
+import { options } from './options';
 import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
-import { Random, Settings } from '@ootmm/core';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = (env !== 'production');

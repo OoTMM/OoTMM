@@ -1,6 +1,7 @@
+import type { Game } from '@ootmm/core';
+
 import JSZip from 'jszip';
 import { concatUint8Arrays } from 'uint8array-extras';
-import { Game } from '@ootmm/core';
 
 const VERSION = '1.2';
 

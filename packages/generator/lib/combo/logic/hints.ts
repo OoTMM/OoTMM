@@ -1,15 +1,21 @@
-import { Game, Settings, Random, sample, shuffle, randomInt } from '@ootmm/core';
+import type { Game, Settings } from '@ootmm/core';
+import type { World } from './world';
+import type { Analysis } from './analysis';
+import type { AnalysisPath } from './analysis-path';
+import type { ItemPlacement } from './solve';
+import type { PlayerItems, PlayerItem } from '../items';
+import type { Location } from './locations';
+import type { Region } from './regions';
+import type { CountMap } from '../util';
 
-import { DUNGEONS_REGIONS, World } from './world';
-import { Analysis } from './analysis';
-import { AnalysisPath } from './analysis-path';
+import { Random, sample, shuffle, randomInt } from '@ootmm/core';
+import { DUNGEONS_REGIONS } from './world';
 import { Monitor } from '../monitor';
 import { Pathfinder } from './pathfind';
-import { ItemPlacement } from './solve';
-import { Location, locationData, makeLocation } from './locations';
-import { Region, makeRegion } from './regions';
-import { CountMap, countMapArray } from '../util';
-import { ItemGroups, ItemHelpers, Items, PlayerItems, PlayerItem, itemByID, makePlayerItem } from '../items';
+import { locationData, makeLocation } from './locations';
+import { makeRegion } from './regions';
+import { countMapArray } from '../util';
+import { ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
 import { isLocationFullyShuffled } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [

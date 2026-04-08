@@ -1,9 +1,11 @@
-import { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/core';
+import type { FileAddress, GameAddresses } from '../addresses';
+import type { PatchGroup } from './group';
 
 import { CONFIG } from '../config';
 import { Patchfile } from './patchfile';
-import { Addresses, FileAddress, GameAddresses } from '../addresses';
-import { PATCH_GROUP_VALUES, PatchGroup } from './group';
+import { Addresses } from '../addresses';
+import { PATCH_GROUP_VALUES } from './group';
 import { bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 
 export class Patcher {

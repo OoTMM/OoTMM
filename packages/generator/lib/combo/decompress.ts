@@ -1,6 +1,8 @@
+import type { Game } from '@ootmm/core';
+
 import * as Yaz0 from 'yaz0';
 import CRC32 from 'crc-32';
-import { Game, GAMES } from '@ootmm/core';
+import { GAMES } from '@ootmm/core';
 
 import { DmaData } from './dma';
 import { CONFIG } from './config';

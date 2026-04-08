@@ -1,7 +1,8 @@
+import type { Game } from '@ootmm/core';
+
 import { XMLParser } from 'fast-xml-parser';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Game } from '@ootmm/core';
 
 import { CodeGen } from '../combo/util/codegen';
 

@@ -1,5 +1,5 @@
+import type { Age } from './constants';
 import { Expr, exprAnd, ExprAnd, ExprOr, exprOr } from './expr';
-import { Age } from './constants';
 
 export function exprPartialEvalAge(expr: Expr, age: Age): Expr {
   const cached = expr._cacheAge[age];

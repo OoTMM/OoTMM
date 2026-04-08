@@ -1,12 +1,13 @@
+import type { Game, Settings } from '@ootmm/core';
+import type { LogicResult } from '../logic';
+import type { HintGossip } from '../logic/hints';
+
 import { concatUint8Arrays } from 'uint8array-extras';
-import { Game, Settings } from '@ootmm/core';
 import { HINTS, REGIONS } from '@ootmm/data';
 
-import { LogicResult } from '../logic';
 import { BOSS_INDEX_BY_DUNGEON } from '../logic/world';
 import { padBuffer16 } from '../util';
 import { DATA_HINTS_POOL } from '../data';
-import { HintGossip } from '../logic/hints';
 import { regionData } from '../logic/regions';
 import { DUNGEONS_BY_KEY } from '../logic/dungeons';
 import { END_BOSS_METADATA } from '../logic/boss';

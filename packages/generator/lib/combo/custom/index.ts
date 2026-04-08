@@ -1,12 +1,13 @@
+import type { Game } from '@ootmm/core';
+import type { DecompressedRoms } from '../decompress';
+
 import path from 'path';
 import fs from 'fs';
 import { FILES } from '@ootmm/data';
-import { Game } from '@ootmm/core';
 
 import { DmaData } from '../dma';
 import { arrayToIndexMap, toU32Buffer } from '../util';
 import { CodeGen } from '../util/codegen';
-import { DecompressedRoms } from '../decompress';
 import { Monitor } from '../monitor';
 import { KeepFile } from './keep';
 import { png } from '../util/png';

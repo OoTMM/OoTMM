@@ -1,10 +1,13 @@
-import { Settings, Random, randomFloat, sample, shuffle } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { World } from './world';
+import type { PlayerItem, PlayerItems } from '../items';
+import type { ItemPlacement } from './solve';
+import type { Location } from './locations';
 
-import { ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
+import { Random, randomFloat, sample, shuffle } from '@ootmm/core';
+import { ItemGroups, ItemHelpers, Items, makePlayerItem } from '../items';
 import { Pathfinder } from './pathfind';
-import { Location, isLocationFullyShuffled, locationData, makeLocation } from './locations';
-import { World } from './world';
-import { ItemPlacement } from './solve';
+import { isLocationFullyShuffled, locationData, makeLocation } from './locations';
 import { Monitor } from '../monitor';
 import { countMapArray } from '../util';
 import { TRAP_AMOUNTS } from './traps';

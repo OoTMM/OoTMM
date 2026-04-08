@@ -1,5 +1,7 @@
-import { Game, Settings } from '@ootmm/core';
-import { Item, ItemHelpers } from '../items';
+import type { Game, Settings } from '@ootmm/core';
+import type { Item } from '../items';
+
+import { ItemHelpers } from '../items';
 import { gameId } from '../util';
 import { ITEMS_SUBSTITUTIONS, SHARED_ITEMS } from './checks';
 import { SharedItemGroups } from '../logic/shared';

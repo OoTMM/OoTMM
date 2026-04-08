@@ -1,14 +1,20 @@
-import { Settings, Random, sample, shuffle } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { ItemProperties } from './item-properties';
+import type { PathfinderState } from './pathfind';
+import type { World } from './world';
+import type { Location } from './locations';
+import type { PlayerItem, PlayerItems, Item } from '../items';
+
+import { Random, sample, shuffle } from '@ootmm/core';
 
 import { countMapAdd, countMapArray, countMapCombine, countMapRemove } from '../util';
-import { Pathfinder, PathfinderState } from './pathfind';
-import { World, cloneWorld } from './world';
+import { Pathfinder } from './pathfind';
+import { cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
 import { Monitor } from '../monitor';
-import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
-import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
+import { isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
+import { ItemGroups, ItemHelpers, Items, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
-import { ItemProperties } from './item-properties';
 import { isDungeonReward } from '../items/helpers';
 import { mustStartWithMasterSword } from './master-sword';
 

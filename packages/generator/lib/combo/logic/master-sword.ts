@@ -1,4 +1,4 @@
-import { Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 
 export function mustStartWithMasterSword(settings: Settings) {
   /* Child start - doesn't matter */

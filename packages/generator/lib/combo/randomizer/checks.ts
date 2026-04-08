@@ -1,9 +1,10 @@
+import type { Game, Settings } from '@ootmm/core';
+import type { World, WorldCheck } from '../logic/world';
+import type { LogicResult } from '../logic';
+
 import { concatUint8Arrays } from 'uint8array-extras';
-import { Game, Settings } from '@ootmm/core';
 import { NPC, SCENES } from '@ootmm/data';
 
-import { World, WorldCheck } from '../logic/world';
-import { LogicResult } from '../logic';
 import { makeLocation } from '../logic/locations';
 import { gi, playerId } from './util';
 import { bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from '../util/buffer';

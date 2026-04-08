@@ -1,16 +1,17 @@
-import { GAMES, Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { GameAddresses } from '../addresses';
+import type { DecompressedRoms } from '../decompress';
+import type { LogicResult } from '../logic';
+import type { PatchGroup } from './group';
+import type { World } from '../logic/world';
 
+import { GAMES } from '@ootmm/core';
 import { CONFIG } from '../config';
-import { GameAddresses } from '../addresses';
-import { DecompressedRoms } from '../decompress';
-import { LogicResult } from '../logic';
 import { Monitor } from '../monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from '../randomizer';
-import { PatchGroup } from './group';
 import { isEntranceShuffle } from '../logic/helpers';
-import { World } from '../logic/world';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { FileResolver } from '../file-resolver';
 
