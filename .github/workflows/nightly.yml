@@ -1,0 +1,60 @@
+name: Nightly Build
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    container: ghcr.io/ootmm/toolchain:1.4
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Mark the directory as safe
+        run: git config --global --add safe.directory $PWD
+
+      - name: Check for changes since last nightly
+        id: check
+        run: |
+          last=$(git rev-list -n1 refs/tags/nightly 2>/dev/null || echo "")
+          current=$(git rev-parse HEAD)
+          if [[ "$last" == "$current" ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup
+        if: ${{ steps.check.outputs.skip == 'false' }}
+        run: ./scripts/setup.sh
+
+      - name: Set version
+        if: ${{ steps.check.outputs.skip == 'false' }}
+        run: |
+          short_sha=$(echo ${{ github.sha }} | cut -c1-7)
+          echo "VERSION=dev" >> $GITHUB_ENV
+          echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
+          echo "ENV_KEYS=dev" >> $GITHUB_ENV
+
+      - name: Build GUI
+        if: ${{ steps.check.outputs.skip == 'false' }}
+        run: pnpm nx run @ootmm/gui:build:desktop --prod
+
+      - name: Build Desktop
+        if: ${{ steps.check.outputs.skip == 'false' }}
+        run: pnpm nx run @ootmm/desktop:build --prod
+
+      - name: Upload Nightly Release
+        if: ${{ steps.check.outputs.skip == 'false' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: Nightly - ${{ env.VERSION_SUFFIX }}
+          prerelease: true
+          make_latest: false
+          files: packages/desktop/dist/ootmm-*.zip

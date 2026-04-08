@@ -79,18 +79,8 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
       - name: Build Desktop
-        if: ${{ github.event_name == 'push' && (env.DEPLOY_TYPE == 'stable' || env.DEPLOY_TYPE == 'dev') }}
+        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE == 'stable' }}
         run: pnpm nx run @ootmm/desktop:build --prod
-
-      - name: Upload Desktop Artifacts (dev)
-        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE == 'dev' }}
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: dev
-          name: Development Build - ${{ env.VERSION_SUFFIX }}
-          prerelease: true
-          make_latest: true
-          files: packages/desktop/dist/ootmm-*.zip
 
       - name: Upload Desktop to Release
         if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE == 'stable' }}
