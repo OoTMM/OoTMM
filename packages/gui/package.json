@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && tsx ./post-build.ts",
+    "build:desktop": "TARGET=desktop vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
@@ -62,7 +63,16 @@
           "env"
         ],
         "outputs": [
-          "{workspaceRoot}/dist"
+          "{workspaceRoot}/dist/web"
+        ]
+      },
+      "build:desktop": {
+        "inputs": [
+          "default",
+          "env"
+        ],
+        "outputs": [
+          "{workspaceRoot}/dist/desktop"
         ]
       },
       "dev": {

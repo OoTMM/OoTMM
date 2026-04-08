@@ -1,0 +1,7 @@
+/node_modules
+/.tmp
+/dist
+/bin/
+/resources/
+/neutralino.js
+/neutralino.d.ts

@@ -4,6 +4,7 @@ import preact from '@preact/preset-vite';
 import tailwindcss from '@tailwindcss/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
+const TARGET = process.env.TARGET || 'web';
 const VERSION = process.env.VERSION || 'XXX';
 const VERSION_SUFFIX = process.env.VERSION_SUFFIX || '';
 const VERSION_FULL = [VERSION, VERSION_SUFFIX].filter(Boolean).join('-');
@@ -12,12 +13,17 @@ const STATIC_URL = process.env.STATIC_URL || '/';
 
 export default defineConfig({
   base: STATIC_URL,
+  build: {
+    outDir: `dist/${TARGET}`,
+    emptyOutDir: true,
+  },
   plugins: [
     preact(),
     tailwindcss(),
     //visualizer({ open: true, filename: 'bundle-visualization.html' })
   ],
   define: {
+    'process.env.TARGET': JSON.stringify(TARGET),
     'process.env.VERSION': JSON.stringify(VERSION_FULL),
     'process.env.__IS_BROWSER__': JSON.stringify(true),
     'process.env.DEBUG_LOG_LARGE_FILES': JSON.stringify(false),
