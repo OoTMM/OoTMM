@@ -1,4 +1,5 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
+
 import { ImCheckmark } from 'react-icons/im';
 import clsx from 'clsx';
 

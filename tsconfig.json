@@ -10,6 +10,7 @@
     "allowImportingTsExtensions": true,
     "allowArbitraryExtensions": true,
     "verbatimModuleSyntax": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "packages/tools/build/**/*.ts"

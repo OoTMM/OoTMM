@@ -1,7 +1,7 @@
-import { OptionRandomSettings } from '@ootmm/generator';
-import { StateCreator } from 'zustand';
-
+import type { OptionRandomSettings } from '@ootmm/generator';
+import type { StateCreator } from 'zustand';
 import type { Store } from './';
+
 import * as API from '../api';
 
 export interface RandomSettingsSlice {

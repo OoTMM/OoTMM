@@ -1,7 +1,8 @@
+import type { TabViewRoute } from '../nav';
 import { LuPackage, LuUsers, LuPuzzle, LuClock, LuTrendingUp } from 'react-icons/lu';
 
 import { useStore } from '@/app/store';
-import { TabView, TabViewRoute } from '../nav';
+import { TabView } from '../nav';
 import { StartingItems } from '../StartingItems';
 import { SettingsEditor } from '../settings';
 

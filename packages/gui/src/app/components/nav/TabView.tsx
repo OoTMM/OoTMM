@@ -1,7 +1,8 @@
+import type { ComponentType } from 'preact';
+import type { IconType } from 'react-icons';
+
 import clsx from 'clsx';
 import { useRouter } from '@/app/hooks/useRouter';
-import { ComponentType } from 'preact';
-import { IconType } from 'react-icons';
 
 export type TabViewRoute = {
   name: string;

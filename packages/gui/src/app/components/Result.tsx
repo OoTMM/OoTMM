@@ -1,5 +1,6 @@
-import { ResultFile } from '../api';
-import { Button, Card } from './ui';
+import type { ResultFile } from '../api';
+
+import { Button } from './ui';
 
 const download = (file: ResultFile) => {
   const a = document.createElement('a');

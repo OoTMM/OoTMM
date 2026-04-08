@@ -1,5 +1,6 @@
-import { ReactNode, useId } from 'react';
+import type { ReactNode } from 'react';
 
+import { useId } from 'react';
 import { Tooltip } from './Tooltip';
 import { Checkbox } from './Checkbox';
 import { Label } from './Label';

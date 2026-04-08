@@ -1,4 +1,5 @@
-import { VNode } from 'preact';
+import type { VNode } from 'preact';
+
 import { useState } from 'preact/hooks';
 import { Button, Card, CheckboxField } from './ui';
 

@@ -1,5 +1,6 @@
-import { ReactNode, useId, ComponentProps } from 'react';
+import type { ReactNode, ComponentProps } from 'react';
 
+import { useId } from 'react';
 import { Tooltip } from './Tooltip';
 import { Input } from './Input';
 import { Label } from './Label';

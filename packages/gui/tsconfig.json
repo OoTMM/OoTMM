@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "skipLibCheck": true,
     "types": ["vite/client"],
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -14,4 +15,5 @@
       "react-dom/*": ["./node_modules/preact/compat/*"]
     }
   },
+  "exclude": ["dist/**/*", "node_modules/**"]
 }

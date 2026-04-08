@@ -1,10 +1,13 @@
+import type { TrickKey } from '@ootmm/generator';
+import type { TabViewRoute } from './nav';
+
 import { useCallback, useMemo } from 'react';
 import { FaYoutube, FaFileLines } from 'react-icons/fa6';
-import { TRICKS, TrickKey } from '@ootmm/generator';
+import { TRICKS } from '@ootmm/generator';
 
 import { DoubleList } from './DoubleList';
 import { Tooltip } from './ui/Tooltip';
-import { TabView, TabViewRoute } from './nav';
+import { TabView } from './nav';
 import { IconMaskMajora, IconTriforce } from './icons';
 import { useStore } from '../store';
 

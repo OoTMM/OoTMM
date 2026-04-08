@@ -1,6 +1,7 @@
-import { ComponentType } from 'preact';
+import type { ComponentType } from 'preact';
+import type { IconType } from 'react-icons';
+
 import clsx from 'clsx';
-import { IconType } from 'react-icons';
 import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';

@@ -1,4 +1,5 @@
-import { itemPool, OptionsInput, GeneratorOutput, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/generator';
+import type { OptionsInput, GeneratorOutput } from '@ootmm/generator';
+import { itemPool, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/generator';
 
 export type WorkerTaskCall = {
   type: 'call',
