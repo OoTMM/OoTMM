@@ -1,5 +1,6 @@
 import './index.css';
+
 import { render } from 'preact';
 import { App } from './app/App';
 
-render(App(), document.getElementById('app'));
+render(App(), document.getElementById('app')!);
