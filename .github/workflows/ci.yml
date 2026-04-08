@@ -5,7 +5,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: ghcr.io/ootmm/ootmm-ci:1.0.0
+    container: ghcr.io/ootmm/toolchain:1.3
     steps:
       - uses: actions/checkout@v5
         with:
@@ -42,11 +42,8 @@ jobs:
             echo "NX_CMD=affected" >> $GITHUB_ENV
           fi
 
-      - name: Install Third Party dependencies
-        run: ./scripts/install-deps.sh
-
-      - name: Install dependencies
-        run: pnpm i
+      - name: Setup
+        run: ./scripts/setup.sh
 
       - name: Find references for NX
         if: ${{ env.NX_CMD != 'run-many' }}
@@ -55,10 +52,10 @@ jobs:
           main-branch-name: master
 
       - name: Test
-        run: npx nx ${NX_CMD} -t test --prod
+        run: pnpm nx ${NX_CMD} -t test --prod
 
       - name: Build
-        run: npx nx ${NX_CMD} -t build --prod
+        run: pnpm nx ${NX_CMD} -t build --prod
 
       - name: Configure AWS
         if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
@@ -74,7 +71,7 @@ jobs:
 
       - name: Deploy
         if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
-        run: npx nx ${NX_CMD} -t deploy --prod
+        run: pnpm nx ${NX_CMD} -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}
           NETLIFY_SITE_ID_WEB: ${{ secrets.NETLIFY_SITE_ID_WEB }}

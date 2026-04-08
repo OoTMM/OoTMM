@@ -14,7 +14,7 @@ jobs:
     # Only run for preview branches
     if: github.event.ref_type == 'branch' && startsWith(github.event.ref, 'preview/')
     runs-on: ubuntu-latest
-    container: ghcr.io/ootmm/ootmm-ci:1.0.0
+    container: ghcr.io/ootmm/toolchain:1.3
     steps:
       - name: Determine version to cleanup
         shell: bash

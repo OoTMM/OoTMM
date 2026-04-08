@@ -67,7 +67,7 @@ On windows, we recommend using [WSL2](https://learn.microsoft.com/en-us/windows/
 
 Install everything you need:
 
-    ./setup.sh
+    ./scripts/setup.sh
 
 ### Using the build
 

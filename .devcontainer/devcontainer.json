@@ -2,25 +2,13 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
 {
 	"name": "OoTMM Dev Container",
-	"build": {
-		// Sets the run context to one level up instead of the .devcontainer folder.
-		"context": "..",
-		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-		"dockerfile": "../Dockerfile.devcontainer"
-	},
-  	"remoteUser": "node",
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-
-	// Uncomment the next line to run commands Runafter the container is created.
-	"postCreateCommand": "./scripts/devcontainer-setup.sh",
-
+	"image": "ghcr.io/ootmm/toolchain:latest",
+  "remoteUser": "user",
+	"postCreateCommand": "./scripts/setup.sh",
 	"runArgs": ["--sysctl", "net.ipv6.conf.all.disable_ipv6=1"],
 	"remoteEnv": {
 		"NX_DAEMON": "true"
 	},
-
-	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -30,11 +18,5 @@
 				"mechatroner.rainbow-csv"
 			]
 		}
-	},
-
-	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "devcontainer"
-	"mounts": [
-		//"source=${localEnv:HOME}${localEnv:USERPROFILE}/OoTMM,target=${containerWorkspaceFolder}/packages/core/out,type=bind,consistency=cached"
-	]
+	}
 }
