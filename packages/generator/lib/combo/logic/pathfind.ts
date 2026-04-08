@@ -1,16 +1,20 @@
-import { cloneDeep } from 'lodash-es';
-import { Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from './expr';
+import type { ItemPlacement } from './solve';
+import type { World } from './world';
+import type { Age } from './constants';
+import type { Item, ItemsCount, PlayerItems } from '../items';
+import type { Location } from './locations';
 
-import { AreaData, Expr, ExprDependencies, ExprResult, ExprResultWithDeps, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
-import { Location, locationData, makeLocation } from './locations';
-import { World } from './world';
+import { cloneDeep } from 'lodash-es';
+import { Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
+import { locationData, makeLocation } from './locations';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
-import { ItemPlacement } from './solve';
 import { countMapAdd } from '../util';
-import { Item, Items, ItemsCount, PlayerItems } from '../items';
+import { Items } from '../items';
 import { isTriforcePiece } from '../items/helpers';
 import { exprPartialEvalAge } from './expr-partial-eval';
-import { Age, AGE_ADULT, AGE_CHILD, AGES } from './constants';
+import { AGE_ADULT, AGE_CHILD, AGES } from './constants';
 import { ANALYSIS_EVENTS } from './analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';

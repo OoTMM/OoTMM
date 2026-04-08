@@ -1,5 +1,5 @@
+import type { ComponentProps } from 'react';
 import clsx from 'clsx';
-import { ComponentProps } from 'react';
 
 type InputProps = {
   className?: string;

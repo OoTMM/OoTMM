@@ -1,5 +1,6 @@
+import type { IconType } from 'react-icons';
+
 import clsx from 'clsx';
-import { IconType } from 'react-icons';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { Setting, SettingsImportExport } from '@/app/components/settings';

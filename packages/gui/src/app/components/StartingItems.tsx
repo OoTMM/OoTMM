@@ -1,5 +1,7 @@
+import type { Items } from '@ootmm/generator';
+
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { itemName, Items } from '@ootmm/generator';
+import { itemName } from '@ootmm/generator';
 
 import { Button, Card, InputField, Select } from './ui';
 import { useStore } from '../store';

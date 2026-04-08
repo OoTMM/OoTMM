@@ -1,9 +1,10 @@
+import type { Options } from '../options';
+
 import { Random } from '@ootmm/core';
 
 import { LogicPassSolver } from './solve';
 import { LogicPassWorld } from './world';
 import { LogicPassSpoiler } from './spoiler';
-import { Options } from '../options';
 import { LogicPassHints } from './hints';
 import { LogicPassAnalysis } from './analysis';
 import { Monitor } from '../monitor';

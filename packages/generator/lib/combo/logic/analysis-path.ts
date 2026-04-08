@@ -1,14 +1,18 @@
-import { Random, Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { World } from './world';
+import type { PathfinderState } from './pathfind';
+import type { Location } from './locations';
+import type { ItemPlacement } from './solve';
+import type { Item, PlayerItems } from '../items';
+import type { ItemProperties } from './item-properties';
+import type { Analysis } from './analysis';
 
-import { cloneWorld, World } from './world';
-import { Pathfinder, PathfinderState } from './pathfind';
+import { Random } from '@ootmm/core';
+import { cloneWorld } from './world';
+import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
-import { Location } from './locations';
-import { ItemPlacement } from './solve';
-import { Item, Items, makePlayerItem, PlayerItems } from '../items';
-import { ItemProperties } from './item-properties';
+import { Items, makePlayerItem } from '../items';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
-import { Analysis } from './analysis';
 import { AGE_ADULT, AGE_CHILD } from './constants';
 
 type Triforce3Type = 'Power' | 'Courage' | 'Wisdom';

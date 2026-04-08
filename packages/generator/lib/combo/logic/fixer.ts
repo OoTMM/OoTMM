@@ -1,10 +1,11 @@
-import { Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { World } from './world';
+import type { Location } from './locations';
 
 import { ItemHelpers, Items } from '../items';
 import { Monitor } from '../monitor';
 import { mustStartWithMasterSword } from './master-sword';
-import { Location, MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_FROGS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, MM_LOTTERY, isLocationChestFairy, isLocationOtherFairy, makeLocation } from './locations';
-import { World } from './world';
+import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_FROGS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, MM_LOTTERY, isLocationChestFairy, isLocationOtherFairy, makeLocation } from './locations';
 
 export class LogicPassFixer {
   private fixedLocations = new Set<Location>();

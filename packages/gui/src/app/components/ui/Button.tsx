@@ -1,4 +1,5 @@
-import { ReactNode, ComponentProps } from 'react';
+import type { ComponentProps } from 'preact';
+import type { ReactNode } from 'preact/compat';
 import clsx from 'clsx';
 
 type ButtonProps = {

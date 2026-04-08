@@ -1,9 +1,10 @@
-import { Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { ItemPlacement } from './solve';
+import type { World } from './world';
+import type { PlayerItem } from '../items';
 
-import { ItemHelpers, PlayerItem } from '../items';
+import { ItemHelpers } from '../items';
 import { isDungeonStrayFairy } from '../items/helpers';
-import { ItemPlacement } from './solve';
-import { World } from './world';
 
 export type Location = string & { __brand: 'Location' };
 type LocationDescriptor = {

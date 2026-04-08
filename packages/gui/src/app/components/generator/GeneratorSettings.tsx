@@ -1,6 +1,8 @@
+import type { TabViewRoute } from '../nav';
+
 import { LuGlobe, LuLink, LuSettings, LuShuffle, LuTag, LuStar, LuTriangleAlert, LuFlaskConical } from 'react-icons/lu';
 
-import { TabView, TabViewRoute } from '../nav';
+import { TabView } from '../nav';
 import { SpecialConds } from '../SpecialConds';
 import { MultipleSettingsEditor, SettingsEditor } from '../settings';
 import { useStore } from '@/app/store';

@@ -1,4 +1,4 @@
-import { ItemID } from './items/defs';
+import type { ItemID } from './items/defs';
 
 const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_ARROW_FIRE: "Fire Arrows (MM)",

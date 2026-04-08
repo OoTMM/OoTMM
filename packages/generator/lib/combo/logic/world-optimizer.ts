@@ -1,6 +1,8 @@
-import { PlayerItems, makePlayerItem } from '../items';
+import type { PlayerItems } from '../items';
+import type { World } from './world';
+
+import { makePlayerItem } from '../items';
 import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAnd, ExprContainer, ExprHas, ExprLicense, ExprRenewable, exprAnd, exprOr } from './expr';
-import { World } from './world';
 
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   const transformed = cb(expr);

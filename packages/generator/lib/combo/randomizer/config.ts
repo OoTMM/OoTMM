@@ -1,9 +1,12 @@
+import type { Game, Settings } from '@ootmm/core';
+import type { World } from '../logic/world';
+import type { LogicResult } from '../logic'
+import type { Region } from '../logic/regions';
+
 import { concatUint8Arrays } from 'uint8array-extras';
-import { Game, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
+import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
-import { World } from '../logic/world';
-import { LogicResult } from '../logic';
 import { bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
 import { DUNGEON_ENTRANCES } from '../logic/entrance';
 import { ENTRANCES, REGIONS } from '@ootmm/data';
@@ -13,7 +16,7 @@ import { CONFVARS_VALUES } from '../confvars';
 import { makeLocation } from '../logic/locations';
 import { Items } from '../items';
 import { gi } from './util';
-import { Region, regionData } from '../logic/regions';
+import { regionData } from '../logic/regions';
 
 const BOMBCHU_BEHAVIORS = {
   free: 0,

@@ -1,4 +1,5 @@
-import { Settings, Random, randString, randomInt, makeSettings, validateSettings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import { Random, randString, randomInt, makeSettings, validateSettings } from '@ootmm/core';
 
 export const DEFAULT_RANDOM_SETTINGS = {
   mq: false,

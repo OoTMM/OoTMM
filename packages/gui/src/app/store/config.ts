@@ -1,6 +1,6 @@
-import { StateCreator } from 'zustand';
-
+import type { StateCreator } from 'zustand';
 import type { Store } from './';
+
 import { saveFile } from '../db';
 
 export interface ConfigSlice {

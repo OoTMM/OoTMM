@@ -1,5 +1,6 @@
-import { ResultFile } from '../api';
-import { Button, Card } from './ui';
+import type { ResultFile } from '../api';
+
+import { Button } from './ui';
 
 const download = (file: ResultFile) => {
   const a = document.createElement('a');
@@ -7,7 +8,7 @@ const download = (file: ResultFile) => {
   if (file.data instanceof Blob) {
     blob = file.data;
   } else {
-    blob = new Blob([file.data], { type: file.mime });
+    blob = new Blob([file.data as BlobPart], { type: file.mime });
   }
   a.href = window.URL.createObjectURL(blob);
   a.download = file.name;

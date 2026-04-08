@@ -1,5 +1,7 @@
-import { Settings, Random, randomInt } from '@ootmm/core';
-import { World } from './world';
+import type { Settings } from '@ootmm/core';
+import type { World } from './world';
+
+import { Random, randomInt } from '@ootmm/core';
 
 export class LogicPassSongEvents {
   constructor(

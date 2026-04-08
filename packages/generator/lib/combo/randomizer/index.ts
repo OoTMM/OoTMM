@@ -1,6 +1,6 @@
-import { Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { LogicResult } from '../logic';
 
-import { LogicResult } from '../logic';
 import { Patchfile } from '../patch-build/patchfile';
 
 import { RandomizerPatcherConfig } from './config';

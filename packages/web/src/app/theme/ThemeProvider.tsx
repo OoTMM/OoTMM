@@ -5,7 +5,7 @@ type ThemeContext = {
   setTheme: (theme: 'light' | 'dark') => void;
 };
 
-const ThemeContext = createContext(null as ThemeContext);
+const ThemeContext = createContext(null as any as ThemeContext);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const defaultTheme = document.documentElement.style.colorScheme as 'light' | 'dark';

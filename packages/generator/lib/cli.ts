@@ -1,8 +1,9 @@
+import type { OptionsInput } from './combo/options';
+
 import { promises as fs } from 'fs';
 import YAML from 'yaml';
 
 import { PRESETS, SETTINGS, generate, importSettings, makeSettings } from './combo';
-import { OptionsInput } from './combo/options';
 
 function readFileUint8(path: string): Promise<Uint8Array> {
   return fs.readFile(path).then((x) => new Uint8Array(x.buffer, x.byteOffset, x.byteLength));

@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
     "strict": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node16",
-    "skipLibCheck": true,
+    "customConditions": ["module"],
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "packages/tools/build/**/*.ts"

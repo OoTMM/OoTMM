@@ -1,10 +1,14 @@
-import { SETTINGS, Settings, TRICKS, TrickKey } from '@ootmm/core';
+import type { Settings, TrickKey } from '@ootmm/core';
+import type { Item, ItemsCount } from '../items';
+import type { ItemID } from '../items/defs';
+import type { Age } from './constants';
+import type { ResolvedWorldFlags, World } from './world';
 
-import { Item, ItemGroups, Items, ItemsCount } from '../items';
-import { ItemID } from '../items/defs';
-import { Age, AGE_ADULT, AGE_CHILD } from './constants';
+import { SETTINGS, TRICKS } from '@ootmm/core';
+import { ItemGroups, Items } from '../items';
+import { AGE_ADULT, AGE_CHILD } from './constants';
 import { PRICE_RANGES } from './price';
-import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
+import { WORLD_FLAGS } from './world';
 
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',

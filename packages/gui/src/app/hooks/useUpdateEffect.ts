@@ -1,4 +1,5 @@
-import { useEffect, useRef, EffectCallback } from 'react';
+import type { EffectCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function useUpdateEffect(effect: EffectCallback, deps: any[]) {
   const isFirst = useRef(true);

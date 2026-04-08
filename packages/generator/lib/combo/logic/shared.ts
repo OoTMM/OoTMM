@@ -1,4 +1,5 @@
-import { Item, Items } from '../items/defs';
+import type { Item } from '../items/defs';
+import { Items } from '../items/defs';
 
 export type ItemSharedDef = {
   shared: Item,

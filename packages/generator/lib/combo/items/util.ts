@@ -1,5 +1,7 @@
-import { CountMap, createMemo } from '../util';
-import { Item } from './defs';
+import type { Item } from './defs';
+import type { CountMap } from '../util';
+
+import { createMemo } from '../util';
 
 export type PlayerItem = {
   item: Item;

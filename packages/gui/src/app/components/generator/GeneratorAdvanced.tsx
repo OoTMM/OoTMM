@@ -1,6 +1,8 @@
+import type { TabViewRoute } from '../nav';
+
 import { LuLightbulb, LuWrench } from 'react-icons/lu';
 
-import { TabView, TabViewRoute } from '../nav';
+import { TabView } from '../nav';
 import { Hints } from '../Hints';
 import { Plando } from '../Plando';
 import { useStore } from '@/app/store';

@@ -1,7 +1,9 @@
-import { Items, Settings, OptionsInput, GeneratorOutput, makeCosmetics, makeSettings, makeRandomSettings } from '@ootmm/generator';
+import type { Items, Settings, OptionsInput, GeneratorOutput } from '@ootmm/generator';
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError } from './worker';
-import Worker from './worker?worker';
+
+import { makeCosmetics, makeSettings, makeRandomSettings } from '@ootmm/generator';
 import JSZip from 'jszip';
+import Worker from './worker?worker';
 import { localStoragePrefixedGet } from './util';
 
 export type ResultFile = {

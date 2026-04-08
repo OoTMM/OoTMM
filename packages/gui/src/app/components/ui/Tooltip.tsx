@@ -1,7 +1,8 @@
-import clsx from 'clsx';
-import { ComponentChildren } from 'preact';
+import type { ComponentChildren, CSSProperties } from 'preact';
+import type { ReactNode, RefObject } from 'preact/compat';
+
 import { useState, useId, useRef, useEffect, useLayoutEffect } from 'preact/hooks';
-import { createPortal, ReactNode, RefObject } from 'preact/compat';
+import { createPortal } from 'preact/compat';
 import { FaCircleQuestion } from 'react-icons/fa6';
 
 type TooltipContentProps = {
@@ -10,7 +11,7 @@ type TooltipContentProps = {
 };
 function TooltipContent({ targetRef, children }: TooltipContentProps) {
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const [style, setStyle] = useState<React.CSSProperties>({display: 'none'});
+  const [style, setStyle] = useState<CSSProperties>({display: 'none'});
 
   useLayoutEffect(() => {
     const target = targetRef.current;

@@ -1,7 +1,8 @@
-import { Items, makeSettings, mergeSettings, Settings, SettingsPatch } from '@ootmm/generator';
-import { StateCreator } from 'zustand';
-
+import type { Items, Settings, SettingsPatch } from '@ootmm/generator';
+import type { StateCreator } from 'zustand';
 import type { Store } from './';
+
+import { makeSettings, mergeSettings } from '@ootmm/generator';
 import * as API from '../api';
 
 export interface SettingsSlice {

@@ -1,9 +1,10 @@
-import { Entrance } from '@ootmm/data';
+import type { Entrance } from '@ootmm/data';
+
+import type { SettingHint } from './hints';
+import type { SpecialConds } from './special-conds';
+import type { TrickKey } from './tricks';
 
 import { SETTINGS } from './data';
-import { SettingHint } from './hints';
-import { SpecialConds } from './special-conds';
-import { TrickKey } from './tricks';
 
 type SettingDataEnumValue = {
   readonly value: string;

@@ -1,8 +1,11 @@
-import { Random, sample, Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { Item, PlayerItem } from '../items';
+import type { ItemPlacement } from './solve';
+import type { Location } from './locations';
 
-import { Item, ItemGroups, ItemHelpers, PlayerItem } from '../items';
-import { ItemPlacement } from './solve';
-import { isLocationFullyShuffled, Location } from './locations';
+import { Random, sample } from '@ootmm/core';
+import { ItemGroups, ItemHelpers } from '../items';
+import { isLocationFullyShuffled } from './locations';
 
 export class LogicPassCloak {
   private itemCloaks: Map<Location, Item>;

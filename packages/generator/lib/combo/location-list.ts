@@ -1,5 +1,6 @@
-import { Settings, DEFAULT_SETTINGS } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 
+import { DEFAULT_SETTINGS } from '@ootmm/core';
 import { makeRandomSettings } from './random-settings';
 import { makeCosmetics } from './cosmetics';
 import { worldState } from './logic';

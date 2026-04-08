@@ -1,7 +1,7 @@
-import { FILES } from '@ootmm/data';
-import { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/core';
+import type { DecompressedRoms } from './decompress';
 
-import { DecompressedRoms } from './decompress';
+import { FILES } from '@ootmm/data';
 import { DmaData } from './dma';
 import { bufReadU32BE } from './util/buffer';
 import { CONFIG } from './config';

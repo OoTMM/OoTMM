@@ -1,5 +1,6 @@
-import { ComponentProps, useId } from 'react';
+import type { ComponentProps } from 'react';
 
+import { useId } from 'react';
 import { Label } from './Label';
 import { FileSelect } from './FileSelect';
 
