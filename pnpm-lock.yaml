@@ -115,6 +115,9 @@ importers:
       '@neutralinojs/neu':
         specifier: ^11.7.1
         version: 11.7.1
+      '@ootmm/gui':
+        specifier: '*'
+        version: link:../gui
 
   packages/generator:
     dependencies:
