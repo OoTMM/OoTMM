@@ -7,7 +7,7 @@ const download = (file: ResultFile) => {
   if (file.data instanceof Blob) {
     blob = file.data;
   } else {
-    blob = new Blob([file.data], { type: file.mime });
+    blob = new Blob([file.data as BlobPart], { type: file.mime });
   }
   a.href = window.URL.createObjectURL(blob);
   a.download = file.name;
