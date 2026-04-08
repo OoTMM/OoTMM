@@ -87,7 +87,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: dev
-          name: Development Build - ${{ github.sha }}
+          name: Development Build - ${{ env.VERSION_SUFFIX }}
           prerelease: true
           make_latest: true
           files: packages/desktop/dist/ootmm-*.zip
