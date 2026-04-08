@@ -56,5 +56,5 @@ jobs:
           tag_name: nightly
           name: Nightly - ${{ env.VERSION_SUFFIX }}
           prerelease: true
-          make_latest: false
+          make_latest: true
           files: packages/desktop/dist/ootmm-*.zip
