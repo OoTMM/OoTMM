@@ -10,9 +10,7 @@
       ],
       "cache": true
     },
-    "test": {
-      "cache": true
-    },
+    "test": {},
     "typecheck": {
       "cache": true
     },
