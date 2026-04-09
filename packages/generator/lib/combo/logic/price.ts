@@ -1,5 +1,6 @@
 import type { Settings } from '@ootmm/core';
-import type { ResolvedWorldFlags, World } from './world';
+import type { ResolvedWorldFlags } from '@ootmm/logic';
+import type { World } from './world';
 
 import { Random, randomInt } from '@ootmm/core';
 

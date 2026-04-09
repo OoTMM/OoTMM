@@ -1,10 +1,11 @@
 import type { Entrance } from '@ootmm/data';
 import type { Game, Settings, Item } from '@ootmm/core';
+import type { ResolvedWorldFlags } from '@ootmm/logic';
 import type { Region } from './regions';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
-import { GAMES, SETTINGS, Random, itemByID, ItemHelpers, Items } from '@ootmm/core';
+import { GAMES, Random, itemByID, ItemHelpers, Items } from '@ootmm/core';
 
 import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
@@ -12,86 +13,7 @@ import { ExprParser } from './expr-parser';
 import { DATA_HINTS_POOL } from '../data';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
-
-export const WORLD_FLAGS = [
-  'ganonTrials',
-  'smallKeyRingOot',
-  'smallKeyRingMm',
-  'silverRupeePouches',
-  'openDungeonsMm',
-  'openDungeonsOot',
-  'mmPreActivatedOwls',
-  'mqDungeons',
-  'jpLayouts',
-] as const;
-
-type WorldFlag = typeof WORLD_FLAGS[number];
-
-class ResolvedWorldFlag {
-  private values: Set<string>;
-  constructor(
-    public readonly setting: keyof Settings,
-    public readonly value: 'all' | 'none' | 'specific'
-  ) {
-    this.values = new Set;
-  }
-
-  add(value: string) {
-    this.values.add(value);
-  }
-
-  has(value: string) {
-    if (this.value === 'all') {
-      return true;
-    }
-    if (this.value === 'none') {
-      return false;
-    }
-    return this.values.has(value);
-  }
-}
-
-export type ResolvedWorldFlags = {[k in WorldFlag]: ResolvedWorldFlag};
-
-function resolveWorldFlag<T extends WorldFlag>(settings: Settings, random: Random, flag: T): ResolvedWorldFlag {
-  const v = settings[flag];
-  let wf: ResolvedWorldFlag;
-  if (v.type === 'random-mixed' || v.type === 'random') {
-    const setting = SETTINGS.find(x => x.key === flag)!;
-    const values = ((setting as any).values as any[]).map(x => x.value) as string[];
-    let set: string[] = [];
-    let unset: string[] = [];
-    if (v.type === 'random-mixed') {
-      set = v.set;
-      unset = v.unset;
-    }
-    wf = new ResolvedWorldFlag(flag, 'specific');
-    for (const v of values) {
-      if (set.includes(v)) {
-        wf.add(v);
-      } else if (!unset.includes(v) && random.next() & 0x1000) {
-        wf.add(v);
-      }
-    }
-  } else {
-    wf = new ResolvedWorldFlag(flag, v.type);
-    if (v.type === 'specific') {
-      for (const k of v.values) {
-        wf.add(k);
-      }
-    }
-  }
-
-  return wf;
-}
-
-function resolveWorldFlags(settings: Settings, random: Random): ResolvedWorldFlags {
-  const result = {} as ResolvedWorldFlags;
-  for (const flag of WORLD_FLAGS) {
-    result[flag] = resolveWorldFlag(settings, random, flag);
-  }
-  return result;
-}
+import { resolveWorldFlags } from '@ootmm/logic';
 
 export const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,

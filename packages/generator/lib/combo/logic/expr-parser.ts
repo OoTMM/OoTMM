@@ -1,5 +1,5 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { ResolvedWorldFlags } from './world';
+import type { ResolvedWorldFlags } from '@ootmm/logic';
 
 import { itemByID } from '@ootmm/core';
 import { gameId } from '../util';

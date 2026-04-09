@@ -11,8 +11,8 @@ import type { Region } from './regions';
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
+import { WORLD_FLAGS } from '@ootmm/logic';
 
-import { WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
 import { ANALYSIS_EVENTS } from './analysis';
