@@ -1,8 +1,10 @@
 import type { Settings, TrickKey, Item, ItemsCount, ItemID } from '@ootmm/core';
-import type { Age } from '@ootmm/logic';
+import type { Age } from '../age';
 
 import { SETTINGS, TRICKS, ItemGroups, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, WORLD_FLAGS, PRICE_RANGES } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD } from '../age';
+import { WORLD_FLAGS } from '../world-flags';
+import { PRICE_RANGES } from '../price';
 
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',

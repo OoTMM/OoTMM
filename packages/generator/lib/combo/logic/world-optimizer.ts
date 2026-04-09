@@ -2,7 +2,7 @@ import type { PlayerItems } from '@ootmm/core';
 import type { World } from './world';
 
 import { makePlayerItem } from '@ootmm/core';
-import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAnd, ExprContainer, ExprHas, ExprLicense, ExprRenewable, exprAnd, exprOr } from './expr';
+import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAnd, ExprContainer, ExprHas, ExprLicense, ExprRenewable, exprAnd, exprOr } from '@ootmm/logic';
 
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   const transformed = cb(expr);

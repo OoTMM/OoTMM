@@ -6,14 +6,13 @@ import type { Region } from './regions';
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
 import { GAMES, Random, itemByID, ItemHelpers, Items } from '@ootmm/core';
+import { Expr, exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
 
 import { gameId } from '../util';
-import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_HINTS_POOL } from '../data';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
-import { resolveWorldFlags } from '@ootmm/logic';
 
 export const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,

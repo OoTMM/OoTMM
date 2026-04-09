@@ -7,12 +7,11 @@ import type { Region } from './regions';
 
 import { ENTRANCES } from '@ootmm/data';
 import { Random, sample } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD, Expr, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from '@ootmm/logic';
 import { DUNGEONS_REGIONS, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from './expr';
 import { makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { BOSS_METADATA_BY_ENTRANCE } from './boss';

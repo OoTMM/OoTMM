@@ -1,17 +1,14 @@
 import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
-import type { Age } from '@ootmm/logic';
-import type { AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from './expr';
+import type { Age, AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from '@ootmm/logic';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
 import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, AGES } from '@ootmm/logic';
-import { Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
+import { AGE_ADULT, AGE_CHILD, AGES, exprPartialEvalAge, Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from '@ootmm/logic';
 import { locationData, makeLocation } from './locations';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
-import { exprPartialEvalAge } from './expr-partial-eval';
 import { ANALYSIS_EVENTS } from './analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';

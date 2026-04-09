@@ -1,4 +1,4 @@
-import type { Age } from '@ootmm/logic';
+import type { Age } from '../age';
 import { Expr, exprAnd, ExprAnd, ExprOr, exprOr } from './expr';
 
 export function exprPartialEvalAge(expr: Expr, age: Age): Expr {
