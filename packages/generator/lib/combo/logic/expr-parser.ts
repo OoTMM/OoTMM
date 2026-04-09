@@ -1,7 +1,7 @@
 import type { Game, Settings } from '@ootmm/core';
 import type { ResolvedWorldFlags } from './world';
 
-import { itemByID } from '../items';
+import { itemByID } from '@ootmm/core';
 import { gameId } from '../util';
 import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEvent } from './expr';
 

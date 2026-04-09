@@ -1,7 +1,7 @@
 import type { Settings } from '@ootmm/core';
 import type { World } from './world';
 
-import { ItemHelpers } from '../items';
+import { ItemHelpers } from '@ootmm/core';
 
 // When adding new settings, add in order of how many checks there are to minimize average runtime
 export const isShuffled = (settings: Settings, world: World, loc: string, dungLocations?: Set<string>) => {

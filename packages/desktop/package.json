@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "postinstall": "neu update",
-    "build": "./build.sh && neu build --release && node ./scripts/split-zips.mjs"
+    "build": "neu update && ./build.sh && neu build --release && node ./scripts/split-zips.mjs"
   },
   "author": "Nax",
   "license": "MIT",

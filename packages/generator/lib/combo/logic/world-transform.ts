@@ -1,21 +1,16 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, ItemID, Item, PlayerItem, PlayerItems } from '@ootmm/core';
 import type { ItemProperties } from './item-properties';
-import type { ItemID } from '../items/defs';
-import type { Item, PlayerItem, PlayerItems } from '../items';
 import type { World, WorldCheckType } from './world';
 import type { ItemSharedDef } from './shared';
 import type { Location } from './locations';
 
 import { POOL } from '@ootmm/data';
-import { sample, Random, randomInt } from '@ootmm/core';
-
-import { ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
+import { sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd } from '@ootmm/core';
 import { Monitor } from '../monitor';
-import { countMapAdd, gameId } from '../util';
+import { gameId } from '../util';
 import { exprTrue } from './expr';
 import { isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';
 import { SharedItemGroups } from './shared';
-import { CLOCKS } from '../items/groups';
 import { mustStartWithMasterSword } from './master-sword';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
 import { TRAP_AMOUNTS } from './traps';
@@ -118,7 +113,7 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
 ]);
 
 const ITEM_POOL_PLENTIFUL = new Set([
-  ...CLOCKS,
+  ...ItemGroups.CLOCKS,
   ...ItemGroups.SONG_NOTES,
   Items.MM_CLOCK,
   Items.OOT_BOTTLE_RUTO_LETTER,

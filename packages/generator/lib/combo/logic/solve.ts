@@ -1,21 +1,16 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, PlayerItem, PlayerItems, Item } from '@ootmm/core';
 import type { ItemProperties } from './item-properties';
 import type { PathfinderState } from './pathfind';
 import type { World } from './world';
 import type { Location } from './locations';
-import type { PlayerItem, PlayerItems, Item } from '../items';
 
-import { Random, sample, shuffle } from '@ootmm/core';
-
-import { countMapAdd, countMapArray, countMapCombine, countMapRemove } from '../util';
+import { Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
 import { Pathfinder } from './pathfind';
 import { cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
 import { Monitor } from '../monitor';
 import { isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
-import { ItemGroups, ItemHelpers, Items, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
-import { isDungeonReward } from '../items/helpers';
 import { mustStartWithMasterSword } from './master-sword';
 
 const VALIDATION_CRITICAL_ITEMS = [
@@ -1067,7 +1062,7 @@ export class LogicPassSolver {
           let valid = true;
           for (const l of locations) {
             const pi = this.state.items.get(l);
-            if (pi && isDungeonReward(pi.item)) {
+            if (pi && ItemHelpers.isDungeonReward(pi.item)) {
               valid = false;
               break;
             }

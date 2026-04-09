@@ -127,6 +127,9 @@ importers:
       '@ootmm/data':
         specifier: '*'
         version: link:../data
+      '@ootmm/logic':
+        specifier: '*'
+        version: link:../logic
       '@ootmm/tools':
         specifier: '*'
         version: link:../tools

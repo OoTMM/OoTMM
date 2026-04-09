@@ -1,18 +1,15 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
 import type { AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from './expr';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
 import type { Age } from './constants';
-import type { Item, ItemsCount, PlayerItems } from '../items';
 import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
+import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
 import { Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
 import { locationData, makeLocation } from './locations';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
-import { countMapAdd } from '../util';
-import { Items } from '../items';
-import { isTriforcePiece } from '../items/helpers';
 import { exprPartialEvalAge } from './expr-partial-eval';
 import { AGE_ADULT, AGE_CHILD, AGES } from './constants';
 import { ANALYSIS_EVENTS } from './analysis';
@@ -498,7 +495,7 @@ export class Pathfinder {
         this.requeueItem(playerItem.player, playerItem.item);
       }
 
-      if (isTriforcePiece(playerItem.item)) {
+      if (ItemHelpers.isTriforcePiece(playerItem.item)) {
         this.updateGoalFlags();
       }
     } else {

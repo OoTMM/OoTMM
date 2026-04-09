@@ -1,9 +1,8 @@
-import type { Settings, TrickKey } from '@ootmm/core';
+import type { Settings, TrickKey, Item, PlayerItem, PlayerItems } from '@ootmm/core';
 import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import type { Options } from '../options';
 import type { Analysis, SphereEntryEvent } from './analysis';
 import type { ItemPlacement } from './solve';
-import type { Item, PlayerItem, PlayerItems } from '../items';
 import type { World } from './world';
 import type { AnalysisPath } from './analysis-path';
 import type { Location } from './locations';

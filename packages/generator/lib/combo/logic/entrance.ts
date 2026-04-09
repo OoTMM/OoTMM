@@ -1,7 +1,6 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, PlayerItems } from '@ootmm/core';
 import type { World, WorldArea } from './world';
 import type { Location } from './locations';
-import type { PlayerItems } from '../items';
 import type { ItemProperties } from './item-properties';
 import type { Region } from './regions';
 import type { Age } from './constants';

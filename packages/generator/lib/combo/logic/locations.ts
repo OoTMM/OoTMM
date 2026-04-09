@@ -1,10 +1,8 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, PlayerItem } from '@ootmm/core';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
-import type { PlayerItem } from '../items';
 
-import { ItemHelpers } from '../items';
-import { isDungeonStrayFairy } from '../items/helpers';
+import { ItemHelpers } from '@ootmm/core';
 
 export type Location = string & { __brand: 'Location' };
 type LocationDescriptor = {
@@ -219,7 +217,7 @@ export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<
   }
 
   /* Non shuffled dungeon stray fairy */
-  if (isDungeonStrayFairy(item.item) && settings.strayFairyChestShuffle !== 'anywhere' && settings.strayFairyOtherShuffle !== 'anywhere') {
+  if (ItemHelpers.isDungeonStrayFairy(item.item) && settings.strayFairyChestShuffle !== 'anywhere' && settings.strayFairyOtherShuffle !== 'anywhere') {
     return false;
   }
 

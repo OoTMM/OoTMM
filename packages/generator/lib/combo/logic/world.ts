@@ -1,11 +1,10 @@
 import type { Entrance } from '@ootmm/data';
-import type { Game, Settings } from '@ootmm/core';
+import type { Game, Settings, Item } from '@ootmm/core';
 import type { Region } from './regions';
-import type { Item } from '../items';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
-import { GAMES, SETTINGS, Random } from '@ootmm/core';
+import { GAMES, SETTINGS, Random, itemByID, ItemHelpers, Items } from '@ootmm/core';
 
 import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
@@ -13,7 +12,6 @@ import { ExprParser } from './expr-parser';
 import { DATA_HINTS_POOL } from '../data';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
-import { itemByID, ItemHelpers, Items } from '../items';
 
 export const WORLD_FLAGS = [
   'ganonTrials',

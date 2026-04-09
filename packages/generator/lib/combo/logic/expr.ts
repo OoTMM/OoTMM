@@ -1,11 +1,8 @@
-import type { Settings, TrickKey } from '@ootmm/core';
-import type { Item, ItemsCount } from '../items';
-import type { ItemID } from '../items/defs';
+import type { Settings, TrickKey, Item, ItemsCount, ItemID } from '@ootmm/core';
 import type { Age } from './constants';
 import type { ResolvedWorldFlags, World } from './world';
 
-import { SETTINGS, TRICKS } from '@ootmm/core';
-import { ItemGroups, Items } from '../items';
+import { SETTINGS, TRICKS, ItemGroups, Items } from '@ootmm/core';
 import { AGE_ADULT, AGE_CHILD } from './constants';
 import { PRICE_RANGES } from './price';
 import { WORLD_FLAGS } from './world';
