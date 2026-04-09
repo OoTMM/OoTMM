@@ -7,11 +7,11 @@ import type { ItemProperties } from './item-properties';
 import type { Analysis } from './analysis';
 
 import { Random, Items, makePlayerItem } from '@ootmm/core';
+import { AGE_ADULT, AGE_CHILD } from '@ootmm/logic';
 import { cloneWorld } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
-import { AGE_ADULT, AGE_CHILD } from './constants';
 
 type Triforce3Type = 'Power' | 'Courage' | 'Wisdom';
 const TRIFORCE3_ITEMS: { [key in Triforce3Type]: Item } = {

@@ -1,9 +1,9 @@
 import type { Settings, TrickKey, Item, ItemsCount, ItemID } from '@ootmm/core';
-import type { Age } from './constants';
+import type { Age } from '@ootmm/logic';
 import type { ResolvedWorldFlags, World } from './world';
 
 import { SETTINGS, TRICKS, ItemGroups, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD } from './constants';
+import { AGE_ADULT, AGE_CHILD } from '@ootmm/logic';
 import { PRICE_RANGES } from './price';
 import { WORLD_FLAGS } from './world';
 
