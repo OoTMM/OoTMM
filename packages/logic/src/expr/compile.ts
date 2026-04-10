@@ -220,14 +220,17 @@ function evalSpecial(state: ExprState, special: string, deps: ExprDependencies):
   return { result };
 }
 
-function evalTimeOot(state: ExprState, flag: number): ExprResult {
-  if (state.areaData.ootTime & flag) {
-    const flagNeg = OOT_TIME_ALL & ~flag;
-    const restrictions = defaultRestrictions();
-    restrictions.ootTime = flagNeg;
-    return { result: true, restrictions };
-  } else {
-    return RESULT_FALSE;
+function evalTimeOot(flag: number): ExprFunc {
+  const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
+  const flagNeg = OOT_TIME_ALL & ~flag;
+  result.restrictions.ootTime = flagNeg;
+
+  return (state) => {
+    if (state.areaData.ootTime & flag) {
+      return result;
+    } else {
+      return RESULT_FALSE;
+    }
   }
 }
 
@@ -288,7 +291,7 @@ function makeEvalFunc(expr: ExprNode): ExprFunc {
     case 'masks': return (state, deps) => evalItems(state.items, ItemGroups.MASKS_REGULAR, expr.count, deps);
     case 'event': return (state, deps) => evalEvent(state, expr.event, deps);
     case 'special': return (state, deps) => evalSpecial(state, expr.specialId, deps);
-    case 'time-oot': return (state) => evalTimeOot(state, expr.flag);
+    case 'time-oot': return evalTimeOot(expr.flag);
     case 'time-mm': return evalTimeMm(expr.value, expr.value2);
     case 'flag-on': return evalFlagOn(expr.flag);
     case 'flag-off': return evalFlagOff(expr.flag);
