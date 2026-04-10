@@ -5,14 +5,15 @@ import { CONSTRAINT_FLAGS, MM_TIME_SLICES, OOT_TIME } from './data';
 import { Items, SETTINGS, TRICKS, type Item, type ItemID, type Settings, type TrickKey } from '@ootmm/core';
 import { WORLD_FLAGS } from '../world-flags';
 import { PRICE_RANGES } from '../price';
+import { compileExpr } from './eval';
 
-const EXPR_FALSE = memoExpr({ type: 'false' });
-const EXPR_TRUE = memoExpr({ type: 'true' });
-const EXPR_AGE_CHILD = memoExpr({ type: 'age', age: AGE_CHILD });
-const EXPR_AGE_ADULT = memoExpr({ type: 'age', age: AGE_ADULT });
-const EXPR_TIME_OOT_DAY = memoExpr({ type: 'time-oot', flag: OOT_TIME.DAY });
-const EXPR_TIME_OOT_NIGHT = memoExpr({ type: 'time-oot', flag: OOT_TIME.NIGHT });
-const EXPR_TIME_OOT_DUSK = memoExpr({ type: 'time-oot', flag: OOT_TIME.DUSK });
+const EXPR_FALSE = compileExpr({ type: 'false' });
+const EXPR_TRUE = compileExpr({ type: 'true' });
+const EXPR_AGE_CHILD = compileExpr({ type: 'age', age: AGE_CHILD });
+const EXPR_AGE_ADULT = compileExpr({ type: 'age', age: AGE_ADULT });
+const EXPR_TIME_OOT_DAY = compileExpr({ type: 'time-oot', flag: OOT_TIME.DAY });
+const EXPR_TIME_OOT_NIGHT = compileExpr({ type: 'time-oot', flag: OOT_TIME.NIGHT });
+const EXPR_TIME_OOT_DUSK = compileExpr({ type: 'time-oot', flag: OOT_TIME.DUSK });
 
 export function exprFalse() {
   return EXPR_FALSE;
@@ -37,7 +38,7 @@ export function exprAnd(exprs: Expr[]) {
     return exprs[0];
   }
 
-  return memoExpr({ type: 'and', exprs });
+  return compileExpr({ type: 'and', exprs });
 }
 
 export function exprOr(exprs: Expr[]) {
@@ -55,7 +56,7 @@ export function exprOr(exprs: Expr[]) {
     return exprs[0];
   }
 
-  return memoExpr({ type: 'or', exprs });
+  return compileExpr({ type: 'or', exprs });
 }
 
 export function exprCond(cond: Expr, then: Expr, otherwise: Expr) {
@@ -101,27 +102,27 @@ export function exprHas(item: Item, count: number) {
     return EXPR_TRUE;
   }
 
-  return memoExpr({ type: 'item', item, count });
+  return compileExpr({ type: 'item', item, count });
 }
 
 export function exprRenewable(item: Item) {
-  return memoExpr({ type: 'renewable', item });
+  return compileExpr({ type: 'renewable', item });
 }
 
 export function exprLicense(item: Item) {
-  return memoExpr({ type: 'license', item });
+  return compileExpr({ type: 'license', item });
 }
 
 export function exprEvent(event: string) {
-  return memoExpr({ type: 'event', event });
+  return compileExpr({ type: 'event', event });
 }
 
 export function exprMasks(count: number) {
-  return memoExpr({ type: 'masks', count });
+  return compileExpr({ type: 'masks', count });
 }
 
 export function exprSpecial(settings: Settings, special: string) {
-  return memoExpr({ type: 'special', name: special });
+  return compileExpr({ type: 'special', specialId: special });
 }
 
 export function exprSetting(settings: Settings, resolvedFlags: Record<string, any>, setting: string, value: string | undefined) {
@@ -252,16 +253,16 @@ export function exprMmTime(operator: string, sliceNames: string[]) {
       throw new Error(`Invalid MM time operator: ${operator}`);
   }
 
-  return memoExpr({ type: 'time-mm', value, value2 });
+  return compileExpr({ type: 'time-mm', value, value2 });
 }
 
 export function exprPrice(range: string, id: number, max: number) {
   const slot = id + PRICE_RANGES[range];
-  return memoExpr({ type: 'price', slot, max });
+  return compileExpr({ type: 'price', slot, max });
 }
 
 export function exprSongEvent(songId: number, cmp: number) {
-  return memoExpr({ type: 'song-event', songId, cmp });
+  return compileExpr({ type: 'song-event', songId, cmp });
 }
 
 export function exprFish(ageAndType: string, minPounds: number, maxPounds: number) {
@@ -282,7 +283,7 @@ export function exprFlagOn(flag: string) {
   if (index === -1) {
     throw new Error(`Unknown constraint flag: ${flag}`);
   }
-  return memoExpr({ type: 'flag-on', flag: index });
+  return compileExpr({ type: 'flag-on', flag: index });
 }
 
 export function exprFlagOff(flag: string) {
@@ -290,5 +291,5 @@ export function exprFlagOff(flag: string) {
   if (index === -1) {
     throw new Error(`Unknown constraint flag: ${flag}`);
   }
-  return memoExpr({ type: 'flag-off', flag: index });
+  return compileExpr({ type: 'flag-off', flag: index });
 }

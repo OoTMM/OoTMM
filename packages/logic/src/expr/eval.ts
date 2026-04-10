@@ -1,7 +1,8 @@
 import { ItemGroups, Items, type CountMap, type Item, type Settings } from '@ootmm/core';
-import type { Expr, ExprDependencies, ExprRestrictions, ExprResult, ExprState } from './types';
+import type { Expr, ExprData, ExprDependencies, ExprFunc, ExprNode, ExprRestrictions, ExprResult, ExprState } from './types';
 
 import { OOT_TIME_ALL } from './data';
+import { memoExpr } from './memo';
 
 const RESULT_TRUE: ExprResult = { result: true };
 const RESULT_FALSE: ExprResult = { result: false };
@@ -85,7 +86,7 @@ function evalOr(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
   const indexEvents = deps.events.length;
 
   for (const e of exprs) {
-    const r = evalExpr(e, state, deps);
+    const r = e(state, deps);
     results.push(r);
     if (r.result) {
       result = true;
@@ -117,7 +118,7 @@ function evalAnd(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
   const indexEvents = deps.events.length;
 
   for (const e of exprs) {
-    const r = evalExpr(e, state, deps);
+    const r = e(state, deps);
     results.push(r);
 
     /* Early exit */
@@ -219,6 +220,8 @@ function evalSpecial(state: ExprState, special: string, deps: ExprDependencies):
   return { result };
 }
 
+type ExprEvalFunc = (state: ExprState, deps: ExprDependencies) => ExprResult;
+
 function evalTimeOot(state: ExprState, flag: number): ExprResult {
   if (state.areaData.ootTime & flag) {
     const flagNeg = OOT_TIME_ALL & ~flag;
@@ -230,41 +233,51 @@ function evalTimeOot(state: ExprState, flag: number): ExprResult {
   }
 }
 
-function evalTimeMm(state: ExprState, value: number, value2: number): ExprResult {
-  if (state.areaData.mmTime & value || state.areaData.mmTime2 & value2) {
-    const restrictions = defaultRestrictions();
-    restrictions.mmTime = ~value >>> 0;
-    restrictions.mmTime2 = ~value2 >>> 0;
-    return { result: true, restrictions };
-  } else {
-    return RESULT_FALSE;
+function evalTimeMm(value: number, value2: number): ExprEvalFunc {
+  const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
+  result.restrictions.mmTime = ~value >>> 0;
+  result.restrictions.mmTime2 = ~value2 >>> 0;
+
+  return (state) => {
+    if (state.areaData.mmTime & value || state.areaData.mmTime2 & value2) {
+      return result;
+    } else {
+      return RESULT_FALSE;
+    }
   }
 }
 
-function evalFlagOn(state: ExprState, flag: number): ExprResult {
-  if (state.areaData.flagsOff & (1 << flag)) {
-    return RESULT_FALSE;
-  }
-
+function evalFlagOn(flag: number): ExprEvalFunc {
+  const mask = 1 << flag;
   const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
   result.restrictions.flagsOn = (1 << flag) >>> 0;
-  return result;
-}
 
-function evalFlagOff(state: ExprState, flag: number): ExprResult {
-  if (state.areaData.flagsOn & (1 << flag)) {
-    return RESULT_FALSE;
+  return (state) => {
+    if (state.areaData.flagsOff & mask) {
+      return RESULT_FALSE;
+    }
+    return result;
   }
 
-  const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
-  result.restrictions.flagsOff = (1 << flag) >>> 0;
-  return result;
 }
 
-type ExprEvalFunc = (state: ExprState, deps: ExprDependencies) => ExprResult;
+function evalFlagOff(flag: number): ExprEvalFunc {
+  const mask = 1 << flag;
+  const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
+  result.restrictions.flagsOff = (1 << flag) >>> 0;
+
+  return (state) => {
+    if (state.areaData.flagsOn & mask) {
+      return RESULT_FALSE;
+    }
+
+    return result;
+  }
+}
+
 const cache = new WeakMap<Expr, ExprEvalFunc>();
 
-function makeEvalFunc(expr: Expr): ExprEvalFunc {
+function makeEvalFunc(expr: ExprData): ExprFunc {
   switch (expr.type) {
     case 'true': return () => RESULT_TRUE;
     case 'false': return () => RESULT_FALSE;
@@ -278,11 +291,11 @@ function makeEvalFunc(expr: Expr): ExprEvalFunc {
     case 'song-event': return (state) => state.world.songEvents[expr.songId] === expr.cmp ? RESULT_TRUE : RESULT_FALSE;
     case 'masks': return (state, deps) => evalItems(state.items, ItemGroups.MASKS_REGULAR, expr.count, deps);
     case 'event': return (state, deps) => evalEvent(state, expr.event, deps);
-    case 'special': return (state, deps) => evalSpecial(state, expr.name, deps);
+    case 'special': return (state, deps) => evalSpecial(state, expr.specialId, deps);
     case 'time-oot': return (state) => evalTimeOot(state, expr.flag);
-    case 'time-mm': return (state) => evalTimeMm(state, expr.value, expr.value2);
-    case 'flag-on': return (state) => evalFlagOn(state, expr.flag);
-    case 'flag-off': return (state) => evalFlagOff(state, expr.flag);
+    case 'time-mm': return evalTimeMm(expr.value, expr.value2);
+    case 'flag-on': return evalFlagOn(expr.flag);
+    case 'flag-off': return evalFlagOff(expr.flag);
   }
 }
 
@@ -293,4 +306,11 @@ export function evalExpr(expr: Expr, state: ExprState, deps: ExprDependencies): 
     cache.set(expr, f);
   }
   return f(state, deps);
+}
+
+export function compileExpr(expr: ExprNode): Expr {
+  const data = memoExpr(expr);
+  const func = Object.assign(makeEvalFunc(data), data);
+  Object.freeze(func);
+  return func;
 }

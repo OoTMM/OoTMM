@@ -1,8 +1,8 @@
-import type { Expr, ExprNode } from './types';
+import type { ExprData, ExprNode } from './types';
 
 let nextExprId = 0;
 const keyToId = new Map<string, number>();
-const isToExpr: Expr[] = [];
+const isToExpr: ExprData[] = [];
 
 function memoKey(expr: ExprNode): string {
   switch (expr.type) {
@@ -16,7 +16,7 @@ function memoKey(expr: ExprNode): string {
     case 'license': return `LICENSE:${expr.item.id}`;
     case 'event': return `EVENT:${expr.event}`;
     case 'masks': return `MASKS:${expr.count}`;
-    case 'special': return `SPECIAL:${expr.name}`;
+    case 'special': return `SPECIAL:${expr.specialId}`;
     case 'time-oot': return `TIME_OOT:${expr.flag}`;
     case 'time-mm': return `TIME_MM:${expr.value}:${expr.value2}`;
     case 'price': return `PRICE:${expr.slot}:${expr.max}`;
@@ -26,8 +26,8 @@ function memoKey(expr: ExprNode): string {
   }
 }
 
-export function memoExpr(expr: ExprNode): Expr {
-  let e: Expr;
+export function memoExpr(expr: ExprNode): ExprData {
+  let e: ExprData;
   const key = memoKey(expr);
   let id = keyToId.get(key);
   if (id === undefined) {

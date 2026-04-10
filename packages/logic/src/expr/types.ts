@@ -11,7 +11,7 @@ type ExprNodeRenewable = { readonly type: 'renewable'; readonly item: Item };
 type ExprNodeLicense = { readonly type: 'license', readonly item: Item };
 type ExprNodeEvent = { readonly type: 'event'; readonly event: string };
 type ExprNodeMasks = { readonly type: 'masks'; readonly count: number };
-type ExprNodeSpecial = { readonly type: 'special'; readonly name: string };
+type ExprNodeSpecial = { readonly type: 'special'; readonly specialId: string };
 type ExprNodeTimeOot = { readonly type: 'time-oot'; readonly flag: number };
 type ExprNodeTimeMm = { readonly type: 'time-mm'; readonly value: number; readonly value2: number };
 type ExprNodePrice = { readonly type: 'price'; readonly slot: number; readonly max: number };
@@ -38,7 +38,9 @@ export type ExprNode =
   | ExprNodeFlagOn
   | ExprNodeFlagOff;
 
-export type Expr = ExprNode & { readonly id: number };
+export type ExprData = ExprNode & { readonly id: number };
+export type ExprFunc = (state: ExprState, deps: ExprDependencies) => ExprResult;
+export type Expr = ExprFunc & ExprData;
 
 type ExprStateWorld = {
   songEvents: number[];

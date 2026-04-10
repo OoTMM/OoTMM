@@ -1,5 +1,5 @@
 import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
-import type { Expr, Age, AreaData, ExprDependencies, ExprResult } from '@ootmm/logic';
+import type { Expr, Age, AreaData, ExprDependencies, ExprResult, ExprState } from '@ootmm/logic';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
 import type { Location } from './locations';
@@ -390,7 +390,7 @@ export class Pathfinder {
       items: [],
       events: [],
     }
-    const result = evalExpr(expr, state, deps);
+    const result = expr(state, deps);
     return { result, deps };
   }
 
