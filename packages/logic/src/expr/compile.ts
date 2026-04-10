@@ -1,6 +1,6 @@
-import { ItemGroups, Items, type CountMap, type Item, type Settings } from '@ootmm/core';
 import type { Expr, ExprDependencies, ExprFunc, ExprNode, ExprRestrictions, ExprResult, ExprState } from './types';
 
+import { ItemGroups, Items, type CountMap, type Item, type Settings } from '@ootmm/core';
 import { OOT_TIME_ALL } from './data';
 import { exprMemoKey } from './memo';
 
@@ -123,14 +123,14 @@ function evalAnd(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
 
     /* Early exit */
     if (!r.result) {
-      return { result: false };
+      return RESULT_FALSE;
     }
   }
 
   const restrictions = exprRestrictionsAnd(results);
   /* Check for a contradiction (a restriction that prevents everything) */
   if (isRestrictionImpossible(restrictions)) {
-    return { result: false };
+    return RESULT_FALSE;
   }
 
   if (isDefaultRestrictions(restrictions)) {
