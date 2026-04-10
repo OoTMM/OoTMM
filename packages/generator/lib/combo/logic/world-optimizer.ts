@@ -1,9 +1,12 @@
 import type { PlayerItems } from '@ootmm/core';
 import type { World } from './world';
 
+/*
 import { makePlayerItem } from '@ootmm/core';
 import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAnd, ExprContainer, ExprHas, ExprLicense, ExprRenewable, exprAnd, exprOr } from '@ootmm/logic';
+*/
 
+/*
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   const transformed = cb(expr);
   if (transformed) {
@@ -25,7 +28,7 @@ function exprTransform(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   return exprTransformSingle(expr, cb);
 }
 
-export function transformEvalExprMap(exprMap: Record<string, Expr>, cb: (e: Expr) => Expr | null): Record<string, Expr> {
+function transformEvalExprMap(exprMap: Record<string, Expr>, cb: (e: Expr) => Expr | null): Record<string, Expr> {
   const newExprMap: Record<string, Expr> = {};
   for (const k in exprMap) {
     const oldExpr = exprMap[k];
@@ -93,4 +96,9 @@ export function optimizeWorldStartingAndPool(world: World, worldId: number, star
 
     return null;
   });
+}
+*/
+
+export function optimizeWorldStartingAndPool(world: World, worldId: number, startingItems: PlayerItems, allItems: PlayerItems): World {
+  return world;
 }

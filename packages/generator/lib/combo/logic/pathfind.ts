@@ -1,12 +1,12 @@
 import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
-import type { Age, AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from '@ootmm/logic';
+import type { Expr, Age, AreaData, ExprDependencies, ExprResult } from '@ootmm/logic';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
 import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, AGES, exprPartialEvalAge, Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD, AGES, exprPartialEvalAge, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions, evalExpr } from '@ootmm/logic';
 import { locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ANALYSIS_EVENTS } from './analysis';
 
@@ -25,6 +25,11 @@ const MASKS_BITS_SET = [
 
 const MASK_MM_TIME = MM_TIME_SLICES.length > 32 ? 0xffffffff : MASKS_BITS_SET[MM_TIME_SLICES.length - 1];
 const MASK_MM_TIME2 = MM_TIME_SLICES.length > 32 ? MASKS_BITS_SET[MM_TIME_SLICES.length - 33] : 0;
+
+type ExprResultWithDeps = {
+  result: ExprResult;
+  deps: ExprDependencies;
+};
 
 type PathfinderDependencyList = {
   locations: Set<string>;
@@ -373,7 +378,7 @@ export class Pathfinder {
     }
   }
 
-  private evalExpr(worldId: number, expr: Expr, age: Age, area: string): ExprResultWithDeps {
+  private evalExpr(worldId: number, expr: Expr, age: Age, area: string) {
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
@@ -385,7 +390,7 @@ export class Pathfinder {
       items: [],
       events: [],
     }
-    const result = expr.eval(state, deps);
+    const result = evalExpr(expr, state, deps);
     return { result, deps };
   }
 

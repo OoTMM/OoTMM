@@ -1,8 +1,8 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { ResolvedWorldFlags } from '@ootmm/logic';
+import type { ResolvedWorldFlags, Expr } from '@ootmm/logic';
 
 import { itemByID } from '@ootmm/core';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEvent } from '@ootmm/logic';
+import { exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEvent } from '@ootmm/logic';
 import { gameId } from '../util';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
