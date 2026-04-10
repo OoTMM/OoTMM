@@ -1,9 +1,8 @@
-import type { Settings, PlayerItems } from '@ootmm/core';
+import type { Settings, PlayerItems, Region } from '@ootmm/core';
 import type { Age } from '@ootmm/logic';
 import type { World, WorldArea } from './world';
 import type { Location } from './locations';
 import type { ItemProperties } from './item-properties';
-import type { Region } from './regions';
 
 import { ENTRANCES } from '@ootmm/data';
 import { Random, sample } from '@ootmm/core';

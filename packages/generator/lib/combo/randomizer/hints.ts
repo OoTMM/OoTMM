@@ -4,11 +4,11 @@ import type { HintGossip } from '../logic/hints';
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { HINTS, REGIONS } from '@ootmm/data';
+import { regionData } from '@ootmm/core';
 
 import { BOSS_INDEX_BY_DUNGEON } from '../logic/world';
 import { padBuffer16 } from '../util';
 import { DATA_HINTS_POOL } from '../data';
-import { regionData } from '../logic/regions';
 import { DUNGEONS_BY_KEY } from '../logic/dungeons';
 import { END_BOSS_METADATA } from '../logic/boss';
 import { PATH_EVENT_DATA } from '../logic/analysis-path';

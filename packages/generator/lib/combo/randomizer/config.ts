@@ -1,10 +1,9 @@
-import type { Game, Settings } from '@ootmm/core';
+import type { Game, Settings, Region } from '@ootmm/core';
 import type { World } from '../logic/world';
 import type { LogicResult } from '../logic'
-import type { Region } from '../logic/regions';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items } from '@ootmm/core';
+import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData } from '@ootmm/core';
 
 import { toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
@@ -15,7 +14,6 @@ import { worldConfig } from './world-config';
 import { CONFVARS_VALUES } from '../confvars';
 import { makeLocation } from '../logic/locations';
 import { gi } from './util';
-import { regionData } from '../logic/regions';
 
 const BOMBCHU_BEHAVIORS = {
   free: 0,

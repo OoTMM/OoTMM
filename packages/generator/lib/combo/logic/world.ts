@@ -1,7 +1,6 @@
 import type { Entrance } from '@ootmm/data';
-import type { Game, Settings, Item } from '@ootmm/core';
+import type { Game, Settings, Item, Region } from '@ootmm/core';
 import type { ResolvedWorldFlags } from '@ootmm/logic';
-import type { Region } from './regions';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';

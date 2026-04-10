@@ -3,3 +3,4 @@ export * from './defines';
 export * from './random';
 export * from './items';
 export * from './util';
+export * from './regions';

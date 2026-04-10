@@ -7,8 +7,7 @@ import type { Location } from './locations';
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
 import { AGE_ADULT, AGE_CHILD, AGES, exprPartialEvalAge, Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from '@ootmm/logic';
-import { locationData, makeLocation } from './locations';
-import { isLocationLicenseGranting, isLocationRenewable } from './locations';
+import { locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ANALYSIS_EVENTS } from './analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
