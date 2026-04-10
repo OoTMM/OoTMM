@@ -261,24 +261,36 @@ function evalFlagOff(state: ExprState, flag: number): ExprResult {
   return result;
 }
 
-export function evalExpr(expr: Expr, state: ExprState, deps: ExprDependencies): ExprResult {
+type ExprEvalFunc = (state: ExprState, deps: ExprDependencies) => ExprResult;
+const cache = new WeakMap<Expr, ExprEvalFunc>();
+
+function makeEvalFunc(expr: Expr): ExprEvalFunc {
   switch (expr.type) {
-    case 'true': return RESULT_TRUE;
-    case 'false': return RESULT_FALSE;
-    case 'or': return evalOr(expr.exprs, state, deps);
-    case 'and': return evalAnd(expr.exprs, state, deps);
-    case 'age': return (state.age === expr.age) ? RESULT_TRUE : RESULT_FALSE;
-    case 'item': return evalItem(state.items, expr.item, expr.count, deps);
-    case 'license': return evalItem(state.licenses, expr.item, 1, deps);
-    case 'renewable': return evalItem(state.renewables, expr.item, 1, deps);
-    case 'price': return state.world.prices[expr.slot] <= expr.max ? RESULT_TRUE : RESULT_FALSE;
-    case 'song-event': return state.world.songEvents[expr.songId] === expr.cmp ? RESULT_TRUE : RESULT_FALSE;
-    case 'masks': return evalItems(state.items, ItemGroups.MASKS_REGULAR, expr.count, deps);
-    case 'event': return evalEvent(state, expr.event, deps);
-    case 'special': return evalSpecial(state, expr.name, deps);
-    case 'time-oot': return evalTimeOot(state, expr.flag);
-    case 'time-mm': return evalTimeMm(state, expr.value, expr.value2);
-    case 'flag-on': return evalFlagOn(state, expr.flag);
-    case 'flag-off': return evalFlagOff(state, expr.flag);
+    case 'true': return () => RESULT_TRUE;
+    case 'false': return () => RESULT_FALSE;
+    case 'or': return (state, deps) => evalOr(expr.exprs, state, deps);
+    case 'and': return (state, deps) => evalAnd(expr.exprs, state, deps);
+    case 'age': return (state) => (state.age === expr.age) ? RESULT_TRUE : RESULT_FALSE;
+    case 'item': return (state, deps) => evalItem(state.items, expr.item, expr.count, deps);
+    case 'license': return (state, deps) => evalItem(state.licenses, expr.item, 1, deps);
+    case 'renewable': return (state, deps) => evalItem(state.renewables, expr.item, 1, deps);
+    case 'price': return (state) => state.world.prices[expr.slot] <= expr.max ? RESULT_TRUE : RESULT_FALSE;
+    case 'song-event': return (state) => state.world.songEvents[expr.songId] === expr.cmp ? RESULT_TRUE : RESULT_FALSE;
+    case 'masks': return (state, deps) => evalItems(state.items, ItemGroups.MASKS_REGULAR, expr.count, deps);
+    case 'event': return (state, deps) => evalEvent(state, expr.event, deps);
+    case 'special': return (state, deps) => evalSpecial(state, expr.name, deps);
+    case 'time-oot': return (state) => evalTimeOot(state, expr.flag);
+    case 'time-mm': return (state) => evalTimeMm(state, expr.value, expr.value2);
+    case 'flag-on': return (state) => evalFlagOn(state, expr.flag);
+    case 'flag-off': return (state) => evalFlagOff(state, expr.flag);
   }
+}
+
+export function evalExpr(expr: Expr, state: ExprState, deps: ExprDependencies): ExprResult {
+  let f = cache.get(expr);
+  if (!f) {
+    f = makeEvalFunc(expr);
+    cache.set(expr, f);
+  }
+  return f(state, deps);
 }
