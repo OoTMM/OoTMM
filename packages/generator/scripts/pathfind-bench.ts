@@ -21,13 +21,13 @@ function stats(times: number[]) {
 }
 
 async function main() {
-  const monitor = new Monitor({ onLog: (msg) => process.stdout.write(msg + '\n') });
+  const monitor = new Monitor({ onLog: () => {} });
 
   console.log('Building solved world...');
   const state = await solvedWorldState(monitor, options({ seed: SEED }));
   const pathfinder = new Pathfinder(state.worlds, state.settings, state.startingItems);
 
-  console.log(`\nRunning pathfinder ${ITERATIONS} times...`);
+  console.log(`Running pathfinder ${ITERATIONS} times...`);
   const times: number[] = [];
 
   for (let i = 0; i < ITERATIONS; i++) {
