@@ -1,11 +1,11 @@
 import type { Entrance } from '@ootmm/data';
 import type { Game, Settings, Item, Region } from '@ootmm/core';
-import type { ResolvedWorldFlags } from '@ootmm/logic';
+import type { ResolvedWorldFlags, Expr } from '@ootmm/logic';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
 import { GAMES, Random, itemByID, ItemHelpers, Items } from '@ootmm/core';
-import { Expr, exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
+import { exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
 
 import { gameId } from '../util';
 import { ExprParser } from './expr-parser';

@@ -1,8 +1,9 @@
 import type { PlayerItems } from '@ootmm/core';
+import type { Expr } from '@ootmm/logic';
 import type { World } from './world';
 
 import { makePlayerItem } from '@ootmm/core';
-import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAnd, ExprContainer, ExprHas, ExprLicense, ExprRenewable, exprAnd, exprOr } from '@ootmm/logic';
+import { exprAnd, exprFalse, exprOr, exprTrue } from '@ootmm/logic';
 
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   const transformed = cb(expr);
@@ -13,19 +14,14 @@ function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
 }
 
 function exprTransform(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
-  if (expr instanceof ExprContainer) {
-    const newExprs = expr.exprs.map(e => exprTransform(e, cb));
-    if (expr instanceof ExprAnd) {
-      return exprTransformSingle(exprAnd(newExprs), cb);
-    } else {
-      return exprTransformSingle(exprOr(newExprs), cb);
-    }
+  switch (expr.type) {
+    case 'and': return exprTransformSingle(exprAnd(expr.exprs.map(e => exprTransform(e, cb))), cb);
+    case 'or': return exprTransformSingle(exprOr(expr.exprs.map(e => exprTransform(e, cb))), cb);
+    default: return exprTransformSingle(expr, cb);
   }
-
-  return exprTransformSingle(expr, cb);
 }
 
-export function transformEvalExprMap(exprMap: Record<string, Expr>, cb: (e: Expr) => Expr | null): Record<string, Expr> {
+function transformEvalExprMap(exprMap: Record<string, Expr>, cb: (e: Expr) => Expr | null): Record<string, Expr> {
   const newExprMap: Record<string, Expr> = {};
   for (const k in exprMap) {
     const oldExpr = exprMap[k];
@@ -53,39 +49,39 @@ function transformWorldExprs(world: World, cb: (e: Expr) => Expr | null): World 
 
 export function optimizeWorldStartingAndPool(world: World, worldId: number, startingItems: PlayerItems, allItems: PlayerItems): World {
   return transformWorldExprs(world, (e) => {
-    if (e instanceof ExprHas) {
+    if (e.type === 'item') {
       const pi = makePlayerItem(e.item, worldId);
 
       if ((startingItems.get(pi) || 0) >= e.count) {
-        return EXPR_TRUE;
+        return exprTrue();
       }
 
       if ((allItems.get(pi) || 0) < e.count) {
-        return EXPR_FALSE;
+        return exprFalse();
       }
 
       return null;
     }
 
-    if (e instanceof ExprLicense) {
+    if (e.type === 'license') {
       const pi = makePlayerItem(e.item, worldId);
 
       if (startingItems.has(pi)) {
-        return EXPR_TRUE;
+        return exprTrue();
       }
 
       if (!allItems.has(pi)) {
-        return EXPR_FALSE;
+        return exprFalse();
       }
 
       return null;
     }
 
-    if (e instanceof ExprRenewable) {
+    if (e.type === 'renewable') {
       const pi = makePlayerItem(e.item, worldId);
 
       if (!allItems.has(pi)) {
-        return EXPR_FALSE;
+        return exprFalse();
       }
 
       return null;
