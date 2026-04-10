@@ -1,8 +1,8 @@
 import { ItemGroups, Items, type CountMap, type Item, type Settings } from '@ootmm/core';
-import type { Expr, ExprData, ExprDependencies, ExprFunc, ExprNode, ExprRestrictions, ExprResult, ExprState } from './types';
+import type { Expr, ExprDependencies, ExprFunc, ExprNode, ExprRestrictions, ExprResult, ExprState } from './types';
 
 import { OOT_TIME_ALL } from './data';
-import { memoExpr } from './memo';
+import { exprMemoKey } from './memo';
 
 const RESULT_TRUE: ExprResult = { result: true };
 const RESULT_FALSE: ExprResult = { result: false };
@@ -86,7 +86,7 @@ function evalOr(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
   const indexEvents = deps.events.length;
 
   for (const e of exprs) {
-    const r = e(state, deps);
+    const r = e.eval(state, deps);
     results.push(r);
     if (r.result) {
       result = true;
@@ -118,7 +118,7 @@ function evalAnd(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
   const indexEvents = deps.events.length;
 
   for (const e of exprs) {
-    const r = e(state, deps);
+    const r = e.eval(state, deps);
     results.push(r);
 
     /* Early exit */
@@ -220,8 +220,6 @@ function evalSpecial(state: ExprState, special: string, deps: ExprDependencies):
   return { result };
 }
 
-type ExprEvalFunc = (state: ExprState, deps: ExprDependencies) => ExprResult;
-
 function evalTimeOot(state: ExprState, flag: number): ExprResult {
   if (state.areaData.ootTime & flag) {
     const flagNeg = OOT_TIME_ALL & ~flag;
@@ -233,7 +231,7 @@ function evalTimeOot(state: ExprState, flag: number): ExprResult {
   }
 }
 
-function evalTimeMm(value: number, value2: number): ExprEvalFunc {
+function evalTimeMm(value: number, value2: number): ExprFunc {
   const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
   result.restrictions.mmTime = ~value >>> 0;
   result.restrictions.mmTime2 = ~value2 >>> 0;
@@ -247,7 +245,7 @@ function evalTimeMm(value: number, value2: number): ExprEvalFunc {
   }
 }
 
-function evalFlagOn(flag: number): ExprEvalFunc {
+function evalFlagOn(flag: number): ExprFunc {
   const mask = 1 << flag;
   const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
   result.restrictions.flagsOn = (1 << flag) >>> 0;
@@ -261,7 +259,7 @@ function evalFlagOn(flag: number): ExprEvalFunc {
 
 }
 
-function evalFlagOff(flag: number): ExprEvalFunc {
+function evalFlagOff(flag: number): ExprFunc {
   const mask = 1 << flag;
   const result = { ...RESULT_TRUE, restrictions: defaultRestrictions() };
   result.restrictions.flagsOff = (1 << flag) >>> 0;
@@ -275,9 +273,7 @@ function evalFlagOff(flag: number): ExprEvalFunc {
   }
 }
 
-const cache = new WeakMap<Expr, ExprEvalFunc>();
-
-function makeEvalFunc(expr: ExprData): ExprFunc {
+function makeEvalFunc(expr: ExprNode): ExprFunc {
   switch (expr.type) {
     case 'true': return () => RESULT_TRUE;
     case 'false': return () => RESULT_FALSE;
@@ -299,18 +295,21 @@ function makeEvalFunc(expr: ExprData): ExprFunc {
   }
 }
 
-export function evalExpr(expr: Expr, state: ExprState, deps: ExprDependencies): ExprResult {
-  let f = cache.get(expr);
-  if (!f) {
-    f = makeEvalFunc(expr);
-    cache.set(expr, f);
-  }
-  return f(state, deps);
-}
+let nextExprId = 0;
+const exprMemoIds: Record<string, number> = {};
+const exprMemo: Expr[] = [];
 
 export function compileExpr(expr: ExprNode): Expr {
-  const data = memoExpr(expr);
-  const func = Object.assign(makeEvalFunc(data), data);
-  Object.freeze(func);
-  return func;
+  const key = exprMemoKey(expr);
+  let id = exprMemoIds[key];
+  if (id !== undefined) {
+    return exprMemo[id];
+  }
+  id = nextExprId++;
+  exprMemoIds[key] = id;
+
+  const e = Object.assign({}, expr, { id, eval: makeEvalFunc(expr) });
+  Object.freeze(e);
+  exprMemo[id] = e;
+  return e;
 }

@@ -1,12 +1,12 @@
 import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
-import type { Expr, Age, AreaData, ExprDependencies, ExprResult, ExprState } from '@ootmm/logic';
+import type { Expr, Age, AreaData, ExprDependencies, ExprResult } from '@ootmm/logic';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
 import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, AGES, exprPartialEvalAge, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions, evalExpr } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD, AGES, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from '@ootmm/logic';
 import { locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ANALYSIS_EVENTS } from './analysis';
 
@@ -385,12 +385,11 @@ export class Pathfinder {
     const areaData = as.areas.get(area)!;
     const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
 
-    expr = exprPartialEvalAge(expr, age);
     const deps: ExprDependencies = {
       items: [],
       events: [],
     }
-    const result = expr(state, deps);
+    const result = expr.eval(state, deps);
     return { result, deps };
   }
 

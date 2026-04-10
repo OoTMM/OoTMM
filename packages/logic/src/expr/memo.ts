@@ -1,10 +1,6 @@
-import type { ExprData, ExprNode } from './types';
+import type { ExprNode } from './types';
 
-let nextExprId = 0;
-const keyToId = new Map<string, number>();
-const isToExpr: ExprData[] = [];
-
-function memoKey(expr: ExprNode): string {
+export function exprMemoKey(expr: ExprNode): string {
   switch (expr.type) {
     case 'true': return 'TRUE';
     case 'false': return 'FALSE';
@@ -26,17 +22,3 @@ function memoKey(expr: ExprNode): string {
   }
 }
 
-export function memoExpr(expr: ExprNode): ExprData {
-  let e: ExprData;
-  const key = memoKey(expr);
-  let id = keyToId.get(key);
-  if (id === undefined) {
-    id = nextExprId++;
-    keyToId.set(key, id);
-    e = Object.freeze({ ...expr, id });
-    isToExpr[id] = e;
-  } else {
-    e = isToExpr[id];
-  }
-  return e;
-};

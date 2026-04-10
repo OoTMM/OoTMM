@@ -38,9 +38,8 @@ export type ExprNode =
   | ExprNodeFlagOn
   | ExprNodeFlagOff;
 
-export type ExprData = ExprNode & { readonly id: number };
 export type ExprFunc = (state: ExprState, deps: ExprDependencies) => ExprResult;
-export type Expr = ExprFunc & ExprData;
+export type Expr = ExprNode & { readonly id: number; readonly eval: ExprFunc };
 
 type ExprStateWorld = {
   songEvents: number[];
