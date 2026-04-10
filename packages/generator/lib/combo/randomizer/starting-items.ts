@@ -1,10 +1,9 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, ItemsCount } from '@ootmm/core';
 import type { LogicResult } from '../logic';
 import type { World } from '../logic/world';
-import type { ItemsCount } from '../items';
 
-import { countMapAdd, toU16Buffer } from '../util';
-import { ItemGroups, ItemHelpers } from '../items';
+import { ItemGroups, ItemHelpers, countMapAdd } from '@ootmm/core';
+import { toU16Buffer } from '../util';
 import { gi } from './util';
 import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '../logic/locations';
 

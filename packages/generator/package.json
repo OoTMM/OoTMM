@@ -13,6 +13,7 @@
     "@ootmm/core": "*",
     "@ootmm/data": "*",
     "@ootmm/tools": "*",
+    "@ootmm/logic": "*",
     "crc-32": "^1.2.2",
     "jszip": "^3.10.1",
     "lodash-es": "catalog:",

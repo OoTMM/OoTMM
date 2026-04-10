@@ -1,8 +1,7 @@
-import type { Settings } from '@ootmm/core';
-import type { ItemsCount } from './items';
+import type { Settings, ItemsCount } from '@ootmm/core';
 
+import { ItemHelpers, makePlayerItem } from '@ootmm/core';
 import { makeCosmetics } from './cosmetics';
-import { ItemHelpers, makePlayerItem } from './items';
 import { worldState } from './logic';
 import { Monitor } from './monitor';
 import { itemName } from './names';

@@ -6,7 +6,7 @@ export { makePlayerItem } from './util';
 export * as ItemGroups from './groups';
 export * as ItemHelpers from './helpers';
 
-export type { Item } from './defs';
+export type { Item, ItemID } from './defs';
 export type { PlayerItems, PlayerItem, ItemsCount } from './util';
 
 export function itemByID(id: string): Item {

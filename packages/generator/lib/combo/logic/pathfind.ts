@@ -1,20 +1,13 @@
-import type { Settings } from '@ootmm/core';
-import type { AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from './expr';
+import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
+import type { Age, AreaData, ExprDependencies, ExprResult, ExprResultWithDeps } from '@ootmm/logic';
 import type { ItemPlacement } from './solve';
 import type { World } from './world';
-import type { Age } from './constants';
-import type { Item, ItemsCount, PlayerItems } from '../items';
 import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
-import { Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from './expr';
-import { locationData, makeLocation } from './locations';
-import { isLocationLicenseGranting, isLocationRenewable } from './locations';
-import { countMapAdd } from '../util';
-import { Items } from '../items';
-import { isTriforcePiece } from '../items/helpers';
-import { exprPartialEvalAge } from './expr-partial-eval';
-import { AGE_ADULT, AGE_CHILD, AGES } from './constants';
+import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
+import { AGE_ADULT, AGE_CHILD, AGES, exprPartialEvalAge, Expr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from '@ootmm/logic';
+import { locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ANALYSIS_EVENTS } from './analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
@@ -498,7 +491,7 @@ export class Pathfinder {
         this.requeueItem(playerItem.player, playerItem.item);
       }
 
-      if (isTriforcePiece(playerItem.item)) {
+      if (ItemHelpers.isTriforcePiece(playerItem.item)) {
         this.updateGoalFlags();
       }
     } else {

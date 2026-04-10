@@ -1,14 +1,10 @@
-import type { Settings, TrickKey } from '@ootmm/core';
-import type { Item, ItemsCount } from '../items';
-import type { ItemID } from '../items/defs';
-import type { Age } from './constants';
-import type { ResolvedWorldFlags, World } from './world';
+import type { Settings, TrickKey, Item, ItemsCount, ItemID } from '@ootmm/core';
+import type { Age } from '../age';
 
-import { SETTINGS, TRICKS } from '@ootmm/core';
-import { ItemGroups, Items } from '../items';
-import { AGE_ADULT, AGE_CHILD } from './constants';
-import { PRICE_RANGES } from './price';
-import { WORLD_FLAGS } from './world';
+import { SETTINGS, TRICKS, ItemGroups, Items } from '@ootmm/core';
+import { AGE_ADULT, AGE_CHILD } from '../age';
+import { WORLD_FLAGS } from '../world-flags';
+import { PRICE_RANGES } from '../price';
 
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',
@@ -151,15 +147,20 @@ export type AreaData = {
   flagsOff: number;
 };
 
-type State = {
+type ExprStateWorld = {
+  songEvents: number[];
+  prices: number[];
+};
+
+type ExprState = {
   items: ItemsCount;
   renewables: ItemsCount;
   licenses: ItemsCount;
   age: Age;
   events: Set<string>;
   areaData: AreaData;
-  world: World;
   settings: Settings;
+  world: ExprStateWorld;
 };
 
 /* AND the restrictions together */
@@ -196,8 +197,8 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
   return restrictions;
 };
 
-const itemCount = (state: State, item: Item): number => state.items.get(item) || 0;
-const itemsCount = (state: State, items: Item[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
+const itemCount = (state: ExprState, item: Item): number => state.items.get(item) || 0;
+const itemsCount = (state: ExprState, items: Item[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
 function specialCondSets(settings: Settings, special: string) {
   const { specialConds } = settings;
@@ -242,7 +243,7 @@ export abstract class Expr {
     this.key = k;
     this._cacheAge = [this, this];
   }
-  abstract eval(state: State, deps: ExprDependencies): ExprResult;
+  abstract eval(state: ExprState, deps: ExprDependencies): ExprResult;
 
   visit(cb: (expr: Expr) => void) {
     cb(this);
@@ -274,7 +275,7 @@ class ExprTrue extends Expr {
     super('TRUE');
   }
 
-  eval(_state: State, deps: ExprDependencies): ExprResult {
+  eval(_state: ExprState, deps: ExprDependencies): ExprResult {
     return RESULT_TRUE;
   }
 }
@@ -284,7 +285,7 @@ class ExprFalse extends Expr {
     super('FALSE');
   }
 
-  eval(_state: State): ExprResult {
+  eval(_state: ExprState): ExprResult {
     return RESULT_FALSE;
   }
 }
@@ -295,7 +296,7 @@ export class ExprAnd extends ExprContainer {
     super(key, exprs);
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     const results: ExprResult[] = [];
     const indexItems = deps.items.length;
     const indexEvents = deps.events.length;
@@ -332,7 +333,7 @@ export class ExprOr extends ExprContainer {
     super(key, exprs);
   }
 
-  eval(state: State, deps: ExprDependencies) {
+  eval(state: ExprState, deps: ExprDependencies) {
     const results: ExprResult[] = [];
     let result = false;
 
@@ -378,7 +379,7 @@ export class ExprAge extends Expr {
     this._cacheAge[age] = EXPR_TRUE;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     return (state.age === this.age) ? RESULT_TRUE : RESULT_FALSE;
   }
 }
@@ -394,7 +395,7 @@ export class ExprHas extends Expr {
     this.count = count;
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     if (itemCount(state, this.item) >= this.count) {
       return RESULT_TRUE;
     } else {
@@ -413,7 +414,7 @@ export class ExprRenewable extends Expr {
     this.item = item;
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     if ((state.renewables.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
@@ -432,7 +433,7 @@ export class ExprLicense extends Expr {
     this.item = item;
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     if ((state.licenses.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
@@ -450,7 +451,7 @@ class ExprEvent extends Expr {
     this.event = event;
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     if (state.events.has(this.event)) {
       return RESULT_TRUE;
     } else {
@@ -468,7 +469,7 @@ class ExprMasks extends Expr {
     this.count = count;
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     if (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count) {
       return RESULT_TRUE;
     } else {
@@ -489,7 +490,7 @@ class ExprSpecial extends Expr {
     this.special = special;
   }
 
-  eval(state: State, deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, deps: ExprDependencies): ExprResult {
     const { items, itemsUnique } = specialCondSets(state.settings, this.special);
     const { specialConds } = state.settings;
     const cond = specialConds[this.special as keyof typeof specialConds];
@@ -513,7 +514,7 @@ class ExprTimeOot extends Expr {
     this.flagNeg = OOT_TIME_ALL & ~this.flag;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     if (state.areaData.ootTime & this.flag) {
       const restrictions = defaultRestrictions();
       restrictions.ootTime = this.flagNeg;
@@ -534,7 +535,7 @@ class ExprTimeMm extends Expr {
     this.value2 = value2;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     if (state.areaData.mmTime & this.value || state.areaData.mmTime2 & this.value2) {
       const restrictions = defaultRestrictions();
       restrictions.mmTime = ~this.value >>> 0;
@@ -556,7 +557,7 @@ class ExprPrice extends Expr {
     this.max = max;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     const price = state.world.prices[this.slot];
     return price <= this.max ? RESULT_TRUE : RESULT_FALSE;
   }
@@ -572,7 +573,7 @@ class ExprSongEvent extends Expr {
     this.cmp = cmp;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     return state.world.songEvents[this.id] === this.cmp ? RESULT_TRUE : RESULT_FALSE;
   }
 }
@@ -589,7 +590,7 @@ class ExprFlagOn extends Expr {
     this.result.restrictions.flagsOn = this.flagBit;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     if (state.areaData.flagsOff & this.flagBit) {
       return RESULT_FALSE;
     }
@@ -609,7 +610,7 @@ class ExprFlagOff extends Expr {
     this.result.restrictions.flagsOff = this.flagBit;
   }
 
-  eval(state: State, _deps: ExprDependencies): ExprResult {
+  eval(state: ExprState, _deps: ExprDependencies): ExprResult {
     if (state.areaData.flagsOn & this.flagBit) {
       return RESULT_FALSE;
     }
@@ -747,7 +748,7 @@ export const exprSpecial = (settings: Settings, special: string): Expr => {
   return exprMemo(new ExprSpecial(settings, special));
 };
 
-export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlags, setting: string, value: string | undefined): Expr => {
+export const exprSetting = (settings: Settings, resolvedFlags: Record<string, any>, setting: string, value: string | undefined): Expr => {
   if ((WORLD_FLAGS as readonly string[]).includes(setting)) {
     /* World flag */
     if (!resolvedFlags.hasOwnProperty(setting)) {
