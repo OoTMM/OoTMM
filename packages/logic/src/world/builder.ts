@@ -1,9 +1,12 @@
 import type { Game, Settings, Item } from '@ootmm/core';
-import type { Expr, World, ExprMap, WorldCheck, WorldArea, ExprParsers, WorldGossip } from '@ootmm/logic';
+import type { World, WorldCheck, WorldArea, ExprMap, ExprParsers } from './types';
+import type { Expr } from '../expr';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId, GOSSIPS_BY_LOCATION } from '@ootmm/core';
-import { ExprParser, defaultPrices, exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
+import { ExprParser, exprTrue, MM_TIME_SLICES } from '../expr';
+import { defaultPrices } from '../price';
+import { resolveWorldFlags } from './flags';
 
 export const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,

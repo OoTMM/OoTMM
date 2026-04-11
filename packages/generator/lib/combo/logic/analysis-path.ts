@@ -3,8 +3,7 @@ import type { Location, ItemPlacement, World, PathfinderState, ItemProperties } 
 import type { Analysis } from './analysis';
 
 import { Monitor, Random, Items, makePlayerItem } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, Pathfinder } from '@ootmm/logic';
-import { cloneWorld } from './world';
+import { cloneWorld, AGE_ADULT, AGE_CHILD, Pathfinder } from '@ootmm/logic';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
 
 type Triforce3Type = 'Power' | 'Courage' | 'Wisdom';

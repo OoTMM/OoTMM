@@ -1,10 +1,9 @@
 import type { Options } from '../options';
 
 import { Monitor, Random } from '@ootmm/core';
-import { LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
+import { LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
 
 import { LogicPassSolver } from './solve';
-import { LogicPassWorld } from './world';
 import { LogicPassSpoiler } from './spoiler';
 import { LogicPassHints } from './hints';
 import { LogicPassAnalysis } from './analysis';
