@@ -14,7 +14,11 @@
       "cache": true,
       "dependsOn": ["^build"]
     },
-    "test": {},
+    "test": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
     "typecheck": {
       "cache": true
     },
