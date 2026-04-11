@@ -98,7 +98,7 @@ export async function logic(monitor: Monitor, opts: Options): Promise<LogicResul
     .apply(logicPassHash)
     .exec();
 
-    const worlds: LogicResultWorld[] = state.worlds.map(w => ({
+    const worlds: LogicResultWorld[] = data.worlds.map(w => ({
       resolvedFlags: w.resolvedFlags,
       checks: w.checks,
       prices: w.prices,
