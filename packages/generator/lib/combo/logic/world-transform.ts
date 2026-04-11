@@ -1,7 +1,6 @@
 import type { Settings, ItemID, Item, PlayerItem, PlayerItems } from '@ootmm/core';
-import type { Location } from '@ootmm/logic';
+import type { Location, World, WorldCheckType } from '@ootmm/logic';
 import type { ItemProperties } from './item-properties';
-import type { World, WorldCheckType } from './world';
 import type { ItemSharedDef } from './shared';
 
 import { POOL } from '@ootmm/data';

@@ -1,6 +1,5 @@
 import type { Settings, PlayerItem } from '@ootmm/core';
-import type { Location, ItemPlacement } from '@ootmm/logic';
-import type { World } from './world';
+import type { Location, ItemPlacement, World } from '@ootmm/logic';
 
 import { ItemHelpers } from '@ootmm/core';
 

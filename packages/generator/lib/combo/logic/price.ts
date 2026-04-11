@@ -1,6 +1,5 @@
 import type { Settings } from '@ootmm/core';
-import type { ResolvedWorldFlags } from '@ootmm/logic';
-import type { World } from './world';
+import type { ResolvedWorldFlags, World } from '@ootmm/logic';
 
 import { Random, randomInt } from '@ootmm/core';
 import { DEFAULT_PRICES, PRICES_RAW, PRICE_RANGES, PRICE_COUNTS } from '@ootmm/logic';

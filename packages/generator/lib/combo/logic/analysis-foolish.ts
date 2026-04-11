@@ -1,7 +1,6 @@
 import type { Settings, PlayerItems } from '@ootmm/core';
-import type { ItemPlacement, Location } from '@ootmm/logic';
+import type { ItemPlacement, Location, World } from '@ootmm/logic';
 import type { PathfinderState } from './pathfind';
-import type { World } from './world';
 import type { Analysis } from './analysis';
 import type { ItemProperties } from './item-properties';
 

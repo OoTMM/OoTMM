@@ -1,6 +1,5 @@
 import type { Game, Settings, CountMap, PlayerItems, PlayerItem, Region } from '@ootmm/core';
-import type { ItemPlacement, Location } from '@ootmm/logic';
-import type { World } from './world';
+import type { ItemPlacement, Location, World } from '@ootmm/logic';
 import type { Analysis } from './analysis';
 import type { AnalysisPath } from './analysis-path';
 
