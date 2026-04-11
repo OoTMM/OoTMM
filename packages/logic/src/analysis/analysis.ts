@@ -1,22 +1,15 @@
 import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
-import type { ItemPlacement, Location, World, PathfinderState, ItemProperties } from '@ootmm/logic';
-import type { AnalysisPath } from './analysis-path';
+import type { AnalysisPath, SphereEntry } from './types';
+import type { ItemPlacement, Location } from '../types';
+import type { World } from '../world';
+import type { ItemProperties } from '../item-properties';
+import type { PathfinderState } from '../pathfind';
 
 import { Monitor, Random, shuffle, ItemHelpers } from '@ootmm/core';
-import { cloneWorld, isLocationRenewable, makeLocation, locationData, ANALYSIS_EVENTS, Pathfinder } from '@ootmm/logic';
-
-type SphereEntryLocation = {
-  type: 'location';
-  location: Location;
-};
-
-export type SphereEntryEvent = {
-  type: 'event';
-  event: string;
-  playerId: number;
-};
-
-type SphereEntry = SphereEntryLocation | SphereEntryEvent;
+import { cloneWorld } from '../world';
+import { isLocationRenewable, makeLocation, locationData } from '../locations';
+import { ANALYSIS_EVENTS } from './events';
+import { Pathfinder } from '../pathfind';
 
 export class LogicPassAnalysis {
   private pathfinder: Pathfinder;
@@ -208,4 +201,3 @@ export class LogicPassAnalysis {
   }
 }
 
-export type Analysis = ReturnType<LogicPassAnalysis['run']>['analysis'];

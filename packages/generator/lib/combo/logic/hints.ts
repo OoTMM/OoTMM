@@ -1,7 +1,5 @@
 import type { Game, Settings, CountMap, PlayerItems, PlayerItem, Region } from '@ootmm/core';
-import type { ItemPlacement, Location, World } from '@ootmm/logic';
-import type { Analysis } from './analysis';
-import type { AnalysisPath } from './analysis-path';
+import type { ItemPlacement, Location, World, Analysis, AnalysisPath } from '@ootmm/logic';
 
 import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion } from '@ootmm/core';
 import { DUNGEONS_REGIONS, locationData, makeLocation, isLocationFullyShuffled, Pathfinder } from '@ootmm/logic';

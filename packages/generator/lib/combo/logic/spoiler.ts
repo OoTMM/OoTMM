@@ -1,16 +1,13 @@
 import type { Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
-import type { Location, ItemPlacement, World } from '@ootmm/logic';
+import type { Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
 import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import type { Options } from '../options';
-import type { Analysis, SphereEntryEvent } from './analysis';
-import type { AnalysisPath } from './analysis-path';
 
 import { sortBy } from 'lodash-es';
 import { Monitor, SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
-import { BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
+import { PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
-import { PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { LogWriter } from '../util/log-writer';
 import { DUNGEONS_BY_KEY } from './dungeons';

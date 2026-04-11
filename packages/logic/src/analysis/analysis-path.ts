@@ -1,33 +1,22 @@
 import type { Settings, Item, PlayerItems } from '@ootmm/core';
-import type { Location, ItemPlacement, World, PathfinderState, ItemProperties } from '@ootmm/logic';
-import type { Analysis } from './analysis';
+import type { Location, ItemPlacement } from '../types';
+import type { World } from '../world';
+import type { ItemProperties } from '../item-properties';
+import type { PathfinderState } from '../pathfind';
+import type { Triforce3Type, Analysis, AnalysisPath, AnalysisPathType } from './types';
 
 import { Monitor, Random, Items, makePlayerItem } from '@ootmm/core';
-import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME, cloneWorld, AGE_ADULT, AGE_CHILD, Pathfinder } from '@ootmm/logic';
+import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from '../data';
+import { cloneWorld } from '../world';
+import { Pathfinder } from '../pathfind';
+import { AGE_ADULT, AGE_CHILD } from '../age';
 
-type Triforce3Type = 'Power' | 'Courage' | 'Wisdom';
 const TRIFORCE3_ITEMS: { [key in Triforce3Type]: Item } = {
   Power: Items.SHARED_TRIFORCE_POWER,
   Courage: Items.SHARED_TRIFORCE_COURAGE,
   Wisdom: Items.SHARED_TRIFORCE_WISDOM,
 };
 
-export type AnalysisPathTypeWotH = { type: 'woth' };
-export type AnalysisPathTypeTriforce = { type: 'triforce', triforce: Triforce3Type };
-export type AnalysisPathTypeDungeon = { type: 'dungeon', dungeon: string };
-export type AnalysisPathTypeBoss = { type: 'boss', boss: string };
-export type AnalysisPathTypeEndBoss = { type: 'end-boss', boss: string };
-export type AnalysisPathTypeEvent = { type: 'event', event: string };
-export type AnalysisPathType =
-  | AnalysisPathTypeWotH
-  | AnalysisPathTypeTriforce
-  | AnalysisPathTypeDungeon
-  | AnalysisPathTypeBoss
-  | AnalysisPathTypeEndBoss
-  | AnalysisPathTypeEvent;
-
-export type AnalysisPathBase = { player: number | 'all', locations: Set<Location> };
-export type AnalysisPath = AnalysisPathBase & AnalysisPathType;
 export type AnalysisPathState = {
   key: string;
   locks: string[];
