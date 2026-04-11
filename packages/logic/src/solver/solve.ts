@@ -6,7 +6,7 @@ import type { PathfinderState } from '../pathfind';
 
 import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
 import { cloneWorld } from '../world';
-import { mustStartWithMasterSword } from '../master-sword';
+import { mustStartWithMasterSword } from '../helpers';
 import { LogicError, LogicSeedError } from '../error';
 import { exprTrue } from '../expr';
 import { isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from '../locations';

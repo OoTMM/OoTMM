@@ -5,12 +5,11 @@ import type { Options } from '../options';
 
 import { sortBy } from 'lodash-es';
 import { Monitor, SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
-import { PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
+import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
 import { regionName } from '../regions';
 import { LogWriter } from '../util/log-writer';
-import { DUNGEONS_BY_KEY } from './dungeons';
 
 const VERSION = process.env.VERSION || 'XXX';
 

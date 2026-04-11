@@ -1,11 +1,10 @@
 import type { Options } from '../options';
 
 import { Monitor, Random } from '@ootmm/core';
-import { LogicPassAnalysisPaths, LogicPassAnalysisFoolish, LogicPassAnalysis, LogicPassCloak, LogicPassMinimize, LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
+import { LogicPassEntrances, LogicPassAnalysisPaths, LogicPassAnalysisFoolish, LogicPassAnalysis, LogicPassCloak, LogicPassMinimize, LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
 
 import { LogicPassSpoiler } from './spoiler';
 import { LogicPassHints } from './hints';
-import { LogicPassEntrances } from './entrance';
 import { LogicPassHash } from './hash';
 import { LogicPassConfig } from './config';
 import { LogicPassWorldTransform } from './world-transform';

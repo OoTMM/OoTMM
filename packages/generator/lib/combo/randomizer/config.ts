@@ -4,12 +4,10 @@ import type { LogicResult } from '../logic'
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData, ENTRANCES, REGIONS } from '@ootmm/core';
-import { makeLocation } from '@ootmm/logic';
+import { DUNGEONS, DUNGEON_ENTRANCES, makeLocation } from '@ootmm/logic';
 
 import { toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
-import { DUNGEON_ENTRANCES } from '../logic/entrance';
-import { DUNGEONS } from '../logic/dungeons';
 import { worldConfig } from './world-config';
 import { CONFVARS_VALUES } from '../confvars';
 import { gi } from './util';
