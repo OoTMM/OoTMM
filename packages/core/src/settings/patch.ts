@@ -1,5 +1,5 @@
-import type { Entrance } from '@ootmm/data';
 import type { PartialDeep } from 'type-fest';
+import type { Entrance } from '../data';
 
 import type { TrickKey } from './tricks';
 import type { Settings } from './type';

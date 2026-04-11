@@ -2,11 +2,10 @@ import type { Game } from '@ootmm/core';
 import type { Cosmetics } from './type';
 
 import JSZip from 'jszip';
-import { Random, sample, shuffle } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle } from '@ootmm/core';
 
 import { toU32Buffer } from '../util';
 import { RomBuilder } from '../rom-builder';
-import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
 import { concatUint8Arrays } from 'uint8array-extras';
 

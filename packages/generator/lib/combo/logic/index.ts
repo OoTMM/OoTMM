@@ -1,25 +1,15 @@
 import type { Options } from '../options';
 
-import { Random } from '@ootmm/core';
+import { Monitor, Random } from '@ootmm/core';
+import { LogicPassEntrances, LogicPassAnalysisPaths, LogicPassAnalysisFoolish, LogicPassAnalysis, LogicPassCloak, LogicPassMinimize, LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
 
-import { LogicPassSolver } from './solve';
-import { LogicPassWorld } from './world';
 import { LogicPassSpoiler } from './spoiler';
 import { LogicPassHints } from './hints';
-import { LogicPassAnalysis } from './analysis';
-import { Monitor } from '../monitor';
-import { LogicPassEntrances } from './entrance';
 import { LogicPassHash } from './hash';
 import { LogicPassConfig } from './config';
 import { LogicPassWorldTransform } from './world-transform';
 import { LogicPassFixer } from './fixer';
-import { LogicPassAnalysisFoolish } from './analysis-foolish';
-import { LogicPassPrice } from './price';
-import { LogicPassItemProperties } from './item-properties';
-import { LogicPassMinimize } from './minimize';
-import { LogicPassAnalysisPaths } from './analysis-path';
 import { LogicPassSongEvents } from './song-events';
-import { LogicPassCloak } from './cloak';
 
 interface LogicPass<Out> {
   run: () => Out;

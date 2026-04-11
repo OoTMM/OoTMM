@@ -1,17 +1,19 @@
 import type { Settings, PlayerItems, Region } from '@ootmm/core';
-import type { Age, Expr, Location, World, WorldArea } from '@ootmm/logic';
-import type { ItemProperties } from './item-properties';
+import type { Location } from '../types';
+import type { World, WorldArea } from '../world';
+import type { ItemProperties } from '../item-properties'
+import type { Age } from '../age';
+import type { Expr } from '../expr';
 
-import { ENTRANCES } from '@ootmm/data';
-import { Random, sample } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from '@ootmm/logic';
-import { DUNGEONS_REGIONS, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
-import { Pathfinder } from './pathfind';
-import { Monitor } from '../monitor';
-import { LogicEntranceError, LogicError } from './error';
-import { makeLocation } from './locations';
-import { LogicPassSolver } from './solve';
-import { BOSS_METADATA_BY_ENTRANCE } from './boss';
+import { Monitor, Random, sample, ENTRANCES } from '@ootmm/core';
+import { AGE_ADULT, AGE_CHILD } from '../age';
+import { exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from '../expr';
+import { LogicPassSolver } from '../solver';
+import { BOSS_INDEX_BY_DUNGEON, cloneWorld, DUNGEONS_REGIONS } from '../world';
+import { BOSS_METADATA_BY_ENTRANCE } from '../data';
+import { Pathfinder } from '../pathfind';
+import { LogicEntranceError, LogicError } from '../error';
+import { makeLocation } from '../locations';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;

@@ -1,25 +1,15 @@
 import type { Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
-import type { Location, ItemPlacement, World } from '@ootmm/logic';
+import type { Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
 import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import type { Options } from '../options';
-import type { Analysis, SphereEntryEvent } from './analysis';
-import type { AnalysisPath } from './analysis-path';
 
 import { sortBy } from 'lodash-es';
-import { SETTINGS, TRICKS, exportSettings, regionData } from '@ootmm/core';
-import { ENTRANCES } from '@ootmm/data';
-import { WORLD_FLAGS } from '@ootmm/logic';
+import { Monitor, SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
+import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
-import { Monitor } from '../monitor';
-import { ANALYSIS_EVENTS } from './analysis';
-import { PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
-import { isShuffled } from './is-shuffled'
-import { locationData, makeLocation } from './locations';
 import { LogWriter } from '../util/log-writer';
-import { BOSS_METADATA_BY_DUNGEON } from './boss';
-import { DUNGEONS_BY_KEY } from './dungeons';
 
 const VERSION = process.env.VERSION || 'XXX';
 

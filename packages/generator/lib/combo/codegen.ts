@@ -1,10 +1,8 @@
-import path from 'path';
-import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
-import { SETTINGS } from '@ootmm/core';
+import path from 'node:path';
+import { Monitor, SETTINGS, ENTRANCES, NPC, SCENES } from '@ootmm/core';
 import { PRICE_RANGES } from '@ootmm/logic';
 
 import { DRAWGI, GI } from './data';
-import { Monitor } from './monitor';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
 import { CodeGen } from './util/codegen';

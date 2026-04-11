@@ -78,9 +78,6 @@ importers:
 
   packages/core:
     dependencies:
-      '@ootmm/data':
-        specifier: '*'
-        version: link:../data
       lodash-es:
         specifier: 'catalog:'
         version: 4.18.1
@@ -97,15 +94,12 @@ importers:
       '@types/pako':
         specifier: ^2.0.4
         version: 2.0.4
-      type-fest:
-        specifier: 'catalog:'
-        version: 5.5.0
-
-  packages/data:
-    devDependencies:
       csv:
         specifier: ^6.5.1
         version: 6.5.1
+      type-fest:
+        specifier: 'catalog:'
+        version: 5.5.0
       yaml:
         specifier: 'catalog:'
         version: 2.8.3
@@ -124,9 +118,6 @@ importers:
       '@ootmm/core':
         specifier: '*'
         version: link:../core
-      '@ootmm/data':
-        specifier: '*'
-        version: link:../data
       '@ootmm/logic':
         specifier: '*'
         version: link:../logic
@@ -219,9 +210,13 @@ importers:
       '@ootmm/core':
         specifier: '*'
         version: link:../core
-      '@ootmm/data':
-        specifier: '*'
-        version: link:../data
+      lodash-es:
+        specifier: 'catalog:'
+        version: 4.18.1
+    devDependencies:
+      '@types/lodash-es':
+        specifier: 'catalog:'
+        version: 4.17.12
 
   packages/tools: {}
 

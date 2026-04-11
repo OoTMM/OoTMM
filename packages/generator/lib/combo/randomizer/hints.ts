@@ -3,15 +3,10 @@ import type { LogicResult } from '../logic';
 import type { HintGossip } from '../logic/hints';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { HINTS, REGIONS } from '@ootmm/data';
-import { regionData } from '@ootmm/core';
+import { GOSSIPS_BY_LOCATION, HINTS, REGIONS, regionData } from '@ootmm/core';
+import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, END_BOSS_METADATA, BOSS_INDEX_BY_DUNGEON } from '@ootmm/logic';
 
-import { BOSS_INDEX_BY_DUNGEON } from '../logic/world';
 import { padBuffer16 } from '../util';
-import { DATA_HINTS_POOL } from '../data';
-import { DUNGEONS_BY_KEY } from '../logic/dungeons';
-import { END_BOSS_METADATA } from '../logic/boss';
-import { PATH_EVENT_DATA } from '../logic/analysis-path';
 import { bufWriteI8, bufWriteU16BE, bufWriteU8 } from '../util/buffer';
 import { gi, playerId } from './util';
 
@@ -69,7 +64,7 @@ export class RandomizerPatcherHints {
   private hintBuffer(gossip: string, hint: HintGossip): Uint8Array {
     const data = new Uint8Array(0x10);
     data.fill(0xff);
-    let gossipData = DATA_HINTS_POOL[this.ctx.game][gossip];
+    let gossipData = GOSSIPS_BY_LOCATION[gossip];
     if (!gossipData) {
       throw new Error(`Unknown gossip ${gossip} for game ${this.ctx.game}`);
     }

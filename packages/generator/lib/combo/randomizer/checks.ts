@@ -3,9 +3,9 @@ import type { World, WorldCheck } from '@ootmm/logic';
 import type { LogicResult } from '../logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { NPC, SCENES } from '@ootmm/data';
+import { NPC, SCENES } from '@ootmm/core';
+import { makeLocation } from '@ootmm/logic';
 
-import { makeLocation } from '../logic/locations';
 import { gi, playerId } from './util';
 import { bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
 

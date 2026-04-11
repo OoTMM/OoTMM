@@ -5,13 +5,12 @@ import type { DecompressedRoms } from '../decompress';
 import type { LogicResult } from '../logic';
 import type { PatchGroup } from './group';
 
-import { GAMES } from '@ootmm/core';
+import { Monitor, GAMES } from '@ootmm/core';
+import { isEntranceShuffle } from '@ootmm/logic';
 import { CONFIG } from '../config';
-import { Monitor } from '../monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from '../randomizer';
-import { isEntranceShuffle } from '../logic/helpers';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { FileResolver } from '../file-resolver';
 

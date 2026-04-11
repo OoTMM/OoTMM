@@ -1,14 +1,12 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, MonitorCallbacks } from '@ootmm/core';
 import type { Options, OptionsInput } from './options';
-import type { MonitorCallbacks } from './monitor';
 
-import { Random } from '@ootmm/core';
+import { Monitor, Random } from '@ootmm/core';
 import { applyRandomSettings } from './random-settings';
 import { codegen } from './codegen';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
 import { logic } from './logic';
-import { Monitor } from './monitor';
 import { options } from './options';
 import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';

@@ -1,49 +1,8 @@
-import { readFileSync, writeFileSync, mkdirSync, globSync } from 'fs';
-import { join } from 'path';
-import { parse as parseYaml } from 'yaml';
-import * as CSV from 'csv/sync';
+import type { GossipDefinition } from '../src/gossips';
 
-function emit(filename: string, data: any) {
-  const dir = join(__dirname, '..', 'dist');
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, `${filename}.json`), JSON.stringify(data));
-}
-
-function loadYaml(patterns: string | string[]): any {
-  patterns = Array.isArray(patterns) ? patterns : [patterns];
-  let data: any = null;
-
-  for (const p of patterns) {
-    const matchedFiles = globSync(p, { cwd: __dirname });
-    if (matchedFiles.length === 0) {
-      throw new Error(`No files matched the pattern: ${p}`);
-    }
-    for (const name of matchedFiles) {
-      const file = readFileSync(join(__dirname, name), 'utf8');
-      const parsed = parseYaml(file);
-
-      if (data === null) {
-        data = parsed;
-      } else if (Array.isArray(data) && Array.isArray(parsed)) {
-        data.push(...parsed);
-      } else if (typeof data === 'object' && typeof parsed === 'object') {
-        data = { ...data, ...parsed };
-      } else {
-        throw new Error(`Incompatible YAML structures in files: existing type ${typeof data}, new type ${typeof parsed}`);
-      }
-    }
-  }
-  return data;
-}
-
-function loadTxt(name: string): string {
-  return readFileSync(join(__dirname, name), 'utf8');
-}
-
-function loadCsv(name: string): any[] {
-  const content = readFileSync(join(__dirname, name), "utf8");
-  return CSV.parse(content, { columns: true, skip_empty_lines: true, trim: true });
-}
+import { gameId } from '../src/util';
+import { GAMES } from '../src/defines';
+import { loadCsv, loadTxt, loadYaml, emit } from './helpers';
 
 const DATA_WORLD = {
   oot: {
@@ -120,10 +79,32 @@ const POOL = {
   mm: loadCsv('pool/pool_mm.csv'),
 };
 
-const HINTS_DATA = {
-  oot: loadCsv('hints/hints_oot.csv'),
-  mm: loadCsv('hints/hints_mm.csv'),
-};
+function buildGossips() {
+  const raw = {
+    oot: loadCsv('gossips/gossips_oot.csv'),
+    mm: loadCsv('gossips/gossips_mm.csv'),
+  };
+
+  let result: GossipDefinition[] = [];
+  for (const game of GAMES) {
+    const hints = raw[game];
+    for (const hint of hints) {
+      const location = gameId(game, hint.location, ' ');
+      const id = parseInt(hint.id);
+      if (isNaN(id)) {
+        throw new Error(`Invalid hint ID for ${location}: ${hint.id}`);
+      }
+      result.push({
+        game,
+        location,
+        type: hint.type,
+        id,
+      });
+    }
+  }
+
+  emit('data-gossips', result);
+}
 
 emit('data-world', DATA_WORLD);
 emit('data-scenes', loadYaml('defs/scenes.yml'));
@@ -136,4 +117,5 @@ emit('data-drawgi', loadYaml('defs/drawgi.yml'));
 emit('data-files', DATA_FILES);
 emit('data-macros', MACROS);
 emit('data-pool', POOL);
-emit('data-hints-raw', HINTS_DATA);
+
+buildGossips();
