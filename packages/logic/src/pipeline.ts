@@ -1,33 +1,55 @@
-import type { Options } from '@ootmm/core';
+import type { Item, Options, PlayerItem, PlayerItems, Settings } from '@ootmm/core';
+import type { ItemPlacement } from './types';
+import type { Hints } from './hints';
+import type { Analysis } from './analysis';
+import type { World } from './world';
+import type { ItemProperties } from './item-properties';
+import type { Location } from './types';
 
 import { Monitor, Random } from '@ootmm/core';
-import { LogicPassConfig, LogicPassFixer, LogicPassHash, LogicPassSongEvents } from './misc';
-import { LogicPassItemProperties } from './item-properties';
-import { LogicPassWorld, LogicPassWorldTransform } from './world';
-import { LogicPassPrice } from './price';
-import { LogicPassCloak, LogicPassEntrances, LogicPassMinimize, LogicPassSolver } from './solver';
-import { LogicPassAnalysis, LogicPassAnalysisFoolish, LogicPassAnalysisPaths } from './analysis';
-import { LogicPassHints } from './hints';
+import { logicPassConfig, logicPassFixer, logicPassHash, logicPassSongEvents } from './misc';
+import { logicPassItemProperties } from './item-properties';
+import { logicPassWorld, logicPassWorldTransform } from './world';
+import { logicPassCloak, logicPassEntrances, logicPassMinimize, logicPassSolver } from './solver';
+import { logicPassAnalysis, logicPassAnalysisFoolish, logicPassAnalysisPaths } from './analysis';
+import { logicPassHints } from './hints';
+import { logicPassPrice } from './price';
 
-interface LogicPass<Out> {
-  run: () => Out;
-}
-
-type LogicPassConstructor<In, Out> = new (state: In) => LogicPass<Out>;
+type LogicPassFunc<State, Out> = (state: State) => Out;
 
 class LogicPipeline<State> {
   constructor(private readonly state: State) {
   }
 
-  apply<Out>(pass: LogicPassConstructor<State, Out>): LogicPipeline<State & Out> {
-    const passInstance = new pass(this.state);
-    const newState = { ...this.state, ...passInstance.run() };
+  apply<Out>(pass: LogicPassFunc<State, Out>): LogicPipeline<State & Out> {
+    const newState = { ...this.state, ...pass(this.state) };
     return new LogicPipeline(newState);
   }
 
   exec(): State {
     return this.state;
   }
+};
+
+export type LogicResult = {
+  monitor: Monitor;
+  opts: Options;
+  settings: Settings;
+  random: Random;
+  attempts: number;
+  startingItems: PlayerItems;
+  itemProperties: ItemProperties;
+  worlds: World[];
+  fixedLocations: Set<Location>;
+  pool: PlayerItems;
+  allItems: PlayerItems;
+  renewableJunks: PlayerItems;
+  plandoLocations: Map<Location, PlayerItem>;
+  items: ItemPlacement;
+  itemCloaks: Map<Location, Item>;
+  analysis: Analysis;
+  hints: Hints;
+  hash: string;
 };
 
 function pipeline<State>(state: State): LogicPipeline<State> {
@@ -41,38 +63,55 @@ export const worldState = async (monitor: Monitor, opts: Options) => {
   const state = { monitor, opts, settings: opts.settings, random, attempts: 0 };
 
   return pipeline(state)
-    .apply(LogicPassConfig)
-    .apply(LogicPassItemProperties)
-    .apply(LogicPassWorld)
-    .apply(LogicPassFixer)
-    .apply(LogicPassWorldTransform)
+    .apply(logicPassConfig)
+    .apply(logicPassItemProperties)
+    .apply(logicPassWorld)
+    .apply(logicPassFixer)
+    .apply(logicPassWorldTransform)
     .exec();
 };
 
 export const solvedWorldState = async (monitor: Monitor, opts: Options) => {
   let state = await worldState(monitor, opts);
   return pipeline(state)
-    .apply(LogicPassPrice)
-    .apply(LogicPassSongEvents)
-    .apply(LogicPassEntrances)
-    .apply(LogicPassSolver)
-    .apply(LogicPassMinimize)
+    .apply(logicPassPrice)
+    .apply(logicPassSongEvents)
+    .apply(logicPassEntrances)
+    .apply(logicPassSolver)
+    .apply(logicPassMinimize)
     .exec();
 }
 
-export const logic = async (monitor: Monitor, opts: Options) => {
+export async function logic(monitor: Monitor, opts: Options): Promise<LogicResult> {
   const state = await solvedWorldState(monitor, opts);
 
   const data = pipeline(state)
-    .apply(LogicPassCloak)
-    .apply(LogicPassAnalysis)
-    .apply(LogicPassAnalysisPaths)
-    .apply(LogicPassAnalysisFoolish)
-    .apply(LogicPassHints)
-    .apply(LogicPassHash)
+    .apply(logicPassCloak)
+    .apply(logicPassAnalysis)
+    .apply(logicPassAnalysisPaths)
+    .apply(logicPassAnalysisFoolish)
+    .apply(logicPassHints)
+    .apply(logicPassHash)
     .exec();
 
-    return data;
+    return {
+      monitor: data.monitor,
+      opts: data.opts,
+      settings: data.settings,
+      random: data.random,
+      attempts: data.attempts,
+      startingItems: data.startingItems,
+      itemProperties: data.itemProperties,
+      worlds: data.worlds,
+      fixedLocations: data.fixedLocations,
+      pool: data.pool,
+      allItems: data.allItems,
+      renewableJunks: data.renewableJunks,
+      plandoLocations: data.plandoLocations,
+      items: data.items,
+      itemCloaks: data.itemCloaks,
+      analysis: data.analysis,
+      hints: data.hints,
+      hash: data.hash,
+    };
 };
-
-export type LogicResult = Awaited<ReturnType<typeof logic>>;

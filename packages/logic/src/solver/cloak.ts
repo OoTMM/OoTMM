@@ -4,17 +4,19 @@ import type { ItemPlacement, Location } from '../types';
 import { Random, sample, ItemGroups, ItemHelpers } from '@ootmm/core';
 import { isLocationFullyShuffled } from '../locations';
 
-export class LogicPassCloak {
+type LogicPassCloakState = {
+  settings: Settings;
+  items: ItemPlacement;
+  random: Random;
+  fixedLocations: Set<Location>;
+  plandoLocations: Map<Location, PlayerItem>;
+};
+
+class LogicPassCloak {
   private itemCloaks: Map<Location, Item>;
 
   constructor(
-    private readonly state: {
-      settings: Settings;
-      items: ItemPlacement;
-      random: Random;
-      fixedLocations: Set<Location>;
-      plandoLocations: Map<Location, PlayerItem>;
-    }
+    private readonly state: LogicPassCloakState,
   ) {
     this.itemCloaks = new Map();
   }
@@ -49,4 +51,8 @@ export class LogicPassCloak {
       return item.item;
     }
   }
+}
+
+export function logicPassCloak(state: LogicPassCloakState) {
+  return new LogicPassCloak(state).run();
 }

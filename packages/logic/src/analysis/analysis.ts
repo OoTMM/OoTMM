@@ -11,7 +11,17 @@ import { isLocationRenewable, makeLocation, locationData } from '../locations';
 import { ANALYSIS_EVENTS } from './events';
 import { Pathfinder } from '../pathfind';
 
-export class LogicPassAnalysis {
+type LogicPassAnalysisState = {
+  settings: Settings;
+  random: Random;
+  worlds: World[];
+  items: ItemPlacement;
+  monitor: Monitor;
+  startingItems: PlayerItems;
+  itemProperties: ItemProperties;
+};
+
+class LogicPassAnalysis {
   private pathfinder: Pathfinder;
   private spheres: SphereEntry[][] = [];
   private requiredLocs = new Set<Location>();
@@ -21,15 +31,7 @@ export class LogicPassAnalysis {
   private locations: Location[];
 
   constructor(
-    private readonly state: {
-      settings: Settings;
-      random: Random;
-      worlds: World[];
-      items: ItemPlacement;
-      monitor: Monitor;
-      startingItems: PlayerItems;
-      itemProperties: ItemProperties;
-    },
+    private readonly state: LogicPassAnalysisState,
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
@@ -201,3 +203,6 @@ export class LogicPassAnalysis {
   }
 }
 
+export function logicPassAnalysis(state: LogicPassAnalysisState) {
+  return new LogicPassAnalysis(state).run();
+}

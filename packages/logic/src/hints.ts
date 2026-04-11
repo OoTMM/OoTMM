@@ -143,7 +143,19 @@ type LocRegion = {
   region: Region;
 };
 
-export class LogicPassHints {
+type LogicPassHintsState = {
+  monitor: Monitor;
+  random: Random;
+  settings: Settings;
+  worlds: World[];
+  items: ItemPlacement;
+  analysis: Analysis;
+  fixedLocations: Set<Location>;
+  startingItems: PlayerItems;
+  plandoLocations: Map<Location, PlayerItem>;
+};
+
+class LogicPassHints {
   private hintedLocations = new Set<Location>();
   private stronglyHintedLocations = new Set<Location>();
   private hintedPlaythroughItems = new Set<PlayerItem>();
@@ -154,17 +166,7 @@ export class LogicPassHints {
   private ignoredRegions: Set<Region>;
 
   constructor(
-    private readonly state: {
-      monitor: Monitor;
-      random: Random;
-      settings: Settings;
-      worlds: World[];
-      items: ItemPlacement;
-      analysis: Analysis;
-      fixedLocations: Set<Location>;
-      startingItems: PlayerItems;
-      plandoLocations: Map<Location, PlayerItem>;
-    },
+    private readonly state: LogicPassHintsState,
   ){
     this.ignoredRegions = new Set;
     for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
@@ -868,4 +870,9 @@ export class LogicPassHints {
 
     return { hints };
   }
+}
+
+export function logicPassHints(state: LogicPassHintsState) {
+  const pass = new LogicPassHints(state);
+  return pass.run();
 }

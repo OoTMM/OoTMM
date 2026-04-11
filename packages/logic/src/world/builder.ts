@@ -111,15 +111,17 @@ export function cloneWorld(world: World): World {
   };
 }
 
-export class LogicPassWorld {
+type LogicPassWorldState = {
+  monitor: Monitor,
+  settings: Settings,
+  random: Random;
+};
+
+class LogicPassWorld {
   private world!: World;
 
   constructor(
-    private readonly state: {
-      monitor: Monitor,
-      settings: Settings,
-      random: Random;
-    }
+    private readonly state: LogicPassWorldState,
   ){
   }
 
@@ -391,4 +393,8 @@ export class LogicPassWorld {
       }
     }
   }
+}
+
+export function logicPassWorld(state: LogicPassWorldState) {
+  return new LogicPassWorld(state).run();
 }

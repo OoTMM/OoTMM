@@ -14,22 +14,24 @@ type ZigZagState = {
   forbidden: Set<Location>;
 }
 
-export class LogicPassAnalysisFoolish {
+type LogicPassAnalysisFoolishState = {
+  monitor: Monitor;
+  random: Random;
+  worlds: World[];
+  settings: Settings;
+  items: ItemPlacement;
+  analysis: Analysis;
+  startingItems: PlayerItems;
+  itemProperties: ItemProperties;
+};
+
+class LogicPassAnalysisFoolish {
   private pathfinder: Pathfinder;
   private conditionallyRequiredLocations: Set<string>;
   private zigZagCount: number = 0;
 
   constructor(
-    private state: {
-      monitor: Monitor;
-      random: Random;
-      worlds: World[];
-      settings: Settings;
-      items: ItemPlacement;
-      analysis: Analysis;
-      startingItems: PlayerItems;
-      itemProperties: ItemProperties;
-    }
+    private state: LogicPassAnalysisFoolishState,
   ) {
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.conditionallyRequiredLocations = new Set();
@@ -186,7 +188,7 @@ export class LogicPassAnalysisFoolish {
 
   run() {
     if (!this.state.settings.probabilisticFoolish || this.state.settings.logic === 'none') {
-      return {};
+      return { analysis: this.state.analysis };
     }
 
     this.state.monitor.log("Logic: Probabilistic Foolish Analysis");
@@ -234,4 +236,8 @@ export class LogicPassAnalysisFoolish {
 
     return { analysis: { ...this.state.analysis, useless } };
   }
+}
+
+export function logicPassAnalysisFoolish(state: LogicPassAnalysisFoolishState) {
+  return new LogicPassAnalysisFoolish(state).run();
 }
