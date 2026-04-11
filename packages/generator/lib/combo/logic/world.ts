@@ -4,10 +4,9 @@ import type { ResolvedWorldFlags, Expr } from '@ootmm/logic';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
-import { GAMES, Random, itemByID, ItemHelpers, Items } from '@ootmm/core';
+import { GAMES, Random, itemByID, ItemHelpers, Items, gameId } from '@ootmm/core';
 import { exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
 
-import { gameId } from '../util';
 import { ExprParser } from './expr-parser';
 import { DATA_HINTS_POOL } from '../data';
 import { Monitor } from '../monitor';
