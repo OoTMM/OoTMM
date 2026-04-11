@@ -32,15 +32,8 @@ class LogicPipeline<State> {
 };
 
 export type LogicResult = {
-  settings: Settings;
-  random: Random;
   startingItems: PlayerItems;
-  itemProperties: ItemProperties;
   worlds: World[];
-  fixedLocations: Set<Location>;
-  pool: PlayerItems;
-  allItems: PlayerItems;
-  renewableJunks: PlayerItems;
   plandoLocations: Map<Location, PlayerItem>;
   items: ItemPlacement;
   itemCloaks: Map<Location, Item>;
@@ -92,15 +85,8 @@ export async function logic(monitor: Monitor, opts: Options): Promise<LogicResul
     .exec();
 
     return {
-      settings: data.settings,
-      random: data.random,
       startingItems: data.startingItems,
-      itemProperties: data.itemProperties,
       worlds: data.worlds,
-      fixedLocations: data.fixedLocations,
-      pool: data.pool,
-      allItems: data.allItems,
-      renewableJunks: data.renewableJunks,
       plandoLocations: data.plandoLocations,
       items: data.items,
       itemCloaks: data.itemCloaks,
