@@ -6,7 +6,7 @@ import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, AGES, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, isDefaultRestrictions } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD, AGES, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '@ootmm/logic';
 import { locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ANALYSIS_EVENTS } from './analysis';
 
@@ -417,7 +417,7 @@ export class Pathfinder {
   }
 
   private resultNeedsTracking(result: ExprResult) {
-    return (result.result === false || (result.restrictions && !isDefaultRestrictions(result.restrictions)));
+    return (result.result === false || result.restrictions);
   }
 
   private trackDependencies(type: 'exits' | 'locations' | 'events' | 'gossips', deps: PathfinderDependencies, id: string, area: string, result: ExprResultWithDeps) {
