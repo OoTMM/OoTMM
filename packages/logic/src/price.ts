@@ -143,13 +143,15 @@ function betaApproxInt(random: Random, alpha: number, beta: number, max: number)
   return (values.sort((a, b) => a - b))[alpha - 1];
 }
 
-export class LogicPassPrice {
+type LogicPassPriceState = {
+  settings: Settings,
+  worlds: World[],
+  random: Random,
+};
+
+class LogicPassPrice {
   constructor(
-    private state: {
-      settings: Settings,
-      worlds: World[],
-      random: Random,
-    }
+    private readonly state: LogicPassPriceState,
   ) {
   }
 
@@ -210,4 +212,8 @@ export class LogicPassPrice {
 
     return {};
   }
+}
+
+export function logicPassPrice(state: LogicPassPriceState) {
+  return new LogicPassPrice(state).run();
 }

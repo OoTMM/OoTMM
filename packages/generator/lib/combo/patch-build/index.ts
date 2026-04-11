@@ -1,5 +1,5 @@
 import type { Settings } from '@ootmm/core';
-import type { World, LogicResult } from '@ootmm/logic';
+import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 import type { GameAddresses } from '../addresses';
 import type { DecompressedRoms } from '../decompress';
 import type { PatchGroup } from './group';
@@ -22,7 +22,7 @@ export type BuildPatchfileIn = {
   settings: Settings;
 };
 
-function asmPatchGroups(world: World, settings: Settings) {
+function asmPatchGroups(world: LogicResultWorld, settings: Settings) {
   const groups: {[k in PatchGroup]: boolean} = {
     OOT_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereOot !== 'off',
     OOT_CLIMB_ANYWHERE: settings.climbMostSurfacesOot !== 'off',

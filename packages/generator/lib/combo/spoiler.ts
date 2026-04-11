@@ -1,5 +1,5 @@
-import type { Options, Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
-import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
+import type { Options, TrickKey, PlayerItem, Region } from '@ootmm/core';
+import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
@@ -17,21 +17,12 @@ class SpoilerWriter {
   private worlds: number;
 
   constructor(
-    private readonly state: {
-      worlds: World[];
-      items: ItemPlacement;
-      itemCloaks: Map<Location, Item>;
-      analysis: Analysis;
-      opts: Options;
-      settings: Settings;
-      hints: Hints;
-      startingItems: PlayerItems;
-      plandoLocations: Map<Location, PlayerItem>;
-    }
+    private readonly logic: LogicResult,
+    private readonly opts: Options,
   ) {
     this.writer = new LogWriter();
-    this.isMulti = this.state.settings.mode === 'multi';
-    this.worlds = this.isMulti ? this.state.settings.players : 1;
+    this.isMulti = this.opts.settings.mode === 'multi';
+    this.worlds = this.isMulti ? this.opts.settings.players : 1;
   }
 
   private getMaxKeyLength(map: [string, any][]): number {
@@ -43,7 +34,7 @@ class SpoilerWriter {
   }
 
   private getImportanceSuffix(importance: number): string {
-    if(this.state.opts.settings.logic === 'none' || !this.state.opts.settings.hintImportance) return ""; // No need for importance in no-logic
+    if (this.opts.settings.logic === 'none' || !this.opts.settings.hintImportance) return ""; // No need for importance in no-logic
     switch (importance) {
       case  0: return "(unreachable)";
       case  1: return "(not required)";
@@ -54,27 +45,27 @@ class SpoilerWriter {
   }
 
   private writeHeader() {
-    this.writer.write(`Seed: ${this.state.opts.seed}`);
+    this.writer.write(`Seed: ${this.opts.seed}`);
     this.writer.write(`Version: ${VERSION}`);
-    this.writer.write(`SettingsString: ${exportSettings(this.state.settings)}`);
+    this.writer.write(`SettingsString: ${exportSettings(this.opts.settings)}`);
     this.writer.write('');
   }
 
   private writeSettings() {
     this.writer.indent('Settings');
-    for (const s in this.state.settings) {
+    for (const s in this.opts.settings) {
       if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'specialConds' || s === 'plando' || s === 'hints') {
         continue;
       }
-      if (this.state.settings.goal !== 'triforce' && (s === 'triforceGoal' || s === 'triforcePieces')) {
+      if (this.opts.settings.goal !== 'triforce' && (s === 'triforceGoal' || s === 'triforcePieces')) {
         continue;
       }
       if (WORLD_FLAGS.includes(s as any)) {
         continue;
       }
-      const v = (this.state.settings as any)[s];
+      const v = (this.opts.settings as any)[s];
       const data = SETTINGS.find(x => x.key === s)! as any;
-      if (data && data.cond && !data.cond(this.state.settings)) {
+      if (data && data.cond && !data.cond(this.opts.settings)) {
         continue;
       }
       this.writer.write(`${s}: ${v}`);
@@ -84,8 +75,8 @@ class SpoilerWriter {
 
   private writeSpecialConds() {
     this.writer.indent('Special Conditions');
-    for (const s in this.state.settings.specialConds) {
-      const cond = this.state.settings.specialConds[s as keyof typeof this.state.settings.specialConds];
+    for (const s in this.opts.settings.specialConds) {
+      const cond = this.opts.settings.specialConds[s as keyof typeof this.opts.settings.specialConds];
       this.writer.indent(`${s}:`);
       for (const key in cond) {
         this.writer.write(`${key}: ${cond[key as keyof typeof cond]}`);
@@ -96,7 +87,7 @@ class SpoilerWriter {
   }
 
   private writeTricks() {
-    let { tricks } = this.state.settings;
+    let { tricks } = this.opts.settings;
     tricks = tricks.filter(x => !TRICKS[x].glitch);
     if (tricks.length === 0) {
       return;
@@ -109,7 +100,7 @@ class SpoilerWriter {
   }
 
   private writeGlitches() {
-    const { tricks } = this.state.settings;
+    const { tricks } = this.opts.settings;
     const glitches = tricks.filter(x => TRICKS[x].glitch);
     if (glitches.length === 0) {
       return;
@@ -122,13 +113,13 @@ class SpoilerWriter {
   }
 
   private writeStartingItems() {
-    const { startingItems } = this.state;
+    const { startingItems } = this.logic;
     if (startingItems.size === 0) {
       return;
     }
 
     this.writer.indent('Starting Items');
-    for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
+    for (let playerId = 0; playerId < this.opts.settings.players; ++playerId) {
       if (this.isMulti) this.writer.indent(`Player ${playerId + 1}`);
       const items = new Map(Array.from(startingItems.entries()).filter(([x, _]) => x.player === playerId));
       for (const [item, count] of items) {
@@ -140,7 +131,7 @@ class SpoilerWriter {
   }
 
   private writeJunkLocations() {
-    const { junkLocations } = this.state.settings;
+    const { junkLocations } = this.opts.settings;
     if (junkLocations.length === 0) {
       return;
     }
@@ -153,9 +144,9 @@ class SpoilerWriter {
   }
 
   private writeWorldFlags() {
-    let worlds = this.state.worlds;
-    if (!this.state.settings.distinctWorlds) {
-      worlds = [this.state.worlds[0]];
+    let worlds = this.logic.worlds;
+    if (!this.opts.settings.distinctWorlds) {
+      worlds = [this.logic.worlds[0]];
     }
 
     this.writer.indent('World Flags');
@@ -189,9 +180,9 @@ class SpoilerWriter {
   }
 
   private writePreCompleted() {
-    let worlds = this.state.worlds;
-    if (!this.state.settings.distinctWorlds) {
-      worlds = [this.state.worlds[0]];
+    let worlds = this.logic.worlds;
+    if (!this.opts.settings.distinctWorlds) {
+      worlds = [this.logic.worlds[0]];
     }
     if (!worlds.some(world => world.preCompleted.size > 0)) {
       return;
@@ -215,9 +206,9 @@ class SpoilerWriter {
   }
 
   private writeEntrances() {
-    let worlds = this.state.worlds;
-    if (!this.state.settings.distinctWorlds) {
-      worlds = [this.state.worlds[0]];
+    let worlds = this.logic.worlds;
+    if (!this.opts.settings.distinctWorlds) {
+      worlds = [this.logic.worlds[0]];
     }
     if (!worlds.some(world => world.entranceOverrides.size > 0)) {
       return;
@@ -253,21 +244,21 @@ class SpoilerWriter {
   }
 
   private writePlando() {
-    if (this.state.plandoLocations.size >= 1) {
+    if (this.logic.plandoLocations.size >= 1) {
       this.writer.indent('Plando');
-      for (let i = 0; i < this.state.worlds.length; ++i) {
-        if (this.state.worlds.length > 1) {
+      for (let i = 0; i < this.logic.worlds.length; ++i) {
+        if (this.logic.worlds.length > 1) {
           this.writer.indent(`World ${i + 1}`);
         }
-        for (const [loc, pi] of this.state.plandoLocations) {
+        for (const [loc, pi] of this.logic.plandoLocations) {
           let locD = locationData(loc);
           if (locD.world !== i) {
             continue;
           }
-          const pi = this.state.plandoLocations.get(loc)!;
+          const pi = this.logic.plandoLocations.get(loc)!;
           this.writer.write(`${locD.id}: ${itemName(pi.item.id)}`)
         }
-        if (this.state.worlds.length > 1) {
+        if (this.logic.worlds.length > 1) {
           this.writer.unindent('');
         }
       }
@@ -287,7 +278,7 @@ class SpoilerWriter {
   }
 
   private writeHints() {
-    const globalHints = this.state.hints;
+    const globalHints = this.logic.hints;
     this.writer.indent('Hints');
     for (let worldId = 0; worldId < this.worlds; ++worldId) {
       if (this.isMulti) this.writer.indent(`World ${worldId + 1}:`);
@@ -307,7 +298,7 @@ class SpoilerWriter {
           const longestRegionNameLength = [...hints].reduce( function (a, b) { return regionName(a[1].location).length > regionName(b[1].location).length ? a : b; } )[1].location.length;
           const longestGossipNameLength = this.getMaxKeyLength(hints);
           for (const [stone, hint] of hints) {
-            this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.locationName(hint.location).padEnd(longestRegionNameLength)} ${this.itemName(this.state.items.get(hint.location)!)}`);
+            this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.locationName(hint.location).padEnd(longestRegionNameLength)} ${this.itemName(this.logic.items.get(hint.location)!)}`);
           }
           this.writer.unindent('');
         }
@@ -326,12 +317,12 @@ class SpoilerWriter {
         this.writer.indent('Specific Hints:');
         let longestLocationNameLength = 0;
         for (const [stone, hint] of gossipsItemExact) {
-          const world = this.state.worlds[hint.world];
+          const world = this.logic.worlds[hint.world];
           const longestLocationName = [...world.checkHints[hint.check]].reduce(  (a, b) => { return a.length > b.length ? a : b; }).length;
           longestLocationNameLength = Math.max(longestLocationNameLength, longestLocationName);
         }
         for (const [stone, hint] of gossipsItemExact) {
-          const world = this.state.worlds[hint.world];
+          const world = this.logic.worlds[hint.world];
           const longestGossipNameLength = this.getMaxKeyLength(gossipsItemExact);
           for(let i = 0; i < hint.items.length; i++) {
             this.writer.write(`${(i ? " ": stone).padEnd(longestGossipNameLength)} ${world.checkHints[hint.check][i].padEnd(longestLocationNameLength + 1)} ${this.itemName(hint.items[i])} ${this.getImportanceSuffix(hint.importances[i])}`);
@@ -367,14 +358,14 @@ class SpoilerWriter {
   }
 
   private writePaths() {
-    const { paths } = this.state.analysis;
+    const { paths } = this.logic.analysis;
     if (paths.length === 0) {
       return;
     }
     this.writer.indent('Paths');
     for (const path of paths) {
       this.writer.indent(this.pathName(path));
-      const locations = [...path.locations].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
+      const locations = [...path.locations].map(x => `${this.locationName(x)}: ${this.itemName(this.logic.items.get(x)!)}`).sort();
       for (const loc of locations) {
         this.writer.write(loc);
       }
@@ -390,7 +381,7 @@ class SpoilerWriter {
   }
 
   private strPad(s: string, number: number) {
-    return `${s} ${this.decPad(number, this.state.worlds.length.toString().length)}`;
+    return `${s} ${this.decPad(number, this.logic.worlds.length.toString().length)}`;
   }
 
   private locationName(location: Location) {
@@ -411,8 +402,8 @@ class SpoilerWriter {
   }
 
   private itemNameAt(loc: Location) {
-    const pi = this.state.items.get(loc)!;
-    const cloakItem = this.state.itemCloaks.get(loc);
+    const pi = this.logic.items.get(loc)!;
+    const cloakItem = this.logic.itemCloaks.get(loc);
 
     let str = this.itemName(pi);
     if (cloakItem) {
@@ -440,11 +431,11 @@ class SpoilerWriter {
   }
 
   private writeRaw() {
-    const { worlds, items: placement, settings } = this.state;
+    const { worlds } = this.logic;
     const allLocsCount = worlds.map(x => x.locations.size).reduce((a, b) => a + b, 0);
     this.writer.writeSectionHeader();
     this.writer.indent(`Location List (${allLocsCount})`);
-    for (let i = 0; i < this.state.settings.players; ++i) {
+    for (let i = 0; i < this.opts.settings.players; ++i) {
       if (this.isMulti) this.writer.indent(`World ${i+1} (${worlds[i].locations.size})`);
       const world = worlds[i];
       const regionNames = new Set(Object.values(world.regions));
@@ -452,7 +443,7 @@ class SpoilerWriter {
       for (const region of regionNames) {
         const regionalLocations = Object.keys(world.regions)
           .filter(location => world.regions[location] === region)
-          .filter(location => isShuffled(settings, world, location, dungeonLocations))
+          .filter(location => isShuffled(this.opts.settings, world, location, dungeonLocations))
           .map(loc => `${loc}: ${this.itemNameAt(makeLocation(loc, i)!)}`);
         this.writer.indent(`${regionName(region)} (${regionalLocations.length}):`);
         for (const loc of regionalLocations) {
@@ -466,7 +457,7 @@ class SpoilerWriter {
   }
 
   private writeSpheres() {
-    const { spheres } = this.state.analysis;
+    const { spheres } = this.logic.analysis;
     this.writer.writeSectionHeader();
     this.writer.indent('Spheres');
     for (const i in spheres) {
@@ -475,7 +466,7 @@ class SpoilerWriter {
       const sphere = spheres[i];
       for (const entry of sphere) {
         switch (entry.type) {
-          case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.state.items.get(entry.location)!)}`); break;
+          case 'location': text.push(`Location - ${this.locationName(entry.location)}: ${this.itemName(this.logic.items.get(entry.location)!)}`); break;
           case 'event': text.push(`Event - ${this.eventName(entry)}`); break;
         }
       }
@@ -502,7 +493,7 @@ class SpoilerWriter {
     this.writeHints();
     this.writePaths();
     this.writePlando();
-    if (this.state.opts.settings.logic !== 'none') {
+    if (this.opts.settings.logic !== 'none') {
       this.writeSpheres();
     }
     this.writeRaw();
@@ -511,7 +502,7 @@ class SpoilerWriter {
   };
 }
 
-export function makeSpoilerLog(result: LogicResult): string {
-  const spoilerWriter = new SpoilerWriter(result);
+export function makeSpoilerLog(result: LogicResult, options: Options): string {
+  const spoilerWriter = new SpoilerWriter(result, options);
   return spoilerWriter.run();
 }

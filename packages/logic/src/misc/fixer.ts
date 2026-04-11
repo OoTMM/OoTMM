@@ -6,15 +6,17 @@ import { Monitor, ItemHelpers, Items } from '@ootmm/core';
 import { mustStartWithMasterSword } from '../helpers';
 import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_FROGS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, MM_LOTTERY, isLocationChestFairy, isLocationOtherFairy, makeLocation } from '../locations';
 
-export class LogicPassFixer {
+type LogicPassFixerState = {
+  worlds: World[],
+  monitor: Monitor,
+  settings: Settings,
+};
+
+class LogicPassFixer {
   private fixedLocations = new Set<Location>();
 
   constructor(
-    private readonly state: {
-      worlds: World[],
-      monitor: Monitor,
-      settings: Settings,
-    }
+    private readonly state: LogicPassFixerState,
   ) {
   }
 
@@ -160,3 +162,7 @@ export class LogicPassFixer {
     return { fixedLocations: this.fixedLocations };
   }
 };
+
+export function logicPassFixer(state: LogicPassFixerState) {
+  return new LogicPassFixer(state).run();
+}

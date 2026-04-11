@@ -38,21 +38,23 @@ export const PATH_EVENT_DATA: PathEventData[] = [
   { key: 'Moon', name: 'Moon', event: 'MM_MOON_OPEN' },
 ];
 
-export class LogicPassAnalysisPaths {
+type LogicPassAnalysisPathsState = {
+  analysis: Analysis;
+  settings: Settings;
+  random: Random;
+  worlds: World[];
+  items: ItemPlacement;
+  monitor: Monitor;
+  startingItems: PlayerItems;
+  itemProperties: ItemProperties;
+};
+
+class LogicPassAnalysisPaths {
   private pathfinder: Pathfinder;
   private states: { [key: string]: AnalysisPathState } = {};
 
   constructor(
-    private readonly state: {
-      analysis: Analysis;
-      settings: Settings;
-      random: Random;
-      worlds: World[];
-      items: ItemPlacement;
-      monitor: Monitor;
-      startingItems: PlayerItems;
-      itemProperties: ItemProperties;
-    },
+    private readonly state: LogicPassAnalysisPathsState,
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
   }
@@ -360,4 +362,8 @@ export class LogicPassAnalysisPaths {
 
     return { analysis: { ...this.state.analysis, paths } };
   }
+}
+
+export function logicPassAnalysisPaths(state: LogicPassAnalysisPathsState) {
+  return new LogicPassAnalysisPaths(state).run();
 }

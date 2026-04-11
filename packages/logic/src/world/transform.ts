@@ -349,21 +349,23 @@ const MM_WATER_ROCKS = [
   'MM Great Bay Coast Rock Water 28',
 ];
 
-export class LogicPassWorldTransform {
+type LogicPassWorldTransformState = {
+  random: Random;
+  monitor: Monitor;
+  worlds: World[];
+  settings: Settings;
+  fixedLocations: Set<Location>;
+  itemProperties: ItemProperties;
+  startingItems: PlayerItems;
+};
+
+class LogicPassWorldTransform {
   private pool: PlayerItems = new Map;
   private locsByItem = new Map<PlayerItem, Set<Location>>();
   private fixedLocations: Set<Location>;
 
   constructor(
-    private readonly state: {
-      random: Random;
-      monitor: Monitor;
-      worlds: World[];
-      settings: Settings;
-      fixedLocations: Set<Location>;
-      itemProperties: ItemProperties;
-      startingItems: PlayerItems;
-    }
+    private readonly state: LogicPassWorldTransformState,
   ) {
     this.fixedLocations = new Set(state.fixedLocations);
   }
@@ -1707,7 +1709,7 @@ export class LogicPassWorldTransform {
     /* Handle Pre-Activated owls */
     if (this.state.settings.mmPreActivatedOwls.type !== 'none') {
       for(let i = 0; i < this.state.settings.players; i++) {
-        this.makeLocationStarting(getPreActivatedOwlsLocations(this.state.worlds[i]));
+        this.makeLocationStarting(getPreActivatedOwlsLocations(this.state.worlds[i].resolvedFlags));
       }
     }
 
@@ -1880,4 +1882,9 @@ export class LogicPassWorldTransform {
 
     return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations, worlds, plandoLocations };
   }
+}
+
+export function logicPassWorldTransform(state: LogicPassWorldTransformState) {
+  const pass = new LogicPassWorldTransform(state);
+  return pass.run();
 }

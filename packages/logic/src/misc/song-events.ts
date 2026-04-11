@@ -3,13 +3,15 @@ import type { World } from '../world';
 
 import { Random, randomInt } from '@ootmm/core';
 
-export class LogicPassSongEvents {
+type LogicPassSongEventsState = {
+  settings: Settings,
+  worlds: World[],
+  random: Random,
+};
+
+class LogicPassSongEvents {
   constructor(
-    private state: {
-      settings: Settings,
-      worlds: World[],
-      random: Random,
-    }
+    private readonly state: LogicPassSongEventsState,
   ) {
   }
 
@@ -29,4 +31,8 @@ export class LogicPassSongEvents {
 
     return {};
   }
+}
+
+export function logicPassSongEvents(state: LogicPassSongEventsState) {
+  return new LogicPassSongEvents(state).run();
 }

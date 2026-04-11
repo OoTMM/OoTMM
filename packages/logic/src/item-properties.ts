@@ -8,12 +8,14 @@ export type ItemProperties = {
   important: Set<Item>;
 };
 
-export class LogicPassItemProperties {
+type LogicPassItemPropertiesState = {
+  settings: Settings;
+};
+
+class LogicPassItemProperties {
   private properties: ItemProperties;
   constructor(
-    private readonly state: {
-      settings: Settings;
-    }
+    private readonly state: LogicPassItemPropertiesState,
   ) {
     this.properties = {
       junk: new Set(),
@@ -43,3 +45,7 @@ export class LogicPassItemProperties {
     return { itemProperties: this.properties };
   }
 };
+
+export function logicPassItemProperties(state: LogicPassItemPropertiesState) {
+  return new LogicPassItemProperties(state).run();
+}

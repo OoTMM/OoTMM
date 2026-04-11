@@ -7,24 +7,26 @@ import { isLocationFullyShuffled, locationData, makeLocation } from '../location
 import { Pathfinder } from '../pathfind';
 import { TRAP_AMOUNTS } from '../data';
 
-export class LogicPassMinimize {
+type LogicPassMinimizeState = {
+  settings: Settings;
+  fixedLocations: Set<Location>;
+  startingItems: PlayerItems;
+  worlds: World[];
+  items: ItemPlacement;
+  random: Random;
+  monitor: Monitor;
+  plandoLocations: Map<Location, PlayerItem>;
+  pool: PlayerItems;
+};
+
+class LogicPassMinimize {
   private pathfinder!: Pathfinder;
   private locations!: Location[];
   private traps: PlayerItem[];
   private trapDensity: number;
 
   constructor(
-    private readonly state: {
-      settings: Settings;
-      fixedLocations: Set<Location>;
-      startingItems: PlayerItems;
-      worlds: World[];
-      items: ItemPlacement;
-      random: Random;
-      monitor: Monitor;
-      plandoLocations: Map<Location, PlayerItem>;
-      pool: PlayerItems;
-    }
+    private readonly state: LogicPassMinimizeState,
   ) {
     const trapPool = new Map();
     for (const [pi, count] of this.state.pool) {
@@ -98,4 +100,8 @@ export class LogicPassMinimize {
 
     return {};
   }
+}
+
+export function logicPassMinimize(state: LogicPassMinimizeState) {
+  return new LogicPassMinimize(state).run();
 }

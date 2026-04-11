@@ -1,5 +1,5 @@
 import type { Game } from '@ootmm/core';
-import type { World, LogicResult } from '@ootmm/logic';
+import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { ENTRANCES } from '@ootmm/core';
 import { padBuffer16, toU32Buffer } from '../util';
@@ -24,7 +24,7 @@ type RandomizerPatcherEntrancesContext = {
 
 export class RandomizerPatcherEntrances {
   private ctx: RandomizerPatcherEntrancesContext;
-  private world: World;
+  private world: LogicResultWorld;
 
   constructor(ctx: RandomizerPatcherEntrancesContext) {
     this.ctx = ctx;

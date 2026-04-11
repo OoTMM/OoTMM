@@ -1,5 +1,5 @@
 import type { Game, Settings, Region } from '@ootmm/core';
-import type { World, LogicResult } from '@ootmm/logic';
+import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData, ENTRANCES, REGIONS } from '@ootmm/core';
@@ -33,7 +33,7 @@ const DUNGEON_REWARD_LOCATIONS = [
   'MM Stone Tower Temple Inverted Boss',
 ];
 
-function entrance(srcName: string, world: World) {
+function entrance(srcName: string, world: LogicResultWorld) {
   const dstName = world.entranceOverrides.get(srcName) || srcName;
   const srcGame: Game = (/^OOT_/.test(srcName) ? 'oot' : 'mm');
   const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
@@ -48,7 +48,7 @@ function entrance(srcName: string, world: World) {
   return data;
 }
 
-function entranceAbs(world: World, name: string) {
+function entranceAbs(world: LogicResultWorld, name: string) {
   const dstName = world.entranceOverrides.get(name) || name;
   const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
   const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
@@ -81,7 +81,7 @@ type RandomizerPatcherConfigContext = {
 };
 
 export class RandomizerPatcherConfig {
-  private world: World;
+  private world: LogicResultWorld;
   private ctx: RandomizerPatcherConfigContext;
 
   constructor(ctx: RandomizerPatcherConfigContext) {

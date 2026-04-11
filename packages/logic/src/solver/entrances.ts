@@ -1,4 +1,4 @@
-import type { Settings, PlayerItems, Region } from '@ootmm/core';
+import type { Settings, PlayerItems, Region, PlayerItem } from '@ootmm/core';
 import type { Location } from '../types';
 import type { World, WorldArea } from '../world';
 import type { ItemProperties } from '../item-properties'
@@ -8,12 +8,12 @@ import type { Expr } from '../expr';
 import { Monitor, Random, sample, ENTRANCES } from '@ootmm/core';
 import { AGE_ADULT, AGE_CHILD } from '../age';
 import { exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from '../expr';
-import { LogicPassSolver } from '../solver';
 import { BOSS_INDEX_BY_DUNGEON, cloneWorld, DUNGEONS_REGIONS } from '../world';
 import { BOSS_METADATA_BY_ENTRANCE } from '../data';
 import { Pathfinder } from '../pathfind';
 import { LogicEntranceError, LogicError } from '../error';
 import { makeLocation } from '../locations';
+import { logicPassSolverValidate } from './solve';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;
@@ -931,22 +931,25 @@ class WorldShuffler {
   }
 };
 
-export class LogicPassEntrances {
+type LogicPassEntranceState = {
+  worlds: World[];
+  settings: Settings;
+  random: Random;
+  monitor: Monitor;
+  fixedLocations: Set<Location>,
+  pool: PlayerItems;
+  allItems: PlayerItems;
+  renewableJunks: PlayerItems;
+  startingItems: PlayerItems;
+  itemProperties: ItemProperties;
+  plandoLocations: Map<Location, PlayerItem>;
+};
+
+class LogicPassEntrances {
   private worlds: World[];
 
   constructor(
-    private readonly input: {
-      worlds: World[];
-      settings: Settings;
-      random: Random;
-      monitor: Monitor;
-      fixedLocations: Set<Location>,
-      pool: PlayerItems;
-      allItems: PlayerItems;
-      renewableJunks: PlayerItems;
-      startingItems: PlayerItems;
-      itemProperties: ItemProperties;
-    },
+    private readonly input: LogicPassEntranceState,
   ) {
     this.worlds = [];
   }
@@ -1074,9 +1077,7 @@ export class LogicPassEntrances {
     }
 
     /* Validate using the solver */
-    /* TODO: Recheck the typing of this */
-    const solver = new LogicPassSolver({ ...this.input, worlds: this.worlds } as any);
-    solver.validate();
+    logicPassSolverValidate({ ...this.input, worlds: this.worlds });
   }
 
   private runAttempt() {
@@ -1130,3 +1131,7 @@ export class LogicPassEntrances {
   }
 };
 
+export function logicPassEntrances(input: LogicPassEntranceState) {
+  const pass = new LogicPassEntrances(input);
+  return pass.run();
+}

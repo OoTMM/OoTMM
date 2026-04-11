@@ -293,7 +293,20 @@ const cloneState = (state: SolverState) => {
   };
 };
 
-export class LogicPassSolver {
+type LogicPassSolverState = {
+  fixedLocations: Set<Location>;
+  worlds: World[];
+  settings: Settings;
+  random: Random;
+  monitor: Monitor;
+  pool: PlayerItems;
+  renewableJunks: PlayerItems;
+  startingItems: PlayerItems;
+  itemProperties: ItemProperties;
+  plandoLocations: Map<Location, PlayerItem>;
+};
+
+class LogicPassSolver {
   private worlds: World[];
   private monitor: Monitor;
   private pathfinder!: Pathfinder;
@@ -306,18 +319,7 @@ export class LogicPassSolver {
   private attemptsMax = 100;
 
   constructor(
-    private readonly input: {
-      fixedLocations: Set<Location>;
-      worlds: World[];
-      settings: Settings;
-      random: Random;
-      monitor: Monitor;
-      pool: PlayerItems;
-      renewableJunks: PlayerItems;
-      startingItems: PlayerItems;
-      itemProperties: ItemProperties;
-      plandoLocations: Map<Location, PlayerItem>;
-    }
+    private readonly input: LogicPassSolverState,
   ) {
     this.monitor = this.input.monitor;
     this.worlds = this.input.worlds.map(x => cloneWorld(x));
@@ -1342,4 +1344,14 @@ export class LogicPassSolver {
     this.state.placedCount++;
     this.monitor.setProgress(this.state.placedCount, this.locations.length);
   }
+}
+
+export function logicPassSolver(input: LogicPassSolverState) {
+  const solver = new LogicPassSolver(input);
+  return solver.run();
+}
+
+export function logicPassSolverValidate(input: LogicPassSolverState) {
+  const solver = new LogicPassSolver(input);
+  solver.validate();
 }

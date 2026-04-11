@@ -3,16 +3,17 @@ import type { Settings, PlayerItems } from '@ootmm/core';
 import { Monitor, Random, sample, countMapAdd, countMapRemove, ItemGroups, Items, itemByID, makePlayerItem  } from '@ootmm/core';
 import { mustStartWithMasterSword } from '../helpers';
 
-/* This pass pre-computes things from the settings */
-export class LogicPassConfig {
+type LogicPassConfigState = {
+  monitor: Monitor,
+  settings: Settings,
+  random: Random,
+};
+
+class LogicPassConfig {
   private startingItems: PlayerItems;
 
   constructor(
-    private readonly state: {
-      monitor: Monitor,
-      settings: Settings,
-      random: Random,
-    }
+    private readonly state: LogicPassConfigState,
   ) {
     /* Starting items */
     this.startingItems = new Map;
@@ -98,4 +99,8 @@ export class LogicPassConfig {
 
     return { startingItems: this.startingItems };
   }
+}
+
+export function logicPassConfig(state: LogicPassConfigState) {
+  return new LogicPassConfig(state).run();
 }

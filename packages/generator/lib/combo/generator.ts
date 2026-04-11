@@ -118,7 +118,7 @@ export class Generator {
 
       /* Generate spoiler log */
       if (this.opts.settings.generateSpoilerLog) {
-        log = makeSpoilerLog(logicResult);
+        log = makeSpoilerLog(logicResult, this.opts);
       }
     } else {
       if (!this.opts.patch) {
