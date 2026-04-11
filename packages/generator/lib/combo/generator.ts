@@ -12,6 +12,7 @@ import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
+import { makeSpoilerLog } from './spoiler';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = (env !== 'production');
@@ -117,7 +118,11 @@ export class Generator {
         logic: logicResult,
         settings: this.opts.settings,
       });
-      log = logicResult.log;
+
+      /* Generate spoiler log */
+      if (this.opts.settings.generateSpoilerLog) {
+        log = makeSpoilerLog(logicResult);
+      }
     } else {
       if (!this.opts.patch) {
         throw new Error('Patch mode requires a patch file');

@@ -2,7 +2,6 @@ import type { Options } from '../options';
 
 import { Monitor, Random } from '@ootmm/core';
 import { LogicPassSongEvents, LogicPassFixer, LogicPassConfig, LogicPassHash, LogicPassWorldTransform, LogicPassHints, LogicPassEntrances, LogicPassAnalysisPaths, LogicPassAnalysisFoolish, LogicPassAnalysis, LogicPassCloak, LogicPassMinimize, LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
-import { LogicPassSpoiler } from './spoiler';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -64,7 +63,6 @@ export const logic = async (monitor: Monitor, opts: Options) => {
     .apply(LogicPassAnalysisPaths)
     .apply(LogicPassAnalysisFoolish)
     .apply(LogicPassHints)
-    .apply(LogicPassSpoiler)
     .apply(LogicPassHash)
     .exec();
 

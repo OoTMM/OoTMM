@@ -1,18 +1,19 @@
 import type { Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
 import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
-import type { Options } from '../options';
+import type { Options } from './options';
 
 import { sortBy } from 'lodash-es';
 import { Monitor, SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
-import { itemName } from '../names';
-import { regionName } from '../regions';
-import { LogWriter } from '../util/log-writer';
+import { itemName } from './names';
+import { regionName } from './regions';
+import { LogWriter } from './util/log-writer';
+import type { LogicResult } from './logic';
 
 const VERSION = process.env.VERSION || 'XXX';
 
-export class LogicPassSpoiler {
+class SpoilerWriter {
   private writer: LogWriter;
   private isMulti: boolean;
   private worlds: number;
@@ -26,7 +27,6 @@ export class LogicPassSpoiler {
       opts: Options;
       settings: Settings;
       hints: Hints;
-      monitor: Monitor;
       startingItems: PlayerItems;
       plandoLocations: Map<Location, PlayerItem>;
     }
@@ -491,12 +491,6 @@ export class LogicPassSpoiler {
   }
 
   run() {
-    this.state.monitor.log('Logic: Spoiler');
-
-    if (!this.state.opts.settings.generateSpoilerLog) {
-      return { log: null };
-    }
-
     this.writeHeader();
     this.writeSettings();
     this.writeSpecialConds();
@@ -515,6 +509,11 @@ export class LogicPassSpoiler {
     }
     this.writeRaw();
 
-    return { log: this.writer.emit() };
+    return this.writer.emit();
   };
+}
+
+export function makeSpoilerLog(result: LogicResult): string {
+  const spoilerWriter = new SpoilerWriter(result);
+  return spoilerWriter.run();
 }
