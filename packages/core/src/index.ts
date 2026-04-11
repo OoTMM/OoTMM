@@ -6,3 +6,4 @@ export * from './random';
 export * from './regions';
 export * from './settings';
 export * from './util';
+export * from './gossips';

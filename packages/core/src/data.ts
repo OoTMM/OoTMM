@@ -1,4 +1,5 @@
 import { default as DATA_ENTRANCES } from '../dist/data-entrances.json';
+
 export { default as WORLD } from '../dist/data-world.json';
 export { default as SCENES } from '../dist/data-scenes.json';
 export { default as NPC } from '../dist/data-npc.json';
@@ -9,7 +10,6 @@ export { default as RAW_DRAWGI } from '../dist/data-drawgi.json';
 export { default as FILES } from '../dist/data-files.json';
 export { default as MACROS } from '../dist/data-macros.json';
 export { default as POOL } from '../dist/data-pool.json';
-export { default as RAW_HINTS_DATA } from '../dist/data-hints-raw.json';
 
 export type EntranceData = {
   game: 'oot' | 'mm';

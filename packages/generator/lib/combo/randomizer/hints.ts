@@ -3,11 +3,10 @@ import type { LogicResult } from '../logic';
 import type { HintGossip } from '../logic/hints';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { HINTS, REGIONS, regionData } from '@ootmm/core';
+import { GOSSIPS_BY_LOCATION, HINTS, REGIONS, regionData } from '@ootmm/core';
 
 import { BOSS_INDEX_BY_DUNGEON } from '../logic/world';
 import { padBuffer16 } from '../util';
-import { DATA_HINTS_POOL } from '../data';
 import { DUNGEONS_BY_KEY } from '../logic/dungeons';
 import { END_BOSS_METADATA } from '../logic/boss';
 import { PATH_EVENT_DATA } from '../logic/analysis-path';
@@ -68,7 +67,7 @@ export class RandomizerPatcherHints {
   private hintBuffer(gossip: string, hint: HintGossip): Uint8Array {
     const data = new Uint8Array(0x10);
     data.fill(0xff);
-    let gossipData = DATA_HINTS_POOL[this.ctx.game][gossip];
+    let gossipData = GOSSIPS_BY_LOCATION[gossip];
     if (!gossipData) {
       throw new Error(`Unknown gossip ${gossip} for game ${this.ctx.game}`);
     }

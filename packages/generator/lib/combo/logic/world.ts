@@ -2,10 +2,8 @@ import type { Game, Settings, Item } from '@ootmm/core';
 import type { Expr, World, ExprMap, WorldCheck, WorldArea, ExprParsers, WorldGossip } from '@ootmm/logic';
 
 import { cloneDeep, mapValues } from 'lodash-es';
-import { MACROS, WORLD, REGIONS, POOL, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId } from '@ootmm/core';
+import { MACROS, WORLD, REGIONS, POOL, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId, GOSSIPS_BY_LOCATION } from '@ootmm/core';
 import { ExprParser, defaultPrices, exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
-
-import { DATA_HINTS_POOL } from '../data';
 
 export const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
@@ -343,9 +341,9 @@ export class LogicPassWorld {
         }
 
         for (const g in gossip) {
-          const data = DATA_HINTS_POOL[game][g];
+          const data = GOSSIPS_BY_LOCATION[g];
           if (!data) throw new Error(`Unknown gossip stone ${g}`);
-          const worldGossip = { game, type: data.type } as WorldGossip;
+          const worldGossip = { game, type: data.type };
           this.world.gossip[g] = worldGossip;
         }
       }

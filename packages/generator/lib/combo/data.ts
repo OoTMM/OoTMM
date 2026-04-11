@@ -1,21 +1,5 @@
-import type { Game } from '@ootmm/core';
-
 import { isArray } from 'lodash-es';
-import { gameId, RAW_GI, RAW_DRAWGI, RAW_HINTS_DATA } from '@ootmm/core';
-
-const mapGossip = (game: Game, data: any[]) => {
-  const result: {[k: string]: any} = {};
-  for (const v of data) {
-    const key = gameId(game, v.location, ' ');
-    result[key] = { type: v.type, id: parseInt(v.id) }
-  }
-  return result;
-};
-
-export const DATA_HINTS_POOL = {
-  oot: mapGossip('oot', RAW_HINTS_DATA.oot),
-  mm: mapGossip('mm', RAW_HINTS_DATA.mm),
-};
+import { RAW_GI, RAW_DRAWGI } from '@ootmm/core';
 
 type DataGi = {
   index: number;
