@@ -59,7 +59,7 @@ type DungeonEntranceRegion = {
   readonly region: Region;
 };
 
-type DungeonEntrance =
+export type DungeonEntrance =
   | DungeonEntranceReplace
   | DungeonEntranceRegion
   ;

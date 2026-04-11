@@ -2,6 +2,7 @@ import type { Settings } from '@ootmm/core';
 import type { World } from './world'
 
 import { ItemHelpers } from '@ootmm/core';
+import type { LogicResultWorld } from './pipeline';
 
 export function isEntranceShuffle(settings: Settings) {
   if (settings.erBoss !== 'none')
@@ -71,7 +72,7 @@ export function mustStartWithMasterSword(settings: Settings) {
 }
 
 // When adding new settings, add in order of how many checks there are to minimize average runtime
-export const isShuffled = (settings: Settings, world: World, loc: string, dungLocations?: Set<string>) => {
+export const isShuffled = (settings: Settings, world: LogicResultWorld, loc: string, dungLocations?: Set<string>) => {
   const check = world.checks[loc];
   const item = check.item;
 

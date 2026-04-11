@@ -1,10 +1,10 @@
 import type { Settings } from '@ootmm/core';
-import type { World } from '@ootmm/logic';
+import type { LogicResultWorld } from '@ootmm/logic';
 import type { Confvar } from '../confvars';
 
 import { isEntranceShuffle, mustStartWithMasterSword } from '@ootmm/logic';
 
-export function worldConfig(world: World, settings: Settings): Set<Confvar> {
+export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Confvar> {
   const config = new Set<Confvar>;
 
   const exprs: { [k in Confvar]: boolean } = {

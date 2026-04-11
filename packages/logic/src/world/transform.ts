@@ -1709,7 +1709,7 @@ class LogicPassWorldTransform {
     /* Handle Pre-Activated owls */
     if (this.state.settings.mmPreActivatedOwls.type !== 'none') {
       for(let i = 0; i < this.state.settings.players; i++) {
-        this.makeLocationStarting(getPreActivatedOwlsLocations(this.state.worlds[i]));
+        this.makeLocationStarting(getPreActivatedOwlsLocations(this.state.worlds[i].resolvedFlags));
       }
     }
 

@@ -1,5 +1,5 @@
 import type { Settings, ItemsCount } from '@ootmm/core';
-import type { World, LogicResult } from '@ootmm/logic';
+import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { ItemGroups, ItemHelpers, countMapAdd } from '@ootmm/core';
 import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '@ootmm/logic';
@@ -13,7 +13,7 @@ type RandomizerPatcherStartingItemsContext = {
 };
 
 export class RandomizerPatcherStartingItems {
-  private world: World;
+  private world: LogicResultWorld;
   private ctx: RandomizerPatcherStartingItemsContext;
 
   constructor(ctx: RandomizerPatcherStartingItemsContext) {
@@ -68,7 +68,7 @@ export class RandomizerPatcherStartingItems {
 
     if (this.ctx.settings.skipZelda) this.addStartingItemLocsWorld(locationsZelda(this.ctx.settings), itemsCount);
     if (this.ctx.settings.gerudoFortress === 'open') this.addStartingItemLocsWorld(['OOT Gerudo Member Card'], itemsCount);
-    if (this.ctx.settings.mmPreActivatedOwls.type !== 'none') this.addStartingItemLocsWorld(getPreActivatedOwlsLocations(this.world), itemsCount);
+    if (this.ctx.settings.mmPreActivatedOwls.type !== 'none') this.addStartingItemLocsWorld(getPreActivatedOwlsLocations(this.world.resolvedFlags), itemsCount);
 
     return itemsCount;
   }

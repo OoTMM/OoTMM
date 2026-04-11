@@ -1,9 +1,8 @@
-import type { Item, Options, PlayerItem, PlayerItems, Settings } from '@ootmm/core';
+import type { Item, Options, PlayerItem, PlayerItems } from '@ootmm/core';
 import type { ItemPlacement } from './types';
 import type { Hints } from './hints';
 import type { Analysis } from './analysis';
-import type { World } from './world';
-import type { ItemProperties } from './item-properties';
+import type { DungeonEntrance, ResolvedWorldFlags, WorldCheck } from './world';
 import type { Location } from './types';
 
 import { Monitor, Random } from '@ootmm/core';
@@ -31,9 +30,24 @@ class LogicPipeline<State> {
   }
 };
 
+export type LogicResultWorld = {
+  resolvedFlags: ResolvedWorldFlags;
+  checks: { [k: string]: WorldCheck };
+  prices: number[];
+  entranceOverrides: Map<string, string>;
+  bossIds: number[];
+  songEvents: number[];
+  dungeonsEntrances: Map<string, DungeonEntrance>;
+  preCompleted: Set<string>;
+  locations: Set<string>;
+  regions: { [k: string]: string };
+  dungeons: { [k: string]: Set<string> };
+  checkHints: { [k: string]: string[] };
+};
+
 export type LogicResult = {
+  worlds: LogicResultWorld[];
   startingItems: PlayerItems;
-  worlds: World[];
   plandoLocations: Map<Location, PlayerItem>;
   items: ItemPlacement;
   itemCloaks: Map<Location, Item>;
@@ -84,9 +98,24 @@ export async function logic(monitor: Monitor, opts: Options): Promise<LogicResul
     .apply(logicPassHash)
     .exec();
 
+    const worlds: LogicResultWorld[] = state.worlds.map(w => ({
+      resolvedFlags: w.resolvedFlags,
+      checks: w.checks,
+      prices: w.prices,
+      entranceOverrides: w.entranceOverrides,
+      bossIds: w.bossIds,
+      songEvents: w.songEvents,
+      dungeonsEntrances: w.dungeonsEntrances,
+      preCompleted: w.preCompleted,
+      locations: w.locations,
+      regions: w.regions,
+      dungeons: w.dungeons,
+      checkHints: w.checkHints,
+    }));
+
     return {
+      worlds,
       startingItems: data.startingItems,
-      worlds: data.worlds,
       plandoLocations: data.plandoLocations,
       items: data.items,
       itemCloaks: data.itemCloaks,

@@ -1,5 +1,5 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { World, WorldCheck, LogicResult } from '@ootmm/logic';
+import type { WorldCheck, LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { NPC, SCENES } from '@ootmm/core';
@@ -321,7 +321,7 @@ type RandomizerPatcherChecksContext = {
 
 export class RandomizerPatcherChecks {
   private ctx: RandomizerPatcherChecksContext;
-  private world: World;
+  private world: LogicResultWorld;
 
   constructor(ctx: RandomizerPatcherChecksContext) {
     this.ctx = ctx;
