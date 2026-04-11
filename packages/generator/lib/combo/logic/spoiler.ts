@@ -8,11 +8,10 @@ import type { AnalysisPath } from './analysis-path';
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
-import { WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
+import { ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
-import { ANALYSIS_EVENTS } from './analysis';
 import { PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
