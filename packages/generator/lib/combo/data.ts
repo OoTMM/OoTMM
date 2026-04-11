@@ -1,7 +1,7 @@
 import type { Game } from '@ootmm/core';
+
 import { isArray } from 'lodash-es';
-import { gameId } from '@ootmm/core';
-import { RAW_GI, RAW_DRAWGI, RAW_HINTS_DATA } from '@ootmm/data';
+import { gameId, RAW_GI, RAW_DRAWGI, RAW_HINTS_DATA } from '@ootmm/core';
 
 const mapGossip = (game: Game, data: any[]) => {
   const result: {[k: string]: any} = {};

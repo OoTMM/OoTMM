@@ -1,6 +1,5 @@
-import path from 'path';
-import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
-import { Monitor, SETTINGS } from '@ootmm/core';
+import path from 'node:path';
+import { Monitor, SETTINGS, ENTRANCES, NPC, SCENES } from '@ootmm/core';
 import { PRICE_RANGES } from '@ootmm/logic';
 
 import { DRAWGI, GI } from './data';

@@ -3,8 +3,7 @@ import type { World } from '@ootmm/logic';
 import type { LogicResult } from '../logic'
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData } from '@ootmm/core';
-import { ENTRANCES, REGIONS } from '@ootmm/data';
+import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData, ENTRANCES, REGIONS } from '@ootmm/core';
 import { makeLocation } from '@ootmm/logic';
 
 import { toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';

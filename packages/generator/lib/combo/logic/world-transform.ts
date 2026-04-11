@@ -2,8 +2,7 @@ import type { Settings, ItemID, Item, PlayerItem, PlayerItems } from '@ootmm/cor
 import type { Location, World, WorldCheckType, ItemProperties } from '@ootmm/logic';
 import type { ItemSharedDef } from './shared';
 
-import { POOL } from '@ootmm/data';
-import { Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
+import { POOL, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
 import { mustStartWithMasterSword, exprTrue, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '@ootmm/logic';
 import { SharedItemGroups } from './shared';
 import { optimizeWorldStartingAndPool } from './world-optimizer';

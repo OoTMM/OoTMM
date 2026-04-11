@@ -1,12 +1,15 @@
-import { readFileSync, writeFileSync, mkdirSync, globSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, writeFileSync, mkdirSync, globSync } from 'node:fs';
+import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import * as CSV from 'csv/sync';
 
+const ROOT_DIR = path.resolve(__dirname, '..', '..');
+const DATA_DIR = path.join(ROOT_DIR, 'data');
+
 function emit(filename: string, data: any) {
-  const dir = join(__dirname, '..', 'dist');
+  const dir = path.join(__dirname, 'dist');
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, `${filename}.json`), JSON.stringify(data));
+  writeFileSync(path.join(dir, `${filename}.json`), JSON.stringify(data));
 }
 
 function loadYaml(patterns: string | string[]): any {
@@ -14,12 +17,12 @@ function loadYaml(patterns: string | string[]): any {
   let data: any = null;
 
   for (const p of patterns) {
-    const matchedFiles = globSync(p, { cwd: __dirname });
+    const matchedFiles = globSync(p, { cwd: DATA_DIR });
     if (matchedFiles.length === 0) {
       throw new Error(`No files matched the pattern: ${p}`);
     }
     for (const name of matchedFiles) {
-      const file = readFileSync(join(__dirname, name), 'utf8');
+      const file = readFileSync(path.join(DATA_DIR, name), 'utf8');
       const parsed = parseYaml(file);
 
       if (data === null) {
@@ -37,11 +40,11 @@ function loadYaml(patterns: string | string[]): any {
 }
 
 function loadTxt(name: string): string {
-  return readFileSync(join(__dirname, name), 'utf8');
+  return readFileSync(path.join(DATA_DIR, name), 'utf8');
 }
 
 function loadCsv(name: string): any[] {
-  const content = readFileSync(join(__dirname, name), "utf8");
+  const content = readFileSync(path.join(DATA_DIR, name), "utf8");
   return CSV.parse(content, { columns: true, skip_empty_lines: true, trim: true });
 }
 

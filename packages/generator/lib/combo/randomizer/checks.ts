@@ -3,7 +3,7 @@ import type { World, WorldCheck } from '@ootmm/logic';
 import type { LogicResult } from '../logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { NPC, SCENES } from '@ootmm/data';
+import { NPC, SCENES } from '@ootmm/core';
 import { makeLocation } from '@ootmm/logic';
 
 import { gi, playerId } from './util';

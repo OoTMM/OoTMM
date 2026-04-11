@@ -1,4 +1,4 @@
-import type { Entrance } from '@ootmm/data';
+import type { Entrance } from '@ootmm/core';
 
 type BossMetadata = {
   readonly name: string;

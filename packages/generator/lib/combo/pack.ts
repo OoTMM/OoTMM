@@ -3,8 +3,7 @@ import type { DecompressedRoms } from './decompress';
 import type { Options } from './options';
 import type { GameAddresses } from './addresses';
 
-import { FILES } from '@ootmm/data';
-import { Monitor, GAMES } from '@ootmm/core';
+import { Monitor, GAMES, FILES } from '@ootmm/core';
 
 import { CONFIG } from './config';
 import { cosmetics } from './cosmetics';

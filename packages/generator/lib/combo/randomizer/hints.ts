@@ -3,8 +3,7 @@ import type { LogicResult } from '../logic';
 import type { HintGossip } from '../logic/hints';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { HINTS, REGIONS } from '@ootmm/data';
-import { regionData } from '@ootmm/core';
+import { HINTS, REGIONS, regionData } from '@ootmm/core';
 
 import { BOSS_INDEX_BY_DUNGEON } from '../logic/world';
 import { padBuffer16 } from '../util';

@@ -2,8 +2,7 @@ import type { Game, Settings, Item } from '@ootmm/core';
 import type { Expr, World, ExprMap, WorldCheck, WorldArea, ExprParsers, WorldGossip } from '@ootmm/logic';
 
 import { cloneDeep, mapValues } from 'lodash-es';
-import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
-import { Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId } from '@ootmm/core';
+import { MACROS, WORLD, REGIONS, POOL, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId } from '@ootmm/core';
 import { ExprParser, defaultPrices, exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
 
 import { DATA_HINTS_POOL } from '../data';

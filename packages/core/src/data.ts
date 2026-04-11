@@ -1,5 +1,4 @@
 import { default as DATA_ENTRANCES } from '../dist/data-entrances.json';
-
 export { default as WORLD } from '../dist/data-world.json';
 export { default as SCENES } from '../dist/data-scenes.json';
 export { default as NPC } from '../dist/data-npc.json';

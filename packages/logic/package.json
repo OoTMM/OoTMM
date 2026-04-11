@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@ootmm/core": "*",
-    "@ootmm/data": "*",
     "lodash-es": "catalog:"
   },
   "packageManager": "pnpm@10.30.1",

@@ -6,8 +6,7 @@ import type { Analysis, SphereEntryEvent } from './analysis';
 import type { AnalysisPath } from './analysis-path';
 
 import { sortBy } from 'lodash-es';
-import { Monitor, SETTINGS, TRICKS, exportSettings, regionData } from '@ootmm/core';
-import { ENTRANCES } from '@ootmm/data';
+import { Monitor, SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
 import { isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
