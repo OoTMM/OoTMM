@@ -32,11 +32,8 @@ class LogicPipeline<State> {
 };
 
 export type LogicResult = {
-  monitor: Monitor;
-  opts: Options;
   settings: Settings;
   random: Random;
-  attempts: number;
   startingItems: PlayerItems;
   itemProperties: ItemProperties;
   worlds: World[];
@@ -60,7 +57,7 @@ export const worldState = async (monitor: Monitor, opts: Options) => {
   const random = new Random();
   const seedKey = [opts.seed.length.toString(16), opts.seed, opts.settings.generateSpoilerLog ? '1' : '0'].join('\0');
   await random.seed(seedKey);
-  const state = { monitor, opts, settings: opts.settings, random, attempts: 0 };
+  const state = { monitor, opts, settings: opts.settings, random };
 
   return pipeline(state)
     .apply(logicPassConfig)
@@ -95,11 +92,8 @@ export async function logic(monitor: Monitor, opts: Options): Promise<LogicResul
     .exec();
 
     return {
-      monitor: data.monitor,
-      opts: data.opts,
       settings: data.settings,
       random: data.random,
-      attempts: data.attempts,
       startingItems: data.startingItems,
       itemProperties: data.itemProperties,
       worlds: data.worlds,
