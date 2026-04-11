@@ -1,7 +1,13 @@
 import type { Options } from '@ootmm/core';
 
 import { Monitor, Random } from '@ootmm/core';
-import { LogicPassSongEvents, LogicPassFixer, LogicPassConfig, LogicPassHash, LogicPassWorldTransform, LogicPassHints, LogicPassEntrances, LogicPassAnalysisPaths, LogicPassAnalysisFoolish, LogicPassAnalysis, LogicPassCloak, LogicPassMinimize, LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
+import { LogicPassConfig, LogicPassFixer, LogicPassHash, LogicPassSongEvents } from './misc';
+import { LogicPassItemProperties } from './item-properties';
+import { LogicPassWorld, LogicPassWorldTransform } from './world';
+import { LogicPassPrice } from './price';
+import { LogicPassCloak, LogicPassEntrances, LogicPassMinimize, LogicPassSolver } from './solver';
+import { LogicPassAnalysis, LogicPassAnalysisFoolish, LogicPassAnalysisPaths } from './analysis';
+import { LogicPassHints } from './hints';
 
 interface LogicPass<Out> {
   run: () => Out;

@@ -1,8 +1,9 @@
-import type { Settings } from '@ootmm/core';
 import type { Cosmetics } from './cosmetics';
 import type { OptionRandomSettings } from './random-settings';
+import type { Settings } from './settings';
 
-import { makeSettings, randString } from '@ootmm/core';
+import { randString } from './random';
+import { makeSettings } from './settings';
 import { makeCosmetics } from './cosmetics';
 import { makeRandomSettings } from './random-settings';
 

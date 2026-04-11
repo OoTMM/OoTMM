@@ -1,9 +1,8 @@
-import type { Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
+import type { Options, Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
 import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
-import type { Options } from './options';
 
 import { sortBy } from 'lodash-es';
-import { Monitor, SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
+import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';

@@ -7,3 +7,6 @@ export * from './regions';
 export * from './settings';
 export * from './util';
 export * from './gossips';
+export * from './cosmetics';
+export * from './random-settings';
+export * from './options';

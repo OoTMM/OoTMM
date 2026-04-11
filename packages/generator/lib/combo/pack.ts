@@ -1,6 +1,5 @@
-import type { Game } from '@ootmm/core';
+import type { Game, Options } from '@ootmm/core';
 import type { DecompressedRoms } from './decompress';
-import type { Options } from './options';
 import type { GameAddresses } from './addresses';
 
 import { Monitor, GAMES, FILES } from '@ootmm/core';

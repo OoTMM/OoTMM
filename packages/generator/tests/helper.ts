@@ -2,11 +2,8 @@ import type { PartialDeep } from 'type-fest';
 import type { Settings } from '@ootmm/core';
 
 import { merge } from 'lodash-es';
-import { Monitor, DEFAULT_SETTINGS } from '@ootmm/core';
-
+import { Monitor, DEFAULT_SETTINGS, makeRandomSettings, makeCosmetics } from '@ootmm/core';
 import { solvedWorldState } from '../lib/combo/logic';
-import { makeCosmetics } from '../lib/combo';
-import { makeRandomSettings } from '../lib/combo/random-settings';
 
 export const makeTestSeed = async (seed: string, settings: PartialDeep<Settings>) => {
   const monitor = new Monitor({ onLog: () => {} });
