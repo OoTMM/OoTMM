@@ -4,9 +4,8 @@ import type { ItemProperties } from './item-properties';
 
 import { ENTRANCES } from '@ootmm/data';
 import { Random, sample } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue, makeLocation } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue, makeLocation, Pathfinder } from '@ootmm/logic';
 import { DUNGEONS_REGIONS, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
-import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { LogicPassSolver } from './solve';

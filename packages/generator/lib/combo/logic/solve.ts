@@ -1,11 +1,9 @@
 import type { Settings, PlayerItem, PlayerItems, Item } from '@ootmm/core';
-import type { Location, ItemPlacement, World } from '@ootmm/logic';
+import type { Location, ItemPlacement, World, PathfinderState } from '@ootmm/logic';
 import type { ItemProperties } from './item-properties';
-import type { PathfinderState } from './pathfind';
 
 import { Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
-import { exprTrue, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from '@ootmm/logic';
-import { Pathfinder } from './pathfind';
+import { exprTrue, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation, Pathfinder } from '@ootmm/logic';
 import { cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
 import { Monitor } from '../monitor';

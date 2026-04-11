@@ -1,12 +1,10 @@
 import type { Settings, PlayerItems } from '@ootmm/core';
-import type { ItemPlacement, Location, World } from '@ootmm/logic';
-import type { PathfinderState } from './pathfind';
+import type { ItemPlacement, Location, World, PathfinderState } from '@ootmm/logic';
 import type { Analysis } from './analysis';
 import type { ItemProperties } from './item-properties';
 
 import { Random, sample, ItemHelpers } from '@ootmm/core';
-import { isLocationRenewable, locationData, makeLocation } from '@ootmm/logic';
-import { Pathfinder } from './pathfind';
+import { isLocationRenewable, locationData, makeLocation, Pathfinder } from '@ootmm/logic';
 import { Monitor } from '../monitor';
 
 type ZigZagState = {

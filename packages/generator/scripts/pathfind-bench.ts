@@ -1,4 +1,4 @@
-import { Pathfinder } from '../lib/combo/logic/pathfind';
+import { Pathfinder } from '@ootmm/logic';
 import { solvedWorldState } from '../lib/combo/logic';
 import { Monitor } from '../lib/combo/monitor';
 import { options } from '../lib/combo/options';

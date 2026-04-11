@@ -2,8 +2,7 @@ import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
 import type { ItemPlacement, Location, World } from '@ootmm/logic';
 
 import { Random, randomFloat, sample, shuffle, countMapArray, ItemGroups, ItemHelpers, Items, makePlayerItem } from '@ootmm/core';
-import { isLocationFullyShuffled, locationData, makeLocation } from '@ootmm/logic';
-import { Pathfinder } from './pathfind';
+import { isLocationFullyShuffled, locationData, makeLocation, Pathfinder } from '@ootmm/logic';
 import { Monitor } from '../monitor';
 import { TRAP_AMOUNTS } from './traps';
 

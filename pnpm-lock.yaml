@@ -222,6 +222,13 @@ importers:
       '@ootmm/data':
         specifier: '*'
         version: link:../data
+      lodash-es:
+        specifier: 'catalog:'
+        version: 4.18.1
+    devDependencies:
+      '@types/lodash-es':
+        specifier: 'catalog:'
+        version: 4.17.12
 
   packages/tools: {}
 

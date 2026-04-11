@@ -1,13 +1,11 @@
 import type { Settings, Item, PlayerItems } from '@ootmm/core';
-import type { Location, ItemPlacement, World } from '@ootmm/logic';
-import type { PathfinderState } from './pathfind';
+import type { Location, ItemPlacement, World, PathfinderState } from '@ootmm/logic';
 import type { ItemProperties } from './item-properties';
 import type { Analysis } from './analysis';
 
 import { Random, Items, makePlayerItem } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD } from '@ootmm/logic';
+import { AGE_ADULT, AGE_CHILD, Pathfinder } from '@ootmm/logic';
 import { cloneWorld } from './world';
-import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from './boss';
 

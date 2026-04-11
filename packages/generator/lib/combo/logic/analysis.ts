@@ -1,13 +1,11 @@
 import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
-import type { ItemPlacement, Location, World } from '@ootmm/logic';
-import type { PathfinderState } from './pathfind';
+import type { ItemPlacement, Location, World, PathfinderState } from '@ootmm/logic';
 import type { ItemProperties } from './item-properties';
 import type { AnalysisPath } from './analysis-path';
 
 import { Random, shuffle, ItemHelpers } from '@ootmm/core';
-import { isLocationRenewable, makeLocation, locationData, ANALYSIS_EVENTS } from '@ootmm/logic';
+import { isLocationRenewable, makeLocation, locationData, ANALYSIS_EVENTS, Pathfinder } from '@ootmm/logic';
 import { cloneWorld } from './world';
-import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 
 type SphereEntryLocation = {
