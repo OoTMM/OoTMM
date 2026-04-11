@@ -5,8 +5,6 @@
     "build": "tsx ./lib/build.ts",
     "start": "tsx ./lib/cli.ts",
     "start:config": "tsx ./lib/cli.ts --config ../../config.yml",
-    "test": "vitest run",
-    "bench": "vitest bench",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

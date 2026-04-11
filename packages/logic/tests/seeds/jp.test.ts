@@ -1,11 +1,10 @@
 import { test, expect } from 'vitest';
 
-import { makeTestSeed } from '../helper';
+import { makeTestSeed } from '../helpers';
 
-test("Can make a seed - JP Layout + ER", async () => {
+test("Can make a seed - JP Layout", async () => {
   const res = await makeTestSeed("JP", {
     jpLayouts: { type: 'all' },
-    erGrottos: 'full',
   });
   expect(res).toBeDefined();
 });

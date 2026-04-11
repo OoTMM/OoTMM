@@ -1,9 +1,9 @@
 import { test, expect } from 'vitest';
 
-import { makeTestSeed } from '../helper';
+import { makeTestSeed } from '../helpers';
 
-test("Can make a seed - Extrasanity", async () => {
-  const res = await makeTestSeed("Extrasanity", {
+test("Can make a seed - MQ Extrasanity", async () => {
+  const res = await makeTestSeed("MQ Extrasanity", {
     songs: 'anywhere',
     goldSkulltulaTokens: 'all',
     housesSkulltulaTokens: 'all',
@@ -53,6 +53,7 @@ test("Can make a seed - Extrasanity", async () => {
     shuffleRedBouldersMm: true,
     shuffleIciclesOot: true,
     shuffleIciclesMm: true,
+    mqDungeons: { type: 'all' },
   });
   expect(res).toBeDefined();
 });

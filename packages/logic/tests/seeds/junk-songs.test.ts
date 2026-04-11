@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { makeTestSeed } from '../helper';
+import { makeTestSeed } from '../helpers';
 
 test("Can make a seed - junk song locations", async () => {
   const res = await makeTestSeed("JUNKSONGS", {

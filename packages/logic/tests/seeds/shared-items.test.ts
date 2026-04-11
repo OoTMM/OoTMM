@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { makeTestSeed } from '../helper';
+import { makeTestSeed } from '../helpers';
 
 test("Can make a seed - Shared Items", async () => {
   const res = await makeTestSeed("SHARED-ITEMS", {

@@ -1,9 +1,9 @@
-import { bench } from 'vitest';
+import { test, expect } from 'vitest';
 
-import { makeTestSeed } from '../helper';
+import { makeTestSeed } from '../helpers';
 
-bench("Full ER", async () => {
-  await makeTestSeed("FULL ER", {
+test("Can make a seed - Full ER", async () => {
+  const res = await makeTestSeed("FULL ER", {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',
@@ -26,4 +26,5 @@ bench("Full ER", async () => {
     erIkanaCastle: true,
     erSecretShrine: true,
   });
+  expect(res).toBeDefined();
 });
