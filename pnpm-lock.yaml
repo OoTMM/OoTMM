@@ -219,6 +219,9 @@ importers:
       '@ootmm/core':
         specifier: '*'
         version: link:../core
+      '@ootmm/data':
+        specifier: '*'
+        version: link:../data
 
   packages/tools: {}
 

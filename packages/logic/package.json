@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ootmm/core": "*"
+    "@ootmm/core": "*",
+    "@ootmm/data": "*"
   },
   "packageManager": "pnpm@10.30.1"
 }

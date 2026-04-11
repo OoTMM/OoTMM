@@ -10,7 +10,7 @@ import {
   exprSongEvent,
 } from '../../src/expr/builder';
 import { CONSTRAINT_FLAGS } from '../../src/expr/data';
-import type { ResolvedWorldFlags } from '../../src/world-flags';
+import type { ResolvedWorldFlags } from '../../src/world/flags';
 
 const NO_FLAGS = new Proxy({} as ResolvedWorldFlags, {
   get: () => ({ has: () => false }),

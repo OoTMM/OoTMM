@@ -1,6 +1,6 @@
 import type { Game, Settings } from '@ootmm/core';
 import type { Expr } from './types';
-import type { ResolvedWorldFlags } from '../world-flags';
+import type { ResolvedWorldFlags } from '../world/flags';
 
 import { itemByID, gameId } from '@ootmm/core';
 import {

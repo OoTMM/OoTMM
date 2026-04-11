@@ -1,8 +1,7 @@
 import type { Settings, PlayerItem, PlayerItems, Item } from '@ootmm/core';
+import type { Location, ItemPlacement, World } from '@ootmm/logic';
 import type { ItemProperties } from './item-properties';
 import type { PathfinderState } from './pathfind';
-import type { World } from './world';
-import type { Location } from './locations';
 
 import { Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
 import { exprTrue } from '@ootmm/logic';
@@ -37,8 +36,6 @@ const VALIDATION_CRITICAL_ITEMS = [
   Items.SHARED_BUTTON_C_UP,
   Items.SHARED_BUTTON_C_LEFT,
 ];
-
-export type ItemPlacement = Map<Location, PlayerItem>;
 
 const NORMAL_DUNGEONS_OOT = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit'];
 const NORMAL_DUNGEONS_MM = ['WF', 'SH', 'GB', 'ST'];

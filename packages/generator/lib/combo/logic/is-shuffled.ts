@@ -1,5 +1,5 @@
 import type { Settings } from '@ootmm/core';
-import type { World } from './world';
+import type { World } from '@ootmm/logic';
 
 import { ItemHelpers } from '@ootmm/core';
 

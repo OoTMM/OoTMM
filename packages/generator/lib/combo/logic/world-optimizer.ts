@@ -1,6 +1,5 @@
 import type { PlayerItems } from '@ootmm/core';
-import type { Expr } from '@ootmm/logic';
-import type { World } from './world';
+import type { Expr, World } from '@ootmm/logic';
 
 import { makePlayerItem } from '@ootmm/core';
 import { exprAnd, exprFalse, exprOr, exprTrue } from '@ootmm/logic';

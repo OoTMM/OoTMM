@@ -1,5 +1,5 @@
 import type { Settings } from '@ootmm/core';
-import type { World } from '../logic/world';
+import type { World } from '@ootmm/logic';
 import type { Confvar } from '../confvars';
 
 import { isEntranceShuffle } from '../logic/helpers';
