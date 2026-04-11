@@ -5,7 +5,7 @@ import type { Analysis } from './analysis';
 import type { ItemProperties } from './item-properties';
 
 import { Random, sample, ItemHelpers } from '@ootmm/core';
-import { isLocationRenewable, locationData, makeLocation } from './locations';
+import { isLocationRenewable, locationData, makeLocation } from '@ootmm/logic';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 

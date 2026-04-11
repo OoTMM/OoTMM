@@ -3,9 +3,9 @@ import type { World } from '@ootmm/logic';
 import type { LogicResult } from '../logic';
 
 import { ItemGroups, ItemHelpers, countMapAdd } from '@ootmm/core';
+import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '@ootmm/logic';
 import { toU16Buffer } from '../util';
 import { gi } from './util';
-import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '../logic/locations';
 
 type RandomizerPatcherStartingItemsContext = {
   worldId: number;

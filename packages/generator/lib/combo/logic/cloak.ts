@@ -2,7 +2,7 @@ import type { Settings, Item, PlayerItem } from '@ootmm/core';
 import type { ItemPlacement, Location } from '@ootmm/logic';
 
 import { Random, sample, ItemGroups, ItemHelpers } from '@ootmm/core';
-import { isLocationFullyShuffled } from './locations';
+import { isLocationFullyShuffled } from '@ootmm/logic';
 
 export class LogicPassCloak {
   private itemCloaks: Map<Location, Item>;

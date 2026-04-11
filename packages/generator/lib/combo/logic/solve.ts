@@ -4,12 +4,11 @@ import type { ItemProperties } from './item-properties';
 import type { PathfinderState } from './pathfind';
 
 import { Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
-import { exprTrue } from '@ootmm/logic';
+import { exprTrue, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from '@ootmm/logic';
 import { Pathfinder } from './pathfind';
 import { cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
 import { Monitor } from '../monitor';
-import { isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { mustStartWithMasterSword } from './master-sword';
 
 const VALIDATION_CRITICAL_ITEMS = [

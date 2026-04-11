@@ -3,8 +3,7 @@ import type { Expr, Age, AreaData, ExprDependencies, ExprResult, ItemPlacement, 
 
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, AGES, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '@ootmm/logic';
-import { locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from './locations';
+import { AGE_ADULT, AGE_CHILD, AGES, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL, locationData, makeLocation, isLocationLicenseGranting, isLocationRenewable } from '@ootmm/logic';
 import { ANALYSIS_EVENTS } from './analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';

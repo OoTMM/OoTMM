@@ -5,10 +5,10 @@ import type { ItemProperties } from './item-properties';
 import type { AnalysisPath } from './analysis-path';
 
 import { Random, shuffle, ItemHelpers } from '@ootmm/core';
+import { isLocationRenewable, makeLocation, locationData } from '@ootmm/logic';
 import { cloneWorld } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
-import { isLocationRenewable, makeLocation, locationData } from './locations';
 
 type SphereEntryLocation = {
   type: 'location';

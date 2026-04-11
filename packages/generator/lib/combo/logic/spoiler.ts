@@ -8,7 +8,7 @@ import type { AnalysisPath } from './analysis-path';
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
-import { WORLD_FLAGS } from '@ootmm/logic';
+import { WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
@@ -16,7 +16,6 @@ import { ANALYSIS_EVENTS } from './analysis';
 import { PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
-import { locationData, makeLocation } from './locations';
 import { LogWriter } from '../util/log-writer';
 import { BOSS_METADATA_BY_DUNGEON } from './boss';
 import { DUNGEONS_BY_KEY } from './dungeons';

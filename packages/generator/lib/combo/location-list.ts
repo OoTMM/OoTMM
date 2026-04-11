@@ -1,11 +1,11 @@
 import type { Settings } from '@ootmm/core';
 
 import { DEFAULT_SETTINGS } from '@ootmm/core';
+import { makeLocation } from '@ootmm/logic';
 import { makeRandomSettings } from './random-settings';
 import { makeCosmetics } from './cosmetics';
 import { worldState } from './logic';
 import { isShuffled } from './logic/is-shuffled';
-import { makeLocation } from './logic/locations';
 import { Monitor } from './monitor';
 
 export async function locationList(aSettings: Partial<Settings>) {

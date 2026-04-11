@@ -5,9 +5,8 @@ import type { ItemSharedDef } from './shared';
 
 import { POOL } from '@ootmm/data';
 import { sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
-import { exprTrue } from '@ootmm/logic';
+import { exprTrue, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '@ootmm/logic';
 import { Monitor } from '../monitor';
-import { isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';
 import { SharedItemGroups } from './shared';
 import { mustStartWithMasterSword } from './master-sword';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
