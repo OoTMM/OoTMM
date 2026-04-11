@@ -1,8 +1,9 @@
 import type { PlayerItems } from '@ootmm/core';
-import type { Expr, World } from '@ootmm/logic';
+import type { Expr } from '../expr';
+import type { World } from './types';
 
 import { makePlayerItem } from '@ootmm/core';
-import { exprAnd, exprFalse, exprOr, exprTrue } from '@ootmm/logic';
+import { exprAnd, exprFalse, exprOr, exprTrue } from '../expr';
 
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   const transformed = cb(expr);

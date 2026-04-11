@@ -1,6 +1,5 @@
 import type { Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
-import type { Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
-import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
+import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
 import type { Options } from '../options';
 
 import { sortBy } from 'lodash-es';

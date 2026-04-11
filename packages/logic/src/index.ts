@@ -12,3 +12,5 @@ export * from './item-properties';
 export * from './solver';
 export * from './data';
 export * from './helpers';
+export * from './hints';
+export * from './misc';

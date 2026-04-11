@@ -1,8 +1,8 @@
 import type { Game, Settings, Item } from '@ootmm/core';
 
 import { ItemHelpers, gameId } from '@ootmm/core';
+import { SharedItemGroups } from '@ootmm/logic';
 import { ITEMS_SUBSTITUTIONS, SHARED_ITEMS } from './checks';
-import { SharedItemGroups } from '../logic/shared';
 import { GI } from '../data';
 
 export function gi(settings: Settings, game: Game, item: Item, generic: boolean) {

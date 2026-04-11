@@ -1,8 +1,12 @@
 import type { Game, Settings, CountMap, PlayerItems, PlayerItem, Region } from '@ootmm/core';
-import type { ItemPlacement, Location, World, Analysis, AnalysisPath } from '@ootmm/logic';
+import type { ItemPlacement, Location } from './types';
+import type { Analysis, AnalysisPath } from './analysis';
+import type { World } from './world';
 
 import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion } from '@ootmm/core';
-import { DUNGEONS_REGIONS, locationData, makeLocation, isLocationFullyShuffled, Pathfinder } from '@ootmm/logic';
+import { Pathfinder } from './pathfind';
+import { DUNGEONS_REGIONS } from './world';
+import { isLocationFullyShuffled, locationData, makeLocation } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',

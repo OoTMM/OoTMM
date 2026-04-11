@@ -1,11 +1,15 @@
 import type { Settings, ItemID, Item, PlayerItem, PlayerItems } from '@ootmm/core';
-import type { Location, World, WorldCheckType, ItemProperties } from '@ootmm/logic';
-import type { ItemSharedDef } from './shared';
+import type { Location } from '../types';
+import type { ItemProperties } from '../item-properties';
+import type { ItemSharedDef } from '../data';
+import type { World, WorldCheckType } from './types';
 
 import { POOL, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
-import { TRAP_AMOUNTS, mustStartWithMasterSword, exprTrue, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '@ootmm/logic';
-import { SharedItemGroups } from './shared';
-import { optimizeWorldStartingAndPool } from './world-optimizer';
+import { TRAP_AMOUNTS, SharedItemGroups } from '../data';
+import { optimizeWorldStartingAndPool } from './optimizer';
+import { mustStartWithMasterSword } from '../helpers';
+import { exprTrue } from '../expr';
+import { isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '../locations';
 
 const SONG_NOTES = new Map<Item, [Item, number]>([
   [Items.OOT_SONG_EPONA, [Items.OOT_SONG_NOTE_EPONA, 6]],
