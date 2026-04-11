@@ -1,10 +1,9 @@
 import type { Settings, PlayerItem } from '@ootmm/core';
-import type { ItemPlacement } from './solve';
+import type { Location, ItemPlacement } from '@ootmm/logic';
 import type { World } from './world';
 
 import { ItemHelpers } from '@ootmm/core';
 
-export type Location = string & { __brand: 'Location' };
 type LocationDescriptor = {
   id: string;
   world: null | number;

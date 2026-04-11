@@ -1,6 +1,5 @@
 import type { Settings, Item, PlayerItem } from '@ootmm/core';
-import type { ItemPlacement } from './solve';
-import type { Location } from './locations';
+import type { ItemPlacement, Location } from '@ootmm/logic';
 
 import { Random, sample, ItemGroups, ItemHelpers } from '@ootmm/core';
 import { isLocationFullyShuffled } from './locations';

@@ -1,8 +1,7 @@
 import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
 import type { Expr, Age, AreaData, ExprDependencies, ExprResult } from '@ootmm/logic';
-import type { ItemPlacement } from './solve';
+import type { ItemPlacement, Location } from '@ootmm/logic';
 import type { World } from './world';
-import type { Location } from './locations';
 
 import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';

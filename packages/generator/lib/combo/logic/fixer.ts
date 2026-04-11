@@ -1,6 +1,6 @@
 import type { Settings } from '@ootmm/core';
+import type { Location } from '@ootmm/logic';
 import type { World } from './world';
-import type { Location } from './locations';
 
 import { ItemHelpers, Items } from '@ootmm/core';
 import { Monitor } from '../monitor';

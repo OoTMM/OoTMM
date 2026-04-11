@@ -1,7 +1,6 @@
 import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
+import type { ItemPlacement, Location } from '@ootmm/logic';
 import type { World } from './world';
-import type { ItemPlacement } from './solve';
-import type { Location } from './locations';
 
 import { Random, randomFloat, sample, shuffle, countMapArray, ItemGroups, ItemHelpers, Items, makePlayerItem } from '@ootmm/core';
 import { Pathfinder } from './pathfind';
