@@ -11,3 +11,4 @@ export * from './is-shuffled';
 export * from './master-sword';
 export * from './error';
 export * from './item-properties';
+export * from './solver';
