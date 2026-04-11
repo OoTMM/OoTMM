@@ -3,10 +3,9 @@ import type { Location, World, WorldCheckType, ItemProperties } from '@ootmm/log
 import type { ItemSharedDef } from './shared';
 
 import { POOL, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
-import { mustStartWithMasterSword, exprTrue, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '@ootmm/logic';
+import { TRAP_AMOUNTS, mustStartWithMasterSword, exprTrue, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '@ootmm/logic';
 import { SharedItemGroups } from './shared';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
-import { TRAP_AMOUNTS } from './traps';
 
 const SONG_NOTES = new Map<Item, [Item, number]>([
   [Items.OOT_SONG_EPONA, [Items.OOT_SONG_NOTE_EPONA, 6]],

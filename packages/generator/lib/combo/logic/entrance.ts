@@ -2,8 +2,7 @@ import type { Settings, PlayerItems, Region } from '@ootmm/core';
 import type { Age, Expr, Location, World, WorldArea, ItemProperties } from '@ootmm/logic';
 
 import { Monitor, Random, sample, ENTRANCES } from '@ootmm/core';
-import { LogicPassSolver, DUNGEONS_REGIONS, cloneWorld, BOSS_INDEX_BY_DUNGEON, LogicEntranceError, LogicError, AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue, makeLocation, Pathfinder } from '@ootmm/logic';
-import { BOSS_METADATA_BY_ENTRANCE } from './boss';
+import { BOSS_METADATA_BY_ENTRANCE, LogicPassSolver, DUNGEONS_REGIONS, cloneWorld, BOSS_INDEX_BY_DUNGEON, LogicEntranceError, LogicError, AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue, makeLocation, Pathfinder } from '@ootmm/logic';
 
 type EntrancePolarity = 'in' | 'out' | 'any';
 type Entrance = keyof typeof ENTRANCES;

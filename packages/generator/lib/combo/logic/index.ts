@@ -1,7 +1,7 @@
 import type { Options } from '../options';
 
 import { Monitor, Random } from '@ootmm/core';
-import { LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
+import { LogicPassCloak, LogicPassMinimize, LogicPassSolver, LogicPassWorld, LogicPassItemProperties, LogicPassPrice } from '@ootmm/logic';
 
 import { LogicPassSpoiler } from './spoiler';
 import { LogicPassHints } from './hints';
@@ -12,10 +12,8 @@ import { LogicPassConfig } from './config';
 import { LogicPassWorldTransform } from './world-transform';
 import { LogicPassFixer } from './fixer';
 import { LogicPassAnalysisFoolish } from './analysis-foolish';
-import { LogicPassMinimize } from './minimize';
 import { LogicPassAnalysisPaths } from './analysis-path';
 import { LogicPassSongEvents } from './song-events';
-import { LogicPassCloak } from './cloak';
 
 interface LogicPass<Out> {
   run: () => Out;

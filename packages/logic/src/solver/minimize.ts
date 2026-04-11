@@ -1,9 +1,11 @@
 import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
-import type { ItemPlacement, Location, World } from '@ootmm/logic';
+import type { ItemPlacement, Location } from '../types';
+import type { World } from '../world';
 
 import { Monitor, Random, randomFloat, sample, shuffle, countMapArray, ItemGroups, ItemHelpers, Items, makePlayerItem } from '@ootmm/core';
-import { isLocationFullyShuffled, locationData, makeLocation, Pathfinder } from '@ootmm/logic';
-import { TRAP_AMOUNTS } from './traps';
+import { isLocationFullyShuffled, locationData, makeLocation } from '../locations';
+import { Pathfinder } from '../pathfind';
+import { TRAP_AMOUNTS } from '../data';
 
 export class LogicPassMinimize {
   private pathfinder!: Pathfinder;

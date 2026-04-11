@@ -9,7 +9,7 @@ import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
 import { MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '../expr';
 import { AGE_ADULT, AGE_CHILD, AGES } from '../age';
 import { isLocationLicenseGranting, isLocationRenewable, locationData, makeLocation } from '../locations';
-import { ANALYSIS_EVENTS } from '../analysis';
+import { ANALYSIS_EVENTS } from '../analysis/events';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
 
