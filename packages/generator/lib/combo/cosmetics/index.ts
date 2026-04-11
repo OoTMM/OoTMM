@@ -4,7 +4,7 @@ import type { ColorArg } from './color';
 import type { BufferPath } from './type';
 
 import fs from 'fs';
-import { GAMES, Random, randString, sample } from '@ootmm/core';
+import { Monitor, GAMES, Random, randString, sample } from '@ootmm/core';
 import { recolorImage } from '../image';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
@@ -12,7 +12,6 @@ import { COLORS } from './color';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
-import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
 import { bufReadU32BE } from '../util/buffer';
 

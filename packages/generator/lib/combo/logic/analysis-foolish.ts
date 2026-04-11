@@ -2,9 +2,8 @@ import type { Settings, PlayerItems } from '@ootmm/core';
 import type { ItemPlacement, Location, World, PathfinderState, ItemProperties } from '@ootmm/logic';
 import type { Analysis } from './analysis';
 
-import { Random, sample, ItemHelpers } from '@ootmm/core';
+import { Monitor, Random, sample, ItemHelpers } from '@ootmm/core';
 import { isLocationRenewable, locationData, makeLocation, Pathfinder } from '@ootmm/logic';
-import { Monitor } from '../monitor';
 
 type ZigZagState = {
   allowed: Set<Location>;

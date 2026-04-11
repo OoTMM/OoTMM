@@ -5,9 +5,8 @@ import type { DecompressedRoms } from '../decompress';
 import type { LogicResult } from '../logic';
 import type { PatchGroup } from './group';
 
-import { GAMES } from '@ootmm/core';
+import { Monitor, GAMES } from '@ootmm/core';
 import { CONFIG } from '../config';
-import { Monitor } from '../monitor';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from '../randomizer';

@@ -1,9 +1,8 @@
 import type { Settings, ItemsCount } from '@ootmm/core';
 
-import { ItemHelpers, makePlayerItem } from '@ootmm/core';
+import { Monitor, ItemHelpers, makePlayerItem } from '@ootmm/core';
 import { makeCosmetics } from './cosmetics';
 import { worldState } from './logic';
-import { Monitor } from './monitor';
 import { itemName } from './names';
 import { makeRandomSettings } from './random-settings';
 

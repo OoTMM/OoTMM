@@ -4,12 +4,11 @@ import type { Options } from './options';
 import type { GameAddresses } from './addresses';
 
 import { FILES } from '@ootmm/data';
-import { GAMES } from '@ootmm/core';
+import { Monitor, GAMES } from '@ootmm/core';
 
 import { CONFIG } from './config';
 import { cosmetics } from './cosmetics';
 import { DmaData } from './dma';
-import { Monitor } from './monitor';
 import { Patchfile } from './patch-build/patchfile';
 import { RomBuilder } from './rom-builder';
 

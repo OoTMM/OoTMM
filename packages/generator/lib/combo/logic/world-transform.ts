@@ -3,9 +3,8 @@ import type { Location, World, WorldCheckType, ItemProperties } from '@ootmm/log
 import type { ItemSharedDef } from './shared';
 
 import { POOL } from '@ootmm/data';
-import { sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
+import { Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
 import { mustStartWithMasterSword, exprTrue, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '@ootmm/logic';
-import { Monitor } from '../monitor';
 import { SharedItemGroups } from './shared';
 import { optimizeWorldStartingAndPool } from './world-optimizer';
 import { TRAP_AMOUNTS } from './traps';

@@ -6,12 +6,11 @@ import type { Analysis, SphereEntryEvent } from './analysis';
 import type { AnalysisPath } from './analysis-path';
 
 import { sortBy } from 'lodash-es';
-import { SETTINGS, TRICKS, exportSettings, regionData } from '@ootmm/core';
+import { Monitor, SETTINGS, TRICKS, exportSettings, regionData } from '@ootmm/core';
 import { ENTRANCES } from '@ootmm/data';
 import { isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from '../names';
-import { Monitor } from '../monitor';
 import { PATH_EVENT_DATA } from './analysis-path';
 import { regionName } from '../regions';
 import { LogWriter } from '../util/log-writer';
