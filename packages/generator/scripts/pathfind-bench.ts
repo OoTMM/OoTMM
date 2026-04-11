@@ -1,6 +1,5 @@
-import { Pathfinder } from '@ootmm/logic';
+import { Pathfinder, solvedWorldState } from '@ootmm/logic';
 import { Monitor, options } from '@ootmm/core';
-import { solvedWorldState } from '../lib/combo/logic';
 
 const SEED = 'BENCH';
 const ITERATIONS = parseInt(process.argv[2] ?? '1000', 10);

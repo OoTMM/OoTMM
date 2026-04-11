@@ -1,6 +1,5 @@
 import type { Settings, ItemsCount } from '@ootmm/core';
-import type { World } from '@ootmm/logic';
-import type { LogicResult } from '../logic';
+import type { World, LogicResult } from '@ootmm/logic';
 
 import { ItemGroups, ItemHelpers, countMapAdd } from '@ootmm/core';
 import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '@ootmm/logic';

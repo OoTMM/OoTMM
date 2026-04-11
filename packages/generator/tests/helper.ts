@@ -3,7 +3,7 @@ import type { Settings } from '@ootmm/core';
 
 import { merge } from 'lodash-es';
 import { Monitor, DEFAULT_SETTINGS, makeRandomSettings, makeCosmetics } from '@ootmm/core';
-import { solvedWorldState } from '../lib/combo/logic';
+import { solvedWorldState } from '@ootmm/logic';
 
 export const makeTestSeed = async (seed: string, settings: PartialDeep<Settings>) => {
   const monitor = new Monitor({ onLog: () => {} });

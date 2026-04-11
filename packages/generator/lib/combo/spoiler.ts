@@ -1,5 +1,5 @@
 import type { Options, Settings, TrickKey, Item, PlayerItem, PlayerItems, Region } from '@ootmm/core';
-import type { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
+import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, Analysis, AnalysisPath, SphereEntryEvent, Location, ItemPlacement, World } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
@@ -8,7 +8,6 @@ import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled,
 import { itemName } from './names';
 import { regionName } from './regions';
 import { LogWriter } from './util/log-writer';
-import type { LogicResult } from './logic';
 
 const VERSION = process.env.VERSION || 'XXX';
 

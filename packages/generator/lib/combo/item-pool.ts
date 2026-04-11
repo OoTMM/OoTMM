@@ -1,7 +1,8 @@
 import type { Settings, ItemsCount } from '@ootmm/core';
 
 import { makeRandomSettings, makeCosmetics, Monitor, ItemHelpers, makePlayerItem } from '@ootmm/core';
-import { worldState } from './logic';
+import { worldState } from '@ootmm/logic';
+
 import { itemName } from './names';
 
 export type Items = {[k: string]: number};

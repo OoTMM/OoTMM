@@ -1,6 +1,5 @@
 import type { Game } from '@ootmm/core';
-import type { World } from '@ootmm/logic';
-import type { LogicResult } from '../logic';
+import type { World, LogicResult } from '@ootmm/logic';
 
 import { ENTRANCES } from '@ootmm/core';
 import { padBuffer16, toU32Buffer } from '../util';

@@ -14,3 +14,4 @@ export * from './data';
 export * from './helpers';
 export * from './hints';
 export * from './misc';
+export * from './pipeline';
