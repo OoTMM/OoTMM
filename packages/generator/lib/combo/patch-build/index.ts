@@ -1,8 +1,7 @@
 import type { Settings } from '@ootmm/core';
-import type { World } from '@ootmm/logic';
+import type { World, LogicResult } from '@ootmm/logic';
 import type { GameAddresses } from '../addresses';
 import type { DecompressedRoms } from '../decompress';
-import type { LogicResult } from '../logic';
 import type { PatchGroup } from './group';
 
 import { Monitor, GAMES } from '@ootmm/core';

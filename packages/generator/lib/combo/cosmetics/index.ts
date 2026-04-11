@@ -1,23 +1,15 @@
-import type { Game } from '@ootmm/core';
-import type { Options } from '../options';
-import type { ColorArg } from './color';
-import type { BufferPath } from './type';
+import type { Game, ColorArg, BufferPath, Options } from '@ootmm/core';
 
-import fs from 'fs';
-import { Monitor, GAMES, Random, randString, sample } from '@ootmm/core';
+import fs from 'node:fs';
+import { COLORS, Monitor, GAMES, Random, randString, sample } from '@ootmm/core';
 import { recolorImage } from '../image';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
-import { COLORS } from './color';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
 import { LogWriter } from '../util/log-writer';
 import { bufReadU32BE } from '../util/buffer';
-
-export { makeCosmetics } from './util';
-export { COSMETICS } from './data';
-export type { Cosmetics } from './type';
 
 export async function cosmeticsAssets() {
   return {

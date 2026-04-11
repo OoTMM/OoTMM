@@ -1,5 +1,5 @@
 import type { Settings } from '@ootmm/core';
-import type { LogicResult } from '../logic';
+import type { LogicResult } from '@ootmm/logic';
 
 import { Patchfile } from '../patch-build/patchfile';
 

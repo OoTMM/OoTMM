@@ -1,6 +1,5 @@
 import type { Game, Settings, Region } from '@ootmm/core';
-import type { World } from '@ootmm/logic';
-import type { LogicResult } from '../logic'
+import type { World, LogicResult } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData, ENTRANCES, REGIONS } from '@ootmm/core';

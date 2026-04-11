@@ -217,6 +217,9 @@ importers:
       '@types/lodash-es':
         specifier: 'catalog:'
         version: 4.17.12
+      type-fest:
+        specifier: 'catalog:'
+        version: 5.5.0
 
   packages/tools: {}
 

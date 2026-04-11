@@ -1,6 +1,5 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { LogicResult } from '../logic';
-import type { HintGossip } from '../logic/hints';
+import type { HintGossip, LogicResult } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { GOSSIPS_BY_LOCATION, HINTS, REGIONS, regionData } from '@ootmm/core';

@@ -1,4 +1,4 @@
-import type { OptionsInput } from './combo/options';
+import type { OptionsInput } from '@ootmm/core';
 
 import { promises as fs } from 'fs';
 import YAML from 'yaml';

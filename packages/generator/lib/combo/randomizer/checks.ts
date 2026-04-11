@@ -1,6 +1,5 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { World, WorldCheck } from '@ootmm/logic';
-import type { LogicResult } from '../logic';
+import type { World, WorldCheck, LogicResult } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
 import { NPC, SCENES } from '@ootmm/core';

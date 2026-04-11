@@ -1,12 +1,11 @@
 import path from 'node:path';
-import { Monitor, SETTINGS, ENTRANCES, NPC, SCENES } from '@ootmm/core';
+import { COSMETICS, Monitor, SETTINGS, ENTRANCES, NPC, SCENES } from '@ootmm/core';
 import { PRICE_RANGES } from '@ootmm/logic';
 
 import { DRAWGI, GI } from './data';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
 import { CodeGen } from './util/codegen';
-import { COSMETICS } from './cosmetics';
 
 const ENTRANCES_DEBUG_CATEGORIES = {
   COMMON: 'Common',

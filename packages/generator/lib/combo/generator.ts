@@ -1,17 +1,15 @@
-import type { Settings, MonitorCallbacks } from '@ootmm/core';
-import type { Options, OptionsInput } from './options';
+import type { Options, OptionsInput, Settings, MonitorCallbacks } from '@ootmm/core';
 
-import { Monitor, Random } from '@ootmm/core';
-import { applyRandomSettings } from './random-settings';
+import { Monitor, Random, applyRandomSettings, options } from '@ootmm/core';
+import { logic } from '@ootmm/logic';
 import { codegen } from './codegen';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
-import { logic } from './logic';
-import { options } from './options';
 import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
+import { makeSpoilerLog } from './spoiler';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = (env !== 'production');
@@ -117,7 +115,11 @@ export class Generator {
         logic: logicResult,
         settings: this.opts.settings,
       });
-      log = logicResult.log;
+
+      /* Generate spoiler log */
+      if (this.opts.settings.generateSpoilerLog) {
+        log = makeSpoilerLog(logicResult);
+      }
     } else {
       if (!this.opts.patch) {
         throw new Error('Patch mode requires a patch file');
