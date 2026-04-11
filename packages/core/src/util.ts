@@ -1,3 +1,4 @@
+import type { Game } from './defines';
 
 export type Optional<T> = T extends {} ? {[K in keyof T]?: T[K]} : T | undefined;
 
@@ -48,4 +49,18 @@ export function createMemo<T>() {
     cache.set(key, value);
     return value;
   }
+}
+
+export function gameId(game: Game | 'shared', id: string, char: string) {
+  const prefixes = ['OOT', 'MM', 'SHARED'];
+  if (!char) {
+    char = '_';
+  }
+  for (const p of prefixes) {
+    const pp = p + char;
+    if (id.startsWith(pp)) {
+      return id;
+    }
+  }
+  return [game.toUpperCase(), id].join(char);
 }

@@ -27,8 +27,8 @@
     WATER: "true"
     FISH: "true"
   exits:
-    "Beneath The Well Hot Spring Water": "(setting(beneathWell, open) || can_pass_gibdo && has_fish)"
-    "Beneath The Well Near Fountain": "(setting(beneathWell, open) || can_pass_gibdo && has_water)"
+    "Beneath The Well Hot Spring Water": "(setting(beneathWell, open) || (can_pass_gibdo && has_fish))"
+    "Beneath The Well Near Fountain": "(setting(beneathWell, open) || (can_pass_gibdo && has_water))"
 
 "Beneath The Well Hot Spring Water":
   dungeon: BtW

@@ -1,9 +1,32 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { ResolvedWorldFlags, Expr } from '@ootmm/logic';
+import type { Expr } from './types';
+import type { ResolvedWorldFlags } from '../world-flags';
 
-import { itemByID } from '@ootmm/core';
-import { exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprFish, exprFlagOn, exprFlagOff, exprAgeString, exprSongEvent } from '@ootmm/logic';
-import { gameId } from '../util';
+import { itemByID, gameId } from '@ootmm/core';
+import {
+  exprTrue,
+  exprFalse,
+  exprAnd,
+  exprOr,
+  exprHas,
+  exprRenewable,
+  exprEvent,
+  exprMasks,
+  exprSetting,
+  exprNot,
+  exprCond,
+  exprTrick,
+  exprSpecial,
+  exprOotTime,
+  exprMmTime,
+  exprLicense,
+  exprPrice,
+  exprFish,
+  exprFlagOn,
+  exprFlagOff,
+  exprAgeString,
+  exprSongEvent
+} from './builder';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -48,7 +71,6 @@ export class ExprParser {
 
     const expr = this.parseExpr();
     if (expr === undefined) {
-      console.log(input);
       throw this.error("Expected expression");
     }
     this.expect('EOF');
@@ -466,58 +488,43 @@ export class ExprParser {
       || this.parseMacro();
   }
 
-  private parseExprOr(): Expr | undefined {
-    const exprs: Expr[] = [];
-    let expr = this.parseExprAnd();
-    if (expr === undefined) {
+  private parseExpr(): Expr | undefined {
+    const first = this.parseExprSingle();
+    if (first === undefined) {
       return undefined;
     }
-    exprs.push(expr);
-    while (this.accept('||')) {
-      expr = this.parseExprAnd();
-      if (expr === undefined) {
-        throw this.error(`Expected expression after || at ${this.ctx[0].cursor}`);
-      }
-      exprs.push(expr);
-    }
-    if (this.peek('&&')) {
-      throw this.error(`Ambiguous AND after OR at ${this.ctx[0].cursor}`);
-    }
-    if (exprs.length === 1) {
-      return exprs[0];
-    } else {
-      return exprOr(exprs);
-    }
-  }
 
-  private parseExprAnd(): Expr | undefined {
-    const exprs: Expr[] = [];
-    let isAnd = false;
-    let expr = this.parseExprSingle();
-    if (expr === undefined) {
-      return undefined;
-    }
-    exprs.push(expr);
-    while (this.accept('&&')) {
-      isAnd = true;
-      expr = this.parseExprSingle();
-      if (expr === undefined) {
-        throw this.error(`Expected expression after && at ${this.ctx[0].cursor}`);
+    if (this.accept('&&')) {
+      const exprs = [first];
+      do {
+        const next = this.parseExprSingle();
+        if (next === undefined) {
+          throw this.error(`Expected expression after &&`);
+        }
+        exprs.push(next);
+      } while (this.accept('&&'));
+      if (this.peek('||')) {
+        throw this.error(`Ambiguous OR after AND`);
       }
-      exprs.push(expr);
-    }
-    if (isAnd && this.peek('||')) {
-      throw this.error(`Ambiguous OR after AND at ${this.ctx[0].cursor}`);
-    }
-    if (exprs.length === 1) {
-      return exprs[0];
-    } else {
       return exprAnd(exprs);
     }
-  }
 
-  private parseExpr(): Expr | undefined {
-    return this.parseExprOr();
+    if (this.accept('||')) {
+      const exprs = [first];
+      do {
+        const next = this.parseExprSingle();
+        if (next === undefined) {
+          throw this.error(`Expected expression after ||`);
+        }
+        exprs.push(next);
+      } while (this.accept('||'));
+      if (this.peek('&&')) {
+        throw this.error(`Ambiguous AND after OR`);
+      }
+      return exprOr(exprs);
+    }
+
+    return first;
   }
 
   private skipWhitespace() {
