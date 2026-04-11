@@ -4,12 +4,10 @@ import type { Expr, World, ExprMap, WorldCheck, WorldArea, ExprParsers, WorldGos
 import { cloneDeep, mapValues } from 'lodash-es';
 import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
 import { GAMES, Random, itemByID, ItemHelpers, Items, gameId } from '@ootmm/core';
-import { exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
+import { ExprParser, defaultPrices, exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
 
-import { ExprParser } from '@ootmm/logic';
 import { DATA_HINTS_POOL } from '../data';
 import { Monitor } from '../monitor';
-import { defaultPrices } from './price';
 
 export const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
