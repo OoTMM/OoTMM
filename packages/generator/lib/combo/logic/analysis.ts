@@ -1,6 +1,5 @@
 import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
-import type { ItemPlacement, Location, World, PathfinderState } from '@ootmm/logic';
-import type { ItemProperties } from './item-properties';
+import type { ItemPlacement, Location, World, PathfinderState, ItemProperties } from '@ootmm/logic';
 import type { AnalysisPath } from './analysis-path';
 
 import { Random, shuffle, ItemHelpers } from '@ootmm/core';

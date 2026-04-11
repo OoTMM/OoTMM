@@ -1,13 +1,11 @@
 import type { Settings, PlayerItems, Region } from '@ootmm/core';
-import type { Age, Expr, Location, World, WorldArea } from '@ootmm/logic';
-import type { ItemProperties } from './item-properties';
+import type { Age, Expr, Location, World, WorldArea, ItemProperties } from '@ootmm/logic';
 
 import { ENTRANCES } from '@ootmm/data';
 import { Random, sample } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue, makeLocation, Pathfinder } from '@ootmm/logic';
+import { LogicEntranceError, LogicError, AGE_ADULT, AGE_CHILD, exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue, makeLocation, Pathfinder } from '@ootmm/logic';
 import { DUNGEONS_REGIONS, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Monitor } from '../monitor';
-import { LogicEntranceError, LogicError } from './error';
 import { LogicPassSolver } from './solve';
 import { BOSS_METADATA_BY_ENTRANCE } from './boss';
 

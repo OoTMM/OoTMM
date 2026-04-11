@@ -1,6 +1,7 @@
 import type { Options } from '../options';
 
 import { Random } from '@ootmm/core';
+import { LogicPassItemProperties } from '@ootmm/logic';
 
 import { LogicPassSolver } from './solve';
 import { LogicPassWorld } from './world';
@@ -15,7 +16,6 @@ import { LogicPassWorldTransform } from './world-transform';
 import { LogicPassFixer } from './fixer';
 import { LogicPassAnalysisFoolish } from './analysis-foolish';
 import { LogicPassPrice } from './price';
-import { LogicPassItemProperties } from './item-properties';
 import { LogicPassMinimize } from './minimize';
 import { LogicPassAnalysisPaths } from './analysis-path';
 import { LogicPassSongEvents } from './song-events';

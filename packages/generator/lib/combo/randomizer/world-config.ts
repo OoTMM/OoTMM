@@ -2,8 +2,8 @@ import type { Settings } from '@ootmm/core';
 import type { World } from '@ootmm/logic';
 import type { Confvar } from '../confvars';
 
+import { mustStartWithMasterSword } from '@ootmm/logic';
 import { isEntranceShuffle } from '../logic/helpers';
-import { mustStartWithMasterSword } from '../logic/master-sword';
 
 export function worldConfig(world: World, settings: Settings): Set<Confvar> {
   const config = new Set<Confvar>;
