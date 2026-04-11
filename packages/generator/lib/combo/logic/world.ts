@@ -7,7 +7,7 @@ import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
 import { GAMES, Random, itemByID, ItemHelpers, Items, gameId } from '@ootmm/core';
 import { exprTrue, MM_TIME_SLICES, resolveWorldFlags } from '@ootmm/logic';
 
-import { ExprParser } from './expr-parser';
+import { ExprParser } from '@ootmm/logic';
 import { DATA_HINTS_POOL } from '../data';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
