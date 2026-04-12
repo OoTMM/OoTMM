@@ -71,7 +71,6 @@ export type World = {
   dungeonsBossAreas: { [k: string]: Set<string> };
   regions: { [k: string]: string };
   gossip: { [k: string]: WorldGossip };
-  checkHints: { [k: string]: string[] };
   locations: Set<string>;
   songLocations: Set<string>;
   warpLocations: Set<string>;

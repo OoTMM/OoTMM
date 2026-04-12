@@ -3,7 +3,7 @@ import type { ItemPlacement, Location } from './types';
 import type { Analysis, AnalysisPath } from './analysis';
 import type { World } from './world';
 
-import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion, hintLocations } from '@ootmm/core';
 import { Pathfinder } from './pathfind';
 import { DUNGEONS_REGIONS } from './world';
 import { isLocationFullyShuffled, locationData, makeLocation } from './locations';
@@ -466,7 +466,7 @@ class LogicPassHints {
     }
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
-    const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
+    const locations = hintLocations(checkHint).filter(x => checkWorld.locations.has(x)).map(x => makeLocation(x, checkWorldId));
     if (((context !== 'moon') && this.state.settings.noPlandoHints && locations.every(l => this.state.plandoLocations.has(l))) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
       return false;
     }
@@ -511,7 +511,7 @@ class LogicPassHints {
       if (placed >= count) {
         break;
       }
-      const locations = (world.checkHints[checkHint] || []).map(x => makeLocation(x, worldId));
+      const locations = hintLocations(checkHint).filter(x => world.locations.has(x)).map(x => makeLocation(x, worldId));
       if (!locations) {
         continue;
       }
