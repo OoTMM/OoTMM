@@ -95,7 +95,6 @@ export function cloneWorld(world: World): World {
     dungeonsBossAreas: mapValues(world.dungeonsBossAreas, x => new Set(x)),
     regions: cloneDeep(world.regions),
     gossip: cloneDeep(world.gossip),
-    checkHints: cloneDeep(world.checkHints),
     locations: new Set(world.locations),
     songLocations: new Set(world.songLocations),
     warpLocations: new Set(world.warpLocations),
@@ -198,7 +197,6 @@ class LogicPassWorld {
       dungeonsBossAreas: {},
       regions: {},
       gossip: {},
-      checkHints: {},
       locations: new Set(),
       songLocations: new Set(),
       warpLocations: new Set(),
@@ -377,12 +375,7 @@ class LogicPassWorld {
       let hint = String(record.hint);
       if (hint !== 'NONE') {
         hint = gameId(game, hint, '_');
-        if (this.world.checkHints[hint] === undefined) {
-          this.world.checkHints[hint] = [];
-        }
-        this.world.checkHints[hint].push(location);
       }
-
       const check = { game, type, scene, id, item, hint } as WorldCheck;
       this.world.checks[location] = check;
 

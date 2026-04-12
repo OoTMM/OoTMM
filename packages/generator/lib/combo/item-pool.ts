@@ -21,7 +21,7 @@ export async function itemPool(settings: Settings): Promise<Items> {
   }
 
   /* Add unlimited consumables */
-  for (const loc in worlds[0].checks) {
+  for (const loc of worlds[0].locations) {
     const check = worlds[0].checks[loc];
     const { item } = check;
     const pi = makePlayerItem(item, 0);

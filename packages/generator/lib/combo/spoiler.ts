@@ -2,7 +2,7 @@ import type { Options, TrickKey, PlayerItem, Region } from '@ootmm/core';
 import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
-import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES } from '@ootmm/core';
+import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -318,14 +318,16 @@ class SpoilerWriter {
         let longestLocationNameLength = 0;
         for (const [stone, hint] of gossipsItemExact) {
           const world = this.logic.worlds[hint.world];
-          const longestLocationName = [...world.checkHints[hint.check]].reduce(  (a, b) => { return a.length > b.length ? a : b; }).length;
+          const locations = hintLocations(hint.check).filter(x => world.locations.has(x));
+          const longestLocationName = Math.max(...locations.map(x => x.length));
           longestLocationNameLength = Math.max(longestLocationNameLength, longestLocationName);
         }
         for (const [stone, hint] of gossipsItemExact) {
           const world = this.logic.worlds[hint.world];
           const longestGossipNameLength = this.getMaxKeyLength(gossipsItemExact);
+          const locations = hintLocations(hint.check).filter(x => world.locations.has(x));
           for(let i = 0; i < hint.items.length; i++) {
-            this.writer.write(`${(i ? " ": stone).padEnd(longestGossipNameLength)} ${world.checkHints[hint.check][i].padEnd(longestLocationNameLength + 1)} ${this.itemName(hint.items[i])} ${this.getImportanceSuffix(hint.importances[i])}`);
+            this.writer.write(`${(i ? " ": stone).padEnd(longestGossipNameLength)} ${locations[i].padEnd(longestLocationNameLength + 1)} ${this.itemName(hint.items[i])} ${this.getImportanceSuffix(hint.importances[i])}`);
           }
         }
         this.writer.unindent('');

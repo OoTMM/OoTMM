@@ -50,7 +50,6 @@ function makeWorld(areas: World['areas'], checks: World['checks'] = {}): World {
     dungeonsBossAreas: {},
     regions: {},
     gossip: {},
-    checkHints: {},
     locations: new Set(Object.keys(checks)),
     songLocations: new Set(),
     warpLocations: new Set(),

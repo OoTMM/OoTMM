@@ -374,7 +374,7 @@ class LogicPassWorldTransform {
     const { worlds } = this.state;
     for (let i = 0; i < worlds.length; ++i) {
       const world = worlds[i];
-      for (const locId in world.checks) {
+      for (const locId of world.locations) {
         const check = world.checks[locId];
         const location = makeLocation(locId, i);
         const item = check.item;

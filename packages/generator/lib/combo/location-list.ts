@@ -14,7 +14,7 @@ export async function locationList(aSettings: Partial<Settings>) {
   const dungeonLocations = Object.values(worlds[0].dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
   const locations: string[] = [];
-  for (const loc in worlds[0].checks) {
+  for (const loc of worlds[0].locations) {
     const pl = makeLocation(loc, 0);
     if (fixedLocations.has(pl) || !isShuffled(settings, worlds[0], loc, dungeonLocations)) {
       continue;
