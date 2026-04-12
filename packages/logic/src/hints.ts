@@ -408,7 +408,7 @@ class LogicPassHints {
     let regions: CountMap<string> = new Map;
     const world = this.state.worlds[worldId];
 
-    for (const locationId in world.checks) {
+    for (const locationId of world.locations) {
       const location = makeLocation(locationId, worldId);
       const region = world.regions[locationId];
       if (!regions.has(region)) {
@@ -547,7 +547,7 @@ class LogicPassHints {
       const gossip = sample(this.state.random, gossips);
 
       /* Found a gossip */
-      for (const locId in world.checks) {
+      for (const locId of world.locations) {
         const loc = makeLocation(locId, worldId);
         if (world.regions[locId] === region) {
           this.hintedLocations.add(loc);

@@ -145,7 +145,7 @@ class LogicPassFixer {
   private fixWorld(id: number) {
     const world = this.state.worlds[id];
 
-    for (const locationId in world.checks) {
+    for (const locationId of world.locations) {
       if (this.isLocationFixed(id, locationId)) {
         this.fixedLocations.add(makeLocation(locationId, id));
       }

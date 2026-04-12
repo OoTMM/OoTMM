@@ -247,7 +247,7 @@ export class Pathfinder {
         const world = this.worlds[worldId];
         const worldGossips = new Set(Object.values(world.areas).map(x => Object.keys(x.gossip || {})).flat());
         this.state.gossips.push(worldGossips);
-        const locs = Object.keys(world.checks).map(x => makeLocation(x, worldId));
+        const locs = [...world.locations].map(x => makeLocation(x, worldId));
         locations.push(locs);
       }
       this.state.locations = new Set(locations.flat());

@@ -512,7 +512,7 @@ class LogicPassSolver {
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const world = this.worlds[worldId];
-      const skullLocations = Object.keys(world.checks).filter(x => ItemHelpers.isGoldToken(world.checks[x].item));
+      const skullLocations = world.locations.values().filter(x => ItemHelpers.isGoldToken(world.checks[x].item));
       const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
       for (const location of skullLocations) {
@@ -530,7 +530,7 @@ class LogicPassSolver {
     const locations = new Set<Location>();
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const world = this.worlds[worldId];
-      for (const location in world.checks) {
+      for (const location of world.locations) {
         const item = world.checks[location].item;
         if (ItemHelpers.isHouseToken(item)) {
           locations.add(makeLocation(location, worldId));
@@ -1330,7 +1330,7 @@ class LogicPassSolver {
   private place(location: Location, item: PlayerItem) {
     const locD = locationData(location);
     const world = this.worlds[locD.world as number];
-    if (world.checks[locationData(location).id] === undefined) {
+    if (!world.locations.has(locationData(location).id)) {
       throw new Error('Invalid Location: ' + location);
     }
     if (this.state.items.has(location)) {
