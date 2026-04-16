@@ -432,6 +432,13 @@ static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx*
     x += drawNoteIcon(list, end, x, y, 0xffa500, gOotSave.info.inventory.quest.songTpSpirit);
     x += drawNoteIcon(list, end, x, y, 0xff00ff, gOotSave.info.inventory.quest.songTpShadow);
     x += drawNoteIcon(list, end, x, y, 0xffff00, gOotSave.info.inventory.quest.songTpLight);
+    y += 12.f;
+    x = startX;
+
+    if (Config_Flag(CFG_OOT_SONG_EMPTINESS))
+    {
+        x += drawNoteIcon(list, end, x, y, 0xffa500, gSharedCustomSave.oot.hasElegy);
+    }
 }
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
