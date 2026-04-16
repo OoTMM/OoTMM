@@ -288,6 +288,95 @@ static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this,
     drawItemIcon24(list, end, x + 2 * ICON_SIZE, y + ICON_SIZE * 4, 8, gOotSave.info.inventory.quest.stoneSapphire);
 }
 
+/*
+ * OoT 24 Icons
+ *
+ * 0x09 - Stone of Agony
+ * 0x0a - Gerudo Card
+ * 0x0b - Gold Skulltula Token
+ * 0x0c - Heart Container
+ * 0x0d - Heart Piece
+ * 0x0e - Boss Key
+ * 0x0f - Compass
+ * 0x10 - Map
+ * 0x11 - Small Key
+ * 0x12 - Small Magic Jar
+ * 0x13 - Large Magic Jar
+ */
+
+static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    int startX;
+    u16 iconMagic;
+    u16 iconScale;
+    u16 iconStrength;
+
+    iconMagic = 0x12;
+    iconScale = ITEM_OOT_SILVER_SCALE;
+    iconStrength = ITEM_OOT_GORON_BRACELET;
+
+    if (gOotSave.info.playerData.isDoubleMagicAcquired)
+        iconMagic = 0x13;
+
+    if (gOotSave.info.inventory.upgrades.dive > 1)
+        iconScale = ITEM_OOT_GOLDEN_SCALE;
+
+    switch (gOotSave.info.inventory.upgrades.strength)
+    {
+    case 2:
+        iconStrength = ITEM_OOT_SILVER_GAUNTLETS;
+        break;
+    case 3:
+        iconStrength = ITEM_OOT_GOLDEN_GAUNTLETS;
+        break;
+    }
+
+    /* Row 1 */
+    startX = x;
+    x += drawItemIcon24(list, end, x, y, 0x09, gOotSave.info.inventory.quest.agonyStone);
+    x += drawItemIcon24(list, end, x, y, 0x0a, gOotSave.info.inventory.quest.gerudoCard);
+    x += drawItemIcon24(list, end, x, y, iconMagic, gOotSave.info.playerData.isMagicAcquired);
+    x += drawItemIcon(list, end, x, y, iconScale, gOotSave.info.inventory.upgrades.dive);
+    x += drawItemIcon(list, end, x, y, iconStrength, gOotSave.info.inventory.upgrades.strength);
+
+    /*
+    y += ICON_SIZE;
+    x = startX;
+
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 0, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 1, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 2, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 3, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 4, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 5, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 6, 1);
+    x += drawItemIcon24(list, end, x, y, 1 * 8 + 7, 1);
+
+    y += ICON_SIZE;
+    x = startX;
+
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 0, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 1, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 2, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 3, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 4, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 5, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 6, 1);
+    x += drawItemIcon24(list, end, x, y, 2 * 8 + 7, 1);
+
+    y += ICON_SIZE;
+    x = startX;
+
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 0, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 1, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 2, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 3, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 4, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 5, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 6, 1);
+    x += drawItemIcon24(list, end, x, y, 3 * 8 + 7, 1);*/
+}
+
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     int startX;
@@ -502,6 +591,7 @@ static void FileSelect_DrawOotEquips(FileSelectState* this, Gfx** list, void** e
 {
     FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
     FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareOotEquips(this, list, end, 140, 94);
 }
 
 static void FileSelect_DrawOotItems(FileSelectState* this, Gfx** list, void** end)
