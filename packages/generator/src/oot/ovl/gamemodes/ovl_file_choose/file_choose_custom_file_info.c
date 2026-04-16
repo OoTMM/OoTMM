@@ -9,11 +9,38 @@
 #define ICONF_MM    0x8000
 #define ICONF_DIM   0x4000
 
+enum {
+    PAGE_OOT_EQUIPS = 0,
+    PAGE_OOT_ITEMS,
+    PAGE_MM_EQUIPS,
+    PAGE_MM_ITEMS,
+    PAGE_MAX,
+};
+
+static char* sSongNoteTex;
+
+static int FileSelect_CustomFileInfoPageAvailable(int page)
+{
+    switch (page)
+    {
+    case PAGE_OOT_EQUIPS:
+    case PAGE_OOT_ITEMS:
+        return !Config_Flag(CFG_ONLY_MM);
+    case PAGE_MM_EQUIPS:
+    case PAGE_MM_ITEMS:
+        return !Config_Flag(CFG_ONLY_OOT);
+    }
+
+    return 0;
+}
+
 void FileSelect_CustomFileInfoInit(FileSelectState* this)
 {
     this->customFileInfoBufs[0] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
     this->customFileInfoBufs[1] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
-    this->game = 0;
+    this->fileInfoPage = 0;
+    this->fileInfoPageLoaded = 0;
+    sSongNoteTex = NULL;
 }
 
 void FileSelect_CustomFileInfoFree(FileSelectState* this)
@@ -207,6 +234,37 @@ static float drawItemIcon24(Gfx** list, void** end, s16 x, s16 y, u16 id, int no
     return ICON_SIZE;
 }
 
+static float drawNoteIcon(Gfx** list, void** end, s16 x, s16 y, u32 color, int noDim)
+{
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    if (!sSongNoteTex)
+    {
+        sSongNoteTex = allocBuf(end, 16 * 24);
+        LoadFile(sSongNoteTex, 0x7bd000 + 0x88040, 16 * 24);
+    }
+
+    r = (color >> 16) & 0xff;
+    g = (color >> 8) & 0xff;
+    b = color & 0xff;
+    a = 0xff;
+
+    if (!noDim)
+    {
+        r = (r / 2);
+        g = (g / 2);
+        b = (b / 2);
+        a = 128;
+    }
+
+    gDPSetPrimColor((*list)++, 0, 0, r, g, b, a);
+    quadIA8(list, sSongNoteTex, 16, 24, x, y, 0.5f);
+    return 8.f;
+}
+
 static void drawInfoHeart(Gfx** list, int x, int y, int isDefense, int count)
 {
     gDPSetCombineLERP((*list)++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
@@ -262,6 +320,229 @@ static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this,
     drawItemIcon24(list, end, x + 0 * ICON_SIZE, y + ICON_SIZE * 4, 6, gOotSave.info.inventory.quest.stoneEmerald);
     drawItemIcon24(list, end, x + 1 * ICON_SIZE, y + ICON_SIZE * 4, 7, gOotSave.info.inventory.quest.stoneRuby);
     drawItemIcon24(list, end, x + 2 * ICON_SIZE, y + ICON_SIZE * 4, 8, gOotSave.info.inventory.quest.stoneSapphire);
+}
+
+/*
+ * OoT 24 Icons
+ *
+ * 0x09 - Stone of Agony
+ * 0x0a - Gerudo Card
+ * 0x0b - Gold Skulltula Token
+ * 0x0c - Heart Container
+ * 0x0d - Heart Piece
+ * 0x0e - Boss Key
+ * 0x0f - Compass
+ * 0x10 - Map
+ * 0x11 - Small Key
+ * 0x12 - Small Magic Jar
+ * 0x13 - Large Magic Jar
+ */
+
+static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    int startX;
+    u16 iconMagic;
+    u16 iconScale;
+    u16 iconStrength;
+    u16 iconSwordKokiri;
+    u16 iconSwordKnife;
+
+    iconMagic = 0x12;
+    iconScale = ITEM_OOT_SILVER_SCALE;
+    iconStrength = ITEM_OOT_GORON_BRACELET;
+    iconSwordKokiri = ITEM_OOT_SWORD_KOKIRI;
+    iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BROKEN;
+
+    if (gOotSave.info.playerData.isDoubleMagicAcquired)
+        iconMagic = 0x13;
+
+    if (gOotSave.info.inventory.upgrades.dive > 1)
+        iconScale = ITEM_OOT_GOLDEN_SCALE;
+
+    switch (gOotSave.info.inventory.upgrades.strength)
+    {
+    case 2:
+        iconStrength = ITEM_OOT_SILVER_GAUNTLETS;
+        break;
+    case 3:
+        iconStrength = ITEM_OOT_GOLDEN_GAUNTLETS;
+        break;
+    }
+
+    switch (gSharedCustomSave.extraSwordsOot)
+    {
+    case 1:
+        iconSwordKokiri = ITEM_MM_SWORD_RAZOR | ICONF_MM;
+        break;
+    case 2:
+        iconSwordKokiri = ITEM_MM_SWORD_GILDED | ICONF_MM;
+        break;
+    }
+
+    if (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE && !(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE_BROKEN))
+        iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+
+    /* Row 1 */
+    startX = x;
+    x += drawItemIcon24(list, end, x, y, 0x09, gOotSave.info.inventory.quest.agonyStone);
+    x += drawItemIcon24(list, end, x, y, 0x0a, gOotSave.info.inventory.quest.gerudoCard);
+    x += drawItemIcon24(list, end, x, y, iconMagic, gOotSave.info.playerData.isMagicAcquired);
+    x += drawItemIcon(list, end, x, y, iconScale, gOotSave.info.inventory.upgrades.dive);
+    x += drawItemIcon(list, end, x, y, iconStrength, gOotSave.info.inventory.upgrades.strength);
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 2 */
+    x += drawItemIcon(list, end, x, y, iconSwordKokiri, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_MASTER, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_MASTER);
+    x += drawItemIcon(list, end, x, y, iconSwordKnife, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_HYLIAN, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_MIRROR, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_MIRROR);
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 3 */
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_KOKIRI, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_GORON, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_GORON);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_ZORA, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_ZORA);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_KOKIRI, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_IRON, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_IRON);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_HOVER, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER);
+}
+
+/*
+ * MM Icon 24
+ *
+ * 0x00 - Gold Skulltula
+ * 0x01 - Heart Container
+ * 0x02 - Heart Piece
+ * 0x03 - Heart Piece (dup)
+ * 0x04 - Heart Container (dup)
+ * 0x05 - Heart Container (dup)
+ * 0x06 - Boss Key
+ * 0x07 - Compass
+ * 0x08 - Gold Skulltula (dup)
+ * 0x09 - Map
+ * 0x0a - Small Key
+ * 0x0b - Small Magic Jar
+ */
+static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    int startX;
+    u16 iconMagic;
+    u16 iconScale;
+    u16 iconStrength;
+    u16 iconSword;
+    u16 iconShield;
+
+    iconMagic = 0x12;
+    iconScale = ITEM_OOT_SILVER_SCALE;
+    iconStrength = ITEM_OOT_GORON_BRACELET;
+    iconSword = ITEM_MM_SWORD_KOKIRI | ICONF_MM;
+    iconShield = ITEM_MM_SHIELD_HERO | ICONF_MM;
+
+    if (gMmSave.info.playerData.isDoubleMagicAcquired)
+        iconMagic = 0x13;
+
+    if (gMmSave.info.inventory.upgrades.scale > 1)
+        iconScale = ITEM_OOT_GOLDEN_SCALE;
+
+    switch (gMmSave.info.inventory.upgrades.strength)
+    {
+    case 2:
+        iconStrength = ITEM_OOT_SILVER_GAUNTLETS;
+        break;
+    case 3:
+        iconStrength = ITEM_OOT_GOLDEN_GAUNTLETS;
+        break;
+    }
+
+    switch (gMmSave.info.itemEquips.sword)
+    {
+    case 2:
+        iconSword = ITEM_MM_SWORD_RAZOR | ICONF_MM;
+        break;
+    case 3:
+        iconSword = ITEM_MM_SWORD_GILDED | ICONF_MM;
+        break;
+    }
+
+    if (Config_Flag(CFG_MM_DEKU_SHIELD) && gSharedCustomSave.mmShieldIsDeku)
+        iconShield = ITEM_OOT_SHIELD_DEKU;
+    else if (gMmSave.info.itemEquips.shield >= 2)
+        iconShield = ITEM_MM_SHIELD_MIRROR | ICONF_MM;
+
+    /* Row 1 */
+    startX = x;
+    if (Config_Flag(CFG_MM_STONE_OF_AGONY))
+        x += drawItemIcon24(list, end, x, y, 0x09, gMmExtraFlags3.stoneAgony);
+    x += drawItemIcon24(list, end, x, y, iconMagic, gMmSave.info.playerData.isMagicAcquired);
+    if (Config_Flag(CFG_MM_SCALES))
+        x += drawItemIcon(list, end, x, y, iconScale, gMmSave.info.inventory.upgrades.scale);
+    if (Config_Flag(CFG_MM_STRENGTH))
+        x += drawItemIcon(list, end, x, y, iconStrength, gMmSave.info.inventory.upgrades.strength);
+    //x += drawItemIcon(list, end, x, y, ITEM_MM_BOMBER_NOTEBOOK | ICONF_MM, gMmSave.info.inventory.quest.notebook);
+    // Disabled, not working
+    x += drawItemIcon(list, end, x, y, iconSword, gMmSave.info.itemEquips.sword);
+    x += drawItemIcon(list, end, x, y, iconShield, gMmSave.info.itemEquips.shield);
+    y += ICON_SIZE;
+    x = startX;
+}
+
+static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    int startX;
+
+    startX = x;
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songZelda);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songEpona);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songSaria);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songSun);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songTime);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songStorms);
+    y += 12.f;
+    x = startX;
+
+    x += drawNoteIcon(list, end, x, y, 0x00ff00, gOotSave.info.inventory.quest.songTpForest);
+    x += drawNoteIcon(list, end, x, y, 0xff0000, gOotSave.info.inventory.quest.songTpFire);
+    x += drawNoteIcon(list, end, x, y, 0x0000ff, gOotSave.info.inventory.quest.songTpWater);
+    x += drawNoteIcon(list, end, x, y, 0xffa500, gOotSave.info.inventory.quest.songTpSpirit);
+    x += drawNoteIcon(list, end, x, y, 0xff00ff, gOotSave.info.inventory.quest.songTpShadow);
+    x += drawNoteIcon(list, end, x, y, 0xffff00, gOotSave.info.inventory.quest.songTpLight);
+    y += 12.f;
+    x = startX;
+
+    if (Config_Flag(CFG_OOT_SONG_EMPTINESS))
+    {
+        x += drawNoteIcon(list, end, x, y, 0xffa500, gSharedCustomSave.oot.hasElegy);
+    }
+}
+
+static void FileSelect_CustomFileInfoPrepareMmSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    u32 colorLullaby;
+    int startX;
+
+    colorLullaby = 0xff0000;
+    if (gMmSave.info.inventory.quest.songLullabyIntro && !gMmSave.info.inventory.quest.songLullaby)
+        colorLullaby = 0xff8787;
+    startX = x;
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songTime);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songHealing);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songEpona);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songSoaring);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songStorms);
+    y += 12.f;
+    x = startX;
+
+    x += drawNoteIcon(list, end, x, y, 0x00ff00, gMmSave.info.inventory.quest.songAwakening);
+    x += drawNoteIcon(list, end, x, y, colorLullaby, (gMmSave.info.inventory.quest.songLullaby || gMmSave.info.inventory.quest.songLullabyIntro));
+    x += drawNoteIcon(list, end, x, y, 0x0000ff, gMmSave.info.inventory.quest.songNewWave);
+    x += drawNoteIcon(list, end, x, y, 0xffa500, gMmSave.info.inventory.quest.songEmpty);
+    x += drawNoteIcon(list, end, x, y, 0xff00ff, gMmSave.info.inventory.quest.songOrder);
+    y += 12.f;
+    x = startX;
 }
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -359,13 +640,6 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     x += drawItemIcon(list, end, x, y, ITEM_OOT_EYEBALL_FROG,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYEBALL_FROG));
     x += drawItemIcon(list, end, x, y, ITEM_OOT_EYE_DROPS,                 gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYE_DROPS));
     x += drawItemIcon(list, end, x, y, ITEM_OOT_CLAIM_CHECK,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_CLAIM_CHECK));
-}
-
-static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
-{
-    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
-    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
-    FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 140, 94);
 }
 
 static void FileSelect_CustomFileInfoPrepareMmRemains(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -481,20 +755,46 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     x += drawItemIcon(list, end, x, y, ITEM_MM_MASK_FIERCE_DEITY | ICONF_MM,         gMmSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY);
 }
 
-static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
+static void FileSelect_DrawOotEquips(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareOotEquips(this, list, end, 140, 94);
+    FileSelect_CustomFileInfoPrepareOotSongs(this, list, end, 140, 140);
+}
+
+static void FileSelect_DrawOotItems(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 140, 94);
+}
+
+static void FileSelect_DrawMmEquips(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareMmInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareMmEquips(this, list, end, 140, 94);
+    FileSelect_CustomFileInfoPrepareMmSongs(this, list, end, 140, 140);
+}
+
+static void FileSelect_DrawMmItems(FileSelectState* this, Gfx** list, void** end)
 {
     FileSelect_CustomFileInfoPrepareMmInfos(this, list, end, 56, 94);
     FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 96, 94);
     FileSelect_CustomFileInfoPrepareMmInventory(this, list, end, 140, 94);
 }
 
-void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
+static void FileSelect_CustomFileInfoLoad(FileSelectState* this)
 {
     Gfx* list;
     void* end;
 
+    if (this->fileInfoPageLoaded)
+        return;
+
     /* Load the saves */
-    gSaveContext.fileNum = slot;
+    gSaveContext.fileNum = this->selectedFileIndex;
     Save_ReadOwn();
     Save_ReadForeign();
 
@@ -507,16 +807,57 @@ void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
     gDPSetPrimColor(list++, 0, 0, 255, 255, 255, 255);
     gDPSetTexturePersp(list++, G_TP_NONE);
 
-    if (!this->game)
-        FileSelect_CustomFileInfoPrepareOot(this, &list, &end);
-    else
-        FileSelect_CustomFileInfoPrepareMm(this, &list, &end);
+    switch (this->fileInfoPage)
+    {
+    case PAGE_OOT_EQUIPS:
+        FileSelect_DrawOotEquips(this, &list, &end);
+        break;
+    case PAGE_OOT_ITEMS:
+        FileSelect_DrawOotItems(this, &list, &end);
+        break;
+    case PAGE_MM_EQUIPS:
+        FileSelect_DrawMmEquips(this, &list, &end);
+        break;
+    case PAGE_MM_ITEMS:
+        FileSelect_DrawMmItems(this, &list, &end);
+        break;
+    }
 
     gSPEndDisplayList(list++);
+    this->fileInfoPageLoaded = 1;
+}
+
+static void FileSelect_CustomFileInfoOnPageChange(FileSelectState* this)
+{
+    for (;;)
+    {
+        if (this->fileInfoPage >= PAGE_MAX)
+        this->fileInfoPage = 0;
+        if (FileSelect_CustomFileInfoPageAvailable(this->fileInfoPage))
+            break;
+        this->fileInfoPage++;
+    }
+
+    this->fileInfoPageLoaded = 0;
+    sSongNoteTex = NULL;
+}
+
+void FileSelect_CustomFileInfoPageFirst(FileSelectState* this)
+{
+    this->fileInfoPage = 0;
+    FileSelect_CustomFileInfoOnPageChange(this);
+}
+
+void FileSelect_CustomFileInfoPageNext(FileSelectState* this)
+{
+    Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
+    this->fileInfoPage++;
+    FileSelect_CustomFileInfoOnPageChange(this);
 }
 
 void FileSelect_CustomFileInfoDraw(FileSelectState* this)
 {
+    FileSelect_CustomFileInfoLoad(this);
     OPEN_DISPS(this->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, this->customFileInfoBufs[0]);
     CLOSE_DISPS();
