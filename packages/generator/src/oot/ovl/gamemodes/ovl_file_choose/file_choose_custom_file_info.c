@@ -411,6 +411,84 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_HOVER, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER);
 }
 
+/*
+ * MM Icon 24
+ *
+ * 0x00 - Gold Skulltula
+ * 0x01 - Heart Container
+ * 0x02 - Heart Piece
+ * 0x03 - Heart Piece (dup)
+ * 0x04 - Heart Container (dup)
+ * 0x05 - Heart Container (dup)
+ * 0x06 - Boss Key
+ * 0x07 - Compass
+ * 0x08 - Gold Skulltula (dup)
+ * 0x09 - Map
+ * 0x0a - Small Key
+ * 0x0b - Small Magic Jar
+ */
+static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    int startX;
+    u16 iconMagic;
+    u16 iconScale;
+    u16 iconStrength;
+    u16 iconSword;
+    u16 iconShield;
+
+    iconMagic = 0x12;
+    iconScale = ITEM_OOT_SILVER_SCALE;
+    iconStrength = ITEM_OOT_GORON_BRACELET;
+    iconSword = ITEM_MM_SWORD_KOKIRI | ICONF_MM;
+    iconShield = ITEM_MM_SHIELD_HERO | ICONF_MM;
+
+    if (gMmSave.info.playerData.isDoubleMagicAcquired)
+        iconMagic = 0x13;
+
+    if (gMmSave.info.inventory.upgrades.scale > 1)
+        iconScale = ITEM_OOT_GOLDEN_SCALE;
+
+    switch (gMmSave.info.inventory.upgrades.strength)
+    {
+    case 2:
+        iconStrength = ITEM_OOT_SILVER_GAUNTLETS;
+        break;
+    case 3:
+        iconStrength = ITEM_OOT_GOLDEN_GAUNTLETS;
+        break;
+    }
+
+    switch (gMmSave.info.itemEquips.sword)
+    {
+    case 2:
+        iconSword = ITEM_MM_SWORD_RAZOR | ICONF_MM;
+        break;
+    case 3:
+        iconSword = ITEM_MM_SWORD_GILDED | ICONF_MM;
+        break;
+    }
+
+    if (Config_Flag(CFG_MM_DEKU_SHIELD) && gSharedCustomSave.mmShieldIsDeku)
+        iconShield = ITEM_OOT_SHIELD_DEKU;
+    else if (gMmSave.info.itemEquips.shield >= 2)
+        iconShield = ITEM_MM_SHIELD_MIRROR | ICONF_MM;
+
+    /* Row 1 */
+    startX = x;
+    if (Config_Flag(CFG_MM_STONE_OF_AGONY))
+        x += drawItemIcon24(list, end, x, y, 0x09, gMmExtraFlags3.stoneAgony);
+    x += drawItemIcon24(list, end, x, y, iconMagic, gMmSave.info.playerData.isMagicAcquired);
+    if (Config_Flag(CFG_MM_SCALES))
+        x += drawItemIcon(list, end, x, y, iconScale, gMmSave.info.inventory.upgrades.scale);
+    if (Config_Flag(CFG_MM_STRENGTH))
+        x += drawItemIcon(list, end, x, y, iconStrength, gMmSave.info.inventory.upgrades.strength);
+    //x += drawItemIcon(list, end, x, y, ITEM_MM_BOMBER_NOTEBOOK | ICONF_MM, gMmSave.info.inventory.quest.notebook);
+    // Disabled, not working
+    x += drawItemIcon(list, end, x, y, iconSword, gMmSave.info.itemEquips.sword);
+    x += drawItemIcon(list, end, x, y, iconShield, gMmSave.info.itemEquips.shield);
+    y += ICON_SIZE;
+    x = startX;
+}
 
 static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
@@ -439,6 +517,32 @@ static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx*
     {
         x += drawNoteIcon(list, end, x, y, 0xffa500, gSharedCustomSave.oot.hasElegy);
     }
+}
+
+static void FileSelect_CustomFileInfoPrepareMmSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    u32 colorLullaby;
+    int startX;
+
+    colorLullaby = 0xff0000;
+    if (gMmSave.info.inventory.quest.songLullabyIntro && !gMmSave.info.inventory.quest.songLullaby)
+        colorLullaby = 0xff8787;
+    startX = x;
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songTime);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songHealing);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songEpona);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songSoaring);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songStorms);
+    y += 12.f;
+    x = startX;
+
+    x += drawNoteIcon(list, end, x, y, 0x00ff00, gMmSave.info.inventory.quest.songAwakening);
+    x += drawNoteIcon(list, end, x, y, colorLullaby, (gMmSave.info.inventory.quest.songLullaby || gMmSave.info.inventory.quest.songLullabyIntro));
+    x += drawNoteIcon(list, end, x, y, 0x0000ff, gMmSave.info.inventory.quest.songNewWave);
+    x += drawNoteIcon(list, end, x, y, 0xffa500, gMmSave.info.inventory.quest.songEmpty);
+    x += drawNoteIcon(list, end, x, y, 0xff00ff, gMmSave.info.inventory.quest.songOrder);
+    y += 12.f;
+    x = startX;
 }
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -670,6 +774,8 @@ static void FileSelect_DrawMmEquips(FileSelectState* this, Gfx** list, void** en
 {
     FileSelect_CustomFileInfoPrepareMmInfos(this, list, end, 56, 94);
     FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareMmEquips(this, list, end, 140, 94);
+    FileSelect_CustomFileInfoPrepareMmSongs(this, list, end, 140, 140);
 }
 
 static void FileSelect_DrawMmItems(FileSelectState* this, Gfx** list, void** end)
