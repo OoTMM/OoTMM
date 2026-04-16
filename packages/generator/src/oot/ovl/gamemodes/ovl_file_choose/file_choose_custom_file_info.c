@@ -310,10 +310,14 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     u16 iconMagic;
     u16 iconScale;
     u16 iconStrength;
+    u16 iconSwordKokiri;
+    u16 iconSwordKnife;
 
     iconMagic = 0x12;
     iconScale = ITEM_OOT_SILVER_SCALE;
     iconStrength = ITEM_OOT_GORON_BRACELET;
+    iconSwordKokiri = ITEM_OOT_SWORD_KOKIRI;
+    iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BROKEN;
 
     if (gOotSave.info.playerData.isDoubleMagicAcquired)
         iconMagic = 0x13;
@@ -331,6 +335,19 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
         break;
     }
 
+    switch (gSharedCustomSave.extraSwordsOot)
+    {
+    case 1:
+        iconSwordKokiri = ITEM_MM_SWORD_RAZOR | ICONF_MM;
+        break;
+    case 2:
+        iconSwordKokiri = ITEM_MM_SWORD_GILDED | ICONF_MM;
+        break;
+    }
+
+    if (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE && !(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE_BROKEN))
+        iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+
     /* Row 1 */
     startX = x;
     x += drawItemIcon24(list, end, x, y, 0x09, gOotSave.info.inventory.quest.agonyStone);
@@ -338,6 +355,29 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     x += drawItemIcon24(list, end, x, y, iconMagic, gOotSave.info.playerData.isMagicAcquired);
     x += drawItemIcon(list, end, x, y, iconScale, gOotSave.info.inventory.upgrades.dive);
     x += drawItemIcon(list, end, x, y, iconStrength, gOotSave.info.inventory.upgrades.strength);
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 2 */
+    x += drawItemIcon(list, end, x, y, iconSwordKokiri, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_MASTER, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_MASTER);
+    x += drawItemIcon(list, end, x, y, iconSwordKnife, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_HYLIAN, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_MIRROR, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_MIRROR);
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 3 */
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_KOKIRI, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_GORON, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_GORON);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_ZORA, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_ZORA);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_KOKIRI, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_IRON, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_IRON);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_HOVER, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER);
+    y += ICON_SIZE;
+    x = startX;
+
 
     /*
     y += ICON_SIZE;
