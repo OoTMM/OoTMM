@@ -1258,8 +1258,7 @@ void FileSelect_FadeInFileInfo(GameState* thisx) {
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
-        this->game = Config_Flag(CFG_ONLY_MM) ? 1 : 0;
-        FileSelect_CustomFileInfoPrepare(this, this->selectedFileIndex);
+        FileSelect_CustomFileInfoPageFirst(this);
         this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = 200;
         this->actionTimer = 8;
         this->selectMode++;
@@ -1277,9 +1276,7 @@ void FileSelect_ConfirmFile(GameState* thisx) {
     Input* input = &this->state.input[0];
 
     if (CHECK_BTN_ANY(input->rel.button, BTN_L | BTN_CUP) && !Config_Flag(CFG_ONLY_OOT) && !Config_Flag(CFG_ONLY_MM)) {
-        Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
-        this->game ^= 1;
-        FileSelect_CustomFileInfoPrepare(this, this->selectedFileIndex);
+        FileSelect_CustomFileInfoPageNext(this);
     }
 
     if (CHECK_BTN_ALL(input->press.button, BTN_START) || (CHECK_BTN_ALL(input->press.button, BTN_A))) {

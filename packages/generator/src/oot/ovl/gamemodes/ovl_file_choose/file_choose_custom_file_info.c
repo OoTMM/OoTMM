@@ -9,11 +9,35 @@
 #define ICONF_MM    0x8000
 #define ICONF_DIM   0x4000
 
+enum {
+    PAGE_OOT_EQUIPS = 0,
+    PAGE_OOT_ITEMS,
+    PAGE_MM_EQUIPS,
+    PAGE_MM_ITEMS,
+    PAGE_MAX,
+};
+
+static int FileSelect_CustomFileInfoPageAvailable(int page)
+{
+    switch (page)
+    {
+    case PAGE_OOT_EQUIPS:
+    case PAGE_OOT_ITEMS:
+        return !Config_Flag(CFG_ONLY_MM);
+    case PAGE_MM_EQUIPS:
+    case PAGE_MM_ITEMS:
+        return !Config_Flag(CFG_ONLY_OOT);
+    }
+
+    return 0;
+}
+
 void FileSelect_CustomFileInfoInit(FileSelectState* this)
 {
     this->customFileInfoBufs[0] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
     this->customFileInfoBufs[1] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
-    this->game = 0;
+    this->fileInfoPage = 0;
+    this->fileInfoPageLoaded = 0;
 }
 
 void FileSelect_CustomFileInfoFree(FileSelectState* this)
@@ -361,13 +385,6 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     x += drawItemIcon(list, end, x, y, ITEM_OOT_CLAIM_CHECK,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_CLAIM_CHECK));
 }
 
-static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
-{
-    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
-    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
-    FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 140, 94);
-}
-
 static void FileSelect_CustomFileInfoPrepareMmRemains(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     static const float scale = 0.75f;
@@ -481,20 +498,42 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     x += drawItemIcon(list, end, x, y, ITEM_MM_MASK_FIERCE_DEITY | ICONF_MM,         gMmSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY);
 }
 
-static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
+static void FileSelect_DrawOotEquips(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
+}
+
+static void FileSelect_DrawOotItems(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 140, 94);
+}
+
+static void FileSelect_DrawMmEquips(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareMmInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 96, 94);
+}
+
+static void FileSelect_DrawMmItems(FileSelectState* this, Gfx** list, void** end)
 {
     FileSelect_CustomFileInfoPrepareMmInfos(this, list, end, 56, 94);
     FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 96, 94);
     FileSelect_CustomFileInfoPrepareMmInventory(this, list, end, 140, 94);
 }
 
-void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
+static void FileSelect_CustomFileInfoLoad(FileSelectState* this)
 {
     Gfx* list;
     void* end;
 
+    if (this->fileInfoPageLoaded)
+        return;
+
     /* Load the saves */
-    gSaveContext.fileNum = slot;
+    gSaveContext.fileNum = this->selectedFileIndex;
     Save_ReadOwn();
     Save_ReadForeign();
 
@@ -507,16 +546,56 @@ void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
     gDPSetPrimColor(list++, 0, 0, 255, 255, 255, 255);
     gDPSetTexturePersp(list++, G_TP_NONE);
 
-    if (!this->game)
-        FileSelect_CustomFileInfoPrepareOot(this, &list, &end);
-    else
-        FileSelect_CustomFileInfoPrepareMm(this, &list, &end);
+    switch (this->fileInfoPage)
+    {
+    case PAGE_OOT_EQUIPS:
+        FileSelect_DrawOotEquips(this, &list, &end);
+        break;
+    case PAGE_OOT_ITEMS:
+        FileSelect_DrawOotItems(this, &list, &end);
+        break;
+    case PAGE_MM_EQUIPS:
+        FileSelect_DrawMmEquips(this, &list, &end);
+        break;
+    case PAGE_MM_ITEMS:
+        FileSelect_DrawMmItems(this, &list, &end);
+        break;
+    }
 
     gSPEndDisplayList(list++);
+    this->fileInfoPageLoaded = 1;
+}
+
+static void FileSelect_CustomFileInfoOnPageChange(FileSelectState* this)
+{
+    for (;;)
+    {
+        if (this->fileInfoPage >= PAGE_MAX)
+        this->fileInfoPage = 0;
+        if (FileSelect_CustomFileInfoPageAvailable(this->fileInfoPage))
+            break;
+        this->fileInfoPage++;
+    }
+
+    this->fileInfoPageLoaded = 0;
+}
+
+void FileSelect_CustomFileInfoPageFirst(FileSelectState* this)
+{
+    this->fileInfoPage = 0;
+    FileSelect_CustomFileInfoOnPageChange(this);
+}
+
+void FileSelect_CustomFileInfoPageNext(FileSelectState* this)
+{
+    Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
+    this->fileInfoPage++;
+    FileSelect_CustomFileInfoOnPageChange(this);
 }
 
 void FileSelect_CustomFileInfoDraw(FileSelectState* this)
 {
+    FileSelect_CustomFileInfoLoad(this);
     OPEN_DISPS(this->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, this->customFileInfoBufs[0]);
     CLOSE_DISPS();

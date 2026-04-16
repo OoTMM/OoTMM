@@ -223,7 +223,8 @@ void FileSelect_DrawCharacter(GraphicsContext* gfxCtx, void* texture, s16 vtx);
 
 void FileSelect_CustomFileInfoInit(FileSelectState* this);
 void FileSelect_CustomFileInfoFree(FileSelectState* this);
-void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot);
+void FileSelect_CustomFileInfoPageFirst(FileSelectState* this);
+void FileSelect_CustomFileInfoPageNext(FileSelectState* this);
 void FileSelect_CustomFileInfoDraw(FileSelectState* this);
 
 extern Vtx gNameEntryVtx[];
