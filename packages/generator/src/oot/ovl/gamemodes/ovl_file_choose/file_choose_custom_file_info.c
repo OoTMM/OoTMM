@@ -17,6 +17,8 @@ enum {
     PAGE_MAX,
 };
 
+static char* sSongNoteTex;
+
 static int FileSelect_CustomFileInfoPageAvailable(int page)
 {
     switch (page)
@@ -38,6 +40,7 @@ void FileSelect_CustomFileInfoInit(FileSelectState* this)
     this->customFileInfoBufs[1] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
     this->fileInfoPage = 0;
     this->fileInfoPageLoaded = 0;
+    sSongNoteTex = NULL;
 }
 
 void FileSelect_CustomFileInfoFree(FileSelectState* this)
@@ -231,6 +234,37 @@ static float drawItemIcon24(Gfx** list, void** end, s16 x, s16 y, u16 id, int no
     return ICON_SIZE;
 }
 
+static float drawNoteIcon(Gfx** list, void** end, s16 x, s16 y, u32 color, int noDim)
+{
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    if (!sSongNoteTex)
+    {
+        sSongNoteTex = allocBuf(end, 16 * 24);
+        LoadFile(sSongNoteTex, 0x7bd000 + 0x88040, 16 * 24);
+    }
+
+    r = (color >> 16) & 0xff;
+    g = (color >> 8) & 0xff;
+    b = color & 0xff;
+    a = 0xff;
+
+    if (!noDim)
+    {
+        r = (r / 2);
+        g = (g / 2);
+        b = (b / 2);
+        a = 128;
+    }
+
+    gDPSetPrimColor((*list)++, 0, 0, r, g, b, a);
+    quadIA8(list, sSongNoteTex, 16, 24, x, y, 0.5f);
+    return 8.f;
+}
+
 static void drawInfoHeart(Gfx** list, int x, int y, int isDefense, int count)
 {
     gDPSetCombineLERP((*list)++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
@@ -375,46 +409,29 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_KOKIRI, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_KOKIRI);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_IRON, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_IRON);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_HOVER, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER);
-    y += ICON_SIZE;
+}
+
+
+static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    int startX;
+
+    startX = x;
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songZelda);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songEpona);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songSaria);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songSun);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songTime);
+    x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songStorms);
+    y += 12.f;
     x = startX;
 
-
-    /*
-    y += ICON_SIZE;
-    x = startX;
-
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 0, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 1, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 2, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 3, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 4, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 5, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 6, 1);
-    x += drawItemIcon24(list, end, x, y, 1 * 8 + 7, 1);
-
-    y += ICON_SIZE;
-    x = startX;
-
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 0, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 1, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 2, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 3, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 4, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 5, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 6, 1);
-    x += drawItemIcon24(list, end, x, y, 2 * 8 + 7, 1);
-
-    y += ICON_SIZE;
-    x = startX;
-
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 0, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 1, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 2, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 3, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 4, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 5, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 6, 1);
-    x += drawItemIcon24(list, end, x, y, 3 * 8 + 7, 1);*/
+    x += drawNoteIcon(list, end, x, y, 0x00ff00, gOotSave.info.inventory.quest.songTpForest);
+    x += drawNoteIcon(list, end, x, y, 0xff0000, gOotSave.info.inventory.quest.songTpFire);
+    x += drawNoteIcon(list, end, x, y, 0x0000ff, gOotSave.info.inventory.quest.songTpWater);
+    x += drawNoteIcon(list, end, x, y, 0xffa500, gOotSave.info.inventory.quest.songTpSpirit);
+    x += drawNoteIcon(list, end, x, y, 0xff00ff, gOotSave.info.inventory.quest.songTpShadow);
+    x += drawNoteIcon(list, end, x, y, 0xffff00, gOotSave.info.inventory.quest.songTpLight);
 }
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -632,6 +649,7 @@ static void FileSelect_DrawOotEquips(FileSelectState* this, Gfx** list, void** e
     FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
     FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
     FileSelect_CustomFileInfoPrepareOotEquips(this, list, end, 140, 94);
+    FileSelect_CustomFileInfoPrepareOotSongs(this, list, end, 140, 140);
 }
 
 static void FileSelect_DrawOotItems(FileSelectState* this, Gfx** list, void** end)
@@ -708,6 +726,7 @@ static void FileSelect_CustomFileInfoOnPageChange(FileSelectState* this)
     }
 
     this->fileInfoPageLoaded = 0;
+    sSongNoteTex = NULL;
 }
 
 void FileSelect_CustomFileInfoPageFirst(FileSelectState* this)
