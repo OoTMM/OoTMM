@@ -26,7 +26,6 @@ export const MASKS_REGULAR = new Set([
   Items.SHARED_MASK_KEATON,
   Items.SHARED_MASK_BLAST,
   Items.SHARED_MASK_STONE,
-  Items.SHARED_MASK_KAMARO,
 ]);
 
 export const MASKS_TRANSFORM = new Set([
@@ -49,7 +48,6 @@ export const MASKS_OOT = new Set([
   Items.OOT_MASK_ZORA,
   Items.OOT_MASK_BLAST,
   Items.OOT_MASK_STONE,
-  Items.OOT_MASK_KAMARO,
   Items.SHARED_MASK_KEATON,
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_TRUTH,
@@ -57,7 +55,6 @@ export const MASKS_OOT = new Set([
   Items.SHARED_MASK_ZORA,
   Items.SHARED_MASK_BLAST,
   Items.SHARED_MASK_STONE,
-  Items.SHARED_MASK_KAMARO,
 ]);
 
 export const STONES = new Set([
@@ -1362,8 +1359,6 @@ export const REQUIRED = new Set([
   Items.SHARED_MASK_BLAST,
   Items.OOT_MASK_STONE,
   Items.SHARED_MASK_STONE,
-  Items.OOT_MASK_KAMARO,
-  Items.SHARED_MASK_KAMARO,
   Items.OOT_SONG_EMPTINESS,
   Items.SHARED_SONG_EMPTINESS,
 ]);

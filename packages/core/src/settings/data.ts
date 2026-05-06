@@ -2067,14 +2067,6 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
-  key: 'kamaroMaskOot',
-  name: "Kamaro Mask (OoT)",
-  category: 'items.extensions',
-  type: 'boolean',
-  description: "Add the Kamaro Mask in Ocarina of Time.",
-  default: false,
-  cond: hasOoT,
-  }, {
   key: 'elegyOot',
   name: "Elegy of Emptiness (OoT)",
   category: 'items.extensions',
@@ -2514,14 +2506,6 @@ export const SETTINGS = [{
   description: 'Combines the Stone Masks from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.stoneMaskOot,
-}, {
-  key: 'sharedMaskKamaro',
-  name: 'Shared Kamaro Mask',
-  category: 'items.shared',
-  type: 'boolean',
-  description: 'Combines the Kamaro Masks from OoT and MM into one item for both games',
-  default: false,
-  cond: (s: any) => hasOoTMM(s) && s.kamaroMaskOot,
 }, {
   key: 'sharedSongElegy',
   name: 'Shared Elegy of Emptiness',

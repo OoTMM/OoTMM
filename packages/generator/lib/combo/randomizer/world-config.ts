@@ -175,8 +175,6 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_MASK_BLAST: settings.sharedMaskBlast,
     OOT_MASK_STONE: settings.stoneMaskOot,
     SHARED_MASK_STONE: settings.sharedMaskStone,
-    OOT_MASK_KAMARO: settings.kamaroMaskOot,
-    SHARED_MASK_KAMARO: settings.sharedMaskKamaro,
     OOT_SONG_EMPTINESS: settings.elegyOot,
     SHARED_SONG_EMPTINESS: settings.sharedSongElegy,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,

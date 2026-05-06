@@ -65,9 +65,6 @@ void comboItemIcon(void* dst, int itemId)
     case ITEM_OOT_MASK_STONE:
         LoadMmItemIcon(dst, ITEM_MM_MASK_STONE);
         break;
-    case ITEM_OOT_MASK_KAMARO:
-        LoadMmItemIcon(dst, ITEM_MM_MASK_KAMARO);
-        break;
     case ITEM_OOT_MAGIC_MUSHROOM:
         LoadMmItemIcon(dst, ITEM_MM_MAGIC_MUSHROOM);
         break;
@@ -117,9 +114,6 @@ static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
             comboItemIcon(dst, ITEM_OOT_MASK_BLAST);
             if (gBlastMaskDelayAcc)
                 Grayscale(dst, 0x400);
-            return;
-        case MASK_KAMARO:
-            comboItemIcon(dst, ITEM_OOT_MASK_KAMARO);
             return;
         }
     }
@@ -210,7 +204,6 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
         switch (itemId)
         {
         case ITEM_OOT_MASK_BLAST:
-        case ITEM_OOT_MASK_KAMARO:
         case ITEM_OOT_MASK_STONE:
             *ptr = ITEM_OOT_KEATON_MASK;
             break;

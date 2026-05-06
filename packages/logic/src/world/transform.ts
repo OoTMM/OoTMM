@@ -202,8 +202,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_BLAST,
   Items.OOT_MASK_STONE,
   Items.SHARED_MASK_STONE,
-  Items.OOT_MASK_KAMARO,
-  Items.SHARED_MASK_KAMARO,
   Items.MM_MASK_SCENTS,
   Items.MM_MASK_KAFEI,
   Items.MM_MASK_FIERCE_DEITY,
@@ -367,7 +365,7 @@ class LogicPassWorldTransform {
   private fixedLocations: Set<Location>;
 
   constructor(
-      private readonly state: LogicPassWorldTransformState,
+    private readonly state: LogicPassWorldTransformState,
   ) {
     this.fixedLocations = new Set(state.fixedLocations);
   }
@@ -640,8 +638,8 @@ class LogicPassWorldTransform {
         const amountMm = this.pool.get(piMm) || 0;
         let newAmount: number;
         switch (policy) {
-          case 'max': newAmount = Math.max(amountOot, amountMm); break;
-          case 'sum': newAmount = amountOot + amountMm; break;
+        case 'max': newAmount = Math.max(amountOot, amountMm); break;
+        case 'sum': newAmount = amountOot + amountMm; break;
         }
         this.removePlayerItem(piOot);
         this.removePlayerItem(piMm);
@@ -669,8 +667,8 @@ class LogicPassWorldTransform {
       return;
 
     const junkCount = Array.from(this.pool.entries())
-        .filter(([pi, _]) => this.state.itemProperties.junk.has(pi.item))
-        .reduce((acc, [_, count]) => acc + count, 0);
+      .filter(([pi, _]) => this.state.itemProperties.junk.has(pi.item))
+      .reduce((acc, [_, count]) => acc + count, 0);
     const trapCount = (junkCount * amountFactor) / ((this.state.settings.trapsLink ? 1 : this.state.worlds.length) * extraTraps.length * 100);
     addTraps(extraTraps, trapCount);
   }
@@ -894,12 +892,6 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.MM_MASK_STONE, Items.SHARED_MASK_STONE);
     } else if (settings.stoneMaskOot) {
       this.addItem(Items.OOT_MASK_STONE);
-    }
-
-    if (settings.sharedMaskKamaro) {
-      this.replaceItem(Items.MM_MASK_KAMARO, Items.SHARED_MASK_KAMARO);
-    } else if (settings.kamaroMaskOot) {
-      this.addItem(Items.OOT_MASK_KAMARO);
     }
 
     if (settings.sharedSongElegy) {
@@ -1728,16 +1720,16 @@ class LogicPassWorldTransform {
 
     /* Alter the item pools */
     switch (settings.itemPool) {
-      case 'scarce':
-        this.scarcifyPool(1);
-        break;
-      case 'minimal':
-      case 'barren':
-        this.scarcifyPool(2);
-        break;
-      case 'plentiful':
-        this.plentifulPool();
-        break;
+    case 'scarce':
+      this.scarcifyPool(1);
+      break;
+    case 'minimal':
+    case 'barren':
+      this.scarcifyPool(2);
+      break;
+    case 'plentiful':
+      this.plentifulPool();
+      break;
     }
 
     /* handle random bottle contents */

@@ -1821,10 +1821,6 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     {
         comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_STONE);
     }
-    else if (itemId == ITEM_OOT_MASK_KAMARO)
-    {
-        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_KAMARO);
-    }
     else if (itemId == ITEM_OOT_KEATON_MASK)
     {
         /* Fixes 1.0 spelling mistake */

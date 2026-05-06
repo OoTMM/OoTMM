@@ -23,6 +23,7 @@ type LogicPassAnalysisFoolishState = {
   analysis: Analysis;
   startingItems: PlayerItems;
   itemProperties: ItemProperties;
+  fixedLocations: Set<Location>;
 };
 
 class LogicPassAnalysisFoolish {
@@ -174,6 +175,7 @@ class LogicPassAnalysisFoolish {
     const allLocs = this.state.worlds.map((x, i) => [...x.locations].map(y => makeLocation(y, i))).flat();
     const locs = new Set<Location>();
     for (const loc of allLocs) {
+      if (this.state.fixedLocations.has(loc)) continue;
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.required.has(loc)) continue;
       if (this.conditionallyRequiredLocations.has(loc)) continue;
@@ -208,6 +210,7 @@ class LogicPassAnalysisFoolish {
     const allLocs = this.state.worlds.map((x, i) => [...x.locations].map(y => makeLocation(y, i))).flat();
     const locsSet = new Set<Location>();
     for (const loc of allLocs) {
+      if (this.state.fixedLocations.has(loc)) continue;
       if (this.state.analysis.required.has(loc)) continue;
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.useless.has(loc)) continue;

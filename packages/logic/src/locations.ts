@@ -230,17 +230,6 @@ export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<
     return false;
   }
 
-  /* Non shuffled GS token */
-  /* TODO: Handle dungeon/overworld better */
-  if (ItemHelpers.isGoldToken(item.item) && settings.goldSkulltulaTokens === 'none') {
-    return false;
-  }
-
-  /* Non shuffled House tokens */
-  if (ItemHelpers.isHouseToken(item.item) && settings.housesSkulltulaTokens === 'none') {
-    return false;
-  }
-
   /* Songs */
   if (opts.songs) {
     if (ItemHelpers.isSong(item.item) && settings.songs !== 'anywhere') {

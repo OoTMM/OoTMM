@@ -202,7 +202,6 @@ int SpecialConds_Eval(int special)
     u8 hasMaskTruth;
     u8 hasMaskBlast;
     u8 hasMaskStone;
-    u8 hasMaskKamaro;
 
     cond = &gComboConfig.special[special];
     count = 0;
@@ -213,7 +212,6 @@ int SpecialConds_Eval(int special)
     hasMaskTruth = 0;
     hasMaskBlast = 0;
     hasMaskStone = 0;
-    hasMaskKamaro = 0;
 
     if (cond->flags & SPF_STONES)
     {
@@ -309,15 +307,6 @@ int SpecialConds_Eval(int special)
         else
         {
             if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
-        }
-
-        if (Config_Flag(CFG_SHARED_MASK_KAMARO))
-        {
-            if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) hasMaskKamaro = 1;
-        }
-        else
-        {
-            if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
         }
 
         if (gMmSave.info.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN) count++;
@@ -426,15 +415,6 @@ int SpecialConds_Eval(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_STONE)) count++;
         }
 
-        if (Config_Flag(CFG_SHARED_MASK_KAMARO))
-        {
-            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_KAMARO)) hasMaskKamaro = 1;
-        }
-        else
-        {
-            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_KAMARO)) count++;
-        }
-
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
@@ -464,7 +444,6 @@ int SpecialConds_Eval(int special)
     count += hasMaskGoron;
     count += hasMaskBlast;
     count += hasMaskStone;
-    count += hasMaskKamaro;
 
     return count >= cond->count;
 }

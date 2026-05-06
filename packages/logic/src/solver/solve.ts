@@ -377,8 +377,8 @@ class LogicPassSolver {
     /* Fix vanilla items */
     this.fixItems();
 
-    /* Place items fixed to default */
-    this.fixTokens();
+    /* KLUDGE: Fix the cross tokens */
+    this.fixCrossTokens();
 
     /* Place dungeon rewards (when set to dungeon locs) */
     if (['dungeons', 'dungeonsLimited'].includes(this.input.settings.dungeonRewardShuffle)) {
@@ -540,10 +540,13 @@ class LogicPassSolver {
     return locations;
   }
 
-  private fixCrossTokens(gs: Set<Location>, house: Set<Location>) {
+  private fixCrossTokens() {
     if (this.input.settings.housesSkulltulaTokens !== 'cross') {
       return;
     }
+
+    const gs = this.goldTokenLocations();
+    const house = this.houseTokenLocations();
 
     for (let player = 0; player < this.input.settings.players; ++player) {
       const locations = [...gs, ...house].filter(x => locationData(x).world === player);
@@ -553,39 +556,6 @@ class LogicPassSolver {
         const item = pool.pop()!;
         this.place(location, item);
         removeItemPools(this.state.pools, item);
-      }
-    }
-  }
-
-  private fixTokens() {
-    const gsLocations = this.goldTokenLocations();
-    const houseLocations = this.houseTokenLocations();
-
-    /* Fix the cross tokens */
-    this.fixCrossTokens(gsLocations, houseLocations);
-
-    /* Fix the non-shuffled GS */
-    for (const location of gsLocations) {
-      const locD = locationData(location);
-      const world = this.worlds[locD.world as number];
-      if (!this.state.items.has(location)) {
-        const item = makePlayerItem(world.checks[locD.id].item, locD.world as number);
-        this.place(location, item);
-        removeItemPools(this.state.pools, item);
-      }
-    }
-
-    /* Fix the non-shuffled house tokens */
-    if (this.input.settings.housesSkulltulaTokens !== 'all') {
-      for (const location of houseLocations) {
-        const locD = locationData(location);
-        const player = locD.world as number;
-        const world = this.worlds[player];
-        if (!this.state.items.has(location)) {
-          const item = makePlayerItem(world.checks[locD.id].item, player);
-          this.place(location, item);
-          removeItemPools(this.state.pools, item);
-        }
       }
     }
   }
@@ -754,12 +724,6 @@ class LogicPassSolver {
           continue;
         }
         if (this.input.fixedLocations.has(l)) {
-          continue;
-        }
-        if (ItemHelpers.isGoldToken(item.item) && this.input.settings.goldSkulltulaTokens !== 'all' && this.input.settings.goldSkulltulaTokens !== 'dungeons') {
-          continue;
-        }
-        if (ItemHelpers.isHouseToken(item.item) && this.input.settings.housesSkulltulaTokens !== 'all') {
           continue;
         }
         if (ItemHelpers.isDungeonStrayFairy(item.item) && this.input.settings.strayFairyChestShuffle !== 'anywhere' && this.input.settings.strayFairyOtherShuffle !== 'anywhere') {

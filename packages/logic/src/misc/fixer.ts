@@ -14,6 +14,7 @@ type LogicPassFixerState = {
 
 class LogicPassFixer {
   private fixedLocations = new Set<Location>();
+  private dungeonLocations = new Set<Location>();
 
   constructor(
     private readonly state: LogicPassFixerState,
@@ -123,23 +124,47 @@ class LogicPassFixer {
       return true;
     }
 
-    if(ItemHelpers.isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot === 'vanilla') {
+    if (ItemHelpers.isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot === 'vanilla') {
       return true;
     }
 
-    if(ItemHelpers.isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm === 'vanilla') {
+    if (ItemHelpers.isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm === 'vanilla') {
       return true;
     }
 
-    if(ItemHelpers.isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot === 'vanilla') {
+    if (ItemHelpers.isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot === 'vanilla') {
       return true;
     }
 
-    if(ItemHelpers.isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm === 'vanilla') {
+    if (ItemHelpers.isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm === 'vanilla') {
       return true;
+    }
+
+    if (this.state.settings.housesSkulltulaTokens !== 'cross') {
+      if (ItemHelpers.isGoldToken(item)) {
+        switch (this.state.settings.goldSkulltulaTokens) {
+        case 'none': return true;
+        case 'overworld': return this.dungeonLocations.has(loc);
+        case 'dungeons': return !this.dungeonLocations.has(loc);
+        }
+      }
+
+      if (ItemHelpers.isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
+        return true;
+      }
     }
 
     return false;
+  }
+
+  private buildDungeonLocations() {
+    for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
+      const world = this.state.worlds[worldId];
+      const rawLocs = Object.values(world.dungeons).map(x => Array.from(x)).flat().map(loc => makeLocation(loc, worldId));
+      for (const loc of rawLocs) {
+        this.dungeonLocations.add(loc);
+      }
+    }
   }
 
   private fixWorld(id: number) {
@@ -155,6 +180,7 @@ class LogicPassFixer {
   run() {
     this.state.monitor.log("Logic: Fixing");
 
+    this.buildDungeonLocations();
     for (let i = 0; i < this.state.worlds.length; ++i) {
       this.fixWorld(i);
     }

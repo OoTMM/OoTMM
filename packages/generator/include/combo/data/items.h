@@ -154,16 +154,15 @@
 #define ITEM_OOT_CUSTOM_MIN             0x9c
 #define ITEM_OOT_MASK_BLAST             0x9c
 #define ITEM_OOT_MASK_STONE             0x9d
-#define ITEM_OOT_MASK_KAMARO            0x9e
-#define ITEM_OOT_MAGIC_MUSHROOM         0x9f
-#define ITEM_OOT_CHATEAU                0xa0
-#define ITEM_OOT_GOLD_DUST              0xa1
-#define ITEM_OOT_SEAHORSE               0xa2
-#define ITEM_OOT_DEKU_PRINCESS          0xa3
-#define ITEM_OOT_SPRING_WATER           0xa4
-#define ITEM_OOT_SPRING_WATER_HOT       0xa5
-#define ITEM_OOT_ZORA_EGG               0xa6
-#define ITEM_OOT_CUSTOM_MAX             0xa7
+#define ITEM_OOT_MAGIC_MUSHROOM         0x9e
+#define ITEM_OOT_CHATEAU                0x9f
+#define ITEM_OOT_GOLD_DUST              0xa0
+#define ITEM_OOT_SEAHORSE               0xa1
+#define ITEM_OOT_DEKU_PRINCESS          0xa2
+#define ITEM_OOT_SPRING_WATER           0xa3
+#define ITEM_OOT_SPRING_WATER_HOT       0xa4
+#define ITEM_OOT_ZORA_EGG               0xa5
+#define ITEM_OOT_CUSTOM_MAX             0xa6
 
 #if defined(GAME_OOT)
 # define ITEM_STICK                     ITEM_OOT_STICK
@@ -316,7 +315,6 @@
 # define ITEM_NUT_UPGRADE2              ITEM_OOT_NUT_UPGRADE2
 # define ITEM_MASK_BLAST                ITEM_OOT_MASK_BLAST
 # define ITEM_MASK_STONE                ITEM_OOT_MASK_STONE
-# define ITEM_MASK_KAMARO               ITEM_OOT_MASK_KAMARO
 #endif
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
@@ -568,8 +566,7 @@
 #define XITEM_OOT_CHILD_MASK_OF_TRUTH   0xa
 #define XITEM_OOT_CHILD_MASK_BLAST      0xb
 #define XITEM_OOT_CHILD_MASK_STONE      0xc
-#define XITEM_OOT_CHILD_MASK_KAMARO     0xd
-#define XITEM_OOT_CHILD_BOTTLE          0xe
+#define XITEM_OOT_CHILD_BOTTLE          0xd
 
 #define XITEM_OOT_ADULT_POCKET_EGG              0x0
 #define XITEM_OOT_ADULT_POCKET_CUCCO            0x1

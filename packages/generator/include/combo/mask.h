@@ -15,7 +15,6 @@
 # define MASK_TRUTH     0x08
 # define MASK_BLAST     0x09
 # define MASK_STONE     0x0a
-# define MASK_KAMARO    0x0b
 #endif
 
 #if defined(GAME_MM)

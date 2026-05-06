@@ -448,7 +448,6 @@
 - { id: OOT_FAIRY_BIG, type: MINOR, add: OOT_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: OOT_MASK_BLAST, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_BLAST], flags: 0x80, draw: MM_MASK_BLAST, object: [mm, 0x026d], name: "the <C1>Blast Mask" }
 - { id: OOT_MASK_STONE, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_STONE], flags: 0x80, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
-- { id: OOT_MASK_KAMARO, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_KAMARO], flags: 0x80, draw: MM_MASK_KAMARO, object: [mm, 0x027d], name: "the <C1>Kamaro Mask" }
 - { id: OOT_SCALE_BRONZE, type: MAJOR, add: [OOT_SCALE, 1], flags: 0x80, draw: [SCALE, 1], object: [oot, 0x00db], name: "the <C1>Bronze Scale" }
 - { id: OOT_WEIRD_MUSHROOM, item: OOT_MAGIC_MUSHROOM, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_MAGIC_MUSHROOM, object: [mm, 0x021d], name: "a <C0>Magic Mushroom" }
 - { id: OOT_CHATEAU, item: OOT_CHATEAU, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_CHATEAU, object: [mm, 0x00c1], name: "some <C0>Chateau Romani" }
