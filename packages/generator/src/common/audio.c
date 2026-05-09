@@ -246,13 +246,17 @@ void AudioCustom_Init(void)
     gCustomAudioSeqBanks[1026] = 0;
 }
 
-static void Audio_UpdateMusicName(void)
+static void Audio_UpdateMusicName(PlayState* play)
 {
     u16 currentSeq;
 
     currentSeq = Audio_GetActiveSeqId(0);
     if (currentSeq == 0xffff)
     {
+        /* Keep the last known name while paused: seq lookup often returns invalid then. */
+        if (play->pauseCtx.state != 0 && sAudioNameBuffer[0] != 0)
+            return;
+
         sAudioNameSeq = 0xffff;
         sAudioNameBuffer[0] = 0;
         sAudioNameTTL = 0;
@@ -385,7 +389,13 @@ void Audio_DisplayMusicName(PlayState* play)
     }
 
     /* Update the music name */
-    Audio_UpdateMusicName();
+    Audio_UpdateMusicName(play);
+
+    /* Show music name while paused */
+    if (play->pauseCtx.state != 0 && sAudioNameSeq != 0xffff && sAudioNameBuffer[0] != 0)
+    {
+        sAudioNameTTL = 60;
+    }
 
     /* Check for no music name */
     if (!sAudioNameTTL || sAudioNameBuffer[0] == 0)
