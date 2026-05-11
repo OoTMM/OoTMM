@@ -2025,6 +2025,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'boomerangMm',
+  name: "Boomerang (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds the Boomerang in Majora's Mask.",
+  default: false,
+  cond: hasMM,
+}, {
   key: 'spinUpgradeOot',
   name: "Spin Attack Upgrade (OoT)",
   category: 'items.extensions',
@@ -2704,6 +2712,14 @@ export const SETTINGS = [{
   description: 'Combines the Megaton Hammers from OoT and MM into one item for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.hammerMm,
+}, {
+  key: 'sharedBoomerang',
+  name: "Shared Boomerang",
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the Boomerangs from OoT and MM into one item for both games',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.boomerangMm,
 }, {
   key: 'sharedBottles',
   name: 'Shared Bottles',

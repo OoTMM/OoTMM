@@ -108,6 +108,10 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_HAMMER;
         break;
+    case ITEM_MM_BOOMERANG:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_BOOMERANG;
+        break;
     case ITEM_MM_RUTO_LETTER:
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_RUTO_LETTER;
@@ -235,6 +239,16 @@ void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, " to smash and break " TEXT_NL "junk! It's so heavy, you need to " TEXT_NL "use two hands to swing it!" TEXT_END);
         break;
+    case ITEM_MM_BOOMERANG:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Boomerang" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Press " TEXT_COLOR_YELLOW "\xB2");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " to throw and watch it" TEXT_NL " come back! The boomerang can stun or " TEXT_NL "defeat enemies!" TEXT_END);
+        break;
     case ITEM_MM_BLUE_FIRE:
         b = play->msgCtx.font.textBuffer.schar;
         b[2] = 0xFE; /* Use No Icon */
@@ -348,6 +362,7 @@ static u32 sCustomIcons[] = {
     ITEM_MM_TUNIC_GORON,
     ITEM_MM_TUNIC_ZORA,
     ITEM_MM_HAMMER,
+    ITEM_MM_BOOMERANG,
     ITEM_MM_RUTO_LETTER,
 };
 
@@ -406,6 +421,9 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         case ITEM_MM_HAMMER:
             foreignIcon = ITEM_OOT_HAMMER;
             break;
+        case ITEM_MM_BOOMERANG:
+            foreignIcon = ITEM_OOT_BOOMERANG;
+            break;
         case ITEM_MM_RUTO_LETTER:
             foreignIcon = ITEM_OOT_RUTO_LETTER;
             break;
@@ -461,16 +479,17 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 6) * 2];
+static Vtx gVertexBufs[(4 * 7) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[6] = {
+static Vtx* gVertex[7] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
     &gVertexBufs[(4 * 3) * 2],
     &gVertexBufs[(4 * 4) * 2],
     &gVertexBufs[(4 * 5) * 2],
+    &gVertexBufs[(4 * 6) * 2],
 };
 
 static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {

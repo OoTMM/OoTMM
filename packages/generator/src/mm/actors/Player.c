@@ -12,7 +12,7 @@
 #include <combo/global.h>
 #include <combo/effect.h>
 #include "../actors.h"
-
+#include <combo/mm/boomerang.h>
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
 static void Player_TryBurnDekuShield(Player* this, PlayState* play)
@@ -100,6 +100,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_TUNIC_GORON,
     PLAYER_CUSTOM_IA_TUNIC_ZORA,
     PLAYER_CUSTOM_IA_HAMMER,
+    PLAYER_CUSTOM_IA_BOOMERANG,
     PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER,
 };
 
@@ -660,6 +661,17 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
         return 1;
     }
 
+    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG)
+    {
+        if (this->transformation == MM_PLAYER_FORM_HUMAN)
+        {
+            return 0;
+        }
+
+        PlaySound(0x4806); /* NA_SE_SY_ERROR */
+        return 1;
+    }
+
     /* PLAYER_IA_MASK_MIN = 0x3A, */
     /* PLAYER_IA_MASK_MAX = 0x51, */
     /* PLAYER_IA_MASK_GIANT = 0x4D, */
@@ -988,7 +1000,7 @@ Gfx gLinkChildGoronBraceletDL[] = {
     gsSPEndDisplayList(),
 };
 
-static int prepareObject(PlayState* play, u16 objectId)
+int prepareObject(PlayState* play, u16 objectId)
 {
     void* obj;
 
@@ -1011,6 +1023,17 @@ static void DrawHammer(PlayState* play)
     OPEN_DISPS(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, 0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_HAMMER_0);
+    CLOSE_DISPS();
+}
+
+static void DrawBoomerang(PlayState* play)
+{
+    if (!prepareObject(play, CUSTOM_OBJECT_ID_EQ_BOOMERANG))
+        return;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    gSPMatrix(POLY_OPA_DISP++, 0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_BOOMERANG_0);
     CLOSE_DISPS();
 }
 
@@ -1208,6 +1231,10 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
 
         if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_HAMMER) {
             DrawHammer(play);
+        }
+
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_BOOMERANG && !(player->stateFlags1 & PLAYER_STATE1_MM_2000000)) {
+            DrawBoomerang(play);
         }
 
         if (player->transformation == MM_PLAYER_FORM_HUMAN && Config_Flag(CFG_MM_STRENGTH))
@@ -1797,7 +1824,7 @@ void Player_UseItem(PlayState* play, Player* this, s16 itemId)
 
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
     if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
-
+    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) return 14;
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
     s32 modelGroup = sActionModelGroups[itemAction];
     /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
@@ -1813,6 +1840,9 @@ PATCH_FUNC(0x80123960, Player_CustomActionToModelGroup)
 /*
     first two arguments match Player_SetUpperAction which allows it to replace relevant calls in which the third argument would always be this->heldItemAction
 */
+extern s32 Player_InitItemAction_CustomBoomerang_Upper(Player* player, PlayState* play);
+extern s32 Player_InitItemAction_CustomBoomerang(Player* player, PlayState* play);
+
 void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     PlayerUpperActionFunc* sPlayerUpperActionUpdateFuncs = (PlayerUpperActionFunc*)OverlayAddr(0x8085c9f0);
     void (*Player_SetUpperAction)(PlayState* play, Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
@@ -1821,7 +1851,10 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     if (upperItemAction == PLAYER_CUSTOM_IA_HAMMER) {
         upperItemAction = PLAYER_IA_SWORD_TWO_HANDED;
     }
-
+    if (upperItemAction == PLAYER_CUSTOM_IA_BOOMERANG) {
+        Player_SetUpperAction(play, player, Player_InitItemAction_CustomBoomerang);
+        return;
+    }
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
     Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[upperItemAction]);
 }
@@ -1832,7 +1865,10 @@ void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 ite
     if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
         itemAction = PLAYER_IA_SWORD_TWO_HANDED;
     }
-
+    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) {
+        Player_InitItemAction_CustomBoomerang_Upper(player, play);
+        return;
+    }
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerItemActionInitFuncs array */
     sPlayerItemActionInitFuncs[itemAction](play, player);
 }

@@ -487,6 +487,7 @@
 # define ACTOR_CUSTOM_SPELL_LOVE    0x02e
 # define ACTOR_EN_BOMBF             0x02f
 # define ACTOR_CUSTOM_ICE_HONO      0x030
+# define ACTOR_CUSTOM_BOOMERANG     0x031
 # define ACTOR_EN_AM                0x032
 # define ACTOR_EN_DEKUBABA          0x033
 # define ACTOR_EN_M_FIRE1           0x034

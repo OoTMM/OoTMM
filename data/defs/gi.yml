@@ -534,7 +534,7 @@
 - { id: MM_COMPASS, item: MM_COMPASS, type: MAP_COMPASS, add: [MM_COMPASS, 0xffff], flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass" }
 - { id: MM_HOOKSHOT, item: MM_HOOKSHOT, type: MAJOR, add: [MM_HOOKSHOT, 2], flags: 0xa0, draw: MM_HOOKSHOT, object: [mm, 0x00b4], name: "the <C1>Hookshot" }
 - { id: MM_LENS, item: MM_LENS_OF_TRUTH, type: MAJOR, add: MM_NORMAL, flags: 0xa0, draw: LENS, object: [mm, 0x00c0], name: "the <C1>Lens of Truth" }
-- { id: MM_PICTOGRAPH_BOX, item: MM_PICTOGRAPH_BOX, type: MAJOR, add: MM_NORMAL, flags: 0xa0, draw: MM_PICTOBOX, object: [mm, 0x0228], name: "the <C1>Pictograph Box" }
+- { id: MM_PICTOGRAPH_BOX, item: MM_PICTOGRAPH_BOX, type: MAJOR, add: [MM_PICTO_BOOM, 0], flags: 0xa0, draw: MM_PICTOBOX, object: [mm, 0x0228], name: "the <C1>Pictograph Box" }
 - { id: MM_OCARINA_OF_TIME, item: MM_OCARINA_OF_TIME, type: MAJOR, add: [MM_OCARINA, 2], flags: 0xa0, draw: OCARINA_TIME, object: [mm, 0x00b5], name: "the <C1>Ocarina of Time" }
 - { id: MM_BOMBER_NOTEBOOK, item: MM_BOMBER_NOTEBOOK, type: MAJOR, add: [MM_QUEST, QUEST_MM_NOTEBOOK], flags: 0x80, draw: MM_NOTEBOOK, object: [mm, 0x0253], name: "the <C1>Bomber's Notebook" }
 - { id: MM_BOTTLE_POTION_RED, item: MM_POTION_RED, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name: "a <C1>bottle of Red Potion" }
@@ -816,6 +816,7 @@
 - { id: MM_CLOCK5, type: MAJOR, add: [MM_CLOCK, 4], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Day 3)" }
 - { id: MM_CLOCK6, type: MAJOR, add: [MM_CLOCK, 5], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Night 3)" }
 - { id: MM_HAMMER, item: MM_HAMMER, type: MAJOR, add: [MM_GFS_HAMMER, 1], flags: 0x80, draw: OOT_MEGATON_HAMMER, object: [oot, 0x00f6], name: "the <C1>Megaton Hammer" }
+- { id: MM_BOOMERANG, item: MM_BOOMERANG, type: MAJOR, add: [MM_PICTO_BOOM, 1], flags: 0x80, draw: OOT_BOOMERANG, object: [oot, 0x00e8], name: "the <C1>Boomerang" }
 - { id: MM_STICK_UPGRADE, type: MAJOR, add: [MM_STICK_UPGRADE, 2], flags: 0x80, draw: OOT_STICK_UPGRADE, object: [oot, 0x00c7], name: "the <C1>Deku Stick Upgrade" }
 - { id: MM_STICK_UPGRADE2, type: MAJOR, add: [MM_STICK_UPGRADE, 3], flags: 0x80, draw: OOT_STICK_UPGRADE2, object: [oot, 0x00c7], name: "the <C1>Second Deku Stick Upgrade" }
 - { id: MM_NUT_UPGRADE, type: MAJOR, add: [MM_NUT_UPGRADE, 2], flags: 0x80, draw: OOT_NUT_UPGRADE, object: [oot, 0x00bb], name: "the <C1>Deku Nut Upgrade" }
