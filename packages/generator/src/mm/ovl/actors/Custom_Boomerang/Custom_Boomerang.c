@@ -706,19 +706,16 @@ void CustomBoomerang_Update(Actor_CustomBoomerang* boom, PlayState* play)
     }
 }
 
-#define BOOMERANG_MODEL_SCALE 0.0125f
-#define BOOMERANG_BLURE_HALF_LEN (960.0f * BOOMERANG_MODEL_SCALE)
-
 void CustomBoomerang_Draw(Actor_CustomBoomerang* boom, PlayState* play)
 {
-    static Vec3f sPosAOffset = { -BOOMERANG_BLURE_HALF_LEN, 0.0f, 0.0f };
-    static Vec3f sPosBOffset = {  BOOMERANG_BLURE_HALF_LEN, 0.0f, 0.0f };
+    static Vec3f sPosAOffset = { -960.0f, 0.0f, 0.0f };
+    static Vec3f sPosBOffset = {  960.0f, 0.0f, 0.0f };
 
     Vec3f posA;
     Vec3f posB;
     void* blure;
 
-    if (!prepareObject(play, CUSTOM_OBJECT_ID_EQ_BOOMERANG)) {
+    if (!prepareObject(play, CUSTOM_OBJECT_ID_EQ_BOOMERANG_FLIGHT)) {
         return;
     }
 
@@ -730,9 +727,18 @@ void CustomBoomerang_Draw(Actor_CustomBoomerang* boom, PlayState* play)
         boom->actor.world.pos.z,
         MTXMODE_NEW
     );
+    
+    CustomBoomerang_MatrixScale(
+        boom->actor.scale.x,
+        boom->actor.scale.y,
+        boom->actor.scale.z,
+        MTXMODE_APPLY
+    );
+
     CustomBoomerang_MatrixRotateYS(boom->actor.world.rot.y, MTXMODE_APPLY);
     CustomBoomerang_MatrixRotateZS(0x1F40, MTXMODE_APPLY);
     CustomBoomerang_MatrixRotateXS(boom->actor.world.rot.x, MTXMODE_APPLY);
+
     CustomBoomerang_MatrixMultVec3f(&sPosAOffset, &posA);
     CustomBoomerang_MatrixMultVec3f(&sPosBOffset, &posB);
 
@@ -745,24 +751,9 @@ void CustomBoomerang_Draw(Actor_CustomBoomerang* boom, PlayState* play)
     }
 
     CustomBoomerang_GfxSetupDL25Opa(play->state.gfxCtx);
+
     CustomBoomerang_MatrixRotateYS(
-        boom->activeTimer * -0x2EE0,
-        MTXMODE_APPLY
-    );
-    CustomBoomerang_MatrixRotateXS(
-        -0x4000,
-        MTXMODE_APPLY
-    );
-    CustomBoomerang_MatrixTranslate(
-        -5.0f,
-        -5.0f,
-        0.0f,
-        MTXMODE_APPLY
-    );
-    CustomBoomerang_MatrixScale(
-        BOOMERANG_MODEL_SCALE,
-        BOOMERANG_MODEL_SCALE,
-        BOOMERANG_MODEL_SCALE,
+        boom->activeTimer * 0x2EE0,
         MTXMODE_APPLY
     );
 
@@ -772,7 +763,7 @@ void CustomBoomerang_Draw(Actor_CustomBoomerang* boom, PlayState* play)
         G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW
     );
 
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_BOOMERANG_0);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_BOOMERANG_FLIGHT_0);
 
     CLOSE_DISPS();
 }
