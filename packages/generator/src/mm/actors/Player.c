@@ -1123,6 +1123,9 @@ EXPORT_SYMBOL(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
 #define DLIST_INDIRECT(x)           (*(u32*)((x)))
 #define DLIST_RHAND_OPEN            DLIST_INDIRECT(0x801c01c4)
+#define DLIST_RHAND_CLOSED          DLIST_INDIRECT(0x801c01ec)
+#define DLIST_LHAND_OPEN            DLIST_INDIRECT(0x801c0134)
+#define DLIST_LHAND_CLOSED          DLIST_INDIRECT(0x801c015c)
 
 static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -1173,12 +1176,33 @@ void Player_PostLimbDrawGameplayWrapper(PlayState* play, s32 limbIndex, Gfx** dL
         Player_DrawShield(play, player);
 }
 
+static int Player_IsCustomBoomerangThrown(Player* player)
+{
+    return !!(player->stateFlags1 & PLAYER_STATE1_MM_2000000);
+}
+
 int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
 {
     Player* player = GET_PLAYER(play);
 
     if (player->transformation == MM_PLAYER_FORM_HUMAN && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
     {
+        if (player->itemAction == PLAYER_CUSTOM_IA_BOOMERANG)
+        {
+            if (limbIndex == PLAYER_LIMB_LEFT_HAND)
+            {
+                if (Player_IsCustomBoomerangThrown(player))
+                {
+                    *dList = (Gfx*)DLIST_LHAND_OPEN;
+                }
+                else
+                {
+                    *dList = (Gfx*)DLIST_LHAND_CLOSED;
+                }
+
+                return FALSE;
+            }
+        }
         if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
         {
             if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
@@ -1820,11 +1844,11 @@ void Player_UseItem(PlayState* play, Player* this, s16 itemId)
     }
 }
 
-/* Hammer Stuff */
+/* Hammer & Boomerang Stuff */
 
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
     if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
-    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) return 14;
+    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) return 3; /* PLAYER_MODELGROUP_DEFAULT */
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
     s32 modelGroup = sActionModelGroups[itemAction];
     /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
