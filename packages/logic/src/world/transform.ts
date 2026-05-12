@@ -1049,6 +1049,12 @@ class LogicPassWorldTransform {
       this.addItem(Items.MM_HAMMER);
     }
 
+    if (settings.sharedBoomerang) {
+      this.replaceItem(Items.OOT_BOOMERANG, Items.SHARED_BOOMERANG);
+    } else if (settings.boomerangMm) {
+      this.addItem(Items.MM_BOOMERANG);
+    }
+
     if (settings.sharedStoneAgony) {
       this.replaceItem(Items.OOT_STONE_OF_AGONY, Items.SHARED_STONE_OF_AGONY);
     } else if (settings.stoneAgonyMm) {
