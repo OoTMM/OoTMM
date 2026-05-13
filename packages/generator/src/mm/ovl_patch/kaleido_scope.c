@@ -368,11 +368,11 @@ static u32 sCustomIcons[] = {
 
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN] =
 {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 1, 1, 1, -1, -1, -1, -1, 1, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -547,6 +547,198 @@ void KaleidoScope_DrawIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u1
         DrawIcon(gfxCtx, vtx, texture, width, height, point);
     }
 }
+
+static s32 KaleidoScope_IsAmmoRestricted(s16 item)
+{
+    return !gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item];
+}
+
+typedef Gfx* (*DrawTexRectIA8Func)(Gfx*, u8*, s16, s16, s16, s16, s16, s16, s32, s32);
+
+#define KALEIDO_DRAW_TEX_RECT_IA8_ADDR 0x8010CD98
+#define KALEIDO_AMMO_DIGIT_0_TEX_ADDR  0x02004aa0
+#define KALEIDO_AMMO_RECT_LEFT_ADDR    0x8082b444
+#define KALEIDO_AMMO_RECT_HEIGHT_ADDR  0x8082b454
+
+static s32 KaleidoScope_ItemHasAmmoCount(s16 item)
+{
+    switch (item)
+    {
+        case ITEM_MM_BOMB:
+        case ITEM_MM_BOW:
+        case ITEM_MM_NUT:
+        case ITEM_MM_BOMBCHU:
+        case ITEM_MM_POWDER_KEG:
+        case ITEM_MM_STICK:
+        case ITEM_MM_MAGIC_BEAN:
+        case ITEM_MM_PICTOGRAPH_BOX:
+            return 1;
+
+        default:
+            return 0;
+    }
+}
+
+static s32 KaleidoScope_FindSlotForItem(s16 item)
+{
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gSave.info.inventory.items); i++)
+    {
+        if (gSave.info.inventory.items[i] == item)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+static s16 KaleidoScope_GetShownAmmoItem(s16 item, s32* outSlot)
+{
+    s32 slot;
+    u8* itemPtr;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+
+    slot = KaleidoScope_FindSlotForItem(item);
+    *outSlot = slot;
+
+    if (slot < 0)
+    {
+        return item;
+    }
+
+    if (comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize) >= 0 && popcount(flags) > 1)
+    {
+        return *itemPtr;
+    }
+
+    return item;
+}
+#define MM_QUEST_PICTOGRAPH 0x19
+
+#define MM_CHECK_QUEST_ITEM(item) \
+(gSave.info.inventory.quest.value & (1u << (item)))
+static s16 KaleidoScope_GetAmmo(s16 item, s32 slot)
+{
+    switch (item)
+    {
+        case ITEM_MM_PICTOGRAPH_BOX:
+            return MM_CHECK_QUEST_ITEM(MM_QUEST_PICTOGRAPH) ? 1 : 0;
+
+        case ITEM_MM_POWDER_KEG:
+            return gSave.info.inventory.ammo[slot];
+
+        default:
+            if (slot >= 0)
+            {
+                return gSave.info.inventory.ammo[slot];
+            }
+            return 0;
+    }
+}
+
+#define MM_UPG_QUIVER      gSave.info.inventory.upgrades.quiver
+#define MM_UPG_BOMB_BAG    gSave.info.inventory.upgrades.bombBag
+#define MM_UPG_DEKU_STICKS gSave.info.inventory.upgrades.dekuStick
+#define MM_UPG_DEKU_NUTS   gSave.info.inventory.upgrades.dekuNut
+
+#define MM_CAPACITY_BOMB_BAG(value)    ((s16[]){ 0, 20, 30, 40 }[(value)])
+#define MM_CAPACITY_QUIVER(value)      ((s16[]){ 0, 30, 40, 50 }[(value)])
+#define MM_CAPACITY_DEKU_STICKS(value) ((s16[]){ 0, 10, 20, 30 }[(value)])
+#define MM_CAPACITY_DEKU_NUTS(value)   ((s16[]){ 0, 20, 30, 40 }[(value)])
+
+#define MM_CUR_BOMB_BAG_CAPACITY()    MM_CAPACITY_BOMB_BAG(MM_UPG_BOMB_BAG)
+#define MM_CUR_QUIVER_CAPACITY()      MM_CAPACITY_QUIVER(MM_UPG_QUIVER)
+#define MM_CUR_DEKU_STICKS_CAPACITY() MM_CAPACITY_DEKU_STICKS(MM_UPG_DEKU_STICKS)
+#define MM_CUR_DEKU_NUTS_CAPACITY()   MM_CAPACITY_DEKU_NUTS(MM_UPG_DEKU_NUTS)
+
+
+static s32 KaleidoScope_IsAmmoAtCapacity(s16 item, s16 ammo)
+{
+    return (((item == ITEM_MM_BOMB) && (ammo == MM_CUR_BOMB_BAG_CAPACITY())) ||
+            ((item == ITEM_MM_BOW) && (ammo == MM_CUR_QUIVER_CAPACITY())) ||
+            ((item == ITEM_MM_STICK) && (ammo == MM_CUR_DEKU_STICKS_CAPACITY())) ||
+            ((item == ITEM_MM_NUT) && (ammo == MM_CUR_DEKU_NUTS_CAPACITY())) ||
+            ((item == ITEM_MM_BOMBCHU) && (ammo == gMaxBombchuMm)) ||
+            ((item == ITEM_MM_POWDER_KEG) && (ammo == 1)) ||
+            ((item == ITEM_MM_PICTOGRAPH_BOX) && (ammo == 1)) ||
+            ((item == ITEM_MM_MAGIC_BEAN) && (ammo == 10)));
+}
+
+void KaleidoScope_DrawAmmoCountCustom(PauseContext* pauseCtx, GraphicsContext* gfxCtx, s16 item, u16 ammoIndex)
+{
+    s16 ammoUpperDigit;
+    s16 ammo;
+    s16 shownItem;
+    s32 slot;
+    u8 alpha;
+    DrawTexRectIA8Func DrawTexRectIA8;
+    u8* ammoDigit0Tex;
+    s16* ammoRectLeft;
+    s16* ammoRectHeight;
+
+    shownItem = KaleidoScope_GetShownAmmoItem(item, &slot);
+
+    if (!KaleidoScope_ItemHasAmmoCount(shownItem))
+    {
+        return;
+    }
+
+    ammo = KaleidoScope_GetAmmo(shownItem, slot);
+    alpha = pauseCtx->itemAlpha & 0xff;
+
+    DrawTexRectIA8 = (DrawTexRectIA8Func)KALEIDO_DRAW_TEX_RECT_IA8_ADDR;
+    ammoDigit0Tex = (u8*)KALEIDO_AMMO_DIGIT_0_TEX_ADDR;
+    ammoRectLeft = OverlayAddr(KALEIDO_AMMO_RECT_LEFT_ADDR);
+    ammoRectHeight = OverlayAddr(KALEIDO_AMMO_RECT_HEIGHT_ADDR);
+
+    OPEN_DISPS(gfxCtx);
+
+    gDPPipeSync(POLY_OPA_DISP++);
+
+    if (KaleidoScope_IsAmmoRestricted(shownItem))
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 100, 100, 100, alpha);
+    }
+    else
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, alpha);
+
+        if (ammo == 0)
+        {
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 130, 130, 130, alpha);
+        }
+        else if (KaleidoScope_IsAmmoAtCapacity(shownItem, ammo))
+        {
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 120, 255, 0, alpha);
+        }
+    }
+
+    for (ammoUpperDigit = 0; ammo >= 10; ammoUpperDigit++)
+    {
+        ammo -= 10;
+    }
+
+    gDPPipeSync(POLY_OPA_DISP++);
+
+    if (ammoUpperDigit != 0)
+    {
+        POLY_OPA_DISP =
+            DrawTexRectIA8(POLY_OPA_DISP, ammoDigit0Tex + (8 * 8 * ammoUpperDigit), 8, 8,
+                           ammoRectLeft[ammoIndex], ammoRectHeight[ammoIndex], 8, 8, 1 << 10, 1 << 10);
+    }
+
+    POLY_OPA_DISP =
+        DrawTexRectIA8(POLY_OPA_DISP, ammoDigit0Tex + (8 * 8 * ammo), 8, 8,
+                       ammoRectLeft[ammoIndex] + 6, ammoRectHeight[ammoIndex], 8, 8, 1 << 10, 1 << 10);
+
+    CLOSE_DISPS();
+}
+
+PATCH_FUNC(0x8081B240, KaleidoScope_DrawAmmoCountCustom);
 
 void KaleidoScope_SetSaveButton(PlayState* play, s16 bButtonDoAction)
 {
