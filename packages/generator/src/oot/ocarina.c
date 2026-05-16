@@ -1043,8 +1043,13 @@ u8 Ocarina_BeforeSongPlayingProcessed(PlayState* play)
     if (songPlayed > 0x80 && songPlayed < 0x80 + CUSTOM_SONG_MAX)
     {
         sCustomSongPlayed = songPlayed - 0x80;
-
-        if (sCustomSongPlayed == CUSTOM_SONG_ELEGY && play->msgCtx.ocarinaAction != OCARINA_ACTION_CHECK_CUSTOM_SONG_ELEGY)
+        if (play->msgCtx.ocarinaAction == OCARINA_ACTION_CHECK_NOWARP)
+        {
+            AudioOcarina_SetInstrument(OCARINA_INSTRUMENT_OFF);
+            PlaySound(NA_SE_SY_OCARINA_ERROR);
+            play->msgCtx.msgMode = MSGMODE_OCARINA_STARTING;
+        }
+        else if (sCustomSongPlayed == CUSTOM_SONG_ELEGY && play->msgCtx.ocarinaAction != OCARINA_ACTION_CHECK_CUSTOM_SONG_ELEGY)
         {
             PlaySound(NA_SE_SY_TRE_BOX_APPEAR);
             HandleElegy(play);
