@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
+- Rename Sun's Song in MM to Sun's Song (MM) to be consistent.
 
 ### Fixed
 
@@ -94,7 +95,6 @@ All notable changes to this project will be documented in this file.
 - Song of Soaring and Song of Double Time in Ocarina of Time now include the song playback, fanfare and song effect.
 - Rework of Forest Temple MQ logic, including implementation of Age Swap, Climb Anywhere, and Hookshot Anywhere features.
 - The trick to enter Bariande's room in vanilla Jabu-Jabu without Boomerang now looks for Hookshot instead of Longshot.
-- Rename Sun's Song in MM to Sun's Song (MM) to be consistent.
 
 ### Fixed
 
