@@ -14,6 +14,14 @@ All notable changes to this project will be documented in this file.
 - Add extra signs outside ganon's castle and on clock tower roof to hint the bridge & moon special conditions, when applicable.
 - Add a basic implementation of music categories.
 - Add a setting to avoid placing multiple playthrough hints for identical items.
+- Add a setting to shuffle the required songs for various events in MM (thanks Mizu Aoyuki for the icons).
+- Add Song of Soaring (OoT) and Ageless Song of Soaring to replace Cross-Games MM Song of Soaring.
+- Add Sonata of Awakening (OoT), Goron Lullaby (OoT), New Wave Bossa Nova (OoT), Oath to Order (OoT), which do nothing unless Song Events Shuffle is on.
+- Add Song of Healing (OoT), which heals signs and summons fairies at gossip stones.
+- Add Zelda's Lullaby (MM), which heals signs and summons fairies at gossip stones.
+- Add Saria's Song (MM), which makes some redeads dance and summons fairies at gossip stones.
+- Add Minuet of Forest (MM), Bolero of Fire (MM), Serenade of Water (MM), Requiem of Spirit (MM), Nocturne of Shadow (MM) and Prelude of Light (MM) to replace Cross-Games OoT Warp Songs.
+- Add Shared settings variants of each song above.
 
 ### Changed
 
@@ -29,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - Fixed a lot of broken logic for Woodfall Temple, mostly accounting for Bronze Scale.
 - Ensure the logic for vanilla Ice Cavern Silver Rupees in the Scythe room is sound.
 - Fix logic for Shared Kamaro's Mask.
+- Fix frog game softlocking when playing a custom song.
 
 ## [30.1] - 2026-03-15
 
@@ -48,14 +57,7 @@ All notable changes to this project will be documented in this file.
 - Add a platinum token item, which counts as every skulltula token at once.
 - Add colored squares next to settings in the cosmetics tab when they have a color associated with them.
 - Add a setting to shuffle the Lottery in Majora's Mask, with all nights having a different item.
-- Add a setting to shuffle the required songs for various events in OoT and MM (thanks Mizu Aoyuki for the icons).
-- Add Song of Soaring (OoT) and Ageless Song of Soaring to replace Cross-Games MM Song of Soaring.
-- Add Sonata of Awakening (OoT), Goron Lullaby (OoT), New Wave Bossa Nova (OoT), Oath to Order (OoT), which do nothing unless Song Events Shuffle is on.
-- Add Song of Healing (OoT), which heals signs and summons fairies at gossip stones.
-- Add Zelda's Lullaby (MM), which heals signs and summons fairies at gossip stones.
-- Add Saria's Song (MM), which makes some redeads dance and summons fairies at gossip stones.
-- Add Minuet of Forest (MM), Bolero of Fire (MM), Serenade of Water (MM), Requiem of Spirit (MM), Nocturne of Shadow (MM) and Prelude of Light (MM) to replace Cross-Games OoT Warp Songs.
-- Add Shared settings variants of each song above.
+- Add a setting to shuffle the required songs for various events in OoT (thanks Mizu Aoyuki for the icons).
 - Add animal souls in OoT and MM.
 - Cosmetics setting to enable BGM during night time.
 - Add soft soil shuffle to Ocarina of Time and Majora's Mask.
