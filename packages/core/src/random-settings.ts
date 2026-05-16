@@ -298,7 +298,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.openDungeonsMm = { type: 'all' };
     base.openDungeonsOot = { type: 'all' };
     base.openMaskShop = true;
-    base.clearStateDungeonsMm = 'both';
+    base.clearStateDungeonsMm = { type: 'all' };
     base.doorOfTime = 'open';
     base.dekuTree = 'open';
     base.kakarikoGate = 'open';
@@ -313,7 +313,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.ganonTrials = { type: 'all' };
     base.openDungeonsMm = { type: 'none' };
     base.openDungeonsOot = { type: 'none' };
-    base.clearStateDungeonsMm = 'none';
+    base.clearStateDungeonsMm = { type: 'none' };
     base.openMaskShop = false;
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
@@ -330,7 +330,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.openDungeonsMm = { type: 'random' };
     base.openDungeonsOot = { type: 'random' };
     base.openMaskShop = booleanWeighted(random, 0.3);
-    base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
+    base.clearStateDungeonsMm = { type: 'random' };
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
     base.kakarikoGate = sampleWeighted(random, { vanilla: 10, open: 5, closed: 5 });
