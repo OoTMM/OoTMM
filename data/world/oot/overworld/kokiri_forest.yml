@@ -177,7 +177,6 @@
   locations:
     "Kokiri Shop Wonder Item": "true"
 
-
 "Kokiri Shop Items":
   region: ENTRANCE
   age_change: false
