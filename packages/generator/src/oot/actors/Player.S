@@ -493,7 +493,7 @@ Player_ShouldDamageRecoil_Hook:
   sw      a1, 0x001c (sp)
   or      a0, s0, zero
   jal     Player_ShouldDamageRecoil
-   addiu  a1, sp, 0x0064
+   addiu  a1, sp, 0x0064 + 0x18
   lw      a0, 0x0018 (sp)
   lw      a1, 0x001c (sp)
   lw      ra, 0x0014 (sp)
