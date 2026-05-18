@@ -41,3 +41,13 @@ void EnFu_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 
 PATCH_CALL(0x809635cc, EnFu_GiveItem);
 PATCH_CALL(0x809635ec, EnFu_GiveItem);
+
+s32 EnFu_CanPlayDay2()
+{
+    return gSave.info.inventory.upgrades.bombBag || gMmExtraItems.ootBombBagUpgrade;
+}
+
+s32 EnFu_CanPlayDay1()
+{
+    return gSharedCustomSave.bombchuBagMm || EnFu_CanPlayDay2();
+}
