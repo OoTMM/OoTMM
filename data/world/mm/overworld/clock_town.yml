@@ -271,7 +271,7 @@
 "Bomb Shop":
   region: ENTRANCE
   events:
-    BUY_KEG: "soul_goron && can_carry_keg && has(POWDER_KEG) && can_use_wallet(1)"
+    BUY_KEG: "soul_goron && can_carry_keg && has_keg && can_use_wallet(1)"
   exits:
     "GLOBAL": "true"
     "Clock Town West": "true"

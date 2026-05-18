@@ -22,7 +22,7 @@
     STICKS: "is_child"
     ARROWS: "is_adult"
     BUGS: "has_bottle && (has_explosives_or_hammer || can_lift_silver)"
-    BUY_KEG: "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && soul_medigoron && can_carry_keg && has(POWDER_KEG) && merchant_price(0x00)"
+    BUY_KEG: "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && soul_medigoron && can_carry_keg && has_keg && merchant_price(0x00)"
   locations:
     "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"

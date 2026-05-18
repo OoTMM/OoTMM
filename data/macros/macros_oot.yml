@@ -86,6 +86,7 @@
 "can_boomerang": "age_boomerang && has(BOOMERANG)"
 "can_hammer": "age_hammer && has_hammer_raw"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
+"has_keg": "has(POWDER_KEG) || has(SHARED_POWDER_KEG)"
 
 # Age macros
 "age_sticks": "glitch_equip_swap || is_child || setting(agelessSticks)"

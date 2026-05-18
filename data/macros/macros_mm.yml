@@ -184,6 +184,7 @@
 "has_mask_stone": "cond(setting(sharedMaskStone), has(SHARED_MASK_STONE), has(MASK_STONE))"
 "has_mask_blast": "cond(setting(sharedMaskBlast), has(SHARED_MASK_BLAST), has(MASK_BLAST))"
 "has_explosives": "has_bombs || has_mask_blast || has_bombchu"
+"has_keg": "has(POWDER_KEG) || has(SHARED_POWDER_KEG)"
 "can_use_fire_arrows": "has_magic && has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE))"
 "can_use_ice_arrows": "has_magic && has_arrows && (has(ARROW_ICE) || has(SHARED_ARROW_ICE))"
 "can_use_light_arrows": "has_magic && has_arrows && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT))"
