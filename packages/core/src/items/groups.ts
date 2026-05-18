@@ -1519,4 +1519,6 @@ export const REQUIRED = new Set([
   Items.MM_BOMB_BAG_OOT,
   Items.OOT_BOMB_BAG_OOT,
   Items.MM_BOMB_BAG_MM,
+  Items.SHARED_BOMB_BAG_MM,
+  Items.SHARED_BOMB_BAG_OOT,
 ]);
