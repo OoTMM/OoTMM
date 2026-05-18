@@ -2693,7 +2693,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongZeldaLullaby',
   name: "Shared Zelda's Lullaby",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines Zelda's Lullaby from OoT and MM into one item for both games",
   default: false,
@@ -2701,7 +2701,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongSarias',
   name: "Shared Saria's Song",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines Saria's Song from OoT and MM into one item for both games",
   default: false,
@@ -2709,7 +2709,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongMinuet',
   name: "Shared Minuet of Forest",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines the Minuet of Forest from OoT and MM into one item for both games",
   default: false,
@@ -2717,7 +2717,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongBolero',
   name: "Shared Bolero of Fire",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines the Bolero of Fire from OoT and MM into one item for both games",
   default: false,
@@ -2725,7 +2725,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongSerenade',
   name: "Shared Serenade of Water",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines the Serenade of Water from OoT and MM into one item for both games",
   default: false,
@@ -2733,7 +2733,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongRequiem',
   name: "Shared Requiem of Spirit",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines the Requiem of Spirit from OoT and MM into one item for both games",
   default: false,
@@ -2741,7 +2741,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongNocturne',
   name: "Shared Nocturne of Shadow",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines the Nocturne of Shadow from OoT and MM into one item for both games",
   default: false,
@@ -2749,7 +2749,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedSongPrelude',
   name: "Shared Prelude of Light",
-  category: 'items.extensions',
+  category: 'items.shared',
   type: 'boolean',
   description: "Combines the Prelude of Light from OoT and MM into one item for both games",
   default: false,
