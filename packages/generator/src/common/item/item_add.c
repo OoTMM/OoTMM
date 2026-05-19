@@ -1199,7 +1199,7 @@ static int addItemBombBagOotOot(PlayState* play, u8 itemId, s16 gi, u16 param)
     if (Config_Flag(CFG_SHARED_BOMB_BAGS_OOT))
         addBombBagOotRawMm(play, param);
     else if (Config_Flag(CFG_SHARED_BOMB_BAGS))
-        addBombsMmRawMm(param);
+        addBombBagMmRawMm(param);
     return 0;
 }
 

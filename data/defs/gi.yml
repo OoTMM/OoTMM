@@ -522,9 +522,9 @@
 - { id: MM_BOMBS_30, item: MM_BOMBS_30, type: MINOR, add: [MM_BOMBS, 30], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>30 Bombs" }
 - { id: MM_STICK, item: MM_STICK, type: MINOR, add: [MM_STICKS, 1], flags: 0x0d, draw: DEKU_STICK, object: [mm, 0x009f], name: "a <C0>Deku Stick" }
 - { id: MM_BOMBCHU_10, item: MM_BOMBCHU_10, type: NORMAL, add: [MM_BOMBCHU, 10], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>10 Bombchu" }
-- { id: MM_BOMB_BAG, item: MM_BOMB_BAG, type: MAJOR, add: [MM_BOMB_BAG, 1], flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag (MM)" }
-- { id: MM_BOMB_BAG2, item: MM_BOMB_BAG2, type: MAJOR, add: [MM_BOMB_BAG, 2], flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag (MM)" }
-- { id: MM_BOMB_BAG3, item: MM_BOMB_BAG3, type: MAJOR, add: [MM_BOMB_BAG, 3], flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag (MM)" }
+- { id: MM_BOMB_BAG, item: MM_BOMB_BAG, type: MAJOR, add: [MM_BOMB_BAG, 1], flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag" }
+- { id: MM_BOMB_BAG2, item: MM_BOMB_BAG2, type: MAJOR, add: [MM_BOMB_BAG, 2], flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag" }
+- { id: MM_BOMB_BAG3, item: MM_BOMB_BAG3, type: MAJOR, add: [MM_BOMB_BAG, 3], flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag" }
 - { id: MM_ARROWS_10, item: MM_ARROWS_10, type: MINOR, add: [MM_ARROWS, 10], flags: 0x48, draw: ARROW, object: [mm, 0x00af], name: "<C0>10 Arrows" }
 - { id: MM_ARROWS_30, item: MM_ARROWS_30, type: MINOR, add: [MM_ARROWS, 30], flags: 0x49, draw: ARROW2, object: [mm, 0x00af], name: "<C0>30 Arrows" }
 - { id: MM_ARROWS_40, item: MM_ARROWS_40, type: MINOR, add: [MM_ARROWS, 40], flags: 0x4a, draw: ARROW3, object: [mm, 0x00af], name: "<C0>40 Arrows" }
