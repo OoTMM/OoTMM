@@ -6,6 +6,7 @@
     "Water Temple Entrance": "can_swim || (hookshot_anywhere && has_iron_boots)"
   events:
     WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION: "can_swim" #This is solely for the fact Water MQ can cause softlocks in its current state. Yes, while it might falsely flag a scale as being required for some checks that might not otherwise need it, it at least makes it playable.
+
 "Water Temple Entrance":
   dungeon: Water
   exits:
@@ -14,6 +15,7 @@
     "Water Temple Main Room Middle Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_MID) || (has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && hookshot_anywhere))"
     "Water Temple Main Room Bottom Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_LOW) || (has_iron_boots && has_tunic_zora))"
     "Water Temple High Water Level Ledge": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && longshot_anywhere"
+
 "Water Temple Main Room Top Floor":
   dungeon: Water
   exits:
@@ -25,6 +27,7 @@
     "Water Temple Main Room Antichamber Ledge": "((can_longshot || can_use_ice_arrow_platforms || (trick(OOT_WATER_BOSSBOOTS) && is_adult && has_iron_boots && can_swim)) && event(WATER_LEVEL_HIGH)) || climb_anywhere || longshot_anywhere"
     "Water Temple Storage Room": "((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (can_hookshot || climb_anywhere)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && can_hookshot && has_tunic_zora)"
     "Water Temple Lizalfos Hallway": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (has_iron_boots && has_tunic_zora_strict && event(WATER_LEVEL_HIGH))"
+
 "Water Temple Main Room Middle Floor":
   dungeon: Water
   exits:
@@ -37,6 +40,7 @@
     "Water Temple Central Tower Middle Door": "event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
     "Water Temple Lizalfos Hallway": "((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (hookshot_anywhere || has_hover_boots)) || (has_iron_boots && has_tunic_zora_strict && event(WATER_LEVEL_HIGH))"
     "Water Temple Main Room Antichamber Ledge": "(event(WATER_LEVEL_HIGH) && can_longshot) || longshot_anywhere"
+
 "Water Temple Main Room Bottom Floor":
   dungeon: Water
   exits:
@@ -49,6 +53,7 @@
     "Water Temple Leading To Side Loop Before Spikes": "event(WATER_GATES) && (((event(WATER_LEVEL_MID) || event(WATER_LEVEL_HIGH)) && has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && (has_iron_boots || hookshot_anywhere || can_dive_small)))"
     "Water Temple Storage Room": "event(WATER_LEVEL_MID) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && longshot_anywhere)"
     "Water Temple Lizalfos Hallway": "event(WATER_LEVEL_MID) || (event(WATER_LEVEL_LOW) && longshot_anywhere) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+
 "Water Temple Ruto Column Bottom":
   dungeon: Water
   exits:
@@ -59,6 +64,7 @@
   locations:
     "MQ Water Temple Pot Ruto 1": "can_hookshot || event(WATER_LEVEL_LOW)"
     "MQ Water Temple Pot Ruto 2": "can_hookshot || event(WATER_LEVEL_LOW)"
+
 "Water Temple Compass Room":
   dungeon: Water
   exits:
@@ -68,6 +74,7 @@
   locations:
     "MQ Water Temple Compass Chest": "event(RUTO_COLUMN_HOOKSHOTS)"
     "MQ Water Temple Wonder Item Lizalfos Room": "can_hookshot"
+
 "Water Temple Ruto Column Middle":
   dungeon: Water
   exits:
@@ -76,6 +83,7 @@
   locations:
     "MQ Water Temple Longshot Chest": "event(WATER_LEVEL_LOW) && can_hookshot && can_damage"
     "MQ Water Temple Wonder Item Longshot Room": "can_hookshot"
+
 "Water Temple Ruto Column Top":
   dungeon: Water
   exits:
@@ -84,6 +92,7 @@
     "Water Temple Map Chest Room": "has_fire"
   events:
     WATER_LEVEL_LOW: "song_event(0x0b)"
+
 "Water Temple Map Chest Room":
   dungeon: Water
   exits:
@@ -91,6 +100,7 @@
   locations:
     "MQ Water Temple Map Chest": "can_hookshot"
     "MQ Water Temple Wonder Item Stalfos Room": "can_hookshot"
+
 "Water Temple Storage Room":
   dungeon: Water
   exits:
@@ -114,11 +124,13 @@
     "MQ Water Temple Storage Room Small Crate 2": "true"
     "MQ Water Temple Storage Room Small Crate 3": "true"
     "MQ Water Temple Storage Room Small Crate 4": "true"
+
 "Water Temple Hookshot Staircase from Main":
   dungeon: Water
   exits:
     "Water Temple Main Room Top Floor": "small_keys_water(1) && event(WATER_LEVEL_HIGH)"
     "Water Temple Hookshot Staircase Before Dark Link": "can_longshot"
+
 "Water Temple Hookshot Staircase Before Dark Link":
   dungeon: Water
   exits:
@@ -131,6 +143,7 @@
     "MQ Water Temple Wonder Item Hookshot Staircase Left 1": "can_hookshot"
     "MQ Water Temple Wonder Item Hookshot Staircase Left 2": "can_hookshot"
     "MQ Water Temple Wonder Item Hookshot Staircase Left 3": "can_hookshot"
+
 "Water Temple Room Before Dark Link Lower":
   dungeon: Water
   exits:
@@ -141,6 +154,7 @@
     "MQ Water Temple Pot Before Dark Link Ledge 2": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hookshot) || has_hover_boots || hookshot_anywhere || climb_anywhere"
     "MQ Water Temple Pot Before Dark Link Ledge 3": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hookshot) || has_hover_boots || hookshot_anywhere || climb_anywhere"
     "MQ Water Temple Big Fairy Before Dark Link Ledge": "can_play_sun && ((soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hookshot) || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+
 "Water Temple Room Before Dark Link Upper":
   dungeon: Water
   exits:
@@ -151,11 +165,13 @@
     "MQ Water Temple Pot Before Dark Link Near Door 2": "true"
     "MQ Water Temple Big Fairy Before Dark Link Near Door 1": "can_play_sun"
     "MQ Water Temple Big Fairy Before Dark Link Near Door 2": "can_play_storms"
+
 "Water Temple Dark Link":
   dungeon: Water
   exits:
     "Water Temple Room Before Dark Link Upper": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
     "Water Temple After Dark Link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
+
 "Water Temple After Dark Link":
   dungeon: Water
   exits:
@@ -165,6 +181,7 @@
     "MQ Water Temple Wonder Item After Dark Link": "can_hookshot"
     "MQ Water Temple Pot After Dark Link 1": "true"
     "MQ Water Temple Pot After Dark Link 2": "true"
+
 "Water Temple River Start":
   dungeon: Water
   exits:
@@ -174,11 +191,13 @@
     "MQ Water Temple GS River": "gs && can_collect_distance" #Believe it or not, this is very easy to get with no Iron Boots.
     "MQ Water Temple Pot River 1": "true"
     "MQ Water Temple Pot River 2": "true"
+
 "Water Temple River End":
   dungeon: Water
   exits:
     "Water Temple River Start": "has_iron_boots && can_hookshot"
     "Water Temple Dragon Room": "true"
+
 "Water Temple Dragon Room":
   dungeon: Water
   exits:
@@ -199,6 +218,7 @@
     "MQ Water Temple Dragon Room At Torches Small Crate 1": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
     "MQ Water Temple Dragon Room At Torches Small Crate 2": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
     "MQ Water Temple Dragon Room At Torches Small Crate 3": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
+
 "Water Temple Boss Key Room Dragon Side":
   dungeon: Water
   exits:
@@ -211,6 +231,7 @@
     "MQ Water Temple Boss Key Room In Center Large Crate 2": "true"
     "MQ Water Temple Boss Key Room In Center Large Crate 3": "true"
     "MQ Water Temple Boss Key Room In Center Large Crate 4": "true"
+
 "Water Temple Boss Key Room Switch Side":
   dungeon: Water
   exits:
@@ -220,6 +241,7 @@
     WATER_GATES: "has_iron_boots && has_tunic_zora"
   locations:
     "MQ Water Temple Boss Key Chest": "true"
+
 "Water Temple Three Torch Room":
   dungeon: Water
   exits:
@@ -243,16 +265,19 @@
     "MQ Water Temple Three Torch Room Behind Gate Large Crate 1": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
     "MQ Water Temple Three Torch Room Behind Gate Large Crate 2": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
     "MQ Water Temple Three Torch Room Behind Gate Large Crate 3": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+
 "Water Temple Leading To Side Loop Before Spikes":
   dungeon: Water
   exits:
     "Water Temple Main Room Bottom Floor": "event(WATER_GATES) && has_iron_boots && has_tunic_zora"
     "Water Temple Leading To Side Loop After Spikes": "can_longshot || can_use_ice_arrow_platforms || hookshot_anywhere || climb_anywhere"
+
 "Water Temple Leading To Side Loop After Spikes":
   dungeon: Water
   exits:
     "Water Temple Side Loop Gate Room Main": "true"
     "Water Temple Leading To Side Loop Before Spikes": "true"
+
 "Water Temple Side Loop Gate Room Main":
   dungeon: Water
   exits:
@@ -268,12 +293,14 @@
     "MQ Water Temple Side Loop First Room Water Large Crate 4": "has_iron_boots && has_tunic_zora"
     "MQ Water Temple Side Loop First Room Water Large Crate 5": "has_iron_boots && has_tunic_zora"
     "MQ Water Temple Side Loop First Room Water Large Crate 6": "has_iron_boots && has_tunic_zora"
+
 "Water Temple Side Loop Scarecrow Alcove":
   dungeon: Water
   exits:
     "Water Temple Side Loop Gate Room Main": "true"
     "Water Temple Side Loop Room After Locked Door Switch Side": "small_keys_water(2)"
     "Water Temple Side Loop Scarecrow Alcove Underwater Path": "(has_iron_boots && has_tunic_zora) || (hookshot_anywhere && has_tunic_zora)"
+
 "Water Temple Side Loop Room After Locked Door Switch Side":
   dungeon: Water
   exits:
@@ -282,6 +309,7 @@
   locations:
     "MQ Water Temple Wonder Item Water Sprouts 1": "can_hookshot || (has_explosives_or_hammer || can_hit_triggers_distance || can_use_sword_or_sticks)"
     "MQ Water Temple Wonder Item Water Sprouts 2": "can_hookshot || (has_explosives_or_hammer || can_hit_triggers_distance || can_use_sword_or_sticks)"
+
 "Water Temple Side Loop Room After Locked Door Target Side":
   dungeon: Water
   exits:
@@ -290,6 +318,7 @@
   locations:
     "MQ Water Temple Wonder Item Water Sprouts 1": "(can_hit_triggers_distance || can_longshot) || (climb_anywhere && (has_explosives_or_hammer || can_hit_triggers_distance || can_use_sword_or_sticks))"
     "MQ Water Temple Wonder Item Water Sprouts 2": "(can_hit_triggers_distance || can_longshot) || (climb_anywhere && (has_explosives_or_hammer || can_hit_triggers_distance || can_use_sword_or_sticks))"
+
 "Water Temple Side Loop Dodongo Room":
   dungeon: Water
   exits:
@@ -303,6 +332,7 @@
     "MQ Water Temple Dodongo Room Large Crate 3": "true"
     "MQ Water Temple Dodongo Room Large Crate 4": "true"
     "MQ Water Temple Dodongo Room Large Crate 5": "true"
+
 "Water Temple Side Loop Gate Room Past Gate":
   dungeon: Water
   exits:
@@ -314,11 +344,13 @@
     "MQ Water Temple Side Loop First Room In Gate Large Crate 2": "true"
     "MQ Water Temple Side Loop First Room In Gate Large Crate 3": "true"
     "MQ Water Temple Side Loop First Room In Gate Large Crate 4": "true"
+
 "Water Temple Side Loop Scarecrow Alcove Underwater Path":
   dungeon: Water
   exits:
     "Water Temple Side Loop Scarecrow Alcove": "(has_iron_boots && has_tunic_zora) || (hookshot_anywhere && has_tunic_zora) || can_dive_small"
     "Water Temple Side Loop Stalfos Room": "true"
+
 "Water Temple Side Loop Stalfos Room":
   dungeon: Water
   exits:
@@ -333,6 +365,7 @@
     "MQ Water Temple Side Loop Stalfos Room Large Crate 3": "true"
     "MQ Water Temple Side Loop Stalfos Room Large Crate 4": "true"
     "MQ Water Temple Side Loop Stalfos Room Large Crate 5": "true"
+
 "Water Temple Main Room Antichamber Ledge":
   dungeon: Water
   exits:
@@ -340,6 +373,7 @@
     "Water Temple Antichamber Room": "true"
     "Water Temple Main Room Middle Floor": "can_longshot && ((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora))"
     "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || ((event(WATER_LEVEL_MID) || event(WATER_LEVEL_HIGH)) && has_iron_boots && has_tunic_zora)"
+
 "Water Temple Antichamber Room":
   dungeon: Water
   exits:
@@ -348,12 +382,14 @@
   locations:
     "MQ Water Temple Wonder Item Before Boss 1": "can_hookshot"
     "MQ Water Temple Wonder Item Before Boss 2": "can_hookshot"
+
 "Water Temple Central Tower Lower Door":
   dungeon: Water
   exits:
     "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || (event(WATER_LEVEL_MID) && ((can_hookshot || is_adult) || climb_anywhere))"
     "Water Temple Central Tower Middle Door": "(event(WATER_LEVEL_MID) && is_adult) || can_longshot || hookshot_anywhere || climb_anywhere"
     "Water Temple Central Tower Under Gate": "event(WATER_CENTRAL_GATE) && (event(WATER_LEVEL_MID) || event(WATER_LEVEL_HIGH)) && has_iron_boots && has_tunic_zora_strict"
+
 "Water Temple Central Tower Middle Door":
   dungeon: Water
   exits:
@@ -366,6 +402,7 @@
   locations:
     "MQ Water Temple Central Tower Top Large Crate 1": "(event(WATER_LEVEL_HIGH) && (has_iron_boots || has_explosives_or_hammer)) || ((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (can_longshot || hookshot_anywhere || climb_anywhere))"
     "MQ Water Temple Central Tower Top Large Crate 2": "(event(WATER_LEVEL_HIGH) && (has_iron_boots || has_explosives_or_hammer)) || ((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (can_longshot || hookshot_anywhere || climb_anywhere))"
+
 "Water Temple Central Tower Under Gate":
   dungeon: Water
   exits:
@@ -387,6 +424,7 @@
     "MQ Water Temple Central Tower Under Gate Large Crate 12": "true"
     "MQ Water Temple Central Tower Under Gate Large Crate 13": "true"
     "MQ Water Temple Central Tower Under Gate Large Crate 14": "true"
+
 "Water Temple Lizalfos Hallway":
   dungeon: Water
   exits:
@@ -409,6 +447,7 @@
     "MQ Water Temple Lizalfos Hallway Large Crate 6": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
     "MQ Water Temple Lizalfos Hallway Large Crate 7": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
     "MQ Water Temple Lizalfos Hallway Large Crate 8": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+
 "Water Temple High Water Level Ledge":
   dungeon: Water
   exits:
@@ -418,6 +457,7 @@
     "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || ((event(WATER_LEVEL_MID) || event(WATER_LEVEL_HIGH)) && has_iron_boots && has_tunic_zora)"
   events:
     WATER_LEVEL_HIGH: "song_event(0x0b)"
+
 "Water Temple Blue Switch Path":
   dungeon: Water
   exits:
@@ -435,6 +475,7 @@
     "MQ Water Temple Room Before High Water Lower Large Crate 5": "true"
     "MQ Water Temple Room Before High Water Lower Large Crate 6": "true"
     "MQ Water Temple Room Before High Water Lower Small Crate": "true"
+
 "Water Temple Room Before Water Raise":
   dungeon: Water
   exits:
