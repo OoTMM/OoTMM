@@ -4,11 +4,13 @@
     "GLOBAL": "true"
     "Death Mountain Crater Near Temple": "true"
     "Fire Temple Entrance": "true"
+
 "Fire Temple Entrance":
   dungeon: Fire
   exits:
     "Fire Temple": "true"
     "Fire Temple Lower Lobby": "true"
+
 "Fire Temple Lower Lobby":
   dungeon: Fire
   exits:
@@ -19,6 +21,7 @@
   locations:
     "MQ Fire Temple Pot Entrance 1": "true"
     "MQ Fire Temple Pot Entrance 2": "true"
+
 "Fire Temple Hammer Loop Goron Cell Like Like Side":
   dungeon: Fire
   exits:
@@ -29,12 +32,14 @@
   locations:
     "MQ Fire Temple Early Lower Left Chest": "event(FIRE_MQ_1ST_GORON_LIKELIKE)"
     "MQ Fire Temple Map Chest": "event(FIRE_MQ_MAP_CHEST_HAMMER_SWITCH)"
+
 "Fire Temple Upper Lobby":
   dungeon: Fire
   exits:
     "Fire Temple Lower Lobby": "true"
     "Fire Temple Pre-Boss Room Entrance Side": "has_fire"
     "Fire Temple 1F Lava Bridge Room Main": "can_hammer"
+
 "Fire Temple Pre-Boss Room Entrance Side":
   dungeon: Fire
   exits:
@@ -44,6 +49,7 @@
     "Fire Temple Pre-Boss Room Tall Ledges Corner": "has_tunic_goron && (climb_anywhere || can_hookshot || has_hover_boots)"
   #events:
     # FIRE_MQ_PRE_BOSS_TORCHES: "has_tunic_goron && has_fire && can_use_bow" #TODO: Trick with shotting the torch through the crate
+
 "Fire Temple Pre-Boss Room Cell Corner":
   dungeon: Fire
   exits:
@@ -53,6 +59,7 @@
     "MQ Fire Temple Pre-Boss Chest": "event(FIRE_MQ_PRE_BOSS_TORCHES)"
     "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1": "has_tunic_goron"
     "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2": "has_tunic_goron"
+
 "Fire Temple Pre-Boss":
   dungeon: Fire
   exits:
@@ -60,6 +67,7 @@
     "Fire Temple Pre-Boss Room Cell Corner": "has_tunic_goron && (is_adult || (can_hookshot || has_hover_boots || climb_anywhere))"
     "Fire Temple Pre-Boss Room Tall Ledges Corner": "has_tunic_goron && (can_hookshot || has_hover_boots || climb_anywhere)"
     "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE)"
+
 "Fire Temple Pre-Boss Room Tall Ledges Corner":
   dungeon: Fire
   exits:
@@ -74,6 +82,7 @@
     "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2": "has_tunic_goron"
     "MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate": "has_tunic_goron" #Child can reach this by jumping off the hookshot platform that has the torch.
     "MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate": "has_tunic_goron" #Child can reach this by using the middle crate as a platform.
+
 "Fire Temple Hammer Loop Enemies Room":
   dungeon: Fire
   exits:
@@ -83,6 +92,7 @@
     FIRE_MQ_HAMMER_LOOP_FIRST_CLEAR: "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
   locations:
     "MQ Fire Temple Hammer Loop Stalfos Big Fairy": "can_play_sun"
+
 "Fire Temple Hammer Loop Iron Knuckle Room":
   dungeon: Fire
   exits:
@@ -100,6 +110,7 @@
     "MQ Fire Temple Pot Hammer Loop 7": "true"
     "MQ Fire Temple Pot Hammer Loop 8": "true"
     "MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy": "can_play_sun"
+
 "Fire Temple Hammer Loop Flare Dancer Room":
   dungeon: Fire
   exits:
@@ -109,6 +120,7 @@
     FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || has_bombchu || can_use_mask_blast || can_hammer || can_hookshot) && (has_weapon || has_sticks || can_hammer)"
   locations:
     "MQ Fire Temple Hammer Chest": "event(FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR) && (is_adult || can_hookshot || climb_anywhere)"
+
 "Fire Temple Hammer Loop Goron Cell Map Chest Side":
   dungeon: Fire
   exits:
@@ -118,6 +130,7 @@
     FIRE_MQ_MAP_CHEST_HAMMER_SWITCH: "can_hammer"
   locations:
     "MQ Fire Temple Map Chest": "event(FIRE_MQ_MAP_CHEST_HAMMER_SWITCH)"
+
 "Fire Temple 1F Lava Bridge Room Main":
   dungeon: Fire
   exits:
@@ -129,6 +142,7 @@
     "Fire Temple Rising Block Room": "has_tunic_goron && small_keys_fire_mq(2)"
   locations:
     "MQ Fire Temple Pot Lava Room Left": "has_tunic_goron"
+
 "Fire Temple 1F Lava Bridge Room High Alcove":
   dungeon: Fire
   exits:
@@ -137,11 +151,13 @@
     FIRE_MQ_LAVA_BRIDGE_ROOM_TORCHES: "has_fire" #Might need to separate intwo two events when action shuffle happens.
   locations:
     "MQ Fire Temple Pot Lava Room Alcove": "has_tunic_goron"
+
 "Fire Temple Lava Bridge Room North Side Upper Ledge":
   dungeon: Fire
   exits:
     "Fire Temple 1F Lava Bridge Room Main": "has_tunic_goron"
     "Fire Temple Boss Key Chest Room": "has_tunic_goron && event(FIRE_MQ_LAVA_BRIDGE_ROOM_TORCHES)"
+
 "Fire Temple Boss Key Chest Room":
   dungeon: Fire
   exits:
@@ -152,12 +168,14 @@
     "MQ Fire Temple Pot Boss Key Room 2": "can_hookshot || can_boomerang || climb_anywhere"
     "MQ Fire Temple Wonder Item Boss Key Room Hookshot": "can_hookshot"
     "MQ Fire Temple Wonder Item Boss Key Room Bow": "can_use_bow && (can_boomerang || can_hookshot || climb_anywhere)"
+
 "Fire Temple Lava Bridge Room North Side Lower Room":
   dungeon: Fire
   exits:
     "Fire Temple 1F Lava Bridge Room Main": "true"
   locations:
     "MQ Fire Temple GS 1f Lava Room": "gs && can_hammer"
+
 "Fire Temple Lava Bridge Room South Side Ledge":
   dungeon: Fire
   exits:
@@ -167,12 +185,14 @@
     FIRE_MQ_LAVA_BRIDGE_ROOM_HOOKSHOT_PLATFORMS: "has_fire"
   locations:
     "MQ Fire Temple Pot Lava Room Right": "has_tunic_goron"
+
 "Fire Temple 1F Lava Bridge Room South Side Room":
   dungeon: Fire
   exits:
     "Fire Temple Lava Bridge Room South Side Ledge": "true"
   locations:
     "MQ Fire Temple 1f Lava Room Goron Chest": "has_fire"
+
 "Fire Temple Rising Block Room":
   dungeon: Fire
   exits:
@@ -182,6 +202,7 @@
     "MQ Fire Temple Heart 1": "has_tunic_goron_strict"
     "MQ Fire Temple Heart 2": "has_tunic_goron_strict"
     "MQ Fire Temple Heart 3": "has_tunic_goron_strict"
+
 "Fire Temple Room Before Maze":
   dungeon: Fire
   exits:
@@ -194,6 +215,7 @@
     "MQ Fire Temple Wonder Item Shortcut Room 1": "can_hammer"
     "MQ Fire Temple Wonder Item Shortcut Room 2": "can_hammer"
     "MQ Fire Temple Wonder Item Shortcut Room 3": "can_hammer"
+
 "Fire Temple Shortcut Cage Under Maze":
   dungeon: Fire
   exits:
@@ -209,6 +231,7 @@
     "MQ Fire Temple Cell Below Maze Large Crate 4": "true"
     "MQ Fire Temple Cell Below Maze Large Crate 5": "true"
     "MQ Fire Temple Cell Below Maze Large Crate 6": "true"
+
 "Fire Temple Maze Room Lower":
   dungeon: Fire
   exits:
@@ -228,12 +251,14 @@
     "MQ Fire Temple Maze Room Lower Cage Large Crate 1": "event(FIRE_MQ_MAZE_ROOM_LOWER_CAGE_SWITCH)"
     "MQ Fire Temple Maze Room Lower Cage Large Crate 2": "event(FIRE_MQ_MAZE_ROOM_LOWER_CAGE_SWITCH)"
     "MQ Fire Temple Maze Room Lower Cage Large Crate 3": "event(FIRE_MQ_MAZE_ROOM_LOWER_CAGE_SWITCH)"
+
 "Fire Temple Maze Room Rusty Switch Behind Bombable Wall":
   dungeon: Fire
   exits:
     "Fire Temple Maze Room Lower": "true"
   events:
     FIRE_MQ_MAZE_ROOM_LOWER_RUSTY_SWITCH: "can_hammer"
+
 "Fire Temple Maze Room Blue Switch Behind Bombable Wall":
   dungeon: Fire
   exits:
@@ -241,6 +266,7 @@
     "Fire Temple Maze Room Side Room": "event(FIRE_MQ_MAZE_ROOM_BLUE_SWITCH)"
   events:
    FIRE_MQ_MAZE_ROOM_BLUE_SWITCH: "can_play_elegy"
+
 "Fire Temple Maze Room Upper Switch Cage Alcove":
   dungeon: Fire
   exits:
@@ -255,12 +281,14 @@
     "MQ Fire Temple Maze Room Upper Cage Large Crate 3": "true"
     "MQ Fire Temple Maze Room Upper Cage Small Crate 1": "true"
     "MQ Fire Temple Maze Room Upper Cage Small Crate 2": "true"
+
 "Fire Temple Maze Room Side Room":
   dungeon: Fire
   exits:
     "Fire Temple Maze Room Blue Switch Behind Bombable Wall": "true"
   locations:
     "MQ Fire Temple Maze Side Room Chest": "true"
+
 "Fire Temple Maze Room Upper":
   dungeon: Fire
   exits:
@@ -269,12 +297,14 @@
     "Fire Temple Shortcut Cage Under Maze": "has_explosives"
     "Fire Temple 3F Lava Floor Room After Maze": "small_keys_fire_mq(3)"
     "Fire Temple Tower Area Above Maze Room": "can_longshot || (can_play_time && can_hookshot) || hookshot_anywhere || climb_anywhere"
+
 "Fire Temple Tower Area Above Maze Room":
   dungeon: Fire
   exits:
     "Fire Temple Maze Room Upper": "true"
     "Fire Temple Maze Room Lower": "true"
     "Fire Temple Tower Above Maze First Room": "true"
+
 "Fire Temple Tower Above Maze First Room":
   dungeon: Fire
   exits:
@@ -285,6 +315,7 @@
     "MQ Fire Temple Wonder Item East Climb First 2": "can_hookshot"
     "MQ Fire Temple Wonder Item East Climb Second 1": "can_hookshot"
     "MQ Fire Temple Wonder Item East Climb Second 2": "can_hookshot"
+
 "Fire Temple Tower Above Maze Burning Block Room":
   dungeon: Fire
   exits:
@@ -295,6 +326,7 @@
     FIRE_MQ_EAST_TOWER_TOP_HOOKSHOT_TARGETS: "can_hammer"
   locations:
     "MQ Fire Temple GS Burning Block": "gs && ((event(FIRE_MQ_EAST_TOWER_TOP_HOOKSHOT_TARGETS) && can_hookshot) || hookshot_anywhere || climb_anywhere)" #TODO: add a trick for getting it with boomerang
+
 "Fire Temple 3F Lava Floor Room After Maze":
   dungeon: Fire
   exits:
@@ -317,6 +349,7 @@
     "MQ Fire Temple 3F Lava Room Near Cage Large Crate": "has_tunic_goron && (can_hookshot || climb_anywhere)" #TODO: trick for adult walking along the edge of cage
     "MQ Fire Temple 3F Lava Room Near Cage Small Crate 1": "has_tunic_goron && (can_hookshot || climb_anywhere)" #TODO: trick for adult walking along the edge of cage
     "MQ Fire Temple 3F Lava Room Near Cage Small Crate 2": "has_tunic_goron && (can_hookshot || climb_anywhere)" #TODO: trick for adult walking along the edge of cage
+
 "Fire Temple 3F Lava Room Ledge Before Fire Walls Hallway":
   dungeon: Fire
   exits:
@@ -325,11 +358,13 @@
   locations:
     "MQ Fire Temple 3F Lava Room High Ledge Large Crate": "has_tunic_goron"
     "MQ Fire Temple 3F Lava Room High Ledge Small Crate": "has_tunic_goron"
+
 "Fire Temple 3F Lava Room Cage Area":
   dungeon: Fire
   exits:
     "Fire Temple 3F Lava Floor Room After Maze": "can_hookshot || climb_anywhere"
     "Fire Temple Inside Maze Narrow Paths Room": "true"
+
 "Fire Temple Inside Maze Narrow Paths Room":
   dungeon: Fire
   exits:
@@ -341,11 +376,13 @@
     "MQ Fire Temple Pot Bridge Above Lava Room 1": "true"
     "MQ Fire Temple Pot Bridge Above Lava Room 2": "true"
     "MQ Fire Temple Pot Bridge Above Lava Room 3": "true"
+
 "Fire Temple 3F Hallway Before Fire Walls":
   dungeon: Fire
   exits:
     "Fire Temple 3F Lava Room Ledge Before Fire Walls Hallway": "true"
     "Fire Temple Fire Walls Room Pillar Side": "true"
+
 "Fire Temple Fire Walls Room Pillar Side":
   dungeon: Fire
   exits:
@@ -364,6 +401,7 @@
   locations:
     "MQ Fire Temple Pot Fire Maze Room Left 1": "true"
     "MQ Fire Temple Pot Fire Maze Room Left 2": "true"
+
 "Fire Temple Fire Walls Room Outside Side Room":
   dungeon: Fire
   exits:
@@ -374,12 +412,14 @@
   locations:
     "MQ Fire Temple Pot Fire Maze Room Right 1": "true"
     "MQ Fire Temple Pot Fire Maze Room Right 2": "true"
+
 "Fire Temple Fire Walls Room Side Room":
   dungeon: Fire
   exits:
     "Fire Temple Fire Walls Room Outside Side Room": "true"
   locations:
     "MQ Fire Temple GS Fire Walls Side Room": "gs && can_damage_skull"
+
 "Fire Temple Fire Walls Middle Hallway Lower":
   dungeon: Fire
   exits:
@@ -388,6 +428,7 @@
     "Fire Temple Fire Walls Middle Hallway Upper": "hookshot_anywhere || climb_anywhere"
   locations:
     "MQ Fire Temple GS Fire Walls Middle": "gs && has_explosives"
+
 "Fire Temple Fire Walls Middle Hallway Upper":
   dungeon: Fire
   exits:
@@ -395,6 +436,7 @@
     "Fire Temple Fire Walls Room Pillar Side": "true"
   events:
     FIRE_MQ_FIRE_WALLS_MIDDLE_ROOM_RUSTY_SWITCH: "can_hammer && (can_hookshot || climb_anywhere)"
+
 "Fire Temple Fire Walls Room Large Fire Wall Side":
   dungeon: Fire
   exits:
@@ -405,6 +447,7 @@
   locations:
     "MQ Fire Temple Pot Fire Maze Room Right 1": "can_boomerang"
     "MQ Fire Temple Pot Fire Maze Room Right 2": "can_boomerang"
+
 "Fire Temple Fire Walls Room Area After Large Fire Wall":
   dungeon: Fire
   exits:
@@ -414,6 +457,7 @@
     "MQ Fire Temple Pot Fire Maze Room Back Right 1": "true"
     "MQ Fire Temple Pot Fire Maze Room Back Right 2": "true"
     "MQ Fire Temple Wonder Item Fire Maze": "can_hookshot"
+
 "Fire Temple Flare Dancer Room After Fire Walls":
   dungeon: Fire
   exits:
@@ -423,6 +467,7 @@
     FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || has_bombchu || can_use_mask_blast || can_hammer || can_hookshot) && (has_weapon || has_sticks || can_hammer)"
   locations:
     "MQ Fire Temple Flare Dancer Key": "event(FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS)" #TODO: trick to get with boomerang
+
 "Fire Temple Tower After Flare Dancer First Room":
   dungeon: Fire
   exits:
@@ -430,6 +475,7 @@
     "Fire Temple Tower After Flare Dancer Pit Room": "small_keys_fire_mq(4)"
   locations:
     "MQ Fire Temple Wonder Item After Flare Dancer": "can_hookshot"
+
 "Fire Temple Tower After Flare Dancer Pit Room":
   dungeon: Fire
   exits:
@@ -441,6 +487,7 @@
     FIRE_MQ_TOWER_AFTER_FLARE_DANCER_HOOKSHOT_TARGETS: "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang" #Many ways to hit crystal switch. Are they even useful in this section?
   locations:
     "MQ Fire Temple Topmost Chest": "is_adult || (scarecrow_hookshot || climb_anywhere || hookshot_anywhere)" #Child can't do it without these.
+
 "Fire Temple Tower After Flare Dancer Area Before Staircase":
   dungeon: Fire
   exits:
@@ -448,6 +495,7 @@
     "Fire Temple Tower After Flare Dancer Staircase Upper": "small_keys_fire_mq(5)"
   events:
     FIRE_MQ_TOWER_AFTER_FLARE_DANCER_CRYSTAL_SWITCH_FROM_BELOW: "event(FIRE_MQ_TOWER_TOP_HAMMER_SWITCH_BEFORE_STAIRCASE) && (has_ranged_weapon || has_bombchu)"
+
 "Fire Temple Tower After Flare Dancer Staircase Upper":
   dungeon: Fire
   exits:
@@ -457,11 +505,13 @@
     FIRE_MQ_STAIRCASE_LOWERED: "can_hammer"
   locations:
     "MQ Fire Temple Wonder Item Staircase": "event(FIRE_MQ_STAIRCASE_LOWERED) && can_hookshot"
+
 "Fire Temple Tower After Flare Dancer Staircase Lower Alcove":
   dungeon: Fire
   exits:
     "Fire Temple Tower After Flare Dancer Staircase Upper": "event(FIRE_MQ_STAIRCASE_LOWERED)"
     "Fire Temple Fire Walls Room High Area After Staircase": "event(FIRE_MQ_STAIRCASE_LOWERED) && can_hookshot"
+
 "Fire Temple Fire Walls Room High Area After Staircase":
   dungeon: Fire
   exits:
