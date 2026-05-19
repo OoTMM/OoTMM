@@ -10,7 +10,7 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
     if (id < ITEM_MM_CUSTOM_MIN)
     {
         LoadIcon(vrom, id, dst, size);
-        if (id == ITEM_MM_BOMB && Config_Flag(CFG_MM_BOMB_BAG_OOT))
+        if (id == ITEM_MM_BOMB && (Config_Flag(CFG_MM_BOMB_BAG_OOT) || Config_Flag(CFG_OOT_BOMB_BAG_MM)))
         {
             hueShift = 50.0f;
         }

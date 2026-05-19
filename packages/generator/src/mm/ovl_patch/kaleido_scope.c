@@ -451,6 +451,15 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
 
 static u32 GetItemTexture(u8 item)
 {
+    if (Config_Flag(CFG_MM_BOMB_BAG_OOT) || Config_Flag(CFG_OOT_BOMB_BAG_MM))
+    {
+        if (item == ITEM_MM_BOMB) {
+            item = ITEM_MM_BOMB_OOT;
+        } else if (item == ITEM_MM_BOMB_OOT) {
+            item = ITEM_MM_BOMB;
+        }
+    }
+
     u32* gItemIcons = (u32*)0x801c1e6c;
     if (item < ITEM_MM_CUSTOM_MIN)
     {
