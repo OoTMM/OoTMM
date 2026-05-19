@@ -4,6 +4,7 @@
     "GLOBAL": "true"
     "Kokiri Forest Near Deku Tree": "true"
     "MQ Deku Tree Lobby": "true"
+
 "MQ Deku Tree Lobby":
   dungeon: DT
   exits:
@@ -19,6 +20,7 @@
     "MQ Deku Tree Grass Entrance Lower 3": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Lower 4": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Lower 5": "can_cut_grass"
+
 "MQ Deku Tree 2nd Floor":
   dungeon: DT
   exits:
@@ -32,16 +34,19 @@
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
     "MQ Deku Tree Main Room 2nd Floor Crate": "true"
+
 "MQ Deku Tree Room Before Compass Room Entry Door":
   dungeon: DT
   exits:
     "MQ Deku Tree 2nd Floor": "true"
     "MQ Deku Tree Room Before Compass Room Door to 2nd Floor": "true"
+
 "MQ Deku Tree Room Before Compass Room Door to 2nd Floor":
   dungeon: DT
   exits:
     "MQ Deku Tree Room Before Compass Room Entry Door": "true"
     "MQ Deku Tree Room Before Compass Room": "true"
+
 "MQ Deku Tree Room Before Compass Room":
   dungeon: DT
   exits:
@@ -60,21 +65,25 @@
     "MQ Deku Tree Grass Room Before Compass 5": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Compass 6": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Compass 7": "can_cut_grass"
+
 "MQ Deku Tree Compass Room Entry Door":
   dungeon: DT
   exits:
     "MQ Deku Tree Room Before Compass Room": "true"
     "MQ Deku Tree Compass Room Exit Door": "event(DEKU_MQ_BEFORE_COMPASS_EYE_SWITCH)"
+
 "MQ Deku Tree Compass Room Exit Door":
   dungeon: DT
   exits:
     "MQ Deku Tree Compass Room Entry Door": "true"
     "MQ Deku Tree MQ Compass Room Entrance": "true"
+
 "MQ Deku Tree MQ Compass Room Entrance":
   dungeon: DT
   exits:
     "MQ Deku Tree Compass Room Exit Door": "true"
     "MQ Deku Tree MQ Compass Room Chest Side": "true"
+
 "MQ Deku Tree MQ Compass Room Chest Side":
   dungeon: DT
   exits:
@@ -86,6 +95,7 @@
     "MQ Deku Tree Grass Compass Room 2": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 3": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 4": "can_cut_grass"
+
 "MQ Deku Tree MQ Compass Room Chest Side Alcove":
   dungeon: DT
   exits:
@@ -93,6 +103,7 @@
   locations:
     "MQ Deku Tree GS Compass Room": "gs && can_collect_distance"
     "MQ Deku Tree Heart Compass Room": "true"
+
 "MQ Deku Tree 3rd Floor":
   dungeon: DT
   exits:
@@ -102,16 +113,19 @@
     "MQ Deku Tree Slingshot Room Entry Door": "has_fire || event(DEKU_MQ_MAIN_TORCH)"
   events:
     DEKU_MQ_MAIN_TORCH: "true"
+
 "MQ Deku Tree Slingshot Room Entry Door":
   dungeon: DT
   exits:
     "MQ Deku Tree 3rd Floor": "true"
     "MQ Deku Tree Slingshot Room Exit Door": "true"
+
 "MQ Deku Tree Slingshot Room Exit Door":
   dungeon: DT
   exits:
     "MQ Deku Tree Slingshot Room Entry Door": "event(DEKU_MQ_SLINGSHOT_ENEMIES)"
     "MQ Deku Tree MQ Slingshot Room": "true"
+
 "MQ Deku Tree MQ Slingshot Room":
   dungeon: DT
   exits:
@@ -129,6 +143,7 @@
     "MQ Deku Tree Grass Slingshot Room Back 2": "can_cut_grass"
     "MQ Deku Tree Slingshot Room Large Crate 1": "true"
     "MQ Deku Tree Slingshot Room Large Crate 2": "true"
+
 "MQ Deku Tree Basement":
   dungeon: DT
   exits:
@@ -144,16 +159,19 @@
     "MQ Deku Tree Grass Basement Lower 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Lower 3": "can_cut_grass"
     "MQ Deku Tree Grass Basement Lower 4": "can_cut_grass"
+
 "MQ Deku Tree Room Before Water Room Entry Door":
   dungeon: DT
   exits:
     "MQ Deku Tree Basement": "true"
     "MQ Deku Tree Room Before Water Room Door to Basement": "event(DEKU_MQ_BASEMENT_EYE_SWITCH)"
+
 "MQ Deku Tree Room Before Water Room Door to Basement":
   dungeon: DT
   exits:
     "MQ Deku Tree Room Before Water Room Entry Door": "event(DEKU_MQ_ROOM_BEFORE_WATER_CLEAR)"
     "MQ Deku Tree Room Before Water Room": "true"
+
 "MQ Deku Tree Room Before Water Room":
   dungeon: DT
   exits:
@@ -167,16 +185,19 @@
     "MQ Deku Tree Grass Room Before Spike 2": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Spike 3": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Spike 4": "can_cut_grass"
+
 "MQ Deku Tree Room Before Water Room Door to Water Room":
   dungeon: DT
   exits:
     "MQ Deku Tree Room Before Water Room": "true"
     "MQ Deku Tree Water Room Door to Room Before Water Room": "event(DEKU_MQ_WATER_PATH_TORCH1)"
+
 "MQ Deku Tree Water Room Door to Room Before Water Room":
   dungeon: DT
   exits:
     "MQ Deku Tree Room Before Water Room Door to Water Room": "true"
     "MQ Deku Tree Water Room Front": "true"
+
 "MQ Deku Tree Water Room Front":
   dungeon: DT
   exits:
@@ -189,6 +210,7 @@
     "MQ Deku Tree Grass Spike Room Front 1": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Front 2": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Front 3": "can_cut_grass"
+
 "MQ Deku Tree Water Room Back":
   dungeon: DT
   exits:
@@ -200,16 +222,19 @@
     "MQ Deku Tree After Water Platform Chest": "can_play_time"
     "MQ Deku Tree Grass Spike Room Back 1": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Back 2": "can_cut_grass"
+
 "MQ Deku Tree Water Room Door to Room After Water Room":
   dungeon: DT
   exits:
     "MQ Deku Tree Water Room Back": "true"
     "MQ Deku Tree Room After Water Room Door to Water Room": "event(MQ_DEKU_WATER_TORCHES)"
+
 "MQ Deku Tree Room After Water Room Door to Water Room":
   dungeon: DT
   exits:
     "MQ Deku Tree Water Room Door to Room After Water Room": "event(DEKU_MQ_ROOM_AFTER_WATER_CLEAR)"
     "MQ Deku Tree Room After Water Room": "true"
+
 "MQ Deku Tree Room After Water Room":
   dungeon: DT
   exits:
@@ -220,16 +245,19 @@
   locations:
     "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass"
     "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass"
+
 "MQ Deku Tree Room After Water Room Door to Gravestone Room":
   dungeon: DT
   exits:
     "MQ Deku Tree Room After Water Room": "true"
     "MQ Deku Tree Gravestone Room Door to Room After Water Room": "event(DEKU_MQ_ROOM_AFTER_WATER_CLEAR)"
+
 "MQ Deku Tree Gravestone Room Door to Room After Water Room":
   dungeon: DT
   exits:
     "MQ Deku Tree Room After Water Room Door to Gravestone Room": "true"
     "MQ Deku Tree MQ Grave Room": "true"
+
 "MQ Deku Tree MQ Grave Room":
   dungeon: DT
   exits:
@@ -251,16 +279,19 @@
     "MQ Deku Tree Wonder Item 2": "can_use_sword_or_sticks"
     "MQ Deku Tree Wonder Item 3": "can_use_sword_or_sticks"
     "MQ Deku Tree Wonder Item 4": "can_use_sword_or_sticks"
+
 "MQ Deku Tree Back Side Room Entry Door":
   dungeon: DT
   exits:
     "MQ Deku Tree MQ Grave Room": "true"
     "MQ Deku Tree Back Side Room Exit Door": "true"
+
 "MQ Deku Tree Back Side Room Exit Door":
   dungeon: DT
   exits:
     "MQ Deku Tree Back Side Room Entry Door": "true"
     "MQ Deku Tree Back Side Room": "true"
+
 "MQ Deku Tree Back Side Room":
   dungeon: DT
   exits:
@@ -273,6 +304,7 @@
     "MQ Deku Tree Grass Back Room 1": "can_cut_grass"
     "MQ Deku Tree Grass Back Room 2": "can_cut_grass"
     "MQ Deku Tree Grass Back Room 3": "can_cut_grass"
+
 "MQ Deku Tree Basement Ledge":
   dungeon: DT
   exits:
@@ -288,6 +320,7 @@
     "MQ Deku Tree Grass Basement Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"
+
 "MQ Deku Tree Pre-Boss Room Water Section":
   dungeon: DT
   exits:
@@ -297,6 +330,7 @@
     "MQ Deku Tree Heart Before Boss 1": "can_swim_or_sink"
     "MQ Deku Tree Heart Before Boss 2": "can_swim_or_sink"
     "MQ Deku Tree Heart Before Boss 3": "can_swim_or_sink"
+
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
@@ -309,6 +343,7 @@
     "MQ Deku Tree Grass Room Before Boss 1": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Boss 2": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Boss 3": "can_cut_grass"
+
 #The below is for later on. Keeping here as a backup.
 #"MQ Deku Tree MQ Compass Room Entrance":
   #dungeon: DT
