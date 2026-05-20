@@ -378,6 +378,16 @@ void Audio_DisplayMusicName(PlayState* play)
     if (!sDisplayMusicNames)
         return;
 
+#if defined(GAME_OOT)
+    /* Don't show music name on the Song of Soaring map screen */
+    if (play->pauseCtx.state >= PAUSE_STATE_OWLWARP_0 && play->pauseCtx.state <= PAUSE_STATE_OWLWARP_6)
+        return;
+#elif defined(GAME_MM)
+    /* Don't show music name on the Song of Soaring map screen */
+    if (play->pauseCtx.state >= 0x13 && play->pauseCtx.state <= 0x19)
+        return;
+#endif
+
     if (!sIsInitialized)
     {
         sIsInitialized = 1;
