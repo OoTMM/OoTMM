@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
+- "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
 - Rename Sun's Song in MM to Sun's Song (MM) to be consistent.
 
 ### Fixed
@@ -38,6 +39,7 @@ All notable changes to this project will be documented in this file.
 - Fixed a lot of broken logic for Woodfall Temple, mostly accounting for Bronze Scale.
 - Ensure the logic for vanilla Ice Cavern Silver Rupees in the Scythe room is sound.
 - Fix logic for Shared Kamaro's Mask.
+- Fix "OOT Kokiri Shop Wonder Item" location incorrectly expecting the Shopkeeper's Soul to obtain.
 - Fix frog game softlocking when playing a custom song.
 
 ## [30.1] - 2026-03-15

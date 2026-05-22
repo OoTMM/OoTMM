@@ -387,7 +387,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_RUPEE_MAGICAL: "Magical Silver Rupee",
   MM_TRANSCENDENT_FAIRY: "Transcendent Fairy",
   OOT_BOTTLE_RUTO_LETTER: "Ruto's Letter",
-  OOT_SCALE: "Progressive Scale (Oot)",
+  OOT_SCALE: "Progressive Scale (OoT)",
   OOT_SHIELD_DEKU: "Deku Shield (OoT)",
   OOT_SHIELD_HYLIAN: "Hylian Shield",
   OOT_SHIELD_MIRROR: "Mirror Shield (OoT)",
