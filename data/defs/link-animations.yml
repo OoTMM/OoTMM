@@ -33,3 +33,33 @@ animations:
     home_game: oot
     header_offset: 0x2C78
     frame_data_offset: 0x12A140
+
+  - name: gPlayerAnim_link_boom_catch
+    home_game: oot
+    header_offset: 0x25F8
+    frame_data_offset: 0x756E0
+
+  - name: gPlayerAnim_link_boom_throwL
+    home_game: oot
+    header_offset: 0x2600
+    frame_data_offset: 0x76AD0
+
+  - name: gPlayerAnim_link_boom_throwR
+    home_game: oot
+    header_offset: 0x2608
+    frame_data_offset: 0x77550
+
+  - name: gPlayerAnim_link_boom_throw_side_walkL
+    home_game: oot
+    header_offset: 0x2618
+    frame_data_offset: 0x77FD0
+
+  - name: gPlayerAnim_link_boom_throw_side_walkR
+    home_game: oot
+    header_offset: 0x2620
+    frame_data_offset: 0x78830
+
+  - name: gPlayerAnim_link_boom_throw_wait2waitR
+    home_game: oot
+    header_offset: 0x2628
+    frame_data_offset: 0x79090

@@ -11,6 +11,7 @@ export const WORLD_FLAGS = [
   'mmPreActivatedOwls',
   'mqDungeons',
   'jpLayouts',
+  'clearStateDungeonsMm',
 ] as const;
 
 export type WorldFlag = typeof WORLD_FLAGS[number];

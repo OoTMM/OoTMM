@@ -5,10 +5,12 @@
     "Ganon Castle Main Room": "event(MQ_GANON_OPEN_MAIN)"
   events:
     MQ_GANON_OPEN_MAIN: "soul_iron_knuckle && soul_armos && soul_bubble && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && (has_ranged_weapon_child || can_use_bow)) || has_explosives_or_hammer)"
+
 "Ganon Castle Spirit Wallmaster":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Ganon Castle Main Room":
   dungeon: Ganon
   exits:
@@ -21,6 +23,7 @@
     "Ganon Castle Shadow Trial Entrance Side": "true"
     "Ganon Castle Stairs": "ganon_barrier"
     "Ganon Castle Fairy Fountain": "has_lens"
+
 "Ganon Castle Fairy Fountain":
   dungeon: Ganon
   exits:
@@ -39,6 +42,7 @@
     "MQ Ganon Castle Fairy Fountain Fairy 6": "true"
     "MQ Ganon Castle Fairy Fountain Fairy 7": "true"
     "MQ Ganon Castle Fairy Fountain Fairy 8": "true"
+
 "Ganon Castle Light Trial Entrance":
   dungeon: Ganon
   exits:
@@ -46,6 +50,7 @@
     "Ganon Castle Light Trial Lullaby Hallway": "event(GANON_MQ_LIGHT_ENEMIES)"
   events:
     GANON_MQ_LIGHT_ENEMIES: "soul_lizalfos_dinolfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || (can_hammer && can_use_sticks))"
+
 "Ganon Castle Light Trial Lullaby Hallway":
   dungeon: Ganon
   exits:
@@ -53,11 +58,13 @@
     "Ganon Castle Light Trial Round Boulder Room Before Flame Walls": "small_keys_ganon(2)"
   locations:
     "MQ Ganon Castle Light Trial Chest": "song_event(0x11)"
+
 "Ganon Castle Light Trial Round Boulder Room Before Flame Walls":
   dungeon: Ganon
   exits:
     "Ganon Castle Light Trial Lullaby Hallway": "small_keys_ganon(2)"
     "Ganon Castle Light Trial Round Boulder Room After Flame Walls": "can_hookshot || climb_anywhere"
+
 "Ganon Castle Light Trial Round Boulder Room After Flame Walls":
   dungeon: Ganon
   exits:
@@ -66,6 +73,7 @@
   locations:
     "MQ Ganon Castle Heart Light 1": "true"
     "MQ Ganon Castle Heart Light 2": "true"
+
 "Ganon Castle Light Trial Ending Room":
   dungeon: Ganon
   exits:
@@ -75,6 +83,7 @@
   locations:
     "MQ Ganon Pot Light End 1": "true"
     "MQ Ganon Pot Light End 2": "true"
+
 "Ganon Castle Forest Trial Entrance":
   dungeon: Ganon
   exits:
@@ -84,6 +93,7 @@
     GANON_MQ_FOREST_ENEMIES: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "MQ Ganon Castle Forest Trial Key": "can_hookshot || can_boomerang || climb_anywhere"
+
 "Ganon Castle Forest Trial Wind Room Starting Side":
   dungeon: Ganon
   exits:
@@ -95,6 +105,7 @@
   locations:
     "MQ Ganon Castle Forest Trial First Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_OPEN_EYE)"
     "MQ Ganon Castle Forest Trial Second Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE)"
+
 "Ganon Castle Forest Trial Wind Room Ending Side":
   dungeon: Ganon
   exits:
@@ -106,6 +117,7 @@
     GANON_MQ_FOREST_SWITCH: "can_play_time || can_play_emptiness"
   locations:
     "MQ Ganon Castle Forest Trial Second Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE)"
+
 "Ganon Castle Forest Trial Ending Room":
   dungeon: Ganon
   exits:
@@ -115,6 +127,7 @@
   locations:
     "MQ Ganon Pot Forest End 1": "true"
     "MQ Ganon Pot Forest End 2": "true"
+
 "Ganon Castle Fire Trial Entrance Ledge":
   dungeon: Ganon
   exits:
@@ -128,6 +141,7 @@
     "MQ Ganon Castle SR Fire Back-Left": "has_tunic_goron_strict"
     "MQ Ganon Castle SR Fire High Above Lava": "has_tunic_goron"
     "MQ Ganon Castle SR Fire Front-Left": "has_tunic_goron_strict"
+
 "Ganon Castle Fire Trial Ending Ledge":
   dungeon: Ganon
   exits:
@@ -139,6 +153,7 @@
     "MQ Ganon Castle SR Fire Back-Left": "longshot_anywhere && has_tunic_goron_strict" #Needs further testing if actually strict.
     "MQ Ganon Castle SR Fire High Above Lava": "longshot_anywhere && has_tunic_goron_strict" #Needs further testing if actually strict.
     "MQ Ganon Castle SR Fire Front-Left": "longshot_anywhere && has_tunic_goron_strict" #Needs further testing if actually strict.
+
 "Ganon Castle Fire Trial Ending Room":
   dungeon: Ganon
   exits:
@@ -148,6 +163,7 @@
   locations:
     "MQ Ganon Pot Fire End 1": "true"
     "MQ Ganon Pot Fire End 2": "true"
+
 "Ganon Castle Water Trial Entrance":
   dungeon: Ganon
   exits:
@@ -174,6 +190,7 @@
     "MQ Ganon Castle Red Ice Water 5": "has_blue_fire"
     "MQ Ganon Castle Red Ice Water 6": "has_blue_fire"
     "MQ Ganon Castle Red Ice Water 7": "has_blue_fire"
+
 "Ganon Castle Water Trial Entrance Room Behind Red Ice":
   dungeon: Ganon
   exits:
@@ -187,6 +204,7 @@
     "MQ Ganon Castle Red Ice Water 5": "has_blue_fire"
     "MQ Ganon Castle Red Ice Water 6": "has_blue_fire"
     "MQ Ganon Castle Red Ice Water 7": "has_blue_fire"
+
 "Ganon Castle Water Trial Silver Rupee Room":
   dungeon: Ganon
   exits:
@@ -204,6 +222,7 @@
     "MQ Ganon Castle Red Ice Block Silver Rupee Room 4": "has_blue_fire"
     "MQ Ganon Castle Red Ice Block Silver Rupee Room 5": "has_blue_fire"
     "MQ Ganon Castle Red Ice Block Silver Rupee Room 6": "has_blue_fire"
+
 "Ganon Castle Water Trial Silver Rupee Room Behind Red Ice":
   dungeon: Ganon
   exits:
@@ -226,6 +245,7 @@
   locations:
     "MQ Ganon Pot Water End 1": "true"
     "MQ Ganon Pot Water End 2": "true"
+
 "Ganon Castle Spirit Trial Entrance":
   dungeon: Ganon
   exits:
@@ -233,6 +253,7 @@
     "Ganon Castle Spirit Trial Sun Room Entrance Side": "event(GANON_MQ_SPIRIT_HAMMER_SWITCH)"
   events:
     GANON_MQ_SPIRIT_HAMMER_SWITCH: "((can_use_bow || can_use_slingshot) && soul_iron_knuckle && can_hammer) || (can_hammer && trick(OOT_HAMMER_WALLS))"
+
 "Ganon Castle Spirit Trial Sun Room Entrance Side":
   dungeon: Ganon
   exits:
@@ -242,6 +263,7 @@
     GANON_MQ_SPIRIT_CRYSTAL: "has_bombchu"
   locations:
       "MQ Ganon Castle Spirit Trial First Chest": "true"
+
 "Ganon Castle Spirit Trial Sun Room Sun Side":
   dungeon: Ganon
   exits:
@@ -259,6 +281,7 @@
     "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "event(GANON_MQ_SPIRIT_ENDING_SUNS)"
     "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "event(GANON_MQ_SPIRIT_ENDING_SUNS)"
     "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "event(GANON_MQ_SPIRIT_ENDING_SUNS)"
+
 "Ganon Castle Spirit Trial Ending Room":
   dungeon: Ganon
   exits:
@@ -268,6 +291,7 @@
   locations:
     "MQ Ganon Pot Spirit End 1": "true"
     "MQ Ganon Pot Spirit End 2": "true"
+
 "Ganon Castle Shadow Trial Entrance Side":
   dungeon: Ganon
   exits:
@@ -282,6 +306,7 @@
     "MQ Ganon Castle SR Shadow Front-Right": "event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
     "MQ Ganon Castle SR Shadow Front-Center": "event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
     "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_ENTRANCE) && event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
+
 "Ganon Castle Shadow Trial Middle Beamos Area 1":
   dungeon: Ganon
   exits:
@@ -297,6 +322,7 @@
     "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1) && (has_lens || longshot_anywhere)"
     "MQ Ganon Castle SR Shadow Front-Right": "has_lens || longshot_anywhere"
     "MQ Ganon Castle SR Shadow Front-Center": "has_lens"
+
 "Ganon Castle Shadow Trial Middle Beamos Area 2":
   dungeon: Ganon
   exits:
@@ -309,12 +335,14 @@
     "MQ Ganon Castle Shadow Trial Switch Chest": "event(GANON_MQ_SHADOW_EYE_CHEST)"
     "MQ Ganon Castle SR Shadow Back-Left": "has_lens || hookshot_anywhere"
     "MQ Ganon Castle SR Shadow Back-Center": "has_lens"
+
 "Ganon Castle Shadow Trial Ending Side":
   dungeon: Ganon
   exits:
     "Ganon Castle Shadow Trial Middle Beamos Area 2": "has_lens || hookshot_anywhere"
     "Ganon Castle Shadow Trial Ending Room": "silver_rupees_ganon_shadow"
     "Ganon Castle Shadow Trial Entrance Side": "climb_anywhere"
+
 "Ganon Castle Shadow Trial Ending Room":
   dungeon: Ganon
   exits:
@@ -324,6 +352,7 @@
   locations:
     "MQ Ganon Pot Shadow End 1": "true"
     "MQ Ganon Pot Shadow End 2": "true"
+
 "Ganon Castle Stairs":
   region: GANON_CASTLE
   exits:

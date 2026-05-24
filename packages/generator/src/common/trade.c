@@ -85,6 +85,11 @@ const u8 kMmGFSHammer[] = {
     ITEM_MM_HAMMER,
 };
 
+const u8 kMmPictoBoom[] = {
+    ITEM_MM_PICTOGRAPH_BOX,
+    ITEM_MM_BOOMERANG,
+};
+
 /* Return value is used to index gVertex */
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
@@ -128,6 +133,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kMmGFSHammer;
         *outTableSize = ARRAY_COUNT(kMmGFSHammer);
         result = 5;
+        break;
+    case ITEM_MM_PICTOGRAPH_BOX:
+        *outFlags = gMmExtraItems.boomPicto;
+        *outTable = kMmPictoBoom;
+        *outTableSize = ARRAY_COUNT(kMmPictoBoom);
+        result = 6;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:

@@ -472,8 +472,9 @@
 #define ITEM_MM_TUNIC_GORON                 0xb3
 #define ITEM_MM_TUNIC_ZORA                  0xb4
 #define ITEM_MM_HAMMER                      0xb5
-#define ITEM_MM_RUTO_LETTER                 0xb6
-#define ITEM_MM_CUSTOM_MAX                  0xb7
+#define ITEM_MM_BOOMERANG                   0xb6
+#define ITEM_MM_RUTO_LETTER                 0xb7
+#define ITEM_MM_CUSTOM_MAX                  0xb8
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 
