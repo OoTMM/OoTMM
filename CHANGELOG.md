@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
 - "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
+- Converted the "Clear State Dungeons (MM)" setting to a "Set" type to allow for random choice.
 
 ### Fixed
 

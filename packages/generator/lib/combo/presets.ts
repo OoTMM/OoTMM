@@ -10,7 +10,10 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   hintPathBoss: true,
   hintPathEndBoss: true,
   hintPathEvents: true,
-  clearStateDungeonsMm: 'both',
+  clearStateDungeonsMm: {
+    type: 'specific',
+    values: ["WF", "GB"]
+  },
   tingleShuffle: 'starting',
   openMaskShop: true,
   hintImportance: true,
@@ -817,7 +820,10 @@ const PRESET_HELL = makeSettings({
 
 const PRESET_BEGINNER = makeSettings({
   autoInvert: 'firstCycle',
-  clearStateDungeonsMm: 'both',
+  clearStateDungeonsMm: {
+    type: 'specific',
+    values: ["WF", "GB"]
+  },
   hintImportance: true,
   tingleShuffle: 'starting',
   mapCompassShuffle: 'starting',
