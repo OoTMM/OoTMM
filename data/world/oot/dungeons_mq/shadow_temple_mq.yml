@@ -4,11 +4,13 @@
     "GLOBAL": "true"
     "Graveyard Upper": "true"
     "Shadow Temple Entrance": "true"
+
 "Shadow Temple Entrance":
   dungeon: Shadow
   exits:
     "Shadow Temple": "true"
     "Shadow Temple Truth Spinner": "has_lens && (can_hookshot || has_hover_boots || glitch_megaflip || climb_anywhere)"
+
 "Shadow Temple Truth Spinner":
   dungeon: Shadow
   exits:
@@ -26,16 +28,19 @@
     "MQ Shadow Temple Truth Spinner Room Small Crate 2": "true"
     "MQ Shadow Temple Truth Spinner Room Small Crate 3": "true"
     "MQ Shadow Temple Truth Spinner Room Small Crate 4": "true"
+
 "Shadow Temple Spinner Room Hallway to Textured Maze":
   dungeon: Shadow
   exits:
     "Shadow Temple Truth Spinner": "(has_lens && has_explosives) || trick(OOT_PASS_COLLISION)"
     "Shadow Temple Textured Maze Room Lens Alcove to Spinner": "small_keys_shadow(6)"
+
 "Shadow Temple Textured Maze Room Lens Alcove to Spinner":
   dungeon: Shadow
   exits:
     "Shadow Temple Spinner Room Hallway to Textured Maze": "small_keys_shadow(6)"
     "Shadow Temple Textured Maze First Half": "has_lens"
+
 "Shadow Temple Textured Maze First Half":
   dungeon: Shadow
   exits:
@@ -47,11 +52,13 @@
     "MQ Shadow Temple Pot Entrance Maze 2": "true"
     "MQ Shadow Temple Flying Pot Entrance Maze 1": "soul_flying_pot"
     "MQ Shadow Temple Flying Pot Entrance Maze 2": "soul_flying_pot"
+
 "Shadow Temple Textured Maze Room Lens Alcove to Side Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Textured Maze First Half": "has_lens"
     "Shadow Temple Textured Maze First Half Side Room": "true"
+
 "Shadow Temple Textured Maze First Half Side Room":
   dungeon: Shadow
   exits:
@@ -62,6 +69,7 @@
     "MQ Shadow Temple Compass Chest": "event(SHADOW_MQ_TEXTURED_MAZE_SIDE_ROOM_CLEAR)"
     "MQ Shadow Temple Pot Compass Room 1": "can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
     "MQ Shadow Temple Pot Compass Room 2": "can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
+
 "Shadow Temple Textured Maze Second Half":
   dungeon: Shadow
   exits:
@@ -72,11 +80,13 @@
   locations:
     "MQ Shadow Temple Flying Pot Entrance Maze 3": "soul_flying_pot"
     "MQ Shadow Temple Flying Pot Entrance Maze 4": "soul_flying_pot"
+
 "Shadow Temple Textured Maze Room Lens Alcove to Dead Hand Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Textured Maze Second Half": "has_lens && event(SHADOW_MQ_TEXTURED_MAZE_LOWER_ICE_BLOCK)"
     "Shadow Temple Dead Hand Room": "true"
+
 "Shadow Temple Dead Hand Room":
   dungeon: Shadow
   exits:
@@ -85,6 +95,7 @@
     SHADOW_MQ_TEXTURED_MAZE_DEAD_HAND_ROOM_CLEAR: "soul_enemy(SOUL_ENEMY_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
   locations:
     "MQ Shadow Temple Hover Boots Chest": "event(SHADOW_MQ_TEXTURED_MAZE_DEAD_HAND_ROOM_CLEAR)"
+
 "Shadow Temple Spinner Room Platform Before First Beamos Fork":
   dungeon: Shadow
   exits:
@@ -92,6 +103,7 @@
     "Shadow Temple First Beamos Fork": "event(SHADOW_MQ_TRUTH_SPINNER)"
   events:
     SHADOW_MQ_SPINNER_ROOM_ICE_PLATFORM: "has_fire"
+
 "Shadow Temple First Beamos Fork":
   dungeon: Shadow
   exits:
@@ -103,11 +115,13 @@
     #SHADOW_MQ_SPINNER_ROOM_ICE_PLATFORM: "can_use_din" #Can light flames with Din's right after the gate. TODO make it a trick.
   locations:
     "MQ Shadow Temple Beamos Big Fairy": "can_play_storms"
+
 "Shadow Temple First Beamos Fork Room Lens Alcove to Gibdo Room":
   dungeon: Shadow
   exits:
     "Shadow Temple First Beamos Fork": "has_lens"
     "Shadow Temple First Beamos Fork Gibdo Room": "true"
+
 "Shadow Temple First Beamos Fork Gibdo Room":
   dungeon: Shadow
   exits:
@@ -116,11 +130,13 @@
     SHADOW_MQ_FIRST_BEAMOS_FORK_GIBDOS_CLEAR: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
   locations:
     "MQ Shadow Temple First Gibdos Chest": "event(SHADOW_MQ_FIRST_BEAMOS_FORK_GIBDOS_CLEAR)"
+
 "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room":
   dungeon: Shadow
   exits:
     "Shadow Temple First Beamos Fork": "has_lens"
     "Shadow Temple Scythe Room": "true"
+
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
@@ -135,6 +151,7 @@
     "MQ Shadow Temple SR Scythe 4": "true"
     "MQ Shadow Temple SR Scythe 5": "true"
     "MQ Shadow Temple Map Chest": "silver_rupees_shadow_scythe"
+
 "Shadow Temple Enclosed Shortcut Area":
   dungeon: Shadow
   exits:
@@ -143,28 +160,33 @@
     "Shadow Temple Area Above Shortcut Enclosure": "climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY)"
   locations:
     "MQ Shadow Temple Boat Passage Chest": "has_lens"
+
 "Shadow Temple First Beamos Fork Room Solid Wall Alcove to Guillotine Hallway":
   dungeon: Shadow
   exits:
     "Shadow Temple First Beamos Fork": "has_explosives || trick(OOT_PASS_COLLISION)"
     "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit": "small_keys_shadow(2)"
+
 "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit":
   dungeon: Shadow
   exits:
     "Shadow Temple First Beamos Fork Room Solid Wall Alcove to Guillotine Hallway": "small_keys_shadow(2)"
     "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "true" #Can avoid all beamos and skultullas.
+
 "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit":
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit": "can_hookshot || climb_anywhere"
     "Shadow Temple Upper Huge Pit Guillotine Section Before Drop": "true" #Can avoid all beamos and skultullas.
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "climb_anywhere"
+
 "Shadow Temple Upper Huge Pit Guillotine Section Before Drop":
   dungeon: Shadow
   exits:
     "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "true"
     "Shadow Temple Upper Huge Pit After Drop": "true"
     "Shadow Temple Lower Huge Pit": "longshot_anywhere" #Can stand on the hookshot target and then make it.
+
 "Shadow Temple Upper Huge Pit After Drop":
   dungeon: Shadow
   exits:
@@ -173,11 +195,13 @@
     "Shadow Temple Lower Huge Pit": "event(SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE) || has_hover_boots || hookshot_anywhere" #Child can *easily* reach with hovers+fast bunny hood without the platforms. Child can also reach with just hovers but its tight. Adult reaches with hovers only no problems.
   events:
     SHADOW_MQ_UPPER_HUGE_PIT_FROZEN_EYE: "has_fire" #If HSW (OoT) is added as a bottle content, maybe can work here because it's below you.
+
 "Shadow Temple Upper Huge Pit East Ledge Before Invisible Scythe Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Huge Pit After Drop": "has_lens"
     "Shadow Temple Invisible Scythe Room": "true"
+
 "Shadow Temple Invisible Scythe Room":
   dungeon: Shadow
   exits:
@@ -197,6 +221,7 @@
     "MQ Shadow Temple Second Silver Rupee Invisible Chest": "silver_rupees_shadow_blades && has_lens"
     "MQ Shadow Temple Heart Invisible Blades 1": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang" #TODO: Add trick for Like-Like boosting onto the block.
     "MQ Shadow Temple Heart Invisible Blades 2": "(can_play_time && is_adult) || hookshot_anywhere || (is_child && climb_anywhere) || can_boomerang" #TODO: Add trick for Like-Like boosting onto the block.
+
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
@@ -213,6 +238,7 @@
     "MQ Shadow Temple SR Pit Midair High": "can_longshot"
     "MQ Shadow Temple SR Pit Right": "true"
     "MQ Shadow Temple SR Pit Front": "true"
+
 "Shadow Temple Falling Spikes Room Entrance":
   dungeon: Shadow
   exits:
@@ -229,12 +255,14 @@
     "MQ Shadow Temple Pot Guillotines Room Upper 1": "(has_lens && has_goron_bracelet && is_adult) || climb_anywhere || hookshot_anywhere"
     "MQ Shadow Temple Pot Guillotines Room Upper 2": "(has_lens && has_goron_bracelet && is_adult) || climb_anywhere || hookshot_anywhere"
     "MQ Shadow Temple Guillotines Room Big Fairy": "can_play_storms" #Where even is this?
+
 "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors":
   dungeon: Shadow
   exits:
     "Shadow Temple Lower Huge Pit": "has_lens && (has_hover_boots || hookshot_anywhere)"
     "Shadow Temple Invisible Spike Floors Room": "small_keys_shadow(3)"
     "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "climb_anywhere"
+
 "Shadow Temple Invisible Spike Floors Room":
   dungeon: Shadow
   exits: #Possibly add the ice platform as a region.
@@ -256,6 +284,7 @@
     "MQ Shadow Temple SR Spikes East Ground": "true"
     "MQ Shadow Temple SR Spikes Northeast Wall": "hookshot_anywhere || (has_lens && can_longshot)" #Can angle it and longshot the ceiling target. TODO: Northeast Wall - Climb anywhere or Hookshot for adult and longshot for child, and the silver rupees (jump from the platforms above the door)
     "MQ Shadow Temple SR Spikes East Wall": "can_hookshot || climb_anywhere"
+
 "Shadow Temple Dual Staircase Stalfos Room":
   dungeon: Shadow
   exits:
@@ -264,6 +293,7 @@
     SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "MQ Shadow Temple Stalfos Room Chest": "event(SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR)"
+
 "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door":
   dungeon: Shadow
   exits: #Possibly add the ice platform as a region.
@@ -275,22 +305,26 @@
     "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
     "MQ Shadow Temple SR Spikes South Midair": "can_hookshot && event(SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_ICE_PLATFORMS)"
     "MQ Shadow Temple SR Spikes Northeast Wall": "has_hover_boots || can_jump_slash || glitch_megaflip"
+
 "Shadow Temple Wind Tunnel First Part":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
     "Shadow Temple Wind Tunnel After Pit Before Drop": "get_past_skultullas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit
+
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
   exits:
     "Shadow Temple Wind Tunnel First Part": "true" #Can use the wind to jump across and the other wind to get past the skultulla.
     "Shadow Temple Wind Tunnel After Drop": "true"
+
 "Shadow Temple Wind Tunnel After Drop":
   dungeon: Shadow
   exits:
     "Shadow Temple Wind Tunnel After Pit Before Drop": "can_hookshot || climb_anywhere"
     "Shadow Temple Wind Tunnel Hint Room": "true"
     "Shadow Temple Wind Tunnel Lens Alcove": "has_lens" #Adult can just make it with a roll jump, and the fan pushes child.
+
 "Shadow Temple Wind Tunnel Hint Room":
   dungeon: Shadow
   exits:
@@ -301,11 +335,13 @@
     "MQ Shadow Temple Wind Hint Chest": "event(SHADOW_MQ_WIND_TUNNEL_HINT_ROOM_REDEADS_CLEAR)"
     "MQ Shadow Temple GS Wind Hint": "gs && collect_gs_on_walls"
     "MQ Shadow Temple Big Fairy After Wind": "can_play_sun"
+
 "Shadow Temple Wind Tunnel Lens Alcove":
   dungeon: Shadow
   exits:
     "Shadow Temple Wind Tunnel After Drop": "has_lens && (is_adult || has_hover_boots || hookshot_anywhere || climb_anywhere)" #Can use climb anywhere to climb onto the fan next to the alcove then jump to the center area.
     "Shadow Temple After Wind Tunnel Gibdos Room": "true"
+
 "Shadow Temple After Wind Tunnel Gibdos Room":
   dungeon: Shadow
   exits:
@@ -321,6 +357,7 @@
     "MQ Shadow Temple Pot Room Before Boat 2": "true" #Gibdos very easy to avoid.
     "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot" #Gibdos very easy to avoid.
     "MQ Shadow Temple Flying Pot Room Before Boat 2": "soul_flying_pot" #Gibdos very easy to avoid.
+
 "Shadow Temple Area Before Boat Ride":
   dungeon: Shadow
   exits:
@@ -331,6 +368,7 @@
     "Shadow Temple On The Boat": "hookshot_anywhere || climb_anywhere" #Climb Anywhere works on the wheel. TODO: Add as trick - "Adult can jump onto the wheel and climb from there."
   events:
     SHADOW_MQ_SHORTCUT_BLOCK_PUSHED: "has_goron_bracelet"
+
 "Shadow Temple Area Above Shortcut Enclosure":
   dungeon: Shadow
   exits:
@@ -340,6 +378,7 @@
   locations:
     "MQ Shadow Temple Heart Shortcut 1": "true"
     "MQ Shadow Temple Heart Shortcut 2": "true"
+
 "Shadow Temple Boarding Boat Landing Area":
   dungeon: Shadow
   exits:
@@ -347,6 +386,7 @@
     "Shadow Temple On The Boat": "true"
     "Shadow Temple Area Above Shortcut Enclosure": "scarecrow_longshot || longshot_anywhere"
     #"Shadow Temple Area After Boat Initial Landing": "false" #Maybe with bomb hovering glitches later.
+
 "Shadow Temple On The Boat": #Made its own region for the Stalfos.
   dungeon: Shadow
   exits:
@@ -356,6 +396,7 @@
     "Shadow Temple Area After Boat Initial Landing": "event(SHADOW_MQ_ACTIVATE_BOAT_RIDE)"
   events:
     SHADOW_MQ_ACTIVATE_BOAT_RIDE: "song_event(0x0c)"
+
 "Shadow Temple Area After Boat Initial Landing":
   dungeon: Shadow
   exits:
@@ -370,6 +411,7 @@
     "MQ Shadow Temple GS After Boat": "gs && (can_hookshot || can_use_bow || can_use_slingshot || can_use_din || has_explosives || (can_boomerang && event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL)))" #Can fall to skultulla after killing it. The angle is a little tricky though, but totally doable. Boomerang, though, is possible without the bridge but should be a trick. TODO: trick: boomerang no bridge
     "MQ Shadow Temple Pot After Boat Before Bridge 1": "true"
     "MQ Shadow Temple Pot After Boat Before Bridge 2": "true"
+
 "Shadow Temple Area After Boat After Bridge":
   dungeon: Shadow
   exits:
@@ -384,6 +426,7 @@
     "MQ Shadow Temple Pot After Boat After Bridge 1": "true"
     "MQ Shadow Temple Pot After Boat After Bridge 2": "true"
     "MQ Shadow Temple Heart Pre-Boss Lower": "is_adult || hookshot_anywhere || climb_anywhere || (can_hookshot && event(SHADOW_MQ_AFTER_BOAT_AFTER_BRIDGE_EYE_SWITCH))" #Child can jump back onto the time block after hookshotting the target.
+
 "Shadow Temple Area After Boat After Bridge High Ledge":
   dungeon: Shadow
   exits:
@@ -394,11 +437,13 @@
   locations:
     "MQ Shadow Temple Heart Pre-Boss Upper 1": "true"
     "MQ Shadow Temple Heart Pre-Boss Upper 2": "true"
+
 "Shadow Temple Invisible Wall Maze Corridor To After Boat":
   dungeon: Shadow
   exits:
     "Shadow Temple Area After Boat Initial Landing": "true"
     "Shadow Temple Invisible Wall Maze Navigation": "has_lens"
+
 "Shadow Temple Invisible Wall Maze Navigation":
   dungeon: Shadow
   exits:
@@ -406,11 +451,13 @@
     "Shadow Temple Invisible Wall Maze Corridor To Dead Hand Bomb Flower Room": "has_lens"
     "Shadow Temple Invisible Wall Maze Corridor To Triple Spinning Pots Room": "has_lens"
     "Shadow Temple Invisible Wall Maze Corridor To Crushing Walls Room": "has_lens"
+
 "Shadow Temple Invisible Wall Maze Corridor To Dead Hand Bomb Flower Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Wall Maze Navigation": "has_lens"
     "Shadow Temple Invisible Wall Maze Dead Hand Bomb Flower Room": "true"
+
 "Shadow Temple Invisible Wall Maze Dead Hand Bomb Flower Room":
   dungeon: Shadow
   exits:
@@ -421,11 +468,13 @@
     "MQ Shadow Temple Hidden Dead Hand Chest": "event(SHADOW_MQ_INVISIBLE_WALL_MAZE_DEAD_HAND_CLEAR)"
     "MQ Shadow Temple Pot Bomb Flowers Room 1": "true"
     "MQ Shadow Temple Pot Bomb Flowers Room 2": "true"
+
 "Shadow Temple Invisible Wall Maze Corridor To Triple Spinning Pots Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Wall Maze Navigation": "has_lens"
     "Shadow Temple Invisible Wall Maze Triple Spinning Pots Room": "true"
+
 "Shadow Temple Invisible Wall Maze Triple Spinning Pots Room":
   dungeon: Shadow
   exits:
@@ -433,11 +482,13 @@
   locations:
     "MQ Shadow Temple Triple Pot Key": "true" #Literally in the open, don't need to blow anything up.
     "MQ Shadow Temple Wonder Item": "can_use_bow"
+
 "Shadow Temple Invisible Wall Maze Corridor To Crushing Walls Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Wall Maze Navigation": "has_lens"
     "Shadow Temple Invisible Wall Maze Crushing Walls Room": "small_keys_shadow(6)"
+
 "Shadow Temple Invisible Wall Maze Crushing Walls Room":
   dungeon: Shadow
   exits:
@@ -448,6 +499,7 @@
     "MQ Shadow Temple Crushing Wall Left Chest": "event(SHADOW_MQ_CRUSHING_WALLS_BURNT)"
     "MQ Shadow Temple Boss Key Chest": "event(SHADOW_MQ_CRUSHING_WALLS_BURNT)"
     "MQ Shadow Temple Pot Boss Key Room": "true"
+
 "Shadow Temple Pre-Boss Room":
   dungeon: Shadow
   exits:
@@ -455,6 +507,7 @@
     "Shadow Temple Pre-Boss": "has_lens && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
   locations:
     "MQ Shadow Temple GS Pre-Boss": "gs && has_lens && (hookshot_anywhere || glitch_megaflip || ((climb_anywhere || has_hover_boots) && (has_ranged_weapon || has_explosives || can_use_din)))" #Can fall down onto it after killing it.
+
 "Shadow Temple Pre-Boss":
   dungeon: Shadow
   exits:

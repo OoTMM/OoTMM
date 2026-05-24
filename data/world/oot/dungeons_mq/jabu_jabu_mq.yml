@@ -15,6 +15,7 @@
     "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
     "MQ Jabu-Jabu Wonder Item Entrance Left Cow": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
     "MQ Jabu-Jabu Wonder Item Entrance Right Cow": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
+
 "Jabu-Jabu Main Elevator Room Upper":
   dungeon: JJ
   exits:
@@ -28,6 +29,7 @@
   locations:
     "MQ Jabu-Jabu Heart 1": "true"
     "MQ Jabu-Jabu Heart 2": "true"
+
 "Jabu-Jabu Main Elevator Room Lower":
   dungeon: JJ
   exits:
@@ -42,6 +44,7 @@
     "MQ Jabu-Jabu Rupee Bottom": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
     "MQ Jabu-Jabu Rupee Middle": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
     "MQ Jabu-Jabu Rupee Top": "has_iron_boots" #Any requirement with swimming is better suited for the other region where these checks are.
+
 "Jabu-Jabu Main Elevator Room Lower Switch Alcove Ledge":
   dungeon: JJ
   exits:
@@ -56,6 +59,7 @@
     "MQ Jabu-Jabu Rupee Bottom": "(can_swim && can_dive_big) || can_boomerang"
     "MQ Jabu-Jabu Rupee Middle": "(can_swim && can_dive_small) || can_boomerang"
     "MQ Jabu-Jabu Rupee Top": "(can_swim && (is_child || can_dive_small)) || can_boomerang"
+
 "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss":
   dungeon: JJ
   exits:
@@ -64,6 +68,7 @@
     "Jabu-Jabu Pre-Boss Room": "event(JABU_TENTACLE_RED)"
   locations:
     "MQ Jabu-Jabu Second Room 1F Chest": "can_use_slingshot"
+
 "Jabu-Jabu Vanilla Ruto Falling Room":
   dungeon: JJ
   exits:
@@ -76,11 +81,13 @@
   locations:
     "MQ Jabu-Jabu Grass Main Room Top 1": "can_cut_grass && has_explosives_or_hammer"
     "MQ Jabu-Jabu Grass Main Room Top 2": "can_cut_grass && has_explosives_or_hammer"
+
 "Jabu-Jabu Vanilla Ruto Falling Room After Wiggling Thing":
   dungeon: JJ
   exits:
     "Jabu-Jabu Vanilla Ruto Falling Room": "can_boomerang"
     "Jabu-Jabu Back Forked Paths": "event(JABU_MQ_BACK_UNLOCK)"
+
 "Jabu-Jabu Ruto Section Bottom Floor":
   dungeon: JJ
   exits:
@@ -94,6 +101,7 @@
     "MQ Jabu-Jabu Grass Main Room Bottom 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 2": "can_cut_grass"
     "MQ Jabu-Jabu Grass Main Room Bottom 3": "can_cut_grass"
+
 "Jabu Jabu Basement Loop to Main Elevator West Side":
   dungeon: JJ
   exits:
@@ -104,6 +112,7 @@
   locations:
     "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
     "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
+
 "Jabu Jabu Basement Loop to Main Elevator East Side":
   dungeon: JJ
   exits:
@@ -118,6 +127,7 @@
     "MQ Jabu-Jabu Grass Boomerang Room": "can_cut_grass"
     "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
     "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
+
 "Jabu-Jabu Basement Ledge Before Big Octo":
   dungeon: JJ
   exits:
@@ -130,11 +140,13 @@
     "MQ Jabu-Jabu Wonder Item Basement Left Cow 1": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Left Cow 2": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Left Cow 3": "can_use_slingshot"
+
 "Jabu-Jabu Basement Ledge Before Big Octo After Green Tentacle":
   dungeon: JJ
   exits:
     "Jabu-Jabu Basement Ledge Before Big Octo": "event(JABU_TENTACLE_GREEN)" #This tentacle can block in door rando, so it needs its own region.
     "Jabu-Jabu Big Octo Room": "true"
+
 "Jabu-Jabu Big Octo Room":
   dungeon: JJ
   exits:
@@ -142,6 +154,7 @@
     "Jabu-Jabu Above Big Octo Fight": "event(JABU_BIG_OCTO)"
   events:
     JABU_BIG_OCTO: "soul_octorok && (can_use_sticks || has_weapon) && soul_ruto"
+
 "Jabu-Jabu Above Big Octo Fight":
   dungeon: JJ
   exits:
@@ -150,6 +163,7 @@
     "MQ Jabu-Jabu Grass Big Octo Top 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Big Octo Top 2": "can_cut_grass"
     "MQ Jabu-Jabu Wonder Item After Big Octo": "can_use_slingshot"
+
 "Jabu-Jabu Room After Above Big Octo":
   dungeon: JJ
   exits:
@@ -163,6 +177,7 @@
     "MQ Jabu-Jabu Wonder Item Platforms Cow": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
     "MQ Jabu-Jabu Room After Above Big Octo Small Crate 1": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
     "MQ Jabu-Jabu Room After Above Big Octo Small Crate 2": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
+
 "Jabu-Jabu Main Elevator Room High Ledge":
   dungeon: JJ
   exits:
@@ -171,6 +186,7 @@
     "Jabu-Jabu Main Elevator Room Lower": "true"
   events:
     JABU_MQ_LOWER_BIG_OCTO_PLATFORM: "true"
+
 "Jabu-Jabu Back Forked Paths":
   dungeon: JJ
   exits:
@@ -186,6 +202,7 @@
   locations:
     "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 1": "true"
     "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 2": "true"
+
 "Jabu-Jabu Back Forked Paths Center After Rocks":
   dungeon: JJ
   exits:
@@ -193,12 +210,14 @@
     "Jabu-Jabu Back Forked Paths Center Room": "event(JABU_MQ_BACK_CENTER_SWITCH)"
   events:
     JABU_MQ_BACK_CENTER_SWITCH: "can_play_elegy" #Event is split up because of the rocks.
+
 "Jabu-Jabu Back Forked Paths Center Room":
   dungeon: JJ
   exits:
     "Jabu-Jabu Back Forked Paths Center After Rocks": "true"
   events:
     JABU_TENTACLE_RED: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+
 "Jabu-Jabu Back Forked Paths Right 1":
   dungeon: JJ
   exits:
@@ -219,29 +238,34 @@
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1": "has_explosives"
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2": "has_explosives"
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3": "has_explosives"
+
 "Jabu-Jabu Back Forked Paths After Right 2 Web":
   dungeon: JJ
   exits:
     "Jabu-Jabu Back Forked Paths": "true" #One-sided collision on the web
     "Jabu-Jabu Back Forked Paths Right 2": "true"
+
 "Jabu-Jabu Back Forked Paths Right 2":
   dungeon: JJ
   exits:
     "Jabu-Jabu Back Forked Paths After Right 2 Web": "true"
   events:
     JABU_TENTACLE_BLUE: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+
 "Jabu-Jabu Back Forked Paths Left 1":
   dungeon: JJ
   exits:
     "Jabu-Jabu Back Forked Paths": "true"
   events:
     JABU_TENTACLE_GREEN: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+
 "Jabu-Jabu Back Forked Paths Left 2":
   dungeon: JJ
   exits:
     "Jabu-Jabu Back Forked Paths": "true"
   locations:
     "MQ Jabu-Jabu GS Back": "gs && ((climb_anywhere && (can_hammer || can_use_mask_blast)) || (has_explosives && can_collect_distance))"
+
 "Jabu-Jabu Basement Side Room Entrance Side":
   dungeon: JJ
   exits:
@@ -252,6 +276,7 @@
     JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
   locations:
     "MQ Jabu-Jabu GS Basement Side Room": "gs && has_fire_arrows && can_longshot"
+
 "Jabu-Jabu Basement Side Room GS Side":
   dungeon: JJ
   exits:
@@ -261,6 +286,7 @@
     JABU_MQ_BASEMENT_SIDE_BUTTON: "can_swim || can_dive_small" #Listed here for action shuffle
   locations:
     "MQ Jabu-Jabu GS Basement Side Room": "gs && (can_collect_distance || (climb_anywhere && can_damage_skull))"
+
 "Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:

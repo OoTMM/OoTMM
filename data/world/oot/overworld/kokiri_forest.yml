@@ -174,6 +174,8 @@
     "GLOBAL": "true"
     "Kokiri Forest": "true"
     "Kokiri Shop Items": "soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+  locations:
+    "Kokiri Shop Wonder Item": "true"
 
 "Kokiri Shop Items":
   region: ENTRANCE
@@ -187,7 +189,6 @@
     "Kokiri Shop Item 6": "shop_price(0x05)"
     "Kokiri Shop Item 7": "shop_price(0x06)"
     "Kokiri Shop Item 8": "shop_price(0x07)"
-    "Kokiri Shop Wonder Item": "true"
 
 "Mido's House":
   region: ENTRANCE

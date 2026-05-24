@@ -6,6 +6,7 @@
     "Ice Cavern Room After Entrance Boulder": "true"
   locations:
     "MQ Ice Cavern Pot Entrance": "true"
+
 "Ice Cavern Room After Entrance Boulder":
   dungeon: IC
   exits:
@@ -17,6 +18,7 @@
   locations:
     "MQ Ice Cavern Icicle Entrance 1": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Entrance 2": "break_icicle_ice_cavern"
+
 "Ice Cavern After Initial Ice Block":
   dungeon: IC
   exits:
@@ -30,6 +32,7 @@
     "MQ Ice Cavern Icicle Before Main Room 3": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Before Main Room 4": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Before Main Room 5": "break_icicle_ice_cavern"
+
 "Ice Cavern Main Room":
   dungeon: IC
   exits:
@@ -55,6 +58,7 @@
     "MQ Ice Cavern Red Ice Main Room 4": "has_blue_fire"
     "MQ Ice Cavern Red Ice Main Room 5": "has_blue_fire"
     "MQ Ice Cavern Red Ice Main Room 6": "has_blue_fire"
+
 "Ice Cavern Map Room":
   dungeon: IC
   exits:
@@ -76,6 +80,7 @@
     "MQ Ice Cavern Icicle Map Room 8": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Map Room 9": "break_icicle_ice_cavern"
     "MQ Ice Cavern Red Ice Map Room": "has_blue_fire"
+
 "Ice Cavern Compass Room":
   dungeon: IC
   exits:
@@ -93,6 +98,7 @@
     "MQ Ice Cavern Icicle Compass Room 3": "break_icicle_ice_cavern"
     "MQ Ice Cavern Icicle Compass Room 4": "break_icicle_ice_cavern"
     "MQ Ice Cavern Red Ice Compass Room": "has_blue_fire"
+
 "Ice Cavern Vanilla Push Block Room":
   dungeon: IC
   exits:
@@ -107,12 +113,14 @@
     "MQ Ice Cavern Red Ice Block Room 1": "has_blue_fire"
     "MQ Ice Cavern Red Ice Block Room 2": "has_blue_fire"
     "MQ Ice Cavern Red Ice Block Room 3": "has_blue_fire"
+
 "Ice Cavern Vanilla Push Block Room Scarecrow Ledge":
   dungeon: IC
   exits:
     "Ice Cavern Vanilla Push Block Room": "true"
   locations:
     "MQ Ice Cavern GS Scarecrow": "gs && can_damage_skull"
+
 "Ice Cavern Past Red Ice Before Shiek":
   dungeon: IC
   exits:
@@ -121,6 +129,7 @@
   locations:
     "MQ Ice Cavern Pot Final Corridor 1": "true"
     "MQ Ice Cavern Pot Final Corridor 2": "true"
+
 "Ice Cavern Serenade Room":
   dungeon: IC
   exits:
@@ -131,16 +140,19 @@
   locations:
     "MQ Ice Cavern Iron Boots": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
     "MQ Ice Cavern Sheik Song": "event(ICE_MQ_FINAL_ROOM_CLEAR) && soul_npc(SOUL_NPC_SHEIK)"
+
 "Ice Cavern Serenade Room Inside Pit of Water":
   dungeon: IC
   exits:
     "Ice Cavern Serenade Room": "can_swim" #Might be able to use irons + hookshot anywhere too, rather than needing to float.
     "Ice Cavern Ledge After Shiek Water Section": "has_iron_boots"
+
 "Ice Cavern Ledge After Shiek Water Section":
   dungeon: IC
   exits:
     "Ice Cavern Serenade Room Inside Pit of Water": "has_iron_boots"
     "Ice Cavern Ledge After Shiek": "can_swim_or_sink"
+
 "Ice Cavern Ledge After Shiek":
   dungeon: IC
   exits:
