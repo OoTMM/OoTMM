@@ -463,7 +463,7 @@ typedef struct
     u32 goldDust:1;
     u32 hammerGFS:2;
     u32 boomPicto:2;
-    u32 unused:25;
+    u32 unused:23;
 }
 MmExtraItems;
 
