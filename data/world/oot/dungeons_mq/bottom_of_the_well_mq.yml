@@ -4,23 +4,28 @@
     "GLOBAL": "true"
     "Kakariko Well": "true"
     "Bottom of the Well Entrance": "true"
+
 "Bottom of the Well Entrance":
   dungeon: BotW
   exits:
     "Bottom of the Well": "true"
     "Bottom of the Well Main": "is_child"
+
 "Bottom of the Well Wallmaster Main":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Bottom of the Well Wallmaster Basement":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Bottom of the Well Wallmaster Pit":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Bottom of the Well Main":
   dungeon: BotW
   exits:
@@ -47,6 +52,7 @@
     "MQ Bottom of the Well Wonder Item Main Room Right 2": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Main Room Right 3": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Main Room Right 4": "can_use_slingshot"
+
 "Bottom of the Well Main Room Center Switch Corner":
   dungeon: BotW
   exits:
@@ -55,6 +61,7 @@
     "Bottom of the Well Basement": "true"
   events:
     BOTW_CENTER_WEST_TORCH: "true"
+
 "Bottom of the Well Main Room Center":
   dungeon: BotW
   exits:
@@ -72,6 +79,7 @@
     "MQ Bottom of the Well Pot Lobby Cage 2": "true"
     "MQ Bottom of the Well Pot Lobby Cage 3": "true"
     "MQ Bottom of the Well Lobby Cage Big Fairy": "can_play_sun"
+
 "Bottom of the Well Basement":
   dungeon: BotW
   exits:
@@ -85,12 +93,14 @@
     "MQ Bottom of the Well Heart Basement 1": "true"
     "MQ Bottom of the Well Heart Basement 2": "true"
     "MQ Bottom of the Well Heart Basement 3": "true"
+
 "Bottom of the Well West Center Room":
   dungeon: BotW
   exits:
     "Bottom of the Well Main Room Center": "true"
   locations:
     "MQ Bottom of the Well GS West Middle Room": "gs && can_damage_skull"
+
 "Bottom of the Well East Center Room":
   dungeon: BotW
   exits:
@@ -104,6 +114,7 @@
     "MQ Bottom of the Well Wonder Item Side Room 2": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Side Room 3": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Side Room 4": "can_use_slingshot"
+
 "Bottom of the Well Basement Switch Ledge":
   dungeon: BotW
   exits:
@@ -111,6 +122,7 @@
     "Bottom of the Well Main Room Center": "event(BOTW_MQ_GATE_FROM_SWITCH) && climb_anywhere && hookshot_anywhere"
   events:
     BOTW_MQ_REDEAD_CHEST: "true"
+
 "Bottom of the Well Coffin Room":
   dungeon: BotW
   exits:
@@ -119,11 +131,13 @@
     "MQ Bottom of the Well GS Coffin Room": "gs && can_damage_skull"
     "MQ Bottom of the Well Heart Coffin 1": "has_fire_or_sticks"
     "MQ Bottom of the Well Heart Coffin 2": "has_fire_or_sticks"
+
 "Bottom of the Well Before Dead Hand":
   dungeon: BotW
   exits:
     "Bottom of the Well Main": "event(BOTW_MQ_DRAIN_WATER) && is_child"
     "Bottom of the Well Dead Hand Room": "true"
+
 "Bottom of the Well Dead Hand Room":
   dungeon: BotW
   exits:
@@ -135,17 +149,20 @@
     "MQ Bottom of the Well Grass Dead-Hand 2": "can_cut_grass"
     "MQ Bottom of the Well Grass Dead-Hand 3": "can_cut_grass"
     "MQ Bottom of the Well Grass Dead-Hand 4": "can_cut_grass"
+
 "Bottom of the Well Main Side Room Before Pit":
   dungeon: BotW
   exits:
     "Bottom of the Well Main": "is_child"
     "Bottom of the Well Pit Before Cage": "can_hit_triggers_distance || can_boomerang || has_explosives || can_hookshot"
+
 "Bottom of the Well Pit Before Cage":
   dungeon: BotW
   exits:
     "Bottom of the Well Main Side Room Before Pit": "true"
     "Bottom of the Well Cage": "small_keys_botw(2)"
     "Bottom of the Well Wallmaster Pit": "soul_wallmaster"
+
 "Bottom of the Well Cage":
   dungeon: BotW
   exits:
