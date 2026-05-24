@@ -271,6 +271,18 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_HAMMER', ...editor.build() };
   }
 
+  private async makeEqBoomerangFlight(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const gameplay_keep = await this.getFile('oot', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, gameplay_keep);
+
+    const b = 0x0400c808;
+    let ms = editor.listData(b)!;
+
+    editor.submitList(ms);
+    return { name: 'EQ_BOOMERANG_FLIGHT', ...editor.build() };
+  }
+
   private async makeEqOcarinaFairy(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const obj = await this.getFile('oot', 'objects/object_link_child');
@@ -396,6 +408,7 @@ export class CustomObjectsBuilder {
       await this.makeEqBiggoronSword(),
       await this.makeEqBiggoronSwordBroken(),
       await this.makeEqHammer(),
+      await this.makeEqBoomerangFlight(),
       await this.makeEqShieldDeku(),
       await this.makeEqShieldMirror(),
       await this.makeEqSheathShieldHylianChild(),

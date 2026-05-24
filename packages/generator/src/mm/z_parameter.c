@@ -38,6 +38,9 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_HAMMER:
             id = ITEM_OOT_HAMMER;
             break;
+        case ITEM_MM_BOOMERANG:
+            id = ITEM_OOT_BOOMERANG;
+            break;
         case ITEM_MM_RUTO_LETTER:
             id = ITEM_OOT_RUTO_LETTER;
             break;

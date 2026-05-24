@@ -3,8 +3,12 @@ __osRestoreInt = 0x80091ad0;
 
 sFlashromMesgQueue = 0x801fbe10;
 
-
+Collider_UpdatePlayerWeapon = 0x80126440;
 _Interface_Update = 0x801210e0;
+
+CollisionCheck_SpawnShieldParticlesMetal = 0x800e8668;
+Collider_InitQuad = 0x800e1e18;
+Collider_SetQuad = 0x800e1f20;
 
 bzero = 0x80089630;
 InitDmaManager = 0x80080d0c;
@@ -628,7 +632,6 @@ EffectSsBlast_SpawnWhiteShockwave = 0x800b1b10;
 Matrix_MultVecY = 0x80181bc4;
 func_800B12F0 = 0x800b12f0;
 WaterBox_GetSurface1 = 0x800ca1ac;
-Actor_WorldYawTowardActor = 0x800b6cd4;
 Rumble_Request = 0x8013ece0;
 func_800B0DE0 = 0x800b0de0;
 Matrix_Finalize = 0x80181a40;
@@ -651,12 +654,18 @@ Audio_RestorePrevBgm = 0x801a2ed8;
 Actor_MoveWithoutGravity = 0x800b6b24;
 Actor_WorldYawTowardActor = 0x800b6cd4;
 Actor_WorldYawTowardPoint = 0x800b6d2c;
+Actor_WorldPitchTowardPoint = 0x800b6da8;
 BgCheck_EntityLineTest1 = 0x800c55c4;
 Actor_WorldDistXZToActor = 0x800b6e1c;
+Player_IsHoldingHookshot = 0x801240c8;
+Camera_CheckValidMode = 0x800df86c;
+AnimTaskQueue_AddCopy = 0x80135a28;
+Player_CheckHostileLockOn = 0x80123420;
 
 Play_EnableMotionBlur = 0x8016566c;
 Play_SetCameraFov = 0x80169940;
 Play_DisableMotionBlur = 0x80165690;
+PlayerAnimation_PlayLoop = 0x80136650;
 
 Matrix_Pop = 0x801801cc;
 Matrix_Push = 0x8018019c;

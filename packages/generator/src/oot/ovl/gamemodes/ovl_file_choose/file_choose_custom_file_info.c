@@ -704,7 +704,7 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     x = startX;
     y += ICON_SIZE;
     x += drawItemIcon(list, end, x, y, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.info.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
-    x += drawItemIcon(list, end, x, y, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,        gMmSave.info.inventory.items[ITS_MM_PICTOBOX] == ITEM_MM_PICTOGRAPH_BOX);
+    x += drawItemIcon(list, end, x, y, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,     gMmExtraItems.boomPicto & 1);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_LENS,                            gMmSave.info.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
     x += drawItemIcon(list, end, x, y, iconHookshot,                             gMmExtraItems.hookshot);
     x += drawItemIcon(list, end, x, y, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);

@@ -107,15 +107,16 @@
 #define IA_OOT_SONG_EMPTINESS   0x61
 #define IA_OOT_SWORD_EXTRA      0x62
 #define IA_MM_GFS_HAMMER        0x63
-#define IA_MM_STICK_UPGRADE     0x64
-#define IA_MM_NUT_UPGRADE       0x65
-#define IA_MM_STONE_AGONY       0x66
-#define IA_OOT_SPIN_UPGRADE     0x67
-#define IA_TRAP                 0x68
-#define IA_SONG_NOTE            0x69
-#define IA_TRANSCENDENT_FAIRY   0x6a
-#define IA_OOT_PLATINUM_TOKEN   0x6b
-#define IA_MM_PLATINUM_TOKEN    0x6c
+#define IA_MM_PICTO_BOOM        0x64
+#define IA_MM_STICK_UPGRADE     0x65
+#define IA_MM_NUT_UPGRADE       0x66
+#define IA_MM_STONE_AGONY       0x67
+#define IA_OOT_SPIN_UPGRADE     0x68
+#define IA_TRAP                 0x69
+#define IA_SONG_NOTE            0x6a
+#define IA_TRANSCENDENT_FAIRY   0x6b
+#define IA_OOT_PLATINUM_TOKEN   0x6c
+#define IA_MM_PLATINUM_TOKEN    0x6d
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -209,7 +210,7 @@ extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 extern const u8 kMmGFSHammer[];
-
+extern const u8 kMmPictoBoom[];
 void comboSyncItems(void);
 
 int isSlotEquippedOot(OotItemEquips* equips, int slot);

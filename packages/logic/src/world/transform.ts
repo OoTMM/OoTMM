@@ -301,6 +301,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_SCALE,
   Items.SHARED_STRENGTH,
   Items.SHARED_HAMMER,
+  Items.SHARED_BOOMERANG,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -1046,6 +1047,12 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_HAMMER, Items.SHARED_HAMMER);
     } else if (settings.hammerMm) {
       this.addItem(Items.MM_HAMMER);
+    }
+
+    if (settings.sharedBoomerang) {
+      this.replaceItem(Items.OOT_BOOMERANG, Items.SHARED_BOOMERANG);
+    } else if (settings.boomerangMm) {
+      this.addItem(Items.MM_BOOMERANG);
     }
 
     if (settings.sharedStoneAgony) {

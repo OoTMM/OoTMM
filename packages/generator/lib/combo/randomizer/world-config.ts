@@ -228,6 +228,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_WELL_OPEN: settings.beneathWell === 'open',
     MM_HAMMER: settings.hammerMm,
     SHARED_HAMMER: settings.sharedHammer,
+    MM_BOOMERANG: settings.boomerangMm,
+    SHARED_BOOMERANG: settings.sharedBoomerang,
     MM_UPGRADES_STICKS_NUTS: settings.sticksNutsUpgradesMm,
     OOT_SHUFFLE_EGGS: settings.eggShuffle,
     MM_STONE_OF_AGONY: settings.stoneAgonyMm,
