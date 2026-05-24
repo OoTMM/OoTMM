@@ -67,12 +67,7 @@ static const char* getSectionName(State* state, const char* baseName, int rel)
 {
     static char buffer[0x100];
 
-    buffer[0] = 0;
-    if (rel)
-        strcat(buffer, ".rel");
-    strcat(buffer, ".");
-    strcat(buffer, state->ovlName);
-    strcat(buffer, baseName);
+    snprintf(buffer, sizeof(buffer), "%s.%s%s", rel ? ".rel" : "", state->ovlName, baseName);
 
     return buffer;
 }
@@ -135,6 +130,11 @@ static int loadSectionStringTable(State* state)
     shdr.sh_offset = eswap32(shdr.sh_offset);
 
     /* Read the shstrtab */
+    if (shdr.sh_size == 0xFFFFFFFFu)
+    {
+        fprintf(stderr, "Error: shstrtab size overflow\n");
+        return 1;
+    }
     shstrtab = malloc(shdr.sh_size + 1);
     if (shstrtab == NULL)
     {
