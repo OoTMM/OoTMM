@@ -505,10 +505,10 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 7) * 2];
+static Vtx gVertexBufs[(4 * 8) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[7] = {
+static Vtx* gVertex[8] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
@@ -516,6 +516,7 @@ static Vtx* gVertex[7] = {
     &gVertexBufs[(4 * 4) * 2],
     &gVertexBufs[(4 * 5) * 2],
     &gVertexBufs[(4 * 6) * 2],
+    &gVertexBufs[(4 * 7) * 2],
 };
 
 static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
