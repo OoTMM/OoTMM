@@ -482,16 +482,17 @@
 #define ITEM_MM_TUNIC_GORON                 0xb3
 #define ITEM_MM_TUNIC_ZORA                  0xb4
 #define ITEM_MM_HAMMER                      0xb5
-#define ITEM_MM_RUTO_LETTER                 0xb6
-#define ITEM_MM_BOMB_OOT                    0xb7
-#define ITEM_MM_BOMB_BAG_OOT                0xb8
-#define ITEM_MM_BOMB_BAG2_OOT               0xb9
-#define ITEM_MM_BOMB_BAG3_OOT               0xba
-#define ITEM_MM_BOMBS_OOT_5                 0xbb
-#define ITEM_MM_BOMBS_OOT_10                0xbc
-#define ITEM_MM_BOMBS_OOT_20                0xbd
-#define ITEM_MM_BOMBS_OOT_30                0xbe
-#define ITEM_MM_CUSTOM_MAX                  0xbf
+#define ITEM_MM_BOOMERANG                   0xb6
+#define ITEM_MM_RUTO_LETTER                 0xb7
+#define ITEM_MM_BOMB_OOT                    0xb8
+#define ITEM_MM_BOMB_BAG_OOT                0xb9
+#define ITEM_MM_BOMB_BAG2_OOT               0xba
+#define ITEM_MM_BOMB_BAG3_OOT               0xbb
+#define ITEM_MM_BOMBS_OOT_5                 0xbc
+#define ITEM_MM_BOMBS_OOT_10                0xbd
+#define ITEM_MM_BOMBS_OOT_20                0xbe
+#define ITEM_MM_BOMBS_OOT_30                0xbf
+#define ITEM_MM_CUSTOM_MAX                  0xc0
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 

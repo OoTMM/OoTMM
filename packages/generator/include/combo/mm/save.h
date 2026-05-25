@@ -462,9 +462,10 @@ typedef struct
     u32 ocarina:2;
     u32 goldDust:1;
     u32 hammerGFS:2;
+    u32 boomPicto:2;
     u32 bombSlot:2;
     u32 ootBombBagUpgrade:2;
-    u32 unused:21;
+    u32 unused:19;
 }
 MmExtraItems;
 

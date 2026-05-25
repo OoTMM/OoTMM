@@ -245,5 +245,6 @@ s32 Collider_InitTris(PlayState* play, ColliderTris* tris);
 #endif
 
 DynaPolyActor* DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);
+int Collider_UpdatePlayerWeapon(PlayState* play, ColliderQuad* collider, WeaponInfo* weaponInfo, Vec3f* newTip, Vec3f* newBase);
 
 #endif

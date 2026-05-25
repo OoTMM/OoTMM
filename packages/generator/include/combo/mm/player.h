@@ -722,4 +722,6 @@ typedef struct AttackAnimInfo {
 #define PLAYER_STATE3_MM_START_CHANGING_HELD_ITEM   (1 << 30)
 #define PLAYER_STATE3_MM_HOSTILE_LOCK_ON   (1 << 31)
 
+int Player_IsHoldingHookshot(Player*);
+
 #endif

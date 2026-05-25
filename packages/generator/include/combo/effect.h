@@ -68,6 +68,17 @@ void EffectSsGSpk_SpawnFuse(PlayState* play, Actor* actor, Vec3f* pos, Vec3f* ve
 void EffectSsBomb2_SpawnFade(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel);
 void EffectSsBomb2_SpawnLayered(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep);
 
+typedef struct EffectBlureInit1 {
+    /* 0x000 */ char unk_00[0x184];
+    /* 0x184 */ u8 p1StartColor[4];
+    /* 0x188 */ u8 p2StartColor[4];
+    /* 0x18C */ u8 p1EndColor[4];
+    /* 0x190 */ u8 p2EndColor[4];
+    /* 0x194 */ s32 elemDuration;
+    /* 0x198 */ s32 unkFlag;
+    /* 0x19C */ s32 calcMode;
+} EffectBlureInit1;
+
 #if defined(GAME_MM) // TODO: Move elsewhere
 
 void EffectSsDeadDb_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* prim, Color_RGBA8* env, s16 scale, s16 scaleStep, s32 life);
@@ -123,17 +134,6 @@ void func_800AE5A0(PlayState* play); // FIXME eff_ss_dead
 #else
 
 #define DEADSOUND_REPEAT_MODE_OFF 1
-
-typedef struct EffectBlureInit1 {
-    /* 0x000 */ char unk_00[0x184];
-    /* 0x184 */ u8 p1StartColor[4];
-    /* 0x188 */ u8 p2StartColor[4];
-    /* 0x18C */ u8 p1EndColor[4];
-    /* 0x190 */ u8 p2EndColor[4];
-    /* 0x194 */ s32 elemDuration;
-    /* 0x198 */ s32 unkFlag;
-    /* 0x19C */ s32 calcMode;
-} EffectBlureInit1;
 
 typedef enum EffectType {
     /* 0x00 */ EFFECT_SPARK,

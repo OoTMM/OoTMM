@@ -582,6 +582,7 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.hookshot = 3;
     gMmExtraItems.ocarina = 3;
     gMmExtraItems.hammerGFS = 3;
+    gMmExtraItems.boomPicto = 3;
     gCustomSave.ootSongs.value = 0xff;
     gMmExtraItems.bombSlot = 0b11;
     gMmExtraItems.ootBombBagUpgrade = 1;

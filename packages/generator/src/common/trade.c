@@ -91,6 +91,11 @@ const u8 kMmGFSHammer[] = {
     ITEM_MM_HAMMER,
 };
 
+const u8 kMmPictoBoom[] = {
+    ITEM_MM_PICTOGRAPH_BOX,
+    ITEM_MM_BOOMERANG,
+};
+
 const u8 kMmBomb[] = {
     ITEM_MM_BOMB,
     ITEM_MM_BOMB_OOT,
@@ -140,11 +145,17 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTableSize = ARRAY_COUNT(kMmGFSHammer);
         result = 5;
         break;
+    case ITEM_MM_PICTOGRAPH_BOX:
+        *outFlags = gMmExtraItems.boomPicto;
+        *outTable = kMmPictoBoom;
+        *outTableSize = ARRAY_COUNT(kMmPictoBoom);
+        result = 6;
+        break;
     case ITS_MM_BOMBS:
         *outFlags = gMmExtraItems.bombSlot;
         *outTable = kMmBomb;
         *outTableSize = ARRAY_COUNT(kMmBomb);
-        result = 6;
+        result = 7;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:

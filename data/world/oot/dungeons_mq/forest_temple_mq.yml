@@ -4,14 +4,17 @@
     "GLOBAL": "true"
     "Sacred Meadow Forest Platform": "true"
     "Forest Temple Entrance Room": "true"
+
 "Forest Temple Wallmaster West":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Forest Temple Wallmaster East":
   region: BUFFER_DELAYED
   exits:
     "VOID": "true"
+
 "Forest Temple Entrance Room":
   dungeon: Forest
   exits: #Maybe make the upper branches where the event takes place its own region?
@@ -21,16 +24,19 @@
     FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH: "can_longshot || climb_anywhere || (has_nuts || can_hit_triggers_distance || can_hookshot || has_hover_boots || can_use_din || has_bomb_bag || can_use_mask_stone || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))))" #Many ways to deal with the Skulltula in the way.
   locations:
     "MQ Forest Temple First Room Chest": "event(FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH)"
+
 "Forest Temple Initial Hallway Front":
   dungeon: Forest
   exits:
     "Forest Temple Entrance Room": "true"
     "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
+
 "Forest Temple Initial Hallway Navigation": #Even more ways to get past the skultulas. Region exists for enemy drops rando, and for ease of placing the door regions for door rando.
   dungeon: Forest
   exits:
     "Forest Temple Initial Hallway Front": "get_past_skultullas"
     "Forest Temple Initial Hallway Back": "get_past_skultullas"
+
 "Forest Temple Initial Hallway Back":
   dungeon: Forest
   exits:
@@ -38,6 +44,7 @@
     "Forest Temple Main Lobby": "small_keys_forest(1)"
   locations:
     "MQ Forest Temple GS Entryway": "gs && (can_collect_distance || ((has_ranged_weapon || has_explosives) && climb_anywhere))" #Blast mask too? Need to have separate macros for close vs far-range explosives...
+
 "Forest Temple Main Lobby":
   dungeon: Forest
   exits: #TODO: Regions for the pot ledges for Action Shuffle
@@ -59,16 +66,19 @@
     "MQ Forest Temple Pot Main Room 4": "true"
     "MQ Forest Temple Pot Main Room 5": "true"
     "MQ Forest Temple Pot Main Room 6": "true"
+
 "Forest Temple Main Lobby Upper East Ledge":
   dungeon: Forest
   exits:
     "Forest Temple Main Lobby": "true"
     "Forest Temple Hallway Between Green Poe Room And Lobby": "true"
+
 "Forest Temple Hallway Before Lower Section Of Stalfos Battle Room":
   dungeon: Forest
   exits:
     "Forest Temple Main Lobby": "true"
     "Forest Temple Lower Section Of Stalfos Battle Room": "is_child || can_play_time" #Will need more handling for the SoT block when door rando logic is added.
+
 "Forest Temple Lower Section Of Stalfos Battle Room":
   dungeon: Forest
   exits:
@@ -83,6 +93,7 @@
     "MQ Forest Temple Pot Bow Room Upper 2": "hookshot_anywhere"
     "MQ Forest Temple Pot Bow Room Upper 3": "hookshot_anywhere"
     "MQ Forest Temple Pot Bow Room Upper 4": "hookshot_anywhere"
+
 "Forest Temple Hallway Before Climbing Block Puzzle Room":
   dungeon: Forest
   exits:
@@ -90,6 +101,7 @@
     "Forest Temple Climbing Block Puzzle Room Ground Floor": "event(FOREST_MQ_HALLWAY_BEFORE_CLIMBING_BLOCKS_STALFOS_CLEAR)"
   events:
     FOREST_MQ_HALLWAY_BEFORE_CLIMBING_BLOCKS_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+
 "Forest Temple Climbing Block Puzzle Room Ground Floor":
   dungeon: Forest
   exits: #Separating floors now in preparation for action shuffle.
@@ -105,6 +117,7 @@
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT: "has_bombchu"
   locations:
     "MQ Forest Temple GS Climb Room": "gs && can_damage_skull"
+
 "Forest Temple Climbing Block Puzzle Room Crystal Switch Alcove":
   dungeon: Forest
   exits:
@@ -113,6 +126,7 @@
   events:
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE: "can_hit_crystal_switch_close"
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_FAR: "has_bombs"
+
 "Forest Temple Climbing Block Puzzle Room First Block Floor":
   dungeon: Forest
   exits:
@@ -122,6 +136,7 @@
     "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "event(FOREST_MQ_SECOND_PUSH_BLOCK_PUZZLE_CLEAR)"
   events:
     FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR: "has_goron_bracelet"
+
 "Forest Temple Climbing Block Puzzle Room First Block Floor Outer Ledge":
   dungeon: Forest
   exits:
@@ -130,6 +145,7 @@
     "Forest Temple Climbing Block Puzzle Room First Block Floor": "event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || has_hover_boots || hookshot_anywhere || climb_anywhere"
     "Forest Temple Climbing Block Puzzle Room Second Block Floor": "event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) || hookshot_anywhere || (is_adult && event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT))"
     "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "(event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT) && can_hookshot) || hookshot_anywhere"
+
 "Forest Temple Climbing Block Puzzle Room Second Block Floor":
   dungeon: Forest
   exits:
@@ -139,6 +155,7 @@
   events:
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT: "can_hit_triggers_distance || can_longshot" #Can hit it if you stand near the guard rails
     FOREST_MQ_SECOND_PUSH_BLOCK_PUZZLE_CLEAR: "(has_goron_bracelet && event(FOREST_MQ_FIRST_PUSH_BLOCK_PUZZLE_CLEAR) && is_adult) || hookshot_anywhere || climb_anywhere" #A little redundant, yes, but it is a separate flag. Also ground jump glitch?
+
 "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing":
   dungeon: Forest
   exits:
@@ -147,11 +164,13 @@
     "Forest Temple Climbing Block Puzzle Room Top Floor": "true"
   events:
     FOREST_MQ_CLIMBING_BLOCK_ROOM_ICE_PLATFORM_SHORTCUT: "can_hit_crystal_switch_close"
+
 "Forest Temple Climbing Block Puzzle Room Top Floor":
   dungeon: Forest
   exits:
     "Forest Temple Climbing Block Puzzle Room After Second Block Floor Crystal Switch Landing": "true"
     "Forest Temple Western Twisting Hallway Block Push Side": "small_keys_forest(3)"
+
 "Forest Temple Western Twisting Hallway Block Push Side":
   dungeon: Forest
   exits:
@@ -161,6 +180,7 @@
     "Forest Temple Western Twisting Hallway Red Poe Side": "event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE) || event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_EARLY)"
   locations:
     "MQ Forest Temple Boss Key Chest": "event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_FAR)"
+
 "Forest Temple Floormaster Battle Room Below Hallway":
   dungeon: Forest
   exits:
@@ -170,6 +190,7 @@
     "MQ Forest Temple Boss Key Chest": "hookshot_anywhere && climb_anywhere" #This and an exit to the Block Push Side will need looked at again once door rando is being implemented.
   events:
     FOREST_MQ_FLOORMASTER_BATTLE_BELOW_HALLWAY_CLEAR: "soul_floormaster && has_weapon" #Placeholder for now.
+
 "Forest Temple West Garden Upper Ledge Hallway":
   dungeon: Forest
   exits:
@@ -181,6 +202,7 @@
     "Forest Temple West Garden Ledge Above Well": "has_hover_boots || hookshot_anywhere || climb_anywhere"
   events:
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire_arrows"
+
 "Forest Temple West Garden Pillar With Items":
   dungeon: Forest
   exits:
@@ -190,6 +212,7 @@
     "MQ Forest Temple Heart Garden 1": "true"
     "MQ Forest Temple Heart Garden 2": "true"
     "MQ Forest Temple Heart Garden 3": "true"
+
 "Forest Temple West Garden Redead Battle Room":
   dungeon: Forest
   exits:
@@ -198,6 +221,7 @@
     FOREST_MQ_WEST_GARDEN_REDEAD_BATTLE_CLEAR: "soul_redead_gibdo && has_weapon" #Placeholder
   locations:
     "MQ Forest Temple ReDead Chest": "event(FOREST_MQ_WEST_GARDEN_REDEAD_BATTLE_CLEAR)"
+
 "Forest Temple West Garden Ledge Above Well":
   dungeon: Forest
   exits:
@@ -207,6 +231,7 @@
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire_arrows"
   locations:
     "MQ Forest Temple GS West Garden": "gs && can_damage_skull"
+
 "Forest Temple West Garden Ground Area":
   dungeon: Forest
   exits:
@@ -219,6 +244,7 @@
     "Forest Temple East Garden Ground Area": "(has_tunic_zora && can_dive_big) || event(FOREST_MQ_DRAIN_WELL)" #Not part of Well region because diving with scale can't get checks.
   events:
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire_arrows"
+
 "Forest Temple West Garden Webbed Alcove":
   dungeon: Forest
   exits:
@@ -226,6 +252,7 @@
     "Forest Temple Linking Room Between Gardens Behind Web": "true"
   events:
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire"
+
 "Forest Temple Linking Room Between Gardens Behind Web":
   dungeon: Forest
   exits:
@@ -233,6 +260,7 @@
     "Forest Temple Linking Room Between Gardens": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)"
   events:
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire"
+
 "Forest Temple Linking Room Between Gardens":
   dungeon: Forest
   exits:
@@ -240,6 +268,7 @@
     "Forest Temple Linking Room Between Gardens Behind Web": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)"
   events:
     FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "can_use_din || has_arrows"
+
 "Forest Temple Gardens Well":
   dungeon: Forest
   exits:
@@ -251,6 +280,7 @@
     "MQ Forest Temple Heart Well 1": "true"
     "MQ Forest Temple Heart Well 2": "true"
     "MQ Forest Temple Heart Well 3": "true"
+
 "Forest Temple East Garden Top Balcony With Door":
   dungeon: Forest
   exits:
@@ -258,6 +288,7 @@
     "Forest Temple East Garden Ground Area": "true"
     "Forest Temple East Garden Top Balcony With Chest": "true" #action rando will need a trick to do this with nothing.
     "Forest Temple East Garden Above GS Awning": "is_adult && can_play_time" #Child can do this but is inconsistent. Can be a trick later on, as well as "3-key Forest."
+
 "Forest Temple East Garden Top Balcony With Chest":
   dungeon: Forest
   exits:
@@ -266,6 +297,7 @@
     #"Forest Temple East Garden Hill With Chest": "has_hover_boots && trick(insert trick here) This is similar to doing "3-Key Forest," so should be behind a trick.
   locations:
     "MQ Forest Temple East Garden High Ledge Chest": "true"
+
 "Forest Temple East Garden Hill With Chest":
   dungeon: Forest
   exits:
@@ -276,11 +308,13 @@
   events:
     STICKS: "soul_deku_baba && (can_boomerang || (has_nuts && has_weapon))"
     NUTS: "soul_deku_baba && (has_weapon || can_hammer || can_hookshot || has_mask_blast || has_explosives || can_hit_triggers_distance)"
+
 "Forest Temple East Garden Water Ledge With Door":
   dungeon: Forest
   exits:
     "Forest Temple Checkerboard Room": "true"
     "Forest Temple East Garden Hill With Chest": "true"
+
 "Forest Temple East Garden Above GS Awning":
   dungeon: Forest
   exits: #This awning region exists to account for the time block method from the upper balconies.
@@ -288,6 +322,7 @@
     "Forest Temple East Garden Top Balcony With Chest": "can_play_time"
   locations:
     "MQ Forest Temple GS East Garden": "gs && (has_explosives || has_ranged_weapon || can_use_din || ((can_use_sword_kokiri || can_use_sword_master || can_use_sword_biggoron || can_use_sticks) && has_one_hand_shield) || ((is_child || has_shield || climb_anywhere) && has_mask_blast))"
+
 "Forest Temple East Garden Ground Area":
   dungeon: Forest
   exits:
@@ -304,11 +339,13 @@
     STICKS: "soul_deku_baba && (can_boomerang || (has_nuts && has_weapon))"
     NUTS: "soul_deku_baba && (has_weapon || can_hookshot || can_hammer || has_mask_blast || has_explosives || can_hit_triggers_distance)"
     FOREST_MQ_DRAIN_WELL: "can_hit_triggers_distance"
+
 "Forest Temple Western Twisting Hallway Red Poe Side":
   dungeon: Forest
   exits:
     "Forest Temple Western Twisting Hallway Block Push Side": "event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_CLOSE) || event(FOREST_MQ_CLIMBING_BLOCK_ROOM_ALCOVE_SWITCH_EARLY)"
     "Forest Temple Red Poe Paintings Room": "small_keys_forest(4)"
+
 "Forest Temple Red Poe Paintings Room":
   dungeon: Forest
   exits:
@@ -318,6 +355,7 @@
     "MQ Forest Temple Map Chest": "event(FOREST_MQ_JOELLE_CLEAR)"
   events:
     FOREST_MQ_JOELLE_CLEAR: "soul_poe && can_use_bow"
+
 "Forest Temple Upper Section Of Stalfos Battle Room":
   dungeon: Forest
   exits:
@@ -332,6 +370,7 @@
   events:
     FOREST_MQ_BOW_ROOM_STALFOS_BATTLE_CLEAR: "event(FOREST_MQ_UNDER_STALFOS_BATTLE_WOLFOS_CLEAR) && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
     FOREST_MQ_UNDER_STALFOS_BATTLE_WOLFOS_CLEAR: "soul_wolfos && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+
 "Forest Temple Blue Poe Paintings Room":
   dungeon: Forest
   exits:
@@ -344,6 +383,7 @@
     "MQ Forest Temple Pot Blue Poe 3": "true"
   events:
     FOREST_MQ_BETH_CLEAR: "soul_poe && can_use_bow"
+
 "Forest Temple Eastern Twisting Hallway Blue Poe Side":
   dungeon: Forest
   exits:
@@ -351,6 +391,7 @@
     "Forest Temple Eastern Twisting Hallway Red Pool Side": "true"
     "Forest Temple Checkerboard Room": "event(FOREST_MQ_SPINNING_RED_POOLS_FROZEN_EYE)"
     "Forest Temple Wallmaster East": "soul_wallmaster"
+
 "Forest Temple Eastern Twisting Hallway Red Pool Side":
   dungeon: Forest
   exits:
@@ -358,6 +399,7 @@
     "Forest Temple Spinning Red Pool Room": "small_keys_forest(6)"
     "Forest Temple Checkerboard Room": "event(FOREST_MQ_SPINNING_RED_POOLS_FROZEN_EYE)"
     "Forest Temple Wallmaster East": "soul_wallmaster"
+
 "Forest Temple Spinning Red Pool Room":
   dungeon: Forest
   exits:
@@ -368,6 +410,7 @@
     "MQ Forest Temple Spinning Red Pool Room Small Crate 3": "true"
   events:
     FOREST_MQ_SPINNING_RED_POOLS_FROZEN_EYE: "can_use_bow || has_fire" #Elegy when action shuffle for carrying crates.
+
 "Forest Temple Checkerboard Room":
   dungeon: Forest
   exits:
@@ -379,6 +422,7 @@
   events:
     FOREST_MQ_CHECKERBOARD_SWITCH_GARDEN_DOOR: "true"
     FOREST_MQ_CHECKERBOARD_SWITCH_CHEST: "true"
+
 "Forest Temple Green Poe Painting Room":
   dungeon: Forest
   exits:
@@ -389,11 +433,13 @@
     "MQ Forest Temple Pot Green Poe 2": "true"
   events:
     FOREST_MQ_AMY_CLEAR: "soul_poe && can_use_bow"
+
 "Forest Temple Hallway Between Green Poe Room And Lobby":
   dungeon: Forest
   exits:
     "Forest Temple Green Poe Painting Room": "true"
     "Forest Temple Main Lobby Upper East Ledge": "true"
+
 "Forest Temple Antichamber Center":
   dungeon: Forest
   exits:
@@ -405,6 +451,7 @@
     "Forest Temple Antichamber Room Hallway Before Boss": "event(FOREST_MQ_ANTICHAMBER_SOUTH_ALCOVE_EYE_SWITCH)"
   events:
     FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_CRYSTAL_SWITCH: "has_ranged_weapon || has_explosives || has_mask_blast || can_use_sticks || can_use_sword_biggoron || (is_adult && (can_use_sword_master || can_hammer))" #razor? gilded? adult+kokiri?
+
 "Forest Temple Antichamber Room Southwest Alcove":
   dungeon: Forest
   exits:
@@ -414,24 +461,28 @@
     "MQ Forest Temple Pot Antichamber 2": "true"
     "MQ Forest Temple Pot Antichamber 3": "true"
     "MQ Forest Temple Pot Antichamber 4": "true"
+
 "Forest Temple Antichamber Room East Alcove":
   dungeon: Forest
   exits:
     "Forest Temple Antichamber Center": "true"
   events:
     FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_FLOOR_SWITCH: "true"
+
 "Forest Temple Antichamber Room Northwest Alcove":
   dungeon: Forest
   exits:
     "Forest Temple Antichamber Center": "true"
   locations:
     "MQ Forest Temple Antichamber": "true"
+
 "Forest Temple Antichamber Room South Alcove":
   dungeon: Forest
   exits:
     "Forest Temple Antichamber Center": "true"
   events:
     FOREST_MQ_ANTICHAMBER_SOUTH_ALCOVE_EYE_SWITCH: "can_hit_triggers_distance"
+
 "Forest Temple Antichamber Room Hallway Before Boss":
   dungeon: Forest
   exits:
