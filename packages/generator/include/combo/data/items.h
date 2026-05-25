@@ -485,6 +485,7 @@
 #define ITEM_MM_BOOMERANG                   0xb6
 #define ITEM_MM_RUTO_LETTER                 0xb7
 #define ITEM_MM_BOMB_OOT                    0xb8
+#define ITEM_MM_CUSTOM_USABLE_MAX           0xb9
 #define ITEM_MM_BOMB_BAG_OOT                0xb9
 #define ITEM_MM_BOMB_BAG2_OOT               0xba
 #define ITEM_MM_BOMB_BAG3_OOT               0xbb

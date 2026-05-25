@@ -88,7 +88,7 @@ u32 Interface_GetCustomIconTexture(PlayState* play, PauseContext* pauseCtx)
     return texture;
 }
 
-extern s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN];
+extern s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN];
 
 /* button and item are stored in SP10 and SP14 by HOOK_SAVE */
 s8 Interface_GetItemRestriction(u8 playerForm, PlayState* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
