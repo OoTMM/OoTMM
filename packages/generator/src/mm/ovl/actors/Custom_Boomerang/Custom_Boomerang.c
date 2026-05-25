@@ -72,7 +72,7 @@ void CustomBoomerang_Init(Actor_CustomBoomerang* boom, PlayState* play)
     static u8 sP2StartColor[4] = { 255, 255, 100, 64 };
     static u8 sP1EndColor[4]   = { 255, 255, 100, 0 };
     static u8 sP2EndColor[4]   = { 255, 255, 100, 0 };
-
+    boom->actor.room = -1;
     EffectBlureInit1 blureInit;
     s32 i;
 
@@ -175,6 +175,8 @@ void CustomBoomerang_Fly(Actor_CustomBoomerang* boom, PlayState* play)
 
             if (boom->collider.base.at->id == ACTOR_EN_SI) {
                 boom->collider.base.at->flags |= ACTOR_FLAG_HOOKSHOT_ATTACHED;
+            } else {
+                boom->collider.base.at->gravity = 0.0f;
             }
         }
     }
@@ -202,25 +204,23 @@ void CustomBoomerang_Fly(Actor_CustomBoomerang* boom, PlayState* play)
             Actor_Kill(&boom->actor);
         }
     } else {
-        collided = !!(boom->collider.base.atFlags & AT_HIT);
+        collided = BgCheck_EntityLineTest1(
+            &play->colCtx,
+            &boom->actor.prevPos,
+            &boom->actor.world.pos,
+            &hitPoint,
+            &boom->actor.wallPoly,
+            true,
+            true,
+            true,
+            true,
+            &hitDynaId
+        );
 
         if (collided) {
-            Math_Vec3f_Copy(&boom->actor.world.pos, &boom->actor.prevPos);
-        } else {
-            collided = BgCheck_EntityLineTest1(
-                &play->colCtx,
-                &boom->actor.prevPos,
-                &boom->actor.world.pos,
-                &hitPoint,
-                &boom->actor.wallPoly,
-                true,
-                true,
-                true,
-                true,
-                &hitDynaId
-            );
-
-            if (collided) {
+            if (func_800B90AC(play, &boom->actor, boom->actor.wallPoly, hitDynaId, &hitPoint)) {
+                collided = false;
+            } else {
                 CollisionCheck_SpawnShieldParticlesMetal(play, &hitPoint);
             }
         }
@@ -319,7 +319,7 @@ void CustomBoomerang_Draw(Actor_CustomBoomerang* boom, PlayState* play)
 
 ActorProfile Custom_Boomerang_InitVars = {
     ACTOR_CUSTOM_BOOMERANG,
-    ACTORCAT_MISC,
+    ACTORCAT_ITEMACTION,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
     sizeof(Actor_CustomBoomerang),
