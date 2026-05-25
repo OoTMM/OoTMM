@@ -174,16 +174,6 @@ static int Combo_LinkAnimFrameDmaInfo(
         return 0;
     }
 
-#if defined(GAME_OOT)
-    if (frame >= (s32)frameCount) {
-        frame = frameCount - 1;
-    }
-#else
-    if (frame >= (s32)frameCount) {
-        return 0;
-    }
-#endif
-
     segment = header->linkAnimSegment >> 24;
     offset = header->linkAnimSegment & 0x00ffffff;
     frameSize = Combo_LinkAnimFrameSize(header, limbCount);
