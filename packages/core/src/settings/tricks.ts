@@ -509,6 +509,12 @@ export const TRICKS: Tricks = {
     tooltip: "Use Goron's ground pound in front of the Tourist Center door to land on the roof and reach the heart piece",
     linkVideo: 'https://www.youtube.com/watch?v=HvH5NaTsf5w&list=PLuteuW9RqeG0NfhzoiZlJ1HQM2BdHftzg&index=5&ab_channel=Pokemongenius88',
   },
+  MM_SOUTHERN_SWAMP_SCRUB_HP_BOOMERANG: {
+    game: 'mm',
+    name: 'Southern Swamp Scrub HP with Boomerang',
+    tooltip: "Toss the Boomerang at a specific angle and sidehop to get the Heart Piece",
+    linkVideo: 'https://youtu.be/_lV4iZhvjqs',
+  },
   MM_GBC_COW_LIKELIKE_ELEVATOR: {
     game: 'mm',
     name: 'Great Bay Coast Cow Grotto LikeLike Elevator',
