@@ -22,7 +22,7 @@
     FAIRY: "true"
     SWAMP_OCTO_RIGHT: "is_swamp_poisoned && kill_big_octo_close"
   locations:
-    "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron) || short_hook_anywhere"
+    "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_BOOMERANG) && has_boomerang) || short_hook_anywhere"
     "Southern Swamp Scrub Deed": "soul_business_scrub && has(DEED_LAND)"
     "Southern Swamp Scrub Shop": "soul_business_scrub && has(MASK_DEKU) && can_use_wallet(1)"
     "Southern Swamp Grass Front 01": "true"

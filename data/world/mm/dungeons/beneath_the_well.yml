@@ -33,8 +33,8 @@
 "Beneath The Well Hot Spring Water":
   dungeon: BtW
   events:
-    HOT_WATER_WELL_SPRING: "is_spring && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
-    HOT_WATER_WELL_WINTER: "is_winter && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    HOT_WATER_WELL_SPRING: "is_spring && (has_explosives || has_boomerang || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    HOT_WATER_WELL_WINTER: "is_winter && (has_explosives || has_boomerang || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
     FISH: "true"
     WATER: "true"
   exits:
