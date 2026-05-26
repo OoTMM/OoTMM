@@ -51,27 +51,35 @@ void comboPlayItemFanfare(s16 gi, int isShort)
         fanfare = FANFARE_MEDALLION;
         break;
     case GI_OOT_SONG_TP_LIGHT:
+    case GI_MM_SONG_TP_LIGHT:
         fanfare = FANFARE_SONG_TP_LIGHT;
         break;
     case GI_OOT_SONG_TP_FOREST:
+    case GI_MM_SONG_TP_FOREST:
         fanfare = FANFARE_SONG_TP_FOREST;
         break;
     case GI_OOT_SONG_TP_FIRE:
+    case GI_MM_SONG_TP_FIRE:
         fanfare = FANFARE_SONG_TP_FIRE;
         break;
     case GI_OOT_SONG_TP_WATER:
+    case GI_MM_SONG_TP_WATER:
         fanfare = FANFARE_SONG_TP_WATER;
         break;
     case GI_OOT_SONG_TP_SHADOW:
+    case GI_MM_SONG_TP_SHADOW:
         fanfare = FANFARE_SONG_TP_SHADOW;
         break;
     case GI_OOT_SONG_TP_SPIRIT:
+    case GI_MM_SONG_TP_SPIRIT:
         fanfare = FANFARE_SONG_TP_SPIRIT;
         break;
     case GI_OOT_SONG_ZELDA:
+    case GI_MM_SONG_ZELDA:
         fanfare = FANFARE_SONG_ZELDA;
         break;
     case GI_OOT_SONG_SARIA:
+    case GI_MM_SONG_SARIA:
         fanfare = FANFARE_SONG_SARIA;
         break;
     case GI_OOT_SONG_TIME:
@@ -90,21 +98,27 @@ void comboPlayItemFanfare(s16 gi, int isShort)
     case GI_MM_SONG_STORMS:
         fanfare = FANFARE_SONG_STORMS;
         break;
+    case GI_OOT_SONG_SOARING:
     case GI_MM_SONG_SOARING:
         fanfare = FANFARE_SONG_SOARING;
         break;
+    case GI_OOT_SONG_HEALING:
     case GI_MM_SONG_HEALING:
         fanfare = FANFARE_SONG_HEALING;
         break;
+    case GI_OOT_SONG_AWAKENING:
     case GI_MM_SONG_AWAKENING:
         fanfare = FANFARE_SONG_AWAKENING;
         break;
+    case GI_OOT_SONG_GORON_HALF:
     case GI_MM_SONG_GORON_HALF:
         fanfare = FANFARE_SONG_GORON_HALF;
         break;
+    case GI_OOT_SONG_GORON:
     case GI_MM_SONG_GORON:
         fanfare = FANFARE_SONG_GORON;
         break;
+    case GI_OOT_SONG_ZORA:
     case GI_MM_SONG_ZORA:
         fanfare = FANFARE_SONG_ZORA;
         break;
@@ -112,6 +126,7 @@ void comboPlayItemFanfare(s16 gi, int isShort)
     case GI_MM_SONG_EMPTINESS:
         fanfare = FANFARE_SONG_EMPTINESS;
         break;
+    case GI_OOT_SONG_ORDER:
     case GI_MM_SONG_ORDER:
         fanfare = FANFARE_SONG_ORDER;
         break;

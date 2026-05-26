@@ -3,7 +3,7 @@ import type { World, WorldCheck, WorldArea, ExprMap, ExprParsers } from './types
 import type { Expr } from '../expr';
 
 import { cloneDeep, mapValues } from 'lodash-es';
-import { MACROS, WORLD, REGIONS, POOL, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId, GOSSIPS_BY_LOCATION } from '@ootmm/core';
+import { MACROS, WORLD, REGIONS, POOL, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId, GOSSIPS_BY_LOCATION, SongEventSongs } from '@ootmm/core';
 import { ExprParser, exprTrue, MM_TIME_SLICES } from '../expr';
 import { defaultPrices } from '../price';
 import { resolveWorldFlags } from './flags';
@@ -99,7 +99,8 @@ export function cloneWorld(world: World): World {
     songLocations: new Set(world.songLocations),
     warpLocations: new Set(world.warpLocations),
     prices: [...world.prices],
-    songEvents: [...world.songEvents],
+    songEventsOot: [...world.songEventsOot],
+    songEventsMm: [...world.songEventsMm],
     preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
     entranceOverrides: new Map(world.entranceOverrides),
@@ -188,7 +189,41 @@ class LogicPassWorld {
     const prices = defaultPrices(resolvedFlags);
 
     /* Song events */
-    const songEvents = [5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const songEventsOot = [
+      SongEventSongs.TIME,                /* SONG_EVENT_TEMPLE_OF_TIME                */
+      SongEventSongs.STORMS,              /* SONG_EVENT_WINDMILL                      */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GRAVEYARD                     */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_ZORA_RIVER                    */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GORON_CITY                    */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GREAT_FAIRY_SPELL_WIND        */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GREAT_FAIRY_SPELL_FIRE        */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GREAT_FAIRY_SPELL_LOVE        */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GREAT_FAIRY_UPGRADE_MAGIC     */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GREAT_FAIRY_UPGRADE_MAGIC2    */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_GREAT_FAIRY_UPGRADE_DEFENSE   */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_WATER                  */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_SHADOW                 */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_SPIRIT_STATUE          */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_SPIRIT_LOWER           */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_SPIRIT_HIGHER          */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_BOTW                   */
+      SongEventSongs.ZELDAS_LULLABY,      /* SONG_EVENT_TEMPLE_GANON                  */
+    ]
+    const songEventsMm = [
+      SongEventSongs.SONATA,              /* SONG_EVENT_TEMPLE_WOODFALL       */
+      SongEventSongs.GORON_LULLABY,       /* SONG_EVENT_TEMPLE_SNOWHEAD       */
+      SongEventSongs.NEW_WAVE,            /* SONG_EVENT_TEMPLE_GREATBAY       */
+      SongEventSongs.HEALING,             /* SONG_EVENT_HEALING_POEHUT        */
+      SongEventSongs.HEALING,             /* SONG_EVENT_HEALING_DARMANI       */
+      SongEventSongs.HEALING,             /* SONG_EVENT_HEALING_PAMELA_FATHER */
+      SongEventSongs.HEALING,             /* SONG_EVENT_HEALING_KAMARO        */
+      SongEventSongs.HEALING,             /* SONG_EVENT_HEALING_MIKAU         */
+      SongEventSongs.SONATA,              /* SONG_EVENT_AWAKENING_KEETA       */
+      SongEventSongs.SONATA,              /* SONG_EVENT_AWAKENING_SCRUB       */
+      SongEventSongs.GORON_LULLABY_INTRO, /* SONG_EVENT_LULLABY_KID           */
+      SongEventSongs.STORMS,              /* SONG_EVENT_STORMS_COMPOSER       */
+      SongEventSongs.OATH,                /* SONG_EVENT_CLOCK_TOWER_ROOF      */
+    ];
 
     return {
       areas: {},
@@ -201,7 +236,8 @@ class LogicPassWorld {
       songLocations: new Set(),
       warpLocations: new Set(),
       prices,
-      songEvents,
+      songEventsOot,
+      songEventsMm,
       preCompleted: new Set(),
       bossIds: Object.values(BOSS_INDEX_BY_DUNGEON),
       entranceOverrides: new Map,

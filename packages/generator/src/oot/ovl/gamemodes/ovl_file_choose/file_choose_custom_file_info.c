@@ -493,6 +493,9 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
 static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     int startX;
+    u32 colorLullaby = 0xff0000;
+    if (gSharedCustomSave.oot.hasSongGoronHalf && !gSharedCustomSave.oot.hasSongGoron)
+        colorLullaby = 0xff8787;
 
     startX = x;
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songZelda);
@@ -501,6 +504,13 @@ static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx*
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songSun);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songTime);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songStorms);
+
+    x += 8.f;
+    if (Config_Flag(CFG_OOT_SONG_HEALING))
+        x += drawNoteIcon(list, end, x, y, 0xffffff, gSharedCustomSave.oot.hasSongHealing);
+    if (Config_Flag(CFG_OOT_SONG_SOARING))
+        x += drawNoteIcon(list, end, x, y, 0xffffff, gSharedCustomSave.oot.hasSongSoaring);
+
     y += 12.f;
     x = startX;
 
@@ -510,13 +520,21 @@ static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx*
     x += drawNoteIcon(list, end, x, y, 0xffa500, gOotSave.info.inventory.quest.songTpSpirit);
     x += drawNoteIcon(list, end, x, y, 0xff00ff, gOotSave.info.inventory.quest.songTpShadow);
     x += drawNoteIcon(list, end, x, y, 0xffff00, gOotSave.info.inventory.quest.songTpLight);
+
+    x += 8.f;
+    if (Config_Flag(CFG_OOT_SONG_AWAKENING))
+        x += drawNoteIcon(list, end, x, y, 0x00ff00, gSharedCustomSave.oot.hasSongAwakening);
+    if (Config_Flag(CFG_OOT_SONG_GORON))
+        x += drawNoteIcon(list, end, x, y, colorLullaby, gSharedCustomSave.oot.hasSongGoron || gSharedCustomSave.oot.hasSongGoronHalf);
+    if (Config_Flag(CFG_OOT_SONG_ZORA))
+        x += drawNoteIcon(list, end, x, y, 0x0000ff, gSharedCustomSave.oot.hasSongZora);
+    if (Config_Flag(CFG_OOT_SONG_EMPTINESS))
+        x += drawNoteIcon(list, end, x, y, 0xffa500, gSharedCustomSave.oot.hasElegy);
+    if (Config_Flag(CFG_OOT_SONG_ORDER))
+        x += drawNoteIcon(list, end, x, y, 0xff00ff, gSharedCustomSave.oot.hasSongOrder);
+
     y += 12.f;
     x = startX;
-
-    if (Config_Flag(CFG_OOT_SONG_EMPTINESS))
-    {
-        x += drawNoteIcon(list, end, x, y, 0xffa500, gSharedCustomSave.oot.hasElegy);
-    }
 }
 
 static void FileSelect_CustomFileInfoPrepareMmSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -533,6 +551,13 @@ static void FileSelect_CustomFileInfoPrepareMmSongs(FileSelectState* this, Gfx**
     x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songEpona);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songSoaring);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songStorms);
+    x += 8.f;
+    if (Config_Flag(CFG_MM_SONG_ZELDA))
+        x += drawNoteIcon(list, end, x, y, 0xffffff, gSharedCustomSave.mm.ootSongs.songZelda);
+    if (Config_Flag(CFG_MM_SONG_SARIA))
+        x += drawNoteIcon(list, end, x, y, 0xffffff, gSharedCustomSave.mm.ootSongs.songSaria);
+    if (Config_Flag(CFG_MM_SONG_SUN))
+        x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songSun);
     y += 12.f;
     x = startX;
 
@@ -541,6 +566,20 @@ static void FileSelect_CustomFileInfoPrepareMmSongs(FileSelectState* this, Gfx**
     x += drawNoteIcon(list, end, x, y, 0x0000ff, gMmSave.info.inventory.quest.songNewWave);
     x += drawNoteIcon(list, end, x, y, 0xffa500, gMmSave.info.inventory.quest.songEmpty);
     x += drawNoteIcon(list, end, x, y, 0xff00ff, gMmSave.info.inventory.quest.songOrder);
+
+    x += 8.f;
+    if (Config_Flag(CFG_MM_SONG_TP_FOREST))
+        x += drawNoteIcon(list, end, x, y, 0x00ff00, gSharedCustomSave.mm.ootSongs.songTpForest);
+    if (Config_Flag(CFG_MM_SONG_TP_FIRE))
+        x += drawNoteIcon(list, end, x, y, 0xff0000, gSharedCustomSave.mm.ootSongs.songTpFire);
+    if (Config_Flag(CFG_MM_SONG_TP_WATER))
+        x += drawNoteIcon(list, end, x, y, 0x0000ff, gSharedCustomSave.mm.ootSongs.songTpWater);
+    if (Config_Flag(CFG_MM_SONG_TP_SPIRIT))
+        x += drawNoteIcon(list, end, x, y, 0xffa500, gSharedCustomSave.mm.ootSongs.songTpSpirit);
+    if (Config_Flag(CFG_MM_SONG_TP_SHADOW))
+        x += drawNoteIcon(list, end, x, y, 0xff00ff, gSharedCustomSave.mm.ootSongs.songTpShadow);
+    if (Config_Flag(CFG_MM_SONG_TP_LIGHT))
+        x += drawNoteIcon(list, end, x, y, 0xffff00, gSharedCustomSave.mm.ootSongs.songTpLight);
     y += 12.f;
     x = startX;
 }

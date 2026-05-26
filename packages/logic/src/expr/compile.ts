@@ -287,7 +287,8 @@ function makeEvalFunc(expr: ExprNode): ExprFunc {
     case 'license': return (state, deps) => evalItem(state.licenses, expr.item, 1, deps);
     case 'renewable': return (state, deps) => evalItem(state.renewables, expr.item, 1, deps);
     case 'price': return (state) => state.world.prices[expr.slot] <= expr.max ? RESULT_TRUE : RESULT_FALSE;
-    case 'song-event': return (state) => state.world.songEvents[expr.songId] === expr.cmp ? RESULT_TRUE : RESULT_FALSE;
+    case 'song-event-oot': return (state) => state.world.songEventsOot[expr.songId] === expr.cmp ? RESULT_TRUE : RESULT_FALSE;
+    case 'song-event-mm': return (state) => state.world.songEventsMm[expr.songId] === expr.cmp ? RESULT_TRUE : RESULT_FALSE;
     case 'masks': return (state, deps) => evalItems(state.items, ItemGroups.MASKS_REGULAR, expr.count, deps);
     case 'event': return (state, deps) => evalEvent(state, expr.event, deps);
     case 'special': return (state, deps) => evalSpecial(state, expr.specialId, deps);

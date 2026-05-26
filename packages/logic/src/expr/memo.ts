@@ -16,7 +16,8 @@ export function exprMemoKey(expr: ExprNode): string {
     case 'time-oot': return `TIME_OOT:${expr.flag}`;
     case 'time-mm': return `TIME_MM:${expr.value}:${expr.value2}`;
     case 'price': return `PRICE:${expr.slot}:${expr.max}`;
-    case 'song-event': return `SONG_EVENT:${expr.songId}:${expr.cmp}`;
+    case 'song-event-oot': return `SONG_EVENT_OOT:${expr.songId}:${expr.cmp}`;
+    case 'song-event-mm': return `SONG_EVENT_MM:${expr.songId}:${expr.cmp}`;
     case 'flag-on': return `FLAG_ON:${expr.flag}`;
     case 'flag-off': return `FLAG_OFF:${expr.flag}`;
   }

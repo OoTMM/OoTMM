@@ -7,7 +7,7 @@ import {
   exprHas, exprEvent, exprAgeString,
   exprRenewable, exprLicense, exprMasks,
   exprOotTime, exprMmTime, exprFlagOn, exprFlagOff,
-  exprSongEvent,
+  exprSongEventOot, exprSongEventMm
 } from '../../src/expr/builder';
 import { CONSTRAINT_FLAGS } from '../../src/expr/data';
 import type { ResolvedWorldFlags } from '../../src/world/flags';
@@ -181,9 +181,15 @@ describe('flag_on() / flag_off()', () => {
   });
 });
 
-describe('_song_event()', () => {
-  it('parses _song_event', () => {
-    expect(parse('_song_event(2, 1)')).toBe(exprSongEvent(2, 1));
+describe('_song_event_oot()', () => {
+  it('parses _song_event_oot', () => {
+    expect(parse('_song_event_oot(2, 1)')).toBe(exprSongEventOot(2, 1));
+  });
+});
+
+describe('_song_event_mm()', () => {
+  it('parses _song_event_mm', () => {
+    expect(parse('_song_event_mm(2, 1)')).toBe(exprSongEventMm(2, 1));
   });
 });
 

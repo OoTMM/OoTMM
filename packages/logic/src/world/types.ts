@@ -75,7 +75,8 @@ export type World = {
   songLocations: Set<string>;
   warpLocations: Set<string>;
   prices: number[];
-  songEvents: number[];
+  songEventsOot: number[];
+  songEventsMm: number[];
   bossIds: number[];
   entranceOverrides: Map<string, string>;
   entranceOverridesRev: Map<string, readonly string[]>;

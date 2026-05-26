@@ -252,6 +252,18 @@ ASSERT_SIZE(MessageContext, 0xe418);
 #define OCARINA_SONG_SCARECROW_SPAWN    0xc
 #define OCARINA_SONG_MEMORY_GAME        0xd
 
+#define OCARINA_SONG_CUSTOM_START       0x15
+#define OCARINA_SONG_SOARING            0x16
+#define OCARINA_SONG_CUSTOM_TIME        0x17
+#define OCARINA_SONG_ELEGY              0x18
+#define OCARINA_SONG_DOUBLE_TIME        0x19
+#define OCARINA_SONG_HEALING            0x1a
+#define OCARINA_SONG_AWAKENING          0x1b
+#define OCARINA_SONG_GORON_HALF         0x1c
+#define OCARINA_SONG_GORON              0x1d
+#define OCARINA_SONG_ZORA               0x1e
+#define OCARINA_SONG_ORDER              0x1f
+
 void Message_UpdateOcarinaMemoryGame(struct PlayState* play);
 // u8 Message_ShouldAdvance(struct PlayState* play); // currently in api.h
 void Message_CloseTextbox(struct PlayState*);

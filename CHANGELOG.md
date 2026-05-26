@@ -15,6 +15,14 @@ All notable changes to this project will be documented in this file.
 - Add extra signs outside ganon's castle and on clock tower roof to hint the bridge & moon special conditions, when applicable.
 - Add a basic implementation of music categories.
 - Add a setting to avoid placing multiple playthrough hints for identical items.
+- Add a setting to shuffle the required songs for various events in MM (thanks Mizu Aoyuki for the icons).
+- Add Song of Soaring (OoT) and Ageless Song of Soaring to replace Cross-Games MM Song of Soaring.
+- Add Sonata of Awakening (OoT), Goron Lullaby (OoT), New Wave Bossa Nova (OoT), Oath to Order (OoT), which do nothing unless Song Events Shuffle is on.
+- Add Song of Healing (OoT), which heals signs and summons fairies at gossip stones.
+- Add Zelda's Lullaby (MM), which heals signs and summons fairies at gossip stones.
+- Add Saria's Song (MM), which makes some redeads dance and summons fairies at gossip stones.
+- Add Minuet of Forest (MM), Bolero of Fire (MM), Serenade of Water (MM), Requiem of Spirit (MM), Nocturne of Shadow (MM) and Prelude of Light (MM) to replace Cross-Games OoT Warp Songs.
+- Add Shared settings variants of each song above.
 
 ### Changed
 
@@ -22,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
 - "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
 - Converted the "Clear State Dungeons (MM)" setting to a "Set" type to allow for random choice.
+- Rename Sun's Song in MM to Sun's Song (MM) to be consistent.
 
 ### Fixed
 
@@ -33,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Ensure the logic for vanilla Ice Cavern Silver Rupees in the Scythe room is sound.
 - Fix logic for Shared Kamaro's Mask.
 - Fix "OOT Kokiri Shop Wonder Item" location incorrectly expecting the Shopkeeper's Soul to obtain.
+- Fix frog game softlocking when playing a custom song.
 
 ## [30.1] - 2026-03-15
 

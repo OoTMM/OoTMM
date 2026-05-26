@@ -306,7 +306,7 @@ static s16 progressiveUpgradeStickMm(void)
     return GI_MM_STICK_UPGRADE2;
 }
 
-static s16 progressiveSongLullaby(void)
+static s16 progressiveSongLullabyMm(void)
 {
     switch (gMmSave.info.inventory.quest.songLullabyIntro)
     {
@@ -314,6 +314,17 @@ static s16 progressiveSongLullaby(void)
         return GI_MM_SONG_GORON_HALF;
     default:
         return GI_MM_SONG_GORON;
+    }
+}
+
+static s16 progressiveSongLullabyOot(void)
+{
+    switch (gSharedCustomSave.oot.hasSongGoronHalf)
+    {
+    case 0:
+        return GI_OOT_SONG_GORON_HALF;
+    default:
+        return GI_OOT_SONG_GORON;
     }
 }
 
@@ -581,7 +592,12 @@ s16 Item_Progressive(s16 gi, int ovflags)
     case GI_MM_SONG_GORON:
     case GI_MM_SONG_GORON_HALF:
         if (Config_Flag(CFG_MM_PROGRESSIVE_LULLABY))
-            gi = progressiveSongLullaby();
+            gi = progressiveSongLullabyMm();
+        break;
+    case GI_OOT_SONG_GORON:
+    case GI_OOT_SONG_GORON_HALF:
+        if (Config_Flag(CFG_OOT_PROGRESSIVE_LULLABY))
+            gi = progressiveSongLullabyOot();
         break;
     case GI_MM_HOOKSHOT_SHORT:
     case GI_MM_HOOKSHOT:
