@@ -67,7 +67,7 @@
     IKANA_CASTLE_LIGHT2: "can_use_keg"
     NUTS: "true"
   locations:
-    "Ancient Castle of Ikana HP": "((has_arrows || can_hookshot_short) && has(MASK_DEKU)) || short_hook_anywhere"
+    "Ancient Castle of Ikana HP": "((has_arrows || has_boomerang || can_hookshot_short) && has(MASK_DEKU)) || short_hook_anywhere"
 
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI
