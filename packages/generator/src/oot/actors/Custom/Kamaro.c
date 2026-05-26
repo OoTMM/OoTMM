@@ -20,13 +20,13 @@ typedef void (*LinkAnimation_PlayLoopSetSpeed_t)(
 #define LinkAnimation_PlayLoopSetSpeed_ADDR 0x8008c298
 
 #define LinkAnimation_Update_OOT \
-((LinkAnimation_Update_t)LinkAnimation_Update_ADDR)
+    ((LinkAnimation_Update_t)LinkAnimation_Update_ADDR)
 
 #define LinkAnimation_PlayOnce_OOT \
-((LinkAnimation_PlayOnce_t)LinkAnimation_PlayOnce_ADDR)
+    ((LinkAnimation_PlayOnce_t)LinkAnimation_PlayOnce_ADDR)
 
 #define LinkAnimation_PlayLoopSetSpeed_OOT \
-((LinkAnimation_PlayLoopSetSpeed_t)LinkAnimation_PlayLoopSetSpeed_ADDR)
+    ((LinkAnimation_PlayLoopSetSpeed_t)LinkAnimation_PlayLoopSetSpeed_ADDR)
 
 #define KAMARO_DANCE_STATE_FRAME PLAYER_STATE2_5
 
@@ -37,6 +37,18 @@ typedef void (*LinkAnimation_PlayLoopSetSpeed_t)(
 #define KAMARO_DANCE_FRAME_COUNT 145.0f
 #define KAMARO_DANCE_SPEED       1.0f
 
+#define KAMARO_DANCE_BLOCK_START_BUTTONS \
+    (A_BUTTON | R_TRIG | Z_TRIG | U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
+
+#define KAMARO_DANCE_START_SWALLOW_PRESS_BUTTONS \
+    (B_BUTTON | U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
+
+#define KAMARO_DANCE_START_SWALLOW_CUR_BUTTONS \
+    (B_BUTTON)
+
+#define KAMARO_DANCE_ACTIVE_SWALLOW_PRESS_BUTTONS \
+    (B_BUTTON | U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
+
 static Player* sPlayerCustomStateOwner;
 static u32 sPlayerCustomState2;
 static s32 sKamaroMusicActive;
@@ -44,7 +56,11 @@ static f32 sKamaroDanceFrame;
 
 static s8 sKamaroSavedHeldItemAction;
 static s8 sKamaroSavedItemAction;
+static s8 sKamaroSavedPrevHeldItemAction;
+static s8 sKamaroSavedPrevItemAction;
 static s32 sKamaroHasSavedItemAction;
+static s32 sKamaroHadHeldItem;
+static s32 sKamaroDanceStartGrace;
 
 static void Player_KamaroDanceActionOoT(Player* link, PlayState* play);
 
@@ -86,39 +102,78 @@ static void Player_CustomState2_ClearAll(Player* link)
     }
 }
 
+static s32 Player_KamaroGetCurrentItemActionOoT(Player* link)
+{
+    if (link->heldItemAction != PLAYER_IA_NONE)
+    {
+        return link->heldItemAction;
+    }
+
+    return link->itemAction;
+}
+
+static void Player_SetKamaroItemActionOoT(Player* link, s32 heldItemAction, s32 itemAction)
+{
+    link->heldItemAction = heldItemAction;
+    link->itemAction = itemAction;
+}
+
+static void Player_HideKamaroHeldItemModelOoT(Player* link)
+{
+    Player_SetModels(link, Player_ActionToModelGroup(link, PLAYER_IA_NONE));
+}
+
+static void Player_RestoreKamaroHeldItemModelOoT(Player* link)
+{
+    Player_SetModels(link, Player_ActionToModelGroup(link, Player_KamaroGetCurrentItemActionOoT(link)));
+}
+
 static void Player_SaveKamaroItemActionOoT(Player* link)
 {
     sKamaroSavedHeldItemAction = link->heldItemAction;
     sKamaroSavedItemAction = link->itemAction;
+
+#ifdef PLAYER_HAS_PREV_ITEM_ACTION_FIELDS
+    sKamaroSavedPrevHeldItemAction = link->prevHeldItemAction;
+    sKamaroSavedPrevItemAction = link->prevItemAction;
+#else
+    sKamaroSavedPrevHeldItemAction = PLAYER_IA_NONE;
+    sKamaroSavedPrevItemAction = PLAYER_IA_NONE;
+#endif
+
+    sKamaroHadHeldItem = Player_KamaroGetCurrentItemActionOoT(link) != PLAYER_IA_NONE;
     sKamaroHasSavedItemAction = true;
 }
 
-static void Player_RestoreKamaroItemActionOoT(Player* link)
+static void Player_PreserveKamaroItemActionOoT(Player* link)
 {
     if (!sKamaroHasSavedItemAction)
     {
         return;
     }
 
-    link->heldItemAction = sKamaroSavedHeldItemAction;
-    link->itemAction = sKamaroSavedItemAction;
+    Player_SetKamaroItemActionOoT(link, sKamaroSavedHeldItemAction, sKamaroSavedItemAction);
 
-    sKamaroHasSavedItemAction = false;
+#ifdef PLAYER_HAS_PREV_ITEM_ACTION_FIELDS
+    link->prevHeldItemAction = sKamaroSavedPrevHeldItemAction;
+    link->prevItemAction = sKamaroSavedPrevItemAction;
+#endif
 }
 
 static void Player_ClearKamaroSavedItemActionOoT(void)
 {
     sKamaroSavedHeldItemAction = PLAYER_IA_NONE;
     sKamaroSavedItemAction = PLAYER_IA_NONE;
+    sKamaroSavedPrevHeldItemAction = PLAYER_IA_NONE;
+    sKamaroSavedPrevItemAction = PLAYER_IA_NONE;
+    sKamaroHadHeldItem = false;
     sKamaroHasSavedItemAction = false;
 }
 
-static void Player_RefreshKamaroHeldItemModelOoT(Player* link)
+static void Player_RestoreKamaroItemActionOoT(Player* link)
 {
-    if (link->heldItemAction != PLAYER_IA_NONE)
-    {
-        Player_SetModels(link, Player_ActionToModelGroup(link, link->heldItemAction));
-    }
+    Player_PreserveKamaroItemActionOoT(link);
+    Player_ClearKamaroSavedItemActionOoT();
 }
 
 s32 Player_IsKamaroMaskActiveOoT(Player* link)
@@ -144,15 +199,22 @@ static void Player_StopKamaroMusicOoT(void)
 
 static void Player_EndKamaroDanceOoT(PlayState* play, Player* link)
 {
+    s32 hadHeldItem = sKamaroHadHeldItem;
+
     Player_ClearKamaroStateOoT(link);
     Player_StopKamaroMusicOoT();
+
+    sKamaroDanceStartGrace = false;
 
     Player_RestoreKamaroItemActionOoT(link);
 
     Player_SetupActionPreserveItemActionOoT(play, link, Player_GetIdleActionOoT(), 1);
     LinkAnimation_PlayOnce_OOT(play, &link->skelAnime, Player_GetIdleAnimOoT(link));
 
-    Player_RefreshKamaroHeldItemModelOoT(link);
+    if (hadHeldItem)
+    {
+        Player_RestoreKamaroHeldItemModelOoT(link);
+    }
 
     link->yaw = link->actor.shape.rot.y;
 }
@@ -172,48 +234,109 @@ void Player_ResetKamaroMaskStateOoT(Player* link)
 
     sKamaroMusicActive = false;
     sKamaroDanceFrame = KAMARO_DANCE_START_FRAME;
+    sKamaroDanceStartGrace = false;
 
     Player_ClearKamaroSavedItemActionOoT();
 }
 
-static s32 Player_CanStartKamaroDanceOoT(Player* link)
+static s32 Player_KamaroItemActionIsCrouchStabMeleeOoT(s32 itemAction)
+{
+    return (itemAction == PLAYER_IA_SWORD_MASTER) ||
+           (itemAction == PLAYER_IA_SWORD_KOKIRI) ||
+           (itemAction == PLAYER_IA_SWORD_BIGGORON) ||
+           (itemAction == PLAYER_IA_DEKU_STICK);
+}
+
+static s32 Player_KamaroCanInterruptCrouchStabOoT(Player* link)
+{
+    s32 itemAction = Player_KamaroGetCurrentItemActionOoT(link);
+
+    return Player_KamaroItemActionIsCrouchStabMeleeOoT(itemAction) &&
+           ((link->meleeWeaponAnimation == PLAYER_MWA_STAB_1H) ||
+            (link->meleeWeaponAnimation == PLAYER_MWA_STAB_2H)) &&
+           (link->stateFlags1 & PLAYER_STATE1_SHIELDING);
+}
+
+static s32 Player_KamaroStateBlocksStartOoT(Player* link)
 {
     if (link->mask != MASK_KAMARO)
     {
-        return false;
+        return true;
     }
 
     if (Player_IsKamaroMaskActiveOoT(link))
     {
-        return false;
+        return true;
     }
 
     if (!(link->actor.bgCheckFlags & BGCHECKFLAG_GROUND))
     {
-        return false;
+        return true;
     }
 
-    if (link->stateFlags1 & PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)
+    if (link->stateFlags1 & (
+        PLAYER_ACTOR_STATE_CUTSCENE_FROZEN |
+        PLAYER_ACTOR_STATE_HOLD_ITEM |
+        PLAYER_STATE1_DEAD |
+        PLAYER_STATE1_TALKING
+    ))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+static s32 Player_KamaroInputBlocksStartOoT(Player* link, Input* input)
+{
+    if (input == NULL)
+    {
+        return true;
+    }
+
+    if (input->press.button & KAMARO_DANCE_BLOCK_START_BUTTONS)
+    {
+        return true;
+    }
+
+    if ((input->cur.button & R_TRIG) && !Player_KamaroCanInterruptCrouchStabOoT(link))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+static s32 Player_KamaroShouldSwallowFailedStartOoT(Player* link, Input* input)
+{
+    return (input != NULL) &&
+           (input->press.button & B_BUTTON) &&
+           (link->mask == MASK_KAMARO) &&
+           !Player_IsKamaroMaskActiveOoT(link) &&
+           (input->cur.button & R_TRIG) &&
+           !Player_KamaroCanInterruptCrouchStabOoT(link);
+}
+
+static s32 Player_CanStartKamaroDanceOoT(Player* link, Input* input)
+{
+    s32 canInterruptCrouchStab = Player_KamaroCanInterruptCrouchStabOoT(link);
+
+    if (Player_KamaroStateBlocksStartOoT(link))
     {
         return false;
     }
 
-    if (link->stateFlags1 & PLAYER_ACTOR_STATE_HOLD_ITEM)
+    if (Player_KamaroInputBlocksStartOoT(link, input))
     {
         return false;
     }
 
-    if (link->stateFlags1 & PLAYER_STATE1_DEAD)
+    if (Player_UsingItem(link) && !canInterruptCrouchStab)
     {
         return false;
     }
 
-    if (link->stateFlags1 & PLAYER_STATE1_TALKING)
-    {
-        return false;
-    }
-
-    if (Player_UsingItem(link))
+    if ((link->actionFunc != Player_GetIdleActionOoT()) && !canInterruptCrouchStab)
     {
         return false;
     }
@@ -271,19 +394,17 @@ static void Player_UpdateKamaroDanceAnimOoT(PlayState* play, Player* link)
     link->actor.speed = link->speedXZ;
 }
 
-static void Player_StartKamaroDanceOoT(PlayState* play, Player* link)
+static void Player_StartKamaroDanceOoT(PlayState* play, Player* link, Input* input)
 {
-    if (!Player_CanStartKamaroDanceOoT(link))
+    if (!Player_CanStartKamaroDanceOoT(link, input))
     {
         return;
     }
 
     Player_SaveKamaroItemActionOoT(link);
 
-    link->heldItemAction = PLAYER_IA_NONE;
-    link->itemAction = PLAYER_IA_NONE;
-
-    Player_SetupActionPreserveItemActionOoT(play, link, Player_KamaroDanceActionOoT, 0);
+    Player_SetupActionPreserveItemActionOoT(play, link, Player_KamaroDanceActionOoT, 1);
+    Player_HideKamaroHeldItemModelOoT(link);
 
     LinkAnimation_PlayLoopSetSpeed_OOT(
         play,
@@ -298,6 +419,7 @@ static void Player_StartKamaroDanceOoT(PlayState* play, Player* link)
     link->skelAnime.curFrame = sKamaroDanceFrame;
 
     Player_CustomState2_Set(link, PLAYER_CUSTOM_STATE2_KAMARO_DANCE);
+    sKamaroDanceStartGrace = true;
 
     sKamaroMusicActive = true;
     Audio_PlayFanfare(FANFARE_KAMARO);
@@ -318,7 +440,11 @@ void Player_UpdateKamaroMaskOoT(PlayState* play, Player* link, Input* input)
 
     if (Player_CustomState2_Has(link, PLAYER_CUSTOM_STATE2_KAMARO_DANCE))
     {
-        if (!(input->cur.button & B_BUTTON))
+        if (sKamaroDanceStartGrace)
+        {
+            sKamaroDanceStartGrace = false;
+        }
+        else if (!(input->cur.button & B_BUTTON))
         {
             Player_EndKamaroDanceOoT(play, link);
             return;
@@ -326,21 +452,37 @@ void Player_UpdateKamaroMaskOoT(PlayState* play, Player* link, Input* input)
 
         if (link->actionFunc != Player_KamaroDanceActionOoT)
         {
-            Player_SetupActionPreserveItemActionOoT(play, link, Player_KamaroDanceActionOoT, 0);
+            Player_EndKamaroDanceOoT(play, link);
+            return;
         }
 
-        input->press.button &= ~B_BUTTON;
+        input->press.button &= ~KAMARO_DANCE_ACTIVE_SWALLOW_PRESS_BUTTONS;
 
+        Player_PreserveKamaroItemActionOoT(link);
+        Player_HideKamaroHeldItemModelOoT(link);
         Player_UpdateKamaroDanceAnimOoT(play, link);
         return;
     }
 
-    if ((input->press.button & B_BUTTON) && Player_CanStartKamaroDanceOoT(link))
+    if (input->press.button & B_BUTTON)
     {
-        input->press.button &= ~B_BUTTON;
+        if (Player_CanStartKamaroDanceOoT(link, input))
+        {
+            Player_StartKamaroDanceOoT(play, link, input);
 
-        Player_StartKamaroDanceOoT(play, link);
+            if (Player_CustomState2_Has(link, PLAYER_CUSTOM_STATE2_KAMARO_DANCE))
+            {
+                input->press.button &= ~KAMARO_DANCE_START_SWALLOW_PRESS_BUTTONS;
+                input->cur.button &= ~KAMARO_DANCE_START_SWALLOW_CUR_BUTTONS;
 
-        Player_UpdateKamaroDanceAnimOoT(play, link);
+                Player_PreserveKamaroItemActionOoT(link);
+                Player_HideKamaroHeldItemModelOoT(link);
+                Player_UpdateKamaroDanceAnimOoT(play, link);
+            }
+        }
+        else if (Player_KamaroShouldSwallowFailedStartOoT(link, input))
+        {
+            input->press.button &= ~B_BUTTON;
+        }
     }
 }
