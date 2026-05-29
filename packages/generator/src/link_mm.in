@@ -728,3 +728,9 @@ Audio_SetSpec = 0x801a400c;
 
 LifeMeter_IsCritical = 0x80101930;
 Inventory_SaveLotteryCodeGuess = 0x8012f278;
+
+func_800F4A10 = 0x800f4a10;
+Audio_SetPauseState = 0x801a3a7c;
+GameState_SetFramerateDivisor = 0x801733a8;
+ShrinkWindow_Letterbox_GetSizeTarget = 0x80160c14;
+Audio_PlaySfx_PauseMenuOpenOrClose = 0x801a3aec;

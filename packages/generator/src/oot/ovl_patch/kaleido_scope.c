@@ -40,7 +40,7 @@ static int checkItemToggle(PlayState* play)
 
     if (p->cursorSpecialPos == 0)
     {
-        switch (p->screen_idx)
+        switch (p->pageIndex)
         {
         case PAUSE_ITEM:
             itemId = p->cursorItem[PAUSE_ITEM];
@@ -155,7 +155,7 @@ void KaleidoSetCursorColor(PlayState* play)
     /* Not on Z/R */
     if (p->cursorSpecialPos == 0)
     {
-        switch (p->screen_idx)
+        switch (p->pageIndex)
         {
         case PAUSE_ITEM:
             /* Item select */
@@ -198,7 +198,7 @@ static void KaleidoScope_HandleMapDungeonMenu(PlayState* play, void* unk, u32 ov
     KaleidoScopeHandler2 handler;
     int onMenu;
 
-    onMenu = play->pauseCtx.screen_idx == 1;
+    onMenu = play->pauseCtx.pageIndex == 1;
     if (onMenu && play->state.input[0].press.button & (L_TRIG | U_CBUTTONS))
         comboMenuNext();
 
@@ -590,7 +590,7 @@ static void KaleidoScope_UpdateOwlWarpNamePanel(PlayState* play)
     u16 texIndex;
 
     pauseCtx = &play->pauseCtx;
-    if ((pauseCtx->namedItem != pauseCtx->cursorItem[PAUSE_MAP]) || ((pauseCtx->screen_idx == 1) && (pauseCtx->cursorSpecialPos != 0)))
+    if ((pauseCtx->namedItem != pauseCtx->cursorItem[PAUSE_MAP]) || ((pauseCtx->pageIndex == 1) && (pauseCtx->cursorSpecialPos != 0)))
     {
         pauseCtx->namedItem = pauseCtx->cursorItem[PAUSE_MAP];
         texIndex = pauseCtx->namedItem;
@@ -879,7 +879,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
                     160.0f;
                 pauseCtx->namedItem = PAUSE_ITEM_NONE;
                 interfaceCtx->startAlpha = 0;
-                pauseCtx->screen_idx = gPrevPageIndex;
+                pauseCtx->pageIndex = gPrevPageIndex;
                 pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = gPrevCursorPoint;
             }
             break;

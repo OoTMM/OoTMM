@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add easy pause buffering for both games - once paused, hold the Start button to advance one single frame.
 - Add Boomerang to Majora's Mask.
 - Add Kamaro's Mask to Ocarina of Time.
 - Add extra signs outside ganon's castle and on clock tower roof to hint the bridge & moon special conditions, when applicable.

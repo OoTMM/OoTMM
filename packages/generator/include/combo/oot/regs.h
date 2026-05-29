@@ -181,6 +181,8 @@
 #define R_B_LABEL_X(i)                           WREG(10 + (i))
 #define R_B_LABEL_Y(i)                           WREG(12 + (i))
 #define R_A_LABEL_Z(i)                           WREG(14 + (i))
+#define R_PAUSE_BUTTON_LEFT_X                    WREG(16)
+#define R_PAUSE_BUTTON_RIGHT_X                   WREG(17)
 #define R_OW_MINIMAP_X                           WREG(29)
 #define R_OW_MINIMAP_Y                           WREG(30)
 #define R_MINIMAP_DISABLED                       WREG(31)

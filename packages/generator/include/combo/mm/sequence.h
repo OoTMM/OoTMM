@@ -215,5 +215,6 @@ s16 Actor_WorldYawTowardPoint(Actor* actor, Vec3f* refPoint);
 s16 Actor_WorldPitchTowardPoint(Actor* actor, Vec3f* refPoint);
 
 void Audio_SetSpec(u8 specId);
+void Audio_SetPauseState(u8 isPauseMenuOpen);
 
 #endif

@@ -1,9 +1,6 @@
 #include <combo.h>
 #include <combo/common/cosmetics.h>
 
-#define IS_PAUSED(pauseCtx) \
-    (((pauseCtx)->state != 0 /* PAUSE_STATE_OFF */) || ((pauseCtx)->debugState != 0 /* PAUSE_DEBUG_STATE_CLOSED */))
-
 u8 gNoLowHealthBeep;
 EXPORT_SYMBOL(NO_LOW_HEALTH_BEEP, gNoLowHealthBeep);
 

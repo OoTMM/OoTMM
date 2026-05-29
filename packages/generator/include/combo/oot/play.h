@@ -44,6 +44,20 @@ typedef struct
 }
 GameOverContext;
 
+typedef enum GameOverState
+{
+    /* 00 */ GAMEOVER_INACTIVE,
+    /* 01 */ GAMEOVER_DEATH_START,
+    /* 02 */ GAMEOVER_DEATH_WAIT_GROUND, // wait for link to fall and hit the ground
+    /* 03 */ GAMEOVER_DEATH_DELAY_MENU,  // wait for 1 second before showing the game over menu
+    /* 04 */ GAMEOVER_DEATH_MENU,        // do nothing while kaleidoscope handles the game over menu
+    /* 20 */ GAMEOVER_REVIVE_START = 20,
+    /* 21 */ GAMEOVER_REVIVE_RUMBLE,
+    /* 22 */ GAMEOVER_REVIVE_WAIT_GROUND, // wait for link to fall and hit the ground
+    /* 23 */ GAMEOVER_REVIVE_WAIT_FAIRY,  // wait for the fairy to rise all the way up out of links body
+    /* 24 */ GAMEOVER_REVIVE_FADE_OUT     // fade out the game over lights as link is revived and gets back up
+} GameOverState;
+
 ASSERT_SIZE(GameOverContext, 0x4);
 
 typedef struct SceneSequences {
@@ -118,7 +132,18 @@ typedef struct PlayState
     s8                      bombchuBowlingStatus; /* "bombchu_game_flag" */
     u8                      transitionType;
     CollisionCheckContext   colChkCtx;
-    char                    unk_120fc[0x41c];
+    /* 0x120FC */ u16 cutsceneFlags[20];
+    /* 0x12124 PreRender pauseBgPreRender; */ u8 unk_12124[0x12174 - 0x12124];
+    /* 0x12174 */ char unk_12174[0x53];
+    /* 0x121C7 */ s8 unk_121C7;
+    /* 0x121C8 TransitionContext transitionCtx; */ u8 unk_121c8[0x12418 - 0x121c8];
+    /* 0x12418 */ char unk_12418[0x3];
+    /* 0x1241B */ u8 transitionMode;                  // "fbdemo_wipe_modem"
+    /* 0x1241C TransitionFade transitionFadeFlash; */ u8 unk_1241c[0x12428 - 0x1241c];
+    /* 0x12428 */ char unk_12428[0x3];
+    /* 0x1242B */ u8 viewpoint; // toggleable camera setting by shops or player. Is also equal to the bgCamIndex + 1
+    /* 0x1242C SceneTableEntry *loadedScene; */ char unk_1242c[0x12430 - 0x1242c];
+    /* 0x12430 */ char unk_12430[0xE8];
 }
 PlayState;
 

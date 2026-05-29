@@ -43,9 +43,9 @@ typedef struct PauseContext
     u16             debugState;
     Vec3f           eye;
     u16             mainState;
-    u16             screen_prev_idx;
-    u16             screen_idx;
-    u16             switchPageTimer;
+    u16             nextPageMode;
+    u16             pageIndex;
+    u16             pageSwitchTimer;
     u16             savePromptState;
     char            pad_1ee[0x2];
     f32             unk_1F0;
@@ -115,9 +115,9 @@ ASSERT_OFFSET(PauseContext, state,                      0x1d4);
 ASSERT_OFFSET(PauseContext, debugState,                 0x1d6);
 ASSERT_OFFSET(PauseContext, eye,                        0x1d8);
 ASSERT_OFFSET(PauseContext, mainState,                  0x1e4);
-ASSERT_OFFSET(PauseContext, screen_prev_idx,            0x1e6);
-ASSERT_OFFSET(PauseContext, screen_idx,                 0x1e8);
-ASSERT_OFFSET(PauseContext, switchPageTimer,            0x1ea);
+ASSERT_OFFSET(PauseContext, nextPageMode,            0x1e6);
+ASSERT_OFFSET(PauseContext, pageIndex,                 0x1e8);
+ASSERT_OFFSET(PauseContext, pageSwitchTimer,            0x1ea);
 ASSERT_OFFSET(PauseContext, savePromptState,            0x1ec);
 ASSERT_OFFSET(PauseContext, pad_1ee,                    0x1ee);
 ASSERT_OFFSET(PauseContext, unk_1F0,                    0x1f0);
@@ -155,5 +155,43 @@ ASSERT_OFFSET(PauseContext, ocarinaSongIdx,             0x264);
 ASSERT_OFFSET(PauseContext, worldMapPoints,             0x266);
 ASSERT_OFFSET(PauseContext, tradeQuestLocation,         0x27a);
 ASSERT_OFFSET(PauseContext, playerSkelAnime,            0x27c);
+
+typedef enum PauseState
+{
+    /*  0 */ PAUSE_STATE_OFF,
+    /*  1 */ PAUSE_STATE_WAIT_LETTERBOX,    // Request no letterboxing and wait for it.
+    /*  2 */ PAUSE_STATE_WAIT_BG_PRERENDER, // Wait for the pause background prerender to be done.
+    /*  3 */ PAUSE_STATE_INIT,              // Load data and initialize/setup various things.
+    /*  4 */ PAUSE_STATE_OPENING_1,         // Animate the pause menu coming together with rotations and other animations.
+    /*  5 */ PAUSE_STATE_OPENING_2,         // Finish some animations for opening the menu.
+    /*  6 */ PAUSE_STATE_MAIN,              // Pause menu ready for player inputs.
+    /*  7 */ PAUSE_STATE_SAVE_PROMPT,       // Save prompt in the pause menu
+    /*  8 */ PAUSE_STATE_GAME_OVER_START,
+    /*  9 */ PAUSE_STATE_GAME_OVER_WAIT_BG_PRERENDER,
+    /* 10 */ PAUSE_STATE_GAME_OVER_INIT,
+    /* 11 */ PAUSE_STATE_GAME_OVER_SHOW_MESSAGE,
+    /* 12 */ PAUSE_STATE_GAME_OVER_WINDOW_DELAY,
+    /* 13 */ PAUSE_STATE_GAME_OVER_SHOW_WINDOW,     // Show background and animate
+    /* 14 */ PAUSE_STATE_GAME_OVER_SAVE_PROMPT,     // Ask "Would you like to save?", apply the choice
+    /* 15 */ PAUSE_STATE_GAME_OVER_SAVED,           // Show "Game saved.", wait for the delay or input
+    /* 16 */ PAUSE_STATE_GAME_OVER_CONTINUE_PROMPT, // Ask "Continue playing?"
+    /* 17 */ PAUSE_STATE_GAME_OVER_FINISH,          // Fade out, then apply the choice
+    /* 18 */ PAUSE_STATE_CLOSING,                   // Animate the pause menu closing
+    /* 19 */ PAUSE_STATE_RESUME_GAMEPLAY            // Handles returning to normal gameplay once the pause menu is visually closed
+} PauseState;
+
+typedef enum PauseDebugState {
+    /* 0 */ PAUSE_DEBUG_STATE_CLOSED,
+    /* 1 */ PAUSE_DEBUG_STATE_INVENTORY_EDITOR_OPENING,
+    /* 2 */ PAUSE_DEBUG_STATE_INVENTORY_EDITOR_OPEN,
+    /* 3 */ PAUSE_DEBUG_STATE_FLAG_SET_OPEN
+} PauseDebugState;
+
+
+#define IS_PAUSED(pauseCtx) \
+    (((pauseCtx)->state != PAUSE_STATE_OFF) || ((pauseCtx)->debugState != PAUSE_DEBUG_STATE_CLOSED))
+
+#define PAUSE_PAGES_Y_ORIGIN_1_LOWER 80 // PAGE_BG_ROWS * PAGE_BG_QUAD_HEIGHT / 2
+#define PAUSE_PAGES_Y_ORIGIN_2_LOWER (s16)(-PAUSE_PAGES_Y_ORIGIN_1_LOWER * 0.78 * 100)
 
 #endif

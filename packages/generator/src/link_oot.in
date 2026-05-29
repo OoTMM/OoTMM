@@ -808,3 +808,8 @@ sIsOcarinaInputEnabled = 0x80102208;
 sStaffOcarinaPlayingPos = 0x80121f46;
 sMusicStaffNumNotesPerTest = 0x80102b78;
 sPrevOcarinaWithMusicStaffFlags = 0x80102248;
+
+sKaleidoSetupRightPageEyeX = 0x800f15e0;
+sKaleidoSetupRightPageEyeZ = 0x800f15f0;
+sKaleidoSetupRightPageIndex = 0x800f15d8;
+Audio_PlaySfx_PauseMenuOpenOrClose = 0x800c7200;

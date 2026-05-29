@@ -33,4 +33,12 @@ void Sfx_PlaySfxCentered(u16 sfxId);
 # define Sfx_PlaySfxCentered2 Sfx_PlaySfxCentered
 #endif
 
+#if defined(GAME_MM)
+typedef enum SfxPauseMenu
+{
+    /* 0 */ SFX_PAUSE_MENU_CLOSE,
+    /* 1 */ SFX_PAUSE_MENU_OPEN
+} SfxPauseMenu;
+#endif
+
 #endif

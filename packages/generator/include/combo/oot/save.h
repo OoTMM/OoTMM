@@ -476,4 +476,21 @@ typedef struct ALIGNED(16)
 }
 OotCustomSave;
 
+#define CS_INDEX_0 0xFFF0
+#define CS_INDEX_1 0xFFF1
+#define CS_INDEX_2 0xFFF2
+#define CS_INDEX_3 0xFFF3
+#define CS_INDEX_4 0xFFF4
+#define CS_INDEX_5 0xFFF5
+#define CS_INDEX_6 0xFFF6
+#define CS_INDEX_7 0xFFF7
+#define CS_INDEX_8 0xFFF8
+#define CS_INDEX_9 0xFFF9
+#define CS_INDEX_A 0xFFFA
+#define CS_INDEX_B 0xFFFB
+#define CS_INDEX_C 0xFFFC
+#define CS_INDEX_D 0xFFFD // does not load a cutscene scene layer (see above)
+#define CS_INDEX_E 0xFFFE
+#define CS_INDEX_F 0xFFFF
+
 #endif

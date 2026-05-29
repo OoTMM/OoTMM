@@ -160,7 +160,11 @@ void Message_ShowMessageAtYPosition(PlayState* play, u16 messageId, u8 yPosition
 void PictoUpdateFlags(PlayState* play);
 extern u16 gPictoboxState;
 extern u16 gPictoboxPhotoTaken;
+void func_800F4A10(PlayState* play);
+void GameState_SetFramerateDivisor(GameState* state, s32 divisor);
+int ShrinkWindow_Letterbox_GetSizeTarget();
 #endif
+void Audio_PlaySfx_PauseMenuOpenOrClose(u8 isPauseMenuOpen);
 
 #define TEXT_STATE_NONE         0
 #define TEXT_STATE_CLOSING      2
