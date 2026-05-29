@@ -8,7 +8,7 @@ import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
 import { patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
-import { SongEventSongs, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM } from '../song-events';
+import { SongEventSongs, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, type PlandoSongEvent } from '../song-events';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   if (s.type === 'set') {
@@ -182,45 +182,39 @@ function sortCopyObject<T extends {[k: string]: any}>(obj: T): T {
 }
 
 function sortCopySongEvents<T extends readonly string[]>(
-    obj: unknown,
+    obj: Partial<Record<T[number], Partial<PlandoSongEvent>>> | undefined,
     validEvents: T,
-): Partial<Record<T[number], { song: SongEventSongs | 'random'; group?: string }>> {
-  const result: Partial<Record<T[number], { song: SongEventSongs | 'random'; group?: string }>> = {};
+): Partial<Record<T[number], PlandoSongEvent>> {
+  const result: Partial<Record<T[number], PlandoSongEvent>> = {};
 
   if (!obj || typeof obj !== 'object') {
     return result;
   }
 
-  const valid = new Set<string>(validEvents as readonly string[]);
+  const valid = new Set<string>(validEvents);
 
-  for (const event of Object.keys(obj as Record<string, unknown>).sort()) {
+  for (const event of Object.keys(obj).sort()) {
     if (!valid.has(event)) {
       continue;
     }
 
-    const data = (obj as Record<string, unknown>)[event];
+    const key = event as T[number];
+    const data = obj[key];
+
     if (!data || typeof data !== 'object') {
       continue;
     }
 
-    const song = (data as { song?: unknown }).song;
-    const group = (data as { group?: unknown }).group;
+    const { song, group } = data;
 
-    const resultData: {
-      song: SongEventSongs | 'random';
-      group?: string;
-    } = {} as {
-      song: SongEventSongs | 'random';
-      group?: string;
-    };
+    if (song === 'random') {
+      const resultData: PlandoSongEvent = { song };
 
     if (typeof group === 'string' && group.length > 0) {
       resultData.group = group;
     }
 
-    if (song === 'random') {
-      resultData.song = song;
-      result[event as T[number]] = resultData;
+      result[key] = resultData;
       continue;
     }
 
@@ -233,8 +227,13 @@ function sortCopySongEvents<T extends readonly string[]>(
       continue;
     }
 
-    resultData.song = song;
-    result[event as T[number]] = resultData;
+    const resultData: PlandoSongEvent = { song };
+
+    if (typeof group === 'string' && group.length > 0) {
+      resultData.group = group;
+    }
+
+    result[key] = resultData;
   }
 
   return result;
