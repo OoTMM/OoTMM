@@ -20,3 +20,61 @@ export enum SongEventSongs {
   ELEGY,
   OATH,
 }
+
+export const SONG_EVENT_LOCATIONS_OOT = [
+  'SONG_EVENT_TEMPLE_OF_TIME',
+  'SONG_EVENT_WINDMILL',
+  'SONG_EVENT_GRAVEYARD',
+  'SONG_EVENT_ZORA_RIVER',
+  'SONG_EVENT_GORON_CITY',
+  'SONG_EVENT_GREAT_FAIRY_SPELL_WIND',
+  'SONG_EVENT_GREAT_FAIRY_SPELL_FIRE',
+  'SONG_EVENT_GREAT_FAIRY_SPELL_LOVE',
+  'SONG_EVENT_GREAT_FAIRY_UPGRADE_MAGIC',
+  'SONG_EVENT_GREAT_FAIRY_UPGRADE_MAGIC2',
+  'SONG_EVENT_GREAT_FAIRY_UPGRADE_DEFENSE',
+  'SONG_EVENT_TEMPLE_WATER',
+  'SONG_EVENT_TEMPLE_SHADOW',
+  'SONG_EVENT_TEMPLE_SPIRIT_STATUE',
+  'SONG_EVENT_TEMPLE_SPIRIT_LOWER',
+  'SONG_EVENT_TEMPLE_SPIRIT_HIGHER',
+  'SONG_EVENT_TEMPLE_BOTW',
+  'SONG_EVENT_TEMPLE_GANON',
+] as const;
+
+export const SONG_EVENT_LOCATIONS_MM = [
+  'SONG_EVENT_TEMPLE_WOODFALL',
+  'SONG_EVENT_TEMPLE_SNOWHEAD',
+  'SONG_EVENT_TEMPLE_GREATBAY',
+  //'SONG_EVENT_HEALING_POEHUT',
+  'SONG_EVENT_HEALING_DARMANI',
+  'SONG_EVENT_HEALING_PAMELA_FATHER',
+  'SONG_EVENT_HEALING_KAMARO',
+  'SONG_EVENT_HEALING_MIKAU',
+  'SONG_EVENT_AWAKENING_KEETA',
+  //'SONG_EVENT_AWAKENING_SCRUB',
+  'SONG_EVENT_LULLABY_KID',
+  'SONG_EVENT_STORMS_COMPOSER',
+  'SONG_EVENT_CLOCK_TOWER_ROOF',
+] as const;
+
+export type SongEventLocationOot = typeof SONG_EVENT_LOCATIONS_OOT[number];
+export type SongEventLocationMm = typeof SONG_EVENT_LOCATIONS_MM[number];
+
+export type PlandoSongEvent = {
+  song: SongEventSongs | 'random';
+  group?: string;
+};
+
+export type PlandoSongEvents = {
+  oot: Partial<Record<SongEventLocationOot, PlandoSongEvent>>;
+  mm: Partial<Record<SongEventLocationMm, PlandoSongEvent>>;
+};
+
+export const SONG_EVENT_INDEX_OOT = Object.fromEntries(
+    SONG_EVENT_LOCATIONS_OOT.map((k, i) => [k, i]),
+) as Record<SongEventLocationOot, number>;
+
+export const SONG_EVENT_INDEX_MM = Object.fromEntries(
+    SONG_EVENT_LOCATIONS_MM.map((k, i) => [k, i]),
+) as Record<SongEventLocationMm, number>;

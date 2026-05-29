@@ -8,6 +8,7 @@ import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
 import { patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
+import { SongEventSongs, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, type PlandoSongEvent } from '../song-events';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   if (s.type === 'set') {
@@ -20,7 +21,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   junkLocations: [] as string[],
   tricks: [ ...DEFAULT_TRICKS ],
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
-  plando: { locations: {}, entrances: {} },
+  plando: { locations: {}, entrances: {}, songEvents: { oot: {}, mm: {} } },
   hints: [ ...SETTINGS_DEFAULT_HINTS ],
 } as Settings;
 
@@ -68,6 +69,12 @@ function validateSettingsStep(settings: Settings): Settings {
     if (s.games === 'oot') s.goal = 'ganon';
     if (s.games === 'mm') s.goal = 'majora';
   }
+
+  /* Validate plando song events */
+  s.plando.songEvents = {
+    oot: sortCopySongEvents(s.plando.songEvents?.oot, SONG_EVENT_LOCATIONS_OOT),
+    mm: sortCopySongEvents(s.plando.songEvents?.mm, SONG_EVENT_LOCATIONS_MM),
+  } as Settings['plando']['songEvents'];
 
   /* Specific validation */
   for (const data of SETTINGS) {
@@ -174,6 +181,64 @@ function sortCopyObject<T extends {[k: string]: any}>(obj: T): T {
   return result as T;
 }
 
+function sortCopySongEvents<T extends readonly string[]>(
+    obj: Partial<Record<T[number], Partial<PlandoSongEvent>>> | undefined,
+    validEvents: T,
+): Partial<Record<T[number], PlandoSongEvent>> {
+  const result: Partial<Record<T[number], PlandoSongEvent>> = {};
+
+  if (!obj || typeof obj !== 'object') {
+    return result;
+  }
+
+  const valid = new Set<string>(validEvents);
+
+  for (const event of Object.keys(obj).sort()) {
+    if (!valid.has(event)) {
+      continue;
+    }
+
+    const key = event as T[number];
+    const data = obj[key];
+
+    if (!data || typeof data !== 'object') {
+      continue;
+    }
+
+    const { song, group } = data;
+
+    if (song === 'random') {
+      const resultData: PlandoSongEvent = { song };
+
+    if (typeof group === 'string' && group.length > 0) {
+      resultData.group = group;
+    }
+
+      result[key] = resultData;
+      continue;
+    }
+
+    if (
+        typeof song !== 'number' ||
+        !Number.isInteger(song) ||
+        song < SongEventSongs.ZELDAS_LULLABY ||
+        song > SongEventSongs.OATH
+    ) {
+      continue;
+    }
+
+    const resultData: PlandoSongEvent = { song };
+
+    if (typeof group === 'string' && group.length > 0) {
+      resultData.group = group;
+    }
+
+    result[key] = resultData;
+  }
+
+  return result;
+}
+
 export function makeSettings(arg: PartialDeep<Settings>): Settings {
   /* Clone the base setting to avoid mutating it */
   const result = cloneDeep(DEFAULT_SETTINGS);
@@ -215,6 +280,13 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
     if (arg.plando.entrances !== undefined) {
       result.plando.entrances = sortCopyObject({ ...arg.plando.entrances }) as Settings['plando']['entrances'];
     }
+
+    if (arg.plando.songEvents !== undefined) {
+      result.plando.songEvents = {
+        oot: sortCopySongEvents(arg.plando.songEvents.oot, SONG_EVENT_LOCATIONS_OOT),
+        mm: sortCopySongEvents(arg.plando.songEvents.mm, SONG_EVENT_LOCATIONS_MM),
+      } as Settings['plando']['songEvents'];
+    }
   }
 
   if (arg.hints !== undefined) {
@@ -235,6 +307,28 @@ function applyKeyValue<K extends string, V>(data: Record<K, V>, patch: undefined
     if (value === null) {
       delete result[key];
     } else {
+      result[key] = value;
+    }
+  }
+  return result;
+}
+
+function applyPartialKeyValue<K extends string, V>(
+    data: Partial<Record<K, V>>,
+    patch: undefined | null | Partial<Record<K, V | null>>,
+): Partial<Record<K, V>> {
+  if (patch === undefined) {
+    return data;
+  }
+  if (patch === null) {
+    return {};
+  }
+  const result = { ...data };
+  for (const key in patch) {
+    const value = patch[key];
+    if (value === null) {
+      delete result[key];
+    } else if (value !== undefined) {
       result[key] = value;
     }
   }
@@ -273,6 +367,18 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
   if (patch.plando !== undefined) {
     s.plando.locations = applyKeyValue(s.plando.locations, patch.plando.locations);
     s.plando.entrances = applyKeyValue(s.plando.entrances, patch.plando.entrances);
+
+    if (patch.plando.songEvents !== undefined) {
+      s.plando.songEvents.oot = applyPartialKeyValue(
+          s.plando.songEvents.oot,
+          patch.plando.songEvents.oot,
+      ) as Settings['plando']['songEvents']['oot'];
+
+      s.plando.songEvents.mm = applyPartialKeyValue(
+          s.plando.songEvents.mm,
+          patch.plando.songEvents.mm,
+      ) as Settings['plando']['songEvents']['mm'];
+    }
   }
 
   /* Apply hints */
