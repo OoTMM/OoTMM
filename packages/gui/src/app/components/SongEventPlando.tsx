@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-import { Button, Card, MultiSelect, Select } from './ui';
+import { Button, Card, MultiSelect, Select, Tooltip } from './ui';
 import { useStore } from '../store';
 
 const SONG_EVENT_LOCATIONS_OOT = [
@@ -772,8 +772,14 @@ export function SongEventPlando() {
 
     return (
         <main className="h-full min-h-0 flex flex-col">
-            <nav className="flex gap-2">
+            <nav className="flex items-end gap-2">
                 <div className="flex-1">
+                    <div className="mb-1 flex justify-start">
+                        <Tooltip>
+                            Assigning Random to a group of events will assign the same randomized song to all events in a group
+                        </Tooltip>
+                    </div>
+
                     <Select
                         searcheable
                         placeholder="Song"
