@@ -741,7 +741,7 @@ const PRESET_HELL = makeSettings({
   progressiveSwordsOot: 'separate',
   progressiveShieldsMm: 'separate',
   progressiveGoronLullabyMm: 'progressive',
-  progressiveGoronLullabyOot: 'progresive',
+  progressiveGoronLullabyOot: 'progressive',
   progressiveClocks: 'separate',
   bottleContentShuffle: true,
   stoneAgonyMm: true,

@@ -3,6 +3,7 @@ import type { Entrance } from '../data/data';
 
 import type { TrickKey } from './tricks';
 import type { Settings } from './type';
+import type { PlandoSongEvent, SongEventLocationOot, SongEventLocationMm } from '../song-events';
 
 type SettingsArrayAdd<T> = { add: T[] };
 type SettingsArrayRemove<T> = { remove: T[] };
@@ -15,6 +16,10 @@ export type SettingsPatch = PartialDeep<Omit<Settings, 'junkLocations' | 'tricks
   plando?: {
     locations?: null | {[k: string]: string | null};
     entrances?: null | Record<Entrance, Entrance | null>;
+    songEvents?: {
+      oot?: null | Partial<Record<SongEventLocationOot, PlandoSongEvent | null>>;
+      mm?: null | Partial<Record<SongEventLocationMm, PlandoSongEvent | null>>;
+    };
   };
   hints?: SettingsArrayPatch<Settings['hints'][number]>;
 };
