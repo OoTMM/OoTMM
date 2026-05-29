@@ -114,7 +114,7 @@ static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
     dst = (*(char**)((char*)&play->interfaceCtx + 0x138)) + 0x1000 * slot;
     itemId = gSave.info.equips.buttonItems[slot];
 
-    if (slot == 0 && !isInit)
+    if (slot == 0 && !isInit && GET_PLAYER(play)->rideActor == NULL)
     {
         /* Masks can overwrite the B icon */
         link = GET_PLAYER(play);

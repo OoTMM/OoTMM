@@ -305,7 +305,10 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     Player_Update(this, play);
     input = *(Input**)(OverlayAddr(0x80856734));
     kamaroInput = sKamaroInputValid ? &sKamaroInput : input;
-    Player_UpdateKamaroMaskOoT(play, this, kamaroInput);
+    if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(this) && GET_PLAYER(play)->rideActor == NULL)
+    {
+        Player_UpdateKamaroMaskOoT(play, this, kamaroInput);
+    }
     Player_HandleBronzeScale(this, play);
     Ocarina_HandleCustomSongs(this, play);
     Dpad_Update(play);
@@ -426,7 +429,7 @@ void Player_ProcessItemButtonsWrapper(Player* link, PlayState* play)
     bPress = !!(input->press.button & B_BUTTON);
 
     /* Handle masks that have B actions */
-    if (bPress && !(link->stateFlags1 & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link))
+    if (bPress && !(link->stateFlags1 & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link) && GET_PLAYER(play)->rideActor == NULL)
     {
         switch (link->mask)
         {
