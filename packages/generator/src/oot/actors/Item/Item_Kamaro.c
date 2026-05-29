@@ -244,6 +244,7 @@ static s32 Player_KamaroItemActionIsCrouchStabMeleeOoT(s32 itemAction)
     return (itemAction == PLAYER_IA_SWORD_MASTER) ||
            (itemAction == PLAYER_IA_SWORD_KOKIRI) ||
            (itemAction == PLAYER_IA_SWORD_BIGGORON) ||
+           (itemAction == PLAYER_IA_HAMMER) ||
            (itemAction == PLAYER_IA_DEKU_STICK);
 }
 
