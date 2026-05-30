@@ -67,6 +67,12 @@ class SpoilerWriter {
     }
   }
 
+  private plandoSongEventSongName(song: number | 'random') {
+    return song === 'random'
+        ? 'Random'
+        : this.songEventSongName(song);
+  }
+
   private writeHeader() {
     this.writer.write(`Seed: ${this.opts.seed}`);
     this.writer.write(`Version: ${VERSION}`);
@@ -267,9 +273,16 @@ class SpoilerWriter {
   }
 
   private writePlando() {
-    if (this.logic.plandoLocations.size >= 1) {
+    const plandoSongEventsOot = this.opts.settings.plando.songEvents?.oot || {};
+    const plandoSongEventsMm = this.opts.settings.plando.songEvents?.mm || {};
+    const hasPlandoSongEvents =
+        Object.values(plandoSongEventsOot).some(Boolean) ||
+        Object.values(plandoSongEventsMm).some(Boolean);
+
+    if (this.logic.plandoLocations.size >= 1 || hasPlandoSongEvents) {
       this.writer.indent('Plando');
       for (let i = 0; i < this.logic.worlds.length; ++i) {
+        const world = this.logic.worlds[i];
         if (this.logic.worlds.length > 1) {
           this.writer.indent(`World ${i + 1}`);
         }
@@ -280,6 +293,17 @@ class SpoilerWriter {
           }
           const pi = this.logic.plandoLocations.get(loc)!;
           this.writer.write(`${locD.id}: ${itemName(pi.item.id)}`)
+        }
+        if (this.opts.settings.songEventsShuffleOot && Object.values(plandoSongEventsOot).some(Boolean)) {
+          this.writer.indent('Song Events - Ocarina of Time');
+          this.writePlandoSongEventGame(SONG_EVENT_LOCATIONS_OOT, world.songEventsOot, plandoSongEventsOot);
+          this.writer.unindent('');
+        }
+
+        if (this.opts.settings.songEventsShuffleMm && Object.values(plandoSongEventsMm).some(Boolean)) {
+          this.writer.indent('Song Events - Majora\'s Mask');
+          this.writePlandoSongEventGame(SONG_EVENT_LOCATIONS_MM, world.songEventsMm, plandoSongEventsMm);
+          this.writer.unindent('');
         }
         if (this.logic.worlds.length > 1) {
           this.writer.unindent('');
@@ -348,6 +372,35 @@ class SpoilerWriter {
 
     for (const { event, song } of entries) {
       this.writer.write(`${event.padEnd(longestEventName + 1)}: ${this.songEventSongName(song)}`);
+    }
+  }
+
+  private writePlandoSongEventGame(
+      locations: readonly string[],
+      resolvedSongs: readonly number[],
+      plandoSongs: Record<string, { song: number | 'random'; group?: string } | null | undefined>,
+  ) {
+    const entries = Object.entries(plandoSongs)
+        .flatMap(([event, plando]) => {
+          const resolvedSong = resolvedSongs[locations.indexOf(event)];
+          return plando && resolvedSong !== undefined
+              ? [{ event, plando, resolvedSong }]
+              : [];
+        });
+    if (!entries.length) return;
+    const longestEventName = Math.max(...entries.map(({ event }) => event.length));
+    const longestSongName = Math.max(
+        ...entries.map(({ plando }) => this.plandoSongEventSongName(plando.song).length),
+    );
+    for (const { event, plando, resolvedSong } of entries) {
+      const songName = this.plandoSongEventSongName(plando.song);
+      const group = plando.group ? ` (${plando.group})` : '';
+      const eventName = `${event.padEnd(longestEventName + 1)}: `;
+      this.writer.write(
+          plando.song === 'random'
+              ? `${eventName}${songName.padEnd(longestSongName + 1)} - ${this.songEventSongName(resolvedSong)}${group}`
+              : `${eventName}${songName}${group}`,
+      );
     }
   }
 
