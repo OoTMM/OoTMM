@@ -275,24 +275,28 @@ class SpoilerWriter {
   private writePlando() {
     const plandoSongEventsOot = this.opts.settings.plando.songEvents?.oot || {};
     const plandoSongEventsMm = this.opts.settings.plando.songEvents?.mm || {};
+    const hasPlandoLocations = this.logic.plandoLocations.size >= 1;
     const hasPlandoSongEvents =
         Object.values(plandoSongEventsOot).some(Boolean) ||
         Object.values(plandoSongEventsMm).some(Boolean);
 
-    if (this.logic.plandoLocations.size >= 1 || hasPlandoSongEvents) {
+    if (hasPlandoLocations || hasPlandoSongEvents) {
       this.writer.indent('Plando');
       for (let i = 0; i < this.logic.worlds.length; ++i) {
         const world = this.logic.worlds[i];
         if (this.logic.worlds.length > 1) {
           this.writer.indent(`World ${i + 1}`);
         }
-        for (const [loc, pi] of this.logic.plandoLocations) {
-          let locD = locationData(loc);
-          if (locD.world !== i) {
-            continue;
+        const plandoLocations = Array.from(this.logic.plandoLocations.entries())
+            .filter(([loc]) => locationData(loc).world === i);
+        if (plandoLocations.length > 0) {
+          this.writer.indent('Locations');
+
+          for (const [loc, pi] of plandoLocations) {
+            const locD = locationData(loc);
+            this.writer.write(`${locD.id}: ${itemName(pi.item.id)}`);
           }
-          const pi = this.logic.plandoLocations.get(loc)!;
-          this.writer.write(`${locD.id}: ${itemName(pi.item.id)}`)
+          this.writer.unindent('');
         }
         if (this.opts.settings.songEventsShuffleOot && Object.values(plandoSongEventsOot).some(Boolean)) {
           this.writer.indent('Song Events - Ocarina of Time');
@@ -398,7 +402,7 @@ class SpoilerWriter {
       const eventName = `${event.padEnd(longestEventName + 1)}: `;
       this.writer.write(
           plando.song === 'random'
-              ? `${eventName}${songName.padEnd(longestSongName + 1)} - ${this.songEventSongName(resolvedSong)}${group}`
+              ? `${eventName}${songName} - ${this.songEventSongName(resolvedSong)}${group}`
               : `${eventName}${songName}${group}`,
       );
     }
