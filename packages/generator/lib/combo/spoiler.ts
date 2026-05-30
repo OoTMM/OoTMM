@@ -2,7 +2,7 @@ import type { Options, TrickKey, PlayerItem, Region } from '@ootmm/core';
 import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
-import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations } from '@ootmm/core';
+import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SongEventSongs, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -10,6 +10,29 @@ import { regionName } from './regions';
 import { LogWriter } from './util/log-writer';
 
 const VERSION = process.env.VERSION || 'XXX';
+
+const SONG_EVENT_SONG_NAMES: Record<number, string> = {
+  [SongEventSongs.ZELDAS_LULLABY]: 'Zelda\'s Lullaby',
+  [SongEventSongs.EPONAS]: 'Epona\'s Song',
+  [SongEventSongs.SARIAS]: 'Saria\'s Song',
+  [SongEventSongs.SUNS]: 'Sun\'s Song',
+  [SongEventSongs.TIME]: 'Song of Time',
+  [SongEventSongs.STORMS]: 'Song of Storms',
+  [SongEventSongs.MINUET]: 'Minuet of Forest',
+  [SongEventSongs.BOLERO]: 'Bolero of Fire',
+  [SongEventSongs.SERENADE]: 'Serenade of Water',
+  [SongEventSongs.REQUIEM]: 'Requiem of Spirit',
+  [SongEventSongs.NOCTURNE]: 'Nocturne of Shadow',
+  [SongEventSongs.PRELUDE]: 'Prelude of Light',
+  [SongEventSongs.HEALING]: 'Song of Healing',
+  [SongEventSongs.SOARING]: 'Song of Soaring',
+  [SongEventSongs.SONATA]: 'Sonata of Awakening',
+  [SongEventSongs.GORON_LULLABY]: 'Goron Lullaby',
+  [SongEventSongs.GORON_LULLABY_INTRO]: 'Goron Lullaby Intro',
+  [SongEventSongs.NEW_WAVE]: 'New Wave Bossa Nova',
+  [SongEventSongs.ELEGY]: 'Elegy of Emptiness',
+  [SongEventSongs.OATH]: 'Oath to Order',
+};
 
 class SpoilerWriter {
   private writer: LogWriter;
@@ -266,6 +289,72 @@ class SpoilerWriter {
     }
   }
 
+  private writeSongEvents() {
+    let worlds = this.logic.worlds;
+
+    if (!this.opts.settings.distinctWorlds) {
+      worlds = [this.logic.worlds[0]];
+    }
+
+    const shouldWriteOot = this.opts.settings.songEventsShuffleOot;
+    const shouldWriteMm = this.opts.settings.songEventsShuffleMm;
+
+    if (!shouldWriteOot && !shouldWriteMm) {
+      return;
+    }
+
+    this.writer.indent('Song Events');
+
+    for (let i = 0; i < worlds.length; ++i) {
+      const world = worlds[i];
+
+      if (worlds.length > 1) {
+        this.writer.indent(`World ${i + 1}`);
+      }
+
+      if (shouldWriteOot) {
+        this.writer.indent('Ocarina of Time');
+        this.writeSongEventGame(SONG_EVENT_LOCATIONS_OOT, world.songEventsOot);
+        this.writer.unindent('');
+      }
+
+      if (shouldWriteMm) {
+        this.writer.indent('Majora\'s Mask');
+        this.writeSongEventGame(SONG_EVENT_LOCATIONS_MM, world.songEventsMm);
+        this.writer.unindent('');
+      }
+
+      if (worlds.length > 1) {
+        this.writer.unindent('');
+      }
+    }
+
+    this.writer.unindent('');
+  }
+
+  private writeSongEventGame(
+      locations: readonly string[],
+      resolvedSongs: readonly number[],
+  ) {
+    const entries = locations
+        .map((event, index) => ({ event, song: resolvedSongs[index] }))
+        .filter(({ song }) => song !== undefined);
+
+    if (entries.length === 0) {
+      return;
+    }
+
+    const longestEventName = Math.max(...entries.map(({ event }) => event.length));
+
+    for (const { event, song } of entries) {
+      this.writer.write(`${event.padEnd(longestEventName + 1)}: ${this.songEventSongName(song)}`);
+    }
+  }
+
+  private songEventSongName(song: number) {
+    return SONG_EVENT_SONG_NAMES[song] ?? `Unknown Song (${song})`;
+  }
+
   private pathName(path: AnalysisPath): string {
     switch (path.type) {
     case 'woth': return 'Way of the Hero';
@@ -492,6 +581,7 @@ class SpoilerWriter {
     this.writeWorldFlags();
     this.writePreCompleted();
     this.writeEntrances();
+    this.writeSongEvents();
     this.writeHints();
     this.writePaths();
     this.writePlando();
