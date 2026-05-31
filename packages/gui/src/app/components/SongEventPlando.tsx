@@ -28,15 +28,13 @@ const SONG_EVENT_LOCATIONS_MM = [
     'SONG_EVENT_TEMPLE_WOODFALL',
     'SONG_EVENT_TEMPLE_SNOWHEAD',
     'SONG_EVENT_TEMPLE_GREATBAY',
-    // commented out because its not currently in use in the pool
-    //'SONG_EVENT_HEALING_POEHUT',
+    'SONG_EVENT_HEALING_POEHUT',
     'SONG_EVENT_HEALING_DARMANI',
     'SONG_EVENT_HEALING_PAMELA_FATHER',
     'SONG_EVENT_HEALING_KAMARO',
     'SONG_EVENT_HEALING_MIKAU',
     'SONG_EVENT_AWAKENING_KEETA',
-    // commented out because its not currently use in the pool
-    //'SONG_EVENT_AWAKENING_SCRUB',
+    'SONG_EVENT_AWAKENING_SCRUB',
     'SONG_EVENT_LULLABY_KID',
     'SONG_EVENT_STORMS_COMPOSER',
     'SONG_EVENT_CLOCK_TOWER_ROOF',
@@ -66,7 +64,6 @@ const SONG_EVENT_SONGS = [
 ] as const;
 
 const RANDOM_SONG_EVENT_SONG = 'RANDOM' as const;
-const SONG_EVENT_GROUPS_STORAGE_KEY = 'song-event-plando-groups';
 
 type Game = 'oot' | 'mm';
 type Settings = ReturnType<typeof useStore.getState>['settings'];
@@ -90,14 +87,12 @@ type SongEventOption = {
 type SongEventGroup = {
     id: string;
     label: string;
-    song: string;
+    song: PlandoSongEventSong;
     events: Array<{
         game: Game;
         event: string;
     }>;
 };
-
-type SongEventGroups = Record<string, SongEventGroup | null>;
 
 const SONG_EVENT_SONG_NAMES: Record<SongEventSongName, string> = {
     ZELDAS_LULLABY: "Zelda's Lullaby",
@@ -145,15 +140,13 @@ const SONG_EVENT_LOCATION_NAMES: Record<string, string> = {
     SONG_EVENT_TEMPLE_WOODFALL: 'Woodfall Temple',
     SONG_EVENT_TEMPLE_SNOWHEAD: 'Snowhead Temple',
     SONG_EVENT_TEMPLE_GREATBAY: 'Great Bay Temple',
-    // commented out because its not currently use in the pool
-    //SONG_EVENT_HEALING_POEHUT: 'Song of Healing - Poe Hut',
+    SONG_EVENT_HEALING_POEHUT: 'Song of Healing - Poe Hut',
     SONG_EVENT_HEALING_DARMANI: 'Song of Healing - Darmani',
     SONG_EVENT_HEALING_PAMELA_FATHER: 'Song of Healing - Pamela’s Father',
     SONG_EVENT_HEALING_KAMARO: 'Song of Healing - Kamaro',
     SONG_EVENT_HEALING_MIKAU: 'Song of Healing - Mikau',
     SONG_EVENT_AWAKENING_KEETA: 'Sonata of Awakening - Keeta',
-    // commented out because its not currently use in the pool
-    //SONG_EVENT_AWAKENING_SCRUB: 'Sonata of Awakening - Deku Scrub',
+    SONG_EVENT_AWAKENING_SCRUB: 'Sonata of Awakening - Deku Scrub',
     SONG_EVENT_LULLABY_KID: 'Goron Lullaby - Elder’s Son',
     SONG_EVENT_STORMS_COMPOSER: 'Song of Storms - Composer',
     SONG_EVENT_CLOCK_TOWER_ROOF: 'Clock Tower Roof',
@@ -169,6 +162,74 @@ function getPlandoSongEvent(
     }
 
     return plando.songEvents?.mm?.[event as SongEventLocationMm] as PlandoSongEventValue | undefined;
+}
+
+function getSongEventEntriesFromPlando(plando: Settings['plando']) {
+    const entries: Array<{
+        game: Game;
+        event: string;
+        data: PlandoSongEventValue;
+    }> = [];
+
+    for (const [event, data] of Object.entries(plando.songEvents?.oot || {}) as Array<[string, PlandoSongEventValue | null]>) {
+        if (data) {
+            entries.push({
+                game: 'oot',
+                event,
+                data,
+            });
+        }
+    }
+
+    for (const [event, data] of Object.entries(plando.songEvents?.mm || {}) as Array<[string, PlandoSongEventValue | null]>) {
+        if (data) {
+            entries.push({
+                game: 'mm',
+                event,
+                data,
+            });
+        }
+    }
+
+    return entries;
+}
+
+function buildSongEventGroups(plando: Settings['plando']): SongEventGroup[] {
+    const groups = new Map<string, SongEventGroup>();
+
+    for (const { game, event, data } of getSongEventEntriesFromPlando(plando)) {
+        if (!data.group) {
+            continue;
+        }
+
+        let group = groups.get(data.group);
+
+        if (!group) {
+            group = {
+                id: data.group,
+                label: groupLabelFromId(data.group),
+                song: data.song,
+                events: [],
+            };
+
+            groups.set(data.group, group);
+        }
+
+        group.events.push({
+            game,
+            event,
+        });
+    }
+
+    return Array.from(groups.values())
+        .map(group => ({
+            ...group,
+            events: group.events.sort((a, b) => {
+                const ga = a.game.localeCompare(b.game);
+                return ga !== 0 ? ga : a.event.localeCompare(b.event);
+            }),
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));
 }
 
 function songEventKey(game: Game, event: string) {
@@ -288,14 +349,10 @@ function isSongAllowedForGame(settings: Settings, song: number, game: Game) {
     return getAllowedSongPoolForGame(settings, game).includes(song);
 }
 
-function nextGroupId(groups: SongEventGroups, extraUsedIds: Iterable<string> = []) {
-    const used = new Set(
-        Object.keys(groups || {})
-            .map(id => Number(id.replace(/^group-/, '')))
-            .filter(Number.isFinite)
-    );
+function nextGroupId(existingIds: Iterable<string> = []) {
+    const used = new Set<number>();
 
-    for (const id of extraUsedIds) {
+    for (const id of existingIds) {
         const n = Number(id.replace(/^group-/, ''));
         if (Number.isFinite(n)) {
             used.add(n);
@@ -316,30 +373,6 @@ function groupLabelFromId(id: string) {
     return Number.isFinite(n) ? `Group ${n}` : id;
 }
 
-function loadSongEventGroups(): SongEventGroups {
-    if (typeof window === 'undefined') {
-        return {};
-    }
-
-    try {
-        const raw = window.localStorage.getItem(SONG_EVENT_GROUPS_STORAGE_KEY);
-        return raw ? JSON.parse(raw) as SongEventGroups : {};
-    } catch {
-        return {};
-    }
-}
-
-function saveSongEventGroups(groups: SongEventGroups) {
-    if (typeof window === 'undefined') {
-        return;
-    }
-
-    window.localStorage.setItem(
-        SONG_EVENT_GROUPS_STORAGE_KEY,
-        JSON.stringify(groups)
-    );
-}
-
 function formatPlandoSong(song: PlandoSongEventSong) {
     return song === 'random'
         ? 'Random'
@@ -353,78 +386,14 @@ export function SongEventPlando() {
 
     const [selectedSong, setSelectedSongRaw] = useState<string | null>(null);
     const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
-    const [songEventGroups, setSongEventGroups] = useState<SongEventGroups>(() => loadSongEventGroups());
 
-    useEffect(() => {
-        saveSongEventGroups(songEventGroups);
-    }, [songEventGroups]);
-
-    useEffect(() => {
-        const songEventsPatch: {
-            oot?: Record<string, PlandoSongEventValue>;
-            mm?: Record<string, PlandoSongEventValue>;
-        } = {};
-
-        let changed = false;
-
-        for (const group of Object.values(songEventGroups || {})) {
-            if (!group) {
-                continue;
-            }
-
-            for (const event of group.events) {
-                const data = getPlandoSongEvent(plando, event.game, event.event);
-
-                if (!data) {
-                    continue;
-                }
-
-                if (data.group === group.id) {
-                    continue;
-                }
-
-                songEventsPatch[event.game] ||= {};
-                songEventsPatch[event.game]![event.event] = {
-                    ...data,
-                    group: group.id,
-                };
-
-                changed = true;
-            }
-        }
-
-        if (!changed) {
-            return;
-        }
-
-        patchSettings({
-            plando: {
-                songEvents: songEventsPatch,
-            },
-        });
-    }, [
-        patchSettings,
-        plando.songEvents,
-        songEventGroups,
-    ]);
+    const groups = useMemo(() => {
+        return buildSongEventGroups(plando);
+    }, [plando.songEvents]);
 
     const plandoGroupIds = useMemo(() => {
-        const ids = new Set<string>();
-
-        for (const data of Object.values(plando.songEvents?.oot || {}) as PlandoSongEventValue[]) {
-            if (data?.group) {
-                ids.add(data.group);
-            }
-        }
-
-        for (const data of Object.values(plando.songEvents?.mm || {}) as PlandoSongEventValue[]) {
-            if (data?.group) {
-                ids.add(data.group);
-            }
-        }
-
-        return ids;
-    }, [plando.songEvents]);
+        return new Set(groups.map(group => group.id));
+    }, [groups]);
 
     const baseEventOptions = useMemo(() => {
         const options: SongEventOption[] = [];
@@ -577,7 +546,7 @@ export function SongEventPlando() {
         }
 
         const groupId = selectedEventOptions.length > 1
-            ? nextGroupId(songEventGroups, plandoGroupIds)
+            ? nextGroupId(plandoGroupIds)
             : undefined;
 
         const nextSongEvents: {
@@ -599,21 +568,6 @@ export function SongEventPlando() {
             },
         });
 
-        if (groupId) {
-            setSongEventGroups(current => ({
-                ...current,
-                [groupId]: {
-                    id: groupId,
-                    label: groupLabelFromId(groupId),
-                    song: selectedSong,
-                    events: selectedEventOptions.map(event => ({
-                        game: event.game,
-                        event: event.value,
-                    })),
-                },
-            }));
-        }
-
         setSelectedSongRaw(null);
         setSelectedEvents([]);
     }, [
@@ -622,7 +576,6 @@ export function SongEventPlando() {
         selectedSong,
         selectedEventOptions,
         settings,
-        songEventGroups,
     ]);
 
     const removeSongEvent = useCallback((game: Game, event: string) => {
@@ -658,12 +611,6 @@ export function SongEventPlando() {
             },
         });
 
-        setSongEventGroups(current => {
-            const next = { ...current };
-            delete next[group.id];
-            return next;
-        });
-
         setSelectedEvents(current =>
             current.filter(selected =>
                 !group.events.some(grouped =>
@@ -684,7 +631,6 @@ export function SongEventPlando() {
         });
 
         setSelectedEvents([]);
-        setSongEventGroups({});
     }, [
         patchSettings,
         settings.songEventsShuffleOot,
@@ -694,39 +640,14 @@ export function SongEventPlando() {
     const groupedEventKeys = useMemo(() => {
         const keys = new Set<string>();
 
-        for (const group of Object.values(songEventGroups || {})) {
-            if (!group) {
-                continue;
-            }
-
-            for (const event of group.events) {
-                keys.add(songEventKey(event.game, event.event));
-            }
-        }
-
-        for (const [event, data] of Object.entries(plando.songEvents?.oot || {}) as Array<[string, PlandoSongEventValue]>) {
-            if (data?.group) {
-                keys.add(songEventKey('oot', event));
-            }
-        }
-
-        for (const [event, data] of Object.entries(plando.songEvents?.mm || {}) as Array<[string, PlandoSongEventValue]>) {
-            if (data?.group) {
-                keys.add(songEventKey('mm', event));
+        for (const { game, event, data } of getSongEventEntriesFromPlando(plando)) {
+            if (data.group) {
+                keys.add(songEventKey(game, event));
             }
         }
 
         return keys;
-    }, [
-        plando.songEvents,
-        songEventGroups,
-    ]);
-
-    const groups = useMemo(() => {
-        return Object.values(songEventGroups || {})
-            .filter((group): group is SongEventGroup => !!group)
-            .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));
-    }, [songEventGroups]);
+    }, [plando.songEvents]);
 
     const entries = useMemo(() => {
         const next: Array<{
@@ -841,9 +762,7 @@ export function SongEventPlando() {
                             <span>{group.label}</span>
 
                             <span className="text-gray-500 font-normal">
-                                {group.song === RANDOM_SONG_EVENT_SONG
-                                    ? 'Random'
-                                    : songEventSongName(Number(group.song))}
+                                {formatPlandoSong(group.song)}
                             </span>
                         </div>
 
