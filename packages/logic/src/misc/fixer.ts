@@ -28,10 +28,6 @@ class LogicPassFixer {
     const { type, item, game } = check;
     const { settings } = this.state;
 
-    if (!settings.shuffleSkulltulaFinalReward && locId === 'OOT Skulltula House 100 Tokens') {
-      return true;
-    }
-
     if (ItemHelpers.isTingleMap(item) && settings.tingleShuffle === 'vanilla') {
       return true;
     }

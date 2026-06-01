@@ -6,7 +6,6 @@ void EnSth_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
     ComboItemQuery q = ITEM_QUERY_INIT;
 
     q.gi = gi;
-    q.giRenew = GI_OOT_RECOVERY_HEART;
     q.ovType = OV_NPC;
 
     switch (gi)
@@ -29,7 +28,7 @@ void EnSth_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
     case GI_OOT_RUPEE_HUGE:
         q.id = NPC_OOT_GS_100;
         if (BITMAP8_GET(gSharedCustomSave.oot.npc, NPC_OOT_GS_100))
-            q.ovFlags |= OVF_RENEW;
+            q.ovType = OV_NONE;
         break;
     }
 

@@ -11,24 +11,21 @@ static const s16 kNPCs[] = {
     NPC_OOT_GS_50,
 };
 
-static void EnSsh_ItemQuery(ComboItemQuery* q, int index, int flags)
+static void EnSsh_ItemQuery(ComboItemQuery* q, int index, s16 gi)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
-    q->gi = GI_OOT_RUPEE_BLUE; /* Dummy */
+    q->gi = gi;
     q->id = kNPCs[index];
-    q->ovFlags = flags;
 }
 
 static void EnSsh_Hint(PlayState* play, int index)
 {
     ComboItemQuery q;
     char* b;
-    int flags;
 
-    flags = 0;
-    EnSsh_ItemQuery(&q, index, flags);
+    EnSsh_ItemQuery(&q, index, GI_OOT_RUPEE_BLUE);
     b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b,
@@ -43,7 +40,20 @@ static void EnSsh_Hint(PlayState* play, int index)
     comboTextAutoLineBreaks(play->msgCtx.font.msgBuf);
 }
 
+static int EnSsh_IsFinalRewardShuffled(void)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    EnSsh_ItemQuery(&q, 0, 0);
+    comboItemOverride(&o, &q);
+    return o.gi != GI_NONE;
+}
+
 void EnSsh_TalkedTo(Actor* this, PlayState* play)
 {
+    if (this->params == 0 && !EnSsh_IsFinalRewardShuffled())
+        return;
+
     EnSsh_Hint(play, this->params);
 }
