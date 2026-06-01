@@ -969,6 +969,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: true
 }, {
+  key: 'shuffleSkulltulaFinalReward',
+  name: 'Skulltula Final Reward Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the huge rupee obtained by having all 100 gold skulltula tokens is shuffled',
+  cond: hasOoT,
+  default: false
+}, {
   key: 'shuffleMaskTrades',
   name: 'Mask Trade Shuffle',
   category: 'main.shuffle',

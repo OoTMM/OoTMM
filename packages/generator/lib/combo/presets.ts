@@ -364,6 +364,7 @@ const ALLSANITY_HELL: PartialDeep<Settings> = {
   soulsAnimalMm: true,
   soulsMiscOot: true,
   soulsMiscMm: true,
+  shuffleSkulltulaFinalReward: true,
 };
 
 

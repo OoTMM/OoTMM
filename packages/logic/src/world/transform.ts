@@ -1558,6 +1558,11 @@ class LogicPassWorldTransform {
       ]);
     }
 
+    /* 100 skulls */
+    if (!settings.shuffleSkulltulaFinalReward) {
+      this.removeLocations(['OOT Skulltula House 100 Tokens']);
+    }
+
     /* Make the basic item pool */
     this.makePools();
 
