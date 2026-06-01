@@ -430,6 +430,7 @@ typedef struct
     u16 unused:7;
     u8 bottleAdultSlot;
     u8 bottleChildSlot;
+    u8 gfsHammer:2;
 }
 OotExtraItems;
 

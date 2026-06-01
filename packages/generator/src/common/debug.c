@@ -649,6 +649,7 @@ static void cheatAllItems(PlayState* play)
 
     gOotExtraItems.ocarina = 3;
     gOotExtraItems.hookshot = 3;
+    gOotExtraItems.gfsHammer = 3;
 
     gSave.info.inventory.equipment.swords = 0x7;
     gSave.info.inventory.equipment.shields = 0x7;

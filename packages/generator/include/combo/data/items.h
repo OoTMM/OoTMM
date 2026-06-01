@@ -164,7 +164,8 @@
 #define ITEM_OOT_SPRING_WATER_HOT       0xa5
 #define ITEM_OOT_ZORA_EGG               0xa6
 #define ITEM_OOT_POWDER_KEG             0xa7
-#define ITEM_OOT_CUSTOM_MAX             0xa8
+#define ITEM_OOT_GREAT_FAIRY_SWORD      0xa8
+#define ITEM_OOT_CUSTOM_MAX             0xa9
 
 #if defined(GAME_OOT)
 # define ITEM_STICK                     ITEM_OOT_STICK
@@ -318,6 +319,7 @@
 # define ITEM_MASK_BLAST                ITEM_OOT_MASK_BLAST
 # define ITEM_MASK_STONE                ITEM_OOT_MASK_STONE
 # define ITEM_MASK_KAMARO               ITEM_OOT_MASK_KAMARO
+# define ITEM_GREAT_FAIRY_SWORD         ITEM_OOT_GREAT_FAIRY_SWORD
 #endif
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00

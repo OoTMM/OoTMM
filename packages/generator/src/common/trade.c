@@ -95,6 +95,11 @@ const u8 kMmPictoBoom[] = {
     ITEM_MM_BOOMERANG,
 };
 
+const u8 kOotHammerGFS[] = {
+    ITEM_OOT_HAMMER,
+    ITEM_OOT_GREAT_FAIRY_SWORD,
+};
+
 /* Return value is used to index gVertex */
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
@@ -175,6 +180,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kOotBomb;
         *outTableSize = ARRAY_COUNT(kOotBomb);
         result = 4;
+        break;
+    case ITS_OOT_HAMMER:
+        *outFlags = gOotExtraItems.gfsHammer;
+        *outTable = kOotHammerGFS;
+        *outTableSize = ARRAY_COUNT(kOotHammerGFS);
+        result = 5;
         break;
 #endif
     default:
