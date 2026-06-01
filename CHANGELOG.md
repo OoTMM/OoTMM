@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add quality of life setting to allow bow and slingshot to break beehives in OoT.
 - Add hyper enemies/bosses to both games, making them twice as fast.
 - Add Telescope ER.
 - Add Fairy Slingshot to Majora's Mask

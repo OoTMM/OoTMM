@@ -289,6 +289,7 @@ export const CONFVARS = [
   'MM_TELESCOPE_ER',
   'OOT_HYPER_ENEMIES',
   'MM_HYPER_ENEMIES',
+  'OOT_BOW_SLINGSHOT_BREAK_HIVES',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
