@@ -3,6 +3,7 @@
 #include <combo/config.h>
 
 static const s16 kNPCs[] = {
+    NPC_OOT_GS_100,
     NPC_OOT_GS_10,
     NPC_OOT_GS_20,
     NPC_OOT_GS_30,
@@ -24,14 +25,16 @@ static void EnSsh_Hint(PlayState* play, int index)
 {
     ComboItemQuery q;
     char* b;
+    int flags;
 
-    EnSsh_ItemQuery(&q, index, 0);
+    flags = 0;
+    EnSsh_ItemQuery(&q, index, flags);
     b = play->msgCtx.font.msgBuf;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b,
         "Yeaaarrgh! I'm cursed!! Please save me by destroying " TEXT_COLOR_RED
     );
-    comboTextAppendNum(&b, (index + 1) * 10);
+    comboTextAppendNum(&b, index == 0 ? 100 : index * 10);
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
@@ -42,9 +45,5 @@ static void EnSsh_Hint(PlayState* play, int index)
 
 void EnSsh_TalkedTo(Actor* this, PlayState* play)
 {
-    /* Big skulltula */
-    if (this->params == 0)
-        return;
-
-    EnSsh_Hint(play, this->params - 1);
+    EnSsh_Hint(play, this->params);
 }

@@ -1564,7 +1564,7 @@ static int addItemMagicalRupee(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemGsToken(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.info.inventory.quest.goldToken = 1;
-    if(gOotSave.info.inventory.goldTokens >= 100)
+    if (gOotSave.info.inventory.goldTokens >= 100)
         return 0;
     return ++gOotSave.info.inventory.goldTokens;
 }

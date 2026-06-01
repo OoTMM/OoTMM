@@ -1409,6 +1409,7 @@ Skulltula House 20 Tokens,                                  npc,            NONE
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET
 Skulltula House 40 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_40,                      BOMBCHU_10
 Skulltula House 50 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_50,                      HEART_PIECE
+Skulltula House 100 Tokens,                                 npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_100,                     RUPEE_HUGE
 Great Fairy Magic Upgrade,                                  npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE,        MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,                                npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE2,       MAGIC_UPGRADE
 Great Fairy Defense Upgrade,                                npc,            GANON_FAIRY,          GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_DEFENSE_UPGRADE,      DEFENSE_UPGRADE
