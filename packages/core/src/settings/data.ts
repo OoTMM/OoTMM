@@ -3557,6 +3557,14 @@ export const SETTINGS = [{
   default: true,
   cond: hasOoT,
 }, {
+  key: 'bowSlingshotBreakHives',
+  name: 'Bow/Slingshot Break Hives',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Allows the Bow and Slingshot to break beehives in OoT, matching MM behavior',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'critWiggleDisable',
   name: 'Disable Crit Wiggle',
   category: 'main.qol',

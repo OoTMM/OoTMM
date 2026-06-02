@@ -278,6 +278,7 @@ export const CONFVARS = [
   'MM_MOON_COND_VANILLA',
   'MM_MOON_COND_CUSTOM',
   'OOT_AIR_PHYSICS_MM',
+  'OOT_BOW_SLINGSHOT_BREAK_HIVES',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
