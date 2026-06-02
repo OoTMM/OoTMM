@@ -1075,11 +1075,13 @@ static int addItemSwordMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static void addBombBagRawOot(u8 index)
+static void addBombBagRawOot(PlayState* play, u8 index)
 {
     if (index > gOotSave.info.inventory.upgrades.bombBag)
         gOotSave.info.inventory.upgrades.bombBag = index;
+    gOotExtraItems.bombSlot |= 1;
     addBombsRawOot(kMaxBombs[index]);
+    reloadSlotOot(play, ITS_OOT_BOMBS);
 }
 
 static void addBombBagRawMm(u8 index)
@@ -1091,7 +1093,7 @@ static void addBombBagRawMm(u8 index)
 
 static int addItemBombBagOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addBombBagRawOot(param);
+    addBombBagRawOot(play, param);
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         addBombBagRawMm(param);
     return 0;
@@ -1101,7 +1103,7 @@ static int addItemBombBagMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombBagRawMm(param);
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
-        addBombBagRawOot(param);
+        addBombBagRawOot(play, param);
     return 0;
 }
 
@@ -1709,12 +1711,6 @@ static int addItemButtonMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemKeg(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    addAmmoMm(ITS_MM_KEG, ITEM_MM_POWDER_KEG, 1, param);
-    return 0;
-}
-
 static int addItemSpinUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
@@ -2086,6 +2082,35 @@ static int addItemGsTokenPlatinumMm(PlayState* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
+static void addPowderKegRawOot(PlayState* play)
+{
+    gOotSave.info.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_POWDER_KEG; // TODO
+    gOotExtraItems.bombSlot |= 2;
+    gOotExtraAmmo.kegAmmo = 1;
+    reloadSlotOot(play, ITS_OOT_BOMBS);
+}
+
+static void addPowderKegRawMm(u16 param)
+{
+    addAmmoMm(ITS_MM_KEG, ITEM_MM_POWDER_KEG, 1, param);
+}
+
+static int addItemKegOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    addPowderKegRawOot(play);
+    if (Config_Flag(CFG_SHARED_POWDER_KEG))
+        addPowderKegRawMm(param);
+    return 0;
+}
+
+static int addItemKegMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    addPowderKegRawMm(param);
+    if (Config_Flag(CFG_SHARED_POWDER_KEG))
+        addPowderKegRawOot(play);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -2167,7 +2192,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemCoin,
     addItemButtonOot,
     addItemButtonMm,
-    addItemKeg,
+    addItemKegMm,
     addItemSpinUpgradeMm,
     addItemSoulOot,
     addItemSoulMm,
@@ -2205,6 +2230,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addSongOotMm,
     addItemGsTokenPlatinumOot,
     addItemGsTokenPlatinumMm,
+    addItemKegOot,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");
@@ -2379,6 +2405,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE2, GI_MM_NUT_UPGRADE2 },
     { CFG_SHARED_STONE_OF_AGONY, GI_OOT_STONE_OF_AGONY, GI_MM_STONE_OF_AGONY },
     { CFG_SHARED_SPIN_UPGRADE, GI_OOT_SPIN_UPGRADE, GI_MM_SPIN_UPGRADE },
+    { CFG_SHARED_POWDER_KEG, GI_OOT_POWDER_KEG, GI_MM_POWDER_KEG },
     { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_EMPTY, GI_MM_BOTTLE_EMPTY },
     { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_MILK, GI_MM_BOTTLE_MILK },
     { CFG_SHARED_BOTTLES, GI_OOT_BOTTLE_RUTO_LETTER, GI_MM_BOTTLE_RUTO_LETTER },

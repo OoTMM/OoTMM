@@ -149,9 +149,9 @@
     BRIDGE_OPEN: "rainbow_bridge"
   locations:
     "Ganon Castle Exterior GS": "gs && (has_ranged_weapon || can_use_sword)"
-    "Ganon Castle Exterior Red Boulder 1": "can_hammer"
-    "Ganon Castle Exterior Red Boulder 2": "can_hammer"
-    "Ganon Castle Exterior Red Boulder 3": "can_hammer"
+    "Ganon Castle Exterior Red Boulder 1": "can_hammer_or_keg"
+    "Ganon Castle Exterior Red Boulder 2": "can_hammer_or_keg"
+    "Ganon Castle Exterior Red Boulder 3": "can_hammer_or_keg"
 
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR

@@ -12,6 +12,8 @@ typedef struct PACKED ALIGNED(4)
 }
 DisplayListBuffer;
 
+typedef void* TexturePtr;
+
 #if defined (GAME_OOT)
 # include <combo/oot/gfx.h>
 #endif
@@ -39,10 +41,14 @@ ALIGNED(16) extern const Gfx kDListEmpty[];
 
 Gfx*    Gfx_SetupDL(Gfx* gfx, u32 i);
 Gfx*    Gfx_SetupDL57(Gfx* gfx);
+Gfx*    Gfx_SetupDL66(Gfx* gfx);
 void    Gfx_SetupDL25_Opa(GraphicsContext* gfx);
 void    Gfx_SetupDL25_Xlu(GraphicsContext* gfx);
 void    Gfx_SetupDL_42Opa(GraphicsContext* gfx);
+void    Gfx_SetupDL_61Xlu(GraphicsContext* gfx);
 u32     DisplaceTexture(GraphicsContext* gfx, int, int, int, int, int, int, int, int, int, int);
+Gfx*    Gfx_TextureIA8(Gfx* displayListHead, void* texture, s16 textureWidth, s16 textureHeight, s16 rectLeft, s16 rectTop,
+                    s16 rectWidth, s16 rectHeight, u16 dsdx, u16 dtdy);
 Gfx*    Gfx_TexScroll(GraphicsContext* ctx, u32 x, u32 y, s32 width, s32 height);
 void    Gfx_DrawDListOpa(PlayState* play, Gfx* dlist);
 void    Gfx_DrawDListXlu(PlayState* play, Gfx* dlist);

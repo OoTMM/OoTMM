@@ -86,7 +86,7 @@ export class ObjectEditor {
           const w = (((data3 >>> 12) & 0xfff) / 4) + 1;
           const h = (((data3 >>>  0) & 0xfff) / 4) + 1;
           const addr = bufReadU32BE(list, i + 4);
-          const newAddr = this.copy(addr, (w * h * bpp) / 8);
+          const newAddr = this.copy(addr, Math.max((w * h * bpp) / 8, 8));
           bufWriteU32BE(list, i + 4, newAddr);
         } else if (op2 === 0xe8) {
           /* Palette */

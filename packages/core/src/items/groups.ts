@@ -1459,4 +1459,6 @@ export const REQUIRED = new Set([
   Items.SHARED_SONG_TP_SHADOW,
   Items.SHARED_SONG_TP_SPIRIT,
   Items.SHARED_SONG_TP_WATER,
+  Items.OOT_POWDER_KEG,
+  Items.SHARED_POWDER_KEG,
 ]);

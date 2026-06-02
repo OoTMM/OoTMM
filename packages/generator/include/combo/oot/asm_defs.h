@@ -7,4 +7,5 @@
 #define PLAYER_CUSTOM_IA_SPRING_WATER       0x48
 #define PLAYER_CUSTOM_IA_SPRING_WATER_HOT   0x49
 #define PLAYER_CUSTOM_IA_ZORA_EGG           0x4a
-#define PLAYER_IA_MAX                       0x4b
+#define PLAYER_CUSTOM_IA_POWDER_KEG         0x4b
+#define PLAYER_IA_MAX                       0x4c

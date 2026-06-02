@@ -92,6 +92,9 @@ void comboItemIcon(void* dst, int itemId)
     case ITEM_OOT_ZORA_EGG:
         LoadMmItemIcon(dst, ITEM_MM_ZORA_EGG);
         break;
+    case ITEM_OOT_POWDER_KEG:
+        LoadMmItemIcon(dst, ITEM_MM_POWDER_KEG);
+        break;
     default:
         LoadFile(dst, 0x7bd000 + itemId * 0x1000, 0x1000);
         break;
