@@ -98,6 +98,57 @@ void Player_UseItem(PlayState* play, Player* link, s16 itemId)
 
 PATCH_CALL(0x8083212c, Player_UseItem);
 
+s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD:
+        return 5;
+    }
+
+    u8* sActionModelGroups = (u8*)0x800f7714; /* using original table also means original glitches, if that matters */
+    s32 modelGroup = sActionModelGroups[itemAction];
+    /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
+    if ((modelGroup == 2) && Player_IsChildWithHylianShield(player)) {
+        // child, using kokiri sword with hylian shield equipped
+        return 1;
+    } else {
+        return modelGroup;
+    }
+}
+
+PATCH_FUNC(0x800794b0, Player_CustomActionToModelGroup)
+
+s32 Player_CustomActionToMeleeWeapon(s32 itemAction) {
+    if (itemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD) {
+        return 3; // PLAYER_IA_SWORD_BIGGORON
+    }
+
+    s32 meleeWeapon = itemAction - PLAYER_IA_FISHING_POLE;
+
+    if ((meleeWeapon > 0) && (meleeWeapon < 6)) {
+        return meleeWeapon;
+    } else {
+        return 0;
+    }
+}
+
+PATCH_FUNC(0x80079C2C, Player_CustomActionToMeleeWeapon)
+
+s32 Player_CustomHoldsTwoHandedWeapon(Player* this) {
+    if (this->heldItemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD) {
+        return 1;
+    }
+
+    if ((this->heldItemAction >= PLAYER_IA_SWORD_BIGGORON) &&
+        (this->heldItemAction <= PLAYER_IA_HAMMER)) {
+        return 1;
+        }
+
+    return 0;
+}
+
+PATCH_FUNC(0x80079C78, Player_CustomHoldsTwoHandedWeapon)
+
 static int prepareMask(PlayState* play, u16 objectId, int needsMatrix)
 {
     void* obj;
@@ -1181,8 +1232,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_SPRING_WATER_HOT,  /* ITEM_OOT_SPRING_WATER_HOT */
     PLAYER_CUSTOM_IA_ZORA_EGG,          /* ITEM_OOT_ZORA_EGG */
     PLAYER_CUSTOM_IA_POWDER_KEG,        /* ITEM_OOT_POWDER_KEG */
-
-    0x05,                               /* ITEM_OOT_GREAT_FAIRY_SWORD: vanilla BGS item action */
+    PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD, /* ITEM_GFS_MM */
 };
 
 s32 Player_CustomItemToItemAction(s32 item, s32 itemAction)
@@ -1745,6 +1795,10 @@ void Player_InvokeItemActionInitFunc(PlayState* play, Player* this, ItemActionIn
             ItemActionInitFunc Player_InitExplosiveIA = OverlayAddr(0x80831838);
             Player_InitExplosiveIA(play, this);
             break;
+        case PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD:
+            ItemActionInitFunc Player_InitDefaultIA = OverlayAddr(0x808317a4);
+            Player_InitDefaultIA(play, this);
+            break;
         default:
             func(play, this);
             break;
@@ -1761,6 +1815,9 @@ void Player_SetUpperActionFuncToHeldItemAction(Player* this, UpperActionFunc upp
     {
     case PLAYER_CUSTOM_IA_POWDER_KEG:
         upperActionFunc = OverlayAddr(0x80833770); /* Player_UpperAction_CarryActor */
+        break;
+    case PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD:
+        upperActionFunc = OverlayAddr(0x80832a40); /* Player_UpperAction_Sword */
         break;
     default:
         break;
