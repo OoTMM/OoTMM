@@ -5,6 +5,11 @@
 #include <combo/actor.h>
 #include <combo/common/color.h>
 
+#if defined(GAME_OOT)
+# define TRANSITION_ACTOR_PARAMS_INDEX_SHIFT 10
+# define GET_TRANSITION_ACTOR_INDEX(actor) PARAMS_GET_NOMASK((u16)(actor)->params, 10)
+#endif
+
 typedef struct
 {
     u32     count;
