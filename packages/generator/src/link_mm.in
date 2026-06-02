@@ -21,20 +21,25 @@ SkelAnime_DrawOpa = 0x80133b3c;
 EffectSs_Delete = 0x800b0210;
 gEffectSsTable = 0x801ae3a0;
 
+EnItem00_SetObject = 0x800a5d00;
 EnItem00_Init = 0x800a5d70;
 EnItem00_CollectedHandler = 0x800a6a40;
 EnItem00_Update = 0x800a6b98;
+EnItem00_DrawRupee = 0x800a72ac;
+EnItem00_DrawHeartContainer = 0x800a74d8;
 
 gAudioLoadStatusFontSample = 0x80204fd8;
 Player_UpdateForm = 0x8012301c;
 func_80123810 = 0x80123810;
 Player_UpdateBottleHeld = 0x80123d50;
+Player_IsBurningStickInRange = 0x80123f48;
 
 Fault_AddHungupAndCrashImpl = 0x80083df4;
 Interface_NewDay = 0x8010ee74;
 Environment_NewDay = 0x800feaf4;
 
 Play_DrawHudButtons = 0x80117100;
+Interface_DrawAmmoCount = 0x80117bd0;
 Audio_GetActiveSeqId = 0x801a8a50;
 Audio_QueueSeqCmd = 0x801a89a8;
 func_8012CF0C = 0x8012cf0c;
@@ -126,6 +131,7 @@ DrawGi_Opa1023              = 0x800ef89c;
 DrawGi_Opa10_Xlu32          = 0x800ef984;
 DrawGi_Opa10234567          = 0x800efbfc;
 DrawGi_Xlu01                = 0x800ef2ac;
+DrawGi_Table                = 0x800ee320;
 DrawGi_BombchuMask          = 0x800ee364;
 DrawGi_Compass              = 0x800ee940;
 DrawGi_DekuNut              = 0x800eed20;
@@ -145,6 +151,7 @@ Player_InCsMode = 0x801233e4;
 Gfx_SetupDL57 = 0x8012BFC4;
 Gfx_SetupDL25_Opa = 0x8012c28c;
 Gfx_SetupDL25_Xlu = 0x8012c2dc;
+Gfx_SetupDL66 = 0x8012c724;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
 Matrix_Put      = 0x8018020c;
 DisplaceTexture = 0x8012cbd0;
@@ -174,6 +181,7 @@ Collider_DestroyJntSph = 0x800e0c18;
 
 Actor_SetScale = 0x800b67e0;
 Actor_SetFocus = 0x800b675c;
+Actor_SetObjectDependency = 0x800b67fc;
 Actor_HasParent  = 0x800b89f8;
 Actor_HasParentZ = 0x800b89f8;
 Actor_HasNoParent = 0x800b8bfc;
@@ -225,6 +233,7 @@ CutsceneManager_IsNext = 0x800f1be4;
 CutsceneManager_Queue = 0x800f1ba4;
 CutsceneManager_Start = 0x800f1d84;
 CutsceneManager_Stop = 0x800f1fbc;
+Gfx_TextureIA8 = 0x8010cd98;
 Interface_SetHudVisibility = 0x8010ef68;
 Environment_PlayStormNatureAmbience = 0x800fd78c;
 Environment_StopStormNatureAmbience = 0x800fd858;
@@ -310,6 +319,7 @@ Matrix_Push = 0x8018019c;
 Matrix_Pop = 0x801801cc;
 
 _AddRupees = 0x801159ec;
+Inventory_ChangeAmmo = 0x80115a14;
 
 PlayStoreFlags = 0x80169d40;
 Play_GetCamera = 0x801696d4;
@@ -440,6 +450,8 @@ EffectSsGSplash_Spawn = 0x800b1f4c;
 EffectSsGRipple_Spawn = 0x800b1ef4;
 EffectSsKakera_Spawn = 0x800b2810;
 EffectSsBubble_Spawn = 0x800b1e94;
+EffectSsGSpk_SpawnFuse = 0x800b1c70;
+EffectSsBomb2_SpawnLayered = 0x800b1970;
 
 PlayerAnimation_Update = 0x801360e0;
 PlayerAnimation_PlayOnce = 0x8013658C;

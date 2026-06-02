@@ -32,6 +32,10 @@ PATCH_START 0x8082d8fc
 .int 0
 PATCH_END
 
+PATCH_START 0x8082c948
+.int 0
+PATCH_END
+
 /* Hide dummy sun song from quest screen */
 KaleidoScope_HideDummySunSong:
   lui at,0x0002

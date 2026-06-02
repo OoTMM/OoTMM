@@ -161,6 +161,15 @@ void comboSyncItems(void)
     if (Config_Flag(CFG_SHARED_BOMBCHU))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBCHU];
 
+    if (Config_Flag(CFG_SHARED_POWDER_KEG))
+    {
+#if defined(GAME_OOT)
+        gForeignSave.info.inventory.ammo[ITS_MM_KEG] = gOotExtraAmmo.kegAmmo;
+#else
+        gOotExtraAmmo.kegAmmo = gSave.info.inventory.ammo[ITS_MM_KEG];
+#endif
+    }
+
     if (Config_Flag(CFG_SHARED_MAGIC))
     {
         gForeignSave.info.playerData.magic = gSave.info.playerData.magic;

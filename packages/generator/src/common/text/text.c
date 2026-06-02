@@ -206,6 +206,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOMBS_20:
     case GI_MM_BOMBS_30:
         return !Config_Flag(CFG_SHARED_BOMB_BAGS);
+    case GI_MM_POWDER_KEG:
+    case GI_OOT_POWDER_KEG:
+        return !Config_Flag(CFG_SHARED_POWDER_KEG);
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
     case GI_OOT_MAGIC_JAR_SMALL:

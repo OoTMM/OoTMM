@@ -42,6 +42,7 @@ Audio_GetActiveSeqId = 0x800cab18;
 Actor_ProcessInitChain = 0x80063f7c;
 Actor_Angle = 0x800213b4;
 Flags_GetClear = 0x80020640;
+func_800F4C58 = 0x800c5998;
 func_800F4E30 = 0x800c5b70;
 Audio_PlaySariaBgm = 0x800c5fe0;
 Audio_UpdateMalonSinging = 0x800c6f9c;
@@ -76,6 +77,7 @@ RequestDma = 0x80000d28;
 kObjectsTable = 0x800f8ff8;
 Audio_PlayFanfare = 0x800c69a0;
 
+Gfx_TextureIA8 = 0x8006f3a4;
 Gfx_TexScroll = 0x8007eb00;
 
 Actor_WorldDistXZToActor = 0x800214fc;
@@ -121,8 +123,10 @@ Interface_SetSubTimerToFinalSecond = 0x80073938;
 Gfx_SetupDL25_Opa       = 0x8007e298;
 Gfx_SetupDL25_Xlu       = 0x8007e2c0;
 Gfx_SetupDL_42Opa       = 0x8007e868;
+Gfx_SetupDL_61Xlu       = 0x8007e978;
+Matrix_Put              = 0x800aa764;
 Matrix_MultVec3f        = 0x800ab958;
-Matrix_Finalize             = 0x800ab900;
+Matrix_Finalize         = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
 Gfx_DrawDListXlu        = 0x800280c8;
 
@@ -140,6 +144,9 @@ CollisionCheck_SetAT = 0x8004bd50;
 CollisionCheck_SetAC = 0x8004bf40;
 
 func_80038A28           = 0x8002b668;
+BgCheck_EntityRaycastDown1 = 0x8002f3a4;
+BgCheck_EntityRaycastDown2 = 0x8002f400;
+BgCheck_EntityRaycastDown3 = 0x8002f454;
 BgCheck_EntityRaycastDown4 = 0x8002f4b8;
 
 Math_Vec3f_Sum = 0x80063d10;
@@ -170,6 +177,7 @@ Matrix_SetTranslateRotateYXZ = 0x800ab510;
 Actor_Noop = 0x80027ef4;
 
 sinf = 0x800cf470;
+cosf = 0x800d2cd0;
 Math3D_Dist1DSq = 0x800a5434;
 Math3D_Dist2DSq = 0x800a5470;
 Math_ScaledStepToS = 0x80063704;
@@ -187,6 +195,8 @@ PlayLoopingSfxAtActor = 0x8002313c;
 Horse_Spawn = 0x8005aefc;
 gTimeSpeed = 0x800f1650;
 Audio_PlaySequenceWithSeqPlayerIO = 0x800c6b54;
+
+Math_Atan2S = 0x800aa4f8;
 Matrix_Init = 0x800aa6b0;
 
 gScreenWidth = 0x800fe500;
@@ -242,13 +252,16 @@ Flags_SetSwitch = 0x800204d0;
 ClearSwitchFlag = 0x80020510;
 
 Audio_ClearSariaBgmAtPos = 0x800c5e2c;
+Audio_PlaySfx_AtPosWithReverb = 0x800c5264;
 Audio_PlaySfxRiver = 0x800c5374;
 Audio_SetGanonsTowerBgmVolumeLevel = 0x800c55b0;
+SurfaceType_GetFloorType = 0x800343d4;
 SurfaceType_GetConveyorSpeed = 0x80034778;
 Audio_ClearSariaBgm2 = 0x800c6258;
 Audio_LowerMainBgmVolume = 0x800c5794;
 Audio_PlayNatureAmbienceSequence = 0x800c7c90;
 Math_Vec3f_DistXYZ = 0x80063e18;
+Math_Vec3f_DistXYZAndStoreDiff = 0x80063e5c;
 Actor_WorldToActorCoords = 0x8002154c;
 
 DisplaceTexture = 0x8007eb84;
@@ -311,6 +324,7 @@ Inventory_UpdateBottleItem = 0x80071b7c;
 Interface_SetDoAction = 0x80071E6C;
 Interface_LoadActionLabelB = 0x80071FF8;
 Interface_ChangeHudVisibilityMode = 0x8006d8e0;
+Interface_DrawAmmoCount = 0x80074a84;
 
 Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
@@ -325,8 +339,10 @@ Sram_CopySave = 0x80090fd0;
 
 SetRoomClear = 0x800206ac;
 
+Play_GetCamera = 0x8009d2f0;
 PlayStoreFlags = 0x8009d894;
 
+Play_ReturnToMainCam = 0x8009d718;
 Player_Update = 0x80097740;
 Play_SetupRespawnPoint = 0x8009D94C;
 
@@ -349,9 +365,17 @@ Interface_LoadItemIconImpl = 0x8006fb50;
 CollisionCheck_GetSwordDamage = 0x80051a34;
 Play_InCutscene = 0x8009cb08;
 
+Cutscene_StartManual = 0x80052328;
+Cutscene_StopManual = 0x80052340;
+
+Play_CreateSubCamera = 0x8009d0f0;
+Play_ChangeCameraStatus = 0x8009d1ac;
+Play_SetCameraAtEye = 0x8009d328;
+
 DeathWarp = 0x8009da10;
 
 _AddRupees = 0x800721cc;
+Inventory_ChangeAmmo = 0x800721f4;
 
 SkelAnime_DrawFlexLod = 0x800894a4;
 SkelAnime_DrawFlex = 0x8008a88c;
@@ -456,10 +480,8 @@ Camera_GetQuakeOffset = 0x80049d34;
 Effect_Add = 0x8001aa5c;
 Effect_Delete = 0x8001ae04;
 EffectSsBlast_SpawnWhiteShockwave = 0x8001cb1c;
-EffectSsBomb2_SpawnLayered = 0x8001c97c;
 EffectSsDeadSound_SpawnStationary = 0x8001e510;
 EffectSsDFire_SpawnFixedScale = 0x8001ce98;
-EffectSsGSpk_SpawnFuse = 0x8001cc7c;
 func_8002829C = 0x8001bd94;
 func_8002836C = 0x8001be64;
 func_8002F5C4 = 0x80022d64;
@@ -749,8 +771,10 @@ SurfaceType_IsIgnoredByProjectiles = 0x80034700;
 Actor_PlaySfx_Flagged2 = 0x800230a0;
 DynaPolyActor_TransformCarriedActor = 0x80035180;
 Actor_MoveXYZ = 0x800212b8;
+Player_SetCsActionWithHaltedActors = 0x800218ec;
 WaterBox_GetSurface1 = 0x800347fc;
 BgCheck_EntityLineTest1 = 0x800308b4;
+BgCheck_SphVsFirstPoly = 0x80030d08;
 
 Actor_TalkOfferAccepted = 0x80022930;
 Actor_OfferTalk = 0x80022a68;
@@ -761,6 +785,7 @@ Math_ApproachZeroF = 0x800642f0;
 Math_ApproachS = 0x80064624;
 
 func_80033480 = 0x80026308;
+Actor_RequestQuakeAndRumble = 0x80026cf4;
 WaterBox_GetSurfaceImpl = 0x80034908;
 gFrogsSongPtr = 0x80102b50;
 Audio_PlaySfxTransposed = 0x800c5934;

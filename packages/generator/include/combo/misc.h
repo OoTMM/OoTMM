@@ -307,6 +307,14 @@ typedef struct {
     s32 value:  16;
 } InitChainEntry;
 
+// Camera is on
+#define CAM_STATUS_CUT        0 // The camera is not updated at all
+#define CAM_STATUS_WAIT       1 // There is minimally/partially updated, action function is not run
+#define CAM_STATUS_UNK3       3 // The camera is mostly updated including running its action function, but data is not set to view
+#define CAM_STATUS_ACTIVE     7 // The camera is fully updated, info is sent to view
+// Camera is off
+#define CAM_STATUS_INACTIVE   0x100
+
 #if defined(GAME_MM)
 /* TODO: Move to En_Door_Warp1 once ported */
 typedef enum
@@ -334,14 +342,6 @@ typedef enum
 ClearTagType;
 
 #define BODYPART_NONE -1
-
-// Camera is on
-#define CAM_STATUS_CUT        0 // The camera is not updated at all
-#define CAM_STATUS_WAIT       1 // There is minimally/partially updated, action function is not run
-#define CAM_STATUS_UNK3       3 // The camera is mostly updated including running its action function, but data is not set to view
-#define CAM_STATUS_ACTIVE     7 // The camera is fully updated, info is sent to view
-// Camera is off
-#define CAM_STATUS_INACTIVE   0x100
 
 typedef enum {
     /* 0x00 */ CAM_FUNC_NONE,

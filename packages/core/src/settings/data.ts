@@ -2217,6 +2217,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'powderKegOot',
+  name: "Powder Keg (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Powder Keg in Ocarina of Time. Once found, Medigoron in Goron City will sell Powder Kegs after you buy his item.",
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons (OoT)',
   category: 'items.extensions',
@@ -2776,6 +2784,14 @@ export const SETTINGS = [{
   description: "Combines the Prelude of Light from OoT and MM into one item for both games",
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.songPreludeMm,
+}, {
+  key: 'sharedPowderKeg',
+  name: 'Shared Powder Keg',
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the Powder Kegs from OoT and MM into one item for both games.',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.powderKegOot,
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',

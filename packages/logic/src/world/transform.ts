@@ -1054,6 +1054,12 @@ class LogicPassWorldTransform {
     }
 
 
+    if (settings.sharedPowderKeg) {
+      this.replaceItem(Items.MM_POWDER_KEG, Items.SHARED_POWDER_KEG);
+    } else if (settings.powderKegOot) {
+      this.addItem(Items.OOT_POWDER_KEG);
+    }
+
     if (settings.sharedLens) {
       this.replaceItem(Items.OOT_LENS, Items.SHARED_LENS);
       this.replaceItem(Items.MM_LENS,  Items.SHARED_LENS);

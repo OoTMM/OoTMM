@@ -70,6 +70,7 @@ void            DynaPoly_SetPlayerOnTop(CollisionContext* colCtx, s32 bgId);
 void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
 void    Interface_UpdateButtonsPart2(PlayState* play);
 
+int SurfaceType_GetFloorType(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 SurfaceType_GetConveyorSpeed(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 SurfaceType_GetConveyorDirection(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 
@@ -103,10 +104,11 @@ int     Actor_HasNoParent(Actor* actor, PlayState* play);
 int     Actor_HasNoParentZ(Actor* actor);
 void    Actor_SetScale(Actor* actor, float scale);
 void    Actor_SetFocus(Actor* actor, float height);
+void    Actor_SetObjectDependency(PlayState* play, Actor* actor);
 void    Actor_OfferCarry(Actor* actor, PlayState* play);
 void    ActorEnableTalk(Actor* actor, PlayState* play, float range);
 void    Actor_OfferTalkExchangeEquiCylinder(Actor* actor, PlayState* play, float range, u32 unk);
-void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
+void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float wallCheckHeight, float wallCheckRadius, float ceilingCheckHeight, u32 flags);
 void    Actor_MoveWithGravity(Actor* actor);
 #define Actor_MoveXZGravity Actor_MoveWithGravity
 void    Actor_RequestHorseCameraSetting(PlayState* play, Player* player);
@@ -212,6 +214,7 @@ void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 button);
 void Interface_SetDoAction(PlayState* play, u16 action);
 void Interface_LoadActionLabelB(PlayState* play, u16 action);
 void Interface_ChangeHudVisibilityMode(u16 hudVisibilityMode);
+void Interface_DrawAmmoCount(PlayState* play, s16 button, s16 alpha);
 
 #if defined(GAME_MM)
 void PrepareSave(SramContext* sram);
@@ -312,6 +315,7 @@ s16 Animation_GetLastFrame(void* animation);
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
 void AudioOcarina_SetPlaybackSong(s8 songIndexPlusOne, u8 playbackState);
 void AudioOcarina_CheckIfStartedSong();
+s32 Player_SetCsActionWithHaltedActors(PlayState* play, Actor* csActor, u8 csAction);
 #if defined(GAME_MM)
 s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
@@ -320,7 +324,6 @@ s32 Actor_TrackPlayer(PlayState* play, Actor* actor, Vec3s* headRot, Vec3s* tors
 s16 Animation_GetLastFrame(void* animation);
 s8 Play_InCsMode(PlayState* this);
 
-s32 Player_SetCsActionWithHaltedActors(PlayState* play, Actor* csActor, u8 csAction);
 s32 Actor_TalkOfferAccepted(Actor* actor, GameState* gameState);
 s32 Actor_OfferTalkExchange(Actor* actor, PlayState* play, f32 xzRange, f32 yRange, PlayerItemAction exchangeItemAction);
 s32 Actor_OfferTalk(Actor* actor, PlayState* play, f32 radius);
@@ -343,6 +346,7 @@ s16 RupeeValueMm(s16 count);
 void AddRupeesRaw(s16 delta);
 void AddRupees(s16 delta);
 void _AddRupees(s16 delta);
+void Inventory_ChangeAmmo(s16 item, s16 ammoChange);
 
 void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
@@ -539,6 +543,12 @@ f32 Math3D_Vec3fMagnitude(Vec3f* vec);
 void DynaPolyActor_LoadMesh(PlayState* play, DynaPolyActor* dynaActor, CollisionHeader* meshHeader);
 extern Vec3f gZeroVec3f;
 
+void Cutscene_StartManual(PlayState* play, CutsceneContext* csCtx);
+s32 Play_ChangeCameraStatus(PlayState* this, s16 camId, s16 status);
+s16 Play_CreateSubCamera(PlayState* this);
+void Cutscene_StopManual(PlayState* play, CutsceneContext* csCtx);
+s32 Play_SetCameraAtEye(PlayState* this, s16 camId, Vec3f* at, Vec3f* eye);
+
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
 
@@ -551,7 +561,6 @@ void Environment_StopTime(void);
 void Audio_PlaySfx_MessageCancel(void);
 void Audio_PlaySfx_MessageDecide(void);
 Path* SubS_GetAdditionalPath(PlayState* play, u8 pathIndex, s32 limit);
-void Math_Vec3s_ToVec3f(Vec3f* dest, Vec3s* src);
 void Interface_InitMinigame(PlayState* play);
 
 s32 DynaPolyActor_IsPlayerOnTop(DynaPolyActor* dynaActor);
@@ -582,10 +591,7 @@ void Animation_MorphToPlayOnce(SkelAnime* skelAnime, AnimationHeader* animation,
 s32 Animation_OnFrame(SkelAnime* skelAnime, f32 frame);
 
 s32 Collider_InitAndSetJntSph(PlayState* play, ColliderJntSph* sphereGroup, Actor* actor, ColliderJntSphInit* src, ColliderJntSphElement* elements);
-void Cutscene_StartManual(PlayState* play, CutsceneContext* csCtx);
-void Cutscene_StopManual(PlayState* play, CutsceneContext* csCtx);
 
-void Matrix_MultVecZ(f32 z, Vec3f* dest);
 void Matrix_MultVecY(f32 y, Vec3f* dest);
 void Matrix_MultZero(Vec3f* dest);
 void Matrix_RotateXFApply(f32 x);
@@ -593,9 +599,6 @@ void Matrix_ReplaceRotation(MtxF* mf);
 void Matrix_RotateXFNew(f32 x);
 void Matrix_Put(MtxF* src);
 
-s16 Play_CreateSubCamera(PlayState* this);
-s32 Play_ChangeCameraStatus(PlayState* this, s16 camId, s16 status);
-s32 Play_SetCameraAtEye(PlayState* this, s16 camId, Vec3f* at, Vec3f* eye);
 s32 Play_SetCameraAtEyeUp(PlayState* this, s16 camId, Vec3f* at, Vec3f* eye, Vec3f* up);
 Gfx* Play_SetFog(PlayState* this, Gfx* gfx);
 
@@ -653,7 +656,6 @@ void Matrix_Get(MtxF* dest);
 void Matrix_MtxFToYXZRot(MtxF* src, Vec3s* dest, s32 nonUniformScale);
 void Effect_Add(PlayState* play, s32* pIndex, int type, u8 arg3, u8 arg4, void* initParams);
 void Effect_Destroy(PlayState* play, s32 index);
-int SurfaceType_GetFloorType(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 void* Effect_GetByIndex(s32 index);
 
 #define MATRIX_FINALIZE_AND_LOAD(pkt, gfxCtx) \

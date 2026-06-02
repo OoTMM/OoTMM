@@ -469,6 +469,7 @@
 - { id: OOT_SEAHORSE2, item: OOT_SEAHORSE, type: NORMAL, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
 - { id: OOT_BOTTLED_GOLD_DUST, item: OOT_GOLD_DUST, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C1>bottle of Gold Dust" }
 - { id: OOT_BOTTLE_CHATEAU, item: OOT_CHATEAU, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLE_CHATEAU, object: [mm, 0x0227], name: "a bottle of <C0>Chateau Romani" }
+- { id: OOT_POWDER_KEG, item: OOT_POWDER_KEG, type: MAJOR, add: [OOT_KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
 - { id: OOT_TRAP_ICE, type: MINOR, add: [TRAP, 0x00], flags: 0x80, draw: [TRAP, 0x00], name: "an <COLOR_BLUE>Ice Trap" }
 - { id: OOT_TRAP_FIRE, type: MINOR, add: [TRAP, 0x01], flags: 0x80, draw: [TRAP, 0x01], name: "a <COLOR_BLUE>Fire Trap" }
 - { id: OOT_TRAP_SHOCK, type: MINOR, add: [TRAP, 0x02], flags: 0x80, object: EFFECT_SHOCK, draw: [TRAP, 0x02], name: "a <COLOR_BLUE>Shock Trap" }
@@ -533,7 +534,7 @@
 - { id: MM_SHIELD_MIRROR, item: MM_SHIELD_MIRROR, type: MAJOR, add: [MM_SHIELD, 3], flags: 0xa0, draw: MM_SHIELD_MIRROR, object: [mm, 0x00c3], name: "the <C1>Mirror Shield" }
 - { id: MM_PROGRESSIVE_SHIELD_DEKU, type: MAJOR, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: [OOT_SHIELD_DEKU, 1], object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
 - { id: MM_PROGRESSIVE_SHIELD_HERO, type: MAJOR, add: [MM_SHIELD, 0x102], flags: 0xa0, draw: [MM_SHIELD_HERO, 1], object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
-- { id: MM_POWDER_KEG, item: MM_POWDER_KEG, type: MAJOR, add: [KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
+- { id: MM_POWDER_KEG, item: MM_POWDER_KEG, type: MAJOR, add: [MM_KEG, 1], flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
 - { id: MM_MAGIC_BEAN, item: MM_MAGIC_BEAN, type: MAJOR, add: [MM_BEANS, 1], flags: 0x80, draw: MAGIC_BEAN, object: [mm, 0x00c6], name: "a <C0>Magic Bean" }
 - { id: MM_BOMBCHU, item: MM_BOMBCHU_ALT, type: NORMAL, add: [MM_BOMBCHU, 1], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "a <C1>Bombchu" }
 - { id: MM_SWORD_KOKIRI, item: MM_SWORD_KOKIRI, type: MAJOR, add: [MM_SWORD, 1], flags: 0xa0, draw: MM_SWORD_KOKIRI, object: [mm, 0x0148], name: "the <C1>Kokiri Sword" }
