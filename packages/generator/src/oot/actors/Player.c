@@ -105,11 +105,9 @@ s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
         return 5;
     }
 
-    u8* sActionModelGroups = (u8*)0x800f7714; /* using original table also means original glitches, if that matters */
+    u8* sActionModelGroups = (u8*)0x800f7714;
     s32 modelGroup = sActionModelGroups[itemAction];
-    /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
     if ((modelGroup == 2) && Player_IsChildWithHylianShield(player)) {
-        // child, using kokiri sword with hylian shield equipped
         return 1;
     } else {
         return modelGroup;
