@@ -9,12 +9,12 @@ import { DUNGEONS_REGIONS } from './world';
 import { isLocationFullyShuffled, locationData, makeLocation } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [
+  'OOT Skulltula House 100 Tokens',
   'OOT Skulltula House 10 Tokens',
   'OOT Skulltula House 20 Tokens',
   'OOT Skulltula House 30 Tokens',
   'OOT Skulltula House 40 Tokens',
   'OOT Skulltula House 50 Tokens',
-  'OOT Skulltula House 100 Tokens',
   'OOT Hyrule Field Ocarina of Time',
   'OOT Hyrule Field Song of Time',
   'MM Laboratory Zora Song',
@@ -812,7 +812,11 @@ class LogicPassHints {
 
     /* Mark static hints */
     for (let world = 0; world < this.state.settings.players; ++world) {
-      FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(makeLocation(x, world)));
+      for (const loc of FIXED_HINTS_LOCATIONS) {
+        if (this.state.worlds[world].locations.has(loc)) {
+          this.hintedLocations.add(makeLocation(loc, world));
+        }
+      }
     }
 
     /* Compute foolish */

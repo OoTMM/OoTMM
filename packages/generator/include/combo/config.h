@@ -51,8 +51,8 @@ typedef struct
     u16             triforcePieces;
     u16             triforceGoal;
     ComboDataHints  hints;
-    s8              staticHintsImportance[20];
     u16             giZoraSapphire;
+    s8              staticHintsImportance[21];
     u8              boss[12];
     u8              strayFairyRewardCount;
     u8              bombchuBehaviorOot;

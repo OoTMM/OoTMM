@@ -29,9 +29,9 @@ static void EnSsh_DisplayHint(Actor* this, PlayState* play)
     int importanceIndex;
 
     if (play->sceneId == SCE_MM_SPIDER_HOUSE_OCEAN)
-        importanceIndex = 17;
+        importanceIndex = 18;
     else
-        importanceIndex = 16;
+        importanceIndex = 17;
 
     EnSsh_ItemQuery(&q, play, 0);
     PlayerDisplayTextBox(play, 0x915, this);
