@@ -393,6 +393,7 @@ static void EnDoor_DrawRusty(PlayState* play) {
     OPEN_DISPS(play->state.gfxCtx);
 
     gSPSegment(POLY_OPA_DISP++, 0x06, ((u32)obj & 0x00ffffff));
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 140, 64, 255);
     Matrix_Translate(0.0f, 5000.f, 500.0f, MTXMODE_APPLY);
     Matrix_Get(&baseMtxF);
 

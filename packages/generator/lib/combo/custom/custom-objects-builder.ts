@@ -476,8 +476,16 @@ export class CustomObjectsBuilder {
     const editor = new ObjectEditor(0x06);
     const obj = await this.getFile('oot', 'objects/gameplay_dangeon_keep');
     editor.loadSegment(0x05, obj);
-    editor.submitListAddr(0x05001100);
-    editor.submitListAddr(0x050011f0);
+
+    let b = 0x05001100;
+    let data = editor.listData(b)!;
+    data = editor.stripList(data, 0x05001170 - b, 0x05001178 - b);
+    editor.submitList(data);
+
+    b = 0x050011f0;
+    data = editor.listData(b)!;
+    data = editor.stripList(data, 0x05001260 - b, 0x05001268 - b);
+    editor.submitList(data);
 
     return { name: 'DOOR_LOCK', ...editor.build() }
   }
