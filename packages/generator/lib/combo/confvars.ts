@@ -275,6 +275,7 @@ export const CONFVARS = [
   'MM_MOON_COND_OPEN',
   'MM_MOON_COND_VANILLA',
   'MM_MOON_COND_CUSTOM',
+  'OOT_AIR_PHYSICS_MM',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -64,6 +64,7 @@ s16     Math_Atan2S_XY(f32 x, f32 y);
 f32     Math_Atan2F_XY(f32 x, f32 y);
 s32     Math_StepToF(float* pValue, float target, float step);
 s32     Math_StepToS(s16* pValue, s16 target, s16 step);
+float   Math_AsymStepToF(float* pValue, float target, float incrStep, float decrStep);
 float   Math_SmoothStepToF(float* pValue, float target, float fraction, float step, float minStep);
 s16     Math_SmoothStepToS(s16* pValue, s16 target, s16 scale, s16 step, s16 minStep);
 void    Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);

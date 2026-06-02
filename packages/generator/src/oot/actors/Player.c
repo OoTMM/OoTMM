@@ -1491,3 +1491,38 @@ void Player_AfterInit(PlayState* play)
 }
 
 PATCH_CALL(0x808452cc, Player_AfterInit);
+
+void Player_CapSpeedXZ(Player* this, f32* speedTarget, s16* yawTarget)
+{
+    s16 yawDiff = this->yaw - *yawTarget;
+
+    f32 step = 1.0f;
+    f32 stepInverse = 0.1f;
+
+    if (Config_Flag(CFG_OOT_AIR_PHYSICS_MM))
+    {
+        if ((this->unk_880 * 1.5f) < fabsf(this->speedXZ)) {
+            step *= 4.0f;
+            stepInverse *= 4.0f;
+        }
+    }
+    else if (this->meleeWeaponState == 0)
+    {
+        this->speedXZ = CLAMP(this->speedXZ, -(R_RUN_SPEED_LIMIT / 100.0f), (R_RUN_SPEED_LIMIT / 100.0f));
+    }
+
+    if (ABS(yawDiff) > 0x6000)
+    {
+        if (Math_StepToF(&this->speedXZ, 0.0f, step))
+        {
+            this->yaw = *yawTarget;
+        }
+    }
+    else
+    {
+        Math_AsymStepToF(&this->speedXZ, *speedTarget, 0.05f, stepInverse);
+        Math_ScaledStepToS(&this->yaw, *yawTarget, 200);
+    }
+}
+
+PATCH_FUNC(0x8083c0a4, Player_CapSpeedXZ)
