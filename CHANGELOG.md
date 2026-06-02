@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - Add Saria's Song (MM), which makes some redeads dance and summons fairies at gossip stones.
 - Add Minuet of Forest (MM), Bolero of Fire (MM), Serenade of Water (MM), Requiem of Spirit (MM), Nocturne of Shadow (MM) and Prelude of Light (MM) to replace Cross-Games OoT Warp Songs.
 - Add Shared settings variants of each song above.
+- Add setting for MM-style air movement in OoT.
 
 ### Changed
 

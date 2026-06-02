@@ -284,6 +284,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_MOON_COND_OPEN: settings.moon === 'open',
     MM_MOON_COND_VANILLA: settings.moon === 'vanilla',
     MM_MOON_COND_CUSTOM: settings.moon === 'custom',
+    OOT_AIR_PHYSICS_MM: settings.mmStyleAirMovementOot,
   };
 
   for (const v in exprs) {

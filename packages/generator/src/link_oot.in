@@ -173,6 +173,7 @@ sinf = 0x800cf470;
 Math3D_Dist1DSq = 0x800a5434;
 Math3D_Dist2DSq = 0x800a5470;
 Math_ScaledStepToS = 0x80063704;
+Math_AsymStepToF = 0x80063acc;
 Math_SmoothStepToF = 0x80064178;
 Math_Vec3f_Yaw = 0x80063f00;
 

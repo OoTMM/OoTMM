@@ -1667,6 +1667,14 @@ export const SETTINGS = [{
   default: 'normal',
   cond: hasMM,
 }, {
+    key: 'mmStyleAirMovementOot',
+    name: 'MM-style air movement in OoT',
+    category: 'main.nologic',
+    type: 'boolean',
+    description: 'Makes the air movement in OoT more like the air movement in MM.',
+    default: false,
+    cond: hasOoT,
+  }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',
