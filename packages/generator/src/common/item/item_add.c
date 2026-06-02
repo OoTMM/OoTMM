@@ -2045,6 +2045,15 @@ static int addItemPictoBoom(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemHammerGFS(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kOotHammerGFS[param];
+    if (gOotSave.info.inventory.items[ITS_OOT_HAMMER] == ITEM_NONE)
+        gOotSave.info.inventory.items[ITS_OOT_HAMMER] = itemId;
+    gOotExtraItems.gfsHammer |= (1 << (u8)param);
+    return 0;
+}
+
 static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmExtraFlags3.stoneAgony = 1;
@@ -2231,6 +2240,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemGsTokenPlatinumOot,
     addItemGsTokenPlatinumMm,
     addItemKegOot,
+    addItemHammerGFS,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");
@@ -2399,6 +2409,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SOULS_ENEMY, GI_OOT_SOUL_ENEMY_THIEVES, GI_MM_SOUL_ENEMY_THIEVES },
     { CFG_SHARED_HAMMER, GI_OOT_HAMMER, GI_MM_HAMMER },
     { CFG_SHARED_BOOMERANG, GI_OOT_BOOMERANG, GI_MM_BOOMERANG },
+    { CFG_SHARED_GREAT_FAIRY_SWORD, GI_OOT_GREAT_FAIRY_SWORD, GI_MM_GREAT_FAIRY_SWORD },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE, GI_MM_STICK_UPGRADE },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE2, GI_MM_STICK_UPGRADE2 },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE,  GI_MM_NUT_UPGRADE },

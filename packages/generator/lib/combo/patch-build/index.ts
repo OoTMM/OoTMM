@@ -48,6 +48,7 @@ function asmPatchGroups(world: LogicResultWorld, settings: Settings) {
     OOT_AGELESS_STICKS: settings.agelessSticks,
     OOT_AGELESS_BOOMERANG: settings.agelessBoomerang,
     OOT_AGELESS_HAMMER: settings.agelessHammer,
+    OOT_AGELESS_GREAT_FAIRY_SWORD: settings.agelessGFS,
     OOT_AGELESS_HOOKSHOT: settings.agelessHookshot,
     OOT_AGELESS_SLINGSHOT: settings.agelessSlingshot,
     OOT_AGELESS_BOW: settings.agelessBow,

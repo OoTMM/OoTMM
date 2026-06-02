@@ -157,6 +157,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_BOW,
   Items.OOT_CHICKEN,
   Items.OOT_HAMMER,
+  Items.OOT_GREAT_FAIRY_SWORD,
   Items.OOT_HOOKSHOT,
   Items.OOT_LENS,
   Items.OOT_MAGIC_UPGRADE,
@@ -333,6 +334,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_STRENGTH,
   Items.SHARED_HAMMER,
   Items.SHARED_BOOMERANG,
+  Items.SHARED_GREAT_FAIRY_SWORD,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -1204,6 +1206,12 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_BOOMERANG, Items.SHARED_BOOMERANG);
     } else if (settings.boomerangMm) {
       this.addItem(Items.MM_BOOMERANG);
+    }
+
+    if (settings.sharedGFS) {
+      this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.SHARED_GREAT_FAIRY_SWORD);
+    } else if (settings.gfsOot) {
+      this.addItem(Items.OOT_GREAT_FAIRY_SWORD);
     }
 
     if (settings.sharedStoneAgony) {

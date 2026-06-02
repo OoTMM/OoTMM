@@ -126,7 +126,8 @@
 #define IA_OOT_PLATINUM_TOKEN   0x74
 #define IA_MM_PLATINUM_TOKEN    0x75
 #define IA_OOT_KEG              0x76
-#define IA_MAX                  0x77
+#define IA_OOT_HAMMER_GFS       0x77
+#define IA_MAX                  0x78
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -221,6 +222,8 @@ extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 extern const u8 kMmGFSHammer[];
 extern const u8 kMmPictoBoom[];
+extern const u8 kOotHammerGFS[];
+
 void comboSyncItems(void);
 
 int isSlotEquippedOot(OotItemEquips* equips, int slot);

@@ -283,6 +283,18 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_BOOMERANG_FLIGHT', ...editor.build() };
   }
 
+  private async makeEqGreatFairySword(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+
+    const object_link_child = await this.getFile('mm', 'objects/object_link_child');
+    editor.loadSegment(0x06, object_link_child);
+
+    const gfs = editor.processListAddr(0x06016898); /* gLinkHumanGreatFairysSwordDL */
+    editor.submitOut(gfs);
+
+    return { name: 'EQ_GREAT_FAIRY_SWORD', ...editor.build() };
+  }
+
   private async makeEqOcarinaFairy(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const obj = await this.getFile('oot', 'objects/object_link_child');
@@ -470,6 +482,7 @@ export class CustomObjectsBuilder {
       await this.makeEqBiggoronSwordBroken(),
       await this.makeEqHammer(),
       await this.makeEqBoomerangFlight(),
+      await this.makeEqGreatFairySword(),
       await this.makeEqShieldDeku(),
       await this.makeEqShieldMirror(),
       await this.makeEqSheathShieldHylianChild(),

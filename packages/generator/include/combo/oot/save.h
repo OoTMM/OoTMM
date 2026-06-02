@@ -427,7 +427,8 @@ typedef struct
     u16 shield:2;
     u16 ocarina:2;
     u16 bombSlot:2;
-    u16 unused:7;
+    u16 gfsHammer:2;
+    u16 unused:5;
     u8 bottleAdultSlot;
     u8 bottleChildSlot;
 }

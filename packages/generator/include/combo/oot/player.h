@@ -461,4 +461,12 @@ typedef enum PlayerItemAction {
     /* 0x43 */ PLAYER_IA_MAX
 } PlayerItemAction;
 
+typedef enum PlayerSword {
+    /* 0 */ PLAYER_SWORD_NONE,
+    /* 1 */ PLAYER_SWORD_KOKIRI,
+    /* 2 */ PLAYER_SWORD_MASTER,
+    /* 3 */ PLAYER_SWORD_BIGGORON,
+    /* 4 */ PLAYER_SWORD_MAX
+} PlayerSword;
+
 #endif

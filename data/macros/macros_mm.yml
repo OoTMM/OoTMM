@@ -128,13 +128,13 @@
 # Misc
 "has_spin_upgrade": "cond(setting(sharedSpinUpgrade), has(SHARED_SPIN_UPGRADE), has(SPIN_UPGRADE))"
 "keaton_grass_easy": "has_sword && has_magic"
-"keaton_grass_hard": "keaton_grass_easy && (has_spin_upgrade || has(GREAT_FAIRY_SWORD) || has_sword_level(3))"
+"keaton_grass_hard": "keaton_grass_easy && (has_spin_upgrade || (has(GREAT_FAIRY_SWORD) || has(SHARED_GREAT_FAIRY_SWORD)) || has_sword_level(3))"
 
 "break_hive": "has_weapon_range"
 
 "has_sword_level(n)": "cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
 "has_b_sword": "has_sword_level(1)"
-"has_sword": "has_b_sword || has(GREAT_FAIRY_SWORD)"
+"has_sword": "has_b_sword || (has(GREAT_FAIRY_SWORD) || has(SHARED_GREAT_FAIRY_SWORD))"
 "has_weapon": "has_sword || can_hammer"
 "deku_stick_fighting": "trick(MM_DEKU_STICK_FIGHTING) && has_sticks"
 
