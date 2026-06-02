@@ -70,7 +70,7 @@ static void EnJs_DisplayHint(PlayState* play, s16 messageId)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "You have only weak masks..." TEXT_NL "Having better masks would give you ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[8]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[9]);
     comboTextAppendStr(&b, "..." TEXT_BB "So...you'll play?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Yes" TEXT_NL "No" TEXT_END);
     comboTextAutoLineBreaks(start);
 }

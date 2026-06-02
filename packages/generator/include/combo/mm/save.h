@@ -600,5 +600,10 @@ MmCustomSave;
 #define MM_SONG_OOT_SARIA        7
 
 #define CURRENT_DAY (((void)0, gSaveContext.save.day) % 5)
+#define CUR_FORM ((gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) ? 0 : gSaveContext.save.playerForm)
+#define BUTTON_ITEM_EQUIP(form, button) (gSaveContext.save.info.itemEquips.buttonItems[form][button])
+#define C_SLOT_EQUIP(form, button) (gSaveContext.save.info.itemEquips.cButtonSlots[form][button])
+#define GET_CUR_FORM_BTN_ITEM(btn) ((u8)((btn) == EQUIP_SLOT_B ? BUTTON_ITEM_EQUIP(CUR_FORM, btn) : BUTTON_ITEM_EQUIP(0, btn)))
+#define GET_CUR_FORM_BTN_SLOT(btn) ((u8)((btn) == EQUIP_SLOT_B ? C_SLOT_EQUIP(CUR_FORM, btn) : C_SLOT_EQUIP(0, btn)))
 
 #endif /* MM_SAVE_H */

@@ -64,6 +64,7 @@ s16     Math_Atan2S_XY(f32 x, f32 y);
 f32     Math_Atan2F_XY(f32 x, f32 y);
 s32     Math_StepToF(float* pValue, float target, float step);
 s32     Math_StepToS(s16* pValue, s16 target, s16 step);
+float   Math_AsymStepToF(float* pValue, float target, float incrStep, float decrStep);
 float   Math_SmoothStepToF(float* pValue, float target, float fraction, float step, float minStep);
 s16     Math_SmoothStepToS(s16* pValue, s16 target, s16 scale, s16 step, s16 minStep);
 void    Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
@@ -85,6 +86,7 @@ f32     Math_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
 f32     Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 s32     Math3D_LineSegVsPlane(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* linePointA, Vec3f* linePointB, Vec3f* intersect, s32 fromFront);
 void    Math_Vec3s_ToVec3f(Vec3f* dest, Vec3s* src);
+void    Math_Vec3f_ToVec3s(Vec3s* dest, Vec3f* src);
 void    Math_Vec3s_DiffToVec3f(Vec3f* dest, Vec3s* a, Vec3s* b);
 void    Math_Vec3f_Scale(Vec3f* vec, f32 scaleF);
 

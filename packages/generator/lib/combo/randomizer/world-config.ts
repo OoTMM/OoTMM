@@ -207,6 +207,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_SONG_GORON: settings.sharedSongGoron,
     SHARED_SONG_ZORA: settings.sharedSongZora,
     SHARED_SONG_ORDER: settings.sharedSongOrder,
+    OOT_POWDER_KEG: settings.powderKegOot,
+    SHARED_POWDER_KEG: settings.sharedPowderKeg,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
     MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',
@@ -285,6 +287,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_MOON_COND_OPEN: settings.moon === 'open',
     MM_MOON_COND_VANILLA: settings.moon === 'vanilla',
     MM_MOON_COND_CUSTOM: settings.moon === 'custom',
+    OOT_AIR_PHYSICS_MM: settings.mmStyleAirMovementOot,
   };
 
   for (const v in exprs) {

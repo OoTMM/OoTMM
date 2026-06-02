@@ -50,11 +50,11 @@ function makeFile(opts: { name?: string, data: string | Uint8Array, mime: string
 }
 
 /* For settings that require randomization always */
-function randomVariants(settings: Settings) {
+async function randomVariants(settings: Settings) {
   const random = new Random();
   const randBytes = crypto.getRandomValues(new Uint8Array(32));
   const randBytesAsHex = Array.from(randBytes).map(b => b.toString(16).padStart(2, '0')).join('');
-  random.seed(randBytesAsHex);
+  await random.seed(randBytesAsHex);
 
   if (settings.startingAge === 'random') {
     if (random.next() & 1) {
@@ -94,7 +94,7 @@ export class Generator {
     if (this.opts.mode === 'random') {
       this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
     } else if (this.opts.mode === 'create') {
-      randomVariants(this.opts.settings);
+      await randomVariants(this.opts.settings);
     }
 
     if (this.opts.mode !== 'patch') {

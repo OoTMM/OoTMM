@@ -969,6 +969,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: true
 }, {
+  key: 'shuffleSkulltulaFinalReward',
+  name: 'Skulltula Final Reward Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the huge rupee obtained by having all 100 gold skulltula tokens is shuffled',
+  cond: hasOoT,
+  default: false
+}, {
   key: 'shuffleMaskTrades',
   name: 'Mask Trade Shuffle',
   category: 'main.shuffle',
@@ -1659,6 +1667,14 @@ export const SETTINGS = [{
   default: 'normal',
   cond: hasMM,
 }, {
+    key: 'mmStyleAirMovementOot',
+    name: 'MM-style air movement in OoT',
+    category: 'main.nologic',
+    type: 'boolean',
+    description: 'Makes the air movement in OoT more like the air movement in MM.',
+    default: false,
+    cond: hasOoT,
+  }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',
@@ -2200,6 +2216,14 @@ export const SETTINGS = [{
   description: "Add the Prelude of Light in Majora's Mask. If Songs are on Song Locations, you must share or start with at least one song",
   default: false,
   cond: hasMM,
+}, {
+  key: 'powderKegOot',
+  name: "Powder Keg (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Powder Keg in Ocarina of Time. Once found, Medigoron in Goron City will sell Powder Kegs after you buy his item.",
+  default: false,
+  cond: hasOoT,
 }, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons (OoT)',
@@ -2760,6 +2784,14 @@ export const SETTINGS = [{
   description: "Combines the Prelude of Light from OoT and MM into one item for both games",
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.songPreludeMm,
+}, {
+  key: 'sharedPowderKeg',
+  name: 'Shared Powder Keg',
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the Powder Kegs from OoT and MM into one item for both games.',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.powderKegOot,
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',

@@ -14,6 +14,7 @@
 #include <combo/audio.h>
 #include <combo/inventory.h>
 #include <combo/draw.h>
+#include <combo/mark.h>
 
 PlayState* gPlay;
 
@@ -542,10 +543,10 @@ void hookPlay_Init(PlayState* play)
     g.decoysCount = 0;
     g.bronzeScaleSolidGround = 0;
     g.bronzeScaleTimer = 0;
-    gMultiMarkChests = 0;
-    gMultiMarkCollectibles = 0;
-    gMultiMarkSwitch0 = 0;
-    gMultiMarkSwitch1 = 0;
+    gMarkChests = 0;
+    gMarkCollectibles = 0;
+    gMarkSwitch0 = 0;
+    gMarkSwitch1 = 0;
     Multi_ResetWisps();
     Inventory_ReobtainProgressiveShields();
 

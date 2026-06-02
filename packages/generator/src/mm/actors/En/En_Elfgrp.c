@@ -96,7 +96,7 @@ static void fairyHint(PlayState* play, int index)
         comboTextAppendStr(&b, "Stray Fairy");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[9 + (index - 2)]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[10 + (index - 2)]);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -116,9 +116,9 @@ static void fairyHintTown(PlayState* play)
     comboTextAppendStr(&b, "Young one, please help us! If you bring the missing " TEXT_COLOR_ORANGE "Stray Fairy");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[18]);
+    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[19]);
     comboTextAppendStr(&b, " and ");
-    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[19]);
+    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[20]);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }

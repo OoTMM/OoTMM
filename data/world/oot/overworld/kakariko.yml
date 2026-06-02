@@ -238,6 +238,7 @@
     "Skulltula House 30 Tokens": "(has(GS_TOKEN, 30) || has_platinum_token)"
     "Skulltula House 40 Tokens": "(has(GS_TOKEN, 40) || has_platinum_token)"
     "Skulltula House 50 Tokens": "(has(GS_TOKEN, 50) || has_platinum_token)"
+    "Skulltula House 100 Tokens": "(has(GS_TOKEN, 100) || has_platinum_token)"
 
 "ReDead Grotto":
   region: ENTRANCE

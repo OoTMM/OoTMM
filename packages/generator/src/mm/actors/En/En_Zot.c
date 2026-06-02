@@ -52,9 +52,9 @@ void EnZot_DisplayBeaverHint(Actor* this, PlayState* play)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I've heard that the beavers are betting ");
-    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[14]);
+    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[15]);
     comboTextAppendStr(&b, " and ");
-    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[15]);
+    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[16]);
     comboTextAppendStr(&b, "." TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

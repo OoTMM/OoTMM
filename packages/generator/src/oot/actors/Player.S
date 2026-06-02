@@ -438,3 +438,89 @@ PATCH_START 0x80844f90
   b       .+0xf4
    or     t0, v0, zero
 PATCH_END
+
+PATCH_START 0x8083413c
+  jal     Player_ShouldExplosiveError
+   sw     a3, 0x002c (sp)
+  beqz    v0, .+0x64
+   lw     a3, 0x002c (sp)
+  b       .+0x4c
+   nop
+PATCH_END
+
+PATCH_START 0x80831928
+  or      a0, s0, zero
+  jal     Player_DeductExplosiveAmmo
+   sw     a3, 0x0044 (sp)
+  nop
+PATCH_END
+
+Player_IsActionCutsceneItem_Hook:
+  sb      a2, 0x0027 (sp)
+  j       Player_IsActionCutsceneItem
+   sw     a3, 0x002c (sp)
+
+PATCH_START 0x80834338
+  jal     Player_IsActionCutsceneItem_Hook
+   or     a0, a2, zero
+  lb      a2, 0x0027 (sp)
+  lw      a3, 0x002c (sp)
+  beqz    v0, .+0x64
+   nop
+PATCH_END
+
+PATCH_START 0x80831a58
+  jal     Player_InvokeItemActionInitFunc
+   or     a2, t9, zero
+PATCH_END
+
+PATCH_START 0x808535a4
+.int 0
+PATCH_END
+
+PATCH_START 0x8085361c
+.int 0
+PATCH_END
+
+PATCH_START 0x8085366c
+.int 0
+PATCH_END
+
+Player_ShouldDamageRecoil_Hook:
+  addiu   sp, sp, -0x18
+  sw      ra, 0x0014 (sp)
+  sw      a0, 0x0018 (sp)
+  sw      a1, 0x001c (sp)
+  or      a0, s0, zero
+  jal     Player_ShouldDamageRecoil
+   addiu  a1, sp, 0x0064 + 0x18
+  lw      a0, 0x0018 (sp)
+  lw      a1, 0x001c (sp)
+  lw      ra, 0x0014 (sp)
+  jr      ra
+  addiu   sp, sp, 0x18
+
+PATCH_START 0x80836634
+  jal     Player_ShouldDamageRecoil_Hook
+   nop
+  lb      v1, 0x0a68 (s0)
+  beqzl   v0, .+0x1b8
+   lbu    t4, 0x0a77 (s0)
+  or      a0, s0, zero
+  addiu   a1, zero, 0x00b4
+  addiu   a2, zero, 0x0014
+  addiu   a3, zero, 0x0064
+  lw      t0, 0x0064 (sp)
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END

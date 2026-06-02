@@ -52,9 +52,9 @@ static void hintDungeons(PlayState* play)
         comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x08" TEXT_FAST "It is also written that reuniting the " TEXT_COLOR_YELLOW "Spiritual Stones ");
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "leads to ");
-        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_ITEM, GI_OOT_OCARINA_TIME, gComboConfig.staticHintsImportance[5]);
+        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_ITEM, GI_OOT_OCARINA_TIME, gComboConfig.staticHintsImportance[6]);
         comboTextAppendStr(&b, " and ");
-        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_SONG, GI_OOT_SONG_TIME, gComboConfig.staticHintsImportance[6]);
+        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_SONG, GI_OOT_SONG_TIME, gComboConfig.staticHintsImportance[7]);
         comboTextAppendStr(&b, ".");
     }
     else
