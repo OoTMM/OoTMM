@@ -472,6 +472,16 @@ export class CustomObjectsBuilder {
     return { name: 'CLEAR_TAG', ...editor.build() }
   }
 
+  private async makeDoorLock(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const obj = await this.getFile('oot', 'objects/gameplay_dangeon_keep');
+    editor.loadSegment(0x05, obj);
+    editor.submitListAddr(0x05001100);
+    editor.submitListAddr(0x050011f0);
+
+    return { name: 'DOOR_LOCK', ...editor.build() }
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -505,6 +515,7 @@ export class CustomObjectsBuilder {
       await this.makeSongEffect(),
       await this.makePowderKeg(),
       await this.makeClearTag(),
+      await this.makeDoorLock(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }
