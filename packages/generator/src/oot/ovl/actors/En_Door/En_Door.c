@@ -1,4 +1,5 @@
 #include <combo/dungeon.h>
+#include <combo/doors.h>
 #include "En_Door.h"
 
 #include <assets/oot/objects/gameplay_keep.h>
@@ -103,6 +104,31 @@ static Gfx* sDoorDLists[DOOR_DL_MAX][2] = {
     { gShadowDoorLeftDL, gShadowDoorRightDL },                             // DOOR_DL_SHADOW
     { gFieldDoorLeftDL, gFieldDoorRightDL },                               // DOOR_DL_DEFAULT_FIELD_KEEP
 };
+
+static int EnDoor_GetID(PlayState* play, int id)
+{
+    switch (play->sceneId)
+    {
+    case SCE_OOT_MARKET_ENTRANCE_ADULT:
+    case SCE_OOT_MARKET_ENTRANCE_CHILD_DAY:
+    case SCE_OOT_MARKET_ENTRANCE_CHILD_NIGHT:
+    case SCE_OOT_GUARD_HOUSE:
+        return DOORID_OOT_GUARD_HOUSE;
+    }
+
+    return DOORID_NONE;
+}
+
+static int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
+{
+    int id;
+
+    return 1;
+    id = EnDoor_GetID(play, GET_TRANSITION_ACTOR_INDEX(this));
+    if (id == DOORID_NONE)
+        return 0;
+    return !BITMAP8_GET(gSharedCustomSave.rustyKeys, id);
+}
 
 void EnDoor_Init(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
@@ -228,7 +254,7 @@ void EnDoor_Idle(EnDoor* this, PlayState* play) {
             Flags_SetSwitch(play, ENDOOR_GET_LOCKED_SWITCH_FLAG(&this->actor));
             Actor_PlaySfx(&this->actor, NA_SE_EV_CHAIN_KEY_UNLOCK);
         }
-    } else if (!Player_InCsMode(play)) {
+    } else if (!Player_InCsMode(play) && !EnDoor_IsRustyLocked(play, &this->actor)) {
         if (fabsf(playerPosRelToDoor.y) < 20.0f && fabsf(playerPosRelToDoor.x) < 20.0f &&
             fabsf(playerPosRelToDoor.z) < 50.0f) {
             s16 yawDiff = player->actor.shape.rot.y - this->actor.shape.rot.y;
@@ -370,14 +396,13 @@ void EnDoor_Draw(Actor* thisx, PlayState* play) {
         SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, EnDoor_OverrideLimbDraw, NULL,
                           &this->actor);
         if (this->actor.world.rot.y != 0) {
-            if (1) {}
             if (this->actor.world.rot.y > 0) {
                 gSPDisplayList(POLY_OPA_DISP++, gDoorRightDL);
             } else {
                 gSPDisplayList(POLY_OPA_DISP++, gDoorLeftDL);
             }
         }
-        if (this->lockTimer != 0) {
+        if (this->lockTimer != 0 || EnDoor_IsRustyLocked(play, &this->actor)) {
             EnDoor_DrawLock(this, play, 0);
         }
 

@@ -17,6 +17,7 @@
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
 # include <combo/notes.h>
+# include <combo/doors.h>
 
 typedef struct ALIGNED(16)
 {
@@ -51,6 +52,7 @@ typedef struct ALIGNED(16)
     u8              bronzeScaleMm:1;
     u8              traps[TRAP_MAX];
     u8              notes[NOTES_MAX];
+    u8              rustyKeys[(DOORID_MAX + 7) / 8];
 #if defined(DEBUG)
     u8              cheats[4];
 #endif
