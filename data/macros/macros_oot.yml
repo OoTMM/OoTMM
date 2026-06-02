@@ -86,6 +86,7 @@
 "can_boomerang": "age_boomerang && (has(BOOMERANG) || has(SHARED_BOOMERANG))"
 "can_hammer": "age_hammer && has_hammer_raw"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
+"has_keg": "has(POWDER_KEG) || has(SHARED_POWDER_KEG)"
 
 # Age macros
 "age_sticks": "glitch_equip_swap || is_child || setting(agelessSticks)"
@@ -182,6 +183,7 @@
 "hidden_grotto_storms": "stone_of_agony && can_play_storms"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
 "can_jump_slash": "can_use_sword || can_use_sticks || can_hammer"
+"can_hammer_or_keg": "can_hammer || can_use_keg"
 
 # Scales
 "has_scale_bronze": "cond(setting(bronzeScale), has_scale_raw(1), true)"
@@ -217,6 +219,8 @@
 "get_past_skultullas": "has_nuts || can_use_sword_or_sticks || has_ranged_weapon || can_use_din || has_explosives || can_hammer || can_use_mask_blast || can_use_mask_stone"
 "get_past_skultullas_no_stone": "has_nuts || can_use_sword_or_sticks || has_ranged_weapon || can_use_din || has_explosives || can_hammer || can_use_mask_blast"
 "collect_gs_on_walls": "gs && (can_collect_distance || (has_ranged_weapon && climb_anywhere))" #TODO: Low/high macros like beehives; Din's, Blast mask, bomchus, bombs (if within throwing distance) and maybe even jump slashes if space permits (and damage?)
+"can_carry_keg": "can_lift_gold"
+"can_use_keg": "cond(setting(sharedPowderKeg), event(MM_BUY_KEG) || event(BUY_KEG), setting(powderKegOot) && event(BUY_KEG))"
 "can_hit_crystal_switch_close": "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang"
 
 

@@ -45,6 +45,11 @@ const u8 kOotHookshot[] = {
     ITEM_OOT_LONGSHOT,
 };
 
+const u8 kOotBomb[] = {
+    ITEM_OOT_BOMB,
+    ITEM_OOT_POWDER_KEG,
+};
+
 const u8 kMmTrade1[] = {
     ITEM_MM_SPELL_FIRE,
     ITEM_MM_MOON_TEAR,
@@ -164,6 +169,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kOotOcarina;
         *outTableSize = ARRAY_COUNT(kOotOcarina);
         result = 3;
+        break;
+    case ITS_OOT_BOMBS:
+        *outFlags = gOotExtraItems.bombSlot;
+        *outTable = kOotBomb;
+        *outTableSize = ARRAY_COUNT(kOotBomb);
+        result = 4;
         break;
 #endif
     default:

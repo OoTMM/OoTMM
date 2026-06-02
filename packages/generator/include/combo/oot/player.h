@@ -390,8 +390,6 @@ typedef enum PlayerMeleeWeaponAnimation {
     /* 28 */ PLAYER_MWA_MAX
 } PlayerMeleeWeaponAnimation;
 
-int Player_IsBurningStickInRange(PlayState* play, Vec3f* pos, f32 xzRange, f32 yRange);
-
 typedef enum PlayerItemAction {
     /* 0x00 */ PLAYER_IA_NONE,
     /* 0x01 */ PLAYER_IA_SWORD_CS, // Hold sword without shield in hand. The sword is not usable.

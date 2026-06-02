@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - Add Saria's Song (MM), which makes some redeads dance and summons fairies at gossip stones.
 - Add Minuet of Forest (MM), Bolero of Fire (MM), Serenade of Water (MM), Requiem of Spirit (MM), Nocturne of Shadow (MM) and Prelude of Light (MM) to replace Cross-Games OoT Warp Songs.
 - Add Shared settings variants of each song above.
+- Add Powder Keg (OoT).
 
 ### Changed
 
@@ -33,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
 - Converted the "Clear State Dungeons (MM)" setting to a "Set" type to allow for random choice.
 - Rename Sun's Song in MM to Sun's Song (MM) to be consistent.
+- Change Blast Mask (OoT) explosion to be MM-style.
 
 ### Fixed
 
@@ -45,6 +47,7 @@ All notable changes to this project will be documented in this file.
 - Fix logic for Shared Kamaro's Mask.
 - Fix "OOT Kokiri Shop Wonder Item" location incorrectly expecting the Shopkeeper's Soul to obtain.
 - Fix frog game softlocking when playing a custom song.
+- Fix ammo amount to display in green when bombchu are at capacity.
 
 ## [30.1] - 2026-03-15
 

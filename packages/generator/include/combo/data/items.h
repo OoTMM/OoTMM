@@ -163,7 +163,8 @@
 #define ITEM_OOT_SPRING_WATER           0xa4
 #define ITEM_OOT_SPRING_WATER_HOT       0xa5
 #define ITEM_OOT_ZORA_EGG               0xa6
-#define ITEM_OOT_CUSTOM_MAX             0xa7
+#define ITEM_OOT_POWDER_KEG             0xa7
+#define ITEM_OOT_CUSTOM_MAX             0xa8
 
 #if defined(GAME_OOT)
 # define ITEM_STICK                     ITEM_OOT_STICK
@@ -450,6 +451,7 @@
 #define ITEM_MM_ARROWS_10                   0x93
 #define ITEM_MM_ARROWS_30                   0x94
 #define ITEM_MM_ARROWS_40                   0x95
+#define ITEM_MM_ARROWS_50                   0x96
 #define ITEM_MM_BOMBCHU_20                  0x97
 #define ITEM_MM_BOMBCHU_10                  0x98
 #define ITEM_MM_BOMBCHU_ALT                 0x99
@@ -661,6 +663,7 @@
 # define ITEM_RUPEE_BLUE       ITEM_MM_RUPEE_BLUE
 # define ITEM_RUPEE_RED        ITEM_MM_RUPEE_RED
 # define ITEM_RUPEE_PURPLE     ITEM_MM_RUPEE_PURPLE
+# define ITEM_RUPEE_GOLD       ITEM_MM_RUPEE_GOLD
 # define ITEM_RECOVERY_HEART   ITEM_MM_RECOVERY_HEART
 #endif
 
