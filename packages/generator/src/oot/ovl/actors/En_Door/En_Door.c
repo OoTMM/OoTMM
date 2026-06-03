@@ -123,6 +123,7 @@ static int EnDoor_GetID(PlayState* play, int id)
         case 1: return DOORID_OOT_BACK_ALLEY_HOUSE;
         case 2: return DOORID_OOT_BOMBCHU_SHOP;
         }
+        break;
     case SCE_OOT_BACK_ALLEY_HOUSE2:
         return DOORID_OOT_DOG_LADY_HOUSE;
     case SCE_OOT_BACK_ALLEY_HOUSE:
@@ -142,6 +143,7 @@ static int EnDoor_GetID(PlayState* play, int id)
         case 4: return DOORID_OOT_CHILD_BAZAAR;
         case 5: return DOORID_OOT_BOMBCHU_BOWLING;
         }
+        break;
     case SCE_OOT_BOMBCHU_BOWLING_ALLEY:
         return DOORID_OOT_BOMBCHU_BOWLING;
     case SCE_OOT_SHOOTING_GALLERY:
@@ -152,12 +154,14 @@ static int EnDoor_GetID(PlayState* play, int id)
         case ENTR_OOT_CHILD_ARCHERY:
             return DOORID_OOT_CHILD_SHOOTING_GALLERY;
         }
+        break;
     case SCE_OOT_LAKE_HYLIA:
         switch (id)
         {
         case 0: return DOORID_OOT_LABORATORY;
         case 1: return DOORID_OOT_FISHING_POND;
         }
+        break;
     case SCE_OOT_LABORATORY:
         return DOORID_OOT_LABORATORY;
     case SCE_OOT_FISHING_POND:
@@ -169,6 +173,7 @@ static int EnDoor_GetID(PlayState* play, int id)
         case 1: return DOORID_OOT_RANCH_STABLE;
         case 2: return DOORID_OOT_RANCH_HOUSE;
         }
+        break;
     case SCE_OOT_STABLE:
         return DOORID_OOT_RANCH_STABLE;
     case SCE_OOT_RANCH_HOUSE_SILO:
@@ -177,6 +182,7 @@ static int EnDoor_GetID(PlayState* play, int id)
         case 0: return DOORID_OOT_RANCH_STABLE;
         case 1: return DOORID_OOT_RANCH_HOUSE;
         }
+        break;
     case SCE_OOT_GRAVEYARD:
         return DOORID_OOT_GRAVEYARD;
         case SCE_OOT_KAKARIKO_VILLAGE:
@@ -192,6 +198,7 @@ static int EnDoor_GetID(PlayState* play, int id)
             case 7: return DOORID_OOT_ADULT_POTION_SHOP;
             case 8: return DOORID_OOT_ADULT_POTION_SHOP_BACK;
         }
+        break;
     case SCE_OOT_TOMB_DAMPE_WINDMILL:
         return DOORID_OOT_WINDMILL;
     case SCE_OOT_HOUSE_OF_SKULLTULA:
@@ -213,7 +220,6 @@ static int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
 {
     int id;
 
-    return 1;
     id = EnDoor_GetID(play, GET_TRANSITION_ACTOR_INDEX(this));
     if (id < 0)
         return 0;
