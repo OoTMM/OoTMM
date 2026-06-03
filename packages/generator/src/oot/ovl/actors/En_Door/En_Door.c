@@ -223,7 +223,7 @@ static int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
     id = EnDoor_GetID(play, GET_TRANSITION_ACTOR_INDEX(this));
     if (id < 0)
         return 0;
-    return !BITMAP8_GET(gSharedCustomSave.rustyKeys, id);
+    return !BITMAP8_GET(gSharedCustomSave.rustyKeysOot, id);
 }
 
 void EnDoor_Init(Actor* thisx, PlayState* play2) {

@@ -279,7 +279,7 @@ void comboCreateSave(void* unk, void* buffer)
 
     /* Apply rusty keys */
     if (!Config_Flag(CFG_OOT_RUSTY_KEYS))
-        memset(gSharedCustomSave.rustyKeys, 0xff, sizeof(gSharedCustomSave.rustyKeys));
+        memset(gSharedCustomSave.rustyKeysOot, 0xff, sizeof(gSharedCustomSave.rustyKeysOot));
 
     /* Apply deku shield flag */
     if (Config_Flag(CFG_MM_DEKU_SHIELD))

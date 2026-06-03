@@ -2056,7 +2056,7 @@ static int addItemHammerGFS(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemOotRustyKey(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    BITMAP8_SET(gSharedCustomSave.rustyKeys, param);
+    BITMAP8_SET(gSharedCustomSave.rustyKeysOot, param);
     return 0;
 }
 

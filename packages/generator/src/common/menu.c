@@ -1395,7 +1395,7 @@ void comboMenuDraw(PlayState* play)
         drawMenuSouls(play, "MM Misc. Souls", kSoulsMiscMm, GI_MM_SOUL_MISC_GS, 1);
         break;
     case MENU_RUSTY_KEYS_OOT:
-        drawMenuBitmap(play, "OoT Rusty Keys", kRustyKeysNamesOot, gSharedCustomSave.rustyKeys);
+        drawMenuBitmap(play, "OoT Rusty Keys", kRustyKeysNamesOot, gSharedCustomSave.rustyKeysOot);
         break;
     }
 }
