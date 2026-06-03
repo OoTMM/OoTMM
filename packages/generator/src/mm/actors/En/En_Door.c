@@ -1,6 +1,6 @@
 #include <combo.h>
 
-int EnDoor_GetID(PlayState* play, int id)
+static int EnDoor_GetID(PlayState* play, int id)
 {
     switch (play->sceneId)
     {
@@ -153,7 +153,7 @@ int EnDoor_GetID(PlayState* play, int id)
     return -1;
 }
 
-int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
+static int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
 {
     int id;
 
@@ -161,6 +161,14 @@ int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
     if (id < 0)
         return 0;
     return !BITMAP8_GET(gSharedCustomSave.rustyKeysMm, id);
+}
+
+int EnDoor_IsOpenInhibited(Actor* this)
+{
+    PlayState* play;
+
+    play = gPlay;
+    return Player_InCsMode(play) || EnDoor_IsRustyLocked(play, this);
 }
 
 void EnDoor_DrawLock(PlayState* play, Actor* this)
