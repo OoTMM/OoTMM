@@ -292,9 +292,9 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
     switch (actorId)
     {
     case ACTOR_EN_SYATEKI_MAN:
-        if(gSave.entrance == ENTR_OOT_CHILD_ARCHERY && gSave.age == AGE_CHILD)
+        if (gSave.entrance == ENTR_OOT_CHILD_ARCHERY && gSave.age == AGE_CHILD)
             return 1;
-        if(gSave.entrance == ENTR_OOT_ADULT_ARCHERY && gSave.age == AGE_ADULT)
+        if (gSave.entrance == ENTR_OOT_ADULT_ARCHERY && gSave.age == AGE_ADULT)
             return 1;
         else
             return 0;

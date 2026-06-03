@@ -115,9 +115,98 @@ static int EnDoor_GetID(PlayState* play, int id)
     case SCE_OOT_MARKET_ENTRANCE_CHILD_NIGHT:
     case SCE_OOT_GUARD_HOUSE:
         return DOORID_OOT_GUARD_HOUSE;
+    case SCE_OOT_BACK_ALLEY_DAY:
+    case SCE_OOT_BACK_ALLEY_NIGHT:
+        switch (id)
+        {
+        case 0: return DOORID_OOT_DOG_LADY_HOUSE;
+        case 1: return DOORID_OOT_BACK_ALLEY_HOUSE;
+        case 2: return DOORID_OOT_BOMBCHU_SHOP;
+        }
+    case SCE_OOT_BACK_ALLEY_HOUSE2:
+        return DOORID_OOT_DOG_LADY_HOUSE;
+    case SCE_OOT_BACK_ALLEY_HOUSE:
+        return DOORID_OOT_BACK_ALLEY_HOUSE;
+    case SCE_OOT_HYRULE_CASTLE:
+        return DOORID_OOT_HYRULE_CASTLE;
+    case SCE_OOT_TREASURE_SHOP:
+        return DOORID_OOT_TREASURE_CHEST_GAME;
+    case SCE_OOT_MARKET_CHILD_DAY:
+    case SCE_OOT_MARKET_CHILD_NIGHT:
+        switch (id)
+        {
+        case 0: return DOORID_OOT_TREASURE_CHEST_GAME;
+        case 1: return DOORID_OOT_CHILD_POTION_SHOP;
+        case 2: return DOORID_OOT_CHILD_SHOOTING_GALLERY;
+        case 3: return DOORID_OOT_MASK_SHOP;
+        case 4: return DOORID_OOT_CHILD_BAZAAR;
+        case 5: return DOORID_OOT_BOMBCHU_BOWLING;
+        }
+    case SCE_OOT_BOMBCHU_BOWLING_ALLEY:
+        return DOORID_OOT_BOMBCHU_BOWLING;
+    case SCE_OOT_SHOOTING_GALLERY:
+        switch (gSave.entrance)
+        {
+        case ENTR_OOT_ADULT_ARCHERY:
+            return DOORID_OOT_ADULT_SHOOTING_GALLERY;
+        case ENTR_OOT_CHILD_ARCHERY:
+            return DOORID_OOT_CHILD_SHOOTING_GALLERY;
+        }
+    case SCE_OOT_LAKE_HYLIA:
+        switch (id)
+        {
+        case 0: return DOORID_OOT_LABORATORY;
+        case 1: return DOORID_OOT_FISHING_POND;
+        }
+    case SCE_OOT_LABORATORY:
+        return DOORID_OOT_LABORATORY;
+    case SCE_OOT_FISHING_POND:
+        return DOORID_OOT_FISHING_POND;
+    case SCE_OOT_LON_LON_RANCH:
+        switch (id)
+        {
+        case 0: return DOORID_OOT_SILO;
+        case 1: return DOORID_OOT_RANCH_STABLE;
+        case 2: return DOORID_OOT_RANCH_HOUSE;
+        }
+    case SCE_OOT_STABLE:
+        return DOORID_OOT_RANCH_STABLE;
+    case SCE_OOT_RANCH_HOUSE_SILO:
+        switch (id)
+        {
+        case 0: return DOORID_OOT_RANCH_STABLE;
+        case 1: return DOORID_OOT_RANCH_HOUSE;
+        }
+    case SCE_OOT_GRAVEYARD:
+        return DOORID_OOT_GRAVEYARD;
+        case SCE_OOT_KAKARIKO_VILLAGE:
+        switch (id)
+        {
+            case 0: return DOORID_OOT_WINDMILL;
+            case 1: return DOORID_OOT_IMPA_HOUSE;
+            case 2: return DOORID_OOT_CARPENTER_HOUSE;
+            case 3: return DOORID_OOT_GRANNY_POTION_SHOP;
+            case 4: return DOORID_OOT_ADULT_SHOOTING_GALLERY;
+            case 5: return DOORID_OOT_SKULLTULA_HOUSE;
+            case 6: return DOORID_OOT_ADULT_BAZAAR;
+            case 7: return DOORID_OOT_ADULT_POTION_SHOP;
+            case 8: return DOORID_OOT_ADULT_POTION_SHOP_BACK;
+        }
+    case SCE_OOT_TOMB_DAMPE_WINDMILL:
+        return DOORID_OOT_WINDMILL;
+    case SCE_OOT_HOUSE_OF_SKULLTULA:
+        return DOORID_OOT_SKULLTULA_HOUSE;
+    case SCE_OOT_CARPENTER_BOSS_HOUSE:
+        return DOORID_OOT_CARPENTER_HOUSE;
+    case SCE_OOT_IMPA_HOUSE:
+        return DOORID_OOT_IMPA_HOUSE;
+    case SCE_OOT_GRAVEKEEPER_HUT:
+        return DOORID_OOT_GRAVEYARD;
+    case SCE_OOT_GRANNY_POTION_SHOP:
+        return DOORID_OOT_GRANNY_POTION_SHOP;
     }
 
-    return DOORID_NONE;
+    return -1;
 }
 
 static int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
@@ -126,7 +215,7 @@ static int EnDoor_IsRustyLocked(PlayState* play, Actor* this)
 
     return 1;
     id = EnDoor_GetID(play, GET_TRANSITION_ACTOR_INDEX(this));
-    if (id == DOORID_NONE)
+    if (id < 0)
         return 0;
     return !BITMAP8_GET(gSharedCustomSave.rustyKeys, id);
 }

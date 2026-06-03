@@ -52,7 +52,7 @@ typedef struct ALIGNED(16)
     u8              bronzeScaleMm:1;
     u8              traps[TRAP_MAX];
     u8              notes[NOTES_MAX];
-    u8              rustyKeys[(DOORID_MAX + 7) / 8];
+    u8              rustyKeys[(DOORID_OOT_MAX + 7) / 8];
 #if defined(DEBUG)
     u8              cheats[4];
 #endif
