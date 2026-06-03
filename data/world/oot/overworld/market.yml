@@ -6,7 +6,7 @@
     "GLOBAL": "true"
     "Hyrule Field": "is_day || is_adult"
     "Market": "true"
-    "Market Pot House": "true"
+    "Market Pot House": "rusty_key(RUSTY_KEY_GUARD_HOUSE)"
 
 "Market Mask Shop":
   region: ENTRANCE
@@ -23,12 +23,12 @@
     "Back Alley": "is_child"
     "Market Castle Entry": "true"
     "Temple of Time Entryway": "true"
-    "Bombchu Bowling": "is_child"
-    "Treasure Chest Game": "is_night && is_child"
-    "Shooting Gallery Child": "is_day && is_child"
-    "Market Bazaar": "is_day && is_child"
-    "Market Potion Shop": "is_day && is_child"
-    "Market Mask Shop": "is_child && (is_day || setting(openMaskShop))"
+    "Bombchu Bowling": "is_child && rusty_key(RUSTY_KEY_BOMBCHU_BOWLING)"
+    "Treasure Chest Game": "is_night && is_child && rusty_key(RUSTY_KEY_TREASURE_CHEST_GAME)"
+    "Shooting Gallery Child": "is_day && is_child && rusty_key(RUSTY_KEY_CHILD_SHOOTING_GALLERY)"
+    "Market Bazaar": "is_day && is_child && rusty_key(RUSTY_KEY_CHILD_BAZAAR)"
+    "Market Potion Shop": "is_day && is_child && rusty_key(RUSTY_KEY_CHILD_POTION_SHOP)"
+    "Market Mask Shop": "is_child && (is_day || setting(openMaskShop)) && rusty_key(RUSTY_KEY_MASK_SHOP)"
   events:
     RICHARD: "is_night && is_child && soul_dog"
     RUPEES: "is_child"
@@ -131,7 +131,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Market Entryway": "true"
+    "Market Entryway": "rusty_key(RUSTY_KEY_GUARD_HOUSE)"
     "Market Pot House Child": "is_child"
     "Market Pot House Adult": "is_adult"
   events:
@@ -216,15 +216,15 @@
   exits:
     "GLOBAL": "true"
     "Market": "true"
-    "Dog Lady House": "true"
-    "Market Bombchu Shop": "is_night"
-    "Market Back Alley East Home": "is_night"
+    "Dog Lady House": "rusty_key(RUSTY_KEY_DOG_LADY_HOUSE)"
+    "Market Bombchu Shop": "is_night && rusty_key(RUSTY_KEY_BOMBCHU_SHOP)"
+    "Market Back Alley East Home": "is_night && rusty_key(RUSTY_KEY_BACK_ALLEY_HOUSE)"
 
 "Dog Lady House":
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Back Alley": "true"
+    "Back Alley": "rusty_key(RUSTY_KEY_DOG_LADY_HOUSE)"
   locations:
     "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
     "Market Dog Lady Crate": "true"
@@ -233,7 +233,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Back Alley": "true"
+    "Back Alley": "rusty_key(RUSTY_KEY_BACK_ALLEY_HOUSE)"
   locations:
     "Market Back Alley East House Pot 1": "true"
     "Market Back Alley East House Pot 2": "true"
@@ -243,7 +243,7 @@
   region: ENTRANCE
   age_change: false
   exits:
-    "Market": "true"
+    "Market": "rusty_key(RUSTY_KEY_BOMBCHU_BOWLING)"
     "Bombchu Bowling Rewards": "(has_bomb_bag || bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
 
 "Bombchu Bowling Rewards":
@@ -259,7 +259,7 @@
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
-    "Market": "true"
+    "Market": "rusty_key(RUSTY_KEY_CHILD_SHOOTING_GALLERY)"
   locations:
     "Shooting Gallery Child": "is_child && can_use_wallet(1) && soul_shooting_gallery_owner"
 

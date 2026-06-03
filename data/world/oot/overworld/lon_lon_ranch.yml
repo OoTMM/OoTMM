@@ -1,13 +1,12 @@
-
 "Lon Lon Ranch":
   region: LON_LON_RANCH
   exits:
     "GLOBAL": "true"
     "Hyrule Field": "true"
     "Lon Lon Ranch Pots": "is_child"
-    "Lon Lon Ranch Silo": "true"
-    "Lon Lon Ranch Stables": "true"
-    "Lon Lon Ranch House": "is_adult || is_day"
+    "Lon Lon Ranch Silo": "rusty_key(RUSTY_KEY_SILO)"
+    "Lon Lon Ranch Stables": "rusty_key(RUSTY_KEY_RANCH_STABLE)"
+    "Lon Lon Ranch House": "(is_adult || is_day) && rusty_key(RUSTY_KEY_RANCH_HOUSE)"
     "Lon Lon Ranch Grotto": "is_child"
   events:
     #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
@@ -40,7 +39,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Lon Lon Ranch": "true"
+    "Lon Lon Ranch": "rusty_key(RUSTY_KEY_RANCH_STABLE)"
   locations:
     "Lon Lon Ranch Stables Cow Left": "cow"
     "Lon Lon Ranch Stables Cow Right": "cow"
@@ -49,7 +48,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Lon Lon Ranch": "true"
+    "Lon Lon Ranch": "rusty_key(RUSTY_KEY_SILO)"
   locations:
     "Lon Lon Ranch Silo HP": "is_child"
     "Lon Lon Ranch Silo Cow Front": "cow"
@@ -59,7 +58,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Lon Lon Ranch": "true"
+    "Lon Lon Ranch": "rusty_key(RUSTY_KEY_RANCH_HOUSE)"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco"
     "Lon Lon Ranch Talon Buy Milk": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco && merchant_price(0x03)"

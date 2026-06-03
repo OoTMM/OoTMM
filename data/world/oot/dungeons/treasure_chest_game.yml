@@ -1,7 +1,7 @@
 "Treasure Chest Game":
   dungeon: TCG
   exits:
-    "Market": "true"
+    "Market": "rusty_key(RUSTY_KEY_TREASURE_CHEST_GAME)"
     "Treasure Chest Game Room 1": "small_keys_tcg(1)"
   locations:
     "Treasure Chest Game Buy Key": "can_use_wallet(1) && soul_chest_game_owner"

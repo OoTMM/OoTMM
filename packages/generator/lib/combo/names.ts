@@ -999,7 +999,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_RUSTY_KEY_CHILD_SHOOTING_GALLERY: "Rusty Key (Child Shooting Gallery)",
   OOT_RUSTY_KEY_BOMBCHU_BOWLING: "Rusty Key (Bombchu Bowling)",
   OOT_RUSTY_KEY_LABORATORY: "Rusty Key (Laboratory)",
-  OOT_RUSTY_KEY_FISHING_POND: "Rusty Key (Fishng Pond)",
+  OOT_RUSTY_KEY_FISHING_POND: "Rusty Key (Fishing Pond)",
   OOT_RUSTY_KEY_SILO: "Rusty Key (Silo)",
   OOT_RUSTY_KEY_RANCH_STABLE: "Rusty Key (Ranch Stable)",
   OOT_RUSTY_KEY_RANCH_HOUSE: "Rusty Key (Ranch House)",

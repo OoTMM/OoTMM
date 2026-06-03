@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add Rusty Keys, locking a single overworld door each (OoT only).
 - Add Great Fairy Sword to Ocarina of Time.
 - Add a setting to shuffle the final skulltula reward in Ocarina of Time.
 - Add easy pause buffering for both games - once paused, hold the Start button to advance one single frame.

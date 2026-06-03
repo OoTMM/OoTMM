@@ -491,7 +491,7 @@
 - { id: OOT_RUSTY_KEY_CHILD_SHOOTING_GALLERY, type: KEY, add: [OOT_RUSTY_KEY, 0x09], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Child Shooting Gallery)" }
 - { id: OOT_RUSTY_KEY_BOMBCHU_BOWLING, type: KEY, add: [OOT_RUSTY_KEY, 0x0a], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Bombchu Bowling)" }
 - { id: OOT_RUSTY_KEY_LABORATORY, type: KEY, add: [OOT_RUSTY_KEY, 0x0b], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Laboratory)" }
-- { id: OOT_RUSTY_KEY_FISHING_POND, type: KEY, add: [OOT_RUSTY_KEY, 0x0c], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Fishng Pond)" }
+- { id: OOT_RUSTY_KEY_FISHING_POND, type: KEY, add: [OOT_RUSTY_KEY, 0x0c], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Fishing Pond)" }
 - { id: OOT_RUSTY_KEY_SILO, type: KEY, add: [OOT_RUSTY_KEY, 0x0d], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Silo)" }
 - { id: OOT_RUSTY_KEY_RANCH_STABLE, type: KEY, add: [OOT_RUSTY_KEY, 0x0e], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Ranch Stable)" }
 - { id: OOT_RUSTY_KEY_RANCH_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x0f], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Ranch House)" }

@@ -198,7 +198,7 @@ static const char* kRustyKeysNamesOot[] = {
     "Child Shooting Gallery",
     "Bombchu Bowling",
     "Laboratory",
-    "Fishng Pond",
+    "Fishing Pond",
     "Silo",
     "Ranch Stable",
     "Ranch House",

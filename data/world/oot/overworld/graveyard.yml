@@ -8,7 +8,7 @@
     "Graveyard Shield Grave": "is_adult || is_night"
     "Graveyard ReDead Grave": "is_adult || is_night"
     "Dampe Grave": "is_adult"
-    "Dampe House": "is_adult || is_dusk"
+    "Dampe House": "(is_adult || is_dusk) && rusty_key(RUSTY_KEY_GRAVEYARD)"
     "Graveyard Upper": "climb_anywhere || hookshot_anywhere"
     "Graveyard Soil Fairies": "soil_fairies(BEAN_GRAVEYARD)"
   events:
@@ -150,4 +150,4 @@
   age_change: false
   exits:
     "GLOBAL": "true"
-    "Graveyard": "true"
+    "Graveyard": "rusty_key(RUSTY_KEY_GRAVEYARD)"
