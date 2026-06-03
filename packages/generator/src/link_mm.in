@@ -643,6 +643,7 @@ CollisionCheck_SpawnShieldParticlesWood = 0x800e86e0;
 BgCheck_EntityLineTest2 = 0x800c5650;
 EffectSsBlast_SpawnWhiteShockwave = 0x800b1b10;
 
+Actor_DrawDoorLock = 0x800bc8b8;
 Matrix_MultVecY = 0x80181bc4;
 func_800B12F0 = 0x800b12f0;
 WaterBox_GetSurface1 = 0x800ca1ac;

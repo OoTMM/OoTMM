@@ -32,4 +32,6 @@ enum
     DOORID_OOT_MAX
 };
 
+void Door_DrawRustyLock(PlayState* play);
+
 #endif
