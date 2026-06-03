@@ -121,7 +121,7 @@
     "GLOBAL": "true"
     "Great Bay Coast": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "Great Bay Coast Water": "can_swim_or_sink"
-    "Laboratory": "true"
+    "Laboratory": "rusty_key(RUSTY_KEY_LABORATORY)"
     "Owl Great Bay": "true"
   events:
     CLEAR_STATE_GREAT_BAY: "wisp_enabled(BOSS_GYORG, REMAINS_GYORG) || event(WISP_CLEAR_STATE_GREAT_BAY)"
@@ -296,7 +296,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Great Bay Coast Platform": "true"
+    "Great Bay Coast Platform": "rusty_key(RUSTY_KEY_LABORATORY)"
   locations:
     "Laboratory Zora Song": "soul_scientist && has_all_zora_eggs && has_mask_zora && has_ocarina"
     "Laboratory Fish HP": "has_fish"

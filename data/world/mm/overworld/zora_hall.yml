@@ -10,11 +10,11 @@
     "GLOBAL": "true"
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
-    "Zora Shop": "true"
-    "Tijo's Room": "can_enter_zora_door"
-    "Japas' Room": "can_enter_zora_door"
-    "Evan's Room": "can_enter_zora_door"
-    "Lulu's Room": "can_enter_zora_door"
+    "Zora Shop": "rusty_key(RUSTY_KEY_ZORA_SHOP)"
+    "Tijo's Room": "can_enter_zora_door && rusty_key(RUSTY_KEY_ZORA_TIJO_ROOM)"
+    "Japas' Room": "can_enter_zora_door && rusty_key(RUSTY_KEY_ZORA_JAPAS_ROOM)"
+    "Evan's Room": "can_enter_zora_door && rusty_key(RUSTY_KEY_ZORA_EVAN_ROOM)"
+    "Lulu's Room": "can_enter_zora_door && rusty_key(RUSTY_KEY_ZORA_LULU_ROOM)"
   locations:
     "Zora Hall Scene Lights": "soul_zora && (can_use_fire_arrows || (trick(MM_STAGE_LIGHTS_DIN) && has_arrows && can_use_din && can_hookshot))"
 
@@ -22,7 +22,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Zora Hall": "true"
+    "Zora Hall": "rusty_key(RUSTY_KEY_ZORA_SHOP)"
   locations:
     "Zora Shop Item 1": "soul_zora_shopkeeper && shop_price(0x13)"
     "Zora Shop Item 2": "soul_zora_shopkeeper && shop_price(0x14)"
@@ -32,19 +32,19 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Zora Hall": "true"
+    "Zora Hall": "rusty_key(RUSTY_KEY_ZORA_TIJO_ROOM)"
 
 "Japas' Room":
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Zora Hall": "true"
+    "Zora Hall": "rusty_key(RUSTY_KEY_ZORA_JAPAS_ROOM)"
 
 "Evan's Room":
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Zora Hall": "true"
+    "Zora Hall": "rusty_key(RUSTY_KEY_ZORA_EVAN_ROOM)"
   locations:
     "Zora Hall Evan HP": "soul_npc(SOUL_NPC_ZORA_MUSICIANS) && can_play_evan && (is_ocean_cursed || (trick(MM_EVAN_FARORE) && can_use_farore))"
 
@@ -52,7 +52,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Zora Hall": "true"
+    "Zora Hall": "rusty_key(RUSTY_KEY_ZORA_LULU_ROOM)"
   locations:
     "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has_mask_goron || is_tall)) || (has_mask_goron && has(MASK_DEKU) && has(DEED_MOUNTAIN)) || has_boomerang || short_hook_anywhere"
     "Zora Hall Scrub Shop": "soul_business_scrub && has_mask_zora && can_use_wallet(1)"

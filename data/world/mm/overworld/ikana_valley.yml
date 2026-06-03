@@ -77,7 +77,7 @@
     "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has(MASK_DEKU) || has_hover_boots || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
-    "Music Box House": "(event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared"
+    "Music Box House": "((event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared) && rusty_key(RUSTY_KEY_MUSIC_HOUSE)"
     "Ghost Hut": "true"
     "Beneath The Well Entrance": "true"
     "Ikana Castle Entrance": "true"
@@ -115,7 +115,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Ikana Canyon": "true"
+    "Ikana Canyon": "rusty_key(RUSTY_KEY_MUSIC_HOUSE)"
   locations:
     "Music Box House Gibdo Mask": "is_valley_cursed && song_event(5)"
 

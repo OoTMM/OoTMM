@@ -202,6 +202,7 @@ static const char* kRustyKeysNamesOot[] = {
     "Silo",
     "Ranch Stable",
     "Ranch House",
+    "Malon's Room",
     "Kakariko Graveyard Hut",
     "Windmill",
     "Impa's House",
@@ -212,6 +213,48 @@ static const char* kRustyKeysNamesOot[] = {
     "Adult Bazaar",
     "Adult Potion Shop",
     "Adult Potion Shop Back",
+};
+
+static const char* kRustyKeysNamesMm[] = {
+    "Tourist Information",
+    "Potion Shop",
+    "Post Office",
+    "Swordsman School",
+    "Lottery",
+    "Bomb Shop",
+    "Trading Post",
+    "Curiosity Shop",
+    "Kafei's Hideout",
+    "Town Archery",
+    "Swamp Archery",
+    "Observatory",
+    "Blacksmith",
+    "Music House",
+    "Oceanic Laboratory",
+    "Beneath the Graveyard",
+    "Dampe's House",
+    "Mayor's Residence",
+    "Mayor's Residence Office",
+    "Mayor's Residence Salon",
+    "Kafei's Room",
+    "Treasure Game",
+    "Honey & Darling",
+    "Milk Bar",
+    "Doggy Racetrack",
+    "Cucco Shack",
+    "Romani Ranch House",
+    "Romani Ranch Barn",
+    "Romani's Room",
+    "Zora Shop",
+    "Japas' Room",
+    "Tijo's Room",
+    "Lulu's Room",
+    "Evan's Room",
+    "Stock Pot Inn",
+    "Stock Pot Inn Roof",
+    "Grandma's Room",
+    "Stock Pot Inn Staff Room",
+    "Stock Pot Inn Dormitory",
 };
 
 void menuInit()
@@ -1261,6 +1304,9 @@ void comboMenuUpdate(PlayState* play)
     case MENU_RUSTY_KEYS_OOT:
         g.menuCursorMax = ARRAY_COUNT(kRustyKeysNamesOot);
         break;
+    case MENU_RUSTY_KEYS_MM:
+        g.menuCursorMax = ARRAY_COUNT(kRustyKeysNamesMm);
+        break;
     }
 
     updateCursor(play);
@@ -1395,7 +1441,10 @@ void comboMenuDraw(PlayState* play)
         drawMenuSouls(play, "MM Misc. Souls", kSoulsMiscMm, GI_MM_SOUL_MISC_GS, 1);
         break;
     case MENU_RUSTY_KEYS_OOT:
-        drawMenuBitmap(play, "OoT Rusty Keys", kRustyKeysNamesOot, gSharedCustomSave.rustyKeys);
+        drawMenuBitmap(play, "OoT Rusty Keys", kRustyKeysNamesOot, gSharedCustomSave.rustyKeysOot);
+        break;
+    case MENU_RUSTY_KEYS_MM:
+        drawMenuBitmap(play, "MM Rusty Keys", kRustyKeysNamesMm, gSharedCustomSave.rustyKeysMm);
         break;
     }
 }
@@ -1438,6 +1487,8 @@ void comboMenuNext(void)
     if (g.menuScreen == MENU_SOULS_MM_MISC && !Config_Flag(CFG_MM_SOULS_MISC))
         g.menuScreen++;
     if (g.menuScreen == MENU_RUSTY_KEYS_OOT && !Config_Flag(CFG_OOT_RUSTY_KEYS))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_RUSTY_KEYS_MM && !Config_Flag(CFG_MM_RUSTY_KEYS))
         g.menuScreen++;
 
     if (g.menuScreen >= MENU_MAX)

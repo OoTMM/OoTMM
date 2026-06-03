@@ -241,6 +241,8 @@
 "turtle_woken": "(song_event(2) && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB)) && is_ocean_cleared)"
 "can_use_sticks": "has_sticks" # Compat
 
+"rusty_key(x)": "cond(setting(rustyKeysMm), has(x), true)"
+
 #Terrain
 
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"

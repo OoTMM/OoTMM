@@ -143,6 +143,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.CLOCKS,
   ...ItemGroups.SONG_NOTES,
   ...ItemGroups.OOT_RUSTY_KEYS,
+  ...ItemGroups.MM_RUSTY_KEYS,
   Items.MM_CLOCK,
   Items.OOT_BOTTLE_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
@@ -1608,6 +1609,7 @@ class LogicPassWorldTransform {
 
     /* Add rusty keys */
     if (settings.rustyKeysOot) this.addItems(ItemGroups.OOT_RUSTY_KEYS);
+    if (settings.rustyKeysMm) this.addItems(ItemGroups.MM_RUSTY_KEYS);
 
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {

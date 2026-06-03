@@ -110,22 +110,13 @@
 
 "Beneath The Graveyard Night 2":
   region: ENTRANCE
-  events:
-    MAGIC: "true"
-    ARROWS: "true"
   exits:
     "GLOBAL": "true"
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
+    "Beneath The Graveyard Night 2 After Door": "can_use_lens && rusty_key(RUSTY_KEY_BENEATH_GRAVEYARD)"
   locations:
-    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives)"
     "Beneath The Graveyard Pot Night 2 Early": "true"
-    "Beneath The Graveyard Pot Night 2 Before Pit 1": "can_use_lens"
-    "Beneath The Graveyard Pot Night 2 Before Pit 2": "can_use_lens"
-    "Beneath The Graveyard Pot Night 2 After Pit 1": "can_use_lens || short_hook_anywhere"
-    "Beneath The Graveyard Pot Night 2 After Pit 2": "can_use_lens || short_hook_anywhere"
-    "Beneath The Graveyard Pot Night 2 After Pit 3": "can_use_lens || short_hook_anywhere"
-    "Beneath The Graveyard Pot Night 2 After Pit 4": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Rupee 1": "true"
     "Beneath The Graveyard Rupee 2": "true"
     "Beneath The Graveyard Rupee 3": "true"
@@ -133,6 +124,23 @@
     "Beneath The Graveyard Rupee 5": "true"
     "Beneath The Graveyard Rupee 6": "true"
     "Beneath The Graveyard Rupee 7": "true"
+
+"Beneath The Graveyard Night 2 After Door":
+  region: ENTRANCE
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+  exits:
+    "GLOBAL": "true"
+    "Beneath The Graveyard Night 2": "can_use_lens && rusty_key(RUSTY_KEY_BENEATH_GRAVEYARD)"
+  locations:
+    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives)"
+    "Beneath The Graveyard Pot Night 2 Before Pit 1": "can_use_lens"
+    "Beneath The Graveyard Pot Night 2 Before Pit 2": "can_use_lens"
+    "Beneath The Graveyard Pot Night 2 After Pit 1": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 2": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 3": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 4": "can_use_lens || short_hook_anywhere"
 
 "Beneath The Graveyard Night 3 Fake Exit":
   region: NONE
@@ -147,7 +155,7 @@
     DAMPE_BIG_POE: "soul_dampe && can_kill_big_poe && is_night3 && soul_poe"
   exits:
     "GLOBAL": "true"
-    "Ikana Graveyard": "true"
+    "Ikana Graveyard": "rusty_key(RUSTY_KEY_DAMPE_HOUSE)"
     "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"
   locations:
     "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3 && soul_dampe"

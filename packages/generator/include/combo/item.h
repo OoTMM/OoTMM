@@ -128,7 +128,8 @@
 #define IA_OOT_KEG              0x76
 #define IA_OOT_HAMMER_GFS       0x77
 #define IA_OOT_RUSTY_KEY        0x78
-#define IA_MAX                  0x79
+#define IA_MM_RUSTY_KEY         0x79
+#define IA_MAX                  0x7a
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
