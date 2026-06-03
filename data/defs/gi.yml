@@ -882,6 +882,45 @@
 - { id: MM_BOTTLE_RUTO_LETTER, item: MM_RUTO_LETTER, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: OOT_BOTTLE_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
 - { id: MM_BOTTLE_BLUE_FIRE, item: MM_BLUE_FIRE, type: MAJOR, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_BLUE_FIRE, object: [oot, 0x00c6], name: "a <C1>Bottle of Blue Fire" }
 - { id: MM_BLUE_FIRE, item: MM_BLUE_FIRE, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: OOT_BLUE_FIRE, object: [oot, 0x0173], name: "some <C0>Blue Fire" }
+- { id: MM_RUSTY_KEY_TOURIST_INFORMATION,       type: KEY, add: [MM_RUSTY_KEY, 0x00], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Tourist Information)" }
+- { id: MM_RUSTY_KEY_POTION_SHOP,               type: KEY, add: [MM_RUSTY_KEY, 0x01], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Potion Shop)" }
+- { id: MM_RUSTY_KEY_POST_OFFICE,               type: KEY, add: [MM_RUSTY_KEY, 0x02], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Post Office)" }
+- { id: MM_RUSTY_KEY_SWORDSMAN_SCHOOL,          type: KEY, add: [MM_RUSTY_KEY, 0x03], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Swordsman School)" }
+- { id: MM_RUSTY_KEY_LOTTERY,                   type: KEY, add: [MM_RUSTY_KEY, 0x04], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Lottery)" }
+- { id: MM_RUSTY_KEY_BOMB_SHOP,                 type: KEY, add: [MM_RUSTY_KEY, 0x05], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Bomb Shop)" }
+- { id: MM_RUSTY_KEY_TRADING_POST,              type: KEY, add: [MM_RUSTY_KEY, 0x06], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Trading Post)" }
+- { id: MM_RUSTY_KEY_CURIOSITY_SHOP,            type: KEY, add: [MM_RUSTY_KEY, 0x07], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Curiosity Shop)" }
+- { id: MM_RUSTY_KEY_KAFEI_HIDEOUT,             type: KEY, add: [MM_RUSTY_KEY, 0x08], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Kafei's Hideout)" }
+- { id: MM_RUSTY_KEY_TOWN_ARCHERY,              type: KEY, add: [MM_RUSTY_KEY, 0x09], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Town Archery)" }
+- { id: MM_RUSTY_KEY_SWAMP_ARCHERY,             type: KEY, add: [MM_RUSTY_KEY, 0x0a], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Swamp Archery)" }
+- { id: MM_RUSTY_KEY_OBSERVATORY,               type: KEY, add: [MM_RUSTY_KEY, 0x0b], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Observatory)" }
+- { id: MM_RUSTY_KEY_BLACKSMITH,                type: KEY, add: [MM_RUSTY_KEY, 0x0c], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Blacksmith)" }
+- { id: MM_RUSTY_KEY_MUSIC_HOUSE,               type: KEY, add: [MM_RUSTY_KEY, 0x0d], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Music House)" }
+- { id: MM_RUSTY_KEY_LABORATORY,                type: KEY, add: [MM_RUSTY_KEY, 0x0e], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Oceanic Laboratory)" }
+- { id: MM_RUSTY_KEY_BENEATH_GRAVEYARD,         type: KEY, add: [MM_RUSTY_KEY, 0x0f], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Beneath the Graveyard)" }
+- { id: MM_RUSTY_KEY_DAMPE_HOUSE,               type: KEY, add: [MM_RUSTY_KEY, 0x10], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Dampe's House)" }
+- { id: MM_RUSTY_KEY_MAYOR_RESIDENCE,           type: KEY, add: [MM_RUSTY_KEY, 0x11], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Mayor's Residence)" }
+- { id: MM_RUSTY_KEY_MAYOR_RESIDENCE_OFFICE,    type: KEY, add: [MM_RUSTY_KEY, 0x12], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Mayor's Residence Office)" }
+- { id: MM_RUSTY_KEY_MAYOR_RESIDENCE_SALON,     type: KEY, add: [MM_RUSTY_KEY, 0x13], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Mayor's Residence Salon)" }
+- { id: MM_RUSTY_KEY_MAYOR_RESIDENCE_KAFEI,     type: KEY, add: [MM_RUSTY_KEY, 0x14], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Kafei's Room)" }
+- { id: MM_RUSTY_KEY_TREASURE_CHEST_GAME,       type: KEY, add: [MM_RUSTY_KEY, 0x15], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Treasure Game)" }
+- { id: MM_RUSTY_KEY_HONEY_DARLING,             type: KEY, add: [MM_RUSTY_KEY, 0x16], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Honey & Darling)" }
+- { id: MM_RUSTY_KEY_MILK_BAR,                  type: KEY, add: [MM_RUSTY_KEY, 0x17], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Milk Bar)" }
+- { id: MM_RUSTY_KEY_DOG_RACETRACK,             type: KEY, add: [MM_RUSTY_KEY, 0x18], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Doggy Racetrack)" }
+- { id: MM_RUSTY_KEY_CUCCO_SHACK,               type: KEY, add: [MM_RUSTY_KEY, 0x19], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Cucco Shack)" }
+- { id: MM_RUSTY_KEY_RANCH_HOUSE,               type: KEY, add: [MM_RUSTY_KEY, 0x1a], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Romani Ranch House)" }
+- { id: MM_RUSTY_KEY_RANCH_BARN,                type: KEY, add: [MM_RUSTY_KEY, 0x1b], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Romani Ranch Barn)" }
+- { id: MM_RUSTY_KEY_RANCH_HOUSE_ROOM,          type: KEY, add: [MM_RUSTY_KEY, 0x1c], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Romani's Room)" }
+- { id: MM_RUSTY_KEY_ZORA_SHOP,                 type: KEY, add: [MM_RUSTY_KEY, 0x1d], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Zora Shop)" }
+- { id: MM_RUSTY_KEY_ZORA_JAPAS_ROOM,           type: KEY, add: [MM_RUSTY_KEY, 0x1e], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Japas' Room)" }
+- { id: MM_RUSTY_KEY_ZORA_TIJO_ROOM,            type: KEY, add: [MM_RUSTY_KEY, 0x1f], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Tijo's Room)" }
+- { id: MM_RUSTY_KEY_ZORA_LULU_ROOM,            type: KEY, add: [MM_RUSTY_KEY, 0x20], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Lulu's Room)" }
+- { id: MM_RUSTY_KEY_ZORA_EVAN_ROOM,            type: KEY, add: [MM_RUSTY_KEY, 0x21], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Evan's Room)" }
+- { id: MM_RUSTY_KEY_STOCK_POT_INN,             type: KEY, add: [MM_RUSTY_KEY, 0x22], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Stock Pot Inn)" }
+- { id: MM_RUSTY_KEY_STOCK_POT_INN_ROOF,        type: KEY, add: [MM_RUSTY_KEY, 0x23], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Stock Pot Inn Roof)" }
+- { id: MM_RUSTY_KEY_GRANDMA_ROOM,              type: KEY, add: [MM_RUSTY_KEY, 0x24], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Grandma's Room)" }
+- { id: MM_RUSTY_KEY_STOCK_POT_INN_STAFF_ROOM,  type: KEY, add: [MM_RUSTY_KEY, 0x25], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Stock Pot Inn Staff Room)" }
+- { id: MM_RUSTY_KEY_STOCK_POT_INN_DORMITORY,   type: KEY, add: [MM_RUSTY_KEY, 0x26], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Stock Pot Inn Dormitory)" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }

@@ -292,6 +292,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_MOON_COND_CUSTOM: settings.moon === 'custom',
     OOT_AIR_PHYSICS_MM: settings.mmStyleAirMovementOot,
     OOT_RUSTY_KEYS: settings.rustyKeysOot,
+    MM_RUSTY_KEYS: settings.rustyKeysMm,
   };
 
   for (const v in exprs) {
