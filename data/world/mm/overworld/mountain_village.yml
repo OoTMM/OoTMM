@@ -7,7 +7,7 @@
     "Twin Islands": "true"
     "Mountain Village Cliff": "(is_winter && (can_use_lens_strict || trick(MM_DARMANI_WALL))) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || can_hookshot || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
-    "Blacksmith": "true"
+    "Blacksmith": "rusty_key(RUSTY_KEY_BLACKSMITH)"
     "Near Village Grotto": "is_spring && (has_mask_goron || short_hook_anywhere)"
     "Owl Mountain": "true"
     "Mountain Village Elder": "true"
@@ -167,7 +167,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Mountain Village": "true"
+    "Mountain Village": "rusty_key(RUSTY_KEY_BLACKSMITH)"
   events:
     BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
     GOLD_DUST_USED: "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && has_gold_dust && event(BLACKSMITH_ENABLED)"
