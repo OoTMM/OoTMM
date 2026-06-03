@@ -181,6 +181,7 @@ static int EnDoor_GetID(PlayState* play, int id)
         {
         case 0: return DOORID_OOT_RANCH_STABLE;
         case 1: return DOORID_OOT_RANCH_HOUSE;
+        case 2: return DOORID_OOT_RANCH_HOUSE_ROOM;
         }
         break;
     case SCE_OOT_GRAVEYARD:
