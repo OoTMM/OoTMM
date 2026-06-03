@@ -1,5 +1,5 @@
 - { id: BOTTLE_EMPTY, func: Opa0_Xlu1, params: [0x6000670, 0x6000750] }
-- { id: SMALL_KEY, func: CustomSmallKey, params: [0x6000800, 0] }
+- { id: SMALL_KEY, func: CustomSmallKey, params: [0x6000800] }
 - { id: RECOVERY_HEART, func: Heart, params: [0x60000e0] }
 - { id: BOSS_KEY, func: Opa0_Xlu1, params: [0x6000ca0, 0x6000f08] }
 - { id: COMPASS, func: Compass, params: [0x6000960, 0x6000c50] }
