@@ -185,6 +185,35 @@ static const char* kSongNames[] = {
     "Sun's Song", // NOTES_SONG_MM_SUN
 };
 
+static const char* kRustyKeysNamesOot[] = {
+    "Treasure Chest Game",
+    "Guard House",
+    "Hyrule Castle",
+    "Dog Lady House",
+    "Back Alley House",
+    "Bombchu Shop",
+    "Mask Shop",
+    "Child Bazaar",
+    "Child Potion Shop",
+    "Child Shooting Gallery",
+    "Bombchu Bowling",
+    "Laboratory",
+    "Fishng Pond",
+    "Silo",
+    "Ranch Stable",
+    "Ranch House",
+    "Kakariko Graveyard Hut",
+    "Windmill",
+    "Impa's House",
+    "Carpenter House",
+    "Granny Potion Shop",
+    "Adult Shooting Gallery",
+    "Skulltula House",
+    "Adult Bazaar",
+    "Adult Potion Shop",
+    "Adult Potion Shop Back",
+};
+
 void menuInit()
 {
     gDungeonDefCount = 0;
@@ -895,6 +924,28 @@ static void printSongNote(PlayState* play, int offset, u8 note)
     CLOSE_DISPS();
 }
 
+
+static void printBitmap(PlayState* play, int index, const char* str, int bit)
+{
+    float x;
+    float y;
+
+    x = -110.f;
+    y = 42.f - 12 * index;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    if (bit)
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    }
+    else
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 70, 70, 70, 255);
+    }
+    printStr(play, str, x, y);
+    CLOSE_DISPS();
+}
+
 static void printSoul(PlayState* play, const char* const* names, int soulBase, int base, int index, int mm)
 {
     const char* name;
@@ -1207,6 +1258,9 @@ void comboMenuUpdate(PlayState* play)
     case MENU_SOULS_MM_MISC:
         g.menuCursorMax = ARRAY_COUNT(kSoulsMiscMm);
         break;
+    case MENU_RUSTY_KEYS_OOT:
+        g.menuCursorMax = ARRAY_COUNT(kRustyKeysNamesOot);
+        break;
     }
 
     updateCursor(play);
@@ -1233,7 +1287,24 @@ static void drawMenuSouls(PlayState* play, const char* title, const char* const*
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
     printStr(play, title, -110.f, 54.f);
     for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
+    {
         printSoul(play, names, soulBase, g.menuCursor, i, mm);
+    }
+    CLOSE_DISPS();
+}
+
+static void drawMenuBitmap(PlayState* play, const char* title, const char* const* names, u8* bitmap)
+{
+    int id;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, title, -110.f, 54.f);
+    for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
+    {
+        id = g.menuCursor + i;
+        printBitmap(play, i, names[id], BITMAP8_GET(bitmap, id));
+    }
     CLOSE_DISPS();
 }
 
@@ -1323,6 +1394,9 @@ void comboMenuDraw(PlayState* play)
     case MENU_SOULS_MM_MISC:
         drawMenuSouls(play, "MM Misc. Souls", kSoulsMiscMm, GI_MM_SOUL_MISC_GS, 1);
         break;
+    case MENU_RUSTY_KEYS_OOT:
+        drawMenuBitmap(play, "OoT Rusty Keys", kRustyKeysNamesOot, gSharedCustomSave.rustyKeys);
+        break;
     }
 }
 
@@ -1362,6 +1436,8 @@ void comboMenuNext(void)
     if (g.menuScreen == MENU_SOULS_MM_ANIMAL && !Config_Flag(CFG_MM_SOULS_ANIMAL))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_MISC && !Config_Flag(CFG_MM_SOULS_MISC))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_RUSTY_KEYS_OOT && !Config_Flag(CFG_OOT_RUSTY_KEYS))
         g.menuScreen++;
 
     if (g.menuScreen >= MENU_MAX)

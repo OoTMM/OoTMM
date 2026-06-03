@@ -17,7 +17,8 @@
 #define MENU_SOULS_MM_NPC       11
 #define MENU_SOULS_MM_ANIMAL    12
 #define MENU_SOULS_MM_MISC      13
-#define MENU_MAX                14
+#define MENU_RUSTY_KEYS_OOT     14
+#define MENU_MAX                15
 
 typedef struct PlayState PlayState;
 
