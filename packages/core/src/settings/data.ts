@@ -2329,6 +2329,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'rustyKeysOot',
+  name: 'Rusty Keys (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add rusty keys to the item pool. Every rusty key locks a single overworld door.',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'clocks',
   name: 'Clocks as Items',
   category: 'items.extensions',

@@ -1605,6 +1605,9 @@ class LogicPassWorldTransform {
     if (settings.soulsAnimalMm) this.addItems(ItemGroups.MM_SOULS_ANIMAL);
     if (settings.soulsMiscMm) this.addItems(ItemGroups.MM_SOULS_MISC);
 
+    /* Add rusty keys */
+    if (settings.rustyKeysOot) this.addItems(ItemGroups.OOT_RUSTY_KEYS);
+
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {
       this.addItem(Items.OOT_SKELETON_KEY);

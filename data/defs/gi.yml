@@ -479,6 +479,32 @@
 - { id: OOT_TRAP_KNOCKBACK, type: MINOR, add: [TRAP, 0x05], flags: 0x80, object: [oot, 0x085], draw: [TRAP, 0x05], name: "a <COLOR_BLUE>Knockback Trap" }
 - { id: OOT_TRAP_RUPOOR, type: RUPEE, add: [TRAP, 0x06], flags: 0x80, draw: [RUPEE, 0], object: [mm, 0x013f], name: "a <COLOR_BLUE>Rupoor" }
 - { id: OOT_PLATINUM_TOKEN, type: MAJOR, add: OOT_PLATINUM_TOKEN, flags: 0x80, draw: [GS_SOUL, 8], object: [oot, 0x015c], name: "the <C0>Platinum Token" }
+- { id: OOT_RUSTY_KEY_TREASURE_CHEST_GAME, type: KEY, add: [OOT_RUSTY_KEY, 0x00], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Treasure Chest Game)" }
+- { id: OOT_RUSTY_KEY_GUARD_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x01], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Guard House)" }
+- { id: OOT_RUSTY_KEY_HYRULE_CASTLE, type: KEY, add: [OOT_RUSTY_KEY, 0x02], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Hyrule Castle)" }
+- { id: OOT_RUSTY_KEY_DOG_LADY_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x03], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Dog Lady House)" }
+- { id: OOT_RUSTY_KEY_BACK_ALLEY_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x04], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Back Alley House)" }
+- { id: OOT_RUSTY_KEY_BOMBCHU_SHOP, type: KEY, add: [OOT_RUSTY_KEY, 0x05], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Bombchu Shop)" }
+- { id: OOT_RUSTY_KEY_MASK_SHOP, type: KEY, add: [OOT_RUSTY_KEY, 0x06], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Mask Shop)" }
+- { id: OOT_RUSTY_KEY_CHILD_BAZAAR, type: KEY, add: [OOT_RUSTY_KEY, 0x07], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Child Bazaar)" }
+- { id: OOT_RUSTY_KEY_CHILD_POTION_SHOP, type: KEY, add: [OOT_RUSTY_KEY, 0x08], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Child Potion Shop)" }
+- { id: OOT_RUSTY_KEY_CHILD_SHOOTING_GALLERY, type: KEY, add: [OOT_RUSTY_KEY, 0x09], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Child Shooting Gallery)" }
+- { id: OOT_RUSTY_KEY_BOMBCHU_BOWLING, type: KEY, add: [OOT_RUSTY_KEY, 0x0a], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Bombchu Bowling)" }
+- { id: OOT_RUSTY_KEY_LABORATORY, type: KEY, add: [OOT_RUSTY_KEY, 0x0b], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Laboratory)" }
+- { id: OOT_RUSTY_KEY_FISHING_POND, type: KEY, add: [OOT_RUSTY_KEY, 0x0c], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Fishng Pond)" }
+- { id: OOT_RUSTY_KEY_SILO, type: KEY, add: [OOT_RUSTY_KEY, 0x0d], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Silo)" }
+- { id: OOT_RUSTY_KEY_RANCH_STABLE, type: KEY, add: [OOT_RUSTY_KEY, 0x0e], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Ranch Stable)" }
+- { id: OOT_RUSTY_KEY_RANCH_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x0f], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Ranch House)" }
+- { id: OOT_RUSTY_KEY_GRAVEYARD, type: KEY, add: [OOT_RUSTY_KEY, 0x10], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Kakariko Graveyard Hut)" }
+- { id: OOT_RUSTY_KEY_WINDMILL, type: KEY, add: [OOT_RUSTY_KEY, 0x11], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Windmill)" }
+- { id: OOT_RUSTY_KEY_IMPA_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x12], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Impa's House)" }
+- { id: OOT_RUSTY_KEY_CARPENTER_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x13], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Carpenter House)" }
+- { id: OOT_RUSTY_KEY_GRANNY_POTION_SHOP, type: KEY, add: [OOT_RUSTY_KEY, 0x14], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Granny Potion Shop)" }
+- { id: OOT_RUSTY_KEY_ADULT_SHOOTING_GALLERY, type: KEY, add: [OOT_RUSTY_KEY, 0x15], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Adult Shooting Gallery)" }
+- { id: OOT_RUSTY_KEY_SKULLTULA_HOUSE, type: KEY, add: [OOT_RUSTY_KEY, 0x16], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Skulltula House)" }
+- { id: OOT_RUSTY_KEY_ADULT_BAZAAR, type: KEY, add: [OOT_RUSTY_KEY, 0x17], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Adult Bazaar)" }
+- { id: OOT_RUSTY_KEY_ADULT_POTION_SHOP, type: KEY, add: [OOT_RUSTY_KEY, 0x18], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Adult Potion Shop)" }
+- { id: OOT_RUSTY_KEY_ADULT_POTION_SHOP_BACK, type: KEY, add: [OOT_RUSTY_KEY, 0x19], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C1>Rusty Key (Adult Potion Shop Back)" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
