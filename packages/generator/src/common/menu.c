@@ -202,6 +202,7 @@ static const char* kRustyKeysNamesOot[] = {
     "Silo",
     "Ranch Stable",
     "Ranch House",
+    "Malon's Room",
     "Kakariko Graveyard Hut",
     "Windmill",
     "Impa's House",

@@ -59,9 +59,17 @@
   exits:
     "GLOBAL": "true"
     "Lon Lon Ranch": "rusty_key(RUSTY_KEY_RANCH_HOUSE)"
+    "Lon Lon Ranch House Room": "rusty_key(RUSTY_KEY_RANCH_HOUSE_ROOM)"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco"
     "Lon Lon Ranch Talon Buy Milk": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon && soul_cucco && merchant_price(0x03)"
+
+"Lon Lon Ranch House Room":
+  region: ENTRANCE
+  exits:
+    "GLOBAL": "true"
+    "Lon Lon Ranch House": "rusty_key(RUSTY_KEY_RANCH_HOUSE_ROOM)"
+  locations:
     "Lon Lon Ranch Talon House Pot 1": "true"
     "Lon Lon Ranch Talon House Pot 2": "true"
     "Lon Lon Ranch Talon House Pot 3": "true"

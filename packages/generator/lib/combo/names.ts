@@ -1003,6 +1003,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_RUSTY_KEY_SILO: "Rusty Key (Silo)",
   OOT_RUSTY_KEY_RANCH_STABLE: "Rusty Key (Ranch Stable)",
   OOT_RUSTY_KEY_RANCH_HOUSE: "Rusty Key (Ranch House)",
+  OOT_RUSTY_KEY_RANCH_HOUSE_ROOM: "Rusty Key (Malon's Room)",
   OOT_RUSTY_KEY_GRAVEYARD: "Rusty Key (Kakariko Graveyard Hut)",
   OOT_RUSTY_KEY_WINDMILL: "Rusty Key (Windmill)",
   OOT_RUSTY_KEY_IMPA_HOUSE: "Rusty Key (Impa's House)",
