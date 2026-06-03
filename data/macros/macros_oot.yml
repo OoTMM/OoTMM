@@ -11,6 +11,8 @@
 "can_use_farore": "can_use_farore_raw"
 "can_use_nayru": "can_use_nayru_raw"
 
+"rusty_key(x)": "cond(setting(rustyKeysOot), has(x), true)"
+
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleOot), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
 "ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"

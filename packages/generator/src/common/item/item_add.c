@@ -2054,6 +2054,12 @@ static int addItemHammerGFS(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemOotRustyKey(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    BITMAP8_SET(gSharedCustomSave.rustyKeys, param);
+    return 0;
+}
+
 static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmExtraFlags3.stoneAgony = 1;
@@ -2241,6 +2247,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemGsTokenPlatinumMm,
     addItemKegOot,
     addItemHammerGFS,
+    addItemOotRustyKey,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");

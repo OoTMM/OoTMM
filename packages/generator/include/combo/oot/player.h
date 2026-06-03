@@ -390,6 +390,14 @@ typedef enum PlayerMeleeWeaponAnimation {
     /* 28 */ PLAYER_MWA_MAX
 } PlayerMeleeWeaponAnimation;
 
+typedef enum PlayerDoorType {
+    /* -1 */ PLAYER_DOORTYPE_AJAR = -1,
+    /*  0 */ PLAYER_DOORTYPE_NONE,
+    /*  1 */ PLAYER_DOORTYPE_HANDLE,
+    /*  2 */ PLAYER_DOORTYPE_SLIDING,
+    /*  3 */ PLAYER_DOORTYPE_FAKE
+} PlayerDoorType;
+
 typedef enum PlayerItemAction {
     /* 0x00 */ PLAYER_IA_NONE,
     /* 0x01 */ PLAYER_IA_SWORD_CS, // Hold sword without shield in hand. The sword is not usable.

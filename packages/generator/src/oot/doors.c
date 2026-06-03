@@ -72,12 +72,3 @@ int comboDoorIsUnlocked(PlayState* play, Actor* actor)
 
     return Flags_GetSwitch(play, flag);
 }
-
-void Door_DrawDoorLock(PlayState* play, Actor_EnDoor* door, s32 type)
-{
-    s32 yaw = Math_Vec3f_Yaw(&play->view.eye, &door->actor.world.pos);
-    if (ABS((s16)(door->actor.shape.rot.y - yaw)) < 0x4000) {
-        Matrix_RotateY(M_PI, MTXMODE_APPLY);
-    }
-    Actor_DrawDoorLock(play, door->lockTimer, type);
-}

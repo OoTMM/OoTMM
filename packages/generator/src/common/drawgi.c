@@ -1030,7 +1030,7 @@ void DrawGi_BottleRutosLetter(PlayState* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomSmallKey(PlayState* play, s16 index)
+void DrawGi_CustomSmallKey(PlayState* play, s16 index, u8 param)
 {
     const DrawGi* drawGi;
 
@@ -1038,7 +1038,7 @@ void DrawGi_CustomSmallKey(PlayState* play, s16 index)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    switch (drawGi->lists[1])
+    switch (param)
     {
     case 0:
         /* Silver */
@@ -1046,9 +1046,9 @@ void DrawGi_CustomSmallKey(PlayState* play, s16 index)
         gDPSetEnvColor(POLY_OPA_DISP++, 60, 80, 90, 255);
         break;
     case 1:
-        /* Gold */
-        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 255, 255, 0, 255);
-        gDPSetEnvColor(POLY_OPA_DISP++, 60, 80, 0, 255);
+        /* Rusty */
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 255, 245, 235, 255);
+        gDPSetEnvColor(POLY_OPA_DISP++, 140, 55, 15, 255);
         break;
     }
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);

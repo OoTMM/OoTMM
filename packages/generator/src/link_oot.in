@@ -326,6 +326,7 @@ Interface_LoadActionLabelB = 0x80071FF8;
 Interface_ChangeHudVisibilityMode = 0x8006d8e0;
 Interface_DrawAmmoCount = 0x80074a84;
 
+Matrix_Get = 0x800aa740;
 Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
 Math_StepToS = 0x800637d4;

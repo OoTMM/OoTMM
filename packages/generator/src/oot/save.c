@@ -277,6 +277,10 @@ void comboCreateSave(void* unk, void* buffer)
     if (!Config_Flag(CFG_MM_SOULS_MISC))
         memset(gSharedCustomSave.soulsMiscMm, 0xff, sizeof(gSharedCustomSave.soulsMiscMm));
 
+    /* Apply rusty keys */
+    if (!Config_Flag(CFG_OOT_RUSTY_KEYS))
+        memset(gSharedCustomSave.rustyKeys, 0xff, sizeof(gSharedCustomSave.rustyKeys));
+
     /* Apply deku shield flag */
     if (Config_Flag(CFG_MM_DEKU_SHIELD))
         gSharedCustomSave.mmShieldIsDeku = 1;

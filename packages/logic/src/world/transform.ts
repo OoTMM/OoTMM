@@ -142,6 +142,7 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
 const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.CLOCKS,
   ...ItemGroups.SONG_NOTES,
+  ...ItemGroups.OOT_RUSTY_KEYS,
   Items.MM_CLOCK,
   Items.OOT_BOTTLE_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
@@ -1604,6 +1605,9 @@ class LogicPassWorldTransform {
     if (settings.soulsNpcMm) this.addItems(ItemGroups.MM_SOULS_NPC);
     if (settings.soulsAnimalMm) this.addItems(ItemGroups.MM_SOULS_ANIMAL);
     if (settings.soulsMiscMm) this.addItems(ItemGroups.MM_SOULS_MISC);
+
+    /* Add rusty keys */
+    if (settings.rustyKeysOot) this.addItems(ItemGroups.OOT_RUSTY_KEYS);
 
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {

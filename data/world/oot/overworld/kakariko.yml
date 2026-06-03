@@ -14,16 +14,16 @@
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || (is_adult && !setting(kakarikoGate, closed)) || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
     "Kakariko Well": "is_adult || has_iron_boots || longshot_anywhere || event(WELL_DRAIN) || setting(openDungeonsOot, BotW)"
-    "Skulltula House": "true"
-    "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
+    "Skulltula House": "rusty_key(RUSTY_KEY_SKULLTULA_HOUSE)"
+    "Shooting Gallery Adult": "(is_adult && is_day && rusty_key(RUSTY_KEY_ADULT_SHOOTING_GALLERY)) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
     "Kakariko Balcony": "(is_child && is_day && soul_cucco) || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
     "Kakariko Rooftop": "can_hookshot || climb_anywhere"
     "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || (is_day && soul_cucco) || climb_anywhere"
-    "Kakariko Bazaar": "is_adult && is_day"
-    "Kakariko Potion Shop": "is_day"
-    "Windmill": "true"
-    "Kakariko Carpenter House": "true"
-    "Impa House Front": "true"
+    "Kakariko Bazaar": "is_adult && is_day && rusty_key(RUSTY_KEY_ADULT_BAZAAR)"
+    "Kakariko Potion Shop": "is_day && rusty_key(RUSTY_KEY_ADULT_POTION_SHOP)"
+    "Windmill": "rusty_key(RUSTY_KEY_WINDMILL)"
+    "Kakariko Carpenter House": "rusty_key(RUSTY_KEY_CARPENTER_HOUSE)"
+    "Impa House Front": "rusty_key(RUSTY_KEY_IMPA_HOUSE)"
     "ReDead Grotto": "hidden_grotto_bomb"
     "Watchtower": "is_day || is_adult || can_use_slingshot || can_use_bow || can_longshot || has_bombchu || climb_anywhere"
   locations:
@@ -106,8 +106,8 @@
   exits:
     "GLOBAL": "true"
     "Kakariko": "true"
-    "Kakariko Potion Shop Back": "is_adult && is_day"
-    "Kakariko Granny Shop": "is_adult"
+    "Kakariko Potion Shop Back": "is_adult && is_day && rusty_key(RUSTY_KEY_ADULT_POTION_SHOP_BACK)"
+    "Kakariko Granny Shop": "is_adult && rusty_key(RUSTY_KEY_GRANNY_POTION_SHOP)"
     "Kakariko Generic Grotto": "true"
   locations:
     "Kakariko Back Pot 1": "is_child"
@@ -172,7 +172,7 @@
 "Kakariko Granny Shop":
   region: ENTRANCE
   exits:
-    "Kakariko Back": "true"
+    "Kakariko Back": "rusty_key(RUSTY_KEY_GRANNY_POTION_SHOP)"
   locations:
     "Kakariko Potion Shop Odd Potion": "soul_old_hag && (adult_trade(ODD_MUSHROOM) || has_mushroom)"
     "Kakariko Potion Shop Buy Blue Potion": "soul_old_hag && (adult_trade(ODD_MUSHROOM) || has_mushroom) && merchant_price(0x02)"
@@ -180,7 +180,7 @@
 "Shooting Gallery Adult":
   region: ENTRANCE
   exits:
-    "Kakariko": "true"
+    "Kakariko": "rusty_key(RUSTY_KEY_ADULT_SHOOTING_GALLERY)"
   locations:
     "Shooting Gallery Adult": "is_adult && can_use_bow && can_use_wallet(1) && soul_shooting_gallery_owner"
 
@@ -188,7 +188,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Kakariko": "true"
+    "Kakariko": "rusty_key(RUSTY_KEY_IMPA_HOUSE)"
   locations:
     "Kakariko Cow": "cow"
     "Kakariko Impa House Wonder Item": "true"
@@ -205,7 +205,7 @@
 "Windmill":
   region: ENTRANCE
   exits:
-    "Kakariko": "true"
+    "Kakariko": "rusty_key(RUSTY_KEY_WINDMILL)"
     "Windmill Exit": "climb_anywhere || hookshot_anywhere || (is_adult && trick(OOT_WINDMILL_HP_NOTHING))"
   events:
     WELL_DRAIN: "is_child && song_event(1)"
@@ -223,7 +223,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Kakariko": "true"
+    "Kakariko": "rusty_key(RUSTY_KEY_CARPENTER_HOUSE)"
   events:
     TALON_AWAKE: "adult_trade(POCKET_CUCCO) && soul_talon"
 
@@ -231,7 +231,7 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Kakariko": "true"
+    "Kakariko": "rusty_key(RUSTY_KEY_SKULLTULA_HOUSE)"
   locations:
     "Skulltula House 10 Tokens": "(has(GS_TOKEN, 10) || has_platinum_token)"
     "Skulltula House 20 Tokens": "(has(GS_TOKEN, 20) || has_platinum_token)"
