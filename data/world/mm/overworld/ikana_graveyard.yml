@@ -158,7 +158,7 @@
     "Ikana Graveyard": "rusty_key(RUSTY_KEY_DAMPE_HOUSE)"
     "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"
   locations:
-    "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3 && soul_dampe"
+    "Beneath The Graveyard Dampe Chest": "event(DAMPE_BIG_POE)"
     "Beneath The Graveyard Pot Dampe 01": "true"
     "Beneath The Graveyard Pot Dampe 02": "true"
     "Beneath The Graveyard Pot Dampe 03": "true"

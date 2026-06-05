@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix logic for MM Beneath The Graveyard Dampe Chest not checking for the poes soul.
 - Fix seeds requiring very early warp songs usage being sometimes unbeatable. (#905)
 - Auto-equip the deku mask when entering deku palace throne in ER if possible to avoid a potential seed brick.
 - Fix Haunted Wasteland Poe Guide being removed when Enemy Souls are on.
