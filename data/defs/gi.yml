@@ -541,7 +541,7 @@
 - { id: MM_ARROWS_30, item: MM_ARROWS_30, type: MINOR, add: [MM_ARROWS, 30], flags: 0x49, draw: ARROW2, object: [mm, 0x00af], name: "<C0>30 Arrows" }
 - { id: MM_ARROWS_40, item: MM_ARROWS_40, type: MINOR, add: [MM_ARROWS, 40], flags: 0x4a, draw: ARROW3, object: [mm, 0x00af], name: "<C0>40 Arrows" }
 - { id: MM_UNK_21, item: MM_ARROWS_40, type: MINOR, add: [MM_ARROWS, 40], flags: 0x4a, draw: ARROW3, object: [mm, 0x00af], name: "<C0>40 Arrows" }
-- { id: MM_BOW, item: MM_BOW, type: MAJOR, add: [MM_BOW, 0], flags: 0xa0, draw: MM_BOW, object: [mm, 0x00bf], name: "the <C1>Hero's Bow" }
+- { id: MM_BOW, item: MM_BOW, type: MAJOR, add: [MM_BOW, 1], flags: 0xa0, draw: MM_BOW, object: [mm, 0x00bf], name: "the <C1>Hero's Bow" }
 - { id: MM_QUIVER2, item: MM_QUIVER2, type: MAJOR, add: [MM_BOW, 2], flags: 0xa0, draw: QUIVER2, object: [mm, 0x0097], name: "the <C1>Big Quiver" }
 - { id: MM_QUIVER3, item: MM_QUIVER3, type: MAJOR, add: [MM_BOW, 3], flags: 0xa0, draw: QUIVER3, object: [mm, 0x0097], name: "the <C1>Biggest Quiver" }
 - { id: MM_ARROW_FIRE, item: MM_ARROW_FIRE, type: MAJOR, add: MM_NORMAL, flags: 0xa0, draw: ARROW_FIRE, object: [mm, 0x0121], name: "the <C1>Fire Arrow" }
@@ -720,7 +720,6 @@
 - { id: MM_SLINGSHOT, item: MM_SLINGSHOT, type: MAJOR, add: [MM_SLINGSHOT, 1], flags: 0x80, draw: OOT_SLINGSHOT, object: [oot, 0x00e7], name: "the <C1>Fairy Slingshot" }
 - { id: MM_DEKU_SEEDS_5, item: MM_SEEDS_5, type: MINOR, add: [ MM_SEEDS, 5 ], flags: 0x50, draw: OOT_SEEDS, object: [ oot, 0x0119 ], name: "<C0>5 Deku Seeds" }
 - { id: MM_DEKU_SEEDS_30, item: MM_SEEDS_30, type: MINOR, add: [MM_SEEDS, 30], flags: 0x50, draw: OOT_SEEDS, object: [oot, 0x0119], name: "<C0>30 Deku Seeds" }
-- { id: MM_BULLET_BAG, item: MM_BULLET_BAG, type: MAJOR, add: [ MM_SLINGSHOT, 1 ], flags: 0x80, draw: OOT_BULLET_BAG2, object: [ oot, 0x017b ] }
 - { id: MM_BULLET_BAG2, item: MM_BULLET_BAG2, type: MAJOR, add: [ MM_SLINGSHOT, 2 ], flags: 0x80, draw: OOT_BULLET_BAG2, object: [ oot, 0x017b ], name: "the <C1>Large Bullet Bag" }
 - { id: MM_BULLET_BAG3, item: MM_BULLET_BAG3, type: MAJOR, add: [ MM_SLINGSHOT, 3], flags: 0x80, draw: OOT_BULLET_BAG3, object: [oot, 0x017b], name: "the <C1>Largest Bullet Bag" }
 - { id: MM_SOUL_ENEMY_OCTOROK, type: SOUL, add: [MM_SOUL, 0x0000], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Octoroks" }

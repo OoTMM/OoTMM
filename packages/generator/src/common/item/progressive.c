@@ -586,7 +586,6 @@ s16 Item_Progressive(s16 gi, int ovflags)
         gi = progressiveBowMm();
         break;
     case GI_MM_SLINGSHOT:
-    case GI_MM_BULLET_BAG:
     case GI_MM_BULLET_BAG2:
     case GI_MM_BULLET_BAG3:
         gi = progressiveSlingshotMm();
