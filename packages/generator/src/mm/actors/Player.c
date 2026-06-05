@@ -2001,8 +2001,16 @@ void Player_UseItem(PlayState* play, Player* this, s16 itemId)
 /* Hammer & Boomerang Stuff */
 
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
-    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
-    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) return 3; /* PLAYER_MODELGROUP_DEFAULT */
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
+        return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
+    case PLAYER_CUSTOM_IA_BOOMERANG:
+        return 3;  /* PLAYER_MODELGROUP_DEFAULT */
+    case PLAYER_CUSTOM_IA_SLINGSHOT:
+        return 3;  /* PLAYER_MODELGROUP_DEFAULT */
+    }
+
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
     s32 modelGroup = sActionModelGroups[itemAction];
     /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
