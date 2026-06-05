@@ -358,11 +358,23 @@ export class CustomObjectsBuilder {
     editor.submitList(editor.listData(0x060221a8)!); /* First person string */
 
     const dataTPAddr = 0x06015df0;
-    let dataTP = editor.listData(dataFPAddr)!;
-    dataTP = editor.stripList(dataTP, 0x06015F18 - dataTPAddr, 0x06015FC8 - dataTPAddr);
+    let dataTP = editor.listData(dataTPAddr)!;
     editor.submitList(dataTP);
 
     return { name: 'EQ_SLINGSHOT', ...editor.build() };
+  }
+
+  private async makeEqSlingshotRightArmStretched(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    const dataFPAddr = 0x06018048;
+    const dataFP = editor.listData(dataFPAddr)!;
+
+    editor.submitList(dataFP);
+
+    return { name: 'EQ_SLINGSHOT_RIGHT_ARM_STRETCHED', ...editor.build() };
   }
 
   private async makeEqBow(): Promise<CustomObject> {
@@ -516,6 +528,7 @@ export class CustomObjectsBuilder {
       await this.makeEqBoomerang(),
       await this.makeEqHookshot(),
       await this.makeEqSlingshot(),
+      await this.makeEqSlingshotRightArmStretched(),
       await this.makeEqBow(),
       await this.makeStrayFairy(),
       await this.makeEffectShock(),

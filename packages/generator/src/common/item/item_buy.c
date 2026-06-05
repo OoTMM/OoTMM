@@ -177,6 +177,9 @@ int isItemBuyable(s16 gi)
         return canBuyShieldMm(0);
     case GI_MM_SHIELD_HERO:
         return canBuyShieldMm(1);
+    case GI_MM_DEKU_SEEDS_5:
+    case GI_MM_DEKU_SEEDS_30:
+        return (gMmSave.info.inventory.upgrades.bulletBag > 0) && (gMmExtraAmmo.slingshotSeeds < kMaxSeeds[gMmSave.info.inventory.upgrades.bulletBag]);
     default:
         return 1;
     }

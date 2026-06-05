@@ -100,6 +100,11 @@ const u8 kOotHammerGFS[] = {
     ITEM_OOT_GREAT_FAIRY_SWORD,
 };
 
+const u8 kMmBowSlingshot[] = {
+    ITEM_MM_BOW,
+    ITEM_MM_SLINGSHOT,
+};
+
 /* Return value is used to index gVertex */
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
@@ -149,6 +154,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kMmPictoBoom;
         *outTableSize = ARRAY_COUNT(kMmPictoBoom);
         result = 6;
+        break;
+    case ITS_MM_BOW:
+        *outFlags = gMmExtraItems.bowSlingshot;
+        *outTable = kMmBowSlingshot;
+        *outTableSize = ARRAY_COUNT(kMmBowSlingshot);
+        result = 7;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:

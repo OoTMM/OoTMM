@@ -44,6 +44,9 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_RUTO_LETTER:
             id = ITEM_OOT_RUTO_LETTER;
             break;
+        case ITEM_MM_SLINGSHOT:
+            id = ITEM_OOT_SLINGSHOT;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);
@@ -165,6 +168,10 @@ void Interface_CustomDrawAmmoCount(PlayState* play, s16 button, s16 alpha)
         ammo = gSave.info.inventory.ammo[ITS_MM_BOMBCHU];
         maxAmmo = gMaxBombchuMm;
         break;
+    case ITEM_MM_SLINGSHOT:
+        ammo = gMmExtraAmmo.slingshotSeeds;
+        maxAmmo = kMaxSeeds[gMmSave.info.inventory.upgrades.bulletBag];
+        break;
     default:
         return;
     }
@@ -213,6 +220,7 @@ void Interface_DrawAmmoCountWrapper(PlayState* play, s16 button, s16 alpha)
     u8 item = GET_CUR_FORM_BTN_ITEM(button);
     switch (item)
     {
+    case ITEM_MM_SLINGSHOT:
     case ITEM_MM_BOMBCHU:
         Interface_CustomDrawAmmoCount(play, button, alpha);
         break;

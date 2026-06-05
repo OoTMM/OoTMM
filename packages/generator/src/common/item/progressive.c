@@ -74,10 +74,12 @@ static s16 progressiveBowOot(void)
 
 static s16 progressiveBowMm(void)
 {
+    if (!(gMmExtraItems.bowSlingshot & (1 << 0)))
+        return GI_MM_BOW;
+
     switch (gMmSave.info.inventory.upgrades.quiver)
     {
     case 0:
-        return GI_MM_BOW;
     case 1:
         return GI_MM_QUIVER2;
     default:
@@ -85,7 +87,7 @@ static s16 progressiveBowMm(void)
     }
 }
 
-static s16 progressiveSlingshot(void)
+static s16 progressiveSlingshotOot(void)
 {
     if (gOotSave.info.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_NONE)
         return GI_OOT_SLINGSHOT;
@@ -97,6 +99,21 @@ static s16 progressiveSlingshot(void)
         return GI_OOT_BULLET_BAG2;
     default:
         return GI_OOT_BULLET_BAG3;
+    }
+}
+
+static s16 progressiveSlingshotMm(void)
+{
+    if (!(gMmExtraItems.bowSlingshot & (1 << 1)))
+        return GI_MM_SLINGSHOT;
+
+    switch (gMmSave.info.inventory.upgrades.bulletBag)
+    {
+    case 0:
+    case 1:
+        return GI_MM_BULLET_BAG2;
+    default:
+        return GI_MM_BULLET_BAG3;
     }
 }
 
@@ -455,7 +472,7 @@ s16 Item_Progressive(s16 gi, int ovflags)
     case GI_OOT_BULLET_BAG:
     case GI_OOT_BULLET_BAG2:
     case GI_OOT_BULLET_BAG3:
-        gi = progressiveSlingshot();
+        gi = progressiveSlingshotOot();
         break;
     case GI_OOT_OCARINA_FAIRY:
     case GI_OOT_OCARINA_TIME:
@@ -568,6 +585,12 @@ s16 Item_Progressive(s16 gi, int ovflags)
     case GI_MM_QUIVER3:
         gi = progressiveBowMm();
         break;
+    case GI_MM_SLINGSHOT:
+    case GI_MM_BULLET_BAG:
+    case GI_MM_BULLET_BAG2:
+    case GI_MM_BULLET_BAG3:
+        gi = progressiveSlingshotMm();
+        break;
     case GI_MM_GORON_BRACELET:
     case GI_MM_SILVER_GAUNTLETS:
     case GI_MM_GOLDEN_GAUNTLETS:
@@ -675,6 +698,8 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_MM_ARROWS_10:
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:
+    case GI_MM_DEKU_SEEDS_5:
+    case GI_MM_DEKU_SEEDS_30:
     case GI_MM_SHIELD_HERO:
     case GI_MM_MILK:
     case GI_MM_CHATEAU:

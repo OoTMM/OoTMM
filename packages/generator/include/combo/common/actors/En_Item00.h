@@ -30,7 +30,7 @@
 # define ITEM00_SHIELD_HYLIAN   0x16
 # define ITEM00_TUNIC_ZORA      0x17
 # define ITEM00_TUNIC_GORON     0x18
-# define ITEM00_BOMBS_5_ALT     0x19
+# define ITEM00_BOMBS_5_ALT     0x19 /* TODO rename to something like custom item? */
 # define ITEM00_MAX             0x1a
 #else
 # define ITEM00_RUPEE_GREEN     0x00
@@ -63,6 +63,7 @@
 # define ITEM00_MAP             0x1b
 # define ITEM00_COMPASS         0x1c
 # define ITEM00_MUSHROOM_CLOUD  0x1d
+# define ITEM00_SEEDS           0x1e
 # define ITEM00_NO_DROP         (-1)
 #endif
 
@@ -71,11 +72,15 @@ typedef struct ALIGNED(4) Actor_EnItem00
     Actor   actor;
     void*   handler;
     u16     collectibleFlag;
-    char    unk_142[0x8];
+    s16     getItem;
+    s16     unk_144;
+    s16     blinkTimer;
+    s16     blinkMask;
     s16     timer;
-    char    unk_14c[0x50];
+    f32     scale;
+    ColliderCylinder collider;
 #if defined(GAME_MM)
-    char    unk_mm[0x4];
+    s8      rupeeCollected;
 #endif
     Xflag   xflag;
     u8      isExtended:1;
@@ -95,9 +100,12 @@ typedef struct PlayState PlayState;
 void EnItem00_Init(Actor_EnItem00* this, PlayState* play);
 void EnItem00_Update(Actor_EnItem00* this, PlayState* play);
 void EnItem00_DrawRupee(Actor_EnItem00* this, PlayState* play);
+void EnItem00_DrawHeartContainer(Actor_EnItem00* this, PlayState* play);
 void EnItem00_CollectedHandler(Actor_EnItem00* this, PlayState* play);
 void EnItem00_SetHandler(Actor_EnItem00* this, void* handler);
+void EnItem00_SetObject(Actor_EnItem00* this, PlayState* play, f32* shadowOffset, f32* shadowScale);
 int  EnItem00_FixDrop(int drop);
+void EnItem00_AddXflag(Actor_EnItem00* this);
 
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);

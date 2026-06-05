@@ -506,6 +506,7 @@
 # define ACTOR_EN_BB                0x03e
 # define ACTOR_BG_KEIKOKU_SPR       0x03f
 # define ACTOR_EN_WOOD02            0x041
+# define ACTOR_CUSTOM_SLINGSHOT_PROJECTILE 0x042
 # define ACTOR_EN_DEATH             0x043
 # define ACTOR_EN_MINIDEATH         0x044
 # define ACTOR_EN_VM                0x047

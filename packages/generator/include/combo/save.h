@@ -134,6 +134,7 @@ ASSERT_SIZE(u32,            sizeof(u32));
 ASSERT_SIZE(u32,            sizeof(u32));
 ASSERT_SIZE(u32,            sizeof(u32));
 ASSERT_SIZE(OotExtraAmmo,   sizeof(u32));
+ASSERT_SIZE(MmExtraAmmo,    sizeof(u32));
 #endif
 
 #define gOotExtraTrade              SAVE_EXTRA_RECORD(OotExtraTrade,     0)
@@ -157,5 +158,6 @@ ASSERT_SIZE(OotExtraAmmo,   sizeof(u32));
 #define gOotSilverRupeeCounts5      SAVE_EXTRA_RECORD(u32,              18)
 #define gTriforceCount              SAVE_EXTRA_RECORD(u32,              19)
 #define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     20)
+#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      21)
 
 #endif

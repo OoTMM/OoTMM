@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add Fairy Slingshot to Majora's Mask
 - Add Rusty Keys, locking a single overworld door each, in both games.
 - Add Great Fairy Sword to Ocarina of Time.
 - Add a setting to shuffle the final skulltula reward in Ocarina of Time.

@@ -82,7 +82,7 @@ typedef struct EffectBlureInit1 {
 #if defined(GAME_MM) // TODO: Move elsewhere
 
 void EffectSsDeadDb_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* prim, Color_RGBA8* env, s16 scale, s16 scaleStep, s32 life);
-
+void EffectSsStone1_Spawn(PlayState* play, Vec3f* pos, s32 arg2);
 #define EFFECT_BLURE_COLOR_COUNT 4
 
 #define EFFECT_BLURE_FLAG_2         (1 << 1)
@@ -259,7 +259,6 @@ void EffectSsSibuki_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* a
 void EffectSsSibuki_SpawnBurst(PlayState* play, Vec3f* pos);
 void EffectSsSibuki2_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 void EffectSsGMagma2_Spawn(PlayState* play, Vec3f* pos, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 updateRate, s16 drawMode, s16 scale);
-void EffectSsStone1_Spawn(PlayState* play, Vec3f* pos, s32 arg2);
 void EffectSsHitMark_Spawn(PlayState* play, s32 type, s16 scale, Vec3f* pos);
 void EffectSsHitMark_SpawnFixedScale(PlayState* play, s32 type, Vec3f* pos);
 void EffectSsHitMark_SpawnCustomScale(PlayState* play, s32 type, s16 scale, Vec3f* pos);

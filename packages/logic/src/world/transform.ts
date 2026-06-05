@@ -117,11 +117,13 @@ const ITEM_POOL_SCARCE = new Set([
   Items.OOT_SLINGSHOT,
   Items.MM_MAGIC_UPGRADE,
   Items.MM_BOW,
+  Items.MM_SLINGSHOT,
   Items.MM_SWORD,
   Items.MM_BOMB_BAG,
   Items.MM_BOMBCHU_BAG,
   Items.MM_OCARINA,
   Items.SHARED_BOW,
+  Items.SHARED_SLINGSHOT,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_BOMBCHU_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -244,6 +246,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_MAGIC_UPGRADE,
   Items.MM_BOMBER_NOTEBOOK,
   Items.MM_BOW,
+  Items.MM_SLINGSHOT,
   Items.MM_OCARINA,
   Items.MM_SWORD,
   Items.MM_SHIELD,
@@ -337,6 +340,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_HAMMER,
   Items.SHARED_BOOMERANG,
   Items.SHARED_GREAT_FAIRY_SWORD,
+  Items.SHARED_SLINGSHOT,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -1214,6 +1218,18 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.SHARED_GREAT_FAIRY_SWORD);
     } else if (settings.gfsOot) {
       this.addItem(Items.OOT_GREAT_FAIRY_SWORD);
+    }
+
+    if (settings.sharedSlingshot) {
+      this.replaceItem(Items.OOT_SLINGSHOT, Items.SHARED_SLINGSHOT);
+      this.replaceItem(Items.OOT_DEKU_SEEDS_5, Items.SHARED_DEKU_SEEDS_5);
+      this.replaceItem(Items.OOT_DEKU_SEEDS_30, Items.SHARED_DEKU_SEEDS_30);
+      this.replaceItem(Items.MM_DEKU_SEEDS_5, Items.SHARED_DEKU_SEEDS_5);
+      this.replaceItem(Items.MM_DEKU_SEEDS_30, Items.SHARED_DEKU_SEEDS_30);
+    } else if (settings.slingshotMm) {
+      this.addItem(Items.MM_SLINGSHOT, 3);
+      this.addItem(Items.MM_DEKU_SEEDS_5, 0);
+      this.addItem(Items.MM_DEKU_SEEDS_30, 7);
     }
 
     if (settings.sharedStoneAgony) {

@@ -2049,6 +2049,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'slingshotMm',
+  name: "Slingshot (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds the Slingshot in Majora's Mask.",
+  default: false,
+  cond: hasMM,
+}, {
   key: 'spinUpgradeOot',
   name: "Spin Attack Upgrade (OoT)",
   category: 'items.extensions',
@@ -3008,6 +3016,14 @@ export const SETTINGS = [{
   description: "Combines the Great Fairy's Sword from OoT and MM into one item for both games",
   default: false,
     cond: (s: any) => hasOoTMM(s) && s.gfsOot,
+}, {
+  key: 'sharedSlingshot',
+  name: "Shared Slingshot",
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the Slingshots from OoT and MM into one item for both games',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.slingshotMm,
 }, {
   key: 'sharedBottles',
   name: 'Shared Bottles',

@@ -155,6 +155,15 @@ void comboSyncItems(void)
     if (Config_Flag(CFG_SHARED_BOWS))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOW] = gSave.info.inventory.ammo[ITS_NATIVE_BOW];
 
+    if (Config_Flag(CFG_SHARED_SLINGSHOT))
+    {
+#if defined(GAME_OOT)
+        gMmExtraAmmo.slingshotSeeds = gSave.info.inventory.ammo[ITS_NATIVE_SLINGSHOT];
+#else
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_SLINGSHOT] = gMmExtraAmmo.slingshotSeeds;
+#endif
+    }
+
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBS];
 
@@ -687,3 +696,4 @@ Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 
     return decoy;
 }
+

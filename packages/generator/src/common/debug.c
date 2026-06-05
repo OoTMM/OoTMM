@@ -480,6 +480,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.itemEquips.shield = 2;
     gSharedCustomSave.mmProgressiveShields = 3;
     gSave.info.inventory.upgrades.quiver = 3;
+    gSave.info.inventory.upgrades.bulletBag = 3;
     gSave.info.inventory.upgrades.dekuStick = 3;
     gSave.info.inventory.upgrades.dekuNut = 3;
     gSave.info.inventory.upgrades.strength = 3;
@@ -572,6 +573,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.ammo[ITS_MM_BOW] = 50;
     gSave.info.inventory.ammo[ITS_MM_BOMBCHU] = 50;
     gSave.info.inventory.ammo[ITS_MM_BOMBS] = 40;
+    gMmExtraAmmo.slingshotSeeds = 50;
 
     gSave.info.playerData.healthCapacity = 0x10 * 20;
     gSave.info.playerData.health = gSave.info.playerData.healthCapacity;
@@ -584,6 +586,7 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.hammerGFS = 3;
     gMmExtraItems.boomPicto = 3;
     gCustomSave.ootSongs.value = 0xff;
+    gMmExtraItems.bowSlingshot = 3;
 
     // gCustomSave.halfDays = 0b111111;
 
@@ -780,6 +783,7 @@ static void debugApplyCheats(void)
         gSave.info.inventory.ammo[ITS_MM_BOW] = 50;
         gSave.info.inventory.ammo[ITS_MM_BOMBCHU] = 50;
         gSave.info.inventory.ammo[ITS_MM_BOMBS] = 40;
+        gMmExtraAmmo.slingshotSeeds = 50;
 #endif
     }
 }

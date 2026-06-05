@@ -503,6 +503,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedHammer = true;
     base.sharedBoomerang = true;
     base.sharedGFS = true;
+    base.sharedSlingshot = true;
     base.sharedStoneAgony = true;
     base.sharedSpinUpgrade = true;
     break;
@@ -524,6 +525,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedHammer = booleanWeighted(random, 0.5);
     base.sharedBoomerang = booleanWeighted(random, 0.5);
     base.sharedGFS = booleanWeighted(random, 0.5);
+    base.sharedSlingshot = booleanWeighted(random, 0.5);
     base.sharedStoneAgony = booleanWeighted(random, 0.5);
     base.sharedSpinUpgrade = booleanWeighted(random, 0.5);
 
@@ -667,6 +669,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.gfsOot = booleanWeighted(random, 0.25);
   base.hammerMm = booleanWeighted(random, 0.25);
   base.boomerangMm = booleanWeighted(random, 0.25);
+  base.slingshotMm = booleanWeighted(random, 0.25);
   base.sticksNutsUpgradesMm = booleanWeighted(random, 0.5);
   base.stoneAgonyMm = booleanWeighted(random, 0.5);
   base.spinUpgradeOot = booleanWeighted(random, 0.33);
