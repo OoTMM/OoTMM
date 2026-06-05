@@ -593,16 +593,19 @@ static int addItemSeedsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static void addBowSlingshotRawMm(PlayState* play, u8 index)
+static void addBowItemRawMm(PlayState* play)
 {
-    u8 itemId;
-
-    itemId = kMmBowSlingshot[index];
     if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
-        gMmSave.info.inventory.items[ITS_MM_BOW] = itemId;
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    gMmExtraItems.bowSlingshot |= 1 << 0;
+    reloadSlotMm(play, ITS_MM_BOW);
+}
 
-    gMmExtraItems.bowSlingshot |= (1 << index);
-
+static void addSlingshotItemRawMm(PlayState* play)
+{
+    if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_SLINGSHOT;
+    gMmExtraItems.bowSlingshot |= 1 << 1;
     reloadSlotMm(play, ITS_MM_BOW);
 }
 
@@ -613,10 +616,11 @@ static void addSlingshotRawOot(u8 index)
     addSeedsRawOot(kMaxSeeds[index]);
 }
 
-static void addSlingshotRawMm(u8 index)
+static void addSlingshotRawMm(PlayState* play, u8 index)
 {
     if (index > gMmSave.info.inventory.upgrades.bulletBag)
         gMmSave.info.inventory.upgrades.bulletBag = index;
+    addSlingshotItemRawMm(play);
     addSeedsRawMm(kMaxSeeds[index]);
 }
 
@@ -628,8 +632,7 @@ static int addItemSlingshotOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSlingshotMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addBowSlingshotRawMm(play, 1);
-    addSlingshotRawMm(param);
+    addSlingshotRawMm(play, param);
     return 0;
 }
 
@@ -652,11 +655,6 @@ static void addArrowsRawMm(u8 count)
         return;
 
     max = kMaxArrows[gMmSave.info.inventory.upgrades.quiver];
-
-    if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
-        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
-
-    gMmExtraItems.bowSlingshot |= (1 << 0);
 
     arrows = gMmSave.info.inventory.ammo[ITS_MM_BOW] + count;
     if (arrows > max)
@@ -706,7 +704,7 @@ static void addBowRawMm(PlayState* play, u8 index)
     if (index > gMmSave.info.inventory.upgrades.quiver)
         gMmSave.info.inventory.upgrades.quiver = index;
 
-    addBowSlingshotRawMm(play, 0);
+    addBowItemRawMm(play);
     addArrowsRawMm(kMaxArrows[index]);
 }
 
