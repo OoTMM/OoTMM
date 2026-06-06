@@ -13,7 +13,7 @@
     "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
   locations:
-    "Ikana Graveyard Captain Mask": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && event(KEETA_WOKEN) && has_arrows && can_fight"
+    "Ikana Graveyard Captain Mask": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && event(KEETA_WOKEN) && (has_arrows || has_slingshot) && can_fight"
     "Ikana Graveyard Grass 1": "true"
     "Ikana Graveyard Grass 2": "true"
     "Ikana Graveyard Grass 3": "true"
