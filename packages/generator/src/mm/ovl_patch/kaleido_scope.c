@@ -453,7 +453,7 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, (void*)customDestination, customIconSize);
 
         u8 customItemIndex = icon - ITEM_MM_CUSTOM_MIN;
-        if (customItemIndex >= (ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
+        if (customItemIndex >= (ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
         {
             KaleidoScope_GrayOutTextureRGBA32((u32*)customDestination, customIconSize);
         }
