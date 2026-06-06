@@ -545,11 +545,10 @@
     "GLOBAL": "true"
     "Clock Town East Near Hideout": "true"
     "Astral Observatory Near Balcony": "true"
+    "Astral Observatory Telescope": "soul_astronomer"
   events:
     MAGIC: "true"
     RUPEES: "true"
-    SCRUB_TELESCOPE: "soul_astronomer && soul_business_scrub"
-    TEAR_TELESCOPE: "soul_astronomer"
     SCARECROW: "can_play_scarecrow"
   locations:
     "Astral Observatory Passage Chest": "(has_explosives || trick_keg_explosives) && (can_swim || is_tall)"
@@ -566,6 +565,14 @@
   exits:
     "Astral Observatory": "true"
     "Astral Observatory Balcony": "rusty_key(RUSTY_KEY_OBSERVATORY)"
+
+"Astral Observatory Telescope":
+  region: ENTRANCE
+  exits:
+    "Astral Observatory": "true"
+  events:
+    SCRUB_TELESCOPE: "soul_business_scrub"
+    TEAR_TELESCOPE: "true"
 
 "Tingle Town":
   region: TINGLE

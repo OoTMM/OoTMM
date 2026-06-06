@@ -32,6 +32,8 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erIndoorsExtra)
     return true;
+  if (settings.erIndoorsTelescopes)
+    return true;
   if (settings.erWarps !== 'none')
     return true;
   if (settings.erOneWaysMajor)

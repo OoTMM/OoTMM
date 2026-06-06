@@ -298,7 +298,7 @@
 "has_mask_goron": "has(MASK_GORON) || has(SHARED_MASK_GORON)"
 "has_mask_kamaro": "has(MASK_KAMARO) || has(SHARED_MASK_KAMARO)"
 
-"er_enabled": "setting(erMajorDungeons) || setting(erMinorDungeons) || setting(erSpiderHouses) || setting(erGanonCastle) || setting(erGanonTower) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || setting(erMoon) || setting(erIndoorsMajor) || setting(erIndoorsExtra) || !setting(erRegions, none) || !setting(erOverworld, none) || !setting(erBoss, none) || !setting(erWarps, none) || setting(erOneWaysMajor) || setting(erOneWaysIkana) || setting(erOneWaysSongs) || setting(erOneWaysStatues) || setting(erOneWaysOwls) || !setting(erGrottos, none) || !setting(erWallmasters, none)"
+"er_enabled": "setting(erMajorDungeons) || setting(erMinorDungeons) || setting(erSpiderHouses) || setting(erGanonCastle) || setting(erGanonTower) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || setting(erMoon) || setting(erIndoorsMajor) || setting(erIndoorsExtra) || setting(erIndoorsTelescopes) || !setting(erRegions, none) || !setting(erOverworld, none) || !setting(erBoss, none) || !setting(erWarps, none) || setting(erOneWaysMajor) || setting(erOneWaysIkana) || setting(erOneWaysSongs) || setting(erOneWaysStatues) || setting(erOneWaysOwls) || !setting(erGrottos, none) || !setting(erWallmasters, none)"
 "dungeon_er": "setting(erMajorDungeons) || setting(erSpiderHouses) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || (setting(erDungeons, full) && (setting(erMinorDungeons) || setting(erGanonCastle) || setting(erGanonTower)))"
 
 # Misc

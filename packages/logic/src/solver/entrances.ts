@@ -717,6 +717,9 @@ class WorldShuffler {
     if (this.settings.erIndoorsExtra && this.settings.erPiratesWorld) {
       types.add('indoors-pf');
     }
+    if (this.settings.erIndoorsTelescopes) {
+      types.add('indoors-telescope');
+    }
     if (this.settings.erIndoorsGameLinks) {
       types.add('indoors-link');
     }

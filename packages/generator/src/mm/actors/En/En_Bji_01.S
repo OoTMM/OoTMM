@@ -1,0 +1,10 @@
+#include <combo.h>
+
+PATCH_GROUP PG_ER_TELESCOPES
+
+PATCH_START 0x809cd634
+  j EnBji01_TelescopeER
+   nop
+PATCH_END
+
+PATCH_GROUP_END

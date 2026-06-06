@@ -3310,6 +3310,14 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
+  key: 'erIndoorsTelescopes',
+  name: 'Shuffle Telescopes',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle Telescopes (Astral Observatory, Kafei Hideout, Pirate Fortress Sewers) among the interiors.',
+  default: false,
+  cond: (x: any) => hasMM(x) && (x.erIndoors !== 'none')
+}, {
   key: 'erIndoorsGameLinks',
   name: 'Shuffle Mask Shop/Clock Tower Entrances',
   category: 'entrances',

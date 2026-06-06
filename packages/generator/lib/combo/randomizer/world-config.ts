@@ -295,6 +295,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_AIR_PHYSICS_MM: settings.mmStyleAirMovementOot,
     OOT_RUSTY_KEYS: settings.rustyKeysOot,
     MM_RUSTY_KEYS: settings.rustyKeysMm,
+    MM_TELESCOPE_ER: settings.erIndoorsTelescopes,
   };
 
   for (const v in exprs) {
