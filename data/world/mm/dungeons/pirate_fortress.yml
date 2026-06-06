@@ -91,6 +91,7 @@
   exits:
     "Pirate Fortress Entrance Balcony": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
     "Pirate Fortress Sewers After Gate": "true"
+    "Pirate Fortress Telescope": "true"
   locations:
     "Pirate Fortress Sewers Pot End 1": "true"
     "Pirate Fortress Sewers Pot End 2": "true"
@@ -103,6 +104,16 @@
     "Pirate Fortress Sewers Barrel End 3": "true"
     "Pirate Fortress Sewers Barrel End 4": "true"
     "Pirate Fortress Sewers Barrel End 5": "true"
+
+"Pirate Fortress Telescope":
+  region: ENTRANCE
+  exit:
+    "Pirate Fortress Telescope Exit": "true"
+
+"Pirate Fortress Telescope Exit":
+  region: BUFFER_DELAYED
+  exits:
+    "Pirate Fortress Sewers End": "true"
 
 "Pirate Fortress Sewers Entrance":
   dungeon: PF
