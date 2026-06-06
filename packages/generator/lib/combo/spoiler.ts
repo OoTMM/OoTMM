@@ -1,8 +1,8 @@
-import type { Options, TrickKey, PlayerItem, Region } from '@ootmm/core';
+import type { Options, TrickKey, PlayerItem, Region, SongEventSongs } from '@ootmm/core';
 import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
-import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SongEventSongs, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM } from '@ootmm/core';
+import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -11,27 +11,27 @@ import { LogWriter } from './util/log-writer';
 
 const VERSION = process.env.VERSION || 'XXX';
 
-const SONG_EVENT_SONG_NAMES: Record<number, string> = {
-  [SongEventSongs.ZELDAS_LULLABY]: 'Zelda\'s Lullaby',
-  [SongEventSongs.EPONAS]: 'Epona\'s Song',
-  [SongEventSongs.SARIAS]: 'Saria\'s Song',
-  [SongEventSongs.SUNS]: 'Sun\'s Song',
-  [SongEventSongs.TIME]: 'Song of Time',
-  [SongEventSongs.STORMS]: 'Song of Storms',
-  [SongEventSongs.MINUET]: 'Minuet of Forest',
-  [SongEventSongs.BOLERO]: 'Bolero of Fire',
-  [SongEventSongs.SERENADE]: 'Serenade of Water',
-  [SongEventSongs.REQUIEM]: 'Requiem of Spirit',
-  [SongEventSongs.NOCTURNE]: 'Nocturne of Shadow',
-  [SongEventSongs.PRELUDE]: 'Prelude of Light',
-  [SongEventSongs.HEALING]: 'Song of Healing',
-  [SongEventSongs.SOARING]: 'Song of Soaring',
-  [SongEventSongs.SONATA]: 'Sonata of Awakening',
-  [SongEventSongs.GORON_LULLABY]: 'Goron Lullaby',
-  [SongEventSongs.GORON_LULLABY_INTRO]: 'Goron Lullaby Intro',
-  [SongEventSongs.NEW_WAVE]: 'New Wave Bossa Nova',
-  [SongEventSongs.ELEGY]: 'Elegy of Emptiness',
-  [SongEventSongs.OATH]: 'Oath to Order',
+const SONG_EVENT_SONG_NAMES: Record<SongEventSongs, string> = {
+  ZELDAS_LULLABY: 'Zelda\'s Lullaby',
+  EPONAS: 'Epona\'s Song',
+  SARIAS: 'Saria\'s Song',
+  SUNS: 'Sun\'s Song',
+  TIME: 'Song of Time',
+  STORMS: 'Song of Storms',
+  MINUET: 'Minuet of Forest',
+  BOLERO: 'Bolero of Fire',
+  SERENADE: 'Serenade of Water',
+  REQUIEM: 'Requiem of Spirit',
+  NOCTURNE: 'Nocturne of Shadow',
+  PRELUDE: 'Prelude of Light',
+  HEALING: 'Song of Healing',
+  SOARING: 'Song of Soaring',
+  SONATA: 'Sonata of Awakening',
+  GORON_LULLABY: 'Goron Lullaby',
+  GORON_LULLABY_INTRO: 'Goron Lullaby Intro',
+  NEW_WAVE: 'New Wave Bossa Nova',
+  ELEGY: 'Elegy of Emptiness',
+  OATH: 'Oath to Order',
 };
 
 class SpoilerWriter {
@@ -67,7 +67,7 @@ class SpoilerWriter {
     }
   }
 
-  private plandoSongEventSongName(song: number | 'random') {
+  private plandoSongEventSongName(song: SongEventSongs | 'random') {
     return song === 'random'
         ? 'Random'
         : this.songEventSongName(song);
@@ -360,13 +360,10 @@ class SpoilerWriter {
     this.writer.unindent('');
   }
 
-  private writeSongEventGame(
-      locations: readonly string[],
-      resolvedSongs: readonly number[],
-  ) {
+  private writeSongEventGame(locations: readonly string[], resolvedSongs: readonly number[]) {
     const entries = locations
-        .map((event, index) => ({ event, song: resolvedSongs[index] }))
-        .filter(({ song }) => song !== undefined);
+      .map((event, index) => ({ event, song: resolvedSongs[index] }))
+      .filter(({ song }) => song !== undefined);
 
     if (entries.length === 0) {
       return;
@@ -375,14 +372,14 @@ class SpoilerWriter {
     const longestEventName = Math.max(...entries.map(({ event }) => event.length));
 
     for (const { event, song } of entries) {
-      this.writer.write(`${event.padEnd(longestEventName + 1)}: ${this.songEventSongName(song)}`);
+      this.writer.write(`${event.padEnd(longestEventName + 1)}: ${this.songEventSongName(SONG_EVENT_SONGS[song])}`);
     }
   }
 
   private writePlandoSongEventGame(
       locations: readonly string[],
       resolvedSongs: readonly number[],
-      plandoSongs: Record<string, { song: number | 'random'; group?: string } | null | undefined>,
+      plandoSongs: Record<string, { song: SongEventSongs | 'random'; group?: string } | null | undefined>,
   ) {
     const entries = Object.entries(plandoSongs)
         .flatMap(([event, plando]) => {
@@ -402,13 +399,13 @@ class SpoilerWriter {
       const eventName = `${event.padEnd(longestEventName + 1)}: `;
       this.writer.write(
           plando.song === 'random'
-              ? `${eventName}${songName} - ${this.songEventSongName(resolvedSong)}${group}`
+              ? `${eventName}${songName} - ${this.songEventSongName(SONG_EVENT_SONGS[resolvedSong])}${group}`
               : `${eventName}${songName}${group}`,
       );
     }
   }
 
-  private songEventSongName(song: number) {
+  private songEventSongName(song: SongEventSongs) {
     return SONG_EVENT_SONG_NAMES[song] ?? `Unknown Song (${song})`;
   }
 

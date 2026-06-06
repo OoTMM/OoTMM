@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
+    "@ootmm/core": "*",
     "@ootmm/generator": "*",
     "clsx": "^2.1.1",
     "jszip": "^3.10.1",

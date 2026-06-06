@@ -1,25 +1,32 @@
-export enum SongEventSongs {
-  ZELDAS_LULLABY,
-  EPONAS,
-  SARIAS,
-  STORMS,
-  SUNS,
-  TIME,
-  MINUET,
-  BOLERO,
-  SERENADE,
-  REQUIEM,
-  NOCTURNE,
-  PRELUDE,
-  HEALING,
-  SOARING,
-  SONATA,
-  GORON_LULLABY,
-  GORON_LULLABY_INTRO,
-  NEW_WAVE,
-  ELEGY,
-  OATH,
-}
+
+export const SONG_EVENT_SONGS = [
+  'ZELDAS_LULLABY',
+  'EPONAS',
+  'SARIAS',
+  'STORMS',
+  'SUNS',
+  'TIME',
+  'MINUET',
+  'BOLERO',
+  'SERENADE',
+  'REQUIEM',
+  'NOCTURNE',
+  'PRELUDE',
+  'HEALING',
+  'SOARING',
+  'SONATA',
+  'GORON_LULLABY',
+  'GORON_LULLABY_INTRO',
+  'NEW_WAVE',
+  'ELEGY',
+  'OATH',
+];
+
+export type SongEventSongs = typeof SONG_EVENT_SONGS[number];
+
+export const SONG_EVENT_SONG_IDS = Object.fromEntries(
+    SONG_EVENT_SONGS.map((k, i) => [k, i]),
+) as Record<SongEventSongs, number>;
 
 export const SONG_EVENT_LOCATIONS_OOT = [
   'SONG_EVENT_TEMPLE_OF_TIME',

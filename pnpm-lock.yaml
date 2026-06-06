@@ -161,6 +161,9 @@ importers:
 
   packages/gui:
     dependencies:
+      '@ootmm/core':
+        specifier: '*'
+        version: link:../core
       '@ootmm/generator':
         specifier: '*'
         version: link:../generator
