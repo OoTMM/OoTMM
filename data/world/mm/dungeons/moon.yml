@@ -173,7 +173,7 @@
   region: MOON
   exits:
     "Moon Trial Link Rest 2": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
-    "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5))) && ((has_bombchu && has_arrows) || short_hook_anywhere)"
+    "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5))) && ((has_bombchu && (has_arrows || can_use_slingshot)) || short_hook_anywhere)"
   locations:
     "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
   gossip:
