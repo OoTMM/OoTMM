@@ -263,6 +263,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_BOOMERANG: settings.sharedBoomerang,
     OOT_GREAT_FAIRY_SWORD: settings.gfsOot,
     SHARED_GREAT_FAIRY_SWORD: settings.sharedGFS,
+    MM_SLINGSHOT: settings.slingshotMm,
+    SHARED_SLINGSHOT: settings.sharedSlingshot,
     MM_UPGRADES_STICKS_NUTS: settings.sticksNutsUpgradesMm,
     OOT_SHUFFLE_EGGS: settings.eggShuffle,
     MM_STONE_OF_AGONY: settings.stoneAgonyMm,

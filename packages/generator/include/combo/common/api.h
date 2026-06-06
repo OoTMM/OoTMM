@@ -620,6 +620,7 @@ void SoundSource_PlaySfxEachFrameAtFixedWorldPos(PlayState* play, Vec3f* worldPo
 Gfx* Gfx_TwoTexScroll(GraphicsContext* gfxCtx, s32 tile1, u32 x1, u32 y1, s32 width1, s32 height1, s32 tile2, u32 x2, u32 y2, s32 width2, s32 height2);
 Gfx* Gfx_SetFog(Gfx* gfx, s32 r, s32 g, s32 b, s32 a, s32 n, s32 f);
 void Gfx_SetupDL25_Xlu(GraphicsContext* gfxCtx);
+void Gfx_SetupDL25_Xlu2(GraphicsContext* gfxCtx);
 void Gfx_SetupDL44_Xlu(GraphicsContext* gfxCtx);
 Gfx* Gfx_SetupDL71(Gfx* gfx);
 Gfx* Gfx_SetupDL72(Gfx* gfx);

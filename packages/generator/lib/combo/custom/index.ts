@@ -220,6 +220,7 @@ export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: stri
   GORON_SYMBOL_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_child', 0x7288, 16 * 32 * 2),
   GAUNTLET1_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0x9980, 16 * 32 * 2),
   GAUNTLET2_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0x9d80, 32 * 32 * 2),
+  DROP_DEKU_SEEDS_TEXTURE: await extractRaw(roms, 'oot', 'objects/gameplay_keep', 0x43650, 32 * 32 * 2,),
 });
 
 type ObjectRef = {

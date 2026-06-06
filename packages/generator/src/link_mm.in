@@ -747,3 +747,15 @@ Audio_SetPauseState = 0x801a3a7c;
 GameState_SetFramerateDivisor = 0x801733a8;
 ShrinkWindow_Letterbox_GetSizeTarget = 0x80160c14;
 Audio_PlaySfx_PauseMenuOpenOrClose = 0x801a3aec;
+
+Player_SetUpperAction = 0x8082F43C;
+Player_UpdateHostileLockOn = 0x8082FB68;
+Player_IsZTargeting = 0x8082FBE8;
+Player_RequestRumble = 0x8082DF48;
+Player_CheckForIdleAnim = 0x8082ED94;
+Player_DecelerateToZero = 0x80832F24;
+Player_CheckRangedShieldDraw = 0x80830B88;
+Player_CheckRangedRestart = 0x80830F9C;
+Player_CheckRangedHoldRelease = 0x80830FD4;
+EffectSsStone1_Spawn = 0x800B25D8;
+Gfx_SetupDL25_Xlu2 = 0x8012C240;

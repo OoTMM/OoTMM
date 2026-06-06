@@ -22,8 +22,8 @@
 #define IA_MM_ARROWS            0x0c
 #define IA_OOT_BOW              0x0d
 #define IA_MM_BOW               0x0e
-#define IA_SEEDS                0x0f
-#define IA_SLINGSHOT            0x10
+#define IA_OOT_SEEDS            0x0f
+#define IA_OOT_SLINGSHOT        0x10
 #define IA_OOT_NORMAL           0x11
 #define IA_MM_NORMAL            0x12
 #define IA_OOT_STICKS           0x13
@@ -129,7 +129,9 @@
 #define IA_OOT_HAMMER_GFS       0x77
 #define IA_OOT_RUSTY_KEY        0x78
 #define IA_MM_RUSTY_KEY         0x79
-#define IA_MAX                  0x7a
+#define IA_MM_SLINGSHOT         0x7a
+#define IA_MM_SEEDS             0x7b
+#define IA_MAX                  0x7c
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -225,6 +227,8 @@ extern const u8 kMmTrade3[];
 extern const u8 kMmGFSHammer[];
 extern const u8 kMmPictoBoom[];
 extern const u8 kOotHammerGFS[];
+
+extern const u8 kMmBowSlingshot[];
 
 void comboSyncItems(void);
 

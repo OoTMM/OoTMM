@@ -13,6 +13,7 @@
 #include <combo/effect.h>
 #include "../actors.h"
 #include <combo/mm/boomerang.h>
+
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
 static void Player_TryBurnDekuShield(Player* this, PlayState* play)
@@ -101,6 +102,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_TUNIC_ZORA,
     PLAYER_CUSTOM_IA_HAMMER,
     PLAYER_CUSTOM_IA_BOOMERANG,
+    PLAYER_CUSTOM_IA_SLINGSHOT,
     PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER,
 };
 
@@ -672,6 +674,17 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
         return 1;
     }
 
+    if (itemAction == PLAYER_CUSTOM_IA_SLINGSHOT)
+    {
+        if (this->transformation == MM_PLAYER_FORM_HUMAN)
+        {
+            return 0;
+        }
+
+        PlaySound(0x4806); /* NA_SE_SY_ERROR */
+        return 1;
+    }
+
     /* PLAYER_IA_MASK_MIN = 0x3A, */
     /* PLAYER_IA_MASK_MAX = 0x51, */
     /* PLAYER_IA_MASK_GIANT = 0x4D, */
@@ -1168,12 +1181,114 @@ void Player_DrawShield(PlayState* play, Player* player)
     CLOSE_DISPS();
 }
 
+static Vec3f sZeroVec = { 0.0f, 0.0f, 0.0f };
+
+static void DrawSlingshotString(PlayState* play, Player* player)
+{
+    void* obj;
+    Vec3f stringOrigin;
+    f32 distXYZ;
+
+    obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
+    if (!obj) {
+        return;
+    }
+
+    OPEN_DISPS(play->state.gfxCtx);
+
+    gSPSegment(POLY_XLU_DISP++, 0x0a, obj);
+
+    Matrix_Push();
+
+    Matrix_Translate(606.0f, 236.0f, 0.0f, MTXMODE_APPLY);
+
+    if ((player->stateFlags3 & PLAYER_STATE3_MM_40) &&
+        (player->unk_B28 >= 0) &&
+        (player->unk_ACC < 0xB)) {
+        Matrix_MultVec3f(&sZeroVec, &stringOrigin);
+        distXYZ = Math_Vec3f_DistXYZ(&player->leftHandWorld.pos, &stringOrigin);
+
+        player->unk_B08 = distXYZ - 3.0f;
+
+        if (distXYZ < 3.0f) {
+            player->unk_B08 = 0.0f;
+        } else {
+            player->unk_B08 *= 1.6f;
+
+            if (player->unk_B08 > 1.0f) {
+                player->unk_B08 = 1.0f;
+            }
+        }
+
+        player->unk_B0C = -0.5f;
+        }
+
+    Matrix_Scale(1.0f, player->unk_B08, 1.0f, MTXMODE_APPLY);
+
+    if (!comboIsLinkAdult()) {
+        Matrix_RotateZ(player->unk_B08 * -0.2f, MTXMODE_APPLY);
+    }
+
+    gSPMatrix(
+        POLY_XLU_DISP++,
+        Matrix_Finalize(play->state.gfxCtx),
+        G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW
+    );
+
+    gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_EQ_SLINGSHOT_1);
+
+    Matrix_Pop();
+
+    CLOSE_DISPS();
+}
+
 void Player_PostLimbDrawGameplayWrapper(PlayState* play, s32 limbIndex, Gfx** dList1, Gfx** dList2, Vec3s* rot, Actor* actor)
 {
     Player* player = (Player*)actor;
     Player_PostLimbDrawGameplay(play, limbIndex, dList1, dList2, rot, actor);
-    if (player->transformation == MM_PLAYER_FORM_HUMAN && limbIndex == PLAYER_LIMB_SHEATH && (player->sheathType == PLAYER_MODELTYPE_SHEATH_14 || player->sheathType == PLAYER_MODELTYPE_SHEATH_15))
-        Player_DrawShield(play, player);
+    if (sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+    {
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && limbIndex == PLAYER_LIMB_SHEATH && (player->sheathType == PLAYER_MODELTYPE_SHEATH_14 || player->sheathType == PLAYER_MODELTYPE_SHEATH_15))
+        {
+            Player_DrawShield(play, player);
+        }
+    }
+
+    if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT && limbIndex == PLAYER_LIMB_RIGHT_HAND)
+    {
+        DrawSlingshotString(play, player);
+    }
+}
+
+static int Player_IsUsingCustomSlingshot(Player* player)
+{
+    return player->transformation == MM_PLAYER_FORM_HUMAN && (player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT || player->heldItemAction == PLAYER_CUSTOM_IA_SLINGSHOT);
+}
+
+static void* Player_CustomSlingshotFirstPerson(void)
+{
+    void* slingshotObj;
+    void* armObj;
+    Gfx* dlist;
+    Gfx* d;
+
+    slingshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
+    armObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT_RIGHT_ARM_STRETCHED);
+
+    if (!slingshotObj || !armObj)
+        return (void*)kDListEmpty;
+
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 6);
+
+    gSPSegment(d++, 0x0a, armObj);
+    gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_RIGHT_ARM_STRETCHED_0);
+
+    gSPSegment(d++, 0x0a, slingshotObj);
+    gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+
+    gSPEndDisplayList(d++);
+
+    return dlist;
 }
 
 static int Player_IsCustomBoomerangThrown(Player* player)
@@ -1181,15 +1296,38 @@ static int Player_IsCustomBoomerangThrown(Player* player)
     return !!(player->stateFlags1 & PLAYER_STATE1_MM_2000000);
 }
 
+#define MM_PLAYER_IS_Z_TARGETING                 0x8082FBE8
+typedef s32 (*MmPlayerIsZTargetingFunc)(Player* player, PlayState* play);
+#define Player_IsZTargeting                 ((MmPlayerIsZTargetingFunc)OverlayAddr(MM_PLAYER_IS_Z_TARGETING))
+
+static int Player_IsCustomSlingshotZTargetAiming(PlayState* play, Player* player)
+{
+    return player->transformation == MM_PLAYER_FORM_HUMAN &&
+           player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT &&
+           (
+               Player_IsZTargeting(player, play) ||
+               player->lockOnActor != NULL
+           );
+}
+
 int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
 {
     Player* player = GET_PLAYER(play);
-
-    if (player->transformation == MM_PLAYER_FORM_HUMAN && sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+    if (Player_IsUsingCustomSlingshot(player) &&
+            sPlayerOverrideLimb == Player_OverrideLimbDrawGameplayFirstPerson)
     {
-        if (player->itemAction == PLAYER_CUSTOM_IA_BOOMERANG)
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
         {
-            if (limbIndex == PLAYER_LIMB_LEFT_HAND)
+            *dList = Player_CustomSlingshotFirstPerson();
+            return FALSE;
+        }
+    }
+    if (player->transformation == MM_PLAYER_FORM_HUMAN &&
+        sPlayerOverrideLimb != Player_OverrideLimbDrawGameplayFirstPerson)
+    {
+        if (limbIndex == PLAYER_LIMB_LEFT_HAND)
+        {
+            if (player->itemAction == PLAYER_CUSTOM_IA_BOOMERANG)
             {
                 if (Player_IsCustomBoomerangThrown(player))
                 {
@@ -1202,7 +1340,14 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
 
                 return FALSE;
             }
+
+            if (Player_IsCustomSlingshotZTargetAiming(play, player))
+            {
+                *dList = (Gfx*)DLIST_LHAND_CLOSED;
+                return FALSE;
+            }
         }
+
         if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
         {
             if ((player->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSharedCustomSave.mmShieldIsDeku && player->currentShield)
@@ -1213,6 +1358,15 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
             else if (player->rightHandType == PLAYER_MODELTYPE_RH_INSTRUMENT && gMmSave.info.inventory.items[ITS_MM_OCARINA] == ITEM_MM_OCARINA_FAIRY)
             {
                 *dList = Player_CustomHandEq(DLIST_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_OCARINA_FAIRY), CUSTOM_OBJECT_EQ_OCARINA_FAIRY_0);
+                return FALSE;
+            }
+            else if (player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT)
+            {
+                *dList = Player_CustomHandEq(
+                    DLIST_RHAND_CLOSED,
+                    comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT),
+                    CUSTOM_OBJECT_EQ_SLINGSHOT_2
+                );
                 return FALSE;
             }
         }
@@ -1235,7 +1389,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
 
-    if (postLimbDraw == (void*)Player_PostLimbDrawGameplay && overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson)
+    if (postLimbDraw == (void*)Player_PostLimbDrawGameplay)
         postLimbDraw = Player_PostLimbDrawGameplayWrapper;
 
     sPlayerOverrideLimb = overrideLimbDraw;
@@ -1847,8 +2001,16 @@ void Player_UseItem(PlayState* play, Player* this, s16 itemId)
 /* Hammer & Boomerang Stuff */
 
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
-    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
-    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) return 3; /* PLAYER_MODELGROUP_DEFAULT */
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
+        return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
+    case PLAYER_CUSTOM_IA_BOOMERANG:
+        return 3;  /* PLAYER_MODELGROUP_DEFAULT */
+    case PLAYER_CUSTOM_IA_SLINGSHOT:
+        return 3;  /* PLAYER_MODELGROUP_DEFAULT */
+    }
+
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
     s32 modelGroup = sActionModelGroups[itemAction];
     /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
@@ -1867,16 +2029,24 @@ PATCH_FUNC(0x80123960, Player_CustomActionToModelGroup)
 extern s32 Player_InitItemAction_CustomBoomerang_Upper(Player* player, PlayState* play);
 extern s32 Player_InitItemAction_CustomBoomerang(Player* player, PlayState* play);
 
+extern s32 Player_InitItemAction_CustomSlingshot(PlayState* play, Player* player);
+extern s32 Player_CheckSlingshotReadyOrStart(Player* player, PlayState* play);
+
 void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     PlayerUpperActionFunc* sPlayerUpperActionUpdateFuncs = (PlayerUpperActionFunc*)OverlayAddr(0x8085c9f0);
     void (*Player_SetUpperAction)(PlayState* play, Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
     s8 upperItemAction = player->heldItemAction;
 
-    if (upperItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    switch (upperItemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
         upperItemAction = PLAYER_IA_SWORD_TWO_HANDED;
-    }
-    if (upperItemAction == PLAYER_CUSTOM_IA_BOOMERANG) {
+        break;
+    case PLAYER_CUSTOM_IA_BOOMERANG:
         Player_SetUpperAction(play, player, Player_InitItemAction_CustomBoomerang);
+        return;
+    case PLAYER_CUSTOM_IA_SLINGSHOT:
+        Player_SetUpperAction(play, player, Player_CheckSlingshotReadyOrStart);
         return;
     }
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
@@ -1886,11 +2056,16 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
 void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 itemAction) {
     PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
 
-    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_HAMMER:
         itemAction = PLAYER_IA_SWORD_TWO_HANDED;
-    }
-    if (itemAction == PLAYER_CUSTOM_IA_BOOMERANG) {
+        break;
+    case PLAYER_CUSTOM_IA_BOOMERANG:
         Player_InitItemAction_CustomBoomerang_Upper(player, play);
+        return;
+    case PLAYER_CUSTOM_IA_SLINGSHOT:
+        Player_InitItemAction_CustomSlingshot(play, player);
         return;
     }
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerItemActionInitFuncs array */

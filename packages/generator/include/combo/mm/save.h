@@ -43,7 +43,7 @@ typedef struct
     u32     unused:9;
     u32     dekuNut:3;
     u32     dekuStick:3;
-    u32     unused2:3; /* bullet bag */
+    u32     bulletBag:3;
     u32     wallet:2;
     u32     scale:3;
     u32     strength:3;
@@ -463,9 +463,19 @@ typedef struct
     u32 goldDust:1;
     u32 hammerGFS:2;
     u32 boomPicto:2;
-    u32 unused:23;
+    u32 bowSlingshot:2;
+    u32 unused:21;
 }
 MmExtraItems;
+
+typedef struct
+{
+    s8 slingshotSeeds;
+    s8 unused1;
+    s8 unused2;
+    s8 unused3;
+}
+MmExtraAmmo;
 
 typedef struct
 {

@@ -112,6 +112,10 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_BOOMERANG;
         break;
+    case ITEM_MM_SLINGSHOT:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_SLINGSHOT;
+        break;
     case ITEM_MM_RUTO_LETTER:
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_RUTO_LETTER;
@@ -247,7 +251,17 @@ void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "Press " TEXT_COLOR_YELLOW "\xB2");
         comboTextAppendClearColor(&b);
-        comboTextAppendStr(&b, " to throw and watch it" TEXT_NL " come back! The boomerang can stun or " TEXT_NL "defeat enemies!" TEXT_END);
+        comboTextAppendStr(&b, " to throw and watch it come" TEXT_NL "back! The boomerang can stun or" TEXT_NL "defeat enemies!" TEXT_END);
+        break;
+    case ITEM_MM_SLINGSHOT:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Fairy Slingshot" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Press " TEXT_COLOR_YELLOW "\xB2");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " to unleash a deku seed" TEXT_NL "at your target!" TEXT_END);
         break;
     case ITEM_MM_BLUE_FIRE:
         b = play->msgCtx.font.textBuffer.schar;
@@ -363,16 +377,17 @@ static u32 sCustomIcons[] = {
     ITEM_MM_TUNIC_ZORA,
     ITEM_MM_HAMMER,
     ITEM_MM_BOOMERANG,
+    ITEM_MM_SLINGSHOT,
     ITEM_MM_RUTO_LETTER,
 };
 
-s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN] =
+s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN] =
 {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
+    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -423,6 +438,9 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
             break;
         case ITEM_MM_BOOMERANG:
             foreignIcon = ITEM_OOT_BOOMERANG;
+            break;
+        case ITEM_MM_SLINGSHOT:
+            foreignIcon = ITEM_OOT_SLINGSHOT;
             break;
         case ITEM_MM_RUTO_LETTER:
             foreignIcon = ITEM_OOT_RUTO_LETTER;
@@ -479,10 +497,10 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 7) * 2];
+static Vtx gVertexBufs[(4 * 8) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[7] = {
+static Vtx* gVertex[8] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
@@ -490,6 +508,7 @@ static Vtx* gVertex[7] = {
     &gVertexBufs[(4 * 4) * 2],
     &gVertexBufs[(4 * 5) * 2],
     &gVertexBufs[(4 * 6) * 2],
+    &gVertexBufs[(4 * 7) * 2],
 };
 
 static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
@@ -610,6 +629,11 @@ void KaleidoScope_CustomDrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* g
         maxAmmo = gMaxBombchuMm;
         canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item];
         break;
+    case ITEM_MM_SLINGSHOT:
+        ammo = gMmExtraAmmo.slingshotSeeds;
+        maxAmmo = kMaxSeeds[gMmSave.info.inventory.upgrades.bulletBag];
+        canEquip = gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][item - ITEM_MM_CUSTOM_MIN];
+        break;
     default:
         return;
     }
@@ -652,6 +676,7 @@ void KaleidoScope_DrawAmmoCountWrapper(PauseContext* pauseCtx, GraphicsContext* 
     switch (item)
     {
     case ITEM_MM_BOMBCHU:
+    case ITEM_MM_SLINGSHOT:
         KaleidoScope_CustomDrawAmmoCount(pauseCtx, gfxCtx, item, ammoIndex);
         break;
     case ITEM_MM_BOOMERANG:

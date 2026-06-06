@@ -13,8 +13,9 @@
 
 #define PLAYER_CUSTOM_IA_HAMMER      0x55
 #define PLAYER_CUSTOM_IA_BOOMERANG   0x56
+#define PLAYER_CUSTOM_IA_SLINGSHOT   0x57
 
-#define PLAYER_CUSTOM_IA_MAX         0x57
+#define PLAYER_CUSTOM_IA_MAX         0x58
 
 #define PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER 0x1f /* Replaces Hylian Loach */
 
