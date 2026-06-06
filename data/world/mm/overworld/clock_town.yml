@@ -168,7 +168,7 @@
     "Stock Pot Inn": "(has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)) && rusty_key(RUSTY_KEY_STOCK_POT_INN)"
     "Clock Town East SPI Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE)"
     "Milk Bar": "(between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))) && rusty_key(RUSTY_KEY_MILK_BAR)"
-    "Astral Observatory": "event(BOMBER_CODE) || event(GUESS_BOMBER) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
+    "Astral Observatory Passage": "event(BOMBER_CODE) || event(GUESS_BOMBER) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
     "Clock Town East Postbox": "true"
   events:
     BOMBERS_EAST1: "event(HIDE_SEEK1)"
@@ -550,32 +550,41 @@
     "Deku Playground Reward Any Day": "has(MASK_DEKU) && can_use_wallet(1) && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
     "Deku Playground Reward All Days": "has(MASK_DEKU) && can_use_wallet(1) && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && event(DEKU_REWARD_3)"
 
-"Astral Observatory":
+"Astral Observatory Passage":
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
     "Clock Town East Near Hideout": "true"
-    "Astral Observatory Near Balcony": "true"
-    "Astral Observatory Telescope": "soul_astronomer"
+    "Astral Observatory Near Baloon": "true"
   events:
     MAGIC: "true"
     RUPEES: "true"
-    SCARECROW: "can_play_scarecrow"
   locations:
     "Astral Observatory Passage Chest": "(has_explosives || trick_keg_explosives) && (can_swim || is_tall)"
     "Astral Observatory Passage Pot 1": "true"
     "Astral Observatory Passage Pot 2": "true"
     "Astral Observatory Passage Pot 3": "true"
     "Astral Observatory Passage Pot 4": "true"
+
+"Astral Observatory Near Baloon":
+  region: BUFFER_DELAYED
+  exits:
+    "Astral Observatory Passage": "true"
+    "Astral Observatory": "true"
+
+"Astral Observatory":
+  region: ENTRANCE
+  exits:
+    "GLOBAL": "true"
+    "Astral Observatory Near Baloon": "true"
+    "Astral Observatory Balcony": "rusty_key(RUSTY_KEY_OBSERVATORY)"
+    "Astral Observatory Telescope": "soul_astronomer"
+  events:
+    SCARECROW: "can_play_scarecrow"
+  locations:
     "Astral Observatory Pot 1": "true"
     "Astral Observatory Pot 2": "true"
     "Astral Observatory Pot 3": "true"
-
-"Astral Observatory Near Balcony":
-  region: BUFFER
-  exits:
-    "Astral Observatory": "true"
-    "Astral Observatory Balcony": "rusty_key(RUSTY_KEY_OBSERVATORY)"
 
 "Astral Observatory Telescope":
   region: ENTRANCE
