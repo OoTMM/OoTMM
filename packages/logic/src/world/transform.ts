@@ -1224,8 +1224,6 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SLINGSHOT, Items.SHARED_SLINGSHOT);
       this.replaceItem(Items.OOT_DEKU_SEEDS_5, Items.SHARED_DEKU_SEEDS_5);
       this.replaceItem(Items.OOT_DEKU_SEEDS_30, Items.SHARED_DEKU_SEEDS_30);
-      this.replaceItem(Items.MM_DEKU_SEEDS_5, Items.SHARED_DEKU_SEEDS_5);
-      this.replaceItem(Items.MM_DEKU_SEEDS_30, Items.SHARED_DEKU_SEEDS_30);
     } else if (settings.slingshotMm) {
       this.addItem(Items.MM_SLINGSHOT, 3);
       this.addItem(Items.MM_DEKU_SEEDS_5, 0);

@@ -77,7 +77,7 @@
 "can_use_sticks": "age_sticks && has_sticks"
 "has_bomb_bag": "has(BOMB_BAG) || has(SHARED_BOMB_BAG)"
 "has_bombs": "has_bomb_bag && (event(BOMBS) || event(BOMBS_OR_BOMBCHU) || (setting(sharedBombBags) && (event(MM_BOMBS) || event(MM_BOMBS_OR_BOMBCHU))) || renewable(BOMBS_5) || renewable(BOMBS_10) || renewable(BOMBS_20) || renewable(BOMBS_30) || renewable(SHARED_BOMBS_5) || renewable(SHARED_BOMBS_10) || renewable(SHARED_BOMBS_20) || renewable(SHARED_BOMBS_30))"
-"can_use_slingshot": "has(SLINGSHOT) && age_slingshot && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
+"can_use_slingshot": "(has(SLINGSHOT) || has(SHARED_SLINGSHOT)) && age_slingshot && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
 "can_use_bow": "age_bow && has_arrows"
