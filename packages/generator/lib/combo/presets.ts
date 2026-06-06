@@ -192,7 +192,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   plando: {
     songEvents: {
       oot: {
-        SONG_EVENT_WINDMILL: 'STORMS'
+        SONG_EVENT_WINDMILL: 'STORMS',
         SONG_EVENT_ZORA_RIVER: 'ZELDAS_LULLABY',
         SONG_EVENT_GORON_CITY: 'GORON_LULLABY',
         SONG_EVENT_GREAT_FAIRY_SPELL_WIND: 'NEW_WAVE',
