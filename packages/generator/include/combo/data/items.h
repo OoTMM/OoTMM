@@ -480,10 +480,10 @@
 #define ITEM_MM_SLINGSHOT                   0xb7
 #define ITEM_MM_RUTO_LETTER                 0xb8
 #define ITEM_MM_CUSTOM_USABLE_MAX           0xb9
-#define ITEM_MM_SEEDS_5                     0xba
-#define ITEM_MM_SEEDS_30                    0xbb
-#define ITEM_MM_BULLET_BAG2                 0xbc
-#define ITEM_MM_BULLET_BAG3                 0xbd
+#define ITEM_MM_SEEDS_5                     0xb9
+#define ITEM_MM_SEEDS_30                    0xba
+#define ITEM_MM_BULLET_BAG2                 0xbb
+#define ITEM_MM_BULLET_BAG3                 0xbc
 #define ITEM_MM_CUSTOM_MAX                  0xc0
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
