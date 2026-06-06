@@ -2596,3 +2596,10 @@ s32 Player_ItemExchangeAnimate(PlayState* play, SkelAnime* skelAnime)
 }
 
 PATCH_CALL(0x80853a9c, Player_ItemExchangeAnimate)
+
+void Player_ExitTelescopeER(void)
+{
+    gPlay->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance;
+    gPlay->transitionTrigger = TRANS_TRIGGER_START;
+    gIsEntranceOverride = 1;
+}

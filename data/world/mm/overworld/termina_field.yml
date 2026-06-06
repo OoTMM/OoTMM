@@ -4,7 +4,7 @@
   exits:
     "GLOBAL": "true"
     "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
-    "Astral Observatory": "rusty_key(RUSTY_KEY_OBSERVATORY)"
+    "Astral Observatory Near Balcony": "rusty_key(RUSTY_KEY_OBSERVATORY)"
   events:
     FAIRY: "can_get_gossip_fairy"
   locations:

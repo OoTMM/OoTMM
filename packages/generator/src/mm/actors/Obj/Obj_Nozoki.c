@@ -35,3 +35,12 @@ static int ObjNozoki_CanOpenDoorForKafeiWrapper(Actor* actor, PlayState* play)
 }
 
 PATCH_CALL(0x80ba2804, ObjNozoki_CanOpenDoorForKafeiWrapper);
+
+void ObjNozoki_TelescopeER(Actor* this, PlayState* play)
+{
+    play->nextEntrance = ENTR_MM_CURIOSITY_SHOP_TELESCOPE;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
+    play->transitionTrigger = TRANS_TRIGGER_START;
+    *(void**)((char*)this + 0x160) = Actor_Noop;
+    gIsEntranceOverride = 1;
+}
