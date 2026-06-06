@@ -1,6 +1,7 @@
 import type { PartialDeep } from 'type-fest';
 import type { Settings, SettingsBase } from './type';
 import type { SettingsPatch } from './patch';
+import type { SongEventSongs } from '../song-events';
 
 import { cloneDeep, isEqual } from 'lodash-es';
 import { SETTINGS } from './data';
@@ -8,7 +9,7 @@ import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
 import { patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
-import { SongEventSongs, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, type PlandoSongEvent } from '../song-events';
+import { SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, type PlandoSongEvent, SONG_EVENT_SONG_IDS } from '../song-events';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   if (s.type === 'set') {
@@ -70,11 +71,10 @@ function validateSettingsStep(settings: Settings): Settings {
     if (s.games === 'mm') s.goal = 'majora';
   }
 
-  /* Validate plando song events */
   s.plando.songEvents = {
-    oot: sortCopySongEvents(s.plando.songEvents?.oot, SONG_EVENT_LOCATIONS_OOT),
-    mm: sortCopySongEvents(s.plando.songEvents?.mm, SONG_EVENT_LOCATIONS_MM),
-  } as Settings['plando']['songEvents'];
+    oot: sortCopySongEvents(s.plando.songEvents.oot, SONG_EVENT_LOCATIONS_OOT),
+    mm: sortCopySongEvents(s.plando.songEvents.mm, SONG_EVENT_LOCATIONS_MM),
+  };
 
   /* Specific validation */
   for (const data of SETTINGS) {
@@ -182,8 +182,8 @@ function sortCopyObject<T extends {[k: string]: any}>(obj: T): T {
 }
 
 function sortCopySongEvents<T extends readonly string[]>(
-    obj: Partial<Record<T[number], Partial<PlandoSongEvent>>> | undefined,
-    validEvents: T,
+  obj: Partial<Record<T[number], Partial<PlandoSongEvent>>> | undefined,
+  validEvents: T,
 ): Partial<Record<T[number], PlandoSongEvent>> {
   const result: Partial<Record<T[number], PlandoSongEvent>> = {};
 
@@ -207,25 +207,17 @@ function sortCopySongEvents<T extends readonly string[]>(
 
     const { song, group } = data;
 
+    if (typeof song !== 'string') continue;
+
     if (song === 'random') {
       const resultData: PlandoSongEvent = { song };
-
-    if (typeof group === 'string' && group.length > 0) {
-      resultData.group = group;
-    }
-
+      if (typeof group === 'string' && group.length > 0) {
+        resultData.group = group;
+      }
       result[key] = resultData;
       continue;
     }
-
-    if (
-        typeof song !== 'number' ||
-        !Number.isInteger(song) ||
-        song < SongEventSongs.ZELDAS_LULLABY ||
-        song > SongEventSongs.OATH
-    ) {
-      continue;
-    }
+    if (!SONG_EVENT_SONG_IDS.hasOwnProperty(song)) continue;
 
     const resultData: PlandoSongEvent = { song };
 
@@ -313,10 +305,7 @@ function applyKeyValue<K extends string, V>(data: Record<K, V>, patch: undefined
   return result;
 }
 
-function applyPartialKeyValue<K extends string, V>(
-    data: Partial<Record<K, V>>,
-    patch: undefined | null | Partial<Record<K, V | null>>,
-): Partial<Record<K, V>> {
+function applyPartialKeyValue<K extends string, V>(data: Partial<Record<K, V>>, patch: undefined | null | Partial<Record<K, V | null>>): Partial<Record<K, V>> {
   if (patch === undefined) {
     return data;
   }
@@ -369,15 +358,8 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
     s.plando.entrances = applyKeyValue(s.plando.entrances, patch.plando.entrances);
 
     if (patch.plando.songEvents !== undefined) {
-      s.plando.songEvents.oot = applyPartialKeyValue(
-          s.plando.songEvents.oot,
-          patch.plando.songEvents.oot,
-      ) as Settings['plando']['songEvents']['oot'];
-
-      s.plando.songEvents.mm = applyPartialKeyValue(
-          s.plando.songEvents.mm,
-          patch.plando.songEvents.mm,
-      ) as Settings['plando']['songEvents']['mm'];
+      s.plando.songEvents.oot = applyPartialKeyValue(s.plando.songEvents.oot, patch.plando.songEvents.oot);
+      s.plando.songEvents.mm = applyPartialKeyValue(s.plando.songEvents.mm, patch.plando.songEvents.mm);
     }
   }
 

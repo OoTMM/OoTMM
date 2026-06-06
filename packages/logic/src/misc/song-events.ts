@@ -1,13 +1,12 @@
-import type { Settings } from '@ootmm/core';
+import type { Settings, PlandoSongEvents, SongEventSongs } from '@ootmm/core';
 import type { World } from '../world';
 
 import {
   Random,
   sample,
-  SongEventSongs,
   SONG_EVENT_INDEX_OOT,
   SONG_EVENT_INDEX_MM,
-  type PlandoSongEvents,
+  SONG_EVENT_SONG_IDS,
 } from '@ootmm/core';
 
 type LogicPassSongEventsState = {
@@ -18,7 +17,7 @@ type LogicPassSongEventsState = {
 
 type Game = 'oot' | 'mm';
 
-type SongPools = Record<Game, number[]>;
+type SongPools = Record<Game, SongEventSongs[]>;
 
 type RandomSongEventEntry = {
   game: Game,
@@ -35,105 +34,105 @@ class LogicPassSongEvents {
   ) {
   }
 
-  private songCheckIdsOot() {
-    const songCheckIds = [
-      SongEventSongs.ZELDAS_LULLABY,
-      SongEventSongs.EPONAS,
-      SongEventSongs.SARIAS,
-      SongEventSongs.SUNS,
-      SongEventSongs.TIME,
-      SongEventSongs.STORMS,
-      SongEventSongs.MINUET,
-      SongEventSongs.BOLERO,
-      SongEventSongs.SERENADE,
-      SongEventSongs.REQUIEM,
-      SongEventSongs.NOCTURNE,
-      SongEventSongs.PRELUDE,
+  private songCheckIdsOot(): SongEventSongs[] {
+    const songCheckIds: SongEventSongs[] = [
+      'ZELDAS_LULLABY',
+      'EPONAS',
+      'SARIAS',
+      'SUNS',
+      'TIME',
+      'STORMS',
+      'MINUET',
+      'BOLERO',
+      'SERENADE',
+      'REQUIEM',
+      'NOCTURNE',
+      'PRELUDE',
     ];
     if (this.state.settings.songHealingOot) {
-      songCheckIds.push(SongEventSongs.HEALING);
+      songCheckIds.push('HEALING');
     }
     if (this.state.settings.songSoaringOot) {
-      songCheckIds.push(SongEventSongs.SOARING);
+      songCheckIds.push('SOARING');
     }
     if (this.state.settings.songAwakeningOot) {
-      songCheckIds.push(SongEventSongs.SONATA);
+      songCheckIds.push('SONATA');
     }
     if (this.state.settings.songGoronOot) {
-      songCheckIds.push(SongEventSongs.GORON_LULLABY);
+      songCheckIds.push('GORON_LULLABY');
     }
     if (this.state.settings.songGoronOot && this.state.settings.progressiveGoronLullabyOot === 'progressive') {
-      songCheckIds.push(SongEventSongs.GORON_LULLABY_INTRO);
+      songCheckIds.push('GORON_LULLABY_INTRO');
     }
     if (this.state.settings.songZoraOot) {
-      songCheckIds.push(SongEventSongs.NEW_WAVE);
+      songCheckIds.push('NEW_WAVE');
     }
     if (this.state.settings.elegyOot) {
-      songCheckIds.push(SongEventSongs.ELEGY);
+      songCheckIds.push('ELEGY');
     }
     if (this.state.settings.songOrderOot) {
-      songCheckIds.push(SongEventSongs.OATH);
+      songCheckIds.push('OATH');
     }
     return songCheckIds;
   }
 
-  private songCheckIdsMm() {
-    const songCheckIds = [
-      SongEventSongs.TIME,
-      SongEventSongs.HEALING,
-      SongEventSongs.EPONAS,
-      SongEventSongs.SOARING,
-      SongEventSongs.STORMS,
-      SongEventSongs.SONATA,
-      SongEventSongs.GORON_LULLABY,
-      SongEventSongs.NEW_WAVE,
+  private songCheckIdsMm(): SongEventSongs[] {
+    const songCheckIds: SongEventSongs[] = [
+      'TIME',
+      'HEALING',
+      'EPONAS',
+      'SOARING',
+      'STORMS',
+      'SONATA',
+      'GORON_LULLABY',
+      'NEW_WAVE',
       // SongEventSongs.ELEGY,
-      SongEventSongs.OATH,
+      'OATH',
     ];
     if (this.state.settings.progressiveGoronLullabyMm === 'progressive') {
-      songCheckIds.push(SongEventSongs.GORON_LULLABY_INTRO);
+      songCheckIds.push('GORON_LULLABY_INTRO');
     }
     if (this.state.settings.songZeldaLullabyMm) {
-      songCheckIds.push(SongEventSongs.ZELDAS_LULLABY);
+      songCheckIds.push('ZELDAS_LULLABY');
     }
     if (this.state.settings.songSariasMm) {
-      songCheckIds.push(SongEventSongs.SARIAS);
+      songCheckIds.push('SARIAS');
     }
     if (this.state.settings.songSunMm) {
-      songCheckIds.push(SongEventSongs.SUNS);
+      songCheckIds.push('SUNS');
     }
     if (this.state.settings.songMinuetMm) {
-      songCheckIds.push(SongEventSongs.MINUET);
+      songCheckIds.push('MINUET');
     }
     if (this.state.settings.songBoleroMm) {
-      songCheckIds.push(SongEventSongs.BOLERO);
+      songCheckIds.push('BOLERO');
     }
     if (this.state.settings.songSerenadeMm) {
-      songCheckIds.push(SongEventSongs.SERENADE);
+      songCheckIds.push('SERENADE');
     }
     if (this.state.settings.songRequiemMm) {
-      songCheckIds.push(SongEventSongs.REQUIEM);
+      songCheckIds.push('REQUIEM');
     }
     if (this.state.settings.songNocturneMm) {
-      songCheckIds.push(SongEventSongs.NOCTURNE);
+      songCheckIds.push('NOCTURNE');
     }
     if (this.state.settings.songPreludeMm) {
-      songCheckIds.push(SongEventSongs.PRELUDE);
+      songCheckIds.push('PRELUDE');
     }
     return songCheckIds;
   }
 
-  private shuffleSongEventsOot(world: World, songCheckIds: number[]) {
+  private shuffleSongEventsOot(world: World, songCheckIds: SongEventSongs[]) {
     for (let i = 0; i < world.songEventsOot.length; ++i) {
       const v = sample(this.state.random, songCheckIds);
-      world.songEventsOot[i] = v;
+      world.songEventsOot[i] = SONG_EVENT_SONG_IDS[v];
     }
   }
 
-  private shuffleSongEventsMm(world: World, songCheckIds: number[]) {
+  private shuffleSongEventsMm(world: World, songCheckIds: SongEventSongs[]) {
     for (let i = 0; i < world.songEventsMm.length; ++i) {
       const v = sample(this.state.random, songCheckIds);
-      world.songEventsMm[i] = v;
+      world.songEventsMm[i] = SONG_EVENT_SONG_IDS[v];
     }
   }
 
@@ -142,7 +141,7 @@ class LogicPassSongEvents {
       worldEvents: number[],
       plando: PlandoSongEventsForGame,
       eventIndex: Record<string, number>,
-      allowedSongs: Set<number>,
+      allowedSongs: Set<SongEventSongs>,
       game: Game,
   ) {
     for (const [event, data] of Object.entries(plando)) {
@@ -173,7 +172,7 @@ class LogicPassSongEvents {
         throw new Error(`Invalid plando song for ${event}: ${data.song}`);
       }
 
-      worldEvents[index] = data.song;
+      worldEvents[index] = SONG_EVENT_SONG_IDS[data.song];
     }
   }
 
@@ -214,7 +213,7 @@ class LogicPassSongEvents {
       const resolvedSong = sample(this.state.random, pool);
 
       for (const { worldEvents, index } of entries) {
-        worldEvents[index] = resolvedSong;
+        worldEvents[index] = SONG_EVENT_SONG_IDS[resolvedSong];
       }
     }
   }
