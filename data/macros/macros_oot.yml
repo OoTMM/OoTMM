@@ -71,13 +71,19 @@
 "bombchu_source": "event(BOMBCHU) || bombchu_drops || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20) || (setting(sharedBombchu) && (event(MM_BOMBCHU) || renewable(SHARED_BOMBCHU) || renewable(SHARED_BOMBCHU_5) || renewable(SHARED_BOMBCHU_10) || renewable(SHARED_BOMBCHU_20)))"
 "has_bombchu": "bombchu_source && bombchu_license"
 
+# Items
+
+## Slingshot
+"has_slingshot": "has(SLINGSHOT) || has(SHARED_SLINGSHOT)"
+"has_slingshot_ammo": "event(SEEDS) || (setting(sharedSlingshot) && event(MM_SEEDS)) || renewable(DEKU_SEEDS_5) || renewable(DEKU_SEEDS_30) || renewable(SHARED_DEKU_SEEDS_5) || renewable(SHARED_DEKU_SEEDS_30)"
+"can_use_slingshot": "age_slingshot && has_slingshot && has_slingshot_ammo"
+
 #Standard Single Item Use Macros
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(STICKS_5) || renewable(STICKS_10) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(MM_NUTS))"
 "can_use_sticks": "age_sticks && has_sticks"
 "has_bomb_bag": "has(BOMB_BAG) || has(SHARED_BOMB_BAG)"
 "has_bombs": "has_bomb_bag && (event(BOMBS) || event(BOMBS_OR_BOMBCHU) || (setting(sharedBombBags) && (event(MM_BOMBS) || event(MM_BOMBS_OR_BOMBCHU))) || renewable(BOMBS_5) || renewable(BOMBS_10) || renewable(BOMBS_20) || renewable(BOMBS_30) || renewable(SHARED_BOMBS_5) || renewable(SHARED_BOMBS_10) || renewable(SHARED_BOMBS_20) || renewable(SHARED_BOMBS_30))"
-"can_use_slingshot": "(has(SLINGSHOT) || has(SHARED_SLINGSHOT)) && age_slingshot && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
 "can_use_bow": "age_bow && has_arrows"

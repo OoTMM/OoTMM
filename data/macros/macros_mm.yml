@@ -177,7 +177,7 @@
 
 "can_break_boulders": "has_explosives || has_mask_goron || can_hammer"
 "can_break_red_boulders": "has_mask_goron || can_hammer || (can_use_keg && trick(MM_KEG_RED_BOULDER))"
-"break_icicle": "has_nuts || has_arrows || has_seeds || can_use_din || can_fight || has(MASK_DEKU) || has_explosives"
+"break_icicle": "has_nuts || has_arrows || can_use_slingshot || can_use_din || can_fight || has(MASK_DEKU) || has_explosives"
 
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
 "can_break_snowballs": "can_break_boulders || can_use_fire_short_range"
@@ -203,7 +203,7 @@
 "scarecrow_hookshot": "scarecrow_set && has_ocarina && can_hookshot"
 "goron_fast_roll": "has_mask_goron && has_magic"
 "can_use_deku_bubble": "has(MASK_DEKU) && has_magic"
-"has_weapon_range": "has_arrows || can_hookshot_short || has_mask_zora || can_use_deku_bubble || has_boomerang || has_seeds"
+"has_weapon_range": "has_arrows || can_hookshot_short || has_mask_zora || can_use_deku_bubble || has_boomerang || can_use_slingshot"
 "has_paper": "has(DEED_LAND) || has(DEED_SWAMP) || has(DEED_MOUNTAIN) || has(DEED_OCEAN) || has(LETTER_TO_KAFEI) || has(LETTER_TO_MAMA) || (setting(sharedBottles) && has_ruto_letter)"
 "can_fight": "has_weapon || has_mask_zora || has_mask_goron"
 "has_shield": "renewable(SHIELD_HERO) || renewable(SHIELD_DEKU) || renewable(SHARED_SHIELD_DEKU) || renewable(SHARED_SHIELD_HYLIAN) || has(SHIELD, 1) || cond(setting(dekuShieldMm), has(SHARED_SHIELD, 1), has(SHARED_SHIELD, 2)) || has_mirror_shield"
@@ -223,9 +223,7 @@
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(OOT_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUT) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(OOT_NUTS))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
-"has_slingshot": "(has(SLINGSHOT) || has(SHARED_SLINGSHOT)) && has_seeds"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(ARROWS_40) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40))"
-"has_seeds": "renewable(DEKU_SEEDS_5) || renewable(DEKU_SEEDS_30) || renewable(SHARED_DEKU_SEEDS_5) || renewable(SHARED_DEKU_SEEDS_30)"
 "has_bombs": "has_bomb_bag && (event(BOMBS) || event(BOMBS_OR_BOMBCHU) || (setting(sharedBombBags) && (event(OOT_BOMBS) || event(OOT_BOMBS_OR_BOMBCHU))) || renewable(BOMBS_5) || renewable(BOMBS_10) || renewable(BOMBS_20) || renewable(BOMBS_30) || renewable(SHARED_BOMBS_5) || renewable(SHARED_BOMBS_10) || renewable(SHARED_BOMBS_20) || renewable(SHARED_BOMBS_30))"
 "has_magic": "(has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)) && (event(MAGIC) || has_magic_jar || has_green_potion || has_blue_potion || has_chateau)"
 "has_double_magic": "(has(MAGIC_UPGRADE, 2) || has(SHARED_MAGIC_UPGRADE, 2)) && (event(MAGIC) || has_green_potion || has_blue_potion || has_chateau)"
@@ -244,6 +242,12 @@
 "can_use_sticks": "has_sticks" # Compat
 
 "rusty_key(x)": "cond(setting(rustyKeysMm), has(x), true)"
+
+# Items
+## Slingshot
+"has_slingshot": "has(SLINGSHOT) || has(SHARED_SLINGSHOT)"
+"has_slingshot_ammo": "event(SEEDS) || (setting(sharedSlingshot) && event(OOT_SEEDS)) || renewable(DEKU_SEEDS_5) || renewable(DEKU_SEEDS_30) || renewable(SHARED_DEKU_SEEDS_5) || renewable(SHARED_DEKU_SEEDS_30)"
+"can_use_slingshot": "has_slingshot && has_slingshot_ammo"
 
 #Terrain
 
@@ -268,7 +272,7 @@
 # Hit targets
 "hit_target_range_melee": "has_sticks || has_nuts || has_weapon || has_bombs || hit_target_range_close"
 "hit_target_range_close": "can_hookshot_short || hit_target_range_far"
-"hit_target_range_far": "can_use_deku_bubble || has_arrows || has_seeds || has_mask_zora || can_hookshot || has_boomerang"
+"hit_target_range_far": "can_use_deku_bubble || has_arrows || can_use_slingshot || has_mask_zora || can_hookshot || has_boomerang"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"
@@ -313,8 +317,8 @@
 "can_kill_baba_both_sticks": "soul_deku_baba && (has_sword || has(MASK_DEKU))"
 "can_kill_freezards_distance": "soul_freezard && (can_use_fire_arrows || can_hookshot || can_use_light_arrows)"
 "can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
-"can_kill_big_poe": "has_arrows || has_mask_zora || can_use_deku_bubble || has_seeds || has_boomerang"
-"can_kill_octoroks": "soul_octorok && (has_arrows || can_hookshot || can_use_deku_bubble || has_seeds || has_mask_zora || has_boomerang)"
+"can_kill_big_poe": "has_arrows || has_mask_zora || can_use_deku_bubble || can_use_slingshot || has_boomerang"
+"can_kill_octoroks": "soul_octorok && (has_arrows || can_hookshot || can_use_deku_bubble || can_use_slingshot || has_mask_zora || has_boomerang)"
 "can_kill_big_octos": "soul_octorok && (has_arrows || can_hookshot || has_mask_zora || has_boomerang)"
 #"can_kill_big_octos_close": "soul_octorok && (has_arrows || can_hookshot_short || has_mask_zora || can_use_din)"
 "can_kill_wallmasters": "soul_wallmaster && (has_arrows || can_fight || can_use_din || has_explosives || deku_stick_fighting)" # unsure if Deku Spins damage
@@ -322,61 +326,61 @@
 #"can_kill_walllmaster_popsicles": "soul_wallmaster && can_kill_wallmasters && can_use_fire_short_range" #Unused actor variant. Name is from MMR Actorizer community.
 "can_kill_dodongos": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows || deku_stick_fighting)"
 "can_kill_keese_distance": "soul_keese && (has_arrows)"
-"can_kill_keese_close": "soul_keese && (has_weapon || has_arrows || can_hookshot_short || can_use_deku_bubble || has_seeds || can_use_din)"
+"can_kill_keese_close": "soul_keese && (has_weapon || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_slingshot || can_use_din)"
 "can_kill_tektites": "soul_tektite && (has_arrows || can_fight || has_explosives || deku_stick_fighting)" # unsure if Deku Spins or hookshot damage
 "can_kill_peahats": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU)) && is_day"
 "can_kill_lizalfos_dinolfos": "soul_lizalfos_dinolfos && (has_weapon || has_mask_goron || has_arrows)"
-"can_kill_skulltulas": "soul_skulltula && (can_fight || has_arrows || can_hookshot_short || can_use_din || has_explosives || can_use_deku_bubble || has_seeds || deku_stick_fighting)"
+"can_kill_skulltulas": "soul_skulltula && (can_fight || has_arrows || can_hookshot_short || can_use_din || has_explosives || can_use_deku_bubble || can_use_slingshot || deku_stick_fighting)"
 "can_kill_skullwalltulas": "soul_skullwalltula && (has_nuts || can_hammer || has_weapon_range || has_explosives)"
 "can_kill_armos": "soul_armos && (can_fight || has_arrows || can_use_din || has_explosives)" # unsure if Deku Bubble works
 #"can_kill_baba_withered": "soul_deku_baba && (can_fight || can_hookshot_short || has(MASK_DEKU) || has_explosives || has_arrows)" # commented out until we know how Nax is shuffling the drops for these Deku Babas
 #"can_kill_baba_whole": "soul_deku_baba && (can_fight || can_hookshot_short || has(MASK_DEKU) || has_explosives || has_arrows)" # commented out until we know how Nax is shuffling the drops for these Deku Babas
 #"can_kill_baba_big": "soul_deku_baba" #Unused actor in MM.
-"can_kill_scrubs_woodfall": "soul_deku_scrub && (has_arrows || can_hookshot || can_use_deku_bubble || has_seeds || (has(MASK_DEKU) && has_nuts))" #Deku flying can drop nuts to kill them; relevant for action shuffle when you can’t spin.
-"can_kill_scrubs_anywhere": "soul_deku_scrub && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot || can_use_din || can_use_deku_bubble || has_seeds || has_nuts || deku_stick_fighting)"
-"can_kill_bubbles": "soul_bubble && (can_fight || has_arrows || can_use_deku_bubble || has_seeds || has_explosives || deku_stick_fighting)"
+"can_kill_scrubs_woodfall": "soul_deku_scrub && (has_arrows || can_hookshot || can_use_deku_bubble || can_use_slingshot || (has(MASK_DEKU) && has_nuts))" #Deku flying can drop nuts to kill them; relevant for action shuffle when you can’t spin.
+"can_kill_scrubs_anywhere": "soul_deku_scrub && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot || can_use_din || can_use_deku_bubble || can_use_slingshot || has_nuts || deku_stick_fighting)"
+"can_kill_bubbles": "soul_bubble && (can_fight || has_arrows || can_use_deku_bubble || can_use_slingshot || has_explosives || deku_stick_fighting)"
 "can_kill_beamos": "soul_beamos && (has_explosives)"
 "can_kill_redead_gibdo": "soul_redead_gibdo && (can_fight || has_fire || has_light_arrow || has_explosives)"
 #"can_kill_zombies_popsicles": "soul_redead_gibdo && can_kill_zombies && can_use_fire_short_range" #Unused actor variant. Name is from MMR Actorizer community.
-"can_kill_poes": "soul_poe && (can_fight || has_arrows || can_hookshot_short || has(MASK_DEKU) || can_use_deku_bubble || has_seeds || can_use_din || has_explosives || deku_stick_fighting)"
-"can_kill_poe_sisters": "soul_poe && (has_arrows || can_hookshot_short || can_use_deku_bubble || has_seeds)"
+"can_kill_poes": "soul_poe && (can_fight || has_arrows || can_hookshot_short || has(MASK_DEKU) || can_use_deku_bubble || can_use_slingshot || can_use_din || has_explosives || deku_stick_fighting)"
+"can_kill_poe_sisters": "soul_poe && (has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_slingshot)"
 "can_kill_shell_blades_underwater":  "soul_shell_blade && (has_mask_zora || (has_iron_boots && can_hookshot_short))"
-"can_kill_like_like": "soul_like_like && (can_fight || can_use_deku_bubble || has_seeds || has_arrows || can_use_din || has_explosives)"
+"can_kill_like_like": "soul_like_like && (can_fight || can_use_deku_bubble || can_use_slingshot || has_arrows || can_use_din || has_explosives)"
 #"can_kill_like_like_underwater": "soul_like_like && (has_mask_zora || (has_iron_boots && has_tunic_zora && has_mask_blast)"
 "can_kill_iron_knuckle": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives || has_light_arrow)"
-"can_kill_wolfos": "soul_wolfos && (can_fight || has_arrows || can_use_deku_bubble || has_seeds || has_explosives || deku_stick_fighting)"
-"can_kill_guays": "soul_guay && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || has_seeds || can_use_din || has_explosives || deku_stick_fighting)"
-"can_kill_guays_distance": "soul_guay && (has_arrows || can_hookshot || can_use_deku_bubble || has_seeds || has_mask_zora || has_boomerang)"
+"can_kill_wolfos": "soul_wolfos && (can_fight || has_arrows || can_use_deku_bubble || can_use_slingshot || has_explosives || deku_stick_fighting)"
+"can_kill_guays": "soul_guay && (has(MASK_DEKU) || can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_slingshot || can_use_din || has_explosives || deku_stick_fighting)"
+"can_kill_guays_distance": "soul_guay && (has_arrows || can_hookshot || can_use_deku_bubble || can_use_slingshot || has_mask_zora || has_boomerang)"
 "can_kill_flying_pots": "soul_flying_pot" #They break themselves.
 "can_kill_chuchu": "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_arrows || has_mask_zora || has(MASK_DEKU) || has_explosives || deku_stick_fighting || has_boomerang)"
 "can_kill_deep_python": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && (has_mask_zora || can_hookshot_short) && can_swim"
-"can_kill_stalchildren": "soul_stalchild && (can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || has_seeds || can_use_din || has_explosives || deku_stick_fighting)"
-"can_kill_leevers": "soul_leever && (can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || has_seeds || can_use_din || has_explosives)"
+"can_kill_stalchildren": "soul_stalchild && (can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_slingshot || can_use_din || has_explosives || deku_stick_fighting)"
+"can_kill_leevers": "soul_leever && (can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_slingshot || can_use_din || has_explosives)"
 #"can_kill_shaboms": #Unused actor.
 "can_kill_skullfish": "soul_skull_fish && (has_mask_zora || (has_iron_boots && can_hookshot))"
 "can_kill_wasp": "soul_wasp && (can_fight || has_arrows || can_hookshot || can_use_din || has(MASK_DEKU))" # currently not used anywhere but created for enemy drops
 "can_kill_dexihands": "soul_enemy(SOUL_ENEMY_DEXIHAND) && (has_mask_zora || has_explosives || has_boomerang)"
-"can_kill_dragonflies": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (has(MASK_DEKU) || can_fight || has_nuts || has_arrows || has_seeds || can_use_din || has_explosives)"
-"can_kill_dragonflies_distance": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (can_use_deku_bubble || has_seeds || has_arrows || has_mask_zora || has_boomerang)"
-"can_kill_eenos": "soul_eenos && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || has_seeds || has_explosives || deku_stick_fighting)"
+"can_kill_dragonflies": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (has(MASK_DEKU) || can_fight || has_nuts || has_arrows || can_use_slingshot || can_use_din || has_explosives)"
+"can_kill_dragonflies_distance": "soul_enemy(SOUL_ENEMY_DRAGONFLY) && (can_use_deku_bubble || can_use_slingshot || has_arrows || has_mask_zora || has_boomerang)"
+"can_kill_eenos": "soul_eenos && (can_fight || has_arrows || can_hookshot || can_use_deku_bubble || can_use_slingshot || has_explosives || deku_stick_fighting)"
 "can_kill_eyegore": "soul_enemy(SOUL_ENEMY_EYEGORE) && (can_fight || has_arrows || can_hookshot_short || can_use_din || has(MASK_DEKU) || has_explosives)"
 "can_kill_eyegore_distance": "soul_enemy(SOUL_ENEMY_EYEGORE) && can_use_light_arrows"
-"can_kill_hiploops": "soul_hiploop && (can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || has_seeds || has_explosives || deku_stick_fighting)"
+"can_kill_hiploops": "soul_hiploop && (can_fight || has_arrows || can_hookshot_short || can_use_deku_bubble || can_use_slingshot || has_explosives || deku_stick_fighting)"
 "can_kill_hiploops_masked": "soul_hiploop && (can_hookshot_short || can_hammer || has_mask_goron || has_explosives)"
 "can_kill_real_bombchu": "soul_real_bombchu"
-"can_kill_takkuri": "soul_takkuri && (has(MASK_DEKU) || can_fight || has_arrows || has_seeds || can_hookshot_short || has_explosives)"
-"can_kill_boes": "soul_enemy(SOUL_ENEMY_BOE) && (has(MASK_DEKU) || can_fight || has_arrows || has_seeds || can_hookshot_short || has_nuts || has_explosives)"
+"can_kill_takkuri": "soul_takkuri && (has(MASK_DEKU) || can_fight || has_arrows || can_use_slingshot || can_hookshot_short || has_explosives)"
+"can_kill_boes": "soul_enemy(SOUL_ENEMY_BOE) && (has(MASK_DEKU) || can_fight || has_arrows || can_use_slingshot || can_hookshot_short || has_nuts || has_explosives)"
 "can_kill_nejirons": "soul_nejiron && (can_fight || can_use_light_arrows || can_hookshot_short || has_explosives)"
-"can_kill_bio_babas": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_arrows || has_seeds || can_hookshot_short || has_mask_zora || has_boomerang)"
+"can_kill_bio_babas": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_arrows || can_use_slingshot || can_hookshot_short || has_mask_zora || has_boomerang)"
 "can_kill_garo": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || has_arrows || has_explosives)"
 "can_kill_garo_master": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || has_arrows || has_explosives)"
 "can_kill_wizzrobe_close": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows || can_use_din || deku_stick_fighting)"
 "can_kill_wizzobe_distance": "soul_enemy(SOUL_ENEMY_WIZZROBE) && has_arrows"
 "can_kill_gomess": "soul_enemy(SOUL_ENEMY_GOMESS) && can_use_light_arrows && can_fight"  # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
-"can_kill_gekko_wft": "soul_enemy(SOUL_ENEMY_GEKKO) && (has_arrows || has_seeds) && (has(MASK_DEKU) || has_mask_goron || can_hammer || has_explosives)"
+"can_kill_gekko_wft": "soul_enemy(SOUL_ENEMY_GEKKO) && (has_arrows || can_use_slingshot) && (has(MASK_DEKU) || has_mask_goron || can_hammer || has_explosives)"
 "can_kill_gekko_gbt": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
-"can_kill_bad_bats_single": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has(MASK_DEKU) || has_arrows || has_seeds || can_hookshot_short || has_explosives || can_use_din)"
-"can_kill_bad_bats_cluster": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || has_seeds || can_hookshot_short || can_use_din || has(MASK_DEKU))" #We may not need this, added it just in case.
+"can_kill_bad_bats_single": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has(MASK_DEKU) || has_arrows || can_use_slingshot || can_hookshot_short || has_explosives || can_use_din)"
+"can_kill_bad_bats_cluster": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_use_slingshot || can_hookshot_short || can_use_din || has(MASK_DEKU))" #We may not need this, added it just in case.
 "can_kill_snappers_flowers": "soul_enemy(SOUL_ENEMY_SNAPPER) && (has(MASK_DEKU) || has_explosives || has_mask_goron || can_hammer)"
 "can_kill_snappers_any": "soul_enemy(SOUL_ENEMY_SNAPPER) && (has_explosives || has_mask_goron || can_hammer)"
 "can_kill_warts": "soul_enemy(SOUL_ENEMY_WART) && has_weapon && (has_mask_zora || has_explosives || has_arrows || can_hookshot_short || can_use_din || has_nuts || has_boomerang)" #the () is for ways to clear the bubbles
@@ -390,4 +394,4 @@
 "can_kill_goht": "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range && (has_arrows || has_mask_goron || has(MASK_FIERCE_DEITY))"
 "can_kill_gyorg": "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
 "can_kill_twinmold": "soul_boss(SOUL_BOSS_TWINMOLD) && ((trick(MM_TWINMOLD_BOW) && has_arrows) || (trick(MM_TWINMOLD_FIRE_AND_ICE) && can_use_fire_arrows && can_use_ice_arrows) || (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY))))"
-"can_kill_igos": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && (can_use_fire_arrows || (trick(MM_IGOS_DINS) && can_use_din)) && (can_fight || can_use_deku_bubble || has_seeds)" #If action shuffle is ever a thing, this needs to be adjusted since Deku won't be able to spin to stun. We currently assume if they can deku bubble, they can spin to stun.
+"can_kill_igos": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && (can_use_fire_arrows || (trick(MM_IGOS_DINS) && can_use_din)) && (can_fight || can_use_deku_bubble || can_use_slingshot)" #If action shuffle is ever a thing, this needs to be adjusted since Deku won't be able to spin to stun. We currently assume if they can deku bubble, they can spin to stun.
