@@ -17,6 +17,8 @@ static void EnTest3_GivePendantOfMemories(Actor* this, PlayState* play)
     {
         MM_SET_EVENT_WEEK(MM_EV(50, 7));
         MM_SET_EVENT_WEEK(MM_EV(51, 3));
+        MM_SET_EVENT_WEEK(MM_EV(64, 5));
+        MM_SET_EVENT_WEEK(MM_EV(64, 6));
         gMmExtraFlags2.pendant = 1;
         return;
     }

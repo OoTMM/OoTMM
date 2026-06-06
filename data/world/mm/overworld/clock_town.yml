@@ -307,6 +307,16 @@
   locations:
     "Bomb Shop Bomb Bag 2": "shop_ex_price(0x00) && is_night3"
 
+"Curiosity Shop Telescope":
+  region: ENTRANCE
+  exits:
+    "Curiosity Shop Telescope Exit": "true"
+
+"Curiosity Shop Telescope Exit":
+  region: BUFFER_DELAYED
+  exits:
+    "Kafei Hideout": "true"
+
 "Kafei Hideout":
   region: ENTRANCE
   stay:
@@ -318,10 +328,11 @@
   exits:
     "GLOBAL": "true"
     "Laundry Pool": "rusty_key(RUSTY_KEY_KAFEI_HIDEOUT)"
+    "Curiosity Shop Telescope": "event(MEET_KAFEI) && between(DAY2_PM_04_00, NIGHT2_PM_10_00)"
   events:
-    MEET_KAFEI: "soul_npc(SOUL_NPC_KAFEI) && event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
+    MEET_KAFEI: "soul_npc(SOUL_NPC_KAFEI) && event(MAIL_LETTER) && between(DAY2_PM_04_00, NIGHT2_PM_10_00)"
   locations:
-    "Kafei Hideout Pendant of Memories": "soul_npc(SOUL_NPC_KAFEI) && event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
+    "Kafei Hideout Pendant of Memories": "event(MEET_KAFEI)"
     "Kafei Hideout Owner Reward 1": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Kafei Hideout Owner Reward 2": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
 
@@ -569,10 +580,15 @@
 "Astral Observatory Telescope":
   region: ENTRANCE
   exits:
-    "Astral Observatory": "true"
+    "Astral Observatory Telescope Exit": "true"
   events:
     SCRUB_TELESCOPE: "soul_business_scrub"
     TEAR_TELESCOPE: "true"
+
+"Astral Observatory Telescope Exit":
+  region: BUFFER_DELAYED
+  exits:
+    "Astral Observatory": "true"
 
 "Tingle Town":
   region: TINGLE
