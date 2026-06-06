@@ -10,8 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Adjusted Beginner preset to have Ageless Soaring enabled.
-- Adjusted the Blitz preset to re-add Ageless Soaring, add Ageless Great Fairy's Sword, shuffle the Master Sword with a Master Sword hint and add Shared Child Swords. Added MM Deku Shield to then share the Deku Shield. Enabled Song Event Shuffle for both games for song event plando to be added for more cross-game song use and now players that pick this preset will start swordless and shieldless (except for Deku Shield). Moved MM Song of Time to starting items and put a recovery heart on Initial Song of Healing.
+- Add Telescope ER.
 - Add Fairy Slingshot to Majora's Mask
 - Add Rusty Keys, locking a single overworld door each, in both games.
 - Add Great Fairy Sword to Ocarina of Time.
@@ -35,6 +34,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Adjusted Beginner preset to have Ageless Soaring enabled.
+- Adjusted the Blitz preset to re-add Ageless Soaring, add Ageless Great Fairy's Sword, shuffle the Master Sword with a Master Sword hint and add Shared Child Swords. Added MM Deku Shield to then share the Deku Shield. Enabled Song Event Shuffle for both games for song event plando to be added for more cross-game song use and now players that pick this preset will start swordless and shieldless (except for Deku Shield). Moved MM Song of Time to starting items and put a recovery heart on Initial Song of Healing.
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
 - "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
