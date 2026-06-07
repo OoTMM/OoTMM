@@ -34,8 +34,25 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Blitz presets adjusted to use Song Event Plando to change the following Song Event Locations:
+
+    - Death Mountain Fairy Fountains and Goron City Darunia's Room from Zelda's Lullaby to Goron Lullaby.
+    - Zora's Fountain Fairy Fountain from Zelda's Lullaby to New Wave Bossa Nova.
+    - Desert Colossus Fairy Fountain from Zelda's Lullaby to Elegy of Emptiness.
+    - Kakariko Graveyard Royal Tomb from Zelda's Lullaby to Random.
+    - Water Temple Water Level from Zelda's Lullaby to New Wave Bossa Nova.
+    - Ikana Canyon Composer Cavern from Song of Storms to Zelda's Lullaby.
+    - Everything else not mentioned here is vanilla.
+
 - Adjusted Beginner preset to have Ageless Soaring enabled.
-- Adjusted the Blitz preset to re-add Ageless Soaring, add Ageless Great Fairy's Sword, shuffle the Master Sword with a Master Sword hint and add Shared Child Swords. Added MM Deku Shield to then share the Deku Shield. Enabled Song Event Shuffle for both games for song event plando to be added for more cross-game song use and now players that pick this preset will start swordless and shieldless (except for Deku Shield). Moved MM Song of Time to starting items and put a recovery heart on Initial Song of Healing.
+- Adjusted the Blitz preset in the following ways: 
+    - Enable Ageless Soaring.
+    - Enable Ageless Great Fairy's Sword.
+    - Shuffle the Master Sword with a Master Sword hint. Master Sword does not lock age-access.
+    -  Add Shared Extra Child Swords, remove starting child sword.
+    - Added MM Deku Shield to then share the Deku Shield. Removed the starting Hylian/Hero Shield.
+    - Enabled Song Event Shuffle for both games to modify some Song Events via plando. 
+    - Moved MM Song of Time to starting items and put a recovery heart on Initial Song of Healing.
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
 - "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
