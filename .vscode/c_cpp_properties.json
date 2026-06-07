@@ -1,7 +1,7 @@
 {
     "env": {
         "myIncludePath": [
-            "${workspaceFolder}/third_party/ultralib/include/gcc",
+            "${workspaceFolder}/third_party/ultralib/include/compiler/modern_gcc",
             "${workspaceFolder}/third_party/ultralib/include",
             "${workspaceFolder}/packages/generator/build/include",
             "${workspaceFolder}/packages/generator/include",
