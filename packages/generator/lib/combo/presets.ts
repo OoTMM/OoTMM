@@ -418,8 +418,8 @@ const ALLSANITY_HELL: PartialDeep<Settings> = {
   soulsMiscOot: true,
   soulsMiscMm: true,
   shuffleSkulltulaFinalReward: true,
+  blastMaskCooldown: 'short',
 };
-
 
 const PRESET_ALLSANITY = makeSettings({
   ...ALLSANITY_HELL,
@@ -530,7 +530,6 @@ const PRESET_ALLSANITY = makeSettings({
   csmcMapCompass: true,
   csmcSkulltula: true,
   csmcCow: true,
-  blastMaskCooldown: 'short',
   autoInvert: 'firstCycle',
   keepItemsReset: true,
   fastBunnyHood: true,
@@ -718,6 +717,8 @@ const PRESET_HELL = makeSettings({
   strayFairyOtherShuffle: 'anywhere',
   ganonBossKey: 'custom',
   dungeonRewardShuffle: 'dungeonsLimited',
+  rustyKeysOot: true,
+  rustyKeysMm: true,
   scrubShuffleOot: true,
   scrubShuffleMm: true,
   cowShuffleOot: true,
@@ -792,7 +793,6 @@ const PRESET_HELL = makeSettings({
   csmc: 'agony',
   csmcHearts: false,
   csmcMapCompass: false,
-  blastMaskCooldown: 'verylong',
   clockSpeed: 'fast',
   restoreBrokenActors: true,
   alterLostWoodsExits: true,
@@ -846,7 +846,6 @@ const PRESET_HELL = makeSettings({
   ocarinaButtonsShuffleOot: true,
   ocarinaButtonsShuffleMm: true,
   clocks: true,
-  menuNotebook: true,
   trapIce: true,
   trapRupoor: true,
   trapKnockback: true,
@@ -889,6 +888,7 @@ const PRESET_HELL = makeSettings({
   erIndoorsMajor: true,
   erIndoorsExtra: true,
   erIndoorsGameLinks: true,
+  erIndoorsTelescopes: true,
   erWarps: 'full',
   erOneWays: 'full',
   erOneWaysMajor: true,
@@ -941,6 +941,13 @@ const PRESET_HELL = makeSettings({
     { type: 'foolish', amount: 'max', extra: 2 },
   ],
   tricks: allTricks,
+});
+
+const PRESET_CIRCLE9 = makeSettings({
+  ...PRESET_HELL,
+  menuNotebook: true,
+  rupeeScaling: false,
+  blastMaskCooldown: 'verylong',
 });
 
 const PRESET_BEGINNER = makeSettings({
@@ -1660,6 +1667,7 @@ export const PRESETS: Presets = {
   'Crosskeys': PRESET_CROSSKEYS,
   'Allsanity': PRESET_ALLSANITY,
   'Hell': PRESET_HELL,
+  'Circle 9': PRESET_CIRCLE9,
   'Only OoT': PRESET_ONLY_OOT,
   'Only MM': PRESET_ONLY_MM,
 };
