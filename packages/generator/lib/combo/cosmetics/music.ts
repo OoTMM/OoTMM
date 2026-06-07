@@ -7,6 +7,7 @@ import { toU32Buffer } from '../util';
 import { RomBuilder } from '../rom-builder';
 import { LogWriter } from '../util/log-writer';
 import { concatUint8Arrays } from 'uint8array-extras';
+import JSON5 from 'json5'
 
 type MusicType = 'bgm' | 'fanfare';
 
@@ -171,12 +172,34 @@ const MMRS_CATEGORIES: {[k: string]: MusicCategory[]} = {
   '16': [MusicCategory.BGM_TITLE_SCREEN, MusicCategory.BGM_CALM],
 };
 
+const SequencePlayState = {
+  None: 0,
+  FierceDeity: 1,
+  Goron: 2,
+  Zora: 4,
+  Deku: 8,
+  Human: 16,
+  All: 31,
+
+  Day: 32,
+  Night: 64,
+  Outdoors: 128,
+  Indoors: 256,
+  Cave: 512,
+  Epona: 1024,
+  Swim: 2048,
+  SpikeRolling: 4096,
+  Combat: 8192,
+  CriticalHealth: 16384,
+} as const
+
 type MusicFile = {
   type: 'bgm' | 'fanfare';
   seq: Uint8Array;
   bankIdOot: number | null;
   bankIdMm: number | null;
   bankCustom: { meta: Uint8Array, data: Uint8Array } | null;
+  formMask: number[] | null
   filename: string;
   name: string;
   games: Game[];
@@ -314,6 +337,12 @@ class MusicInjector {
     return bankId;
   }
 
+  private addFormMask(game: Game, slot: number, data: Uint8Array) {
+    const customFile = this.builder.fileByNameRequired(`custom/${game}_form_mask_table`);
+    const offset = slot * 0x30;
+    customFile.data.set(data, offset);
+  }
+
   private registerName(seqId: number, name: string) {
     /* Cut name to 48 characters */
     name = name.slice(0, 48);
@@ -443,7 +472,7 @@ class MusicInjector {
         pad.fill(0x00);
         seq = concatUint8Arrays([seq, pad]);
       }
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, categories: categoriesSet };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, categories: categoriesSet, formMask: null };
       this.musics.push(music);
     }
   }
@@ -485,8 +514,8 @@ class MusicInjector {
 
       /* Find the zseq file */
       const zseqFiles = musicZip.file(/\.zseq$/);
-      if (zseqFiles.length !== 1) {
-        this.monitor.warn(`Skipped music file ${f.name}: multiple sequence files`);
+      if (zseqFiles.length === 0) {
+        this.monitor.warn(`Skipped music file ${f.name}: no sequence files`);
         continue;
       }
 
@@ -539,9 +568,12 @@ class MusicInjector {
       let bankIdOot: number | null = null;
       let bankIdMm: number | null = null;
 
-      if (filesBank.length) {
-        const bank = await filesBank[0].async('uint8array');
-        const bankmeta = await filesBankmeta[0].async('uint8array');
+      const matchingZBank = filesBank.find((file) => file.name === `${bankIdRaw}.zbank`)
+      const matchingBankmeta = filesBankmeta.find((file) => file.name === `${bankIdRaw}.bankmeta`)
+
+      if (matchingZBank && matchingBankmeta) {
+        const bank = await matchingZBank.async('uint8array');
+        const bankmeta = await matchingBankmeta.async('uint8array');
         if (bankmeta.length !== 0x08) {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;
@@ -571,7 +603,50 @@ class MusicInjector {
         }
       }
 
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, categories: categoriesSet };
+      let formMask: number[] | null = null;
+      const matchingFormMask = musicZip.file(/\.formmask$/).find((file) => file.name === `${bankIdRaw}.formmask`);
+      if (matchingFormMask) {
+        const formMaskRaw = await matchingFormMask.async('string');
+        try {
+          const playState = JSON5.parse<string[]>(formMaskRaw)
+            .map((s) => s.split(', ')
+              .map((s) => {
+                if (s in SequencePlayState) {
+                  return SequencePlayState[s as keyof typeof SequencePlayState];
+                }
+                throw new Error('Invalid formmask json');
+              })
+              .reduce((previousValue: number, currentValue: number) => previousValue | currentValue, 0)
+            );
+
+          if (playState.length != 17) {
+            throw new Error('Invalid formmask json');
+          }
+
+          /* ensure backwards compatibility with MMR 1.15 sequences */
+          if (!playState.some(s => (s & SequencePlayState.FierceDeity) && !(s & SequencePlayState.Human))) {
+            for (let i = 0; i < playState.length; i++) {
+              if (playState[i] & SequencePlayState.Human) {
+                playState[i] |= SequencePlayState.FierceDeity;
+              }
+            }
+          }
+
+          /* ensure unused cumulative states don't cause music to get muted in those states */
+          Object.values(SequencePlayState)
+            .filter((s) => s > SequencePlayState.All)
+            .forEach((cumulativeState) => {
+              if (!playState.some((s) => s & cumulativeState)) {
+                playState[0x10] |= cumulativeState;
+              }
+            })
+          formMask = playState;
+        } catch (error) {
+          this.monitor.warn(`Music file ${f.name}: error parsing formmask. Ignoring.`);
+        }
+      }
+
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games, categories: categoriesSet, formMask };
       this.musics.push(music);
     }
   }
@@ -615,12 +690,30 @@ class MusicInjector {
       customBankId = this.addCustomBank(music.bankCustom.meta, music.bankCustom.data);
     }
 
+    let formMaskData: Uint8Array | null = null;
+    if (music.formMask) {
+      formMaskData = new Uint8Array(0x30);
+      for (let i = 0; i < 17; i++) {
+        formMaskData[i*2] = music.formMask[i] >> 8;
+        formMaskData[i*2 + 1] = music.formMask[i] & 0xff;
+      }
+      formMaskData[0x22] = 1;
+    }
+
     for (const id of entry.oot || []) {
       await this.injectMusicMeta('oot', id, vrom, music.seq.length, customBankId || music.bankIdOot!, music.name);
+
+      if (formMaskData) {
+        this.addFormMask('oot', id, formMaskData);
+      }
     }
 
     for (const id of entry.mm || []) {
       await this.injectMusicMeta('mm', id, vrom, music.seq.length, customBankId || music.bankIdMm!, music.name);
+
+      if (formMaskData) {
+        this.addFormMask('mm', id, formMaskData);
+      }
     }
   }
 

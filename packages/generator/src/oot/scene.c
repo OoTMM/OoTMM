@@ -28,37 +28,7 @@ s32 Entrance_GetTransitionFlags(u16 entrance)
     return Entrance_GetTableEntryCustom(entrance)->flags;
 }
 
-u8 gNightBgm;
-EXPORT_SYMBOL(NIGHT_BGM, gNightBgm);
-
-void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd)
+s32 Entrance_GetSceneIdAbsolute(u16 entrance)
 {
-    u8 natureAmbienceId;
-
-    natureAmbienceId = cmd->soundSettings.natureAmbienceId;
-    if (gNightBgm)
-    {
-        switch (play->sceneId)
-        {
-        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
-        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
-        case SCE_OOT_GANON_CASTLE_EXTERIOR:
-        case SCE_OOT_MARKET_CHILD_NIGHT:
-        case SCE_OOT_MARKET_ADULT:
-        case SCE_OOT_GRAVEYARD:
-            break;
-        default:
-            natureAmbienceId = 0x13;
-        }
-    }
-
-    play->sceneSequences.seqId = cmd->soundSettings.seqId;
-    play->sceneSequences.natureAmbienceId = natureAmbienceId;
-
-    if (gSaveContext.seqId == (u8)NA_BGM_DISABLED)
-    {
-        SEQCMD_RESET_AUDIO_HEAP(0, cmd->soundSettings.specId);
-    }
+    return Entrance_GetTableEntryCustom(entrance)->sceneId;
 }
-
-PATCH_FUNC(0x80082478, Scene_CommandSoundSettings);

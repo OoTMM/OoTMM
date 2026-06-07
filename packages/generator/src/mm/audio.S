@@ -9,3 +9,27 @@ PATCH_END
 PATCH_START 0x800b9e14
   li a0, 3
 PATCH_END
+
+Music_AfterChannelInit_Hook:
+    addiu   sp, sp, -0x28
+    or      a0, s2, zero
+    jal     Music_AfterChannelInit
+     lw     a1, 0x002C (sp)
+    lw      ra, 0x0024 (sp)
+    jr      ra
+     addiu  sp, sp, 0x28
+
+PATCH_START 0x80197D1C
+    j       Music_AfterChannelInit_Hook
+PATCH_END
+
+PATCH_START 0x801941D8
+    jal     Music_HandleChannelMute
+     nop
+    nop
+    nop
+    nop
+    nop
+    b       .+0xbc
+     nop
+PATCH_END

@@ -131,6 +131,40 @@ typedef struct PlayerImpact {
     /* 0x08 */ Vec3f pos;
 } PlayerImpact; // size = 0x14
 
+typedef struct {
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s32 unk8;
+    /* 0x0C */ f32 unkC;
+    /* 0x10 */ Color_RGBA8 unk10;
+} TargetContextEntry; // size = 0x14
+
+typedef struct {
+    /* 0x00 */ Vec3f unk0;
+    /* 0x0C */ Vec3f unkC;
+    /* 0x18 */ f32 unk18;
+    /* 0x1C */ f32 unk1C;
+    /* 0x20 */ f32 unk20;
+    /* 0x24 */ f32 unk24;
+    /* 0x28 */ f32 unk28;
+    /* 0x2C */ f32 unk2C;
+    /* 0x30 */ f32 unk30;
+    /* 0x34 */ f32 unk34;
+    /* 0x38 */ Actor* targetHover;
+    /* 0x3C */ Actor* targetLocked;
+    /* 0x40 */ f32 unk40;
+    /* 0x44 */ f32 unk44;
+    /* 0x48 */ s16 unk48;
+    /* 0x4A */ u8 targetType;
+    /* 0x4B */ u8 unk4B;
+    /* 0x4C */ s8 unk4C;
+    /* 0x4D */ s8 pad4D[0x3];
+    /* 0x50 */ TargetContextEntry unk50[3];
+    /* 0x8C */ Actor* unk8C;
+    /* 0x90 */ Actor* nearbyEnemy;
+    /* 0x94 */ s8 pad94[0x4];
+} TargetContext; // size = 0x98
+
 typedef struct ActorContext
 {
     /* 0x000 */ u8 freezeFlashTimer;
@@ -146,7 +180,12 @@ typedef struct ActorContext
     /* 0x00F */ u8 numLensActors;
     ActorList   actors[12];
     /* 0x0A0 */ Actor* lensActors[32]; /* LENS_ACTOR_MAX // Draws up to LENS_ACTOR_MAX number of invisible actors */
-    char        unk_120[0xc4];
+    /* 0x120 */ TargetContext targetContext;
+    /* 0x1B8 */ u32 switchFlags[4]; // First 0x40 are permanent, second 0x40 are temporary
+    /* 0x1C8 */ u32 chestFlags;
+    /* 0x1CC */ u32 clearedRooms;
+    /* 0x1D0 */ u32 clearedRoomsTemp;
+    /* 0x1D4 */ u32 collectibleFlags[4]; // bitfield of 128 bits
     /* 0x1E4 */ TitleCardContext titleCtx;
     /* 0x1F4 */ PlayerImpact playerImpact;
     char        unk_208[0x4c];
@@ -157,7 +196,7 @@ typedef struct ActorContext
 ActorContext;
 
 ASSERT_OFFSET(ActorContext, actors,            0x010);
-ASSERT_OFFSET(ActorContext, unk_120,           0x120);
+ASSERT_OFFSET(ActorContext, targetContext,     0x120);
 ASSERT_OFFSET(ActorContext, titleCtx,          0x1e4);
 ASSERT_OFFSET(ActorContext, elegyStatues,      0x254);
 ASSERT_OFFSET(ActorContext, isOverrideInputOn, 0x268);
