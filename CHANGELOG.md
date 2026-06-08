@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add hyper enemies/bosses to both games, making them twice as fast.
 - Add Telescope ER.
 - Add Fairy Slingshot to Majora's Mask
 - Add Rusty Keys, locking a single overworld door each, in both games.

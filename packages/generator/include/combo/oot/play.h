@@ -65,6 +65,12 @@ typedef struct SceneSequences {
     /* 0x01 */ u8 natureAmbienceId;
 } SceneSequences; // size = 0x2
 
+typedef struct FrameAdvanceContext
+{
+    /* 0x0 */ s32 enabled;
+    /* 0x4 */ s32 timer;
+} FrameAdvanceContext; // size = 0x8
+
 typedef struct PlayState
 {
     GameState              state;
@@ -79,7 +85,7 @@ typedef struct PlayState
     s16                    nextCamId;
     SceneSequences         sceneSequences;
     LightContext           lightCtx;
-    char                   unk_007b8[0x08];
+    FrameAdvanceContext    frameAdvCtx;
     CollisionContext       colCtx;
     ActorContext           actorCtx;
     CutsceneContext        csCtx;

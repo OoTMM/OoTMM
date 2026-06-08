@@ -613,6 +613,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.isBiggoronSword = 1;
     gSharedCustomSave.extraSwordsOot = 2;
     gSave.info.inventory.goldTokens = 100;
+    gSharedCustomSave.foundMasterSword = 1;
 
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);

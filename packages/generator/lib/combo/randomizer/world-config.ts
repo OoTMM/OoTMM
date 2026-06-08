@@ -296,6 +296,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_RUSTY_KEYS: settings.rustyKeysOot,
     MM_RUSTY_KEYS: settings.rustyKeysMm,
     MM_TELESCOPE_ER: settings.erIndoorsTelescopes,
+    OOT_HYPER_ENEMIES: settings.ootHyperEnemies,
+    MM_HYPER_ENEMIES: settings.mmHyperEnemies,
   };
 
   for (const v in exprs) {

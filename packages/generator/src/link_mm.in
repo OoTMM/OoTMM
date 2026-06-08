@@ -748,6 +748,8 @@ GameState_SetFramerateDivisor = 0x801733a8;
 ShrinkWindow_Letterbox_GetSizeTarget = 0x80160c14;
 Audio_PlaySfx_PauseMenuOpenOrClose = 0x801a3aec;
 
+Player_InBlockingCsMode = 0x80123358;
+
 Player_SetUpperAction = 0x8082F43C;
 Player_UpdateHostileLockOn = 0x8082FB68;
 Player_IsZTargeting = 0x8082FBE8;

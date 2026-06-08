@@ -7,24 +7,25 @@
 #include <combo/global.h>
 #include <combo/inventory.h>
 #include <combo/multi.h>
+#include <combo/actors.h>
 
-void EnGo_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnDnh_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnShn_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnPm_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b);
-void EnAn_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnPst_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnNb_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnAl_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnBjt_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
-void EnTab_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnGo_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnDnh_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnShn_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnPm_GiveItem(Actor *this, PlayState *play, s16 gi, float a, float b);
+void EnAn_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnPst_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnNb_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnAl_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnBjt_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
+void EnTab_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
 
-typedef void (*TextBoxCallback)(Actor*, PlayState*, s16);
-void EnGo_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
-void EnTab_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
-void EnBjt_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
+typedef void (*TextBoxCallback)(Actor *, PlayState *, s16);
+void EnGo_AfterTextBox(Actor *this, PlayState *play, s16 messageId);
+void EnTab_AfterTextBox(Actor *this, PlayState *play, s16 messageId);
+void EnBjt_AfterTextBox(Actor *this, PlayState *play, s16 messageId);
 
-static Actor* sByteCodeActor;
+static Actor *sByteCodeActor;
 
 static int opt(int x)
 {
@@ -36,31 +37,48 @@ static s16 convertGi(s16 initial)
 {
     switch (initial)
     {
-    case 0x01: return GI_MM_RUPEE_GREEN;
-    case 0x02: return GI_MM_RUPEE_BLUE;
-    case 0x04: return GI_MM_RUPEE_RED;
-    case 0x05: return GI_MM_RUPEE_PURPLE;
-    case 0x06: return GI_MM_RUPEE_SILVER;
-    case 0x07: return GI_MM_RUPEE_GOLD;
-    case 0x0a: return GI_MM_RECOVERY_HEART;
-    case 0x0c: return GI_MM_HEART_PIECE;
-    case 0x34: return GI_MM_POWDER_KEG;
-    case 0x43: return GI_MM_PICTOGRAPH_BOX;
-    case 0x6f: return GI_MM_BOTTLE_CHATEAU;
-    case 0x84: return GI_MM_MASK_POSTMAN;
-    case 0x8f: return GI_MM_MASK_KAFEI;
-    case 0x91: return GI_MM_CHATEAU;
-    case 0x92: return GI_MM_MILK;
-    case 0xa0: return GI_MM_ROOM_KEY;
-    case 0xaa: return GI_MM_LETTER_TO_KAFEI;
+    case 0x01:
+        return GI_MM_RUPEE_GREEN;
+    case 0x02:
+        return GI_MM_RUPEE_BLUE;
+    case 0x04:
+        return GI_MM_RUPEE_RED;
+    case 0x05:
+        return GI_MM_RUPEE_PURPLE;
+    case 0x06:
+        return GI_MM_RUPEE_SILVER;
+    case 0x07:
+        return GI_MM_RUPEE_GOLD;
+    case 0x0a:
+        return GI_MM_RECOVERY_HEART;
+    case 0x0c:
+        return GI_MM_HEART_PIECE;
+    case 0x34:
+        return GI_MM_POWDER_KEG;
+    case 0x43:
+        return GI_MM_PICTOGRAPH_BOX;
+    case 0x6f:
+        return GI_MM_BOTTLE_CHATEAU;
+    case 0x84:
+        return GI_MM_MASK_POSTMAN;
+    case 0x8f:
+        return GI_MM_MASK_KAFEI;
+    case 0x91:
+        return GI_MM_CHATEAU;
+    case 0x92:
+        return GI_MM_MILK;
+    case 0xa0:
+        return GI_MM_ROOM_KEY;
+    case 0xaa:
+        return GI_MM_LETTER_TO_KAFEI;
     }
 
     return initial;
 }
 
-static void Actor_ByteCode_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
+static void Actor_ByteCode_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b)
 {
-    void (*func)(Actor*, PlayState*, s16, float, float);
+    void (*func)(Actor *, PlayState *, s16, float, float);
 
     if (actor->id != ACTOR_EN_NB)
         gi = convertGi(gi);
@@ -98,7 +116,7 @@ static void Actor_ByteCode_GiveItem(Actor* actor, PlayState* play, s16 gi, float
         func = EnBjt_GiveItem;
         break;
     default:
-        func = (void*)Actor_OfferGetItem;
+        func = (void *)Actor_OfferGetItem;
         break;
     }
 
@@ -107,16 +125,16 @@ static void Actor_ByteCode_GiveItem(Actor* actor, PlayState* play, s16 gi, float
 
 PATCH_CALL(0x8010aa34, Actor_ByteCode_GiveItem);
 
-void EnGo_AfterGivingItem(Actor* actor);
-void EnDnh_AfterGivingItem(Actor* actor);
-void EnPm_AfterGivingItem(Actor* actor);
-void EnAn_AfterGivingItem(Actor* actor);
-void EnTab_AfterGivingItem(Actor* actor);
+void EnGo_AfterGivingItem(Actor *actor);
+void EnDnh_AfterGivingItem(Actor *actor);
+void EnPm_AfterGivingItem(Actor *actor);
+void EnAn_AfterGivingItem(Actor *actor);
+void EnTab_AfterGivingItem(Actor *actor);
 
-static int Actor_ByteCode_HasParent(Actor* actor)
+static int Actor_ByteCode_HasParent(Actor *actor)
 {
     int ret;
-    void (*func)(Actor*);
+    void (*func)(Actor *);
 
     ret = Actor_HasParentZ(actor);
     if (ret)
@@ -172,7 +190,7 @@ static void Actor_ByteCode_RemoveItem(s16 item, s16 slot)
 
 PATCH_CALL(0x8010bc60, Actor_ByteCode_RemoveItem);
 
-int Actor_RunByteCodeWrapper(Actor* this, PlayState* play, void* bytecode, void* unk1, void* unk2)
+int Actor_RunByteCodeWrapper(Actor *this, PlayState *play, void *bytecode, void *unk1, void *unk2)
 {
     sByteCodeActor = this;
     return Actor_RunByteCode(this, play, bytecode, unk1, unk2);
@@ -199,9 +217,9 @@ PATCH_CALL(0x80bf2bf4, Actor_RunByteCodeWrapper);
 PATCH_CALL(0x80bfda74, Actor_RunByteCodeWrapper);
 PATCH_CALL(0x80c22a14, Actor_RunByteCodeWrapper);
 
-static void Actor_ByteCode_DispatchTextBox(PlayState* play, s16 messageId)
+static void Actor_ByteCode_DispatchTextBox(PlayState *play, s16 messageId)
 {
-    Actor* this;
+    Actor *this;
     TextBoxCallback cb;
 
     this = sByteCodeActor;
@@ -224,7 +242,7 @@ static void Actor_ByteCode_DispatchTextBox(PlayState* play, s16 messageId)
     }
 }
 
-static void Actor_ByteCode_PlayerDisplayTextBox_Hook(PlayState* play, s16 messageId, void* unk)
+static void Actor_ByteCode_PlayerDisplayTextBox_Hook(PlayState *play, s16 messageId, void *unk)
 {
     PlayerDisplayTextBox(play, messageId, unk);
     Actor_ByteCode_DispatchTextBox(play, messageId);
@@ -232,7 +250,7 @@ static void Actor_ByteCode_PlayerDisplayTextBox_Hook(PlayState* play, s16 messag
 
 PATCH_CALL(0x8010af04, Actor_ByteCode_PlayerDisplayTextBox_Hook);
 
-static void Actor_ByteCode_DisplayTextBox2_Hook(PlayState* play, s16 messageId)
+static void Actor_ByteCode_DisplayTextBox2_Hook(PlayState *play, s16 messageId)
 {
     DisplayTextBox2(play, messageId);
     Actor_ByteCode_DispatchTextBox(play, messageId);
@@ -240,7 +258,7 @@ static void Actor_ByteCode_DisplayTextBox2_Hook(PlayState* play, s16 messageId)
 
 PATCH_CALL(0x8010af50, Actor_ByteCode_DisplayTextBox2_Hook);
 
-static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
+static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
 {
     if (g.isCredits)
         return 1;
@@ -255,7 +273,7 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GURU_GURU));
     case ACTOR_EN_DAIKU:
     case ACTOR_EN_DAIKU2:
-        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.num == 0x01)
+        if (play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.num == 0x01)
             return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MAYOR_DOTOUR));
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CARPENTERS));
     case ACTOR_EN_MS:
@@ -298,7 +316,7 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_MUTO:
     case ACTOR_EN_HEISHI:
     case ACTOR_EN_BAISEN:
-        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.num != 0x01)
+        if (play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.num != 0x01)
             return 1;
         /* Fallthrough */
     case ACTOR_EN_DT:
@@ -325,10 +343,14 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_SOB1:
         switch (variable & 0xf)
         {
-        case 0: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ZORA_SHOPKEEPER));
-        case 1: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON_SHOPKEEPER));
-        case 2: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBCHU_SHOPKEEPER));
-        default: return 1;
+        case 0:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ZORA_SHOPKEEPER));
+        case 1:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON_SHOPKEEPER));
+        case 2:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBCHU_SHOPKEEPER));
+        default:
+            return 1;
         }
     case ACTOR_EN_JGAME_TSN:
     case ACTOR_EN_TSN:
@@ -364,17 +386,22 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_OSSAN:
         switch (variable & 0xf)
         {
-        case 0x00: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_FISHING_POND_OWNER));
-        case 0x01: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN));
-        default: UNREACHABLE();
+        case 0x00:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_FISHING_POND_OWNER));
+        case 0x01:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN));
+        default:
+            UNREACHABLE();
         }
     case ACTOR_EN_ANI:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN));
     case ACTOR_EN_GO:
         switch (variable)
         {
-        case 0x08: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MEDIGORON));
-        default: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON));
+        case 0x08:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MEDIGORON));
+        default:
+            return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON));
         }
     case ACTOR_EN_S_GORO:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON));
@@ -563,13 +590,13 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     return 1;
 }
 
-static int canSpawnActor(PlayState* play, s16 actorId, u16 variable)
+static int canSpawnActor(PlayState *play, s16 actorId, u16 variable)
 {
     switch (actorId)
     {
     // Remove the sounds of the carpenters without their souls.
     case ACTOR_OBJ_SOUND:
-        if((play->sceneId == SCE_MM_CLOCK_TOWN_SOUTH || play->sceneId == SCE_MM_CLOCK_TOWN_EAST) && ((variable & 0x7f) == 0x10))
+        if ((play->sceneId == SCE_MM_CLOCK_TOWN_SOUTH || play->sceneId == SCE_MM_CLOCK_TOWN_EAST) && ((variable & 0x7f) == 0x10))
             return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CARPENTERS));
         else
             return 1;
@@ -585,7 +612,7 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 variable)
 
 static s16 sActorIdToSpawn;
 
-Actor* Actor_SpawnAsChildAndCutsceneWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
+Actor *Actor_SpawnAsChildAndCutsceneWrapper(ActorContext *actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     int ret;
 
@@ -607,7 +634,7 @@ Actor* Actor_SpawnAsChildAndCutsceneWrapper(ActorContext* actorCtx, PlayState *p
     return _Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
 }
 
-static int GetRoomClearFlagForActor(PlayState* play, int flag)
+static int GetRoomClearFlagForActor(PlayState *play, int flag)
 {
     int res;
 
@@ -620,14 +647,15 @@ static int GetRoomClearFlagForActor(PlayState* play, int flag)
 PATCH_CALL(0x800baea0, GetRoomClearFlagForActor);
 
 static LightInfo D_8015BC00;
-static LightNode* D_8015BC10;
+static LightNode *D_8015BC10;
 static s32 D_8015BC14;
 static f32 D_8015BC18;
 
-void Actor_InitFaroresWind(PlayState* play) {
+void Actor_InitFaroresWind(PlayState *play)
+{
     Vec3f lightPos;
 
-    RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+    RespawnData *fw = &gCustomSave.fw[gOotSave.age];
 
     if (fw->data)
     {
@@ -651,7 +679,7 @@ void Actor_InitFaroresWind(PlayState* play) {
     D_8015BC18 = 0.0f;
 }
 
-void Actor_DrawFaroresWindPointer(PlayState* play)
+void Actor_DrawFaroresWindPointer(PlayState *play)
 {
     s32 lightRadius = -1;
     s32 params;
@@ -680,12 +708,12 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
         }
         else if (D_8015BC18 > 0.0f)
         {
-            static Vec3f effectVel = { 0.0f, -0.05f, 0.0f };
-            static Vec3f effectAccel = { 0.0f, -0.025f, 0.0f };
-            static Color_RGBA8 effectPrimCol = { 255, 255, 255, 0 };
-            static Color_RGBA8 effectEnvCol = { 100, 200, 0, 0 };
-            Vec3f* curPos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
-            Vec3f* nextPos = &gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
+            static Vec3f effectVel = {0.0f, -0.05f, 0.0f};
+            static Vec3f effectAccel = {0.0f, -0.025f, 0.0f};
+            static Color_RGBA8 effectPrimCol = {255, 255, 255, 0};
+            static Color_RGBA8 effectEnvCol = {100, 200, 0, 0};
+            Vec3f *curPos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
+            Vec3f *nextPos = &gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
             f32 prevNum = D_8015BC18;
             Vec3f dist;
             f32 diff = Math_Vec3f_DistXYZAndStoreDiff(nextPos, curPos, &dist);
@@ -731,7 +759,7 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
         }
         else if (temp > 0)
         {
-            Vec3f* curPos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
+            Vec3f *curPos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
             f32 nextRatio = 1.0f - temp * 0.1f;
             f32 curRatio = 1.0f - (f32)(temp - 1) * 0.1f;
             Vec3f eye;
@@ -814,8 +842,7 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
             }
         }
 
-        s32 shouldDraw = sceneMatches
-                && (D_8015BC18 != 0.0f || fwRoomId == play->roomCtx.curRoom.num || fwRoomId == play->roomCtx.prefRoom.num);
+        s32 shouldDraw = sceneMatches && (D_8015BC18 != 0.0f || fwRoomId == play->roomCtx.curRoom.num || fwRoomId == play->roomCtx.prefRoom.num);
 
         if ((play->csCtx.state == CS_STATE_IDLE) && shouldDraw)
         {
@@ -845,14 +872,14 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
             Lights_PointNoGlowSetInfo(&D_8015BC00, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x,
-                                    yPos,
-                                    gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, 255, 255, 255, lightRadius);
+                                      yPos,
+                                      gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, 255, 255, 255, lightRadius);
         }
         CLOSE_DISPS();
     }
 }
 
-void Actor_AfterDrawAll(PlayState* play)
+void Actor_AfterDrawAll(PlayState *play)
 {
     /* Displaced code: */
     if (play->actorCtx.lensMaskSize != 0)
@@ -869,66 +896,65 @@ typedef struct
 {
     u32 offset;
     u16 value;
-}
-OverlayPatch;
+} OverlayPatch;
 
 static OverlayPatch adultEponaPatch[] = {
-    { 0x865a, 0x0600 },
-    { 0x865e, 0x1e2c },
-    { 0x867a, 0x0600 },
-    { 0x868e, 0x3cec },
-    { 0x8706, 0x0600 },
-    { 0x870a, 0x3cec },
-    { 0x872a, 0x0600 },
-    { 0x8736, 0x3cec },
-    { 0x879a, 0x0600 },
-    { 0x87a2, 0x75f0 },
-    { 0x87ae, 0x0600 },
-    { 0x87be, 0x75f0 },
-    { 0x880e, 0x0600 },
-    { 0x8812, 0x6d50 },
-    { 0x8832, 0x0600 },
-    { 0x883e, 0x6d50 },
-    { 0x887e, 0x0600 },
-    { 0x8886, 0x6d50 },
-    { 0x8c22, 0x0600 },
-    { 0x8c2e, 0x3cec },
-    { 0x8c3a, 0x0600 },
-    { 0x8c4e, 0x3cec },
-    { 0x8d52, 0x0600 },
-    { 0x8d5e, 0x1e2c },
-    { 0x8d6a, 0x0600 },
-    { 0x8d7e, 0x1e2c },
-    { 0x8dde, 0x0600 },
-    { 0x8de6, 0x1e2c },
-    { 0x8df2, 0x0600 },
-    { 0x8e06, 0x1e2c },
-    { 0x8e72, 0x0600 },
-    { 0x8e7e, 0x6d50 },
-    { 0x8e92, 0x0600 },
-    { 0x8e9e, 0x6d50 },
-    { 0x8f06, 0x0600 },
-    { 0x8f0e, 0x6d50 },
-    { 0x8f1a, 0x0600 },
-    { 0x8f2e, 0x6d50 },
-    { 0xbbde, 0x3c23 },
-    { 0xc8ac, 0x1000 },
-    { 0xd792, 0x6d50 },
-    { 0xd796, 0x5584 },
-    { 0xd79a, 0x4dec },
-    { 0xd79e, 0x3cec },
-    { 0xd7a2, 0x75f0 },
-    { 0xd7a6, 0x32b0 },
-    { 0xd7aa, 0x1e2c },
-    { 0xd7ae, 0x2470 },
-    { 0xd7b2, 0x2c38 },
-    { 0xd81a, 0x9d74 },
-    { 0xdad6, 0x9f80 },
-    { 0xdada, 0xa180 },
-    { 0xdade, 0xa380 },
+    {0x865a, 0x0600},
+    {0x865e, 0x1e2c},
+    {0x867a, 0x0600},
+    {0x868e, 0x3cec},
+    {0x8706, 0x0600},
+    {0x870a, 0x3cec},
+    {0x872a, 0x0600},
+    {0x8736, 0x3cec},
+    {0x879a, 0x0600},
+    {0x87a2, 0x75f0},
+    {0x87ae, 0x0600},
+    {0x87be, 0x75f0},
+    {0x880e, 0x0600},
+    {0x8812, 0x6d50},
+    {0x8832, 0x0600},
+    {0x883e, 0x6d50},
+    {0x887e, 0x0600},
+    {0x8886, 0x6d50},
+    {0x8c22, 0x0600},
+    {0x8c2e, 0x3cec},
+    {0x8c3a, 0x0600},
+    {0x8c4e, 0x3cec},
+    {0x8d52, 0x0600},
+    {0x8d5e, 0x1e2c},
+    {0x8d6a, 0x0600},
+    {0x8d7e, 0x1e2c},
+    {0x8dde, 0x0600},
+    {0x8de6, 0x1e2c},
+    {0x8df2, 0x0600},
+    {0x8e06, 0x1e2c},
+    {0x8e72, 0x0600},
+    {0x8e7e, 0x6d50},
+    {0x8e92, 0x0600},
+    {0x8e9e, 0x6d50},
+    {0x8f06, 0x0600},
+    {0x8f0e, 0x6d50},
+    {0x8f1a, 0x0600},
+    {0x8f2e, 0x6d50},
+    {0xbbde, 0x3c23},
+    {0xc8ac, 0x1000},
+    {0xd792, 0x6d50},
+    {0xd796, 0x5584},
+    {0xd79a, 0x4dec},
+    {0xd79e, 0x3cec},
+    {0xd7a2, 0x75f0},
+    {0xd7a6, 0x32b0},
+    {0xd7aa, 0x1e2c},
+    {0xd7ae, 0x2470},
+    {0xd7b2, 0x2c38},
+    {0xd81a, 0x9d74},
+    {0xdad6, 0x9f80},
+    {0xdada, 0xa180},
+    {0xdade, 0xa380},
 };
 
-static void Actor_PatchAdultHorse(void* loadedRam)
+static void Actor_PatchAdultHorse(void *loadedRam)
 {
     if (!comboIsLinkAdult())
     {
@@ -937,7 +963,7 @@ static void Actor_PatchAdultHorse(void* loadedRam)
 
     for (int i = 0; i < ARRAY_COUNT(adultEponaPatch); i++)
     {
-        u16* patchPointer = (u16*)(((u8*)loadedRam) + adultEponaPatch[i].offset);
+        u16 *patchPointer = (u16 *)(((u8 *)loadedRam) + adultEponaPatch[i].offset);
         *patchPointer = adultEponaPatch[i].value;
     }
 }
@@ -960,51 +986,51 @@ static PlayerAgeProperties sPlayerAgePropertiesAdult = {
     18.0f,
     23.0f,
     70.0f,
-    { 9, 0x123F, 0x167 },
+    {9, 0x123F, 0x167},
     {
-        { 8, 0x1256, 0x17C },
-        { 9, 0x17EA, 0x167 },
-        { 8, 0x1256, 0x17C },
-        { 9, 0x17EA, 0x167 },
+        {8, 0x1256, 0x17C},
+        {9, 0x17EA, 0x167},
+        {8, 0x1256, 0x17C},
+        {9, 0x17EA, 0x167},
     },
     {
-        { 9, 0x17EA, 0x167 },
-        { 9, 0x1E0D, 0x17C },
-        { 9, 0x17EA, 0x167 },
-        { 9, 0x1E0D, 0x17C },
+        {9, 0x17EA, 0x167},
+        {9, 0x1E0D, 0x17C},
+        {9, 0x17EA, 0x167},
+        {9, 0x1E0D, 0x17C},
     },
     {
-        { 8, 0x1256, 0x17C },
-        { 9, 0x17EA, 0x167 },
-        { -0x638, 0x1256, 0x17C },
-        { -0x637, 0x17EA, 0x167 },
+        {8, 0x1256, 0x17C},
+        {9, 0x17EA, 0x167},
+        {-0x638, 0x1256, 0x17C},
+        {-0x637, 0x17EA, 0x167},
     },
     0,
     0x80,
     22.0f,
     36.0f,
-    (PlayerAnimationHeader*)0x0400e300, /* gPlayerAnim_pz_Tbox_open */
-    (PlayerAnimationHeader*)0x0400d548, /* gPlayerAnim_link_demo_back_to_past */
-    (PlayerAnimationHeader*)0x0400d660, /* gPlayerAnim_link_demo_return_to_past */
-    (PlayerAnimationHeader*)0x0400e378, /* gPlayerAnim_pz_climb_startA */
-    (PlayerAnimationHeader*)0x0400e380, /* gPlayerAnim_pz_climb_startB */
+    (PlayerAnimationHeader *)0x0400e300, /* gPlayerAnim_pz_Tbox_open */
+    (PlayerAnimationHeader *)0x0400d548, /* gPlayerAnim_link_demo_back_to_past */
+    (PlayerAnimationHeader *)0x0400d660, /* gPlayerAnim_link_demo_return_to_past */
+    (PlayerAnimationHeader *)0x0400e378, /* gPlayerAnim_pz_climb_startA */
+    (PlayerAnimationHeader *)0x0400e380, /* gPlayerAnim_pz_climb_startB */
     {
-        (PlayerAnimationHeader*)0x0400e388, /* gPlayerAnim_pz_climb_upL */
-        (PlayerAnimationHeader*)0x0400e390, /* gPlayerAnim_pz_climb_upR */
-        (PlayerAnimationHeader*)0x0400dab0, /* gPlayerAnim_link_normal_Fclimb_upL */
-        (PlayerAnimationHeader*)0x0400dab8, /* gPlayerAnim_link_normal_Fclimb_upR */
+        (PlayerAnimationHeader *)0x0400e388, /* gPlayerAnim_pz_climb_upL */
+        (PlayerAnimationHeader *)0x0400e390, /* gPlayerAnim_pz_climb_upR */
+        (PlayerAnimationHeader *)0x0400dab0, /* gPlayerAnim_link_normal_Fclimb_upL */
+        (PlayerAnimationHeader *)0x0400dab8, /* gPlayerAnim_link_normal_Fclimb_upR */
     },
     {
-        (PlayerAnimationHeader*)0x0400da90, /* gPlayerAnim_link_normal_Fclimb_sideL */
-        (PlayerAnimationHeader*)0x0400da98, /* gPlayerAnim_link_normal_Fclimb_sideR */
+        (PlayerAnimationHeader *)0x0400da90, /* gPlayerAnim_link_normal_Fclimb_sideL */
+        (PlayerAnimationHeader *)0x0400da98, /* gPlayerAnim_link_normal_Fclimb_sideR */
     },
     {
-        (PlayerAnimationHeader*)0x0400e358, /* gPlayerAnim_pz_climb_endAL */
-        (PlayerAnimationHeader*)0x04008360, /* gPlayerAnim_pz_climb_endAR */
+        (PlayerAnimationHeader *)0x0400e358, /* gPlayerAnim_pz_climb_endAL */
+        (PlayerAnimationHeader *)0x04008360, /* gPlayerAnim_pz_climb_endAR */
     },
     {
-        (PlayerAnimationHeader*)0x0400e370, /* gPlayerAnim_pz_climb_endBR */
-        (PlayerAnimationHeader*)0x0400e368, /* gPlayerAnim_pz_climb_endBL */
+        (PlayerAnimationHeader *)0x0400e370, /* gPlayerAnim_pz_climb_endBR */
+        (PlayerAnimationHeader *)0x0400e368, /* gPlayerAnim_pz_climb_endBL */
     },
 };
 
@@ -1013,10 +1039,10 @@ static void Actor_PatchPlayerFormProperties()
     if (comboIsLinkAdult())
     {
         /* Maybe better to move this to when the overlay is loaded? */
-        PlayerAgeProperties* playerAgeProperties = (PlayerAgeProperties*) OverlayAddr(0x8085ba38);
+        PlayerAgeProperties *playerAgeProperties = (PlayerAgeProperties *)OverlayAddr(0x8085ba38);
         playerAgeProperties[MM_PLAYER_FORM_HUMAN] = sPlayerAgePropertiesAdult;
 
-        u32* playerAnimationHeaders = (u32*)OverlayAddr(0x8085be84);
+        u32 *playerAnimationHeaders = (u32 *)OverlayAddr(0x8085be84);
         playerAnimationHeaders[0x36] = 0x0400e3c8;
         playerAnimationHeaders[0x37] = 0x0400e3c8;
         playerAnimationHeaders[0x38] = 0x0400e3c8;
@@ -1033,11 +1059,11 @@ static void Actor_PatchPlayerFormProperties()
     }
 }
 
-ActorProfile* Actor_LoadOverlayCustom(ActorContext* actorCtx, s16 index)
+ActorProfile *Actor_LoadOverlayCustom(ActorContext *actorCtx, s16 index)
 {
-    ActorProfile* ActorProfile = Actor_LoadOverlay(actorCtx, index);
+    ActorProfile *ActorProfile = Actor_LoadOverlay(actorCtx, index);
 
-    ActorOvl* overlayEntry = &gActorOvl[index];
+    ActorOvl *overlayEntry = &gActorOvl[index];
 
     if (overlayEntry->count == 0 && overlayEntry->data)
     {
@@ -1052,9 +1078,18 @@ ActorProfile* Actor_LoadOverlayCustom(ActorContext* actorCtx, s16 index)
     return ActorProfile;
 }
 
+void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
+{
+    update(this, play);
+    if (Config_Flag(CFG_MM_HYPER_ENEMIES))
+    {
+        Actor_Hyper(this, play, update);
+    }
+}
+
 PATCH_CALL(0x800bae44, Actor_LoadOverlayCustom);
 
-void KaleidoManager_LoadPlayerOvl(void* ovl)
+void KaleidoManager_LoadPlayerOvl(void *ovl)
 {
     KaleidoManager_LoadOvl(ovl);
     Actor_PatchPlayerFormProperties();

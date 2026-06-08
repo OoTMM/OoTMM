@@ -7,6 +7,7 @@
 #include <combo/global.h>
 #include <combo/actor.h>
 #include <combo/multi.h>
+#include <combo/actors.h>
 
 static s16 sActorIdToSpawn;
 
@@ -15,7 +16,7 @@ static int opt(int x)
     return x > 0 ? 1 : -1;
 }
 
-static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
+static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
 {
     if (g.isCredits)
         return 1;
@@ -194,14 +195,22 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_OSSAN:
         switch (variable)
         {
-        case 0: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_KOKIRI_SHOPKEEPER));
-        case 1: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_SHOPKEEPER));
-        case 2: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER));
-        case 3: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_SHOPKEEPER));
-        case 4: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BAZAAR_SHOPKEEPER));
-        case 7: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZORA_SHOPKEEPER));
-        case 8: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_SHOPKEEPER));
-        default: return 1;
+        case 0:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_KOKIRI_SHOPKEEPER));
+        case 1:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_SHOPKEEPER));
+        case 2:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER));
+        case 3:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_SHOPKEEPER));
+        case 4:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BAZAAR_SHOPKEEPER));
+        case 7:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZORA_SHOPKEEPER));
+        case 8:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_SHOPKEEPER));
+        default:
+            return 1;
         }
         break;
     case ACTOR_EN_HEISHI2:
@@ -218,17 +227,21 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_HY:
         switch (variable & 0x3f)
         {
-        case 0x00: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_DOG_LADY));
-        case 0x05: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BANKER));
-        case 0x07: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ASTRONOMER));
-        default: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
+        case 0x00:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_DOG_LADY));
+        case 0x05:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BANKER));
+        case 0x07:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ASTRONOMER));
+        default:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
         }
     case ACTOR_EN_MA1:
     case ACTOR_EN_MA2:
     case ACTOR_EN_MA3:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_MALON));
     case ACTOR_BG_SPOT15_RRBOX:
-        if(play->sceneId != SCE_OOT_HYRULE_CASTLE)
+        if (play->sceneId != SCE_OOT_HYRULE_CASTLE)
             return 1;
         /* Fallthrough */
     case ACTOR_EN_TA:
@@ -240,9 +253,12 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     case ACTOR_EN_GO2:
         switch (variable & 0x1f)
         {
-        case 1: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_CHILD));
-        case 2: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BIGGORON));
-        default: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON));
+        case 1:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_CHILD));
+        case 2:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BIGGORON));
+        default:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON));
         }
         break;
     case ACTOR_EN_GM:
@@ -287,7 +303,7 @@ static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
     }
 }
 
-static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
+static int canSpawnActor(PlayState *play, s16 actorId, u16 param)
 {
     switch (actorId)
     {
@@ -316,10 +332,10 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
     }
 }
 
-Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
-    Actor* actor;
+    Actor *actor;
 
     if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;
@@ -363,7 +379,8 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId
 
     if (Config_Flag(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == ACTOR_EN_DOOR)
     {
-        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10)) {
+        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10))
+        {
             variable &= 0xfc00;
             variable |= 0x1bf;
         }
@@ -380,7 +397,7 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId
     return actor;
 }
 
-static int GetRoomClearFlagForActor(PlayState* play, int flag)
+static int GetRoomClearFlagForActor(PlayState *play, int flag)
 {
     int res;
 
@@ -392,7 +409,7 @@ static int GetRoomClearFlagForActor(PlayState* play, int flag)
 
 PATCH_CALL(0x80025284, GetRoomClearFlagForActor);
 
-static int shouldActorIgnorePlayer(Actor* this, Player* link)
+static int shouldActorIgnorePlayer(Actor *this, Player *link)
 {
     u16 variable;
 
@@ -447,29 +464,29 @@ static int shouldActorIgnorePlayer(Actor* this, Player* link)
     }
 }
 
-static int GetDamage(DamageTable* tbl, int type)
+static int GetDamage(DamageTable *tbl, int type)
 {
     return tbl->attack[type] & 0xf;
 }
 
-static int GetDamageEffect(DamageTable* tbl, int type)
+static int GetDamageEffect(DamageTable *tbl, int type)
 {
     return tbl->attack[type] >> 4;
 }
 
-static void SetDamage(DamageTable* tbl, int type, int value)
+static void SetDamage(DamageTable *tbl, int type, int value)
 {
     tbl->attack[type] = (tbl->attack[type] & 0xf0) | (value & 0xf);
 }
 
-static void SetDamageEffect(DamageTable* tbl, int type, int value)
+static void SetDamageEffect(DamageTable *tbl, int type, int value)
 {
     tbl->attack[type] = (tbl->attack[type] & 0xf) | (value << 4);
 }
 
-static void Actor_UpdateDamageTable(Actor* this)
+static void Actor_UpdateDamageTable(Actor *this)
 {
-    DamageTable* tbl;
+    DamageTable *tbl;
     int dmg;
     int dmgEffectKokiri;
     int dmgEffectGiant;
@@ -503,7 +520,7 @@ static void Actor_UpdateDamageTable(Actor* this)
     }
 }
 
-void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
+void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
 {
     int ignorePlayer;
     s16 yawTowardsPlayer;
@@ -532,6 +549,10 @@ void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
         this->xyzDistToPlayerSq = xyzDistToPlayerSq;
         this->xzDistToPlayer = xzDistToPlayer;
         this->yDistanceFromLink = yDistanceFromLink;
+    }
+    if (Config_Flag(CFG_OOT_HYPER_ENEMIES))
+    {
+        Actor_Hyper(this, play, update);
     }
 }
 

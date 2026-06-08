@@ -214,6 +214,8 @@ s32 func_80123810(PlayState* play);
 void Player_TryUpdateForm(Player* this, PlayState* play);
 #endif
 
+int Player_InBlockingCsMode(PlayState *play, Player *player);
+
 /* Custom stuff */
 void Player_HandleBronzeScale(Player* this, PlayState* play);
 

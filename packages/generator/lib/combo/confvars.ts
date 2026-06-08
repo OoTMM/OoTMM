@@ -287,6 +287,8 @@ export const CONFVARS = [
   'OOT_RUSTY_KEYS',
   'MM_RUSTY_KEYS',
   'MM_TELESCOPE_ER',
+  'OOT_HYPER_ENEMIES',
+  'MM_HYPER_ENEMIES',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

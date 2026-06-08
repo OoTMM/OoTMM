@@ -24,3 +24,8 @@ PATCH_START 0x800ba660
   nop
   nop
 PATCH_END
+
+PATCH_START 0x800b9744
+  jal   Actor_RunUpdate
+   move a2,t9
+PATCH_END

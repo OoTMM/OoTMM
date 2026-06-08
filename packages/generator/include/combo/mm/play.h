@@ -430,6 +430,12 @@ _Static_assert(sizeof(DayTelopState) == 0x248, "MM DayTelopState Size is wrong")
         (state)->nextGameStateSize = nextSize;                        \
     } while (0)
 
+typedef struct FrameAdvanceContext
+{
+    /* 0x0 */ s32 enabled;
+    /* 0x4 */ s32 timer;
+} FrameAdvanceContext; // size = 0x8
+
 typedef struct PlayState
 {
     GameState           state;
@@ -446,7 +452,7 @@ typedef struct PlayState
     s16                 nextCamera;
     SceneSequences      sceneSequences;
     LightContext        lightCtx;
-    char                unk_00828[0x08];
+    FrameAdvanceContext frameAdvCtx;
     CollisionContext    colCtx;
     ActorContext        actorCtx;
     /* 0x01F24 */ CutsceneContext csCtx;

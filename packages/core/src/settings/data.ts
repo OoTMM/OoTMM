@@ -1667,14 +1667,30 @@ export const SETTINGS = [{
   default: 'normal',
   cond: hasMM,
 }, {
-    key: 'mmStyleAirMovementOot',
-    name: 'MM-style air movement in OoT',
-    category: 'main.nologic',
-    type: 'boolean',
-    description: 'Makes the air movement in OoT more like the air movement in MM.',
-    default: false,
-    cond: hasOoT,
-  }, {
+  key: 'mmStyleAirMovementOot',
+  name: 'MM-style air movement in OoT',
+  category: 'main.nologic',
+  type: 'boolean',
+  description: 'Makes the air movement in OoT more like the air movement in MM.',
+  default: false,
+  cond: hasOoT,
+}, {
+  key: 'ootHyperEnemies',
+  name: 'Hyper Enemies (OoT)',
+  category: 'main.nologic',
+  type: 'boolean',
+  description: 'Make enemies and most bosses in OoT be twice as fast.',
+  default: false,
+  cond: hasOoT,
+}, {
+  key: 'mmHyperEnemies',
+  name: 'Hyper Enemies (MM)',
+  category: 'main.nologic',
+  type: 'boolean',
+  description: 'Make enemies and bosses in MM be twice as fast.',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',
@@ -2104,7 +2120,7 @@ export const SETTINGS = [{
   description: "Add the Kamaro Mask in Ocarina of Time.",
   default: false,
   cond: hasOoT,
-  }, {
+}, {
   key: 'elegyOot',
   name: "Elegy of Emptiness (OoT)",
   category: 'items.extensions',
@@ -3015,7 +3031,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: "Combines the Great Fairy's Sword from OoT and MM into one item for both games",
   default: false,
-    cond: (s: any) => hasOoTMM(s) && s.gfsOot,
+  cond: (s: any) => hasOoTMM(s) && s.gfsOot,
 }, {
   key: 'sharedSlingshot',
   name: "Shared Slingshot",

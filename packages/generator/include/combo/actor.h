@@ -7,6 +7,7 @@
 #include <combo/util.h>
 #include <combo/math/vec.h>
 #include <combo/misc.h>
+#include <combo/common/actor_init.h>
 
 #define NBITS_TO_MASK(n)        ((1 << (n)) - 1)
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
