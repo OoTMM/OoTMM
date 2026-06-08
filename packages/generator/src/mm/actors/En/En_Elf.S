@@ -112,3 +112,32 @@ PATCH_END
 PATCH_START 0x8088ded4
   lui a2, 0x41c8
 PATCH_END
+
+
+/*
+
+*/
+PATCH_START 0x8088FFF0
+  li at, 4
+  or a0, s0, zero
+  div zero, v0, at
+  mfhi v0
+  li at, 3
+  beql v0, at, .+0x48
+  lw t9, 0x0010(v1)
+  beql v0, zero, .+0x08
+  addiu v0, zero, 5
+  jal 0x80151938
+  addiu a1, v0, 0x0245
+  b .+0xb8
+  lw a0, 0x0030(sp)
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END

@@ -45,13 +45,13 @@ All notable changes to this project will be documented in this file.
     - Everything else not mentioned here is vanilla.
 
 - Adjusted Beginner preset to have Ageless Soaring enabled.
-- Adjusted the Blitz preset in the following ways: 
+- Adjusted the Blitz preset in the following ways:
     - Enable Ageless Soaring.
     - Enable Ageless Great Fairy's Sword.
     - Shuffle the Master Sword with a Master Sword hint. Master Sword does not lock age-access.
     -  Add Shared Extra Child Swords, remove starting child sword.
     - Added MM Deku Shield to then share the Deku Shield. Removed the starting Hylian/Hero Shield.
-    - Enabled Song Event Shuffle for both games to modify some Song Events via plando. 
+    - Enabled Song Event Shuffle for both games to modify some Song Events via plando.
     - Moved MM Song of Time to starting items and put a recovery heart on Initial Song of Healing.
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
@@ -62,6 +62,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Tatl sometimes crashing when you talk to her during 4th day.
 - Fix logic for MM Beneath The Graveyard Dampe Chest not checking for the poes soul.
 - Fix seeds requiring very early warp songs usage being sometimes unbeatable. (#905)
 - Auto-equip the deku mask when entering deku palace throne in ER if possible to avoid a potential seed brick.

@@ -202,6 +202,7 @@
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_KAMAROS_MASK           MM_EV(72, 4)
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_STONE_MASK             MM_EV(72, 5)
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_BREMEN_MASK            MM_EV(72, 6)
+#define EV_MM_WEEK_MOONS_TEAR_FALLEN                        MM_EV(74, 5)
 #define EV_MM_WEEK_RECEIVED_ROOM_KEY                        MM_EV(75, 4)
 #define EV_MM_WEEK_PAMELA_FATHER                            MM_EV(75, 5)
 #define EV_MM_WEEK_PIRATES_BEES                             MM_EV(83, 1)
