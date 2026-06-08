@@ -362,8 +362,12 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId
     }
 
     if (Config_Flag(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == ACTOR_EN_DOOR)
-        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10))
-            variable = 0x1bf;
+    {
+        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10)) {
+            variable &= 0xfc00;
+            variable |= 0x1bf;
+        }
+    }
 
     if (Config_Flag(CFG_OOT_OPEN_ZD_SHORTCUT) && actorId == ACTOR_BG_SPOT06_OBJECTS && play->sceneId == SCE_OOT_LAKE_HYLIA)
         if (((variable >> 8) & 0xff) == 3)
