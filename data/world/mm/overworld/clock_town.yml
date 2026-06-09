@@ -475,12 +475,12 @@
     DAY3_AM_06_00: "has(ROOM_KEY)"
   events:
     SETUP_MEET: "soul_anju && has(MASK_KAFEI) && between(DAY1_PM_01_45, NIGHT1_PM_09_00)"
-    MEET_ANJU: "soul_anju && event(SETUP_MEET) && cond(setting(erIndoorsExtra), between(NIGHT1_AM_12_00, DAY2_AM_06_00), between(NIGHT1_AM_12_00, DAY2_AM_06_00) && (has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    MEET_ANJU: "soul_anju && event(SETUP_MEET) && cond(setting(erIndoorsExtra), between(NIGHT1_AM_12_00, DAY2_AM_06_00), between(NIGHT1_AM_12_00, DAY2_AM_06_00) && (has(ROOM_KEY) || (rusty_key(RUSTY_KEY_STOCK_POT_INN_ROOF) && (has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))))"
     DELIVER_PENDANT: "soul_anju && has(PENDANT_OF_MEMORIES) && (between(DAY2_AM_06_00, NIGHT2_PM_09_00) || between(DAY3_AM_06_00, DAY3_AM_11_30))"
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
-    TOILET_HAND: "midnight && soul_npc(SOUL_NPC_TOILET_HAND) && (setting(erIndoorsExtra) || clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT))"
+    TOILET_HAND: "midnight && soul_npc(SOUL_NPC_TOILET_HAND) && (setting(erIndoorsExtra) || clock_night3 || has(ROOM_KEY) || (rusty_key(RUSTY_KEY_STOCK_POT_INN_ROOF) && (has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT))))"
     TOILET_RUTO_LETTER: "has_ruto_letter && event(TOILET_HAND)"
   locations:
     "Stock Pot Inn Room Key": "soul_anju && between(DAY1_PM_01_45, DAY1_PM_04_00)"
