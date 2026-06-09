@@ -199,7 +199,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_DEKU_SEEDS_30:
     case GI_MM_DEKU_SEEDS_5:
     case GI_MM_DEKU_SEEDS_30:
-        return !Config_Flag(CFG_SHARED_SLINGSHOT);
+        return !Config_Flag(CFG_SHARED_SLINGSHOT) && Config_Flag(CFG_MM_SLINGSHOT);
     case GI_OOT_BOMB_BAG:
     case GI_OOT_BOMB_BAG2:
     case GI_OOT_BOMB_BAG3:
