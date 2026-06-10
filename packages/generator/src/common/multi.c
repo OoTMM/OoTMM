@@ -323,7 +323,12 @@ static void Multi_ReceiveItem(PlayState* play, NetContext* net)
             return;
         Multi_GiveItem(play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags);
         if (needsMark)
-            Mark_Set(play, ovType, sceneId, roomId, id);
+        {
+            if (net->cmdIn.itemRecv.game)
+                Mark_SetMm(play, ovType, sceneId, roomId, id);
+            else
+                Mark_SetOot(play, ovType, sceneId, roomId, id);
+        }
     }
 
     /* Mark as obtained on the network */
