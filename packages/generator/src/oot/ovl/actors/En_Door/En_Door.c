@@ -179,7 +179,7 @@ static int EnDoor_GetID(PlayState* play, int id)
     case SCE_OOT_RANCH_HOUSE_SILO:
         switch (id)
         {
-        case 0: return DOORID_OOT_RANCH_STABLE;
+        case 0: return DOORID_OOT_SILO;
         case 1: return DOORID_OOT_RANCH_HOUSE;
         case 2: return DOORID_OOT_RANCH_HOUSE_ROOM;
         }
