@@ -569,7 +569,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
         comboTextHijackItemEx(play, &o, count);
 
     /* Mark the item, and add to GI skips in multi */
-    if (Item_IsPlayerSelf(o.player) && q->ovType != OV_NONE)
+    if (Item_IsPlayerSelf(o.playerFrom) && q->ovType != OV_NONE)
     {
         Mark_Set(play, q->ovType, q->sceneId, q->roomId, q->id);
         if (Config_Flag(CFG_MULTIPLAYER) && (q->ovFlags & OVF_RENEW))

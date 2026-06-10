@@ -282,14 +282,17 @@ static void Multi_ReceiveItem(PlayState* play, NetContext* net)
     u8 id;
     u8 isMarked;
     u8 isSamePlayer;
+    u8 needsMark;
 
     gi = net->cmdIn.itemRecv.gi;
     isMarked = 0;
+    needsMark = 0;
     isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboConfig.playerId);
     if (isSamePlayer)
     {
         if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
         {
+            needsMark = 1;
             ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
             sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
             roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
@@ -319,6 +322,8 @@ static void Multi_ReceiveItem(PlayState* play, NetContext* net)
         if (!Item_SafeToReceive(play) || g.decoysCount)
             return;
         Multi_GiveItem(play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags);
+        if (needsMark)
+            Mark_Set(play, ovType, sceneId, roomId, id);
     }
 
     /* Mark as obtained on the network */
