@@ -225,6 +225,7 @@ void Sram_SaveNewDay(PlayState* play);
 #endif
 
 void Grayscale(void* buffer, u16 size);
+void change_hsv(Color_RGBA8 *pixels, size_t size, float hue_shift, float saturation_mul, float brightness_mul);
 
 extern u32 gSegments[16];
 

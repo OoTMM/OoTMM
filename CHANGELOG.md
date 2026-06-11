@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Load Save Screen now shows all collected equipment upgrades and all available cross game items.
 - Blitz presets adjusted to use Song Event Plando to change the following Song Event Locations:
 
     - Death Mountain Fairy Fountains and Goron City Darunia's Room from Zelda's Lullaby to Goron Lullaby.
@@ -45,6 +46,7 @@ All notable changes to this project will be documented in this file.
     - Ikana Canyon Composer Cavern from Song of Storms to Zelda's Lullaby.
     - Everything else not mentioned here is vanilla.
 
+- Save Screen now shows all collected equipment upgrades and all available cross game items.
 - Adjusted Beginner preset to have Ageless Soaring enabled.
 - Adjusted the Blitz preset in the following ways:
     - Enable Ageless Soaring.
@@ -63,6 +65,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Load Save screen properly lets you cycle to the next page if Only MM or Only OOT is on.
 - Fix Tatl sometimes crashing when you talk to her during 4th day.
 - Fix logic for MM Beneath The Graveyard Dampe Chest not checking for the poes soul.
 - Fix seeds requiring very early warp songs usage being sometimes unbeatable. (#905)
