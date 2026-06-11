@@ -832,7 +832,7 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if (this->heldItemId == ITEM_OOT_GREAT_FAIRY_SWORD)
+        if (this->heldItemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD)
             *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GREAT_FAIRY_SWORD), CUSTOM_OBJECT_EQ_GREAT_FAIRY_SWORD_0);
         if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.info.equips.equipment.swords == 1)
         {
@@ -890,9 +890,9 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
                 *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
             }
         }
-        if (this->heldItemId == ITEM_OOT_GREAT_FAIRY_SWORD)
+        if (this->heldItemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD)
             *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GREAT_FAIRY_SWORD), CUSTOM_OBJECT_EQ_GREAT_FAIRY_SWORD_0);
-        else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.info.equips.equipment.swords == 3)
+        else if (this->heldItemId != ITEM_OOT_GREAT_FAIRY_SWORD &&(this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.info.equips.equipment.swords == 3)
         {
             if (gSave.info.playerData.swordHealth)
                 *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_0);
@@ -1802,6 +1802,22 @@ void Player_InvokeItemActionInitFunc(PlayState* play, Player* this, ItemActionIn
             break;
     }
 }
+
+typedef s32 (*Player_ActionToSwordFunc)(Player* player, s32 itemAction);
+
+s32 Player_CustomActionToSword(Player* player, s32 itemAction)
+{
+    Player_ActionToSwordFunc Player_ActionToSwordImpl;
+
+    if (itemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD)
+        return 2; /* PLAYER_IA_SWORD_BIGGORON - PLAYER_IA_SWORD_MASTER */
+
+    Player_ActionToSwordImpl = (Player_ActionToSwordFunc)0x80079d94;
+    return Player_ActionToSwordImpl(player, itemAction);
+}
+
+PATCH_CALL(0x80832614, Player_CustomActionToSword);
+PATCH_CALL(0x80832654, Player_CustomActionToSword);
 
 typedef void (*UpperActionFunc)(Player*, PlayState*);
 typedef void (*Player_SetUpperActionFunc)(Player*, UpperActionFunc);
