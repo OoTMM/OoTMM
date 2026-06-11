@@ -942,6 +942,24 @@ class LogicPassWorldTransform {
       this.addItem(Items.OOT_MASK_KAMARO);
     }
 
+    if (settings.sharedMaskGerudo) {
+      this.replaceItem(Items.OOT_MASK_GERUDO, Items.SHARED_MASK_GERUDO);
+    } else if (settings.gerudoMaskMm) {
+      this.addItem(Items.MM_MASK_GERUDO);
+    }
+
+    if (settings.sharedMaskSkull) {
+      this.replaceItem(Items.OOT_MASK_SKULL, Items.SHARED_MASK_SKULL);
+    } else if (settings.skullMaskMm) {
+      this.addItem(Items.MM_MASK_SKULL);
+    }
+
+    if (settings.sharedMaskSpooky) {
+      this.replaceItem(Items.OOT_MASK_SPOOKY, Items.SHARED_MASK_SPOOKY);
+    } else if (settings.spookyMaskMm) {
+      this.addItem(Items.MM_MASK_SPOOKY);
+    }
+
     if (settings.sharedSongElegy) {
       this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
     } else if (settings.elegyOot) {

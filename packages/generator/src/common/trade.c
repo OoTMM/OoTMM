@@ -105,6 +105,17 @@ const u8 kMmBowSlingshot[] = {
     ITEM_MM_SLINGSHOT,
 };
 
+const u8 kMmStoneGerudoSkull[] = {
+    ITEM_MM_MASK_STONE,
+    ITEM_MM_MASK_GERUDO,
+    ITEM_MM_MASK_SKULL,
+};
+
+const u8 kMmGibdoSpooky[] = {
+    ITEM_MM_MASK_GIBDO,
+    ITEM_MM_MASK_SPOOKY,
+};
+
 /* Return value is used to index gVertex */
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
@@ -149,7 +160,7 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTableSize = ARRAY_COUNT(kMmGFSHammer);
         result = 5;
         break;
-    case ITEM_MM_PICTOGRAPH_BOX:
+    case ITS_MM_PICTOBOX:
         *outFlags = gMmExtraItems.boomPicto;
         *outTable = kMmPictoBoom;
         *outTableSize = ARRAY_COUNT(kMmPictoBoom);
@@ -160,6 +171,18 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kMmBowSlingshot;
         *outTableSize = ARRAY_COUNT(kMmBowSlingshot);
         result = 7;
+        break;
+    case ITS_MM_MASK_STONE:
+        *outFlags = gMmExtraItems.stoneGerudoSkull;
+        *outTable = kMmStoneGerudoSkull;
+        *outTableSize = ARRAY_COUNT(kMmStoneGerudoSkull);
+        result = 8;
+        break;
+    case ITS_MM_MASK_GIBDO:
+        *outFlags = gMmExtraItems.gibdoSpooky;
+        *outTable = kMmGibdoSpooky;
+        *outTableSize = ARRAY_COUNT(kMmGibdoSpooky);
+        result = 9;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:

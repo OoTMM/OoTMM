@@ -203,6 +203,9 @@ int SpecialConds_Eval(int special)
     u8 hasMaskBlast;
     u8 hasMaskStone;
     u8 hasMaskKamaro;
+    u8 hasMaskGerudo;
+    u8 hasMaskSkull;
+    u8 hasMaskSpooky;
 
     cond = &gComboConfig.special[special];
     count = 0;
@@ -214,6 +217,9 @@ int SpecialConds_Eval(int special)
     hasMaskBlast = 0;
     hasMaskStone = 0;
     hasMaskKamaro = 0;
+    hasMaskGerudo = 0;
+    hasMaskSkull = 0;
+    hasMaskSpooky = 0;
 
     if (cond->flags & SPF_STONES)
     {
@@ -304,11 +310,13 @@ int SpecialConds_Eval(int special)
 
         if (Config_Flag(CFG_SHARED_MASK_STONE))
         {
-            if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) hasMaskStone = 1;
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 0))
+                hasMaskStone = 1;
         }
         else
         {
-            if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 0))
+                count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_KAMARO))
@@ -319,7 +327,40 @@ int SpecialConds_Eval(int special)
         {
             if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
         }
+        if (Config_Flag(CFG_SHARED_MASK_GERUDO))
+        {
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 1))
+                hasMaskGerudo = 1;
+        }
+        else
+        {
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 1))
+                count++;
+        }
 
+        if (Config_Flag(CFG_SHARED_MASK_SKULL))
+        {
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 2))
+                hasMaskSkull = 1;
+        }
+        else
+        {
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 2))
+                count++;
+        }
+
+        if (Config_Flag(CFG_SHARED_MASK_SPOOKY))
+        {
+            if (gMmExtraItems.gibdoSpooky & (1 << 1))
+                hasMaskSpooky = 1;
+        }
+        else
+        {
+            if (gMmExtraItems.gibdoSpooky & (1 << 1))
+                count++;
+        }
+        if (gMmExtraItems.gibdoSpooky & (1 << 0))
+            count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY) count++;
@@ -330,8 +371,6 @@ int SpecialConds_Eval(int special)
         if (gMmSave.info.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE) count++;
-        if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
-        if (gMmSave.info.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT) count++;
@@ -435,9 +474,38 @@ int SpecialConds_Eval(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_KAMARO)) count++;
         }
 
-        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
-        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
-        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
+        if (Config_Flag(CFG_SHARED_MASK_GERUDO))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK))
+                hasMaskGerudo = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK))
+                count++;
+        }
+
+        if (Config_Flag(CFG_SHARED_MASK_SKULL))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK))
+                hasMaskSkull = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK))
+                count++;
+        }
+
+        if (Config_Flag(CFG_SHARED_MASK_SPOOKY))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK))
+                hasMaskSpooky = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK))
+                count++;
+        }
     }
 
     if (cond->flags & SPF_TRIFORCE)
@@ -465,6 +533,8 @@ int SpecialConds_Eval(int special)
     count += hasMaskBlast;
     count += hasMaskStone;
     count += hasMaskKamaro;
-
+    count += hasMaskGerudo;
+    count += hasMaskSkull;
+    count += hasMaskSpooky;
     return count >= cond->count;
 }

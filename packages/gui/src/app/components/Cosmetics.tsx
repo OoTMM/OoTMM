@@ -84,10 +84,18 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
 }
 
 export function CosmeticsEditor() {
+  const settings = useStore(state => state.settings);
   const options: { name: string, value: string }[] = Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }));
   options.push({ name: "Random", value: "random" });
-  const nonFiles = COSMETICS.filter(c => c.type !== 'file');
-  const files = COSMETICS.filter(c => c.type === 'file');
+  const nonFiles = COSMETICS.filter(c => {
+    const cond = (c as any).cond;
+    return c.type !== 'file' && (!cond || cond(settings));
+  });
+
+  const files = COSMETICS.filter(c => {
+    const cond = (c as any).cond;
+    return c.type === 'file' && (!cond || cond(settings));
+  });
 
   return <main className="p-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

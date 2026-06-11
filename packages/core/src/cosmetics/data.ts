@@ -1,3 +1,13 @@
+import type {Game} from "../defines.ts";
+
+function hasGame(x: any, g: Game) {
+  return x.games === g || x.games === 'ootmm';
+}
+
+const hasOoTMM = (x: any) => x.games === 'ootmm';
+const hasOoT = (x: any) => hasGame(x, 'oot');
+const hasMM = (x: any) => hasGame(x, 'mm');
+
 export const COSMETICS = [{
   key: 'defaultHold',
   name: 'Default Hold Target',
@@ -32,6 +42,13 @@ export const COSMETICS = [{
   description: 'Disable the low health warning beep sound.',
   type: 'boolean',
   default: false,
+}, {
+  key: 'gerudoTunic',
+  name: 'Gerudo Mask Tunic',
+  description: 'If enabled, Link\'s default MM Human tunic will become purple while wearing the Gerudo Mask.',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => hasMM(s) && s.gerudoMaskMm,
 }, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',

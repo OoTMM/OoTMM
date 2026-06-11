@@ -587,6 +587,8 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.boomPicto = 3;
     gCustomSave.ootSongs.value = 0xff;
     gMmExtraItems.bowSlingshot = 3;
+    gMmExtraItems.stoneGerudoSkull = 7;
+    gMmExtraItems.gibdoSpooky = 3;
 
     // gCustomSave.halfDays = 0b111111;
 
