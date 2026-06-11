@@ -5,7 +5,7 @@
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
     "Near Deku Shrine": "(is_swamp_cleared && can_swim) || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
-    "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
+    "Deku Palace Main": "can_enter_deku_palace || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
     "Deku Palace Upper": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && can_use_beans"
   events:
     NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || (((is_swamp_cleared && can_swim) || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short || can_hammer)))"
@@ -71,11 +71,11 @@
   region: ENTRANCE
   exits:
     "GLOBAL": "true"
-    "Deku Palace Main": "has(MASK_DEKU)"
-    "Deku Palace Throne To Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
+    "Deku Palace Main": "can_enter_deku_palace"
+    "Deku Palace Throne To Cage": "(event(RETURN_PRINCESS) || has_mask_skull) && short_hook_anywhere"
   events:
-    PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
-    RETURN_PRINCESS: "is_swamp_cleared && has_deku_princess && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
+    PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && can_enter_deku_palace && soul_npc(SOUL_NPC_DEKU_KING)"
+    RETURN_PRINCESS: "is_swamp_cleared && has_deku_princess && can_enter_deku_palace && soul_npc(SOUL_NPC_DEKU_KING)"
 
 "Deku Palace Throne To Cage":
   region: BUFFER_DELAYED

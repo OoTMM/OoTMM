@@ -107,4 +107,6 @@ typedef enum MessageMode
     /* 0x4F */ MSGMODE_OWL_SAVE_2
 } MessageMode;
 
+void SubS_SetOfferMode(u16* flags, u16 offerMode, u16 mask);
+
 #endif

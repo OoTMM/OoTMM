@@ -724,4 +724,6 @@ typedef struct AttackAnimInfo {
 
 int Player_IsHoldingHookshot(Player*);
 
+bool func_800B715C(struct PlayState* play);
+
 #endif

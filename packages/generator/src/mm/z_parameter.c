@@ -47,6 +47,15 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_SLINGSHOT:
             id = ITEM_OOT_SLINGSHOT;
             break;
+        case ITEM_MM_MASK_GERUDO:
+            id = ITEM_OOT_GERUDO_MASK;
+            break;
+        case ITEM_MM_MASK_SKULL:
+            id = ITEM_OOT_SKULL_MASK;
+            break;
+        case ITEM_MM_MASK_SPOOKY:
+            id = ITEM_OOT_SPOOKY_MASK;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);

@@ -607,15 +607,18 @@
 - { id: MM_MASK_POSTMAN, item: MM_MASK_POSTMAN, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_POSTMAN, object: [mm, 0x0225], name: "the <C1>Postman's Hat" }
 - { id: MM_MASK_COUPLE, item: MM_MASK_COUPLE, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_COUPLE, object: [mm, 0x0282], name: "the <C1>Couple's Mask" }
 - { id: MM_MASK_GREAT_FAIRY, item: MM_MASK_GREAT_FAIRY, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_GREAT_FAIRY, object: [mm, 0x020a], name: "the <C1>Great Fairy Mask" }
-- { id: MM_MASK_GIBDO, item: MM_MASK_GIBDO, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_GIBDO, object: [mm, 0x020b], name: "the <C1>Gibdo Mask" }
+- { id: MM_MASK_GIBDO, item: MM_MASK_GIBDO, type: MASK, add: [MM_GIBDOSPOOKY, 0], flags: 0xa0, draw: MM_MASK_GIBDO, object: [mm, 0x020b], name: "the <C1>Gibdo Mask" }
 - { id: MM_MASK_DON_GERO, item: MM_MASK_DON_GERO, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_DON_GERO, object: [mm, 0x0266], name: "the <C1>Don Gero's Mask" }
 - { id: MM_MASK_KAMARO, item: MM_MASK_KAMARO, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_KAMARO, object: [mm, 0x027d], name: "the <C1>Kamaro's Mask" }
 - { id: MM_MASK_TRUTH, item: MM_MASK_TRUTH, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MASK_TRUTH, object: [mm, 0x0104], name: "the <C1>Mask of Truth" }
-- { id: MM_MASK_STONE, item: MM_MASK_STONE, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
+- { id: MM_MASK_STONE, item: MM_MASK_STONE, type: MASK, add: [MM_STONEGERUDOSKULL, 0], flags: 0xa0, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
 - { id: MM_MASK_BREMEN, item: MM_MASK_BREMEN, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_BREMEN, object: [mm, 0x025a], name: "the <C1>Bremen Mask" }
 - { id: MM_MASK_BLAST, item: MM_MASK_BLAST, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_BLAST, object: [mm, 0x026d], name: "the <C1>Blast Mask" }
 - { id: MM_MASK_SCENTS, item: MM_MASK_SCENTS, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_SCENTS, object: [mm, 0x027e], name: "the <C1>Mask of Scents" }
 - { id: MM_MASK_KAFEI, item: MM_MASK_KAFEI, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_KAFEI, object: [mm, 0x0258], name: "the <C1>Kafei's Mask" }
+- { id: MM_MASK_GERUDO, item: MM_MASK_GERUDO, type: MASK, add: [MM_STONEGERUDOSKULL, 1], flags: 0x80, draw: OOT_MASK_GERUDO, object: [oot, 0x0152], name: "the <C1>Gerudo Mask" }
+- { id: MM_MASK_SKULL, item: MM_MASK_SKULL, type: MASK, add: [MM_STONEGERUDOSKULL, 2], flags: 0x80, draw: OOT_MASK_SKULL, object: [oot, 0x0136], name: "the <C1>Skull Mask" }
+- { id: MM_MASK_SPOOKY, item: MM_MASK_SPOOKY, type: MASK, add: [MM_GIBDOSPOOKY, 1], flags: 0x80, draw: OOT_MASK_SPOOKY, object: [oot, 0x0135], name: "the <C1>Spooky Mask" }
 - { id: MM_CHATEAU, item: MM_CHATEAU, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_CHATEAU, object: [mm, 0x00c1], name: "some <C0>Chateau Romani" }
 - { id: MM_MILK, item: MM_MILK, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MILK, object: [mm, 0x00c1], name: "some <C0>Milk" }
 - { id: MM_GOLD_DUST, item: MM_GOLD_DUST, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }

@@ -46,6 +46,8 @@
 # define MASK_DEKU               0x18
 #endif
 
+u8 Player_MaskIdToItemId(s32 maskIdMinusOne);
+
 typedef struct PlayState PlayState;
 
 #if defined(GAME_OOT)

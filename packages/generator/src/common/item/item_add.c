@@ -2147,6 +2147,24 @@ static int addItemMmRustyKey(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemStoneGerudoSkullMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmStoneGerudoSkull[param];
+    if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_MASK_STONE] = itemId;
+    gMmExtraItems.stoneGerudoSkull |= (1 << (u8)param);
+    return 0;
+}
+
+static int addItemGibdoSpookyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmGibdoSpooky[param];
+    if (gMmSave.info.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_MASK_GIBDO] = itemId;
+    gMmExtraItems.gibdoSpooky |= (1 << (u8)param);
+    return 0;
+}
+
 static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmExtraFlags3.stoneAgony = 1;
@@ -2338,6 +2356,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemMmRustyKey,
     addItemSlingshotMm,
     addItemSeedsMm,
+    addItemStoneGerudoSkullMm,
+    addItemGibdoSpookyMm,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");
@@ -2493,6 +2513,9 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_MASK_BLAST, GI_OOT_MASK_BLAST, GI_MM_MASK_BLAST },
     { CFG_SHARED_MASK_STONE, GI_OOT_MASK_STONE, GI_MM_MASK_STONE },
     { CFG_SHARED_MASK_KAMARO, GI_OOT_MASK_KAMARO, GI_MM_MASK_KAMARO },
+    { CFG_SHARED_MASK_GERUDO, GI_OOT_MASK_GERUDO, GI_MM_MASK_GERUDO },
+    { CFG_SHARED_MASK_SKULL, GI_OOT_MASK_SKULL, GI_MM_MASK_SKULL },
+    { CFG_SHARED_MASK_SPOOKY, GI_OOT_MASK_SPOOKY, GI_MM_MASK_SPOOKY },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_BRONZE, GI_MM_SCALE_BRONZE },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_SILVER, GI_MM_SCALE_SILVER },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_GOLDEN, GI_MM_SCALE_GOLDEN },

@@ -13,6 +13,17 @@ PATCH_START 0x8081c674
    nop
 PATCH_END
 
+KaleidoScope_AfterSetCutsorColor_Mask_Trampoline:
+  lw      a0, 0x50(sp)
+  lw      s0, 0x18(sp)
+  j       KaleidoScope_AfterSetCutsorColor
+   addiu  sp, sp, 0x50
+
+PATCH_START 0x80820F94
+  j KaleidoScope_AfterSetCutsorColor_Mask_Trampoline
+   nop
+PATCH_END
+
 /* Relocs */
 PATCH_START 0x8082cea4
 .int 0
@@ -70,6 +81,14 @@ PATCH_END
 
 PATCH_START 0x8081c5e4
   jal   KaleidoScope_ShowItemMessage
+PATCH_END
+
+PATCH_START 0x80820F00
+  jal KaleidoScope_ShowItemMessage
+PATCH_END
+
+PATCH_START 0x80820F20
+  jal KaleidoScope_ShowItemMessage
 PATCH_END
 
 KaleidoScope_LoadIcons_Hook:
@@ -144,19 +163,18 @@ KaleidoScope_DrawMaskCustom_Hook:
   addiu   sp, sp, -0x20
   sw      ra, 0x001C (sp)
 
-  // Parameter 5 (inventory slot index)
-  addiu   at, s1, 0x0018
-  sw      at, 0x0010 (sp)
+  // Parameter 5: unused by KaleidoScope_DrawMaskIconCustom,
+  // since it derives the mask slot from vertIdx.
+  sw      zero, 0x0010 (sp)
 
-  // Parameter 6 (vertices index for Quadrangle)
+  // Parameter 6: vertices index for Quadrangle
   lw      at, 0x0030 (sp)
   sw      at, 0x0014 (sp)
 
-  // Parameter 7 (Vertex buffer index)
+  // Parameter 7: vertex buffer index
   sw      s4, 0x0018 (sp)
 
-  jal     KaleidoScope_DrawIconCustom
-  // Overwrite A1 with item Id in V0 (we can calculate A1 with it later)
+  jal     KaleidoScope_DrawMaskIconCustom
    or     a1, v0, zero
 
   lw      ra, 0x001C (sp)
