@@ -75,6 +75,7 @@ All notable changes to this project will be documented in this file.
 - Fix "OOT Kokiri Shop Wonder Item" location incorrectly expecting the Shopkeeper's Soul to obtain.
 - Fix frog game softlocking when playing a custom song.
 - Fix ammo amount to display in green when bombchu are at capacity.
+- Fix custom music not using formmask files when available.
 
 ## [30.1] - 2026-03-15
 

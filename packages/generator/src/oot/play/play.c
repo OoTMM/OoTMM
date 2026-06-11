@@ -582,6 +582,7 @@ void Play_MainWrapper(PlayState* play)
     Play_Main(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
+    Music_Update(play);
 
     if (play->pauseCtx.state == 0)
     {
