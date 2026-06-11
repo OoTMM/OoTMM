@@ -1275,7 +1275,7 @@ void FileSelect_ConfirmFile(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     Input* input = &this->state.input[0];
 
-    if (CHECK_BTN_ANY(input->rel.button, BTN_L | BTN_CUP) && !Config_Flag(CFG_ONLY_OOT) && !Config_Flag(CFG_ONLY_MM)) {
+    if (CHECK_BTN_ANY(input->rel.button, BTN_L | BTN_CUP)) {
         FileSelect_CustomFileInfoPageNext(this);
     }
 
