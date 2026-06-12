@@ -98,24 +98,6 @@ void Player_UseItem(PlayState* play, Player* link, s16 itemId)
 
 PATCH_CALL(0x8083212c, Player_UseItem);
 
-s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
-    switch (itemAction)
-    {
-    case PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD:
-        return 5;
-    }
-
-    u8* sActionModelGroups = (u8*)0x800f7714;
-    s32 modelGroup = sActionModelGroups[itemAction];
-    if ((modelGroup == 2) && Player_IsChildWithHylianShield(player)) {
-        return 1;
-    } else {
-        return modelGroup;
-    }
-}
-
-PATCH_FUNC(0x800794b0, Player_CustomActionToModelGroup)
-
 s32 Player_CustomActionToMeleeWeapon(s32 itemAction) {
     if (itemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD) {
         return 3; // PLAYER_IA_SWORD_BIGGORON
@@ -631,6 +613,12 @@ static u8 sCustomActionModelGroups[] = {
 
 s32 Player_ActionToModelGroup(Player* this, s32 itemAction) {
     s32 modelGroup;
+
+    if (itemAction == PLAYER_CUSTOM_IA_GREAT_FAIRY_SWORD)
+    {
+        return 5; /* Two-handed/BGS-ish model group */
+    }
+
     s8 customItemAction = itemAction - PLAYER_CUSTOM_IA_MIN;
     if (customItemAction >= 0 && customItemAction < ARRAY_COUNT(sCustomActionModelGroups))
     {
