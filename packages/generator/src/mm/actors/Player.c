@@ -1188,6 +1188,8 @@ static void DrawSlingshotString(PlayState* play, Player* player)
     void* obj;
     Vec3f stringOrigin;
     f32 distXYZ;
+    f32 stringMaxScale;
+    f32 stringPullScale;
 
     obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
     if (!obj) {
@@ -1208,15 +1210,23 @@ static void DrawSlingshotString(PlayState* play, Player* player)
         Matrix_MultVec3f(&sZeroVec, &stringOrigin);
         distXYZ = Math_Vec3f_DistXYZ(&player->leftHandWorld.pos, &stringOrigin);
 
+        if (comboIsLinkAdult()) {
+            stringMaxScale = 1.65f;
+            stringPullScale = 1.6f;
+        } else {
+            stringMaxScale = 1.0f;
+            stringPullScale = 1.6f;
+        }
+
         player->unk_B08 = distXYZ - 3.0f;
 
         if (distXYZ < 3.0f) {
             player->unk_B08 = 0.0f;
         } else {
-            player->unk_B08 *= 1.6f;
+            player->unk_B08 *= stringPullScale;
 
-            if (player->unk_B08 > 1.0f) {
-                player->unk_B08 = 1.0f;
+            if (player->unk_B08 > stringMaxScale) {
+                player->unk_B08 = stringMaxScale;
             }
         }
 
@@ -1265,30 +1275,78 @@ static int Player_IsUsingCustomSlingshot(Player* player)
     return player->transformation == MM_PLAYER_FORM_HUMAN && (player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT || player->heldItemAction == PLAYER_CUSTOM_IA_SLINGSHOT);
 }
 
-static void* Player_CustomSlingshotFirstPerson(void)
+static void* Player_CustomSlingshotFirstPerson(s32 limbIndex)
 {
     void* slingshotObj;
     void* armObj;
     Gfx* dlist;
     Gfx* d;
 
-    slingshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
-    armObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT_RIGHT_ARM_STRETCHED);
+    if (comboIsLinkAdult())
+    {
+        armObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_ADULT_RIGHT_ARM_OUT);
+        if (!armObj)
+            return (void*)kDListEmpty;
 
-    if (!slingshotObj || !armObj)
-        return (void*)kDListEmpty;
+        /* Adult arm limb: draw only the arm DL here */
+        if (limbIndex == PLAYER_LIMB_RIGHT_FOREARM) /* or PLAYER_LIMB_RIGHT_ARM */
+        {
+            d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 4);
 
-    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 6);
+            gSPSegment(d++, 0x0a, armObj);
+            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_ADULT_RIGHT_ARM_OUT_0); /* gLinkAdultRightArmOutNearDL */
 
-    gSPSegment(d++, 0x0a, armObj);
-    gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_RIGHT_ARM_STRETCHED_0);
+            gSPEndDisplayList(d++);
 
-    gSPSegment(d++, 0x0a, slingshotObj);
-    gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+            return dlist;
+        }
 
-    gSPEndDisplayList(d++);
+        /* Adult hand limb: draw hand + slingshot here */
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
+        {
+            slingshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
+            if (!slingshotObj)
+                return (void*)kDListEmpty;
 
-    return dlist;
+            d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 6);
+
+            gSPSegment(d++, 0x0a, armObj);
+            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_ADULT_RIGHT_ARM_OUT_1); /* gLinkAdultRightHandOutNearDL */
+
+            gSPSegment(d++, 0x0a, slingshotObj);
+            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+
+            gSPEndDisplayList(d++);
+
+            return dlist;
+        }
+
+        return NULL;
+    }
+
+    /* Child: keep the old combined stretched arm on the hand limb */
+    if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
+    {
+        slingshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
+        armObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT_RIGHT_ARM_STRETCHED);
+
+        if (!slingshotObj || !armObj)
+            return (void*)kDListEmpty;
+
+        d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 6);
+
+        gSPSegment(d++, 0x0a, armObj);
+        gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_RIGHT_ARM_STRETCHED_0);
+
+        gSPSegment(d++, 0x0a, slingshotObj);
+        gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+
+        gSPEndDisplayList(d++);
+
+        return dlist;
+    }
+
+    return NULL;
 }
 
 static int Player_IsCustomBoomerangThrown(Player* player)
@@ -1316,9 +1374,9 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
     if (Player_IsUsingCustomSlingshot(player) &&
             sPlayerOverrideLimb == Player_OverrideLimbDrawGameplayFirstPerson)
     {
-        if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
+        if (limbIndex == PLAYER_LIMB_RIGHT_HAND || limbIndex == PLAYER_LIMB_RIGHT_FOREARM)
         {
-            *dList = Player_CustomSlingshotFirstPerson();
+            *dList = Player_CustomSlingshotFirstPerson(limbIndex);
             return FALSE;
         }
     }
