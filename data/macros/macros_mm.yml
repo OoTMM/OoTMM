@@ -208,7 +208,7 @@
 "can_fight": "has_weapon || has_mask_zora || has_mask_goron"
 "has_shield": "renewable(SHIELD_HERO) || renewable(SHIELD_DEKU) || renewable(SHARED_SHIELD_DEKU) || renewable(SHARED_SHIELD_HYLIAN) || has(SHIELD, 1) || cond(setting(dekuShieldMm), has(SHARED_SHIELD, 1), has(SHARED_SHIELD, 2)) || has_mirror_shield"
 "can_activate_crystal": "can_break_boulders || has_weapon || has_arrows || can_hookshot_short || has(MASK_DEKU) || has_mask_zora || has_sticks"
-"can_evade_gerudo": "has_arrows || can_hookshot_short || has_mask_zora || has_mask_stone"
+"can_evade_gerudo": "has_arrows || can_use_slingshot || has_boomerang || can_hookshot_short || has_mask_zora || has_mask_stone"
 "can_goron_bomb_jump": "trick(MM_GORON_BOMB_JUMP) && has_mask_goron && (has_bombs || trick_keg_explosives)"
 "can_hookshot_n(x)": "has(HOOKSHOT, x) || has(SHARED_HOOKSHOT, x)"
 "can_hookshot_short": "can_hookshot_n(1)"
