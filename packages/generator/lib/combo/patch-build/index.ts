@@ -121,11 +121,11 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       }
       /* Pack the payload */
       const payload = await fileResolver.fetch(`${game}_payload.bin`);
-      if (payload.length > (game === 'mm' ? 0x50000 : 0x80000)) {
+      if (payload.length > (game === 'mm' ? 0x60000 : 0x80000)) {
         throw new Error(`Payload too large ${game}`);
       }
       const payloadVrom = game === 'oot' ? 0xf0000000 : 0xf0100000;
-      const payloadVram = game === 'oot' ? 0x80400000 : 0x80730000; /* TODO: Codegen this */
+      const payloadVram = game === 'oot' ? 0x80400000 : 0x80720000; /* TODO: Codegen this */
       const payloadVramEnd = payloadVram + payload.length;
       p.addNewFile({ name: `${game}/payload`, vrom: payloadVrom, vram: { [game]: [payloadVram, payloadVramEnd] }, data: payload, compressed: false });
 

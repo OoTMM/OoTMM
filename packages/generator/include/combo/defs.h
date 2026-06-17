@@ -35,7 +35,7 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_SIZE   0x50000
+# define PAYLOAD_SIZE   0x60000
 # define PAYLOAD_RAM    (0x80780000 - PAYLOAD_SIZE)
 # define HEAP_SIZE      0x40000
 # define HEAP_BASE      (PAYLOAD_RAM - HEAP_SIZE)
