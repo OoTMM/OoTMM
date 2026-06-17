@@ -189,4 +189,7 @@ ASSERT_OFFSET(InterfaceContext, storySegment, 0x33C);
 ASSERT_OFFSET(InterfaceContext, storyAddr, 0x340);
 ASSERT_OFFSET(InterfaceContext, storySize, 0x344);
 
+void Inventory_DeleteItem(s16 item, s16 slot);
+void Inventory_UnequipItem(s16 item);
+
 #endif

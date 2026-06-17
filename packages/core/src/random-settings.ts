@@ -506,6 +506,9 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedSlingshot = true;
     base.sharedStoneAgony = true;
     base.sharedSpinUpgrade = true;
+    base.sharedMaskGerudo = true;
+    base.sharedMaskSkull = true;
+    base.sharedMaskSpooky = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -528,6 +531,9 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedSlingshot = booleanWeighted(random, 0.5);
     base.sharedStoneAgony = booleanWeighted(random, 0.5);
     base.sharedSpinUpgrade = booleanWeighted(random, 0.5);
+    base.sharedMaskGerudo = booleanWeighted(random, 0.5);
+    base.sharedMaskSkull = booleanWeighted(random, 0.5);
+    base.sharedMaskSpooky = booleanWeighted(random, 0.5);
 
     /* Boots - grouping */
     switch (randomInt(random, 4)) {
@@ -586,6 +592,9 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.sharedMaskBlast = true;
       base.sharedMaskStone = true;
       base.sharedMaskKamaro = true;
+      base.sharedMaskGerudo = true;
+      base.sharedMaskSkull = true;
+      base.sharedMaskSpooky = true;
       break;
     default:
       base.sharedMaskGoron = booleanWeighted(random, 0.5);
@@ -596,6 +605,9 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.sharedMaskBlast = booleanWeighted(random, 0.5);
       base.sharedMaskStone = booleanWeighted(random, 0.5);
       base.sharedMaskKamaro = booleanWeighted(random, 0.5);
+      base.sharedMaskGerudo = booleanWeighted(random, 0.5);
+      base.sharedMaskSkull = booleanWeighted(random, 0.5);
+      base.sharedMaskSpooky = booleanWeighted(random, 0.5);
       break;
     }
 
@@ -670,6 +682,9 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.hammerMm = booleanWeighted(random, 0.25);
   base.boomerangMm = booleanWeighted(random, 0.25);
   base.slingshotMm = booleanWeighted(random, 0.25);
+  base.gerudoMaskMm = booleanWeighted(random, 0.25);
+  base.skullMaskMm = booleanWeighted(random, 0.25);
+  base.spookyMaskMm = booleanWeighted(random, 0.25);
   base.sticksNutsUpgradesMm = booleanWeighted(random, 0.5);
   base.stoneAgonyMm = booleanWeighted(random, 0.5);
   base.spinUpgradeOot = booleanWeighted(random, 0.33);

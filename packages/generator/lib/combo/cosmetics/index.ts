@@ -433,6 +433,10 @@ class CosmeticsPass {
       this.patchSymbol('NO_LOW_HEALTH_BEEP', new Uint8Array([0x01]));
     }
 
+    if (c.gerudoTunic) {
+      this.patchSymbol('GERUDO_TUNIC', new Uint8Array([0x01]));
+    }
+
     const log = this.logWriter.emit();
     if (log !== '') {
       return log;
