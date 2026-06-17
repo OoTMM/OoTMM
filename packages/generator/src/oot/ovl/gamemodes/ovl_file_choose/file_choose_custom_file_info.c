@@ -337,27 +337,30 @@ static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this,
  * 0x12 - Small Magic Jar
  * 0x13 - Large Magic Jar
  */
-
+// TODO Figure out a good icon for bombchu bag (bronze, silver, gold bomchu maybe?)
 static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     int startX;
     u16 iconMagic;
-    u16 iconScale;
     u16 iconStrength;
     u16 iconSwordKokiri;
     u16 iconSwordKnife;
+    u16 iconQuiver;
+    u16 iconBombBag;
+    u16 iconBulletBag;
+    u16 iconWallet;
 
     iconMagic = 0x12;
-    iconScale = ITEM_OOT_SILVER_SCALE;
     iconStrength = ITEM_OOT_GORON_BRACELET;
     iconSwordKokiri = ITEM_OOT_SWORD_KOKIRI;
     iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BROKEN;
+    iconQuiver = ITEM_OOT_QUIVER;
+    iconBombBag = ITEM_OOT_BOMB_BAG;
+    iconBulletBag = ITEM_OOT_BULLET_BAG;
+    iconWallet = ITEM_OOT_WALLET2;
 
     if (gOotSave.info.playerData.isDoubleMagicAcquired)
         iconMagic = 0x13;
-
-    if (gOotSave.info.inventory.upgrades.dive > 1)
-        iconScale = ITEM_OOT_GOLDEN_SCALE;
 
     switch (gOotSave.info.inventory.upgrades.strength)
     {
@@ -379,6 +382,40 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
         break;
     }
 
+    switch (gOotSave.info.inventory.upgrades.quiver)
+    {
+    case 2:
+        iconQuiver = ITEM_OOT_QUIVER2;
+        break;
+    case 3:
+        iconQuiver = ITEM_OOT_QUIVER3;
+        break;
+    }
+    switch (gOotSave.info.inventory.upgrades.bombBag)
+    {
+    case 2:
+        iconBombBag = ITEM_OOT_BOMB_BAG2;
+        break;
+    case 3:
+        iconBombBag = ITEM_OOT_BOMB_BAG3;
+        break;
+    }
+    switch (gOotSave.info.inventory.upgrades.bulletBag)
+    {
+    case 2:
+        iconBulletBag = ITEM_OOT_BULLET_BAG2;
+        break;
+    case 3:
+        iconBulletBag = ITEM_OOT_BULLET_BAG3;
+        break;
+    }
+    switch (gOotSave.info.inventory.upgrades.wallet)
+    {
+    case 2:
+        iconWallet = ITEM_OOT_WALLET3;
+        break;
+    }
+
     if (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE && !(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE_BROKEN))
         iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
 
@@ -387,22 +424,107 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     x += drawItemIcon24(list, end, x, y, 0x09, gOotSave.info.inventory.quest.agonyStone);
     x += drawItemIcon24(list, end, x, y, 0x0a, gOotSave.info.inventory.quest.gerudoCard);
     x += drawItemIcon24(list, end, x, y, iconMagic, gOotSave.info.playerData.isMagicAcquired);
-    x += drawItemIcon(list, end, x, y, iconScale, gOotSave.info.inventory.upgrades.dive);
+
+    {
+        void* scaleTex;
+        u8 scaleLevel = gOotSave.info.inventory.upgrades.dive;
+        int hasScale = scaleLevel || gSharedCustomSave.bronzeScaleOot;
+
+        if (scaleLevel >= 2) {
+            scaleTex = allocItemIconOot(end, ITEM_OOT_GOLDEN_SCALE);
+        } else {
+            scaleTex = allocItemIconOot(end, ITEM_OOT_SILVER_SCALE);
+
+            if (scaleLevel == 0 && gSharedCustomSave.bronzeScaleOot) {
+                change_hsv((Color_RGBA8*)scaleTex, 0x1000 / sizeof(Color_RGBA8),
+                           160.0f, 1.0f, 0.8f);
+            }
+        }
+
+        gDPSetPrimColor((*list)++, 0, 0,
+                        hasScale ? 255 : 30,
+                        hasScale ? 255 : 30,
+                        hasScale ? 255 : 30,
+                        hasScale ? 255 : 128);
+
+        quadRGBA8(list, scaleTex, 32, 32, x, y, (float)ICON_SIZE / 32.0f);
+        x += ICON_SIZE;
+    }
+
     x += drawItemIcon(list, end, x, y, iconStrength, gOotSave.info.inventory.upgrades.strength);
     y += ICON_SIZE;
     x = startX;
 
     /* Row 2 */
-    x += drawItemIcon(list, end, x, y, iconSwordKokiri, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI);
-    x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_MASTER, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_MASTER);
-    x += drawItemIcon(list, end, x, y, iconSwordKnife, gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE);
-    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
-    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_HYLIAN, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
-    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_MIRROR, gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_MIRROR);
+    x += drawItemIcon(list, end, x, y, iconWallet,    gOotSave.info.inventory.upgrades.wallet);
+    x += drawItemIcon(list, end, x, y, iconQuiver,    gOotSave.info.inventory.upgrades.quiver);
+    x += drawItemIcon(list, end, x, y, iconBombBag,   gOotSave.info.inventory.upgrades.bombBag);
+    x += drawItemIcon(list, end, x, y, iconBulletBag, gOotSave.info.inventory.upgrades.bulletBag);
+
+    {
+        void* stickTex = allocItemIconOot(end, ITEM_OOT_STICK);
+        u8 dekuStick = gOotSave.info.inventory.upgrades.dekuStick;
+
+        if (dekuStick == 1) {
+            change_hsv((Color_RGBA8*)stickTex, 0x1000 / sizeof(Color_RGBA8),
+                       1.0f, 1.0f, 1.0f);
+        } else if (dekuStick == 2) {
+            change_hsv((Color_RGBA8*)stickTex, 0x1000 / sizeof(Color_RGBA8),
+                       0.0f, 0.15f, 1.6f);
+        } else if (dekuStick >= 3) {
+            change_hsv((Color_RGBA8*)stickTex, 0x1000 / sizeof(Color_RGBA8),
+                       20.0f, 2.5f, 2.0f);
+        }
+
+        gDPSetPrimColor((*list)++, 0, 0,
+                        dekuStick ? 255 : 30,
+                        dekuStick ? 255 : 30,
+                        dekuStick ? 255 : 30,
+                        dekuStick ? 255 : 128);
+
+        quadRGBA8(list, stickTex, 32, 32, x, y, (float)ICON_SIZE / 32.0f);
+        x += ICON_SIZE;
+    }
+
+    {
+        void* nutTex = allocItemIconOot(end, ITEM_OOT_NUT);
+        u8 dekuNut = gOotSave.info.inventory.upgrades.dekuNut;
+
+        if (dekuNut == 1) {
+            change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8),
+                       0.0f, 0.0f, 0.0f);
+        } else if (dekuNut == 2) {
+            change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8),
+                       0.0f, 0.15f, 1.6f);
+        } else if (dekuNut >= 3) {
+            change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8),
+                       30.0f, 2.5f, 2.5f);
+        }
+
+        gDPSetPrimColor((*list)++, 0, 0,
+                        dekuNut ? 255 : 30,
+                        dekuNut ? 255 : 30,
+                        dekuNut ? 255 : 30,
+                        dekuNut ? 255 : 128);
+
+        quadRGBA8(list, nutTex, 32, 32, x, y, (float)ICON_SIZE / 32.0f);
+        x += ICON_SIZE;
+    }
+
     y += ICON_SIZE;
     x = startX;
 
     /* Row 3 */
+    x += drawItemIcon(list, end, x, y, iconSwordKokiri,       gOotSave.info.inventory.equipment.swords  & EQ_OOT_SWORD_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_MASTER, gOotSave.info.inventory.equipment.swords  & EQ_OOT_SWORD_MASTER);
+    x += drawItemIcon(list, end, x, y, iconSwordKnife,        gOotSave.info.inventory.equipment.swords  & EQ_OOT_SWORD_KNIFE);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU,  gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_HYLIAN,gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_MIRROR,gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_MIRROR);
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 4 */
     x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_KOKIRI, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_KOKIRI);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_GORON, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_GORON);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_ZORA, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_ZORA);
@@ -431,22 +553,24 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
 {
     int startX;
     u16 iconMagic;
-    u16 iconScale;
     u16 iconStrength;
     u16 iconSword;
     u16 iconShield;
+    u16 iconQuiver;
+    u16 iconBombBag;
+    u16 iconBulletBag;
+    u16 iconWallet;
 
     iconMagic = 0x12;
-    iconScale = ITEM_OOT_SILVER_SCALE;
     iconStrength = ITEM_OOT_GORON_BRACELET;
     iconSword = ITEM_MM_SWORD_KOKIRI | ICONF_MM;
     iconShield = ITEM_MM_SHIELD_HERO | ICONF_MM;
-
+    iconQuiver = ITEM_MM_QUIVER | ICONF_MM;
+    iconBombBag = ITEM_MM_BOMB_BAG | ICONF_MM;
+    iconBulletBag = ITEM_OOT_BULLET_BAG;
+    iconWallet = ITEM_MM_WALLET2 | ICONF_MM;
     if (gMmSave.info.playerData.isDoubleMagicAcquired)
         iconMagic = 0x13;
-
-    if (gMmSave.info.inventory.upgrades.scale > 1)
-        iconScale = ITEM_OOT_GOLDEN_SCALE;
 
     switch (gMmSave.info.inventory.upgrades.strength)
     {
@@ -467,6 +591,39 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
         iconSword = ITEM_MM_SWORD_GILDED | ICONF_MM;
         break;
     }
+    switch (gMmSave.info.inventory.upgrades.quiver)
+    {
+    case 2:
+        iconQuiver = ITEM_MM_QUIVER2 | ICONF_MM;
+        break;
+    case 3:
+        iconQuiver = ITEM_MM_QUIVER3 | ICONF_MM;
+        break;
+    }
+    switch (gMmSave.info.inventory.upgrades.bombBag)
+    {
+    case 2:
+        iconBombBag = ITEM_MM_BOMB_BAG2 | ICONF_MM;
+        break;
+    case 3:
+        iconBombBag = ITEM_MM_BOMB_BAG3 | ICONF_MM;
+        break;
+    }
+    switch (gMmSave.info.inventory.upgrades.bulletBag)
+    {
+    case 2:
+        iconBulletBag = ITEM_OOT_BULLET_BAG2;
+        break;
+    case 3:
+        iconBulletBag = ITEM_OOT_BULLET_BAG3;
+        break;
+    }
+    switch (gMmSave.info.inventory.upgrades.wallet)
+    {
+    case 2:
+        iconWallet = ITEM_MM_WALLET3 | ICONF_MM;
+        break;
+    }
 
     if (Config_Flag(CFG_MM_DEKU_SHIELD) && gSharedCustomSave.mmShieldIsDeku)
         iconShield = ITEM_OOT_SHIELD_DEKU;
@@ -478,14 +635,116 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
     if (Config_Flag(CFG_MM_STONE_OF_AGONY))
         x += drawItemIcon24(list, end, x, y, 0x09, gMmExtraFlags3.stoneAgony);
     x += drawItemIcon24(list, end, x, y, iconMagic, gMmSave.info.playerData.isMagicAcquired);
-    if (Config_Flag(CFG_MM_SCALES))
-        x += drawItemIcon(list, end, x, y, iconScale, gMmSave.info.inventory.upgrades.scale);
+
+    if (Config_Flag(CFG_MM_SCALES)) {
+        void* scaleTex;
+        u8 scaleLevel = gMmSave.info.inventory.upgrades.scale;
+        int hasScale = scaleLevel || gSharedCustomSave.bronzeScaleMm;
+
+        if (scaleLevel >= 2) {
+            scaleTex = allocItemIconOot(end, ITEM_OOT_GOLDEN_SCALE);
+        } else {
+            scaleTex = allocItemIconOot(end, ITEM_OOT_SILVER_SCALE);
+
+            if (scaleLevel == 0 && gSharedCustomSave.bronzeScaleMm) {
+                change_hsv((Color_RGBA8*)scaleTex, 0x1000 / sizeof(Color_RGBA8),
+                           160.0f, 1.0f, 0.8f);
+            }
+        }
+
+        gDPSetPrimColor((*list)++, 0, 0,
+                        hasScale ? 255 : 30,
+                        hasScale ? 255 : 30,
+                        hasScale ? 255 : 30,
+                        hasScale ? 255 : 128);
+
+        quadRGBA8(list, scaleTex, 32, 32, x, y, (float)ICON_SIZE / 32.0f);
+        x += ICON_SIZE;
+    }
+
     if (Config_Flag(CFG_MM_STRENGTH))
         x += drawItemIcon(list, end, x, y, iconStrength, gMmSave.info.inventory.upgrades.strength);
     //x += drawItemIcon(list, end, x, y, ITEM_MM_BOMBER_NOTEBOOK | ICONF_MM, gMmSave.info.inventory.quest.notebook);
     // Disabled, not working
     x += drawItemIcon(list, end, x, y, iconSword, gMmSave.info.itemEquips.sword);
     x += drawItemIcon(list, end, x, y, iconShield, gMmSave.info.itemEquips.shield);
+
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 2 */
+    x += drawItemIcon(list, end, x, y, iconWallet,  gMmSave.info.inventory.upgrades.wallet);
+    x += drawItemIcon(list, end, x, y, iconQuiver,  gMmSave.info.inventory.upgrades.quiver);
+    x += drawItemIcon(list, end, x, y, iconBombBag, gMmSave.info.inventory.upgrades.bombBag);
+
+    if (Config_Flag(CFG_MM_SLINGSHOT))
+        x += drawItemIcon(list, end, x, y, iconBulletBag, gMmSave.info.inventory.upgrades.bulletBag);
+
+
+    if (Config_Flag(CFG_MM_UPGRADES_STICKS_NUTS)) {
+        {
+            void* stickTex = allocItemIconOot(end, ITEM_OOT_STICK);
+            u8 dekuStick = gMmSave.info.inventory.upgrades.dekuStick;
+
+            if (dekuStick == 1) {
+                change_hsv((Color_RGBA8*)stickTex, 0x1000 / sizeof(Color_RGBA8),
+                           1.0f, 1.0f, 1.0f);
+            } else if (dekuStick == 2) {
+                change_hsv((Color_RGBA8*)stickTex, 0x1000 / sizeof(Color_RGBA8),
+                           0.0f, 0.15f, 1.6f);
+            } else if (dekuStick >= 3) {
+                change_hsv((Color_RGBA8*)stickTex, 0x1000 / sizeof(Color_RGBA8),
+                           20.0f, 2.5f, 2.0f);
+            }
+
+            gDPSetPrimColor((*list)++, 0, 0,
+                            dekuStick ? 255 : 30,
+                            dekuStick ? 255 : 30,
+                            dekuStick ? 255 : 30,
+                            dekuStick ? 255 : 128);
+
+            quadRGBA8(list, stickTex, 32, 32, x, y, (float)ICON_SIZE / 32.0f);
+            x += ICON_SIZE;
+        }
+
+        {
+            void* nutTex = allocItemIconOot(end, ITEM_OOT_NUT);
+            u8 dekuNut = gMmSave.info.inventory.upgrades.dekuNut;
+
+            if (dekuNut == 1) {
+                change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8), 0.0f, 0.0f, 0.0f);
+            } else if (dekuNut == 2) {
+                change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8), 0.0f, 0.15f, 1.6f);
+            } else if (dekuNut >= 3) {
+                change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8), 30.0f, 2.5f, 2.5f);
+            }
+
+            gDPSetPrimColor((*list)++, 0, 0,
+                            dekuNut ? 255 : 30,
+                            dekuNut ? 255 : 30,
+                            dekuNut ? 255 : 30,
+                            dekuNut ? 255 : 128);
+
+            quadRGBA8(list, nutTex, 32, 32, x, y, (float)ICON_SIZE / 32.0f);
+            x += ICON_SIZE;
+        }
+    }
+
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 3 */
+    //OOT Kokiri tunic and boots are used for parity in the look. These should be swapped for actual MM variants once a full MM equipment menu port happens.
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_KOKIRI, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_KOKIRI);
+    if (Config_Flag(CFG_MM_TUNIC_GORON))
+        x += drawItemIcon(list, end, x, y,ITEM_OOT_TUNIC_GORON, gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_TUNIC_GORON));
+    if (Config_Flag(CFG_MM_TUNIC_ZORA))
+        x += drawItemIcon(list, end, x, y,ITEM_OOT_TUNIC_ZORA, gMmExtraTrade.trade3 & (1 << XITEM_MM_TRADE3_TUNIC_ZORA));
+    x += drawItemIcon(list, end, x, y,ITEM_OOT_BOOTS_KOKIRI, gOotSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_KOKIRI);
+    if (Config_Flag(CFG_MM_BOOTS_IRON))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_IRON, gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_BOOTS_IRON));
+    if (Config_Flag(CFG_MM_BOOTS_HOVER))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_HOVER, gMmExtraTrade.trade3 & (1 << XITEM_MM_TRADE3_BOOTS_HOVER));
     y += ICON_SIZE;
     x = startX;
 }
@@ -498,6 +757,7 @@ static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx*
         colorLullaby = 0xff8787;
 
     startX = x;
+    y += 12.f;
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songZelda);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songEpona);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gOotSave.info.inventory.quest.songSaria);
@@ -622,6 +882,8 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOTTLE_EMPTY,    bottlesCount);
     if (bottlesCount > 1)
         drawDigit(list, x - 7, y, bottlesCount);
+    if (Config_Flag(CFG_OOT_POWDER_KEG))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_POWDER_KEG,gOotExtraItems.bombSlot & 2);
 
     /* Row 2 */
     x = startX;
@@ -633,6 +895,8 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     x += drawItemIcon(list, end, x, y, ITEM_OOT_ARROW_ICE,   gOotSave.info.inventory.items[ITS_OOT_ARROW_ICE] == ITEM_OOT_ARROW_ICE);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_WIND,  gOotSave.info.inventory.items[ITS_OOT_SPELL_WIND] == ITEM_OOT_SPELL_WIND);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_RUTO_LETTER, gOotExtraItems.rutoLetter);
+    if (Config_Flag(CFG_OOT_GREAT_FAIRY_SWORD))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_GREAT_FAIRY_SWORD,gOotExtraItems.gfsHammer & 2);
 
     /* Row 3 */
     x = startX;
@@ -732,6 +996,12 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOTTLE_EMPTY,        bottlesCount);
     if (bottlesCount > 1)
         drawDigit(list, x - 7, y, bottlesCount);
+    if (Config_Flag(CFG_MM_SPELL_FIRE))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_FIRE,gMmExtraTrade.trade1 & (1 << XITEM_MM_TRADE1_SPELL_FIRE));
+    if (Config_Flag(CFG_MM_SPELL_WIND))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_WIND,gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_SPELL_WIND));
+    if (Config_Flag(CFG_MM_SPELL_LOVE))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_LOVE,gMmExtraTrade.trade3 & (1 << XITEM_MM_TRADE3_SPELL_LOVE));
     x = startX;
     y += ICON_SIZE;
     x += drawItemIcon(list, end, x, y, ITEM_OOT_BOMB,                gMmSave.info.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
@@ -740,6 +1010,12 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     x += drawItemIcon(list, end, x, y, ITEM_OOT_NUT,                 gMmSave.info.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_MAGIC_BEAN,          gMmSave.info.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
     x += drawItemIcon(list, end, x, y, ITEM_MM_GOLD_DUST | ICONF_MM, gMmExtraItems.goldDust);
+    if (Config_Flag(CFG_MM_SLINGSHOT))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SLINGSHOT,gMmExtraItems.bowSlingshot & 2);
+    if (Config_Flag(CFG_MM_BOOMERANG))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOMERANG,gMmExtraItems.boomPicto & 2);
+    if (Config_Flag(CFG_MM_HAMMER))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_HAMMER,gMmExtraItems.hammerGFS & 2);
     x = startX;
     y += ICON_SIZE;
     x += drawItemIcon(list, end, x, y, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.info.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);

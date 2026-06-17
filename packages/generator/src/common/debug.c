@@ -479,6 +479,7 @@ static void cheatAllItems(PlayState* play)
     gSave.info.itemEquips.sword = 1;
     gSave.info.itemEquips.shield = 2;
     gSharedCustomSave.mmProgressiveShields = 3;
+    gSave.info.inventory.upgrades.scale = 3;
     gSave.info.inventory.upgrades.quiver = 3;
     gSave.info.inventory.upgrades.bulletBag = 3;
     gSave.info.inventory.upgrades.dekuStick = 3;
@@ -488,6 +489,8 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.upgrades.wallet = 3;
     //gMmExtraFlags3.bottomlessWallet = 1;
     gSave.info.inventory.upgrades.bombBag = 3;
+    gSharedCustomSave.bombchuBagMm = 3;
+    Inventory_UpdateMaxBombchu();
 
     gSave.info.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
     gSave.info.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
@@ -577,7 +580,7 @@ static void cheatAllItems(PlayState* play)
 
     gSave.info.playerData.healthCapacity = 0x10 * 20;
     gSave.info.playerData.health = gSave.info.playerData.healthCapacity;
-
+    gMmExtraFlags3.stoneAgony = 1;
     gMmExtraTrade.trade1 = 0x3f;
     gMmExtraTrade.trade2 = 0x1f;
     gMmExtraTrade.trade3 = 0x1f;
@@ -664,6 +667,8 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.upgrades.dekuNut = 3;
     gSave.info.inventory.upgrades.bulletBag = 3;
     gSave.info.inventory.upgrades.bombBag = 3;
+    gSharedCustomSave.bombchuBagOot = 3;
+    Inventory_UpdateMaxBombchu();
     gSave.info.inventory.upgrades.quiver = 3;
     gSave.info.inventory.upgrades.dive = 2;
     gSave.info.inventory.upgrades.wallet = 3;
