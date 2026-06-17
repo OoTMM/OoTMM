@@ -257,16 +257,35 @@ void EnItem00_DrawShield(PlayState* play)
     Draw_Gi(play, NULL, gi, DRAW_RAW);
 }
 
+static s16 DekuSeedBlockedScenes[] = {
+    SCE_MM_ROMANI_RANCH,
+    SCE_MM_LAIR_TWINMOLD,
+    SCE_MM_LAIR_MAJORA
+};
+
+static s32 EnItem00_IsDekuSeedBlockedScene(s16 sceneId)
+{
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(DekuSeedBlockedScenes); i++) {
+        if (DekuSeedBlockedScenes[i] == sceneId) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void EnItem00_InitType(Actor_EnItem00* this, PlayState* play, f32* shadowOffset, f32* shadowScale, s32* sp30)
 {
     Actor* thisx = &this->actor;
 
-    if (play->sceneId == SCE_MM_ROMANI_RANCH && thisx->params == ITEM00_SEEDS)
-    {
-        if (gSave.info.inventory.upgrades.quiver != 0)
+    if (thisx->params == ITEM00_SEEDS && EnItem00_IsDekuSeedBlockedScene(play->sceneId)) {
+        if (gSave.info.inventory.upgrades.quiver != 0) {
             thisx->params = ITEM00_ARROWS_10;
-        else
+        } else {
             thisx->params = ITEM00_NOTHING;
+        }
     }
 
     this->blinkMask = 1;
