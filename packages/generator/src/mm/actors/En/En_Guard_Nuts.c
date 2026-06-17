@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/player.h>
-#include <combo/mask.h>
+#include <combo/common/events.h>
 
 #define ENGUARDNUTS_GUARD_TEXT_INDEX(actor) (*(s32*)((u8*)(actor) + 0x220))
 #define ENGUARDNUTS_HAS_COMPLETED(actor)    (*(u8*)((u8*)(actor) + 0x224))
@@ -25,10 +25,10 @@ void EnGuardNuts_OfferTalk_CustomSkullMask(Actor* actor, PlayState* play, f32 ra
     if (EnGuardNuts_IsHumanWithCustomSkullMask(play)) {
         s32 guardTextIndex = 0;
 
-        if (CHECK_WEEKEVENTREG(WEEKEVENTREG_17_04) &&
+        if (MM_GET_EVENT_WEEK(EV_MM_WEEK_WEEKEVENTREG_17_2) &&
             !ENGUARDNUTS_HAS_COMPLETED(actor)) {
             guardTextIndex = 7;
-            } else if (CHECK_WEEKEVENTREG(WEEKEVENTREG_12_40)) {
+            } else if (MM_GET_EVENT_WEEK(EV_MM_WEEK_WEEKEVENTREG_12_6)) {
                 guardTextIndex = 4;
             }
 

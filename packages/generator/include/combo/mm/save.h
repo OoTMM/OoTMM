@@ -619,14 +619,4 @@ MmCustomSave;
 #define GET_CUR_FORM_BTN_ITEM(btn) ((u8)((btn) == EQUIP_SLOT_B ? BUTTON_ITEM_EQUIP(CUR_FORM, btn) : BUTTON_ITEM_EQUIP(0, btn)))
 #define GET_CUR_FORM_BTN_SLOT(btn) ((u8)((btn) == EQUIP_SLOT_B ? C_SLOT_EQUIP(CUR_FORM, btn) : C_SLOT_EQUIP(0, btn)))
 
-#define GET_WEEKEVENTREG(index) \
-(*(u8*)((u8*)&gSaveContext.save + 0xEF8 + (index)))
-
-#define CHECK_WEEKEVENTREG(flag) \
-(GET_WEEKEVENTREG((flag) >> 8) & ((flag) & 0xFF))
-
-#define WEEKEVENTREG_12_40 ((12 << 8) | 0x40)
-#define WEEKEVENTREG_17_04 ((17 << 8) | 0x04)
-#define WEEKEVENTREG_23_20 ((23 << 8) | 0x20)
-
 #endif /* MM_SAVE_H */

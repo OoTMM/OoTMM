@@ -109,7 +109,7 @@ MsgScript* EnDns_GetMsgScript_Custom(EnDns* this, PlayState* play)
 {
     Player* player = GET_PLAYER(play);
 
-    if (!CHECK_WEEKEVENTREG(WEEKEVENTREG_23_20)) {
+    if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_PRINCESS_RETURNED)) {
         if (player->transformation != MM_PLAYER_FORM_DEKU) {
             if (!(player->transformation == MM_PLAYER_FORM_HUMAN &&
                   gCustomSave.customMask == PLAYER_CUSTOM_MASK_SKULL)) {
