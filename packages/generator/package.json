@@ -9,9 +9,10 @@
   },
   "dependencies": {
     "@ootmm/core": "*",
-    "@ootmm/tools": "*",
     "@ootmm/logic": "*",
+    "@ootmm/tools": "*",
     "crc-32": "^1.2.2",
+    "json5": "^2.2.3",
     "jszip": "^3.10.1",
     "lodash-es": "catalog:",
     "pngjs": "^7.0.0",

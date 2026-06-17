@@ -23,6 +23,7 @@ DMARomToRam = 0x8000085c;
 Audio_SetMainBgmTempoFreqAfterFanfare = 0x800c64a0;
 
 gAudioLoadStatusFontSample = 0x80128a68;
+gAudioCtx = 0x80125630;
 
 Player_GetHeight = 0x80021600;
 

@@ -844,6 +844,7 @@ void Play_MainWrapper(PlayState* play)
     Play_Main(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);
+    Music_Update(play);
 
     if (play->pauseCtx.state == 0)
     {

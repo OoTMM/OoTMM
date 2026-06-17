@@ -70,3 +70,27 @@ PATCH_END
 PATCH_START 0x800c03bc
   move t6,t5
 PATCH_END
+
+Music_AfterChannelInit_Hook:
+    addiu   sp, sp, -0x28
+    or      a0, s2, zero
+    jal     Music_AfterChannelInit
+     lw     a1, 0x002C (sp)
+    lw      ra, 0x0024 (sp)
+    jr      ra
+     addiu  sp, sp, 0x28
+
+PATCH_START 0x800bf0fc
+    j       Music_AfterChannelInit_Hook
+PATCH_END
+
+PATCH_START 0x800bb9ec
+    addiu   sp, sp, -0x18
+    sw      ra, 0x0014 (sp)
+    jal     Music_HandleChannelMute
+     nop
+    nop
+    lw      ra, 0x0014 (sp)
+    jr      ra
+     addiu  sp, sp, 0x18
+PATCH_END

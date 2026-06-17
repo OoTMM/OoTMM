@@ -3,6 +3,7 @@
 #include <combo/dma.h>
 #include <combo/global.h>
 #include <combo/custom.h>
+#include <combo/common/scene.h>
 
 #if defined(GAME_OOT)
 # define MUSIC_NAMES_OFFSET 0
@@ -95,7 +96,7 @@ static AudioTable* allocTable(int count)
 
     table = malloc(sizeof(AudioTableHeader) + count * sizeof(AudioTableEntry));
     memset(table, 0, sizeof(AudioTableHeader) + count * sizeof(AudioTableEntry));
-    table->header.count = count;
+    table->header.numEntries = count;
 
     return table;
 }
@@ -414,6 +415,332 @@ void Audio_DisplayMusicName(PlayState* play)
     /* Draw the music name */
     Audio_DrawMusicName(play);
 }
+
+static MusicState sMusicState = {};
+
+#if defined (GAME_MM)
+static const u8* sAudioBaseFilter = (u8*)0x801D66E0;
+#else
+static const u8* sAudioBaseFilter = (u8*)0x8010194c;
+#endif
+
+static u16 CalculateCurrentState() {
+    u16 state;
+    Player* player = GET_PLAYER(gPlay);
+    if (player) {
+        s8 form;
+#if defined (GAME_MM)
+        form = player->transformation;
+#else
+        form = player->currentTunic;
+        if (form == 0) {
+            form = gSave.age == AGE_ADULT ? 4 : 3;
+            if (player->currentSwordItemId == ITEM_SWORD_BIGGORON) {
+                form = 0;
+            }
+        }
+#endif
+        state = 1 << form;
+
+        if (gSaveContext.save.isNight) {
+            state = sMusicState.sequenceData.cumulativeStates.night ? state | SEQUENCE_PLAY_STATE_NIGHT : SEQUENCE_PLAY_STATE_NIGHT;
+        } else {
+            state = sMusicState.sequenceData.cumulativeStates.day ? state | SEQUENCE_PLAY_STATE_DAY : SEQUENCE_PLAY_STATE_DAY;
+        }
+        if (!sMusicState.isIndoors && !sMusicState.isInCave) {
+            state = sMusicState.sequenceData.cumulativeStates.outdoors ? state | SEQUENCE_PLAY_STATE_OUTDOORS : SEQUENCE_PLAY_STATE_OUTDOORS;
+        }
+        if (sMusicState.isIndoors) {
+            state = sMusicState.sequenceData.cumulativeStates.indoors ? state | SEQUENCE_PLAY_STATE_INDOORS : SEQUENCE_PLAY_STATE_INDOORS;
+        }
+        if (sMusicState.isInCave) {
+            state = sMusicState.sequenceData.cumulativeStates.cave ? state | SEQUENCE_PLAY_STATE_CAVE : SEQUENCE_PLAY_STATE_CAVE;
+        }
+        if (player->stateFlags1 & PLAYER_ACTOR_STATE_EPONA) {
+            state = sMusicState.sequenceData.cumulativeStates.epona ? state | SEQUENCE_PLAY_STATE_EPONA : SEQUENCE_PLAY_STATE_EPONA;
+        }
+        if (player->stateFlags1 & PLAYER_ACTOR_STATE_WATER
+#if defined (GAME_MM)
+            || player->stateFlags3 & PLAYER_STATE3_MM_8000
+#endif
+            || *sAudioBaseFilter == 0x20) {
+            state = sMusicState.sequenceData.cumulativeStates.swimming ? state | SEQUENCE_PLAY_STATE_SWIM : SEQUENCE_PLAY_STATE_SWIM;
+        }
+#if defined (GAME_MM)
+        if (player->stateFlags3 & PLAYER_STATE3_MM_80000) {
+            state = sMusicState.sequenceData.cumulativeStates.spikeRolling ? state | SEQUENCE_PLAY_STATE_SPIKE_ROLLING : SEQUENCE_PLAY_STATE_SPIKE_ROLLING;
+        }
+        if (gPlay->actorCtx.targetContext.nearbyEnemy) {
+#else
+        if (gPlay->actorCtx.targetCtx.bgmEnemy) {
+#endif
+            state = sMusicState.sequenceData.cumulativeStates.combat ? state | SEQUENCE_PLAY_STATE_COMBAT : SEQUENCE_PLAY_STATE_COMBAT;
+        }
+#if defined (GAME_MM)
+        if (LifeMeter_IsCritical()) {
+#else
+        if (Health_IsCritical()) {
+#endif
+            state = sMusicState.sequenceData.cumulativeStates.criticalHealth ? state | SEQUENCE_PLAY_STATE_CRITICAL_HEALTH : SEQUENCE_PLAY_STATE_CRITICAL_HEALTH;
+        }
+    } else if (sMusicState.currentState) {
+        state = sMusicState.currentState;
+    } else {
+        state = 1;
+    }
+    return state;
+}
+
+static void ProcessChannel(u8 channelIndex, u16 stateMask) {
+    SequenceChannel* sequenceChannel = gAudioCtx.seqPlayers[0].channels[channelIndex];
+    if (sequenceChannel->enabled) {
+        bool shouldBeMuted = false;
+        if (!sequenceChannel->muted) {
+            sMusicState.forceMute &= ~(1 << channelIndex);
+        } else {
+            shouldBeMuted = sMusicState.forceMute & (1 << channelIndex);
+        }
+        if (!shouldBeMuted) {
+            u16 playMask = sMusicState.sequenceData.playMask[channelIndex];
+            u16 formMask = playMask & ~sMusicState.sequenceData.cumulativeStates.value;
+            u16 miscMask = playMask & sMusicState.sequenceData.cumulativeStates.value;
+            u16 formState = stateMask & ~sMusicState.sequenceData.cumulativeStates.value;
+            u16 miscState = stateMask & sMusicState.sequenceData.cumulativeStates.value;
+            bool shouldPlay = (!miscMask || (miscMask & miscState)) && (formMask & formState);
+            shouldBeMuted = !shouldPlay;
+        }
+        bool isMuted = sequenceChannel->muted;
+        if (!isMuted && shouldBeMuted) {
+            sequenceChannel->muted = true;
+        } else if (isMuted && !shouldBeMuted) {
+            sequenceChannel->muted = false;
+        }
+    }
+}
+
+#if defined (GAME_MM)
+#define CUSTOM_FORM_MASK_TABLE_VROM CUSTOM_FORM_MASK_TABLE_MM_VROM
+#else
+#define CUSTOM_FORM_MASK_TABLE_VROM CUSTOM_FORM_MASK_TABLE_OOT_VROM
+#endif
+
+static void LoadMuteMask() {
+    u8 sequenceId = gAudioCtx.seqPlayers[0].seqId;
+    if (sMusicState.loadedSequenceId != sequenceId) {
+        sMusicState.loadedSequenceId = sequenceId;
+
+        if (!comboDmaLoadFilePartial(&sMusicState.sequenceData, CUSTOM_FORM_MASK_TABLE_VROM, sequenceId * sizeof(SequenceData), sizeof(SequenceData))) {
+            bzero(&sMusicState.sequenceData, sizeof(SequenceData));
+        }
+    }
+}
+
+static void HandleFormChannels(PlayState* play) {
+    LoadMuteMask();
+    if (sMusicState.sequenceData.hasFormMask) {
+        u16 state = CalculateCurrentState();
+        if (sMusicState.currentState != state) {
+            sMusicState.currentState = state;
+
+            for (u8 i = 0; i < sizeof(gAudioCtx.seqPlayers[0].channels) / sizeof(SequenceChannel*); i++) {
+                ProcessChannel(i, state);
+            }
+        }
+    }
+}
+
+void Music_Update(PlayState* play) {
+    HandleFormChannels(play);
+}
+
+void Music_AfterChannelInit(SequencePlayer* sequencePlayer, u8 channelIndex) {
+    if (sequencePlayer == &gAudioCtx.seqPlayers[0]) {
+        LoadMuteMask();
+        if (sMusicState.sequenceData.hasFormMask) {
+            u16 state = CalculateCurrentState();
+            sMusicState.currentState = state;
+            ProcessChannel(channelIndex, state);
+        }
+    }
+}
+
+void Music_HandleChannelMute(SequenceChannel* sequenceChannel, AudioCmd* audioCmd) {
+    u8 channelIndex;
+#if defined (GAME_MM)
+    channelIndex = sequenceChannel->channelIndex;
+#else
+    channelIndex = 0xff;
+    for (u8 i = 0; i < ARRAY_COUNT(sequenceChannel->seqPlayer->channels); i++) {
+        if (sequenceChannel == sequenceChannel->seqPlayer->channels[i]) {
+            channelIndex = i;
+            break;
+        }
+    }
+    if (channelIndex == 0xff) {
+        return;
+    }
+#endif
+    u8 shouldBeMuted = audioCmd->asSbyte;
+    if (shouldBeMuted) {
+        if (sMusicState.sequenceData.hasFormMask && sequenceChannel->seqPlayer == &gAudioCtx.seqPlayers[0] && !sequenceChannel->finished) {
+            sMusicState.forceMute |= (1 << channelIndex);
+        }
+        sequenceChannel->muted = true;
+    } else {
+        if (sMusicState.sequenceData.hasFormMask && sequenceChannel->seqPlayer == &gAudioCtx.seqPlayers[0]) {
+            sMusicState.forceMute &= ~(1 << channelIndex);
+            ProcessChannel(channelIndex, sMusicState.currentState);
+        } else {
+            sequenceChannel->muted = false;
+        }
+    }
+}
+
+#if defined (GAME_MM)
+#define SCE_CUTSCENE_MAP SCE_MM_CUTSCENE_MAP
+#else
+#define SCE_CUTSCENE_MAP SCE_OOT_CUTSCENE_MAP
+#endif
+
+u8 gNightBgm;
+EXPORT_SYMBOL(NIGHT_BGM, gNightBgm);
+
+void Scene_CommandSoundSettings(PlayState* play, SceneCmd* cmd)
+{
+    u8 ambienceId;
+#if defined (GAME_MM)
+    ambienceId = cmd->soundSettings.ambienceId;
+#else
+    ambienceId = cmd->soundSettings.natureAmbienceId;
+#endif
+    if (gNightBgm)
+    {
+        switch (play->sceneId)
+        {
+#if defined (GAME_MM)
+            case SCE_MM_MOON:
+            case SCE_MM_MOON_DEKU:
+            case SCE_MM_MOON_GORON:
+            case SCE_MM_MOON_ZORA:
+            case SCE_MM_MOON_LINK:
+            case SCE_MM_IKANA_GRAVEYARD:
+#else
+            case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
+            case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
+            case SCE_OOT_GANON_CASTLE_EXTERIOR:
+            case SCE_OOT_MARKET_CHILD_NIGHT:
+            case SCE_OOT_MARKET_ADULT:
+            case SCE_OOT_GRAVEYARD:
+#endif
+                break;
+            default:
+                ambienceId = 0x13;
+        }
+    }
+
+    sMusicState.isInCave = false;
+    sMusicState.isIndoors = false;
+    switch (play->sceneId) {
+#if defined (GAME_MM)
+        case SCE_MM_GROTTOS:
+        case SCE_MM_DEKU_PLAYGROUND:
+        case SCE_MM_FAIRY_FOUNTAIN:
+        case SCE_MM_GORON_GRAVEYARD:
+#else
+        case SCE_OOT_GROTTOS:
+        case SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES:
+        case SCE_OOT_FAIRY_FOUNTAIN:
+        case SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS:
+        case SCE_OOT_TOMB_REDEAD:
+        case SCE_OOT_TOMB_FAIRY:
+        case SCE_OOT_TOMB_ROYAL:
+#endif
+            sMusicState.isInCave = true;
+            break;
+#if defined (GAME_MM)
+        case SCE_MM_POTION_SHOP:
+        case SCE_MM_CURIOSITY_SHOP:
+        case SCE_MM_RANCH_HOUSE_BARN:
+        case SCE_MM_HONEY_DARLING:
+        case SCE_MM_MAYOR_HOUSE:
+
+        case SCE_MM_TREASURE_SHOP:
+        case SCE_MM_SHOOTING_GALLERY:
+        case SCE_MM_SHOOTING_GALLERY_SWAMP:
+        case SCE_MM_BLACKSMITH:
+        case SCE_MM_POST_OFFICE:
+        case SCE_MM_LABORATORY:
+        case SCE_MM_TRADING_POST:
+        case SCE_MM_LOTTERY:
+        case SCE_MM_FISHERMAN_HUT:
+        case SCE_MM_GORON_SHOP:
+        case SCE_MM_ZORA_HALL_ROOMS:
+        case SCE_MM_GHOST_HUT:
+        case SCE_MM_SWORDSMAN_SCHOOL:
+        case SCE_MM_TOURIST_INFORMATION:
+        case SCE_MM_STOCK_POT_INN:
+        case SCE_MM_BOMB_SHOP:
+#else
+        case SCE_OOT_TREASURE_SHOP:
+        case SCE_OOT_KOKIRI_KNOW_IT_ALL:
+        case SCE_OOT_KOKIRI_TWINS:
+        case SCE_OOT_KOKIRI_MIDO:
+        case SCE_OOT_KOKIRI_SARIA:
+        case SCE_OOT_CARPENTER_BOSS_HOUSE:
+        case SCE_OOT_BACK_ALLEY_HOUSE:
+        case SCE_OOT_BAZAAR:
+        case SCE_OOT_KOKIRI_SHOP:
+        case SCE_OOT_GORON_SHOP:
+        case SCE_OOT_ZORA_SHOP:
+        case SCE_OOT_KAKARIKO_POTION_SHOP:
+        case SCE_OOT_MARKET_POTION_SHOP:
+        case SCE_OOT_BOMBCHU_SHOP:
+        case SCE_OOT_HAPPY_MASK_SHOP:
+        case SCE_OOT_LINK_HOUSE:
+        case SCE_OOT_BACK_ALLEY_HOUSE2:
+        case SCE_OOT_STABLE:
+        case SCE_OOT_IMPA_HOUSE:
+        case SCE_OOT_LABORATORY:
+        case SCE_OOT_CARPENTER_TENT:
+        case SCE_OOT_GRAVEKEEPER_HUT:
+        case SCE_OOT_SHOOTING_GALLERY:
+        case SCE_OOT_FISHING_POND:
+        case SCE_OOT_BOMBCHU_BOWLING_ALLEY:
+        case SCE_OOT_RANCH_HOUSE_SILO:
+        case SCE_OOT_GUARD_HOUSE:
+        case SCE_OOT_GRANNY_POTION_SHOP:
+        case SCE_OOT_HOUSE_OF_SKULLTULA:
+#endif
+            sMusicState.isIndoors = true;
+            break;
+    }
+
+    play->sceneSequences.seqId = cmd->soundSettings.seqId;
+
+#if defined (GAME_MM)
+    play->sceneSequences.ambienceId = ambienceId;
+
+    if (gSaveContext.seqId == (u8)NA_BGM_DISABLED ||
+
+        Audio_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN) == NA_BGM_FINAL_HOURS)
+    {
+        Audio_SetSpec(cmd->soundSettings.specId);
+    }
+#else
+    play->sceneSequences.natureAmbienceId = ambienceId;
+
+    if (gSaveContext.seqId == (u8)NA_BGM_DISABLED)
+    {
+        SEQCMD_RESET_AUDIO_HEAP(0, cmd->soundSettings.specId);
+    }
+#endif
+}
+
+#if defined (GAME_MM)
+PATCH_FUNC(0x801303e0, Scene_CommandSoundSettings);
+#else
+PATCH_FUNC(0x80082478, Scene_CommandSoundSettings);
+#endif
 
 #if defined(GAME_OOT)
 void Audio_UpdateMalonSingingWrapper(f32 dist, u16 seqId)
