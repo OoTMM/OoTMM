@@ -260,6 +260,15 @@ void EnItem00_DrawShield(PlayState* play)
 void EnItem00_InitType(Actor_EnItem00* this, PlayState* play, f32* shadowOffset, f32* shadowScale, s32* sp30)
 {
     Actor* thisx = &this->actor;
+
+    if (play->sceneId == SCE_MM_ROMANI_RANCH && thisx->params == ITEM00_SEEDS)
+    {
+        if (gSave.info.inventory.upgrades.quiver != 0)
+            thisx->params = ITEM00_ARROWS_10;
+        else
+            thisx->params = ITEM00_NOTHING;
+    }
+
     this->blinkMask = 1;
     switch (thisx->params)
     {
