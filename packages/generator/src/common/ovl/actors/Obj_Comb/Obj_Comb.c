@@ -236,9 +236,15 @@ void ObjComb_Wait(Actor_ObjComb* this, PlayState* play)
     }
 
     if (this->collider.base.acFlags & AC_HIT) {
+        u32 bounceFlags = DMG_HAMMER | DMG_ARROW | DMG_SLINGSHOT | DMG_DEKU_STICK;
+
         this->collider.base.acFlags &= ~AC_HIT;
         dmgFlags = this->collider.elements[0].base.acHitElem->atDmgInfo.dmgFlags;
-        if (dmgFlags & (DMG_HAMMER | DMG_ARROW | DMG_SLINGSHOT | DMG_DEKU_STICK))
+        if (Config_Flag(CFG_OOT_BOW_SLINGSHOT_BREAK_HIVES))
+        {
+            bounceFlags &= ~(DMG_ARROW | DMG_SLINGSHOT);
+        }
+        if (dmgFlags & bounceFlags)
         {
             this->unk_1B0 = 1500;
         }

@@ -109,6 +109,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_AGELESS_STICKS: settings.agelessSticks,
     OOT_AGELESS_BOW: settings.agelessBow,
     OOT_AGELESS_SLINGSHOT: settings.agelessSlingshot,
+    OOT_BOW_SLINGSHOT_BREAK_HIVES: settings.bowSlingshotBreakHives,
     OOT_AGELESS_BOOTS: settings.agelessBoots,
     OOT_AGELESS_STRENGTH: settings.agelessStrength,
     OOT_AGELESS_SWORDS: settings.agelessSwords,
