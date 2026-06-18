@@ -49,14 +49,15 @@ All notable changes to this project will be documented in this file.
 
 - Save Screen now shows all collected equipment upgrades and all available cross game items.
 - Adjusted Beginner preset to have Ageless Soaring enabled.
-- Adjusted the Blitz preset in the following ways:
+- Adjusted the Blitz presets in the following ways:
     - Enable Ageless Soaring.
     - Enable Ageless Great Fairy's Sword.
     - Shuffle the Master Sword with a Master Sword hint. Master Sword does not lock age-access.
-    -  Add Shared Extra Child Swords, remove starting child sword.
+    - Add Shared Extra Child Swords, remove starting child sword.
     - Added MM Deku Shield to then share the Deku Shield. Removed the starting Hylian/Hero Shield.
     - Enabled Song Event Shuffle for both games to modify some Song Events via plando.
     - Moved MM Song of Time to starting items and put a recovery heart on Initial Song of Healing.
+    - Made the gibdos in Beneath the Well be Remorseless.
 - Paths that only differ by unshuffled items are now considered identical for hint importance purposes.
 - Revamped Woodfall Temple logic to better account for Bronze Scale and future-proofing for planned features.
 - "MM Termina Field Pot" location can now expect Long Hookshot to obtain.
