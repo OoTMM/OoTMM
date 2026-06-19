@@ -9,6 +9,9 @@
     FAIRY: "can_get_gossip_fairy"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
+    "Termina Field Soil Observatory Item 1": "has_bugs"
+    "Termina Field Soil Observatory Item 2": "has_bugs"
+    "Termina Field Soil Observatory Item 3": "has_bugs"
   gossip:
     "Termina Field Gossip Near Observatory": "true"
 
@@ -312,9 +315,6 @@
     "Termina Field Wonder Item Graffiti 2": "true"
     "Termina Field Wonder Item Graffiti 3": "true"
     "Termina Field Soil Tree Stump": "has_bugs"
-    "Termina Field Soil Observatory Item 1": "has_bugs"
-    "Termina Field Soil Observatory Item 2": "has_bugs"
-    "Termina Field Soil Observatory Item 3": "has_bugs"
     "Termina Field Soil Wall Item 1": "has_bugs"
     "Termina Field Soil Wall Item 2": "has_bugs"
     "Termina Field Soil Wall Item 3": "has_bugs"
