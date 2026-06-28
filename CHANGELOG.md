@@ -67,6 +67,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix logic for Secret Shrine Entrance Pots, and account for bronze scale logic for the underwater ones.
 - Fix logic for MM Termina Field Soil Observatory items not being in the right logic region.
 - Load Save screen properly lets you cycle to the next page if Only MM or Only OOT is on.
 - Fix Tatl sometimes crashing when you talk to her during 4th day.

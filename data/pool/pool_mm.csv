@@ -2671,15 +2671,15 @@ Secret Shrine Wizzrobe Chest,                           chest,          NONE,   
 Secret Shrine Wart Chest,                               chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,                0x02,                       RUPEE_SILVER
 Secret Shrine Garo Master Chest,                        chest,          NONE,                   SECRET_SHRINE,                0x03,                       RUPEE_SILVER
 Secret Shrine HP Chest,                                 chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,                0x0a,                       HEART_PIECE
-Secret Shrine Pot 1,                                    pot,            NONE,                   SECRET_SHRINE,                0x0017,                     RECOVERY_HEART
-Secret Shrine Pot 2,                                    pot,            NONE,                   SECRET_SHRINE,                0x0018,                     ARROWS_10
-Secret Shrine Pot 3,                                    pot,            NONE,                   SECRET_SHRINE,                0x0019,                     MAGIC_JAR_SMALL
-Secret Shrine Pot 4,                                    pot,            NONE,                   SECRET_SHRINE,                0x0106,                     MAGIC_JAR_SMALL
-Secret Shrine Pot 5,                                    pot,            NONE,                   SECRET_SHRINE,                0x0107,                     RECOVERY_HEART
-Secret Shrine Pot 6,                                    pot,            NONE,                   SECRET_SHRINE,                0x0108,                     ARROWS_10
-Secret Shrine Pot 7,                                    pot,            NONE,                   SECRET_SHRINE,                0x0109,                     ARROWS_10
-Secret Shrine Pot 8,                                    pot,            NONE,                   SECRET_SHRINE,                0x010a,                     MAGIC_JAR_SMALL
-Secret Shrine Pot 9,                                    pot,            NONE,                   SECRET_SHRINE,                0x010b,                     FAIRY
+Secret Shrine Pot Entrance 1,                           pot,            NONE,                   SECRET_SHRINE,                0x0017,                     RECOVERY_HEART
+Secret Shrine Pot Entrance 2,                           pot,            NONE,                   SECRET_SHRINE,                0x0018,                     ARROWS_10
+Secret Shrine Pot Entrance 3,                           pot,            NONE,                   SECRET_SHRINE,                0x0019,                     MAGIC_JAR_SMALL
+Secret Shrine Pot Underwater 1,                         pot,            NONE,                   SECRET_SHRINE,                0x0106,                     MAGIC_JAR_SMALL
+Secret Shrine Pot Underwater 2,                         pot,            NONE,                   SECRET_SHRINE,                0x0107,                     RECOVERY_HEART
+Secret Shrine Pot Underwater 3,                         pot,            NONE,                   SECRET_SHRINE,                0x0108,                     ARROWS_10
+Secret Shrine Pot Underwater 4,                         pot,            NONE,                   SECRET_SHRINE,                0x0109,                     ARROWS_10
+Secret Shrine Pot Underwater 5,                         pot,            NONE,                   SECRET_SHRINE,                0x010a,                     MAGIC_JAR_SMALL
+Secret Shrine Pot Underwater 6,                         pot,            NONE,                   SECRET_SHRINE,                0x010b,                     FAIRY
 Secret Shrine Grass Entrance 1,                         grass,          NONE,                   SECRET_SHRINE,                0x0001a,                    RANDOM
 Secret Shrine Grass Entrance 2,                         grass,          NONE,                   SECRET_SHRINE,                0x0001b,                    RANDOM
 Secret Shrine Grass Entrance 3,                         grass,          NONE,                   SECRET_SHRINE,                0x0001c,                    RANDOM
