@@ -257,23 +257,17 @@ void EnItem00_DrawShield(PlayState* play)
     Draw_Gi(play, NULL, gi, DRAW_RAW);
 }
 
-static s16 DekuSeedBlockedScenes[] = {
-    SCE_MM_ROMANI_RANCH,
-    SCE_MM_LAIR_TWINMOLD,
-    SCE_MM_LAIR_MAJORA
-};
-
 static s32 EnItem00_IsDekuSeedBlockedScene(s16 sceneId)
 {
-    s32 i;
-
-    for (i = 0; i < ARRAY_COUNT(DekuSeedBlockedScenes); i++) {
-        if (DekuSeedBlockedScenes[i] == sceneId) {
+    switch (sceneId) {
+        case SCE_MM_ROMANI_RANCH:
+        case SCE_MM_LAIR_TWINMOLD:
+        case SCE_MM_LAIR_MAJORA:
             return true;
-        }
-    }
 
-    return false;
+        default:
+            return false;
+    }
 }
 
 void EnItem00_InitType(Actor_EnItem00* this, PlayState* play, f32* shadowOffset, f32* shadowScale, s32* sp30)
