@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- The range to trigger the New Wave Bossa Nova Check (Zora Eggs) was increased: pull the zora guitar after watching them hatch.
 - Load Save Screen now shows all collected equipment upgrades and all available cross game items.
 - Blitz presets adjusted to use Song Event Plando to change the following Song Event Locations:
 
