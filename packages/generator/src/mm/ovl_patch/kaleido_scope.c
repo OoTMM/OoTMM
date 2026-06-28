@@ -11,6 +11,14 @@
 #include <combo/misc.h>
 #include <combo/common/Kaleido_Scope.h>
 
+
+static u32 comboResolvePauseSlot(PlayState* play, u32 slot)
+{
+    if (play && play->pauseCtx.pageIndex == PAUSE_MASK)
+        return slot + ITEM_NUM_SLOTS;
+    return slot;
+}
+
 void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
     u16 cursorSlot;
@@ -20,7 +28,8 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
     /* Update Dpad */
     Dpad_Update(play);
 
-    cursorSlot = play->pauseCtx.cursorSlot[0];
+    cursorSlot = play->pauseCtx.cursorSlot[play->pauseCtx.pageIndex];
+    cursorSlot = comboResolvePauseSlot(play, cursorSlot);
     press = !!(play->state.input[0].press.button & (L_TRIG | U_CBUTTONS));
     effect = 0;
 
@@ -28,7 +37,10 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
     u32 flags;
     const u8* table;
     u32 tableSize;
-    if (comboGetSlotExtras(cursorSlot, &itemPtr, &flags, &table, &tableSize) >= 0 && play->pauseCtx.cursorItem[0] != 999 && popcount(flags) > 1)
+
+    if (comboGetSlotExtras(cursorSlot, &itemPtr, &flags, &table, &tableSize) >= 0 &&
+        play->pauseCtx.cursorItem[play->pauseCtx.pageIndex] != 999 &&
+        popcount(flags) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
@@ -119,6 +131,18 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     case ITEM_MM_RUTO_LETTER:
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_RUTO_LETTER;
+        break;
+    case ITEM_MM_MASK_GERUDO:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_GERUDO_MASK;
+        break;
+    case ITEM_MM_MASK_SKULL:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_SKULL_MASK;
+        break;
+    case ITEM_MM_MASK_SPOOKY:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_SPOOKY_MASK;
         break;
     }
     if (isForeign)
@@ -279,6 +303,30 @@ void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "It looks like there is something" TEXT_NL "already inside this bottle." TEXT_END);
         break;
+    case ITEM_MM_MASK_GERUDO:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Gerudo Mask" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "With its charming eyes, it makes" TEXT_NL "a great lady's disguise." TEXT_END);
+        break;
+    case ITEM_MM_MASK_SKULL:
+            b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Skull Mask" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "A mysterious aura emanates from" TEXT_NL "this mask." TEXT_END);
+        break;
+    case ITEM_MM_MASK_SPOOKY:
+            b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Spooky Mask" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "This mask was manufactured from" TEXT_NL "the plank of a coffin." TEXT_END);
+        break;
     }
 }
 
@@ -379,15 +427,18 @@ static u32 sCustomIcons[] = {
     ITEM_MM_BOOMERANG,
     ITEM_MM_SLINGSHOT,
     ITEM_MM_RUTO_LETTER,
+    ITEM_MM_MASK_GERUDO,
+    ITEM_MM_MASK_SKULL,
+    ITEM_MM_MASK_SPOOKY
 };
 
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN] =
 {
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1 },
-    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
+    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -445,6 +496,15 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         case ITEM_MM_RUTO_LETTER:
             foreignIcon = ITEM_OOT_RUTO_LETTER;
             break;
+        case ITEM_MM_MASK_GERUDO:
+            foreignIcon = ITEM_OOT_GERUDO_MASK;
+            break;
+        case ITEM_MM_MASK_SKULL:
+            foreignIcon = ITEM_OOT_SKULL_MASK;
+            break;
+        case ITEM_MM_MASK_SPOOKY:
+            foreignIcon = ITEM_OOT_SPOOKY_MASK;
+            break;
         default:
             continue;
         }
@@ -497,10 +557,10 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 8) * 2];
+static Vtx gVertexBufs[(4 * 11) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[8] = {
+static Vtx* gVertex[11] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
@@ -509,6 +569,9 @@ static Vtx* gVertex[8] = {
     &gVertexBufs[(4 * 5) * 2],
     &gVertexBufs[(4 * 6) * 2],
     &gVertexBufs[(4 * 7) * 2],
+    &gVertexBufs[(4 * 8) * 2],
+    &gVertexBufs[(4 * 9) * 2],
+    &gVertexBufs[(4 * 10) * 2],
 };
 
 static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
@@ -559,6 +622,30 @@ void KaleidoScope_DrawIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u1
 
     s32 tableIndex;
     u8 next = GetNextItem(slot, &tableIndex);
+    if (next != ITEM_NONE && next != item)
+    {
+        texture = GetItemTexture(next);
+        Vtx* vtx = GetVtxBuffer(gfxCtx->play, vertIdx, tableIndex);
+        DrawIcon(gfxCtx, vtx, texture, width, height, point);
+    }
+}
+
+void KaleidoScope_DrawMaskIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u16 height, u32 maskSlot, u16 point, u16 vertIdx)
+{
+    u32 slot;
+    u32 texture;
+    s32 tableIndex;
+    u8 next;
+
+    maskSlot = vertIdx >> 2;
+    slot = maskSlot + ITEM_NUM_SLOTS;
+
+    texture = GetItemTexture(item);
+
+    KaleidoScope_DrawIcon KaleidoScope_DrawIcon = OverlayAddr(0x80821ad4);
+    KaleidoScope_DrawIcon(gfxCtx, texture, width, height, point);
+
+    next = GetNextItem(slot, &tableIndex);
     if (next != ITEM_NONE && next != item)
     {
         texture = GetItemTexture(next);

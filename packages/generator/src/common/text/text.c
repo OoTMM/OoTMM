@@ -398,6 +398,15 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_MASK_KAMARO:
     case GI_MM_MASK_KAMARO:
         return (Config_Flag(CFG_OOT_MASK_KAMARO) && !Config_Flag(CFG_SHARED_MASK_KAMARO));
+    case GI_OOT_MASK_GERUDO:
+    case GI_MM_MASK_GERUDO:
+        return (Config_Flag(CFG_MM_MASK_GERUDO) && !Config_Flag(CFG_SHARED_MASK_GERUDO));
+    case GI_OOT_MASK_SKULL:
+    case GI_MM_MASK_SKULL:
+        return (Config_Flag(CFG_MM_MASK_SKULL) && !Config_Flag(CFG_SHARED_MASK_SKULL));
+    case GI_OOT_MASK_SPOOKY:
+    case GI_MM_MASK_SPOOKY:
+        return (Config_Flag(CFG_MM_MASK_SPOOKY) && !Config_Flag(CFG_SHARED_MASK_SPOOKY));
     case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:

@@ -761,3 +761,15 @@ Player_CheckRangedRestart = 0x80830F9C;
 Player_CheckRangedHoldRelease = 0x80830FD4;
 EffectSsStone1_Spawn = 0x800B25D8;
 Gfx_SetupDL25_Xlu2 = 0x8012C240;
+
+Player_MaskIdToItemId = 0x80122ED8;
+func_800B715C = 0x800B715C;
+BgCheck_AnyLineTest1 = 0x800C57F8;
+SurfaceType_GetSceneExitIndex = 0x800C99AC;
+SubS_SetOfferMode = 0x8013AED4;
+Inventory_DeleteItem = 0x801149A0;
+Inventory_UnequipItem = 0x80114A9C;
+Message_ContinueTextbox = 0x80151938;
+Message_CloseTextbox = 0x801477B4;
+func_80969DA4 = 0x80969DA4;
+func_80969898 = 0x80969898;

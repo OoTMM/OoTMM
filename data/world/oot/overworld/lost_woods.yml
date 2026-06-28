@@ -49,7 +49,7 @@
   locations:
     "Lost Woods Target": "is_child && (can_use_slingshot || can_use_bow)"
     "Lost Woods Skull Kid": "is_child && can_play_saria"
-    "Lost Woods Sell Skull Mask": "is_child && can_play_saria && has(MASK_SKULL)"
+    "Lost Woods Sell Skull Mask": "is_child && can_play_saria && (has(MASK_SKULL) || has(SHARED_MASK_SKULL))"
     "Lost Woods Memory Game": "is_child && can_play_minigame"
     "Lost Woods Scrub Sticks Upgrade": "is_child && business_scrub(0x00)"
     "Lost Woods Odd Mushroom": "soul_grog && adult_trade(COJIRO)"
@@ -190,7 +190,7 @@
     "GLOBAL": "true"
     "Lost Woods Deep": "true"
   locations:
-    "Deku Theater Sticks Upgrade": "age_child_trade && has(MASK_SKULL)"
+    "Deku Theater Sticks Upgrade": "age_child_trade && (has(MASK_SKULL) || has(SHARED_MASK_SKULL))"
     "Deku Theater Nuts Upgrade": "age_child_trade && has_mask_truth"
 
 "Lost Woods Scrub Grotto":

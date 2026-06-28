@@ -464,7 +464,9 @@ typedef struct
     u32 hammerGFS:2;
     u32 boomPicto:2;
     u32 bowSlingshot:2;
-    u32 unused:21;
+    u32 stoneGerudoSkull:3;
+    u32 gibdoSpooky:2;
+    u32 unused:16;
 }
 MmExtraItems;
 
@@ -597,6 +599,7 @@ typedef struct ALIGNED(16)
         };
         u8 value;
     } ootSongs;
+    u8 customMask;
 }
 MmCustomSave;
 

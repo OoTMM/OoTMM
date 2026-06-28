@@ -131,7 +131,9 @@
 #define IA_MM_RUSTY_KEY         0x79
 #define IA_MM_SLINGSHOT         0x7a
 #define IA_MM_SEEDS             0x7b
-#define IA_MAX                  0x7c
+#define IA_MM_STONEGERUDOSKULL  0x7c
+#define IA_MM_GIBDOSPOOKY       0x7d
+#define IA_MAX                  0x7e
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -227,8 +229,9 @@ extern const u8 kMmTrade3[];
 extern const u8 kMmGFSHammer[];
 extern const u8 kMmPictoBoom[];
 extern const u8 kOotHammerGFS[];
-
 extern const u8 kMmBowSlingshot[];
+extern const u8 kMmStoneGerudoSkull[];
+extern const u8 kMmGibdoSpooky[];
 
 void comboSyncItems(void);
 

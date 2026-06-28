@@ -304,11 +304,13 @@ int SpecialConds_Eval(int special)
 
         if (Config_Flag(CFG_SHARED_MASK_STONE))
         {
-            if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) hasMaskStone = 1;
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 0))
+                hasMaskStone = 1;
         }
         else
         {
-            if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
+            if (gMmExtraItems.stoneGerudoSkull & (1 << 0))
+                count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_KAMARO))
@@ -319,7 +321,8 @@ int SpecialConds_Eval(int special)
         {
             if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
         }
-
+        if (gMmExtraItems.gibdoSpooky & (1 << 0))
+            count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY) count++;
@@ -330,8 +333,6 @@ int SpecialConds_Eval(int special)
         if (gMmSave.info.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE) count++;
-        if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
-        if (gMmSave.info.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN) count++;
         if (gMmSave.info.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT) count++;
