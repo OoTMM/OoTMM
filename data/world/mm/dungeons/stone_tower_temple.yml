@@ -17,7 +17,7 @@
     "Stone Tower Temple East": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Entrance Chest": "has_arrows"
+    "Stone Tower Temple Entrance Chest": "has_arrows || can_use_slingshot"
     "Stone Tower Temple Entrance Switch Chest": "event(STONE_TOWER_ENTRANCE_CHEST_SWITCH)"
     "Stone Tower Temple Pot Entrance 1": "true"
     "Stone Tower Temple Pot Entrance 2": "true"
