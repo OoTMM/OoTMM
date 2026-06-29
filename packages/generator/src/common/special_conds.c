@@ -203,6 +203,9 @@ int SpecialConds_Eval(int special)
     u8 hasMaskBlast;
     u8 hasMaskStone;
     u8 hasMaskKamaro;
+    u8 hasMaskGerudo;
+    u8 hasMaskSkull;
+    u8 hasMaskSpooky;
 
     cond = &gComboConfig.special[special];
     count = 0;
@@ -214,6 +217,9 @@ int SpecialConds_Eval(int special)
     hasMaskBlast = 0;
     hasMaskStone = 0;
     hasMaskKamaro = 0;
+    hasMaskGerudo = 0;
+    hasMaskSkull = 0;
+    hasMaskSpooky = 0;
 
     if (cond->flags & SPF_STONES)
     {
@@ -435,10 +441,30 @@ int SpecialConds_Eval(int special)
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_KAMARO)) count++;
         }
-
-        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
-        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
-        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
+        if (Config_Flag(CFG_SHARED_MASK_GERUDO))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) hasMaskGerudo = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
+        }
+        if (Config_Flag(CFG_SHARED_MASK_SPOOKY))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) hasMaskSpooky = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
+        }
+        if (Config_Flag(CFG_SHARED_MASK_SKULL))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) hasMaskSkull = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
+        }
     }
 
     if (cond->flags & SPF_TRIFORCE)
@@ -466,6 +492,8 @@ int SpecialConds_Eval(int special)
     count += hasMaskBlast;
     count += hasMaskStone;
     count += hasMaskKamaro;
-
+    count += hasMaskGerudo;
+    count += hasMaskSkull;
+    count += hasMaskSpooky;
     return count >= cond->count;
 }

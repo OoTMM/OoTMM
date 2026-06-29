@@ -64,6 +64,9 @@ export const MASKS_OOT = new Set([
   Items.SHARED_MASK_BLAST,
   Items.SHARED_MASK_STONE,
   Items.SHARED_MASK_KAMARO,
+  Items.SHARED_MASK_SKULL,
+  Items.SHARED_MASK_SPOOKY,
+  Items.SHARED_MASK_GERUDO,
 ]);
 
 export const STONES = new Set([
