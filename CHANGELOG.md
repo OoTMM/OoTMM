@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed the logic for Pirate Fortress Exterior entrance from Great Bay Coast not properly expecting a way to swim.
+
 ## [31.0] - 2026-07-02
 
 ### Jokes

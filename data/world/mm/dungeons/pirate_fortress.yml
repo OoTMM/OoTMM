@@ -2,7 +2,7 @@
   dungeon: PF
   exits:
     "Great Bay Coast Fortress": "can_reset_time && (underwater_walking || can_dive_small)"
-    "Pirate Fortress Entrance": "can_reset_time_dungeon"
+    "Pirate Fortress Entrance": "can_reset_time_dungeon && can_swim"
 
 "Pirate Fortress Entrance":
   dungeon: PF

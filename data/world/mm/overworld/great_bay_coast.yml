@@ -152,7 +152,7 @@
   region: GREAT_BAY_COAST
   exits:
     "Great Bay Coast Water": "underwater_walking"
-    "Pirate Fortress": "true"
+    "Pirate Fortress": "can_swim"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
 
