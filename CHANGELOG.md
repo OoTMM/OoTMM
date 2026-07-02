@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [31.0] - 2026-07-02
+
 ### Jokes
 
 - (**April Fools**) Add a fake actor randomizer for OoT, which actually replaces most enemies with very fast redeads.
@@ -1748,7 +1750,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v30.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v31.0...HEAD
+[31.0]: https://github.com/OoTMM/OoTMM/compare/v30.1...v31.0
 [30.1]: https://github.com/OoTMM/OoTMM/compare/v30.0...v30.1
 [30.0]: https://github.com/OoTMM/OoTMM/compare/v29.0...v30.0
 [29.0]: https://github.com/OoTMM/OoTMM/compare/v28.2...v29.0
