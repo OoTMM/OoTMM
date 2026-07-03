@@ -104,6 +104,15 @@ export class Generator {
       const patchfile = new Patchfile;
       await custom(this.monitor, roms, patchfile);
 
+      /* Prepare multi stuff */
+      const sessionId = new Uint8Array(16);
+      const sessionSecret = new Uint8Array(8);
+      if (this.opts.settings.mode !== 'single') {
+        crypto.getRandomValues(sessionId);
+        crypto.getRandomValues(sessionSecret);
+        sessionId[15] = 0;
+      }
+
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
@@ -119,6 +128,11 @@ export class Generator {
       /* Generate spoiler log */
       if (this.opts.settings.generateSpoilerLog) {
         log = makeSpoilerLog(logicResult, this.opts);
+      }
+
+      for (let i = 0; i < patchfiles.length; ++i) {
+        patchfiles[i].addSymbolPatch('MULTI_SESSION_ID', sessionId);
+        patchfiles[i].addSymbolPatch('MULTI_SESSION_SECRET', sessionSecret);
       }
     } else {
       if (!this.opts.patch) {
