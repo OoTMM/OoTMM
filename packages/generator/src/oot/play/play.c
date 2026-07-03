@@ -578,7 +578,10 @@ void Play_MainWrapper(PlayState* play)
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    Multi_Update(play);
+
+    if (gSaveContext.gameMode == GAMEMODE_NORMAL)
+        Multi_Update(play);
+
     Play_Main(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);

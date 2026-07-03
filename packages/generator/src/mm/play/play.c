@@ -840,7 +840,10 @@ void Play_MainWrapper(PlayState* play)
     comboObjectsGC();
     link = GET_PLAYER(play);
     Player_TryUpdateForm(link, play);
-    Multi_Update(play);
+
+    if (gSaveContext.gameMode == GAMEMODE_NORMAL)
+        Multi_Update(play);
+
     Play_Main(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);

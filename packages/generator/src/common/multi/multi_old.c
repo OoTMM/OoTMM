@@ -1,5 +1,4 @@
-#include <combo.h>
-#include <combo/multi.h>
+#include "multi.h"
 #include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
@@ -357,7 +356,7 @@ static void Multi_ProcessItems(PlayState* play, NetContext* net)
     }
 }
 
-void Multi_Update(PlayState* play)
+void Multi_UpdateOld(PlayState* play)
 {
     NetContext* ctx;
 
