@@ -19,6 +19,73 @@ static u32 comboResolvePauseSlot(PlayState* play, u32 slot)
     return slot;
 }
 
+static int KaleidoScope_NormalizeMoonMaskSlot(u32 slot);
+static void KaleidoScope_ToggleMaskSlotSkipHidden(u32 slot);
+
+static u8 KaleidoScope_CustomMaskToItem(s32 customMask)
+{
+    switch (customMask)
+    {
+    case PLAYER_CUSTOM_MASK_GERUDO:
+        return ITEM_MM_MASK_GERUDO;
+    case PLAYER_CUSTOM_MASK_SKULL:
+        return ITEM_MM_MASK_SKULL;
+    case PLAYER_CUSTOM_MASK_SPOOKY:
+        return ITEM_MM_MASK_SPOOKY;
+    default:
+        return ITEM_NONE;
+    }
+}
+
+static s32 KaleidoScope_IsWornCustomMaskSlot(u32 slot)
+{
+    s32 i;
+    u8 wornItem;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+    u8* itemPtr;
+
+    wornItem = KaleidoScope_CustomMaskToItem(gCustomSave.customMask);
+    if (wornItem == ITEM_NONE)
+        return 0;
+
+    for (i = EQUIP_SLOT_C_LEFT; i <= EQUIP_SLOT_C_RIGHT; i++)
+    {
+        if (BUTTON_ITEM_EQUIP(0, i) == wornItem && C_SLOT_EQUIP(0, i) == slot)
+            return 1;
+    }
+    if (comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize) >= 0)
+        return *itemPtr == wornItem;
+
+    return 0;
+}
+
+s32 KaleidoScope_GetCurMaskItemId_Custom(PlayState* play)
+{
+    s32 customItem;
+
+    customItem = KaleidoScope_CustomMaskToItem(gCustomSave.customMask);
+    if (customItem != ITEM_NONE)
+        return customItem;
+
+    return Player_GetCurMaskItemId(play);
+}
+
+PATCH_CALL(0x8081c370, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x8081c384, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x8081c3c8, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x8081c3dc, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x8081c424, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x8081c438, KaleidoScope_GetCurMaskItemId_Custom);
+
+PATCH_CALL(0x80820be4, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x80820bfc, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x80820c6c, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x80820c84, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x80820cf4, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_CALL(0x80820d0c, KaleidoScope_GetCurMaskItemId_Custom);
+
 void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
     u16 cursorSlot;
@@ -39,13 +106,30 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
     u32 tableSize;
 
     if (comboGetSlotExtras(cursorSlot, &itemPtr, &flags, &table, &tableSize) >= 0 &&
-        play->pauseCtx.cursorItem[play->pauseCtx.pageIndex] != 999 &&
-        popcount(flags) > 1)
+play->pauseCtx.cursorItem[play->pauseCtx.pageIndex] != 999 &&
+popcount(flags) > 1)
     {
+        if (play->pauseCtx.pageIndex == PAUSE_MASK)
+        {
+            if (KaleidoScope_NormalizeMoonMaskSlot(cursorSlot))
+                effect = 1;
+        }
+
         play->pauseCtx.cursorColorIndex = 4;
+
         if (press)
         {
-            comboToggleSlot(cursorSlot);
+            if (KaleidoScope_IsWornCustomMaskSlot(cursorSlot))
+            {
+                PlaySound(0x4806); /* NA_SE_SY_ERROR */
+                return;
+            }
+
+            if (play->pauseCtx.pageIndex == PAUSE_MASK)
+                KaleidoScope_ToggleMaskSlotSkipHidden(cursorSlot);
+            else
+                comboToggleSlot(cursorSlot);
+
             effect = 1;
         }
     }
@@ -630,23 +714,168 @@ void KaleidoScope_DrawIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u1
     }
 }
 
+#define MOON_MASK_BIT(i, f) ((u16)(((i) << 8) | (f)))
+#define MOON_MASK_BYTES     ((u8*)0x801f3f3a)
+#define MOON_MASK_GIVEN(i)  (MOON_MASK_BYTES[sMasksGivenOnMoonBits_Custom[i] >> 8] & (u8)sMasksGivenOnMoonBits_Custom[i])
+
+static const u16 sMasksGivenOnMoonBits_Custom[MASK_NUM_SLOTS] = {
+    MOON_MASK_BIT(1, 0x01), MOON_MASK_BIT(0, 0x04), MOON_MASK_BIT(2, 0x02), MOON_MASK_BIT(1, 0x80),
+    MOON_MASK_BIT(1, 0x04), MOON_MASK_BIT(2, 0x10), MOON_MASK_BIT(0, 0x10), MOON_MASK_BIT(2, 0x01),
+    MOON_MASK_BIT(0, 0x08), MOON_MASK_BIT(1, 0x10), MOON_MASK_BIT(2, 0x04), MOON_MASK_BIT(2, 0x20),
+    MOON_MASK_BIT(0, 0x40), MOON_MASK_BIT(0, 0x80), MOON_MASK_BIT(0, 0x02), MOON_MASK_BIT(1, 0x02),
+    MOON_MASK_BIT(0, 0x01), MOON_MASK_BIT(2, 0x40), MOON_MASK_BIT(1, 0x20), MOON_MASK_BIT(1, 0x08),
+    MOON_MASK_BIT(0, 0x20), MOON_MASK_BIT(1, 0x40), MOON_MASK_BIT(2, 0x08), MOON_MASK_BIT(2, 0x80),
+};
+
+typedef struct {
+    u32 flags;
+    u32 tableSize;
+    u8* itemPtr;
+    const u8* table;
+    s32 index;
+} MaskSlotExtras;
+
+static int GetMaskSlotExtras(u32 slot, MaskSlotExtras* e) {
+    e->index = comboGetSlotExtras(slot, &e->itemPtr, &e->flags, &e->table, &e->tableSize);
+    return e->index >= 0 && e->tableSize != 0;
+}
+
+static int KaleidoScope_IsMoonGivenParam0Mask(u32 slot, u8 item) {
+    u32 maskSlot = slot - ITEM_NUM_SLOTS;
+    MaskSlotExtras e;
+    if (slot < ITEM_NUM_SLOTS || maskSlot >= MASK_NUM_SLOTS || !MOON_MASK_GIVEN(maskSlot))
+        return 0;
+    return GetMaskSlotExtras(slot, &e) ? item == e.table[0] : item == gSave.info.inventory.items[slot];
+}
+
+static s32 GetMaskItemTableIndex(u32 slot, u8 item) {
+    MaskSlotExtras e;
+    s32 i;
+    if (!GetMaskSlotExtras(slot, &e))
+        return -1;
+    for (i = 0; i < (s32)e.tableSize; i++)
+        if (e.table[i] == item)
+            return i;
+    return -1;
+}
+
+static u8 GetNextVisibleMaskTrade(u32 slot, u8 currentItem) {
+    MaskSlotExtras e;
+    u8 next, probe = currentItem;
+    u32 i;
+    if (!GetMaskSlotExtras(slot, &e))
+        return ITEM_NONE;
+    for (i = 0; i < e.tableSize; i++) {
+        next = comboGetNextTrade(probe, e.flags, e.table, e.tableSize);
+        if (next == ITEM_NONE || next == currentItem)
+            return ITEM_NONE;
+        if (!KaleidoScope_IsMoonGivenParam0Mask(slot, next))
+            return next;
+        probe = next;
+    }
+    return ITEM_NONE;
+}
+
+static u8 GetCurrentVisibleMaskItem(u32 slot, s32* outActiveIndex) {
+    MaskSlotExtras e;
+    u8 next;
+    if (!GetMaskSlotExtras(slot, &e)) {
+        *outActiveIndex = -1;
+        return ITEM_NONE;
+    }
+    *outActiveIndex = e.index;
+    if (!KaleidoScope_IsMoonGivenParam0Mask(slot, *e.itemPtr))
+        return *e.itemPtr;
+    next = GetNextVisibleMaskTrade(slot, *e.itemPtr);
+    if (next == ITEM_NONE)
+        return ITEM_NONE;
+    *e.itemPtr = next;
+    *outActiveIndex = GetMaskItemTableIndex(slot, next);
+    return next;
+}
+
+static int KaleidoScope_NormalizeMoonMaskSlot(u32 slot) {
+    MaskSlotExtras e;
+    u8 next;
+    if (slot < ITEM_NUM_SLOTS || slot >= ITEM_NUM_SLOTS + MASK_NUM_SLOTS || !GetMaskSlotExtras(slot, &e))
+        return 0;
+    if (!KaleidoScope_IsMoonGivenParam0Mask(slot, *e.itemPtr))
+        return 0;
+    next = GetNextVisibleMaskTrade(slot, *e.itemPtr);
+    if (next == ITEM_NONE)
+        return 0;
+    *e.itemPtr = next;
+    return 1;
+}
+
+static u8 GetNextVisibleMaskOverlayItem(u32 slot, u8 currentItem, s32* outVtxBufferIndex) {
+    MaskSlotExtras e;
+    u8 next;
+    if (!GetMaskSlotExtras(slot, &e)) {
+        *outVtxBufferIndex = -1;
+        return ITEM_NONE;
+    }
+    *outVtxBufferIndex = e.index;
+    next = GetNextVisibleMaskTrade(slot, currentItem);
+    return next != currentItem ? next : ITEM_NONE;
+}
+
+static void KaleidoScope_ToggleMaskSlotSkipHidden(u32 slot) {
+    MaskSlotExtras e;
+    u32 i;
+    if (!GetMaskSlotExtras(slot, &e))
+        return;
+    for (i = 0; i < e.tableSize; i++) {
+        comboToggleSlot(slot);
+        if (!GetMaskSlotExtras(slot, &e) || !KaleidoScope_IsMoonGivenParam0Mask(slot, *e.itemPtr))
+            return;
+    }
+}
+
+u16 KaleidoScope_ResolveMoonMaskCursorItem(u16 maskSlot, u16 cursorItem) {
+    u32 slot = maskSlot + ITEM_NUM_SLOTS;
+    s32 activeIndex;
+    u8 activeItem;
+    if (cursorItem == ITEM_NONE || cursorItem == 999 || !KaleidoScope_IsMoonGivenParam0Mask(slot, cursorItem))
+        return cursorItem;
+    activeItem = GetCurrentVisibleMaskItem(slot, &activeIndex);
+    return activeItem != ITEM_NONE ? activeItem : ITEM_NONE;
+}
+
 void KaleidoScope_DrawMaskIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u16 height, u32 maskSlot, u16 point, u16 vertIdx)
 {
     u32 slot;
     u32 texture;
     s32 tableIndex;
+    u8 primary;
     u8 next;
+    KaleidoScope_DrawIcon KaleidoScope_DrawIcon;
 
     maskSlot = vertIdx >> 2;
     slot = maskSlot + ITEM_NUM_SLOTS;
 
-    texture = GetItemTexture(item);
+    KaleidoScope_DrawIcon = OverlayAddr(0x80821ad4);
+    if (!KaleidoScope_IsMoonGivenParam0Mask(slot, item))
+    {
+        texture = GetItemTexture(item);
+        KaleidoScope_DrawIcon(gfxCtx, texture, width, height, point);
 
-    KaleidoScope_DrawIcon KaleidoScope_DrawIcon = OverlayAddr(0x80821ad4);
+        next = GetNextVisibleMaskOverlayItem(slot, item, &tableIndex);
+        if (next != ITEM_NONE && next != item && tableIndex >= 0)
+        {
+            texture = GetItemTexture(next);
+            Vtx* vtx = GetVtxBuffer(gfxCtx->play, vertIdx, tableIndex);
+            DrawIcon(gfxCtx, vtx, texture, width, height, point);
+        }
+        return;
+    }
+    primary = GetCurrentVisibleMaskItem(slot, &tableIndex);
+    if (primary == ITEM_NONE)
+        return;
+    texture = GetItemTexture(primary);
     KaleidoScope_DrawIcon(gfxCtx, texture, width, height, point);
-
-    next = GetNextItem(slot, &tableIndex);
-    if (next != ITEM_NONE && next != item)
+    next = GetNextVisibleMaskOverlayItem(slot, primary, &tableIndex);
+    if (next != ITEM_NONE && next != primary && tableIndex >= 0)
     {
         texture = GetItemTexture(next);
         Vtx* vtx = GetVtxBuffer(gfxCtx->play, vertIdx, tableIndex);
