@@ -11,6 +11,8 @@
 #include <combo/misc.h>
 #include <combo/common/Kaleido_Scope.h>
 
+#include "combo/mask.h"
+
 
 static u32 comboResolvePauseSlot(PlayState* play, u32 slot)
 {
@@ -61,30 +63,24 @@ static s32 KaleidoScope_IsWornCustomMaskSlot(u32 slot)
     return 0;
 }
 
-s32 KaleidoScope_GetCurMaskItemId_Custom(PlayState* play)
+s32 Player_GetCurMaskItemId_Custom(PlayState* play)
 {
+    Player* player;
     s32 customItem;
 
     customItem = KaleidoScope_CustomMaskToItem(gCustomSave.customMask);
     if (customItem != ITEM_NONE)
         return customItem;
 
-    return Player_GetCurMaskItemId(play);
+    player = GET_PLAYER(play);
+
+    if (player->currentMask != PLAYER_MASK_NONE)
+        return Player_MaskIdToItemId(player->currentMask - 1);
+
+    return ITEM_NONE;
 }
 
-PATCH_CALL(0x8081c370, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x8081c384, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x8081c3c8, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x8081c3dc, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x8081c424, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x8081c438, KaleidoScope_GetCurMaskItemId_Custom);
-
-PATCH_CALL(0x80820be4, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x80820bfc, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x80820c6c, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x80820c84, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x80820cf4, KaleidoScope_GetCurMaskItemId_Custom);
-PATCH_CALL(0x80820d0c, KaleidoScope_GetCurMaskItemId_Custom);
+PATCH_FUNC(0x80122eec, Player_GetCurMaskItemId_Custom);
 
 void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
