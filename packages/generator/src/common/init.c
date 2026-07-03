@@ -8,6 +8,7 @@
 #include <combo/global.h>
 #include <combo/context.h>
 #include <combo/hint.h>
+#include <combo/ipc.h>
 
 ComboGlobal g;
 
@@ -31,6 +32,7 @@ void comboInit(void)
     Hint_Init();
     comboInitEntrances();
     comboSilverRupeesInit();
+    IPC_Init();
     netInit();
     menuInit();
     Debug_Init();
