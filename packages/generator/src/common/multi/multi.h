@@ -10,6 +10,9 @@
 
 typedef struct PACKED
 {
+    u8  sessionId[16];
+    u8  sessionSecret[8];
+    u8  playerId[16];
     u16 seqGame;
     u16 seqNet;
     u8 op;
