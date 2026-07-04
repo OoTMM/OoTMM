@@ -10,11 +10,7 @@
 
 typedef struct PACKED
 {
-    u8  sessionId[16];
-    u8  sessionSecret[8];
-    u8  playerId[16];
-    u16 seqGame;
-    u16 seqNet;
+    u32 seq;
     u8 op;
 }
 MultiPacketHeader;
@@ -22,7 +18,14 @@ MultiPacketHeader;
 typedef struct PACKED
 {
     MultiPacketHeader header;
-    u8 magic[8];
+
+    u8  magic[8];
+    u8  sessionId[16];
+    u8  sessionSecret[8];
+    u8  playerId[16];
+    u8  playerName[8];
+    u8  worldId;
+    u8  multi;
 }
 MultiPacketHelloOut;
 

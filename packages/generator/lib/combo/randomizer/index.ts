@@ -8,6 +8,7 @@ import { RandomizerPatcherStartingItems } from './starting-items';
 import { RandomizerPatcherHints } from './hints';
 import { RandomizerPatcherEntrances } from './entrances';
 import { RandomizerPatcherChecks } from './checks';
+import { toU8Buffer } from '../util';
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const bufConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
@@ -19,6 +20,7 @@ export function patchRandomizer(worldId: number, logic: LogicResult, settings: S
   const bufEntrancesOot = RandomizerPatcherEntrances.run({ worldId, logic, game: 'oot' });
   const bufEntrancesMm = RandomizerPatcherEntrances.run({ worldId, logic, game: 'mm' });
 
+  patchfile.addSymbolPatch('MULTI_WORLD_ID', toU8Buffer([worldId + 1]));
   patchfile.addNewFile({ vrom: 0xf0200000, data: bufConfig, compressed: true });
   patchfile.addNewFile({ vrom: 0xf0300000, data: bufStartingItems, compressed: false });
   patchfile.addNewFile({ vrom: 0xf0400000, data: bufChecksOot, compressed: false });
