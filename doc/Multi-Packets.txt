@@ -7,5 +7,5 @@ Magic           u8[8]
 SessionID       u8[16]
 SessionSecret   u8[8]
 PlayerID        u8[16]
-PlayerSlot      u8
 PlayerName      u8[8]
+WorldID         u8

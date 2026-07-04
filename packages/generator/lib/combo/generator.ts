@@ -107,11 +107,9 @@ export class Generator {
       /* Prepare multi stuff */
       const sessionId = new Uint8Array(16);
       const sessionSecret = new Uint8Array(8);
-      if (this.opts.settings.mode !== 'single') {
-        crypto.getRandomValues(sessionId);
-        crypto.getRandomValues(sessionSecret);
-        sessionId[15] = 0;
-      }
+      crypto.getRandomValues(sessionId);
+      crypto.getRandomValues(sessionSecret);
+      sessionId[15] = 0;
 
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);
