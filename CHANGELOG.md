@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [31.1] - 2026-07-04
+
 ### Fixed
 
 - Fix an inventory corruption bug with the Moon children.
@@ -1755,7 +1757,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v31.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v31.1...HEAD
+[31.1]: https://github.com/OoTMM/OoTMM/compare/v31.0...v31.1
 [31.0]: https://github.com/OoTMM/OoTMM/compare/v30.1...v31.0
 [30.1]: https://github.com/OoTMM/OoTMM/compare/v30.0...v30.1
 [30.0]: https://github.com/OoTMM/OoTMM/compare/v29.0...v30.0
