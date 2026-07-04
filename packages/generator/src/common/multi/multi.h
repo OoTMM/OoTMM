@@ -29,6 +29,16 @@ typedef struct PACKED
 }
 MultiPacketHelloOut;
 
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+
+    u8  magic[8];
+    u32 seqGame;
+    u32 seqNet;
+}
+MultiPacketHelloIn;
+
 typedef struct
 {
     u8  isConnected:1;
