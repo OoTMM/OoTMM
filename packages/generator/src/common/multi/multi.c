@@ -16,6 +16,8 @@ EXPORT_SYMBOL(MULTI_PLAYER_ID, sPlayerId);
 static u8 sWorldId;
 EXPORT_SYMBOL(MULTI_WORLD_ID, sWorldId);
 
+ALIGNED(4) static u8 sBuffer[128];
+
 static int Multi_SendHello(void)
 {
     MultiPacketHelloOut pkt;
@@ -38,6 +40,41 @@ static int Multi_SendHello(void)
     pkt.multi = Config_Flag(CFG_MULTIPLAYER) ? 0x01 : 0x00;
 
     return IPC_Write(&pkt, sizeof(pkt));
+}
+
+static void Multi_ProcessMessagesDisconnected(void)
+{
+    int size;
+
+    size = IPC_Read(sBuffer, sizeof(sBuffer));
+    if (size < sizeof(MultiPacketHelloIn))
+        return;
+    MultiPacketHelloIn* pkt = (MultiPacketHelloIn*)sBuffer;
+    if (pkt->header.op != MULTI_OP_HELLO)
+        return;
+    if (memcmp(pkt->magic, HELLO_MAGIC, sizeof(pkt->magic)) != 0)
+        return;
+    if (pkt->header.seq != 0)
+        return;
+
+    gMulti.isConnected = 1;
+    gMulti.seqGame = pkt->seqGame;
+    gMulti.seqNet = pkt->seqNet;
+
+    return;
+}
+
+static void Multi_ProcessMessagesConnected(void)
+{
+    gSave.info.playerData.rupees++;
+}
+
+static void Multi_ProcessMessages(void)
+{
+    if (gMulti.isConnected)
+        Multi_ProcessMessagesConnected();
+    else
+        Multi_ProcessMessagesDisconnected();
 }
 
 static void Multi_TryConnect(void)
@@ -67,4 +104,7 @@ void Multi_Update(PlayState* play)
 
     if (!gMulti.isConnected && IPC_IsConnected())
         Multi_TryConnect();
+
+    if (IPC_IsConnected())
+        Multi_ProcessMessages();
 }
