@@ -106,7 +106,6 @@ static u32 entranceForOverride(u32 entrance)
 
 static void sendSelfMajorasMask(void)
 {
-    NetContext* net;
     int npc;
     s16 gi;
 
@@ -116,17 +115,7 @@ static void sendSelfMajorasMask(void)
     gi = GI_MM_MASK_MAJORA;
     npc = NPC_MM_MAJORA;
 
-    net = netMutexLock();
-    netWaitCmdClear();
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
-    net->cmdOut.itemSend.game = 1;
-    net->cmdOut.itemSend.gi = gi;
-    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
-    net->cmdOut.itemSend.flags = 0;
-    netMutexUnlock();
+    Multi_SendSelfItem(gi, 0, ((u32)OV_NPC << 24) | npc);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

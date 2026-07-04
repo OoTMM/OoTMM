@@ -7,6 +7,9 @@
 
 #define MULTI_OP_NOP   0x00
 #define MULTI_OP_HELLO 0x01
+#define MULTI_OP_WAL   0x02
+
+#define WAL_ITEM 0x01
 
 typedef struct PACKED
 {
@@ -38,6 +41,24 @@ typedef struct PACKED
     u32 seqNet;
 }
 MultiPacketHelloIn;
+
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+    u8 type;
+}
+MultiPacketWalHeader;
+
+typedef struct PACKED
+{
+    MultiPacketWalHeader wal;
+    u8 to;
+    u8 game;
+    s16 gi;
+    s16 flags;
+    u32 key;
+}
+MultiPacketWalItemOut;
 
 typedef struct
 {
