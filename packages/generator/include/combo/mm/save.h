@@ -387,10 +387,11 @@ typedef struct
     f32                 screenScale;
     MmCycleSceneFlags   cycleSceneFlags[120];
     u16                 dungeonId;
+    u8                  masksGivenOnMoon[27];
 }
 MmSaveContext;
 
-_Static_assert(sizeof(MmSaveContext) == 0x48d0, "MmSaveContext size is wrong");
+_Static_assert(sizeof(MmSaveContext) == 0x48e8, "MmSaveContext size is wrong");
 
 ASSERT_OFFSET(MmSaveContext, fileNum,               0x3ca0);
 ASSERT_OFFSET(MmSaveContext, gameMode,              0x3ca8);
@@ -408,6 +409,7 @@ ASSERT_OFFSET(MmSaveContext, healthDelta,           0x3f5a);
 ASSERT_OFFSET(MmSaveContext, betRupees,             0x3f5c);
 ASSERT_OFFSET(MmSaveContext, cycleSceneFlags,       0x3f68);
 ASSERT_OFFSET(MmSaveContext, dungeonId,             0x48c8);
+ASSERT_OFFSET(MmSaveContext, masksGivenOnMoon,      0x48ca);
 
 #define HUD_VISIBILITY_IDLE                                     0
 #define HUD_VISIBILITY_NONE                                     1

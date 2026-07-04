@@ -711,8 +711,7 @@ void KaleidoScope_DrawIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u1
 }
 
 #define MOON_MASK_BIT(i, f) ((u16)(((i) << 8) | (f)))
-#define MOON_MASK_BYTES     ((u8*)0x801f3f3a)
-#define MOON_MASK_GIVEN(i)  (MOON_MASK_BYTES[sMasksGivenOnMoonBits_Custom[i] >> 8] & (u8)sMasksGivenOnMoonBits_Custom[i])
+#define MOON_MASK_GIVEN(i) (gSaveContext.masksGivenOnMoon[sMasksGivenOnMoonBits_Custom[i] >> 8] & (u8)(sMasksGivenOnMoonBits_Custom[i] & 0xff))
 
 static const u16 sMasksGivenOnMoonBits_Custom[MASK_NUM_SLOTS] = {
     MOON_MASK_BIT(1, 0x01), MOON_MASK_BIT(0, 0x04), MOON_MASK_BIT(2, 0x02), MOON_MASK_BIT(1, 0x80),
