@@ -5,12 +5,12 @@
 #include <combo/config.h>
 #include <combo/actor.h>
 #include <combo/time.h>
+#include <combo/multi.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
 
 static void sendNetOwl(PlayState* play, int owlId)
 {
-    NetContext* net;
     int npc;
     s16 gi;
 
@@ -28,17 +28,8 @@ static void sendNetOwl(PlayState* play, int owlId)
         npc = NPC_MM_OWL_GREAT_BAY + owlId;
     }
 
-    net = netMutexLock();
-    netWaitCmdClear();
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
-    net->cmdOut.itemSend.game = 1;
-    net->cmdOut.itemSend.gi = gi;
-    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
-    net->cmdOut.itemSend.flags = 0;
-    netMutexUnlock();
+    /* Network */
+    Multi_SendSelfItem(gi, 0, ((u32)OV_NPC << 24) | npc);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

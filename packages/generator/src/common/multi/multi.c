@@ -1,5 +1,11 @@
 #include "multi.h"
 
+#if defined(GAME_OOT)
+# define GAME_ID 0
+#else
+# define GAME_ID 1
+#endif
+
 #define HELLO_MAGIC "OoTMM\x7f\x01\x00"
 
 MultiState gMulti;
@@ -107,4 +113,32 @@ void Multi_Update(PlayState* play)
 
     if (IPC_IsConnected())
         Multi_ProcessMessages();
+}
+
+static int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
+{
+    pkt->seq = gMulti.seqGame++;
+    return IPC_Write(pkt, size);
+}
+
+void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
+{
+    /* TODO: Store in persistance */
+    if (!gMulti.isConnected)
+        return;
+
+    MultiPacketWalItemOut pkt;
+    pkt.wal.header.op = MULTI_OP_WAL;
+    pkt.to = to;
+    pkt.game = GAME_ID;
+    pkt.gi = gi;
+    pkt.flags = flags;
+    pkt.key = key;
+
+    Multi_SendPacket(&pkt.wal.header, sizeof(pkt));
+}
+
+void Multi_SendSelfItem(s16 gi, s16 flags, u32 key)
+{
+    Multi_SendItem(sWorldId, gi, flags, key);
 }

@@ -554,7 +554,6 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
-    NetContext* net;
     int count;
 
     comboItemOverride(&o, q);
@@ -586,24 +585,8 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     }
 
     /* Send the item on the network */
-    if (Config_Flag(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
-    {
-        net = netMutexLock();
-        netWaitCmdClear();
-        bzero(&net->cmdOut, sizeof(net->cmdOut));
-        net->cmdOut.op = NET_OP_ITEM_SEND;
-        net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-        net->cmdOut.itemSend.playerTo = o.player;
-#if defined(GAME_OOT)
-        net->cmdOut.itemSend.game = 0;
-#else
-        net->cmdOut.itemSend.game = 1;
-#endif
-        net->cmdOut.itemSend.gi = comboItemResolve(play, o.gi);
-        net->cmdOut.itemSend.key = makeOverrideKey(q);
-        net->cmdOut.itemSend.flags = (s16)q->ovFlags;
-        netMutexUnlock();
-    }
+    if (q->ovType != OV_NONE)
+        Multi_SendItem(o.player, o.gi, (s16)q->ovFlags, makeOverrideKey(q));
 
     return count;
 }
