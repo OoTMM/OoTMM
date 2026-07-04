@@ -183,6 +183,37 @@ KaleidoScope_DrawMaskCustom_Hook:
    addiu  sp, sp, 0x20
 
 /*
+==================================================================================================
+ Pause Menu (Select Mask subscreen) - Moon-given mask cursor fix
+==================================================================================================
+*/
+
+KaleidoScope_MaskCursorMoonItem_Trampoline:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x001C(sp)
+  sw      t2, 0x0018(sp)
+  sw      t3, 0x0014(sp)
+  sw      t4, 0x0010(sp)
+
+  lhu     a0, 0x005E(sp)
+  or      a1, v0, zero
+
+  jal     KaleidoScope_ResolveMoonMaskCursorItem
+   nop
+
+  sh      v0, 0x0060(sp)
+
+  lw      t4, 0x0010(sp)
+  lw      t3, 0x0014(sp)
+  lw      t2, 0x0018(sp)
+  lw      ra, 0x001C(sp)
+
+  li      t5, 999
+
+  jr      ra
+   addiu  sp, sp, 0x20
+
+/*
 Hook draw for item textures on "Select Mask" screen.
 Replaces:
   jal     KaleidoScope_DrawTexQuadRGBA32
@@ -193,7 +224,61 @@ PATCH_END
 
 /* Remove relocations. */
 PATCH_START 0x8082cc34
-.int 0x00000000 // Removes: 0x4400a3b8
+.int 0x00000000 /* Removes: 0x4400a3b8 */
+PATCH_END
+
+/*
+ * Draw path: don't skip whole slot.
+ */
+PATCH_START 0x808201ec
+  nop
+  nop
+PATCH_END
+
+/*
+ * Horizontal cursor move: don't overwrite candidate item with ITEM_NONE.
+ */
+PATCH_START 0x80820770
+  nop
+  nop
+PATCH_END
+
+/*
+ * Left-page special-position scan: don't skip whole slot.
+ */
+PATCH_START 0x808207fc
+  nop
+  nop
+PATCH_END
+
+/*
+ * Right-page special-position scan: don't skip whole slot.
+ */
+PATCH_START 0x808208ec
+  nop
+  nop
+PATCH_END
+
+/*
+ * Up/down / refresh path 1: keep branch, remove ITEM_NONE store.
+ */
+PATCH_START 0x80820a98
+  nop
+PATCH_END
+
+/*
+ * Up/down / refresh path 2: remove ITEM_NONE store.
+ */
+PATCH_START 0x80820adc
+  nop
+PATCH_END
+
+/*
+ * Resolve final cursor item.
+ */
+PATCH_START 0x80820ae0
+  jal     KaleidoScope_MaskCursorMoonItem_Trampoline
+   lhu    v0, 0x0040(sp)
 PATCH_END
 
 /* Fast magical arrow */

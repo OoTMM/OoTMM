@@ -773,3 +773,5 @@ Message_ContinueTextbox = 0x80151938;
 Message_CloseTextbox = 0x801477B4;
 func_80969DA4 = 0x80969DA4;
 func_80969898 = 0x80969898;
+
+Player_GetCurMaskItemId = 0x80122EEC;

@@ -20,4 +20,6 @@ typedef enum PauseMenuPage {
 #define ITEM_NUM_SLOTS (ITEM_GRID_ROWS * ITEM_GRID_COLS)
 #define MASK_NUM_SLOTS (MASK_GRID_ROWS * MASK_GRID_COLS)
 
+s32 Player_GetCurMaskItemId(PlayState* play);
+
 #endif
