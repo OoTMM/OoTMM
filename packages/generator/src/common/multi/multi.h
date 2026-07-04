@@ -63,8 +63,8 @@ MultiPacketWalItemOut;
 typedef struct
 {
     u8  isConnected:1;
-    u16 seqGame;
-    u16 seqNet;
+    u32 seqGame;
+    u32 seqNet;
     u16 ttl;
     u8  buffer[128];
 }
