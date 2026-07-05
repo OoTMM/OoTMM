@@ -2,6 +2,7 @@
 #include <combo/text.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/multi.h>
 
 typedef struct
 {
@@ -1210,7 +1211,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     comboTextAppendStr(b, regName->name);
     comboTextAppendClearColor(b);
 
-    if (world != 0 && world != 0xff && world != gComboConfig.playerId)
+    if (world != 0 && world != 0xff && world != Multi_WorldID())
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);
@@ -1239,7 +1240,7 @@ int comboTextAppendCheckName(char** b, u8 checkId, u8 world)
     comboTextAppendStr(b, cn->name);
     comboTextAppendClearColor(b);
 
-    if (world != 0 && world != 0xff && world != gComboConfig.playerId)
+    if (world != 0 && world != 0xff && world != Multi_WorldID())
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);

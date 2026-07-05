@@ -286,7 +286,7 @@ static void Multi_ReceiveItem(PlayState* play, NetContext* net)
     gi = net->cmdIn.itemRecv.gi;
     isMarked = 0;
     needsMark = 0;
-    isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboConfig.playerId);
+    isSamePlayer = (net->cmdIn.itemRecv.playerFrom == Multi_WorldID());
     if (isSamePlayer)
     {
         if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))

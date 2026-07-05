@@ -23,6 +23,7 @@ typedef struct ALIGNED(16)
 {
     OotCustomSave   oot;
     MmCustomSave    mm;
+    u32             walIndex;
     s16             netGiSkip[16];
     u16             coins[4];
     u16             ocarinaButtonMaskOot;
