@@ -570,6 +570,8 @@ void Play_MainWrapper(PlayState* play)
 
     if (gSaveContext.gameMode == GAMEMODE_NORMAL)
         Multi_Update(play);
+    else
+        Multi_Disconnect();
 
     Play_Main(play);
     Dpad_Draw(play);

@@ -1,3 +1,4 @@
+#include <combo/mark.h>
 #include "multi.h"
 
 #if defined(GAME_OOT)
@@ -70,9 +71,182 @@ static void Multi_ProcessMessagesDisconnected(void)
     return;
 }
 
+static void Multi_GiveItem(PlayState* play, s16 gi, u8 from, int flags)
+{
+    ComboItemQuery q = ITEM_QUERY_INIT;
+
+    q.gi = gi;
+    q.from = from;
+
+    if ((flags & OVF_PRECOND) && (!isItemLicensed(gi)))
+    {
+        bzero(&q, sizeof(q));
+        q.ovType = OV_NONE;
+        q.gi = GI_RECOVERY_HEART;
+    }
+
+    Item_AddWithDecoy(play, &q);
+}
+
+u8 Multi_WorldID(void)
+{
+    return sWorldId;
+}
+
+static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
+{
+    PlayState* play;
+    s16 gi;
+    u8 ovType;
+    u8 sceneId;
+    u8 roomId;
+    u8 id;
+    u8 isMarked;
+    u8 isSamePlayer;
+    u8 needsMark;
+
+    if (!Item_IsPlayerSelf(pkt->to))
+        return 1;
+    play = gPlay;
+
+    gSave.info.playerData.rupees = 13;
+
+    /* The item is for us, we just need to make sure it's safe to get it */
+    gi = pkt->gi;
+    isMarked = 0;
+    needsMark = 0;
+    isSamePlayer = Item_IsPlayerSelf(pkt->from);
+    if (isSamePlayer)
+    {
+        if (!(pkt->flags & OVF_RENEW))
+        {
+            needsMark = 1;
+            ovType = (pkt->key >> 24) & 0xff;
+            sceneId = (pkt->key >> 16) & 0xff;
+            roomId = (pkt->key >> 8) & 0xff;
+            id = pkt->key & 0xff;
+            if (pkt->game)
+                isMarked = Mark_GetMm(play, ovType, sceneId, roomId, id);
+            else
+                isMarked = Mark_GetOot(play, ovType, sceneId, roomId, id);
+        }
+        else
+        {
+            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
+            {
+                if (gSharedCustomSave.netGiSkip[i] == gi)
+                {
+                    isMarked = 1;
+                    gSharedCustomSave.netGiSkip[i] = GI_NONE;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!isMarked && gi != GI_NOTHING)
+    {
+        /* Need to actually give the item */
+        if (!Item_SafeToReceive(play) || g.decoysCount)
+            return 0;
+        Multi_GiveItem(play, gi, pkt->from, pkt->flags);
+        if (needsMark)
+        {
+            if (pkt->game)
+                Mark_SetMm(play, ovType, sceneId, roomId, id);
+            else
+                Mark_SetOot(play, ovType, sceneId, roomId, id);
+        }
+    }
+
+    return 1;
+}
+
+static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
+{
+    int increment;
+
+    gSave.info.playerData.rupees = 9;
+    if (pkt->index != gSharedCustomSave.walIndex)
+        return 1;
+
+    gSave.info.playerData.rupees = 10;
+    gSave.info.playerData.rupees = pkt->type;
+
+    increment = 0;
+    switch (pkt->type)
+    {
+    case WAL_ITEM:
+        gSave.info.playerData.rupees = 11;
+        if (size < sizeof(MultiPacketWalItemIn))
+            return 0;
+        gSave.info.playerData.rupees = 12;
+        MultiPacketWalItemIn* itemPkt = (MultiPacketWalItemIn*)pkt;
+        increment = MultiProcessMessageItemWAL(itemPkt, size);
+        break;
+    }
+
+    if (increment)
+        gSharedCustomSave.walIndex++;
+
+    return 1;
+}
+
+static int MultiProcessMessage(MultiPacketHeader* pkt, int size)
+{
+    /* DEBUG */
+    gSave.info.playerData.rupees = 6;
+
+    switch (pkt->op)
+    {
+    case MULTI_OP_WAL:
+        gSave.info.playerData.rupees = 7;
+        if (size < sizeof(MultiPacketWalInHeader))
+            return 0;
+        gSave.info.playerData.rupees = 8;
+        MultiPacketWalInHeader* walPkt = (MultiPacketWalInHeader*)pkt;
+        return MultiProcessMessageWAL(walPkt, size);
+    }
+
+    return 1;
+}
+
 static void Multi_ProcessMessagesConnected(void)
 {
-    gSave.info.playerData.rupees++;
+    int size;
+
+    gSave.info.playerData.rupees = 1;
+    for (;;)
+    {
+        size = IPC_Read(sBuffer, sizeof(sBuffer));
+        if (size <= 0)
+            break;
+
+        gSave.info.playerData.rupees = 2;
+
+        if (size < sizeof(MultiPacketHeader))
+        {
+            gMulti.isConnected = 0;
+            return;
+        }
+
+        gSave.info.playerData.rupees = 3;
+
+        MultiPacketHeader* pkt = (MultiPacketHeader*)sBuffer;
+        if (pkt->seq != gMulti.seqNet++)
+        {
+            gMulti.isConnected = 0;
+            return;
+        }
+
+        gSave.info.playerData.rupees = 4;
+
+        if (!MultiProcessMessage(pkt, size))
+        {
+            gMulti.isConnected = 0;
+            return;
+        }
+    }
 }
 
 static void Multi_ProcessMessages(void)
@@ -91,6 +265,21 @@ static void Multi_TryConnect(void)
     gMulti.ttl = 30;
     if (!Multi_SendHello())
         return;
+}
+
+static int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
+{
+    pkt->seq = gMulti.seqGame++;
+    return IPC_Write(pkt, size);
+}
+
+static void Multi_QueryWal(void)
+{
+    MultiPacketWalQuery pkt;
+    pkt.header.op = MULTI_OP_WAL_QUERY;
+    pkt.index = gSharedCustomSave.walIndex;
+    if (!Multi_SendPacket(&pkt.header, sizeof(pkt)))
+        gMulti.isConnected = 0;
 }
 
 void Multi_Update(PlayState* play)
@@ -113,12 +302,17 @@ void Multi_Update(PlayState* play)
 
     if (IPC_IsConnected())
         Multi_ProcessMessages();
+
+    if (gMulti.isConnected)
+    {
+        Multi_QueryWal();
+    }
 }
 
-static int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
+void Multi_Disconnect(void)
 {
-    pkt->seq = gMulti.seqGame++;
-    return IPC_Write(pkt, size);
+    gMulti.isConnected = 0;
+    gMulti.ttl = 0;
 }
 
 void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
@@ -129,6 +323,7 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
 
     MultiPacketWalItemOut pkt;
     pkt.wal.header.op = MULTI_OP_WAL;
+    pkt.wal.type = WAL_ITEM;
     pkt.to = to;
     pkt.game = GAME_ID;
     pkt.gi = gi;

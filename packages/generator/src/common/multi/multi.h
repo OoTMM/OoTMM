@@ -5,9 +5,10 @@
 #include <combo/multi.h>
 #include <combo/ipc.h>
 
-#define MULTI_OP_NOP   0x00
-#define MULTI_OP_HELLO 0x01
-#define MULTI_OP_WAL   0x02
+#define MULTI_OP_NOP            0x00
+#define MULTI_OP_HELLO          0x01
+#define MULTI_OP_WAL            0x02
+#define MULTI_OP_WAL_QUERY      0x03
 
 #define WAL_ITEM 0x01
 
@@ -51,6 +52,14 @@ MultiPacketWalHeader;
 
 typedef struct PACKED
 {
+    MultiPacketHeader header;
+    u32 index;
+    u8 type;
+}
+MultiPacketWalInHeader;
+
+typedef struct PACKED
+{
     MultiPacketWalHeader wal;
     u8 to;
     u8 game;
@@ -59,6 +68,26 @@ typedef struct PACKED
     u32 key;
 }
 MultiPacketWalItemOut;
+
+typedef struct PACKED
+{
+    MultiPacketWalInHeader wal;
+    u8 from;
+    u8 to;
+    u8 game;
+    s16 gi;
+    s16 flags;
+    u32 key;
+    u8 playerName[8];
+}
+MultiPacketWalItemIn;
+
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+    u32 index;
+}
+MultiPacketWalQuery;
 
 typedef struct
 {

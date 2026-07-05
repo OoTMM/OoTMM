@@ -111,6 +111,14 @@ export class Generator {
       crypto.getRandomValues(sessionSecret);
       sessionId[15] = 0;
 
+      /* DEBUG */
+      for (let i = 0; i < 16; ++i) {
+        sessionId[i] = (i << 4) | i;
+      }
+      for (let i = 0; i < 8; ++i) {
+        sessionSecret[i] = (i << 4) | i;
+      }
+
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);

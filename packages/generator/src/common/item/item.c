@@ -49,7 +49,7 @@ int Item_SafeToReceive(PlayState* play)
 
 int Item_IsPlayerSelf(u8 playerId)
 {
-    if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == gComboConfig.playerId)
+    if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == Multi_WorldID())
         return 1;
     return 0;
 }
