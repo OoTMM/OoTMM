@@ -95,7 +95,6 @@ export class RandomizerPatcherConfig {
 
   private execute() {
     const buffers = [];
-    buffers.push(toU8Buffer([this.ctx.worldId + 1, 0, 0, 0]));
     buffers.push(this.dungeonWarpsBuffer());
     buffers.push(this.dungeonEntrancesBuffer());
     buffers.push(this.randomizerDungeonsBits());
