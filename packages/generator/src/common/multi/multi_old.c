@@ -255,107 +255,6 @@ void Multi_ResetWisps(void)
     bzero(sPlayerWisps, sizeof(sPlayerWisps));
 }
 
-static void Multi_GiveItem(PlayState* play, s16 gi, u8 from, int flags)
-{
-    ComboItemQuery q = ITEM_QUERY_INIT;
-
-    q.gi = gi;
-    q.from = from;
-
-    if ((flags & OVF_PRECOND) && (!isItemLicensed(gi)))
-    {
-        bzero(&q, sizeof(q));
-        q.ovType = OV_NONE;
-        q.gi = RECOVERY_HEART;
-    }
-
-    Item_AddWithDecoy(play, &q);
-}
-
-static void Multi_ReceiveItem(PlayState* play, NetContext* net)
-{
-    s16 gi;
-    u8 ovType;
-    u8 sceneId;
-    u8 roomId;
-    u8 id;
-    u8 isMarked;
-    u8 isSamePlayer;
-    u8 needsMark;
-
-    gi = net->cmdIn.itemRecv.gi;
-    isMarked = 0;
-    needsMark = 0;
-    isSamePlayer = (net->cmdIn.itemRecv.playerFrom == Multi_WorldID());
-    if (isSamePlayer)
-    {
-        if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
-        {
-            needsMark = 1;
-            ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
-            sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
-            roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
-            id = net->cmdIn.itemRecv.key & 0xff;
-            if (net->cmdIn.itemRecv.game)
-                isMarked = Mark_GetMm(play, ovType, sceneId, roomId, id);
-            else
-                isMarked = Mark_GetOot(play, ovType, sceneId, roomId, id);
-        }
-        else
-        {
-            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
-            {
-                if (gSharedCustomSave.netGiSkip[i] == gi)
-                {
-                    isMarked = 1;
-                    gSharedCustomSave.netGiSkip[i] = GI_NONE;
-                    break;
-                }
-            }
-        }
-    }
-
-    if (!isMarked && gi != GI_NOTHING)
-    {
-        /* Need to actually give the item */
-        if (!Item_SafeToReceive(play) || g.decoysCount)
-            return;
-        Multi_GiveItem(play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags);
-        if (needsMark)
-        {
-            if (net->cmdIn.itemRecv.game)
-                Mark_SetMm(play, ovType, sceneId, roomId, id);
-            else
-                Mark_SetOot(play, ovType, sceneId, roomId, id);
-        }
-    }
-
-    /* Mark as obtained on the network */
-    bzero(&net->cmdIn, sizeof(net->cmdIn));
-    gSaveLedgerBase++;
-    net->ledgerBase = gSaveLedgerBase;
-}
-
-static void Multi_ProcessItems(PlayState* play, NetContext* net)
-{
-    u8 playerTo;
-
-    if (net->cmdIn.op == NET_OP_ITEM_RECV)
-    {
-        playerTo = net->cmdIn.itemRecv.playerTo;
-        if (playerTo != gComboConfig.playerId && playerTo != PLAYER_ALL)
-        {
-            bzero(&net->cmdIn, sizeof(net->cmdIn));
-            gSaveLedgerBase++;
-            net->ledgerBase = gSaveLedgerBase;
-        }
-        else
-        {
-            Multi_ReceiveItem(play, net);
-        }
-    }
-}
-
 void Multi_UpdateOld(PlayState* play)
 {
     NetContext* ctx;
@@ -365,6 +264,5 @@ void Multi_UpdateOld(PlayState* play)
 
     ctx = netMutexLock();
     Multi_ProcessMessages(play, ctx);
-    Multi_ProcessItems(play, ctx);
     netMutexUnlock();
 }
