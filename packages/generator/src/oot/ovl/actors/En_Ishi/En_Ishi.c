@@ -374,6 +374,26 @@ static void EnIshi_AliasSilverBoulder(Xflag* xf) {
                 xf->id -= 6;
         }
         break;
+    case SCE_OOT_DESERT_COLOSSUS:
+        xf->setupId = 0;
+        xf->id = 18;
+        break;
+    case SCE_OOT_GERUDO_VALLEY:
+        xf->setupId = 0;
+        xf->id = 18;
+        break;
+    case SCE_OOT_ZORA_FOUNTAIN:
+        xf->setupId = 0;
+        xf->id = 5;
+        break;
+    case SCE_OOT_KAKARIKO_VILLAGE:
+        xf->setupId = 2;
+        xf->id = 48;
+        break;
+    case SCE_OOT_HYRULE_FIELD:
+        xf->setupId = 0;
+        xf->id = 30;
+        break;
     }
 }
 
