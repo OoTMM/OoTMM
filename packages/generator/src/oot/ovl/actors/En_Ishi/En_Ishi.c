@@ -298,7 +298,7 @@ static InitChainEntry sInitChains[][5] = {
     },
 };
 
-static void EnIshi_Alias(Xflag* xf) {
+static void EnIshi_AliasRock(Xflag* xf) {
     switch (xf->sceneId)
     {
     case SCE_OOT_LAKE_HYLIA:
@@ -361,13 +361,22 @@ static void EnIshi_Alias(Xflag* xf) {
     }
 }
 
+static void EnIshi_AliasSilverBoulder(Xflag* xf) {
+}
+
 void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
 
     if (comboXflagInit(&this->xflag, &this->actor, play)) {
-        if (type == 0) {
-            EnIshi_Alias(&this->xflag);
+        switch (type)
+        {
+        case ROCK_SMALL:
+            EnIshi_AliasRock(&this->xflag);
+            break;
+        case ROCK_LARGE:
+            EnIshi_AliasSilverBoulder(&this->xflag);
+            break;
         }
     }
 
@@ -578,14 +587,25 @@ void EnIshi_DrawSmall(EnIshi* this, PlayState* play) {
 }
 
 void EnIshi_DrawLarge(EnIshi* this, PlayState* play) {
-    OPEN_DISPS(play->state.gfxCtx);
+    int csmc;
+    const Color_RGB8* color;
 
+    csmc = EnIshi_CAMC(this, play);
+
+    OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL_25Opa(play->state.gfxCtx);
     MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
     gSPDisplayList(POLY_OPA_DISP++, gSilverRockDL);
-
     CLOSE_DISPS();
+
+    if (csmc != CSMC_NORMAL)
+    {
+        const Color_RGB8* color;
+        color = csmcTypeColor(csmc);
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 4.5f, 120.f);
+    }
 }
 
 static EnIshiDrawFunc sDrawFuncs[] = { EnIshi_DrawSmall, EnIshi_DrawLarge };
