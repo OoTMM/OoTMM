@@ -87,11 +87,12 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "GLOBAL": "true"
-    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere || can_lift_silver)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
     "Death Mountain Crater Bottom Child": "is_child"
     "Death Mountain Crater Bottom Adult Rupees": "is_adult && scarecrow_longshot"
     "Death Mountain Crater Soil Fairies": "soil_fairies(BEAN_DEATH_MOUNTAIN_CRATER)"
+    "Death Mountain Crater Silver Boulders": "is_child && can_lift_silver"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
@@ -103,6 +104,14 @@
     "Death Mountain Crater Rock Adult 3": "is_adult"
     "Death Mountain Crater Rock Adult 4": "is_adult"
     "Death Mountain Crater Rock Adult 5": "is_adult"
+
+"Death Mountain Crater Silver Boulders":
+  region: DEATH_MOUNTAIN_CRATER
+  age_change: false
+  locations:
+    "Death Mountain Crater Silver Boulder 1": "true"
+    "Death Mountain Crater Silver Boulder 2": "true"
+    "Death Mountain Crater Silver Boulder 3": "true"
 
 "Death Mountain Crater Soil Fairies":
   region: DEATH_MOUNTAIN_CRATER

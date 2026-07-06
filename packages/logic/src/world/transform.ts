@@ -1321,29 +1321,32 @@ class LogicPassWorldTransform {
     }
   }
 
-  private removeLocations(locs: string[]) {
-    const { worlds } = this.state;
-    for (let i = 0; i < worlds.length; ++i) {
-      const world = worlds[i];
+  private removeWorldLocations(worldId: number, locs: string[]) {
+    const world = this.state.worlds[worldId];
+    for (const loc of locs) {
+      delete world.checks[loc];
+      delete world.regions[loc];
+      world.locations.delete(loc);
+      this.fixedLocations.delete(makeLocation(loc, worldId));
+    }
+    for (const areaName in world.areas) {
+      const area = world.areas[areaName];
+      const locations = area.locations;
       for (const loc of locs) {
-        delete world.checks[loc];
-        delete world.regions[loc];
-        world.locations.delete(loc);
-        this.fixedLocations.delete(makeLocation(loc, i));
+        delete locations[loc];
       }
-      for (const areaName in world.areas) {
-        const area = world.areas[areaName];
-        const locations = area.locations;
-        for (const loc of locs) {
-          delete locations[loc];
-        }
+    }
+    for (const dungeonId of Object.keys(world.dungeons)) {
+      const dungeon = world.dungeons[dungeonId];
+      for (const l of locs) {
+        dungeon.delete(l);
       }
-      for (const dungeonId of Object.keys(world.dungeons)) {
-        const dungeon = world.dungeons[dungeonId];
-        for (const l of locs) {
-          dungeon.delete(l);
-        }
-      }
+    }
+  }
+
+  private removeLocations(locs: string[]) {
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      this.removeWorldLocations(i, locs);
     }
   }
 
@@ -1524,6 +1527,17 @@ class LogicPassWorldTransform {
 
   private filterChecksSilverBoulders() {
     this.filterLocationsBool(this.state.settings.shuffleSilverBouldersOot, 'boulder-silver', 'oot');
+
+    /* Impossible boulders */
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      if (!this.state.settings.agelessStrength || this.state.worlds[i].resolvedFlags.openDungeonsOot.has('fireChild')) {
+        this.removeLocations([
+          'OOT Death Mountain Crater Silver Boulder 1',
+          'OOT Death Mountain Crater Silver Boulder 2',
+          'OOT Death Mountain Crater Silver Boulder 3',
+        ]);
+      }
+    }
   }
 
   private filterChecksSnowballs() {
