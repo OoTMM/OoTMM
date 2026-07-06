@@ -66,10 +66,20 @@ void ObjBombiwa_InitCollision(Actor* thisx, PlayState* play) {
     Collider_UpdateCylinder(&this->actor, &this->collider);
 }
 
+static void ObjBombiwa_Alias(Xflag* xf)
+{
+
+}
+
 void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
+    ObjBombiwa* this = (ObjBombiwa*)thisx;
+
     Actor_ProcessInitChain(thisx, sInitChain);
+    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+        ObjBombiwa_Alias(&this->xflag);
+    }
     ObjBombiwa_InitCollision(thisx, play);
-    if ((Flags_GetSwitch(play, PARAMS_GET_U(thisx->params, 0, 6)) != 0)) {
+    if ((Flags_GetSwitch(play, PARAMS_GET_U(thisx->params, 0, 6)) != 0) && !Xflag_IsShuffled(&this->xflag)) {
         Actor_Kill(thisx);
     } else {
         CollisionCheck_SetInfo(&thisx->colChkInfo, NULL, &sColChkInfoInit);
@@ -98,6 +108,9 @@ void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play) {
     s16 arg5;
     s16 scale;
     s32 i;
+
+    if (Xflag_IsShuffled(&this->xflag))
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
 
     dlist = object_bombiwa_DL_0009E0;
     for (i = 0; i < ARRAY_COUNT(sEffectScales); i++) {
@@ -136,6 +149,31 @@ void ObjBombiwa_Update(Actor* thisx, PlayState* play) {
     }
 }
 
+static int ObjBombiwa_CAMC(ObjBombiwa* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
 void ObjBombiwa_Draw(Actor* thisx, PlayState* play) {
+    int csmc;
+    const Color_RGB8* color;
+
+    csmc = ObjBombiwa_CAMC((ObjBombiwa*)thisx, play);
     Gfx_DrawDListOpa(play, object_bombiwa_DL_0009E0);
+
+    if (csmc != CSMC_NORMAL)
+    {
+        color = csmcTypeColor(csmc);
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 4.5f, 120.f);
+    }
 }
