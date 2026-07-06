@@ -402,7 +402,7 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
     }
     Actor_SetScale(&this->actor, sRockScales[type]);
     EnIshi_InitCollider(&this->actor, play);
-    if ((type == ROCK_LARGE) && Flags_GetSwitch(play, ISHI_GET_SWITCH_FLAG(&this->actor))) {
+    if ((type == ROCK_LARGE) && Flags_GetSwitch(play, ISHI_GET_SWITCH_FLAG(&this->actor)) && !Xflag_IsShuffled(&this->xflag)) {
         Actor_Kill(&this->actor);
         return;
     }
