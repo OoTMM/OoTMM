@@ -366,7 +366,9 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
 
     if (comboXflagInit(&this->xflag, &this->actor, play)) {
-        EnIshi_Alias(&this->xflag);
+        if (type == 0) {
+            EnIshi_Alias(&this->xflag);
+        }
     }
 
     Actor_ProcessInitChain(&this->actor, sInitChains[type]);

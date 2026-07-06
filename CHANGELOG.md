@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix the silver boulder in Desert Colossus incorrectly giving a shuffled wonder item when broken.
+
 ## [31.1] - 2026-07-04
 
 ### Fixed
