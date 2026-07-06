@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/souls.h>
-#include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
 #include <combo/debug.h>

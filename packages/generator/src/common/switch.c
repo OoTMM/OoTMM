@@ -1,5 +1,4 @@
 #include <combo.h>
-#include <combo/net.h>
 #include <combo/dma.h>
 #include <combo/system.h>
 #include <combo/context.h>
@@ -77,7 +76,6 @@ NORETURN void comboGameSwitch(PlayState* play, u32 entrance)
     gComboCtx.entrance = entrance;
     gComboCtx.saveIndex = gSaveContext.fileNum;
 
-    netClose();
     if (play)
         Save_DoSave(play, SF_OWL);
     System_DisableInterrupts();

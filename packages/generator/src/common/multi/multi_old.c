@@ -1,5 +1,5 @@
+#if 0
 #include "multi.h"
-#include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/item.h>
@@ -266,3 +266,4 @@ void Multi_UpdateOld(PlayState* play)
     Multi_ProcessMessages(play, ctx);
     netMutexUnlock();
 }
+#endif

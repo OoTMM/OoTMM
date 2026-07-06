@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/dma.h>
 #include <combo/entrance.h>
 #include <combo/io.h>
