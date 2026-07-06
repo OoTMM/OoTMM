@@ -269,6 +269,7 @@ Kakariko Grass 5,                                           grass,          NONE
 Kakariko Grass 6,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00029,                    RANDOM
 Kakariko Grass 7,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002a,                    RANDOM
 Kakariko Grass 8,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002b,                    RANDOM
+Kakariko Silver Boulder,                                    boulder-silver, NONE,                 KAKARIKO_VILLAGE,               0x08030,                    NOTHING
 Kakariko Wonder Item,                                       wonder,         NONE,                 KAKARIKO_VILLAGE,               0x00037,                    RUPEE_RED
 Kakariko Butterfly 1,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x0002e,                    FAIRY
 Kakariko Butterfly 2,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x1002e,                    NOTHING
@@ -749,6 +750,7 @@ Zora Fountain Bush 3,                                       bush,           NONE
 Zora Fountain Bush 4,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00009,                    NOTHING
 Zora Fountain Bush 5,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000a,                    NOTHING
 Zora Fountain Bush 6,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000b,                    NOTHING
+Zora Fountain Silver Boulder,                               boulder-silver, NONE,                 ZORA_FOUNTAIN,                  0x00005,                    NOTHING
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                BOTTLE_RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
@@ -1100,6 +1102,7 @@ Hyrule Field Red Boulder 1,                                 boulder-red,    NONE
 Hyrule Field Red Boulder 2,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08009,                    NOTHING
 Hyrule Field Red Boulder 3,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x0800a,                    NOTHING
 Hyrule Field Red Boulder 4,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x0800b,                    NOTHING
+Hyrule Field Silver Boulder,                                boulder-silver, NONE,                 HYRULE_FIELD,                   0x0001e,                    NOTHING
 Hyrule Field Fairy Fountain Fairy 1,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 2,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 3,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22000,                    FAIRY
@@ -1340,6 +1343,7 @@ Gerudo Valley Red Boulder Around Chest 1,                   boulder-red,    NONE
 Gerudo Valley Red Boulder Around Chest 2,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08014,                    NOTHING
 Gerudo Valley Red Boulder Around Chest 3,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08015,                    NOTHING
 Gerudo Valley Red Boulder Around Chest 4,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08016,                    NOTHING
+Gerudo Valley Silver Boulder,                               boulder-silver, NONE,                 GERUDO_VALLEY,                  0x00012,                    NOTHING
 Gerudo Valley Soil 1,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x0001f,                    FAIRY
 Gerudo Valley Soil 2,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x1001f,                    FAIRY
 Gerudo Valley Soil 3,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x2001f,                    FAIRY
@@ -1437,6 +1441,7 @@ Desert Colossus Rock Circle 2 Rock 5,                       rock,           NONE
 Desert Colossus Rock Circle 2 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001b,                    RANDOM
+Desert Colossus Silver Boulder,                             boulder-silver, NONE,                 DESERT_COLOSSUS,                0x00012,                    NOTHING
 Desert Colossus Soil 1,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x0001d,                    FAIRY
 Desert Colossus Soil 2,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x1001d,                    FAIRY
 Desert Colossus Soil 3,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x2001d,                    FAIRY

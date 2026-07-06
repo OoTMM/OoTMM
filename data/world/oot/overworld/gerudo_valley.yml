@@ -86,6 +86,7 @@
     "Octorok Grotto": "can_lift_silver"
   locations:
     "Gerudo Valley Crate HP": "can_longshot"
+    "Gerudo Valley Silver Boulder": "can_lift_silver"
 
 "Octorok Grotto":
   region: ENTRANCE

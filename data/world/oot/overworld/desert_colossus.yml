@@ -41,6 +41,7 @@
     "Desert Colossus Rock Circle 2 Rock 6": "true"
     "Desert Colossus Rock Circle 2 Rock 7": "true"
     "Desert Colossus Rock Circle 2 Rock 8": "true"
+    "Desert Colossus Silver Boulder": "can_lift_silver"
   gossip:
     "Desert Colossus Gossip": "true"
 
