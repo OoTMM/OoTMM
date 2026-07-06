@@ -1518,8 +1518,8 @@ class LogicPassWorldTransform {
   }
 
   private filterChecksRedBoulders() {
-    this.filterLocationsBool(this.state.settings.shuffleRedBouldersOot, 'redboulder', 'oot');
-    this.filterLocationsBool(this.state.settings.shuffleRedBouldersMm, 'redboulder', 'mm');
+    this.filterLocationsBool(this.state.settings.shuffleRedBouldersOot, 'boulder-red', 'oot');
+    this.filterLocationsBool(this.state.settings.shuffleRedBouldersMm, 'boulder-red', 'mm');
   }
 
   private filterChecksSnowballs() {

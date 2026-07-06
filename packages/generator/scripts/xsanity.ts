@@ -1427,7 +1427,7 @@ function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerObjHamishi(checks: Check[], ra: RoomActor) {
-  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'redboulder' });
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'boulder-red' });
 }
 
 function actorHandlerOotBgIcicle(checks: Check[], ra: RoomActor) {

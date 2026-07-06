@@ -346,7 +346,7 @@ function checkKey(check: WorldCheck): number {
     case 'fairy_spot':
     case 'wonder':
     case 'butterfly':
-    case 'redboulder':
+    case 'boulder-red':
     case 'icicle':
     case 'redice':
       /* xflag */
@@ -376,7 +376,7 @@ function checkKey(check: WorldCheck): number {
     case 'fairy_spot':
     case 'wonder':
     case 'butterfly':
-    case 'redboulder':
+    case 'boulder-red':
     case 'icicle':
     case 'redice':
       sceneId = (SCENES as any)[check.scene];
