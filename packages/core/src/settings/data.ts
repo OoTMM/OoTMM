@@ -905,6 +905,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false,
 }, {
+  key: 'shuffleSilverBouldersOot',
+  name: 'Silver Boulder Drops Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the silver boulders drop an item when broken (OoT)',
+  cond: hasOoT,
+  default: false,
+}, {
   key: 'shuffleFrogsRupeesOot',
   name: 'Frogs Rupees Shuffle (OoT)',
   category: 'main.shuffle',
