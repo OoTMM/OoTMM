@@ -889,6 +889,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false,
 }, {
+  key: 'shuffleBouldersOot',
+  name: 'Boulder Drops Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the regular boulders drop an item when broken (OoT)',
+  cond: hasOoT,
+  default: false,
+}, {
   key: 'shuffleRedBouldersOot',
   name: 'Red Boulder Drops Shuffle (OoT)',
   category: 'main.shuffle',

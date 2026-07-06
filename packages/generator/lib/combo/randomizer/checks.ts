@@ -346,6 +346,7 @@ function checkKey(check: WorldCheck): number {
     case 'fairy_spot':
     case 'wonder':
     case 'butterfly':
+    case 'boulder':
     case 'boulder-red':
     case 'boulder-silver':
     case 'icicle':
@@ -377,6 +378,7 @@ function checkKey(check: WorldCheck): number {
     case 'fairy_spot':
     case 'wonder':
     case 'butterfly':
+    case 'boulder':
     case 'boulder-red':
     case 'boulder-silver':
     case 'icicle':
