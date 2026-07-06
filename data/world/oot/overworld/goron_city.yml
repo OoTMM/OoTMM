@@ -17,6 +17,7 @@
     "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will)) || (has_blue_fire_arrows_mudwall && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
     "Goron City Red Boulders": "true"
+    "Goron City Silver Boulders": "can_lift_silver"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
     STICKS: "is_child"
@@ -43,6 +44,40 @@
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+
+"Goron City Silver Boulders":
+  region: GORON_CITY
+  age_change: false
+  locations:
+    "Goron City Silver Boulder 01": "true"
+    "Goron City Silver Boulder 02": "true"
+    "Goron City Silver Boulder 03": "true"
+    "Goron City Silver Boulder 04": "true"
+    "Goron City Silver Boulder 05": "true"
+    "Goron City Silver Boulder 06": "true"
+    "Goron City Silver Boulder 07": "true"
+    "Goron City Silver Boulder 08": "true"
+    "Goron City Silver Boulder 09": "true"
+    "Goron City Silver Boulder 10": "true"
+    "Goron City Silver Boulder 11": "true"
+    "Goron City Silver Boulder 12": "true"
+    "Goron City Silver Boulder 13": "true"
+    "Goron City Silver Boulder 14": "true"
+    "Goron City Silver Boulder 15": "true"
+    "Goron City Silver Boulder 16": "true"
+    "Goron City Silver Boulder 17": "true"
+    "Goron City Silver Boulder 18": "true"
+    "Goron City Silver Boulder 19": "true"
+    "Goron City Silver Boulder 20": "true"
+    "Goron City Silver Boulder 21": "true"
+    "Goron City Silver Boulder 22": "true"
+    "Goron City Silver Boulder 23": "true"
+    "Goron City Silver Boulder 24": "true"
+    "Goron City Silver Boulder 25": "true"
+    "Goron City Silver Boulder 26": "true"
+    "Goron City Silver Boulder 27": "true"
+    "Goron City Silver Boulder 28": "true"
+    "Goron City Silver Boulder 29": "true"
 
 "Goron City Red Boulders":
   region: GORON_CITY

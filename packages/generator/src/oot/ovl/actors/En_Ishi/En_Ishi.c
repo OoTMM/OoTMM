@@ -362,6 +362,19 @@ static void EnIshi_AliasRock(Xflag* xf) {
 }
 
 static void EnIshi_AliasSilverBoulder(Xflag* xf) {
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_GORON_CITY:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            if (xf->id == 34)
+                xf->id = 44;
+            else
+                xf->id -= 6;
+        }
+        break;
+    }
 }
 
 void EnIshi_Init(Actor* thisx, PlayState* play) {
