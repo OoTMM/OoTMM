@@ -1,6 +1,19 @@
 packages:
   - packages/*
 
+allowBuilds:
+  '@parcel/watcher': true
+  bufferutil: true
+  es5-ext: true
+  esbuild: true
+  microtime: true
+  netlify-cli: true
+  nx: true
+  sharp: true
+  unix-dgram: true
+  utf-8-validate: true
+  yaz0: true
+
 catalog:
   '@preact/preset-vite': ^2.10.5
   '@tailwindcss/vite': ^4.2.2
