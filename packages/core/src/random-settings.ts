@@ -922,6 +922,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleButterfliesMm = true;
       base.shuffleRedBouldersOot = true;
       base.shuffleRedBouldersMm = true;
+      base.shuffleSilverBouldersOot = true;
       base.shuffleIciclesOot = true;
       base.shuffleIciclesMm = true;
       break;
@@ -954,6 +955,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleButterfliesMm = true;
       base.shuffleRedBouldersOot = true;
       base.shuffleRedBouldersMm = true;
+      base.shuffleSilverBouldersOot = true;
       base.shuffleIciclesOot = true;
       base.shuffleIciclesMm = true;
       break;
@@ -1006,6 +1008,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleButterfliesMm = booleanWeighted(random, 0.5);
       base.shuffleRedBouldersOot = booleanWeighted(random, 0.5);
       base.shuffleRedBouldersMm = booleanWeighted(random, 0.5);
+      base.shuffleSilverBouldersOot = booleanWeighted(random, 0.5);
       base.shuffleIciclesOot = booleanWeighted(random, 0.5);
       base.shuffleIciclesMm = booleanWeighted(random, 0.5);
       break;

@@ -269,6 +269,7 @@ Kakariko Grass 5,                                           grass,          NONE
 Kakariko Grass 6,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00029,                    RANDOM
 Kakariko Grass 7,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002a,                    RANDOM
 Kakariko Grass 8,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002b,                    RANDOM
+Kakariko Silver Boulder,                                    boulder-silver, NONE,                 KAKARIKO_VILLAGE,               0x08030,                    NOTHING
 Kakariko Wonder Item,                                       wonder,         NONE,                 KAKARIKO_VILLAGE,               0x00037,                    RUPEE_RED
 Kakariko Butterfly 1,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x0002e,                    FAIRY
 Kakariko Butterfly 2,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x1002e,                    NOTHING
@@ -413,17 +414,17 @@ Death Mountain Trail Cow Grotto Hive,                       hive,           NONE
 Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
-Death Mountain Trail Red Boulder Near Lower GS,             redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800a,                    NOTHING
-Death Mountain Trail Red Boulder Lower 1,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800b,                    NOTHING
-Death Mountain Trail Red Boulder Lower 2,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800c,                    NOTHING
-Death Mountain Trail Red Boulder Lower 3,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08014,                    NOTHING
-Death Mountain Trail Red Boulder Lower 4,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800d,                    NOTHING
-Death Mountain Trail Red Boulder Lower 5,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08010,                    NOTHING
-Death Mountain Trail Red Boulder Lower 6,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800e,                    NOTHING
-Death Mountain Trail Red Boulder Lower 7,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800f,                    NOTHING
-Death Mountain Trail Red Boulder Near Upper GS,             redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08011,                    NOTHING
-Death Mountain Trail Red Boulder Upper 1,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08013,                    NOTHING
-Death Mountain Trail Red Boulder Upper 2,                   redboulder,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08012,                    NOTHING
+Death Mountain Trail Red Boulder Near Lower GS,             boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800a,                    NOTHING
+Death Mountain Trail Red Boulder Lower 1,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800b,                    NOTHING
+Death Mountain Trail Red Boulder Lower 2,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800c,                    NOTHING
+Death Mountain Trail Red Boulder Lower 3,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08014,                    NOTHING
+Death Mountain Trail Red Boulder Lower 4,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800d,                    NOTHING
+Death Mountain Trail Red Boulder Lower 5,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08010,                    NOTHING
+Death Mountain Trail Red Boulder Lower 6,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800e,                    NOTHING
+Death Mountain Trail Red Boulder Lower 7,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800f,                    NOTHING
+Death Mountain Trail Red Boulder Near Upper GS,             boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08011,                    NOTHING
+Death Mountain Trail Red Boulder Upper 1,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08013,                    NOTHING
+Death Mountain Trail Red Boulder Upper 2,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x08012,                    NOTHING
 Death Mountain Trail Soil 1,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0002b,                    FAIRY
 Death Mountain Trail Soil 2,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1002b,                    FAIRY
 Death Mountain Trail Soil 3,                                soil,           NONE,                 DEATH_MOUNTAIN_TRAIL,           0x2002b,                    FAIRY
@@ -459,11 +460,40 @@ Goron Shop Item 5,                                          shop,           NONE
 Goron Shop Item 6,                                          shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
 Goron Shop Item 7,                                          shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
 Goron Shop Item 8,                                          shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
-Goron City Red Boulder 1,                                   redboulder,     NONE,                 GORON_CITY,                     0x00029,                    NOTHING
-Goron City Red Boulder 2,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002d,                    NOTHING
-Goron City Red Boulder 3,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002a,                    NOTHING
-Goron City Red Boulder 4,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002e,                    NOTHING
-Goron City Red Boulder 5,                                   redboulder,     NONE,                 GORON_CITY,                     0x0002b,                    NOTHING
+Goron City Red Boulder 1,                                   boulder-red,    NONE,                 GORON_CITY,                     0x00029,                    NOTHING
+Goron City Red Boulder 2,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002d,                    NOTHING
+Goron City Red Boulder 3,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002a,                    NOTHING
+Goron City Red Boulder 4,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002e,                    NOTHING
+Goron City Red Boulder 5,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002b,                    NOTHING
+Goron City Silver Boulder 01,                               boulder-silver, NONE,                 GORON_CITY,                     0x00000,                    NOTHING
+Goron City Silver Boulder 02,                               boulder-silver, NONE,                 GORON_CITY,                     0x00001,                    NOTHING
+Goron City Silver Boulder 03,                               boulder-silver, NONE,                 GORON_CITY,                     0x00002,                    NOTHING
+Goron City Silver Boulder 04,                               boulder-silver, NONE,                 GORON_CITY,                     0x00003,                    NOTHING
+Goron City Silver Boulder 05,                               boulder-silver, NONE,                 GORON_CITY,                     0x00004,                    NOTHING
+Goron City Silver Boulder 06,                               boulder-silver, NONE,                 GORON_CITY,                     0x00005,                    NOTHING
+Goron City Silver Boulder 07,                               boulder-silver, NONE,                 GORON_CITY,                     0x00006,                    NOTHING
+Goron City Silver Boulder 08,                               boulder-silver, NONE,                 GORON_CITY,                     0x00007,                    NOTHING
+Goron City Silver Boulder 09,                               boulder-silver, NONE,                 GORON_CITY,                     0x00008,                    NOTHING
+Goron City Silver Boulder 10,                               boulder-silver, NONE,                 GORON_CITY,                     0x00009,                    NOTHING
+Goron City Silver Boulder 11,                               boulder-silver, NONE,                 GORON_CITY,                     0x0000a,                    NOTHING
+Goron City Silver Boulder 12,                               boulder-silver, NONE,                 GORON_CITY,                     0x0000b,                    NOTHING
+Goron City Silver Boulder 13,                               boulder-silver, NONE,                 GORON_CITY,                     0x0000c,                    NOTHING
+Goron City Silver Boulder 14,                               boulder-silver, NONE,                 GORON_CITY,                     0x0000d,                    NOTHING
+Goron City Silver Boulder 15,                               boulder-silver, NONE,                 GORON_CITY,                     0x0000e,                    NOTHING
+Goron City Silver Boulder 16,                               boulder-silver, NONE,                 GORON_CITY,                     0x0000f,                    NOTHING
+Goron City Silver Boulder 17,                               boulder-silver, NONE,                 GORON_CITY,                     0x00010,                    NOTHING
+Goron City Silver Boulder 18,                               boulder-silver, NONE,                 GORON_CITY,                     0x00011,                    NOTHING
+Goron City Silver Boulder 19,                               boulder-silver, NONE,                 GORON_CITY,                     0x00012,                    NOTHING
+Goron City Silver Boulder 20,                               boulder-silver, NONE,                 GORON_CITY,                     0x00013,                    NOTHING
+Goron City Silver Boulder 21,                               boulder-silver, NONE,                 GORON_CITY,                     0x00014,                    NOTHING
+Goron City Silver Boulder 22,                               boulder-silver, NONE,                 GORON_CITY,                     0x00015,                    NOTHING
+Goron City Silver Boulder 23,                               boulder-silver, NONE,                 GORON_CITY,                     0x00016,                    NOTHING
+Goron City Silver Boulder 24,                               boulder-silver, NONE,                 GORON_CITY,                     0x00017,                    NOTHING
+Goron City Silver Boulder 25,                               boulder-silver, NONE,                 GORON_CITY,                     0x00018,                    NOTHING
+Goron City Silver Boulder 26,                               boulder-silver, NONE,                 GORON_CITY,                     0x00019,                    NOTHING
+Goron City Silver Boulder 27,                               boulder-silver, NONE,                 GORON_CITY,                     0x0001a,                    NOTHING
+Goron City Silver Boulder 28,                               boulder-silver, NONE,                 GORON_CITY,                     0x0001b,                    NOTHING
+Goron City Silver Boulder 29,                               boulder-silver, NONE,                 GORON_CITY,                     0x0002c,                    NOTHING
 Death Mountain Crater Alcove HP,                            collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
 Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
@@ -518,10 +548,13 @@ Death Mountain Crater Rupee Adult 4,                        rupee,          NONE
 Death Mountain Crater Rupee Adult 5,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x48112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 6,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x58112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 7,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x68112,                    RUPEE_RED
-Death Mountain Crater Red Boulder Grotto,                   redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010b,                    NOTHING
-Death Mountain Crater Red Boulder Great Fairy 1,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
-Death Mountain Crater Red Boulder Great Fairy 2,            redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING
-Death Mountain Crater Red Boulder Shortcut,                 redboulder,     NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010e,                    NOTHING
+Death Mountain Crater Red Boulder Grotto,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010b,                    NOTHING
+Death Mountain Crater Red Boulder Great Fairy 1,            boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
+Death Mountain Crater Red Boulder Great Fairy 2,            boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING
+Death Mountain Crater Red Boulder Shortcut,                 boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010e,                    NOTHING
+Death Mountain Crater Silver Boulder 1,                     boulder-silver, NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011b,                    NOTHING
+Death Mountain Crater Silver Boulder 2,                     boulder-silver, NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011c,                    NOTHING
+Death Mountain Crater Silver Boulder 3,                     boulder-silver, NONE,                 DEATH_MOUNTAIN_CRATER,          0x0011d,                    NOTHING
 Death Mountain Crater Soil 1,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x00121,                    FAIRY
 Death Mountain Crater Soil 2,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x10121,                    FAIRY
 Death Mountain Crater Soil 3,                               soil,           NONE,                 DEATH_MOUNTAIN_CRATER,          0x20121,                    FAIRY
@@ -717,6 +750,7 @@ Zora Fountain Bush 3,                                       bush,           NONE
 Zora Fountain Bush 4,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00009,                    NOTHING
 Zora Fountain Bush 5,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000a,                    NOTHING
 Zora Fountain Bush 6,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000b,                    NOTHING
+Zora Fountain Silver Boulder,                               boulder-silver, NONE,                 ZORA_FOUNTAIN,                  0x00005,                    NOTHING
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                BOTTLE_RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
@@ -1064,10 +1098,11 @@ Hyrule Field River Big Fairy,                               fairy_spot,     NONE
 Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
 Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
 Hyrule Field Wonder Item 3,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00036,                    RUPEE_RED
-Hyrule Field Red Boulder 1,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x08008,                    NOTHING
-Hyrule Field Red Boulder 2,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x08009,                    NOTHING
-Hyrule Field Red Boulder 3,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x0800a,                    NOTHING
-Hyrule Field Red Boulder 4,                                 redboulder,     NONE,                 HYRULE_FIELD,                   0x0800b,                    NOTHING
+Hyrule Field Red Boulder 1,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08008,                    NOTHING
+Hyrule Field Red Boulder 2,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08009,                    NOTHING
+Hyrule Field Red Boulder 3,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x0800a,                    NOTHING
+Hyrule Field Red Boulder 4,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x0800b,                    NOTHING
+Hyrule Field Silver Boulder,                                boulder-silver, NONE,                 HYRULE_FIELD,                   0x0001e,                    NOTHING
 Hyrule Field Fairy Fountain Fairy 1,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 2,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 3,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22000,                    FAIRY
@@ -1257,9 +1292,13 @@ Hyrule Castle Butterfly Pack 4 Butterfly 3,                 butterfly,      NONE
 Hyrule Castle Butterfly Pack 4 Butterfly 4,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x30036,                    NOTHING
 Hyrule Castle Butterfly Pack 4 Butterfly 5,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x40036,                    NOTHING
 Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
-Ganon Castle Exterior Red Boulder 1,                        redboulder,     NONE,                 GANON_CASTLE_EXTERIOR,          0x00003,                    NOTHING
-Ganon Castle Exterior Red Boulder 2,                        redboulder,     NONE,                 GANON_CASTLE_EXTERIOR,          0x00004,                    NOTHING
-Ganon Castle Exterior Red Boulder 3,                        redboulder,     NONE,                 GANON_CASTLE_EXTERIOR,          0x00005,                    NOTHING
+Ganon Castle Exterior Red Boulder 1,                        boulder-red,    NONE,                 GANON_CASTLE_EXTERIOR,          0x00003,                    NOTHING
+Ganon Castle Exterior Red Boulder 2,                        boulder-red,    NONE,                 GANON_CASTLE_EXTERIOR,          0x00004,                    NOTHING
+Ganon Castle Exterior Red Boulder 3,                        boulder-red,    NONE,                 GANON_CASTLE_EXTERIOR,          0x00005,                    NOTHING
+Ganon Castle Exterior Silver Boulder 1,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00006,                    NOTHING
+Ganon Castle Exterior Silver Boulder 2,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00007,                    NOTHING
+Ganon Castle Exterior Silver Boulder 3,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00008,                    NOTHING
+Ganon Castle Exterior Silver Boulder 4,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00009,                    NOTHING
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
 Temple of Time Sheik Song,                                  npc,            NONE,                 TEMPLE_OF_TIME,                 SHEIK_LIGHT,                SONG_TP_LIGHT
@@ -1296,14 +1335,15 @@ Gerudo Valley Crate Child Bottom,                           crate,          NONE
 Gerudo Valley Crate Ledge,                                  crate,          NONE,                 GERUDO_VALLEY,                  0x00026,                    RUPEE_GREEN
 Gerudo Valley Wonder Item Lower,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08028,                    RUPEE_RED
 Gerudo Valley Wonder Item Upper,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08029,                    RUPEE_RED
-Gerudo Valley Red Boulder Before Bridge 1,                  redboulder,     NONE,                 GERUDO_VALLEY,                  0x08010,                    NOTHING
-Gerudo Valley Red Boulder Before Bridge 2,                  redboulder,     NONE,                 GERUDO_VALLEY,                  0x08011,                    NOTHING
-Gerudo Valley Red Boulder After Bridge 1,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08012,                    NOTHING
-Gerudo Valley Red Boulder After Bridge 2,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08013,                    NOTHING
-Gerudo Valley Red Boulder Around Chest 1,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x0800f,                    NOTHING
-Gerudo Valley Red Boulder Around Chest 2,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08014,                    NOTHING
-Gerudo Valley Red Boulder Around Chest 3,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08015,                    NOTHING
-Gerudo Valley Red Boulder Around Chest 4,                   redboulder,     NONE,                 GERUDO_VALLEY,                  0x08016,                    NOTHING
+Gerudo Valley Red Boulder Before Bridge 1,                  boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08010,                    NOTHING
+Gerudo Valley Red Boulder Before Bridge 2,                  boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08011,                    NOTHING
+Gerudo Valley Red Boulder After Bridge 1,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08012,                    NOTHING
+Gerudo Valley Red Boulder After Bridge 2,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08013,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 1,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x0800f,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 2,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08014,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 3,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08015,                    NOTHING
+Gerudo Valley Red Boulder Around Chest 4,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08016,                    NOTHING
+Gerudo Valley Silver Boulder,                               boulder-silver, NONE,                 GERUDO_VALLEY,                  0x00012,                    NOTHING
 Gerudo Valley Soil 1,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x0001f,                    FAIRY
 Gerudo Valley Soil 2,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x1001f,                    FAIRY
 Gerudo Valley Soil 3,                                       soil,           NONE,                 GERUDO_VALLEY,                  0x2001f,                    FAIRY
@@ -1401,6 +1441,7 @@ Desert Colossus Rock Circle 2 Rock 5,                       rock,           NONE
 Desert Colossus Rock Circle 2 Rock 6,                       rock,           NONE,                 DESERT_COLOSSUS,                0x5001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 7,                       rock,           NONE,                 DESERT_COLOSSUS,                0x6001b,                    RANDOM
 Desert Colossus Rock Circle 2 Rock 8,                       rock,           NONE,                 DESERT_COLOSSUS,                0x7001b,                    RANDOM
+Desert Colossus Silver Boulder,                             boulder-silver, NONE,                 DESERT_COLOSSUS,                0x00012,                    NOTHING
 Desert Colossus Soil 1,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x0001d,                    FAIRY
 Desert Colossus Soil 2,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x1001d,                    FAIRY
 Desert Colossus Soil 3,                                     soil,           NONE,                 DESERT_COLOSSUS,                0x2001d,                    FAIRY

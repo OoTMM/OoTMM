@@ -1427,7 +1427,7 @@ function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerObjHamishi(checks: Check[], ra: RoomActor) {
-  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'redboulder' });
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'boulder-red' });
 }
 
 function actorHandlerOotBgIcicle(checks: Check[], ra: RoomActor) {
@@ -1472,10 +1472,21 @@ function actorHandlerOotEnItem00(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerOotEnIshi(checks: Check[], ra: RoomActor) {
-  const type = (ra.actor.params & 1);
-  if (type !== 0) return;
-  const item = 'RANDOM';
-  checks.push({ roomActor: ra, item, name: 'Rock', type: 'rock' });
+  let type: string;
+  let name: string;
+  let item: string;
+
+  if (ra.actor.params & 1) {
+    type = 'boulder-silver';
+    name = 'Silver Boulder';
+    item = 'NOTHING';
+  } else {
+    type = 'rock';
+    name = 'Rock';
+    item = 'RANDOM';
+  }
+
+  checks.push({ roomActor: ra, item, name, type });
 }
 
 function actorHandlerMmEnIshi(checks: Check[], ra: RoomActor) {

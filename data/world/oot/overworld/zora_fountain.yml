@@ -28,6 +28,7 @@
     "Zora Fountain Bush 4": "is_child"
     "Zora Fountain Bush 5": "is_child"
     "Zora Fountain Bush 6": "is_child"
+    "Zora Fountain Silver Boulder": "can_lift_silver"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"

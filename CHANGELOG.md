@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add silver boulder shuffle for Ocarina of Time.
+
 ### Fixed
 
 - Fix the silver boulder in Desert Colossus incorrectly giving a shuffled wonder item when broken.
