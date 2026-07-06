@@ -128,6 +128,10 @@ void    SetRoomClear(PlayState* play, int flag);
 s32     Flags_GetClear(PlayState* play, s32 roomNumber);
 
 
+#if defined(GAME_OOT)
+void* func_80033684(PlayState*, Actor*);
+#endif
+
 void Sleep_Usec(u32 delay);
 
 void Audio_PlayFanfareWithPlayerIOPort7(u16 seqId, u8 ioData);

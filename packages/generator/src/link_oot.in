@@ -144,6 +144,7 @@ CollisionCheck_SetAT = 0x8004bd50;
 CollisionCheck_SetAC = 0x8004bf40;
 
 func_80038A28           = 0x8002b668;
+func_80033684           = 0x8002650c;
 BgCheck_EntityRaycastDown1 = 0x8002f3a4;
 BgCheck_EntityRaycastDown2 = 0x8002f400;
 BgCheck_EntityRaycastDown3 = 0x8002f454;
