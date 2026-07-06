@@ -29,6 +29,10 @@
     "Zora River Wonder Item Front 2": "is_child && can_swim_or_sink"
     "Zora River Wonder Item Front 3": "is_child && can_swim_or_sink"
     "Zora River Wonder Item Front 4": "is_child && can_swim_or_sink"
+    "Zora River Boulder Lower 1": "is_child && has_explosives_or_hammer"
+    "Zora River Boulder Lower 2": "is_child && has_explosives_or_hammer"
+    "Zora River Boulder Lower 3": "is_child && has_explosives_or_hammer"
+    "Zora River Boulder Lower 4": "is_child && has_explosives_or_hammer"
 
 # TODO: Animal souls probably require splitting this logic a bit
 "Zora River":
@@ -134,6 +138,7 @@
     "Zora River Rock Circle Upper Rock 6": "true"
     "Zora River Rock Circle Upper Rock 7": "true"
     "Zora River Rock Circle Upper Rock 8": "true"
+    "Zora River Boulder Upper": "has_explosives_or_hammer"
   gossip:
     "Zora River Gossip High Pillar": "true"
 

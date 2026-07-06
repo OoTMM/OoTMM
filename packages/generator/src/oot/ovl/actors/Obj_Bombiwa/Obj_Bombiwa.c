@@ -68,7 +68,16 @@ void ObjBombiwa_InitCollision(Actor* thisx, PlayState* play) {
 
 static void ObjBombiwa_Alias(Xflag* xf)
 {
-
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_ZORA_RIVER:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id = 61;
+        }
+        break;
+    }
 }
 
 void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
@@ -174,6 +183,6 @@ void ObjBombiwa_Draw(Actor* thisx, PlayState* play) {
     {
         color = csmcTypeColor(csmc);
         Gfx_SetupDL_25Xlu(play->state.gfxCtx);
-        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 4.5f, 120.f);
+        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 18.f, 120.f);
     }
 }
