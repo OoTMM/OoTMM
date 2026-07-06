@@ -7,6 +7,8 @@
 # define GAME_ID 1
 #endif
 
+#define TTL_RESEND 60
+
 #define HELLO_MAGIC "OoTMM\x7f\x01\x00"
 
 MultiState gMulti;
@@ -167,7 +169,7 @@ static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
     int increment;
 
     gSave.info.playerData.rupees = 9;
-    if (pkt->index != gSharedCustomSave.walIndex)
+    if (pkt->index != gSharedCustomSave.multi.walIndex)
         return 1;
 
     gSave.info.playerData.rupees = 10;
@@ -187,9 +189,18 @@ static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
     }
 
     if (increment)
-        gSharedCustomSave.walIndex++;
+        gSharedCustomSave.multi.walIndex++;
 
     return 1;
+}
+
+static void MultiProcessAck(MultiPacketWalAckIn* pkt)
+{
+    if (pkt->token != gSharedCustomSave.multi.sendBufferChecksum)
+        return;
+
+    gSharedCustomSave.multi.sendBufferSize = 0;
+    gMulti.ttlResend = 0;
 }
 
 static int MultiProcessMessage(MultiPacketHeader* pkt, int size)
@@ -206,6 +217,11 @@ static int MultiProcessMessage(MultiPacketHeader* pkt, int size)
         gSave.info.playerData.rupees = 8;
         MultiPacketWalInHeader* walPkt = (MultiPacketWalInHeader*)pkt;
         return MultiProcessMessageWAL(walPkt, size);
+    case MULTI_OP_WAL_ACK:
+        if (size < sizeof(MultiPacketWalAckIn))
+            return 0;
+        MultiPacketWalAckIn* ackPkt = (MultiPacketWalAckIn*)pkt;
+        MultiProcessAck(ackPkt);
     }
 
     return 1;
@@ -257,6 +273,34 @@ static void Multi_ProcessMessages(void)
         Multi_ProcessMessagesDisconnected();
 }
 
+static int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
+{
+    pkt->seq = gMulti.seqGame++;
+    return IPC_Write(pkt, size);
+}
+
+static void Multi_Resend(void)
+{
+    if (!Config_Flag(CFG_MULTIPLAYER))
+        return;
+
+    if (!gMulti.isConnected)
+        return;
+
+    if (!gSharedCustomSave.multi.sendBufferSize)
+        return;
+
+    if (gMulti.ttlResend)
+    {
+        gMulti.ttlResend--;
+        return;
+    }
+
+    gMulti.ttlResend = TTL_RESEND;
+    MultiPacketHeader* pkt = (MultiPacketHeader*)&gSharedCustomSave.multi.sendBuffer;
+    Multi_SendPacket(pkt, gSharedCustomSave.multi.sendBufferSize);
+}
+
 static void Multi_TryConnect(void)
 {
     if (gMulti.ttl)
@@ -267,17 +311,11 @@ static void Multi_TryConnect(void)
         return;
 }
 
-static int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
-{
-    pkt->seq = gMulti.seqGame++;
-    return IPC_Write(pkt, size);
-}
-
 static void Multi_QueryWal(void)
 {
     MultiPacketWalQuery pkt;
     pkt.header.op = MULTI_OP_WAL_QUERY;
-    pkt.index = gSharedCustomSave.walIndex;
+    pkt.index = gSharedCustomSave.multi.walIndex;
     if (!Multi_SendPacket(&pkt.header, sizeof(pkt)))
         gMulti.isConnected = 0;
 }
@@ -301,10 +339,13 @@ void Multi_Update(PlayState* play)
         Multi_TryConnect();
 
     if (IPC_IsConnected())
+    {
         Multi_ProcessMessages();
+    }
 
     if (gMulti.isConnected)
     {
+        Multi_Resend();
         Multi_QueryWal();
     }
 }
@@ -315,13 +356,50 @@ void Multi_Disconnect(void)
     gMulti.ttl = 0;
 }
 
+static void Multi_EnsureSendBufferEmpty(void)
+{
+    for (;;)
+    {
+        if (!gSharedCustomSave.multi.sendBufferSize)
+            return;
+
+        if (gMulti.ttl)
+            --gMulti.ttl;
+
+        IPC_Refresh();
+        if (gMulti.isConnected && !IPC_IsConnected())
+        {
+            gMulti.isConnected = 0;
+            gMulti.ttl = 0;
+        }
+
+        if (!gMulti.isConnected && IPC_IsConnected())
+            Multi_TryConnect();
+
+        if (IPC_IsConnected())
+            Multi_ProcessMessages();
+
+        if (gMulti.isConnected)
+        {
+            Multi_Resend();
+        }
+
+        Sleep_Usec(1000000 / 20);
+    }
+}
+
 void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
 {
-    /* TODO: Store in persistance */
-    if (!gMulti.isConnected)
+    u32 token;
+
+    if (Config_Flag(CFG_MULTIPLAYER))
+        Multi_EnsureSendBufferEmpty();
+    else if (!gMulti.isConnected)
         return;
 
     MultiPacketWalItemOut pkt;
+    memset(&pkt, 0, sizeof(pkt));
+    pkt.wal.token = 0;
     pkt.wal.header.op = MULTI_OP_WAL;
     pkt.wal.type = WAL_ITEM;
     pkt.to = to;
@@ -330,10 +408,32 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
     pkt.flags = flags;
     pkt.key = key;
 
+    token = Multi_CRC32(&pkt, sizeof(pkt));
+    pkt.wal.token = token;
+
     Multi_SendPacket(&pkt.wal.header, sizeof(pkt));
+
+    if (Config_Flag(CFG_MULTIPLAYER))
+    {
+        /* Store persistently */
+        memcpy(&gSharedCustomSave.multi.sendBuffer, &pkt, sizeof(pkt));
+        gSharedCustomSave.multi.sendBufferSize = sizeof(pkt);
+        gSharedCustomSave.multi.sendBufferChecksum = token;
+        gMulti.ttlResend = TTL_RESEND;
+    }
 }
 
 void Multi_SendSelfItem(s16 gi, s16 flags, u32 key)
 {
     Multi_SendItem(sWorldId, gi, flags, key);
+}
+
+void Multi_ResetWisps(void)
+{
+
+}
+
+void Multi_DrawWisps(PlayState* play)
+{
+
 }

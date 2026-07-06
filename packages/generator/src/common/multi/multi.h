@@ -9,6 +9,7 @@
 #define MULTI_OP_HELLO          0x01
 #define MULTI_OP_WAL            0x02
 #define MULTI_OP_WAL_QUERY      0x03
+#define MULTI_OP_WAL_ACK        0x04
 
 #define WAL_ITEM 0x01
 
@@ -46,9 +47,17 @@ MultiPacketHelloIn;
 typedef struct PACKED
 {
     MultiPacketHeader header;
+    u32 token;
+}
+MultiPacketWalAckIn;
+
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+    u32 token;
     u8 type;
 }
-MultiPacketWalHeader;
+MultiPacketWalOutHeader;
 
 typedef struct PACKED
 {
@@ -60,7 +69,7 @@ MultiPacketWalInHeader;
 
 typedef struct PACKED
 {
-    MultiPacketWalHeader wal;
+    MultiPacketWalOutHeader wal;
     u8 to;
     u8 game;
     s16 gi;
@@ -95,10 +104,13 @@ typedef struct
     u32 seqGame;
     u32 seqNet;
     u16 ttl;
+    u16 ttlResend;
     u8  buffer[128];
 }
 MultiState;
 
 extern MultiState gMulti;
+
+u32 Multi_CRC32(const void* data, int size);
 
 #endif

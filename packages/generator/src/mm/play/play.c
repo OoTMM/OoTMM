@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/mask.h>
-#include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
 #include <combo/time.h>
