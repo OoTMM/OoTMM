@@ -145,6 +145,7 @@
     "Market Castle Entry": "true"
     "Ganon Castle Exterior After Bridge": "event(BRIDGE_OPEN) || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
     "Near Fairy Fountain Defense": "can_lift_gold"
+    "Ganon Castle Exterior Silver Boulders": "can_lift_silver"
   events:
     BRIDGE_OPEN: "rainbow_bridge"
   locations:
@@ -164,6 +165,15 @@
     "Ganon Castle": "is_adult"
   events:
     BRIDGE_OPEN: "is_adult && rainbow_bridge"
+
+"Ganon Castle Exterior Silver Boulders":
+  region: GANON_CASTLE_EXTERIOR
+  age_change: false
+  locations:
+    "Ganon Castle Exterior Silver Boulder 1": "true"
+    "Ganon Castle Exterior Silver Boulder 2": "true"
+    "Ganon Castle Exterior Silver Boulder 3": "true"
+    "Ganon Castle Exterior Silver Boulder 4": "true"
 
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR

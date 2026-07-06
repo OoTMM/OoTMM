@@ -1260,6 +1260,10 @@ Ganon Castle Exterior GS,                                   gs,             NONE
 Ganon Castle Exterior Red Boulder 1,                        boulder-red,    NONE,                 GANON_CASTLE_EXTERIOR,          0x00003,                    NOTHING
 Ganon Castle Exterior Red Boulder 2,                        boulder-red,    NONE,                 GANON_CASTLE_EXTERIOR,          0x00004,                    NOTHING
 Ganon Castle Exterior Red Boulder 3,                        boulder-red,    NONE,                 GANON_CASTLE_EXTERIOR,          0x00005,                    NOTHING
+Ganon Castle Exterior Silver Boulder 1,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00006,                    RANDOM
+Ganon Castle Exterior Silver Boulder 2,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00007,                    RANDOM
+Ganon Castle Exterior Silver Boulder 3,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00008,                    RANDOM
+Ganon Castle Exterior Silver Boulder 4,                     boulder-silver, NONE,                 GANON_CASTLE_EXTERIOR,          0x00009,                    RANDOM
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
 Temple of Time Sheik Song,                                  npc,            NONE,                 TEMPLE_OF_TIME,                 SHEIK_LIGHT,                SONG_TP_LIGHT

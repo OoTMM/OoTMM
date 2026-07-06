@@ -601,7 +601,6 @@ void EnIshi_DrawLarge(EnIshi* this, PlayState* play) {
 
     if (csmc != CSMC_NORMAL)
     {
-        const Color_RGB8* color;
         color = csmcTypeColor(csmc);
         Gfx_SetupDL_25Xlu(play->state.gfxCtx);
         Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 4.5f, 120.f);
