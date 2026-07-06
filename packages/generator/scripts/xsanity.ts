@@ -1472,10 +1472,18 @@ function actorHandlerOotEnItem00(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerOotEnIshi(checks: Check[], ra: RoomActor) {
-  const type = (ra.actor.params & 1);
-  if (type !== 0) return;
+  let type: string;
+  let name: string;
+
+  if (ra.actor.params & 1) {
+    type = 'boulder-silver';
+    name = 'Silver Boulder';
+  } else {
+    type = 'rock';
+    name = 'Rock';
+  }
   const item = 'RANDOM';
-  checks.push({ roomActor: ra, item, name: 'Rock', type: 'rock' });
+  checks.push({ roomActor: ra, item, name, type });
 }
 
 function actorHandlerMmEnIshi(checks: Check[], ra: RoomActor) {
