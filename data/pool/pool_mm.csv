@@ -1732,6 +1732,13 @@ Road to Ikana Rock Circle Rock 6,                       rock,           NONE,   
 Road to Ikana Rock Circle Rock 7,                       rock,           NONE,                   ROAD_IKANA,                   0x60023,                    RANDOM
 Road to Ikana Rock Circle Rock 8,                       rock,           NONE,                   ROAD_IKANA,                   0x70023,                    RANDOM
 Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
+Road to Ikana Large Boulder 1,                          boulder,        NONE,                   ROAD_IKANA,                   0x0003c,                    NOTHING
+Road to Ikana Large Boulder 2,                          boulder,        NONE,                   ROAD_IKANA,                   0x0003e,                    NOTHING
+Road to Ikana Large Boulder 3,                          boulder,        NONE,                   ROAD_IKANA,                   0x00040,                    NOTHING
+Road to Ikana Large Boulder 4,                          boulder,        NONE,                   ROAD_IKANA,                   0x00041,                    NOTHING
+Road to Ikana Large Boulder 5,                          boulder,        NONE,                   ROAD_IKANA,                   0x00042,                    NOTHING
+Road to Ikana Large Boulder 6,                          boulder,        NONE,                   ROAD_IKANA,                   0x00043,                    NOTHING
+Road to Ikana Large Boulder 7,                          boulder,        NONE,                   ROAD_IKANA,                   0x00044,                    NOTHING
 Road to Ikana Red Boulder,                              boulder-red,    NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Road to Ikana Grotto,                                   chest,          NONE,                   GROTTOS,                      0x16,                       BOMBCHU
 Road to Ikana Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x03600,                    RANDOM

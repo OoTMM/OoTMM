@@ -74,3 +74,11 @@
     "GLOBAL": "true"
     "Road to Ikana Center": "true"
     "Ikana Valley": "true"
+  locations:
+    "Road to Ikana Large Boulder 1": "has_explosives"
+    "Road to Ikana Large Boulder 2": "has_explosives"
+    "Road to Ikana Large Boulder 3": "has_explosives"
+    "Road to Ikana Large Boulder 4": "has_explosives"
+    "Road to Ikana Large Boulder 5": "has_explosives"
+    "Road to Ikana Large Boulder 6": "has_explosives"
+    "Road to Ikana Large Boulder 7": "has_explosives"
