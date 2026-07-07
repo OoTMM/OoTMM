@@ -2,6 +2,7 @@
 #define OVL_OBJ_BOMBIWA_H
 
 #include <combo.h>
+#include <combo/xflags.h>
 
 struct ObjBombiwa;
 
@@ -30,6 +31,7 @@ typedef struct ObjBombiwa {
     /* 0x202 */ s8 unk_202;
     /* 0x203 */ u8 unk_203;
     /* 0x204 */ ObjBombiwaActionFunc actionFunc;
+    Xflag xflag;
 } ObjBombiwa; // size = 0x208
 
 #endif // Z_OBJ_BOMBIWA_H

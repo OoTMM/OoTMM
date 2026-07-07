@@ -170,9 +170,12 @@ void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     s32 sp34 = OBJBOMBIWA_GET_100(&this->actor);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
+    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+        this->xflag.setupId = 0;
+    }
     Collider_InitCylinder(play, &this->collider);
 
-    if (Flags_GetSwitch(play, OBJBOMBIWA_GET_SWITCH_FLAG(&this->actor))) {
+    if (Flags_GetSwitch(play, OBJBOMBIWA_GET_SWITCH_FLAG(&this->actor)) && !Xflag_IsShuffled(&this->xflag)) {
         Actor_Kill(&this->actor);
         return;
     }
@@ -201,6 +204,12 @@ void ObjBombiwa_Destroy(Actor* thisx, PlayState* play2) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
 
     Collider_DestroyCylinder(play, &this->collider);
+}
+
+static void ObjBombiwa_OnBreak(ObjBombiwa* this, PlayState* play) {
+    if (Xflag_IsShuffled(&this->xflag)) {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    }
 }
 
 void func_80939794(ObjBombiwa* this, PlayState* play) {
@@ -331,6 +340,7 @@ void func_80939EF4(ObjBombiwa* this, PlayState* play) {
     }
 
     if (sp28->unk_0C(&this->actor)) {
+        ObjBombiwa_OnBreak(this, play);
         Flags_SetSwitch(play, OBJBOMBIWA_GET_SWITCH_FLAG(&this->actor));
         SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 80, NA_SE_EV_WALL_BROKEN);
         if (OBJBOMBIWA_GET_8000(&this->actor)) {
@@ -437,6 +447,39 @@ void ObjBombiwa_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
+static int ObjBombiwa_CAMC(ObjBombiwa* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+static void ObjBombiwa_DrawCSMC(ObjBombiwa* this, PlayState* play, int alpha)
+{
+    int csmc;
+    const Color_RGB8* color;
+
+    csmc = ObjBombiwa_CAMC(this, play);
+    if (csmc != CSMC_NORMAL)
+    {
+        color = csmcTypeColor(csmc);
+        if (alpha < 0)
+        {
+            Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+            alpha = 255;
+        }
+        alpha *= 0.75f;
+        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | (alpha & 0xff), 18.f, 120.f);
+    }
+}
+
 void func_8093A418(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
     f32 sp28;
@@ -444,6 +487,7 @@ void func_8093A418(Actor* thisx, PlayState* play) {
     if ((this->actor.projectedPos.z <= 2200.0f) || ((this->unk_203 & 1) && (this->actor.projectedPos.z < 2300.0f))) {
         this->actor.shape.shadowAlpha = 160;
         Gfx_DrawDListOpa(play, object_bombiwa_DL_0009E0);
+        ObjBombiwa_DrawCSMC(this, play, -1);
         return;
     }
 
@@ -458,8 +502,8 @@ void func_8093A418(Actor* thisx, PlayState* play) {
         MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (s32)sp28);
         gSPDisplayList(POLY_XLU_DISP++, object_bombiwa_DL_000AF0);
-
         CLOSE_DISPS();
+        ObjBombiwa_DrawCSMC(this, play, (int)sp28);
     } else {
         this->actor.shape.shadowAlpha = 0;
     }
