@@ -778,6 +778,8 @@ Zora Fountain Bush 3,                                       bush,           NONE
 Zora Fountain Bush 4,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00009,                    NOTHING
 Zora Fountain Bush 5,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000a,                    NOTHING
 Zora Fountain Bush 6,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000b,                    NOTHING
+Zora Fountain Boulder Exposed,                              boulder,        NONE,                 ZORA_FOUNTAIN,                  0x00010,                    NOTHING
+Zora Fountain Boulder Underground,                          boulder,        NONE,                 ZORA_FOUNTAIN,                  0x00011,                    NOTHING
 Zora Fountain Silver Boulder,                               boulder-silver, NONE,                 ZORA_FOUNTAIN,                  0x00005,                    NOTHING
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                BOTTLE_RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
