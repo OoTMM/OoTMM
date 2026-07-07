@@ -13,6 +13,8 @@
     "Deku Palace Soil Item 1": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && has_bugs"
     "Deku Palace Soil Item 2": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && has_bugs"
     "Deku Palace Soil Item 3": "(((is_swamp_cleared || can_use_nayru) && can_swim) || has(MASK_DEKU)) && has_bugs"
+    "Deku Palace Boulder 1": "has_bombs && can_swim"
+    "Deku Palace Boulder 2": "has_bombs && can_swim"
 
 "Deku Palace Main":
   region: DEKU_PALACE

@@ -765,6 +765,8 @@ Deku Palace Rupee Left Far 2,                           rupee,          NONE,   
 Deku Palace Rupee Left Far 3,                           rupee,          NONE,                   DEKU_PALACE,                  0x00209,                    RUPEE_BLUE
 Deku Palace Rupee Layout-Dependant 1,                   rupee,          NONE,                   DEKU_PALACE,                  0x0020a,                    RUPEE_BLUE
 Deku Palace Rupee Layout-Dependant 2,                   rupee,          NONE,                   DEKU_PALACE,                  0x0020b,                    RUPEE_BLUE
+Deku Palace Boulder 1,                                  boulder,        NONE,                   DEKU_PALACE,                  0x00013,                    NOTHING
+Deku Palace Boulder 2,                                  boulder,        NONE,                   DEKU_PALACE,                  0x00014,                    NOTHING
 Deku Palace Red Boulder 1,                              boulder-red,    NONE,                   DEKU_PALACE,                  0x0010c,                    NOTHING
 Deku Palace Red Boulder 2,                              boulder-red,    NONE,                   DEKU_PALACE,                  0x0010d,                    NOTHING
 Deku Palace Red Boulder 3,                              boulder-red,    NONE,                   DEKU_PALACE,                  0x0010e,                    NOTHING
