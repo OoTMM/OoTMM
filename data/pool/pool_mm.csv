@@ -1604,6 +1604,9 @@ Zora Cape Rock Sand 2,                                  rock,           NONE,   
 Zora Cape Rock Sand 3,                                  rock,           NONE,                   ZORA_CAPE,                    0x00037,                    RANDOM
 Zora Cape Rock Sand 4,                                  rock,           NONE,                   ZORA_CAPE,                    0x00038,                    RANDOM
 Zora Cape Rock Sand 5,                                  rock,           NONE,                   ZORA_CAPE,                    0x00039,                    RANDOM
+Zora Cape Large Boulder 1,                              boulder,        NONE,                   ZORA_CAPE,                    0x0002a,                    NOTHING
+Zora Cape Large Boulder 2,                              boulder,        NONE,                   ZORA_CAPE,                    0x0002b,                    NOTHING
+Zora Cape Boulder,                                      boulder,        NONE,                   ZORA_CAPE,                    0x0002c,                    NOTHING
 Zora Cape Palm Tree Beach 1,                            tree,           NONE,                   ZORA_CAPE,                    0x00018,                    NUT
 Zora Cape Palm Tree Beach 2,                            tree,           NONE,                   ZORA_CAPE,                    0x00019,                    NUT
 Zora Cape Palm Tree Island Near Fountain,               tree,           NONE,                   ZORA_CAPE,                    0x0001a,                    NUT
