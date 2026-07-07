@@ -170,6 +170,7 @@ void ObjBombiwa_Destroy(Actor* thisx, PlayState* play2) {
 }
 
 void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play) {
+    Player* player;
     Vec3f pos;
     Vec3f velocity;
     Gfx* dlist;
@@ -178,7 +179,18 @@ void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play) {
     s32 i;
 
     if (Xflag_IsShuffled(&this->xflag))
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    {
+        /* MQ Spirit has boulders above holes & one boulder in a child crawl */
+        if (this->xflag.sceneId == SCE_OOT_TEMPLE_SPIRIT && ((this->xflag.roomId == 2 && this->xflag.id >= 10) || (this->xflag.roomId == 1 && gSave.age == AGE_CHILD)))
+        {
+            player = GET_PLAYER(play);
+            EnItem00_DropCustomNoInertia(play, &player->actor.world.pos, &this->xflag);
+        }
+        else
+        {
+            EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        }
+    }
 
     dlist = object_bombiwa_DL_0009E0;
     for (i = 0; i < ARRAY_COUNT(sEffectScales); i++) {

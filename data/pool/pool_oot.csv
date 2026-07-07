@@ -3085,6 +3085,15 @@ MQ Spirit Temple Top Near Lowering Platform Large Crate 1,  crate,          NONE
 MQ Spirit Temple Top Near Lowering Platform Large Crate 2,  crate,          NONE,                 TEMPLE_SPIRIT,                  0x01902,                    RUPEE_GREEN
 MQ Spirit Temple Top Near Lowering Platform Large Crate 3,  crate,          NONE,                 TEMPLE_SPIRIT,                  0x01903,                    RUPEE_GREEN
 MQ Spirit Temple Top Near Lowering Platform Large Crate 4,  crate,          NONE,                 TEMPLE_SPIRIT,                  0x01904,                    RUPEE_GREEN
+MQ Spirit Temple Boulder Entrance Left,                     boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00001,                    NOTHING
+MQ Spirit Temple Boulder Entrance Upper,                    boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00002,                    NOTHING
+MQ Spirit Temple Boulder Entrance Cobra,                    boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00003,                    NOTHING
+MQ Spirit Temple Boulder Entrance Right,                    boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00004,                    NOTHING
+MQ Spirit Temple Boulder Entrance Side,                     boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00005,                    NOTHING
+MQ Spirit Temple Boulder Child Crawl,                       boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00104,                    NOTHING
+MQ Spirit Temple Boulder Child Bridge Ground,               boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00207,                    NOTHING
+MQ Spirit Temple Boulder Child Bridge Wall Left,            boulder,        NONE,                 TEMPLE_SPIRIT,                  0x0020a,                    NOTHING
+MQ Spirit Temple Boulder Child Bridge Wall Front,           boulder,        NONE,                 TEMPLE_SPIRIT,                  0x0020b,                    NOTHING
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
