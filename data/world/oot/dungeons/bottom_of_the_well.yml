@@ -85,6 +85,12 @@
     "Bottom of the Well Heart 1": "can_swim || event(BOTW_WATER_DRAINED) || (has_iron_boots && hookshot_anywhere)"
     "Bottom of the Well Heart 2": "can_swim || event(BOTW_WATER_DRAINED) || (has_iron_boots && hookshot_anywhere)"
     "Bottom of the Well Basement Big Fairy": "can_play_sun"
+    "Bottom of the Well Boulder Near Chest 1": "has_explosives_or_hammer" # TODO: Might be too restrictive
+    "Bottom of the Well Boulder Near Chest 2": "has_explosives_or_hammer"
+    "Bottom of the Well Boulder Middle 1": "has_explosives_or_hammer"
+    "Bottom of the Well Boulder Middle 2": "has_explosives_or_hammer"
+    "Bottom of the Well Boulder Far 1": "has_explosives_or_hammer"
+    "Bottom of the Well Boulder Far 2": "has_explosives_or_hammer"
 
 "Bottom of the Well Basement Platform":
   dungeon: BotW

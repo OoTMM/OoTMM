@@ -1917,6 +1917,12 @@ Bottom of the Well Rupee 5,                                 rupee,          NONE
 Bottom of the Well Heart 1,                                 heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020d,                    RECOVERY_HEART
 Bottom of the Well Heart 2,                                 heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020e,                    RECOVERY_HEART
 Bottom of the Well Basement Big Fairy,                      fairy_spot,     NONE,                 BOTTOM_OF_THE_WELL,             0x00113,                    FAIRY_BIG
+Bottom of the Well Boulder Near Chest 1,                    boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00120,                    NOTHING
+Bottom of the Well Boulder Near Chest 2,                    boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00121,                    NOTHING
+Bottom of the Well Boulder Middle 1,                        boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00122,                    NOTHING
+Bottom of the Well Boulder Middle 2,                        boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00123,                    NOTHING
+Bottom of the Well Boulder Far 1,                           boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00124,                    NOTHING
+Bottom of the Well Boulder Far 2,                           boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00125,                    NOTHING
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
