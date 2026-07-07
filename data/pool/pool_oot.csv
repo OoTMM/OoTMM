@@ -1131,6 +1131,9 @@ Hyrule Field River Big Fairy,                               fairy_spot,     NONE
 Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
 Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
 Hyrule Field Wonder Item 3,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00036,                    RUPEE_RED
+Hyrule Field Boulder Near Lake,                             boulder,        NONE,                 HYRULE_FIELD,                   0x00044,                    NOTHING
+Hyrule Field Boulder Near Market,                           boulder,        NONE,                 HYRULE_FIELD,                   0x00045,                    NOTHING
+Hyrule Field Boulder Island,                                boulder,        NONE,                 HYRULE_FIELD,                   0x00046,                    NOTHING
 Hyrule Field Red Boulder 1,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08008,                    NOTHING
 Hyrule Field Red Boulder 2,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08009,                    NOTHING
 Hyrule Field Red Boulder 3,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x0800a,                    NOTHING

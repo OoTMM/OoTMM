@@ -151,6 +151,9 @@
     "Hyrule Field Rock Circle Rock 6": "true"
     "Hyrule Field Rock Circle Rock 7": "true"
     "Hyrule Field Rock Circle Rock 8": "true"
+    "Hyrule Field Boulder Near Lake": "has_explosives_or_hammer"
+    "Hyrule Field Boulder Near Market": "has_explosives_or_hammer"
+    "Hyrule Field Boulder Island": "has_explosives_or_hammer"
     "Hyrule Field Silver Boulder": "can_lift_silver"
 
 "Hyrule Field Grass":
