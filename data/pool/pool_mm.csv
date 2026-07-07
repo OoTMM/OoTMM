@@ -520,6 +520,8 @@ Termina Field Cow Grotto Hive,                          hive,           NONE,   
 Termina Field Cow Grotto Butterfly 1,                   butterfly,      NONE,                   GROTTOS,                      0x00a06,                    FAIRY
 Termina Field Cow Grotto Butterfly 2,                   butterfly,      NONE,                   GROTTOS,                      0x10a06,                    NOTHING
 Termina Field Cow Grotto Butterfly 3,                   butterfly,      NONE,                   GROTTOS,                      0x20a06,                    NOTHING
+Termina Field Boulder West Gossip,                      boulder,        NONE,                   TERMINA_FIELD,                0x000c6,                    NOTHING
+Termina Field Boulder Bio Baba,                         boulder,        NONE,                   TERMINA_FIELD,                0x000c7,                    NOTHING
 Ocean Gossip Grotto Grass 1,                            grass,          NONE,                   GROTTOS,                      0x00001,                    RANDOM
 Ocean Gossip Grotto Grass 2,                            grass,          NONE,                   GROTTOS,                      0x00004,                    RANDOM
 Ocean Gossip Grotto Grass 3,                            grass,          NONE,                   GROTTOS,                      0x00006,                    RANDOM
@@ -1067,10 +1069,18 @@ Lone Peak Shrine Grass Pack 2 Grass 09,                 grass,          NONE,   
 Lone Peak Shrine Grass Pack 2 Grass 10,                 grass,          NONE,                   GROTTOS,                      0x90502,                    RANDOM
 Lone Peak Shrine Grass Pack 2 Grass 11,                 grass,          NONE,                   GROTTOS,                      0xa0502,                    RANDOM
 Lone Peak Shrine Grass Pack 2 Grass 12,                 grass,          NONE,                   GROTTOS,                      0xb0502,                    RANDOM
+Lone Peak Shrine Large Boulder 1,                       boulder,        NONE,                   GROTTOS,                      0x00506,                    NOTHING
+Lone Peak Shrine Large Boulder 2,                       boulder,        NONE,                   GROTTOS,                      0x00507,                    NOTHING
+Lone Peak Shrine Large Boulder 3,                       boulder,        NONE,                   GROTTOS,                      0x00509,                    NOTHING
 Goron Graveyard Mask,                                   npc,            NONE,                   GORON_GRAVEYARD,              MASK_GORON,                 MASK_GORON
 Twin Islands Underwater Chest 1,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x06,                       HEART_PIECE
 Twin Islands Underwater Chest 2,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x00,                       RUPEE_RED
 Twin Islands Frozen Grotto Chest,                       chest,          NONE,                   GROTTOS,                      0x02,                       RUPEE_RED
+Twin Islands Frozen Grotto Large Boulder 1,             boulder,        NONE,                 GROTTOS,                        0x00e0a,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 2,             boulder,        NONE,                 GROTTOS,                        0x00e0b,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 3,             boulder,        NONE,                 GROTTOS,                        0x00e0c,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 4,             boulder,        NONE,                 GROTTOS,                        0x00e0d,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 5,             boulder,        NONE,                 GROTTOS,                        0x00e0e,                    NOTHING
 Twin Islands Ramp Grotto Chest,                         chest,          NONE,                   GROTTOS,                      0x19,                       BOMBCHU
 Twin Islands Ramp Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x03900,                    RANDOM
 Twin Islands Ramp Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x03901,                    RANDOM

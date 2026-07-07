@@ -87,6 +87,9 @@
     "Lone Peak Shrine Grass Pack 2 Grass 10": "true"
     "Lone Peak Shrine Grass Pack 2 Grass 11": "true"
     "Lone Peak Shrine Grass Pack 2 Grass 12": "true"
+    "Lone Peak Shrine Large Boulder 1": "has_explosives"
+    "Lone Peak Shrine Large Boulder 2": "has_explosives"
+    "Lone Peak Shrine Large Boulder 3": "has_explosives"
 
 "Goron Shrine":
   region: ENTRANCE

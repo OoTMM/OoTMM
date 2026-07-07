@@ -461,7 +461,7 @@ static int ObjBombiwa_CAMC(ObjBombiwa* this, PlayState* play)
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
-static void ObjBombiwa_DrawCSMC(ObjBombiwa* this, PlayState* play, int alpha)
+static void ObjBombiwa_DrawCSMC(ObjBombiwa* this, PlayState* play, int alpha, float scaleX, float scaleY)
 {
     int csmc;
     const Color_RGB8* color;
@@ -472,12 +472,22 @@ static void ObjBombiwa_DrawCSMC(ObjBombiwa* this, PlayState* play, int alpha)
         color = csmcTypeColor(csmc);
         if (alpha < 0)
         {
-            Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+            Gfx_SetupDL25_Xlu(play->state.gfxCtx);
             alpha = 255;
         }
         alpha *= 0.75f;
-        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | (alpha & 0xff), 18.f, 120.f);
+        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | (alpha & 0xff), scaleX, scaleY);
     }
+}
+
+static void ObjBombiwa_SmallDrawCSMC(ObjBombiwa* this, PlayState* play, int alpha)
+{
+    ObjBombiwa_DrawCSMC(this, play, alpha, 18.f, 120.f);
+}
+
+static void ObjBombiwa_LargeDrawCSMC(ObjBombiwa* this, PlayState* play, int alpha)
+{
+    ObjBombiwa_DrawCSMC(this, play, alpha, 30.f, 200.f);
 }
 
 void func_8093A418(Actor* thisx, PlayState* play) {
@@ -487,7 +497,7 @@ void func_8093A418(Actor* thisx, PlayState* play) {
     if ((this->actor.projectedPos.z <= 2200.0f) || ((this->unk_203 & 1) && (this->actor.projectedPos.z < 2300.0f))) {
         this->actor.shape.shadowAlpha = 160;
         Gfx_DrawDListOpa(play, object_bombiwa_DL_0009E0);
-        ObjBombiwa_DrawCSMC(this, play, -1);
+        ObjBombiwa_SmallDrawCSMC(this, play, -1);
         return;
     }
 
@@ -503,7 +513,7 @@ void func_8093A418(Actor* thisx, PlayState* play) {
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (s32)sp28);
         gSPDisplayList(POLY_XLU_DISP++, object_bombiwa_DL_000AF0);
         CLOSE_DISPS();
-        ObjBombiwa_DrawCSMC(this, play, (int)sp28);
+        ObjBombiwa_SmallDrawCSMC(this, play, (int)sp28);
     } else {
         this->actor.shape.shadowAlpha = 0;
     }
@@ -531,6 +541,7 @@ void func_8093A608(Actor* thisx, PlayState* play) {
 
             MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
             gSPDisplayList(POLY_XLU_DISP++, object_bombiwa_DL_004688);
+            ObjBombiwa_LargeDrawCSMC(this, play, 255);
         } else if (this->actor.projectedPos.z < 2300.0f) {
             sp38 = (2300.0f - this->actor.projectedPos.z) * 2.55f;
             Gfx_SetupDL25_Xlu(play->state.gfxCtx);
@@ -539,6 +550,7 @@ void func_8093A608(Actor* thisx, PlayState* play) {
             MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x9B, 255, 255, 255, (s32)sp38);
             gSPDisplayList(POLY_XLU_DISP++, object_bombiwa_DL_004560);
+            ObjBombiwa_LargeDrawCSMC(this, play, (int)sp38);
         }
     } else {
         Gfx_SetupDL25_Opa(play->state.gfxCtx);

@@ -319,6 +319,8 @@
     "Termina Field Soil Wall Item 2": "has_bugs"
     "Termina Field Soil Wall Item 3": "has_bugs"
     "Termina Field Soil Pillar": "has_bugs"
+    "Termina Field Boulder West Gossip": "can_break_boulders"
+    "Termina Field Boulder Bio Baba": "can_break_boulders"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
