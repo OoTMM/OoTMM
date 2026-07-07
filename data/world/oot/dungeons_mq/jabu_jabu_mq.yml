@@ -15,6 +15,7 @@
     "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
     "MQ Jabu-Jabu Wonder Item Entrance Left Cow": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
     "MQ Jabu-Jabu Wonder Item Entrance Right Cow": "can_use_slingshot && (soul_cow || trick(OOT_MQ_JABU_WITHOUT_COW_SOUL))"
+    "MQ Jabu-Jabu Room Boulder Entrance": "has_explosives_or_hammer"
 
 "Jabu-Jabu Main Elevator Room Upper":
   dungeon: JJ
@@ -81,6 +82,11 @@
   locations:
     "MQ Jabu-Jabu Grass Main Room Top 1": "can_cut_grass && has_explosives_or_hammer"
     "MQ Jabu-Jabu Grass Main Room Top 2": "can_cut_grass && has_explosives_or_hammer"
+    "MQ Jabu-Jabu Room Boulder Holes Room Ground 1": "has_explosives_or_hammer"
+    "MQ Jabu-Jabu Room Boulder Holes Room Ground 2": "has_explosives_or_hammer"
+    "MQ Jabu-Jabu Room Boulder Holes Room Wall 1": "has_explosives"
+    "MQ Jabu-Jabu Room Boulder Holes Room Wall 2": "has_explosives"
+    "MQ Jabu-Jabu Room Boulder Holes Room Wall 3": "has_explosives"
 
 "Jabu-Jabu Vanilla Ruto Falling Room After Wiggling Thing":
   dungeon: JJ
@@ -202,6 +208,8 @@
   locations:
     "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 1": "true"
     "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 2": "true"
+    "MQ Jabu-Jabu Room Boulder Fork Room 1": "has_explosives_or_hammer"
+    "MQ Jabu-Jabu Room Boulder Fork Room 2": "has_explosives_or_hammer"
 
 "Jabu-Jabu Back Forked Paths Center After Rocks":
   dungeon: JJ
@@ -264,6 +272,8 @@
     "Jabu-Jabu Back Forked Paths": "true"
   locations:
     "MQ Jabu-Jabu GS Back": "gs && ((climb_anywhere && (can_hammer || can_use_mask_blast)) || (has_explosives && can_collect_distance))"
+    "MQ Jabu-Jabu Room Boulder Side Room Wall": "has_explosives"
+    "MQ Jabu-Jabu Room Boulder Side Room Ground": "has_explosives_or_hammer"
 
 "Jabu-Jabu Basement Side Room Entrance Side":
   dungeon: JJ

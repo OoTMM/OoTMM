@@ -24,6 +24,10 @@
     "MQ Spirit Temple Pot Entrance 2": "true"
     "MQ Spirit Temple Pot Entrance 3": "true"
     "MQ Spirit Temple Pot Entrance 4": "true"
+    "MQ Spirit Temple Boulder Entrance Left": "has_explosives_or_hammer"
+    "MQ Spirit Temple Boulder Entrance Cobra": "has_explosives_or_hammer"
+    "MQ Spirit Temple Boulder Entrance Right": "has_explosives_or_hammer"
+    "MQ Spirit Temple Boulder Entrance Upper": "has_bombchu"
 
 "Spirit Temple Wallmaster Child Sun":
   region: BUFFER_DELAYED
@@ -59,6 +63,12 @@
     "MQ Spirit Temple Pot Child Back 4": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
     "MQ Spirit Temple Heart 1": "can_hit_triggers_distance"
     "MQ Spirit Temple Heart 2": "can_hit_triggers_distance"
+    "MQ Spirit Temple Boulder Child Crawl": "has_bombchu"
+    # TODO: Review this, probably too conservative
+    # TODO: Properly model this part of the dungeon as multiple areas
+    "MQ Spirit Temple Boulder Child Bridge Ground": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Boulder Child Bridge Wall Left": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Boulder Child Bridge Wall Front": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
 
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
@@ -132,6 +142,7 @@
     "MQ Spirit Temple SR Lobby After Water Near Door": "true"
     "MQ Spirit Temple Pot Adult Climb 1": "true"
     "MQ Spirit Temple Pot Adult Climb 2": "true"
+    "MQ Spirit Temple Boulder Entrance Side": "has_explosives_or_hammer"
 
 "Spirit Temple Adult Upper":
   dungeon: Spirit

@@ -168,6 +168,7 @@ const ACTORS_OOT = {
   EN_ISHI: 0x14e,
   EN_WOOD02: 0x077,
   OBJ_BEAN: 0x126,
+  OBJ_BOMBIWA: 0x127,
 };
 
 const ACTORS_MM = {
@@ -1156,6 +1157,11 @@ function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Grass', type: 'grass' });
 }
 
+function actorHandlerOotObjBombiwa(checks: Check[], ra: RoomActor) {
+  const { actor } = ra;
+  checks.push({ roomActor: ra, item: 'NOTHING', name: 'Boulder', type: 'boulder' });
+}
+
 function handleWood02(checks: Check[], ra: RoomActor, game: Game) {
   const { actor } = ra;
   let checkType: 'bush' | 'tree';
@@ -1550,6 +1556,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_ISHI]: actorHandlerOotEnIshi,
   [ACTORS_OOT.EN_WOOD02]: actorHandlerOotEnWood02,
   [ACTORS_OOT.OBJ_BEAN]: actorHandlerOotObjBean,
+  [ACTORS_OOT.OBJ_BOMBIWA]: actorHandlerOotObjBombiwa,
 };
 
 const ACTORS_HANDLERS_MM = {

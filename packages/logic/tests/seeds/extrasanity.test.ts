@@ -49,6 +49,7 @@ test("Can make a seed - Extrasanity", async () => {
     shuffleWonderItemsOot: 'all',
     shuffleWonderItemsMm: true,
     fairySpotShuffleOot: true,
+    shuffleBouldersOot: 'all',
     shuffleRedBouldersOot: true,
     shuffleRedBouldersMm: true,
     shuffleSilverBouldersOot: true,

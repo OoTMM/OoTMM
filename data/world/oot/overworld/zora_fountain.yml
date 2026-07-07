@@ -28,6 +28,8 @@
     "Zora Fountain Bush 4": "is_child"
     "Zora Fountain Bush 5": "is_child"
     "Zora Fountain Bush 6": "is_child"
+    "Zora Fountain Boulder Exposed": "has_explosives_or_hammer"
+    "Zora Fountain Boulder Underground": "can_lift_silver && has_explosives_or_hammer"
     "Zora Fountain Silver Boulder": "can_lift_silver"
   gossip:
     "Zora Fountain Gossip Northwest": "true"

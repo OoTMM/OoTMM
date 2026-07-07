@@ -95,6 +95,9 @@
     "MQ Deku Tree Grass Compass Room 2": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 3": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 4": "can_cut_grass"
+    "MQ Deku Tree Boulder 1": "has_bombchu || has_mask_blast || ((can_play_time || hookshot_anywhere || climb_anywhere) && has_explosives_or_hammer)"
+    "MQ Deku Tree Boulder 2": "has_bombchu || has_mask_blast || ((can_play_time || hookshot_anywhere || climb_anywhere) && has_explosives_or_hammer)"
+    "MQ Deku Tree Boulder 3": "has_bombchu || has_mask_blast || ((can_play_time || hookshot_anywhere || climb_anywhere) && has_explosives_or_hammer)"
 
 "MQ Deku Tree MQ Compass Room Chest Side Alcove":
   dungeon: DT

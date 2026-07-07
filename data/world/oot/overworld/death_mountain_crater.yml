@@ -29,6 +29,9 @@
     "Death Mountain Crater Rock Circle Rock 6": "true"
     "Death Mountain Crater Rock Circle Rock 7": "true"
     "Death Mountain Crater Rock Circle Rock 8": "true"
+    "Death Mountain Crater Boulder 1": "has_explosives_or_hammer"
+    "Death Mountain Crater Boulder 2": "has_explosives_or_hammer"
+    "Death Mountain Crater Boulder 3": "has_explosives_or_hammer"
   gossip:
     "Death Mountain Crater Gossip Wall": "has_explosives"
 

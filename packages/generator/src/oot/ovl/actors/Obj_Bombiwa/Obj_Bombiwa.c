@@ -1,0 +1,259 @@
+#include "Obj_Bombiwa.h"
+#include <assets/oot/objects/object_bombiwa.h>
+
+#define FLAGS 0
+
+void ObjBombiwa_Init(Actor* thisx, PlayState* play);
+void ObjBombiwa_InitCollision(Actor* thisx, PlayState* play);
+void ObjBombiwa_Destroy(Actor* thisx, PlayState* play2);
+void ObjBombiwa_Update(Actor* thisx, PlayState* play);
+void ObjBombiwa_Draw(Actor* thisx, PlayState* play);
+
+void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play);
+
+ActorProfile Obj_Bombiwa_Profile = {
+    /**/ ACTOR_OBJ_BOMBIWA,
+    /**/ ACTORCAT_PROP,
+    /**/ FLAGS,
+    /**/ OBJECT_BOMBIWA,
+    /**/ sizeof(ObjBombiwa),
+    /**/ ObjBombiwa_Init,
+    /**/ ObjBombiwa_Destroy,
+    /**/ ObjBombiwa_Update,
+    /**/ ObjBombiwa_Draw,
+};
+
+OVL_INFO_ACTOR(ACTOR_OBJ_BOMBIWA, Obj_Bombiwa_Profile);
+
+static ColliderCylinderInit sCylinderInit = {
+    {
+        COL_MATERIAL_HARD,
+        AT_NONE,
+        AC_ON | AC_HARD | AC_TYPE_PLAYER,
+        OC1_ON | OC1_TYPE_ALL,
+        OC2_TYPE_2,
+        COLSHAPE_CYLINDER,
+    },
+    {
+        ELEM_MATERIAL_UNK0,
+        { 0x00000000, HIT_SPECIAL_EFFECT_NONE, 0x00 },
+        { 0x4FC1FFFE, HIT_BACKLASH_NONE, 0x00 },
+        ATELEM_NONE,
+        ACELEM_ON,
+        OCELEM_ON,
+    },
+    { 55, 70, 0, { 0, 0, 0 } },
+};
+
+static CollisionCheckInfoInit sColChkInfoInit = { 0, 12, 60, MASS_IMMOVABLE };
+
+static InitChainEntry sInitChain[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeScale, 350, ICHAIN_CONTINUE),
+    ICHAIN_F32(cullingVolumeDownward, 1000, ICHAIN_STOP),
+};
+
+static s16 sEffectScales[] = {
+    17, 14, 10, 8, 7, 5, 3, 2,
+};
+
+void ObjBombiwa_InitCollision(Actor* thisx, PlayState* play) {
+    ObjBombiwa* this = (ObjBombiwa*)thisx;
+
+    Collider_InitCylinder(play, &this->collider);
+    Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
+    Collider_UpdateCylinder(&this->actor, &this->collider);
+}
+
+static void ObjBombiwa_Alias(Xflag* xf)
+{
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_ZORA_RIVER:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id = 61;
+        }
+        break;
+    case SCE_OOT_GORON_CITY:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            if (xf->id >= 36)
+                xf->id -= 5;
+            else if (xf->id == 29)
+                xf->id = 22;
+            else
+                xf->id -= 6;
+        }
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            switch (xf->id)
+            {
+            case 47: xf->id = 35; break;
+            case 45: xf->id = 36; break;
+            case 46: xf->id = 37; break;
+            }
+        }
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+        if (xf->setupId == 2)
+            xf->setupId = 0;
+        break;
+    case SCE_OOT_LOST_WOODS:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            switch (xf->roomId)
+            {
+            case 2: xf->id = 6; break;
+            case 7: xf->id = 5; break;
+            case 8: xf->id = 8; break;
+            }
+        }
+        break;
+    case SCE_OOT_ZORA_FOUNTAIN:
+        if (xf->setupId == 2)
+            xf->id -= 36;
+        xf->setupId = 0;
+        break;
+    case SCE_OOT_HYRULE_FIELD:
+        if (xf->setupId == 2)
+            xf->id += 1;
+        else if (xf->setupId == 1)
+        {
+            switch (xf->id)
+            {
+            case 68: xf->id = 68; break;
+            case 67: xf->id = 69; break;
+            case 66: xf->id = 70; break;
+            }
+        }
+        xf->setupId = 0;
+        break;
+    }
+}
+
+void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
+    ObjBombiwa* this = (ObjBombiwa*)thisx;
+
+    Actor_ProcessInitChain(thisx, sInitChain);
+    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+        ObjBombiwa_Alias(&this->xflag);
+    }
+    ObjBombiwa_InitCollision(thisx, play);
+    if ((Flags_GetSwitch(play, PARAMS_GET_U(thisx->params, 0, 6)) != 0) && !Xflag_IsShuffled(&this->xflag)) {
+        Actor_Kill(thisx);
+    } else {
+        CollisionCheck_SetInfo(&thisx->colChkInfo, NULL, &sColChkInfoInit);
+        if (thisx->shape.rot.y == 0) {
+            s16 rand = (s16)Rand_ZeroFloat(65536.0f);
+
+            thisx->world.rot.y = rand;
+            thisx->shape.rot.y = rand;
+        }
+        thisx->shape.yOffset = -200.0f;
+        thisx->world.pos.y = thisx->home.pos.y + 20.0f;
+    }
+}
+
+void ObjBombiwa_Destroy(Actor* thisx, PlayState* play2) {
+    PlayState* play = play2;
+    ObjBombiwa* this = (ObjBombiwa*)thisx;
+
+    Collider_DestroyCylinder(play, &this->collider);
+}
+
+void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play) {
+    Player* player;
+    Vec3f pos;
+    Vec3f velocity;
+    Gfx* dlist;
+    s16 arg5;
+    s16 scale;
+    s32 i;
+
+    if (Xflag_IsShuffled(&this->xflag))
+    {
+        /* MQ Spirit has boulders above holes & one boulder in a child crawl */
+        if (this->xflag.sceneId == SCE_OOT_TEMPLE_SPIRIT && ((this->xflag.roomId == 2 && this->xflag.id >= 10) || (this->xflag.roomId == 1 && gSave.age == AGE_CHILD)))
+        {
+            player = GET_PLAYER(play);
+            EnItem00_DropCustomNoInertia(play, &player->actor.world.pos, &this->xflag);
+        }
+        else
+        {
+            EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        }
+    }
+
+    dlist = object_bombiwa_DL_0009E0;
+    for (i = 0; i < ARRAY_COUNT(sEffectScales); i++) {
+        pos.x = ((Rand_ZeroOne() - 0.5f) * 10.0f) + this->actor.home.pos.x;
+        pos.y = ((Rand_ZeroOne() * 5.0f) + this->actor.home.pos.y) + 8.0f;
+        pos.z = ((Rand_ZeroOne() - 0.5f) * 10.0f) + this->actor.home.pos.z;
+        velocity.x = (Rand_ZeroOne() - 0.5f) * 15.0f;
+        velocity.y = (Rand_ZeroOne() * 16.0f) + 5.0f;
+        velocity.z = (Rand_ZeroOne() - 0.5f) * 15.0f;
+        scale = sEffectScales[i];
+        arg5 = (scale >= 11) ? 37 : 33;
+        EffectSsKakera_Spawn(play, &pos, &velocity, &pos, -400, arg5, 10, 2, 0, scale, 1, 0, 80, KAKERA_COLOR_NONE,
+                             OBJECT_BOMBIWA, dlist);
+    }
+    func_80033480(play, &this->actor.world.pos, 60.0f, 8, 100, 160, 1);
+}
+
+void ObjBombiwa_Update(Actor* thisx, PlayState* play) {
+    ObjBombiwa* this = (ObjBombiwa*)thisx;
+
+    if ((func_80033684(play, &this->actor) != NULL) ||
+        ((this->collider.base.acFlags & AC_HIT) && (this->collider.elem.acHitElem->atDmgInfo.dmgFlags & DMG_HAMMER))) {
+        ObjBombiwa_Break(this, play);
+        Flags_SetSwitch(play, PARAMS_GET_U(this->actor.params, 0, 6));
+        SfxSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 80, NA_SE_EV_WALL_BROKEN);
+        if (PARAMS_GET_U(this->actor.params, 15, 1) != 0) {
+            Sfx_PlaySfxCentered(NA_SE_SY_CORRECT_CHIME);
+        }
+        Actor_Kill(&this->actor);
+    } else {
+        this->collider.base.acFlags &= ~AC_HIT;
+        if (this->actor.xzDistToPlayer < 800.0f) {
+            CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider.base);
+            CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
+        }
+    }
+}
+
+static int ObjBombiwa_CAMC(ObjBombiwa* this, PlayState* play)
+{
+    ComboItemOverride o;
+
+    if (!Xflag_IsShuffled(&this->xflag))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItemCloaked(o.gi, o.cloakGi);
+}
+
+void ObjBombiwa_Draw(Actor* thisx, PlayState* play) {
+    int csmc;
+    const Color_RGB8* color;
+
+    csmc = ObjBombiwa_CAMC((ObjBombiwa*)thisx, play);
+    Gfx_DrawDListOpa(play, object_bombiwa_DL_0009E0);
+
+    if (csmc != CSMC_NORMAL)
+    {
+        color = csmcTypeColor(csmc);
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        Gfx_DrawFlameColor(play, color->r << 24 | color->g << 16 | color->b << 8 | 0xcc, 18.f, 120.f);
+    }
+}

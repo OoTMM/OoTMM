@@ -33,6 +33,8 @@
     "Gerudo Valley Rock Entrance Water 1": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
     "Gerudo Valley Rock Entrance Water 2": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
     "Gerudo Valley Rock Entrance Water 3": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
+    "Gerudo Valley Boulder Before Bridge 1": "is_adult && has_explosives_or_hammer"
+    "Gerudo Valley Boulder Before Bridge 2": "is_adult && has_explosives_or_hammer"
   gossip:
     "Gerudo Valley Gossip": "true"
 
@@ -70,6 +72,7 @@
     "Gerudo Valley Rock Adult 2": "is_adult"
     "Gerudo Valley Rock Adult 3": "is_adult"
     "Gerudo Valley Rock Adult 4": "is_adult"
+    "Gerudo Valley Boulder After Bridge": "is_adult && has_explosives_or_hammer"
     # Unreachable with some settings, need a way to detect that
     #"Gerudo Valley Crate Child Unreachable 1": "is_child"
     #"Gerudo Valley Crate Child Unreachable 2": "is_child"

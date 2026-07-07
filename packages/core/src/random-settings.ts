@@ -920,6 +920,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleWonderItemsMm = true;
       base.shuffleButterfliesOot = true;
       base.shuffleButterfliesMm = true;
+      base.shuffleBouldersOot = 'all';
       base.shuffleRedBouldersOot = true;
       base.shuffleRedBouldersMm = true;
       base.shuffleSilverBouldersOot = true;
@@ -953,6 +954,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleWonderItemsMm = true;
       base.shuffleButterfliesOot = true;
       base.shuffleButterfliesMm = true;
+      base.shuffleBouldersOot = 'overworld';
       base.shuffleRedBouldersOot = true;
       base.shuffleRedBouldersMm = true;
       base.shuffleSilverBouldersOot = true;
@@ -977,6 +979,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleBarrelsMm = 'dungeons';
       base.shuffleSnowballsMm = 'dungeons';
       base.shuffleWonderItemsOot = 'dungeons';
+      base.shuffleBouldersOot = 'dungeons';
       break;
     default:
       base.shufflePotsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
@@ -1006,6 +1009,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleWonderItemsMm = booleanWeighted(random, 0.5);
       base.shuffleButterfliesOot = booleanWeighted(random, 0.5);
       base.shuffleButterfliesMm = booleanWeighted(random, 0.5);
+      base.shuffleBouldersOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleRedBouldersOot = booleanWeighted(random, 0.5);
       base.shuffleRedBouldersMm = booleanWeighted(random, 0.5);
       base.shuffleSilverBouldersOot = booleanWeighted(random, 0.5);

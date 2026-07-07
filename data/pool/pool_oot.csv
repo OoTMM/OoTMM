@@ -183,6 +183,9 @@ Lost Woods Soil Early 3,                                    soil,           NONE
 Lost Woods Soil Late 1,                                     soil,           NONE,                 LOST_WOODS,                     0x00605,                    FAIRY
 Lost Woods Soil Late 2,                                     soil,           NONE,                 LOST_WOODS,                     0x10605,                    FAIRY
 Lost Woods Soil Late 3,                                     soil,           NONE,                 LOST_WOODS,                     0x20605,                    FAIRY
+Lost Woods Boulder Early,                                   boulder,        NONE,                 LOST_WOODS,                     0x00206,                    NOTHING
+Lost Woods Boulder Deep 1,                                  boulder,        NONE,                 LOST_WOODS,                     0x00705,                    NOTHING
+Lost Woods Boulder Deep 2,                                  boulder,        NONE,                 LOST_WOODS,                     0x00808,                    NOTHING
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
@@ -414,6 +417,10 @@ Death Mountain Trail Cow Grotto Hive,                       hive,           NONE
 Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
+Death Mountain Trail Boulder Child,                         boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0002f,                    NOTHING
+Death Mountain Trail Boulder Lower,                         boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00030,                    NOTHING
+Death Mountain Trail Boulder Middle,                        boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00031,                    NOTHING
+Death Mountain Trail Boulder Upper,                         boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00032,                    NOTHING
 Death Mountain Trail Red Boulder Near Lower GS,             boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800a,                    NOTHING
 Death Mountain Trail Red Boulder Lower 1,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800b,                    NOTHING
 Death Mountain Trail Red Boulder Lower 2,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800c,                    NOTHING
@@ -460,6 +467,22 @@ Goron Shop Item 5,                                          shop,           NONE
 Goron Shop Item 6,                                          shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
 Goron Shop Item 7,                                          shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
 Goron Shop Item 8,                                          shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
+Goron City Maze Boulder 01,                                 boulder,        NONE,                 GORON_CITY,                     0x0001f,                    NOTHING
+Goron City Maze Boulder 02,                                 boulder,        NONE,                 GORON_CITY,                     0x00020,                    NOTHING
+Goron City Maze Boulder 03,                                 boulder,        NONE,                 GORON_CITY,                     0x00021,                    NOTHING
+Goron City Maze Boulder 04,                                 boulder,        NONE,                 GORON_CITY,                     0x00022,                    NOTHING
+Goron City Maze Boulder 05,                                 boulder,        NONE,                 GORON_CITY,                     0x00023,                    NOTHING
+Goron City Maze Boulder 06,                                 boulder,        NONE,                 GORON_CITY,                     0x00024,                    NOTHING
+Goron City Maze Boulder 07,                                 boulder,        NONE,                 GORON_CITY,                     0x00025,                    NOTHING
+Goron City Maze Boulder 08,                                 boulder,        NONE,                 GORON_CITY,                     0x00026,                    NOTHING
+Goron City Maze Boulder 09,                                 boulder,        NONE,                 GORON_CITY,                     0x00027,                    NOTHING
+Goron City Maze Boulder 10,                                 boulder,        NONE,                 GORON_CITY,                     0x00028,                    NOTHING
+Goron City Boulder Upper 1,                                 boulder,        NONE,                 GORON_CITY,                     0x00316,                    NOTHING
+Goron City Boulder Upper 2,                                 boulder,        NONE,                 GORON_CITY,                     0x00319,                    NOTHING
+Goron City Boulder Upper 3,                                 boulder,        NONE,                 GORON_CITY,                     0x0031a,                    NOTHING
+Goron City Boulder Shortcut 1,                              boulder,        NONE,                 GORON_CITY,                     0x00318,                    NOTHING
+Goron City Boulder Shortcut 2,                              boulder,        NONE,                 GORON_CITY,                     0x0031b,                    NOTHING
+Goron City Boulder Shortcut 3,                              boulder,        NONE,                 GORON_CITY,                     0x0031c,                    NOTHING
 Goron City Red Boulder 1,                                   boulder-red,    NONE,                 GORON_CITY,                     0x00029,                    NOTHING
 Goron City Red Boulder 2,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002d,                    NOTHING
 Goron City Red Boulder 3,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002a,                    NOTHING
@@ -548,6 +571,9 @@ Death Mountain Crater Rupee Adult 4,                        rupee,          NONE
 Death Mountain Crater Rupee Adult 5,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x48112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 6,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x58112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 7,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x68112,                    RUPEE_RED
+Death Mountain Crater Boulder 1,                            boulder,        NONE,                 DEATH_MOUNTAIN_CRATER,          0x00123,                    NOTHING
+Death Mountain Crater Boulder 2,                            boulder,        NONE,                 DEATH_MOUNTAIN_CRATER,          0x00124,                    NOTHING
+Death Mountain Crater Boulder 3,                            boulder,        NONE,                 DEATH_MOUNTAIN_CRATER,          0x00125,                    NOTHING
 Death Mountain Crater Red Boulder Grotto,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010b,                    NOTHING
 Death Mountain Crater Red Boulder Great Fairy 1,            boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
 Death Mountain Crater Red Boulder Great Fairy 2,            boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING
@@ -614,6 +640,11 @@ Zora River Rock Circle Upper Rock 5,                        rock,           NONE
 Zora River Rock Circle Upper Rock 6,                        rock,           NONE,                 ZORA_RIVER,                     0x50033,                    RANDOM
 Zora River Rock Circle Upper Rock 7,                        rock,           NONE,                 ZORA_RIVER,                     0x60033,                    RANDOM
 Zora River Rock Circle Upper Rock 8,                        rock,           NONE,                 ZORA_RIVER,                     0x70033,                    RANDOM
+Zora River Boulder Lower 1,                                 boulder,        NONE,                 ZORA_RIVER,                     0x0003c,                    NOTHING
+Zora River Boulder Lower 2,                                 boulder,        NONE,                 ZORA_RIVER,                     0x0003e,                    NOTHING
+Zora River Boulder Lower 3,                                 boulder,        NONE,                 ZORA_RIVER,                     0x0003f,                    NOTHING
+Zora River Boulder Lower 4,                                 boulder,        NONE,                 ZORA_RIVER,                     0x00040,                    NOTHING
+Zora River Boulder Upper,                                   boulder,        NONE,                 ZORA_RIVER,                     0x0003d,                    NOTHING
 Zora River Butterfly Near Beans 1,                          butterfly,      NONE,                 ZORA_RIVER,                     0x00037,                    FAIRY
 Zora River Butterfly Near Beans 2,                          butterfly,      NONE,                 ZORA_RIVER,                     0x10037,                    NOTHING
 Zora River Butterfly Near Waterfall 1,                      butterfly,      NONE,                 ZORA_RIVER,                     0x0010a,                    FAIRY
@@ -750,6 +781,8 @@ Zora Fountain Bush 3,                                       bush,           NONE
 Zora Fountain Bush 4,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x00009,                    NOTHING
 Zora Fountain Bush 5,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000a,                    NOTHING
 Zora Fountain Bush 6,                                       bush,           NONE,                 ZORA_FOUNTAIN,                  0x0000b,                    NOTHING
+Zora Fountain Boulder Exposed,                              boulder,        NONE,                 ZORA_FOUNTAIN,                  0x00010,                    NOTHING
+Zora Fountain Boulder Underground,                          boulder,        NONE,                 ZORA_FOUNTAIN,                  0x00011,                    NOTHING
 Zora Fountain Silver Boulder,                               boulder-silver, NONE,                 ZORA_FOUNTAIN,                  0x00005,                    NOTHING
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                BOTTLE_RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
@@ -1098,6 +1131,9 @@ Hyrule Field River Big Fairy,                               fairy_spot,     NONE
 Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
 Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
 Hyrule Field Wonder Item 3,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00036,                    RUPEE_RED
+Hyrule Field Boulder Near Lake,                             boulder,        NONE,                 HYRULE_FIELD,                   0x00044,                    NOTHING
+Hyrule Field Boulder Near Market,                           boulder,        NONE,                 HYRULE_FIELD,                   0x00045,                    NOTHING
+Hyrule Field Boulder Island,                                boulder,        NONE,                 HYRULE_FIELD,                   0x00046,                    NOTHING
 Hyrule Field Red Boulder 1,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08008,                    NOTHING
 Hyrule Field Red Boulder 2,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x08009,                    NOTHING
 Hyrule Field Red Boulder 3,                                 boulder-red,    NONE,                 HYRULE_FIELD,                   0x0800a,                    NOTHING
@@ -1267,6 +1303,7 @@ Hyrule Castle Tree Guarded,                                 tree,           NONE
 Hyrule Castle Rock 1,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002a,                    RANDOM
 Hyrule Castle Rock 2,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002b,                    RANDOM
 Hyrule Castle Rock 3,                                       rock,           NONE,                 HYRULE_CASTLE,                  0x0002c,                    RANDOM
+Hyrule Castle Boulder,                                      boulder,        NONE,                 HYRULE_CASTLE,                  0x0003a,                    NOTHING
 Hyrule Castle Wonder Item Torch 1,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x0000c,                    MAGIC_JAR_LARGE
 Hyrule Castle Wonder Item Torch 2,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x0000d,                    RUPEE_RED
 Hyrule Castle Wonder Item Moat 01,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00020,                    RUPEE_GREEN
@@ -1335,6 +1372,9 @@ Gerudo Valley Crate Child Bottom,                           crate,          NONE
 Gerudo Valley Crate Ledge,                                  crate,          NONE,                 GERUDO_VALLEY,                  0x00026,                    RUPEE_GREEN
 Gerudo Valley Wonder Item Lower,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08028,                    RUPEE_RED
 Gerudo Valley Wonder Item Upper,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08029,                    RUPEE_RED
+Gerudo Valley Boulder Before Bridge 1,                      boulder,        NONE,                 GERUDO_VALLEY,                  0x0801b,                    NOTHING
+Gerudo Valley Boulder Before Bridge 2,                      boulder,        NONE,                 GERUDO_VALLEY,                  0x0801d,                    NOTHING
+Gerudo Valley Boulder After Bridge,                         boulder,        NONE,                 GERUDO_VALLEY,                  0x0801c,                    NOTHING
 Gerudo Valley Red Boulder Before Bridge 1,                  boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08010,                    NOTHING
 Gerudo Valley Red Boulder Before Bridge 2,                  boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08011,                    NOTHING
 Gerudo Valley Red Boulder After Bridge 1,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08012,                    NOTHING
@@ -1877,6 +1917,12 @@ Bottom of the Well Rupee 5,                                 rupee,          NONE
 Bottom of the Well Heart 1,                                 heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020d,                    RECOVERY_HEART
 Bottom of the Well Heart 2,                                 heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020e,                    RECOVERY_HEART
 Bottom of the Well Basement Big Fairy,                      fairy_spot,     NONE,                 BOTTOM_OF_THE_WELL,             0x00113,                    FAIRY_BIG
+Bottom of the Well Boulder Near Chest 1,                    boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00120,                    NOTHING
+Bottom of the Well Boulder Near Chest 2,                    boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00121,                    NOTHING
+Bottom of the Well Boulder Middle 1,                        boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00122,                    NOTHING
+Bottom of the Well Boulder Middle 2,                        boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00123,                    NOTHING
+Bottom of the Well Boulder Far 1,                           boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00124,                    NOTHING
+Bottom of the Well Boulder Far 2,                           boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00125,                    NOTHING
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
@@ -2297,6 +2343,9 @@ MQ Deku Tree Wonder Item 4,                                 wonder,         NONE
 MQ Deku Tree Main Room 2nd Floor Crate,                     crate,          NONE,                 DEKU_TREE,                      0x0001c,                    RUPEE_GREEN
 MQ Deku Tree Slingshot Room Large Crate 1,                  crate,          NONE,                 DEKU_TREE,                      0x00a10,                    RUPEE_GREEN
 MQ Deku Tree Slingshot Room Large Crate 2,                  crate,          NONE,                 DEKU_TREE,                      0x00a11,                    RUPEE_GREEN
+MQ Deku Tree Boulder 1,                                     boulder,        NONE,                 DEKU_TREE,                      0x00214,                    NOTHING
+MQ Deku Tree Boulder 2,                                     boulder,        NONE,                 DEKU_TREE,                      0x00215,                    NOTHING
+MQ Deku Tree Boulder 3,                                     boulder,        NONE,                 DEKU_TREE,                      0x00216,                    NOTHING
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
@@ -2381,6 +2430,26 @@ MQ Dodongo Cavern Larve Room Large Crate 5,                 crate,          NONE
 MQ Dodongo Cavern Larve Room Large Crate 6,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0060b,                    RUPEE_GREEN
 MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1,  crate,          NONE,                 DODONGO_CAVERN,                 0x00c0a,                    RUPEE_GREEN
 MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2,  crate,          NONE,                 DODONGO_CAVERN,                 0x00c0b,                    RUPEE_GREEN
+MQ Dodongo Cavern Boulder Entrance Back 1,                  boulder,        NONE,                 DODONGO_CAVERN,                 0x00016,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Back 2,                  boulder,        NONE,                 DODONGO_CAVERN,                 0x00017,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Upper 1,                 boulder,        NONE,                 DODONGO_CAVERN,                 0x00018,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Upper 2,                 boulder,        NONE,                 DODONGO_CAVERN,                 0x00019,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Upper 3,                 boulder,        NONE,                 DODONGO_CAVERN,                 0x0001a,                    NOTHING
+MQ Dodongo Cavern Boulder Right Corridor Ground,            boulder,        NONE,                 DODONGO_CAVERN,                 0x00118,                    NOTHING
+MQ Dodongo Cavern Boulder Right Corridor Wall,              boulder,        NONE,                 DODONGO_CAVERN,                 0x00119,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 01,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030b,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 02,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030c,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 03,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030d,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 04,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030e,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 05,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030f,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 06,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00310,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 07,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00311,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 08,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00312,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 09,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00313,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 10,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00314,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 11,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00315,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 12,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00316,                    NOTHING
+MQ Dodongo Cavern Boulder Deep,                             boulder,        NONE,                 DODONGO_CAVERN,                 0x00c09,                    NOTHING
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
@@ -2452,6 +2521,16 @@ MQ Jabu-Jabu Room After Above Big Octo Small Crate 1,       crate,          NONE
 MQ Jabu-Jabu Room After Above Big Octo Small Crate 2,       crate,          NONE,                 INSIDE_JABU_JABU,               0x0040c,                    NOTHING
 MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 1,     crate,          NONE,                 INSIDE_JABU_JABU,               0x00705,                    NOTHING
 MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 2,     crate,          NONE,                 INSIDE_JABU_JABU,               0x00706,                    NOTHING
+MQ Jabu-Jabu Room Boulder Entrance,                         boulder,        NONE,                 INSIDE_JABU_JABU,               0x00006,                    NOTHING
+MQ Jabu-Jabu Room Boulder Holes Room Ground 1,              boulder,        NONE,                 INSIDE_JABU_JABU,               0x00208,                    NOTHING
+MQ Jabu-Jabu Room Boulder Holes Room Ground 2,              boulder,        NONE,                 INSIDE_JABU_JABU,               0x00209,                    NOTHING
+MQ Jabu-Jabu Room Boulder Holes Room Wall 1,                boulder,        NONE,                 INSIDE_JABU_JABU,               0x00207,                    NOTHING
+MQ Jabu-Jabu Room Boulder Holes Room Wall 2,                boulder,        NONE,                 INSIDE_JABU_JABU,               0x0020a,                    NOTHING
+MQ Jabu-Jabu Room Boulder Holes Room Wall 3,                boulder,        NONE,                 INSIDE_JABU_JABU,               0x0020b,                    NOTHING
+MQ Jabu-Jabu Room Boulder Fork Room 1,                      boulder,        NONE,                 INSIDE_JABU_JABU,               0x00703,                    NOTHING
+MQ Jabu-Jabu Room Boulder Fork Room 2,                      boulder,        NONE,                 INSIDE_JABU_JABU,               0x00704,                    NOTHING
+MQ Jabu-Jabu Room Boulder Side Room Wall,                   boulder,        NONE,                 INSIDE_JABU_JABU,               0x00c07,                    NOTHING
+MQ Jabu-Jabu Room Boulder Side Room Ground,                 boulder,        NONE,                 INSIDE_JABU_JABU,               0x00c08,                    NOTHING
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
@@ -2492,6 +2571,9 @@ MQ Bottom of the Well Wonder Item Side Room 1,              wonder,         NONE
 MQ Bottom of the Well Wonder Item Side Room 2,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00501,                    MAGIC_JAR_LARGE
 MQ Bottom of the Well Wonder Item Side Room 3,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00502,                    ARROWS_30
 MQ Bottom of the Well Wonder Item Side Room 4,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00503,                    FLEXIBLE
+MQ Bottom of the Well Boulder Alcove 1,                     boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00013,                    NOTHING
+MQ Bottom of the Well Boulder Alcove 2,                     boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00014,                    NOTHING
+MQ Bottom of the Well Boulder Alcove Solo,                  boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x0001a,                    NOTHING
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
@@ -3023,6 +3105,15 @@ MQ Spirit Temple Top Near Lowering Platform Large Crate 1,  crate,          NONE
 MQ Spirit Temple Top Near Lowering Platform Large Crate 2,  crate,          NONE,                 TEMPLE_SPIRIT,                  0x01902,                    RUPEE_GREEN
 MQ Spirit Temple Top Near Lowering Platform Large Crate 3,  crate,          NONE,                 TEMPLE_SPIRIT,                  0x01903,                    RUPEE_GREEN
 MQ Spirit Temple Top Near Lowering Platform Large Crate 4,  crate,          NONE,                 TEMPLE_SPIRIT,                  0x01904,                    RUPEE_GREEN
+MQ Spirit Temple Boulder Entrance Left,                     boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00001,                    NOTHING
+MQ Spirit Temple Boulder Entrance Upper,                    boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00002,                    NOTHING
+MQ Spirit Temple Boulder Entrance Cobra,                    boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00003,                    NOTHING
+MQ Spirit Temple Boulder Entrance Right,                    boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00004,                    NOTHING
+MQ Spirit Temple Boulder Entrance Side,                     boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00005,                    NOTHING
+MQ Spirit Temple Boulder Child Crawl,                       boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00104,                    NOTHING
+MQ Spirit Temple Boulder Child Bridge Ground,               boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00207,                    NOTHING
+MQ Spirit Temple Boulder Child Bridge Wall Left,            boulder,        NONE,                 TEMPLE_SPIRIT,                  0x0020a,                    NOTHING
+MQ Spirit Temple Boulder Child Bridge Wall Front,           boulder,        NONE,                 TEMPLE_SPIRIT,                  0x0020b,                    NOTHING
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
