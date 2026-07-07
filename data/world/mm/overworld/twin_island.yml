@@ -99,6 +99,11 @@
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Twin Islands Frozen Grotto Chest": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none) && setting(erGrottos, none))"
+    "Twin Islands Frozen Grotto Large Boulder 1": "has_explosives"
+    "Twin Islands Frozen Grotto Large Boulder 2": "has_explosives"
+    "Twin Islands Frozen Grotto Large Boulder 3": "has_explosives"
+    "Twin Islands Frozen Grotto Large Boulder 4": "has_explosives"
+    "Twin Islands Frozen Grotto Large Boulder 5": "has_explosives"
 
 "Near Goron Race":
   region: TWIN_ISLANDS

@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Add boulder shuffle for Ocarina of Time.
+- Add boulder shuffle for Ocarina of Time and Majora's Mask.
 - Add silver boulder shuffle for Ocarina of Time.
 
 ### Fixed

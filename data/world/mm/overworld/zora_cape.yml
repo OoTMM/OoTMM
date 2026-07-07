@@ -40,6 +40,7 @@
     "Zora Cape Palm Tree Island Near Fountain": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Palm Tree Island Near Beach": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Palm Tree Island Center": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
+    "Zora Cape Boulder": "can_break_boulders"
 
   gossip:
     "Zora Cape Gossip": "true"
@@ -92,6 +93,9 @@
     "GLOBAL": "true"
     "Zora Cape": "(has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)) && (can_swim_or_sink || can_use_ice_arrows)"
     "Great Bay Fairy Fountain": "true"
+  locations:
+    "Zora Cape Large Boulder 1": "has_explosives"
+    "Zora Cape Large Boulder 2": "has_explosives"
 
 "Great Bay Fairy Fountain":
   region: ENTRANCE

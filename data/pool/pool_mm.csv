@@ -520,6 +520,8 @@ Termina Field Cow Grotto Hive,                          hive,           NONE,   
 Termina Field Cow Grotto Butterfly 1,                   butterfly,      NONE,                   GROTTOS,                      0x00a06,                    FAIRY
 Termina Field Cow Grotto Butterfly 2,                   butterfly,      NONE,                   GROTTOS,                      0x10a06,                    NOTHING
 Termina Field Cow Grotto Butterfly 3,                   butterfly,      NONE,                   GROTTOS,                      0x20a06,                    NOTHING
+Termina Field Boulder West Gossip,                      boulder,        NONE,                   TERMINA_FIELD,                0x000c6,                    NOTHING
+Termina Field Boulder Bio Baba,                         boulder,        NONE,                   TERMINA_FIELD,                0x000c7,                    NOTHING
 Ocean Gossip Grotto Grass 1,                            grass,          NONE,                   GROTTOS,                      0x00001,                    RANDOM
 Ocean Gossip Grotto Grass 2,                            grass,          NONE,                   GROTTOS,                      0x00004,                    RANDOM
 Ocean Gossip Grotto Grass 3,                            grass,          NONE,                   GROTTOS,                      0x00006,                    RANDOM
@@ -763,6 +765,8 @@ Deku Palace Rupee Left Far 2,                           rupee,          NONE,   
 Deku Palace Rupee Left Far 3,                           rupee,          NONE,                   DEKU_PALACE,                  0x00209,                    RUPEE_BLUE
 Deku Palace Rupee Layout-Dependant 1,                   rupee,          NONE,                   DEKU_PALACE,                  0x0020a,                    RUPEE_BLUE
 Deku Palace Rupee Layout-Dependant 2,                   rupee,          NONE,                   DEKU_PALACE,                  0x0020b,                    RUPEE_BLUE
+Deku Palace Boulder 1,                                  boulder,        NONE,                   DEKU_PALACE,                  0x00013,                    NOTHING
+Deku Palace Boulder 2,                                  boulder,        NONE,                   DEKU_PALACE,                  0x00014,                    NOTHING
 Deku Palace Red Boulder 1,                              boulder-red,    NONE,                   DEKU_PALACE,                  0x0010c,                    NOTHING
 Deku Palace Red Boulder 2,                              boulder-red,    NONE,                   DEKU_PALACE,                  0x0010d,                    NOTHING
 Deku Palace Red Boulder 3,                              boulder-red,    NONE,                   DEKU_PALACE,                  0x0010e,                    NOTHING
@@ -908,6 +912,7 @@ Swamp Spider House Soil Gold,                           soil,           NONE,   
 Swamp Spider House Soil Monument Item 1,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0030e,                    RUPEE_BLUE
 Swamp Spider House Soil Monument Item 2,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x1030e,                    RUPEE_BLUE
 Swamp Spider House Soil Monument Item 3,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x2030e,                    RUPEE_BLUE
+Swamp Spider House Boulder,                             boulder,        NONE,                   SPIDER_HOUSE_SWAMP,           0x00312,                    NOTHING
 Path to Mountain Village Big Snowball Lower 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001a,                    NOTHING
 Path to Mountain Village Big Snowball Lower 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002a,                    NOTHING
 Path to Mountain Village Big Snowball Lower 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001e,                    RECOVERY_HEART
@@ -1067,10 +1072,18 @@ Lone Peak Shrine Grass Pack 2 Grass 09,                 grass,          NONE,   
 Lone Peak Shrine Grass Pack 2 Grass 10,                 grass,          NONE,                   GROTTOS,                      0x90502,                    RANDOM
 Lone Peak Shrine Grass Pack 2 Grass 11,                 grass,          NONE,                   GROTTOS,                      0xa0502,                    RANDOM
 Lone Peak Shrine Grass Pack 2 Grass 12,                 grass,          NONE,                   GROTTOS,                      0xb0502,                    RANDOM
+Lone Peak Shrine Large Boulder 1,                       boulder,        NONE,                   GROTTOS,                      0x00506,                    NOTHING
+Lone Peak Shrine Large Boulder 2,                       boulder,        NONE,                   GROTTOS,                      0x00507,                    NOTHING
+Lone Peak Shrine Large Boulder 3,                       boulder,        NONE,                   GROTTOS,                      0x00509,                    NOTHING
 Goron Graveyard Mask,                                   npc,            NONE,                   GORON_GRAVEYARD,              MASK_GORON,                 MASK_GORON
 Twin Islands Underwater Chest 1,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x06,                       HEART_PIECE
 Twin Islands Underwater Chest 2,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x00,                       RUPEE_RED
 Twin Islands Frozen Grotto Chest,                       chest,          NONE,                   GROTTOS,                      0x02,                       RUPEE_RED
+Twin Islands Frozen Grotto Large Boulder 1,             boulder,        NONE,                 GROTTOS,                        0x00e0a,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 2,             boulder,        NONE,                 GROTTOS,                        0x00e0b,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 3,             boulder,        NONE,                 GROTTOS,                        0x00e0c,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 4,             boulder,        NONE,                 GROTTOS,                        0x00e0d,                    NOTHING
+Twin Islands Frozen Grotto Large Boulder 5,             boulder,        NONE,                 GROTTOS,                        0x00e0e,                    NOTHING
 Twin Islands Ramp Grotto Chest,                         chest,          NONE,                   GROTTOS,                      0x19,                       BOMBCHU
 Twin Islands Ramp Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x03900,                    RANDOM
 Twin Islands Ramp Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x03901,                    RANDOM
@@ -1591,6 +1604,9 @@ Zora Cape Rock Sand 2,                                  rock,           NONE,   
 Zora Cape Rock Sand 3,                                  rock,           NONE,                   ZORA_CAPE,                    0x00037,                    RANDOM
 Zora Cape Rock Sand 4,                                  rock,           NONE,                   ZORA_CAPE,                    0x00038,                    RANDOM
 Zora Cape Rock Sand 5,                                  rock,           NONE,                   ZORA_CAPE,                    0x00039,                    RANDOM
+Zora Cape Large Boulder 1,                              boulder,        NONE,                   ZORA_CAPE,                    0x0002a,                    NOTHING
+Zora Cape Large Boulder 2,                              boulder,        NONE,                   ZORA_CAPE,                    0x0002b,                    NOTHING
+Zora Cape Boulder,                                      boulder,        NONE,                   ZORA_CAPE,                    0x0002c,                    NOTHING
 Zora Cape Palm Tree Beach 1,                            tree,           NONE,                   ZORA_CAPE,                    0x00018,                    NUT
 Zora Cape Palm Tree Beach 2,                            tree,           NONE,                   ZORA_CAPE,                    0x00019,                    NUT
 Zora Cape Palm Tree Island Near Fountain,               tree,           NONE,                   ZORA_CAPE,                    0x0001a,                    NUT
@@ -1721,6 +1737,13 @@ Road to Ikana Rock Circle Rock 6,                       rock,           NONE,   
 Road to Ikana Rock Circle Rock 7,                       rock,           NONE,                   ROAD_IKANA,                   0x60023,                    RANDOM
 Road to Ikana Rock Circle Rock 8,                       rock,           NONE,                   ROAD_IKANA,                   0x70023,                    RANDOM
 Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
+Road to Ikana Large Boulder 1,                          boulder,        NONE,                   ROAD_IKANA,                   0x0003c,                    NOTHING
+Road to Ikana Large Boulder 2,                          boulder,        NONE,                   ROAD_IKANA,                   0x0003e,                    NOTHING
+Road to Ikana Large Boulder 3,                          boulder,        NONE,                   ROAD_IKANA,                   0x00040,                    NOTHING
+Road to Ikana Large Boulder 4,                          boulder,        NONE,                   ROAD_IKANA,                   0x00041,                    NOTHING
+Road to Ikana Large Boulder 5,                          boulder,        NONE,                   ROAD_IKANA,                   0x00042,                    NOTHING
+Road to Ikana Large Boulder 6,                          boulder,        NONE,                   ROAD_IKANA,                   0x00043,                    NOTHING
+Road to Ikana Large Boulder 7,                          boulder,        NONE,                   ROAD_IKANA,                   0x00044,                    NOTHING
 Road to Ikana Red Boulder,                              boulder-red,    NONE,                   ROAD_IKANA,                   0x00005,                    NOTHING
 Road to Ikana Grotto,                                   chest,          NONE,                   GROTTOS,                      0x16,                       BOMBCHU
 Road to Ikana Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x03600,                    RANDOM
