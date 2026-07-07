@@ -183,6 +183,9 @@ Lost Woods Soil Early 3,                                    soil,           NONE
 Lost Woods Soil Late 1,                                     soil,           NONE,                 LOST_WOODS,                     0x00605,                    FAIRY
 Lost Woods Soil Late 2,                                     soil,           NONE,                 LOST_WOODS,                     0x10605,                    FAIRY
 Lost Woods Soil Late 3,                                     soil,           NONE,                 LOST_WOODS,                     0x20605,                    FAIRY
+Lost Woods Boulder Early,                                   boulder,        NONE,                 LOST_WOODS,                     0x00206,                    NOTHING
+Lost Woods Boulder Deep 1,                                  boulder,        NONE,                 LOST_WOODS,                     0x00705,                    NOTHING
+Lost Woods Boulder Deep 2,                                  boulder,        NONE,                 LOST_WOODS,                     0x00808,                    NOTHING
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA

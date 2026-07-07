@@ -62,6 +62,7 @@
     "Lost Woods Wonder Item 1": "is_child"
     "Lost Woods Wonder Item 2": "is_child"
     "Lost Woods Wonder Item 3": "is_child"
+    "Lost Woods Boulder Early": "has_explosives_or_hammer"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 
@@ -174,6 +175,8 @@
     "Lost Woods Butterfly 3": "is_child && butterfly"
     "Lost Woods Butterfly 4": "is_child && butterfly"
     "Lost Woods Butterfly 5": "is_child && butterfly"
+    "Lost Woods Boulder Deep 1": "has_explosives_or_hammer"
+    "Lost Woods Boulder Deep 2": "has_explosives_or_hammer"
 
 "Lost Woods Soil Late Fairies":
   region: LOST_WOODS
