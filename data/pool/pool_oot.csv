@@ -2343,6 +2343,9 @@ MQ Deku Tree Wonder Item 4,                                 wonder,         NONE
 MQ Deku Tree Main Room 2nd Floor Crate,                     crate,          NONE,                 DEKU_TREE,                      0x0001c,                    RUPEE_GREEN
 MQ Deku Tree Slingshot Room Large Crate 1,                  crate,          NONE,                 DEKU_TREE,                      0x00a10,                    RUPEE_GREEN
 MQ Deku Tree Slingshot Room Large Crate 2,                  crate,          NONE,                 DEKU_TREE,                      0x00a11,                    RUPEE_GREEN
+MQ Deku Tree Boulder 1,                                     boulder,        NONE,                 DEKU_TREE,                      0x00214,                    NOTHING
+MQ Deku Tree Boulder 2,                                     boulder,        NONE,                 DEKU_TREE,                      0x00215,                    NOTHING
+MQ Deku Tree Boulder 3,                                     boulder,        NONE,                 DEKU_TREE,                      0x00216,                    NOTHING
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
