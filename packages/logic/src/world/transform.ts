@@ -1521,7 +1521,7 @@ class LogicPassWorldTransform {
   }
 
   private filterChecksBoulders() {
-    this.filterLocationsBool(this.state.settings.shuffleBouldersOot, 'boulder', 'oot');
+    this.filterLocations(this.state.settings.shuffleBouldersOot, 'boulder', 'oot');
   }
 
   private filterChecksRedBoulders() {

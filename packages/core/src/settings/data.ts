@@ -892,10 +892,16 @@ export const SETTINGS = [{
   key: 'shuffleBouldersOot',
   name: 'Boulder Drops Shuffle (OoT)',
   category: 'main.shuffle',
-  type: 'boolean',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'all', name: 'All' },
+    { value: 'overworld', name: 'Overworld' },
+    { value: 'dungeons', name: 'Dungeons only' },
+  ],
   description: 'Controls whether or not the regular boulders drop an item when broken (OoT)',
   cond: hasOoT,
-  default: false,
+  default: 'none',
 }, {
   key: 'shuffleRedBouldersOot',
   name: 'Red Boulder Drops Shuffle (OoT)',
