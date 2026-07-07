@@ -910,6 +910,7 @@ Swamp Spider House Soil Gold,                           soil,           NONE,   
 Swamp Spider House Soil Monument Item 1,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0030e,                    RUPEE_BLUE
 Swamp Spider House Soil Monument Item 2,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x1030e,                    RUPEE_BLUE
 Swamp Spider House Soil Monument Item 3,                soil,           NONE,                   SPIDER_HOUSE_SWAMP,           0x2030e,                    RUPEE_BLUE
+Swamp Spider House Boulder,                             boulder,        NONE,                   SPIDER_HOUSE_SWAMP,           0x00312,                    NOTHING
 Path to Mountain Village Big Snowball Lower 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001a,                    NOTHING
 Path to Mountain Village Big Snowball Lower 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002a,                    NOTHING
 Path to Mountain Village Big Snowball Lower 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001e,                    RECOVERY_HEART

@@ -110,5 +110,6 @@
     "Swamp Spider House Soil Monument Item 1": "has_bugs"
     "Swamp Spider House Soil Monument Item 2": "has_bugs"
     "Swamp Spider House Soil Monument Item 3": "has_bugs"
+    "Swamp Spider House Boulder": "can_break_boulders"
   gossip:
     "Swamp Spider House Gossip": "true"
