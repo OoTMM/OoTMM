@@ -28,6 +28,8 @@
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
     "MQ Dodongo Cavern Lobby Scrub Front": "business_scrub(0x1c)"
     "MQ Dodongo Cavern Lobby Scrub Back": "business_scrub(0x1d)"
+    "MQ Dodongo Cavern Boulder Entrance Back 1": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Entrance Back 2": "has_explosives_or_hammer"
   gossip:
     "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
 
@@ -41,6 +43,10 @@
     MQ_DC_OPEN_SKULL: "has_explosives"
     MQ_DC_STAIRCASE_SWITCH: "true"
     DC_MQ_SHORTCUT: "has_explosives_or_hammer || can_use_din"
+  locations:
+    "MQ Dodongo Cavern Boulder Entrance Upper 1": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Entrance Upper 2": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Entrance Upper 3": "has_explosives_or_hammer"
 
 "Dodongo Cavern Staircase Room Lower":
   dungeon: DC
@@ -171,6 +177,7 @@
     "MQ Dodongo Cavern Pot After Miniboss 2": "true"
     "MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1": "true"
     "MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2": "true"
+    "MQ Dodongo Cavern Boulder Deep": "has_explosives_or_hammer"
 
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
@@ -188,6 +195,18 @@
     "MQ Dodongo Cavern Pot Miniboss 3": "true"
     "MQ Dodongo Cavern Pot Miniboss 4": "true"
     "MQ Dodongo Cavern Heart Lizalfos Room": "has_explosives_or_hammer || hookshot_anywhere || climb_anywhere" #In Lower section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
+    "MQ Dodongo Cavern Boulder Lizalfos 01": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 02": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 03": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 04": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 05": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 06": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 07": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 08": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 09": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 10": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 11": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Lizalfos 12": "has_explosives_or_hammer"
 
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
@@ -202,6 +221,8 @@
     "MQ Dodongo Cavern Pot East Corridor 2": "true"
     "MQ Dodongo Cavern Pot East Corridor 3": "true"
     "MQ Dodongo Cavern Pot East Corridor 4": "true"
+    "MQ Dodongo Cavern Boulder Right Corridor Ground": "has_bombflowers || has_explosives_or_hammer"
+    "MQ Dodongo Cavern Boulder Right Corridor Wall": "has_bombflowers || can_use_din"
 
 "Dodongo Cavern Lower Tunnel Side Room":
   dungeon: DC

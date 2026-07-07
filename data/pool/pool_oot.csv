@@ -2430,6 +2430,26 @@ MQ Dodongo Cavern Larve Room Large Crate 5,                 crate,          NONE
 MQ Dodongo Cavern Larve Room Large Crate 6,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0060b,                    RUPEE_GREEN
 MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1,  crate,          NONE,                 DODONGO_CAVERN,                 0x00c0a,                    RUPEE_GREEN
 MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2,  crate,          NONE,                 DODONGO_CAVERN,                 0x00c0b,                    RUPEE_GREEN
+MQ Dodongo Cavern Boulder Entrance Back 1,                  boulder,        NONE,                 DODONGO_CAVERN,                 0x00016,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Back 2,                  boulder,        NONE,                 DODONGO_CAVERN,                 0x00017,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Upper 1,                 boulder,        NONE,                 DODONGO_CAVERN,                 0x00018,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Upper 2,                 boulder,        NONE,                 DODONGO_CAVERN,                 0x00019,                    NOTHING
+MQ Dodongo Cavern Boulder Entrance Upper 3,                 boulder,        NONE,                 DODONGO_CAVERN,                 0x0001a,                    NOTHING
+MQ Dodongo Cavern Boulder Right Corridor Ground,            boulder,        NONE,                 DODONGO_CAVERN,                 0x00118,                    NOTHING
+MQ Dodongo Cavern Boulder Right Corridor Wall,              boulder,        NONE,                 DODONGO_CAVERN,                 0x00119,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 01,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030b,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 02,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030c,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 03,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030d,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 04,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030e,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 05,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x0030f,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 06,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00310,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 07,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00311,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 08,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00312,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 09,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00313,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 10,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00314,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 11,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00315,                    NOTHING
+MQ Dodongo Cavern Boulder Lizalfos 12,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00316,                    NOTHING
+MQ Dodongo Cavern Boulder Deep,                             boulder,        NONE,                 DODONGO_CAVERN,                 0x00c09,                    NOTHING
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
