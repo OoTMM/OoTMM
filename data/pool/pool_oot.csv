@@ -1364,6 +1364,9 @@ Gerudo Valley Crate Child Bottom,                           crate,          NONE
 Gerudo Valley Crate Ledge,                                  crate,          NONE,                 GERUDO_VALLEY,                  0x00026,                    RUPEE_GREEN
 Gerudo Valley Wonder Item Lower,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08028,                    RUPEE_RED
 Gerudo Valley Wonder Item Upper,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08029,                    RUPEE_RED
+Gerudo Valley Boulder Before Bridge 1,                      boulder,        NONE,                 GERUDO_VALLEY,                  0x0801b,                    NOTHING
+Gerudo Valley Boulder Before Bridge 2,                      boulder,        NONE,                 GERUDO_VALLEY,                  0x0801d,                    NOTHING
+Gerudo Valley Boulder After Bridge,                         boulder,        NONE,                 GERUDO_VALLEY,                  0x0801c,                    NOTHING
 Gerudo Valley Red Boulder Before Bridge 1,                  boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08010,                    NOTHING
 Gerudo Valley Red Boulder Before Bridge 2,                  boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08011,                    NOTHING
 Gerudo Valley Red Boulder After Bridge 1,                   boulder-red,    NONE,                 GERUDO_VALLEY,                  0x08012,                    NOTHING
