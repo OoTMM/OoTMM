@@ -202,6 +202,7 @@ const ACTORS_MM = {
   EN_SNOWWD: 0x1d4,
   OBJ_TREE: 0x229,
   OBJ_SWPRIZE: 0x2ae,
+  OBJ_BOMBIWA: 0x092,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -1158,8 +1159,12 @@ function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerOotObjBombiwa(checks: Check[], ra: RoomActor) {
-  const { actor } = ra;
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Boulder', type: 'boulder' });
+}
+
+function actorHandlerMmObjBombiwa(checks: Check[], ra: RoomActor) {
+  const name = (ra.actor.params & 0x100) ? 'Large Boulder' : 'Boulder';
+  checks.push({ roomActor: ra, item: 'NOTHING', name, type: 'boulder' });
 }
 
 function handleWood02(checks: Check[], ra: RoomActor, game: Game) {
@@ -1581,6 +1586,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.EN_SNOWWD]: actorHandlerMmEnSnowwd,
   [ACTORS_MM.OBJ_TREE]: actorHandlerMmObjTree,
   [ACTORS_MM.OBJ_SWPRIZE]: actorHandlerMmObjSwprize,
+  [ACTORS_MM.OBJ_BOMBIWA]: actorHandlerMmObjBombiwa,
 };
 
 const ACTORS_HANDLERS = {
