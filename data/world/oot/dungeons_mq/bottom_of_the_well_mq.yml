@@ -52,6 +52,9 @@
     "MQ Bottom of the Well Wonder Item Main Room Right 2": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Main Room Right 3": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Main Room Right 4": "can_use_slingshot"
+    "MQ Bottom of the Well Boulder Alcove 1": "has_explosives_or_hammer"
+    "MQ Bottom of the Well Boulder Alcove 2": "has_explosives_or_hammer"
+    "MQ Bottom of the Well Boulder Alcove Solo": "has_explosives_or_hammer"
 
 "Bottom of the Well Main Room Center Switch Corner":
   dungeon: BotW

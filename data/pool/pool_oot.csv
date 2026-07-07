@@ -2541,6 +2541,9 @@ MQ Bottom of the Well Wonder Item Side Room 1,              wonder,         NONE
 MQ Bottom of the Well Wonder Item Side Room 2,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00501,                    MAGIC_JAR_LARGE
 MQ Bottom of the Well Wonder Item Side Room 3,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00502,                    ARROWS_30
 MQ Bottom of the Well Wonder Item Side Room 4,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00503,                    FLEXIBLE
+MQ Bottom of the Well Boulder Alcove 1,                     boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00013,                    NOTHING
+MQ Bottom of the Well Boulder Alcove 2,                     boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00014,                    NOTHING
+MQ Bottom of the Well Boulder Alcove Solo,                  boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x0001a,                    NOTHING
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
