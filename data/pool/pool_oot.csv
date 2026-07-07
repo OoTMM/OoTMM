@@ -414,6 +414,10 @@ Death Mountain Trail Cow Grotto Hive,                       hive,           NONE
 Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
+Death Mountain Trail Boulder Child,                         boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0002f,                    NOTHING
+Death Mountain Trail Boulder Lower,                         boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00030,                    NOTHING
+Death Mountain Trail Boulder Middle,                        boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00031,                    NOTHING
+Death Mountain Trail Boulder Upper,                         boulder,        NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00032,                    NOTHING
 Death Mountain Trail Red Boulder Near Lower GS,             boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800a,                    NOTHING
 Death Mountain Trail Red Boulder Lower 1,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800b,                    NOTHING
 Death Mountain Trail Red Boulder Lower 2,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x0800c,                    NOTHING
@@ -460,6 +464,22 @@ Goron Shop Item 5,                                          shop,           NONE
 Goron Shop Item 6,                                          shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
 Goron Shop Item 7,                                          shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
 Goron Shop Item 8,                                          shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
+Goron City Maze Boulder 01,                                 boulder,        NONE,                 GORON_CITY,                     0x0001f,                    NOTHING
+Goron City Maze Boulder 02,                                 boulder,        NONE,                 GORON_CITY,                     0x00020,                    NOTHING
+Goron City Maze Boulder 03,                                 boulder,        NONE,                 GORON_CITY,                     0x00021,                    NOTHING
+Goron City Maze Boulder 04,                                 boulder,        NONE,                 GORON_CITY,                     0x00022,                    NOTHING
+Goron City Maze Boulder 05,                                 boulder,        NONE,                 GORON_CITY,                     0x00023,                    NOTHING
+Goron City Maze Boulder 06,                                 boulder,        NONE,                 GORON_CITY,                     0x00024,                    NOTHING
+Goron City Maze Boulder 07,                                 boulder,        NONE,                 GORON_CITY,                     0x00025,                    NOTHING
+Goron City Maze Boulder 08,                                 boulder,        NONE,                 GORON_CITY,                     0x00026,                    NOTHING
+Goron City Maze Boulder 09,                                 boulder,        NONE,                 GORON_CITY,                     0x00027,                    NOTHING
+Goron City Maze Boulder 10,                                 boulder,        NONE,                 GORON_CITY,                     0x00028,                    NOTHING
+Goron City Boulder Upper 1,                                 boulder,        NONE,                 GORON_CITY,                     0x00316,                    NOTHING
+Goron City Boulder Upper 2,                                 boulder,        NONE,                 GORON_CITY,                     0x00319,                    NOTHING
+Goron City Boulder Upper 3,                                 boulder,        NONE,                 GORON_CITY,                     0x0031a,                    NOTHING
+Goron City Boulder Shortcut 1,                              boulder,        NONE,                 GORON_CITY,                     0x00318,                    NOTHING
+Goron City Boulder Shortcut 2,                              boulder,        NONE,                 GORON_CITY,                     0x0031b,                    NOTHING
+Goron City Boulder Shortcut 3,                              boulder,        NONE,                 GORON_CITY,                     0x0031c,                    NOTHING
 Goron City Red Boulder 1,                                   boulder-red,    NONE,                 GORON_CITY,                     0x00029,                    NOTHING
 Goron City Red Boulder 2,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002d,                    NOTHING
 Goron City Red Boulder 3,                                   boulder-red,    NONE,                 GORON_CITY,                     0x0002a,                    NOTHING
@@ -548,6 +568,9 @@ Death Mountain Crater Rupee Adult 4,                        rupee,          NONE
 Death Mountain Crater Rupee Adult 5,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x48112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 6,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x58112,                    RUPEE_GREEN
 Death Mountain Crater Rupee Adult 7,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x68112,                    RUPEE_RED
+Death Mountain Crater Boulder 1,                            boulder,        NONE,                 DEATH_MOUNTAIN_CRATER,          0x00123,                    NOTHING
+Death Mountain Crater Boulder 2,                            boulder,        NONE,                 DEATH_MOUNTAIN_CRATER,          0x00124,                    NOTHING
+Death Mountain Crater Boulder 3,                            boulder,        NONE,                 DEATH_MOUNTAIN_CRATER,          0x00125,                    NOTHING
 Death Mountain Crater Red Boulder Grotto,                   boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010b,                    NOTHING
 Death Mountain Crater Red Boulder Great Fairy 1,            boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010c,                    NOTHING
 Death Mountain Crater Red Boulder Great Fairy 2,            boulder-red,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x0010d,                    NOTHING

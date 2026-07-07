@@ -37,6 +37,10 @@
     "Death Mountain Trail Rock Circle Rock 6": "true"
     "Death Mountain Trail Rock Circle Rock 7": "true"
     "Death Mountain Trail Rock Circle Rock 8": "true"
+    "Death Mountain Trail Boulder Child": "is_child && has_explosives_or_hammer"
+    "Death Mountain Trail Boulder Lower": "has_explosives_or_hammer"
+    "Death Mountain Trail Boulder Middle": "has_explosives_or_hammer"
+    "Death Mountain Trail Boulder Upper": "has_explosives_or_hammer"
 
 "Death Mountain Trail Soil Fairies":
   region: DEATH_MOUNTAIN_TRAIL
