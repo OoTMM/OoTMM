@@ -914,7 +914,7 @@ export const SETTINGS = [{
     { value: 'dungeons', name: 'Dungeons only' },
   ],
   description: 'Controls whether or not the regular boulders drop an item when broken (MM)',
-  cond: hasOoT,
+  cond: hasMM,
   default: 'none',
 }, {
   key: 'shuffleRedBouldersOot',
