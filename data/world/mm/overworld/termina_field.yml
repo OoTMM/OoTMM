@@ -374,7 +374,7 @@
     "GLOBAL": "true"
     "Termina Field": "true"
   locations:
-    "Termina Field Peahat Grotto": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU)) && is_day"
+    "Termina Field Peahat Grotto": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU) || can_use_slingshot) && is_day"
     "Peahat Grotto Grass 01": "true"
     "Peahat Grotto Grass 02": "true"
     "Peahat Grotto Grass 03": "true"
