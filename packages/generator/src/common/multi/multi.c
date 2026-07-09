@@ -304,7 +304,7 @@ static void Multi_ProcessMessages(void)
         Multi_ProcessMessagesDisconnected();
 }
 
-static int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
+int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
 {
     pkt->seq = gMulti.seqGame++;
     return IPC_Write(pkt, size);
@@ -378,6 +378,7 @@ void Multi_Update(PlayState* play)
     {
         Multi_Resend();
         Multi_QueryWal();
+        Multi_SendPosition(play);
     }
 }
 

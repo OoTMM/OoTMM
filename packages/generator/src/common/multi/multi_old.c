@@ -81,44 +81,6 @@ static u16 GetSceneKey(PlayState* play)
 }
 #endif
 
-static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
-{
-    Player* link;
-    int index;
-    NetMsg* msg;
-
-    /* Find a suitable index */
-    index = -1;
-    for (int i = 0; i < NET_MSG_MAX; ++i)
-    {
-        if (net->msgInSize[i] == 0 && net->msgOutSize[i] == 0)
-        {
-            index = i;
-            break;
-        }
-    }
-    if (index < 0)
-        return;
-
-    /* We have a suitable index, send the message */
-    link = GET_PLAYER(play);
-    if (!link || (link->actor.id != ACTOR_PLAYER))
-        return;
-
-    msg = &net->msgBuffer[index];
-    msg->op = NETMSG_PLAYER_POS;
-    msg->playerPos.frameCount = play->state.frameCount;
-    msg->playerPos.x = (s16)link->actor.world.pos.x;
-    msg->playerPos.y = (s16)link->actor.world.pos.y;
-    msg->playerPos.z = (s16)link->actor.world.pos.z;
-    msg->playerPos.sceneKey = GetSceneKey(play);
-#if defined(GAME_MM)
-    if (play->sceneId == SCE_MM_TEMPLE_STONE_TOWER_INVERTED)
-        msg->playerPos.y *= -1;
-#endif
-    net->msgOutSize[index] = 0x10;
-}
-
 typedef struct
 {
     u16     clientId;

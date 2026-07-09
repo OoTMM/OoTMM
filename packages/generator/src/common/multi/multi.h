@@ -10,6 +10,7 @@
 #define MULTI_OP_WAL            0x02
 #define MULTI_OP_WAL_QUERY      0x03
 #define MULTI_OP_WAL_ACK        0x04
+#define MULTI_OP_POSITION       0x05
 
 #define WAL_ITEM 0x01
 
@@ -98,6 +99,29 @@ typedef struct PACKED
 }
 MultiPacketWalQuery;
 
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+    u8 slot;
+    u8 color;
+    u8 name[8];
+    u16 key;
+    s16 x;
+    s16 y;
+    s16 z;
+}
+MultiPacketPositionIn;
+
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+    u16 key;
+    s16 x;
+    s16 y;
+    s16 z;
+}
+MultiPacketPositionOut;
+
 typedef struct
 {
     u8  isConnected:1;
@@ -112,5 +136,7 @@ MultiState;
 extern MultiState gMulti;
 
 u32 Multi_CRC32(const void* data, int size);
+int Multi_SendPacket(MultiPacketHeader* pkt, u32 size);
+void Multi_SendPosition(PlayState* play);
 
 #endif
