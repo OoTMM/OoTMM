@@ -253,6 +253,13 @@ static int MultiProcessMessage(MultiPacketHeader* pkt, int size)
             return 0;
         MultiPacketWalAckIn* ackPkt = (MultiPacketWalAckIn*)pkt;
         MultiProcessAck(ackPkt);
+        break;
+    case MULTI_OP_POSITION:
+        if (size < sizeof(MultiPacketPositionIn))
+            return 0;
+        MultiPacketPositionIn* posPkt = (MultiPacketPositionIn*)pkt;
+        Multi_UpdateWisp(gPlay, posPkt);
+        break;
     }
 
     return 1;
@@ -380,6 +387,8 @@ void Multi_Update(PlayState* play)
         Multi_QueryWal();
         Multi_SendPosition(play);
     }
+
+    Multi_UpdateWisps();
 }
 
 void Multi_Disconnect(void)
@@ -458,14 +467,4 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
 void Multi_SendSelfItem(s16 gi, s16 flags, u32 key)
 {
     Multi_SendItem(sWorldId, gi, flags, key);
-}
-
-void Multi_ResetWisps(void)
-{
-
-}
-
-void Multi_DrawWisps(PlayState* play)
-{
-
 }

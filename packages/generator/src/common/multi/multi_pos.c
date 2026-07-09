@@ -1,5 +1,19 @@
 #include "multi.h"
 
+#define MAX_WISPS 16
+
+char sWispNames[MAX_WISPS][9];
+u16 sWispIDs[MAX_WISPS];
+u16 sWispColors[MAX_WISPS];
+s16 sWispTargetPosX[MAX_WISPS];
+s16 sWispTargetPosY[MAX_WISPS];
+s16 sWispTargetPosZ[MAX_WISPS];
+u8 sWispTTL[MAX_WISPS];
+
+float sWispCurPosX[MAX_WISPS];
+float sWispCurPosY[MAX_WISPS];
+float sWispCurPosZ[MAX_WISPS];
+
 #if defined(GAME_OOT)
 static u16 Multi_GetSceneKey(PlayState* play)
 {
@@ -66,6 +80,114 @@ static u16 Multi_GetSceneKey(PlayState* play)
     return sceneKey | 0x8000;
 }
 #endif
+
+void Multi_UpdateWisps(void)
+{
+    for (int i = 0; i < MAX_WISPS; ++i)
+    {
+        if (sWispTTL[i])
+        {
+            sWispCurPosX[i] += (float)(sWispTargetPosX[i] - sWispCurPosX[i]) * 0.2f;
+            sWispCurPosY[i] += (float)(sWispTargetPosY[i] - sWispCurPosY[i]) * 0.2f;
+            sWispCurPosZ[i] += (float)(sWispTargetPosZ[i] - sWispCurPosZ[i]) * 0.2f;
+            --sWispTTL[i];
+        }
+    }
+}
+
+static int Multi_GetWispSlot(u16 id)
+{
+    /* Find existing wisp */
+    for (int i = 0; i < MAX_WISPS; ++i)
+    {
+        if (sWispIDs[i] == id && sWispTTL[i])
+            return i;
+    }
+
+    /* Find free slot */
+    for (int i = 0; i < MAX_WISPS; ++i)
+    {
+        if (!sWispTTL[i])
+            return i;
+    }
+
+    return -1;
+}
+
+void Multi_UpdateWisp(PlayState* play, MultiPacketPositionIn* pkt)
+{
+    int slot;
+
+    if (pkt->key != Multi_GetSceneKey(play))
+        return;
+    slot = Multi_GetWispSlot(pkt->id);
+    if (slot < 0)
+        return;
+
+    /* We found valid wisp data */
+    memcpy(sWispNames[slot], pkt->name, sizeof(pkt->name));
+    sWispIDs[slot] = pkt->id;
+    sWispColors[slot] = pkt->color;
+    sWispTargetPosX[slot] = pkt->x;
+    sWispTargetPosY[slot] = pkt->y;
+    sWispTargetPosZ[slot] = pkt->z;
+
+#if defined(GAME_MM)
+    if (play->sceneId == SCE_MM_TEMPLE_STONE_TOWER_INVERTED)
+        sWispTargetPosY[slot] *= -1;
+#endif
+
+    if (!sWispTTL[slot])
+    {
+        sWispCurPosX[slot] = (float)sWispTargetPosX[slot];
+        sWispCurPosY[slot] = (float)sWispTargetPosY[slot];
+        sWispCurPosZ[slot] = (float)sWispTargetPosZ[slot];
+    }
+    sWispTTL[slot] = 50;
+}
+
+void Multi_ResetWisps(void)
+{
+    for (int i = 0; i < MAX_WISPS; ++i)
+    {
+        sWispTTL[i] = 0;
+    }
+}
+
+static const u32 kWispColors[] = {
+    0xff0000cc, 0x00ff00cc, 0x0000ffcc, 0xffff00cc,
+    0xff00ffcc, 0x00ffffcc, 0x000000cc, 0xffffffcc,
+    0x7f0000cc, 0x007f00cc, 0x00007fcc, 0x7f7f00cc,
+    0x7f007fcc, 0x007f7fcc, 0x7f7f7fcc, 0x3f3f3fcc,
+};
+
+static void Multi_DrawWisp(PlayState* play, int slot)
+{
+    OPEN_DISPS(play->state.gfxCtx);
+    Matrix_Translate(sWispCurPosX[slot], sWispCurPosY[slot], sWispCurPosZ[slot], MTXMODE_NEW);
+    Gfx_DrawFlameColor(play, kWispColors[sWispColors[slot] & 0xf], 0.35f, -50.0f);
+    CLOSE_DISPS();
+}
+
+void Multi_DrawWisps(PlayState* play)
+{
+    int started;
+
+    started = 0;
+    for (int i = 0; i < MAX_WISPS; ++i)
+    {
+        if (!sWispTTL[i])
+            continue;
+
+        if (!started)
+        {
+            Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+            started = 1;
+        }
+
+        Multi_DrawWisp(play, i);
+    }
+}
 
 void Multi_SendPosition(PlayState* play)
 {

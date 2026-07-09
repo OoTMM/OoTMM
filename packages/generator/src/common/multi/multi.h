@@ -102,8 +102,8 @@ MultiPacketWalQuery;
 typedef struct PACKED
 {
     MultiPacketHeader header;
-    u8 slot;
-    u8 color;
+    u16 id;
+    u16 color;
     u8 name[8];
     u16 key;
     s16 x;
@@ -138,5 +138,7 @@ extern MultiState gMulti;
 u32 Multi_CRC32(const void* data, int size);
 int Multi_SendPacket(MultiPacketHeader* pkt, u32 size);
 void Multi_SendPosition(PlayState* play);
+void Multi_UpdateWisps(void);
+void Multi_UpdateWisp(PlayState* play, MultiPacketPositionIn* pkt);
 
 #endif
