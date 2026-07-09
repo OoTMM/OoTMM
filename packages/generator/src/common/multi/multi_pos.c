@@ -169,6 +169,68 @@ static void Multi_DrawWisp(PlayState* play, int slot)
     CLOSE_DISPS();
 }
 
+static void Multi_WispsDrawLabel(Gfx** gfxP, PlayState* play, int index)
+{
+    Player* player;
+    int width;
+    Vec3f wisp;
+    Vec3f pos;
+    float invW;
+    int x;
+    int y;
+    float playerDist;
+
+    player = GET_PLAYER(play);
+    if (!player || player->actor.id != ACTOR_PLAYER)
+        return;
+    wisp.x = sWispCurPosX[index];
+    wisp.y = sWispCurPosY[index];
+    wisp.z = sWispCurPosZ[index];
+    playerDist = Math_Vec3f_DistXYZ(&player->actor.world.pos, &wisp);
+    if (playerDist > 200.f)
+        return;
+
+    width = (strlen(sWispNames[index]) * 7 + 1);
+    wisp.y += 55.f;
+    Actor_ProjectPos(play, &wisp, &pos, &invW);
+    pos.x *= invW;
+    pos.y *= invW;
+    pos.z *= invW;
+    if (pos.z <= 0.f)
+        return;
+    pos.x *= pos.z;
+    pos.y *= pos.z;
+    x = ((pos.x + 1.f) * 0.5f) * 320 - width / 2;
+    y = ((-pos.y + 1.f) * 0.5f) * 240;
+
+    if (x < 0 || x + width > 320 || y < 0 || y + 8 > 240) return;
+
+    FontCustom_DrawStr(gfxP, x, y, sWispNames[index]);
+}
+
+static void Multi_WispsDrawLabels(PlayState* play)
+{
+    Gfx* plusOne;
+    Gfx* polyOpaP;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    polyOpaP = POLY_OPA_DISP;
+    plusOne = Gfx_Open(polyOpaP);
+    gSPDisplayList(OVERLAY_DISP++, plusOne);
+
+    FontCustom_Setup(&plusOne);
+    for (int i = 0; i < MAX_WISPS; ++i)
+    {
+        if (sWispTTL[i])
+            Multi_WispsDrawLabel(&plusOne, play, i);
+    }
+
+    gSPEndDisplayList(plusOne++);
+    Gfx_Close(polyOpaP, plusOne);
+    POLY_OPA_DISP = plusOne;
+    CLOSE_DISPS();
+}
+
 void Multi_DrawWisps(PlayState* play)
 {
     int started;
@@ -187,6 +249,9 @@ void Multi_DrawWisps(PlayState* play)
 
         Multi_DrawWisp(play, i);
     }
+
+    if (started)
+        Multi_WispsDrawLabels(play);
 }
 
 void Multi_SendPosition(PlayState* play)
