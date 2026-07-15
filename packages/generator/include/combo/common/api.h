@@ -427,7 +427,6 @@ void PreDraw2(Actor* actor, PlayState* play, int unk);
 #if defined(GAME_OOT)
 Actor* ActorFind(void* actorCtx, s32 actorId, s32 actorCategory);
 void Play_InitEnvironment(PlayState *play, u16 skyboxId);
-extern u8 gFogState;
 void func_800C4F94(Vec3f* pos, u8 level);
 #endif
 
@@ -514,8 +513,6 @@ s32 SysFlashrom_ReadData(void* addr, u32 pageNum, u32 pageCount);
 s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 
 EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
-
-extern u8 gWeatherMode;
 
 void SkinMatrix_Vec3fMtxFMultXYZW(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDest);
 

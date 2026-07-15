@@ -9,4 +9,7 @@
 # include <combo/mm/environment.h>
 #endif
 
+extern u8 gWeatherMode;
+extern u8 gInterruptSongOfStorms;
+
 #endif

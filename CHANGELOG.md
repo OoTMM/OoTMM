@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a vanilla NTSC bug where Song of Storms would sometimes fail to trigger in OoT.
 - Fix a logic issue with Moon butterflies.
 - Fix the silver boulder in Desert Colossus incorrectly giving a shuffled wonder item when broken.
 

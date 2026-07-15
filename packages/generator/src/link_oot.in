@@ -55,7 +55,8 @@ Magic_Refill = 0x80072500;
 ActorRemove = 0x80025648;
 
 Play_InitEnvironment = 0x8009cda0;
-gFogState = 0x800f1640;
+gWeatherMode = 0x800f1640;
+gInterruptSongOfStorms = 0x800f1648;
 
 __osPiTable = 0x8000638c;
 gCartHandle = 0x80006260;

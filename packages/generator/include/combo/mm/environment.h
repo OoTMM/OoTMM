@@ -325,9 +325,7 @@ void func_800FEAB0(void);
 void Environment_NewDay(EnvironmentContext* envCtx);
 
 // Data
-extern u8 gWeatherMode;
 extern u8 gLightConfigAfterUnderwater;
-extern u8 gInterruptSongOfStorms;
 extern u8 gSceneSeqState;
 
 // Bss

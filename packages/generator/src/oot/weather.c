@@ -2,13 +2,13 @@
 
 static void PatchWeather(PlayState* play)
 {
-    gFogState = 0;
+    gWeatherMode = 0;
     if (gSave.age != AGE_ADULT || gSaveContext.sceneSetupId >= 4)
         return;
 
     if (gSave.entrance == ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE)
     {
-        gFogState = 1;
+        gWeatherMode = 1;
         return;
     }
 
@@ -18,7 +18,7 @@ static void PatchWeather(PlayState* play)
         {
         case ENTR_OOT_LON_LON_RANCH_FROM_FIELD:
         case ENTR_OOT_FIELD_FROM_LON_LON_RANCH:
-            gFogState = 2;
+            gWeatherMode = 2;
             return;
         }
     }
@@ -30,7 +30,7 @@ static void PatchWeather(PlayState* play)
         case ENTR_OOT_ZORA_RIVER_FROM_LOST_WOODS:
         case ENTR_OOT_LOST_WOODS_FROM_ZORA_RIVER:
         case 0x019D: /* Zora River from Zora's Domain? */
-            gFogState = 3;
+            gWeatherMode = 3;
             return;
         }
 
@@ -38,7 +38,7 @@ static void PatchWeather(PlayState* play)
         {
         case SCE_OOT_ZORA_DOMAIN:
         case SCE_OOT_ZORA_FOUNTAIN:
-            gFogState = 3;
+            gWeatherMode = 3;
             return;
         }
     }
@@ -56,7 +56,7 @@ static void PatchWeather(PlayState* play)
             case ENTR_OOT_GRAVEYARD_FROM_TEMPLE_SHADOW:
                 break;
             default:
-                gFogState = 5;
+                gWeatherMode = 5;
                 return;
             }
         }
@@ -66,7 +66,7 @@ static void PatchWeather(PlayState* play)
     {
         if (gSave.entrance == ENTR_OOT_LOST_WOODS_FROM_GORON_CITY)
         {
-            gFogState = 2;
+            gWeatherMode = 2;
             return;
         }
 
@@ -82,7 +82,7 @@ static void PatchWeather(PlayState* play)
             case 0x0195: /* Kakariko from Graveyard */
                 break;
             default:
-                gFogState = 2;
+                gWeatherMode = 2;
                 return;
             }
         }
