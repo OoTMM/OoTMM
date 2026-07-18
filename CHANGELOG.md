@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [32.0] - 2026-07-19
+
 ### Added
 
 - Add boulder shuffle for Ocarina of Time and Majora's Mask.
@@ -1769,7 +1771,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v31.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.0...HEAD
+[32.0]: https://github.com/OoTMM/OoTMM/compare/v31.1...v32.0
 [31.1]: https://github.com/OoTMM/OoTMM/compare/v31.0...v31.1
 [31.0]: https://github.com/OoTMM/OoTMM/compare/v30.1...v31.0
 [30.1]: https://github.com/OoTMM/OoTMM/compare/v30.0...v30.1
