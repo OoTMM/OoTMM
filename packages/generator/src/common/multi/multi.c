@@ -426,7 +426,7 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
     pkt.wal.type = WAL_ITEM;
     pkt.to = to;
     pkt.game = GAME_ID;
-    pkt.gi = gi;
+    pkt.gi = comboItemResolve(gPlay, gi);
     pkt.flags = flags;
     pkt.key = key;
 
