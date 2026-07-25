@@ -175,8 +175,8 @@
 #define OV_XFLAG10      0x1a
 #define OV_XFLAG11      0x1b
 
-#define OVF_RENEW             (1 << 2)
-#define OVF_PRECOND           (1 << 3)
+#define OVF_RENEW             (1 << 0)
+#define OVF_PRECOND           (1 << 1)
 
 typedef struct PlayState PlayState;
 

@@ -21,10 +21,11 @@
 
 typedef struct
 {
-    u32 walIndex;
-    char sendBuffer[32];
-    u32 sendBufferChecksum;
-    u8 sendBufferSize;
+    u32     walIndex;
+    char    sendBuffer[32];
+    u32     sendBufferChecksum;
+    u8      sendBufferSize;
+    s16     giSkip[16];
 }
 MultiSave;
 
@@ -33,7 +34,6 @@ typedef struct ALIGNED(16)
     OotCustomSave   oot;
     MmCustomSave    mm;
     MultiSave       multi;
-    s16             netGiSkip[16];
     u16             coins[4];
     u16             ocarinaButtonMaskOot;
     u16             ocarinaButtonMaskMm;

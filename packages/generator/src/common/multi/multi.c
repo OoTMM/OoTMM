@@ -163,12 +163,12 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
         }
         else
         {
-            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
+            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.multi.giSkip); ++i)
             {
-                if (gSharedCustomSave.netGiSkip[i] == gi)
+                if (gSharedCustomSave.multi.giSkip[i] == gi)
                 {
                     isMarked = 1;
-                    gSharedCustomSave.netGiSkip[i] = GI_NONE;
+                    gSharedCustomSave.multi.giSkip[i] = GI_NONE;
                     break;
                 }
             }

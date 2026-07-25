@@ -572,11 +572,11 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
         Mark_Set(play, q->ovType, q->sceneId, q->roomId, q->id);
         if (Config_Flag(CFG_MULTIPLAYER) && (q->ovFlags & OVF_RENEW))
         {
-            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
+            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.multi.giSkip); ++i)
             {
-                if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
+                if (gSharedCustomSave.multi.giSkip[i] == GI_NONE)
                 {
-                    gSharedCustomSave.netGiSkip[i] = o.gi;
+                    gSharedCustomSave.multi.giSkip[i] = o.gi;
                     break;
                 }
             }
