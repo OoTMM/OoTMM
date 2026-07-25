@@ -1,7 +1,4 @@
 import type { Settings } from '@ootmm/core';
-import type { LogicResultWorld } from './pipeline';
-
-import { ItemHelpers } from '@ootmm/core';
 
 export function isEntranceShuffle(settings: Settings) {
   if (settings.erBoss !== 'none')
