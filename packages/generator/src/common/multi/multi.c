@@ -142,8 +142,6 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
         return 1;
     play = gPlay;
 
-    gSave.info.playerData.rupees = 13;
-
     /* The item is for us, we just need to make sure it's safe to get it */
     gi = pkt->gi;
     isMarked = 0;
@@ -199,21 +197,15 @@ static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
 {
     int increment;
 
-    gSave.info.playerData.rupees = 9;
     if (pkt->index != gSharedCustomSave.multi.walIndex)
         return 1;
-
-    gSave.info.playerData.rupees = 10;
-    gSave.info.playerData.rupees = pkt->type;
 
     increment = 0;
     switch (pkt->type)
     {
     case WAL_ITEM:
-        gSave.info.playerData.rupees = 11;
         if (size < sizeof(MultiPacketWalItemIn))
             return 0;
-        gSave.info.playerData.rupees = 12;
         MultiPacketWalItemIn* itemPkt = (MultiPacketWalItemIn*)pkt;
         increment = MultiProcessMessageItemWAL(itemPkt, size);
         break;
@@ -236,16 +228,11 @@ static void MultiProcessAck(MultiPacketWalAckIn* pkt)
 
 static int MultiProcessMessage(MultiPacketHeader* pkt, int size)
 {
-    /* DEBUG */
-    gSave.info.playerData.rupees = 6;
-
     switch (pkt->op)
     {
     case MULTI_OP_WAL:
-        gSave.info.playerData.rupees = 7;
         if (size < sizeof(MultiPacketWalInHeader))
             return 0;
-        gSave.info.playerData.rupees = 8;
         MultiPacketWalInHeader* walPkt = (MultiPacketWalInHeader*)pkt;
         return MultiProcessMessageWAL(walPkt, size);
     case MULTI_OP_WAL_ACK:
@@ -269,14 +256,11 @@ static void Multi_ProcessMessagesConnected(void)
 {
     int size;
 
-    gSave.info.playerData.rupees = 1;
     for (;;)
     {
         size = IPC_Read(sBuffer, sizeof(sBuffer));
         if (size <= 0)
             break;
-
-        gSave.info.playerData.rupees = 2;
 
         if (size < sizeof(MultiPacketHeader))
         {
@@ -284,16 +268,12 @@ static void Multi_ProcessMessagesConnected(void)
             return;
         }
 
-        gSave.info.playerData.rupees = 3;
-
         MultiPacketHeader* pkt = (MultiPacketHeader*)sBuffer;
         if (pkt->seq != gMulti.seqNet++)
         {
             gMulti.isConnected = 0;
             return;
         }
-
-        gSave.info.playerData.rupees = 4;
 
         if (!MultiProcessMessage(pkt, size))
         {
