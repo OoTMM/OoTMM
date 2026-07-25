@@ -124,12 +124,8 @@ MultiPacketPositionOut;
 
 typedef struct
 {
-    u8  isConnected:1;
-    u32 seqGame;
-    u32 seqNet;
     u16 ttl;
     u16 ttlResend;
-    u8  buffer[128];
 }
 MultiState;
 

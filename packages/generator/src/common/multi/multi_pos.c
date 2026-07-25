@@ -1,3 +1,4 @@
+#include <combo/context.h>
 #include "multi.h"
 
 #define MAX_WISPS 16
@@ -259,7 +260,7 @@ void Multi_SendPosition(PlayState* play)
     MultiPacketPositionOut pkt;
     Player* player;
 
-    if (!gMulti.isConnected)
+    if (!gComboCtx.isMultiConnected)
         return;
 
     player = GET_PLAYER(play);

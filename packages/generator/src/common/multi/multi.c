@@ -1,4 +1,5 @@
 #include <combo/mark.h>
+#include <combo/context.h>
 #include "multi.h"
 
 #if defined(GAME_OOT)
@@ -97,9 +98,9 @@ static void Multi_ProcessMessagesDisconnected(void)
     if (pkt->header.seq != 0)
         return;
 
-    gMulti.isConnected = 1;
-    gMulti.seqGame = pkt->seqGame;
-    gMulti.seqNet = pkt->seqNet;
+    gComboCtx.isMultiConnected = 1;
+    gComboCtx.multiSeqGame = pkt->seqGame;
+    gComboCtx.multiSeqNet = pkt->seqNet;
 
     return;
 }
@@ -264,20 +265,20 @@ static void Multi_ProcessMessagesConnected(void)
 
         if (size < sizeof(MultiPacketHeader))
         {
-            gMulti.isConnected = 0;
+            gComboCtx.isMultiConnected = 0;
             return;
         }
 
         MultiPacketHeader* pkt = (MultiPacketHeader*)sBuffer;
-        if (pkt->seq != gMulti.seqNet++)
+        if (pkt->seq != gComboCtx.multiSeqNet++)
         {
-            gMulti.isConnected = 0;
+            gComboCtx.isMultiConnected = 0;
             return;
         }
 
         if (!MultiProcessMessage(pkt, size))
         {
-            gMulti.isConnected = 0;
+            gComboCtx.isMultiConnected = 0;
             return;
         }
     }
@@ -285,7 +286,7 @@ static void Multi_ProcessMessagesConnected(void)
 
 static void Multi_ProcessMessages(void)
 {
-    if (gMulti.isConnected)
+    if (gComboCtx.isMultiConnected)
         Multi_ProcessMessagesConnected();
     else
         Multi_ProcessMessagesDisconnected();
@@ -293,7 +294,7 @@ static void Multi_ProcessMessages(void)
 
 int Multi_SendPacket(MultiPacketHeader* pkt, u32 size)
 {
-    pkt->seq = gMulti.seqGame++;
+    pkt->seq = gComboCtx.multiSeqGame++;
     return IPC_Write(pkt, size);
 }
 
@@ -302,7 +303,7 @@ static void Multi_Resend(void)
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
-    if (!gMulti.isConnected)
+    if (!gComboCtx.isMultiConnected)
         return;
 
     if (!gSharedCustomSave.multi.sendBufferSize)
@@ -335,7 +336,7 @@ static void Multi_QueryWal(void)
     pkt.header.op = MULTI_OP_WAL_QUERY;
     pkt.index = gSharedCustomSave.multi.walIndex;
     if (!Multi_SendPacket(&pkt.header, sizeof(pkt)))
-        gMulti.isConnected = 0;
+        gComboCtx.isMultiConnected = 0;
 }
 
 void Multi_Update(PlayState* play)
@@ -347,13 +348,13 @@ void Multi_Update(PlayState* play)
 
     /* Refresh the IPC state and detect disconnects */
     IPC_Refresh();
-    if (gMulti.isConnected && !IPC_IsConnected())
+    if (gComboCtx.isMultiConnected && !IPC_IsConnected())
     {
-        gMulti.isConnected = 0;
+        gComboCtx.isMultiConnected = 0;
         gMulti.ttl = 0;
     }
 
-    if (!gMulti.isConnected && IPC_IsConnected())
+    if (!gComboCtx.isMultiConnected && IPC_IsConnected())
         Multi_TryConnect();
 
     if (IPC_IsConnected())
@@ -361,7 +362,7 @@ void Multi_Update(PlayState* play)
         Multi_ProcessMessages();
     }
 
-    if (gMulti.isConnected)
+    if (gComboCtx.isMultiConnected)
     {
         Multi_Resend();
         Multi_QueryWal();
@@ -373,7 +374,7 @@ void Multi_Update(PlayState* play)
 
 void Multi_Disconnect(void)
 {
-    gMulti.isConnected = 0;
+    gComboCtx.isMultiConnected = 0;
     gMulti.ttl = 0;
 }
 
@@ -388,19 +389,19 @@ static void Multi_EnsureSendBufferEmpty(void)
             --gMulti.ttl;
 
         IPC_Refresh();
-        if (gMulti.isConnected && !IPC_IsConnected())
+        if (gComboCtx.isMultiConnected && !IPC_IsConnected())
         {
-            gMulti.isConnected = 0;
+            gComboCtx.isMultiConnected = 0;
             gMulti.ttl = 0;
         }
 
-        if (!gMulti.isConnected && IPC_IsConnected())
+        if (!gComboCtx.isMultiConnected && IPC_IsConnected())
             Multi_TryConnect();
 
         if (IPC_IsConnected())
             Multi_ProcessMessages();
 
-        if (gMulti.isConnected)
+        if (gComboCtx.isMultiConnected)
         {
             Multi_Resend();
         }
@@ -415,7 +416,7 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
 
     if (Config_Flag(CFG_MULTIPLAYER))
         Multi_EnsureSendBufferEmpty();
-    else if (!gMulti.isConnected)
+    else if (!gComboCtx.isMultiConnected)
         return;
 
     MultiPacketWalItemOut pkt;
