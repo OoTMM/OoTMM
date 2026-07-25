@@ -27,6 +27,44 @@ EXPORT_SYMBOL(MULTI_WORLD_ID, sWorldId);
 
 ALIGNED(4) static u8 sBuffer[128];
 
+static void Multi_ExportFilename(char* dst)
+{
+    int len;
+    u8 c;
+
+    len = 7;
+    while (len)
+    {
+        if (gSave.info.playerData.playerName[len - 1] != FILENAME_SPACE)
+            break;
+        len--;
+    }
+
+    for (int i = len; i < 8; ++i)
+        dst[i] = 0;
+
+    for (int i = 0; i < len; ++i)
+    {
+        c = (u8)gSave.info.playerData.playerName[i];
+        if (c == FILENAME_DASH)
+            c = '-';
+        else if (c == FILENAME_PERIOD)
+            c = '.';
+        else if (c == FILENAME_SPACE)
+            c = ' ';
+        else if (c >= FILENAME_DIGIT('0') && c <= FILENAME_DIGIT('9'))
+            c = '0' + (c - FILENAME_DIGIT('0'));
+        else if (c >= FILENAME_UPPERCASE('A') && c <= FILENAME_UPPERCASE('Z'))
+            c = 'A' + (c - FILENAME_UPPERCASE('A'));
+        else if (c >= FILENAME_LOWERCASE('a') && c <= FILENAME_LOWERCASE('z'))
+            c = 'a' + (c - FILENAME_LOWERCASE('a'));
+        else
+            c = '_';
+
+        dst[i] = (char)c;
+    }
+}
+
 static int Multi_SendHello(void)
 {
     MultiPacketHelloOut pkt;
@@ -37,14 +75,7 @@ static int Multi_SendHello(void)
     memcpy(pkt.sessionId, sSessionId, sizeof(pkt.sessionId));
     memcpy(pkt.sessionSecret, sSessionSecret, sizeof(pkt.sessionSecret));
     memcpy(pkt.playerId, sPlayerId, sizeof(pkt.playerId));
-    pkt.playerName[0] = 'T';
-    pkt.playerName[1] = 'E';
-    pkt.playerName[2] = 'S';
-    pkt.playerName[3] = 'T';
-    pkt.playerName[4] = 0;
-    pkt.playerName[5] = 0;
-    pkt.playerName[6] = 0;
-    pkt.playerName[7] = 0;
+    Multi_ExportFilename((char*)pkt.playerName);
     pkt.worldId = sWorldId;
     pkt.multi = Config_Flag(CFG_MULTIPLAYER) ? 0x01 : 0x00;
 
