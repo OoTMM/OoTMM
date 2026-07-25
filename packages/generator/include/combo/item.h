@@ -197,6 +197,7 @@ typedef struct ComboItemOverride
 {
     u8  player;
     u8  playerFrom;
+    u8  playerName[8];
     s16 giRaw;
     s16 gi;
     s16 cloakGi;
@@ -268,6 +269,7 @@ s16 comboItemResolve(PlayState* play, s16 gi);
 s16 Item_Progressive(s16 gi, int ovflags);
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q);
+Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q, const char* name);
 
 extern u8 gMaxBombchuOot;
 extern u8 gMaxBombchuMm;

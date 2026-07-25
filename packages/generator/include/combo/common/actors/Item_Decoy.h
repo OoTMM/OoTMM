@@ -14,6 +14,7 @@ typedef struct Actor_ItemDecoy
     s16                 gi;
     u8                  player;
     u8                  playerFrom;
+    u8                  playerName[8];
     s16                 count;
     u16                 timer;
 }

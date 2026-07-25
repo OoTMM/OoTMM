@@ -661,6 +661,11 @@ u8 comboItemType(s16 gi)
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 {
+    return Item_AddWithDecoyNamed(play, q, NULL);
+}
+
+Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q, const char* name)
+{
     int count;
     Actor_ItemDecoy* decoy;
     ComboItemOverride o;
@@ -674,6 +679,10 @@ Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
     decoy->gi = o.gi;
     decoy->player = o.player;
     decoy->playerFrom = o.playerFrom;
+    if (name)
+        memcpy(decoy->playerName, name, sizeof(decoy->playerName));
+    else
+        memset(decoy->playerName, 0, sizeof(decoy->playerName));
     g.decoysCount++;
 
     return decoy;

@@ -1165,6 +1165,7 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
 {
     s16 gi;
     int isNotSelf;
+    char name[9];
 
     isNotSelf = !Item_IsPlayerSelf(o->player);
     if (isNotSelf)
@@ -1181,15 +1182,16 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
     comboTextAppendItemNameEx(b, gi, flags, importance);
     if (isNotSelf)
     {
-        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
+        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, o->player);
         comboTextAppendClearColor(b);
     }
 
-    if (!Item_IsPlayerSelf(o->playerFrom))
-    {
-        comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW "Player ");
-        comboTextAppendNum(b, o->playerFrom);
+    if (o->playerName[0]) {
+        memcpy(name, o->playerName, 8);
+        name[8] = 0;
+        comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW);
+        comboTextAppendStr(b, name);
         comboTextAppendClearColor(b);
     }
 }
