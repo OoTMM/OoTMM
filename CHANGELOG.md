@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix OoT Poes and OoT Big Poes not accounting for the extra bottles on the trade slots.
+
 ## [32.0] - 2026-07-19
 
 ### Added

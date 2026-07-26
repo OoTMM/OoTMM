@@ -9,6 +9,9 @@ void comboToggleSlot(u32 slot);
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 s32 comboIsTradeBottleOot(u8 itemId);
 
+int comboHasFreeBottleOot(void);
+int comboHasFreeBottleMm(void);
+
 #if defined(GAME_OOT)
 void comboRemoveTradeItemAdult(u16 xitemId);
 void comboRemoveTradeItemChild(u16 xitemId);
