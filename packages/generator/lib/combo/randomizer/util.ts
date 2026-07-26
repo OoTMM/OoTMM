@@ -67,6 +67,14 @@ export function gi(settings: Settings, game: Game, item: Item, generic: boolean)
     itemId = 'MM_OCARINA_FAIRY';
   } else if (itemId === 'MM_HOOKSHOT' && settings.shortHookshotMm) {
     itemId = 'MM_HOOKSHOT_SHORT';
+  } else if (itemId === 'OOT_SCALE' && settings.bronzeScale) {
+    itemId = 'OOT_SCALE_BRONZE';
+  } else if (itemId === 'MM_SCALE' && settings.bronzeScale) {
+    itemId = 'MM_SCALE_BRONZE';
+  } else if (itemId === 'OOT_WALLET' && settings.childWallets) {
+    itemId = 'OOT_WALLET';
+  } else if (itemId === 'MM_WALLET' && settings.childWallets) {
+    itemId = 'MM_WALLET';
   } else {
     const subst = ITEMS_SUBSTITUTIONS[itemId];
     if (subst) {

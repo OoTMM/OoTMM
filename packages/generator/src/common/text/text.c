@@ -1066,6 +1066,8 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             break;
         case GI_OOT_WALLET:
         case GI_MM_WALLET:
+        case GI_OOT_WALLET2:
+        case GI_MM_WALLET2:
             itemName = "a " TEXT_C1 "Progressive Wallet";
             ambiguous = !Config_Flag(CFG_SHARED_WALLETS);
             break;
@@ -1074,6 +1076,8 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             break;
         case GI_OOT_SCALE_BRONZE:
         case GI_MM_SCALE_BRONZE:
+        case GI_OOT_SCALE_SILVER:
+        case GI_MM_SCALE_SILVER:
             itemName = "a " TEXT_C1 "Progressive Scale";
             ambiguous = !Config_Flag(CFG_SHARED_SCALES) && Config_Flag(CFG_MM_SCALES);
             break;
@@ -1159,6 +1163,11 @@ void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int f
 void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int flags, int importance)
 {
     s16 gi;
+    int isNotSelf;
+
+    isNotSelf = !Item_IsPlayerSelf(o->player);
+    if (isNotSelf)
+        flags |= TF_PROGRESSIVE;
 
     if (flags & TF_PROGRESSIVE)
         gi = o->giRaw;
@@ -1169,7 +1178,7 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
         gi = o->cloakGi;
 
     comboTextAppendItemNameEx(b, gi, flags, importance);
-    if (!Item_IsPlayerSelf(o->player))
+    if (isNotSelf)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->player);
