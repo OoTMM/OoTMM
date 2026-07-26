@@ -1,34 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/config.h>
-
-static int hasFreeBottleOot(void)
-{
-    for (int i = 0; i < 4; ++i)
-    {
-        if (gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
-            return 1;
-    }
-    if ((gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE)) && gOotExtraItems.bottleAdultSlot == ITEM_OOT_BOTTLE_EMPTY)
-    {
-        return 1;
-    }
-    if ((gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE)) && gOotExtraItems.bottleChildSlot == ITEM_OOT_BOTTLE_EMPTY)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-static int hasFreeBottleMm(void)
-{
-    for (int i = 0; i < 6; ++i)
-    {
-        if (gMmSave.info.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
-            return 1;
-    }
-    return 0;
-}
+#include <combo/inventory.h>
 
 static int canBuyShieldOotRaw(int level)
 {
@@ -121,7 +94,7 @@ int isItemBuyable(s16 gi)
     case GI_OOT_FAIRY:
     case GI_OOT_MILK:
     case GI_OOT_CHATEAU:
-        return hasFreeBottleOot();
+        return comboHasFreeBottleOot();
     case GI_OOT_SHIELD_DEKU:
         return canBuyShieldOot(0);
     case GI_OOT_SHIELD_HYLIAN:
@@ -172,7 +145,7 @@ int isItemBuyable(s16 gi)
     case GI_MM_POE:
     case GI_MM_BIG_POE:
     case GI_MM_BLUE_FIRE:
-        return hasFreeBottleMm();
+        return comboHasFreeBottleMm();
     case GI_MM_SHIELD_DEKU:
         return canBuyShieldMm(0);
     case GI_MM_SHIELD_HERO:
