@@ -410,18 +410,41 @@ static void Multi_EnsureSendBufferEmpty(void)
     }
 }
 
-void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
+static int Multi_BeforeSend(void)
 {
-    u32 token;
-
     if (Config_Flag(CFG_MULTIPLAYER))
         Multi_EnsureSendBufferEmpty();
     else if (!gComboCtx.isMultiConnected)
+        return 0;
+    return 1;
+}
+
+static void Multi_ReliableSendWAL(MultiPacketWalOutHeader* pkt, u32 size)
+{
+    u32 token;
+
+    token = Multi_CRC32(&pkt, sizeof(pkt));
+    pkt->token = token;
+
+    Multi_SendPacket(&pkt->header, size);
+
+    if (Config_Flag(CFG_MULTIPLAYER))
+    {
+        /* Store persistently */
+        memcpy(&gSharedCustomSave.multi.sendBuffer, pkt, size);
+        gSharedCustomSave.multi.sendBufferSize = size;
+        gSharedCustomSave.multi.sendBufferChecksum = pkt->token;
+        gMulti.ttlResend = TTL_RESEND;
+    }
+}
+
+void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
+{
+    if (!Multi_BeforeSend())
         return;
 
     MultiPacketWalItemOut pkt;
     memset(&pkt, 0, sizeof(pkt));
-    pkt.wal.token = 0;
     pkt.wal.header.op = MULTI_OP_WAL;
     pkt.wal.type = WAL_ITEM;
     pkt.to = to;
@@ -430,22 +453,25 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
     pkt.flags = flags;
     pkt.key = key;
 
-    token = Multi_CRC32(&pkt, sizeof(pkt));
-    pkt.wal.token = token;
-
-    Multi_SendPacket(&pkt.wal.header, sizeof(pkt));
-
-    if (Config_Flag(CFG_MULTIPLAYER))
-    {
-        /* Store persistently */
-        memcpy(&gSharedCustomSave.multi.sendBuffer, &pkt, sizeof(pkt));
-        gSharedCustomSave.multi.sendBufferSize = sizeof(pkt);
-        gSharedCustomSave.multi.sendBufferChecksum = token;
-        gMulti.ttlResend = TTL_RESEND;
-    }
+    Multi_ReliableSendWAL(&pkt.wal, sizeof(pkt));
 }
 
 void Multi_SendSelfItem(s16 gi, s16 flags, u32 key)
 {
     Multi_SendItem(sWorldId, gi, flags, key);
+}
+
+void Multi_SendEvent(u32 eventId)
+{
+    if (!Multi_BeforeSend())
+        return;
+
+    MultiPacketWalEventOut pkt;
+    memset(&pkt, 0, sizeof(pkt));
+    pkt.wal.token = 0;
+    pkt.wal.header.op = MULTI_OP_WAL;
+    pkt.wal.type = WAL_EVENT;
+    pkt.eventId = eventId;
+
+    Multi_ReliableSendWAL(&pkt.wal, sizeof(pkt));
 }

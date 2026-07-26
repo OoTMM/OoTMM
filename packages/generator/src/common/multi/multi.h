@@ -12,7 +12,8 @@
 #define MULTI_OP_WAL_ACK        0x04
 #define MULTI_OP_POSITION       0x05
 
-#define WAL_ITEM 0x01
+#define WAL_ITEM    0x01
+#define WAL_EVENT   0x02
 
 typedef struct PACKED
 {
@@ -80,6 +81,13 @@ typedef struct PACKED
     u32 key;
 }
 MultiPacketWalItemOut;
+
+typedef struct PACKED
+{
+    MultiPacketWalOutHeader wal;
+    u32 eventId;
+}
+MultiPacketWalEventOut;
 
 typedef struct PACKED
 {
