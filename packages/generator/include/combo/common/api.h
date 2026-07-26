@@ -124,7 +124,7 @@ void    Flags_SetCollectible(PlayState* play, int flag);
 u32     Flags_GetSwitch(PlayState* play, int flag);
 u32     Flags_SetSwitch(PlayState* play, int flag);
 void    ClearSwitchFlag(PlayState* play, int flag);
-void    SetRoomClear(PlayState* play, int flag);
+void    Flags_SetClear(PlayState* play, int flag);
 s32     Flags_GetClear(PlayState* play, s32 roomNumber);
 
 

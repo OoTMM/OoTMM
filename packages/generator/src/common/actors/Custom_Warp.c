@@ -54,19 +54,19 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, PlayState* play)
     switch (this->base.params)
     {
     case SWITCH_SPRING:
-        comboDungeonSetFlags(DUNGEONID_TEMPLE_SNOWHEAD, DUNGEONCLEARFLAG_EFFECT);
+        Dungeon_SetFlags(DUNGEONID_TEMPLE_SNOWHEAD, DUNGEONCLEARFLAG_EFFECT);
         play->nextEntrance = 0x9a70;
         break;
     case SWITCH_SWAMP_CLEAR:
-        comboDungeonSetFlags(DUNGEONID_TEMPLE_WOODFALL, DUNGEONCLEARFLAG_EFFECT);
+        Dungeon_SetFlags(DUNGEONID_TEMPLE_WOODFALL, DUNGEONCLEARFLAG_EFFECT);
         CustomWarp_Reload();
         break;
     case SWITCH_COAST_CLEAR:
-        comboDungeonSetFlags(DUNGEONID_TEMPLE_GREAT_BAY, DUNGEONCLEARFLAG_EFFECT);
+        Dungeon_SetFlags(DUNGEONID_TEMPLE_GREAT_BAY, DUNGEONCLEARFLAG_EFFECT);
         CustomWarp_Reload();
         break;
     case SWITCH_VALLEY_CLEAR:
-        comboDungeonSetFlags(DUNGEONID_TEMPLE_STONE_TOWER, DUNGEONCLEARFLAG_EFFECT);
+        Dungeon_SetFlags(DUNGEONID_TEMPLE_STONE_TOWER, DUNGEONCLEARFLAG_EFFECT);
         CustomWarp_Reload();
         break;
     case SWITCH_OPEN_MOON:
@@ -148,13 +148,15 @@ ActorProfile CustomWarp_gActorProfile = {
     (ActorFunc)CustomWarp_Draw,
 };
 
-static int dungeonWispEnabled(int wispFlag, int rewardFlag)
+static int dungeonWispEnabled(int dungeonFlag, int rewardFlag)
 {
     if (Config_Flag(CFG_REGION_STATE_FREE))
         return true;
+    if (Config_Flag(CFG_REGION_STATE_DUNGEONS) && dungeonFlag)
+        return true;
     if (Config_Flag(CFG_REGION_STATE_REWARDS) && rewardFlag)
         return true;
-    return wispFlag;
+    return false;
 }
 
 void comboSpawnCustomWarps(PlayState* play)
@@ -167,15 +169,7 @@ void comboSpawnCustomWarps(PlayState* play)
     variable = -1;
 
 #if defined(GAME_MM)
-    if (play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && dungeonWispEnabled(gMiscFlags.wispMmMountain, gMmSave.info.inventory.quest.remainsGoht))
-    {
-        variable = SWITCH_SPRING;
-        x = -1200.f;
-        y = 30.f;
-        z = 600.f;
-    }
-
-    if (play->sceneId == SCE_MM_SOUTHERN_SWAMP && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && dungeonWispEnabled(gMiscFlags.wispMmSwamp, gMmSave.info.inventory.quest.remainsOdolwa))
+    if (play->sceneId == SCE_MM_SOUTHERN_SWAMP && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && dungeonWispEnabled(gMmExtraBoss.dungeon & (1 << 0), gMmSave.info.inventory.quest.remainsOdolwa))
     {
         variable = SWITCH_SWAMP_CLEAR;
         x = -910.f;
@@ -183,7 +177,15 @@ void comboSpawnCustomWarps(PlayState* play)
         z = -550.f;
     }
 
-    if (play->sceneId == SCE_MM_GREAT_BAY_COAST && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && dungeonWispEnabled(gMiscFlags.wispMmOcean, gMmSave.info.inventory.quest.remainsGyorg))
+    if (play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && dungeonWispEnabled(gMmExtraBoss.dungeon & (1 << 1), gMmSave.info.inventory.quest.remainsGoht))
+    {
+        variable = SWITCH_SPRING;
+        x = -1200.f;
+        y = 30.f;
+        z = 600.f;
+    }
+
+    if (play->sceneId == SCE_MM_GREAT_BAY_COAST && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && dungeonWispEnabled(gMmExtraBoss.dungeon & (1 << 2), gMmSave.info.inventory.quest.remainsGyorg))
     {
         variable = SWITCH_COAST_CLEAR;
         x = -3020.f;
@@ -191,7 +193,7 @@ void comboSpawnCustomWarps(PlayState* play)
         z = 3921.f;
     }
 
-    if (play->sceneId == SCE_MM_IKANA_CANYON && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST) && dungeonWispEnabled(gMiscFlags.wispMmValley, gMmSave.info.inventory.quest.remainsTwinmold))
+    if (play->sceneId == SCE_MM_IKANA_CANYON && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST) && dungeonWispEnabled(gMmExtraBoss.dungeon & (1 << 3), gMmSave.info.inventory.quest.remainsTwinmold))
     {
         variable = SWITCH_VALLEY_CLEAR;
         x = -700.f;
@@ -225,7 +227,7 @@ void comboSpawnCustomWarps(PlayState* play)
 #endif
 
 #if defined(GAME_OOT)
-    if (play->sceneId == SCE_OOT_LAKE_HYLIA && gSave.age == AGE_ADULT && dungeonWispEnabled(gMiscFlags.wispOotLake, gOotSave.info.inventory.quest.medallionWater))
+    if (play->sceneId == SCE_OOT_LAKE_HYLIA && gSave.age == AGE_ADULT && dungeonWispEnabled(gMiscFlags.waterBeaten, gOotSave.info.inventory.quest.medallionWater))
     {
         variable = SWITCH_LAKE_HYLIA_WATER;
         x = -850.f;

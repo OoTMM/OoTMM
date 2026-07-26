@@ -449,10 +449,10 @@ extern s8 gPlayerFormItemRestrictions[5][0x72];
 /* Custom */
 typedef struct
 {
-    u8 boss;
+    u8 dungeon;
     u8 bossCycle;
+    u8 boss;
     u8 items;
-    u8 unused;
 }
 MmExtraBoss;
 

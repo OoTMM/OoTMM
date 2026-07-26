@@ -62,10 +62,11 @@ typedef struct PlayState PlayState;
 
 #define DUNGEONCLEARFLAG_BOSS   (1 << 0)
 #define DUNGEONCLEARFLAG_EFFECT (1 << 1)
-#define DUNGEONCLEARFLAG_WISP   (1 << 2)
 
-int comboCurrentDungeon(PlayState *play);
-int comboBossDungeon(int dungeonId);
-void comboDungeonSetFlags(int dungeonId, int flags);
+int Dungeon_Current(PlayState *play);
+int Dungeon_Boss(int dungeonId);
+void Dungeon_SetFlags(int dungeonId, int flags);
+int DungeonBoss_GetFlag(int bossId);
+void DungeonBoss_SetFlag(int bossId);
 
 #endif

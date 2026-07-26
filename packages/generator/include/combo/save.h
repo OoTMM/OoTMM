@@ -102,12 +102,8 @@ void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 # define SAVE_EXTRA_RECORD(type, index) (*((type*)(gOotSave.info.perm[index].raw + 0x10)))
 typedef struct
 {
-    u32 wispMmSwamp:1;
-    u32 wispMmMountain:1;
-    u32 wispMmOcean:1;
-    u32 wispMmValley:1;
-    u32 wispOotLake:1;
-    u32 unused:27;
+    u32 waterBeaten:1;
+    u32 unused:31;
 }
 MiscFlags;
 #endif

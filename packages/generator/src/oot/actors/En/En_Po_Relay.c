@@ -3,7 +3,7 @@
 static int EnPoRelay_GetHeartPieceFlag(PlayState* play, int flag)
 {
     /* Also spawn chest */
-    SetRoomClear(play, 4);
+    Flags_SetClear(play, 4);
     return Flags_GetCollectible(play, flag);
 }
 

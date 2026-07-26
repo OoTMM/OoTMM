@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Change how the region-state wisps are handled when set to "dungeon beaten", ER is no longer required for them to show up.
+
 ### Fixed
 
 - Fix OoT Poes and OoT Big Poes not accounting for the extra bottles on the trade slots.

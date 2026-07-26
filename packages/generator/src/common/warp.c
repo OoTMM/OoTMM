@@ -9,35 +9,15 @@ void comboTriggerWarp(PlayState* play, int bossId)
     int dungeonClearFlags;
     u32 dungeonExit;
 
-#if defined(GAME_MM)
-    /* Flag the actual boss as dead (MM) */
-    switch (bossId)
-    {
-    case BOSSID_ODOLWA:
-        gMmExtraBoss.bossCycle |= (1 << 0);
-        break;
-    case BOSSID_GOHT:
-        gMmExtraBoss.bossCycle |= (1 << 1);
-        break;
-    case BOSSID_GYORG:
-        gMmExtraBoss.bossCycle |= (1 << 2);
-        break;
-    case BOSSID_TWINMOLD:
-        gMmExtraBoss.bossCycle |= (1 << 3);
-        break;
-    }
-#endif
+    /* Flag the boss as dead */
+    DungeonBoss_SetFlag(bossId);
 
     /* Compute shuffled index and set flags */
     dungeonId = (int)gComboConfig.boss[bossId];
     dungeonClearFlags = DUNGEONCLEARFLAG_BOSS;
     if (Config_Flag(CFG_REGION_STATE_DUNGEONS))
-    {
         dungeonClearFlags |= DUNGEONCLEARFLAG_EFFECT;
-        if (Config_Flag(CFG_ER_MAJOR_DUNGEONS))
-            dungeonClearFlags |= DUNGEONCLEARFLAG_WISP;
-    }
-    comboDungeonSetFlags(dungeonId, dungeonClearFlags);
+    Dungeon_SetFlags(dungeonId, dungeonClearFlags);
 
     /* Set entrance - need special case for warp dungeons */
     dungeonExit = gComboConfig.dungeonWarps[dungeonId];

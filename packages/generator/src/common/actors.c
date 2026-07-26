@@ -5,7 +5,7 @@
 void SetRoomClearHook(PlayState* play, u32 flag)
 {
     if (!g.roomEnemyLackSoul)
-        SetRoomClear(play, flag);
+        Flags_SetClear(play, flag);
 }
 
 void Actor_Hyper(Actor* this, PlayState* play, ActorFunc update)

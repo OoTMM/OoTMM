@@ -38,7 +38,7 @@ static int mapDungeonId(PlayState* play, s16 gi)
         return DUNGEONID_TEMPLE_STONE_TOWER;
     case GI_OOT_MAP:
     case GI_MM_MAP:
-        return comboCurrentDungeon(play);
+        return Dungeon_Current(play);
     default:
         return -1;
     }
@@ -78,7 +78,7 @@ static int compassDungeonId(PlayState* play, s16 gi)
         return DUNGEONID_TEMPLE_STONE_TOWER;
     case GI_OOT_COMPASS:
     case GI_MM_COMPASS:
-        return comboCurrentDungeon(play);
+        return Dungeon_Current(play);
     default:
         return -1;
     }
@@ -144,7 +144,7 @@ static void comboTextCompass(char** b, PlayState* play, s16 gi)
         return;
     if (dungeonId == DUNGEONID_TEMPLE_STONE_TOWER)
         dungeonId = DUNGEONID_TEMPLE_STONE_TOWER_INVERTED;
-    bossId = comboBossDungeon(dungeonId);
+    bossId = Dungeon_Boss(dungeonId);
     if (bossId < 0)
         return;
 

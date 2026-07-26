@@ -340,7 +340,7 @@ osSetIntMask = 0x80003cc0;
 
 Sram_CopySave = 0x80090fd0;
 
-SetRoomClear = 0x800206ac;
+Flags_SetClear = 0x800206ac;
 
 Play_GetCamera = 0x8009d2f0;
 PlayStoreFlags = 0x8009d894;
