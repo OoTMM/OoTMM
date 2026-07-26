@@ -43,6 +43,11 @@ int Item_SafeToReceive(PlayState* play)
     if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GROTTO))
         return 0;
 
+#if defined(GAME_OOT)
+    if (link->stateFlags2 & PLAYER_STATE2_CRAWLING)
+        return 0;
+#endif
+
     return 1;
 }
 
