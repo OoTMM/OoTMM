@@ -147,7 +147,7 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
     gi = pkt->gi;
     isMarked = 0;
     needsMark = 0;
-    isSamePlayer = Item_IsPlayerSelf(pkt->from);
+    isSamePlayer = Item_IsPlayerSelf(pkt->wal.from);
     if (isSamePlayer)
     {
         if (!(pkt->flags & OVF_RENEW))
@@ -181,7 +181,7 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
         /* Need to actually give the item */
         if (!Item_SafeToReceive(play) || g.decoysCount)
             return 0;
-        Multi_GiveItem(play, gi, pkt->from, pkt->flags, (char*)pkt->playerName);
+        Multi_GiveItem(play, gi, pkt->wal.from, pkt->flags, (char*)pkt->wal.playerName);
         if (needsMark)
         {
             if (pkt->game)

@@ -65,6 +65,8 @@ typedef struct PACKED
     MultiPacketHeader header;
     u32 index;
     u8 type;
+    u8 from;
+    u8 playerName[8];
 }
 MultiPacketWalInHeader;
 
@@ -82,15 +84,20 @@ MultiPacketWalItemOut;
 typedef struct PACKED
 {
     MultiPacketWalInHeader wal;
-    u8 from;
     u8 to;
     u8 game;
     s16 gi;
     s16 flags;
     u32 key;
-    u8 playerName[8];
 }
 MultiPacketWalItemIn;
+
+typedef struct PACKED
+{
+    MultiPacketWalInHeader wal;
+    u32 eventId;
+}
+MultiPacketWalEventIn;
 
 typedef struct PACKED
 {
