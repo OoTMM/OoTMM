@@ -3,6 +3,8 @@
 #include <combo/player.h>
 #include <combo/draw.h>
 
+#define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1b0) = (h); } while (0)
+
 typedef struct
 {
     u16 npc;
@@ -129,6 +131,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
             return 0;
 
         comboTriggerWarp(play, id);
+        SET_HANDLER(this, Actor_Noop);
     }
     return 0;
 }

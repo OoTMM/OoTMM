@@ -1,19 +1,20 @@
 #include <combo.h>
-#include <combo/souls.h>
-#include <combo/menu.h>
-#include <combo/entrance.h>
-#include <combo/debug.h>
-#include <combo/magic.h>
-#include <combo/config.h>
-#include <combo/global.h>
-#include <combo/dpad.h>
-#include <combo/multi.h>
-#include <combo/context.h>
-#include <combo/dungeon.h>
 #include <combo/audio.h>
-#include <combo/inventory.h>
+#include <combo/config.h>
+#include <combo/context.h>
+#include <combo/debug.h>
+#include <combo/dpad.h>
 #include <combo/draw.h>
+#include <combo/dungeon.h>
+#include <combo/entrance.h>
+#include <combo/global.h>
+#include <combo/inventory.h>
+#include <combo/magic.h>
 #include <combo/mark.h>
+#include <combo/menu.h>
+#include <combo/message.h>
+#include <combo/multi.h>
+#include <combo/souls.h>
 
 PlayState* gPlay;
 
@@ -573,6 +574,7 @@ void Play_MainWrapper(PlayState* play)
         Multi_Disconnect();
 
     Play_Main(play);
+    Message_UpdateBlocking(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
 

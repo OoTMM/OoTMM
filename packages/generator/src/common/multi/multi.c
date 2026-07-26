@@ -1,5 +1,7 @@
 #include <combo/mark.h>
 #include <combo/context.h>
+#include <combo/message.h>
+#include <combo/dungeon.h>
 #include "multi.h"
 
 #if defined(GAME_OOT)
@@ -194,6 +196,76 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
     return 1;
 }
 
+static int Multi_ProcessBossEvent(PlayState* play, int bossId, const char* aName)
+{
+    int dungeonId;
+    char* b;
+    char* start;
+    char name[9];
+
+    /* Check if the boss is already beaten */
+    if (DungeonBoss_GetFlag(bossId))
+        return 1;
+
+    /* Might be too restrictive */
+    if (!Item_SafeToReceive(play) || g.decoysCount)
+        return 0;
+
+    /* Actually trigger the boss & dungeon completion */
+    dungeonId = (int)gComboConfig.boss[bossId];
+    DungeonBoss_SetFlag(bossId);
+    Dungeon_SetFlags(dungeonId, DUNGEONCLEARFLAG_BOSS);
+
+    /* Display a helpful message */
+    memcpy(name, aName, sizeof(name));
+    name[8] = 0;
+    Message_StartBlocking(play);
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.font.msgBuf;
+#else
+    b = play->msgCtx.font.textBuffer.schar;
+#endif
+
+    comboTextAppendHeader(&b);
+    start = b;
+
+    if (name[0]) {
+        comboTextAppendStr(&b, TEXT_COLOR_YELLOW);
+        comboTextAppendStr(&b, name);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " has");
+    } else {
+        comboTextAppendStr(&b, "You have");
+    }
+    comboTextAppendStr(&b, " defeated ");
+    comboTextAppendBossName(&b, bossId, NULL);
+    comboTextAppendStr(&b, "!" TEXT_END);
+    comboTextAutoLineBreaks(start);
+
+    return 1;
+}
+
+static int MultiProcessMessageEventWAL(MultiPacketWalEventIn* pkt, int size)
+{
+    PlayState* play;
+    u8 type;
+
+    if (!Item_IsPlayerSelf(pkt->wal.from))
+        return 1;
+    play = gPlay;
+
+    /* Actually process the event */
+    type = (pkt->eventId >> 24) & 0xff;
+    switch (type)
+    {
+    case MULTI_EVENT_TYPE_BOSS:
+        return Multi_ProcessBossEvent(play, pkt->eventId & 0xff, (char*)pkt->wal.playerName);
+    default:
+        return 1;
+    }
+}
+
 static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
 {
     int increment;
@@ -209,6 +281,12 @@ static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
             return 0;
         MultiPacketWalItemIn* itemPkt = (MultiPacketWalItemIn*)pkt;
         increment = MultiProcessMessageItemWAL(itemPkt, size);
+        break;
+    case WAL_EVENT:
+        if (size < sizeof(MultiPacketWalEventIn))
+            return 0;
+        MultiPacketWalEventIn* eventPkt = (MultiPacketWalEventIn*)pkt;
+        increment = MultiProcessMessageEventWAL(eventPkt, size);
         break;
     }
 

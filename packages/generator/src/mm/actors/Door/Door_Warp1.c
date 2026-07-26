@@ -3,6 +3,8 @@
 #include <combo/player.h>
 #include <combo/draw.h>
 
+#define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1d8) = (h); } while (0)
+
 typedef struct
 {
     s16 gi;
@@ -116,6 +118,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
     if (gMmExtraBoss.items & (1 << data->index))
     {
         comboTriggerWarp(play, id + 8);
+        SET_HANDLER(this, Actor_Noop);
         return 0;
     }
 

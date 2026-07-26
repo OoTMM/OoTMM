@@ -1,22 +1,23 @@
 #include <combo.h>
-#include <combo/mask.h>
-#include <combo/menu.h>
-#include <combo/entrance.h>
-#include <combo/time.h>
+#include <combo/audio.h>
+#include <combo/config.h>
+#include <combo/context.h>
 #include <combo/custom.h>
 #include <combo/debug.h>
-#include <combo/player.h>
-#include <combo/config.h>
-#include <combo/item.h>
-#include <combo/global.h>
-#include <combo/multi.h>
-#include <combo/context.h>
-#include <combo/audio.h>
-#include <combo/inventory.h>
 #include <combo/draw.h>
-#include <actors/Obj_Grass/Obj_Grass.h>
-#include <combo/mm/ocarina.h>
+#include <combo/entrance.h>
+#include <combo/global.h>
+#include <combo/inventory.h>
+#include <combo/item.h>
 #include <combo/mark.h>
+#include <combo/mask.h>
+#include <combo/menu.h>
+#include <combo/message.h>
+#include <combo/mm/ocarina.h>
+#include <combo/multi.h>
+#include <combo/player.h>
+#include <combo/time.h>
+#include <actors/Obj_Grass/Obj_Grass.h>
 
 /* Grass hooks */
 ObjGrass* gObjGrass;
@@ -835,6 +836,7 @@ void Play_MainWrapper(PlayState* play)
         Multi_Disconnect();
 
     Play_Main(play);
+    Message_UpdateBlocking(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);
 
