@@ -405,3 +405,8 @@ int Mark_GetMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 
     return 0;
 }
+
+int Mark_GetQuery(PlayState* play, const ComboItemQuery* q)
+{
+    return Mark_Get(play, q->ovType, q->sceneId, q->roomId, q->id);
+}

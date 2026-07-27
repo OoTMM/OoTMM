@@ -3,6 +3,7 @@
 #include <combo/config.h>
 #include <combo/shop.h>
 #include <combo/actor.h>
+#include <combo/mark.h>
 
 static u16 kTingleMaps[] = {
     GI_MM_WORLD_MAP_CLOCK_TOWN,
@@ -54,7 +55,7 @@ static void EnBal_ItemQuery(ComboItemQuery* q, int mapId)
     q->gi = kTingleMaps[mapId];
     q->giRenew = 0;
 
-    if (MM_GET_EVENT_WEEK(0x118 + mapId))
+    if (Mark_GetQuery(gPlay, q))
         q->ovFlags |= OVF_RENEW;
 }
 
@@ -65,21 +66,6 @@ static void EnBal_ItemOverride(ComboItemOverride* o, int mapId)
     EnBal_ItemQuery(&q, mapId);
     comboItemOverride(o, &q);
 }
-
-static int EnBal_HasGivenItem(Actor* this, PlayState* play)
-{
-    s16 mapId;
-
-    if (!Actor_HasParentZ(this))
-        return 0;
-
-    mapId = *(s16*)((char*)this + 0x3ac);
-    MM_SET_EVENT_WEEK(0x118 + mapId);
-
-    return 1;
-}
-
-PATCH_CALL(0x80a6352c, EnBal_HasGivenItem);
 
 static void EnBal_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
