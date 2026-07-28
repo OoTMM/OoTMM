@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fix OoT Poes and OoT Big Poes not accounting for the extra bottles on the trade slots.
+- Fix moon gossip stones sometimes hinting non-vanilla masks when item extensions are enabled.
 
 ## [32.0] - 2026-07-19
 
