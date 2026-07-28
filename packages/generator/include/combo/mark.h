@@ -19,6 +19,7 @@ extern u32 gMarkSwitch1;
 #endif
 
 typedef struct PlayState PlayState;
+typedef struct ComboItemQuery ComboItemQuery;
 
 void    Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 void    Mark_SetMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);

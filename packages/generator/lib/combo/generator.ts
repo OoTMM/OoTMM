@@ -109,7 +109,6 @@ export class Generator {
       const sessionSecret = new Uint8Array(8);
       crypto.getRandomValues(sessionId);
       crypto.getRandomValues(sessionSecret);
-      sessionId[15] = 0;
 
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);
@@ -129,6 +128,11 @@ export class Generator {
       }
 
       for (let i = 0; i < patchfiles.length; ++i) {
+        patchfiles[i].meta['mode'] = this.opts.settings.mode;
+        patchfiles[i].meta['worldId'] = i;
+        patchfiles[i].meta['sessionId'] = sessionId.toHex();
+        patchfiles[i].meta['sessionSecret'] = sessionSecret.toHex();
+
         patchfiles[i].addSymbolPatch('MULTI_SESSION_ID', sessionId);
         patchfiles[i].addSymbolPatch('MULTI_SESSION_SECRET', sessionSecret);
       }
