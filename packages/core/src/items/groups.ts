@@ -1,6 +1,6 @@
 import { Items } from './defs';
 
-export const MASKS_REGULAR = new Set([
+export const MASKS_REGULAR_VANILLA_MM = new Set([
   Items.MM_MASK_CAPTAIN,
   Items.MM_MASK_GIANT,
   Items.MM_MASK_ALL_NIGHT,
@@ -21,15 +21,19 @@ export const MASKS_REGULAR = new Set([
   Items.MM_MASK_BLAST,
   Items.MM_MASK_SCENTS,
   Items.MM_MASK_KAFEI,
-  Items.MM_MASK_GERUDO,
-  Items.MM_MASK_SKULL,
-  Items.MM_MASK_SPOOKY,
   Items.SHARED_MASK_TRUTH,
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_KEATON,
   Items.SHARED_MASK_BLAST,
   Items.SHARED_MASK_STONE,
   Items.SHARED_MASK_KAMARO,
+]);
+
+export const MASKS_REGULAR = new Set([
+  ...MASKS_REGULAR_VANILLA_MM,
+  Items.MM_MASK_GERUDO,
+  Items.MM_MASK_SKULL,
+  Items.MM_MASK_SPOOKY,
   Items.SHARED_MASK_GERUDO,
   Items.SHARED_MASK_SKULL,
   Items.SHARED_MASK_SPOOKY,

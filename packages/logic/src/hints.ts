@@ -729,7 +729,7 @@ class LogicPassHints {
   }
 
   private placeMoonGossip(world: number) {
-    for (const mask of ItemGroups.MASKS_REGULAR) {
+    for (const mask of ItemGroups.MASKS_REGULAR_VANILLA_MM) {
       const location = this.findItem(makePlayerItem(mask, world)).loc;
       this.placeGossipItemRegion(world, location, 0, 'moon');
     }
