@@ -240,7 +240,7 @@ static void Triggers_Check(PlayState* play)
     }
 
     /* Saria's Ocarina */
-    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == ENTR_OOT_LOST_WOODS_BRIDGE_FROM_FOREST && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == ENTR_OOT_LOST_WOODS_BRIDGE_FROM_FOREST && !BITMAP8_GET(gSharedCustomSave.oot.npc, NPC_OOT_SARIA_OCARINA))
     {
         Trigger_Set(TRIGGER_OOT_SARIA_OCARINA);
         return;
@@ -320,12 +320,7 @@ static int Triggers_Run(PlayState* play)
         }
         return 0;
     case TRIGGER_OOT_SARIA_OCARINA:
-        if (Triggers_GiveItemNpc(play, GI_OOT_OCARINA_FAIRY, NPC_OOT_SARIA_OCARINA))
-        {
-            SetEventChk(EV_OOT_CHK_SARIA_OCARINA);
-            return 1;
-        }
-        return 0;
+        return Triggers_GiveItemNpc(play, GI_OOT_OCARINA_FAIRY, NPC_OOT_SARIA_OCARINA);
     case TRIGGER_OOT_ZELDA_LIGHT_ARROW:
         if (Triggers_GiveItemNpc(play, GI_OOT_ARROW_LIGHT, NPC_OOT_ZELDA_LIGHT_ARROW))
         {
