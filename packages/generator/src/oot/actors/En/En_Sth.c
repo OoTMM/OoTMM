@@ -27,8 +27,6 @@ void EnSth_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
         break;
     case GI_OOT_RUPEE_HUGE:
         q.id = NPC_OOT_GS_100;
-        if (BITMAP8_GET(gSharedCustomSave.oot.npc, NPC_OOT_GS_100))
-            q.ovType = OV_NONE;
         break;
     }
 
