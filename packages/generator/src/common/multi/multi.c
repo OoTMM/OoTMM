@@ -80,7 +80,6 @@ static int Multi_SendHello(void)
     memcpy(pkt.playerId, sPlayerId, sizeof(pkt.playerId));
     Multi_ExportFilename((char*)pkt.playerName);
     pkt.worldId = sWorldId;
-    pkt.multi = Config_Flag(CFG_MULTIPLAYER) ? 0x01 : 0x00;
 
     return IPC_Write(&pkt, sizeof(pkt));
 }

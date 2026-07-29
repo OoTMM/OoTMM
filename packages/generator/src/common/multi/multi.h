@@ -32,7 +32,6 @@ typedef struct PACKED
     u8  playerId[16];
     u8  playerName[8];
     u8  worldId;
-    u8  multi;
 }
 MultiPacketHelloOut;
 

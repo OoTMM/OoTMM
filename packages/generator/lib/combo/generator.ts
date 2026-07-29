@@ -129,7 +129,7 @@ export class Generator {
 
       for (let i = 0; i < patchfiles.length; ++i) {
         patchfiles[i].meta['mode'] = this.opts.settings.mode;
-        patchfiles[i].meta['worldId'] = i;
+        patchfiles[i].meta['worldId'] = (i + 1);
         patchfiles[i].meta['sessionId'] = sessionId.toHex();
         patchfiles[i].meta['sessionSecret'] = sessionSecret.toHex();
 
@@ -178,7 +178,7 @@ export class Generator {
         for (let team = 0; team < this.opts.settings.teams; ++team) {
           patchfile.multiId = teamsUuids[team];
           const data = await patchfiles[i].serialize();
-          files.push(makeFile({ name: 'Patch', hash: hashFileName, data, mime: 'application/octet-stream', world: playerNumber(i), team: teamNumber(team), ext: 'ootmm' }));
+          files.push(makeFile({ name: 'Patch', hash: hashFileName, data, mime: 'application/vnd.ootmm.patch+zip', world: playerNumber(i), team: teamNumber(team), ext: 'ootmm' }));
         }
       }
     }
