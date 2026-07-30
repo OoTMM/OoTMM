@@ -71,13 +71,7 @@ void EnPoComposer_PlayCurse(EnPoComposer* this, PlayState* play) {
 
     // Song check, check if player just played song of storms or song of healing
     if (play->msgCtx.ocarinaMode == OCARINA_MODE_EVENT) {
-        if (play->msgCtx.ocarinaSong == OCARINA_SONG_HEALING)
-        {
-            this->sharpCsNum = SHARP_CS_SONG_HEALING;
-            EnPoComposerFunc EnPoComposer_SetupStartCutscene = actorAddr(ACTOR_EN_PO_COMPOSER, 0x80bc52d4);
-            EnPoComposer_SetupStartCutscene(this);
-        }
-        else if (Ocarina_CheckSongEventSong(play->msgCtx.ocarinaSong, SONG_EVENT_STORMS_COMPOSER))
+        if (Ocarina_CheckSongEventSong(play->msgCtx.ocarinaSong, SONG_EVENT_STORMS_COMPOSER))
         {
             Ocarina_ClearLastPlayedSong(play);
             this->sharpCsNum = SHARP_CS_SONG_STORMS;
@@ -89,6 +83,12 @@ void EnPoComposer_PlayCurse(EnPoComposer* this, PlayState* play) {
             play->nextEntrance = ((SCE_MM_IKANA_CANYON - 3) << 9) | (14 << 4);
             play->transitionTrigger = TRANS_TRIGGER_START;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
+        }
+        else if (play->msgCtx.ocarinaSong == OCARINA_SONG_HEALING)
+        {
+            this->sharpCsNum = SHARP_CS_SONG_HEALING;
+            EnPoComposerFunc EnPoComposer_SetupStartCutscene = actorAddr(ACTOR_EN_PO_COMPOSER, 0x80bc52d4);
+            EnPoComposer_SetupStartCutscene(this);
         }
     }
 
