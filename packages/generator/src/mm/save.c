@@ -1,5 +1,4 @@
 #include <combo.h>
-#include <combo/net.h>
 #include <combo/config.h>
 #include <combo/inventory.h>
 #include <combo/entrance.h>
@@ -179,9 +178,6 @@ PATCH_CALL(0x80146f10, PrepareSaveAndSave);
 
 void Save_DoSave(PlayState* play, int saveFlags)
 {
-    /* Wait for net */
-    netWaitSave();
-
     /* Mark the save as owl */
     if (saveFlags & SF_OWL)
         gSave.isOwlSave = 1;

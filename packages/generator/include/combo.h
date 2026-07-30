@@ -208,6 +208,10 @@ void LoadMmItemIcon(void* dst, int iconId);
 void Triggers_Update(PlayState* play);
 void Triggers_Reset(void);
 
+void FontCustom_DrawChar(Gfx** gfxP, int x, int y, char c);
+void FontCustom_DrawStr(Gfx** gfxP, int x, int y, const char* str);
+void FontCustom_Setup(Gfx** gfxP);
+
 #else
 # include <combo/asm.h>
 #endif

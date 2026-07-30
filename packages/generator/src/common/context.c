@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/context.h>
 #include <combo/system.h>
+#include <combo/multi.h>
 
 #define MAGIC "OoT+MM<3"
 

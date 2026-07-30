@@ -1,20 +1,20 @@
 #include <combo.h>
-#include <combo/souls.h>
-#include <combo/net.h>
-#include <combo/menu.h>
-#include <combo/entrance.h>
-#include <combo/debug.h>
-#include <combo/magic.h>
-#include <combo/config.h>
-#include <combo/global.h>
-#include <combo/dpad.h>
-#include <combo/multi.h>
-#include <combo/context.h>
-#include <combo/dungeon.h>
 #include <combo/audio.h>
-#include <combo/inventory.h>
+#include <combo/config.h>
+#include <combo/context.h>
+#include <combo/debug.h>
+#include <combo/dpad.h>
 #include <combo/draw.h>
+#include <combo/dungeon.h>
+#include <combo/entrance.h>
+#include <combo/global.h>
+#include <combo/inventory.h>
+#include <combo/magic.h>
 #include <combo/mark.h>
+#include <combo/menu.h>
+#include <combo/message.h>
+#include <combo/multi.h>
+#include <combo/souls.h>
 
 PlayState* gPlay;
 
@@ -123,7 +123,6 @@ static void eventFixes(PlayState* play)
 
 static void sendSelfTriforce(void)
 {
-    NetContext* net;
     int npc;
     s16 gi;
 
@@ -133,17 +132,7 @@ static void sendSelfTriforce(void)
     gi = GI_OOT_TRIFORCE_FULL;
     npc = NPC_OOT_GANON;
 
-    net = netMutexLock();
-    netWaitCmdClear();
-    bzero(&net->cmdOut, sizeof(net->cmdOut));
-    net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
-    net->cmdOut.itemSend.game = 0;
-    net->cmdOut.itemSend.gi = gi;
-    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
-    net->cmdOut.itemSend.flags = 0;
-    netMutexUnlock();
+    Multi_SendSelfItem(gi, 0, ((u32)OV_NPC << 24) | npc);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.oot.npc, npc);
@@ -578,8 +567,14 @@ void Play_MainWrapper(PlayState* play)
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    Multi_Update(play);
+
+    if (gSaveContext.gameMode == GAMEMODE_NORMAL)
+        Multi_Update(play);
+    else
+        Multi_Disconnect();
+
     Play_Main(play);
+    Message_UpdateBlocking(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
 

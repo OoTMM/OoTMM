@@ -1,7 +1,4 @@
 import type { Settings } from '@ootmm/core';
-import type { LogicResultWorld } from './pipeline';
-
-import { ItemHelpers } from '@ootmm/core';
 
 export function isEntranceShuffle(settings: Settings) {
   if (settings.erBoss !== 'none')
@@ -71,15 +68,3 @@ export function mustStartWithMasterSword(settings: Settings) {
   /* Fine */
   return false;
 }
-
-export const isShuffled = (settings: Settings, world: LogicResultWorld, loc: string, dungLocations?: Set<string>) => {
-  const check = world.checks[loc];
-  const item = check.item;
-
-  // Single Item shuffles - 1 each
-  if (ItemHelpers.isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
-    return false;
-  }
-
-  return true;
-};

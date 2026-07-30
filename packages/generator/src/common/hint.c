@@ -3,6 +3,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 #include <combo/hint.h>
+#include <combo/multi.h>
 
 #if defined(GAME_OOT)
 # define HINTS_ADDR 0x03ff1000
@@ -84,7 +85,7 @@ void Hint_Init(void)
 
 void appendPlayer(char** b, u8 player)
 {
-    if (player != 0 && player != 0xff && player != gComboConfig.playerId)
+    if (player != 0 && player != 0xff && player != Multi_WorldID())
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, player);

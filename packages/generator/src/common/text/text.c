@@ -2,6 +2,7 @@
 #include <combo/text.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/multi.h>
 
 typedef struct
 {
@@ -1164,6 +1165,7 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
 {
     s16 gi;
     int isNotSelf;
+    char name[9];
 
     isNotSelf = !Item_IsPlayerSelf(o->player);
     if (isNotSelf)
@@ -1180,15 +1182,16 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
     comboTextAppendItemNameEx(b, gi, flags, importance);
     if (isNotSelf)
     {
-        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
+        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, o->player);
         comboTextAppendClearColor(b);
     }
 
-    if (!Item_IsPlayerSelf(o->playerFrom))
-    {
-        comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW "Player ");
-        comboTextAppendNum(b, o->playerFrom);
+    if (o->playerName[0]) {
+        memcpy(name, o->playerName, 8);
+        name[8] = 0;
+        comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW);
+        comboTextAppendStr(b, name);
         comboTextAppendClearColor(b);
     }
 }
@@ -1219,7 +1222,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     comboTextAppendStr(b, regName->name);
     comboTextAppendClearColor(b);
 
-    if (world != 0 && world != 0xff && world != gComboConfig.playerId)
+    if (world != 0 && world != 0xff && world != Multi_WorldID())
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);
@@ -1248,7 +1251,7 @@ int comboTextAppendCheckName(char** b, u8 checkId, u8 world)
     comboTextAppendStr(b, cn->name);
     comboTextAppendClearColor(b);
 
-    if (world != 0 && world != 0xff && world != gComboConfig.playerId)
+    if (world != 0 && world != 0xff && world != Multi_WorldID())
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);

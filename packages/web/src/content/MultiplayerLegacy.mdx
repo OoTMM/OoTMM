@@ -1,17 +1,13 @@
-# Multiplayer Setup Guide
+# Legacy Multiplayer Setup Guide
 
-*This guide covers the new multiplayer system. If you are looking for the legacy multiplayer system, please see the [Legacy Multiplayer Setup Guide](/multiplayer/legacy).*
-
-OoTMM has extensive multiworld & coop support.
+OoTMM has rudimentary multiworld & coop support.
 
 ## Setup
 
 You'll need to download the following:
 
  * [Project64-EM](https://github.com/OoTMM/Project64-EM/releases/latest)
- * [OoTMM Client](https://github.com/OoTMM/multiplayer/releases/latest)
-
-For the OoTMM client, make sure to download the correct package for your system (right now, only Windows is supported), and make sure it has "client" in the name. The other package is for server operators.
+ * [The Multiworld Client](https://github.com/OoTMM/multi-client/releases/latest)
 
 Make sure to configure Project64-EM like you would for regular Project64.
 In particular, you need to set an Audio plugin and a RSP plugin (both are provided, but you need to select them).
@@ -27,13 +23,12 @@ Each player needs to get their patch file from the player that generated the mul
 
 To start playing and sending/receiving items, you need to do the following:
 
- * Drag and drop the patch file into the OoTMM client (download link above)
+ * Start the multiworld client (download link above)
  * Start Project64-EM
  * Open your multiworld ROM inside Project64-EM
+ * Inside Project64-EM, go to File -> Lua Scripts and start the built-in script called "adapter.lua"
 
 The multiworld client should then acknowledge that you've started playing and you should be able to send/receive items.
-
-**Important note: Unlike the legacy client, the new client does NOT require you to start a Lua script in Project64-EM. The client will automatically handle all communication with the game.**
 
 ## Troubleshooting
 

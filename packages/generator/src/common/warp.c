@@ -2,6 +2,7 @@
 #include <combo/entrance.h>
 #include <combo/dungeon.h>
 #include <combo/config.h>
+#include <combo/multi.h>
 
 void comboTriggerWarp(PlayState* play, int bossId)
 {
@@ -11,6 +12,7 @@ void comboTriggerWarp(PlayState* play, int bossId)
 
     /* Flag the boss as dead */
     DungeonBoss_SetFlag(bossId);
+    Multi_SendEvent(MULTI_EVENT_BOSS(bossId));
 
     /* Compute shuffled index and set flags */
     dungeonId = (int)gComboConfig.boss[bossId];

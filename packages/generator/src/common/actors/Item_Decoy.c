@@ -110,6 +110,7 @@ static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, PlayState* pla
     o.giRaw = this->gi;
     o.player = this->player;
     o.playerFrom = this->playerFrom;
+    memcpy(o.playerName, this->playerName, sizeof(o.playerName));
 
     comboPlayItemFanfare(this->gi, 1);
     this->base.draw = ItemDecoy_Draw;

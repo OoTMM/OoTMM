@@ -1,5 +1,4 @@
 #include <combo.h>
-#include <combo/net.h>
 #include <combo/sr.h>
 #include <combo/dma.h>
 #include <combo/menu.h>
@@ -8,6 +7,7 @@
 #include <combo/global.h>
 #include <combo/context.h>
 #include <combo/hint.h>
+#include <combo/ipc.h>
 
 ComboGlobal g;
 
@@ -31,7 +31,7 @@ void comboInit(void)
     Hint_Init();
     comboInitEntrances();
     comboSilverRupeesInit();
-    netInit();
+    IPC_Init();
     menuInit();
     Debug_Init();
 }

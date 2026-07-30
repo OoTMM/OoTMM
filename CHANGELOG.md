@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Complete overhaul of the multiplayer system, see website for the setup guide and details.
 - Change how the region-state wisps are handled when set to "dungeon beaten", ER is no longer required for them to show up.
 
 ### Fixed

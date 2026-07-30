@@ -3,7 +3,7 @@ import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExac
 
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';
-import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, isShuffled, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
+import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
 import { regionName } from './regions';
@@ -584,11 +584,9 @@ class SpoilerWriter {
       if (this.isMulti) this.writer.indent(`World ${i+1} (${worlds[i].locations.size})`);
       const world = worlds[i];
       const regionNames = new Set(Object.values(world.regions));
-      const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
       for (const region of regionNames) {
         const regionalLocations = Object.keys(world.regions)
           .filter(location => world.regions[location] === region)
-          .filter(location => isShuffled(this.opts.settings, world, location, dungeonLocations))
           .map(loc => `${loc}: ${this.itemNameAt(makeLocation(loc, i)!)}`);
         this.writer.indent(`${regionName(region)} (${regionalLocations.length}):`);
         for (const loc of regionalLocations) {

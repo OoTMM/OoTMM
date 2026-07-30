@@ -3,6 +3,14 @@
 
 #include <combo/gi_data.h>
 
+#if defined(GAME_OOT)
+# define GI_RECOVERY_HEART         GI_OOT_RECOVERY_HEART
+#endif
+
+#if defined(GAME_MM)
+# define GI_RECOVERY_HEART         GI_MM_RECOVERY_HEART
+#endif
+
 #if !defined(__ASSEMBLER__)
 # include <combo/types.h>
 

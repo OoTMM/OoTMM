@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/item.h>
-#include <combo/net.h>
 #include <combo/dma.h>
 #include <combo/entrance.h>
 #include <combo/io.h>
@@ -44,12 +43,17 @@ int Item_SafeToReceive(PlayState* play)
     if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GROTTO))
         return 0;
 
+#if defined(GAME_OOT)
+    if (link->stateFlags2 & PLAYER_STATE2_CRAWLING)
+        return 0;
+#endif
+
     return 1;
 }
 
 int Item_IsPlayerSelf(u8 playerId)
 {
-    if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == gComboConfig.playerId)
+    if (playerId == PLAYER_SELF || playerId == PLAYER_ALL || playerId == Multi_WorldID())
         return 1;
     return 0;
 }
@@ -554,7 +558,6 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
-    NetContext* net;
     int count;
 
     comboItemOverride(&o, q);
@@ -574,11 +577,11 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
         Mark_Set(play, q->ovType, q->sceneId, q->roomId, q->id);
         if (Config_Flag(CFG_MULTIPLAYER) && (q->ovFlags & OVF_RENEW))
         {
-            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
+            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.multi.giSkip); ++i)
             {
-                if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
+                if (gSharedCustomSave.multi.giSkip[i] == GI_NONE)
                 {
-                    gSharedCustomSave.netGiSkip[i] = o.gi;
+                    gSharedCustomSave.multi.giSkip[i] = o.gi;
                     break;
                 }
             }
@@ -586,24 +589,8 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     }
 
     /* Send the item on the network */
-    if (Config_Flag(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
-    {
-        net = netMutexLock();
-        netWaitCmdClear();
-        bzero(&net->cmdOut, sizeof(net->cmdOut));
-        net->cmdOut.op = NET_OP_ITEM_SEND;
-        net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
-        net->cmdOut.itemSend.playerTo = o.player;
-#if defined(GAME_OOT)
-        net->cmdOut.itemSend.game = 0;
-#else
-        net->cmdOut.itemSend.game = 1;
-#endif
-        net->cmdOut.itemSend.gi = comboItemResolve(play, o.gi);
-        net->cmdOut.itemSend.key = makeOverrideKey(q);
-        net->cmdOut.itemSend.flags = (s16)q->ovFlags;
-        netMutexUnlock();
-    }
+    if (q->ovType != OV_NONE)
+        Multi_SendItem(o.player, o.gi, (s16)q->ovFlags, makeOverrideKey(q));
 
     return count;
 }
@@ -679,6 +666,11 @@ u8 comboItemType(s16 gi)
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 {
+    return Item_AddWithDecoyNamed(play, q, NULL);
+}
+
+Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q, const char* name)
+{
     int count;
     Actor_ItemDecoy* decoy;
     ComboItemOverride o;
@@ -692,6 +684,10 @@ Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
     decoy->gi = o.gi;
     decoy->player = o.player;
     decoy->playerFrom = o.playerFrom;
+    if (name)
+        memcpy(decoy->playerName, name, sizeof(decoy->playerName));
+    else
+        memset(decoy->playerName, 0, sizeof(decoy->playerName));
     g.decoysCount++;
 
     return decoy;
