@@ -794,6 +794,7 @@ WaterBox_GetSurfaceImpl = 0x80034908;
 gFrogsSongPtr = 0x80102b50;
 Audio_PlaySfxTransposed = 0x800c5934;
 OnePointCutscene_Init = 0x8006b6fc;
+OnePointCutscene_EndCutscene = 0x8006b9b4;
 Message_UpdateOcarinaMemoryGame = 0x800d5fec;
 Message_ShouldAdvance = 0x800d6110;
 Message_CloseTextbox = 0x800d6218;
@@ -845,3 +846,5 @@ sKaleidoSetupRightPageIndex = 0x800f15d8;
 Audio_PlaySfx_PauseMenuOpenOrClose = 0x800c7200;
 
 Player_InBlockingCsMode = 0x8007938c;
+
+D_8011D3AC = 0x800ef1b4;

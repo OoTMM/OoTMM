@@ -302,6 +302,8 @@ export const CONFVARS = [
   'OOT_HYPER_ENEMIES',
   'MM_HYPER_ENEMIES',
   'OOT_BOW_SLINGSHOT_BREAK_HIVES',
+  'OOT_SKIP_CUTSCENES',
+  'OOT_CUTSCENE_GLITCH_AID',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

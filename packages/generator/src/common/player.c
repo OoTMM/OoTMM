@@ -22,7 +22,7 @@ s32 Play_ApplyPlayerDamage(PlayState *play, Player *this, s32 damage)
 {
     u8 multiplier = 1;
     #if defined(GAME_OOT)
-    if ((this->invincibilityTimer != 0) || (this->actor.type != ACTORCAT_PLAYER))
+    if ((this->invincibilityTimer != 0) || (this->actor.category != ACTORCAT_PLAYER))
     {
         return true;
     }
@@ -53,7 +53,7 @@ s32 Play_ApplyPlayerDamage(PlayState *play, Player *this, s32 damage)
         return true;
     }
 
-    if (this->actor.type != ACTORCAT_PLAYER)
+    if (this->actor.category != ACTORCAT_PLAYER)
     {
         this->actor.colChkInfo.damage = -damage;
         return Actor_ApplyDamage(&this->actor);

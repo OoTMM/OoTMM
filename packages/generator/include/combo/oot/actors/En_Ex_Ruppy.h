@@ -5,7 +5,7 @@
 
 typedef struct Actor_EnExRuppy Actor_EnExRuppy;
 
-typedef void (*EnExRuppyActionFunc)(Actor_EnExRuppy*, PlayState*);
+typedef void (*EnExRuppyActionFunc)(Actor_EnExRuppy *, PlayState *);
 
 struct Actor_EnExRuppy
 {
@@ -19,7 +19,7 @@ struct Actor_EnExRuppy
     /* 0x014A */ s16 unk_15A;
     /* 0x014C */ s16 galleryFlag;
     /* 0x0150 */ f32 unk_160;
-} ;
+};
 
 _Static_assert(sizeof(Actor_EnExRuppy) == 0x0154, "OoT Actor_EnExRuppy size is wrong");
 

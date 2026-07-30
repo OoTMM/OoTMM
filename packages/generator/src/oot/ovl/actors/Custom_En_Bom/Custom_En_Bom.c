@@ -563,8 +563,8 @@ void EnBomMM_Update(Actor* thisx, PlayState* play)
             func_8002829C(play, &effPos, &effVelocity, &dustAccel, &dustColor, &dustColor, 50, 5);
 
             if ((this->collider1.base.acFlags & AC_HIT) ||
-                ((this->collider1.base.ocFlags1 & OC1_HIT) && ((this->collider1.base.oc->type == ACTORCAT_ENEMY) ||
-                                                               (this->collider1.base.oc->type == ACTORCAT_BOSS))))
+                ((this->collider1.base.ocFlags1 & OC1_HIT) && ((this->collider1.base.oc->category == ACTORCAT_ENEMY) ||
+                                                               (this->collider1.base.oc->category == ACTORCAT_BOSS))))
             {
                 this->timer = 0;
                 thisx->shape.rot.z = 0;

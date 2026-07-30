@@ -41,4 +41,7 @@ typedef enum SfxPauseMenu
 } SfxPauseMenu;
 #endif
 
+// Custom
+void Sfx_PlaySuccessChime(void);
+
 #endif

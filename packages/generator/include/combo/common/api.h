@@ -81,6 +81,10 @@ Actor*  Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, float 
 
 #if defined(GAME_OOT)
 Actor*  _Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+
+s16 OnePointCutscene_Init(PlayState* play, s16 csId, s16 timer, Actor* actor, s16 parentCamId);
+
+extern s32 D_8011D3AC;
 #endif
 
 #if defined(GAME_MM)

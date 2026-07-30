@@ -2,7 +2,7 @@ import type { ComponentType } from 'preact';
 import type { IconType } from 'react-icons';
 
 import clsx from 'clsx';
-import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave } from 'react-icons/lu';
+import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave, LuVideo } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';
 import { GeneratorGeneral } from './GeneratorGeneral';
@@ -12,6 +12,7 @@ import { GeneratorItems } from './GeneratorItems';
 import { GeneratorLogic } from './GeneratorLogic';
 import { GeneratorEntrances } from './GeneratorEntrances';
 import { GeneratorAdvanced } from './GeneratorAdvanced';
+import { GeneratorCutscenes } from './GeneratorCutscenes';
 import { useStore } from '@/app/store';
 import { Save } from '../Save';
 
@@ -35,6 +36,7 @@ export function Generator() {
     { name: 'Logic', icon: LuRoute, disabled: isPatch, component: GeneratorLogic },
     { name: 'Entrances', icon: LuCompass, disabled: isPatch || isRandom, component: GeneratorEntrances },
     { name: 'Advanced', icon: LuCpu, disabled: isPatch, component: GeneratorAdvanced },
+    { name: 'Cutscenes', icon: LuVideo, disabled: isPatch || isRandom, component: GeneratorCutscenes },
     { name: 'Cosmetics', icon: LuSparkle, component: CosmeticsEditor },
     { name: 'Data', icon: LuSave, component: Save, bottom: true },
   ]);

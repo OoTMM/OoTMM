@@ -1,0 +1,19 @@
+#include <combo.h>
+
+PATCH_GROUP PG_OOT_SKIP_CUTSCENES
+
+// Speedups DC stairs
+PATCH_START 0x80903eb0
+  lui a3, 0x4000
+PATCH_END
+
+PATCH_START 0x80903ebc
+  lui a1, 0x4100
+  lui a2, 0x4000
+PATCH_END
+
+PATCH_START 0x808b8bac
+  nop
+PATCH_END
+
+PATCH_GROUP_END

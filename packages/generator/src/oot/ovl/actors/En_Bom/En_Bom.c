@@ -254,7 +254,7 @@ void EnBom_Update(EnBom* this, PlayState* play) {
         }
 
         if ((this->bombCollider.base.acFlags & AC_HIT) || ((this->bombCollider.base.ocFlags1 & OC1_HIT) &&
-                                                           (this->bombCollider.base.oc->type == ACTORCAT_ENEMY))) {
+                                                           (this->bombCollider.base.oc->category == ACTORCAT_ENEMY))) {
             this->timer = 0;
             this->actor.shape.rot.z = 0;
         } else {

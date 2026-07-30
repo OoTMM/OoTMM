@@ -109,3 +109,25 @@ PATCH_END
 PATCH_START 0x800efe04
 .short 0xfff
 PATCH_END
+
+.globl _OnePointCutscene_Init
+_OnePointCutscene_Init:
+  addiu sp, -0x48
+  j OnePointCutscene_Init+0x8
+   sw s3, 0x28(sp)
+
+PATCH_START OnePointCutscene_Init
+  j OnePointCutscene_InitHook
+   nop
+PATCH_END
+
+.globl _OnePointCutscene_EndCutscene
+_OnePointCutscene_EndCutscene:
+  sw a1, 0x04(sp)
+  j OnePointCutscene_EndCutscene+0x8
+   sll a1, a1, 0x10
+
+PATCH_START OnePointCutscene_EndCutscene
+  j OnePointCutscene_EndCutsceneHook
+   nop
+PATCH_END

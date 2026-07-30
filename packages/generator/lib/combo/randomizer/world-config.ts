@@ -311,6 +311,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_TELESCOPE_ER: settings.erIndoorsTelescopes,
     OOT_HYPER_ENEMIES: settings.ootHyperEnemies,
     MM_HYPER_ENEMIES: settings.mmHyperEnemies,
+    OOT_SKIP_CUTSCENES: settings.cutsceneSkipOoT,
+    OOT_CUTSCENE_GLITCH_AID: settings.cutsceneGlitchOoT,
   };
 
   for (const v in exprs) {

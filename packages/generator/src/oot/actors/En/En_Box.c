@@ -3,8 +3,9 @@
 #include <combo/csmc.h>
 #include <combo/config.h>
 #include <combo/actor.h>
+#include <combo/oot/actors/En_Box.h>
 
-static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play, s16 gi)
+static void EnBox_ItemQuery(ComboItemQuery *q, Actor *this, PlayState *play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
@@ -21,7 +22,7 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play, s16
     }
 }
 
-static void EnBox_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play, s16 gi)
+static void EnBox_ItemOverride(ComboItemOverride *o, Actor *this, PlayState *play, s16 gi)
 {
     ComboItemQuery q;
 
@@ -29,12 +30,12 @@ static void EnBox_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* pla
     comboItemOverride(o, &q);
 }
 
-static s16 EnBox_GetGI(Actor* this)
+static s16 EnBox_GetGI(Actor *this)
 {
     return -((this->params >> 5) & 0x7f);
 }
 
-void EnBox_GiveItem(Actor* actor, PlayState* play, s16 gi)
+void EnBox_GiveItem(Actor *actor, PlayState *play, s16 gi)
 {
     ComboItemQuery q;
 
@@ -44,7 +45,7 @@ void EnBox_GiveItem(Actor* actor, PlayState* play, s16 gi)
 
 PATCH_CALL(0x808696bc, EnBox_GiveItem);
 
-void EnBox_InitWrapper(Actor* this, PlayState* play)
+void EnBox_InitWrapper(Actor *this, PlayState *play)
 {
     ActorCallback init;
     ComboItemOverride o;
@@ -58,7 +59,7 @@ void EnBox_InitWrapper(Actor* this, PlayState* play)
     csmcChestInit(this, play, o.giRaw, o.cloakGi);
 }
 
-void EnBox_DrawWrapper(Actor* this, PlayState* play)
+void EnBox_DrawWrapper(Actor *this, PlayState *play)
 {
     ActorCallback draw;
     ComboItemOverride o;
@@ -71,3 +72,18 @@ void EnBox_DrawWrapper(Actor* this, PlayState* play)
     draw = actorAddr(ACTOR_EN_BOX, 0x80869e68);
     draw(this, play);
 }
+
+void EnBox_AppearAnimation(EnBox *this, PlayState *play)
+{
+    DynaPoly_EnableCollision(play, &play->colCtx.dyna, this->dyna.bgId);
+    this->appearTimer = 60;
+    this->alpha += 5;
+    this->dyna.actor.world.pos.y = this->dyna.actor.home.pos.y;
+
+    if (this->alpha == 255)
+    {
+        this->actionFunc = actorAddr(ACTOR_EN_BOX, 0x808694c8);
+    }
+}
+
+PATCH_FUNC(0x8086941C, EnBox_AppearAnimation);

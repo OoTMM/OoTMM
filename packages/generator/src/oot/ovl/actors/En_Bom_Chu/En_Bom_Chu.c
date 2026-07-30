@@ -249,7 +249,7 @@ void EnBomChu_Move(EnBomChu* this, PlayState* play) {
     }
 
     if ((this->timer == 0) || (this->collider.base.acFlags & AC_HIT) ||
-        ((this->collider.base.ocFlags1 & OC1_HIT) && (this->collider.base.oc->type != ACTORCAT_PLAYER))) {
+        ((this->collider.base.ocFlags1 & OC1_HIT) && (this->collider.base.oc->category != ACTORCAT_PLAYER))) {
         EnBomChu_Explode(this, play);
         return;
     }

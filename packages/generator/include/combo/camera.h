@@ -2,6 +2,9 @@
 #define COMBO_CAMERA_H
 
 #if defined(GAME_OOT)
+
+#define SUBCAM_NONE -1
+
 typedef enum CameraSettingType {
     /* 0x00 */ CAM_SET_NONE,
     /* 0x01 */ CAM_SET_NORMAL0,

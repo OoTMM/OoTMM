@@ -81,6 +81,7 @@ function asmPatchGroups(world: LogicResultWorld, settings: Settings) {
     MM_JP_LAYOUT_GREAT_BAY_COAST: world.resolvedFlags.jpLayouts.has('GreatBayCoast'),
     MM_KEG_STRENGTH_3: settings.kegStrength3,
     ER_TELESCOPES: settings.erIndoorsTelescopes,
+    OOT_SKIP_CUTSCENES: settings.cutsceneSkipOoT,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

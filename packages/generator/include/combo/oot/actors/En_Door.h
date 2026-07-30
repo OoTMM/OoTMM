@@ -5,7 +5,7 @@
 
 typedef struct Actor_EnDoor Actor_EnDoor;
 
-typedef void (*EnDoorActionFunc)(struct Actor_EnDoor*, PlayState*);
+typedef void (*EnDoorActionFunc)(struct Actor_EnDoor *, PlayState *);
 
 struct Actor_EnDoor
 {

@@ -6,8 +6,8 @@
 
 typedef struct Actor_EnElf Actor_EnElf;
 
-typedef void (*EnElfActionFunc)(Actor_EnElf*, PlayState*);
-typedef void (*EnElfUnkFunc)(Actor_EnElf*, PlayState*);
+typedef void (*EnElfActionFunc)(Actor_EnElf *, PlayState *);
+typedef void (*EnElfUnkFunc)(Actor_EnElf *, PlayState *);
 
 struct Actor_EnElf
 {
@@ -17,12 +17,12 @@ struct Actor_EnElf
     /* 0x01DA */ Vec3s morphTable[15];
     /* 0x0234 */ Color_RGBAf innerColor;
     /* 0x0244 */ Color_RGBAf outerColor;
-    /* 0x0254 */ u8 lightInfoGlow[0x10]; /* LightInfo */
-    /* 0x0264 */ void* lightNodeGlow; /* LightNode */
+    /* 0x0254 */ u8 lightInfoGlow[0x10];   /* LightInfo */
+    /* 0x0264 */ void *lightNodeGlow;      /* LightNode */
     /* 0x0268 */ u8 lightInfoNoGlow[0x10]; /* LightInfo */
-    /* 0x0278 */ void* lightNodeNoGlow; /* LightNode */
+    /* 0x0278 */ void *lightNodeNoGlow;    /* LightNode */
     /* 0x027C */ Vec3f unk_28C;
-    /* 0x0288 */ void* elfMsg; /* ElfMsg */
+    /* 0x0288 */ void *elfMsg; /* ElfMsg */
     /* 0x028C */ f32 unk_29C;
     /* 0x0290 */ f32 unk_2A0;
     /* 0x0294 */ f32 unk_2A4;
@@ -50,8 +50,8 @@ struct Actor_EnElf
     /* 0x02CA */ s16 extendedGiDraw;
 };
 
-void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this);
-void EnElf_Draw(Actor_EnElf* this, PlayState* play);
+void EnElf_ItemQuery(ComboItemQuery *q, Actor_EnElf *this);
+void EnElf_Draw(Actor_EnElf *this, PlayState *play);
 
 _Static_assert(sizeof(Actor_EnElf) == 0x02CC, "OoT Actor_EnElf size is wrong");
 
