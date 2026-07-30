@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix logic mistakenly expecting OoT masks in MM to access the trials.
 - Fix sharp curse not being breakable in song events when the required song is healing.
 - Fix OoT Poes and OoT Big Poes not accounting for the extra bottles on the trade slots.
 - Fix moon gossip stones sometimes hinting non-vanilla masks when item extensions are enabled.
