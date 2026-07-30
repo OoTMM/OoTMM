@@ -7,6 +7,7 @@ import { GeneratorVersions } from './pages/GeneratorVersions';
 import { NotFound } from './pages/NotFound';
 import { Faq } from './pages/Faq';
 import { Multiplayer } from './pages/Multiplayer';
+import { MultiplayerLegacy } from './pages/MultiplayerLegacy';
 import { Layout } from './layout/Layout';
 
 export function App() {
@@ -19,6 +20,7 @@ export function App() {
             <Route path="/gen/:id" component={Generator} />
             <Route path="/" component={Home} />
             <Route path="/faq" component={Faq}/>
+            <Route path="/multiplayer/legacy" component={MultiplayerLegacy} />
             <Route path="/multiplayer" component={Multiplayer} />
             <Route default component={NotFound} />
           </Router>
