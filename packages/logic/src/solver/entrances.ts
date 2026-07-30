@@ -1087,22 +1087,11 @@ class LogicPassEntrances {
     this.worlds = [];
     let changed = false;
 
-    if (this.input.settings.distinctWorlds) {
-      /* Distinct worlds */
-      for (let i = 0; i < this.input.worlds.length; ++i) {
-        const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
-        const result = shuffler.run();
-        this.worlds.push(result.world);
-        changed = changed || result.changed;
-      }
-    } else {
-      /* Shared world */
-      const shuffler = new WorldShuffler(this.input.random, 0, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
+    for (let i = 0; i < this.input.worlds.length; ++i) {
+      const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
       const result = shuffler.run();
-      changed = result.changed;
-      for (let i = 0; i < this.input.worlds.length; ++i) {
-        this.worlds.push(cloneWorld(result.world));
-      }
+      this.worlds.push(result.world);
+      changed = changed || result.changed;
     }
 
     /* Validate */

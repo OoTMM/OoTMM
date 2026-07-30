@@ -174,9 +174,6 @@ class SpoilerWriter {
 
   private writeWorldFlags() {
     let worlds = this.logic.worlds;
-    if (!this.opts.settings.distinctWorlds) {
-      worlds = [this.logic.worlds[0]];
-    }
 
     this.writer.indent('World Flags');
     for (let i = 0; i < worlds.length; ++i) {
@@ -210,9 +207,6 @@ class SpoilerWriter {
 
   private writePreCompleted() {
     let worlds = this.logic.worlds;
-    if (!this.opts.settings.distinctWorlds) {
-      worlds = [this.logic.worlds[0]];
-    }
     if (!worlds.some(world => world.preCompleted.size > 0)) {
       return;
     }
@@ -236,9 +230,6 @@ class SpoilerWriter {
 
   private writeEntrances() {
     let worlds = this.logic.worlds;
-    if (!this.opts.settings.distinctWorlds) {
-      worlds = [this.logic.worlds[0]];
-    }
     if (!worlds.some(world => world.entranceOverrides.size > 0)) {
       return;
     }
@@ -319,10 +310,6 @@ class SpoilerWriter {
 
   private writeSongEvents() {
     let worlds = this.logic.worlds;
-
-    if (!this.opts.settings.distinctWorlds) {
-      worlds = [this.logic.worlds[0]];
-    }
 
     const shouldWriteOot = this.opts.settings.songEventsShuffleOot;
     const shouldWriteMm = this.opts.settings.songEventsShuffleMm;

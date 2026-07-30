@@ -65,14 +65,6 @@ export const SETTINGS = [{
   cond: (x: any) => x.mode !== 'single',
   default: 1
 }, {
-  key: 'distinctWorlds',
-  name: 'Distinct Worlds',
-  category: 'main',
-  type: 'boolean',
-  description: 'For multiworld, with settings that involve randomness, should the worlds have distinct properties (ER, MQ, price rando...).',
-  cond: (x: any) => x.mode === 'multi',
-  default: true
-}, {
   key: 'goal',
   name: 'Goal',
   category: 'main',
@@ -1432,7 +1424,6 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Allow dungeons to be pre-completed depending on rules.<br>Every check in a pre-completed dungeon will be junked, and its boss will be considered defeated, granting clear state access.',
   default: false,
-  cond: (s: any) => (s.mode !== 'multi' || s.distinctWorlds),
 }, {
   key: 'preCompletedDungeonsMajor',
   name: 'Pre-Completed Dungeons (Major)',

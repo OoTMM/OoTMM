@@ -129,15 +129,8 @@ class LogicPassWorld {
     const worlds: World[] = [];
     this.state.monitor.log('Logic: World Building');
 
-    if (this.state.settings.distinctWorlds) {
-      for (let i = 0; i < this.state.settings.players; ++i) {
-        worlds.push(this.createWorld());
-      }
-    } else {
-      const world = this.createWorld();
-      for (let i = 0; i < this.state.settings.players; ++i) {
-        worlds.push(cloneWorld(world));
-      }
+    for (let i = 0; i < this.state.settings.players; ++i) {
+      worlds.push(this.createWorld());
     }
 
     return { worlds };
