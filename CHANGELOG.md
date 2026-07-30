@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed some rusty keys to make them less ambiguous.
+
 ### Fixed
 
 - Fix sharp curse not being breakable in song events when the required song is healing.
