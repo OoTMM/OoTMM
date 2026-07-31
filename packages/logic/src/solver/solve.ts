@@ -22,6 +22,7 @@ class Solver {
       },
       criticalRenewables: new Set(),
       placedCount: 0,
+      log: [],
     };
     this.placers = {
       item: new ItemPlacer(input, this.state),
@@ -34,7 +35,10 @@ class Solver {
 
     for (;;) {
       this.placers.item.run();
+      /* TODO: Break this */
     }
+
+    this.placers.item.finalize();
   }
 }
 

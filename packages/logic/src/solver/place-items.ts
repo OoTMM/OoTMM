@@ -352,6 +352,7 @@ export class ItemPlacer {
 
       if (goal) {
         console.log('DEBUG - GOAL REACHED');
+        console.log(this.state.log);
         process.exit(0);
       }
 
@@ -359,14 +360,16 @@ export class ItemPlacer {
       this.randomPlace(this.state.pools.required);
       return;
     }
+  }
 
+  finalize() {
     /* Nothing else to place, fill with junk */
     this.fillAll();
   }
 
   private placePlando() {
     for (const [loc, pi] of this.input.plandoLocations) {
-      this.place(loc, pi);
+      this.place(loc, pi, false);
     }
   }
 
@@ -374,7 +377,7 @@ export class ItemPlacer {
     for (const loc of this.input.fixedLocations.values()) {
       const locD = locationData(loc);
       const item = makePlayerItem(this.input.worlds[locD.world as number].checks[locD.id].item, locD.world as number);
-      this.place(loc, item);
+      this.place(loc, item, false);
     }
   }
 
@@ -475,7 +478,7 @@ export class ItemPlacer {
       const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checks[locationData(loc).id].item, player)));
       for (const location of locations) {
         const item = pool.pop()!;
-        this.place(location, item);
+        this.place(location, item, false);
         removeItemPools(this.state.pools, item);
       }
     }
@@ -544,7 +547,7 @@ export class ItemPlacer {
       if (region !== 'NONE') {
         locsArray = locsArray.filter(x => locationData(x).world !== locWorld || this.input.worlds[locWorld].regions[locationData(x).id] !== region);
       }
-      this.place(l, pi);
+      this.place(l, pi, false);
       removeItemPools(this.state.pools, pi);
     }
   }
@@ -1014,77 +1017,7 @@ export class ItemPlacer {
   }
 
   private randomPlace(pool: PlayerItems) {
-    if (this.modeValidate) {
-      this.forwardFill(pool);
-    } else {
-      this.randomAssumed(pool);
-    }
-  }
-
-  private forwardFill(pool: PlayerItems) {
-    /* Only used for validation, needs to be fast */
-    const items = countMapArray(pool);
-    let unplacedLocs = [...this.pathfinderState.locations].filter(x => !this.state.items.has(x));
-
-    if (items.length === 0) {
-      const unreachableLocs = this.locations.filter(x => !this.pathfinderState.locations.has(x));
-      throw new LogicError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
-    }
-
-    /* Try to find an item that unlocks at least two locations */
-    let item: PlayerItem | null = null;
-    const availableLocsCount = [...this.pathfinderState.locations].filter(x => !this.state.items.has(x)).length;
-
-    for (const candidate of VALIDATION_CRITICAL_ITEMS) {
-      for (let playerId = 0; playerId < this.input.settings.players; ++playerId) {
-        const pi = makePlayerItem(candidate, 0);
-        if (pool.has(pi)) {
-          item = pi;
-          break;
-        }
-      }
-      if (item)
-        break;
-    }
-
-    if (item && availableLocsCount < 5) {
-      /* We want to place a validation critical item, but there are few locations left */
-
-      for (const pi of pool.keys()) {
-        /* Ignore critical renewables right now */
-        if (ItemHelpers.isItemCriticalRenewable(pi.item)) {
-          continue;
-        }
-
-        /* Pathfind to see how many locations this item unlocks */
-        const assumedItems: PlayerItems = new Map;
-        assumedItems.set(pi, 1);
-        const pathfindState = this.pathfinder.run(null, { recursive: true, items: this.state.items, assumedItems });
-        const newAvailableLocsCount = [...pathfindState.locations].filter(x => !this.state.items.has(x)).length;
-        const netGain = newAvailableLocsCount - availableLocsCount - 1;
-
-        if (netGain > 0) {
-          item = pi;
-          break;
-        }
-      }
-    }
-
-    if (!item) {
-      item = sample(this.input.random, items);
-    }
-
-    if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
-      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
-    }
-
-    if (unplacedLocs.length === 0) {
-      throw new LogicSeedError(`No locations left to place items`);
-    }
-
-    const location = sample(this.input.random, unplacedLocs);
-    this.place(location, item);
-    countMapRemove(pool, item);
+    this.randomAssumed(pool);
   }
 
   private randomAssumed(pool: PlayerItems, opts?: { restrictedLocations?: Set<Location>, forcedItem?: PlayerItem }) {
@@ -1135,7 +1068,7 @@ export class ItemPlacer {
       const location = sample(this.input.random, unplacedLocs);
 
       /* Place the selected item at the selected location */
-      this.place(location, requiredItem);
+      this.place(location, requiredItem, true);
     } else {
       /* Get all remainig locations */
       if (options.restrictedLocations) {
@@ -1157,7 +1090,7 @@ export class ItemPlacer {
           goal = result.goal;
         }
         if (goal) {
-          this.place(loc, requiredItem);
+          this.place(loc, requiredItem, true);
           return;
         }
       }
@@ -1192,7 +1125,7 @@ export class ItemPlacer {
       const locD = locationData(loc);
       const junkPool = isLocationRenewable(this.input.worlds[locD.world as number], loc) ? junkDistributionRenewable : junkDistribution;
       const item = sample(this.input.random, junkPool);
-      this.place(loc, item);
+      this.place(loc, item, false);
     }
   }
 
@@ -1208,11 +1141,11 @@ export class ItemPlacer {
         break;
       }
       const loc = locations.pop()!;
-      this.place(loc, item);
+      this.place(loc, item, false);
     }
   }
 
-  private place(location: Location, item: PlayerItem) {
+  private place(location: Location, item: PlayerItem, log: boolean) {
     const locD = locationData(location);
     const world = this.input.worlds[locD.world as number];
     if (!world.locations.has(locationData(location).id)) {
@@ -1228,6 +1161,14 @@ export class ItemPlacer {
 
     this.state.placedCount++;
     this.input.monitor.setProgress(this.state.placedCount, this.locations.length);
+
+    if (log) {
+      this.state.log.push({
+        type: 'item',
+        location: location,
+        item: item,
+      })
+    }
 
     console.log(`Placed ${item.item.id}@${item.player} at ${locationData(location).id}@${locD.world}`);
   }

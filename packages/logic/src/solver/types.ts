@@ -3,6 +3,9 @@ import type { World } from '../world';
 import type { ItemProperties } from '../item-properties';
 import type { Location, ItemPlacement } from '../types';
 
+export type SolverLogItem = { type: 'item', item: PlayerItem, location: Location };
+export type SolverLogEntry = SolverLogItem;
+
 export type LogicPassSolverState = {
   fixedLocations: Set<Location>;
   worlds: World[];
@@ -30,4 +33,5 @@ export type SolverState = {
   pools: ItemPools;
   criticalRenewables: Set<PlayerItem>;
   placedCount: number;
+  log: SolverLogEntry[];
 };
