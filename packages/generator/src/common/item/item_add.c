@@ -174,6 +174,8 @@ static void reloadSlotEquipsOot(OotItemEquips* equips, int slot)
 void reloadSlotRawOot(int slot)
 {
     reloadSlotEquipsOot(&gOotSave.info.equips, slot);
+    if (slot == ITS_OOT_HAMMER)
+        return;
     reloadSlotEquipsOot(&gOotSave.info.childEquips, slot);
     reloadSlotEquipsOot(&gOotSave.info.adultEquips, slot);
 }
