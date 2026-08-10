@@ -679,7 +679,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SOUL_NPC_CHEST_GAME_OWNER: "Soul of the Fisherman (MM)",
   MM_SOUL_NPC_GORON_SHOPKEEPER: "Soul of the Goron Shopkeeper (MM)",
   MM_SOUL_NPC_HONEY_DARLING: "Soul of Honey & Darling (MM)",
-  MM_SOUL_NPC_TOTO: "Soul of Toto(MM)",
+  MM_SOUL_NPC_TOTO: "Soul of Toto (MM)",
   MM_SOUL_NPC_RUTO: "Soul of Lulu (MM)",
   MM_SOUL_NPC_ZORA_MUSICIANS: "Soul of the Zora Musicians",
   MM_SOUL_NPC_KAFEI: "Soul of Kafei",
