@@ -364,6 +364,11 @@ export const TRICKS: Tricks = {
     name: "MQ Jabu without cow soul",
     tooltip: "Logic can expect you to hit the switches in MQ Jabu-Jabu without needing to possess the cow soul.",
   },
+  OOT_FIRE_TEMPLE_BOSS_DOOR_ROLL_JUMP: {
+    game: 'oot',
+    name: "Roll Jump to Fire Temple Boss Door",
+    tooltip: "Removes the hover boots or the temple climbing requirement to reach the boss door"
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',

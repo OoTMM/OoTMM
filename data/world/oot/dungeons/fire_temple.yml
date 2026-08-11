@@ -11,7 +11,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && has_tunic_goron && (((is_adult || time_travel_at_will) && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && has_tunic_goron && (((is_adult || time_travel_at_will) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || trick(OOT_FIRE_TEMPLE_BOSS_DOOR_ROLL_JUMP))) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
     BOMBS_OR_BOMBCHU: "has_tunic_goron"
   locations:

@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Add a setting to shuffle OoT time flow as a clock item.
 - Add a setting to restore some of the skipped cutscenes in OoT, for glitch purposes.
 - Add a setting to skip most mundane cutscenes in OoT (chests appearing, barred doors opening, etc).
+- Add a trick to skip the Hover Boots or climbing Fire Temple to drop the pillar requirements to reach the boss door.
 
 ### Changed
 

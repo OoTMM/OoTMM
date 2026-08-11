@@ -54,7 +54,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron"
-    "Fire Temple Pre-Boss": "has_tunic_goron && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pre-Boss": "has_tunic_goron && (has_hover_boots || climb_anywhere || hookshot_anywhere || (is_adult && trick(OOT_FIRE_TEMPLE_BOSS_DOOR_ROLL_JUMP)))"
   locations:
     "MQ Fire Temple Pre-Boss Chest": "event(FIRE_MQ_PRE_BOSS_TORCHES)"
     "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1": "has_tunic_goron"
