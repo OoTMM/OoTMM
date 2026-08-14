@@ -1441,21 +1441,21 @@ Great Bay Coast Fisherman Grotto Grass 14,              grass,          NONE,   
 Great Bay Coast Cow Front,                              cow,            NONE,                   GREAT_BAY_COAST,              0x15,                       MILK
 Great Bay Coast Cow Back,                               cow,            NONE,                   GREAT_BAY_COAST,              0x16,                       MILK
 Great Bay Coast Owl Statue,                             npc,            NONE,                   GREAT_BAY_COAST,              OWL_GREAT_BAY,              OWL_GREAT_BAY
-Great Bay Coast Pot Ledge 1,                            pot,            NONE,                   GREAT_BAY_COAST,              0x003d,                     RUPEE_BLUE
-Great Bay Coast Pot Ledge 2,                            pot,            NONE,                   GREAT_BAY_COAST,              0x003e,                     RUPEE_BLUE
-Great Bay Coast Pot Ledge 3,                            pot,            NONE,                   GREAT_BAY_COAST,              0x003f,                     RUPEE_BLUE
-Great Bay Coast Pot 01,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0076,                     RECOVERY_HEART
-Great Bay Coast Pot 02,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0077,                     RECOVERY_HEART
-Great Bay Coast Pot 03,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0078,                     RECOVERY_HEART
-Great Bay Coast Pot 04,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0079,                     RECOVERY_HEART
-Great Bay Coast Pot 05,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x007b,                     MAGIC_JAR_LARGE
-Great Bay Coast Pot 06,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x007c,                     FAIRY
-Great Bay Coast Pot 07,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x007d,                     BOMBS_5
-Great Bay Coast Pot 08,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0080,                     ARROWS_10
-Great Bay Coast Pot 09,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0081,                     ARROWS_10
-Great Bay Coast Pot 10,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0082,                     ARROWS_10
-Great Bay Coast Pot 11,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0083,                     ARROWS_10
-Great Bay Coast Pot 12,                                 pot,            NONE,                   GREAT_BAY_COAST,              0x0085,                     ARROWS_20
+Great Bay Coast Pot 1,                                  pot,            NONE,                   GREAT_BAY_COAST,              0x0077,                     RECOVERY_HEART
+Great Bay Coast Pot 2,                                  pot,            NONE,                   GREAT_BAY_COAST,              0x0081,                     ARROWS_10
+Great Bay Coast Pot Platform 1,                         pot,            NONE,                   GREAT_BAY_COAST,              0x007b,                     MAGIC_JAR_LARGE
+Great Bay Coast Pot Platform 2,                         pot,            NONE,                   GREAT_BAY_COAST,              0x007d,                     BOMBS_5
+Great Bay Coast Pot Platform 3,                         pot,            NONE,                   GREAT_BAY_COAST,              0x007c,                     FAIRY
+Great Bay Coast Pot Platform 4,                         pot,            NONE,                   GREAT_BAY_COAST,              0x0085,                     ARROWS_20
+Great Bay Coast Pot Ledge 1,                            pot,            NONE,                   GREAT_BAY_COAST,              0x0076,                     RECOVERY_HEART
+Great Bay Coast Pot Ledge 2,                            pot,            NONE,                   GREAT_BAY_COAST,              0x0080,                     ARROWS_10
+Great Bay Coast Pot Lower Cliffs 3,                     pot,            NONE,                   GREAT_BAY_COAST,              0x0078,                     RECOVERY_HEART
+Great Bay Coast Pot Lower Cliffs 2,                     pot,            NONE,                   GREAT_BAY_COAST,              0x0079,                     RECOVERY_HEART
+Great Bay Coast Pot Lower Cliffs 4,                     pot,            NONE,                   GREAT_BAY_COAST,              0x0082,                     ARROWS_10
+Great Bay Coast Pot Lower Cliffs 1,                     pot,            NONE,                   GREAT_BAY_COAST,              0x0083,                     ARROWS_10
+Great Bay Coast Pot Upper Cliffs 1,                     pot,            NONE,                   GREAT_BAY_COAST,              0x003d,                     RUPEE_BLUE
+Great Bay Coast Pot Upper Cliffs 2,                     pot,            NONE,                   GREAT_BAY_COAST,              0x003e,                     RUPEE_BLUE
+Great Bay Coast Pot Upper Cliffs 3,                     pot,            NONE,                   GREAT_BAY_COAST,              0x003f,                     RUPEE_BLUE
 Great Bay Coast Grass 1,                                grass,          NONE,                   GREAT_BAY_COAST,              0x0006e,                    RANDOM
 Great Bay Coast Grass 2,                                grass,          NONE,                   GREAT_BAY_COAST,              0x0006f,                    RANDOM
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
@@ -1500,9 +1500,9 @@ Great Bay Coast Rock Sand 2,                            rock,           NONE,   
 Great Bay Coast Rock Sand 3,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00061,                    RANDOM
 Great Bay Coast Rock Sand 4,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00062,                    RANDOM
 Great Bay Coast Rock Sand 5,                            rock,           NONE,                   GREAT_BAY_COAST,              0x00063,                    RANDOM
-Great Bay Coast Rock Ledge 1,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00064,                    RANDOM
-Great Bay Coast Rock Ledge 2,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00065,                    RANDOM
-Great Bay Coast Rock Ledge 3,                           rock,           NONE,                   GREAT_BAY_COAST,              0x00066,                    RANDOM
+Great Bay Coast Rock Cliffs 1,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00064,                    RANDOM
+Great Bay Coast Rock Cliffs 2,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00065,                    RANDOM
+Great Bay Coast Rock Cliffs 3,                          rock,           NONE,                   GREAT_BAY_COAST,              0x00066,                    RANDOM
 Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x04085,                    FAIRY
 Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
 Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
