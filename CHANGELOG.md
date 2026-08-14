@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [32.3] - 2026-08-23
+
+### Changed
+
+- GBC Tingle now accounts for Hookshot and Slingshot in logic.
+
+### Fixed
+
+- Fix logic for most of the pots in Great Bay Coast not checking for the ability to swim.
+- Fix logic for GBC Tingle's photo not checking for the ability to knock him down.
+
 ## [32.2] - 2026-08-21
 
 ### Fixed
@@ -26,8 +37,6 @@ All notable changes to this project will be documented in this file.
 - Fix sharp curse not being breakable in song events when the required song is healing.
 - Fix OoT Poes and OoT Big Poes not accounting for the extra bottles on the trade slots.
 - Fix moon gossip stones sometimes hinting non-vanilla masks when item extensions are enabled.
-- Fix logic for most of the pots in Great Bay Coast not checking for the ability to swim.
-- Fix logic for GBC Tingle's photo not checking for the ability to knock him down.
 - Fix typos in item names on spoiler logs.
 
 ## [32.0] - 2026-07-19
@@ -1797,7 +1806,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.2...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.3...HEAD
+[32.3]: https://github.com/OoTMM/OoTMM/compare/v32.2...v32.3
 [32.2]: https://github.com/OoTMM/OoTMM/compare/v32.1...v32.2
 [32.1]: https://github.com/OoTMM/OoTMM/compare/v32.0...v32.1
 [32.0]: https://github.com/OoTMM/OoTMM/compare/v31.1...v32.0
