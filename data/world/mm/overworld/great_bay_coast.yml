@@ -23,8 +23,8 @@
     "Great Bay Coast Zora Mask": "song_event(7)"
     "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
     "Great Bay Coast Palm Tree Island": "(can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared"
-    "Great Bay Coast Pot 01": "true"
-    "Great Bay Coast Pot 02": "true"
+    "Great Bay Coast Pot 1": "true"
+    "Great Bay Coast Pot 2": "true"
     "Great Bay Coast Grass 1": "true"
     "Great Bay Coast Grass 2": "true"
     "Great Bay Coast Grass 3": "true"
@@ -50,10 +50,10 @@
     "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
   locations:
     "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
-    "Great Bay Coast Pot Lower Cliffs 01": "true"
-    "Great Bay Coast Pot Lower Cliffs 02": "true"
-    "Great Bay Coast Pot Lower Cliffs 03": "true"
-    "Great Bay Coast Pot Lower Cliffs 04": "true"
+    "Great Bay Coast Pot Lower Cliffs 1": "true"
+    "Great Bay Coast Pot Lower Cliffs 2": "true"
+    "Great Bay Coast Pot Lower Cliffs 3": "true"
+    "Great Bay Coast Pot Lower Cliffs 4": "true"
     "Great Bay Coast Pot Upper Cliffs 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Upper Cliffs 2": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Upper Cliffs 3": "can_hookshot || short_hook_anywhere"
@@ -72,8 +72,8 @@
     "Great Bay Coast Fortress": "underwater_walking"
     "Great Bay Coast Near Pinnacle": "true"
   locations:
-    "Great Bay Coast Pot Ledge 01": "can_swim || hookshot_anywhere"
-    "Great Bay Coast Pot Ledge 02": "can_swim || hookshot_anywhere"
+    "Great Bay Coast Pot Ledge 1": "can_swim || hookshot_anywhere"
+    "Great Bay Coast Pot Ledge 2": "can_swim || hookshot_anywhere"
     "Great Bay Coast Rock Water 01": "has_mask_blast && has_iron_boots"
     "Great Bay Coast Rock Water 02": "has_mask_blast && has_iron_boots"
     "Great Bay Coast Rock Water 03": "has_mask_blast && has_iron_boots"
@@ -123,10 +123,10 @@
   events:
     CLEAR_STATE_GREAT_BAY: "wisp_enabled(BOSS_GYORG, REMAINS_GYORG) || event(WISP_CLEAR_STATE_GREAT_BAY)"
   locations:
-    "Great Bay Coast Pot Platform 01": "true"
-    "Great Bay Coast Pot Platform 02": "true"
-    "Great Bay Coast Pot Platform 03": "true"
-    "Great Bay Coast Pot Platform 04": "true"
+    "Great Bay Coast Pot Platform 1": "true"
+    "Great Bay Coast Pot Platform 2": "true"
+    "Great Bay Coast Pot Platform 3": "true"
+    "Great Bay Coast Pot Platform 4": "true"
 
 "Great Bay Coast Butterflies":
   region: GREAT_BAY_COAST
