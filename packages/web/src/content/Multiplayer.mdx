@@ -16,12 +16,25 @@ For the OoTMM client, make sure to download the correct package for your system 
 Make sure to configure Project64-EM like you would for regular Project64.
 In particular, you need to set an Audio plugin and a RSP plugin (both are provided, but you need to select them).
 
-## Creating a Multiworld
+## Creating a Multiplayer Seed
 
-One player needs to create a multiworld using the regular web generator. Be sure to set the Mode option to "Multiworld" and to set the correct amount of players.
-This will generate a set of numbered patch files, one for each player.
+One player needs to create a multiplayer seed using the regular web generator: Be sure to set the Mode option to "Co-Op" or "Multiworld".
 
-## Playing a Multiworld
+### Co-Op
+Co-Op is multiple players sharing a single world.
+
+This will generate a single patch file. This patch file must be distributed to every player.
+
+### Multiworld
+Multiworld is multiple worlds. Be sure to set the "Players" setting; this controls the number of worlds.
+
+This will generate a set of numbered patch files; one for each world. Distribute these patch files amongst players. 
+
+Multiworld automatically supports co-op: if multiple players are given the same patch file, they will share that world.
+
+Ensure that each patch file has been sent to at least one player; an unused patch file is an unused world, which is likely to contain vital items.
+
+## Playing a Multiplayer Seed
 
 Each player needs to get their patch file from the player that generated the multiworld. They can then use the web generator to turn their patch file into an OoTMM ROM.
 
@@ -29,7 +42,7 @@ To start playing and sending/receiving items, you need to do the following:
 
  * Drag and drop the patch file into the OoTMM client (download link above)
  * Start Project64-EM
- * Open your multiworld ROM inside Project64-EM
+ * Open your multiworld OoTMM ROM inside Project64-EM
 
 The multiworld client should then acknowledge that you've started playing and you should be able to send/receive items.
 
