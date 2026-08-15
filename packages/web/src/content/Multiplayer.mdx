@@ -2,11 +2,11 @@
 
 *This guide covers the new multiplayer system. If you are looking for the legacy multiplayer system, please see the [Legacy Multiplayer Setup Guide](/multiplayer/legacy).*
 
-OoTMM has extensive multiworld & coop support.
+OoTMM has extensive multiworld & co-op support.
 
 ## Setup
 
-You'll need to download the following:
+Each player will need to download the following:
 
  * [Project64-EM](https://github.com/OoTMM/Project64-EM/releases/latest)
  * [OoTMM Client](https://github.com/OoTMM/multiplayer/releases/latest)
@@ -16,22 +16,35 @@ For the OoTMM client, make sure to download the correct package for your system 
 Make sure to configure Project64-EM like you would for regular Project64.
 In particular, you need to set an Audio plugin and a RSP plugin (both are provided, but you need to select them).
 
-## Creating a Multiworld
+## Creating a Multiplayer Seed
 
-One player needs to create a multiworld using the regular web generator. Be sure to set the Mode option to "Multiworld" and to set the correct amount of players.
-This will generate a set of numbered patch files, one for each player.
+One player needs to create a multiplayer seed using the regular web generator: be sure to set "Mode" to either "Co-op" or "Multiworld".
 
-## Playing a Multiworld
+### Co-Op
+Co-op is multiple players sharing a single world.
 
-Each player needs to get their patch file from the player that generated the multiworld. They can then use the web generator to turn their patch file into an OoTMM ROM.
+Selecting "Co-op" will generate a single patch file. **This patch file must be distributed to every player.**
 
-To start playing and sending/receiving items, you need to do the following:
+### Multiworld
+Multiworld is multiple worlds. Be sure to set the number of "Players"; this controls the number of worlds.
 
- * Drag and drop the patch file into the OoTMM client (download link above)
+Selecting "Multiworld" will generate a set of numbered patch files; one for each world. **Distribute these patch files amongst players.**
+
+Multiworld automatically supports co-op: if multiple players are given the same patch file, they will share that world as in co-op.
+
+**Ensure that each patch file has been sent to at least one player**; an unused patch file is an unused world - it may contain vital items.
+
+## Playing a Multiplayer Seed
+
+Each player needs to get their patch file from the player that generated the multiworld. **They must then use the web generator to turn their patch file into an OoTMM ROM.**
+
+To start playing and sending/receiving items, each player needs to do the following:
+
+ * Drag and drop the patch file into the OoTMM Client (download link above)
  * Start Project64-EM
- * Open your multiworld ROM inside Project64-EM
+ * Open your multiplayer OoTMM ROM inside Project64-EM
 
-The multiworld client should then acknowledge that you've started playing and you should be able to send/receive items.
+The OoTMM Client should then acknowledge that you've started playing and you should be able to send/receive items.
 
 **Important note: Unlike the legacy client, the new client does NOT require you to start a Lua script in Project64-EM. The client will automatically handle all communication with the game.**
 
