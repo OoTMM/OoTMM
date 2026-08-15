@@ -3,7 +3,7 @@
   exits:
     "GLOBAL": "true"
     "Great Bay Coast Water": "can_swim_or_sink"
-    "Great Bay Coast Ledge": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
+    "Great Bay Coast Cliffs": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "Great Bay Coast Platform": "is_ocean_cleared && can_use_ice_arrows" # Direct access without water
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
@@ -22,19 +22,9 @@
   locations:
     "Great Bay Coast Zora Mask": "song_event(7)"
     "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
-    "Great Bay Coast Palm Tree Island": "(can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared" # Likely too restrictive
-    "Great Bay Coast Pot 01": "true"
-    "Great Bay Coast Pot 02": "true"
-    "Great Bay Coast Pot 03": "true"
-    "Great Bay Coast Pot 04": "true"
-    "Great Bay Coast Pot 05": "true"
-    "Great Bay Coast Pot 06": "true"
-    "Great Bay Coast Pot 07": "true"
-    "Great Bay Coast Pot 08": "true"
-    "Great Bay Coast Pot 09": "true"
-    "Great Bay Coast Pot 10": "true"
-    "Great Bay Coast Pot 11": "true"
-    "Great Bay Coast Pot 12": "true"
+    "Great Bay Coast Palm Tree Island": "(can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared"
+    "Great Bay Coast Pot 1": "true"
+    "Great Bay Coast Pot 2": "true"
     "Great Bay Coast Grass 1": "true"
     "Great Bay Coast Grass 2": "true"
     "Great Bay Coast Grass 3": "true"
@@ -51,7 +41,7 @@
   gossip:
     "Great Bay Coast Gossip": "true"
 
-"Great Bay Coast Ledge":
+"Great Bay Coast Cliffs":
   region: GREAT_BAY_COAST
   exits:
     "GLOBAL": "true"
@@ -60,12 +50,16 @@
     "GBC Near Cow Grotto": "can_hookshot || (trick(MM_GBC_COW_LIKELIKE_ELEVATOR) && soul_like_like && is_night)"
   locations:
     "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
-    "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
-    "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
-    "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
-    "Great Bay Coast Rock Ledge 1": "true"
-    "Great Bay Coast Rock Ledge 2": "true"
-    "Great Bay Coast Rock Ledge 3": "true"
+    "Great Bay Coast Pot Lower Cliffs 1": "true"
+    "Great Bay Coast Pot Lower Cliffs 2": "true"
+    "Great Bay Coast Pot Lower Cliffs 3": "true"
+    "Great Bay Coast Pot Lower Cliffs 4": "true"
+    "Great Bay Coast Pot Upper Cliffs 1": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Upper Cliffs 2": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Upper Cliffs 3": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Rock Cliffs 1": "true"
+    "Great Bay Coast Rock Cliffs 2": "true"
+    "Great Bay Coast Rock Cliffs 3": "true"
     "Great Bay Coast Soil": "(can_hookshot || short_hook_anywhere) && has_bugs"
 
 "Great Bay Coast Water":
@@ -73,11 +67,13 @@
   exits:
     "Great Bay Coast Water Void": "true"
     "Great Bay Coast": "true"
-    "Great Bay Coast Ledge": "true"
+    "Great Bay Coast Cliffs": "true"
     "Great Bay Coast Platform": "can_swim && (!setting(jpLayouts, GreatBayCoast) || has_mask_zora)"
     "Great Bay Coast Fortress": "underwater_walking"
     "Great Bay Coast Near Pinnacle": "true"
   locations:
+    "Great Bay Coast Pot Ledge 1": "can_swim || hookshot_anywhere"
+    "Great Bay Coast Pot Ledge 2": "can_swim || hookshot_anywhere"
     "Great Bay Coast Rock Water 01": "has_mask_blast && has_iron_boots"
     "Great Bay Coast Rock Water 02": "has_mask_blast && has_iron_boots"
     "Great Bay Coast Rock Water 03": "has_mask_blast && has_iron_boots"
@@ -123,8 +119,14 @@
     "Great Bay Coast Water": "can_swim_or_sink"
     "Laboratory": "rusty_key(RUSTY_KEY_LABORATORY)"
     "Owl Great Bay": "true"
+    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && (has_arrows || can_use_slingshot || can_hookshot)"
   events:
     CLEAR_STATE_GREAT_BAY: "wisp_enabled(BOSS_GYORG, REMAINS_GYORG) || event(WISP_CLEAR_STATE_GREAT_BAY)"
+  locations:
+    "Great Bay Coast Pot Platform 1": "true"
+    "Great Bay Coast Pot Platform 2": "true"
+    "Great Bay Coast Pot Platform 3": "true"
+    "Great Bay Coast Pot Platform 4": "true"
 
 "Great Bay Coast Butterflies":
   region: GREAT_BAY_COAST
@@ -152,7 +154,7 @@
   region: GREAT_BAY_COAST
   exits:
     "Great Bay Coast Water": "underwater_walking"
-    "Pirate Fortress": "can_swim"
+    "Pirate Fortress": "can_swim_or_sink"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
 
@@ -191,7 +193,7 @@
   region: GREAT_BAY_COAST
   exits:
     "GLOBAL": "true"
-    "Great Bay Coast Ledge": "true"
+    "Great Bay Coast Cliffs": "true"
     "Great Bay Cow Grotto": "true"
 
 "Great Bay Cow Grotto":
@@ -303,6 +305,8 @@
 
 "Tingle Great Bay":
   region: TINGLE
+  events:
+    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
   locations:
     "Tingle Map Great Bay": "tingle_price(0x08)"
     "Tingle Map Ikana": "tingle_price(0x09)"
@@ -312,8 +316,6 @@
   exits:
     "GLOBAL": "true"
     "Great Bay Coast Platform": "can_reset_time"
-    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && has_arrows"
-  events:
-    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && (has_arrows || can_use_slingshot)"
   locations:
     "Great Bay Coast Owl Statue": "has_sticks || has_sword"
