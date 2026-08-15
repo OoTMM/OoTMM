@@ -80,6 +80,7 @@ void Sram_SaveEndOfCycle(PlayState* play)
         /* Reset ammo */
         for (int i = 0; i < 24; ++i)
             gSave.info.inventory.ammo[i] = 0;
+        gMmExtraAmmo.slingshotSeeds = 0;
 
         /* Reset rupees */
         gSave.info.playerData.rupees = 0;
