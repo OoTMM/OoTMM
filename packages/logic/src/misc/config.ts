@@ -74,8 +74,8 @@ class LogicPassConfig {
     /* Handle fairies */
     this.startingFairies();
 
-    /* Handle clocks */
-    if (this.state.settings.clocks && this.state.settings.progressiveClocks === 'separate') {
+    /* Handle MM clocks */
+    if (this.state.settings.clocksMm && this.state.settings.progressiveClocks === 'separate') {
       for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
         /* Check if the player already has a clock */
         let hasClock = false;

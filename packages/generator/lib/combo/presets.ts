@@ -854,7 +854,7 @@ const PRESET_HELL = makeSettings({
   powderKegOot: true,
   ocarinaButtonsShuffleOot: true,
   ocarinaButtonsShuffleMm: true,
-  clocks: true,
+  clocksMm: true,
   trapIce: true,
   trapRupoor: true,
   trapKnockback: true,

@@ -2020,9 +2020,15 @@ static int addItemBigFairyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemClock(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemClockMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.mm.halfDays |= (1 << param);
+    return 0;
+}
+
+static int addItemClockOot(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.oot.hasClock = 1;
     return 0;
 }
 
@@ -2329,7 +2335,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBigFairyMm,
     addItemScaleMm,
     addItemStrengthMm,
-    addItemClock,
+    addItemClockMm,
     addItemEndgame,
     addElegyOot,
     addItemSwordExtraOot,
@@ -2360,6 +2366,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSeedsMm,
     addItemStoneGerudoSkullMm,
     addItemGibdoSpookyMm,
+    addItemClockOot,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");

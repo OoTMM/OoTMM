@@ -63,6 +63,14 @@ async function randomVariants(settings: Settings) {
       settings.startingAge = 'child';
     }
   }
+
+  if (settings.clocksOot === 'random') {
+    if (random.next() & 1) {
+      settings.clocksOot = 'night';
+    } else {
+      settings.clocksOot = 'day';
+    }
+  }
 }
 
 export class Generator {
