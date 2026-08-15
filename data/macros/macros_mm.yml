@@ -1,7 +1,7 @@
 # Time
-"clock_separate(x)": "!setting(clocks) || (setting(progressiveClocks, separate) && has(x))"
-"clock_ascending(x)": "!setting(clocks) || (setting(progressiveClocks, ascending) && has(CLOCK, x))"
-"clock_descending(x)": "!setting(clocks) || (setting(progressiveClocks, descending) && has(CLOCK, x))"
+"clock_separate(x)": "!setting(clocksMm) || (setting(progressiveClocks, separate) && has(x))"
+"clock_ascending(x)": "!setting(clocksMm) || (setting(progressiveClocks, ascending) && has(CLOCK, x))"
+"clock_descending(x)": "!setting(clocksMm) || (setting(progressiveClocks, descending) && has(CLOCK, x))"
 
 "clock_day1":   "clock_separate(CLOCK1) || clock_ascending(0) || clock_descending(5)"
 "clock_night1": "clock_separate(CLOCK2) || clock_ascending(1) || clock_descending(4)"
@@ -22,7 +22,7 @@
 "is_day3": "raw_between(DAY3_AM_06_00, NIGHT3_PM_06_00) && clock_day3"
 "is_night3": "raw_after(NIGHT3_PM_06_00) && clock_night3"
 
-"clock_filter": "!setting(clocks) || is_day1 || is_night1 || is_day2 || is_night2 || is_day3 || is_night3"
+"clock_filter": "!setting(clocksMm) || is_day1 || is_night1 || is_day2 || is_night2 || is_day3 || is_night3"
 
 "is_day": "is_day1 || is_day2 || is_day3"
 "is_night": "is_night1 || is_night2 || is_night3"

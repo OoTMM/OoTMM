@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add a setting to shuffle OoT time flow as a clock item.
+
 ### Changed
 
 - Remove the "Distinct Worlds" setting, all worlds are now distinct by default.

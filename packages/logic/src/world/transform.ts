@@ -147,6 +147,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.OOT_RUSTY_KEYS,
   ...ItemGroups.MM_RUSTY_KEYS,
   Items.MM_CLOCK,
+  Items.OOT_CLOCK,
   Items.OOT_BOTTLE_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
   Items.OOT_POCKET_EGG,
@@ -1714,12 +1715,16 @@ class LogicPassWorldTransform {
     }
 
     /* Add clocks */
-    if (this.state.settings.clocks) {
+    if (this.state.settings.clocksMm) {
       if (this.state.settings.progressiveClocks === 'separate') {
         this.addItems(ItemGroups.CLOCKS);
       } else {
         this.addItem(Items.MM_CLOCK, 5);
       }
+    }
+
+    if (this.state.settings.clocksOot) {
+      this.addItem(Items.OOT_CLOCK);
     }
 
     /* Handle extra wallets */

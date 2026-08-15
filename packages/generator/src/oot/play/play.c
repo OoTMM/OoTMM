@@ -523,6 +523,21 @@ static void Play_AfterInit(PlayState* play)
     }
 }
 
+static void Play_ApplyClock(void)
+{
+    u16 time;
+
+    if (!Config_Flag(CFG_OOT_CLOCKS) || gSharedCustomSave.oot.hasClock || gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
+    if (Config_Flag(CFG_OOT_CLOCKS_NIGHT))
+        time = CLOCK_TIME(0, 0);
+    else
+        time = CLOCK_TIME(12, 0);
+    Time_Set(time);
+    gSaveContext.nextDayTime = NEXT_TIME_NONE;
+}
+
 void hookPlay_Init(PlayState* play)
 {
     gPlay = play;
@@ -538,6 +553,7 @@ void hookPlay_Init(PlayState* play)
     gMarkSwitch1 = 0;
     Multi_ResetWisps();
     Inventory_ReobtainProgressiveShields();
+    Play_ApplyClock();
 
     /* Adjust entrance */
     playAdjustEntrance(play);
@@ -559,6 +575,8 @@ void hookPlay_Init(PlayState* play)
 
 void Play_MainWrapper(PlayState* play)
 {
+    Play_ApplyClock();
+
     /* Auto-press A during credits */
     if (g.isCredits)
         play->state.input[0].press.button = (play->state.frameCount & 1) ? A_BUTTON : 0;

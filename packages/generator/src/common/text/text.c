@@ -715,6 +715,14 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_POE:
     case GI_MM_BIG_POE:
         return !Config_Flag(CFG_SHARED_BOTTLES);
+    case GI_MM_CLOCK1:
+    case GI_MM_CLOCK2:
+    case GI_MM_CLOCK3:
+    case GI_MM_CLOCK4:
+    case GI_MM_CLOCK5:
+    case GI_MM_CLOCK6:
+    case GI_OOT_CLOCK:
+        return Config_Flag(CFG_MM_CLOCKS) && Config_Flag(CFG_OOT_CLOCKS);
     case GI_MM_MAGIC_BEAN:
     case GI_OOT_MAGIC_BEAN:
         return 1;
