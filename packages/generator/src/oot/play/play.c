@@ -535,6 +535,7 @@ static void Play_ApplyClock(void)
     else
         time = CLOCK_TIME(12, 0);
     Time_Set(time);
+    gSaveContext.nextDayTime = NEXT_TIME_NONE;
 }
 
 void hookPlay_Init(PlayState* play)

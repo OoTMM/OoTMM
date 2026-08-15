@@ -1,9 +1,10 @@
 #Generic Utility Macros
 "is_child": "age(child)"
 "is_adult": "age(adult)"
-"is_day": "oot_time(day) || can_play_sun || can_play_double_time"
-"is_night": "oot_time(night) || can_play_sun || can_play_double_time"
-"is_dusk": "oot_time(dusk) || can_play_sun || can_play_double_time"
+"has_clock": "setting(clocksOot, none) || has(CLOCK)"
+"is_day": "(has_clock || setting(clocksOot, day)) && (oot_time(day) || can_play_sun || can_play_double_time)"
+"is_night": "(has_clock || setting(clocksOot, night)) && (oot_time(night) || can_play_sun || can_play_double_time)"
+"is_dusk": "has_clock && (oot_time(dusk) || can_play_sun || can_play_double_time)"
 "time_travel_at_will": "!setting(ageChange, none) && event(TIME_TRAVEL_AT_WILL)"
 
 # Spells
