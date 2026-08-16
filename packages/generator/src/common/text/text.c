@@ -338,12 +338,16 @@ static int isItemAmbiguous(s16 gi)
         return !Config_Flag(CFG_SHARED_SONG_ORDER) && Config_Flag(CFG_OOT_SONG_ORDER);
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
+    case GI_OOT_STICK_UPGRADE3:
     case GI_MM_STICK_UPGRADE:
     case GI_MM_STICK_UPGRADE2:
+    case GI_MM_STICK_UPGRADE3:
     case GI_OOT_NUT_UPGRADE:
     case GI_OOT_NUT_UPGRADE2:
+    case GI_OOT_NUT_UPGRADE3:
     case GI_MM_NUT_UPGRADE:
     case GI_MM_NUT_UPGRADE2:
+    case GI_MM_NUT_UPGRADE3:
         return Config_Flag(CFG_MM_UPGRADES_STICKS_NUTS) && !Config_Flag(CFG_SHARED_NUTS_STICKS);
     case GI_OOT_SPIN_UPGRADE:
     case GI_MM_SPIN_UPGRADE:
@@ -1119,6 +1123,20 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_MM_BOMBCHU_20:
             if (gComboConfig.bombchuBehaviorMm == BOMBCHU_BEHAVIOR_BAG_FIRST)
                 itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
+            break;
+        case GI_OOT_STICK_UPGRADE:
+        case GI_OOT_STICK_UPGRADE2:
+        case GI_MM_STICK_UPGRADE:
+        case GI_MM_STICK_UPGRADE2:
+            itemName = "a " TEXT_C1 "Progressive Deku Stick Upgrade";
+            ambiguous = !Config_Flag(CFG_SHARED_NUTS_STICKS);
+            break;
+        case GI_OOT_NUT_UPGRADE:
+        case GI_OOT_NUT_UPGRADE2:
+        case GI_MM_NUT_UPGRADE:
+        case GI_MM_NUT_UPGRADE2:
+            itemName = "a " TEXT_C1 "Progressive Deku Nuts Upgrade";
+            ambiguous = !Config_Flag(CFG_SHARED_NUTS_STICKS);
             break;
         }
 
