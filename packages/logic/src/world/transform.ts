@@ -970,6 +970,10 @@ class LogicPassWorldTransform {
       this.addItem(Items.MM_MASK_SPOOKY);
     }
 
+    if (settings.adultMaskMm) {
+      this.addItem(Items.MM_MASK_ADULT);
+    }
+
     if (settings.sharedSongElegy) {
       this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
     } else if (settings.elegyOot) {
