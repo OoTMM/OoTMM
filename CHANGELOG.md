@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a multiplayer issue where stray fairies could be collected more than once.
 - Fix logic mistakenly expecting OoT masks in MM to access the trials.
 - Fix sharp curse not being breakable in song events when the required song is healing.
 - Fix OoT Poes and OoT Big Poes not accounting for the extra bottles on the trade slots.
