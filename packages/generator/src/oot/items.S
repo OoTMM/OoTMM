@@ -91,3 +91,14 @@ PATCH_START Item_CheckObtainability
    nop
 PATCH_END
 
+/* Hook Item_Give */
+.globl _Item_Give
+_Item_Give:
+  addiu sp,-0x30
+  j Item_Give+0x08
+   lui t2,0x8010
+
+PATCH_START Item_Give
+  j Item_GiveHook
+   nop
+PATCH_END

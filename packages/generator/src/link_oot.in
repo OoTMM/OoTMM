@@ -319,7 +319,7 @@ Flags_GetTreasure = 0x8002060c;
 SetChestFlag = 0x80020624;
 Actor_GetPlayerExchangeItemId = 0x80022b04;
 
-AddItem = 0x8006fdcc;
+Item_Give = 0x8006fdcc;
 Player_AddItemWithIcon = 0x8083c590;
 Item_CheckObtainability = 0x80071420;
 Inventory_ReplaceItem = 0x800719e0;

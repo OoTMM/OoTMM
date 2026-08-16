@@ -454,14 +454,14 @@ void addNutsRawMm(int count)
     addAmmoMm(ITS_MM_NUTS, ITEM_MM_NUT, max, count);
 }
 
-void addNutsOot(int count)
+void Item_AddNutsOot(int count)
 {
     addNutsRawOot(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addNutsRawMm(count);
 }
 
-void addNutsMm(int count)
+void Item_AddNutsMm(int count)
 {
     addNutsRawMm(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
@@ -470,13 +470,13 @@ void addNutsMm(int count)
 
 static int addItemNutsOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addNutsOot(param);
+    Item_AddNutsOot(param);
     return 0;
 }
 
 static int addItemNutsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addNutsMm(param);
+    Item_AddNutsMm(param);
     return 0;
 }
 
@@ -484,7 +484,7 @@ static int addItemNutsUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.info.inventory.upgrades.dekuNut < param)
         gOotSave.info.inventory.upgrades.dekuNut = param;
-    addNutsOot(kMaxNuts[param]);
+    Item_AddNutsOot(kMaxNuts[param]);
     return 0;
 }
 
@@ -492,7 +492,7 @@ static int addItemNutsUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gMmSave.info.inventory.upgrades.dekuNut < param)
         gMmSave.info.inventory.upgrades.dekuNut = param;
-    addNutsMm(kMaxNuts[param]);
+    Item_AddNutsMm(kMaxNuts[param]);
     return 0;
 }
 
@@ -759,14 +759,14 @@ void addSticksRawMm(int count)
     addAmmoMm(ITS_MM_STICKS, ITEM_MM_STICK, max, count);
 }
 
-void addSticksOot(int count)
+void Item_AddSticksOot(int count)
 {
     addSticksRawOot(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addSticksRawMm(count);
 }
 
-void addSticksMm(int count)
+void Item_AddSticksMm(int count)
 {
     addSticksRawMm(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
@@ -775,13 +775,13 @@ void addSticksMm(int count)
 
 static int addItemSticksOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addSticksOot(param);
+    Item_AddSticksOot(param);
     return 0;
 }
 
 static int addItemSticksMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addSticksMm(param);
+    Item_AddSticksMm(param);
     return 0;
 }
 
@@ -789,7 +789,7 @@ static int addItemSticksUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param
 {
     if (gOotSave.info.inventory.upgrades.dekuStick < param)
         gOotSave.info.inventory.upgrades.dekuStick = param;
-    addSticksOot(kMaxSticks[param]);
+    Item_AddSticksOot(kMaxSticks[param]);
     return 0;
 }
 
@@ -797,7 +797,7 @@ static int addItemSticksUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gMmSave.info.inventory.upgrades.dekuStick < param)
         gMmSave.info.inventory.upgrades.dekuStick = param;
-    addSticksMm(kMaxSticks[param]);
+    Item_AddSticksMm(kMaxSticks[param]);
     return 0;
 }
 
