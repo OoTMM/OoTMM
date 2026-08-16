@@ -297,30 +297,54 @@ static s16 progressiveMagicMm(void)
 
 static s16 progressiveUpgradeNutOot(void)
 {
-    if (gOotSave.info.inventory.upgrades.dekuNut < 2)
+    switch (gOotSave.info.inventory.upgrades.dekuNut)
+    {
+    case 0:
         return GI_OOT_NUT_UPGRADE;
-    return GI_OOT_NUT_UPGRADE2;
+    case 1:
+        return GI_OOT_NUT_UPGRADE2;
+    default:
+        return GI_OOT_NUT_UPGRADE3;
+    }
 }
 
 static s16 progressiveUpgradeStickOot(void)
 {
-    if (gOotSave.info.inventory.upgrades.dekuStick < 2)
+    switch (gOotSave.info.inventory.upgrades.dekuStick)
+    {
+    case 0:
         return GI_OOT_STICK_UPGRADE;
-    return GI_OOT_STICK_UPGRADE2;
+    case 1:
+        return GI_OOT_STICK_UPGRADE2;
+    default:
+        return GI_OOT_STICK_UPGRADE3;
+    }
 }
 
 static s16 progressiveUpgradeNutMm(void)
 {
-    if (gMmSave.info.inventory.upgrades.dekuNut < 2)
+    switch (gMmSave.info.inventory.upgrades.dekuNut)
+    {
+    case 0:
         return GI_MM_NUT_UPGRADE;
-    return GI_MM_NUT_UPGRADE2;
+    case 1:
+        return GI_MM_NUT_UPGRADE2;
+    default:
+        return GI_MM_NUT_UPGRADE3;
+    }
 }
 
 static s16 progressiveUpgradeStickMm(void)
 {
-    if (gMmSave.info.inventory.upgrades.dekuStick < 2)
+    switch (gMmSave.info.inventory.upgrades.dekuStick)
+    {
+    case 0:
         return GI_MM_STICK_UPGRADE;
-    return GI_MM_STICK_UPGRADE2;
+    case 1:
+        return GI_MM_STICK_UPGRADE2;
+    default:
+        return GI_MM_STICK_UPGRADE3;
+    }
 }
 
 static s16 progressiveSongLullabyMm(void)
