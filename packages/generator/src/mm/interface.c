@@ -2,11 +2,16 @@
 #include <combo/interface.h>
 #include <combo/config.h>
 
+s32 Player_IsAdultMaskItem(Player* player, s16 itemId);
+
 void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 {
+    Player* player = GET_PLAYER(play);
     u8* ptr;
     u8 itemId;
     u8 buttons[3];
+    s32 envHazard;
+    envHazard = Player_GetEnvironmentalHazard(play);
 
     for (int i = 0; i < 3; ++i)
     {
@@ -16,6 +21,24 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 
         if (itemId == ITEM_MM_OCARINA_FAIRY)
             *ptr = ITEM_MM_OCARINA_OF_TIME;
+        if (itemId == ITEM_MM_MASK_GERUDO)
+            *ptr = ITEM_MM_MASK_STONE;
+        if (itemId == ITEM_MM_MASK_SKULL)
+            *ptr = ITEM_MM_MASK_STONE;
+        if (itemId == ITEM_MM_MASK_SPOOKY)
+            *ptr = ITEM_MM_MASK_GIBDO;
+        else if (Player_IsAdultMaskItem(player, itemId))
+        {
+            if ((envHazard >= PLAYER_ENV_HAZARD_UNDERWATER_FLOOR) &&
+                (envHazard <= PLAYER_ENV_HAZARD_UNDERWATER_FREE))
+            {
+                *ptr = ITEM_MM_MASK_ZORA;
+            }
+            else
+            {
+                *ptr = ITEM_MM_OCARINA_OF_TIME;
+            }
+        }
     }
 
     Interface_UpdateButtonsPart2(play);

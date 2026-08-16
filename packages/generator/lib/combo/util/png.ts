@@ -79,7 +79,7 @@ const parsePngBitmask = async (data: Uint8Array) => {
   return bitmask;
 };
 
-export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'ia8' | 'bitmask') => {
+export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'ia4' | 'ia8' | 'bitmask') => {
   if (process.env.__IS_BROWSER__) {
     return new FileResolver().fetch(`${filename}.bin`);
   } else {
@@ -98,6 +98,10 @@ export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | '
     case 'ia8':
       pngBuffer = await parsePngRgba32(data);
       pngBuffer = toFormat(pngBuffer, 'ia8');
+      break;
+    case 'ia4':
+      pngBuffer = await parsePngRgba32(data);
+      pngBuffer = toFormat(pngBuffer, 'ia4');
       break;
     case 'bitmask':
       pngBuffer = await parsePngBitmask(data);

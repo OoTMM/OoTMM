@@ -158,6 +158,18 @@ static u8 getForeignBottle(u8 itemId)
 
 void comboSyncItems(void)
 {
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+    {
+#if defined(GAME_OOT)
+        gForeignSave.linkAge = (gSave.age == AGE_ADULT)
+            ? MM_LINK_AGE_ADULT
+            : MM_LINK_AGE_CHILD;
+#else
+        gOotSave.age = (gSave.linkAge == MM_LINK_AGE_ADULT)
+            ? 0
+            : 1;
+#endif
+    }
     if (Config_Flag(CFG_SHARED_BOWS))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOW] = gSave.info.inventory.ammo[ITS_NATIVE_BOW];
 
@@ -276,8 +288,9 @@ void comboSyncItems(void)
 
     if (Config_Flag(CFG_CROSS_GAME_FW))
     {
+        u8 mmFwAge = comboMmFwAge();
 #if defined(GAME_MM)
-        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+        RespawnData* fw = &gCustomSave.fw[mmFwAge];
         OotFaroreWind* foreignFw = &gForeignSave.info.fw;
 
         if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
@@ -291,7 +304,8 @@ void comboSyncItems(void)
             foreignFw->entrance = ENTR_FW_CROSS;
         }
 #else
-        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
+        RespawnData* foreignFw =
+            &gSharedCustomSave.mm.fw[mmFwAge];
         OotFaroreWind* fw = &gSave.info.fw;
 
         if (fw->set <= 0 || fw->entrance != ENTR_FW_CROSS)

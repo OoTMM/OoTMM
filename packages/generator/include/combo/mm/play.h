@@ -540,5 +540,5 @@ typedef struct RegEditor {
 void Play_EnableMotionBlur(u32 alpha);
 s32 Play_SetCameraFov(PlayState* this, s16 camId, f32 fov);
 void Play_DisableMotionBlur(void);
-
+void Play_FillScreen(PlayState* this, s16 fillScreenOn, u8 red, u8 green, u8 blue, u8 alpha);
 #endif
