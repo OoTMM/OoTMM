@@ -58,7 +58,7 @@ export function StartingItems() {
       <Card className="flex-1 p-4 gap-4">
         <div className="flex gap-4">
           <div className="flex-1">
-            <Select searcheable placeholder="Search for items" value={null} options={options} onSelect={(item) => alterItem(item, 1)} />
+            <Select searchable placeholder="Search for items" value={null} options={options} onSelect={(item) => alterItem(item, 1)} />
           </div>
           <Button className="w-50" variant="danger" onClick={reset}>Reset Starting Items</Button>
         </div>

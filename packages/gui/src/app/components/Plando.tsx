@@ -46,8 +46,8 @@ export function Plando() {
   return (
     <main className="h-full flex flex-col">
       <nav className="flex gap-2">
-        <div className="flex-1"><Select searcheable placeholder="Location" options={locsOptions} onSelect={setSelectedLoc} value={selectedLoc}/></div>
-        <div className="flex-1"><Select searcheable placeholder="Item" options={itemOptions} onSelect={setSelectedItem} value={selectedItem}/></div>
+        <div className="flex-1"><Select searchable placeholder="Location" options={locsOptions} onSelect={setSelectedLoc} value={selectedLoc}/></div>
+        <div className="flex-1"><Select searchable placeholder="Item" options={itemOptions} onSelect={setSelectedItem} value={selectedItem}/></div>
         <Button onClick={placeItem}>Add</Button>
         <Button variant="danger" onClick={removeAll}>Remove All</Button>
       </nav>

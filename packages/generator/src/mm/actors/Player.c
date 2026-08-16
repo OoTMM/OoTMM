@@ -146,12 +146,23 @@ static void Player_RefreshMaskObjectForAge(Player* player)
     player->maskObjectLoadState = 1;
 }
 
+static void Player_UpdateHumanStrengthRestrictions(void)
+{
+    if (Config_Flag(CFG_MM_KEG_STRENGTH_3))
+    {
+        gPlayerFormItemRestrictions
+            [MM_PLAYER_FORM_HUMAN]
+            [ITEM_MM_POWDER_KEG] = Player_HasStrength(3) ? 1 : 0;
+    }
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
     Player_HandleBurningDekuShield(this, play);
     Player_ClearCustomMaskSpoofBeforeUpdate(this);
     Player_RefreshMaskObjectForAge(this);
+    Player_UpdateHumanStrengthRestrictions();
     Player_Update(this, play);
     Player_UpdateCustomMaskBehavior(this);
     Player_HandleBronzeScale(this, play);
@@ -1698,6 +1709,36 @@ static void DrawExtendedMaskSpooky(PlayState* play, Player* link)
 u8 gGerudoTunic;
 EXPORT_SYMBOL(GERUDO_TUNIC, gGerudoTunic);
 
+s32 MmAgeReq_CheckCurrentAge(u16 childReq, u16 adultReq)
+{
+    if (comboIsLinkAdult())
+    {
+        return !Config_Flag(childReq);
+    }
+    else
+    {
+        return !Config_Flag(adultReq);
+    }
+}
+
+static u8 Player_GetEffectiveHumanStrength(void)
+{
+    u8 strength;
+
+    strength = gSaveContext.save.info.inventory.upgrades.strength;
+    if (strength <= 1)
+        return strength;
+
+    if (!MmAgeReq_CheckCurrentAge(
+            CFG_MM_AGE_REQ_CHILD_STRENGTH,
+            CFG_MM_AGE_REQ_ADULT_STRENGTH))
+    {
+        return 1;
+    }
+
+    return strength;
+}
+
 void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawFlex postLimbDraw, Player* player, s32 lod)
 {
     OPEN_DISPS(play->state.gfxCtx);
@@ -1768,7 +1809,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         if (player->transformation == MM_PLAYER_FORM_HUMAN && Config_Flag(CFG_MM_STRENGTH))
         {
             Color_RGB8* gauntletColor;
-            s32 strength = gSaveContext.save.info.inventory.upgrades.strength;
+            s32 strength = Player_GetEffectiveHumanStrength();
             switch (strength)
             {
                 case 1:
@@ -2174,7 +2215,7 @@ u8 Player_GetStrengthCustom(u8 formStrength)
 {
     if (Config_Flag(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) /* || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY) */
     {
-        return gSaveContext.save.info.inventory.upgrades.strength;
+        return Player_GetEffectiveHumanStrength();
     }
     return formStrength;
 }

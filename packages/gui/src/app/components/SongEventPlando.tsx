@@ -623,7 +623,7 @@ function getAllowedSongPoolForGame(settings: Settings, game: Game): SongEventSon
           </div>
 
           <Select
-            searcheable
+            searchable
             placeholder="Song"
             options={songOptions}
             onSelect={setSelectedSong}
@@ -633,7 +633,7 @@ function getAllowedSongPoolForGame(settings: Settings, game: Game): SongEventSon
 
           <div className="flex-1">
           <MultiSelect
-          searcheable
+          searchable
           placeholder="Song Event"
           options={eventOptions.map(option => ({
             value: option.key,

@@ -33,7 +33,7 @@ export function JunkLocations() {
   return (
     <main className="h-full flex flex-col gap-4">
       <div className="flex gap-4">
-        <div className="flex-1"><Select searcheable placeholder="Location" value={null} options={options} onSelect={add}/></div>
+        <div className="flex-1"><Select searchable placeholder="Location" value={null} options={options} onSelect={add}/></div>
         <Button variant="danger" onClick={clear}>Clear All</Button>
       </div>
       <Card className="flex-[1_1_0] overflow-y-auto">

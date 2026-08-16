@@ -54,7 +54,7 @@
     NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     BUGS: "true"
     FISH: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   locations:
     "Path to Snowhead Grotto": "true"
     "Path to Snowhead Grotto Grass 01": "true"

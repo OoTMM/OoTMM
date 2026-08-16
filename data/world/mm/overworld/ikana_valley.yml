@@ -11,7 +11,8 @@
     "Swamp Near Potion Shop": "true" #You can jump into the cave from sakon's hideout fairly easily
     "Ikana Valley Scrub Ledge": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
   locations:
-    "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
+    "Ikana Valley Scrub Rupee": "soul_business_scrub && has_ocean_title_deed && has_mask_zora"
+    "Ikana Valley Scrub HP": "(has_ocean_title_deed && has_mask_zora && has_mask_deku) || hookshot_anywhere"
     "Ikana Valley Scrub Shop": "soul_business_scrub && can_use_wallet(2)"
     "Ikana Valley Gossip Fairy Lower": "gossip_fairy"
     "Ikana Valley Gossip Big Fairy Lower": "gossip_fairy_big"
@@ -84,7 +85,7 @@
   region: IKANA_CANYON
   exits:
     "GLOBAL": "true"
-    "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has(MASK_DEKU) || has_hover_boots || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
+    "Ikana Valley": "can_swim || can_use_ice_arrows || has_mask_goron || has_mask_deku || has_hover_boots || can_hookshot_short" #If on top of the first tree, you can short hook the second tree then jump down
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "((event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared) && rusty_key(RUSTY_KEY_MUSIC_HOUSE)"
@@ -101,7 +102,7 @@
     ARROWS: "true"
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
     FAIRY: "true"
-    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && can_use_pictograph_box"
   locations:
     "Ikana Valley Gossip Fairy Upper": "gossip_fairy"
     "Ikana Valley Gossip Big Fairy Upper": "gossip_fairy_big"
@@ -138,7 +139,7 @@
     "GLOBAL": "true"
     "Ikana Canyon": "true"
   locations:
-    "Ghost Hut HP": "soul_poe_collector && soul_poe && (has_arrows || can_hookshot_short || can_use_slingshot || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
+    "Ghost Hut HP": "soul_poe_collector && soul_poe && (has_arrows || can_hookshot_short || can_use_slingshot ||  can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
 
 "Ikana Castle Entrance":
   region: IKANA_CASTLE
