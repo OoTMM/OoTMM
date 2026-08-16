@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/mark.h>
 
+/* TODO: This system is a big mess, reorganize this someday */
+
 u32 gMarkChests;
 u32 gMarkCollectibles;
 u32 gMarkSwitch0;
@@ -165,6 +167,14 @@ static int getSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
     return !!(gMmSave.info.permanentSceneFlags[sceneId].switch1 & (1 << flagId));
 }
 
+static int getSwitchMarkMm(PlayState* play, int sceneId, int flagId)
+{
+    if (flagId >= 0x20)
+        return getSwitch1MarkMm(play, sceneId, flagId & 0x1f);
+    else
+        return getSwitch0MarkMm(play, sceneId, flagId & 0x1f);
+}
+
 static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 {
     sceneId = mmSceneId(sceneId);
@@ -199,24 +209,28 @@ static void setSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
     gMmSave.info.permanentSceneFlags[sceneId].switch1 |= (1 << flagId);
 }
 
+static void setSwitchMarkMm(PlayState* play, int sceneId, int flagId)
+{
+    if (flagId >= 0x20)
+        setSwitch1MarkMm(play, sceneId, flagId & 0x1f);
+    else
+        setSwitch0MarkMm(play, sceneId, flagId & 0x1f);
+}
+
 static int getStrayFairyMarkMm(PlayState* play, int sceneId, int id)
 {
-    if (id >= 0x30)
-        return getCollectibleMarkMm(play, sceneId, id & 0x1f);
-    else if (id >= 0x20)
-        return getSwitch1MarkMm(play, sceneId, id & 0x1f);
+    if (id >= 0x20)
+        return getSwitchMarkMm(play, sceneId, id);
     else
-        return getSwitch0MarkMm(play, sceneId, id & 0x1f);
+        return getCollectibleMarkMm(play, sceneId, id);
 }
 
 static void setStrayFairyMarkMm(PlayState* play, int sceneId, int id)
 {
-    if (id >= 0x30)
-        setCollectibleMarkMm(play, sceneId, id & 0x1f);
-    else if (id >= 0x20)
-        setSwitch1MarkMm(play, sceneId, id & 0x1f);
+    if (id >= 0x20)
+        setSwitchMarkMm(play, sceneId, id);
     else
-        setSwitch0MarkMm(play, sceneId, id & 0x1f);
+        setCollectibleMarkMm(play, sceneId, id);
 }
 
 static void markXflag(Xflag* xf, int sliceId, int sceneId, int roomId, int id)
