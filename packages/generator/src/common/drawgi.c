@@ -303,45 +303,57 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
 
 static const u32 kNutStickPrimColors[] = {
     0xa06428ff,
+    0xa06428ff,
     0xffffffff,
     0xffffbbff,
 };
+
 static const u32 kNutStickEnvColors[] = {
+    0x280a00ff,
     0x280a00ff,
     0x505050ff,
     0xaaaa00ff,
 };
 
-void DrawGi_CustomStick(PlayState* play, s16 drawGiId)
+static const s8 kNutStickFlameIndex[] = {
+    -1,
+    3,
+    0,
+    1,
+};
+
+void DrawGi_CustomStick(PlayState* play, s16 drawGiId, u8 param)
 {
     const DrawGi* drawGi;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
+    s8 flameId;
 
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[param]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-    color4(&r, &g, &b, &a, kNutStickEnvColors[drawGi->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[param]);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     /* Draw fire */
-    if (drawGi->lists[1])
+    flameId = kNutStickFlameIndex[param];
+    if (flameId >= 0)
     {
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
+        shaderFlameEffect(play, flameId, 1.f, 0.f);
     }
 
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomNut(PlayState* play, s16 drawGiId)
+void DrawGi_CustomNut(PlayState* play, s16 drawGiId, u8 param)
 {
     const DrawGi* drawGi;
     u8 r;
@@ -349,6 +361,7 @@ void DrawGi_CustomNut(PlayState* play, s16 drawGiId)
     u8 b;
     u8 a;
     u32 fc;
+    s8 flameId;
 
     drawGi = &kDrawGi[drawGiId];
     fc = play->state.frameCount * 6;
@@ -357,17 +370,18 @@ void DrawGi_CustomNut(PlayState* play, s16 drawGiId)
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x09, DisplaceTexture(play->state.gfxCtx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[param]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-    color4(&r, &g, &b, &a, kNutStickEnvColors[drawGi->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[param]);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     /* Draw fire */
-    if (drawGi->lists[1])
+    flameId = kNutStickFlameIndex[param];
+    if (flameId >= 0)
     {
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
+        shaderFlameEffect(play, flameId, 1.f, 0.f);
     }
 
     CLOSE_DISPS();

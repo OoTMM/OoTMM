@@ -9,7 +9,7 @@
 - { id: OOT_MEDALLION_SPIRIT, func: Medallion, params: [GI_MEDALLION_SPIRIT_0, GI_MEDALLION_SPIRIT_1] }
 - { id: OOT_MEDALLION_SHADOW, func: Medallion, params: [GI_MEDALLION_SHADOW_0, GI_MEDALLION_SHADOW_1] }
 - { id: OOT_MEDALLION_LIGHT, func: Medallion, params: [GI_MEDALLION_LIGHT_0, GI_MEDALLION_LIGHT_1] }
-- { id: DEKU_NUT, func: CustomNut, params: [0x6000e90, 0] }
+- { id: DEKU_NUT, func: CustomNut, params: [0x6000e90] }
 - { id: HEART_CONTAINER, func: CustomHeartContainer, params: [0x0, 0x6001290, 0x6001470] }
 - { id: HEART_PIECE, func: CustomHeartContainer, params: [0x0, 0x6001290, 0x6001590] }
 - { id: QUIVER, func: Opa1023, params: [0x6000990, 0x60008d0, 0x6000930, 0x6000a80] }
@@ -164,10 +164,6 @@
 - { id: MM_PICTOBOX, func: Opa0_Xlu1, params: [0x6000ec8, 0x6000bc0] }
 - { id: MM_MASK_FIERCE_DEITY, func: Opa01, params: [0x6000b90, 0x60009b0] }
 - { id: NOTE, func: CustomNote, params: [0x6000ae0] }
-- { id: OOT_STICK_UPGRADE, func: CustomStick, params: [0x60004d0, 1] }
-- { id: OOT_STICK_UPGRADE2, func: CustomStick, params: [0x60004d0, 2] }
-- { id: OOT_NUT_UPGRADE, func: CustomNut, params: [0x6000e90, 1] }
-- { id: OOT_NUT_UPGRADE2, func: CustomNut, params: [0x6000e90, 2] }
 - { id: SPIN_UPGRADE, func: CustomSpin, params: [0x6000998, 0x6000850, 0x6000960] }
 - { id: STRAY_FAIRY, func: CustomStrayFairy, params: [0] }
 - { id: MILK, func: CustomPotion, params: [3] }
