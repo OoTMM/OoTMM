@@ -132,6 +132,8 @@ void Save_SwapFaroreOot(void);
 
 u8 comboMmFwAge(void);
 
+u8 comboMmFwAge(void);
+
 extern const u8 kMaxSongNotes[];
 
 void    comboWalletRefresh(void);
