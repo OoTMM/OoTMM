@@ -7,9 +7,13 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Add a setting to shuffle OoT time flow as a clock item.
+- Added MM Adult Mask
+- Added MM item age requirements
+- Added MM Starting Age Selection
 
 ### Changed
 
+- Changed Starting Age to Starting Age OoT to differentiate from the new Starting Age MM setting.
 - Remove the "Distinct Worlds" setting, all worlds are now distinct by default.
 - Renamed some rusty keys to make them less ambiguous.
 - Complete overhaul of the multiplayer system, see website for the setup guide and details.

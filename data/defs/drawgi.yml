@@ -201,3 +201,4 @@
 - { id: CLOCK, func: Clock, params: [GI_CLOCK_0, GI_CLOCK_1, GI_CLOCK_2, GI_CLOCK_3] }
 - { id: POND_FISH, func: PondFish, params: [GI_POND_FISH_0] }
 - { id: TRAP, func: Trap, params: [0] }
+- { id: MASK_ADULT, func: Opa01, params: [MASK_ADULT_1, MASK_ADULT_0] }

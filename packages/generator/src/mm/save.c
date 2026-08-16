@@ -11,6 +11,11 @@ void Sram_AfterOpenSave(void)
     /* Read the foreign save */
     Save_ReadForeign();
 
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+    {
+        gMmSave.linkAge = gOotSave.age;
+    }
+
     /* Handle common settings */
     Save_OnLoad();
 

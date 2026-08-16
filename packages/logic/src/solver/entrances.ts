@@ -267,7 +267,7 @@ class WorldShuffler {
     const a = newWorld.areas['OOT SPAWN'];
     let otherAge: Age;
 
-    if (this.settings.startingAge === 'child') {
+    if (this.settings.startingAgeOot === 'child') {
       a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
       a.exits['OOT SPAWN CHILD'] = exprFalse();
       otherAge = AGE_ADULT;

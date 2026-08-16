@@ -340,7 +340,8 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.openZdShortcut = booleanWeighted(random, 0.5);
   }
 
-  base.startingAge = sampleWeighted(random, { child: 10, adult: 10 });
+  base.startingAgeOot = sampleWeighted(random, { child: 10, adult: 10 });
+  base.startingAgeMm = sampleWeighted(random, { child: 10, adult: 10 });
   base.swordlessAdult = booleanWeighted(random, 0.5);
   base.timeTravelSword = booleanWeighted(random, 0.5);
   base.ageChange = sampleWeighted(random, { none: 10, always: 5, oot: 5 });
@@ -685,6 +686,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.gerudoMaskMm = booleanWeighted(random, 0.25);
   base.skullMaskMm = booleanWeighted(random, 0.25);
   base.spookyMaskMm = booleanWeighted(random, 0.25);
+  base.adultMaskMm = booleanWeighted(random, 0.25);
   base.sticksNutsUpgradesMm = booleanWeighted(random, 0.5);
   base.stoneAgonyMm = booleanWeighted(random, 0.5);
   base.spinUpgradeOot = booleanWeighted(random, 0.33);

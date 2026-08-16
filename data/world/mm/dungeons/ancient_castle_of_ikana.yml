@@ -24,7 +24,7 @@
   exits:
     "GLOBAL": "true"
     "Ancient Castle of Ikana Interior": "true"
-    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere || (can_use_nayru && is_tall)"
+    "Ancient Castle of Ikana Interior North 2": "has_mask_deku || short_hook_anywhere || (can_use_nayru && is_tall)"
   locations:
     "Ancient Castle of Ikana Pot Left First Room 1": "true"
     "Ancient Castle of Ikana Pot Left First Room 2": "true"
@@ -32,17 +32,17 @@
 "Ancient Castle of Ikana Interior North 2":
   dungeon: ACoI
   events:
-    MAGIC: "has(MASK_DEKU) || short_hook_anywhere"
-    FAIRY: "has(MASK_DEKU) || short_hook_anywhere"
+    MAGIC: "has_mask_deku || short_hook_anywhere"
+    FAIRY: "has_mask_deku || short_hook_anywhere"
   exits:
     "GLOBAL": "true"
     "Ancient Castle of Ikana Interior North": "true"
     "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere || has_hover_boots"
   locations:
-    "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
-    "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
-    "Ancient Castle of Ikana Pot Left Second Room 3": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
-    "Ancient Castle of Ikana Pot Left Second Room 4": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 1": "has_mask_deku || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 2": "has_mask_deku || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 3": "has_mask_deku || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 4": "has_mask_deku || short_hook_anywhere || has_hover_boots"
 
 "Ancient Castle of Ikana Interior North 3":
   dungeon: ACoI
@@ -61,13 +61,13 @@
     "Ancient Castle of Ikana Interior North 3": "true"
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
-    "Ikana Castle Entrance": "(trick(MM_IKANA_PILLAR_ENTRANCE_FLOAT) && (has(MASK_DEKU) || has_hover_boots)) || trick(MM_IKANA_PILLAR_ENTRANCE_JUMP)"
+    "Ikana Castle Entrance": "(trick(MM_IKANA_PILLAR_ENTRANCE_FLOAT) && (has_mask_deku || has_hover_boots)) || trick(MM_IKANA_PILLAR_ENTRANCE_JUMP)"
   events:
     IKANA_CASTLE_LIGHT: "true" #Due to being able to save-warp in MM now, this is no longer an issue.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
     NUTS: "true"
   locations:
-    "Ancient Castle of Ikana HP": "((has_arrows || has_boomerang || can_hookshot_short) && has(MASK_DEKU)) || short_hook_anywhere"
+    "Ancient Castle of Ikana HP": "((has_arrows || has_boomerang || can_hookshot_short) && has_mask_deku) || short_hook_anywhere"
 
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI

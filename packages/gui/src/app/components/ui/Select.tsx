@@ -15,14 +15,14 @@ type SelectProps<T> = {
   placeholder?: string;
   clearable?: boolean;
   creatable?: boolean;
-  searcheable?: boolean;
+  searchable?: boolean;
   multi?: boolean;
   onSelect: (value: T) => void;
   onUnselect?: (value: T) => void;
   onClear?: () => void;
   onCreate?: (label: string) => void;
 }
-export function Select<T>({ id, options, value, placeholder, clearable, creatable, searcheable, multi, onSelect, onUnselect, onClear, onCreate }: SelectProps<T>) {
+export function Select<T>({ id, options, value, placeholder, clearable, creatable, searchable, multi, onSelect, onUnselect, onClear, onCreate }: SelectProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
   };
 
   let filterFunc: (opt: SelectOption<T>) => boolean;
-  if (searcheable) {
+  if (searchable) {
     filterFunc = (opt) => opt.label.toLowerCase().includes(inputValue.toLowerCase());
   } else {
     filterFunc = () => true;
@@ -90,10 +90,10 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
             autoComplete="off"
             autoCorrect="off"
             id={id}
-            readOnly={!creatable && !searcheable}
+            readOnly={!creatable && !searchable}
             placeholder={placeholder}
             className={clsx("outline-none text-left select-none", (multi && Array.isArray(value) && value.length > 0) ? 'sr-only' : 'w-full')}
-            value={(open && (creatable || searcheable)) ? inputValue : currentLabel}
+            value={(open && (creatable || searchable)) ? inputValue : currentLabel}
             onFocus={onFocus}
             onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); }}
             onKeyDown={onInputKeyDown}
@@ -105,7 +105,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
         </div>
       </div>
       <div className="relative select-none">
-        {open && (searcheable || !inputValue) && <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
+        {open && (searchable || !inputValue) && <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
           {filteredOptions.length > 0 && filteredOptions.map((opt, i) =>
             <div key={i} className="ux-hover p-2" onClick={(e) => { setOpen(false); onSelect(opt.value); e.preventDefault(); e.stopPropagation(); setInputValue(''); }}>
               {opt.label}

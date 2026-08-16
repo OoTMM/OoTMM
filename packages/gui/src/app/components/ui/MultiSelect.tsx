@@ -15,7 +15,7 @@ type MultiSelectProps<T> = {
   placeholder?: string;
   clearable?: boolean;
   creatable?: boolean;
-  searcheable?: boolean;
+  searchable?: boolean;
   onSelect: (value: T) => void;
   onUnselect?: (value: T) => void;
   onClear?: () => void;
@@ -29,7 +29,7 @@ export function MultiSelect<T>({
                                  placeholder = '-----',
                                  clearable,
                                  creatable,
-                                 searcheable,
+                                 searchable,
                                  onSelect,
                                  onUnselect,
                                  onClear,
@@ -75,7 +75,7 @@ export function MultiSelect<T>({
   };
 
   const filterFunc = (opt: MultiSelectOption<T>) => {
-    if (!searcheable) return true;
+    if (!searchable) return true;
 
     return opt.label.toLowerCase().includes(inputValue.toLowerCase());
   };
@@ -113,7 +113,7 @@ export function MultiSelect<T>({
             }}
         >
           <div className="flex-1">
-            {open && (creatable || searcheable) ? (
+            {open && (creatable || searchable) ? (
                 <input
                     ref={inputRef}
                     type="text"

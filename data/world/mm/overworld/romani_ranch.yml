@@ -14,7 +14,7 @@
     "Stables": "(between(DAY1_AM_06_00, NIGHT1_AM_02_30) || second_day || between(DAY3_AM_06_00, NIGHT3_PM_08_00)) && rusty_key(RUSTY_KEY_RANCH_BARN)"
     "Ranch House": "(between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)) && rusty_key(RUSTY_KEY_RANCH_HOUSE)"
   locations:
-    "Romani Ranch Epona Song": "soul_malon && (before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1))"
+    "Romani Ranch Epona Song": "soul_malon && age_bow && (before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1))"
     "Romani Ranch Aliens": "event(ALIENS)"
     "Romani Ranch Cremia Escort": "event(ALIENS) && (at(NIGHT2_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night2))"
     "Romani Ranch Crate": "true"
@@ -110,7 +110,7 @@
     "GLOBAL": "true"
     "Romani Ranch": "rusty_key(RUSTY_KEY_CUCCO_SHACK)"
   locations:
-    "Cucco Shack Bunny Mask": "soul_grog && has(MASK_BREMEN) && soul_cucco"
+    "Cucco Shack Bunny Mask": "soul_grog && has_mask_bremen && soul_cucco"
     "Cucco Shack Wonder Item 1": "true"
     "Cucco Shack Wonder Item 2": "true"
     "Cucco Shack Wonder Item 3": "true"

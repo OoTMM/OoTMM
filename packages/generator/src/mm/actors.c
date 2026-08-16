@@ -8,6 +8,9 @@
 #include <combo/inventory.h>
 #include <combo/multi.h>
 #include <combo/actors.h>
+#include <combo/mm/actors/En_Horse.h>
+
+#include "combo/custom.h"
 
 void EnGo_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
 void EnDnh_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
@@ -654,8 +657,8 @@ static f32 D_8015BC18;
 void Actor_InitFaroresWind(PlayState *play)
 {
     Vec3f lightPos;
-
-    RespawnData *fw = &gCustomSave.fw[gOotSave.age];
+    u8 fwAge = comboMmFwAge();
+    RespawnData* fw = &gCustomSave.fw[fwAge];
 
     if (fw->data)
     {
@@ -782,7 +785,7 @@ void Actor_DrawFaroresWindPointer(PlayState *play)
 
             if (alpha < 0)
             {
-                gCustomSave.fw[gOotSave.age].data = 0;
+                gCustomSave.fw[comboMmFwAge()].data = 0;
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
                 alpha = 0;
             }
@@ -892,173 +895,6 @@ void Actor_AfterDrawAll(PlayState *play)
     Multi_DrawWisps(play);
 }
 
-typedef struct
-{
-    u32 offset;
-    u16 value;
-} OverlayPatch;
-
-static OverlayPatch adultEponaPatch[] = {
-    {0x865a, 0x0600},
-    {0x865e, 0x1e2c},
-    {0x867a, 0x0600},
-    {0x868e, 0x3cec},
-    {0x8706, 0x0600},
-    {0x870a, 0x3cec},
-    {0x872a, 0x0600},
-    {0x8736, 0x3cec},
-    {0x879a, 0x0600},
-    {0x87a2, 0x75f0},
-    {0x87ae, 0x0600},
-    {0x87be, 0x75f0},
-    {0x880e, 0x0600},
-    {0x8812, 0x6d50},
-    {0x8832, 0x0600},
-    {0x883e, 0x6d50},
-    {0x887e, 0x0600},
-    {0x8886, 0x6d50},
-    {0x8c22, 0x0600},
-    {0x8c2e, 0x3cec},
-    {0x8c3a, 0x0600},
-    {0x8c4e, 0x3cec},
-    {0x8d52, 0x0600},
-    {0x8d5e, 0x1e2c},
-    {0x8d6a, 0x0600},
-    {0x8d7e, 0x1e2c},
-    {0x8dde, 0x0600},
-    {0x8de6, 0x1e2c},
-    {0x8df2, 0x0600},
-    {0x8e06, 0x1e2c},
-    {0x8e72, 0x0600},
-    {0x8e7e, 0x6d50},
-    {0x8e92, 0x0600},
-    {0x8e9e, 0x6d50},
-    {0x8f06, 0x0600},
-    {0x8f0e, 0x6d50},
-    {0x8f1a, 0x0600},
-    {0x8f2e, 0x6d50},
-    {0xbbde, 0x3c23},
-    {0xc8ac, 0x1000},
-    {0xd792, 0x6d50},
-    {0xd796, 0x5584},
-    {0xd79a, 0x4dec},
-    {0xd79e, 0x3cec},
-    {0xd7a2, 0x75f0},
-    {0xd7a6, 0x32b0},
-    {0xd7aa, 0x1e2c},
-    {0xd7ae, 0x2470},
-    {0xd7b2, 0x2c38},
-    {0xd81a, 0x9d74},
-    {0xdad6, 0x9f80},
-    {0xdada, 0xa180},
-    {0xdade, 0xa380},
-};
-
-static void Actor_PatchAdultHorse(void *loadedRam)
-{
-    if (!comboIsLinkAdult())
-    {
-        return;
-    }
-
-    for (int i = 0; i < ARRAY_COUNT(adultEponaPatch); i++)
-    {
-        u16 *patchPointer = (u16 *)(((u8 *)loadedRam) + adultEponaPatch[i].offset);
-        *patchPointer = adultEponaPatch[i].value;
-    }
-}
-
-static PlayerAgeProperties sPlayerAgePropertiesAdult = {
-    56.0f,
-    90.0f,
-    1.0f,
-    111.0f,
-    70.0f,
-    79.4f,
-    59.0f,
-    41.0f,
-    19.0f,
-    36.0f,
-    50.0f,
-    56.0f,
-    68.0f,
-    70.0f,
-    18.0f,
-    23.0f,
-    70.0f,
-    {9, 0x123F, 0x167},
-    {
-        {8, 0x1256, 0x17C},
-        {9, 0x17EA, 0x167},
-        {8, 0x1256, 0x17C},
-        {9, 0x17EA, 0x167},
-    },
-    {
-        {9, 0x17EA, 0x167},
-        {9, 0x1E0D, 0x17C},
-        {9, 0x17EA, 0x167},
-        {9, 0x1E0D, 0x17C},
-    },
-    {
-        {8, 0x1256, 0x17C},
-        {9, 0x17EA, 0x167},
-        {-0x638, 0x1256, 0x17C},
-        {-0x637, 0x17EA, 0x167},
-    },
-    0,
-    0x80,
-    22.0f,
-    36.0f,
-    (PlayerAnimationHeader *)0x0400e300, /* gPlayerAnim_pz_Tbox_open */
-    (PlayerAnimationHeader *)0x0400d548, /* gPlayerAnim_link_demo_back_to_past */
-    (PlayerAnimationHeader *)0x0400d660, /* gPlayerAnim_link_demo_return_to_past */
-    (PlayerAnimationHeader *)0x0400e378, /* gPlayerAnim_pz_climb_startA */
-    (PlayerAnimationHeader *)0x0400e380, /* gPlayerAnim_pz_climb_startB */
-    {
-        (PlayerAnimationHeader *)0x0400e388, /* gPlayerAnim_pz_climb_upL */
-        (PlayerAnimationHeader *)0x0400e390, /* gPlayerAnim_pz_climb_upR */
-        (PlayerAnimationHeader *)0x0400dab0, /* gPlayerAnim_link_normal_Fclimb_upL */
-        (PlayerAnimationHeader *)0x0400dab8, /* gPlayerAnim_link_normal_Fclimb_upR */
-    },
-    {
-        (PlayerAnimationHeader *)0x0400da90, /* gPlayerAnim_link_normal_Fclimb_sideL */
-        (PlayerAnimationHeader *)0x0400da98, /* gPlayerAnim_link_normal_Fclimb_sideR */
-    },
-    {
-        (PlayerAnimationHeader *)0x0400e358, /* gPlayerAnim_pz_climb_endAL */
-        (PlayerAnimationHeader *)0x04008360, /* gPlayerAnim_pz_climb_endAR */
-    },
-    {
-        (PlayerAnimationHeader *)0x0400e370, /* gPlayerAnim_pz_climb_endBR */
-        (PlayerAnimationHeader *)0x0400e368, /* gPlayerAnim_pz_climb_endBL */
-    },
-};
-
-static void Actor_PatchPlayerFormProperties()
-{
-    if (comboIsLinkAdult())
-    {
-        /* Maybe better to move this to when the overlay is loaded? */
-        PlayerAgeProperties *playerAgeProperties = (PlayerAgeProperties *)OverlayAddr(0x8085ba38);
-        playerAgeProperties[MM_PLAYER_FORM_HUMAN] = sPlayerAgePropertiesAdult;
-
-        u32 *playerAnimationHeaders = (u32 *)OverlayAddr(0x8085be84);
-        playerAnimationHeaders[0x36] = 0x0400e3c8;
-        playerAnimationHeaders[0x37] = 0x0400e3c8;
-        playerAnimationHeaders[0x38] = 0x0400e3c8;
-        playerAnimationHeaders[0x39] = 0x0400e3c8;
-        playerAnimationHeaders[0x3a] = 0x0400e3c8;
-        playerAnimationHeaders[0x3b] = 0x0400e3c8;
-
-        playerAnimationHeaders[0x42] = 0x0400e3d0;
-        playerAnimationHeaders[0x43] = 0x0400e3d0;
-        playerAnimationHeaders[0x44] = 0x0400e3d0;
-        playerAnimationHeaders[0x45] = 0x0400e3d0;
-        playerAnimationHeaders[0x46] = 0x0400e3d0;
-        playerAnimationHeaders[0x47] = 0x0400e3d0;
-    }
-}
-
 ActorProfile *Actor_LoadOverlayCustom(ActorContext *actorCtx, s16 index)
 {
     ActorProfile *ActorProfile = Actor_LoadOverlay(actorCtx, index);
@@ -1069,9 +905,9 @@ ActorProfile *Actor_LoadOverlayCustom(ActorContext *actorCtx, s16 index)
     {
         switch (index)
         {
-        case ACTOR_EN_HORSE:
-            Actor_PatchAdultHorse(overlayEntry->data);
-            break;
+            case ACTOR_EN_HORSE:
+                EponaAge_OnHorseOverlayLoaded(overlayEntry->data);
+                break;
         }
     }
 
@@ -1089,10 +925,94 @@ void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
 
 PATCH_CALL(0x800bae44, Actor_LoadOverlayCustom);
 
-void KaleidoManager_LoadPlayerOvl(void *ovl)
+#define PLAYER_AGE_PROPERTIES_TABLE \
+    ((PlayerAgeProperties*)OverlayAddr(0x8085BA38))
+
+#define PLAYER_ANIMATION_HEADERS \
+    ((PlayerAnimationHeader**)OverlayAddr(0x8085BE84))
+
+#define PLAYER_ANIMTYPE_COUNT 6
+
+#define PLAYER_DOOR_A_BASE 0x36
+#define PLAYER_DOOR_B_BASE 0x42
+
+static PlayerAnimationHeader*
+    sChildDoorAAnimations[PLAYER_ANIMTYPE_COUNT];
+
+static PlayerAnimationHeader*
+    sChildDoorBAnimations[PLAYER_ANIMTYPE_COUNT];
+
+static s32 sPlayerAgeOverlayDefaultsValid;
+
+static void PlayerAge_CaptureOverlayDefaults(void)
+{
+    PlayerAnimationHeader** table = PLAYER_ANIMATION_HEADERS;
+
+    memcpy(
+        sChildDoorAAnimations,
+        &table[PLAYER_DOOR_A_BASE],
+        sizeof(sChildDoorAAnimations)
+    );
+
+    memcpy(
+        sChildDoorBAnimations,
+        &table[PLAYER_DOOR_B_BASE],
+        sizeof(sChildDoorBAnimations)
+    );
+
+    sPlayerAgeOverlayDefaultsValid = 1;
+}
+
+void PlayerAge_ApplyOverlayData(s32 adult)
+{
+    PlayerAgeProperties* humanProperties =
+        &PLAYER_AGE_PROPERTIES_TABLE[MM_PLAYER_FORM_HUMAN];
+
+    PlayerAnimationHeader** table =
+        PLAYER_ANIMATION_HEADERS;
+
+    s32 i;
+
+    LoadFile(
+        humanProperties,
+        adult
+            ? CUSTOM_MM_ADULT_HUMAN_AGE_PROPERTIES_VROM
+            : CUSTOM_MM_CHILD_HUMAN_AGE_PROPERTIES_VROM,
+        sizeof(*humanProperties)
+    );
+
+    if (adult)
+    {
+        for (i = 0; i < PLAYER_ANIMTYPE_COUNT; i++)
+        {
+            table[PLAYER_DOOR_A_BASE + i] =
+                (PlayerAnimationHeader*)0x0400E3C8;
+
+            table[PLAYER_DOOR_B_BASE + i] =
+                (PlayerAnimationHeader*)0x0400E3D0;
+        }
+    }
+    else if (sPlayerAgeOverlayDefaultsValid)
+    {
+        memcpy(
+            &table[PLAYER_DOOR_A_BASE],
+            sChildDoorAAnimations,
+            sizeof(sChildDoorAAnimations)
+        );
+
+        memcpy(
+            &table[PLAYER_DOOR_B_BASE],
+            sChildDoorBAnimations,
+            sizeof(sChildDoorBAnimations)
+        );
+    }
+}
+
+void KaleidoManager_LoadPlayerOvl(void* ovl)
 {
     KaleidoManager_LoadOvl(ovl);
-    Actor_PatchPlayerFormProperties();
+    PlayerAge_CaptureOverlayDefaults();
+    PlayerAge_ApplyOverlayData(comboIsLinkAdult());
 }
 
 PATCH_CALL(0x801639d4, KaleidoManager_LoadPlayerOvl);

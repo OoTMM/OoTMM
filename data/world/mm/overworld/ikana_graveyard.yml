@@ -9,9 +9,9 @@
     "GLOBAL": "true"
     "Road to Ikana Center": "true"
     "Ikana Graveyard Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
-    "Beneath The Graveyard Night 1": "soul_stalchild && has(MASK_CAPTAIN) && is_night1"
-    "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
-    "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
+    "Beneath The Graveyard Night 1": "soul_stalchild && has_mask_captain && is_night1"
+    "Beneath The Graveyard Night 2": "soul_stalchild && has_mask_captain && is_night2"
+    "Beneath The Graveyard Night 3": "soul_stalchild && has_mask_captain && is_night3"
   locations:
     "Ikana Graveyard Captain Mask": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && event(KEETA_WOKEN) && (has_arrows || can_use_slingshot) && can_fight"
     "Ikana Graveyard Grass 1": "true"
@@ -94,7 +94,7 @@
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
-    "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || can_use_din || has(MASK_DEKU))"
+    "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || can_use_din || has_mask_deku)"
     "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"

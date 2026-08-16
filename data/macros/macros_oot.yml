@@ -5,7 +5,7 @@
 "is_day": "(has_clock || setting(clocksOot, day)) && (oot_time(day) || can_play_sun || can_play_double_time)"
 "is_night": "(has_clock || setting(clocksOot, night)) && (oot_time(night) || can_play_sun || can_play_double_time)"
 "is_dusk": "has_clock && (oot_time(dusk) || can_play_sun || can_play_double_time)"
-"time_travel_at_will": "!setting(ageChange, none) && event(TIME_TRAVEL_AT_WILL)"
+"time_travel_at_will": "(!setting(ageChange, none) && event(TIME_TRAVEL_AT_WILL)) || (has_mask_adult && (setting(crossAge)))"
 
 # Spells
 "can_use_din": "can_use_din_raw"
@@ -115,7 +115,7 @@
 "age_bow": "is_adult || setting(agelessBow) || glitch_equip_swap"
 
 # Swords
-"starts_with_master_sword": "setting(startingAge, adult) && (!setting(swordlessAdult) || (!setting(shuffleMasterSword) && setting(timeTravelSword)))"
+"starts_with_master_sword": "setting(startingAgeOot, adult) && (!setting(swordlessAdult) || (!setting(shuffleMasterSword) && setting(timeTravelSword)))"
 "has_sword_child(n)": "setting(extraChildSwordsOot) && cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), cond(setting(extraChildSwordsOot), has_sword_child(1), has(SWORD_KOKIRI)))"
 "has_sword_razor": "has_sword_child(2)"

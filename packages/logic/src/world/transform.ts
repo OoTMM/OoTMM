@@ -961,6 +961,10 @@ class LogicPassWorldTransform {
       this.addItem(Items.MM_MASK_SPOOKY);
     }
 
+    if (settings.adultMaskMm) {
+      this.addItem(Items.MM_MASK_ADULT);
+    }
+
     if (settings.sharedSongElegy) {
       this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
     } else if (settings.elegyOot) {
@@ -1479,8 +1483,21 @@ class LogicPassWorldTransform {
     this.filterLocationsBool(this.state.settings.shuffleRocksOot, 'rock', 'oot');
     this.filterLocations(this.state.settings.shuffleRocksMm, 'rock', 'mm');
 
-    if (!this.state.settings.bootsIronMm) {
-      /* Remove water rocks if iron boots are not available */
+    const blastMaskChild = this.state.settings.mmAgeReqChildMaskBlast;
+    const blastMaskAdult = this.state.settings.mmAgeReqAdultMaskBlast;
+
+    const ironBootsChild = this.state.settings.mmAgeReqChildBootsIron;
+    const ironBootsAdult = this.state.settings.mmAgeReqAdultBootsIron;
+
+    const blastMaskAndIronBootsDifferentAges =
+        (blastMaskChild && ironBootsAdult) ||
+        (blastMaskAdult && ironBootsChild);
+
+    if (
+        !this.state.settings.bootsIronMm ||
+        blastMaskAndIronBootsDifferentAges
+    ) {
+      /* Remove water rocks if iron boots are not available, or if Blast Mask and Iron Boots require different ages */
       this.removeLocations(MM_WATER_ROCKS);
     }
   }

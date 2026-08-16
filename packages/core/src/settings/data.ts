@@ -1,5 +1,5 @@
 import type { Game } from '../defines';
-
+import { MM_AGE_REQ_ITEMS } from '../mm-age-requirements';
 function hasGame(x: any, g: Game) {
   return x.games === g || x.games === 'ootmm';
 }
@@ -19,6 +19,27 @@ const SETTING_PRICE = {
   category: 'main.prices',
   default: 'vanilla',
 } as const;
+
+const MM_AGE_REQ_SETTINGS = MM_AGE_REQ_ITEMS.flatMap(item => [
+  {
+    key: item.childSetting,
+    name: `${item.label} requires Child Link`,
+    category: 'items.mmAgeRequirements',
+    type: 'boolean',
+    description: `Requires Child Link to equip ${item.label} in MM.`,
+    default: false,
+    cond: hasMM,
+  },
+  {
+    key: item.adultSetting,
+    name: `${item.label} requires Adult Link`,
+    category: 'items.mmAgeRequirements',
+    type: 'boolean',
+    description: `Requires Adult Link to equip ${item.label} in MM.`,
+    default: false,
+    cond: hasMM,
+  },
+] as const);
 
 export const SETTINGS = [{
   key: 'games',
@@ -1129,8 +1150,8 @@ export const SETTINGS = [{
   cond: hasMM,
   default: 'reset'
 }, {
-  key: 'startingAge',
-  name: 'Starting Age',
+  key: 'startingAgeOot',
+    name: 'Starting Age (OoT)',
   category: 'main.events',
   type: 'enum',
   description: 'Choose the starting age',
@@ -1140,6 +1161,19 @@ export const SETTINGS = [{
     { value: 'random', name: 'Random', description: 'Link will start off as either Adult or Child, with a 50/50 probability' },
   ],
   cond: hasOoT,
+  default: 'child'
+}, {
+  key: 'startingAgeMm',
+    name: 'Starting Age (MM)',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Choose the starting age in Majora\'s Mask. If Adult Mask or Cross-Game Age is off, you will be unable to change age in MM.',
+  values: [
+    { value: 'child', name: 'Child', description: 'Link will start off as Child' },
+    { value: 'adult', name: 'Adult', description: 'Link will start off as Adult' },
+    { value: 'random', name: 'Random', description: 'Link will start off as either Adult or Child, with a 50/50 probability' },
+  ],
+  cond: (s: any) => hasMM(s) && !s.crossAge,
   default: 'child'
 }, {
   key: 'swordlessAdult',
@@ -1179,7 +1213,7 @@ export const SETTINGS = [{
     { value: 'oot', name: 'Ocarina of Time', description: 'Can change age by playing Song of Time with the Ocarina of Time specifically.' },
     { value: 'always', name: 'Always', description: 'Can change age by playing Song of Time using any means.' },
   ],
-  description: 'Allows you to switch ages by playing Song of Time after you\'ve switched ages once in Temple of Time.<br>Preserves your current position on the scene, which logic can expect you to take advantage of.',
+  description: 'Allows you to switch ages by playing Song of Time in OoT after you\'ve switched ages once in Temple of Time.<br>Preserves your current position on the scene, which logic can expect you to take advantage of.',
   default: 'none',
   cond: hasOoT,
 }, {
@@ -2169,6 +2203,14 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   description: "Add the Spooky Mask in Majora's Mask. The spooky mask functions like the Gibdo mask but only at night.",
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'adultMaskMm',
+  name: "Adult Mask",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Adult Mask in Majora's Mask. The Adult mask allows you to change age in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
@@ -3249,7 +3291,9 @@ export const SETTINGS = [{
   description: 'Allows Link to use the Song of Soaring in OoT independently of his age',
   default: false,
   cond: (s: any) => s.songSoaringOot,
-}, {
+},
+  ...MM_AGE_REQ_SETTINGS,
+{
   key: 'erSelfLoops',
   name: 'Allow Self-Loops',
   category: 'entrances',

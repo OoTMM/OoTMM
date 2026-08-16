@@ -1,13 +1,13 @@
 import type { Settings } from '@ootmm/core';
 import type { LogicResultWorld } from '@ootmm/logic';
 import type { Confvar } from '../confvars';
-
+import { MM_AGE_REQ_ITEMS } from '@ootmm/core';
 import { isEntranceShuffle, mustStartWithMasterSword } from '@ootmm/logic';
 
 export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Confvar> {
   const config = new Set<Confvar>;
 
-  const exprs: { [k in Confvar]: boolean } = {
+  const exprs: Partial<Record<Confvar, boolean>> = {
     GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
     SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
     CSMC: settings.csmc === 'always',
@@ -145,7 +145,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_SHUFFLE_MASK_TRADES: settings.shuffleMaskTrades,
     MENU_NOTEBOOK: settings.menuNotebook,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
-    OOT_START_ADULT: settings.startingAge === 'adult',
+    OOT_START_ADULT: settings.startingAgeOot === 'adult',
+    MM_START_ADULT: settings.startingAgeMm === 'adult',
     HINT_IMPORTANCE: settings.hintImportance && settings.logic !== 'none',
     OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
     MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
@@ -274,6 +275,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_MASK_GERUDO: settings.gerudoMaskMm,
     MM_MASK_SKULL: settings.skullMaskMm,
     MM_MASK_SPOOKY: settings.spookyMaskMm,
+    MM_MASK_ADULT: settings.adultMaskMm,
     MM_UPGRADES_STICKS_NUTS: settings.sticksNutsUpgradesMm,
     OOT_SHUFFLE_EGGS: settings.eggShuffle,
     MM_STONE_OF_AGONY: settings.stoneAgonyMm,
@@ -312,6 +314,16 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
   for (const v in exprs) {
     if (exprs[v as Confvar]) {
       config.add(v as Confvar);
+    }
+  }
+
+  for (const item of MM_AGE_REQ_ITEMS) {
+    if ((settings as any)[item.childSetting]) {
+      config.add(item.childConfvar as Confvar);
+    }
+
+    if ((settings as any)[item.adultSetting]) {
+      config.add(item.adultConfvar as Confvar);
     }
   }
 

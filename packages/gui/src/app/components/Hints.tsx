@@ -100,7 +100,7 @@ export function HintEditor({ index }: HintEditorProps) {
         </div>
       </td>
       <td><Select options={hintOptions} value={hint.type} onSelect={onInputType} /></td>
-      <td>{hint.type === 'item' && <Select searcheable placeholder="Search..." options={itemOptions} onSelect={onInputItem} value={selectedItem?.value ?? null}/>}</td>
+      <td>{hint.type === 'item' && <Select searchable placeholder="Search..." options={itemOptions} onSelect={onInputItem} value={selectedItem?.value ?? null}/>}</td>
       <td>{hint.amount !== 'max' && <Input type="number" min="1" max="99" className="w-full" value={hint.amount.toString()} onChange={onInputAmount} />}</td>
       <td><div className="flex justify-center"><Checkbox checked={hint.amount === 'max'} onChange={onInputMax} /></div></td>
       <td>

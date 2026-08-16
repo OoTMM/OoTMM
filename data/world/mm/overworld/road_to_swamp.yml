@@ -9,9 +9,9 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
     WATER: "true"
-    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && can_use_pictograph_box"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "GLOBAL": "true"
@@ -74,7 +74,7 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Road to Southern Swamp": "true"
