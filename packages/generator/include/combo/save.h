@@ -22,8 +22,9 @@
 typedef struct
 {
     u32     walIndex;
+    u32     ackToken;
     char    sendBuffer[32];
-    u32     sendBufferChecksum;
+    u32     sendBufferToken;
     u8      sendBufferSize;
     s16     giSkip[16];
 }

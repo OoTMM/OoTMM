@@ -145,7 +145,6 @@ MultiState;
 
 extern MultiState gMulti;
 
-u32 Multi_CRC32(const void* data, int size);
 int Multi_SendPacket(MultiPacketHeader* pkt, u32 size);
 void Multi_SendPosition(PlayState* play);
 void Multi_UpdateWisps(void);

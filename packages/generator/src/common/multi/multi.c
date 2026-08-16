@@ -297,7 +297,7 @@ static int MultiProcessMessageWAL(MultiPacketWalInHeader* pkt, int size)
 
 static void MultiProcessAck(MultiPacketWalAckIn* pkt)
 {
-    if (pkt->token != gSharedCustomSave.multi.sendBufferChecksum)
+    if (pkt->token != gSharedCustomSave.multi.sendBufferToken)
         return;
 
     gSharedCustomSave.multi.sendBufferSize = 0;
@@ -500,7 +500,7 @@ static void Multi_ReliableSendWAL(MultiPacketWalOutHeader* pkt, u32 size)
 {
     u32 token;
 
-    token = Multi_CRC32(&pkt, sizeof(pkt));
+    token = gSharedCustomSave.multi.ackToken++;
     pkt->token = token;
 
     Multi_SendPacket(&pkt->header, size);
@@ -510,7 +510,7 @@ static void Multi_ReliableSendWAL(MultiPacketWalOutHeader* pkt, u32 size)
         /* Store persistently */
         memcpy(&gSharedCustomSave.multi.sendBuffer, pkt, size);
         gSharedCustomSave.multi.sendBufferSize = size;
-        gSharedCustomSave.multi.sendBufferChecksum = pkt->token;
+        gSharedCustomSave.multi.sendBufferToken = token;
         gMulti.ttlResend = TTL_RESEND;
     }
 }
