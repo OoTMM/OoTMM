@@ -242,7 +242,7 @@
 # Mido / Deku Tree
 "can_move_mido_reqs": "is_child && has_sword_kokiri && has_shield_deku"
 "can_move_mido": "can_move_mido_reqs && soul_npc(SOUL_NPC_MIDO)"
-"can_bypass_mido": "setting(dekuTree, open) || is_adult || climb_anywhere || hookshot_anywhere || can_move_mido_reqs"
+"can_bypass_mido": "setting(dekuTree, open) || climb_anywhere || hookshot_anywhere || can_move_mido_reqs || is_adult && (get_past_skultullas_no_stone || event(BOSS_PHANTOM_GANON))"
 
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
