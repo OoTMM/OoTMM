@@ -392,27 +392,27 @@ void EnItem00_InitGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItemId
     switch (thisx->params)
     {
     case ITEM00_RUPEE_GREEN:
-        AddItem(play, ITEM_RUPEE_GREEN);
+        Item_Give(play, ITEM_RUPEE_GREEN);
         break;
 
     case ITEM00_RUPEE_BLUE:
-        AddItem(play, ITEM_RUPEE_BLUE);
+        Item_Give(play, ITEM_RUPEE_BLUE);
         break;
 
     case ITEM00_RUPEE_RED:
-        AddItem(play, ITEM_RUPEE_RED);
+        Item_Give(play, ITEM_RUPEE_RED);
         break;
 
     case ITEM00_RUPEE_PURPLE:
-        AddItem(play, ITEM_RUPEE_PURPLE);
+        Item_Give(play, ITEM_RUPEE_PURPLE);
         break;
 
     case ITEM00_RUPEE_ORANGE:
-        AddItem(play, ITEM_RUPEE_GOLD);
+        Item_Give(play, ITEM_RUPEE_GOLD);
         break;
 
     case ITEM00_RECOVERY_HEART:
-        AddItem(play, ITEM_RECOVERY_HEART);
+        Item_Give(play, ITEM_RECOVERY_HEART);
         break;
 
     case ITEM00_FLEXIBLE:
@@ -422,35 +422,35 @@ void EnItem00_InitGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItemId
 
     case ITEM00_BOMB:
     case ITEM00_BOMBS_5:
-        AddItem(play, ITEM_MM_BOMBS_5);
+        Item_Give(play, ITEM_MM_BOMBS_5);
         break;
 
     case ITEM00_ARROWS_10:
-        AddItem(play, ITEM_MM_ARROWS_10);
+        Item_Give(play, ITEM_MM_ARROWS_10);
         break;
 
     case ITEM00_ARROWS_30:
-        AddItem(play, ITEM_MM_ARROWS_30);
+        Item_Give(play, ITEM_MM_ARROWS_30);
         break;
 
     case ITEM00_ARROWS_40:
-        AddItem(play, ITEM_MM_ARROWS_40);
+        Item_Give(play, ITEM_MM_ARROWS_40);
         break;
 
     case ITEM00_ARROWS_50:
-        AddItem(play, ITEM_MM_ARROWS_50);
+        Item_Give(play, ITEM_MM_ARROWS_50);
         break;
 
     case ITEM00_MAGIC_LARGE:
-        AddItem(play, ITEM_MM_MAGIC_JAR_LARGE);
+        Item_Give(play, ITEM_MM_MAGIC_JAR_LARGE);
         break;
 
     case ITEM00_MAGIC_SMALL:
-        AddItem(play, ITEM_MM_MAGIC_JAR_SMALL);
+        Item_Give(play, ITEM_MM_MAGIC_JAR_SMALL);
         break;
 
     case ITEM00_KEY:
-        AddItem(play, ITEM_MM_SMALL_KEY);
+        Item_Give(play, ITEM_MM_SMALL_KEY);
         break;
 
     case ITEM00_NUT:
@@ -462,11 +462,11 @@ void EnItem00_InitGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItemId
         break;
 
     case ITEM00_BOMBCHU:
-        AddItem(play, ITEM_MM_BOMBCHU_5);
+        Item_Give(play, ITEM_MM_BOMBCHU_5);
         break;
 
     case ITEM00_SEEDS:
-        AddItem(play, ITEM_MM_SEEDS_5);
+        Item_Give(play, ITEM_MM_SEEDS_5);
         break;
 
     default:
@@ -485,22 +485,22 @@ void EnItem00_UpdateGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItem
 
     case ITEM00_RUPEE_BLUE:
         this->rupeeCollected = 1;
-        AddItem(play, ITEM_RUPEE_BLUE);
+        Item_Give(play, ITEM_RUPEE_BLUE);
         break;
 
     case ITEM00_RUPEE_RED:
         this->rupeeCollected = 1;
-        AddItem(play, ITEM_RUPEE_RED);
+        Item_Give(play, ITEM_RUPEE_RED);
         break;
 
     case ITEM00_RUPEE_PURPLE:
         this->rupeeCollected = 1;
-        AddItem(play, ITEM_RUPEE_PURPLE);
+        Item_Give(play, ITEM_RUPEE_PURPLE);
         break;
 
     case ITEM00_RUPEE_ORANGE:
         this->rupeeCollected = 1;
-        AddItem(play, ITEM_RUPEE_GOLD);
+        Item_Give(play, ITEM_RUPEE_GOLD);
         break;
 
     case ITEM00_STICK:
@@ -516,7 +516,7 @@ void EnItem00_UpdateGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItem
         break;
 
     case ITEM00_RECOVERY_HEART:
-        AddItem(play, ITEM_RECOVERY_HEART);
+        Item_Give(play, ITEM_RECOVERY_HEART);
         break;
 
     case ITEM00_FLEXIBLE:
@@ -526,23 +526,23 @@ void EnItem00_UpdateGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItem
 
     case ITEM00_BOMB:
     case ITEM00_BOMBS_5:
-        AddItem(play, ITEM_MM_BOMBS_5);
+        Item_Give(play, ITEM_MM_BOMBS_5);
         break;
 
     case ITEM00_ARROWS_10:
-        AddItem(play, ITEM_MM_ARROWS_10);
+        Item_Give(play, ITEM_MM_ARROWS_10);
         break;
 
     case ITEM00_ARROWS_30:
-        AddItem(play, ITEM_MM_ARROWS_30);
+        Item_Give(play, ITEM_MM_ARROWS_30);
         break;
 
     case ITEM00_ARROWS_40:
-        AddItem(play, ITEM_MM_ARROWS_40);
+        Item_Give(play, ITEM_MM_ARROWS_40);
         break;
 
     case ITEM00_ARROWS_50:
-        AddItem(play, ITEM_MM_ARROWS_50);
+        Item_Give(play, ITEM_MM_ARROWS_50);
         break;
 
     case ITEM00_KEY:
@@ -558,11 +558,11 @@ void EnItem00_UpdateGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItem
         break;
 
     case ITEM00_MAGIC_LARGE:
-        AddItem(play, ITEM_MM_MAGIC_JAR_LARGE);
+        Item_Give(play, ITEM_MM_MAGIC_JAR_LARGE);
         break;
 
     case ITEM00_MAGIC_SMALL:
-        AddItem(play, ITEM_MM_MAGIC_JAR_SMALL);
+        Item_Give(play, ITEM_MM_MAGIC_JAR_SMALL);
         break;
 
     case ITEM00_SHIELD_HERO:
@@ -578,7 +578,7 @@ void EnItem00_UpdateGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItem
         break;
 
     case ITEM00_BOMBCHU:
-        AddItem(play, ITEM_MM_BOMBCHU_5);
+        Item_Give(play, ITEM_MM_BOMBCHU_5);
         break;
 
     case ITEM00_SEEDS:

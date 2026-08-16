@@ -1044,7 +1044,7 @@ PATCH_CALL(0x8007a0d0, Player_DrawFlexLod);
 static void Player_AddMasterSwordGanonFight(PlayState* play)
 {
     if (gSharedCustomSave.foundMasterSword)
-        AddItem(play, ITEM_OOT_SWORD_MASTER);
+        Item_Give(play, ITEM_OOT_SWORD_MASTER);
 }
 
 PATCH_CALL(0x80850758, Player_AddMasterSwordGanonFight);

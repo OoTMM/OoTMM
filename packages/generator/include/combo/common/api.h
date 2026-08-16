@@ -210,7 +210,7 @@ s8 Actor_GetPlayerExchangeItemId(PlayState* play);
 void AddMagic(PlayState* play, s16 amount);
 #endif
 
-u8 AddItem(PlayState* play, u8 itemId);
+u8 Item_Give(PlayState* play, u8 itemId);
 u8 AddItemWithIcon(PlayState* play, Player* link, const GetItem* giEntry);
 u8 Item_CheckObtainability(s16 itemId);
 void Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem);
