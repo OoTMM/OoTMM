@@ -10,7 +10,7 @@
 #include <combo/entrance.h>
 #include <combo/misc.h>
 #include <combo/common/Kaleido_Scope.h>
-
+#include "combo/custom.h"
 #include "combo/mask.h"
 
 
@@ -153,6 +153,17 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     u32 isForeign = 0;
     switch (texIndex)
     {
+    case ITEM_MM_MASK_ADULT:
+        {
+        void* src = comboCacheGetFile(CUSTOM_ADULT_MASK_TEXT_ADDR);
+
+        if (src)
+            memcpy(segment, src, 0x400);
+        else
+            bzero(segment, 0x400);
+
+        return;
+        }
     case ITEM_MM_SHIELD_HERO:
         if (gSharedCustomSave.mmShieldIsDeku)
         {
@@ -407,6 +418,19 @@ void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "This mask was manufactured from" TEXT_NL "the plank of a coffin." TEXT_END);
         break;
+    case ITEM_MM_MASK_ADULT:
+            b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Adult Mask" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Wear it with " TEXT_COLOR_YELLOW "\xB2");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " to assume Adult" TEXT_NL);
+        comboTextAppendStr(&b, "form. Use " TEXT_COLOR_YELLOW "\xB2");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " to change back." TEXT_END);
+        break;
     }
 }
 
@@ -509,16 +533,17 @@ static u32 sCustomIcons[] = {
     ITEM_MM_RUTO_LETTER,
     ITEM_MM_MASK_GERUDO,
     ITEM_MM_MASK_SKULL,
-    ITEM_MM_MASK_SPOOKY
+    ITEM_MM_MASK_SPOOKY,
+    ITEM_MM_MASK_ADULT,
 };
 
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN] =
 {
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
-    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0 },
-    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
+    { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
+    { 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -585,6 +610,20 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         case ITEM_MM_MASK_SPOOKY:
             foreignIcon = ITEM_OOT_SPOOKY_MASK;
             break;
+        case ITEM_MM_MASK_ADULT:
+        {
+            void* src;
+            u32 customDestination;
+
+            customDestination = gCustomIconAddr + (i * customIconSize);
+            src = comboCacheGetFile(CUSTOM_ADULT_MASK_ICON_ADDR);
+
+            if (src)
+                memcpy((void*)customDestination, src, customIconSize);
+
+            *size += customIconSize;
+            continue;
+        }
         default:
             continue;
         }
@@ -637,10 +676,10 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 11) * 2];
+static Vtx gVertexBufs[(4 * 12) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[11] = {
+static Vtx* gVertex[12] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
@@ -652,6 +691,7 @@ static Vtx* gVertex[11] = {
     &gVertexBufs[(4 * 8) * 2],
     &gVertexBufs[(4 * 9) * 2],
     &gVertexBufs[(4 * 10) * 2],
+    &gVertexBufs[(4 * 11) * 2],
 };
 
 static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {

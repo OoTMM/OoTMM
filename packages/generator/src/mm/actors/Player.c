@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <assets/mm/objects/gameplay_keep.h>
 #include <combo/custom_animations.h>
 #include <combo/custom.h>
 #include <combo/entrance.h>
@@ -13,6 +14,7 @@
 #include <combo/effect.h>
 #include "../actors.h"
 #include <combo/mm/boomerang.h>
+#include <combo/mm/adultmask.h>
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
@@ -115,11 +117,41 @@ static void Player_UpdateCustomMaskBehavior(Player* player)
         player->currentMask = effectiveMask;
 }
 
+static s8 sLoadedMaskObjectAdult = -1;
+
+static void Player_RefreshMaskObjectForAge(Player* player)
+{
+    s32 isAdult;
+
+    if (player->actor.id != ACTOR_PLAYER)
+        return;
+
+    if (player->transformation != MM_PLAYER_FORM_HUMAN)
+        return;
+
+    if (player->currentMask == 0)
+        return;
+
+    if (player->maskObjectLoadState != 0)
+        return;
+
+    if (sLoadedMaskObjectAdult < 0)
+        return;
+
+    isAdult = comboIsLinkAdult();
+
+    if (sLoadedMaskObjectAdult == isAdult)
+        return;
+    player->maskId = player->currentMask;
+    player->maskObjectLoadState = 1;
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
     Player_HandleBurningDekuShield(this, play);
     Player_ClearCustomMaskSpoofBeforeUpdate(this);
+    Player_RefreshMaskObjectForAge(this);
     Player_Update(this, play);
     Player_UpdateCustomMaskBehavior(this);
     Player_HandleBronzeScale(this, play);
@@ -175,6 +207,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_MASK_GERUDO,
     PLAYER_CUSTOM_IA_MASK_SKULL,
     PLAYER_CUSTOM_IA_MASK_SPOOKY,
+    PLAYER_CUSTOM_IA_MASK_ADULT,
 };
 
 static u8 sMagicSpellCosts[] =
@@ -406,7 +439,8 @@ void Player_Action_CastingSpell(Player* this, PlayState* play)
 
             if (this->av2.actionVar2 == 0)
             {
-                RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+                u8 fwAge = comboMmFwAge();
+                RespawnData* fw = &gCustomSave.fw[fwAge];
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 1;
                 Play_SetupRespawnPoint(play, RESPAWN_MODE_HUMAN, 0x6ff);
                 *fw = gSaveContext.respawn[RESPAWN_MODE_DOWN];
@@ -414,8 +448,8 @@ void Player_Action_CastingSpell(Player* this, PlayState* play)
                 fw->data = 40;
 
                 /* Copy Game Over / Soar to Entrance respawn data. */
-                memcpy(&gCustomSave.fwRespawnTop[gOotSave.age], &gSaveContext.respawn[RESPAWN_MODE_TOP], sizeof(RespawnData));
-                memcpy(&gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
+                memcpy(&gCustomSave.fwRespawnTop[fwAge], &gSaveContext.respawn[RESPAWN_MODE_TOP], sizeof(RespawnData));
+                memcpy(&gCustomSave.fwRespawnDungeonEntrance[fwAge], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
 
                 this->av2.actionVar2 = 2;
             }
@@ -521,10 +555,10 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
             play->transitionTrigger = TRANS_TRIGGER_START;
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
-
+            u8 fwAge = comboMmFwAge();
             /* Restore Game Over / Soar to Entrance respawn data. */
-            memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[gOotSave.age], sizeof(RespawnData));
-            memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(RespawnData));
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[fwAge], sizeof(RespawnData));
+            memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[fwAge], sizeof(RespawnData));
 
             /* TODO cancel timers? */
 
@@ -534,8 +568,9 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
         if (play->msgCtx.choiceIndex == 1)
         {
             gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = -gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
-            gCustomSave.fw[gOotSave.age].data = 0;
-            Audio_PlaySfx_AtPos(&gCustomSave.fw[gOotSave.age].pos, 0x8C8); /* NA_SE_PL_MAGIC_WIND_VANISH */
+            RespawnData *fw = &gCustomSave.fw[comboMmFwAge()];
+            fw->data = 0;
+            Audio_PlaySfx_AtPos(&fw->pos, 0x8C8); /* NA_SE_PL_MAGIC_WIND_VANISH */
         }
 
         Player_func_8085B384 = OverlayAddr(0x8085B384);
@@ -576,6 +611,12 @@ s32 Player_CustomCsItem(Player* this, PlayState* play)
         }
         func_8082DAD4 = OverlayAddr(0x8082DAD4);
         func_8082DAD4(this);
+        return 1;
+    }
+    if (AdultMask_IsCsItem(this))
+    {
+        AdultMask_StartCsItem(this, play);
+        AdultMask_AfterStart(this);
         return 1;
     }
     else if (this->itemAction >= 0x3a && this->itemAction <= 0x51) /* PLAYER_IA_MASK_MIN // PLAYER_IA_MASK_MAX */
@@ -748,6 +789,11 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
         /* Handled */
         return 1;
     }
+    if (AdultMask_TryUse(this, play, itemAction))
+    {
+        return 1;
+    }
+
     s32 customMask = Player_ActionToCustomMask(this, itemAction);
     if (customMask != PLAYER_CUSTOM_MASK_NONE)
     {
@@ -835,7 +881,7 @@ void Player_Action_FaroresWindSpawning(Player* this, PlayState* play)
     if (this->av2.actionVar2++ == 20)
     {
         gSaveContext.respawn[RESPAWN_MODE_HUMAN].data++;
-        Audio_PlaySfx_AtPos(&gCustomSave.fw[gOotSave.age].pos, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
+        Audio_PlaySfx_AtPos(&gCustomSave.fw[comboMmFwAge()].pos, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
     }
 }
 
@@ -1383,6 +1429,55 @@ void Player_PostLimbDrawGameplayWrapper(PlayState* play, s32 limbIndex, Gfx** dL
             Player_DrawShield(play, player);
         }
     }
+    if (AdultMask_IsPuttingOn())
+    {
+        s32 timer = AdultMask_GetTimer();
+        s32 isSetMaskEndAnim = player->skelAnime.animation == &gPlayerAnim_cl_setmaskend;
+
+        if (timer >= 0 &&
+            timer < 11 &&
+            !isSetMaskEndAnim)
+        {
+            if (limbIndex == PLAYER_LIMB_LEFT_HAND)
+            {
+                AdultMask_DrawMaskInHand(play, player);
+            }
+        }
+
+        if (limbIndex == PLAYER_LIMB_HEAD)
+        {
+            if (AdultMask_ShouldDrawTransformFace())
+            {
+                AdultMask_DrawTransformationMaskOnFace(play, player);
+                AdultMask_DrawTransformRing(play, player);
+            }
+            else if (timer >= 12 &&
+                     !isSetMaskEndAnim)
+            {
+                AdultMask_DrawMaskOnFaceNativeLike(play, player);
+            }
+        }
+    }
+    else if (AdultMask_IsTakeOffTransform())
+    {
+        if (limbIndex == PLAYER_LIMB_HEAD)
+            AdultMask_DrawTransformRing(play, player);
+    }
+    else if (AdultMask_IsTakeOffChild())
+    {
+        s32 timer = AdultMask_GetTimer();
+        s32 isSetMaskEndAnim = player->skelAnime.animation == &gPlayerAnim_cl_setmaskend;
+
+        if (timer >= 0 &&
+            timer < 0x7FFF &&
+            !isSetMaskEndAnim)
+        {
+            if (limbIndex == PLAYER_LIMB_LEFT_HAND)
+            {
+                AdultMask_DrawMaskInHand(play, player);
+            }
+        }
+    }
 
     if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT && limbIndex == PLAYER_LIMB_RIGHT_HAND)
     {
@@ -1803,6 +1898,10 @@ s32 Player_ShouldCheckItemUsabilityWhileSwimming(Player* player, u8 itemAction)
     case PLAYER_CUSTOM_IA_BOOTS_HOVER:
     case PLAYER_CUSTOM_IA_TUNIC_ZORA:
     case PLAYER_CUSTOM_IA_TUNIC_GORON:
+    case PLAYER_CUSTOM_IA_MASK_GERUDO:
+    case PLAYER_CUSTOM_IA_MASK_SKULL:
+    case PLAYER_CUSTOM_IA_MASK_SPOOKY:
+    case PLAYER_CUSTOM_IA_MASK_ADULT:
         return 0;
     default:
         return 1;
@@ -2098,38 +2197,42 @@ PATCH_CALL(0x8019f874, Player_PlaySfx_GiantsMask);
 
 u8 Player_AfterMaskLoaded(Player* player)
 {
+    s32 isAdult = comboIsLinkAdult();
+
     player->maskObjectLoadState = 0;
 
-    if (player->actor.id == ACTOR_PLAYER && comboIsLinkAdult())
+    if (player->actor.id == ACTOR_PLAYER && isAdult)
     {
         u32* maskObjectSegment;
         switch (player->currentMask)
         {
-        case MASK_KEATON:
-            maskObjectSegment = (u32*) player->maskObjectSegment;
-            maskObjectSegment[0x12a] = 0xde000000;
-            maskObjectSegment[0x12b] = 0x0405a2e0;
-            break;
-        case MASK_BUNNY:
-            maskObjectSegment = (u32*) player->maskObjectSegment;
-            maskObjectSegment[0x188] = 0xde000000;
-            maskObjectSegment[0x189] = 0x0405a2e0;
-            maskObjectSegment[0x1e0] = 0xde000000;
-            maskObjectSegment[0x1e1] = 0x0405a2e8;
-            maskObjectSegment[0x1ec] = 0xde000000;
-            maskObjectSegment[0x1ed] = 0x0405a2e0;
-            maskObjectSegment[0x224] = 0xde000000;
-            maskObjectSegment[0x225] = 0x0405a2e8;
-            maskObjectSegment[0x230] = 0xde000000;
-            maskObjectSegment[0x231] = 0x0405a2e0;
-            break;
-        case MASK_SCENTS:
-            maskObjectSegment = (u32*) player->maskObjectSegment;
-            maskObjectSegment[0x1c6] = 0xde000000;
-            maskObjectSegment[0x1c7] = 0x0405a2e0;
-            break;
+            case MASK_KEATON:
+                maskObjectSegment = (u32*)player->maskObjectSegment;
+                maskObjectSegment[0x12a] = 0xde000000;
+                maskObjectSegment[0x12b] = 0x0405a2e0;
+                break;
+            case MASK_BUNNY:
+                maskObjectSegment = (u32*)player->maskObjectSegment;
+                maskObjectSegment[0x188] = 0xde000000;
+                maskObjectSegment[0x189] = 0x0405a2e0;
+                maskObjectSegment[0x1e0] = 0xde000000;
+                maskObjectSegment[0x1e1] = 0x0405a2e8;
+                maskObjectSegment[0x1ec] = 0xde000000;
+                maskObjectSegment[0x1ed] = 0x0405a2e0;
+                maskObjectSegment[0x224] = 0xde000000;
+                maskObjectSegment[0x225] = 0x0405a2e8;
+                maskObjectSegment[0x230] = 0xde000000;
+                maskObjectSegment[0x231] = 0x0405a2e0;
+                break;
+            case MASK_SCENTS:
+                maskObjectSegment = (u32*)player->maskObjectSegment;
+                maskObjectSegment[0x1c6] = 0xde000000;
+                maskObjectSegment[0x1c7] = 0x0405a2e0;
+                break;
         }
     }
+    if (player->actor.id == ACTOR_PLAYER)
+        sLoadedMaskObjectAdult = isAdult;
 
     return player->currentMask;
 }
@@ -2257,6 +2360,15 @@ static s32 Player_ShouldNativeMaskClearCustomMask(s16 itemId)
     return 1;
 }
 
+s32 Player_IsAdultMaskItem(Player* player, s16 itemId)
+{
+    return Player_CustomItemToItemAction(
+        player,
+        itemId,
+        PLAYER_IA_NONE
+    ) == PLAYER_CUSTOM_IA_MASK_ADULT;
+}
+
 void Player_UseItem(PlayState* play, Player* this, s16 itemId)
 {
     void (*Player_UseItemImpl)(PlayState* play, Player* this, s16 itemId);
@@ -2312,6 +2424,7 @@ s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
     case PLAYER_CUSTOM_IA_MASK_GERUDO:
     case PLAYER_CUSTOM_IA_MASK_SKULL:
     case PLAYER_CUSTOM_IA_MASK_SPOOKY:
+    case PLAYER_CUSTOM_IA_MASK_ADULT:
         return 3;  /* PLAYER_MODELGROUP_DEFAULT */
     }
 
@@ -2355,6 +2468,7 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     case PLAYER_CUSTOM_IA_MASK_GERUDO:
     case PLAYER_CUSTOM_IA_MASK_SKULL:
     case PLAYER_CUSTOM_IA_MASK_SPOOKY:
+    case PLAYER_CUSTOM_IA_MASK_ADULT:
         return;
     }
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
@@ -2378,6 +2492,7 @@ void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 ite
     case PLAYER_CUSTOM_IA_MASK_GERUDO:
     case PLAYER_CUSTOM_IA_MASK_SKULL:
     case PLAYER_CUSTOM_IA_MASK_SPOOKY:
+    case PLAYER_CUSTOM_IA_MASK_ADULT:
         return;
     }
     /* If more custom items were to be added that go to this extent I would suggest a sPlayerItemActionInitFuncs array */

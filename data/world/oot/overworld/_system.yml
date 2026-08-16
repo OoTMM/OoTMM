@@ -5,8 +5,8 @@
   region: NONE
   age_change: false
   exits:
-    "SPAWN CHILD": "is_child && (setting(startingAge, child) || event(TIME_TRAVEL))"
-    "SPAWN ADULT": "is_adult && (setting(startingAge, adult) || event(TIME_TRAVEL))"
+    "SPAWN CHILD": "is_child && (setting(startingAgeOot, child) || event(TIME_TRAVEL))"
+    "SPAWN ADULT": "is_adult && (setting(startingAgeOot, adult) || event(TIME_TRAVEL))"
 
 "SPAWN CHILD":
   region: NONE

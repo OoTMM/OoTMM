@@ -117,5 +117,5 @@ typedef enum MessageMode
 void SubS_SetOfferMode(u16* flags, u16 offerMode, u16 mask);
 void Message_CloseTextbox(struct PlayState* play);
 void Message_ContinueTextbox(struct PlayState* play, u16 textId);
-
+void Message_StartTextbox(struct PlayState* play, u16 textId, struct Actor* actor);
 #endif

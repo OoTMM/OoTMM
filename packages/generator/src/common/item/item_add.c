@@ -2127,6 +2127,15 @@ static int addItemHammerGFS(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemFierceDeityAdult(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmFierceDeityAdult[param];
+    if (gMmSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = itemId;
+    gMmExtraItems.fierceDeityAdult |= (1 << (u8)param);
+    return 0;
+}
+
 static int addItemOotRustyKey(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     BITMAP8_SET(gSharedCustomSave.rustyKeysOot, param);
@@ -2356,6 +2365,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSeedsMm,
     addItemStoneGerudoSkullMm,
     addItemGibdoSpookyMm,
+    addItemFierceDeityAdult,
     addItemSaveFlag,
 };
 
