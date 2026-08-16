@@ -7,13 +7,6 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, PlayState* play, s16 gi)
     float dist;
 
     link = GET_PLAYER(play);
-
-    if (GetItemCollectBehavior(ITEM_OOT_STICK) == 0xff)
-    {
-        GiveItemDefaultRange(this, play, gi);
-        return;
-    }
-
     dist = this->xzDistToPlayer;
     if (dist < 0.f)
         dist = -dist;

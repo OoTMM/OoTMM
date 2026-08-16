@@ -36,7 +36,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play, s16 gi, float a, f
     if (q.ovType == OV_NONE)
     {
         itemId = kExtendedGetItems[gi - 1].itemId;
-        if (GetItemCollectBehavior(itemId) == 0xff)
+        if (Item_CheckObtainability(itemId) == 0xff)
             itemId = -1;
 
         if (gi == GI_MM_SHIELD_HERO && gSharedCustomSave.mmShieldIsDeku)

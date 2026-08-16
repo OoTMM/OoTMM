@@ -321,7 +321,7 @@ Actor_GetPlayerExchangeItemId = 0x80022b04;
 
 AddItem = 0x8006fdcc;
 Player_AddItemWithIcon = 0x8083c590;
-GetItemCollectBehavior = 0x80071420;
+Item_CheckObtainability = 0x80071420;
 Inventory_ReplaceItem = 0x800719e0;
 Inventory_UpdateBottleItem = 0x80071b7c;
 Interface_SetDoAction = 0x80071E6C;

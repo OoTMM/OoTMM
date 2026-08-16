@@ -266,7 +266,7 @@ gActorOvl = 0x801aefd0;
 
 Flags_SetSwitch = 0x800b5bf4;
 ClearSwitchFlag = 0x800b5c34;
-GetItemCollectBehavior = 0x801143cc;
+_Item_CheckObtainability = 0x801143cc;
 RemoveItem = 0x801149a0;
 Inventory_UpdateBottleItem = 0x80114fd0;
 

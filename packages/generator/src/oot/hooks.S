@@ -77,3 +77,5 @@ PATCH_START 0x800a0734
   j Play_FastInit
    nop
 PATCH_END
+
+/* Disable Item_CheckObtainability for sticks & nuts */

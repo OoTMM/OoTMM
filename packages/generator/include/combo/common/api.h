@@ -212,7 +212,7 @@ void AddMagic(PlayState* play, s16 amount);
 
 u8 AddItem(PlayState* play, u8 itemId);
 u8 AddItemWithIcon(PlayState* play, Player* link, const GetItem* giEntry);
-u8 GetItemCollectBehavior(s16 itemId);
+u8 Item_CheckObtainability(s16 itemId);
 void Inventory_ReplaceItem(PlayState* play, u16 oldItem, u16 newItem);
 void Inventory_UpdateBottleItem(PlayState* play, u8 item, u8 button);
 void Interface_SetDoAction(PlayState* play, u16 action);

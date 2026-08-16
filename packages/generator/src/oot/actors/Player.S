@@ -36,7 +36,7 @@ PATCH_START 0x80831d8c
   lw    ra,0x00(sp)
 PATCH_END
 
-/* Disable calls to GetItemCollectBehavior */
+/* Disable calls to Item_CheckObtainability */
 PATCH_START 0x8083c6f0
   li v0,0xff
 PATCH_END
