@@ -1802,7 +1802,7 @@ export const SETTINGS = [{
     { value: 'descending', name: 'Descending ', description: 'Clocks will be received in descending order, with Night 3 already unlocked.' },
   ],
   default: 'ascending',
-  cond: (s: any) => s.clocks,
+  cond: (s: any) => s.clocksMm,
 }, {
   key: 'fillWallets',
   name: 'Fill Wallets',
