@@ -1143,6 +1143,12 @@ export const MM_RUSTY_KEYS = new Set([
 ]);
 
 export const REQUIRED = new Set([
+  Items.OOT_STICK_UPGRADE,
+  Items.MM_STICK_UPGRADE,
+  Items.SHARED_STICK_UPGRADE,
+  Items.OOT_NUT_UPGRADE,
+  Items.MM_NUT_UPGRADE,
+  Items.SHARED_NUT_UPGRADE,
   ...OOT_RUSTY_KEYS,
   ...MM_RUSTY_KEYS,
   ...SONG_NOTES,
