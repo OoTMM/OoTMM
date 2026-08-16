@@ -46,6 +46,7 @@ export const MASKS_TRANSFORM = new Set([
   Items.MM_MASK_FIERCE_DEITY,
   Items.SHARED_MASK_GORON,
   Items.SHARED_MASK_ZORA,
+  Items.MM_MASK_ADULT,
 ]);
 
 export const MASKS_OOT = new Set([
@@ -1381,6 +1382,7 @@ export const REQUIRED = new Set([
   Items.MM_MASK_GERUDO,
   Items.MM_MASK_SKULL,
   Items.MM_MASK_SPOOKY,
+  Items.MM_MASK_ADULT,
   Items.MM_BOTTLED_GOLD_DUST,
   Items.MM_BOTTLE_EMPTY,
   Items.MM_BOTTLE_MILK,

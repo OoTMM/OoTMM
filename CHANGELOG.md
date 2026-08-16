@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Added MM Adult Mask
+- Added MM Starting Age Selection
 - Add a qol setting to allow time selection when playing song of double time.
 - Add a setting to shuffle a shovel in the item pool, locking grottoes.
 - Add a setting to shuffle the initial stick/nuts capacity as additional upgrades in the item pool.
@@ -17,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Changed Starting Age to Starting Age OoT to differentiate from the new Starting Age MM setting.
 - Remove "Swordless Adult" as a setting - it's now always enabled.
 - When going back to spawn, players can now explicitly select which spawn point to get back to, assuming they discovered both ages.
 - Remove the "Distinct Worlds" setting, all worlds are now distinct by default.

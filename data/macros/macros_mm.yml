@@ -56,8 +56,8 @@
 "is_valley_cleared": "flag_on(MM_REGION_VALLEY_CLEARED) && flag_off(MM_REGION_VALLEY_CURSED) && ((setting(erBoss, none) && setting(regionState, dungeonBeaten) && event(BOSS_TWINMOLD)) || event(CLEAR_STATE_IKANA))"
 
 # Age
-"is_child": "!setting(crossAge) || age(child)"
-"is_adult": "setting(crossAge) && age(adult)"
+"is_child": "!setting(crossAge) || age(child) || has_mask_adult || setting(startingAgeMm, child)"
+"is_adult": "(setting(crossAge) && age(adult)) || has_mask_adult || setting(startingAgeMm, adult)"
 "is_tall": "has_mask_zora || is_adult" #add Fierce Deity or a new macro to include FD
 "is_short": "has(MASK_DEKU) || is_child"
 
@@ -301,6 +301,7 @@
 "small_keys_st(n)": "small_keys(ST, SMALL_KEY_ST, KEY_RING_ST, n)"
 
 # Masks
+"has_mask_adult": "has(MM_MASK_ADULT)"
 "has_mask_bunny": "has(MASK_BUNNY) || has(SHARED_MASK_BUNNY)"
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
 "has_mask_keaton": "has(MASK_KEATON) || has(SHARED_MASK_KEATON)"

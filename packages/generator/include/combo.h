@@ -130,6 +130,8 @@ NORETURN void comboGameSwitch(PlayState* play, u32 entrance);
 
 void Save_SwapFaroreOot(void);
 
+u8 comboMmFwAge(void);
+
 extern const u8 kMaxSongNotes[];
 
 void    comboWalletRefresh(void);
