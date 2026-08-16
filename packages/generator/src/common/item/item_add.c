@@ -374,6 +374,9 @@ static int addItemWalletMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addAmmoOot(u8 slot, u16 item, u8 max, u8 count)
 {
+    if (max == 0)
+        return;
+
     gOotSave.info.inventory.items[slot] = item;
     gOotSave.info.inventory.ammo[slot] += count;
     if (gOotSave.info.inventory.ammo[slot] > max)
@@ -382,6 +385,9 @@ static void addAmmoOot(u8 slot, u16 item, u8 max, u8 count)
 
 static void addAmmoMm(u8 slot, u16 item, u8 max, u8 count)
 {
+    if (max == 0)
+        return;
+
     gMmSave.info.inventory.items[slot] = item;
     gMmSave.info.inventory.ammo[slot] += count;
     if (gMmSave.info.inventory.ammo[slot] > max)
@@ -437,10 +443,6 @@ static int addItemBombsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 void addNutsRawOot(int count)
 {
     u8 max;
-
-    if (gOotSave.info.inventory.upgrades.dekuNut == 0)
-        gOotSave.info.inventory.upgrades.dekuNut = 1;
-
     max = kMaxNuts[gOotSave.info.inventory.upgrades.dekuNut];
     addAmmoOot(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
@@ -448,10 +450,6 @@ void addNutsRawOot(int count)
 void addNutsRawMm(int count)
 {
     u8 max;
-
-    if (gMmSave.info.inventory.upgrades.dekuNut == 0)
-        gMmSave.info.inventory.upgrades.dekuNut = 1;
-
     max = kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut];
     addAmmoMm(ITS_MM_NUTS, ITEM_MM_NUT, max, count);
 }
@@ -750,10 +748,6 @@ static int addItemNormalMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 void addSticksRawOot(int count)
 {
     u8 max;
-
-    if (gOotSave.info.inventory.upgrades.dekuStick == 0)
-        gOotSave.info.inventory.upgrades.dekuStick = 1;
-
     max = kMaxSticks[gOotSave.info.inventory.upgrades.dekuStick];
     addAmmoOot(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
@@ -761,10 +755,6 @@ void addSticksRawOot(int count)
 void addSticksRawMm(int count)
 {
     u8 max;
-
-    if (gMmSave.info.inventory.upgrades.dekuStick == 0)
-        gMmSave.info.inventory.upgrades.dekuStick = 1;
-
     max = kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick];
     addAmmoMm(ITS_MM_STICKS, ITEM_MM_STICK, max, count);
 }
