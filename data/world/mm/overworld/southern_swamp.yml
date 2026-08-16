@@ -150,8 +150,6 @@
     "Southern Swamp Grass Near Witch 1": "true"
     "Southern Swamp Grass Near Witch 2": "true"
     "Southern Swamp Hive": "is_swamp_poisoned && event(SOUTHERN_SWAMP_HIVE) && (has_hover_boots || has_mask_deku)"
-    "Southern Swamp Gossip Fairy": "gossip_fairy"
-    "Southern Swamp Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Southern Swamp Gossip": "true"
 

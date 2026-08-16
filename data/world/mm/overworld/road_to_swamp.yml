@@ -12,7 +12,7 @@
     MUSHROOM: "has_mask_scents"
     WATER: "true"
     PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && can_use_pictograph_box"
-    FAIRY: "gossip_fairy"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Swamp Front": "true"
@@ -52,8 +52,6 @@
     "Road to Southern Swamp Forked Tree 4": "true"
     "Road to Southern Swamp Forked Tree 5": "true"
     "Road to Southern Swamp Forked Tree 6": "true"
-    "Road to Southern Swamp Gossip Fairy": "gossip_fairy"
-    "Road to Southern Swamp Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Road to Southern Swamp Gossip": "true"
 
