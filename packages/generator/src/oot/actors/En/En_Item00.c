@@ -42,7 +42,7 @@ void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, PlayState* play, s16 gi
     if (q.ovType == OV_NONE)
     {
         itemId = kExtendedGetItems[gi - 1].itemId;
-        if (GetItemCollectBehavior(itemId) == 0xff)
+        if (Item_CheckObtainability(itemId) == 0xff)
             itemId = -1;
     }
 

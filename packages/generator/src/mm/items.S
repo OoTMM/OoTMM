@@ -79,3 +79,15 @@ PATCH_END
 PATCH_START 0x8085C99C + 0x05
   .byte 0x14
 PATCH_END
+
+/* Hook Item_Give */
+.globl _Item_Give
+_Item_Give:
+  addiu sp,-0x40
+  j Item_Give+0x08
+   lui t1,0x801c
+
+PATCH_START Item_Give
+  j Item_GiveHook
+   nop
+PATCH_END

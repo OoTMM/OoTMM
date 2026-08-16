@@ -250,6 +250,20 @@ void comboCreateSave(void* unk, void* buffer)
         gOotExtraFlags.childWallet = 1;
         gMmExtraFlags2.childWallet = 1;
     }
+
+    if (!Config_Flag(CFG_INITIAL_STICKS_NUTS_UPGRADES))
+    {
+        gOotSave.info.inventory.upgrades.dekuStick = 1;
+        gOotSave.info.inventory.upgrades.dekuNut = 1;
+
+    }
+
+    if (!Config_Flag(CFG_INITIAL_STICKS_NUTS_UPGRADES) || !Config_Flag(CFG_MM_UPGRADES_STICKS_NUTS))
+    {
+        gMmSave.info.inventory.upgrades.dekuStick = 1;
+        gMmSave.info.inventory.upgrades.dekuNut = 1;
+    }
+
     comboWalletRefresh();
     Inventory_UpdateMaxBombchu();
 

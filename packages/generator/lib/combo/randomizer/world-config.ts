@@ -243,6 +243,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
     MM_DEKU_SHIELD: settings.dekuShieldMm,
     BRONZE_SCALE: settings.bronzeScale,
+    INITIAL_STICKS_NUTS_UPGRADES: settings.sticksNutsUpgradesInitial,
     ONLY_OOT: settings.games === 'oot',
     ONLY_MM: settings.games === 'mm',
     OOT_PLANTED_BEANS: settings.ootPreplantedBeans,

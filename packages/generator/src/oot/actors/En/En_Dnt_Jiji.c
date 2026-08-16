@@ -8,12 +8,12 @@ void EnDntJiji_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
     npc = -1;
     switch (gi)
     {
-    case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
+    case GI_OOT_STICK_UPGRADE3:
         npc = NPC_OOT_THEATER_STICKS;
         break;
-    case GI_OOT_NUT_UPGRADE:
     case GI_OOT_NUT_UPGRADE2:
+    case GI_OOT_NUT_UPGRADE3:
         npc = NPC_OOT_THEATER_NUTS;
         break;
     }

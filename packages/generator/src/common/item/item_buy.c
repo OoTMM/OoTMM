@@ -55,11 +55,11 @@ int isItemBuyable(s16 gi)
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
-        return (gOotSave.info.inventory.upgrades.dekuStick == 0) || (gOotSave.info.inventory.ammo[ITS_OOT_STICKS] < kMaxSticks[gOotSave.info.inventory.upgrades.dekuStick]);
+        return gOotSave.info.inventory.ammo[ITS_OOT_STICKS] < kMaxSticks[gOotSave.info.inventory.upgrades.dekuStick];
     case GI_OOT_NUTS_5:
     case GI_OOT_NUTS_5_ALT:
     case GI_OOT_NUTS_10:
-        return (gOotSave.info.inventory.upgrades.dekuNut == 0) || (gOotSave.info.inventory.ammo[ITS_OOT_NUTS] < kMaxNuts[gOotSave.info.inventory.upgrades.dekuNut]);
+        return gOotSave.info.inventory.ammo[ITS_OOT_NUTS] < kMaxNuts[gOotSave.info.inventory.upgrades.dekuNut];
     case GI_OOT_BOMB:
     case GI_OOT_BOMBS_5:
     case GI_OOT_BOMBS_10:
@@ -105,11 +105,11 @@ int isItemBuyable(s16 gi)
     case GI_MM_MAGIC_JAR_LARGE:
         return (gMmSave.info.playerData.isMagicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30)));
     case GI_MM_STICK:
-        return (gMmSave.info.inventory.upgrades.dekuStick == 0) || (gMmSave.info.inventory.ammo[ITS_MM_STICKS] < kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick]);
+        return gMmSave.info.inventory.ammo[ITS_MM_STICKS] < kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick];
     case GI_MM_NUT:
     case GI_MM_NUTS_5:
     case GI_MM_NUTS_10:
-        return (gMmSave.info.inventory.upgrades.dekuNut == 0) || (gMmSave.info.inventory.ammo[ITS_MM_NUTS] < kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut]);
+        return gMmSave.info.inventory.ammo[ITS_MM_NUTS] < kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut];
     case GI_MM_BOMB:
     case GI_MM_BOMBS_5:
     case GI_MM_BOMBS_10:

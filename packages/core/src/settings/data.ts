@@ -1834,6 +1834,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'sticksNutsUpgradesInitial',
+  name: 'Shuffle Initial Deku Stick & Nut Upgrades',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Shuffle the initial stick & nuts.',
+  default: false,
+  cond: (s: any) => (hasOoT(s) || s.sticksNutsUpgradesMm),
+}, {
   key: 'fairyOcarinaMm',
   name: 'Fairy Ocarina in MM',
   category: 'items.extensions',

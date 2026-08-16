@@ -74,7 +74,31 @@ PATCH_START 0x8084c19c
   nop
 PATCH_END
 
-/* Fix magic jars */
+/* Item_CheckObtainability - magic jars */
 PATCH_START 0x8007181c
   li t7,0xfff
+PATCH_END
+
+/* Hook Item_CheckObtainability */
+.globl _Item_CheckObtainability
+_Item_CheckObtainability:
+  sw a0,0x00(sp)
+  j Item_CheckObtainability+0x08
+   lui a2,0x8010
+
+PATCH_START Item_CheckObtainability
+  j Item_CheckObtainabilityHook
+   nop
+PATCH_END
+
+/* Hook Item_Give */
+.globl _Item_Give
+_Item_Give:
+  addiu sp,-0x30
+  j Item_Give+0x08
+   lui t2,0x8010
+
+PATCH_START Item_Give
+  j Item_GiveHook
+   nop
 PATCH_END

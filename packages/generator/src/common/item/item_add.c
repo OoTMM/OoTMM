@@ -374,6 +374,9 @@ static int addItemWalletMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addAmmoOot(u8 slot, u16 item, u8 max, u8 count)
 {
+    if (max == 0)
+        return;
+
     gOotSave.info.inventory.items[slot] = item;
     gOotSave.info.inventory.ammo[slot] += count;
     if (gOotSave.info.inventory.ammo[slot] > max)
@@ -382,6 +385,9 @@ static void addAmmoOot(u8 slot, u16 item, u8 max, u8 count)
 
 static void addAmmoMm(u8 slot, u16 item, u8 max, u8 count)
 {
+    if (max == 0)
+        return;
+
     gMmSave.info.inventory.items[slot] = item;
     gMmSave.info.inventory.ammo[slot] += count;
     if (gMmSave.info.inventory.ammo[slot] > max)
@@ -437,10 +443,6 @@ static int addItemBombsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 void addNutsRawOot(int count)
 {
     u8 max;
-
-    if (gOotSave.info.inventory.upgrades.dekuNut == 0)
-        gOotSave.info.inventory.upgrades.dekuNut = 1;
-
     max = kMaxNuts[gOotSave.info.inventory.upgrades.dekuNut];
     addAmmoOot(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
@@ -448,22 +450,18 @@ void addNutsRawOot(int count)
 void addNutsRawMm(int count)
 {
     u8 max;
-
-    if (gMmSave.info.inventory.upgrades.dekuNut == 0)
-        gMmSave.info.inventory.upgrades.dekuNut = 1;
-
     max = kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut];
     addAmmoMm(ITS_MM_NUTS, ITEM_MM_NUT, max, count);
 }
 
-void addNutsOot(int count)
+void Item_AddNutsOot(int count)
 {
     addNutsRawOot(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addNutsRawMm(count);
 }
 
-void addNutsMm(int count)
+void Item_AddNutsMm(int count)
 {
     addNutsRawMm(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
@@ -472,13 +470,13 @@ void addNutsMm(int count)
 
 static int addItemNutsOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addNutsOot(param);
+    Item_AddNutsOot(param);
     return 0;
 }
 
 static int addItemNutsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addNutsMm(param);
+    Item_AddNutsMm(param);
     return 0;
 }
 
@@ -486,7 +484,7 @@ static int addItemNutsUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.info.inventory.upgrades.dekuNut < param)
         gOotSave.info.inventory.upgrades.dekuNut = param;
-    addNutsOot(kMaxNuts[param]);
+    Item_AddNutsOot(kMaxNuts[param]);
     return 0;
 }
 
@@ -494,7 +492,7 @@ static int addItemNutsUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gMmSave.info.inventory.upgrades.dekuNut < param)
         gMmSave.info.inventory.upgrades.dekuNut = param;
-    addNutsMm(kMaxNuts[param]);
+    Item_AddNutsMm(kMaxNuts[param]);
     return 0;
 }
 
@@ -750,10 +748,6 @@ static int addItemNormalMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 void addSticksRawOot(int count)
 {
     u8 max;
-
-    if (gOotSave.info.inventory.upgrades.dekuStick == 0)
-        gOotSave.info.inventory.upgrades.dekuStick = 1;
-
     max = kMaxSticks[gOotSave.info.inventory.upgrades.dekuStick];
     addAmmoOot(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
@@ -761,22 +755,18 @@ void addSticksRawOot(int count)
 void addSticksRawMm(int count)
 {
     u8 max;
-
-    if (gMmSave.info.inventory.upgrades.dekuStick == 0)
-        gMmSave.info.inventory.upgrades.dekuStick = 1;
-
     max = kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick];
     addAmmoMm(ITS_MM_STICKS, ITEM_MM_STICK, max, count);
 }
 
-void addSticksOot(int count)
+void Item_AddSticksOot(int count)
 {
     addSticksRawOot(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addSticksRawMm(count);
 }
 
-void addSticksMm(int count)
+void Item_AddSticksMm(int count)
 {
     addSticksRawMm(count);
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
@@ -785,13 +775,13 @@ void addSticksMm(int count)
 
 static int addItemSticksOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addSticksOot(param);
+    Item_AddSticksOot(param);
     return 0;
 }
 
 static int addItemSticksMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    addSticksMm(param);
+    Item_AddSticksMm(param);
     return 0;
 }
 
@@ -799,7 +789,7 @@ static int addItemSticksUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param
 {
     if (gOotSave.info.inventory.upgrades.dekuStick < param)
         gOotSave.info.inventory.upgrades.dekuStick = param;
-    addSticksOot(kMaxSticks[param]);
+    Item_AddSticksOot(kMaxSticks[param]);
     return 0;
 }
 
@@ -807,7 +797,7 @@ static int addItemSticksUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gMmSave.info.inventory.upgrades.dekuStick < param)
         gMmSave.info.inventory.upgrades.dekuStick = param;
-    addSticksMm(kMaxSticks[param]);
+    Item_AddSticksMm(kMaxSticks[param]);
     return 0;
 }
 
@@ -2548,8 +2538,10 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_GREAT_FAIRY_SWORD, GI_OOT_GREAT_FAIRY_SWORD, GI_MM_GREAT_FAIRY_SWORD },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE, GI_MM_STICK_UPGRADE },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE2, GI_MM_STICK_UPGRADE2 },
+    { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE3, GI_MM_STICK_UPGRADE3 },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE,  GI_MM_NUT_UPGRADE },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE2, GI_MM_NUT_UPGRADE2 },
+    { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE3, GI_MM_NUT_UPGRADE3 },
     { CFG_SHARED_STONE_OF_AGONY, GI_OOT_STONE_OF_AGONY, GI_MM_STONE_OF_AGONY },
     { CFG_SHARED_SPIN_UPGRADE, GI_OOT_SPIN_UPGRADE, GI_MM_SPIN_UPGRADE },
     { CFG_SHARED_POWDER_KEG, GI_OOT_POWDER_KEG, GI_MM_POWDER_KEG },

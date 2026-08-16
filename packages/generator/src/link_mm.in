@@ -247,7 +247,7 @@ CutsceneManager_GetCutsceneEntry = 0x800f208c;
 Rand_S16Offset = 0x800ff450;
 
 gSegments = 0x801f8180;
-AddItem = 0x80112e80;
+Item_Give = 0x80112e80;
 Player_AddItemWithIcon = 0x8083d168;
 GiveItemDefaultRange = 0x800b8b84;
 
@@ -266,7 +266,7 @@ gActorOvl = 0x801aefd0;
 
 Flags_SetSwitch = 0x800b5bf4;
 ClearSwitchFlag = 0x800b5c34;
-GetItemCollectBehavior = 0x801143cc;
+_Item_CheckObtainability = 0x801143cc;
 RemoveItem = 0x801149a0;
 Inventory_UpdateBottleItem = 0x80114fd0;
 

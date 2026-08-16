@@ -122,7 +122,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
 
     if (!this->isExtended)
     {
-        AddItem(gPlay, ITEM_RUPEE_GREEN);
+        Item_Give(gPlay, ITEM_RUPEE_GREEN);
         return;
     }
 

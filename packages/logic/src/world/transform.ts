@@ -834,6 +834,11 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SONG_SUN, Items.SHARED_SONG_SUN);
     }
 
+    if (settings.sticksNutsUpgradesInitial && settings.games !== 'mm') {
+      this.addItem(Items.OOT_STICK_UPGRADE, 1);
+      this.addItem(Items.OOT_NUT_UPGRADE, 1);
+    }
+
     if (settings.sharedNutsSticks) {
       /* Nuts */
       this.replaceItem(Items.OOT_NUTS_5,      Items.SHARED_NUTS_5);
@@ -855,6 +860,10 @@ class LogicPassWorldTransform {
     } else if (settings.sticksNutsUpgradesMm) {
       this.addItem(Items.MM_STICK_UPGRADE, 2);
       this.addItem(Items.MM_NUT_UPGRADE, 2);
+      if (settings.sticksNutsUpgradesInitial) {
+        this.addItem(Items.MM_STICK_UPGRADE, 1);
+        this.addItem(Items.MM_NUT_UPGRADE, 1);
+      }
     }
 
     if (settings.sharedHookshot) {

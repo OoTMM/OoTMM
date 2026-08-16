@@ -5,7 +5,7 @@ PATCH_START 0x808420c8
   li a0,0x8000
 PATCH_END
 
-/* Force GetItemCollectBehavior return value */
+/* Force Item_CheckObtainability return value */
 PATCH_START 0x8083d554
   li v0,0xff
 PATCH_END
