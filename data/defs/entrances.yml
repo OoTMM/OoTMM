@@ -589,6 +589,7 @@ MM_VOID_GREAT_BAY_BY_PINNACLE_ROCK:             { game: mm, id: 0x6860, type: on
 MM_VOID_ZORA_CAPE:                              { game: mm, id: 0x6a30, type: one-way-water-void, maps: [NONE, MM_ZORA_CAPE], areas: ["MM Zora Cape Water Void", "MM VOID"]}
 MM_VOID_PINNACLE_ROCK:                          { game: mm, id: 0x4410, type: one-way-water-void, maps: [NONE, MM_PINNACLE_ROCK], areas: ["MM Pinnacle Rock Water Void", "MM VOID"]}
 MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
+MM_BOSS_MAJORA:                                 { game: mm, id: 0x0200, type: none, debug: ['BOSS', 'Majora'] }
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
 MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm, id: 0xc030, type: none }
 MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd800, type: indoors-link, maps: [NONE, MM_CLOCK_TOWN], areas: ["MM Clock Tower", "MM Clock Town From Clock Tower"], flags: [no-sot], reverse: MM_CLOCK_TOWER_FROM_CLOCK_TOWN, debug: ['COMMON', 'Clock Town'] }
