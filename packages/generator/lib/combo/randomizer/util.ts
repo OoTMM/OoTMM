@@ -75,6 +75,14 @@ export function gi(settings: Settings, game: Game, item: Item, generic: boolean)
     itemId = 'OOT_WALLET';
   } else if (itemId === 'MM_WALLET' && settings.childWallets) {
     itemId = 'MM_WALLET';
+  } else if (itemId === 'OOT_STICK_UPGRADE' && !settings.sticksNutsUpgradesInitial) {
+    itemId = 'OOT_STICK_UPGRADE2';
+  } else if (itemId === 'OOT_NUT_UPGRADE' && !settings.sticksNutsUpgradesInitial) {
+    itemId = 'OOT_NUT_UPGRADE2';
+  } else if (itemId === 'MM_STICK_UPGRADE' && !settings.sticksNutsUpgradesInitial) {
+    itemId = 'MM_STICK_UPGRADE2';
+  } else if (itemId === 'MM_NUT_UPGRADE' && !settings.sticksNutsUpgradesInitial) {
+    itemId = 'MM_NUT_UPGRADE2';
   } else {
     const subst = ITEMS_SUBSTITUTIONS[itemId];
     if (subst) {
