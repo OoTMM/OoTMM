@@ -78,6 +78,8 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_SCALES: settings.sharedScales,
     SHARED_STRENGTH: settings.sharedStrength,
     SHARED_BOTTLES: settings.sharedBottles,
+    OOT_SHOVEL: settings.shovelOot,
+    MM_SHOVEL: settings.shovelMm,
     MM_CROSS_AGE: settings.crossAge,
     MM_OCARINA_FAIRY: settings.fairyOcarinaMm,
     MM_HOOKSHOT_SHORT: settings.shortHookshotMm,

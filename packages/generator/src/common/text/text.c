@@ -582,6 +582,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SOUL_MISC_GS:
     case GI_MM_SOUL_MISC_BUSINESS_SCRUB:
         return !Config_Flag(CFG_SHARED_SOULS_MISC);
+    case GI_OOT_SHOVEL:
+    case GI_MM_SHOVEL:
+        return !Config_Flag(CFG_SHARED_SHOVEL);
     case GI_OOT_SKELETON_KEY:
     case GI_MM_SKELETON_KEY:
         return !Config_Flag(CFG_SHARED_SKELETON_KEY);

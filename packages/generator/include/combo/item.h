@@ -134,7 +134,8 @@
 #define IA_MM_STONEGERUDOSKULL  0x7c
 #define IA_MM_GIBDOSPOOKY       0x7d
 #define IA_OOT_CLOCK            0x7e
-#define IA_MAX                  0x7f
+#define IA_SHOVEL               0x7f
+#define IA_MAX                  0x80
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

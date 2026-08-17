@@ -486,6 +486,7 @@ typedef struct ALIGNED(16)
     u8  hasSongZora:1;
     u8  hasSongOrder:1;
     u8  hasClock:1;
+    u8  hasShovel:1;
 }
 OotCustomSave;
 
