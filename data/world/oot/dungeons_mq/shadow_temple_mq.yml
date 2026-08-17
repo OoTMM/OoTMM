@@ -140,10 +140,10 @@
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room": "event(SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR)" #Don't need SR itself to exit, only the skultullas. See below comment.
-    "Shadow Temple Enclosed Shortcut Area": "has_lens && get_past_skultullas"
+    "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room": "event(SHADOW_MQ_SCYTHE_ROOM_SKULLTULAS_CLEAR)" #Don't need SR itself to exit, only the skulltulas. See below comment.
+    "Shadow Temple Enclosed Shortcut Area": "has_lens && get_past_skulltulas"
   events:
-    SHADOW_MQ_SCYTHE_ROOM_SKULTULLAS_CLEAR: "soul_skulltula && (can_use_din || (silver_rupees_shadow_scythe && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)))"
+    SHADOW_MQ_SCYTHE_ROOM_SKULLTULAS_CLEAR: "soul_skulltula && (can_use_din || (silver_rupees_shadow_scythe && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)))"
   locations:
     "MQ Shadow Temple SR Scythe 1": "true"
     "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
@@ -155,7 +155,7 @@
 "Shadow Temple Enclosed Shortcut Area":
   dungeon: Shadow
   exits:
-    "Shadow Temple Scythe Room": "get_past_skultullas"
+    "Shadow Temple Scythe Room": "get_past_skulltulas"
     "Shadow Temple Area Before Boat Ride": "event(SHADOW_MQ_SHORTCUT_BLOCK_PUSHED)" #TODO: Add the glitch to jump through wall and skip this.
     "Shadow Temple Area Above Shortcut Enclosure": "climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY)"
   locations:
@@ -171,13 +171,13 @@
   dungeon: Shadow
   exits:
     "Shadow Temple First Beamos Fork Room Solid Wall Alcove to Guillotine Hallway": "small_keys_shadow(2)"
-    "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "true" #Can avoid all beamos and skultullas.
+    "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit": "true" #Can avoid all beamos and skulltulas.
 
 "Shadow Temple Lower Guillotine Hallway Before Upper Huge Pit":
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Guillotine Hallway Before Upper Huge Pit": "can_hookshot || climb_anywhere"
-    "Shadow Temple Upper Huge Pit Guillotine Section Before Drop": "true" #Can avoid all beamos and skultullas.
+    "Shadow Temple Upper Huge Pit Guillotine Section Before Drop": "true" #Can avoid all beamos and skulltulas.
     "Shadow Temple Lower Huge Pit Ledge Before Invisible Spike Floors": "climb_anywhere"
 
 "Shadow Temple Upper Huge Pit Guillotine Section Before Drop":
@@ -310,12 +310,12 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
-    "Shadow Temple Wind Tunnel After Pit Before Drop": "get_past_skultullas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skultulla and the pit
+    "Shadow Temple Wind Tunnel After Pit Before Drop": "get_past_skulltulas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skulltula and the pit
 
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind Tunnel First Part": "true" #Can use the wind to jump across and the other wind to get past the skultulla.
+    "Shadow Temple Wind Tunnel First Part": "true" #Can use the wind to jump across and the other wind to get past the skulltula.
     "Shadow Temple Wind Tunnel After Drop": "true"
 
 "Shadow Temple Wind Tunnel After Drop":
@@ -408,7 +408,7 @@
   events:
     SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL: "can_use_bow"
   locations:
-    "MQ Shadow Temple GS After Boat": "gs && (can_hookshot || can_use_bow || can_use_slingshot || can_use_din || has_explosives || (can_boomerang && event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL)))" #Can fall to skultulla after killing it. The angle is a little tricky though, but totally doable. Boomerang, though, is possible without the bridge but should be a trick. TODO: trick: boomerang no bridge
+    "MQ Shadow Temple GS After Boat": "gs && (can_hookshot || can_use_bow || can_use_slingshot || can_use_din || has_explosives || (can_boomerang && event(SHADOW_MQ_AFTER_BOAT_BRIDGE_FALL)))" #Can fall to skulltula after killing it. The angle is a little tricky though, but totally doable. Boomerang, though, is possible without the bridge but should be a trick. TODO: trick: boomerang no bridge
     "MQ Shadow Temple Pot After Boat Before Bridge 1": "true"
     "MQ Shadow Temple Pot After Boat Before Bridge 2": "true"
 

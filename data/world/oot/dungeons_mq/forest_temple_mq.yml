@@ -29,18 +29,18 @@
   dungeon: Forest
   exits:
     "Forest Temple Entrance Room": "true"
-    "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
+    "Forest Temple Initial Hallway Navigation": "get_past_skulltulas"
 
-"Forest Temple Initial Hallway Navigation": #Even more ways to get past the skultulas. Region exists for enemy drops rando, and for ease of placing the door regions for door rando.
+"Forest Temple Initial Hallway Navigation": #Even more ways to get past the skulltulas. Region exists for enemy drops rando, and for ease of placing the door regions for door rando.
   dungeon: Forest
   exits:
-    "Forest Temple Initial Hallway Front": "get_past_skultullas"
-    "Forest Temple Initial Hallway Back": "get_past_skultullas"
+    "Forest Temple Initial Hallway Front": "get_past_skulltulas"
+    "Forest Temple Initial Hallway Back": "get_past_skulltulas"
 
 "Forest Temple Initial Hallway Back":
   dungeon: Forest
   exits:
-    "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
+    "Forest Temple Initial Hallway Navigation": "get_past_skulltulas"
     "Forest Temple Main Lobby": "small_keys_forest(1)"
   locations:
     "MQ Forest Temple GS Entryway": "gs && (can_collect_distance || ((has_ranged_weapon || has_explosives) && climb_anywhere))" #Blast mask too? Need to have separate macros for close vs far-range explosives...
@@ -444,7 +444,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Main Lobby": "event(FOREST_MQ_MEG_CLEAR)"
-    "Forest Temple Antichamber Room Southwest Alcove": "get_past_skultullas_no_stone" #You can roll into and out of the room with nothing. Trick or base?
+    "Forest Temple Antichamber Room Southwest Alcove": "get_past_skulltulas_no_stone" #You can roll into and out of the room with nothing. Trick or base?
     "Forest Temple Antichamber Room East Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_CRYSTAL_SWITCH)"
     "Forest Temple Antichamber Room Northwest Alcove": "true"
     "Forest Temple Antichamber Room South Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_FLOOR_SWITCH)"
