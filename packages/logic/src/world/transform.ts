@@ -1216,6 +1216,10 @@ class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.PLATINUM_TOKEN, 'max');
     }
 
+    if (settings.sharedShovel) {
+      this.shareItems(SharedItemGroups.SHOVEL, 'max');
+    }
+
     if (settings.sharedOcarinaButtons) {
       this.shareItems(SharedItemGroups.OCARINA_BUTTONS, 'max');
     }
@@ -1704,6 +1708,14 @@ class LogicPassWorldTransform {
     /* Add transcendent fairy */
     if (settings.transcendentFairy) {
       this.addItem(Items.MM_TRANSCENDENT_FAIRY);
+    }
+
+    /* Add shovel(s) */
+    if (settings.shovelOot) {
+      this.addItem(Items.OOT_SHOVEL);
+    }
+    if (settings.shovelMm) {
+      this.addItem(Items.MM_SHOVEL);
     }
 
     /* Add ocarina buttons */

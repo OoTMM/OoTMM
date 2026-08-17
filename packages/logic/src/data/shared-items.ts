@@ -110,6 +110,10 @@ const SHIELDS: ItemSharedDef[] = [
   { shared: Items.SHARED_SHIELD_MIRROR,  oot: Items.OOT_SHIELD_MIRROR,  mm: Items.MM_SHIELD_MIRROR },
 ];
 
+const SHOVEL: ItemSharedDef[] = [
+  { shared: Items.SHARED_SHOVEL,         oot: Items.OOT_SHOVEL,         mm: Items.MM_SHOVEL },
+];
+
 const BOTTLES: ItemSharedDef[] = [
   { shared: Items.SHARED_BOTTLE_EMPTY, oot: Items.OOT_BOTTLE_EMPTY, mm: Items.MM_BOTTLE_EMPTY },
   { shared: Items.SHARED_BOTTLE_POTION_RED, oot: Items.OOT_BOTTLE_POTION_RED, mm: Items.MM_BOTTLE_POTION_RED },
@@ -138,4 +142,4 @@ const BOTTLES: ItemSharedDef[] = [
 ]
 
 
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES };
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES, SHOVEL };

@@ -1066,6 +1066,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_RUSTY_KEY_GRANDMA_ROOM: "Rusty Key (Grandma's Room)",
   MM_RUSTY_KEY_STOCK_POT_INN_STAFF_ROOM: "Rusty Key (Stock Pot Inn Staff Room)",
   MM_RUSTY_KEY_STOCK_POT_INN_DORMITORY: "Rusty Key (Stock Pot Inn Dormitory)",
+  OOT_SHOVEL: "Shovel (OoT)",
+  MM_SHOVEL: "Shovel (MM)",
+  SHARED_SHOVEL: "Shovel",
 };
 
 export function itemName(item: string) {

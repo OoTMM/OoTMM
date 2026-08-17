@@ -65,6 +65,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_SOULS_MISC: settings.sharedSoulsMisc,
     SHARED_SOULS_NPC: settings.sharedSoulsNpc,
     SHARED_SOULS_ANIMAL: settings.sharedSoulsAnimal,
+    SHARED_SHOVEL: settings.sharedShovel,
     SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
     SHARED_SHIELDS: settings.sharedShields,
     SHARED_SPELL_FIRE: settings.sharedSpellFire,

@@ -516,6 +516,19 @@ export class CustomObjectsBuilder {
     return { name: 'DOOR_LOCK', ...editor.build() }
   }
 
+  private async makeGiShovel(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0x06);
+    const obj = await this.getFile('oot', 'objects/object_tk');
+    editor.loadSegment(0x06, obj);
+
+    let b = 0x0600ace0;
+    let data = editor.listData(b)!;
+    editor.setScale(0.1);
+    editor.submitList(data);
+
+    return { name: 'GI_SHOVEL', ...editor.build() }
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -552,6 +565,7 @@ export class CustomObjectsBuilder {
       await this.makePowderKeg(),
       await this.makeClearTag(),
       await this.makeDoorLock(),
+      await this.makeGiShovel(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

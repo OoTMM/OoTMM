@@ -1,5 +1,5 @@
 import { concatUint8Arrays } from 'uint8array-extras';
-import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE, bufWriteU8, bufWriteU16BE } from '../util/buffer';
+import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE, bufWriteU8, bufWriteU16BE, bufReadI16BE, bufWriteI16BE } from '../util/buffer';
 
 export type ObjectEditorOut = {
   data: Uint8Array;
@@ -13,10 +13,15 @@ export class ObjectEditor {
   private out: Uint8Array[] = [];
   private outSize: number = 0;
   private outOffsets: number[] = [];
+  private vtxScale = 1;
 
   constructor(
     private readonly segOut: number,
   ) {
+  }
+
+  setScale(scale: number) {
+    this.vtxScale = scale;
   }
 
   submitOut(listAddr: number) {
@@ -56,7 +61,7 @@ export class ObjectEditor {
         /* Vertices */
         const count = (data >> 12) & 0xff;
         const addr = bufReadU32BE(list, i + 4);
-        const newAddr = this.copy(addr, count * 0x10);
+        const newAddr = this.processVertices(this.segData(addr, count * 16) ?? new Uint8Array(0));
         bufWriteU32BE(list, i + 4, newAddr);
       } else if (op === 0xfd) {
         /* Texture or palette */
@@ -131,6 +136,29 @@ export class ObjectEditor {
       this.out.push(extraBuf);
     }
     return newAddr;
+  }
+
+  processVertices(data: Uint8Array) {
+    const newData = new Uint8Array(data);
+    if (this.vtxScale !== 1) {
+      const count = newData.length / 16;
+      for (let i = 0; i < count; ++i) {
+        const base = 16 * i;
+
+        let x = bufReadI16BE(newData, base + 0);
+        let y = bufReadI16BE(newData, base + 2);
+        let z = bufReadI16BE(newData, base + 4);
+
+        x *= this.vtxScale;
+        y *= this.vtxScale;
+        z *= this.vtxScale;
+
+        bufWriteI16BE(newData, base + 0, x);
+        bufWriteI16BE(newData, base + 2, y);
+        bufWriteI16BE(newData, base + 4, z);
+      }
+    }
+    return this.emitData(newData);
   }
 
   processJointIndexAddr(addr: number, limbCount: number) {
