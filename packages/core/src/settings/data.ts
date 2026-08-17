@@ -2332,6 +2332,22 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'shovelOot',
+  name: 'Shovel (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add a shovel to the item pool. The shovel is required to access grottos.',
+  default: false,
+  cond: hasOoT,
+}, {
+  key: 'shovelMm',
+  name: 'Shovel (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add a shovel to the item pool. The shovel is required to access grottos.',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'soulsEnemyOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',
@@ -2985,6 +3001,14 @@ export const SETTINGS = [{
   description: 'Combines the Ocarina Buttons from OoT and MM into five items for both games',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.ocarinaButtonsShuffleOot && s.ocarinaButtonsShuffleMm,
+}, {
+  key: 'sharedShovel',
+  name: 'Shared Shovel',
+  category: 'items.shared',
+  type: 'boolean',
+  description: 'Combines the Shovels from OoT and MM into a single item for both games',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.shovelOot && s.shovelMm,
 }, {
   key: 'sharedSkeletonKey',
   name: 'Shared Skeleton Key',

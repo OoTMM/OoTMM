@@ -40,6 +40,8 @@
 
 "soil_fairies(x)": "is_child && (can_play_storms || has_water) && (setting(ootPreplantedBeans) || event(x))"
 
+"has_shovel": "!setting(shovelOot) || has(SHOVEL) || has(SHARED_SHOVEL)"
+
 # Song events
 "song_event_zelda(x)": "_song_event_oot(x, 0) && can_play_zelda"
 "song_event_epona(x)": "_song_event_oot(x, 1) && can_play_epona"
@@ -192,8 +194,8 @@
 "scarecrow_longshot": "has_ocarina && can_longshot && (event(SCARECROW) || setting(freeScarecrowOot))"
 "has_fire": "has_fire_arrows || can_use_din"
 "has_fire_or_sticks": "can_use_sticks || has_fire"
-"hidden_grotto_bomb": "stone_of_agony && has_explosives_or_hammer"
-"hidden_grotto_storms": "stone_of_agony && can_play_storms"
+"hidden_grotto_bomb": "has_shovel && stone_of_agony && has_explosives_or_hammer"
+"hidden_grotto_storms": "has_shovel && stone_of_agony && can_play_storms"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
 "can_jump_slash": "can_use_sword || can_use_sticks || can_hammer"
 "can_hammer_or_keg": "can_hammer || can_use_keg"

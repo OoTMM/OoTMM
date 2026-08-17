@@ -22,7 +22,7 @@
   exits:
     "GLOBAL": "true"
     "Secret Shrine": "true"
-    "Ikana Valley Grotto": "true"
+    "Ikana Valley Grotto": "has_shovel"
     "Ikana Valley": "can_swim || (can_use_ice_arrows && has_chateau)"
 
 "Ikana Valley Grotto":

@@ -5,7 +5,7 @@
     "Death Mountain Summit": "true"
     "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && can_jump_slash) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
-    "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
+    "Death Mountain Crater Generic Grotto": "has_shovel && has_explosives_or_hammer"
     "Fairy Fountain Double Magic": "glitch_megaflip"
     "Death Mountain Crater Bottom Adult Rupees": "is_adult"
   events:
@@ -42,7 +42,7 @@
     "Darunia Chamber": "true"
     "Death Mountain Crater Warp": "(can_hookshot || has_hover_boots) && (is_adult || has_tunic_goron_strict || can_hammer_or_keg || hookshot_anywhere || climb_anywhere)" #child cannot do anything at the warp from the top within 24 seconds
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
-    "Death Mountain Crater Scrub Grotto": "can_hammer_or_keg"
+    "Death Mountain Crater Scrub Grotto": "has_shovel && can_hammer_or_keg"
     "Fairy Fountain Double Magic": "can_hammer_or_keg || climb_anywhere || hookshot_anywhere"
     "Death Mountain Crater Red Boulders": "can_hammer_or_keg"
   events:

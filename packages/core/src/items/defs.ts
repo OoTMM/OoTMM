@@ -1066,6 +1066,9 @@ const ITEM_IDS = [
   'MM_RUSTY_KEY_GRANDMA_ROOM',
   'MM_RUSTY_KEY_STOCK_POT_INN_STAFF_ROOM',
   'MM_RUSTY_KEY_STOCK_POT_INN_DORMITORY',
+  'OOT_SHOVEL',
+  'MM_SHOVEL',
+  'SHARED_SHOVEL',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

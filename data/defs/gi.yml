@@ -508,7 +508,8 @@
 - { id: OOT_RUSTY_KEY_ADULT_BAZAAR,              type: KEY, add: [OOT_RUSTY_KEY, 0x18], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Kakariko Bazaar)" }
 - { id: OOT_RUSTY_KEY_ADULT_POTION_SHOP,         type: KEY, add: [OOT_RUSTY_KEY, 0x19], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Kakariko Potion Shop)" }
 - { id: OOT_RUSTY_KEY_ADULT_POTION_SHOP_BACK,    type: KEY, add: [OOT_RUSTY_KEY, 0x1a], flags: 0x80, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Kakariko Potion Shop Back)" }
-- { id: OOT_CLOCK, type: MAJOR, add: OOT_CLOCK, flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "the <C1>Clock" }
+- { id: OOT_CLOCK, type: MAJOR, add: OOT_CLOCK, flags: 0x80, draw: CLOCK, object: GI_CLOCK, name: "the <C1>Clock" }
+- { id: OOT_SHOVEL, type: MAJOR, add: [SHOVEL, 0], flags: 0x80, draw: SHOVEL, object: GI_SHOVEL, name: "the <C1>Shovel" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
@@ -935,6 +936,7 @@
 - { id: MM_RUSTY_KEY_GRANDMA_ROOM,              type: KEY, add: [MM_RUSTY_KEY, 0x24], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Grandma's Room)" }
 - { id: MM_RUSTY_KEY_STOCK_POT_INN_STAFF_ROOM,  type: KEY, add: [MM_RUSTY_KEY, 0x25], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Stock Pot Inn Staff Room)" }
 - { id: MM_RUSTY_KEY_STOCK_POT_INN_DORMITORY,   type: KEY, add: [MM_RUSTY_KEY, 0x26], flags: 0xa0, draw: [SMALL_KEY, 1], object: [oot, 0x00aa], name: "a <C1>Rusty Key (Stock Pot Inn Dormitory)" }
+- { id: MM_SHOVEL, type: MAJOR, add: [SHOVEL, 1], flags: 0xa0, draw: SHOVEL, object: GI_SHOVEL, name: "the <C1>Shovel" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }

@@ -108,7 +108,7 @@
     "Kakariko": "true"
     "Kakariko Potion Shop Back": "is_adult && is_day && rusty_key(RUSTY_KEY_ADULT_POTION_SHOP_BACK)"
     "Kakariko Granny Shop": "is_adult && rusty_key(RUSTY_KEY_GRANNY_POTION_SHOP)"
-    "Kakariko Generic Grotto": "true"
+    "Kakariko Generic Grotto": "has_shovel"
   locations:
     "Kakariko Back Pot 1": "is_child"
     "Kakariko Back Pot 2": "is_child"

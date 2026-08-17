@@ -327,6 +327,8 @@ static int canSpawnActor(PlayState *play, s16 actorId, u16 param)
             return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
         else
             return 1;
+    case ACTOR_DOOR_ANA:
+        return !(Config_Flag(CFG_OOT_SHOVEL) && !gSharedCustomSave.oot.hasShovel);
     default:
         return 1;
     }

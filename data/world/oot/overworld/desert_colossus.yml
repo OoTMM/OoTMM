@@ -7,7 +7,7 @@
     "Spirit Temple": "true"
     "Haunted Wasteland End": "true"
     "Fairy Fountain Nayru": "has_explosives"
-    "Desert Colossus Grotto": "can_lift_silver"
+    "Desert Colossus Grotto": "has_shovel && can_lift_silver"
     "Spirit Temple Adult Hand": "climb_anywhere"
     "Spirit Temple Child Hand": "climb_anywhere"
     "Desert Colossus Oasis": "can_play_storms"

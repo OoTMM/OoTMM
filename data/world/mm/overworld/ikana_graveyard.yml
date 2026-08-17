@@ -8,7 +8,7 @@
   exits:
     "GLOBAL": "true"
     "Road to Ikana Center": "true"
-    "Ikana Graveyard Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
+    "Ikana Graveyard Grotto": "has_shovel && stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
     "Beneath The Graveyard Night 1": "soul_stalchild && has(MASK_CAPTAIN) && is_night1"
     "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"

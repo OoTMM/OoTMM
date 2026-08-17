@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.1.1",
-    "@ootmm/web-components": "*",
+    "@ootmm/web-components": "workspace:*",
     "@preact/preset-vite": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "vite-multiple-assets": "^2.2.6"

@@ -15,6 +15,14 @@ export function bufReadU16BE(data: Uint8Array, offset: number) {
   return (data[offset] << 8) | data[offset + 1];
 }
 
+export function bufReadI16BE(data: Uint8Array, offset: number) {
+  let v = bufReadU16BE(data, offset);
+  if (v >= 32768) {
+    v -= 65536;
+  }
+  return v;
+}
+
 export function bufReadU32LE(data: Uint8Array, offset: number) {
   return (data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16) | (data[offset + 3] << 24)) >>> 0;
 }
@@ -42,6 +50,13 @@ export function bufWriteU16LE(data: Uint8Array, offset: number, value: number) {
 export function bufWriteU16BE(data: Uint8Array, offset: number, value: number) {
   data[offset] = (value >> 8) & 0xff;
   data[offset + 1] = value & 0xff;
+}
+
+export function bufWriteI16BE(data: Uint8Array, offset: number, value: number) {
+  if (value < 0) {
+    value += 65536;
+  }
+  bufWriteU16BE(data, offset, value);
 }
 
 export function bufWriteU32LE(data: Uint8Array, offset: number, value: number) {

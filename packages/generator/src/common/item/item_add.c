@@ -2229,6 +2229,15 @@ static int addItemKegMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemShovel(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    if (param)
+        gSharedCustomSave.mm.hasShovel = 1;
+    else
+        gSharedCustomSave.oot.hasShovel = 1;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -2357,6 +2366,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStoneGerudoSkullMm,
     addItemGibdoSpookyMm,
     addItemClockOot,
+    addItemShovel,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");
@@ -2571,6 +2581,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_BOTTLES, GI_OOT_CHATEAU, GI_MM_CHATEAU } ,
     { CFG_SHARED_BOTTLES, GI_OOT_GOLD_DUST, GI_MM_GOLD_DUST } ,
     { CFG_SHARED_BOTTLES, GI_OOT_SEAHORSE2, GI_MM_SEAHORSE2 } ,
+    { CFG_SHARED_SHOVEL, GI_OOT_SHOVEL, GI_MM_SHOVEL },
 };
 
 static int addItem(PlayState* play, s16 gi)

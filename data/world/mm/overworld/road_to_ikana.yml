@@ -5,7 +5,7 @@
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
-    "Road to Ikana Grotto": "can_break_red_boulders"
+    "Road to Ikana Grotto": "has_shovel && can_break_red_boulders"
     "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT))"
