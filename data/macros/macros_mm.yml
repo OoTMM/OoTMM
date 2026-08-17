@@ -225,6 +225,8 @@
 "can_reset_time_dungeon": "cond(setting(erMoon), (((trick(MM_MAJORA_LOGIC) && event(MAJORA) && !is_goal_triforce) || setting(moonCrash, cycle)) && (before(NIGHT3_AM_12_00) || can_use_farore || setting(autoInvert, always))) || can_play_time, can_reset_time)"
 "can_reset_time_on_moon": "can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !is_goal_triforce)"
 
+"has_shovel": "!setting(shovelMm) || has(SHOVEL) || has(SHARED_SHOVEL)"
+
 "has_sticks_capacity": "!setting(sticksNutsUpgradesInitial) || !setting(sticksNutsUpgradesMm) || has(STICK_UPGRADE) || has(SHARED_STICK_UPGRADE)"
 "has_nuts_capacity": "!setting(sticksNutsUpgradesInitial) || !setting(sticksNutsUpgradesMm) || has(NUT_UPGRADE) || has(SHARED_NUT_UPGRADE)"
 "has_sticks": "has_sticks_capacity && (event(STICKS) || renewable(STICK) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(OOT_STICKS)))"

@@ -7,7 +7,7 @@
     "Lon Lon Ranch Silo": "rusty_key(RUSTY_KEY_SILO)"
     "Lon Lon Ranch Stables": "rusty_key(RUSTY_KEY_RANCH_STABLE)"
     "Lon Lon Ranch House": "(is_adult || is_day) && rusty_key(RUSTY_KEY_RANCH_HOUSE)"
-    "Lon Lon Ranch Grotto": "is_child"
+    "Lon Lon Ranch Grotto": "is_child && has_shovel"
   events:
     #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
     EPONA: "true" #If fast Epona becomes a setting, we need a check here... this is "Ingo deposed".

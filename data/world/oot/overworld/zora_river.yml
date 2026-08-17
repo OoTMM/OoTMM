@@ -127,8 +127,8 @@
   exits:
     "GLOBAL": "true"
     "Zora River": "true"
-    "Zora River Open Grotto": "true"
-    "Zora River Boulder Grotto": "has_explosives_or_hammer"
+    "Zora River Open Grotto": "has_shovel"
+    "Zora River Boulder Grotto": "has_shovel && has_explosives_or_hammer"
   locations:
     "Zora River Rock Circle Upper Rock 1": "true"
     "Zora River Rock Circle Upper Rock 2": "true"

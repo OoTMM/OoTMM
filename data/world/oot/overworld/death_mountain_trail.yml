@@ -8,7 +8,7 @@
     "Kakariko Trail Start": "true"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Storms Grotto": "hidden_grotto_storms"
-    "Death Mountain Cow Grotto": "has_explosives_or_hammer"
+    "Death Mountain Cow Grotto": "has_shovel && has_explosives_or_hammer"
     "Death Mountain Trail Red Boulders Lower": "is_adult && can_hammer_or_keg"
     "Death Mountain Trail Soil Fairies": "soil_fairies(BEAN_DEATH_MOUNTAIN)"
   events:
