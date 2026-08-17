@@ -9,7 +9,7 @@
     "Great Bay Fence": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
-    "Great Bay Grotto": "true"
+    "Great Bay Grotto": "has_shovel"
     "Great Bay Coast Butterflies": "has_sticks"
   events:
     MAGIC: "true"
@@ -194,7 +194,7 @@
   exits:
     "GLOBAL": "true"
     "Great Bay Coast Cliffs": "true"
-    "Great Bay Cow Grotto": "true"
+    "Great Bay Cow Grotto": "has_shovel"
 
 "Great Bay Cow Grotto":
   region: ENTRANCE

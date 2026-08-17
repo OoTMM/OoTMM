@@ -3,13 +3,13 @@
   region: DEKU_PALACE
   exits:
     "GLOBAL": "true"
-    "JP Grotto Climb Left": "true"
+    "JP Grotto Climb Left": "has_shovel"
     "Deku Palace Main": "true"
 "Deku Palace Near JP Grotto Climb Right":
   region: DEKU_PALACE
   exits:
     "GLOBAL": "true"
-    "JP Grotto Climb Right": "true"
+    "JP Grotto Climb Right": "has_shovel"
     "Deku Palace Main": "true"
 "JP Grotto Climb":
   region: ENTRANCE
@@ -35,7 +35,7 @@
   region: DEKU_PALACE
   exits:
     "GLOBAL": "true"
-    "JP Grotto Line Start": "true"
+    "JP Grotto Line Start": "has_shovel"
     "Deku Palace Main": "is_child" # TODO: Refactor Deku Palace
 "JP Grotto Line":
   region: ENTRANCE
@@ -73,14 +73,14 @@
   exits:
     "GLOBAL": "true"
     "Deku Palace Corner Ledge Middle": "true"
-    "Deku Palace Beans Grotto": "true"
+    "Deku Palace Beans Grotto": "has_shovel"
 
 "Deku Palace Corner Ledge Top":
   region: DEKU_PALACE
   exits:
     "GLOBAL": "true"
     "Deku Palace Corner Ledge Middle": "true"
-    "JP Grotto Line End": "true"
+    "JP Grotto Line End": "has_shovel"
 "Deku Palace Corner Ledge Middle":
   region: DEKU_PALACE
   exits:

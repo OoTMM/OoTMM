@@ -127,7 +127,7 @@
   region: MOUNTAIN_VILLAGE
   exits:
     "GLOBAL": "true"
-    "Mountain Village Grotto": "is_spring"
+    "Mountain Village Grotto": "has_shovel && is_spring"
     "Mountain Village": "true"
     "Mountain Village Cliff": "is_spring && (has_mask_goron || short_hook_anywhere)"
 

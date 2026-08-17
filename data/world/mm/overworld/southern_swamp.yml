@@ -189,7 +189,7 @@
     "GLOBAL": "true"
     "Swamp Water Near Spider House": "cross_poison_swamp"
     "Near Swamp Spider House": "has(MASK_DEKU) || can_hookshot_short || has_hover_boots"
-    "Southern Swamp Grotto": "true"
+    "Southern Swamp Grotto": "has_shovel"
     "Swamp Canopy Front": "short_hook_anywhere"
 
 "Southern Swamp Grotto":

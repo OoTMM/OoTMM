@@ -11,7 +11,7 @@
     "Goron Village": "true"
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
     "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
-    "Twin Islands Frozen Grotto": "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
+    "Twin Islands Frozen Grotto": "has_shovel && (is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))))"
     "Tingle Mountain": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
   locations:
     "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
@@ -122,7 +122,7 @@
   exits:
     "GLOBAL": "true"
     "Twin Islands": "true"
-    "Twin Islands Ramp Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none)) || can_hammer)"
+    "Twin Islands Ramp Grotto": "has_shovel && stone_of_agony && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none)) || can_hammer)"
   locations:
     "Twin Islands Small Snowball Ramp 1": "is_winter"
     "Twin Islands Small Snowball Ramp 2": "is_winter"

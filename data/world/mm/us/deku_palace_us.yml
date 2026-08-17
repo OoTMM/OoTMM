@@ -10,7 +10,7 @@
   exits:
     "GLOBAL": "true"
     "Deku Palace Near US Beans Grotto": "true"
-    "Deku Palace Beans Grotto": "true"
+    "Deku Palace Beans Grotto": "has_shovel"
 
 # JP Stubs
 "Deku Palace Near JP Grotto Climb Left":
