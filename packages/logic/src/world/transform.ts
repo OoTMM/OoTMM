@@ -1747,7 +1747,7 @@ class LogicPassWorldTransform {
       }
     }
 
-    if (this.state.settings.clocksOot) {
+    if (this.state.settings.clocksOot !== 'none') {
       this.addItem(Items.OOT_CLOCK);
     }
 
