@@ -403,6 +403,10 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
 })
 
 const ALLSANITY_HELL: PartialDeep<Settings> = {
+  shovelOot: true,
+  shovelMm: true,
+  clocksOot: 'random',
+  sticksNutsUpgradesInitial: true,
   blueFireArrows: true,
   iceArrowPlatformsOot: true,
   sunlightArrows: true,
