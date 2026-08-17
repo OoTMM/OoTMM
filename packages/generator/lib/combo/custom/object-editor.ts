@@ -1,5 +1,8 @@
 import { concatUint8Arrays } from 'uint8array-extras';
+import { mat4, vec3, vec4 } from 'gl-matrix';
+
 import { bufReadU16BE, bufReadU32BE, bufReadU8, bufWriteU32BE, bufWriteU8, bufWriteU16BE, bufReadI16BE, bufWriteI16BE } from '../util/buffer';
+import type { NegativeInfinity } from 'type-fest';
 
 export type ObjectEditorOut = {
   data: Uint8Array;
@@ -13,15 +16,17 @@ export class ObjectEditor {
   private out: Uint8Array[] = [];
   private outSize: number = 0;
   private outOffsets: number[] = [];
-  private vtxScale = 1;
+  private transform: mat4 | null = null;
+  private bbMin = [Infinity, Infinity, Infinity];
+  private bbMax = [-Infinity, -Infinity, -Infinity];
 
   constructor(
     private readonly segOut: number,
   ) {
   }
 
-  setScale(scale: number) {
-    this.vtxScale = scale;
+  setTransform(m: mat4) {
+    this.transform = m;
   }
 
   submitOut(listAddr: number) {
@@ -138,24 +143,41 @@ export class ObjectEditor {
     return newAddr;
   }
 
+  private bbRegister(v: vec3) {
+    for (let i = 0; i < 3; ++i) {
+      const min = this.bbMin[i];
+      const max = this.bbMax[i];
+      const vv = v[i];
+
+      if (vv < min) this.bbMin[i] = vv;
+      if (vv > max) this.bbMax[i] = vv;
+    }
+  }
+
+  center() {
+    const c = [0, 0, 0];
+    vec3.add(c, this.bbMin, this.bbMax);
+    vec3.scale(c, c, 0.5);
+    return c;
+  }
+
   processVertices(data: Uint8Array) {
     const newData = new Uint8Array(data);
-    if (this.vtxScale !== 1) {
+    if (this.transform) {
       const count = newData.length / 16;
       for (let i = 0; i < count; ++i) {
         const base = 16 * i;
-
-        let x = bufReadI16BE(newData, base + 0);
-        let y = bufReadI16BE(newData, base + 2);
-        let z = bufReadI16BE(newData, base + 4);
-
-        x *= this.vtxScale;
-        y *= this.vtxScale;
-        z *= this.vtxScale;
-
-        bufWriteI16BE(newData, base + 0, x);
-        bufWriteI16BE(newData, base + 2, y);
-        bufWriteI16BE(newData, base + 4, z);
+        const v = [
+          bufReadI16BE(newData, base + 0),
+          bufReadI16BE(newData, base + 2),
+          bufReadI16BE(newData, base + 4),
+          1
+        ];
+        vec4.transformMat4(v, v, this.transform);
+        this.bbRegister(v);
+        bufWriteI16BE(newData, base + 0, v[0]);
+        bufWriteI16BE(newData, base + 2, v[1]);
+        bufWriteI16BE(newData, base + 4, v[2]);
       }
     }
     return this.emitData(newData);

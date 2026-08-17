@@ -9,7 +9,7 @@
   "author": "Nax",
   "license": "MIT",
   "dependencies": {
-    "@ootmm/gui": "*"
+    "@ootmm/gui": "workspace:*"
   },
   "nx": {
     "targets": {

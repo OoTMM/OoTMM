@@ -8,9 +8,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ootmm/core": "*",
-    "@ootmm/tools": "*",
-    "@ootmm/logic": "*",
+    "@ootmm/core": "workspace:*",
+    "@ootmm/logic": "workspace:*",
+    "@ootmm/tools": "workspace:*",
     "crc-32": "^1.2.2",
     "jszip": "^3.10.1",
     "lodash-es": "catalog:",
@@ -23,6 +23,7 @@
     "@types/lodash-es": "catalog:",
     "@types/pngjs": "^6.0.5",
     "fast-xml-parser": "^5.5.10",
+    "gl-matrix": "^3.4.4",
     "type-fest": "catalog:",
     "yaml": "catalog:"
   },

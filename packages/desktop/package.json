@@ -9,7 +9,7 @@
   "license": "MIT",
   "devDependencies": {
     "@neutralinojs/neu": "^11.7.1",
-    "@ootmm/gui": "*"
+    "@ootmm/gui": "workspace:*"
   },
   "nx": {
     "targets": {

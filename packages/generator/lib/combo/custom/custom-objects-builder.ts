@@ -6,6 +6,7 @@ import { DmaData } from '../dma';
 import { arrayToIndexMap } from '../util';
 import { ObjectEditor } from './object-editor';
 import { concatUint8Arrays } from 'uint8array-extras';
+import { mat4 } from 'gl-matrix';
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),
@@ -521,9 +522,16 @@ export class CustomObjectsBuilder {
     const obj = await this.getFile('oot', 'objects/object_tk');
     editor.loadSegment(0x06, obj);
 
+    const mat = mat4.create();
+    const scale = 0.02;
+    mat4.scale(mat, mat, [scale, scale, scale]);
+    mat4.rotateZ(mat, mat, Math.PI * -0.75);
+    mat4.rotateY(mat, mat, Math.PI * 0.5);
+    mat4.translate(mat, mat, [-627.5, -281, -2170]);
+    editor.setTransform(mat);
+
     let b = 0x0600ace0;
     let data = editor.listData(b)!;
-    editor.setScale(0.1);
     editor.submitList(data);
 
     return { name: 'GI_SHOVEL', ...editor.build() }
