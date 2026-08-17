@@ -600,7 +600,6 @@ typedef struct ALIGNED(16)
         u8 value;
     } ootSongs;
     u8 customMask;
-    u8 hasShovel:1;
 }
 MmCustomSave;
 

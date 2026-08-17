@@ -606,7 +606,7 @@ static int canSpawnActor(PlayState *play, s16 actorId, u16 variable)
         else
             return 1;
     case ACTOR_DOOR_ANA:
-        return !(Config_Flag(CFG_MM_SHOVEL) && !gSharedCustomSave.mm.hasShovel);
+        return !(Config_Flag(CFG_MM_SHOVEL) && !SaveFlag_Get(SAVE_FLAG_SHOVEL_MM));
     default:
         return 1;
     }

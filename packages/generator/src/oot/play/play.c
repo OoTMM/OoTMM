@@ -527,7 +527,7 @@ static void Play_ApplyClock(void)
 {
     u16 time;
 
-    if (!Config_Flag(CFG_OOT_CLOCKS) || gSharedCustomSave.oot.hasClock || gSaveContext.gameMode != GAMEMODE_NORMAL)
+    if (!Config_Flag(CFG_OOT_CLOCKS) || SaveFlag_Get(SAVE_FLAG_CLOCK_OOT) || gSaveContext.gameMode != GAMEMODE_NORMAL)
         return;
 
     if (Config_Flag(CFG_OOT_CLOCKS_NIGHT))

@@ -1,0 +1,13 @@
+#ifndef INCLUDED_COMBO_SAVE_FLAGS
+#define INCLUDED_COMBO_SAVE_FLAGS
+
+#include <combo/util.h>
+
+enum {
+    SAVE_FLAG_CLOCK_OOT,
+    SAVE_FLAG_SHOVEL_OOT,
+    SAVE_FLAG_SHOVEL_MM,
+    SAVE_FLAG_MAX,
+};
+
+#endif

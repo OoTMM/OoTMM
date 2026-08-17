@@ -5,6 +5,7 @@
 #include <combo/magic.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/save_flags.h>
 
 #if !defined(GAME_OOT)
 ALIGNED(16) OotSave gOotSave;

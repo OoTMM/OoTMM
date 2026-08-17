@@ -18,6 +18,7 @@
 # include <combo/mm/save.h>
 # include <combo/notes.h>
 # include <combo/doors.h>
+# include <combo/save_flags.h>
 
 typedef struct
 {
@@ -65,6 +66,7 @@ typedef struct ALIGNED(16)
     u8              notes[NOTES_MAX];
     u8              rustyKeysOot[(DOORID_OOT_MAX + 7) / 8];
     u8              rustyKeysMm[(DOORID_MM_MAX + 7) / 8];
+    u8              saveFlags[(SAVE_FLAG_MAX + 7) / 8];
 #if defined(DEBUG)
     u8              cheats[4];
 #endif
@@ -87,6 +89,16 @@ void Save_OnLoad(void);
 void Save_DoSave(PlayState* play, int saveFlags);
 
 void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction);
+
+inline static void SaveFlag_Set(int saveFlag)
+{
+    BITMAP8_SET(gSharedCustomSave.saveFlags, saveFlag);
+}
+
+inline static int SaveFlag_Get(int saveFlag)
+{
+    return BITMAP8_GET(gSharedCustomSave.saveFlags, saveFlag);
+}
 
 # if defined(GAME_OOT)
 #  define gCustomSave gSharedCustomSave.oot

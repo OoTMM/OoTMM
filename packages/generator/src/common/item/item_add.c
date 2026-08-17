@@ -2016,12 +2016,6 @@ static int addItemClockMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemClockOot(PlayState* play, u8 itemId, s16 gi, u16 param)
-{
-    gSharedCustomSave.oot.hasClock = 1;
-    return 0;
-}
-
 static int addItemEndgame(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     switch (param)
@@ -2229,12 +2223,9 @@ static int addItemKegMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemShovel(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemSaveFlag(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param)
-        gSharedCustomSave.mm.hasShovel = 1;
-    else
-        gSharedCustomSave.oot.hasShovel = 1;
+    SaveFlag_Set(param);
     return 0;
 }
 
@@ -2365,8 +2356,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSeedsMm,
     addItemStoneGerudoSkullMm,
     addItemGibdoSpookyMm,
-    addItemClockOot,
-    addItemShovel,
+    addItemSaveFlag,
 };
 
 _Static_assert(ARRAY_COUNT(kAddItemHandlers) == IA_MAX, "kAddItemHandlers length is wrong");
