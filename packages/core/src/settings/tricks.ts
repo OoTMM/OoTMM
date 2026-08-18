@@ -349,6 +349,12 @@ export const TRICKS: Tricks = {
     name: "Backflip/Sidehop Over Gap to Reach BotW MQ's Main Room's Center",
     tooltip: "Makes the center of the main room reachable without Zelda's Lullaby or Hover Boots by entering the left cage and backflipping/sidehopping over the invisible gap",
   },
+  OOT_FOREST_MQ_STAND_IN_FRONT_OF_LOBBY_SKULLTULA: {
+    game: 'oot',
+    name: "Stand in front of Forest MQ Lobby Skulltula",
+    tooltip: "The Skulltula guarding a high tree branch in Forest MQ's first room has a small patch of ground in front of it where Link can stand freely. Using this ground, Link can use hammer or bombchus to kill the Skulltula, or bypass it by combining this trick with the 'Skulltula Elevator' glitch",
+    linkVideo: "https://www.youtube.com/watch?v=zcr465LTwEU",
+  },
   OOT_FOREST_MQ_CLIMBING_BLOCK_ROOM_TWIST_SWITCH_EARLY: {
     game: 'oot',
     name: "Hit/Reach the Forest MQ Twisting Switch While It Is Blocked",
