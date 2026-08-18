@@ -30,8 +30,11 @@ void BgTokiSwd_Handler(Actor* this, PlayState* play)
 
     if (Actor_HasParentZ(this))
     {
+        /* Register the "seen both ages" flag */
+        gSharedCustomSave.hasBeenChildAndAdult = 1;
+
         /* Swap farore */
-        swapFarore();
+        Save_SwapFaroreOot();
 
         /* Time Travel */
         play->transitionTrigger = TRANS_TRIGGER_START;

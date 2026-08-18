@@ -236,3 +236,17 @@ void comboClearCustomRespawn(CustomRespawnMode customRespawnMode)
 {
     bzero(&gSharedCustomSave.respawn[customRespawnMode], sizeof(RespawnData));
 }
+
+void Save_SwapFaroreOot(void)
+{
+    OotFaroreWind* current;
+    OotFaroreWind* prev;
+    OotFaroreWind tmp;
+
+    current = &gOotSave.info.fw;
+    prev = current - 1;
+
+    memcpy(&tmp, current, sizeof(tmp));
+    memcpy(current, prev, sizeof(tmp));
+    memcpy(prev, &tmp, sizeof(tmp));
+}
