@@ -241,7 +241,6 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     ER_REGIONS_OVERWORLD: settings.erRegions !== 'none' || settings.erOverworld !== 'none',
     CROSS_GAME_FW: settings.crossGameFw,
     RUPEE_SCALING: settings.rupeeScaling,
-    OOT_SWORDLESS_ADULT: settings.swordlessAdult,
     OOT_TIME_TRAVEL_REQUIRES_MS: settings.timeTravelSword,
     OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
     MM_DEKU_SHIELD: settings.dekuShieldMm,

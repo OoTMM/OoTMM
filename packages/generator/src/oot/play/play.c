@@ -447,18 +447,6 @@ static void masterSwordFix(PlayState* play)
 
     /* Re-add the Master Sword to the inventory */
     gSave.info.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
-
-    if (Config_Flag(CFG_OOT_SWORDLESS_ADULT))
-        return;
-    if (gSave.age != AGE_ADULT)
-        return;
-    if (gSave.info.equips.buttonItems[0] != ITEM_NONE)
-        return;
-
-    /* We need to force-reequip */
-    gSave.info.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
-    gSave.info.equips.equipment.swords = EQ_OOT_SWORD_MASTER;
-    EV_OOT_UNSET_SWORDLESS();
 }
 
 static void Play_AfterInit(PlayState* play)

@@ -341,7 +341,6 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   }
 
   base.startingAge = sampleWeighted(random, { child: 10, adult: 10 });
-  base.swordlessAdult = booleanWeighted(random, 0.5);
   base.timeTravelSword = booleanWeighted(random, 0.5);
   base.ageChange = sampleWeighted(random, { none: 10, always: 5, oot: 5 });
   base.moonCrash = sampleWeighted(random, { cycle: 3, reset: 10 });
