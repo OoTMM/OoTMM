@@ -3,6 +3,8 @@
 #include <combo/entrance.h>
 #include <combo/context.h>
 
+static u8 sSaveState;
+
 int KaleidoScope_CanSave(PlayState* play)
 {
 #if defined(GAME_MM)
@@ -82,8 +84,7 @@ static void spawnSelectMessage(PlayState* play)
     b = play->msgCtx.font.textBuffer.schar;
 #endif
     comboTextAppendHeader(&b);
-    comboTextAppendStr(&b, "Go to spawn:" TEXT_NL);
-    comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Child" TEXT_NL "Adult" TEXT_END);
+    comboTextAppendStr(&b, "Go to spawn:" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Child" TEXT_NL "Adult" TEXT_END);
 }
 
 static void close(PlayState* play)
@@ -123,7 +124,6 @@ static void KaleidoScope_GoBackToSpawn(PlayState* play, int age)
 
 static int KaleidoScope_HandleAfterSave(PlayState* play)
 {
-    PauseContext* pauseCtx = &play->pauseCtx;
     u16 buttons = play->state.input[0].press.button;
 
     if (buttons & (A_BUTTON | U_CBUTTONS))
@@ -134,7 +134,7 @@ static int KaleidoScope_HandleAfterSave(PlayState* play)
             PlaySound(NA_SE_SY_PIECE_OF_HEART);
             PlayerDisplayTextBox(play, 0, NULL);
             gameSavedMessage(play);
-            pauseCtx->savePromptState = 1;
+            sSaveState = 1;
         }
         else
         {
@@ -148,12 +148,11 @@ static int KaleidoScope_HandleAfterSave(PlayState* play)
         close(play);
         return 0;
     }
-    return 1;
+    return 0;
 }
 
 static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
 {
-    PauseContext* pauseCtx = &play->pauseCtx;
     u16 buttons = play->state.input[0].press.button;
 
     if (buttons & (A_BUTTON | U_CBUTTONS))
@@ -170,11 +169,14 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
             {
                 KaleidoScope_GoBackToSpawn(play, gOotSave.age);
                 close(play);
-                return 0;
             }
-            PlayerDisplayTextBox(play, 0, NULL);
-            spawnSelectMessage(play);
-            pauseCtx->savePromptState = 2;
+            else
+            {
+                PlayerDisplayTextBox(play, 0, NULL);
+                spawnSelectMessage(play);
+                sSaveState = 2;
+            }
+            return 0;
         }
         else
         {
@@ -231,7 +233,7 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
         close(play);
         return 0;
     }
-    return 1;
+    return 0;
 }
 
 static int KaleidoScope_HandleAfterSaveReturnSpawnSelection(PlayState* play)
@@ -251,7 +253,7 @@ static int KaleidoScope_HandleAfterSaveReturnSpawnSelection(PlayState* play)
         close(play);
         return 0;
     }
-    return 1;
+    return 0;
 }
 
 static const KaleidoScopePauseHandler kAfterSaveHandlers[] = {
@@ -303,7 +305,7 @@ s32 KaleidoScope_Update(PlayState* play)
                     PlayerDisplayTextBox(play, 0, NULL);
                     saveMessage(play);
                     pauseCtx->state = 7; /* PAUSE_STATE_SAVE_PROMPT */
-                    pauseCtx->savePromptState = 0;
+                    sSaveState = 0;
                     return 1;
                 }
             }
@@ -311,7 +313,8 @@ s32 KaleidoScope_Update(PlayState* play)
         }
         break;
     case 7: /* PAUSE_STATE_SAVE_PROMPT */
-        return kAfterSaveHandlers[pauseCtx->savePromptState](play);
+        kAfterSaveHandlers[sSaveState](play);
+        return 1;
     }
 
     return 0;
