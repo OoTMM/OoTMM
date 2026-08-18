@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- When going back to spawn, players can now explicitly select which spawn point to get back to, assuming they discovered both ages.
 - Remove the "Distinct Worlds" setting, all worlds are now distinct by default.
 - Renamed some rusty keys to make them less ambiguous.
 - Complete overhaul of the multiplayer system, see website for the setup guide and details.
