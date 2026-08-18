@@ -444,7 +444,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Main Lobby": "event(FOREST_MQ_MEG_CLEAR)"
-    "Forest Temple Antichamber Room Southwest Alcove": "get_past_skulltulas_no_stone" #You can roll into and out of the room with nothing. Trick or base?
+    "Forest Temple Antichamber Room Southwest Alcove": "true" #You can walk into and out of the room with nothing; you will get hit by the skulltula as you enter/leave though.
     "Forest Temple Antichamber Room East Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_CRYSTAL_SWITCH)"
     "Forest Temple Antichamber Room Northwest Alcove": "true"
     "Forest Temple Antichamber Room South Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_FLOOR_SWITCH)"
