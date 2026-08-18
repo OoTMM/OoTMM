@@ -18,6 +18,17 @@ import { CustomObjectsBuilder } from './custom-objects-builder';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { ObjectEditor } from './object-editor';
 import { patchAnimationPorts } from './custom-animation-builder';
+import {concatUint8Arrays} from "uint8array-extras";
+
+const AGE_MODEL_CMD_END     = 0x00000000;
+const AGE_MODEL_CMD_WRITE16 = 0x00000001;
+const AGE_MODEL_CMD_WRITE32 = 0x00000002;
+const AGE_MODEL_CMD_COPY32  = 0x00000003;
+
+type AddedCustomObject = {
+  objectId: number;
+  defines: number[];
+};
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),
@@ -161,6 +172,8 @@ export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
   POT_SOUL_SIDE: await png('pots/soul_side', 'rgba16'),
   POT_SOUL_TOP: await png('pots/soul_top', 'rgba16'),
   POT_MAP_SIDE: await png('pots/map_side', 'rgba16'),
+  ADULT_MASK_ICON: await png('adult_mask_icon', 'rgba32'),
+  ADULT_MASK_TEXT: await png('adult_mask_text', 'ia4'),
   GLITTER: await png('glitter', 'i4'),
   SONG_TAG_LULLABY: await png('song_tags/lullaby', 'ia8'),
   SONG_TAG_EPONA: await png('song_tags/epona', 'ia8'),
@@ -269,18 +282,256 @@ class CustomAssetsBuilder {
     return vrom;
   }
 
-  async addCustomObject(name: string, data: Uint8Array, defines: number[]) {
+  async addCustomObject(name: string, data: Uint8Array, defines: number[]): Promise<AddedCustomObject> {
     const vrom = this.addRawData(`custom/${name.toLowerCase()}`, data, true);
     const objectId = this.addObjectEntry(vrom, data.length);
     this.cg.define('CUSTOM_OBJECT_ID_' + name, objectId);
     for (let i = 0; i < defines.length; ++i) {
       this.cg.define('CUSTOM_OBJECT_' + name + '_' + i, defines[i]);
     }
+    return { objectId, defines };
   }
 
-  async addObjectFile(name: string, filename: string, defines: number[]) {
-    const file = await raw(filename);
-    await this.addCustomObject(name, file, defines);
+  async addObjectFile(name: string, filename: string, defines: number[]): Promise<AddedCustomObject> {
+    return this.addCustomObject(name, await raw(filename), defines);
+  }
+
+  private extractMmCodeRamRange(ramStart: number, size: number): Uint8Array {
+    const off = 0x00b3c000 + ramStart - 0x800a5ac0;
+    return this.roms.mm.rom.slice(off, off + size);
+  }
+
+  private u32pair(a: number, b: number): Uint8Array {
+    const data = new Uint8Array(8);
+    bufWriteU32BE(data, 0, a);
+    bufWriteU32BE(data, 4, b);
+    return data;
+  }
+
+  async addHumanAgeProperties() {
+    const AGE_BASE = 0x8085BA38;
+    const AGE_SIZE = 0xDC;
+    const PLAYER_ACTOR_VRAM = 0x8082DA90;
+    const PLAYER_ACTOR_ROM = 0x00CA7F00;
+
+    const read = (vram: number) => {
+      const rom = PLAYER_ACTOR_ROM + vram - PLAYER_ACTOR_VRAM;
+      const data = this.roms.mm.rom.slice(rom, rom + AGE_SIZE);
+
+      if (rom < 0 || data.length !== AGE_SIZE) {
+        throw new Error(
+            `Player actor ROM read failed: ` +
+            `vram=0x${vram.toString(16)}, ` +
+            `rom=0x${rom.toString(16)}, ` +
+            `size=0x${AGE_SIZE.toString(16)}, ` +
+            `got=0x${data.length.toString(16)}`
+        );
+      }
+
+      return data;
+    };
+
+    const childHuman = read(AGE_BASE + AGE_SIZE * 4);
+    const zora = read(AGE_BASE + AGE_SIZE * 2);
+    const adultHuman = new Uint8Array(zora);
+
+    const view = new DataView(
+        adultHuman.buffer,
+        adultHuman.byteOffset,
+        adultHuman.byteLength
+    );
+
+    const writeU16 = (offset: number, value: number) => {
+      view.setUint16(offset, value & 0xffff, false);
+    };
+
+    const writeS16 = (offset: number, value: number) => {
+      view.setInt16(offset, value, false);
+    };
+
+    const writeU32 = (offset: number, value: number) => {
+      view.setUint32(offset, value >>> 0, false);
+    };
+
+    const writeF32 = (offset: number, value: number) => {
+      view.setFloat32(offset, value, false);
+    };
+
+    const writeVec3s = (
+        offset: number,
+        value: readonly [number, number, number]
+    ) => {
+      writeS16(offset + 0x0, value[0]);
+      writeS16(offset + 0x2, value[1]);
+      writeS16(offset + 0x4, value[2]);
+    };
+
+    const writeVec3sArray = (
+        offset: number,
+        values: readonly (readonly [number, number, number])[]
+    ) => {
+      values.forEach((value, index) => {
+        writeVec3s(offset + index * 6, value);
+      });
+    };
+    writeF32(0x28, 44.8);
+    writeF32(0x3C, 15.0);
+
+    /* PlayerAgeProperties::unk_44 */
+    writeVec3s(0x44, [9, 0x123F, 0x0167]);
+
+    /* PlayerAgeProperties::unk_4A[4] */
+    writeVec3sArray(0x4A, [
+      [8, 0x1256, 0x017C],
+      [9, 0x17EA, 0x0167],
+      [8, 0x1256, 0x017C],
+      [9, 0x17EA, 0x0167],
+    ]);
+
+    /* PlayerAgeProperties::unk_62[4] */
+    writeVec3sArray(0x62, [
+      [9, 0x17EA, 0x0167],
+      [9, 0x1E0D, 0x017C],
+      [9, 0x17EA, 0x0167],
+      [9, 0x1E0D, 0x017C],
+    ]);
+
+    /* PlayerAgeProperties::unk_7A[4] */
+    writeVec3sArray(0x7A, [
+      [8, 0x1256, 0x017C],
+      [9, 0x17EA, 0x0167],
+      [-0x638, 0x1256, 0x017C],
+      [-0x637, 0x17EA, 0x0167],
+    ]);
+
+    /* Adult voice, human surface sounds. */
+    writeU16(0x92, 0x0000);
+    writeU16(0x94, 0x0080);
+
+    writeF32(0x98, 22.0);
+    writeF32(0x9C, 36.0);
+
+    const animations: readonly (readonly [number, number])[] = [
+      [0xA0, 0x0400E300], // openChestAnim
+      [0xA4, 0x0400D548],
+      [0xA8, 0x0400D660],
+
+      [0xAC, 0x0400E378], // climb start A
+      [0xB0, 0x0400E380], // climb start B
+
+      [0xB4, 0x0400E388], // climb up L
+      [0xB8, 0x0400E390], // climb up R
+      [0xBC, 0x0400DAB0], // fast climb up L
+      [0xC0, 0x0400DAB8], // fast climb up R
+
+      [0xC4, 0x0400DA90], // climb side L
+      [0xC8, 0x0400DA98], // climb side R
+
+      [0xCC, 0x0400E358], // climb end A L
+      [0xD0, 0x0400E360], // climb end A R — corrected address
+
+      [0xD4, 0x0400E370], // climb end B R
+      [0xD8, 0x0400E368], // climb end B L
+    ];
+
+    for (const [offset, address] of animations) {
+      writeU32(offset, address);
+    }
+
+    this.cg.define(
+        'CUSTOM_MM_CHILD_HUMAN_AGE_PROPERTIES_VROM',
+        this.addRawData(
+            'custom/mm_child_human_age_properties',
+            childHuman,
+            false
+        )
+    );
+
+    this.cg.define(
+        'CUSTOM_MM_ADULT_HUMAN_AGE_PROPERTIES_VROM',
+        this.addRawData(
+            'custom/mm_adult_human_age_properties',
+            adultHuman,
+            false
+        )
+    );
+  }
+
+  async addChildAgeModelTables() {
+    const ranges = [
+      [0x801bfe00, 0x4f8],
+      [0x801c0d78, 0x20],
+      [0x801c2730, 0x10],
+      [0x801dca58, 0x14],
+    ];
+
+    const parts = ranges.flatMap(([addr, size]) => [
+      this.u32pair(addr, size),
+      this.extractMmCodeRamRange(addr, size),
+    ]);
+    parts.push(this.u32pair(0, 0));
+
+    const data = concatUint8Arrays(parts);
+    const vrom = this.addRawData('custom/mm_age_model_child_tables', data, false);
+
+    this.cg.define('CUSTOM_MM_AGE_MODEL_CHILD_TABLES_VROM', vrom);
+    this.cg.define('CUSTOM_MM_AGE_MODEL_CHILD_TABLES_SIZE', data.length);
+  }
+
+  async addAdultAgeModelTables(adultLink: AddedCustomObject) {
+    const writes: { op: number; addr: number; value: number }[] = [];
+    const { objectId: id, defines: d } = adultLink;
+
+    const w = (op: number, addr: number, value: number) => writes.push({ op, addr, value });
+    const w16 = (addr: number, value: number) => w(AGE_MODEL_CMD_WRITE16, addr, value);
+    const w32 = (addr: number, value: number) => w(AGE_MODEL_CMD_WRITE32, addr, value);
+    const copy32 = (addr: number, value: number) => w(AGE_MODEL_CMD_COPY32, addr, value);
+    const w32a = (base: number, ids: number[]) => ids.forEach((i, n) => w32(base + n * 4, d[i]));
+
+    w16(0x801c2738, id);      // playerFormObjectIds[HUMAN]
+    w32(0x801bfe10, d[0]);   // playerSkeletons[HUMAN]
+    w32a(0x801c001c, [1, 1]); // playerWaistDLs
+    w32a(0x801c0024, [2, 2, 3, 3]); // playerHandHoldingShieldDLs
+    w32a(0x801c0054, [4, 4]); // playerSheath12DLs
+    w32a(0x801c007c, [4, 4]); // playerSheath13DLs
+    w32a(0x801c00a4, [4, 4]); // playerSheath14DLs
+    w32a(0x801c00ac, [5, 5, 6, 6]); // playerShieldDLs
+    w32a(0x801c00bc, [7, 7, 8, 8, 9, 9]); // playerSheathedSwordDLs
+    w32a(0x801c00d4, [10, 10, 11, 11, 12, 12]); // playerSwordSheathsDLs
+    w32a(0x801c010c, [13, 13]); // playerLeftHandTwoHandSwordDLs
+    w32a(0x801c0134, [14, 14]); // playerLeftHandOpenDLs
+    w32a(0x801c015c, [15, 15]); // playerLeftHandClosedDLs
+    w32a(0x801c0184, [16, 16]); // playerLeftHandOneHandSwordDLs
+    w32a(0x801c018c, [17, 17, 18, 18, 19, 19]); // playerEquipValueDLs
+    w32a(0x801c01c4, [20, 20]); // playerRightHandOpenDLs
+    w32a(0x801c01ec, [21, 21]); // playerRightHandClosedDLs
+    w32a(0x801c0214, [22, 22]); // playerRightHandBowDLs
+    w32a(0x801c023c, [23, 23]); // playerRightHandInstrumentDLs
+    w32a(0x801c0264, [24, 24]); // playerRightHandHookshotDLs
+    w32a(0x801c028c, [25, 25]); // playerLeftHandBottleDLs
+    w32(0x801c02a4, d[4]);  // playerFirstPersonLeftForearmDLs[HUMAN]
+    w32(0x801c02b8, d[15]); // playerFirstPersonLeftHandDLs[HUMAN]
+    w32(0x801c02cc, d[26]); // playerFirstPersonRightShoulderDLs[HUMAN]
+    w32(0x801c02e0, d[27]); // playerFirstPersonRightHandDLs[HUMAN]
+    w32(0x801c02f4, d[28]); // playerFirstPersonRightHandHookshotDLs[HUMAN]
+    w32(0x801c0d94, d[29]); // Extra bow hand DL pointer
+    w32(0x801c0d7c, 0x457a0000); // meleeWeaponLengths[1] = 4000.0f
+    w32(0x801c0d80, 0x457a0000); // meleeWeaponLengths[2] = 4000.0f
+    w32(0x801c0d84, 0x45abe000); // meleeWeaponLengths[3] = 5500.0f
+    w32(0x801c0d88, 0x45abe000); // meleeWeaponLengths[4] = 5500.0f
+    copy32(0x801dca68, 0x801dca60); // playerHeightJtbl[HUMAN] = playerHeightJtbl[ZORA]
+
+    const data = new Uint8Array((writes.length + 1) * 0x0c);
+    [...writes, { op: AGE_MODEL_CMD_END, addr: 0, value: 0 }].forEach(({ op, addr, value }, i) => {
+      const off = i * 0x0c;
+      bufWriteU32BE(data, off + 0x00, op);
+      bufWriteU32BE(data, off + 0x04, addr);
+      bufWriteU32BE(data, off + 0x08, value);
+    });
+
+    const vrom = this.addRawData('custom/mm_age_model_tables', data, false);
+    this.cg.define('CUSTOM_MM_AGE_MODEL_TABLES_VROM', vrom);
+    this.cg.define('CUSTOM_MM_AGE_MODEL_TABLES_SIZE', data.length);
   }
 
   async addCustomExtractedObject(entry: CustomEntry) {
@@ -476,17 +727,23 @@ class CustomAssetsBuilder {
     await this.addObjectFile('BTN_C_VERTICAL', 'btn_c_vertical.zobj', [0x06000960]);
     await this.addObjectFile('GI_POND_FISH', 'gi_pond_fish.zobj', [0x06001160]);
     await this.addObjectFile('BOMBCHU_BAG', 'bombchu_bag.zobj', [0x060006A0, 0x060008E0, 0x06001280]);
-    await this.addObjectFile('MM_ADULT_LINK', 'mm_adult_link.zobj', [
+    const mmAdultLink = await this.addObjectFile('MM_ADULT_LINK', 'mm_adult_link.zobj', [
       0x060122C4, 0x0600bb00, 0x0601c0c0, 0x0601c0d0, 0x0601c130, 0x0601BFE8, 0x0601BFF8, 0x0601C008,
       0x0601C028, 0x0601C048, 0x0601BFC8, 0x0601BFA8, 0x0601BEC8, 0x0601C0B0, 0x06010000, 0x0600AE40,
       0x0601DC68, 0x0601C068, 0x0601C080, 0x0601C098, 0x06010D50, 0x0600B3F0, 0x0601C0F0, 0x0601C100,
       0x0601C0E0, 0x0600A8E8, 0x060103D8, 0x0601C120, 0x0601C110, 0x0601be60
     ]);
+    await this.addChildAgeModelTables();
+    await this.addAdultAgeModelTables(mmAdultLink);
+    await this.addHumanAgeProperties();
     await this.addObjectFile('MM_ADULT_EPONA', 'mm_adult_epona.zobj', []);
     await this.addObjectFile('MM_ADULT_LINK_SPIN_ATTACK_VTX_1', 'mm_adult_link_spin_attack_vtx_1.bin', []);
     await this.addObjectFile('MM_ADULT_LINK_SPIN_ATTACK_VTX_2', 'mm_adult_link_spin_attack_vtx_2.bin', []);
     await this.addObjectFile('MM_ADULT_LINK_SPIN_ATTACK_VTX_3', 'mm_adult_link_spin_attack_vtx_3.bin', []);
     await this.addObjectFile('MM_ADULT_LINK_MASK_MTX', 'mm_adult_link_mask_mtx.bin', []);
+    await this.addObjectFile('MASK_ADULT', 'object_gi_maskadult.zobj', [0x060009B0, 0x06000B90,]);
+    await this.addObjectFile('MASK_ADULT_TRANSFORM_PLAYER', 'object_mask_adult.zobj', [0x0a000900,]);
+    await this.addObjectFile('ADULT_MASK_EQUIPMENT', 'adult_mask_equipment_standalone.zobj', [0x0a000920,]);
 
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());

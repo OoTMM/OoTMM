@@ -599,7 +599,7 @@
 - { id: MM_MASK_DEKU, item: MM_MASK_DEKU, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_DEKU, object: [mm, 0x01bd], name: "the <C1>Deku Mask" }
 - { id: MM_MASK_GORON, item: MM_MASK_GORON, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_GORON, object: [mm, 0x0119], name: "the <C1>Goron Mask" }
 - { id: MM_MASK_ZORA, item: MM_MASK_ZORA, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_ZORA, object: [mm, 0x011a], name: "the <C1>Zora Mask" }
-- { id: MM_MASK_FIERCE_DEITY, item: MM_MASK_FIERCE_DEITY, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_FIERCE_DEITY, object: [mm, 0x0242], name: "the <C1>Fierce Deity's Mask" }
+- { id: MM_MASK_FIERCE_DEITY, item: MM_MASK_FIERCE_DEITY, type: MASK, add: [MM_FIERCE_DEITY_ADULT, 0], flags: 0xa0, draw: MM_MASK_FIERCE_DEITY, object: [mm, 0x0242], name: "the <C1>Fierce Deity's Mask" }
 - { id: MM_MASK_CAPTAIN, item: MM_MASK_CAPTAIN, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_CAPTAIN, object: [mm, 0x0102], name: "the <C1>Captain's Hat" }
 - { id: MM_MASK_GIANT, item: MM_MASK_GIANT, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_GIANT, object: [mm, 0x0226], name: "the <C1>Giant's Mask" }
 - { id: MM_MASK_ALL_NIGHT, item: MM_MASK_ALL_NIGHT, type: MASK, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_ALL_NIGHT, object: [mm, 0x0265], name: "the <C1>All Night Mask" }
@@ -623,6 +623,7 @@
 - { id: MM_MASK_GERUDO, item: MM_MASK_GERUDO, type: MASK, add: [MM_STONEGERUDOSKULL, 1], flags: 0x80, draw: OOT_MASK_GERUDO, object: [oot, 0x0152], name: "the <C1>Gerudo Mask" }
 - { id: MM_MASK_SKULL, item: MM_MASK_SKULL, type: MASK, add: [MM_STONEGERUDOSKULL, 2], flags: 0x80, draw: OOT_MASK_SKULL, object: [oot, 0x0136], name: "the <C1>Skull Mask" }
 - { id: MM_MASK_SPOOKY, item: MM_MASK_SPOOKY, type: MASK, add: [MM_GIBDOSPOOKY, 1], flags: 0x80, draw: OOT_MASK_SPOOKY, object: [oot, 0x0135], name: "the <C1>Spooky Mask" }
+- { id: MM_MASK_ADULT, item: MM_MASK_ADULT, type: MASK, add: [MM_FIERCE_DEITY_ADULT, 1], flags: 0xa0, draw: MASK_ADULT, object: MASK_ADULT, name: "the <C1>Adult Mask" }
 - { id: MM_CHATEAU, item: MM_CHATEAU, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_CHATEAU, object: [mm, 0x00c1], name: "some <C0>Chateau Romani" }
 - { id: MM_MILK, item: MM_MILK, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MILK, object: [mm, 0x00c1], name: "some <C0>Milk" }
 - { id: MM_GOLD_DUST, item: MM_GOLD_DUST, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }

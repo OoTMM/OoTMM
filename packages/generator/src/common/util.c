@@ -74,8 +74,29 @@ int comboIsChateauActive(void)
 int comboIsLinkAdult(void)
 {
 #if defined(GAME_MM)
-    if (!Config_Flag(CFG_MM_CROSS_AGE))
-        return 0;
-#endif
+    return gMmSave.linkAge == 0;
+#else
     return gOotSave.age == 0;
+#endif
+}
+
+u8 comboMmFwAge(void)
+{
+    u8 age;
+    if (Config_Flag(CFG_MM_CROSS_AGE) ||
+        Config_Flag(CFG_MM_MASK_ADULT))
+    {
+        age = gMmSave.linkAge;
+    }
+    else
+    {
+        age = (gOotSave.age == 0)
+            ? MM_LINK_AGE_ADULT
+            : MM_LINK_AGE_CHILD;
+    }
+
+    if (age >= MM_LINK_AGE_COUNT)
+        age = MM_LINK_AGE_CHILD;
+
+    return age;
 }

@@ -146,6 +146,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.SONG_NOTES,
   ...ItemGroups.OOT_RUSTY_KEYS,
   ...ItemGroups.MM_RUSTY_KEYS,
+  ...ItemGroups.MASKS_TRANSFORM,
   Items.OOT_SHOVEL,
   Items.MM_SHOVEL,
   Items.SHARED_SHOVEL,
@@ -217,9 +218,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_PLATINUM_TOKEN,
   Items.SHARED_PLATINUM_TOKEN,
   Items.MM_BOTTLED_GOLD_DUST,
-  Items.MM_MASK_DEKU,
-  Items.MM_MASK_GORON,
-  Items.MM_MASK_ZORA,
   Items.MM_MASK_CAPTAIN,
   Items.MM_MASK_GIANT,
   Items.MM_MASK_ALL_NIGHT,
@@ -246,7 +244,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_KAMARO,
   Items.MM_MASK_SCENTS,
   Items.MM_MASK_KAFEI,
-  Items.MM_MASK_FIERCE_DEITY,
   Items.MM_MAGIC_UPGRADE,
   Items.MM_BOMBER_NOTEBOOK,
   Items.MM_BOW,
@@ -299,8 +296,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_HOOKSHOT,
   Items.SHARED_LENS,
   Items.SHARED_OCARINA,
-  Items.SHARED_MASK_GORON,
-  Items.SHARED_MASK_ZORA,
   Items.SHARED_MASK_TRUTH,
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_KEATON,
@@ -971,6 +966,10 @@ class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_MASK_SPOOKY, Items.SHARED_MASK_SPOOKY);
     } else if (settings.spookyMaskMm) {
       this.addItem(Items.MM_MASK_SPOOKY);
+    }
+
+    if (settings.adultMaskMm) {
+      this.addItem(Items.MM_MASK_ADULT);
     }
 
     if (settings.sharedSongElegy) {

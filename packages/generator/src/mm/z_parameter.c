@@ -2,6 +2,8 @@
 #include <combo/player.h>
 #include <combo/souls.h>
 
+#include "combo/custom.h"
+
 void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
 {
     DmaEntry dma;
@@ -14,6 +16,15 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
     {
         switch(id)
         {
+            case ITEM_MM_MASK_ADULT:
+            {
+                void* src = comboCacheGetFile(CUSTOM_ADULT_MASK_ICON_ADDR);
+
+                if (src)
+                    memcpy(dst, src, size); /* or adultMaskIconSize if size is wrong */
+
+                return;
+            }
         case ITEM_MM_SPELL_FIRE:
             id = ITEM_OOT_SPELL_FIRE;
             break;
