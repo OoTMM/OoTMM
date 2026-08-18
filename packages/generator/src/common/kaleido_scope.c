@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/config.h>
 #include <combo/entrance.h>
+#include <combo/context.h>
 
 int KaleidoScope_CanSave(PlayState* play)
 {
@@ -71,6 +72,20 @@ static void gameSavedMessage(PlayState* play)
     }
 }
 
+static void spawnSelectMessage(PlayState* play)
+{
+    char* b;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.font.msgBuf;
+#else
+    b = play->msgCtx.font.textBuffer.schar;
+#endif
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "Go to spawn:" TEXT_NL);
+    comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Child" TEXT_NL "Adult" TEXT_END);
+}
+
 static void close(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
@@ -80,6 +95,170 @@ static void close(PlayState* play)
     play->state.input[0].press.button |= START_BUTTON;
     gSaveContext.prevHudVisibilityMode = HUD_VISIBILITY_ALL;
 }
+
+typedef int (*KaleidoScopePauseHandler)(PlayState* play);
+
+static void KaleidoScope_GoBackToSpawn(PlayState* play, int age)
+{
+    u32 entrance = gComboConfig.entrancesSpawns[age];
+
+    if (gOotSave.age != age)
+        Save_SwapFaroreOot();
+
+#if defined(GAME_OOT)
+    play->linkAgeOnLoad = age;
+#endif
+
+#if defined(GAME_MM)
+    if (gOotSave.age != age)
+        gComboCtx.isAgeSwapSpawn = 1;
+
+    /* Assume spawn is always an OoT spawn */
+    entrance |= MASK_FOREIGN_ENTRANCE;
+#endif
+
+    comboTransition(play, entrance);
+    Player_Freeze(play);
+}
+
+static int KaleidoScope_HandleAfterSave(PlayState* play)
+{
+    PauseContext* pauseCtx = &play->pauseCtx;
+    u16 buttons = play->state.input[0].press.button;
+
+    if (buttons & (A_BUTTON | U_CBUTTONS))
+    {
+        if (play->msgCtx.choiceIndex == 0)
+        {
+            Save_DoSave(play, SF_OWL);
+            PlaySound(NA_SE_SY_PIECE_OF_HEART);
+            PlayerDisplayTextBox(play, 0, NULL);
+            gameSavedMessage(play);
+            pauseCtx->savePromptState = 1;
+        }
+        else
+        {
+            close(play);
+            return 0;
+        }
+    }
+    else if (buttons & (START_BUTTON | B_BUTTON))
+    {
+        play->state.input[0].press.button &= ~B_BUTTON;
+        close(play);
+        return 0;
+    }
+    return 1;
+}
+
+static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
+{
+    PauseContext* pauseCtx = &play->pauseCtx;
+    u16 buttons = play->state.input[0].press.button;
+
+    if (buttons & (A_BUTTON | U_CBUTTONS))
+    {
+        if (play->msgCtx.choiceIndex == 0)
+        {
+            close(play);
+            return 0;
+        }
+        else if (play->msgCtx.choiceIndex == 1)
+        {
+            PlaySound(NA_SE_SY_DECIDE);
+            if (!gSharedCustomSave.hasBeenChildAndAdult)
+            {
+                KaleidoScope_GoBackToSpawn(play, gOotSave.age);
+                close(play);
+                return 0;
+            }
+            PlayerDisplayTextBox(play, 0, NULL);
+            spawnSelectMessage(play);
+            pauseCtx->savePromptState = 2;
+        }
+        else
+        {
+            RespawnData* dungeonEntranceRespawn = &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE];
+            if (dungeonEntranceRespawn->playerParams)
+            {
+                PlaySound(NA_SE_SY_DECIDE);
+#if defined(GAME_OOT)
+                if (dungeonEntranceRespawn->data & 0x80)
+                {
+                    play->nextEntranceIndex = ENTR_CROSS_RESPAWN;
+                }
+                else
+                {
+                    memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(OotRespawnData));
+                    memcpy(&gSaveContext.respawn[RESPAWN_MODE_DOWN], dungeonEntranceRespawn, sizeof(OotRespawnData));
+                    play->nextEntranceIndex = dungeonEntranceRespawn->entrance;
+                    gSaveContext.respawnFlag = 2;
+                }
+#else
+                if(!Config_Flag(CFG_MM_FD_ANYWHERE) && gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
+                {
+                    gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+                    gSave.equippedMask = 0;
+                }
+                if (!(dungeonEntranceRespawn->data & 0x80))
+                {
+                    play->nextEntrance = ENTR_CROSS_RESPAWN;
+                }
+                else
+                {
+                    memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], dungeonEntranceRespawn, sizeof(RespawnData));
+                    gSaveContext.respawn[RESPAWN_MODE_TOP].data &= 0x7f;
+                    play->nextEntrance = dungeonEntranceRespawn->entrance;
+                    gSaveContext.respawnFlag = -6;
+                }
+#endif
+                play->transitionTrigger = TRANS_TRIGGER_START;
+                play->transitionType = TRANS_TYPE_FADE_BLACK;
+                Player_Freeze(play);
+                close(play);
+                return 0;
+            }
+            else
+            {
+                close(play);
+                return 0;
+            }
+        }
+    }
+    else if (buttons & (START_BUTTON | B_BUTTON))
+    {
+        play->state.input[0].press.button &= ~B_BUTTON;
+        close(play);
+        return 0;
+    }
+    return 1;
+}
+
+static int KaleidoScope_HandleAfterSaveReturnSpawnSelection(PlayState* play)
+{
+    u16 buttons = play->state.input[0].press.button;
+
+    if (buttons & (A_BUTTON | U_CBUTTONS))
+    {
+        PlaySound(NA_SE_SY_DECIDE);
+        KaleidoScope_GoBackToSpawn(play, !play->msgCtx.choiceIndex);
+        close(play);
+        return 0;
+    }
+    else if (buttons & (START_BUTTON | B_BUTTON))
+    {
+        play->state.input[0].press.button &= ~B_BUTTON;
+        close(play);
+        return 0;
+    }
+    return 1;
+}
+
+static const KaleidoScopePauseHandler kAfterSaveHandlers[] = {
+    KaleidoScope_HandleAfterSave,
+    KaleidoScope_HandleAfterSaveAction,
+    KaleidoScope_HandleAfterSaveReturnSpawnSelection,
+};
 
 s32 KaleidoScope_Update(PlayState* play)
 {
@@ -132,111 +311,7 @@ s32 KaleidoScope_Update(PlayState* play)
         }
         break;
     case 7: /* PAUSE_STATE_SAVE_PROMPT */
-        switch (pauseCtx->savePromptState)
-        {
-        case 0:
-            if (buttons & (A_BUTTON | U_CBUTTONS))
-            {
-                if (play->msgCtx.choiceIndex == 0)
-                {
-                    Save_DoSave(play, SF_OWL);
-                    PlaySound(NA_SE_SY_PIECE_OF_HEART);
-                    PlayerDisplayTextBox(play, 0, NULL);
-                    gameSavedMessage(play);
-                    pauseCtx->savePromptState = 1;
-                }
-                else
-                {
-                    close(play);
-                    return 0;
-                }
-            }
-            else if (buttons & (START_BUTTON | B_BUTTON))
-            {
-                play->state.input[0].press.button &= ~B_BUTTON;
-                close(play);
-                return 0;
-            }
-            break;
-        case 1:
-            if (buttons & (A_BUTTON | U_CBUTTONS))
-            {
-                if (play->msgCtx.choiceIndex == 0)
-                {
-                    close(play);
-                    return 0;
-                }
-                else if (play->msgCtx.choiceIndex == 1)
-                {
-                    PlaySound(NA_SE_SY_DECIDE);
-                    u32 entrance = gComboConfig.entrancesSpawns[gOotSave.age];
-#if defined(GAME_MM)
-                    /* Assume spawn is always an OoT spawn */
-                    entrance |= MASK_FOREIGN_ENTRANCE;
-#endif
-                    comboTransition(play, entrance);
-                    Player_Freeze(play);
-                    close(play);
-                    return 0;
-                }
-                else
-                {
-                    RespawnData* dungeonEntranceRespawn = &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE];
-                    if (dungeonEntranceRespawn->playerParams)
-                    {
-                        PlaySound(NA_SE_SY_DECIDE);
-#if defined(GAME_OOT)
-                        if (dungeonEntranceRespawn->data & 0x80)
-                        {
-                            play->nextEntranceIndex = ENTR_CROSS_RESPAWN;
-                        }
-                        else
-                        {
-                            memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(OotRespawnData));
-                            memcpy(&gSaveContext.respawn[RESPAWN_MODE_DOWN], dungeonEntranceRespawn, sizeof(OotRespawnData));
-                            play->nextEntranceIndex = dungeonEntranceRespawn->entrance;
-                            gSaveContext.respawnFlag = 2;
-                        }
-#else
-                        if(!Config_Flag(CFG_MM_FD_ANYWHERE) && gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
-                        {
-                            gSave.playerForm = MM_PLAYER_FORM_HUMAN;
-                            gSave.equippedMask = 0;
-                        }
-                        if (!(dungeonEntranceRespawn->data & 0x80))
-                        {
-                            play->nextEntrance = ENTR_CROSS_RESPAWN;
-                        }
-                        else
-                        {
-                            memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], dungeonEntranceRespawn, sizeof(RespawnData));
-                            gSaveContext.respawn[RESPAWN_MODE_TOP].data &= 0x7f;
-                            play->nextEntrance = dungeonEntranceRespawn->entrance;
-                            gSaveContext.respawnFlag = -6;
-                        }
-#endif
-                        play->transitionTrigger = TRANS_TRIGGER_START;
-                        play->transitionType = TRANS_TYPE_FADE_BLACK;
-                        Player_Freeze(play);
-                        close(play);
-                        return 0;
-                    }
-                    else
-                    {
-                        close(play);
-                        return 0;
-                    }
-                }
-            }
-            else if (buttons & (START_BUTTON | B_BUTTON))
-            {
-                play->state.input[0].press.button &= ~B_BUTTON;
-                close(play);
-                return 0;
-            }
-            break;
-        }
-        return 1;
+        return kAfterSaveHandlers[pauseCtx->savePromptState](play);
     }
 
     return 0;
