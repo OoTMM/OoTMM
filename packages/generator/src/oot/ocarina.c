@@ -918,6 +918,12 @@ static void HandleSoaring(PlayState* play)
 
 void ageSwap(PlayState* play)
 {
+    /* Register flag */
+    gSharedCustomSave.hasBeenChildAndAdult = 1;
+
+    /* Set the correct farore */
+    Save_SwapFaroreOot();
+
     /* Age swap */
     play->linkAgeOnLoad = !gSaveContext.save.age;
     Play_SetupRespawnPoint(play, 1, 0xdff);
@@ -925,9 +931,6 @@ void ageSwap(PlayState* play)
     play->transitionTrigger = TRANS_TRIGGER_START;
     play->nextEntranceIndex = gSaveContext.save.entrance;
     play->transitionType = TRANS_GFX_SHORTCUT;
-
-    /* Set the correct farore */
-    swapFarore();
 }
 
 static void HandleSongOfTime(PlayState* play)

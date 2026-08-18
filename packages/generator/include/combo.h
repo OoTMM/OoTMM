@@ -128,9 +128,7 @@ extern u16 gBlastMaskDelayAcc;
 /* Switch */
 NORETURN void comboGameSwitch(PlayState* play, u32 entrance);
 
-#if defined(GAME_OOT)
-void swapFarore(void);
-#endif
+void Save_SwapFaroreOot(void);
 
 extern const u8 kMaxSongNotes[];
 

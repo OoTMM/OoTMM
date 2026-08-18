@@ -835,6 +835,14 @@ void Play_FastInit(GameState* gs)
     gSaveContext.gameMode = GAMEMODE_NORMAL;
     gSaveContext.showTitleCard = TRUE;
 
+    /* Handle cross age spawns */
+    if (gComboCtx.isAgeSwapSpawn)
+    {
+        gComboCtx.isAgeSwapSpawn = 0;
+        TimeTravelUpdateEquipment();
+        gSave.age = !gSave.age;
+    }
+
     if (gComboCtx.isFwSpawn)
     {
         gSaveContext.respawnFlag = 3;
