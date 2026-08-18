@@ -93,7 +93,7 @@ static void close(PlayState* play)
 
     Message_Close(play);
     pauseCtx->state = 6; /* PAUSE_STATE_MAIN */
-    play->state.input[0].press.button |= START_BUTTON;
+    play->state.input[0].press.button = START_BUTTON;
     gSaveContext.prevHudVisibilityMode = HUD_VISIBILITY_ALL;
 }
 
@@ -138,15 +138,12 @@ static int KaleidoScope_HandleAfterSave(PlayState* play)
         }
         else
         {
-            close(play);
-            return 0;
+            return 1;
         }
     }
     else if (buttons & (START_BUTTON | B_BUTTON))
     {
-        play->state.input[0].press.button &= ~B_BUTTON;
-        close(play);
-        return 0;
+        return 1;
     }
     return 0;
 }
@@ -159,8 +156,7 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
     {
         if (play->msgCtx.choiceIndex == 0)
         {
-            close(play);
-            return 0;
+            return 1;
         }
         else if (play->msgCtx.choiceIndex == 1)
         {
@@ -168,7 +164,7 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
             if (!gSharedCustomSave.hasBeenChildAndAdult)
             {
                 KaleidoScope_GoBackToSpawn(play, gOotSave.age);
-                close(play);
+                return 1;
             }
             else
             {
@@ -176,7 +172,6 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
                 spawnSelectMessage(play);
                 sSaveState = 2;
             }
-            return 0;
         }
         else
         {
@@ -217,21 +212,17 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
                 play->transitionTrigger = TRANS_TRIGGER_START;
                 play->transitionType = TRANS_TYPE_FADE_BLACK;
                 Player_Freeze(play);
-                close(play);
-                return 0;
+                return 1;
             }
             else
             {
-                close(play);
-                return 0;
+                return 1;
             }
         }
     }
     else if (buttons & (START_BUTTON | B_BUTTON))
     {
-        play->state.input[0].press.button &= ~B_BUTTON;
-        close(play);
-        return 0;
+        return 1;
     }
     return 0;
 }
@@ -244,14 +235,11 @@ static int KaleidoScope_HandleAfterSaveReturnSpawnSelection(PlayState* play)
     {
         PlaySound(NA_SE_SY_DECIDE);
         KaleidoScope_GoBackToSpawn(play, !play->msgCtx.choiceIndex);
-        close(play);
-        return 0;
+        return 1;
     }
     else if (buttons & (START_BUTTON | B_BUTTON))
     {
-        play->state.input[0].press.button &= ~B_BUTTON;
-        close(play);
-        return 0;
+        return 1;
     }
     return 0;
 }
@@ -313,7 +301,11 @@ s32 KaleidoScope_Update(PlayState* play)
         }
         break;
     case 7: /* PAUSE_STATE_SAVE_PROMPT */
-        kAfterSaveHandlers[sSaveState](play);
+        if (kAfterSaveHandlers[sSaveState](play))
+        {
+            close(play);
+            return 0;
+        }
         return 1;
     }
 
