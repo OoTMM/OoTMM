@@ -5,7 +5,8 @@
   exits:
     "GLOBAL": "true"
     "Lost Woods Bridge": "true"
-    "Market Entryway": "true"
+    "Hyrule Field Near Market": "is_day || is_adult || longshot_anywhere || (climb_anywhere && (can_swim || hookshot_anywhere || has_hover_boots))" # With climb anywhere, MM air movement can also do this as well as a precisely aimed jump from the fence near boulder grotto
+    "Hyrule Field Moat": "can_swim_or_sink"
     "Kakariko": "true"
     "Zora River Front": "true"
     "Lake Hylia": "true"
@@ -30,13 +31,11 @@
     ARROWS: "is_adult"
     MAGIC: "true"
   locations:
-    "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA) && can_swim_or_sink"
-    "Hyrule Field Song of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA) && can_swim_or_sink"
     "Hyrule Field Sell Bunny Mask": "is_child && has_spiritual_stones && has_mask_bunny && soul_citizen"
     "Hyrule Field River Big Fairy": "can_play_storms"
-    "Hyrule Field Wonder Item 1": "is_child"
-    "Hyrule Field Wonder Item 2": "is_child"
-    "Hyrule Field Wonder Item 3": "is_child"
+    "Hyrule Field Wonder Item 1": "is_child && (is_day || longshot_anywhere || (climb_anywhere && (can_swim || hookshot_anywhere || has_hover_boots)))"
+    "Hyrule Field Wonder Item 2": "is_child && (is_day || longshot_anywhere || (climb_anywhere && (can_swim || hookshot_anywhere || has_hover_boots)))"
+    "Hyrule Field Wonder Item 3": "is_child && (is_day || longshot_anywhere || (climb_anywhere && (can_swim || hookshot_anywhere || has_hover_boots)))"
     "Hyrule Field Tree 01": "true"
     "Hyrule Field Tree 02": "true"
     "Hyrule Field Tree 03": "true"
@@ -218,12 +217,34 @@
     "Hyrule Field Red Boulder 3": "true"
     "Hyrule Field Red Boulder 4": "true"
 
-"Hyrule Field Drawbridge":
+"Hyrule Field Near Market":
   region: HYRULE_FIELD
   time: flow
   exits:
     "GLOBAL": "true"
-    "Hyrule Field": "true"
+    "Hyrule Field": "is_day || is_adult || longshot_anywhere || (climb_anywhere && has_hover_boots)"
+    "Market Entryway": "true"
+  locations:
+    "Hyrule Field Wonder Item 1": "is_child && (hookshot_anywhere || climb_anywhere)"
+    "Hyrule Field Wonder Item 2": "is_child && (hookshot_anywhere || climb_anywhere)"
+    "Hyrule Field Wonder Item 3": "is_child && (hookshot_anywhere || climb_anywhere)"
+
+"Hyrule Field Drawbridge":
+  region: HYRULE_FIELD
+  age_change: false
+  exits:
+    "Hyrule Field": "is_day || is_adult"
+    "Hyrule Field Moat": "can_swim_or_sink"
+
+"Hyrule Field Moat":
+  region: HYRULE_FIELD
+  time: flow
+  age_change: false
+  exits:
+    "Hyrule Field": "can_swim || (has_iron_boots && hookshot_anywhere)"
+  locations:
+    "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
+    "Hyrule Field Song of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
 
 "Hyrule Field Scrub Grotto":
   region: ENTRANCE

@@ -4,7 +4,7 @@
   age_change: false
   exits:
     "GLOBAL": "true"
-    "Hyrule Field": "is_day || is_adult"
+    "Hyrule Field Drawbridge": "is_day || is_adult"
     "Market": "true"
     "Market Pot House": "rusty_key(RUSTY_KEY_GUARD_HOUSE)"
 
