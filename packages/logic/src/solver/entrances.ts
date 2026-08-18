@@ -262,30 +262,6 @@ class WorldShuffler {
     }
   }
 
-  private validateAgeTemple(world: World) {
-    const newWorld = cloneWorld(world);
-    const a = newWorld.areas['OOT SPAWN'];
-    let otherAge: Age;
-
-    if (this.settings.startingAge === 'child') {
-      a.exits['OOT SPAWN ADULT'] = exprAge(AGE_ADULT);
-      a.exits['OOT SPAWN CHILD'] = exprFalse();
-      otherAge = AGE_ADULT;
-    } else {
-      a.exits['OOT SPAWN ADULT'] = exprFalse();
-      a.exits['OOT SPAWN CHILD'] = exprAge(AGE_CHILD);
-      otherAge = AGE_CHILD;
-    }
-
-    const worlds = [...this.worlds];
-    worlds[this.worldId] = newWorld;
-    const agePathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
-    const pathfinderState = agePathfinder.run(null, { recursive: true, singleWorld: this.worldId });
-    const target = 'OOT Temple of Time';
-    const ws = pathfinderState.ws[this.worldId];
-    return (ws.ages[otherAge].areas.has(target));
-  }
-
   private changeWorldAssumePools(world: World, pools: EntrancePools) {
     const assumedSets: Set<Entrance>[] = [];
 
@@ -404,11 +380,6 @@ class WorldShuffler {
     }
 
     if (this.settings.logic === 'allLocations' && pathfinderState.locations.size < newWorld.locations.size) {
-      return false;
-    }
-
-    /* Check ToT access */
-    if (['ootmm', 'oot'].includes(this.settings.games) && !this.validateAgeTemple(newWorld)) {
       return false;
     }
 
