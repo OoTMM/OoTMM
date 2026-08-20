@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [32.1] - 2026-08-20
+
 ### Changed
 
 - Renamed some rusty keys to make them less ambiguous.
@@ -1787,7 +1789,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.1...HEAD
+[32.1]: https://github.com/OoTMM/OoTMM/compare/v32.0...v32.1
 [32.0]: https://github.com/OoTMM/OoTMM/compare/v31.1...v32.0
 [31.1]: https://github.com/OoTMM/OoTMM/compare/v31.0...v31.1
 [31.0]: https://github.com/OoTMM/OoTMM/compare/v30.1...v31.0
