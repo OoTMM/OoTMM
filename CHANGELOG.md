@@ -15,10 +15,15 @@ All notable changes to this project will be documented in this file.
 - Remove "Swordless Adult" as a setting - it's now always enabled.
 - When going back to spawn, players can now explicitly select which spawn point to get back to, assuming they discovered both ages.
 - Remove the "Distinct Worlds" setting, all worlds are now distinct by default.
-- Renamed some rusty keys to make them less ambiguous.
 - Complete overhaul of the multiplayer system, see website for the setup guide and details.
 - Change how the region-state wisps are handled when set to "dungeon beaten", ER is no longer required for them to show up.
 - GBC Tingle now accounts for Hookshot and Slingshot in logic.
+
+## [32.1] - 2026-08-20
+
+### Changed
+
+- Renamed some rusty keys to make them less ambiguous.
 
 ### Fixed
 
@@ -1799,7 +1804,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.1...HEAD
+[32.1]: https://github.com/OoTMM/OoTMM/compare/v32.0...v32.1
 [32.0]: https://github.com/OoTMM/OoTMM/compare/v31.1...v32.0
 [31.1]: https://github.com/OoTMM/OoTMM/compare/v31.0...v31.1
 [31.0]: https://github.com/OoTMM/OoTMM/compare/v30.1...v31.0
