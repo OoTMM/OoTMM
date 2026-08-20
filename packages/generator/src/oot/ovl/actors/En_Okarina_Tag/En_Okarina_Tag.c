@@ -124,9 +124,15 @@ static u8 kOcarinaActions[] = {
 
 static int EnOkarinaTag_OcarinaAction(EnOkarinaTag* this, int vanilla)
 {
+    u8 action;
+
     if (this->shuffledSongId < 0)
         return vanilla;
-    return kOcarinaActions[gComboConfig.songEventsOot[this->shuffledSongId]];
+    action = kOcarinaActions[gComboConfig.songEventsOot[this->shuffledSongId]];
+    if (action == OCARINA_ACTION_CHECK_CUSTOM_SONG_GORON_HALF && gSharedCustomSave.oot.hasSongGoron) {
+        action = OCARINA_ACTION_CHECK_CUSTOM_SONG_GORON;
+    }
+    return action;
 }
 
 void EnOkarinaTag_Disable(EnOkarinaTag* this)

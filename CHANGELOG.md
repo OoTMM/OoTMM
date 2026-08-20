@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a bug where OoT song event shuffle would not accept goron lullaby in place of goron lullaby intro.
 - Fix a multiplayer issue where stray fairies could be collected more than once.
 - Fix logic mistakenly expecting OoT masks in MM to access the trials.
 - Fix sharp curse not being breakable in song events when the required song is healing.
