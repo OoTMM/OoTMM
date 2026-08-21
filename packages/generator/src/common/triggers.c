@@ -203,14 +203,14 @@ static void Triggers_Check(PlayState* play)
     }
 
     /* Triforce (Hunt) */
-    if (Config_Flag(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gTriforceCount >= gComboConfig.triforceGoal)
+    if (Config_Flag(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gSharedCustomSave.triforcePieces >= gComboConfig.triforceGoal)
     {
         Trigger_Set(TRIGGER_TRIFORCE);
         return;
     }
 
     /* Triforce (Quest) */
-    if (Config_Flag(CFG_GOAL_TRIFORCE3) && !gOotExtraFlags.triforceWin && gTriforceCount >= 3)
+    if (Config_Flag(CFG_GOAL_TRIFORCE3) && !gOotExtraFlags.triforceWin && gSharedCustomSave.triforcePieces >= 3)
     {
         Trigger_Set(TRIGGER_TRIFORCE);
         return;

@@ -1155,7 +1155,7 @@ static void printDungeonData(PlayState* play, int base, int index)
             /* Triforce */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
-            printNumColored(play, gTriforceCount, triforceMax, triforceDigits, x + 116.f, y, 1);
+            printNumColored(play, gSharedCustomSave.triforcePieces, triforceMax, triforceDigits, x + 116.f, y, 1);
             break;
         case 3:
             /* Red Coins */

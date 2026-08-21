@@ -1764,7 +1764,7 @@ static int addItemStrayFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemTriforce(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    return ++gTriforceCount;
+    return ++gSharedCustomSave.triforcePieces;
 }
 
 static int addItemCoin(PlayState* play, u8 itemId, s16 gi, u16 param)

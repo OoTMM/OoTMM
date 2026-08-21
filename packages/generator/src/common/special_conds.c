@@ -469,7 +469,7 @@ int SpecialConds_Eval(int special)
 
     if (cond->flags & SPF_TRIFORCE)
     {
-        count += gTriforceCount;
+        count += gSharedCustomSave.triforcePieces;
     }
 
     if (cond->flags & SPF_COIN_RED)

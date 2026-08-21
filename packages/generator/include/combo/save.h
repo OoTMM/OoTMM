@@ -39,6 +39,7 @@ typedef struct ALIGNED(16)
     MultiSave       multi;
     u32             cows;
     u16             coins[4];
+    u16             triforcePieces;
     u8              silverRupees[(SR_MAX + 1) / 2];
     u16             ocarinaButtonMaskOot;
     u16             ocarinaButtonMaskMm;
@@ -127,6 +128,7 @@ inline static int SaveFlag_Get(int saveFlag)
 # define SAVE_EXTRA_RECORD(type, index) (gOotSave + 0xd4 + 0x1c * (index) + 0x10)
 #else
 # define SAVE_EXTRA_RECORD(type, index) (*((type*)(gOotSave.info.perm[index].raw + 0x10)))
+
 typedef struct
 {
     u32 waterBeaten:1;
@@ -163,8 +165,7 @@ ASSERT_SIZE(MmExtraAmmo,    sizeof(u32));
 #define gOotExtraTradeSave          SAVE_EXTRA_RECORD(OotExtraTrade,     9)
 #define gMmOwlFlags                 SAVE_EXTRA_RECORD(u32,              10)
 #define gMmExtraFlags3              SAVE_EXTRA_RECORD(MmExtraFlags3,    11)
-#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              12)
-#define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     13)
-#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      14)
+#define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     12)
+#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      13)
 
 #endif
