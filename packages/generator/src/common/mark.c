@@ -110,8 +110,10 @@ static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 {
+    sceneId = Mark_NormalizeSceneId(sceneId);
+
 #if defined(GAME_OOT)
-    if (play && play->sceneId == sceneId)
+    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
         return !!(gMarkCollectibles & (1 << flagId));
 #endif
 
@@ -134,8 +136,10 @@ static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 {
+    sceneId = Mark_NormalizeSceneId(sceneId);
+
 #if defined(GAME_OOT)
-    if (play && play->sceneId == sceneId)
+    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
     {
         Flags_SetCollectible(play, flagId);
         gMarkCollectibles |= (1 << flagId);

@@ -2534,8 +2534,8 @@ MQ Jabu-Jabu Room Boulder Side Room Ground,                 boulder,        NONE
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x01,                       LENS
-MQ Bottom of the Well Dead Hand Key,                        collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       SMALL_KEY_BOTW
-MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       SMALL_KEY_BOTW
+MQ Bottom of the Well Dead Hand Key,                        collectible,    NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x02,                       SMALL_KEY_BOTW
+MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x01,                       SMALL_KEY_BOTW
 MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
 MQ Bottom of the Well GS West Middle Room,                  gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
 MQ Bottom of the Well GS Coffin Room,                       gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
@@ -2577,7 +2577,7 @@ MQ Bottom of the Well Boulder Alcove Solo,                  boulder,        NONE
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN_MQ,                  0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN_MQ,                  0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN_MQ,                  0x02,                       BOOTS_IRON
-MQ Ice Cavern Piece of Heart,                               collectible,    NONE,                 ICE_CAVERN,                     0x01,                       HEART_PIECE
+MQ Ice Cavern Piece of Heart,                               collectible,    NONE,                 ICE_CAVERN_MQ,                  0x01,                       HEART_PIECE
 MQ Ice Cavern Sheik Song,                                   npc,            ICE_CAVERN_CHEST,     ICE_CAVERN,                     SHEIK_WATER,                SONG_TP_WATER
 MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
 MQ Ice Cavern GS Scarecrow,                                 gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
@@ -2688,7 +2688,7 @@ MQ Fire Temple Maze Upper Chest,                            chest,          NONE
 MQ Fire Temple Maze Side Room Chest,                        chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x08,                       SMALL_KEY_FIRE
 MQ Fire Temple Compass Chest,                               chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x0b,                       COMPASS_FIRE
 MQ Fire Temple Topmost Chest,                               chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x05,                       SMALL_KEY_FIRE
-MQ Fire Temple Flare Dancer Key,                            collectible,    NONE,                 TEMPLE_FIRE,                    0x1c,                       SMALL_KEY_FIRE
+MQ Fire Temple Flare Dancer Key,                            collectible,    NONE,                 TEMPLE_FIRE_MQ,                 0x1c,                       SMALL_KEY_FIRE
 MQ Fire Temple GS Burning Block,                            gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
 MQ Fire Temple GS 1f Lava Room,                             gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
 MQ Fire Temple GS Fire Walls Side Room,                     gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
@@ -2776,7 +2776,7 @@ MQ Water Temple Compass Chest,                              chest,          NONE
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER_MQ,                0x00,                       HOOKSHOT
 MQ Water Temple Central Pillar Chest,                       chest,          NONE,                 TEMPLE_WATER_MQ,                0x06,                       SMALL_KEY_WATER
 MQ Water Temple Boss Key Chest,                             chest,          NONE,                 TEMPLE_WATER_MQ,                0x05,                       BOSS_KEY_WATER
-MQ Water Temple Side Loop Key,                              collectible,    NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
+MQ Water Temple Side Loop Key,                              collectible,    NONE,                 TEMPLE_WATER_MQ,                0x01,                       SMALL_KEY_WATER
 MQ Water Temple GS Lizalfos Hallway,                        gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
 MQ Water Temple GS High Water Changer,                      gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
 MQ Water Temple GS River,                                   gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
@@ -2951,7 +2951,7 @@ MQ Shadow Temple After Wind Bomb Chest,                     chest,          NONE
 MQ Shadow Temple Hidden Dead Hand Chest,                    chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0d,                       ARROWS_10
 MQ Shadow Temple Crushing Wall Left Chest,                  chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0a,                       RUPEE_BLUE
 MQ Shadow Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0b,                       BOSS_KEY_SHADOW
-MQ Shadow Temple Triple Pot Key,                            collectible,    NONE,                 TEMPLE_SHADOW,                  0x06,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Triple Pot Key,                            collectible,    NONE,                 TEMPLE_SHADOW_MQ,               0x06,                       SMALL_KEY_SHADOW
 MQ Shadow Temple GS Spike Curtain,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
 MQ Shadow Temple GS Wind Hint,                              gs,             NONE,                 TEMPLE_SHADOW,                  0x40,                       GS_TOKEN
 MQ Shadow Temple GS After Wind Bomb,                        gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
@@ -3157,19 +3157,19 @@ MQ Gerudo Training Grounds Icicle Slopes 2,                 icicle,         NONE
 MQ Gerudo Training Grounds Icicle Slopes 3,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020b,                    NOTHING
 MQ Gerudo Training Grounds Icicle Slopes 4,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020c,                    NOTHING
 MQ Gerudo Training Grounds Icicle Slopes 5,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020d,                    NOTHING
-MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x04,                       RECOVERY_HEART
-MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x02,                       ARROWS_10
-MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x03,                       BOMBS_5
-MQ Ganon Castle Water Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x01,                       RUPEE_RED
-MQ Ganon Castle Spirit Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x0a,                       BOMBCHU_5
-MQ Ganon Castle Spirit Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x14,                       ARROWS_10
-MQ Ganon Castle Spirit Trial Back Right Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x09,                       RECOVERY_HEART
-MQ Ganon Castle Spirit Trial Back Left Sun Chest,           chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x08,                       SMALL_KEY_GANON
-MQ Ganon Castle Spirit Trial Front Left Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x07,                       RECOVERY_HEART
-MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x06,                       STRENGTH
-MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x00,                       ARROWS_10
-MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x05,                       SMALL_KEY_GANON
-MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE,            0x01,                       SMALL_KEY_GANON
+MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x04,                       RECOVERY_HEART
+MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x02,                       ARROWS_10
+MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x03,                       BOMBS_5
+MQ Ganon Castle Water Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x01,                       RUPEE_RED
+MQ Ganon Castle Spirit Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x0a,                       BOMBCHU_5
+MQ Ganon Castle Spirit Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x14,                       ARROWS_10
+MQ Ganon Castle Spirit Trial Back Right Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x09,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Back Left Sun Chest,           chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x08,                       SMALL_KEY_GANON
+MQ Ganon Castle Spirit Trial Front Left Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x07,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x06,                       STRENGTH
+MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x00,                       ARROWS_10
+MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,         0x05,                       SMALL_KEY_GANON
+MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE_MQ,         0x01,                       SMALL_KEY_GANON
 MQ Ganon Castle Leftmost Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x21,                       POTION_GREEN
 MQ Ganon Castle Left-Center Scrub,                          scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5
 MQ Ganon Castle Center Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
