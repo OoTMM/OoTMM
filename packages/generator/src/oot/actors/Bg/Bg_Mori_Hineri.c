@@ -10,7 +10,7 @@ static void BgMoriHineri_ItemQuery(ComboItemQuery* q, int flags)
     bzero(q, sizeof(*q));
 
     q->ovType = OV_CHEST;
-    q->sceneId = SCE_OOT_TEMPLE_FOREST;
+    q->sceneId = Play_SceneKey(SCE_OOT_TEMPLE_FOREST);
     q->gi = GI_OOT_BOSS_KEY;
     q->id = 0x0e;
     q->ovFlags = flags;

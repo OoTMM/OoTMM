@@ -22,7 +22,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     bzero(q, sizeof(*q));
     q->ovType = OV_CHEST;
-    q->sceneId = comboSceneKey(play->sceneId);
+    q->sceneId = Play_SceneKey(play->sceneId);
     q->id = (this->params & 0xfc) >> 2;
     q->gi = play->sceneId == SCE_MM_SPIDER_HOUSE_OCEAN ? GI_MM_GS_TOKEN_OCEAN : GI_MM_GS_TOKEN_SWAMP;
 }

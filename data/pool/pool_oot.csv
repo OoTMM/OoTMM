@@ -2266,13 +2266,13 @@ Ganon Tower Pot 15,                                         pot,            NONE
 Ganon Tower Pot 16,                                         pot,            NONE,                 GANON_TOWER,                    0x0810,                     NOTHING
 Ganon Tower Pot 17,                                         pot,            NONE,                 GANON_TOWER,                    0x0811,                     NOTHING
 Ganon Tower Pot 18,                                         pot,            NONE,                 GANON_TOWER,                    0x0812,                     ARROWS_10
-MQ Deku Tree Map Chest,                                     chest,          NONE,                 DEKU_TREE,                      0x03,                       MAP_DT
-MQ Deku Tree Compass Chest,                                 chest,          NONE,                 DEKU_TREE,                      0x01,                       COMPASS_DT
-MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 DEKU_TREE,                      0x06,                       SLINGSHOT
-MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE,                 DEKU_TREE,                      0x02,                       RUPEE_BLUE
-MQ Deku Tree Basement Chest,                                chest,          NONE,                 DEKU_TREE,                      0x04,                       RUPEE_BLUE
-MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 DEKU_TREE,                      0x05,                       RECOVERY_HEART
-MQ Deku Tree After Water Platform Chest,                    chest,          MQ_DEKU_TIME_BLOCK,   DEKU_TREE,                      0x00,                       RUPEE_PURPLE
+MQ Deku Tree Map Chest,                                     chest,          NONE,                 DEKU_TREE_MQ,                   0x03,                       MAP_DT
+MQ Deku Tree Compass Chest,                                 chest,          NONE,                 DEKU_TREE_MQ,                   0x01,                       COMPASS_DT
+MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 DEKU_TREE_MQ,                   0x06,                       SLINGSHOT
+MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE,                 DEKU_TREE_MQ,                   0x02,                       RUPEE_BLUE
+MQ Deku Tree Basement Chest,                                chest,          NONE,                 DEKU_TREE_MQ,                   0x04,                       RUPEE_BLUE
+MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 DEKU_TREE_MQ,                   0x05,                       RECOVERY_HEART
+MQ Deku Tree After Water Platform Chest,                    chest,          MQ_DEKU_TIME_BLOCK,   DEKU_TREE_MQ,                   0x00,                       RUPEE_PURPLE
 MQ Deku Tree Scrub,                                         scrub,          NONE,                 DEKU_TREE,                      0x1b,                       SHIELD_DEKU
 MQ Deku Tree GS Back Room,                                  gs,             DEKU_BACK_SKULL,      DEKU_TREE,                      0x08,                       GS_TOKEN
 MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 DEKU_TREE,                      0x09,                       GS_TOKEN
@@ -2346,12 +2346,12 @@ MQ Deku Tree Slingshot Room Large Crate 2,                  crate,          NONE
 MQ Deku Tree Boulder 1,                                     boulder,        NONE,                 DEKU_TREE,                      0x00214,                    NOTHING
 MQ Deku Tree Boulder 2,                                     boulder,        NONE,                 DEKU_TREE,                      0x00215,                    NOTHING
 MQ Deku Tree Boulder 3,                                     boulder,        NONE,                 DEKU_TREE,                      0x00216,                    NOTHING
-MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
-MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
-MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
-MQ Dodongo Cavern Upper Ledge Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_BLUE
-MQ Dodongo Cavern Bomb Bag Chest,                           chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
-MQ Dodongo Cavern Chest Under Grave,                        chest,          NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_BLUE
+MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN_MQ,              0x00,                       MAP_DC
+MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN_MQ,              0x05,                       COMPASS_DC
+MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN_MQ,              0x02,                       RUPEE_BLUE
+MQ Dodongo Cavern Upper Ledge Chest,                        chest,          NONE,                 DODONGO_CAVERN_MQ,              0x03,                       RUPEE_BLUE
+MQ Dodongo Cavern Bomb Bag Chest,                           chest,          NONE,                 DODONGO_CAVERN_MQ,              0x04,                       BOMB_BAG
+MQ Dodongo Cavern Chest Under Grave,                        chest,          NONE,                 DODONGO_CAVERN_MQ,              0x01,                       RUPEE_BLUE
 MQ Dodongo Cavern Lobby Scrub Front,                        scrub,          NONE,                 DODONGO_CAVERN,                 0x1c,                       DEKU_SEEDS_30
 MQ Dodongo Cavern Lobby Scrub Back,                         scrub,          NONE,                 DODONGO_CAVERN,                 0x1d,                       STICK
 MQ Dodongo Cavern Staircase Scrub,                          scrub,          NONE,                 DODONGO_CAVERN,                 0x1f,                       POTION_RED
@@ -2450,17 +2450,17 @@ MQ Dodongo Cavern Boulder Lizalfos 10,                      boulder,        NONE
 MQ Dodongo Cavern Boulder Lizalfos 11,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00315,                    NOTHING
 MQ Dodongo Cavern Boulder Lizalfos 12,                      boulder,        NONE,                 DODONGO_CAVERN,                 0x00316,                    NOTHING
 MQ Dodongo Cavern Boulder Deep,                             boulder,        NONE,                 DODONGO_CAVERN,                 0x00c09,                    NOTHING
-MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
-MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
-MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
-MQ Jabu-Jabu Second Room B1 Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       NUTS_5
-MQ Jabu-Jabu Second Room 1F Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x07,                       RECOVERY_HEART
-MQ Jabu-Jabu Third Room West Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       BOMBCHU_5
-MQ Jabu-Jabu Third Room East Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x08,                       NUTS_5
-MQ Jabu-Jabu SoT Room Lower Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       STICK
-MQ Jabu-Jabu Boomerang Chest,                               chest,          NONE,                 INSIDE_JABU_JABU,               0x06,                       BOOMERANG
-MQ Jabu-Jabu Back Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x09,                       NUTS_5
-MQ Jabu-Jabu Pre-Boss Chest,                                chest,          NONE,                 INSIDE_JABU_JABU,               0x0a,                       RUPEE_BLUE
+MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x03,                       MAP_JJ
+MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x05,                       NUTS_5
+MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x00,                       COMPASS_JJ
+MQ Jabu-Jabu Second Room B1 Chest,                          chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x02,                       NUTS_5
+MQ Jabu-Jabu Second Room 1F Chest,                          chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x07,                       RECOVERY_HEART
+MQ Jabu-Jabu Third Room West Chest,                         chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x04,                       BOMBCHU_5
+MQ Jabu-Jabu Third Room East Chest,                         chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x08,                       NUTS_5
+MQ Jabu-Jabu SoT Room Lower Chest,                          chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x01,                       STICK
+MQ Jabu-Jabu Boomerang Chest,                               chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x06,                       BOOMERANG
+MQ Jabu-Jabu Back Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x09,                       NUTS_5
+MQ Jabu-Jabu Pre-Boss Chest,                                chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x0a,                       RUPEE_BLUE
 MQ Jabu-Jabu GS SoT Block,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
 MQ Jabu-Jabu GS Back,                                       gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
 MQ Jabu-Jabu GS Basement Side Room,                         gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
@@ -2531,9 +2531,9 @@ MQ Jabu-Jabu Room Boulder Fork Room 1,                      boulder,        NONE
 MQ Jabu-Jabu Room Boulder Fork Room 2,                      boulder,        NONE,                 INSIDE_JABU_JABU,               0x00704,                    NOTHING
 MQ Jabu-Jabu Room Boulder Side Room Wall,                   boulder,        NONE,                 INSIDE_JABU_JABU,               0x00c07,                    NOTHING
 MQ Jabu-Jabu Room Boulder Side Room Ground,                 boulder,        NONE,                 INSIDE_JABU_JABU,               0x00c08,                    NOTHING
-MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
-MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
-MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
+MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x03,                       MAP_BOTW
+MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x02,                       COMPASS_BOTW
+MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x01,                       LENS
 MQ Bottom of the Well Dead Hand Key,                        collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       SMALL_KEY_BOTW
 MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       SMALL_KEY_BOTW
 MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
@@ -2574,9 +2574,9 @@ MQ Bottom of the Well Wonder Item Side Room 4,              wonder,         NONE
 MQ Bottom of the Well Boulder Alcove 1,                     boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00013,                    NOTHING
 MQ Bottom of the Well Boulder Alcove 2,                     boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x00014,                    NOTHING
 MQ Bottom of the Well Boulder Alcove Solo,                  boulder,        NONE,                 BOTTOM_OF_THE_WELL,             0x0001a,                    NOTHING
-MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
-MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
-MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
+MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN_MQ,                  0x01,                       MAP_IC
+MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN_MQ,                  0x00,                       COMPASS_IC
+MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN_MQ,                  0x02,                       BOOTS_IRON
 MQ Ice Cavern Piece of Heart,                               collectible,    NONE,                 ICE_CAVERN,                     0x01,                       HEART_PIECE
 MQ Ice Cavern Sheik Song,                                   npc,            ICE_CAVERN_CHEST,     ICE_CAVERN,                     SHEIK_WATER,                SONG_TP_WATER
 MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
@@ -2630,18 +2630,18 @@ MQ Ice Cavern Red Ice Block Room 2,                         redice,         NONE
 MQ Ice Cavern Red Ice Block Room 3,                         redice,         NONE,                 ICE_CAVERN,                     0x00510,                    NOTHING
 MQ Ice Cavern Red Ice Compass Room,                         redice,         NONE,                 ICE_CAVERN,                     0x00912,                    NOTHING
 MQ Ice Cavern Red Ice Map Room,                             redice,         NONE,                 ICE_CAVERN,                     0x00b00,                    NOTHING
-MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
-MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
-MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
-MQ Forest Temple ReDead Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
-MQ Forest Temple Well Chest,                                chest,          NONE,                 TEMPLE_FOREST,                  0x09,                       SMALL_KEY_FOREST
-MQ Forest Temple East Garden High Ledge Chest,              chest,          NONE,                 TEMPLE_FOREST,                  0x05,                       SMALL_KEY_FOREST
-MQ Forest Temple East Garden Ledge Chest,                   chest,          NONE,                 TEMPLE_FOREST,                  0x01,                       SMALL_KEY_FOREST
-MQ Forest Temple Map Chest,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x0d,                       MAP_FOREST
-MQ Forest Temple Bow Chest,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x0c,                       BOW
-MQ Forest Temple Compass Chest,                             chest,          NONE,                 TEMPLE_FOREST,                  0x0f,                       COMPASS_FOREST
-MQ Forest Temple Falling Ceiling Chest,                     chest,          NONE,                 TEMPLE_FOREST,                  0x06,                       ARROWS_5
-MQ Forest Temple Antichamber,                               chest,          NONE,                 TEMPLE_FOREST,                  0x0b,                       ARROWS_5
+MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST_MQ,               0x03,                       SMALL_KEY_FOREST
+MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST_MQ,               0x00,                       SMALL_KEY_FOREST
+MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0e,                       BOSS_KEY_FOREST
+MQ Forest Temple ReDead Chest,                              chest,          NONE,                 TEMPLE_FOREST_MQ,               0x02,                       SMALL_KEY_FOREST
+MQ Forest Temple Well Chest,                                chest,          NONE,                 TEMPLE_FOREST_MQ,               0x09,                       SMALL_KEY_FOREST
+MQ Forest Temple East Garden High Ledge Chest,              chest,          NONE,                 TEMPLE_FOREST_MQ,               0x05,                       SMALL_KEY_FOREST
+MQ Forest Temple East Garden Ledge Chest,                   chest,          NONE,                 TEMPLE_FOREST_MQ,               0x01,                       SMALL_KEY_FOREST
+MQ Forest Temple Map Chest,                                 chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0d,                       MAP_FOREST
+MQ Forest Temple Bow Chest,                                 chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0c,                       BOW
+MQ Forest Temple Compass Chest,                             chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0f,                       COMPASS_FOREST
+MQ Forest Temple Falling Ceiling Chest,                     chest,          NONE,                 TEMPLE_FOREST_MQ,               0x06,                       ARROWS_5
+MQ Forest Temple Antichamber,                               chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0b,                       ARROWS_5
 MQ Forest Temple GS Entryway,                               gs,             NONE,                 TEMPLE_FOREST,                  0x21,                       GS_TOKEN
 MQ Forest Temple GS Climb Room,                             gs,             NONE,                 TEMPLE_FOREST,                  0x24,                       GS_TOKEN
 MQ Forest Temple GS West Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
@@ -2677,17 +2677,17 @@ MQ Forest Temple Heart Well 3,                              heart,          NONE
 MQ Forest Temple Spinning Red Pool Room Small Crate 1,      crate,          NONE,                 TEMPLE_FOREST,                  0x00e07,                    ARROWS_5
 MQ Forest Temple Spinning Red Pool Room Small Crate 2,      crate,          NONE,                 TEMPLE_FOREST,                  0x00e08,                    ARROWS_5
 MQ Forest Temple Spinning Red Pool Room Small Crate 3,      crate,          NONE,                 TEMPLE_FOREST,                  0x00e09,                    RECOVERY_HEART
-MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
-MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
-MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
-MQ Fire Temple Map Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x0c,                       MAP_FIRE
-MQ Fire Temple Boss Key Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       BOSS_KEY_FIRE
-MQ Fire Temple 1f Lava Room Goron Chest,                    chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
-MQ Fire Temple Maze Lower Chest,                            chest,          NONE,                 TEMPLE_FIRE,                    0x03,                       BOMBS_5
-MQ Fire Temple Maze Upper Chest,                            chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       BOMBS_5
-MQ Fire Temple Maze Side Room Chest,                        chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
-MQ Fire Temple Compass Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       COMPASS_FIRE
-MQ Fire Temple Topmost Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x05,                       SMALL_KEY_FIRE
+MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x02,                       RUPEE_BLUE
+MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x07,                       SMALL_KEY_FIRE
+MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x00,                       HAMMER
+MQ Fire Temple Map Chest,                                   chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x0c,                       MAP_FIRE
+MQ Fire Temple Boss Key Chest,                              chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x04,                       BOSS_KEY_FIRE
+MQ Fire Temple 1f Lava Room Goron Chest,                    chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x01,                       SMALL_KEY_FIRE
+MQ Fire Temple Maze Lower Chest,                            chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x03,                       BOMBS_5
+MQ Fire Temple Maze Upper Chest,                            chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x06,                       BOMBS_5
+MQ Fire Temple Maze Side Room Chest,                        chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x08,                       SMALL_KEY_FIRE
+MQ Fire Temple Compass Chest,                               chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x0b,                       COMPASS_FIRE
+MQ Fire Temple Topmost Chest,                               chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x05,                       SMALL_KEY_FIRE
 MQ Fire Temple Flare Dancer Key,                            collectible,    NONE,                 TEMPLE_FIRE,                    0x1c,                       SMALL_KEY_FIRE
 MQ Fire Temple GS Burning Block,                            gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
 MQ Fire Temple GS 1f Lava Room,                             gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
@@ -2771,11 +2771,11 @@ MQ Fire Temple 3F Lava Room Near Cage Small Crate 2,        crate,          NONE
 MQ Fire Temple 3F Lava Room Lower Small Crate 1,            crate,          NONE,                 TEMPLE_FIRE,                    0x0100f,                    NOTHING
 MQ Fire Temple 3F Lava Room Lower Small Crate 2,            crate,          NONE,                 TEMPLE_FIRE,                    0x01010,                    NOTHING
 MQ Fire Temple 3F Lava Room High Ledge Small Crate,         crate,          NONE,                 TEMPLE_FIRE,                    0x01011,                    NOTHING
-MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
-MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
-MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
-MQ Water Temple Central Pillar Chest,                       chest,          NONE,                 TEMPLE_WATER,                   0x06,                       SMALL_KEY_WATER
-MQ Water Temple Boss Key Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
+MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER_MQ,                0x02,                       MAP_WATER
+MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER_MQ,                0x01,                       COMPASS_WATER
+MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER_MQ,                0x00,                       HOOKSHOT
+MQ Water Temple Central Pillar Chest,                       chest,          NONE,                 TEMPLE_WATER_MQ,                0x06,                       SMALL_KEY_WATER
+MQ Water Temple Boss Key Chest,                             chest,          NONE,                 TEMPLE_WATER_MQ,                0x05,                       BOSS_KEY_WATER
 MQ Water Temple Side Loop Key,                              collectible,    NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
 MQ Water Temple GS Lizalfos Hallway,                        gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
 MQ Water Temple GS High Water Changer,                      gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
@@ -2932,25 +2932,25 @@ MQ Water Temple Lizalfos Hallway Large Crate 5,             crate,          NONE
 MQ Water Temple Lizalfos Hallway Large Crate 6,             crate,          NONE,                 TEMPLE_WATER,                   0x0140b,                    RUPEE_GREEN
 MQ Water Temple Lizalfos Hallway Large Crate 7,             crate,          NONE,                 TEMPLE_WATER,                   0x0140c,                    RUPEE_GREEN
 MQ Water Temple Lizalfos Hallway Large Crate 8,             crate,          NONE,                 TEMPLE_WATER,                   0x0140d,                    RUPEE_GREEN
-MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
-MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
-MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW
-MQ Shadow Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       MAP_SHADOW
-MQ Shadow Temple Boat Passage Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0e,                       SMALL_KEY_SHADOW
-MQ Shadow Temple Second Silver Rupee Visible Chest,         chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
-MQ Shadow Temple Second Silver Rupee Invisible Chest,       chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       SMALL_KEY_SHADOW
-MQ Shadow Temple Huge Pit Silver Rupee Chest,               chest,          NONE,                 TEMPLE_SHADOW,                  0x0f,                       RUPEE_BLUE
-MQ Shadow Temple Spike Curtain Ground Chest,                chest,          NONE,                 TEMPLE_SHADOW,                  0x05,                       ARROWS_10
-MQ Shadow Temple Spike Curtain Upper Cage Chest,            chest,          NONE,                 TEMPLE_SHADOW,                  0x06,                       RUPEE_BLUE
-MQ Shadow Temple Spike Curtain Upper Switch Chest,          chest,          NONE,                 TEMPLE_SHADOW,                  0x04,                       SMALL_KEY_SHADOW
-MQ Shadow Temple Invisible Spike Floor Chest,               chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
-MQ Shadow Temple Stalfos Room Chest,                        chest,          MQ_SHADOW_STALFOS,    TEMPLE_SHADOW,                  0x10,                       RUPEE_RED
-MQ Shadow Temple Wind Hint Chest,                           chest,          NONE,                 TEMPLE_SHADOW,                  0x15,                       SMALL_KEY_SHADOW
-MQ Shadow Temple After Wind Gibdos Chest,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x08,                       RUPEE_BLUE
-MQ Shadow Temple After Wind Bomb Chest,                     chest,          NONE,                 TEMPLE_SHADOW,                  0x14,                       ARROWS_5
-MQ Shadow Temple Hidden Dead Hand Chest,                    chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       ARROWS_10
-MQ Shadow Temple Crushing Wall Left Chest,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
-MQ Shadow Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
+MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x01,                       COMPASS_SHADOW
+MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x07,                       BOOTS_HOVER
+MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x03,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x02,                       MAP_SHADOW
+MQ Shadow Temple Boat Passage Chest,                        chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0e,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Second Silver Rupee Visible Chest,         chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0c,                       RUPEE_BLUE
+MQ Shadow Temple Second Silver Rupee Invisible Chest,       chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x16,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Huge Pit Silver Rupee Chest,               chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0f,                       RUPEE_BLUE
+MQ Shadow Temple Spike Curtain Ground Chest,                chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x05,                       ARROWS_10
+MQ Shadow Temple Spike Curtain Upper Cage Chest,            chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x06,                       RUPEE_BLUE
+MQ Shadow Temple Spike Curtain Upper Switch Chest,          chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x04,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Invisible Spike Floor Chest,               chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x09,                       RUPEE_BLUE
+MQ Shadow Temple Stalfos Room Chest,                        chest,          MQ_SHADOW_STALFOS,    TEMPLE_SHADOW_MQ,               0x10,                       RUPEE_RED
+MQ Shadow Temple Wind Hint Chest,                           chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x15,                       SMALL_KEY_SHADOW
+MQ Shadow Temple After Wind Gibdos Chest,                   chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x08,                       RUPEE_BLUE
+MQ Shadow Temple After Wind Bomb Chest,                     chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x14,                       ARROWS_5
+MQ Shadow Temple Hidden Dead Hand Chest,                    chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0d,                       ARROWS_10
+MQ Shadow Temple Crushing Wall Left Chest,                  chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0a,                       RUPEE_BLUE
+MQ Shadow Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0b,                       BOSS_KEY_SHADOW
 MQ Shadow Temple Triple Pot Key,                            collectible,    NONE,                 TEMPLE_SHADOW,                  0x06,                       SMALL_KEY_SHADOW
 MQ Shadow Temple GS Spike Curtain,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
 MQ Shadow Temple GS Wind Hint,                              gs,             NONE,                 TEMPLE_SHADOW,                  0x40,                       GS_TOKEN
@@ -3025,26 +3025,26 @@ MQ Shadow Temple Truth Spinner Room Small Crate 1,          crate,          NONE
 MQ Shadow Temple Truth Spinner Room Small Crate 2,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00212,                    MAGIC_JAR_LARGE
 MQ Shadow Temple Truth Spinner Room Small Crate 3,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00213,                    BOMB
 MQ Shadow Temple Truth Spinner Room Small Crate 4,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00214,                    RECOVERY_HEART
-MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
-MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
-MQ Spirit Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       COMPASS_SPIRIT
-MQ Spirit Temple Sun Block Room Chest,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x01,                       RECOVERY_HEART
-MQ Spirit Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       MAP_SPIRIT
-MQ Spirit Temple Map Room Back Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Paradox Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x1d,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Child Upper Ground Chest,                  chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHU_5
-MQ Spirit Temple Child Upper Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Silver Block Room Target Chest,            chest,          NONE,                 TEMPLE_SPIRIT,                  0x1c,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Chest in Box,                              chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
-MQ Spirit Temple Statue Room Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       RECOVERY_HEART
-MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x1b,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       RUPEE_PURPLE
-MQ Spirit Temple Symphony Room Chest,                       chest,          MQ_SPIRIT_SYMPHONY,   TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
-MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x19,                       ARROWS_30
-MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x18,                       ICE_TRAP
-MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       BOSS_KEY_SPIRIT
-MQ Spirit Temple Topmost Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x12,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x1a,                       BOMBCHU_5
+MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x1e,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x1f,                       BOMBCHU_5
+MQ Spirit Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x03,                       COMPASS_SPIRIT
+MQ Spirit Temple Sun Block Room Chest,                      chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x01,                       RECOVERY_HEART
+MQ Spirit Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x00,                       MAP_SPIRIT
+MQ Spirit Temple Map Room Back Chest,                       chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x08,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Paradox Chest,                             chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x1d,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Child Upper Ground Chest,                  chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x06,                       BOMBCHU_5
+MQ Spirit Temple Child Upper Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x0c,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Silver Block Room Target Chest,            chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x1c,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Chest in Box,                              chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x0f,                       RUPEE_BLUE
+MQ Spirit Temple Statue Room Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x02,                       RECOVERY_HEART
+MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x1b,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x04,                       RUPEE_PURPLE
+MQ Spirit Temple Symphony Room Chest,                       chest,          MQ_SPIRIT_SYMPHONY,   TEMPLE_SPIRIT_MQ,               0x07,                       RUPEE_PURPLE
+MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x19,                       ARROWS_30
+MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x18,                       ICE_TRAP
+MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x05,                       BOSS_KEY_SPIRIT
+MQ Spirit Temple Topmost Chest,                             chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x12,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple GS Sun Block Room,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
 MQ Spirit Temple GS Leever Room,                            gs,             NONE,                 TEMPLE_SPIRIT,                  0x39,                       GS_TOKEN
 MQ Spirit Temple GS Symphony Room,                          gs,             NONE,                 TEMPLE_SPIRIT,                  0x3b,                       GS_TOKEN
@@ -3114,23 +3114,23 @@ MQ Spirit Temple Boulder Child Crawl,                       boulder,        NONE
 MQ Spirit Temple Boulder Child Bridge Ground,               boulder,        NONE,                 TEMPLE_SPIRIT,                  0x00207,                    NOTHING
 MQ Spirit Temple Boulder Child Bridge Wall Left,            boulder,        NONE,                 TEMPLE_SPIRIT,                  0x0020a,                    NOTHING
 MQ Spirit Temple Boulder Child Bridge Wall Front,           boulder,        NONE,                 TEMPLE_SPIRIT,                  0x0020b,                    NOTHING
-MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
-MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
-MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
-MQ Gerudo Training Grounds Maze Second Chest,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x06,                       RUPEE_GREEN
-MQ Gerudo Training Grounds Maze Third Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0a,                       RUPEE_RED
-MQ Gerudo Training Grounds Maze Fourth Chest,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x09,                       RUPEE_GREEN
-MQ Gerudo Training Grounds Right Side Dinolfos Chest,       chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
-MQ Gerudo Training Grounds Water Room Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0d,                       SMALL_KEY_GTG
-MQ Gerudo Training Grounds Left Side Iron Knuckle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       RUPEE_BLUE
-MQ Gerudo Training Grounds Stalfos Room Chest,              chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x11,                       ARROWS_10
-MQ Gerudo Training Grounds Silver Block Room Chest,         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       RUPEE_PURPLE
-MQ Gerudo Training Grounds Spinning Statue Chest,           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x03,                       BOMBCHU_5
-MQ Gerudo Training Grounds Torch Slug Room Clear Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x12,                       ARROWS_10
-MQ Gerudo Training Grounds Torch Slug Room Switch Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       SMALL_KEY_GTG
-MQ Gerudo Training Grounds Maze Right Side Middle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       RUPEE_BLUE
-MQ Gerudo Training Grounds Maze Right Side Right Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       RUPEE_GREEN
-MQ Gerudo Training Grounds Ice Arrows Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       ARROW_ICE
+MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x13,                       ARROWS_10
+MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x07,                       BOMBCHU_10
+MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x0b,                       RUPEE_PURPLE
+MQ Gerudo Training Grounds Maze Second Chest,               chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x06,                       RUPEE_GREEN
+MQ Gerudo Training Grounds Maze Third Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x0a,                       RUPEE_RED
+MQ Gerudo Training Grounds Maze Fourth Chest,               chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x09,                       RUPEE_GREEN
+MQ Gerudo Training Grounds Right Side Dinolfos Chest,       chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x01,                       SMALL_KEY_GTG
+MQ Gerudo Training Grounds Water Room Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x0d,                       SMALL_KEY_GTG
+MQ Gerudo Training Grounds Left Side Iron Knuckle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x00,                       RUPEE_BLUE
+MQ Gerudo Training Grounds Stalfos Room Chest,              chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x11,                       ARROWS_10
+MQ Gerudo Training Grounds Silver Block Room Chest,         chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x02,                       RUPEE_PURPLE
+MQ Gerudo Training Grounds Spinning Statue Chest,           chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x03,                       BOMBCHU_5
+MQ Gerudo Training Grounds Torch Slug Room Clear Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x12,                       ARROWS_10
+MQ Gerudo Training Grounds Torch Slug Room Switch Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x0e,                       SMALL_KEY_GTG
+MQ Gerudo Training Grounds Maze Right Side Middle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x05,                       RUPEE_BLUE
+MQ Gerudo Training Grounds Maze Right Side Right Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x08,                       RUPEE_GREEN
+MQ Gerudo Training Grounds Ice Arrows Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND_MQ,      0x04,                       ARROW_ICE
 MQ Gerudo Training Grounds SR Slopes Top Right,             sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x41,                       RUPEE_SILVER_GTG_SLOPES
 MQ Gerudo Training Grounds SR Slopes Middle,                sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x42,                       RUPEE_SILVER_GTG_SLOPES
 MQ Gerudo Training Grounds SR Slopes Front,                 sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x43,                       RUPEE_SILVER_GTG_SLOPES
@@ -3157,18 +3157,18 @@ MQ Gerudo Training Grounds Icicle Slopes 2,                 icicle,         NONE
 MQ Gerudo Training Grounds Icicle Slopes 3,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020b,                    NOTHING
 MQ Gerudo Training Grounds Icicle Slopes 4,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020c,                    NOTHING
 MQ Gerudo Training Grounds Icicle Slopes 5,                 icicle,         NONE,                 GERUDO_TRAINING_GROUND,         0x0020d,                    NOTHING
-MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
-MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
-MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
-MQ Ganon Castle Water Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x01,                       RUPEE_RED
-MQ Ganon Castle Spirit Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0a,                       BOMBCHU_5
-MQ Ganon Castle Spirit Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
-MQ Ganon Castle Spirit Trial Back Right Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RECOVERY_HEART
-MQ Ganon Castle Spirit Trial Back Left Sun Chest,           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       SMALL_KEY_GANON
-MQ Ganon Castle Spirit Trial Front Left Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       RECOVERY_HEART
-MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       STRENGTH
-MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE,            0x00,                       ARROWS_10
-MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       SMALL_KEY_GANON
+MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x04,                       RECOVERY_HEART
+MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x02,                       ARROWS_10
+MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x03,                       BOMBS_5
+MQ Ganon Castle Water Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x01,                       RUPEE_RED
+MQ Ganon Castle Spirit Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x0a,                       BOMBCHU_5
+MQ Ganon Castle Spirit Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x14,                       ARROWS_10
+MQ Ganon Castle Spirit Trial Back Right Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x09,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Back Left Sun Chest,           chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x08,                       SMALL_KEY_GANON
+MQ Ganon Castle Spirit Trial Front Left Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x07,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x06,                       STRENGTH
+MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x00,                       ARROWS_10
+MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE_MQ,          0x05,                       SMALL_KEY_GANON
 MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE,            0x01,                       SMALL_KEY_GANON
 MQ Ganon Castle Leftmost Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x21,                       POTION_GREEN
 MQ Ganon Castle Left-Center Scrub,                          scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5

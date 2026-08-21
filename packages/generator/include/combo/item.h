@@ -261,7 +261,7 @@ void comboGiveItemNpcEx(Actor* actor, PlayState* play, s16 gi, int npcId, int fl
 void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q);
 u8   comboItemType(s16 gi);
 
-u8 comboSceneKey(u8 sceneId);
+u8 Play_SceneKey(u8 sceneId);
 
 void comboPlayItemFanfare(s16 gi, int isShort);
 

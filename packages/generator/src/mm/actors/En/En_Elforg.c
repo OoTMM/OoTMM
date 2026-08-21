@@ -17,7 +17,7 @@ static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
         break;
     default:
         q->ovType = OV_SF;
-        q->sceneId = comboSceneKey(play->sceneId);
+        q->sceneId = Play_SceneKey(play->sceneId);
         q->id = (this->params & 0xfe00) >> 9;
         break;
     }
