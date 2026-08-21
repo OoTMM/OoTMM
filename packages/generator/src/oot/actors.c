@@ -57,6 +57,8 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
         return opt(comboHasSoulOot(GI_OOT_SOUL_MISC_BUSINESS_SCRUB));
     case ACTOR_EN_TEST:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_STALFOS);
+    case ACTOR_BG_MORI_BIGST:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_ENEMY_STALFOS));
     case ACTOR_BG_BDAN_OBJECTS:
         if (variable & 0xff)
             return 1;
