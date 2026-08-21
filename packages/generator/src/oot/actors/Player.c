@@ -1,5 +1,4 @@
 #include <combo.h>
-#include <combo/sr.h>
 #include <combo/dungeon.h>
 #include <combo/custom.h>
 #include <combo/player.h>
@@ -444,18 +443,6 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     Ocarina_HandleCustomSongs(this, play);
     Dpad_Update(play);
     Dpad_Use(play, DPF_EQUIP);
-
-    if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)) || Message_GetState(&play->msgCtx) == TEXT_STATE_NONE)
-    {
-        if (g.delayedSwitchFlagsCount)
-        {
-            for (int i = 0; i < g.delayedSwitchFlagsCount; ++i)
-                Flags_SetSwitch(play, g.delayedSwitchFlags[i]);
-            g.delayedSwitchFlagsCount = 0;
-        }
-    }
-
-    comboSrUpdate(play);
 }
 
 int Player_DpadHook(Player* this, PlayState* play)

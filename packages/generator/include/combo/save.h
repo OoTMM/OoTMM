@@ -19,6 +19,7 @@
 # include <combo/notes.h>
 # include <combo/doors.h>
 # include <combo/save_flags.h>
+# include <combo/sr.h>
 
 typedef struct
 {
@@ -37,6 +38,7 @@ typedef struct ALIGNED(16)
     MmCustomSave    mm;
     MultiSave       multi;
     u16             coins[4];
+    u8              silverRupees[(SR_MAX + 1) / 2];
     u16             ocarinaButtonMaskOot;
     u16             ocarinaButtonMaskMm;
     u8              soulsEnemyOot[8];
@@ -142,17 +144,8 @@ ASSERT_SIZE(MmExtraTrade,   sizeof(u32));
 ASSERT_SIZE(MmExtraFlags,   sizeof(u32));
 ASSERT_SIZE(MmExtraFlags2,  sizeof(u32));
 ASSERT_SIZE(MiscFlags,      sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
 ASSERT_SIZE(OotExtraTrade,  sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
 ASSERT_SIZE(MmExtraFlags3,  sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
-ASSERT_SIZE(u32,            sizeof(u32));
 ASSERT_SIZE(OotExtraAmmo,   sizeof(u32));
 ASSERT_SIZE(MmExtraAmmo,    sizeof(u32));
 #endif
@@ -170,13 +163,8 @@ ASSERT_SIZE(MmExtraAmmo,    sizeof(u32));
 #define gOotExtraTradeSave          SAVE_EXTRA_RECORD(OotExtraTrade,    10)
 #define gMmOwlFlags                 SAVE_EXTRA_RECORD(u32,              11)
 #define gMmExtraFlags3              SAVE_EXTRA_RECORD(MmExtraFlags3,    12)
-#define gOotSilverRupeeCounts1      SAVE_EXTRA_RECORD(u32,              13)
-#define gOotSilverRupeeCounts2      SAVE_EXTRA_RECORD(u32,              14)
-#define gOotSilverRupeeCounts3      SAVE_EXTRA_RECORD(u32,              15)
-#define gOotSilverRupeeCounts4      SAVE_EXTRA_RECORD(u32,              16)
-#define gOotSilverRupeeCounts5      SAVE_EXTRA_RECORD(u32,              17)
-#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              18)
-#define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     19)
-#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      20)
+#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              13)
+#define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     14)
+#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      15)
 
 #endif

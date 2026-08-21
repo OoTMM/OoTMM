@@ -933,7 +933,7 @@ static void printDungeonSilverRupees(PlayState* play, float x, float y, int srBa
         if (data->count == 0)
             continue;
         digits = digitCount(data->count);
-        count = comboSilverRupeesGetCount(sr);
+        count = SilverRupees_GetCount(sr);
         printNumColored(play, count, data->count, digits, x, y, 0);
         x += 8.f * digits + 3.f;
     }

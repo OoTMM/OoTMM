@@ -15,6 +15,7 @@
 #include <combo/message.h>
 #include <combo/multi.h>
 #include <combo/souls.h>
+#include <combo/sr.h>
 
 PlayState* gPlay;
 
@@ -591,6 +592,7 @@ void Play_MainWrapper(PlayState* play)
         Triggers_Update(play);
     }
 
+    SilverRupees_Update(play);
     Debug_Update();
 }
 

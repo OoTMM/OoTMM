@@ -1606,7 +1606,7 @@ static int addItemMapMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addSilverRupee(PlayState* play, int id)
 {
     addRupeesOot(play, 5);
-    return comboSilverRupeesIncCount(play, id);
+    return SilverRupees_IncCount(play, id);
 }
 
 static void addSilverPouch(PlayState* play, int id)

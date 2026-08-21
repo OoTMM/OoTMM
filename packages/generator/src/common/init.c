@@ -19,8 +19,6 @@ void menuInit();
 
 void comboInit(void)
 {
-    g.delayedSwitchFlagsCount = 0;
-
     initHeap();
     AudioCustom_Init();
     Context_Init();
@@ -30,7 +28,7 @@ void comboInit(void)
     comboInitOverride();
     Hint_Init();
     comboInitEntrances();
-    comboSilverRupeesInit();
+    SilverRupees_Init();
     IPC_Init();
     menuInit();
     Debug_Init();
