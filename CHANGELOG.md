@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 - Child can now use Bombchu or Blast Mask with the ability to swim to get the rocks underwater in Zora's River.
 - Megaflip is now logical to reach the grass in Zora's River.
 
+## [32.2] - 2026-08-21
+
 ### Fixed
 
 - Fix an issue where the MQ forest scripted stalfos fight would behave incorrectly when the stalfos soul was not collected.
@@ -1813,7 +1815,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.2...HEAD
+[32.2]: https://github.com/OoTMM/OoTMM/compare/v32.1...v32.2
 [32.1]: https://github.com/OoTMM/OoTMM/compare/v32.0...v32.1
 [32.0]: https://github.com/OoTMM/OoTMM/compare/v31.1...v32.0
 [31.1]: https://github.com/OoTMM/OoTMM/compare/v31.0...v31.1
