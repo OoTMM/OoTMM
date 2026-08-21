@@ -4,14 +4,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/global.h>
-
-static u32* const kSilverRupeeCounts[] = {
-    &gOotSilverRupeeCounts1,
-    &gOotSilverRupeeCounts2,
-    &gOotSilverRupeeCounts3,
-    &gOotSilverRupeeCounts4,
-    &gOotSilverRupeeCounts5,
-};
+#include <combo/flags.h>
 
 ComboSilverRupeeData gSilverRupeeData[SR_MAX] = {
     { SCE_OOT_DODONGO_CAVERN,           0x00, 0 }, /* SR_DC */
@@ -34,121 +27,121 @@ ComboSilverRupeeData gSilverRupeeData[SR_MAX] = {
     { SCE_OOT_INSIDE_GANON_CASTLE,      0x0e, 5 }, /* SR_GANON4 */
 };
 
-static void updateSR(int id, int count, int flag)
+static void SilverRupees_SetData(int id, int count, int flag)
 {
     gSilverRupeeData[id].count = count;
     gSilverRupeeData[id].flag = flag;
 }
 
-void comboSilverRupeesInit(void)
+void SilverRupees_Init(void)
 {
     if (Config_IsMq(MQ_DODONGOS_CAVERN))
     {
-        updateSR(SR_DC, 5, 0x25);
+        SilverRupees_SetData(SR_DC, 5, 0x25);
     }
 
     if (Config_IsMq(MQ_BOTTOM_OF_THE_WELL))
     {
-        updateSR(SR_BOTW, 0, 0);
+        SilverRupees_SetData(SR_BOTW, 0, 0);
     }
 
     if (Config_IsMq(MQ_TEMPLE_SPIRIT))
     {
-        /* Need logic */
-        updateSR(SR_SPIRIT1, 5, 0x37);
-        updateSR(SR_SPIRIT2, 5, 0x00);
-        updateSR(SR_SPIRIT3, 0, 0);
+        SilverRupees_SetData(SR_SPIRIT1, 5, 0x37);
+        SilverRupees_SetData(SR_SPIRIT2, 5, 0x00);
+        SilverRupees_SetData(SR_SPIRIT3, 0, 0);
     }
 
     if (Config_IsMq(MQ_TEMPLE_SHADOW))
     {
-        updateSR(SR_SHADOW2, 10, 0x03);
-        updateSR(SR_SHADOW3,  5, 0x11); /* Double check */
-        updateSR(SR_SHADOW4, 10, 0x08);
+        SilverRupees_SetData(SR_SHADOW2, 10, 0x03);
+        SilverRupees_SetData(SR_SHADOW3,  5, 0x11);
+        SilverRupees_SetData(SR_SHADOW4, 10, 0x08);
     }
 
     if (Config_IsMq(MQ_ICE_CAVERN))
     {
-        updateSR(SR_IC1, 0, 0);
-        updateSR(SR_IC2, 0, 0);
+        SilverRupees_SetData(SR_IC1, 0, 0);
+        SilverRupees_SetData(SR_IC2, 0, 0);
     }
 
     if (Config_IsMq(MQ_GERUDO_TRAINING_GROUNDS))
     {
-        updateSR(SR_GTG1, 5, 0x1c);
-        updateSR(SR_GTG2, 6, 0x0c);
-        updateSR(SR_GTG3, 3, 0x1b);
+        SilverRupees_SetData(SR_GTG1, 5, 0x1c);
+        SilverRupees_SetData(SR_GTG2, 6, 0x0c);
+        SilverRupees_SetData(SR_GTG3, 3, 0x1b);
     }
 
     if (Config_IsMq(MQ_GANON_CASTLE))
     {
-        updateSR(SR_GANON1, 5, 0x0b);
-        updateSR(SR_GANON2, 5, 0x02);
-        updateSR(SR_GANON3, 5, 0x01);
-        updateSR(SR_GANON4, 0, 0);
+        SilverRupees_SetData(SR_GANON1, 5, 0x0b);
+        SilverRupees_SetData(SR_GANON2, 5, 0x02);
+        SilverRupees_SetData(SR_GANON3, 5, 0x01);
+        SilverRupees_SetData(SR_GANON4, 0, 0);
     }
 }
 
-int comboSilverRupeesGetCount(int id)
+int SilverRupees_GetCount(int id)
 {
-    return ((*(kSilverRupeeCounts[id >> 2])) >> ((id & 3) * 8)) & 0xff;
+    return ((gSharedCustomSave.silverRupees[id >> 1]) >> ((id & 1) * 4)) & 0xf;
 }
 
-int comboSilverRupeesIncCount(PlayState* play, int id)
+static void SilverRupees_SetCount(int id, int count)
+{
+    u8* p;
+
+    p = &gSharedCustomSave.silverRupees[id >> 1];
+    *p &= ~(0xf << ((id & 1) * 4));
+    *p |= (count << ((id & 1) * 4));
+}
+
+int SilverRupees_IncCount(PlayState* play, int id)
 {
     const ComboSilverRupeeData* data;
     int tmp;
 
     data = &gSilverRupeeData[id];
-    tmp = comboSilverRupeesGetCount(id) + 1;
+    tmp = SilverRupees_GetCount(id) + 1;
     if (tmp > data->count)
         tmp = data->count;
-    (*(kSilverRupeeCounts[id >> 2])) &= ~(0xff << ((id & 3) * 8));
-    (*(kSilverRupeeCounts[id >> 2])) |= (tmp << ((id & 3) * 8));
+    SilverRupees_SetCount(id, tmp);
 
-    if (tmp >= data->count)
-    {
-        /* Special-cased */
-        if (data->flag >= 0x20)
-            return tmp;
-
-        /* Set switch flag */
-        gOotSave.info.perm[data->sceneId].switches |= (1 << data->flag);
-
+    if (data->count && (tmp == data->count) && data->flag < 0x20
 #if defined(GAME_OOT)
-        Player* link;
-
-        if (play && play->sceneId == data->sceneId)
-        {
-            link = GET_PLAYER(play);
-            if ((Message_GetState(&play->msgCtx) != TEXT_STATE_NONE) || (link->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
-            {
-                g.delayedSwitchFlags[g.delayedSwitchFlagsCount++] = data->flag;
-            }
-            else
-                Flags_SetSwitch(play, data->flag);
-        }
+        && !(play && play->sceneId == data->sceneId)
 #endif
+    )
+    {
+        gOotSave.info.perm[data->sceneId].switches |= (1 << data->flag);
     }
 
     return tmp;
 }
 
-/* Handle temp flags */
-void comboSrUpdate(PlayState* play)
+#if defined(GAME_OOT)
+void SilverRupees_Update(PlayState* play)
 {
     const ComboSilverRupeeData* data;
+    Player* link;
 
+    /* Sanity check */
+    if (gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+    link = GET_PLAYER(play);
+    if ((Message_GetState(&play->msgCtx) != TEXT_STATE_NONE) || (link->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
+        return;
+
+    /* Trigger obtained silver rupees for the current scene */
     for (int sr = 0; sr < SR_MAX; ++sr)
     {
         data = &gSilverRupeeData[sr];
-        if (data->flag < 0x20)
+        if (!data->count)
             continue;
-        if (play->sceneId != data->sceneId)
+        if (data->sceneId != play->sceneId)
             continue;
-        if (comboSilverRupeesGetCount(sr) < data->count)
+        if (SilverRupees_GetCount(sr) < data->count)
             continue;
-
         Flags_SetSwitch(play, data->flag);
     }
 }
+#endif

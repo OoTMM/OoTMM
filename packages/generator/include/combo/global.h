@@ -16,8 +16,6 @@ typedef struct
     const ComboItemQuery*   itemQuery;
     const ComboItemQuery*   itemQueryBox;
     u8                      silverRupee;
-    u8                      delayedSwitchFlags[4];
-    u8                      delayedSwitchFlagsCount;
     u8                      roomEnemyLackSoul:1;
     u8                      spawnExtended:1;
     u8                      xflagOverride:1;

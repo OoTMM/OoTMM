@@ -15,6 +15,7 @@
 #include <combo/inventory.h>
 #include <combo/draw.h>
 #include <combo/mark.h>
+#include <combo/sr.h>
 
 PlayState* gPlay;
 
@@ -590,6 +591,7 @@ void Play_MainWrapper(PlayState* play)
         Triggers_Update(play);
     }
 
+    SilverRupees_Update(play);
     Debug_Update();
 }
 

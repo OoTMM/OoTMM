@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix an issue where obtaining silver rupee pouches while owning the magical rupee could corrupt flags.
 - Logic for reaching the front of Zora River without Bronze Scale is now accounted for.
 
 ## [32.1] - 2026-08-20
