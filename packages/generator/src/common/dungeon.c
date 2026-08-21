@@ -13,7 +13,7 @@ void Dungeon_SetFlags(int dungeonId, int flags)
         BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
         break;
     case DUNGEONID_TEMPLE_WATER:
-        gMiscFlags.waterBeaten = 1;
+        gSharedCustomSave.oot.waterBeaten = 1;
         if (flags & DUNGEONCLEARFLAG_EFFECT)
         {
             BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);

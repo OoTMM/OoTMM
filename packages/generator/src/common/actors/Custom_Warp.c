@@ -227,7 +227,7 @@ void comboSpawnCustomWarps(PlayState* play)
 #endif
 
 #if defined(GAME_OOT)
-    if (play->sceneId == SCE_OOT_LAKE_HYLIA && gSave.age == AGE_ADULT && dungeonWispEnabled(gMiscFlags.waterBeaten, gOotSave.info.inventory.quest.medallionWater))
+    if (play->sceneId == SCE_OOT_LAKE_HYLIA && gSave.age == AGE_ADULT && dungeonWispEnabled(gSharedCustomSave.oot.waterBeaten, gOotSave.info.inventory.quest.medallionWater))
     {
         variable = SWITCH_LAKE_HYLIA_WATER;
         x = -850.f;
