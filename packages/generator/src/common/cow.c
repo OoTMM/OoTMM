@@ -158,7 +158,7 @@ static void EnCow_ItemQuery(PlayState* play, Actor* this, ComboItemQuery* q, s16
         q->ovType = OV_COW;
         q->id = id;
         q->giRenew = RECOVERY_HEART;
-        if (gCowFlags & (1 << id))
+        if (gSharedCustomSave.cows & (1 << id))
             q->ovFlags |= OVF_RENEW;
     }
 }
@@ -272,7 +272,7 @@ static int EnCow_HasGivenItem(Actor* this)
     {
         if (sCowID != -1)
         {
-            gCowFlags |= 1 << sCowID;
+            gSharedCustomSave.cows |= 1 << sCowID;
             sCowID = -1;
         }
         return 1;

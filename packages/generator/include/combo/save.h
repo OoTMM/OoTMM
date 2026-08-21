@@ -37,6 +37,7 @@ typedef struct ALIGNED(16)
     OotCustomSave   oot;
     MmCustomSave    mm;
     MultiSave       multi;
+    u32             cows;
     u16             coins[4];
     u8              silverRupees[(SR_MAX + 1) / 2];
     u16             ocarinaButtonMaskOot;
@@ -159,12 +160,11 @@ ASSERT_SIZE(MmExtraAmmo,    sizeof(u32));
 #define gMmExtraFlags               SAVE_EXTRA_RECORD(MmExtraFlags,      6)
 #define gMmExtraFlags2              SAVE_EXTRA_RECORD(MmExtraFlags2,     7)
 #define gMiscFlags                  SAVE_EXTRA_RECORD(MiscFlags,         8)
-#define gCowFlags                   SAVE_EXTRA_RECORD(u32,               9)
-#define gOotExtraTradeSave          SAVE_EXTRA_RECORD(OotExtraTrade,    10)
-#define gMmOwlFlags                 SAVE_EXTRA_RECORD(u32,              11)
-#define gMmExtraFlags3              SAVE_EXTRA_RECORD(MmExtraFlags3,    12)
-#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              13)
-#define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     14)
-#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      15)
+#define gOotExtraTradeSave          SAVE_EXTRA_RECORD(OotExtraTrade,     9)
+#define gMmOwlFlags                 SAVE_EXTRA_RECORD(u32,              10)
+#define gMmExtraFlags3              SAVE_EXTRA_RECORD(MmExtraFlags3,    11)
+#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              12)
+#define gOotExtraAmmo               SAVE_EXTRA_RECORD(OotExtraAmmo,     13)
+#define gMmExtraAmmo                SAVE_EXTRA_RECORD(MmExtraAmmo,      14)
 
 #endif

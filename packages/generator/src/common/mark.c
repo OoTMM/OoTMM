@@ -296,7 +296,7 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_SF:
         break;
     case OV_COW:
-        gCowFlags |= (1 << id);
+        gSharedCustomSave.cows |= (1 << id);
         break;
     case OV_SHOP:
         BITMAP8_SET(gSharedCustomSave.oot.shops, id);
@@ -337,7 +337,7 @@ void Mark_SetMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         setStrayFairyMarkMm(play, sceneId, id);
         break;
     case OV_COW:
-        gCowFlags |= (1 << id);
+        gSharedCustomSave.cows |= (1 << id);
         break;
     case OV_SHOP:
         BITMAP8_SET(gSharedCustomSave.mm.shops, id);
@@ -371,7 +371,7 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_SF:
         break;
     case OV_COW:
-        return !!(gCowFlags & (1 << id));
+        return !!(gSharedCustomSave.cows & (1 << id));
     case OV_SHOP:
         return BITMAP8_GET(gSharedCustomSave.oot.shops, id);
     case OV_SCRUB:
@@ -404,7 +404,7 @@ int Mark_GetMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_SF:
         return getStrayFairyMarkMm(play, sceneId, id);
     case OV_COW:
-        return !!(gCowFlags & (1 << id));
+        return !!(gSharedCustomSave.cows & (1 << id));
     case OV_SHOP:
         return BITMAP8_GET(gSharedCustomSave.mm.shops, id);
     case OV_SCRUB:
