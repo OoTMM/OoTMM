@@ -18,6 +18,13 @@ All notable changes to this project will be documented in this file.
 - Complete overhaul of the multiplayer system, see website for the setup guide and details.
 - Change how the region-state wisps are handled when set to "dungeon beaten", ER is no longer required for them to show up.
 - GBC Tingle now accounts for Hookshot and Slingshot in logic.
+- Added other methods for child to reach the plateau in Zora's River.
+- Child can now use Bombchu or Blast Mask with the ability to swim to get the rocks underwater in Zora's River.
+- Megaflip is now logical to reach the grass in Zora's River.
+
+### Fixed
+
+- Logic for reaching the front of Zora River without Bronze Scale is now accounted for.
 
 ## [32.1] - 2026-08-20
 
