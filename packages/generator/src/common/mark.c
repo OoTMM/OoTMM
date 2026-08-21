@@ -8,9 +8,8 @@ u32 gMarkCollectibles;
 u32 gMarkSwitch0;
 u32 gMarkSwitch1;
 
-static int Mark_NormalizeSceneId(int sceneId)
+static int Mark_NormalizeSceneIdOot(int sceneId)
 {
-#if defined(GAME_OOT)
     switch (sceneId)
     {
     case SCE_OOT_DEKU_TREE_MQ: return SCE_OOT_DEKU_TREE;
@@ -26,9 +25,12 @@ static int Mark_NormalizeSceneId(int sceneId)
     case SCE_OOT_GERUDO_TRAINING_GROUND_MQ: return SCE_OOT_GERUDO_TRAINING_GROUND;
     case SCE_OOT_INSIDE_GANON_CASTLE_MQ: return SCE_OOT_INSIDE_GANON_CASTLE;
     }
-#endif
 
-#if defined(GAME_MM)
+    return sceneId;
+}
+
+static int Mark_NormalizeSceneIdMm(int sceneId)
+{
     switch (sceneId)
     {
     case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
@@ -44,17 +46,16 @@ static int Mark_NormalizeSceneId(int sceneId)
     case SCE_MM_STONE_TOWER_INVERTED:
         return SCE_MM_STONE_TOWER;
     }
-#endif
 
     return sceneId;
 }
 
 static int getChestMarkOot(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
 
 #if defined(GAME_OOT)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
         return !!(gMarkChests & (1 << flagId));
 #endif
 
@@ -63,10 +64,10 @@ static int getChestMarkOot(PlayState* play, int sceneId, int flagId)
 
 static int getChestMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkChests & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].chest & (1 << flagId))
         return 1;
@@ -77,10 +78,10 @@ static int getChestMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setChestMarkOot(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
 
 #if defined(GAME_OOT)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
     {
         SetChestFlag(play, flagId);
         gMarkChests |= (1 << flagId);
@@ -93,10 +94,10 @@ static void setChestMarkOot(PlayState* play, int sceneId, int flagId)
 
 static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         SetChestFlag(play, flagId);
         gMarkChests |= (1 << flagId);
@@ -110,10 +111,10 @@ static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
 
 #if defined(GAME_OOT)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
         return !!(gMarkCollectibles & (1 << flagId));
 #endif
 
@@ -122,10 +123,10 @@ static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 
 static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkCollectibles & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].collectible & (1 << flagId))
         return 1;
@@ -136,10 +137,10 @@ static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
 
 #if defined(GAME_OOT)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
     {
         Flags_SetCollectible(play, flagId);
         gMarkCollectibles |= (1 << flagId);
@@ -152,10 +153,10 @@ static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 
 static void setCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         Flags_SetCollectible(play, flagId);
         gMarkCollectibles |= (1 << flagId);
@@ -169,10 +170,10 @@ static void setCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkSwitch0 & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].switch0 & (1 << flagId))
         return 1;
@@ -183,10 +184,10 @@ static int getSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkSwitch1 & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].switch1 & (1 << flagId))
         return 1;
@@ -205,10 +206,10 @@ static int getSwitchMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         Flags_SetSwitch(play, flagId);
         gMarkSwitch0 |= (1 << flagId);
@@ -222,10 +223,10 @@ static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = Mark_NormalizeSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && Mark_NormalizeSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         Flags_SetSwitch(play, flagId | 0x20);
         gMarkSwitch1 |= (1 << flagId);
