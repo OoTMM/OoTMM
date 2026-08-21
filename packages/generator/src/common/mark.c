@@ -43,10 +43,10 @@ static int Mark_NormalizeSceneId(int sceneId)
         return SCE_MM_TWIN_ISLANDS_WINTER;
     case SCE_MM_STONE_TOWER_INVERTED:
         return SCE_MM_STONE_TOWER;
-    default:
-        return sceneId;
     }
 #endif
+
+    return sceneId;
 }
 
 static int getChestMarkOot(PlayState* play, int sceneId, int flagId)
