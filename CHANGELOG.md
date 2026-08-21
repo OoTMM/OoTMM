@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [32.2] - 2026-08-21
+
+### Fixed
+
+- Logic for reaching the front of Zora River without Bronze Scale is now accounted for.
+
 ## [32.1] - 2026-08-20
 
 ### Changed
@@ -1789,7 +1795,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.2...HEAD
+[32.2]: https://github.com/OoTMM/OoTMM/compare/v32.1...v32.2
 [32.1]: https://github.com/OoTMM/OoTMM/compare/v32.0...v32.1
 [32.0]: https://github.com/OoTMM/OoTMM/compare/v31.1...v32.0
 [31.1]: https://github.com/OoTMM/OoTMM/compare/v31.0...v31.1
