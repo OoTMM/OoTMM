@@ -1,8 +1,9 @@
 #include <combo.h>
-#include <combo/item.h>
 #include <combo/draw.h>
+#include <combo/item.h>
+#include <combo/play.h>
 
-static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
+static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     u16 key;
 
@@ -20,7 +21,10 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
     default:
         UNREACHABLE();
     }
+
     key += (((this->params >> 8) & 0x1f) * 8);
+    if (Play_ExpandMQ(play, play->sceneId) != play->sceneId)
+        key += 0xb0;
 
     bzero(q, sizeof(*q));
     q->ovType = OV_GS;
@@ -28,11 +32,11 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
     q->gi = GI_OOT_GS_TOKEN;
 }
 
-void EnSi_ItemOverride(ComboItemOverride* o, Actor* this)
+void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
-    EnSi_ItemQuery(&q, this);
+    EnSi_ItemQuery(&q, this, play);
     comboItemOverride(o, &q);
 }
 
@@ -41,7 +45,7 @@ void EnSi_Draw(Actor* this, PlayState* play)
     ComboItemOverride o;
     s16 gi;
 
-    EnSi_ItemOverride(&o, this);
+    EnSi_ItemOverride(&o, this, play);
     gi = o.gi;
     if (o.cloakGi)
     {
@@ -58,7 +62,7 @@ void EnSi_GiveItem(PlayState* play, Actor* this)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    EnSi_ItemQuery(&q, this);
+    EnSi_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
     PlayerDisplayTextBox(play, 0xb4, NULL);
     comboAddItemEx(play, &q, 1);

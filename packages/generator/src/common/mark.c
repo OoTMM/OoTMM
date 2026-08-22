@@ -289,6 +289,20 @@ static void setXflagsMarkMm(PlayState* play, int sliceId, int sceneId, int roomI
     comboXflagsSetMm(&xf);
 }
 
+static int getGsFlagOot(int id)
+{
+    if (id > 0xb0)
+        id -= 0xb0;
+    return BITMAP32_GET(gOotSave.info.gsFlags, id);
+}
+
+static void setGsFlagOot(int id)
+{
+    if (id > 0xb0)
+        id -= 0xb0;
+    BITMAP32_SET(gOotSave.info.gsFlags, id);
+}
+
 void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     switch (ovType)
@@ -305,7 +319,7 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         BITMAP8_SET(gSharedCustomSave.oot.npc, id);
         break;
     case OV_GS:
-        BITMAP32_SET(gOotSave.info.gsFlags, id);
+        setGsFlagOot(id);
         break;
     case OV_SF:
         break;
@@ -381,7 +395,7 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_NPC:
         return BITMAP8_GET(gSharedCustomSave.oot.npc, id);
     case OV_GS:
-        return BITMAP32_GET(gOotSave.info.gsFlags, id);
+        return getGsFlagOot(id);
     case OV_SF:
         break;
     case OV_COW:
