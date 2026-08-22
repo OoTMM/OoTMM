@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/global.h>
 #include <combo/draw.h>
+#include <combo/play.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
@@ -15,6 +16,7 @@ static u16 EnGSwitch_ID(Actor* this, PlayState* play)
 {
     u16 base;
     u16 offset;
+    u16 id;
 
     switch (play->sceneId)
     {
@@ -115,8 +117,12 @@ static u16 EnGSwitch_ID(Actor* this, PlayState* play)
         UNREACHABLE();
     }
     offset = EnGSwitch_LocalID(this);
+    id = base + offset;
 
-    return base + offset;
+    if (play->sceneId != Play_ExpandMQ(play, play->sceneId))
+        id |= 0x80;
+
+    return id;
 }
 
 static void EnGSwitch_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
@@ -143,7 +149,7 @@ int EnGSwitch_AlreadyTaken(PlayState* play, Actor* this)
     *(u16*)((char*)this + 0x148) = id;
 
     /* Check for flag */
-    return BITMAP8_GET(gCustomSave.sr, EnGSwitch_ID(this, play));
+    return BITMAP8_GET(gCustomSave.sr, EnGSwitch_ID(this, play) & 0x7f);
 }
 
 void EnGSwitch_DrawSilverRupee(Actor* this, PlayState* play)
@@ -212,7 +218,7 @@ void EnGSwitch_GiveItemSilverRupee(Actor* this)
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
     comboAddItemEx(gPlay, &q, 1);
     comboPlayItemFanfare(o.gi, 1);
-    BITMAP8_SET(gCustomSave.sr, EnGSwitch_ID(this, gPlay));
+    BITMAP8_SET(gCustomSave.sr, EnGSwitch_ID(this, gPlay) & 0x7f);
     SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }
 

@@ -333,7 +333,7 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         BITMAP8_SET(gSharedCustomSave.oot.scrubs, id & 0x7f);
         break;
     case OV_SR:
-        BITMAP8_SET(gSharedCustomSave.oot.sr, id);
+        BITMAP8_SET(gSharedCustomSave.oot.sr, id & 0x7f);
         break;
     case OV_FISH:
         BITMAP8_SET(gSharedCustomSave.caughtFishFlags, id);
@@ -405,7 +405,7 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_SCRUB:
         return BITMAP8_GET(gSharedCustomSave.oot.scrubs, id & 0x7f);
     case OV_SR:
-        return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
+        return BITMAP8_GET(gSharedCustomSave.oot.sr, id & 0x7f);
     case OV_FISH:
         return BITMAP8_GET(gSharedCustomSave.caughtFishFlags, id);
     default:
