@@ -245,7 +245,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
     f32 floorY;
     s16 extraRot;
 
-    if (comboXflagInit(&this->xflag, thisx, play))
+    if (Xflag_Init(&this->xflag, thisx, play))
     {
         if (EnWood02_IsTree(this))
             EnWood02_AliasTree(&this->xflag);

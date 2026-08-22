@@ -62,7 +62,7 @@ static void ObjYasi_Alias(Xflag* xf)
 void ObjYasi_Init(Actor* thisx, PlayState* play) {
     ObjYasi* this = (ObjYasi*)thisx;
 
-    if (comboXflagInit(&this->xflag, thisx, play)) {
+    if (Xflag_Init(&this->xflag, thisx, play)) {
         ObjYasi_Alias(&this->xflag);
     }
 

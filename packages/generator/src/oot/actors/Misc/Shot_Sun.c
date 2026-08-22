@@ -40,7 +40,7 @@ void ShotSun_InitWrapper(Actor_ShotSun* this, PlayState* play)
     /* Fairy Spawner */
     if (variable == 0x40 || variable == 0x41)
     {
-        if (comboXflagInit(&this->xflag, &this->base, play))
+        if (Xflag_Init(&this->xflag, &this->base, play))
             ShotSun_Aliases(&this->xflag);
     }
 

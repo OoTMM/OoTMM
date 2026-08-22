@@ -207,7 +207,7 @@ void ObjTsubo_InitCollider(Actor_ObjTsubo* this, PlayState* play)
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
 {
     /* Set the extended properties */
-    if (comboXflagInit(&this->xflag, &this->actor, play))
+    if (Xflag_Init(&this->xflag, &this->actor, play))
         ObjTsubo_Alias(this);
     this->isExtended = Xflag_IsShuffled(&this->xflag);
 

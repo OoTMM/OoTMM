@@ -220,7 +220,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     }
     else
     {
-        if (comboXflagInit(&this->xflag, &this->base, play))
+        if (Xflag_Init(&this->xflag, &this->base, play))
             EnElf_Aliases(&this->xflag);
     }
 

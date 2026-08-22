@@ -875,7 +875,7 @@ void EnKusa2_Init(Actor* thisx, PlayState* play) {
     if (!ENKUSA2_GET_1(&this->actor)) {
         sLastFrameCount = play->state.frameCount - 1;
         sDrawIndex = 0;
-        if (comboXflagInit(&sXflagBase, thisx, play)) {
+        if (Xflag_Init(&sXflagBase, thisx, play)) {
             EnKusa2_Alias(&sXflagBase);
         }
         EnKusa2_UpdateCurrentXflag(0);

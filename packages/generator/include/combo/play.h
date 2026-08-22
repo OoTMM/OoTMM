@@ -29,4 +29,9 @@ typedef enum TransitionMode
     /* 17 */ TRANS_MODE_CS_BLACK_FILL
 } TransitionMode;
 
+#if defined(GAME_OOT)
+int Play_ExpandMQ(PlayState* play, int sceneId);
+#endif
+int Play_MergeMQ(int sceneId);
+
 #endif

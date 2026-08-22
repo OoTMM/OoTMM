@@ -1,10 +1,11 @@
 #include <combo.h>
-#include <combo/xflags.h>
-#include <combo/item.h>
 #include <combo/custom.h>
 #include <combo/dma.h>
 #include <combo/global.h>
 #include <combo/io.h>
+#include <combo/item.h>
+#include <combo/play.h>
+#include <combo/xflags.h>
 
 static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSetups, u32 paddrTableRooms)
 {
@@ -120,7 +121,7 @@ void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
     comboItemOverride(o, &q);
 }
 
-int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
+int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
 {
     if (g.xflagOverride)
     {
@@ -142,6 +143,8 @@ int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
     xf->id = actor->actorIndex;
 
 #if defined(GAME_OOT)
+    xf->sceneId = Play_ExpandMQ(play, xf->sceneId);
+
     if (xf->sceneId == SCE_OOT_GROTTOS)
     {
         switch (xf->roomId)
@@ -149,6 +152,28 @@ int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
         case 0x00:
             /* Generic grottos */
             xf->roomId = 0x20 | (gGrottoData & 0x1f);
+            break;
+        case 0x09:
+            /* Scrubs x2 */
+            switch (gLastScene)
+            {
+            case SCE_OOT_SACRED_FOREST_MEADOW: xf->roomId = 0x21; break;
+            case SCE_OOT_ZORA_RIVER: xf->roomId = 0x24; break;
+            case SCE_OOT_GERUDO_VALLEY: xf->roomId = 0x25; break;
+            case SCE_OOT_DESERT_COLOSSUS: xf->roomId = 0x26; break;
+            default: UNREACHABLE(); break;
+            }
+            break;
+        case 0x0c:
+            /* Scrubs x3 */
+            switch (gLastScene)
+            {
+            case SCE_OOT_LON_LON_RANCH: xf->roomId = 0x27; break;
+            case SCE_OOT_GORON_CITY: xf->roomId = 0x2a; break;
+            case SCE_OOT_DEATH_MOUNTAIN_CRATER: xf->roomId = 0x2b; break;
+            case SCE_OOT_LAKE_HYLIA: xf->roomId = 0x2d; break;
+            default: UNREACHABLE(); break;
+            }
             break;
         }
     }

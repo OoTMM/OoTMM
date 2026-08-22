@@ -96,7 +96,7 @@ void EnHitTag_InitWrapper(Actor_EnHitTag* this, PlayState* play)
     Xflag x;
 
     /* Setup the xflag */
-    comboXflagInit(&this->xflag, &this->base, play);
+    Xflag_Init(&this->xflag, &this->base, play);
     this->isExtended = FALSE;
     memcpy(&x, &this->xflag, sizeof(Xflag));
     for (int i = 0; i < 3; ++i)

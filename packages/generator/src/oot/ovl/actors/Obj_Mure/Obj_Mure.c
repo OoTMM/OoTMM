@@ -80,7 +80,7 @@ s32 ObjMure_SetCulling(Actor_ObjMure* thisx, PlayState* play)
 
 void ObjMure_Init(Actor_ObjMure* this, PlayState* play)
 {
-    comboXflagInit(&this->xflag, &this->actor, play);
+    Xflag_Init(&this->xflag, &this->actor, play);
 
     this->chNum = PARAMS_GET_U(this->actor.params, 12, 4);
     this->ptn = PARAMS_GET_U(this->actor.params, 8, 3);

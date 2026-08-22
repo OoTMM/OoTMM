@@ -490,7 +490,7 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
         this->flags |= ISHI_FLAG_CUTSCENE_ROCK;
     }
 
-    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+    if (Xflag_Init(&this->xflag, &this->actor, play)) {
         EnIshi_Alias(&this->xflag);
     }
     Actor_ProcessInitChain(&this->actor, sInitChain[rockSize]);

@@ -486,51 +486,6 @@ function sortRoomActors(roomActors: RoomActors[]) {
   });
 }
 
-function mergeRooms(a: RoomActors, b: RoomActors): RoomActors {
-  /* Copy the longest actor list */
-  let actors: Actor[] = [];
-  if (a.actors.length > b.actors.length) {
-    actors = a.actors.map(a => ({...a}));
-  } else {
-    actors = b.actors.map(a => ({...a}));
-  }
-  const overlapCount = Math.min(a.actors.length, b.actors.length);
-  for (let i = 0; i < overlapCount; i++) {
-    const actorA = a.actors[i];
-    const actorB = b.actors[i];
-
-    const sliceSizeA = sliceSize('oot', actorA);
-    const sliceSizeB = sliceSize('oot', actorB);
-    if (sliceSizeA > sliceSizeB) {
-      actors[i] = { ...actorA };
-    } else {
-      actors[i] = { ...actorB };
-    }
-  }
-
-  return {
-    sceneId: a.sceneId,
-    roomId: a.roomId,
-    setupId: a.setupId,
-    actors,
-  };
-}
-
-function mergeRoomActors(roomActors: RoomActors[][]): RoomActors[] {
-  /* For every unique room, get the longest actor list */
-  const merged = new Map<string, RoomActors>();
-  for (const roomActor of roomActors.flat()) {
-    const key = `${roomActor.sceneId}-${roomActor.setupId}-${roomActor.roomId}`;
-    const existing = merged.get(key);
-    let room = roomActor;
-    if (existing) {
-      room = mergeRooms(existing, room);
-    }
-    merged.set(key, room);
-  }
-  return sortRoomActors(Array.from(merged.values()));
-}
-
 function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingTable {
   let sceneId = -1;
   let setupId = -1;
@@ -1115,7 +1070,10 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
 
 function getGameRoomActor(rom: Buffer, game: Game) {
   const rawRooms = getRawRooms(rom, game);
-  const actorRooms = roomActorsFromRaw(rom, rawRooms, game);
+  let actorRooms = roomActorsFromRaw(rom, rawRooms, game);
+  if (game === 'mq') {
+    actorRooms = actorRooms.filter(r => r.sceneId < 0x0a || r.sceneId == 0x0b || r.sceneId == 0x0d).map(r => ({ ...r, sceneId: r.sceneId + 0x70 }));
+  }
   return actorRooms;
 }
 
@@ -1721,7 +1679,7 @@ async function build() {
   const mqRooms = getGameRoomActor(mqRom, 'mq');
 
   /* Get the merged list */
-  const ootMqRooms = mergeRoomActors([ootRooms, mqRooms]);
+  const ootMqRooms = [...ootRooms, ...mqRooms];
 
   /* Build the addr tables */
   const addrTableOotMq = buildAddressingTable('oot', ootMqRooms);
@@ -1734,10 +1692,7 @@ async function build() {
     writeAddressingTable('mm', addrTableMm),
   ]);
 
-  /* Compute the MQ subset */
-  const mqRoomsOnly = mqRooms.filter(r => r.sceneId < 0x0a || r.sceneId == 0x0b || r.sceneId == 0x0d);
-
-  return { oot: ootRooms, mm: mmRooms, mq: mqRoomsOnly };
+  return { oot: ootMqRooms, mm: mmRooms };
 }
 
 async function run() {

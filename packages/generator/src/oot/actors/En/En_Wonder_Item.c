@@ -128,7 +128,7 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, PlayState* play)
     Actor_EnWonderItem_Func EnWonderItem_Init;
 
     /* Setup the xflag */
-    if (comboXflagInit(&this->xflag, &this->base, play))
+    if (Xflag_Init(&this->xflag, &this->base, play))
         EnWonderItem_Alias(&this->xflag);
 
     if (play->sceneId == SCE_OOT_CASTLE_COURTYARD && Config_Flag(CFG_OOT_SKIP_ZELDA))

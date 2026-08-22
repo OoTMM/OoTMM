@@ -109,7 +109,7 @@ void ObjTree_Init(Actor* thisx, PlayState* play) {
     ObjTree* this = (ObjTree*)thisx;
     CollisionHeader* colHeader = NULL;
 
-    if (comboXflagInit(&this->xflag, thisx, play)) {
+    if (Xflag_Init(&this->xflag, thisx, play)) {
         ObjTree_Alias(&this->xflag);
     }
 

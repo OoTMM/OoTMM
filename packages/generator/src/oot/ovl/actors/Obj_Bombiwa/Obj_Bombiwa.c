@@ -143,7 +143,7 @@ void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
 
     Actor_ProcessInitChain(thisx, sInitChain);
-    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+    if (Xflag_Init(&this->xflag, &this->actor, play)) {
         ObjBombiwa_Alias(&this->xflag);
     }
     ObjBombiwa_InitCollision(thisx, play);

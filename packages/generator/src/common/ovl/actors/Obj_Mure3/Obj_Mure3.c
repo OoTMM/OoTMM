@@ -49,7 +49,7 @@ int ObjMure3_IsAnyShuffled(Actor_ObjMure3* this, PlayState* play)
     Xflag xf;
     Xflag xf2;
 
-    if (comboXflagInit(&xf, &this->actor, play))
+    if (Xflag_Init(&xf, &this->actor, play))
         ObjMure3_Alias(&xf);
     count = sRupeeCounts[OBJMURE3_PARAM_RUPEEINDEX(&this->actor)];
 
@@ -74,7 +74,7 @@ void ObjMure3_SpawnRupee(Actor_ObjMure3* this, PlayState* play, Vec3f* pos, int 
         return;
 
     /* Get the matching xflag */
-    if (comboXflagInit(&g.xflag, &this->actor, play))
+    if (Xflag_Init(&g.xflag, &this->actor, play))
         ObjMure3_Alias(&g.xflag);
     g.xflag.sliceId = (u8)index;
 

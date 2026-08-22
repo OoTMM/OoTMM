@@ -170,7 +170,7 @@ void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     s32 sp34 = OBJBOMBIWA_GET_100(&this->actor);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+    if (Xflag_Init(&this->xflag, &this->actor, play)) {
         this->xflag.setupId = 0;
     }
     Collider_InitCylinder(play, &this->collider);

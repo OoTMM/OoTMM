@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/mark.h>
+#include <combo/play.h>
 
 /* TODO: This system is a big mess, reorganize this someday */
 
@@ -10,23 +11,7 @@ u32 gMarkSwitch1;
 
 static int Mark_NormalizeSceneIdOot(int sceneId)
 {
-    switch (sceneId)
-    {
-    case SCE_OOT_DEKU_TREE_MQ: return SCE_OOT_DEKU_TREE;
-    case SCE_OOT_DODONGO_CAVERN_MQ: return SCE_OOT_DODONGO_CAVERN;
-    case SCE_OOT_INSIDE_JABU_JABU_MQ: return SCE_OOT_INSIDE_JABU_JABU;
-    case SCE_OOT_TEMPLE_FOREST_MQ: return SCE_OOT_TEMPLE_FOREST;
-    case SCE_OOT_TEMPLE_FIRE_MQ: return SCE_OOT_TEMPLE_FIRE;
-    case SCE_OOT_TEMPLE_WATER_MQ: return SCE_OOT_TEMPLE_WATER;
-    case SCE_OOT_TEMPLE_SPIRIT_MQ: return SCE_OOT_TEMPLE_SPIRIT;
-    case SCE_OOT_TEMPLE_SHADOW_MQ: return SCE_OOT_TEMPLE_SHADOW;
-    case SCE_OOT_BOTTOM_OF_THE_WELL_MQ: return SCE_OOT_BOTTOM_OF_THE_WELL;
-    case SCE_OOT_ICE_CAVERN_MQ: return SCE_OOT_ICE_CAVERN;
-    case SCE_OOT_GERUDO_TRAINING_GROUND_MQ: return SCE_OOT_GERUDO_TRAINING_GROUND;
-    case SCE_OOT_INSIDE_GANON_CASTLE_MQ: return SCE_OOT_INSIDE_GANON_CASTLE;
-    }
-
-    return sceneId;
+    return Play_MergeMQ(sceneId);
 }
 
 static int Mark_NormalizeSceneIdMm(int sceneId)

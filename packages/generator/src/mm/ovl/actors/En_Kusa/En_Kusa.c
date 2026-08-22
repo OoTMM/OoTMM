@@ -397,7 +397,7 @@ void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = THIS;
     s32 kusaType = KUSA_GET_TYPE(&this->actor);
 
-    if (comboXflagInit(&this->xflag, thisx, play))
+    if (Xflag_Init(&this->xflag, thisx, play))
         EnKusa_Aliases(&this->xflag);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);

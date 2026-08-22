@@ -10,6 +10,7 @@
 #include <combo/item.h>
 #include <combo/mark.h>
 #include <combo/multi.h>
+#include <combo/play.h>
 #include <combo/shop.h>
 
 #if defined(GAME_OOT)
@@ -415,21 +416,7 @@ void comboInitOverride(void)
 u8 Play_SceneKey(u8 sceneId)
 {
 #if defined(GAME_OOT)
-    switch (sceneId)
-    {
-    case SCE_OOT_DEKU_TREE: if (Config_IsMq(MQ_DEKU_TREE)) return SCE_OOT_DEKU_TREE_MQ; break;
-    case SCE_OOT_DODONGO_CAVERN: if (Config_IsMq(MQ_DODONGOS_CAVERN)) return SCE_OOT_DODONGO_CAVERN_MQ; break;
-    case SCE_OOT_INSIDE_JABU_JABU: if (Config_IsMq(MQ_JABU_JABU)) return SCE_OOT_INSIDE_JABU_JABU_MQ; break;
-    case SCE_OOT_TEMPLE_FOREST: if (Config_IsMq(MQ_TEMPLE_FOREST)) return SCE_OOT_TEMPLE_FOREST_MQ; break;
-    case SCE_OOT_TEMPLE_FIRE: if (Config_IsMq(MQ_TEMPLE_FIRE)) return SCE_OOT_TEMPLE_FIRE_MQ; break;
-    case SCE_OOT_TEMPLE_WATER: if (Config_IsMq(MQ_TEMPLE_WATER)) return SCE_OOT_TEMPLE_WATER_MQ; break;
-    case SCE_OOT_TEMPLE_SPIRIT: if (Config_IsMq(MQ_TEMPLE_SPIRIT)) return SCE_OOT_TEMPLE_SPIRIT_MQ; break;
-    case SCE_OOT_TEMPLE_SHADOW: if (Config_IsMq(MQ_TEMPLE_SHADOW)) return SCE_OOT_TEMPLE_SHADOW_MQ; break;
-    case SCE_OOT_BOTTOM_OF_THE_WELL: if (Config_IsMq(MQ_BOTTOM_OF_THE_WELL)) return SCE_OOT_BOTTOM_OF_THE_WELL_MQ; break;
-    case SCE_OOT_ICE_CAVERN: if (Config_IsMq(MQ_ICE_CAVERN)) return SCE_OOT_ICE_CAVERN_MQ; break;
-    case SCE_OOT_GERUDO_TRAINING_GROUND: if (Config_IsMq(MQ_GERUDO_TRAINING_GROUNDS)) return SCE_OOT_GERUDO_TRAINING_GROUND_MQ; break;
-    case SCE_OOT_INSIDE_GANON_CASTLE: if (Config_IsMq(MQ_GANON_CASTLE)) return SCE_OOT_INSIDE_GANON_CASTLE_MQ; break;
-    }
+    sceneId = Play_ExpandMQ(gPlay, sceneId);
 #endif
 
 #if defined(GAME_MM)
