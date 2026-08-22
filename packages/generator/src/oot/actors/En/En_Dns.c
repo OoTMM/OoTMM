@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/shop.h>
+#include <combo/play.h>
 
 #define SCRUB_ITEM_NUTS             0x00
 #define SCRUB_ITEM_STICK            0x01
@@ -37,7 +38,7 @@ static int scrubSceneKey(PlayState* play, int inGrotto)
     return gLastScene;
 }
 
-static int EnDns_GetID(Actor* this)
+static int EnDns_RawGetID(Actor* this)
 {
     int key;
     int lastScene;
@@ -120,6 +121,16 @@ static int EnDns_GetID(Actor* this)
     return 0;
 }
 
+static int EnDns_GetID(Actor* this)
+{
+    int id;
+
+    id = EnDns_RawGetID(this);
+    if (Play_ExpandMQ(gPlay, gPlay->sceneId) != gPlay->sceneId)
+        id |= 0x80;
+    return id;
+}
+
 static void EnDns_ItemQuery(ComboItemQuery* q, int id)
 {
     bzero(q, sizeof(*q));
@@ -129,7 +140,7 @@ static void EnDns_ItemQuery(ComboItemQuery* q, int id)
     q->ovFlags = OVF_PRECOND;
     q->id = id;
 
-    if (BITMAP8_GET(gCustomSave.scrubs, id))
+    if (BITMAP8_GET(gCustomSave.scrubs, (id & 0x7f)))
         q->ovFlags |= OVF_RENEW;
 }
 
@@ -152,7 +163,7 @@ static s16 EnDns_GetPrice(Actor* this)
 {
     int id;
 
-    id = EnDns_GetID(this);
+    id = EnDns_RawGetID(this);
     return (s16)gComboConfig.prices[PRICES_OOT_SCRUBS + id];
 }
 
@@ -250,7 +261,7 @@ static int EnDns_HasGivenItem(Actor* this)
     link = GET_PLAYER(gPlay);
     if (Actor_HasParentZ(this) && !(link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
     {
-        id = EnDns_GetID(this);
+        id = EnDns_RawGetID(this);
         BITMAP8_SET(gCustomSave.scrubs, id);
         return 1;
     }
