@@ -31,14 +31,13 @@ int Item_SafeToReceive(PlayState* play)
     /* Used to track shop interactions, interferes with the message system */
     if (YREG(31) != 0)
         return 0;
+    if (play->shootingGalleryStatus)
+        return 0;
 #endif
-    if (play->transitionTrigger)
+
+    if (play->transitionTrigger || gSaveContext.gameMode || (gSaveContext.minigameState == 1) || Player_InCsMode(play) || Message_GetState(&play->msgCtx))
         return 0;
 
-    if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
-        return 0;
-    if (Message_GetState(&play->msgCtx) != 0)
-        return 0;
     link = GET_PLAYER(play);
     if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GROTTO))
         return 0;
