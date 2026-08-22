@@ -307,7 +307,7 @@ export class RandomizerPatcherChecks {
 
   private execute(): Uint8Array {
     const buffers: Uint8Array[] = [];
-    for (const locId in this.world.locations) {
+    for (const locId of this.world.locations) {
       const check = CHECKS_BY_LOCATION[locId];
       const loc = makeLocation(locId, this.ctx.worldId);
       const item = this.ctx.logic.items.get(loc)!;

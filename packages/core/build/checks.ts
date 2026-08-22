@@ -73,6 +73,7 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
       switch (ov) {
       case 'chest':
       case 'collectible':
+      case 'sf':
         {
           const sceneId = sceneLookup(scene, state);
           const value = parseInt(attrs['flag']);
@@ -86,7 +87,6 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
         }
         break;
       case 'gs':
-      case 'sf':
       case 'cow':
       case 'shop':
       case 'scrub':
@@ -99,9 +99,11 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
           const sceneId = sceneLookup(scene, state);
           const sliceId = parseInt(attrs['slice']);
           const roomId = parseInt(attrs['room']);
+          const setupId = parseInt(attrs['setup']);
+          const roomSetup = (roomId | ((setupId & 3) << 6)) & 0xff;
           const actorId = parseInt(attrs['actor']);
           const ovValue = OV_VALUES[ov] + sliceId;
-          key = makeOvKey(ovValue, sceneId, (roomId << 8) | actorId);
+          key = makeOvKey(ovValue, sceneId, (roomSetup << 8) | actorId);
         }
         break;
       default:
