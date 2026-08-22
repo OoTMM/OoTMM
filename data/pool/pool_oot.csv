@@ -2274,10 +2274,10 @@ MQ Deku Tree Basement Chest,                                chest,          NONE
 MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 DEKU_TREE_MQ,                   0x05,                       RECOVERY_HEART
 MQ Deku Tree After Water Platform Chest,                    chest,          MQ_DEKU_TIME_BLOCK,   DEKU_TREE_MQ,                   0x00,                       RUPEE_PURPLE
 MQ Deku Tree Scrub,                                         scrub,          NONE,                 DEKU_TREE,                      0x1b,                       SHIELD_DEKU
-MQ Deku Tree GS Back Room,                                  gs,             DEKU_BACK_SKULL,      DEKU_TREE,                      0x00,                       GS_TOKEN
-MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 DEKU_TREE,                      0x01,                       GS_TOKEN
-MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 DEKU_TREE,                      0x02,                       GS_TOKEN
-MQ Deku Tree GS Compass Room,                               gs,             NONE,                 DEKU_TREE,                      0x03,                       GS_TOKEN
+MQ Deku Tree GS Back Room,                                  gs,             DEKU_BACK_SKULL,      DEKU_TREE_MQ,                   0xb0,                       GS_TOKEN
+MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 DEKU_TREE_MQ,                   0xb1,                       GS_TOKEN
+MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 DEKU_TREE_MQ,                   0xb2,                       GS_TOKEN
+MQ Deku Tree GS Compass Room,                               gs,             NONE,                 DEKU_TREE_MQ,                   0xb3,                       GS_TOKEN
 MQ Deku Tree Grass Entrance Lower 1,                        grass,          NONE,                 DEKU_TREE_MQ,                   0x00005,                    DEKU_SEEDS_5
 MQ Deku Tree Grass Entrance Lower 2,                        grass,          NONE,                 DEKU_TREE_MQ,                   0x00006,                    RECOVERY_HEART
 MQ Deku Tree Grass Entrance Lower 3,                        grass,          NONE,                 DEKU_TREE_MQ,                   0x00007,                    DEKU_SEEDS_5
@@ -2356,11 +2356,11 @@ MQ Dodongo Cavern Lobby Scrub Front,                        scrub,          NONE
 MQ Dodongo Cavern Lobby Scrub Back,                         scrub,          NONE,                 DODONGO_CAVERN,                 0x1d,                       STICK
 MQ Dodongo Cavern Staircase Scrub,                          scrub,          NONE,                 DODONGO_CAVERN,                 0x1f,                       POTION_RED
 MQ Dodongo Cavern Tunnel Side Scrub,                        scrub,          NONE,                 DODONGO_CAVERN,                 0x1e,                       SHIELD_DEKU
-MQ Dodongo Cavern GS Time Blocks,                           gs,             NONE,                 DODONGO_CAVERN,                 0x0b,                       GS_TOKEN
-MQ Dodongo Cavern GS Larve Room,                            gs,             NONE,                 DODONGO_CAVERN,                 0x0c,                       GS_TOKEN
-MQ Dodongo Cavern GS Upper Lizalfos,                        gs,             NONE,                 DODONGO_CAVERN,                 0x0a,                       GS_TOKEN
-MQ Dodongo Cavern GS Poe Room Side,                         gs,             NONE,                 DODONGO_CAVERN,                 0x09,                       GS_TOKEN
-MQ Dodongo Cavern GS Near Boss,                             gs,             NONE,                 DODONGO_CAVERN,                 0x08,                       GS_TOKEN
+MQ Dodongo Cavern GS Time Blocks,                           gs,             NONE,                 DODONGO_CAVERN_MQ,              0xbb,                       GS_TOKEN
+MQ Dodongo Cavern GS Larve Room,                            gs,             NONE,                 DODONGO_CAVERN_MQ,              0xbc,                       GS_TOKEN
+MQ Dodongo Cavern GS Upper Lizalfos,                        gs,             NONE,                 DODONGO_CAVERN_MQ,              0xba,                       GS_TOKEN
+MQ Dodongo Cavern GS Poe Room Side,                         gs,             NONE,                 DODONGO_CAVERN_MQ,              0xb9,                       GS_TOKEN
+MQ Dodongo Cavern GS Near Boss,                             gs,             NONE,                 DODONGO_CAVERN_MQ,              0xb8,                       GS_TOKEN
 MQ Dodongo Cavern SR Beamos,                                sr,             NONE,                 DODONGO_CAVERN,                 0x00,                       RUPEE_SILVER_DC
 MQ Dodongo Cavern SR Crate,                                 sr,             NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_SILVER_DC
 MQ Dodongo Cavern SR Upper Corner Low,                      sr,             NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_SILVER_DC
@@ -2461,10 +2461,10 @@ MQ Jabu-Jabu SoT Room Lower Chest,                          chest,          NONE
 MQ Jabu-Jabu Boomerang Chest,                               chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x06,                       BOOMERANG
 MQ Jabu-Jabu Back Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x09,                       NUTS_5
 MQ Jabu-Jabu Pre-Boss Chest,                                chest,          NONE,                 INSIDE_JABU_JABU_MQ,            0x0a,                       RUPEE_BLUE
-MQ Jabu-Jabu GS SoT Block,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x10,                       GS_TOKEN
-MQ Jabu-Jabu GS Back,                                       gs,             NONE,                 INSIDE_JABU_JABU,               0x12,                       GS_TOKEN
-MQ Jabu-Jabu GS Basement Side Room,                         gs,             NONE,                 INSIDE_JABU_JABU,               0x13,                       GS_TOKEN
-MQ Jabu-Jabu GS Pre-Boss,                                   gs,             NONE,                 INSIDE_JABU_JABU,               0x11,                       GS_TOKEN
+MQ Jabu-Jabu GS SoT Block,                                  gs,             NONE,                 INSIDE_JABU_JABU_MQ,            0xc0,                       GS_TOKEN
+MQ Jabu-Jabu GS Back,                                       gs,             NONE,                 INSIDE_JABU_JABU_MQ,            0xc2,                       GS_TOKEN
+MQ Jabu-Jabu GS Basement Side Room,                         gs,             NONE,                 INSIDE_JABU_JABU_MQ,            0xc3,                       GS_TOKEN
+MQ Jabu-Jabu GS Pre-Boss,                                   gs,             NONE,                 INSIDE_JABU_JABU_MQ,            0xc1,                       GS_TOKEN
 MQ Jabu-Jabu Cow,                                           cow,            NONE,                 INSIDE_JABU_JABU_MQ,            0x09,                       MILK
 MQ Jabu-Jabu Pot Entrance 1,                                pot,            NONE,                 INSIDE_JABU_JABU_MQ,            0x000f,                     BOMB
 MQ Jabu-Jabu Pot Entrance 2,                                pot,            NONE,                 INSIDE_JABU_JABU_MQ,            0x0010,                     NUTS_5
@@ -2536,9 +2536,9 @@ MQ Bottom of the Well Compass Chest,                        chest,          NONE
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x01,                       LENS
 MQ Bottom of the Well Dead Hand Key,                        collectible,    NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x02,                       SMALL_KEY_BOTW
 MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x01,                       SMALL_KEY_BOTW
-MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x40,                       GS_TOKEN
-MQ Bottom of the Well GS West Middle Room,                  gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x41,                       GS_TOKEN
-MQ Bottom of the Well GS Coffin Room,                       gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x42,                       GS_TOKEN
+MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL_MQ,          0xf0,                       GS_TOKEN
+MQ Bottom of the Well GS West Middle Room,                  gs,             NONE,                 BOTTOM_OF_THE_WELL_MQ,          0xf1,                       GS_TOKEN
+MQ Bottom of the Well GS Coffin Room,                       gs,             NONE,                 BOTTOM_OF_THE_WELL_MQ,          0xf2,                       GS_TOKEN
 MQ Bottom of the Well Pot Lobby Cage 1,                     pot,            NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x0028,                     ARROWS_10
 MQ Bottom of the Well Pot Lobby Cage 2,                     pot,            NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x002a,                     BOMBS_5
 MQ Bottom of the Well Pot Lobby Cage 3,                     pot,            NONE,                 BOTTOM_OF_THE_WELL_MQ,          0x002c,                     RECOVERY_HEART
@@ -2578,9 +2578,9 @@ MQ Ice Cavern Map Chest,                                    chest,          NONE
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN_MQ,                  0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN_MQ,                  0x02,                       BOOTS_IRON
 MQ Ice Cavern Piece of Heart,                               collectible,    NONE,                 ICE_CAVERN_MQ,                  0x01,                       HEART_PIECE
-MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN,                     0x49,                       GS_TOKEN
-MQ Ice Cavern GS Scarecrow,                                 gs,             NONE,                 ICE_CAVERN,                     0x48,                       GS_TOKEN
-MQ Ice Cavern GS Clear Blocks,                              gs,             NONE,                 ICE_CAVERN,                     0x4a,                       GS_TOKEN
+MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN_MQ,                  0xf9,                       GS_TOKEN
+MQ Ice Cavern GS Scarecrow,                                 gs,             NONE,                 ICE_CAVERN_MQ,                  0xf8,                       GS_TOKEN
+MQ Ice Cavern GS Clear Blocks,                              gs,             NONE,                 ICE_CAVERN_MQ,                  0xfa,                       GS_TOKEN
 MQ Ice Cavern Pot Entrance,                                 pot,            NONE,                 ICE_CAVERN_MQ,                  0x0003,                     RECOVERY_HEART
 MQ Ice Cavern Pot First Room 1,                             pot,            NONE,                 ICE_CAVERN_MQ,                  0x0105,                     RECOVERY_HEART
 MQ Ice Cavern Pot First Room 2,                             pot,            NONE,                 ICE_CAVERN_MQ,                  0x0106,                     RECOVERY_HEART
@@ -2641,11 +2641,11 @@ MQ Forest Temple Bow Chest,                                 chest,          NONE
 MQ Forest Temple Compass Chest,                             chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0f,                       COMPASS_FOREST
 MQ Forest Temple Falling Ceiling Chest,                     chest,          NONE,                 TEMPLE_FOREST_MQ,               0x06,                       ARROWS_5
 MQ Forest Temple Antichamber,                               chest,          NONE,                 TEMPLE_FOREST_MQ,               0x0b,                       ARROWS_5
-MQ Forest Temple GS Entryway,                               gs,             NONE,                 TEMPLE_FOREST,                  0x19,                       GS_TOKEN
-MQ Forest Temple GS Climb Room,                             gs,             NONE,                 TEMPLE_FOREST,                  0x1c,                       GS_TOKEN
-MQ Forest Temple GS West Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x1a,                       GS_TOKEN
-MQ Forest Temple GS East Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x18,                       GS_TOKEN
-MQ Forest Temple GS Well,                                   gs,             NONE,                 TEMPLE_FOREST,                  0x1b,                       GS_TOKEN
+MQ Forest Temple GS Entryway,                               gs,             NONE,                 TEMPLE_FOREST_MQ,               0xc9,                       GS_TOKEN
+MQ Forest Temple GS Climb Room,                             gs,             NONE,                 TEMPLE_FOREST_MQ,               0xcc,                       GS_TOKEN
+MQ Forest Temple GS West Garden,                            gs,             NONE,                 TEMPLE_FOREST_MQ,               0xca,                       GS_TOKEN
+MQ Forest Temple GS East Garden,                            gs,             NONE,                 TEMPLE_FOREST_MQ,               0xc8,                       GS_TOKEN
+MQ Forest Temple GS Well,                                   gs,             NONE,                 TEMPLE_FOREST_MQ,               0xcb,                       GS_TOKEN
 MQ Forest Temple Pot Main Room 1,                           pot,            NONE,                 TEMPLE_FOREST_MQ,               0x0209,                     MAGIC_JAR_SMALL
 MQ Forest Temple Pot Main Room 2,                           pot,            NONE,                 TEMPLE_FOREST_MQ,               0x020a,                     MAGIC_JAR_SMALL
 MQ Forest Temple Pot Main Room 3,                           pot,            NONE,                 TEMPLE_FOREST_MQ,               0x020b,                     RECOVERY_HEART
@@ -2688,11 +2688,11 @@ MQ Fire Temple Maze Side Room Chest,                        chest,          NONE
 MQ Fire Temple Compass Chest,                               chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x0b,                       COMPASS_FIRE
 MQ Fire Temple Topmost Chest,                               chest,          NONE,                 TEMPLE_FIRE_MQ,                 0x05,                       SMALL_KEY_FIRE
 MQ Fire Temple Flare Dancer Key,                            collectible,    NONE,                 TEMPLE_FIRE_MQ,                 0x1c,                       SMALL_KEY_FIRE
-MQ Fire Temple GS Burning Block,                            gs,             NONE,                 TEMPLE_FIRE,                    0x22,                       GS_TOKEN
-MQ Fire Temple GS 1f Lava Room,                             gs,             NONE,                 TEMPLE_FIRE,                    0x20,                       GS_TOKEN
-MQ Fire Temple GS Fire Walls Side Room,                     gs,             NONE,                 TEMPLE_FIRE,                    0x24,                       GS_TOKEN
-MQ Fire Temple GS Fire Walls Middle,                        gs,             NONE,                 TEMPLE_FIRE,                    0x23,                       GS_TOKEN
-MQ Fire Temple GS Topmost,                                  gs,             NONE,                 TEMPLE_FIRE,                    0x21,                       GS_TOKEN
+MQ Fire Temple GS Burning Block,                            gs,             NONE,                 TEMPLE_FIRE_MQ,                 0xd2,                       GS_TOKEN
+MQ Fire Temple GS 1f Lava Room,                             gs,             NONE,                 TEMPLE_FIRE_MQ,                 0xd0,                       GS_TOKEN
+MQ Fire Temple GS Fire Walls Side Room,                     gs,             NONE,                 TEMPLE_FIRE_MQ,                 0xd4,                       GS_TOKEN
+MQ Fire Temple GS Fire Walls Middle,                        gs,             NONE,                 TEMPLE_FIRE_MQ,                 0xd3,                       GS_TOKEN
+MQ Fire Temple GS Topmost,                                  gs,             NONE,                 TEMPLE_FIRE_MQ,                 0xd1,                       GS_TOKEN
 MQ Fire Temple Pot Entrance 1,                              pot,            NONE,                 TEMPLE_FIRE_MQ,                 0x0009,                     MAGIC_JAR_SMALL
 MQ Fire Temple Pot Entrance 2,                              pot,            NONE,                 TEMPLE_FIRE_MQ,                 0x000a,                     MAGIC_JAR_SMALL
 MQ Fire Temple Pot Lava Room Left,                          pot,            NONE,                 TEMPLE_FIRE_MQ,                 0x0111,                     ARROWS_10
@@ -2776,11 +2776,11 @@ MQ Water Temple Longshot Chest,                             chest,          NONE
 MQ Water Temple Central Pillar Chest,                       chest,          NONE,                 TEMPLE_WATER_MQ,                0x06,                       SMALL_KEY_WATER
 MQ Water Temple Boss Key Chest,                             chest,          NONE,                 TEMPLE_WATER_MQ,                0x05,                       BOSS_KEY_WATER
 MQ Water Temple Side Loop Key,                              collectible,    NONE,                 TEMPLE_WATER_MQ,                0x01,                       SMALL_KEY_WATER
-MQ Water Temple GS Lizalfos Hallway,                        gs,             NONE,                 TEMPLE_WATER,                   0x28,                       GS_TOKEN
-MQ Water Temple GS High Water Changer,                      gs,             NONE,                 TEMPLE_WATER,                   0x2a,                       GS_TOKEN
-MQ Water Temple GS River,                                   gs,             NONE,                 TEMPLE_WATER,                   0x29,                       GS_TOKEN
-MQ Water Temple GS Three Torch,                             gs,             NONE,                 TEMPLE_WATER,                   0x2c,                       GS_TOKEN
-MQ Water Temple GS Side Loop,                               gs,             NONE,                 TEMPLE_WATER,                   0x2b,                       GS_TOKEN
+MQ Water Temple GS Lizalfos Hallway,                        gs,             NONE,                 TEMPLE_WATER_MQ,                0xd8,                       GS_TOKEN
+MQ Water Temple GS High Water Changer,                      gs,             NONE,                 TEMPLE_WATER_MQ,                0xda,                       GS_TOKEN
+MQ Water Temple GS River,                                   gs,             NONE,                 TEMPLE_WATER_MQ,                0xd9,                       GS_TOKEN
+MQ Water Temple GS Three Torch,                             gs,             NONE,                 TEMPLE_WATER_MQ,                0xdc,                       GS_TOKEN
+MQ Water Temple GS Side Loop,                               gs,             NONE,                 TEMPLE_WATER_MQ,                0xdb,                       GS_TOKEN
 MQ Water Temple Pot Skull Cage 1,                           pot,            NONE,                 TEMPLE_WATER_MQ,                0x0313,                     BOMB
 MQ Water Temple Pot Skull Cage 2,                           pot,            NONE,                 TEMPLE_WATER_MQ,                0x0314,                     BOMB
 MQ Water Temple Pot Skull Cage 3,                           pot,            NONE,                 TEMPLE_WATER_MQ,                0x0319,                     ARROWS_10
@@ -2951,11 +2951,11 @@ MQ Shadow Temple Hidden Dead Hand Chest,                    chest,          NONE
 MQ Shadow Temple Crushing Wall Left Chest,                  chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0a,                       RUPEE_BLUE
 MQ Shadow Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SHADOW_MQ,               0x0b,                       BOSS_KEY_SHADOW
 MQ Shadow Temple Triple Pot Key,                            collectible,    NONE,                 TEMPLE_SHADOW_MQ,               0x06,                       SMALL_KEY_SHADOW
-MQ Shadow Temple GS Spike Curtain,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x39,                       GS_TOKEN
-MQ Shadow Temple GS Wind Hint,                              gs,             NONE,                 TEMPLE_SHADOW,                  0x38,                       GS_TOKEN
-MQ Shadow Temple GS After Wind Bomb,                        gs,             NONE,                 TEMPLE_SHADOW,                  0x3b,                       GS_TOKEN
-MQ Shadow Temple GS After Boat,                             gs,             NONE,                 TEMPLE_SHADOW,                  0x3c,                       GS_TOKEN
-MQ Shadow Temple GS Pre-Boss,                               gs,             NONE,                 TEMPLE_SHADOW,                  0x3a,                       GS_TOKEN
+MQ Shadow Temple GS Spike Curtain,                          gs,             NONE,                 TEMPLE_SHADOW_MQ,               0xe9,                       GS_TOKEN
+MQ Shadow Temple GS Wind Hint,                              gs,             NONE,                 TEMPLE_SHADOW_MQ,               0xe8,                       GS_TOKEN
+MQ Shadow Temple GS After Wind Bomb,                        gs,             NONE,                 TEMPLE_SHADOW_MQ,               0xeb,                       GS_TOKEN
+MQ Shadow Temple GS After Boat,                             gs,             NONE,                 TEMPLE_SHADOW_MQ,               0xec,                       GS_TOKEN
+MQ Shadow Temple GS Pre-Boss,                               gs,             NONE,                 TEMPLE_SHADOW_MQ,               0xea,                       GS_TOKEN
 MQ Shadow Temple SR Scythe 1,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x19,                       RUPEE_SILVER_SHADOW_SCYTHE
 MQ Shadow Temple SR Scythe 2,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x1a,                       RUPEE_SILVER_SHADOW_SCYTHE
 MQ Shadow Temple SR Scythe 3,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x1b,                       RUPEE_SILVER_SHADOW_SCYTHE
@@ -3044,11 +3044,11 @@ MQ Spirit Temple Beamos Room Chest,                         chest,          NONE
 MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x18,                       ICE_TRAP
 MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x05,                       BOSS_KEY_SPIRIT
 MQ Spirit Temple Topmost Chest,                             chest,          NONE,                 TEMPLE_SPIRIT_MQ,               0x12,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple GS Sun Block Room,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x30,                       GS_TOKEN
-MQ Spirit Temple GS Leever Room,                            gs,             NONE,                 TEMPLE_SPIRIT,                  0x31,                       GS_TOKEN
-MQ Spirit Temple GS Symphony Room,                          gs,             NONE,                 TEMPLE_SPIRIT,                  0x33,                       GS_TOKEN
-MQ Spirit Temple GS Top Floor Left Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x32,                       GS_TOKEN
-MQ Spirit Temple GS Top Floor Back Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x34,                       GS_TOKEN
+MQ Spirit Temple GS Sun Block Room,                         gs,             NONE,                 TEMPLE_SPIRIT_MQ,               0xe0,                       GS_TOKEN
+MQ Spirit Temple GS Leever Room,                            gs,             NONE,                 TEMPLE_SPIRIT_MQ,               0xe1,                       GS_TOKEN
+MQ Spirit Temple GS Symphony Room,                          gs,             NONE,                 TEMPLE_SPIRIT_MQ,               0xe3,                       GS_TOKEN
+MQ Spirit Temple GS Top Floor Left Wall,                    gs,             NONE,                 TEMPLE_SPIRIT_MQ,               0xe2,                       GS_TOKEN
+MQ Spirit Temple GS Top Floor Back Wall,                    gs,             NONE,                 TEMPLE_SPIRIT_MQ,               0xe4,                       GS_TOKEN
 MQ Spirit Temple SR Lobby After Water Near Stairs,          sr,             NONE,                 TEMPLE_SPIRIT,                  0x0a,                       RUPEE_SILVER_SPIRIT_LOBBY
 MQ Spirit Temple SR Lobby Rock Right,                       sr,             NONE,                 TEMPLE_SPIRIT,                  0x0b,                       RUPEE_SILVER_SPIRIT_LOBBY
 MQ Spirit Temple SR Lobby Rock Left,                        sr,             NONE,                 TEMPLE_SPIRIT,                  0x0c,                       RUPEE_SILVER_SPIRIT_LOBBY
