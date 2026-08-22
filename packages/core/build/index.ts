@@ -3,6 +3,7 @@ import type { GossipDefinition } from '../src/gossips';
 import { gameId } from '../src/util';
 import { GAMES } from '../src/defines';
 import { loadCsv, loadTxt, loadYaml, emit } from './helpers';
+import { buildChecks } from './checks';
 
 const DATA_WORLD = {
   oot: {
@@ -74,11 +75,6 @@ const MACROS = {
   mm: loadYaml('macros/macros_mm.yml'),
 };
 
-const POOL = {
-  oot: loadCsv('pool/pool_oot.csv'),
-  mm: loadCsv('pool/pool_mm.csv'),
-};
-
 function buildGossips() {
   const raw = {
     oot: loadCsv('gossips/gossips_oot.csv'),
@@ -106,17 +102,31 @@ function buildGossips() {
   emit('data-gossips', result);
 }
 
-emit('data-world', DATA_WORLD);
-emit('data-scenes', loadYaml('defs/scenes.yml'));
-emit('data-npc', loadYaml('defs/npc.yml'));
-emit('data-regions', loadYaml('defs/regions.yml'));
-emit('data-hints', loadYaml('defs/hints.yml'));
-emit('data-entrances', loadYaml('defs/entrances.yml'));
-emit('data-gi', loadYaml('defs/gi.yml'));
-emit('data-drawgi', loadYaml('defs/drawgi.yml'));
-emit('data-files', DATA_FILES);
-emit('data-macros', MACROS);
-emit('data-pool', POOL);
-emit('data-link-animations', loadYaml('defs/link-animations.yml'));
+async function run() {
+  const scenes = loadYaml('defs/scenes.yml');
+  const npcs = loadYaml('defs/npc.yml');
+  const checks = await buildChecks({ scenes, npcs });
 
-buildGossips();
+  emit('data-scenes', scenes);
+  emit('data-npc', npcs);
+  emit('data-checks', checks);
+
+  emit('data-world', DATA_WORLD);
+  emit('data-regions', loadYaml('defs/regions.yml'));
+  emit('data-hints', loadYaml('defs/hints.yml'));
+  emit('data-entrances', loadYaml('defs/entrances.yml'));
+  emit('data-gi', loadYaml('defs/gi.yml'));
+  emit('data-drawgi', loadYaml('defs/drawgi.yml'));
+  emit('data-files', DATA_FILES);
+  emit('data-macros', MACROS);
+  emit('data-link-animations', loadYaml('defs/link-animations.yml'));
+
+  buildGossips();
+}
+
+run().then(() => {
+
+}).catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

@@ -20,7 +20,8 @@
     "@types/pako": "^2.0.4",
     "csv": "^6.5.1",
     "type-fest": "catalog:",
-    "yaml": "catalog:"
+    "yaml": "catalog:",
+    "fast-xml-parser": "catalog:"
   },
   "nx": {
     "targets": {
