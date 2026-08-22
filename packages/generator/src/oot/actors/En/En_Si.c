@@ -20,7 +20,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
     default:
         UNREACHABLE();
     }
-    key += ((((this->params + 0x100) >> 8) & 0x1f) * 8);
+    key += (((this->params >> 8) & 0x1f) * 8);
 
     bzero(q, sizeof(*q));
     q->ovType = OV_GS;

@@ -305,7 +305,7 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         BITMAP8_SET(gSharedCustomSave.oot.npc, id);
         break;
     case OV_GS:
-        BITMAP32_SET(gOotSave.info.gsFlags, id - 8);
+        BITMAP32_SET(gOotSave.info.gsFlags, id);
         break;
     case OV_SF:
         break;
@@ -381,7 +381,7 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_NPC:
         return BITMAP8_GET(gSharedCustomSave.oot.npc, id);
     case OV_GS:
-        return BITMAP32_GET(gOotSave.info.gsFlags, id - 8);
+        return BITMAP32_GET(gOotSave.info.gsFlags, id);
     case OV_SF:
         break;
     case OV_COW:
