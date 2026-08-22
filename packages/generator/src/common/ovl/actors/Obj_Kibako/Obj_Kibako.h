@@ -22,7 +22,6 @@ typedef struct Actor_ObjKibako
 #endif
 
     Xflag xflag;
-    u8    isExtended:1;
 }
 Actor_ObjKibako;
 

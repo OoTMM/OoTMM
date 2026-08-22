@@ -8,7 +8,7 @@ static void ItemBHeart_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play
 
     q->ovType = OV_COLLECTIBLE;
     q->gi = GI_OOT_HEART_CONTAINER;
-    q->sceneId = play->sceneId;
+    q->sceneId = Play_SceneKey(play->sceneId);
     q->id = 0x1f;
 }
 

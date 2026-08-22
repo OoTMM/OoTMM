@@ -401,7 +401,7 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
 
-    if (comboXflagInit(&this->xflag, &this->actor, play)) {
+    if (Xflag_Init(&this->xflag, &this->actor, play)) {
         switch (type)
         {
         case ROCK_SMALL:

@@ -238,7 +238,7 @@ void ObjMure2_Alias(Actor_ObjMure2* this, PlayState* play)
 
 void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)
 {
-    comboXflagInit(&this->xflag, &this->actor, play);
+    Xflag_Init(&this->xflag, &this->actor, play);
     ObjMure2_Alias(this, play);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);

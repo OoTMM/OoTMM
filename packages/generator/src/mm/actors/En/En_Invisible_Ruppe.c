@@ -53,7 +53,7 @@ void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, PlayState* play)
     EnInvisibleRuppeFunc init;
 
     /* Setup the xflag */
-    comboXflagInit(&this->xflag, &this->base, play);
+    Xflag_Init(&this->xflag, &this->base, play);
     this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     switchFlag = (this->base.params & 0x1fc) >> 2;

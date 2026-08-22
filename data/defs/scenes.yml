@@ -100,6 +100,19 @@ OOT_GORON_CITY:                          0x62
 OOT_LON_LON_RANCH:                       0x63
 OOT_GANON_CASTLE_EXTERIOR:               0x64
 
+OOT_DEKU_TREE_MQ:                       0x70
+OOT_DODONGO_CAVERN_MQ:                  0x71
+OOT_INSIDE_JABU_JABU_MQ:                0x72
+OOT_TEMPLE_FOREST_MQ:                   0x73
+OOT_TEMPLE_FIRE_MQ:                     0x74
+OOT_TEMPLE_WATER_MQ:                    0x75
+OOT_TEMPLE_SPIRIT_MQ:                   0x76
+OOT_TEMPLE_SHADOW_MQ:                   0x77
+OOT_BOTTOM_OF_THE_WELL_MQ:              0x78
+OOT_ICE_CAVERN_MQ:                      0x79
+OOT_GERUDO_TRAINING_GROUND_MQ:          0x7b
+OOT_INSIDE_GANON_CASTLE_MQ:             0x7d
+
 MM_SOUTHERN_SWAMP_CLEAR:                0x00
 MM_GROTTOS:                             0x07
 MM_CUTSCENE_MAP:                        0x08

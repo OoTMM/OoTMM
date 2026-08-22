@@ -14,6 +14,7 @@ import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
 
 import { setupAssetsMap } from './build/build-assets-map';
+import { buildManifests } from './build/build-manifests';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
@@ -87,6 +88,7 @@ async function build() {
     comboCodegen(dummyMonitor),
     cosmeticsAssets(),
     setupAssetsMap(),
+    buildManifests(),
   ]);
 
   const installDir = await buildNative();

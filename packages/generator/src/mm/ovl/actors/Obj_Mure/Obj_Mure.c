@@ -97,7 +97,7 @@ void ObjMure_Alias(Actor_ObjMure* this)
 
 void ObjMure_Init(Actor_ObjMure* this, PlayState* play)
 {
-    comboXflagInit(&this->xflag, &this->actor, play);
+    Xflag_Init(&this->xflag, &this->actor, play);
     if (!g.xflagOverride)
         ObjMure_Alias(this);
 

@@ -12,47 +12,11 @@ void ObjKibako_Update(Actor_ObjKibako* this, PlayState* play);
 void ObjKibako_Draw(Actor_ObjKibako* this, PlayState* play);
 void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play);
 
-static int ObjKibako_IsExtended(Actor_ObjKibako* this)
-{
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
-}
-
-#if defined(GAME_OOT)
-static void ObjKibako_Alias(Actor_ObjKibako* this)
-{
-}
-#endif
-
-#if defined(GAME_MM)
-static void ObjKibako_Alias(Actor_ObjKibako* this)
-{
-}
-#endif
-
-static void ObjKibako_InitXflag(Actor_ObjKibako* this, PlayState* play)
-{
-    ComboItemOverride o;
-
-    /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->actor.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = this->actor.actorIndex;
-
-    /* Fix the aliases */
-    ObjKibako_Alias(this);
-
-    /* Detect xflags */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
-}
-
 static int ObjKibako_CsmcType(Actor_ObjKibako* this)
 {
     ComboItemOverride o;
 
-    if (!ObjKibako_IsExtended(this))
+    if (!Xflag_IsShuffled(&this->xflag))
         return CSMC_NORMAL;
 
     comboXflagItemOverride(&o, &this->xflag, 0);
@@ -146,7 +110,7 @@ void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play)
 {
     s16 collectible;
 
-    if (ObjKibako_IsExtended(this))
+    if (Xflag_IsShuffled(&this->xflag))
     {
         EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
         return;
@@ -174,9 +138,9 @@ void ObjKibako_InitCollider(Actor_ObjKibako* this, PlayState* play)
 
 void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
 {
-    ObjKibako_InitXflag(this, play);
     this->actor.draw = ObjKibako_Draw;
     Actor_ProcessInitChain(&this->actor, sInitChain);
+    Xflag_Init(&this->xflag, &this->actor, play);
     this->actor.gravity = -1.2f;
     this->actor.minVelocityY = -13.0f;
     ObjKibako_InitCollider(this, play);
@@ -440,7 +404,7 @@ void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play)
 {
     s32 dropItem00Id;
 
-    if (ObjKibako_IsExtended(this))
+    if (Xflag_IsShuffled(&this->xflag))
     {
         EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
         return;
@@ -497,7 +461,7 @@ void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
 {
     s32 objectIndex;
 
-    ObjKibako_InitXflag(this, play);
+    Xflag_Init(&this->xflag, &this->actor, play);
     objectIndex = KIBAKO_BANK_INDEX(this);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Actor_SetScale(&this->actor, 0.15f);
@@ -633,7 +597,7 @@ void ObjKibako_Idle(Actor_ObjKibako* this, PlayState* play)
         ObjKibako_SetupHeld(this);
         this->actor.room = -1;
         this->actor.colChkInfo.mass = 120;
-        if (Item_CollectibleDropTable2(KIBAKO_COLLECTIBLE_ID(this)) && !ObjKibako_IsExtended(this)) {
+        if (Item_CollectibleDropTable2(KIBAKO_COLLECTIBLE_ID(this)) && !Xflag_IsShuffled(&this->xflag)) {
             ObjKibako_SpawnCollectible(this, play);
         }
 

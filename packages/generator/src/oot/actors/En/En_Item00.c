@@ -12,13 +12,13 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
     {
     case 0x06:
         q->ovType = OV_COLLECTIBLE;
-        q->sceneId = play->sceneId;
+        q->sceneId = Play_SceneKey(play->sceneId);
         q->id = this->collectibleFlag;
         q->gi = GI_OOT_HEART_PIECE;
         break;
     case 0x11:
         q->ovType = OV_COLLECTIBLE;
-        q->sceneId = play->sceneId;
+        q->sceneId = Play_SceneKey(play->sceneId);
         q->id = this->collectibleFlag;
         q->gi = GI_OOT_SMALL_KEY;
         break;

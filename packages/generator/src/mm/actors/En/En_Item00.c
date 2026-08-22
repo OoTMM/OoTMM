@@ -12,7 +12,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
     if (this->actor.params == 0x06)
     {
         q->ovType = OV_COLLECTIBLE;
-        q->sceneId = comboSceneKey(play->sceneId);
+        q->sceneId = Play_SceneKey(play->sceneId);
         q->id = this->collectibleFlag;
         q->gi = gi;
     }

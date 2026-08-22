@@ -12,7 +12,7 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play, s16
     if (!(play->sceneId == SCE_OOT_TREASURE_SHOP && gi != -GI_OOT_TC_HEART_PIECE && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE)))
     {
         q->ovType = OV_CHEST;
-        q->sceneId = play->sceneId;
+        q->sceneId = Play_SceneKey(play->sceneId);
         q->id = this->params & 0x1f;
     }
     else

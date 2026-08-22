@@ -36,7 +36,6 @@ struct Actor_ObjComb
 #endif
 
     Xflag   xflag;
-    u8      isExtended;
 };
 
 #endif

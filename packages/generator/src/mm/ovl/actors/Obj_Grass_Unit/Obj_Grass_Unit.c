@@ -169,7 +169,7 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
     if (grassGroup->count > 0) {
         /* Init xflag */
         xf = &grassManager->xflag[grassManager->activeGrassGroups];
-        if (comboXflagInit(xf, this, play)) {
+        if (Xflag_Init(xf, this, play)) {
             ObjGrassUnit_Alias(xf);
         }
 

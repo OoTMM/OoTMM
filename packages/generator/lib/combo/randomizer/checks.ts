@@ -295,7 +295,7 @@ const checkId = (check: WorldCheck) => {
   return check.id;
 }
 
-function checkKey(check: WorldCheck): number {
+export function checkKey(check: WorldCheck): number {
   /* Extract the ID */
   const id = checkId(check);
 

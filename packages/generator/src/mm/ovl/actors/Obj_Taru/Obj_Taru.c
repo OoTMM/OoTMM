@@ -65,16 +65,9 @@ static int ObjTaru_DropCustom(Actor_ObjTaru* this, PlayState* play)
 static void ObjTaru_InitXflag(Actor_ObjTaru* this, PlayState* play)
 {
     ComboItemOverride   o;
-    Xflag*              xflag;
 
     /* Set the extended properties */
-    xflag = &this->xflag;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->dyna.actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->dyna.actor.actorIndex;
-
+    Xflag_Init(&this->xflag, &this->dyna.actor, play);
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
 }

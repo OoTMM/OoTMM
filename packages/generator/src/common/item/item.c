@@ -1,15 +1,17 @@
 #include <combo.h>
-#include <combo/item.h>
-#include <combo/dma.h>
-#include <combo/entrance.h>
-#include <combo/io.h>
-#include <combo/config.h>
-#include <combo/shop.h>
-#include <combo/global.h>
-#include <combo/multi.h>
 #include <combo/actor.h>
+#include <combo/config.h>
+#include <combo/dma.h>
+#include <combo/dungeon.h>
+#include <combo/entrance.h>
+#include <combo/global.h>
 #include <combo/inventory.h>
+#include <combo/io.h>
+#include <combo/item.h>
 #include <combo/mark.h>
+#include <combo/multi.h>
+#include <combo/play.h>
+#include <combo/shop.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -411,8 +413,12 @@ void comboInitOverride(void)
     sComboOverridesCacheCursor = 0;
 }
 
-u8 comboSceneKey(u8 sceneId)
+u8 Play_SceneKey(u8 sceneId)
 {
+#if defined(GAME_OOT)
+    sceneId = Play_ExpandMQ(gPlay, sceneId);
+#endif
+
 #if defined(GAME_MM)
     switch (sceneId)
     {

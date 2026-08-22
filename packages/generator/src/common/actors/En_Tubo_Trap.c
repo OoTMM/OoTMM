@@ -21,7 +21,7 @@ void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, PlayState* play)
     ActorFunc EnTuboTrap_Init;
 
     /* Xflag init */
-    comboXflagInit(&this->xflag, &this->base, play);
+    Xflag_Init(&this->xflag, &this->base, play);
     this->isExtended = Xflag_IsShuffled(&this->xflag);
 
     /* Forward init */

@@ -99,7 +99,7 @@ static void ObjSzprize_Alias(Xflag* xf)
 void ObjSwprize_Init(Actor* thisx, PlayState* play) {
     ObjSwprize* this = (ObjSwprize*)thisx;
 
-    if (comboXflagInit(&this->xflag, thisx, play)) {
+    if (Xflag_Init(&this->xflag, thisx, play)) {
         ObjSzprize_Alias(&this->xflag);
     }
 

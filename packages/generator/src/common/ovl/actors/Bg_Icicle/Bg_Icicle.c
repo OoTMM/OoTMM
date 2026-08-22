@@ -70,7 +70,7 @@ static InitChainEntry sInitChain[] = {
 
 static void BgIcicle_InitXflag(Actor_BgIcicle* this, PlayState* play)
 {
-    comboXflagInit(&this->xflag, &this->dyna.actor, play);
+    Xflag_Init(&this->xflag, &this->dyna.actor, play);
     this->isExtended = Xflag_IsShuffled(&this->xflag);
 }
 

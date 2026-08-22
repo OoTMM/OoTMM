@@ -190,7 +190,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
     f32 floorY;
     s16 extraRot;
 
-    comboXflagInit(&this->xflag, thisx, play);
+    Xflag_Init(&this->xflag, thisx, play);
 
     this->actor.world.rot.z = 0;
     this->unk_144 = ENWOOD02_GET_FF00(&this->actor);

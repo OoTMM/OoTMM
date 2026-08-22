@@ -60,7 +60,7 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtendedMajor = 0;
 
     /* Init the xflag */
-    if (comboXflagInit(&this->xflag, &this->actor, play))
+    if (Xflag_Init(&this->xflag, &this->actor, play))
     {
         switch (this->actor.params & 0xff)
         {

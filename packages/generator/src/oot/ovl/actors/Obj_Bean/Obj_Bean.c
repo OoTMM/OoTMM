@@ -532,7 +532,7 @@ void ObjBean_Init(Actor* thisx, PlayState* play) {
     s32 path;
     ObjBean* this = (ObjBean*)thisx;
 
-    if (comboXflagInit(&sXflag, thisx, play)) {
+    if (Xflag_Init(&sXflag, thisx, play)) {
         ObjBean_Alias();
     }
 

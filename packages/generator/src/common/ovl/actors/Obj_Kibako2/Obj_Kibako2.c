@@ -6,13 +6,6 @@
 
 #define FLAGS 0
 
-static int ObjKibako2_IsShuffled(Actor_ObjKibako2* this)
-{
-    if (!this->isExtended || comboXflagsGet(&this->xflag))
-        return 0;
-    return 1;
-}
-
 #if defined(GAME_OOT)
 # define SEGADDR_COLLIDER       ((void*)0x06000b70)
 # define SEGADDR_CRATE_DL       ((void*)0x06000960)
@@ -93,7 +86,7 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, PlayState* play)
     s16 itemDropped;
     s16 collectibleFlagTemp;
 
-    if (ObjKibako2_IsShuffled(this))
+    if (Xflag_IsShuffled(&this->xflag))
     {
         EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
         return;
@@ -245,7 +238,7 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, PlayState* play)
 {
     s32 dropItem00Id;
 
-    if (ObjKibako2_IsShuffled(this))
+    if (Xflag_IsShuffled(&this->xflag))
     {
         EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
         return;
@@ -456,32 +449,14 @@ static void ObjKibako2_Alias(Actor_ObjKibako2* this)
 }
 #endif
 
-static void ObjKibako2_InitXflag(Actor_ObjKibako2* this, PlayState* play)
-{
-    ComboItemOverride o;
-
-    /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->dyna.actor.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = this->dyna.actor.actorIndex;
-
-    /* Fix the aliases */
-    ObjKibako2_Alias(this);
-
-    /* Detect xflags */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
-}
-
 #if defined(GAME_OOT)
 static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 {
     CollisionHeader* colHeader;
     u32 bgId;
 
-    ObjKibako2_InitXflag(this, play);
+    if (Xflag_Init(&this->xflag, &this->dyna.actor, play))
+        ObjKibako2_Alias(this);
     colHeader = NULL;
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -500,7 +475,8 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 {
     s32 contents;
 
-    ObjKibako2_InitXflag(this, play);
+    if (Xflag_Init(&this->xflag, &this->dyna.actor, play))
+        ObjKibako2_Alias(this);
     contents = KIBAKO2_CONTENTS(this);
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -570,7 +546,7 @@ static int ObjKibako2_CsmcType(Actor_ObjKibako2* this)
 {
     ComboItemOverride o;
 
-    if (!ObjKibako2_IsShuffled(this))
+    if (!Xflag_IsShuffled(&this->xflag))
         return CSMC_NORMAL;
 
     comboXflagItemOverride(&o, &this->xflag, 0);

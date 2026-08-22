@@ -139,7 +139,7 @@
     ICE_MQ_FINAL_ROOM_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "MQ Ice Cavern Iron Boots": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
-    "MQ Ice Cavern Sheik Song": "event(ICE_MQ_FINAL_ROOM_CLEAR) && soul_npc(SOUL_NPC_SHEIK)"
+    "Ice Cavern Sheik Song": "event(ICE_MQ_FINAL_ROOM_CLEAR) && soul_npc(SOUL_NPC_SHEIK)"
 
 "Ice Cavern Serenade Room Inside Pit of Water":
   dungeon: IC

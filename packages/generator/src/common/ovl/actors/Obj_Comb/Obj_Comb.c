@@ -10,76 +10,12 @@
 void ObjComb_Init(Actor_ObjComb* this, PlayState* play);
 void ObjComb_Update(Actor_ObjComb* this, PlayState* play);
 
-static int ObjComb_IsShuffled(Actor_ObjComb* this)
-{
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
-}
-
 static int ObjComb_DropCustom(Actor_ObjComb* this, PlayState* play)
 {
-    if (!ObjComb_IsShuffled(this))
+    if (!Xflag_IsShuffled(&this->xflag))
         return 0;
     EnItem00_DropCustomNoInertia(play, &this->actor.world.pos, &this->xflag);
     return 1;
-}
-
-static void ObjComb_InitXflag(Actor_ObjComb* this, PlayState* play)
-{
-    ComboItemOverride   o;
-    Xflag*              xflag;
-
-    /* Set the extended properties */
-    xflag = &this->xflag;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->actor.actorIndex;
-
-#if defined(GAME_OOT)
-    if (xflag->sceneId == SCE_OOT_GROTTOS)
-    {
-        /* Grottos */
-        switch (xflag->roomId)
-        {
-        case 0x00:
-            /* Genertic grottos */
-            xflag->roomId = 0x20 | (gGrottoData & 0x1f);
-            break;
-        case 0x09:
-            /* Scrubs x2 */
-            switch (gLastScene)
-            {
-            case SCE_OOT_SACRED_FOREST_MEADOW: xflag->roomId = 0x21; break;
-            case SCE_OOT_ZORA_RIVER: xflag->roomId = 0x24; break;
-            case SCE_OOT_GERUDO_VALLEY: xflag->roomId = 0x25; break;
-            case SCE_OOT_DESERT_COLOSSUS: xflag->roomId = 0x26; break;
-            default: UNREACHABLE(); break;
-            }
-            break;
-        case 0x0c:
-            /* Scrubs x3 */
-            switch (gLastScene)
-            {
-            case SCE_OOT_LON_LON_RANCH: xflag->roomId = 0x27; break;
-            case SCE_OOT_GORON_CITY: xflag->roomId = 0x2a; break;
-            case SCE_OOT_DEATH_MOUNTAIN_CRATER: xflag->roomId = 0x2b; break;
-            case SCE_OOT_LAKE_HYLIA: xflag->roomId = 0x2d; break;
-            default: UNREACHABLE(); break;
-            }
-            break;
-        }
-    }
-#endif
-
-#if defined(GAME_MM)
-    if (xflag->roomId == 0x0a && gLastScene == SCE_MM_GREAT_BAY_COAST)
-        xflag->roomId = 0x0f;
-#endif
-
-    /* Detect xflags */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
 }
 
 #if defined(GAME_OOT)
@@ -214,8 +150,8 @@ void ObjComb_ChooseItemDrop(Actor_ObjComb* this, PlayState* play)
 
 void ObjComb_Init(Actor_ObjComb* this, PlayState* play)
 {
-    ObjComb_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
+    Xflag_Init(&this->xflag, &this->actor, play);
     Collider_InitJntSph(play, &this->collider);
     Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
     ObjComb_SetupWait(this);
@@ -605,8 +541,8 @@ void ObjComb_Init(Actor_ObjComb* this, PlayState* play)
 {
     s32 sp2C = OBJCOMB_GET_8000(this) | OBJCOMB_GET_80(this);
 
-    ObjComb_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
+    Xflag_Init(&this->xflag, &this->actor, play);
     Collider_InitJntSph(play, &this->collider);
 
     if ((sp2C == 1) && OBJCOMB_GET_10(this) && MM_GET_EVENT_WEEK(EV_MM_WEEK_PIRATES_BEES))
@@ -858,7 +794,7 @@ static int ObjComb_CsmcType(Actor_ObjComb* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!ObjComb_IsShuffled(this))
+    if (!Xflag_IsShuffled(&this->xflag))
         return CSMC_NORMAL;
 
     if (!csmcEnabled())

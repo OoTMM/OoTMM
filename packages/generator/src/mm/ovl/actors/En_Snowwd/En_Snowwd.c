@@ -74,7 +74,7 @@ static void EnSnowwd_Alias(Xflag* xf)
 void EnSnowwd_Init(Actor* thisx, PlayState* play) {
     EnSnowwd* this = (EnSnowwd*)thisx;
 
-    if (comboXflagInit(&this->xflag, thisx, play)) {
+    if (Xflag_Init(&this->xflag, thisx, play)) {
         EnSnowwd_Alias(&this->xflag);
     }
 

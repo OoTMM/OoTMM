@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/mark.h>
+#include <combo/play.h>
 
 /* TODO: This system is a big mess, reorganize this someday */
 
@@ -8,7 +9,12 @@ u32 gMarkCollectibles;
 u32 gMarkSwitch0;
 u32 gMarkSwitch1;
 
-static int mmSceneId(int sceneId)
+static int Mark_NormalizeSceneIdOot(int sceneId)
+{
+    return Play_MergeMQ(sceneId);
+}
+
+static int Mark_NormalizeSceneIdMm(int sceneId)
 {
     switch (sceneId)
     {
@@ -24,15 +30,17 @@ static int mmSceneId(int sceneId)
         return SCE_MM_TWIN_ISLANDS_WINTER;
     case SCE_MM_STONE_TOWER_INVERTED:
         return SCE_MM_STONE_TOWER;
-    default:
-        return sceneId;
     }
+
+    return sceneId;
 }
 
 static int getChestMarkOot(PlayState* play, int sceneId, int flagId)
 {
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
+
 #if defined(GAME_OOT)
-    if (play && play->sceneId == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
         return !!(gMarkChests & (1 << flagId));
 #endif
 
@@ -41,10 +49,10 @@ static int getChestMarkOot(PlayState* play, int sceneId, int flagId)
 
 static int getChestMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkChests & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].chest & (1 << flagId))
         return 1;
@@ -55,8 +63,10 @@ static int getChestMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setChestMarkOot(PlayState* play, int sceneId, int flagId)
 {
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
+
 #if defined(GAME_OOT)
-    if (play && play->sceneId == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
     {
         SetChestFlag(play, flagId);
         gMarkChests |= (1 << flagId);
@@ -69,10 +79,10 @@ static void setChestMarkOot(PlayState* play, int sceneId, int flagId)
 
 static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         SetChestFlag(play, flagId);
         gMarkChests |= (1 << flagId);
@@ -86,8 +96,10 @@ static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 {
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
+
 #if defined(GAME_OOT)
-    if (play && play->sceneId == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
         return !!(gMarkCollectibles & (1 << flagId));
 #endif
 
@@ -96,10 +108,10 @@ static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 
 static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkCollectibles & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].collectible & (1 << flagId))
         return 1;
@@ -110,8 +122,10 @@ static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 {
+    sceneId = Mark_NormalizeSceneIdOot(sceneId);
+
 #if defined(GAME_OOT)
-    if (play && play->sceneId == sceneId)
+    if (play && Mark_NormalizeSceneIdOot(play->sceneId) == sceneId)
     {
         Flags_SetCollectible(play, flagId);
         gMarkCollectibles |= (1 << flagId);
@@ -124,10 +138,10 @@ static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
 
 static void setCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         Flags_SetCollectible(play, flagId);
         gMarkCollectibles |= (1 << flagId);
@@ -141,10 +155,10 @@ static void setCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkSwitch0 & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].switch0 & (1 << flagId))
         return 1;
@@ -155,10 +169,10 @@ static int getSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 
 static int getSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
         return !!(gMarkSwitch1 & (1 << flagId));
     if (gSaveContext.cycleSceneFlags[sceneId].switch1 & (1 << flagId))
         return 1;
@@ -177,10 +191,10 @@ static int getSwitchMarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         Flags_SetSwitch(play, flagId);
         gMarkSwitch0 |= (1 << flagId);
@@ -194,10 +208,10 @@ static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
 
 static void setSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
 {
-    sceneId = mmSceneId(sceneId);
+    sceneId = Mark_NormalizeSceneIdMm(sceneId);
 
 #if defined(GAME_MM)
-    if (play && mmSceneId(play->sceneId) == sceneId)
+    if (play && Mark_NormalizeSceneIdMm(play->sceneId) == sceneId)
     {
         Flags_SetSwitch(play, flagId | 0x20);
         gMarkSwitch1 |= (1 << flagId);
@@ -275,6 +289,20 @@ static void setXflagsMarkMm(PlayState* play, int sliceId, int sceneId, int roomI
     comboXflagsSetMm(&xf);
 }
 
+static int getGsFlagOot(int id)
+{
+    if (id > 0xb0)
+        id -= 0xb0;
+    return BITMAP32_GET(gOotSave.info.gsFlags, id);
+}
+
+static void setGsFlagOot(int id)
+{
+    if (id > 0xb0)
+        id -= 0xb0;
+    BITMAP32_SET(gOotSave.info.gsFlags, id);
+}
+
 void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     switch (ovType)
@@ -291,7 +319,7 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         BITMAP8_SET(gSharedCustomSave.oot.npc, id);
         break;
     case OV_GS:
-        BITMAP32_SET(gOotSave.info.gsFlags, id - 8);
+        setGsFlagOot(id);
         break;
     case OV_SF:
         break;
@@ -302,10 +330,10 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         BITMAP8_SET(gSharedCustomSave.oot.shops, id);
         break;
     case OV_SCRUB:
-        BITMAP8_SET(gSharedCustomSave.oot.scrubs, id);
+        BITMAP8_SET(gSharedCustomSave.oot.scrubs, id & 0x7f);
         break;
     case OV_SR:
-        BITMAP8_SET(gSharedCustomSave.oot.sr, id);
+        BITMAP8_SET(gSharedCustomSave.oot.sr, id & 0x7f);
         break;
     case OV_FISH:
         BITMAP8_SET(gSharedCustomSave.caughtFishFlags, id);
@@ -367,7 +395,7 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_NPC:
         return BITMAP8_GET(gSharedCustomSave.oot.npc, id);
     case OV_GS:
-        return BITMAP32_GET(gOotSave.info.gsFlags, id - 8);
+        return getGsFlagOot(id);
     case OV_SF:
         break;
     case OV_COW:
@@ -375,9 +403,9 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_SHOP:
         return BITMAP8_GET(gSharedCustomSave.oot.shops, id);
     case OV_SCRUB:
-        return BITMAP8_GET(gSharedCustomSave.oot.scrubs, id);
+        return BITMAP8_GET(gSharedCustomSave.oot.scrubs, id & 0x7f);
     case OV_SR:
-        return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
+        return BITMAP8_GET(gSharedCustomSave.oot.sr, id & 0x7f);
     case OV_FISH:
         return BITMAP8_GET(gSharedCustomSave.caughtFishFlags, id);
     default:

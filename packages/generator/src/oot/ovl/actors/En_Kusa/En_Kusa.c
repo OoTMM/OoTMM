@@ -283,7 +283,7 @@ void EnKusa_InitCollider(Actor* thisx, PlayState* play) {
 void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = (EnKusa*)thisx;
 
-    if (comboXflagInit(&this->xflag, thisx, play))
+    if (Xflag_Init(&this->xflag, thisx, play))
         EnKusa_Aliases(&this->xflag);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
