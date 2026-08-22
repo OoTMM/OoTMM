@@ -210,17 +210,9 @@ static int ObjSnowball_DropCustom(Actor_ObjSnowball* this, PlayState* play)
 static void ObjSnowball_InitXflag(Actor_ObjSnowball* this, PlayState* play)
 {
     ComboItemOverride   o;
-    Xflag*              xflag;
 
-    /* Set the extended properties */
-    xflag = &this->xflag;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->actor.actorIndex;
-
-    ObjSnowball_Alias(this);
+    if (Xflag_Init(&this->xflag, &this->actor, play))
+        ObjSnowball_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));

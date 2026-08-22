@@ -76,17 +76,9 @@ static void BgIceShelter_Alias(Actor_BgIceShelter* this)
 static void BgIceShelter_InitXflag(Actor_BgIceShelter* this, PlayState* play)
 {
     ComboItemOverride   o;
-    Xflag*              xflag;
 
-    /* Set the extended properties */
-    xflag = &this->xflag;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->dyna.actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->dyna.actor.actorIndex;
-
-    BgIceShelter_Alias(this);
+    if (Xflag_Init(&this->xflag, &this->dyna.actor, play))
+        BgIceShelter_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
