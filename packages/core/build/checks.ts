@@ -67,8 +67,6 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
       let hint = attrs['hint'];
       if (hint) {
         hint = gameId(game, hint, '_');
-      } else {
-        hint = 'NONE';
       }
       let key: number;
 
@@ -111,12 +109,14 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
       }
 
       entries.push({
+        game,
         ov,
         type,
         location,
         key,
         item,
         hint,
+        scene,
       });
     }
   }
@@ -130,9 +130,6 @@ export async function buildChecks(state: BuildChecksState): Promise<any> {
     buildGameChecks('mm', state),
   ]);
 
-  return {
-    oot,
-    mm,
-  };
+  return [...oot, ...mm];
 }
 

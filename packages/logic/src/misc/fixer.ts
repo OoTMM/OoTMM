@@ -2,7 +2,7 @@ import type { Settings } from '@ootmm/core';
 import type { World } from '../world';
 import type { Location } from '../types';
 
-import { Monitor, ItemHelpers, Items } from '@ootmm/core';
+import { Monitor, ItemHelpers, Items, CHECKS_BY_LOCATION } from '@ootmm/core';
 import { mustStartWithMasterSword } from '../helpers';
 import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_FROGS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, MM_LOTTERY, isLocationChestFairy, isLocationOtherFairy, makeLocation } from '../locations';
 
@@ -24,8 +24,9 @@ class LogicPassFixer {
   private isLocationFixed(worldId: number, locId: string) {
     const world = this.state.worlds[worldId];
     const loc = makeLocation(locId, worldId);
-    const check = world.checks[locId];
-    const { type, item, game } = check;
+    const check = CHECKS_BY_LOCATION[locId];
+    const { type, game } = check;
+    const item = world.checkItems.get(locId)!;
     const { settings } = this.state;
 
     if (ItemHelpers.isTingleMap(item) && settings.tingleShuffle === 'vanilla') {

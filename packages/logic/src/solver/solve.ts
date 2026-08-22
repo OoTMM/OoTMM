@@ -452,8 +452,10 @@ class LogicPassSolver {
   private fixItems() {
     for (const loc of this.input.fixedLocations.values()) {
       const locD = locationData(loc);
-      const item = makePlayerItem(this.worlds[locD.world as number].checks[locD.id].item, locD.world as number);
-      this.place(loc, item);
+      const world = this.worlds[locD.world as number];
+      const item = world.checkItems.get(locD.id)!;
+      const pi = makePlayerItem(item, locD.world as number);
+      this.place(loc, pi);
     }
   }
 
@@ -512,7 +514,7 @@ class LogicPassSolver {
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const world = this.worlds[worldId];
-      const skullLocations = world.locations.values().filter(x => ItemHelpers.isGoldToken(world.checks[x].item));
+      const skullLocations = world.locations.values().filter(x => ItemHelpers.isGoldToken(world.checkItems.get(x)!));
       const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
       for (const location of skullLocations) {
@@ -531,7 +533,7 @@ class LogicPassSolver {
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const world = this.worlds[worldId];
       for (const location of world.locations) {
-        const item = world.checks[location].item;
+        const item = world.checkItems.get(location)!;
         if (ItemHelpers.isHouseToken(item)) {
           locations.add(makeLocation(location, worldId));
         }
@@ -551,7 +553,7 @@ class LogicPassSolver {
     for (let player = 0; player < this.input.settings.players; ++player) {
       const locations = [...gs, ...house].filter(x => locationData(x).world === player);
       const world = this.worlds[player];
-      const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checks[locationData(loc).id].item, player)));
+      const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checkItems.get(locationData(loc).id)!, player)));
       for (const location of locations) {
         const item = pool.pop()!;
         this.place(location, item);

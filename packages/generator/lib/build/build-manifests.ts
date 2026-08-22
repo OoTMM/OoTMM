@@ -1,6 +1,6 @@
 import type { Game } from '@ootmm/core';
 
-import { gameId, POOL } from '@ootmm/core';
+import { gameId, CHECKS } from '@ootmm/core';
 import { checkKey } from '../combo/randomizer/checks';
 
 /* TODO: very ugly, will fix */
@@ -27,7 +27,7 @@ async function buildManifestChecks(game: Game) {
 
 export async function buildManifests() {
   await Promise.all([
-    buildManifestChecks('oot'),
-    buildManifestChecks('mm'),
+    //buildManifestChecks('oot'),
+    //buildManifestChecks('mm'),
   ]);
 }

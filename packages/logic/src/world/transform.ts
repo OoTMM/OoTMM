@@ -1,10 +1,10 @@
-import type { Settings, ItemID, Item, PlayerItem, PlayerItems } from '@ootmm/core';
+import type { Settings, ItemID, Item, PlayerItem, PlayerItems, CheckType } from '@ootmm/core';
 import type { Location } from '../types';
 import type { ItemProperties } from '../item-properties';
 import type { ItemSharedDef } from '../data';
-import type { World, WorldCheckType } from './types';
+import type { World } from './types';
 
-import { POOL, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId } from '@ootmm/core';
+import { CHECKS, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId, CHECKS_BY_LOCATION } from '@ootmm/core';
 import { TRAP_AMOUNTS, SharedItemGroups } from '../data';
 import { optimizeWorldStartingAndPool } from './optimizer';
 import { mustStartWithMasterSword } from '../helpers';
@@ -421,9 +421,9 @@ class LogicPassWorldTransform {
     for (let i = 0; i < worlds.length; ++i) {
       const world = worlds[i];
       for (const locId of world.locations) {
-        const check = world.checks[locId];
+        const check = CHECKS_BY_LOCATION[locId];
+        const item = world.checkItems.get(locId)!;
         const location = makeLocation(locId, i);
-        const item = check.item;
         const playerItem = makePlayerItem(item, i);
         countMapAdd(this.pool, playerItem);
         const set = this.locsByItem.get(playerItem) || new Set();
@@ -449,8 +449,8 @@ class LogicPassWorldTransform {
     const newSet = this.locsByItem.get(to) || new Set();
     for (const loc of oldSet) {
       const locData = locationData(loc);
-      const check = this.state.worlds[locData.world!].checks[locData.id];
-      check.item = to.item;
+      const world = this.state.worlds[locData.world!];
+      world.checkItems.set(locData.id, to.item);
       newSet.add(loc);
     }
     this.locsByItem.set(to, newSet);
@@ -1341,7 +1341,7 @@ class LogicPassWorldTransform {
   private removeWorldLocations(worldId: number, locs: string[]) {
     const world = this.state.worlds[worldId];
     for (const loc of locs) {
-      delete world.checks[loc];
+      world.checkItems.delete(loc);
       delete world.regions[loc];
       world.locations.delete(loc);
       this.fixedLocations.delete(makeLocation(loc, worldId));
@@ -1367,23 +1367,23 @@ class LogicPassWorldTransform {
     }
   }
 
-  private filterLocations(value: 'none' | 'all' | 'overworld' | 'dungeons', type: WorldCheckType, game: 'oot' | 'mm') {
+  private filterLocations(value: 'none' | 'all' | 'overworld' | 'dungeons', type: CheckType, game: 'oot' | 'mm') {
     if (value === 'all') {
       return;
     }
 
     let locationsToRemove: string[];
     if (value === 'overworld') {
-      locationsToRemove = POOL[game].filter((x: any) => x.type === type && isLocationInDungeon(x.scene)).map((x: any) => gameId(game, x.location, ' ')) as string[];
+      locationsToRemove = CHECKS.filter(x => x.game === game && x.type === type && isLocationInDungeon(x.scene)).map(x => x.location);
     } else if (value === 'dungeons') {
-      locationsToRemove = POOL[game].filter((x: any) => x.type === type && !isLocationInDungeon(x.scene)).map((x: any) => gameId(game, x.location, ' ')) as string[];
+      locationsToRemove = CHECKS.filter(x => x.game === game && x.type === type && !isLocationInDungeon(x.scene)).map(x => x.location);
     } else {
-      locationsToRemove = POOL[game].filter((x: any) => x.type === type).map((x: any) => gameId(game, x.location, ' ')) as string[];
+      locationsToRemove = CHECKS.filter(x => x.game === game && x.type === type).map(x => x.location);
     }
     this.removeLocations(locationsToRemove);
   }
 
-  private filterLocationsBool(value: boolean, type: WorldCheckType, game: 'oot' | 'mm') {
+  private filterLocationsBool(value: boolean, type: CheckType, game: 'oot' | 'mm') {
     this.filterLocations(value ? 'all' : 'none', type, game);
   }
 
@@ -1446,8 +1446,8 @@ class LogicPassWorldTransform {
     this.filterLocations(this.state.settings.shufflePotsMm, 'pot', 'mm');
 
     if (settings.goal === 'triforce' || settings.goal === 'triforce3') {
-      const potsGanonTower = POOL.oot.filter((x: any) => x.type === 'pot' && x.scene === 'GANON_TOWER').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      const potsMajora = POOL.mm.filter((x: any) => x.type === 'pot' && x.scene === 'LAIR_MAJORA').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      const potsGanonTower = CHECKS.filter(x => x.type === 'pot' && x.scene === 'OOT_GANON_TOWER').map(x => x.location);
+      const potsMajora = CHECKS.filter(x => x.type === 'pot' && x.scene === 'MM_LAIR_MAJORA').map(x => x.location);
       this.removeLocations(potsGanonTower);
       this.removeLocations(potsMajora);
     }
@@ -1486,7 +1486,7 @@ class LogicPassWorldTransform {
     this.filterLocations(this.state.settings.shuffleGrassMm, 'grass', 'mm');
 
     if(!this.state.settings.shuffleTFGrassMm) {
-      const grassTerminaField = POOL.mm.filter((x: any) => x.type === 'grass' && x.scene === 'TERMINA_FIELD').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      const grassTerminaField = CHECKS.filter(x => x.type === 'grass' && x.scene === 'MM_TERMINA_FIELD').map(x => x.location);
       this.removeLocations(grassTerminaField);
     }
   }
@@ -1512,7 +1512,7 @@ class LogicPassWorldTransform {
 
     if (this.state.settings.logic === 'allLocations' && !this.state.settings.tricks.includes('MM_GORON_BOMB_JUMP') && this.state.settings.hookshotAnywhereMm !== 'logical') {
       /* Can't reach Gorman track trees */
-      const locs = POOL.mm.filter((x: any) => x.type === 'tree' && x.scene === 'GORMAN_TRACK').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      const locs = CHECKS.filter(x => x.type === 'tree' && x.scene === 'MM_GORMAN_TRACK').map(x => x.location);
       this.removeLocations(locs);
     }
   }
@@ -2114,10 +2114,10 @@ class LogicPassWorldTransform {
 
     /* Handle fixed locations */
     for (const loc of this.fixedLocations) {
-      const worldId = locationData(loc).world as number;
+      const locD = locationData(loc);
+      const worldId = locD.world as number;
       const world = this.state.worlds[worldId];
-      const check = world.checks[locationData(loc).id];
-      const { item } = check;
+      const item = world.checkItems.get(locD.id)!;
       const pi = makePlayerItem(item, worldId);
       this.removePlayerItem(pi, 1);
       countMapAdd(allItems, pi);
