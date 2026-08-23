@@ -56,7 +56,10 @@ export async function extractEntries(filepath: string, state: BuildChecksState) 
   const xmlRoot = xml.find((e: any) => e['checks']);
   const game = xmlRoot[':@'].game;
   for (const xmlScene of xmlRoot.checks) {
-    const scene = gameId(game, xmlScene[':@'].id, '_');
+    let scene = xmlScene[':@'].id;
+    if (scene !== 'NONE') {
+      scene = gameId(game, scene, '_');
+    }
     const children = xmlScene['scene'];
     for (const xmlCheck of children) {
       const ov = Object.keys(xmlCheck).find(k => k !== ':@')!;

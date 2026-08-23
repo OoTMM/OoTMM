@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checks game="oot">
-  <scene id="GROTTOS">
+  <scene id="NONE">
     <npc location="Hatch Chicken" npc="WEIRD_EGG" item="WEIRD_EGG"/>
     <npc location="Hatch Pocket Cucco" npc="POCKET_EGG" item="POCKET_EGG"/>
   </scene>
