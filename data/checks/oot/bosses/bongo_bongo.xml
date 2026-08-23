@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="LAIR_BONGO_BONGO">
+    <collectible location="Shadow Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
+    <npc location="Shadow Temple Boss" npc="BLUE_WARP_BONGO_BONGO" item="MEDALLION_SHADOW"/>
+  </scene>
+</checks>

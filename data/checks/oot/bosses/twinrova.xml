@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="LAIR_TWINROVA">
+    <collectible location="Spirit Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
+    <npc location="Spirit Temple Boss" npc="BLUE_WARP_TWINROVA" item="MEDALLION_SPIRIT"/>
+  </scene>
+</checks>

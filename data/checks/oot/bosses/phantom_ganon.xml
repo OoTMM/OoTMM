@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="LAIR_PHANTOM_GANON">
+    <collectible location="Forest Temple Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
+    <npc location="Forest Temple Boss" npc="BLUE_WARP_PHANTOM_GANON" item="MEDALLION_FOREST"/>
+  </scene>
+</checks>

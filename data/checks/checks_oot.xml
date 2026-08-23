@@ -1317,18 +1317,6 @@
     <xflag type="heart" location="Deku Tree Heart Pre-Boss 2" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Deku Tree Heart Pre-Boss 3" slice="0x0" setup="0x0" room="0x9" actor="0x8" item="RECOVERY_HEART"/>
   </scene>
-  <scene id="LAIR_GOHMA">
-    <collectible location="Deku Tree Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Deku Tree Boss" npc="BLUE_WARP_GOHMA" item="STONE_EMERALD"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 1" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 2" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 3" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 4" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 5" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 6" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 7" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 8" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="DEKU_SEEDS_5"/>
-  </scene>
   <scene id="DODONGO_CAVERN">
     <chest location="Dodongo Cavern Map Chest" flag="0x08" item="MAP_DC"/>
     <chest location="Dodongo Cavern Compass Chest" flag="0x05" item="COMPASS_DC"/>
@@ -1382,11 +1370,6 @@
     <xflag type="heart" location="Dodongo Cavern Heart Miniboss Upper 2" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Dodongo Cavern Heart Bomb Bag Room" slice="0x0" setup="0x0" room="0x9" actor="0xd" item="RECOVERY_HEART"/>
   </scene>
-  <scene id="LAIR_KING_DODONGO">
-    <chest location="Dodongo Cavern Boss Chest" flag="0x00" item="BOMBS_10"/>
-    <collectible location="Dodongo Cavern Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Dodongo Cavern Boss" npc="BLUE_WARP_KING_DODONGO" item="STONE_RUBY"/>
-  </scene>
   <scene id="INSIDE_JABU_JABU">
     <chest location="Jabu-Jabu Map Chest" flag="0x02" item="MAP_JJ"/>
     <chest location="Jabu-Jabu Compass Chest" flag="0x04" item="COMPASS_JJ"/>
@@ -1409,16 +1392,6 @@
     <xflag type="pot" location="Jabu-Jabu Pot Alcove 3" slice="0x0" setup="0x0" room="0xe" actor="0x9" item="DEKU_SEEDS_5"/>
     <xflag type="crate" location="Jabu-Jabu Small Crate 1" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="NOTHING"/>
     <xflag type="crate" location="Jabu-Jabu Small Crate 2" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="RECOVERY_HEART"/>
-  </scene>
-  <scene id="LAIR_BARINADE">
-    <collectible location="Jabu-Jabu Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Jabu-Jabu Boss" npc="BLUE_WARP_BARINADE" item="STONE_SAPPHIRE"/>
-    <xflag type="pot" location="Jabu-Jabu Boss Pot 1" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Jabu-Jabu Boss Pot 2" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Jabu-Jabu Boss Pot 3" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Jabu-Jabu Boss Pot 4" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Jabu-Jabu Boss Pot 5" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Jabu-Jabu Boss Pot 6" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="RECOVERY_HEART"/>
   </scene>
   <scene id="TEMPLE_FOREST">
     <chest location="Forest Temple Tree Small Key" flag="0x03" item="SMALL_KEY_FOREST"/>
@@ -1462,10 +1435,6 @@
     <xflag type="heart" location="Forest Temple Heart Garden 2" slice="0x0" setup="0x0" room="0x8" actor="0xa" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Forest Temple Heart Well 1" slice="0x0" setup="0x0" room="0x9" actor="0x2" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Forest Temple Heart Well 2" slice="0x0" setup="0x0" room="0x9" actor="0x3" item="RECOVERY_HEART"/>
-  </scene>
-  <scene id="LAIR_PHANTOM_GANON">
-    <collectible location="Forest Temple Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Forest Temple Boss" npc="BLUE_WARP_PHANTOM_GANON" item="MEDALLION_FOREST"/>
   </scene>
   <scene id="TEMPLE_FIRE">
     <chest location="Fire Temple Jail 1 Chest" flag="0x01" item="SMALL_KEY_FIRE"/>
@@ -1513,10 +1482,6 @@
     <xflag type="heart" location="Fire Temple Heart Elevator 1" slice="0x0" setup="0x0" room="0x15" actor="0x6" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Fire Temple Heart Elevator 2" slice="0x0" setup="0x0" room="0x15" actor="0x7" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Fire Temple Heart Elevator 3" slice="0x0" setup="0x0" room="0x15" actor="0x8" item="RECOVERY_HEART"/>
-  </scene>
-  <scene id="LAIR_VOLVAGIA">
-    <collectible location="Fire Temple Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Fire Temple Boss" npc="BLUE_WARP_VOLVAGIA" item="MEDALLION_FIRE"/>
   </scene>
   <scene id="ICE_CAVERN">
     <chest location="Ice Cavern Iron Boots" flag="0x02" item="BOOTS_IRON" hint="ICE_CAVERN_CHEST"/>
@@ -1624,12 +1589,6 @@
     <gs location="Water Temple GS Large Pit" flag="0x29" item="GS_TOKEN"/>
     <gs location="Water Temple GS Waterfalls" flag="0x2b" item="GS_TOKEN"/>
     <gs location="Water Temple GS Cage" flag="0x28" item="GS_TOKEN"/>
-  </scene>
-  <scene id="LAIR_MORPHA">
-    <collectible location="Water Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Water Temple Boss" npc="BLUE_WARP_MORPHA" item="MEDALLION_WATER"/>
-  </scene>
-  <scene id="TEMPLE_WATER">
     <xflag type="pot" location="Water Temple Pot Main Room Near Block 1" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Water Temple Pot Main Room Near Block 2" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Water Temple Pot Main Room Near Boss 1" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="FAIRY"/>
@@ -1804,10 +1763,6 @@
     <xflag type="fairy_spot" location="Shadow Temple Big Fairy After Wind" slice="0x0" setup="0x0" room="0x13" actor="0x2" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Shadow Temple Wonder Item" slice="0x0" setup="0x0" room="0xc" actor="0x1" item="ARROWS_30"/>
   </scene>
-  <scene id="LAIR_BONGO_BONGO">
-    <collectible location="Shadow Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Shadow Temple Boss" npc="BLUE_WARP_BONGO_BONGO" item="MEDALLION_SHADOW"/>
-  </scene>
   <scene id="THIEVES_HIDEOUT">
     <collectible location="Gerudo Fortress Jail 1" flag="0x0c" item="SMALL_KEY_GF"/>
     <collectible location="Gerudo Fortress Jail 2" flag="0x0f" item="SMALL_KEY_GF"/>
@@ -1899,10 +1854,6 @@
   <scene id="DESERT_COLOSSUS">
     <chest location="Spirit Temple Silver Gauntlets" flag="0x0b" item="STRENGTH"/>
     <chest location="Spirit Temple Mirror Shield" flag="0x09" item="SHIELD_MIRROR"/>
-  </scene>
-  <scene id="LAIR_TWINROVA">
-    <collectible location="Spirit Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
-    <npc location="Spirit Temple Boss" npc="BLUE_WARP_TWINROVA" item="MEDALLION_SPIRIT"/>
   </scene>
   <scene id="TEMPLE_SPIRIT">
     <xflag type="pot" location="Spirit Temple Pot Lobby 1" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RECOVERY_HEART"/>
@@ -2003,11 +1954,6 @@
     <chest location="Ganon Castle Shadow Chest 2" flag="0x05" item="STRENGTH"/>
     <chest location="Ganon Castle Spirit Chest 1" flag="0x12" item="BOMBCHU_20"/>
     <chest location="Ganon Castle Spirit Chest 2" flag="0x14" item="ARROWS_10"/>
-  </scene>
-  <scene id="GANON_TOWER">
-    <chest location="Ganon Castle Boss Key" flag="0x0b" item="BOSS_KEY_GANON"/>
-  </scene>
-  <scene id="INSIDE_GANON_CASTLE">
     <scrub location="Ganon Castle Leftmost Scrub" flag="0x21" item="POTION_GREEN"/>
     <scrub location="Ganon Castle Left-Center Scrub" flag="0x22" item="BOMBS_5"/>
     <scrub location="Ganon Castle Right-Center Scrub" flag="0x23" item="ARROWS_10"/>
@@ -2076,26 +2022,6 @@
     <xflag type="icicle" location="Ganon Castle Icicle Water 12" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="NOTHING"/>
     <xflag type="icicle" location="Ganon Castle Icicle Water 13" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="NOTHING"/>
     <xflag type="icicle" location="Ganon Castle Icicle Water 14" slice="0x0" setup="0x0" room="0x2" actor="0xf" item="NOTHING"/>
-  </scene>
-  <scene id="GANON_TOWER">
-    <xflag type="pot" location="Ganon Tower Pot 01" slice="0x0" setup="0x0" room="0x8" actor="0x1" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Ganon Tower Pot 02" slice="0x0" setup="0x0" room="0x8" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Tower Pot 03" slice="0x0" setup="0x0" room="0x8" actor="0x3" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ganon Tower Pot 04" slice="0x0" setup="0x0" room="0x8" actor="0x4" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ganon Tower Pot 05" slice="0x0" setup="0x0" room="0x8" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Tower Pot 06" slice="0x0" setup="0x0" room="0x8" actor="0x6" item="ARROWS_10"/>
-    <xflag type="pot" location="Ganon Tower Pot 07" slice="0x0" setup="0x0" room="0x8" actor="0x7" item="ARROWS_10"/>
-    <xflag type="pot" location="Ganon Tower Pot 08" slice="0x0" setup="0x0" room="0x8" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Tower Pot 09" slice="0x0" setup="0x0" room="0x8" actor="0x9" item="NOTHING"/>
-    <xflag type="pot" location="Ganon Tower Pot 10" slice="0x0" setup="0x0" room="0x8" actor="0xa" item="NOTHING"/>
-    <xflag type="pot" location="Ganon Tower Pot 11" slice="0x0" setup="0x0" room="0x8" actor="0xb" item="ARROWS_10"/>
-    <xflag type="pot" location="Ganon Tower Pot 12" slice="0x0" setup="0x0" room="0x8" actor="0xc" item="ARROWS_10"/>
-    <xflag type="pot" location="Ganon Tower Pot 13" slice="0x0" setup="0x0" room="0x8" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Tower Pot 14" slice="0x0" setup="0x0" room="0x8" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Tower Pot 15" slice="0x0" setup="0x0" room="0x8" actor="0xf" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Tower Pot 16" slice="0x0" setup="0x0" room="0x8" actor="0x10" item="NOTHING"/>
-    <xflag type="pot" location="Ganon Tower Pot 17" slice="0x0" setup="0x0" room="0x8" actor="0x11" item="NOTHING"/>
-    <xflag type="pot" location="Ganon Tower Pot 18" slice="0x0" setup="0x0" room="0x8" actor="0x12" item="ARROWS_10"/>
   </scene>
   <scene id="DEKU_TREE_MQ">
     <chest location="MQ Deku Tree Map Chest" flag="0x03" item="MAP_DT"/>

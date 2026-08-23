@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="LAIR_KING_DODONGO">
+    <chest location="Dodongo Cavern Boss Chest" flag="0x00" item="BOMBS_10"/>
+    <collectible location="Dodongo Cavern Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
+    <npc location="Dodongo Cavern Boss" npc="BLUE_WARP_KING_DODONGO" item="STONE_RUBY"/>
+  </scene>
+</checks>

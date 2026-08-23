@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="LAIR_MORPHA">
+    <collectible location="Water Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
+    <npc location="Water Temple Boss" npc="BLUE_WARP_MORPHA" item="MEDALLION_WATER"/>
+  </scene>
+</checks>
