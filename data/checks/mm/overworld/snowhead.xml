@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="SNOWHEAD">
+    <npc location="Snowhead Owl Statue" npc="OWL_SNOWHEAD" item="OWL_SNOWHEAD"/>
+    <xflag type="snowball" location="Snowhead Big Snowball 1" slice="0x0" setup="0x0" room="0x0" actor="0x2e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Big Snowball 2" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Big Snowball 3" slice="0x0" setup="0x0" room="0x0" actor="0x30" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Big Snowball 4" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Big Snowball 5" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Big Snowball 6" slice="0x0" setup="0x0" room="0x0" actor="0x33" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Small Snowball 1" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="BOMBS_5"/>
+    <xflag type="snowball" location="Snowhead Small Snowball 2" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="ARROWS_20"/>
+    <xflag type="snowball" location="Snowhead Small Snowball 3" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="FLEXIBLE"/>
+    <xflag type="snowball" location="Snowhead Small Snowball 4" slice="0x0" setup="0x0" room="0x0" actor="0x2d" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Snowhead Small Snowball Spring 1" slice="0x0" setup="0x1" room="0x0" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Small Snowball Spring 2" slice="0x0" setup="0x1" room="0x0" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Small Snowball Spring 3" slice="0x0" setup="0x1" room="0x0" actor="0x10" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Small Snowball Spring 4" slice="0x0" setup="0x1" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Small Snowball Spring 5" slice="0x0" setup="0x1" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Small Snowball Spring Out of Bounds" slice="0x0" setup="0x1" room="0x0" actor="0x12" item="MAGIC_JAR_SMALL"/>
+  </scene>
+  <scene id="FAIRY_FOUNTAIN">
+    <npc location="Snowhead Great Fairy" npc="GREAT_FAIRY_MOUNTAIN" item="MAGIC_UPGRADE"/>
+  </scene>
+</checks>

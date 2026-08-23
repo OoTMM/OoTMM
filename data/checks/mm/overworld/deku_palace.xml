@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="DEKU_PALACE">
+    <collectible location="Deku Palace HP" flag="0x1e" item="HEART_PIECE"/>
+    <xflag type="soil" location="Deku Palace Soil Item 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="soil" location="Deku Palace Soil Item 2" slice="0x1" setup="0x0" room="0x0" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="soil" location="Deku Palace Soil Item 3" slice="0x2" setup="0x0" room="0x0" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Deku Palace Pot 1" slice="0x0" setup="0x0" room="0x1" actor="0xf" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Deku Palace Pot 2" slice="0x0" setup="0x0" room="0x1" actor="0x10" item="MAGIC_JAR_SMALL"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 01" slice="0x0" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 02" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 03" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 04" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 05" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 06" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 07" slice="0x0" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 08" slice="0x1" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 09" slice="0x2" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 10" slice="0x3" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 11" slice="0x4" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 12" slice="0x5" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Right 13" slice="0x6" setup="0x0" room="0x1" actor="0x11" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left 1" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left 2" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left 3" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left 5" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left 6" slice="0x0" setup="0x0" room="0x2" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left 7" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left Far 1" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left Far 2" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Deku Palace Rupee Left Far 3" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Deku Palace Rupee Layout-Dependant 1" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Deku Palace Rupee Layout-Dependant 2" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="RUPEE_BLUE"/>
+    <xflag type="boulder" location="Deku Palace Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="NOTHING"/>
+    <xflag type="boulder" location="Deku Palace Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="NOTHING"/>
+    <xflag type="boulder-red" location="Deku Palace Red Boulder 1" slice="0x0" setup="0x0" room="0x1" actor="0xc" item="NOTHING"/>
+    <xflag type="boulder-red" location="Deku Palace Red Boulder 2" slice="0x0" setup="0x0" room="0x1" actor="0xd" item="NOTHING"/>
+    <xflag type="boulder-red" location="Deku Palace Red Boulder 3" slice="0x0" setup="0x0" room="0x1" actor="0xe" item="NOTHING"/>
+  </scene>
+  <scene id="DEKU_KING_CHAMBER">
+    <npc location="Deku Palace Sonata of Awakening" npc="SONG_AWAKENING" item="SONG_AWAKENING"/>
+  </scene>
+  <scene id="GROTTOS">
+    <chest location="Deku Palace Grotto Chest" flag="0x05" item="RUPEE_RED"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 01" slice="0x0" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 02" slice="0x1" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 03" slice="0x2" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 04" slice="0x3" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 05" slice="0x4" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 06" slice="0x5" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 07" slice="0x6" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 08" slice="0x7" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 09" slice="0x8" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 10" slice="0x9" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 11" slice="0xa" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace Grotto Grass 12" slice="0xb" setup="0x0" room="0xc" actor="0x3" item="RANDOM"/>
+    <xflag type="butterfly" location="Deku Palace Grotto Butterfly 1" slice="0x0" setup="0x0" room="0xc" actor="0x4" item="FAIRY"/>
+    <xflag type="butterfly" location="Deku Palace Grotto Butterfly 2" slice="0x1" setup="0x0" room="0xc" actor="0x4" item="NOTHING"/>
+    <xflag type="butterfly" location="Deku Palace Grotto Butterfly 3" slice="0x2" setup="0x0" room="0xc" actor="0x4" item="NOTHING"/>
+    <xflag type="butterfly" location="Deku Palace Grotto Butterfly 4" slice="0x3" setup="0x0" room="0xc" actor="0x4" item="NOTHING"/>
+    <xflag type="soil" location="Beans Grotto Soil Item 1" slice="0x0" setup="0x0" room="0xc" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="soil" location="Beans Grotto Soil Item 2" slice="0x1" setup="0x0" room="0xc" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="soil" location="Beans Grotto Soil Item 3" slice="0x2" setup="0x0" room="0xc" actor="0x9" item="RUPEE_BLUE"/>
+  </scene>
+  <scene id="GROTTOS">
+    <xflag type="grass" location="Deku Palace JP Line Grotto Grass 1" slice="0x0" setup="0x0" room="0x6" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace JP Line Grotto Grass 2" slice="0x0" setup="0x0" room="0x6" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace JP Line Grotto Grass 3" slice="0x0" setup="0x0" room="0x6" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace JP Line Grotto Grass 4" slice="0x0" setup="0x0" room="0x6" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Deku Palace JP Line Grotto Grass 5" slice="0x0" setup="0x0" room="0x6" actor="0x6" item="RANDOM"/>
+    <xflag type="butterfly" location="Deku Palace JP Line Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x6" actor="0x3" item="FAIRY"/>
+    <xflag type="butterfly" location="Deku Palace JP Line Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x6" actor="0x3" item="NOTHING"/>
+    <xflag type="butterfly" location="Deku Palace JP Line Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x6" actor="0x3" item="NOTHING"/>
+    <xflag type="butterfly" location="Deku Palace JP Line Grotto Butterfly 4" slice="0x3" setup="0x0" room="0x6" actor="0x3" item="NOTHING"/>
+    <xflag type="butterfly" location="Deku Palace JP Line Grotto Butterfly 5" slice="0x4" setup="0x0" room="0x6" actor="0x3" item="NOTHING"/>
+  </scene>
+</checks>

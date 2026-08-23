@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="BENEATH_THE_WELL">
+    <chest location="Beneath The Well Skulltulla Chest" flag="0x01" item="RUPEE_PURPLE"/>
+    <chest location="Beneath The Well Keese Chest" flag="0x02" item="RUPEE_PURPLE"/>
+    <chest location="Beneath The Well Mirror Shield" flag="0x1b" item="SHIELD_MIRROR"/>
+    <cow location="Beneath The Well Cow" flag="0x17" item="MILK" hint="COW_WELL"/>
+    <xflag type="pot" location="Beneath The Well Pot Big Poe 1" slice="0x0" setup="0x0" room="0xc" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Well Pot Big Poe 2" slice="0x0" setup="0x0" room="0xc" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Well Pot Big Poe 3" slice="0x0" setup="0x0" room="0xc" actor="0x7" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Well Pot Big Poe 4" slice="0x0" setup="0x0" room="0xc" actor="0x8" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Well Pot Left Side 1" slice="0x0" setup="0x0" room="0x5" actor="0x11" item="BOMBS_5"/>
+    <xflag type="pot" location="Beneath The Well Pot Left Side 2" slice="0x0" setup="0x0" room="0x5" actor="0x12" item="BOMBS_5"/>
+    <xflag type="pot" location="Beneath The Well Pot Left Side 3" slice="0x0" setup="0x0" room="0x5" actor="0x13" item="BOMBS_5"/>
+    <xflag type="pot" location="Beneath The Well Pot Left Side 4" slice="0x0" setup="0x0" room="0x5" actor="0x14" item="BOMBS_5"/>
+    <xflag type="pot" location="Beneath The Well Pot Left Side 5" slice="0x0" setup="0x0" room="0x5" actor="0x15" item="BOMBS_5"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 01" slice="0x0" setup="0x0" room="0x6" actor="0xe" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 02" slice="0x0" setup="0x0" room="0x6" actor="0xf" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 03" slice="0x0" setup="0x0" room="0x6" actor="0x10" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 04" slice="0x0" setup="0x0" room="0x6" actor="0x11" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 05" slice="0x0" setup="0x0" room="0x6" actor="0x12" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 06" slice="0x0" setup="0x0" room="0x6" actor="0x13" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 07" slice="0x0" setup="0x0" room="0x6" actor="0x14" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 08" slice="0x0" setup="0x0" room="0x6" actor="0x15" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 09" slice="0x0" setup="0x0" room="0x6" actor="0x16" item="ARROWS_20"/>
+    <xflag type="pot" location="Beneath The Well Pot Middle 10" slice="0x0" setup="0x0" room="0x6" actor="0x17" item="ARROWS_20"/>
+    <xflag type="grass" location="Beneath The Well Grass Before Poe 1" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Before Poe 2" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Before Poe 3" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Before Poe 4" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Left Side 1" slice="0x0" setup="0x0" room="0x5" actor="0x16" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Left Side 2" slice="0x0" setup="0x0" room="0x5" actor="0x17" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Near End 1" slice="0x0" setup="0x0" room="0x7" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Near End 2" slice="0x0" setup="0x0" room="0x7" actor="0x14" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Near End 3" slice="0x0" setup="0x0" room="0x7" actor="0x15" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Near End 4" slice="0x0" setup="0x0" room="0x7" actor="0x16" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Near End 5" slice="0x0" setup="0x0" room="0x7" actor="0x17" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Cow 1" slice="0x0" setup="0x0" room="0x9" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Cow 2" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Beneath The Well Grass Cow 3" slice="0x0" setup="0x0" room="0x9" actor="0x8" item="RANDOM"/>
+    <xflag type="tree" location="Beneath The Well Tree" slice="0x0" setup="0x0" room="0x9" actor="0x3" item="NOTHING"/>
+    <xflag type="bush" location="Beneath The Well Bush 1" slice="0x0" setup="0x0" room="0x9" actor="0x1" item="NOTHING"/>
+    <xflag type="bush" location="Beneath The Well Bush 2" slice="0x0" setup="0x0" room="0x9" actor="0x2" item="NOTHING"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 1" slice="0x0" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 2" slice="0x1" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 3" slice="0x2" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 4" slice="0x3" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 5" slice="0x4" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 6" slice="0x5" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 7" slice="0x6" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+    <xflag type="fairy" location="Beneath The Well Fairy Fountain Fairy 8" slice="0x7" setup="0x0" room="0xb" actor="0x4" item="FAIRY"/>
+  </scene>
+</checks>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="ZORA_CAPE">
+    <chest location="Zora Cape Ledge Chest 1" flag="0x01" item="RUPEE_RED"/>
+    <chest location="Zora Cape Ledge Chest 2" flag="0x02" item="RUPEE_RED"/>
+    <chest location="Zora Cape Underwater Chest" flag="0x00" item="RUPEE_PURPLE"/>
+    <collectible location="Zora Cape Waterfall HP" flag="0x07" item="HEART_PIECE"/>
+    <npc location="Zora Cape Owl Statue" npc="OWL_ZORA_CAPE" item="OWL_ZORA_CAPE"/>
+    <xflag type="rock" location="Zora Cape Rock Island 1" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Island 2" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Island 3" slice="0x0" setup="0x0" room="0x0" actor="0x22" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Island 4" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Island 5" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Water 1" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Water 2" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Water 3" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Water 4" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Water 5" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 1" slice="0x0" setup="0x0" room="0x0" actor="0x35" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 2" slice="0x0" setup="0x0" room="0x0" actor="0x36" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 3" slice="0x0" setup="0x0" room="0x0" actor="0x37" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 4" slice="0x0" setup="0x0" room="0x0" actor="0x38" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 5" slice="0x0" setup="0x0" room="0x0" actor="0x39" item="RANDOM"/>
+    <xflag type="boulder" location="Zora Cape Large Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="NOTHING"/>
+    <xflag type="boulder" location="Zora Cape Large Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="NOTHING"/>
+    <xflag type="boulder" location="Zora Cape Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="NOTHING"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Beach 1" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Beach 2" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Island Near Fountain" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Island Near Beach" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Island Center" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="NUT"/>
+    <xflag type="pot" location="Zora Cape Pot Near Beavers 1" slice="0x0" setup="0x0" room="0x0" actor="0x43" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Zora Cape Pot Near Beavers 2" slice="0x0" setup="0x0" room="0x0" actor="0x44" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 1" slice="0x0" setup="0x0" room="0x0" actor="0x45" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 2" slice="0x0" setup="0x0" room="0x0" actor="0x46" item="FAIRY"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 3" slice="0x0" setup="0x0" room="0x0" actor="0x47" item="BOMBS_5"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 4" slice="0x0" setup="0x0" room="0x0" actor="0x48" item="ARROWS_20"/>
+  </scene>
+  <scene id="EXTRA">
+    <xflag type="pot" location="Zora Cape Pot Game 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 4" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 5" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="NOTHING"/>
+  </scene>
+  <scene id="WATERFALL_RAPIDS">
+    <npc location="Waterfall Rapids Beaver Race 1" npc="BEAVER_1" item="BOTTLE_EMPTY"/>
+    <npc location="Waterfall Rapids Beaver Race 2" npc="BEAVER_2" item="HEART_PIECE"/>
+  </scene>
+  <scene id="GROTTOS">
+    <chest location="Zora Cape Grotto" flag="0x15" item="BOMBCHU"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 01" slice="0x0" setup="0x0" room="0x35" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 02" slice="0x0" setup="0x0" room="0x35" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 03" slice="0x0" setup="0x0" room="0x35" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 04" slice="0x0" setup="0x0" room="0x35" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 05" slice="0x0" setup="0x0" room="0x35" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 06" slice="0x0" setup="0x0" room="0x35" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 07" slice="0x0" setup="0x0" room="0x35" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 08" slice="0x0" setup="0x0" room="0x35" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 09" slice="0x0" setup="0x0" room="0x35" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 10" slice="0x0" setup="0x0" room="0x35" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 11" slice="0x0" setup="0x0" room="0x35" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 12" slice="0x0" setup="0x0" room="0x35" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 13" slice="0x0" setup="0x0" room="0x35" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Zora Cape Grotto Grass 14" slice="0x0" setup="0x0" room="0x35" actor="0x13" item="RANDOM"/>
+  </scene>
+  <scene id="FAIRY_FOUNTAIN">
+    <npc location="Great Bay Great Fairy" npc="GREAT_FAIRY_OCEAN" item="DEFENSE_UPGRADE"/>
+  </scene>
+</checks>

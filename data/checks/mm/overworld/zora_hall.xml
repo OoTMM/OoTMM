@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="ZORA_HALL">
+    <npc location="Zora Hall Scene Lights" npc="ZORA_HALL_LIGHTS" item="RUPEE_BLUE"/>
+  </scene>
+  <scene id="ZORA_HALL_ROOMS">
+    <npc location="Zora Hall Scrub Deed" npc="SCRUB_OCEAN" item="DEED_OCEAN"/>
+    <npc location="Zora Hall Scrub Shop" npc="SCRUB_SHOP_POTION_GREEN" item="POTION_GREEN"/>
+    <collectible location="Zora Hall Scrub HP" flag="0x1e" item="HEART_PIECE"/>
+  </scene>
+  <scene id="ZORA_HALL_ROOMS">
+    <npc location="Zora Hall Evan HP" npc="ZORA_EVAN" item="HEART_PIECE"/>
+  </scene>
+  <scene id="ZORA_HALL_ROOMS">
+    <shop location="Zora Shop Item 1" flag="0x13" item="SHIELD_HERO"/>
+    <shop location="Zora Shop Item 2" flag="0x14" item="ARROWS_10"/>
+    <shop location="Zora Shop Item 3" flag="0x15" item="POTION_RED"/>
+  </scene>
+</checks>

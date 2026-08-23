@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="TEMPLE_GREAT_BAY">
+    <chest location="Great Bay Temple Map" flag="0x1d" item="MAP_GB"/>
+    <chest location="Great Bay Temple Baba Chest" flag="0x19" item="STRAY_FAIRY_GB"/>
+    <chest location="Great Bay Temple Boss Key" flag="0x1e" item="BOSS_KEY_GB"/>
+    <chest location="Great Bay Temple Compass" flag="0x1c" item="COMPASS_GB"/>
+    <chest location="Great Bay Temple Compass Room Underwater" flag="0x01" item="SMALL_KEY_GB"/>
+    <chest location="Great Bay Temple Ice Arrow" flag="0x1b" item="ARROW_ICE" hint="GBT_ICE_ARROW"/>
+    <chest location="Great Bay Temple Green Pipe 1 Chest" flag="0x15" item="STRAY_FAIRY_GB"/>
+    <chest location="Great Bay Temple Green Pipe 2 Lower Chest" flag="0x17" item="STRAY_FAIRY_GB"/>
+    <chest location="Great Bay Temple Green Pipe 2 Upper Chest" flag="0x14" item="STRAY_FAIRY_GB"/>
+    <chest location="Great Bay Temple Green Pipe 3 Chest" flag="0x16" item="STRAY_FAIRY_GB"/>
+    <chest location="Great Bay Temple Entrance Chest" flag="0x18" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Water Wheel Platform" flag="0x30" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Water Wheel Skulltula" flag="0x32" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Central Room Barrel" flag="0x1c" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Central Room Underwater Pot" flag="0x1b" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Map Room Pot" flag="0x1e" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Compass Room Pot" flag="0x1d" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Green Pipe 3 Barrel" flag="0x1a" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Pre-Boss Above Water" flag="0x31" item="STRAY_FAIRY_GB"/>
+    <sf location="Great Bay Temple SF Pre-Boss Underwater" flag="0x2f" item="STRAY_FAIRY_GB"/>
+    <xflag type="pot" location="Great Bay Temple Pot Central Room 1" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Central Room 2" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Surface 1" slice="0x0" setup="0x0" room="0x1" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Surface 2" slice="0x0" setup="0x0" room="0x1" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Surface 3" slice="0x0" setup="0x0" room="0x1" actor="0x10" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 1" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 2" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 3" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 4" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 5" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 6" slice="0x0" setup="0x0" room="0x1" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 7" slice="0x0" setup="0x0" room="0x1" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Map Room Water 8" slice="0x0" setup="0x0" room="0x1" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Surface 1" slice="0x0" setup="0x0" room="0x4" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Surface 2" slice="0x0" setup="0x0" room="0x4" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Surface 3" slice="0x0" setup="0x0" room="0x4" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Surface 4" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Water 1" slice="0x0" setup="0x0" room="0x4" actor="0xb" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Water 2" slice="0x0" setup="0x0" room="0x4" actor="0xd" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Great Bay Temple Pot Compass Room Water 3" slice="0x0" setup="0x0" room="0x4" actor="0xc" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Red Pipe Before Wart 1" slice="0x0" setup="0x0" room="0x6" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Red Pipe Before Wart 2" slice="0x0" setup="0x0" room="0x6" actor="0x9" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Red Pipe Before Wart 3" slice="0x0" setup="0x0" room="0x6" actor="0xa" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Red Pipe Before Wart 4" slice="0x0" setup="0x0" room="0x6" actor="0xb" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 1" slice="0x0" setup="0x0" room="0x7" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 2" slice="0x0" setup="0x0" room="0x7" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 3" slice="0x0" setup="0x0" room="0x7" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 4" slice="0x0" setup="0x0" room="0x7" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 5" slice="0x0" setup="0x0" room="0x7" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 6" slice="0x0" setup="0x0" room="0x7" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 7" slice="0x0" setup="0x0" room="0x7" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Wart 8" slice="0x0" setup="0x0" room="0x7" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 1" slice="0x0" setup="0x0" room="0x9" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 2" slice="0x0" setup="0x0" room="0x9" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 3" slice="0x0" setup="0x0" room="0x9" actor="0x16" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 4" slice="0x0" setup="0x0" room="0x9" actor="0x17" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 5" slice="0x0" setup="0x0" room="0x9" actor="0x18" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 6" slice="0x0" setup="0x0" room="0x9" actor="0x19" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 7" slice="0x0" setup="0x0" room="0x9" actor="0x1a" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 2 8" slice="0x0" setup="0x0" room="0x9" actor="0x1b" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 3 Upper 1" slice="0x0" setup="0x0" room="0xa" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 3 Upper 2" slice="0x0" setup="0x0" room="0xa" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 3 Lower" slice="0x0" setup="0x0" room="0xa" actor="0x15" item="ARROWS_20"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 1" slice="0x0" setup="0x0" room="0xb" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 2" slice="0x0" setup="0x0" room="0xb" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 3" slice="0x0" setup="0x0" room="0xb" actor="0x2" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 4" slice="0x0" setup="0x0" room="0xb" actor="0x3" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 5" slice="0x0" setup="0x0" room="0xb" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 6" slice="0x0" setup="0x0" room="0xb" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 7" slice="0x0" setup="0x0" room="0xb" actor="0xe" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Pre-Boss 8" slice="0x0" setup="0x0" room="0xb" actor="0xf" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 1 1" slice="0x0" setup="0x0" room="0xc" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 1 2" slice="0x0" setup="0x0" room="0xc" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 1 3" slice="0x0" setup="0x0" room="0xc" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Green Pipe 1 4" slice="0x0" setup="0x0" room="0xc" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 01" slice="0x0" setup="0x0" room="0xe" actor="0x2" item="BOMBS_5"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 02" slice="0x0" setup="0x0" room="0xe" actor="0x3" item="BOMBS_5"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 03" slice="0x0" setup="0x0" room="0xe" actor="0x4" item="BOMBS_5"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 04" slice="0x0" setup="0x0" room="0xe" actor="0x5" item="BOMBS_5"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 05" slice="0x0" setup="0x0" room="0xe" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 06" slice="0x0" setup="0x0" room="0xe" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 07" slice="0x0" setup="0x0" room="0xe" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 08" slice="0x0" setup="0x0" room="0xe" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 09" slice="0x0" setup="0x0" room="0xe" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 10" slice="0x0" setup="0x0" room="0xe" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 11" slice="0x0" setup="0x0" room="0xe" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Great Bay Temple Pot Before Wart 12" slice="0x0" setup="0x0" room="0xe" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Chu Room 1" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Chu Room 2" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Chu Room 3" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Chu Room 4" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Chu Room 5" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 01" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 02" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 03" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 04" slice="0x0" setup="0x0" room="0x5" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 05" slice="0x0" setup="0x0" room="0x5" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 06" slice="0x0" setup="0x0" room="0x5" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 07" slice="0x0" setup="0x0" room="0x5" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 08" slice="0x0" setup="0x0" room="0x5" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 09" slice="0x0" setup="0x0" room="0x5" actor="0xa" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 10" slice="0x0" setup="0x0" room="0x5" actor="0xb" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 11" slice="0x0" setup="0x0" room="0x5" actor="0xc" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 12" slice="0x0" setup="0x0" room="0x5" actor="0xd" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 13" slice="0x0" setup="0x0" room="0x5" actor="0xe" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 14" slice="0x0" setup="0x0" room="0x5" actor="0xf" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 15" slice="0x0" setup="0x0" room="0x5" actor="0x10" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Before Boss Key 16" slice="0x0" setup="0x0" room="0x5" actor="0x11" item="ARROWS_10"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 1" slice="0x0" setup="0x0" room="0xa" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 2" slice="0x0" setup="0x0" room="0xa" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 3" slice="0x0" setup="0x0" room="0xa" actor="0x18" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 4" slice="0x0" setup="0x0" room="0xa" actor="0x19" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 5" slice="0x0" setup="0x0" room="0xa" actor="0x1a" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 6" slice="0x0" setup="0x0" room="0xa" actor="0x1b" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Great Bay Temple Crate Green Pipe 7" slice="0x0" setup="0x0" room="0xa" actor="0x1c" item="MAGIC_JAR_LARGE"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 1" slice="0x0" setup="0x0" room="0xd" actor="0x0" item="NOTHING"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 2" slice="0x0" setup="0x0" room="0xd" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 3" slice="0x0" setup="0x0" room="0xd" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 4" slice="0x0" setup="0x0" room="0xd" actor="0x3" item="FLEXIBLE"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 5" slice="0x0" setup="0x0" room="0xd" actor="0x4" item="BOMBS_5"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 6" slice="0x0" setup="0x0" room="0xd" actor="0x5" item="BOMBS_5"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 7" slice="0x0" setup="0x0" room="0xd" actor="0x6" item="ARROWS_10"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Entrance 8" slice="0x0" setup="0x0" room="0xd" actor="0x7" item="ARROWS_10"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Chu Room 1" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="NOTHING"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Chu Room 2" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Chu Room 3" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Chu Room 4" slice="0x0" setup="0x0" room="0x2" actor="0x5" item="BOMBS_5"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Chu Room 5" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="ARROWS_10"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Green Pipe 1 1" slice="0x0" setup="0x0" room="0xc" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Green Pipe 1 2" slice="0x0" setup="0x0" room="0xc" actor="0xb" item="BOMBS_5"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Green Pipe 1 3" slice="0x0" setup="0x0" room="0xc" actor="0xc" item="ARROWS_20"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Green Pipe 2 1" slice="0x0" setup="0x0" room="0x9" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="barrel" location="Great Bay Temple Barrel Green Pipe 2 2" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Compass Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Compass Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Entrance 1" slice="0x0" setup="0x0" room="0x8" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Entrance 2" slice="0x0" setup="0x0" room="0x8" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Entrance 3" slice="0x0" setup="0x0" room="0x8" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Entrance 4" slice="0x0" setup="0x0" room="0x8" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Entrance 5" slice="0x0" setup="0x0" room="0x8" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Hookshot 1" slice="0x0" setup="0x0" room="0xc" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Great Bay Temple Rupee Hookshot 2" slice="0x0" setup="0x0" room="0xc" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="icicle" location="Great Bay Temple Icicle Compass Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RANDOM"/>
+    <xflag type="icicle" location="Great Bay Temple Icicle Compass Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="RANDOM"/>
+    <xflag type="icicle" location="Great Bay Temple Icicle Compass Room 3" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="RANDOM"/>
+    <xflag type="icicle" location="Great Bay Temple Icicle Compass Room 4" slice="0x0" setup="0x0" room="0x4" actor="0x6" item="RANDOM"/>
+    <xflag type="icicle" location="Great Bay Temple Icicle Compass Room 5" slice="0x0" setup="0x0" room="0x4" actor="0x7" item="RANDOM"/>
+  </scene>
+</checks>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="ROAD_IKANA">
+    <chest location="Road to Ikana Chest" flag="0x00" item="RUPEE_RED"/>
+    <npc location="Road to Ikana Stone Mask" npc="MASK_STONE" item="MASK_STONE" hint="INVISIBLE_SOLDIER"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 1" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 2" slice="0x1" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 3" slice="0x2" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 4" slice="0x3" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 5" slice="0x4" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Road to Ikana Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="pot" location="Road to Ikana Pot" slice="0x0" setup="0x0" room="0x0" actor="0x4c" item="FAIRY"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x3c" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x3e" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 3" slice="0x0" setup="0x0" room="0x0" actor="0x40" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 4" slice="0x0" setup="0x0" room="0x0" actor="0x41" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 5" slice="0x0" setup="0x0" room="0x0" actor="0x42" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 6" slice="0x0" setup="0x0" room="0x0" actor="0x43" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 7" slice="0x0" setup="0x0" room="0x0" actor="0x44" item="NOTHING"/>
+    <xflag type="boulder-red" location="Road to Ikana Red Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
+  </scene>
+  <scene id="GROTTOS">
+    <chest location="Road to Ikana Grotto" flag="0x16" item="BOMBCHU"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 01" slice="0x0" setup="0x0" room="0x36" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 02" slice="0x0" setup="0x0" room="0x36" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 03" slice="0x0" setup="0x0" room="0x36" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 04" slice="0x0" setup="0x0" room="0x36" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 05" slice="0x0" setup="0x0" room="0x36" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 06" slice="0x0" setup="0x0" room="0x36" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 07" slice="0x0" setup="0x0" room="0x36" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 08" slice="0x0" setup="0x0" room="0x36" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 09" slice="0x0" setup="0x0" room="0x36" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 10" slice="0x0" setup="0x0" room="0x36" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 11" slice="0x0" setup="0x0" room="0x36" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 12" slice="0x0" setup="0x0" room="0x36" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 13" slice="0x0" setup="0x0" room="0x36" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Road to Ikana Grotto Grass 14" slice="0x0" setup="0x0" room="0x36" actor="0x13" item="RANDOM"/>
+  </scene>
+</checks>

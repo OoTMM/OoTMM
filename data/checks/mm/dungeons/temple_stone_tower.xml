@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="TEMPLE_STONE_TOWER">
+    <chest location="Stone Tower Temple Entrance Chest" flag="0x16" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Entrance Switch Chest" flag="0x12" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Under West Garden Ledge Chest" flag="0x15" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Under West Garden Lava Chest" flag="0x02" item="SMALL_KEY_ST"/>
+    <chest location="Stone Tower Temple Map" flag="0x1d" item="MAP_ST"/>
+    <chest location="Stone Tower Temple Center Sun Block Chest" flag="0x18" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Center Across Water Chest" flag="0x01" item="SMALL_KEY_ST"/>
+    <chest location="Stone Tower Temple Compass" flag="0x1c" item="COMPASS_ST"/>
+    <chest location="Stone Tower Temple Water Sun Switch Chest" flag="0x17" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Mirrors Room Center Chest" flag="0x0f" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Mirrors Room Right Chest" flag="0x0b" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Wind Room Ledge Chest" flag="0x19" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Wind Room Jail Chest" flag="0x0d" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Light Arrow" flag="0x1b" item="ARROW_LIGHT"/>
+    <chest location="Stone Tower Temple Before Water Bridge Chest" flag="0x14" item="STRAY_FAIRY_ST"/>
+    <chest location="Stone Tower Temple Water Bridge Chest" flag="0x0c" item="STRAY_FAIRY_ST"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Center Room Right" slice="0x0" setup="0x0" room="0x1" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Center Room Left" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 1" slice="0x0" setup="0x0" room="0x8" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 2" slice="0x0" setup="0x0" room="0x8" actor="0x1" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 3" slice="0x0" setup="0x0" room="0x8" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 4" slice="0x0" setup="0x0" room="0x8" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 5" slice="0x0" setup="0x0" room="0x8" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 6" slice="0x0" setup="0x0" room="0x8" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 7" slice="0x0" setup="0x0" room="0x8" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Before Water Bridge 8" slice="0x0" setup="0x0" room="0x8" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Wind Room 1" slice="0x0" setup="0x0" room="0x9" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Wind Room 2" slice="0x0" setup="0x0" room="0x9" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Wind Room 3" slice="0x0" setup="0x0" room="0x9" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Wind Room 4" slice="0x0" setup="0x0" room="0x9" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Wind Room 5" slice="0x0" setup="0x0" room="0x9" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Rupee Wind Room 6" slice="0x0" setup="0x0" room="0x9" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Underwater Lower 1" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Underwater Lower 2" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Underwater Lower 3" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Underwater Upper 1" slice="0x0" setup="0x0" room="0x3" actor="0xd" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Underwater Upper 2" slice="0x0" setup="0x0" room="0x3" actor="0xe" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Bridge 1" slice="0x0" setup="0x0" room="0x3" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Water Room Bridge 2" slice="0x0" setup="0x0" room="0x3" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room After Block 1" slice="0x0" setup="0x0" room="0x4" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room After Block 2" slice="0x0" setup="0x0" room="0x4" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room 1" slice="0x0" setup="0x0" room="0x4" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room 2" slice="0x0" setup="0x0" room="0x4" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room 3" slice="0x0" setup="0x0" room="0x4" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room 4" slice="0x0" setup="0x0" room="0x4" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room After Block 3" slice="0x0" setup="0x0" room="0x4" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Lava Room After Block 4" slice="0x0" setup="0x0" room="0x4" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Mirror Room 1" slice="0x0" setup="0x0" room="0x7" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Mirror Room 2" slice="0x0" setup="0x0" room="0x7" actor="0x6" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 1" slice="0x0" setup="0x0" room="0x8" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 2" slice="0x0" setup="0x0" room="0x8" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 3" slice="0x0" setup="0x0" room="0x8" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 4" slice="0x0" setup="0x0" room="0x8" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 5" slice="0x0" setup="0x0" room="0x8" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 6" slice="0x0" setup="0x0" room="0x8" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 7" slice="0x0" setup="0x0" room="0x8" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Before Water Bridge 8" slice="0x0" setup="0x0" room="0x8" actor="0x15" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Wind Room 1" slice="0x0" setup="0x0" room="0x9" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Wind Room 2" slice="0x0" setup="0x0" room="0x9" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Wind Room 3" slice="0x0" setup="0x0" room="0x9" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Pot Wind Room 4" slice="0x0" setup="0x0" room="0x9" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="ARROWS_10"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Water 1" slice="0x0" setup="0x0" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Water 2" slice="0x0" setup="0x0" room="0x1" actor="0x17" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Water 3" slice="0x0" setup="0x0" room="0x1" actor="0x18" item="ARROWS_20"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Large 1" slice="0x0" setup="0x0" room="0x2" actor="0x18" item="NOTHING"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Large 2" slice="0x0" setup="0x0" room="0x2" actor="0x19" item="NOTHING"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Large 3" slice="0x0" setup="0x0" room="0x2" actor="0x1a" item="NOTHING"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Large 4" slice="0x0" setup="0x0" room="0x2" actor="0x1b" item="NOTHING"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Large 5" slice="0x0" setup="0x0" room="0x2" actor="0x1c" item="NOTHING"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Small 1" slice="0x0" setup="0x0" room="0x2" actor="0x1e" item="BOMBS_5"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Maze Small 2" slice="0x0" setup="0x0" room="0x2" actor="0x1f" item="BOMBS_5"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Mirrors 1" slice="0x0" setup="0x0" room="0x7" actor="0x1d" item="RUPEE_RED"/>
+    <xflag type="crate" location="Stone Tower Temple Crate Mirrors 2" slice="0x0" setup="0x0" room="0x7" actor="0x1e" item="RUPEE_RED"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Entrance 3" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Garden 1" slice="0x0" setup="0x0" room="0x2" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Garden 2" slice="0x0" setup="0x0" room="0x2" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Garden 3" slice="0x0" setup="0x0" room="0x2" actor="0x14" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Garden 4" slice="0x0" setup="0x0" room="0x2" actor="0x15" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Garden 5" slice="0x0" setup="0x0" room="0x2" actor="0x16" item="RANDOM"/>
+    <xflag type="grass" location="Stone Tower Temple Grass Garden 6" slice="0x0" setup="0x0" room="0x2" actor="0x17" item="RANDOM"/>
+  </scene>
+</checks>

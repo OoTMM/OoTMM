@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="DEKU_SHRINE">
+    <npc location="Deku Shrine Mask of Scents" npc="MASK_SCENTS" item="MASK_SCENTS" hint="BUTLER_RACE"/>
+    <xflag type="pot" location="Deku Shrine Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Deku Shrine Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 01" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 02" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 03" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 04" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 05" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 06" slice="0x0" setup="0x0" room="0x2" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 07" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 08" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 09" slice="0x0" setup="0x0" room="0x3" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 10" slice="0x0" setup="0x0" room="0x3" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 11" slice="0x0" setup="0x0" room="0x3" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 12" slice="0x0" setup="0x0" room="0x3" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 13" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 14" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 15" slice="0x0" setup="0x0" room="0x4" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 16" slice="0x0" setup="0x0" room="0x4" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 17" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 18" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 19" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee Main 20" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 01" slice="0x0" setup="0x0" room="0x8" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 02" slice="0x0" setup="0x0" room="0x8" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 03" slice="0x0" setup="0x0" room="0x8" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 04" slice="0x0" setup="0x0" room="0x8" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 05" slice="0x0" setup="0x0" room="0x8" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 06" slice="0x0" setup="0x0" room="0x8" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 07" slice="0x0" setup="0x0" room="0x8" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 08" slice="0x0" setup="0x0" room="0x8" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 09" slice="0x0" setup="0x0" room="0x8" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Deku Shrine Rupee End 10" slice="0x0" setup="0x0" room="0x8" actor="0x9" item="RUPEE_GREEN"/>
+  </scene>
+</checks>

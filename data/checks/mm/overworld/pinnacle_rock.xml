@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="PINNACLE_ROCK">
+    <chest location="Pinnacle Rock Chest 1" flag="0x01" item="RUPEE_RED"/>
+    <chest location="Pinnacle Rock Chest 2" flag="0x02" item="RUPEE_RED"/>
+    <npc location="Pinnacle Rock HP" npc="SEAHORSE_HEART_PIECE" item="HEART_PIECE" hint="PINNACLE_ROCK_HP"/>
+    <xflag type="rock" location="Pinnacle Rock Rock Unreachable 1" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="RANDOM"/>
+    <xflag type="rock" location="Pinnacle Rock Rock Unreachable 2" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 01" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 02" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 03" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 04" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 05" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 06" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 07" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 08" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 09" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 10" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Pinnacle Rock Pot 11" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="MAGIC_JAR_SMALL"/>
+  </scene>
+</checks>

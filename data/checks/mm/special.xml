@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="NONE">
+    <npc location="Initial Song of Healing" npc="SONG_HEALING" item="SONG_HEALING"/>
+    <npc location="Oath to Order" npc="SONG_ORDER" item="SONG_ORDER"/>
+    <npc location="Tingle Map Clock Town" npc="TINGLE_MAP_CLOCK_TOWN" item="WORLD_MAP_CLOCK_TOWN"/>
+    <npc location="Tingle Map Woodfall" npc="TINGLE_MAP_WOODFALL" item="WORLD_MAP_WOODFALL"/>
+    <npc location="Tingle Map Snowhead" npc="TINGLE_MAP_SNOWHEAD" item="WORLD_MAP_SNOWHEAD"/>
+    <npc location="Tingle Map Ranch" npc="TINGLE_MAP_ROMANI_RANCH" item="WORLD_MAP_ROMANI_RANCH"/>
+    <npc location="Tingle Map Great Bay" npc="TINGLE_MAP_GREAT_BAY" item="WORLD_MAP_GREAT_BAY"/>
+    <npc location="Tingle Map Ikana" npc="TINGLE_MAP_STONE_TOWER" item="WORLD_MAP_STONE_TOWER"/>
+  </scene>
+</checks>

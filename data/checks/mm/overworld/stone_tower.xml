@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="STONE_TOWER">
+    <npc location="Stone Tower Owl Statue" npc="OWL_STONE_TOWER" item="OWL_STONE_TOWER"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 01" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 02" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 03" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 04" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 05" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 06" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 07" slice="0x0" setup="0x0" room="0x0" actor="0x2d" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 08" slice="0x0" setup="0x0" room="0x0" actor="0x2e" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 09" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 10" slice="0x0" setup="0x0" room="0x0" actor="0x30" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 11" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Lower Scarecrow 12" slice="0x0" setup="0x0" room="0x0" actor="0x3b" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 1" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 2" slice="0x0" setup="0x0" room="0x0" actor="0x33" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 3" slice="0x0" setup="0x0" room="0x0" actor="0x34" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 4" slice="0x0" setup="0x0" room="0x0" actor="0x35" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 5" slice="0x0" setup="0x0" room="0x0" actor="0x36" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 6" slice="0x0" setup="0x0" room="0x0" actor="0x37" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 7" slice="0x0" setup="0x0" room="0x0" actor="0x38" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 8" slice="0x0" setup="0x0" room="0x0" actor="0x39" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Pot Higher Scarecrow 9" slice="0x0" setup="0x0" room="0x0" actor="0x3a" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Pot Climb 1" slice="0x0" setup="0x0" room="0x0" actor="0x3c" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Climb 2" slice="0x0" setup="0x0" room="0x0" actor="0x3d" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Pot Owl Statue 1" slice="0x0" setup="0x0" room="0x0" actor="0x3e" item="BOMBS_5"/>
+    <xflag type="pot" location="Stone Tower Pot Owl Statue 2" slice="0x0" setup="0x0" room="0x0" actor="0x3f" item="ARROWS_20"/>
+    <xflag type="pot" location="Stone Tower Pot Owl Statue 3" slice="0x0" setup="0x0" room="0x0" actor="0x40" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Pot Owl Statue 4" slice="0x0" setup="0x0" room="0x0" actor="0x41" item="MAGIC_JAR_LARGE"/>
+  </scene>
+  <scene id="STONE_TOWER_INVERTED">
+    <chest location="Stone Tower Inverted Chest 1" flag="0x1d" item="RUPEE_SILVER"/>
+    <chest location="Stone Tower Inverted Chest 2" flag="0x1e" item="BOMBCHU_10"/>
+    <chest location="Stone Tower Inverted Chest 3" flag="0x1f" item="MAGIC_BEAN"/>
+    <xflag type="rock" location="Stone Tower Inverted Rock 1" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="RANDOM"/>
+    <xflag type="rock" location="Stone Tower Inverted Rock 2" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="RANDOM"/>
+    <xflag type="pot" location="Stone Tower Inverted Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Inverted Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Inverted Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Inverted Pot 4" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="BOMBS_5"/>
+    <xflag type="pot" location="Stone Tower Inverted Pot 5" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="soil" location="Stone Tower Inverted Soil Lower" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="ARROWS_30"/>
+    <xflag type="soil" location="Stone Tower Inverted Soil Upper" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="ARROWS_30"/>
+  </scene>
+</checks>

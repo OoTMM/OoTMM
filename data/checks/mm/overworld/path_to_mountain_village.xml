@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="PATH_MOUNTAIN_VILLAGE">
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 1" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 2" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 3" slice="0x0" setup="0x0" room="0x0" actor="0x1e" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 4" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 1" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 2" slice="0x0" setup="0x0" room="0x0" actor="0x22" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 3" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 4" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 1" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 2" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 3" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Winter 1" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Winter 2" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Winter 3" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Upper Winter" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Spring 1" slice="0x0" setup="0x1" room="0x0" actor="0xc" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Spring 2" slice="0x0" setup="0x1" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Spring 3" slice="0x0" setup="0x1" room="0x0" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Spring 4" slice="0x0" setup="0x1" room="0x0" actor="0x10" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Upper Spring 1" slice="0x0" setup="0x1" room="0x0" actor="0xd" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Upper Spring 2" slice="0x0" setup="0x1" room="0x0" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Path to Mountain Village Small Snowball Upper Spring 3" slice="0x0" setup="0x1" room="0x0" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="tree" location="Path to Mountain Village Snow Tree Lower 1" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="NOTHING"/>
+    <xflag type="tree" location="Path to Mountain Village Snow Tree Lower 2" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="NOTHING"/>
+    <xflag type="tree" location="Path to Mountain Village Snow Tree Upper 1" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="NOTHING"/>
+    <xflag type="tree" location="Path to Mountain Village Snow Tree Upper 2" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="NOTHING"/>
+  </scene>
+</checks>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="IKANA_GRAVEYARD">
+    <chest location="Ikana Graveyard Captain Mask" flag="0x00" item="MASK_CAPTAIN"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 3" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 4" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 5" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 1" slice="0x0" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 2" slice="0x1" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 3" slice="0x2" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 4" slice="0x3" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 5" slice="0x4" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 6" slice="0x5" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 7" slice="0x6" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 8" slice="0x7" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 9" slice="0x8" setup="0x0" room="0x1" actor="0x2f" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Wall 1" slice="0x0" setup="0x0" room="0x1" actor="0x22" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Wall 2" slice="0x0" setup="0x0" room="0x1" actor="0x23" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Wall 3" slice="0x0" setup="0x0" room="0x1" actor="0x24" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Wall 4" slice="0x0" setup="0x0" room="0x1" actor="0x25" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Wall 5" slice="0x0" setup="0x0" room="0x1" actor="0x26" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 1" slice="0x0" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 2" slice="0x1" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 3" slice="0x2" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 4" slice="0x3" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 5" slice="0x4" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Ikana Graveyard Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x1" actor="0x2c" item="RANDOM"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 01" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 02" slice="0x1" setup="0x0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 03" slice="0x2" setup="0x0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 04" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 05" slice="0x1" setup="0x0" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 06" slice="0x2" setup="0x0" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 07" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 08" slice="0x1" setup="0x0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 09" slice="0x2" setup="0x0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 10" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 11" slice="0x1" setup="0x0" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ikana Graveyard Wonder Item 12" slice="0x2" setup="0x0" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
+  </scene>
+  <scene id="BENEATH_THE_GRAVEYARD">
+    <chest location="Beneath The Graveyard Chest" flag="0x03" item="RUPEE_PURPLE"/>
+    <npc location="Beneath The Graveyard Song of Storms" npc="SONG_STORMS" item="SONG_STORMS"/>
+    <chest location="Beneath The Graveyard HP" flag="0x00" item="HEART_PIECE"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 1 Early 1" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 1 Early 2" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 Early" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 1 Bats 1" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 1 Bats 2" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 1 Bats 3" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="NOTHING"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 After Pit 1" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="NOTHING"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 After Pit 2" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="NOTHING"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 Before Pit 1" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 Before Pit 2" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 After Pit 3" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Night 2 After Pit 4" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="NOTHING"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 2" slice="0x1" setup="0x0" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 3" slice="0x2" setup="0x0" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 4" slice="0x3" setup="0x0" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 5" slice="0x4" setup="0x0" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 6" slice="0x5" setup="0x0" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Beneath The Graveyard Rupee 7" slice="0x6" setup="0x0" room="0x0" actor="0x0" item="RUPEE_RED"/>
+  </scene>
+  <scene id="DAMPE_HOUSE">
+    <chest location="Beneath The Graveyard Dampe Chest" flag="0x00" item="BOTTLE_EMPTY" hint="GRAVEYARD_NIGHT3"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 01" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 02" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 03" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 04" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 05" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 06" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 07" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="RUPEE_PURPLE"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 08" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 09" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="ARROWS_10"/>
+    <xflag type="pot" location="Beneath The Graveyard Pot Dampe 10" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="RECOVERY_HEART"/>
+  </scene>
+  <scene id="GROTTOS">
+    <chest location="Ikana Graveyard Grotto" flag="0x18" item="BOMBCHU_5"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 01" slice="0x0" setup="0x0" room="0x38" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 02" slice="0x0" setup="0x0" room="0x38" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 03" slice="0x0" setup="0x0" room="0x38" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 04" slice="0x0" setup="0x0" room="0x38" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 05" slice="0x0" setup="0x0" room="0x38" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 06" slice="0x0" setup="0x0" room="0x38" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 07" slice="0x0" setup="0x0" room="0x38" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 08" slice="0x0" setup="0x0" room="0x38" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 09" slice="0x0" setup="0x0" room="0x38" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 10" slice="0x0" setup="0x0" room="0x38" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 11" slice="0x0" setup="0x0" room="0x38" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 12" slice="0x0" setup="0x0" room="0x38" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 13" slice="0x0" setup="0x0" room="0x38" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grotto Grass 14" slice="0x0" setup="0x0" room="0x38" actor="0x13" item="RANDOM"/>
+  </scene>
+</checks>

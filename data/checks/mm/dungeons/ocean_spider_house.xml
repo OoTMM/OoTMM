@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="SPIDER_HOUSE_OCEAN">
+    <npc location="Ocean Spider House Wallet" npc="SPIDER_HOUSE_OCEAN" item="WALLET"/>
+    <chest location="Ocean Spider House Chest HP" flag="0x00" item="HEART_PIECE" hint="OSH_CHEST"/>
+    <chest location="Ocean Skulltula Entrance Right Wall" flag="0x0c" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Entrance Left Wall" flag="0x0d" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Entrance Web" flag="0x0f" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Ceiling Edge" flag="0x05" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Ceiling Plank" flag="0x06" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Jar" flag="0x0b" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Webbed Hole" flag="0x0e" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Webbed Pot" flag="0x17" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Upper Pot" flag="0x18" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Lower Pot" flag="0x1b" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Behind Skull 1" flag="0x1d" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula 2nd Room Behind Skull 2" flag="0x1e" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Storage Room Behind Boat" flag="0x01" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Storage Room Ceiling Web" flag="0x09" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Storage Room Behind Crate" flag="0x0a" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Storage Room Crate" flag="0x16" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Storage Room Jar" flag="0x1a" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library Hole Behind Picture" flag="0x02" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library Hole Behind Cabinet" flag="0x03" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library On Corner Bookshelf" flag="0x04" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library Ceiling Edge" flag="0x08" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library Behind Picture" flag="0x14" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library Behind Bookcase 1" flag="0x15" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Library Behind Bookcase 2" flag="0x1c" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Colored Skulls Ceiling Edge" flag="0x07" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Colored Skulls Chandelier 1" flag="0x10" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Colored Skulls Chandelier 2" flag="0x11" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Colored Skulls Chandelier 3" flag="0x12" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Colored Skulls Behind Picture" flag="0x13" item="GS_TOKEN_OCEAN"/>
+    <chest location="Ocean Skulltula Colored Skulls Pot" flag="0x19" item="GS_TOKEN_OCEAN"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 3" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 4" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room Web" slice="0x0" setup="0x0" room="0x1" actor="0x1b" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room 1" slice="0x0" setup="0x0" room="0x1" actor="0x1c" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room 2" slice="0x0" setup="0x0" room="0x1" actor="0x1e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room Boe" slice="0x0" setup="0x0" room="0x1" actor="0x1d" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ocean Spider House Pot Colored Skulls 1" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Colored Skulls 2" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 1" slice="0x0" setup="0x0" room="0x5" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 2" slice="0x0" setup="0x0" room="0x5" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 3" slice="0x0" setup="0x0" room="0x5" actor="0xd" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage Top 1" slice="0x0" setup="0x0" room="0x5" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage Top 2" slice="0x0" setup="0x0" room="0x5" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage Top 3" slice="0x0" setup="0x0" room="0x5" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 4" slice="0x0" setup="0x0" room="0x5" actor="0x11" item="MAGIC_JAR_SMALL"/>
+    <xflag type="crate" location="Ocean Spider House Crate" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="NOTHING"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 1" slice="0x0" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 2" slice="0x1" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 3" slice="0x2" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 4" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 5" slice="0x1" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 6" slice="0x2" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 7" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 8" slice="0x1" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 9" slice="0x2" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+  </scene>
+</checks>

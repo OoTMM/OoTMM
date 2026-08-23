@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="mm">
+  <scene id="ROAD_SOUTHERN_SWAMP">
+    <collectible location="Road to Southern Swamp HP" flag="0x01" item="HEART_PIECE"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 01" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 02" slice="0x1" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 03" slice="0x2" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 04" slice="0x3" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 05" slice="0x4" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 06" slice="0x5" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 07" slice="0x6" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 08" slice="0x7" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 09" slice="0x8" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 01" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 02" slice="0x1" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 03" slice="0x2" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 04" slice="0x3" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 05" slice="0x4" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 06" slice="0x5" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 07" slice="0x6" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 08" slice="0x7" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 09" slice="0x8" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x30" item="RANDOM"/>
+    <xflag type="pot" location="Road to Southern Swamp Potted Plant 1 Pot" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="NOTHING"/>
+    <xflag type="grass" location="Road to Southern Swamp Potted Plant 1 Grass" slice="0x1" setup="0x0" room="0x0" actor="0x28" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Road to Southern Swamp Potted Plant 2 Pot" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="NOTHING"/>
+    <xflag type="grass" location="Road to Southern Swamp Potted Plant 2 Grass" slice="0x1" setup="0x0" room="0x0" actor="0x29" item="RECOVERY_HEART"/>
+    <xflag type="tree" location="Road to Southern Swamp Forked Tree 1" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="NOTHING"/>
+    <xflag type="tree" location="Road to Southern Swamp Forked Tree 2" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="NOTHING"/>
+    <xflag type="tree" location="Road to Southern Swamp Forked Tree 3" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="NOTHING"/>
+    <xflag type="tree" location="Road to Southern Swamp Forked Tree 4" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="NOTHING"/>
+    <xflag type="tree" location="Road to Southern Swamp Forked Tree 5" slice="0x0" setup="0x0" room="0x0" actor="0x1e" item="NOTHING"/>
+    <xflag type="tree" location="Road to Southern Swamp Forked Tree 6" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="NOTHING"/>
+  </scene>
+  <scene id="SHOOTING_GALLERY_SWAMP">
+    <npc location="Swamp Archery Reward 1" npc="SHOOTING_GAME_SWAMP_1" item="BOW"/>
+    <npc location="Swamp Archery Reward 2" npc="SHOOTING_GAME_SWAMP_2" item="HEART_PIECE"/>
+  </scene>
+  <scene id="GROTTOS">
+    <chest location="Road to Southern Swamp Grotto" flag="0x1e" item="RUPEE_RED"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 01" slice="0x0" setup="0x0" room="0x3e" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 02" slice="0x0" setup="0x0" room="0x3e" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 03" slice="0x0" setup="0x0" room="0x3e" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 04" slice="0x0" setup="0x0" room="0x3e" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 05" slice="0x0" setup="0x0" room="0x3e" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 06" slice="0x0" setup="0x0" room="0x3e" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 07" slice="0x0" setup="0x0" room="0x3e" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 08" slice="0x0" setup="0x0" room="0x3e" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 09" slice="0x0" setup="0x0" room="0x3e" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 10" slice="0x0" setup="0x0" room="0x3e" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 11" slice="0x0" setup="0x0" room="0x3e" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 12" slice="0x0" setup="0x0" room="0x3e" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 13" slice="0x0" setup="0x0" room="0x3e" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Road to Southern Swamp Grotto Grass 14" slice="0x0" setup="0x0" room="0x3e" actor="0x13" item="RANDOM"/>
+  </scene>
+</checks>
