@@ -1,5 +1,6 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
-import { readFile } from 'node:fs/promises';
 import { gameId } from '../src/util';
 
 type BuildChecksState = {
@@ -42,11 +43,10 @@ const OV_VALUES = {
   xflag: 0x10,
 };
 
-export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksState) {
+export async function extractEntries(filepath: string, state: BuildChecksState) {
   /* Parse the XML file */
   const entries: any = [];
-  const file = __dirname + `/../../../data/checks/checks_${game}.xml`;
-  const data = await readFile(file, 'utf-8');
+  const data = await fs.readFile(filepath, 'utf-8');
   const parser = new XMLParser({
     ignoreAttributes: false,
     preserveOrder: true,
@@ -54,6 +54,7 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
   });
   const xml = parser.parse(data);
   const xmlRoot = xml.find((e: any) => e['checks']);
+  const game = xmlRoot[':@'].game;
   for (const xmlScene of xmlRoot.checks) {
     const scene = gameId(game, xmlScene[':@'].id, '_');
     const children = xmlScene['scene'];
@@ -129,11 +130,32 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
 }
 
 export async function buildChecks(state: BuildChecksState): Promise<any> {
-  const [oot, mm] = await Promise.all([
-    buildGameChecks('oot', state),
-    buildGameChecks('mm', state),
-  ]);
+  /* Detect XML files */
+  const inputDir = path.resolve(__dirname, '../../../data/checks');
+  const filepaths: string[] = [];
+  for await (const entry of fs.glob('**/*.xml', { cwd: inputDir })) {
+    filepaths.push(entry);
+  }
+  filepaths.sort();
 
-  return [...oot, ...mm];
+  /* Collect entries */
+  const entries: any = [];
+  for (const f of filepaths) {
+    const filepath = path.resolve(inputDir, f);
+    const newEntries = await extractEntries(filepath, state);
+    entries.push(...newEntries);
+  }
+
+  /* Detect duplicates */
+  const set = new Set<number>();
+  for (const entry of entries) {
+    if (set.has(entry.key)) {
+      const matching = entries.filter((e: any) => e.key === entry.key).map((e: any) => e.location);
+      console.error(`Duplicate check key ${entry.key} for locations ${matching.join(', ')}`);
+      process.exit(1);
+    }
+  }
+
+  return entries;
 }
 
