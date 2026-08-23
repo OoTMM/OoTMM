@@ -74,7 +74,7 @@ typedef struct PACKED
 {
     MultiPacketWalOutHeader wal;
     u8 to;
-    u8 game;
+    u8 unused;
     s16 gi;
     s16 flags;
     u32 key;
@@ -92,7 +92,7 @@ typedef struct PACKED
 {
     MultiPacketWalInHeader wal;
     u8 to;
-    u8 game;
+    u8 unused;
     s16 gi;
     s16 flags;
     u32 key;

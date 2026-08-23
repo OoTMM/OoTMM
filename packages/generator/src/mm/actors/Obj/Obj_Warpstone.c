@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/checks.h>
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/config.h>
@@ -28,7 +29,7 @@ static void sendNetOwl(PlayState* play, int owlId)
     }
 
     /* Network */
-    Multi_SendSelfItem(gi, 0, ((u32)OV_NPC << 24) | npc);
+    Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

@@ -286,7 +286,6 @@ export const ITEMS_SUBSTITUTIONS: { [k: string]: string } = {
 };
 
 type RandomizerPatcherChecksContext = {
-  game: Game;
   worldId: number;
   logic: LogicResult;
   settings: Settings;
@@ -312,20 +311,16 @@ export class RandomizerPatcherChecks {
       const loc = makeLocation(locId, this.ctx.worldId);
       const item = this.ctx.logic.items.get(loc)!;
 
-      if (check.game !== this.ctx.game) {
-        continue;
-      }
-
       /* Skip cows if not shuffled */
       if (check.game === 'oot' && check.type === 'cow' && !this.ctx.settings.cowShuffleOot) continue;
       if (check.game === 'mm' && check.type === 'cow' && !this.ctx.settings.cowShuffleMm) continue;
 
-      const itemGi = gi(this.ctx.settings, this.ctx.game, item.item, true);
+      const itemGi = gi(this.ctx.settings, check.game, item.item, true);
       const b = new Uint8Array(16);
       const cloakItem = this.ctx.logic.itemCloaks.get(loc);
       let cloakGi = 0;
       if (cloakItem) {
-        cloakGi = gi(this.ctx.settings, this.ctx.game, cloakItem, true);
+        cloakGi = gi(this.ctx.settings, check.game, cloakItem, true);
       }
       bufWriteU32BE(b, 0, check.key);
       bufWriteU16BE(b, 4, playerId(item.player));

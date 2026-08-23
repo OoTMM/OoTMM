@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/audio.h>
+#include <combo/checks.h>
 #include <combo/config.h>
 #include <combo/context.h>
 #include <combo/custom.h>
@@ -115,7 +116,7 @@ static void sendSelfMajorasMask(void)
     gi = GI_MM_MASK_MAJORA;
     npc = NPC_MM_MAJORA;
 
-    Multi_SendSelfItem(gi, 0, ((u32)OV_NPC << 24) | npc);
+    Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

@@ -12,6 +12,7 @@
 #include <combo/multi.h>
 #include <combo/play.h>
 #include <combo/shop.h>
+#include <combo/checks.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -443,22 +444,6 @@ u8 Play_SceneKey(u8 sceneId)
     return sceneId;
 }
 
-static u32 makeOverrideKey(const ComboItemQuery* q)
-{
-    u32 key;
-
-    if (q->ovType == OV_NONE)
-        return 0;
-
-    key = 0;
-    key |= (((u32)(q->ovType & 0xff)) << 24);
-    key |= (((u32)(q->sceneId & 0xff)) << 16);
-    key |= (((u32)(q->roomId & 0xff)) << 8);
-    key |= (((u32)(q->id & 0xff)) << 0);
-
-    return key;
-}
-
 static int overrideData(ComboOverrideData* data, u32 key)
 {
     u32 min;
@@ -531,7 +516,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
         isOverride = 0;
     else
     {
-        isOverride = overrideData(&data, makeOverrideKey(q));
+        isOverride = overrideData(&data, Checks_MakeOverrideKey(q));
     }
 
     if (isOverride)
@@ -595,7 +580,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 
     /* Send the item on the network */
     if (q->ovType != OV_NONE)
-        Multi_SendItem(o.player, o.gi, (s16)q->ovFlags, makeOverrideKey(q));
+        Multi_SendItem(o.player, o.gi, (s16)q->ovFlags, Checks_MakeOverrideKey(q));
 
     return count;
 }

@@ -7,8 +7,9 @@ type BuildChecksState = {
   npcs: any;
 };
 
-function makeOvKey(ov: number, sceneId: number, value: number): number {
-  return ((ov & 0xff) << 24) | ((sceneId & 0xff) << 16) | (value & 0xffff);
+function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number, value: number): number {
+  const gameMask = game === 'mm' ? 0x80000000 : 0;
+  return (((ov & 0x7f) << 24) | ((sceneId & 0xff) << 16) | (value & 0xffff) | gameMask) >>> 0;
 }
 
 function sceneLookup(scene: string, state: BuildChecksState): number {
@@ -78,13 +79,13 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
         {
           const sceneId = sceneLookup(scene, state);
           const value = parseInt(attrs['flag']);
-          key = makeOvKey(OV_VALUES[ov], sceneId, value);
+          key = makeOvKey(game, OV_VALUES[ov], sceneId, value);
         }
         break;
       case 'npc':
         {
           const value = npcLookup(gameId(game, attrs['npc'], '_'), state);
-          key = makeOvKey(OV_VALUES[ov], 0, value);
+          key = makeOvKey(game, OV_VALUES[ov], 0, value);
         }
         break;
       case 'gs':
@@ -93,7 +94,7 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
       case 'scrub':
       case 'sr':
       case 'fish':
-        key = makeOvKey(OV_VALUES[ov], 0, parseInt(attrs['flag']));
+        key = makeOvKey(game, OV_VALUES[ov], 0, parseInt(attrs['flag']));
         break;
       case 'xflag':
         {
@@ -104,7 +105,7 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
           const roomSetup = (roomId | ((setupId & 3) << 6)) & 0xff;
           const actorId = parseInt(attrs['actor']);
           const ovValue = OV_VALUES[ov] + sliceId;
-          key = makeOvKey(ovValue, sceneId, (roomSetup << 8) | actorId);
+          key = makeOvKey(game, ovValue, sceneId, (roomSetup << 8) | actorId);
         }
         break;
       default:
