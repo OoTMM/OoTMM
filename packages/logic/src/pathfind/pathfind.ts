@@ -37,6 +37,7 @@ type PathfinderDependencyList = {
   events: Set<string>;
   gossips: Set<string>;
   exits: Set<string>;
+  areas: Set<string>;
 };
 
 type PathfinderDependencySet<T> = Map<T, Map<string, PathfinderDependencyList>>;
@@ -85,6 +86,7 @@ const emptyDepList = (): PathfinderDependencyList => ({
   events: new Set(),
   gossips: new Set(),
   exits: new Set(),
+  areas: new Set(),
 });
 
 const defaultAgeState = (): PathfinderAgeState => ({
@@ -260,7 +262,7 @@ export class Pathfinder {
   /**
    * Explore an area, adding all locations and events to the queue
    */
-  private exploreArea(worldId: number, age: Age, area: string, sourceAreaData: AreaData, fromArea: string) {
+  private exploreArea(worldId: number, age: Age, area: string, sourceAreaData: AreaData, fromArea: string, allowAgeSwap = area !== fromArea) {
     /* Compute the previous area data and compare it to the old one */
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
@@ -332,7 +334,11 @@ export class Pathfinder {
             } else {
               /* We can't wait! */
               waitMode = false;
-              this.trackDependencies('exits', as.dependencies, area, fromArea, result);
+              if (area !== fromArea) {
+                this.trackDependencies('exits', as.dependencies, area, fromArea, result);
+              } else {
+                this.trackDependencies('areas', as.dependencies, area, area, result);
+              }
             }
           }
         }
@@ -340,9 +346,10 @@ export class Pathfinder {
     }
 
     /* Age swap */
-    if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.ageChange && area !== fromArea) {
+    const canSwapAge = (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.ageChange) || (this.settings.crossAge && worldArea.game === 'mm' && ws.items.has(Items.MM_MASK_ADULT));
+    if (canSwapAge && allowAgeSwap) {
       const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
-      this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
+      this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area, false);
     }
 
     if (previousAreaData && coveringAreaData(previousAreaData, newAreaData)) {
@@ -410,7 +417,7 @@ export class Pathfinder {
     return data2;
   }
 
-  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: T[]) {
+  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips' | 'areas', set: PathfinderDependencySet<T>, id: string, area: string, dependents: T[]) {
     for (const dep of dependents) {
       const data = this.dependenciesLookup(set, dep, area);
       data[type].add(id);
@@ -421,13 +428,28 @@ export class Pathfinder {
     return (result.result === false || result.restrictions);
   }
 
-  private trackDependencies(type: 'exits' | 'locations' | 'events' | 'gossips', deps: PathfinderDependencies, id: string, area: string, result: ExprResultWithDeps) {
+  private trackDependencies(type: 'exits' | 'locations' | 'events' | 'gossips' | 'areas', deps: PathfinderDependencies, id: string, area: string, result: ExprResultWithDeps) {
     if (!this.resultNeedsTracking(result.result)) {
       return;
     }
 
     this.addDependencies(type, deps.items, id, area, result.deps.items);
     this.addDependencies(type, deps.events, id, area, result.deps.events);
+  }
+
+  private requeueAgeSwap(
+      worldId: number,
+      canSwap: (area: string) => boolean
+  ) {
+    const ws = this.state.ws[worldId];
+    for (const age of AGES) {
+      const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
+      for (const [area, areaData] of [...ws.ages[age].areas]) {
+        if (!canSwap(area))
+          continue;
+        this.exploreArea(worldId, otherAge, area, cloneAreaData(areaData), area, false);
+      }
+    }
   }
 
   private requeueItem(worldId: number, item: Item) {
@@ -441,11 +463,21 @@ export class Pathfinder {
           d.exits.forEach(x => this.evalExit(worldId, age, area, x));
           d.events.forEach(x => this.evalEvent(worldId, age, area, x));
           d.locations.forEach(x => this.evalLocation(worldId, age, area, x));
+          d.areas.forEach(area => {
+            const areaData = as.areas.get(area);
+            if (areaData) {
+              this.exploreArea(worldId, age, area, cloneAreaData(areaData), area, true);
+            }
+          });
           if (this.opts.gossips) {
             d.gossips.forEach(x => this.evalGossip(worldId, age, area, x));
           }
         }
       }
+    }
+    if (item === Items.MM_MASK_ADULT && this.settings.crossAge) {
+      const world = this.worlds[worldId];
+      this.requeueAgeSwap(worldId, area => world.areas[area].game === 'mm');
     }
   }
 
@@ -529,6 +561,12 @@ export class Pathfinder {
           d.exits.forEach(x => this.evalExit(worldId, evAge, area, x));
           d.events.forEach(x => this.evalEvent(worldId, evAge, area, x));
           d.locations.forEach(x => this.evalLocation(worldId, evAge, area, x));
+          d.areas.forEach(area => {
+            const areaData = evAs.areas.get(area);
+            if (areaData) {
+              this.exploreArea(worldId, evAge, area, cloneAreaData(areaData), area, true);
+            }
+          });
           if (this.opts.gossips) {
             d.gossips.forEach(x => this.evalGossip(worldId, evAge, area, x));
           }
@@ -538,16 +576,7 @@ export class Pathfinder {
 
     /* If it's time travel at will, we need to re-explore everything */
     if (event === EVENT_TIME_TRAVEL) {
-      for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
-        const a = world.areas[area];
-        if (a.ageChange)
-          this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
-      }
-      for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
-        const a = world.areas[area];
-        if (a.ageChange)
-          this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
-      }
+      this.requeueAgeSwap(worldId, area => world.areas[area].ageChange);
     }
   }
 
