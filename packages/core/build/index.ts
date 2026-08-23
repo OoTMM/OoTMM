@@ -19,7 +19,7 @@ const DATA_WORLD = {
     Shadow: loadYaml('world/oot/dungeons/shadow_temple.yml'),
     BotW: loadYaml('world/oot/dungeons/bottom_of_the_well.yml'),
     IC: loadYaml('world/oot/dungeons/ice_cavern.yml'),
-    Gerudo: loadYaml('world/oot/dungeons/gerudo_fortress.yml'),
+    Gerudo: loadYaml('world/oot/dungeons/thieves_hideout.yml'),
     GTG: loadYaml('world/oot/dungeons/gerudo_training_grounds.yml'),
     Ganon: loadYaml('world/oot/dungeons/ganon_castle.yml'),
     Ganon2: loadYaml('world/oot/dungeons/ganon_tower.yml'),
