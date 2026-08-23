@@ -4,12 +4,6 @@
 #include <combo/dungeon.h>
 #include "multi.h"
 
-#if defined(GAME_OOT)
-# define GAME_ID 0
-#else
-# define GAME_ID 1
-#endif
-
 #define TTL_RESEND 60
 
 #define HELLO_MAGIC "OoTMM\x7f\x01\x00"
@@ -154,11 +148,11 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
         if (!(pkt->flags & OVF_RENEW))
         {
             needsMark = 1;
-            ovType = (pkt->key >> 24) & 0xff;
+            ovType = (pkt->key >> 24) & 0x7f;
             sceneId = (pkt->key >> 16) & 0xff;
             roomId = (pkt->key >> 8) & 0xff;
             id = pkt->key & 0xff;
-            if (pkt->game)
+            if (pkt->key & 0x80000000)
                 isMarked = Mark_GetMm(play, ovType, sceneId, roomId, id);
             else
                 isMarked = Mark_GetOot(play, ovType, sceneId, roomId, id);
@@ -185,7 +179,7 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
         Multi_GiveItem(play, gi, pkt->wal.from, pkt->flags, (char*)pkt->wal.playerName);
         if (needsMark)
         {
-            if (pkt->game)
+            if (pkt->key & 0x80000000)
                 Mark_SetMm(play, ovType, sceneId, roomId, id);
             else
                 Mark_SetOot(play, ovType, sceneId, roomId, id);
@@ -525,7 +519,6 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
     pkt.wal.header.op = MULTI_OP_WAL;
     pkt.wal.type = WAL_ITEM;
     pkt.to = to;
-    pkt.game = GAME_ID;
     pkt.gi = comboItemResolve(gPlay, gi);
     pkt.flags = flags;
     pkt.key = key;

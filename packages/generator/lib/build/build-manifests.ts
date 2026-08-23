@@ -1,33 +1,28 @@
-import type { Game } from '@ootmm/core';
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import { CHECKS } from '@ootmm/core';
 
-import { gameId, POOL } from '@ootmm/core';
-import { checkKey } from '../combo/randomizer/checks';
+const MANIFESTS_DIR = path.resolve(__dirname, '../../build/manifests');
 
-/* TODO: very ugly, will fix */
-async function buildManifestChecks(game: Game) {
-  const pool = POOL[game];
-  const set = new Set<number>();
-  for (const entry of pool) {
-    const location = gameId(game, String(entry.location), ' ');
-    const type = String(entry.type);
-    const scene = gameId(game, String(entry.scene), '_');
-    let id = null;
-    if (type === 'npc') {
-      id = gameId(game, String(entry.id), '_');
-    } else {
-      id = Number(entry.id);
-    }
-    const key = checkKey({ game, scene, location, type, id } as any);
-    if (set.has(key)) {
-      console.warn(`Duplicate check key 0x${key.toString(16)} for ${location}`);
-    }
-    set.add(key);
+async function buildManifestChecks() {
+  const data: any = {};
+  data['version'] = 1;
+  data['checks'] = [];
+
+  for (const check of CHECKS) {
+    data.checks.push({
+      key: check.key,
+      location: check.location,
+    });
   }
+
+  data.checks.sort((a: any, b: any) => a.key - b.key);
+
+  const file = path.join(MANIFESTS_DIR, 'checks.json');
+  await fs.writeFile(file, JSON.stringify(data), 'utf-8');
 }
 
 export async function buildManifests() {
-  await Promise.all([
-    buildManifestChecks('oot'),
-    buildManifestChecks('mm'),
-  ]);
+  await fs.mkdir(MANIFESTS_DIR, { recursive: true });
+  await buildManifestChecks();
 }

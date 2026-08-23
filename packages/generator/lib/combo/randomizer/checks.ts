@@ -1,8 +1,8 @@
 import type { Game, Settings } from '@ootmm/core';
-import type { WorldCheck, LogicResult, LogicResultWorld } from '@ootmm/logic';
+import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { NPC, SCENES } from '@ootmm/core';
+import { CHECKS_BY_LOCATION, NPC, SCENES } from '@ootmm/core';
 import { makeLocation } from '@ootmm/logic';
 
 import { gi, playerId } from './util';
@@ -285,126 +285,7 @@ export const ITEMS_SUBSTITUTIONS: { [k: string]: string } = {
   SHARED_TRIFORCE_WISDOM: 'OOT_TRIFORCE_WISDOM',
 };
 
-const checkId = (check: WorldCheck) => {
-  if (check.type === 'npc') {
-    if (!NPC.hasOwnProperty(check.id)) {
-      throw new Error(`Unknown NPC ${check.id}`);
-    }
-    return (NPC as any)[check.id];
-  }
-  return check.id;
-}
-
-export function checkKey(check: WorldCheck): number {
-  /* Extract the ID */
-  const id = checkId(check);
-
-  /* Extract the type */
-  let typeId: number;
-  switch (check.type) {
-    case 'chest':
-      typeId = 0x01;
-      break;
-    case 'collectible':
-      typeId = 0x02;
-      break;
-    case 'npc':
-      typeId = 0x03;
-      break;
-    case 'gs':
-      typeId = 0x04;
-      break;
-    case 'sf':
-      typeId = 0x05;
-      break;
-    case 'cow':
-      typeId = 0x06;
-      break;
-    case 'shop':
-      typeId = 0x07;
-      break;
-    case 'scrub':
-      typeId = 0x08;
-      break;
-    case 'sr':
-      typeId = 0x09;
-      break;
-    case 'fish':
-      typeId = 0x0A;
-      break;
-    case 'pot':
-    case 'crate':
-    case 'barrel':
-    case 'grass':
-    case 'tree':
-    case 'bush':
-    case 'rock':
-    case 'soil':
-    case 'fairy':
-    case 'snowball':
-    case 'hive':
-    case 'rupee':
-    case 'heart':
-    case 'fairy_spot':
-    case 'wonder':
-    case 'butterfly':
-    case 'boulder':
-    case 'boulder-red':
-    case 'boulder-silver':
-    case 'icicle':
-    case 'redice':
-      /* xflag */
-      typeId = 0x10 + ((id >> 16) & 0xf);
-      break;
-  }
-
-  /* Extract the scene ID */
-  let sceneId = 0;
-  switch (check.type) {
-    case 'chest':
-    case 'collectible':
-    case 'sf':
-    case 'pot':
-    case 'crate':
-    case 'barrel':
-    case 'grass':
-    case 'tree':
-    case 'bush':
-    case 'rock':
-    case 'soil':
-    case 'fairy':
-    case 'snowball':
-    case 'hive':
-    case 'rupee':
-    case 'heart':
-    case 'fairy_spot':
-    case 'wonder':
-    case 'butterfly':
-    case 'boulder':
-    case 'boulder-red':
-    case 'boulder-silver':
-    case 'icicle':
-    case 'redice':
-      sceneId = (SCENES as any)[check.scene];
-      if (sceneId === undefined) {
-        throw new Error(`Unknown scene ${check.scene}`);
-      }
-      break;
-    default:
-      break;
-  }
-
-  /* Build the key */
-  let key = 0;
-  key = (key | ((typeId & 0xff) << 24)) >>> 0;
-  key = (key | ((sceneId & 0xff) << 16)) >>> 0;
-  key = (key | (id & 0xffff)) >>> 0;
-
-  return key;
-}
-
 type RandomizerPatcherChecksContext = {
-  game: Game;
   worldId: number;
   logic: LogicResult;
   settings: Settings;
@@ -425,28 +306,23 @@ export class RandomizerPatcherChecks {
 
   private execute(): Uint8Array {
     const buffers: Uint8Array[] = [];
-    for (const locId in this.world.checks) {
+    for (const locId of this.world.locations) {
+      const check = CHECKS_BY_LOCATION[locId];
       const loc = makeLocation(locId, this.ctx.worldId);
-      const c = this.world.checks[locId];
       const item = this.ctx.logic.items.get(loc)!;
 
-      if (c.game !== this.ctx.game) {
-        continue;
-      }
-
       /* Skip cows if not shuffled */
-      if (c.game === 'oot' && c.type === 'cow' && !this.ctx.settings.cowShuffleOot) continue;
-      if (c.game === 'mm' && c.type === 'cow' && !this.ctx.settings.cowShuffleMm) continue;
+      if (check.game === 'oot' && check.type === 'cow' && !this.ctx.settings.cowShuffleOot) continue;
+      if (check.game === 'mm' && check.type === 'cow' && !this.ctx.settings.cowShuffleMm) continue;
 
-      const key = checkKey(c);
-      const itemGi = gi(this.ctx.settings, this.ctx.game, item.item, true);
+      const itemGi = gi(this.ctx.settings, check.game, item.item, true);
       const b = new Uint8Array(16);
       const cloakItem = this.ctx.logic.itemCloaks.get(loc);
       let cloakGi = 0;
       if (cloakItem) {
-        cloakGi = gi(this.ctx.settings, this.ctx.game, cloakItem, true);
+        cloakGi = gi(this.ctx.settings, check.game, cloakItem, true);
       }
-      bufWriteU32BE(b, 0, key);
+      bufWriteU32BE(b, 0, check.key);
       bufWriteU16BE(b, 4, playerId(item.player));
       bufWriteU16BE(b, 6, itemGi);
       bufWriteU16BE(b, 8, cloakGi);

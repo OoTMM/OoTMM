@@ -22,9 +22,9 @@
   "devDependencies": {
     "@types/lodash-es": "catalog:",
     "@types/pngjs": "^6.0.5",
-    "fast-xml-parser": "^5.5.10",
-    "gl-matrix": "^3.4.4",
     "type-fest": "catalog:",
+    "fast-xml-parser": "catalog:",
+    "gl-matrix": "^3.4.4",
     "yaml": "catalog:"
   },
   "files": [

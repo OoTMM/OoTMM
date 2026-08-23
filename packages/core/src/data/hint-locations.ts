@@ -1,20 +1,14 @@
-import { GAMES } from '../defines';
-import { gameId } from '../util';
-import { POOL } from './data';
+import { CHECKS } from './checks';
 
 const hintToLocations = new Map<string, string[]>();
 
-for (const game of GAMES) {
-  for (const record of POOL[game]) {
-    if (record.hint === 'NONE')
-      continue;
-    const hint = gameId(game, record.hint, '_');
-    const loc = gameId(game, record.location, ' ');
-    if (!hintToLocations.has(hint)) {
-      hintToLocations.set(hint, []);
-    }
-    hintToLocations.get(hint)!.push(loc);
+for (const check of CHECKS) {
+  if (!check.hint)
+    continue;
+  if (!hintToLocations.has(check.hint)) {
+    hintToLocations.set(check.hint, []);
   }
+  hintToLocations.get(check.hint)!.push(check.location);
 }
 
 export function hintLocations(hint: string): string[] {

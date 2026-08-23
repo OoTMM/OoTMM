@@ -9,7 +9,6 @@ export { default as RAW_GI } from '../../dist/data-gi.json';
 export { default as RAW_DRAWGI } from '../../dist/data-drawgi.json';
 export { default as FILES } from '../../dist/data-files.json';
 export { default as MACROS } from '../../dist/data-macros.json';
-export { default as POOL } from '../../dist/data-pool.json';
 
 export type EntranceData = {
   game: 'oot' | 'mm';

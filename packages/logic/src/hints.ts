@@ -3,7 +3,7 @@ import type { ItemPlacement, Location } from './types';
 import type { Analysis, AnalysisPath } from './analysis';
 import type { World } from './world';
 
-import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion, hintLocations } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion, hintLocations, CHECKS_BY_LOCATION } from '@ootmm/core';
 import { Pathfinder } from './pathfind';
 import { DUNGEONS_REGIONS } from './world';
 import { isLocationFullyShuffled, locationData, makeLocation } from './locations';
@@ -462,9 +462,6 @@ class LogicPassHints {
   }
 
   private placeGossipItemExact(worldId: number, checkWorldId: number, checkHint: string, extra: number, context: 'normal' | 'moon' | 'playthrough') {
-    if (checkHint === 'NONE') {
-      return false;
-    }
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
     const locations = hintLocations(checkHint).filter(x => checkWorld.locations.has(x)).map(x => makeLocation(x, checkWorldId));
@@ -638,8 +635,9 @@ class LogicPassHints {
     if (this.state.settings.noDuplicatePlaythroughHints && context === 'playthrough' && this.hintedPlaythroughItems.has(item)) {
       return false;
     }
-    const hint = locWorld.checks[locD.id].hint;
-    if (this.placeGossipItemExact(worldId, locD.world as number, hint, extra, context)) {
+    const check = CHECKS_BY_LOCATION[locD.id];
+    const hint = check.hint;
+    if (hint && this.placeGossipItemExact(worldId, locD.world as number, hint, extra, context)) {
       return true;
     }
     let gossip;

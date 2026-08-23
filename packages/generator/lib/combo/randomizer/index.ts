@@ -13,8 +13,7 @@ import { toU8Buffer } from '../util';
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const bufConfig = RandomizerPatcherConfig.run({ worldId, logic, settings });
   const bufStartingItems = RandomizerPatcherStartingItems.run({ worldId, logic, settings });
-  const bufChecksOot = RandomizerPatcherChecks.run({ worldId, logic, settings, game: 'oot' });
-  const bufChecksMm = RandomizerPatcherChecks.run({ worldId, logic, settings, game: 'mm' });
+  const bufChecks = RandomizerPatcherChecks.run({ worldId, logic, settings });
   const bufHintsOot = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'oot' });
   const bufHintsMm = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'mm' });
   const bufEntrancesOot = RandomizerPatcherEntrances.run({ worldId, logic, game: 'oot' });
@@ -23,8 +22,7 @@ export function patchRandomizer(worldId: number, logic: LogicResult, settings: S
   patchfile.addSymbolPatch('MULTI_WORLD_ID', toU8Buffer([worldId + 1]));
   patchfile.addNewFile({ vrom: 0xf0200000, data: bufConfig, compressed: true });
   patchfile.addNewFile({ vrom: 0xf0300000, data: bufStartingItems, compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0400000, data: bufChecksOot, compressed: false });
-  patchfile.addNewFile({ vrom: 0xf0500000, data: bufChecksMm, compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0400000, data: bufChecks, compressed: false });
   patchfile.addNewFile({ vrom: 0xf0600000, data: bufHintsOot, compressed: true });
   patchfile.addNewFile({ vrom: 0xf0700000, data: bufHintsMm, compressed: true });
   patchfile.addNewFile({ vrom: 0xf0800000, data: bufEntrancesOot, compressed: true });

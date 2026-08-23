@@ -2,7 +2,7 @@ import type { Settings, PlayerItem } from '@ootmm/core';
 import type { ItemPlacement, Location } from './types';
 import type { ResolvedWorldFlags, World } from './world';
 
-import { ItemHelpers } from '@ootmm/core';
+import { CHECKS_BY_LOCATION, ItemHelpers } from '@ootmm/core';
 
 type LocationDescriptor = {
   id: string;
@@ -90,13 +90,10 @@ export function isLocationRenewable(world: World, loc: Location) {
     return true;
   if (ONE_TIME_SHOP_CHECKS.includes(locationId))
     return false;
-  const check = world.checks[locationId];
-  if (!check) {
-    throw new Error(`Unknown location ${locationId}@${locationData(loc).world}`);
-  }
+  const check = CHECKS_BY_LOCATION[locationId];
   if (['shop', 'cow', 'scrub', 'fairy', 'fish', 'fairy_spot'].includes(check.type))
     return true;
-  if (ItemHelpers.isTingleMap(check.item))
+  if (ItemHelpers.isTingleMap(world.checkItems.get(locationId)!))
     return true;
   return false;
 }
@@ -106,7 +103,7 @@ export function isLocationLicenseGranting(world: World, loc: Location) {
   if (ONE_TIME_SHOP_CHECKS.includes(locationId) || MM_MERCHANTS.includes(locationId) || OOT_MERCHANTS.includes(locationId)) {
     return false;
   }
-  const check = world.checks[locationId];
+  const check = CHECKS_BY_LOCATION[locationId];
   if (['cow'].includes(check.type))
     return true;
   if (isLocationRenewable(world, loc))
@@ -116,14 +113,16 @@ export function isLocationLicenseGranting(world: World, loc: Location) {
 
 export function isLocationChestFairy(world: World, loc: Location) {
   const locD = locationData(loc);
-  const check = world.checks[locD.id];
-  return check.type !== 'sf' && ItemHelpers.isDungeonStrayFairy(check.item);
+  const check = CHECKS_BY_LOCATION[locD.id];
+  const item = world.checkItems.get(locD.id)!;
+  return check.type !== 'sf' && ItemHelpers.isDungeonStrayFairy(item);
 }
 
 export function isLocationOtherFairy(world: World, loc: Location) {
   const locD = locationData(loc);
-  const check = world.checks[locD.id];
-  return (check.type === 'sf') && ItemHelpers.isDungeonStrayFairy(check.item);
+  const check = CHECKS_BY_LOCATION[locD.id];
+  const item = world.checkItems.get(locD.id)!;
+  return (check.type === 'sf') && ItemHelpers.isDungeonStrayFairy(item);
 }
 
 type IsLocationFullyShuffledOptions = {

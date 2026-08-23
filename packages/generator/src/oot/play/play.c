@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/audio.h>
+#include <combo/checks.h>
 #include <combo/config.h>
 #include <combo/context.h>
 #include <combo/debug.h>
@@ -133,7 +134,7 @@ static void sendSelfTriforce(void)
     gi = GI_OOT_TRIFORCE_FULL;
     npc = NPC_OOT_GANON;
 
-    Multi_SendSelfItem(gi, 0, ((u32)OV_NPC << 24) | npc);
+    Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.oot.npc, npc);

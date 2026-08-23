@@ -20,25 +20,6 @@ export type WorldArea = {
   region: string;
 };
 
-export type WorldCheckType = 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'barrel' | 'grass' | 'tree' | 'bush' | 'rock' | 'soil' | 'wonder' | 'fish' | 'fairy' | 'snowball' | 'hive' | 'rupee' | 'heart' | 'fairy_spot' | 'butterfly' | 'boulder' | 'boulder-red' | 'boulder-silver' | 'icicle' | 'redice';
-
-type WorldCheckNumeric = {
-  type: WorldCheckType;
-  id: number;
-};
-
-type WorldCheckSymbolic = {
-  type: 'npc';
-  id: string;
-};
-
-export type WorldCheck = {
-  game: Game;
-  scene: string;
-  item: Item;
-  hint: string;
-} & (WorldCheckNumeric | WorldCheckSymbolic);
-
 export type WorldGossip = {
   game: Game;
   type: 'gossip' | 'gossip-grotto' | 'gossip-moon';
@@ -66,7 +47,6 @@ export type DungeonEntrance =
 
 export type World = {
   areas: { [k: string]: WorldArea };
-  checks: { [k: string]: WorldCheck };
   dungeons: { [k: string]: Set<string> };
   dungeonsBossAreas: { [k: string]: Set<string> };
   regions: { [k: string]: string };
@@ -84,4 +64,5 @@ export type World = {
   resolvedFlags: ResolvedWorldFlags;
   exprParsers: ExprParsers;
   dungeonsEntrances: Map<string, DungeonEntrance>;
+  checkItems: Map<string, Item>;
 };
