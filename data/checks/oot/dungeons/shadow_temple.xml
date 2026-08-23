@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="TEMPLE_SHADOW">
+    <chest location="Shadow Temple Map" flag="0x01" item="MAP_SHADOW"/>
+    <chest location="Shadow Temple Hover Boots" flag="0x07" item="BOOTS_HOVER"/>
+    <chest location="Shadow Temple Silver Rupees" flag="0x02" item="SMALL_KEY_SHADOW"/>
+    <chest location="Shadow Temple Compass" flag="0x03" item="COMPASS_SHADOW"/>
+    <chest location="Shadow Temple Falling Spikes Lower" flag="0x05" item="ARROWS_10"/>
+    <chest location="Shadow Temple Falling Spikes Upper 1" flag="0x04" item="SMALL_KEY_SHADOW"/>
+    <chest location="Shadow Temple Falling Spikes Upper 2" flag="0x06" item="RUPEE_BLUE"/>
+    <chest location="Shadow Temple Invisible Spike Room" flag="0x09" item="RUPEE_BLUE"/>
+    <chest location="Shadow Temple Boss Key Room 1" flag="0x0a" item="RUPEE_BLUE"/>
+    <chest location="Shadow Temple Boss Key Room 2" flag="0x0b" item="BOSS_KEY_SHADOW"/>
+    <collectible location="Shadow Temple Skull" flag="0x01" item="SMALL_KEY_SHADOW" hint="SHADOW_SKULL_POT"/>
+    <chest location="Shadow Temple Spinning Blades Visible" flag="0x0c" item="RUPEE_BLUE"/>
+    <chest location="Shadow Temple Spinning Blades Invisible" flag="0x16" item="ARROWS_30"/>
+    <chest location="Shadow Temple Invisible Floormaster" flag="0x0d" item="SMALL_KEY_SHADOW"/>
+    <chest location="Shadow Temple Wind Room Hint" flag="0x15" item="ARROWS_10"/>
+    <chest location="Shadow Temple After Wind" flag="0x08" item="RUPEE_BLUE"/>
+    <chest location="Shadow Temple After Wind Invisible" flag="0x14" item="SMALL_KEY_SHADOW"/>
+    <gs location="Shadow Temple GS Invisible Scythe" flag="0x3b" item="GS_TOKEN"/>
+    <gs location="Shadow Temple GS Skull Pot" flag="0x38" item="GS_TOKEN"/>
+    <gs location="Shadow Temple GS Triple Skull Pot" flag="0x3a" item="GS_TOKEN"/>
+    <gs location="Shadow Temple GS Near Boat" flag="0x3c" item="GS_TOKEN"/>
+    <gs location="Shadow Temple GS Falling Spikes" flag="0x39" item="GS_TOKEN"/>
+    <sr location="Shadow Temple SR Scythe 1" flag="0x19" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="Shadow Temple SR Scythe 2" flag="0x1a" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="Shadow Temple SR Scythe 3" flag="0x1b" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="Shadow Temple SR Scythe 4" flag="0x1c" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="Shadow Temple SR Scythe 5" flag="0x1d" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="Shadow Temple SR Pit 1" flag="0x28" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="Shadow Temple SR Pit 2" flag="0x29" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="Shadow Temple SR Pit 3" flag="0x2a" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="Shadow Temple SR Pit 4" flag="0x2b" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="Shadow Temple SR Pit 5" flag="0x2c" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="Shadow Temple SR Spikes Back Left" flag="0x2d" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="Shadow Temple SR Spikes Right" flag="0x2e" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="Shadow Temple SR Spikes Center" flag="0x2f" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="Shadow Temple SR Spikes Front Left" flag="0x30" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="Shadow Temple SR Spikes Midair" flag="0x31" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <xflag type="pot" location="Shadow Temple Pot Early Maze 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Shadow Temple Pot Early Maze 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Shadow Temple Pot Early Maze 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Early Maze 4" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Shadow Temple Pot Early Maze 5" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="NUTS_5"/>
+    <xflag type="pot" location="Shadow Temple Pot Early Maze 6" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Map Room 1" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="ARROWS_10"/>
+    <xflag type="pot" location="Shadow Temple Pot Map Room 2" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Falling Spikes Bottom 1" slice="0x0" setup="0x0" room="0xa" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Falling Spikes Bottom 2" slice="0x0" setup="0x0" room="0xa" actor="0x4" item="BOMB"/>
+    <xflag type="pot" location="Shadow Temple Pot Falling Spikes Top 1" slice="0x0" setup="0x0" room="0xa" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Falling Spikes Top 2" slice="0x0" setup="0x0" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Boss Key Room" slice="0x0" setup="0x0" room="0xd" actor="0x2" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Shadow Temple Pot Invisible Floormaster Room 1" slice="0x0" setup="0x0" room="0x11" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Pot Invisible Floormaster Room 2" slice="0x0" setup="0x0" room="0x11" actor="0x2" item="ARROWS_30"/>
+    <xflag type="pot" location="Shadow Temple Pot After Wind 1" slice="0x0" setup="0x0" room="0x14" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Shadow Temple Pot After Wind 2" slice="0x0" setup="0x0" room="0x14" actor="0x3" item="NUTS_5"/>
+    <xflag type="pot" location="Shadow Temple Pot Boat Before Bridge 1" slice="0x0" setup="0x0" room="0x15" actor="0x10" item="ARROWS_10"/>
+    <xflag type="pot" location="Shadow Temple Pot Boat Before Bridge 2" slice="0x0" setup="0x0" room="0x15" actor="0x11" item="NOTHING"/>
+    <xflag type="pot" location="Shadow Temple Pot Boat After Bridge 1" slice="0x0" setup="0x0" room="0x15" actor="0x12" item="ARROWS_30"/>
+    <xflag type="pot" location="Shadow Temple Pot Boat After Bridge 2" slice="0x0" setup="0x0" room="0x15" actor="0x13" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Shadow Temple Flying Pot Early Maze" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Flying Pot After Wind 1" slice="0x0" setup="0x0" room="0x14" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Shadow Temple Flying Pot After Wind 2" slice="0x0" setup="0x0" room="0x14" actor="0x5" item="NUTS_5"/>
+    <xflag type="heart" location="Shadow Temple Heart Scythe 1" slice="0x0" setup="0x0" room="0x10" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Shadow Temple Heart Scythe 2" slice="0x0" setup="0x0" room="0x10" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Shadow Temple Heart Shortcut 1" slice="0x0" setup="0x0" room="0x15" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Shadow Temple Heart Shortcut 2" slice="0x0" setup="0x0" room="0x15" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Shadow Temple Heart Pre-Boss 1" slice="0x0" setup="0x0" room="0x15" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Shadow Temple Heart Pre-Boss 2" slice="0x0" setup="0x0" room="0x15" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Shadow Temple Heart Pre-Boss 3" slice="0x0" setup="0x0" room="0x15" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="fairy_spot" location="Shadow Temple Beamos Big Fairy" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="Shadow Temple Stalfos Big Fairy" slice="0x0" setup="0x0" room="0x9" actor="0x15" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="Shadow Temple Big Fairy After Wind" slice="0x0" setup="0x0" room="0x13" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="wonder" location="Shadow Temple Wonder Item" slice="0x0" setup="0x0" room="0xc" actor="0x1" item="ARROWS_30"/>
+  </scene>
+</checks>

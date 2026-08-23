@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="ZORA_DOMAIN">
+    <chest location="Zora Domain Waterfall Chest" flag="0x00" item="HEART_PIECE"/>
+    <npc location="Zora Domain Diving Game" npc="ZORA_DIVING_GAME" item="SCALE"/>
+    <collectible location="Zora Domain Diving Game Green Rupee" flag="0x1" item="RUPEE_GREEN"/>
+    <collectible location="Zora Domain Diving Game Blue Rupee" flag="0x2" item="RUPEE_BLUE"/>
+    <collectible location="Zora Domain Diving Game Red Rupee" flag="0x3" item="RUPEE_RED"/>
+    <collectible location="Zora Domain Diving Game Purple Rupee" flag="0x5" item="RUPEE_PURPLE"/>
+    <collectible location="Zora Domain Diving Game Huge Rupee" flag="0x4" item="RUPEE_HUGE"/>
+    <npc location="Zora Domain Tunic" npc="ZORA_KING_TUNIC" item="TUNIC_ZORA" hint="ZORA_KING"/>
+    <npc location="Zora Domain Eyeball Frog" npc="TRADE_EYEBALL_FROG" item="EYEBALL_FROG" hint="ZORA_KING"/>
+    <gs location="Zora Domain GS Waterfall" flag="0x8e" item="GS_TOKEN"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 1" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 2" slice="0x1" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 3" slice="0x2" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 4" slice="0x3" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 5" slice="0x4" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="rock" location="Zora Domain Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <xflag type="pot" location="Zora Domain Pot 1" slice="0x0" setup="0x0" room="0x1" actor="0x15" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Zora Domain Pot 2" slice="0x0" setup="0x0" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Zora Domain Pot 3" slice="0x0" setup="0x0" room="0x1" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Zora Domain Pot 4" slice="0x0" setup="0x0" room="0x1" actor="0x18" item="NUTS_5"/>
+    <xflag type="pot" location="Zora Domain Pot 5" slice="0x0" setup="0x0" room="0x1" actor="0x19" item="STICK"/>
+    <xflag type="hive" location="Zora Domain Hive Front 1" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Front 2" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Back" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RUPEE_RED"/>
+  </scene>
+  <scene id="FAIRY_FOUNTAIN">
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 1" slice="0x0" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 2" slice="0x1" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 3" slice="0x2" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 4" slice="0x3" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 5" slice="0x4" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 6" slice="0x5" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 7" slice="0x6" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 8" slice="0x7" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+  </scene>
+  <scene id="ZORA_SHOP">
+    <shop location="Zora Shop Item 1" flag="0x10" item="POTION_RED"/>
+    <shop location="Zora Shop Item 2" flag="0x11" item="ARROWS_30"/>
+    <shop location="Zora Shop Item 3" flag="0x12" item="FISH"/>
+    <shop location="Zora Shop Item 4" flag="0x13" item="NUTS_5"/>
+    <shop location="Zora Shop Item 5" flag="0x14" item="ARROWS_5"/>
+    <shop location="Zora Shop Item 6" flag="0x15" item="ARROWS_10"/>
+    <shop location="Zora Shop Item 7" flag="0x16" item="TUNIC_ZORA"/>
+    <shop location="Zora Shop Item 8" flag="0x17" item="RECOVERY_HEART"/>
+  </scene>
+</checks>

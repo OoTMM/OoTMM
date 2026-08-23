@@ -76,5 +76,8 @@
     <xflag type="fairy_spot" location="Death Mountain Trail Cow Grotto Big Fairy" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="FAIRY_BIG"/>
     <xflag type="hive" location="Death Mountain Trail Cow Grotto Hive" slice="0x0" setup="0x0" room="0x3" actor="0x3" item="RUPEE_RED"/>
   </scene>
+  <scene id="GREAT_FAIRY_FOUNTAIN_UPGRADES">
+    <npc location="Great Fairy Magic Upgrade" npc="FAIRY_MAGIC_UPGRADE" item="MAGIC_UPGRADE"/>
+  </scene>
 </checks>
 

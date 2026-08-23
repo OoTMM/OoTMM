@@ -157,6 +157,7 @@ export async function buildChecks(state: BuildChecksState): Promise<any> {
       console.error(`Duplicate check key ${entry.key} for locations ${matching.join(', ')}`);
       process.exit(1);
     }
+    set.add(entry.key);
   }
 
   return entries;

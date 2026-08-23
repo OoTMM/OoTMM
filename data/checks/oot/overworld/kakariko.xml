@@ -101,4 +101,19 @@
     <npc location="Kakariko Potion Shop Odd Potion" npc="TRADE_ODD_POTION" item="ODD_POTION"/>
     <npc location="Kakariko Potion Shop Buy Blue Potion" npc="WITCH_BLUE_POTION" item="POTION_BLUE"/>
   </scene>
+  <scene id="HOUSE_OF_SKULLTULA">
+    <npc location="Skulltula House 10 Tokens" npc="GS_10" item="WALLET"/>
+    <npc location="Skulltula House 20 Tokens" npc="GS_20" item="STONE_OF_AGONY"/>
+    <npc location="Skulltula House 30 Tokens" npc="GS_30" item="WALLET"/>
+    <npc location="Skulltula House 40 Tokens" npc="GS_40" item="BOMBCHU_10"/>
+    <npc location="Skulltula House 50 Tokens" npc="GS_50" item="HEART_PIECE"/>
+    <npc location="Skulltula House 100 Tokens" npc="GS_100" item="RUPEE_HUGE"/>
+  </scene>
+  <scene id="TOMB_DAMPE_WINDMILL">
+    <collectible location="Windmill HP" flag="0x01" item="HEART_PIECE"/>
+    <npc location="Windmill Song of Storms" npc="SONG_STORMS" item="SONG_STORMS"/>
+  </scene>
+  <scene id="SHOOTING_GALLERY">
+    <npc location="Shooting Gallery Adult" npc="SHOOTING_GAME_ADULT" item="BOW"/>
+  </scene>
 </checks>

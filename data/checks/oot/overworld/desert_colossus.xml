@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="DESERT_COLOSSUS">
+    <chest location="Spirit Temple Silver Gauntlets" flag="0x0b" item="STRENGTH"/>
+    <chest location="Spirit Temple Mirror Shield" flag="0x09" item="SHIELD_MIRROR"/>
+    <collectible location="Desert Colossus HP" flag="0x0d" item="HEART_PIECE"/>
+    <npc location="Desert Colossus Song Spirit" npc="SHEIK_SPIRIT" item="SONG_TP_SPIRIT"/>
+    <gs location="Desert Colossus GS Soil" flag="0xa8" item="GS_TOKEN"/>
+    <gs location="Desert Colossus GS Tree" flag="0xab" item="GS_TOKEN"/>
+    <gs location="Desert Colossus GS Plateau" flag="0xaa" item="GS_TOKEN"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 1" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 2" slice="0x1" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 3" slice="0x2" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 4" slice="0x3" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 5" slice="0x4" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 6" slice="0x5" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 7" slice="0x6" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="fairy" location="Desert Colossus Oasis Fairy 8" slice="0x7" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 1" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
+    <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 2" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Desert Colossus Wonder Item Oasis Child" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Desert Colossus Wonder Item Fountain 1" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Desert Colossus Wonder Item Fountain 2" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="RUPEE_RED"/>
+    <xflag type="rock" location="Desert Colossus Rock" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 1" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 2" slice="0x1" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 3" slice="0x2" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 4" slice="0x3" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 5" slice="0x4" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 6" slice="0x5" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 7" slice="0x6" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 1 Rock 8" slice="0x7" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 1" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 2" slice="0x1" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 3" slice="0x2" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 4" slice="0x3" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 5" slice="0x4" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 6" slice="0x5" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 7" slice="0x6" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 8" slice="0x7" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="boulder-silver" location="Desert Colossus Silver Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="NOTHING"/>
+    <xflag type="soil" location="Desert Colossus Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="FAIRY"/>
+    <xflag type="soil" location="Desert Colossus Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x1d" item="FAIRY"/>
+    <xflag type="soil" location="Desert Colossus Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x1d" item="FAIRY"/>
+  </scene>
+  <scene id="GROTTOS">
+    <scrub location="Desert Colossus Grotto Front Scrub" flag="0x19" item="POTION_GREEN"/>
+    <scrub location="Desert Colossus Grotto Back Scrub" flag="0x1a" item="POTION_RED"/>
+    <xflag type="hive" location="Desert Colossus Grotto Hive" slice="0x0" setup="0x0" room="0x26" actor="0x2" item="RUPEE_RED"/>
+  </scene>
+  <scene id="GREAT_FAIRY_FOUNTAIN_SPELLS">
+    <npc location="Great Fairy Nayru's Love" npc="FAIRY_SPELL_LOVE" item="SPELL_LOVE"/>
+  </scene>
+</checks>

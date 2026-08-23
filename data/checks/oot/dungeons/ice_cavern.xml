@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="ICE_CAVERN">
+    <chest location="Ice Cavern Iron Boots" flag="0x02" item="BOOTS_IRON" hint="ICE_CAVERN_CHEST"/>
+    <chest location="Ice Cavern Map" flag="0x00" item="MAP_IC"/>
+    <chest location="Ice Cavern Compass" flag="0x01" item="COMPASS_IC"/>
+    <collectible location="Ice Cavern HP" flag="0x01" item="HEART_PIECE"/>
+    <npc location="Ice Cavern Sheik Song" npc="SHEIK_WATER" item="SONG_TP_WATER" hint="ICE_CAVERN_CHEST"/>
+    <gs location="Ice Cavern GS Scythe Room" flag="0x49" item="GS_TOKEN"/>
+    <gs location="Ice Cavern GS HP Room" flag="0x4a" item="GS_TOKEN"/>
+    <gs location="Ice Cavern GS Block Room" flag="0x48" item="GS_TOKEN"/>
+    <sr location="Ice Cavern SR Scythe Left" flag="0x37" item="RUPEE_SILVER_IC_SCYTHE"/>
+    <sr location="Ice Cavern SR Scythe Center Left" flag="0x38" item="RUPEE_SILVER_IC_SCYTHE"/>
+    <sr location="Ice Cavern SR Scythe Back" flag="0x39" item="RUPEE_SILVER_IC_SCYTHE"/>
+    <sr location="Ice Cavern SR Scythe Center Right" flag="0x3a" item="RUPEE_SILVER_IC_SCYTHE"/>
+    <sr location="Ice Cavern SR Scythe Midair" flag="0x3b" item="RUPEE_SILVER_IC_SCYTHE"/>
+    <sr location="Ice Cavern SR Blocks Back Left" flag="0x3c" item="RUPEE_SILVER_IC_BLOCK"/>
+    <sr location="Ice Cavern SR Blocks Back Right" flag="0x3d" item="RUPEE_SILVER_IC_BLOCK"/>
+    <sr location="Ice Cavern SR Blocks Center" flag="0x3e" item="RUPEE_SILVER_IC_BLOCK"/>
+    <sr location="Ice Cavern SR Blocks Alcove" flag="0x3f" item="RUPEE_SILVER_IC_BLOCK"/>
+    <sr location="Ice Cavern SR Blocks Front Left" flag="0x40" item="RUPEE_SILVER_IC_BLOCK"/>
+    <xflag type="pot" location="Ice Cavern Pot First Corridor 1" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ice Cavern Pot First Corridor 2" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ice Cavern Pot Scythe Room 1" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="ARROWS_10"/>
+    <xflag type="pot" location="Ice Cavern Pot Scythe Room 2" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Ice Cavern Pot Scythe Room 3" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ice Cavern Pot Red Ice 1" slice="0x0" setup="0x0" room="0x6" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ice Cavern Pot Red Ice 2" slice="0x0" setup="0x0" room="0x6" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ice Cavern Pot Map Room" slice="0x0" setup="0x0" room="0x9" actor="0x9" item="RUPEE_PURPLE"/>
+    <xflag type="pot" location="Ice Cavern Flying Pot Scythe Room" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="rupee" location="Ice Cavern Rupee Ice" slice="0x0" setup="0x0" room="0x1" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Ice Cavern Rupee Midair 1" slice="0x0" setup="0x0" room="0x5" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Ice Cavern Rupee Midair 2" slice="0x0" setup="0x0" room="0x5" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Ice Cavern Rupee Midair 3" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="RUPEE_RED"/>
+    <xflag type="heart" location="Ice Cavern Heart 1" slice="0x0" setup="0x0" room="0x9" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Ice Cavern Heart 2" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Ice Cavern Heart 3" slice="0x0" setup="0x0" room="0x9" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="fairy_spot" location="Ice Cavern Entrance Big Fairy" slice="0x0" setup="0x0" room="0x1" actor="0xd" item="FAIRY_BIG"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Entrance 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Entrance 1" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Entrance 2" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Entrance 3" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Scythe 1" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Scythe 2" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Scythe 3" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Scythe 4" slice="0x0" setup="0x0" room="0x2" actor="0x5" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Scythe 1" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Scythe 2" slice="0x0" setup="0x0" room="0x3" actor="0xd" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Scythe 3" slice="0x0" setup="0x0" room="0x3" actor="0xe" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Block 1" slice="0x0" setup="0x0" room="0x4" actor="0x0" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Block 2" slice="0x0" setup="0x0" room="0x4" actor="0x1" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Block 3" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Block 4" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Block 5" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 1" slice="0x0" setup="0x0" room="0x6" actor="0x2" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 2" slice="0x0" setup="0x0" room="0x6" actor="0x3" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 3" slice="0x0" setup="0x0" room="0x6" actor="0x4" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 4" slice="0x0" setup="0x0" room="0x6" actor="0x5" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 5" slice="0x0" setup="0x0" room="0x6" actor="0x6" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 6" slice="0x0" setup="0x0" room="0x6" actor="0x7" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 7" slice="0x0" setup="0x0" room="0x6" actor="0x8" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle After Block 8" slice="0x0" setup="0x0" room="0x6" actor="0x9" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Map 1" slice="0x0" setup="0x0" room="0x8" actor="0x0" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Map 2" slice="0x0" setup="0x0" room="0x8" actor="0x1" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Before Map 3" slice="0x0" setup="0x0" room="0x8" actor="0x2" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 01" slice="0x0" setup="0x0" room="0xb" actor="0x5" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 02" slice="0x0" setup="0x0" room="0xb" actor="0x6" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 03" slice="0x0" setup="0x0" room="0xb" actor="0x7" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 04" slice="0x0" setup="0x0" room="0xb" actor="0x8" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 05" slice="0x0" setup="0x0" room="0xb" actor="0x9" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 06" slice="0x0" setup="0x0" room="0xb" actor="0xa" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 07" slice="0x0" setup="0x0" room="0xb" actor="0xb" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 08" slice="0x0" setup="0x0" room="0xb" actor="0xc" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 09" slice="0x0" setup="0x0" room="0xb" actor="0xd" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 10" slice="0x0" setup="0x0" room="0xb" actor="0xe" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 11" slice="0x0" setup="0x0" room="0xb" actor="0xf" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 12" slice="0x0" setup="0x0" room="0xb" actor="0x10" item="NOTHING"/>
+    <xflag type="icicle" location="Ice Cavern Icicle Compass 13" slice="0x0" setup="0x0" room="0xb" actor="0x11" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Entrance" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Freezard 1" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Freezard 2" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Block" slice="0x0" setup="0x0" room="0x5" actor="0x13" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice After Block 1" slice="0x0" setup="0x0" room="0x6" actor="0xe" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice After Block 2" slice="0x0" setup="0x0" room="0x6" actor="0xf" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice After Block 3" slice="0x0" setup="0x0" room="0x6" actor="0x10" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Map 1" slice="0x0" setup="0x0" room="0x9" actor="0xb" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Map 2" slice="0x0" setup="0x0" room="0x9" actor="0xc" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Compass 1" slice="0x0" setup="0x0" room="0xb" actor="0x1a" item="NOTHING"/>
+    <xflag type="redice" location="Ice Cavern Red Ice Compass 2" slice="0x0" setup="0x0" room="0xb" actor="0x1b" item="NOTHING"/>
+  </scene>
+</checks>

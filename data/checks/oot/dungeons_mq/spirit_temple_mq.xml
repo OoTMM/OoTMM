@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="TEMPLE_SPIRIT_MQ">
+    <chest location="MQ Spirit Temple Entrance Initial Chest" flag="0x1a" item="BOMBCHU_5"/>
+    <chest location="MQ Spirit Temple Lobby Back-Left Chest" flag="0x1e" item="SMALL_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Lobby Back-Right Chest" flag="0x1f" item="BOMBCHU_5"/>
+    <chest location="MQ Spirit Temple Compass Chest" flag="0x03" item="COMPASS_SPIRIT"/>
+    <chest location="MQ Spirit Temple Sun Block Room Chest" flag="0x01" item="RECOVERY_HEART"/>
+    <chest location="MQ Spirit Temple Map Chest" flag="0x00" item="MAP_SPIRIT"/>
+    <chest location="MQ Spirit Temple Map Room Back Chest" flag="0x08" item="SMALL_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Paradox Chest" flag="0x1d" item="SMALL_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Child Upper Ground Chest" flag="0x06" item="BOMBCHU_5"/>
+    <chest location="MQ Spirit Temple Child Upper Ledge Chest" flag="0x0c" item="SMALL_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Silver Block Room Target Chest" flag="0x1c" item="SMALL_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Chest in Box" flag="0x0f" item="RUPEE_BLUE"/>
+    <chest location="MQ Spirit Temple Statue Room Ledge Chest" flag="0x02" item="RECOVERY_HEART"/>
+    <chest location="MQ Spirit Temple Lobby Front-Right Chest" flag="0x1b" item="SMALL_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Purple Leever Chest" flag="0x04" item="RUPEE_PURPLE"/>
+    <chest location="MQ Spirit Temple Symphony Room Chest" flag="0x07" item="RUPEE_PURPLE" hint="MQ_SPIRIT_SYMPHONY"/>
+    <chest location="MQ Spirit Temple Beamos Room Chest" flag="0x19" item="ARROWS_30"/>
+    <chest location="MQ Spirit Temple Dinolfos Room Chest" flag="0x18" item="ICE_TRAP"/>
+    <chest location="MQ Spirit Temple Boss Key Chest" flag="0x05" item="BOSS_KEY_SPIRIT"/>
+    <chest location="MQ Spirit Temple Topmost Chest" flag="0x12" item="SMALL_KEY_SPIRIT"/>
+    <gs location="MQ Spirit Temple GS Sun Block Room" flag="0xe0" item="GS_TOKEN"/>
+    <gs location="MQ Spirit Temple GS Leever Room" flag="0xe1" item="GS_TOKEN"/>
+    <gs location="MQ Spirit Temple GS Symphony Room" flag="0xe3" item="GS_TOKEN"/>
+    <gs location="MQ Spirit Temple GS Top Floor Left Wall" flag="0xe2" item="GS_TOKEN"/>
+    <gs location="MQ Spirit Temple GS Top Floor Back Wall" flag="0xe4" item="GS_TOKEN"/>
+    <sr location="MQ Spirit Temple SR Lobby After Water Near Stairs" flag="0x8a" item="RUPEE_SILVER_SPIRIT_LOBBY"/>
+    <sr location="MQ Spirit Temple SR Lobby Rock Right" flag="0x8b" item="RUPEE_SILVER_SPIRIT_LOBBY"/>
+    <sr location="MQ Spirit Temple SR Lobby Rock Left" flag="0x8c" item="RUPEE_SILVER_SPIRIT_LOBBY"/>
+    <sr location="MQ Spirit Temple SR Lobby After Water Near Door" flag="0x8d" item="RUPEE_SILVER_SPIRIT_LOBBY"/>
+    <sr location="MQ Spirit Temple SR Lobby In Water" flag="0x8e" item="RUPEE_SILVER_SPIRIT_LOBBY"/>
+    <sr location="MQ Spirit Temple SR Adult Bottom" flag="0x8f" item="RUPEE_SILVER_SPIRIT_ADULT"/>
+    <sr location="MQ Spirit Temple SR Adult Bottom-Center" flag="0x90" item="RUPEE_SILVER_SPIRIT_ADULT"/>
+    <sr location="MQ Spirit Temple SR Adult Center-Top" flag="0x91" item="RUPEE_SILVER_SPIRIT_ADULT"/>
+    <sr location="MQ Spirit Temple SR Adult Top" flag="0x92" item="RUPEE_SILVER_SPIRIT_ADULT"/>
+    <sr location="MQ Spirit Temple SR Adult Skulltula" flag="0x93" item="RUPEE_SILVER_SPIRIT_ADULT"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Entrance 3" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="BOMB"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Entrance 4" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Entrance" slice="0x0" setup="0x0" room="0x1" actor="0xb" item="BOMB"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Boulders 1" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Boulders 2" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Climb" slice="0x0" setup="0x0" room="0x4" actor="0xc" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Statue Room Upper 1" slice="0x0" setup="0x0" room="0x5" actor="0x20" item="ARROWS_5"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Statue Room Upper 2" slice="0x0" setup="0x0" room="0x5" actor="0x21" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Statue Room Lower 1" slice="0x0" setup="0x0" room="0x5" actor="0x1e" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Statue Room Lower 2" slice="0x0" setup="0x0" room="0x5" actor="0x22" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Statue Room Lower 3" slice="0x0" setup="0x0" room="0x5" actor="0x23" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Sun Room 1" slice="0x0" setup="0x0" room="0x8" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Sun Room 2" slice="0x0" setup="0x0" room="0x8" actor="0x18" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Adult Climb 1" slice="0x0" setup="0x0" room="0xf" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Adult Climb 2" slice="0x0" setup="0x0" room="0xf" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Topmost Climb 1" slice="0x0" setup="0x0" room="0x17" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Topmost Climb 2" slice="0x0" setup="0x0" room="0x17" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Top Near Triforce Symbol 1" slice="0x0" setup="0x0" room="0x18" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Top Near Triforce Symbol 2" slice="0x0" setup="0x0" room="0x18" actor="0x4" item="BOMB"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Top Near Lowering Platform 1" slice="0x0" setup="0x0" room="0x19" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Top Near Lowering Platform 2" slice="0x0" setup="0x0" room="0x19" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Top Near Lowering Platform 3" slice="0x0" setup="0x0" room="0x19" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Top Near Lowering Platform 4" slice="0x0" setup="0x0" room="0x19" actor="0xc" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Back 1" slice="0x0" setup="0x0" room="0x1b" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Back 2" slice="0x0" setup="0x0" room="0x1b" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Back 3" slice="0x0" setup="0x0" room="0x1b" actor="0xb" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Spirit Temple Pot Child Back 4" slice="0x0" setup="0x0" room="0x1b" actor="0xc" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Spirit Temple Flying Pot Statue Room Upper" slice="0x0" setup="0x0" room="0x5" actor="0x12" item="NOTHING"/>
+    <xflag type="pot" location="MQ Spirit Temple Flying Pot Statue Room Lower" slice="0x0" setup="0x0" room="0x5" actor="0x13" item="NOTHING"/>
+    <xflag type="pot" location="MQ Spirit Temple Flying Pot Statue Room Stairs" slice="0x0" setup="0x0" room="0x5" actor="0x16" item="NOTHING"/>
+    <xflag type="fairy_spot" location="MQ Spirit Temple Dinolfos Room Big Fairy" slice="0x0" setup="0x0" room="0x12" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="heart" location="MQ Spirit Temple Heart 1" slice="0x0" setup="0x0" room="0x1" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Spirit Temple Heart 2" slice="0x0" setup="0x0" room="0x1" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Spirit Temple Wonder Item Chest Hammer" slice="0x0" setup="0x0" room="0x12" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Spirit Temple Wonder Item Chest Slash" slice="0x0" setup="0x0" room="0x12" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="MQ Spirit Temple Giant Statue Room Large Crate 1" slice="0x0" setup="0x0" room="0x5" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Spirit Temple Giant Statue Room Large Crate 2" slice="0x0" setup="0x0" room="0x5" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Spirit Temple Giant Statue Room Small Crate" slice="0x0" setup="0x0" room="0x5" actor="0xd" item="NOTHING"/>
+    <xflag type="crate" location="MQ Spirit Temple Beamos Room Small Crate" slice="0x0" setup="0x0" room="0x11" actor="0x0" item="NOTHING"/>
+    <xflag type="crate" location="MQ Spirit Temple Top Near Lowering Platform Large Crate 1" slice="0x0" setup="0x0" room="0x19" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Spirit Temple Top Near Lowering Platform Large Crate 2" slice="0x0" setup="0x0" room="0x19" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Spirit Temple Top Near Lowering Platform Large Crate 3" slice="0x0" setup="0x0" room="0x19" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Spirit Temple Top Near Lowering Platform Large Crate 4" slice="0x0" setup="0x0" room="0x19" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Entrance Left" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Entrance Upper" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Entrance Cobra" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Entrance Right" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Entrance Side" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Child Crawl" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Child Bridge Ground" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Child Bridge Wall Left" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Spirit Temple Boulder Child Bridge Wall Front" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="NOTHING"/>
+  </scene>
+</checks>

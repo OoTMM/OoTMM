@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="TEMPLE_SPIRIT">
+    <chest location="Spirit Temple Child First Chest" flag="0x08" item="SHIELD_DEKU"/>
+    <chest location="Spirit Temple Child Second Chest" flag="0x00" item="SMALL_KEY_SPIRIT"/>
+    <chest location="Spirit Temple Child Climb 1" flag="0x0c" item="SHIELD_DEKU"/>
+    <chest location="Spirit Temple Child Climb 2" flag="0x06" item="BOMBCHU_10"/>
+    <chest location="Spirit Temple Statue Base" flag="0x03" item="MAP_SPIRIT"/>
+    <chest location="Spirit Temple Statue Hands" flag="0x02" item="SMALL_KEY_SPIRIT"/>
+    <chest location="Spirit Temple Statue Upper Right" flag="0x0f" item="RUPEE_BLUE"/>
+    <chest location="Spirit Temple Sun Block Room Torches" flag="0x01" item="SMALL_KEY_SPIRIT"/>
+    <chest location="Spirit Temple Adult Silver Rupees" flag="0x07" item="SMALL_KEY_SPIRIT"/>
+    <chest location="Spirit Temple Adult Lullaby" flag="0x04" item="COMPASS_SPIRIT"/>
+    <chest location="Spirit Temple Adult Suns on Wall 1" flag="0x0d" item="RECOVERY_HEART"/>
+    <chest location="Spirit Temple Adult Suns on Wall 2" flag="0x0e" item="ICE_TRAP"/>
+    <chest location="Spirit Temple Adult Invisible 1" flag="0x14" item="RECOVERY_HEART"/>
+    <chest location="Spirit Temple Adult Invisible 2" flag="0x15" item="RECOVERY_HEART"/>
+    <chest location="Spirit Temple Adult Late Sun on Wall" flag="0x05" item="SMALL_KEY_SPIRIT"/>
+    <chest location="Spirit Temple Adult Boss Key Chest" flag="0x0a" item="BOSS_KEY_SPIRIT"/>
+    <chest location="Spirit Temple Adult Topmost Sun on Wall" flag="0x12" item="BOMBS_20"/>
+    <gs location="Spirit Temple GS Child Climb" flag="0x33" item="GS_TOKEN"/>
+    <gs location="Spirit Temple GS Child Fence" flag="0x34" item="GS_TOKEN"/>
+    <gs location="Spirit Temple GS Iron Knuckle" flag="0x30" item="GS_TOKEN"/>
+    <gs location="Spirit Temple GS Boulders" flag="0x31" item="GS_TOKEN"/>
+    <gs location="Spirit Temple GS Statue" flag="0x32" item="GS_TOKEN"/>
+    <sr location="Spirit Temple SR Child 1" flag="0x0a" item="RUPEE_SILVER_SPIRIT_CHILD"/>
+    <sr location="Spirit Temple SR Child 2" flag="0x0b" item="RUPEE_SILVER_SPIRIT_CHILD"/>
+    <sr location="Spirit Temple SR Child 3" flag="0x0c" item="RUPEE_SILVER_SPIRIT_CHILD"/>
+    <sr location="Spirit Temple SR Child 4" flag="0x0d" item="RUPEE_SILVER_SPIRIT_CHILD"/>
+    <sr location="Spirit Temple SR Child 5" flag="0x0e" item="RUPEE_SILVER_SPIRIT_CHILD"/>
+    <sr location="Spirit Temple SR Sun 1" flag="0x0f" item="RUPEE_SILVER_SPIRIT_SUN"/>
+    <sr location="Spirit Temple SR Sun 2" flag="0x10" item="RUPEE_SILVER_SPIRIT_SUN"/>
+    <sr location="Spirit Temple SR Sun 3" flag="0x11" item="RUPEE_SILVER_SPIRIT_SUN"/>
+    <sr location="Spirit Temple SR Sun 4" flag="0x12" item="RUPEE_SILVER_SPIRIT_SUN"/>
+    <sr location="Spirit Temple SR Sun 5" flag="0x13" item="RUPEE_SILVER_SPIRIT_SUN"/>
+    <sr location="Spirit Temple SR Boulders 1" flag="0x14" item="RUPEE_SILVER_SPIRIT_BOULDERS"/>
+    <sr location="Spirit Temple SR Boulders 2" flag="0x15" item="RUPEE_SILVER_SPIRIT_BOULDERS"/>
+    <sr location="Spirit Temple SR Boulders 3" flag="0x16" item="RUPEE_SILVER_SPIRIT_BOULDERS"/>
+    <sr location="Spirit Temple SR Boulders 4" flag="0x17" item="RUPEE_SILVER_SPIRIT_BOULDERS"/>
+    <sr location="Spirit Temple SR Boulders 5" flag="0x18" item="RUPEE_SILVER_SPIRIT_BOULDERS"/>
+    <xflag type="pot" location="Spirit Temple Pot Lobby 1" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Pot Lobby 2" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Climb" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="Spirit Temple Pot Statue Room 1" slice="0x0" setup="0x0" room="0x5" actor="0x17" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Statue Room 2" slice="0x0" setup="0x0" room="0x5" actor="0x18" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Statue Room 3" slice="0x0" setup="0x0" room="0x5" actor="0x19" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Statue Room 4" slice="0x0" setup="0x0" room="0x5" actor="0x1a" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Statue Room 5" slice="0x0" setup="0x0" room="0x5" actor="0x1b" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Statue Room 6" slice="0x0" setup="0x0" room="0x5" actor="0x1c" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Hand Stairway 1" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Hand Stairway 2" slice="0x0" setup="0x0" room="0x9" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Pot Adult Upper" slice="0x0" setup="0x0" room="0x10" actor="0x5" item="BOMBS_5"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Anubis Room 1" slice="0x0" setup="0x0" room="0x1b" actor="0x4" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Anubis Room 2" slice="0x0" setup="0x0" room="0x1b" actor="0x5" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Anubis Room 3" slice="0x0" setup="0x0" room="0x1b" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Pot Child Anubis Room 4" slice="0x0" setup="0x0" room="0x1b" actor="0x7" item="SHIELD_DEKU"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Lobby 1" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Lobby 2" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Child After Bridge 1" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="NOTHING"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Child After Bridge 2" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Statue Room 1" slice="0x0" setup="0x0" room="0x5" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Statue Room 2" slice="0x0" setup="0x0" room="0x5" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Adult Climb 1" slice="0x0" setup="0x0" room="0xf" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Adult Climb 2" slice="0x0" setup="0x0" room="0xf" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Topmost 1" slice="0x0" setup="0x0" room="0x19" actor="0x4" item="NUTS_5"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Topmost 2" slice="0x0" setup="0x0" room="0x19" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Topmost 3" slice="0x0" setup="0x0" room="0x19" actor="0x6" item="NUTS_5"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Topmost 4" slice="0x0" setup="0x0" room="0x19" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Topmost 5" slice="0x0" setup="0x0" room="0x19" actor="0x8" item="NUTS_5"/>
+    <xflag type="pot" location="Spirit Temple Flying Pot Topmost 6" slice="0x0" setup="0x0" room="0x19" actor="0x9" item="NUTS_5"/>
+    <xflag type="crate" location="Spirit Temple Crate 1" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="NUTS_5"/>
+    <xflag type="crate" location="Spirit Temple Crate 2" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="BOMB"/>
+    <xflag type="heart" location="Spirit Temple Heart 1" slice="0x0" setup="0x0" room="0x17" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Spirit Temple Heart 2" slice="0x0" setup="0x0" room="0x17" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="fairy_spot" location="Spirit Temple Adult Silver Rupees Big Fairy" slice="0x0" setup="0x0" room="0xc" actor="0x1" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="Spirit Temple Adult Sunlight Big Fairy" slice="0x0" setup="0x0" room="0x12" actor="0x6" item="FAIRY_BIG"/>
+  </scene>
+</checks>

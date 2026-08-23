@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="TEMPLE_FOREST">
+    <chest location="Forest Temple Tree Small Key" flag="0x03" item="SMALL_KEY_FOREST"/>
+    <chest location="Forest Temple Mini-Boss Key" flag="0x00" item="SMALL_KEY_FOREST"/>
+    <chest location="Forest Temple Map" flag="0x01" item="MAP_FOREST"/>
+    <chest location="Forest Temple Maze" flag="0x04" item="ARROWS_30"/>
+    <chest location="Forest Temple Garden" flag="0x05" item="RECOVERY_HEART"/>
+    <chest location="Forest Temple Well" flag="0x09" item="SMALL_KEY_FOREST"/>
+    <chest location="Forest Temple Poe Key" flag="0x0d" item="SMALL_KEY_FOREST"/>
+    <chest location="Forest Temple Bow" flag="0x0c" item="BOW"/>
+    <chest location="Forest Temple Compass" flag="0x0f" item="COMPASS_FOREST"/>
+    <chest location="Forest Temple Checkerboard" flag="0x07" item="ARROWS_10"/>
+    <chest location="Forest Temple Boss Key" flag="0x0e" item="BOSS_KEY_FOREST"/>
+    <chest location="Forest Temple Floormaster" flag="0x02" item="SMALL_KEY_FOREST" hint="FOREST_FLOORMASTER"/>
+    <chest location="Forest Temple Antichamber" flag="0x0b" item="ARROWS_5"/>
+    <gs location="Forest Temple GS Entrance" flag="0x19" item="GS_TOKEN"/>
+    <gs location="Forest Temple GS Main" flag="0x1b" item="GS_TOKEN"/>
+    <gs location="Forest Temple GS Garden West" flag="0x1a" item="GS_TOKEN"/>
+    <gs location="Forest Temple GS Garden East" flag="0x18" item="GS_TOKEN"/>
+    <gs location="Forest Temple GS Antichamber" flag="0x1c" item="GS_TOKEN"/>
+    <xflag type="pot" location="Forest Temple Pot Main Room 1" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Forest Temple Pot Main Room 2" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Forest Temple Pot Main Room 3" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Main Room 4" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Main Room 5" slice="0x0" setup="0x0" room="0x2" actor="0xf" item="ARROWS_10"/>
+    <xflag type="pot" location="Forest Temple Pot Main Room 6" slice="0x0" setup="0x0" room="0x2" actor="0x10" item="ARROWS_10"/>
+    <xflag type="pot" location="Forest Temple Pot Miniboss Lower 1" slice="0x0" setup="0x0" room="0x6" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Miniboss Lower 2" slice="0x0" setup="0x0" room="0x6" actor="0x6" item="FAIRY"/>
+    <xflag type="pot" location="Forest Temple Pot Miniboss Upper 1" slice="0x0" setup="0x0" room="0x6" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Miniboss Upper 2" slice="0x0" setup="0x0" room="0x6" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Miniboss Upper 3" slice="0x0" setup="0x0" room="0x6" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Miniboss Upper 4" slice="0x0" setup="0x0" room="0x6" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Blue Poe 1" slice="0x0" setup="0x0" room="0xd" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Blue Poe 2" slice="0x0" setup="0x0" room="0xd" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="Forest Temple Pot Blue Poe 3" slice="0x0" setup="0x0" room="0xd" actor="0x7" item="ARROWS_10"/>
+    <xflag type="pot" location="Forest Temple Pot Rotating Room 1" slice="0x0" setup="0x0" room="0xe" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Rotating Room 2" slice="0x0" setup="0x0" room="0xe" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="Forest Temple Pot Green Poe Pot 1" slice="0x0" setup="0x0" room="0x10" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Forest Temple Pot Green Poe Pot 2" slice="0x0" setup="0x0" room="0x10" actor="0x7" item="ARROWS_10"/>
+    <xflag type="heart" location="Forest Temple Heart Garden 1" slice="0x0" setup="0x0" room="0x8" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Forest Temple Heart Garden 2" slice="0x0" setup="0x0" room="0x8" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Forest Temple Heart Well 1" slice="0x0" setup="0x0" room="0x9" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Forest Temple Heart Well 2" slice="0x0" setup="0x0" room="0x9" actor="0x3" item="RECOVERY_HEART"/>
+  </scene>
+</checks>

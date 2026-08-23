@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="DODONGO_CAVERN">
+    <chest location="Dodongo Cavern Map Chest" flag="0x08" item="MAP_DC"/>
+    <chest location="Dodongo Cavern Compass Chest" flag="0x05" item="COMPASS_DC"/>
+    <chest location="Dodongo Cavern Bomb Bag Side Chest" flag="0x06" item="RUPEE_RED"/>
+    <chest location="Dodongo Cavern Bomb Bag Chest" flag="0x04" item="BOMB_BAG"/>
+    <chest location="Dodongo Cavern Bridge Chest" flag="0x0a" item="SHIELD_DEKU"/>
+    <scrub location="Dodongo Cavern Lobby Scrub" flag="0x1f" item="SHIELD_DEKU"/>
+    <scrub location="Dodongo Cavern Green Side Room Scrub" flag="0x1d" item="STICK"/>
+    <scrub location="Dodongo Cavern Bomb Bag Side Room Left Scrub" flag="0x1e" item="NUTS_5"/>
+    <scrub location="Dodongo Cavern Bomb Bag Side Room Right Scrub" flag="0x1c" item="DEKU_SEEDS_30"/>
+    <gs location="Dodongo Cavern GS Side Room" flag="0x0c" item="GS_TOKEN"/>
+    <gs location="Dodongo Cavern GS Stairs Vines" flag="0x08" item="GS_TOKEN"/>
+    <gs location="Dodongo Cavern GS Stairs Top" flag="0x0a" item="GS_TOKEN"/>
+    <gs location="Dodongo Cavern GS Scarecrow" flag="0x09" item="GS_TOKEN"/>
+    <gs location="Dodongo Cavern GS Near Boss" flag="0x0b" item="GS_TOKEN"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Right Corridor Pot 1" slice="0x0" setup="0x0" room="0x1" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Right Corridor Pot 2" slice="0x0" setup="0x0" room="0x1" actor="0xd" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Right Corridor Pot 3" slice="0x0" setup="0x0" room="0x1" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Right Corridor Pot 4" slice="0x0" setup="0x0" room="0x1" actor="0x10" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Right Corridor Pot 5" slice="0x0" setup="0x0" room="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Right Corridor Pot 6" slice="0x0" setup="0x0" room="0x1" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Stairs Pot 1" slice="0x0" setup="0x0" room="0x2" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Stairs Pot 2" slice="0x0" setup="0x0" room="0x2" actor="0x18" item="RUPEE_RED"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Stairs Pot 3" slice="0x0" setup="0x0" room="0x2" actor="0x19" item="RUPEE_RED"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Stairs Pot 4" slice="0x0" setup="0x0" room="0x2" actor="0x1a" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Miniboss 1" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Miniboss 2" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Miniboss 3" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Miniboss 4" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Green Room Pot 1" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Green Room Pot 2" slice="0x0" setup="0x0" room="0x4" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Green Room Pot 3" slice="0x0" setup="0x0" room="0x4" actor="0xc" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Green Room Pot 4" slice="0x0" setup="0x0" room="0x4" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Skull 1" slice="0x0" setup="0x0" room="0x7" actor="0x6" item="BOMB"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Skull 2" slice="0x0" setup="0x0" room="0x7" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Skull 3" slice="0x0" setup="0x0" room="0x8" actor="0x6" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Skull 4" slice="0x0" setup="0x0" room="0x8" actor="0x7" item="FAIRY"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Bomb Bag Room 1" slice="0x0" setup="0x0" room="0x9" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Bomb Bag Room 2" slice="0x0" setup="0x0" room="0x9" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Room Before Miniboss 1" slice="0x0" setup="0x0" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Room Before Miniboss 2" slice="0x0" setup="0x0" room="0xa" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Room After Miniboss 1" slice="0x0" setup="0x0" room="0xc" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Dodongo Cavern Pot Room After Miniboss 2" slice="0x0" setup="0x0" room="0xc" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="grass" location="Dodongo Cavern Grass Lobby" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Dodongo Cavern Grass Pre-Boss" slice="0x0" setup="0x0" room="0x7" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Dodongo Cavern Grass Bomb Bag Room" slice="0x0" setup="0x0" room="0x9" actor="0x0" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Dodongo Cavern Grass Pre-Miniboss" slice="0x0" setup="0x0" room="0xa" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Dodongo Cavern Grass East Corridor Side Room" slice="0x0" setup="0x0" room="0xb" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="heart" location="Dodongo Cavern Heart Miniboss Lava" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Dodongo Cavern Heart Miniboss Upper 1" slice="0x0" setup="0x0" room="0x3" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Dodongo Cavern Heart Miniboss Upper 2" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Dodongo Cavern Heart Bomb Bag Room" slice="0x0" setup="0x0" room="0x9" actor="0xd" item="RECOVERY_HEART"/>
+  </scene>
+</checks>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="GERUDO_TRAINING_GROUND">
+    <chest location="Gerudo Training Grounds Entrance 1" flag="0x07" item="ARROWS_10"/>
+    <chest location="Gerudo Training Grounds Entrance 2" flag="0x13" item="RUPEE_BLUE"/>
+    <chest location="Gerudo Training Grounds Stalfos" flag="0x00" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Grounds Near Block" flag="0x11" item="ARROWS_30"/>
+    <chest location="Gerudo Training Grounds Behind Block Invisible" flag="0x14" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Grounds Behind Block Visible" flag="0x02" item="ICE_TRAP"/>
+    <chest location="Gerudo Training Grounds Behind Block Enemy Back" flag="0x0e" item="RUPEE_BLUE"/>
+    <chest location="Gerudo Training Grounds Behind Block Enemy Front" flag="0x0f" item="RUPEE_HUGE"/>
+    <chest location="Gerudo Training Grounds Eye Statue" flag="0x03" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Grounds Hammer Room Switch" flag="0x10" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Grounds Hammer Room" flag="0x12" item="ARROWS_10"/>
+    <chest location="Gerudo Training Grounds Lizalfos" flag="0x01" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Water" flag="0x0d" item="SMALL_KEY_GTG" hint="GTG_WATER"/>
+    <collectible location="Gerudo Training Freestanding Key" flag="0x01" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Maze Upper Cage" flag="0x04" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Maze Upper Fake Ceiling" flag="0x0b" item="SMALL_KEY_GTG"/>
+    <chest location="Gerudo Training Maze Side Chest 1" flag="0x05" item="BOMBCHU_5"/>
+    <chest location="Gerudo Training Maze Side Chest 2" flag="0x08" item="ARROWS_30"/>
+    <chest location="Gerudo Training Maze Chest 1" flag="0x06" item="RUPEE_PURPLE"/>
+    <chest location="Gerudo Training Maze Chest 2" flag="0x0a" item="RUPEE_RED"/>
+    <chest location="Gerudo Training Maze Chest 3" flag="0x09" item="ARROWS_30"/>
+    <chest location="Gerudo Training Maze Chest 4" flag="0x0c" item="ARROW_ICE"/>
+    <sr location="Gerudo Training Grounds SR Slope Front Right" flag="0x41" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="Gerudo Training Grounds SR Slope Front Left" flag="0x42" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="Gerudo Training Grounds SR Slope Front Above" flag="0x43" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="Gerudo Training Grounds SR Slope Center" flag="0x44" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="Gerudo Training Grounds SR Slope Back" flag="0x45" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="Gerudo Training Grounds SR Lava Front Left" flag="0x46" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="Gerudo Training Grounds SR Lava Front Right" flag="0x47" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="Gerudo Training Grounds SR Lava Back Left" flag="0x48" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="Gerudo Training Grounds SR Lava Back Center" flag="0x49" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="Gerudo Training Grounds SR Lava Back Right" flag="0x4a" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="Gerudo Training Grounds SR Water 1" flag="0x4c" item="RUPEE_SILVER_GTG_WATER"/>
+    <sr location="Gerudo Training Grounds SR Water 2" flag="0x4d" item="RUPEE_SILVER_GTG_WATER"/>
+    <sr location="Gerudo Training Grounds SR Water 3" flag="0x4e" item="RUPEE_SILVER_GTG_WATER"/>
+    <sr location="Gerudo Training Grounds SR Water 4" flag="0x4f" item="RUPEE_SILVER_GTG_WATER"/>
+    <sr location="Gerudo Training Grounds SR Water 5" flag="0x50" item="RUPEE_SILVER_GTG_WATER"/>
+    <xflag type="heart" location="Gerudo Training Grounds Heart 1" slice="0x0" setup="0x0" room="0x7" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Gerudo Training Grounds Heart 2" slice="0x0" setup="0x0" room="0x7" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="fairy_spot" location="Gerudo Training Grounds Entrance Big Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
+    <xflag type="wonder" location="Gerudo Training Grounds Wonder Item Eye Statue Room" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="Gerudo Training Grounds Wonder Item Torch Slugs Room" slice="0x0" setup="0x0" room="0x5" actor="0x10" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Gerudo Training Grounds Wonder Item Beamos Room" slice="0x0" setup="0x0" room="0x7" actor="0xc" item="FLEXIBLE"/>
+  </scene>
+</checks>

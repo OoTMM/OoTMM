@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="HAUNTED_WASTELAND">
+    <npc location="Haunted Wasteland Carpet Merchant" npc="CARPET_MERCHANT" item="BOMBCHU_20"/>
+    <chest location="Haunted Wasteland Chest" flag="0x00" item="RUPEE_PURPLE" hint="HAUNTED_WASTELAND"/>
+    <gs location="Haunted Wasteland GS" flag="0xa9" item="GS_TOKEN"/>
+    <xflag type="pot" location="Haunted Wasteland Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Haunted Wasteland Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NUTS_5"/>
+    <xflag type="pot" location="Haunted Wasteland Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="FAIRY"/>
+    <xflag type="pot" location="Haunted Wasteland Pot 4" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="MAGIC_JAR_SMALL"/>
+    <xflag type="crate" location="Haunted Wasteland Crate Entrance" slice="0x0" setup="0x0" room="0x1" actor="0x25" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Haunted Wasteland Crate After Pit 1" slice="0x0" setup="0x0" room="0x1" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Haunted Wasteland Crate After Pit 2" slice="0x0" setup="0x0" room="0x1" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Haunted Wasteland Crate After Pit 3" slice="0x0" setup="0x0" room="0x1" actor="0x24" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Haunted Wasteland Crate Deep" slice="0x0" setup="0x0" room="0x1" actor="0x21" item="RUPEE_GREEN"/>
+  </scene>
+</checks>

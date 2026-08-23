@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="TEMPLE_SHADOW_MQ">
+    <chest location="MQ Shadow Temple Compass Chest" flag="0x01" item="COMPASS_SHADOW"/>
+    <chest location="MQ Shadow Temple Hover Boots Chest" flag="0x07" item="BOOTS_HOVER"/>
+    <chest location="MQ Shadow Temple First Gibdos Chest" flag="0x03" item="SMALL_KEY_SHADOW"/>
+    <chest location="MQ Shadow Temple Map Chest" flag="0x02" item="MAP_SHADOW"/>
+    <chest location="MQ Shadow Temple Boat Passage Chest" flag="0x0e" item="SMALL_KEY_SHADOW"/>
+    <chest location="MQ Shadow Temple Second Silver Rupee Visible Chest" flag="0x0c" item="RUPEE_BLUE"/>
+    <chest location="MQ Shadow Temple Second Silver Rupee Invisible Chest" flag="0x16" item="SMALL_KEY_SHADOW"/>
+    <chest location="MQ Shadow Temple Huge Pit Silver Rupee Chest" flag="0x0f" item="RUPEE_BLUE"/>
+    <chest location="MQ Shadow Temple Spike Curtain Ground Chest" flag="0x05" item="ARROWS_10"/>
+    <chest location="MQ Shadow Temple Spike Curtain Upper Cage Chest" flag="0x06" item="RUPEE_BLUE"/>
+    <chest location="MQ Shadow Temple Spike Curtain Upper Switch Chest" flag="0x04" item="SMALL_KEY_SHADOW"/>
+    <chest location="MQ Shadow Temple Invisible Spike Floor Chest" flag="0x09" item="RUPEE_BLUE"/>
+    <chest location="MQ Shadow Temple Stalfos Room Chest" flag="0x10" item="RUPEE_RED" hint="MQ_SHADOW_STALFOS"/>
+    <chest location="MQ Shadow Temple Wind Hint Chest" flag="0x15" item="SMALL_KEY_SHADOW"/>
+    <chest location="MQ Shadow Temple After Wind Gibdos Chest" flag="0x08" item="RUPEE_BLUE"/>
+    <chest location="MQ Shadow Temple After Wind Bomb Chest" flag="0x14" item="ARROWS_5"/>
+    <chest location="MQ Shadow Temple Hidden Dead Hand Chest" flag="0x0d" item="ARROWS_10"/>
+    <chest location="MQ Shadow Temple Crushing Wall Left Chest" flag="0x0a" item="RUPEE_BLUE"/>
+    <chest location="MQ Shadow Temple Boss Key Chest" flag="0x0b" item="BOSS_KEY_SHADOW"/>
+    <collectible location="MQ Shadow Temple Triple Pot Key" flag="0x06" item="SMALL_KEY_SHADOW"/>
+    <gs location="MQ Shadow Temple GS Spike Curtain" flag="0xe9" item="GS_TOKEN"/>
+    <gs location="MQ Shadow Temple GS Wind Hint" flag="0xe8" item="GS_TOKEN"/>
+    <gs location="MQ Shadow Temple GS After Wind Bomb" flag="0xeb" item="GS_TOKEN"/>
+    <gs location="MQ Shadow Temple GS After Boat" flag="0xec" item="GS_TOKEN"/>
+    <gs location="MQ Shadow Temple GS Pre-Boss" flag="0xea" item="GS_TOKEN"/>
+    <sr location="MQ Shadow Temple SR Scythe 1" flag="0x99" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="MQ Shadow Temple SR Scythe 2" flag="0x9a" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="MQ Shadow Temple SR Scythe 3" flag="0x9b" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="MQ Shadow Temple SR Scythe 4" flag="0x9c" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="MQ Shadow Temple SR Scythe 5" flag="0x9d" item="RUPEE_SILVER_SHADOW_SCYTHE"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 1" flag="0x9e" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 2" flag="0x9f" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 3" flag="0xa0" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 4" flag="0xa1" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 5" flag="0xa2" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 6" flag="0xa3" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 7" flag="0xa4" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 8" flag="0xa5" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Ground 9" flag="0xa6" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Invisible Blades Time Block" flag="0xa7" item="RUPEE_SILVER_SHADOW_BLADES"/>
+    <sr location="MQ Shadow Temple SR Pit Back" flag="0xa8" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="MQ Shadow Temple SR Pit Midair Low" flag="0xa9" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="MQ Shadow Temple SR Pit Midair High" flag="0xaa" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="MQ Shadow Temple SR Pit Right" flag="0xab" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="MQ Shadow Temple SR Pit Front" flag="0xac" item="RUPEE_SILVER_SHADOW_PIT"/>
+    <sr location="MQ Shadow Temple SR Spikes Northwest Corner" flag="0xad" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes Southwest Wall" flag="0xae" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes West Midair" flag="0xaf" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes Ceiling" flag="0xb0" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes Center Ground" flag="0xb1" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes Center Midair" flag="0xb2" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes South Midair" flag="0xb3" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes East Ground" flag="0xb4" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes Northeast Wall" flag="0xb5" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <sr location="MQ Shadow Temple SR Spikes East Wall" flag="0xb6" item="RUPEE_SILVER_SHADOW_SPIKES"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Entrance Maze 1" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Entrance Maze 2" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Compass Room 1" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Compass Room 2" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Lower 1" slice="0x0" setup="0x0" room="0xa" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Lower 2" slice="0x0" setup="0x0" room="0xa" actor="0x4" item="BOMB"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Upper 1" slice="0x0" setup="0x0" room="0xa" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Upper 2" slice="0x0" setup="0x0" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Boss Key Room" slice="0x0" setup="0x0" room="0xd" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Bomb Flowers Room 1" slice="0x0" setup="0x0" room="0x11" actor="0x1" item="BOMBS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Bomb Flowers Room 2" slice="0x0" setup="0x0" room="0x11" actor="0x2" item="ARROWS_30"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Room Before Boat 1" slice="0x0" setup="0x0" room="0x14" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Room Before Boat 2" slice="0x0" setup="0x0" room="0x14" actor="0x4" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat Before Bridge 1" slice="0x0" setup="0x0" room="0x15" actor="0x13" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat Before Bridge 2" slice="0x0" setup="0x0" room="0x15" actor="0x14" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat After Bridge 1" slice="0x0" setup="0x0" room="0x15" actor="0x15" item="ARROWS_30"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat After Bridge 2" slice="0x0" setup="0x0" room="0x15" actor="0x16" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 1" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 2" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 3" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 4" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 1" slice="0x0" setup="0x0" room="0x14" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 2" slice="0x0" setup="0x0" room="0x14" actor="0x6" item="NUTS_5"/>
+    <xflag type="fairy_spot" location="MQ Shadow Temple Beamos Big Fairy" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Shadow Temple Guillotines Room Big Fairy" slice="0x0" setup="0x0" room="0x9" actor="0x1d" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Shadow Temple Big Fairy After Wind" slice="0x0" setup="0x0" room="0x13" actor="0x5" item="FAIRY_BIG"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 1" slice="0x0" setup="0x0" room="0x10" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 2" slice="0x0" setup="0x0" room="0x10" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 1" slice="0x0" setup="0x0" room="0x15" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 2" slice="0x0" setup="0x0" room="0x15" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Upper 1" slice="0x0" setup="0x0" room="0x15" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Upper 2" slice="0x0" setup="0x0" room="0x15" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Lower" slice="0x0" setup="0x0" room="0x15" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Shadow Temple Wonder Item" slice="0x0" setup="0x0" room="0xc" actor="0x1" item="ARROWS_30"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 1" slice="0x0" setup="0x0" room="0x2" actor="0x11" item="ARROWS_10"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 2" slice="0x0" setup="0x0" room="0x2" actor="0x12" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 3" slice="0x0" setup="0x0" room="0x2" actor="0x13" item="BOMB"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 4" slice="0x0" setup="0x0" room="0x2" actor="0x14" item="RECOVERY_HEART"/>
+  </scene>
+</checks>

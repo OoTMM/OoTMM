@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checks game="oot">
+  <scene id="GERUDO_TRAINING_GROUND_MQ">
+    <chest location="MQ Gerudo Training Grounds Entryway Left Chest" flag="0x13" item="ARROWS_10"/>
+    <chest location="MQ Gerudo Training Grounds Entryway Right Chest" flag="0x07" item="BOMBCHU_10"/>
+    <chest location="MQ Gerudo Training Grounds Maze First Chest" flag="0x0b" item="RUPEE_PURPLE"/>
+    <chest location="MQ Gerudo Training Grounds Maze Second Chest" flag="0x06" item="RUPEE_GREEN"/>
+    <chest location="MQ Gerudo Training Grounds Maze Third Chest" flag="0x0a" item="RUPEE_RED"/>
+    <chest location="MQ Gerudo Training Grounds Maze Fourth Chest" flag="0x09" item="RUPEE_GREEN"/>
+    <chest location="MQ Gerudo Training Grounds Right Side Dinolfos Chest" flag="0x01" item="SMALL_KEY_GTG"/>
+    <chest location="MQ Gerudo Training Grounds Water Room Chest" flag="0x0d" item="SMALL_KEY_GTG"/>
+    <chest location="MQ Gerudo Training Grounds Left Side Iron Knuckle Chest" flag="0x00" item="RUPEE_BLUE"/>
+    <chest location="MQ Gerudo Training Grounds Stalfos Room Chest" flag="0x11" item="ARROWS_10"/>
+    <chest location="MQ Gerudo Training Grounds Silver Block Room Chest" flag="0x02" item="RUPEE_PURPLE"/>
+    <chest location="MQ Gerudo Training Grounds Spinning Statue Chest" flag="0x03" item="BOMBCHU_5"/>
+    <chest location="MQ Gerudo Training Grounds Torch Slug Room Clear Chest" flag="0x12" item="ARROWS_10"/>
+    <chest location="MQ Gerudo Training Grounds Torch Slug Room Switch Chest" flag="0x0e" item="SMALL_KEY_GTG"/>
+    <chest location="MQ Gerudo Training Grounds Maze Right Side Middle Chest" flag="0x05" item="RUPEE_BLUE"/>
+    <chest location="MQ Gerudo Training Grounds Maze Right Side Right Chest" flag="0x08" item="RUPEE_GREEN"/>
+    <chest location="MQ Gerudo Training Grounds Ice Arrows Chest" flag="0x04" item="ARROW_ICE"/>
+    <sr location="MQ Gerudo Training Grounds SR Slopes Top Right" flag="0xc1" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="MQ Gerudo Training Grounds SR Slopes Middle" flag="0xc2" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="MQ Gerudo Training Grounds SR Slopes Front" flag="0xc3" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="MQ Gerudo Training Grounds SR Slopes Front-Left" flag="0xc4" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="MQ Gerudo Training Grounds SR Slopes Front-Right" flag="0xc5" item="RUPEE_SILVER_GTG_SLOPES"/>
+    <sr location="MQ Gerudo Training Grounds SR Lava Back-Right" flag="0xc6" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="MQ Gerudo Training Grounds SR Lava Back-Left" flag="0xc7" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="MQ Gerudo Training Grounds SR Lava Center" flag="0xc8" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="MQ Gerudo Training Grounds SR Lava Front-Right" flag="0xc9" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="MQ Gerudo Training Grounds SR Lava Front-Left" flag="0xca" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="MQ Gerudo Training Grounds SR Lava Front" flag="0xcb" item="RUPEE_SILVER_GTG_LAVA"/>
+    <sr location="MQ Gerudo Training Grounds SR Water Top-Left" flag="0xcc" item="RUPEE_SILVER_GTG_WATER"/>
+    <sr location="MQ Gerudo Training Grounds SR Water Center" flag="0xcd" item="RUPEE_SILVER_GTG_WATER"/>
+    <sr location="MQ Gerudo Training Grounds SR Water Bottom-Right" flag="0xce" item="RUPEE_SILVER_GTG_WATER"/>
+    <xflag type="pot" location="MQ Gerudo Training Grounds Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Gerudo Training Grounds Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Gerudo Training Grounds Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Gerudo Training Grounds Pot 4" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Gerudo Training Grounds Wonder Item Eye Statue" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall" slice="0x0" setup="0x0" room="0x7" actor="0x9" item="FLEXIBLE"/>
+    <xflag type="crate" location="MQ Gerudo Training Grounds Maze Center Room Large Crate" slice="0x0" setup="0x0" room="0x8" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="icicle" location="MQ Gerudo Training Grounds Icicle Slopes 1" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Gerudo Training Grounds Icicle Slopes 2" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Gerudo Training Grounds Icicle Slopes 3" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Gerudo Training Grounds Icicle Slopes 4" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Gerudo Training Grounds Icicle Slopes 5" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="NOTHING"/>
+  </scene>
+</checks>
