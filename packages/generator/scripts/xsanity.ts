@@ -1618,8 +1618,8 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filt
     /* Prefix */
     if (ra.sceneId != lastSceneId) {
       if (lastSceneId !== -1)
-        console.log('');
-      console.log(`### Scene: ${scenesById(game)[ra.sceneId]}`);
+        console.log('</scene>');
+      console.log(`<scene id="${scenesById(game)[ra.sceneId]}">`);
       lastSceneId = ra.sceneId;
       lastSetupId = ra.setupId;
     } else if (ra.setupId != lastSetupId) {
@@ -1643,16 +1643,11 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filt
       frags.push(check.name2);
     }
     const name = frags.join(' ');
-    const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
-    const components: string[] = [];
-    components.push(`${name},`.padEnd(60));
-    components.push(`${check.type},`.padEnd(16));
-    components.push('NONE,'.padEnd(22));
-    components.push(`${scenesById(game)[ra.sceneId].slice(3 + Number(game === 'oot'))},`.padEnd(32));
-    components.push(`${hexPad(key, 5)},`.padEnd(28));
-    components.push(check.item);
-    console.log(components.join(''));
+
+    console.log(`  <xflag type="${check.type}" location="${name}" slice="0x${(check.sliceId ?? 0).toString(16)}" setup="0x${ra.setupId.toString(16)}" room="0x${ra.roomId.toString(16)}" actor="0x${ra.actor.actorId.toString(16)}" item="${check.item}"/>`);
   }
+  if (lastSceneId !== -1)
+    console.log('</scene>');
 }
 
 async function build() {
