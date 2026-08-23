@@ -58,7 +58,7 @@ const SLICES = 12;
 
 /* OOT Grass Scatter: 12 */
 
-type Game = 'oot' | 'mq' | 'mm';
+type Game = 'oot' | 'mm';
 
 function scenesById(game: 'oot' | 'mm') {
   const data: {[k: number]: string} = {};
@@ -1068,9 +1068,9 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
   return sortRoomActors(actorsRooms);
 }
 
-function getGameRoomActor(rom: Buffer, game: Game) {
+function getGameRoomActor(rom: Buffer, game: 'oot' | 'mq' | 'mm'): RoomActors[] {
   const rawRooms = getRawRooms(rom, game);
-  let actorRooms = roomActorsFromRaw(rom, rawRooms, game);
+  let actorRooms = roomActorsFromRaw(rom, rawRooms, game === 'mq' ? 'oot' : game);
   if (game === 'mq') {
     actorRooms = actorRooms.filter(r => r.sceneId < 0x0a || r.sceneId == 0x0b || r.sceneId == 0x0d).map(r => ({ ...r, sceneId: r.sceneId + 0x70 }));
   }

@@ -51,12 +51,13 @@ export async function buildGameChecks(game: 'oot' | 'mm', state: BuildChecksStat
     preserveOrder: true,
     attributeNamePrefix: '',
   });
-  const [_, xmlRoot] = parser.parse(data);
+  const xml = parser.parse(data);
+  const xmlRoot = xml.find((e: any) => e['checks']);
   for (const xmlScene of xmlRoot.checks) {
     const scene = gameId(game, xmlScene[':@'].id, '_');
     const children = xmlScene['scene'];
     for (const xmlCheck of children) {
-      const ov = Object.keys(xmlCheck)[0];
+      const ov = Object.keys(xmlCheck).find(k => k !== ':@')!;
       const attrs = xmlCheck[':@'];
       const location = gameId(game, attrs['location'], ' ');
       const type = attrs['type'] ?? ov;
