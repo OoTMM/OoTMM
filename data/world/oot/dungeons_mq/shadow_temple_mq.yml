@@ -140,17 +140,17 @@
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room": "event(SHADOW_MQ_SCYTHE_ROOM_SKULLTULAS_CLEAR)" #Don't need SR itself to exit, only the skulltulas. See below comment.
-    "Shadow Temple Enclosed Shortcut Area": "has_lens && get_past_skulltulas"
+    "Shadow Temple First Beamos Fork Room Lens Alcove to Scythe and Shortcut Room": "event(SHADOW_MQ_SCYTHE_ROOM_SKULLTULAS_CLEAR)" #Don't need SR itself to exit, only the skulltulas.
+    "Shadow Temple Enclosed Shortcut Area": "has_lens && get_past_skulltulas" 
   events:
-    SHADOW_MQ_SCYTHE_ROOM_SKULLTULAS_CLEAR: "soul_skulltula && (can_use_din || (silver_rupees_shadow_scythe && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)))"
-  locations:
-    "MQ Shadow Temple SR Scythe 1": "true"
-    "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
-    "MQ Shadow Temple SR Scythe 3": "true"
-    "MQ Shadow Temple SR Scythe 4": "true"
-    "MQ Shadow Temple SR Scythe 5": "true"
-    "MQ Shadow Temple Map Chest": "silver_rupees_shadow_scythe"
+    SHADOW_MQ_SCYTHE_ROOM_SKULLTULAS_CLEAR: "soul_skulltula && (can_use_din || (silver_rupees_shadow_scythe && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)))" # too restrictive? you can jumpslash through the gate, even with child kokiri sword. Fully charged child kokiri sword spin slash works too. MQ already expects you to know about this 'exploit' later in the dungeon, when you hit a switch through a gate.
+  locations: # Adult Link can roll under these skulltulas with stone mask
+    "MQ Shadow Temple SR Scythe 1": "get_past_skulltulas" #left alcove. You can get around the skulltula by getting repeatedly hit (child or adult).
+    "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere" # You can get this with nothing as adult with a good jump
+    "MQ Shadow Temple SR Scythe 3": "true" # floor, far
+    "MQ Shadow Temple SR Scythe 4": "true" # floor, near
+    "MQ Shadow Temple SR Scythe 5": "get_past_skulltulas" # back right alcove.
+    "MQ Shadow Temple Map Chest": "silver_rupees_shadow_scythe" # TODO: solve the issue where child and adult can collect subsets of silver rupees that logic thinks combine into a complete simultaenous collection.
 
 "Shadow Temple Enclosed Shortcut Area":
   dungeon: Shadow
@@ -310,7 +310,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
-    "Shadow Temple Wind Tunnel After Pit Before Drop": "get_past_skulltulas && (has_hover_boots || hookshot_anywhere || climb_anywhere)" #Need to get past Skulltula and the pit
+    "Shadow Temple Wind Tunnel After Pit Before Drop": "(can_kill_skulltulas || has_nuts || has_boomerang || can_use_mask_stone || (trick(GLITCH_OOT_SKULLTULA_ELEVATOR) && has_iron_boots)) && (has_hover_boots || can_hookshot || climb_anywhere)" #Need to get past Skulltula and the pit. Skulltula Elevator needs to be combined with some way to stop being pushed too far away from the Skulltula such that it resets.
 
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
