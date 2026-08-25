@@ -549,4 +549,4 @@ static void DtMessageDraw(PlayState* play)
     DoubleTimeSelector_Draw(play);
 }
 
-PATCH_FUNC(0x80156758, DtMessageDraw);
+PATCH_CALL(0x801567C8, DtMessageDrawMain);
