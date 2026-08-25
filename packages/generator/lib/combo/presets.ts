@@ -140,6 +140,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   sharedPowderKeg: true,
   agelessGFS: true,
   agelessChildTrade: true,
+  mmSongOfDoubleTimeTimeSelector: true,
   agelessSoaring: true,
   scalesMm: true,
   strengthMm: true,
