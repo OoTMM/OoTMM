@@ -45,8 +45,7 @@ static u32 DtTicksToMinutes(u32 ticks) { return (ticks * DT_MINUTES_PER_DAY) >> 
 static u32 DtMinutesToTicks(u32 minutes) { return ((minutes << 16) + DT_MINUTES_PER_DAY - 1) / DT_MINUTES_PER_DAY; }
 
 static u32 DtCurrentTicks(void) {
-    u32 day = gSave.day < 1 ? 1 : gSave.day;
-    return ((day - 1) << 16) + (u16)(gSave.time - CLOCK_TIME(6, 0));
+    return ((gSave.day - 1) << 16) + (u16)(gSave.time - CLOCK_TIME(6, 0));
 }
 
 static void DtTicksToDayTime(u32 ticks, u32* day, u16* time) {
@@ -79,10 +78,6 @@ static u32 DtGetLandingTicks(u32 ticks) {
 }
 
 static void DtLoadClockDayTexture(PlayState* play, u32 day) {
-    if (day < 1)
-        day = 1;
-    else if (day > 3)
-        day = 3;
     if (sDtClockTextureDay == day)
         return;
     memcpy(sDtSceneFlagsBackup, gSave.info.permanentSceneFlags, sizeof(sDtSceneFlagsBackup));
@@ -96,10 +91,6 @@ static void DtAppendDayName(char** b, u32 day, u16 time) {
         { "First Day", "Second Day", "Final Day" },
         { "Night of the First Day", "Night of the Second Day", "Night of the Final Day" },
     };
-    if (day < 1)
-        day = 1;
-    else if (day > 3)
-        day = 3;
     comboTextAppendStr(b, names[DtIsNight(time)][day - 1]);
 }
 static void DtAppendTime(char** b, u16 time) {
@@ -190,29 +181,26 @@ static int DtReadHorizontalInput(Input* input) {
 static void DtMoveTarget(PlayState* play, int dir) {
     u32 old = sDtTargetTicks, next, half, target;
     s32 i;
-    s32 oldHalf = old / DT_HALF_TICKS;
     if (dir > 0) {
         next = DtNextSnapTicks(old);
         half = next / DT_HALF_TICKS;
-        if (half >= DT_HALF_COUNT || !(gSharedCustomSave.mm.halfDays & (1u << half))) {
+        if (!(gSharedCustomSave.mm.halfDays & (1u << half))) {
             next = old;
             for (i = half + 1; i < DT_HALF_COUNT; i++) {
                 if (!(gSharedCustomSave.mm.halfDays & (1u << i)))
                     continue;
-                target = (u32)i * DT_HALF_TICKS;
-                if (target <= DT_MAX_TICKS)
-                    next = target;
+                next = (u32)i * DT_HALF_TICKS;
                 break;
             }
         }
         sDtTargetTicks = next;
-    } else if (dir < 0) {
+    } else {
         next = old <= sDtStartTicks ? sDtStartTicks : DtPrevSnapTicks(old);
         if (next <= sDtStartTicks) {
             sDtTargetTicks = sDtStartTicks;
         } else {
             half = next / DT_HALF_TICKS;
-            if (half < DT_HALF_COUNT && (gSharedCustomSave.mm.halfDays & (1u << half))) {
+            if (gSharedCustomSave.mm.halfDays & (1u << half)) {
                 sDtTargetTicks = next;
             } else {
                 sDtTargetTicks = sDtStartTicks;
@@ -226,14 +214,10 @@ static void DtMoveTarget(PlayState* play, int dir) {
             }
         }
     }
-    if (sDtTargetTicks < sDtStartTicks)
-        sDtTargetTicks = sDtStartTicks;
-    if (sDtTargetTicks > DT_MAX_TICKS)
-        sDtTargetTicks = DT_MAX_TICKS;
     if (sDtTargetTicks != old)
         Audio_PlaySfx(NA_SE_SY_CURSOR);
     DtLoadClockDayTexture(play, (sDtTargetTicks >> 16) + 1);
-    if ((s32)(sDtTargetTicks / DT_HALF_TICKS) != oldHalf || (s32)(sDtTargetTicks / DT_HALF_TICKS) != sDtDisplayedHalf)
+    if ((s32)(sDtTargetTicks / DT_HALF_TICKS) != sDtDisplayedHalf)
         DtShowSelectorText(play);
 }
 static int DtShouldBegin(PlayState* play) {
@@ -247,6 +231,7 @@ static int DtShouldBegin(PlayState* play) {
 
 static void DtBegin(PlayState* play) {
     sDtStartTicks = sDtTargetTicks = DtCurrentTicks();
+    sDtClockTextureDay = 0;
     sDtStickRepeatDir = sDtStickRepeatTimer = sDtHoldFrames = 0;
     sDtDisplayedHalf = -1;
     sDtState = DT_STATE_SELECT;
@@ -255,17 +240,10 @@ static void DtBegin(PlayState* play) {
 
 static void DtCancel(PlayState* play) {
     u32 day = gSave.day;
-    if (day < 1)
-        day = 1;
-    else if (day > 3)
-        day = 3;
     if (sDtClockTextureDay && sDtClockTextureDay != day)
         DtLoadClockDayTexture(play, day);
-    sDtClockTextureDay = 0;
     Message_Close(play);
     play->msgCtx.ocarinaMode = OCARINA_MODE_END;
-    sDtStickRepeatDir = sDtStickRepeatTimer = sDtHoldFrames = 0;
-    sDtDisplayedHalf = -1;
     sDtState = DT_STATE_NONE;
 }
 
@@ -280,7 +258,7 @@ static void DtConfigureFastForwardSpeed(void) {
         return;
     }
     speed = (s32)remaining - gSave.daySpeed;
-    R_TIME_SPEED = speed <= 0 ? 1 : speed > DT_FAST_FORWARD_SPEED ? DT_FAST_FORWARD_SPEED : speed;
+    R_TIME_SPEED = speed <= 0 ? 1 : speed;
 }
 
 static void DtFinishFastForward(void) {
@@ -296,7 +274,6 @@ static void DtFinishFastForward(void) {
 
 static void DtStartFastForward(PlayState* play) {
     sDtTargetTicks = DtGetLandingTicks(sDtTargetTicks);
-    sDtClockTextureDay = 0;
     sDtOldTimeSpeed = R_TIME_SPEED;
     Message_Close(play);
     play->msgCtx.ocarinaMode = OCARINA_MODE_END;
@@ -307,18 +284,11 @@ static void DtStartFastForward(PlayState* play) {
 }
 
 static void DtUpdateFastForward(PlayState* play) {
-    u32 now = DtCurrentTicks(), remaining;
-    s32 next;
-    if (now >= sDtTargetTicks || !play->envCtx.sceneTimeSpeed) {
+    if (DtCurrentTicks() >= sDtTargetTicks || !play->envCtx.sceneTimeSpeed) {
         DtFinishFastForward();
         return;
     }
-    remaining = sDtTargetTicks - now;
-    next = R_TIME_SPEED + gSave.daySpeed;
-    if (next <= 0 || remaining <= (u32)next || remaining <= (u32)(DT_FAST_FORWARD_SPEED + gSave.daySpeed))
-        DtConfigureFastForwardSpeed();
-    else
-        R_TIME_SPEED = DT_FAST_FORWARD_SPEED;
+    DtConfigureFastForwardSpeed();
 }
 
 static void DtStartNormalDoubleTime(PlayState* play) {
@@ -329,7 +299,6 @@ static void DtStartNormalDoubleTime(PlayState* play) {
         Sram_IncrementDay();
     gSave.time = time;
     gSave.isNight = DtIsNight(time);
-    sDtClockTextureDay = 0;
     gDoubleTimeTargetDayChanged = oldDay != gSave.day;
     gDoubleTimeTargetPending = 1;
     gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = 0;
