@@ -314,6 +314,17 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_SKIP_CUTSCENES: settings.cutsceneSkipOoT,
     OOT_CUTSCENE_GLITCH_AID: settings.cutsceneGlitchOoT,
     MM_SKIP_CUTSCENES: settings.cutsceneSkipMM,
+    OOT_CS_GOHMA: settings.cutsceneIntroGohma,
+    OOT_CS_KING_DODONGO: settings.cutsceneIntroKingDodongo,
+    OOT_CS_BARINADE: settings.cutsceneIntroBarinade,
+    OOT_CS_PHANTOM_GANON: settings.cutsceneIntroPhantomGanon,
+    OOT_CS_VOLVAGIA: settings.cutsceneIntroVolvagia,
+    OOT_CS_MORPHA: settings.cutsceneIntroMorpha,
+    OOT_CS_BONGO_BONGO: settings.cutsceneIntroBongoBongo,
+    OOT_CS_TWINROVA: settings.cutsceneIntroTwinrova,
+    OOT_CS_GANONDORF: settings.cutsceneIntroGanondorf,
+    MM_CS_ODOLWA: settings.cutsceneIntroOdolwa,
+    MM_CS_WART: settings.cutsceneIntroWart,
   };
 
   for (const v in exprs) {

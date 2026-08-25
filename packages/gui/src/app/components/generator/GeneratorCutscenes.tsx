@@ -1,7 +1,7 @@
-import { SettingsEditor } from '../settings/SettingsEditor';
+import { MultipleSettingsEditor } from '../settings/SettingsEditor';
 
 export function GeneratorCutscenes() {
   return (
-    <SettingsEditor name="Cutscenes" category="cutscenes"/>
+    <MultipleSettingsEditor name="cutscenes"/>
   );
 }

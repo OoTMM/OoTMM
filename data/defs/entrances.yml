@@ -266,6 +266,7 @@ OOT_GRAVE_EXIT_SHIELD:                          { game: oot, id: 0x35d, type: gr
 OOT_GRAVE_EXIT_REDEAD:                          { game: oot, id: 0x361, type: grave-exit, maps: [NONE, OOT_GRAVEYARD], areas: ["OOT Graveyard ReDead Grave", "OOT Graveyard"], reverse: OOT_GRAVE_REDEAD }
 OOT_GRAVE_EXIT_ROYAL:                           { game: oot, id: 0x50b, type: grave-exit, maps: [NONE, OOT_GRAVEYARD], areas: ["OOT Graveyard Royal Tomb", "OOT Graveyard"], reverse: OOT_GRAVE_ROYAL }
 OOT_GRAVE_EXIT_DAMPE:                           { game: oot, id: 0x359, type: grave-exit, maps: [OOT_DAMPE_WINDMILL, OOT_GRAVEYARD], areas: ["OOT Dampe Grave Entrance", "OOT Graveyard"], reverse: OOT_GRAVE_DAMPE }
+OOT_BOSS_GANONDORF:                             { game: oot, id: 0x41f, type: none, debug: ['BOSS', 'Ganondorf'] }
 OOT_BOSS_GANON2:                                { game: oot, id: 0x517, type: none, debug: ['BOSS', 'Ganon'] }
 OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5, type: none }
 OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8, type: none }
@@ -590,6 +591,7 @@ MM_VOID_ZORA_CAPE:                              { game: mm, id: 0x6a30, type: on
 MM_VOID_PINNACLE_ROCK:                          { game: mm, id: 0x4410, type: one-way-water-void, maps: [NONE, MM_PINNACLE_ROCK], areas: ["MM Pinnacle Rock Water Void", "MM VOID"]}
 MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 MM_BOSS_MAJORA:                                 { game: mm, id: 0x0200, type: none, debug: ['BOSS', 'Majora'] }
+MM_BOSS_IGOS:                                   { game: mm, id: 0xa600, type: none, debug: ['BOSS', 'Igos'] }
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
 MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm, id: 0xc030, type: none }
 MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd800, type: indoors-link, maps: [NONE, MM_CLOCK_TOWN], areas: ["MM Clock Tower", "MM Clock Town From Clock Tower"], flags: [no-sot], reverse: MM_CLOCK_TOWER_FROM_CLOCK_TOWN, debug: ['COMMON', 'Clock Town'] }

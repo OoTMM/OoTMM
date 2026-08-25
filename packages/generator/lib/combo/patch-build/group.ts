@@ -57,6 +57,13 @@ export const PATCH_GROUPS = [
   'MM_KEG_STRENGTH_3',
   'ER_TELESCOPES',
   'OOT_SKIP_CUTSCENES',
+  'MM_CS_GOHT',
+  'MM_CS_WART',
+  'MM_CS_GYORG',
+  'MM_CS_IGOS',
+  'MM_CS_GOMESS',
+  'MM_CS_TWINMOLD',
+  'MM_CS_MAJORA',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

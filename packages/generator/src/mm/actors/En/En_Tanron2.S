@@ -1,0 +1,9 @@
+#include <combo.h>
+
+PATCH_GROUP PG_MM_CS_WART
+
+PATCH_START 0x80bb68b8
+  li t0, 0x1
+PATCH_END
+
+PATCH_GROUP_END

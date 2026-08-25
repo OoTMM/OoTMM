@@ -812,9 +812,13 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
         SkelAnime_InitFlex(play, &this->skelAnime, (void*)gOdolwaSkel, (void*)gOdolwaReadyAnim, this->jointTable, this->morphTable,
                            ODOLWA_LIMB_MAX);
 
-        Boss01_SetupWait(this, play, ODOLWA_WAIT_READY);
-        this->actor.gravity = -2.5f;
-        sOdolwaMusicStartTimer = KREG(15) + 20;
+        if ((KREG(64) != 0) || MM_CHECK_EVENT_INF(EVENTINF_INTRO_CS_WATCHED_ODOLWA) || Config_Flag(CFG_MM_CS_ODOLWA)) {
+            Boss01_SetupWait(this, play, ODOLWA_WAIT_READY);
+            this->actor.gravity = -2.5f;
+            sOdolwaMusicStartTimer = KREG(15) + 20;
+        } else {
+            Boss01_SetupIntroCutscene(this, play);
+        }
 
         sMothSwarm = (struct Actor_EnTanron1*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_TANRON1, 0.0f, 437.0f,
                                                     -750.0f, 0, 0, 0, 0x100);

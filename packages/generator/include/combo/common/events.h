@@ -4,103 +4,113 @@
 #define OOT_EV(a, b)        (((a) << 4) | (b))
 #define MM_EV(a, b)         (((a) << 3) | (b))
 
-#define EV_OOT_CHK_DEKU_MIDO_MEET           OOT_EV(0,  2)
-#define EV_OOT_CHK_DEKU_MIDO_COMPLAIN       OOT_EV(0,  3)
-#define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   OOT_EV(0,  4)
-#define EV_OOT_CHK_DEKU_TREE_OPEN           OOT_EV(0,  5)
-#define EV_OOT_CHK_EMERALD_TREE_DEAD        OOT_EV(0,  7)
-#define EV_OOT_CHK_GOHMA                    OOT_EV(0,  9)
-#define EV_OOT_CHK_DEKU_TREE_MEET           OOT_EV(0, 12)
-#define EV_OOT_CHK_MALON_SPOKEN_HYRULE      OOT_EV(1,  0)
-#define EV_OOT_CHK_MALON_EGG                0x12
-#define EV_OOT_CHK_CHILD_TALON_WOKEN        0x13
-#define EV_OOT_CHK_CHILD_TALON_FLED         0x14
-#define EV_OOT_CHK_TREE_DEAD                0x17
-#define EV_OOT_CHK_EPONA                    0x18
-#define EV_OOT_CHK_STONE_EMERALD            0x19
-#define EV_OOT_CHK_MIDO_TREE_DEAD           0x1c
-#define EV_OOT_CHK_BOMBCHU_BOWLING          0x22
-#define EV_OOT_CHK_STONE_RUBY               0x25
-#define EV_OOT_CHK_RUTO_LETTER              0x31
-#define EV_OOT_CHK_KING_ZORA_MOVED          0x33
-#define EV_OOT_CHK_STONE_SAPPHIRE           0x37
-#define EV_OOT_CHK_ZELDA_LETTER             0x40
-#define EV_OOT_CHK_OCARINA_OF_TIME          0x43
-#define EV_OOT_CHK_MASTER_SWORD_PULLED      0x45
-#define EV_OOT_CHK_MEDALLION_FOREST         0x48
-#define EV_OOT_CHK_MEDALLION_FIRE           0x49
-#define EV_OOT_CHK_MEDALLION_WATER          0x4a
-#define EV_OOT_CHK_DOOR_TIME                0x4b
-#define EV_OOT_CHK_RAINBOW_BRIDGE           0x4d
-#define EV_OOT_CHK_MASTER_SWORD_CHAMBER     0x4f
-#define EV_OOT_CHK_SONG_TP_FOREST           0x50
-#define EV_OOT_CHK_SONG_TP_FIRE             0x51
-#define EV_OOT_CHK_SONG_TP_WATER            0x52
-#define EV_OOT_CHK_SONG_TP_SHADOW           0x54
-#define EV_OOT_CHK_SONG_TP_LIGHT            0x55
-#define EV_OOT_CHK_SONG_ZELDA               0x59
-#define EV_OOT_CHK_SONG_SUN                 0x5a
-#define EV_OOT_CHK_SONG_STORMS              0x5b
-#define EV_OOT_CHK_WINDMILL_FAST            0x65
-#define EV_OOT_CHK_WELL_DRAINED             0x67
-#define EV_OOT_CHK_LAKE_HYLIA_WATER         0x69
-#define EV_OOT_CHK_ZELDA_FLED               0x80
-#define EV_OOT_CHK_ZELDA_FLED_BRIDGE        0x82
-#define EV_OOT_CHK_SONG_SCARECROW_ADULT     0x9c
-#define EV_OOT_CHK_CARPENTER_1              OOT_EV(0x9, 0)
-#define EV_OOT_CHK_CARPENTER_2              OOT_EV(0x9, 1)
-#define EV_OOT_CHK_CARPENTER_3              OOT_EV(0x9, 2)
-#define EV_OOT_CHK_CARPENTER_4              OOT_EV(0x9, 3)
-#define EV_OOT_CHK_SONG_TIME                0xa9
-#define EV_OOT_CHK_BONGO_ESCAPE             0xaa
-#define EV_OOT_CHK_SONG_TP_SPIRIT           0xac
-#define EV_OOT_CHK_SARIA_OCARINA            0xc1
-#define EV_OOT_CHK_LIGHT_ARROW              0xc4
-#define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
-#define EV_OOT_CHK_FROGS_GAME               0xd0
-#define EV_OOT_CHK_FROGS_ZL                 0xd1
-#define EV_OOT_CHK_FROGS_EPONA              0xd2
-#define EV_OOT_CHK_FROGS_SUNS               0xd3
-#define EV_OOT_CHK_FROGS_SARIA              0xd4
-#define EV_OOT_CHK_FROGS_SOT                0xd5
-#define EV_OOT_CHK_FROGS_STORMS             0xd6
-#define EV_OOT_CHK_JABU_JABU_OPEN           0x3a
-
-#define EV_OOT_CHK_TRIAL_LIGHT              0xbf
-#define EV_OOT_CHK_TRIAL_FIRE               0xbe
-#define EV_OOT_CHK_TRIAL_SHADOW             0xbd
-#define EV_OOT_CHK_TRIAL_WATER              0xbc
-#define EV_OOT_CHK_TRIAL_FOREST             0xbb
-#define EV_OOT_CHK_TRIAL_SPIRIT             0xad
-#define EN_OOT_CHK_GANON_BARRIER            0xc3
-
-#define EV_OOT_ITEM_DEKU_SEEDS              0x13
-#define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
-#define EV_OOT_ITEM_ANJU_POCKET_EGG         0x2c
-#define EV_OOT_ITEM_HBA_1500                OOT_EV(0, 15)
-
-#define EV_OOT_INF_KAKARIKO_GATE_OPEN       0x076
-#define EV_OOT_INF_KING_ZORA_THAWED         0x138
-#define EV_OOT_INF_MAGIC_JAR                0x198
-#define EV_OOT_INF_MALON_RANCH_SAVED        OOT_EV(11, 8)
-#define EV_OOT_INF_GORON_LINK               OOT_EV(16, 12)
-#define EV_OOT_INF_RUTO_ON_BLUE_SWITCH      OOT_EV(20, 0)
-#define EV_OOT_INF_RUTO_MET                 OOT_EV(20, 1)
-#define EV_OOT_INF_RUTO_TALKED              OOT_EV(20, 2)
-#define EV_OOT_INF_RUTO_ESCORT              OOT_EV(20, 3)
-#define EV_OOT_INF_RUTO_ASK_SAPPHIRE        OOT_EV(20, 4)
-#define EV_OOT_INF_RUTO_GOT_SAPPHIRE        OOT_EV(20, 5)
-#define EV_OOT_INF_RUTO_KIDNAPPED           OOT_EV(20, 6)
-#define EV_OOT_INF_RUTO_TOP_FLOOR           OOT_EV(20, 7)
-#define EV_OOT_INF_HBA_1000                 OOT_EV(25, 0)
-#define EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN    OOT_EV(25, 5)
-
-/* Custom flags that seems unused */
-#define EV_OOT_CHK_SONG_SARIA               0x58
-#define EV_OOT_CHK_MEDALLION_SHADOW         0x61
-#define EV_OOT_CHK_SONG_EPONA               0x62
-#define EV_OOT_ITEM_GORON_BRACELET          0x20
-#define EV_OOT_INF_MEDIGORON                0xb2
+#define EV_OOT_CHK_DEKU_MIDO_MEET             OOT_EV(0,  2)
+#define EV_OOT_CHK_DEKU_MIDO_COMPLAIN         OOT_EV(0,  3)
+#define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD     OOT_EV(0,  4)
+#define EV_OOT_CHK_DEKU_TREE_OPEN             OOT_EV(0,  5)
+#define EV_OOT_CHK_EMERALD_TREE_DEAD          OOT_EV(0,  7)
+#define EV_OOT_CHK_GOHMA                      OOT_EV(0,  9)
+#define EV_OOT_CHK_DEKU_TREE_MEET             OOT_EV(0, 12)
+#define EV_OOT_CHK_MALON_SPOKEN_HYRULE        OOT_EV(1,  0)
+#define EV_OOT_CHK_MALON_EGG                  0x12
+#define EV_OOT_CHK_CHILD_TALON_WOKEN          0x13
+#define EV_OOT_CHK_CHILD_TALON_FLED           0x14
+#define EV_OOT_CHK_TREE_DEAD                  0x17
+#define EV_OOT_CHK_EPONA                      0x18
+#define EV_OOT_CHK_STONE_EMERALD              0x19
+#define EV_OOT_CHK_MIDO_TREE_DEAD             0x1c
+#define EV_OOT_CHK_BOMBCHU_BOWLING            0x22
+#define EV_OOT_CHK_STONE_RUBY                 0x25
+#define EV_OOT_CHK_RUTO_LETTER                0x31
+#define EV_OOT_CHK_KING_ZORA_MOVED            0x33
+#define EV_OOT_CHK_STONE_SAPPHIRE             0x37
+#define EV_OOT_CHK_ZELDA_LETTER               0x40
+#define EV_OOT_CHK_OCARINA_OF_TIME            0x43
+#define EV_OOT_CHK_MASTER_SWORD_PULLED        0x45
+#define EV_OOT_CHK_MEDALLION_FOREST           0x48
+#define EV_OOT_CHK_MEDALLION_FIRE             0x49
+#define EV_OOT_CHK_MEDALLION_WATER            0x4a
+#define EV_OOT_CHK_DOOR_TIME                  0x4b
+#define EV_OOT_CHK_RAINBOW_BRIDGE             0x4d
+#define EV_OOT_CHK_MASTER_SWORD_CHAMBER       0x4f
+#define EV_OOT_CHK_SONG_TP_FOREST             0x50
+#define EV_OOT_CHK_SONG_TP_FIRE               0x51
+#define EV_OOT_CHK_SONG_TP_WATER              0x52
+#define EV_OOT_CHK_SONG_TP_SHADOW             0x54
+#define EV_OOT_CHK_SONG_TP_LIGHT              0x55
+#define EV_OOT_CHK_SONG_ZELDA                 0x59
+#define EV_OOT_CHK_SONG_SUN                   0x5a
+#define EV_OOT_CHK_SONG_STORMS                0x5b
+#define EV_OOT_CHK_WINDMILL_FAST              0x65
+#define EV_OOT_CHK_WELL_DRAINED               0x67
+#define EV_OOT_CHK_LAKE_HYLIA_WATER           0x69
+#define EV_OOT_CHK_BEGAN_GOHMA_BATTLE         0x70
+#define EV_OOT_CHK_BEGAN_KING_DODONGO_BATTLE  0x71
+#define EV_OOT_CHK_BEGAN_PHANTOM_GANON_BATTLE 0x72
+#define EV_OOT_CHK_BEGAN_VOLVAGIA_BATTLE      0x73
+#define EV_OOT_CHK_BEGAN_MORPHA_BATTLE        0x74
+#define EV_OOT_CHK_BEGAN_TWINROVA_BATTLE      0x75
+#define EV_OOT_CHK_BEGAN_BARINADE_BATTLE      0x76
+#define EV_OOT_CHK_BEGAN_BONGO_BONGO_BATTLE   0x77
+#define EV_OOT_CHK_BEGAN_GANONDORF_BATTLE     0x78
+#define EV_OOT_CHK_ZELDA_FLED                 0x80
+#define EV_OOT_CHK_ZELDA_FLED_BRIDGE          0x82
+#define EV_OOT_CHK_SONG_SCARECROW_ADULT       0x9c
+#define EV_OOT_CHK_CARPENTER_1                OOT_EV(0x9, 0)
+#define EV_OOT_CHK_CARPENTER_2                OOT_EV(0x9, 1)
+#define EV_OOT_CHK_CARPENTER_3                OOT_EV(0x9, 2)
+#define EV_OOT_CHK_CARPENTER_4                OOT_EV(0x9, 3)
+#define EV_OOT_CHK_SONG_TIME                  0xa9
+#define EV_OOT_CHK_BONGO_ESCAPE               0xaa
+#define EV_OOT_CHK_SONG_TP_SPIRIT             0xac
+#define EV_OOT_CHK_SARIA_OCARINA              0xc1
+#define EV_OOT_CHK_LIGHT_ARROW                0xc4
+#define EV_OOT_CHK_MEDALLION_SPIRIT           0xc8
+#define EV_OOT_CHK_FROGS_GAME                 0xd0
+#define EV_OOT_CHK_FROGS_ZL                   0xd1
+#define EV_OOT_CHK_FROGS_EPONA                0xd2
+#define EV_OOT_CHK_FROGS_SUNS                 0xd3
+#define EV_OOT_CHK_FROGS_SARIA                0xd4
+#define EV_OOT_CHK_FROGS_SOT                  0xd5
+#define EV_OOT_CHK_FROGS_STORMS               0xd6
+#define EV_OOT_CHK_JABU_JABU_OPEN             0x3a
+  
+#define EV_OOT_CHK_TRIAL_LIGHT                0xbf
+#define EV_OOT_CHK_TRIAL_FIRE                 0xbe
+#define EV_OOT_CHK_TRIAL_SHADOW               0xbd
+#define EV_OOT_CHK_TRIAL_WATER                0xbc
+#define EV_OOT_CHK_TRIAL_FOREST               0xbb
+#define EV_OOT_CHK_TRIAL_SPIRIT               0xad
+#define EN_OOT_CHK_GANON_BARRIER              0xc3
+  
+#define EV_OOT_ITEM_DEKU_SEEDS                0x13
+#define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP        0x1c
+#define EV_OOT_ITEM_ANJU_POCKET_EGG           0x2c
+#define EV_OOT_ITEM_HBA_1500                  OOT_EV(0, 15)
+  
+#define EV_OOT_INF_KAKARIKO_GATE_OPEN         0x076
+#define EV_OOT_INF_KING_ZORA_THAWED           0x138
+#define EV_OOT_INF_MAGIC_JAR                  0x198
+#define EV_OOT_INF_MALON_RANCH_SAVED          OOT_EV(11, 8)
+#define EV_OOT_INF_GORON_LINK                 OOT_EV(16, 12)
+#define EV_OOT_INF_DARUNIA_FIRE_TEMPLE        OOT_EV(0x11, 0xa)
+#define EV_OOT_INF_RUTO_ON_BLUE_SWITCH        OOT_EV(20, 0)
+#define EV_OOT_INF_RUTO_MET                   OOT_EV(20, 1)
+#define EV_OOT_INF_RUTO_TALKED                OOT_EV(20, 2)
+#define EV_OOT_INF_RUTO_ESCORT                OOT_EV(20, 3)
+#define EV_OOT_INF_RUTO_ASK_SAPPHIRE          OOT_EV(20, 4)
+#define EV_OOT_INF_RUTO_GOT_SAPPHIRE          OOT_EV(20, 5)
+#define EV_OOT_INF_RUTO_KIDNAPPED             OOT_EV(20, 6)
+#define EV_OOT_INF_RUTO_TOP_FLOOR             OOT_EV(20, 7)
+#define EV_OOT_INF_HBA_1000                   OOT_EV(25, 0)
+#define EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN      OOT_EV(25, 5)
+  
+/* Custom flags that seems unused */  
+#define EV_OOT_CHK_SONG_SARIA                 0x58
+#define EV_OOT_CHK_MEDALLION_SHADOW           0x61
+#define EV_OOT_CHK_SONG_EPONA                 0x62
+#define EV_OOT_ITEM_GORON_BRACELET            0x20
+#define EV_OOT_INF_MEDIGORON                  0xb2
 
 #define EV_MM_WEEK_ENTERED_TERMINA                          MM_EV(0,  1)
 #define EV_MM_WEEK_ENTERED_CLOCK_TOWN_EAST                  MM_EV(2,  3)

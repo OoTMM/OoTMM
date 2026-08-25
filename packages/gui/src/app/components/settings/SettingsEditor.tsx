@@ -37,7 +37,7 @@ export function MultipleSettingsEditor({ name }: MultipleSettingsEditorProps) {
   }
 
   return (
-    <main className="flex flex-col gap-16">
+    <main className="flex flex-col gap-16 p-8">
       {categoriesData.map((x) =>
         <div>
           <h1 className="font-bold text-xl mb-4">{x.key}</h1>

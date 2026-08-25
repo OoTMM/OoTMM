@@ -53,8 +53,8 @@ static int isRainbowBridgeOpen(void)
 
 static void eventFixes(PlayState* play)
 {
-    /* Skip forest temple cutscene */
-    if (gSave.entrance == ENTR_OOT_TEMPLE_FOREST)
+    /* Skip forest temple po sisters cutscene */
+    if (!Config_Flag(CFG_OOT_CUTSCENE_GLITCH_AID) && gSave.entrance == ENTR_OOT_TEMPLE_FOREST)
     {
         u32 tmp;
         tmp = gSave.info.perm[SCE_OOT_TEMPLE_FOREST].switches;
@@ -62,6 +62,37 @@ static void eventFixes(PlayState* play)
             tmp |= 0x08000000;
         gSave.info.perm[SCE_OOT_TEMPLE_FOREST].switches = tmp;
     }
+
+    /* Skip Fire Temple Darunia cutscene */
+    if(!Config_Flag(CFG_OOT_CUTSCENE_GLITCH_AID) && gSave.entrance == ENTR_OOT_TEMPLE_FIRE)
+        BITMAP16_SET(gSave.info.eventsMisc, EV_OOT_INF_DARUNIA_FIRE_TEMPLE);
+
+    if(Config_Flag(CFG_OOT_CS_GOHMA) && gSave.entrance == ENTR_OOT_BOSS_DEKU_TREE)
+        SetEventChk(EV_OOT_CHK_BEGAN_GOHMA_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_KING_DODONGO) && gSave.entrance == ENTR_OOT_BOSS_DODONGO_CAVERN)
+        SetEventChk(EV_OOT_CHK_BEGAN_KING_DODONGO_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_BARINADE) && gSave.entrance == ENTR_OOT_BOSS_JABU_JABU)
+        SetEventChk(EV_OOT_CHK_BEGAN_BARINADE_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_PHANTOM_GANON) && gSave.entrance == ENTR_OOT_BOSS_TEMPLE_FOREST)
+        SetEventChk(EV_OOT_CHK_BEGAN_PHANTOM_GANON_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_VOLVAGIA) && gSave.entrance == ENTR_OOT_BOSS_TEMPLE_FIRE)
+        SetEventChk(EV_OOT_CHK_BEGAN_VOLVAGIA_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_MORPHA) && gSave.entrance == ENTR_OOT_BOSS_TEMPLE_WATER)
+        SetEventChk(EV_OOT_CHK_BEGAN_MORPHA_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_TWINROVA) && gSave.entrance == ENTR_OOT_BOSS_TEMPLE_SPIRIT)
+        SetEventChk(EV_OOT_CHK_BEGAN_TWINROVA_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_BONGO_BONGO) && gSave.entrance == ENTR_OOT_BOSS_TEMPLE_SHADOW)
+        SetEventChk(EV_OOT_CHK_BEGAN_BONGO_BONGO_BATTLE);
+
+    if(Config_Flag(CFG_OOT_CS_GANONDORF) && gSave.entrance == ENTR_OOT_BOSS_GANONDORF)
+        SetEventChk(EV_OOT_CHK_BEGAN_GANONDORF_BATTLE);
 
     /* Ruto fixes */
     if (gSave.entrance == ENTR_OOT_JABU_JABU)

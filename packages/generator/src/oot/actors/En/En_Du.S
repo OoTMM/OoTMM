@@ -26,8 +26,3 @@ PATCH_START 0x80954424
   nop
   nop
 PATCH_END
-
-/* Disable darunia in fire temple */
-PATCH_START 0x80953680
-  li t8,1
-PATCH_END

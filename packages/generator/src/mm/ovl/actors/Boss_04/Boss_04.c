@@ -177,7 +177,7 @@ void Boss04_Init(Actor_Boss04* this, PlayState* play) {
     this->actor.world.pos.z = this->unk_6F0;
     Actor_UpdateBgCheckInfo(play, &this->actor, 35.0f, 60.0f, 60.0f, UPDBGCHECKINFO_FLAG_MM_4);
 
-    if ((KREG(64) != 0) || MM_CHECK_EVENT_INF(EVENTINF_INTRO_CS_WATCHED_WART)) {
+    if ((KREG(64) != 0) || MM_CHECK_EVENT_INF(EVENTINF_INTRO_CS_WATCHED_WART) || Config_Flag(CFG_MM_CS_WART)) {
         func_809ECD00(this, play);
         this->actor.world.pos.y = this->actor.floorHeight + 160.0f;
         phi_f24 = this->actor.floorHeight;
