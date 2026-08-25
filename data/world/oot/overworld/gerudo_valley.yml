@@ -115,7 +115,7 @@
   age_change: false
   exits:
     "GLOBAL": "true"
-    "Lake Hylia": "true"
+    "Lake Hylia Falls": "true"
 
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
