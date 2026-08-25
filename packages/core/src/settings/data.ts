@@ -3919,7 +3919,7 @@ export const SETTINGS = [{
   category: 'cutscenes.minibosses.mm',
   type: 'boolean',
   description: 'Skips the intro cutscene for Wart.',
-  default: true,
+  default: false,
   cond: hasMM,
 }, {
   key: 'cutsceneIntroGyorg',
