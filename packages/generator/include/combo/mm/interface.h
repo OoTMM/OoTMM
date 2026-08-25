@@ -191,5 +191,6 @@ ASSERT_OFFSET(InterfaceContext, storySize, 0x344);
 
 void Inventory_DeleteItem(s16 item, s16 slot);
 void Inventory_UnequipItem(s16 item);
+void Interface_DrawClock(PlayState* play);
 
 #endif

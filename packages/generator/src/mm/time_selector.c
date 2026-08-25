@@ -4,14 +4,10 @@
 #include <combo/text.h>
 #include <combo/environment.h>
 #include <combo/mm/regs.h>
+#include <combo/mm/interface.h>
 #include <combo/mm/message.h>
 #include <combo/common/ocarina.h>
 #include "../../build/include/combo/generated_config.h"
-
-void Interface_DrawClock(PlayState* play);
-void Message_DrawMain(PlayState* play, Gfx** gfxP);
-void Font_LoadMessageBoxEndIcon(Font* font, u16 icon);
-void Message_Decode(PlayState* play);
 
 #define DT_SNAP_MINUTES 30u
 #define DT_MINUTES_PER_DAY 1440u
