@@ -245,7 +245,7 @@
 # Mido / Deku Tree
 "can_move_mido_reqs": "is_child && has_sword_kokiri && has_shield_deku"
 "can_move_mido": "can_move_mido_reqs && soul_npc(SOUL_NPC_MIDO)"
-"can_bypass_mido": "setting(dekuTree, open) || climb_anywhere || hookshot_anywhere || can_move_mido_reqs || is_adult && (get_past_skulltulas_no_stone || is_forest_cleared)"
+"can_bypass_mido": "setting(dekuTree, open) || climb_anywhere || hookshot_anywhere || can_move_mido_reqs || is_adult && (get_past_skulltulas || is_forest_cleared)"
 
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
