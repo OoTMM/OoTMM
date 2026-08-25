@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file.
 - Add a setting to skip most mundane cutscenes in OoT (chests appearing, barred doors opening, etc).
 - Add a trick to skip the Hover Boots or climbing Fire Temple to drop the pillar requirements to reach the boss door.
 
+### Fixed
+
+- Fix Deku Seeds pickups from shuffled locations having text in Majora's Mask when playing with slingshot in said game when they shouldn't.
+
 ### Changed
 
 - Remove "Swordless Adult" as a setting - it's now always enabled.
