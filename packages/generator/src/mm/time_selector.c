@@ -11,6 +11,7 @@
 void Interface_DrawClock(PlayState* play);
 void Message_DrawMain(PlayState* play, Gfx** gfxP);
 void Font_LoadMessageBoxEndIcon(Font* font, u16 icon);
+void Message_Decode(PlayState* play);
 
 #define DT_SNAP_MINUTES 30u
 #define DT_MINUTES_PER_DAY 1440u
@@ -125,6 +126,7 @@ static void DtShowSelectorText(PlayState* play) {
     DtAppendDayName(&b, day, time);
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, TEXT_NL "Left/Right: Change" TEXT_NL "A: Confirm  B: Cancel" TEXT_FAST_END TEXT_NOCLOSE);
+    Message_Decode(play);
     play->msgCtx.ocarinaMode = OCARINA_MODE_PROCESS_DOUBLE_TIME;
     sDtDisplayedHalf = sDtTargetTicks / DT_HALF_TICKS;
 }
