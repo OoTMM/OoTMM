@@ -34,12 +34,13 @@ static s16 sDtHoldFrames, sDtOldTimeSpeed, sDtStickRepeatTimer;
 static s8 sDtStickRepeatDir;
 static s32 sDtDisplayedHalf = -1;
 static u32 sDtStartTicks, sDtTargetTicks;
-u8 gDoubleTimeTargetPending;
-u8 gDoubleTimeTargetDayChanged;
-
+static u8 sDtTextDirty;
 static int DtIsNight(u16 time) { return time < CLOCK_TIME(6, 0) || time >= CLOCK_TIME(18, 0); }
 static u32 DtTicksToMinutes(u32 ticks) { return (ticks * DT_MINUTES_PER_DAY) >> 16; }
 static u32 DtMinutesToTicks(u32 minutes) { return ((minutes << 16) + DT_MINUTES_PER_DAY - 1) / DT_MINUTES_PER_DAY; }
+
+u8 gDoubleTimeTargetPending;
+u8 gDoubleTimeTargetDayChanged;
 
 static u32 DtCurrentTicks(void) {
     return ((gSave.day - 1) << 16) + (u16)(gSave.time - CLOCK_TIME(6, 0));
@@ -118,13 +119,13 @@ static void DtShowSelectorText(PlayState* play) {
     DtTicksToDayTime(sDtTargetTicks, &day, &time);
     b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
-    comboTextAppendStr(&b, TEXT_FAST "Select a time." TEXT_NL TEXT_COLOR_YELLOW);
+    comboTextAppendStr(&b, "Select a time." TEXT_NL TEXT_COLOR_YELLOW);
     DtAppendDayName(&b, day, time);
     comboTextAppendClearColor(&b);
-    comboTextAppendStr(&b, TEXT_NL "Left/Right: Change" TEXT_NL "A: Confirm  B: Cancel" TEXT_FAST_END TEXT_NOCLOSE);
-    Message_Decode(play);
+    comboTextAppendStr(&b, TEXT_NL "Left/Right: Change" TEXT_NL "A: Confirm  B: Cancel" TEXT_NOCLOSE);
     play->msgCtx.ocarinaMode = OCARINA_MODE_PROCESS_DOUBLE_TIME;
     sDtDisplayedHalf = sDtTargetTicks / DT_HALF_TICKS;
+    sDtTextDirty = 1;
 }
 
 static void DtShowConfirmation(PlayState* play) {
@@ -136,14 +137,15 @@ static void DtShowConfirmation(PlayState* play) {
     Message_ContinueTextbox(play, DT_BASE_TEXT_ID);
     b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
-    comboTextAppendStr(&b, TEXT_FAST "Travel to" TEXT_NL TEXT_COLOR_YELLOW);
+    comboTextAppendStr(&b, "Travel to" TEXT_NL TEXT_COLOR_YELLOW);
     DtAppendDayName(&b, day, time);
     comboTextAppendStr(&b, " ");
     DtAppendTime(&b, time);
     comboTextAppendClearColor(&b);
-    comboTextAppendStr(&b, "?" TEXT_FAST_END TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN "Yes" TEXT_NL "No" TEXT_END);
+    comboTextAppendStr(&b, "?" TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN "Yes" TEXT_NL "No" TEXT_END);
     Font_LoadMessageBoxEndIcon(&play->msgCtx.font, 2);
     play->msgCtx.choiceIndex = 0;
+    sDtTextDirty = 1;
 }
 
 static int DtReadHorizontalInput(Input* input) {
@@ -418,6 +420,11 @@ static void DtMessageDrawMain(PlayState* play, Gfx** gfxP) {
     MessageContext* msg = &play->msgCtx;
     s16 oldBoxY, oldBoxTarget, oldTextY, oldTextTarget, offset;
     int move = Config_Flag(CFG_MM_SONG_OF_DOUBLE_TIME_TIME_SELECTOR) && sDtState == DT_STATE_SELECT;
+    if (sDtTextDirty) {
+        Message_DecodeNES(play);
+        msg->unk_11fee = msg->unk_11ff0 + 1;
+        sDtTextDirty = 0;
+    }
     if (move) {
         oldBoxY = msg->unk_1206a;
         oldBoxTarget = msg->unk_12006;

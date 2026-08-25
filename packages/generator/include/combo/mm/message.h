@@ -122,5 +122,6 @@ void Message_ContinueTextbox(struct PlayState* play, u16 textId);
 void Message_DrawMain(PlayState* play, Gfx** gfxP);
 void Message_Decode(PlayState* play);
 void Font_LoadMessageBoxEndIcon(struct Font* font, u16 icon);
+void Message_DecodeNES(PlayState* play);
 
 #endif
