@@ -7,7 +7,7 @@
 #include <combo/mm/interface.h>
 #include <combo/mm/message.h>
 #include <combo/common/ocarina.h>
-#include "../../build/include/combo/generated_config.h"
+#include <combo/config.h>
 
 #define DT_SNAP_MINUTES 30u
 #define DT_MINUTES_PER_DAY 1440u
