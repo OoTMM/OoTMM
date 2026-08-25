@@ -255,6 +255,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_OPEN_WATER_TEMPLE: world.resolvedFlags.openDungeonsOot.has('Water'),
     OOT_OPEN_WELL: world.resolvedFlags.openDungeonsOot.has('BotW'),
     OOT_SONG_OF_DOUBLE_TIME: settings.songOfDoubleTimeOot,
+    MM_SONG_OF_DOUBLE_TIME_TIME_SELECTOR: settings.mmSongOfDoubleTimeTimeSelector,
     MM_PRE_ACTIVATED_OWL_CT: world.resolvedFlags.mmPreActivatedOwls.has('clocktown'),
     MM_PRE_ACTIVATED_OWL_MR: world.resolvedFlags.mmPreActivatedOwls.has('milkroad'),
     MM_PRE_ACTIVATED_OWL_SS: world.resolvedFlags.mmPreActivatedOwls.has('swamp'),
