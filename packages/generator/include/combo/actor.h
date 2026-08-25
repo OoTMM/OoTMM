@@ -624,4 +624,13 @@ extern Gfx D_801AEF88[];
 void Actor_WorldToActorCoords(Actor* actor, Vec3f* dest, Vec3f* pos);
 void Actor_ProjectPos(PlayState* play, Vec3f* src, Vec3f* xyzDest, f32* cappedInvWDest);
 
+#if defined(GAME_MM)
+typedef s32 (*PictoValidationFunc)(PlayState *, Actor *);
+
+typedef struct
+{
+    /* 0x000 */ Actor actor;
+    /* 0x144 */ PictoValidationFunc validationFunc;
+} PictoActor;
+#endif
 #endif

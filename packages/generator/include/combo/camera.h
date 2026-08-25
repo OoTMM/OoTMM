@@ -171,6 +171,9 @@ typedef enum {
     /* 0x5A */ CAM_SET_DUNGEON4, /* Used in Pirates Fortress Interior, hidden room near hookshot "DUNGEON4" */
     /* 0x5B */ CAM_SET_MAX
 } CameraSettingType;
+
+void Camera_SetFocalActor(Camera* camera, Actor* actor);
+void _Camera_SetFocalActor(Camera* camera, Actor* actor);
 #endif
 
 s32 Camera_RequestSetting(Camera* camera, s16 setting);

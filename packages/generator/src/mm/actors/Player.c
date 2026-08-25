@@ -2915,3 +2915,27 @@ void Player_ExitTelescopeER(void)
     gPlay->transitionTrigger = TRANS_TRIGGER_START;
     gIsEntranceOverride = 1;
 }
+
+s32 Player_ShouldSetCsAction(PlayState *play, Actor *csActor, u8 csAction)
+{
+    s32 shouldSetCsAction = true;
+    if (!play || !csActor)
+        return shouldSetCsAction;
+
+    switch (csActor->id)
+    {
+    case ACTOR_EN_BIGOKUTA:
+        shouldSetCsAction = false;
+    default:
+        break;
+    }
+
+    return shouldSetCsAction;
+}
+
+s32 Player_SetCsActionHook(PlayState *play, Actor *csActor, u8 csAction)
+{
+    if (!Player_ShouldSetCsAction(play, csActor, csAction))
+        return false;
+    return _Player_SetCsAction(play, csActor, csAction);
+}

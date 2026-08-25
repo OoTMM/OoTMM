@@ -554,6 +554,7 @@ s32 Play_ChangeCameraStatus(PlayState* this, s16 camId, s16 status);
 s16 Play_CreateSubCamera(PlayState* this);
 void Cutscene_StopManual(PlayState* play, CutsceneContext* csCtx);
 s32 Play_SetCameraAtEye(PlayState* this, s16 camId, Vec3f* at, Vec3f* eye);
+s32 _Play_SetCameraAtEye(PlayState* this, s16 camId, Vec3f* at, Vec3f* eye);
 
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
@@ -586,6 +587,7 @@ void Audio_PlaySequenceAtPos(u8 seqPlayerIndex, Vec3f* pos, u16 seqId, f32 maxDi
 s16 CutsceneManager_IsNext(s16 csId);
 void CutsceneManager_Queue(s16 csId);
 s16 CutsceneManager_Start(s16 csId, Actor* actor);
+s16 _CutsceneManager_Start(s16 csId, Actor* actor);
 s16 CutsceneManager_Stop(s16 csId);
 s16 CutsceneManager_GetCutsceneScriptIndex(s16 csId);
 s16 CutsceneManager_GetCutsceneCustomValue(s16 csId);

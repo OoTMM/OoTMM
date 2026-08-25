@@ -2,10 +2,6 @@
 #include <combo/entrance.h>
 
 typedef struct {
-    Actor actor;
-} PictoActor;
-
-typedef struct {
     PictoActor picto;
 } EnGe2;
 

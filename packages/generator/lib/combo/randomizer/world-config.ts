@@ -313,6 +313,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_HYPER_ENEMIES: settings.mmHyperEnemies,
     OOT_SKIP_CUTSCENES: settings.cutsceneSkipOoT,
     OOT_CUTSCENE_GLITCH_AID: settings.cutsceneGlitchOoT,
+    MM_SKIP_CUTSCENES: settings.cutsceneSkipMM,
   };
 
   for (const v in exprs) {

@@ -785,3 +785,6 @@ func_80969DA4 = 0x80969DA4;
 func_80969898 = 0x80969898;
 
 Player_GetCurMaskItemId = 0x80122EEC;
+
+Camera_SetFocalActor = 0x800e02ac;
+sCutsceneMgr = 0x801bd8b0;

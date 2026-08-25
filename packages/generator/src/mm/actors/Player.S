@@ -1406,3 +1406,14 @@ PATCH_START 0x8083acb0
 PATCH_END
 
 PATCH_GROUP_END
+
+.globl _Player_SetCsAction
+_Player_SetCsAction:
+  sw a2, 0x8(sp)
+  j Player_SetCsAction+0x8
+   andi a2, 0xff
+
+PATCH_START Player_SetCsAction
+  j Player_SetCsActionHook
+   nop
+PATCH_END

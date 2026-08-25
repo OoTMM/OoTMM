@@ -3825,6 +3825,14 @@ export const SETTINGS = [{
   description: 'Enables glitch-aiding cutscenes<br><br>Currently, the Poe Sisters and Darunia cutscenes in Forest and Fire Temples respetively are STILL skipped.',
   default: false,
   cond: (s: any) => hasOoT(s) && s.cutsceneSkipOoT,
+}, {
+  key: 'cutsceneSkipMM',
+  name: 'Skip Mundane Cutscenes (MM)',
+  category: 'cutscenes',
+  type: 'boolean',
+  description: 'Skips a lot of mundane cutscenes in MM, such as chests appearing, barred doors opening, etc.',
+  default: false,
+  cond: hasMM,
 }] as const;
 
 export const SUBCATEGORIES = [{

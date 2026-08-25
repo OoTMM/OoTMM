@@ -304,6 +304,7 @@ export const CONFVARS = [
   'OOT_BOW_SLINGSHOT_BREAK_HIVES',
   'OOT_SKIP_CUTSCENES',
   'OOT_CUTSCENE_GLITCH_AID',
+  'MM_SKIP_CUTSCENES',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
