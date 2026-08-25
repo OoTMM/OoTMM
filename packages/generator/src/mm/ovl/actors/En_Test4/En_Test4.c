@@ -8,6 +8,8 @@
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_100000)
 
+extern u8 gDoubleTimeTargetPending;
+extern u8 gDoubleTimeTargetDayChanged;
 void EnTest4_Init(Actor_EnTest4* this, PlayState* play);
 void EnTest4_Destroy(Actor_EnTest4* this, PlayState* play);
 void EnTest4_Update(Actor_EnTest4* this, PlayState* play);
@@ -622,6 +624,33 @@ static int isNight(u16 time)
     return !!((time < 0x4000) || (time >= 0xc000));
 }
 
+static int EnTest4_ApplyDoubleTimeTarget(Actor_EnTest4* this, PlayState* play)
+{
+    int dayChanged;
+    if (!gDoubleTimeTargetPending)
+        return 0;
+    gDoubleTimeTargetPending = 0;
+    dayChanged = gDoubleTimeTargetDayChanged;
+    gDoubleTimeTargetDayChanged = 0;
+    if (dayChanged && play->sceneId == SCE_MM_HONEY_DARLING)
+    {
+        EnTest4_Reload(play);
+        return 1;
+    }
+    if (isNight(gSave.time))
+        this->daytimeIndex = THREEDAY_DAYTIME_NIGHT;
+    else
+        this->daytimeIndex = THREEDAY_DAYTIME_DAY;
+    this->prevTime = gSave.time;
+    this->actionFunc = EnTest4_HandleEvents;
+    if (dayChanged)
+    {
+        Interface_NewDay(play, gSave.day);
+        Environment_NewDay(&play->envCtx);
+    }
+    return 0;
+}
+
 static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, PlayState* play)
 {
     u8 day;
@@ -663,6 +692,9 @@ static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, PlayState* play)
 
 void EnTest4_Update(Actor_EnTest4* this, PlayState* play)
 {
+    if (EnTest4_ApplyDoubleTimeTarget(this, play))
+        return;
+
     if (!BITMAP8_GET(gSave.eventInf, 0x0f))
         EnTest4_CheckTimeSkip(this, play);
 

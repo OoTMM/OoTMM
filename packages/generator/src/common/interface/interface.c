@@ -10,6 +10,10 @@
 # define gRupeesDelta gSave.rupeesDelta
 #endif
 
+#if defined(GAME_MM)
+void DoubleTimeSelector_Update(PlayState* play);
+#endif
+
 /* Original func */
 void _Interface_Update(PlayState* play);
 
@@ -59,6 +63,9 @@ void Interface_Update(PlayState* play)
 {
     Interface_UpdateRupees();
     _Interface_Update(play);
+#if defined(GAME_MM)
+    DoubleTimeSelector_Update(play);
+#endif
 }
 
 void Interface_AfterDraw(void)

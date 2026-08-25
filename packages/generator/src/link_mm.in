@@ -38,6 +38,13 @@ Fault_AddHungupAndCrashImpl = 0x80083df4;
 Interface_NewDay = 0x8010ee74;
 Environment_NewDay = 0x800feaf4;
 
+Interface_DrawClock = 0x80119610;
+Environment_IsTimeStopped = 0x800fe4a8;
+Message_DrawMain = 0x801541d4;
+Font_LoadMessageBoxEndIcon = 0x800f4fc0;
+Message_Decode = 0x8014D7B4;
+Message_DecodeNES = 0x8015B198;
+
 Play_DrawHudButtons = 0x80117100;
 Interface_DrawAmmoCount = 0x80117bd0;
 Audio_GetActiveSeqId = 0x801a8a50;

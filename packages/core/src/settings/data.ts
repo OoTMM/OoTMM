@@ -3789,6 +3789,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'mmSongOfDoubleTimeTimeSelector',
+  name: 'Song of Double Time - Time Selector',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Changes the Song of Double Time in MM to allow selecting time, similar to the Song of Double Time in Majoras Mask 3D.',
+  default: false,
+  cond: hasMM,
+},{
   key: 'autoInvert',
   name: 'Auto-Invert Time (MM)',
   category: 'main.qol',
