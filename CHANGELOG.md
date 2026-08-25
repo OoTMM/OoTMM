@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - Added other methods for child to reach the plateau in Zora's River.
 - Child can now use Bombchu or Blast Mask with the ability to swim to get the rocks underwater in Zora's River.
 - Megaflip is now logical to reach the grass in Zora's River.
+- Add the itemless jump to Fire Temple Boss door trick to all blitz presets
 
 ### Fixed
 
