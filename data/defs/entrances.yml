@@ -86,7 +86,7 @@ OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138, type: ov
 OOT_MARKET_FROM_CASTLE:                         { game: oot, id: 0x25a, type: overworld, maps: [OOT_HYRULE_CASTLE, OOT_MARKET], areas: ["OOT Market Castle Entry", "OOT Market"], reverse: OOT_HYRULE_CASTLE }
 OOT_MARKET_FROM_TEMPLE_OF_TIME_ENTRYWAY:        { game: oot, id: 0x25e, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [TEMPLE, MAIN], areas: ["OOT Temple of Time Entryway", "OOT Market"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_MARKET }
 OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_MARKET:        { game: oot, id: 0x171, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, TEMPLE], areas: ["OOT Market", "OOT Temple of Time Entryway"], reverse: OOT_MARKET_FROM_TEMPLE_OF_TIME_ENTRYWAY }
-OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
+OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia Falls"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: one-way-woods, areas: ["OOT Lost Woods Lost South", "OOT Lost Woods"] }

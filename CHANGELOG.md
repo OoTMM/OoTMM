@@ -22,6 +22,10 @@ All notable changes to this project will be documented in this file.
 - Child can now use Bombchu or Blast Mask with the ability to swim to get the rocks underwater in Zora's River.
 - Megaflip is now logical to reach the grass in Zora's River.
 
+### Fixed
+
+- Logic now accounts for Bronze Scale or Iron Boots when coming from Gerudo Valley in Lake Hylia.
+
 ## [32.3] - 2026-08-23
 
 ### Changed

@@ -195,3 +195,9 @@
   age_change: false
   exits:
     "Hyrule Field": "true"
+
+"Lake Hylia Falls":
+  region: LAKE_HYLIA
+  age_change: false
+  exits:
+    "Lake Hylia": "can_swim_or_sink"
