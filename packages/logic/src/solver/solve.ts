@@ -1156,7 +1156,7 @@ class LogicPassSolver {
     }
 
     if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
-      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.worlds[locationData(x).world as number], x));
+      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(x));
     }
 
     if (unplacedLocs.length === 0) {
@@ -1204,7 +1204,7 @@ class LogicPassSolver {
 
         /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
         if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(requiredItem.item) && !this.state.criticalRenewables.has(requiredItem)) {
-          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.worlds[locationData(x).world as number], x));
+          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(x));
         }
 
         /* If there is nowhere to place an item, raise an error */
@@ -1271,7 +1271,7 @@ class LogicPassSolver {
     const junkDistributionRenewable = countMapArray(this.junkDistribution).filter(x => !ItemHelpers.isItemMajor(x.item));
     for (const loc of locs) {
       const locD = locationData(loc);
-      const junkPool = isLocationRenewable(this.worlds[locD.world as number], loc) ? junkDistributionRenewable : junkDistribution;
+      const junkPool = isLocationRenewable(loc) ? junkDistributionRenewable : junkDistribution;
       const item = sample(this.input.random, junkPool);
       this.place(loc, item);
     }
@@ -1303,7 +1303,7 @@ class LogicPassSolver {
       throw new Error('Location already placed: ' + location);
     }
     this.state.items.set(location, item);
-    if (isLocationRenewable(world, location) && ItemHelpers.isItemCriticalRenewable(item.item)) {
+    if (isLocationRenewable(location) && ItemHelpers.isItemCriticalRenewable(item.item)) {
       this.state.criticalRenewables.add(item);
     }
 

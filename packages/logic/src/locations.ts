@@ -2,7 +2,7 @@ import type { Settings, PlayerItem } from '@ootmm/core';
 import type { ItemPlacement, Location } from './types';
 import type { ResolvedWorldFlags, World } from './world';
 
-import { CHECKS_BY_LOCATION, ItemHelpers } from '@ootmm/core';
+import { CHECKS, CHECKS_BY_LOCATION, ItemHelpers } from '@ootmm/core';
 
 type LocationDescriptor = {
   id: string;
@@ -68,13 +68,30 @@ export const OOT_FROGS = [
   'OOT Zora River Frogs Sarias Song',
   'OOT Zora River Frogs Suns Song',
   'OOT Zora River Frogs Song of Time'
-]
+];
 
 export const MM_LOTTERY = [
   'MM Lottery Prize Night 1',
   'MM Lottery Prize Night 2',
   'MM Lottery Prize Night 3',
-]
+];
+
+const MM_TINGLE = [
+  'MM Tingle Map Clock Town',
+  'MM Tingle Map Woodfall',
+  'MM Tingle Map Snowhead',
+  'MM Tingle Map Ranch',
+  'MM Tingle Map Great Bay',
+  'MM Tingle Map Ikana',
+];
+
+const RENEWABLE_LOCATIONS = new Set([
+  ...MM_SCRUBS,
+  ...MM_MERCHANTS,
+  ...MM_TINGLE,
+  ...OOT_MERCHANTS,
+  ...CHECKS.filter(x => ['shop', 'cow', 'scrub', 'fairy', 'fish', 'fairy_spot'].includes(x.type) && !ONE_TIME_SHOP_CHECKS.includes(x.location)).map(x => x.location),
+]);
 
 export function locationsZelda(settings: Settings) {
   const locs = ['OOT Zelda\'s Letter', 'OOT Zelda\'s Song'];
@@ -84,18 +101,9 @@ export function locationsZelda(settings: Settings) {
   return locs;
 }
 
-export function isLocationRenewable(world: World, loc: Location) {
+export function isLocationRenewable(loc: Location) {
   const locationId = locationData(loc).id;
-  if (MM_SCRUBS.includes(locationId) || MM_MERCHANTS.includes(locationId) || OOT_MERCHANTS.includes(locationId))
-    return true;
-  if (ONE_TIME_SHOP_CHECKS.includes(locationId))
-    return false;
-  const check = CHECKS_BY_LOCATION[locationId];
-  if (['shop', 'cow', 'scrub', 'fairy', 'fish', 'fairy_spot'].includes(check.type))
-    return true;
-  if (ItemHelpers.isTingleMap(world.checkItems.get(locationId)!))
-    return true;
-  return false;
+  return RENEWABLE_LOCATIONS.has(locationId);
 }
 
 export function isLocationLicenseGranting(world: World, loc: Location) {
@@ -106,7 +114,7 @@ export function isLocationLicenseGranting(world: World, loc: Location) {
   const check = CHECKS_BY_LOCATION[locationId];
   if (['cow'].includes(check.type))
     return true;
-  if (isLocationRenewable(world, loc))
+  if (isLocationRenewable(loc))
     return false;
   return true;
 }

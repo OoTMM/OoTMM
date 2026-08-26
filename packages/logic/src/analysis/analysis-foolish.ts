@@ -216,7 +216,7 @@ class LogicPassAnalysisFoolish {
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items.get(loc)!;
       const locD = locationData(loc);
-      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !this.state.itemProperties.license.has(item.item)) continue;
+      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(loc) && !this.state.itemProperties.license.has(item.item)) continue;
       locsSet.add(loc);
     }
 

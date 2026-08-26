@@ -499,7 +499,7 @@ export class Pathfinder {
       for (const otherWs of otherWss) {
         countMapAdd(otherWs.items, playerItem.item);
       }
-      if (isLocationRenewable(world, globalLoc)) {
+      if (isLocationRenewable(globalLoc)) {
         for (const otherWs of otherWss) {
           countMapAdd(otherWs.renewables, playerItem.item);
         }

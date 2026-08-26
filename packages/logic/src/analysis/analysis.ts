@@ -149,8 +149,7 @@ class LogicPassAnalysis {
 
   private isLocUselessNonRenewable(loc: Location) {
     const pi = this.state.items.get(loc)!;
-    const locD = locationData(loc);
-    return (ItemHelpers.isItemConsumable(pi.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !this.state.itemProperties.license.has(pi.item));
+    return (ItemHelpers.isItemConsumable(pi.item) && !isLocationRenewable(loc) && !this.state.itemProperties.license.has(pi.item));
   }
 
   private makeUselessLocs() {

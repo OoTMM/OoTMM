@@ -2097,8 +2097,7 @@ class LogicPassWorldTransform {
     for (const pi of this.pool.keys()) {
       if (this.state.itemProperties.junk.has(pi.item) && ItemHelpers.isItemConsumable(pi.item)) {
         for (const loc of this.locsByItem.get(pi) || []) {
-          const world = this.state.worlds[locationData(loc).world as number];
-          if (isLocationRenewable(world, loc) && !this.fixedLocations.has(loc)) {
+          if (isLocationRenewable(loc) && !this.fixedLocations.has(loc)) {
             countMapAdd(renewableJunks, pi);
           }
         }
