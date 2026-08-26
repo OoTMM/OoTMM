@@ -332,7 +332,9 @@ export class Pathfinder {
             } else {
               /* We can't wait! */
               waitMode = false;
-              this.trackDependencies('exits', as.dependencies, area, fromArea, result);
+              if (area !== fromArea) {
+                this.trackDependencies('exits', as.dependencies, area, fromArea, result);
+              }
             }
           }
         }
@@ -340,7 +342,12 @@ export class Pathfinder {
     }
 
     /* Age swap */
-    if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.ageChange && area !== fromArea) {
+    if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.game === 'oot' && worldArea.ageChange && area !== fromArea) {
+      const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
+      this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
+    }
+
+    if (ws.items.has(Items.MM_MASK_ADULT) && this.settings.crossAge && worldArea.game === 'mm' && area !== fromArea) {
       const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
       this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
     }
@@ -447,6 +454,21 @@ export class Pathfinder {
         }
       }
     }
+
+    /* If the item is MM adult mask & cross-age is enabled, re-explore every area */
+    if (item === Items.MM_MASK_ADULT && this.settings.crossAge) {
+      const world = this.worlds[worldId];
+      for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
+        const a = world.areas[area];
+        if (a.game === 'mm')
+          this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
+      }
+      for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
+        const a = world.areas[area];
+        if (a.game === 'mm')
+          this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
+      }
+    }
   }
 
   private addLocationDelayed(worldId: number, loc: string) {
@@ -540,12 +562,12 @@ export class Pathfinder {
     if (event === EVENT_TIME_TRAVEL) {
       for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
         const a = world.areas[area];
-        if (a.ageChange)
+        if (a.game === 'oot' && a.ageChange)
           this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
       }
       for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
         const a = world.areas[area];
-        if (a.ageChange)
+        if (a.game === 'oot' && a.ageChange)
           this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
       }
     }

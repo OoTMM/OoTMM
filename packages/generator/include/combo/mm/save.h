@@ -466,7 +466,8 @@ typedef struct
     u32 bowSlingshot:2;
     u32 stoneGerudoSkull:3;
     u32 gibdoSpooky:2;
-    u32 unused:16;
+    u32 fierceDeityAdult:2;
+    u32 unused:14;
 }
 MmExtraItems;
 
@@ -576,6 +577,18 @@ MmExtraFlags3;
 #define MM_PLAYER_FORM_DEKU         3
 #define MM_PLAYER_FORM_HUMAN        4
 
+typedef struct
+{
+    u8 buttonItems[4];
+    u8 cButtonSlots[4];
+
+    u8 boots;
+    u8 tunic;
+    u8 shield;
+    u8 sword;
+}
+MmHumanAgeLoadout;
+
 typedef struct ALIGNED(16)
 {
     u8 xflags[XFLAGS_COUNT_MM];
@@ -600,6 +613,7 @@ typedef struct ALIGNED(16)
         u8 value;
     } ootSongs;
     u8 customMask;
+    MmHumanAgeLoadout humanAgeLoadouts[2];
 }
 MmCustomSave;
 

@@ -13,6 +13,7 @@
 #include <combo/play.h>
 #include <combo/shop.h>
 #include <combo/checks.h>
+#include <combo/age.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -276,8 +277,9 @@ void comboSyncItems(void)
 
     if (Config_Flag(CFG_CROSS_GAME_FW))
     {
+        u8 mmFwAge = comboMmFwAge();
 #if defined(GAME_MM)
-        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+        RespawnData* fw = &gCustomSave.fw[mmFwAge];
         OotFaroreWind* foreignFw = &gForeignSave.info.fw;
 
         if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
@@ -291,7 +293,8 @@ void comboSyncItems(void)
             foreignFw->entrance = ENTR_FW_CROSS;
         }
 #else
-        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
+        RespawnData* foreignFw =
+            &gSharedCustomSave.mm.fw[mmFwAge];
         OotFaroreWind* fw = &gSave.info.fw;
 
         if (fw->set <= 0 || fw->entrance != ENTR_FW_CROSS)

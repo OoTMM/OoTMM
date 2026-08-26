@@ -220,4 +220,8 @@ int Player_InBlockingCsMode(PlayState *play, Player *player);
 /* Custom stuff */
 void Player_HandleBronzeScale(Player* this, PlayState* play);
 
+void Player_UpdateWrapper(Player* this, PlayState* play);
+
+void Player_CheckCustomBoots(PlayState* play);
+
 #endif

@@ -55,28 +55,49 @@ s32 Object_SpawnPersistentCustom(ObjectContext* objectCtx, s16 id)
 
 PATCH_FUNC(0x8012f2e0, Object_SpawnPersistentCustom);
 
-static void UpdateGameplayKeepForAdult(ObjectContext* objectCtx)
+void Scene_ApplyHumanAgeGameplayKeep(ObjectContext* objectCtx, s32 isAdult)
 {
-    if (comboIsLinkAdult())
-    {
-        u32 gameplayKeep = (u32)objectCtx->slots[gPlay->objectCtx.mainKeepIndex].segment;
-        comboLoadObject((void*)(gameplayKeep + 0x25510), CUSTOM_OBJECT_ID_MM_ADULT_LINK_SPIN_ATTACK_VTX_1);
-        comboLoadObject((void*)(gameplayKeep + 0x25A90), CUSTOM_OBJECT_ID_MM_ADULT_LINK_SPIN_ATTACK_VTX_2);
-        comboLoadObject((void*)(gameplayKeep + 0x26810), CUSTOM_OBJECT_ID_MM_ADULT_LINK_SPIN_ATTACK_VTX_3);
-        comboLoadObject((void*)(gameplayKeep + 0x5A2A0), CUSTOM_OBJECT_ID_MM_ADULT_LINK_MASK_MTX);
+    u8* gameplayKeep;
+    u32* spinAttackChargingDL1;
+    u32* maskMatrixDL;
 
-        u32* spinAttackChargingDL1 = (u32*)(gameplayKeep + 0x268F0);
-        spinAttackChargingDL1[0] = 0xde000000;
-        spinAttackChargingDL1[1] = 0x0405a2e0;
+    if (!isAdult)
+        return;
 
-        u32* maskMatrixDL = (u32*)(gameplayKeep + 0x5a2e0);
-        maskMatrixDL[0] = 0xe7000000;
-        maskMatrixDL[1] = 0;
-        maskMatrixDL[2] = 0xda380001;
-        maskMatrixDL[3] = 0x0405a2a0;
-        maskMatrixDL[4] = 0xdf000000;
-        maskMatrixDL[5] = 0;
-    }
+    gameplayKeep =
+        objectCtx->slots[objectCtx->mainKeepIndex].segment;
+
+    comboLoadObject(
+        gameplayKeep + 0x25510,
+        CUSTOM_OBJECT_ID_MM_ADULT_LINK_SPIN_ATTACK_VTX_1
+    );
+
+    comboLoadObject(
+        gameplayKeep + 0x25A90,
+        CUSTOM_OBJECT_ID_MM_ADULT_LINK_SPIN_ATTACK_VTX_2
+    );
+
+    comboLoadObject(
+        gameplayKeep + 0x26810,
+        CUSTOM_OBJECT_ID_MM_ADULT_LINK_SPIN_ATTACK_VTX_3
+    );
+
+    comboLoadObject(
+        gameplayKeep + 0x5A2A0,
+        CUSTOM_OBJECT_ID_MM_ADULT_LINK_MASK_MTX
+    );
+
+    spinAttackChargingDL1 = (u32*)(gameplayKeep + 0x268F0);
+    spinAttackChargingDL1[0] = 0xDE000000;
+    spinAttackChargingDL1[1] = 0x0405A2E0;
+
+    maskMatrixDL = (u32*)(gameplayKeep + 0x5A2E0);
+    maskMatrixDL[0] = 0xE7000000;
+    maskMatrixDL[1] = 0x00000000;
+    maskMatrixDL[2] = 0xDA380001;
+    maskMatrixDL[3] = 0x0405A2A0;
+    maskMatrixDL[4] = 0xDF000000;
+    maskMatrixDL[5] = 0x00000000;
 }
 
 void Object_LoadAllCustom(ObjectContext* objectCtx)
@@ -90,7 +111,7 @@ void Object_LoadAllCustom(ObjectContext* objectCtx)
         comboLoadObject(objectCtx->slots[i].segment, id);
     }
 
-    UpdateGameplayKeepForAdult(objectCtx);
+    Scene_ApplyHumanAgeGameplayKeep(objectCtx, comboIsLinkAdult() );
 }
 
 PATCH_FUNC(0x8012f698, Object_LoadAllCustom);
@@ -165,7 +186,7 @@ PATCH_FUNC(0x8012F4FC, Object_UpdateEntriesCustom);
 
 void Object_AfterInitContext(void)
 {
-    UpdateGameplayKeepForAdult(&gPlay->objectCtx);
+    Scene_ApplyHumanAgeGameplayKeep(&gPlay->objectCtx, comboIsLinkAdult());
 }
 
 u8 gNightBgm;

@@ -234,6 +234,34 @@ static void applyStartingEvents(void)
     }
 }
 
+static void Save_InitNewMmLinkAge(void)
+{
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+    {
+        gMmSave.linkAge = gOotSave.age;
+    }
+    else
+    {
+        gMmSave.linkAge = Config_Flag(CFG_MM_START_ADULT)
+            ? AGE_ADULT
+            : AGE_CHILD;
+    }
+
+    for (int age = 0; age < 2; ++age)
+    {
+        MmHumanAgeLoadout* equips = &gSharedCustomSave.mm.humanAgeLoadouts[age];
+        for (int i = 0; i < 4; ++i)
+        {
+            equips->buttonItems[i] = ITEM_NONE;
+            equips->cButtonSlots[i] = 0xff;
+        }
+        equips->boots = 0;
+        equips->tunic = 0;
+        equips->shield = 0;
+        equips->sword = 0;
+    }
+}
+
 void comboCreateSave(void* unk, void* buffer)
 {
     u32 base;
@@ -348,6 +376,8 @@ void comboCreateSave(void* unk, void* buffer)
             gSave.info.eventsMisc[29] = 0;
         }
     }
+
+    Save_InitNewMmLinkAge();
 
     /* Apply starting items */
     applyStartingItems();

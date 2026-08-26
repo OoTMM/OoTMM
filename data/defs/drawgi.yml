@@ -198,3 +198,4 @@
 - { id: POND_FISH, func: PondFish, params: [GI_POND_FISH_0] }
 - { id: SHOVEL, func: Opa0, params: [GI_SHOVEL_0] }
 - { id: TRAP, func: Trap, params: [0] }
+- { id: MASK_ADULT, func: Opa01, params: [MASK_ADULT_1, MASK_ADULT_0] }
