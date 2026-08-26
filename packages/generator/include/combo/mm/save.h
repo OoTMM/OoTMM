@@ -586,13 +586,8 @@ typedef struct
     u8 tunic;
     u8 shield;
     u8 sword;
-
-    u8 valid;
-    u8 pad[3];
 }
 MmHumanAgeLoadout;
-
-ASSERT_SIZE(MmHumanAgeLoadout, 0x10);
 
 typedef struct ALIGNED(16)
 {

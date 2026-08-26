@@ -190,57 +190,6 @@ static void AdultMask_ApplyRuntimeAgeProperties(Player* player, PlayState* play)
     player->actor.cullingVolumeDownward = height;
 }
 
-static MmHumanAgeLoadout* AdultMask_GetHumanAgeLoadout(u8 age)
-{
-    /* TODO: Kludge */
-    if (age >= 2)
-        age = AGE_CHILD;
-    return &gCustomSave.humanAgeLoadouts[age];
-}
-
-static void AdultMask_CaptureHumanAgeLoadout(MmHumanAgeLoadout* loadout)
-{
-    MmItemEquips* equips = &gMmSave.info.itemEquips;
-    s32 button;
-
-    for (button = EQUIP_SLOT_C_LEFT; button <= EQUIP_SLOT_C_RIGHT; button++) {
-        loadout->buttonItems[button] = equips->buttonItems[0][button];
-        loadout->cButtonSlots[button] = equips->cButtonSlots[0][button];
-    }
-
-    loadout->boots = equips->boots;
-    loadout->tunic = equips->tunic;
-    loadout->valid = 1;
-}
-
-static s32 AdultMask_IsBottleSlot(u8 slot)
-{
-    return slot >= ITS_MM_BOTTLE && slot <= ITS_MM_BOTTLE6;
-}
-
-static void AdultMask_RestoreHumanAgeLoadout(const MmHumanAgeLoadout* loadout)
-{
-    MmItemEquips* equips = &gMmSave.info.itemEquips;
-    s32 button;
-
-    for (button = EQUIP_SLOT_C_LEFT; button <= EQUIP_SLOT_C_RIGHT; button++) {
-        u8 slot = loadout->cButtonSlots[button];
-        u8 item = loadout->buttonItems[button];
-
-        equips->cButtonSlots[0][button] = slot;
-
-        if (slot == 0xff)
-            equips->buttonItems[0][button] = ITEM_NONE;
-        else if (AdultMask_IsBottleSlot(slot))
-            equips->buttonItems[0][button] = gSave.info.inventory.items[slot];
-        else
-            equips->buttonItems[0][button] = item;
-    }
-
-    equips->boots = loadout->boots;
-    equips->tunic = loadout->tunic;
-}
-
 static void AdultMask_RefreshButtonIcons(PlayState* play)
 {
     s32 button;
@@ -255,19 +204,6 @@ static void AdultMask_RefreshButtonIcons(PlayState* play)
             bzero(iconBuffer, ADULT_MASK_ITEM_ICON_SIZE);
         }
     }
-}
-
-static void AdultMask_InitEmptyHumanAgeLoadout(MmHumanAgeLoadout* loadout)
-{
-    s32 button;
-
-    bzero(loadout, sizeof(*loadout));
-    for (button = EQUIP_SLOT_C_LEFT; button <= EQUIP_SLOT_C_RIGHT; button++) {
-        loadout->buttonItems[button] = ITEM_NONE;
-        loadout->cButtonSlots[button] = 0xff;
-    }
-
-    loadout->valid = 1;
 }
 
 void AdultMask_ResetDrawStateForNewPlay(void)
@@ -407,30 +343,16 @@ static void AdultMask_ClearState(void)
 
 static void AdultMask_CommitAge(Player* player)
 {
-    MmHumanAgeLoadout* outgoingLoadout;
-    MmHumanAgeLoadout* incomingLoadout;
-    u8 outgoingAge;
-    u8 incomingAge;
-
     if (sAdultMaskCommitted)
         return;
 
+    Age_SwapMm(gPlay);
     sAdultMaskCommitted = 1;
-    outgoingAge = gMmSave.linkAge;
-    incomingAge = sAdultMaskTargetAdult ? AGE_ADULT : AGE_CHILD;
-    /* TODO: Kludge */
-    if (outgoingAge >= 2)
-        outgoingAge = sAdultMaskTargetAdult ? AGE_CHILD : AGE_ADULT;
-    outgoingLoadout = AdultMask_GetHumanAgeLoadout(outgoingAge);
-    incomingLoadout = AdultMask_GetHumanAgeLoadout(incomingAge);
-    AdultMask_CaptureHumanAgeLoadout(outgoingLoadout);
-    if (!incomingLoadout->valid)
-        AdultMask_InitEmptyHumanAgeLoadout(incomingLoadout);
 
-    gMmSave.linkAge = incomingAge;
+    /* Reset FW spawn */
     gSaveContext.respawn[RESPAWN_MODE_HUMAN] = gCustomSave.fw[comboMmFwAge()];
-    AdultMask_RestoreHumanAgeLoadout(incomingLoadout);
 
+    /* Reset mask */
     gSaveContext.save.playerForm = MM_PLAYER_FORM_HUMAN;
     player->transformation = MM_PLAYER_FORM_HUMAN;
     player->currentMask = 0;
@@ -514,7 +436,6 @@ static void AdultMask_CommitAgeApplyTablesAndReloadPlayer(Player* player, PlaySt
 static void AdultMask_PlayerPostReloadUpdateWrapper(Actor* thisx, PlayState* play)
 {
     Player* player = (Player*)thisx;
-    MmHumanAgeLoadout* incomingLoadout;
     s32 fastMasks = Config_Flag(CFG_MM_FAST_MASKS);
     u8 sharedBItem = gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B];
     u8 sharedBSlot = gMmSave.info.itemEquips.cButtonSlots[0][EQUIP_SLOT_B];
@@ -543,9 +464,6 @@ static void AdultMask_PlayerPostReloadUpdateWrapper(Actor* thisx, PlayState* pla
     gMmSave.info.itemEquips.shield = sharedShield;
     gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B] = sharedBItem;
     gMmSave.info.itemEquips.cButtonSlots[0][EQUIP_SLOT_B] = sharedBSlot;
-
-    incomingLoadout = AdultMask_GetHumanAgeLoadout(gMmSave.linkAge);
-    AdultMask_RestoreHumanAgeLoadout(incomingLoadout);
 
     Player_SetBootData(play, player);
     Player_CheckCustomBoots(play);

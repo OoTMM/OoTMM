@@ -8,5 +8,7 @@ typedef struct PlayState PlayState;
 
 void Age_SetOot(PlayState* play, int age);
 void Age_SwapOot(PlayState* play);
+void Age_SetMm(PlayState* play, int age);
+void Age_SwapMm(PlayState* play);
 
 #endif

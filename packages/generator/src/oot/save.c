@@ -246,6 +246,20 @@ static void Save_InitNewMmLinkAge(void)
             ? AGE_ADULT
             : AGE_CHILD;
     }
+
+    for (int age = 0; age < 2; ++age)
+    {
+        MmHumanAgeLoadout* equips = &gSharedCustomSave.mm.humanAgeLoadouts[age];
+        for (int i = 0; i < 4; ++i)
+        {
+            equips->buttonItems[i] = ITEM_NONE;
+            equips->cButtonSlots[i] = 0xff;
+        }
+        equips->boots = 0;
+        equips->tunic = 0;
+        equips->shield = 0;
+        equips->sword = 0;
+    }
 }
 
 void comboCreateSave(void* unk, void* buffer)

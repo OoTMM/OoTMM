@@ -75,9 +75,9 @@ int comboIsChateauActive(void)
 int comboIsLinkAdult(void)
 {
 #if defined(GAME_MM)
-    return gMmSave.linkAge == 0;
+    return gMmSave.linkAge == AGE_ADULT;
 #else
-    return gOotSave.age == 0;
+    return gOotSave.age == AGE_ADULT;
 #endif
 }
 
@@ -95,9 +95,6 @@ u8 comboMmFwAge(void)
             ? AGE_ADULT
             : AGE_CHILD;
     }
-
-    if (age >= 2)
-        age = AGE_CHILD;
 
     return age;
 }

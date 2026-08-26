@@ -159,18 +159,6 @@ static u8 getForeignBottle(u8 itemId)
 
 void comboSyncItems(void)
 {
-    if (Config_Flag(CFG_MM_CROSS_AGE))
-    {
-#if defined(GAME_OOT)
-        gForeignSave.linkAge = (gSave.age == AGE_ADULT)
-            ? AGE_ADULT
-            : AGE_CHILD;
-#else
-        gOotSave.age = (gSave.linkAge == AGE_ADULT)
-            ? 0
-            : 1;
-#endif
-    }
     if (Config_Flag(CFG_SHARED_BOWS))
         gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOW] = gSave.info.inventory.ammo[ITS_NATIVE_BOW];
 
