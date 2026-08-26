@@ -13,6 +13,7 @@
 #include <combo/play.h>
 #include <combo/shop.h>
 #include <combo/checks.h>
+#include <combo/age.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -162,10 +163,10 @@ void comboSyncItems(void)
     {
 #if defined(GAME_OOT)
         gForeignSave.linkAge = (gSave.age == AGE_ADULT)
-            ? MM_LINK_AGE_ADULT
-            : MM_LINK_AGE_CHILD;
+            ? AGE_ADULT
+            : AGE_CHILD;
 #else
-        gOotSave.age = (gSave.linkAge == MM_LINK_AGE_ADULT)
+        gOotSave.age = (gSave.linkAge == AGE_ADULT)
             ? 0
             : 1;
 #endif

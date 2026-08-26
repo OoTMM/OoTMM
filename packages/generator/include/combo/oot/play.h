@@ -2,6 +2,7 @@
 #define OOT_PLAY_H
 
 #include <combo/util.h>
+#include <combo/age.h>
 #include <combo/game_state.h>
 #include <combo/actor.h>
 #include <combo/oot/regs.h>
@@ -18,9 +19,6 @@
 #include <combo/oot/environment.h>
 #include <combo/oot/sram.h>
 #include <combo/oot/skybox.h>
-
-#define AGE_ADULT 0
-#define AGE_CHILD 1
 
 typedef struct Player Player;
 

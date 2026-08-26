@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/player.h>
 #include <combo/custom.h>
 #include <combo/mm/adultmask.h>
@@ -191,8 +192,9 @@ static void AdultMask_ApplyRuntimeAgeProperties(Player* player, PlayState* play)
 
 static MmHumanAgeLoadout* AdultMask_GetHumanAgeLoadout(u8 age)
 {
-    if (age >= MM_LINK_AGE_COUNT)
-        age = MM_LINK_AGE_CHILD;
+    /* TODO: Kludge */
+    if (age >= 2)
+        age = AGE_CHILD;
     return &gCustomSave.humanAgeLoadouts[age];
 }
 
@@ -415,9 +417,10 @@ static void AdultMask_CommitAge(Player* player)
 
     sAdultMaskCommitted = 1;
     outgoingAge = gMmSave.linkAge;
-    incomingAge = sAdultMaskTargetAdult ? MM_LINK_AGE_ADULT : MM_LINK_AGE_CHILD;
-    if (outgoingAge >= MM_LINK_AGE_COUNT)
-        outgoingAge = sAdultMaskTargetAdult ? MM_LINK_AGE_CHILD : MM_LINK_AGE_ADULT;
+    incomingAge = sAdultMaskTargetAdult ? AGE_ADULT : AGE_CHILD;
+    /* TODO: Kludge */
+    if (outgoingAge >= 2)
+        outgoingAge = sAdultMaskTargetAdult ? AGE_CHILD : AGE_ADULT;
     outgoingLoadout = AdultMask_GetHumanAgeLoadout(outgoingAge);
     incomingLoadout = AdultMask_GetHumanAgeLoadout(incomingAge);
     AdultMask_CaptureHumanAgeLoadout(outgoingLoadout);

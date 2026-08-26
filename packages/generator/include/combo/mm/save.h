@@ -577,10 +577,6 @@ MmExtraFlags3;
 #define MM_PLAYER_FORM_DEKU         3
 #define MM_PLAYER_FORM_HUMAN        4
 
-#define MM_LINK_AGE_ADULT 0
-#define MM_LINK_AGE_CHILD 1
-#define MM_LINK_AGE_COUNT 2
-
 typedef struct
 {
     u8 buttonItems[4];
@@ -622,7 +618,7 @@ typedef struct ALIGNED(16)
         u8 value;
     } ootSongs;
     u8 customMask;
-    MmHumanAgeLoadout humanAgeLoadouts[MM_LINK_AGE_COUNT];
+    MmHumanAgeLoadout humanAgeLoadouts[2];
 }
 MmCustomSave;
 

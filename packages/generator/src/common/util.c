@@ -2,6 +2,7 @@
 #include <combo/util.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/age.h>
 
 u32 popcount(u32 x)
 {
@@ -91,12 +92,12 @@ u8 comboMmFwAge(void)
     else
     {
         age = (gOotSave.age == 0)
-            ? MM_LINK_AGE_ADULT
-            : MM_LINK_AGE_CHILD;
+            ? AGE_ADULT
+            : AGE_CHILD;
     }
 
-    if (age >= MM_LINK_AGE_COUNT)
-        age = MM_LINK_AGE_CHILD;
+    if (age >= 2)
+        age = AGE_CHILD;
 
     return age;
 }

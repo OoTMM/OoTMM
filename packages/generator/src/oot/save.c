@@ -243,8 +243,8 @@ static void Save_InitNewMmLinkAge(void)
     else
     {
         gMmSave.linkAge = Config_Flag(CFG_MM_START_ADULT)
-            ? MM_LINK_AGE_ADULT
-            : MM_LINK_AGE_CHILD;
+            ? AGE_ADULT
+            : AGE_CHILD;
     }
 }
 
