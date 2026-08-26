@@ -100,7 +100,7 @@
 "Dodongo Cavern Room After Upper Staircase":
   dungeon: DC
   exits:
-    "Dodongo Cavern Staircase Room Upper": "true"
+    "Dodongo Cavern Staircase Room Upper Near Door": "true"
     "Dodongo Cavern Main Room Upper Entrance Side": "event(DC_MQ_DEFEAT_DONDONGOS_AFTER_STAIRCASE)"
   events:
     DC_MQ_DEFEAT_DONDONGOS_AFTER_STAIRCASE: "soul_dodongo && can_damage" #Placeholder macro for defeating Dodongos
@@ -166,7 +166,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Before Upper Lizalfos Corridor End": "true" # If you got past skulltulas to get in here, you can get past them to get out
-    "Dogongo Cavern Vanilla Bomb Bag Room Lower": "true" # ditto + moves through invisible one way collision
+    "Dodongo Cavern Vanilla Bomb Bag Room Lower": "true" # ditto + moves through invisible one way collision
   locations:
     "MQ Dodongo Cavern Pot Before Miniboss 1": "true"
     "MQ Dodongo Cavern Pot Before Miniboss 2": "true"

@@ -1,7 +1,7 @@
 #Generic Utility Macros
 "is_child": "age(child)"
 "is_adult": "age(adult)"
-"temp_flag_event(childEvent, adultEvent)": "(is_child && childEvent) || (is_adult && adultEvent)"
+"temp_flag_event(childEvent, adultEvent)": "(is_child && event(childEvent)) || (is_adult && event(adultEvent))"
 #"temp_flag_event_time_travel(childEvent, adultEvent)": "temp_flag_event(childEvent, adultEvent) || time_travel_at_will && (childEvent || adultEvent)" # This macro is only relevant for sitations where Link moves from one place he can time travel to a place he may not (e.g.s; 1 - because of ER, 2 - through a door to a boss room)
 "has_clock": "setting(clocksOot, none) || has(CLOCK)"
 "is_day": "(has_clock || setting(clocksOot, day)) && (oot_time(day) || can_play_sun || can_play_double_time)"

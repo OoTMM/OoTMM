@@ -310,7 +310,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floors Room Upper Ledge Before Door": "small_keys_shadow(4)"
-    "Shadow Temple Wind Tunnel After Pit Before Drop": "(can_kill_skulltulas || has_nuts || has_boomerang || can_use_mask_stone || (trick(GLITCH_OOT_SKULLTULA_ELEVATOR) && has_iron_boots)) && (has_hover_boots || can_hookshot || climb_anywhere)" #Need to get past Skulltula and the pit. Skulltula Elevator needs to be combined with some way to stop being pushed too far away from the Skulltula such that it resets.
+    "Shadow Temple Wind Tunnel After Pit Before Drop": "(can_kill_skulltulas || has_nuts || can_boomerang || can_use_mask_stone || (trick(GLITCH_OOT_SKULLTULA_ELEVATOR) && has_iron_boots)) && (has_hover_boots || can_hookshot || climb_anywhere)" #Need to get past Skulltula and the pit. Skulltula Elevator needs to be combined with some way to stop being pushed too far away from the Skulltula such that it resets.
 
 "Shadow Temple Wind Tunnel After Pit Before Drop":
   dungeon: Shadow
