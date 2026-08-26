@@ -20,8 +20,8 @@
   exits: #Maybe make the upper branches where the event takes place its own region?
     "Forest Temple": "true"
     "Forest Temple Initial Hallway Front": "true"
-  events: #longshot_anywhere is for action shuffle and not being able to climb; redundant currently with can_hookshot
-    FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH: "can_longshot || climb_anywhere || (has_nuts || can_hit_triggers_distance || can_hookshot || has_hover_boots || can_use_din || has_bomb_bag || can_use_mask_stone || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))))" #Many ways to deal with the Skulltula in the way.
+  events: #longshot is for action shuffle and not being able to climb; redundant currently with can_hookshot within the has_ranged_weapon macro
+    FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH: "can_longshot || climb_anywhere || has_nuts || can_use_sword_or_sticks || has_ranged_weapon || can_use_din || has_bombs || can_use_mask_blast || can_use_mask_stone || has_hover_boots || trick(OOT_FOREST_MQ_STAND_IN_FRONT_OF_LOBBY_SKULLTULA) && (has_bombchu || can_hammer || trick(GLITCH_OOT_SKULLTULA_ELEVATOR))" #Many ways to deal with the Skulltula in the way.
   locations:
     "MQ Forest Temple First Room Chest": "event(FOREST_MQ_ENTRANCE_ROOM_CHEST_SWITCH)"
 
@@ -29,18 +29,18 @@
   dungeon: Forest
   exits:
     "Forest Temple Entrance Room": "true"
-    "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
+    "Forest Temple Initial Hallway Navigation": "get_past_skulltulas"
 
-"Forest Temple Initial Hallway Navigation": #Even more ways to get past the skultulas. Region exists for enemy drops rando, and for ease of placing the door regions for door rando.
+"Forest Temple Initial Hallway Navigation": #Region exists for enemy drops rando, and for ease of placing the door regions for door rando. Middle Skultula sorta needs roll with adult+stone mask.
   dungeon: Forest
   exits:
-    "Forest Temple Initial Hallway Front": "get_past_skultullas"
-    "Forest Temple Initial Hallway Back": "get_past_skultullas"
+    "Forest Temple Initial Hallway Front": "get_past_skulltulas" 
+    "Forest Temple Initial Hallway Back": "get_past_skulltulas"
 
 "Forest Temple Initial Hallway Back":
   dungeon: Forest
   exits:
-    "Forest Temple Initial Hallway Navigation": "get_past_skultullas"
+    "Forest Temple Initial Hallway Navigation": "get_past_skulltulas"
     "Forest Temple Main Lobby": "small_keys_forest(1)"
   locations:
     "MQ Forest Temple GS Entryway": "gs && (can_collect_distance || ((has_ranged_weapon || has_explosives) && climb_anywhere))" #Blast mask too? Need to have separate macros for close vs far-range explosives...
@@ -201,7 +201,8 @@
     "Forest Temple Climbing Block Puzzle Room Crystal Switch Alcove": "true"
     "Forest Temple West Garden Ledge Above Well": "has_hover_boots || hookshot_anywhere || climb_anywhere"
   events:
-    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire_arrows"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD: "is_child && has_fire_arrows"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT: "is_adult && has_fire_arrows"
 
 "Forest Temple West Garden Pillar With Items":
   dungeon: Forest
@@ -228,7 +229,8 @@
     "Forest Temple West Garden Ground Area": "true"
     "Forest Temple West Garden Upper Ledge Hallway": "hookshot_anywhere"
   events:
-    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire_arrows"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD: "is_child && has_fire_arrows"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT: "is_adult && has_fire_arrows"
   locations:
     "MQ Forest Temple GS West Garden": "gs && can_damage_skull"
 
@@ -240,34 +242,38 @@
     "Forest Temple Main Lobby": "true"
     "Forest Temple Gardens Well": "(has_tunic_zora && has_iron_boots) || event(FOREST_MQ_DRAIN_WELL)"
     "Forest Temple West Garden Ledge Above Well": "true"
-    "Forest Temple West Garden Webbed Alcove": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)" #Maybe another way to destroy web with glitches?
+    "Forest Temple West Garden Webbed Alcove": "temp_flag_event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD, FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT) && (can_kill_skulltulas || is_child && can_use_mask_stone)" # 5% of the time, adult link with stone mask gets knocked down. 95% of the time he gets knocked INTO the alcove.
     "Forest Temple East Garden Ground Area": "(has_tunic_zora && can_dive_big) || event(FOREST_MQ_DRAIN_WELL)" #Not part of Well region because diving with scale can't get checks.
   events:
-    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire_arrows"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD: "is_child && has_fire_arrows" #Maybe another way to destroy web with glitches?
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT: "is_adult && has_fire_arrows"
 
 "Forest Temple West Garden Webbed Alcove":
   dungeon: Forest
   exits:
-    "Forest Temple West Garden Ground Area": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)"
-    "Forest Temple Linking Room Between Gardens Behind Web": "true"
+    "Forest Temple West Garden Ground Area": "temp_flag_event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD, FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT) || trick(OOT_PASS_COLLISION)"
+    "Forest Temple Linking Room Between Gardens": "true" # Failsafe: door rando might actually put you in "Linking Room Between Gardens Behind Web"
   events:
-    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD: "is_child && has_fire" # These events will be a problem in door rando
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT: "is_adult && has_fire" # since we have one event, one temp flag and two webs in two different rooms.
 
 "Forest Temple Linking Room Between Gardens Behind Web":
   dungeon: Forest
   exits:
     "Forest Temple West Garden Webbed Alcove": "true"
-    "Forest Temple Linking Room Between Gardens": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)"
+    "Forest Temple Linking Room Between Gardens": "true" # Walk through INvisible one-way collision
   events:
-    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "has_fire"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD: "is_child && has_fire"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT: "is_adult && has_fire"
 
 "Forest Temple Linking Room Between Gardens":
   dungeon: Forest
   exits:
     "Forest Temple East Garden Top Balcony With Door": "true"
-    "Forest Temple Linking Room Between Gardens Behind Web": "event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY)"
+    "Forest Temple Linking Room Between Gardens Behind Web": "temp_flag_event(FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD, FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT)"
   events:
-    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY: "can_use_din || has_arrows"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_CHILD: "is_child && can_use_din || has_arrows || has_sticks"
+    FOREST_MQ_WEST_GARDEN_HIGH_WEB_DESTROY_ADULT: "is_adult && can_use_din || has_arrows || has_sticks"
 
 "Forest Temple Gardens Well":
   dungeon: Forest
@@ -444,7 +450,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Main Lobby": "event(FOREST_MQ_MEG_CLEAR)"
-    "Forest Temple Antichamber Room Southwest Alcove": "get_past_skultullas_no_stone" #You can roll into and out of the room with nothing. Trick or base?
+    "Forest Temple Antichamber Room Southwest Alcove": "true" #You can walk into and out of the room with nothing; you will get hit by the skulltula as you enter/leave though, unless you're child.
     "Forest Temple Antichamber Room East Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_CRYSTAL_SWITCH)"
     "Forest Temple Antichamber Room Northwest Alcove": "true"
     "Forest Temple Antichamber Room South Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_FLOOR_SWITCH)"

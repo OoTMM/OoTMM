@@ -154,7 +154,7 @@
     "Gerudo Fortress Break Room Top": "can_hookshot || climb_anywhere"
   events:
     MAGIC: "evade_gerudo"
-    ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot || has_mask_stone)"
+    ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot || can_use_mask_stone)"
     SEEDS: "is_child && has(GERUDO_CARD)"
   locations:
     "Gerudo Fortress Pot Break Room 1": "true"

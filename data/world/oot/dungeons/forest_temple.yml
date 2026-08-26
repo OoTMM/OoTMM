@@ -3,7 +3,7 @@
   exits:
     "GLOBAL": "true"
     "Sacred Meadow Forest Platform": "true"
-    "Forest Temple Main": "can_damage || can_collect_distance || can_hammer"
+    "Forest Temple Main": "get_past_skulltulas"
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "gs && (has_ranged_weapon || has_explosives || can_use_din)"
