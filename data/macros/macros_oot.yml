@@ -346,7 +346,7 @@
 "can_kill_biris_baris": "soul_biris_baris && (can_use_sword_or_sticks || can_boomerang || has_explosives || can_use_din))"
 "can_kill_tailpasarans": "soul_tailpasarans && (can_boomerang || can_use_sword_or_sticks || can_hammer)" #It should be noted that Ruto can kill them but most players wouldn't know this.
 "can_kill_jabu_parasites": "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang" #Can have glitches or tricks for bombchu later on.
-"can_kill_torch_slugs": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword_or_sticks || can_hammer || cam_use_bow || can_use_mask_blast || has_explosives || has_sticks)"
+"can_kill_torch_slugs": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword_or_sticks || can_hammer || can_use_bow || can_use_mask_blast || has_explosives || has_sticks)"
 "can_kill_moblins": "soul_moblins && (can_use_sword_or_sticks || can_hammer || can_use_bow || can_hookshot)"
 "can_kill_poes": "soul_poe && (can_use_sword || can_hammer || can_use_slingshot || can_use_bow || can_hookshot)"
 "can_kill_poe_sisters": "soul_poe && (can_use_sword || can_hammer || can_use_bow || can_hookshot)"
