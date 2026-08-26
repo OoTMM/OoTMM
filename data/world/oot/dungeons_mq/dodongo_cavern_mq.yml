@@ -125,9 +125,9 @@
     "Dodongo Cavern Main Room Upper Entrance Side": "true"
     "Dodongo Cavern Before Upper Lizalfos Room": "has_fire_or_sticks" # use fire or beat the 3-torch puzzle and carry flame. Fire/sticks kills skulltulas
     "Dodongo Cavern Vanilla Bomb Bag Room Upper": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere"
-    "Dodongo Cavern MQ Larvae Room": "has_fire_or_sticks || event(DC_MQ_SOLVE_3-TORCH_PUZZLE_TIME_TRAVEL)" # Either beat the 3-torch puzzle with the current age, or beat it with the other age then SoT-age-change.
+    "Dodongo Cavern MQ Larvae Room": "has_fire_or_sticks || event(DC_MQ_SOLVE_3_TORCH_PUZZLE_TIME_TRAVEL)" # Either beat the 3-torch puzzle with the current age, or beat it with the other age then SoT-age-change.
   events:
-    DC_MQ_SOLVE_3-TORCH_PUZZLE_TIME_TRAVEL: "time_travel_at_will && has_fire_or_sticks" # Temp flag: not reset when using age change. Only age swap allows you to keep the puzzle solved for an age that can't solve it.
+    DC_MQ_SOLVE_3_TORCH_PUZZLE_TIME_TRAVEL: "time_travel_at_will && has_fire_or_sticks" # Temp flag: not reset when using age change. Only age swap allows you to keep the puzzle solved for an age that can't solve it.
   locations:
     "MQ Dodongo Cavern Heart Vanilla Bomb Bag Room": "true"
     # Fails to load
