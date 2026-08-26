@@ -141,6 +141,17 @@ static int KaleidoScope_HandleAfterSave(PlayState* play)
     return 0;
 }
 
+static int KaleidoScope_CanReturnToEitherSpawn(void)
+{
+    u8 startingAge;
+
+    startingAge = Config_Flag(CFG_OOT_START_ADULT) ? AGE_ADULT : AGE_CHILD;
+    if (gOotSave.age == startingAge)
+        return FALSE;
+
+    return TRUE;
+}
+
 static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
 {
     u16 buttons = play->state.input[0].press.button;
@@ -154,7 +165,7 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
         else if (play->msgCtx.choiceIndex == 1)
         {
             PlaySound(NA_SE_SY_DECIDE);
-            if (!gSharedCustomSave.hasBeenChildAndAdult)
+            if (!KaleidoScope_CanReturnToEitherSpawn())
             {
                 KaleidoScope_GoBackToSpawn(play, gOotSave.age);
                 return 1;

@@ -114,7 +114,6 @@ void Age_SetRawOot(PlayState* play, int age)
     if (gOotSave.age == age)
         return;
 
-    gSharedCustomSave.hasBeenChildAndAdult = 1;
 #if defined(GAME_OOT)
     /* Defer on next load if possible */
     if (play)
