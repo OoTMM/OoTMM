@@ -53,7 +53,7 @@ AudioLoad_InitTable = 0x800b70c8;
 Audio_SetFileSelectSettings = 0x800c7420;
 Magic_Refill = 0x80072500;
 
-ActorRemove = 0x80025648;
+Actor_Delete = 0x80025648;
 
 Play_InitEnvironment = 0x8009cda0;
 gWeatherMode = 0x800f1640;

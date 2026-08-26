@@ -348,7 +348,7 @@ void DeathWarp(PlayState* play);
 void DrawDungeonUnk2(void* unk);
 #endif
 
-void ActorRemove(ActorContext* ctx, Actor* actor, PlayState* play);
+void Actor_Delete(ActorContext* ctx, Actor* actor, PlayState* play);
 
 s16 RupeeValueOot(s16 count);
 s16 RupeeValueMm(s16 count);
