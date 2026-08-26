@@ -843,7 +843,7 @@ export const TRICKS: Tricks = {
   GLITCH_OOT_SKULLTULA_ELEVATOR: {
     game: 'oot',
     name: "Skulltula Elevator (OoT)",
-    tooltip: "Skulltulas have a bobbing animation that uses a global timer. By repeatedly using well-timed pauses or Navi text boxes, the downwards part of the bobbing animation can be skipped, such that the Skulltula gradually moves upwards, allowing Link to roll or walk underneath."
+    tooltip: "Skulltulas have a bobbing animation that uses a global timer. By repeatedly using well-timed pauses or Navi text boxes, the downwards part of the bobbing animation can be skipped, such that the Skulltula gradually moves upwards, allowing Link to roll or walk underneath.",
     glitch: true,
     linkVideo: "https://www.youtube.com/watch?v=s-66puPn368&list=PLE8vRlR0R9U4"
   },
