@@ -789,50 +789,6 @@ void Play_TransitionDone(PlayState* play)
     }
 }
 
-static void TimeTravelUpdateEquipment(void)
-{
-    OotItemEquips* prevAge;
-    OotItemEquips* nextAge;
-    u8 item;
-
-    if (gSave.age == AGE_ADULT)
-    {
-        prevAge = &gSave.info.adultEquips;
-        nextAge = &gSave.info.childEquips;
-    }
-    else
-    {
-        prevAge = &gSave.info.childEquips;
-        nextAge = &gSave.info.adultEquips;
-    }
-
-    memcpy(prevAge, &gSave.info.equips, sizeof(*prevAge));
-    if (EV_OOT_IS_SWORDLESS())
-        prevAge->buttonItems[0] = ITEM_NONE;
-    memcpy(&gSave.info.equips, nextAge, sizeof(*nextAge));
-
-    /* Reload bottles */
-    for (int i = 0; i < 3; ++i)
-    {
-        item = gSave.info.equips.buttonItems[i + 1];
-        if ((item >= ITEM_OOT_BOTTLE_EMPTY && item <= ITEM_OOT_POE) || comboIsTradeBottleOot(item))
-            item = gSave.info.inventory.items[gSave.info.equips.cButtonSlots[i]];
-        gSave.info.equips.buttonItems[i + 1] = item;
-    }
-
-    /* Fix sword */
-    if (gSave.info.equips.buttonItems[0] == ITEM_NONE)
-        EV_OOT_SET_SWORDLESS();
-    else
-        EV_OOT_UNSET_SWORDLESS();
-
-    /* Fix shield, if opposite age lost it */
-    if (gSave.info.equips.equipment.shields && !(gSave.info.inventory.equipment.shields & (1 << (gSave.info.equips.equipment.shields - 1))))
-        gSave.info.equips.equipment.shields = 0;
-}
-
-PATCH_FUNC(0x8006f804, TimeTravelUpdateEquipment);
-
 void Play_FastInit(GameState* gs)
 {
     u32 entrance;
@@ -856,14 +812,6 @@ void Play_FastInit(GameState* gs)
     /* Set game mode */
     gSaveContext.gameMode = GAMEMODE_NORMAL;
     gSaveContext.showTitleCard = TRUE;
-
-    /* Handle cross age spawns */
-    if (gComboCtx.isAgeSwapSpawn)
-    {
-        gComboCtx.isAgeSwapSpawn = 0;
-        TimeTravelUpdateEquipment();
-        gSave.age = !gSave.age;
-    }
 
     if (gComboCtx.isFwSpawn)
     {

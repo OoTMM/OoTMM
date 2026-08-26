@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/config.h>
 #include <combo/entrance.h>
 #include <combo/context.h>
@@ -103,17 +104,9 @@ static void KaleidoScope_GoBackToSpawn(PlayState* play, int age)
 {
     u32 entrance = gComboConfig.entrancesSpawns[age];
 
-    if (gOotSave.age != age)
-        Save_SwapFaroreOot();
-
-#if defined(GAME_OOT)
-    play->linkAgeOnLoad = age;
-#endif
+    Age_SetOot(play, age);
 
 #if defined(GAME_MM)
-    if (gOotSave.age != age)
-        gComboCtx.isAgeSwapSpawn = 1;
-
     /* Assume spawn is always an OoT spawn */
     entrance |= MASK_FOREIGN_ENTRANCE;
 #endif
