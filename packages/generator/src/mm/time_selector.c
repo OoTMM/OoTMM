@@ -423,6 +423,10 @@ static void DtMessageDrawMain(PlayState* play, Gfx** gfxP) {
     if (sDtTextDirty) {
         Message_DecodeNES(play);
         msg->unk_11fee = msg->unk_11ff0 + 1;
+        if (sDtState == DT_STATE_CONFIRM) {
+            msg->unk_11ffe[1] = msg->unk_11ffa + msg->unk_11ffc * 2;
+            msg->unk_11ffe[2] = msg->unk_11ffa + msg->unk_11ffc * 3;
+        }
         sDtTextDirty = 0;
     }
     if (move) {
