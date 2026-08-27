@@ -8,8 +8,6 @@ jobs:
     container: ghcr.io/ootmm/toolchain:1.4
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - name: Mark the directory as safe
         run: git config --global --add safe.directory $PWD
@@ -21,14 +19,12 @@ jobs:
             echo "DEPLOY_TYPE=stable" >> $GITHUB_ENV
             echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
             echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
-            echo "NX_CMD=run-many" >> $GITHUB_ENV
           elif [[ "${{ github.ref }}" == refs/heads/master ]]; then
             echo "DEPLOY_TYPE=dev" >> $GITHUB_ENV
             short_sha=$(echo ${{ github.sha }} | cut -c1-7)
             echo "VERSION=dev" >> $GITHUB_ENV
             echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
             echo "ENV_KEYS=dev" >> $GITHUB_ENV
-            echo "NX_CMD=affected" >> $GITHUB_ENV
           elif [[ "${{ github.ref }}" == refs/heads/preview/* ]]; then
             echo "DEPLOY_TYPE=preview" >> $GITHUB_ENV
             short_sha=$(echo ${{ github.sha }} | cut -c1-7)
@@ -36,26 +32,18 @@ jobs:
             echo "VERSION=preview-${branch_name}" >> $GITHUB_ENV
             echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
             echo "ENV_KEYS=preview-${branch_name},preview" >> $GITHUB_ENV
-            echo "NX_CMD=run-many" >> $GITHUB_ENV
           else
             echo "DEPLOY_TYPE=none" >> $GITHUB_ENV
-            echo "NX_CMD=affected" >> $GITHUB_ENV
           fi
 
       - name: Setup
         run: ./scripts/setup.sh
 
-      - name: Find references for NX
-        if: ${{ env.NX_CMD != 'run-many' }}
-        uses: nrwl/nx-set-shas@v4
-        with:
-          main-branch-name: master
-
       - name: Test
         run: pnpm test
 
       - name: Build
-        run: pnpm nx ${NX_CMD} -t build --prod
+        run: pnpm nx run-many -t build --prod
 
       - name: Configure AWS
         if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
@@ -71,7 +59,7 @@ jobs:
 
       - name: Deploy
         if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
-        run: pnpm nx ${NX_CMD} -t deploy --prod
+        run: pnpm nx run-many -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}
           NETLIFY_SITE_ID_WEB: ${{ secrets.NETLIFY_SITE_ID_WEB }}
