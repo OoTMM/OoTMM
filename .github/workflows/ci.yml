@@ -3,11 +3,49 @@ name: Continuous Integration Workflow
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-latest
     container: ghcr.io/ootmm/toolchain:1.4
     steps:
       - uses: actions/checkout@v7
+
+      - name: Get pnpm store path
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Cache Dependencies
+        uses: actions/cache@v6
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Tests
+        run: pnpm test
+
+  ci:
+    needs: test
+    runs-on: ubuntu-latest
+    container: ghcr.io/ootmm/toolchain:1.4
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get pnpm store path
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Cache Dependencies
+        uses: actions/cache@v6
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-
+
+      - name: Setup
+        run: ./scripts/setup.sh
 
       - name: Determine Deployment Type
         shell: bash
@@ -32,12 +70,6 @@ jobs:
           else
             echo "DEPLOY_TYPE=none" >> $GITHUB_ENV
           fi
-
-      - name: Setup
-        run: ./scripts/setup.sh
-
-      - name: Test
-        run: pnpm test
 
       - name: Build
         run: pnpm nx run-many -t build --prod
