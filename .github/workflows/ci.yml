@@ -7,10 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/ootmm/toolchain:1.4
     steps:
-      - uses: actions/checkout@v5
-
-      - name: Mark the directory as safe
-        run: git config --global --add safe.directory $PWD
+      - uses: actions/checkout@v7
 
       - name: Determine Deployment Type
         shell: bash
