@@ -15,7 +15,7 @@ jobs:
         name: Extract Metadata
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" != 'push']]; then
+          if [[ "${{ github.event_name }}" != 'push' ]]; then
             echo "deploy_type=none" >> $GITHUB_OUTPUT
           elif [[ "${{ github.repository }}" != "OoTMM/OoTMM" ]]; then
             echo "deploy_type=none" >> $GITHUB_OUTPUT
