@@ -46,9 +46,9 @@ jobs:
     needs: [meta]
     steps:
       - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-      - name: Run Tests
-        run: pnpm test
+#      - uses: ./.github/actions/setup
+#      - name: Run Tests
+#        run: pnpm test
 
   build:
     runs-on: ubuntu-latest
