@@ -6,7 +6,6 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "./deploy.sh",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

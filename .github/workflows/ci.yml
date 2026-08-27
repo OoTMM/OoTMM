@@ -86,6 +86,27 @@ jobs:
           name: build-desktop
           path: packages/desktop/dist
 
+  deploy-web:
+    needs: [meta, test, build]
+    if: ${{ needs.meta.outputs.deploy_type == 'dev' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli@24
+      - name: Download Web Build
+        if: ${{ needs.meta.outputs.deploy_type == 'dev' }}
+        uses: actions/download-artifact@v7
+        with:
+          name: build-web
+          path: packages/web/dist
+      - name: Deploy Web to Netlify
+        run: netlify deploy -d "dist" --no-build --site $NETLIFY_SITE_ID --prod
+        working-directory: packages/web/dist
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_WEB }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
   legacy:
     needs: [test, build]
     runs-on: ubuntu-latest
@@ -138,7 +159,6 @@ jobs:
         run: pnpm nx run-many -t deploy --prod
         env:
           S3_BUCKET: ${{ vars.S3_BUCKET }}
-          NETLIFY_SITE_ID_WEB: ${{ secrets.NETLIFY_SITE_ID_WEB }}
           NETLIFY_SITE_ID_STATIC: ${{ secrets.NETLIFY_SITE_ID_STATIC }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
