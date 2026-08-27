@@ -65,15 +65,6 @@
           "{projectRoot}/include/combo/custom_animations.h"
         ]
       },
-      "test": {
-        "inputs": [
-          "ts",
-          "{projectRoot}/tests/**/*"
-        ],
-        "dependsOn": [
-          "build"
-        ]
-      },
       "start": {
         "dependsOn": [
           "build"

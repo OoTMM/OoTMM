@@ -52,7 +52,7 @@ jobs:
           main-branch-name: master
 
       - name: Test
-        run: pnpm nx ${NX_CMD} -t test --prod
+        run: pnpm test
 
       - name: Build
         run: pnpm nx ${NX_CMD} -t build --prod
