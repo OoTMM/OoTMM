@@ -141,8 +141,12 @@ static s32 OnePointCutscene_ShouldCutscenePlay(PlayState *play, Actor *actor)
         OnePointCutscene_Sfx(&shouldCsPlay, true);
         break;
     }
-    case ACTOR_SHOT_SUN:
     case ACTOR_BG_HIDAN_FWBIG:
+    {
+        OnePointCutscene_Sfx(&shouldCsPlay, false);
+        break;
+    }
+    case ACTOR_SHOT_SUN:
     case ACTOR_EN_EX_ITEM:
     case ACTOR_EN_DNT_NOMAL:
     case ACTOR_EN_DNT_DEMO:

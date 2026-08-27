@@ -113,6 +113,7 @@ s16 CutsceneManager_StartHook(s16 csId, Actor *actor)
     {
         // csActor = actor;
         actor->csId = CS_ID_NONE;
+        Sfx_PlaySuccessChime();
         return CS_ID_NONE;
     }
     return _CutsceneManager_Start(csId, actor);
