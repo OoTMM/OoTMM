@@ -1,0 +1,22 @@
+name: Setup
+description: Checkout deps, warm pnpm store, install
+runs:
+  using: composite
+  steps:
+    - name: Resolve pnpm store
+      shell: bash
+      run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - uses: actions/cache@v4
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: pnpm-
+
+    - name: Install
+      shell: bash
+      run: pnpm install --frozen-lockfile --prefer-offline
+
+    - name: Setup 3rd Party Dependencies
+      shell: bash
+      run: ./scripts/deps.sh
