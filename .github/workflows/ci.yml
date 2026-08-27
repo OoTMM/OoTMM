@@ -129,7 +129,7 @@ jobs:
     if: ${{ needs.meta.outputs.deploy_type != 'none' }}
     runs-on: ubuntu-latest
     concurrency:
-      group: deploy-web-components-${{ needs.meta.outputs.version }}
+      group: deploy-web-components
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
