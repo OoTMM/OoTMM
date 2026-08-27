@@ -90,6 +90,9 @@ jobs:
     needs: [meta, test, build]
     if: ${{ needs.meta.outputs.deploy_type == 'dev' }}
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-web
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v7
       - name: Install Netlify CLI
@@ -100,9 +103,24 @@ jobs:
         with:
           name: build-web
           path: packages/web/dist
+
+      - id: check
+        name: Check if we are deploying the latest commit
+        shell: bash
+        run: |
+          git fetch origin ${{ github.ref }}
+          latest_commit=$(git rev-parse HEAD)
+          if [[ "${{ github.sha }}" != "${latest_commit}" ]]; then
+            echo "This is not the latest commit. Skipping deployment."
+            echo "deploy=false" >> $GITHUB_OUT
+          else
+            echo "deploy=true" >> $GITHUB_OUT
+          fi
+
       - name: Deploy Web to Netlify
+        if: ${{ steps.check.outputs.deploy == 'true' }}
         run: netlify deploy -d "dist" --no-build --site $NETLIFY_SITE_ID --prod
-        working-directory: packages/web/dist
+        working-directory: packages/web
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_WEB }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
