@@ -1,9 +1,9 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+const fs = require('node:fs').promises;
+const path = require('node:path');
 
 async function build() {
   const versionFiles = await fs.readdir('tmp/configs');
-  const config: any = {};
+  const config = {};
   for (const version of versionFiles) {
     const versionConfig = JSON.parse(await fs.readFile(path.resolve('tmp/configs', version), 'utf8'));
     const versionName = path.basename(version, '.json');

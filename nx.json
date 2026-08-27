@@ -21,11 +21,6 @@
     },
     "typecheck": {
       "cache": true
-    },
-    "deploy": {
-      "dependsOn": [
-        "build"
-      ]
     }
   },
   "defaultBase": "master",

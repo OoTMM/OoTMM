@@ -77,7 +77,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: build-web-components
-          path: packages/web-components/dist
+          path: packages/web-components/dist/current
 
       - name: Upload Desktop
         if: ${{ needs.meta.outputs.deploy_type == 'stable' }}
@@ -98,7 +98,6 @@ jobs:
       - name: Install Netlify CLI
         run: npm install -g netlify-cli@24
       - name: Download Web Build
-        if: ${{ needs.meta.outputs.deploy_type == 'dev' }}
         uses: actions/download-artifact@v7
         with:
           name: build-web
@@ -125,67 +124,55 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_WEB }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-  legacy:
-    needs: [test, build]
+  deploy-web-components:
+    needs: [meta, test, build]
+    if: ${{ needs.meta.outputs.deploy_type != 'none' }}
     runs-on: ubuntu-latest
-    container: ghcr.io/ootmm/toolchain:1.4
+    concurrency:
+      group: deploy-web-components-${{ needs.meta.outputs.version }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-
-      - name: Determine Deployment Type
-        shell: bash
-        run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "DEPLOY_TYPE=stable" >> $GITHUB_ENV
-            echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
-            echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
-          elif [[ "${{ github.ref }}" == refs/heads/master ]]; then
-            echo "DEPLOY_TYPE=dev" >> $GITHUB_ENV
-            short_sha=$(echo ${{ github.sha }} | cut -c1-7)
-            echo "VERSION=dev" >> $GITHUB_ENV
-            echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
-            echo "ENV_KEYS=dev" >> $GITHUB_ENV
-          elif [[ "${{ github.ref }}" == refs/heads/preview/* ]]; then
-            echo "DEPLOY_TYPE=preview" >> $GITHUB_ENV
-            short_sha=$(echo ${{ github.sha }} | cut -c1-7)
-            branch_name=$(echo "${{ github.ref_name }}" | sed 's/preview\///' | sed 's/[^a-zA-Z0-9-]/-/g')
-            echo "VERSION=preview-${branch_name}" >> $GITHUB_ENV
-            echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
-            echo "ENV_KEYS=preview-${branch_name},preview" >> $GITHUB_ENV
-          else
-            echo "DEPLOY_TYPE=none" >> $GITHUB_ENV
-          fi
-
-      - name: Build
-        run: pnpm nx run-many -t build --prod
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli@24
 
       - name: Configure AWS
-        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ vars.AWS_REGION }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Lock for Deploy
-        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
-        uses: ahmadnassri/action-workflow-queue@v1
+      - name: Download Build
+        uses: actions/download-artifact@v7
+        with:
+          name: build-web-components
+          path: packages/web-components/dist/current
 
       - name: Deploy
-        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE != 'none' }}
-        run: pnpm nx run-many -t deploy --prod
+        run: ./deploy.sh
+        working-directory: packages/web-components
         env:
+          VERSION: ${{ needs.meta.outputs.version }}
           S3_BUCKET: ${{ vars.S3_BUCKET }}
-          NETLIFY_SITE_ID_STATIC: ${{ secrets.NETLIFY_SITE_ID_STATIC }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STATIC }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-      - name: Build Desktop
-        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE == 'stable' }}
-        run: pnpm nx run @ootmm/desktop:build --prod
+  deploy-desktop:
+    needs: [meta, test, build]
+    if: ${{ needs.meta.outputs.deploy_type == 'stable' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-desktop
+      cancel-in-progress: false
+    steps:
+      - id: download
+        name: Download Build
+        uses: actions/download-artifact@v7
+        with:
+          name: build-desktop
 
-      - name: Upload Desktop to Release
-        if: ${{ github.event_name == 'push' && env.DEPLOY_TYPE == 'stable' }}
+      - name: Upload Release
         uses: softprops/action-gh-release@v2
         with:
-          files: packages/desktop/dist/ootmm-*.zip
+          files: ${{ steps.download.outputs.artifact-path }}/ootmm-*.zip
