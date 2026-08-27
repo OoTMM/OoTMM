@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: deploy-web
-      cancel-in-progress: true
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
       - name: Install Netlify CLI
@@ -109,7 +109,7 @@ jobs:
         shell: bash
         run: |
           git fetch origin ${{ github.ref }}
-          latest_commit=$(git rev-parse HEAD)
+          latest_commit=$(git rev-parse FETCH_HEAD)
           if [[ "${{ github.sha }}" != "${latest_commit}" ]]; then
             echo "This is not the latest commit. Skipping deployment."
             echo "deploy=false" >> $GITHUB_OUTPUT
@@ -119,7 +119,7 @@ jobs:
 
       - name: Deploy Web to Netlify
         if: ${{ steps.check.outputs.deploy == 'true' }}
-        run: netlify deploy -d "dist" --no-build --site $NETLIFY_SITE_ID --prod
+        run: netlify deploy -d "$PWD/dist" --no-build --site $NETLIFY_SITE_ID --prod
         working-directory: packages/web
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_WEB }}
