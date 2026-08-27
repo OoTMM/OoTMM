@@ -112,9 +112,9 @@ jobs:
           latest_commit=$(git rev-parse HEAD)
           if [[ "${{ github.sha }}" != "${latest_commit}" ]]; then
             echo "This is not the latest commit. Skipping deployment."
-            echo "deploy=false" >> $GITHUB_OUT
+            echo "deploy=false" >> $GITHUB_OUTPUT
           else
-            echo "deploy=true" >> $GITHUB_OUT
+            echo "deploy=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Deploy Web to Netlify
