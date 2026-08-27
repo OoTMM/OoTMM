@@ -19,6 +19,7 @@
 #define DT_CLOCK_DRAW_TEXT_ID 0x0100
 #define DT_FAST_FORWARD_SPEED 400
 #define DT_SELECTOR_BOX_Y 90
+#define DT_MSG_S16(msg, off) (*(s16*)((u8*)(msg) + (off)))
 
 typedef enum {
     DT_STATE_NONE,
@@ -423,6 +424,12 @@ static void DtMessageDrawMain(PlayState* play, Gfx** gfxP) {
     if (sDtTextDirty) {
         Message_DecodeNES(play);
         msg->unk_11fee = msg->unk_11ff0 + 1;
+        if (sDtState == DT_STATE_CONFIRM) {
+            s16 y = DT_MSG_S16(msg, 0x11ffa);
+            s16 h = DT_MSG_S16(msg, 0x11ffc);
+            DT_MSG_S16(msg, 0x12000) = y + h * 2;
+            DT_MSG_S16(msg, 0x12002) = y + h * 3;
+        }
         sDtTextDirty = 0;
     }
     if (move) {
