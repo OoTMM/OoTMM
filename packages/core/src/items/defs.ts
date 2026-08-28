@@ -1077,12 +1077,9 @@ export type ItemName = typeof ITEM_IDS[number];
 export type ItemID = number & { __itemId: never };
 
 type ItemDefs = {[k in ItemName]: ItemID};
-
-const itemIds = Object.fromEntries(ITEM_IDS.map((name, index) => [name, index])) as {[k in ItemName]: ItemID};
+export const Items: ItemDefs = Object.fromEntries(ITEM_IDS.map((name, index) => [name, index])) as ItemDefs;
 
 export const Item = {
-  id: (x: ItemName) => itemIds[x],
+  id: (x: ItemName) => Items[x],
   name: (x: ItemID) => ITEM_IDS[x],
 };
-
-export const Items: ItemDefs = Object.fromEntries(ITEM_IDS.map((name, index) => [name, index])) as ItemDefs;
