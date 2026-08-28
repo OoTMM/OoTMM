@@ -1,11 +1,11 @@
-import type { Settings, Item } from '@ootmm/core';
+import type { Settings, ItemID } from '@ootmm/core';
 
 import { ItemGroups } from '@ootmm/core';
 
 export type ItemProperties = {
-  junk: Set<Item>;
-  license: Set<Item>;
-  important: Set<Item>;
+  junk: Set<ItemID>;
+  license: Set<ItemID>;
+  important: Set<ItemID>;
 };
 
 type LogicPassItemPropertiesState = {

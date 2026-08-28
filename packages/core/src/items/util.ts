@@ -1,19 +1,19 @@
-import type { Item } from './defs';
+import type { ItemID } from './defs';
 import type { CountMap } from '../util';
 
 import { createMemo } from '../util';
 
 export type PlayerItem = {
-  item: Item;
+  item: ItemID;
   player: number | 'all';
   __brand: 'PlayerItem';
 };
 
 const playerItemMemo = createMemo<PlayerItem>();
 
-export function makePlayerItem(item: Item, player: number | 'all'): PlayerItem {
-  return playerItemMemo(`${item.id}@${player}`, () => ({ item, player } as PlayerItem));
+export function makePlayerItem(item: ItemID, player: number | 'all'): PlayerItem {
+  return playerItemMemo(`${item}@${player}`, () => ({ item, player } as PlayerItem));
 }
 
-export type ItemsCount = CountMap<Item>;
+export type ItemsCount = CountMap<ItemID>;
 export type PlayerItems = CountMap<PlayerItem>;

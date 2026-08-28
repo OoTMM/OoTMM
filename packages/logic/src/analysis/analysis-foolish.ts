@@ -5,7 +5,7 @@ import type { ItemPlacement, Location } from '../types';
 import type { ItemProperties } from '../item-properties';
 import type { Analysis } from './types';
 
-import { Monitor, Random, sample, ItemHelpers } from '@ootmm/core';
+import { Monitor, Random, sample, ItemHelpers, Item } from '@ootmm/core';
 import { isLocationRenewable, locationData, makeLocation } from '../locations';
 import { Pathfinder } from '../pathfind';
 
@@ -46,7 +46,7 @@ class LogicPassAnalysisFoolish {
   private markAsSometimesRequired(loc: Location) {
     if (!this.conditionallyRequiredLocations.has(loc)) {
       const item = this.state.items.get(loc)!;
-      this.state.monitor.debug(`Foolish Analysis - Sometimes Required: ${loc} (${item.item.id}@${item.player})`);
+      this.state.monitor.debug(`Foolish Analysis - Sometimes Required: ${loc} (${Item.name(item.item)}@${item.player})`);
       this.conditionallyRequiredLocations.add(loc);
     }
   }

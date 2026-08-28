@@ -1,4 +1,4 @@
-import type { Settings, Item, PlayerItem } from '@ootmm/core';
+import type { Settings, ItemID, PlayerItem } from '@ootmm/core';
 import type { ItemPlacement, Location } from '../types';
 
 import { Random, sample, ItemGroups, ItemHelpers } from '@ootmm/core';
@@ -13,7 +13,7 @@ type LogicPassCloakState = {
 };
 
 class LogicPassCloak {
-  private itemCloaks: Map<Location, Item>;
+  private itemCloaks: Map<Location, ItemID>;
 
   constructor(
     private readonly state: LogicPassCloakState,

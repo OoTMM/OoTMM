@@ -1073,12 +1073,16 @@ const ITEM_IDS = [
   'SHARED_SHOVEL',
 ] as const;
 
-export type ItemID = typeof ITEM_IDS[number];
-type ItemDefs = {[k in ItemID]: Item};
+export type ItemName = typeof ITEM_IDS[number];
+export type ItemID = number & { __itemId: never };
 
-export type Item = {
-  id: string;
-  __brand: 'Item';
+type ItemDefs = {[k in ItemName]: ItemID};
+
+const itemIds = Object.fromEntries(ITEM_IDS.map((name, index) => [name, index])) as {[k in ItemName]: ItemID};
+
+export const Item = {
+  id: (x: ItemName) => itemIds[x],
+  name: (x: ItemID) => ITEM_IDS[x],
 };
 
-export const Items: ItemDefs = Object.fromEntries(ITEM_IDS.map(id => [id, { id } as Item])) as ItemDefs;
+export const Items: ItemDefs = Object.fromEntries(ITEM_IDS.map((name, index) => [name, index])) as ItemDefs;

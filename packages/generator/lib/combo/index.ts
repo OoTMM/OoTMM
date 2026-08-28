@@ -11,4 +11,4 @@ export { PRESETS } from './presets';
 export { locationList } from './location-list';
 export { generate } from './generator';
 export { itemPool } from './item-pool';
-export { itemName } from './names';
+export { itemNiceName as itemName } from './names';

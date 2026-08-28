@@ -1,6 +1,6 @@
 import type { Expr, ExprDependencies, ExprFunc, ExprNode, ExprRestrictions, ExprResult, ExprState } from './types';
 
-import { ItemGroups, Items, type CountMap, type Item, type Settings } from '@ootmm/core';
+import { ItemGroups, Items, type CountMap, type ItemID, type Settings } from '@ootmm/core';
 import { OOT_TIME_ALL } from './data';
 import { exprMemoKey } from './memo';
 
@@ -142,10 +142,10 @@ function evalAnd(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
   }
 }
 
-const itemCount = (state: ExprState, item: Item): number => state.items.get(item) || 0;
-const itemsCount = (state: ExprState, items: Item[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
+const itemCount = (state: ExprState, item: ItemID): number => state.items.get(item) || 0;
+const itemsCount = (state: ExprState, items: ItemID[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
-function evalItem(counts: CountMap<Item>, item: Item, count: number, deps: ExprDependencies): ExprResult {
+function evalItem(counts: CountMap<ItemID>, item: ItemID, count: number, deps: ExprDependencies): ExprResult {
   if ((counts.get(item) || 0) >= count) {
     return RESULT_TRUE;
   } else {
@@ -154,7 +154,7 @@ function evalItem(counts: CountMap<Item>, item: Item, count: number, deps: ExprD
   }
 }
 
-function evalItems(counts: CountMap<Item>, items: Set<Item>, count: number, deps: ExprDependencies): ExprResult {
+function evalItems(counts: CountMap<ItemID>, items: Set<ItemID>, count: number, deps: ExprDependencies): ExprResult {
   let acc = 0;
   for (const i of items) {
     acc += (counts.get(i) || 0) > 0 ? 1 : 0;
@@ -181,8 +181,8 @@ function specialCondSets(settings: Settings, special: string) {
     throw new Error(`Unknown special condition: ${special}`);
   }
   const cond = specialConds[special as keyof typeof specialConds];
-  let items = new Set<Item>();
-  let itemsUnique = new Set<Item>();
+  let items = new Set<ItemID>();
+  let itemsUnique = new Set<ItemID>();
 
   if (cond.stones) itemsUnique = new Set([...itemsUnique, ...ItemGroups.STONES]);
   if (cond.medallions) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MEDALLIONS]);

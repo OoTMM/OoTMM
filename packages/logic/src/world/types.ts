@@ -1,4 +1,4 @@
-import type { Entrance, Game, Item, Region } from '@ootmm/core';
+import type { Entrance, Game, ItemID, Region } from '@ootmm/core';
 import type { ResolvedWorldFlags } from './flags';
 import type { Expr, ExprParser } from '../expr';
 
@@ -64,5 +64,5 @@ export type World = {
   resolvedFlags: ResolvedWorldFlags;
   exprParsers: ExprParsers;
   dungeonsEntrances: Map<string, DungeonEntrance>;
-  checkItems: Map<string, Item>;
+  checkItems: Map<string, ItemID>;
 };

@@ -1,4 +1,4 @@
-import type { Item, Options, PlayerItem, PlayerItems } from '@ootmm/core';
+import type { ItemID, Options, PlayerItem, PlayerItems } from '@ootmm/core';
 import type { ItemPlacement } from './types';
 import type { Hints } from './hints';
 import type { Analysis } from './analysis';
@@ -49,7 +49,7 @@ export type LogicResult = {
   startingItems: PlayerItems;
   plandoLocations: Map<Location, PlayerItem>;
   items: ItemPlacement;
-  itemCloaks: Map<Location, Item>;
+  itemCloaks: Map<Location, ItemID>;
   analysis: Analysis;
   hints: Hints;
   hash: string;

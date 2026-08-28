@@ -7,9 +7,9 @@ export function exprMemoKey(expr: ExprNode): string {
     case 'or': return `OR:${expr.exprs.map(x => x.id).sort().join(',')}`;
     case 'and': return `AND:${expr.exprs.map(x => x.id).sort().join(',')}`;
     case 'age': return `AGE:${expr.age}`;
-    case 'item': return `ITEM:${expr.item.id}:${expr.count}`;
-    case 'renewable': return `RENEWABLE:${expr.item.id}`;
-    case 'license': return `LICENSE:${expr.item.id}`;
+    case 'item': return `ITEM:${expr.item}:${expr.count}`;
+    case 'renewable': return `RENEWABLE:${expr.item}`;
+    case 'license': return `LICENSE:${expr.item}`;
     case 'event': return `EVENT:${expr.event}`;
     case 'masks': return `MASKS:${expr.count}`;
     case 'special': return `SPECIAL:${expr.specialId}`;

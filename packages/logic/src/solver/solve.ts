@@ -1,10 +1,10 @@
-import type { Settings, PlayerItem, PlayerItems, Item } from '@ootmm/core';
+import type { Settings, PlayerItem, PlayerItems, ItemID } from '@ootmm/core';
 import type { World } from '../world';
 import type { Location, ItemPlacement } from '../types';
 import type { ItemProperties } from '../item-properties';
 import type { PathfinderState } from '../pathfind';
 
-import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem, Item } from '@ootmm/core';
 import { cloneWorld } from '../world';
 import { mustStartWithMasterSword } from '../helpers';
 import { LogicError, LogicSeedError } from '../error';
@@ -742,7 +742,7 @@ class LogicPassSolver {
     this.fillJunk(locations);
   }
 
-  private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<Item>) {
+  private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<ItemID>) {
     const world = this.worlds[worldId];
     const dungeons = shuffle(this.input.random, normalDungeons(this.input.settings));
 
@@ -1209,7 +1209,7 @@ class LogicPassSolver {
 
         /* If there is nowhere to place an item, raise an error */
         if (unplacedLocs.length === 0) {
-          throw new LogicSeedError(`No reachable locations for item ${requiredItem.item.id}@${requiredItem.player}`);
+          throw new LogicSeedError(`No reachable locations for item ${Item.name(requiredItem.item)}@${requiredItem.player}`);
         }
 
       /* Select a random location from the assumed reachable locations */
@@ -1243,7 +1243,7 @@ class LogicPassSolver {
         }
       }
 
-      throw new LogicSeedError(`No reachable locations for item ${requiredItem.item.id}`);
+      throw new LogicSeedError(`No reachable locations for item ${Item.name(requiredItem.item)}`);
     }
   }
 

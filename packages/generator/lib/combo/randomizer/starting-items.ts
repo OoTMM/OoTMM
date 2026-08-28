@@ -1,7 +1,7 @@
 import type { Settings, ItemsCount } from '@ootmm/core';
 import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
-import { ItemGroups, ItemHelpers, countMapAdd } from '@ootmm/core';
+import { Item, ItemGroups, ItemHelpers, countMapAdd } from '@ootmm/core';
 import { getPreActivatedOwlsLocations, locationsZelda, makePlayerLocations } from '@ootmm/logic';
 import { toU16Buffer } from '../util';
 import { gi } from './util';
@@ -32,7 +32,7 @@ export class RandomizerPatcherStartingItems {
     for (const [item, count] of items.entries()) {
       const id = gi(this.ctx.settings, 'oot', item, false);
       if (id === undefined) {
-        throw new Error(`Unknown item ${item.id}`);
+        throw new Error(`Unknown item ${Item.name(item)}`);
       }
       /* Consumables need to be added late */
       if (ItemHelpers.isItemUnlimitedStarting(item)) {

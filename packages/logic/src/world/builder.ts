@@ -1,4 +1,4 @@
-import type { Game, Settings, Item, SongEventSongs } from '@ootmm/core';
+import type { Game, Settings, ItemID, SongEventSongs } from '@ootmm/core';
 import type { World, WorldArea, ExprMap, ExprParsers } from './types';
 import type { Expr } from '../expr';
 

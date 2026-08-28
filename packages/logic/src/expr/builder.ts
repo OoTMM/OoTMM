@@ -1,7 +1,7 @@
 import type { Expr } from './types';
 import { AGE_ADULT, AGE_CHILD, type Age } from '../age';
 import { CONSTRAINT_FLAGS, MM_TIME_SLICES, OOT_TIME } from './data';
-import { Items, SETTINGS, TRICKS, type Item, type ItemID, type Settings, type TrickKey } from '@ootmm/core';
+import { Items, SETTINGS, TRICKS, type ItemID, type ItemName, type Settings, type TrickKey } from '@ootmm/core';
 import { WORLD_FLAGS } from '../world/flags';
 import { PRICE_RANGES } from '../price';
 import { compileExpr } from './compile';
@@ -96,7 +96,7 @@ export function exprAgeString(age: string) {
   }
 }
 
-export function exprHas(item: Item, count: number) {
+export function exprHas(item: ItemID, count: number) {
   if (count <= 0) {
     return EXPR_TRUE;
   }
@@ -104,11 +104,11 @@ export function exprHas(item: Item, count: number) {
   return compileExpr({ type: 'item', item, count });
 }
 
-export function exprRenewable(item: Item) {
+export function exprRenewable(item: ItemID) {
   return compileExpr({ type: 'renewable', item });
 }
 
-export function exprLicense(item: Item) {
+export function exprLicense(item: ItemID) {
   return compileExpr({ type: 'license', item });
 }
 
@@ -269,10 +269,10 @@ export function exprSongEventMm(songId: number, cmp: number) {
 }
 
 export function exprFish(ageAndType: string, minPounds: number, maxPounds: number) {
-  const items: Item[] = [];
+  const items: ItemID[] = [];
 
   for (let i = minPounds; i <= maxPounds; i++) {
-    const key = `OOT_FISHING_POND_${ageAndType}_${i}LBS` as ItemID;
+    const key = `OOT_FISHING_POND_${ageAndType}_${i}LBS` as ItemName;
     const item = Items[key];
     items.push(item);
   }

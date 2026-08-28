@@ -1,10 +1,10 @@
-import type { Item } from '@ootmm/core';
+import type { ItemID } from '@ootmm/core';
 import { Items } from '@ootmm/core';
 
 export type ItemSharedDef = {
-  shared: Item,
-  oot: Item,
-  mm: Item,
+  shared: ItemID,
+  oot: ItemID,
+  mm: ItemID,
 };
 
 const SOULS_ENEMY: ItemSharedDef[] = [

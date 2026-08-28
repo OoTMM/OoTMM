@@ -5,7 +5,7 @@ import type { World } from '../world';
 import type { ItemProperties } from '../item-properties';
 import type { PathfinderState } from '../pathfind';
 
-import { Monitor, Random, shuffle, ItemHelpers } from '@ootmm/core';
+import { Monitor, Random, shuffle, ItemHelpers, Item } from '@ootmm/core';
 import { cloneWorld } from '../world';
 import { isLocationRenewable, makeLocation, locationData } from '../locations';
 import { ANALYSIS_EVENTS } from './events';
@@ -169,7 +169,7 @@ class LogicPassAnalysis {
     for (const loc of this.locations) {
       const item = this.state.items.get(loc)!;
       if (this.state.itemProperties.important.has(item.item) && !pathfinderState.locations.has(loc)) {
-        this.state.monitor.debug(`Analysis - makeUnreachable: ${item.item.id}@${item.player}`);
+        this.state.monitor.debug(`Analysis - makeUnreachable: ${Item.name(item.item)}@${item.player}`);
         this.unreachableLocs.add(loc);
       }
     }

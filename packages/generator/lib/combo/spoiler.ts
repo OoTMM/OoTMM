@@ -5,7 +5,7 @@ import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
-import { itemName } from './names';
+import { itemNiceName } from './names';
 import { regionName } from './regions';
 import { LogWriter } from './util/log-writer';
 
@@ -152,7 +152,7 @@ class SpoilerWriter {
       if (this.isMulti) this.writer.indent(`Player ${playerId + 1}`);
       const items = new Map(Array.from(startingItems.entries()).filter(([x, _]) => x.player === playerId));
       for (const [item, count] of items) {
-        this.writer.write(`${itemName(item.item.id)}: ${count}`);
+        this.writer.write(`${itemNiceName(item.item)}: ${count}`);
       }
       if (this.isMulti) this.writer.unindent('');
     }
@@ -285,7 +285,7 @@ class SpoilerWriter {
 
           for (const [loc, pi] of plandoLocations) {
             const locD = locationData(loc);
-            this.writer.write(`${locD.id}: ${itemName(pi.item.id)}`);
+            this.writer.write(`${locD.id}: ${itemNiceName(pi.item)}`);
           }
           this.writer.unindent('');
         }
@@ -527,9 +527,9 @@ class SpoilerWriter {
 
   private itemName(item: PlayerItem) {
     if (this.isMulti && item.player !== 'all') {
-      return `${this.strPad("Player", item.player + 1)} ${itemName(item.item.id)}`;
+      return `${this.strPad("Player", item.player + 1)} ${itemNiceName(item.item)}`;
     } else {
-      return itemName(item.item.id);
+      return itemNiceName(item.item);
     }
   }
 
@@ -539,7 +539,7 @@ class SpoilerWriter {
 
     let str = this.itemName(pi);
     if (cloakItem) {
-      str += ` (cloaked as ${itemName(cloakItem.id)})`;
+      str += ` (cloaked as ${itemNiceName(cloakItem)})`;
     }
     return str;
   }

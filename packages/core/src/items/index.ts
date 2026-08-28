@@ -1,15 +1,15 @@
-import type { Item } from './defs';
-import { Items } from './defs';
+import type { ItemID } from './defs';
+import { Item, Items } from './defs';
 
-export { Items } from './defs';
+export { Item, Items } from './defs';
 export { makePlayerItem } from './util';
 export * as ItemGroups from './groups';
 export * as ItemHelpers from './helpers';
 
-export type { Item, ItemID } from './defs';
+export type { ItemID, ItemName } from './defs';
 export type { PlayerItems, PlayerItem, ItemsCount } from './util';
 
-export function itemByID(id: string): Item {
+export function itemByID(id: string): ItemID {
   /* HARDCODED */
   if (['OOT_FLEXIBLE', 'OOT_RANDOM'].includes(id)) {
     id = 'OOT_RUPEE_GREEN';

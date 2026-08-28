@@ -1,4 +1,4 @@
-import type { Settings, ItemID, Item, PlayerItem, PlayerItems, CheckType } from '@ootmm/core';
+import type { Settings, ItemName, ItemID, PlayerItem, PlayerItems, CheckType } from '@ootmm/core';
 import type { Location } from '../types';
 import type { ItemProperties } from '../item-properties';
 import type { ItemSharedDef } from '../data';
@@ -11,7 +11,7 @@ import { mustStartWithMasterSword } from '../helpers';
 import { exprTrue } from '../expr';
 import { isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from '../locations';
 
-const SONG_NOTES = new Map<Item, [Item, number]>([
+const SONG_NOTES = new Map<ItemID, [ItemID, number]>([
   [Items.OOT_SONG_EPONA, [Items.OOT_SONG_NOTE_EPONA, 6]],
   [Items.OOT_SONG_SARIA, [Items.OOT_SONG_NOTE_SARIA, 6]],
   [Items.OOT_SONG_STORMS, [Items.OOT_SONG_NOTE_STORMS, 6]],
@@ -452,7 +452,7 @@ class LogicPassWorldTransform {
     this.locsByItem.delete(from);
   }
 
-  private replaceItem(from: Item, to: Item) {
+  private replaceItem(from: ItemID, to: ItemID) {
     for (let i = 0; i < this.state.worlds.length; ++i) {
       this.replacePlayerItem(makePlayerItem(from, i), makePlayerItem(to, i));
     }
@@ -471,13 +471,13 @@ class LogicPassWorldTransform {
     }
   }
 
-  private removeItem(item: Item, amount?: number) {
+  private removeItem(item: ItemID, amount?: number) {
     for (let i = 0; i < this.state.worlds.length; ++i) {
       this.removePlayerItem(makePlayerItem(item, i), amount);
     }
   }
 
-  private removeItems(items: Set<Item>, amount?: number) {
+  private removeItems(items: Set<ItemID>, amount?: number) {
     for (const item of items) {
       this.removeItem(item, amount);
     }
@@ -491,23 +491,23 @@ class LogicPassWorldTransform {
     this.pool.set(item, count + amount);
   }
 
-  private addItem(item: Item, amount?: number) {
+  private addItem(item: ItemID, amount?: number) {
     for (let i = 0; i < this.state.worlds.length; ++i) {
       this.addPlayerItem(makePlayerItem(item, i), amount);
     }
   }
 
-  private addItemGlobal(item: Item, amount?: number) {
+  private addItemGlobal(item: ItemID, amount?: number) {
     this.addPlayerItem(makePlayerItem(item, 'all'), amount);
   }
 
-  private addItems(items: Iterable<Item>, amount?: number) {
+  private addItems(items: Iterable<ItemID>, amount?: number) {
     for (const item of items) {
       this.addItem(item, amount);
     }
   }
 
-  private addItemsGlobal(items: Iterable<Item>, amount?: number) {
+  private addItemsGlobal(items: Iterable<ItemID>, amount?: number) {
     for (const item of items) {
       this.addItemGlobal(item, amount);
     }
@@ -694,7 +694,7 @@ class LogicPassWorldTransform {
 
     const addTraps = (this.state.settings.trapsLink ? this.addItemsGlobal : this.addItems).bind(this);
 
-    let extraTraps: Item[] = [];
+    let extraTraps: ItemID[] = [];
 
     if (this.state.settings.trapIce) extraTraps.push(Items.OOT_TRAP_ICE);
     if (this.state.settings.trapFire) extraTraps.push(Items.OOT_TRAP_FIRE);
@@ -1399,7 +1399,7 @@ class LogicPassWorldTransform {
     }
   }
 
-  private randomizeGroup(group: Set<Item>) {
+  private randomizeGroup(group: Set<ItemID>) {
     for (let i = 0; i < this.state.worlds.length; ++i) {
       let count = 0;
       for (const item of group) {
@@ -1418,7 +1418,7 @@ class LogicPassWorldTransform {
     }
   }
 
-  private keyRing(worldId: number, key: Item, keyRing: Item) {
+  private keyRing(worldId: number, key: ItemID, keyRing: ItemID) {
     const playerKey = makePlayerItem(key, worldId);
     const playerKeyRing = makePlayerItem(keyRing, worldId);
     const count = this.pool.get(playerKey) || 0;
@@ -2075,7 +2075,7 @@ class LogicPassWorldTransform {
 
             const lbs = Math.floor((weight * weight * 0.0036) + 0.5);
 
-            const itemKey = `${type}_${lbs}LBS` as ItemID; // maybe needs validation?
+            const itemKey = `${type}_${lbs}LBS` as ItemName; // maybe needs validation?
             const item = itemByID(itemKey);
             const pi = makePlayerItem(item, i);
             this.addPlayerItem(pi);

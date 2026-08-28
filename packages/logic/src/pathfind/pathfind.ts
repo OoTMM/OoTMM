@@ -1,4 +1,4 @@
-import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
+import type { Settings, ItemID, ItemsCount, PlayerItems } from '@ootmm/core';
 import type { ItemPlacement, Location } from '../types';
 import type { World } from '../world';
 import type { Expr, AreaData, ExprDependencies, ExprResult } from '../expr';
@@ -42,7 +42,7 @@ type PathfinderDependencyList = {
 type PathfinderDependencySet<T> = Map<T, Map<string, PathfinderDependencyList>>;
 
 type PathfinderDependencies = {
-  items: PathfinderDependencySet<Item>;
+  items: PathfinderDependencySet<ItemID>;
   events: PathfinderDependencySet<string>;
 };
 
@@ -435,7 +435,7 @@ export class Pathfinder {
     this.addDependencies(type, deps.events, id, area, result.deps.events);
   }
 
-  private requeueItem(worldId: number, item: Item) {
+  private requeueItem(worldId: number, item: ItemID) {
     const ws = this.state.ws[worldId];
     for (const age of AGES) {
       const as = ws.ages[age];

@@ -3,7 +3,7 @@ import type { Settings, ItemsCount } from '@ootmm/core';
 import { makeRandomSettings, makeCosmetics, Monitor, ItemHelpers, makePlayerItem } from '@ootmm/core';
 import { worldState } from '@ootmm/logic';
 
-import { itemName } from './names';
+import { itemNiceName } from './names';
 
 export type Items = {[k: string]: number};
 
@@ -31,7 +31,7 @@ export async function itemPool(settings: Settings): Promise<Items> {
 
   /* Sort items */
   const items: ItemsCount = new Map;
-  const sortedItems = [...pool.keys()].sort((a, b) => itemName(a.item.id).localeCompare(itemName(b.item.id)));
+  const sortedItems = [...pool.keys()].sort((a, b) => itemNiceName(a.item).localeCompare(itemNiceName(b.item)));
   for (const item of sortedItems) {
     items.set(item.item, pool.get(item)!);
   }
@@ -39,7 +39,7 @@ export async function itemPool(settings: Settings): Promise<Items> {
   /* Make the item pool */
   const itemPool: Items = {};
   for (const [item, count] of items) {
-    itemPool[item.id] = count;
+    itemPool[item] = count;
   }
   return itemPool;
 }

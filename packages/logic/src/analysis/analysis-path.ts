@@ -1,4 +1,4 @@
-import type { Settings, Item, PlayerItems } from '@ootmm/core';
+import type { Settings, ItemID, PlayerItems } from '@ootmm/core';
 import type { Location, ItemPlacement } from '../types';
 import type { World } from '../world';
 import type { ItemProperties } from '../item-properties';
@@ -11,7 +11,7 @@ import { cloneWorld } from '../world';
 import { Pathfinder } from '../pathfind';
 import { AGE_ADULT, AGE_CHILD } from '../age';
 
-const TRIFORCE3_ITEMS: { [key in Triforce3Type]: Item } = {
+const TRIFORCE3_ITEMS: { [key in Triforce3Type]: ItemID } = {
   Power: Items.SHARED_TRIFORCE_POWER,
   Courage: Items.SHARED_TRIFORCE_COURAGE,
   Wisdom: Items.SHARED_TRIFORCE_WISDOM,

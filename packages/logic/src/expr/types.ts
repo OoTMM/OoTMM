@@ -1,4 +1,4 @@
-import type { Item, ItemsCount, Settings } from '@ootmm/core';
+import type { ItemID, ItemsCount, Settings } from '@ootmm/core';
 import type { Age } from '../age';
 
 type ExprNodeTrue = { readonly type: 'true' };
@@ -6,9 +6,9 @@ type ExprNodeFalse = { readonly type: 'false' };
 type ExprNodeOr = { readonly type: 'or'; readonly exprs: Expr[] };
 type ExprNodeAnd = { readonly type: 'and'; readonly exprs: Expr[] };
 type ExprNodeAge = { readonly type: 'age'; readonly age: Age };
-type ExprNodeItem = { readonly type: 'item'; readonly item: Item; readonly count: number };
-type ExprNodeRenewable = { readonly type: 'renewable'; readonly item: Item };
-type ExprNodeLicense = { readonly type: 'license', readonly item: Item };
+type ExprNodeItem = { readonly type: 'item'; readonly item: ItemID; readonly count: number };
+type ExprNodeRenewable = { readonly type: 'renewable'; readonly item: ItemID };
+type ExprNodeLicense = { readonly type: 'license', readonly item: ItemID };
 type ExprNodeEvent = { readonly type: 'event'; readonly event: string };
 type ExprNodeMasks = { readonly type: 'masks'; readonly count: number };
 type ExprNodeSpecial = { readonly type: 'special'; readonly specialId: string };
@@ -61,7 +61,7 @@ export type ExprState = {
 };
 
 export type ExprDependencies = {
-  items: Item[];
+  items: ItemID[];
   events: string[];
 }
 
