@@ -410,7 +410,7 @@ class LogicPassSolver {
 
         for (;;) {
           /* Pathfind */
-          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { inPlace: true, recursive: true, items: this.state.items });
+          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.state.items });
 
           let goal = true;
           if (this.input.settings.logic === 'allLocations') {
@@ -568,7 +568,7 @@ class LogicPassSolver {
     let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items });
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items });
       if (!pathfinderState.newLocations.size) {
         break;
       }

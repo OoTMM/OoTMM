@@ -100,7 +100,7 @@ class LogicPassAnalysisFoolish {
       locations.delete(loc);
       forbidden.delete(loc);
       allowed.add(loc);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true, includeForbiddenReachable: true });
+      pathfinderState = this.pathfinder.run(pathfinderState, { recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true, includeForbiddenReachable: true });
       if (pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);

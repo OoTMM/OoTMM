@@ -177,7 +177,6 @@ const cloneAreaData = (a: AreaData): AreaData => ({
   flagsOff: a.flagsOff,
 });
 
-export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
 type PathfinderOptions = {
   assumedItems?: PlayerItems;
   items?: ItemPlacement;
@@ -187,7 +186,6 @@ type PathfinderOptions = {
   forbiddenLocations?: Set<Location>;
   includeForbiddenReachable?: boolean;
   gossips?: boolean;
-  inPlace?: boolean;
   singleWorld?: number;
 };
 
@@ -204,7 +202,7 @@ export class Pathfinder {
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
-    this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds.length);
+    this.state = state ?? defaultState(this.startingItems, this.worlds.length);
 
     /* Restricted locations */
     if (this.opts.restrictedLocations) {

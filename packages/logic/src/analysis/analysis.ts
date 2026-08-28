@@ -81,7 +81,7 @@ class LogicPassAnalysis {
 
     do {
       this.progress(count++, 10);
-      pathfinderState = pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true });
+      pathfinderState = pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true });
       const sphere: SphereEntry[] = [];
       const locs = Array.from(pathfinderState.newLocations).filter(x => this.state.itemProperties.important.has(this.state.items.get(x)!.item));
       for (const loc of locs) {
