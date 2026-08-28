@@ -1041,7 +1041,7 @@ class LogicPassSolver {
 
       for (;;) {
         if (!candidates.length) {
-          throw new LogicSeedError(`No valid candidates for ${reward.item}`);
+          throw new LogicSeedError(`No valid candidates for ${Item.name(reward.item)}`);
         }
         const c = candidates.pop()!;
         const { player, dungeon } = c;
