@@ -91,6 +91,17 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
     /* Update Dpad */
     Dpad_Update(play);
 
+    if (play->pauseCtx.pageIndex == PAUSE_MASK)
+    {
+        u16 slot = play->pauseCtx.cursorSlot[PAUSE_MASK];
+        if (slot >= MASK_NUM_SLOTS || gSave.info.inventory.items[ITEM_NUM_SLOTS + slot] == ITEM_NONE)
+        {
+            play->pauseCtx.cursorItem[PAUSE_MASK] = 999;
+            if (play->pauseCtx.nameSegment)
+                bzero(play->pauseCtx.nameSegment, 0x400);
+        }
+    }
+
     cursorSlot = play->pauseCtx.cursorSlot[play->pauseCtx.pageIndex];
     cursorSlot = comboResolvePauseSlot(play, cursorSlot);
     press = !!(play->state.input[0].press.button & (L_TRIG | U_CBUTTONS));
