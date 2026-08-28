@@ -176,7 +176,6 @@ const cloneAreaData = (a: AreaData): AreaData => ({
   flagsOff: a.flagsOff,
 });
 
-export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
 type PathfinderOptions = {
   assumedItems?: PlayerItems;
   items?: ItemPlacement;
