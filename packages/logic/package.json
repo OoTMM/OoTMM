@@ -2,6 +2,7 @@
   "name": "@ootmm/logic",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest run",

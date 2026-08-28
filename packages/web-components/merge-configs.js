@@ -1,5 +1,5 @@
-const fs = require('node:fs').promises;
-const path = require('node:path');
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 async function build() {
   const versionFiles = await fs.readdir('tmp/configs');
@@ -10,7 +10,7 @@ async function build() {
     config[versionName] = versionConfig;
   }
 
-  await fs.writeFile(path.resolve(__dirname, 'tmp/tree/config.json'), JSON.stringify(config));
+  await fs.writeFile(path.resolve(import.meta.dirname, 'tmp/tree/config.json'), JSON.stringify(config));
 }
 
 build().catch(err => {

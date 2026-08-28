@@ -188,7 +188,7 @@ function makeRooms() {
 
   const fileBuffer = Buffer.concat([globalHeader, headerBuffer, ...buffers]);
 
-  fs.writeFileSync(__dirname + '/../data/static/mq_rooms.bin', fileBuffer);
+  fs.writeFileSync(import.meta.dirname + '/../data/static/mq_rooms.bin', fileBuffer);
 }
 
 function makeScenes() {
@@ -389,7 +389,7 @@ function makeScenes() {
 
   const fileBuffer = Buffer.concat([globalHeader, headerBuffer, ...buffers]);
 
-  fs.writeFileSync(__dirname + '/../data/static/mq_scenes.bin', fileBuffer);
+  fs.writeFileSync(import.meta.dirname + '/../data/static/mq_scenes.bin', fileBuffer);
 }
 
 function makeMaps() {
@@ -408,7 +408,7 @@ function makeMaps() {
   mapData.writeFloatBE(46.5, chestRecordAddr + 0x04);
   mapData.writeFloatBE(-17.5, chestRecordAddr + 0x08);
 
-  fs.writeFileSync(__dirname + '/../data/static/mq_maps.bin', mapData);
+  fs.writeFileSync(import.meta.dirname + '/../data/static/mq_maps.bin', mapData);
 }
 
 makeRooms();

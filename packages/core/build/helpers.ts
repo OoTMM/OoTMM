@@ -3,9 +3,9 @@ import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import * as CSV from 'csv/sync';
 
-export const ROOT_DIR = path.resolve(__dirname, '..', '..', '..');
+export const ROOT_DIR = path.resolve(import.meta.dirname, '..', '..', '..');
 export const DATA_DIR = path.join(ROOT_DIR, 'data');
-export const DIST_DIR = path.resolve(__dirname, '..', 'dist');
+export const DIST_DIR = path.resolve(import.meta.dirname, '..', 'dist');
 
 export function emit(filename: string, data: any) {
   mkdirSync(DIST_DIR, { recursive: true });

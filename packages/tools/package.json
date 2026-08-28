@@ -2,6 +2,7 @@
   "name": "@ootmm/tools",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "cmake -B build && cmake --build build && cmake --install build --prefix bin"

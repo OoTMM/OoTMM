@@ -719,7 +719,7 @@ function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
 async function codegenHeader(addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
   const byteCountOot = Math.floor((addrTableOotMq.bitCount + 7) / 8);
   const byteCountMm = Math.floor((addrTableMm.bitCount + 7) / 8);
-  const cg = new CodeGen(__dirname + '/../include/combo/xflags_data.h', 'XFLAGS_DATA');
+  const cg = new CodeGen(import.meta.dirname + '/../include/combo/xflags_data.h', 'XFLAGS_DATA');
   cg.define('XFLAGS_COUNT_OOT', byteCountOot);
   cg.define('XFLAGS_COUNT_MM', byteCountMm);
   return cg.emit();
@@ -1018,7 +1018,7 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
 }
 
 async function writeAddressingTable(game: Game, addressingTable: AddressingTable) {
-  const base = `${__dirname}/../data/static`;
+  const base = `${import.meta.dirname}/../data/static`;
   const scenesTableFilename = `${base}/xflag_table_${game}_scenes.bin`;
   const setupsTableFilename = `${base}/xflag_table_${game}_setups.bin`;
   const roomsTableFilename = `${base}/xflag_table_${game}_rooms.bin`;
@@ -1652,12 +1652,12 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filt
 
 async function build() {
   /* Get OoT ROM */
-  const ootRomCompressed = await fs.readFile(__dirname + '/../../../roms/oot.z64');
+  const ootRomCompressed = await fs.readFile(import.meta.dirname + '/../../../roms/oot.z64');
   const ootDecompressed = await decompressGame('oot', ootRomCompressed);
   const ootRom = Buffer.from(ootDecompressed.rom);
 
   /* Get MM ROM */
-  const mmRomCompressed = await fs.readFile(__dirname + '/../../../roms/mm.z64');
+  const mmRomCompressed = await fs.readFile(import.meta.dirname + '/../../../roms/mm.z64');
   const mmDecompressed = await decompressGame('mm', mmRomCompressed);
   const mmRom = Buffer.from(mmDecompressed.rom);
 
@@ -1665,7 +1665,7 @@ async function build() {
   const mmRooms = getGameRoomActor(mmRom, 'mm');
 
   /* Get MQ ROM */
-  const mqRom = await fs.readFile(__dirname + '/../../../roms/mq.z64');
+  const mqRom = await fs.readFile(import.meta.dirname + '/../../../roms/mq.z64');
 
   /* Get OoT Rooms */
   const ootRooms = getGameRoomActor(ootRom, 'oot');

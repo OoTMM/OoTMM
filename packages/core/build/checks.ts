@@ -13,6 +13,7 @@ function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number, value: numbe
   return (((ov & 0x7f) << 24) | ((sceneId & 0xff) << 16) | (value & 0xffff) | gameMask) >>> 0;
 }
 
+
 function sceneLookup(scene: string, state: BuildChecksState): number {
   const id = state.scenes[scene];
   if (id === undefined) {
@@ -134,7 +135,7 @@ export async function extractEntries(filepath: string, state: BuildChecksState) 
 
 export async function buildChecks(state: BuildChecksState): Promise<any> {
   /* Detect XML files */
-  const inputDir = path.resolve(__dirname, '../../../data/checks');
+  const inputDir = path.resolve(import.meta.dirname, '../../../data/checks');
   const filepaths: string[] = [];
   for await (const entry of fs.glob('**/*.xml', { cwd: inputDir })) {
     filepaths.push(entry);

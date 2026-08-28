@@ -2,6 +2,7 @@
   "name": "@ootmm/desktop",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "scripts": {
     "build": "neu update && ./build.sh && neu build --release && node ./scripts/split-zips.mjs"
   },

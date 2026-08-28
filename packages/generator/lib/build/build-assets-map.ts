@@ -1,12 +1,12 @@
 import type { Game } from '@ootmm/core';
 
 import { XMLParser } from 'fast-xml-parser';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 
 import { CodeGen } from '../combo/util/codegen';
 
-const DIR_OUT_BUILD = path.resolve(__dirname, '../../build');
+const DIR_OUT_BUILD = path.resolve(import.meta.dirname, '../../build');
 const DIR_OUT_INCLUDES = path.resolve(path.join(DIR_OUT_BUILD, 'include/assets'));
 
 function ensureArray<T>(value: T | T[]): T[] {
@@ -73,7 +73,7 @@ async function buildAssetsMapLinkScript(game: Game, addrMap: AddrMap) {
 
 async function buildAssetsMap(game: Game) {
   const addrMap: AddrMap = new Map();
-  const srcDir = path.resolve(__dirname, `../../data/setup/${game}`);
+  const srcDir = path.resolve(import.meta.dirname, `../../data/setup/${game}`);
   const dirs = await fs.readdir(srcDir);
   await Promise.all(dirs.map(async (dir) => {
     const ddir = path.join(srcDir, dir);

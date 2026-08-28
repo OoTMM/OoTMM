@@ -36,9 +36,9 @@ export async function buildNative() {
   const cmakeBuildType = isProd ? 'Release' : 'Debug';
 
   /* Resolve paths */
-  const installDir = path.resolve(__dirname, '..', 'build');
+  const installDir = path.resolve(import.meta.dirname, '..', 'build');
   const buildDir = path.resolve(installDir, 'tree', cmakeBuildType);
-  const sourceDir = path.resolve(__dirname, '..');
+  const sourceDir = path.resolve(import.meta.dirname, '..');
   const binDir = path.resolve(installDir, 'bin');
   const ovlDir = path.resolve(binDir, 'ovl');
 

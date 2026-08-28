@@ -83,7 +83,7 @@ export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | '
   if (process.env.__IS_BROWSER__) {
     return new FileResolver().fetch(`${filename}.bin`);
   } else {
-    const data = await fs.promises.readFile(__dirname + '/../../../data/assets/' + filename + '.png').then((d) => new Uint8Array(d.buffer, d.byteOffset, d.byteLength));
+    const data = await fs.promises.readFile(import.meta.dirname + '/../../../data/assets/' + filename + '.png').then((d) => new Uint8Array(d.buffer, d.byteOffset, d.byteLength));
     let pngBuffer: Uint8Array;
     switch (mode) {
     case 'rgba32':
@@ -108,7 +108,7 @@ export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | '
       break;
     }
 
-    const outPath = path.resolve(__dirname, '../../../build/assets', filename + '.bin');
+    const outPath = path.resolve(import.meta.dirname, '../../../build/assets', filename + '.bin');
     await fs.promises.mkdir(path.dirname(outPath), { recursive: true });
     await fs.promises.writeFile(outPath, pngBuffer);
     return pngBuffer;

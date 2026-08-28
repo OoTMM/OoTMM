@@ -2,6 +2,7 @@
   "name": "@ootmm/core",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsx ./build/index.ts",
