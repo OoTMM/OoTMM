@@ -4,7 +4,6 @@ import type { World } from '../world';
 import type { Expr, AreaData, ExprDependencies, ExprResult } from '../expr';
 import type { Age } from '../age';
 
-import { cloneDeep } from 'lodash-es';
 import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
 import { MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '../expr';
 import { AGE_ADULT, AGE_CHILD, AGES } from '../age';
@@ -187,7 +186,6 @@ type PathfinderOptions = {
   forbiddenLocations?: Set<Location>;
   includeForbiddenReachable?: boolean;
   gossips?: boolean;
-  inPlace?: boolean;
   singleWorld?: number;
 };
 
@@ -204,7 +202,7 @@ export class Pathfinder {
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
-    this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds.length);
+    this.state = state ?? defaultState(this.startingItems, this.worlds.length);
 
     /* Restricted locations */
     if (this.opts.restrictedLocations) {
