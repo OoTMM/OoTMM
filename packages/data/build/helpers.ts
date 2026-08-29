@@ -1,0 +1,37 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { parse as parseYaml } from 'yaml';
+
+export const ROOT_DIR = path.resolve(import.meta.dirname, '..', '..', '..');
+export const DATA_DIR = path.join(ROOT_DIR, 'data');
+export const DIST_DIR = path.resolve(import.meta.dirname, '..', 'dist');
+
+export async function emit(filename: string, data: any) {
+  await fs.mkdir(DIST_DIR, { recursive: true });
+  await fs.writeFile(path.join(DIST_DIR, `${filename}.json`), JSON.stringify(data));
+}
+
+export async function loadYaml(patterns: string | string[]): Promise<any> {
+  patterns = Array.isArray(patterns) ? patterns : [patterns];
+  let data: any = null;
+
+  for (const p of patterns) {
+    const match = fs.glob(p, { cwd: DATA_DIR });
+    for await (const name of match) {
+      const filename = path.join(DATA_DIR, name);
+      const file = await fs.readFile(filename, 'utf8');
+      const parsed = parseYaml(file);
+
+      if (data === null) {
+        data = parsed;
+      } else if (Array.isArray(data) && Array.isArray(parsed)) {
+        data.push(...parsed);
+      } else if (typeof data === 'object' && typeof parsed === 'object') {
+        data = { ...data, ...parsed };
+      } else {
+        throw new Error(`Incompatible YAML structures in files: existing type ${typeof data}, new type ${typeof parsed}`);
+      }
+    }
+  }
+  return data;
+}

@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
-import { gameId } from '../src/util';
+import { gameId } from '../lib';
+import { DATA_DIR } from './helpers';
 
 type BuildChecksState = {
   scenes: any;
@@ -133,9 +134,9 @@ export async function extractEntries(filepath: string, state: BuildChecksState) 
   return entries;
 }
 
-export async function buildChecks(state: BuildChecksState): Promise<any> {
+export async function parseChecks(state: BuildChecksState): Promise<any> {
   /* Detect XML files */
-  const inputDir = path.resolve(import.meta.dirname, '../../../data/checks');
+  const inputDir = path.join(DATA_DIR, 'checks');
   const filepaths: string[] = [];
   for await (const entry of fs.glob('**/*.xml', { cwd: inputDir })) {
     filepaths.push(entry);

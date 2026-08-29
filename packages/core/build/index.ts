@@ -3,7 +3,7 @@ import type { GossipDefinition } from '../src/gossips';
 import { gameId } from '../src/util';
 import { GAMES } from '../src/defines';
 import { loadCsv, loadTxt, loadYaml, emit } from './helpers';
-import { buildChecks } from './checks';
+import { buildChecks } from '../../data/build/checks';
 
 const DATA_WORLD = {
   oot: {

@@ -1,0 +1,42 @@
+{
+  "name": "@ootmm/data",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "lib/index.ts",
+  "exports": {
+    ".": "./lib/index.ts",
+    "./build": "./build/index.ts"
+  },
+  "scripts": {
+    "build": "tsx ./build/run.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash-es": "catalog:"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "catalog:",
+    "csv": "^6.5.1",
+    "type-fest": "catalog:",
+    "yaml": "catalog:",
+    "fast-xml-parser": "catalog:"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{workspaceRoot}/data/**/*",
+          "{projectRoot}/build/**/*",
+          "{projectRoot}/src/**/*"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ]
+      }
+    }
+  }
+}
