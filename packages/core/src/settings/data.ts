@@ -238,7 +238,6 @@ export const SETTINGS = [{
   description: 'Controls how Swamp and Ocean Skulltulas will be shuffled',
   values: [
     { value: 'none', name: 'No Shuffle', description: 'Swamp and Ocean Tokens will be vanilla' },
-    { value: 'cross', name: 'Gold Skulltulas Only', description: 'Any unshuffled Token can be found on any other unshuffled Skulltula', cond: hasOoTMM },
     { value: 'all', name: 'All Tokens', description: 'Swamp and Ocean Tokens can be found anywhere' },
   ],
   cond: hasMM,

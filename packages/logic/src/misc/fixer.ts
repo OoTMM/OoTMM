@@ -141,18 +141,16 @@ class LogicPassFixer {
       return true;
     }
 
-    if (this.state.settings.housesSkulltulaTokens !== 'cross') {
-      if (ItemHelpers.isGoldToken(item)) {
-        switch (this.state.settings.goldSkulltulaTokens) {
-        case 'none': return true;
-        case 'overworld': return this.dungeonLocations.has(loc);
-        case 'dungeons': return !this.dungeonLocations.has(loc);
-        }
+    if (ItemHelpers.isGoldToken(item)) {
+      switch (this.state.settings.goldSkulltulaTokens) {
+      case 'none': return true;
+      case 'overworld': return this.dungeonLocations.has(loc);
+      case 'dungeons': return !this.dungeonLocations.has(loc);
       }
+    }
 
-      if (ItemHelpers.isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
-        return true;
-      }
+    if (ItemHelpers.isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
+      return true;
     }
 
     return false;

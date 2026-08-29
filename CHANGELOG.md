@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Remove the mostly-unused 'cross' tokens setting.
 - Changed Starting Age to Starting Age OoT to differentiate from the new Starting Age MM setting.
 - Remove "Swordless Adult" as a setting - it's now always enabled.
 - When going back to spawn, players can now explicitly select which spawn point to get back to from the non-starting age.

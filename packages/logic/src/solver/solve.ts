@@ -377,9 +377,6 @@ class LogicPassSolver {
     /* Fix vanilla items */
     this.fixItems();
 
-    /* KLUDGE: Fix the cross tokens */
-    this.fixCrossTokens();
-
     /* Place dungeon rewards (when set to dungeon locs) */
     if (['dungeons', 'dungeonsLimited'].includes(this.input.settings.dungeonRewardShuffle)) {
       this.retry(() => {
@@ -503,61 +500,6 @@ class LogicPassSolver {
         continue;
       for (let i = 0; i < count; ++i) {
         removeItemPools(this.state.pools, pi);
-      }
-    }
-  }
-
-  private goldTokenLocations() {
-    const locations = new Set<Location>();
-    const setting = this.input.settings.goldSkulltulaTokens;
-    const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
-    const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const world = this.worlds[worldId];
-      const skullLocations = world.locations.values().filter(x => ItemHelpers.isGoldToken(world.checkItems.get(x)!));
-      const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
-
-      for (const location of skullLocations) {
-        const isDungeon = dungeonLocations.has(location);
-        if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
-          locations.add(makeLocation(location, worldId));
-        }
-      }
-    }
-
-    return locations;
-  }
-
-  private houseTokenLocations() {
-    const locations = new Set<Location>();
-    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const world = this.worlds[worldId];
-      for (const location of world.locations) {
-        const item = world.checkItems.get(location)!;
-        if (ItemHelpers.isHouseToken(item)) {
-          locations.add(makeLocation(location, worldId));
-        }
-      }
-    }
-    return locations;
-  }
-
-  private fixCrossTokens() {
-    if (this.input.settings.housesSkulltulaTokens !== 'cross') {
-      return;
-    }
-
-    const gs = this.goldTokenLocations();
-    const house = this.houseTokenLocations();
-
-    for (let player = 0; player < this.input.settings.players; ++player) {
-      const locations = [...gs, ...house].filter(x => locationData(x).world === player);
-      const world = this.worlds[player];
-      const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checkItems.get(locationData(loc).id)!, player)));
-      for (const location of locations) {
-        const item = pool.pop()!;
-        this.place(location, item);
-        removeItemPools(this.state.pools, item);
       }
     }
   }
