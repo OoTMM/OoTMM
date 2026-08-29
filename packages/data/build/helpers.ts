@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
+import * as CSV from 'csv/sync';
 
 export const ROOT_DIR = path.resolve(import.meta.dirname, '..', '..', '..');
 export const DATA_DIR = path.join(ROOT_DIR, 'data');
@@ -34,4 +35,13 @@ export async function loadYaml(patterns: string | string[]): Promise<any> {
     }
   }
   return data;
+}
+
+export function loadTxt(name: string): Promise<string> {
+  return fs.readFile(path.join(DATA_DIR, name), 'utf8');
+}
+
+export async function loadCsv(name: string): Promise<any[]> {
+  const content = await fs.readFile(path.join(DATA_DIR, name), 'utf8');
+  return CSV.parse(content, { columns: true, skip_empty_lines: true, trim: true });
 }
