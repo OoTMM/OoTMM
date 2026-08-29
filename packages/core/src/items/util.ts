@@ -1,18 +1,22 @@
 import type { Item } from './defs';
 import type { CountMap } from '../util';
 
-import { createMemo } from '../util';
-
 export type PlayerItem = {
-  item: Item;
-  player: number | 'all';
-  __brand: 'PlayerItem';
+  readonly item: Item;
+  readonly player: number | 'all';
+  readonly __brand: unique symbol;
 };
 
-const playerItemMemo = createMemo<PlayerItem>();
+const playerItemMemo = new Map<number, PlayerItem>();
 
 export function makePlayerItem(item: Item, player: number | 'all'): PlayerItem {
-  return playerItemMemo(`${item.id}@${player}`, () => ({ item, player } as PlayerItem));
+  const keyPlayerId = player === 'all' ? 0 : player + 1;
+  const key = item.index | (keyPlayerId << 16);
+  let result = playerItemMemo.get(key);
+  if (result) return result;
+  result = Object.freeze({ item, player }) as PlayerItem;
+  playerItemMemo.set(key, result);
+  return result;
 }
 
 export type ItemsCount = CountMap<Item>;
