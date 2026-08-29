@@ -19,3 +19,4 @@
 /.pnpm-store
 /devcontainer-setup.local.sh
 /.idea
+.bench-runner/

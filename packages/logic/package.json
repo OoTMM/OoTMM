@@ -6,7 +6,9 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "bench": "node --import tsx bench/run.ts",
+    "bench:compare": "node --import tsx bench/compare.ts"
   },
   "keywords": [],
   "author": "",
