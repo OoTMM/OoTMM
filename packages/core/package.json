@@ -5,7 +5,6 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsx ./build/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -23,19 +22,5 @@
     "type-fest": "catalog:",
     "yaml": "catalog:",
     "fast-xml-parser": "catalog:"
-  },
-  "nx": {
-    "targets": {
-      "build": {
-        "inputs": [
-          "{workspaceRoot}/data/**/*",
-          "{projectRoot}/src/**/*",
-          "{projectRoot}/build/**/*"
-        ],
-        "outputs": [
-          "{projectRoot}/dist/**/*"
-        ]
-      }
-    }
   }
 }

@@ -1,6 +1,5 @@
-import type { Game } from '../defines';
-
-import { default as DATA } from '../../dist/data-link-animations.json';
+import { default as DATA } from '../dist/data-link-animations.json';
+import type { Game } from './game';
 
 export type CustomAnimation = {
   name: string;
