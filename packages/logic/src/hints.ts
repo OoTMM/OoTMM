@@ -1,9 +1,11 @@
-import type { Game, Settings, CountMap, PlayerItems, PlayerItem, Region } from '@ootmm/core';
+import type { Game, Settings, CountMap, Region } from '@ootmm/core';
+import type { PlayerItems, PlayerItem } from './items';
 import type { ItemPlacement, Location } from './types';
 import type { Analysis, AnalysisPath } from './analysis';
 import type { World } from './world';
 
-import { Monitor, Random, sample, shuffle, randomInt, countMapArray, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, makeRegion, hintLocations, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle, randomInt, countMapArray, makeRegion, hintLocations, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from './items';
 import { Pathfinder } from './pathfind';
 import { DUNGEONS_REGIONS } from './world';
 import { isLocationFullyShuffled, locationData, makeLocation } from './locations';

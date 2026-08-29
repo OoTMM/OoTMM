@@ -1,13 +1,11 @@
-import type { Settings, PlayerItems, Region, PlayerItem } from '@ootmm/core';
+import type { Settings, Region } from '@ootmm/core';
 import type { Location } from '../types';
 import type { World, WorldArea } from '../world';
-import type { ItemProperties } from '../item-properties'
-import type { Age } from '../age';
+import type { PlayerItem, PlayerItems, ItemProperties } from '../items';
 import type { Expr } from '../expr';
 
 import { Monitor, Random, sample, ENTRANCES } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD } from '../age';
-import { exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from '../expr';
+import { exprAnd, exprEvent, exprOr, exprTrue } from '../expr';
 import { BOSS_INDEX_BY_DUNGEON, cloneWorld, DUNGEONS_REGIONS } from '../world';
 import { BOSS_METADATA_BY_ENTRANCE } from '../data';
 import { Pathfinder } from '../pathfind';

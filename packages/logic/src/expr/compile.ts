@@ -1,6 +1,8 @@
+import type { Settings, CountMap } from '@ootmm/core';
 import type { Expr, ExprDependencies, ExprFunc, ExprNode, ExprRestrictions, ExprResult, ExprState } from './types';
+import type { Item } from '../items';
 
-import { ItemGroups, Items, type CountMap, type Item, type Settings } from '@ootmm/core';
+import { ItemGroups, Items } from '../items';
 import { OOT_TIME_ALL } from './data';
 import { exprMemoKey } from './memo';
 

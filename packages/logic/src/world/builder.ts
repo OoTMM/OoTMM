@@ -1,9 +1,10 @@
-import type { Game, Settings, Item, SongEventSongs } from '@ootmm/core';
+import type { Game, Settings, SongEventSongs } from '@ootmm/core';
 import type { World, WorldArea, ExprMap, ExprParsers } from './types';
 import type { Expr } from '../expr';
 
 import { cloneDeep, mapValues } from 'lodash-es';
-import { MACROS, WORLD, REGIONS, CHECKS, Monitor, GAMES, Random, itemByID, ItemHelpers, Items, gameId, GOSSIPS_BY_LOCATION, SONG_EVENT_SONG_IDS } from '@ootmm/core';
+import { MACROS, WORLD, REGIONS, CHECKS, Monitor, GAMES, Random, gameId, GOSSIPS_BY_LOCATION, SONG_EVENT_SONG_IDS } from '@ootmm/core';
+import { itemByID, ItemHelpers } from '../items';
 import { ExprParser, exprTrue, MM_TIME_SLICES } from '../expr';
 import { defaultPrices } from '../price';
 import { resolveWorldFlags } from './flags';

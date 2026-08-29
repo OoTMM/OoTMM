@@ -1,7 +1,8 @@
-import type { Game, Settings, Item } from '@ootmm/core';
+import type { Game, Settings } from '@ootmm/core';
+import type { Item } from '@ootmm/logic';
 
-import { ItemHelpers, gameId } from '@ootmm/core';
-import { SharedItemGroups } from '@ootmm/logic';
+import { gameId } from '@ootmm/core';
+import { SharedItemGroups, ItemHelpers } from '@ootmm/logic';
 import { ITEMS_SUBSTITUTIONS, SHARED_ITEMS } from './checks';
 import { GI } from '../data';
 

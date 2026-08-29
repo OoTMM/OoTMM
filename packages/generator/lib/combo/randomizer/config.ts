@@ -2,8 +2,8 @@ import type { Game, Settings, Region } from '@ootmm/core';
 import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, Items, regionData, ENTRANCES, REGIONS } from '@ootmm/core';
-import { DUNGEONS, DUNGEON_ENTRANCES, makeLocation } from '@ootmm/logic';
+import { SETTINGS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, regionData, ENTRANCES, REGIONS } from '@ootmm/core';
+import { DUNGEONS, DUNGEON_ENTRANCES, makeLocation, Items } from '@ootmm/logic';
 
 import { toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { bufWriteU16BE, bufWriteU32BE } from '../util/buffer';

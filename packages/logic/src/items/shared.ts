@@ -1,5 +1,5 @@
-import type { Item } from '@ootmm/core';
-import { Items } from '@ootmm/core';
+import type { Item } from '.';
+import { Items } from '.';
 
 export type ItemSharedDef = {
   shared: Item,
@@ -140,6 +140,5 @@ const BOTTLES: ItemSharedDef[] = [
   { shared: Items.SHARED_BUGS, oot: Items.OOT_BUGS, mm: Items.MM_BUGS },
   { shared: Items.SHARED_FISH, oot: Items.OOT_FISH, mm: Items.MM_FISH },
 ]
-
 
 export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES, SHOVEL };

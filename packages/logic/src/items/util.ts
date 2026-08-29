@@ -1,5 +1,5 @@
 import type { Item } from './defs';
-import type { CountMap } from '../util';
+import type { CountMap } from '@ootmm/core/src/util';
 
 export type PlayerItem = {
   readonly item: Item;

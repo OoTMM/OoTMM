@@ -2,7 +2,8 @@ import type { Settings } from '@ootmm/core';
 import type { World } from '../world';
 import type { Location } from '../types';
 
-import { Monitor, ItemHelpers, Items, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { Monitor, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { ItemHelpers, Items } from '../items';
 import { mustStartWithMasterSword } from '../helpers';
 import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_FROGS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, MM_LOTTERY, isLocationChestFairy, isLocationOtherFairy, makeLocation } from '../locations';
 

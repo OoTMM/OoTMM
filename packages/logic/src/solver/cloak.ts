@@ -1,7 +1,9 @@
-import type { Settings, Item, PlayerItem } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { ItemPlacement, Location } from '../types';
+import type { Item, PlayerItem } from '../items';
 
-import { Random, sample, ItemGroups, ItemHelpers } from '@ootmm/core';
+import { Random, sample } from '@ootmm/core';
+import { ItemGroups, ItemHelpers } from '../items';
 import { isLocationFullyShuffled } from '../locations';
 
 type LogicPassCloakState = {

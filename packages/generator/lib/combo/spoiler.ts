@@ -1,5 +1,5 @@
-import type { Options, TrickKey, PlayerItem, Region, SongEventSongs } from '@ootmm/core';
-import type { LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
+import type { Options, TrickKey, Region, SongEventSongs } from '@ootmm/core';
+import type { PlayerItem, LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
 import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';

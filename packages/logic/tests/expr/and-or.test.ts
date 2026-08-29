@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Items } from '@ootmm/core';
+import { Items } from '../../src';
 
 import { exprTrue, exprFalse, exprAnd, exprOr, exprHas, exprOotTime, exprFlagOn, CONSTRAINT_FLAGS } from '../../src';
 import { isDefaultRestrictions } from '../../src/expr/compile';

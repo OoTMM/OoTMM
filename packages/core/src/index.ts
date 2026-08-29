@@ -1,6 +1,5 @@
 export * from './data';
 export * from './defines';
-export * from './items';
 export * from './monitor';
 export * from './random';
 export * from './regions';

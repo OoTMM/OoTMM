@@ -1,8 +1,10 @@
-import type { Settings, PlayerItem } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { PlayerItem } from './items';
 import type { ItemPlacement, Location } from './types';
 import type { ResolvedWorldFlags, World } from './world';
 
-import { CHECKS, CHECKS_BY_LOCATION, ItemHelpers } from '@ootmm/core';
+import { CHECKS, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { ItemHelpers } from './items';
 
 type LocationDescriptor = {
   id: string;

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Items } from '@ootmm/core';
+import { Items } from '../../src';
 
 import { exprHas, exprLicense, exprRenewable } from '../../src';
 import { makeDeps, makeState } from './helpers';

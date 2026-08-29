@@ -1,4 +1,4 @@
-import type { ItemID } from '@ootmm/core';
+import type { ItemID } from '@ootmm/logic';
 
 const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_ARROW_FIRE: "Fire Arrows (MM)",

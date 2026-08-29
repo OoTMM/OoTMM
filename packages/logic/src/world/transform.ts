@@ -1,11 +1,11 @@
-import type { Settings, ItemID, Item, PlayerItem, PlayerItems, CheckType } from '@ootmm/core';
+import type { Settings, CheckType } from '@ootmm/core';
+import type { ItemID, Item, PlayerItem, PlayerItems, ItemSharedDef, ItemProperties } from '../items';
 import type { Location } from '../types';
-import type { ItemProperties } from '../item-properties';
-import type { ItemSharedDef } from '../data';
 import type { World } from './types';
 
-import { CHECKS, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId, CHECKS_BY_LOCATION } from '@ootmm/core';
-import { TRAP_AMOUNTS, SharedItemGroups } from '../data';
+import { CHECKS, Monitor, sample, Random, randomInt, countMapAdd, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { TRAP_AMOUNTS } from '../data';
+import { SharedItemGroups, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
 import { optimizeWorldStartingAndPool } from './optimizer';
 import { mustStartWithMasterSword } from '../helpers';
 import { exprTrue } from '../expr';

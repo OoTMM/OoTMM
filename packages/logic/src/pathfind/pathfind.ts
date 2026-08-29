@@ -1,14 +1,16 @@
-import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { ItemPlacement, Location } from '../types';
 import type { World } from '../world';
 import type { Expr, AreaData, ExprDependencies, ExprResult } from '../expr';
 import type { Age } from '../age';
+import type { Item, ItemsCount, PlayerItems } from '../items';
 
-import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
+import { countMapAdd } from '@ootmm/core';
+import { ItemHelpers, Items } from '../items';
 import { MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '../expr';
 import { AGE_ADULT, AGE_CHILD, AGES } from '../age';
 import { isLocationLicenseGranting, isLocationRenewable, locationData, makeLocation } from '../locations';
-import { ANALYSIS_EVENTS } from '../analysis/events';
+import { ANALYSIS_EVENTS } from '../analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
 

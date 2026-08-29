@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { Items, DEFAULT_SETTINGS, makeSettings } from '@ootmm/core';
+import { DEFAULT_SETTINGS, makeSettings } from '@ootmm/core';
+import { Items, ExprParser } from '../../src';
 
-import { ExprParser } from '../../src/expr/parser';
 import {
   exprTrue, exprFalse, exprAnd, exprOr,
   exprHas, exprEvent, exprAgeString,
@@ -10,7 +10,7 @@ import {
   exprSongEventOot, exprSongEventMm
 } from '../../src/expr/builder';
 import { CONSTRAINT_FLAGS } from '../../src/expr/data';
-import type { ResolvedWorldFlags } from '../../src/world/flags';
+import type { ResolvedWorldFlags } from '../../src/world';
 
 const NO_FLAGS = new Proxy({} as ResolvedWorldFlags, {
   get: () => ({ has: () => false }),

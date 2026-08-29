@@ -5,6 +5,8 @@ export { Items } from './defs';
 export { makePlayerItem } from './util';
 export * as ItemGroups from './groups';
 export * as ItemHelpers from './helpers';
+export * from './properties';
+export * from './shared';
 
 export type { Item, ItemID } from './defs';
 export type { PlayerItems, PlayerItem, ItemsCount } from './util';

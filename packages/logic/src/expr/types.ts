@@ -1,5 +1,6 @@
-import type { Item, ItemsCount, Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { Age } from '../age';
+import type { Item, ItemsCount } from '../items';
 
 type ExprNodeTrue = { readonly type: 'true' };
 type ExprNodeFalse = { readonly type: 'false' };

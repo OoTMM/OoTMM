@@ -1,10 +1,11 @@
-import type { Settings, PlayerItem, PlayerItems, Item } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { World } from '../world';
 import type { Location, ItemPlacement } from '../types';
-import type { ItemProperties } from '../item-properties';
+import type { PlayerItem, PlayerItems, Item, ItemProperties } from '../items';
 import type { PathfinderState } from '../pathfind';
 
-import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove } from '@ootmm/core';
+import { ItemHelpers, ItemGroups, Items, makePlayerItem } from '../items';
 import { cloneWorld } from '../world';
 import { mustStartWithMasterSword } from '../helpers';
 import { LogicError, LogicSeedError } from '../error';
