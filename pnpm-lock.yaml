@@ -81,6 +81,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@ootmm/data':
+        specifier: workspace:*
+        version: link:../data
       lodash-es:
         specifier: 'catalog:'
         version: 4.18.1
@@ -146,6 +149,9 @@ importers:
       '@ootmm/core':
         specifier: workspace:*
         version: link:../core
+      '@ootmm/data':
+        specifier: workspace:*
+        version: link:../data
       '@ootmm/logic':
         specifier: workspace:*
         version: link:../logic

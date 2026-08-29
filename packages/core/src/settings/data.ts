@@ -1,4 +1,4 @@
-import type { Game } from '../defines';
+import type { Game } from '@ootmm/data';
 
 function hasGame(x: any, g: Game) {
   return x.games === g || x.games === 'ootmm';

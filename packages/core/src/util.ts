@@ -1,5 +1,3 @@
-import type { Game } from './defines';
-
 export type CountMap<T> = Map<T, number>;
 
 export function countMapAdd<T>(map: CountMap<T>, key: T, count: number = 1) {

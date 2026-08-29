@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ootmm/data": "workspace:*",
     "@ootmm/core": "workspace:*",
     "@ootmm/logic": "workspace:*",
     "@ootmm/tools": "workspace:*",
