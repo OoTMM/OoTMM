@@ -3,7 +3,7 @@ import type { PlayerItem } from './items';
 import type { ItemPlacement, Location } from './types';
 import type { ResolvedWorldFlags, World } from './world';
 
-import { CHECKS, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { CHECKS, CHECKS_BY_LOCATION } from '@ootmm/data';
 import { ItemHelpers } from './items';
 
 type LocationDescriptor = {

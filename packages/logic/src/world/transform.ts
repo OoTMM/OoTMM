@@ -1,9 +1,11 @@
-import type { Settings, CheckType } from '@ootmm/core';
+import type { CheckType } from '@ootmm/data';
+import type { Settings } from '@ootmm/core';
 import type { ItemID, Item, PlayerItem, PlayerItems, ItemSharedDef, ItemProperties } from '../items';
 import type { Location } from '../types';
 import type { World } from './types';
 
-import { CHECKS, Monitor, sample, Random, randomInt, countMapAdd, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { CHECKS, CHECKS_BY_LOCATION } from '@ootmm/data';
+import { Monitor, sample, Random, randomInt, countMapAdd } from '@ootmm/core';
 import { TRAP_AMOUNTS } from '../data';
 import { SharedItemGroups, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
 import { optimizeWorldStartingAndPool } from './optimizer';
