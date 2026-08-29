@@ -1,11 +1,13 @@
 import { parseChecks } from './checks';
 import { parseNpcs, parseScenes } from './common';
 import { emit } from './helpers';
+import { parseMacros } from './macros';
 
 async function run() {
-  const [scenes, npcs] = await Promise.all([
+  const [scenes, npcs, macros] = await Promise.all([
     parseScenes(),
     parseNpcs(),
+    parseMacros(),
   ]);
   const checks = await parseChecks({ scenes, npcs });
 
@@ -13,6 +15,7 @@ async function run() {
     emit('data-scenes', scenes),
     emit('data-npc', npcs),
     emit('data-checks', checks),
+    emit('data-macros', macros),
   ]);
 }
 

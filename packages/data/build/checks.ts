@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
-import { gameId } from '../lib';
+import { gameId } from '../lib/game';
 import { DATA_DIR } from './helpers';
 
 type BuildChecksState = {

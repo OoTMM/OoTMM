@@ -69,12 +69,6 @@ const DATA_FILES = {
   mm: loadTxt('files/files-mm.txt').trim().split('\n'),
 };
 
-const MACROS = {
-  common: loadYaml('macros/macros_common.yml'),
-  oot: loadYaml('macros/macros_oot.yml'),
-  mm: loadYaml('macros/macros_mm.yml'),
-};
-
 function buildGossips() {
   const raw = {
     oot: loadCsv('gossips/gossips_oot.csv'),
@@ -103,14 +97,6 @@ function buildGossips() {
 }
 
 async function run() {
-  const scenes = loadYaml('defs/scenes.yml');
-  const npcs = loadYaml('defs/npc.yml');
-  const checks = await buildChecks({ scenes, npcs });
-
-  emit('data-scenes', scenes);
-  emit('data-npc', npcs);
-  emit('data-checks', checks);
-
   emit('data-world', DATA_WORLD);
   emit('data-regions', loadYaml('defs/regions.yml'));
   emit('data-hints', loadYaml('defs/hints.yml'));

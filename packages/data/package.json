@@ -27,6 +27,11 @@
   },
   "nx": {
     "targets": {
+      "typecheck": {
+        "dependsOn": [
+          "build"
+        ]
+      },
       "build": {
         "inputs": [
           "{workspaceRoot}/data/**/*",
