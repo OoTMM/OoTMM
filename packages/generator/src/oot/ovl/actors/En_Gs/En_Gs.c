@@ -89,10 +89,22 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
+static void EnGs_Alias(Xflag* xf)
+{
+    switch (xf->sceneId) {
+        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
+        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
+            xf->sceneId = SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY;
+            break;
+    }
+}
+
 void EnGs_Init(Actor* thisx, PlayState* play) {
     EnGs* this = (EnGs*)thisx;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    if (Xflag_Init(&this->xflag, thisx, play)) {
+        EnGs_Alias(&this->xflag);
+    }
 
     Actor_ProcessInitChain(thisx, sInitChain);
     Collider_InitCylinder(play, &this->collider);
