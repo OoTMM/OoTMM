@@ -1,13 +1,11 @@
 #include <combo.h>
 #include <combo/config.h>
-#include <combo/global.h>
 #include <combo/text.h>
-#include <combo/environment.h>
 #include <combo/mm/regs.h>
 #include <combo/mm/interface.h>
 #include <combo/mm/message.h>
 #include <combo/common/ocarina.h>
-#include <combo/config.h>
+#include <combo/entrance.h>
 
 #define DT_SNAP_MINUTES 30u
 #define DT_MINUTES_PER_DAY 1440u
@@ -35,9 +33,11 @@ static s8 sDtStickRepeatDir;
 static s32 sDtDisplayedHalf = -1;
 static u32 sDtStartTicks, sDtTargetTicks;
 static u8 sDtTextDirty;
+static u8 sDtPostReloadState;
 static int DtIsNight(u16 time) { return time < CLOCK_TIME(6, 0) || time >= CLOCK_TIME(18, 0); }
 static u32 DtTicksToMinutes(u32 ticks) { return (ticks * DT_MINUTES_PER_DAY) >> 16; }
 static u32 DtMinutesToTicks(u32 minutes) { return ((minutes << 16) + DT_MINUTES_PER_DAY - 1) / DT_MINUTES_PER_DAY; }
+static int DtSameHalf(u32 a, u32 b) { return a / DT_HALF_TICKS == b / DT_HALF_TICKS; }
 
 u8 gDoubleTimeTargetPending;
 u8 gDoubleTimeTargetDayChanged;
@@ -291,16 +291,67 @@ static void DtUpdateFastForward(PlayState* play) {
     DtConfigureFastForwardSpeed();
 }
 
-static void DtStartNormalDoubleTime(PlayState* play) {
-    u32 oldDay = gSave.day, day;
+static void DtUpdatePostDoubleTime(PlayState* play) {
+    Player* link;
+    u32 target, day;
     u16 time;
-    DtTicksToDayTime(DtGetLandingTicks(sDtTargetTicks), &day, &time);
+    int reload;
+
+    if (sDtPostReloadState == 1) {
+        if (play->transitionTrigger == TRANS_TRIGGER_OFF && !gSaveContext.respawnFlag)
+            return;
+        sDtPostReloadState = 2;
+        return;
+    }
+
+    if (sDtPostReloadState != 2)
+        return;
+    if (play->transitionTrigger != TRANS_TRIGGER_OFF || play->transitionMode != 0 ||
+        gSaveContext.respawnFlag)
+        return;
+
+    target = sDtTargetTicks;
+    if (target == DT_MAX_TICKS)
+        target = DtMinutesToTicks(DtTicksToMinutes(target) - 1);
+
+    reload = !DtSameHalf(DtCurrentTicks(), target);
+    DtTicksToDayTime(target, &day, &time);
+
     while (gSave.day < day)
         Sram_IncrementDay();
+
     gSave.time = time;
     gSave.isNight = DtIsNight(time);
-    gDoubleTimeTargetDayChanged = oldDay != gSave.day;
-    gDoubleTimeTargetPending = 1;
+    gDoubleTimeTargetDayChanged = ((sDtStartTicks >> 16) + 1) != gSave.day;
+    gDoubleTimeTargetPending = 0;
+    sDtPostReloadState = 0;
+
+    if (!reload)
+        return;
+
+    link = GET_PLAYER(play);
+    Play_SetRespawnData(play, 1, gSave.entrance, play->roomCtx.curRoom.num, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
+    gSaveContext.respawnFlag = 2;
+    gSaveContext.nextCutscene = 0;
+    comboTransition(play, gSave.entrance);
+}
+static void DtStartNormalDoubleTime(PlayState* play) {
+    if (DtSameHalf(sDtStartTicks, sDtTargetTicks)) {
+        u32 oldDay = gSave.day, day;
+        u16 time;
+        DtTicksToDayTime(DtGetLandingTicks(sDtTargetTicks), &day, &time);
+        while (gSave.day < day)
+            Sram_IncrementDay();
+        gSave.time = time;
+        gSave.isNight = DtIsNight(time);
+        gDoubleTimeTargetDayChanged = oldDay != gSave.day;
+        gDoubleTimeTargetPending = 1;
+    } else {
+        sDtPostReloadState = 1;
+        gDoubleTimeTargetPending = 0;
+        gDoubleTimeTargetDayChanged = 0;
+        gSave.time = gSave.isNight ? CLOCK_TIME(6, 0) : CLOCK_TIME(18, 0);
+    }
     gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = 0;
     Message_Close(play);
     play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_DOUBLE_SOT;
@@ -311,7 +362,7 @@ static void DtAcceptTarget(PlayState* play) {
         DtCancel(play);
         return;
     }
-    if (sDtStartTicks / DT_HALF_TICKS == sDtTargetTicks / DT_HALF_TICKS && play->envCtx.sceneTimeSpeed)
+    if (DtSameHalf(sDtStartTicks, sDtTargetTicks) && play->envCtx.sceneTimeSpeed)
         DtStartFastForward(play);
     else
         DtStartNormalDoubleTime(play);
@@ -360,6 +411,10 @@ static void DtUpdateConfirmation(PlayState* play) {
 }
 
 void DoubleTimeSelector_Update(PlayState* play) {
+    if (sDtPostReloadState) {
+        DtUpdatePostDoubleTime(play);
+        return;
+    }
     if (!Config_Flag(CFG_MM_SONG_OF_DOUBLE_TIME_TIME_SELECTOR))
         return;
     switch (sDtState) {
