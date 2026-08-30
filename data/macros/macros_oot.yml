@@ -217,7 +217,8 @@
 "gs_night": "gs && is_night && (trick(OOT_NIGHT_GS) || can_play_sun || can_play_double_time)"
 
 # Gossip Stones
-"gossip_fairy": "can_play_zelda || can_play_saria || can_play_epona || can_play_time" # Sun works in theory according to the code but the reload overrides it
+"gossip_fairy": "can_play_zelda || can_play_epona || can_play_time"
+"gossip_fairy_sun": "gossip_fairy || can_play_sun"
 "gossip_fairy_big": "can_play_storms"
 
 #Specific Interaction Macros:

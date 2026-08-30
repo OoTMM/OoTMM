@@ -52,5 +52,7 @@
     <xflag type="heart" location="Dodongo Cavern Heart Miniboss Upper 1" slice="0x0" setup="0x0" room="0x3" actor="0x6" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Dodongo Cavern Heart Miniboss Upper 2" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Dodongo Cavern Heart Bomb Bag Room" slice="0x0" setup="0x0" room="0x9" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="gossip" location="Dodongo Cavern Gossip Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="FAIRY"/>
+    <xflag type="gossip-big" location="Dodongo Cavern Gossip Big Fairy" slice="0x1" setup="0x0" room="0x0" actor="0x19" item="FAIRY_BIG"/>
   </scene>
 </checks>
