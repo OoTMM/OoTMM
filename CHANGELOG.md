@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add gossip fairies / big fairies shuffle (OoT only).
 - Added MM Adult Mask
 - Added MM Starting Age Selection
 - Add a qol setting to allow time selection when playing song of double time.
