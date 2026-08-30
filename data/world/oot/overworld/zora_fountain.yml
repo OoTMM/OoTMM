@@ -31,6 +31,10 @@
     "Zora Fountain Boulder Exposed": "has_explosives_or_hammer"
     "Zora Fountain Boulder Underground": "can_lift_silver && has_explosives_or_hammer"
     "Zora Fountain Silver Boulder": "can_lift_silver"
+    "Zora Fountain Gossip Fairy Land": "gossip_fairy"
+    "Zora Fountain Gossip Fairy Water": "gossip_fairy"
+    "Zora Fountain Gossip Big Fairy Land": "gossip_fairy_big"
+    "Zora Fountain Gossip Big Fairy Water": "gossip_fairy_big"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
