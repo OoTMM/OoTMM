@@ -27,6 +27,8 @@
     <xflag type="hive" location="Zora Domain Hive Front 1" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RUPEE_RED"/>
     <xflag type="hive" location="Zora Domain Hive Front 2" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RUPEE_RED"/>
     <xflag type="hive" location="Zora Domain Hive Back" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RUPEE_RED"/>
+    <xflag type="gossip" location="Zora Domain Gossip Fairy" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="FAIRY"/>
+    <xflag type="gossip-big" location="Zora Domain Gossip Big Fairy" slice="0x1" setup="0x0" room="0x0" actor="0xd" item="FAIRY_BIG"/>
   </scene>
   <scene id="FAIRY_FOUNTAIN">
     <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 1" slice="0x0" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>

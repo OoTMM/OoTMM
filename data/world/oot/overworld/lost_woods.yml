@@ -63,6 +63,8 @@
     "Lost Woods Wonder Item 2": "is_child"
     "Lost Woods Wonder Item 3": "is_child"
     "Lost Woods Boulder Early": "has_explosives_or_hammer"
+    "Lost Woods Gossip Fairy": "gossip_fairy"
+    "Lost Woods Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 

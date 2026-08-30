@@ -120,6 +120,10 @@ static void EnGs_Alias(Xflag* xf)
             if (xf->setupId == 2) xf->id -= 4;
             xf->setupId = 0;
             break;
+        case SCE_OOT_ZORA_DOMAIN:
+            xf->setupId = 0;
+            xf->id = 0x0d;
+            break;
         case SCE_OOT_GERUDO_VALLEY:
             xf->setupId = 0;
             xf->id = 0x08;
