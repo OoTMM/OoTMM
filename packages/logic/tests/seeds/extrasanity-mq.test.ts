@@ -47,6 +47,7 @@ test("Can make a seed - MQ Extrasanity", async () => {
     shuffleButterfliesOot: true,
     shuffleButterfliesMm: true,
     shuffleGossipFairiesOot: 'all',
+    shuffleGossipBigFairiesOot: 'all',
     shuffleWonderItemsOot: 'all',
     shuffleWonderItemsMm: true,
     fairySpotShuffleOot: true,

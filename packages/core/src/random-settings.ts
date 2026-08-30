@@ -918,6 +918,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleHivesMm = true;
       base.shuffleSnowballsMm = 'all';
       base.shuffleGossipFairiesOot = 'all';
+      base.shuffleGossipBigFairiesOot = 'all';
       base.shuffleWonderItemsOot = 'all';
       base.shuffleWonderItemsMm = true;
       base.shuffleButterfliesOot = true;
@@ -954,6 +955,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleHivesMm = true;
       base.shuffleSnowballsMm = 'overworld';
       base.shuffleGossipFairiesOot = 'overworld';
+      base.shuffleGossipBigFairiesOot = 'overworld';
       base.shuffleWonderItemsOot = 'overworld';
       base.shuffleWonderItemsMm = true;
       base.shuffleButterfliesOot = true;
@@ -984,6 +986,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleBarrelsMm = 'dungeons';
       base.shuffleSnowballsMm = 'dungeons';
       base.shuffleGossipFairiesOot = 'dungeons';
+      base.shuffleGossipBigFairiesOot = 'dungeons';
       base.shuffleWonderItemsOot = 'dungeons';
       base.shuffleBouldersOot = 'dungeons';
       base.shuffleBouldersMm = 'dungeons';
@@ -1013,6 +1016,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.shuffleHivesMm = booleanWeighted(random, 0.5);
       base.shuffleSnowballsMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleGossipFairiesOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
+      base.shuffleGossipBigFairiesOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleWonderItemsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10, all: 10 });
       base.shuffleWonderItemsMm = booleanWeighted(random, 0.5);
       base.shuffleButterfliesOot = booleanWeighted(random, 0.5);

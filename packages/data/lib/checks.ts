@@ -1,6 +1,6 @@
 import type { Game } from './game';
 
-export type CheckType = 'npc' | 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'barrel' | 'grass' | 'tree' | 'bush' | 'rock' | 'soil' | 'wonder' | 'fish' | 'fairy' | 'snowball' | 'hive' | 'rupee' | 'heart' | 'fairy_spot' | 'butterfly' | 'boulder' | 'boulder-red' | 'boulder-silver' | 'icicle' | 'redice' | 'gossip';
+export type CheckType = 'npc' | 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'barrel' | 'grass' | 'tree' | 'bush' | 'rock' | 'soil' | 'wonder' | 'fish' | 'fairy' | 'snowball' | 'hive' | 'rupee' | 'heart' | 'fairy_spot' | 'butterfly' | 'boulder' | 'boulder-red' | 'boulder-silver' | 'icicle' | 'redice' | 'gossip' | 'gossip-big';
 export type CheckOverrideType = 'npc' | 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'xflag';
 
 export type CheckData = {

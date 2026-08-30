@@ -1530,6 +1530,7 @@ class LogicPassWorldTransform {
 
   private filterChecksGossipFairies() {
     this.filterLocations(this.state.settings.shuffleGossipFairiesOot, 'gossip', 'oot');
+    this.filterLocations(this.state.settings.shuffleGossipBigFairiesOot, 'gossip-big', 'oot');
   }
 
   private filterChecksWonder() {
