@@ -79,6 +79,8 @@
     "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_biggoron"
     "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer_or_keg || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
     "Death Mountain Trail Rock Child": "is_child"
+    "Death Mountain Trail Gossip Fairy": "gossip_fairy"
+    "Death Mountain Trail Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Death Mountain Trail Gossip on Climb": "true"
 

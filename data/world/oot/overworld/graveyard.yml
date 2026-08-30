@@ -58,7 +58,7 @@
     "Shadow Temple": "setting(openDungeonsOot, Shadow) || can_use_din || (has_fire_arrows && (trick(OOT_SHADOW_FIRE_ARROW) || (trick(OOT_SHADOW_TEMPLE_STICKS) && can_use_sticks)))"
   locations:
     "Graveyard Gossip Fairy": "gossip_fairy"
-    "Graveyard Gossip Big Fairy": "gossip_big_fairy"
+    "Graveyard Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Graveyard Gossip": "true"
 

@@ -32,6 +32,8 @@
     "Death Mountain Crater Boulder 1": "has_explosives_or_hammer"
     "Death Mountain Crater Boulder 2": "has_explosives_or_hammer"
     "Death Mountain Crater Boulder 3": "has_explosives_or_hammer"
+    "Death Mountain Crater Gossip Fairy": "has_explosives && gossip_fairy"
+    "Death Mountain Crater Gossip Big Fairy": "has_explosives && gossip_fairy_big"
   gossip:
     "Death Mountain Crater Gossip Wall": "has_explosives"
 
