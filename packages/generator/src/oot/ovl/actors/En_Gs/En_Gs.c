@@ -145,10 +145,21 @@ s32 func_80A4E3EC(EnGs* this, PlayState* play) {
     return ret;
 }
 
+static void EnGs_Xflag(Xflag* xf, EnGs* this, int isBig)
+{
+    memcpy(&xf, &this->xflag, sizeof(Xflag));
+    xf->sliceId = isBig;
+}
+
 static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
 {
-    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-    g.xflag.sliceId = isBig;
+    Xflag xf;
+
+    EnGs_Xflag(&xf, this, isBig);
+    if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)) && !Xflag_IsValid(&xf))
+        return;
+
+    memcpy(&g.xflag, &xf, sizeof(Xflag));
     g.xflagOverride = TRUE;
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? /* FAIRY_HEAL_BIG */ 0x0007 : /* FAIRY_HEAL_TIMED */ 0x0002);
     g.xflagOverride = FALSE;
@@ -504,9 +515,7 @@ void func_80A4F700(EnGs* this, PlayState* play) {
 }
 
 void func_80A4F734(EnGs* this, PlayState* play) {
-    if (!Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6))) {
-        func_80A4E470(this, play);
-    }
+    func_80A4E470(this, play);
 }
 
 void func_80A4F77C(EnGs* this) {
