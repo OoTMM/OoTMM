@@ -36,7 +36,7 @@
         "inputs": [
           "{workspaceRoot}/data/**/*",
           "{projectRoot}/build/**/*",
-          "{projectRoot}/src/**/*"
+          "{projectRoot}/lib/**/*"
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
