@@ -96,6 +96,53 @@ static void EnGs_Alias(Xflag* xf)
         case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
             xf->sceneId = SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY;
             break;
+        case SCE_OOT_DESERT_COLOSSUS:
+            xf->setupId = 0x0;
+            xf->id = 0x03;
+            break;
+        case SCE_OOT_LOST_WOODS:
+            xf->setupId = 0x0;
+            xf->id = 0x04;
+            break;
+        case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+            xf->setupId = 0;
+            xf->id = 0x04;
+            break;
+        case SCE_OOT_DEATH_MOUNTAIN_CRATER:
+            xf->setupId = 0;
+            xf->id = 0x09;
+            break;
+        case SCE_OOT_GORON_CITY:
+            xf->setupId = 2;
+            xf->id = 0;
+            break;
+        case SCE_OOT_ZORA_FOUNTAIN:
+            if (xf->setupId == 2) xf->id -= 4;
+            xf->setupId = 0;
+            break;
+        case SCE_OOT_GERUDO_VALLEY:
+            xf->setupId = 0;
+            xf->id = 0x08;
+            break;
+        case SCE_OOT_GRAVEYARD:
+            xf->setupId = 0;
+            xf->id = 0x02;
+            break;
+        case SCE_OOT_ZORA_RIVER:
+            xf->setupId = 0;
+            switch (xf->roomId)
+            {
+            case 0: xf->id = 0x07; break;
+            case 1: xf->id = 0x01; break;
+            }
+            break;
+        case SCE_OOT_SACRED_FOREST_MEADOW:
+            if (xf->setupId == 2)
+            {
+                xf->setupId = 0;
+                xf->id += 1;
+            }
+            break;
     }
 }
 
