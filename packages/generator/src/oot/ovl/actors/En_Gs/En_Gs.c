@@ -147,7 +147,22 @@ static void EnGs_Alias(Xflag* xf)
                 xf->id += 1;
             }
             break;
-    }
+        case SCE_OOT_KOKIRI_FOREST:
+            if (xf->roomId == 0)
+            {
+                xf->id = 0x0f;
+            }
+            else
+            {
+                switch (xf->setupId)
+                {
+                case 1: xf->id -= 1; break;
+                case 2: xf->id += 4; break;
+                }
+            }
+            xf->setupId = 0;
+            break;
+        }
 }
 
 void EnGs_Init(Actor* thisx, PlayState* play) {
