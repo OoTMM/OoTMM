@@ -71,6 +71,8 @@
     <xflag type="rock" location="Hyrule Castle Grotto Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x8" actor="0x2" item="RANDOM"/>
     <xflag type="rock" location="Hyrule Castle Grotto Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x8" actor="0x2" item="RANDOM"/>
     <xflag type="rock" location="Hyrule Castle Grotto Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x8" actor="0x2" item="RANDOM"/>
+    <xflag type="gossip" location="Hyrule Castle Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x8" actor="0xd" item="FAIRY"/>
+    <xflag type="gossip-big" location="Hyrule Castle Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x8" actor="0xd" item="FAIRY_BIG"/>
   </scene>
   <scene id="GANON_CASTLE_EXTERIOR">
     <gs location="Ganon Castle Exterior GS" flag="0x70" item="GS_TOKEN"/>

@@ -345,6 +345,8 @@
     "Hyrule Field Cow Grotto Pot 2": "has_fire"
     "Hyrule Field Grotto Near Gerudo Grass 1": "has_fire && can_cut_grass"
     "Hyrule Field Grotto Near Gerudo Grass 2": "has_fire && can_cut_grass"
+    "Hyrule Field Cow Grotto Gossip Fairy": "has_fire && grotto_fairy_sun"
+    "Hyrule Field Cow Grotto Gossip Big Fairy": "has_fire && grotto_fairy_big"
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 

@@ -138,6 +138,8 @@
     "Hyrule Castle Grotto Rock Circle Rock 6": "has_explosives_or_hammer"
     "Hyrule Castle Grotto Rock Circle Rock 7": "has_explosives_or_hammer"
     "Hyrule Castle Grotto Rock Circle Rock 8": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Gossip Fairy": "has_explosives_or_hammer && gossip_fairy_sun"
+    "Hyrule Castle Grotto Gossip Big Fairy": "has_explosives_or_hammer && gossip_fairy_big"
   gossip:
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 

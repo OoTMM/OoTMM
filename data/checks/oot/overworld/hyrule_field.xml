@@ -223,6 +223,8 @@
     <cow location="Hyrule Field Cow" flag="0x01" item="MILK"/>
     <xflag type="pot" location="Hyrule Field Cow Grotto Pot 1" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="NUTS_5"/>
     <xflag type="pot" location="Hyrule Field Cow Grotto Pot 2" slice="0x0" setup="0x0" room="0x4" actor="0x7" item="MAGIC_JAR_SMALL"/>
+    <xflag type="gossip" location="Hyrule Field Cow Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="FAIRY"/>
+    <xflag type="gossip-big" location="Hyrule Field Cow Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x4" actor="0xa" item="FAIRY_BIG"/>
   </scene>
   <scene id="FAIRY_FOUNTAIN">
     <xflag type="fairy" location="Hyrule Field Fairy Fountain Fairy 1" slice="0x0" setup="0x0" room="0x20" actor="0x0" item="FAIRY"/>
