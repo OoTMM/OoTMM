@@ -61,6 +61,10 @@
     "Hyrule Castle Tree 8": "true"
     "Hyrule Castle Tree Guarded": "can_use_mask_stone"
     "Hyrule Castle Boulder": "has_explosives_or_hammer"
+    "Hyrule Castle Gossip Fairy Near Castle": "gossip_fairy"
+    "Hyrule Castle Gossip Fairy Near Entrance": "gossip_fairy"
+    "Hyrule Castle Gossip Big Fairy Near Castle": "gossip_fairy_big"
+    "Hyrule Castle Gossip Big Fairy Near Entrance": "gossip_fairy_big"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
@@ -134,6 +138,8 @@
     "Hyrule Castle Grotto Rock Circle Rock 6": "has_explosives_or_hammer"
     "Hyrule Castle Grotto Rock Circle Rock 7": "has_explosives_or_hammer"
     "Hyrule Castle Grotto Rock Circle Rock 8": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Gossip Fairy": "has_explosives_or_hammer && gossip_fairy_sun"
+    "Hyrule Castle Grotto Gossip Big Fairy": "has_explosives_or_hammer && gossip_fairy_big"
   gossip:
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 

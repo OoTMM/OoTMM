@@ -83,6 +83,12 @@
     "Lake Hylia Butterfly 1": "is_child && butterfly"
     "Lake Hylia Butterfly 2": "is_child && butterfly"
     "Lake Hylia Butterfly 3": "is_child && butterfly"
+    "Lake Hylia Gossip Fairy Land": "gossip_fairy"
+    "Lake Hylia Gossip Fairy Water East": "gossip_fairy"
+    "Lake Hylia Gossip Fairy Water West": "gossip_fairy"
+    "Lake Hylia Gossip Big Fairy Land": "gossip_fairy_big"
+    "Lake Hylia Gossip Big Fairy Water East": "gossip_fairy_big"
+    "Lake Hylia Gossip Big Fairy Water West": "gossip_fairy_big"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"

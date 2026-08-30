@@ -33,4 +33,6 @@ typedef union {
     u16 rgba;
 } Color_RGBA16;
 
+void Color_RGBA8_Copy(Color_RGBA8* dst, Color_RGBA8* src);
+
 #endif

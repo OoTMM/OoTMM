@@ -21,6 +21,7 @@
     "Dodongo Cavern Main Room Upper Entrance Side": "climb_anywhere || longshot_anywhere"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has_goron_bracelet) || has_blue_fire_arrows_mudwall"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult || climb_anywhere || can_hookshot"
+    "MQ Dodongo Cavern Near Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
   events:
     MQ_DC_PILLAR_RAISE: "has_bombflowers || can_hammer"
     MQ_DC_OPEN_SKULL: "(hookshot_anywhere || climb_anywhere) && has_explosives"
@@ -30,8 +31,14 @@
     "MQ Dodongo Cavern Lobby Scrub Back": "business_scrub(0x1d)"
     "MQ Dodongo Cavern Boulder Entrance Back 1": "has_explosives_or_hammer"
     "MQ Dodongo Cavern Boulder Entrance Back 2": "has_explosives_or_hammer"
+
+"MQ Dodongo Cavern Near Gossip":
+  dungeon: DC
+  locations:
+    "MQ Dodongo Cavern Gossip Fairy": "gossip_fairy_sun"
+    "MQ Dodongo Cavern Gossip Big Fairy": "gossip_fairy_big"
   gossip:
-    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Gossip": "true"
 
 "Dodongo Cavern Main Room Upper Skull Side":
   dungeon: DC

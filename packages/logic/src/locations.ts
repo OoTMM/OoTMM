@@ -92,7 +92,7 @@ const RENEWABLE_LOCATIONS = new Set([
   ...MM_MERCHANTS,
   ...MM_TINGLE,
   ...OOT_MERCHANTS,
-  ...CHECKS.filter(x => ['shop', 'cow', 'scrub', 'fairy', 'fish', 'fairy_spot'].includes(x.type) && !ONE_TIME_SHOP_CHECKS.includes(x.location)).map(x => x.location),
+  ...CHECKS.filter(x => ['shop', 'cow', 'scrub', 'fairy', 'fish', 'fairy_spot', 'gossip', 'gossip-big'].includes(x.type) && !ONE_TIME_SHOP_CHECKS.includes(x.location)).map(x => x.location),
 ]);
 
 export function locationsZelda(settings: Settings) {

@@ -151,3 +151,8 @@ export function ObjBean(checks: Check[], ra: RoomActor) {
 export function ObjBombiwa(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Boulder', type: 'boulder' });
 }
+
+export function EnGs(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'FAIRY', name: 'Gossip Fairy', type: 'gossip', sliceId: 0 });
+  checks.push({ roomActor: ra, item: 'FAIRY_BIG', name: 'Gossip Big Fairy', type: 'gossip-big', sliceId: 1 });
+}

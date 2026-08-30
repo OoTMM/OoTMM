@@ -93,6 +93,7 @@ export const ACTORS_OOT = {
   EN_WOOD02: 0x077,
   OBJ_BEAN: 0x126,
   OBJ_BOMBIWA: 0x127,
+  EN_GS: 0x1b9,
 };
 
 export const ACTORS_MM = {
@@ -136,6 +137,7 @@ export const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.OBJ_MURE]: 5,
   [ACTORS_OOT.EN_WOOD02]: 6,
   [ACTORS_OOT.OBJ_BEAN]: 3,
+  [ACTORS_OOT.EN_GS]: 2,
 }
 
 export const ACTOR_SLICES_MM = {

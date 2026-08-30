@@ -45,6 +45,8 @@
     <xflag type="soil" location="Death Mountain Trail Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="FAIRY"/>
     <xflag type="soil" location="Death Mountain Trail Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x2b" item="FAIRY"/>
     <xflag type="soil" location="Death Mountain Trail Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x2b" item="FAIRY"/>
+    <xflag type="gossip" location="Death Mountain Trail Gossip Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="FAIRY"/>
+    <xflag type="gossip-big" location="Death Mountain Trail Gossip Big Fairy" slice="0x1" setup="0x0" room="0x0" actor="0x4" item="FAIRY_BIG"/>
   </scene>
   <scene name="Death Mountain Trail Grotto" id="GROTTOS">
     <chest location="Death Mountain Trail Grotto" flag="0x17" item="RUPEE_HUGE"/>
@@ -57,6 +59,8 @@
     <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x37" actor="0x6" item="FAIRY"/>
     <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x37" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x37" actor="0x6" item="NOTHING"/>
+    <xflag type="gossip" location="Death Mountain Trail Storms Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x37" actor="0x9" item="FAIRY"/>
+    <xflag type="gossip-big" location="Death Mountain Trail Storms Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x37" actor="0x9" item="FAIRY_BIG"/>
   </scene>
   <scene name="Death Mountain Trail Cow Grotto" id="GROTTOS">
     <cow location="Death Mountain Trail Cow" flag="0x07" item="MILK"/>

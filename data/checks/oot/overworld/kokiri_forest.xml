@@ -86,6 +86,12 @@
     <xflag type="soil" location="Kokiri Forest Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x49" item="FAIRY"/>
     <xflag type="soil" location="Kokiri Forest Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x49" item="FAIRY"/>
     <xflag type="soil" location="Kokiri Forest Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x49" item="FAIRY"/>
+    <xflag type="gossip" location="Kokiri Forest Gossip Fairy Near Lost Woods" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="FAIRY"/>
+    <xflag type="gossip" location="Kokiri Forest Gossip Fairy Near Deku Tree 1" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="FAIRY"/>
+    <xflag type="gossip" location="Kokiri Forest Gossip Fairy Near Deku Tree 2" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="FAIRY"/>
+    <xflag type="gossip-big" location="Kokiri Forest Gossip Big Fairy Near Lost Woods" slice="0x1" setup="0x0" room="0x0" actor="0xf" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Kokiri Forest Gossip Big Fairy Near Deku Tree 1" slice="0x1" setup="0x0" room="0x1" actor="0x7" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Kokiri Forest Gossip Big Fairy Near Deku Tree 2" slice="0x1" setup="0x0" room="0x1" actor="0x8" item="FAIRY_BIG"/>
   </scene>
   <scene name="Link's House" id="LINK_HOUSE">
     <xflag type="pot" location="Link's House Pot" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RECOVERY_HEART"/>
@@ -133,5 +139,7 @@
     <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x2c" actor="0x6" item="FAIRY"/>
     <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x2c" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x2c" actor="0x6" item="NOTHING"/>
+    <xflag type="gossip" location="Kokiri Forest Storms Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x2c" actor="0x9" item="FAIRY"/>
+    <xflag type="gossip-big" location="Kokiri Forest Storms Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x2c" actor="0x9" item="FAIRY_BIG"/>
   </scene>
 </checks>

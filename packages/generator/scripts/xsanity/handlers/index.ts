@@ -23,6 +23,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_BEAN]: OotHandlers.ObjBean,
   [ACTORS_OOT.OBJ_BOMBIWA]: OotHandlers.ObjBombiwa,
   [ACTORS_OOT.EN_WONDER_ITEM]: OotHandlers.EnWonderItem,
+  [ACTORS_OOT.EN_GS]: OotHandlers.EnGs,
 };
 
 const ACTORS_HANDLERS_MM = {

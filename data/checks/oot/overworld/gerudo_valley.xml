@@ -43,6 +43,8 @@
     <xflag type="soil" location="Gerudo Valley Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="FAIRY"/>
     <xflag type="soil" location="Gerudo Valley Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x1f" item="FAIRY"/>
     <xflag type="soil" location="Gerudo Valley Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x1f" item="FAIRY"/>
+    <xflag type="gossip" location="Gerudo Valley Gossip Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="FAIRY"/>
+    <xflag type="gossip-big" location="Gerudo Valley Gossip Big Fairy" slice="0x1" setup="0x0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
   </scene>
   <scene id="GROTTOS">
     <scrub location="Gerudo Valley Grotto Front Scrub" flag="0x17" item="POTION_GREEN"/>

@@ -44,6 +44,10 @@
     <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 3" slice="0x2" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
     <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 4" slice="0x3" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
     <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 5" slice="0x4" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
+    <xflag type="gossip" location="Hyrule Castle Gossip Fairy Near Castle" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="FAIRY"/>
+    <xflag type="gossip" location="Hyrule Castle Gossip Fairy Near Entrance" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="FAIRY"/>
+    <xflag type="gossip-big" location="Hyrule Castle Gossip Big Fairy Near Castle" slice="0x1" setup="0x0" room="0x0" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Hyrule Castle Gossip Big Fairy Near Entrance" slice="0x1" setup="0x0" room="0x0" actor="0x3" item="FAIRY_BIG"/>
   </scene>
   <scene id="CASTLE_COURTYARD">
     <npc location="Zelda's Letter" npc="ZELDA_LETTER" item="ZELDA_LETTER"/>
@@ -67,6 +71,8 @@
     <xflag type="rock" location="Hyrule Castle Grotto Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x8" actor="0x2" item="RANDOM"/>
     <xflag type="rock" location="Hyrule Castle Grotto Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x8" actor="0x2" item="RANDOM"/>
     <xflag type="rock" location="Hyrule Castle Grotto Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x8" actor="0x2" item="RANDOM"/>
+    <xflag type="gossip" location="Hyrule Castle Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x8" actor="0xd" item="FAIRY"/>
+    <xflag type="gossip-big" location="Hyrule Castle Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x8" actor="0xd" item="FAIRY_BIG"/>
   </scene>
   <scene id="GANON_CASTLE_EXTERIOR">
     <gs location="Ganon Castle Exterior GS" flag="0x70" item="GS_TOKEN"/>

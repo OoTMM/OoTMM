@@ -36,6 +36,12 @@
     "Sacred Meadow Wonder Item Maze 3": "true"
     "Sacred Meadow Wonder Item Maze 4": "true"
     "Sacred Meadow Wonder Item Maze 5": "true"
+    "Sacred Meadow Gossip Fairy Maze 1": "gossip_fairy"
+    "Sacred Meadow Gossip Fairy Maze 2": "gossip_fairy"
+    "Sacred Meadow Gossip Fairy Deep": "gossip_fairy"
+    "Sacred Meadow Gossip Big Fairy Maze 1": "gossip_fairy_big"
+    "Sacred Meadow Gossip Big Fairy Maze 2": "gossip_fairy_big"
+    "Sacred Meadow Gossip Big Fairy Deep": "gossip_fairy_big"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"
     "Sacred Meadow Gossip Atop Maze Woods Side": "true"

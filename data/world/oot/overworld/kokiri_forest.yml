@@ -45,6 +45,8 @@
     "Kokiri Forest Rock Circle Rock 6": "true"
     "Kokiri Forest Rock Circle Rock 7": "true"
     "Kokiri Forest Rock Circle Rock 8": "true"
+    "Kokiri Forest Gossip Fairy Near Lost Woods": "gossip_fairy"
+    "Kokiri Forest Gossip Big Fairy Near Lost Woods": "gossip_fairy_big"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
 
@@ -164,6 +166,11 @@
   events:
     STICKS: "is_child && soul_deku_baba && (can_boomerang || can_use_sword)"
     MIDO_MOVED: "can_move_mido"
+  locations:
+    "Kokiri Forest Gossip Fairy Near Deku Tree 1": "gossip_fairy"
+    "Kokiri Forest Gossip Fairy Near Deku Tree 2": "gossip_fairy"
+    "Kokiri Forest Gossip Big Fairy Near Deku Tree 1": "gossip_fairy_big"
+    "Kokiri Forest Gossip Big Fairy Near Deku Tree 2": "gossip_fairy_big"
   gossip:
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
@@ -248,5 +255,7 @@
     "Kokiri Forest Storms Grotto Butterfly 1": "butterfly"
     "Kokiri Forest Storms Grotto Butterfly 2": "butterfly"
     "Kokiri Forest Storms Grotto Butterfly 3": "butterfly"
+    "Kokiri Forest Storms Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Kokiri Forest Storms Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"

@@ -48,6 +48,10 @@
     "Goron City Boulder Shortcut 1": "event(GORON_CITY_SHORTCUT)"
     "Goron City Boulder Shortcut 2": "event(GORON_CITY_SHORTCUT)"
     "Goron City Boulder Shortcut 3": "event(GORON_CITY_SHORTCUT)"
+    "Goron City Gossip Fairy Maze": "(has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere) && gossip_fairy"
+    "Goron City Gossip Fairy Medigoron": "(has_bombflowers || can_hammer) && gossip_fairy"
+    "Goron City Gossip Big Fairy Maze": "(has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere) && gossip_fairy_big"
+    "Goron City Gossip Big Fairy Medigoron": "(has_bombflowers || can_hammer) && gossip_fairy_big"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"

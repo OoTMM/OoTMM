@@ -97,6 +97,10 @@
     <xflag type="wonder" location="Zora River Wonder Item Back 25" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Zora River Wonder Item Back 26" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Zora River Wonder Item Back 27" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="gossip" location="Zora River Gossip Fairy Upper" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="FAIRY"/>
+    <xflag type="gossip" location="Zora River Gossip Fairy Water" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="FAIRY"/>
+    <xflag type="gossip-big" location="Zora River Gossip Big Fairy Upper" slice="0x1" setup="0x0" room="0x0" actor="0x7" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Zora River Gossip Big Fairy Water" slice="0x1" setup="0x0" room="0x1" actor="0x1" item="FAIRY_BIG"/>
   </scene>
   <scene id="GROTTOS">
     <chest location="Zora River Grotto" flag="0x09" item="RUPEE_RED"/>
@@ -109,6 +113,8 @@
     <xflag type="butterfly" location="Zora River Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x29" actor="0x6" item="FAIRY"/>
     <xflag type="butterfly" location="Zora River Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x29" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Zora River Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x29" actor="0x6" item="NOTHING"/>
+    <xflag type="gossip" location="Zora River Generic Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x29" actor="0x9" item="FAIRY"/>
+    <xflag type="gossip-big" location="Zora River Generic Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x29" actor="0x9" item="FAIRY_BIG"/>
   </scene>
   <scene id="GROTTOS">
     <scrub location="Zora River Storms Grotto Front Scrub" flag="0x12" item="POTION_GREEN"/>
