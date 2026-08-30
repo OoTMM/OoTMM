@@ -4,7 +4,8 @@ import type { GameAddresses } from '../addresses';
 import type { DecompressedRoms } from '../decompress';
 import type { PatchGroup } from './group';
 
-import { Monitor, GAMES } from '@ootmm/core';
+import { GAMES } from '@ootmm/data';
+import { Monitor } from '@ootmm/core';
 import { isEntranceShuffle } from '@ootmm/logic';
 import { CONFIG } from '../config';
 import { Patcher } from './patcher';

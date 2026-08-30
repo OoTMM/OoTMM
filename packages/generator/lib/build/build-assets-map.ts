@@ -1,4 +1,4 @@
-import type { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
 
 import { XMLParser } from 'fast-xml-parser';
 import { promises as fs } from 'node:fs';

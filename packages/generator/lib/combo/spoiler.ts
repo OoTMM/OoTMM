@@ -2,7 +2,8 @@ import type { Options, TrickKey, Region, SongEventSongs } from '@ootmm/core';
 import type { PlayerItem, LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
-import { SETTINGS, TRICKS, exportSettings, regionData, ENTRANCES, hintLocations, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';
+import { ENTRANCES, hintLocations } from '@ootmm/data';
+import { SETTINGS, TRICKS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
