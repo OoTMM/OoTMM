@@ -860,37 +860,6 @@ function outputFairyPoolOot(roomActors: RoomActors[]) {
   }
 }
 
-function outputWonderOot(roomActors: RoomActors[]) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
-  for (const room of roomActors) {
-    for (const actor of room.actors) {
-      if (actor.typeId !== ACTORS_OOT.EN_WONDER_ITEM)
-        continue;
-      const type = (actor.params >>> 11) & 0x1f;
-      if (type !== 2 && type !== 3 && type !== 0 && type !== 5)
-        continue;
-      const itemId = ((actor.params & 0x07c0) >>> 6) & 0x1f;
-      const item = OOT_WONDER_ITEM_DROPS[itemId];
-      const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-      if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-        console.log('');
-        console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
-        lastSceneId = room.sceneId;
-        lastSetupId = room.setupId;
-      }
-      let meta = '';
-      if (type === 0) {
-        meta = ' TYPE 0';
-      }
-      if (type === 5) {
-        meta = ' TYPE 5';
-      }
-      console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Wonder Item${meta} ${decPad(actor.actorId + 1, 2)},        wonder,           NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-    }
-  }
-}
-
 function outputWonderMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1082,6 +1051,14 @@ type ActorHandler = (checks: Check[], actor: RoomActor) => void;
 type ActorHandlers = { [actorId: number]: ActorHandler };
 
 let altGrassAcc = 0;
+
+function actorHandlerOotEnWonderItem(checks: Check[], ra: RoomActor) {
+  const type = (ra.actor.params >>> 11) & 0x1f;
+  if (type !== 2 && type !== 3 && type !== 0 && type !== 5) return;
+  const itemId = ((ra.actor.params & 0x07c0) >>> 6) & 0x1f;
+  const item = OOT_WONDER_ITEM_DROPS[itemId];
+  checks.push({ roomActor: ra, item, name: 'Wonder Item', type: 'wonder' });
+}
 
 function actorHandlerOotObjBean(checks: Check[], ra: RoomActor) {
   for (let i = 0; i < 3; ++i) {
@@ -1521,6 +1498,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_WOOD02]: actorHandlerOotEnWood02,
   [ACTORS_OOT.OBJ_BEAN]: actorHandlerOotObjBean,
   [ACTORS_OOT.OBJ_BOMBIWA]: actorHandlerOotObjBombiwa,
+  [ACTORS_OOT.EN_WONDER_ITEM]: actorHandlerOotEnWonderItem,
 };
 
 const ACTORS_HANDLERS_MM = {
