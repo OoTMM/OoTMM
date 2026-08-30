@@ -2,9 +2,16 @@ import { SETTINGS } from '@ootmm/generator';
 import { useStore } from '@/app/store';
 import { Setting } from './settings/Setting.tsx';
 
-type SettingKey = (typeof SETTINGS)[number]['key'];
+type SettingDefinition = (typeof SETTINGS)[number];
+type SettingKey = SettingDefinition['key'];
 type Game = 'oot' | 'mm';
+type ItemGame = Game | 'shared';
 type ItemCellValue = SettingKey | 'native';
+
+type ItemSetting = Extract<
+    SettingDefinition,
+    { game: ItemGame; group: string }
+>;
 
 type ItemRow = {
   name: string;
@@ -15,10 +22,11 @@ type ItemRow = {
   mmLabel?: string;
 };
 
-type ItemSection = {
+type ItemSectionDefinition = {
   name: string;
   description: string;
-  rows: readonly ItemRow[];
+  category: string;
+  nativeMissing?: boolean;
 };
 
 type SimpleSectionDefinition = {
@@ -27,42 +35,8 @@ type SimpleSectionDefinition = {
   settings: readonly SettingKey[];
 };
 
-function sharedNative(
-    name: string,
-    shared: SettingKey,
-): ItemRow {
-  return {
-    name,
-    oot: 'native',
-    mm: 'native',
-    shared,
-  };
-}
-
-function ootItem(
-    name: string,
-    mm: SettingKey,
-    shared?: SettingKey,
-): ItemRow {
-  return {
-    name,
-    oot: 'native',
-    mm,
-    shared,
-  };
-}
-
-function mmItem(
-    name: string,
-    oot: SettingKey,
-    shared?: SettingKey,
-): ItemRow {
-  return {
-    name,
-    oot,
-    mm: 'native',
-    shared,
-  };
+function isItemSetting(setting: SettingDefinition): setting is ItemSetting {
+  return 'game' in setting && 'group' in setting;
 }
 
 function settingsForCategory(category: string): SettingKey[] {
@@ -71,6 +45,87 @@ function settingsForCategory(category: string): SettingKey[] {
       .map(setting => setting.key);
 }
 
+function rowsForCategory(
+    category: string,
+    nativeMissing = false,
+): ItemRow[] {
+  const rows = new Map<string, ItemRow>();
+
+  for (const setting of SETTINGS) {
+    if (setting.category !== category || !isItemSetting(setting)) {
+      continue;
+    }
+
+    let row = rows.get(setting.group);
+
+    if (!row) {
+      row = {
+        name: setting.group,
+        oot: nativeMissing ? 'native' : undefined,
+        mm: nativeMissing ? 'native' : undefined,
+      };
+      rows.set(setting.group, row);
+    }
+
+    const label = setting.type === 'enum' ? 'Behavior' : undefined;
+
+    switch (setting.game) {
+      case 'oot':
+        row.oot = setting.key;
+        row.ootLabel = label;
+        break;
+
+      case 'mm':
+        row.mm = setting.key;
+        row.mmLabel = label;
+        break;
+
+      case 'shared':
+        row.shared = setting.key;
+        break;
+    }
+  }
+
+  return [...rows.values()];
+}
+
+const ITEM_SECTIONS = [
+  {
+    name: 'Shared Items',
+    description:
+        'Items that already exist in both games, but can be shared to combine them into one item for both games.',
+    category: 'items.extensions.shared',
+    nativeMissing: true,
+  },
+  {
+    name: 'Cross-Game Items',
+    description:
+        'Items that have been ported from one game into the other.',
+    category: 'items.extensions.crossGame.items',
+    nativeMissing: true,
+  },
+  {
+    name: 'Cross-Game Masks',
+    description:
+        'Masks that have been imported from one game into the other.',
+    category: 'items.extensions.crossGame.masks',
+    nativeMissing: true,
+  },
+  {
+    name: 'Cross-Game Songs',
+    description:
+        'Songs that have been imported from one game into the other.',
+    category: 'items.extensions.crossGame.songs',
+    nativeMissing: true,
+  },
+  {
+    name: 'Extended Item Systems',
+    description:
+        'Additional item systems such as keys, clocks, souls, and other new progression items.',
+    category: 'items.extensions.systems',
+  },
+] as const satisfies readonly ItemSectionDefinition[];
+
 const PROGRESSIVE_SECTION = {
   name: 'Progressive Items',
   description:
@@ -78,429 +133,42 @@ const PROGRESSIVE_SECTION = {
   settings: settingsForCategory('items.progressive'),
 } satisfies SimpleSectionDefinition;
 
-const ITEM_SECTIONS = [
-  {
-    name: 'Shared Items',
-    description:
-        'Items that already exist in both games, but can be shared to combine them into one item for both games.',
-    rows: [
-      sharedNative('Bows', 'sharedBows'),
-      sharedNative('Bomb Bags', 'sharedBombBags'),
-      sharedNative('Magic', 'sharedMagic'),
-      sharedNative('Fire Arrows', 'sharedMagicArrowFire'),
-      sharedNative('Ice Arrows', 'sharedMagicArrowIce'),
-      sharedNative('Light Arrows', 'sharedMagicArrowLight'),
-      sharedNative("Epona's Song", 'sharedSongEpona'),
-      sharedNative('Song of Storms', 'sharedSongStorms'),
-      sharedNative('Song of Time', 'sharedSongTime'),
-      sharedNative('Lens of Truth', 'sharedLens'),
-      sharedNative('Goron Mask', 'sharedMaskGoron'),
-      sharedNative('Zora Mask', 'sharedMaskZora'),
-      sharedNative('Bunny Hood', 'sharedMaskBunny'),
-      sharedNative('Keaton Mask', 'sharedMaskKeaton'),
-      sharedNative('Mask of Truth', 'sharedMaskTruth'),
-      sharedNative('Wallets', 'sharedWallets'),
-      sharedNative('Health', 'sharedHealth'),
-      sharedNative('Bottles', 'sharedBottles'),
-    ],
-  },
-  {
-    name: 'Cross-Game Items',
-    description:
-        'Items that have been ported from one game into the other.',
-    rows: [
-      ootItem(
-          'Stone of Agony',
-          'stoneAgonyMm',
-          'sharedStoneAgony',
-      ),
-      mmItem(
-          'Spin Attack Upgrade',
-          'spinUpgradeOot',
-          'sharedSpinUpgrade',
-      ),
-      ootItem(
-          'Deku Stick & Nut Upgrades',
-          'sticksNutsUpgradesMm',
-          'sharedNutsSticks',
-      ),
-      ootItem(
-          'Fairy Ocarina',
-          'fairyOcarinaMm',
-          'sharedOcarina',
-      ),
-      ootItem(
-          'Short Hookshot',
-          'shortHookshotMm',
-          'sharedHookshot',
-      ),
-      ootItem(
-          "Din's Fire",
-          'spellFireMm',
-          'sharedSpellFire',
-      ),
-      ootItem(
-          "Farore's Wind",
-          'spellWindMm',
-          'sharedSpellWind',
-      ),
-      ootItem(
-          "Nayru's Love",
-          'spellLoveMm',
-          'sharedSpellLove',
-      ),
-      ootItem(
-          'Iron Boots',
-          'bootsIronMm',
-          'sharedBootsIron',
-      ),
-      ootItem(
-          'Hover Boots',
-          'bootsHoverMm',
-          'sharedBootsHover',
-      ),
-      ootItem(
-          'Goron Tunic',
-          'tunicGoronMm',
-          'sharedTunicGoron',
-      ),
-      ootItem(
-          'Zora Tunic',
-          'tunicZoraMm',
-          'sharedTunicZora',
-      ),
-      ootItem(
-          'Scales',
-          'scalesMm',
-          'sharedScales',
-      ),
-      ootItem(
-          'Strength',
-          'strengthMm',
-          'sharedStrength',
-      ),
-      ootItem(
-          'Megaton Hammer',
-          'hammerMm',
-          'sharedHammer',
-      ),
-      ootItem(
-          'Boomerang',
-          'boomerangMm',
-          'sharedBoomerang',
-      ),
-      mmItem(
-          "Great Fairy's Sword",
-          'gfsOot',
-          'sharedGFS',
-      ),
-      ootItem(
-          'Slingshot',
-          'slingshotMm',
-          'sharedSlingshot',
-      ),
-      mmItem(
-          'Child Swords',
-          'extraChildSwordsOot',
-          'sharedSwords',
-      ),
-      ootItem(
-          'Deku Shield',
-          'dekuShieldMm',
-          'sharedShields',
-      ),
-      mmItem(
-          'Powder Keg',
-          'powderKegOot',
-          'sharedPowderKeg',
-      ),
-    ],
-  },
-  {
-    name: 'Cross-Game Masks',
-    description:
-        'Masks that have been imported from one game into the other.',
-    rows: [
-      mmItem(
-          'Blast Mask',
-          'blastMaskOot',
-          'sharedMaskBlast',
-      ),
-      mmItem(
-          'Stone Mask',
-          'stoneMaskOot',
-          'sharedMaskStone',
-      ),
-      mmItem(
-          'Kamaro Mask',
-          'kamaroMaskOot',
-          'sharedMaskKamaro',
-      ),
-      ootItem(
-          'Gerudo Mask',
-          'gerudoMaskMm',
-          'sharedMaskGerudo',
-      ),
-      ootItem(
-          'Skull Mask',
-          'skullMaskMm',
-          'sharedMaskSkull',
-      ),
-      ootItem(
-          'Spooky Mask',
-          'spookyMaskMm',
-          'sharedMaskSpooky',
-      ),
-    ],
-  },
-  {
-    name: 'Cross-Game Songs',
-    description:
-        'Songs that have been imported from one game into the other.',
-    rows: [
-      ootItem(
-          "Sun's Song",
-          'songSunMm',
-          'sharedSongSun',
-      ),
-      mmItem(
-          'Elegy of Emptiness',
-          'elegyOot',
-          'sharedSongElegy',
-      ),
-      mmItem(
-          'Song of Healing',
-          'songHealingOot',
-          'sharedSongHealing',
-      ),
-      mmItem(
-          'Song of Soaring',
-          'songSoaringOot',
-          'sharedSongSoaring',
-      ),
-      mmItem(
-          'Sonata of Awakening',
-          'songAwakeningOot',
-          'sharedSongAwakening',
-      ),
-      mmItem(
-          'Goron Lullaby',
-          'songGoronOot',
-          'sharedSongGoron',
-      ),
-      mmItem(
-          'New Wave Bossa Nova',
-          'songZoraOot',
-          'sharedSongZora',
-      ),
-      mmItem(
-          'Oath to Order',
-          'songOrderOot',
-          'sharedSongOrder',
-      ),
-      ootItem(
-          "Zelda's Lullaby",
-          'songZeldaLullabyMm',
-          'sharedSongZeldaLullaby',
-      ),
-      ootItem(
-          "Saria's Song",
-          'songSariasMm',
-          'sharedSongSarias',
-      ),
-      ootItem(
-          'Minuet of Forest',
-          'songMinuetMm',
-          'sharedSongMinuet',
-      ),
-      ootItem(
-          'Bolero of Fire',
-          'songBoleroMm',
-          'sharedSongBolero',
-      ),
-      ootItem(
-          'Serenade of Water',
-          'songSerenadeMm',
-          'sharedSongSerenade',
-      ),
-      ootItem(
-          'Requiem of Spirit',
-          'songRequiemMm',
-          'sharedSongRequiem',
-      ),
-      ootItem(
-          'Nocturne of Shadow',
-          'songNocturneMm',
-          'sharedSongNocturne',
-      ),
-      ootItem(
-          'Prelude of Light',
-          'songPreludeMm',
-          'sharedSongPrelude',
-      ),
-    ],
-  },
-  {
-    name: 'Extended Item Systems',
-    description:
-        'Additional item systems such as keys, clocks, souls, and other new progression items.',
-    rows: [
-      {
-        name: 'Skeleton Key',
-        oot: 'skeletonKeyOot',
-        mm: 'skeletonKeyMm',
-        shared: 'sharedSkeletonKey',
-      },
-      {
-        name: 'Platinum Token',
-        oot: 'platinumTokenOot',
-        mm: 'platinumTokenMm',
-        shared: 'sharedPlatinumToken',
-      },
-      {
-        name: 'Ocarina Buttons',
-        oot: 'ocarinaButtonsShuffleOot',
-        mm: 'ocarinaButtonsShuffleMm',
-        shared: 'sharedOcarinaButtons',
-      },
-      {
-        name: 'Shovel',
-        oot: 'shovelOot',
-        mm: 'shovelMm',
-        shared: 'sharedShovel',
-      },
-      {
-        name: 'Bombchu',
-        oot: 'bombchuBehaviorOot',
-        mm: 'bombchuBehaviorMm',
-        shared: 'sharedBombchu',
-        ootLabel: 'Behavior',
-        mmLabel: 'Behavior',
-      },
-      {
-        name: 'Enemy Souls',
-        oot: 'soulsEnemyOot',
-        mm: 'soulsEnemyMm',
-        shared: 'sharedSoulsEnemy',
-      },
-      {
-        name: 'Boss Souls',
-        oot: 'soulsBossOot',
-        mm: 'soulsBossMm',
-      },
-      {
-        name: 'NPC Souls',
-        oot: 'soulsNpcOot',
-        mm: 'soulsNpcMm',
-        shared: 'sharedSoulsNpc',
-      },
-      {
-        name: 'Animal Souls',
-        oot: 'soulsAnimalOot',
-        mm: 'soulsAnimalMm',
-        shared: 'sharedSoulsAnimal',
-      },
-      {
-        name: 'Misc. Souls',
-        oot: 'soulsMiscOot',
-        mm: 'soulsMiscMm',
-        shared: 'sharedSoulsMisc',
-      },
-      {
-        name: 'Rusty Keys',
-        oot: 'rustyKeysOot',
-        mm: 'rustyKeysMm',
-      },
-      {
-        name: 'Clocks',
-        oot: 'clocksOot',
-        mm: 'clocksMm',
-        ootLabel: 'Behavior',
-      },
-    ],
-  },
-] as const satisfies readonly ItemSection[];
-
 const SIMPLE_SECTIONS = [
   {
     name: 'Ocarina of Time Extensions',
     description:
         'Additional OoT-specific item behavior and progression options.',
-    settings: [
-      'blueFireArrows',
-      'iceArrowPlatformsOot',
-      'sunlightArrows',
-      'magicalRupee',
-      'songOfDoubleTimeOot',
-    ],
+    settings: settingsForCategory('items.extensions.oot'),
   },
   {
     name: "Majora's Mask Extensions",
     description:
         'Additional MM-specific item behavior and progression options.',
-    settings: [
-      'kegStrength3',
-      'adultMaskMm',
-      'transcendentFairy',
-      'menuNotebook',
-    ],
+    settings: settingsForCategory('items.extensions.mm'),
   },
   {
     name: 'General Item Extensions',
     description:
         'Extensions that affect both games or the item pool as a whole.',
-    settings: [
-      'fillWallets',
-      'bottleContentShuffle',
-      'sticksNutsUpgradesInitial',
-      'bronzeScale',
-      'childWallets',
-      'colossalWallets',
-      'bottomlessWallets',
-      'rupeeScaling',
-    ],
+    settings: settingsForCategory('items.extensions.general'),
   },
   {
     name: 'Coins',
     description:
         'Enable coin items and configure how many of each color are added to the pool.',
-    settings: [
-      'coins',
-      'coinsRed',
-      'coinsGreen',
-      'coinsBlue',
-      'coinsYellow',
-    ],
+    settings: settingsForCategory('items.extensions.coins'),
   },
   {
     name: 'Traps',
     description:
         'Configure which traps exist and how densely they replace junk items.',
-    settings: [
-      'trapIce',
-      'trapFire',
-      'trapShock',
-      'trapDrain',
-      'trapAntiMagic',
-      'trapKnockback',
-      'trapRupoor',
-      'cloakTraps',
-      'trapsQuantity',
-    ],
+    settings: settingsForCategory('items.extensions.traps'),
   },
 ] as const satisfies readonly SimpleSectionDefinition[];
-
-/*
- * Helpers
- */
 
 function gameEnabled(games: string, game: Game) {
   return games === 'ootmm' || games === game;
 }
-
-/*
- * Item table
- */
 
 function NativeItem({ enabled }: { enabled: boolean }) {
   return (
@@ -515,8 +183,8 @@ function NativeItem({ enabled }: { enabled: boolean }) {
           aria-disabled={!enabled || undefined}
           title="Already present in this game"
       >
-      Native
-    </span>
+        Native
+      </span>
   );
 }
 
@@ -543,8 +211,8 @@ function ItemCell({
                   className="text-sm text-muted-foreground/50"
                   aria-label="Not available"
               >
-            —
-          </span>
+                —
+              </span>
           ) : value === 'native' ? (
               <NativeItem enabled={enabled}/>
           ) : (
@@ -559,12 +227,16 @@ function ItemCell({
   );
 }
 
-function ItemSectionView({section, games,}: {
-  section: ItemSection;
+function ItemSectionView({
+                           section,
+                           games,
+                         }: {
+  section: ItemSectionDefinition;
   games: string;
 }) {
   const ootEnabled = gameEnabled(games, 'oot');
   const mmEnabled = gameEnabled(games, 'mm');
+  const rows = rowsForCategory(section.category, section.nativeMissing);
 
   return (
       <section className="rounded-xl border bg-card">
@@ -580,20 +252,20 @@ function ItemSectionView({section, games,}: {
 
         <div
             className="
-          hidden
-          grid-cols-[minmax(13rem,1.3fr)_repeat(3,minmax(10rem,1fr))]
-          gap-4
-          border-b
-          bg-muted/40
-          px-5
-          py-2.5
-          text-xs
-          font-semibold
-          uppercase
-          tracking-wide
-          text-muted-foreground
-          lg:grid
-        "
+              hidden
+              grid-cols-[minmax(13rem,1.3fr)_repeat(3,minmax(10rem,1fr))]
+              gap-4
+              border-b
+              bg-muted/40
+              px-5
+              py-2.5
+              text-xs
+              font-semibold
+              uppercase
+              tracking-wide
+              text-muted-foreground
+              lg:grid
+            "
         >
           <div>Item</div>
           <div className="text-center">Ocarina of Time</div>
@@ -602,7 +274,7 @@ function ItemSectionView({section, games,}: {
         </div>
 
         <div>
-          {section.rows.map((row, index) => (
+          {rows.map((row, index) => (
               <div
                   key={row.name}
                   className={[
@@ -645,8 +317,11 @@ function ItemSectionView({section, games,}: {
   );
 }
 
-function SimpleSection({name, description, settings,}: SimpleSectionDefinition)
-{
+function SimpleSection({
+                         name,
+                         description,
+                         settings,
+                       }: SimpleSectionDefinition) {
   return (
       <section className="rounded-xl border bg-card p-5">
         <header>
@@ -690,7 +365,7 @@ export function ExtendedItemsEditor() {
 
         {ITEM_SECTIONS.map(section => (
             <ItemSectionView
-                key={section.name}
+                key={section.category}
                 section={section}
                 games={games}
             />
