@@ -1,3 +1,8 @@
+import path from 'node:path';
+
+export const ROOT_DIR = path.resolve(import.meta.dirname, '../../../..');
+export const ROMS_DIR = path.join(ROOT_DIR, 'roms');
+
 export const OOT_GENERIC_GROTTOS = [
   0x00, /* Hyrule Field Market */
   0x02, /* Hyrule Field Southwest */
