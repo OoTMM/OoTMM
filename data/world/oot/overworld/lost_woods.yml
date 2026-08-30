@@ -120,6 +120,8 @@
     "Lost Woods Grotto Generic Butterfly 1": "butterfly"
     "Lost Woods Grotto Generic Butterfly 2": "butterfly"
     "Lost Woods Grotto Generic Butterfly 3": "butterfly"
+    "Lost Woods Generic Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Lost Woods Generic Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 

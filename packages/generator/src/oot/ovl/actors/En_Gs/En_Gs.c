@@ -117,7 +117,14 @@ static void EnGs_Alias(Xflag* xf)
             xf->id = 0;
             break;
         case SCE_OOT_ZORA_FOUNTAIN:
-            if (xf->setupId == 2) xf->id -= 4;
+            if (xf->setupId == 2)
+            {
+                switch (xf->id)
+                {
+                case 0x16: xf->id = 0x12; break;
+                case 0x17: xf->id = 0x14; break;
+                }
+            }
             xf->setupId = 0;
             break;
         case SCE_OOT_ZORA_DOMAIN:
@@ -156,8 +163,8 @@ static void EnGs_Alias(Xflag* xf)
             {
                 switch (xf->setupId)
                 {
-                case 1: xf->id -= 1; break;
-                case 2: xf->id += 4; break;
+                case 2: xf->id -= 1; break;
+                case 3: xf->id += 4; break;
                 }
             }
             xf->setupId = 0;
@@ -220,7 +227,7 @@ s32 func_80A4E3EC(EnGs* this, PlayState* play) {
 
 static void EnGs_Xflag(Xflag* xf, EnGs* this, int isBig)
 {
-    memcpy(&xf, &this->xflag, sizeof(Xflag));
+    memcpy(xf, &this->xflag, sizeof(Xflag));
     xf->sliceId = isBig;
 }
 

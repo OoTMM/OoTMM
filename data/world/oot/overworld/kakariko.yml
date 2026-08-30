@@ -268,6 +268,8 @@
     "Kakariko Grotto Butterfly 1": "butterfly"
     "Kakariko Grotto Butterfly 2": "butterfly"
     "Kakariko Grotto Butterfly 3": "butterfly"
+    "Kakariko Generic Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Kakariko Generic Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Kakariko Gossip Grotto": "true"
 

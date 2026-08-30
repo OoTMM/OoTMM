@@ -218,6 +218,12 @@
     <gs location="Hyrule Field Grotto Near Gerudo GS" flag="0x50" item="GS_TOKEN"/>
     <xflag type="grass" location="Hyrule Field Grotto Near Gerudo Grass 1" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RANDOM"/>
     <xflag type="grass" location="Hyrule Field Grotto Near Gerudo Grass 2" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RANDOM"/>
+    <xflag type="gossip" location="Hyrule Field Market Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x20" actor="0x9" item="FAIRY"/>
+    <xflag type="gossip" location="Hyrule Field Southeast Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x22" actor="0x9" item="FAIRY"/>
+    <xflag type="gossip" location="Hyrule Field Open Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x23" actor="0x9" item="FAIRY"/>
+    <xflag type="gossip-big" location="Hyrule Field Market Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x20" actor="0x9" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Hyrule Field Southeast Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x22" actor="0x9" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Hyrule Field Open Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x23" actor="0x9" item="FAIRY_BIG"/>
   </scene>
   <scene id="GROTTOS">
     <cow location="Hyrule Field Cow" flag="0x01" item="MILK"/>

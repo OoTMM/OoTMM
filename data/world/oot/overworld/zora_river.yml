@@ -205,6 +205,8 @@
     "Zora River Grotto Butterfly 1": "butterfly"
     "Zora River Grotto Butterfly 2": "butterfly"
     "Zora River Grotto Butterfly 3": "butterfly"
+    "Zora River Generic Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Zora River Generic Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Zora River Gossip Grotto": "true"
 
