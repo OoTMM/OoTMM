@@ -9,11 +9,38 @@ type BuildChecksState = {
   npcs: any;
 };
 
+const OV_VALUES = {
+  chest: 0x01,
+  collectible: 0x02,
+  npc: 0x03,
+  gs: 0x04,
+  sf: 0x05,
+  cow: 0x06,
+  shop: 0x07,
+  scrub: 0x08,
+  sr: 0x09,
+  fish: 0x0a,
+  xflag: 0x10,
+};
+
 function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number, value: number): number {
   const gameMask = game === 'mm' ? 0x80000000 : 0;
   return (((ov & 0x7f) << 24) | ((sceneId & 0xff) << 16) | (value & 0xffff) | gameMask) >>> 0;
 }
 
+type OvKeyXflagParams = {
+  game: 'oot' | 'mm';
+  sceneId: number;
+  sliceId: number;
+  roomId: number;
+  setupId: number;
+  actorId: number;
+};
+export function makeOvKeyXflag(params: OvKeyXflagParams) {
+  const roomSetup = (params.roomId | ((params.setupId & 3) << 6)) & 0xff;
+  const ovValue = OV_VALUES.xflag + params.sliceId;
+  return makeOvKey(params.game, ovValue, params.sceneId, (roomSetup << 8) | params.actorId);
+}
 
 function sceneLookup(scene: string, state: BuildChecksState): number {
   const id = state.scenes[scene];
@@ -30,20 +57,6 @@ function npcLookup(npc: string, state: BuildChecksState): number {
   }
   return id;
 }
-
-const OV_VALUES = {
-  chest: 0x01,
-  collectible: 0x02,
-  npc: 0x03,
-  gs: 0x04,
-  sf: 0x05,
-  cow: 0x06,
-  shop: 0x07,
-  scrub: 0x08,
-  sr: 0x09,
-  fish: 0x0a,
-  xflag: 0x10,
-};
 
 export async function extractEntries(filepath: string, state: BuildChecksState) {
   /* Parse the XML file */
@@ -108,10 +121,8 @@ export async function extractEntries(filepath: string, state: BuildChecksState) 
           const sliceId = parseInt(attrs['slice']);
           const roomId = parseInt(attrs['room']);
           const setupId = parseInt(attrs['setup']);
-          const roomSetup = (roomId | ((setupId & 3) << 6)) & 0xff;
           const actorId = parseInt(attrs['actor']);
-          const ovValue = OV_VALUES[ov] + sliceId;
-          key = makeOvKey(game, ovValue, sceneId, (roomSetup << 8) | actorId);
+          key = makeOvKeyXflag({ game, sceneId, sliceId, roomId, setupId, actorId });
         }
         break;
       default:

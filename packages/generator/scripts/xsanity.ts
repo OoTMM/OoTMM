@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import { SCENES } from '@ootmm/data';
+import { parseScenes, parseNpcs, parseChecks, makeOvKeyXflag } from '@ootmm/data/build';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
@@ -1604,7 +1605,7 @@ function makeChecks(rooms: RoomActors[], handlers: ActorHandlers): Check[] {
   return checks;
 }
 
-function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filterSubtype?: string) {
+function outputChecks(game: 'oot' | 'mm', checks: Check[], checkNames: Map<number, string>, filter?: string, filterSubtype?: string) {
   let lastSceneId = -1;
   let lastSetupId = -1;
 
@@ -1627,22 +1628,27 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filt
       lastSetupId = ra.setupId;
     }
 
-    const frags: string[] = [];
-    frags.push(`Scene ${ra.sceneId.toString(16)}`);
-    frags.push(`Setup ${ra.setupId}`);
-    frags.push(`Room ${decPad(ra.roomId, 2)}`);
-    frags.push(check.name);
-    if (check.roomActor.actor.halfDays !== 0x3ff) {
-      frags.push(`(HD:${binPad(check.roomActor.actor.halfDays, 10)})`);
+    const key = makeOvKeyXflag({ game, sceneId: ra.sceneId, setupId: ra.setupId, roomId: ra.roomId, actorId: ra.actor.actorId, sliceId: check.sliceId ?? 0 });
+    let name = checkNames.get(key);
+
+    if (!name) {
+      const frags: string[] = [];
+      frags.push(`Scene ${ra.sceneId.toString(16)}`);
+      frags.push(`Setup ${ra.setupId}`);
+      frags.push(`Room ${decPad(ra.roomId, 2)}`);
+      frags.push(check.name);
+      if (check.roomActor.actor.halfDays !== 0x3ff) {
+        frags.push(`(HD:${binPad(check.roomActor.actor.halfDays, 10)})`);
+      }
+      if (check.letter) {
+        frags.push(`[${check.letter.padEnd(2)}]`);
+      }
+      frags.push(`${decPad(ra.actor.actorId + 1, 2)}`);
+      if (check.name2) {
+        frags.push(check.name2);
+      }
+      name = frags.join(' ');
     }
-    if (check.letter) {
-      frags.push(`[${check.letter.padEnd(2)}]`);
-    }
-    frags.push(`${decPad(ra.actor.actorId + 1, 2)}`);
-    if (check.name2) {
-      frags.push(check.name2);
-    }
-    const name = frags.join(' ');
 
     console.log(`  <xflag type="${check.type}" location="${name}" slice="0x${(check.sliceId ?? 0).toString(16)}" setup="0x${ra.setupId.toString(16)}" room="0x${ra.roomId.toString(16)}" actor="0x${ra.actor.actorId.toString(16)}" item="${check.item}"/>`);
   }
@@ -1690,8 +1696,26 @@ async function build() {
   return { oot: ootMqRooms, mm: mmRooms };
 }
 
+async function getCheckNames() {
+  const data = new Map<number, string>();
+  const [scenes, npcs] = await Promise.all([
+    parseScenes(),
+    parseNpcs(),
+  ]);
+
+  const checks = await parseChecks({ scenes, npcs });
+  for (const c of checks) {
+    data.set(c.key, c.location);
+  }
+  return data;
+}
+
 async function run() {
-  const rooms = await build();
+  const [rooms, checkNames] = await Promise.all([
+    build(),
+    getCheckNames(),
+  ]);
+
   const argGame = process.argv[2];
   const argFilter = process.argv[3];
   const argFilterSubtype = process.argv[4];
@@ -1715,7 +1739,7 @@ async function run() {
 
   const gameRooms = rooms[gameWithMq];
   const checks = makeChecks(gameRooms, ACTORS_HANDLERS[game]);
-  outputChecks(game, checks, argFilter, argFilterSubtype);
+  outputChecks(game, checks, checkNames, argFilter, argFilterSubtype);
 }
 
 run().catch(e => {
