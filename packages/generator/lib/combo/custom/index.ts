@@ -1,9 +1,11 @@
-import type { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
 import type { DecompressedRoms } from '../decompress';
 
 import path from 'node:path';
 import fs from 'node:fs';
-import { Monitor, FILES } from '@ootmm/core';
+import { FILES } from '@ootmm/data';
+import { Monitor } from '@ootmm/core';
+import { concatUint8Arrays } from 'uint8array-extras';
 
 import { DmaData } from '../dma';
 import { arrayToIndexMap, toU32Buffer } from '../util';
@@ -18,7 +20,6 @@ import { CustomObjectsBuilder } from './custom-objects-builder';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { ObjectEditor } from './object-editor';
 import { patchAnimationPorts } from './custom-animation-builder';
-import {concatUint8Arrays} from "uint8array-extras";
 
 const AGE_MODEL_CMD_END     = 0x00000000;
 const AGE_MODEL_CMD_WRITE16 = 0x00000001;

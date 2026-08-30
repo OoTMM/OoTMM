@@ -20,7 +20,7 @@
       ]
     },
     "typecheck": {
-      "cache": true
+      "cache": false
     }
   },
   "defaultBase": "master",

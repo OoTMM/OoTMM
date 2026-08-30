@@ -1,5 +1,5 @@
 import { promises as fs } from 'node:fs';
-import { SCENES } from '@ootmm/core';
+import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';

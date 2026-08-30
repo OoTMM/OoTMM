@@ -1,7 +1,7 @@
+import type { CustomAnimation, Game } from '@ootmm/data';
 import type { DecompressedRoms } from '../decompress.ts';
-import type { CustomAnimation, Game } from '@ootmm/core';
 
-import { DATA_ANIMATIONS, FILES as GAME_FILES } from '@ootmm/core';
+import { DATA_ANIMATIONS, FILES as GAME_FILES } from '@ootmm/data';
 
 import { DmaData } from '../dma.ts';
 import { arrayToIndexMap } from '../util.ts';

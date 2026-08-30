@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, globSync } from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import * as CSV from 'csv/sync';
@@ -7,22 +7,20 @@ export const ROOT_DIR = path.resolve(import.meta.dirname, '..', '..', '..');
 export const DATA_DIR = path.join(ROOT_DIR, 'data');
 export const DIST_DIR = path.resolve(import.meta.dirname, '..', 'dist');
 
-export function emit(filename: string, data: any) {
-  mkdirSync(DIST_DIR, { recursive: true });
-  writeFileSync(path.join(DIST_DIR, `${filename}.json`), JSON.stringify(data));
+export async function emit(filename: string, data: any) {
+  await fs.mkdir(DIST_DIR, { recursive: true });
+  await fs.writeFile(path.join(DIST_DIR, `${filename}.json`), JSON.stringify(data));
 }
 
-export function loadYaml(patterns: string | string[]): any {
+export async function loadYaml(patterns: string | string[]): Promise<any> {
   patterns = Array.isArray(patterns) ? patterns : [patterns];
   let data: any = null;
 
   for (const p of patterns) {
-    const matchedFiles = globSync(p, { cwd: DATA_DIR });
-    if (matchedFiles.length === 0) {
-      throw new Error(`No files matched the pattern: ${p}`);
-    }
-    for (const name of matchedFiles) {
-      const file = readFileSync(path.join(DATA_DIR, name), 'utf8');
+    const match = fs.glob(p, { cwd: DATA_DIR });
+    for await (const name of match) {
+      const filename = path.join(DATA_DIR, name);
+      const file = await fs.readFile(filename, 'utf8');
       const parsed = parseYaml(file);
 
       if (data === null) {
@@ -39,11 +37,11 @@ export function loadYaml(patterns: string | string[]): any {
   return data;
 }
 
-export function loadTxt(name: string): string {
-  return readFileSync(path.join(DATA_DIR, name), 'utf8');
+export function loadTxt(name: string): Promise<string> {
+  return fs.readFile(path.join(DATA_DIR, name), 'utf8');
 }
 
-export function loadCsv(name: string): any[] {
-  const content = readFileSync(path.join(DATA_DIR, name), "utf8");
+export async function loadCsv(name: string): Promise<any[]> {
+  const content = await fs.readFile(path.join(DATA_DIR, name), 'utf8');
   return CSV.parse(content, { columns: true, skip_empty_lines: true, trim: true });
 }

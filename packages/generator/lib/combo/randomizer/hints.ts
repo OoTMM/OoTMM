@@ -1,8 +1,10 @@
-import type { Game, Settings } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
+import type { Settings } from '@ootmm/core';
 import type { HintGossip, LogicResult } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { GOSSIPS_BY_LOCATION, HINTS, REGIONS, regionData } from '@ootmm/core';
+import { GOSSIPS_BY_LOCATION, HINTS, REGIONS } from '@ootmm/data';
+import { regionData } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, END_BOSS_METADATA, BOSS_INDEX_BY_DUNGEON } from '@ootmm/logic';
 
 import { padBuffer16 } from '../util';

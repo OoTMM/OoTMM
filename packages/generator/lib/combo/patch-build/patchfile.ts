@@ -1,4 +1,4 @@
-import type { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
 
 import JSZip from 'jszip';
 import { concatUint8Arrays, base64ToUint8Array, uint8ArrayToBase64 } from 'uint8array-extras';

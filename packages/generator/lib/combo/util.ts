@@ -1,5 +1,4 @@
-import type { Game } from '@ootmm/core';
-import fs from 'fs';
+import fs from 'node:fs';
 
 import { bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU32LE } from './util/buffer';
 

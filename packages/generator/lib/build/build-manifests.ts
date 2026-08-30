@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { CHECKS } from '@ootmm/core';
+import { CHECKS } from '@ootmm/data';
 
 const MANIFESTS_DIR = path.resolve(import.meta.dirname, '../../build/manifests');
 

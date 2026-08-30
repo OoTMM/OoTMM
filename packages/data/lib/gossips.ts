@@ -1,11 +1,5 @@
-import type { Game } from './defines';
-
-export type GossipDefinition = {
-  game: Game;
-  location: string;
-  type: 'gossip' | 'gossip-grotto' | 'gossip-moon';
-  id: number;
-};
+import type { Game } from './game';
+import type { GossipDefinition } from './types';
 
 import DATA from '../dist/data-gossips.json';
 

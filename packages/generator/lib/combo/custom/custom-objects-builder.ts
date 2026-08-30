@@ -1,7 +1,7 @@
-import type { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
 import type { DecompressedRoms } from '../decompress';
 
-import { FILES } from '@ootmm/core';
+import { FILES } from '@ootmm/data';
 import { DmaData } from '../dma';
 import { arrayToIndexMap } from '../util';
 import { ObjectEditor } from './object-editor';

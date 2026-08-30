@@ -1,10 +1,11 @@
-import type { Game, Settings } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
+import type { Settings } from '@ootmm/core';
 import type { Item } from '@ootmm/logic';
 
-import { gameId } from '@ootmm/core';
+import { gameId } from '@ootmm/data';
 import { SharedItemGroups, ItemHelpers } from '@ootmm/logic';
-import { ITEMS_SUBSTITUTIONS, SHARED_ITEMS } from './checks';
 import { GI } from '../data';
+import { ITEMS_SUBSTITUTIONS, SHARED_ITEMS } from './checks';
 
 export function gi(settings: Settings, game: Game, item: Item, generic: boolean) {
   let itemId = item.id;

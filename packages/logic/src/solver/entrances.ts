@@ -4,7 +4,8 @@ import type { World, WorldArea } from '../world';
 import type { PlayerItem, PlayerItems, ItemProperties } from '../items';
 import type { Expr } from '../expr';
 
-import { Monitor, Random, sample, ENTRANCES } from '@ootmm/core';
+import { ENTRANCES } from '@ootmm/data';
+import { Monitor, Random, sample } from '@ootmm/core';
 import { exprAnd, exprEvent, exprOr, exprTrue } from '../expr';
 import { BOSS_INDEX_BY_DUNGEON, cloneWorld, DUNGEONS_REGIONS } from '../world';
 import { BOSS_METADATA_BY_ENTRANCE } from '../data';
