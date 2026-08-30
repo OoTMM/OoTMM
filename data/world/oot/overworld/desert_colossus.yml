@@ -42,6 +42,8 @@
     "Desert Colossus Rock Circle 2 Rock 7": "true"
     "Desert Colossus Rock Circle 2 Rock 8": "true"
     "Desert Colossus Silver Boulder": "can_lift_silver"
+    "Desert Colossus Gossip Fairy": "gossip_fairy"
+    "Desert Colossus Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Desert Colossus Gossip": "true"
 

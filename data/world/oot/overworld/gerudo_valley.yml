@@ -35,6 +35,8 @@
     "Gerudo Valley Rock Entrance Water 3": "is_adult || has_iron_boots || ((has_explosives || can_use_mask_blast) && can_swim)"
     "Gerudo Valley Boulder Before Bridge 1": "is_adult && has_explosives_or_hammer"
     "Gerudo Valley Boulder Before Bridge 2": "is_adult && has_explosives_or_hammer"
+    "Gerudo Valley Gossip Fairy": "gossip_fairy"
+    "Gerudo Valley Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Gerudo Valley Gossip": "true"
 
