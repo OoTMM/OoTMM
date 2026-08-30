@@ -118,6 +118,8 @@
     "Zora River Rock Circle Lower Rock 6": "true"
     "Zora River Rock Circle Lower Rock 7": "true"
     "Zora River Rock Circle Lower Rock 8": "true"
+    "Zora River Gossip Fairy Water": "gossip_fairy"
+    "Zora River Gossip Big Fairy Water": "gossip_fairy_big"
   gossip:
     "Zora River Gossip Near Domain": "true"
 
@@ -139,6 +141,8 @@
     "Zora River Rock Circle Upper Rock 7": "true"
     "Zora River Rock Circle Upper Rock 8": "true"
     "Zora River Boulder Upper": "has_explosives_or_hammer"
+    "Zora River Gossip Fairy Upper": "gossip_fairy"
+    "Zora River Gossip Big Fairy Upper": "gossip_fairy_big"
   gossip:
     "Zora River Gossip High Pillar": "true"
 
