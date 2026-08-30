@@ -162,6 +162,13 @@ static void EnGs_Alias(Xflag* xf)
             }
             xf->setupId = 0;
             break;
+        case SCE_OOT_LAKE_HYLIA:
+            if (xf->setupId == 2)
+            {
+                xf->setupId = 0;
+                xf->id += 0x32;
+            }
+            break;
         }
 }
 

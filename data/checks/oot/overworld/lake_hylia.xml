@@ -64,6 +64,12 @@
     <xflag type="soil" location="Lake Hylia Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="FAIRY"/>
     <xflag type="soil" location="Lake Hylia Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x27" item="FAIRY"/>
     <xflag type="soil" location="Lake Hylia Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x27" item="FAIRY"/>
+    <xflag type="gossip" location="Lake Hylia Gossip Fairy Land" slice="0x0" setup="0x0" room="0x0" actor="0x34" item="FAIRY"/>
+    <xflag type="gossip" location="Lake Hylia Gossip Fairy Water East" slice="0x0" setup="0x0" room="0x0" actor="0x35" item="FAIRY"/>
+    <xflag type="gossip" location="Lake Hylia Gossip Fairy Water West" slice="0x0" setup="0x0" room="0x0" actor="0x36" item="FAIRY"/>
+    <xflag type="gossip-big" location="Lake Hylia Gossip Big Fairy Land" slice="0x1" setup="0x0" room="0x0" actor="0x34" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Lake Hylia Gossip Big Fairy Water East" slice="0x1" setup="0x0" room="0x0" actor="0x35" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Lake Hylia Gossip Big Fairy Water West" slice="0x1" setup="0x0" room="0x0" actor="0x36" item="FAIRY_BIG"/>
   </scene>
   <scene id="LABORATORY">
     <npc location="Laboratory Dive" npc="LABORATORY_DIVE" item="HEART_PIECE"/>
