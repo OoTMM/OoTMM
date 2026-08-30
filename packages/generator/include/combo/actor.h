@@ -458,6 +458,7 @@ s32 Actor_SetPlayerImpact(PlayState* play, PlayerImpactType type, s32 timer, f32
 void Actor_RequestQuakeAndRumble(Actor* actor, PlayState* play, s16 quakeY, s16 quakeDuration);
 #endif
 void Actor_SetClosestSecretDistance(Actor* actor, PlayState* play);
+void Actor_GetScreenPos(PlayState* play, Actor* actor, s16* x, s16* y);
 
 #if defined(GAME_OOT)
 typedef enum NaviEnemy {

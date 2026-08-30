@@ -21,6 +21,9 @@ osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 Audio_SetMainBgmTempoFreqAfterFanfare = 0x800c64a0;
+Actor_GetScreenPos = 0x80022b14;
+Color_RGBA8_Copy = 0x800646c8;
+CollisionCheck_SetInfo2 = 0x80050370;
 
 gAudioLoadStatusFontSample = 0x80128a68;
 
