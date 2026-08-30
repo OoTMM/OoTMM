@@ -44,6 +44,10 @@
     <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 3" slice="0x2" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
     <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 4" slice="0x3" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
     <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 5" slice="0x4" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
+    <xflag type="gossip" location="Hyrule Castle Gossip Fairy Near Castle" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="FAIRY"/>
+    <xflag type="gossip" location="Hyrule Castle Gossip Fairy Near Entrance" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="FAIRY"/>
+    <xflag type="gossip-big" location="Hyrule Castle Gossip Big Fairy Near Castle" slice="0x1" setup="0x0" room="0x0" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="gossip-big" location="Hyrule Castle Gossip Big Fairy Near Entrance" slice="0x1" setup="0x0" room="0x0" actor="0x3" item="FAIRY_BIG"/>
   </scene>
   <scene id="CASTLE_COURTYARD">
     <npc location="Zelda's Letter" npc="ZELDA_LETTER" item="ZELDA_LETTER"/>
