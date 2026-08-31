@@ -29,6 +29,8 @@
     "Path to Mountain Village Small Snowball Lower Spring 4": "is_spring"
     "Path to Mountain Village Snow Tree Lower 1": "true"
     "Path to Mountain Village Snow Tree Lower 2": "true"
+    "Path to Mountain Village Gossip Fairy": "gossip_fairy"
+    "Path to Mountain Village Gossip Big Fairy": "gossip_fairy_big"
 
 "Mountain Village Path Upper":
   region: PATH_TO_MOUNTAIN_VILLAGE

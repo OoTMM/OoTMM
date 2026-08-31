@@ -143,6 +143,9 @@
 "kill_big_octo_close": "has_mask_zora || can_use_nayru || can_use_din || has_arrows || can_hookshot_short || has_boomerang"
 "gorman_gates_moved": "event(ALIENS) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_05_30)"
 
+"gossip_fairy": "can_play_healing || can_play_epona"
+"gossip_fairy_big": "can_play_storms"
+
 # Song events
 "song_event_zelda(x)": "_song_event_mm(x, 0) && can_play_zelda"
 "song_event_epona(x)": "_song_event_mm(x, 1) && can_play_epona"
