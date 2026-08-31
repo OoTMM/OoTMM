@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 - Remove the mostly-unused 'cross' tokens setting.
 - Changed Starting Age to Starting Age OoT to differentiate from the new Starting Age MM setting.
 - Remove "Swordless Adult" as a setting - it's now always enabled.
-- When going back to spawn, players can now explicitly select which spawn point to get back to from the non-starting age.
+- When going back to spawn, players can now explicitly select which spawn point to get back to from the non-starting age, after having traveled through time at the Temple of Time.
 - Remove the "Distinct Worlds" setting, all worlds are now distinct by default.
 - Complete overhaul of the multiplayer system, see website for the setup guide and details.
 - Change how the region-state wisps are handled when set to "dungeon beaten", ER is no longer required for them to show up.

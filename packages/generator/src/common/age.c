@@ -2,6 +2,11 @@
 #include <combo/age.h>
 #include <combo/inventory.h>
 
+int Age_GetStarting(void)
+{
+    return Config_Flag(CFG_OOT_START_ADULT) ? AGE_ADULT : AGE_CHILD;
+}
+
 static void Age_SwapFaroreOot(void)
 {
     OotFaroreWind* current;

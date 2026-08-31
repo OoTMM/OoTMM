@@ -143,10 +143,9 @@ static int KaleidoScope_HandleAfterSave(PlayState* play)
 
 static int KaleidoScope_CanReturnToEitherSpawn(void)
 {
-    u8 startingAge;
-
-    startingAge = Config_Flag(CFG_OOT_START_ADULT) ? AGE_ADULT : AGE_CHILD;
-    if (gOotSave.age == startingAge)
+    if (!gSharedCustomSave.oot.hasTimeTraveledAtTemple)
+        return FALSE;
+    if (gOotSave.age == Age_GetStarting())
         return FALSE;
 
     return TRUE;
@@ -167,7 +166,7 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
             PlaySound(NA_SE_SY_DECIDE);
             if (!KaleidoScope_CanReturnToEitherSpawn())
             {
-                KaleidoScope_GoBackToSpawn(play, gOotSave.age);
+                KaleidoScope_GoBackToSpawn(play, Age_GetStarting());
                 return 1;
             }
             else

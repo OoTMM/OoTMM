@@ -30,6 +30,8 @@ void BgTokiSwd_Handler(Actor* this, PlayState* play)
 
     if (Actor_HasParentZ(this))
     {
+        gSharedCustomSave.oot.hasTimeTraveledAtTemple = TRUE;
+
         /* Time Travel */
         Age_SwapOot(play);
         play->transitionTrigger = TRANS_TRIGGER_START;

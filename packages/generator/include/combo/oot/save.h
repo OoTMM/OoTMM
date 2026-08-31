@@ -474,6 +474,7 @@ typedef struct ALIGNED(16)
     u8  sr[16];
     OotRespawnData fwRespawnDungeonEntrance[2];
     s16 powderKegTimer;
+    u8  hasTimeTraveledAtTemple:1;
     u8  hasElegy:1;
     u8  chateauActive:1;
     u8  hasSongHealing:1;

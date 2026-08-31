@@ -6,6 +6,7 @@
 
 typedef struct PlayState PlayState;
 
+int Age_GetStarting(void);
 void Age_SetOot(PlayState* play, int age);
 void Age_SwapOot(PlayState* play);
 void Age_SetMm(PlayState* play, int age);
