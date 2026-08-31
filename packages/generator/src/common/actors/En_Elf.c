@@ -162,6 +162,8 @@ static int EnElf_IsShuffled(Actor_EnElf* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
+    if (!Xflag_IsValidEx(this->xflag))
+        return FALSE;
     Xflag_ItemQuery(&q, this->xflag, this->extendedGi);
     if (Xflag_Get(this->xflag))
         q.ovFlags |= OVF_RENEW;

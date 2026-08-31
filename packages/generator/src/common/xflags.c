@@ -310,6 +310,17 @@ int Xflag_IsValid(Xflag* xf)
     return TRUE;
 }
 
+int Xflag_IsValidEx(XflagID id)
+{
+    ComboItemOverride o;
+
+    if (id == XFLAGID_NONE)
+        return FALSE;
+
+    Xflag_ItemOverride(&o, id, GI_NONE);
+    return (o.gi != GI_NONE);
+}
+
 int Xflag_IsShuffled(Xflag* xf)
 {
     return Xflag_IsValid(xf) && !Xflag_GetIndirect(xf);
