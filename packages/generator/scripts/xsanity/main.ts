@@ -1,16 +1,11 @@
 import type { Game } from '@ootmm/data';
-import type { Actor, ActorHandlers, AddressingTable, Check, RoomActor, RoomActors } from './types';
+import type { ActorHandlers, Check, RoomActor, RoomActors } from './types';
 
-import { promises as fs } from 'node:fs';
 import { SCENES } from '@ootmm/data';
-import { parseScenes, parseNpcs, parseChecks, makeOvKeyXflag } from '@ootmm/data/build';
+import { parseScenes, parseNpcs, parseChecks } from '@ootmm/data/build';
 
-import { CodeGen } from '../../lib/combo/util/codegen';
-import { CONFIGS } from './data';
 import { ACTORS_HANDLERS } from './handlers';
 import { makeRooms } from './rooms';
-
-const SLICES = 12;
 
 function scenesById(game: 'oot' | 'mm') {
   const data: {[k: number]: string} = {};
@@ -22,96 +17,6 @@ function scenesById(game: 'oot' | 'mm') {
   return data;
 }
 
-function sliceOverrideOot(a: Actor) {
-  return -1;
-}
-
-function sliceOverrideMm(a: Actor) {
-  return -1;
-}
-
-function sliceOverride(game: Game, a: Actor) {
-  return game === 'oot' ? sliceOverrideOot(a) : sliceOverrideMm(a);
-}
-
-function sliceSize(game: Game, a: Actor) {
-  const conf = CONFIGS[game];
-  if (!conf.INTERESTING_ACTORS.includes(a.typeId))
-    return 0;
-  const override = sliceOverride(game, a);
-  if (override !== -1)
-    return override;
-  return conf.SLICES[a.typeId] || 1;
-}
-
-function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingTable {
-  let sceneId = -1;
-  let setupId = -1;
-  let roomId = -1;
-  let scenesTable: number[] = [];
-  let setupsTable: number[] = [];
-  let roomsTable: number[] = [];
-  let bits = 0;
-
-  for (const roomActor of roomActors) {
-    /* If it's a new scene, push the offset to the setups table */
-    while (sceneId < roomActor.sceneId) {
-      sceneId++;
-      scenesTable.push(setupsTable.length);
-      setupId = -1;
-      roomId = -1;
-    }
-
-    /* If it's a new setup, push the offset to the room table */
-    while (setupId < roomActor.setupId) {
-      setupId++;
-      setupsTable.push(roomsTable.length);
-      roomId = -1;
-    }
-
-    for (let slice = 0; slice < SLICES; ++slice) {
-      /* We need bits starting at the first useful actor */
-      const pred = (a: Actor) => sliceSize(game, a) > slice;
-      let firstBit = roomActor.actors.findIndex(pred);
-      if (firstBit === -1) {
-        firstBit = 0;
-      }
-      let lastBit = roomActor.actors.findLastIndex(pred);
-      if (lastBit === -1) {
-        lastBit = 0;
-      } else {
-        lastBit += 1;
-      }
-      const bitCount = lastBit - firstBit;
-
-      /* Push the bit pos */
-      while (roomId < roomActor.roomId * SLICES + slice) {
-        roomId++;
-        roomsTable.push(bits - firstBit);
-      }
-
-      /* Allocate bits */
-      bits += bitCount;
-    }
-  }
-
-  return { scenesTable, setupsTable, roomsTable, bitCount: bits };
-}
-
-async function codegenHeader(addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
-  const byteCountOot = Math.floor((addrTableOotMq.bitCount + 7) / 8);
-  const byteCountMm = Math.floor((addrTableMm.bitCount + 7) / 8);
-  const cg = new CodeGen(import.meta.dirname + '/../../include/combo/xflags_data.h', 'XFLAGS_DATA');
-  cg.define('XFLAGS_COUNT_OOT', byteCountOot);
-  cg.define('XFLAGS_COUNT_MM', byteCountMm);
-  return cg.emit();
-}
-
-function hexPad(n: number, width: number) {
-  const s = n.toString(16);
-  return '0x' + '0'.repeat(width - s.length) + s;
-}
-
 function binPad(n: number, width: number) {
   const s = n.toString(2);
   return '0b' + '0'.repeat(width - s.length) + s;
@@ -121,35 +26,6 @@ function decPad(n: number, width: number) {
   const s = n.toString();
   const count = width - s.length;
   return count > 0 ? '0'.repeat(width - s.length) + s : s;
-}
-
-async function writeAddressingTable(game: Game, addressingTable: AddressingTable) {
-  const base = `${import.meta.dirname}/../../data/static`;
-  const scenesTableFilename = `${base}/xflag_table_${game}_scenes.bin`;
-  const setupsTableFilename = `${base}/xflag_table_${game}_setups.bin`;
-  const roomsTableFilename = `${base}/xflag_table_${game}_rooms.bin`;
-
-  const scenesTableData = Buffer.alloc(addressingTable.scenesTable.length * 2);
-  const setupsTableData = Buffer.alloc(addressingTable.setupsTable.length * 2);
-  const roomsTableData = Buffer.alloc(addressingTable.roomsTable.length * 2);
-
-  for (let i = 0; i < addressingTable.scenesTable.length; ++i) {
-    scenesTableData.writeUInt16BE(addressingTable.scenesTable[i], i * 2);
-  }
-
-  for (let i = 0; i < addressingTable.setupsTable.length; ++i) {
-    setupsTableData.writeUInt16BE(addressingTable.setupsTable[i], i * 2);
-  }
-
-  for (let i = 0; i < addressingTable.roomsTable.length; ++i) {
-    roomsTableData.writeInt16BE(addressingTable.roomsTable[i], i * 2);
-  }
-
-  return Promise.all([
-    fs.writeFile(scenesTableFilename, scenesTableData),
-    fs.writeFile(setupsTableFilename, setupsTableData),
-    fs.writeFile(roomsTableFilename, roomsTableData),
-  ]);
 }
 
 function letterChecks(checks: Check[]) {
@@ -227,8 +103,10 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], checkNames: Map<numbe
       lastSetupId = ra.setupId;
     }
 
-    const key = makeOvKeyXflag({ game, sceneId: ra.sceneId, setupId: ra.setupId, roomId: ra.roomId, actorId: ra.actor.actorId, sliceId: check.sliceId ?? 0 });
-    let name = checkNames.get(key);
+    /* TODO: Repair this eventually */
+    //const key = makeOvKeyXflag({ game, sceneId: ra.sceneId, setupId: ra.setupId, roomId: ra.roomId, actorId: ra.actor.actorId, sliceId: check.sliceId ?? 0 });
+    //let name = checkNames.get(key);
+    let name = null;
 
     if (!name) {
       const frags: string[] = [];
@@ -255,23 +133,6 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], checkNames: Map<numbe
     console.log('</scene>');
 }
 
-async function build() {
-  const rooms = await makeRooms();
-
-  /* Build the addr tables */
-  const addrTableOotMq = buildAddressingTable('oot', rooms.oot);
-  const addrTableMm = buildAddressingTable('mm', rooms.mm);
-
-  /* Codegen and write files */
-  await Promise.all([
-    codegenHeader(addrTableOotMq, addrTableMm),
-    writeAddressingTable('oot', addrTableOotMq),
-    writeAddressingTable('mm', addrTableMm),
-  ]);
-
-  return rooms;
-}
-
 async function getCheckNames() {
   const data = new Map<number, string>();
   const [scenes, npcs] = await Promise.all([
@@ -279,7 +140,7 @@ async function getCheckNames() {
     parseNpcs(),
   ]);
 
-  const checks = await parseChecks({ scenes, npcs });
+  const { checks } = await parseChecks({ scenes, npcs });
   for (const c of checks) {
     data.set(c.key, c.location);
   }
@@ -288,7 +149,7 @@ async function getCheckNames() {
 
 export async function run() {
   const [rooms, checkNames] = await Promise.all([
-    build(),
+    makeRooms(),
     getCheckNames(),
   ]);
 

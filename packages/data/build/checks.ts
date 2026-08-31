@@ -28,20 +28,6 @@ function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number, value: numbe
   return (((ov & 0x7f) << 24) | ((sceneId & 0xff) << 16) | (value & 0xffff) | gameMask) >>> 0;
 }
 
-type OvKeyXflagParams = {
-  game: 'oot' | 'mm';
-  sceneId: number;
-  sliceId: number;
-  roomId: number;
-  setupId: number;
-  actorId: number;
-};
-export function makeOvKeyXflag(params: OvKeyXflagParams) {
-  const roomSetup = (params.roomId | ((params.setupId & 3) << 6)) & 0xff;
-  const ovValue = OV_VALUES.xflag + params.sliceId;
-  return makeOvKey(params.game, ovValue, params.sceneId, (roomSetup << 8) | params.actorId);
-}
-
 function sceneLookup(scene: string, state: BuildChecksState): number {
   const id = state.scenes[scene];
   if (id === undefined) {
