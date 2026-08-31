@@ -22,19 +22,6 @@
 # define EN_ELF_SFX_ICE_TRAP     0x31a4
 #endif
 
-void EnElf_Aliases(Xflag* xf)
-{
-#if defined(GAME_OOT)
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_DESERT_COLOSSUS:
-        xf->id = 1;
-        xf->setupId = 0;
-        break;
-    }
-#endif
-}
-
 void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
 {
     comboXflagItemQuery(q, &this->xflag, this->extendedGi);
@@ -195,8 +182,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     }
     else
     {
-        if (Xflag_Init(&this->xflag, &this->base, play))
-            EnElf_Aliases(&this->xflag);
+        Xflag_Init(&this->xflag, &this->base, play);
     }
 
     init = actorAddr(ACTOR_EN_ELF, EN_ELF_INIT_VROM);

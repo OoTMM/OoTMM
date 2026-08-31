@@ -8,14 +8,18 @@
     <gs location="Desert Colossus GS Soil" flag="0xa8" item="GS_TOKEN"/>
     <gs location="Desert Colossus GS Tree" flag="0xab" item="GS_TOKEN"/>
     <gs location="Desert Colossus GS Plateau" flag="0xaa" item="GS_TOKEN"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 1" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 2" slice="0x1" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 3" slice="0x2" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 4" slice="0x3" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 5" slice="0x4" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 6" slice="0x5" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 7" slice="0x6" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="fairy" location="Desert Colossus Oasis Fairy 8" slice="0x7" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
+    <actor>
+      <match setup="0" actor="1"/>
+      <match setup="2" actor="0"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 2" slice="1" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 3" slice="2" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 4" slice="3" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 5" slice="4" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 6" slice="5" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 7" slice="6" item="FAIRY"/>
+      <xflag type="fairy" location="Desert Colossus Oasis Fairy 8" slice="7" item="FAIRY"/>
+    </actor>
     <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 1" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
     <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 2" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="RUPEE_BLUE"/>
     <xflag type="wonder" location="Desert Colossus Wonder Item Oasis Child" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="RUPEE_BLUE"/>

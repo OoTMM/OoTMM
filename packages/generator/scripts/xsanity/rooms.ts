@@ -80,17 +80,6 @@ function sortRoomActors(roomActors: RoomActors[]) {
   });
 }
 
-function filterActors(actors: Actor[], game: Game): Actor[] {
-  /* Filter the unintresting trailing actors */
-  let lastInterestingActor = -1;
-  for (let i = 0; i < actors.length; i++) {
-    if (CONFIGS[game].INTERESTING_ACTORS.includes(actors[i].typeId)) {
-      lastInterestingActor = i;
-    }
-  }
-  return actors.slice(0, lastInterestingActor + 1);
-}
-
 function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
   const typeIdMask = (game === 'mm' ? 0xfff : 0xffff);
   let actors: Actor[] = [];
@@ -123,7 +112,6 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
       actors.push({ actorId, halfDays, typeId, pos: [posx, posy, posz], rx, ry, rz, params });
     }
   }
-  actors = filterActors(actors, game);
 
   /* OoT generic grottos */
   if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x00) {
