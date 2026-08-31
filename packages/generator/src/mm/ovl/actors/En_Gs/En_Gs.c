@@ -1,4 +1,5 @@
 #include "En_Gs.h"
+#include <combo/hint.h>
 #include <assets/mm/objects/object_gs.h>
 #include <assets/mm/objects/gameplay_keep.h>
 
@@ -17,7 +18,7 @@ void func_80997E4C(EnGs* this, PlayState* play);
 void func_80998040(EnGs* this, PlayState* play);
 void func_8099807C(EnGs* this, PlayState* play);
 void func_80998300(EnGs* this, PlayState* play);
-void func_809984F4(EnGs* this, PlayState* play);
+void EnGs_AfterDungeonSong(EnGs* this, PlayState* play);
 void func_809985B8(EnGs* this, PlayState* play);
 void func_80998704(EnGs* this, PlayState* play);
 void func_8099874C(EnGs* this, PlayState* play);
@@ -177,8 +178,9 @@ void func_80997D38(EnGs* this, PlayState* play) {
 
     if (Message_GetState(&play->msgCtx) == TEXT_STATE_NONE) {
         if (this->actor.xzDistToPlayer <= D_8099A408[this->actor.params]) {
+            /* Patched distance for easier interaction */
             SubS_OfferTalkExchangeFacing(&this->actor, play, D_8099A408[this->actor.params],
-                                         D_8099A408[this->actor.params], PLAYER_IA_NONE, 0x2000, 0x2000);
+                                         D_8099A408[this->actor.params], PLAYER_IA_NONE, 0x4000, 0x7fff);
         }
     }
 
@@ -188,19 +190,43 @@ void func_80997D38(EnGs* this, PlayState* play) {
 }
 
 void func_80997DEC(EnGs* this, PlayState* play) {
-    if (Player_GetMask(play) == PLAYER_MASK_TRUTH) {
-        this->unk_210 = 0x20D1;
-    } else {
-        this->unk_210 = 0x20D0;
-    }
+    /* Patch - remove mask of truth check */
+    this->textId = 0x20D0;
     this->unk_19A |= 0x200;
     this->actionFunc = func_80997E4C;
+}
+
+void EnGs_DisplayHint(PlayState* play, EnGs* this)
+{
+    u16 tmp;
+    u8 key;
+
+    if (this->actor.params == 1 || this->actor.params == 2)
+    {
+        tmp = this->unk_198;
+        key = (tmp & 0x1f) | 0x20;
+    }
+    else
+    {
+        key = (this->unk_195 & 0x1f);
+        switch (play->sceneId)
+        {
+        case SCE_MM_MOON_DEKU:
+        case SCE_MM_MOON_GORON:
+        case SCE_MM_MOON_ZORA:
+        case SCE_MM_MOON_LINK:
+            key |= 0x40;
+            break;
+        }
+    }
+    PlayerDisplayTextBox(play, 0x20d0, this);
+    Hint_Display(play, key);
 }
 
 void func_80997E4C(EnGs* this, PlayState* play) {
     switch (Message_GetState(&play->msgCtx)) {
         case TEXT_STATE_NONE:
-            Message_StartTextbox(play, this->unk_210, &this->actor);
+            EnGs_DisplayHint(play, this);
             break;
 
         case TEXT_STATE_NEXT:
@@ -220,33 +246,33 @@ void func_80997E4C(EnGs* this, PlayState* play) {
                     case 0x20D1:
                         switch (this->actor.params) {
                             case ENGS_0:
-                                this->unk_210 = this->unk_195 + 0x20D3;
-                                if (this->unk_210 >= 0x20D4) {
-                                    //s32 temp_v1 = this->unk_210 - 0x20D4;
+                                this->textId = this->unk_195 + 0x20D3;
+                                if (this->textId >= 0x20D4) {
+                                    //s32 temp_v1 = this->textId - 0x20D4;
 
-                                    //if ((this->unk_210 < 0x20E8) &&
+                                    //if ((this->textId < 0x20E8) &&
                                     //    ((temp_v1 + ITEM_MM_MASK_TRUTH) == INV_CONTENT(temp_v1 + ITEM_MASK_TRUTH))) {
-                                    //    this->unk_210 = temp_v1 + 0x2103;
+                                    //    this->textId = temp_v1 + 0x2103;
                                     //}
                                 }
                                 break;
 
                             case ENGS_3:
-                                this->unk_210 = this->unk_195 + 0x20B0;
+                                this->textId = this->unk_195 + 0x20B0;
                                 break;
 
                             case ENGS_1:
-                                this->unk_210 = this->unk_195 + 0x20F3;
+                                this->textId = this->unk_195 + 0x20F3;
                                 break;
 
                             case ENGS_2:
-                                this->unk_210 = this->unk_195 + 0x20F7;
+                                this->textId = this->unk_195 + 0x20F7;
                                 break;
 
                             default:
                                 break;
                         }
-                        Message_ContinueTextbox(play, this->unk_210);
+                        Message_ContinueTextbox(play, this->textId);
                         break;
 
                     default:
@@ -300,7 +326,7 @@ void func_8099807C(EnGs* this, PlayState* play) {
                         this->unk_19C = 5;
                         this->unk_19A |= 1;
                         func_80999AC0(this);
-                        func_809984F4(this, play);
+                        EnGs_AfterDungeonSong(this, play);
                     }
                     break;
 
@@ -310,7 +336,7 @@ void func_8099807C(EnGs* this, PlayState* play) {
                         this->unk_19C = 5;
                         this->unk_19A |= 1;
                         func_80999AC0(this);
-                        func_809984F4(this, play);
+                        EnGs_AfterDungeonSong(this, play);
                     }
                     break;
 
@@ -320,7 +346,7 @@ void func_8099807C(EnGs* this, PlayState* play) {
                         this->unk_19C = 5;
                         this->unk_19A |= 1;
                         func_80999AC0(this);
-                        func_809984F4(this, play);
+                        EnGs_AfterDungeonSong(this, play);
                     }
                     break;
 
@@ -361,7 +387,7 @@ f32 func_80998334(EnGs* this, PlayState* play, f32* arg2, f32* arg3, s16* arg4, 
     return sp2C;
 }
 
-void func_809984F4(EnGs* this, PlayState* play) {
+void EnGs_AfterDungeonSong(EnGs* this, PlayState* play) {
     EnGs* gossipStone = NULL;
 
     do {
@@ -509,8 +535,18 @@ void func_8099874C(EnGs* this, PlayState* play) {
     }
 }
 
+static void EnGs_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
+{
+    int npc;
+
+    npc = -1;
+    if (gi == GI_MM_HEART_PIECE)
+        npc = NPC_MM_GOSSIP_HEART_PIECE;
+    comboGiveItemNpc(this, play, gi, npc, a, b);
+}
+
 void func_809989B4(EnGs* this, PlayState* play) {
-    Actor_OfferGetItem(&this->actor, play, this->getItemId, this->actor.xzDistToPlayer, this->actor.yDistanceFromLink);
+    EnGs_GiveItem(&this->actor, play, this->getItemId, this->actor.xzDistToPlayer, this->actor.yDistanceFromLink);
     this->actionFunc = func_809989F4;
 }
 
@@ -519,7 +555,7 @@ void func_809989F4(EnGs* this, PlayState* play) {
         this->actor.parent = NULL;
         func_80997D14(this, play);
     } else {
-        Actor_OfferGetItem(&this->actor, play, this->getItemId, this->actor.xzDistToPlayer, this->actor.yDistanceFromLink);
+        EnGs_GiveItem(&this->actor, play, this->getItemId, this->actor.xzDistToPlayer, this->actor.yDistanceFromLink);
     }
 }
 
