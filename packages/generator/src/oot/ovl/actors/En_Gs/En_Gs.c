@@ -89,99 +89,10 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
-static void EnGs_Alias(Xflag* xf)
-{
-    switch (xf->sceneId) {
-        case SCE_OOT_DESERT_COLOSSUS:
-            xf->setupId = 0x0;
-            xf->id = 0x03;
-            break;
-        case SCE_OOT_LOST_WOODS:
-            xf->setupId = 0x0;
-            xf->id = 0x04;
-            break;
-        case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-            xf->setupId = 0;
-            xf->id = 0x04;
-            break;
-        case SCE_OOT_DEATH_MOUNTAIN_CRATER:
-            xf->setupId = 0;
-            xf->id = 0x09;
-            break;
-        case SCE_OOT_GORON_CITY:
-            xf->setupId = 2;
-            xf->id = 0;
-            break;
-        case SCE_OOT_ZORA_FOUNTAIN:
-            if (xf->setupId == 2)
-            {
-                switch (xf->id)
-                {
-                case 0x16: xf->id = 0x12; break;
-                case 0x17: xf->id = 0x14; break;
-                }
-            }
-            xf->setupId = 0;
-            break;
-        case SCE_OOT_ZORA_DOMAIN:
-            xf->setupId = 0;
-            xf->id = 0x0d;
-            break;
-        case SCE_OOT_GERUDO_VALLEY:
-            xf->setupId = 0;
-            xf->id = 0x08;
-            break;
-        case SCE_OOT_GRAVEYARD:
-            xf->setupId = 0;
-            xf->id = 0x02;
-            break;
-        case SCE_OOT_ZORA_RIVER:
-            xf->setupId = 0;
-            switch (xf->roomId)
-            {
-            case 0: xf->id = 0x07; break;
-            case 1: xf->id = 0x01; break;
-            }
-            break;
-        case SCE_OOT_SACRED_FOREST_MEADOW:
-            if (xf->setupId == 2)
-            {
-                xf->setupId = 0;
-                xf->id += 1;
-            }
-            break;
-        case SCE_OOT_KOKIRI_FOREST:
-            if (xf->roomId == 0)
-            {
-                xf->id = 0x0f;
-            }
-            else
-            {
-                switch (xf->setupId)
-                {
-                case 2: xf->id -= 1; break;
-                case 3: xf->id += 4; break;
-                }
-            }
-            xf->setupId = 0;
-            break;
-        case SCE_OOT_LAKE_HYLIA:
-            if (xf->setupId == 2)
-            {
-                xf->setupId = 0;
-                xf->id += 0x32;
-            }
-            break;
-        }
-}
-
 void EnGs_Init(Actor* thisx, PlayState* play) {
     EnGs* this = (EnGs*)thisx;
 
-    if (Xflag_Init(&this->xflag, thisx, play)) {
-        EnGs_Alias(&this->xflag);
-    }
-
+    Xflag_Init(&this->xflag, thisx, play);
     Actor_ProcessInitChain(thisx, sInitChain);
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, thisx, &sCylinderInit);

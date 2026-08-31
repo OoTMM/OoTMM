@@ -105,7 +105,9 @@
     <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 11" slice="0x0" setup="0x0" room="0x3" actor="0x15" item="NOTHING"/>
     <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 12" slice="0x0" setup="0x0" room="0x3" actor="0x16" item="NOTHING"/>
     <xflag type="boulder" location="MQ Dodongo Cavern Boulder Deep" slice="0x0" setup="0x0" room="0xc" actor="0x9" item="NOTHING"/>
-    <xflag type="gossip" location="MQ Dodongo Cavern Gossip Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="FAIRY"/>
-    <xflag type="gossip-big" location="MQ Dodongo Cavern Gossip Big Fairy" slice="0x1" setup="0x0" room="0x0" actor="0x0" item="FAIRY_BIG"/>
+    <actor room="0x0" actor="0x0">
+      <xflag type="gossip" location="MQ Dodongo Cavern Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="MQ Dodongo Cavern Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
 </checks>

@@ -71,10 +71,18 @@
     <xflag type="boulder-silver" location="Goron City Silver Boulder 27" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="NOTHING"/>
     <xflag type="boulder-silver" location="Goron City Silver Boulder 28" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="NOTHING"/>
     <xflag type="boulder-silver" location="Goron City Silver Boulder 29" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="NOTHING"/>
-    <xflag type="gossip" location="Goron City Gossip Fairy Maze" slice="0x0" setup="0x2" room="0x0" actor="0x0" item="FAIRY"/>
-    <xflag type="gossip" location="Goron City Gossip Fairy Medigoron" slice="0x0" setup="0x2" room="0x2" actor="0x0" item="FAIRY"/>
-    <xflag type="gossip-big" location="Goron City Gossip Big Fairy Maze" slice="0x1" setup="0x2" room="0x0" actor="0x0" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Goron City Gossip Big Fairy Medigoron" slice="0x1" setup="0x2" room="0x2" actor="0x0" item="FAIRY_BIG"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x30"/>
+      <match setup="2" actor="0x00"/>
+      <xflag type="gossip" location="Goron City Gossip Fairy Maze" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Goron City Gossip Big Fairy Maze" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x2">
+      <match setup="0" actor="0x05"/>
+      <match setup="2" actor="0x00"/>
+      <xflag type="gossip" location="Goron City Gossip Fairy Medigoron" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Goron City Gossip Big Fairy Medigoron" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GORON_SHOP">
     <shop location="Goron Shop Item 1" flag="0x18" item="RECOVERY_HEART"/>

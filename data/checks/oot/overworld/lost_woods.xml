@@ -50,8 +50,12 @@
     <xflag type="boulder" location="Lost Woods Boulder Early" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="NOTHING"/>
     <xflag type="boulder" location="Lost Woods Boulder Deep 1" slice="0x0" setup="0x0" room="0x7" actor="0x5" item="NOTHING"/>
     <xflag type="boulder" location="Lost Woods Boulder Deep 2" slice="0x0" setup="0x0" room="0x8" actor="0x8" item="NOTHING"/>
-    <xflag type="gossip" location="Lost Woods Gossip Fairy" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="FAIRY"/>
-    <xflag type="gossip-big" location="Lost Woods Gossip Big Fairy" slice="0x1" setup="0x0" room="0x5" actor="0x4" item="FAIRY_BIG"/>
+    <actor room="0x5">
+      <match setup="0" actor="0x4"/>
+      <match setup="2" actor="0x1"/>
+      <xflag type="gossip" location="Lost Woods Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Lost Woods Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene name="Lost Woods Scrub Grotto" id="GROTTOS">
     <scrub location="Lost Woods Grotto Scrub Nuts Upgrade" flag="0x03" item="NUT_UPGRADE"/>
@@ -70,8 +74,10 @@
     <xflag type="butterfly" location="Lost Woods Grotto Generic Butterfly 1" slice="0x0" setup="0x0" room="0x34" actor="0x6" item="FAIRY"/>
     <xflag type="butterfly" location="Lost Woods Grotto Generic Butterfly 2" slice="0x1" setup="0x0" room="0x34" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Lost Woods Grotto Generic Butterfly 3" slice="0x2" setup="0x0" room="0x34" actor="0x6" item="NOTHING"/>
-    <xflag type="gossip" location="Lost Woods Generic Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x34" actor="0x9" item="FAIRY"/>
-    <xflag type="gossip-big" location="Lost Woods Generic Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x34" actor="0x9" item="FAIRY_BIG"/>
+    <actor room="0x34" actor="0x9">
+      <xflag type="gossip" location="Lost Woods Generic Grotto Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Lost Woods Generic Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene name="Deku Theater" id="GROTTOS">
     <npc location="Deku Theater Sticks Upgrade" npc="THEATER_STICKS" item="STICK_UPGRADE"/>

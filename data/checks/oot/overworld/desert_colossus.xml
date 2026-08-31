@@ -46,8 +46,12 @@
     <xflag type="soil" location="Desert Colossus Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="FAIRY"/>
     <xflag type="soil" location="Desert Colossus Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x1d" item="FAIRY"/>
     <xflag type="soil" location="Desert Colossus Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x1d" item="FAIRY"/>
-    <xflag type="gossip" location="Desert Colossus Gossip Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="FAIRY"/>
-    <xflag type="gossip-big" location="Desert Colossus Gossip Big Fairy" slice="0x1" setup="0x0" room="0x0" actor="0x3" item="FAIRY_BIG"/>
+    <actor>
+      <match setup="0" actor="0x3"/>
+      <match setup="2" actor="0x2"/>
+      <xflag type="gossip" location="Desert Colossus Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Desert Colossus Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <scrub location="Desert Colossus Grotto Front Scrub" flag="0x19" item="POTION_GREEN"/>

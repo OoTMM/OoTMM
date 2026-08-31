@@ -54,8 +54,12 @@
     <xflag type="soil" location="Death Mountain Crater Soil 1" slice="0x0" setup="0x0" room="0x1" actor="0x21" item="FAIRY"/>
     <xflag type="soil" location="Death Mountain Crater Soil 2" slice="0x1" setup="0x0" room="0x1" actor="0x21" item="FAIRY"/>
     <xflag type="soil" location="Death Mountain Crater Soil 3" slice="0x2" setup="0x0" room="0x1" actor="0x21" item="FAIRY"/>
-    <xflag type="gossip" location="Death Mountain Crater Gossip Fairy" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="FAIRY"/>
-    <xflag type="gossip-big" location="Death Mountain Crater Gossip Big Fairy" slice="0x1" setup="0x0" room="0x1" actor="0x9" item="FAIRY_BIG"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x9"/>
+      <match setup="2" actor="0x1"/>
+      <xflag type="gossip" location="Death Mountain Crater Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Death Mountain Crater Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <chest location="Death Mountain Crater Grotto" flag="0x1a" item="BOMBS_20"/>

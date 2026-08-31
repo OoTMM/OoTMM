@@ -10,12 +10,24 @@
     <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 3" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 4" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RUPEE_BLUE"/>
     <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 5" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RUPEE_BLUE"/>
-    <xflag type="gossip" location="Sacred Meadow Gossip Fairy Maze 1" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="FAIRY"/>
-    <xflag type="gossip" location="Sacred Meadow Gossip Fairy Maze 2" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="FAIRY"/>
-    <xflag type="gossip" location="Sacred Meadow Gossip Fairy Deep" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="FAIRY"/>
-    <xflag type="gossip-big" location="Sacred Meadow Gossip Big Fairy Maze 1" slice="0x1" setup="0x0" room="0x0" actor="0x2" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Sacred Meadow Gossip Big Fairy Maze 2" slice="0x1" setup="0x0" room="0x0" actor="0x3" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Sacred Meadow Gossip Big Fairy Deep" slice="0x1" setup="0x0" room="0x0" actor="0x4" item="FAIRY_BIG"/>
+    <actor>
+      <match setup="0" actor="0x2"/>
+      <match setup="2" actor="0x1"/>
+      <xflag type="gossip" location="Sacred Meadow Gossip Fairy Maze 1" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Sacred Meadow Gossip Big Fairy Maze 1" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3"/>
+      <match setup="2" actor="0x2"/>
+      <xflag type="gossip" location="Sacred Meadow Gossip Fairy Maze 2" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Sacred Meadow Gossip Big Fairy Maze 2" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4"/>
+      <match setup="2" actor="0x3"/>
+      <xflag type="gossip" location="Sacred Meadow Gossip Fairy Deep" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Sacred Meadow Gossip Big Fairy Deep" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene name="Sacred Meadow Grotto" id="GROTTOS">
     <chest location="Sacred Meadow Grotto" flag="0x11" item="RUPEE_PURPLE"/>

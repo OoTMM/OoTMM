@@ -97,10 +97,18 @@
     <xflag type="wonder" location="Zora River Wonder Item Back 25" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Zora River Wonder Item Back 26" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Zora River Wonder Item Back 27" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="gossip" location="Zora River Gossip Fairy Upper" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="FAIRY"/>
-    <xflag type="gossip" location="Zora River Gossip Fairy Water" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="FAIRY"/>
-    <xflag type="gossip-big" location="Zora River Gossip Big Fairy Upper" slice="0x1" setup="0x0" room="0x0" actor="0x7" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Zora River Gossip Big Fairy Water" slice="0x1" setup="0x0" room="0x1" actor="0x1" item="FAIRY_BIG"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x07"/>
+      <match setup="2" actor="0x0a"/>
+      <xflag type="gossip" location="Zora River Gossip Fairy Upper" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Zora River Gossip Big Fairy Upper" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x01"/>
+      <match setup="2" actor="0x05"/>
+      <xflag type="gossip" location="Zora River Gossip Fairy Water" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Zora River Gossip Big Fairy Water" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <chest location="Zora River Grotto" flag="0x09" item="RUPEE_RED"/>

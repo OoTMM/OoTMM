@@ -42,10 +42,20 @@
     <xflag type="boulder" location="Zora Fountain Boulder Exposed" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="NOTHING"/>
     <xflag type="boulder" location="Zora Fountain Boulder Underground" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="NOTHING"/>
     <xflag type="boulder-silver" location="Zora Fountain Silver Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
-    <xflag type="gossip" location="Zora Fountain Gossip Fairy Land" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="FAIRY"/>
-    <xflag type="gossip" location="Zora Fountain Gossip Fairy Water" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="FAIRY"/>
-    <xflag type="gossip-big" location="Zora Fountain Gossip Big Fairy Land" slice="0x1" setup="0x0" room="0x0" actor="0x12" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Zora Fountain Gossip Big Fairy Water" slice="0x1" setup="0x0" room="0x0" actor="0x14" item="FAIRY_BIG"/>
+    <actor>
+      <match setup="0" actor="0x12"/>
+      <match setup="1" actor="0x12"/>
+      <match setup="2" actor="0x16"/>
+      <xflag type="gossip" location="Zora Fountain Gossip Fairy Land" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Zora Fountain Gossip Big Fairy Land" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x14"/>
+      <match setup="1" actor="0x14"/>
+      <match setup="2" actor="0x17"/>
+      <xflag type="gossip" location="Zora Fountain Gossip Fairy Water" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Zora Fountain Gossip Big Fairy Water" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GREAT_FAIRY_FOUNTAIN_SPELLS">
     <npc location="Great Fairy Farore's Wind" npc="FAIRY_SPELL_WIND" item="SPELL_WIND"/>

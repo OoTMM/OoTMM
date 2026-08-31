@@ -26,8 +26,14 @@
     <xflag type="soil" location="Graveyard Soil 1" slice="0x0" setup="0x0" room="0x1" actor="0x12" item="FAIRY"/>
     <xflag type="soil" location="Graveyard Soil 2" slice="0x1" setup="0x0" room="0x1" actor="0x12" item="FAIRY"/>
     <xflag type="soil" location="Graveyard Soil 3" slice="0x2" setup="0x0" room="0x1" actor="0x12" item="FAIRY"/>
-    <xflag type="gossip" location="Graveyard Gossip Fairy" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="FAIRY"/>
-    <xflag type="gossip-big" location="Graveyard Gossip Big Fairy" slice="0x1" setup="0x0" room="0x1" actor="0x2" item="FAIRY_BIG"/>
+    <actor room="0x01">
+      <match setup="0" actor="0x2"/>
+      <match setup="1" actor="0x32"/>
+      <match setup="2" actor="0x1"/>
+      <match setup="3" actor="0x1"/>
+      <xflag type="gossip" location="Graveyard Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Graveyard Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="TOMB_REDEAD">
     <chest location="Graveyard ReDead Tomb" flag="0x00" item="HEART_PIECE"/>
