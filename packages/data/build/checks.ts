@@ -1,3 +1,5 @@
+import type { Game } from '../lib/game';
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
@@ -23,7 +25,10 @@ const OV_VALUES = {
   xflag: 0x10,
 };
 
-function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number, value: number): number {
+function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number | undefined, value: number): number {
+  if (sceneId === undefined) {
+    throw new Error(`Scene ID is required for ov type ${ov}`);
+  }
   const gameMask = game === 'mm' ? 0x80000000 : 0;
   return (((ov & 0x7f) << 24) | ((sceneId & 0xff) << 16) | (value & 0xffff) | gameMask) >>> 0;
 }
@@ -44,6 +49,15 @@ function npcLookup(npc: string, state: BuildChecksState): number {
   return id;
 }
 
+type CheckContext = {
+  scene?: string;
+  sceneId?: number;
+  setupId?: number;
+  roomId?: number;
+  sliceId?: number;
+  actorId?: number;
+};
+
 class ChecksBuilder {
   private nextXflagId: number;
   private checks: any[];
@@ -53,6 +67,65 @@ class ChecksBuilder {
     this.nextXflagId = 0;
     this.checks = [];
     this.matches = {};
+  }
+
+  private enrich(game: Game, oldCtx: CheckContext, attrs: Record<string, string>): CheckContext {
+    const newCtx: CheckContext = { ...oldCtx };
+    const scene = attrs['scene'];
+    const setup = attrs['setup'];
+    const room = attrs['room'];
+    const slice = attrs['slice'];
+    const actor = attrs['actor'];
+
+    if (scene !== undefined) {
+      if (scene === 'NONE') {
+        newCtx.scene = 'NONE';
+        newCtx.sceneId = -1;
+      } else {
+        newCtx.scene = gameId(game, scene, '_');
+        newCtx.sceneId = sceneLookup(newCtx.scene, this.state);
+      }
+    }
+
+    if (setup !== undefined) {
+      newCtx.setupId = parseInt(setup);
+    }
+
+    if (room !== undefined) {
+      newCtx.roomId = parseInt(room);
+    }
+
+    if (slice !== undefined) {
+      newCtx.sliceId = parseInt(slice);
+    }
+
+    if (actor !== undefined) {
+      newCtx.actorId = parseInt(actor);
+    }
+
+    return newCtx;
+  }
+
+  private match(game: Game, ctx: CheckContext, id: number) {
+    if (ctx.sceneId === undefined) {
+      throw new Error(`Scene ID is required for match`);
+    }
+
+    const setupId = ctx.setupId ?? 0;
+    const roomId = ctx.roomId ?? 0;
+    const sliceId = ctx.sliceId ?? 0;
+    const actorId = ctx.actorId ?? 0;
+
+    let matchId = (actorId & 0xff) | ((sliceId & 0xf) << 8) | ((roomId & 0x3f) << 12) | ((setupId & 0x3) << 18) | ((ctx.sceneId & 0xff) << 20);
+    if (game === 'mm') {
+      matchId = (matchId | 0x80000000) >>> 0;
+    }
+
+    if (this.matches[matchId] !== undefined) {
+      console.error(`Duplicate xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
+      process.exit(1);
+    }
+    this.matches[matchId] = id;
   }
 
   private async process(filepath: string) {
@@ -67,14 +140,12 @@ class ChecksBuilder {
     const xmlRoot = xml.find((e: any) => e['checks']);
     const game = xmlRoot[':@'].game;
     for (const xmlScene of xmlRoot.checks) {
-      let scene = xmlScene[':@'].id;
-      if (scene !== 'NONE') {
-        scene = gameId(game, scene, '_');
-      }
+      const sceneCtx = this.enrich(game, {}, { scene: xmlScene[':@'].id });
       const children = xmlScene['scene'];
       for (const xmlCheck of children) {
         const ov = Object.keys(xmlCheck).find(k => k !== ':@')!;
         const attrs = xmlCheck[':@'];
+        const checkCtx = this.enrich(game, sceneCtx, attrs);
         const location = gameId(game, attrs['location'], ' ');
         const type = attrs['type'] ?? ov;
         let item = attrs['item'];
@@ -92,9 +163,8 @@ class ChecksBuilder {
         case 'collectible':
         case 'sf':
           {
-            const sceneId = sceneLookup(scene, this.state);
             const value = parseInt(attrs['flag']);
-            key = makeOvKey(game, OV_VALUES[ov], sceneId, value);
+            key = makeOvKey(game, OV_VALUES[ov], checkCtx.sceneId, value);
           }
           break;
         case 'npc':
@@ -115,27 +185,14 @@ class ChecksBuilder {
           {
             const xflagId = this.nextXflagId++;
             key = makeOvKey(game, OV_VALUES.xflag, 0, xflagId);
-            const sceneId = sceneLookup(scene, this.state);
-            const sliceId = parseInt(attrs['slice']);
-            const roomId = parseInt(attrs['room']);
-            const setupId = parseInt(attrs['setup']);
-            const actorId = parseInt(attrs['actor']);
-            let matchId = (actorId & 0xff) | ((sliceId & 0xf) << 8) | ((roomId & 0x3f) << 12) | ((setupId & 0x3) << 18) | ((sceneId & 0xff) << 20);
-            if (game === 'mm') {
-              matchId = (matchId | 0x80000000) >>> 0;
-            }
-            if (this.matches[matchId] !== undefined) {
-              console.error(`Duplicate xflag match for scene ${scene} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
-              process.exit(1);
-            }
-            this.matches[matchId] = xflagId;
+            this.match(game, checkCtx, xflagId);
           }
           break;
         default:
           throw new Error(`Unknown ov type ${ov}`);
         }
 
-        this.checks.push({ game, ov, type, location, key, item, hint, scene });
+        this.checks.push({ game, ov, type, location, key, item, hint, scene: checkCtx.scene });
       }
     }
   }

@@ -156,3 +156,8 @@ export function EnGs(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'FAIRY', name: 'Gossip Fairy', type: 'gossip', sliceId: 0 });
   checks.push({ roomActor: ra, item: 'FAIRY_BIG', name: 'Gossip Big Fairy', type: 'gossip-big', sliceId: 1 });
 }
+
+export function EnElf(checks: Check[], ra: RoomActor) {
+  const item = 'FAIRY';
+  checks.push({ roomActor: ra, item, name: '???', type: 'fairy' });
+}

@@ -71,11 +71,11 @@ export const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
 
 export const ACTORS_OOT = {
   EN_ITEM00: 0x15,
+  EN_ELF: 0x18,
   POT: 0x111,
   FLYING_POT: 0x11d,
   EN_KUSA: 0x125,
   OBJ_HANA: 0x14f,
-  EN_ELF: 0x18,
   BG_SPOT11_OASIS: 0x1C2,
   OBJ_MURE: 0x094,
   OBJ_MURE2: 0x151,
@@ -129,24 +129,18 @@ export const ACTORS_MM = {
   OBJ_BOMBIWA: 0x092,
 };
 
-export const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
-export const INTERESTING_ACTORS_MM = Object.values(ACTORS_MM);
-
 export const CONFIGS = {
   oot: {
     SCENE_TABLE_ADDR: 0xb71440,
     SCENE_TABLE_SIZE: 101,
-    INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
   },
   mq: {
     SCENE_TABLE_ADDR: 0xba0bb0,
     SCENE_TABLE_SIZE: 101,
-    INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
   },
   mm: {
     SCENE_TABLE_ADDR: 0x00C5A1E0,
     SCENE_TABLE_SIZE: 113,
-    INTERESTING_ACTORS: INTERESTING_ACTORS_MM,
   }
 };
 
