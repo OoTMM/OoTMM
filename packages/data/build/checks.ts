@@ -156,6 +156,10 @@ class ChecksBuilder {
         process.exit(1);
       }
       matchId = baseId | ((sliceId & 0x3f) << 16) | 0x40000000;
+      if (this.matches[matchId] !== undefined && this.matches[matchId] !== id) {
+        console.error(`Duplicate xflag slice ${sliceId} for scene ${ctx.sceneId} room ${roomId} setup ${setupId} actor ${actorId}`);
+        process.exit(1);
+      }
     }
     this.matches[matchId] = id;
   }

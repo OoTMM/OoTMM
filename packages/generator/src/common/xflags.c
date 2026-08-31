@@ -42,10 +42,9 @@ static u32 Xflag_GetKey(const Xflag* xf)
 
     key = 0;
     key |= xf->id;
-    key |= (xf->sliceId & 0xf) << 8;
-    key |= (xf->roomId & 0x3f) << 12;
-    key |= (xf->setupId & 0x3) << 18;
-    key |= (xf->sceneId & 0xff) << 20;
+    key |= (xf->roomId & 0x3f) << 8;
+    key |= (xf->setupId & 0x3) << 16;
+    key |= (xf->sceneId & 0xff) << 18;
 
 #if defined(GAME_MM)
     key |= 0x80000000;
@@ -54,18 +53,13 @@ static u32 Xflag_GetKey(const Xflag* xf)
     return key;
 }
 
-XflagID Xflag_Lookup(const Xflag* xf)
+XflagID Xflag_LookupKey(u32 key)
 {
-    u32 key;
     u32 cartKey;
     u16 cartId;
     u32 min;
     u32 max;
     u32 cursor;
-
-    if (xf->sceneId == 0xff)
-        return XFLAGID_NONE;
-    key = Xflag_GetKey(xf);
 
     /* Cache lookup */
     for (int i = 0; i < CACHE_SIZE; ++i)
@@ -104,6 +98,32 @@ XflagID Xflag_Lookup(const Xflag* xf)
     sCache[sCacheIndex].id = cartId;
     sCacheIndex = (sCacheIndex + 1) % CACHE_SIZE;
     return cartId;
+}
+
+XflagID Xflag_LookupSlice(XflagID id, int sliceId)
+{
+    u32 key;
+
+    if (id == XFLAGID_NONE)
+        return XFLAGID_NONE;
+    if (sliceId == 0)
+        return id;
+
+    key = 0x40000000 | ((sliceId & 0x3f) << 16) | id;
+    return Xflag_LookupKey(key);
+}
+
+XflagID Xflag_Lookup(const Xflag* xf)
+{
+    XflagID id;
+    u32 key;
+
+    if (xf->sceneId == 0xff)
+        return XFLAGID_NONE;
+    key = Xflag_GetKey(xf);
+    id = Xflag_LookupKey(key);
+    id = Xflag_LookupSlice(id, xf->sliceId);
+    return id;
 }
 
 int Xflag_Get(XflagID id)
