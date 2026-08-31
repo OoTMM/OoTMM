@@ -132,6 +132,7 @@ static InitChainEntry sInitChain[] = {
 void EnGs_Init(Actor* thisx, PlayState* play) {
     EnGs* this = (EnGs*)thisx;
 
+    this->xflag = Xflag_InitEx(thisx, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->unk_208 = -1;
     this->unk_204 = 1;
@@ -299,25 +300,34 @@ void func_80998040(EnGs* this, PlayState* play) {
     this->actionFunc = func_8099807C;
 }
 
+static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
+{
+    XflagID id;
+
+    id = Xflag_LookupSlice(this->xflag, isBig);
+    if (Flags_GetSwitch(play, this->switchFlag) && !Xflag_IsValidEx(id))
+        return;
+
+    g.xflagOverrideEx = TRUE;
+    g.xflagId = id;
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? 7 : 2);
+    g.xflagOverrideEx = FALSE;
+
+    Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
+    Flags_SetSwitch(play, this->switchFlag);
+}
+
 void func_8099807C(EnGs* this, PlayState* play) {
     switch (play->msgCtx.ocarinaMode) {
         case OCARINA_MODE_EVENT:
             switch (play->msgCtx.ocarinaSong) {
                 case OCARINA_SONG_HEALING:
                 case OCARINA_SONG_EPONAS:
-                    if (!Flags_GetSwitch(play, this->switchFlag)) {
-                        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, 0x0002);
-                        Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
-                        Flags_SetSwitch(play, this->switchFlag);
-                    }
+                    EnGs_SpawnFairy(this, play, 0);
                     break;
 
                 case OCARINA_SONG_STORMS:
-                    if (!Flags_GetSwitch(play, this->switchFlag)) {
-                        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, 0x0007);
-                        Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
-                        Flags_SetSwitch(play, this->switchFlag);
-                    }
+                    EnGs_SpawnFairy(this, play, 1);
                     break;
 
                 case OCARINA_SONG_SONATA:
