@@ -64,7 +64,7 @@ void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
 {
     comboXflagItemQuery(q, &this->xflag, this->extendedGi);
     q->giRenew = this->extendedGi;
-    if (comboXflagsGet(&this->xflag)) {
+    if (Xflag_GetIndirect(&this->xflag)) {
         q->ovFlags = OVF_RENEW;
     }
 }
@@ -189,7 +189,7 @@ void EnElf_GiveItem(Actor_EnElf* this, PlayState* play)
     }
 
     comboAddItemEx(play, &q, major);
-    comboXflagsSet(&this->xflag);
+    Xflag_SetIndirect(&this->xflag);
 
     /* Play the sound */
     comboPlayItemFanfare(o.gi, 1);
@@ -201,7 +201,7 @@ static int EnElf_IsShuffled(Actor_EnElf* this, PlayState* play)
     ComboItemOverride o;
 
     comboXflagItemQuery(&q, &this->xflag, 0);
-    if (comboXflagsGet(&this->xflag))
+    if (Xflag_GetIndirect(&this->xflag))
         q.ovFlags |= OVF_RENEW;
     comboItemOverride(&o, &q);
     return o.gi != GI_NONE;

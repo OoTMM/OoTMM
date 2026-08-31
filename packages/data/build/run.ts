@@ -2,7 +2,7 @@ import { parseChecks } from './checks';
 import { parseDrawGi, parseEntrances, parseGi, parseHints, parseLinkAnimations, parseNpcs, parseRegions, parseScenes } from './common';
 import { parseFiles } from './files';
 import { parseGossips } from './gossips';
-import { emit } from './helpers';
+import { emit, emitJson } from './helpers';
 import { parseMacros } from './macros';
 import { parseWorld } from './world';
 
@@ -35,21 +35,25 @@ async function run() {
     parseGossips(),
   ]);
   const checks = await parseChecks({ scenes, npcs });
+  const xflagsCount = Array.from(checks.checks.filter((c: any) => c.ov === 'xflag')).length;
+  const xflagsCountIds = Object.keys(checks.matches).length;
 
   await Promise.all([
-    emit('data-files', files),
-    emit('data-scenes', scenes),
-    emit('data-npc', npcs),
-    emit('data-checks', checks),
-    emit('data-macros', macros),
-    emit('data-world', world),
-    emit('data-regions', regions),
-    emit('data-hints', hints),
-    emit('data-entrances', entrances),
-    emit('data-gi', gi),
-    emit('data-drawgi', drawGi),
-    emit('data-link-animations', linkAnimations),
-    emit('data-gossips', gossips),
+    emitJson('lib/data-files.json', files),
+    emitJson('lib/data-scenes.json', scenes),
+    emitJson('lib/data-npc.json', npcs),
+    emitJson('lib/data-checks.json', checks.checks),
+    emitJson('lib/data-checks-xflags.json', checks.matches),
+    emitJson('lib/data-macros.json', macros),
+    emitJson('lib/data-world.json', world),
+    emitJson('lib/data-regions.json', regions),
+    emitJson('lib/data-hints.json', hints),
+    emitJson('lib/data-entrances.json', entrances),
+    emitJson('lib/data-gi.json', gi),
+    emitJson('lib/data-drawgi.json', drawGi),
+    emitJson('lib/data-link-animations.json', linkAnimations),
+    emitJson('lib/data-gossips.json', gossips),
+    emit('include/combo/data/xflags.h', `#define XFLAGS_COUNT ${xflagsCount}\n#define XFLAGS_COUNT_IDS ${xflagsCountIds}\n`),
   ]);
 }
 

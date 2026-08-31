@@ -1,4 +1,4 @@
-import { default as DATA_ENTRANCES } from '../dist/data-entrances.json';
+import { default as DATA_ENTRANCES } from '../dist/lib/data-entrances.json';
 
 /* TODO: Refactor this file */
 export type EntranceData = {

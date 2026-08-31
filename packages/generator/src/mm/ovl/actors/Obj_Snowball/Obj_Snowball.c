@@ -196,7 +196,7 @@ static void ObjSnowball_Alias(Actor_ObjSnowball* this)
 
 static int ObjSnowball_IsShuffled(Actor_ObjSnowball* this)
 {
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
 }
 
 static int ObjSnowball_DropCustom(Actor_ObjSnowball* this, PlayState* play)
@@ -215,7 +215,7 @@ static void ObjSnowball_InitXflag(Actor_ObjSnowball* this, PlayState* play)
         ObjSnowball_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void ObjSnowball_SpawnEnemy(Actor_ObjSnowball* this, PlayState* play) {

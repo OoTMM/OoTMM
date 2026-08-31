@@ -5,7 +5,8 @@
             "${workspaceFolder}/third_party/ultralib/include",
             "${workspaceFolder}/packages/generator/build/include",
             "${workspaceFolder}/packages/generator/include",
-            "${workspaceFolder}/packages/generator/src/common/ovl"
+            "${workspaceFolder}/packages/generator/src/common/ovl",
+            "${workspaceFolder}/packages/data/dist/include"
         ],
         "myDefines": [
             "_LANGUAGE_C=1",

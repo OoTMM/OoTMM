@@ -120,7 +120,7 @@ static void ObjHamishi_Alias(Actor_ObjHamishi* this)
 
 static int ObjHamishi_IsShuffled(Actor_ObjHamishi* this)
 {
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
 }
 
 static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
@@ -153,7 +153,7 @@ static void ObjHamishi_InitXflag(Actor_ObjHamishi* this, PlayState* play)
         ObjHamishi_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void ObjHamishi_InitCollision(Actor_ObjHamishi* this, PlayState* play) {

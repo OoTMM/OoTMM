@@ -81,12 +81,12 @@ static void BgIceShelter_InitXflag(Actor_BgIceShelter* this, PlayState* play)
         BgIceShelter_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 static int BgIceShelter_IsShuffled(Actor_BgIceShelter* this)
 {
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
 }
 
 static int BgIceShelter_DropCustom(Actor_BgIceShelter* this, PlayState* play)

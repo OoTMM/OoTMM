@@ -71,7 +71,7 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, PlayState* play)
     ComboItemOverride o;
 
     /* Check xflag */
-    if (comboXflagsGet(&this->xflag))
+    if (Xflag_GetIndirect(&this->xflag))
     {
         this->base.draw = NULL;
         return;
@@ -87,7 +87,7 @@ static void EnWonderItem_DropCustomDecoy(Actor_EnWonderItem* this, PlayState* pl
 
     comboXflagItemQuery(&q, &this->xflag, 0);
     Item_AddWithDecoy(play, &q);
-    comboXflagsSet(&this->xflag);
+    Xflag_SetIndirect(&this->xflag);
 }
 
 static void EnWonderItem_DropCustom(Actor_EnWonderItem* this, PlayState* play, s16 params)
@@ -101,7 +101,7 @@ static void EnWonderItem_DropCustom(Actor_EnWonderItem* this, PlayState* play, s
 static void EnWonderItem_ItemDropCollectible(PlayState* play, const Vec3f* pos, s16 params)
 {
     /* Check for vanilla */
-    if (!sWonderItem->isExtended || comboXflagsGet(&sWonderItem->xflag))
+    if (!sWonderItem->isExtended || Xflag_GetIndirect(&sWonderItem->xflag))
         Item_DropCollectible(play, pos, params);
     else
         EnWonderItem_DropCustom(sWonderItem, play, params);
@@ -113,7 +113,7 @@ PATCH_CALL(0x80a6630c, EnWonderItem_ItemDropCollectible);
 static void EnWonderItem_ItemDropCollectibleRandom(PlayState* play, Actor* from, const Vec3f* pos, s16 params)
 {
     /* Check for vanilla */
-    if (!sWonderItem->isExtended || comboXflagsGet(&sWonderItem->xflag))
+    if (!sWonderItem->isExtended || Xflag_GetIndirect(&sWonderItem->xflag))
         Item_DropCollectibleRandom(play, from, pos, params);
     else
         EnWonderItem_DropCustom(sWonderItem, play, params);

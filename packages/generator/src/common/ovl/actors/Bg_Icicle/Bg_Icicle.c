@@ -76,7 +76,7 @@ static void BgIcicle_InitXflag(Actor_BgIcicle* this, PlayState* play)
 
 static int BgIcicle_IsShuffled(Actor_BgIcicle* this)
 {
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
 }
 
 static int BgIcicle_DropCustom(Actor_BgIcicle* this, PlayState* play)

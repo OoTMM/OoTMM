@@ -3,7 +3,6 @@
 
 #include <combo/types.h>
 #include <combo/util.h>
-#include <combo/xflags.h>
 
 #define LANGUAGE_JPN 0
 #define LANGUAGE_ENG 1
@@ -469,7 +468,6 @@ OotExtraFlags;
 
 typedef struct ALIGNED(16)
 {
-    u8  xflags[XFLAGS_COUNT_OOT];
     u8  npc[32];
     u8  shops[8];
     u8  scrubs[8];

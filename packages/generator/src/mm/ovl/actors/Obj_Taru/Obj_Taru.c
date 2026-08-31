@@ -51,7 +51,7 @@ static InitChainEntry sInitChain[] = {
 
 static int ObjTaru_IsShuffled(Actor_ObjTaru* this)
 {
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
 }
 
 static int ObjTaru_DropCustom(Actor_ObjTaru* this, PlayState* play)
@@ -69,7 +69,7 @@ static void ObjTaru_InitXflag(Actor_ObjTaru* this, PlayState* play)
     /* Set the extended properties */
     Xflag_Init(&this->xflag, &this->dyna.actor, play);
     comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void func_80B9B74C(Actor_ObjTaru* this, PlayState* play)

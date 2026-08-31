@@ -2,7 +2,6 @@
 #define MM_SAVE_H
 
 #include <combo/types.h>
-#include <combo/xflags.h>
 
 typedef struct
 {
@@ -591,7 +590,6 @@ MmHumanAgeLoadout;
 
 typedef struct ALIGNED(16)
 {
-    u8 xflags[XFLAGS_COUNT_MM];
     u8 npc[32];
     u8 shops[4];
     u8 halfDays;

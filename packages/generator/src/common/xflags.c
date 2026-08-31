@@ -7,109 +7,136 @@
 #include <combo/play.h>
 #include <combo/xflags.h>
 
-static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSetups, u32 paddrTableRooms)
-{
-    u16 setupIndex;
-    u16 roomIndex;
+#define CACHE_SIZE 32
 
-    setupIndex = IO_ReadPhysU16(paddrTableScenes + xf->sceneId * 2) + xf->setupId;
-    roomIndex = IO_ReadPhysU16(paddrTableSetups + setupIndex * 2) + (xf->roomId * 12) + xf->sliceId;
-    return IO_ReadPhysI16(paddrTableRooms + roomIndex * 2) + xf->id;
+typedef struct
+{
+    u32 key;
+    u16 id;
+    u16 zero;
+}
+XflagCheckData;
+
+static u32 sXflagDevAddr;
+static XflagCheckData sCache[CACHE_SIZE];
+static int sCacheIndex;
+
+void Xflag_InitSystem(void)
+{
+    DmaEntry e;
+
+    comboDmaLookup(&e, COMBO_VROM_XFLAGS);
+    sXflagDevAddr = e.pstart | PI_DOM1_ADDR2;
+    for (int i = 0; i < CACHE_SIZE; ++i)
+    {
+        sCache[i].key = 0xffffffff;
+        sCache[i].id = 0;
+        sCache[i].zero = 0;
+    }
+    sCacheIndex = 0;
 }
 
-static u16 bitPosLookupOot(const Xflag* xf)
+static u32 Xflag_GetKey(const Xflag* xf)
 {
-    static u32 paddrTableScenes;
-    static u32 paddrTableSetups;
-    static u32 paddrTableRooms;
-    DmaEntry dmaEntry;
+    u32 key;
 
-    /* Init */
-    if (paddrTableScenes == 0)
+    key = 0;
+    key |= xf->id;
+    key |= (xf->sliceId & 0xf) << 8;
+    key |= (xf->roomId & 0x3f) << 12;
+    key |= (xf->setupId & 0x3) << 18;
+    key |= (xf->sceneId & 0xff) << 20;
+
+#if defined(GAME_MM)
+    key |= 0x80000000;
+#endif
+
+    return key;
+}
+
+XflagID Xflag_Lookup(const Xflag* xf)
+{
+    u32 key;
+    u32 cartKey;
+    u16 cartId;
+    u32 min;
+    u32 max;
+    u32 cursor;
+
+    key = Xflag_GetKey(xf);
+
+    /* Cache lookup */
+    for (int i = 0; i < CACHE_SIZE; ++i)
     {
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_SCENES_ADDR);
-        paddrTableScenes = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_SETUPS_ADDR);
-        paddrTableSetups = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_ROOMS_ADDR);
-        paddrTableRooms = dmaEntry.pstart;
+        if (sCache[i].key == key)
+            return sCache[i].id;
     }
 
-    return bitPosLookup(xf, paddrTableScenes, paddrTableSetups, paddrTableRooms);
-}
+    /* Cache lookup did not work, binary search */
+    min = 0;
+    max = XFLAGS_COUNT_IDS;
 
-static u16 bitPosLookupMm(const Xflag* xf)
-{
-    static u32 paddrTableScenes;
-    static u32 paddrTableSetups;
-    static u32 paddrTableRooms;
-    DmaEntry dmaEntry;
-
-    /* Init */
-    if (paddrTableScenes == 0)
+    for (;;)
     {
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_SCENES_ADDR);
-        paddrTableScenes = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_SETUPS_ADDR);
-        paddrTableSetups = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_ROOMS_ADDR);
-        paddrTableRooms = dmaEntry.pstart;
+        if (min >= max)
+            return XFLAGID_NONE;
+        cursor = (min + max) / 2;
+        cartKey = IO_ReadPhysU32(sXflagDevAddr + cursor * sizeof(XflagCheckData) + 0x00);
+        if (cartKey == key)
+        {
+            cartId = IO_ReadPhysU16(sXflagDevAddr + cursor * sizeof(XflagCheckData) + 0x04);
+            sCache[sCacheIndex].key = key;
+            sCache[sCacheIndex].id = cartId;
+            sCacheIndex = (sCacheIndex + 1) % CACHE_SIZE;
+            return cartId;
+        }
+        if (key > cartKey)
+            min = cursor + 1;
+        else
+            max = cursor;
     }
-
-    return bitPosLookup(xf, paddrTableScenes, paddrTableSetups, paddrTableRooms);
 }
 
-int comboXflagsGetOot(const Xflag* xf)
+int Xflag_Get(XflagID id)
 {
-    u16 bitPos;
-
-    if (xf->sceneId == 0xff)
-        return 1;
-    bitPos = bitPosLookupOot(xf);
-    return BITMAP8_GET(gSharedCustomSave.oot.xflags, bitPos);
+    if (id == XFLAGID_NONE)
+        return 0;
+    return BITMAP8_GET(gSharedCustomSave.xflags, id);
 }
 
-int comboXflagsGetMm(const Xflag* xf)
+void Xflag_Set(XflagID id)
 {
-    u16 bitPos;
-
-    if (xf->sceneId == 0xff)
-        return 1;
-    bitPos = bitPosLookupMm(xf);
-    return BITMAP8_GET(gSharedCustomSave.mm.xflags, bitPos);
-}
-
-void comboXflagsSetOot(const Xflag* xf)
-{
-    u16 bitPos;
-
-    if (xf->sceneId == 0xff)
+    if (id == XFLAGID_NONE)
         return;
-    bitPos = bitPosLookupOot(xf);
-    BITMAP8_SET(gSharedCustomSave.oot.xflags, bitPos);
+    BITMAP8_SET(gSharedCustomSave.xflags, id);
 }
 
-void comboXflagsSetMm(const Xflag* xf)
+int Xflag_GetIndirect(const Xflag* xf)
 {
-    u16 bitPos;
+    return Xflag_Get(Xflag_Lookup(xf));
+}
 
-    if (xf->sceneId == 0xff)
-        return;
-    bitPos = bitPosLookupMm(xf);
-    BITMAP8_SET(gSharedCustomSave.mm.xflags, bitPos);
+void Xflag_SetIndirect(const Xflag* xf)
+{
+    Xflag_Set(Xflag_Lookup(xf));
 }
 
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
 {
+    XflagID id;
+
     bzero(q, sizeof(*q));
-    q->ovType = OV_XFLAG0 + xf->sliceId;
-    q->sceneId = xf->sceneId;
-    q->roomId = (xf->roomId | ((xf->setupId & 3) << 6));
-    q->id = xf->id;
+    id = Xflag_Lookup(xf);
+    if (id == XFLAGID_NONE)
+    {
+        q->ovType = OV_NONE;
+    }
+    else
+    {
+        q->ovType = OV_XFLAG;
+        q->roomId = (id >> 8) & 0xff;
+        q->id = id & 0xff;
+    }
     q->gi = gi;
 }
 
@@ -220,7 +247,7 @@ int Xflag_IsValid(Xflag* xf)
 
 int Xflag_IsShuffled(Xflag* xf)
 {
-    return Xflag_IsValid(xf) && !comboXflagsGet(xf);
+    return Xflag_IsValid(xf) && !Xflag_GetIndirect(xf);
 }
 
 void Xflag_Clear(Xflag* xf)
