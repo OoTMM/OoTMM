@@ -148,14 +148,26 @@
     <npc location="Shooting Gallery Child" npc="SHOOTING_GAME_CHILD" item="SLINGSHOT"/>
   </scene>
   <scene id="TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY">
-    <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 1" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="FAIRY"/>
-    <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 2" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="FAIRY"/>
-    <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 3" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="FAIRY"/>
-    <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 4" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="FAIRY"/>
-    <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 1" slice="0x1" setup="0x0" room="0x0" actor="0x1" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 2" slice="0x1" setup="0x0" room="0x0" actor="0x2" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 3" slice="0x1" setup="0x0" room="0x0" actor="0x3" item="FAIRY_BIG"/>
-    <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 4" slice="0x1" setup="0x0" room="0x0" actor="0x4" item="FAIRY_BIG"/>
+    <actor actor="0x1">
+      <match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY"/><match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT"/><match scene="TEMPLE_OF_TIME_EXTERIOR_ADULT"/>
+      <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 1" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x2">
+      <match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY"/><match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT"/><match scene="TEMPLE_OF_TIME_EXTERIOR_ADULT"/>
+      <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 2" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 2" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x3">
+      <match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY"/><match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT"/><match scene="TEMPLE_OF_TIME_EXTERIOR_ADULT"/>
+      <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 3" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 3" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x4">
+      <match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY"/><match scene="TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT"/><match scene="TEMPLE_OF_TIME_EXTERIOR_ADULT"/>
+      <xflag type="gossip" location="Temple of Time Exterior Gossip Fairy 4" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Temple of Time Exterior Gossip Big Fairy 4" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="TEMPLE_OF_TIME">
     <npc location="Temple of Time Master Sword" npc="MASTER_SWORD" item="SWORD_MASTER"/>

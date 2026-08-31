@@ -92,10 +92,6 @@ static InitChainEntry sInitChain[] = {
 static void EnGs_Alias(Xflag* xf)
 {
     switch (xf->sceneId) {
-        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
-        case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
-            xf->sceneId = SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY;
-            break;
         case SCE_OOT_DESERT_COLOSSUS:
             xf->setupId = 0x0;
             xf->id = 0x03;
