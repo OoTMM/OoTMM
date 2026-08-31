@@ -112,22 +112,24 @@ class ChecksBuilder {
           key = makeOvKey(game, OV_VALUES[ov], 0, parseInt(attrs['flag']));
           break;
         case 'xflag':
-          const xflagId = this.nextXflagId++;
-          key = makeOvKey(game, OV_VALUES.xflag, 0, xflagId);
-          const sceneId = sceneLookup(scene, this.state);
-          const sliceId = parseInt(attrs['slice']);
-          const roomId = parseInt(attrs['room']);
-          const setupId = parseInt(attrs['setup']);
-          const actorId = parseInt(attrs['actor']);
-          let matchId = (actorId & 0xff) | ((sliceId & 0xf) << 8) | ((roomId & 0x3f) << 12) | ((setupId & 0x3) << 18) | ((sceneId & 0xff) << 20);
-          if (game === 'mm') {
-            matchId = (matchId | 0x80000000) >>> 0;
+          {
+            const xflagId = this.nextXflagId++;
+            key = makeOvKey(game, OV_VALUES.xflag, 0, xflagId);
+            const sceneId = sceneLookup(scene, this.state);
+            const sliceId = parseInt(attrs['slice']);
+            const roomId = parseInt(attrs['room']);
+            const setupId = parseInt(attrs['setup']);
+            const actorId = parseInt(attrs['actor']);
+            let matchId = (actorId & 0xff) | ((sliceId & 0xf) << 8) | ((roomId & 0x3f) << 12) | ((setupId & 0x3) << 18) | ((sceneId & 0xff) << 20);
+            if (game === 'mm') {
+              matchId = (matchId | 0x80000000) >>> 0;
+            }
+            if (this.matches[matchId] !== undefined) {
+              console.error(`Duplicate xflag match for scene ${scene} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
+              process.exit(1);
+            }
+            this.matches[matchId] = xflagId;
           }
-          if (this.matches[matchId] !== undefined) {
-            console.error(`Duplicate xflag match for scene ${scene} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
-            process.exit(1);
-          }
-          this.matches[matchId] = xflagId;
           break;
         default:
           throw new Error(`Unknown ov type ${ov}`);

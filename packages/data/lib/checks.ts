@@ -22,4 +22,3 @@ export const CHECKS_XFLAG_IDS = new Map<number, number>();
 for (const [k, v] of Object.entries(DATA_RAW_IDS)) {
   CHECKS_XFLAG_IDS.set(parseInt(k), v);
 }
-export const CHECKS_XFLAG_COUNT = Math.max(...Array.from(CHECKS_XFLAG_IDS.values())) + 1;

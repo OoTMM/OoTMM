@@ -63,6 +63,8 @@ XflagID Xflag_Lookup(const Xflag* xf)
     u32 max;
     u32 cursor;
 
+    if (xf->sceneId == 0xff)
+        return XFLAGID_NONE;
     key = Xflag_GetKey(xf);
 
     /* Cache lookup */
@@ -100,7 +102,7 @@ XflagID Xflag_Lookup(const Xflag* xf)
 int Xflag_Get(XflagID id)
 {
     if (id == XFLAGID_NONE)
-        return 0;
+        return 1;
     return BITMAP8_GET(gSharedCustomSave.xflags, id);
 }
 
