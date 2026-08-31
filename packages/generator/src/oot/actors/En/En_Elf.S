@@ -2,7 +2,7 @@
 
 /* Resize the actor */
 PATCH_START 0x80889e7c
-.int 0x2cc
+.int 0x2c8
 PATCH_END
 
 PATCH_START 0x80889e80

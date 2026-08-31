@@ -150,12 +150,9 @@ void Xflag_SetIndirect(const Xflag* xf)
     Xflag_Set(Xflag_Lookup(xf));
 }
 
-void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
+void Xflag_ItemQuery(ComboItemQuery* q, XflagID id, s16 gi)
 {
-    XflagID id;
-
     bzero(q, sizeof(*q));
-    id = Xflag_Lookup(xf);
     if (id == XFLAGID_NONE)
     {
         q->ovType = OV_NONE;
@@ -169,12 +166,39 @@ void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
     q->gi = gi;
 }
 
+void Xflag_ItemOverride(ComboItemOverride* o, XflagID id, s16 gi)
+{
+    ComboItemQuery q;
+
+    Xflag_ItemQuery(&q, id, gi);
+    comboItemOverride(o, &q);
+}
+
+void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
+{
+    XflagID id;
+
+    id = Xflag_Lookup(xf);
+    Xflag_ItemQuery(q, id, gi);
+}
+
 void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
 {
     ComboItemQuery q;
 
     comboXflagItemQuery(&q, xf, gi);
     comboItemOverride(o, &q);
+}
+
+XflagID Xflag_InitEx(Actor* actor, PlayState* play)
+{
+    Xflag xf;
+
+    if (g.xflagOverrideEx)
+        return g.xflagId;
+
+    Xflag_Init(&xf, actor, play);
+    return Xflag_Lookup(&xf);
 }
 
 int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)

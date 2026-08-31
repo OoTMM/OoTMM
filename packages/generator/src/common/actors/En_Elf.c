@@ -24,9 +24,9 @@
 
 void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
 {
-    comboXflagItemQuery(q, &this->xflag, this->extendedGi);
+    Xflag_ItemQuery(q, this->xflag, this->extendedGi);
     q->giRenew = this->extendedGi;
-    if (Xflag_GetIndirect(&this->xflag)) {
+    if (Xflag_Get(this->xflag)) {
         q->ovFlags = OVF_RENEW;
     }
 }
@@ -151,7 +151,7 @@ void EnElf_GiveItem(Actor_EnElf* this, PlayState* play)
     }
 
     comboAddItemEx(play, &q, major);
-    Xflag_SetIndirect(&this->xflag);
+    Xflag_Set(this->xflag);
 
     /* Play the sound */
     comboPlayItemFanfare(o.gi, 1);
@@ -162,8 +162,8 @@ static int EnElf_IsShuffled(Actor_EnElf* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    comboXflagItemQuery(&q, &this->xflag, 0);
-    if (Xflag_GetIndirect(&this->xflag))
+    Xflag_ItemQuery(&q, this->xflag, this->extendedGi);
+    if (Xflag_Get(this->xflag))
         q.ovFlags |= OVF_RENEW;
     comboItemOverride(&o, &q);
     return o.gi != GI_NONE;
@@ -178,11 +178,11 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     memset(&this->xflag, 0, sizeof(Xflag));
     if (type < 2)
     {
-        Xflag_Clear(&this->xflag);
+        this->xflag = XFLAGID_NONE;
     }
     else
     {
-        Xflag_Init(&this->xflag, &this->base, play);
+        this->xflag = Xflag_InitEx(&this->base, play);
     }
 
     init = actorAddr(ACTOR_EN_ELF, EN_ELF_INIT_VROM);
@@ -211,11 +211,13 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
 
 void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, u8 count)
 {
-    memcpy(&g.xflag, &spawner->xflag, sizeof(Xflag));
-    g.xflag.sliceId = count;
-    g.xflagOverride = TRUE;
+    XflagID id;
+
+    id = Xflag_LookupSlice(spawner->xflag, count);
+    g.xflagOverrideEx = TRUE;
+    g.xflagId = id;
     Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
 }
 
 void EnElf_PlayItemSfx(Actor_EnElf* this, PlayState* play)

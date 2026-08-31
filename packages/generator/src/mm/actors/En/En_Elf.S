@@ -8,7 +8,7 @@ PATCH_END
 /* Resize the actor */
 
 PATCH_START 0x808909cc
-.int 0x280
+.int 0x27c
 PATCH_END
 
 /* Init Wrapper */

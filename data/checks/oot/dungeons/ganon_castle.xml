@@ -56,14 +56,16 @@
     <xflag type="pot" location="Ganon Castle Pot Fire End 2" slice="0x0" setup="0x0" room="0xf" actor="0x5" item="MAGIC_JAR_SMALL"/>
     <xflag type="pot" location="Ganon Castle Pot Spirit End 1" slice="0x0" setup="0x0" room="0x13" actor="0x4" item="NUTS_5"/>
     <xflag type="pot" location="Ganon Castle Pot Spirit End 2" slice="0x0" setup="0x0" room="0x13" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 1" slice="0x0" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 2" slice="0x1" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 3" slice="0x2" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 4" slice="0x3" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 5" slice="0x4" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 6" slice="0x5" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 7" slice="0x6" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
-    <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 8" slice="0x7" setup="0x0" room="0x10" actor="0x4" item="FAIRY"/>
+    <actor room="0x10" actor="0x4">
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 2" slice="1" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 3" slice="2" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 4" slice="3" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 5" slice="4" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 6" slice="5" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 7" slice="6" item="FAIRY"/>
+      <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 8" slice="7" item="FAIRY"/>
+    </actor>
     <xflag type="heart" location="Ganon Castle Heart Shadow 1" slice="0x0" setup="0x0" room="0xc" actor="0x8" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Ganon Castle Heart Shadow 2" slice="0x0" setup="0x0" room="0xc" actor="0xa" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Ganon Castle Heart Shadow 3" slice="0x0" setup="0x0" room="0xc" actor="0xc" item="RECOVERY_HEART"/>
