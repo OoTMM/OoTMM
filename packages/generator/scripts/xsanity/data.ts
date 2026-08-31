@@ -97,6 +97,7 @@ export const ACTORS_OOT = {
 };
 
 export const ACTORS_MM = {
+  EN_GS: 0xef,
   EN_ITEM00: 0x0e,
   POT: 0x82,
   FLYING_POT: 0x8d,

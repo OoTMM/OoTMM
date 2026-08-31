@@ -152,11 +152,6 @@ export function ObjBombiwa(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Boulder', type: 'boulder' });
 }
 
-export function EnGs(checks: Check[], ra: RoomActor) {
-  checks.push({ roomActor: ra, item: 'FAIRY', name: 'Gossip Fairy', type: 'gossip', sliceId: 0 });
-  checks.push({ roomActor: ra, item: 'FAIRY_BIG', name: 'Gossip Big Fairy', type: 'gossip-big', sliceId: 1 });
-}
-
 export function EnElf(checks: Check[], ra: RoomActor) {
   for (let i = 0; i < 8; ++i) {
     checks.push({ roomActor: ra, item: 'FAIRY', name: `Fairy ${i + 1}`, type: 'fairy', sliceId: i });
@@ -164,7 +159,7 @@ export function EnElf(checks: Check[], ra: RoomActor) {
 }
 
 export function BgSpot11Oasis(checks: Check[], ra: RoomActor) {
-for (let i = 0; i < 8; ++i) {
+  for (let i = 0; i < 8; ++i) {
     checks.push({ roomActor: ra, item: 'FAIRY', name: `Oasis Fairy ${i + 1}`, type: 'fairy', sliceId: i });
   }
 }

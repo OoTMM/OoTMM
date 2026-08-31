@@ -552,6 +552,8 @@ const ALLSANITY_HELL: PartialDeep<Settings> = {
   shuffleTreesOot: true,
   shuffleGossipFairiesOot: 'all',
   shuffleGossipBigFairiesOot: 'all',
+  shuffleGossipFairiesMm: 'all',
+  shuffleGossipBigFairiesMm: 'all',
   shuffleWonderItemsMm: true,
   shuffleWonderItemsOot: 'all',
   silverRupeeShuffle: 'anywhere',

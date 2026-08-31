@@ -308,7 +308,7 @@ class ChecksBuilder {
   }
 
   private processXmlScene(game: Game, xml: XmlElement) {
-    const sceneCtx = this.enrich(game, {}, { scene: xml.attributes.id });
+    const sceneCtx = this.enrich(game, {}, { scene: xml.attributes.id, room: xml.attributes.room });
     for (const xmlCheck of xml.children) {
       if (xmlCheck.tag === 'actor') {
         this.processXmlActor(game, sceneCtx, xmlCheck);
