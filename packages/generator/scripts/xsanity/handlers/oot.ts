@@ -158,6 +158,13 @@ export function EnGs(checks: Check[], ra: RoomActor) {
 }
 
 export function EnElf(checks: Check[], ra: RoomActor) {
-  const item = 'FAIRY';
-  checks.push({ roomActor: ra, item, name: '???', type: 'fairy' });
+  for (let i = 0; i < 8; ++i) {
+    checks.push({ roomActor: ra, item: 'FAIRY', name: `Fairy ${i + 1}`, type: 'fairy', sliceId: i });
+  }
+}
+
+export function BgSpot11Oasis(checks: Check[], ra: RoomActor) {
+for (let i = 0; i < 8; ++i) {
+    checks.push({ roomActor: ra, item: 'FAIRY', name: `Oasis Fairy ${i + 1}`, type: 'fairy', sliceId: i });
+  }
 }

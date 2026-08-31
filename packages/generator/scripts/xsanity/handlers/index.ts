@@ -25,6 +25,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_WONDER_ITEM]: OotHandlers.EnWonderItem,
   [ACTORS_OOT.EN_GS]: OotHandlers.EnGs,
   [ACTORS_OOT.EN_ELF]: OotHandlers.EnElf,
+  [ACTORS_OOT.BG_SPOT11_OASIS]: OotHandlers.BgSpot11Oasis,
 };
 
 const ACTORS_HANDLERS_MM = {
