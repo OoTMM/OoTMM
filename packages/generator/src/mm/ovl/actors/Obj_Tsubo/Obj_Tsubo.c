@@ -174,7 +174,7 @@ static void ObjTsubo_Alias(Actor_ObjTsubo* this)
 
 static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
 {
-    if (!this->isExtended || comboXflagsGet(&this->xflag))
+    if (!this->isExtended || Xflag_GetIndirect(&this->xflag))
         return 0;
     return 1;
 }

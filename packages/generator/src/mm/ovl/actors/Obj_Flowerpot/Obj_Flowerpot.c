@@ -98,7 +98,7 @@ static int ObjFlowerpot_IsShuffled(Actor_ObjFlowerpot* this, int slice)
     Xflag xflags;
 
     ObjFlowerpot_Xflag(&xflags, slice, this);
-    return !!((this->isExtendedFlags & (1 << slice)) && (!comboXflagsGet(&xflags)));
+    return !!((this->isExtendedFlags & (1 << slice)) && (!Xflag_GetIndirect(&xflags)));
 }
 
 static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlowerpot* this, int slice)
@@ -107,7 +107,7 @@ static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlo
 
     ObjFlowerpot_Xflag(&xf, slice, this);
     comboXflagItemOverride(o, &xf, 0);
-    if (comboXflagsGet(&xf))
+    if (Xflag_GetIndirect(&xf))
     {
         o->gi = 0;
         o->cloakGi = 0;

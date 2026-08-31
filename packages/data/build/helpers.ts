@@ -7,9 +7,15 @@ export const ROOT_DIR = path.resolve(import.meta.dirname, '..', '..', '..');
 export const DATA_DIR = path.join(ROOT_DIR, 'data');
 export const DIST_DIR = path.resolve(import.meta.dirname, '..', 'dist');
 
-export async function emit(filename: string, data: any) {
-  await fs.mkdir(DIST_DIR, { recursive: true });
-  await fs.writeFile(path.join(DIST_DIR, `${filename}.json`), JSON.stringify(data));
+export async function emitJson(filename: string, data: any) {
+  return emit(filename, JSON.stringify(data));
+}
+
+export async function emit(filename: string, data: string) {
+  const fullpath = path.join(DIST_DIR, filename);
+  const dirPath = path.dirname(fullpath);
+  await fs.mkdir(dirPath, { recursive: true });
+  await fs.writeFile(fullpath, data, 'utf8');
 }
 
 export async function loadYaml(patterns: string | string[]): Promise<any> {

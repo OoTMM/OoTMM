@@ -32,13 +32,6 @@ export type RoomActor = {
   actor: Actor;
 };
 
-export type AddressingTable = {
-  scenesTable: number[];
-  setupsTable: number[];
-  roomsTable: number[];
-  bitCount: number;
-};
-
 export type Check = {
   name: string;
   name2?: string;

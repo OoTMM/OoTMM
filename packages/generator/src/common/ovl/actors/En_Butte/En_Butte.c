@@ -120,7 +120,7 @@ static int EnButte_IsShuffled(Actor_EnButte* this, PlayState* play)
     comboItemOverride(&o, &q);
     if (o.gi == GI_NONE)
         return FALSE;
-    if (comboXflagsGet(&this->xflag))
+    if (Xflag_GetIndirect(&this->xflag))
         return FALSE;
     return TRUE;
 }
@@ -411,13 +411,13 @@ static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    if (comboXflagsGet(&this->xflag))
+    if (Xflag_GetIndirect(&this->xflag))
         return TRUE;
     comboXflagItemQuery(&q, &this->xflag, 0);
     comboItemOverride(&o, &q);
     if (o.gi == GI_NOTHING)
     {
-        comboXflagsSet(&this->xflag);
+        Xflag_SetIndirect(&this->xflag);
         return FALSE;
     }
     return TRUE;
@@ -546,7 +546,7 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, PlayState* play)
     {
         csmcType = CSMC_MAJOR;
     }
-    else if (comboXflagsGet(&this->xflag))
+    else if (Xflag_GetIndirect(&this->xflag))
     {
         csmcType = CSMC_NORMAL;
     }

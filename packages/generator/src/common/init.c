@@ -14,6 +14,7 @@ ComboGlobal g;
 void initHeap(void);
 void AudioCustom_Init(void);
 void comboInitObjects(void);
+void Xflag_InitSystem(void);
 
 void menuInit();
 
@@ -26,6 +27,7 @@ void comboInit(void)
     comboInitData();
     comboInitObjects();
     comboInitOverride();
+    Xflag_InitSystem();
     Hint_Init();
     comboInitEntrances();
     SilverRupees_Init();

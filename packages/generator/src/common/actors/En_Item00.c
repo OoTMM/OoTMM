@@ -135,7 +135,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         this->isExtendedMajor = 1;
     }
     comboAddItemEx(gPlay, &q, this->isExtendedMajor);
-    comboXflagsSet(&this->xflag);
+    Xflag_SetIndirect(&this->xflag);
 
     comboPlayItemFanfare(o.gi, 1);
     this->isExtendedCollected = 1;
@@ -196,7 +196,7 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
     comboXflagItemOverride(&o, xflag, 0);
     if (o.gi == GI_NOTHING)
     {
-        comboXflagsSet(xflag);
+        Xflag_SetIndirect(xflag);
         return NULL;
     }
 

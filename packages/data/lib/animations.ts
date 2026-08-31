@@ -1,4 +1,4 @@
-import { default as DATA } from '../dist/data-link-animations.json';
+import { default as DATA } from '../dist/lib/data-link-animations.json';
 import type { Game } from './game';
 
 export type CustomAnimation = {

@@ -20,6 +20,7 @@
 # include <combo/doors.h>
 # include <combo/save_flags.h>
 # include <combo/sr.h>
+# include <combo/xflags.h>
 
 typedef struct
 {
@@ -37,6 +38,7 @@ typedef struct ALIGNED(16)
     OotCustomSave   oot;
     MmCustomSave    mm;
     MultiSave       multi;
+    u8              xflags[(XFLAGS_COUNT + 7) / 8];
     u32             cows;
     u16             coins[4];
     u16             triforcePieces;

@@ -2,15 +2,10 @@
 #define COMBO_XFLAGS_H
 
 #include <combo/types.h>
-#include <combo/xflags_data.h>
+#include <combo/data/xflags.h>
 
-#if defined(GAME_OOT)
-# define comboXflagsGet     comboXflagsGetOot
-# define comboXflagsSet     comboXflagsSetOot
-#else
-# define comboXflagsGet     comboXflagsGetMm
-# define comboXflagsSet     comboXflagsSetMm
-#endif
+#define XFLAGID_NONE 0xffff
+typedef u16 XflagID;
 
 typedef struct ComboItemQuery ComboItemQuery;
 typedef struct ComboItemOverride ComboItemOverride;
@@ -27,10 +22,12 @@ typedef struct Xflag
 }
 Xflag;
 
-int  comboXflagsGetOot(const Xflag* xf);
-int  comboXflagsGetMm(const Xflag* xf);
-void comboXflagsSetOot(const Xflag* xf);
-void comboXflagsSetMm(const Xflag* xf);
+XflagID Xflag_Lookup(const Xflag* xf);
+int Xflag_Get(XflagID id);
+void Xflag_Set(XflagID id);
+int Xflag_GetIndirect(const Xflag* xf);
+void Xflag_SetIndirect(const Xflag* xf);
+
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi);
 void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi);
 int  Xflag_Init(Xflag* xf, Actor* actor, PlayState* play);

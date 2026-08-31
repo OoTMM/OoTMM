@@ -122,7 +122,7 @@ void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
 
 static int ObjSnowball2_IsShuffled(Actor_ObjSnowball2* this)
 {
-    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
 }
 
 static void ObjSnowball2_InitXflag(Actor_ObjSnowball2* this, PlayState* play)
@@ -133,7 +133,7 @@ static void ObjSnowball2_InitXflag(Actor_ObjSnowball2* this, PlayState* play)
         ObjSnowball2_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void ObjSnowball2_DropCollectible(Actor_ObjSnowball2* this, PlayState* play) {

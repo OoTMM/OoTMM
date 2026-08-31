@@ -14,6 +14,11 @@ export type CheckData = {
   readonly item: string;
 };
 
-import DATA_RAW from '../dist/data-checks.json';
+import DATA_RAW from '../dist/lib/data-checks.json';
+import DATA_RAW_IDS from '../dist/lib/data-checks-xflags.json';
 export const CHECKS = DATA_RAW as CheckData[];
 export const CHECKS_BY_LOCATION: { [k: string]: CheckData } = Object.fromEntries(CHECKS.map(c => [c.location, c]));
+export const CHECKS_XFLAG_IDS = new Map<number, number>();
+for (const [k, v] of Object.entries(DATA_RAW_IDS)) {
+  CHECKS_XFLAG_IDS.set(parseInt(k), v);
+}

@@ -68,7 +68,7 @@ void Actor_AfterSetNaviToActor(TargetContext* targetCtx, Actor* actor, s32 actor
         Actor_ShotSun* shotSun = (Actor_ShotSun*)actor;
         comboXflagItemQuery(&q, &shotSun->xflag, GI_OOT_FAIRY_BIG);
         q.giRenew = GI_OOT_FAIRY_BIG;
-        if (comboXflagsGet(&shotSun->xflag))
+        if (Xflag_GetIndirect(&shotSun->xflag))
             q.ovFlags |= OVF_RENEW;
         comboItemOverride(&o, &q);
         type = csmcNaviId(o.gi, o.cloakGi);

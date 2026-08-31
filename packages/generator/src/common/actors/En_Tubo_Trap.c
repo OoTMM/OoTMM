@@ -31,7 +31,7 @@ void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, PlayState* play)
 
 int EnTuboTrap_IsShuffled(Actor_EnTuboTrap* this)
 {
-    return this->isExtended && !comboXflagsGet(&this->xflag);
+    return this->isExtended && !Xflag_GetIndirect(&this->xflag);
 }
 
 static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, PlayState* play)
