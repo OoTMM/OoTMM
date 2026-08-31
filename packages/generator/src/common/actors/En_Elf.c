@@ -177,7 +177,6 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     ActorCallback init;
 
     type = this->base.params & 0xf;
-    memset(&this->xflag, 0, sizeof(Xflag));
     if (type < 2)
     {
         this->xflag = XFLAGID_NONE;
