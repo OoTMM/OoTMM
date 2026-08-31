@@ -138,14 +138,24 @@ class ChecksBuilder {
     const sliceId = ctx.sliceId ?? 0;
     const actorId = ctx.actorId ?? 0;
 
-    let matchId = (actorId & 0xff) | ((sliceId & 0xf) << 8) | ((roomId & 0x3f) << 12) | ((setupId & 0x3) << 18) | ((ctx.sceneId & 0xff) << 20);
+    /* Compose the base match ID */
+    let matchId = (actorId & 0xff) | ((roomId & 0x3f) << 8) | ((setupId & 0x3) << 16) | ((ctx.sceneId & 0xff) << 18);
     if (game === 'mm') {
       matchId = (matchId | 0x80000000) >>> 0;
     }
 
-    if (this.matches[matchId] !== undefined) {
-      console.error(`Duplicate xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
-      process.exit(1);
+    if (sliceId === 0) {
+      if (this.matches[matchId] !== undefined) {
+        console.error(`Duplicate xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
+        process.exit(1);
+      }
+    } else {
+      const baseId = this.matches[matchId];
+      if (baseId === undefined) {
+        console.error(`Missing base xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
+        process.exit(1);
+      }
+      matchId = baseId | ((sliceId & 0x3f) << 16) | 0x40000000;
     }
     this.matches[matchId] = id;
   }
