@@ -76,8 +76,10 @@
     <xflag type="butterfly" location="Kakariko Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x28" actor="0x6" item="FAIRY"/>
     <xflag type="butterfly" location="Kakariko Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x28" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Kakariko Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x28" actor="0x6" item="NOTHING"/>
-    <xflag type="gossip" location="Kakariko Generic Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x28" actor="0x9" item="FAIRY"/>
-    <xflag type="gossip-big" location="Kakariko Generic Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x28" actor="0x9" item="FAIRY_BIG"/>
+    <actor room="0x28" actor="0x9">
+      <xflag type="gossip" location="Kakariko Generic Grotto Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Kakariko Generic Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene name="Kakariko Potion Shop" id="KAKARIKO_POTION_SHOP">
     <shop location="Kakariko Potion Shop Item 1" flag="0x38" item="FISH"/>

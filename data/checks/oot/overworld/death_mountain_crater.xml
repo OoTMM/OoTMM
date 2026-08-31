@@ -72,8 +72,10 @@
     <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x3a" actor="0x6" item="FAIRY"/>
     <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x3a" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x3a" actor="0x6" item="NOTHING"/>
-    <xflag type="gossip" location="Death Mountain Crater Generic Grotto Gossip Fairy" slice="0x0" setup="0x0" room="0x3a" actor="0x9" item="FAIRY"/>
-    <xflag type="gossip-big" location="Death Mountain Crater Generic Grotto Gossip Big Fairy" slice="0x1" setup="0x0" room="0x3a" actor="0x9" item="FAIRY_BIG"/>
+    <actor room="0x3a" actor="0x9">
+      <xflag type="gossip" location="Death Mountain Crater Generic Grotto Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Death Mountain Crater Generic Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <scrub location="Death Mountain Crater Grotto Left Scrub" flag="0x0f" item="NUTS_5"/>
