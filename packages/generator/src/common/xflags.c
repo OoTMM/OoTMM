@@ -180,9 +180,9 @@ int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
 
 #if defined(GAME_OOT)
     xf->sceneId = Play_ExpandMQ(play, xf->sceneId);
-
-    if (xf->sceneId == SCE_OOT_GROTTOS)
+    switch (xf->sceneId)
     {
+    case SCE_OOT_GROTTOS:
         switch (xf->roomId)
         {
         case 0x00:
@@ -212,6 +212,18 @@ int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
             }
             break;
         }
+        break;
+    case SCE_OOT_FAIRY_FOUNTAIN:
+        switch (gLastScene)
+        {
+        case SCE_OOT_HYRULE_FIELD: xf->roomId = 0x20; break;
+        case SCE_OOT_ZORA_RIVER: xf->roomId = 0x21; break;
+        case SCE_OOT_SACRED_FOREST_MEADOW: xf->roomId = 0x22; break;
+        case SCE_OOT_ZORA_DOMAIN: xf->roomId = 0x23; break;
+        case SCE_OOT_GERUDO_FORTRESS: xf->roomId = 0x24; break;
+        default: UNREACHABLE(); break;
+        }
+        break;
     }
 #endif
 

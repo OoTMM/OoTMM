@@ -25,33 +25,8 @@
 void EnElf_Aliases(Xflag* xf)
 {
 #if defined(GAME_OOT)
-    u8 fairyFountainIndex;
-
     switch (xf->sceneId)
     {
-    case SCE_OOT_FAIRY_FOUNTAIN:
-        switch (gLastScene)
-        {
-        case SCE_OOT_HYRULE_FIELD:
-            fairyFountainIndex = 0;
-            break;
-        case SCE_OOT_ZORA_RIVER:
-            fairyFountainIndex = 1;
-            break;
-        case SCE_OOT_SACRED_FOREST_MEADOW:
-            fairyFountainIndex = 2;
-            break;
-        case SCE_OOT_ZORA_DOMAIN:
-            fairyFountainIndex = 3;
-            break;
-        case SCE_OOT_GERUDO_FORTRESS:
-            fairyFountainIndex = 4;
-            break;
-        default:
-            UNREACHABLE();
-        }
-        xf->roomId = 0x20 | fairyFountainIndex;
-        break;
     case SCE_OOT_DESERT_COLOSSUS:
         xf->id = 1;
         xf->setupId = 0;
