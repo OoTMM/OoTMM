@@ -92,7 +92,7 @@ static InitChainEntry sInitChain[] = {
 void EnGs_Init(Actor* thisx, PlayState* play) {
     EnGs* this = (EnGs*)thisx;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflag = Xflag_InitEx(thisx, play);
     Actor_ProcessInitChain(thisx, sInitChain);
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, thisx, &sCylinderInit);
@@ -132,24 +132,18 @@ s32 func_80A4E3EC(EnGs* this, PlayState* play) {
     return ret;
 }
 
-static void EnGs_Xflag(Xflag* xf, EnGs* this, int isBig)
-{
-    memcpy(xf, &this->xflag, sizeof(Xflag));
-    xf->sliceId = isBig;
-}
-
 static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
 {
-    Xflag xf;
+    XflagID id;
 
-    EnGs_Xflag(&xf, this, isBig);
-    if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)) && !Xflag_IsValid(&xf))
+    id = Xflag_LookupSlice(this->xflag, isBig);
+    if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)) && !Xflag_IsValidEx(id))
         return;
 
-    memcpy(&g.xflag, &xf, sizeof(Xflag));
-    g.xflagOverride = TRUE;
+    g.xflagOverrideEx = TRUE;
+    g.xflagId = id;
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? /* FAIRY_HEAL_BIG */ 0x0007 : /* FAIRY_HEAL_TIMED */ 0x0002);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
     Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
 }
 

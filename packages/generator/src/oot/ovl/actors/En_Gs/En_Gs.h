@@ -28,7 +28,7 @@ typedef struct EnGs {
     /* 0x01F8 */ f32 unk_1F8;
     /* 0x01FC */ f32 unk_1FC;
     /* 0x0200 */ u16 unk_200;
-    Xflag xflag;
+    XflagID xflag;
 } EnGs;
 
 #endif
