@@ -11,6 +11,7 @@
 
 # include <ultra64.h>
 # include <combo/special_conds.h>
+# include <combo/subs.h>
 # include <combo/seqcmd.h>
 # include <combo/config.h>
 # include <combo/audio.h>
@@ -48,6 +49,7 @@
 # include <combo/common/color.h>
 # include <combo/common/cosmetics.h>
 # include <combo/common/actors/En_Tubo_Trap.h>
+# include <combo/message.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/sequence.h>
@@ -65,6 +67,7 @@
 # endif
 
 # if defined(GAME_MM)
+#  include <combo/mm/cutscene.h>
 #  include <combo/mm/play.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>

@@ -6,10 +6,15 @@ sFlashromMesgQueue = 0x801fbe10;
 Collider_UpdatePlayerWeapon = 0x80126440;
 _Interface_Update = 0x801210e0;
 
+Actor_GetScreenPos = 0x800b8898;
+SubS_OfferTalkExchangeFacing = 0x8013e8f8;
+Play_SetMotionBlurAlpha = 0x80165658;
 CollisionCheck_SpawnShieldParticlesMetal = 0x800e8668;
 Collider_InitQuad = 0x800e1e18;
 Collider_SetQuad = 0x800e1f20;
-
+Actor_OfferOcarinaInteraction = 0x800b874c;
+SubS_FillCutscenesList = 0x8013e3b8;
+gOneVec3f = 0x801c5db0;
 bzero = 0x80089630;
 InitDmaManager = 0x80080d0c;
 Play_Init = 0x8016a2c8;
@@ -17,6 +22,10 @@ gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
 Camera_GetCamDir = 0x800DFC90;
 SkelAnime_DrawOpa = 0x80133b3c;
+Message_DisplayOcarinaStaff = 0x80152434;
+SubS_StartCutscene = 0x8013e2d4;
+Actor_OcarinaInteractionAccepted = 0x800b8718;
+Color_RGB8_Lerp = 0x801001b8;
 
 EffectSs_Delete = 0x800b0210;
 gEffectSsTable = 0x801ae3a0;

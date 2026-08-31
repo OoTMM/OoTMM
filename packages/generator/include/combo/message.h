@@ -14,5 +14,6 @@
 typedef struct PlayState PlayState;
 void Message_StartBlocking(PlayState* play);
 void Message_UpdateBlocking(PlayState* play);
+void Message_DisplayOcarinaStaff(PlayState* play, u16 ocarinaAction);
 
 #endif

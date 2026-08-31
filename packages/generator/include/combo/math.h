@@ -90,4 +90,6 @@ void    Math_Vec3f_ToVec3s(Vec3s* dest, Vec3f* src);
 void    Math_Vec3s_DiffToVec3f(Vec3f* dest, Vec3s* a, Vec3s* b);
 void    Math_Vec3f_Scale(Vec3f* vec, f32 scaleF);
 
+extern Vec3f gOneVec3f;
+
 #endif

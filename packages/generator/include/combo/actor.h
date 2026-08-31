@@ -624,8 +624,11 @@ extern Gfx D_801AEF88[];
 
 void Actor_WorldToActorCoords(Actor* actor, Vec3f* dest, Vec3f* pos);
 void Actor_ProjectPos(PlayState* play, Vec3f* src, Vec3f* xyzDest, f32* cappedInvWDest);
+s32 Actor_OfferOcarinaInteraction(Actor* actor, PlayState* play, f32 xzRange, f32 yRange);
 
 #if defined(GAME_MM)
+typedef struct GameState GameState;
+s32 Actor_OcarinaInteractionAccepted(Actor* actor, GameState* gameState);
 typedef s32 (*PictoValidationFunc)(PlayState *, Actor *);
 
 typedef struct
