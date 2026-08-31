@@ -81,22 +81,29 @@ XflagID Xflag_Lookup(const Xflag* xf)
     for (;;)
     {
         if (min >= max)
-            return XFLAGID_NONE;
+        {
+            cartId = XFLAGID_NONE;
+            break;
+        }
+
         cursor = (min + max) / 2;
         cartKey = IO_ReadPhysU32(sXflagDevAddr + cursor * sizeof(XflagCheckData) + 0x00);
         if (cartKey == key)
         {
             cartId = IO_ReadPhysU16(sXflagDevAddr + cursor * sizeof(XflagCheckData) + 0x04);
-            sCache[sCacheIndex].key = key;
-            sCache[sCacheIndex].id = cartId;
-            sCacheIndex = (sCacheIndex + 1) % CACHE_SIZE;
-            return cartId;
+            break;
         }
+
         if (key > cartKey)
             min = cursor + 1;
         else
             max = cursor;
     }
+
+    sCache[sCacheIndex].key = key;
+    sCache[sCacheIndex].id = cartId;
+    sCacheIndex = (sCacheIndex + 1) % CACHE_SIZE;
+    return cartId;
 }
 
 int Xflag_Get(XflagID id)
