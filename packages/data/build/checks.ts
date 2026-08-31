@@ -25,6 +25,57 @@ const OV_VALUES = {
   xflag: 0x10,
 };
 
+const MATCH_SIBLING = 0x40000000;
+
+export type XflagIdentity = {
+  sceneId: number;
+  setupId?: number;
+  roomId?: number;
+  actorId?: number;
+};
+
+/* Compose the match key that locates an actor. Slice 0 resolves through this */
+export function makeXflagMatchKey(game: Game, ident: XflagIdentity): number {
+  const setupId = ident.setupId ?? 0;
+  const roomId = ident.roomId ?? 0;
+  const actorId = ident.actorId ?? 0;
+
+  let key = (actorId & 0xff) | ((roomId & 0x3f) << 8) | ((setupId & 0x3) << 16) | ((ident.sceneId & 0xff) << 18);
+  if (game === 'mm') {
+    key = (key | 0x80000000) >>> 0;
+  }
+  return key;
+}
+
+/* Compose the sibling key reaching another slice of an already resolved xflag */
+export function makeXflagSliceKey(baseId: number, sliceId: number): number {
+  return ((baseId & 0xffff) | ((sliceId & 0x3f) << 16) | MATCH_SIBLING) >>> 0;
+}
+
+export type XflagMatchKey =
+  | ({ kind: 'actor'; game: Game } & Required<XflagIdentity>)
+  | { kind: 'slice'; baseId: number; sliceId: number };
+
+export function parseXflagMatchKey(key: number): XflagMatchKey {
+  const k = key >>> 0;
+  if (k & MATCH_SIBLING) {
+    return { kind: 'slice', baseId: k & 0xffff, sliceId: (k >>> 16) & 0x3f };
+  }
+  return {
+    kind: 'actor',
+    game: (k & 0x80000000) ? 'mm' : 'oot',
+    actorId: k & 0xff,
+    roomId: (k >>> 8) & 0x3f,
+    setupId: (k >>> 16) & 0x3,
+    sceneId: (k >>> 18) & 0xff,
+  };
+}
+
+/* Recover the xflag id an xflag check key was built from */
+export function xflagIdFromCheckKey(key: number): number {
+  return key & 0xffff;
+}
+
 function makeOvKey(game: 'oot' | 'mm', ov: number, sceneId: number | undefined, value: number): number {
   if (sceneId === undefined) {
     throw new Error(`Scene ID is required for ov type ${ov}`);
@@ -139,10 +190,7 @@ class ChecksBuilder {
     const actorId = ctx.actorId ?? 0;
 
     /* Compose the base match ID */
-    let matchId = (actorId & 0xff) | ((roomId & 0x3f) << 8) | ((setupId & 0x3) << 16) | ((ctx.sceneId & 0xff) << 18);
-    if (game === 'mm') {
-      matchId = (matchId | 0x80000000) >>> 0;
-    }
+    let matchId = makeXflagMatchKey(game, { sceneId: ctx.sceneId, setupId, roomId, actorId });
 
     if (sliceId === 0) {
       if (this.matches[matchId] !== undefined) {
@@ -155,7 +203,7 @@ class ChecksBuilder {
         console.error(`Missing base xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
         process.exit(1);
       }
-      matchId = baseId | ((sliceId & 0x3f) << 16) | 0x40000000;
+      matchId = makeXflagSliceKey(baseId, sliceId);
       if (this.matches[matchId] !== undefined && this.matches[matchId] !== id) {
         console.error(`Duplicate xflag slice ${sliceId} for scene ${ctx.sceneId} room ${roomId} setup ${setupId} actor ${actorId}`);
         process.exit(1);

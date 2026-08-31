@@ -2,7 +2,7 @@ import type { Game } from '@ootmm/data';
 import type { ActorHandlers, Check, RoomActor, RoomActors } from './types';
 
 import { SCENES } from '@ootmm/data';
-import { parseScenes, parseNpcs, parseChecks } from '@ootmm/data/build';
+import { parseScenes, parseNpcs, parseChecks, makeXflagMatchKey, makeXflagSliceKey, parseXflagMatchKey, xflagIdFromCheckKey } from '@ootmm/data/build';
 
 import { ACTORS_HANDLERS } from './handlers';
 import { makeRooms } from './rooms';
@@ -80,77 +80,196 @@ function makeChecks(rooms: RoomActors[], handlers: ActorHandlers): Check[] {
   return checks;
 }
 
-function outputChecks(game: 'oot' | 'mm', checks: Check[], checkNames: Map<number, string>, filter?: string, filterSubtype?: string) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
+type Identity = {
+  sceneId: number;
+  setupId: number;
+  roomId: number;
+  actorId: number;
+};
+
+class XflagLookup {
+  private locations = new Map<number, string>();
+  private identities = new Map<number, Identity[]>();
+
+  constructor(private game: 'oot' | 'mm', private matches: Record<number, number>, checks: any[]) {
+    for (const c of checks) {
+      if (c.ov === 'xflag') {
+        this.locations.set(xflagIdFromCheckKey(c.key), c.location);
+      }
+    }
+
+    for (const k of Object.keys(matches)) {
+      const parsed = parseXflagMatchKey(Number(k));
+      if (parsed.kind !== 'actor' || parsed.game !== game) {
+        continue;
+      }
+      const baseId = matches[Number(k)];
+      let list = this.identities.get(baseId);
+      if (list === undefined) {
+        list = [];
+        this.identities.set(baseId, list);
+      }
+      list.push({ sceneId: parsed.sceneId, setupId: parsed.setupId, roomId: parsed.roomId, actorId: parsed.actorId });
+    }
+  }
+
+  baseId(ident: Identity): number | undefined {
+    return this.matches[makeXflagMatchKey(this.game, ident)];
+  }
+
+  sliceOf(baseId: number, sliceId: number): number | undefined {
+    return sliceId === 0 ? baseId : this.matches[makeXflagSliceKey(baseId, sliceId)];
+  }
+
+  /* Every identity the data resolves to this xflag, the aliases included */
+  aliases(baseId: number): Identity[] {
+    return this.identities.get(baseId) ?? [];
+  }
+
+  location(id: number | undefined): string | undefined {
+    if (id === undefined) {
+      return undefined;
+    }
+    const location = this.locations.get(id);
+
+    return location?.replace(/^(OOT|MM) /, '');
+  }
+}
+
+type ActorGroup = {
+  sceneId: number;
+  identities: Identity[];
+  checks: Check[];
+  baseId?: number;
+};
+
+function identityOf(check: Check): Identity {
+  const ra = check.roomActor;
+  return { sceneId: ra.sceneId, setupId: ra.setupId, roomId: ra.roomId, actorId: ra.actor.actorId };
+}
+
+function groupChecks(checks: Check[], lookup: XflagLookup): ActorGroup[] {
+  const groups = new Map<string, ActorGroup>();
+  const order: ActorGroup[] = [];
 
   for (const check of checks) {
-    if (filter && check.type !== filter)
-      continue;
-    if (filterSubtype && (check.subtype === undefined || check.subtype !== filterSubtype))
-      continue;
-    const ra = check.roomActor;
+    const ident = identityOf(check);
+    const baseId = lookup.baseId(ident);
+    const groupKey = baseId !== undefined ? `id:${baseId}` : `raw:${ident.sceneId}:${ident.setupId}:${ident.roomId}:${ident.actorId}`;
 
-    /* Prefix */
-    if (ra.sceneId != lastSceneId) {
+    let group = groups.get(groupKey);
+    if (group === undefined) {
+      group = {
+        sceneId: ident.sceneId,
+        identities: baseId !== undefined ? lookup.aliases(baseId) : [ident],
+        checks: [],
+        baseId,
+      };
+      groups.set(groupKey, group);
+      order.push(group);
+    }
+
+    /* An aliased actor is discovered once per identity, keep one copy */
+    if (!group.checks.some(c => (c.sliceId ?? 0) === (check.sliceId ?? 0))) {
+      group.checks.push(check);
+    }
+  }
+
+  return order;
+}
+
+function fallbackName(check: Check) {
+  const ra = check.roomActor;
+  const frags: string[] = [];
+
+  frags.push(`Scene ${ra.sceneId.toString(16)}`);
+  frags.push(`Setup ${ra.setupId}`);
+  frags.push(`Room ${decPad(ra.roomId, 2)}`);
+  frags.push(check.name);
+  if (ra.actor.halfDays !== 0x3ff) {
+    frags.push(`(HD:${binPad(ra.actor.halfDays, 10)})`);
+  }
+  if (check.letter) {
+    frags.push(`[${check.letter.padEnd(2)}]`);
+  }
+  frags.push(`${decPad(ra.actor.actorId + 1, 2)}`);
+  if (check.name2) {
+    frags.push(check.name2);
+  }
+  return frags.join(' ');
+}
+
+function xflagName(check: Check, group: ActorGroup, lookup: XflagLookup) {
+  if (group.baseId !== undefined) {
+    const known = lookup.location(lookup.sliceOf(group.baseId, check.sliceId ?? 0));
+    if (known) {
+      return known;
+    }
+  }
+  return fallbackName(check);
+}
+
+function hex(n: number) {
+  return `0x${n.toString(16)}`;
+}
+
+function outputChecks(game: 'oot' | 'mm', checks: Check[], lookup: XflagLookup, filter?: string, filterSubtype?: string) {
+  const filtered = checks.filter(c => {
+    if (filter && c.type !== filter)
+      return false;
+    if (filterSubtype && (c.subtype === undefined || c.subtype !== filterSubtype))
+      return false;
+    return true;
+  });
+
+  const scenes = scenesById(game);
+  let lastSceneId = -1;
+
+  for (const group of groupChecks(filtered, lookup)) {
+    if (group.sceneId !== lastSceneId) {
       if (lastSceneId !== -1)
         console.log('</scene>');
-      console.log(`<scene id="${scenesById(game)[ra.sceneId]}">`);
-      lastSceneId = ra.sceneId;
-      lastSetupId = ra.setupId;
-    } else if (ra.setupId != lastSetupId) {
-      console.log('');
-      lastSetupId = ra.setupId;
+      console.log(`<scene id="${scenes[group.sceneId]}">`);
+      lastSceneId = group.sceneId;
     }
 
-    /* TODO: Repair this eventually */
-    //const key = makeOvKeyXflag({ game, sceneId: ra.sceneId, setupId: ra.setupId, roomId: ra.roomId, actorId: ra.actor.actorId, sliceId: check.sliceId ?? 0 });
-    //let name = checkNames.get(key);
-    let name = null;
-
-    if (!name) {
-      const frags: string[] = [];
-      frags.push(`Scene ${ra.sceneId.toString(16)}`);
-      frags.push(`Setup ${ra.setupId}`);
-      frags.push(`Room ${decPad(ra.roomId, 2)}`);
-      frags.push(check.name);
-      if (check.roomActor.actor.halfDays !== 0x3ff) {
-        frags.push(`(HD:${binPad(check.roomActor.actor.halfDays, 10)})`);
-      }
-      if (check.letter) {
-        frags.push(`[${check.letter.padEnd(2)}]`);
-      }
-      frags.push(`${decPad(ra.actor.actorId + 1, 2)}`);
-      if (check.name2) {
-        frags.push(check.name2);
-      }
-      name = frags.join(' ');
+    /* A lone unaliased slice stays on one line */
+    if (group.identities.length === 1 && group.checks.length === 1) {
+      const check = group.checks[0];
+      const ident = group.identities[0];
+      const name = xflagName(check, group, lookup);
+      console.log(`  <xflag type="${check.type}" location="${name}" slice="${hex(check.sliceId ?? 0)}" setup="${hex(ident.setupId)}" room="${hex(ident.roomId)}" actor="${hex(ident.actorId)}" item="${check.item}"/>`);
+      continue;
     }
 
-    console.log(`  <xflag type="${check.type}" location="${name}" slice="0x${(check.sliceId ?? 0).toString(16)}" setup="0x${ra.setupId.toString(16)}" room="0x${ra.roomId.toString(16)}" actor="0x${ra.actor.actorId.toString(16)}" item="${check.item}"/>`);
+    console.log('  <actor>');
+    for (const ident of group.identities) {
+      console.log(`    <match setup="${hex(ident.setupId)}" room="${hex(ident.roomId)}" actor="${hex(ident.actorId)}"/>`);
+    }
+    for (const check of group.checks) {
+      const name = xflagName(check, group, lookup);
+      console.log(`    <xflag type="${check.type}" location="${name}" slice="${hex(check.sliceId ?? 0)}" item="${check.item}"/>`);
+    }
+    console.log('  </actor>');
   }
+
   if (lastSceneId !== -1)
     console.log('</scene>');
 }
 
-async function getCheckNames() {
-  const data = new Map<number, string>();
+async function getXflagData() {
   const [scenes, npcs] = await Promise.all([
     parseScenes(),
     parseNpcs(),
   ]);
 
-  const { checks } = await parseChecks({ scenes, npcs });
-  for (const c of checks) {
-    data.set(c.key, c.location);
-  }
-  return data;
+  return parseChecks({ scenes, npcs });
 }
 
 export async function run() {
-  const [rooms, checkNames] = await Promise.all([
+  const [rooms, xflagData] = await Promise.all([
     makeRooms(),
-    getCheckNames(),
+    getXflagData(),
   ]);
 
   const argGame = process.argv[2];
@@ -176,5 +295,6 @@ export async function run() {
 
   const gameRooms = rooms[gameWithMq];
   const checks = makeChecks(gameRooms, ACTORS_HANDLERS[game]);
-  outputChecks(game, checks, checkNames, argFilter, argFilterSubtype);
+  const lookup = new XflagLookup(game, xflagData.matches, xflagData.checks);
+  outputChecks(game, checks, lookup, argFilter, argFilterSubtype);
 }
