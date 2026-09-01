@@ -19,7 +19,7 @@
 "Bottom of the Well Main":
   dungeon: BotW
   exits:
-    "Bottom of the Well Front Hallway": "get_past_skulltulas_no_stone || climb_anywhere" #climb anywhere works for either age
+    "Bottom of the Well Front Hallway": "true" # Use pot to kill skulltula
     "Bottom of the Well Wallmaster Main": "soul_wallmaster && has_lens"
     "Bottom of the Well Basement Platform": "has_lens || climb_anywhere || hookshot_anywhere"
   events:
