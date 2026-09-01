@@ -29,44 +29,196 @@
     <xflag type="tree" location="Great Bay Coast Palm Tree Beach 1" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="NUT"/>
     <xflag type="tree" location="Great Bay Coast Palm Tree Beach 2" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="NUT"/>
     <xflag type="tree" location="Great Bay Coast Palm Tree Beach 3" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="NUT"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water Cleared 1" slice="0x0" setup="0x0" room="0x0" actor="0x45" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water Cleared 2" slice="0x0" setup="0x0" room="0x0" actor="0x42" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 01" slice="0x0" setup="0x0" room="0x0" actor="0x43" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 02" slice="0x0" setup="0x0" room="0x0" actor="0x44" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 03" slice="0x0" setup="0x0" room="0x0" actor="0x46" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 04" slice="0x0" setup="0x0" room="0x0" actor="0x47" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 05" slice="0x0" setup="0x0" room="0x0" actor="0x48" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 06" slice="0x0" setup="0x0" room="0x0" actor="0x49" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 07" slice="0x0" setup="0x0" room="0x0" actor="0x4a" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 08" slice="0x0" setup="0x0" room="0x0" actor="0x4b" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 09" slice="0x0" setup="0x0" room="0x0" actor="0x4c" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 10" slice="0x0" setup="0x0" room="0x0" actor="0x4d" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 11" slice="0x0" setup="0x0" room="0x0" actor="0x4e" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 12" slice="0x0" setup="0x0" room="0x0" actor="0x4f" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 13" slice="0x0" setup="0x0" room="0x0" actor="0x50" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 14" slice="0x0" setup="0x0" room="0x0" actor="0x51" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 15" slice="0x0" setup="0x0" room="0x0" actor="0x52" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 16" slice="0x0" setup="0x0" room="0x0" actor="0x53" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 17" slice="0x0" setup="0x0" room="0x0" actor="0x54" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 18" slice="0x0" setup="0x0" room="0x0" actor="0x55" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 19" slice="0x0" setup="0x0" room="0x0" actor="0x56" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 20" slice="0x0" setup="0x0" room="0x0" actor="0x57" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 21" slice="0x0" setup="0x0" room="0x0" actor="0x58" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 22" slice="0x0" setup="0x0" room="0x0" actor="0x59" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 23" slice="0x0" setup="0x0" room="0x0" actor="0x5a" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 24" slice="0x0" setup="0x0" room="0x0" actor="0x5b" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 25" slice="0x0" setup="0x0" room="0x0" actor="0x5c" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 26" slice="0x0" setup="0x0" room="0x0" actor="0x5d" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 27" slice="0x0" setup="0x0" room="0x0" actor="0x5e" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 28" slice="0x0" setup="0x0" room="0x0" actor="0x67" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 1" slice="0x0" setup="0x0" room="0x0" actor="0x5f" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 2" slice="0x0" setup="0x0" room="0x0" actor="0x60" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 3" slice="0x0" setup="0x0" room="0x0" actor="0x61" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 4" slice="0x0" setup="0x0" room="0x0" actor="0x62" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 5" slice="0x0" setup="0x0" room="0x0" actor="0x63" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Cliffs 1" slice="0x0" setup="0x0" room="0x0" actor="0x64" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Cliffs 2" slice="0x0" setup="0x0" room="0x0" actor="0x65" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Cliffs 3" slice="0x0" setup="0x0" room="0x0" actor="0x66" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x45"/>
+      <match setup="1" actor="0x56"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water Cleared 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x42"/>
+      <match setup="1" actor="0x59"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water Cleared 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x43"/>
+      <match setup="1" actor="0x5f"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 01" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x44"/>
+      <match setup="1" actor="0x5d"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 02" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x46"/>
+      <match setup="1" actor="0x4a"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 03" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x47"/>
+      <match setup="1" actor="0x4d"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 04" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x48"/>
+      <match setup="1" actor="0x4f"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 05" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x49"/>
+      <match setup="1" actor="0x51"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 06" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4a"/>
+      <match setup="1" actor="0x4e"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 07" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4b"/>
+      <match setup="1" actor="0x54"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 08" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4c"/>
+      <match setup="1" actor="0x52"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 09" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4d"/>
+      <match setup="1" actor="0x49"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 10" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4e"/>
+      <match setup="1" actor="0x4c"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 11" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4f"/>
+      <match setup="1" actor="0x53"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 12" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x50"/>
+      <match setup="1" actor="0x5a"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 13" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x51"/>
+      <match setup="1" actor="0x60"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 14" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x52"/>
+      <match setup="1" actor="0x66"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 15" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x53"/>
+      <match setup="1" actor="0x63"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 16" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x54"/>
+      <match setup="1" actor="0x61"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 17" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x55"/>
+      <match setup="1" actor="0x62"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 18" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x56"/>
+      <match setup="1" actor="0x4b"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 19" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x57"/>
+      <match setup="1" actor="0x64"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 20" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x58"/>
+      <match setup="1" actor="0x5b"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 21" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x59"/>
+      <match setup="1" actor="0x55"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 22" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5a"/>
+      <match setup="1" actor="0x58"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 23" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5b"/>
+      <match setup="1" actor="0x57"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 24" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5c"/>
+      <match setup="1" actor="0x5c"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 25" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5d"/>
+      <match setup="1" actor="0x5e"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 26" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5e"/>
+      <match setup="1" actor="0x50"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 27" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x67"/>
+      <match setup="1" actor="0x65"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 28" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5f"/>
+      <match setup="1" actor="0x69"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x60"/>
+      <match setup="1" actor="0x6b"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x61"/>
+      <match setup="1" actor="0x68"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 3" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x62"/>
+      <match setup="1" actor="0x6a"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 4" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x63"/>
+      <match setup="1" actor="0x67"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 5" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x64"/>
+      <match setup="1" actor="0x6e"/>
+      <xflag type="rock" location="Great Bay Coast Rock Cliffs 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x65"/>
+      <match setup="1" actor="0x6d"/>
+      <xflag type="rock" location="Great Bay Coast Rock Cliffs 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x66"/>
+      <match setup="1" actor="0x6c"/>
+      <xflag type="rock" location="Great Bay Coast Rock Cliffs 3" item="RANDOM"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x40"/>
       <match setup="1" actor="0x85"/>
