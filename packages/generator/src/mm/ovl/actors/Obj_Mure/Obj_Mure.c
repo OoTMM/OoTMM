@@ -70,7 +70,7 @@ s32 func_808D7928(Actor_ObjMure* this, PlayState* play)
 
 void ObjMure_Init(Actor_ObjMure* this, PlayState* play)
 {
-    Xflag_Init(&this->xflag, &this->actor, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
 
     this->chNum = OBJ_MURE_GET_CHNUM(&this->actor);
     this->ptn = OBJ_MURE_GET_PTN(&this->actor);
@@ -110,11 +110,10 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, PlayState* play, s16 actor
 {
     Actor* tmp;
 
-    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-    g.xflag.sliceId = (u8)index;
-    g.xflagOverride = TRUE;
+    g.xflagId = Xflag_LookupSlice(this->xflag, index);
+    g.xflagOverrideEx = TRUE;
     tmp = Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
 
     return tmp;
 }
