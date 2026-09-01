@@ -18,82 +18,82 @@
     <gs location="MQ Fire Temple GS Fire Walls Side Room" flag="0xd4" item="GS_TOKEN"/>
     <gs location="MQ Fire Temple GS Fire Walls Middle" flag="0xd3" item="GS_TOKEN"/>
     <gs location="MQ Fire Temple GS Topmost" flag="0xd1" item="GS_TOKEN"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Lava Room Left" slice="0x0" setup="0x0" room="0x1" actor="0x11" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Lava Room Alcove" slice="0x0" setup="0x0" room="0x1" actor="0x12" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Lava Room Right" slice="0x0" setup="0x0" room="0x1" actor="0x13" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Pre-Boss 1" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Pre-Boss 2" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="ARROWS_30"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Bridge Above Lava Room 1" slice="0x0" setup="0x0" room="0x6" actor="0x1" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Bridge Above Lava Room 2" slice="0x0" setup="0x0" room="0x6" actor="0x2" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Bridge Above Lava Room 3" slice="0x0" setup="0x0" room="0x6" actor="0x3" item="BOMBS_5"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Back Right 1" slice="0x0" setup="0x0" room="0xa" actor="0x2f" item="BOMB"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Back Right 2" slice="0x0" setup="0x0" room="0xa" actor="0x30" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Right 1" slice="0x0" setup="0x0" room="0xa" actor="0x31" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Right 2" slice="0x0" setup="0x0" room="0xa" actor="0x32" item="BOMB"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Left 1" slice="0x0" setup="0x0" room="0xa" actor="0x33" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Left 2" slice="0x0" setup="0x0" room="0xa" actor="0x34" item="BOMBS_5"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Grids Above Lava 1" slice="0x0" setup="0x0" room="0x10" actor="0x5" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Grids Above Lava 2" slice="0x0" setup="0x0" room="0x10" actor="0x6" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 1" slice="0x0" setup="0x0" room="0x12" actor="0x8" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 2" slice="0x0" setup="0x0" room="0x12" actor="0x9" item="BOMB"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 3" slice="0x0" setup="0x0" room="0x12" actor="0xa" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 4" slice="0x0" setup="0x0" room="0x12" actor="0xb" item="BOMB"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 5" slice="0x0" setup="0x0" room="0x12" actor="0xc" item="BOMB"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 6" slice="0x0" setup="0x0" room="0x12" actor="0xd" item="BOMB"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 7" slice="0x0" setup="0x0" room="0x12" actor="0xe" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 8" slice="0x0" setup="0x0" room="0x12" actor="0xf" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Boss Key Room 1" slice="0x0" setup="0x0" room="0x13" actor="0xd" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Fire Temple Pot Boss Key Room 2" slice="0x0" setup="0x0" room="0x13" actor="0xe" item="MAGIC_JAR_SMALL"/>
-    <xflag type="fairy_spot" location="MQ Fire Temple Hammer Loop Stalfos Big Fairy" slice="0x0" setup="0x0" room="0xf" actor="0x1" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy" slice="0x0" setup="0x0" room="0x12" actor="0x7" item="FAIRY_BIG"/>
-    <xflag type="heart" location="MQ Fire Temple Heart 1" slice="0x0" setup="0x0" room="0x15" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Fire Temple Heart 2" slice="0x0" setup="0x0" room="0x15" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Fire Temple Heart 3" slice="0x0" setup="0x0" room="0x15" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Shortcut Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Shortcut Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Shortcut Room 3" slice="0x0" setup="0x0" room="0x4" actor="0x8" item="ARROWS_10"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Maze" slice="0x0" setup="0x0" room="0x5" actor="0x13" item="RUPEE_RED"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb First 1" slice="0x0" setup="0x0" room="0x7" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb First 2" slice="0x0" setup="0x0" room="0x7" actor="0x7" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb Second 1" slice="0x0" setup="0x0" room="0x7" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb Second 2" slice="0x0" setup="0x0" room="0x7" actor="0x5" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Fire Maze" slice="0x0" setup="0x0" room="0xa" actor="0x2a" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item After Flare Dancer" slice="0x0" setup="0x0" room="0xc" actor="0x0" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Staircase" slice="0x0" setup="0x0" room="0xe" actor="0x1" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Torch Room" slice="0x0" setup="0x0" room="0x10" actor="0x0" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Boss Key Room Hookshot" slice="0x0" setup="0x0" room="0x13" actor="0x9" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Fire Temple Wonder Item Boss Key Room Bow" slice="0x0" setup="0x0" room="0x13" actor="0xa" item="FLEXIBLE"/>
-    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 1" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate" slice="0x0" setup="0x0" room="0x2" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 1" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 2" slice="0x0" setup="0x0" room="0x4" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 3" slice="0x0" setup="0x0" room="0x4" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 4" slice="0x0" setup="0x0" room="0x4" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 5" slice="0x0" setup="0x0" room="0x4" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 6" slice="0x0" setup="0x0" room="0x4" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Large Crate 1" slice="0x0" setup="0x0" room="0x5" actor="0x18" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Large Crate 2" slice="0x0" setup="0x0" room="0x5" actor="0x19" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Large Crate 3" slice="0x0" setup="0x0" room="0x5" actor="0x1a" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Lower Cage Large Crate 1" slice="0x0" setup="0x0" room="0x5" actor="0x1b" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Lower Cage Large Crate 2" slice="0x0" setup="0x0" room="0x5" actor="0x1c" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Lower Cage Large Crate 3" slice="0x0" setup="0x0" room="0x5" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Small Crate 1" slice="0x0" setup="0x0" room="0x5" actor="0x20" item="NOTHING"/>
-    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Small Crate 2" slice="0x0" setup="0x0" room="0x5" actor="0x21" item="NOTHING"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Near Cage Large Crate" slice="0x0" setup="0x0" room="0x10" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Large Crate 1" slice="0x0" setup="0x0" room="0x10" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Large Crate 2" slice="0x0" setup="0x0" room="0x10" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room High Ledge Large Crate" slice="0x0" setup="0x0" room="0x10" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Large Crate 3" slice="0x0" setup="0x0" room="0x10" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Near Cage Small Crate 1" slice="0x0" setup="0x0" room="0x10" actor="0xd" item="NOTHING"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Near Cage Small Crate 2" slice="0x0" setup="0x0" room="0x10" actor="0xe" item="NOTHING"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Small Crate 1" slice="0x0" setup="0x0" room="0x10" actor="0xf" item="NOTHING"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Small Crate 2" slice="0x0" setup="0x0" room="0x10" actor="0x10" item="NOTHING"/>
-    <xflag type="crate" location="MQ Fire Temple 3F Lava Room High Ledge Small Crate" slice="0x0" setup="0x0" room="0x10" actor="0x11" item="NOTHING"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Entrance 1" slice="0x0" setup="0" room="0x0" actor="0x9" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Entrance 2" slice="0x0" setup="0" room="0x0" actor="0xa" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Lava Room Left" slice="0x0" setup="0" room="0x1" actor="0x11" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Lava Room Alcove" slice="0x0" setup="0" room="0x1" actor="0x12" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Lava Room Right" slice="0x0" setup="0" room="0x1" actor="0x13" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Pre-Boss 1" slice="0x0" setup="0" room="0x2" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Pre-Boss 2" slice="0x0" setup="0" room="0x2" actor="0x9" item="ARROWS_30"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Bridge Above Lava Room 1" slice="0x0" setup="0" room="0x6" actor="0x1" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Bridge Above Lava Room 2" slice="0x0" setup="0" room="0x6" actor="0x2" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Bridge Above Lava Room 3" slice="0x0" setup="0" room="0x6" actor="0x3" item="BOMBS_5"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Back Right 1" slice="0x0" setup="0" room="0xa" actor="0x2f" item="BOMB"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Back Right 2" slice="0x0" setup="0" room="0xa" actor="0x30" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Right 1" slice="0x0" setup="0" room="0xa" actor="0x31" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Right 2" slice="0x0" setup="0" room="0xa" actor="0x32" item="BOMB"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Left 1" slice="0x0" setup="0" room="0xa" actor="0x33" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Fire Maze Room Left 2" slice="0x0" setup="0" room="0xa" actor="0x34" item="BOMBS_5"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Grids Above Lava 1" slice="0x0" setup="0" room="0x10" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Grids Above Lava 2" slice="0x0" setup="0" room="0x10" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 1" slice="0x0" setup="0" room="0x12" actor="0x8" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 2" slice="0x0" setup="0" room="0x12" actor="0x9" item="BOMB"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 3" slice="0x0" setup="0" room="0x12" actor="0xa" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 4" slice="0x0" setup="0" room="0x12" actor="0xb" item="BOMB"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 5" slice="0x0" setup="0" room="0x12" actor="0xc" item="BOMB"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 6" slice="0x0" setup="0" room="0x12" actor="0xd" item="BOMB"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 7" slice="0x0" setup="0" room="0x12" actor="0xe" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 8" slice="0x0" setup="0" room="0x12" actor="0xf" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Boss Key Room 1" slice="0x0" setup="0" room="0x13" actor="0xd" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Fire Temple Pot Boss Key Room 2" slice="0x0" setup="0" room="0x13" actor="0xe" item="MAGIC_JAR_SMALL"/>
+    <xflag type="fairy_spot" location="MQ Fire Temple Hammer Loop Stalfos Big Fairy" slice="0x0" setup="0" room="0xf" actor="0x1" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy" slice="0x0" setup="0" room="0x12" actor="0x7" item="FAIRY_BIG"/>
+    <xflag type="heart" location="MQ Fire Temple Heart 1" slice="0x0" setup="0" room="0x15" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Fire Temple Heart 2" slice="0x0" setup="0" room="0x15" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Fire Temple Heart 3" slice="0x0" setup="0" room="0x15" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Shortcut Room 1" slice="0x0" setup="0" room="0x4" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Shortcut Room 2" slice="0x0" setup="0" room="0x4" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Shortcut Room 3" slice="0x0" setup="0" room="0x4" actor="0x8" item="ARROWS_10"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Maze" slice="0x0" setup="0" room="0x5" actor="0x13" item="RUPEE_RED"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb First 1" slice="0x0" setup="0" room="0x7" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb First 2" slice="0x0" setup="0" room="0x7" actor="0x7" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb Second 1" slice="0x0" setup="0" room="0x7" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item East Climb Second 2" slice="0x0" setup="0" room="0x7" actor="0x5" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Fire Maze" slice="0x0" setup="0" room="0xa" actor="0x2a" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item After Flare Dancer" slice="0x0" setup="0" room="0xc" actor="0x0" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Staircase" slice="0x0" setup="0" room="0xe" actor="0x1" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Torch Room" slice="0x0" setup="0" room="0x10" actor="0x0" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Boss Key Room Hookshot" slice="0x0" setup="0" room="0x13" actor="0x9" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Fire Temple Wonder Item Boss Key Room Bow" slice="0x0" setup="0" room="0x13" actor="0xa" item="FLEXIBLE"/>
+    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 1" slice="0x0" setup="0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2" slice="0x0" setup="0" room="0x2" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate" slice="0x0" setup="0" room="0x2" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1" slice="0x0" setup="0" room="0x2" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2" slice="0x0" setup="0" room="0x2" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate" slice="0x0" setup="0" room="0x2" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 1" slice="0x0" setup="0" room="0x4" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 2" slice="0x0" setup="0" room="0x4" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 3" slice="0x0" setup="0" room="0x4" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 4" slice="0x0" setup="0" room="0x4" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 5" slice="0x0" setup="0" room="0x4" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Cell Below Maze Large Crate 6" slice="0x0" setup="0" room="0x4" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Large Crate 1" slice="0x0" setup="0" room="0x5" actor="0x18" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Large Crate 2" slice="0x0" setup="0" room="0x5" actor="0x19" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Large Crate 3" slice="0x0" setup="0" room="0x5" actor="0x1a" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Lower Cage Large Crate 1" slice="0x0" setup="0" room="0x5" actor="0x1b" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Lower Cage Large Crate 2" slice="0x0" setup="0" room="0x5" actor="0x1c" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Lower Cage Large Crate 3" slice="0x0" setup="0" room="0x5" actor="0x1d" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Small Crate 1" slice="0x0" setup="0" room="0x5" actor="0x20" item="NOTHING"/>
+    <xflag type="crate" location="MQ Fire Temple Maze Room Upper Cage Small Crate 2" slice="0x0" setup="0" room="0x5" actor="0x21" item="NOTHING"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Near Cage Large Crate" slice="0x0" setup="0" room="0x10" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Large Crate 1" slice="0x0" setup="0" room="0x10" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Large Crate 2" slice="0x0" setup="0" room="0x10" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room High Ledge Large Crate" slice="0x0" setup="0" room="0x10" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Large Crate 3" slice="0x0" setup="0" room="0x10" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Near Cage Small Crate 1" slice="0x0" setup="0" room="0x10" actor="0xd" item="NOTHING"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Near Cage Small Crate 2" slice="0x0" setup="0" room="0x10" actor="0xe" item="NOTHING"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Small Crate 1" slice="0x0" setup="0" room="0x10" actor="0xf" item="NOTHING"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room Lower Small Crate 2" slice="0x0" setup="0" room="0x10" actor="0x10" item="NOTHING"/>
+    <xflag type="crate" location="MQ Fire Temple 3F Lava Room High Ledge Small Crate" slice="0x0" setup="0" room="0x10" actor="0x11" item="NOTHING"/>
   </scene>
 </checks>

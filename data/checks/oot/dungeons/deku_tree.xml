@@ -11,36 +11,36 @@
     <gs location="Deku Tree GS Basement Vines" flag="0x02" item="GS_TOKEN"/>
     <gs location="Deku Tree GS Basement Gate" flag="0x01" item="GS_TOKEN"/>
     <gs location="Deku Tree GS Basement Back Room" flag="0x00" item="GS_TOKEN" hint="DEKU_BACK_SKULL"/>
-    <xflag type="grass" location="Deku Tree Grass Lobby 1" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Lobby 2" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Lobby 3" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Lobby 4" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Lobby 5" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Slingshot Room 1" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Slingshot Room 2" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Slingshot Room 3" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Slingshot Room 4" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Basement Main 1" slice="0x0" setup="0x0" room="0x3" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Basement Main 2" slice="0x0" setup="0x0" room="0x3" actor="0x2" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x0" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x1" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 3" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 4" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Water Room 1" slice="0x0" setup="0x0" room="0x5" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Water Room 2" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Torch Room 1" slice="0x0" setup="0x0" room="0x6" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Torch Room 2" slice="0x0" setup="0x0" room="0x6" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Larva Room 1" slice="0x0" setup="0x0" room="0x7" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Larva Room 2" slice="0x0" setup="0x0" room="0x7" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Pre-Boss Room 1" slice="0x0" setup="0x0" room="0x9" actor="0x0" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Pre-Boss Room 2" slice="0x0" setup="0x0" room="0x9" actor="0x1" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Pre-Boss Room 3" slice="0x0" setup="0x0" room="0x9" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Grass Compass Room 1" slice="0x0" setup="0x0" room="0xa" actor="0x2" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Grass Compass Room 2" slice="0x0" setup="0x0" room="0xa" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Deku Tree Heart Main Room Lower" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Deku Tree Heart Main Room Upper" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Deku Tree Heart Pre-Boss 1" slice="0x0" setup="0x0" room="0x9" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Deku Tree Heart Pre-Boss 2" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Deku Tree Heart Pre-Boss 3" slice="0x0" setup="0x0" room="0x9" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Lobby 1" slice="0x0" setup="0" room="0x0" actor="0x6" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Lobby 2" slice="0x0" setup="0" room="0x0" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Lobby 3" slice="0x0" setup="0" room="0x0" actor="0x8" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Lobby 4" slice="0x0" setup="0" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Lobby 5" slice="0x0" setup="0" room="0x0" actor="0xa" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Slingshot Room 1" slice="0x0" setup="0" room="0x2" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Slingshot Room 2" slice="0x0" setup="0" room="0x2" actor="0x1" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Slingshot Room 3" slice="0x0" setup="0" room="0x2" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Slingshot Room 4" slice="0x0" setup="0" room="0x2" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Basement Main 1" slice="0x0" setup="0" room="0x3" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Basement Main 2" slice="0x0" setup="0" room="0x3" actor="0x2" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 1" slice="0x0" setup="0" room="0x4" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 2" slice="0x0" setup="0" room="0x4" actor="0x1" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 3" slice="0x0" setup="0" room="0x4" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Eye Switch Room 4" slice="0x0" setup="0" room="0x4" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Water Room 1" slice="0x0" setup="0" room="0x5" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Water Room 2" slice="0x0" setup="0" room="0x5" actor="0x2" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Torch Room 1" slice="0x0" setup="0" room="0x6" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Torch Room 2" slice="0x0" setup="0" room="0x6" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Larva Room 1" slice="0x0" setup="0" room="0x7" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Larva Room 2" slice="0x0" setup="0" room="0x7" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Pre-Boss Room 1" slice="0x0" setup="0" room="0x9" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Pre-Boss Room 2" slice="0x0" setup="0" room="0x9" actor="0x1" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Pre-Boss Room 3" slice="0x0" setup="0" room="0x9" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Grass Compass Room 1" slice="0x0" setup="0" room="0xa" actor="0x2" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Grass Compass Room 2" slice="0x0" setup="0" room="0xa" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Deku Tree Heart Main Room Lower" slice="0x0" setup="0" room="0x0" actor="0x19" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Deku Tree Heart Main Room Upper" slice="0x0" setup="0" room="0x0" actor="0x1a" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Deku Tree Heart Pre-Boss 1" slice="0x0" setup="0" room="0x9" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Deku Tree Heart Pre-Boss 2" slice="0x0" setup="0" room="0x9" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Deku Tree Heart Pre-Boss 3" slice="0x0" setup="0" room="0x9" actor="0x8" item="RECOVERY_HEART"/>
   </scene>
 </checks>

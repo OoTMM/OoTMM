@@ -12,155 +12,155 @@
     <gs location="MQ Water Temple GS River" flag="0xd9" item="GS_TOKEN"/>
     <gs location="MQ Water Temple GS Three Torch" flag="0xdc" item="GS_TOKEN"/>
     <gs location="MQ Water Temple GS Side Loop" flag="0xdb" item="GS_TOKEN"/>
-    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 1" slice="0x0" setup="0x0" room="0x3" actor="0x13" item="BOMB"/>
-    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 2" slice="0x0" setup="0x0" room="0x3" actor="0x14" item="BOMB"/>
-    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 3" slice="0x0" setup="0x0" room="0x3" actor="0x19" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 4" slice="0x0" setup="0x0" room="0x3" actor="0x1a" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Water Temple Pot Storage Room 1" slice="0x0" setup="0x0" room="0x4" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Storage Room 2" slice="0x0" setup="0x0" room="0x4" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Storage Room 3" slice="0x0" setup="0x0" room="0x4" actor="0xf" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Near Door 1" slice="0x0" setup="0x0" room="0x6" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Near Door 2" slice="0x0" setup="0x0" room="0x6" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Ledge 1" slice="0x0" setup="0x0" room="0x6" actor="0x9" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Ledge 2" slice="0x0" setup="0x0" room="0x6" actor="0xa" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Ledge 3" slice="0x0" setup="0x0" room="0x6" actor="0xb" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Water Temple Pot After Dark Link 1" slice="0x0" setup="0x0" room="0x7" actor="0x2" item="ARROWS_30"/>
-    <xflag type="pot" location="MQ Water Temple Pot After Dark Link 2" slice="0x0" setup="0x0" room="0x7" actor="0x3" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Boss Key Room" slice="0x0" setup="0x0" room="0x9" actor="0xf" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Room Before High Water 1" slice="0x0" setup="0x0" room="0xa" actor="0x11" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Room Before High Water 2" slice="0x0" setup="0x0" room="0xa" actor="0x12" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Room Before High Water 3" slice="0x0" setup="0x0" room="0xa" actor="0x13" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Loop 1" slice="0x0" setup="0x0" room="0xe" actor="0xe" item="BOMB"/>
-    <xflag type="pot" location="MQ Water Temple Pot Loop 2" slice="0x0" setup="0x0" room="0xe" actor="0xf" item="BOMB"/>
-    <xflag type="pot" location="MQ Water Temple Pot Stalfos Room 1" slice="0x0" setup="0x0" room="0x10" actor="0x8" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Stalfos Room 2" slice="0x0" setup="0x0" room="0x10" actor="0x9" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Ruto 1" slice="0x0" setup="0x0" room="0x11" actor="0xd" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Ruto 2" slice="0x0" setup="0x0" room="0x11" actor="0xe" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Entrance" slice="0x0" setup="0x0" room="0x14" actor="0x11" item="RUPEE_RED"/>
-    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Right 1" slice="0x0" setup="0x0" room="0x14" actor="0x12" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Right 2" slice="0x0" setup="0x0" room="0x14" actor="0x13" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Cage 1" slice="0x0" setup="0x0" room="0x14" actor="0x14" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Cage 2" slice="0x0" setup="0x0" room="0x14" actor="0x15" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Water Temple Pot River 1" slice="0x0" setup="0x0" room="0x15" actor="0x12" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Water Temple Pot River 2" slice="0x0" setup="0x0" room="0x15" actor="0x13" item="FLEXIBLE"/>
-    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Ledge" slice="0x0" setup="0x0" room="0x6" actor="0x1" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 1" slice="0x0" setup="0x0" room="0x6" actor="0x5" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 2" slice="0x0" setup="0x0" room="0x6" actor="0x6" item="FAIRY_BIG"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Under Pillar Room" slice="0x0" setup="0x0" room="0x2" actor="0x18" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Triple Torches" slice="0x0" setup="0x0" room="0x3" actor="0x3" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 1" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="NUTS_5"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 2" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 3" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="RUPEE_RED"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Left 1" slice="0x0" setup="0x0" room="0x5" actor="0x9" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Left 2" slice="0x0" setup="0x0" room="0x5" actor="0xa" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Left 3" slice="0x0" setup="0x0" room="0x5" actor="0xb" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item After Dark Link" slice="0x0" setup="0x0" room="0x7" actor="0x0" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Dragon Room Eyes 1" slice="0x0" setup="0x0" room="0x8" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Dragon Room Eyes 2" slice="0x0" setup="0x0" room="0x8" actor="0x6" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Dragon Room Portrait" slice="0x0" setup="0x0" room="0x8" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Above 2F West Room" slice="0x0" setup="0x0" room="0xa" actor="0x1" item="RANDOM"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Before Boss 1" slice="0x0" setup="0x0" room="0xb" actor="0x0" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Before Boss 2" slice="0x0" setup="0x0" room="0xb" actor="0x1" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Water Sprouts 1" slice="0x0" setup="0x0" room="0xf" actor="0x0" item="MAGIC_JAR_SMALL"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Water Sprouts 2" slice="0x0" setup="0x0" room="0xf" actor="0x1" item="ARROWS_30"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Freestanding Room" slice="0x0" setup="0x0" room="0x10" actor="0x0" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Longshot Room" slice="0x0" setup="0x0" room="0x11" actor="0x7" item="MAGIC_JAR_SMALL"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Lizalfos Room" slice="0x0" setup="0x0" room="0x12" actor="0x3" item="RUPEE_RED"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Stalfos Room" slice="0x0" setup="0x0" room="0x13" actor="0x5" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Water Temple Wonder Item Lizalfos Hallway" slice="0x0" setup="0x0" room="0x14" actor="0x2" item="ARROWS_5"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Top Large Crate 1" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Top Large Crate 2" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 1" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 2" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 3" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 4" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 5" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 6" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 7" slice="0x0" setup="0x0" room="0x2" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 8" slice="0x0" setup="0x0" room="0x2" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 9" slice="0x0" setup="0x0" room="0x2" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 10" slice="0x0" setup="0x0" room="0x2" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 11" slice="0x0" setup="0x0" room="0x2" actor="0x13" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 12" slice="0x0" setup="0x0" room="0x2" actor="0x14" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 13" slice="0x0" setup="0x0" room="0x2" actor="0x15" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 14" slice="0x0" setup="0x0" room="0x2" actor="0x16" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 1" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 2" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 3" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 4" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 5" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 6" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Behind Gate Large Crate 1" slice="0x0" setup="0x0" room="0x3" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Behind Gate Large Crate 2" slice="0x0" setup="0x0" room="0x3" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Three Torch Room Behind Gate Large Crate 3" slice="0x0" setup="0x0" room="0x3" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 1" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 2" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 3" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 4" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 5" slice="0x0" setup="0x0" room="0x4" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 6" slice="0x0" setup="0x0" room="0x4" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 7" slice="0x0" setup="0x0" room="0x4" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 1" slice="0x0" setup="0x0" room="0x4" actor="0x9" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 2" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 3" slice="0x0" setup="0x0" room="0x4" actor="0xb" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 4" slice="0x0" setup="0x0" room="0x4" actor="0xc" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Large Crate 1" slice="0x0" setup="0x0" room="0x8" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Large Crate 2" slice="0x0" setup="0x0" room="0x8" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Door Large Crate 1" slice="0x0" setup="0x0" room="0x8" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Door Large Crate 2" slice="0x0" setup="0x0" room="0x8" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 1" slice="0x0" setup="0x0" room="0x8" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 2" slice="0x0" setup="0x0" room="0x8" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 3" slice="0x0" setup="0x0" room="0x8" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 4" slice="0x0" setup="0x0" room="0x8" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Small Crate 1" slice="0x0" setup="0x0" room="0x8" actor="0x10" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Small Crate 2" slice="0x0" setup="0x0" room="0x8" actor="0x11" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Small Crate 3" slice="0x0" setup="0x0" room="0x8" actor="0x12" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 1" slice="0x0" setup="0x0" room="0x9" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Boss Key Room By Switch Large Crate" slice="0x0" setup="0x0" room="0x9" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 2" slice="0x0" setup="0x0" room="0x9" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 3" slice="0x0" setup="0x0" room="0x9" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 4" slice="0x0" setup="0x0" room="0x9" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 1" slice="0x0" setup="0x0" room="0xa" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 2" slice="0x0" setup="0x0" room="0xa" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 3" slice="0x0" setup="0x0" room="0xa" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 4" slice="0x0" setup="0x0" room="0xa" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 5" slice="0x0" setup="0x0" room="0xa" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Upper Large Crate 1" slice="0x0" setup="0x0" room="0xa" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Upper Large Crate 2" slice="0x0" setup="0x0" room="0xa" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 6" slice="0x0" setup="0x0" room="0xa" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Small Crate" slice="0x0" setup="0x0" room="0xa" actor="0xb" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Room Before High Water Upper Small Crate" slice="0x0" setup="0x0" room="0xa" actor="0xc" item="NOTHING"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 1" slice="0x0" setup="0x0" room="0xc" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 2" slice="0x0" setup="0x0" room="0xc" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 3" slice="0x0" setup="0x0" room="0xc" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 4" slice="0x0" setup="0x0" room="0xc" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room At Door Large Crate 1" slice="0x0" setup="0x0" room="0xc" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room At Door Large Crate 2" slice="0x0" setup="0x0" room="0xc" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 1" slice="0x0" setup="0x0" room="0xc" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 2" slice="0x0" setup="0x0" room="0xc" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 3" slice="0x0" setup="0x0" room="0xc" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 4" slice="0x0" setup="0x0" room="0xc" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 5" slice="0x0" setup="0x0" room="0xc" actor="0x13" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 6" slice="0x0" setup="0x0" room="0xc" actor="0x14" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 1" slice="0x0" setup="0x0" room="0xe" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 2" slice="0x0" setup="0x0" room="0xe" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 3" slice="0x0" setup="0x0" room="0xe" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 4" slice="0x0" setup="0x0" room="0xe" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 5" slice="0x0" setup="0x0" room="0xe" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 1" slice="0x0" setup="0x0" room="0x10" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 2" slice="0x0" setup="0x0" room="0x10" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 3" slice="0x0" setup="0x0" room="0x10" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 4" slice="0x0" setup="0x0" room="0x10" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 5" slice="0x0" setup="0x0" room="0x10" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Behind Gate Large Crate 1" slice="0x0" setup="0x0" room="0x14" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Behind Gate Large Crate 2" slice="0x0" setup="0x0" room="0x14" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 1" slice="0x0" setup="0x0" room="0x14" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 2" slice="0x0" setup="0x0" room="0x14" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 3" slice="0x0" setup="0x0" room="0x14" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 4" slice="0x0" setup="0x0" room="0x14" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 5" slice="0x0" setup="0x0" room="0x14" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 6" slice="0x0" setup="0x0" room="0x14" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 7" slice="0x0" setup="0x0" room="0x14" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 8" slice="0x0" setup="0x0" room="0x14" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 1" slice="0x0" setup="0" room="0x3" actor="0x13" item="BOMB"/>
+    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 2" slice="0x0" setup="0" room="0x3" actor="0x14" item="BOMB"/>
+    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 3" slice="0x0" setup="0" room="0x3" actor="0x19" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Water Temple Pot Skull Cage 4" slice="0x0" setup="0" room="0x3" actor="0x1a" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Water Temple Pot Storage Room 1" slice="0x0" setup="0" room="0x4" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Storage Room 2" slice="0x0" setup="0" room="0x4" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Storage Room 3" slice="0x0" setup="0" room="0x4" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Near Door 1" slice="0x0" setup="0" room="0x6" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Near Door 2" slice="0x0" setup="0" room="0x6" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Ledge 1" slice="0x0" setup="0" room="0x6" actor="0x9" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Ledge 2" slice="0x0" setup="0" room="0x6" actor="0xa" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Before Dark Link Ledge 3" slice="0x0" setup="0" room="0x6" actor="0xb" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Water Temple Pot After Dark Link 1" slice="0x0" setup="0" room="0x7" actor="0x2" item="ARROWS_30"/>
+    <xflag type="pot" location="MQ Water Temple Pot After Dark Link 2" slice="0x0" setup="0" room="0x7" actor="0x3" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Boss Key Room" slice="0x0" setup="0" room="0x9" actor="0xf" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Room Before High Water 1" slice="0x0" setup="0" room="0xa" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Room Before High Water 2" slice="0x0" setup="0" room="0xa" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Room Before High Water 3" slice="0x0" setup="0" room="0xa" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Loop 1" slice="0x0" setup="0" room="0xe" actor="0xe" item="BOMB"/>
+    <xflag type="pot" location="MQ Water Temple Pot Loop 2" slice="0x0" setup="0" room="0xe" actor="0xf" item="BOMB"/>
+    <xflag type="pot" location="MQ Water Temple Pot Stalfos Room 1" slice="0x0" setup="0" room="0x10" actor="0x8" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Stalfos Room 2" slice="0x0" setup="0" room="0x10" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Ruto 1" slice="0x0" setup="0" room="0x11" actor="0xd" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Ruto 2" slice="0x0" setup="0" room="0x11" actor="0xe" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Entrance" slice="0x0" setup="0" room="0x14" actor="0x11" item="RUPEE_RED"/>
+    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Right 1" slice="0x0" setup="0" room="0x14" actor="0x12" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Right 2" slice="0x0" setup="0" room="0x14" actor="0x13" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Cage 1" slice="0x0" setup="0" room="0x14" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot Twisted Room Cage 2" slice="0x0" setup="0" room="0x14" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Water Temple Pot River 1" slice="0x0" setup="0" room="0x15" actor="0x12" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Water Temple Pot River 2" slice="0x0" setup="0" room="0x15" actor="0x13" item="FLEXIBLE"/>
+    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Ledge" slice="0x0" setup="0" room="0x6" actor="0x1" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 1" slice="0x0" setup="0" room="0x6" actor="0x5" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 2" slice="0x0" setup="0" room="0x6" actor="0x6" item="FAIRY_BIG"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Under Pillar Room" slice="0x0" setup="0" room="0x2" actor="0x18" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Triple Torches" slice="0x0" setup="0" room="0x3" actor="0x3" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 1" slice="0x0" setup="0" room="0x5" actor="0x2" item="NUTS_5"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 2" slice="0x0" setup="0" room="0x5" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 3" slice="0x0" setup="0" room="0x5" actor="0x4" item="RUPEE_RED"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Left 1" slice="0x0" setup="0" room="0x5" actor="0x9" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Left 2" slice="0x0" setup="0" room="0x5" actor="0xa" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Left 3" slice="0x0" setup="0" room="0x5" actor="0xb" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item After Dark Link" slice="0x0" setup="0" room="0x7" actor="0x0" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Dragon Room Eyes 1" slice="0x0" setup="0" room="0x8" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Dragon Room Eyes 2" slice="0x0" setup="0" room="0x8" actor="0x6" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Dragon Room Portrait" slice="0x0" setup="0" room="0x8" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Above 2F West Room" slice="0x0" setup="0" room="0xa" actor="0x1" item="RANDOM"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Before Boss 1" slice="0x0" setup="0" room="0xb" actor="0x0" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Before Boss 2" slice="0x0" setup="0" room="0xb" actor="0x1" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Water Sprouts 1" slice="0x0" setup="0" room="0xf" actor="0x0" item="MAGIC_JAR_SMALL"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Water Sprouts 2" slice="0x0" setup="0" room="0xf" actor="0x1" item="ARROWS_30"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Freestanding Room" slice="0x0" setup="0" room="0x10" actor="0x0" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Longshot Room" slice="0x0" setup="0" room="0x11" actor="0x7" item="MAGIC_JAR_SMALL"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Lizalfos Room" slice="0x0" setup="0" room="0x12" actor="0x3" item="RUPEE_RED"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Stalfos Room" slice="0x0" setup="0" room="0x13" actor="0x5" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Water Temple Wonder Item Lizalfos Hallway" slice="0x0" setup="0" room="0x14" actor="0x2" item="ARROWS_5"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Top Large Crate 1" slice="0x0" setup="0" room="0x1" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Top Large Crate 2" slice="0x0" setup="0" room="0x1" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 1" slice="0x0" setup="0" room="0x2" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 2" slice="0x0" setup="0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 3" slice="0x0" setup="0" room="0x2" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 4" slice="0x0" setup="0" room="0x2" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 5" slice="0x0" setup="0" room="0x2" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 6" slice="0x0" setup="0" room="0x2" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 7" slice="0x0" setup="0" room="0x2" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 8" slice="0x0" setup="0" room="0x2" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 9" slice="0x0" setup="0" room="0x2" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 10" slice="0x0" setup="0" room="0x2" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 11" slice="0x0" setup="0" room="0x2" actor="0x13" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 12" slice="0x0" setup="0" room="0x2" actor="0x14" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 13" slice="0x0" setup="0" room="0x2" actor="0x15" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Central Tower Under Gate Large Crate 14" slice="0x0" setup="0" room="0x2" actor="0x16" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 1" slice="0x0" setup="0" room="0x3" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 2" slice="0x0" setup="0" room="0x3" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 3" slice="0x0" setup="0" room="0x3" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 4" slice="0x0" setup="0" room="0x3" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 5" slice="0x0" setup="0" room="0x3" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Large Crate 6" slice="0x0" setup="0" room="0x3" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Behind Gate Large Crate 1" slice="0x0" setup="0" room="0x3" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Behind Gate Large Crate 2" slice="0x0" setup="0" room="0x3" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Three Torch Room Behind Gate Large Crate 3" slice="0x0" setup="0" room="0x3" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 1" slice="0x0" setup="0" room="0x4" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 2" slice="0x0" setup="0" room="0x4" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 3" slice="0x0" setup="0" room="0x4" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 4" slice="0x0" setup="0" room="0x4" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 5" slice="0x0" setup="0" room="0x4" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 6" slice="0x0" setup="0" room="0x4" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Large Crate 7" slice="0x0" setup="0" room="0x4" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 1" slice="0x0" setup="0" room="0x4" actor="0x9" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 2" slice="0x0" setup="0" room="0x4" actor="0xa" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 3" slice="0x0" setup="0" room="0x4" actor="0xb" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Storage Room Small Crate 4" slice="0x0" setup="0" room="0x4" actor="0xc" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Large Crate 1" slice="0x0" setup="0" room="0x8" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Large Crate 2" slice="0x0" setup="0" room="0x8" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Door Large Crate 1" slice="0x0" setup="0" room="0x8" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Door Large Crate 2" slice="0x0" setup="0" room="0x8" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 1" slice="0x0" setup="0" room="0x8" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 2" slice="0x0" setup="0" room="0x8" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 3" slice="0x0" setup="0" room="0x8" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room Underwater Large Crate 4" slice="0x0" setup="0" room="0x8" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Small Crate 1" slice="0x0" setup="0" room="0x8" actor="0x10" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Small Crate 2" slice="0x0" setup="0" room="0x8" actor="0x11" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Dragon Room At Torches Small Crate 3" slice="0x0" setup="0" room="0x8" actor="0x12" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 1" slice="0x0" setup="0" room="0x9" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Boss Key Room By Switch Large Crate" slice="0x0" setup="0" room="0x9" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 2" slice="0x0" setup="0" room="0x9" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 3" slice="0x0" setup="0" room="0x9" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Boss Key Room In Center Large Crate 4" slice="0x0" setup="0" room="0x9" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 1" slice="0x0" setup="0" room="0xa" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 2" slice="0x0" setup="0" room="0xa" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 3" slice="0x0" setup="0" room="0xa" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 4" slice="0x0" setup="0" room="0xa" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 5" slice="0x0" setup="0" room="0xa" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Upper Large Crate 1" slice="0x0" setup="0" room="0xa" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Upper Large Crate 2" slice="0x0" setup="0" room="0xa" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Large Crate 6" slice="0x0" setup="0" room="0xa" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Lower Small Crate" slice="0x0" setup="0" room="0xa" actor="0xb" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Room Before High Water Upper Small Crate" slice="0x0" setup="0" room="0xa" actor="0xc" item="NOTHING"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 1" slice="0x0" setup="0" room="0xc" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 2" slice="0x0" setup="0" room="0xc" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 3" slice="0x0" setup="0" room="0xc" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room In Gate Large Crate 4" slice="0x0" setup="0" room="0xc" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room At Door Large Crate 1" slice="0x0" setup="0" room="0xc" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room At Door Large Crate 2" slice="0x0" setup="0" room="0xc" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 1" slice="0x0" setup="0" room="0xc" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 2" slice="0x0" setup="0" room="0xc" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 3" slice="0x0" setup="0" room="0xc" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 4" slice="0x0" setup="0" room="0xc" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 5" slice="0x0" setup="0" room="0xc" actor="0x13" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop First Room Water Large Crate 6" slice="0x0" setup="0" room="0xc" actor="0x14" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 1" slice="0x0" setup="0" room="0xe" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 2" slice="0x0" setup="0" room="0xe" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 3" slice="0x0" setup="0" room="0xe" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 4" slice="0x0" setup="0" room="0xe" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Dodongo Room Large Crate 5" slice="0x0" setup="0" room="0xe" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 1" slice="0x0" setup="0" room="0x10" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 2" slice="0x0" setup="0" room="0x10" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 3" slice="0x0" setup="0" room="0x10" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 4" slice="0x0" setup="0" room="0x10" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Side Loop Stalfos Room Large Crate 5" slice="0x0" setup="0" room="0x10" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Behind Gate Large Crate 1" slice="0x0" setup="0" room="0x14" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Behind Gate Large Crate 2" slice="0x0" setup="0" room="0x14" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 1" slice="0x0" setup="0" room="0x14" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 2" slice="0x0" setup="0" room="0x14" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 3" slice="0x0" setup="0" room="0x14" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 4" slice="0x0" setup="0" room="0x14" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 5" slice="0x0" setup="0" room="0x14" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 6" slice="0x0" setup="0" room="0x14" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 7" slice="0x0" setup="0" room="0x14" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Water Temple Lizalfos Hallway Large Crate 8" slice="0x0" setup="0" room="0x14" actor="0xd" item="RUPEE_GREEN"/>
   </scene>
 </checks>

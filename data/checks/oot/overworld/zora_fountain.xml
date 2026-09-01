@@ -6,44 +6,44 @@
     <gs location="Zora Fountain GS Wall" flag="0x8a" item="GS_TOKEN"/>
     <gs location="Zora Fountain GS Tree" flag="0x8f" item="GS_TOKEN"/>
     <gs location="Zora Fountain GS Upper" flag="0x8d" item="GS_TOKEN"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 4" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Zora Fountain Adult Pot 1" slice="0x0" setup="0x2" room="0x0" actor="0x2a" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Zora Fountain Adult Pot 2" slice="0x0" setup="0x2" room="0x0" actor="0x2b" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Zora Fountain Adult Pot 3" slice="0x0" setup="0x2" room="0x0" actor="0x2c" item="ARROWS_10"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 01" slice="0x0" setup="0x2" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 02" slice="0x0" setup="0x2" room="0x0" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 03" slice="0x0" setup="0x2" room="0x0" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 04" slice="0x0" setup="0x2" room="0x0" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 05" slice="0x0" setup="0x2" room="0x0" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 06" slice="0x0" setup="0x2" room="0x0" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 07" slice="0x0" setup="0x2" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 08" slice="0x0" setup="0x2" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 09" slice="0x0" setup="0x2" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 10" slice="0x0" setup="0x2" room="0x0" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 11" slice="0x0" setup="0x2" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 12" slice="0x0" setup="0x2" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 13" slice="0x0" setup="0x2" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 14" slice="0x0" setup="0x2" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 15" slice="0x0" setup="0x2" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 16" slice="0x0" setup="0x2" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 17" slice="0x0" setup="0x2" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Zora Fountain Rupee 18" slice="0x0" setup="0x2" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <actor setup="0x0" room="0x0" actor="0xe">
+    <xflag type="pot" location="Zora Fountain Child Pot 1" setup="0" room="0x0" actor="0x13" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="Zora Fountain Child Pot 2" setup="0" room="0x0" actor="0x15" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="Zora Fountain Child Pot 3" setup="0" room="0x0" actor="0x16" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="Zora Fountain Child Pot 4" setup="0" room="0x0" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Zora Fountain Adult Pot 1" setup="2" room="0x0" actor="0x2a" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Zora Fountain Adult Pot 2" setup="2" room="0x0" actor="0x2b" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Zora Fountain Adult Pot 3" setup="2" room="0x0" actor="0x2c" item="ARROWS_10"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 01" setup="2" room="0x0" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 02" setup="2" room="0x0" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 03" setup="2" room="0x0" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 04" setup="2" room="0x0" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 05" setup="2" room="0x0" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 06" setup="2" room="0x0" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 07" setup="2" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 08" setup="2" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 09" setup="2" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 10" setup="2" room="0x0" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 11" setup="2" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 12" setup="2" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 13" setup="2" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 14" setup="2" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 15" setup="2" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 16" setup="2" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 17" setup="2" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Zora Fountain Rupee 18" setup="2" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
+    <actor setup="0" room="0x0" actor="0xe">
       <xflag type="butterfly" location="Zora Fountain Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Zora Fountain Butterfly 2" slice="1" item="NOTHING"/>
     </actor>
-    <xflag type="bush" location="Zora Fountain Bush 1" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 2" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 3" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 4" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 5" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 6" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Fountain Boulder Exposed" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Fountain Boulder Underground" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Zora Fountain Silver Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="bush" location="Zora Fountain Bush 1" setup="0" room="0x0" actor="0x6" item="NOTHING"/>
+    <xflag type="bush" location="Zora Fountain Bush 2" setup="0" room="0x0" actor="0x7" item="NOTHING"/>
+    <xflag type="bush" location="Zora Fountain Bush 3" setup="0" room="0x0" actor="0x8" item="NOTHING"/>
+    <xflag type="bush" location="Zora Fountain Bush 4" setup="0" room="0x0" actor="0x9" item="NOTHING"/>
+    <xflag type="bush" location="Zora Fountain Bush 5" setup="0" room="0x0" actor="0xa" item="NOTHING"/>
+    <xflag type="bush" location="Zora Fountain Bush 6" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
+    <xflag type="boulder" location="Zora Fountain Boulder Exposed" setup="0" room="0x0" actor="0x10" item="NOTHING"/>
+    <xflag type="boulder" location="Zora Fountain Boulder Underground" setup="0" room="0x0" actor="0x11" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Zora Fountain Silver Boulder" setup="0" room="0x0" actor="0x5" item="NOTHING"/>
     <actor>
       <match setup="0" actor="0x12"/>
       <match setup="1" actor="0x12"/>

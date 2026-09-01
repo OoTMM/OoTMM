@@ -40,22 +40,22 @@
     <sr location="Ganon Castle SR Forest Back Right" flag="0x62" item="RUPEE_SILVER_GANON_FOREST"/>
     <sr location="Ganon Castle SR Forest Back Middle" flag="0x63" item="RUPEE_SILVER_GANON_FOREST"/>
     <sr location="Ganon Castle SR Forest Center Left" flag="0x64" item="RUPEE_SILVER_GANON_FOREST"/>
-    <xflag type="pot" location="Ganon Castle Pot Water" slice="0x0" setup="0x0" room="0x3" actor="0x3" item="FAIRY"/>
-    <xflag type="pot" location="Ganon Castle Pot Water End 1" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Castle Pot Water End 2" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ganon Castle Pot Forest End 1" slice="0x0" setup="0x0" room="0x7" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Castle Pot Forest End 2" slice="0x0" setup="0x0" room="0x7" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ganon Castle Pot Light" slice="0x0" setup="0x0" room="0x8" actor="0xa" item="NOTHING"/>
-    <xflag type="pot" location="Ganon Castle Pot Light End 1" slice="0x0" setup="0x0" room="0xb" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Castle Pot Light End 2" slice="0x0" setup="0x0" room="0xb" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Ganon Castle Pot Shadow 1" slice="0x0" setup="0x0" room="0xc" actor="0xe" item="ARROWS_10"/>
-    <xflag type="pot" location="Ganon Castle Pot Shadow 2" slice="0x0" setup="0x0" room="0xc" actor="0xf" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Ganon Castle Pot Shadow End 1" slice="0x0" setup="0x0" room="0xd" actor="0x4" item="ARROWS_10"/>
-    <xflag type="pot" location="Ganon Castle Pot Shadow End 2" slice="0x0" setup="0x0" room="0xd" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Ganon Castle Pot Fire End 1" slice="0x0" setup="0x0" room="0xf" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ganon Castle Pot Fire End 2" slice="0x0" setup="0x0" room="0xf" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ganon Castle Pot Spirit End 1" slice="0x0" setup="0x0" room="0x13" actor="0x4" item="NUTS_5"/>
-    <xflag type="pot" location="Ganon Castle Pot Spirit End 2" slice="0x0" setup="0x0" room="0x13" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ganon Castle Pot Water" slice="0x0" setup="0" room="0x3" actor="0x3" item="FAIRY"/>
+    <xflag type="pot" location="Ganon Castle Pot Water End 1" slice="0x0" setup="0" room="0x4" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ganon Castle Pot Water End 2" slice="0x0" setup="0" room="0x4" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ganon Castle Pot Forest End 1" slice="0x0" setup="0" room="0x7" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ganon Castle Pot Forest End 2" slice="0x0" setup="0" room="0x7" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ganon Castle Pot Light" slice="0x0" setup="0" room="0x8" actor="0xa" item="NOTHING"/>
+    <xflag type="pot" location="Ganon Castle Pot Light End 1" slice="0x0" setup="0" room="0xb" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ganon Castle Pot Light End 2" slice="0x0" setup="0" room="0xb" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Ganon Castle Pot Shadow 1" slice="0x0" setup="0" room="0xc" actor="0xe" item="ARROWS_10"/>
+    <xflag type="pot" location="Ganon Castle Pot Shadow 2" slice="0x0" setup="0" room="0xc" actor="0xf" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Ganon Castle Pot Shadow End 1" slice="0x0" setup="0" room="0xd" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Ganon Castle Pot Shadow End 2" slice="0x0" setup="0" room="0xd" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Ganon Castle Pot Fire End 1" slice="0x0" setup="0" room="0xf" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ganon Castle Pot Fire End 2" slice="0x0" setup="0" room="0xf" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ganon Castle Pot Spirit End 1" slice="0x0" setup="0" room="0x13" actor="0x4" item="NUTS_5"/>
+    <xflag type="pot" location="Ganon Castle Pot Spirit End 2" slice="0x0" setup="0" room="0x13" actor="0x5" item="MAGIC_JAR_SMALL"/>
     <actor room="0x10" actor="0x4">
       <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 1" slice="0" item="FAIRY"/>
       <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 2" slice="1" item="FAIRY"/>
@@ -66,25 +66,25 @@
       <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 7" slice="6" item="FAIRY"/>
       <xflag type="fairy" location="Ganon Castle Fairy Fountain Fairy 8" slice="7" item="FAIRY"/>
     </actor>
-    <xflag type="heart" location="Ganon Castle Heart Shadow 1" slice="0x0" setup="0x0" room="0xc" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Ganon Castle Heart Shadow 2" slice="0x0" setup="0x0" room="0xc" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Ganon Castle Heart Shadow 3" slice="0x0" setup="0x0" room="0xc" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Ganon Castle Heart Fire" slice="0x0" setup="0x0" room="0xe" actor="0x13" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Ganon Castle Heart Spirit" slice="0x0" setup="0x0" room="0x11" actor="0x1b" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Ganon Castle Spirit Big Fairy" slice="0x0" setup="0x0" room="0x11" actor="0xb" item="FAIRY_BIG"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 01" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 02" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 03" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 04" slice="0x0" setup="0x0" room="0x2" actor="0x5" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 05" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 06" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 07" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 08" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 09" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 10" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 11" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 12" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 13" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="NOTHING"/>
-    <xflag type="icicle" location="Ganon Castle Icicle Water 14" slice="0x0" setup="0x0" room="0x2" actor="0xf" item="NOTHING"/>
+    <xflag type="heart" location="Ganon Castle Heart Shadow 1" slice="0x0" setup="0" room="0xc" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Ganon Castle Heart Shadow 2" slice="0x0" setup="0" room="0xc" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Ganon Castle Heart Shadow 3" slice="0x0" setup="0" room="0xc" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Ganon Castle Heart Fire" slice="0x0" setup="0" room="0xe" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Ganon Castle Heart Spirit" slice="0x0" setup="0" room="0x11" actor="0x1b" item="RECOVERY_HEART"/>
+    <xflag type="fairy_spot" location="Ganon Castle Spirit Big Fairy" slice="0x0" setup="0" room="0x11" actor="0xb" item="FAIRY_BIG"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 01" slice="0x0" setup="0" room="0x2" actor="0x2" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 02" slice="0x0" setup="0" room="0x2" actor="0x3" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 03" slice="0x0" setup="0" room="0x2" actor="0x4" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 04" slice="0x0" setup="0" room="0x2" actor="0x5" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 05" slice="0x0" setup="0" room="0x2" actor="0x6" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 06" slice="0x0" setup="0" room="0x2" actor="0x7" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 07" slice="0x0" setup="0" room="0x2" actor="0x8" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 08" slice="0x0" setup="0" room="0x2" actor="0x9" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 09" slice="0x0" setup="0" room="0x2" actor="0xa" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 10" slice="0x0" setup="0" room="0x2" actor="0xb" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 11" slice="0x0" setup="0" room="0x2" actor="0xc" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 12" slice="0x0" setup="0" room="0x2" actor="0xd" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 13" slice="0x0" setup="0" room="0x2" actor="0xe" item="NOTHING"/>
+    <xflag type="icicle" location="Ganon Castle Icicle Water 14" slice="0x0" setup="0" room="0x2" actor="0xf" item="NOTHING"/>
   </scene>
 </checks>

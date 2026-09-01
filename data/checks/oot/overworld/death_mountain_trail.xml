@@ -35,7 +35,7 @@
       <match setup="2" actor="0x27"/>
       <xflag type="rock" location="Death Mountain Trail Rock 5" item="RANDOM"/>
     </actor>
-    <xflag type="rock" location="Death Mountain Trail Rock Child" setup="0x0" actor="0x20" item="RANDOM"/>
+    <xflag type="rock" location="Death Mountain Trail Rock Child" setup="0" actor="0x20" item="RANDOM"/>
     <actor>
       <match setup="0" actor="0x21"/>
       <match setup="2" actor="0x28"/>
@@ -48,27 +48,27 @@
       <xflag type="rock" location="Death Mountain Trail Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Death Mountain Trail Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="rupee" location="Death Mountain Trail Rupee Upper" slice="0x0" setup="0x0" actor="0x1" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Death Mountain Trail Rupee Lower" slice="0x0" setup="0x0" actor="0x2" item="RUPEE_BLUE"/>
-    <xflag type="fairy_spot" location="Death Mountain Trail Big Fairy" slice="0x0" setup="0x0" actor="0x26" item="FAIRY_BIG"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Child" slice="0x0" setup="0x0" actor="0x2f" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Lower" slice="0x0" setup="0x0" actor="0x30" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Middle" slice="0x0" setup="0x0" actor="0x31" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Upper" slice="0x0" setup="0x0" actor="0x32" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Near Lower GS" slice="0x0" setup="0x2" actor="0xa" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 1" slice="0x0" setup="0x2" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 2" slice="0x0" setup="0x2" actor="0xc" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 3" slice="0x0" setup="0x2" actor="0x14" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 4" slice="0x0" setup="0x2" actor="0xd" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 5" slice="0x0" setup="0x2" actor="0x10" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 6" slice="0x0" setup="0x2" actor="0xe" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 7" slice="0x0" setup="0x2" actor="0xf" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Near Upper GS" slice="0x0" setup="0x2" actor="0x11" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Upper 1" slice="0x0" setup="0x2" actor="0x13" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Upper 2" slice="0x0" setup="0x2" actor="0x12" item="NOTHING"/>
-    <xflag type="soil" location="Death Mountain Trail Soil 1" slice="0x0" setup="0x0" actor="0x2b" item="FAIRY"/>
-    <xflag type="soil" location="Death Mountain Trail Soil 2" slice="0x1" setup="0x0" actor="0x2b" item="FAIRY"/>
-    <xflag type="soil" location="Death Mountain Trail Soil 3" slice="0x2" setup="0x0" actor="0x2b" item="FAIRY"/>
+    <xflag type="rupee" location="Death Mountain Trail Rupee Upper" setup="0" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Death Mountain Trail Rupee Lower" setup="0" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="fairy_spot" location="Death Mountain Trail Big Fairy" slice="0x0" setup="0" actor="0x26" item="FAIRY_BIG"/>
+    <xflag type="boulder" location="Death Mountain Trail Boulder Child" slice="0x0" setup="0" actor="0x2f" item="NOTHING"/>
+    <xflag type="boulder" location="Death Mountain Trail Boulder Lower" slice="0x0" setup="0" actor="0x30" item="NOTHING"/>
+    <xflag type="boulder" location="Death Mountain Trail Boulder Middle" slice="0x0" setup="0" actor="0x31" item="NOTHING"/>
+    <xflag type="boulder" location="Death Mountain Trail Boulder Upper" slice="0x0" setup="0" actor="0x32" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Near Lower GS" slice="0x0" setup="2" actor="0xa" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 1" slice="0x0" setup="2" actor="0xb" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 2" slice="0x0" setup="2" actor="0xc" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 3" slice="0x0" setup="2" actor="0x14" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 4" slice="0x0" setup="2" actor="0xd" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 5" slice="0x0" setup="2" actor="0x10" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 6" slice="0x0" setup="2" actor="0xe" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 7" slice="0x0" setup="2" actor="0xf" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Near Upper GS" slice="0x0" setup="2" actor="0x11" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Upper 1" slice="0x0" setup="2" actor="0x13" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Upper 2" slice="0x0" setup="2" actor="0x12" item="NOTHING"/>
+    <xflag type="soil" location="Death Mountain Trail Soil 1" slice="0x0" setup="0" actor="0x2b" item="FAIRY"/>
+    <xflag type="soil" location="Death Mountain Trail Soil 2" slice="0x1" setup="0" actor="0x2b" item="FAIRY"/>
+    <xflag type="soil" location="Death Mountain Trail Soil 3" slice="0x2" setup="0" actor="0x2b" item="FAIRY"/>
     <actor>
       <match setup="0" actor="0x4"/>
       <match setup="2" actor="0x1"/>
@@ -94,23 +94,25 @@
       <xflag type="gossip-big" location="Death Mountain Trail Storms Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
   </scene>
-  <scene name="Death Mountain Trail Cow Grotto" id="GROTTOS">
+  <scene name="Death Mountain Trail Cow Grotto" id="GROTTOS" room="0x3">
     <cow location="Death Mountain Trail Cow" flag="0x07" item="MILK"/>
-    <xflag type="grass" location="Death Mountain Trail Cow Grotto Grass 1" slice="0x0" setup="0x0" room="0x3" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Trail Cow Grotto Grass 2" slice="0x0" setup="0x0" room="0x3" actor="0x2" item="RANDOM"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 1" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 2" slice="0x1" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 3" slice="0x2" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 4" slice="0x3" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 5" slice="0x4" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 6" slice="0x5" setup="0x0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 7" slice="0x6" setup="0x0" room="0x3" actor="0x5" item="RUPEE_RED"/>
-    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 1" slice="0x0" setup="0x0" room="0x3" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 2" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 3" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 4" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Death Mountain Trail Cow Grotto Big Fairy" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="FAIRY_BIG"/>
-    <xflag type="hive" location="Death Mountain Trail Cow Grotto Hive" slice="0x0" setup="0x0" room="0x3" actor="0x3" item="RUPEE_RED"/>
+    <xflag type="grass" location="Death Mountain Trail Cow Grotto Grass 1" slice="0x0" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Trail Cow Grotto Grass 2" slice="0x0" actor="0x2" item="RANDOM"/>
+    <actor actor="0x5">
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 1" slice="0" item="RUPEE_GREEN"/>
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 2" slice="1" item="RUPEE_GREEN"/>
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 3" slice="2" item="RUPEE_GREEN"/>
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 4" slice="3" item="RUPEE_GREEN"/>
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 5" slice="4" item="RUPEE_GREEN"/>
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 6" slice="5" item="RUPEE_GREEN"/>
+      <xflag type="rupee" location="Death Mountain Trail Cow Grotto Rupee 7" slice="6" item="RUPEE_RED"/>
+    </actor>
+    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 1" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 2" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 3" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Death Mountain Trail Cow Grotto Heart 4" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="fairy_spot" location="Death Mountain Trail Cow Grotto Big Fairy" actor="0x4" item="FAIRY_BIG"/>
+    <xflag type="hive" location="Death Mountain Trail Cow Grotto Hive" actor="0x3" item="RUPEE_RED"/>
   </scene>
   <scene id="GREAT_FAIRY_FOUNTAIN_UPGRADES">
     <npc location="Great Fairy Magic Upgrade" npc="FAIRY_MAGIC_UPGRADE" item="MAGIC_UPGRADE"/>

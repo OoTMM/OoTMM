@@ -18,35 +18,35 @@
     <gs location="MQ Forest Temple GS West Garden" flag="0xca" item="GS_TOKEN"/>
     <gs location="MQ Forest Temple GS East Garden" flag="0xc8" item="GS_TOKEN"/>
     <gs location="MQ Forest Temple GS Well" flag="0xcb" item="GS_TOKEN"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Main Room 1" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Main Room 2" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Main Room 3" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Main Room 4" slice="0x0" setup="0x0" room="0x2" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Main Room 5" slice="0x0" setup="0x0" room="0x2" actor="0xd" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Main Room 6" slice="0x0" setup="0x0" room="0x2" actor="0xe" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Lower 1" slice="0x0" setup="0x0" room="0x6" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Lower 2" slice="0x0" setup="0x0" room="0x6" actor="0x7" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 1" slice="0x0" setup="0x0" room="0x6" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 2" slice="0x0" setup="0x0" room="0x6" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 3" slice="0x0" setup="0x0" room="0x6" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 4" slice="0x0" setup="0x0" room="0x6" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Blue Poe 1" slice="0x0" setup="0x0" room="0xd" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Blue Poe 2" slice="0x0" setup="0x0" room="0xd" actor="0x6" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Blue Poe 3" slice="0x0" setup="0x0" room="0xd" actor="0x7" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Green Poe 1" slice="0x0" setup="0x0" room="0x10" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Green Poe 2" slice="0x0" setup="0x0" room="0x10" actor="0x7" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 1" slice="0x0" setup="0x0" room="0x11" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 2" slice="0x0" setup="0x0" room="0x11" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 3" slice="0x0" setup="0x0" room="0x11" actor="0xd" item="BOMBS_5"/>
-    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 4" slice="0x0" setup="0x0" room="0x11" actor="0xe" item="ARROWS_5"/>
-    <xflag type="heart" location="MQ Forest Temple Heart Garden 1" slice="0x0" setup="0x0" room="0x8" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Forest Temple Heart Garden 2" slice="0x0" setup="0x0" room="0x8" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Forest Temple Heart Garden 3" slice="0x0" setup="0x0" room="0x8" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Forest Temple Heart Well 1" slice="0x0" setup="0x0" room="0x9" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Forest Temple Heart Well 2" slice="0x0" setup="0x0" room="0x9" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Forest Temple Heart Well 3" slice="0x0" setup="0x0" room="0x9" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="MQ Forest Temple Spinning Red Pool Room Small Crate 1" slice="0x0" setup="0x0" room="0xe" actor="0x7" item="ARROWS_5"/>
-    <xflag type="crate" location="MQ Forest Temple Spinning Red Pool Room Small Crate 2" slice="0x0" setup="0x0" room="0xe" actor="0x8" item="ARROWS_5"/>
-    <xflag type="crate" location="MQ Forest Temple Spinning Red Pool Room Small Crate 3" slice="0x0" setup="0x0" room="0xe" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Main Room 1" slice="0x0" setup="0" room="0x2" actor="0x9" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Main Room 2" slice="0x0" setup="0" room="0x2" actor="0xa" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Main Room 3" slice="0x0" setup="0" room="0x2" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Main Room 4" slice="0x0" setup="0" room="0x2" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Main Room 5" slice="0x0" setup="0" room="0x2" actor="0xd" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Main Room 6" slice="0x0" setup="0" room="0x2" actor="0xe" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Lower 1" slice="0x0" setup="0" room="0x6" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Lower 2" slice="0x0" setup="0" room="0x6" actor="0x7" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 1" slice="0x0" setup="0" room="0x6" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 2" slice="0x0" setup="0" room="0x6" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 3" slice="0x0" setup="0" room="0x6" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Bow Room Upper 4" slice="0x0" setup="0" room="0x6" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Blue Poe 1" slice="0x0" setup="0" room="0xd" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Blue Poe 2" slice="0x0" setup="0" room="0xd" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Blue Poe 3" slice="0x0" setup="0" room="0xd" actor="0x7" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Green Poe 1" slice="0x0" setup="0" room="0x10" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Green Poe 2" slice="0x0" setup="0" room="0x10" actor="0x7" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 1" slice="0x0" setup="0" room="0x11" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 2" slice="0x0" setup="0" room="0x11" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 3" slice="0x0" setup="0" room="0x11" actor="0xd" item="BOMBS_5"/>
+    <xflag type="pot" location="MQ Forest Temple Pot Antichamber 4" slice="0x0" setup="0" room="0x11" actor="0xe" item="ARROWS_5"/>
+    <xflag type="heart" location="MQ Forest Temple Heart Garden 1" slice="0x0" setup="0" room="0x8" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Forest Temple Heart Garden 2" slice="0x0" setup="0" room="0x8" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Forest Temple Heart Garden 3" slice="0x0" setup="0" room="0x8" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Forest Temple Heart Well 1" slice="0x0" setup="0" room="0x9" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Forest Temple Heart Well 2" slice="0x0" setup="0" room="0x9" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Forest Temple Heart Well 3" slice="0x0" setup="0" room="0x9" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="MQ Forest Temple Spinning Red Pool Room Small Crate 1" slice="0x0" setup="0" room="0xe" actor="0x7" item="ARROWS_5"/>
+    <xflag type="crate" location="MQ Forest Temple Spinning Red Pool Room Small Crate 2" slice="0x0" setup="0" room="0xe" actor="0x8" item="ARROWS_5"/>
+    <xflag type="crate" location="MQ Forest Temple Spinning Red Pool Room Small Crate 3" slice="0x0" setup="0" room="0xe" actor="0x9" item="RECOVERY_HEART"/>
   </scene>
 </checks>

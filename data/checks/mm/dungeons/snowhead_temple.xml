@@ -23,114 +23,114 @@
     <sf location="Snowhead Temple SF Snow Room" flag="0x2b" item="STRAY_FAIRY_SH"/>
     <sf location="Snowhead Temple SF Dinolfos 1" flag="0x2d" item="STRAY_FAIRY_SH"/>
     <sf location="Snowhead Temple SF Dinolfos 2" flag="0x31" item="STRAY_FAIRY_SH"/>
-    <xflag type="pot" location="Snowhead Temple Pot Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Compass Room 1" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Compass Room 2" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Compass Room 3" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Compass Room 4" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Compass Room 5" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room After 1" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room After 2" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 1" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 2" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 3" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 4" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 5" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="BOMBS_5"/>
-    <xflag type="pot" location="Snowhead Temple Pot Block Room 1" slice="0x0" setup="0x0" room="0x3" actor="0x0" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Block Room 2" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Scarecrow 1" slice="0x0" setup="0x0" room="0x4" actor="0x1b" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Scarecrow 2" slice="0x0" setup="0x0" room="0x4" actor="0x1c" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Near Boss Key 1" slice="0x0" setup="0x0" room="0x4" actor="0x1d" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Near Boss Key 2" slice="0x0" setup="0x0" room="0x4" actor="0x1e" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Level 2 1" slice="0x0" setup="0x0" room="0x4" actor="0x2e" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Level 2 2" slice="0x0" setup="0x0" room="0x4" actor="0x2f" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Bottom 1" slice="0x0" setup="0x0" room="0x4" actor="0x30" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Central Room Bottom 2" slice="0x0" setup="0x0" room="0x4" actor="0x31" item="FAIRY"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 1" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 2" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 3" slice="0x0" setup="0x0" room="0x5" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 4" slice="0x0" setup="0x0" room="0x5" actor="0x6" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 5" slice="0x0" setup="0x0" room="0x5" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 6" slice="0x0" setup="0x0" room="0x5" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 1" slice="0x0" setup="0x0" room="0x5" actor="0xc" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 2" slice="0x0" setup="0x0" room="0x5" actor="0xd" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 3" slice="0x0" setup="0x0" room="0x5" actor="0xe" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 4" slice="0x0" setup="0x0" room="0x5" actor="0xf" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 5" slice="0x0" setup="0x0" room="0x5" actor="0x10" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 6" slice="0x0" setup="0x0" room="0x5" actor="0x11" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 7" slice="0x0" setup="0x0" room="0x5" actor="0x12" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Dual Switches 1" slice="0x0" setup="0x0" room="0x8" actor="0xb" item="BOMBS_5"/>
-    <xflag type="pot" location="Snowhead Temple Pot Dual Switches 2" slice="0x0" setup="0x0" room="0x8" actor="0xc" item="BOMBS_5"/>
-    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 1" slice="0x0" setup="0x0" room="0xc" actor="0x8" item="NOTHING"/>
-    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 2" slice="0x0" setup="0x0" room="0xc" actor="0x9" item="NOTHING"/>
-    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 3" slice="0x0" setup="0x0" room="0xc" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 4" slice="0x0" setup="0x0" room="0xc" actor="0xb" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 5" slice="0x0" setup="0x0" room="0xc" actor="0xc" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Flying Pot 1" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="NOTHING"/>
-    <xflag type="pot" location="Snowhead Temple Flying Pot 2" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="NOTHING"/>
-    <xflag type="crate" location="Snowhead Temple Crate Bridge" slice="0x0" setup="0x0" room="0x2" actor="0x11" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Snowhead Temple Crate Dual Switches 1" slice="0x0" setup="0x0" room="0x8" actor="0xf" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Snowhead Temple Crate Dual Switches 2" slice="0x0" setup="0x0" room="0x8" actor="0x10" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Snowhead Temple Crate Map Room 1" slice="0x0" setup="0x0" room="0x9" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="crate" location="Snowhead Temple Crate Map Room 2" slice="0x0" setup="0x0" room="0x9" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="crate" location="Snowhead Temple Crate Map Room 3" slice="0x0" setup="0x0" room="0x9" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="crate" location="Snowhead Temple Crate Map Room 4" slice="0x0" setup="0x0" room="0x9" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="crate" location="Snowhead Temple Crate Map Room 5" slice="0x0" setup="0x0" room="0x9" actor="0xa" item="RUPEE_BLUE"/>
-    <xflag type="grass" location="Snowhead Temple Grass 01" slice="0x0" setup="0x0" room="0x4" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 02" slice="0x0" setup="0x0" room="0x4" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 03" slice="0x0" setup="0x0" room="0x4" actor="0x3e" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 04" slice="0x0" setup="0x0" room="0x4" actor="0x3f" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 05" slice="0x0" setup="0x0" room="0x4" actor="0x40" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 06" slice="0x0" setup="0x0" room="0x4" actor="0x41" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 07" slice="0x0" setup="0x0" room="0x4" actor="0x42" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 08" slice="0x0" setup="0x0" room="0x4" actor="0x43" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 09" slice="0x0" setup="0x0" room="0x4" actor="0x44" item="RANDOM"/>
-    <xflag type="grass" location="Snowhead Temple Grass 10" slice="0x0" setup="0x0" room="0x4" actor="0x45" item="RANDOM"/>
-    <xflag type="rupee" location="Snowhead Temple Rupee 1" slice="0x0" setup="0x0" room="0x7" actor="0x0" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Snowhead Temple Rupee 2" slice="0x0" setup="0x0" room="0x7" actor="0x1" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Snowhead Temple Rupee 3" slice="0x0" setup="0x0" room="0x7" actor="0x2" item="RUPEE_RED"/>
-    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x4b" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x4c" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 3" slice="0x0" setup="0x0" room="0x4" actor="0x4d" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 4" slice="0x0" setup="0x0" room="0x4" actor="0x4e" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Snowhead Temple Big Snowball Icicle Room" slice="0x0" setup="0x0" room="0x7" actor="0x1a" item="NOTHING"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Bridge Room 1" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Bridge Room 2" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 1" slice="0x0" setup="0x0" room="0x7" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 2" slice="0x0" setup="0x0" room="0x7" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 3" slice="0x0" setup="0x0" room="0x7" actor="0xa" item="RUPEE_BLUE"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 4" slice="0x0" setup="0x0" room="0x7" actor="0xb" item="ARROWS_10"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 5" slice="0x0" setup="0x0" room="0x7" actor="0xc" item="ARROWS_10"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 1" slice="0x0" setup="0x0" room="0xa" actor="0x8" item="NOTHING"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 2" slice="0x0" setup="0x0" room="0xa" actor="0x9" item="NOTHING"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 3" slice="0x0" setup="0x0" room="0xa" actor="0xa" item="NOTHING"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 4" slice="0x0" setup="0x0" room="0xa" actor="0xb" item="NOTHING"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 5" slice="0x0" setup="0x0" room="0xa" actor="0xc" item="NOTHING"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 6" slice="0x0" setup="0x0" room="0xa" actor="0xd" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 7" slice="0x0" setup="0x0" room="0xa" actor="0xe" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 8" slice="0x0" setup="0x0" room="0xa" actor="0xf" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x21" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x22" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 3" slice="0x0" setup="0x0" room="0x4" actor="0x26" item="ARROWS_10"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 4" slice="0x0" setup="0x0" room="0x4" actor="0x23" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 5" slice="0x0" setup="0x0" room="0x4" actor="0x24" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 6" slice="0x0" setup="0x0" room="0x4" actor="0x25" item="MAGIC_JAR_SMALL"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NOTHING"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 3" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 4" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 5" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance After Block 1" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Entrance After Block 2" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss Key 1" slice="0x0" setup="0x0" room="0x4" actor="0x0" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss Key 2" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 1" slice="0x0" setup="0x0" room="0x4" actor="0x1" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 2" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 3" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 4" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Snow Room 1" slice="0x0" setup="0x0" room="0xa" actor="0x0" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Snow Room 2" slice="0x0" setup="0x0" room="0xa" actor="0x1" item="RANDOM"/>
-    <xflag type="icicle" location="Snowhead Temple Icicle Snow Room 3" slice="0x0" setup="0x0" room="0xa" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Entrance 1" slice="0x0" setup="0" room="0x0" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Entrance 2" slice="0x0" setup="0" room="0x0" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Compass Room 1" slice="0x0" setup="0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Compass Room 2" slice="0x0" setup="0" room="0x1" actor="0x6" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Compass Room 3" slice="0x0" setup="0" room="0x1" actor="0x7" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Compass Room 4" slice="0x0" setup="0" room="0x1" actor="0x8" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Compass Room 5" slice="0x0" setup="0" room="0x1" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room After 1" slice="0x0" setup="0" room="0x2" actor="0x1" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room After 2" slice="0x0" setup="0" room="0x2" actor="0x2" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 1" slice="0x0" setup="0" room="0x2" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 2" slice="0x0" setup="0" room="0x2" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 3" slice="0x0" setup="0" room="0x2" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 4" slice="0x0" setup="0" room="0x2" actor="0xa" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Bridge Room 5" slice="0x0" setup="0" room="0x2" actor="0xb" item="BOMBS_5"/>
+    <xflag type="pot" location="Snowhead Temple Pot Block Room 1" slice="0x0" setup="0" room="0x3" actor="0x0" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Block Room 2" slice="0x0" setup="0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Scarecrow 1" slice="0x0" setup="0" room="0x4" actor="0x1b" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Scarecrow 2" slice="0x0" setup="0" room="0x4" actor="0x1c" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Near Boss Key 1" slice="0x0" setup="0" room="0x4" actor="0x1d" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Near Boss Key 2" slice="0x0" setup="0" room="0x4" actor="0x1e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Level 2 1" slice="0x0" setup="0" room="0x4" actor="0x2e" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Level 2 2" slice="0x0" setup="0" room="0x4" actor="0x2f" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Bottom 1" slice="0x0" setup="0" room="0x4" actor="0x30" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Central Room Bottom 2" slice="0x0" setup="0" room="0x4" actor="0x31" item="FAIRY"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 1" slice="0x0" setup="0" room="0x5" actor="0x3" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 2" slice="0x0" setup="0" room="0x5" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 3" slice="0x0" setup="0" room="0x5" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 4" slice="0x0" setup="0" room="0x5" actor="0x6" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 5" slice="0x0" setup="0" room="0x5" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Upper 6" slice="0x0" setup="0" room="0x5" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 1" slice="0x0" setup="0" room="0x5" actor="0xc" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 2" slice="0x0" setup="0" room="0x5" actor="0xd" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 3" slice="0x0" setup="0" room="0x5" actor="0xe" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 4" slice="0x0" setup="0" room="0x5" actor="0xf" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 5" slice="0x0" setup="0" room="0x5" actor="0x10" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 6" slice="0x0" setup="0" room="0x5" actor="0x11" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Pillars Room Lower 7" slice="0x0" setup="0" room="0x5" actor="0x12" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Dual Switches 1" slice="0x0" setup="0" room="0x8" actor="0xb" item="BOMBS_5"/>
+    <xflag type="pot" location="Snowhead Temple Pot Dual Switches 2" slice="0x0" setup="0" room="0x8" actor="0xc" item="BOMBS_5"/>
+    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 1" slice="0x0" setup="0" room="0xc" actor="0x8" item="NOTHING"/>
+    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 2" slice="0x0" setup="0" room="0xc" actor="0x9" item="NOTHING"/>
+    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 3" slice="0x0" setup="0" room="0xc" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 4" slice="0x0" setup="0" room="0xc" actor="0xb" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Pot Wizzrobe 5" slice="0x0" setup="0" room="0xc" actor="0xc" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Flying Pot 1" slice="0x0" setup="0" room="0x3" actor="0x8" item="NOTHING"/>
+    <xflag type="pot" location="Snowhead Temple Flying Pot 2" slice="0x0" setup="0" room="0x3" actor="0x9" item="NOTHING"/>
+    <xflag type="crate" location="Snowhead Temple Crate Bridge" slice="0x0" setup="0" room="0x2" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Snowhead Temple Crate Dual Switches 1" slice="0x0" setup="0" room="0x8" actor="0xf" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Snowhead Temple Crate Dual Switches 2" slice="0x0" setup="0" room="0x8" actor="0x10" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Snowhead Temple Crate Map Room 1" slice="0x0" setup="0" room="0x9" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="crate" location="Snowhead Temple Crate Map Room 2" slice="0x0" setup="0" room="0x9" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="crate" location="Snowhead Temple Crate Map Room 3" slice="0x0" setup="0" room="0x9" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="crate" location="Snowhead Temple Crate Map Room 4" slice="0x0" setup="0" room="0x9" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="crate" location="Snowhead Temple Crate Map Room 5" slice="0x0" setup="0" room="0x9" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="grass" location="Snowhead Temple Grass 01" slice="0x0" setup="0" room="0x4" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 02" slice="0x0" setup="0" room="0x4" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 03" slice="0x0" setup="0" room="0x4" actor="0x3e" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 04" slice="0x0" setup="0" room="0x4" actor="0x3f" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 05" slice="0x0" setup="0" room="0x4" actor="0x40" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 06" slice="0x0" setup="0" room="0x4" actor="0x41" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 07" slice="0x0" setup="0" room="0x4" actor="0x42" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 08" slice="0x0" setup="0" room="0x4" actor="0x43" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 09" slice="0x0" setup="0" room="0x4" actor="0x44" item="RANDOM"/>
+    <xflag type="grass" location="Snowhead Temple Grass 10" slice="0x0" setup="0" room="0x4" actor="0x45" item="RANDOM"/>
+    <xflag type="rupee" location="Snowhead Temple Rupee 1" slice="0x0" setup="0" room="0x7" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Snowhead Temple Rupee 2" slice="0x0" setup="0" room="0x7" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Snowhead Temple Rupee 3" slice="0x0" setup="0" room="0x7" actor="0x2" item="RUPEE_RED"/>
+    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 1" slice="0x0" setup="0" room="0x4" actor="0x4b" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 2" slice="0x0" setup="0" room="0x4" actor="0x4c" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 3" slice="0x0" setup="0" room="0x4" actor="0x4d" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Snowhead Temple Big Snowball Central Room 4" slice="0x0" setup="0" room="0x4" actor="0x4e" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Snowhead Temple Big Snowball Icicle Room" slice="0x0" setup="0" room="0x7" actor="0x1a" item="NOTHING"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Bridge Room 1" slice="0x0" setup="0" room="0x2" actor="0x3" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Bridge Room 2" slice="0x0" setup="0" room="0x2" actor="0x4" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 1" slice="0x0" setup="0" room="0x7" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 2" slice="0x0" setup="0" room="0x7" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 3" slice="0x0" setup="0" room="0x7" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 4" slice="0x0" setup="0" room="0x7" actor="0xb" item="ARROWS_10"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Icicles Room 5" slice="0x0" setup="0" room="0x7" actor="0xc" item="ARROWS_10"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 1" slice="0x0" setup="0" room="0xa" actor="0x8" item="NOTHING"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 2" slice="0x0" setup="0" room="0xa" actor="0x9" item="NOTHING"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 3" slice="0x0" setup="0" room="0xa" actor="0xa" item="NOTHING"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 4" slice="0x0" setup="0" room="0xa" actor="0xb" item="NOTHING"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 5" slice="0x0" setup="0" room="0xa" actor="0xc" item="NOTHING"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 6" slice="0x0" setup="0" room="0xa" actor="0xd" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 7" slice="0x0" setup="0" room="0xa" actor="0xe" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Snow Room 8" slice="0x0" setup="0" room="0xa" actor="0xf" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 1" slice="0x0" setup="0" room="0x4" actor="0x21" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 2" slice="0x0" setup="0" room="0x4" actor="0x22" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 3" slice="0x0" setup="0" room="0x4" actor="0x26" item="ARROWS_10"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 4" slice="0x0" setup="0" room="0x4" actor="0x23" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 5" slice="0x0" setup="0" room="0x4" actor="0x24" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Snowhead Temple Small Snowball Central Room 6" slice="0x0" setup="0" room="0x4" actor="0x25" item="MAGIC_JAR_SMALL"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 1" slice="0x0" setup="0" room="0x0" actor="0x0" item="NOTHING"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 2" slice="0x0" setup="0" room="0x0" actor="0x1" item="NOTHING"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 3" slice="0x0" setup="0" room="0x0" actor="0x4" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 4" slice="0x0" setup="0" room="0x0" actor="0x5" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance 5" slice="0x0" setup="0" room="0x0" actor="0x6" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance After Block 1" slice="0x0" setup="0" room="0x0" actor="0x2" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Entrance After Block 2" slice="0x0" setup="0" room="0x0" actor="0x3" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss Key 1" slice="0x0" setup="0" room="0x4" actor="0x0" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss Key 2" slice="0x0" setup="0" room="0x4" actor="0x4" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 1" slice="0x0" setup="0" room="0x4" actor="0x1" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 2" slice="0x0" setup="0" room="0x4" actor="0x2" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 3" slice="0x0" setup="0" room="0x4" actor="0x3" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Central Room Near Boss 4" slice="0x0" setup="0" room="0x4" actor="0x5" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Snow Room 1" slice="0x0" setup="0" room="0xa" actor="0x0" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Snow Room 2" slice="0x0" setup="0" room="0xa" actor="0x1" item="RANDOM"/>
+    <xflag type="icicle" location="Snowhead Temple Icicle Snow Room 3" slice="0x0" setup="0" room="0xa" actor="0x2" item="RECOVERY_HEART"/>
   </scene>
 </checks>

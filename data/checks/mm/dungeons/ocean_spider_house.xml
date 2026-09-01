@@ -33,32 +33,32 @@
     <chest location="Ocean Skulltula Colored Skulls Chandelier 3" flag="0x12" item="GS_TOKEN_OCEAN"/>
     <chest location="Ocean Skulltula Colored Skulls Behind Picture" flag="0x13" item="GS_TOKEN_OCEAN"/>
     <chest location="Ocean Skulltula Colored Skulls Pot" flag="0x19" item="GS_TOKEN_OCEAN"/>
-    <xflag type="pot" location="Ocean Spider House Pot Entrance 1" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ocean Spider House Pot Entrance 2" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ocean Spider House Pot Entrance 3" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Entrance 4" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Main Room Web" slice="0x0" setup="0x0" room="0x1" actor="0x1b" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Main Room 1" slice="0x0" setup="0x0" room="0x1" actor="0x1c" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Main Room 2" slice="0x0" setup="0x0" room="0x1" actor="0x1e" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ocean Spider House Pot Main Room Boe" slice="0x0" setup="0x0" room="0x1" actor="0x1d" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Ocean Spider House Pot Colored Skulls 1" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Colored Skulls 2" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage 1" slice="0x0" setup="0x0" room="0x5" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage 2" slice="0x0" setup="0x0" room="0x5" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage 3" slice="0x0" setup="0x0" room="0x5" actor="0xd" item="ARROWS_10"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage Top 1" slice="0x0" setup="0x0" room="0x5" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage Top 2" slice="0x0" setup="0x0" room="0x5" actor="0xf" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage Top 3" slice="0x0" setup="0x0" room="0x5" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Ocean Spider House Pot Storage 4" slice="0x0" setup="0x0" room="0x5" actor="0x11" item="MAGIC_JAR_SMALL"/>
-    <xflag type="crate" location="Ocean Spider House Crate" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="NOTHING"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 1" slice="0x0" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 2" slice="0x1" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 3" slice="0x2" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 4" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 5" slice="0x1" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 6" slice="0x2" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 7" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 8" slice="0x1" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 9" slice="0x2" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 1" slice="0x0" setup="0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 2" slice="0x0" setup="0" room="0x0" actor="0xd" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 3" slice="0x0" setup="0" room="0x0" actor="0xe" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Entrance 4" slice="0x0" setup="0" room="0x0" actor="0xf" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room Web" slice="0x0" setup="0" room="0x1" actor="0x1b" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room 1" slice="0x0" setup="0" room="0x1" actor="0x1c" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room 2" slice="0x0" setup="0" room="0x1" actor="0x1e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ocean Spider House Pot Main Room Boe" slice="0x0" setup="0" room="0x1" actor="0x1d" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Ocean Spider House Pot Colored Skulls 1" slice="0x0" setup="0" room="0x3" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Colored Skulls 2" slice="0x0" setup="0" room="0x3" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 1" slice="0x0" setup="0" room="0x5" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 2" slice="0x0" setup="0" room="0x5" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 3" slice="0x0" setup="0" room="0x5" actor="0xd" item="ARROWS_10"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage Top 1" slice="0x0" setup="0" room="0x5" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage Top 2" slice="0x0" setup="0" room="0x5" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage Top 3" slice="0x0" setup="0" room="0x5" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Ocean Spider House Pot Storage 4" slice="0x0" setup="0" room="0x5" actor="0x11" item="MAGIC_JAR_SMALL"/>
+    <xflag type="crate" location="Ocean Spider House Crate" slice="0x0" setup="0" room="0x5" actor="0x4" item="NOTHING"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 1" slice="0x0" setup="0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 2" slice="0x1" setup="0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 3" slice="0x2" setup="0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 4" slice="0x0" setup="0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 5" slice="0x1" setup="0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 6" slice="0x2" setup="0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 7" slice="0x0" setup="0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 8" slice="0x1" setup="0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 9" slice="0x2" setup="0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
   </scene>
 </checks>

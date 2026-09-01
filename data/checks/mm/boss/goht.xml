@@ -3,19 +3,19 @@
   <scene id="LAIR_GOHT">
     <collectible location="Snowhead Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
     <npc location="Snowhead Temple Boss" npc="REMAINS_GOHT" item="REMAINS_GOHT"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot Early 1" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot Early 2" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="ARROWS_10"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot Early 3" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot Early 4" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 01" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 02" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 03" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 04" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 05" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 06" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 07" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 08" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 09" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Snowhead Temple Boss Pot 10" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot Early 1" slice="0x0" setup="0" room="0x0" actor="0xd" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot Early 2" slice="0x0" setup="0" room="0x0" actor="0xe" item="ARROWS_10"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot Early 3" slice="0x0" setup="0" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot Early 4" slice="0x0" setup="0" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 01" slice="0x0" setup="0" room="0x0" actor="0x1" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 02" slice="0x0" setup="0" room="0x0" actor="0x2" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 03" slice="0x0" setup="0" room="0x0" actor="0x3" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 04" slice="0x0" setup="0" room="0x0" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 05" slice="0x0" setup="0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 06" slice="0x0" setup="0" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 07" slice="0x0" setup="0" room="0x0" actor="0x9" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 08" slice="0x0" setup="0" room="0x0" actor="0xa" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 09" slice="0x0" setup="0" room="0x0" actor="0xb" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Snowhead Temple Boss Pot 10" slice="0x0" setup="0" room="0x0" actor="0xc" item="MAGIC_JAR_LARGE"/>
   </scene>
 </checks>

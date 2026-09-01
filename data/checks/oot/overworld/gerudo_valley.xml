@@ -40,33 +40,33 @@
       <match setup="2" actor="0x23"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Water 3" item="RANDOM"/>
     </actor>
-    <xflag type="rock" location="Gerudo Valley Rock Adult 1" setup="0x2" actor="0x24" item="RANDOM"/>
-    <xflag type="rock" location="Gerudo Valley Rock Adult 2" setup="0x2" actor="0x25" item="RANDOM"/>
-    <xflag type="rock" location="Gerudo Valley Rock Adult 3" setup="0x2" actor="0x26" item="RANDOM"/>
-    <xflag type="rock" location="Gerudo Valley Rock Adult 4" setup="0x2" actor="0x27" item="RANDOM"/>
-    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 1" slice="0x0" setup="0x0" actor="0x21" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 2" slice="0x0" setup="0x0" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 3" slice="0x0" setup="0x0" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 4" slice="0x0" setup="0x0" actor="0x24" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Gerudo Valley Crate Child Bottom" slice="0x0" setup="0x0" actor="0x25" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Gerudo Valley Crate Ledge" slice="0x0" setup="0x0" actor="0x26" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Gerudo Valley Wonder Item Lower" slice="0x0" setup="0x2" actor="0x28" item="RUPEE_RED"/>
-    <xflag type="wonder" location="Gerudo Valley Wonder Item Upper" slice="0x0" setup="0x2" actor="0x29" item="RUPEE_RED"/>
-    <xflag type="boulder" location="Gerudo Valley Boulder Before Bridge 1" slice="0x0" setup="0x2" actor="0x1b" item="NOTHING"/>
-    <xflag type="boulder" location="Gerudo Valley Boulder Before Bridge 2" slice="0x0" setup="0x2" actor="0x1d" item="NOTHING"/>
-    <xflag type="boulder" location="Gerudo Valley Boulder After Bridge" slice="0x0" setup="0x2" actor="0x1c" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Before Bridge 1" slice="0x0" setup="0x2" actor="0x10" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Before Bridge 2" slice="0x0" setup="0x2" actor="0x11" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder After Bridge 1" slice="0x0" setup="0x2" actor="0x12" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder After Bridge 2" slice="0x0" setup="0x2" actor="0x13" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 1" slice="0x0" setup="0x2" actor="0xf" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 2" slice="0x0" setup="0x2" actor="0x14" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 3" slice="0x0" setup="0x2" actor="0x15" item="NOTHING"/>
-    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 4" slice="0x0" setup="0x2" actor="0x16" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Gerudo Valley Silver Boulder" slice="0x0" setup="0x0" actor="0x12" item="NOTHING"/>
-    <xflag type="soil" location="Gerudo Valley Soil 1" slice="0x0" setup="0x0" actor="0x1f" item="FAIRY"/>
-    <xflag type="soil" location="Gerudo Valley Soil 2" slice="0x1" setup="0x0" actor="0x1f" item="FAIRY"/>
-    <xflag type="soil" location="Gerudo Valley Soil 3" slice="0x2" setup="0x0" actor="0x1f" item="FAIRY"/>
+    <xflag type="rock" location="Gerudo Valley Rock Adult 1" setup="2" actor="0x24" item="RANDOM"/>
+    <xflag type="rock" location="Gerudo Valley Rock Adult 2" setup="2" actor="0x25" item="RANDOM"/>
+    <xflag type="rock" location="Gerudo Valley Rock Adult 3" setup="2" actor="0x26" item="RANDOM"/>
+    <xflag type="rock" location="Gerudo Valley Rock Adult 4" setup="2" actor="0x27" item="RANDOM"/>
+    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 1" slice="0x0" setup="0" actor="0x21" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 2" slice="0x0" setup="0" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 3" slice="0x0" setup="0" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 4" slice="0x0" setup="0" actor="0x24" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Gerudo Valley Crate Child Bottom" slice="0x0" setup="0" actor="0x25" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Gerudo Valley Crate Ledge" slice="0x0" setup="0" actor="0x26" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Gerudo Valley Wonder Item Lower" slice="0x0" setup="2" actor="0x28" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Gerudo Valley Wonder Item Upper" slice="0x0" setup="2" actor="0x29" item="RUPEE_RED"/>
+    <xflag type="boulder" location="Gerudo Valley Boulder Before Bridge 1" slice="0x0" setup="2" actor="0x1b" item="NOTHING"/>
+    <xflag type="boulder" location="Gerudo Valley Boulder Before Bridge 2" slice="0x0" setup="2" actor="0x1d" item="NOTHING"/>
+    <xflag type="boulder" location="Gerudo Valley Boulder After Bridge" slice="0x0" setup="2" actor="0x1c" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Before Bridge 1" slice="0x0" setup="2" actor="0x10" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Before Bridge 2" slice="0x0" setup="2" actor="0x11" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder After Bridge 1" slice="0x0" setup="2" actor="0x12" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder After Bridge 2" slice="0x0" setup="2" actor="0x13" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 1" slice="0x0" setup="2" actor="0xf" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 2" slice="0x0" setup="2" actor="0x14" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 3" slice="0x0" setup="2" actor="0x15" item="NOTHING"/>
+    <xflag type="boulder-red" location="Gerudo Valley Red Boulder Around Chest 4" slice="0x0" setup="2" actor="0x16" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Gerudo Valley Silver Boulder" slice="0x0" setup="0" actor="0x12" item="NOTHING"/>
+    <xflag type="soil" location="Gerudo Valley Soil 1" slice="0x0" setup="0" actor="0x1f" item="FAIRY"/>
+    <xflag type="soil" location="Gerudo Valley Soil 2" slice="0x1" setup="0" actor="0x1f" item="FAIRY"/>
+    <xflag type="soil" location="Gerudo Valley Soil 3" slice="0x2" setup="0" actor="0x1f" item="FAIRY"/>
     <actor>
       <match setup="0" actor="0x8"/>
       <match setup="2" actor="0x2d"/>
@@ -74,19 +74,19 @@
       <xflag type="gossip-big" location="Gerudo Valley Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x25">
     <scrub location="Gerudo Valley Grotto Front Scrub" flag="0x17" item="POTION_GREEN"/>
     <scrub location="Gerudo Valley Grotto Back Scrub" flag="0x18" item="POTION_RED"/>
-    <xflag type="hive" location="Gerudo Valley Grotto Hive" slice="0x0" setup="0x0" room="0x25" actor="0x2" item="RUPEE_RED"/>
+    <xflag type="hive" location="Gerudo Valley Grotto Hive" actor="0x2" item="RUPEE_RED"/>
   </scene>
-  <scene id="GROTTOS">
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 1" slice="0x0" setup="0x0" room="0x5" actor="0x1" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 2" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 3" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 4" slice="0x0" setup="0x0" room="0x5" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 5" slice="0x0" setup="0x0" room="0x5" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 6" slice="0x0" setup="0x0" room="0x5" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 7" slice="0x0" setup="0x0" room="0x5" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 8" slice="0x0" setup="0x0" room="0x5" actor="0x8" item="RUPEE_RED"/>
+  <scene id="GROTTOS" room="0x5">
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 1" actor="0x1" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 2" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 3" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 4" actor="0x4" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 5" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 6" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 7" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Gerudo Valley Octorok Grotto Rupee 8" actor="0x8" item="RUPEE_RED"/>
   </scene>
 </checks>

@@ -2,37 +2,37 @@
 <checks game="mm">
   <scene id="PATH_SNOWHEAD">
     <collectible location="Path to Snowhead HP" flag="0x08" item="HEART_PIECE"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 1" slice="0x0" setup="0x0" room="0x0" actor="0x1e" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 2" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 1" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 2" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 1" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 2" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 3" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 1" slice="0x0" setup="0x1" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 2" slice="0x0" setup="0x1" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 1" slice="0x0" setup="0x1" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 2" slice="0x0" setup="0x1" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree End 1" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="NOTHING"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree End 2" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="NOTHING"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree End 3" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="NOTHING"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree Entrance" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 1" slice="0x0" setup="0" room="0x0" actor="0x1e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 2" slice="0x0" setup="0" room="0x0" actor="0x1f" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 1" slice="0x0" setup="0" room="0x0" actor="0x1c" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 2" slice="0x0" setup="0" room="0x0" actor="0x1d" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 1" slice="0x0" setup="0" room="0x0" actor="0x9" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 2" slice="0x0" setup="0" room="0x0" actor="0xa" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 3" slice="0x0" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 1" slice="0x0" setup="1" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 2" slice="0x0" setup="1" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 1" slice="0x0" setup="1" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 2" slice="0x0" setup="1" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="tree" location="Path to Snowhead Snow Tree End 1" slice="0x0" setup="0" room="0x0" actor="0x16" item="NOTHING"/>
+    <xflag type="tree" location="Path to Snowhead Snow Tree End 2" slice="0x0" setup="0" room="0x0" actor="0x17" item="NOTHING"/>
+    <xflag type="tree" location="Path to Snowhead Snow Tree End 3" slice="0x0" setup="0" room="0x0" actor="0x18" item="NOTHING"/>
+    <xflag type="tree" location="Path to Snowhead Snow Tree Entrance" slice="0x0" setup="0" room="0x0" actor="0x19" item="NOTHING"/>
   </scene>
   <scene id="GROTTOS">
     <chest location="Path to Snowhead Grotto" flag="0x13" item="RUPEE_RED"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 01" slice="0x0" setup="0x0" room="0x33" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 02" slice="0x0" setup="0x0" room="0x33" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 03" slice="0x0" setup="0x0" room="0x33" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 04" slice="0x0" setup="0x0" room="0x33" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 05" slice="0x0" setup="0x0" room="0x33" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 06" slice="0x0" setup="0x0" room="0x33" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 07" slice="0x0" setup="0x0" room="0x33" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 08" slice="0x0" setup="0x0" room="0x33" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 09" slice="0x0" setup="0x0" room="0x33" actor="0xc" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 10" slice="0x0" setup="0x0" room="0x33" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 11" slice="0x0" setup="0x0" room="0x33" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 12" slice="0x0" setup="0x0" room="0x33" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 13" slice="0x0" setup="0x0" room="0x33" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Path to Snowhead Grotto Grass 14" slice="0x0" setup="0x0" room="0x33" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 01" slice="0x0" setup="0" room="0x33" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 02" slice="0x0" setup="0" room="0x33" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 03" slice="0x0" setup="0" room="0x33" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 04" slice="0x0" setup="0" room="0x33" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 05" slice="0x0" setup="0" room="0x33" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 06" slice="0x0" setup="0" room="0x33" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 07" slice="0x0" setup="0" room="0x33" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 08" slice="0x0" setup="0" room="0x33" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 09" slice="0x0" setup="0" room="0x33" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 10" slice="0x0" setup="0" room="0x33" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 11" slice="0x0" setup="0" room="0x33" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 12" slice="0x0" setup="0" room="0x33" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 13" slice="0x0" setup="0" room="0x33" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Path to Snowhead Grotto Grass 14" slice="0x0" setup="0" room="0x33" actor="0x13" item="RANDOM"/>
   </scene>
 </checks>

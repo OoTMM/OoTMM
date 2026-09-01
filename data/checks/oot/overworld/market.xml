@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checks game="oot">
   <scene id="MARKET_CHILD_DAY">
-    <xflag type="crate" location="Market Crate 1" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="RUPEE_RED"/>
-    <xflag type="crate" location="Market Crate 2" slice="0x0" setup="0x0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Crate 3" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Crate 4" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Market Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 3" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 4" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 5" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 6" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 7" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 8" slice="0x0" setup="0x0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="tree" location="Market Tree" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="NOTHING"/>
-    <xflag type="wonder" location="Market Wonder Item Day 1" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 2" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 3" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 4" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 5" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Crate 1" slice="0x0" setup="0" room="0x0" actor="0x21" item="RUPEE_RED"/>
+    <xflag type="crate" location="Market Crate 2" slice="0x0" setup="0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Crate 3" slice="0x0" setup="0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Crate 4" slice="0x0" setup="0" room="0x0" actor="0x24" item="RUPEE_GREEN"/>
+    <xflag type="grass" location="Market Grass 1" slice="0x0" setup="0" room="0x0" actor="0x17" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 2" slice="0x0" setup="0" room="0x0" actor="0x18" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 3" slice="0x0" setup="0" room="0x0" actor="0x19" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 4" slice="0x0" setup="0" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 5" slice="0x0" setup="0" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 6" slice="0x0" setup="0" room="0x0" actor="0x1c" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 7" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Market Grass 8" slice="0x0" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="tree" location="Market Tree" slice="0x0" setup="0" room="0x0" actor="0xe" item="NOTHING"/>
+    <xflag type="wonder" location="Market Wonder Item Day 1" slice="0x0" setup="0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 2" slice="0x0" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 3" slice="0x0" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 4" slice="0x0" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 5" slice="0x0" setup="0" room="0x0" actor="0x13" item="RUPEE_GREEN"/>
   </scene>
   <scene id="MARKET_CHILD_NIGHT">
-    <xflag type="wonder" location="Market Wonder Item Night 1" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Market Wonder Item Night 2" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Market Wonder Item Night 1" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Market Wonder Item Night 2" slice="0x0" setup="0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
   </scene>
   <scene id="BACK_ALLEY_HOUSE">
-    <xflag type="pot" location="Market Back Alley East House Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Market Back Alley East House Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Market Back Alley East House Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Market Back Alley East House Pot 1" slice="0x0" setup="0" room="0x0" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Market Back Alley East House Pot 2" slice="0x0" setup="0" room="0x0" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Market Back Alley East House Pot 3" slice="0x0" setup="0" room="0x0" actor="0x4" item="MAGIC_JAR_SMALL"/>
   </scene>
   <scene id="BACK_ALLEY_HOUSE2">
     <npc location="Market Dog Lady HP" npc="DOG_LADY" item="HEART_PIECE"/>
-    <xflag type="crate" location="Market Dog Lady Crate" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="crate" location="Market Dog Lady Crate" slice="0x0" setup="0" room="0x0" actor="0x2" item="RUPEE_BLUE"/>
   </scene>
   <scene id="GUARD_HOUSE">
     <npc location="Market Pot House Big Poes" npc="POE_COLLECTOR" item="BOTTLE_EMPTY"/>
     <gs location="Market Pot House GS" flag="0x73" item="GS_TOKEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 1" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 2" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 3" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 4" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 5" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 6" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 7" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 8" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 9" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 10" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 11" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 12" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 13" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 14" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 15" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 16" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 17" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 18" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 19" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 20" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 21" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 22" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 23" slice="0x0" setup="0x0" room="0x0" actor="0x1e" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 24" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 25" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 26" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 27" slice="0x0" setup="0x0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 28" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 29" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 30" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 31" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 32" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 33" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 34" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 35" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 36" slice="0x0" setup="0x0" room="0x0" actor="0x2d" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 37" slice="0x0" setup="0x0" room="0x0" actor="0x2e" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 38" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 39" slice="0x0" setup="0x0" room="0x0" actor="0x30" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 40" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 41" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Ground 42" slice="0x0" setup="0x0" room="0x0" actor="0x33" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Above 1" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Child Pot Above 2" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 1" slice="0x0" setup="0x2" room="0x0" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 2" slice="0x0" setup="0x2" room="0x0" actor="0x2" item="NOTHING"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 3" slice="0x0" setup="0x2" room="0x0" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 4" slice="0x0" setup="0x2" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 5" slice="0x0" setup="0x2" room="0x0" actor="0x5" item="NOTHING"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 6" slice="0x0" setup="0x2" room="0x0" actor="0x6" item="RUPEE_RED"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 7" slice="0x0" setup="0x2" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 8" slice="0x0" setup="0x2" room="0x0" actor="0x8" item="NOTHING"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 9" slice="0x0" setup="0x2" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 10" slice="0x0" setup="0x2" room="0x0" actor="0xa" item="NOTHING"/>
-    <xflag type="pot" location="Market Pot House Adult Pot 11" slice="0x0" setup="0x2" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Pot House Crate 1" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="NOTHING"/>
-    <xflag type="crate" location="Market Pot House Crate 2" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="NOTHING"/>
-    <xflag type="crate" location="Market Pot House Crate 3" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Pot House Crate 4" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="NOTHING"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 1" slice="0x0" setup="0" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 2" slice="0x0" setup="0" room="0x0" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 3" slice="0x0" setup="0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 4" slice="0x0" setup="0" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 5" slice="0x0" setup="0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 6" slice="0x0" setup="0" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 7" slice="0x0" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 8" slice="0x0" setup="0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 9" slice="0x0" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 10" slice="0x0" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 11" slice="0x0" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 12" slice="0x0" setup="0" room="0x0" actor="0x13" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 13" slice="0x0" setup="0" room="0x0" actor="0x14" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 14" slice="0x0" setup="0" room="0x0" actor="0x15" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 15" slice="0x0" setup="0" room="0x0" actor="0x16" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 16" slice="0x0" setup="0" room="0x0" actor="0x17" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 17" slice="0x0" setup="0" room="0x0" actor="0x18" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 18" slice="0x0" setup="0" room="0x0" actor="0x19" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 19" slice="0x0" setup="0" room="0x0" actor="0x1a" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 20" slice="0x0" setup="0" room="0x0" actor="0x1b" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 21" slice="0x0" setup="0" room="0x0" actor="0x1c" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 22" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 23" slice="0x0" setup="0" room="0x0" actor="0x1e" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 24" slice="0x0" setup="0" room="0x0" actor="0x1f" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 25" slice="0x0" setup="0" room="0x0" actor="0x20" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 26" slice="0x0" setup="0" room="0x0" actor="0x21" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 27" slice="0x0" setup="0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 28" slice="0x0" setup="0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 29" slice="0x0" setup="0" room="0x0" actor="0x24" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 30" slice="0x0" setup="0" room="0x0" actor="0x25" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 31" slice="0x0" setup="0" room="0x0" actor="0x26" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 32" slice="0x0" setup="0" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 33" slice="0x0" setup="0" room="0x0" actor="0x2a" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 34" slice="0x0" setup="0" room="0x0" actor="0x2b" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 35" slice="0x0" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 36" slice="0x0" setup="0" room="0x0" actor="0x2d" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 37" slice="0x0" setup="0" room="0x0" actor="0x2e" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 38" slice="0x0" setup="0" room="0x0" actor="0x2f" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 39" slice="0x0" setup="0" room="0x0" actor="0x30" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 40" slice="0x0" setup="0" room="0x0" actor="0x31" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 41" slice="0x0" setup="0" room="0x0" actor="0x32" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Ground 42" slice="0x0" setup="0" room="0x0" actor="0x33" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Above 1" slice="0x0" setup="0" room="0x0" actor="0x27" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Child Pot Above 2" slice="0x0" setup="0" room="0x0" actor="0x29" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 1" slice="0x0" setup="2" room="0x0" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 2" slice="0x0" setup="2" room="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 3" slice="0x0" setup="2" room="0x0" actor="0x3" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 4" slice="0x0" setup="2" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 5" slice="0x0" setup="2" room="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 6" slice="0x0" setup="2" room="0x0" actor="0x6" item="RUPEE_RED"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 7" slice="0x0" setup="2" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 8" slice="0x0" setup="2" room="0x0" actor="0x8" item="NOTHING"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 9" slice="0x0" setup="2" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 10" slice="0x0" setup="2" room="0x0" actor="0xa" item="NOTHING"/>
+    <xflag type="pot" location="Market Pot House Adult Pot 11" slice="0x0" setup="2" room="0x0" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Pot House Crate 1" slice="0x0" setup="0" room="0x0" actor="0x3" item="NOTHING"/>
+    <xflag type="crate" location="Market Pot House Crate 2" slice="0x0" setup="0" room="0x0" actor="0x4" item="NOTHING"/>
+    <xflag type="crate" location="Market Pot House Crate 3" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Pot House Crate 4" slice="0x0" setup="0" room="0x0" actor="0x6" item="NOTHING"/>
   </scene>
   <scene id="BAZAAR">
     <shop location="Market Bazaar Item 1" flag="0x20" item="ARROWS_5"/>

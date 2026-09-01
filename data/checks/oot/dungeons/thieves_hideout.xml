@@ -6,47 +6,47 @@
     <collectible location="Gerudo Fortress Jail 3" flag="0x0a" item="SMALL_KEY_GF"/>
     <collectible location="Gerudo Fortress Jail 4" flag="0x0e" item="SMALL_KEY_GF"/>
     <npc location="Gerudo Member Card" npc="GERUDO_CARD" item="GERUDO_CARD"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Break Room 1" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="ARROWS_10"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Break Room 2" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 1 1" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 1 2" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="ARROWS_10"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 1 3" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="RUPEE_RED"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Kitchen 1" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="ARROWS_10"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Kitchen 2" slice="0x0" setup="0x0" room="0x3" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 3 1" slice="0x0" setup="0x0" room="0x4" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 3 2" slice="0x0" setup="0x0" room="0x4" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 1" slice="0x0" setup="0x0" room="0x5" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 2" slice="0x0" setup="0x0" room="0x5" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 3" slice="0x0" setup="0x0" room="0x5" actor="0x9" item="RUPEE_RED"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 4" slice="0x0" setup="0x0" room="0x5" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 5" slice="0x0" setup="0x0" room="0x5" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 6" slice="0x0" setup="0x0" room="0x5" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 7" slice="0x0" setup="0x0" room="0x5" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Thieves Hideout Crate Break Room 1" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Break Room 2" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Break Room 3" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Break Room 4" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Jail 3" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Jail 1" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Kitchen" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 1" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 2" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 3" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 4" slice="0x0" setup="0x0" room="0x3" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Jail 2 1" slice="0x0" setup="0x0" room="0x5" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Thieves Hideout Crate Jail 2 2" slice="0x0" setup="0x0" room="0x5" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="fairy_spot" location="Gerudo Fortress Kitchen Big Fairy" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="FAIRY_BIG"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 1 1" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 1 2" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 2 1" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 2 2" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 3 1" slice="0x0" setup="0x0" room="0x1" actor="0x3" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 3 2" slice="0x0" setup="0x0" room="0x1" actor="0x4" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 4 1" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 4 2" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Break Room Bottom" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Break Room Top" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Kitchen Skull" slice="0x0" setup="0x0" room="0x3" actor="0x3" item="RANDOM"/>
-    <xflag type="wonder" location="Gerudo Fortress Wonder Item Kitchen Soup" slice="0x0" setup="0x0" room="0x3" actor="0x4" item="RUPEE_RED"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Break Room 1" slice="0x0" setup="0" room="0x0" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Break Room 2" slice="0x0" setup="0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 1 1" slice="0x0" setup="0" room="0x2" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 1 2" slice="0x0" setup="0" room="0x2" actor="0x7" item="ARROWS_10"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 1 3" slice="0x0" setup="0" room="0x2" actor="0x8" item="RUPEE_RED"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Kitchen 1" slice="0x0" setup="0" room="0x3" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Kitchen 2" slice="0x0" setup="0" room="0x3" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 3 1" slice="0x0" setup="0" room="0x4" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 3 2" slice="0x0" setup="0" room="0x4" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 1" slice="0x0" setup="0" room="0x5" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 2" slice="0x0" setup="0" room="0x5" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 3" slice="0x0" setup="0" room="0x5" actor="0x9" item="RUPEE_RED"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 4" slice="0x0" setup="0" room="0x5" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 5" slice="0x0" setup="0" room="0x5" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 6" slice="0x0" setup="0" room="0x5" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 2 7" slice="0x0" setup="0" room="0x5" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Thieves Hideout Crate Break Room 1" slice="0x0" setup="0" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Break Room 2" slice="0x0" setup="0" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Break Room 3" slice="0x0" setup="0" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Break Room 4" slice="0x0" setup="0" room="0x0" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Jail 3" slice="0x0" setup="0" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Jail 1" slice="0x0" setup="0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Kitchen" slice="0x0" setup="0" room="0x3" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 1" slice="0x0" setup="0" room="0x3" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 2" slice="0x0" setup="0" room="0x3" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 3" slice="0x0" setup="0" room="0x3" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 4" slice="0x0" setup="0" room="0x3" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Jail 2 1" slice="0x0" setup="0" room="0x5" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Thieves Hideout Crate Jail 2 2" slice="0x0" setup="0" room="0x5" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="fairy_spot" location="Gerudo Fortress Kitchen Big Fairy" slice="0x0" setup="0" room="0x3" actor="0x9" item="FAIRY_BIG"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 1 1" slice="0x0" setup="0" room="0x2" actor="0x2" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 1 2" slice="0x0" setup="0" room="0x2" actor="0x3" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 2 1" slice="0x0" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 2 2" slice="0x0" setup="0" room="0x5" actor="0x3" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 3 1" slice="0x0" setup="0" room="0x1" actor="0x3" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 3 2" slice="0x0" setup="0" room="0x1" actor="0x4" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 4 1" slice="0x0" setup="0" room="0x4" actor="0x2" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 4 2" slice="0x0" setup="0" room="0x4" actor="0x3" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Break Room Bottom" slice="0x0" setup="0" room="0x0" actor="0x2" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Break Room Top" slice="0x0" setup="0" room="0x0" actor="0x3" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Kitchen Skull" slice="0x0" setup="0" room="0x3" actor="0x3" item="RANDOM"/>
+    <xflag type="wonder" location="Gerudo Fortress Wonder Item Kitchen Soup" slice="0x0" setup="0" room="0x3" actor="0x4" item="RUPEE_RED"/>
   </scene>
 </checks>

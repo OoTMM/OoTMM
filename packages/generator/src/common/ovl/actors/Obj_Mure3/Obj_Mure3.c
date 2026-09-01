@@ -32,15 +32,6 @@ void ObjMure3_WatchDespawn(Actor_ObjMure3* this, PlayState* play);
 
 static void ObjMure3_Alias(Xflag* xf)
 {
-    switch (xf->sceneId)
-    {
-#if defined(GAME_OOT)
-    case SCE_OOT_KOKIRI_FOREST:
-        xf->setupId = 2;
-        xf->id = 11;
-        break;
-#endif
-    }
 }
 
 int ObjMure3_IsAnyShuffled(Actor_ObjMure3* this, PlayState* play)

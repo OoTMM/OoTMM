@@ -4,160 +4,160 @@
     <npc location="Hyrule Field Ocarina of Time" npc="OCARINA_TIME_ITEM" item="OCARINA"/>
     <npc location="Hyrule Field Song of Time" npc="OCARINA_TIME_SONG" item="SONG_TIME"/>
     <npc location="Hyrule Field Sell Bunny Mask" npc="MASK_SELL_BUNNY" item="RUPEE_RAINBOW"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 01" slice="0x0" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 02" slice="0x1" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 03" slice="0x2" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 04" slice="0x3" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 05" slice="0x4" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 06" slice="0x5" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 07" slice="0x6" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 08" slice="0x7" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 09" slice="0x8" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 10" slice="0x9" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 11" slice="0xa" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 12" slice="0xb" setup="0x0" actor="0x3a" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 01" slice="0x0" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 02" slice="0x1" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 03" slice="0x2" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 04" slice="0x3" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 05" slice="0x4" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 06" slice="0x5" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 07" slice="0x6" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 08" slice="0x7" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 09" slice="0x8" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 10" slice="0x9" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 11" slice="0xa" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 12" slice="0xb" setup="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 01" slice="0x0" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 02" slice="0x1" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 03" slice="0x2" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 04" slice="0x3" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 05" slice="0x4" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 06" slice="0x5" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 07" slice="0x6" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 08" slice="0x7" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 09" slice="0x8" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 10" slice="0x9" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 11" slice="0xa" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 12" slice="0xb" setup="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 01" slice="0x0" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 02" slice="0x1" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 03" slice="0x2" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 04" slice="0x3" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 05" slice="0x4" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 06" slice="0x5" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 07" slice="0x6" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 08" slice="0x7" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 09" slice="0x8" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 10" slice="0x9" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 11" slice="0xa" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 12" slice="0xb" setup="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 01" slice="0x0" setup="0x1" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree 02" slice="0x0" setup="0x1" actor="0x1e" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree 03" slice="0x0" setup="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 04" slice="0x1" setup="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 05" slice="0x2" setup="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 06" slice="0x3" setup="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 07" slice="0x4" setup="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 08" slice="0x5" setup="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 09" slice="0x0" setup="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 10" slice="0x1" setup="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 11" slice="0x2" setup="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 12" slice="0x3" setup="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 13" slice="0x4" setup="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 14" slice="0x5" setup="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 15" slice="0x0" setup="0x1" actor="0x21" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 16" slice="0x1" setup="0x1" actor="0x21" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 17" slice="0x2" setup="0x1" actor="0x21" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 18" slice="0x3" setup="0x1" actor="0x21" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 19" slice="0x4" setup="0x1" actor="0x21" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 20" slice="0x5" setup="0x1" actor="0x21" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 21" slice="0x0" setup="0x1" actor="0x22" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 22" slice="0x1" setup="0x1" actor="0x22" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 23" slice="0x2" setup="0x1" actor="0x22" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 24" slice="0x3" setup="0x1" actor="0x22" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 25" slice="0x4" setup="0x1" actor="0x22" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 26" slice="0x5" setup="0x1" actor="0x22" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 27" slice="0x0" setup="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 28" slice="0x1" setup="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 29" slice="0x2" setup="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 30" slice="0x3" setup="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 31" slice="0x4" setup="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 32" slice="0x5" setup="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 33" slice="0x0" setup="0x1" actor="0x24" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 34" slice="0x0" setup="0x1" actor="0x25" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 35" slice="0x0" setup="0x1" actor="0x31" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 36" slice="0x0" setup="0x1" actor="0x3d" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree 37" slice="0x0" setup="0x1" actor="0x3e" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree 38" slice="0x0" setup="0x1" actor="0x3f" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree 39" slice="0x0" setup="0x1" actor="0x40" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree 40" slice="0x0" setup="0x1" actor="0x41" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 1" slice="0x0" setup="0x1" actor="0x1c" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 2" slice="0x1" setup="0x1" actor="0x1c" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 3" slice="0x2" setup="0x1" actor="0x1c" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 4" slice="0x3" setup="0x1" actor="0x1c" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 5" slice="0x4" setup="0x1" actor="0x1c" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 6" slice="0x5" setup="0x1" actor="0x1c" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Field Tree Child Near Valley" slice="0x0" setup="0x1" actor="0x3c" item="RUPEE_GREEN"/>
-    <xflag type="tree" location="Hyrule Field Tree Adult" slice="0x0" setup="0x2" actor="0x42" item="RUPEE_GREEN"/>
-    <xflag type="bush" location="Hyrule Field Bush 01" slice="0x0" setup="0x1" actor="0x26" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 02" slice="0x1" setup="0x1" actor="0x26" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 03" slice="0x2" setup="0x1" actor="0x26" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 04" slice="0x3" setup="0x1" actor="0x26" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 05" slice="0x4" setup="0x1" actor="0x26" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 06" slice="0x5" setup="0x1" actor="0x26" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 07" slice="0x0" setup="0x1" actor="0x27" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 08" slice="0x1" setup="0x1" actor="0x27" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 09" slice="0x2" setup="0x1" actor="0x27" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 10" slice="0x3" setup="0x1" actor="0x27" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 11" slice="0x4" setup="0x1" actor="0x27" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 12" slice="0x5" setup="0x1" actor="0x27" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 13" slice="0x0" setup="0x1" actor="0x28" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 14" slice="0x1" setup="0x1" actor="0x28" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 15" slice="0x2" setup="0x1" actor="0x28" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 16" slice="0x3" setup="0x1" actor="0x28" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 17" slice="0x4" setup="0x1" actor="0x28" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 18" slice="0x5" setup="0x1" actor="0x28" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 19" slice="0x0" setup="0x1" actor="0x2b" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 20" slice="0x2" setup="0x1" actor="0x2b" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 21" slice="0x3" setup="0x1" actor="0x2b" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 22" slice="0x4" setup="0x1" actor="0x2b" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 23" slice="0x5" setup="0x1" actor="0x2b" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 24" slice="0x0" setup="0x1" actor="0x2d" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 25" slice="0x1" setup="0x1" actor="0x2d" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 26" slice="0x2" setup="0x1" actor="0x2d" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 27" slice="0x3" setup="0x1" actor="0x2d" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 28" slice="0x4" setup="0x1" actor="0x2d" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 29" slice="0x5" setup="0x1" actor="0x2d" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 30" slice="0x0" setup="0x1" actor="0x2e" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 31" slice="0x1" setup="0x1" actor="0x2e" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 32" slice="0x2" setup="0x1" actor="0x2e" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 33" slice="0x3" setup="0x1" actor="0x2e" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 34" slice="0x4" setup="0x1" actor="0x2e" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush 35" slice="0x5" setup="0x1" actor="0x2e" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 01" slice="0x0" setup="0x1" actor="0x29" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 02" slice="0x2" setup="0x1" actor="0x29" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 03" slice="0x3" setup="0x1" actor="0x29" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 04" slice="0x4" setup="0x1" actor="0x29" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 05" slice="0x5" setup="0x1" actor="0x29" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 06" slice="0x0" setup="0x1" actor="0x2a" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 07" slice="0x1" setup="0x1" actor="0x2a" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 08" slice="0x2" setup="0x1" actor="0x2a" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 09" slice="0x3" setup="0x1" actor="0x2a" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 10" slice="0x4" setup="0x1" actor="0x2a" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 11" slice="0x5" setup="0x1" actor="0x2a" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 12" slice="0x0" setup="0x1" actor="0x2c" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 13" slice="0x1" setup="0x1" actor="0x2c" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 14" slice="0x2" setup="0x1" actor="0x2c" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 15" slice="0x3" setup="0x1" actor="0x2c" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 16" slice="0x4" setup="0x1" actor="0x2c" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 17" slice="0x5" setup="0x1" actor="0x2c" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 18" slice="0x0" setup="0x1" actor="0x2f" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 19" slice="0x1" setup="0x1" actor="0x2f" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 20" slice="0x2" setup="0x1" actor="0x2f" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 21" slice="0x3" setup="0x1" actor="0x2f" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 22" slice="0x4" setup="0x1" actor="0x2f" item="NOTHING"/>
-    <xflag type="bush" location="Hyrule Field Bush Child 23" slice="0x5" setup="0x1" actor="0x2f" item="NOTHING"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 01" slice="0x0" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 02" slice="0x1" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 03" slice="0x2" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 04" slice="0x3" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 05" slice="0x4" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 06" slice="0x5" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 07" slice="0x6" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 08" slice="0x7" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 09" slice="0x8" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 10" slice="0x9" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 11" slice="0xa" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 1 Bush 12" slice="0xb" setup="0" actor="0x3a" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 01" slice="0x0" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 02" slice="0x1" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 03" slice="0x2" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 04" slice="0x3" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 05" slice="0x4" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 06" slice="0x5" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 07" slice="0x6" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 08" slice="0x7" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 09" slice="0x8" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 10" slice="0x9" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 11" slice="0xa" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 2 Bush 12" slice="0xb" setup="0" actor="0x3b" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 01" slice="0x0" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 02" slice="0x1" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 03" slice="0x2" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 04" slice="0x3" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 05" slice="0x4" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 06" slice="0x5" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 07" slice="0x6" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 08" slice="0x7" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 09" slice="0x8" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 10" slice="0x9" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 11" slice="0xa" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 3 Bush 12" slice="0xb" setup="0" actor="0x3c" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 01" slice="0x0" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 02" slice="0x1" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 03" slice="0x2" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 04" slice="0x3" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 05" slice="0x4" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 06" slice="0x5" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 07" slice="0x6" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 08" slice="0x7" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 09" slice="0x8" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 10" slice="0x9" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 11" slice="0xa" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grass Pack 4 Bush 12" slice="0xb" setup="0" actor="0x3d" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 01" slice="0x0" setup="1" actor="0x1d" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree 02" slice="0x0" setup="1" actor="0x1e" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree 03" slice="0x0" setup="1" actor="0x1f" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 04" slice="0x1" setup="1" actor="0x1f" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 05" slice="0x2" setup="1" actor="0x1f" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 06" slice="0x3" setup="1" actor="0x1f" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 07" slice="0x4" setup="1" actor="0x1f" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 08" slice="0x5" setup="1" actor="0x1f" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 09" slice="0x0" setup="1" actor="0x20" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 10" slice="0x1" setup="1" actor="0x20" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 11" slice="0x2" setup="1" actor="0x20" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 12" slice="0x3" setup="1" actor="0x20" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 13" slice="0x4" setup="1" actor="0x20" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 14" slice="0x5" setup="1" actor="0x20" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 15" slice="0x0" setup="1" actor="0x21" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 16" slice="0x1" setup="1" actor="0x21" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 17" slice="0x2" setup="1" actor="0x21" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 18" slice="0x3" setup="1" actor="0x21" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 19" slice="0x4" setup="1" actor="0x21" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 20" slice="0x5" setup="1" actor="0x21" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 21" slice="0x0" setup="1" actor="0x22" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 22" slice="0x1" setup="1" actor="0x22" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 23" slice="0x2" setup="1" actor="0x22" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 24" slice="0x3" setup="1" actor="0x22" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 25" slice="0x4" setup="1" actor="0x22" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 26" slice="0x5" setup="1" actor="0x22" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 27" slice="0x0" setup="1" actor="0x23" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 28" slice="0x1" setup="1" actor="0x23" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 29" slice="0x2" setup="1" actor="0x23" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 30" slice="0x3" setup="1" actor="0x23" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 31" slice="0x4" setup="1" actor="0x23" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 32" slice="0x5" setup="1" actor="0x23" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 33" slice="0x0" setup="1" actor="0x24" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 34" slice="0x0" setup="1" actor="0x25" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 35" slice="0x0" setup="1" actor="0x31" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 36" slice="0x0" setup="1" actor="0x3d" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree 37" slice="0x0" setup="1" actor="0x3e" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree 38" slice="0x0" setup="1" actor="0x3f" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree 39" slice="0x0" setup="1" actor="0x40" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree 40" slice="0x0" setup="1" actor="0x41" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 1" slice="0x0" setup="1" actor="0x1c" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 2" slice="0x1" setup="1" actor="0x1c" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 3" slice="0x2" setup="1" actor="0x1c" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 4" slice="0x3" setup="1" actor="0x1c" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 5" slice="0x4" setup="1" actor="0x1c" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Lake 6" slice="0x5" setup="1" actor="0x1c" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Field Tree Child Near Valley" slice="0x0" setup="1" actor="0x3c" item="RUPEE_GREEN"/>
+    <xflag type="tree" location="Hyrule Field Tree Adult" slice="0x0" setup="2" actor="0x42" item="RUPEE_GREEN"/>
+    <xflag type="bush" location="Hyrule Field Bush 01" slice="0x0" setup="1" actor="0x26" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 02" slice="0x1" setup="1" actor="0x26" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 03" slice="0x2" setup="1" actor="0x26" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 04" slice="0x3" setup="1" actor="0x26" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 05" slice="0x4" setup="1" actor="0x26" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 06" slice="0x5" setup="1" actor="0x26" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 07" slice="0x0" setup="1" actor="0x27" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 08" slice="0x1" setup="1" actor="0x27" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 09" slice="0x2" setup="1" actor="0x27" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 10" slice="0x3" setup="1" actor="0x27" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 11" slice="0x4" setup="1" actor="0x27" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 12" slice="0x5" setup="1" actor="0x27" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 13" slice="0x0" setup="1" actor="0x28" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 14" slice="0x1" setup="1" actor="0x28" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 15" slice="0x2" setup="1" actor="0x28" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 16" slice="0x3" setup="1" actor="0x28" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 17" slice="0x4" setup="1" actor="0x28" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 18" slice="0x5" setup="1" actor="0x28" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 19" slice="0x0" setup="1" actor="0x2b" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 20" slice="0x2" setup="1" actor="0x2b" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 21" slice="0x3" setup="1" actor="0x2b" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 22" slice="0x4" setup="1" actor="0x2b" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 23" slice="0x5" setup="1" actor="0x2b" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 24" slice="0x0" setup="1" actor="0x2d" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 25" slice="0x1" setup="1" actor="0x2d" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 26" slice="0x2" setup="1" actor="0x2d" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 27" slice="0x3" setup="1" actor="0x2d" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 28" slice="0x4" setup="1" actor="0x2d" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 29" slice="0x5" setup="1" actor="0x2d" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 30" slice="0x0" setup="1" actor="0x2e" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 31" slice="0x1" setup="1" actor="0x2e" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 32" slice="0x2" setup="1" actor="0x2e" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 33" slice="0x3" setup="1" actor="0x2e" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 34" slice="0x4" setup="1" actor="0x2e" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush 35" slice="0x5" setup="1" actor="0x2e" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 01" slice="0x0" setup="1" actor="0x29" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 02" slice="0x2" setup="1" actor="0x29" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 03" slice="0x3" setup="1" actor="0x29" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 04" slice="0x4" setup="1" actor="0x29" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 05" slice="0x5" setup="1" actor="0x29" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 06" slice="0x0" setup="1" actor="0x2a" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 07" slice="0x1" setup="1" actor="0x2a" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 08" slice="0x2" setup="1" actor="0x2a" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 09" slice="0x3" setup="1" actor="0x2a" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 10" slice="0x4" setup="1" actor="0x2a" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 11" slice="0x5" setup="1" actor="0x2a" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 12" slice="0x0" setup="1" actor="0x2c" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 13" slice="0x1" setup="1" actor="0x2c" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 14" slice="0x2" setup="1" actor="0x2c" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 15" slice="0x3" setup="1" actor="0x2c" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 16" slice="0x4" setup="1" actor="0x2c" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 17" slice="0x5" setup="1" actor="0x2c" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 18" slice="0x0" setup="1" actor="0x2f" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 19" slice="0x1" setup="1" actor="0x2f" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 20" slice="0x2" setup="1" actor="0x2f" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 21" slice="0x3" setup="1" actor="0x2f" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 22" slice="0x4" setup="1" actor="0x2f" item="NOTHING"/>
+    <xflag type="bush" location="Hyrule Field Bush Child 23" slice="0x5" setup="1" actor="0x2f" item="NOTHING"/>
     <actor>
       <match setup="0" actor="0x37"/>
       <match setup="1" actor="0x35"/>
@@ -171,18 +171,18 @@
       <xflag type="rock" location="Hyrule Field Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Hyrule Field Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="fairy_spot" location="Hyrule Field River Big Fairy" slice="0x0" setup="0x0" actor="0x48" item="FAIRY_BIG"/>
-    <xflag type="wonder" location="Hyrule Field Wonder Item 1" slice="0x0" setup="0x0" actor="0x34" item="RUPEE_RED"/>
-    <xflag type="wonder" location="Hyrule Field Wonder Item 2" slice="0x0" setup="0x0" actor="0x35" item="RUPEE_RED"/>
-    <xflag type="wonder" location="Hyrule Field Wonder Item 3" slice="0x0" setup="0x0" actor="0x36" item="RUPEE_RED"/>
-    <xflag type="boulder" location="Hyrule Field Boulder Near Lake" slice="0x0" setup="0x0" actor="0x44" item="NOTHING"/>
-    <xflag type="boulder" location="Hyrule Field Boulder Near Market" slice="0x0" setup="0x0" actor="0x45" item="NOTHING"/>
-    <xflag type="boulder" location="Hyrule Field Boulder Island" slice="0x0" setup="0x0" actor="0x46" item="NOTHING"/>
-    <xflag type="boulder-red" location="Hyrule Field Red Boulder 1" slice="0x0" setup="0x2" actor="0x8" item="NOTHING"/>
-    <xflag type="boulder-red" location="Hyrule Field Red Boulder 2" slice="0x0" setup="0x2" actor="0x9" item="NOTHING"/>
-    <xflag type="boulder-red" location="Hyrule Field Red Boulder 3" slice="0x0" setup="0x2" actor="0xa" item="NOTHING"/>
-    <xflag type="boulder-red" location="Hyrule Field Red Boulder 4" slice="0x0" setup="0x2" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Hyrule Field Silver Boulder" slice="0x0" setup="0x0" actor="0x1e" item="NOTHING"/>
+    <xflag type="fairy_spot" location="Hyrule Field River Big Fairy" slice="0x0" setup="0" actor="0x48" item="FAIRY_BIG"/>
+    <xflag type="wonder" location="Hyrule Field Wonder Item 1" slice="0x0" setup="0" actor="0x34" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Hyrule Field Wonder Item 2" slice="0x0" setup="0" actor="0x35" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Hyrule Field Wonder Item 3" slice="0x0" setup="0" actor="0x36" item="RUPEE_RED"/>
+    <xflag type="boulder" location="Hyrule Field Boulder Near Lake" slice="0x0" setup="0" actor="0x44" item="NOTHING"/>
+    <xflag type="boulder" location="Hyrule Field Boulder Near Market" slice="0x0" setup="0" actor="0x45" item="NOTHING"/>
+    <xflag type="boulder" location="Hyrule Field Boulder Island" slice="0x0" setup="0" actor="0x46" item="NOTHING"/>
+    <xflag type="boulder-red" location="Hyrule Field Red Boulder 1" slice="0x0" setup="2" actor="0x8" item="NOTHING"/>
+    <xflag type="boulder-red" location="Hyrule Field Red Boulder 2" slice="0x0" setup="2" actor="0x9" item="NOTHING"/>
+    <xflag type="boulder-red" location="Hyrule Field Red Boulder 3" slice="0x0" setup="2" actor="0xa" item="NOTHING"/>
+    <xflag type="boulder-red" location="Hyrule Field Red Boulder 4" slice="0x0" setup="2" actor="0xb" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Hyrule Field Silver Boulder" slice="0x0" setup="0" actor="0x1e" item="NOTHING"/>
   </scene>
   <scene id="GROTTOS" room="0x1">
     <scrub location="Hyrule Field Grotto Scrub HP" flag="0x07" item="HEART_PIECE"/>
@@ -252,10 +252,10 @@
   <scene id="GROTTOS">
     <cow location="Hyrule Field Cow" flag="0x01" item="MILK"/>
     <gs location="Hyrule Field Grotto Near Gerudo GS" flag="0x50" item="GS_TOKEN"/>
-    <xflag type="grass" location="Hyrule Field Grotto Near Gerudo Grass 1" slice="0x0" setup="0x0" room="0x4" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Hyrule Field Grotto Near Gerudo Grass 2" slice="0x0" setup="0x0" room="0x4" actor="0x3" item="RANDOM"/>
-    <xflag type="pot" location="Hyrule Field Cow Grotto Pot 1" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="NUTS_5"/>
-    <xflag type="pot" location="Hyrule Field Cow Grotto Pot 2" slice="0x0" setup="0x0" room="0x4" actor="0x7" item="MAGIC_JAR_SMALL"/>
+    <xflag type="grass" location="Hyrule Field Grotto Near Gerudo Grass 1" slice="0x0" setup="0" room="0x4" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Hyrule Field Grotto Near Gerudo Grass 2" slice="0x0" setup="0" room="0x4" actor="0x3" item="RANDOM"/>
+    <xflag type="pot" location="Hyrule Field Cow Grotto Pot 1" slice="0x0" setup="0" room="0x4" actor="0x5" item="NUTS_5"/>
+    <xflag type="pot" location="Hyrule Field Cow Grotto Pot 2" slice="0x0" setup="0" room="0x4" actor="0x7" item="MAGIC_JAR_SMALL"/>
     <actor room="0x4" actor="0xa">
       <xflag type="gossip" location="Hyrule Field Cow Grotto Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Hyrule Field Cow Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>

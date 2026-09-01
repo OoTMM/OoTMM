@@ -34,18 +34,18 @@
     <sr location="MQ Ganon Castle SR Fire Back-Left" flag="0xdd" item="RUPEE_SILVER_GANON_FIRE"/>
     <sr location="MQ Ganon Castle SR Fire High Above Lava" flag="0xde" item="RUPEE_SILVER_GANON_FIRE"/>
     <sr location="MQ Ganon Castle SR Fire Front-Left" flag="0xdf" item="RUPEE_SILVER_GANON_FIRE"/>
-    <xflag type="pot" location="MQ Ganon Pot Water End 1" slice="0x0" setup="0x0" room="0x4" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Ganon Pot Water End 2" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Ganon Pot Forest End 1" slice="0x0" setup="0x0" room="0x7" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Ganon Pot Forest End 2" slice="0x0" setup="0x0" room="0x7" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Ganon Pot Light End 1" slice="0x0" setup="0x0" room="0xb" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Ganon Pot Light End 2" slice="0x0" setup="0x0" room="0xb" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Ganon Pot Shadow End 1" slice="0x0" setup="0x0" room="0xd" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Ganon Pot Shadow End 2" slice="0x0" setup="0x0" room="0xd" actor="0x5" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Ganon Pot Fire End 1" slice="0x0" setup="0x0" room="0xf" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Ganon Pot Fire End 2" slice="0x0" setup="0x0" room="0xf" actor="0x5" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="MQ Ganon Pot Spirit End 1" slice="0x0" setup="0x0" room="0x13" actor="0x4" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Ganon Pot Spirit End 2" slice="0x0" setup="0x0" room="0x13" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Ganon Pot Water End 1" slice="0x0" setup="0" room="0x4" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Ganon Pot Water End 2" slice="0x0" setup="0" room="0x4" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Ganon Pot Forest End 1" slice="0x0" setup="0" room="0x7" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Ganon Pot Forest End 2" slice="0x0" setup="0" room="0x7" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Ganon Pot Light End 1" slice="0x0" setup="0" room="0xb" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Ganon Pot Light End 2" slice="0x0" setup="0" room="0xb" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Ganon Pot Shadow End 1" slice="0x0" setup="0" room="0xd" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Ganon Pot Shadow End 2" slice="0x0" setup="0" room="0xd" actor="0x5" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Ganon Pot Fire End 1" slice="0x0" setup="0" room="0xf" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Ganon Pot Fire End 2" slice="0x0" setup="0" room="0xf" actor="0x5" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="MQ Ganon Pot Spirit End 1" slice="0x0" setup="0" room="0x13" actor="0x4" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Ganon Pot Spirit End 2" slice="0x0" setup="0" room="0x13" actor="0x5" item="MAGIC_JAR_SMALL"/>
     <actor room="0x10" actor="0x5">
       <xflag type="fairy" location="MQ Ganon Castle Fairy Fountain Fairy 1" slice="0" item="FAIRY"/>
       <xflag type="fairy" location="MQ Ganon Castle Fairy Fountain Fairy 2" slice="1" item="FAIRY"/>
@@ -56,30 +56,30 @@
       <xflag type="fairy" location="MQ Ganon Castle Fairy Fountain Fairy 7" slice="6" item="FAIRY"/>
       <xflag type="fairy" location="MQ Ganon Castle Fairy Fountain Fairy 8" slice="7" item="FAIRY"/>
     </actor>
-    <xflag type="heart" location="MQ Ganon Castle Heart Water" slice="0x0" setup="0x0" room="0x2" actor="0x1d" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Ganon Castle Heart Light 1" slice="0x0" setup="0x0" room="0x8" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Ganon Castle Heart Light 2" slice="0x0" setup="0x0" room="0x8" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="MQ Ganon Castle Wonder Item" slice="0x0" setup="0x0" room="0xc" actor="0xc" item="NUTS_5"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 1" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 2" slice="0x0" setup="0x0" room="0x2" actor="0x5" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 3" slice="0x0" setup="0x0" room="0x2" actor="0x6" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 4" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 5" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 6" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 7" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="NOTHING"/>
-    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 8" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 1" slice="0x0" setup="0x0" room="0x2" actor="0x13" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 2" slice="0x0" setup="0x0" room="0x2" actor="0x14" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 3" slice="0x0" setup="0x0" room="0x2" actor="0x15" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 4" slice="0x0" setup="0x0" room="0x2" actor="0x17" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 5" slice="0x0" setup="0x0" room="0x2" actor="0x18" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 6" slice="0x0" setup="0x0" room="0x2" actor="0x19" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 7" slice="0x0" setup="0x0" room="0x2" actor="0x1a" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 1" slice="0x0" setup="0x0" room="0x3" actor="0x6" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 2" slice="0x0" setup="0x0" room="0x3" actor="0xd" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 3" slice="0x0" setup="0x0" room="0x3" actor="0xe" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 4" slice="0x0" setup="0x0" room="0x3" actor="0xf" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 5" slice="0x0" setup="0x0" room="0x3" actor="0x10" item="NOTHING"/>
-    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 6" slice="0x0" setup="0x0" room="0x3" actor="0x11" item="NOTHING"/>
+    <xflag type="heart" location="MQ Ganon Castle Heart Water" slice="0x0" setup="0" room="0x2" actor="0x1d" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Ganon Castle Heart Light 1" slice="0x0" setup="0" room="0x8" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Ganon Castle Heart Light 2" slice="0x0" setup="0" room="0x8" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Ganon Castle Wonder Item" slice="0x0" setup="0" room="0xc" actor="0xc" item="NUTS_5"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 1" slice="0x0" setup="0" room="0x2" actor="0x4" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 2" slice="0x0" setup="0" room="0x2" actor="0x5" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 3" slice="0x0" setup="0" room="0x2" actor="0x6" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 4" slice="0x0" setup="0" room="0x2" actor="0x7" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 5" slice="0x0" setup="0" room="0x2" actor="0x8" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 6" slice="0x0" setup="0" room="0x2" actor="0x9" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 7" slice="0x0" setup="0" room="0x2" actor="0xa" item="NOTHING"/>
+    <xflag type="icicle" location="MQ Ganon Castle Icicle Water 8" slice="0x0" setup="0" room="0x2" actor="0xb" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 1" slice="0x0" setup="0" room="0x2" actor="0x13" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 2" slice="0x0" setup="0" room="0x2" actor="0x14" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 3" slice="0x0" setup="0" room="0x2" actor="0x15" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 4" slice="0x0" setup="0" room="0x2" actor="0x17" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 5" slice="0x0" setup="0" room="0x2" actor="0x18" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 6" slice="0x0" setup="0" room="0x2" actor="0x19" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Water 7" slice="0x0" setup="0" room="0x2" actor="0x1a" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 1" slice="0x0" setup="0" room="0x3" actor="0x6" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 2" slice="0x0" setup="0" room="0x3" actor="0xd" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 3" slice="0x0" setup="0" room="0x3" actor="0xe" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 4" slice="0x0" setup="0" room="0x3" actor="0xf" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 5" slice="0x0" setup="0" room="0x3" actor="0x10" item="NOTHING"/>
+    <xflag type="redice" location="MQ Ganon Castle Red Ice Block Silver Rupee Room 6" slice="0x0" setup="0" room="0x3" actor="0x11" item="NOTHING"/>
   </scene>
 </checks>

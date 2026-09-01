@@ -21,90 +21,90 @@
     <sr location="MQ Dodongo Cavern SR Upper Corner Low" flag="0x82" item="RUPEE_SILVER_DC"/>
     <sr location="MQ Dodongo Cavern SR Vines" flag="0x83" item="RUPEE_SILVER_DC"/>
     <sr location="MQ Dodongo Cavern SR Upper Corner High" flag="0x84" item="RUPEE_SILVER_DC"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 1" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 2" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 3" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 4" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 1" slice="0x0" setup="0x0" room="0x2" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 2" slice="0x0" setup="0x0" room="0x2" actor="0x11" item="RUPEE_RED"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 3" slice="0x0" setup="0x0" room="0x2" actor="0x12" item="RUPEE_RED"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 4" slice="0x0" setup="0x0" room="0x2" actor="0x13" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 1" slice="0x0" setup="0x0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 2" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 3" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 4" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 1" slice="0x0" setup="0x0" room="0x4" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 2" slice="0x0" setup="0x0" room="0x4" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 3" slice="0x0" setup="0x0" room="0x4" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 4" slice="0x0" setup="0x0" room="0x4" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss 1" slice="0x0" setup="0x0" room="0x7" actor="0x6" item="BOMB"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss 2" slice="0x0" setup="0x0" room="0x7" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 1" slice="0x0" setup="0x0" room="0x8" actor="0x13" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 2" slice="0x0" setup="0x0" room="0x8" actor="0x14" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 3" slice="0x0" setup="0x0" room="0x8" actor="0x15" item="BOMB"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 4" slice="0x0" setup="0x0" room="0x8" actor="0x16" item="BOMB"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 1" slice="0x0" setup="0x0" room="0x9" actor="0xb" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2" slice="0x0" setup="0x0" room="0x9" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Miniboss 1" slice="0x0" setup="0x0" room="0xa" actor="0x10" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Miniboss 2" slice="0x0" setup="0x0" room="0xa" actor="0x11" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot After Miniboss 1" slice="0x0" setup="0x0" room="0xc" actor="0x5" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot After Miniboss 2" slice="0x0" setup="0x0" room="0xc" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop Side Room 1" slice="0x0" setup="0x0" room="0xe" actor="0x2" item="BOMB"/>
-    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop Side Room 2" slice="0x0" setup="0x0" room="0xe" actor="0x3" item="BOMB"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 1" slice="0x0" setup="0x0" room="0x5" actor="0x0" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 2" slice="0x0" setup="0x0" room="0x5" actor="0x1" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 3" slice="0x0" setup="0x0" room="0x5" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 4" slice="0x0" setup="0x0" room="0x5" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Boss Loop" slice="0x0" setup="0x0" room="0x8" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Vanilla Bomb Bag Room" slice="0x0" setup="0x0" room="0x9" actor="0x0" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Room Before Miniboss" slice="0x0" setup="0x0" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Green Corridor Side Room 1" slice="0x0" setup="0x0" room="0xd" actor="0x0" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Green Corridor Side Room 2" slice="0x0" setup="0x0" room="0xd" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Dodongo Cavern Grass Boss Loop Side Room" slice="0x0" setup="0x0" room="0xe" actor="0x0" item="DEKU_SEEDS_5"/>
-    <xflag type="heart" location="MQ Dodongo Cavern Heart Lizalfos Room" slice="0x0" setup="0x0" room="0x3" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Dodongo Cavern Heart Vanilla Bomb Bag Room" slice="0x0" setup="0x0" room="0x9" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 1" slice="0x0" setup="0x0" room="0x2" actor="0x26" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 2" slice="0x0" setup="0x0" room="0x2" actor="0x27" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Lower Large Crate 1" slice="0x0" setup="0x0" room="0x2" actor="0x28" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Lower Large Crate 2" slice="0x0" setup="0x0" room="0x2" actor="0x29" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 3" slice="0x0" setup="0x0" room="0x2" actor="0x2a" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 4" slice="0x0" setup="0x0" room="0x2" actor="0x2b" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 1" slice="0x0" setup="0x0" room="0x4" actor="0x16" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 2" slice="0x0" setup="0x0" room="0x4" actor="0x17" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 3" slice="0x0" setup="0x0" room="0x4" actor="0x18" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 4" slice="0x0" setup="0x0" room="0x4" actor="0x19" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 5" slice="0x0" setup="0x0" room="0x4" actor="0x1a" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 6" slice="0x0" setup="0x0" room="0x4" actor="0x1b" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 7" slice="0x0" setup="0x0" room="0x4" actor="0x1c" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 8" slice="0x0" setup="0x0" room="0x4" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 1" slice="0x0" setup="0x0" room="0x6" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 2" slice="0x0" setup="0x0" room="0x6" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 3" slice="0x0" setup="0x0" room="0x6" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 4" slice="0x0" setup="0x0" room="0x6" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 5" slice="0x0" setup="0x0" room="0x6" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 6" slice="0x0" setup="0x0" room="0x6" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1" slice="0x0" setup="0x0" room="0xc" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2" slice="0x0" setup="0x0" room="0xc" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Back 1" slice="0x0" setup="0x0" room="0x0" actor="0x16" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Back 2" slice="0x0" setup="0x0" room="0x0" actor="0x17" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Upper 1" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Upper 2" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Upper 3" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Right Corridor Ground" slice="0x0" setup="0x0" room="0x1" actor="0x18" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Right Corridor Wall" slice="0x0" setup="0x0" room="0x1" actor="0x19" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 01" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 02" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 03" slice="0x0" setup="0x0" room="0x3" actor="0xd" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 04" slice="0x0" setup="0x0" room="0x3" actor="0xe" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 05" slice="0x0" setup="0x0" room="0x3" actor="0xf" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 06" slice="0x0" setup="0x0" room="0x3" actor="0x10" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 07" slice="0x0" setup="0x0" room="0x3" actor="0x11" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 08" slice="0x0" setup="0x0" room="0x3" actor="0x12" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 09" slice="0x0" setup="0x0" room="0x3" actor="0x13" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 10" slice="0x0" setup="0x0" room="0x3" actor="0x14" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 11" slice="0x0" setup="0x0" room="0x3" actor="0x15" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 12" slice="0x0" setup="0x0" room="0x3" actor="0x16" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Deep" slice="0x0" setup="0x0" room="0xc" actor="0x9" item="NOTHING"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 1" slice="0x0" setup="0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 2" slice="0x0" setup="0" room="0x1" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 3" slice="0x0" setup="0" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot East Corridor 4" slice="0x0" setup="0" room="0x1" actor="0xa" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 1" slice="0x0" setup="0" room="0x2" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 2" slice="0x0" setup="0" room="0x2" actor="0x11" item="RUPEE_RED"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 3" slice="0x0" setup="0" room="0x2" actor="0x12" item="RUPEE_RED"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Stairs 4" slice="0x0" setup="0" room="0x2" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 1" slice="0x0" setup="0" room="0x3" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 2" slice="0x0" setup="0" room="0x3" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 3" slice="0x0" setup="0" room="0x3" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Miniboss 4" slice="0x0" setup="0" room="0x3" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 1" slice="0x0" setup="0" room="0x4" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 2" slice="0x0" setup="0" room="0x4" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 3" slice="0x0" setup="0" room="0x4" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Green Room 4" slice="0x0" setup="0" room="0x4" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss 1" slice="0x0" setup="0" room="0x7" actor="0x6" item="BOMB"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss 2" slice="0x0" setup="0" room="0x7" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 1" slice="0x0" setup="0" room="0x8" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 2" slice="0x0" setup="0" room="0x8" actor="0x14" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 3" slice="0x0" setup="0" room="0x8" actor="0x15" item="BOMB"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop 4" slice="0x0" setup="0" room="0x8" actor="0x16" item="BOMB"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 1" slice="0x0" setup="0" room="0x9" actor="0xb" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2" slice="0x0" setup="0" room="0x9" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Miniboss 1" slice="0x0" setup="0" room="0xa" actor="0x10" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Miniboss 2" slice="0x0" setup="0" room="0xa" actor="0x11" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot After Miniboss 1" slice="0x0" setup="0" room="0xc" actor="0x5" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot After Miniboss 2" slice="0x0" setup="0" room="0xc" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop Side Room 1" slice="0x0" setup="0" room="0xe" actor="0x2" item="BOMB"/>
+    <xflag type="pot" location="MQ Dodongo Cavern Pot Before Boss Loop Side Room 2" slice="0x0" setup="0" room="0xe" actor="0x3" item="BOMB"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 1" slice="0x0" setup="0" room="0x5" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 2" slice="0x0" setup="0" room="0x5" actor="0x1" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 3" slice="0x0" setup="0" room="0x5" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Compass Room 4" slice="0x0" setup="0" room="0x5" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Boss Loop" slice="0x0" setup="0" room="0x8" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Vanilla Bomb Bag Room" slice="0x0" setup="0" room="0x9" actor="0x0" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Room Before Miniboss" slice="0x0" setup="0" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Green Corridor Side Room 1" slice="0x0" setup="0" room="0xd" actor="0x0" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Green Corridor Side Room 2" slice="0x0" setup="0" room="0xd" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Dodongo Cavern Grass Boss Loop Side Room" slice="0x0" setup="0" room="0xe" actor="0x0" item="DEKU_SEEDS_5"/>
+    <xflag type="heart" location="MQ Dodongo Cavern Heart Lizalfos Room" slice="0x0" setup="0" room="0x3" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Dodongo Cavern Heart Vanilla Bomb Bag Room" slice="0x0" setup="0" room="0x9" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 1" slice="0x0" setup="0" room="0x2" actor="0x26" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 2" slice="0x0" setup="0" room="0x2" actor="0x27" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Lower Large Crate 1" slice="0x0" setup="0" room="0x2" actor="0x28" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Lower Large Crate 2" slice="0x0" setup="0" room="0x2" actor="0x29" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 3" slice="0x0" setup="0" room="0x2" actor="0x2a" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Staircase Room Upper Large Crate 4" slice="0x0" setup="0" room="0x2" actor="0x2b" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 1" slice="0x0" setup="0" room="0x4" actor="0x16" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 2" slice="0x0" setup="0" room="0x4" actor="0x17" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 3" slice="0x0" setup="0" room="0x4" actor="0x18" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 4" slice="0x0" setup="0" room="0x4" actor="0x19" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 5" slice="0x0" setup="0" room="0x4" actor="0x1a" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 6" slice="0x0" setup="0" room="0x4" actor="0x1b" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 7" slice="0x0" setup="0" room="0x4" actor="0x1c" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Poe Room Large Crate 8" slice="0x0" setup="0" room="0x4" actor="0x1d" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 1" slice="0x0" setup="0" room="0x6" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 2" slice="0x0" setup="0" room="0x6" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 3" slice="0x0" setup="0" room="0x6" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 4" slice="0x0" setup="0" room="0x6" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 5" slice="0x0" setup="0" room="0x6" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Larve Room Large Crate 6" slice="0x0" setup="0" room="0x6" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1" slice="0x0" setup="0" room="0xc" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2" slice="0x0" setup="0" room="0xc" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Back 1" slice="0x0" setup="0" room="0x0" actor="0x16" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Back 2" slice="0x0" setup="0" room="0x0" actor="0x17" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Upper 1" slice="0x0" setup="0" room="0x0" actor="0x18" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Upper 2" slice="0x0" setup="0" room="0x0" actor="0x19" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Entrance Upper 3" slice="0x0" setup="0" room="0x0" actor="0x1a" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Right Corridor Ground" slice="0x0" setup="0" room="0x1" actor="0x18" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Right Corridor Wall" slice="0x0" setup="0" room="0x1" actor="0x19" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 01" slice="0x0" setup="0" room="0x3" actor="0xb" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 02" slice="0x0" setup="0" room="0x3" actor="0xc" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 03" slice="0x0" setup="0" room="0x3" actor="0xd" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 04" slice="0x0" setup="0" room="0x3" actor="0xe" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 05" slice="0x0" setup="0" room="0x3" actor="0xf" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 06" slice="0x0" setup="0" room="0x3" actor="0x10" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 07" slice="0x0" setup="0" room="0x3" actor="0x11" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 08" slice="0x0" setup="0" room="0x3" actor="0x12" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 09" slice="0x0" setup="0" room="0x3" actor="0x13" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 10" slice="0x0" setup="0" room="0x3" actor="0x14" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 11" slice="0x0" setup="0" room="0x3" actor="0x15" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Lizalfos 12" slice="0x0" setup="0" room="0x3" actor="0x16" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Dodongo Cavern Boulder Deep" slice="0x0" setup="0" room="0xc" actor="0x9" item="NOTHING"/>
     <actor room="0x0" actor="0x0">
       <xflag type="gossip" location="MQ Dodongo Cavern Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="MQ Dodongo Cavern Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>

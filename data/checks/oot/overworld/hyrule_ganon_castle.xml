@@ -64,7 +64,7 @@
   <scene id="CASTLE_COURTYARD">
     <npc location="Zelda's Letter" npc="ZELDA_LETTER" item="ZELDA_LETTER"/>
     <npc location="Zelda's Song" npc="ZELDA_SONG" item="SONG_ZELDA"/>
-    <xflag type="wonder" location="Castle Courtyard Wonder Item" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Castle Courtyard Wonder Item" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_RED"/>
   </scene>
   <scene id="GREAT_FAIRY_FOUNTAIN_SPELLS">
     <npc location="Great Fairy Din's Fire" npc="FAIRY_SPELL_FIRE" item="SPELL_FIRE"/>
@@ -92,13 +92,13 @@
   </scene>
   <scene id="GANON_CASTLE_EXTERIOR">
     <gs location="Ganon Castle Exterior GS" flag="0x70" item="GS_TOKEN"/>
-    <xflag type="boulder-red" location="Ganon Castle Exterior Red Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="NOTHING"/>
-    <xflag type="boulder-red" location="Ganon Castle Exterior Red Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="NOTHING"/>
-    <xflag type="boulder-red" location="Ganon Castle Exterior Red Boulder 3" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 3" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 4" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="NOTHING"/>
+    <xflag type="boulder-red" location="Ganon Castle Exterior Red Boulder 1" slice="0x0" setup="0" room="0x0" actor="0x3" item="NOTHING"/>
+    <xflag type="boulder-red" location="Ganon Castle Exterior Red Boulder 2" slice="0x0" setup="0" room="0x0" actor="0x4" item="NOTHING"/>
+    <xflag type="boulder-red" location="Ganon Castle Exterior Red Boulder 3" slice="0x0" setup="0" room="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 1" slice="0x0" setup="0" room="0x0" actor="0x6" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 2" slice="0x0" setup="0" room="0x0" actor="0x7" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 3" slice="0x0" setup="0" room="0x0" actor="0x8" item="NOTHING"/>
+    <xflag type="boulder-silver" location="Ganon Castle Exterior Silver Boulder 4" slice="0x0" setup="0" room="0x0" actor="0x9" item="NOTHING"/>
   </scene>
   <scene id="GREAT_FAIRY_FOUNTAIN_UPGRADES">
     <npc location="Great Fairy Defense Upgrade" npc="FAIRY_DEFENSE_UPGRADE" item="DEFENSE_UPGRADE" hint="GANON_FAIRY"/>

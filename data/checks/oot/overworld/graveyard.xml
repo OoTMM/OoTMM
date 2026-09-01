@@ -18,22 +18,22 @@
     <collectible location="Graveyard Crate HP" flag="0x04" item="HEART_PIECE"/>
     <gs location="Graveyard GS Soil" flag="0x80" item="GS_TOKEN"/>
     <gs location="Graveyard GS Wall" flag="0x87" item="GS_TOKEN"/>
-    <xflag type="crate" location="Graveyard Crate" slice="0x0" setup="0x0" room="0x1" actor="0x15" item="NOTHING"/>
-    <xflag type="grass" location="Graveyard Grass 01" slice="0x0" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 02" slice="0x1" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 03" slice="0x2" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 04" slice="0x3" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 05" slice="0x4" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 06" slice="0x5" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 07" slice="0x6" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 08" slice="0x7" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 09" slice="0x8" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 10" slice="0x9" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 11" slice="0xa" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Graveyard Grass 12" slice="0xb" setup="0x0" room="0x1" actor="0x10" item="RANDOM"/>
-    <xflag type="soil" location="Graveyard Soil 1" slice="0x0" setup="0x0" room="0x1" actor="0x12" item="FAIRY"/>
-    <xflag type="soil" location="Graveyard Soil 2" slice="0x1" setup="0x0" room="0x1" actor="0x12" item="FAIRY"/>
-    <xflag type="soil" location="Graveyard Soil 3" slice="0x2" setup="0x0" room="0x1" actor="0x12" item="FAIRY"/>
+    <xflag type="crate" location="Graveyard Crate" slice="0x0" setup="0" room="0x1" actor="0x15" item="NOTHING"/>
+    <xflag type="grass" location="Graveyard Grass 01" slice="0x0" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 02" slice="0x1" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 03" slice="0x2" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 04" slice="0x3" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 05" slice="0x4" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 06" slice="0x5" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 07" slice="0x6" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 08" slice="0x7" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 09" slice="0x8" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 10" slice="0x9" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 11" slice="0xa" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Graveyard Grass 12" slice="0xb" setup="0" room="0x1" actor="0x10" item="RANDOM"/>
+    <xflag type="soil" location="Graveyard Soil 1" slice="0x0" setup="0" room="0x1" actor="0x12" item="FAIRY"/>
+    <xflag type="soil" location="Graveyard Soil 2" slice="0x1" setup="0" room="0x1" actor="0x12" item="FAIRY"/>
+    <xflag type="soil" location="Graveyard Soil 3" slice="0x2" setup="0" room="0x1" actor="0x12" item="FAIRY"/>
     <actor room="0x01">
       <match setup="0" actor="0x2"/>
       <match setup="1" actor="0x32"/>
@@ -49,7 +49,7 @@
   <scene id="TOMB_ROYAL">
     <npc location="Graveyard Royal Tomb Song" npc="ROYAL_TOMB_SONG" item="SONG_SUN"/>
     <chest location="Graveyard Royal Tomb Chest" flag="0x00" item="BOMBS_5"/>
-    <xflag type="fairy_spot" location="Graveyard Royal Tomb Big Fairy" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="Graveyard Royal Tomb Big Fairy" slice="0x0" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
   </scene>
   <scene id="TOMB_FAIRY">
     <chest location="Graveyard Fairy Tomb" flag="0x00" item="SHIELD_HYLIAN"/>
@@ -67,35 +67,35 @@
   <scene id="TOMB_DAMPE_WINDMILL">
     <chest location="Graveyard Dampe Tomb Reward 1" flag="0x00" item="HOOKSHOT"/>
     <collectible location="Graveyard Dampe Tomb Reward 2" flag="0x07" item="HEART_PIECE"/>
-    <xflag type="pot" location="Graveyard Dampe Tomb Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Graveyard Dampe Tomb Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NUTS_5"/>
-    <xflag type="pot" location="Graveyard Dampe Tomb Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="BOMB"/>
-    <xflag type="pot" location="Graveyard Dampe Tomb Pot 4" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="ARROWS_5"/>
-    <xflag type="pot" location="Graveyard Dampe Tomb Pot 5" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Graveyard Dampe Tomb Pot 6" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 1" slice="0x0" setup="0x0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 2" slice="0x0" setup="0x0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 3" slice="0x0" setup="0x0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 4" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 5" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 6" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 7" slice="0x0" setup="0x0" room="0x3" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 8" slice="0x0" setup="0x0" room="0x3" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 01" slice="0x0" setup="0x0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 02" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 03" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 04" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 05" slice="0x0" setup="0x0" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 06" slice="0x0" setup="0x0" room="0x2" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 07" slice="0x0" setup="0x0" room="0x2" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 08" slice="0x0" setup="0x0" room="0x2" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 09" slice="0x0" setup="0x0" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 10" slice="0x0" setup="0x0" room="0x2" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 11" slice="0x0" setup="0x0" room="0x3" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 12" slice="0x0" setup="0x0" room="0x3" actor="0x9" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 13" slice="0x0" setup="0x0" room="0x3" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 14" slice="0x0" setup="0x0" room="0x3" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 15" slice="0x0" setup="0x0" room="0x3" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Graveyard Dampe Tomb Pot 1" room="0x0" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Graveyard Dampe Tomb Pot 2" room="0x0" actor="0x1" item="NUTS_5"/>
+    <xflag type="pot" location="Graveyard Dampe Tomb Pot 3" room="0x0" actor="0x2" item="BOMB"/>
+    <xflag type="pot" location="Graveyard Dampe Tomb Pot 4" room="0x0" actor="0x3" item="ARROWS_5"/>
+    <xflag type="pot" location="Graveyard Dampe Tomb Pot 5" room="0x0" actor="0x4" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Graveyard Dampe Tomb Pot 6" room="0x0" actor="0x5" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 1" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 2" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 3" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 4" room="0x2" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 5" room="0x2" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 6" room="0x2" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 7" room="0x3" actor="0x0" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Graveyard Dampe Tomb Rupee 8" room="0x3" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 01" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 02" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 03" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 04" room="0x1" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 05" room="0x1" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 06" room="0x2" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 07" room="0x2" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 08" room="0x2" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 09" room="0x2" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 10" room="0x2" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 11" room="0x3" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 12" room="0x3" actor="0x9" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 13" room="0x3" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 14" room="0x3" actor="0xb" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Graveyard Dampe Tomb Wonder Item 15" room="0x3" actor="0xc" item="RUPEE_GREEN"/>
   </scene>
 </checks>
 

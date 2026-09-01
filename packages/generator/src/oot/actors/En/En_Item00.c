@@ -198,16 +198,6 @@ PATCH_CALL(0x80013dec, EnItem00_FixDrop);
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 {
-    switch (xflag->sceneId)
-    {
-    case SCE_OOT_LOST_WOODS:
-        if (xflag->roomId == 7)
-        {
-            xflag->setupId = 0;
-            xflag->id = 4;
-        }
-        break;
-    }
 }
 
 void EnItem00_DrawShieldDeku(PlayState* play)
