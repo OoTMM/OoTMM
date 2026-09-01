@@ -1,5 +1,21 @@
 import type { Check, RoomActor } from '../types';
 
+export function ObjMure(checks: Check[], ra: RoomActor) {
+  const subtype = ra.actor.params & 0x1f;
+  let count = (ra.actor.params >> 12);
+  if (count === 0) {
+    const lut = [12, 9, 8];
+    const id = (ra.actor.params >> 8) & 3;
+    count = id < lut.length ? lut[id] : 0;
+  }
+  for (let i = 0; i < count; ++i) {
+    if (subtype === 0x04) {
+      const item = (i === 0) ? 'FAIRY' : 'NOTHING';
+      checks.push({ roomActor: ra, item, name: 'Butterfly Pack', type: 'butterfly', sliceId: i, name2: `Butterfly ${i + 1}` });
+    }
+  }
+}
+
 export function ObjMure2(checks: Check[], ra: RoomActor) {
   const type = (ra.actor.params) & 3;
   let checkType: string;

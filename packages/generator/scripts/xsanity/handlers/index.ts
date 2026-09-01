@@ -5,6 +5,7 @@ import * as OotHandlers from './oot';
 import * as MmHandlers from './mm';
 
 const ACTORS_HANDLERS_OOT = {
+  [ACTORS_OOT.OBJ_MURE]: CommonHandlers.ObjMure,
   [ACTORS_OOT.OBJ_MURE2]: CommonHandlers.ObjMure2,
   [ACTORS_OOT.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_OOT.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
@@ -15,7 +16,6 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_KIBAKO]: OotHandlers.ObjKibako,
   [ACTORS_OOT.OBJ_KIBAKO2]: OotHandlers.ObjKibako2,
   [ACTORS_OOT.EN_BUTTE]: OotHandlers.EnButte,
-  [ACTORS_OOT.OBJ_MURE]: OotHandlers.ObjMure,
   [ACTORS_OOT.OBJ_HANA]: OotHandlers.ObjHana,
   [ACTORS_OOT.BG_ICICLE]: OotHandlers.BgIcicle,
   [ACTORS_OOT.BG_ICE_SHELTER]: OotHandlers.BgIceShelter,
@@ -29,6 +29,7 @@ const ACTORS_HANDLERS_OOT = {
 };
 
 const ACTORS_HANDLERS_MM = {
+  [ACTORS_MM.OBJ_MURE]: CommonHandlers.ObjMure,
   [ACTORS_MM.OBJ_MURE2]: CommonHandlers.ObjMure2,
   [ACTORS_MM.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_MM.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
@@ -42,7 +43,6 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_SNOWBALL]: MmHandlers.ObjSnowball,
   [ACTORS_MM.OBJ_SNOWBALL2]: MmHandlers.ObjSnowball2,
   [ACTORS_MM.EN_BUTTE]: MmHandlers.EnButte,
-  [ACTORS_MM.OBJ_MURE]: MmHandlers.ObjMure,
   [ACTORS_MM.OBJ_GRASS_UNIT]: MmHandlers.ObjGrassUnit,
   [ACTORS_MM.BG_ICICLE]: MmHandlers.BgIcicle,
   [ACTORS_MM.EN_ISHI]: MmHandlers.EnIshi,
