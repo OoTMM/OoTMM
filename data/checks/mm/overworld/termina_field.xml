@@ -457,21 +457,91 @@
     <xflag type="butterfly" location="Termina Field Cow Grotto Butterfly 2" slice="0x1" setup="0x0" room="0xa" actor="0x6" item="NOTHING"/>
     <xflag type="butterfly" location="Termina Field Cow Grotto Butterfly 3" slice="0x2" setup="0x0" room="0xa" actor="0x6" item="NOTHING"/>
   </scene>
-  <scene id="GROTTOS">
-    <xflag type="grass" location="Ocean Gossip Grotto Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Ocean Gossip Grotto Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Ocean Gossip Grotto Grass 3" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Ocean Gossip Grotto Grass 4" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Ocean Gossip Grotto Grass 5" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RANDOM"/>
-    <xflag type="hive" location="Ocean Gossip Grotto Hive" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>
-    <xflag type="butterfly" location="Ocean Gossip Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="FAIRY"/>
-    <xflag type="butterfly" location="Ocean Gossip Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x2" item="NOTHING"/>
+  <scene id="GROTTOS" room="0x0">
+    <xflag type="grass" location="Ocean Gossip Grotto Grass 1" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Ocean Gossip Grotto Grass 2" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Ocean Gossip Grotto Grass 3" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Ocean Gossip Grotto Grass 4" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Ocean Gossip Grotto Grass 5" actor="0x8" item="RANDOM"/>
+    <xflag type="hive" location="Ocean Gossip Grotto Hive" actor="0x0" item="NOTHING"/>
+    <actor actor="0x2">
+      <xflag type="butterfly" location="Ocean Gossip Grotto Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Ocean Gossip Grotto Butterfly 2" slice="1" item="NOTHING"/>
+    </actor>
+    <actor actor="0x9">
+      <xflag type="gossip" location="Ocean Gossip Grotto Gossip Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ocean Gossip Grotto Gossip Big Fairy 1" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0xa">
+      <xflag type="gossip" location="Ocean Gossip Grotto Gossip Fairy 2" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ocean Gossip Grotto Gossip Big Fairy 2" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0xb">
+      <xflag type="gossip" location="Ocean Gossip Grotto Gossip Fairy 3" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ocean Gossip Grotto Gossip Big Fairy 3" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0xc">
+      <xflag type="gossip" location="Ocean Gossip Grotto Gossip Fairy 4" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ocean Gossip Grotto Gossip Big Fairy 4" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
-  <scene id="GROTTOS">
-    <xflag type="grass" location="Canyon Gossip Grotto Grass 1" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Canyon Gossip Grotto Grass 2" slice="0x0" setup="0x0" room="0x2" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Canyon Gossip Grotto Grass 3" slice="0x0" setup="0x0" room="0x2" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Canyon Gossip Grotto Grass 4" slice="0x0" setup="0x0" room="0x2" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Canyon Gossip Grotto Grass 5" slice="0x0" setup="0x0" room="0x2" actor="0x4" item="RANDOM"/>
+  <scene id="GROTTOS" room="0x1">
+    <actor actor="0x3">
+      <xflag type="gossip" location="Swamp Gossip Grotto Gossip Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Swamp Gossip Grotto Gossip Big Fairy 1" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x4">
+      <xflag type="gossip" location="Swamp Gossip Grotto Gossip Fairy 2" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Swamp Gossip Grotto Gossip Big Fairy 2" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x5">
+      <xflag type="gossip" location="Swamp Gossip Grotto Gossip Fairy 3" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Swamp Gossip Grotto Gossip Big Fairy 3" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x6">
+      <xflag type="gossip" location="Swamp Gossip Grotto Gossip Fairy 4" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Swamp Gossip Grotto Gossip Big Fairy 4" slice="1" item="FAIRY_BIG"/>
+    </actor>
+  </scene>
+  <scene id="GROTTOS" room="0x2">
+    <xflag type="grass" location="Canyon Gossip Grotto Grass 1" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Canyon Gossip Grotto Grass 2" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Canyon Gossip Grotto Grass 3" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Canyon Gossip Grotto Grass 4" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Canyon Gossip Grotto Grass 5" actor="0x4" item="RANDOM"/>
+    <actor actor="0x5">
+      <xflag type="gossip" location="Canyon Gossip Grotto Gossip Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Canyon Gossip Grotto Gossip Big Fairy 1" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x6">
+      <xflag type="gossip" location="Canyon Gossip Grotto Gossip Fairy 2" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Canyon Gossip Grotto Gossip Big Fairy 2" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x7">
+      <xflag type="gossip" location="Canyon Gossip Grotto Gossip Fairy 3" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Canyon Gossip Grotto Gossip Big Fairy 3" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x8">
+      <xflag type="gossip" location="Canyon Gossip Grotto Gossip Fairy 4" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Canyon Gossip Grotto Gossip Big Fairy 4" slice="1" item="FAIRY_BIG"/>
+    </actor>
+  </scene>
+  <scene id="GROTTOS" room="0x3">
+    <actor actor="0x1">
+      <xflag type="gossip" location="Mountain Gossip Grotto Gossip Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Mountain Gossip Grotto Gossip Big Fairy 1" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x2">
+      <xflag type="gossip" location="Mountain Gossip Grotto Gossip Fairy 2" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Mountain Gossip Grotto Gossip Big Fairy 2" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x3">
+      <xflag type="gossip" location="Mountain Gossip Grotto Gossip Fairy 3" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Mountain Gossip Grotto Gossip Big Fairy 3" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x4">
+      <xflag type="gossip" location="Mountain Gossip Grotto Gossip Fairy 4" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Mountain Gossip Grotto Gossip Big Fairy 4" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
 </checks>
