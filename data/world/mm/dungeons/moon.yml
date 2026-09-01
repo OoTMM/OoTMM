@@ -52,6 +52,16 @@
     "Moon Trial Deku Exit": "has(MASK_DEKU)"
   locations:
     "Moon Trial Deku HP": "has(MASK_DEKU) || hookshot_anywhere"
+    "Moon Trial Deku Gossip Fairy Front-Left": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Front-Right": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Mid-Left": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Mid-Right": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Back": "gossip_fairy && (has(MASK_DEKU) || hookshot_anywhere)"
+    "Moon Trial Deku Gossip Big Fairy Front-Left": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Front-Right": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Mid-Left": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Mid-Right": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Back": "gossip_fairy_big && (has(MASK_DEKU) || hookshot_anywhere)"
   gossip:
     "Moon Trial Deku Gossip Front-Left": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Moon Trial Deku Gossip Front-Right": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
