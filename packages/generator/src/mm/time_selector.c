@@ -292,49 +292,30 @@ static void DtUpdateFastForward(PlayState* play) {
 }
 
 static void DtUpdatePostDoubleTime(PlayState* play) {
-    Player* link;
     u32 target, day;
     u16 time;
-    int reload;
 
     if (sDtPostReloadState == 1) {
-        if (play->transitionTrigger == TRANS_TRIGGER_OFF && !gSaveContext.respawnFlag)
+        if (play->transitionTrigger == TRANS_TRIGGER_OFF && play->transitionMode == 0)
             return;
+        target = DtGetLandingTicks(sDtTargetTicks);
+        DtTicksToDayTime(target, &day, &time);
+        while (gSave.day < day)
+            Sram_IncrementDay();
+        gSave.time = time;
+        gSave.isNight = DtIsNight(time);
+        gDoubleTimeTargetDayChanged = ((sDtStartTicks >> 16) + 1) != gSave.day;
+        gDoubleTimeTargetPending = 0;
         sDtPostReloadState = 2;
         return;
     }
-
     if (sDtPostReloadState != 2)
         return;
-    if (play->transitionTrigger != TRANS_TRIGGER_OFF || play->transitionMode != 0 ||
-        gSaveContext.respawnFlag)
+    if (play->transitionTrigger != TRANS_TRIGGER_OFF || play->transitionMode != 0 || gSaveContext.respawnFlag || MM_CHECK_EVENT_INF(EVENTINF_17))
         return;
-
-    target = sDtTargetTicks;
-    if (target == DT_MAX_TICKS)
-        target = DtMinutesToTicks(DtTicksToMinutes(target) - 1);
-
-    reload = !DtSameHalf(DtCurrentTicks(), target);
-    DtTicksToDayTime(target, &day, &time);
-
-    while (gSave.day < day)
-        Sram_IncrementDay();
-
-    gSave.time = time;
-    gSave.isNight = DtIsNight(time);
-    gDoubleTimeTargetDayChanged = ((sDtStartTicks >> 16) + 1) != gSave.day;
-    gDoubleTimeTargetPending = 0;
     sDtPostReloadState = 0;
-
-    if (!reload)
-        return;
-
-    link = GET_PLAYER(play);
-    Play_SetRespawnData(play, 1, gSave.entrance, play->roomCtx.curRoom.num, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
-    gSaveContext.respawnFlag = 2;
-    gSaveContext.nextCutscene = 0;
-    comboTransition(play, gSave.entrance);
 }
+
 static void DtStartNormalDoubleTime(PlayState* play) {
     if (DtSameHalf(sDtStartTicks, sDtTargetTicks)) {
         u32 oldDay = gSave.day, day;
