@@ -180,6 +180,9 @@
   exits:
     "Moon Trial Link Dinolfos Fight": "true"
     "Moon Trial Link Garo Fight": "true"
+  locations:
+    "Moon Trial Link Fairy Gossip 1": "gossip_fairy"
+    "Moon Trial Link Big Fairy Gossip 1": "gossip_fairy_big"
   gossip:
     "Moon Trial Link Gossip 1": "true"
 
@@ -196,6 +199,9 @@
   exits:
     "Moon Trial Link Garo Fight": "true"
     "Moon Trial Link Iron Knuckle Fight": "true"
+  locations:
+    "Moon Trial Link Fairy Gossip 2": "gossip_fairy"
+    "Moon Trial Link Big Fairy Gossip 2": "gossip_fairy_big"
   gossip:
     "Moon Trial Link Gossip 2": "true"
 
@@ -206,6 +212,10 @@
     "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5))) && ((has_bombchu && (has_arrows || can_use_slingshot)) || short_hook_anywhere)"
   locations:
     "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
+    "Moon Trial Link Fairy Gossip Left": "gossip_fairy && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
+    "Moon Trial Link Fairy Gossip Right": "gossip_fairy && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
+    "Moon Trial Link Big Fairy Gossip Left": "gossip_fairy_big && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
+    "Moon Trial Link Big Fairy Gossip Right": "gossip_fairy_big && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
   gossip:
     "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot))"
     "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot))"
@@ -217,6 +227,8 @@
     "Moon Trial Link Exit": "(has_bombchu || (short_hook_anywhere && has_mask_blast && masks(5))) && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
+    "Moon Trial Link Fairy Gossip Last": "gossip_fairy"
+    "Moon Trial Link Big Fairy Gossip Last": "gossip_fairy_big"
   gossip:
     "Moon Trial Link Gossip Last": "true"
 
