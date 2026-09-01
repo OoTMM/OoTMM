@@ -50,15 +50,6 @@ static s32 CutsceneManager_ShouldCutscenePlay(s16 csId, Actor *actor)
             }
             break;
         }
-        case ACTOR_EN_BIGOKUTA: // Big Octo
-        {
-            shouldCsPlay = false;
-            if (actor->params != 0xFF) // EN_BIGOKUTA_GET_SWITCH_FLAG(actor)
-            {
-                Flags_SetSwitch(gPlay, actor->params); // EN_BIGOKUTA_GET_SWITCH_FLAG(actor)
-            }
-            break;
-        }
         case ACTOR_BG_ASTR_BOMBWALL:    // Astral Observatory - Bombable Wall
         case ACTOR_BG_DBLUE_BALANCE:    // Great Bay Temple - Seesaw and Waterwheel w/ Platforms
         case ACTOR_BG_DBLUE_MOVEBG:     // Moveable block in Great Bay Temple

@@ -827,6 +827,13 @@ void Actor_PlaySfx_FlaggedCentered2(Actor* actor, u16 sfxId);
 
 #if defined(GAME_OOT)
 u32 Health_IsCritical(void);
-#else
+#endif
+#if defined(GAME_MM)
 u32 LifeMeter_IsCritical(void);
+
+f32 Math_Vec3f_StepTo(Vec3f* start, Vec3f* target, f32 speed);
+s32 Snap_ValidatePictograph(PlayState* play, Actor* actor, s32 flag, Vec3f* pos, Vec3s* rot, f32 distanceMin, f32 distanceMax, s16 angleRange);
+void EffectSsDtBubble_SpawnCustomColor(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 life, s16 randXZ);
+void Actor_SetColorFilter(Actor* actor, u16 colorFlag, u16 colorIntensityMax, u16 bufFlag, u16 duration);
+void Actor_DrawDamageEffects(PlayState* play, Actor* actor, Vec3f bodyPartsPos[], s16 bodyPartsCount, f32 effectScale, f32 frozenSteamScale, f32 effectAlpha, u8 type);
 #endif
