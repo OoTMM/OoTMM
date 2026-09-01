@@ -35,7 +35,7 @@ struct Actor_EnButte
     s16                     unk_25E;
     s16                     unk_260;
     f32                     posYTarget;
-    Xflag                   xflag;
+    XflagID                 xflag;
 };
 
 #endif // Z_EN_BUTTE_H

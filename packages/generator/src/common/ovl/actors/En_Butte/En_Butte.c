@@ -116,11 +116,11 @@ static int EnButte_IsShuffled(Actor_EnButte* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    comboXflagItemQuery(&q, &this->xflag, 0);
+    Xflag_ItemQuery(&q, this->xflag, GI_NONE);
     comboItemOverride(&o, &q);
     if (o.gi == GI_NONE)
         return FALSE;
-    if (Xflag_GetIndirect(&this->xflag))
+    if (Xflag_Get(this->xflag))
         return FALSE;
     return TRUE;
 }
@@ -183,7 +183,7 @@ static InitChainEntry sInitChain[] = {
 
 void EnButte_Init(Actor_EnButte* this, PlayState* play)
 {
-    Xflag_Init(&this->xflag, &this->actor, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
 
     if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
         this->actor.params = BUTTERFLY_0;
@@ -411,13 +411,13 @@ static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    if (Xflag_GetIndirect(&this->xflag))
+    if (Xflag_Get(this->xflag))
         return TRUE;
-    comboXflagItemQuery(&q, &this->xflag, 0);
+    Xflag_ItemQuery(&q, this->xflag, GI_NONE);
     comboItemOverride(&o, &q);
     if (o.gi == GI_NOTHING)
     {
-        Xflag_SetIndirect(&this->xflag);
+        Xflag_Set(this->xflag);
         return FALSE;
     }
     return TRUE;
@@ -428,10 +428,10 @@ static void EnButte_SpawnFairy(Actor_EnButte* this, PlayState* play)
     if (!EnButte_ShouldSpawnFairy(this, play))
         return;
 
-    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-    g.xflagOverride = TRUE;
+    g.xflagId = this->xflag;
+    g.xflagOverrideEx = TRUE;
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
 }
 
 void EnButte_TransformIntoFairy(Actor_EnButte* this, PlayState* play)
@@ -538,7 +538,7 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, PlayState* play)
     int csmcType;
     void* customTexture;
 
-    comboXflagItemQuery(&q, &this->xflag, 0);
+    Xflag_ItemQuery(&q, this->xflag, GI_NONE);
     comboItemOverride(&o, &q);
 
     /* Get CSMC type */
@@ -546,7 +546,7 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, PlayState* play)
     {
         csmcType = CSMC_MAJOR;
     }
-    else if (Xflag_GetIndirect(&this->xflag))
+    else if (Xflag_Get(this->xflag))
     {
         csmcType = CSMC_NORMAL;
     }
