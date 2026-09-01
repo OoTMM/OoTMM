@@ -13,6 +13,10 @@
     "Mountain Village Elder": "true"
     "Mountain Village Keaton": "true"
     "Mountain Village Butterflies": "is_spring && is_day && butterfly"
+    "Mountain Village Gossip Outside Fairy": "is_spring && gossip_fairy"
+    "Mountain Village Gossip Outside Big Fairy": "is_spring && gossip_fairy_big"
+    "Mountain Village Gossip Tunnel Fairy": "is_spring && (has_mask_goron || short_hook_anywhere) && gossip_fairy"
+    "Mountain Village Gossip Tunnel Big Fairy": "is_spring && (has_mask_goron || short_hook_anywhere) && gossip_fairy_big"
   gossip:
     "Mountain Village Gossip Outside": "is_spring"
     "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
