@@ -60,6 +60,26 @@
     <xflag type="icicle" location="Moon Trial Goron Icicle 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="MAGIC_JAR_LARGE"/>
     <xflag type="icicle" location="Moon Trial Goron Icicle 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="MAGIC_JAR_LARGE"/>
     <xflag type="icicle" location="Moon Trial Goron Icicle 4" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="MAGIC_JAR_LARGE"/>
+    <actor room="0x0" actor="0x4">
+      <xflag type="gossip" location="Moon Trial Goron Gossip Fairy Center Left" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Moon Trial Goron Gossip Big Fairy Center Left" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x0" actor="0x5">
+      <xflag type="gossip" location="Moon Trial Goron Gossip Fairy Center Right" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Moon Trial Goron Gossip Big Fairy Center Right" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x0" actor="0x6">
+      <xflag type="gossip" location="Moon Trial Goron Gossip Fairy West Left" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Moon Trial Goron Gossip Big Fairy West Left" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x0" actor="0x7">
+      <xflag type="gossip" location="Moon Trial Goron Gossip Fairy West Right" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Moon Trial Goron Gossip Big Fairy West Right" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x0" actor="0x8">
+      <xflag type="gossip" location="Moon Trial Goron Gossip Fairy By Heart Piece" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Moon Trial Goron Gossip Big Fairy By Heart Piece" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="MOON_ZORA">
     <collectible location="Moon Trial Zora HP" flag="0x01" item="HEART_PIECE"/>
