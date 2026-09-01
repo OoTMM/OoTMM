@@ -158,14 +158,19 @@
     <xflag type="bush" location="Hyrule Field Bush Child 21" slice="0x3" setup="0x1" actor="0x2f" item="NOTHING"/>
     <xflag type="bush" location="Hyrule Field Bush Child 22" slice="0x4" setup="0x1" actor="0x2f" item="NOTHING"/>
     <xflag type="bush" location="Hyrule Field Bush Child 23" slice="0x5" setup="0x1" actor="0x2f" item="NOTHING"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 1" slice="0x0" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 2" slice="0x1" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 3" slice="0x2" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 4" slice="0x3" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 5" slice="0x4" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 6" slice="0x5" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 7" slice="0x6" setup="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Field Rock Circle Rock 8" slice="0x7" setup="0x0" actor="0x37" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x37"/>
+      <match setup="1" actor="0x35"/>
+      <match setup="2" actor="0x2f"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 1" slice="0" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 2" slice="1" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 3" slice="2" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 4" slice="3" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 5" slice="4" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 6" slice="5" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 7" slice="6" item="RANDOM"/>
+      <xflag type="rock" location="Hyrule Field Rock Circle Rock 8" slice="7" item="RANDOM"/>
+    </actor>
     <xflag type="fairy_spot" location="Hyrule Field River Big Fairy" slice="0x0" setup="0x0" actor="0x48" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 1" slice="0x0" setup="0x0" actor="0x34" item="RUPEE_RED"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 2" slice="0x0" setup="0x0" actor="0x35" item="RUPEE_RED"/>
