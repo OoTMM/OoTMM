@@ -54,6 +54,7 @@ typedef struct EnGs {
     /* 0x21C */ s16 quakeY;
     /* 0x21E */ s16 quakeDuration;
     XflagID xflag;
+    u8 canEmitFairy:1;
 } EnGs; // size = 0x220
 
 #endif // Z_EN_GS_H

@@ -13,6 +13,7 @@
 #include <combo/play.h>
 #include <combo/shop.h>
 #include <combo/checks.h>
+#include <combo/xflags.h>
 #include <combo/age.h>
 
 #if defined(GAME_OOT)
@@ -686,3 +687,27 @@ Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q
     return decoy;
 }
 
+int Item_AddXflagRenew(PlayState* play, XflagID xflag, s16 gi)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    /* Make sure there is a valid item */
+    if (xflag == XFLAGID_NONE)
+        return FALSE;
+    Xflag_ItemQuery(&q, xflag, GI_NONE);
+    if (Xflag_Get(xflag))
+    {
+        q.giRenew = gi;
+        q.ovFlags |= OVF_RENEW;
+    }
+    comboItemOverride(&o, &q);
+    if (o.gi == GI_NONE)
+        return FALSE;
+
+    /* Special case - Nothing */
+    if (o.gi != GI_NOTHING)
+        Item_AddWithDecoy(play, &q);
+    Xflag_Set(xflag);
+    return TRUE;
+}
