@@ -27,8 +27,8 @@
     <xflag type="snowball" location="Mountain Village Small Snowball Cliff 1" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="MAGIC_JAR_LARGE"/>
     <xflag type="snowball" location="Mountain Village Small Snowball Cliff 2" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="MAGIC_JAR_LARGE"/>
     <actor room="0x00">
-      <match scene="MM_MOUNTAIN_VILLAGE_WINTER" actor="0x39"/>
-      <match scene="MM_MOUNTAIN_VILLAGE_SPRING" actor="0x33"/>
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x39"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x33"/>
       <xflag type="gossip" location="Mountain Village Gossip Outside Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Mountain Village Gossip Outside Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
@@ -94,7 +94,7 @@
     <xflag type="rock" location="Mountain Village Rock Ground 3" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="RANDOM"/>
     <xflag type="rock" location="Mountain Village Rock Ground 4" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="RANDOM"/>
     <xflag type="rock" location="Mountain Village Rock Ground 5" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="RANDOM"/>
-    <actor room="0x01" actor="0x18"/>
+    <actor room="0x01" actor="0x18">
       <xflag type="gossip" location="Mountain Village Gossip Tunnel Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Mountain Village Gossip Tunnel Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>

@@ -5,7 +5,7 @@
     ALIENS: "soul_malon && (at(NIGHT1_AM_02_30) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night1)) && has_arrows"
     ARROWS: "true"
     MAGIC: "true"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Near Romani Ranch": "true"
@@ -96,6 +96,12 @@
     "Romani Ranch Soil Days 2-3 Item 2": "has_bugs && after(DAY2_AM_06_00)"
     "Romani Ranch Soil Days 2-3 Item 3": "has_bugs && after(DAY2_AM_06_00)"
     "Romani Ranch Soil Day 1": "has_bugs && before(DAY2_AM_06_00)"
+    "Romani Ranch Gossip Fairy Entrance": "gossip_fairy"
+    "Romani Ranch Gossip Fairy Behind House": "gossip_fairy"
+    "Romani Ranch Gossip Fairy Near Tree": "gossip_fairy"
+    "Romani Ranch Gossip Big Fairy Entrance": "gossip_fairy_big"
+    "Romani Ranch Gossip Big Fairy Behind House": "gossip_fairy_big"
+    "Romani Ranch Gossip Big Fairy Near Tree": "gossip_fairy_big"
   gossip:
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"
@@ -105,7 +111,7 @@
   region: ENTRANCE
   events:
     RUPEES: "has_weapon_range || has_weapon || can_break_boulders"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Romani Ranch": "rusty_key(RUSTY_KEY_CUCCO_SHACK)"
@@ -138,7 +144,7 @@
 "Doggy Racetrack": #The race is always available
   region: ENTRANCE
   events:
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Romani Ranch": "rusty_key(RUSTY_KEY_DOG_RACETRACK)"

@@ -6,7 +6,7 @@
     "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Astral Observatory": "rusty_key(RUSTY_KEY_OBSERVATORY)"
   events:
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
     "Termina Field Soil Observatory Item 1": "has_bugs"
@@ -26,7 +26,7 @@
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Clock Town South": "true"
@@ -566,7 +566,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
     SWAMP_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -584,7 +584,7 @@
   events:
     BUGS: "true"
     MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -607,7 +607,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
     OCEAN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -638,7 +638,7 @@
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
     CANYON_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"

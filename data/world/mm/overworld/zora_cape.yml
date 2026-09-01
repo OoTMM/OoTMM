@@ -4,7 +4,7 @@
     MAGIC: "true"
     RUPEES: "(can_fight || has_explosives || has_arrows) && is_night && soul_like_like"
     FISH: "true"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Great Bay Coast": "true"

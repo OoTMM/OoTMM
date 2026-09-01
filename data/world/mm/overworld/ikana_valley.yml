@@ -1,7 +1,7 @@
 "Ikana Valley":
   region: IKANA_CANYON
   events:
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Road to Ikana Top": "true"

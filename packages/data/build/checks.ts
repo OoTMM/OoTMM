@@ -2,7 +2,8 @@ import type { Game } from '../lib/game';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { XMLParser } from 'fast-xml-parser';
+import { XMLParser, XMLValidator } from 'fast-xml-parser';
+
 import { gameId } from '../lib/game';
 import { DATA_DIR } from './helpers';
 
@@ -194,18 +195,18 @@ class ChecksBuilder {
 
     if (sliceId === 0) {
       if (this.matches[matchId] !== undefined) {
-        console.error(`Duplicate xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
+        console.error(`Duplicate xflag match for scene ${ctx.scene} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
         process.exit(1);
       }
     } else {
       const baseId = this.matches[matchId];
       if (baseId === undefined) {
-        console.error(`Missing base xflag match for scene ${ctx.sceneId} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
+        console.error(`Missing base xflag match for scene ${ctx.scene} slice ${sliceId} room ${roomId} setup ${setupId} actor ${actorId}`);
         process.exit(1);
       }
       matchId = makeXflagSliceKey(baseId, sliceId);
       if (this.matches[matchId] !== undefined && this.matches[matchId] !== id) {
-        console.error(`Duplicate xflag slice ${sliceId} for scene ${ctx.sceneId} room ${roomId} setup ${setupId} actor ${actorId}`);
+        console.error(`Duplicate xflag slice ${sliceId} for scene ${ctx.scene} room ${roomId} setup ${setupId} actor ${actorId}`);
         process.exit(1);
       }
     }
@@ -332,6 +333,10 @@ class ChecksBuilder {
   private async process(filepath: string) {
     /* Parse the XML file */
     const data = await fs.readFile(filepath, 'utf-8');
+    const valid = XMLValidator.validate(data);
+    if (valid !== true) {
+      throw new Error(`Invalid XML in ${filepath}: ${valid.err.msg}`);
+    }
     const parser = new XMLParser({
       ignoreAttributes: false,
       preserveOrder: true,
