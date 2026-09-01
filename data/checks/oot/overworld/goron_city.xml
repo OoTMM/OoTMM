@@ -20,7 +20,11 @@
     <xflag type="pot" location="Goron City Pot Stairs 3" slice="0x0" setup="0x0" room="0x3" actor="0x2b" item="RUPEE_GREEN"/>
     <xflag type="pot" location="Goron City Pot Stairs 4" slice="0x0" setup="0x0" room="0x3" actor="0x2c" item="RUPEE_BLUE"/>
     <xflag type="pot" location="Goron City Pot Stairs 5" slice="0x0" setup="0x0" room="0x3" actor="0x2d" item="RECOVERY_HEART"/>
-    <xflag type="rock" location="Goron City Rock" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="RANDOM"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x2f"/>
+      <match setup="2" actor="0x23"/>
+      <xflag type="rock" location="Goron City Rock" item="RANDOM"/>
+    </actor>
     <xflag type="boulder" location="Goron City Maze Boulder 01" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="NOTHING"/>
     <xflag type="boulder" location="Goron City Maze Boulder 02" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="NOTHING"/>
     <xflag type="boulder" location="Goron City Maze Boulder 03" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="NOTHING"/>

@@ -53,7 +53,11 @@
     <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 10" slice="0x9" setup="0x0" actor="0x20" item="RANDOM"/>
     <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 11" slice="0xa" setup="0x0" actor="0x20" item="RANDOM"/>
     <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 12" slice="0xb" setup="0x0" actor="0x20" item="RANDOM"/>
-    <xflag type="rock" location="Lake Hylia Rock" slice="0x0" setup="0x0" actor="0x16" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x16"/>
+      <match setup="2" actor="0x1e"/>
+      <xflag type="rock" location="Lake Hylia Rock" item="RANDOM"/>
+    </actor>
     <xflag type="rupee" location="Lake Hylia Rupee 1" slice="0x0" setup="0x0" actor="0x31" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lake Hylia Rupee 2" slice="0x0" setup="0x0" actor="0x32" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lake Hylia Rupee 3" slice="0x0" setup="0x0" actor="0x33" item="RUPEE_GREEN"/>

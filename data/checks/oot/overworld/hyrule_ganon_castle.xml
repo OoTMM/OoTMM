@@ -16,9 +16,9 @@
     <xflag type="tree" location="Hyrule Castle Tree 7" slice="0x0" actor="0x31" item="RANDOM"/>
     <xflag type="tree" location="Hyrule Castle Tree 8" slice="0x0" actor="0x32" item="RANDOM"/>
     <xflag type="tree" location="Hyrule Castle Tree Guarded" slice="0x0" actor="0x14" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Castle Rock 1" slice="0x0" actor="0x2a" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Castle Rock 2" slice="0x0" actor="0x2b" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Castle Rock 3" slice="0x0" actor="0x2c" item="RANDOM"/>
+    <xflag type="rock" location="Hyrule Castle Rock 1" actor="0x2a" item="RANDOM"/>
+    <xflag type="rock" location="Hyrule Castle Rock 2" actor="0x2b" item="RANDOM"/>
+    <xflag type="rock" location="Hyrule Castle Rock 3" actor="0x2c" item="RANDOM"/>
     <xflag type="boulder" location="Hyrule Castle Boulder" slice="0x0" actor="0x3a" item="NOTHING"/>
     <xflag type="wonder" location="Hyrule Castle Wonder Item Torch 1" slice="0x0" actor="0xc" item="MAGIC_JAR_LARGE"/>
     <xflag type="wonder" location="Hyrule Castle Wonder Item Torch 2" slice="0x0" actor="0xd" item="RUPEE_RED"/>

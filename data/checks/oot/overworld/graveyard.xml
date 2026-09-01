@@ -3,7 +3,13 @@
   <scene id="GRAVEYARD">
     <collectible location="Graveyard Dampe Game" flag="0x1f" item="HEART_PIECE"/>
     <npc location="Graveyard Sell Spooky Mask" npc="MASK_SELL_SPOOKY" item="RUPEE_RED"/>
-    <xflag type="rock" location="Graveyard Rock" slice="0x0" setup="0x0" room="0x1" actor="0xe" item="RANDOM"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x0e"/>
+      <match setup="1" actor="0x12"/>
+      <match setup="2" actor="0x1b"/>
+      <match setup="3" actor="0x1b"/>
+      <xflag type="rock" location="Graveyard Rock" item="RANDOM"/>
+    </actor>
     <actor room="0x1" actor="0x11">
       <xflag type="butterfly" location="Graveyard Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Graveyard Butterfly 2" slice="1" item="NOTHING"/>

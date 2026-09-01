@@ -298,69 +298,6 @@ static InitChainEntry sInitChains[][5] = {
     },
 };
 
-static void EnIshi_AliasRock(Xflag* xf) {
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_LAKE_HYLIA:
-        xf->setupId = 0;
-        xf->id = 22;
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id -= 2;
-        }
-        break;
-    case SCE_OOT_GORON_CITY:
-        xf->setupId = 0;
-        xf->id = 47;
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        switch (xf->setupId)
-        {
-        case 1: xf->id += 5; break;
-        case 2: xf->id += 11; break;
-        case 3: xf->id += 12; break;
-        }
-        xf->setupId = 0;
-        break;
-    case SCE_OOT_GRAVEYARD:
-        xf->setupId = 0;
-        xf->id = 14;
-        break;
-    case SCE_OOT_ZORA_RIVER:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id += 29;
-        }
-        break;
-    case SCE_OOT_GERUDO_VALLEY:
-        if (xf->setupId == 0)
-        {
-            xf->setupId = 2;
-            switch (xf->id)
-            {
-            case 23: xf->id = 42; break;
-            case 24: xf->id = 43; break;
-            case 25: xf->id = 33; break;
-            case 26: xf->id = 34; break;
-            case 27: xf->id = 35; break;
-            case 28: xf->id = 44; break;
-            }
-        }
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id -= 8;
-        }
-        break;
-    }
-}
-
 static void EnIshi_AliasSilverBoulder(Xflag* xf) {
     switch (xf->sceneId)
     {
@@ -404,9 +341,6 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
     if (Xflag_Init(&this->xflag, &this->actor, play)) {
         switch (type)
         {
-        case ROCK_SMALL:
-            EnIshi_AliasRock(&this->xflag);
-            break;
         case ROCK_LARGE:
             EnIshi_AliasSilverBoulder(&this->xflag);
             break;

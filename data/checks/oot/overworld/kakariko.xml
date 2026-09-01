@@ -56,8 +56,20 @@
       <xflag type="butterfly" location="Kakariko Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Kakariko Butterfly 2" slice="1" item="NOTHING"/>
     </actor>
-    <xflag type="rock" location="Kakariko Rock Near Gate" slice="0x0" setup="0x0" actor="0x20" item="RANDOM"/>
-    <xflag type="rock" location="Kakariko Rock Near Spider House" slice="0x0" setup="0x0" actor="0x21" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x20"/>
+      <match setup="1" actor="0x1b"/>
+      <match setup="2" actor="0x15"/>
+      <match setup="3" actor="0x14"/>
+      <xflag type="rock" location="Kakariko Rock Near Gate" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x21"/>
+      <match setup="1" actor="0x1c"/>
+      <match setup="2" actor="0x16"/>
+      <match setup="3" actor="0x15"/>
+      <xflag type="rock" location="Kakariko Rock Near Spider House" item="RANDOM"/>
+    </actor>
   </scene>
   <scene name="Impa House" id="IMPA_HOUSE">
     <collectible location="Kakariko Impa House HP" flag="0x01" item="HEART_PIECE"/>

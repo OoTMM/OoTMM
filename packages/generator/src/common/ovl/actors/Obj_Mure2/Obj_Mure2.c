@@ -231,9 +231,15 @@ void ObjMure2_Alias(Actor_ObjMure2* this, PlayState* play)
 
     xf = &this->xflag;
     if (OBJ_MURE2_GET_CHILD_TYPE(&this->actor) == OBJMURE2_CHILDTYPE_ROCK_RING)
+    {
+#if defined(GAME_MM)
         ObjMure2_AliasRocks(xf);
+#endif
+    }
     else
+    {
         ObjMure2_AliasGrass(xf);
+    }
 }
 
 void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)

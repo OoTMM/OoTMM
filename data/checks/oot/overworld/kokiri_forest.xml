@@ -41,22 +41,27 @@
     <xflag type="grass" location="Kokiri Forest Grass Adult Near Crawl 6" slice="0x0" setup="0x2" room="0x0" actor="0x14" item="RANDOM"/>
     <xflag type="grass" location="Kokiri Forest Grass Adult Near Crawl 7" slice="0x0" setup="0x2" room="0x0" actor="0x15" item="RANDOM"/>
     <xflag type="grass" location="Kokiri Forest Grass Adult Near Crawl 8" slice="0x0" setup="0x2" room="0x0" actor="0x16" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 1" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="NOTHING"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 2" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="NOTHING"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 3" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="NOTHING"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 4" slice="0x0" setup="0x0" room="0x0" actor="0x2d" item="NOTHING"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 5" slice="0x0" setup="0x0" room="0x0" actor="0x2e" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 6" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 7" slice="0x0" setup="0x0" room="0x0" actor="0x30" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Child 8" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 1" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 2" slice="0x1" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 3" slice="0x2" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 4" slice="0x3" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 5" slice="0x4" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="rock" location="Kokiri Forest Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 1" setup="0x0" room="0x0" actor="0x2a" item="NOTHING"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 2" setup="0x0" room="0x0" actor="0x2b" item="NOTHING"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 3" setup="0x0" room="0x0" actor="0x2c" item="NOTHING"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 4" setup="0x0" room="0x0" actor="0x2d" item="NOTHING"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 5" setup="0x0" room="0x0" actor="0x2e" item="RANDOM"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 6" setup="0x0" room="0x0" actor="0x2f" item="RANDOM"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 7" setup="0x0" room="0x0" actor="0x30" item="RANDOM"/>
+    <xflag type="rock" location="Kokiri Forest Rock Child 8" setup="0x0" room="0x0" actor="0x31" item="RANDOM"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x32"/>
+      <match setup="2" actor="0x0e"/>
+      <match setup="3" actor="0x11"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 1" slice="0" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 2" slice="1" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 3" slice="2" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 4" slice="3" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 5" slice="4" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 6" slice="5" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 7" slice="6" item="RANDOM"/>
+      <xflag type="rock" location="Kokiri Forest Rock Circle Rock 8" slice="7" item="RANDOM"/>
+    </actor>
     <xflag type="rupee" location="Kokiri Forest Rupee Child 1" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
     <xflag type="rupee" location="Kokiri Forest Rupee Child 2" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
     <xflag type="rupee" location="Kokiri Forest Rupee Crawl 1" slice="0x0" setup="0x0" room="0x2" actor="0x0" item="RUPEE_BLUE"/>

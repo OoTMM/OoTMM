@@ -11,14 +11,18 @@
     <npc location="Zora Domain Tunic" npc="ZORA_KING_TUNIC" item="TUNIC_ZORA" hint="ZORA_KING"/>
     <npc location="Zora Domain Eyeball Frog" npc="TRADE_EYEBALL_FROG" item="EYEBALL_FROG" hint="ZORA_KING"/>
     <gs location="Zora Domain GS Waterfall" flag="0x8e" item="GS_TOKEN"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 1" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 2" slice="0x1" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 3" slice="0x2" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 4" slice="0x3" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 5" slice="0x4" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
+    <actor room="0x1">
+      <match setup="0" actor="0xa"/>
+      <match setup="2" actor="0xb"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 1" slice="0" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 2" slice="1" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 3" slice="2" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 4" slice="3" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 5" slice="4" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 6" slice="5" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 7" slice="6" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 8" slice="7" item="RANDOM"/>
+    </actor>
     <xflag type="pot" location="Zora Domain Pot 1" slice="0x0" setup="0x0" room="0x1" actor="0x15" item="RUPEE_BLUE"/>
     <xflag type="pot" location="Zora Domain Pot 2" slice="0x0" setup="0x0" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Zora Domain Pot 3" slice="0x0" setup="0x0" room="0x1" actor="0x17" item="RECOVERY_HEART"/>
