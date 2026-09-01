@@ -12,7 +12,6 @@
 #endif
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag);
-void EnItem00_AliasFreestandingHeart(Xflag* xflag);
 
 static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
@@ -68,9 +67,6 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
         case ITEM00_RUPEE_BLUE:
         case ITEM00_RUPEE_RED:
             EnItem00_AliasFreestandingRupee(&this->xflag);
-            break;
-        case ITEM00_RECOVERY_HEART:
-            EnItem00_AliasFreestandingHeart(&this->xflag);
             break;
         }
     }

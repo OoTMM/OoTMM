@@ -240,10 +240,6 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
     }
 }
 
-void EnItem00_AliasFreestandingHeart(Xflag* xflag)
-{
-}
-
 void EnItem00_DrawShield(PlayState* play)
 {
     s16 gi;

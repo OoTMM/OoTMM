@@ -210,10 +210,6 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
     }
 }
 
-void EnItem00_AliasFreestandingHeart(Xflag* xflag)
-{
-}
-
 void EnItem00_DrawShieldDeku(PlayState* play)
 {
     Draw_Gi(play, NULL, GI_OOT_SHIELD_DEKU, DRAW_RAW);
