@@ -72,6 +72,12 @@
     <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 1" slice="0x2" setup="0x1" room="0x0" actor="0x85" item="NOTHING"/>
     <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 2" slice="0x3" setup="0x1" room="0x0" actor="0x85" item="NOTHING"/>
     <xflag type="soil" location="Great Bay Coast Soil" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RUPEE_RED"/>
+    <actor>
+      <match setup="0" actor="0x7a"/>
+      <match setup="1" actor="0x02"/>
+      <xflag type="gossip" location="Great Bay Coast Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Great Bay Coast Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="LABORATORY">
     <npc location="Laboratory Zora Song" npc="SONG_ZORA" item="SONG_ZORA"/>

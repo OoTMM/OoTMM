@@ -41,7 +41,8 @@
     "Zora Cape Palm Tree Island Near Beach": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Palm Tree Island Center": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Boulder": "can_break_boulders"
-
+    "Zora Cape Gossip Fairy": "gossip_fairy"
+    "Zora Cape Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Zora Cape Gossip": "true"
 

@@ -138,6 +138,8 @@
     "Cucco Shack Bush 5": "true"
     "Cucco Shack Bush 6": "true"
     "Cucco Shack Bush 7": "true"
+    "Cucco Shack Gossip Fairy": "gossip_fairy"
+    "Cucco Shack Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Cucco Shack Gossip": "true"
 
@@ -156,6 +158,8 @@
     "Doggy Racetrack Pot 3": "true"
     "Doggy Racetrack Pot 4": "true"
     "Doggy Racetrack Soil": "has_bugs"
+    "Doggy Racetrack Gossip Fairy": "gossip_fairy"
+    "Doggy Racetrack Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Doggy Racetrack Gossip": "true"
 

@@ -2,7 +2,6 @@
 #define COMBO_XFLAGS_H
 
 #include <combo/types.h>
-#include <combo/data/xflags.h>
 
 #define XFLAGID_NONE 0xffff
 typedef u16 XflagID;
