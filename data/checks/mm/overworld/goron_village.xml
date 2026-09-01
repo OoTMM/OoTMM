@@ -30,33 +30,97 @@
   </scene>
   <scene id="GORON_SHRINE">
     <npc location="Goron Baby" npc="GORON_BABY" item="SONG_GORON"/>
-    <xflag type="rock" location="Goron Shrine Rock 01" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 02" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 03" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 04" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 05" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 06" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 07" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 08" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 09" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 10" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 11" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 12" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 13" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 14" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 15" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RANDOM"/>
-    <xflag type="rock" location="Goron Shrine Rock 16" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RANDOM"/>
-    <xflag type="pot" location="Goron Shrine Pot 01" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="STICK"/>
-    <xflag type="pot" location="Goron Shrine Pot 02" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Goron Shrine Pot 03" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Goron Shrine Pot 04" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="STICK"/>
-    <xflag type="pot" location="Goron Shrine Pot 05" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Shrine Pot 06" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Shrine Pot 07" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Shrine Pot 08" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="STICK"/>
-    <xflag type="pot" location="Goron Shrine Pot 09" slice="0x0" setup="0x0" room="0x1" actor="0x6" item="STICK"/>
-    <xflag type="pot" location="Goron Shrine Pot 10" slice="0x0" setup="0x0" room="0x1" actor="0x7" item="STICK"/>
-    <xflag type="pot" location="Goron Shrine Pot 11" slice="0x0" setup="0x0" room="0x1" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x02"/>
+      <match setup="1" actor="0x07"/>
+      <xflag type="rock" location="Goron Shrine Rock 01" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x03"/>
+      <match setup="1" actor="0x08"/>
+      <xflag type="rock" location="Goron Shrine Rock 02" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x04"/>
+      <match setup="1" actor="0x09"/>
+      <xflag type="rock" location="Goron Shrine Rock 03" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x05"/>
+      <match setup="1" actor="0x0a"/>
+      <xflag type="rock" location="Goron Shrine Rock 04" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x06"/>
+      <match setup="1" actor="0x0b"/>
+      <xflag type="rock" location="Goron Shrine Rock 05" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x07"/>
+      <match setup="1" actor="0x0c"/>
+      <xflag type="rock" location="Goron Shrine Rock 06" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x08"/>
+      <match setup="1" actor="0x0d"/>
+      <xflag type="rock" location="Goron Shrine Rock 07" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x09"/>
+      <match setup="1" actor="0x0e"/>
+      <xflag type="rock" location="Goron Shrine Rock 08" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0a"/>
+      <match setup="1" actor="0x0f"/>
+      <xflag type="rock" location="Goron Shrine Rock 09" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0b"/>
+      <match setup="1" actor="0x10"/>
+      <xflag type="rock" location="Goron Shrine Rock 10" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0c"/>
+      <match setup="1" actor="0x11"/>
+      <xflag type="rock" location="Goron Shrine Rock 11" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0d"/>
+      <match setup="1" actor="0x12"/>
+      <xflag type="rock" location="Goron Shrine Rock 12" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0e"/>
+      <match setup="1" actor="0x13"/>
+      <xflag type="rock" location="Goron Shrine Rock 13" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0f"/>
+      <match setup="1" actor="0x14"/>
+      <xflag type="rock" location="Goron Shrine Rock 14" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x10"/>
+      <match setup="1" actor="0x15"/>
+      <xflag type="rock" location="Goron Shrine Rock 15" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x11"/>
+      <match setup="1" actor="0x16"/>
+      <xflag type="rock" location="Goron Shrine Rock 16" item="RANDOM"/>
+    </actor>
+    <xflag type="pot" location="Goron Shrine Pot 01" setup="0x0" room="0x0" actor="0x23" item="STICK"/>
+    <xflag type="pot" location="Goron Shrine Pot 02" setup="0x0" room="0x0" actor="0x24" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Goron Shrine Pot 03" setup="0x0" room="0x0" actor="0x25" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Goron Shrine Pot 04" setup="0x0" room="0x0" actor="0x26" item="STICK"/>
+    <xflag type="pot" location="Goron Shrine Pot 05" setup="0x0" room="0x0" actor="0x27" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Goron Shrine Pot 06" setup="0x0" room="0x0" actor="0x28" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Goron Shrine Pot 07" setup="0x0" room="0x0" actor="0x29" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Goron Shrine Pot 08" setup="0x0" room="0x0" actor="0x2a" item="STICK"/>
+    <xflag type="pot" location="Goron Shrine Pot 09" setup="0x0" room="0x1" actor="0x6" item="STICK"/>
+    <xflag type="pot" location="Goron Shrine Pot 10" setup="0x0" room="0x1" actor="0x7" item="STICK"/>
+    <xflag type="pot" location="Goron Shrine Pot 11" setup="0x0" room="0x1" actor="0x8" item="MAGIC_JAR_LARGE"/>
   </scene>
   <scene id="GORON_SHOP">
     <shop location="Goron Shop Item 1" flag="0x10" item="BOMBS_10"/>

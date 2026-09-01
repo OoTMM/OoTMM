@@ -421,16 +421,6 @@ static void EnIshi_Alias(Xflag* xf)
 {
     switch (xf->sceneId)
     {
-    case SCE_MM_GORON_SHRINE:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            xf->id -= 5;
-        }
-        break;
-    case SCE_MM_ZORA_CAPE:
-        xf->setupId = 0;
-        break;
     case SCE_MM_GREAT_BAY_COAST:
         if (xf->setupId == 1)
         {

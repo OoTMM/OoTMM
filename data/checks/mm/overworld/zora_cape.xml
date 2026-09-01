@@ -6,35 +6,39 @@
     <chest location="Zora Cape Underwater Chest" flag="0x00" item="RUPEE_PURPLE"/>
     <collectible location="Zora Cape Waterfall HP" flag="0x07" item="HEART_PIECE"/>
     <npc location="Zora Cape Owl Statue" npc="OWL_ZORA_CAPE" item="OWL_ZORA_CAPE"/>
-    <xflag type="rock" location="Zora Cape Rock Island 1" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Island 2" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Island 3" slice="0x0" setup="0x0" room="0x0" actor="0x22" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Island 4" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Island 5" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Water 1" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Water 2" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Water 3" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Water 4" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Water 5" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Sand 1" slice="0x0" setup="0x0" room="0x0" actor="0x35" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Sand 2" slice="0x0" setup="0x0" room="0x0" actor="0x36" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Sand 3" slice="0x0" setup="0x0" room="0x0" actor="0x37" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Sand 4" slice="0x0" setup="0x0" room="0x0" actor="0x38" item="RANDOM"/>
-    <xflag type="rock" location="Zora Cape Rock Sand 5" slice="0x0" setup="0x0" room="0x0" actor="0x39" item="RANDOM"/>
-    <xflag type="boulder" location="Zora Cape Large Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Cape Large Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Cape Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="NOTHING"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Beach 1" slice="0x0" setup="0x0" room="0x0" actor="0x18" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Beach 2" slice="0x0" setup="0x0" room="0x0" actor="0x19" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Island Near Fountain" slice="0x0" setup="0x0" room="0x0" actor="0x1a" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Island Near Beach" slice="0x0" setup="0x0" room="0x0" actor="0x1b" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Island Center" slice="0x0" setup="0x0" room="0x0" actor="0x1c" item="NUT"/>
-    <xflag type="pot" location="Zora Cape Pot Near Beavers 1" slice="0x0" setup="0x0" room="0x0" actor="0x43" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Zora Cape Pot Near Beavers 2" slice="0x0" setup="0x0" room="0x0" actor="0x44" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 1" slice="0x0" setup="0x0" room="0x0" actor="0x45" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 2" slice="0x0" setup="0x0" room="0x0" actor="0x46" item="FAIRY"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 3" slice="0x0" setup="0x0" room="0x0" actor="0x47" item="BOMBS_5"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 4" slice="0x0" setup="0x0" room="0x0" actor="0x48" item="ARROWS_20"/>
+    <actor>
+      <match setup="0"/>
+      <match setup="1"/>
+      <xflag type="rock" location="Zora Cape Rock Island 1" actor="0x20" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Island 2" actor="0x21" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Island 3" actor="0x22" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Island 4" actor="0x23" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Island 5" actor="0x24" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Water 1" actor="0x25" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Water 2" actor="0x26" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Water 3" actor="0x27" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Water 4" actor="0x28" item="RANDOM"/>
+      <xflag type="rock" location="Zora Cape Rock Water 5" actor="0x29" item="RANDOM"/>
+    </actor>
+    <xflag type="rock" location="Zora Cape Rock Sand 1" setup="0x0" actor="0x35" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 2" setup="0x0" actor="0x36" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 3" setup="0x0" actor="0x37" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 4" setup="0x0" actor="0x38" item="RANDOM"/>
+    <xflag type="rock" location="Zora Cape Rock Sand 5" setup="0x0" actor="0x39" item="RANDOM"/>
+    <xflag type="boulder" location="Zora Cape Large Boulder 1" setup="0x0" actor="0x2a" item="NOTHING"/>
+    <xflag type="boulder" location="Zora Cape Large Boulder 2" setup="0x0" actor="0x2b" item="NOTHING"/>
+    <xflag type="boulder" location="Zora Cape Boulder" setup="0x0" actor="0x2c" item="NOTHING"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Beach 1" setup="0x0" actor="0x18" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Beach 2" setup="0x0" actor="0x19" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Island Near Fountain" setup="0x0" actor="0x1a" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Island Near Beach" setup="0x0" actor="0x1b" item="NUT"/>
+    <xflag type="tree" location="Zora Cape Palm Tree Island Center" setup="0x0" actor="0x1c" item="NUT"/>
+    <xflag type="pot" location="Zora Cape Pot Near Beavers 1" setup="0x0" actor="0x43" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Zora Cape Pot Near Beavers 2" setup="0x0" actor="0x44" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 1" setup="0x0" actor="0x45" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 2" setup="0x0" actor="0x46" item="FAIRY"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 3" setup="0x0" actor="0x47" item="BOMBS_5"/>
+    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 4" setup="0x0" actor="0x48" item="ARROWS_20"/>
     <actor>
       <match setup="0" actor="0x3e"/>
       <match setup="1" actor="0x0"/>
@@ -43,11 +47,11 @@
     </actor>
   </scene>
   <scene id="EXTRA">
-    <xflag type="pot" location="Zora Cape Pot Game 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>
-    <xflag type="pot" location="Zora Cape Pot Game 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NOTHING"/>
-    <xflag type="pot" location="Zora Cape Pot Game 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="NOTHING"/>
-    <xflag type="pot" location="Zora Cape Pot Game 4" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="NOTHING"/>
-    <xflag type="pot" location="Zora Cape Pot Game 5" slice="0x0" setup="0x0" room="0x0" actor="0x4" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 1" slice="0x0" setup="0x0" actor="0x0" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 2" slice="0x0" setup="0x0" actor="0x1" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 3" slice="0x0" setup="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 4" slice="0x0" setup="0x0" actor="0x3" item="NOTHING"/>
+    <xflag type="pot" location="Zora Cape Pot Game 5" slice="0x0" setup="0x0" actor="0x4" item="NOTHING"/>
   </scene>
   <scene id="WATERFALL_RAPIDS">
     <npc location="Waterfall Rapids Beaver Race 1" npc="BEAVER_1" item="BOTTLE_EMPTY"/>
