@@ -32,6 +32,10 @@
     <xflag type="tree" location="Road to Southern Swamp Forked Tree 4" slice="0x0" setup="0x0" room="0x0" actor="0x1d" item="NOTHING"/>
     <xflag type="tree" location="Road to Southern Swamp Forked Tree 5" slice="0x0" setup="0x0" room="0x0" actor="0x1e" item="NOTHING"/>
     <xflag type="tree" location="Road to Southern Swamp Forked Tree 6" slice="0x0" setup="0x0" room="0x0" actor="0x1f" item="NOTHING"/>
+    <actor actor="0x2e">
+      <xflag type="gossip" location="Road to Southern Swamp Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Road to Southern Swamp Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="SHOOTING_GALLERY_SWAMP">
     <npc location="Swamp Archery Reward 1" npc="SHOOTING_GAME_SWAMP_1" item="BOW"/>

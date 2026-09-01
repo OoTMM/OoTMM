@@ -468,7 +468,7 @@ typedef struct PlayState
     ObjectContext       objectCtx;
     RoomContext         roomCtx;
     char                unk_18760[0x3c];
-    s16                 playerActorCsIds[10];
+    s16                 playerCsIds[10];
     MtxF                viewProjectionMtxF;
     Vec3f               projectionMtxFDiagonal;
     MtxF                billboardMtxF;
@@ -542,4 +542,6 @@ s32 Play_SetCameraFov(PlayState* this, s16 camId, f32 fov);
 s32 _Play_SetCameraFov(PlayState* this, s16 camId, f32 fov);
 void Play_DisableMotionBlur(void);
 void Play_FillScreen(PlayState* this, s16 fillScreenOn, u8 red, u8 green, u8 blue, u8 alpha);
+void Play_SetMotionBlurAlpha(u32 alpha);
+
 #endif

@@ -2922,7 +2922,7 @@ s32 Player_ShowItem(PlayState* play, Player* this, PlayerAnimationHeader* anim)
 {
     if (this->exchangeItemAction == PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER)
     {
-        this->csId = play->playerActorCsIds[2]; /* PLAYER_CS_ID_ITEM_BOTTLE */
+        this->csId = play->playerCsIds[2]; /* PLAYER_CS_ID_ITEM_BOTTLE */
         PlayerAnimation_PlayOnce(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400d4e0); /* &gPlayerAnim_link_bottle_read */
     }
     else

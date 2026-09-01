@@ -137,13 +137,12 @@ static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
     XflagID id;
 
     id = Xflag_LookupSlice(this->xflag, isBig);
-    if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)) && !Xflag_IsValidEx(id))
-        return;
-
-    g.xflagOverrideEx = TRUE;
-    g.xflagId = id;
-    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? /* FAIRY_HEAL_BIG */ 0x0007 : /* FAIRY_HEAL_TIMED */ 0x0002);
-    g.xflagOverrideEx = FALSE;
+    if (!Item_AddXflagRenew(play, id, GI_NOTHING))
+    {
+        if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)))
+            return;
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? /* FAIRY_HEAL_BIG */ 0x0007 : /* FAIRY_HEAL_TIMED */ 0x0002);
+    }
     Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
 }
 

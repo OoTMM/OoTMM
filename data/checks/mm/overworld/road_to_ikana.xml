@@ -20,6 +20,10 @@
     <xflag type="boulder" location="Road to Ikana Large Boulder 6" slice="0x0" setup="0x0" room="0x0" actor="0x43" item="NOTHING"/>
     <xflag type="boulder" location="Road to Ikana Large Boulder 7" slice="0x0" setup="0x0" room="0x0" actor="0x44" item="NOTHING"/>
     <xflag type="boulder-red" location="Road to Ikana Red Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="NOTHING"/>
+    <actor actor="0x2">
+      <xflag type="gossip" location="Road to Ikana Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Road to Ikana Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <chest location="Road to Ikana Grotto" flag="0x16" item="BOMBCHU"/>

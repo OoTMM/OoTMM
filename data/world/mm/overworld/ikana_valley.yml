@@ -1,7 +1,7 @@
 "Ikana Valley":
   region: IKANA_CANYON
   events:
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Road to Ikana Top": "true"
@@ -9,13 +9,23 @@
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Ikana Valley Near Secret Shrine": "can_swim || (can_use_ice_arrows && has_chateau)"
     "Swamp Near Potion Shop": "true" #You can jump into the cave from sakon's hideout fairly easily
+    "Ikana Valley Scrub Ledge": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
   locations:
     "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
-    "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
     "Ikana Valley Scrub Shop": "soul_business_scrub && can_use_wallet(2)"
+    "Ikana Valley Gossip Fairy Lower": "gossip_fairy"
+    "Ikana Valley Gossip Big Fairy Lower": "gossip_fairy_big"
   gossip:
     "Ikana Valley Gossip Lower": "true"
-    "Ikana Valley Gossip Scrub": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
+
+"Ikana Valley Scrub Ledge":
+  region: IKANA_CANYON
+  locations:
+    "Ikana Valley Scrub HP": "true"
+    "Ikana Valley Gossip Fairy Scrub": "gossip_fairy"
+    "Ikana Valley Gossip Big Fairy Scrub": "gossip_fairy_big"
+  gossip:
+    "Ikana Valley Gossip Scrub": "true"
 
 "Ikana Valley Near Secret Shrine":
   region: IKANA_CANYON
@@ -92,6 +102,9 @@
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
     FAIRY: "true"
     PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+  locations:
+    "Ikana Valley Gossip Fairy Upper": "gossip_fairy"
+    "Ikana Valley Gossip Big Fairy Upper": "gossip_fairy_big"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
 

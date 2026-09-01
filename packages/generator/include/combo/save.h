@@ -21,6 +21,7 @@
 # include <combo/save_flags.h>
 # include <combo/sr.h>
 # include <combo/xflags.h>
+# include <combo/data/xflags.h>
 
 typedef struct
 {

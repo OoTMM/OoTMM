@@ -17,4 +17,18 @@ typedef struct {
 
 extern CutsceneManager sCutsceneMgr;
 
+typedef enum {
+    /*  0 */ PLAYER_CS_ID_ITEM_OCARINA,
+    /*  1 */ PLAYER_CS_ID_ITEM_GET,
+    /*  2 */ PLAYER_CS_ID_ITEM_BOTTLE,
+    /*  3 */ PLAYER_CS_ID_ITEM_SHOW,
+    /*  4 */ PLAYER_CS_ID_WARP_PAD_MOON,
+    /*  5 */ PLAYER_CS_ID_MASK_TRANSFORMATION,
+    /*  6 */ PLAYER_CS_ID_DEATH,
+    /*  7 */ PLAYER_CS_ID_REVIVE,
+    /*  8 */ PLAYER_CS_ID_SONG_WARP, // Song of Time and Song of Soaring
+    /*  9 */ PLAYER_CS_ID_WARP_PAD_ENTRANCE,
+    /* 10 */ PLAYER_CS_ID_MAX
+} PlayerCsId;
+
 #endif

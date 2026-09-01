@@ -198,7 +198,7 @@ void Ocarina_HandleWarp(Player* player, PlayState* play)
         if (play->msgCtx.ocarinaMode == 2) /* OCARINA_MODE_WARP */
         {
             play->interfaceCtx.bButtonInterfaceDoActionActive = 0;
-            ActorCutscene_Stop(play->playerActorCsIds[0]);
+            ActorCutscene_Stop(play->playerCsIds[0]);
             player->actor.flags &= ~ACTOR_FLAG_MM_20000000;
             Actor* actor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_TEST7, player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, 0, 0, 0, 0x8000 | sCustomSongPlayed);
             if (actor)
@@ -534,7 +534,7 @@ static u8 sSongEventSongs[] = {
     OCARINA_SONG_OATH,
 };
 
-s32 Ocarina_CheckSongEventSong(u16 ocarinaSong, int songEventId)
+int Ocarina_CheckSongEventSong(u16 ocarinaSong, int songEventId)
 {
     u8 expectedSong = sSongEventSongs[gComboConfig.songEventsMm[songEventId]];
     if (ocarinaSong == expectedSong || (expectedSong == OCARINA_SONG_GORON_LULLABY_INTRO && ocarinaSong == OCARINA_SONG_GORON_LULLABY)) {

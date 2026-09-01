@@ -8,6 +8,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_MURE2]: CommonHandlers.ObjMure2,
   [ACTORS_OOT.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_OOT.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
+  [ACTORS_OOT.EN_GS]: CommonHandlers.EnGs,
   [ACTORS_OOT.EN_ITEM00]: OotHandlers.EnItem00,
   [ACTORS_OOT.EN_KUSA]: OotHandlers.EnKusa,
   [ACTORS_OOT.OBJ_COMB]: OotHandlers.ObjComb,
@@ -23,7 +24,6 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_BEAN]: OotHandlers.ObjBean,
   [ACTORS_OOT.OBJ_BOMBIWA]: OotHandlers.ObjBombiwa,
   [ACTORS_OOT.EN_WONDER_ITEM]: OotHandlers.EnWonderItem,
-  [ACTORS_OOT.EN_GS]: OotHandlers.EnGs,
   [ACTORS_OOT.EN_ELF]: OotHandlers.EnElf,
   [ACTORS_OOT.BG_SPOT11_OASIS]: OotHandlers.BgSpot11Oasis,
 };
@@ -32,6 +32,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_MURE2]: CommonHandlers.ObjMure2,
   [ACTORS_MM.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_MM.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
+  [ACTORS_MM.EN_GS]: CommonHandlers.EnGs,
   [ACTORS_MM.EN_ITEM00]: MmHandlers.EnItem00,
   [ACTORS_MM.EN_KUSA]: MmHandlers.EnKusa,
   [ACTORS_MM.EN_KUSA2]: MmHandlers.EnKusa2,

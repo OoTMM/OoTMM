@@ -52,6 +52,16 @@
     "Moon Trial Deku Exit": "has(MASK_DEKU)"
   locations:
     "Moon Trial Deku HP": "has(MASK_DEKU) || hookshot_anywhere"
+    "Moon Trial Deku Gossip Fairy Front-Left": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Front-Right": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Mid-Left": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Mid-Right": "gossip_fairy && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Fairy Back": "gossip_fairy && (has(MASK_DEKU) || hookshot_anywhere)"
+    "Moon Trial Deku Gossip Big Fairy Front-Left": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Front-Right": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Mid-Left": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Mid-Right": "gossip_fairy_big && (has(MASK_DEKU) || short_hook_anywhere || has_hover_boots)"
+    "Moon Trial Deku Gossip Big Fairy Back": "gossip_fairy_big && (has(MASK_DEKU) || hookshot_anywhere)"
   gossip:
     "Moon Trial Deku Gossip Front-Left": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Moon Trial Deku Gossip Front-Right": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
@@ -89,6 +99,16 @@
     "Moon Trial Goron Pot 09": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Pot 10": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Pot 11": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Gossip Fairy Center Left": "gossip_fairy && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Fairy Center Right": "gossip_fairy && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Fairy West Left": "gossip_fairy && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Fairy West Right": "gossip_fairy && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Fairy By Heart Piece": "gossip_fairy && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Big Fairy Center Left": "gossip_fairy_big && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Big Fairy Center Right": "gossip_fairy_big && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Big Fairy West Left": "gossip_fairy_big && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Big Fairy West Right": "gossip_fairy_big && (goron_fast_roll || hookshot_anywhere)"
+    "Moon Trial Goron Gossip Big Fairy By Heart Piece": "gossip_fairy_big && (goron_fast_roll || hookshot_anywhere)"
   gossip:
     "Moon Trial Goron Gossip Center Left": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Gossip Center Right": "goron_fast_roll || hookshot_anywhere"
@@ -117,6 +137,16 @@
     MOON_TRIAL_ZORA: "underwater_walking || can_dive_small"
   locations:
     "Moon Trial Zora HP": "underwater_walking || can_dive_small"
+    "Moon Trial Zora Gossip Fairy Outer Left": "gossip_fairy && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Fairy Middle Left": "gossip_fairy && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Fairy Inner Right": "gossip_fairy && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Fairy Middle Right": "gossip_fairy && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Fairy Outer Right": "gossip_fairy && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Big Fairy Outer Left": "gossip_fairy_big && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Big Fairy Middle Left": "gossip_fairy_big && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Big Fairy Inner Right": "gossip_fairy_big && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Big Fairy Middle Right": "gossip_fairy_big && (underwater_walking || can_dive_small)"
+    "Moon Trial Zora Gossip Big Fairy Outer Right": "gossip_fairy_big && (underwater_walking || can_dive_small)"
   gossip:
     "Moon Trial Zora Gossip Outer Left": "underwater_walking || can_dive_small"
     "Moon Trial Zora Gossip Middle Left": "underwater_walking || can_dive_small"
@@ -150,6 +180,9 @@
   exits:
     "Moon Trial Link Dinolfos Fight": "true"
     "Moon Trial Link Garo Fight": "true"
+  locations:
+    "Moon Trial Link Gossip Fairy 1": "gossip_fairy"
+    "Moon Trial Link Gossip Big Fairy 1": "gossip_fairy_big"
   gossip:
     "Moon Trial Link Gossip 1": "true"
 
@@ -166,6 +199,9 @@
   exits:
     "Moon Trial Link Garo Fight": "true"
     "Moon Trial Link Iron Knuckle Fight": "true"
+  locations:
+    "Moon Trial Link Gossip Fairy 2": "gossip_fairy"
+    "Moon Trial Link Gossip Big Fairy 2": "gossip_fairy_big"
   gossip:
     "Moon Trial Link Gossip 2": "true"
 
@@ -176,6 +212,10 @@
     "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5))) && ((has_bombchu && (has_arrows || can_use_slingshot)) || short_hook_anywhere)"
   locations:
     "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
+    "Moon Trial Link Gossip Fairy Left": "gossip_fairy && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
+    "Moon Trial Link Gossip Fairy Right": "gossip_fairy && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
+    "Moon Trial Link Gossip Big Fairy Left": "gossip_fairy_big && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
+    "Moon Trial Link Gossip Big Fairy Right": "gossip_fairy_big && (short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot)))"
   gossip:
     "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot))"
     "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && (has_arrows || can_use_slingshot))"
@@ -187,6 +227,8 @@
     "Moon Trial Link Exit": "(has_bombchu || (short_hook_anywhere && has_mask_blast && masks(5))) && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
+    "Moon Trial Link Gossip Fairy Last": "gossip_fairy"
+    "Moon Trial Link Gossip Big Fairy Last": "gossip_fairy_big"
   gossip:
     "Moon Trial Link Gossip Last": "true"
 

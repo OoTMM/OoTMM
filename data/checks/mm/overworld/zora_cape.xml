@@ -35,6 +35,12 @@
     <xflag type="pot" location="Zora Cape Pot Near Owl Statue 2" slice="0x0" setup="0x0" room="0x0" actor="0x46" item="FAIRY"/>
     <xflag type="pot" location="Zora Cape Pot Near Owl Statue 3" slice="0x0" setup="0x0" room="0x0" actor="0x47" item="BOMBS_5"/>
     <xflag type="pot" location="Zora Cape Pot Near Owl Statue 4" slice="0x0" setup="0x0" room="0x0" actor="0x48" item="ARROWS_20"/>
+    <actor>
+      <match setup="0" actor="0x3e"/>
+      <match setup="1" actor="0x0"/>
+      <xflag type="gossip" location="Zora Cape Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Zora Cape Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="EXTRA">
     <xflag type="pot" location="Zora Cape Pot Game 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>

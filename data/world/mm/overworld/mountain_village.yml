@@ -95,6 +95,10 @@
     "Mountain Village Spring Red Boulder 1": "is_spring && can_break_red_boulders"
     "Mountain Village Spring Red Boulder 2": "is_spring && can_break_red_boulders"
     "Mountain Village Spring Red Boulder 3": "is_spring && can_break_red_boulders"
+    "Mountain Village Gossip Outside Fairy": "is_spring && gossip_fairy"
+    "Mountain Village Gossip Outside Big Fairy": "is_spring && gossip_fairy_big"
+    "Mountain Village Gossip Tunnel Fairy": "is_spring && (has_mask_goron || short_hook_anywhere) && gossip_fairy"
+    "Mountain Village Gossip Tunnel Big Fairy": "is_spring && (has_mask_goron || short_hook_anywhere) && gossip_fairy_big"
 
 "Mountain Village Butterflies":
   region: MOUNTAIN_VILLAGE

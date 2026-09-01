@@ -9,6 +9,26 @@
     <xflag type="grass" location="Ikana Canyon Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x3c" item="RANDOM"/>
     <xflag type="grass" location="Ikana Canyon Grass 3" slice="0x0" setup="0x0" room="0x0" actor="0x3d" item="RANDOM"/>
     <xflag type="grass" location="Ikana Canyon Grass 4" slice="0x0" setup="0x0" room="0x0" actor="0x3e" item="RANDOM"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x6"/>
+      <match setup="1" actor="0x5"/>
+      <match setup="3" actor="0x6"/>
+      <xflag type="gossip" location="Ikana Valley Gossip Fairy Lower" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ikana Valley Gossip Big Fairy Lower" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x7"/>
+      <match setup="1" actor="0x6"/>
+      <match setup="3" actor="0x5"/>
+      <xflag type="gossip" location="Ikana Valley Gossip Fairy Upper" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ikana Valley Gossip Big Fairy Upper" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor room="0x4">
+      <match setup="0" actor="0x1"/>
+      <match setup="3" actor="0x3"/>
+      <xflag type="gossip" location="Ikana Valley Gossip Fairy Scrub" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Ikana Valley Gossip Big Fairy Scrub" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="FAIRY_FOUNTAIN">
     <npc location="Ikana Great Fairy" npc="GREAT_FAIRY_VALLEY" item="GREAT_FAIRY_SWORD"/>

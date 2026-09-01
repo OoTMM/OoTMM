@@ -46,6 +46,12 @@
     <xflag type="rupee" location="Southern Swamp Rupee 1" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
     <xflag type="rupee" location="Southern Swamp Rupee 2" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RUPEE_BLUE"/>
     <xflag type="hive" location="Southern Swamp Hive" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="RUPEE_RED"/>
+    <actor>
+      <match scene="SOUTHERN_SWAMP" room="0x2" actor="0x13"/>
+      <match scene="SOUTHERN_SWAMP_CLEAR" room="0x2" actor="0x10"/>
+      <xflag type="gossip" location="Southern Swamp Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Southern Swamp Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="POTION_SHOP">
     <npc location="Swamp Potion Shop Kotake" npc="KOTAKE_RED_POTION" item="BOTTLE_POTION_RED"/>

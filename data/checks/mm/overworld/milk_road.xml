@@ -14,6 +14,10 @@
     <xflag type="grass" location="Milk Road Keaton Grass Reward 7" slice="0x6" setup="0x0" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
     <xflag type="grass" location="Milk Road Keaton Grass Reward 8" slice="0x7" setup="0x0" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
     <xflag type="grass" location="Milk Road Keaton Grass Reward 9" slice="0x8" setup="0x0" room="0x0" actor="0x6" item="RUPEE_RED"/>
+    <actor actor="0x2">
+      <xflag type="gossip" location="Milk Road Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Milk Road Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="GORMAN_TRACK">
     <npc location="Gorman Track Garo Mask" npc="MASK_GARO" item="MASK_GARO"/>

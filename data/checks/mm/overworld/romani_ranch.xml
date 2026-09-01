@@ -86,6 +86,18 @@
     <xflag type="soil" location="Romani Ranch Soil Days 2-3 Item 2" slice="0x1" setup="0x0" room="0x0" actor="0x30" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Romani Ranch Soil Days 2-3 Item 3" slice="0x2" setup="0x0" room="0x0" actor="0x30" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Romani Ranch Soil Day 1" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="ARROWS_30"/>
+    <actor actor="0x33">
+      <xflag type="gossip" location="Romani Ranch Gossip Fairy Entrance" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Romani Ranch Gossip Big Fairy Entrance" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x34">
+      <xflag type="gossip" location="Romani Ranch Gossip Fairy Near Tree" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Romani Ranch Gossip Big Fairy Near Tree" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x35">
+      <xflag type="gossip" location="Romani Ranch Gossip Fairy Behind House" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Romani Ranch Gossip Big Fairy Behind House" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="RANCH_HOUSE_BARN">
     <xflag type="wonder" location="Romani Ranch Barn Wonder Item 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RUPEE_BLUE"/>
@@ -114,6 +126,10 @@
     <xflag type="bush" location="Cucco Shack Bush 5" slice="0x4" setup="0x0" room="0x0" actor="0xb" item="NOTHING"/>
     <xflag type="bush" location="Cucco Shack Bush 6" slice="0x5" setup="0x0" room="0x0" actor="0xb" item="NOTHING"/>
     <xflag type="bush" location="Cucco Shack Bush 7" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="NOTHING"/>
+    <actor actor="0x18">
+      <xflag type="gossip" location="Cucco Shack Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Cucco Shack Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="DOG_RACETRACK">
     <chest location="Doggy Racetrack Chest" flag="0x00" item="RUPEE_PURPLE"/>
@@ -123,5 +139,9 @@
     <xflag type="pot" location="Doggy Racetrack Pot 3" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RUPEE_BLUE"/>
     <xflag type="pot" location="Doggy Racetrack Pot 4" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Doggy Racetrack Soil" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RUPEE_RED"/>
+    <actor actor="0xe">
+      <xflag type="gossip" location="Doggy Racetrack Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Doggy Racetrack Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
 </checks>

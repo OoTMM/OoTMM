@@ -34,5 +34,6 @@ typedef union {
 } Color_RGBA16;
 
 void Color_RGBA8_Copy(Color_RGBA8* dst, Color_RGBA8* src);
+void Color_RGB8_Lerp(Color_RGB8* from, Color_RGB8* to, f32 lerp, Color_RGB8* dst);
 
 #endif

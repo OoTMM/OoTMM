@@ -2,6 +2,7 @@
 #define INCLUDED_COMBO_ITEMS_H
 
 #include <combo/types.h>
+#include <combo/xflags.h>
 #include <combo/data/items.h>
 #include <combo/common/actors/Item_Decoy.h>
 #include <combo/oot/save.h>
@@ -261,6 +262,8 @@ s16 Item_Progressive(s16 gi, int ovflags);
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q);
 Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q, const char* name);
+
+int Item_AddXflagRenew(PlayState* play, XflagID xflag, s16 gi);
 
 extern u8 gMaxBombchuOot;
 extern u8 gMaxBombchuMm;

@@ -39,4 +39,4 @@
     <scrub location="Lon Lon Ranch Grotto Right Scrub" flag="0x0a" item="BOMBS_5"/>
     <xflag type="hive" location="Lon Lon Ranch Grotto Hive" slice="0x0" setup="0x0" room="0x27" actor="0x3" item="RUPEE_RED"/>
   </scene>
-</check>
+</checks>

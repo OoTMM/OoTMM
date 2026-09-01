@@ -856,6 +856,34 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: 'none'
 }, {
+  key: 'shuffleGossipFairiesMm',
+  name: 'Gossip Fairies Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls whether or not the gossip stones fairies are shuffled (MM)',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'all', name: 'All' },
+    { value: 'overworld', name: 'Overworld' },
+    { value: 'dungeons', name: 'Dungeons only' },
+  ],
+  cond: hasMM,
+  default: 'none'
+}, {
+  key: 'shuffleGossipBigFairiesMm',
+  name: 'Gossip Big Fairies Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls whether or not the gossip stones big fairies are shuffled (MM)',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'all', name: 'All' },
+    { value: 'overworld', name: 'Overworld' },
+    { value: 'dungeons', name: 'Dungeons only' },
+  ],
+  cond: hasMM,
+  default: 'none'
+}, {
   key: 'shuffleWonderItemsOot',
   name: 'Wonder Items Shuffle (OoT)',
   category: 'main.shuffle',

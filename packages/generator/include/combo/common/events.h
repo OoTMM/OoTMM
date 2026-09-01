@@ -74,7 +74,7 @@
 #define EV_OOT_CHK_FROGS_SOT                  0xd5
 #define EV_OOT_CHK_FROGS_STORMS               0xd6
 #define EV_OOT_CHK_JABU_JABU_OPEN             0x3a
-  
+
 #define EV_OOT_CHK_TRIAL_LIGHT                0xbf
 #define EV_OOT_CHK_TRIAL_FIRE                 0xbe
 #define EV_OOT_CHK_TRIAL_SHADOW               0xbd
@@ -82,12 +82,12 @@
 #define EV_OOT_CHK_TRIAL_FOREST               0xbb
 #define EV_OOT_CHK_TRIAL_SPIRIT               0xad
 #define EN_OOT_CHK_GANON_BARRIER              0xc3
-  
+
 #define EV_OOT_ITEM_DEKU_SEEDS                0x13
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP        0x1c
 #define EV_OOT_ITEM_ANJU_POCKET_EGG           0x2c
 #define EV_OOT_ITEM_HBA_1500                  OOT_EV(0, 15)
-  
+
 #define EV_OOT_INF_KAKARIKO_GATE_OPEN         0x076
 #define EV_OOT_INF_KING_ZORA_THAWED           0x138
 #define EV_OOT_INF_MAGIC_JAR                  0x198
@@ -104,8 +104,8 @@
 #define EV_OOT_INF_RUTO_TOP_FLOOR             OOT_EV(20, 7)
 #define EV_OOT_INF_HBA_1000                   OOT_EV(25, 0)
 #define EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN      OOT_EV(25, 5)
-  
-/* Custom flags that seems unused */  
+
+/* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA                 0x58
 #define EV_OOT_CHK_MEDALLION_SHADOW           0x61
 #define EV_OOT_CHK_SONG_EPONA                 0x62
@@ -220,6 +220,11 @@
 #define EV_MM_WEEK_PIRATES_BEES                             MM_EV(83, 1)
 #define EV_MM_WEEK_WEEKEVENTREG_90_6                        MM_EV(90, 6)
 #define EV_MM_WEEK_BEAVER_RACE1_DONE                        MM_EV(93, 0)
+#define EV_MM_WEEK_GOSSIP_STONES_HEART_PIECE                MM_EV(90, 4)
+
+#define EV_MM_77_08 MM_EV(77, 3)
+#define EV_MM_77_10 MM_EV(77, 4)
+#define EV_MM_77_20 MM_EV(77, 5)
 
 #define EVENTINF_10 0x10
 #define EVENTINF_11 0x11
