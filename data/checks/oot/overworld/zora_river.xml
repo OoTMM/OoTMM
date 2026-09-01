@@ -35,7 +35,7 @@
     </actor>
     <actor room="0x00">
       <match setup="0" actor="0x2e"/>
-      <match setup="2" actor="0x11"/>
+      <match setup="2" actor="0x13"/>
       <xflag type="rock" location="Zora River Rock Water 1" item="RANDOM"/>
     </actor>
     <actor room="0x00">
@@ -45,7 +45,7 @@
     </actor>
     <actor room="0x00">
       <match setup="0" actor="0x30"/>
-      <match setup="2" actor="0x13"/>
+      <match setup="2" actor="0x11"/>
       <xflag type="rock" location="Zora River Rock Water 3" item="RANDOM"/>
     </actor>
     <actor room="0x00">

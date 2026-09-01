@@ -223,20 +223,12 @@ static InitChainEntry sInitChain[] = {
 };
 
 void ObjMure2_AliasGrass(Xflag* xf);
-void ObjMure2_AliasRocks(Xflag* xf);
-
 void ObjMure2_Alias(Actor_ObjMure2* this, PlayState* play)
 {
     Xflag* xf;
 
     xf = &this->xflag;
-    if (OBJ_MURE2_GET_CHILD_TYPE(&this->actor) == OBJMURE2_CHILDTYPE_ROCK_RING)
-    {
-#if defined(GAME_MM)
-        ObjMure2_AliasRocks(xf);
-#endif
-    }
-    else
+    if (!(OBJ_MURE2_GET_CHILD_TYPE(&this->actor) == OBJMURE2_CHILDTYPE_ROCK_RING))
     {
         ObjMure2_AliasGrass(xf);
     }

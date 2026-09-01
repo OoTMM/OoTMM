@@ -11,32 +11,32 @@
     <gs location="Gerudo Valley GS Pillar" flag="0x9a" item="GS_TOKEN"/>
     <cow location="Gerudo Valley Cow" flag="0x08" item="MILK"/>
     <actor>
-      <match setup="0" actor="0x19"/>
+      <match setup="0" actor="0x17"/>
       <match setup="2" actor="0x2a"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Ground 1" item="RANDOM"/>
     </actor>
     <actor>
-      <match setup="0" actor="0x1a"/>
+      <match setup="0" actor="0x18"/>
       <match setup="2" actor="0x2b"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Ground 2" item="RANDOM"/>
     </actor>
     <actor>
-      <match setup="0" actor="0x1b"/>
+      <match setup="0" actor="0x1c"/>
       <match setup="2" actor="0x2c"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Ground 3" item="RANDOM"/>
     </actor>
     <actor>
-      <match setup="0" actor="0x17"/>
+      <match setup="0" actor="0x19"/>
       <match setup="2" actor="0x21"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Water 1" item="RANDOM"/>
     </actor>
     <actor>
-      <match setup="0" actor="0x18"/>
+      <match setup="0" actor="0x1a"/>
       <match setup="2" actor="0x22"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Water 2" item="RANDOM"/>
     </actor>
     <actor>
-      <match setup="0" actor="0x1c"/>
+      <match setup="0" actor="0x1b"/>
       <match setup="2" actor="0x23"/>
       <xflag type="rock" location="Gerudo Valley Rock Entrance Water 3" item="RANDOM"/>
     </actor>
