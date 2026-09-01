@@ -96,5 +96,9 @@
     <xflag type="soil" location="Swamp Spider House Soil Monument Item 2" slice="0x1" setup="0x0" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Swamp Spider House Soil Monument Item 3" slice="0x2" setup="0x0" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
     <xflag type="boulder" location="Swamp Spider House Boulder" slice="0x0" setup="0x0" room="0x3" actor="0x12" item="NOTHING"/>
+    <actor room="0x5" actor="0x0">
+      <xflag type="gossip" location="Swamp Spider House Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Swamp Spider House Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
 </checks>

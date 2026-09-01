@@ -12,6 +12,8 @@
     "Termina Field Soil Observatory Item 1": "has_bugs"
     "Termina Field Soil Observatory Item 2": "has_bugs"
     "Termina Field Soil Observatory Item 3": "has_bugs"
+    "Termina Field Gossip Fairy Observatory": "gossip_fairy"
+    "Termina Field Gossip Big Fairy Observatory": "gossip_fairy_big"
   gossip:
     "Termina Field Gossip Near Observatory": "true"
 
@@ -321,6 +323,16 @@
     "Termina Field Soil Pillar": "has_bugs"
     "Termina Field Boulder West Gossip": "can_break_boulders"
     "Termina Field Boulder Bio Baba": "can_break_boulders"
+    "Termina Field Gossip Fairy Southeast": "gossip_fairy"
+    "Termina Field Gossip Fairy Near Kamaro": "gossip_fairy"
+    "Termina Field Gossip Fairy Near Mountain": "gossip_fairy"
+    "Termina Field Gossip Fairy Southwest": "gossip_fairy"
+    "Termina Field Gossip Fairy Northeast": "gossip_fairy"
+    "Termina Field Gossip Big Fairy Southeast": "gossip_fairy_big"
+    "Termina Field Gossip Big Fairy Near Kamaro": "gossip_fairy_big"
+    "Termina Field Gossip Big Fairy Near Mountain": "gossip_fairy_big"
+    "Termina Field Gossip Big Fairy Southwest": "gossip_fairy_big"
+    "Termina Field Gossip Big Fairy Northeast": "gossip_fairy_big"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"

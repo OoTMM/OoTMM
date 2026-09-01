@@ -278,6 +278,30 @@
     <xflag type="soil" location="Termina Field Soil Wall Item 2" slice="0x1" setup="0x0" room="0x0" actor="0x7" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Termina Field Soil Wall Item 3" slice="0x2" setup="0x0" room="0x0" actor="0x7" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Termina Field Soil Pillar" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="ARROWS_30"/>
+    <actor actor="0x15">
+      <xflag type="gossip" location="Termina Field Gossip Fairy Southeast" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Southeast" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x16">
+      <xflag type="gossip" location="Termina Field Gossip Fairy Near Kamaro" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Near Kamaro" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x17">
+      <xflag type="gossip" location="Termina Field Gossip Fairy Near Mountain" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Near Mountain" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x18">
+      <xflag type="gossip" location="Termina Field Gossip Fairy Southwest" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Southwest" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x19">
+      <xflag type="gossip" location="Termina Field Gossip Fairy Northeast" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Northeast" slice="1" item="FAIRY_BIG"/>
+    </actor>
+    <actor actor="0x1a">
+      <xflag type="gossip" location="Termina Field Gossip Fairy Observatory" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Observatory" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="OBSERVATORY">
     <npc location="Astral Observatory Moon Tear" npc="MOON_TEAR" item="MOON_TEAR"/>
