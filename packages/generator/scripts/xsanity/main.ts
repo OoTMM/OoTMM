@@ -238,17 +238,17 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], lookup: XflagLookup, 
       const check = group.checks[0];
       const ident = group.identities[0];
       const name = xflagName(check, group, lookup);
-      console.log(`  <xflag type="${check.type}" location="${name}" slice="${hex(check.sliceId ?? 0)}" setup="${hex(ident.setupId)}" room="${hex(ident.roomId)}" actor="${hex(ident.actorId)}" item="${check.item}"/>`);
+      console.log(`  <xflag type="${check.type}" location="${name}" slice="${check.sliceId ?? 0}" setup="${ident.setupId}" room="${hex(ident.roomId)}" actor="${hex(ident.actorId)}" item="${check.item}"/>`);
       continue;
     }
 
     console.log('  <actor>');
     for (const ident of group.identities) {
-      console.log(`    <match setup="${hex(ident.setupId)}" room="${hex(ident.roomId)}" actor="${hex(ident.actorId)}"/>`);
+      console.log(`    <match setup="${ident.setupId}" room="${hex(ident.roomId)}" actor="${hex(ident.actorId)}"/>`);
     }
     for (const check of group.checks) {
       const name = xflagName(check, group, lookup);
-      console.log(`    <xflag type="${check.type}" location="${name}" slice="${hex(check.sliceId ?? 0)}" item="${check.item}"/>`);
+      console.log(`    <xflag type="${check.type}" location="${name}" slice="${check.sliceId ?? 0}" item="${check.item}"/>`);
     }
     console.log('  </actor>');
   }
