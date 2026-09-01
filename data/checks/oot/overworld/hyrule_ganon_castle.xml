@@ -3,47 +3,55 @@
   <scene id="HYRULE_CASTLE">
     <npc location="Malon Egg" npc="MALON_EGG" item="CHICKEN"/>
     <gs location="Hyrule Castle GS Tree" flag="0x72" item="GS_TOKEN"/>
-    <xflag type="pot" location="Hyrule Castle Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Hyrule Castle Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="grass" location="Hyrule Castle Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x2e" item="NOTHING"/>
-    <xflag type="grass" location="Hyrule Castle Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x2f" item="NOTHING"/>
-    <xflag type="tree" location="Hyrule Castle Tree 1" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 2" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 3" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 4" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 5" slice="0x0" setup="0x0" room="0x0" actor="0x13" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 6" slice="0x0" setup="0x0" room="0x0" actor="0x15" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 7" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree 8" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="RANDOM"/>
-    <xflag type="tree" location="Hyrule Castle Tree Guarded" slice="0x0" setup="0x0" room="0x0" actor="0x14" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Castle Rock 1" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Castle Rock 2" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="RANDOM"/>
-    <xflag type="rock" location="Hyrule Castle Rock 3" slice="0x0" setup="0x0" room="0x0" actor="0x2c" item="RANDOM"/>
-    <xflag type="boulder" location="Hyrule Castle Boulder" slice="0x0" setup="0x0" room="0x0" actor="0x3a" item="NOTHING"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Torch 1" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Torch 2" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="RUPEE_RED"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 01" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 02" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 03" slice="0x0" setup="0x0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 04" slice="0x0" setup="0x0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 05" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 06" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 07" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 08" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 09" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 10" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RUPEE_BLUE"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 1 Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x33" item="FAIRY"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 1 Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x33" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 2 Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x34" item="FAIRY"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 2 Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x34" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 3 Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x35" item="FAIRY"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 3 Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x35" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 3 Butterfly 3" slice="0x2" setup="0x0" room="0x0" actor="0x35" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x36" item="FAIRY"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 3" slice="0x2" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 4" slice="0x3" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
-    <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 5" slice="0x4" setup="0x0" room="0x0" actor="0x36" item="NOTHING"/>
+    <xflag type="pot" location="Hyrule Castle Pot 1" slice="0x0" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Hyrule Castle Pot 2" slice="0x0" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="grass" location="Hyrule Castle Grass 1" slice="0x0" actor="0x2e" item="NOTHING"/>
+    <xflag type="grass" location="Hyrule Castle Grass 2" slice="0x0" actor="0x2f" item="NOTHING"/>
+    <xflag type="tree" location="Hyrule Castle Tree 1" slice="0x0" actor="0xf" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 2" slice="0x0" actor="0x10" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 3" slice="0x0" actor="0x11" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 4" slice="0x0" actor="0x12" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 5" slice="0x0" actor="0x13" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 6" slice="0x0" actor="0x15" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 7" slice="0x0" actor="0x31" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree 8" slice="0x0" actor="0x32" item="RANDOM"/>
+    <xflag type="tree" location="Hyrule Castle Tree Guarded" slice="0x0" actor="0x14" item="RANDOM"/>
+    <xflag type="rock" location="Hyrule Castle Rock 1" slice="0x0" actor="0x2a" item="RANDOM"/>
+    <xflag type="rock" location="Hyrule Castle Rock 2" slice="0x0" actor="0x2b" item="RANDOM"/>
+    <xflag type="rock" location="Hyrule Castle Rock 3" slice="0x0" actor="0x2c" item="RANDOM"/>
+    <xflag type="boulder" location="Hyrule Castle Boulder" slice="0x0" actor="0x3a" item="NOTHING"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Torch 1" slice="0x0" actor="0xc" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Torch 2" slice="0x0" actor="0xd" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 01" slice="0x0" actor="0x20" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 02" slice="0x0" actor="0x21" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 03" slice="0x0" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 04" slice="0x0" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 05" slice="0x0" actor="0x24" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 06" slice="0x0" actor="0x25" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 07" slice="0x0" actor="0x26" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 08" slice="0x0" actor="0x27" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 09" slice="0x0" actor="0x28" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Hyrule Castle Wonder Item Moat 10" slice="0x0" actor="0x29" item="RUPEE_BLUE"/>
+    <actor actor="0x33">
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 1 Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 1 Butterfly 2" slice="1" item="NOTHING"/>
+    </actor>
+    <actor actor="0x34">
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 2 Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 2 Butterfly 2" slice="1" item="NOTHING"/>
+    </actor>
+    <actor actor="0x35">
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 3 Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 3 Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 3 Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
+    <actor actor="0x36">
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 3" slice="2" item="NOTHING"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 4" slice="3" item="NOTHING"/>
+      <xflag type="butterfly" location="Hyrule Castle Butterfly Pack 4 Butterfly 5" slice="4" item="NOTHING"/>
+    </actor>
     <actor actor="0x2">
       <xflag type="gossip" location="Hyrule Castle Gossip Fairy Near Castle" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Hyrule Castle Gossip Big Fairy Near Castle" slice="1" item="FAIRY_BIG"/>

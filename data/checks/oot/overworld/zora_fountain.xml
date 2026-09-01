@@ -31,8 +31,10 @@
     <xflag type="rupee" location="Zora Fountain Rupee 16" slice="0x0" setup="0x2" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Zora Fountain Rupee 17" slice="0x0" setup="0x2" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Zora Fountain Rupee 18" slice="0x0" setup="0x2" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="butterfly" location="Zora Fountain Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="FAIRY"/>
-    <xflag type="butterfly" location="Zora Fountain Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0xe" item="NOTHING"/>
+    <actor setup="0x0" room="0x0" actor="0xe">
+      <xflag type="butterfly" location="Zora Fountain Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Zora Fountain Butterfly 2" slice="1" item="NOTHING"/>
+    </actor>
     <xflag type="bush" location="Zora Fountain Bush 1" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="NOTHING"/>
     <xflag type="bush" location="Zora Fountain Bush 2" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="NOTHING"/>
     <xflag type="bush" location="Zora Fountain Bush 3" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="NOTHING"/>

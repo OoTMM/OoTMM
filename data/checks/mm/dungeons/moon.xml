@@ -2,19 +2,19 @@
 <checks game="mm">
   <scene id="MOON">
     <npc location="Moon Fierce Deity Mask" npc="MASK_FIERCE_DEITY" item="MASK_FIERCE_DEITY"/>
-    <xflag type="butterfly" location="Moon Butterfly 01" slice="0x0" setup="0x0" room="0x0" actor="0x5" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 02" slice="0x0" setup="0x0" room="0x0" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 03" slice="0x0" setup="0x0" room="0x0" actor="0x7" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 04" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 05" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="NOTHING"/>
-    <xflag type="butterfly" location="Moon Butterfly 06" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 07" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 08" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 09" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 10" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 11" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 12" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="FAIRY"/>
-    <xflag type="butterfly" location="Moon Butterfly 13" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 01" actor="0x5" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 02" actor="0x6" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 03" actor="0x7" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 04" actor="0x8" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 05" actor="0x9" item="NOTHING"/>
+    <xflag type="butterfly" location="Moon Butterfly 06" actor="0xa" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 07" actor="0xb" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 08" actor="0xc" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 09" actor="0xd" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 10" actor="0xe" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 11" actor="0xf" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 12" actor="0x10" item="FAIRY"/>
+    <xflag type="butterfly" location="Moon Butterfly 13" actor="0x11" item="FAIRY"/>
   </scene>
   <scene id="MOON_DEKU">
     <collectible location="Moon Trial Deku HP" flag="0x01" item="HEART_PIECE"/>

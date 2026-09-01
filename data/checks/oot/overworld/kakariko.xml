@@ -13,49 +13,51 @@
     <gs location="Kakariko GS House of Skulltula" flag="0x84" item="GS_TOKEN"/>
     <gs location="Kakariko GS Bazaar" flag="0x81" item="GS_TOKEN"/>
     <gs location="Kakariko GS Ladder" flag="0x82" item="GS_TOKEN"/>
-    <xflag type="pot" location="Kakariko Pot 01" slice="0x0" setup="0x0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 02" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 03" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 04" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 05" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 06" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 07" slice="0x0" setup="0x0" room="0x0" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 08" slice="0x0" setup="0x0" room="0x0" actor="0xf" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 09" slice="0x0" setup="0x0" room="0x0" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Back Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Back Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x12" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Trail" slice="0x0" setup="0x0" room="0x0" actor="0x31" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near House" slice="0x0" setup="0x0" room="0x0" actor="0x32" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Windmill Bottom" slice="0x0" setup="0x0" room="0x0" actor="0x33" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Windmill Top" slice="0x0" setup="0x0" room="0x0" actor="0x34" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Graveyard" slice="0x0" setup="0x0" room="0x0" actor="0x35" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near First House" slice="0x0" setup="0x2" room="0x0" actor="0x22" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Trail 1" slice="0x0" setup="0x2" room="0x0" actor="0x23" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Trail 2" slice="0x0" setup="0x2" room="0x0" actor="0x24" item="ARROWS_5"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Impa 1" slice="0x0" setup="0x2" room="0x0" actor="0x25" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Impa 2" slice="0x0" setup="0x2" room="0x0" actor="0x26" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Center 1" slice="0x0" setup="0x2" room="0x0" actor="0x27" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Center 2" slice="0x0" setup="0x2" room="0x0" actor="0x28" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Archery" slice="0x0" setup="0x2" room="0x0" actor="0x29" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Potion Shop" slice="0x0" setup="0x2" room="0x0" actor="0x2a" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 1" slice="0x0" setup="0x2" room="0x0" actor="0x2b" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 2" slice="0x0" setup="0x2" room="0x0" actor="0x2c" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 3" slice="0x0" setup="0x2" room="0x0" actor="0x2d" item="RUPEE_RED"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 4" slice="0x0" setup="0x2" room="0x0" actor="0x2e" item="NOTHING"/>
-    <xflag type="grass" location="Kakariko Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x25" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 3" slice="0x0" setup="0x0" room="0x0" actor="0x26" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 4" slice="0x0" setup="0x0" room="0x0" actor="0x27" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 5" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 6" slice="0x0" setup="0x0" room="0x0" actor="0x29" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 7" slice="0x0" setup="0x0" room="0x0" actor="0x2a" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 8" slice="0x0" setup="0x0" room="0x0" actor="0x2b" item="RANDOM"/>
-    <xflag type="boulder-silver" location="Kakariko Silver Boulder" slice="0x0" setup="0x2" room="0x0" actor="0x30" item="NOTHING"/>
-    <xflag type="wonder" location="Kakariko Wonder Item" slice="0x0" setup="0x0" room="0x0" actor="0x37" item="RUPEE_RED"/>
-    <xflag type="butterfly" location="Kakariko Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x2e" item="FAIRY"/>
-    <xflag type="butterfly" location="Kakariko Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x2e" item="NOTHING"/>
-    <xflag type="rock" location="Kakariko Rock Near Gate" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="RANDOM"/>
-    <xflag type="rock" location="Kakariko Rock Near Spider House" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="RANDOM"/>
+    <xflag type="pot" location="Kakariko Pot 01" slice="0x0" setup="0x0" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 02" slice="0x0" setup="0x0" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 03" slice="0x0" setup="0x0" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 04" slice="0x0" setup="0x0" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 05" slice="0x0" setup="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 06" slice="0x0" setup="0x0" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 07" slice="0x0" setup="0x0" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 08" slice="0x0" setup="0x0" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Pot 09" slice="0x0" setup="0x0" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Back Pot 1" slice="0x0" setup="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Kakariko Back Pot 2" slice="0x0" setup="0x0" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Kakariko Crate Child Near Trail" slice="0x0" setup="0x0" actor="0x31" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Child Near House" slice="0x0" setup="0x0" actor="0x32" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Child Near Windmill Bottom" slice="0x0" setup="0x0" actor="0x33" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Child Near Windmill Top" slice="0x0" setup="0x0" actor="0x34" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Child Near Graveyard" slice="0x0" setup="0x0" actor="0x35" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near First House" slice="0x0" setup="0x2" actor="0x22" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near Trail 1" slice="0x0" setup="0x2" actor="0x23" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near Trail 2" slice="0x0" setup="0x2" actor="0x24" item="ARROWS_5"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near Impa 1" slice="0x0" setup="0x2" actor="0x25" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near Impa 2" slice="0x0" setup="0x2" actor="0x26" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Center 1" slice="0x0" setup="0x2" actor="0x27" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Center 2" slice="0x0" setup="0x2" actor="0x28" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near Archery" slice="0x0" setup="0x2" actor="0x29" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Near Potion Shop" slice="0x0" setup="0x2" actor="0x2a" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Back 1" slice="0x0" setup="0x2" actor="0x2b" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Back 2" slice="0x0" setup="0x2" actor="0x2c" item="NOTHING"/>
+    <xflag type="crate" location="Kakariko Crate Adult Back 3" slice="0x0" setup="0x2" actor="0x2d" item="RUPEE_RED"/>
+    <xflag type="crate" location="Kakariko Crate Adult Back 4" slice="0x0" setup="0x2" actor="0x2e" item="NOTHING"/>
+    <xflag type="grass" location="Kakariko Grass 1" slice="0x0" setup="0x0" actor="0x24" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 2" slice="0x0" setup="0x0" actor="0x25" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 3" slice="0x0" setup="0x0" actor="0x26" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 4" slice="0x0" setup="0x0" actor="0x27" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 5" slice="0x0" setup="0x0" actor="0x28" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 6" slice="0x0" setup="0x0" actor="0x29" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 7" slice="0x0" setup="0x0" actor="0x2a" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grass 8" slice="0x0" setup="0x0" actor="0x2b" item="RANDOM"/>
+    <xflag type="boulder-silver" location="Kakariko Silver Boulder" slice="0x0" setup="0x2" actor="0x30" item="NOTHING"/>
+    <xflag type="wonder" location="Kakariko Wonder Item" slice="0x0" setup="0x0" actor="0x37" item="RUPEE_RED"/>
+    <actor setup="0x0" actor="0x2e">
+      <xflag type="butterfly" location="Kakariko Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Kakariko Butterfly 2" slice="1" item="NOTHING"/>
+    </actor>
+    <xflag type="rock" location="Kakariko Rock Near Gate" slice="0x0" setup="0x0" actor="0x20" item="RANDOM"/>
+    <xflag type="rock" location="Kakariko Rock Near Spider House" slice="0x0" setup="0x0" actor="0x21" item="RANDOM"/>
   </scene>
   <scene name="Impa House" id="IMPA_HOUSE">
     <collectible location="Kakariko Impa House HP" flag="0x01" item="HEART_PIECE"/>
@@ -65,18 +67,20 @@
   <scene name="Kakariko ReDead Grotto" id="GROTTOS">
     <chest location="Kakariko Grotto Front" flag="0x0a" item="RUPEE_HUGE"/>
   </scene>
-  <scene name="Kakariko Generic Grotto" id="GROTTOS">
+  <scene name="Kakariko Generic Grotto" id="GROTTOS" room="0x28">
     <chest location="Kakariko Grotto Back" flag="0x08" item="RUPEE_RED"/>
-    <xflag type="grass" location="Kakariko Grotto Back Grass 1" slice="0x0" setup="0x0" room="0x28" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grotto Back Grass 2" slice="0x0" setup="0x0" room="0x28" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grotto Back Grass 3" slice="0x0" setup="0x0" room="0x28" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grotto Back Grass 4" slice="0x0" setup="0x0" room="0x28" actor="0x5" item="RANDOM"/>
-    <xflag type="hive" location="Kakariko Grotto Back Hive 1" slice="0x0" setup="0x0" room="0x28" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Kakariko Grotto Back Hive 2" slice="0x0" setup="0x0" room="0x28" actor="0x8" item="RUPEE_RED"/>
-    <xflag type="butterfly" location="Kakariko Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x28" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Kakariko Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x28" actor="0x6" item="NOTHING"/>
-    <xflag type="butterfly" location="Kakariko Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x28" actor="0x6" item="NOTHING"/>
-    <actor room="0x28" actor="0x9">
+    <xflag type="grass" location="Kakariko Grotto Back Grass 1" slice="0x0" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grotto Back Grass 2" slice="0x0" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grotto Back Grass 3" slice="0x0" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Kakariko Grotto Back Grass 4" slice="0x0" actor="0x5" item="RANDOM"/>
+    <xflag type="hive" location="Kakariko Grotto Back Hive 1" slice="0x0" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Kakariko Grotto Back Hive 2" slice="0x0" actor="0x8" item="RUPEE_RED"/>
+    <actor actor="0x6">
+      <xflag type="butterfly" location="Kakariko Grotto Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Kakariko Grotto Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Kakariko Grotto Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
+    <actor actor="0x9">
       <xflag type="gossip" location="Kakariko Generic Grotto Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Kakariko Generic Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>

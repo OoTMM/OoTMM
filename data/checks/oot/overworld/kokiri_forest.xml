@@ -143,18 +143,20 @@
     <xflag type="pot" location="Twins House Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="RUPEE_GREEN"/>
     <xflag type="pot" location="Twins House Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x3" item="RUPEE_BLUE"/>
   </scene>
-  <scene name="Kokiri Forest Storms Grotto" id="GROTTOS">
+  <scene name="Kokiri Forest Storms Grotto" id="GROTTOS" room="0x2c">
     <chest location="Kokiri Forest Storms Grotto" flag="0x0c" item="RUPEE_RED"/>
-    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 1" slice="0x0" setup="0x0" room="0x2c" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 2" slice="0x0" setup="0x0" room="0x2c" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 3" slice="0x0" setup="0x0" room="0x2c" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 4" slice="0x0" setup="0x0" room="0x2c" actor="0x5" item="RANDOM"/>
-    <xflag type="hive" location="Kokiri Forest Storms Grotto Hive 1" slice="0x0" setup="0x0" room="0x2c" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Kokiri Forest Storms Grotto Hive 2" slice="0x0" setup="0x0" room="0x2c" actor="0x8" item="RUPEE_RED"/>
-    <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x2c" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x2c" actor="0x6" item="NOTHING"/>
-    <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x2c" actor="0x6" item="NOTHING"/>
-    <actor room="0x2c" actor="0x9">
+    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 1" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 2" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 3" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Kokiri Forest Storms Grotto Grass 4" actor="0x5" item="RANDOM"/>
+    <xflag type="hive" location="Kokiri Forest Storms Grotto Hive 1" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Kokiri Forest Storms Grotto Hive 2" actor="0x8" item="RUPEE_RED"/>
+    <actor actor="0x6">
+      <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Kokiri Forest Storms Grotto Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
+    <actor actor="0x9">
       <xflag type="gossip" location="Kokiri Forest Storms Grotto Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Kokiri Forest Storms Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>

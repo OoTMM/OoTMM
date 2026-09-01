@@ -75,15 +75,19 @@
     <xflag type="grass" location="Mountain Village Keaton Grass Reward 9" slice="0x8" setup="0x0" room="0x0" actor="0x2c" item="RUPEE_RED"/>
     <xflag type="rupee" location="Mountain Village Rupee" slice="0x0" setup="0x0" room="0x0" actor="0x28" item="RUPEE_RED"/>
     <xflag type="hive" location="Mountain Village Hive" slice="0x0" setup="0x0" room="0x0" actor="0x24" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x20" item="FAIRY"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x20" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 3" slice="0x2" setup="0x0" room="0x0" actor="0x20" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 4" slice="0x3" setup="0x0" room="0x0" actor="0x20" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 1" slice="0x0" setup="0x0" room="0x0" actor="0x21" item="FAIRY"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 2" slice="0x1" setup="0x0" room="0x0" actor="0x21" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 3" slice="0x2" setup="0x0" room="0x0" actor="0x21" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 4" slice="0x3" setup="0x0" room="0x0" actor="0x21" item="NOTHING"/>
-    <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 5" slice="0x4" setup="0x0" room="0x0" actor="0x21" item="NOTHING"/>
+    <actor room="0x0" actor="0x20">
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 3" slice="2" item="NOTHING"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 4" slice="3" item="NOTHING"/>
+    </actor>
+    <actor room="0x0" actor="0x21">
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 3" slice="2" item="NOTHING"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 4" slice="3" item="NOTHING"/>
+      <xflag type="butterfly" location="Mountain Village Butterfly Pack 2 Butterfly 5" slice="4" item="NOTHING"/>
+    </actor>
     <xflag type="boulder-red" location="Mountain Village Spring Red Boulder 1" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="NOTHING"/>
     <xflag type="boulder-red" location="Mountain Village Spring Red Boulder 2" slice="0x0" setup="0x0" room="0x0" actor="0x1" item="NOTHING"/>
     <xflag type="boulder-red" location="Mountain Village Spring Red Boulder 3" slice="0x0" setup="0x0" room="0x0" actor="0x2" item="NOTHING"/>

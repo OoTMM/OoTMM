@@ -4,9 +4,11 @@
     <collectible location="Graveyard Dampe Game" flag="0x1f" item="HEART_PIECE"/>
     <npc location="Graveyard Sell Spooky Mask" npc="MASK_SELL_SPOOKY" item="RUPEE_RED"/>
     <xflag type="rock" location="Graveyard Rock" slice="0x0" setup="0x0" room="0x1" actor="0xe" item="RANDOM"/>
-    <xflag type="butterfly" location="Graveyard Butterfly 1" slice="0x0" setup="0x0" room="0x1" actor="0x11" item="FAIRY"/>
-    <xflag type="butterfly" location="Graveyard Butterfly 2" slice="0x1" setup="0x0" room="0x1" actor="0x11" item="NOTHING"/>
-    <xflag type="butterfly" location="Graveyard Butterfly 3" slice="0x2" setup="0x0" room="0x1" actor="0x11" item="NOTHING"/>
+    <actor room="0x1" actor="0x11">
+      <xflag type="butterfly" location="Graveyard Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Graveyard Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Graveyard Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
     <collectible location="Graveyard Crate HP" flag="0x04" item="HEART_PIECE"/>
     <gs location="Graveyard GS Soil" flag="0x80" item="GS_TOKEN"/>
     <gs location="Graveyard GS Wall" flag="0x87" item="GS_TOKEN"/>

@@ -52,18 +52,20 @@
       <xflag type="gossip-big" location="Death Mountain Trail Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
   </scene>
-  <scene name="Death Mountain Trail Grotto" id="GROTTOS">
+  <scene name="Death Mountain Trail Grotto" id="GROTTOS" room="0x37">
     <chest location="Death Mountain Trail Grotto" flag="0x17" item="RUPEE_HUGE"/>
-    <xflag type="grass" location="Death Mountain Trail Grotto Grass 1" slice="0x0" setup="0x0" room="0x37" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Trail Grotto Grass 2" slice="0x0" setup="0x0" room="0x37" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Trail Grotto Grass 3" slice="0x0" setup="0x0" room="0x37" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Trail Grotto Grass 4" slice="0x0" setup="0x0" room="0x37" actor="0x5" item="RANDOM"/>
-    <xflag type="hive" location="Death Mountain Trail Grotto Hive 1" slice="0x0" setup="0x0" room="0x37" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Death Mountain Trail Grotto Hive 2" slice="0x0" setup="0x0" room="0x37" actor="0x8" item="RUPEE_RED"/>
-    <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x37" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x37" actor="0x6" item="NOTHING"/>
-    <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x37" actor="0x6" item="NOTHING"/>
-    <actor room="0x37" actor="0x9">
+    <xflag type="grass" location="Death Mountain Trail Grotto Grass 1" slice="0x0" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Trail Grotto Grass 2" slice="0x0" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Trail Grotto Grass 3" slice="0x0" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Trail Grotto Grass 4" slice="0x0" actor="0x5" item="RANDOM"/>
+    <xflag type="hive" location="Death Mountain Trail Grotto Hive 1" slice="0x0" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Death Mountain Trail Grotto Hive 2" slice="0x0" actor="0x8" item="RUPEE_RED"/>
+    <actor actor="0x6">
+      <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Death Mountain Trail Grotto Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
+    <actor actor="0x9">
       <xflag type="gossip" location="Death Mountain Trail Storms Grotto Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Death Mountain Trail Storms Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>

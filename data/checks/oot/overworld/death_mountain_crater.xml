@@ -61,27 +61,29 @@
       <xflag type="gossip-big" location="Death Mountain Crater Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x3a">
     <chest location="Death Mountain Crater Grotto" flag="0x1a" item="BOMBS_20"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 1" slice="0x0" setup="0x0" room="0x3a" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 2" slice="0x0" setup="0x0" room="0x3a" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 3" slice="0x0" setup="0x0" room="0x3a" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 4" slice="0x0" setup="0x0" room="0x3a" actor="0x5" item="RANDOM"/>
-    <xflag type="hive" location="Death Mountain Crater Grotto Hive 1" slice="0x0" setup="0x0" room="0x3a" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Death Mountain Crater Grotto Hive 2" slice="0x0" setup="0x0" room="0x3a" actor="0x8" item="RUPEE_RED"/>
-    <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x3a" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x3a" actor="0x6" item="NOTHING"/>
-    <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x3a" actor="0x6" item="NOTHING"/>
-    <actor room="0x3a" actor="0x9">
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 1" slice="0x0" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 2" slice="0x0" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 3" slice="0x0" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 4" slice="0x0" actor="0x5" item="RANDOM"/>
+    <xflag type="hive" location="Death Mountain Crater Grotto Hive 1" slice="0x0" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Death Mountain Crater Grotto Hive 2" slice="0x0" actor="0x8" item="RUPEE_RED"/>
+    <actor actor="0x6">
+      <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 1" slice="0x0" item="FAIRY"/>
+      <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 2" slice="0x1" item="NOTHING"/>
+      <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 3" slice="0x2" item="NOTHING"/>
+    </actor>
+    <actor actor="0x9">
       <xflag type="gossip" location="Death Mountain Crater Generic Grotto Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Death Mountain Crater Generic Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x2b">
     <scrub location="Death Mountain Crater Grotto Left Scrub" flag="0x0f" item="NUTS_5"/>
     <scrub location="Death Mountain Crater Grotto Center Scrub" flag="0x10" item="DEKU_SEEDS_30"/>
     <scrub location="Death Mountain Crater Grotto Right Scrub" flag="0x11" item="BOMBS_5"/>
-    <xflag type="hive" location="Death Mountain Crater Scrub Grotto Hive" slice="0x0" setup="0x0" room="0x2b" actor="0x3" item="RUPEE_RED"/>
+    <xflag type="hive" location="Death Mountain Crater Scrub Grotto Hive" actor="0x3" item="RUPEE_RED"/>
   </scene>
   <scene id="GREAT_FAIRY_FOUNTAIN_UPGRADES">
     <npc location="Great Fairy Magic Upgrade 2" npc="FAIRY_MAGIC_UPGRADE2" item="MAGIC_UPGRADE"/>

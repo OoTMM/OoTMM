@@ -54,11 +54,15 @@
     <xflag type="boulder" location="Zora River Boulder Lower 3" slice="0x0" setup="0x0" room="0x0" actor="0x3f" item="NOTHING"/>
     <xflag type="boulder" location="Zora River Boulder Lower 4" slice="0x0" setup="0x0" room="0x0" actor="0x40" item="NOTHING"/>
     <xflag type="boulder" location="Zora River Boulder Upper" slice="0x0" setup="0x0" room="0x0" actor="0x3d" item="NOTHING"/>
-    <xflag type="butterfly" location="Zora River Butterfly Near Beans 1" slice="0x0" setup="0x0" room="0x0" actor="0x37" item="FAIRY"/>
-    <xflag type="butterfly" location="Zora River Butterfly Near Beans 2" slice="0x1" setup="0x0" room="0x0" actor="0x37" item="NOTHING"/>
-    <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 1" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="FAIRY"/>
-    <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 2" slice="0x1" setup="0x0" room="0x1" actor="0xa" item="NOTHING"/>
-    <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 3" slice="0x2" setup="0x0" room="0x1" actor="0xa" item="NOTHING"/>
+    <actor setup="0x0" room="0x0" actor="0x37">
+      <xflag type="butterfly" location="Zora River Butterfly Near Beans 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Zora River Butterfly Near Beans 2" slice="1" item="NOTHING"/>
+    </actor>
+    <actor setup="0x0" room="0x1" actor="0xa">
+      <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 3" slice="2" item="NOTHING"/>
+    </actor>
     <xflag type="soil" location="Zora River Soil 1" slice="0x0" setup="0x0" room="0x0" actor="0x38" item="FAIRY"/>
     <xflag type="soil" location="Zora River Soil 2" slice="0x1" setup="0x0" room="0x0" actor="0x38" item="FAIRY"/>
     <xflag type="soil" location="Zora River Soil 3" slice="0x2" setup="0x0" room="0x0" actor="0x38" item="FAIRY"/>
@@ -110,18 +114,20 @@
       <xflag type="gossip-big" location="Zora River Gossip Big Fairy Water" slice="1" item="FAIRY_BIG"/>
     </actor>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x29">
     <chest location="Zora River Grotto" flag="0x09" item="RUPEE_RED"/>
-    <xflag type="grass" location="Zora River Grotto Grass 1" slice="0x0" setup="0x0" room="0x29" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Zora River Grotto Grass 2" slice="0x0" setup="0x0" room="0x29" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Zora River Grotto Grass 3" slice="0x0" setup="0x0" room="0x29" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Zora River Grotto Grass 4" slice="0x0" setup="0x0" room="0x29" actor="0x5" item="RANDOM"/>
-    <xflag type="hive" location="Zora River Grotto Hive 1" slice="0x0" setup="0x0" room="0x29" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Zora River Grotto Hive 2" slice="0x0" setup="0x0" room="0x29" actor="0x8" item="RUPEE_RED"/>
-    <xflag type="butterfly" location="Zora River Grotto Butterfly 1" slice="0x0" setup="0x0" room="0x29" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Zora River Grotto Butterfly 2" slice="0x1" setup="0x0" room="0x29" actor="0x6" item="NOTHING"/>
-    <xflag type="butterfly" location="Zora River Grotto Butterfly 3" slice="0x2" setup="0x0" room="0x29" actor="0x6" item="NOTHING"/>
-    <actor room="0x29" actor="0x9">
+    <xflag type="grass" location="Zora River Grotto Grass 1" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Zora River Grotto Grass 2" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Zora River Grotto Grass 3" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Zora River Grotto Grass 4" actor="0x5" item="RANDOM"/>
+    <xflag type="hive" location="Zora River Grotto Hive 1" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Zora River Grotto Hive 2" actor="0x8" item="RUPEE_RED"/>
+    <actor actor="0x6">
+      <xflag type="butterfly" location="Zora River Grotto Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Zora River Grotto Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Zora River Grotto Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
+    <actor actor="0x9">
       <xflag type="gossip" location="Zora River Generic Grotto Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Zora River Generic Grotto Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
     </actor>
