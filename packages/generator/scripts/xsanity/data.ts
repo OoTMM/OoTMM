@@ -99,8 +99,8 @@ export const ACTORS_OOT = {
 export const ACTORS_MM = {
   EN_GS: 0xef,
   EN_ITEM00: 0x0e,
-  POT: 0x82,
-  FLYING_POT: 0x8d,
+  OBJ_TSUBO: 0x82,
+  EN_TUBO_TRAP: 0x8d,
   EN_KUSA: 0x90,
   EN_BUTTE: 0x15,
   OBJ_MURE: 0x4f,
@@ -266,7 +266,7 @@ export const MM_ITEM00_DROP_COLLECTIBLE_TABLE = [
 ];
 
 /* Unused? */
-const MM_POTS_SET_DROPS = [
+export const MM_POTS_SET_DROPS = [
   'NOTHING',
   'RUPEE_GREEN',
   'RUPEE_BLUE',
@@ -301,7 +301,7 @@ const MM_POTS_SET_DROPS = [
   'ARROWS_20',
 ];
 
-const MM_POTS_RANDOM_DROPS = [
+export const MM_POTS_RANDOM_DROPS = [
   'RUPEE_GREEN',
   'MAGIC_JAR_SMALL',
   'RECOVERY_HEART',

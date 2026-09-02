@@ -36,6 +36,8 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_MM.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
   [ACTORS_MM.EN_GS]: CommonHandlers.EnGs,
+  [ACTORS_MM.OBJ_TSUBO]: MmHandlers.ObjTsubo,
+  [ACTORS_MM.EN_TUBO_TRAP]: MmHandlers.EnTuboTrap,
   [ACTORS_MM.EN_ITEM00]: MmHandlers.EnItem00,
   [ACTORS_MM.EN_KUSA]: MmHandlers.EnKusa,
   [ACTORS_MM.EN_KUSA2]: MmHandlers.EnKusa2,

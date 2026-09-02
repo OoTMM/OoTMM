@@ -1,4 +1,4 @@
-import { ITEM00_DROPS_MM, MM_ITEM00_DROP_COLLECTIBLE_TABLE, RUPEES } from '../data';
+import { ITEM00_DROPS_MM, MM_ITEM00_DROP_COLLECTIBLE_TABLE, MM_POTS_RANDOM_DROPS, MM_POTS_SET_DROPS, RUPEES } from '../data';
 import type { Check, RoomActor } from '../types';
 import { handleWood02 } from './helpers';
 
@@ -173,4 +173,43 @@ export function EnItem00(checks: Check[], ra: RoomActor) {
   } else if (item === 'RECOVERY_HEART') {
     checks.push({ roomActor: ra, item, name: 'Heart', type: 'heart' });
   }
+}
+
+export function ObjTsubo(checks: Check[], ra: RoomActor) {
+  let item: string;
+  const potType = (ra.actor.params >> 7) & 3;
+  const potEnemy = (ra.actor.rz >> 7) & 3;
+  //if (potEnemy)
+  //  return;
+  switch (potType) {
+  case 0:
+  case 2:
+    /* Set item */
+    item = MM_POTS_SET_DROPS[ra.actor.params & 0x1f];
+    break;
+  case 1:
+    /* Magic Pot */
+    item = 'MAGIC_JAR_LARGE';
+    break;
+  case 3:
+    /* Random item */
+    if (ra.actor.params & 0x10) {
+      item = 'NOTHING';
+    } else {
+      item = MM_POTS_RANDOM_DROPS[ra.actor.params & 0x1f];
+    }
+    break;
+  default:
+    item = 'DUMMY';
+    break;
+  }
+  if (item === 'STRAY_FAIRY') {
+    return;
+  }
+  checks.push({ roomActor: ra, item, name: 'Pot', type: 'pot' });
+}
+
+export function EnTuboTrap(checks: Check[], ra: RoomActor) {
+  const item = '???'; /* TODO: Document this */
+  checks.push({ roomActor: ra, item, name: 'Flying Pot', type: 'pot' });
 }
