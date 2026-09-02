@@ -37,6 +37,7 @@ static u32 sDtStartTicks, sDtTargetTicks;
 static u8 sDtTextDirty;
 static u8 sDtNativeDoubleTime;
 static u8 sDtNativeSawActor;
+static u8 sDtSceneReloadsOnBoundary;
 static int DtIsNight(u16 time) { return time < CLOCK_TIME(6, 0) || time >= CLOCK_TIME(18, 0); }
 static u32 DtTicksToMinutes(u32 ticks) { return (ticks * DT_MINUTES_PER_DAY) >> 16; }
 static u32 DtMinutesToTicks(u32 minutes) { return ((minutes << 16) + DT_MINUTES_PER_DAY - 1) / DT_MINUTES_PER_DAY; }
@@ -351,13 +352,16 @@ static void DtReloadAtCurrentEntrance(PlayState* play) {
 
 static void DtFinishNormalDoubleTime(PlayState* play, int nativeTransition) {
     u32 target;
+    int crossedHalf;
     int reload;
 
     target = DtGetFinalTargetTicks();
-    reload = !DtSameHalf(sDtStartTicks, target);
+    crossedHalf = !DtSameHalf(sDtStartTicks, target);
+    reload = nativeTransition || (crossedHalf && sDtSceneReloadsOnBoundary);
     DtSetDoubleTimeTarget();
     sDtNativeDoubleTime = 0;
     sDtNativeSawActor = 0;
+    sDtSceneReloadsOnBoundary = 0;
     gSaveContext.nextDayTime = NEXT_TIME_NONE;
     MM_CLEAR_EVENT_INF(EVENTINF_TRIGGER_DAYTELOP);
     play->msgCtx.ocarinaMode = OCARINA_MODE_END;
@@ -396,10 +400,13 @@ static void DtUpdateNormalDoubleTime(PlayState* play) {
 static void DtStartNormalDoubleTime(PlayState* play) {
     sDtNativeDoubleTime = 1;
     sDtNativeSawActor = 0;
+    sDtSceneReloadsOnBoundary = MM_CHECK_EVENT_INF(EVENTINF_HAS_DAYTIME_TRANSITION_CS);
     gDoubleTimeTargetPending = 0;
     gDoubleTimeTargetDayChanged = 0;
     gSaveContext.nextDayTime = NEXT_TIME_NONE;
     MM_CLEAR_EVENT_INF(EVENTINF_TRIGGER_DAYTELOP);
+    if (!DtSameHalf(sDtStartTicks, sDtTargetTicks))
+        gSave.time = gSave.isNight ? CLOCK_TIME(6, 0) : CLOCK_TIME(18, 0);
     gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = 0;
     Message_Close(play);
     play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_DOUBLE_SOT;
