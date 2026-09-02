@@ -4,6 +4,7 @@
 #include <combo/mm/regs.h>
 #include <combo/mm/interface.h>
 #include <combo/mm/message.h>
+#include <combo/mm/environment.h>
 #include <combo/common/ocarina.h>
 #include <combo/entrance.h>
 
@@ -17,6 +18,7 @@
 #define DT_CLOCK_DRAW_TEXT_ID 0x0100
 #define DT_FAST_FORWARD_SPEED 400
 #define DT_SELECTOR_BOX_Y 90
+#define DT_EN_TEST6_TIMER_OFFSET 0x27a
 
 typedef enum {
     DT_STATE_NONE,
@@ -33,7 +35,8 @@ static s8 sDtStickRepeatDir;
 static s32 sDtDisplayedHalf = -1;
 static u32 sDtStartTicks, sDtTargetTicks;
 static u8 sDtTextDirty;
-static u8 sDtPostReloadState;
+static u8 sDtNativeDoubleTime;
+static u8 sDtNativeSawActor;
 static int DtIsNight(u16 time) { return time < CLOCK_TIME(6, 0) || time >= CLOCK_TIME(18, 0); }
 static u32 DtTicksToMinutes(u32 ticks) { return (ticks * DT_MINUTES_PER_DAY) >> 16; }
 static u32 DtMinutesToTicks(u32 minutes) { return ((minutes << 16) + DT_MINUTES_PER_DAY - 1) / DT_MINUTES_PER_DAY; }
@@ -291,48 +294,112 @@ static void DtUpdateFastForward(PlayState* play) {
     DtConfigureFastForwardSpeed();
 }
 
-static void DtUpdatePostDoubleTime(PlayState* play) {
+static Actor* DtFindDoubleTimeActor(PlayState* play) {
+    Actor* actor;
+
+    actor = play->actorCtx.actors[ACTORCAT_ITEMACTION].first;
+    while (actor) {
+        if (actor->id == ACTOR_EN_TEST6 && actor->params == OCARINA_MODE_APPLY_DOUBLE_SOT)
+            return actor;
+        actor = actor->next;
+    }
+
+    return NULL;
+}
+
+static s16 DtGetDoubleTimeTimer(Actor* actor) {
+    return *(s16*)((u8*)actor + DT_EN_TEST6_TIMER_OFFSET);
+}
+
+static u32 DtGetFinalTargetTicks(void) {
+    u32 target = sDtTargetTicks;
+    if (target == DT_MAX_TICKS)
+        target = DtMinutesToTicks(DtTicksToMinutes(target) - 1);
+
+    return target;
+}
+
+static int DtSetDoubleTimeTarget(void) {
+    u32 oldDay = gSave.day;
     u32 target, day;
     u16 time;
+    
+    target = DtGetFinalTargetTicks();
+    DtTicksToDayTime(target, &day, &time);
+    if (day > 3)
+        day = 3;
+    while (gSave.day < day && gSave.day < 3)
+        Sram_IncrementDay();
+    gSave.day = day;
+    gSave.daysElapsed = day;
+    gSave.time = time;
+    gSaveContext.skyboxTime = time;
+    gSave.isNight = DtIsNight(time);
+    gDoubleTimeTargetDayChanged = oldDay != day;
+    return gDoubleTimeTargetDayChanged;
+}
 
-    if (sDtPostReloadState == 1) {
-        if (play->transitionTrigger == TRANS_TRIGGER_OFF && play->transitionMode == 0)
-            return;
-        target = DtGetLandingTicks(sDtTargetTicks);
-        DtTicksToDayTime(target, &day, &time);
-        while (gSave.day < day)
-            Sram_IncrementDay();
-        gSave.time = time;
-        gSave.isNight = DtIsNight(time);
-        gDoubleTimeTargetDayChanged = ((sDtStartTicks >> 16) + 1) != gSave.day;
+static void DtReloadAtCurrentEntrance(PlayState* play) {
+    Player* link;
+
+    link = GET_PLAYER(play);
+    Play_SetRespawnData(play, 1, gSave.entrance, play->roomCtx.curRoom.num, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
+    gSaveContext.respawnFlag = 2;
+    gSaveContext.nextCutscene = 0;
+    comboTransition(play, gSave.entrance);
+}
+
+static void DtFinishNormalDoubleTime(PlayState* play, int nativeTransition) {
+    u32 target;
+    int reload;
+
+    target = DtGetFinalTargetTicks();
+    reload = !DtSameHalf(sDtStartTicks, target);
+    DtSetDoubleTimeTarget();
+    sDtNativeDoubleTime = 0;
+    sDtNativeSawActor = 0;
+    gSaveContext.nextDayTime = NEXT_TIME_NONE;
+    MM_CLEAR_EVENT_INF(EVENTINF_TRIGGER_DAYTELOP);
+    play->msgCtx.ocarinaMode = OCARINA_MODE_END;
+    if (nativeTransition) {
+        gSaveContext.respawnFlag = 2;
+        gSaveContext.nextCutscene = 0;
         gDoubleTimeTargetPending = 0;
-        sDtPostReloadState = 2;
+        gDoubleTimeTargetDayChanged = 0;
         return;
     }
-    if (sDtPostReloadState != 2)
+    if (reload) {
+        gDoubleTimeTargetPending = 0;
+        gDoubleTimeTargetDayChanged = 0;
+        DtReloadAtCurrentEntrance(play);
         return;
-    if (play->transitionTrigger != TRANS_TRIGGER_OFF || play->transitionMode != 0 || gSaveContext.respawnFlag || MM_CHECK_EVENT_INF(EVENTINF_17))
+    }
+    gDoubleTimeTargetPending = 1;
+}
+
+static void DtUpdateNormalDoubleTime(PlayState* play) {
+    Actor* actor;
+
+    actor = DtFindDoubleTimeActor(play);
+    if (actor)
+        sDtNativeSawActor = 1;
+    if (!sDtNativeSawActor)
         return;
-    sDtPostReloadState = 0;
+    if (play->transitionTrigger != TRANS_TRIGGER_OFF) {
+        DtFinishNormalDoubleTime(play, 1);
+        return;
+    }
+    if (!actor || DtGetDoubleTimeTimer(actor) <= 0)
+        DtFinishNormalDoubleTime(play, 0);
 }
 
 static void DtStartNormalDoubleTime(PlayState* play) {
-    if (DtSameHalf(sDtStartTicks, sDtTargetTicks)) {
-        u32 oldDay = gSave.day, day;
-        u16 time;
-        DtTicksToDayTime(DtGetLandingTicks(sDtTargetTicks), &day, &time);
-        while (gSave.day < day)
-            Sram_IncrementDay();
-        gSave.time = time;
-        gSave.isNight = DtIsNight(time);
-        gDoubleTimeTargetDayChanged = oldDay != gSave.day;
-        gDoubleTimeTargetPending = 1;
-    } else {
-        sDtPostReloadState = 1;
-        gDoubleTimeTargetPending = 0;
-        gDoubleTimeTargetDayChanged = 0;
-        gSave.time = gSave.isNight ? CLOCK_TIME(6, 0) : CLOCK_TIME(18, 0);
-    }
+    sDtNativeDoubleTime = 1;
+    sDtNativeSawActor = 0;
+    gDoubleTimeTargetPending = 0;
+    gDoubleTimeTargetDayChanged = 0;
+    gSaveContext.nextDayTime = NEXT_TIME_NONE;
+    MM_CLEAR_EVENT_INF(EVENTINF_TRIGGER_DAYTELOP);
     gSaveContext.timerStates[TIMER_ID_MOON_CRASH] = 0;
     Message_Close(play);
     play->msgCtx.ocarinaMode = OCARINA_MODE_APPLY_DOUBLE_SOT;
@@ -392,8 +459,8 @@ static void DtUpdateConfirmation(PlayState* play) {
 }
 
 void DoubleTimeSelector_Update(PlayState* play) {
-    if (sDtPostReloadState) {
-        DtUpdatePostDoubleTime(play);
+    if (sDtNativeDoubleTime) {
+        DtUpdateNormalDoubleTime(play);
         return;
     }
     if (!Config_Flag(CFG_MM_SONG_OF_DOUBLE_TIME_TIME_SELECTOR))
