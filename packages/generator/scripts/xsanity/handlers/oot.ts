@@ -1,5 +1,5 @@
 import type { Check, RoomActor } from '../types';
-import { ITEM00_DROPS_OOT, OOT_WONDER_ITEM_DROPS, RUPEES } from '../data';
+import { ITEM00_DROPS_OOT, OOT_WONDER_ITEM_DROPS, RUPEES, FLYING_POT_DROPS } from '../data';
 import { handleWood02 } from './helpers';
 
 let altGrassAcc = 0;
@@ -144,4 +144,26 @@ export function BgSpot11Oasis(checks: Check[], ra: RoomActor) {
   for (let i = 0; i < 8; ++i) {
     checks.push({ roomActor: ra, item: 'FAIRY', name: `Oasis Fairy ${i + 1}`, type: 'fairy', sliceId: i });
   }
+}
+
+export function ObjTsubo(checks: Check[], ra: RoomActor) {
+  const item00 = (ra.actor.params >> 0) & 0xff;
+  let item: string;
+  if (item00 >= 0x1a) {
+    item = 'NOTHING';
+  } else {
+    item = ITEM00_DROPS_OOT[item00];
+  }
+  checks.push({ roomActor: ra, item, name: 'Pot', type: 'pot' });
+}
+
+export function EnTuboTrap(checks: Check[], ra: RoomActor) {
+  const itemId = (ra.actor.params >> 8) & 0xff;
+  let item: string;
+  if (itemId >= 0x07) {
+    item = 'NOTHING';
+  } else {
+    item = FLYING_POT_DROPS[itemId];
+  }
+  checks.push({ roomActor: ra, item, name: 'Flying Pot', type: 'pot' });
 }

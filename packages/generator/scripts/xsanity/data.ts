@@ -72,8 +72,8 @@ export const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
 export const ACTORS_OOT = {
   EN_ITEM00: 0x15,
   EN_ELF: 0x18,
-  POT: 0x111,
-  FLYING_POT: 0x11d,
+  OBJ_TSUBO: 0x111,
+  EN_TUBO_TRAP: 0x11d,
   EN_KUSA: 0x125,
   OBJ_HANA: 0x14f,
   BG_SPOT11_OASIS: 0x1C2,
@@ -320,7 +320,7 @@ const MM_POTS_RANDOM_DROPS = [
   'STICK',
 ];
 
-const FLYING_POT_DROPS = [
+export const FLYING_POT_DROPS = [
   'RECOVERY_HEART',
   'BOMBS_5',
   'DEKU_SEEDS_5',

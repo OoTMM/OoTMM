@@ -1,48 +1,4 @@
 /*
-function outputPotsPoolOot(roomActors: RoomActors[]) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
-  for (const room of roomActors) {
-    for (const actor of room.actors) {
-      if (actor.typeId === ACTORS_OOT.POT) {
-        const item00 = (actor.params >> 0) & 0xff;
-        let item: string;
-        if (item00 >= 0x1a) {
-          item = 'NOTHING';
-        } else {
-          item = ITEM00_DROPS_OOT[item00];
-        }
-        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
-      }
-
-      if (actor.typeId === ACTORS_OOT.FLYING_POT) {
-        const itemId = (actor.params >> 8) & 0xff;
-        let item: string;
-        if (itemId >= 0x07) {
-          item = 'NOTHING';
-        } else {
-          item = FLYING_POT_DROPS[itemId];
-        }
-        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Flying Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
-      }
-    }
-  }
-}
-*/
-
-
 // function outputShotSunOot(roomActors: RoomActors[]) {
 //   let lastSceneId = -1;
 //   let lastSetupId = -1;

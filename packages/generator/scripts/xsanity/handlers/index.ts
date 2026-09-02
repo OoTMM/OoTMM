@@ -10,6 +10,8 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_OOT.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
   [ACTORS_OOT.EN_GS]: CommonHandlers.EnGs,
+  [ACTORS_OOT.OBJ_TSUBO]: OotHandlers.ObjTsubo,
+  [ACTORS_OOT.EN_TUBO_TRAP]: OotHandlers.EnTuboTrap,
   [ACTORS_OOT.EN_ITEM00]: OotHandlers.EnItem00,
   [ACTORS_OOT.EN_KUSA]: OotHandlers.EnKusa,
   [ACTORS_OOT.OBJ_COMB]: OotHandlers.ObjComb,
