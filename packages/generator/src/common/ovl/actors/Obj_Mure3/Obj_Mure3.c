@@ -33,17 +33,13 @@ void ObjMure3_WatchDespawn(Actor_ObjMure3* this, PlayState* play);
 int ObjMure3_IsAnyShuffled(Actor_ObjMure3* this, PlayState* play)
 {
     s16 count;
-    Xflag xf;
-    Xflag xf2;
+    XflagID id;
 
-    Xflag_Init(&xf, &this->actor, play);
     count = sRupeeCounts[OBJMURE3_PARAM_RUPEEINDEX(&this->actor)];
-
     for (s16 i = 0; i < count; ++i)
     {
-        memcpy(&xf2, &xf, sizeof(Xflag));
-        xf2.sliceId = i;
-        if (Xflag_IsShuffled(&xf2))
+        id = Xflag_LookupSlice(this->xflag, i);
+        if (Xflag_IsShuffledEx(id))
         {
             return TRUE;
         }
@@ -59,14 +55,11 @@ void ObjMure3_SpawnRupee(Actor_ObjMure3* this, PlayState* play, Vec3f* pos, int 
     if (this->childrenBits & (1 << index))
         return;
 
-    /* Get the matching xflag */
-    Xflag_Init(&g.xflag, &this->actor, play);
-    g.xflag.sliceId = (u8)index;
-
     /* Spawn the item */
-    g.xflagOverride = TRUE;
+    g.xflagOverrideEx = TRUE;
+    g.xflagId = Xflag_LookupSlice(this->xflag, index);
     item = (Actor_EnItem00*)Item_DropCollectible2(play, pos, params);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
 
     /* Original stuff */
     this->children[index] = item;
@@ -175,6 +168,7 @@ void ObjMure3_DespawnChildren(Actor_ObjMure3* this, PlayState* play)
 void ObjMure3_Init(Actor* thisx, PlayState* play) {
     Actor_ObjMure3* this = (Actor_ObjMure3*)thisx;
 
+    this->xflag = Xflag_InitEx(&this->actor, play);
     if (!ObjMure3_IsAnyShuffled(this, play) && Flags_GetSwitch(play, OBJMURE3_GET_SWITCH_FLAG(&this->actor))) {
         Actor_Kill(&this->actor);
         return;
