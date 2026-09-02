@@ -29,6 +29,7 @@ void Xflag_Set(XflagID id);
 void Xflag_ItemQuery(ComboItemQuery* q, XflagID id, s16 gi);
 void Xflag_ItemOverride(ComboItemOverride* o, XflagID id, s16 gi);
 int Xflag_IsValidEx(XflagID id);
+int Xflag_IsShuffledEx(XflagID id);
 
 /* Legacy API */
 XflagID Xflag_Lookup(const Xflag* xf);

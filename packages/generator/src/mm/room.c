@@ -49,6 +49,7 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
     g.silverRupee = 0;
     g.roomEnemyLackSoul = 0;
     g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
 
     /* Update the scene setup */
     updateSceneSetup(play);

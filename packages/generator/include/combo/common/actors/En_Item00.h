@@ -82,7 +82,7 @@ typedef struct ALIGNED(4) Actor_EnItem00
 #if defined(GAME_MM)
     s8      rupeeCollected;
 #endif
-    Xflag   xflag;
+    XflagID xflag;
     u8      isExtended:1;
     u8      isExtendedCollected:1;
     u8      isExtendedMajor:1;
@@ -93,7 +93,7 @@ Actor_EnItem00;
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor_EnItem00) == 0x1a4, "OoT Actor_EnItem00 size is wrong");
 #else
-_Static_assert(sizeof(Actor_EnItem00) == 0x1b0, "MM Actor_EnItem00 size is wrong");
+_Static_assert(sizeof(Actor_EnItem00) == 0x1ac, "MM Actor_EnItem00 size is wrong");
 #endif
 
 typedef struct PlayState PlayState;

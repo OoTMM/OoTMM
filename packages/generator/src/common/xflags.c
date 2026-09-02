@@ -326,6 +326,11 @@ int Xflag_IsShuffled(Xflag* xf)
     return Xflag_IsValid(xf) && !Xflag_GetIndirect(xf);
 }
 
+int Xflag_IsShuffledEx(XflagID id)
+{
+    return Xflag_IsValidEx(id) && !Xflag_Get(id);
+}
+
 void Xflag_Clear(Xflag* xf)
 {
     xf->sceneId = 0xff;

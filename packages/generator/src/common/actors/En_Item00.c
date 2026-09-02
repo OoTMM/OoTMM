@@ -25,7 +25,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
     }
     else
     {
-        comboXflagItemOverride(&o, &this->xflag, 0);
+        Xflag_ItemOverride(&o, this->xflag, GI_NONE);
         gi = o.gi;
         cloakGi = o.cloakGi;
         this->xflagGi = gi;
@@ -57,11 +57,10 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtendedMajor = 0;
 
     /* Init the xflag */
-    Xflag_Init(&this->xflag, &this->actor, play);
-
-    if (Xflag_IsShuffled(&this->xflag))
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (Xflag_IsShuffledEx(this->xflag))
     {
-        comboXflagItemOverride(&o, &this->xflag, 0);
+        Xflag_ItemOverride(&o, this->xflag, 0);
         this->isExtended = 1;
         this->xflagGi = o.gi;
 
@@ -110,7 +109,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         return;
     }
 
-    comboXflagItemQuery(&q, &this->xflag, 0);
+    Xflag_ItemQuery(&q, this->xflag, 0);
     comboItemOverride(&o, &q);
     if (!isItemFastBuy(o.gi))
     {
@@ -119,7 +118,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         this->isExtendedMajor = 1;
     }
     comboAddItemEx(gPlay, &q, this->isExtendedMajor);
-    Xflag_SetIndirect(&this->xflag);
+    Xflag_Set(this->xflag);
 
     comboPlayItemFanfare(o.gi, 1);
     this->isExtendedCollected = 1;
