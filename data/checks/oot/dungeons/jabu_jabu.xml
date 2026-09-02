@@ -9,18 +9,18 @@
     <gs location="Jabu-Jabu GS Bottom Lower" flag="0x10" item="GS_TOKEN"/>
     <gs location="Jabu-Jabu GS Bottom Upper" flag="0x11" item="GS_TOKEN"/>
     <gs location="Jabu-Jabu GS Near Boss" flag="0x12" item="GS_TOKEN"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Big Octo Room 1" slice="0x0" setup="0" room="0x6" actor="0x6" item="FAIRY"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Big Octo Room 2" slice="0x0" setup="0" room="0x6" actor="0x7" item="NUTS_5"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Big Octo Room 3" slice="0x0" setup="0" room="0x6" actor="0x8" item="NUTS_5"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 1" slice="0x0" setup="0" room="0xd" actor="0x3" item="FAIRY"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 2" slice="0x0" setup="0" room="0xd" actor="0x4" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 3" slice="0x0" setup="0" room="0xd" actor="0x5" item="RUPEE_RED"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 4" slice="0x0" setup="0" room="0xd" actor="0x6" item="RUPEE_RED"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 5" slice="0x0" setup="0" room="0xd" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Alcove 1" slice="0x0" setup="0" room="0xe" actor="0x7" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Alcove 2" slice="0x0" setup="0" room="0xe" actor="0x8" item="FAIRY"/>
-    <xflag type="pot" location="Jabu-Jabu Pot Alcove 3" slice="0x0" setup="0" room="0xe" actor="0x9" item="DEKU_SEEDS_5"/>
-    <xflag type="crate" location="Jabu-Jabu Small Crate 1" slice="0x0" setup="0" room="0x1" actor="0x6" item="NOTHING"/>
-    <xflag type="crate" location="Jabu-Jabu Small Crate 2" slice="0x0" setup="0" room="0x1" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Big Octo Room 1" room="0x6" actor="0x6" item="FAIRY"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Big Octo Room 2" room="0x6" actor="0x7" item="NUTS_5"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Big Octo Room 3" room="0x6" actor="0x8" item="NUTS_5"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 1" room="0xd" actor="0x3" item="FAIRY"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 2" room="0xd" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 3" room="0xd" actor="0x5" item="RUPEE_RED"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 4" room="0xd" actor="0x6" item="RUPEE_RED"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Muscle Block Room 5" room="0xd" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Alcove 1" room="0xe" actor="0x7" item="DEKU_SEEDS_5"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Alcove 2" room="0xe" actor="0x8" item="FAIRY"/>
+    <xflag type="pot" location="Jabu-Jabu Pot Alcove 3" room="0xe" actor="0x9" item="DEKU_SEEDS_5"/>
+    <xflag type="crate" location="Jabu-Jabu Small Crate 1" room="0x1" actor="0x6" item="NOTHING"/>
+    <xflag type="crate" location="Jabu-Jabu Small Crate 2" room="0x1" actor="0x7" item="RECOVERY_HEART"/>
   </scene>
 </checks>

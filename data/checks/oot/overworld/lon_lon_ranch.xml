@@ -6,16 +6,44 @@
     <gs location="Lon Lon Ranch GS House" flag="0x5a" item="GS_TOKEN"/>
     <gs location="Lon Lon Ranch GS Rain Shed" flag="0x59" item="GS_TOKEN"/>
     <gs location="Lon Lon Ranch GS Back Wall" flag="0x58" item="GS_TOKEN"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 1" slice="0x0" setup="0" room="0x0" actor="0x3" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 2" slice="0x0" setup="0" room="0x0" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 3" slice="0x0" setup="0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 4" slice="0x0" setup="0" room="0x0" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 5" slice="0x0" setup="0" room="0x0" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 6" slice="0x0" setup="0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Lon Lon Ranch Pot 7" slice="0x0" setup="0" room="0x0" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Lon Lon Ranch Crate" slice="0x0" setup="0" room="0x0" actor="0x18" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Lon Lon Ranch Wonder Item 1" slice="0x0" setup="2" room="0x0" actor="0x18" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Lon Lon Ranch Wonder Item 2" slice="0x0" setup="2" room="0x0" actor="0x19" item="RUPEE_BLUE"/>
+    <actor>
+      <match setup="0" actor="0x03"/>
+      <match setup="1" actor="0x02"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 1" item="RUPEE_GREEN"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x04"/>
+      <match setup="1" actor="0x03"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x05"/>
+      <match setup="1" actor="0x04"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 3" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x06"/>
+      <match setup="1" actor="0x05"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 4" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x07"/>
+      <match setup="1" actor="0x06"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 5" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x08"/>
+      <match setup="1" actor="0x07"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 6" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x09"/>
+      <match setup="1" actor="0x08"/>
+      <xflag type="pot" location="Lon Lon Ranch Pot 7" item="RECOVERY_HEART"/>
+    </actor>
+    <xflag type="crate" location="Lon Lon Ranch Crate" setup="0" actor="0x18" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Lon Lon Ranch Wonder Item 1" setup="2" actor="0x18" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Lon Lon Ranch Wonder Item 2" setup="2" actor="0x19" item="RUPEE_BLUE"/>
   </scene>
   <scene id="RANCH_HOUSE_SILO">
     <collectible location="Lon Lon Ranch Silo HP" flag="0x01" item="HEART_PIECE"/>
@@ -25,18 +53,18 @@
   <scene id="RANCH_HOUSE_SILO">
     <npc location="Lon Lon Ranch Talon Bottle" npc="TALON_BOTTLE" item="BOTTLE_MILK"/>
     <npc location="Lon Lon Ranch Talon Buy Milk" npc="TALON_MILK" item="MILK"/>
-    <xflag type="pot" location="Lon Lon Ranch Talon House Pot 1" slice="0x0" setup="0" room="0x2" actor="0x0" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Lon Lon Ranch Talon House Pot 2" slice="0x0" setup="0" room="0x2" actor="0x1" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Lon Lon Ranch Talon House Pot 3" slice="0x0" setup="0" room="0x2" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Lon Lon Ranch Talon House Pot 1" room="0x2" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Lon Lon Ranch Talon House Pot 2" room="0x2" actor="0x1" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Lon Lon Ranch Talon House Pot 3" room="0x2" actor="0x2" item="RUPEE_GREEN"/>
   </scene>
   <scene id="STABLE">
     <cow location="Lon Lon Ranch Stables Cow Left" flag="0x02" item="MILK"/>
     <cow location="Lon Lon Ranch Stables Cow Right" flag="0x03" item="MILK"/>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x27">
     <scrub location="Lon Lon Ranch Grotto Left Scrub" flag="0x08" item="NUTS_5"/>
     <scrub location="Lon Lon Ranch Grotto Center Scrub" flag="0x09" item="DEKU_SEEDS_30"/>
     <scrub location="Lon Lon Ranch Grotto Right Scrub" flag="0x0a" item="BOMBS_5"/>
-    <xflag type="hive" location="Lon Lon Ranch Grotto Hive" slice="0x0" setup="0" room="0x27" actor="0x3" item="RUPEE_RED"/>
+    <xflag type="hive" location="Lon Lon Ranch Grotto Hive" actor="0x3" item="RUPEE_RED"/>
   </scene>
 </checks>

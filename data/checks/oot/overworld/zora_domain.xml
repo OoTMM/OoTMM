@@ -23,11 +23,31 @@
       <xflag type="rock" location="Zora Domain Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Zora Domain Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="pot" location="Zora Domain Pot 1" slice="0x0" setup="0" room="0x1" actor="0x15" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Zora Domain Pot 2" slice="0x0" setup="0" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Zora Domain Pot 3" slice="0x0" setup="0" room="0x1" actor="0x17" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Zora Domain Pot 4" slice="0x0" setup="0" room="0x1" actor="0x18" item="NUTS_5"/>
-    <xflag type="pot" location="Zora Domain Pot 5" slice="0x0" setup="0" room="0x1" actor="0x19" item="STICK"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x15"/>
+      <match setup="2" actor="0x04"/>
+      <xflag type="pot" location="Zora Domain Pot 1" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x16"/>
+      <match setup="2" actor="0x02"/>
+      <xflag type="pot" location="Zora Domain Pot 2" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x17"/>
+      <match setup="2" actor="0x05"/>
+      <xflag type="pot" location="Zora Domain Pot 3" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x18"/>
+      <match setup="2" actor="0x03"/>
+      <xflag type="pot" location="Zora Domain Pot 4" item="NUTS_5"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x19"/>
+      <match setup="2" actor="0x01"/>
+      <xflag type="pot" location="Zora Domain Pot 5" item="STICK"/>
+    </actor>
     <xflag type="hive" location="Zora Domain Hive Front 1" slice="0x0" setup="0" room="0x0" actor="0x9" item="RUPEE_RED"/>
     <xflag type="hive" location="Zora Domain Hive Front 2" slice="0x0" setup="0" room="0x0" actor="0xa" item="RUPEE_RED"/>
     <xflag type="hive" location="Zora Domain Hive Back" slice="0x0" setup="0" room="0x0" actor="0xb" item="RUPEE_RED"/>

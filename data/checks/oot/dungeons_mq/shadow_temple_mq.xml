@@ -56,43 +56,43 @@
     <sr location="MQ Shadow Temple SR Spikes East Ground" flag="0xb4" item="RUPEE_SILVER_SHADOW_SPIKES"/>
     <sr location="MQ Shadow Temple SR Spikes Northeast Wall" flag="0xb5" item="RUPEE_SILVER_SHADOW_SPIKES"/>
     <sr location="MQ Shadow Temple SR Spikes East Wall" flag="0xb6" item="RUPEE_SILVER_SHADOW_SPIKES"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Entrance Maze 1" slice="0x0" setup="0" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Entrance Maze 2" slice="0x0" setup="0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Compass Room 1" slice="0x0" setup="0" room="0x1" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Compass Room 2" slice="0x0" setup="0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Lower 1" slice="0x0" setup="0" room="0xa" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Lower 2" slice="0x0" setup="0" room="0xa" actor="0x4" item="BOMB"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Upper 1" slice="0x0" setup="0" room="0xa" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Upper 2" slice="0x0" setup="0" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Boss Key Room" slice="0x0" setup="0" room="0xd" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Bomb Flowers Room 1" slice="0x0" setup="0" room="0x11" actor="0x1" item="BOMBS_5"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Bomb Flowers Room 2" slice="0x0" setup="0" room="0x11" actor="0x2" item="ARROWS_30"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Room Before Boat 1" slice="0x0" setup="0" room="0x14" actor="0x3" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot Room Before Boat 2" slice="0x0" setup="0" room="0x14" actor="0x4" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot After Boat Before Bridge 1" slice="0x0" setup="0" room="0x15" actor="0x13" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot After Boat Before Bridge 2" slice="0x0" setup="0" room="0x15" actor="0x14" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot After Boat After Bridge 1" slice="0x0" setup="0" room="0x15" actor="0x15" item="ARROWS_30"/>
-    <xflag type="pot" location="MQ Shadow Temple Pot After Boat After Bridge 2" slice="0x0" setup="0" room="0x15" actor="0x16" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 1" slice="0x0" setup="0" room="0x0" actor="0x6" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 2" slice="0x0" setup="0" room="0x0" actor="0x7" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 3" slice="0x0" setup="0" room="0x0" actor="0x8" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 4" slice="0x0" setup="0" room="0x0" actor="0x9" item="NUTS_5"/>
-    <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 1" slice="0x0" setup="0" room="0x14" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 2" slice="0x0" setup="0" room="0x14" actor="0x6" item="NUTS_5"/>
-    <xflag type="fairy_spot" location="MQ Shadow Temple Beamos Big Fairy" slice="0x0" setup="0" room="0x5" actor="0x3" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Shadow Temple Guillotines Room Big Fairy" slice="0x0" setup="0" room="0x9" actor="0x1d" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Shadow Temple Big Fairy After Wind" slice="0x0" setup="0" room="0x13" actor="0x5" item="FAIRY_BIG"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 1" slice="0x0" setup="0" room="0x10" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 2" slice="0x0" setup="0" room="0x10" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 1" slice="0x0" setup="0" room="0x15" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 2" slice="0x0" setup="0" room="0x15" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Upper 1" slice="0x0" setup="0" room="0x15" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Upper 2" slice="0x0" setup="0" room="0x15" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Lower" slice="0x0" setup="0" room="0x15" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="MQ Shadow Temple Wonder Item" slice="0x0" setup="0" room="0xc" actor="0x1" item="ARROWS_30"/>
-    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 1" slice="0x0" setup="0" room="0x2" actor="0x11" item="ARROWS_10"/>
-    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 2" slice="0x0" setup="0" room="0x2" actor="0x12" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 3" slice="0x0" setup="0" room="0x2" actor="0x13" item="BOMB"/>
-    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 4" slice="0x0" setup="0" room="0x2" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Entrance Maze 1" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Entrance Maze 2" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Compass Room 1" room="0x1" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Compass Room 2" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Lower 1" room="0xa" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Lower 2" room="0xa" actor="0x4" item="BOMB"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Upper 1" room="0xa" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Guillotines Room Upper 2" room="0xa" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Boss Key Room" room="0xd" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Bomb Flowers Room 1" room="0x11" actor="0x1" item="BOMBS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Bomb Flowers Room 2" room="0x11" actor="0x2" item="ARROWS_30"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Room Before Boat 1" room="0x14" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot Room Before Boat 2" room="0x14" actor="0x4" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat Before Bridge 1" room="0x15" actor="0x13" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat Before Bridge 2" room="0x15" actor="0x14" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat After Bridge 1" room="0x15" actor="0x15" item="ARROWS_30"/>
+    <xflag type="pot" location="MQ Shadow Temple Pot After Boat After Bridge 2" room="0x15" actor="0x16" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 1" room="0x0" actor="0x6" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 2" room="0x0" actor="0x7" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 3" room="0x0" actor="0x8" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 4" room="0x0" actor="0x9" item="NUTS_5"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 1" room="0x14" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 2" room="0x14" actor="0x6" item="NUTS_5"/>
+    <xflag type="fairy_spot" location="MQ Shadow Temple Beamos Big Fairy" room="0x5" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Shadow Temple Guillotines Room Big Fairy" room="0x9" actor="0x1d" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Shadow Temple Big Fairy After Wind" room="0x13" actor="0x5" item="FAIRY_BIG"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 1" room="0x10" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 2" room="0x10" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 1" room="0x15" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 2" room="0x15" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Upper 1" room="0x15" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Upper 2" room="0x15" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Shadow Temple Heart Pre-Boss Lower" room="0x15" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Shadow Temple Wonder Item" room="0xc" actor="0x1" item="ARROWS_30"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 1" room="0x2" actor="0x11" item="ARROWS_10"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 2" room="0x2" actor="0x12" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 3" room="0x2" actor="0x13" item="BOMB"/>
+    <xflag type="crate" location="MQ Shadow Temple Truth Spinner Room Small Crate 4" room="0x2" actor="0x14" item="RECOVERY_HEART"/>
   </scene>
 </checks>

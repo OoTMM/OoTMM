@@ -118,7 +118,7 @@
     </actor>
   </scene>
   <scene name="Link's House" id="LINK_HOUSE">
-    <xflag type="pot" location="Link's House Pot" slice="0x0" setup="0" room="0x0" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Link's House Pot" actor="0x2" item="RECOVERY_HEART"/>
     <cow location="Kokiri Forest Cow" flag="0x00" item="MILK" hint="COW_LINK"/>
   </scene>
   <scene name="Mido's House" id="KOKIRI_MIDO">
@@ -128,10 +128,10 @@
     <chest location="Mido's House Bottom Right" flag="0x03" item="RECOVERY_HEART"/>
   </scene>
   <scene name="Saria's House" id="KOKIRI_SARIA">
-    <xflag type="heart" location="Saria's House Heart 1" slice="0x0" setup="0" room="0x0" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Saria's House Heart 2" slice="0x0" setup="0" room="0x0" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Saria's House Heart 3" slice="0x0" setup="0" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="Saria's House Heart 4" slice="0x0" setup="0" room="0x0" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Saria's House Heart 1" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Saria's House Heart 2" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Saria's House Heart 3" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="Saria's House Heart 4" actor="0x5" item="RECOVERY_HEART"/>
   </scene>
   <scene name="Kokiri Shop" id="KOKIRI_SHOP">
     <shop location="Kokiri Shop Item 1" flag="0x00" item="RECOVERY_HEART"/>
@@ -142,15 +142,15 @@
     <shop location="Kokiri Shop Item 6" flag="0x05" item="NUTS_10"/>
     <shop location="Kokiri Shop Item 7" flag="0x06" item="STICK"/>
     <shop location="Kokiri Shop Item 8" flag="0x07" item="SHIELD_DEKU"/>
-    <xflag type="wonder" location="Kokiri Shop Wonder Item" slice="0x0" setup="0" room="0x0" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Kokiri Shop Wonder Item" actor="0x4" item="RUPEE_BLUE"/>
   </scene>
   <scene name="Know It All House" id="KOKIRI_KNOW_IT_ALL">
-    <xflag type="pot" location="Know It All House Pot 1" slice="0x0" setup="0" room="0x0" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Know It All House Pot 2" slice="0x0" setup="0" room="0x0" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Know It All House Pot 1" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Know It All House Pot 2" actor="0x7" item="RUPEE_GREEN"/>
   </scene>
   <scene name="Twins House" id="KOKIRI_TWINS">
-    <xflag type="pot" location="Twins House Pot 1" slice="0x0" setup="0" room="0x0" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Twins House Pot 2" slice="0x0" setup="0" room="0x0" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Twins House Pot 1" actor="0x2" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Twins House Pot 2" actor="0x3" item="RUPEE_BLUE"/>
   </scene>
   <scene name="Kokiri Forest Storms Grotto" id="GROTTOS" room="0x2c">
     <chest location="Kokiri Forest Storms Grotto" flag="0x0c" item="RUPEE_RED"/>

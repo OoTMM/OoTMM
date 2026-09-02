@@ -13,17 +13,61 @@
     <gs location="Kakariko GS House of Skulltula" flag="0x84" item="GS_TOKEN"/>
     <gs location="Kakariko GS Bazaar" flag="0x81" item="GS_TOKEN"/>
     <gs location="Kakariko GS Ladder" flag="0x82" item="GS_TOKEN"/>
-    <xflag type="pot" location="Kakariko Pot 01" slice="0x0" setup="0" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 02" slice="0x0" setup="0" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 03" slice="0x0" setup="0" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 04" slice="0x0" setup="0" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 05" slice="0x0" setup="0" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 06" slice="0x0" setup="0" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 07" slice="0x0" setup="0" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 08" slice="0x0" setup="0" actor="0xf" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Pot 09" slice="0x0" setup="0" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Back Pot 1" slice="0x0" setup="0" actor="0x11" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Kakariko Back Pot 2" slice="0x0" setup="0" actor="0x12" item="RECOVERY_HEART"/>
+    <actor>
+      <match setup="0" actor="0x08"/>
+      <match setup="1" actor="0x07"/>
+      <xflag type="pot" location="Kakariko Pot 01" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x09"/>
+      <match setup="1" actor="0x08"/>
+      <xflag type="pot" location="Kakariko Pot 02" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0a"/>
+      <match setup="1" actor="0x09"/>
+      <xflag type="pot" location="Kakariko Pot 03" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0b"/>
+      <match setup="1" actor="0x0a"/>
+      <xflag type="pot" location="Kakariko Pot 04" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0c"/>
+      <match setup="1" actor="0x0b"/>
+      <xflag type="pot" location="Kakariko Pot 05" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0d"/>
+      <match setup="1" actor="0x0c"/>
+      <xflag type="pot" location="Kakariko Pot 06" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0e"/>
+      <match setup="1" actor="0x0d"/>
+      <xflag type="pot" location="Kakariko Pot 07" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0f"/>
+      <match setup="1" actor="0x0e"/>
+      <xflag type="pot" location="Kakariko Pot 08" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x10"/>
+      <match setup="1" actor="0x0f"/>
+      <xflag type="pot" location="Kakariko Pot 09" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x11"/>
+      <match setup="1" actor="0x10"/>
+      <xflag type="pot" location="Kakariko Back Pot 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x12"/>
+      <match setup="1" actor="0x11"/>
+      <xflag type="pot" location="Kakariko Back Pot 2" item="RECOVERY_HEART"/>
+    </actor>
     <xflag type="crate" location="Kakariko Crate Child Near Trail" slice="0x0" setup="0" actor="0x31" item="NOTHING"/>
     <xflag type="crate" location="Kakariko Crate Child Near House" slice="0x0" setup="0" actor="0x32" item="NOTHING"/>
     <xflag type="crate" location="Kakariko Crate Child Near Windmill Bottom" slice="0x0" setup="0" actor="0x33" item="NOTHING"/>

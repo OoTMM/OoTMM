@@ -26,10 +26,26 @@
       <xflag type="rock" location="Death Mountain Crater Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Death Mountain Crater Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="pot" location="Death Mountain Crater Pot 1" slice="0x0" setup="2" room="0x1" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Death Mountain Crater Pot 2" slice="0x0" setup="2" room="0x1" actor="0xe" item="ARROWS_5"/>
-    <xflag type="pot" location="Death Mountain Crater Pot 3" slice="0x0" setup="2" room="0x1" actor="0xf" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Death Mountain Crater Pot 4" slice="0x0" setup="2" room="0x1" actor="0x10" item="MAGIC_JAR_SMALL"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x10"/>
+      <match setup="2" actor="0x0d"/>
+      <xflag type="pot" location="Death Mountain Crater Pot 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x0f"/>
+      <match setup="2" actor="0x0e"/>
+      <xflag type="pot" location="Death Mountain Crater Pot 2" item="ARROWS_5"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x11"/>
+      <match setup="2" actor="0x0f"/>
+      <xflag type="pot" location="Death Mountain Crater Pot 3" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x12"/>
+      <match setup="2" actor="0x10"/>
+      <xflag type="pot" location="Death Mountain Crater Pot 4" item="MAGIC_JAR_SMALL"/>
+    </actor>
     <xflag type="rupee" location="Death Mountain Crater Rupee Child 1" setup="0" room="0x1" actor="0x1" item="RUPEE_RED"/>
     <xflag type="rupee" location="Death Mountain Crater Rupee Child 2" setup="0" room="0x1" actor="0x2" item="RUPEE_RED"/>
     <xflag type="rupee" location="Death Mountain Crater Rupee Child 3" setup="0" room="0x1" actor="0x3" item="RUPEE_BLUE"/>

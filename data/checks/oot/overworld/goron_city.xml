@@ -11,15 +11,51 @@
     <npc location="Goron City Medigoron Giant Knife" npc="MEDIGORON" item="SWORD_KNIFE"/>
     <gs location="Goron City GS Platform" flag="0x7d" item="GS_TOKEN"/>
     <gs location="Goron City GS Maze" flag="0x7e" item="GS_TOKEN"/>
-    <xflag type="pot" location="Goron City Pot Darunia Room 1" slice="0x0" setup="0" room="0x1" actor="0x5" item="STICK"/>
-    <xflag type="pot" location="Goron City Pot Darunia Room 2" slice="0x0" setup="0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Goron City Pot Darunia Room 3" slice="0x0" setup="0" room="0x1" actor="0x7" item="STICK"/>
-    <xflag type="pot" location="Goron City Pot Medigoron Room" slice="0x0" setup="0" room="0x2" actor="0x3" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Goron City Pot Stairs 1" slice="0x0" setup="0" room="0x3" actor="0x29" item="STICK"/>
-    <xflag type="pot" location="Goron City Pot Stairs 2" slice="0x0" setup="0" room="0x3" actor="0x2a" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Goron City Pot Stairs 3" slice="0x0" setup="0" room="0x3" actor="0x2b" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Goron City Pot Stairs 4" slice="0x0" setup="0" room="0x3" actor="0x2c" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Goron City Pot Stairs 5" slice="0x0" setup="0" room="0x3" actor="0x2d" item="RECOVERY_HEART"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x05"/>
+      <match setup="2" actor="0x01"/>
+      <xflag type="pot" location="Goron City Pot Darunia Room 1" item="STICK"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x06"/>
+      <match setup="2" actor="0x02"/>
+      <xflag type="pot" location="Goron City Pot Darunia Room 2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x07"/>
+      <match setup="2" actor="0x03"/>
+      <xflag type="pot" location="Goron City Pot Darunia Room 3" item="STICK"/>
+    </actor>
+    <actor room="0x2">
+      <match setup="0" actor="0x03"/>
+      <match setup="2" actor="0x03"/>
+      <xflag type="pot" location="Goron City Pot Medigoron Room" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x29"/>
+      <match setup="2" actor="0x08"/>
+      <xflag type="pot" location="Goron City Pot Stairs 1" item="STICK"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x2a"/>
+      <match setup="2" actor="0x09"/>
+      <xflag type="pot" location="Goron City Pot Stairs 2" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x2b"/>
+      <match setup="2" actor="0x0a"/>
+      <xflag type="pot" location="Goron City Pot Stairs 3" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x2c"/>
+      <match setup="2" actor="0x0b"/>
+      <xflag type="pot" location="Goron City Pot Stairs 4" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x2d"/>
+      <match setup="2" actor="0x0c"/>
+      <xflag type="pot" location="Goron City Pot Stairs 5" item="RECOVERY_HEART"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0x2f"/>
       <match setup="2" actor="0x23"/>

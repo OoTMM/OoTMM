@@ -6,10 +6,26 @@
     <gs location="Zora Fountain GS Wall" flag="0x8a" item="GS_TOKEN"/>
     <gs location="Zora Fountain GS Tree" flag="0x8f" item="GS_TOKEN"/>
     <gs location="Zora Fountain GS Upper" flag="0x8d" item="GS_TOKEN"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 1" setup="0" room="0x0" actor="0x13" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 2" setup="0" room="0x0" actor="0x15" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 3" setup="0" room="0x0" actor="0x16" item="DEKU_SEEDS_5"/>
-    <xflag type="pot" location="Zora Fountain Child Pot 4" setup="0" room="0x0" actor="0x17" item="RECOVERY_HEART"/>
+    <actor actor="0x13">
+      <match setup="0"/>
+      <match setup="1"/>
+      <xflag type="pot" location="Zora Fountain Child Pot 1" setup="0" room="0x0" item="DEKU_SEEDS_5"/>
+    </actor>
+    <actor actor="0x15">
+      <match setup="0"/>
+      <match setup="1"/>
+      <xflag type="pot" location="Zora Fountain Child Pot 2" setup="0" room="0x0" item="DEKU_SEEDS_5"/>
+    </actor>
+    <actor actor="0x16">
+      <match setup="0"/>
+      <match setup="1"/>
+      <xflag type="pot" location="Zora Fountain Child Pot 3" setup="0" room="0x0" item="DEKU_SEEDS_5"/>
+    </actor>
+    <actor actor="0x17">
+      <match setup="0"/>
+      <match setup="1"/>
+      <xflag type="pot" location="Zora Fountain Child Pot 4" setup="0" room="0x0" item="RECOVERY_HEART"/>
+    </actor>
     <xflag type="pot" location="Zora Fountain Adult Pot 1" setup="2" room="0x0" actor="0x2a" item="MAGIC_JAR_LARGE"/>
     <xflag type="pot" location="Zora Fountain Adult Pot 2" setup="2" room="0x0" actor="0x2b" item="MAGIC_JAR_LARGE"/>
     <xflag type="pot" location="Zora Fountain Adult Pot 3" setup="2" room="0x0" actor="0x2c" item="ARROWS_10"/>

@@ -9,40 +9,40 @@
     <gs location="MQ Bottom of the Well GS Basement" flag="0xf0" item="GS_TOKEN"/>
     <gs location="MQ Bottom of the Well GS West Middle Room" flag="0xf1" item="GS_TOKEN"/>
     <gs location="MQ Bottom of the Well GS Coffin Room" flag="0xf2" item="GS_TOKEN"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Cage 1" slice="0x0" setup="0" room="0x0" actor="0x28" item="ARROWS_10"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Cage 2" slice="0x0" setup="0" room="0x0" actor="0x2a" item="BOMBS_5"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Cage 3" slice="0x0" setup="0" room="0x0" actor="0x2c" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Alcove" slice="0x0" setup="0" room="0x0" actor="0x2e" item="FLEXIBLE"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Side Room 1" slice="0x0" setup="0" room="0x5" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Side Room 2" slice="0x0" setup="0" room="0x5" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="MQ Bottom of the Well Pot Side Room 3" slice="0x0" setup="0" room="0x5" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 1" slice="0x0" setup="0" room="0x4" actor="0x0" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 2" slice="0x0" setup="0" room="0x4" actor="0x1" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 3" slice="0x0" setup="0" room="0x4" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 4" slice="0x0" setup="0" room="0x4" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="fairy_spot" location="MQ Bottom of the Well Lobby Cage Big Fairy" slice="0x0" setup="0" room="0x0" actor="0xd" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Bottom of the Well Basement Big Fairy" slice="0x0" setup="0" room="0x1" actor="0x11" item="FAIRY_BIG"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Main Room 1" slice="0x0" setup="0" room="0x0" actor="0x24" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Main Room 2" slice="0x0" setup="0" room="0x0" actor="0x25" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Basement 1" slice="0x0" setup="0" room="0x1" actor="0x1b" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Basement 2" slice="0x0" setup="0" room="0x1" actor="0x1c" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Basement 3" slice="0x0" setup="0" room="0x1" actor="0x1d" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Coffin 1" slice="0x0" setup="0" room="0x2" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="heart" location="MQ Bottom of the Well Heart Coffin 2" slice="0x0" setup="0" room="0x2" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 1" slice="0x0" setup="0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 2" slice="0x0" setup="0" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 3" slice="0x0" setup="0" room="0x0" actor="0x8" item="ARROWS_30"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 4" slice="0x0" setup="0" room="0x0" actor="0xa" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 1" slice="0x0" setup="0" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 2" slice="0x0" setup="0" room="0x0" actor="0x9" item="ARROWS_30"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 3" slice="0x0" setup="0" room="0x0" actor="0xb" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 4" slice="0x0" setup="0" room="0x0" actor="0xc" item="FLEXIBLE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 1" slice="0x0" setup="0" room="0x5" actor="0x0" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 2" slice="0x0" setup="0" room="0x5" actor="0x1" item="MAGIC_JAR_LARGE"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 3" slice="0x0" setup="0" room="0x5" actor="0x2" item="ARROWS_30"/>
-    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 4" slice="0x0" setup="0" room="0x5" actor="0x3" item="FLEXIBLE"/>
-    <xflag type="boulder" location="MQ Bottom of the Well Boulder Alcove 1" slice="0x0" setup="0" room="0x0" actor="0x13" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Bottom of the Well Boulder Alcove 2" slice="0x0" setup="0" room="0x0" actor="0x14" item="NOTHING"/>
-    <xflag type="boulder" location="MQ Bottom of the Well Boulder Alcove Solo" slice="0x0" setup="0" room="0x0" actor="0x1a" item="NOTHING"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Cage 1" room="0x0" actor="0x28" item="ARROWS_10"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Cage 2" room="0x0" actor="0x2a" item="BOMBS_5"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Cage 3" room="0x0" actor="0x2c" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Lobby Alcove" room="0x0" actor="0x2e" item="FLEXIBLE"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Side Room 1" room="0x5" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Side Room 2" room="0x5" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="MQ Bottom of the Well Pot Side Room 3" room="0x5" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 1" room="0x4" actor="0x0" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 2" room="0x4" actor="0x1" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 3" room="0x4" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 4" room="0x4" actor="0x3" item="DEKU_SEEDS_5"/>
+    <xflag type="fairy_spot" location="MQ Bottom of the Well Lobby Cage Big Fairy" room="0x0" actor="0xd" item="FAIRY_BIG"/>
+    <xflag type="fairy_spot" location="MQ Bottom of the Well Basement Big Fairy" room="0x1" actor="0x11" item="FAIRY_BIG"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Main Room 1" room="0x0" actor="0x24" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Main Room 2" room="0x0" actor="0x25" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Basement 1" room="0x1" actor="0x1b" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Basement 2" room="0x1" actor="0x1c" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Basement 3" room="0x1" actor="0x1d" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Coffin 1" room="0x2" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="heart" location="MQ Bottom of the Well Heart Coffin 2" room="0x2" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 1" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 2" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 3" room="0x0" actor="0x8" item="ARROWS_30"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Left 4" room="0x0" actor="0xa" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 1" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 2" room="0x0" actor="0x9" item="ARROWS_30"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 3" room="0x0" actor="0xb" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Main Room Right 4" room="0x0" actor="0xc" item="FLEXIBLE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 1" room="0x5" actor="0x0" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 2" room="0x5" actor="0x1" item="MAGIC_JAR_LARGE"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 3" room="0x5" actor="0x2" item="ARROWS_30"/>
+    <xflag type="wonder" location="MQ Bottom of the Well Wonder Item Side Room 4" room="0x5" actor="0x3" item="FLEXIBLE"/>
+    <xflag type="boulder" location="MQ Bottom of the Well Boulder Alcove 1" room="0x0" actor="0x13" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Bottom of the Well Boulder Alcove 2" room="0x0" actor="0x14" item="NOTHING"/>
+    <xflag type="boulder" location="MQ Bottom of the Well Boulder Alcove Solo" room="0x0" actor="0x1a" item="NOTHING"/>
   </scene>
 </checks>
