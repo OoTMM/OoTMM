@@ -92,6 +92,7 @@
 
 "Lost Woods Rupee Arrow":
   region: LOST_WOODS
+  age_change: false
   locations:
     "Lost Woods Rupee Arrow 1": "true"
     "Lost Woods Rupee Arrow 2": "true"

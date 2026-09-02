@@ -1,7 +1,6 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "GLOBAL": "true"
     "Lake Hylia Near Water Temple": "can_swim_or_sink"
     "Water Temple Entrance": "can_swim || (hookshot_anywhere && has_iron_boots)"
   events:
@@ -10,6 +9,7 @@
 "Water Temple Entrance":
   dungeon: Water
   exits:
+    "GLOBAL": "true"
     "Water Temple": "can_swim_or_sink"
     "Water Temple Main Room Top Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_HIGH) || has_hover_boots || hookshot_anywhere)"
     "Water Temple Main Room Middle Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_MID) || (has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && hookshot_anywhere))"
