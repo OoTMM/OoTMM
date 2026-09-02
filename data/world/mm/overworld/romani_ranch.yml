@@ -2,7 +2,7 @@
 "Romani Ranch":
   region: ROMANI_RANCH
   events:
-    ALIENS: "soul_malon && (at(NIGHT1_AM_02_30) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night1)) && has_arrows"
+    ALIENS: "soul_malon && (at(NIGHT1_AM_02_30) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night1)) && (has_arrows || (can_use_din && trick(MM_ALIENS_DIN)))"
     ARROWS: "true"
     MAGIC: "true"
     FAIRY: "gossip_fairy"
@@ -169,9 +169,9 @@
     "GLOBAL": "true"
     "Romani Ranch": "rusty_key(RUSTY_KEY_RANCH_BARN)"
   locations:
-    "Romani Ranch Barn Cow Left": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && cow"
-    "Romani Ranch Barn Cow Right Front": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && cow"
-    "Romani Ranch Barn Cow Right Back": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && cow"
+    "Romani Ranch Barn Cow Left": "(is_night1 || (event(ALIENS) && (second_day || is_night3))) && cow"
+    "Romani Ranch Barn Cow Right Front": "(is_night1 || (event(ALIENS) && (second_day || is_night3))) && cow"
+    "Romani Ranch Barn Cow Right Back": "(is_night1 || (event(ALIENS) && (second_day || is_night3))) && cow"
     "Romani Ranch Barn Wonder Item 1": "true"
     "Romani Ranch Barn Wonder Item 2": "true"
 
@@ -187,9 +187,3 @@
   exits:
     "GLOBAL": "true"
     "Ranch House": "rusty_key(RUSTY_KEY_RANCH_HOUSE_ROOM)"
-
-"Tingle Ranch":
-  region: TINGLE
-  locations:
-    "Tingle Map Ranch": "tingle_price(0x06)"
-    "Tingle Map Great Bay": "tingle_price(0x07)"

@@ -148,3 +148,9 @@
     "Milk Road Grass 1": "true"
     "Milk Road Grass 2": "true"
     "Milk Road Grass 3": "true"
+
+"Tingle Ranch":
+  region: TINGLE
+  locations:
+    "Tingle Map Ranch": "tingle_price(0x06)"
+    "Tingle Map Great Bay": "tingle_price(0x07)"

@@ -31,12 +31,14 @@ All notable changes to this project will be documented in this file.
 - Child can now use Bombchu or Blast Mask with the ability to swim to get the rocks underwater in Zora's River.
 - Megaflip is now logical to reach the grass in Zora's River.
 - Add the itemless jump to Fire Temple Boss door trick to all blitz presets
+- The Romani Ranch alien defense now accounts for Din's Fire as a trick
 
 ### Fixed
 
 - Logic now accounts for Bronze Scale or Iron Boots when coming from Gerudo Valley in Lake Hylia.
 - Fix Deku Seeds pickups from shuffled locations having text in Majora's Mask when playing with slingshot in said game when they shouldn't.
 - Fix some logic for warp songs, eggs, and age change that could create impossible seeds in rare circumstances.
+- Logic for when the cows in Romani Ranch can be interacted with has been fixed.
 
 ## [32.3] - 2026-08-23
 

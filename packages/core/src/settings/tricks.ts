@@ -810,6 +810,12 @@ export const TRICKS: Tricks = {
     name: "Defeat the waterfall Like Like in Zora Cape by using a precise Bombchu launch.",
     tooltip: "It is possible to get a precise angle for the Bombchu to crawl along and blow up the Like Like for the Piece of Heart.",
   },
+  MM_ALIENS_DIN: {
+    game: 'mm',
+    name: "Defend Romani Ranch from the aliens using only Din's Fire",
+    tooltip: "Din's Fire is able to defeat the aliens and with careful usage of it can defend the ranch for the entire duration, needing only one refill of magic.",
+    linkVideo: 'https://youtu.be/QMuKmQ7NGIE',
+  },
   GLITCH_OOT_EQUIP_SWAP: {
     game: 'oot',
     name: "Equip Swap (OoT)",
