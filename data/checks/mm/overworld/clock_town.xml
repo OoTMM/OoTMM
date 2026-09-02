@@ -57,13 +57,28 @@
   <scene id="LAUNDRY_POOL">
     <npc location="Clock Town Guru Guru Mask Bremen" npc="MASK_BREMEN" item="MASK_BREMEN"/>
     <npc location="Clock Town Stray Fairy" npc="STRAY_FAIRY_TOWN" item="STRAY_FAIRY_TOWN"/>
-    <xflag type="crate" location="Clock Town Laundry Pool Small Crate" slice="0x0" setup="0" room="0x0" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="grass" location="Clock Town Laundry Pool Grass 1" slice="0x0" setup="0" room="0x0" actor="0xd" item="RANDOM"/>
-    <xflag type="grass" location="Clock Town Laundry Pool Grass 2" slice="0x0" setup="0" room="0x0" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Clock Town Laundry Pool Grass 3" slice="0x0" setup="0" room="0x0" actor="0xf" item="RANDOM"/>
-    <xflag type="rupee" location="Clock Town Laundry Pool Rupee 1" slice="0x0" setup="0" room="0x0" actor="0x13" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Clock Town Laundry Pool Rupee 2" slice="0x0" setup="0" room="0x0" actor="0x16" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Clock Town Laundry Pool Rupee 3" slice="0x0" setup="0" room="0x0" actor="0x19" item="RUPEE_RED"/>
+    <xflag type="crate" location="Clock Town Laundry Pool Small Crate" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="grass" location="Clock Town Laundry Pool Grass 1" actor="0xd" item="RANDOM"/>
+    <xflag type="grass" location="Clock Town Laundry Pool Grass 2" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Clock Town Laundry Pool Grass 3" actor="0xf" item="RANDOM"/>
+    <actor>
+      <match actor="0x13"/>
+      <match actor="0x14"/>
+      <match actor="0x15"/>
+      <xflag type="rupee" location="Clock Town Laundry Pool Rupee 1" item="RUPEE_RED"/>
+    </actor>
+    <actor>
+      <match actor="0x16"/>
+      <match actor="0x17"/>
+      <match actor="0x18"/>
+      <xflag type="rupee" location="Clock Town Laundry Pool Rupee 2" item="RUPEE_RED"/>
+    </actor>
+    <actor>
+      <match actor="0x19"/>
+      <match actor="0x1a"/>
+      <match actor="0x1b"/>
+      <xflag type="rupee" location="Clock Town Laundry Pool Rupee 3" item="RUPEE_RED"/>
+    </actor>
   </scene>
   <scene id="FAIRY_FOUNTAIN">
     <npc location="Clock Town Great Fairy" npc="GREAT_FAIRY_TOWN" item="MASK_GREAT_FAIRY"/>

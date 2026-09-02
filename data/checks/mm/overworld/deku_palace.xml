@@ -7,7 +7,7 @@
       <xflag type="soil" location="Deku Palace Soil Item 2" slice="1" item="RUPEE_BLUE"/>
       <xflag type="soil" location="Deku Palace Soil Item 3" slice="2" item="RUPEE_BLUE"/>
     </actor>
-    <xflag type="pot" location="Deku Palace Pot 1" room="0x1" actor="0xf" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Deku Palace Pot 1" room="0x1" actor="0x0f" item="MAGIC_JAR_SMALL"/>
     <xflag type="pot" location="Deku Palace Pot 2" room="0x1" actor="0x10" item="MAGIC_JAR_SMALL"/>
     <xflag type="rupee" location="Deku Palace Rupee Right 01" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Deku Palace Rupee Right 02" room="0x1" actor="0x1" item="RUPEE_GREEN"/>

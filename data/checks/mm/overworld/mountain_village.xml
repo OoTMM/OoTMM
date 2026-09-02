@@ -34,47 +34,49 @@
     </actor>
   </scene>
   <scene id="MOUNTAIN_VILLAGE_SPRING">
-    <xflag type="grass" location="Mountain Village Grass 1" slice="0x0" setup="0" room="0x0" actor="0x1a" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass 2" slice="0x0" setup="0" room="0x0" actor="0x1b" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass 3" slice="0x0" setup="0" room="0x0" actor="0x1c" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 1" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 2" slice="0x1" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 3" slice="0x2" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 4" slice="0x3" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 5" slice="0x4" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 6" slice="0x5" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 7" slice="0x6" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 8" slice="0x7" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 9" slice="0x8" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 1" slice="0x0" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 2" slice="0x1" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 3" slice="0x2" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 4" slice="0x3" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 5" slice="0x4" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 6" slice="0x5" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 7" slice="0x6" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 8" slice="0x7" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 9" slice="0x8" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 1" slice="0x0" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 2" slice="0x1" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 3" slice="0x2" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 4" slice="0x3" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 5" slice="0x4" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 6" slice="0x5" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 7" slice="0x6" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 8" slice="0x7" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 9" slice="0x8" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 1" slice="0x0" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 2" slice="0x1" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 3" slice="0x2" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 4" slice="0x3" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 5" slice="0x4" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 6" slice="0x5" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 7" slice="0x6" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 8" slice="0x7" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Mountain Village Keaton Grass Reward 9" slice="0x8" setup="0" room="0x0" actor="0x2c" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Mountain Village Rupee" slice="0x0" setup="0" room="0x0" actor="0x28" item="RUPEE_RED"/>
-    <xflag type="hive" location="Mountain Village Hive" slice="0x0" setup="0" room="0x0" actor="0x24" item="NOTHING"/>
+    <xflag type="grass" location="Mountain Village Grass 1" room="0x0" actor="0x1a" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass 2" room="0x0" actor="0x1b" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass 3" room="0x0" actor="0x1c" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 1" slice="0x0" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 2" slice="0x1" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 3" slice="0x2" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 4" slice="0x3" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 5" slice="0x4" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 6" slice="0x5" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 7" slice="0x6" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 8" slice="0x7" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 1 Grass 9" slice="0x8" room="0x0" actor="0x1d" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 1" slice="0x0" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 2" slice="0x1" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 3" slice="0x2" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 4" slice="0x3" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 5" slice="0x4" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 6" slice="0x5" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 7" slice="0x6" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 8" slice="0x7" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 2 Grass 9" slice="0x8" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 1" slice="0x0" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 2" slice="0x1" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 3" slice="0x2" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 4" slice="0x3" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 5" slice="0x4" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 6" slice="0x5" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 7" slice="0x6" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 8" slice="0x7" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Mountain Village Grass Pack 3 Grass 9" slice="0x8" room="0x0" actor="0x1f" item="RANDOM"/>
+    <actor room="0x0" actor="0x2c">
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 1" slice="0" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 2" slice="1" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 3" slice="2" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 4" slice="3" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 5" slice="4" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 6" slice="5" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 7" slice="6" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 8" slice="7" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Mountain Village Keaton Grass Reward 9" slice="8" item="RUPEE_RED"/>
+    </actor>
+    <xflag type="rupee" location="Mountain Village Rupee" room="0x0" actor="0x28" item="RUPEE_RED"/>
+    <xflag type="hive" location="Mountain Village Hive" room="0x0" actor="0x24" item="NOTHING"/>
     <actor room="0x0" actor="0x20">
       <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Mountain Village Butterfly Pack 1 Butterfly 2" slice="1" item="NOTHING"/>
@@ -91,8 +93,8 @@
     <xflag type="boulder-red" location="Mountain Village Spring Red Boulder 1" room="0x0" actor="0x0" item="NOTHING"/>
     <xflag type="boulder-red" location="Mountain Village Spring Red Boulder 2" room="0x0" actor="0x1" item="NOTHING"/>
     <xflag type="boulder-red" location="Mountain Village Spring Red Boulder 3" room="0x0" actor="0x2" item="NOTHING"/>
-    <xflag type="rock" location="Mountain Village Rock Cliff 1" room="0x0" actor="0xe" item="RANDOM"/>
-    <xflag type="rock" location="Mountain Village Rock Cliff 2" room="0x0" actor="0xf" item="RANDOM"/>
+    <xflag type="rock" location="Mountain Village Rock Cliff 1" room="0x0" actor="0x0e" item="RANDOM"/>
+    <xflag type="rock" location="Mountain Village Rock Cliff 2" room="0x0" actor="0x0f" item="RANDOM"/>
     <xflag type="rock" location="Mountain Village Rock Ground 1" room="0x0" actor="0x10" item="RANDOM"/>
     <xflag type="rock" location="Mountain Village Rock Ground 2" room="0x0" actor="0x11" item="RANDOM"/>
     <xflag type="rock" location="Mountain Village Rock Ground 3" room="0x0" actor="0x12" item="RANDOM"/>

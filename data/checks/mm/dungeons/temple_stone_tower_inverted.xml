@@ -12,65 +12,77 @@
     <chest location="Stone Tower Temple Inverted Giant Mask" flag="0x1a" item="MASK_GIANT"/>
   </scene>
   <scene id="TEMPLE_STONE_TOWER_INVERTED">
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Maze Side 1" slice="0x0" setup="0" room="0x2" actor="0x9" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Maze Side 2" slice="0x0" setup="0" room="0x2" actor="0xb" item="ARROWS_10"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1" slice="0x0" setup="0" room="0x2" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2" slice="0x0" setup="0" room="0x2" actor="0xc" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Bridge 1" slice="0x0" setup="0" room="0x3" actor="0x10" item="ARROWS_10"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Bridge 2" slice="0x0" setup="0" room="0x3" actor="0x11" item="ARROWS_10"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 1" slice="0x0" setup="0" room="0x3" actor="0x17" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 2" slice="0x0" setup="0" room="0x3" actor="0x18" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 3" slice="0x0" setup="0" room="0x3" actor="0x19" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 4" slice="0x0" setup="0" room="0x3" actor="0x1a" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 1" slice="0x0" setup="0" room="0x4" actor="0x8" item="ARROWS_10"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 2" slice="0x0" setup="0" room="0x4" actor="0x9" item="BOMBS_5"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 3" slice="0x0" setup="0" room="0x4" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 4" slice="0x0" setup="0" room="0x4" actor="0xd" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 5" slice="0x0" setup="0" room="0x4" actor="0xe" item="FAIRY"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 1" slice="0x0" setup="0" room="0x8" actor="0x12" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 2" slice="0x0" setup="0" room="0x8" actor="0x13" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 3" slice="0x0" setup="0" room="0x8" actor="0x14" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 4" slice="0x0" setup="0" room="0x8" actor="0x15" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 5" slice="0x0" setup="0" room="0x8" actor="0x16" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 6" slice="0x0" setup="0" room="0x8" actor="0x17" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 7" slice="0x0" setup="0" room="0x8" actor="0x18" item="BOMBS_5"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 8" slice="0x0" setup="0" room="0x8" actor="0x19" item="ARROWS_10"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 1" slice="0x0" setup="0" room="0xb" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 2" slice="0x0" setup="0" room="0xb" actor="0x2" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 3" slice="0x0" setup="0" room="0xb" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 4" slice="0x0" setup="0" room="0xb" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Center 1" slice="0x0" setup="0" room="0x1" actor="0xd" item="NOTHING"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Center 2" slice="0x0" setup="0" room="0x1" actor="0xe" item="NOTHING"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 1" slice="0x0" setup="0" room="0x8" actor="0x1a" item="NOTHING"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 2" slice="0x0" setup="0" room="0x8" actor="0x1b" item="NOTHING"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 3" slice="0x0" setup="0" room="0x8" actor="0x1c" item="NOTHING"/>
-    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 4" slice="0x0" setup="0" room="0x8" actor="0x1d" item="NOTHING"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Right 1" slice="0x0" setup="0" room="0x0" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Right 2" slice="0x0" setup="0" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Left 1" slice="0x0" setup="0" room="0x0" actor="0xd" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Left 2" slice="0x0" setup="0" room="0x0" actor="0xe" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Left 3" slice="0x0" setup="0" room="0x0" actor="0xf" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 1" slice="0x0" setup="0" room="0x3" actor="0x27" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 2" slice="0x0" setup="0" room="0x3" actor="0x28" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 3" slice="0x0" setup="0" room="0x3" actor="0x29" item="MAGIC_JAR_LARGE"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 4" slice="0x0" setup="0" room="0x3" actor="0x2a" item="BOMBS_5"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 5" slice="0x0" setup="0" room="0x3" actor="0x2b" item="ARROWS_10"/>
-    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 6" slice="0x0" setup="0" room="0x3" actor="0x2c" item="ARROWS_10"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Dexihand 1" slice="0x0" setup="0" room="0x1" actor="0x0" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Dexihand 2" slice="0x0" setup="0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Dexihand 3" slice="0x0" setup="0" room="0x1" actor="0x2" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Alcove 1" slice="0x0" setup="0" room="0x3" actor="0x1" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Alcove 2" slice="0x0" setup="0" room="0x3" actor="0x2" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Top 1" slice="0x0" setup="0" room="0x8" actor="0x0" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Top 2" slice="0x0" setup="0" room="0x8" actor="0x1" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Top 3" slice="0x0" setup="0" room="0x8" actor="0x2" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 1" slice="0x0" setup="0" room="0x8" actor="0x3" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 2" slice="0x0" setup="0" room="0x8" actor="0x4" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 3" slice="0x0" setup="0" room="0x8" actor="0x5" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 4" slice="0x0" setup="0" room="0x8" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 1" slice="0x0" setup="0" room="0x8" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 2" slice="0x0" setup="0" room="0x8" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 3" slice="0x0" setup="0" room="0x8" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 4" slice="0x0" setup="0" room="0x8" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Maze Side 1" room="0x2" actor="0x9" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Maze Side 2" room="0x2" actor="0xb" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1" room="0x2" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2" room="0x2" actor="0xc" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Bridge 1" room="0x3" actor="0x10" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Bridge 2" room="0x3" actor="0x11" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 1" room="0x3" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 2" room="0x3" actor="0x18" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 3" room="0x3" actor="0x19" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Updrafts Ledge 4" room="0x3" actor="0x1a" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 1" room="0x4" actor="0x8" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 2" room="0x4" actor="0x9" item="BOMBS_5"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 3" room="0x4" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 4" room="0x4" actor="0xd" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Wizzrobe 5" room="0x4" actor="0xe" item="FAIRY"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 1" room="0x8" actor="0x12" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 2" room="0x8" actor="0x13" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 3" room="0x8" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 4" room="0x8" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 5" room="0x8" actor="0x16" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 6" room="0x8" actor="0x17" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 7" room="0x8" actor="0x18" item="BOMBS_5"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Pre-Boss 8" room="0x8" actor="0x19" item="ARROWS_10"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 1" room="0xb" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 2" room="0xb" actor="0x2" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 3" room="0xb" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Pot Gomess 4" room="0xb" actor="0x4" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Center 1" room="0x1" actor="0xd" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Center 2" room="0x1" actor="0xe" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 1" room="0x8" actor="0x1a" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 2" room="0x8" actor="0x1b" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 3" room="0x8" actor="0x1c" item="NOTHING"/>
+    <xflag type="pot" location="Stone Tower Temple Inverted Flying Pot Pre-Boss 4" room="0x8" actor="0x1d" item="NOTHING"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Right 1" room="0x0" actor="0xb" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Right 2" room="0x0" actor="0xc" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Left 1" room="0x0" actor="0xd" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Left 2" room="0x0" actor="0xe" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Entrance Left 3" room="0x0" actor="0xf" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 1" room="0x3" actor="0x27" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 2" room="0x3" actor="0x28" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 3" room="0x3" actor="0x29" item="MAGIC_JAR_LARGE"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 4" room="0x3" actor="0x2a" item="BOMBS_5"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 5" room="0x3" actor="0x2b" item="ARROWS_10"/>
+    <xflag type="crate" location="Stone Tower Temple Inverted Crate Before Gomess 6" room="0x3" actor="0x2c" item="ARROWS_10"/>
+    <actor>
+      <match room="0x1" actor="0x0"/>
+      <match room="0x3" actor="0x0"/>
+      <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Dexihand 1" item="RUPEE_RED"/>
+    </actor>
+    <actor>
+      <match room="0x1" actor="0x1"/>
+      <match room="0x3" actor="0x3"/>
+      <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Dexihand 2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor>
+      <match room="0x1" actor="0x2"/>
+      <match room="0x3" actor="0x4"/>
+      <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Dexihand 3" item="RUPEE_BLUE"/>
+    </actor>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Alcove 1" room="0x3" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Alcove 2" room="0x3" actor="0x2" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Top 1" room="0x8" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Top 2" room="0x8" actor="0x1" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Top 3" room="0x8" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 1" room="0x8" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 2" room="0x8" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 3" room="0x8" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Back 4" room="0x8" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 1" room="0x8" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 2" room="0x8" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 3" room="0x8" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Stone Tower Temple Inverted Rupee Pre-Boss Front 4" room="0x8" actor="0xa" item="RUPEE_BLUE"/>
   </scene>
 </checks>

@@ -30,18 +30,13 @@ void ObjMure3_DespawnChildren(Actor_ObjMure3* this, PlayState* play);
 void ObjMure3_SetActionWatchDespawn(Actor_ObjMure3* this);
 void ObjMure3_WatchDespawn(Actor_ObjMure3* this, PlayState* play);
 
-static void ObjMure3_Alias(Xflag* xf)
-{
-}
-
 int ObjMure3_IsAnyShuffled(Actor_ObjMure3* this, PlayState* play)
 {
     s16 count;
     Xflag xf;
     Xflag xf2;
 
-    if (Xflag_Init(&xf, &this->actor, play))
-        ObjMure3_Alias(&xf);
+    Xflag_Init(&xf, &this->actor, play);
     count = sRupeeCounts[OBJMURE3_PARAM_RUPEEINDEX(&this->actor)];
 
     for (s16 i = 0; i < count; ++i)
@@ -65,8 +60,7 @@ void ObjMure3_SpawnRupee(Actor_ObjMure3* this, PlayState* play, Vec3f* pos, int 
         return;
 
     /* Get the matching xflag */
-    if (Xflag_Init(&g.xflag, &this->actor, play))
-        ObjMure3_Alias(&g.xflag);
+    Xflag_Init(&g.xflag, &this->actor, play);
     g.xflag.sliceId = (u8)index;
 
     /* Spawn the item */

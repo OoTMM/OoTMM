@@ -21,68 +21,68 @@
     <sf location="Woodfall Temple SF Pre-Boss Left" flag="0x2c" item="STRAY_FAIRY_WF"/>
     <sf location="Woodfall Temple SF Pre-Boss Top Right" flag="0x32" item="STRAY_FAIRY_WF"/>
     <sf location="Woodfall Temple SF Pre-Boss Pillar" flag="0x2d" item="STRAY_FAIRY_WF"/>
-    <xflag type="pot" location="Woodfall Temple Pot Pre-Boss 1" slice="0x0" setup="0" room="0x0" actor="0x1c" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Pre-Boss 2" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Upper 1" slice="0x0" setup="0" room="0x1" actor="0xa" item="ARROWS_10"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Upper 2" slice="0x0" setup="0" room="0x1" actor="0xb" item="ARROWS_10"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 1" slice="0x0" setup="0" room="0x1" actor="0x15" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 2" slice="0x0" setup="0" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 3" slice="0x0" setup="0" room="0x1" actor="0x17" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 4" slice="0x0" setup="0" room="0x1" actor="0x18" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 5" slice="0x0" setup="0" room="0x1" actor="0x1a" item="BOMBS_5"/>
-    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 6" slice="0x0" setup="0" room="0x1" actor="0x1b" item="ARROWS_10"/>
-    <xflag type="pot" location="Woodfall Temple Pot Entrance" slice="0x0" setup="0" room="0x2" actor="0x16" item="FAIRY"/>
-    <xflag type="pot" location="Woodfall Temple Pot Maze 1" slice="0x0" setup="0" room="0x3" actor="0xd" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Maze 2" slice="0x0" setup="0" room="0x3" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Water Room 1" slice="0x0" setup="0" room="0x5" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Water Room 2" slice="0x0" setup="0" room="0x5" actor="0xf" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Water Room 3" slice="0x0" setup="0" room="0x5" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Woodfall Temple Pot Water Room 4" slice="0x0" setup="0" room="0x5" actor="0x11" item="ARROWS_10"/>
-    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 1" slice="0x0" setup="0" room="0x8" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 2" slice="0x0" setup="0" room="0x8" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 3" slice="0x0" setup="0" room="0x8" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 4" slice="0x0" setup="0" room="0x8" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 1" slice="0x0" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 2" slice="0x0" setup="0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 3" slice="0x0" setup="0" room="0x0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 4" slice="0x0" setup="0" room="0x0" actor="0x21" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 5" slice="0x0" setup="0" room="0x0" actor="0x22" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Main Room 1" slice="0x0" setup="0" room="0x1" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Main Room 2" slice="0x0" setup="0" room="0x1" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Main Room 3" slice="0x0" setup="0" room="0x1" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Entrance Bottom 1" slice="0x0" setup="0" room="0x2" actor="0x17" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Entrance Bottom 2" slice="0x0" setup="0" room="0x2" actor="0x18" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Entrance Bottom 3" slice="0x0" setup="0" room="0x2" actor="0x1b" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Entrance Ledge 1" slice="0x0" setup="0" room="0x2" actor="0x19" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Entrance Ledge 2" slice="0x0" setup="0" room="0x2" actor="0x1a" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Compass Room 1" slice="0x0" setup="0" room="0x4" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Compass Room 2" slice="0x0" setup="0" room="0x4" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Compass Room 3" slice="0x0" setup="0" room="0x4" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Water Room 1" slice="0x0" setup="0" room="0x5" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Water Room 2" slice="0x0" setup="0" room="0x5" actor="0x13" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Map Room 1" slice="0x0" setup="0" room="0x6" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Map Room 2" slice="0x0" setup="0" room="0x6" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Map Room 3" slice="0x0" setup="0" room="0x6" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Map Room 4" slice="0x0" setup="0" room="0x6" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Map Room 5" slice="0x0" setup="0" room="0x6" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 01" slice="0x0" setup="0" room="0xa" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 02" slice="0x0" setup="0" room="0xa" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 03" slice="0x0" setup="0" room="0xa" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 04" slice="0x0" setup="0" room="0xa" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 05" slice="0x0" setup="0" room="0xa" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 06" slice="0x0" setup="0" room="0xa" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 07" slice="0x0" setup="0" room="0xa" actor="0xc" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 08" slice="0x0" setup="0" room="0xa" actor="0xd" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 09" slice="0x0" setup="0" room="0xa" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 10" slice="0x0" setup="0" room="0xa" actor="0xf" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Temple Grass Pits Room 11" slice="0x0" setup="0" room="0xa" actor="0x10" item="RANDOM"/>
-    <xflag type="rupee" location="Woodfall Temple Rupee Upper Left" slice="0x0" setup="0" room="0x0" actor="0x0" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Woodfall Temple Rupee Upper Right" slice="0x0" setup="0" room="0x0" actor="0x1" item="RUPEE_RED"/>
-    <xflag type="rupee" location="Woodfall Temple Rupee Lower 1" slice="0x0" setup="0" room="0x0" actor="0x2" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Woodfall Temple Rupee Lower 2" slice="0x0" setup="0" room="0x0" actor="0x3" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Woodfall Temple Rupee Lower 3" slice="0x0" setup="0" room="0x0" actor="0x4" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Woodfall Temple Rupee Lower 4" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Woodfall Temple Hive Entrance" slice="0x0" setup="0" room="0x2" actor="0x1d" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Woodfall Temple Hive Maze" slice="0x0" setup="0" room="0x3" actor="0x11" item="NOTHING"/>
+    <xflag type="pot" location="Woodfall Temple Pot Pre-Boss 1" room="0x0" actor="0x1c" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Pre-Boss 2" room="0x0" actor="0x1d" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Upper 1" room="0x1" actor="0xa" item="ARROWS_10"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Upper 2" room="0x1" actor="0xb" item="ARROWS_10"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 1" room="0x1" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 2" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 3" room="0x1" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 4" room="0x1" actor="0x18" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 5" room="0x1" actor="0x1a" item="BOMBS_5"/>
+    <xflag type="pot" location="Woodfall Temple Pot Main Room Lower 6" room="0x1" actor="0x1b" item="ARROWS_10"/>
+    <xflag type="pot" location="Woodfall Temple Pot Entrance" room="0x2" actor="0x16" item="FAIRY"/>
+    <xflag type="pot" location="Woodfall Temple Pot Maze 1" room="0x3" actor="0xd" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Maze 2" room="0x3" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Water Room 1" room="0x5" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Water Room 2" room="0x5" actor="0xf" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Water Room 3" room="0x5" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Woodfall Temple Pot Water Room 4" room="0x5" actor="0x11" item="ARROWS_10"/>
+    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 1" room="0x8" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 2" room="0x8" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 3" room="0x8" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Woodfall Temple Pot Miniboss Room 4" room="0x8" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 1" room="0x0" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 2" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 3" room="0x0" actor="0x20" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 4" room="0x0" actor="0x21" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pre-Boss 5" room="0x0" actor="0x22" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Main Room 1" room="0x1" actor="0x1e" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Main Room 2" room="0x1" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Main Room 3" room="0x1" actor="0x20" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Entrance Bottom 1" room="0x2" actor="0x17" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Entrance Bottom 2" room="0x2" actor="0x18" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Entrance Bottom 3" room="0x2" actor="0x1b" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Entrance Ledge 1" room="0x2" actor="0x19" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Entrance Ledge 2" room="0x2" actor="0x1a" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Compass Room 1" room="0x4" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Compass Room 2" room="0x4" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Compass Room 3" room="0x4" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Water Room 1" room="0x5" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Water Room 2" room="0x5" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Map Room 1" room="0x6" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Map Room 2" room="0x6" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Map Room 3" room="0x6" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Map Room 4" room="0x6" actor="0x9" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Map Room 5" room="0x6" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 01" room="0xa" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 02" room="0xa" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 03" room="0xa" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 04" room="0xa" actor="0x9" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 05" room="0xa" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 06" room="0xa" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 07" room="0xa" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 08" room="0xa" actor="0xd" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 09" room="0xa" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 10" room="0xa" actor="0xf" item="RANDOM"/>
+    <xflag type="grass" location="Woodfall Temple Grass Pits Room 11" room="0xa" actor="0x10" item="RANDOM"/>
+    <xflag type="rupee" location="Woodfall Temple Rupee Upper Left" room="0x0" actor="0x0" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Woodfall Temple Rupee Upper Right" room="0x0" actor="0x1" item="RUPEE_RED"/>
+    <xflag type="rupee" location="Woodfall Temple Rupee Lower 1" room="0x0" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Woodfall Temple Rupee Lower 2" room="0x0" actor="0x3" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Woodfall Temple Rupee Lower 3" room="0x0" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Woodfall Temple Rupee Lower 4" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Woodfall Temple Hive Entrance" room="0x2" actor="0x1d" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Woodfall Temple Hive Maze" room="0x3" actor="0x11" item="NOTHING"/>
   </scene>
 </checks>

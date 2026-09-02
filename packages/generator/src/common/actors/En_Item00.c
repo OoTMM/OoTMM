@@ -11,8 +11,6 @@
 # define DUMMY_MSG 0x52
 #endif
 
-void EnItem00_AliasFreestandingRupee(Xflag* xflag);
-
 static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
     ComboItemOverride o;
@@ -59,17 +57,7 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtendedMajor = 0;
 
     /* Init the xflag */
-    if (Xflag_Init(&this->xflag, &this->actor, play))
-    {
-        switch (this->actor.params & 0xff)
-        {
-        case ITEM00_RUPEE_GREEN:
-        case ITEM00_RUPEE_BLUE:
-        case ITEM00_RUPEE_RED:
-            EnItem00_AliasFreestandingRupee(&this->xflag);
-            break;
-        }
-    }
+    Xflag_Init(&this->xflag, &this->actor, play);
 
     if (Xflag_IsShuffled(&this->xflag))
     {

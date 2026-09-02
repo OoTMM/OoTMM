@@ -6,46 +6,46 @@
     <npc location="Southern Swamp Scrub Shop" npc="SCRUB_SHOP_BEANS" item="MAGIC_BEAN"/>
     <npc location="Southern Swamp Song of Soaring" npc="SONG_SOARING" item="SONG_SOARING"/>
     <npc location="Southern Swamp Owl Statue" npc="OWL_SOUTHERN_SWAMP" item="OWL_SOUTHERN_SWAMP"/>
-    <xflag type="pot" location="Southern Swamp Pot 1" slice="0x0" setup="0" room="0x2" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Southern Swamp Pot 2" slice="0x0" setup="0" room="0x2" actor="0xf" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Southern Swamp Pot 3" slice="0x0" setup="0" room="0x2" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 01" slice="0x0" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 02" slice="0x1" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 03" slice="0x2" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 04" slice="0x3" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 05" slice="0x4" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 06" slice="0x5" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 07" slice="0x6" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 08" slice="0x7" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 09" slice="0x8" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 10" slice="0x9" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 11" slice="0xa" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Front 12" slice="0xb" setup="0" room="0x0" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Owl 1" slice="0x0" setup="0" room="0x0" actor="0x2d" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Owl 2" slice="0x0" setup="0" room="0x0" actor="0x2e" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 01" slice="0x0" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 02" slice="0x1" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 03" slice="0x2" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 04" slice="0x3" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 05" slice="0x4" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 06" slice="0x5" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 07" slice="0x6" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 08" slice="0x7" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 09" slice="0x8" setup="0" room="0x2" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 01" slice="0x0" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 02" slice="0x1" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 03" slice="0x2" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 04" slice="0x3" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 05" slice="0x4" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 06" slice="0x5" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 07" slice="0x6" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 08" slice="0x7" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 09" slice="0x8" setup="0" room="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch 1" slice="0x0" setup="0" room="0x2" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Southern Swamp Grass Near Witch 2" slice="0x0" setup="0" room="0x2" actor="0x12" item="RANDOM"/>
-    <xflag type="rupee" location="Southern Swamp Rupee 1" slice="0x0" setup="0" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
-    <xflag type="rupee" location="Southern Swamp Rupee 2" slice="0x0" setup="0" room="0x0" actor="0x29" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Southern Swamp Hive" slice="0x0" setup="0" room="0x0" actor="0x2b" item="RUPEE_RED"/>
+    <xflag type="pot" location="Southern Swamp Pot 1" room="0x2" actor="0xe" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Southern Swamp Pot 2" room="0x2" actor="0xf" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Southern Swamp Pot 3" room="0x2" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 01" slice="0x0" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 02" slice="0x1" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 03" slice="0x2" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 04" slice="0x3" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 05" slice="0x4" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 06" slice="0x5" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 07" slice="0x6" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 08" slice="0x7" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 09" slice="0x8" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 10" slice="0x9" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 11" slice="0xa" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Front 12" slice="0xb" room="0x0" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Owl 1" room="0x0" actor="0x2d" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Owl 2" room="0x0" actor="0x2e" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 01" slice="0x0" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 02" slice="0x1" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 03" slice="0x2" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 04" slice="0x3" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 05" slice="0x4" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 06" slice="0x5" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 07" slice="0x6" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 08" slice="0x7" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 1 Grass 09" slice="0x8" room="0x2" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 01" slice="0x0" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 02" slice="0x1" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 03" slice="0x2" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 04" slice="0x3" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 05" slice="0x4" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 06" slice="0x5" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 07" slice="0x6" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 08" slice="0x7" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch Pack 2 Grass 09" slice="0x8" room="0x2" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch 1" room="0x2" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Southern Swamp Grass Near Witch 2" room="0x2" actor="0x12" item="RANDOM"/>
+    <xflag type="rupee" location="Southern Swamp Rupee 1" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
+    <xflag type="rupee" location="Southern Swamp Rupee 2" room="0x0" actor="0x29" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Southern Swamp Hive" room="0x0" actor="0x2b" item="RUPEE_RED"/>
     <actor>
       <match scene="SOUTHERN_SWAMP" room="0x2" actor="0x13"/>
       <match scene="SOUTHERN_SWAMP_CLEAR" room="0x2" actor="0x10"/>
@@ -58,7 +58,7 @@
     <shop location="Swamp Potion Shop Item 1" flag="0x0d" item="POTION_BLUE"/>
     <shop location="Swamp Potion Shop Item 2" flag="0x0e" item="POTION_GREEN"/>
     <shop location="Swamp Potion Shop Item 3" flag="0x0f" item="POTION_RED"/>
-    <xflag type="rupee" location="Swamp Potion Shop Rupee" slice="0x0" setup="0" room="0x0" actor="0x1" item="RUPEE_GREEN"/>
+    <xflag type="rupee" location="Swamp Potion Shop Rupee" actor="0x1" item="RUPEE_GREEN"/>
   </scene>
   <scene id="TOURIST_INFORMATION">
     <npc location="Tourist Information Pictobox" npc="KOUME_PICTOGRAPH_BOX" item="PICTOGRAPH_BOX"/>

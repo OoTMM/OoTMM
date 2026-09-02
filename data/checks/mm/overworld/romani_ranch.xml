@@ -100,8 +100,8 @@
     </actor>
   </scene>
   <scene id="RANCH_HOUSE_BARN">
-    <xflag type="wonder" location="Romani Ranch Barn Wonder Item 1" slice="0x0" setup="0" room="0x0" actor="0x0" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Romani Ranch Barn Wonder Item 2" slice="0x0" setup="0" room="0x0" actor="0x1" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Romani Ranch Barn Wonder Item 1" room="0x0" actor="0x0" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Romani Ranch Barn Wonder Item 2" room="0x0" actor="0x1" item="RUPEE_BLUE"/>
   </scene>
   <scene id="CUCCO_SHACK">
     <npc location="Cucco Shack Bunny Mask" npc="MASK_BUNNY" item="MASK_BUNNY" hint="CUCCOS"/>

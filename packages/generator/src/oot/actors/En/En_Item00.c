@@ -196,10 +196,6 @@ PATCH_CALL(0x8001376c, EnItem00_FixDrop);
 PATCH_CALL(0x80013998, EnItem00_FixDrop);
 PATCH_CALL(0x80013dec, EnItem00_FixDrop);
 
-void EnItem00_AliasFreestandingRupee(Xflag* xflag)
-{
-}
-
 void EnItem00_DrawShieldDeku(PlayState* play)
 {
     Draw_Gi(play, NULL, GI_OOT_SHIELD_DEKU, DRAW_RAW);
