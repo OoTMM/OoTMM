@@ -71,10 +71,26 @@
     <xflag type="tree" location="Zora Cape Palm Tree Island Center" setup="0" actor="0x1c" item="NUT"/>
     <xflag type="pot" location="Zora Cape Pot Near Beavers 1" setup="0" actor="0x43" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Zora Cape Pot Near Beavers 2" setup="0" actor="0x44" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 1" setup="0" actor="0x45" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 2" setup="0" actor="0x46" item="FAIRY"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 3" setup="0" actor="0x47" item="BOMBS_5"/>
-    <xflag type="pot" location="Zora Cape Pot Near Owl Statue 4" setup="0" actor="0x48" item="ARROWS_20"/>
+    <actor>
+      <match setup="0" actor="0x45"/>
+      <match setup="1" actor="0x3c"/>
+      <xflag type="pot" location="Zora Cape Pot Near Owl Statue 1" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x46"/>
+      <match setup="1" actor="0x3d"/>
+      <xflag type="pot" location="Zora Cape Pot Near Owl Statue 2" item="FAIRY"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x47"/>
+      <match setup="1" actor="0x3e"/>
+      <xflag type="pot" location="Zora Cape Pot Near Owl Statue 3" item="BOMBS_5"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x48"/>
+      <match setup="1" actor="0x3f"/>
+      <xflag type="pot" location="Zora Cape Pot Near Owl Statue 4" item="ARROWS_20"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x3e"/>
       <match setup="1" actor="0x0"/>

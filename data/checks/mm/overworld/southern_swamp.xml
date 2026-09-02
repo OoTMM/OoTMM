@@ -6,9 +6,21 @@
     <npc location="Southern Swamp Scrub Shop" npc="SCRUB_SHOP_BEANS" item="MAGIC_BEAN"/>
     <npc location="Southern Swamp Song of Soaring" npc="SONG_SOARING" item="SONG_SOARING"/>
     <npc location="Southern Swamp Owl Statue" npc="OWL_SOUTHERN_SWAMP" item="OWL_SOUTHERN_SWAMP"/>
-    <xflag type="pot" location="Southern Swamp Pot 1" room="0x2" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Southern Swamp Pot 2" room="0x2" actor="0xf" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Southern Swamp Pot 3" room="0x2" actor="0x10" item="RUPEE_GREEN"/>
+    <actor room="0x2">
+      <match scene="SOUTHERN_SWAMP" actor="0x0e"/>
+      <match scene="SOUTHERN_SWAMP_CLEAR" actor="0x0b"/>
+      <xflag type="pot" location="Southern Swamp Pot 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x2">
+      <match scene="SOUTHERN_SWAMP" actor="0x0f"/>
+      <match scene="SOUTHERN_SWAMP_CLEAR" actor="0x0c"/>
+      <xflag type="pot" location="Southern Swamp Pot 2" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x2">
+      <match scene="SOUTHERN_SWAMP" actor="0x10"/>
+      <match scene="SOUTHERN_SWAMP_CLEAR" actor="0x0d"/>
+      <xflag type="pot" location="Southern Swamp Pot 3" item="RUPEE_GREEN"/>
+    </actor>
     <xflag type="grass" location="Southern Swamp Grass Front 01" slice="0x0" room="0x0" actor="0xb" item="RANDOM"/>
     <xflag type="grass" location="Southern Swamp Grass Front 02" slice="0x1" room="0x0" actor="0xb" item="RANDOM"/>
     <xflag type="grass" location="Southern Swamp Grass Front 03" slice="0x2" room="0x0" actor="0xb" item="RANDOM"/>

@@ -87,10 +87,10 @@
   <scene id="CLOCK_TOWER_ROOFTOP">
     <npc location="Clock Tower Roof Skull Kid Ocarina" npc="SKULL_KID_OCARINA" item="OCARINA"/>
     <npc location="Clock Tower Roof Skull Kid Song of Time" npc="SKULL_KID_SONG" item="SONG_TIME"/>
-    <xflag type="pot" location="Clock Tower Roof Pot 1" slice="0x0" setup="0" room="0x0" actor="0x3" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Clock Tower Roof Pot 2" slice="0x0" setup="0" room="0x0" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Clock Tower Roof Pot 3" slice="0x0" setup="0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Clock Tower Roof Pot 4" slice="0x0" setup="0" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Clock Tower Roof Pot 1" actor="0x3" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Clock Tower Roof Pot 2" actor="0x4" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Clock Tower Roof Pot 3" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Clock Tower Roof Pot 4" actor="0x6" item="MAGIC_JAR_LARGE"/>
   </scene>
   <scene id="MAYOR_HOUSE">
     <npc location="Mayor's Office Kafei's Mask" npc="MASK_KAFEI" item="MASK_KAFEI"/>
@@ -128,10 +128,10 @@
   </scene>
   <scene id="OBSERVATORY">
     <chest location="Astral Observatory Passage Chest" flag="0x00" item="RUPEE_SILVER"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 1" slice="0x0" setup="0" room="0x0" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 2" slice="0x0" setup="0" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 3" slice="0x0" setup="0" room="0x0" actor="0x12" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 4" slice="0x0" setup="0" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 1" slice="0x0" room="0x0" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 2" slice="0x0" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 3" slice="0x0" room="0x0" actor="0x12" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 4" slice="0x0" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
   </scene>
   <scene id="TRADING_POST">
     <shop location="Trading Post Item 1" flag="0x05" item="POTION_RED"/>

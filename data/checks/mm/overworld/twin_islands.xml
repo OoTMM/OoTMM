@@ -71,36 +71,156 @@
   </scene>
   <scene id="GORON_RACETRACK">
     <npc location="Goron Race Reward" npc="GORON_RACE" item="BOTTLED_GOLD_DUST" hint="GORON_RACE"/>
-    <xflag type="pot" location="Goron Race Pot 01" actor="0x2" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 02" actor="0x3" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 03" actor="0x4" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 04" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 05" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 06" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 07" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 08" actor="0x9" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 09" actor="0xa" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 10" actor="0xb" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 11" actor="0xc" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 12" actor="0xd" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 13" actor="0xe" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 14" actor="0xf" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 15" actor="0x10" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 16" actor="0x11" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 17" actor="0x12" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 18" actor="0x13" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 19" actor="0x14" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 20" actor="0x15" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 21" actor="0x16" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 22" actor="0x17" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 23" actor="0x18" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 24" actor="0x19" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 25" actor="0x1a" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 26" actor="0x1b" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 27" actor="0x1c" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 28" actor="0x1d" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 29" actor="0x1e" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Goron Race Pot 30" actor="0x1f" item="MAGIC_JAR_LARGE"/>
+    <actor>
+      <match setup="0" actor="0x2"/>
+      <match setup="1" actor="0x2"/>
+      <xflag type="pot" location="Goron Race Pot 01" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3"/>
+      <match setup="1" actor="0x3"/>
+      <xflag type="pot" location="Goron Race Pot 02" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4"/>
+      <match setup="1" actor="0x4"/>
+      <xflag type="pot" location="Goron Race Pot 03" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5"/>
+      <match setup="1" actor="0x5"/>
+      <xflag type="pot" location="Goron Race Pot 04" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x6"/>
+      <match setup="1" actor="0x6"/>
+      <xflag type="pot" location="Goron Race Pot 05" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7"/>
+      <match setup="1" actor="0x7"/>
+      <xflag type="pot" location="Goron Race Pot 06" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x8"/>
+      <match setup="1" actor="0x8"/>
+      <xflag type="pot" location="Goron Race Pot 07" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x9"/>
+      <match setup="1" actor="0x9"/>
+      <xflag type="pot" location="Goron Race Pot 08" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0xa"/>
+      <match setup="1" actor="0xa"/>
+      <xflag type="pot" location="Goron Race Pot 09" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0xb"/>
+      <match setup="1" actor="0xb"/>
+      <xflag type="pot" location="Goron Race Pot 10" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0xc"/>
+      <match setup="1" actor="0xc"/>
+      <xflag type="pot" location="Goron Race Pot 11" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0xd"/>
+      <match setup="1" actor="0xd"/>
+      <xflag type="pot" location="Goron Race Pot 12" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0xe"/>
+      <match setup="1" actor="0xe"/>
+      <xflag type="pot" location="Goron Race Pot 13" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0xf"/>
+      <match setup="1" actor="0xf"/>
+      <xflag type="pot" location="Goron Race Pot 14" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x10"/>
+      <match setup="1" actor="0x10"/>
+      <xflag type="pot" location="Goron Race Pot 15" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x11"/>
+      <match setup="1" actor="0x11"/>
+      <xflag type="pot" location="Goron Race Pot 16" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x12"/>
+      <match setup="1" actor="0x12"/>
+      <xflag type="pot" location="Goron Race Pot 17" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x13"/>
+      <match setup="1" actor="0x13"/>
+      <xflag type="pot" location="Goron Race Pot 18" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x14"/>
+      <match setup="1" actor="0x14"/>
+      <xflag type="pot" location="Goron Race Pot 19" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x15"/>
+      <match setup="1" actor="0x15"/>
+      <xflag type="pot" location="Goron Race Pot 20" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x16"/>
+      <match setup="1" actor="0x16"/>
+      <xflag type="pot" location="Goron Race Pot 21" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x17"/>
+      <match setup="1" actor="0x17"/>
+      <xflag type="pot" location="Goron Race Pot 22" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x18"/>
+      <match setup="1" actor="0x18"/>
+      <xflag type="pot" location="Goron Race Pot 23" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x19"/>
+      <match setup="1" actor="0x19"/>
+      <xflag type="pot" location="Goron Race Pot 24" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1a"/>
+      <match setup="1" actor="0x1a"/>
+      <xflag type="pot" location="Goron Race Pot 25" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1b"/>
+      <match setup="1" actor="0x1b"/>
+      <xflag type="pot" location="Goron Race Pot 26" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1c"/>
+      <match setup="1" actor="0x1c"/>
+      <xflag type="pot" location="Goron Race Pot 27" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1d"/>
+      <match setup="1" actor="0x1d"/>
+      <xflag type="pot" location="Goron Race Pot 28" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1e"/>
+      <match setup="1" actor="0x1e"/>
+      <xflag type="pot" location="Goron Race Pot 29" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1f"/>
+      <match setup="1" actor="0x1f"/>
+      <xflag type="pot" location="Goron Race Pot 30" item="MAGIC_JAR_LARGE"/>
+    </actor>
     <xflag type="tree" location="Goron Race Forked Tree 1" actor="0x3b" item="NOTHING"/>
     <xflag type="tree" location="Goron Race Forked Tree 2" actor="0x3c" item="NOTHING"/>
     <xflag type="tree" location="Goron Race Forked Tree 3" actor="0x3d" item="NOTHING"/>

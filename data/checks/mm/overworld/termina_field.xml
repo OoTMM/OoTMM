@@ -373,10 +373,10 @@
     <xflag type="grass" location="Bio Baba Grotto Grass 2" actor="0x3" item="RANDOM"/>
     <xflag type="rock" location="Bio Baba Grotto Rock" actor="0x1" item="RANDOM"/>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x9">
     <npc location="Termina Field Scrub" npc="SCRUB_TELESCOPE" item="HEART_PIECE"/>
-    <xflag type="pot" location="Termina Field Scrub Pot" slice="0x0" setup="0" room="0x9" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Termina Field Scrub Crate" slice="0x0" setup="0" room="0x9" actor="0x0" item="NOTHING"/>
+    <xflag type="pot" location="Termina Field Scrub Pot" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Termina Field Scrub Crate" actor="0x0" item="NOTHING"/>
   </scene>
   <scene id="GROTTOS">
     <npc location="Termina Field Gossip Stones HP" npc="GOSSIP_HEART_PIECE" item="HEART_PIECE" hint="SONGS_GOSSIPS"/>

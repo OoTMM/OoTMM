@@ -5,27 +5,35 @@
     <npc location="Mountain Village Don Gero Mask" npc="MASK_DON_GERO" item="MASK_DON_GERO" hint="HUNGRY_GORON"/>
     <npc location="Mountain Village Frog Choir HP" npc="FROG_HEART_PIECE" item="HEART_PIECE" hint="DON_GERO_CHOIR"/>
     <npc location="Mountain Village Owl Statue" npc="OWL_MOUNTAIN_VILLAGE" item="OWL_MOUNTAIN_VILLAGE"/>
-    <xflag type="pot" location="Mountain Village Pot" slice="0x0" setup="0" room="0x0" actor="0x26" item="FAIRY"/>
-    <xflag type="pot" location="Mountain Village Potted Plant 1 Pot" slice="0x0" setup="0" room="0x0" actor="0x23" item="NOTHING"/>
-    <xflag type="grass" location="Mountain Village Potted Plant 1 Grass" slice="0x1" setup="0" room="0x0" actor="0x23" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Mountain Village Potted Plant 2 Pot" slice="0x0" setup="0" room="0x0" actor="0x24" item="NOTHING"/>
-    <xflag type="grass" location="Mountain Village Potted Plant 2 Grass" slice="0x1" setup="0" room="0x0" actor="0x24" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 1" slice="0x0" setup="0" room="0x0" actor="0x11" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 2" slice="0x0" setup="0" room="0x0" actor="0xe" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 3" slice="0x0" setup="0" room="0x0" actor="0x2e" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 4" slice="0x0" setup="0" room="0x0" actor="0x34" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 5" slice="0x0" setup="0" room="0x0" actor="0x12" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 1" slice="0x0" setup="0" room="0x0" actor="0x29" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 2" slice="0x0" setup="0" room="0x0" actor="0x38" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 3" slice="0x0" setup="0" room="0x0" actor="0x35" item="BOMBS_5"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 4" slice="0x0" setup="0" room="0x0" actor="0x36" item="ARROWS_20"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 5" slice="0x0" setup="0" room="0x0" actor="0x37" item="FLEXIBLE"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball Winter 1" slice="0x0" setup="0" room="0x0" actor="0x2a" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball Winter 2" slice="0x0" setup="0" room="0x0" actor="0x28" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball Winter 3" slice="0x0" setup="0" room="0x0" actor="0x27" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball Winter 4" slice="0x0" setup="0" room="0x0" actor="0x2b" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball Cliff 1" slice="0x0" setup="0" room="0x0" actor="0x31" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball Cliff 2" slice="0x0" setup="0" room="0x0" actor="0x32" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Mountain Village Pot" room="0x0" actor="0x26" item="FAIRY"/>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x23"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x29"/>
+      <xflag type="pot" location="Mountain Village Potted Plant 1 Pot" slice="0" item="NOTHING"/>
+      <xflag type="grass" location="Mountain Village Potted Plant 1 Grass" slice="1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x24"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x2a"/>
+      <xflag type="pot" location="Mountain Village Potted Plant 2 Pot" slice="0" item="NOTHING"/>
+      <xflag type="grass" location="Mountain Village Potted Plant 2 Grass" slice="1" item="RECOVERY_HEART"/>
+    </actor>
+    <xflag type="snowball" location="Mountain Village Big Snowball 1" room="0x0" actor="0x11" item="NOTHING"/>
+    <xflag type="snowball" location="Mountain Village Big Snowball 2" room="0x0" actor="0xe" item="NOTHING"/>
+    <xflag type="snowball" location="Mountain Village Big Snowball 3" room="0x0" actor="0x2e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Mountain Village Big Snowball 4" room="0x0" actor="0x34" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Mountain Village Big Snowball 5" room="0x0" actor="0x12" item="NOTHING"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball 1" room="0x0" actor="0x29" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball 2" room="0x0" actor="0x38" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball 3" room="0x0" actor="0x35" item="BOMBS_5"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball 4" room="0x0" actor="0x36" item="ARROWS_20"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball 5" room="0x0" actor="0x37" item="FLEXIBLE"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball Winter 1" room="0x0" actor="0x2a" item="RECOVERY_HEART"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball Winter 2" room="0x0" actor="0x28" item="NOTHING"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball Winter 3" room="0x0" actor="0x27" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball Winter 4" room="0x0" actor="0x2b" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball Cliff 1" room="0x0" actor="0x31" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Mountain Village Small Snowball Cliff 2" room="0x0" actor="0x32" item="MAGIC_JAR_LARGE"/>
     <actor room="0x00">
       <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x39"/>
       <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x33"/>
@@ -108,10 +116,14 @@
   <scene id="BLACKSMITH">
     <npc location="Blacksmith Razor Blade" npc="SWORD_RAZOR" item="SWORD" hint="BLACKSMITH"/>
     <npc location="Blacksmith Gilded Sword" npc="SWORD_GILDED" item="SWORD" hint="BLACKSMITH"/>
-    <xflag type="pot" location="Blacksmith Potted Plant 1 Pot" slice="0x0" setup="0" room="0x0" actor="0x4" item="NOTHING"/>
-    <xflag type="grass" location="Blacksmith Potted Plant 1 Grass" slice="0x1" setup="0" room="0x0" actor="0x4" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Blacksmith Potted Plant 2 Pot" slice="0x0" setup="0" room="0x0" actor="0x8" item="NOTHING"/>
-    <xflag type="grass" location="Blacksmith Potted Plant 2 Grass" slice="0x1" setup="0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
+    <actor actor="0x4">
+      <xflag type="pot" location="Blacksmith Potted Plant 1 Pot" slice="0" item="NOTHING"/>
+      <xflag type="grass" location="Blacksmith Potted Plant 1 Grass" slice="1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor actor="0x8">
+      <xflag type="pot" location="Blacksmith Potted Plant 2 Pot" slice="0" item="NOTHING"/>
+      <xflag type="grass" location="Blacksmith Potted Plant 2 Grass" slice="1" item="RECOVERY_HEART"/>
+    </actor>
   </scene>
   <scene id="GORON_GRAVEYARD">
     <npc location="Goron Graveyard Mask" npc="MASK_GORON" item="MASK_GORON"/>

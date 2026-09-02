@@ -105,27 +105,31 @@
   </scene>
   <scene id="CUCCO_SHACK">
     <npc location="Cucco Shack Bunny Mask" npc="MASK_BUNNY" item="MASK_BUNNY" hint="CUCCOS"/>
-    <xflag type="wonder" location="Cucco Shack Wonder Item 1" slice="0x0" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Cucco Shack Wonder Item 2" slice="0x1" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Cucco Shack Wonder Item 3" slice="0x2" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Cucco Shack Wonder Item 4" slice="0x0" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Cucco Shack Wonder Item 5" slice="0x1" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Cucco Shack Wonder Item 6" slice="0x2" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Cucco Shack Crate 1" slice="0x0" setup="0" room="0x0" actor="0xe" item="NOTHING"/>
-    <xflag type="crate" location="Cucco Shack Crate 2" slice="0x0" setup="0" room="0x0" actor="0xf" item="NOTHING"/>
-    <xflag type="crate" location="Cucco Shack Crate 3" slice="0x0" setup="0" room="0x0" actor="0x16" item="ARROWS_10"/>
-    <xflag type="pot" location="Cucco Shack Potted Plant 1 Pot" slice="0x0" setup="0" room="0x0" actor="0xd" item="NOTHING"/>
-    <xflag type="grass" location="Cucco Shack Potted Plant 1 Grass" slice="0x1" setup="0" room="0x0" actor="0xd" item="NOTHING"/>
-    <xflag type="pot" location="Cucco Shack Potted Plant 2 Pot" slice="0x0" setup="0" room="0x0" actor="0x17" item="NOTHING"/>
-    <xflag type="grass" location="Cucco Shack Potted Plant 2 Grass" slice="0x1" setup="0" room="0x0" actor="0x17" item="RUPEE_BLUE"/>
-    <xflag type="tree" location="Cucco Shack Tree" slice="0x0" setup="0" room="0x0" actor="0xc" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 1" slice="0x0" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 2" slice="0x1" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 3" slice="0x2" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 4" slice="0x3" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 5" slice="0x4" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 6" slice="0x5" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="bush" location="Cucco Shack Bush 7" slice="0x0" setup="0" room="0x0" actor="0x13" item="NOTHING"/>
+    <xflag type="wonder" location="Cucco Shack Wonder Item 1" slice="0x0" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Cucco Shack Wonder Item 2" slice="0x1" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Cucco Shack Wonder Item 3" slice="0x2" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Cucco Shack Wonder Item 4" slice="0x0" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Cucco Shack Wonder Item 5" slice="0x1" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Cucco Shack Wonder Item 6" slice="0x2" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Cucco Shack Crate 1" slice="0x0" actor="0x0e" item="NOTHING"/>
+    <xflag type="crate" location="Cucco Shack Crate 2" slice="0x0" actor="0x0f" item="NOTHING"/>
+    <xflag type="crate" location="Cucco Shack Crate 3" slice="0x0" actor="0x16" item="ARROWS_10"/>
+    <actor actor="0x0d">
+      <xflag type="pot" location="Cucco Shack Potted Plant 1 Pot" slice="0" item="NOTHING"/>
+      <xflag type="grass" location="Cucco Shack Potted Plant 1 Grass" slice="1" item="NOTHING"/>
+    </actor>
+    <actor actor="0x17">
+      <xflag type="pot" location="Cucco Shack Potted Plant 2 Pot" slice="0" item="NOTHING"/>
+      <xflag type="grass" location="Cucco Shack Potted Plant 2 Grass" slice="1" item="RUPEE_BLUE"/>
+    </actor>
+    <xflag type="tree" location="Cucco Shack Tree" actor="0x0c" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 1" slice="0x0" actor="0x0b" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 2" slice="0x1" actor="0x0b" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 3" slice="0x2" actor="0x0b" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 4" slice="0x3" actor="0x0b" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 5" slice="0x4" actor="0x0b" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 6" slice="0x5" actor="0x0b" item="NOTHING"/>
+    <xflag type="bush" location="Cucco Shack Bush 7" slice="0x0" actor="0x13" item="NOTHING"/>
     <actor actor="0x18">
       <xflag type="gossip" location="Cucco Shack Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Cucco Shack Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>

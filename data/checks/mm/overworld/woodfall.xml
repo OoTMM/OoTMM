@@ -5,9 +5,21 @@
     <chest location="Woodfall Near Owl Chest" flag="0x02" item="RUPEE_RED"/>
     <chest location="Woodfall Entrance Chest" flag="0x00" item="RUPEE_RED"/>
     <chest location="Woodfall HP Chest" flag="0x01" item="HEART_PIECE"/>
-    <xflag type="pot" location="Woodfall Pot 1" actor="0x6" item="FAIRY"/>
-    <xflag type="pot" location="Woodfall Pot 2" actor="0x7" item="NUTS_10"/>
-    <xflag type="pot" location="Woodfall Pot 3" actor="0x8" item="STICK"/>
+    <actor>
+      <match setup="0" actor="0x06"/>
+      <match setup="2" actor="0x2b"/>
+      <xflag type="pot" location="Woodfall Pot 1" item="FAIRY"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x07"/>
+      <match setup="2" actor="0x2c"/>
+      <xflag type="pot" location="Woodfall Pot 2" item="NUTS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x08"/>
+      <match setup="2" actor="0x2a"/>
+      <xflag type="pot" location="Woodfall Pot 3" item="STICK"/>
+    </actor>
     <xflag type="grass" location="Woodfall Grass 1" actor="0x11" item="RANDOM"/>
     <xflag type="grass" location="Woodfall Grass 2" actor="0x12" item="RANDOM"/>
     <xflag type="grass" location="Woodfall Grass 3" actor="0x13" item="RANDOM"/>

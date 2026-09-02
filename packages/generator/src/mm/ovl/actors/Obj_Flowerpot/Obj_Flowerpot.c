@@ -122,30 +122,9 @@ static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
     return o.gi;
 }
 
-static void ObjFlowerpot_Alias(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
-        xf->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
-        xf->id -= 6;
-        break;
-    }
-}
-
 static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, PlayState* play)
 {
-    Xflag* xflag;
-
-    xflag = &this->xflags;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->actor.actorIndex;
-
-    ObjFlowerpot_Alias(xflag);
-
+    Xflag_Init(&this->xflags, &this->actor, play);
     this->isExtendedFlags = 0;
     for (int i = 0; i < 2; ++i)
     {

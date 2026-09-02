@@ -138,7 +138,7 @@
     </actor>
   </scene>
   <scene id="LAIR_MAJORA">
-    <xflag type="pot" location="Moon Majora Pot 1" slice="0x0" setup="0" room="0x0" actor="0x1" item="ARROWS_20"/>
-    <xflag type="pot" location="Moon Majora Pot 2" slice="0x0" setup="0" room="0x0" actor="0x2" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Moon Majora Pot 1" actor="0x1" item="ARROWS_20"/>
+    <xflag type="pot" location="Moon Majora Pot 2" actor="0x2" item="MAGIC_JAR_LARGE"/>
   </scene>
 </checks>

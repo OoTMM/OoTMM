@@ -35,36 +35,36 @@
     <xflag type="rock" location="Swamp Spider House Rock Entrance 1" room="0x0" actor="0x3" item="RANDOM"/>
     <xflag type="rock" location="Swamp Spider House Rock Entrance 2" room="0x0" actor="0x4" item="RANDOM"/>
     <xflag type="rock" location="Swamp Spider House Rock Pots Room" room="0x4" actor="0x5" item="RANDOM"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Upper Left 1" slice="0x0" room="0x1" actor="0x3" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Upper Left 2" slice="0x0" room="0x1" actor="0x4" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Lower 1" slice="0x0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Lower 2" slice="0x0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Lower 3" slice="0x0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Upper Right 1" slice="0x0" room="0x1" actor="0x8" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Main Upper Right 2" slice="0x0" room="0x1" actor="0x9" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Gold Room Lower 1" slice="0x0" room="0x2" actor="0x0" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Gold Room Lower 2" slice="0x0" room="0x2" actor="0x1" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 1" slice="0x0" room="0x2" actor="0x2" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 2" slice="0x0" room="0x2" actor="0x3" item="NOTHING"/>
-    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 3" slice="0x0" room="0x2" actor="0x4" item="NOTHING"/>
-    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 4" slice="0x0" room="0x2" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Swamp Spider House Pot Monument Room 1" slice="0x0" room="0x3" actor="0x0" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Monument Room 2" slice="0x0" room="0x3" actor="0x1" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 1" slice="0x0" room="0x4" actor="0x3" item="NOTHING"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 2" slice="0x0" room="0x4" actor="0x4" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 3" slice="0x0" room="0x4" actor="0x14" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 4" slice="0x0" room="0x4" actor="0x15" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 5" slice="0x0" room="0x4" actor="0x16" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 6" slice="0x0" room="0x4" actor="0x17" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Swamp Spider House Pot Jar Room 7" slice="0x0" room="0x4" actor="0x18" item="RECOVERY_HEART"/>
-    <xflag type="crate" location="Swamp Spider House Crate Gold 1" slice="0x0" room="0x2" actor="0x7" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Gold 2" slice="0x0" room="0x2" actor="0x8" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Monument 1" slice="0x0" room="0x3" actor="0x5" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Monument 2" slice="0x0" room="0x3" actor="0x6" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Monument 3" slice="0x0" room="0x3" actor="0x7" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Monument 4" slice="0x0" room="0x3" actor="0x8" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Monument 5" slice="0x0" room="0x3" actor="0x9" item="NOTHING"/>
-    <xflag type="crate" location="Swamp Spider House Crate Monument 6" slice="0x0" room="0x3" actor="0xa" item="NOTHING"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Upper Left 1" room="0x1" actor="0x3" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Upper Left 2" room="0x1" actor="0x4" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Lower 1" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Lower 2" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Lower 3" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Upper Right 1" room="0x1" actor="0x8" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Main Upper Right 2" room="0x1" actor="0x9" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Gold Room Lower 1" room="0x2" actor="0x0" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Gold Room Lower 2" room="0x2" actor="0x1" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 1" room="0x2" actor="0x2" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 2" room="0x2" actor="0x3" item="NOTHING"/>
+    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 3" room="0x2" actor="0x4" item="NOTHING"/>
+    <xflag type="pot" location="Swamp Spider House Pot Gold Room Upper 4" room="0x2" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Swamp Spider House Pot Monument Room 1" room="0x3" actor="0x0" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Monument Room 2" room="0x3" actor="0x1" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 1" room="0x4" actor="0x3" item="NOTHING"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 2" room="0x4" actor="0x4" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 3" room="0x4" actor="0x14" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 4" room="0x4" actor="0x15" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 5" room="0x4" actor="0x16" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 6" room="0x4" actor="0x17" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Swamp Spider House Pot Jar Room 7" room="0x4" actor="0x18" item="RECOVERY_HEART"/>
+    <xflag type="crate" location="Swamp Spider House Crate Gold 1" room="0x2" actor="0x7" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Gold 2" room="0x2" actor="0x8" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Monument 1" room="0x3" actor="0x5" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Monument 2" room="0x3" actor="0x6" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Monument 3" room="0x3" actor="0x7" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Monument 4" room="0x3" actor="0x8" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Monument 5" room="0x3" actor="0x9" item="NOTHING"/>
+    <xflag type="crate" location="Swamp Spider House Crate Monument 6" room="0x3" actor="0xa" item="NOTHING"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 01" slice="0x0" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 02" slice="0x1" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 03" slice="0x2" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
@@ -77,25 +77,25 @@
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 10" slice="0x0" room="0x1" actor="0xd" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 11" slice="0x1" room="0x1" actor="0xd" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 12" slice="0x2" room="0x1" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 1" slice="0x0" room="0x4" actor="0x19" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 2" slice="0x0" room="0x4" actor="0x1a" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 3" slice="0x0" room="0x4" actor="0x1b" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 4" slice="0x0" room="0x4" actor="0x1c" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 5" slice="0x0" room="0x4" actor="0x1d" item="RUPEE_RED"/>
-    <xflag type="hive" location="Swamp Spider House Hive Gold Room 1" slice="0x0" room="0x2" actor="0x9" item="MAGIC_JAR_SMALL"/>
-    <xflag type="hive" location="Swamp Spider House Hive Gold Room 2" slice="0x0" room="0x2" actor="0xa" item="NOTHING"/>
-    <xflag type="hive" location="Swamp Spider House Hive Gold Room 3" slice="0x0" room="0x2" actor="0xb" item="NOTHING"/>
-    <xflag type="hive" location="Swamp Spider House Hive Jars Room 1" slice="0x0" room="0x4" actor="0x7" item="MAGIC_JAR_SMALL"/>
-    <xflag type="hive" location="Swamp Spider House Hive Jars Room 2" slice="0x0" room="0x4" actor="0x8" item="NOTHING"/>
-    <xflag type="hive" location="Swamp Spider House Hive Jars Room 3" slice="0x0" room="0x4" actor="0xb" item="NOTHING"/>
-    <xflag type="hive" location="Swamp Spider House Hive Tree Room 1" slice="0x0" room="0x5" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="hive" location="Swamp Spider House Hive Tree Room 2" slice="0x0" room="0x5" actor="0x7" item="MAGIC_JAR_SMALL"/>
-    <xflag type="hive" location="Swamp Spider House Hive Tree Room 3" slice="0x0" room="0x5" actor="0x9" item="NOTHING"/>
-    <xflag type="soil" location="Swamp Spider House Soil Gold" slice="0x0" room="0x2" actor="0xd" item="ARROWS_30"/>
+    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 1" room="0x4" actor="0x19" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 2" room="0x4" actor="0x1a" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 3" room="0x4" actor="0x1b" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 4" room="0x4" actor="0x1c" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 5" room="0x4" actor="0x1d" item="RUPEE_RED"/>
+    <xflag type="hive" location="Swamp Spider House Hive Gold Room 1" room="0x2" actor="0x9" item="MAGIC_JAR_SMALL"/>
+    <xflag type="hive" location="Swamp Spider House Hive Gold Room 2" room="0x2" actor="0xa" item="NOTHING"/>
+    <xflag type="hive" location="Swamp Spider House Hive Gold Room 3" room="0x2" actor="0xb" item="NOTHING"/>
+    <xflag type="hive" location="Swamp Spider House Hive Jars Room 1" room="0x4" actor="0x7" item="MAGIC_JAR_SMALL"/>
+    <xflag type="hive" location="Swamp Spider House Hive Jars Room 2" room="0x4" actor="0x8" item="NOTHING"/>
+    <xflag type="hive" location="Swamp Spider House Hive Jars Room 3" room="0x4" actor="0xb" item="NOTHING"/>
+    <xflag type="hive" location="Swamp Spider House Hive Tree Room 1" room="0x5" actor="0x6" item="RECOVERY_HEART"/>
+    <xflag type="hive" location="Swamp Spider House Hive Tree Room 2" room="0x5" actor="0x7" item="MAGIC_JAR_SMALL"/>
+    <xflag type="hive" location="Swamp Spider House Hive Tree Room 3" room="0x5" actor="0x9" item="NOTHING"/>
+    <xflag type="soil" location="Swamp Spider House Soil Gold" room="0x2" actor="0xd" item="ARROWS_30"/>
     <xflag type="soil" location="Swamp Spider House Soil Monument Item 1" slice="0x0" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Swamp Spider House Soil Monument Item 2" slice="0x1" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
     <xflag type="soil" location="Swamp Spider House Soil Monument Item 3" slice="0x2" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
-    <xflag type="boulder" location="Swamp Spider House Boulder" slice="0x0" room="0x3" actor="0x12" item="NOTHING"/>
+    <xflag type="boulder" location="Swamp Spider House Boulder" room="0x3" actor="0x12" item="NOTHING"/>
     <actor room="0x5" actor="0x0">
       <xflag type="gossip" location="Swamp Spider House Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Swamp Spider House Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>

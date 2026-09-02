@@ -5,21 +5,81 @@
     <npc location="Great Bay Coast Fisherman HP" npc="FISHERMAN_HEART_PIECE" item="HEART_PIECE" hint="FISHERMAN_GAME"/>
     <npc location="Great Bay Coast Owl Statue" npc="OWL_GREAT_BAY" item="OWL_GREAT_BAY"/>
     <collectible location="Great Bay Coast HP" flag="0x05" item="HEART_PIECE"/>
-    <xflag type="pot" location="Great Bay Coast Pot 1" slice="0x0" setup="0" room="0x0" actor="0x77" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot 2" slice="0x0" setup="0" room="0x0" actor="0x81" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 1" slice="0x0" setup="0" room="0x0" actor="0x7b" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 2" slice="0x0" setup="0" room="0x0" actor="0x7d" item="BOMBS_5"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 3" slice="0x0" setup="0" room="0x0" actor="0x7c" item="FAIRY"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 4" slice="0x0" setup="0" room="0x0" actor="0x85" item="ARROWS_20"/>
-    <xflag type="pot" location="Great Bay Coast Pot Ledge 1" slice="0x0" setup="0" room="0x0" actor="0x76" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot Ledge 2" slice="0x0" setup="0" room="0x0" actor="0x80" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 3" slice="0x0" setup="0" room="0x0" actor="0x78" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 2" slice="0x0" setup="0" room="0x0" actor="0x79" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 4" slice="0x0" setup="0" room="0x0" actor="0x82" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 1" slice="0x0" setup="0" room="0x0" actor="0x83" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 1" slice="0x0" setup="0" room="0x0" actor="0x3d" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 2" slice="0x0" setup="0" room="0x0" actor="0x3e" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 3" slice="0x0" setup="0" room="0x0" actor="0x3f" item="RUPEE_BLUE"/>
+    <actor>
+      <match setup="0" actor="0x77"/>
+      <match setup="1" actor="0x11"/>
+      <xflag type="pot" location="Great Bay Coast Pot 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x81"/>
+      <match setup="1" actor="0x12"/>
+      <xflag type="pot" location="Great Bay Coast Pot 2" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7b"/>
+      <match setup="1" actor="0x0d"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 1" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7d"/>
+      <match setup="1" actor="0x0f"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 2" item="BOMBS_5"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7c"/>
+      <match setup="1" actor="0x0e"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 3" item="FAIRY"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x85"/>
+      <match setup="1" actor="0x10"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 4" item="ARROWS_20"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x76"/>
+      <match setup="1" actor="0x14"/>
+      <xflag type="pot" location="Great Bay Coast Pot Ledge 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x80"/>
+      <match setup="1" actor="0x13"/>
+      <xflag type="pot" location="Great Bay Coast Pot Ledge 2" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x78"/>
+      <match setup="1" actor="0x16"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 3" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x79"/>
+      <match setup="1" actor="0x17"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 2" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x82"/>
+      <match setup="1" actor="0x15"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 4" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x83"/>
+      <match setup="1" actor="0x1b"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 1" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3d"/>
+      <match setup="1" actor="0x19"/>
+      <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 1" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3e"/>
+      <match setup="1" actor="0x18"/>
+      <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 2" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3f"/>
+      <match setup="1" actor="0x1a"/>
+      <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 3" item="RUPEE_BLUE"/>
+    </actor>
     <xflag type="grass" location="Great Bay Coast Grass 1" slice="0x0" setup="0" room="0x0" actor="0x6e" item="RANDOM"/>
     <xflag type="grass" location="Great Bay Coast Grass 2" slice="0x0" setup="0" room="0x0" actor="0x6f" item="RANDOM"/>
     <xflag type="grass" location="Great Bay Coast Grass 3" slice="0x0" setup="0" room="0x0" actor="0x70" item="RANDOM"/>
