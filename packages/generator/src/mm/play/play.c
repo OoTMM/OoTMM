@@ -20,6 +20,8 @@
 #include <combo/time.h>
 #include <actors/Obj_Grass/Obj_Grass.h>
 
+#include "combo/age.h"
+
 /* Grass hooks */
 ObjGrass* gObjGrass;
 static u8 sNeedsScreenClear;
@@ -793,9 +795,10 @@ void Play_TransitionDone(PlayState* play)
 
     applyCustomEntrance(&entrance);
 
-    /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)
     {
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawMm(NULL, gOotSave.age);
         comboGameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
     }
     else
