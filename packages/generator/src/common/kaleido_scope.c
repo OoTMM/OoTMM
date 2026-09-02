@@ -104,11 +104,11 @@ static void KaleidoScope_GoBackToSpawn(PlayState* play, int age)
 {
     u32 entrance = gComboConfig.entrancesSpawns[age];
 
-    Age_SetOot(play, age);
-
 #if defined(GAME_MM)
-    /* Assume spawn is always an OoT spawn */
+    Age_SetRawOot(NULL, age);
     entrance |= MASK_FOREIGN_ENTRANCE;
+#else
+    Age_SetOot(play, age);
 #endif
 
     comboTransition(play, entrance);
