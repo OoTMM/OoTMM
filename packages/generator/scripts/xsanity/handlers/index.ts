@@ -11,6 +11,7 @@ const ACTORS_HANDLERS_OOT: HandlerMap = {
   [ACTORS_OOT.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_OOT.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
   [ACTORS_OOT.EN_GS]: CommonHandlers.EnGs,
+  [ACTORS_OOT.EN_ELF]: CommonHandlers.EnElf,
   [ACTORS_OOT.OBJ_TSUBO]: OotHandlers.ObjTsubo,
   [ACTORS_OOT.EN_TUBO_TRAP]: OotHandlers.EnTuboTrap,
   [ACTORS_OOT.EN_ITEM00]: OotHandlers.EnItem00,
@@ -27,7 +28,6 @@ const ACTORS_HANDLERS_OOT: HandlerMap = {
   [ACTORS_OOT.OBJ_BEAN]: OotHandlers.ObjBean,
   [ACTORS_OOT.OBJ_BOMBIWA]: OotHandlers.ObjBombiwa,
   [ACTORS_OOT.EN_WONDER_ITEM]: OotHandlers.EnWonderItem,
-  [ACTORS_OOT.EN_ELF]: OotHandlers.EnElf,
   [ACTORS_OOT.BG_SPOT11_OASIS]: OotHandlers.BgSpot11Oasis,
 };
 
@@ -37,6 +37,7 @@ const ACTORS_HANDLERS_MM: HandlerMap = {
   [ACTORS_MM.OBJ_MURE3]: CommonHandlers.ObjMure3,
   [ACTORS_MM.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
   [ACTORS_MM.EN_GS]: CommonHandlers.EnGs,
+  [ACTORS_MM.EN_ELF]: CommonHandlers.EnElf,
   [ACTORS_MM.OBJ_TSUBO]: MmHandlers.ObjTsubo,
   [ACTORS_MM.EN_TUBO_TRAP]: MmHandlers.EnTuboTrap,
   [ACTORS_MM.EN_ITEM00]: MmHandlers.EnItem00,

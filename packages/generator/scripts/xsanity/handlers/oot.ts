@@ -134,12 +134,6 @@ export const ObjBombiwa: Handler = ({ checks, ra }) => {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Boulder', type: 'boulder' });
 }
 
-export const EnElf: Handler = ({ checks, ra }) => {
-  for (let i = 0; i < 8; ++i) {
-    checks.push({ roomActor: ra, item: 'FAIRY', name: `Fairy ${i + 1}`, type: 'fairy', sliceId: i });
-  }
-}
-
 export const BgSpot11Oasis: Handler = ({ checks, ra }) => {
   for (let i = 0; i < 8; ++i) {
     checks.push({ roomActor: ra, item: 'FAIRY', name: `Oasis Fairy ${i + 1}`, type: 'fairy', sliceId: i });

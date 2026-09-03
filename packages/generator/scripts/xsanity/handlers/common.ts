@@ -71,3 +71,9 @@ export const EnGs: Handler = ({ checks, ra }) => {
   checks.push({ roomActor: ra, item: 'FAIRY', name: 'Gossip Fairy', type: 'gossip', sliceId: 0 });
   checks.push({ roomActor: ra, item: 'FAIRY_BIG', name: 'Gossip Big Fairy', type: 'gossip-big', sliceId: 1 });
 }
+
+export const EnElf: Handler = ({ checks, ra }) => {
+  for (let i = 0; i < 8; ++i) {
+    checks.push({ roomActor: ra, item: 'FAIRY', name: `Fairy ${i + 1}`, type: 'fairy', sliceId: i });
+  }
+}
