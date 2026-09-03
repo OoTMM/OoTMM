@@ -90,18 +90,6 @@ s32 ObjGrassUnit_IsUnderwater(PlayState* play, Vec3f* pos) {
     return false;
 }
 
-static void ObjGrassUnit_Alias(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
-        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
-        if (xflag->roomId == 0x00)
-            xflag->id += 2;
-        break;
-    }
-}
-
 void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
     PlayState* play = play2;
     ObjGrassGroup* grassGroup;
@@ -169,10 +157,7 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
     if (grassGroup->count > 0) {
         /* Init xflag */
         xf = &grassManager->xflag[grassManager->activeGrassGroups];
-        if (Xflag_Init(xf, this, play)) {
-            ObjGrassUnit_Alias(xf);
-        }
-
+        Xflag_Init(xf, this, play);
         grassManager->activeGrassGroups++;
         grassGroup->homePos.x = this->home.pos.x;
         grassGroup->homePos.y = (homePosYSum / grassGroup->count);
