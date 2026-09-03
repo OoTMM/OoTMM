@@ -13,6 +13,7 @@ typedef struct EnTuboTrap {
     /* 0x148 */ f32 targetHeight;
     /* 0x14C */ Vec3f originPos;
     /* 0x158 */ ColliderCylinder collider;
+    XflagID xflag;
 } EnTuboTrap; // size = 0x1A4
 
 #endif // Z_EN_TUBO_TRAP_H

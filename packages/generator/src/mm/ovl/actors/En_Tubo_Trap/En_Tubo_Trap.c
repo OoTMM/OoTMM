@@ -55,6 +55,10 @@ static InitChainEntry sInitChain[] = {
 void EnTuboTrap_Init(Actor* thisx, PlayState* play) {
     EnTuboTrap* this = (EnTuboTrap*)thisx;
 
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->actor.shape.rot.z = 0;
     this->actor.world.rot.z = 0;
@@ -73,6 +77,12 @@ void EnTuboTrap_Destroy(Actor* thisx, PlayState* play) {
 void EnTuboTrap_DropCollectible(EnTuboTrap* this, PlayState* play) {
     s32 itemParam = ((this->actor.params >> 8) & 0x3F);
     s32 dropItem00Id = func_800A8150(itemParam);
+
+    if (this->xflag != XFLAGID_NONE)
+    {
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        return;
+    }
 
     if (dropItem00Id > ITEM00_NO_DROP) {
         Item_DropCollectible(play, &this->actor.world.pos, ((this->actor.params & 0x7F) << 8) | dropItem00Id);
@@ -278,6 +288,9 @@ void EnTuboTrap_FlyAtPlayer(EnTuboTrap* this, PlayState* play) {
 void EnTuboTrap_Update(Actor* thisx, PlayState* play) {
     EnTuboTrap* this = (EnTuboTrap*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
     Actor_MoveWithGravity(&this->actor);
     Actor_UpdateBgCheckInfo(play, &this->actor, 12.0f, 10.0f, 20.0f,
@@ -305,5 +318,10 @@ void EnTuboTrap_Update(Actor* thisx, PlayState* play) {
 }
 
 void EnTuboTrap_Draw(Actor* thisx, PlayState* play) {
+    EnTuboTrap* this = (EnTuboTrap*)thisx;
+    ComboItemOverride o;
+
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
+    csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, CSMC_POT_NORMAL_DANGEON);
     Gfx_DrawDListOpa(play, gameplay_dangeon_keep_DL_017EA0);
 }

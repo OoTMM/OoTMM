@@ -108,14 +108,6 @@ static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlo
     }
 }
 
-static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
-{
-    ComboItemOverride o;
-
-    ObjFlowerpot_ShuffledItemOverride(&o, this, slice);
-    return o.gi;
-}
-
 static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, PlayState* play, int slice)
 {
     XflagID id;

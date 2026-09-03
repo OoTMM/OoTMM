@@ -49,6 +49,10 @@ OVL_INFO_ACTOR(ACTOR_EN_TUBO_TRAP, En_Tubo_Trap_Profile);
 void EnTuboTrap_Init(Actor* thisx, PlayState* play) {
     EnTuboTrap* this = (EnTuboTrap*)thisx;
 
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 2.0f);
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
@@ -65,6 +69,12 @@ void EnTuboTrap_Destroy(Actor* thisx, PlayState* play) {
 void EnTuboTrap_DropCollectible(EnTuboTrap* this, PlayState* play) {
     s16 params = this->actor.params;
     s16 dropType = PARAMS_GET_U(params, 6, 10);
+
+    if (this->xflag != XFLAGID_NONE)
+    {
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        return;
+    }
 
     if (dropType >= 0 && dropType < ITEM00_MAX) {
         Item_DropCollectible(play, &this->actor.world.pos, dropType | (PARAMS_GET_U(params, 0, 6) << 8));
@@ -258,10 +268,12 @@ void EnTuboTrap_Fly(EnTuboTrap* this, PlayState* play) {
 void EnTuboTrap_Update(Actor* thisx, PlayState* play) {
     EnTuboTrap* this = (EnTuboTrap*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
     Actor_MoveXZGravity(&this->actor);
-    Actor_UpdateBgCheckInfo(play, &this->actor, 10.0f, 10.0f, 20.0f, UPDBGCHECKINFO_FLAG_OOT_0 | UPDBGCHECKINFO_FLAG_OOT_2 | UPDBGCHECKINFO_FLAG_OOT_3 |
-                                UPDBGCHECKINFO_FLAG_OOT_4);
+    Actor_UpdateBgCheckInfo(play, &this->actor, 10.0f, 10.0f, 20.0f, UPDBGCHECKINFO_FLAG_OOT_0 | UPDBGCHECKINFO_FLAG_OOT_2 | UPDBGCHECKINFO_FLAG_OOT_3 | UPDBGCHECKINFO_FLAG_OOT_4);
     Actor_SetFocus(&this->actor, 0.0f);
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider.base);
@@ -269,5 +281,10 @@ void EnTuboTrap_Update(Actor* thisx, PlayState* play) {
 }
 
 void EnTuboTrap_Draw(Actor* thisx, PlayState* play) {
+    EnTuboTrap* this = (EnTuboTrap*)thisx;
+    ComboItemOverride o;
+
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
+    csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, CSMC_POT_NORMAL_DANGEON);
     Gfx_DrawDListOpa(play, gPotDL);
 }

@@ -21,6 +21,9 @@ typedef struct Xflag
 }
 Xflag;
 
+#define XFVF_SHUFFLED       0x01
+#define XVFV_UNCOLLECTED    0x02
+
 /* New API */
 XflagID Xflag_InitEx(Actor* actor, PlayState* play);
 XflagID Xflag_LookupSlice(XflagID id, int sliceId);

@@ -48,7 +48,6 @@
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
 # include <combo/common/cosmetics.h>
-# include <combo/common/actors/En_Tubo_Trap.h>
 # include <combo/message.h>
 
 # if defined(GAME_OOT)
