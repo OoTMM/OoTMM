@@ -43,5 +43,3 @@ export type Check = {
   letter?: string;
 };
 
-export type ActorHandler = (checks: Check[], actor: RoomActor) => void;
-export type ActorHandlers = { [actorId: number]: ActorHandler };

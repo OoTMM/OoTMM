@@ -1,13 +1,14 @@
 import type { Game } from '@ootmm/data';
-import type { ActorHandlers, Check, RoomActor, RoomActors } from './types';
+import type { Check, RoomActor, RoomActors } from './types';
 
 import { SCENES } from '@ootmm/data';
 import { parseScenes, parseNpcs, parseChecks, makeXflagMatchKey, makeXflagSliceKey, parseXflagMatchKey, xflagIdFromCheckKey } from '@ootmm/data/build';
 
 import { ACTORS_HANDLERS } from './handlers';
 import { makeRooms } from './rooms';
+import type { HandlerMap } from './handlers/types';
 
-function scenesById(game: 'oot' | 'mm') {
+function scenesById(game: Game) {
   const data: {[k: number]: string} = {};
   for (const [name, id] of Object.entries(SCENES)) {
     if (name.startsWith(`${game.toUpperCase()}_`)) {
@@ -64,14 +65,15 @@ function letterChecks(checks: Check[]) {
   }
 }
 
-function makeChecks(rooms: RoomActors[], handlers: ActorHandlers): Check[] {
+function makeChecks(game: Game, rooms: RoomActors[], handlers: HandlerMap): Check[] {
   const checks: Check[] = [];
   for (const r of rooms) {
     for (const a of r.actors) {
       const handler = handlers[a.typeId];
       if (handler) {
         const aa: RoomActor = { sceneId: r.sceneId, roomId: r.roomId, setupId: r.setupId, actor: a };
-        handler(checks, aa);
+        const params = { game, checks, ra: aa };
+        handler(params);
       }
     }
   }
@@ -283,7 +285,7 @@ export async function run() {
   }
 
   const gameRooms = rooms[game];
-  const checks = makeChecks(gameRooms, ACTORS_HANDLERS[game]);
+  const checks = makeChecks(game, gameRooms, ACTORS_HANDLERS[game]);
   const lookup = new XflagLookup(game, xflagData.matches, xflagData.checks);
   outputChecks(game, checks, lookup, argFilter, argFilterSubtype);
 }

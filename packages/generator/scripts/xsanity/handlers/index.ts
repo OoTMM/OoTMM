@@ -1,10 +1,11 @@
-import { ACTORS_MM, ACTORS_OOT } from '../data';
+import type { HandlerMap } from './types';
 
+import { ACTORS_MM, ACTORS_OOT } from '../data';
 import * as CommonHandlers from './common';
 import * as OotHandlers from './oot';
 import * as MmHandlers from './mm';
 
-const ACTORS_HANDLERS_OOT = {
+const ACTORS_HANDLERS_OOT: HandlerMap = {
   [ACTORS_OOT.OBJ_MURE]: CommonHandlers.ObjMure,
   [ACTORS_OOT.OBJ_MURE2]: CommonHandlers.ObjMure2,
   [ACTORS_OOT.OBJ_MURE3]: CommonHandlers.ObjMure3,
@@ -30,7 +31,7 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.BG_SPOT11_OASIS]: OotHandlers.BgSpot11Oasis,
 };
 
-const ACTORS_HANDLERS_MM = {
+const ACTORS_HANDLERS_MM: HandlerMap = {
   [ACTORS_MM.OBJ_MURE]: CommonHandlers.ObjMure,
   [ACTORS_MM.OBJ_MURE2]: CommonHandlers.ObjMure2,
   [ACTORS_MM.OBJ_MURE3]: CommonHandlers.ObjMure3,

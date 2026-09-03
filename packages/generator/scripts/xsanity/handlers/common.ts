@@ -1,6 +1,6 @@
-import type { Check, RoomActor } from '../types';
+import type { Handler } from './types';
 
-export function ObjMure(checks: Check[], ra: RoomActor) {
+export const ObjMure: Handler = ({ checks, ra }) => {
   const subtype = ra.actor.params & 0x1f;
   let count = (ra.actor.params >> 12);
   if (count === 0) {
@@ -16,7 +16,7 @@ export function ObjMure(checks: Check[], ra: RoomActor) {
   }
 }
 
-export function ObjMure2(checks: Check[], ra: RoomActor) {
+export const ObjMure2: Handler = ({ checks, ra }) => {
   const type = (ra.actor.params) & 3;
   let checkType: string;
   let checkName: string;
@@ -40,7 +40,7 @@ export function ObjMure2(checks: Check[], ra: RoomActor) {
   }
 }
 
-export function ObjMure3(checks: Check[], ra: RoomActor) {
+export const ObjMure3: Handler = ({ checks, ra }) => {
   let items: string[] = [];
   switch (ra.actor.params & 0xe000) {
   case 0x0000:
@@ -63,11 +63,11 @@ export function ObjMure3(checks: Check[], ra: RoomActor) {
   }
 }
 
-export function ObjHamishi(checks: Check[], ra: RoomActor) {
+export const ObjHamishi: Handler = ({ checks, ra }) => {
   checks.push({ roomActor: ra, item: 'NOTHING', name: 'Red Boulder', type: 'boulder-red' });
 }
 
-export function EnGs(checks: Check[], ra: RoomActor) {
+export const EnGs: Handler = ({ checks, ra }) => {
   checks.push({ roomActor: ra, item: 'FAIRY', name: 'Gossip Fairy', type: 'gossip', sliceId: 0 });
   checks.push({ roomActor: ra, item: 'FAIRY_BIG', name: 'Gossip Big Fairy', type: 'gossip-big', sliceId: 1 });
 }
