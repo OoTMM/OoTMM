@@ -1589,7 +1589,7 @@ class LogicPassWorldTransform {
   }
 
   private filterChecksFairySpots() {
-    this.filterLocationsBool(this.state.settings.fairySpotShuffleOot, 'fairy_spot', 'oot');
+    this.filterLocationsBool(this.state.settings.fairySpotShuffleOot, 'fairy-spot', 'oot');
   }
 
   run() {

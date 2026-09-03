@@ -69,9 +69,9 @@
     <xflag type="heart" location="Shadow Temple Heart Pre-Boss 1" room="0x15" actor="0x8" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Shadow Temple Heart Pre-Boss 2" room="0x15" actor="0x9" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Shadow Temple Heart Pre-Boss 3" room="0x15" actor="0xa" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Shadow Temple Beamos Big Fairy" room="0x5" actor="0x3" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="Shadow Temple Stalfos Big Fairy" room="0x9" actor="0x15" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="Shadow Temple Big Fairy After Wind" room="0x13" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Shadow Temple Beamos Big Fairy" room="0x5" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Shadow Temple Stalfos Big Fairy" room="0x9" actor="0x15" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Shadow Temple Big Fairy After Wind" room="0x13" actor="0x2" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Shadow Temple Wonder Item" room="0xc" actor="0x1" item="ARROWS_30"/>
   </scene>
 </checks>

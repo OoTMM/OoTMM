@@ -18,7 +18,7 @@
 //           lastSetupId = room.setupId;
 //         }
 //         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-//         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Spot ${decPad(actor.actorId + 1, 2)},             fairy_spot,            NONE,                 ${SCENES_BY_ID.oot[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
+//         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Spot ${decPad(actor.actorId + 1, 2)},             fairy-spot,            NONE,                 ${SCENES_BY_ID.oot[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
 //         console.log(params === 0x40 ? "Suns Song" : "Song of Storms");
 //       }
 //     }

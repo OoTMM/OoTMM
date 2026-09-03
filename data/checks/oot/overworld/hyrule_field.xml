@@ -191,7 +191,7 @@
       <xflag type="rock" location="Hyrule Field Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Hyrule Field Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="fairy_spot" location="Hyrule Field River Big Fairy" slice="0x0" setup="0" actor="0x48" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Hyrule Field River Big Fairy" slice="0x0" setup="0" actor="0x48" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 1" slice="0x0" setup="0" actor="0x34" item="RUPEE_RED"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 2" slice="0x0" setup="0" actor="0x35" item="RUPEE_RED"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 3" slice="0x0" setup="0" actor="0x36" item="RUPEE_RED"/>
@@ -211,7 +211,7 @@
   </scene>
   <scene id="GROTTOS" room="0x1">
     <scrub location="Hyrule Field Grotto Scrub HP" flag="0x07" item="HEART_PIECE"/>
-    <xflag type="fairy_spot" location="Hyrule Field Grotto Scrub Big Fairy" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Hyrule Field Grotto Scrub Big Fairy" actor="0x2" item="FAIRY_BIG"/>
     <xflag type="hive" location="Hyrule Field Grotto Scrub Hive" actor="0x1" item="RUPEE_RED"/>
   </scene>
   <scene id="GROTTOS" room="0x22">

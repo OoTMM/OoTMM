@@ -72,7 +72,7 @@
     <xflag type="crate" location="Spirit Temple Crate 2" room="0x1" actor="0xa" item="BOMB"/>
     <xflag type="heart" location="Spirit Temple Heart 1" room="0x17" actor="0x2" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Spirit Temple Heart 2" room="0x17" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Spirit Temple Adult Silver Rupees Big Fairy" room="0xc" actor="0x1" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="Spirit Temple Adult Sunlight Big Fairy" room="0x12" actor="0x6" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Spirit Temple Adult Silver Rupees Big Fairy" room="0xc" actor="0x1" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Spirit Temple Adult Sunlight Big Fairy" room="0x12" actor="0x6" item="FAIRY_BIG"/>
   </scene>
 </checks>

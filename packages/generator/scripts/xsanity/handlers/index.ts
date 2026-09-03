@@ -12,6 +12,7 @@ const ACTORS_HANDLERS_OOT: HandlerMap = {
   [ACTORS_OOT.OBJ_HAMISHI]: CommonHandlers.ObjHamishi,
   [ACTORS_OOT.EN_GS]: CommonHandlers.EnGs,
   [ACTORS_OOT.EN_ELF]: CommonHandlers.EnElf,
+  [ACTORS_OOT.SHOT_SUN]: OotHandlers.ShotSun,
   [ACTORS_OOT.OBJ_TSUBO]: OotHandlers.ObjTsubo,
   [ACTORS_OOT.EN_TUBO_TRAP]: OotHandlers.EnTuboTrap,
   [ACTORS_OOT.EN_ITEM00]: OotHandlers.EnItem00,

@@ -20,8 +20,8 @@
     <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 2" room="0x4" actor="0x1" item="DEKU_SEEDS_5"/>
     <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 3" room="0x4" actor="0x2" item="RECOVERY_HEART"/>
     <xflag type="grass" location="MQ Bottom of the Well Grass Dead-Hand 4" room="0x4" actor="0x3" item="DEKU_SEEDS_5"/>
-    <xflag type="fairy_spot" location="MQ Bottom of the Well Lobby Cage Big Fairy" room="0x0" actor="0xd" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Bottom of the Well Basement Big Fairy" room="0x1" actor="0x11" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Bottom of the Well Lobby Cage Big Fairy" room="0x0" actor="0xd" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Bottom of the Well Basement Big Fairy" room="0x1" actor="0x11" item="FAIRY_BIG"/>
     <xflag type="heart" location="MQ Bottom of the Well Heart Main Room 1" room="0x0" actor="0x24" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Bottom of the Well Heart Main Room 2" room="0x0" actor="0x25" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Bottom of the Well Heart Basement 1" room="0x1" actor="0x1b" item="RECOVERY_HEART"/>

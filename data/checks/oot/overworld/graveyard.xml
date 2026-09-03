@@ -55,7 +55,7 @@
   <scene id="TOMB_ROYAL">
     <npc location="Graveyard Royal Tomb Song" npc="ROYAL_TOMB_SONG" item="SONG_SUN"/>
     <chest location="Graveyard Royal Tomb Chest" flag="0x00" item="BOMBS_5"/>
-    <xflag type="fairy_spot" location="Graveyard Royal Tomb Big Fairy" slice="0x0" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Graveyard Royal Tomb Big Fairy" slice="0x0" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
   </scene>
   <scene id="TOMB_FAIRY">
     <chest location="Graveyard Fairy Tomb" flag="0x00" item="SHIELD_HYLIAN"/>

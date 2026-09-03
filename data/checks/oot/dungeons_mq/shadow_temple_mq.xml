@@ -79,9 +79,9 @@
     <xflag type="pot" location="MQ Shadow Temple Flying Pot Entrance Maze 4" room="0x0" actor="0x9" item="NUTS_5"/>
     <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 1" room="0x14" actor="0x5" item="RECOVERY_HEART"/>
     <xflag type="pot" location="MQ Shadow Temple Flying Pot Room Before Boat 2" room="0x14" actor="0x6" item="NUTS_5"/>
-    <xflag type="fairy_spot" location="MQ Shadow Temple Beamos Big Fairy" room="0x5" actor="0x3" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Shadow Temple Guillotines Room Big Fairy" room="0x9" actor="0x1d" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Shadow Temple Big Fairy After Wind" room="0x13" actor="0x5" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Shadow Temple Beamos Big Fairy" room="0x5" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Shadow Temple Guillotines Room Big Fairy" room="0x9" actor="0x1d" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Shadow Temple Big Fairy After Wind" room="0x13" actor="0x5" item="FAIRY_BIG"/>
     <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 1" room="0x10" actor="0x4" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Shadow Temple Heart Invisible Blades 2" room="0x10" actor="0x5" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Shadow Temple Heart Shortcut 1" room="0x15" actor="0x9" item="RECOVERY_HEART"/>

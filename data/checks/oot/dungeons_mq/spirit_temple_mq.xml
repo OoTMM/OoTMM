@@ -68,7 +68,7 @@
     <xflag type="pot" location="MQ Spirit Temple Flying Pot Statue Room Upper" room="0x5" actor="0x12" item="NOTHING"/>
     <xflag type="pot" location="MQ Spirit Temple Flying Pot Statue Room Lower" room="0x5" actor="0x13" item="NOTHING"/>
     <xflag type="pot" location="MQ Spirit Temple Flying Pot Statue Room Stairs" room="0x5" actor="0x16" item="NOTHING"/>
-    <xflag type="fairy_spot" location="MQ Spirit Temple Dinolfos Room Big Fairy" room="0x12" actor="0x2" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Spirit Temple Dinolfos Room Big Fairy" room="0x12" actor="0x2" item="FAIRY_BIG"/>
     <xflag type="heart" location="MQ Spirit Temple Heart 1" room="0x1" actor="0xd" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Spirit Temple Heart 2" room="0x1" actor="0xe" item="RECOVERY_HEART"/>
     <xflag type="wonder" location="MQ Spirit Temple Wonder Item Chest Hammer" room="0x12" actor="0x8" item="RECOVERY_HEART"/>

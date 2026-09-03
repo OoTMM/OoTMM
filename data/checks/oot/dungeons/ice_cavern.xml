@@ -35,7 +35,7 @@
     <xflag type="heart" location="Ice Cavern Heart 1" room="0x9" actor="0x6" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Ice Cavern Heart 2" room="0x9" actor="0x7" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Ice Cavern Heart 3" room="0x9" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Ice Cavern Entrance Big Fairy" room="0x1" actor="0xd" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Ice Cavern Entrance Big Fairy" room="0x1" actor="0xd" item="FAIRY_BIG"/>
     <xflag type="icicle" location="Ice Cavern Icicle Before Entrance 1" room="0x0" actor="0x0" item="NOTHING"/>
     <xflag type="icicle" location="Ice Cavern Icicle Before Entrance 2" room="0x0" actor="0x1" item="NOTHING"/>
     <xflag type="icicle" location="Ice Cavern Icicle Before Entrance 3" room="0x0" actor="0x2" item="NOTHING"/>

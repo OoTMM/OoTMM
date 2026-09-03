@@ -161,3 +161,11 @@ export const EnTuboTrap: Handler = ({ checks, ra }) => {
   }
   checks.push({ roomActor: ra, item, name: 'Flying Pot', type: 'pot' });
 }
+
+export const ShotSun: Handler = ({ checks, ra }) => {
+  const params = ra.actor.params & 0xff;
+  if (params !== 0x40 && params !== 0x41)
+    return;
+
+  checks.push({ roomActor: ra, item: 'FAIRY_BIG', name: 'Fairy Spot', type: 'fairy-spot' });
+}

@@ -64,7 +64,7 @@
     <xflag type="rupee" location="Bottom of the Well Rupee 5" room="0x1" actor="0x1e" item="RUPEE_BLUE"/>
     <xflag type="heart" location="Bottom of the Well Heart 1" room="0x2" actor="0xd" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Bottom of the Well Heart 2" room="0x2" actor="0xe" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Bottom of the Well Basement Big Fairy" room="0x1" actor="0x13" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Bottom of the Well Basement Big Fairy" room="0x1" actor="0x13" item="FAIRY_BIG"/>
     <xflag type="boulder" location="Bottom of the Well Boulder Near Chest 1" room="0x1" actor="0x20" item="NOTHING"/>
     <xflag type="boulder" location="Bottom of the Well Boulder Near Chest 2" room="0x1" actor="0x21" item="NOTHING"/>
     <xflag type="boulder" location="Bottom of the Well Boulder Middle 1" room="0x1" actor="0x22" item="NOTHING"/>

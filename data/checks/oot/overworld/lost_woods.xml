@@ -72,7 +72,7 @@
       <match setup="2" actor="0x1"/>
       <xflag type="rupee" location="Lost Woods Rupee Boulder" item="RUPEE_BLUE"/>
     </actor>
-    <xflag type="fairy_spot" location="Lost Woods Pool Big Fairy" slice="0x0" setup="0" room="0x3" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Lost Woods Pool Big Fairy" slice="0x0" setup="0" room="0x3" actor="0x3" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Lost Woods Wonder Item 1" slice="0x0" setup="0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Lost Woods Wonder Item 2" slice="0x0" setup="0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Lost Woods Wonder Item 3" slice="0x0" setup="0" room="0x1" actor="0x7" item="RUPEE_BLUE"/>
@@ -102,7 +102,7 @@
   <scene name="Lost Woods Scrub Grotto" id="GROTTOS">
     <scrub location="Lost Woods Grotto Scrub Nuts Upgrade" flag="0x03" item="NUT_UPGRADE"/>
     <scrub location="Lost Woods Grotto Scrub Back" flag="0x04" item="DEKU_SEEDS_30"/>
-    <xflag type="fairy_spot" location="Lost Woods Grotto Scrub Big Fairy" slice="0x0" setup="0" room="0x6" actor="0x0" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Lost Woods Grotto Scrub Big Fairy" slice="0x0" setup="0" room="0x6" actor="0x0" item="FAIRY_BIG"/>
     <xflag type="hive" location="Lost Woods Grotto Scrub Hive" slice="0x0" setup="0" room="0x6" actor="0x3" item="RUPEE_RED"/>
   </scene>
   <scene name="Lost Woods Generic Grotto" id="GROTTOS" room="0x34">

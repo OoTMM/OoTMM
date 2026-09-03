@@ -43,9 +43,9 @@
     <xflag type="pot" location="MQ Water Temple Pot Twisted Room Cage 2" room="0x14" actor="0x15" item="RECOVERY_HEART"/>
     <xflag type="pot" location="MQ Water Temple Pot River 1" room="0x15" actor="0x12" item="ARROWS_10"/>
     <xflag type="pot" location="MQ Water Temple Pot River 2" room="0x15" actor="0x13" item="FLEXIBLE"/>
-    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Ledge" room="0x6" actor="0x1" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 1" room="0x6" actor="0x5" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 2" room="0x6" actor="0x6" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Water Temple Big Fairy Before Dark Link Ledge" room="0x6" actor="0x1" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 1" room="0x6" actor="0x5" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Water Temple Big Fairy Before Dark Link Near Door 2" room="0x6" actor="0x6" item="FAIRY_BIG"/>
     <xflag type="wonder" location="MQ Water Temple Wonder Item Under Pillar Room" room="0x2" actor="0x18" item="MAGIC_JAR_LARGE"/>
     <xflag type="wonder" location="MQ Water Temple Wonder Item Triple Torches" room="0x3" actor="0x3" item="FLEXIBLE"/>
     <xflag type="wonder" location="MQ Water Temple Wonder Item Hookshot Staircase Right 1" room="0x5" actor="0x2" item="NUTS_5"/>

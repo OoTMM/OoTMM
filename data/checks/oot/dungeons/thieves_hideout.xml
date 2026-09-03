@@ -35,7 +35,7 @@
     <xflag type="crate" location="Thieves Hideout Crate Kitchen Corridor 4" room="0x3" actor="0xd" item="RUPEE_GREEN"/>
     <xflag type="crate" location="Thieves Hideout Crate Jail 2 1" room="0x5" actor="0xf" item="RUPEE_GREEN"/>
     <xflag type="crate" location="Thieves Hideout Crate Jail 2 2" room="0x5" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="fairy_spot" location="Gerudo Fortress Kitchen Big Fairy" room="0x3" actor="0x9" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Gerudo Fortress Kitchen Big Fairy" room="0x3" actor="0x9" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 1 1" room="0x2" actor="0x2" item="RANDOM"/>
     <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 1 2" room="0x2" actor="0x3" item="RANDOM"/>
     <xflag type="wonder" location="Gerudo Fortress Wonder Item Jail 2 1" room="0x5" actor="0x2" item="RANDOM"/>

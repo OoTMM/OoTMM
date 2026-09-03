@@ -40,7 +40,7 @@
     <sr location="Gerudo Training Grounds SR Water 5" flag="0x50" item="RUPEE_SILVER_GTG_WATER"/>
     <xflag type="heart" location="Gerudo Training Grounds Heart 1" slice="0x0" setup="0" room="0x7" actor="0xa" item="RECOVERY_HEART"/>
     <xflag type="heart" location="Gerudo Training Grounds Heart 2" slice="0x0" setup="0" room="0x7" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="fairy_spot" location="Gerudo Training Grounds Entrance Big Fairy" slice="0x0" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Gerudo Training Grounds Entrance Big Fairy" slice="0x0" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
     <xflag type="wonder" location="Gerudo Training Grounds Wonder Item Eye Statue Room" slice="0x0" setup="0" room="0x4" actor="0x2" item="MAGIC_JAR_LARGE"/>
     <xflag type="wonder" location="Gerudo Training Grounds Wonder Item Torch Slugs Room" slice="0x0" setup="0" room="0x5" actor="0x10" item="RUPEE_RED"/>
     <xflag type="wonder" location="Gerudo Training Grounds Wonder Item Beamos Room" slice="0x0" setup="0" room="0x7" actor="0xc" item="FLEXIBLE"/>

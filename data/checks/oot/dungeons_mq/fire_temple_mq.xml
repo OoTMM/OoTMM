@@ -46,8 +46,8 @@
     <xflag type="pot" location="MQ Fire Temple Pot Hammer Loop 8" room="0x12" actor="0xf" item="FLEXIBLE"/>
     <xflag type="pot" location="MQ Fire Temple Pot Boss Key Room 1" room="0x13" actor="0xd" item="FLEXIBLE"/>
     <xflag type="pot" location="MQ Fire Temple Pot Boss Key Room 2" room="0x13" actor="0xe" item="MAGIC_JAR_SMALL"/>
-    <xflag type="fairy_spot" location="MQ Fire Temple Hammer Loop Stalfos Big Fairy" room="0xf" actor="0x1" item="FAIRY_BIG"/>
-    <xflag type="fairy_spot" location="MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy" room="0x12" actor="0x7" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Fire Temple Hammer Loop Stalfos Big Fairy" room="0xf" actor="0x1" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy" room="0x12" actor="0x7" item="FAIRY_BIG"/>
     <xflag type="heart" location="MQ Fire Temple Heart 1" room="0x15" actor="0x2" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Fire Temple Heart 2" room="0x15" actor="0x3" item="RECOVERY_HEART"/>
     <xflag type="heart" location="MQ Fire Temple Heart 3" room="0x15" actor="0x4" item="RECOVERY_HEART"/>
