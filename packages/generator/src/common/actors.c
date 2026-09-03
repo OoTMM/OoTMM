@@ -11,7 +11,7 @@ void SetRoomClearHook(PlayState* play, u32 flag)
 void Actor_Hyper(Actor* this, PlayState* play, ActorFunc update)
 {
 #if defined(GAME_OOT)
-    if (this->id == ACTOR_EN_DOG || (this->id == ACTOR_BOSS_VA && (this->params >= 11 && this->params <= 15)) || this->id == ACTOR_BOSS_GANON)
+    if (this->id == ACTOR_EN_DOG || (this->id == ACTOR_BOSS_VA && (this->params >= 11 || this->params <= 15)) || this->id == ACTOR_BOSS_GANON)
 #elif defined(GAME_MM)
     if (this->id == ACTOR_EN_DG)
 #endif
