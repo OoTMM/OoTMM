@@ -59,6 +59,10 @@ const ACTORS_HANDLERS_MM: HandlerMap = {
   [ACTORS_MM.OBJ_TREE]: MmHandlers.ObjTree,
   [ACTORS_MM.OBJ_SWPRIZE]: MmHandlers.ObjSwprize,
   [ACTORS_MM.OBJ_BOMBIWA]: MmHandlers.ObjBombiwa,
+  [ACTORS_MM.EN_HIT_TAG]: MmHandlers.EnHitTag,
+  [ACTORS_MM.EN_INVISIBLE_RUPPE]: MmHandlers.EnInvisibleRuppe,
+  [ACTORS_MM.OBJ_KIBAKO]: MmHandlers.ObjKibako,
+  [ACTORS_MM.OBJ_KIBAKO2]: MmHandlers.ObjKibako2,
 };
 
 export const ACTORS_HANDLERS = {

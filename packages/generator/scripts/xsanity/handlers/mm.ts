@@ -213,3 +213,27 @@ export const EnTuboTrap: Handler = ({ checks, ra }) => {
   const item = '???'; /* TODO: Document this */
   checks.push({ roomActor: ra, item, name: 'Flying Pot', type: 'pot' });
 }
+
+export const EnHitTag: Handler = ({ checks, ra }) => {
+  for (let i = 0; i < 3; ++i) {
+    checks.push({ roomActor: ra, item: 'RUPEE_GREEN', name: 'Wonder Item', type: 'wonder', sliceId: i, name2: `Rupee ${i + 1}` });
+  }
+}
+
+export const EnInvisibleRuppe: Handler = ({ checks, ra }) => {
+  const item = ['RUPEE_GREEN', 'RUPEE_BLUE', 'RUPEE_RED', '???'][ra.actor.params & 3];
+  checks.push({ roomActor: ra, item, name: 'Wonder Item', type: 'wonder' });
+};
+
+export const ObjKibako: Handler = ({ checks, ra }) => {
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, item, name: 'Small Crate', type: 'crate' });
+};
+
+export const ObjKibako2: Handler = ({ checks, ra }) => {
+  const { params } = ra.actor;
+  if (params & 0x8000) return;
+  const item = mmCollectibleDrop(params & 0x3f);
+  if (item === 'STRAY_FAIRY') return;
+  checks.push({ roomActor: ra, item, name: 'Large Crate', type: 'crate' });
+};
