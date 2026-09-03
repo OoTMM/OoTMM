@@ -19,7 +19,7 @@ struct Actor_ObjMure2
     Actor*              actors[OBJ_MURE2_CHILD_MAX];
     u16                 spawnFlags;
     float               rangeMultiplier;
-    Xflag               xflag;
+    XflagID             xflag;
 };
 
 #endif
