@@ -109,41 +109,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 200, ICHAIN_STOP),
 };
 
-void EnKusa_Aliases(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
-        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
-        if (xflag->roomId == 0x00)
-            xflag->id += 6;
-        else
-            xflag->id += 3;
-        break;
-    case SCE_MM_IKANA_CANYON:
-        if (xflag->setupId == 3)
-        {
-            xflag->setupId = 0;
-            xflag->id += 30;
-        }
-        break;
-    case SCE_MM_GREAT_BAY_COAST:
-        if (xflag->setupId == 1)
-        {
-            xflag->setupId = 0;
-            xflag->id -= 4;
-        }
-        break;
-    case SCE_MM_WOODFALL:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            xflag->id += 8;
-        }
-        break;
-    }
-}
-
 /**
  * @brief Applies a "swaying" motion to the provided matrix
  *
@@ -397,9 +362,7 @@ void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = THIS;
     s32 kusaType = KUSA_GET_TYPE(&this->actor);
 
-    if (Xflag_Init(&this->xflag, thisx, play))
-        EnKusa_Aliases(&this->xflag);
-
+    Xflag_Init(&this->xflag, thisx, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (play->csCtx.state != CS_STATE_IDLE) {

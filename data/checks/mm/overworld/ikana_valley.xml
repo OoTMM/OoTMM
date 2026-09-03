@@ -5,10 +5,26 @@
     <npc location="Ikana Valley Scrub Shop" npc="SCRUB_SHOP_POTION_BLUE" item="POTION_BLUE"/>
     <npc location="Ikana Canyon Owl Statue" npc="OWL_IKANA_CANYON" item="OWL_IKANA_CANYON"/>
     <collectible location="Ikana Valley Scrub HP" flag="0x1e" item="HEART_PIECE"/>
-    <xflag type="grass" location="Ikana Canyon Grass 1" slice="0x0" setup="0" room="0x0" actor="0x3b" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Canyon Grass 2" slice="0x0" setup="0" room="0x0" actor="0x3c" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Canyon Grass 3" slice="0x0" setup="0" room="0x0" actor="0x3d" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Canyon Grass 4" slice="0x0" setup="0" room="0x0" actor="0x3e" item="RANDOM"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x3b"/>
+      <match setup="3" actor="0x1d"/>
+      <xflag type="grass" location="Ikana Canyon Grass 1" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x3c"/>
+      <match setup="3" actor="0x1e"/>
+      <xflag type="grass" location="Ikana Canyon Grass 2" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x3d"/>
+      <match setup="3" actor="0x1f"/>
+      <xflag type="grass" location="Ikana Canyon Grass 3" item="RANDOM"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x3e"/>
+      <match setup="3" actor="0x20"/>
+      <xflag type="grass" location="Ikana Canyon Grass 4" item="RANDOM"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0x6"/>
       <match setup="1" actor="0x5"/>

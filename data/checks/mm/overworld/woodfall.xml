@@ -20,12 +20,36 @@
       <match setup="2" actor="0x2a"/>
       <xflag type="pot" location="Woodfall Pot 3" item="STICK"/>
     </actor>
-    <xflag type="grass" location="Woodfall Grass 1" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Grass 2" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Grass 3" actor="0x13" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Grass 4" actor="0x14" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Grass 5" actor="0x15" item="RANDOM"/>
-    <xflag type="grass" location="Woodfall Grass 6" actor="0x16" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x11"/>
+      <match setup="2" actor="0x09"/>
+      <xflag type="grass" location="Woodfall Grass 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x12"/>
+      <match setup="2" actor="0x0a"/>
+      <xflag type="grass" location="Woodfall Grass 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x13"/>
+      <match setup="2" actor="0x0b"/>
+      <xflag type="grass" location="Woodfall Grass 3" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x14"/>
+      <match setup="2" actor="0x0c"/>
+      <xflag type="grass" location="Woodfall Grass 4" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x15"/>
+      <match setup="2" actor="0x0d"/>
+      <xflag type="grass" location="Woodfall Grass 5" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x16"/>
+      <match setup="2" actor="0x0e"/>
+      <xflag type="grass" location="Woodfall Grass 6" item="RANDOM"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x00"/>
       <match setup="2" actor="0x25"/>
