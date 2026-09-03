@@ -72,21 +72,13 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 800, ICHAIN_STOP),
 };
 
-int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
-{
-    if (!this->isExtended || Xflag_GetIndirect(&this->xflag))
-        return 0;
-    return 1;
-}
-
 void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 {
     s16 dropParams = this->actor.params & 0x1F;
 
-    /* Potsanity */
-    if (ObjTsubo_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -137,9 +129,9 @@ void ObjTsubo_InitCollider(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
 {
-    /* Set the extended properties */
-    Xflag_Init(&this->xflag, &this->actor, play);
-    this->isExtended = Xflag_IsShuffled(&this->xflag);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     ObjTsubo_InitCollider(this, play);
@@ -372,6 +364,9 @@ void ObjTsubo_Thrown(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_Update(Actor_ObjTsubo* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 }
 
@@ -380,11 +375,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
     int type;
     ComboItemOverride o;
 
-    if (ObjTsubo_IsShuffled(this))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
-
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     if (this->actor.params & (1 << 8))
         type = CSMC_POT_NORMAL;
     else
