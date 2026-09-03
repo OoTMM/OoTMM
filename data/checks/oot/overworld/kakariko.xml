@@ -94,7 +94,11 @@
     <xflag type="grass" location="Kakariko Grass 6" slice="0x0" setup="0" actor="0x29" item="RANDOM"/>
     <xflag type="grass" location="Kakariko Grass 7" slice="0x0" setup="0" actor="0x2a" item="RANDOM"/>
     <xflag type="grass" location="Kakariko Grass 8" slice="0x0" setup="0" actor="0x2b" item="RANDOM"/>
-    <xflag type="boulder-silver" location="Kakariko Silver Boulder" slice="0x0" setup="2" actor="0x30" item="NOTHING"/>
+    <actor>
+      <match setup="2" actor="0x30"/>
+      <match setup="3" actor="0x13"/>
+      <xflag type="boulder-silver" location="Kakariko Silver Boulder" item="NOTHING"/>
+    </actor>
     <xflag type="wonder" location="Kakariko Wonder Item" slice="0x0" setup="0" actor="0x37" item="RUPEE_RED"/>
     <actor setup="0" actor="0x2e">
       <xflag type="butterfly" location="Kakariko Butterfly 1" slice="0" item="FAIRY"/>

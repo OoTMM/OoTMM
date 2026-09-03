@@ -182,7 +182,12 @@
     <xflag type="boulder-red" location="Hyrule Field Red Boulder 2" slice="0x0" setup="2" actor="0x9" item="NOTHING"/>
     <xflag type="boulder-red" location="Hyrule Field Red Boulder 3" slice="0x0" setup="2" actor="0xa" item="NOTHING"/>
     <xflag type="boulder-red" location="Hyrule Field Red Boulder 4" slice="0x0" setup="2" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Hyrule Field Silver Boulder" slice="0x0" setup="0" actor="0x1e" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x1e"/>
+      <match setup="1" actor="0x1b"/>
+      <match setup="2" actor="0x25"/>
+      <xflag type="boulder-silver" location="Hyrule Field Silver Boulder" item="NOTHING"/>
+    </actor>
   </scene>
   <scene id="GROTTOS" room="0x1">
     <scrub location="Hyrule Field Grotto Scrub HP" flag="0x07" item="HEART_PIECE"/>

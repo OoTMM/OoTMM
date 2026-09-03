@@ -54,7 +54,11 @@
       <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Desert Colossus Rock Circle 2 Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="boulder-silver" location="Desert Colossus Silver Boulder" slice="0x0" setup="0" actor="0x12" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x12"/>
+      <match setup="2" actor="0x15"/>
+      <xflag type="boulder-silver" location="Desert Colossus Silver Boulder" item="NOTHING"/>
+    </actor>
     <xflag type="soil" location="Desert Colossus Soil 1" slice="0x0" setup="0" actor="0x1d" item="FAIRY"/>
     <xflag type="soil" location="Desert Colossus Soil 2" slice="0x1" setup="0" actor="0x1d" item="FAIRY"/>
     <xflag type="soil" location="Desert Colossus Soil 3" slice="0x2" setup="0" actor="0x1d" item="FAIRY"/>

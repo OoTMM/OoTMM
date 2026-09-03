@@ -82,35 +82,151 @@
     <xflag type="boulder-red" location="Goron City Red Boulder 3" slice="0x0" setup="0" room="0x0" actor="0x2a" item="NOTHING"/>
     <xflag type="boulder-red" location="Goron City Red Boulder 4" slice="0x0" setup="0" room="0x0" actor="0x2e" item="NOTHING"/>
     <xflag type="boulder-red" location="Goron City Red Boulder 5" slice="0x0" setup="0" room="0x0" actor="0x2b" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 01" slice="0x0" setup="0" room="0x0" actor="0x0" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 02" slice="0x0" setup="0" room="0x0" actor="0x1" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 03" slice="0x0" setup="0" room="0x0" actor="0x2" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 04" slice="0x0" setup="0" room="0x0" actor="0x3" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 05" slice="0x0" setup="0" room="0x0" actor="0x4" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 06" slice="0x0" setup="0" room="0x0" actor="0x5" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 07" slice="0x0" setup="0" room="0x0" actor="0x6" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 08" slice="0x0" setup="0" room="0x0" actor="0x7" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 09" slice="0x0" setup="0" room="0x0" actor="0x8" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 10" slice="0x0" setup="0" room="0x0" actor="0x9" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 11" slice="0x0" setup="0" room="0x0" actor="0xa" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 12" slice="0x0" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 13" slice="0x0" setup="0" room="0x0" actor="0xc" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 14" slice="0x0" setup="0" room="0x0" actor="0xd" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 15" slice="0x0" setup="0" room="0x0" actor="0xe" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 16" slice="0x0" setup="0" room="0x0" actor="0xf" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 17" slice="0x0" setup="0" room="0x0" actor="0x10" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 18" slice="0x0" setup="0" room="0x0" actor="0x11" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 19" slice="0x0" setup="0" room="0x0" actor="0x12" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 20" slice="0x0" setup="0" room="0x0" actor="0x13" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 21" slice="0x0" setup="0" room="0x0" actor="0x14" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 22" slice="0x0" setup="0" room="0x0" actor="0x15" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 23" slice="0x0" setup="0" room="0x0" actor="0x16" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 24" slice="0x0" setup="0" room="0x0" actor="0x17" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 25" slice="0x0" setup="0" room="0x0" actor="0x18" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 26" slice="0x0" setup="0" room="0x0" actor="0x19" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 27" slice="0x0" setup="0" room="0x0" actor="0x1a" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 28" slice="0x0" setup="0" room="0x0" actor="0x1b" item="NOTHING"/>
-    <xflag type="boulder-silver" location="Goron City Silver Boulder 29" slice="0x0" setup="0" room="0x0" actor="0x2c" item="NOTHING"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x00"/>
+      <match setup="2" actor="0x06"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 01" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x01"/>
+      <match setup="2" actor="0x07"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 02" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x02"/>
+      <match setup="2" actor="0x08"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 03" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x03"/>
+      <match setup="2" actor="0x09"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 04" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x04"/>
+      <match setup="2" actor="0x0a"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 05" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x05"/>
+      <match setup="2" actor="0x0b"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 06" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x06"/>
+      <match setup="2" actor="0x0c"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 07" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x07"/>
+      <match setup="2" actor="0x0d"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 08" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x08"/>
+      <match setup="2" actor="0x0e"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 09" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x09"/>
+      <match setup="2" actor="0x0f"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 10" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0a"/>
+      <match setup="2" actor="0x10"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 11" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0b"/>
+      <match setup="2" actor="0x11"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 12" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0c"/>
+      <match setup="2" actor="0x12"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 13" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0d"/>
+      <match setup="2" actor="0x13"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 14" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0e"/>
+      <match setup="2" actor="0x14"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 15" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0f"/>
+      <match setup="2" actor="0x15"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 16" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x10"/>
+      <match setup="2" actor="0x16"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 17" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x11"/>
+      <match setup="2" actor="0x17"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 18" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x12"/>
+      <match setup="2" actor="0x18"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 19" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x13"/>
+      <match setup="2" actor="0x19"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 20" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x14"/>
+      <match setup="2" actor="0x1a"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 21" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x15"/>
+      <match setup="2" actor="0x1b"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 22" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x16"/>
+      <match setup="2" actor="0x1c"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 23" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x17"/>
+      <match setup="2" actor="0x1d"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 24" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x18"/>
+      <match setup="2" actor="0x1e"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 25" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x19"/>
+      <match setup="2" actor="0x1f"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 26" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x1a"/>
+      <match setup="2" actor="0x20"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 27" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x1b"/>
+      <match setup="2" actor="0x21"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 28" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2c"/>
+      <match setup="2" actor="0x22"/>
+      <xflag type="boulder-silver" location="Goron City Silver Boulder 29" item="NOTHING"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0x30"/>
       <match setup="2" actor="0x00"/>

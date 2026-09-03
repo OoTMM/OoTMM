@@ -298,54 +298,11 @@ static InitChainEntry sInitChains[][5] = {
     },
 };
 
-static void EnIshi_AliasSilverBoulder(Xflag* xf) {
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_GORON_CITY:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            if (xf->id == 34)
-                xf->id = 44;
-            else
-                xf->id -= 6;
-        }
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        xf->setupId = 0;
-        xf->id = 18;
-        break;
-    case SCE_OOT_GERUDO_VALLEY:
-        xf->setupId = 0;
-        xf->id = 18;
-        break;
-    case SCE_OOT_ZORA_FOUNTAIN:
-        xf->setupId = 0;
-        xf->id = 5;
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        xf->setupId = 2;
-        xf->id = 48;
-        break;
-    case SCE_OOT_HYRULE_FIELD:
-        xf->setupId = 0;
-        xf->id = 30;
-        break;
-    }
-}
-
 void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
 
-    if (Xflag_Init(&this->xflag, &this->actor, play)) {
-        switch (type)
-        {
-        case ROCK_LARGE:
-            EnIshi_AliasSilverBoulder(&this->xflag);
-            break;
-        }
-    }
+    Xflag_Init(&this->xflag, &this->actor, play);
 
     Actor_ProcessInitChain(&this->actor, sInitChains[type]);
     if (play->csCtx.state != CS_STATE_IDLE) {
