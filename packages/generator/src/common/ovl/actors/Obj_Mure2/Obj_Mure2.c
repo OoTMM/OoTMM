@@ -222,23 +222,9 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-void ObjMure2_AliasGrass(Xflag* xf);
-void ObjMure2_Alias(Actor_ObjMure2* this, PlayState* play)
-{
-    Xflag* xf;
-
-    xf = &this->xflag;
-    if (!(OBJ_MURE2_GET_CHILD_TYPE(&this->actor) == OBJMURE2_CHILDTYPE_ROCK_RING))
-    {
-        ObjMure2_AliasGrass(xf);
-    }
-}
-
 void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)
 {
     Xflag_Init(&this->xflag, &this->actor, play);
-    ObjMure2_Alias(this, play);
-
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (play->csCtx.state != CS_STATE_IDLE)
         this->actor.cullingVolumeDistance += 1200.0f;

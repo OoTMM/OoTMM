@@ -14,15 +14,51 @@
     <scrub location="Lost Woods Scrub Sticks Upgrade" flag="0x00" item="STICK_UPGRADE"/>
     <scrub location="Lost Woods Scrub Near Theater Left" flag="0x01" item="STICK"/>
     <scrub location="Lost Woods Scrub Near Theater Right" flag="0x02" item="NUTS_5"/>
-    <xflag type="grass" location="Lost Woods Grass 1" slice="0x0" setup="0" room="0x2" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass 2" slice="0x0" setup="0" room="0x2" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass 3" slice="0x0" setup="0" room="0x2" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass Deep 1" slice="0x0" setup="0" room="0x7" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass Deep 2" slice="0x0" setup="0" room="0x7" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass Deep 3" slice="0x0" setup="0" room="0x7" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass Deep 4" slice="0x0" setup="0" room="0x8" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass Deep 5" slice="0x0" setup="0" room="0x8" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Lost Woods Grass Deep 6" slice="0x0" setup="0" room="0x8" actor="0x5" item="RANDOM"/>
+    <actor room="0x2">
+      <match setup="0" actor="0x02"/>
+      <match setup="2" actor="0x04"/>
+      <xflag type="grass" location="Lost Woods Grass 1" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x2">
+      <match setup="0" actor="0x03"/>
+      <match setup="2" actor="0x06"/>
+      <xflag type="grass" location="Lost Woods Grass 2" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x2">
+      <match setup="0" actor="0x04"/>
+      <match setup="2" actor="0x05"/>
+      <xflag type="grass" location="Lost Woods Grass 3" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x7">
+      <match setup="0" actor="0x01"/>
+      <match setup="2" actor="0x02"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 1" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x7">
+      <match setup="0" actor="0x02"/>
+      <match setup="2" actor="0x04"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 2" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x7">
+      <match setup="0" actor="0x03"/>
+      <match setup="2" actor="0x03"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 3" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x8">
+      <match setup="0" actor="0x03"/>
+      <match setup="2" actor="0x04"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 4" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x8">
+      <match setup="0" actor="0x04"/>
+      <match setup="2" actor="0x05"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 5" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor room="0x8">
+      <match setup="0" actor="0x05"/>
+      <match setup="2" actor="0x06"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 6" slice="0x0" item="RANDOM"/>
+    </actor>
     <xflag type="rupee" location="Lost Woods Rupee Arrow 1" setup="0" room="0x3" actor="0x4" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lost Woods Rupee Arrow 2" setup="0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lost Woods Rupee Arrow 3" setup="0" room="0x3" actor="0x6" item="RUPEE_GREEN"/>

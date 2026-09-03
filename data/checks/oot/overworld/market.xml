@@ -1,24 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checks game="oot">
   <scene id="MARKET_CHILD_DAY">
-    <xflag type="crate" location="Market Crate 1" slice="0x0" setup="0" room="0x0" actor="0x21" item="RUPEE_RED"/>
-    <xflag type="crate" location="Market Crate 2" slice="0x0" setup="0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Crate 3" slice="0x0" setup="0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Crate 4" slice="0x0" setup="0" room="0x0" actor="0x24" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Market Grass 1" slice="0x0" setup="0" room="0x0" actor="0x17" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 2" slice="0x0" setup="0" room="0x0" actor="0x18" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 3" slice="0x0" setup="0" room="0x0" actor="0x19" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 4" slice="0x0" setup="0" room="0x0" actor="0x1a" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 5" slice="0x0" setup="0" room="0x0" actor="0x1b" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 6" slice="0x0" setup="0" room="0x0" actor="0x1c" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 7" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RANDOM"/>
-    <xflag type="grass" location="Market Grass 8" slice="0x0" setup="0" room="0x0" actor="0x1e" item="RANDOM"/>
-    <xflag type="tree" location="Market Tree" slice="0x0" setup="0" room="0x0" actor="0xe" item="NOTHING"/>
-    <xflag type="wonder" location="Market Wonder Item Day 1" slice="0x0" setup="0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 2" slice="0x0" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 3" slice="0x0" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 4" slice="0x0" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Market Wonder Item Day 5" slice="0x0" setup="0" room="0x0" actor="0x13" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Crate 1" actor="0x21" item="RUPEE_RED"/>
+    <xflag type="crate" location="Market Crate 2" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Crate 3" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Market Crate 4" actor="0x24" item="RUPEE_GREEN"/>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x17"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x07"/>
+      <xflag type="grass" location="Market Grass 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x18"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x08"/>
+      <xflag type="grass" location="Market Grass 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x19"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x09"/>
+      <xflag type="grass" location="Market Grass 3" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x1a"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x0a"/>
+      <xflag type="grass" location="Market Grass 4" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x1b"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x0b"/>
+      <xflag type="grass" location="Market Grass 5" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x1c"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x0c"/>
+      <xflag type="grass" location="Market Grass 6" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x1d"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x0d"/>
+      <xflag type="grass" location="Market Grass 7" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x1e"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x0e"/>
+      <xflag type="grass" location="Market Grass 8" item="RANDOM"/>
+    </actor>
+    <xflag type="tree" location="Market Tree" actor="0xe" item="NOTHING"/>
+    <xflag type="wonder" location="Market Wonder Item Day 1" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 2" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 3" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 4" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Market Wonder Item Day 5" actor="0x13" item="RUPEE_GREEN"/>
   </scene>
   <scene id="MARKET_CHILD_NIGHT">
     <xflag type="wonder" location="Market Wonder Item Night 1" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>

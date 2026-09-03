@@ -3,13 +3,13 @@
   <scene id="LAIR_GOHMA">
     <collectible location="Deku Tree Boss Container" flag="0x1f" item="HEART_CONTAINER"/>
     <npc location="Deku Tree Boss" npc="BLUE_WARP_GOHMA" item="STONE_EMERALD"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 1" slice="0x0" setup="0" room="0x1" actor="0x1" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 2" slice="0x0" setup="0" room="0x1" actor="0x2" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 3" slice="0x0" setup="0" room="0x1" actor="0x3" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 4" slice="0x0" setup="0" room="0x1" actor="0x4" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 5" slice="0x0" setup="0" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 6" slice="0x0" setup="0" room="0x1" actor="0x6" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 7" slice="0x0" setup="0" room="0x1" actor="0x7" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Deku Tree Boss Grass 8" slice="0x0" setup="0" room="0x1" actor="0x8" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 1" room="0x1" actor="0x1" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 2" room="0x1" actor="0x2" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 3" room="0x1" actor="0x3" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 4" room="0x1" actor="0x4" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 5" room="0x1" actor="0x5" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 6" room="0x1" actor="0x6" item="DEKU_SEEDS_5"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 7" room="0x1" actor="0x7" item="RECOVERY_HEART"/>
+    <xflag type="grass" location="Deku Tree Boss Grass 8" room="0x1" actor="0x8" item="DEKU_SEEDS_5"/>
   </scene>
 </checks>

@@ -86,14 +86,62 @@
     <xflag type="crate" location="Kakariko Crate Adult Back 2" slice="0x0" setup="2" actor="0x2c" item="NOTHING"/>
     <xflag type="crate" location="Kakariko Crate Adult Back 3" slice="0x0" setup="2" actor="0x2d" item="RUPEE_RED"/>
     <xflag type="crate" location="Kakariko Crate Adult Back 4" slice="0x0" setup="2" actor="0x2e" item="NOTHING"/>
-    <xflag type="grass" location="Kakariko Grass 1" slice="0x0" setup="0" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 2" slice="0x0" setup="0" actor="0x25" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 3" slice="0x0" setup="0" actor="0x26" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 4" slice="0x0" setup="0" actor="0x27" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 5" slice="0x0" setup="0" actor="0x28" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 6" slice="0x0" setup="0" actor="0x29" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 7" slice="0x0" setup="0" actor="0x2a" item="RANDOM"/>
-    <xflag type="grass" location="Kakariko Grass 8" slice="0x0" setup="0" actor="0x2b" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x24"/>
+      <match setup="1" actor="0x1f"/>
+      <match setup="2" actor="0x18"/>
+      <match setup="3" actor="0x16"/>
+      <xflag type="grass" location="Kakariko Grass 1" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x25"/>
+      <match setup="1" actor="0x20"/>
+      <match setup="2" actor="0x19"/>
+      <match setup="3" actor="0x17"/>
+      <xflag type="grass" location="Kakariko Grass 2" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x26"/>
+      <match setup="1" actor="0x21"/>
+      <match setup="2" actor="0x1a"/>
+      <match setup="3" actor="0x18"/>
+      <xflag type="grass" location="Kakariko Grass 3" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x27"/>
+      <match setup="1" actor="0x22"/>
+      <match setup="2" actor="0x1b"/>
+      <match setup="3" actor="0x19"/>
+      <xflag type="grass" location="Kakariko Grass 4" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x28"/>
+      <match setup="1" actor="0x23"/>
+      <match setup="2" actor="0x1c"/>
+      <match setup="3" actor="0x1a"/>
+      <xflag type="grass" location="Kakariko Grass 5" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x29"/>
+      <match setup="1" actor="0x24"/>
+      <match setup="2" actor="0x1d"/>
+      <match setup="3" actor="0x1b"/>
+      <xflag type="grass" location="Kakariko Grass 6" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x2a"/>
+      <match setup="1" actor="0x25"/>
+      <match setup="2" actor="0x1e"/>
+      <match setup="3" actor="0x1c"/>
+      <xflag type="grass" location="Kakariko Grass 7" slice="0x0" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x2b"/>
+      <match setup="1" actor="0x26"/>
+      <match setup="2" actor="0x1f"/>
+      <match setup="3" actor="0x1d"/>
+      <xflag type="grass" location="Kakariko Grass 8" slice="0x0" item="RANDOM"/>
+    </actor>
     <actor>
       <match setup="2" actor="0x30"/>
       <match setup="3" actor="0x13"/>

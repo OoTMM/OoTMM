@@ -86,64 +86,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),         ICHAIN_F32(cullingVolumeDownward, 120, ICHAIN_STOP),
 };
 
-void EnKusa_Aliases(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_OOT_MARKET_CHILD_NIGHT:
-        xflag->sceneId = SCE_OOT_MARKET_CHILD_DAY;
-        xflag->id += 16;
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        switch (xflag->setupId)
-        {
-        case 1: xflag->id += 5; break;
-        case 2: xflag->id += 12; break;
-        case 3: xflag->id += 14; break;
-        }
-        xflag->setupId = 0;
-        break;
-    case SCE_OOT_ZORA_RIVER:
-        if (xflag->setupId == 2)
-        {
-            xflag->id += 28;
-            xflag->setupId = 0;
-        }
-        break;
-    case SCE_OOT_KOKIRI_FOREST:
-        if (xflag->setupId == 3)
-        {
-            xflag->setupId = 2;
-            xflag->id -= 7;
-        }
-        if (xflag->setupId == 0 && xflag->roomId == 2 && xflag->id == 9)
-        {
-            xflag->roomId = 0;
-            xflag->id = 62;
-        }
-        break;
-    case SCE_OOT_LAKE_HYLIA:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            xflag->id -= 8;
-        }
-        break;
-    case SCE_OOT_LOST_WOODS:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            switch (xflag->roomId)
-            {
-            case 2: xflag->id -= 2; break;
-            case 7: xflag->id -= 1; break;
-            case 8: xflag->id -= 1; break;
-            }
-        }
-        break;
-    }
-}
-
 void EnKusa_SetupAction(EnKusa* this, EnKusaActionFunc actionFunc) {
     this->timer = 0;
     this->actionFunc = actionFunc;
@@ -283,9 +225,7 @@ void EnKusa_InitCollider(Actor* thisx, PlayState* play) {
 void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = (EnKusa*)thisx;
 
-    if (Xflag_Init(&this->xflag, thisx, play))
-        EnKusa_Aliases(&this->xflag);
-
+    Xflag_Init(&this->xflag, thisx, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (play->csCtx.state != CS_STATE_IDLE) {

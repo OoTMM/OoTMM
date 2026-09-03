@@ -10,49 +10,69 @@
     <gs location="Lake Hylia GS Big Tree" flag="0x94" item="GS_TOKEN"/>
     <xflag type="pot" location="Lake Hylia Pot 1" setup="0" actor="0xa" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Lake Hylia Pot 2" setup="0" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="grass" location="Lake Hylia Grass 1" setup="0" actor="0x18" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass 2" setup="0" actor="0x19" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x18"/>
+      <match setup="2" actor="0x20"/>
+      <xflag type="grass" location="Lake Hylia Grass 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x19"/>
+      <match setup="2" actor="0x21"/>
+      <xflag type="grass" location="Lake Hylia Grass 2" item="RANDOM"/>
+    </actor>
     <xflag type="grass" location="Lake Hylia Grass Child 1" setup="0" actor="0x1a" item="RANDOM"/>
     <xflag type="grass" location="Lake Hylia Grass Child 2" setup="0" actor="0x1b" item="RANDOM"/>
     <xflag type="grass" location="Lake Hylia Grass Child 3" setup="0" actor="0x1c" item="RANDOM"/>
     <xflag type="grass" location="Lake Hylia Grass Child 4" setup="0" actor="0x1d" item="RANDOM"/>
     <xflag type="grass" location="Lake Hylia Grass Child 5" setup="0" actor="0x6" item="DEKU_SEEDS_5"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 01" slice="0x0" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 02" slice="0x1" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 03" slice="0x2" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 04" slice="0x3" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 05" slice="0x4" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 06" slice="0x5" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 07" slice="0x6" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 08" slice="0x7" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 09" slice="0x8" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 10" slice="0x9" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 11" slice="0xa" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 12" slice="0xb" setup="0" actor="0x1e" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 01" slice="0x0" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 02" slice="0x1" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 03" slice="0x2" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 04" slice="0x3" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 05" slice="0x4" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 06" slice="0x5" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 07" slice="0x6" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 08" slice="0x7" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 09" slice="0x8" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 10" slice="0x9" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 11" slice="0xa" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 12" slice="0xb" setup="0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 01" slice="0x0" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 02" slice="0x1" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 03" slice="0x2" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 04" slice="0x3" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 05" slice="0x4" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 06" slice="0x5" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 07" slice="0x6" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 08" slice="0x7" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 09" slice="0x8" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 10" slice="0x9" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 11" slice="0xa" setup="0" actor="0x20" item="RANDOM"/>
-    <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 12" slice="0xb" setup="0" actor="0x20" item="RANDOM"/>
+    <actor>
+      <match setup="0" actor="0x1e"/>
+      <match setup="2" actor="0x22"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 1 Bush 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1f"/>
+      <match setup="2" actor="0x23"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 2 Bush 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x20"/>
+      <match setup="2" actor="0x24"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Lake Hylia Grass Pack 3 Bush 12" slice="0xb" item="RANDOM"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x16"/>
       <match setup="2" actor="0x1e"/>

@@ -98,6 +98,9 @@
   exits:
     "Kokiri Forest Grass Child": "is_child"
     "Kokiri Forest Grass Adult": "is_adult"
+  locations:
+    "Kokiri Forest Grass Near Crawl 1": "true"
+    "Kokiri Forest Grass Near Crawl 2": "true"
 
 "Kokiri Forest Grass Child":
   region: KOKIRI_FOREST
@@ -109,8 +112,6 @@
     "Kokiri Forest Grass Child Near Crawl 4": "true"
     "Kokiri Forest Grass Child Near Crawl 5": "true"
     "Kokiri Forest Grass Child Near Crawl 6": "true"
-    "Kokiri Forest Grass Child Near Crawl 7": "true"
-    "Kokiri Forest Grass Child Near Crawl 8": "true"
     "Kokiri Forest Grass Child 1": "true"
     "Kokiri Forest Grass Child 2": "true"
     "Kokiri Forest Grass Child 3": "true"
@@ -142,8 +143,6 @@
     "Kokiri Forest Grass Adult Near Crawl 4": "true"
     "Kokiri Forest Grass Adult Near Crawl 5": "true"
     "Kokiri Forest Grass Adult Near Crawl 6": "true"
-    "Kokiri Forest Grass Adult Near Crawl 7": "true"
-    "Kokiri Forest Grass Adult Near Crawl 8": "true"
 
 "Kokiri Forest Adult Rupees":
   region: KOKIRI_FOREST
