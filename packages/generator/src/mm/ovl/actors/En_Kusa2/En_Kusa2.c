@@ -87,8 +87,8 @@ Vec3s D_80A5EAF4 = { 0, 0, 0 };
 Vec3s D_80A5EAFC = { 0, 0, 0 };
 Vec3s D_80A5EB04 = { 0, 0, 0 };
 
-static Xflag sXflagBase;
-static Xflag sXflagCurrent;
+static XflagID sXflagBase;
+static XflagID sXflagCurrent;
 static u32 sLastFrameCount;
 static u32 sDrawIndex;
 static u8 sDisturbed;
@@ -311,8 +311,7 @@ void func_80A5BB40(EnKusa2* this, PlayState* play, s32 arg2) {
 
 static void EnKusa2_UpdateCurrentXflag(u8 sliceId)
 {
-    memcpy(&sXflagCurrent, &sXflagBase, sizeof(Xflag));
-    sXflagCurrent.sliceId = sliceId;
+    sXflagCurrent = Xflag_LookupSlice(sXflagBase, sliceId);
 }
 
 void func_80A5BD14(EnKusa2* this, PlayState* play, s32 arg2) {
@@ -329,8 +328,8 @@ void func_80A5BD14(EnKusa2* this, PlayState* play, s32 arg2) {
             kusa2->unk_1BC = 8;
         }
 
-        if (Xflag_IsShuffled(&sXflagCurrent)) {
-            EnItem00_DropCustom(play, &this->actor.world.pos, &sXflagCurrent);
+        if (Xflag_IsShuffledEx(sXflagCurrent)) {
+            EnItem00_DropCustomEx(play, &this->actor.world.pos, sXflagCurrent);
         } else {
             Item_DropCollectible(play, &this->actor.world.pos, D_80A5EB24[kusa2->unk_1BC]);
         }
@@ -858,16 +857,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-void EnKusa2_Alias(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_MM_CLOCK_TOWN_NORTH:
-        xflag->id = 16;
-        break;
-    }
-}
-
 void EnKusa2_Init(Actor* thisx, PlayState* play) {
     EnKusa2* this = THIS;
 
@@ -875,9 +864,7 @@ void EnKusa2_Init(Actor* thisx, PlayState* play) {
     if (!ENKUSA2_GET_1(&this->actor)) {
         sLastFrameCount = play->state.frameCount - 1;
         sDrawIndex = 0;
-        if (Xflag_Init(&sXflagBase, thisx, play)) {
-            EnKusa2_Alias(&sXflagBase);
-        }
+        sXflagBase = Xflag_InitEx(thisx, play);
         EnKusa2_UpdateCurrentXflag(0);
         this->actor.update = func_80A5E604;
         this->actor.draw = NULL;
@@ -1355,8 +1342,7 @@ void func_80A5E6F0(Actor* thisx, PlayState* play) {
 
 static void EnKusa2_DrawImpl(EnKusa2* this, PlayState* play)
 {
-    Xflag xflagBuffer;
-    Xflag* xflag;
+    XflagID xflag;
     ComboItemOverride o;
     int id;
 
@@ -1372,17 +1358,12 @@ static void EnKusa2_DrawImpl(EnKusa2* this, PlayState* play)
         id = sDrawIndex++;
         id += (play->state.frameCount / 5) % 9;
         id %= 9;
-        memcpy(&xflagBuffer, &sXflagBase, sizeof(Xflag));
-        xflagBuffer.sliceId = id;
-        xflag = &xflagBuffer;
+        xflag = Xflag_LookupSlice(sXflagBase, id);
     }
     else
-        xflag = &sXflagCurrent;
+        xflag = sXflagCurrent;
 
-    if (Xflag_IsShuffled(xflag))
-        comboXflagItemOverride(&o, xflag, GI_NONE);
-    else
-        o.gi = GI_NONE;
+    Xflag_ItemOverride(&o, xflag, GI_NONE);
 
     /* Prepare */
     csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 0);

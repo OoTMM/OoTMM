@@ -16,17 +16,21 @@
     <npc location="Clock Town Bomber Notebook" npc="BOMBER_NOTEBOOK" item="BOMBER_NOTEBOOK"/>
     <npc location="Clock Town Blast Mask" npc="MASK_BLAST" item="MASK_BLAST"/>
     <npc location="Clock Town Keaton HP" npc="KEATON_HEART_PIECE" item="HEART_PIECE"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 1" slice="0x0" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 2" slice="0x1" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 3" slice="0x2" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 4" slice="0x3" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 5" slice="0x4" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 6" slice="0x5" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 7" slice="0x6" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 8" slice="0x7" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="grass" location="Clock Town Keaton Grass Reward 9" slice="0x8" setup="0" room="0x0" actor="0x10" item="RUPEE_RED"/>
-    <xflag type="tree" location="Clock Town North Forked Tree 1" slice="0x0" setup="0" room="0x0" actor="0x7" item="NOTHING"/>
-    <xflag type="tree" location="Clock Town North Forked Tree 2" slice="0x0" setup="0" room="0x0" actor="0x15" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x10"/>
+      <match setup="1" actor="0x1c"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 1" slice="0" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 2" slice="1" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 3" slice="2" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 4" slice="3" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 5" slice="4" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 6" slice="5" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 7" slice="6" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 8" slice="7" item="RUPEE_GREEN"/>
+      <xflag type="grass" location="Clock Town Keaton Grass Reward 9" slice="8" item="RUPEE_RED"/>
+    </actor>
+    <xflag type="tree" location="Clock Town North Forked Tree 1" setup="0" actor="0x07" item="NOTHING"/>
+    <xflag type="tree" location="Clock Town North Forked Tree 2" setup="0" actor="0x15" item="NOTHING"/>
   </scene>
   <scene id="CLOCK_TOWN_EAST">
     <chest location="Clock Town Silver Rupee Chest" flag="0x0a" item="RUPEE_SILVER"/>
