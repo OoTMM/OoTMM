@@ -161,9 +161,21 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
 
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
+    XflagID id;
+
+    id = Xflag_Lookup(xflag);
+    return EnItem00_DropCustomEx(play, pos, id);
+}
+
+
+Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id)
+{
     Actor* actor;
     Actor_EnItem00* item;
     ComboItemOverride o;
+
+    if (id == XFLAGID_NONE)
+        return (Actor_EnItem00*)Item_DropCollectible(play, pos, 0x0000);
 
     /* Check if the xflag item is already spawned */
     for (actor = play->actorCtx.actors[0x08].first; actor != NULL; actor = actor->next)
@@ -171,23 +183,23 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
         if (actor->id != ACTOR_EN_ITEM00)
             continue;
         item = (Actor_EnItem00*)actor;
-        if (memcmp(&item->xflag, xflag, sizeof(Xflag)) == 0)
+        if (item->xflag == id)
             return NULL;
     }
 
     /* Check if the item to be spawned is literaly Nothing */
-    comboXflagItemOverride(&o, xflag, 0);
+    Xflag_ItemOverride(&o, id, GI_NONE);
     if (o.gi == GI_NOTHING)
     {
-        Xflag_SetIndirect(xflag);
+        Xflag_Set(id);
         return NULL;
     }
 
     /* Spawn the item */
-    memcpy(&g.xflag, xflag, sizeof(Xflag));
-    g.xflagOverride = TRUE;
+    g.xflagOverrideEx = TRUE;
+    g.xflagId = id;
     item = (Actor_EnItem00*)Item_DropCollectible(play, pos, 0x0000);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
     if (!item)
         return NULL;
 

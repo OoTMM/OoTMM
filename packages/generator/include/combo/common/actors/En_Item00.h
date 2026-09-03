@@ -108,6 +108,7 @@ int  EnItem00_FixDrop(int drop);
 void EnItem00_AddXflag(Actor_EnItem00* this);
 
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);
+Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id);
 Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 
 #endif

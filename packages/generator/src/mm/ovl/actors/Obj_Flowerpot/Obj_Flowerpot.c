@@ -87,30 +87,24 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-static void ObjFlowerpot_Xflag(Xflag* dst, int slice, Actor_ObjFlowerpot* this)
-{
-    memcpy(dst, &this->xflags, sizeof(Xflag));
-    dst->sliceId = slice;
-}
-
 static int ObjFlowerpot_IsShuffled(Actor_ObjFlowerpot* this, int slice)
 {
-    Xflag xflags;
+    XflagID id;
 
-    ObjFlowerpot_Xflag(&xflags, slice, this);
-    return !!((this->isExtendedFlags & (1 << slice)) && (!Xflag_GetIndirect(&xflags)));
+    id = Xflag_LookupSlice(this->xflag, slice);
+    return Xflag_IsShuffledEx(id);
 }
 
 static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlowerpot* this, int slice)
 {
-    Xflag xf;
+    XflagID id;
 
-    ObjFlowerpot_Xflag(&xf, slice, this);
-    comboXflagItemOverride(o, &xf, 0);
-    if (Xflag_GetIndirect(&xf))
+    id = Xflag_LookupSlice(this->xflag, slice);
+    Xflag_ItemOverride(o, id, GI_NONE);
+    if (Xflag_Get(id))
     {
-        o->gi = 0;
-        o->cloakGi = 0;
+        o->gi = GI_NONE;
+        o->cloakGi = GI_NONE;
     }
 }
 
@@ -122,26 +116,15 @@ static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
     return o.gi;
 }
 
-static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, PlayState* play)
-{
-    Xflag_Init(&this->xflags, &this->actor, play);
-    this->isExtendedFlags = 0;
-    for (int i = 0; i < 2; ++i)
-    {
-        if (ObjFlowerpot_ShuffledItem(this, i))
-            this->isExtendedFlags |= 1 << i;
-    }
-}
-
 static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, PlayState* play, int slice)
 {
-    Xflag xf;
+    XflagID id;
 
     if (!ObjFlowerpot_IsShuffled(this, slice))
-        return 0;
-    ObjFlowerpot_Xflag(&xf, slice, this);
-    EnItem00_DropCustom(play, &this->actor.world.pos, &xf);
-    return 1;
+        return FALSE;
+    id = Xflag_LookupSlice(this->xflag, slice);
+    EnItem00_DropCustomEx(play, &this->actor.world.pos, id);
+    return TRUE;
 }
 
 void func_80A1B3D0(void)
@@ -450,7 +433,7 @@ void func_80A1C62C(Actor_ObjFlowerpot* this, PlayState* play) {
 
 void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, PlayState* play)
 {
-    ObjFlowerpot_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (this->actor.shape.rot.y == 0) {
