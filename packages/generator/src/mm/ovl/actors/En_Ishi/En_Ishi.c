@@ -316,9 +316,9 @@ void EnIshi_SpawnDustBoulder(Actor* thisx, PlayState* play) {
 
 int EnIshi_DropCustom(EnIshi* this, PlayState* play)
 {
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return true;
     }
 
@@ -426,7 +426,10 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
         this->flags |= ISHI_FLAG_CUTSCENE_ROCK;
     }
 
-    Xflag_Init(&this->xflag, &this->actor, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     Actor_ProcessInitChain(&this->actor, sInitChain[rockSize]);
 
     if (play->csCtx.state != CS_STATE_IDLE) {
@@ -748,19 +751,22 @@ void EnIshi_Kill(EnIshi* this, PlayState* play) {
 void EnIshi_Update(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 }
 
 static int EnIshi_CAMC(EnIshi* this, PlayState* play) {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
