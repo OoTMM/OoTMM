@@ -115,9 +115,9 @@ s32 EnKusa_SnapToFloor(EnKusa* this, PlayState* play, f32 yOffset) {
 void EnKusa_DropCollectible(EnKusa* this, PlayState* play) {
     s16 dropParams;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -225,7 +225,10 @@ void EnKusa_InitCollider(Actor* thisx, PlayState* play) {
 void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = (EnKusa*)thisx;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflag = Xflag_InitEx(thisx, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (play->csCtx.state != CS_STATE_IDLE) {
@@ -476,6 +479,9 @@ void EnKusa_Regrow(EnKusa* this, PlayState* play) {
 void EnKusa_Update(Actor* thisx, PlayState* play) {
     EnKusa* this = (EnKusa*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->timer++;
 
     this->actionFunc(this, play);
@@ -504,10 +510,7 @@ void EnKusa_Draw(Actor* thisx, PlayState* play)
     int alt;
 
     this = (EnKusa*)thisx;
-    if (Xflag_IsShuffled(&this->xflag))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
 
     /* Prepare */
     if ((this->actor.params & 3) == 0)

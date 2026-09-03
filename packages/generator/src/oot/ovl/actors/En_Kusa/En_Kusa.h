@@ -20,7 +20,7 @@ typedef struct EnKusa {
     /* 0x019C */ s16 timer;
     /* 0x019E */ s8 requiredObjectSlot;
 
-    Xflag xflag;
+    XflagID xflag;
 } EnKusa; // size = 0x01A0
 
 #endif
