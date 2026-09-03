@@ -101,13 +101,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
-{
-    if (!this->isExtended || Xflag_GetIndirect(&this->xflag))
-        return 0;
-    return 1;
-}
-
 int func_809275C0(Actor_ObjTsubo* this, PlayState* play)
 {
     s32 chestFlag = -1;
@@ -123,9 +116,9 @@ int func_809275C0(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, PlayState* play)
 {
-    if (ObjTsubo_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -139,9 +132,9 @@ void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 {
     s32 itemDrop;
 
-    if (ObjTsubo_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -211,24 +204,21 @@ void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
     /* TODO: Inelegant, should use an xflag override on the spawner instead */
     if (play->sceneId == SCE_MM_ZORA_CAPE && this->actor.params == 0x13f)
     {
-        Xflag_Clear(&this->xflag);
-        this->xflag.sceneId = SCE_MM_EXTRA;
         switch ((s16)(this->actor.home.pos.x))
         {
-        case 0x04D0: this->xflag.id = 0; break;
-        case 0x0560: this->xflag.id = 1; break;
-        case 0x05BD: this->xflag.id = 2; break;
-        case 0x056F: this->xflag.id = 3; break;
-        case 0x0543: this->xflag.id = 4; break;
+        case 0x04D0: this->actor.actorIndex = 0xf0; break;
+        case 0x0560: this->actor.actorIndex = 0xf1; break;
+        case 0x05BD: this->actor.actorIndex = 0xf2; break;
+        case 0x056F: this->actor.actorIndex = 0xf3; break;
+        case 0x0543: this->actor.actorIndex = 0xf4; break;
         default: UNREACHABLE(); break;
         }
     }
-    else
-    {
-        /* Set the extended properties */
-        Xflag_Init(&this->xflag, &this->actor, play);
-    }
-    this->isExtended = Xflag_IsShuffled(&this->xflag);
+
+    /* Set the extended properties */
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     type = OBJ_TSUBO_GET_TYPE(&this->actor);
     sp2C = OBJ_TSUBO_ZROT(&this->actor);
@@ -740,6 +730,9 @@ void func_8092926C(Actor_ObjTsubo* this, PlayState* play) {
 
 void ObjTsubo_Update(Actor_ObjTsubo* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
     if (this->actor.draw == NULL) {
         this->actor.shape.shadowDraw = NULL;
@@ -796,11 +789,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
         break;
     }
 
-    if (ObjTsubo_IsShuffled(this))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
-
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, type);
     Gfx_DrawDListOpa(play, sPotTypeData[OBJ_TSUBO_GET_TYPE(&this->actor)].modelDL);
 }

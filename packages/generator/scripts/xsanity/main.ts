@@ -272,28 +272,17 @@ export async function run() {
     getXflagData(),
   ]);
 
-  const argGame = process.argv[2];
+  const game = process.argv[2];
   const argFilter = process.argv[3];
   const argFilterSubtype = process.argv[4];
 
-  let gameWithMq: Game;
-  let game: 'oot' | 'mm';
-
-  if (!argGame)
+  if (!game)
     return;
-  if (['oot', 'mq', 'mm'].includes(argGame)) {
-    gameWithMq = argGame as Game;
-  } else {
-    throw new Error(`Invalid game: ${argGame}`);
+  if (game !== 'oot' && game !== 'mm') {
+    throw new Error(`Invalid game: ${game}`);
   }
 
-  if (gameWithMq === 'mm') {
-    game = 'mm';
-  } else {
-    game = 'oot';
-  }
-
-  const gameRooms = rooms[gameWithMq];
+  const gameRooms = rooms[game];
   const checks = makeChecks(gameRooms, ACTORS_HANDLERS[game]);
   const lookup = new XflagLookup(game, xflagData.matches, xflagData.checks);
   outputChecks(game, checks, lookup, argFilter, argFilterSubtype);

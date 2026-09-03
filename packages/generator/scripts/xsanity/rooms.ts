@@ -187,15 +187,15 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
   /* Inject extra fake rooms */
   if (game === 'mm') {
     actorsRooms.push({
-      sceneId: 0x71,
+      sceneId: 0x38,
       roomId: 0x00,
       setupId: 0x00,
       actors: [
-        { actorId: 0, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 1, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 2, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 3, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
-        { actorId: 4, typeId: ACTORS_MM.POT, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 0xf0, typeId: ACTORS_MM.OBJ_TSUBO, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 0xf1, typeId: ACTORS_MM.OBJ_TSUBO, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 0xf2, typeId: ACTORS_MM.OBJ_TSUBO, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 0xf3, typeId: ACTORS_MM.OBJ_TSUBO, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 0xf4, typeId: ACTORS_MM.OBJ_TSUBO, halfDays: 0x3ff, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
       ]
     });
   }
