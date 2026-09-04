@@ -732,7 +732,7 @@ static void AdultMask_SetStartCamera(Player* player, PlayState* play, s32 camMod
 {
     Camera* cam;
 
-    player->csId = play->playerActorCsIds[5];
+    player->csId = play->playerCsIds[5];
     Player_StartMaskTransformCs(player, player->csId);
     cam = Play_GetCamera(play, play->activeCamId);
     Camera_ChangeMode(cam, camMode);
