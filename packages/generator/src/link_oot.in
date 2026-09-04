@@ -24,6 +24,9 @@ Audio_SetMainBgmTempoFreqAfterFanfare = 0x800c64a0;
 Actor_GetScreenPos = 0x80022b14;
 Color_RGBA8_Copy = 0x800646c8;
 CollisionCheck_SetInfo2 = 0x80050370;
+func_8005B198 = 0x80049da4;
+Sfx_PlaySfxAtPos = 0x80064780;
+Collider_SetCylinderPosition = 0x80050b44;
 
 gAudioLoadStatusFontSample = 0x80128a68;
 

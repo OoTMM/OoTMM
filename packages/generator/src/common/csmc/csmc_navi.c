@@ -4,6 +4,10 @@
 #include <combo/dungeon.h>
 #include <combo/actor.h>
 
+#if defined(GAME_OOT)
+# include <actors/Shot_Sun/Shot_Sun.h>
+#endif
+
 #define CSMC_NAVI_NORMAL        0x00
 #define CSMC_NAVI_BOSS_KEY      0x01
 #define CSMC_NAVI_MAJOR         0x02
@@ -59,17 +63,19 @@ static int csmcNaviId(s16 gi, s16 cloakGi)
 
 void Actor_AfterSetNaviToActor(TargetContext* targetCtx, Actor* actor, s32 actorCategory, PlayState* play)
 {
-    ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemQuery q;
     ComboItemOverride o;
     int type;
 
     if (actor->id == ACTOR_SHOT_SUN)
     {
-        Actor_ShotSun* shotSun = (Actor_ShotSun*)actor;
-        comboXflagItemQuery(&q, &shotSun->xflag, GI_OOT_FAIRY_BIG);
-        q.giRenew = GI_OOT_FAIRY_BIG;
-        if (Xflag_GetIndirect(&shotSun->xflag))
+        ShotSun* shotSun = (ShotSun*)actor;
+        Xflag_ItemQuery(&q, shotSun->xflag, GI_OOT_FAIRY_BIG);
+        if (Xflag_Get(shotSun->xflag))
+        {
             q.ovFlags |= OVF_RENEW;
+            q.giRenew = GI_OOT_FAIRY_BIG;
+        }
         comboItemOverride(&o, &q);
         type = csmcNaviId(o.gi, o.cloakGi);
         NaviColor* naviColor = &sNaviColorList[type];
