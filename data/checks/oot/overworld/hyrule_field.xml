@@ -203,7 +203,10 @@
       <xflag type="tree" location="Hyrule Field Tree Child Near Valley" item="RUPEE_GREEN"/>
     </actor>
     <xflag type="tree" location="Hyrule Field Tree Adult" setup="2" actor="0x42" item="RUPEE_GREEN"/>
-    <actor setup="1" actor="0x26">
+    <actor>
+      <match setup="0" actor="0x29"/>
+      <match setup="1" actor="0x26"/>
+      <match setup="2" actor="0x36"/>
       <xflag type="bush" location="Hyrule Field Bush 01" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 02" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 03" slice="0x2" item="NOTHING"/>
@@ -211,7 +214,10 @@
       <xflag type="bush" location="Hyrule Field Bush 05" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 06" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x27">
+    <actor>
+      <match setup="0" actor="0x2a"/>
+      <match setup="1" actor="0x27"/>
+      <match setup="2" actor="0x37"/>
       <xflag type="bush" location="Hyrule Field Bush 07" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 08" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 09" slice="0x2" item="NOTHING"/>
@@ -219,7 +225,10 @@
       <xflag type="bush" location="Hyrule Field Bush 11" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 12" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x28">
+    <actor>
+      <match setup="0" actor="0x2b"/>
+      <match setup="1" actor="0x28"/>
+      <match setup="2" actor="0x38"/>
       <xflag type="bush" location="Hyrule Field Bush 13" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 14" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 15" slice="0x2" item="NOTHING"/>
@@ -227,14 +236,20 @@
       <xflag type="bush" location="Hyrule Field Bush 17" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 18" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x2b">
+    <actor>
+      <match setup="0" actor="0x2e"/>
+      <match setup="1" actor="0x2b"/>
+      <match setup="2" actor="0x3b"/>
       <xflag type="bush" location="Hyrule Field Bush 19" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 20" slice="0x2" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 21" slice="0x3" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 22" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 23" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x2d">
+    <actor>
+      <match setup="0" actor="0x30"/>
+      <match setup="1" actor="0x2d"/>
+      <match setup="2" actor="0x39"/>
       <xflag type="bush" location="Hyrule Field Bush 24" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 25" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 26" slice="0x2" item="NOTHING"/>
@@ -242,7 +257,10 @@
       <xflag type="bush" location="Hyrule Field Bush 28" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 29" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x2e">
+    <actor>
+      <match setup="0" actor="0x31"/>
+      <match setup="1" actor="0x2e"/>
+      <match setup="2" actor="0x3a"/>
       <xflag type="bush" location="Hyrule Field Bush 30" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 31" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 32" slice="0x2" item="NOTHING"/>
@@ -250,14 +268,18 @@
       <xflag type="bush" location="Hyrule Field Bush 34" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush 35" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x29">
+    <actor>
+      <match setup="0" actor="0x2c"/>
+      <match setup="1" actor="0x29"/>
       <xflag type="bush" location="Hyrule Field Bush Child 01" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 02" slice="0x2" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 03" slice="0x3" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 04" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 05" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x2a">
+    <actor>
+      <match setup="0" actor="0x2d"/>
+      <match setup="1" actor="0x2a"/>
       <xflag type="bush" location="Hyrule Field Bush Child 06" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 07" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 08" slice="0x2" item="NOTHING"/>
@@ -265,7 +287,9 @@
       <xflag type="bush" location="Hyrule Field Bush Child 10" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 11" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x2c">
+    <actor>
+      <match setup="0" actor="0x2f"/>
+      <match setup="1" actor="0x2c"/>
       <xflag type="bush" location="Hyrule Field Bush Child 12" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 13" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 14" slice="0x2" item="NOTHING"/>
@@ -273,7 +297,9 @@
       <xflag type="bush" location="Hyrule Field Bush Child 16" slice="0x4" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 17" slice="0x5" item="NOTHING"/>
     </actor>
-    <actor setup="1" actor="0x2f">
+    <actor>
+      <match setup="0" actor="0x32"/>
+      <match setup="1" actor="0x2f"/>
       <xflag type="bush" location="Hyrule Field Bush Child 18" slice="0x0" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 19" slice="0x1" item="NOTHING"/>
       <xflag type="bush" location="Hyrule Field Bush Child 20" slice="0x2" item="NOTHING"/>

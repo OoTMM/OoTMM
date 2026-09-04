@@ -51,12 +51,36 @@
       <xflag type="butterfly" location="Zora Fountain Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Zora Fountain Butterfly 2" slice="1" item="NOTHING"/>
     </actor>
-    <xflag type="bush" location="Zora Fountain Bush 1" setup="0" room="0x0" actor="0x6" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 2" setup="0" room="0x0" actor="0x7" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 3" setup="0" room="0x0" actor="0x8" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 4" setup="0" room="0x0" actor="0x9" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 5" setup="0" room="0x0" actor="0xa" item="NOTHING"/>
-    <xflag type="bush" location="Zora Fountain Bush 6" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x06"/>
+      <match setup="1" actor="0x06"/>
+      <xflag type="bush" location="Zora Fountain Bush 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x07"/>
+      <match setup="1" actor="0x07"/>
+      <xflag type="bush" location="Zora Fountain Bush 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x08"/>
+      <match setup="1" actor="0x08"/>
+      <xflag type="bush" location="Zora Fountain Bush 3" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x09"/>
+      <match setup="1" actor="0x09"/>
+      <xflag type="bush" location="Zora Fountain Bush 4" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0a"/>
+      <match setup="1" actor="0x0a"/>
+      <xflag type="bush" location="Zora Fountain Bush 5" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x0b"/>
+      <match setup="1" actor="0x0b"/>
+      <xflag type="bush" location="Zora Fountain Bush 6" item="NOTHING"/>
+    </actor>
     <xflag type="boulder" location="Zora Fountain Boulder Exposed" setup="0" room="0x0" actor="0x10" item="NOTHING"/>
     <xflag type="boulder" location="Zora Fountain Boulder Underground" setup="0" room="0x0" actor="0x11" item="NOTHING"/>
     <actor room="0x0">
