@@ -158,6 +158,34 @@ static u8 getForeignBottle(u8 itemId)
     }
 }
 
+static void syncBottleSlotEquips(u8* buttonItems, u8* cButtonSlots, int slot, u8 oldItem, u8 newItem)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (cButtonSlots[i] == slot && buttonItems[i] == oldItem)
+            buttonItems[i] = newItem;
+    }
+}
+
+static void syncBottleSlot(int slot, u8 newItem)
+{
+    u8 oldItem;
+
+    oldItem = gForeignSave.info.inventory.items[slot];
+    if (oldItem == newItem)
+        return;
+
+    gForeignSave.info.inventory.items[slot] = newItem;
+
+#if defined(GAME_OOT)
+    syncBottleSlotEquips(&gMmSave.info.itemEquips.buttonItems[0][1], &gMmSave.info.itemEquips.cButtonSlots[0][1], slot, oldItem, newItem);
+#else
+    syncBottleSlotEquips(&gOotSave.info.equips.buttonItems[1], &gOotSave.info.equips.cButtonSlots[0], slot, oldItem, newItem);
+    syncBottleSlotEquips(&gOotSave.info.childEquips.buttonItems[1], &gOotSave.info.childEquips.cButtonSlots[0], slot, oldItem, newItem);
+    syncBottleSlotEquips(&gOotSave.info.adultEquips.buttonItems[1], &gOotSave.info.adultEquips.cButtonSlots[0], slot, oldItem, newItem);
+#endif
+}
+
 void comboSyncItems(void)
 {
     if (Config_Flag(CFG_SHARED_BOWS))
@@ -229,10 +257,10 @@ void comboSyncItems(void)
 
     if (Config_Flag(CFG_SHARED_BOTTLES))
     {
-        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE]);
-        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE2] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE2]);
-        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE3] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE3]);
-        gForeignSave.info.inventory.items[ITS_FOREIGN_BOTTLE4] = getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE4]);
+        syncBottleSlot(ITS_FOREIGN_BOTTLE, getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE]));
+        syncBottleSlot(ITS_FOREIGN_BOTTLE2, getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE2]));
+        syncBottleSlot(ITS_FOREIGN_BOTTLE3, getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE3]));
+        syncBottleSlot(ITS_FOREIGN_BOTTLE4, getForeignBottle(gSave.info.inventory.items[ITS_NATIVE_BOTTLE4]));
 #if defined (GAME_OOT)
         if (gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE))
         {
@@ -240,7 +268,7 @@ void comboSyncItems(void)
             {
                 gOotExtraItems.bottleAdultSlot = gSave.info.inventory.items[ITS_OOT_TRADE_ADULT];
             }
-            gForeignSave.info.inventory.items[ITS_MM_BOTTLE5] = getForeignBottle(gOotExtraItems.bottleAdultSlot);
+            syncBottleSlot(ITS_MM_BOTTLE5, getForeignBottle(gOotExtraItems.bottleAdultSlot));
         }
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE))
         {
@@ -248,30 +276,18 @@ void comboSyncItems(void)
             {
                 gOotExtraItems.bottleChildSlot = gSave.info.inventory.items[ITS_OOT_TRADE_CHILD];
             }
-            gForeignSave.info.inventory.items[ITS_MM_BOTTLE6] = getForeignBottle(gOotExtraItems.bottleChildSlot);
+            syncBottleSlot(ITS_MM_BOTTLE6, getForeignBottle(gOotExtraItems.bottleChildSlot));
         }
-        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE);
-        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE2);
-        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE3);
-        reloadSlotMm(NULL, ITS_FOREIGN_BOTTLE4);
-        reloadSlotMm(NULL, ITS_MM_BOTTLE5);
-        reloadSlotMm(NULL, ITS_MM_BOTTLE6);
 #else
-        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE);
-        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE2);
-        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE3);
-        reloadSlotOot(NULL, ITS_FOREIGN_BOTTLE4);
         gOotExtraItems.bottleAdultSlot = getForeignBottle(gSave.info.inventory.items[ITS_MM_BOTTLE5]);
         gOotExtraItems.bottleChildSlot = getForeignBottle(gSave.info.inventory.items[ITS_MM_BOTTLE6]);
         if (comboIsTradeBottleOot(gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT]))
         {
-            gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = gOotExtraItems.bottleAdultSlot;
-            reloadSlotOot(NULL, ITS_OOT_TRADE_ADULT);
+            syncBottleSlot(ITS_OOT_TRADE_ADULT, gOotExtraItems.bottleAdultSlot);
         }
         if (comboIsTradeBottleOot(gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD]))
         {
-            gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = gOotExtraItems.bottleChildSlot;
-            reloadSlotOot(NULL, ITS_OOT_TRADE_CHILD);
+            syncBottleSlot(ITS_OOT_TRADE_CHILD, gOotExtraItems.bottleChildSlot);
         }
 #endif
     }

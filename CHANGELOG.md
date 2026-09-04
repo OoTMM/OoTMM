@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to add extra OoT bottles without having to share bottles.
 - Add gossip fairies / big fairies shuffle.
 - Added MM Adult Mask
 - Added MM Starting Age Selection
@@ -20,6 +21,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- When more than 4 OoT bottles are found, you no longer gain extra trade slot bottle slots unless Extra OoT Bottles is on.
+- When bottle random bottle contents is on, random bottles can be added to plando or starting items.
 - Remove the mostly-unused 'cross' tokens setting.
 - Changed Starting Age to Starting Age OoT to differentiate from the new Starting Age MM setting.
 - Remove "Swordless Adult" as a setting - it's now always enabled.
@@ -36,6 +39,9 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Plentiful item pool now properly has an extra shared bottle when bottles are shared.
+- Fix bottles not having a consistent amount in pool under certain combinations of settings.
+- Fix equip swapped items from reverting to bottles if they were equip swapped over bottles.
 - Fixed MM Hyper enemy crash during Majora boss fight phase 3 when he spawns tops.
 - Logic now accounts for Bronze Scale or Iron Boots when coming from Gerudo Valley in Lake Hylia.
 - Fix Deku Seeds pickups from shuffled locations having text in Majora's Mask when playing with slingshot in said game when they shouldn't.
