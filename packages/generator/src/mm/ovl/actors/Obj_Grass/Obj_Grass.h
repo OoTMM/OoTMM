@@ -25,6 +25,7 @@ typedef struct ObjGrassElement {
     /* 0x0E */ s8 dropTable;
     /* 0x0F */ u8 flags;
     /* 0x10 */ u8 alpha;
+    XflagID xflag;
 } ObjGrassElement; // size = 0x14
 
 typedef struct {
@@ -41,7 +42,7 @@ typedef struct {
 
 typedef struct ObjGrass {
     /* 0x0000 */ Actor actor;
-    /* 0x0144 */ ObjGrassGroup grassGroups[40];
+    /* 0x0144 */ ObjGrassGroup grassGroups[18];
     /* 0x2944 */ s16 activeGrassGroups;
     /* 0x2948 */ ObjGrassCollider grassElemColliders[OBJ_GRASS_NEAREST_ELEM_MAX];
     /* 0x2F88 */ MtxF distortionMtx[OBJ_GRASS_GROUP_ELEM_COUNT_MAX];
@@ -53,8 +54,6 @@ typedef struct ObjGrass {
     /* 0x3292 */ s16 activeGrassCarry;
     /* 0x3294 */ ObjGrassElement* carryGrassElem;
     /* 0x3298 */ struct ObjGrassCarry* grassCarry[2];
-
-    Xflag xflag[40];
 } ObjGrass; // size = 0x32A0
 
 #endif // Z_OBJ_GRASS_H

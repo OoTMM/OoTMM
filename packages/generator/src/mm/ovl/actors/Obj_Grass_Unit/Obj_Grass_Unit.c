@@ -102,8 +102,11 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
     s32 bgId;
     ObjGrassElement* grassElem;
     ObjGrassUnitPattern* grassPattern;
-    Xflag* xf;
     s8 dropTable = OBJGRASSUNIT_GET_DROPTABLE(this);
+    XflagID xfBase;
+    XflagID xfIndex;
+
+    xfBase = Xflag_InitEx(this, play);
 
     if ((sGrassManager == NULL) && !ObjGrassUnit_SpawnObjGrass(this, play)) {
         Actor_Kill(this);
@@ -135,6 +138,10 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
     grassPattern = &sGrassPatterns[OBJGRASSUNIT_GET_PATTERN(this)];
 
     for (i = 0; i < grassPattern->count; i++) {
+        xfIndex = Xflag_LookupSlice(xfBase, i);
+        if (!Xflag_IsShuffledEx(xfIndex))
+            xfIndex = XFLAGID_NONE;
+
         grassElem = &grassGroup->elements[grassGroup->count];
         grassPos = &grassPattern->positions[i];
 
@@ -146,6 +153,7 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
         tmp = grassElem->pos.y - this->home.pos.y;
         if ((fabsf(tmp) < 80.0f) && (grassElem->pos.y > BGCHECK_Y_MIN)) {
             grassGroup->count++;
+            grassElem->xflag = xfIndex;
             grassElem->rotY = (s16)(Rand_Next() >> 0x10);
             grassElem->dropTable = dropTable;
             if (ObjGrassUnit_IsUnderwater(play, &grassElem->pos)) {
@@ -155,9 +163,6 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
         }
     }
     if (grassGroup->count > 0) {
-        /* Init xflag */
-        xf = &grassManager->xflag[grassManager->activeGrassGroups];
-        Xflag_Init(xf, this, play);
         grassManager->activeGrassGroups++;
         grassGroup->homePos.x = this->home.pos.x;
         grassGroup->homePos.y = (homePosYSum / grassGroup->count);

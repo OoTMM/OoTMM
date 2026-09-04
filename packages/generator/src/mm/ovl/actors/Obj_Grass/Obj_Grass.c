@@ -92,8 +92,6 @@ static Vec3f sUnitDirections[] = {
 
 static s16 sFragmentScales[] = { 108, 102, 96, 84, 66, 55, 42, 38 };
 
-extern ObjGrass* gObjGrass;
-
 s32 func_809A9110(PlayState* play, Vec3f* pos) {
     f32 w;
     Vec3f projectedPos;
@@ -124,16 +122,10 @@ void ObjGrass_OverrideMatrixCurrent(MtxF* matrix) {
     }
 }
 
-void ObjGrass_GetID(int* dstPackId, int* dstBushId, ObjGrassElement* grass);
-void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem);
-
 void ObjGrass_DropCollectible(ObjGrassElement* grassElem, PlayState* play) {
-    Xflag xflag;
-
-    ObjGrass_GetXflag(&xflag, grassElem);
-    if (Xflag_IsShuffled(&xflag))
+    if (grassElem->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &grassElem->pos, &xflag);
+        EnItem00_DropCustomEx(play, &grassElem->pos, grassElem->xflag);
         return;
     }
 
@@ -181,7 +173,6 @@ void ObjGrass_Init(Actor* thisx, PlayState* play) {
     ObjGrass* this = THIS;
     s32 i;
 
-    gObjGrass = this;
     Actor_SetScale(&this->actor, 0.4f);
 
     for (i = 0; i < ARRAY_COUNT(this->grassElemColliders); i++) {
@@ -238,6 +229,7 @@ void ObjGrass_UpdateGrass(ObjGrass* this, PlayState* play) {
     s32 y;
     f32 distSq;
     ObjGrassGroup* grassGroup;
+    ObjGrassElement* grassElem;
     s16 yaw;
 
     for (i = 0; i < OBJ_GRASS_NEAREST_ELEM_MAX; i++) {
@@ -254,7 +246,10 @@ void ObjGrass_UpdateGrass(ObjGrass* this, PlayState* play) {
         grassGroup = &this->grassGroups[i];
 
         for (j = 0; j < grassGroup->count; j++) {
-            grassGroup->elements[j].flags &= (u16)~OBJ_GRASS_ELEM_ANIM;
+            grassElem = &grassGroup->elements[j];
+            grassElem->flags &= (u16)~OBJ_GRASS_ELEM_ANIM;
+            if (Xflag_Get(grassElem->xflag))
+                grassElem->xflag = XFLAGID_NONE;
         }
     }
 
@@ -479,14 +474,9 @@ void ObjGrass_InitDraw(ObjGrass* this, PlayState* play) {
 
 void ObjGrass_PreDraw(ObjGrassElement* grassElem, PlayState* play)
 {
-    Xflag xflag;
     ComboItemOverride o;
 
-    ObjGrass_GetXflag(&xflag, grassElem);
-    if (Xflag_IsShuffled(&xflag))
-        comboXflagItemOverride(&o, &xflag, 0);
-    else
-        o.gi = 0;
+    Xflag_ItemOverride(&o, grassElem->xflag, GI_NONE);
     csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 1);
 }
 
