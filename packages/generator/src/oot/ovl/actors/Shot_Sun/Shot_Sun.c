@@ -179,28 +179,3 @@ void ShotSun_Update(Actor* thisx, PlayState* play) {
     ShotSun* this = (ShotSun*)thisx;
     this->actionFunc(this, play);
 }
-
-/*
-void ShotSun_Aliases(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_HYRULE_FIELD:
-        xf->setupId = 0;
-        xf->id = 0x48;
-        break;
-    case SCE_OOT_LAKE_HYLIA:
-        xf->setupId = 0;
-        xf->id = 0x37;
-        break;
-    case SCE_OOT_LOST_WOODS:
-        xf->setupId = 0;
-        xf->id = 0x03;
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        xf->setupId = 0;
-        xf->id = 0x26;
-        break;
-    }
-}
-*/

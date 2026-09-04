@@ -50,7 +50,11 @@
     </actor>
     <xflag type="rupee" location="Death Mountain Trail Rupee Upper" setup="0" actor="0x1" item="RUPEE_RED"/>
     <xflag type="rupee" location="Death Mountain Trail Rupee Lower" setup="0" actor="0x2" item="RUPEE_BLUE"/>
-    <xflag type="fairy-spot" location="Death Mountain Trail Big Fairy" setup="0" actor="0x26" item="FAIRY_BIG"/>
+    <actor>
+      <match setup="0" actor="0x26"/>
+      <match setup="2" actor="0x2b"/>
+      <xflag type="fairy-spot" location="Death Mountain Trail Big Fairy" item="FAIRY_BIG"/>
+    </actor>
     <xflag type="boulder" location="Death Mountain Trail Boulder Child" setup="0" actor="0x2f" item="NOTHING"/>
     <xflag type="boulder" location="Death Mountain Trail Boulder Lower" setup="0" actor="0x30" item="NOTHING"/>
     <xflag type="boulder" location="Death Mountain Trail Boulder Middle" setup="0" actor="0x31" item="NOTHING"/>

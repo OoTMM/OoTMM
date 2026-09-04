@@ -81,7 +81,11 @@
     <xflag type="rupee" location="Lake Hylia Rupee 1" setup="0" actor="0x31" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lake Hylia Rupee 2" setup="0" actor="0x32" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lake Hylia Rupee 3" setup="0" actor="0x33" item="RUPEE_GREEN"/>
-    <xflag type="fairy-spot" location="Lake Hylia Island Big Fairy" setup="0" actor="0x37" item="FAIRY_BIG"/>
+    <actor>
+      <match setup="0" actor="0x37"/>
+      <match setup="2" actor="0x26"/>
+      <xflag type="fairy-spot" location="Lake Hylia Island Big Fairy" item="FAIRY_BIG"/>
+    </actor>
     <actor setup="0" actor="0x21">
       <xflag type="butterfly" location="Lake Hylia Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Lake Hylia Butterfly 2" slice="1" item="NOTHING"/>
