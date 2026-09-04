@@ -5,7 +5,6 @@
 
 #include <combo/oot/actors/Door_Shutter.h>
 #include <combo/oot/actors/Obj_Switch.h>
-#include <combo/oot/actors/Shot_Sun.h>
 #include <combo/oot/actors/En_Box.h>
 #include <combo/oot/actors/Bg_Jya_Bombchuiwa.h>
 #include <combo/oot/actors/Bg_Hidan_Kousi.h>

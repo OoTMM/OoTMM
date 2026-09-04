@@ -223,7 +223,12 @@
       <xflag type="rock" location="Hyrule Field Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Hyrule Field Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="fairy-spot" location="Hyrule Field River Big Fairy" setup="0" actor="0x48" item="FAIRY_BIG"/>
+    <actor>
+      <match setup="0" actor="0x48"/>
+      <match setup="1" actor="0x46"/>
+      <match setup="2" actor="0x47"/>
+      <xflag type="fairy-spot" location="Hyrule Field River Big Fairy" item="FAIRY_BIG"/>
+    </actor>
     <xflag type="wonder" location="Hyrule Field Wonder Item 1" setup="0" actor="0x34" item="RUPEE_RED"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 2" setup="0" actor="0x35" item="RUPEE_RED"/>
     <xflag type="wonder" location="Hyrule Field Wonder Item 3" setup="0" actor="0x36" item="RUPEE_RED"/>
