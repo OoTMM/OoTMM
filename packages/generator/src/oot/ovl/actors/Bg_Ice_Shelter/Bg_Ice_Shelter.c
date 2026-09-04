@@ -69,32 +69,12 @@ static ColliderCylinderInit sCylinderInit2 = {
     { 0, 0, 0, { 0, 0, 0 } },
 };
 
-static void BgIceShelter_Alias(Actor_BgIceShelter* this)
-{
-}
-
-static void BgIceShelter_InitXflag(Actor_BgIceShelter* this, PlayState* play)
-{
-    ComboItemOverride   o;
-
-    if (Xflag_Init(&this->xflag, &this->dyna.actor, play))
-        BgIceShelter_Alias(this);
-
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
-}
-
-static int BgIceShelter_IsShuffled(Actor_BgIceShelter* this)
-{
-    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
-}
-
 static int BgIceShelter_DropCustom(Actor_BgIceShelter* this, PlayState* play)
 {
-    if (!BgIceShelter_IsShuffled(this))
-        return 0;
-    EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
-    return 1;
+    if (this->xflag == XFLAGID_NONE)
+        return FALSE;
+    EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag);
+    return TRUE;
 }
 
 
@@ -162,7 +142,10 @@ static InitChainEntry sInitChain[] = {
 void BgIceShelter_Init(Actor_BgIceShelter* this, PlayState* play) {
     s16 type = BGICESHELTER_GET_TYPE(&this->dyna.actor);
 
-    BgIceShelter_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
 
     if (type == RED_ICE_KING_ZORA) {
@@ -196,7 +179,7 @@ void BgIceShelter_Init(Actor_BgIceShelter* this, PlayState* play) {
     this->dyna.actor.colChkInfo.mass = MASS_IMMOVABLE;
 
     // The only red ice actor in the game that doesn't use a switch flag is the one for King Zora
-    if (!BgIceShelter_IsShuffled(this) && !BGICESHELTER_NO_SWITCH_FLAG(&this->dyna.actor) && Flags_GetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6))) {
+    if (this->xflag == XFLAGID_NONE && !BGICESHELTER_NO_SWITCH_FLAG(&this->dyna.actor) && Flags_GetSwitch(play, PARAMS_GET_U(this->dyna.actor.params, 0, 6))) {
         Actor_Kill(&this->dyna.actor);
         return;
     }
@@ -449,6 +432,8 @@ void BgIceShelter_Melt(Actor_BgIceShelter* this, PlayState* play) {
 }
 
 void BgIceShelter_Update(Actor_BgIceShelter* this, PlayState* play) {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
     this->actionFunc(this, play);
 }
 
@@ -456,13 +441,13 @@ static int BgIceShelter_CsmcType(Actor_BgIceShelter* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!BgIceShelter_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_HEART; // default red ice color
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
