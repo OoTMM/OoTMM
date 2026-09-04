@@ -222,3 +222,17 @@ Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, 
     item->actor.velocity.z = 0.f;
     return item;
 }
+
+Actor_EnItem00* EnItem00_DropCustomNoInertiaEx(PlayState* play, const Vec3f* pos, XflagID xflag)
+{
+    Actor_EnItem00* item;
+
+    item = EnItem00_DropCustomEx(play, pos, xflag);
+    if (!item)
+        return NULL;
+    item->actor.speed = 0.f;
+    item->actor.velocity.x = 0.f;
+    item->actor.velocity.y = 0.f;
+    item->actor.velocity.z = 0.f;
+    return item;
+}
