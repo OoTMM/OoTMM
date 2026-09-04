@@ -4,12 +4,12 @@
     <npc location="Saria's Song" npc="SARIA_SONG" item="SONG_SARIA"/>
     <npc location="Sacred Meadow Sheik Song" npc="SHEIK_FOREST" item="SONG_TP_FOREST"/>
     <gs location="Sacred Meadow GS Night Adult" flag="0x6b" item="GS_TOKEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Entrance" slice="0x0" setup="0" room="0x0" actor="0xf" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 1" slice="0x0" setup="0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 2" slice="0x0" setup="0" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 3" slice="0x0" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 4" slice="0x0" setup="0" room="0x0" actor="0x10" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 5" slice="0x0" setup="0" room="0x0" actor="0x11" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Sacred Meadow Wonder Item Entrance" setup="0" room="0x0" actor="0xf" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 1" setup="0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 2" setup="0" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 3" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 4" setup="0" room="0x0" actor="0x10" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 5" setup="0" room="0x0" actor="0x11" item="RUPEE_BLUE"/>
     <actor>
       <match setup="0" actor="0x2"/>
       <match setup="2" actor="0x1"/>
@@ -35,7 +35,7 @@
   <scene name="Sacred Meadow Storms Grotto" id="GROTTOS">
     <scrub location="Sacred Meadow Storms Grotto Front Scrub" flag="0x05" item="POTION_GREEN"/>
     <scrub location="Sacred Meadow Storms Grotto Back Scrub" flag="0x06" item="POTION_RED"/>
-    <xflag type="hive" location="Sacred Meadow Storms Grotto Hive" slice="0x0" setup="0" room="0x21" actor="0x2" item="RUPEE_RED"/>
+    <xflag type="hive" location="Sacred Meadow Storms Grotto Hive" setup="0" room="0x21" actor="0x2" item="RUPEE_RED"/>
   </scene>
   <scene name="Sacred Meadow Fairy Fountain" id="FAIRY_FOUNTAIN">
     <actor room="0x22" actor="0x0">

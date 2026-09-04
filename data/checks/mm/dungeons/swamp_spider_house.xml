@@ -65,18 +65,26 @@
     <xflag type="crate" location="Swamp Spider House Crate Monument 4" room="0x3" actor="0x8" item="NOTHING"/>
     <xflag type="crate" location="Swamp Spider House Crate Monument 5" room="0x3" actor="0x9" item="NOTHING"/>
     <xflag type="crate" location="Swamp Spider House Crate Monument 6" room="0x3" actor="0xa" item="NOTHING"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 01" slice="0x0" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 02" slice="0x1" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 03" slice="0x2" room="0x1" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 04" slice="0x0" room="0x1" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 05" slice="0x1" room="0x1" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 06" slice="0x2" room="0x1" actor="0xb" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 07" slice="0x0" room="0x1" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 08" slice="0x1" room="0x1" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 09" slice="0x2" room="0x1" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 10" slice="0x0" room="0x1" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 11" slice="0x1" room="0x1" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 12" slice="0x2" room="0x1" actor="0xd" item="RUPEE_GREEN"/>
+    <actor room="0x1" actor="0xa">
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 01" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 02" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 03" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x1" actor="0xb">
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 04" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 05" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 06" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x1" actor="0xc">
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 07" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 08" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 09" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x1" actor="0xd">
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 10" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 11" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Swamp Spider House Wonder Item Pillars 12" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 1" room="0x4" actor="0x19" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 2" room="0x4" actor="0x1a" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Swamp Spider House Wonder Item Pots 3" room="0x4" actor="0x1b" item="RUPEE_GREEN"/>
@@ -92,9 +100,11 @@
     <xflag type="hive" location="Swamp Spider House Hive Tree Room 2" room="0x5" actor="0x7" item="MAGIC_JAR_SMALL"/>
     <xflag type="hive" location="Swamp Spider House Hive Tree Room 3" room="0x5" actor="0x9" item="NOTHING"/>
     <xflag type="soil" location="Swamp Spider House Soil Gold" room="0x2" actor="0xd" item="ARROWS_30"/>
-    <xflag type="soil" location="Swamp Spider House Soil Monument Item 1" slice="0x0" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Swamp Spider House Soil Monument Item 2" slice="0x1" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Swamp Spider House Soil Monument Item 3" slice="0x2" room="0x3" actor="0xe" item="RUPEE_BLUE"/>
+    <actor room="0x3" actor="0xe">
+      <xflag type="soil" location="Swamp Spider House Soil Monument Item 1" slice="0x0" item="RUPEE_BLUE"/>
+      <xflag type="soil" location="Swamp Spider House Soil Monument Item 2" slice="0x1" item="RUPEE_BLUE"/>
+      <xflag type="soil" location="Swamp Spider House Soil Monument Item 3" slice="0x2" item="RUPEE_BLUE"/>
+    </actor>
     <xflag type="boulder" location="Swamp Spider House Boulder" room="0x3" actor="0x12" item="NOTHING"/>
     <actor room="0x5" actor="0x0">
       <xflag type="gossip" location="Swamp Spider House Gossip Fairy" slice="0" item="FAIRY"/>

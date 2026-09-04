@@ -124,17 +124,19 @@
     <xflag type="wonder" location="Kokiri Forest Wonder Item Invisible Rupee 2" setup="0" room="0x0" actor="0x2" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Kokiri Forest Wonder Item Invisible Rupee 3" setup="0" room="0x0" actor="0x3" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Kokiri Forest Wonder Item Invisible Rupee 4" setup="0" room="0x0" actor="0x4" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Sign" slice="0x0" setup="0" room="0x0" actor="0x20" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Midair 1" slice="0x0" setup="0" room="0x0" actor="0x27" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Midair 2" slice="0x0" setup="0" room="0x0" actor="0x28" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Midair 3" slice="0x0" setup="0" room="0x0" actor="0x29" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Crawl 1" slice="0x0" setup="0" room="0x2" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Crawl 2" slice="0x0" setup="0" room="0x2" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Platforms 1" slice="0x0" setup="0" room="0x0" actor="0x21" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Kokiri Forest Wonder Item Platforms 2" slice="0x0" setup="0" room="0x0" actor="0x26" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Kokiri Forest Soil 1" slice="0x0" setup="0" room="0x0" actor="0x49" item="FAIRY"/>
-    <xflag type="soil" location="Kokiri Forest Soil 2" slice="0x1" setup="0" room="0x0" actor="0x49" item="FAIRY"/>
-    <xflag type="soil" location="Kokiri Forest Soil 3" slice="0x2" setup="0" room="0x0" actor="0x49" item="FAIRY"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Sign" setup="0" room="0x0" actor="0x20" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Midair 1" setup="0" room="0x0" actor="0x27" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Midair 2" setup="0" room="0x0" actor="0x28" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Midair 3" setup="0" room="0x0" actor="0x29" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Crawl 1" setup="0" room="0x2" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Crawl 2" setup="0" room="0x2" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Platforms 1" setup="0" room="0x0" actor="0x21" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Kokiri Forest Wonder Item Platforms 2" setup="0" room="0x0" actor="0x26" item="RUPEE_BLUE"/>
+    <actor setup="0" room="0x0" actor="0x49">
+      <xflag type="soil" location="Kokiri Forest Soil 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Kokiri Forest Soil 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Kokiri Forest Soil 3" slice="0x2" item="FAIRY"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0xf"/>
       <match setup="2" actor="0x18"/>

@@ -48,9 +48,9 @@
       <match setup="2" actor="0x01"/>
       <xflag type="pot" location="Zora Domain Pot 5" item="STICK"/>
     </actor>
-    <xflag type="hive" location="Zora Domain Hive Front 1" slice="0x0" setup="0" room="0x0" actor="0x9" item="RUPEE_RED"/>
-    <xflag type="hive" location="Zora Domain Hive Front 2" slice="0x0" setup="0" room="0x0" actor="0xa" item="RUPEE_RED"/>
-    <xflag type="hive" location="Zora Domain Hive Back" slice="0x0" setup="0" room="0x0" actor="0xb" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Front 1" setup="0" room="0x0" actor="0x9" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Front 2" setup="0" room="0x0" actor="0xa" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Back" setup="0" room="0x0" actor="0xb" item="RUPEE_RED"/>
     <actor room="0x0">
       <match setup="0" actor="0xd"/>
       <match setup="2" actor="0x1"/>

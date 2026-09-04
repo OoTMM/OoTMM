@@ -5,7 +5,7 @@
     <chest location="Termina Field Tall Grass Chest" flag="0x01" item="RUPEE_RED"/>
     <chest location="Termina Field Tree Stump Chest" flag="0x02" item="RUPEE_RED"/>
     <npc location="Termina Field Kamaro Mask" npc="MASK_KAMARO" item="MASK_KAMARO" hint="KAMARO"/>
-    <xflag type="pot" location="Termina Field Pot" slice="0x0" actor="0x40" item="FAIRY"/>
+    <xflag type="pot" location="Termina Field Pot" actor="0x40" item="FAIRY"/>
     <actor actor="0xac">
       <xflag type="grass" location="Termina Field Grass Pack 01 Grass 01" slice="0x0" item="RANDOM"/>
       <xflag type="grass" location="Termina Field Grass Pack 01 Grass 02" slice="0x1" item="RANDOM"/>
@@ -258,8 +258,8 @@
       <xflag type="grass" location="Termina Field Grass Pack 18 Grass 11" slice="0xa" item="RANDOM"/>
       <xflag type="grass" location="Termina Field Grass Pack 18 Grass 12" slice="0xb" item="RANDOM"/>
     </actor>
-    <xflag type="tree" location="Termina Field Tree 1" slice="0x0" actor="0xa8" item="NOTHING"/>
-    <xflag type="tree" location="Termina Field Tree 2" slice="0x0" actor="0xa9" item="NOTHING"/>
+    <xflag type="tree" location="Termina Field Tree 1" actor="0xa8" item="NOTHING"/>
+    <xflag type="tree" location="Termina Field Tree 2" actor="0xa9" item="NOTHING"/>
     <xflag type="rock" location="Termina Field Rock Near Ocean" actor="0x7f" item="RANDOM"/>
     <xflag type="rock" location="Termina Field Rock Wall Mountain 1" actor="0x80" item="RANDOM"/>
     <xflag type="rock" location="Termina Field Rock Wall Mountain 2" actor="0x82" item="RANDOM"/>
@@ -297,27 +297,37 @@
     <xflag type="wonder" location="Termina Field Wonder Item North Ramp" actor="0x61" item="RUPEE_BLUE"/>
     <xflag type="wonder" location="Termina Field Wonder Item West Ramp" actor="0x62" item="RUPEE_BLUE"/>
     <xflag type="wonder" location="Termina Field Wonder Item South West Ramp" actor="0x63" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Shell 1" slice="0x0" actor="0x64" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Shell 2" slice="0x1" actor="0x64" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Shell 3" slice="0x2" actor="0x64" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Shell Side 1" slice="0x0" actor="0x65" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Shell Side 2" slice="0x1" actor="0x65" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Shell Side 3" slice="0x2" actor="0x65" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Graffiti 1" slice="0x0" actor="0x66" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Graffiti 2" slice="0x1" actor="0x66" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Termina Field Wonder Item Graffiti 3" slice="0x2" actor="0x66" item="RUPEE_GREEN"/>
+    <actor actor="0x64">
+      <xflag type="wonder" location="Termina Field Wonder Item Shell 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Termina Field Wonder Item Shell 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Termina Field Wonder Item Shell 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor actor="0x65">
+      <xflag type="wonder" location="Termina Field Wonder Item Shell Side 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Termina Field Wonder Item Shell Side 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Termina Field Wonder Item Shell Side 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor actor="0x66">
+      <xflag type="wonder" location="Termina Field Wonder Item Graffiti 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Termina Field Wonder Item Graffiti 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Termina Field Wonder Item Graffiti 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
     <actor actor="0xab">
       <xflag type="butterfly" location="Termina Field Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Termina Field Butterfly 2" slice="1" item="NOTHING"/>
     </actor>
-    <xflag type="soil" location="Termina Field Soil Tree Stump" slice="0x0" actor="0x5" item="RUPEE_RED"/>
-    <xflag type="soil" location="Termina Field Soil Observatory Item 1" slice="0x0" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Termina Field Soil Observatory Item 2" slice="0x1" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Termina Field Soil Observatory Item 3" slice="0x2" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Termina Field Soil Wall Item 1" slice="0x0" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Termina Field Soil Wall Item 2" slice="0x1" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Termina Field Soil Wall Item 3" slice="0x2" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="soil" location="Termina Field Soil Pillar" slice="0x0" actor="0x8" item="ARROWS_30"/>
+    <xflag type="soil" location="Termina Field Soil Tree Stump" actor="0x5" item="RUPEE_RED"/>
+    <actor actor="0x6">
+      <xflag type="soil" location="Termina Field Soil Observatory Item 1" slice="0x0" item="RUPEE_BLUE"/>
+      <xflag type="soil" location="Termina Field Soil Observatory Item 2" slice="0x1" item="RUPEE_BLUE"/>
+      <xflag type="soil" location="Termina Field Soil Observatory Item 3" slice="0x2" item="RUPEE_BLUE"/>
+    </actor>
+    <actor actor="0x7">
+      <xflag type="soil" location="Termina Field Soil Wall Item 1" slice="0x0" item="RUPEE_BLUE"/>
+      <xflag type="soil" location="Termina Field Soil Wall Item 2" slice="0x1" item="RUPEE_BLUE"/>
+      <xflag type="soil" location="Termina Field Soil Wall Item 3" slice="0x2" item="RUPEE_BLUE"/>
+    </actor>
+    <xflag type="soil" location="Termina Field Soil Pillar" actor="0x8" item="ARROWS_30"/>
     <actor actor="0x15">
       <xflag type="gossip" location="Termina Field Gossip Fairy Southeast" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Termina Field Gossip Big Fairy Southeast" slice="1" item="FAIRY_BIG"/>
@@ -345,43 +355,43 @@
   </scene>
   <scene id="OBSERVATORY">
     <npc location="Astral Observatory Moon Tear" npc="MOON_TEAR" item="MOON_TEAR"/>
-    <xflag type="pot" location="Astral Observatory Pot 1" slice="0x0" setup="0" room="0x1" actor="0x4" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Astral Observatory Pot 2" slice="0x0" setup="0" room="0x1" actor="0x5" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Astral Observatory Pot 3" slice="0x0" setup="0" room="0x1" actor="0x6" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Astral Observatory Pot 1" setup="0" room="0x1" actor="0x4" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Astral Observatory Pot 2" setup="0" room="0x1" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Astral Observatory Pot 3" setup="0" room="0x1" actor="0x6" item="MAGIC_JAR_SMALL"/>
   </scene>
   <scene id="GROTTOS">
     <chest location="Termina Field Tall Grass Grotto" flag="0x1f" item="RUPEE_RED"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 01" slice="0x0" setup="0" room="0x3f" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 02" slice="0x0" setup="0" room="0x3f" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 03" slice="0x0" setup="0" room="0x3f" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 04" slice="0x0" setup="0" room="0x3f" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 05" slice="0x0" setup="0" room="0x3f" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 06" slice="0x0" setup="0" room="0x3f" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 07" slice="0x0" setup="0" room="0x3f" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 08" slice="0x0" setup="0" room="0x3f" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 09" slice="0x0" setup="0" room="0x3f" actor="0xc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 10" slice="0x0" setup="0" room="0x3f" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 11" slice="0x0" setup="0" room="0x3f" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 12" slice="0x0" setup="0" room="0x3f" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 13" slice="0x0" setup="0" room="0x3f" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 14" slice="0x0" setup="0" room="0x3f" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 01" setup="0" room="0x3f" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 02" setup="0" room="0x3f" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 03" setup="0" room="0x3f" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 04" setup="0" room="0x3f" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 05" setup="0" room="0x3f" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 06" setup="0" room="0x3f" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 07" setup="0" room="0x3f" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 08" setup="0" room="0x3f" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 09" setup="0" room="0x3f" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 10" setup="0" room="0x3f" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 11" setup="0" room="0x3f" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 12" setup="0" room="0x3f" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 13" setup="0" room="0x3f" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Tall Grass Grotto Grass 14" setup="0" room="0x3f" actor="0x13" item="RANDOM"/>
   </scene>
   <scene id="GROTTOS">
     <chest location="Termina Field Pillar Grotto" flag="0x1a" item="BOMBCHU"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 01" slice="0x0" setup="0" room="0x3a" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 02" slice="0x0" setup="0" room="0x3a" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 03" slice="0x0" setup="0" room="0x3a" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 04" slice="0x0" setup="0" room="0x3a" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 05" slice="0x0" setup="0" room="0x3a" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 06" slice="0x0" setup="0" room="0x3a" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 07" slice="0x0" setup="0" room="0x3a" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 08" slice="0x0" setup="0" room="0x3a" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 09" slice="0x0" setup="0" room="0x3a" actor="0xc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 10" slice="0x0" setup="0" room="0x3a" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 11" slice="0x0" setup="0" room="0x3a" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 12" slice="0x0" setup="0" room="0x3a" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 13" slice="0x0" setup="0" room="0x3a" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Pillar Grotto Grass 14" slice="0x0" setup="0" room="0x3a" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 01" setup="0" room="0x3a" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 02" setup="0" room="0x3a" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 03" setup="0" room="0x3a" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 04" setup="0" room="0x3a" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 05" setup="0" room="0x3a" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 06" setup="0" room="0x3a" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 07" setup="0" room="0x3a" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 08" setup="0" room="0x3a" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 09" setup="0" room="0x3a" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 10" setup="0" room="0x3a" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 11" setup="0" room="0x3a" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 12" setup="0" room="0x3a" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 13" setup="0" room="0x3a" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Termina Field Pillar Grotto Grass 14" setup="0" room="0x3a" actor="0x13" item="RANDOM"/>
   </scene>
   <scene id="GROTTOS">
     <chest location="Termina Field Peahat Grotto" flag="0x04" item="HEART_PIECE"/>
@@ -506,7 +516,7 @@
       <xflag type="grass" location="Termina Field Cow Grotto Grass 71" slice="0xa" item="RANDOM"/>
       <xflag type="grass" location="Termina Field Cow Grotto Grass 72" slice="0xb" item="RANDOM"/>
     </actor>
-    <xflag type="hive" location="Termina Field Cow Grotto Hive" slice="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="hive" location="Termina Field Cow Grotto Hive" actor="0x2" item="NOTHING"/>
     <actor actor="0x6">
       <xflag type="butterfly" location="Termina Field Cow Grotto Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Termina Field Cow Grotto Butterfly 2" slice="1" item="NOTHING"/>

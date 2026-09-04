@@ -85,11 +85,11 @@
       <xflag type="rock" location="Zora River Rock Circle Upper Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Zora River Rock Circle Upper Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="boulder" location="Zora River Boulder Lower 1" slice="0x0" setup="0" room="0x0" actor="0x3c" item="NOTHING"/>
-    <xflag type="boulder" location="Zora River Boulder Lower 2" slice="0x0" setup="0" room="0x0" actor="0x3e" item="NOTHING"/>
-    <xflag type="boulder" location="Zora River Boulder Lower 3" slice="0x0" setup="0" room="0x0" actor="0x3f" item="NOTHING"/>
-    <xflag type="boulder" location="Zora River Boulder Lower 4" slice="0x0" setup="0" room="0x0" actor="0x40" item="NOTHING"/>
-    <xflag type="boulder" location="Zora River Boulder Upper" slice="0x0" setup="0" room="0x0" actor="0x3d" item="NOTHING"/>
+    <xflag type="boulder" location="Zora River Boulder Lower 1" setup="0" room="0x0" actor="0x3c" item="NOTHING"/>
+    <xflag type="boulder" location="Zora River Boulder Lower 2" setup="0" room="0x0" actor="0x3e" item="NOTHING"/>
+    <xflag type="boulder" location="Zora River Boulder Lower 3" setup="0" room="0x0" actor="0x3f" item="NOTHING"/>
+    <xflag type="boulder" location="Zora River Boulder Lower 4" setup="0" room="0x0" actor="0x40" item="NOTHING"/>
+    <xflag type="boulder" location="Zora River Boulder Upper" setup="0" room="0x0" actor="0x3d" item="NOTHING"/>
     <actor setup="0" room="0x0" actor="0x37">
       <xflag type="butterfly" location="Zora River Butterfly Near Beans 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Zora River Butterfly Near Beans 2" slice="1" item="NOTHING"/>
@@ -99,44 +99,46 @@
       <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 2" slice="1" item="NOTHING"/>
       <xflag type="butterfly" location="Zora River Butterfly Near Waterfall 3" slice="2" item="NOTHING"/>
     </actor>
-    <xflag type="soil" location="Zora River Soil 1" slice="0x0" setup="0" room="0x0" actor="0x38" item="FAIRY"/>
-    <xflag type="soil" location="Zora River Soil 2" slice="0x1" setup="0" room="0x0" actor="0x38" item="FAIRY"/>
-    <xflag type="soil" location="Zora River Soil 3" slice="0x2" setup="0" room="0x0" actor="0x38" item="FAIRY"/>
+    <actor setup="0" room="0x0" actor="0x38">
+      <xflag type="soil" location="Zora River Soil 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Zora River Soil 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Zora River Soil 3" slice="0x2" item="FAIRY"/>
+    </actor>
     <xflag type="rupee" location="Zora River Rupee 1" setup="2" room="0x1" actor="0x1" item="RUPEE_RED"/>
     <xflag type="rupee" location="Zora River Rupee 2" setup="2" room="0x1" actor="0x2" item="RUPEE_RED"/>
     <xflag type="rupee" location="Zora River Rupee 3" setup="2" room="0x1" actor="0x3" item="RUPEE_RED"/>
     <xflag type="rupee" location="Zora River Rupee 4" setup="2" room="0x1" actor="0x4" item="RUPEE_RED"/>
-    <xflag type="wonder" location="Zora River Wonder Item Front 1" slice="0x0" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Front 2" slice="0x0" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Front 3" slice="0x0" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Front 4" slice="0x0" setup="0" room="0x0" actor="0x13" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 01" slice="0x0" setup="0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 02" slice="0x0" setup="0" room="0x0" actor="0x14" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 03" slice="0x0" setup="0" room="0x0" actor="0x15" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 04" slice="0x0" setup="0" room="0x0" actor="0x16" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 05" slice="0x0" setup="0" room="0x0" actor="0x17" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 06" slice="0x0" setup="0" room="0x0" actor="0x18" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 07" slice="0x0" setup="0" room="0x0" actor="0x19" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 08" slice="0x0" setup="0" room="0x0" actor="0x1a" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 09" slice="0x0" setup="0" room="0x0" actor="0x1b" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 10" slice="0x0" setup="0" room="0x0" actor="0x1c" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 11" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 12" slice="0x0" setup="0" room="0x0" actor="0x1e" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 13" slice="0x0" setup="0" room="0x0" actor="0x1f" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 14" slice="0x0" setup="0" room="0x0" actor="0x20" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 15" slice="0x0" setup="0" room="0x0" actor="0x21" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 16" slice="0x0" setup="0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 17" slice="0x0" setup="0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 18" slice="0x0" setup="0" room="0x0" actor="0x24" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 19" slice="0x0" setup="0" room="0x0" actor="0x25" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 20" slice="0x0" setup="0" room="0x0" actor="0x26" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 21" slice="0x0" setup="0" room="0x0" actor="0x27" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 22" slice="0x0" setup="0" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 23" slice="0x0" setup="0" room="0x0" actor="0x29" item="RUPEE_RED"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 24" slice="0x0" setup="0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 25" slice="0x0" setup="0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 26" slice="0x0" setup="0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Zora River Wonder Item Back 27" slice="0x0" setup="0" room="0x1" actor="0x8" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Front 1" setup="0" room="0x0" actor="0x10" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Front 2" setup="0" room="0x0" actor="0x11" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Front 3" setup="0" room="0x0" actor="0x12" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Front 4" setup="0" room="0x0" actor="0x13" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 01" setup="0" room="0x0" actor="0xf" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 02" setup="0" room="0x0" actor="0x14" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 03" setup="0" room="0x0" actor="0x15" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 04" setup="0" room="0x0" actor="0x16" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 05" setup="0" room="0x0" actor="0x17" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 06" setup="0" room="0x0" actor="0x18" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 07" setup="0" room="0x0" actor="0x19" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 08" setup="0" room="0x0" actor="0x1a" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 09" setup="0" room="0x0" actor="0x1b" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 10" setup="0" room="0x0" actor="0x1c" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 11" setup="0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 12" setup="0" room="0x0" actor="0x1e" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 13" setup="0" room="0x0" actor="0x1f" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 14" setup="0" room="0x0" actor="0x20" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 15" setup="0" room="0x0" actor="0x21" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 16" setup="0" room="0x0" actor="0x22" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 17" setup="0" room="0x0" actor="0x23" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 18" setup="0" room="0x0" actor="0x24" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 19" setup="0" room="0x0" actor="0x25" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 20" setup="0" room="0x0" actor="0x26" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 21" setup="0" room="0x0" actor="0x27" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 22" setup="0" room="0x0" actor="0x28" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 23" setup="0" room="0x0" actor="0x29" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 24" setup="0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 25" setup="0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 26" setup="0" room="0x1" actor="0x7" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Zora River Wonder Item Back 27" setup="0" room="0x1" actor="0x8" item="RUPEE_GREEN"/>
     <actor room="0x0">
       <match setup="0" actor="0x07"/>
       <match setup="2" actor="0x0a"/>
@@ -171,7 +173,7 @@
   <scene id="GROTTOS">
     <scrub location="Zora River Storms Grotto Front Scrub" flag="0x12" item="POTION_GREEN"/>
     <scrub location="Zora River Storms Grotto Back Scrub" flag="0x13" item="POTION_RED"/>
-    <xflag type="hive" location="Zora River Storms Grotto Hive" slice="0x0" setup="0" room="0x24" actor="0x2" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora River Storms Grotto Hive" setup="0" room="0x24" actor="0x2" item="RUPEE_RED"/>
   </scene>
   <scene id="FAIRY_FOUNTAIN">
     <actor room="0x21" actor="0x0">

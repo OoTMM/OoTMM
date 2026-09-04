@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checks game="mm">
   <scene id="WOODS_MYSTERY">
-    <xflag type="grass" location="Woods of Mystery Grass SW 1" slice="0x0" setup="0" room="0x0" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass SW 2" slice="0x0" setup="0" room="0x0" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass S 1" slice="0x0" setup="0" room="0x1" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass S 2" slice="0x0" setup="0" room="0x1" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass S 3" slice="0x0" setup="0" room="0x1" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass SE" slice="0x0" setup="0" room="0x2" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass W 1" slice="0x0" setup="0" room="0x3" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass W 2" slice="0x0" setup="0" room="0x3" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass Center 1" slice="0x0" setup="0" room="0x4" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass Center 2" slice="0x0" setup="0" room="0x4" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass Center 3" slice="0x0" setup="0" room="0x4" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass Center 4" slice="0x0" setup="0" room="0x4" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass E 1" slice="0x0" setup="0" room="0x5" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass E 2" slice="0x0" setup="0" room="0x5" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NW 1" slice="0x0" setup="0" room="0x6" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NW 2" slice="0x0" setup="0" room="0x6" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass N 1" slice="0x0" setup="0" room="0x7" actor="0x7" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass N 2" slice="0x0" setup="0" room="0x7" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NE 1" slice="0x0" setup="0" room="0x8" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NE 2" slice="0x0" setup="0" room="0x8" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NE 3" slice="0x0" setup="0" room="0x8" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NE 4" slice="0x0" setup="0" room="0x8" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grass NE 5" slice="0x0" setup="0" room="0x8" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass SW 1" setup="0" room="0x0" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass SW 2" setup="0" room="0x0" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass S 1" setup="0" room="0x1" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass S 2" setup="0" room="0x1" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass S 3" setup="0" room="0x1" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass SE" setup="0" room="0x2" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass W 1" setup="0" room="0x3" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass W 2" setup="0" room="0x3" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass Center 1" setup="0" room="0x4" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass Center 2" setup="0" room="0x4" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass Center 3" setup="0" room="0x4" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass Center 4" setup="0" room="0x4" actor="0x9" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass E 1" setup="0" room="0x5" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass E 2" setup="0" room="0x5" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NW 1" setup="0" room="0x6" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NW 2" setup="0" room="0x6" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass N 1" setup="0" room="0x7" actor="0x7" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass N 2" setup="0" room="0x7" actor="0x8" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NE 1" setup="0" room="0x8" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NE 2" setup="0" room="0x8" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NE 3" setup="0" room="0x8" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NE 4" setup="0" room="0x8" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grass NE 5" setup="0" room="0x8" actor="0x6" item="RANDOM"/>
   </scene>
   <scene id="GROTTOS">
     <chest location="Woods of Mystery Grotto" flag="0x1c" item="RUPEE_PURPLE"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 01" slice="0x0" setup="0" room="0x3c" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 02" slice="0x0" setup="0" room="0x3c" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 03" slice="0x0" setup="0" room="0x3c" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 04" slice="0x0" setup="0" room="0x3c" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 05" slice="0x0" setup="0" room="0x3c" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 06" slice="0x0" setup="0" room="0x3c" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 07" slice="0x0" setup="0" room="0x3c" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 08" slice="0x0" setup="0" room="0x3c" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 09" slice="0x0" setup="0" room="0x3c" actor="0xc" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 10" slice="0x0" setup="0" room="0x3c" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 11" slice="0x0" setup="0" room="0x3c" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 12" slice="0x0" setup="0" room="0x3c" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 13" slice="0x0" setup="0" room="0x3c" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Woods of Mystery Grotto Grass 14" slice="0x0" setup="0" room="0x3c" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 01" setup="0" room="0x3c" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 02" setup="0" room="0x3c" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 03" setup="0" room="0x3c" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 04" setup="0" room="0x3c" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 05" setup="0" room="0x3c" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 06" setup="0" room="0x3c" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 07" setup="0" room="0x3c" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 08" setup="0" room="0x3c" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 09" setup="0" room="0x3c" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 10" setup="0" room="0x3c" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 11" setup="0" room="0x3c" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 12" setup="0" room="0x3c" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 13" setup="0" room="0x3c" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Woods of Mystery Grotto Grass 14" setup="0" room="0x3c" actor="0x13" item="RANDOM"/>
   </scene>
 </checks>

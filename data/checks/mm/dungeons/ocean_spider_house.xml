@@ -51,14 +51,20 @@
     <xflag type="pot" location="Ocean Spider House Pot Storage Top 3" room="0x5" actor="0x10" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Ocean Spider House Pot Storage 4" room="0x5" actor="0x11" item="MAGIC_JAR_SMALL"/>
     <xflag type="crate" location="Ocean Spider House Crate" room="0x5" actor="0x4" item="NOTHING"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 1" slice="0" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 2" slice="1" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 3" slice="2" room="0x1" actor="0x0" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 4" slice="0" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 5" slice="1" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 6" slice="2" room="0x1" actor="0x1" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 7" slice="0" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 8" slice="1" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 9" slice="2" room="0x1" actor="0x2" item="RUPEE_GREEN"/>
+    <actor room="0x1" actor="0x0">
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 1" slice="0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 2" slice="1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 3" slice="2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x1" actor="0x1">
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 4" slice="0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 5" slice="1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 6" slice="2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x1" actor="0x2">
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 7" slice="0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 8" slice="1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Ocean Spider House Wonder Item Masks 9" slice="2" item="RUPEE_GREEN"/>
+    </actor>
   </scene>
 </checks>

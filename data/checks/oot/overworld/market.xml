@@ -53,8 +53,8 @@
     <xflag type="wonder" location="Market Wonder Item Day 5" actor="0x13" item="RUPEE_GREEN"/>
   </scene>
   <scene id="MARKET_CHILD_NIGHT">
-    <xflag type="wonder" location="Market Wonder Item Night 1" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Market Wonder Item Night 2" slice="0x0" setup="0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Market Wonder Item Night 1" setup="0" room="0x0" actor="0x5" item="RUPEE_BLUE"/>
+    <xflag type="wonder" location="Market Wonder Item Night 2" setup="0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
   </scene>
   <scene id="BACK_ALLEY_HOUSE">
     <xflag type="pot" location="Market Back Alley East House Pot 1" actor="0x2" item="RECOVERY_HEART"/>
@@ -63,7 +63,7 @@
   </scene>
   <scene id="BACK_ALLEY_HOUSE2">
     <npc location="Market Dog Lady HP" npc="DOG_LADY" item="HEART_PIECE"/>
-    <xflag type="crate" location="Market Dog Lady Crate" slice="0x0" setup="0" room="0x0" actor="0x2" item="RUPEE_BLUE"/>
+    <xflag type="crate" location="Market Dog Lady Crate" setup="0" room="0x0" actor="0x2" item="RUPEE_BLUE"/>
   </scene>
   <scene id="GUARD_HOUSE">
     <npc location="Market Pot House Big Poes" npc="POE_COLLECTOR" item="BOTTLE_EMPTY"/>

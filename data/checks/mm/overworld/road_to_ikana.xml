@@ -13,15 +13,15 @@
       <xflag type="rock" location="Road to Ikana Rock Circle Rock 7" slice="6" item="RANDOM"/>
       <xflag type="rock" location="Road to Ikana Rock Circle Rock 8" slice="7" item="RANDOM"/>
     </actor>
-    <xflag type="pot" location="Road to Ikana Pot" slice="0x0" actor="0x4c" item="FAIRY"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 1" slice="0x0" actor="0x3c" item="NOTHING"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 2" slice="0x0" actor="0x3e" item="NOTHING"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 3" slice="0x0" actor="0x40" item="NOTHING"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 4" slice="0x0" actor="0x41" item="NOTHING"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 5" slice="0x0" actor="0x42" item="NOTHING"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 6" slice="0x0" actor="0x43" item="NOTHING"/>
-    <xflag type="boulder" location="Road to Ikana Large Boulder 7" slice="0x0" actor="0x44" item="NOTHING"/>
-    <xflag type="boulder-red" location="Road to Ikana Red Boulder" slice="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="pot" location="Road to Ikana Pot" actor="0x4c" item="FAIRY"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 1" actor="0x3c" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 2" actor="0x3e" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 3" actor="0x40" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 4" actor="0x41" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 5" actor="0x42" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 6" actor="0x43" item="NOTHING"/>
+    <xflag type="boulder" location="Road to Ikana Large Boulder 7" actor="0x44" item="NOTHING"/>
+    <xflag type="boulder-red" location="Road to Ikana Red Boulder" actor="0x5" item="NOTHING"/>
     <actor actor="0x2">
       <xflag type="gossip" location="Road to Ikana Gossip Fairy" slice="0" item="FAIRY"/>
       <xflag type="gossip-big" location="Road to Ikana Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>

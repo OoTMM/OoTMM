@@ -105,10 +105,10 @@
       <match setup="1" actor="0x73"/>
       <xflag type="grass" location="Great Bay Coast Grass 5" item="RANDOM"/>
     </actor>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Island" slice="0x0" setup="0" room="0x0" actor="0xa" item="NUT"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 1" slice="0x0" setup="0" room="0x0" actor="0xb" item="NUT"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 2" slice="0x0" setup="0" room="0x0" actor="0xc" item="NUT"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 3" slice="0x0" setup="0" room="0x0" actor="0xd" item="NUT"/>
+    <xflag type="tree" location="Great Bay Coast Palm Tree Island" setup="0" room="0x0" actor="0xa" item="NUT"/>
+    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 1" setup="0" room="0x0" actor="0xb" item="NUT"/>
+    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 2" setup="0" room="0x0" actor="0xc" item="NUT"/>
+    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 3" setup="0" room="0x0" actor="0xd" item="NUT"/>
     <actor>
       <match setup="0" actor="0x45"/>
       <match setup="1" actor="0x56"/>

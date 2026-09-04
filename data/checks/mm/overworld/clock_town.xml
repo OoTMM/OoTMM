@@ -7,9 +7,11 @@
     <npc location="Clock Town Business Scrub" npc="SCRUB_LAND" item="DEED_LAND"/>
     <npc location="Clock Town Post Box" npc="POSTBOX" item="HEART_PIECE"/>
     <npc location="Clock Town Owl Statue" npc="OWL_CLOCK_TOWN" item="OWL_CLOCK_TOWN"/>
-    <xflag type="wonder" location="Clock Town South Wonder Item 1" slice="0x0" setup="0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town South Wonder Item 2" slice="0x1" setup="0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town South Wonder Item 3" slice="0x2" setup="0" room="0x0" actor="0x1d" item="RUPEE_GREEN"/>
+    <actor setup="0" room="0x0" actor="0x1d">
+      <xflag type="wonder" location="Clock Town South Wonder Item 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town South Wonder Item 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town South Wonder Item 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
   </scene>
   <scene id="CLOCK_TOWN_NORTH">
     <collectible location="Clock Town Tree HP" flag="0x0a" item="HEART_PIECE"/>
@@ -35,17 +37,23 @@
   <scene id="CLOCK_TOWN_EAST">
     <chest location="Clock Town Silver Rupee Chest" flag="0x0a" item="RUPEE_SILVER"/>
     <npc location="Clock Town Postman Hat" npc="MASK_POSTMAN" item="MASK_POSTMAN"/>
-    <xflag type="crate" location="Clock Town East Small Crate 1" slice="0x0" setup="0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Clock Town East Small Crate 2" slice="0x0" setup="0" room="0x0" actor="0xb" item="RECOVERY_HEART"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Target Left 1" slice="0x0" setup="0" room="0x0" actor="0x2a" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Target Left 2" slice="0x1" setup="0" room="0x0" actor="0x2a" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Target Left 3" slice="0x2" setup="0" room="0x0" actor="0x2a" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Target Right 1" slice="0x0" setup="0" room="0x0" actor="0x2b" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Target Right 2" slice="0x1" setup="0" room="0x0" actor="0x2b" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Target Right 3" slice="0x2" setup="0" room="0x0" actor="0x2b" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Basket 1" slice="0x0" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Basket 2" slice="0x1" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Clock Town East Wonder Item Basket 3" slice="0x2" setup="0" room="0x0" actor="0x2c" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Clock Town East Small Crate 1" setup="0" room="0x0" actor="0xa" item="RUPEE_GREEN"/>
+    <xflag type="crate" location="Clock Town East Small Crate 2" setup="0" room="0x0" actor="0xb" item="RECOVERY_HEART"/>
+    <actor setup="0" room="0x0" actor="0x2a">
+      <xflag type="wonder" location="Clock Town East Wonder Item Target Left 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town East Wonder Item Target Left 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town East Wonder Item Target Left 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor setup="0" room="0x0" actor="0x2b">
+      <xflag type="wonder" location="Clock Town East Wonder Item Target Right 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town East Wonder Item Target Right 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town East Wonder Item Target Right 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor setup="0" room="0x0" actor="0x2c">
+      <xflag type="wonder" location="Clock Town East Wonder Item Basket 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town East Wonder Item Basket 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Clock Town East Wonder Item Basket 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
   </scene>
   <scene id="CLOCK_TOWN_WEST">
     <npc location="Clock Town Bank Reward 1" npc="BANK_1" item="WALLET"/>
@@ -126,16 +134,18 @@
     <npc location="Stock Pot Inn Grandma HP 1" npc="GRANDMA_HEART_PIECE_1" item="HEART_PIECE"/>
     <npc location="Stock Pot Inn Grandma HP 2" npc="GRANDMA_HEART_PIECE_2" item="HEART_PIECE"/>
     <npc location="Stock Pot Inn ??? HP" npc="TOILET_HEART_PIECE" item="HEART_PIECE"/>
-    <xflag type="wonder" location="Stock Pot Inn Wonder Item 1" slice="0x0" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Stock Pot Inn Wonder Item 2" slice="0x1" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Stock Pot Inn Wonder Item 3" slice="0x2" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
+    <actor setup="0" room="0x0" actor="0xe">
+      <xflag type="wonder" location="Stock Pot Inn Wonder Item 1" slice="0x0" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Stock Pot Inn Wonder Item 2" slice="0x1" item="RUPEE_GREEN"/>
+      <xflag type="wonder" location="Stock Pot Inn Wonder Item 3" slice="0x2" item="RUPEE_GREEN"/>
+    </actor>
   </scene>
   <scene id="OBSERVATORY">
     <chest location="Astral Observatory Passage Chest" flag="0x00" item="RUPEE_SILVER"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 1" slice="0x0" room="0x0" actor="0x10" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 2" slice="0x0" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 3" slice="0x0" room="0x0" actor="0x12" item="MAGIC_JAR_SMALL"/>
-    <xflag type="pot" location="Astral Observatory Passage Pot 4" slice="0x0" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 1" room="0x0" actor="0x10" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 2" room="0x0" actor="0x11" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 3" room="0x0" actor="0x12" item="MAGIC_JAR_SMALL"/>
+    <xflag type="pot" location="Astral Observatory Passage Pot 4" room="0x0" actor="0x13" item="MAGIC_JAR_SMALL"/>
   </scene>
   <scene id="TRADING_POST">
     <shop location="Trading Post Item 1" flag="0x05" item="POTION_RED"/>
@@ -146,11 +156,11 @@
     <shop location="Trading Post Item 6" flag="0x0a" item="ARROWS_10"/>
     <shop location="Trading Post Item 7" flag="0x0b" item="NUTS_10"/>
     <shop location="Trading Post Item 8" flag="0x0c" item="ARROWS_30"/>
-    <xflag type="pot" location="Trading Post Pot" slice="0x0" setup="0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
-    <xflag type="bush" location="Trading Post Bush 1" slice="0x0" setup="0" room="0x0" actor="0x2" item="NOTHING"/>
-    <xflag type="bush" location="Trading Post Bush 2" slice="0x0" setup="0" room="0x0" actor="0x3" item="NOTHING"/>
-    <xflag type="bush" location="Trading Post Bush 3" slice="0x0" setup="0" room="0x0" actor="0x4" item="NOTHING"/>
-    <xflag type="bush" location="Trading Post Bush 4" slice="0x0" setup="0" room="0x0" actor="0x5" item="NOTHING"/>
+    <xflag type="pot" location="Trading Post Pot" setup="0" room="0x0" actor="0x8" item="RECOVERY_HEART"/>
+    <xflag type="bush" location="Trading Post Bush 1" setup="0" room="0x0" actor="0x2" item="NOTHING"/>
+    <xflag type="bush" location="Trading Post Bush 2" setup="0" room="0x0" actor="0x3" item="NOTHING"/>
+    <xflag type="bush" location="Trading Post Bush 3" setup="0" room="0x0" actor="0x4" item="NOTHING"/>
+    <xflag type="bush" location="Trading Post Bush 4" setup="0" room="0x0" actor="0x5" item="NOTHING"/>
   </scene>
   <scene id="BOMB_SHOP">
     <shop location="Bomb Shop Item 1" flag="0x00" item="BOMBS_10"/>
@@ -169,11 +179,11 @@
   </scene>
   <scene id="SWORDSMAN_SCHOOL">
     <npc location="Swordsman School HP" npc="SWORDSMAN_HEART_PIECE" item="HEART_PIECE"/>
-    <xflag type="pot" location="Swordsman School Pot 1" slice="0x0" setup="0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Swordsman School Pot 2" slice="0x0" setup="0" room="0x0" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Swordsman School Pot 3" slice="0x0" setup="0" room="0x0" actor="0x8" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Swordsman School Pot 4" slice="0x0" setup="0" room="0x0" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Swordsman School Pot 5" slice="0x0" setup="0" room="0x0" actor="0xa" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Swordsman School Pot 1" setup="0" room="0x0" actor="0x6" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Swordsman School Pot 2" setup="0" room="0x0" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Swordsman School Pot 3" setup="0" room="0x0" actor="0x8" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Swordsman School Pot 4" setup="0" room="0x0" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Swordsman School Pot 5" setup="0" room="0x0" actor="0xa" item="RUPEE_BLUE"/>
   </scene>
   <scene id="DEKU_PLAYGROUND">
     <npc location="Deku Playground Reward Any Day" npc="DEKU_PLAYGROUND_1" item="RUPEE_PURPLE"/>

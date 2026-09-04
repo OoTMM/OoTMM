@@ -81,15 +81,17 @@
     <xflag type="rupee" location="Lake Hylia Rupee 1" setup="0" actor="0x31" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lake Hylia Rupee 2" setup="0" actor="0x32" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lake Hylia Rupee 3" setup="0" actor="0x33" item="RUPEE_GREEN"/>
-    <xflag type="fairy-spot" location="Lake Hylia Island Big Fairy" slice="0x0" setup="0" actor="0x37" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Lake Hylia Island Big Fairy" setup="0" actor="0x37" item="FAIRY_BIG"/>
     <actor setup="0" actor="0x21">
       <xflag type="butterfly" location="Lake Hylia Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Lake Hylia Butterfly 2" slice="1" item="NOTHING"/>
       <xflag type="butterfly" location="Lake Hylia Butterfly 3" slice="2" item="NOTHING"/>
     </actor>
-    <xflag type="soil" location="Lake Hylia Soil 1" slice="0x0" setup="0" actor="0x27" item="FAIRY"/>
-    <xflag type="soil" location="Lake Hylia Soil 2" slice="0x1" setup="0" actor="0x27" item="FAIRY"/>
-    <xflag type="soil" location="Lake Hylia Soil 3" slice="0x2" setup="0" actor="0x27" item="FAIRY"/>
+    <actor setup="0" actor="0x27">
+      <xflag type="soil" location="Lake Hylia Soil 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Lake Hylia Soil 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Lake Hylia Soil 3" slice="0x2" item="FAIRY"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x34"/>
       <match setup="2" actor="0x02"/>
@@ -158,6 +160,6 @@
     <scrub location="Lake Hylia Grotto Left Scrub" flag="0x14" item="NUTS_5"/>
     <scrub location="Lake Hylia Grotto Center Scrub" flag="0x15" item="DEKU_SEEDS_30"/>
     <scrub location="Lake Hylia Grotto Right Scrub" flag="0x16" item="BOMBS_5"/>
-    <xflag type="hive" location="Lake Hylia Grotto Hive" slice="0x0" setup="0" room="0x2d" actor="0x3" item="RUPEE_RED"/>
+    <xflag type="hive" location="Lake Hylia Grotto Hive" setup="0" room="0x2d" actor="0x3" item="RUPEE_RED"/>
   </scene>
 </checks>

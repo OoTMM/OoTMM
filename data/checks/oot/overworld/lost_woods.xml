@@ -17,47 +17,47 @@
     <actor room="0x2">
       <match setup="0" actor="0x02"/>
       <match setup="2" actor="0x04"/>
-      <xflag type="grass" location="Lost Woods Grass 1" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass 1" item="RANDOM"/>
     </actor>
     <actor room="0x2">
       <match setup="0" actor="0x03"/>
       <match setup="2" actor="0x06"/>
-      <xflag type="grass" location="Lost Woods Grass 2" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass 2" item="RANDOM"/>
     </actor>
     <actor room="0x2">
       <match setup="0" actor="0x04"/>
       <match setup="2" actor="0x05"/>
-      <xflag type="grass" location="Lost Woods Grass 3" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass 3" item="RANDOM"/>
     </actor>
     <actor room="0x7">
       <match setup="0" actor="0x01"/>
       <match setup="2" actor="0x02"/>
-      <xflag type="grass" location="Lost Woods Grass Deep 1" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 1" item="RANDOM"/>
     </actor>
     <actor room="0x7">
       <match setup="0" actor="0x02"/>
       <match setup="2" actor="0x04"/>
-      <xflag type="grass" location="Lost Woods Grass Deep 2" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 2" item="RANDOM"/>
     </actor>
     <actor room="0x7">
       <match setup="0" actor="0x03"/>
       <match setup="2" actor="0x03"/>
-      <xflag type="grass" location="Lost Woods Grass Deep 3" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 3" item="RANDOM"/>
     </actor>
     <actor room="0x8">
       <match setup="0" actor="0x03"/>
       <match setup="2" actor="0x04"/>
-      <xflag type="grass" location="Lost Woods Grass Deep 4" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 4" item="RANDOM"/>
     </actor>
     <actor room="0x8">
       <match setup="0" actor="0x04"/>
       <match setup="2" actor="0x05"/>
-      <xflag type="grass" location="Lost Woods Grass Deep 5" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 5" item="RANDOM"/>
     </actor>
     <actor room="0x8">
       <match setup="0" actor="0x05"/>
       <match setup="2" actor="0x06"/>
-      <xflag type="grass" location="Lost Woods Grass Deep 6" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lost Woods Grass Deep 6" item="RANDOM"/>
     </actor>
     <xflag type="rupee" location="Lost Woods Rupee Arrow 1" setup="0" room="0x3" actor="0x4" item="RUPEE_GREEN"/>
     <xflag type="rupee" location="Lost Woods Rupee Arrow 2" setup="0" room="0x3" actor="0x5" item="RUPEE_GREEN"/>
@@ -72,10 +72,10 @@
       <match setup="2" actor="0x1"/>
       <xflag type="rupee" location="Lost Woods Rupee Boulder" item="RUPEE_BLUE"/>
     </actor>
-    <xflag type="fairy-spot" location="Lost Woods Pool Big Fairy" slice="0x0" setup="0" room="0x3" actor="0x3" item="FAIRY_BIG"/>
-    <xflag type="wonder" location="Lost Woods Wonder Item 1" slice="0x0" setup="0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Lost Woods Wonder Item 2" slice="0x0" setup="0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Lost Woods Wonder Item 3" slice="0x0" setup="0" room="0x1" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="fairy-spot" location="Lost Woods Pool Big Fairy" setup="0" room="0x3" actor="0x3" item="FAIRY_BIG"/>
+    <xflag type="wonder" location="Lost Woods Wonder Item 1" setup="0" room="0x1" actor="0x5" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Lost Woods Wonder Item 2" setup="0" room="0x1" actor="0x6" item="RUPEE_GREEN"/>
+    <xflag type="wonder" location="Lost Woods Wonder Item 3" setup="0" room="0x1" actor="0x7" item="RUPEE_BLUE"/>
     <actor setup="0" room="0x6" actor="0x1">
       <xflag type="butterfly" location="Lost Woods Butterfly 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Lost Woods Butterfly 2" slice="1" item="NOTHING"/>
@@ -83,15 +83,19 @@
       <xflag type="butterfly" location="Lost Woods Butterfly 4" slice="3" item="NOTHING"/>
       <xflag type="butterfly" location="Lost Woods Butterfly 5" slice="4" item="NOTHING"/>
     </actor>
-    <xflag type="soil" location="Lost Woods Soil Early 1" slice="0x0" setup="0" room="0x5" actor="0x3" item="FAIRY"/>
-    <xflag type="soil" location="Lost Woods Soil Early 2" slice="0x1" setup="0" room="0x5" actor="0x3" item="FAIRY"/>
-    <xflag type="soil" location="Lost Woods Soil Early 3" slice="0x2" setup="0" room="0x5" actor="0x3" item="FAIRY"/>
-    <xflag type="soil" location="Lost Woods Soil Late 1" slice="0x0" setup="0" room="0x6" actor="0x5" item="FAIRY"/>
-    <xflag type="soil" location="Lost Woods Soil Late 2" slice="0x1" setup="0" room="0x6" actor="0x5" item="FAIRY"/>
-    <xflag type="soil" location="Lost Woods Soil Late 3" slice="0x2" setup="0" room="0x6" actor="0x5" item="FAIRY"/>
-    <xflag type="boulder" location="Lost Woods Boulder Early" slice="0x0" setup="0" room="0x2" actor="0x6" item="NOTHING"/>
-    <xflag type="boulder" location="Lost Woods Boulder Deep 1" slice="0x0" setup="0" room="0x7" actor="0x5" item="NOTHING"/>
-    <xflag type="boulder" location="Lost Woods Boulder Deep 2" slice="0x0" setup="0" room="0x8" actor="0x8" item="NOTHING"/>
+    <actor setup="0" room="0x5" actor="0x3">
+      <xflag type="soil" location="Lost Woods Soil Early 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Lost Woods Soil Early 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Lost Woods Soil Early 3" slice="0x2" item="FAIRY"/>
+    </actor>
+    <actor setup="0" room="0x6" actor="0x5">
+      <xflag type="soil" location="Lost Woods Soil Late 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Lost Woods Soil Late 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Lost Woods Soil Late 3" slice="0x2" item="FAIRY"/>
+    </actor>
+    <xflag type="boulder" location="Lost Woods Boulder Early" setup="0" room="0x2" actor="0x6" item="NOTHING"/>
+    <xflag type="boulder" location="Lost Woods Boulder Deep 1" setup="0" room="0x7" actor="0x5" item="NOTHING"/>
+    <xflag type="boulder" location="Lost Woods Boulder Deep 2" setup="0" room="0x8" actor="0x8" item="NOTHING"/>
     <actor room="0x5">
       <match setup="0" actor="0x4"/>
       <match setup="2" actor="0x1"/>
@@ -102,8 +106,8 @@
   <scene name="Lost Woods Scrub Grotto" id="GROTTOS">
     <scrub location="Lost Woods Grotto Scrub Nuts Upgrade" flag="0x03" item="NUT_UPGRADE"/>
     <scrub location="Lost Woods Grotto Scrub Back" flag="0x04" item="DEKU_SEEDS_30"/>
-    <xflag type="fairy-spot" location="Lost Woods Grotto Scrub Big Fairy" slice="0x0" setup="0" room="0x6" actor="0x0" item="FAIRY_BIG"/>
-    <xflag type="hive" location="Lost Woods Grotto Scrub Hive" slice="0x0" setup="0" room="0x6" actor="0x3" item="RUPEE_RED"/>
+    <xflag type="fairy-spot" location="Lost Woods Grotto Scrub Big Fairy" setup="0" room="0x6" actor="0x0" item="FAIRY_BIG"/>
+    <xflag type="hive" location="Lost Woods Grotto Scrub Hive" setup="0" room="0x6" actor="0x3" item="RUPEE_RED"/>
   </scene>
   <scene name="Lost Woods Generic Grotto" id="GROTTOS" room="0x34">
     <chest location="Lost Woods Grotto Generic" flag="0x14" item="RUPEE_BLUE"/>

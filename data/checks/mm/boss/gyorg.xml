@@ -3,13 +3,13 @@
   <scene id="LAIR_GYORG">
     <collectible location="Great Bay Temple Boss HC" flag="0x1f" item="HEART_CONTAINER"/>
     <npc location="Great Bay Temple Boss" npc="REMAINS_GYORG" item="REMAINS_GYORG"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot 1" slice="0x0" setup="0" room="0x0" actor="0x1" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot 2" slice="0x0" setup="0" room="0x0" actor="0x2" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot 3" slice="0x0" setup="0" room="0x0" actor="0x3" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot 4" slice="0x0" setup="0" room="0x0" actor="0x4" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 1" slice="0x0" setup="0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 2" slice="0x0" setup="0" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 3" slice="0x0" setup="0" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 4" slice="0x0" setup="0" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot 1" setup="0" room="0x0" actor="0x1" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot 2" setup="0" room="0x0" actor="0x2" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot 3" setup="0" room="0x0" actor="0x3" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot 4" setup="0" room="0x0" actor="0x4" item="ARROWS_10"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 1" setup="0" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 2" setup="0" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 3" setup="0" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="pot" location="Great Bay Temple Boss Pot Underwater 4" setup="0" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
   </scene>
 </checks>

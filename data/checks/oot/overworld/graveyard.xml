@@ -18,7 +18,7 @@
     <collectible location="Graveyard Crate HP" flag="0x04" item="HEART_PIECE"/>
     <gs location="Graveyard GS Soil" flag="0x80" item="GS_TOKEN"/>
     <gs location="Graveyard GS Wall" flag="0x87" item="GS_TOKEN"/>
-    <xflag type="crate" location="Graveyard Crate" slice="0x0" setup="0" room="0x1" actor="0x15" item="NOTHING"/>
+    <xflag type="crate" location="Graveyard Crate" setup="0" room="0x1" actor="0x15" item="NOTHING"/>
     <actor room="0x1">
       <match setup="0" actor="0x10"/>
       <match setup="1" actor="0x14"/>
@@ -37,9 +37,11 @@
       <xflag type="grass" location="Graveyard Grass 11" slice="0xa" item="RANDOM"/>
       <xflag type="grass" location="Graveyard Grass 12" slice="0xb" item="RANDOM"/>
     </actor>
-    <xflag type="soil" location="Graveyard Soil 1" slice="0x0" setup="0" room="0x1" actor="0x12" item="FAIRY"/>
-    <xflag type="soil" location="Graveyard Soil 2" slice="0x1" setup="0" room="0x1" actor="0x12" item="FAIRY"/>
-    <xflag type="soil" location="Graveyard Soil 3" slice="0x2" setup="0" room="0x1" actor="0x12" item="FAIRY"/>
+    <actor setup="0" room="0x1" actor="0x12">
+      <xflag type="soil" location="Graveyard Soil 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Graveyard Soil 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Graveyard Soil 3" slice="0x2" item="FAIRY"/>
+    </actor>
     <actor room="0x01">
       <match setup="0" actor="0x2"/>
       <match setup="1" actor="0x32"/>
@@ -55,7 +57,7 @@
   <scene id="TOMB_ROYAL">
     <npc location="Graveyard Royal Tomb Song" npc="ROYAL_TOMB_SONG" item="SONG_SUN"/>
     <chest location="Graveyard Royal Tomb Chest" flag="0x00" item="BOMBS_5"/>
-    <xflag type="fairy-spot" location="Graveyard Royal Tomb Big Fairy" slice="0x0" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
+    <xflag type="fairy-spot" location="Graveyard Royal Tomb Big Fairy" setup="0" room="0x0" actor="0x8" item="FAIRY_BIG"/>
   </scene>
   <scene id="TOMB_FAIRY">
     <chest location="Graveyard Fairy Tomb" flag="0x00" item="SHIELD_HYLIAN"/>

@@ -2,11 +2,11 @@
 <checks game="mm">
   <scene id="IKANA_GRAVEYARD">
     <chest location="Ikana Graveyard Captain Mask" flag="0x00" item="MASK_CAPTAIN"/>
-    <xflag type="grass" location="Ikana Graveyard Grass 1" slice="0x0" room="0x0" actor="0x1f" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Graveyard Grass 2" slice="0x0" room="0x0" actor="0x27" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Graveyard Grass 3" slice="0x0" room="0x0" actor="0x28" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Graveyard Grass 4" slice="0x0" room="0x0" actor="0x29" item="RANDOM"/>
-    <xflag type="grass" location="Ikana Graveyard Grass 5" slice="0x0" room="0x0" actor="0x2a" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 1" room="0x0" actor="0x1f" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 2" room="0x0" actor="0x27" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 3" room="0x0" actor="0x28" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 4" room="0x0" actor="0x29" item="RANDOM"/>
+    <xflag type="grass" location="Ikana Graveyard Grass 5" room="0x0" actor="0x2a" item="RANDOM"/>
     <actor room="0x1" actor="0x2f">
       <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 1" slice="0" item="RANDOM"/>
       <xflag type="grass" location="Ikana Graveyard Grass Pack Grass 2" slice="1" item="RANDOM"/>

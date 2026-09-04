@@ -63,19 +63,21 @@
       <xflag type="rupee" location="Death Mountain Crater Rupee Adult 6" slice="5" item="RUPEE_GREEN"/>
       <xflag type="rupee" location="Death Mountain Crater Rupee Adult 7" slice="6" item="RUPEE_RED"/>
     </actor>
-    <xflag type="boulder" location="Death Mountain Crater Boulder 1" slice="0x0" setup="0" room="0x1" actor="0x23" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Crater Boulder 2" slice="0x0" setup="0" room="0x1" actor="0x24" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Crater Boulder 3" slice="0x0" setup="0" room="0x1" actor="0x25" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Grotto" slice="0x0" setup="0" room="0x1" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 1" slice="0x0" setup="0" room="0x1" actor="0xc" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 2" slice="0x0" setup="0" room="0x1" actor="0xd" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Shortcut" slice="0x0" setup="0" room="0x1" actor="0xe" item="NOTHING"/>
+    <xflag type="boulder" location="Death Mountain Crater Boulder 1" setup="0" room="0x1" actor="0x23" item="NOTHING"/>
+    <xflag type="boulder" location="Death Mountain Crater Boulder 2" setup="0" room="0x1" actor="0x24" item="NOTHING"/>
+    <xflag type="boulder" location="Death Mountain Crater Boulder 3" setup="0" room="0x1" actor="0x25" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Grotto" setup="0" room="0x1" actor="0xb" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 1" setup="0" room="0x1" actor="0xc" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 2" setup="0" room="0x1" actor="0xd" item="NOTHING"/>
+    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Shortcut" setup="0" room="0x1" actor="0xe" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 1" setup="0" room="0x1" actor="0x1b" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 2" setup="0" room="0x1" actor="0x1c" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 3" setup="0" room="0x1" actor="0x1d" item="NOTHING"/>
-    <xflag type="soil" location="Death Mountain Crater Soil 1" slice="0x0" setup="0" room="0x1" actor="0x21" item="FAIRY"/>
-    <xflag type="soil" location="Death Mountain Crater Soil 2" slice="0x1" setup="0" room="0x1" actor="0x21" item="FAIRY"/>
-    <xflag type="soil" location="Death Mountain Crater Soil 3" slice="0x2" setup="0" room="0x1" actor="0x21" item="FAIRY"/>
+    <actor setup="0" room="0x1" actor="0x21">
+      <xflag type="soil" location="Death Mountain Crater Soil 1" slice="0x0" item="FAIRY"/>
+      <xflag type="soil" location="Death Mountain Crater Soil 2" slice="0x1" item="FAIRY"/>
+      <xflag type="soil" location="Death Mountain Crater Soil 3" slice="0x2" item="FAIRY"/>
+    </actor>
     <actor room="0x1">
       <match setup="0" actor="0x9"/>
       <match setup="2" actor="0x1"/>
@@ -85,12 +87,12 @@
   </scene>
   <scene id="GROTTOS" room="0x3a">
     <chest location="Death Mountain Crater Grotto" flag="0x1a" item="BOMBS_20"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 1" slice="0x0" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 2" slice="0x0" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 3" slice="0x0" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Death Mountain Crater Grotto Grass 4" slice="0x0" actor="0x5" item="RANDOM"/>
-    <xflag type="hive" location="Death Mountain Crater Grotto Hive 1" slice="0x0" actor="0x7" item="RUPEE_BLUE"/>
-    <xflag type="hive" location="Death Mountain Crater Grotto Hive 2" slice="0x0" actor="0x8" item="RUPEE_RED"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 1" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 2" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 3" actor="0x4" item="RANDOM"/>
+    <xflag type="grass" location="Death Mountain Crater Grotto Grass 4" actor="0x5" item="RANDOM"/>
+    <xflag type="hive" location="Death Mountain Crater Grotto Hive 1" actor="0x7" item="RUPEE_BLUE"/>
+    <xflag type="hive" location="Death Mountain Crater Grotto Hive 2" actor="0x8" item="RUPEE_RED"/>
     <actor actor="0x6">
       <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 1" slice="0x0" item="FAIRY"/>
       <xflag type="butterfly" location="Death Mountain Crater Grotto Butterfly 2" slice="0x1" item="NOTHING"/>

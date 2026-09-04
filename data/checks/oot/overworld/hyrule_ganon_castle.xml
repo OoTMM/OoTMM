@@ -64,7 +64,7 @@
   <scene id="CASTLE_COURTYARD">
     <npc location="Zelda's Letter" npc="ZELDA_LETTER" item="ZELDA_LETTER"/>
     <npc location="Zelda's Song" npc="ZELDA_SONG" item="SONG_ZELDA"/>
-    <xflag type="wonder" location="Castle Courtyard Wonder Item" slice="0x0" setup="0" room="0x0" actor="0x5" item="RUPEE_RED"/>
+    <xflag type="wonder" location="Castle Courtyard Wonder Item" setup="0" room="0x0" actor="0x5" item="RUPEE_RED"/>
   </scene>
   <scene id="GREAT_FAIRY_FOUNTAIN_SPELLS">
     <npc location="Great Fairy Din's Fire" npc="FAIRY_SPELL_FIRE" item="SPELL_FIRE"/>
