@@ -2,24 +2,28 @@
 <checks game="mm">
   <scene id="ROAD_SOUTHERN_SWAMP">
     <collectible location="Road to Southern Swamp HP" flag="0x01" item="HEART_PIECE"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 01" slice="0x0" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 02" slice="0x1" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 03" slice="0x2" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 04" slice="0x3" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 05" slice="0x4" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 06" slice="0x5" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 07" slice="0x6" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 08" slice="0x7" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 09" slice="0x8" actor="0x23" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 01" slice="0x0" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 02" slice="0x1" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 03" slice="0x2" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 04" slice="0x3" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 05" slice="0x4" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 06" slice="0x5" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 07" slice="0x6" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 08" slice="0x7" actor="0x24" item="RANDOM"/>
-    <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 09" slice="0x8" actor="0x24" item="RANDOM"/>
+    <actor actor="0x23">
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 1 Grass 09" slice="0x8" item="RANDOM"/>
+    </actor>
+    <actor actor="0x24">
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Road to Southern Swamp Grass Pack 2 Grass 09" slice="0x8" item="RANDOM"/>
+    </actor>
     <xflag type="grass" location="Road to Southern Swamp Grass 1" actor="0x2f" item="RANDOM"/>
     <xflag type="grass" location="Road to Southern Swamp Grass 2" actor="0x30" item="RANDOM"/>
     <actor actor="0x28">

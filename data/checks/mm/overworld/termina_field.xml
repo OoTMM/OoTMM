@@ -6,222 +6,258 @@
     <chest location="Termina Field Tree Stump Chest" flag="0x02" item="RUPEE_RED"/>
     <npc location="Termina Field Kamaro Mask" npc="MASK_KAMARO" item="MASK_KAMARO" hint="KAMARO"/>
     <xflag type="pot" location="Termina Field Pot" slice="0x0" actor="0x40" item="FAIRY"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 01" slice="0x0" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 02" slice="0x1" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 03" slice="0x2" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 04" slice="0x3" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 05" slice="0x4" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 06" slice="0x5" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 07" slice="0x6" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 08" slice="0x7" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 09" slice="0x8" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 10" slice="0x9" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 11" slice="0xa" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 01 Grass 12" slice="0xb" actor="0xac" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 01" slice="0x0" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 02" slice="0x1" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 03" slice="0x2" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 04" slice="0x3" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 05" slice="0x4" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 06" slice="0x5" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 07" slice="0x6" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 08" slice="0x7" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 09" slice="0x8" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 10" slice="0x9" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 11" slice="0xa" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 02 Grass 12" slice="0xb" actor="0xad" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 01" slice="0x0" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 02" slice="0x1" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 03" slice="0x2" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 04" slice="0x3" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 05" slice="0x4" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 06" slice="0x5" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 07" slice="0x6" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 08" slice="0x7" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 09" slice="0x8" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 10" slice="0x9" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 11" slice="0xa" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 03 Grass 12" slice="0xb" actor="0xae" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 01" slice="0x0" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 02" slice="0x1" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 03" slice="0x2" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 04" slice="0x3" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 05" slice="0x4" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 06" slice="0x5" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 07" slice="0x6" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 08" slice="0x7" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 09" slice="0x8" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 10" slice="0x9" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 11" slice="0xa" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 04 Grass 12" slice="0xb" actor="0xaf" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 01" slice="0x0" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 02" slice="0x1" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 03" slice="0x2" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 04" slice="0x3" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 05" slice="0x4" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 06" slice="0x5" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 07" slice="0x6" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 08" slice="0x7" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 09" slice="0x8" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 10" slice="0x9" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 11" slice="0xa" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 05 Grass 12" slice="0xb" actor="0xb0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 01" slice="0x0" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 02" slice="0x1" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 03" slice="0x2" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 04" slice="0x3" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 05" slice="0x4" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 06" slice="0x5" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 07" slice="0x6" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 08" slice="0x7" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 09" slice="0x8" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 10" slice="0x9" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 11" slice="0xa" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 06 Grass 12" slice="0xb" actor="0xb1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 01" slice="0x0" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 02" slice="0x1" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 03" slice="0x2" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 04" slice="0x3" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 05" slice="0x4" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 06" slice="0x5" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 07" slice="0x6" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 08" slice="0x7" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 09" slice="0x8" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 10" slice="0x9" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 11" slice="0xa" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 07 Grass 12" slice="0xb" actor="0xb2" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 01" slice="0x0" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 02" slice="0x1" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 03" slice="0x2" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 04" slice="0x3" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 05" slice="0x4" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 06" slice="0x5" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 07" slice="0x6" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 08" slice="0x7" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 09" slice="0x8" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 10" slice="0x9" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 11" slice="0xa" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 08 Grass 12" slice="0xb" actor="0xb3" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 01" slice="0x0" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 02" slice="0x1" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 03" slice="0x2" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 04" slice="0x3" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 05" slice="0x4" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 06" slice="0x5" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 07" slice="0x6" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 08" slice="0x7" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 09" slice="0x8" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 10" slice="0x9" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 11" slice="0xa" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 09 Grass 12" slice="0xb" actor="0xb4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 01" slice="0x0" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 02" slice="0x1" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 03" slice="0x2" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 04" slice="0x3" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 05" slice="0x4" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 06" slice="0x5" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 07" slice="0x6" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 08" slice="0x7" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 09" slice="0x8" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 10" slice="0x9" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 11" slice="0xa" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 10 Grass 12" slice="0xb" actor="0xb5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 01" slice="0x0" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 02" slice="0x1" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 03" slice="0x2" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 04" slice="0x3" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 05" slice="0x4" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 06" slice="0x5" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 07" slice="0x6" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 08" slice="0x7" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 09" slice="0x8" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 10" slice="0x9" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 11" slice="0xa" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 11 Grass 12" slice="0xb" actor="0xb6" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 01" slice="0x0" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 02" slice="0x1" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 03" slice="0x2" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 04" slice="0x3" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 05" slice="0x4" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 06" slice="0x5" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 07" slice="0x6" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 08" slice="0x7" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 09" slice="0x8" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 10" slice="0x9" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 11" slice="0xa" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 12 Grass 12" slice="0xb" actor="0xb7" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 01" slice="0x0" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 02" slice="0x1" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 03" slice="0x2" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 04" slice="0x3" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 05" slice="0x4" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 06" slice="0x5" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 07" slice="0x6" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 08" slice="0x7" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 09" slice="0x8" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 10" slice="0x9" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 11" slice="0xa" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 13 Grass 12" slice="0xb" actor="0xb8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 01" slice="0x0" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 02" slice="0x1" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 03" slice="0x2" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 04" slice="0x3" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 05" slice="0x4" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 06" slice="0x5" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 07" slice="0x6" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 08" slice="0x7" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 09" slice="0x8" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 10" slice="0x9" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 11" slice="0xa" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 14 Grass 12" slice="0xb" actor="0xb9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 01" slice="0x0" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 02" slice="0x1" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 03" slice="0x2" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 04" slice="0x3" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 05" slice="0x4" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 06" slice="0x5" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 07" slice="0x6" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 08" slice="0x7" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 09" slice="0x8" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 10" slice="0x9" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 11" slice="0xa" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 15 Grass 12" slice="0xb" actor="0xba" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 01" slice="0x0" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 02" slice="0x1" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 03" slice="0x2" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 04" slice="0x3" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 05" slice="0x4" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 06" slice="0x5" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 07" slice="0x6" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 08" slice="0x7" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 09" slice="0x8" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 10" slice="0x9" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 11" slice="0xa" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 16 Grass 12" slice="0xb" actor="0xbb" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 01" slice="0x0" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 02" slice="0x1" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 03" slice="0x2" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 04" slice="0x3" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 05" slice="0x4" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 06" slice="0x5" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 07" slice="0x6" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 08" slice="0x7" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 09" slice="0x8" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 10" slice="0x9" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 11" slice="0xa" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 17 Grass 12" slice="0xb" actor="0xbc" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 01" slice="0x0" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 02" slice="0x1" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 03" slice="0x2" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 04" slice="0x3" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 05" slice="0x4" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 06" slice="0x5" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 07" slice="0x6" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 08" slice="0x7" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 09" slice="0x8" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 10" slice="0x9" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 11" slice="0xa" actor="0xbd" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Grass Pack 18 Grass 12" slice="0xb" actor="0xbd" item="RANDOM"/>
+    <actor actor="0xac">
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 01 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xad">
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 02 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xae">
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 03 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xaf">
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 04 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb0">
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 05 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb1">
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 06 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb2">
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 07 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb3">
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 08 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb4">
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 09 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb5">
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 10 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb6">
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 11 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb7">
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 12 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb8">
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 13 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xb9">
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 14 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xba">
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 15 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xbb">
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 16 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xbc">
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 17 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0xbd">
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Grass Pack 18 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
     <xflag type="tree" location="Termina Field Tree 1" slice="0x0" actor="0xa8" item="NOTHING"/>
     <xflag type="tree" location="Termina Field Tree 2" slice="0x0" actor="0xa9" item="NOTHING"/>
     <xflag type="rock" location="Termina Field Rock Near Ocean" actor="0x7f" item="RANDOM"/>
@@ -349,18 +385,20 @@
   </scene>
   <scene id="GROTTOS">
     <chest location="Termina Field Peahat Grotto" flag="0x04" item="HEART_PIECE"/>
-    <xflag type="grass" location="Peahat Grotto Grass 01" slice="0x0" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 02" slice="0x1" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 03" slice="0x2" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 04" slice="0x3" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 05" slice="0x4" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 06" slice="0x5" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 07" slice="0x6" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 08" slice="0x7" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 09" slice="0x8" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 10" slice="0x9" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 11" slice="0xa" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Peahat Grotto Grass 12" slice="0xb" setup="0" room="0xd" actor="0x1" item="RANDOM"/>
+    <actor setup="0" room="0xd" actor="0x1">
+      <xflag type="grass" location="Peahat Grotto Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Peahat Grotto Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <chest location="Termina Field Dodongo Grotto" flag="0x00" item="HEART_PIECE"/>
@@ -384,78 +422,90 @@
   <scene id="GROTTOS" room="0xa">
     <cow location="Termina Field Cow Front" flag="0x13" item="MILK"/>
     <cow location="Termina Field Cow Back" flag="0x14" item="MILK"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 01" slice="0x0" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 02" slice="0x1" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 03" slice="0x2" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 04" slice="0x3" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 05" slice="0x4" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 06" slice="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 07" slice="0x6" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 08" slice="0x7" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 09" slice="0x8" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 10" slice="0x9" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 11" slice="0xa" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 12" slice="0xb" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 13" slice="0x0" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 14" slice="0x1" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 15" slice="0x2" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 16" slice="0x3" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 17" slice="0x4" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 18" slice="0x5" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 19" slice="0x6" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 20" slice="0x7" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 21" slice="0x8" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 22" slice="0x9" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 23" slice="0xa" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 24" slice="0xb" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 25" slice="0x0" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 26" slice="0x1" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 27" slice="0x2" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 28" slice="0x3" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 29" slice="0x4" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 30" slice="0x5" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 31" slice="0x6" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 32" slice="0x7" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 33" slice="0x8" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 34" slice="0x9" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 35" slice="0xa" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 36" slice="0xb" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 37" slice="0x0" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 38" slice="0x1" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 39" slice="0x2" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 40" slice="0x3" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 41" slice="0x4" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 42" slice="0x5" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 43" slice="0x6" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 44" slice="0x7" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 45" slice="0x8" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 46" slice="0x9" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 47" slice="0xa" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 48" slice="0xb" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 49" slice="0x0" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 50" slice="0x1" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 51" slice="0x2" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 52" slice="0x3" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 53" slice="0x4" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 54" slice="0x5" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 55" slice="0x6" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 56" slice="0x7" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 57" slice="0x8" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 58" slice="0x9" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 59" slice="0xa" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 60" slice="0xb" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 61" slice="0x0" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 62" slice="0x1" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 63" slice="0x2" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 64" slice="0x3" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 65" slice="0x4" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 66" slice="0x5" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 67" slice="0x6" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 68" slice="0x7" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 69" slice="0x8" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 70" slice="0x9" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 71" slice="0xa" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Termina Field Cow Grotto Grass 72" slice="0xb" actor="0x9" item="RANDOM"/>
+    <actor actor="0x0">
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x1">
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 13" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 14" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 15" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 16" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 17" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 18" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 19" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 20" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 21" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 22" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 23" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 24" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x4">
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 25" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 26" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 27" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 28" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 29" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 30" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 31" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 32" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 33" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 34" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 35" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 36" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x5">
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 37" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 38" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 39" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 40" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 41" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 42" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 43" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 44" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 45" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 46" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 47" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 48" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x8">
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 49" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 50" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 51" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 52" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 53" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 54" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 55" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 56" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 57" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 58" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 59" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 60" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x9">
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 61" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 62" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 63" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 64" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 65" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 66" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 67" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 68" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 69" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 70" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 71" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Termina Field Cow Grotto Grass 72" slice="0xb" item="RANDOM"/>
+    </actor>
     <xflag type="hive" location="Termina Field Cow Grotto Hive" slice="0x0" actor="0x2" item="NOTHING"/>
     <actor actor="0x6">
       <xflag type="butterfly" location="Termina Field Cow Grotto Butterfly 1" slice="0" item="FAIRY"/>

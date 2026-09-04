@@ -171,36 +171,40 @@
     <shop location="Goron Shop Item 2" flag="0x11" item="ARROWS_10"/>
     <shop location="Goron Shop Item 3" flag="0x12" item="POTION_RED"/>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x5">
     <chest location="Lone Peak Shrine Lens Chest" flag="0x01" item="LENS"/>
     <chest location="Lone Peak Shrine Boulder Chest" flag="0x06" item="RUPEE_RED"/>
     <chest location="Lone Peak Shrine Invisible Chest" flag="0x03" item="RUPEE_PURPLE"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 01" slice="0x0" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 02" slice="0x1" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 03" slice="0x2" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 04" slice="0x3" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 05" slice="0x4" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 06" slice="0x5" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 07" slice="0x6" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 08" slice="0x7" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 09" slice="0x8" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 10" slice="0x9" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 11" slice="0xa" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 12" slice="0xb" setup="0" room="0x5" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 01" slice="0x0" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 02" slice="0x1" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 03" slice="0x2" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 04" slice="0x3" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 05" slice="0x4" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 06" slice="0x5" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 07" slice="0x6" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 08" slice="0x7" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 09" slice="0x8" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 10" slice="0x9" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 11" slice="0xa" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 12" slice="0xb" setup="0" room="0x5" actor="0x2" item="RANDOM"/>
-    <xflag type="boulder" location="Lone Peak Shrine Large Boulder 1" slice="0x0" setup="0" room="0x5" actor="0x6" item="NOTHING"/>
-    <xflag type="boulder" location="Lone Peak Shrine Large Boulder 2" slice="0x0" setup="0" room="0x5" actor="0x7" item="NOTHING"/>
-    <xflag type="boulder" location="Lone Peak Shrine Large Boulder 3" slice="0x0" setup="0" room="0x5" actor="0x9" item="NOTHING"/>
+    <actor actor="0x0">
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 1 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x2">
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Lone Peak Shrine Grass Pack 2 Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <xflag type="boulder" location="Lone Peak Shrine Large Boulder 1" actor="0x6" item="NOTHING"/>
+    <xflag type="boulder" location="Lone Peak Shrine Large Boulder 2" actor="0x7" item="NOTHING"/>
+    <xflag type="boulder" location="Lone Peak Shrine Large Boulder 3" actor="0x9" item="NOTHING"/>
   </scene>
 </checks>
