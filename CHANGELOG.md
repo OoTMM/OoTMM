@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - Fix Deku Seeds pickups from shuffled locations having text in Majora's Mask when playing with slingshot in said game when they shouldn't.
 - Fix some logic for warp songs, eggs, and age change that could create impossible seeds in rare circumstances.
 - Logic for when the cows in Romani Ranch can be interacted with has been fixed.
+- Fix logic for Market grass.
 
 ## [32.3] - 2026-08-23
 
