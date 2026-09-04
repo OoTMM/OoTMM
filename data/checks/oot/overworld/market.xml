@@ -45,7 +45,11 @@
       <match scene="MARKET_CHILD_NIGHT" actor="0x0e"/>
       <xflag type="grass" location="Market Grass 8" item="RANDOM"/>
     </actor>
-    <xflag type="tree" location="Market Tree" actor="0xe" item="NOTHING"/>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x0e"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x04"/>
+      <xflag type="tree" location="Market Tree" item="NOTHING"/>
+    </actor>
     <xflag type="wonder" location="Market Wonder Item Day 1" actor="0xf" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Market Wonder Item Day 2" actor="0x10" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Market Wonder Item Day 3" actor="0x11" item="RUPEE_GREEN"/>

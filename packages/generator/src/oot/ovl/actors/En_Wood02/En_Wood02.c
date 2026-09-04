@@ -199,42 +199,6 @@ static void EnWood02_AliasBush(Xflag* xf)
     }
 }
 
-static void EnWood02_AliasTree(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_MARKET_CHILD_NIGHT:
-        xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
-        xf->id = 14;
-        break;
-    case SCE_OOT_HYRULE_FIELD:
-        if (xf->setupId == 2 && xf->id != 66)
-        {
-            xf->setupId = 1;
-            switch (xf->id)
-            {
-            case 38: xf->id = 33; break;
-            case 39: xf->id = 34; break;
-            case 40: xf->id = 35; break;
-            case 41: xf->id = 32; break;
-            case 42: xf->id = 31; break;
-            case 43: xf->id = 29; break;
-            case 44: xf->id = 36; break;
-            case 45: xf->id = 37; break;
-            case 46: xf->id = 49; break;
-            case 60: xf->id = 30; break;
-            case 61: xf->id = 62; break;
-            case 62: xf->id = 63; break;
-            case 63: xf->id = 64; break;
-            case 64: xf->id = 65; break;
-            case 65: xf->id = 61; break;
-            default: Xflag_Clear(xf); break;
-            }
-        }
-        break;
-    }
-}
-
 void EnWood02_Init(Actor* thisx, PlayState* play2) {
     s16 spawnType;
     f32 actorScale;
@@ -247,9 +211,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
 
     if (Xflag_Init(&this->xflag, thisx, play))
     {
-        if (EnWood02_IsTree(this))
-            EnWood02_AliasTree(&this->xflag);
-        else
+        if (!EnWood02_IsTree(this))
             EnWood02_AliasBush(&this->xflag);
     }
 
