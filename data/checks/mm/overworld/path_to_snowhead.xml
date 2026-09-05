@@ -2,21 +2,37 @@
 <checks game="mm">
   <scene id="PATH_SNOWHEAD">
     <collectible location="Path to Snowhead HP" flag="0x08" item="HEART_PIECE"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 1" setup="0" room="0x0" actor="0x1e" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 2" setup="0" room="0x0" actor="0x1f" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 1" setup="0" room="0x0" actor="0x1c" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 2" setup="0" room="0x0" actor="0x1d" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 1" setup="0" room="0x0" actor="0x9" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 2" setup="0" room="0x0" actor="0xa" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 3" setup="0" room="0x0" actor="0xb" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 1" setup="1" room="0x0" actor="0x5" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 2" setup="1" room="0x0" actor="0x6" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 1" setup="1" room="0x0" actor="0x7" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 2" setup="1" room="0x0" actor="0x8" item="MAGIC_JAR_LARGE"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree End 1" setup="0" room="0x0" actor="0x16" item="NOTHING"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree End 2" setup="0" room="0x0" actor="0x17" item="NOTHING"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree End 3" setup="0" room="0x0" actor="0x18" item="NOTHING"/>
-    <xflag type="tree" location="Path to Snowhead Snow Tree Entrance" setup="0" room="0x0" actor="0x19" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 1" setup="0" actor="0x1e" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Middle 2" setup="0" actor="0x1f" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 1" setup="0" actor="0x1c" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Big Snowball Back 2" setup="0" actor="0x1d" item="MAGIC_JAR_SMALL"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 1" setup="0" actor="0x9" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 2" setup="0" actor="0xa" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Back 3" setup="0" actor="0xb" item="NOTHING"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 1" setup="1" actor="0x5" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Middle 2" setup="1" actor="0x6" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 1" setup="1" actor="0x7" item="MAGIC_JAR_LARGE"/>
+    <xflag type="snowball" location="Path to Snowhead Small Snowball Spring Back 2" setup="1" actor="0x8" item="MAGIC_JAR_LARGE"/>
+    <actor>
+      <match setup="0" actor="0x16"/>
+      <match setup="1" actor="0x02"/>
+      <xflag type="tree" location="Path to Snowhead Snow Tree End 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x17"/>
+      <match setup="1" actor="0x01"/>
+      <xflag type="tree" location="Path to Snowhead Snow Tree End 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x18"/>
+      <match setup="1" actor="0x00"/>
+      <xflag type="tree" location="Path to Snowhead Snow Tree End 3" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x19"/>
+      <match setup="1" actor="0x03"/>
+      <xflag type="tree" location="Path to Snowhead Snow Tree Entrance" item="NOTHING"/>
+    </actor>
   </scene>
   <scene id="GROTTOS">
     <chest location="Path to Snowhead Grotto" flag="0x13" item="RUPEE_RED"/>
