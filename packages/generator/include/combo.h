@@ -130,6 +130,7 @@ extern u16 gBlastMaskDelayAcc;
 NORETURN void comboGameSwitch(PlayState* play, u32 entrance);
 
 u8 comboMmFwAge(void);
+OotFaroreWind* Age_GetFaroreOot(int age);
 
 extern const u8 kMaxSongNotes[];
 

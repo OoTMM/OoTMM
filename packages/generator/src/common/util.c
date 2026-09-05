@@ -83,18 +83,14 @@ int comboIsLinkAdult(void)
 
 u8 comboMmFwAge(void)
 {
-    u8 age;
-    if (Config_Flag(CFG_MM_CROSS_AGE) ||
-        Config_Flag(CFG_MM_MASK_ADULT))
-    {
-        age = gMmSave.linkAge;
-    }
-    else
-    {
-        age = (gOotSave.age == 0)
-            ? AGE_ADULT
-            : AGE_CHILD;
-    }
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+        return gMmSave.linkAge;
 
-    return age;
+    if (Config_Flag(CFG_CROSS_GAME_FW))
+        return gOotSave.age;
+
+    if (Config_Flag(CFG_MM_MASK_ADULT))
+        return gMmSave.linkAge;
+
+    return gOotSave.age;
 }
