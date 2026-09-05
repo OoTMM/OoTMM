@@ -18,7 +18,13 @@
     <collectible location="Graveyard Crate HP" flag="0x04" item="HEART_PIECE"/>
     <gs location="Graveyard GS Soil" flag="0x80" item="GS_TOKEN"/>
     <gs location="Graveyard GS Wall" flag="0x87" item="GS_TOKEN"/>
-    <xflag type="crate" location="Graveyard Crate" setup="0" room="0x1" actor="0x15" item="NOTHING"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x15"/>
+      <match setup="1" actor="0x17"/>
+      <match setup="2" actor="0x21"/>
+      <match setup="3" actor="0x21"/>
+      <xflag type="crate" location="Graveyard Crate" item="NOTHING"/>
+    </actor>
     <actor room="0x1">
       <match setup="0" actor="0x10"/>
       <match setup="1" actor="0x14"/>

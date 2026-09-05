@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checks game="oot">
   <scene id="MARKET_CHILD_DAY">
-    <xflag type="crate" location="Market Crate 1" actor="0x21" item="RUPEE_RED"/>
-    <xflag type="crate" location="Market Crate 2" actor="0x22" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Crate 3" actor="0x23" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Market Crate 4" actor="0x24" item="RUPEE_GREEN"/>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x21"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x16"/>
+      <xflag type="crate" location="Market Crate 1" item="RUPEE_RED"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x22"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x17"/>
+      <xflag type="crate" location="Market Crate 2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x23"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x18"/>
+      <xflag type="crate" location="Market Crate 3" item="RUPEE_GREEN"/>
+    </actor>
+    <actor>
+      <match scene="MARKET_CHILD_DAY" actor="0x24"/>
+      <match scene="MARKET_CHILD_NIGHT" actor="0x19"/>
+      <xflag type="crate" location="Market Crate 4" item="RUPEE_GREEN"/>
+    </actor>
     <actor>
       <match scene="MARKET_CHILD_DAY" actor="0x17"/>
       <match scene="MARKET_CHILD_NIGHT" actor="0x07"/>

@@ -68,24 +68,96 @@
       <match setup="1" actor="0x11"/>
       <xflag type="pot" location="Kakariko Back Pot 2" item="RECOVERY_HEART"/>
     </actor>
-    <xflag type="crate" location="Kakariko Crate Child Near Trail" setup="0" actor="0x31" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near House" setup="0" actor="0x32" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Windmill Bottom" setup="0" actor="0x33" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Windmill Top" setup="0" actor="0x34" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Child Near Graveyard" setup="0" actor="0x35" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near First House" setup="2" actor="0x22" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Trail 1" setup="2" actor="0x23" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Trail 2" setup="2" actor="0x24" item="ARROWS_5"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Impa 1" setup="2" actor="0x25" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Impa 2" setup="2" actor="0x26" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Center 1" setup="2" actor="0x27" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Center 2" setup="2" actor="0x28" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Archery" setup="2" actor="0x29" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Near Potion Shop" setup="2" actor="0x2a" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 1" setup="2" actor="0x2b" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 2" setup="2" actor="0x2c" item="NOTHING"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 3" setup="2" actor="0x2d" item="RUPEE_RED"/>
-    <xflag type="crate" location="Kakariko Crate Adult Back 4" setup="2" actor="0x2e" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x31"/>
+      <match setup="1" actor="0x2a"/>
+      <xflag type="crate" location="Kakariko Crate Child Near Trail" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x32"/>
+      <match setup="1" actor="0x2b"/>
+      <xflag type="crate" location="Kakariko Crate Child Near House" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x33"/>
+      <match setup="1" actor="0x2c"/>
+      <xflag type="crate" location="Kakariko Crate Child Near Windmill Bottom" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x34"/>
+      <match setup="1" actor="0x2d"/>
+      <xflag type="crate" location="Kakariko Crate Child Near Windmill Top" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x35"/>
+      <match setup="1" actor="0x2e"/>
+      <xflag type="crate" location="Kakariko Crate Child Near Graveyard" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x22"/>
+      <match setup="3" actor="0x20"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near First House" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x23"/>
+      <match setup="3" actor="0x21"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near Trail 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x24"/>
+      <match setup="3" actor="0x22"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near Trail 2" item="ARROWS_5"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x25"/>
+      <match setup="3" actor="0x23"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near Impa 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x26"/>
+      <match setup="3" actor="0x24"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near Impa 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x27"/>
+      <match setup="3" actor="0x25"/>
+      <xflag type="crate" location="Kakariko Crate Adult Center 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x28"/>
+      <match setup="3" actor="0x26"/>
+      <xflag type="crate" location="Kakariko Crate Adult Center 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x29"/>
+      <match setup="3" actor="0x27"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near Archery" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x2a"/>
+      <match setup="3" actor="0x28"/>
+      <xflag type="crate" location="Kakariko Crate Adult Near Potion Shop" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x2b"/>
+      <match setup="3" actor="0x29"/>
+      <xflag type="crate" location="Kakariko Crate Adult Back 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x2c"/>
+      <match setup="3" actor="0x2a"/>
+      <xflag type="crate" location="Kakariko Crate Adult Back 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x2d"/>
+      <match setup="3" actor="0x2b"/>
+      <xflag type="crate" location="Kakariko Crate Adult Back 3" item="RUPEE_RED"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x2e"/>
+      <match setup="3" actor="0x2c"/>
+      <xflag type="crate" location="Kakariko Crate Adult Back 4" item="NOTHING"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x24"/>
       <match setup="1" actor="0x1f"/>

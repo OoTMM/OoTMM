@@ -49,7 +49,11 @@
     <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 3" setup="0" actor="0x23" item="RUPEE_GREEN"/>
     <xflag type="crate" location="Gerudo Valley Crate Child Unreachable 4" setup="0" actor="0x24" item="RUPEE_GREEN"/>
     <xflag type="crate" location="Gerudo Valley Crate Child Bottom" setup="0" actor="0x25" item="RUPEE_GREEN"/>
-    <xflag type="crate" location="Gerudo Valley Crate Ledge" setup="0" actor="0x26" item="RUPEE_GREEN"/>
+    <actor>
+      <match setup="0" actor="0x26"/>
+      <match setup="2" actor="0x1e"/>
+      <xflag type="crate" location="Gerudo Valley Crate Ledge" item="RUPEE_GREEN"/>
+    </actor>
     <xflag type="wonder" location="Gerudo Valley Wonder Item Lower" setup="2" actor="0x28" item="RUPEE_RED"/>
     <xflag type="wonder" location="Gerudo Valley Wonder Item Upper" setup="2" actor="0x29" item="RUPEE_RED"/>
     <xflag type="boulder" location="Gerudo Valley Boulder Before Bridge 1" setup="2" actor="0x1b" item="NOTHING"/>

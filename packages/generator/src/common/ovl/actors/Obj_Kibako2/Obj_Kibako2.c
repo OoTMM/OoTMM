@@ -349,105 +349,12 @@ static void ObjKibako2_InitCollider(Actor_ObjKibako2* this, PlayState* play)
 }
 
 #if defined(GAME_OOT)
-static void ObjKibako2_Alias(Actor_ObjKibako2* this)
-{
-    Xflag* xf;
-
-    xf = &this->xflag;
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_MARKET_CHILD_NIGHT:
-        xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
-        xf->id += 11;
-        break;
-    case SCE_OOT_LON_LON_RANCH:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            xf->id -= 5;
-        }
-        break;
-    case SCE_OOT_GRAVEYARD:
-        switch (xf->setupId)
-        {
-        case 1: xf->id -= 2; break;
-        case 2: /* Fallthrough */
-        case 3: xf->id -= 12; break;
-        }
-        xf->setupId = 0;
-        break;
-    case SCE_OOT_GERUDO_VALLEY:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id += 8;
-        }
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            xf->id += 7;
-        }
-        else if (xf->setupId == 3)
-        {
-            xf->setupId = 2;
-            xf->id += 2;
-        }
-        break;
-    case SCE_OOT_GERUDO_FORTRESS:
-        switch (xf->roomId)
-        {
-        case 0x00:
-            if (xf->setupId == 0)
-            {
-                switch (xf->id)
-                {
-                case 14: xf->id = 12; break;
-                case 15: xf->id = 13; break;
-                case 16: xf->id = 14; break;
-                case 17: xf->id = 15; break;
-                case 18: xf->id = 11; break;
-                case 19: xf->id = 16; break;
-                case 20: xf->id = 17; break;
-                case 21: xf->id = 18; break;
-                }
-            }
-            xf->setupId = 2;
-            break;
-        case 0x01:
-            switch (xf->setupId)
-            {
-            case 2: xf->id -= 8; break;
-            case 3: xf->id -= 1; break;
-            }
-            if (xf->setupId != 0)
-            {
-                if (xf->id >= 3)
-                    xf->id += 1;
-                xf->setupId = 0;
-            }
-            break;
-        }
-        break;
-    }
-}
-#endif
-
-#if defined(GAME_MM)
-static void ObjKibako2_Alias(Actor_ObjKibako2* this)
-{
-}
-#endif
-
-#if defined(GAME_OOT)
 static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 {
     CollisionHeader* colHeader;
     u32 bgId;
 
-    if (Xflag_Init(&this->xflag, &this->dyna.actor, play))
-        ObjKibako2_Alias(this);
+    Xflag_Init(&this->xflag, &this->dyna.actor, play);
     colHeader = NULL;
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -466,8 +373,7 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 {
     s32 contents;
 
-    if (Xflag_Init(&this->xflag, &this->dyna.actor, play))
-        ObjKibako2_Alias(this);
+    Xflag_Init(&this->xflag, &this->dyna.actor, play);
     contents = KIBAKO2_CONTENTS(this);
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);

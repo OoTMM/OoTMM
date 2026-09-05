@@ -41,7 +41,11 @@
       <match setup="1" actor="0x08"/>
       <xflag type="pot" location="Lon Lon Ranch Pot 7" item="RECOVERY_HEART"/>
     </actor>
-    <xflag type="crate" location="Lon Lon Ranch Crate" setup="0" actor="0x18" item="RUPEE_GREEN"/>
+    <actor>
+      <match setup="0" actor="0x18"/>
+      <match setup="1" actor="0x1d"/>
+      <xflag type="crate" location="Lon Lon Ranch Crate" item="RUPEE_GREEN"/>
+    </actor>
     <xflag type="wonder" location="Lon Lon Ranch Wonder Item 1" setup="2" actor="0x18" item="RUPEE_BLUE"/>
     <xflag type="wonder" location="Lon Lon Ranch Wonder Item 2" setup="2" actor="0x19" item="RUPEE_BLUE"/>
   </scene>
