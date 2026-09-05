@@ -3,7 +3,7 @@
   exits:
     "GLOBAL": "true"
     "Sacred Meadow Forest Platform": "true"
-    "Forest Temple Main": "can_damage || can_collect_distance || can_hammer"
+    "Forest Temple Main": "get_past_skulltulas"
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "gs && (has_ranged_weapon || has_explosives || can_use_din)"
@@ -21,7 +21,7 @@
 "Forest Temple Main":
   dungeon: Forest
   exits:
-    "Forest Temple": "true"
+    "Forest Temple": "get_past_skulltulas"
     "Forest Temple Mini-Boss": "true"
     "Forest Temple Garden West": "is_child || can_play_time"
     "Forest Temple Garden East": "can_hit_triggers_distance"
