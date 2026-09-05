@@ -117,6 +117,8 @@ void Play_UpdateTraps(PlayState* play)
         return;
     if (player->invincibilityTimer)
         return;
+    if (Player_InCsMode(play) || Message_GetState(&play->msgCtx))
+        return;
 #if defined(GAME_MM)
     /* Shops safety */
     if (player->gi && player->interactRangeActor && (player->interactRangeActor->id == ACTOR_EN_OSSAN || player->interactRangeActor->id == ACTOR_EN_TRT || player->interactRangeActor->id == ACTOR_EN_SOB1))
