@@ -13,12 +13,22 @@ static void Age_SwapFaroreOot(void)
     OotFaroreWind* prev;
     OotFaroreWind tmp;
 
-    current = &gOotSave.info.fw;
-    prev = current - 1;
+    current = Age_GetFaroreOot(gOotSave.age);
+    prev = Age_GetFaroreOot(1 - gOotSave.age);
 
     memcpy(&tmp, current, sizeof(tmp));
     memcpy(current, prev, sizeof(tmp));
     memcpy(prev, &tmp, sizeof(tmp));
+}
+
+OotFaroreWind* Age_GetFaroreOot(int age)
+{
+    OotFaroreWind* current = &gOotSave.info.fw;
+
+    if (age == gOotSave.age)
+        return current;
+
+    return current - 1;
 }
 
 static void Age_SwapEquipmentOot(void)

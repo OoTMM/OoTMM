@@ -540,6 +540,11 @@ void hookPlay_Init(PlayState* play)
 
     if (gSaveContext.respawnFlag == 8)
     {
+        u8 fwAge;
+        if (gComboCtx.isFwSpawn)
+            fwAge = gComboCtx.fwSpawnAge;
+        else
+            fwAge = comboMmFwAge();
         s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance);
         Vec3f* pos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
         if (fwSceneId == SCE_MM_GORON_VILLAGE_SPRING || fwSceneId == SCE_MM_GORON_VILLAGE_WINTER)
@@ -571,7 +576,8 @@ void hookPlay_Init(PlayState* play)
                 }
             }
         }
-        gCustomSave.fw[comboMmFwAge()].pos = *pos;
+        gCustomSave.fw[fwAge].pos = *pos;
+        gComboCtx.isFwSpawn = 0;
     }
 
     ComboPlayer_ApplyAgeModelTables();
@@ -726,10 +732,23 @@ void Play_TransitionDone(PlayState* play)
     case ENTR_EXTENDED:
         entrance = g.nextEntrance;
         break;
-    case ENTR_FW_CROSS:
-        entrance = gForeignSave.info.fw.entrance | MASK_FOREIGN_ENTRANCE;
+    case ENTR_FW_CROSS: {
+        u8 fwAge = comboMmFwAge();
+        OotFaroreWind* fw = Age_GetFaroreOot(fwAge);
+        if (fw->set <= 0 || fw->entrance == ENTR_FW_CROSS)
+        {
+            gCustomSave.fw[fwAge].data = 0;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+
+            gIsEntranceOverride = 0;
+            entrance = gSave.entrance;
+            break;
+        }
+        entrance = fw->entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
+        gComboCtx.fwSpawnAge = fwAge;
         break;
+    }
     case ENTR_CROSS_RESPAWN:
         entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isDungeonEntranceSpawn = 1;
@@ -828,10 +847,11 @@ void Play_FastInit(GameState* gs)
 
     if (gComboCtx.isFwSpawn)
     {
-        u8 fwAge = comboMmFwAge();
+        u8 fwAge = gComboCtx.fwSpawnAge;
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawMm(NULL, fwAge);
         RespawnData* fw = &gCustomSave.fw[fwAge];
         gSaveContext.respawnFlag = 8;
-        gComboCtx.isFwSpawn = 0;
 
         /* Restore Game Over / Soar to Entrance respawn data. */
         memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[fwAge], sizeof(RespawnData));

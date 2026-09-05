@@ -13,6 +13,7 @@ typedef struct PACKED ALIGNED(4)
     u32     multiSeqNet;
     u32     isDungeonEntranceSpawn:1;
     u32     isFwSpawn:1;
+    u32     fwSpawnAge:1;
     u32     isMultiConnected:1;
 }
 ComboContext;

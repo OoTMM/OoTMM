@@ -581,6 +581,24 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
     }
 }
 
+static s32 Player_HasValidFaroresWind(void)
+{
+    u8 fwAge = comboMmFwAge();
+    RespawnData* fw = &gCustomSave.fw[fwAge];
+
+    if (fw->data <= 0)
+        return 0;
+    if (fw->entrance != ENTR_FW_CROSS)
+        return 1;
+    OotFaroreWind* foreignFw = Age_GetFaroreOot(fwAge);
+    if (foreignFw->set > 0 && foreignFw->entrance != ENTR_FW_CROSS)
+        return 1;
+    fw->data = 0;
+    gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+
+    return 0;
+}
+
 typedef void (*Player_func_8082DAD4)(Player*);
 typedef PlayerAnimationHeader* (*Player_GetWaitAnimation)(Player*);
 typedef void (*Player_SetAction)(PlayState*, Player*, PlayerActionFunc, s32);
@@ -594,7 +612,7 @@ s32 Player_CustomCsItem(Player* this, PlayState* play)
     s32 magicSpell = Player_ActionToMagicSpell(this, this->itemAction);
     if (magicSpell >= PLAYER_MAGIC_SPELL_MIN)
     {
-        if ((magicSpell != PLAYER_MAGIC_SPELL_WIND) || (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data <= 0))
+        if ((magicSpell != PLAYER_MAGIC_SPELL_WIND) || !Player_HasValidFaroresWind())
         {
             Player_CastSpell(play, this, magicSpell);
         }
@@ -732,7 +750,7 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
     s32 magicSpell = Player_ActionToMagicSpell(this, itemAction);
     if (magicSpell >= 0)
     {
-        if (((magicSpell == PLAYER_MAGIC_SPELL_WIND) && (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data > 0)) ||
+        if (((magicSpell == PLAYER_MAGIC_SPELL_WIND) && Player_HasValidFaroresWind()) ||
             ((gSaveContext.magicCapacity != 0) && (gSaveContext.magicState == MAGIC_STATE_IDLE) &&
              (gSaveContext.save.info.playerData.magic >= sMagicSpellCosts[magicSpell])))
         {

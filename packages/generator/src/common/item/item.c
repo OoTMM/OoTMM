@@ -278,10 +278,10 @@ void comboSyncItems(void)
 
     if (Config_Flag(CFG_CROSS_GAME_FW))
     {
-        u8 mmFwAge = comboMmFwAge();
 #if defined(GAME_MM)
-        RespawnData* fw = &gCustomSave.fw[mmFwAge];
-        OotFaroreWind* foreignFw = &gForeignSave.info.fw;
+        u8 fwAge = comboMmFwAge();
+        RespawnData* fw = &gCustomSave.fw[fwAge];
+        OotFaroreWind* foreignFw = Age_GetFaroreOot(fwAge);
 
         if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
         {
@@ -294,9 +294,9 @@ void comboSyncItems(void)
             foreignFw->entrance = ENTR_FW_CROSS;
         }
 #else
-        RespawnData* foreignFw =
-            &gSharedCustomSave.mm.fw[mmFwAge];
-        OotFaroreWind* fw = &gSave.info.fw;
+        u8 fwAge = gOotSave.age;
+        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[fwAge];
+        OotFaroreWind* fw = Age_GetFaroreOot(fwAge);
 
         if (fw->set <= 0 || fw->entrance != ENTR_FW_CROSS)
         {

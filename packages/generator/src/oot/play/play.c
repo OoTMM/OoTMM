@@ -744,10 +744,22 @@ void Play_TransitionDone(PlayState* play)
     case ENTR_EXTENDED:
         entrance = g.nextEntrance;
         break;
-    case ENTR_FW_CROSS:
-        entrance = gSharedCustomSave.mm.fw[gSave.age].entrance | MASK_FOREIGN_ENTRANCE;
+    case ENTR_FW_CROSS: {
+        u8 fwAge = gSave.age;
+        RespawnData* fw = &gSharedCustomSave.mm.fw[fwAge];
+        if (fw->data <= 0 || fw->entrance == ENTR_FW_CROSS)
+        {
+            gSave.info.fw.set = 0;
+
+            gIsEntranceOverride = 0;
+            entrance = gSave.entrance;
+            break;
+        }
+        entrance = fw->entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
+        gComboCtx.fwSpawnAge = fwAge;
         break;
+    }
     case ENTR_CROSS_RESPAWN:
         entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isDungeonEntranceSpawn = 1;
@@ -815,13 +827,15 @@ void Play_FastInit(GameState* gs)
 
     if (gComboCtx.isFwSpawn)
     {
+        u8 fwAge = gComboCtx.fwSpawnAge;
+        OotFaroreWind* fw;
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawOot(NULL, fwAge);
+
         gSaveContext.respawnFlag = 3;
         gComboCtx.isFwSpawn = 0;
-
-        /* Restore dungeon entrance respawn data. */
-        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(OotRespawnData));
-
-        OotFaroreWind* fw = &gSave.info.fw;
+        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[fwAge], sizeof(OotRespawnData));
+        fw = Age_GetFaroreOot(fwAge);
 
         if (fw->set)
         {
