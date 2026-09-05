@@ -6,6 +6,7 @@ import clsx from 'clsx';
 export type SelectOption<T> = {
   value: T;
   label: string;
+  disabled?: boolean;
 };
 
 type SelectProps<T> = {
@@ -107,9 +108,29 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
       <div className="relative select-none">
         {open && (searcheable || !inputValue) && <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
           {filteredOptions.length > 0 && filteredOptions.map((opt, i) =>
-            <div key={i} className="ux-hover p-2" onClick={(e) => { setOpen(false); onSelect(opt.value); e.preventDefault(); e.stopPropagation(); setInputValue(''); }}>
-              {opt.label}
-            </div>
+              <div
+                  key={i}
+                  className={clsx(
+                      'p-2',
+                      opt.disabled
+                          ? 'text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                          : 'ux-hover cursor-pointer',
+                  )}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (opt.disabled) {
+                      return;
+                    }
+
+                    setOpen(false);
+                    onSelect(opt.value);
+                    setInputValue('');
+                  }}
+              >
+                {opt.label}
+              </div>
           )}
           {filteredOptions.length === 0 && <div className="p-8 text-gray-500">Nothing</div>}
         </div>}
