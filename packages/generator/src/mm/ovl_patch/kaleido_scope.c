@@ -82,6 +82,21 @@ s32 Player_GetCurMaskItemId_Custom(PlayState* play)
 
 PATCH_FUNC(0x80122eec, Player_GetCurMaskItemId_Custom);
 
+static void removeMmSlotFromCurrentCButton(u16 slot, u8 item)
+{
+    for (int button = 1; button < 4; ++button)
+    {
+        if (gMmSave.info.itemEquips.cButtonSlots[0][button] == slot ||
+            gMmSave.info.itemEquips.buttonItems[0][button] == item)
+        {
+            gMmSave.info.itemEquips.buttonItems[0][button] = ITEM_NONE;
+            gMmSave.info.itemEquips.cButtonSlots[0][button] = 0xff;
+        }
+    }
+}
+
+int KaleidoScope_CheckMmItemAgeReq(u8 item);
+
 void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
     u16 cursorSlot;
@@ -136,6 +151,10 @@ popcount(flags) > 1)
                 KaleidoScope_ToggleMaskSlotSkipHidden(cursorSlot);
             else
                 comboToggleSlot(cursorSlot);
+            if (!KaleidoScope_CheckMmItemAgeReq(*itemPtr))
+            {
+                removeMmSlotFromCurrentCButton(cursorSlot, *itemPtr);
+            }
 
             effect = 1;
         }
@@ -548,6 +567,216 @@ static u32 sCustomIcons[] = {
     ITEM_MM_MASK_ADULT,
 };
 
+typedef enum MmAgeReq {
+    MM_AGE_REQ_NONE  = 0,
+    MM_AGE_REQ_CHILD = 1,
+    MM_AGE_REQ_ADULT = 2,
+} MmAgeReq;
+
+typedef struct MmItemAgeReqConfig {
+    u8 item;
+    u16 adultFlag;
+    u16 childFlag;
+} MmItemAgeReqConfig;
+
+static const MmItemAgeReqConfig kMmItemAgeReqConfigs[] = {
+    { ITEM_MM_HOOKSHOT,           CFG_MM_AGE_REQ_ADULT_HOOKSHOT,           CFG_MM_AGE_REQ_CHILD_HOOKSHOT },
+    { ITEM_MM_HOOKSHOT_SHORT,     CFG_MM_AGE_REQ_ADULT_HOOKSHOT_SHORT,     CFG_MM_AGE_REQ_CHILD_HOOKSHOT_SHORT },
+    { ITEM_MM_BOW,                CFG_MM_AGE_REQ_ADULT_BOW,                CFG_MM_AGE_REQ_CHILD_BOW },
+    { ITEM_MM_ARROW_FIRE,         CFG_MM_AGE_REQ_ADULT_ARROW_FIRE,         CFG_MM_AGE_REQ_CHILD_ARROW_FIRE },
+    { ITEM_MM_ARROW_ICE,          CFG_MM_AGE_REQ_ADULT_ARROW_ICE,          CFG_MM_AGE_REQ_CHILD_ARROW_ICE },
+    { ITEM_MM_ARROW_LIGHT,        CFG_MM_AGE_REQ_ADULT_ARROW_LIGHT,        CFG_MM_AGE_REQ_CHILD_ARROW_LIGHT },
+    { ITEM_MM_OCARINA_OF_TIME,    CFG_MM_AGE_REQ_ADULT_OCARINA_OF_TIME,    CFG_MM_AGE_REQ_CHILD_OCARINA_OF_TIME },
+    { ITEM_MM_OCARINA_FAIRY,      CFG_MM_AGE_REQ_ADULT_OCARINA_FAIRY,      CFG_MM_AGE_REQ_CHILD_OCARINA_FAIRY },
+    { ITEM_MM_BOMB,               CFG_MM_AGE_REQ_ADULT_BOMB,               CFG_MM_AGE_REQ_CHILD_BOMB },
+    { ITEM_MM_BOMBCHU,            CFG_MM_AGE_REQ_ADULT_BOMBCHU,            CFG_MM_AGE_REQ_CHILD_BOMBCHU },
+    { ITEM_MM_STICK,              CFG_MM_AGE_REQ_ADULT_STICK,              CFG_MM_AGE_REQ_CHILD_STICK },
+    { ITEM_MM_NUT,                CFG_MM_AGE_REQ_ADULT_DEKU_NUTS,          CFG_MM_AGE_REQ_CHILD_DEKU_NUTS },
+    { ITEM_MM_MAGIC_BEAN,         CFG_MM_AGE_REQ_ADULT_MAGIC_BEAN,         CFG_MM_AGE_REQ_CHILD_MAGIC_BEAN },
+    { ITEM_MM_POWDER_KEG,         CFG_MM_AGE_REQ_ADULT_POWDER_KEG,         CFG_MM_AGE_REQ_CHILD_POWDER_KEG },
+    { ITEM_MM_PICTOGRAPH_BOX,     CFG_MM_AGE_REQ_ADULT_PICTOGRAPH_BOX,     CFG_MM_AGE_REQ_CHILD_PICTOGRAPH_BOX },
+    { ITEM_MM_LENS_OF_TRUTH,      CFG_MM_AGE_REQ_ADULT_LENS_OF_TRUTH,      CFG_MM_AGE_REQ_CHILD_LENS_OF_TRUTH },
+    { ITEM_MM_GREAT_FAIRY_SWORD,  CFG_MM_AGE_REQ_ADULT_GREAT_FAIRY_SWORD,  CFG_MM_AGE_REQ_CHILD_GREAT_FAIRY_SWORD },
+    { ITEM_MM_HAMMER,             CFG_MM_AGE_REQ_ADULT_HAMMER,             CFG_MM_AGE_REQ_CHILD_HAMMER },
+    { ITEM_MM_BOOTS_IRON,         CFG_MM_AGE_REQ_ADULT_BOOTS_IRON,         CFG_MM_AGE_REQ_CHILD_BOOTS_IRON },
+    { ITEM_MM_BOOTS_HOVER,        CFG_MM_AGE_REQ_ADULT_BOOTS_HOVER,        CFG_MM_AGE_REQ_CHILD_BOOTS_HOVER },
+    { ITEM_MM_TUNIC_GORON,        CFG_MM_AGE_REQ_ADULT_TUNIC_GORON,        CFG_MM_AGE_REQ_CHILD_TUNIC_GORON },
+    { ITEM_MM_TUNIC_ZORA,         CFG_MM_AGE_REQ_ADULT_TUNIC_ZORA,         CFG_MM_AGE_REQ_CHILD_TUNIC_ZORA },
+    { ITEM_MM_SPELL_WIND,         CFG_MM_AGE_REQ_ADULT_SPELL_WIND,         CFG_MM_AGE_REQ_CHILD_SPELL_WIND },
+    { ITEM_MM_SPELL_LOVE,         CFG_MM_AGE_REQ_ADULT_SPELL_LOVE,         CFG_MM_AGE_REQ_CHILD_SPELL_LOVE },
+    { ITEM_MM_SPELL_FIRE,         CFG_MM_AGE_REQ_ADULT_SPELL_FIRE,         CFG_MM_AGE_REQ_CHILD_SPELL_FIRE },
+    { ITEM_MM_BOOMERANG,          CFG_MM_AGE_REQ_ADULT_BOOMERANG,          CFG_MM_AGE_REQ_CHILD_BOOMERANG },
+    { ITEM_MM_SLINGSHOT,          CFG_MM_AGE_REQ_ADULT_SLINGSHOT,          CFG_MM_AGE_REQ_CHILD_SLINGSHOT },
+    { ITEM_MM_MASK_DEKU,          CFG_MM_AGE_REQ_ADULT_MASK_DEKU,          CFG_MM_AGE_REQ_CHILD_MASK_DEKU },
+    { ITEM_MM_MASK_GORON,         CFG_MM_AGE_REQ_ADULT_MASK_GORON,         CFG_MM_AGE_REQ_CHILD_MASK_GORON },
+    { ITEM_MM_MASK_ZORA,          CFG_MM_AGE_REQ_ADULT_MASK_ZORA,          CFG_MM_AGE_REQ_CHILD_MASK_ZORA },
+    { ITEM_MM_MASK_FIERCE_DEITY,  CFG_MM_AGE_REQ_ADULT_MASK_FIERCE_DEITY,  CFG_MM_AGE_REQ_CHILD_MASK_FIERCE_DEITY },
+    { ITEM_MM_MASK_TRUTH,         CFG_MM_AGE_REQ_ADULT_MASK_TRUTH,         CFG_MM_AGE_REQ_CHILD_MASK_TRUTH },
+    { ITEM_MM_MASK_KAFEI,         CFG_MM_AGE_REQ_ADULT_MASK_KAFEI,         CFG_MM_AGE_REQ_CHILD_MASK_KAFEI },
+    { ITEM_MM_MASK_ALL_NIGHT,     CFG_MM_AGE_REQ_ADULT_MASK_ALL_NIGHT,     CFG_MM_AGE_REQ_CHILD_MASK_ALL_NIGHT },
+    { ITEM_MM_MASK_BUNNY,         CFG_MM_AGE_REQ_ADULT_MASK_BUNNY,         CFG_MM_AGE_REQ_CHILD_MASK_BUNNY },
+    { ITEM_MM_MASK_KEATON,        CFG_MM_AGE_REQ_ADULT_MASK_KEATON,        CFG_MM_AGE_REQ_CHILD_MASK_KEATON },
+    { ITEM_MM_MASK_GARO,          CFG_MM_AGE_REQ_ADULT_MASK_GARO,          CFG_MM_AGE_REQ_CHILD_MASK_GARO },
+    { ITEM_MM_MASK_ROMANI,        CFG_MM_AGE_REQ_ADULT_MASK_ROMANI,        CFG_MM_AGE_REQ_CHILD_MASK_ROMANI },
+    { ITEM_MM_MASK_TROUPE_LEADER, CFG_MM_AGE_REQ_ADULT_MASK_TROUPE_LEADER, CFG_MM_AGE_REQ_CHILD_MASK_TROUPE_LEADER },
+    { ITEM_MM_MASK_POSTMAN,       CFG_MM_AGE_REQ_ADULT_MASK_POSTMAN,       CFG_MM_AGE_REQ_CHILD_MASK_POSTMAN },
+    { ITEM_MM_MASK_COUPLE,        CFG_MM_AGE_REQ_ADULT_MASK_COUPLE,        CFG_MM_AGE_REQ_CHILD_MASK_COUPLE },
+    { ITEM_MM_MASK_GREAT_FAIRY,   CFG_MM_AGE_REQ_ADULT_MASK_GREAT_FAIRY,   CFG_MM_AGE_REQ_CHILD_MASK_GREAT_FAIRY },
+    { ITEM_MM_MASK_GIBDO,         CFG_MM_AGE_REQ_ADULT_MASK_GIBDO,         CFG_MM_AGE_REQ_CHILD_MASK_GIBDO },
+    { ITEM_MM_MASK_DON_GERO,      CFG_MM_AGE_REQ_ADULT_MASK_DON_GERO,      CFG_MM_AGE_REQ_CHILD_MASK_DON_GERO },
+    { ITEM_MM_MASK_KAMARO,        CFG_MM_AGE_REQ_ADULT_MASK_KAMARO,        CFG_MM_AGE_REQ_CHILD_MASK_KAMARO },
+    { ITEM_MM_MASK_CAPTAIN,       CFG_MM_AGE_REQ_ADULT_MASK_CAPTAIN,       CFG_MM_AGE_REQ_CHILD_MASK_CAPTAIN },
+    { ITEM_MM_MASK_STONE,         CFG_MM_AGE_REQ_ADULT_MASK_STONE,         CFG_MM_AGE_REQ_CHILD_MASK_STONE },
+    { ITEM_MM_MASK_BREMEN,        CFG_MM_AGE_REQ_ADULT_MASK_BREMEN,        CFG_MM_AGE_REQ_CHILD_MASK_BREMEN },
+    { ITEM_MM_MASK_BLAST,         CFG_MM_AGE_REQ_ADULT_MASK_BLAST,         CFG_MM_AGE_REQ_CHILD_MASK_BLAST },
+    { ITEM_MM_MASK_SCENTS,        CFG_MM_AGE_REQ_ADULT_MASK_SCENTS,        CFG_MM_AGE_REQ_CHILD_MASK_SCENTS },
+    { ITEM_MM_MASK_GIANT,         CFG_MM_AGE_REQ_ADULT_MASK_GIANT,         CFG_MM_AGE_REQ_CHILD_MASK_GIANT },
+    { ITEM_MM_MASK_GERUDO,        CFG_MM_AGE_REQ_ADULT_MASK_GERUDO,        CFG_MM_AGE_REQ_CHILD_MASK_GERUDO },
+    { ITEM_MM_MASK_SKULL,         CFG_MM_AGE_REQ_ADULT_MASK_SKULL,         CFG_MM_AGE_REQ_CHILD_MASK_SKULL },
+    { ITEM_MM_MASK_SPOOKY,        CFG_MM_AGE_REQ_ADULT_MASK_SPOOKY,        CFG_MM_AGE_REQ_CHILD_MASK_SPOOKY },
+    { ITEM_MM_MOON_TEAR,          CFG_MM_AGE_REQ_ADULT_MOON_TEAR,          CFG_MM_AGE_REQ_CHILD_MOON_TEAR },
+    { ITEM_MM_DEED_LAND,          CFG_MM_AGE_REQ_ADULT_DEED_LAND,          CFG_MM_AGE_REQ_CHILD_DEED_LAND },
+    { ITEM_MM_DEED_SWAMP,         CFG_MM_AGE_REQ_ADULT_DEED_SWAMP,         CFG_MM_AGE_REQ_CHILD_DEED_SWAMP },
+    { ITEM_MM_DEED_MOUNTAIN,      CFG_MM_AGE_REQ_ADULT_DEED_MOUNTAIN,      CFG_MM_AGE_REQ_CHILD_DEED_MOUNTAIN },
+    { ITEM_MM_DEED_OCEAN,         CFG_MM_AGE_REQ_ADULT_DEED_OCEAN,         CFG_MM_AGE_REQ_CHILD_DEED_OCEAN },
+    { ITEM_MM_LETTER_TO_MAMA,     CFG_MM_AGE_REQ_ADULT_LETTER_TO_MAMA,     CFG_MM_AGE_REQ_CHILD_LETTER_TO_MAMA },
+    { ITEM_MM_LETTER_TO_KAFEI,    CFG_MM_AGE_REQ_ADULT_LETTER_TO_KAFEI,    CFG_MM_AGE_REQ_CHILD_LETTER_TO_KAFEI },
+    { ITEM_MM_PENDANT_OF_MEMORIES,CFG_MM_AGE_REQ_ADULT_PENDANT_OF_MEMORIES,CFG_MM_AGE_REQ_CHILD_PENDANT_OF_MEMORIES },
+    { ITEM_NONE, 0, 0 },
+};
+
+static u8 KaleidoScope_GetMmItemAgeReq(u8 item)
+{
+    const MmItemAgeReqConfig* entry;
+    for (u32 i = 0; kMmItemAgeReqConfigs[i].item != ITEM_NONE; i++)
+    {
+        entry = &kMmItemAgeReqConfigs[i];
+        if (entry->item != item)
+            continue;
+        if (Config_Flag(entry->adultFlag))
+            return MM_AGE_REQ_ADULT;
+        if (Config_Flag(entry->childFlag))
+            return MM_AGE_REQ_CHILD;
+        return MM_AGE_REQ_NONE;
+    }
+    return MM_AGE_REQ_NONE;
+}
+
+static int KaleidoScope_CheckMmAgeReqValue(u8 req)
+{
+    switch (req)
+    {
+        case MM_AGE_REQ_ADULT:
+            return comboIsLinkAdult();
+
+        case MM_AGE_REQ_CHILD:
+            return !comboIsLinkAdult();
+
+        default:
+            return 1;
+    }
+}
+
+int KaleidoScope_CheckMmItemAgeReq(u8 item)
+{
+    if (item == ITEM_NONE || item >= 0xff)
+        return 1;
+
+    return KaleidoScope_CheckMmAgeReqValue(KaleidoScope_GetMmItemAgeReq(item));
+}
+
+#define PLAYER_STATE1_MOUNTED 0x00800000
+
+static u8 sHorseBowManaged;
+static u8 sHorsePreviousBItem;
+
+static void Interface_UpdateButtons_Horse(PlayState* play)
+{
+    Player* player;
+    u8* bItem;
+    u8 savedBowItem;
+    u8 itemBefore;
+    int mounted;
+    int spoofBow;
+
+    player = GET_PLAYER(play);
+    bItem = &gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B];
+    mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    if (sHorseBowManaged)
+    {
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = sHorsePreviousBItem;
+
+        if (*bItem == ITEM_NONE)
+            *bItem = ITEM_MM_BOW;
+    }
+
+    itemBefore = *bItem;
+    savedBowItem = gMmSave.info.inventory.items[ITS_MM_BOW];
+    spoofBow = mounted && savedBowItem == ITEM_NONE;
+    if (spoofBow)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    ((void (*)(PlayState*))0x80111cb4)(play);
+
+    if (spoofBow)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = savedBowItem;
+    player = GET_PLAYER(play);
+    mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    if (!mounted)
+    {
+        sHorseBowManaged = 0;
+        return;
+    }
+    if (*bItem == ITEM_MM_BOW &&
+        itemBefore != ITEM_MM_BOW &&
+        itemBefore != ITEM_MM_BOMB &&
+        itemBefore != ITEM_MM_BOMBCHU)
+    {
+        sHorsePreviousBItem = itemBefore;
+        sHorseBowManaged = 1;
+    }
+
+    if (!sHorseBowManaged)
+        return;
+    if (*bItem != ITEM_MM_BOW)
+    {
+        sHorseBowManaged = 0;
+        return;
+    }
+    if (!KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW))
+        *bItem = ITEM_NONE;
+}
+
+PATCH_CALL(0x80112e68, Interface_UpdateButtons_Horse);
+PATCH_CALL(0x80121140, Interface_UpdateButtons_Horse);
+
+static u8 KaleidoScope_GetMmSlotItem(u16 slot)
+{
+    u8* itemPtr;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+
+    if (slot > ITS_MM_MASK_FIERCE_DEITY)
+        return ITEM_NONE;
+
+    if (comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize) >= 0)
+        return *itemPtr;
+
+    return gMmSave.info.inventory.items[slot];
+}
+
+int KaleidoScope_CheckMmSlotAgeReq(u16 slot)
+{
+    u8 item;
+
+    item = KaleidoScope_GetMmSlotItem(slot);
+
+    if (item != ITEM_NONE && item < 0xff)
+        return KaleidoScope_CheckMmItemAgeReq(item);
+
+    return 1;
+}
+
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN] =
 {
     { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
@@ -643,7 +872,7 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, (void*)customDestination, customIconSize);
 
         u8 customItemIndex = icon - ITEM_MM_CUSTOM_MIN;
-        if (customItemIndex >= (ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
+        if (customItemIndex >= (ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex] || !KaleidoScope_CheckMmItemAgeReq(icon))
         {
             KaleidoScope_GrayOutTextureRGBA32((u32*)customDestination, customIconSize);
         }
@@ -987,15 +1216,58 @@ void KaleidoScope_CustomDrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* g
 
     switch (item)
     {
+    case ITEM_MM_BOW:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BOW];
+        maxAmmo = kMaxArrows[gMmSave.info.inventory.upgrades.quiver];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
+    case ITEM_MM_BOMB:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BOMBS];
+        maxAmmo = kMaxBombs[gMmSave.info.inventory.upgrades.bombBag];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
     case ITEM_MM_BOMBCHU:
         ammo = gSave.info.inventory.ammo[ITS_MM_BOMBCHU];
         maxAmmo = gMaxBombchuMm;
-        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
         break;
+
+    case ITEM_MM_STICK:
+        ammo = gSave.info.inventory.ammo[ITS_MM_STICKS];
+        maxAmmo = kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
+    case ITEM_MM_NUT:
+        ammo = gSave.info.inventory.ammo[ITS_MM_NUTS];
+        maxAmmo = kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
+    case ITEM_MM_MAGIC_BEAN:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BEANS];
+        maxAmmo = 20;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
+    case ITEM_MM_POWDER_KEG:
+        ammo = gSave.info.inventory.ammo[ITS_MM_KEG];
+        maxAmmo = 1;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
+    case ITEM_MM_PICTOGRAPH_BOX:
+        ammo = (gSave.info.inventory.quest.value & (1 << 0x19)) ? 1 : 0;
+        maxAmmo = 1;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && KaleidoScope_CheckMmItemAgeReq(item);
+        break;
+
     case ITEM_MM_SLINGSHOT:
         ammo = gMmExtraAmmo.slingshotSeeds;
         maxAmmo = kMaxSeeds[gMmSave.info.inventory.upgrades.bulletBag];
-        canEquip = gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][item - ITEM_MM_CUSTOM_MIN];
+        canEquip = gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][item - ITEM_MM_CUSTOM_MIN] && KaleidoScope_CheckMmItemAgeReq(item);
         break;
     default:
         return;
@@ -1038,7 +1310,14 @@ void KaleidoScope_DrawAmmoCountWrapper(PauseContext* pauseCtx, GraphicsContext* 
 {
     switch (item)
     {
+    case ITEM_MM_BOW:
+    case ITEM_MM_BOMB:
     case ITEM_MM_BOMBCHU:
+    case ITEM_MM_STICK:
+    case ITEM_MM_NUT:
+    case ITEM_MM_MAGIC_BEAN:
+    case ITEM_MM_POWDER_KEG:
+    case ITEM_MM_PICTOGRAPH_BOX:
     case ITEM_MM_SLINGSHOT:
         KaleidoScope_CustomDrawAmmoCount(pauseCtx, gfxCtx, item, ammoIndex);
         break;

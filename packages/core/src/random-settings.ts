@@ -1,6 +1,7 @@
 import type { Settings } from './settings';
 import { Random, randString, randomInt } from './random';
 import { makeSettings, validateSettings } from './settings';
+import { MM_AGE_REQ_ITEMS, isMmAgeReqItemInPool, randomizeMmAgeRequirements } from './mm-age-requirements';
 
 export const DEFAULT_RANDOM_SETTINGS = {
   mq: false,
@@ -752,6 +753,19 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.spellFireMm = booleanWeighted(random, 0.25);
     base.spellWindMm = booleanWeighted(random, 0.25);
     base.spellLoveMm = booleanWeighted(random, 0.25);
+  }
+
+  /* MM Age Requirements - 50% none, 50% age-locked */
+  if (base.games !== 'oot' && booleanWeighted(random, 0.5)) {
+    if (!base.crossAge && !base.adultMaskMm) {
+      base.adultMaskMm = true;
+    }
+
+    const ageReqItemIds = MM_AGE_REQ_ITEMS
+        .filter(item => isMmAgeReqItemInPool(base, item))
+        .map(item => item.id);
+
+    randomizeMmAgeRequirements(base, random, ageReqItemIds);
   }
 
   /* Extra Wallets - 25% none, 25% all, 50% individual */

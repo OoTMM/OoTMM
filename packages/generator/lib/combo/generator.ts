@@ -1,6 +1,6 @@
 import type { Options, OptionsInput, Settings, MonitorCallbacks } from '@ootmm/core';
 
-import { Monitor, Random, applyRandomSettings, options } from '@ootmm/core';
+import { Monitor, Random, applyRandomSettings, options, resolveMmAgeRequirements } from '@ootmm/core';
 import { logic } from '@ootmm/logic';
 import { codegen } from './codegen';
 import { custom } from './custom';
@@ -110,6 +110,13 @@ export class Generator {
       this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
     } else if (this.opts.mode === 'create') {
       await randomVariants(this.opts.settings);
+    }
+
+    if (this.opts.mode !== 'patch') {
+      await resolveMmAgeRequirements(
+          this.opts.settings,
+          this.opts.seed,
+      );
     }
 
     if (this.opts.mode !== 'patch') {
