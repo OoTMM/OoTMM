@@ -323,7 +323,11 @@
       <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 1" slice="2" item="NOTHING"/>
       <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 2" slice="3" item="NOTHING"/>
     </actor>
-    <xflag type="soil" location="Great Bay Coast Soil" actor="0x0" item="RUPEE_RED"/>
+    <actor>
+      <match setup="0" actor="0x00"/>
+      <match setup="1" actor="0x00"/>
+      <xflag type="soil" location="Great Bay Coast Soil" item="RUPEE_RED"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x7a"/>
       <match setup="1" actor="0x02"/>

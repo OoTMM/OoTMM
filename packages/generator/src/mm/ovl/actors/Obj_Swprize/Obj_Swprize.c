@@ -86,22 +86,10 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
     }
 }
 
-static void ObjSzprize_Alias(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_MM_GREAT_BAY_COAST:
-        xf->setupId = 0;
-        break;
-    }
-}
-
 void ObjSwprize_Init(Actor* thisx, PlayState* play) {
     ObjSwprize* this = (ObjSwprize*)thisx;
 
-    if (Xflag_Init(&this->xflag, thisx, play)) {
-        ObjSzprize_Alias(&this->xflag);
-    }
+    Xflag_Init(&this->xflag, thisx, play);
 
     if (Flags_GetSwitch(play, OBJ_SWPRIZE_GET_SWITCH_FLAG(&this->actor))) {
         ObjSwprize_SetupDoNothing(this);
