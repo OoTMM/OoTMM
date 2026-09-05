@@ -153,12 +153,12 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
                     childParams = (((this->drawType & 0xF0) << 4) | (this->actor.params + 1));
                 }
 
-                g.xflagOverrideEx = TRUE;
+                g.xflagOverride = TRUE;
                 g.xflagId = Xflag_LookupSlice(this->xflagSpawner, i + 1);
                 childWood = (EnWood02*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_WOOD02,
                                                           childPos.x, childPos.y, childPos.z, this->actor.world.rot.x,
                                                           *childSpawnAngle, 0, childParams);
-                g.xflagOverrideEx = FALSE;
+                g.xflagOverride = FALSE;
 
                 if (childWood != NULL) {
                     childWood->unk_14E[0] = i;

@@ -215,10 +215,10 @@ void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, PlayState* play, s16 acto
     XflagID id;
 
     id = Xflag_LookupSlice(spawner->xflag, count);
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     g.xflagId = id;
     Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
 }
 
 void EnElf_PlayItemSfx(Actor_EnElf* this, PlayState* play)

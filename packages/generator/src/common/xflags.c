@@ -194,7 +194,7 @@ XflagID Xflag_InitEx(Actor* actor, PlayState* play)
 {
     Xflag xf;
 
-    if (g.xflagOverrideEx)
+    if (g.xflagOverride)
         return g.xflagId;
 
     Xflag_Init(&xf, actor, play);

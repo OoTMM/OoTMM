@@ -17,8 +17,7 @@ typedef struct
     const ComboItemQuery*   itemQueryBox;
     u8                      silverRupee;
     u8                      roomEnemyLackSoul:1;
-    u8                      spawnExtended:1;
-    u8                      xflagOverrideEx:1;
+    u8                      xflagOverride:1;
     u8                      isNextEntranceInitialSong:1;
     u8                      bronzeScaleSolidGround:1;
     u8                      blockingMessage:1;

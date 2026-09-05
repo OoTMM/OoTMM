@@ -46,9 +46,9 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, PlayState* play, s16 actor
     Actor* tmp;
 
     g.xflagId = Xflag_LookupSlice(this->xflag, index);
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     tmp = Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
 
     return tmp;
 }

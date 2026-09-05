@@ -91,10 +91,10 @@ void func_808B29F0(BgSpot11Oasis* this, PlayState* play) {
 
         /* Spawn the fairies, with xflag */
         g.xflagId = Xflag_InitEx(&this->actor, play);
-        g.xflagOverrideEx = TRUE;
+        g.xflagOverride = TRUE;
         Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f,
                     this->actor.world.pos.z, 0, 0, 0, 0x0004);
-        g.xflagOverrideEx = FALSE;
+        g.xflagOverride = FALSE;
         Sfx_PlaySfxCentered(NA_SE_SY_CORRECT_CHIME);
     }
     func_808B27F0(play, this->actor.world.pos.y);

@@ -429,9 +429,9 @@ static void EnButte_SpawnFairy(Actor_EnButte* this, PlayState* play)
         return;
 
     g.xflagId = this->xflag;
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
 }
 
 void EnButte_TransformIntoFairy(Actor_EnButte* this, PlayState* play)

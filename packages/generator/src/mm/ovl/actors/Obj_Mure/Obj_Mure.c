@@ -111,9 +111,9 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, PlayState* play, s16 actor
     Actor* tmp;
 
     g.xflagId = Xflag_LookupSlice(this->xflag, index);
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     tmp = Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
 
     return tmp;
 }

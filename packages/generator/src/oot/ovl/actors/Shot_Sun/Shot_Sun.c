@@ -85,10 +85,10 @@ void ShotSun_Destroy(Actor* thisx, PlayState* play) {
 
 void ShotSun_SpawnFairy(ShotSun* this, PlayState* play) {
     g.xflagId = this->xflag;
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.home.pos.x, this->actor.home.pos.y,
                 this->actor.home.pos.z, 0, 0, 0, /* FAIRY_HEAL_BIG */ 0x07);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
     Actor_Kill(&this->actor);
 }
 

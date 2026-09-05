@@ -56,10 +56,10 @@ void ObjMure3_SpawnRupee(Actor_ObjMure3* this, PlayState* play, Vec3f* pos, int 
         return;
 
     /* Spawn the item */
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     g.xflagId = Xflag_LookupSlice(this->xflag, index);
     item = (Actor_EnItem00*)Item_DropCollectible2(play, pos, params);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
 
     /* Original stuff */
     this->children[index] = item;

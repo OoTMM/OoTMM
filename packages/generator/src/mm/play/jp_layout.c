@@ -10,10 +10,10 @@ static void ComboPlay_SpawnLayoutDependantRupee(PlayState* play, float x, float 
     xf.setupId = 0;
     xf.id = actorIndex;
 
-    g.xflagOverrideEx = TRUE;
+    g.xflagOverride = TRUE;
     g.xflagId = Xflag_Lookup(&xf);
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ITEM00, x, y, z, 0, 0, 0, params);
-    g.xflagOverrideEx = FALSE;
+    g.xflagOverride = FALSE;
 }
 
 static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float y, float z)
