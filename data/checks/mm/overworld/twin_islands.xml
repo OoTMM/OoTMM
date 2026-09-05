@@ -221,16 +221,56 @@
       <match setup="1" actor="0x1f"/>
       <xflag type="pot" location="Goron Race Pot 30" item="MAGIC_JAR_LARGE"/>
     </actor>
-    <xflag type="tree" location="Goron Race Forked Tree 1" actor="0x3b" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 2" actor="0x3c" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 3" actor="0x3d" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 4" actor="0x3e" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 5" actor="0x3f" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 6" actor="0x40" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 7" actor="0x41" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 8" actor="0x42" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 9" actor="0x43" item="NOTHING"/>
-    <xflag type="tree" location="Goron Race Forked Tree 10" actor="0x44" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x3b"/>
+      <match setup="1" actor="0x3b"/>
+      <xflag type="tree" location="Goron Race Forked Tree 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3c"/>
+      <match setup="1" actor="0x3c"/>
+      <xflag type="tree" location="Goron Race Forked Tree 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3d"/>
+      <match setup="1" actor="0x3d"/>
+      <xflag type="tree" location="Goron Race Forked Tree 3" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3e"/>
+      <match setup="1" actor="0x3e"/>
+      <xflag type="tree" location="Goron Race Forked Tree 4" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3f"/>
+      <match setup="1" actor="0x3f"/>
+      <xflag type="tree" location="Goron Race Forked Tree 5" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x40"/>
+      <match setup="1" actor="0x40"/>
+      <xflag type="tree" location="Goron Race Forked Tree 6" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x41"/>
+      <match setup="1" actor="0x41"/>
+      <xflag type="tree" location="Goron Race Forked Tree 7" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x42"/>
+      <match setup="1" actor="0x42"/>
+      <xflag type="tree" location="Goron Race Forked Tree 8" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x43"/>
+      <match setup="1" actor="0x43"/>
+      <xflag type="tree" location="Goron Race Forked Tree 9" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x44"/>
+      <match setup="1" actor="0x44"/>
+      <xflag type="tree" location="Goron Race Forked Tree 10" item="NOTHING"/>
+    </actor>
   </scene>
   <scene id="GROTTOS" room="0xe">
     <chest location="Twin Islands Frozen Grotto Chest" flag="0x02" item="RUPEE_RED"/>
