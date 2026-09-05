@@ -78,46 +78,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 500, ICHAIN_STOP),
 };
 
-static void ObjHamishi_Alias(Actor_ObjHamishi* this)
-{
-    Xflag* xflag;
-
-    xflag = &this->xflag;
-
-    switch(xflag->sceneId)
-    {
-#if defined(GAME_OOT)
-    case SCE_OOT_GORON_CITY:
-        if(xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            switch(xflag->id)
-            {
-            case 1: xflag->id = 41; break;
-            case 4: xflag->id = 45; break;
-            case 2: xflag->id = 42; break;
-            case 5: xflag->id = 46; break;
-            case 3: xflag->id = 43; break;
-            }
-        }
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
-        if(xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            switch(xflag->id)
-            {
-            case 4: xflag->id = 12; break;
-            case 5: xflag->id = 13; break;
-            case 6: xflag->id = 11; break;
-            case 7: xflag->id = 14; break;
-            }
-        }
-        break;
-#endif
-    }
-}
-
 static int ObjHamishi_IsShuffled(Actor_ObjHamishi* this)
 {
     return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
@@ -149,9 +109,7 @@ static void ObjHamishi_InitXflag(Actor_ObjHamishi* this, PlayState* play)
 
     ComboItemOverride   o;
 
-    if (Xflag_Init(&this->xflag, &this->actor, play))
-        ObjHamishi_Alias(this);
-
+    Xflag_Init(&this->xflag, &this->actor, play);
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }

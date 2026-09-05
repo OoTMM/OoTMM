@@ -66,10 +66,26 @@
     <xflag type="boulder" location="Death Mountain Crater Boulder 1" setup="0" room="0x1" actor="0x23" item="NOTHING"/>
     <xflag type="boulder" location="Death Mountain Crater Boulder 2" setup="0" room="0x1" actor="0x24" item="NOTHING"/>
     <xflag type="boulder" location="Death Mountain Crater Boulder 3" setup="0" room="0x1" actor="0x25" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Grotto" setup="0" room="0x1" actor="0xb" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 1" setup="0" room="0x1" actor="0xc" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 2" setup="0" room="0x1" actor="0xd" item="NOTHING"/>
-    <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Shortcut" setup="0" room="0x1" actor="0xe" item="NOTHING"/>
+    <actor room="0x1">
+      <match setup="0" actor="0xb"/>
+      <match setup="2" actor="0x6"/>
+      <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Grotto" item="NOTHING"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0xc"/>
+      <match setup="2" actor="0x4"/>
+      <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0xd"/>
+      <match setup="2" actor="0x5"/>
+      <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Great Fairy 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0xe"/>
+      <match setup="2" actor="0x7"/>
+      <xflag type="boulder-red" location="Death Mountain Crater Red Boulder Shortcut" item="NOTHING"/>
+    </actor>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 1" setup="0" room="0x1" actor="0x1b" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 2" setup="0" room="0x1" actor="0x1c" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 3" setup="0" room="0x1" actor="0x1d" item="NOTHING"/>

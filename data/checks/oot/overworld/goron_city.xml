@@ -77,11 +77,31 @@
     <xflag type="boulder" location="Goron City Boulder Shortcut 1" setup="0" room="0x3" actor="0x18" item="NOTHING"/>
     <xflag type="boulder" location="Goron City Boulder Shortcut 2" setup="0" room="0x3" actor="0x1b" item="NOTHING"/>
     <xflag type="boulder" location="Goron City Boulder Shortcut 3" setup="0" room="0x3" actor="0x1c" item="NOTHING"/>
-    <xflag type="boulder-red" location="Goron City Red Boulder 1" setup="0" room="0x0" actor="0x29" item="NOTHING"/>
-    <xflag type="boulder-red" location="Goron City Red Boulder 2" setup="0" room="0x0" actor="0x2d" item="NOTHING"/>
-    <xflag type="boulder-red" location="Goron City Red Boulder 3" setup="0" room="0x0" actor="0x2a" item="NOTHING"/>
-    <xflag type="boulder-red" location="Goron City Red Boulder 4" setup="0" room="0x0" actor="0x2e" item="NOTHING"/>
-    <xflag type="boulder-red" location="Goron City Red Boulder 5" setup="0" room="0x0" actor="0x2b" item="NOTHING"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x29"/>
+      <match setup="2" actor="0x01"/>
+      <xflag type="boulder-red" location="Goron City Red Boulder 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2d"/>
+      <match setup="2" actor="0x02"/>
+      <xflag type="boulder-red" location="Goron City Red Boulder 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2a"/>
+      <match setup="2" actor="0x03"/>
+      <xflag type="boulder-red" location="Goron City Red Boulder 3" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2e"/>
+      <match setup="2" actor="0x04"/>
+      <xflag type="boulder-red" location="Goron City Red Boulder 4" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2b"/>
+      <match setup="2" actor="0x05"/>
+      <xflag type="boulder-red" location="Goron City Red Boulder 5" item="NOTHING"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0x00"/>
       <match setup="2" actor="0x06"/>
