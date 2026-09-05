@@ -2,15 +2,18 @@
 
 static void ComboPlay_SpawnLayoutDependantRupee(PlayState* play, float x, float y, float z, s16 params, u8 actorIndex)
 {
-    Xflag_Clear(&g.xflag);
-    g.xflag.sceneId = play->sceneId;
-    g.xflag.roomId = 0x02;
-    g.xflag.sliceId = 0;
-    g.xflag.setupId = 0;
-    g.xflag.id = actorIndex;
-    g.xflagOverride = TRUE;
+    Xflag xf;
+    Xflag_Clear(&xf);
+    xf.sceneId = play->sceneId;
+    xf.roomId = 0x02;
+    xf.sliceId = 0;
+    xf.setupId = 0;
+    xf.id = actorIndex;
+
+    g.xflagOverrideEx = TRUE;
+    g.xflagId = Xflag_Lookup(&xf);
     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ITEM00, x, y, z, 0, 0, 0, params);
-    g.xflagOverride = FALSE;
+    g.xflagOverrideEx = FALSE;
 }
 
 static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float y, float z)

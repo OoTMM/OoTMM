@@ -203,12 +203,6 @@ XflagID Xflag_InitEx(Actor* actor, PlayState* play)
 
 int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
 {
-    if (g.xflagOverride)
-    {
-        memcpy(xf, &g.xflag, sizeof(*xf));
-        return FALSE;
-    }
-
     /* Check for an actor index of 0xff, meaning NO XFLAG */
     if (actor->actorIndex == 0xff)
     {
