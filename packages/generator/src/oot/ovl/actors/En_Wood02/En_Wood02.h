@@ -13,7 +13,8 @@ typedef struct EnWood02 {
     /* 0x0153 */ u8 spawnType;
     /* 0x0154 */ u8 drawType;
     /* 0x0158 */ ColliderCylinder collider;
-    Xflag xflag;
+    XflagID xflag;
+    XflagID xflagSpawner;
 } EnWood02; // size = 0x01A4
 
 // Types with SPAWNED in the name are those that can be managed by a spawner, however the actor allows you to spawn them

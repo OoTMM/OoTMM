@@ -161,14 +161,13 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
                     unk = this->actor.home.rot.z;
                 }
 
-                memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-                g.xflag.sliceId = i + 1;
-                g.xflagOverride = TRUE;
+                g.xflagOverrideEx = TRUE;
+                g.xflagId = Xflag_LookupSlice(this->xflagSpawner, i + 1);
                 childParams = ((this->unk_144 << 8) & 0xFF00) | (this->actor.params + 1);
                 child = (EnWood02*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_WOOD02, childPos.x,
                                                       childPos.y, childPos.z, this->actor.world.rot.x,
                                                       sWood02SpawnAngle[i], unk, childParams);
-                g.xflagOverride = FALSE;
+                g.xflagOverrideEx = FALSE;
                 if (child != NULL) {
                     child->unk_14A[0] = i;
                     this->unk_14A[i] |= 1;
@@ -190,7 +189,10 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
     f32 floorY;
     s16 extraRot;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflagSpawner = Xflag_InitEx(thisx, play);
+    this->xflag = this->xflagSpawner;
+    if (!Xflag_IsValidEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     this->actor.world.rot.z = 0;
     this->unk_144 = ENWOOD02_GET_FF00(&this->actor);
@@ -305,7 +307,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
     }
 
     /* Override tree type */
-    if (Xflag_IsValid(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
         if (EnWood02_IsTree(this))
             this->drawType = WOOD_DRAW_TREE_OVAL;
@@ -360,9 +362,9 @@ void EnWood02_Destroy(Actor* thisx, PlayState* play) {
 
 static int EnWood02_DropCustom(EnWood02* this, PlayState* play)
 {
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE && !Xflag_Get(this->xflag))
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return true;
     }
     return false;
@@ -506,13 +508,13 @@ int EnWood02_CAMC(EnWood02* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (Xflag_Get(this->xflag))
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
@@ -541,7 +543,7 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     }
 
     csmc = -1;
-    if (Xflag_IsValid(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
         csmc = EnWood02_CAMC(this, play);
         if (csmc == CSMC_NORMAL)
