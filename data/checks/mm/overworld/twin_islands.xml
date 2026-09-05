@@ -27,19 +27,82 @@
       <match scene="TWIN_ISLANDS_SPRING" actor="0x12"/>
       <xflag type="rupee" location="Twin Islands Rupee 4" item="RUPEE_BLUE"/>
     </actor>
-    <xflag type="snowball" location="Twin Islands Big Snowball 01" actor="0x3b" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 02" actor="0x3a" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 03" actor="0x39" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 04" actor="0x37" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 05" actor="0x16" item="NOTHING"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 06" actor="0x3c" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 07" actor="0x13" item="NOTHING"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 08" actor="0x5" item="NOTHING"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 09" actor="0x38" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 10" actor="0x1e" item="NOTHING"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 11" actor="0x36" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 12" actor="0x12" item="NOTHING"/>
-    <xflag type="snowball" location="Twin Islands Big Snowball 13" actor="0x3d" item="MAGIC_JAR_SMALL"/>
+    <actor>
+      <match actor="0x0e"/>
+      <match actor="0x3b"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 01" item="MAGIC_JAR_SMALL"/>
+    </actor>
+    <actor>
+      <match actor="0x10"/>
+      <match actor="0x2e"/>
+      <match actor="0x3a"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 02" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match actor="0x14"/>
+      <match actor="0x30"/>
+      <match actor="0x39"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 03" item="MAGIC_JAR_SMALL"/>
+    </actor>
+    <actor>
+      <match actor="0x0d"/>
+      <match actor="0x33"/>
+      <match actor="0x37"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 04" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match actor="0x11"/>
+      <match actor="0x16"/>
+      <match actor="0x2a"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 05" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match actor="0x1d"/>
+      <match actor="0x29"/>
+      <match actor="0x3c"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 06" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match actor="0x13"/>
+      <match actor="0x2d"/>
+      <match actor="0x31"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 07" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match actor="0x04"/>
+      <match actor="0x05"/>
+      <match actor="0x32"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 08" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match actor="0x28"/>
+      <match actor="0x2f"/>
+      <match actor="0x38"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 09" item="MAGIC_JAR_SMALL"/>
+    </actor>
+    <actor>
+      <match actor="0x1e"/>
+      <match actor="0x2c"/>
+      <match actor="0x34"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 10" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match actor="0x15"/>
+      <match actor="0x1c"/>
+      <match actor="0x36"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 11" item="MAGIC_JAR_SMALL"/>
+    </actor>
+    <actor>
+      <match actor="0x12"/>
+      <match actor="0x2b"/>
+      <match actor="0x35"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 12" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match actor="0x0f"/>
+      <match actor="0x3d"/>
+      <xflag type="snowball" location="Twin Islands Big Snowball 13" item="MAGIC_JAR_SMALL"/>
+    </actor>
     <xflag type="snowball" location="Twin Islands Small Snowball 1" actor="0x3e" item="MAGIC_JAR_SMALL"/>
     <xflag type="snowball" location="Twin Islands Small Snowball 2" actor="0x3f" item="RECOVERY_HEART"/>
     <xflag type="snowball" location="Twin Islands Small Snowball 3" actor="0x40" item="MAGIC_JAR_SMALL"/>

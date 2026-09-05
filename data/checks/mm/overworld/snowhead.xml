@@ -8,10 +8,26 @@
     <xflag type="snowball" location="Snowhead Big Snowball 4" setup="0" room="0x0" actor="0x31" item="MAGIC_JAR_SMALL"/>
     <xflag type="snowball" location="Snowhead Big Snowball 5" setup="0" room="0x0" actor="0x32" item="MAGIC_JAR_SMALL"/>
     <xflag type="snowball" location="Snowhead Big Snowball 6" setup="0" room="0x0" actor="0x33" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Snowhead Small Snowball 1" setup="0" room="0x0" actor="0x2a" item="BOMBS_5"/>
-    <xflag type="snowball" location="Snowhead Small Snowball 2" setup="0" room="0x0" actor="0x2b" item="ARROWS_20"/>
-    <xflag type="snowball" location="Snowhead Small Snowball 3" setup="0" room="0x0" actor="0x2c" item="FLEXIBLE"/>
-    <xflag type="snowball" location="Snowhead Small Snowball 4" setup="0" room="0x0" actor="0x2d" item="MAGIC_JAR_LARGE"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x2a"/>
+      <match setup="1" actor="0x14"/>
+      <xflag type="snowball" location="Snowhead Small Snowball 1" item="BOMBS_5"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2b"/>
+      <match setup="1" actor="0xb"/>
+      <xflag type="snowball" location="Snowhead Small Snowball 2" item="ARROWS_20"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2c"/>
+      <match setup="1" actor="0xc"/>
+      <xflag type="snowball" location="Snowhead Small Snowball 3" item="FLEXIBLE"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x2d"/>
+      <match setup="1" actor="0xd"/>
+      <xflag type="snowball" location="Snowhead Small Snowball 4" item="MAGIC_JAR_LARGE"/>
+    </actor>
     <xflag type="snowball" location="Snowhead Small Snowball Spring 1" setup="1" room="0x0" actor="0xe" item="RECOVERY_HEART"/>
     <xflag type="snowball" location="Snowhead Small Snowball Spring 2" setup="1" room="0x0" actor="0xf" item="RECOVERY_HEART"/>
     <xflag type="snowball" location="Snowhead Small Snowball Spring 3" setup="1" room="0x0" actor="0x10" item="MAGIC_JAR_SMALL"/>

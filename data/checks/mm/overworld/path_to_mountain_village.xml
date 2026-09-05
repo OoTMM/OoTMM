@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checks game="mm">
   <scene id="PATH_MOUNTAIN_VILLAGE">
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 1" setup="0" actor="0x1a" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 2" setup="0" actor="0x2a" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 3" setup="0" actor="0x1e" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 4" setup="0" actor="0x1f" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x17"/>
+      <match setup="0" actor="0x1a"/>
+      <match setup="0" actor="0x1c"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x13"/>
+      <match setup="0" actor="0x18"/>
+      <match setup="0" actor="0x2a"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1b"/>
+      <match setup="0" actor="0x1d"/>
+      <match setup="0" actor="0x1e"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 3" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x16"/>
+      <match setup="0" actor="0x1f"/>
+      <match setup="0" actor="0x2e"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Lower 4" item="NOTHING"/>
+    </actor>
     <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 1" setup="0" actor="0x23" item="NOTHING"/>
     <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 2" setup="0" actor="0x22" item="NOTHING"/>
     <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 3" setup="0" actor="0x21" item="NOTHING"/>
     <xflag type="snowball" location="Path to Mountain Village Big Snowball Middle 4" setup="0" actor="0x24" item="NOTHING"/>
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 1" setup="0" actor="0x2b" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 2" setup="0" actor="0x29" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 3" setup="0" actor="0x2c" item="RECOVERY_HEART"/>
+    <actor>
+      <match setup="0" actor="0x14"/>
+      <match setup="0" actor="0x2b"/>
+      <match setup="0" actor="0x30"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x29"/>
+      <match setup="0" actor="0x2d"/>
+      <match setup="0" actor="0x2f"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 2" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x15"/>
+      <match setup="0" actor="0x19"/>
+      <match setup="0" actor="0x2c"/>
+      <xflag type="snowball" location="Path to Mountain Village Big Snowball Upper 3" item="RECOVERY_HEART"/>
+    </actor>
     <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Winter 1" setup="0" actor="0x25" item="NOTHING"/>
     <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Winter 2" setup="0" actor="0x26" item="RECOVERY_HEART"/>
     <xflag type="snowball" location="Path to Mountain Village Small Snowball Lower Winter 3" setup="0" actor="0x27" item="RECOVERY_HEART"/>

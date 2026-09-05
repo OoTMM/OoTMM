@@ -72,54 +72,6 @@ void func_80B38E20(Actor_ObjSnowball2* this) {
     Collider_UpdateSpheres(0, &this->collider);
 }
 
-void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
-{
-    Xflag* xflag;
-    xflag = &this->xflag;
-
-    if (xflag->sceneId == SCE_MM_MOUNTAIN_VILLAGE_SPRING)
-    {
-        switch(xflag->id)
-        {
-            case 45:
-                xflag->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
-                xflag->id = 41;
-                break;
-            case 47:
-            case 48:
-            case 49:
-            case 50:
-                xflag->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
-                xflag->id += 6;
-                break;
-            default:
-                UNREACHABLE();
-        }
-    }
-    if (xflag->sceneId == SCE_MM_PATH_SNOWHEAD && xflag->setupId == 1)
-    {
-        switch(xflag->id)
-        {
-            case 17:
-            case 18:
-            case 19:
-                xflag->id -= 8;
-                xflag->setupId = 0;
-                break;
-        }
-    }
-    if (xflag->sceneId == SCE_MM_SNOWHEAD && xflag->setupId == 1)
-    {
-        switch(xflag->id)
-        {
-            case 11: xflag->id = 43; xflag->setupId = 0; break;
-            case 12: xflag->id = 44; xflag->setupId = 0; break;
-            case 13: xflag->id = 45; xflag->setupId = 0; break;
-            case 20: xflag->id = 42; xflag->setupId = 0; break;
-        }
-    }
-}
-
 static int ObjSnowball2_IsShuffled(Actor_ObjSnowball2* this)
 {
     return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
@@ -129,9 +81,7 @@ static void ObjSnowball2_InitXflag(Actor_ObjSnowball2* this, PlayState* play)
 {
     ComboItemOverride   o;
 
-    if (Xflag_Init(&this->xflag, &this->actor, play))
-        ObjSnowball2_Alias(this);
-
+    Xflag_Init(&this->xflag, &this->actor, play);
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }

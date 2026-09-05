@@ -87,113 +87,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_STOP),
 };
 
-static void ObjSnowball_Alias(Actor_ObjSnowball* this)
-{
-    Xflag* xflag;
-
-    xflag = &this->xflag;
-
-    if (xflag->sceneId == SCE_MM_PATH_MOUNTAIN_VILLAGE)
-    {
-        switch(xflag->id)
-        {
-            case 28:
-            case 23:
-                xflag->id = 26; /* Lower 1 */
-                break;
-            case 24:
-            case 19:
-                xflag->id = 42; /* Lower 2 */
-                break;
-            case 27:
-            case 29:
-                xflag->id = 30; /* Lower 3 */
-                break;
-            case 46:
-            case 22:
-                xflag->id = 31; /* Lower 4 */
-                break;
-            case 48:
-            case 20:
-                xflag->id = 43; /* Upper 1 */
-                break;
-            case 45:
-            case 47:
-                xflag->id = 41; /* Upper 2 */
-                break;
-            case 25:
-            case 21:
-                xflag->id = 44; /* Upper 3 */
-                break;
-        }
-    }
-    else if (xflag->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER)
-    {
-        switch(xflag->id)
-        {
-            case 12:
-            case 13:
-                xflag->id = 17; break;
-            case 45:
-            case 16:
-                xflag->id = 14; break;
-            case 48:
-                xflag->id = 46; break;
-            case 15:
-            case 51:
-                xflag->id = 52; break;
-            case 47:
-            case 44:
-                xflag->id = 18; break;
-        }
-    }
-    else if (xflag->sceneId == SCE_MM_TWIN_ISLANDS_WINTER)
-    {
-        switch(xflag->id)
-        {
-            /* Goron Elder on day 2 */
-            case 14:
-                xflag->id = 59; break;
-            case 16:
-            case 46:
-                xflag->id = 58; break;
-            case 20:
-            case 48:
-                xflag->id = 57; break;
-            case 13:
-            case 51:
-                xflag->id = 55; break;
-            case 17:
-            case 42:
-                xflag->id = 22; break;
-            case 41:
-            case 29:
-                xflag->id = 60; break;
-            case 53:
-            case 43:
-                xflag->id = 19; break;
-            /* Goron Elder on day 1 */
-            case 50:
-                xflag->id = 5; break;
-            case 40:
-            case 47:
-                xflag->id = 56; break;
-            case 44:
-            case 52:
-                xflag->id = 30; break;
-            case 21:
-            case 28:
-                xflag->id = 54; break;
-            case 45:
-            case 49:
-                xflag->id = 18; break;
-            /* Only here on day 1 and 3 for some reason */
-            case 15:
-                xflag->id = 61; break;
-        }
-    }
-}
-
 static int ObjSnowball_IsShuffled(Actor_ObjSnowball* this)
 {
     return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
@@ -211,9 +104,7 @@ static void ObjSnowball_InitXflag(Actor_ObjSnowball* this, PlayState* play)
 {
     ComboItemOverride   o;
 
-    if (Xflag_Init(&this->xflag, &this->actor, play))
-        ObjSnowball_Alias(this);
-
+    Xflag_Init(&this->xflag, &this->actor, play);
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }

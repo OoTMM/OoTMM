@@ -18,16 +18,60 @@
       <xflag type="pot" location="Mountain Village Potted Plant 2 Pot" slice="0" item="NOTHING"/>
       <xflag type="grass" location="Mountain Village Potted Plant 2 Grass" slice="1" item="RECOVERY_HEART"/>
     </actor>
-    <xflag type="snowball" location="Mountain Village Big Snowball 1" room="0x0" actor="0x11" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 2" room="0x0" actor="0xe" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 3" room="0x0" actor="0x2e" item="MAGIC_JAR_SMALL"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 4" room="0x0" actor="0x34" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Mountain Village Big Snowball 5" room="0x0" actor="0x12" item="NOTHING"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 1" room="0x0" actor="0x29" item="RECOVERY_HEART"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 2" room="0x0" actor="0x38" item="MAGIC_JAR_LARGE"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 3" room="0x0" actor="0x35" item="BOMBS_5"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 4" room="0x0" actor="0x36" item="ARROWS_20"/>
-    <xflag type="snowball" location="Mountain Village Small Snowball 5" room="0x0" actor="0x37" item="FLEXIBLE"/>
+    <actor room="0x0">
+      <match actor="0xc"/>
+      <match actor="0xd"/>
+      <match actor="0x11"/>
+      <xflag type="snowball" location="Mountain Village Big Snowball 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match actor="0xe"/>
+      <match actor="0x10"/>
+      <match actor="0x2d"/>
+      <xflag type="snowball" location="Mountain Village Big Snowball 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match actor="0x2e"/>
+      <match actor="0x30"/>
+      <xflag type="snowball" location="Mountain Village Big Snowball 3" item="MAGIC_JAR_SMALL"/>
+    </actor>
+    <actor room="0x0">
+      <match actor="0xf"/>
+      <match actor="0x33"/>
+      <match actor="0x34"/>
+      <xflag type="snowball" location="Mountain Village Big Snowball 4" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x0">
+      <match actor="0x12"/>
+      <match actor="0x2c"/>
+      <match actor="0x2f"/>
+      <xflag type="snowball" location="Mountain Village Big Snowball 5" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x29"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x2d"/>
+      <xflag type="snowball" location="Mountain Village Small Snowball 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x38"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x32"/>
+      <xflag type="snowball" location="Mountain Village Small Snowball 2" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x35"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x2f"/>
+      <xflag type="snowball" location="Mountain Village Small Snowball 3" item="BOMBS_5"/>
+    </actor>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x36"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x30"/>
+      <xflag type="snowball" location="Mountain Village Small Snowball 4" item="ARROWS_20"/>
+    </actor>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x37"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x31"/>
+      <xflag type="snowball" location="Mountain Village Small Snowball 5" item="FLEXIBLE"/>
+    </actor>
     <xflag type="snowball" location="Mountain Village Small Snowball Winter 1" room="0x0" actor="0x2a" item="RECOVERY_HEART"/>
     <xflag type="snowball" location="Mountain Village Small Snowball Winter 2" room="0x0" actor="0x28" item="NOTHING"/>
     <xflag type="snowball" location="Mountain Village Small Snowball Winter 3" room="0x0" actor="0x27" item="MAGIC_JAR_SMALL"/>
