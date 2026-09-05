@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { SETTINGS } from '@ootmm/generator';
 
 import { InputField, SelectField, CheckboxField, Select } from '@/app/components/ui';
@@ -68,7 +69,7 @@ function SettingTooltip({ setting }: { setting: string }) {
   </>;
 }
 
-function SettingSet({ setting }: { setting: string }) {
+function SettingSet({ setting, label }: { setting: string; label?: string }) {
   const settings = useStore(state => state.settings);
   const patchSettings = useStore(state => state.patchSettings);
   const data = SETTINGS.find(x => x.key === setting)!;
@@ -146,7 +147,7 @@ function SettingSet({ setting }: { setting: string }) {
     <span>
       <SelectField
         value={(settings[data.key] as any).type as string}
-        label={data.name}
+        label={label ?? data.name}
         options={SET_OPTIONS}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         onSelect={onTypeChange as any}
@@ -186,39 +187,52 @@ function SettingSet({ setting }: { setting: string }) {
   );
 }
 
-export function Setting({ setting }: { setting: string }) {
+type SettingProps = {
+  setting: string;
+  showDisabled?: boolean;
+  label?: string;
+};
+
+export function Setting({ setting, showDisabled = false, label }: SettingProps) {
   const settings = useStore(state => state.settings);
   const patchSettings = useStore(state => state.patchSettings);
   const data = SETTINGS.find(x => x.key === setting)!;
   const cond = (data as any).cond;
-  const isDisabled = cond && !cond(settings);
+  const isDisabled = !!cond && !cond(settings);
+  const settingLabel = label ?? data.name;
 
-  if (isDisabled) {
+  if (isDisabled && !showDisabled) {
     return null;
   }
 
+  let content: ReactNode;
+
   switch (data.type) {
   case 'enum':
-    return (
+    content = (
       <SelectField
         value={settings[data.key] as string}
-        label={data.name}
+        label={settingLabel}
         options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings)).map((x: any) => ({ label: x.name, value: x.value }))}
         tooltip={data.description && <SettingTooltip setting={data.key}/>}
         onSelect={(v) => patchSettings({ [data.key]: v })}
       />
     );
-  case 'set': return <SettingSet setting={setting}/>;
+    break;
+  case 'set':
+    content = <SettingSet setting={setting} label={settingLabel}/>;
+    break;
   case 'boolean':
-    return (
+    content = (
       <CheckboxField
-        label={data.name}
+        label={settingLabel}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         checked={settings[data.key] as boolean}
         onChange={(v) => patchSettings({ [data.key]: v })}
       />
     );
-  case 'number':
+    break;
+  case 'number': {
     const min = (data as any).min;
     const max = (data as any).max;
     let minValue: number | undefined;
@@ -231,10 +245,10 @@ export function Setting({ setting }: { setting: string }) {
       maxValue = typeof max === 'function' ? max(settings) : max;
     }
 
-    return (
+    content = (
       <InputField
         type="number"
-        label={data.name}
+        label={settingLabel}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         value={settings[data.key].toString()}
         onChange={(v) => patchSettings({ [data.key]: Number(v) })}
@@ -242,7 +256,24 @@ export function Setting({ setting }: { setting: string }) {
         max={maxValue}
       />
     );
+    break;
+  }
   default:
     return null;
   }
+
+  return (
+    <div
+      className={isDisabled ? 'opacity-50' : undefined}
+      aria-disabled={isDisabled || undefined}
+      title={isDisabled ? 'Unavailable with the current settings' : undefined}
+    >
+      <fieldset
+        disabled={isDisabled}
+        className={`m-0 min-w-0 border-0 p-0 ${isDisabled ? 'pointer-events-none' : ''}`}
+      >
+        {content}
+      </fieldset>
+    </div>
+  );
 }
