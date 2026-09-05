@@ -64,11 +64,31 @@
     <xflag type="boulder" location="Zora Cape Large Boulder 1" setup="0" actor="0x2a" item="NOTHING"/>
     <xflag type="boulder" location="Zora Cape Large Boulder 2" setup="0" actor="0x2b" item="NOTHING"/>
     <xflag type="boulder" location="Zora Cape Boulder" setup="0" actor="0x2c" item="NOTHING"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Beach 1" setup="0" actor="0x18" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Beach 2" setup="0" actor="0x19" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Island Near Fountain" setup="0" actor="0x1a" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Island Near Beach" setup="0" actor="0x1b" item="NUT"/>
-    <xflag type="tree" location="Zora Cape Palm Tree Island Center" setup="0" actor="0x1c" item="NUT"/>
+    <actor>
+      <match setup="0" actor="0x18"/>
+      <match setup="1" actor="0x19"/>
+      <xflag type="tree" location="Zora Cape Palm Tree Beach 1" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x19"/>
+      <match setup="1" actor="0x1a"/>
+      <xflag type="tree" location="Zora Cape Palm Tree Beach 2" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1a"/>
+      <match setup="1" actor="0x1b"/>
+      <xflag type="tree" location="Zora Cape Palm Tree Island Near Fountain" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1b"/>
+      <match setup="1" actor="0x1c"/>
+      <xflag type="tree" location="Zora Cape Palm Tree Island Near Beach" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x1c"/>
+      <match setup="1" actor="0x1d"/>
+      <xflag type="tree" location="Zora Cape Palm Tree Island Center" item="NUT"/>
+    </actor>
     <xflag type="pot" location="Zora Cape Pot Near Beavers 1" setup="0" actor="0x43" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Zora Cape Pot Near Beavers 2" setup="0" actor="0x44" item="MAGIC_JAR_SMALL"/>
     <actor>
