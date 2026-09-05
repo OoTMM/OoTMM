@@ -31,7 +31,7 @@
     "Forest Temple Entrance Room": "true"
     "Forest Temple Initial Hallway Navigation": "get_past_skulltulas"
 
-"Forest Temple Initial Hallway Navigation": #Region exists for enemy drops rando, and for ease of placing the door regions for door rando. Middle Skultula sorta needs roll with adult+stone mask.
+"Forest Temple Initial Hallway Navigation": #Region exists for enemy drops rando, and for ease of placing the door regions for door rando. Middle Skulltula sorta needs roll with adult+stone mask.
   dungeon: Forest
   exits:
     "Forest Temple Initial Hallway Front": "get_past_skulltulas" 
@@ -450,7 +450,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Main Lobby": "event(FOREST_MQ_MEG_CLEAR)"
-    "Forest Temple Antichamber Room Southwest Alcove": "true" #You can walk into and out of the room with nothing; you will get hit by the skulltula as you enter/leave though, unless you're child.
+    "Forest Temple Antichamber Room Southwest Alcove": "get_past_skultullas_no_stone" #You can walk into and out of the room with nothing; you will get hit by the skulltula as you enter/leave though, unless you're child.
     "Forest Temple Antichamber Room East Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_CRYSTAL_SWITCH)"
     "Forest Temple Antichamber Room Northwest Alcove": "true"
     "Forest Temple Antichamber Room South Alcove": "event(FOREST_MQ_ANTICHAMBER_EAST_ALCOVE_FLOOR_SWITCH)"
