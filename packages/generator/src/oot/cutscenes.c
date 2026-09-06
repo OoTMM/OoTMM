@@ -145,28 +145,28 @@ static s32 OnePointCutscene_ShouldCutscenePlay(PlayState *play, Actor *actor)
         OnePointCutscene_Sfx(&shouldCsPlay, false);
         break;
     }
-    case ACTOR_SHOT_SUN:
-    case ACTOR_EN_EX_ITEM:
-    case ACTOR_EN_DNT_NOMAL:
-    case ACTOR_EN_DNT_DEMO:
-    case ACTOR_BG_HAKA_ZOU:
-    case ACTOR_EN_TA:
-    case ACTOR_BG_ICE_SHUTTER:
-    case ACTOR_OBJ_SYOKUDAI:
-    case ACTOR_OBJ_TIMEBLOCK:
-    case ACTOR_EN_PO_SISTERS:
-    case ACTOR_OBJ_ICE_POLY:
-    case ACTOR_BG_YDAN_MARUTA:
-    case ACTOR_BG_SPOT18_SHUTTER:
-    case ACTOR_BG_SPOT05_SOKO:
-    case ACTOR_BG_SPOT06_OBJECTS:
-    case ACTOR_BG_SPOT18_BASKET:
-    case ACTOR_BG_HIDAN_CURTAIN:
-    case ACTOR_BG_MORI_HINERI:
-    case ACTOR_BG_MIZU_SHUTTER:
-    case ACTOR_BG_HAKA_GATE:
-    case ACTOR_EN_KAKASI2:
-    case ACTOR_EN_DNT_JIJI:
+    case ACTOR_BG_HAKA_GATE:      // Truth Spinner Puzzle (Shadow Temple)
+    case ACTOR_BG_HAKA_ZOU:       // Bombable Shadow Temple themed objects
+    case ACTOR_BG_HIDAN_CURTAIN:  // Flame circle
+    case ACTOR_BG_ICE_SHUTTER:    // Vertical Ice Bars (Doors) in Ice Cavern
+    case ACTOR_BG_MIZU_SHUTTER:   // Water Temple Gate
+    case ACTOR_BG_MORI_HINERI:    // Forest Temple Twisting Corridor
+    case ACTOR_BG_SPOT05_SOKO:    // Sacred Forest Meadow Pond Bottom (?)
+    case ACTOR_BG_SPOT06_OBJECTS: // Lake Hylia Objects
+    case ACTOR_BG_SPOT18_BASKET:  // Spinning Goron Vase
+    case ACTOR_BG_SPOT18_SHUTTER: // Door to Darunia's Room
+    case ACTOR_BG_YDAN_MARUTA:    // Deku Tree Spiked Log & Dropdown Ladder
+    // case ACTOR_EN_DNT_DEMO:       // Forest Stage Actor Spawner
+    // case ACTOR_EN_DNT_JIJI:       // Forest Stage Judge
+    case ACTOR_EN_DNT_NOMAL:      // Deku Scrub (Deku Target Game)
+    case ACTOR_EN_EX_ITEM:        // Bombchu Bowling Prizes
+    case ACTOR_EN_KAKASI2:        // Pierre (Wandering)
+    case ACTOR_EN_PO_SISTERS:     // Poe Sisters
+    case ACTOR_EN_TA:             // Talon
+    case ACTOR_OBJ_ICE_POLY:      // ???
+    case ACTOR_OBJ_SYOKUDAI:      // Torch Stand (Generic)
+    case ACTOR_OBJ_TIMEBLOCK:     // Time Block
+    case ACTOR_SHOT_SUN:          // Fire Arrow Trigger & Big Fairy
         OnePointCutscene_Sfx(&shouldCsPlay, true);
         break;
     }
