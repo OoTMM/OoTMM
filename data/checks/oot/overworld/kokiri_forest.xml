@@ -132,7 +132,10 @@
     <xflag type="wonder" location="Kokiri Forest Wonder Item Crawl 2" setup="0" room="0x2" actor="0x6" item="RUPEE_GREEN"/>
     <xflag type="wonder" location="Kokiri Forest Wonder Item Platforms 1" setup="0" room="0x0" actor="0x21" item="RUPEE_BLUE"/>
     <xflag type="wonder" location="Kokiri Forest Wonder Item Platforms 2" setup="0" room="0x0" actor="0x26" item="RUPEE_BLUE"/>
-    <actor setup="0" room="0x0" actor="0x49">
+    <actor room="0x0">
+      <match setup="0" actor="0x49"/>
+      <match setup="2" actor="0xc"/>
+      <match setup="3" actor="0x1f"/>
       <xflag type="soil" location="Kokiri Forest Soil 1" slice="0x0" item="FAIRY"/>
       <xflag type="soil" location="Kokiri Forest Soil 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Kokiri Forest Soil 3" slice="0x2" item="FAIRY"/>

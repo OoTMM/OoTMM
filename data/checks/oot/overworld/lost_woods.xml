@@ -87,12 +87,16 @@
       <xflag type="butterfly" location="Lost Woods Butterfly 4" slice="3" item="NOTHING"/>
       <xflag type="butterfly" location="Lost Woods Butterfly 5" slice="4" item="NOTHING"/>
     </actor>
-    <actor setup="0" room="0x5" actor="0x3">
+    <actor room="0x5">
+      <match setup="0" actor="0x3"/>
+      <match setup="2" actor="0x3"/>
       <xflag type="soil" location="Lost Woods Soil Early 1" slice="0x0" item="FAIRY"/>
       <xflag type="soil" location="Lost Woods Soil Early 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Lost Woods Soil Early 3" slice="0x2" item="FAIRY"/>
     </actor>
-    <actor setup="0" room="0x6" actor="0x5">
+    <actor room="0x6">
+      <match setup="0" actor="0x5"/>
+      <match setup="2" actor="0x2"/>
       <xflag type="soil" location="Lost Woods Soil Late 1" slice="0x0" item="FAIRY"/>
       <xflag type="soil" location="Lost Woods Soil Late 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Lost Woods Soil Late 3" slice="0x2" item="FAIRY"/>

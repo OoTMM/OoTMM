@@ -70,7 +70,9 @@
     <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Near Upper GS" setup="2" actor="0x11" item="NOTHING"/>
     <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Upper 1" setup="2" actor="0x13" item="NOTHING"/>
     <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Upper 2" setup="2" actor="0x12" item="NOTHING"/>
-    <actor setup="0" actor="0x2b">
+    <actor>
+      <match setup="0" actor="0x2b"/>
+      <match setup="2" actor="0x2e"/>
       <xflag type="soil" location="Death Mountain Trail Soil 1" slice="0x0" item="FAIRY"/>
       <xflag type="soil" location="Death Mountain Trail Soil 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Death Mountain Trail Soil 3" slice="0x2" item="FAIRY"/>

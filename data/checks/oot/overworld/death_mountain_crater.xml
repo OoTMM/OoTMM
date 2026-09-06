@@ -89,7 +89,9 @@
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 1" setup="0" room="0x1" actor="0x1b" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 2" setup="0" room="0x1" actor="0x1c" item="NOTHING"/>
     <xflag type="boulder-silver" location="Death Mountain Crater Silver Boulder 3" setup="0" room="0x1" actor="0x1d" item="NOTHING"/>
-    <actor setup="0" room="0x1" actor="0x21">
+    <actor room="0x1">
+      <match setup="0" actor="0x21"/>
+      <match setup="2" actor="0x2b"/>
       <xflag type="soil" location="Death Mountain Crater Soil 1" slice="0x0" item="FAIRY"/>
       <xflag type="soil" location="Death Mountain Crater Soil 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Death Mountain Crater Soil 3" slice="0x2" item="FAIRY"/>

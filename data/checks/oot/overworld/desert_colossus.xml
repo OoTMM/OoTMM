@@ -75,7 +75,9 @@
       <match setup="2" actor="0x15"/>
       <xflag type="boulder-silver" location="Desert Colossus Silver Boulder" item="NOTHING"/>
     </actor>
-    <actor setup="0" actor="0x1d">
+    <actor>
+      <match setup="0" actor="0x1d"/>
+      <match setup="2" actor="0x1f"/>
       <xflag type="soil" location="Desert Colossus Soil 1" slice="0x0" item="FAIRY"/>
       <xflag type="soil" location="Desert Colossus Soil 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Desert Colossus Soil 3" slice="0x2" item="FAIRY"/>
