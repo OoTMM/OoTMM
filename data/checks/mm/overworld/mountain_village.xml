@@ -5,7 +5,11 @@
     <npc location="Mountain Village Don Gero Mask" npc="MASK_DON_GERO" item="MASK_DON_GERO" hint="HUNGRY_GORON"/>
     <npc location="Mountain Village Frog Choir HP" npc="FROG_HEART_PIECE" item="HEART_PIECE" hint="DON_GERO_CHOIR"/>
     <npc location="Mountain Village Owl Statue" npc="OWL_MOUNTAIN_VILLAGE" item="OWL_MOUNTAIN_VILLAGE"/>
-    <xflag type="pot" location="Mountain Village Pot" room="0x0" actor="0x26" item="FAIRY"/>
+    <actor room="0x0">
+      <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x26"/>
+      <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x2e"/>
+      <xflag type="pot" location="Mountain Village Pot" item="FAIRY"/>
+    </actor>
     <actor room="0x0">
       <match scene="MOUNTAIN_VILLAGE_WINTER" actor="0x23"/>
       <match scene="MOUNTAIN_VILLAGE_SPRING" actor="0x29"/>

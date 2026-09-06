@@ -148,22 +148,22 @@
     </actor>
     <actor room="0x0">
       <match setup="0" actor="0x2d"/>
-      <match setup="2" actor="0x02"/>
+      <match setup="2" actor="0x04"/>
       <xflag type="boulder-red" location="Goron City Red Boulder 2" item="NOTHING"/>
     </actor>
     <actor room="0x0">
       <match setup="0" actor="0x2a"/>
-      <match setup="2" actor="0x03"/>
+      <match setup="2" actor="0x02"/>
       <xflag type="boulder-red" location="Goron City Red Boulder 3" item="NOTHING"/>
     </actor>
     <actor room="0x0">
       <match setup="0" actor="0x2e"/>
-      <match setup="2" actor="0x04"/>
+      <match setup="2" actor="0x05"/>
       <xflag type="boulder-red" location="Goron City Red Boulder 4" item="NOTHING"/>
     </actor>
     <actor room="0x0">
       <match setup="0" actor="0x2b"/>
-      <match setup="2" actor="0x05"/>
+      <match setup="2" actor="0x03"/>
       <xflag type="boulder-red" location="Goron City Red Boulder 5" item="NOTHING"/>
     </actor>
     <actor room="0x0">
