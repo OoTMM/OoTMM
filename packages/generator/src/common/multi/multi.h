@@ -11,6 +11,7 @@
 #define MULTI_OP_WAL_QUERY      0x03
 #define MULTI_OP_WAL_ACK        0x04
 #define MULTI_OP_POSITION       0x05
+#define MULTI_OP_INFO_ITEM      0x06
 
 #define WAL_ITEM    0x01
 #define WAL_EVENT   0x02
@@ -135,6 +136,14 @@ typedef struct PACKED
     s16 z;
 }
 MultiPacketPositionOut;
+
+typedef struct PACKED
+{
+    MultiPacketHeader header;
+    u32 overrideKey;
+    s16 gi;
+}
+MultiPacketOutInfoItem;
 
 typedef struct
 {

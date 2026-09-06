@@ -77,13 +77,14 @@ static void sendSelfMajorasMask(void)
     int npc;
     s16 gi;
 
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
     gi = GI_MM_MASK_MAJORA;
     npc = NPC_MM_MAJORA;
 
+    if (BITMAP8_GET(gSharedCustomSave.mm.npc, npc))
+        return;
+
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
+    Multi_InfoItem(0, gi);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

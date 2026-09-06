@@ -551,6 +551,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
+    u32 key;
     ComboItemOverride o;
     int count;
 
@@ -559,7 +560,14 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 
     /* Add the item if it's for us */
     if (Item_IsPlayerSelf(o.player))
+    {
         count = comboAddItemRaw(play, o.gi);
+        if (q->ovType == OV_NONE)
+            key = 0;
+        else
+            key = Checks_MakeOverrideKey(q);
+        Multi_InfoItem(key, o.gi);
+    }
 
     /* Update text */
     if (updateText)

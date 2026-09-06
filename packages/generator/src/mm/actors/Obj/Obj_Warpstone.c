@@ -14,9 +14,6 @@ static void sendNetOwl(PlayState* play, int owlId)
     int npc;
     s16 gi;
 
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
     if (owlId == 0xf)
     {
         gi = GI_MM_OWL_HIDDEN;
@@ -30,6 +27,7 @@ static void sendNetOwl(PlayState* play, int owlId)
 
     /* Network */
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
+    Multi_InfoItem(0, gi);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);

@@ -159,13 +159,14 @@ static void sendSelfTriforce(void)
     int npc;
     s16 gi;
 
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
     gi = GI_OOT_TRIFORCE_FULL;
     npc = NPC_OOT_GANON;
 
+    if (BITMAP8_GET(gSharedCustomSave.oot.npc, npc))
+        return;
+
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
+    Multi_InfoItem(0, gi);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.oot.npc, npc);

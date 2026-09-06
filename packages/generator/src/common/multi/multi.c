@@ -483,11 +483,26 @@ static void Multi_EnsureSendBufferEmpty(void)
 
 static int Multi_BeforeSend(void)
 {
-    if (Config_Flag(CFG_MULTIPLAYER))
-        Multi_EnsureSendBufferEmpty();
-    else if (!gComboCtx.isMultiConnected)
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
+
+    Multi_EnsureSendBufferEmpty();
     return 1;
+}
+
+void Multi_InfoItem(u32 ovKey, s16 gi)
+{
+    MultiPacketOutInfoItem pkt;
+
+    if (!gComboCtx.isMultiConnected)
+        return;
+
+    memset(&pkt, 0, sizeof(pkt));
+    pkt.header.op = MULTI_OP_INFO_ITEM;
+    pkt.overrideKey = ovKey;
+    pkt.gi = gi;
+
+    Multi_SendPacket(&pkt.header, sizeof(pkt));
 }
 
 static void Multi_ReliableSendWAL(MultiPacketWalOutHeader* pkt, u32 size)
@@ -499,14 +514,11 @@ static void Multi_ReliableSendWAL(MultiPacketWalOutHeader* pkt, u32 size)
 
     Multi_SendPacket(&pkt->header, size);
 
-    if (Config_Flag(CFG_MULTIPLAYER))
-    {
-        /* Store persistently */
-        memcpy(&gSharedCustomSave.multi.sendBuffer, pkt, size);
-        gSharedCustomSave.multi.sendBufferSize = size;
-        gSharedCustomSave.multi.sendBufferToken = token;
-        gMulti.ttlResend = TTL_RESEND;
-    }
+    /* Store persistently */
+    memcpy(&gSharedCustomSave.multi.sendBuffer, pkt, size);
+    gSharedCustomSave.multi.sendBufferSize = size;
+    gSharedCustomSave.multi.sendBufferToken = token;
+    gMulti.ttlResend = TTL_RESEND;
 }
 
 void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
