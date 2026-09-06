@@ -135,14 +135,25 @@ s32 func_80A4E3EC(EnGs* this, PlayState* play) {
 static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
 {
     XflagID id;
+    Vec3f spawnPos;
+    Player* player;
 
     id = Xflag_LookupSlice(this->xflag, isBig);
-    if (!Item_AddXflagRenew(play, id, GI_NOTHING))
+    if (Xflag_IsValidEx(id))
+    {
+        player = GET_PLAYER(play);
+        spawnPos = player->actor.world.pos;
+    }
+    else
     {
         if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)))
             return;
-        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? /* FAIRY_HEAL_BIG */ 0x0007 : /* FAIRY_HEAL_TIMED */ 0x0002);
+        spawnPos = this->actor.world.pos;
     }
+    g.xflagOverride = TRUE;
+    g.xflagId = id;
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, spawnPos.x, spawnPos.y + 40.0f, spawnPos.z, 0, 0, 0, isBig ? 7 : 2);
+    g.xflagOverride = FALSE;
     Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
 }
 

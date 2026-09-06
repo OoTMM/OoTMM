@@ -186,7 +186,7 @@ void func_80997D38(EnGs* this, PlayState* play) {
     }
 
     if (this->actor.params != ENGS_2) {
-        Actor_OfferOcarinaInteraction(&this->actor, play, 100.0f, 100.0f);
+        Actor_OfferOcarinaInteraction(&this->actor, play, this->actor.params == ENGS_1 ? 400.f : 100.0f, 100.0f);
     }
 }
 
@@ -300,22 +300,64 @@ void func_80998040(EnGs* this, PlayState* play) {
     this->actionFunc = func_8099807C;
 }
 
+static EnGs* EnGs_ResolveClosest(PlayState* play, EnGs* this) {
+    Player* player;
+    Actor* best;
+    Actor* actor;
+    float dist;
+    float bestDist;
+
+    if (this->actor.params != ENGS_1) {
+        return this;
+    }
+
+    player = GET_PLAYER(play);
+    actor = play->actorCtx.actors[ACTORCAT_PROP].first;
+    best = NULL;
+    while (actor) {
+        if (actor->id == ACTOR_EN_GS) {
+            dist = Math_Vec3f_DistXYZ(&actor->world.pos, &player->actor.world.pos);
+            if (!best || dist < bestDist) {
+                bestDist = dist;
+                best = actor;
+            }
+        }
+        actor = actor->next;
+    }
+
+    return (EnGs*)best;
+}
+
 static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
 {
+    EnGs* gossip;
     XflagID id;
+    Vec3f spawnPos;
+    Player* player;
 
     if (!this->canEmitFairy)
         return;
 
-    id = Xflag_LookupSlice(this->xflag, isBig);
-    if (!Item_AddXflagRenew(play, id, GI_NOTHING))
+    gossip = EnGs_ResolveClosest(play, this);
+    id = Xflag_LookupSlice(gossip->xflag, isBig);
+    if (Xflag_IsValidEx(id))
     {
-        if (Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 8, 6)))
-            return;
-        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f, this->actor.world.pos.z, 0, 0, 0, isBig ? 7 : 2);
+        player = GET_PLAYER(play);
+        spawnPos = player->actor.world.pos;
     }
+    else
+    {
+        if ((this != gossip) || Flags_GetSwitch(play, this->switchFlag))
+            return;
+        spawnPos = this->actor.world.pos;
+    }
+    g.xflagOverride = TRUE;
+    g.xflagId = id;
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, spawnPos.x, spawnPos.y + 40.0f, spawnPos.z, 0, 0, 0, isBig ? 7 : 2);
+    g.xflagOverride = FALSE;
     Actor_PlaySfx(&this->actor, NA_SE_EV_BUTTERFRY_TO_FAIRY);
-    Flags_SetSwitch(play, this->switchFlag);
+    if (this == gossip)
+        Flags_SetSwitch(play, this->switchFlag);
     this->canEmitFairy = FALSE;
 }
 
