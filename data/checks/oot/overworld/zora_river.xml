@@ -89,7 +89,11 @@
     <xflag type="boulder" location="Zora River Boulder Lower 2" setup="0" room="0x0" actor="0x3e" item="NOTHING"/>
     <xflag type="boulder" location="Zora River Boulder Lower 3" setup="0" room="0x0" actor="0x3f" item="NOTHING"/>
     <xflag type="boulder" location="Zora River Boulder Lower 4" setup="0" room="0x0" actor="0x40" item="NOTHING"/>
-    <xflag type="boulder" location="Zora River Boulder Upper" setup="0" room="0x0" actor="0x3d" item="NOTHING"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x3d"/>
+      <match setup="2" actor="0x1b"/>
+      <xflag type="boulder" location="Zora River Boulder Upper" item="NOTHING"/>
+    </actor>
     <actor setup="0" room="0x0" actor="0x37">
       <xflag type="butterfly" location="Zora River Butterfly Near Beans 1" slice="0" item="FAIRY"/>
       <xflag type="butterfly" location="Zora River Butterfly Near Beans 2" slice="1" item="NOTHING"/>

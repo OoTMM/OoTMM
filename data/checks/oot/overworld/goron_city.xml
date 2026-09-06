@@ -61,22 +61,86 @@
       <match setup="2" actor="0x23"/>
       <xflag type="rock" location="Goron City Rock" item="RANDOM"/>
     </actor>
-    <xflag type="boulder" location="Goron City Maze Boulder 01" setup="0" room="0x0" actor="0x1f" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 02" setup="0" room="0x0" actor="0x20" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 03" setup="0" room="0x0" actor="0x21" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 04" setup="0" room="0x0" actor="0x22" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 05" setup="0" room="0x0" actor="0x23" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 06" setup="0" room="0x0" actor="0x24" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 07" setup="0" room="0x0" actor="0x25" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 08" setup="0" room="0x0" actor="0x26" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 09" setup="0" room="0x0" actor="0x27" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Maze Boulder 10" setup="0" room="0x0" actor="0x28" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Boulder Upper 1" setup="0" room="0x3" actor="0x16" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Boulder Upper 2" setup="0" room="0x3" actor="0x19" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Boulder Upper 3" setup="0" room="0x3" actor="0x1a" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Boulder Shortcut 1" setup="0" room="0x3" actor="0x18" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Boulder Shortcut 2" setup="0" room="0x3" actor="0x1b" item="NOTHING"/>
-    <xflag type="boulder" location="Goron City Boulder Shortcut 3" setup="0" room="0x3" actor="0x1c" item="NOTHING"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x1f"/>
+      <match setup="2" actor="0x24"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 01" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x20"/>
+      <match setup="2" actor="0x25"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 02" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x21"/>
+      <match setup="2" actor="0x26"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 03" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x22"/>
+      <match setup="2" actor="0x27"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 04" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x23"/>
+      <match setup="2" actor="0x28"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 05" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x24"/>
+      <match setup="2" actor="0x29"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 06" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x25"/>
+      <match setup="2" actor="0x2a"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 07" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x26"/>
+      <match setup="2" actor="0x2b"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 08" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x27"/>
+      <match setup="2" actor="0x2c"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 09" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x28"/>
+      <match setup="2" actor="0x2d"/>
+      <xflag type="boulder" location="Goron City Maze Boulder 10" item="NOTHING"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x16"/>
+      <match setup="2" actor="0x1d"/>
+      <xflag type="boulder" location="Goron City Boulder Upper 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x19"/>
+      <match setup="2" actor="0x1f"/>
+      <xflag type="boulder" location="Goron City Boulder Upper 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x1a"/>
+      <match setup="2" actor="0x20"/>
+      <xflag type="boulder" location="Goron City Boulder Upper 3" item="NOTHING"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x18"/>
+      <match setup="2" actor="0x1e"/>
+      <xflag type="boulder" location="Goron City Boulder Shortcut 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x1b"/>
+      <match setup="2" actor="0x21"/>
+      <xflag type="boulder" location="Goron City Boulder Shortcut 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x3">
+      <match setup="0" actor="0x1c"/>
+      <match setup="2" actor="0x22"/>
+      <xflag type="boulder" location="Goron City Boulder Shortcut 3" item="NOTHING"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0x29"/>
       <match setup="2" actor="0x01"/>

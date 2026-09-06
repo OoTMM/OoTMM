@@ -63,9 +63,21 @@
       <xflag type="rupee" location="Death Mountain Crater Rupee Adult 6" slice="5" item="RUPEE_GREEN"/>
       <xflag type="rupee" location="Death Mountain Crater Rupee Adult 7" slice="6" item="RUPEE_RED"/>
     </actor>
-    <xflag type="boulder" location="Death Mountain Crater Boulder 1" setup="0" room="0x1" actor="0x23" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Crater Boulder 2" setup="0" room="0x1" actor="0x24" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Crater Boulder 3" setup="0" room="0x1" actor="0x25" item="NOTHING"/>
+    <actor room="0x1">
+      <match setup="0" actor="0x23"/>
+      <match setup="2" actor="0x2f"/>
+      <xflag type="boulder" location="Death Mountain Crater Boulder 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x24"/>
+      <match setup="2" actor="0x2d"/>
+      <xflag type="boulder" location="Death Mountain Crater Boulder 2" item="NOTHING"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x25"/>
+      <match setup="2" actor="0x2e"/>
+      <xflag type="boulder" location="Death Mountain Crater Boulder 3" item="NOTHING"/>
+    </actor>
     <actor room="0x1">
       <match setup="0" actor="0xb"/>
       <match setup="2" actor="0x6"/>

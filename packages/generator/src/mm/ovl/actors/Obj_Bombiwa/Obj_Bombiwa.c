@@ -170,9 +170,7 @@ void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     s32 sp34 = OBJBOMBIWA_GET_100(&this->actor);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    if (Xflag_Init(&this->xflag, &this->actor, play)) {
-        this->xflag.setupId = 0;
-    }
+    Xflag_Init(&this->xflag, &this->actor, play);
     Collider_InitCylinder(play, &this->collider);
 
     if (Flags_GetSwitch(play, OBJBOMBIWA_GET_SWITCH_FLAG(&this->actor)) && !Xflag_IsShuffled(&this->xflag)) {

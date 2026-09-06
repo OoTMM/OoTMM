@@ -101,9 +101,21 @@
       <xflag type="soil" location="Lost Woods Soil Late 2" slice="0x1" item="FAIRY"/>
       <xflag type="soil" location="Lost Woods Soil Late 3" slice="0x2" item="FAIRY"/>
     </actor>
-    <xflag type="boulder" location="Lost Woods Boulder Early" setup="0" room="0x2" actor="0x6" item="NOTHING"/>
-    <xflag type="boulder" location="Lost Woods Boulder Deep 1" setup="0" room="0x7" actor="0x5" item="NOTHING"/>
-    <xflag type="boulder" location="Lost Woods Boulder Deep 2" setup="0" room="0x8" actor="0x8" item="NOTHING"/>
+    <actor room="0x2">
+      <match setup="0" actor="0x6"/>
+      <match setup="2" actor="0x7"/>
+      <xflag type="boulder" location="Lost Woods Boulder Early" item="NOTHING"/>
+    </actor>
+    <actor room="0x7">
+      <match setup="0" actor="0x5"/>
+      <match setup="2" actor="0x5"/>
+      <xflag type="boulder" location="Lost Woods Boulder Deep 1" item="NOTHING"/>
+    </actor>
+    <actor room="0x8">
+      <match setup="0" actor="0x8"/>
+      <match setup="2" actor="0x7"/>
+      <xflag type="boulder" location="Lost Woods Boulder Deep 2" item="NOTHING"/>
+    </actor>
     <actor room="0x5">
       <match setup="0" actor="0x4"/>
       <match setup="2" actor="0x1"/>

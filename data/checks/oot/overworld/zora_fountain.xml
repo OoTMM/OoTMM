@@ -81,8 +81,18 @@
       <match setup="1" actor="0x0b"/>
       <xflag type="bush" location="Zora Fountain Bush 6" item="NOTHING"/>
     </actor>
-    <xflag type="boulder" location="Zora Fountain Boulder Exposed" setup="0" room="0x0" actor="0x10" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Fountain Boulder Underground" setup="0" room="0x0" actor="0x11" item="NOTHING"/>
+    <actor room="0x0">
+      <match setup="0" actor="0x10"/>
+      <match setup="1" actor="0x10"/>
+      <match setup="2" actor="0x34"/>
+      <xflag type="boulder" location="Zora Fountain Boulder Exposed" item="NOTHING"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x11"/>
+      <match setup="1" actor="0x11"/>
+      <match setup="2" actor="0x35"/>
+      <xflag type="boulder" location="Zora Fountain Boulder Underground" item="NOTHING"/>
+    </actor>
     <actor room="0x0">
       <match setup="0" actor="0x05"/>
       <match setup="1" actor="0x05"/>

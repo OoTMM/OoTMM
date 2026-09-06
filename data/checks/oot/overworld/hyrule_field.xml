@@ -341,9 +341,24 @@
       <match setup="1" actor="0x34"/>
       <xflag type="wonder" location="Hyrule Field Wonder Item 3" item="RUPEE_RED"/>
     </actor>
-    <xflag type="boulder" location="Hyrule Field Boulder Near Lake" setup="0" actor="0x44" item="NOTHING"/>
-    <xflag type="boulder" location="Hyrule Field Boulder Near Market" setup="0" actor="0x45" item="NOTHING"/>
-    <xflag type="boulder" location="Hyrule Field Boulder Island" setup="0" actor="0x46" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x44"/>
+      <match setup="1" actor="0x44"/>
+      <match setup="2" actor="0x43"/>
+      <xflag type="boulder" location="Hyrule Field Boulder Near Lake" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x45"/>
+      <match setup="1" actor="0x43"/>
+      <match setup="2" actor="0x44"/>
+      <xflag type="boulder" location="Hyrule Field Boulder Near Market" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x46"/>
+      <match setup="1" actor="0x42"/>
+      <match setup="2" actor="0x45"/>
+      <xflag type="boulder" location="Hyrule Field Boulder Island" item="NOTHING"/>
+    </actor>
     <xflag type="boulder-red" location="Hyrule Field Red Boulder 1" setup="2" actor="0x8" item="NOTHING"/>
     <xflag type="boulder-red" location="Hyrule Field Red Boulder 2" setup="2" actor="0x9" item="NOTHING"/>
     <xflag type="boulder-red" location="Hyrule Field Red Boulder 3" setup="2" actor="0xa" item="NOTHING"/>

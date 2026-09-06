@@ -61,9 +61,21 @@
     <xflag type="rock" location="Zora Cape Rock Sand 3" setup="0" actor="0x37" item="RANDOM"/>
     <xflag type="rock" location="Zora Cape Rock Sand 4" setup="0" actor="0x38" item="RANDOM"/>
     <xflag type="rock" location="Zora Cape Rock Sand 5" setup="0" actor="0x39" item="RANDOM"/>
-    <xflag type="boulder" location="Zora Cape Large Boulder 1" setup="0" actor="0x2a" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Cape Large Boulder 2" setup="0" actor="0x2b" item="NOTHING"/>
-    <xflag type="boulder" location="Zora Cape Boulder" setup="0" actor="0x2c" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x2a"/>
+      <match setup="1" actor="0x2a"/>
+      <xflag type="boulder" location="Zora Cape Large Boulder 1" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x2b"/>
+      <match setup="1" actor="0x2b"/>
+      <xflag type="boulder" location="Zora Cape Large Boulder 2" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x2c"/>
+      <match setup="1" actor="0x2c"/>
+      <xflag type="boulder" location="Zora Cape Boulder" item="NOTHING"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x18"/>
       <match setup="1" actor="0x19"/>

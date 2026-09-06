@@ -56,9 +56,21 @@
       <xflag type="fairy-spot" location="Death Mountain Trail Big Fairy" item="FAIRY_BIG"/>
     </actor>
     <xflag type="boulder" location="Death Mountain Trail Boulder Child" setup="0" actor="0x2f" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Lower" setup="0" actor="0x30" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Middle" setup="0" actor="0x31" item="NOTHING"/>
-    <xflag type="boulder" location="Death Mountain Trail Boulder Upper" setup="0" actor="0x32" item="NOTHING"/>
+    <actor>
+      <match setup="0" actor="0x30"/>
+      <match setup="2" actor="0x30"/>
+      <xflag type="boulder" location="Death Mountain Trail Boulder Lower" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x31"/>
+      <match setup="2" actor="0x31"/>
+      <xflag type="boulder" location="Death Mountain Trail Boulder Middle" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x32"/>
+      <match setup="2" actor="0x32"/>
+      <xflag type="boulder" location="Death Mountain Trail Boulder Upper" item="NOTHING"/>
+    </actor>
     <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Near Lower GS" setup="2" actor="0xa" item="NOTHING"/>
     <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 1" setup="2" actor="0xb" item="NOTHING"/>
     <xflag type="boulder-red" location="Death Mountain Trail Red Boulder Lower 2" setup="2" actor="0xc" item="NOTHING"/>
