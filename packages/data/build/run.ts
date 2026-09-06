@@ -38,6 +38,9 @@ async function run() {
   const xflagsCount = Array.from(checks.checks.filter((c: any) => c.ov === 'xflag')).length;
   const xflagsCountIds = Object.keys(checks.matches).length;
 
+  const manifestItems = { version: 1, items: gi.map((item: any, index: number) => ({ id: index + 1, sym: item.id })) };
+  const manifestLocations = { version: 1, locations: checks.checks.map((check: any, index: number) => ({ key: check.key, location: check.location })) };
+
   await Promise.all([
     emitJson('lib/data-files.json', files),
     emitJson('lib/data-scenes.json', scenes),
@@ -53,6 +56,8 @@ async function run() {
     emitJson('lib/data-drawgi.json', drawGi),
     emitJson('lib/data-link-animations.json', linkAnimations),
     emitJson('lib/data-gossips.json', gossips),
+    emitJson('manifests/items.json', manifestItems),
+    emitJson('manifests/locations.json', manifestLocations),
     emit('include/combo/data/xflags.h', `#define XFLAGS_COUNT ${xflagsCount}\n#define XFLAGS_COUNT_IDS ${xflagsCountIds}\n`),
   ]);
 }
