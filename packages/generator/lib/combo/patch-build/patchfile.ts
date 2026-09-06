@@ -2,6 +2,7 @@ import type { Game } from '@ootmm/data';
 
 import JSZip from 'jszip';
 import { concatUint8Arrays, base64ToUint8Array, uint8ArrayToBase64 } from 'uint8array-extras';
+import { FileResolver } from '../file-resolver';
 
 const VERSION = '1.3';
 
@@ -190,6 +191,14 @@ export class Patchfile {
       symPatches[k] = uint8ArrayToBase64(v);
     }
     zip.file('symbol-patches.json', JSON.stringify(symPatches));
+
+    /* Store manifest files */
+    const fileResolver = new FileResolver();
+    const manifests = await fileResolver.glob(/^manifests\/.*/);
+    for (const f of manifests) {
+      const data = await fileResolver.fetch(f);
+      zip.file(f, data);
+    }
 
     return await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' });
   }
