@@ -4,12 +4,36 @@
     <npc location="Saria's Song" npc="SARIA_SONG" item="SONG_SARIA"/>
     <npc location="Sacred Meadow Sheik Song" npc="SHEIK_FOREST" item="SONG_TP_FOREST"/>
     <gs location="Sacred Meadow GS Night Adult" flag="0x6b" item="GS_TOKEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Entrance" setup="0" room="0x0" actor="0xf" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 1" setup="0" room="0x0" actor="0xc" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 2" setup="0" room="0x0" actor="0xd" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 3" setup="0" room="0x0" actor="0xe" item="RUPEE_GREEN"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 4" setup="0" room="0x0" actor="0x10" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 5" setup="0" room="0x0" actor="0x11" item="RUPEE_BLUE"/>
+    <actor room="0x0">
+      <match setup="0" actor="0xf"/>
+      <match setup="2" actor="0x12"/>
+      <xflag type="wonder" location="Sacred Meadow Wonder Item Entrance" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0xc"/>
+      <match setup="2" actor="0xf"/>
+      <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 1" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0xd"/>
+      <match setup="2" actor="0x10"/>
+      <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 2" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0xe"/>
+      <match setup="2" actor="0x11"/>
+      <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 3" item="RUPEE_GREEN"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x10"/>
+      <match setup="2" actor="0x13"/>
+      <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 4" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x0">
+      <match setup="0" actor="0x11"/>
+      <match setup="2" actor="0x14"/>
+      <xflag type="wonder" location="Sacred Meadow Wonder Item Maze 5" item="RUPEE_BLUE"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x2"/>
       <match setup="2" actor="0x1"/>

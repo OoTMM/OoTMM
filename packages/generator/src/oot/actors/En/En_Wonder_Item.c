@@ -8,64 +8,6 @@
 
 static Actor_EnWonderItem* sWonderItem;
 
-static void EnWonderItem_Alias(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_SACRED_FOREST_MEADOW:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id -= 3;
-        }
-        break;
-    case SCE_OOT_HYRULE_FIELD:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            xf->id += 2;
-        }
-        break;
-    case SCE_OOT_LON_LON_RANCH:
-        if (xf->setupId == 3)
-        {
-            xf->setupId = 2;
-            xf->id += 16;
-        }
-        break;
-    case SCE_OOT_GERUDO_FORTRESS:
-        if (xf->setupId != 0)
-        {
-            xf->setupId = 0;
-            if (xf->id == 5)
-                xf->id = 8;
-            else
-                xf->id = 7;
-        }
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            switch (xf->id)
-            {
-            case 22: xf->id = 19; break;
-            case 23: xf->id = 21; break;
-            case 24: xf->id = 20; break;
-            case 25: xf->id = 23; break;
-            }
-        }
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            xf->id += 7;
-        }
-        break;
-    }
-}
-
 static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, PlayState* play)
 {
     ComboItemOverride o;
@@ -128,8 +70,7 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, PlayState* play)
     Actor_EnWonderItem_Func EnWonderItem_Init;
 
     /* Setup the xflag */
-    if (Xflag_Init(&this->xflag, &this->base, play))
-        EnWonderItem_Alias(&this->xflag);
+    Xflag_Init(&this->xflag, &this->base, play);
 
     if (play->sceneId == SCE_OOT_CASTLE_COURTYARD && Config_Flag(CFG_OOT_SKIP_ZELDA))
         this->isExtended = FALSE;

@@ -46,8 +46,16 @@
       <match setup="1" actor="0x1d"/>
       <xflag type="crate" location="Lon Lon Ranch Crate" item="RUPEE_GREEN"/>
     </actor>
-    <xflag type="wonder" location="Lon Lon Ranch Wonder Item 1" setup="2" actor="0x18" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Lon Lon Ranch Wonder Item 2" setup="2" actor="0x19" item="RUPEE_BLUE"/>
+    <actor>
+      <match setup="2" actor="0x18"/>
+      <match setup="3" actor="0x8"/>
+      <xflag type="wonder" location="Lon Lon Ranch Wonder Item 1" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="2" actor="0x19"/>
+      <match setup="3" actor="0x9"/>
+      <xflag type="wonder" location="Lon Lon Ranch Wonder Item 2" item="RUPEE_BLUE"/>
+    </actor>
   </scene>
   <scene id="RANCH_HOUSE_SILO">
     <collectible location="Lon Lon Ranch Silo HP" flag="0x01" item="HEART_PIECE"/>

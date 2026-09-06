@@ -20,11 +20,27 @@
       <xflag type="fairy" location="Desert Colossus Oasis Fairy 7" slice="6" item="FAIRY"/>
       <xflag type="fairy" location="Desert Colossus Oasis Fairy 8" slice="7" item="FAIRY"/>
     </actor>
-    <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 1" setup="0" actor="0x13" item="MAGIC_JAR_SMALL"/>
-    <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 2" setup="0" actor="0x15" item="RUPEE_BLUE"/>
+    <actor>
+      <match setup="0" actor="0x13"/>
+      <match setup="2" actor="0x16"/>
+      <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 1" item="MAGIC_JAR_SMALL"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x15"/>
+      <match setup="2" actor="0x17"/>
+      <xflag type="wonder" location="Desert Colossus Wonder Item Oasis 2" item="RUPEE_BLUE"/>
+    </actor>
     <xflag type="wonder" location="Desert Colossus Wonder Item Oasis Child" setup="0" actor="0x16" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Desert Colossus Wonder Item Fountain 1" setup="0" actor="0x14" item="RUPEE_BLUE"/>
-    <xflag type="wonder" location="Desert Colossus Wonder Item Fountain 2" setup="0" actor="0x17" item="RUPEE_RED"/>
+    <actor>
+      <match setup="0" actor="0x14"/>
+      <match setup="2" actor="0x18"/>
+      <xflag type="wonder" location="Desert Colossus Wonder Item Fountain 1" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x17"/>
+      <match setup="2" actor="0x19"/>
+      <xflag type="wonder" location="Desert Colossus Wonder Item Fountain 2" item="RUPEE_RED"/>
+    </actor>
     <actor>
       <match setup="0" actor="0x19"/>
       <match setup="2" actor="0x1b"/>
