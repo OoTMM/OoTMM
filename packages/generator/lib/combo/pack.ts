@@ -11,6 +11,7 @@ import { cosmetics } from './cosmetics';
 import { DmaData } from './dma';
 import { Patchfile } from './patch-build/patchfile';
 import { RomBuilder } from './rom-builder';
+import { applyAssetDedupe } from './compact.ts';
 
 /* Files to alias (will use the OoT version) */
 const ALIASES_OOT = [
@@ -131,10 +132,6 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
     }
   }
 
-  /* We need to pack a few static files before we can pack the rest */
-  await injectFirst('oot', romBuilder, 6);
-  await injectFirst('mm', romBuilder,  6);
-
   /* Add the extra files */
   for (const newFile of patchfile.newFiles) {
     const type = newFile.compressed ? 'compressed' : 'uncompressed';
@@ -177,6 +174,14 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   /* Apply cosmetics */
   monitor.log("Pack: Cosmetics");
   const cosmeticLog = await cosmetics(monitor, args.opts, romBuilder, patchfile.symbols);
+  let assetDedupe: ReturnType<typeof applyAssetDedupe> | null = null;
+  if (!process.env.OOTMM_DISABLE_ASSET_DEDUPE) {
+    monitor.log("Pack: Asset dedupe");
+    assetDedupe = applyAssetDedupe(roms, romBuilder, monitor);
+  }
+  await injectFirst('oot', romBuilder, 6);
+  await injectFirst('mm', romBuilder,  6);
+  assetDedupe?.finalizePhysicalTables();
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");
