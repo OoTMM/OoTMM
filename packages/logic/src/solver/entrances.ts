@@ -206,9 +206,20 @@ class WorldShuffler {
 
     /* Change the world */
     let expr = this.getExpr(original);
+
     if (entranceReplacement.game === 'mm' && !(entranceReplacement.flags.includes('no-sot'))) {
+      /* Add MM Access rule */
+      let mmAccessExpr = expr;
+      const existing = areaFrom.exits['MM ACCESS'];
+      if (existing) {
+        mmAccessExpr = exprOr([expr, existing]);
+      }
+      areaFrom.exits['MM ACCESS'] = mmAccessExpr;
+
+      /* Account for song of time */
       expr = this.songOfTime(expr);
     }
+
     if (areaFrom.exits[entranceReplacement.to]) {
       expr = exprOr([expr, areaFrom.exits[entranceReplacement.to]]);
     }
