@@ -104,7 +104,7 @@ static u8 foreignSampleTable(u8 sampleTableId)
 {
     if (sampleTableId == 0xff)
         return 0xff;
-    return sampleTableId + 8;
+    return sampleTableId ^ 0x08;
 }
 
 static u8 customSampleTable(u8 sampleTableId)
