@@ -15,10 +15,10 @@
     STICKS: "true"
     RUPEES: "can_break_snowballs || (can_use_light_arrows && soul_tektite)"
   locations:
-    "Goron Village HP": "(has(DEED_SWAMP) && has(MASK_DEKU)) || short_hook_anywhere"
-    "Goron Village Scrub Deed": "soul_business_scrub && has(DEED_SWAMP) && has(MASK_DEKU)"
+    "Goron Village HP": "(has_swamp_title_deed && has_mask_deku) || short_hook_anywhere"
+    "Goron Village Scrub Deed": "soul_business_scrub && has_swamp_title_deed && has_mask_deku"
     "Goron Village Scrub Bomb Bag": "soul_business_scrub && has_mask_goron && can_use_wallet(2)"
-#    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
+#    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has_moon_tear && has_land_title_deed && has_swamp_title_deed)) && can_use_wallet(2)"
     "Goron Powder Keg": "event(TRIAL_BOULDER) && (event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS)))"
     "Goron Village Crate": "is_spring || can_use_fire_short_range || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS))"
     "Goron Village Big Snowball 1": "is_winter && can_break_snowballs"

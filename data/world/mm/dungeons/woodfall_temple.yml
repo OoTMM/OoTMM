@@ -13,11 +13,11 @@
     FAIRY: "true"
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Temple Entrance Back": "has(MASK_DEKU) || can_hookshot_short || (has_hover_boots && has_weapon && has_explosives && has_mask_bunny && (has_arrows || has_mask_stone) && trick(MM_WFT_LOBBY_HOVERS))"
+    "Woodfall Temple Entrance Back": "has_mask_deku || can_hookshot_short || (has_hover_boots && has_weapon && has_explosives && has_mask_bunny && (has_arrows || has_mask_stone) && trick(MM_WFT_LOBBY_HOVERS))"
     "Woodfall Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_ODOLWA)"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || can_hookshot_short"
+    "Woodfall Temple Entrance Chest": "has_mask_deku || can_hookshot_short"
     "Woodfall Temple SF Entrance": "true"
     "Woodfall Temple Pot Entrance": "true"
     "Woodfall Temple Grass Entrance Bottom 1": "true"
@@ -34,8 +34,8 @@
     "Woodfall Temple Main Entrance Ledge": "true"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Entrance Chest": "can_hookshot || (has(MASK_DEKU) && (can_goron_bomb_jump || short_hook_anywhere))"
-    "Woodfall Temple SF Entrance": "has(MASK_GREAT_FAIRY)"
+    "Woodfall Temple Entrance Chest": "can_hookshot || (has_mask_deku && (can_goron_bomb_jump || short_hook_anywhere))"
+    "Woodfall Temple SF Entrance": "has_mask_great_fairy"
     "Woodfall Temple Pot Entrance": "has_weapon_range || has_bombchu"
     "Woodfall Temple Grass Entrance Bottom 1": "true"
     "Woodfall Temple Grass Entrance Bottom 2": "true"
@@ -48,10 +48,10 @@
   dungeon: WF
   exits:
     "Woodfall Temple Entrance Back": "true"
-    "Woodfall Temple Main Water Room Ledge": "has(MASK_DEKU) || has_bombs || has_mask_goron || event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_use_ice_arrows || (can_use_nayru && can_swim) || has_hover_boots || can_hookshot_short"
+    "Woodfall Temple Main Water Room Ledge": "has_mask_deku || has_bombs || has_mask_goron || event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_use_ice_arrows || (can_use_nayru && can_swim) || has_hover_boots || can_hookshot_short"
     "Woodfall Temple Maze": "small_keys_wf(1)"
     "Woodfall Temple Main Upper Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_hookshot_short"
-    "Woodfall Temple Main Pots": "has(MASK_DEKU) || has_hover_boots || can_use_ice_arrows || short_hook_anywhere || (enter_woodfall_temple_water && can_swim)"
+    "Woodfall Temple Main Pots": "has_mask_deku || has_hover_boots || can_use_ice_arrows || short_hook_anywhere || (enter_woodfall_temple_water && can_swim)"
     "WARP_SONGS": "true"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_short_range"
@@ -67,9 +67,9 @@
 "Woodfall Temple Main Water Room Ledge":
   dungeon: WF
   exits:
-    "Woodfall Temple Main Entrance Ledge": "has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim) || can_use_ice_arrows || has_bombs || has_mask_goron || short_hook_anywhere || (event(WOODFALL_TEMPLE_MAIN_FLOWER) && has_hover_boots)"
+    "Woodfall Temple Main Entrance Ledge": "has_mask_deku || (enter_woodfall_temple_water && can_swim) || can_use_ice_arrows || has_bombs || has_mask_goron || short_hook_anywhere || (event(WOODFALL_TEMPLE_MAIN_FLOWER) && has_hover_boots)"
     "Woodfall Temple Main Upper Ledge": "event(WOODFALL_TEMPLE_MAIN_LADDER) || short_hook_anywhere || (can_hookshot_short && (can_use_ice_arrows || has_bombs || has_mask_goron))"
-    "Woodfall Temple Main Pots": "has(MASK_DEKU) || has_hover_boots || can_use_ice_arrows || short_hook_anywhere || (enter_woodfall_temple_water && can_swim)"
+    "Woodfall Temple Main Pots": "has_mask_deku || has_hover_boots || can_use_ice_arrows || short_hook_anywhere || (enter_woodfall_temple_water && can_swim)"
     "Woodfall Temple Water Room Lower Ledge": "true"
     "WARP_SONGS": "true"
   locations:
@@ -79,9 +79,9 @@
 "Woodfall Temple Main Pots":
   dungeon: WF
   exits:
-    "Woodfall Temple Main Entrance Ledge": "has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim) || can_use_ice_arrows || hookshot_anywhere"
+    "Woodfall Temple Main Entrance Ledge": "has_mask_deku || (enter_woodfall_temple_water && can_swim) || can_use_ice_arrows || hookshot_anywhere"
     "Woodfall Temple Main Upper Ledge": "short_hook_anywhere"
-    "Woodfall Temple Main Water Room Ledge": "has(MASK_DEKU) || has_hover_boots || can_use_ice_arrows || short_hook_anywhere || (enter_woodfall_temple_water && can_swim)"
+    "Woodfall Temple Main Water Room Ledge": "has_mask_deku || has_hover_boots || can_use_ice_arrows || short_hook_anywhere || (enter_woodfall_temple_water && can_swim)"
     "WARP_SONGS": "true"
   events:
     BOMBS_OR_BOMBCHU: "true"
@@ -98,25 +98,25 @@
   dungeon: WF
   exits:
     "Woodfall Temple Main Water Room Ledge": "true"
-    "Woodfall Temple Water Room Map Ledge": "has(MASK_DEKU) || can_hookshot || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || short_hook_anywhere || (has_hover_boots && (has_arrows || can_hookshot_short)) || (has_mask_goron && (has_hover_boots || can_hookshot_short)) || (enter_woodfall_temple_water && can_enter_water && is_child && (can_hookshot_short || (has_arrows && (has_weapon || has_mask_zora || has_mask_goron || has_sticks))))"
-    "Woodfall Temple Water Room Upper Ledge": "(has_arrows && (has(MASK_DEKU) || has_hover_boots)) || short_hook_anywhere"
-    "Woodfall Temple Water Room Boss Key Ledge": "(has(MASK_DEKU) && (has_arrows || can_use_slingshot)) || (short_hook_anywhere && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || hookshot_anywhere"
+    "Woodfall Temple Water Room Map Ledge": "has_mask_deku || can_hookshot || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || short_hook_anywhere || (has_hover_boots && (has_arrows || can_hookshot_short)) || (has_mask_goron && (has_hover_boots || can_hookshot_short)) || (enter_woodfall_temple_water && can_enter_water && is_child && (can_hookshot_short || (has_arrows && (has_weapon || has_mask_zora || has_mask_goron || has_sticks))))"
+    "Woodfall Temple Water Room Upper Ledge": "(has_arrows && (has_mask_deku || has_hover_boots)) || short_hook_anywhere"
+    "Woodfall Temple Water Room Boss Key Ledge": "(has_mask_deku && (has_arrows || can_use_slingshot)) || (short_hook_anywhere && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || hookshot_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Water Chest": "has(MASK_DEKU) || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has(MASK_GREAT_FAIRY) && (has_arrows || has_bombchu || can_hookshot))"
+    "Woodfall Temple Water Chest": "has_mask_deku || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has_mask_deku || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has_mask_great_fairy && (has_arrows || has_bombchu || can_hookshot))"
 
 "Woodfall Temple Water Room Map Ledge":
   dungeon: WF
   exits:
     "Woodfall Temple Map Room": "true"
-    "Woodfall Temple Water Room Lower Ledge": "has(MASK_DEKU) || short_hook_anywhere || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_hover_boots || (can_use_nayru && can_swim) || (has_arrows && (has_mask_goron || (enter_woodfall_temple_water && can_enter_water && is_child)))"
-    "Woodfall Temple Water Room Upper Ledge": "(has_arrows && (has(MASK_DEKU) || has_hover_boots)) || short_hook_anywhere"
-    "Woodfall Temple Water Room Boss Key Ledge": "(has(MASK_DEKU) && (has_arrows || can_use_slingshot)) || (short_hook_anywhere && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || hookshot_anywhere"
+    "Woodfall Temple Water Room Lower Ledge": "has_mask_deku || short_hook_anywhere || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_hover_boots || (can_use_nayru && can_swim) || (has_arrows && (has_mask_goron || (enter_woodfall_temple_water && can_enter_water && is_child)))"
+    "Woodfall Temple Water Room Upper Ledge": "(has_arrows && (has_mask_deku || has_hover_boots)) || short_hook_anywhere"
+    "Woodfall Temple Water Room Boss Key Ledge": "(has_mask_deku && (has_arrows || can_use_slingshot)) || (short_hook_anywhere && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || hookshot_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Water Chest": "has(MASK_DEKU) || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Woodfall Temple Water Chest": "has_mask_deku || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has_mask_deku || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has_mask_great_fairy && (has_arrows || can_hookshot))"
     "Woodfall Temple Grass Water Room 1": "true"
     "Woodfall Temple Grass Water Room 2": "true"
 
@@ -145,7 +145,7 @@
   locations:
     "Woodfall Temple SF Maze Skulltula": "can_kill_skulltulas"
     "Woodfall Temple SF Maze Beehive": "has_weapon_range || has_explosives"
-    "Woodfall Temple SF Maze Bubble": "(has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot_short)) || (enter_woodfall_temple_water && can_swim_or_sink)"
+    "Woodfall Temple SF Maze Bubble": "(has_mask_great_fairy && (has_arrows || can_hookshot_short)) || (enter_woodfall_temple_water && can_swim_or_sink)"
     "Woodfall Temple Pot Maze 1": "true"
     "Woodfall Temple Pot Maze 2": "true"
     "Woodfall Temple Hive Maze": "has_weapon_range || has_explosives"
@@ -183,7 +183,7 @@
   exits:
     "Woodfall Temple Main Entrance Ledge": "true"
     "Woodfall Temple Dark Room": "true"
-    "Woodfall Temple Main Upper Ledge": "has(MASK_DEKU) || short_hook_anywhere"
+    "Woodfall Temple Main Upper Ledge": "has_mask_deku || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple Grass Pits Room 01": "true"
@@ -201,7 +201,7 @@
 "Woodfall Temple Main Upper Ledge":
   dungeon: WF
   exits:
-    "Woodfall Temple Main Entrance Ledge": "has(MASK_DEKU) || short_hook_anywhere || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_hover_boots || has_bombs || has_mask_goron || (can_use_nayru && can_swim) || (event(WOODFALL_TEMPLE_MAIN_CHEST) && can_hookshot)"
+    "Woodfall Temple Main Entrance Ledge": "has_mask_deku || short_hook_anywhere || can_use_ice_arrows || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_hover_boots || has_bombs || has_mask_goron || (can_use_nayru && can_swim) || (event(WOODFALL_TEMPLE_MAIN_CHEST) && can_hookshot)"
     "Woodfall Temple Main Water Room Ledge": "true"
     "Woodfall Temple Pits Room": "true"
     "Woodfall Temple Pre-Boss Main Ledge": "has_arrows || can_use_din"
@@ -210,7 +210,7 @@
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "has_arrows"
     WOODFALL_TEMPLE_MAIN_LADDER: "true"
-    WOODFALL_TEMPLE_MAIN_CHEST: "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    WOODFALL_TEMPLE_MAIN_CHEST: "has_mask_deku || short_hook_anywhere || has_hover_boots"
   locations:
     "Woodfall Temple SF Main Bubble": "true"
     "Woodfall Temple Pot Main Room Upper 1": "true"
@@ -223,11 +223,11 @@
     "Woodfall Temple Water Room Lower Ledge": "has_bombs || has_mask_goron || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_arrows || has_hover_boots || short_hook_anywhere || can_swim || can_use_ice_arrows"
     "Woodfall Temple Water Room Map Ledge": "has_bombs || has_mask_goron || has_hover_boots || can_use_ice_arrows || can_hookshot_short"
     "Woodfall Temple Bow Room": "true"
-    "Woodfall Temple Water Room Boss Key Ledge": "(has(MASK_DEKU) && (has_arrows || can_use_slingshot)) || (short_hook_anywhere && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || hookshot_anywhere"
+    "Woodfall Temple Water Room Boss Key Ledge": "(has_mask_deku && (has_arrows || can_use_slingshot)) || (short_hook_anywhere && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || hookshot_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Water Chest": "has(MASK_DEKU) || has_hover_boots || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has(MASK_DEKU) || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Woodfall Temple Water Chest": "has_mask_deku || has_hover_boots || can_hookshot || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || (has_arrows && (can_hookshot || can_use_ice_arrows || has_mask_deku || (enter_woodfall_temple_water && can_swim_or_sink) || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)))) || (has_mask_great_fairy && (has_arrows || can_hookshot))"
     "Woodfall Temple Pot Water Room 1": "true"
     "Woodfall Temple Pot Water Room 2": "true"
     "Woodfall Temple Pot Water Room 3": "true"
@@ -248,12 +248,12 @@
   exits:
     "Woodfall Temple Water Room Lower Ledge": "has_bombs || has_mask_goron || event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_hover_boots || hookshot_anywhere || can_use_ice_arrows || (can_use_nayru && can_swim)"
     "Woodfall Temple Water Room Map Ledge": "has_bombs || has_mask_goron || event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_hookshot || has_hover_boots || can_use_ice_arrows"
-    "Woodfall Temple Water Room Upper Ledge": "has(MASK_DEKU) || hookshot_anywhere"
+    "Woodfall Temple Water Room Upper Ledge": "has_mask_deku || hookshot_anywhere"
     "Woodfall Temple Boss Key Room": "true"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Water Chest": "has(MASK_DEKU) || has_hover_boots || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows || short_hook_anywhere"
-    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || has_arrows || has_bombs || (has(MASK_GREAT_FAIRY) && (has_mask_zora || has_boomerang || can_hookshot_short))"
+    "Woodfall Temple Water Chest": "has_mask_deku || has_hover_boots || (can_hookshot_short && (event(WOODFALL_TEMPLE_MAIN_FLOWER) || has_bombs || has_mask_goron)) || can_use_ice_arrows || short_hook_anywhere"
+    "Woodfall Temple SF Water Room Beehive": "can_use_deku_bubble || has_arrows || has_bombs || (has_mask_great_fairy && (has_mask_zora || has_boomerang || can_hookshot_short))"
 
 "Woodfall Temple Boss Key Room":
   dungeon: WF
@@ -263,7 +263,7 @@
     "WARP_SONGS": "true"
   events:
     WOODFALL_TEMPLE_GEKKO: "can_kill_gekko_wft"
-    FROG_2: "event(WOODFALL_TEMPLE_GEKKO) && has(MASK_DON_GERO)"
+    FROG_2: "event(WOODFALL_TEMPLE_GEKKO) && has_mask_don_gero"
 
 "Woodfall Temple Boss Key Room Cage":
   dungeon: WF
@@ -281,20 +281,20 @@
   dungeon: WF
   exits:
     "Woodfall Temple Main Upper Ledge": "true"
-    "Woodfall Temple Pre-Boss Rupee Platform": "has(MASK_DEKU) || has_mask_zora || can_goron_bomb_jump || short_hook_anywhere || ((has_hover_boots || can_swim || can_use_ice_arrows) && (can_hookshot || is_adult))"
-    "Woodfall Temple Pre-Boss Far Ledge": "has(MASK_DEKU) || hookshot_anywhere || (can_hookshot && (can_swim || has_hover_boots || can_use_ice_arrows)) || (has_arrows && short_hook_anywhere)"
+    "Woodfall Temple Pre-Boss Rupee Platform": "has_mask_deku || has_mask_zora || can_goron_bomb_jump || short_hook_anywhere || ((has_hover_boots || can_swim || can_use_ice_arrows) && (can_hookshot || is_adult))"
+    "Woodfall Temple Pre-Boss Far Ledge": "has_mask_deku || hookshot_anywhere || (can_hookshot && (can_swim || has_hover_boots || can_use_ice_arrows)) || (has_arrows && short_hook_anywhere)"
     "WARP_SONGS": "true"
   locations:
     "Woodfall Temple SF Pre-Boss Bottom Right": "true"
-    "Woodfall Temple SF Pre-Boss Left": "has(MASK_DEKU) || short_hook_anywhere || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Woodfall Temple SF Pre-Boss Left": "has_mask_deku || short_hook_anywhere || (has_mask_great_fairy && (has_arrows || can_hookshot))"
     "Woodfall Temple SF Pre-Boss Top Right": "true"
-    "Woodfall Temple SF Pre-Boss Pillar": "short_hook_anywhere || has(MASK_DEKU) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Woodfall Temple SF Pre-Boss Pillar": "short_hook_anywhere || has_mask_deku || (has_mask_great_fairy && (has_arrows || can_hookshot))"
     "Woodfall Temple Grass Pre-Boss 1": "true"
     "Woodfall Temple Grass Pre-Boss 2": "true"
     "Woodfall Temple Grass Pre-Boss 3": "true"
     "Woodfall Temple Grass Pre-Boss 4": "true"
     "Woodfall Temple Grass Pre-Boss 5": "true"
-    "Woodfall Temple Rupee Upper Right": "has(MASK_DEKU)"
+    "Woodfall Temple Rupee Upper Right": "has_mask_deku"
 
 "Woodfall Temple Pre-Boss Far Ledge":
   dungeon: WF
@@ -307,20 +307,20 @@
     "Woodfall Temple Pot Pre-Boss 2": "true"
     "Woodfall Temple Rupee Upper Left": "has_mask_zora || has_boomerang || short_hook_anywhere || (can_use_ice_arrows && trick(MM_WFT_RUPEES_ICE)) || has_hover_boots"
     "Woodfall Temple Rupee Upper Right": "has_mask_zora || has_boomerang || short_hook_anywhere || (can_use_ice_arrows && trick(MM_WFT_RUPEES_ICE)) || has_hover_boots"
-    "Woodfall Temple SF Pre-Boss Bottom Right": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
-    "Woodfall Temple SF Pre-Boss Left": "has(MASK_DEKU) || short_hook_anywhere || (has(MASK_GREAT_FAIRY) && has_arrows)"
-    "Woodfall Temple SF Pre-Boss Top Right": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall) || (has(MASK_GREAT_FAIRY) && has_arrows)"
-    "Woodfall Temple SF Pre-Boss Pillar": "short_hook_anywhere || has(MASK_DEKU) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
-    "Woodfall Temple Grass Pre-Boss 1": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall)"
-    "Woodfall Temple Grass Pre-Boss 2": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall)"
-    "Woodfall Temple Grass Pre-Boss 3": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall)"
-    "Woodfall Temple Grass Pre-Boss 4": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall)"
-    "Woodfall Temple Grass Pre-Boss 5": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall)"
+    "Woodfall Temple SF Pre-Boss Bottom Right": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall) || (has_mask_great_fairy && (has_arrows || can_hookshot))"
+    "Woodfall Temple SF Pre-Boss Left": "has_mask_deku || short_hook_anywhere || (has_mask_great_fairy && has_arrows)"
+    "Woodfall Temple SF Pre-Boss Top Right": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall) || (has_mask_great_fairy && has_arrows)"
+    "Woodfall Temple SF Pre-Boss Pillar": "short_hook_anywhere || has_mask_deku || (has_mask_great_fairy && (has_arrows || can_hookshot))"
+    "Woodfall Temple Grass Pre-Boss 1": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall)"
+    "Woodfall Temple Grass Pre-Boss 2": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall)"
+    "Woodfall Temple Grass Pre-Boss 3": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall)"
+    "Woodfall Temple Grass Pre-Boss 4": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall)"
+    "Woodfall Temple Grass Pre-Boss 5": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall)"
 
 "Woodfall Temple Pre-Boss Rupee Platform":
   dungeon: WF
   exits:
-    "Woodfall Temple Pre-Boss Main Ledge": "short_hook_anywhere || has(MASK_DEKU) || (can_use_ice_arrows && is_tall)"
+    "Woodfall Temple Pre-Boss Main Ledge": "short_hook_anywhere || has_mask_deku || (can_use_ice_arrows && is_tall)"
     "Woodfall Temple Pre-Boss Far Ledge": "can_hookshot || (has_arrows && short_hook_anywhere)"
   locations:
     "Woodfall Temple Rupee Lower 1": "true"

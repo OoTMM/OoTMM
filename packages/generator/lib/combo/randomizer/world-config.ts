@@ -1,13 +1,13 @@
 import type { Settings } from '@ootmm/core';
 import type { LogicResultWorld } from '@ootmm/logic';
 import type { Confvar } from '../confvars';
-
+import { MM_AGE_REQ_ITEMS } from '@ootmm/core';
 import { isEntranceShuffle, mustStartWithMasterSword } from '@ootmm/logic';
 
 export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Confvar> {
   const config = new Set<Confvar>;
 
-  const exprs: { [k in Confvar]: boolean } = {
+  const exprs: Partial<Record<Confvar, boolean>> = {
     GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
     SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
     CSMC: settings.csmc === 'always',
@@ -332,6 +332,16 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
   for (const v in exprs) {
     if (exprs[v as Confvar]) {
       config.add(v as Confvar);
+    }
+  }
+
+  for (const item of MM_AGE_REQ_ITEMS) {
+    if ((settings as any)[item.childSetting]) {
+      config.add(item.childConfvar as Confvar);
+    }
+
+    if ((settings as any)[item.adultSetting]) {
+      config.add(item.adultConfvar as Confvar);
     }
   }
 

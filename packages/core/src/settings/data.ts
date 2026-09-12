@@ -1,5 +1,5 @@
 import type { Game } from '@ootmm/data';
-
+import { MM_AGE_REQ_ITEMS } from '../mm-age-requirements';
 function hasGame(x: any, g: Game) {
   return x.games === g || x.games === 'ootmm';
 }
@@ -18,6 +18,41 @@ const SETTING_PRICE = {
   ],
   category: 'main.prices',
   default: 'vanilla',
+} as const;
+
+const MM_AGE_REQ_SETTINGS = MM_AGE_REQ_ITEMS.flatMap(item => [
+  {
+    key: item.childSetting,
+    name: `${item.label} requires Child Link`,
+    category: 'items.mmAgeRequirements',
+    type: 'boolean',
+    description: `Requires Child Link to equip ${item.label} in MM.`,
+    default: false,
+    cond: hasMM,
+  },
+  {
+    key: item.adultSetting,
+    name: `${item.label} requires Adult Link`,
+    category: 'items.mmAgeRequirements',
+    type: 'boolean',
+    description: `Requires Adult Link to equip ${item.label} in MM.`,
+    default: false,
+    cond: hasMM,
+  },
+] as const);
+
+const MM_AGE_REQ_RANDOM_SETTING = {
+  key: 'mmAgeReqRandom',
+  name: 'Random MM Age Requirements',
+  category: 'items.mmAgeRequirements',
+  type: 'set',
+  description: 'Items whose MM age requirement is chosen randomly from the seed.',
+  values: MM_AGE_REQ_ITEMS.map(item => ({
+    value: item.id,
+    name: item.label,
+  })),
+  default: 'none',
+  cond: hasMM,
 } as const;
 
 export const SETTINGS = [{
@@ -3341,7 +3376,10 @@ export const SETTINGS = [{
   description: 'Allows Link to use the Song of Soaring in OoT independently of his age',
   default: false,
   cond: (s: any) => s.songSoaringOot,
-}, {
+},
+  ...MM_AGE_REQ_SETTINGS,
+  MM_AGE_REQ_RANDOM_SETTING,
+{
   key: 'erSelfLoops',
   name: 'Allow Self-Loops',
   category: 'entrances',

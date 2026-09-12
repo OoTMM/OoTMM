@@ -38,7 +38,7 @@
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Road to Ikana Front": "true"
-    "Astral Observatory Balcony": "has(MASK_DEKU) || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+    "Astral Observatory Balcony": "has_mask_deku || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Grass Grotto": "has_shovel"
     "Peahat Grotto": "has_shovel"
     "Bio Baba Grotto": "has_shovel && can_break_boulders"
@@ -301,7 +301,7 @@
     "Termina Field Wonder Item Grass 3": "true"
     "Termina Field Wonder Item Grass 4": "true"
     "Termina Field Wonder Item Grass 5": "true"
-    "Termina Field Wonder Item Hollow Trunk": "goron_fast_roll || has(MASK_DEKU)"
+    "Termina Field Wonder Item Hollow Trunk": "goron_fast_roll || has_mask_deku"
     "Termina Field Wonder Item Fountains 1": "true"
     "Termina Field Wonder Item Fountains 2": "true"
     "Termina Field Wonder Item North Ramp": "goron_fast_roll"
@@ -357,7 +357,7 @@
     ARROWS: "true"
     FISH: "true"
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -381,12 +381,12 @@
 "Peahat Grotto":
   region: ENTRANCE
   events:
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
   locations:
-    "Termina Field Peahat Grotto": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has(MASK_DEKU) || can_use_slingshot) && is_day"
+    "Termina Field Peahat Grotto": "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has_mask_deku || can_use_slingshot) && is_day"
     "Peahat Grotto Grass 01": "true"
     "Peahat Grotto Grass 02": "true"
     "Peahat Grotto Grass 03": "true"
@@ -404,7 +404,7 @@
   region: ENTRANCE
   events:
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -435,7 +435,7 @@
     ARROWS: "true"
     FISH: "true"
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -460,7 +460,7 @@
   region: ENTRANCE
   events:
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -476,7 +476,7 @@
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   exits:
     "GLOBAL": "true"
     "Termina Field": "true"
@@ -564,8 +564,8 @@
   region: ENTRANCE
   events:
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
-    SWAMP_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
+    MUSHROOM: "has_mask_scents"
+    SWAMP_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has_mask_deku && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
@@ -591,7 +591,7 @@
   region: ENTRANCE
   events:
     BUGS: "true"
-    MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
+    MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has_mask_deku && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
@@ -621,8 +621,8 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
-    OCEAN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
+    MUSHROOM: "has_mask_scents"
+    OCEAN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has_mask_deku && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
@@ -660,8 +660,8 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     BUGS: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
-    CANYON_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
+    MUSHROOM: "has_mask_scents"
+    CANYON_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has_mask_deku && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"

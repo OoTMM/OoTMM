@@ -49,7 +49,7 @@
     "Ocean Skulltula Colored Skulls Behind Picture": "gs && (can_hookshot_short || has_boomerang || has_mask_zora || (has_mask_goron && (has_arrows || can_use_deku_bubble)))"
     "Ocean Skulltula Colored Skulls Pot": "gs"
     "Ocean Skulltula Colored Skulls Ceiling Edge": "gs && (can_hookshot_short || has_boomerang || has_mask_zora)"
-    "Ocean Spider House Chest HP": "has_arrows && ((has(MASK_CAPTAIN) && soul_stalchild) || trick(MM_CAPTAIN_SKIP))"
+    "Ocean Spider House Chest HP": "has_arrows && ((has_mask_captain && soul_stalchild) || trick(MM_CAPTAIN_SKIP))"
     "Ocean Skulltula Storage Room Behind Boat": "gs && has_fire_sticks"
     "Ocean Skulltula Storage Room Ceiling Web": "gs && can_use_fire_short_range && (can_hookshot_short || has_boomerang || has_mask_zora)"
     "Ocean Skulltula Storage Room Behind Crate": "gs && has_fire_sticks && is_short && (can_hookshot_short || has_boomerang || has_mask_zora || (has_mask_goron && (has_arrows || can_use_deku_bubble || has_explosives || trick_keg_explosives)))"

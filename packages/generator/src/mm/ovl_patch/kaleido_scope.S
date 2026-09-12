@@ -479,3 +479,134 @@ PATCH_END
 PATCH_START 0x8081CB72
   .short ITEM_MM_CUSTOM_MAX + 3
 PATCH_END
+
+/*
+==================================================================================================
+ MM item equip age gate
+==================================================================================================
+*/
+
+KaleidoScope_MmEquipAgeGate_ButtonMask:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x001c(sp)
+  sw      a0, 0x0018(sp)
+  sw      t1, 0x0014(sp)
+  sw      s1, 0x0010(sp)
+
+  andi    t5, a0, 0x0007
+  beqz    t5, .L_mm_agegate_restore
+   nop
+
+  jal     KaleidoScope_CheckMmSlotAgeReq
+   lhu    a0, 0x0268(s0)
+
+  bnez    v0, .L_mm_agegate_allow
+   nop
+
+  jal     Audio_PlaySfx
+   li     a0, 0x4806
+
+  b       .L_mm_agegate_block
+   nop
+
+.L_mm_agegate_allow:
+  li      t5, 0x1
+  b       .L_mm_agegate_restore
+   nop
+
+.L_mm_agegate_block:
+  move    t5, zero
+
+.L_mm_agegate_restore:
+  lw      s1, 0x0010(sp)
+  lw      t1, 0x0014(sp)
+  lw      a0, 0x0018(sp)
+  lw      ra, 0x001c(sp)
+  jr      ra
+   addiu  sp, sp, 0x20
+
+PATCH_START 0x8081c2a0
+  jal     KaleidoScope_MmEquipAgeGate_ButtonMask
+   nop
+  .int    0x11a000b0
+PATCH_END
+
+/*
+==================================================================================================
+ MM mask equip age gate
+==================================================================================================
+*/
+
+KaleidoScope_MmMaskEquipAgeGate_Accept:
+  addiu   sp, sp, -0x30
+
+  sw      ra, 0x002c(sp)
+  sw      a0, 0x0028(sp)
+  sw      v0, 0x0024(sp)
+  sw      v1, 0x0020(sp)
+  sw      s0, 0x001c(sp)
+  sw      t4, 0x0018(sp)
+
+  jal     KaleidoScope_CheckMmSlotAgeReq
+   addiu  a0, v1, 0x0018
+
+  sw      v0, 0x0014(sp)
+
+  lw      t4, 0x0018(sp)
+  lw      s0, 0x001c(sp)
+  lw      v1, 0x0020(sp)
+  lw      v0, 0x0024(sp)
+  lw      a0, 0x0028(sp)
+  lw      ra, 0x002c(sp)
+
+  lhu     t5, 0x0070(sp)
+  lw      t6, 0x019c(s0)
+  addiu   t8, v1, 0x0018
+  sll     t7, v1, 0x2
+
+  lw      t9, 0x0014(sp)
+
+  jr      ra
+   addiu  sp, sp, 0x30
+
+PATCH_START 0x80820e0c
+  jal     KaleidoScope_MmMaskEquipAgeGate_Accept
+   nop
+  .int    0x1320ff8e
+  nop
+PATCH_END
+
+/*
+==================================================================================================
+ MM native icon age greying
+==================================================================================================
+*/
+
+KaleidoScope_NativeItemAgeAndFormCheck_Hook:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x001c(sp)
+  sw      a0, 0x0018(sp)
+  sw      a2, 0x0014(sp)
+  sw      v0, 0x0010(sp)
+
+  lbu     t9, 0x2410(t9)
+
+  beqz    t9, .L_native_age_form_restore
+   nop
+
+  jal     KaleidoScope_CheckMmItemAgeReq
+   andi   a0, a2, 0xffff
+
+  move    t9, v0
+
+.L_native_age_form_restore:
+  lw      v0, 0x0010(sp)
+  lw      a2, 0x0014(sp)
+  lw      a0, 0x0018(sp)
+  lw      ra, 0x001c(sp)
+  jr      ra
+   addiu  sp, sp, 0x20
+
+PATCH_START 0x80828b14
+  jal     KaleidoScope_NativeItemAgeAndFormCheck_Hook
+PATCH_END

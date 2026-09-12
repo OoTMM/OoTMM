@@ -2,7 +2,7 @@
 "Twin Islands":
   region: TWIN_ISLANDS
   events:
-    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && can_use_pictograph_box"
     MAGIC: "true"
     RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || (can_break_snowballs && soul_enemy(SOUL_ENEMY_SNAPPER)))) || is_spring"
   exits:
@@ -68,7 +68,7 @@
     NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     BUGS: "true"
     FISH: "true"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   locations:
     "Twin Islands Ramp Grotto Chest": "true"
     "Twin Islands Ramp Grotto Grass 01": "true"
@@ -96,7 +96,7 @@
     HOT_WATER_NORTH_SPRING: "is_spring"
     WATER: "true"
     STICKS: "can_kill_baba_sticks"
-    MUSHROOM: "has(MASK_SCENTS)"
+    MUSHROOM: "has_mask_scents"
   locations:
     "Twin Islands Frozen Grotto Chest": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL) && setting(erOverworld, none) && setting(erGrottos, none))"
     "Twin Islands Frozen Grotto Large Boulder 1": "has_explosives"
