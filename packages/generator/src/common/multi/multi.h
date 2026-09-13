@@ -143,6 +143,7 @@ typedef struct PACKED
     MultiPacketHeader header;
     u32 overrideKey;
     s16 gi;
+    u8 flags;
 }
 MultiPacketOutInfoItem;
 

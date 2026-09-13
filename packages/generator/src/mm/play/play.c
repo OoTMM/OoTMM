@@ -84,7 +84,7 @@ static void sendSelfMajorasMask(void)
         return;
 
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
-    Multi_InfoItem(0, gi);
+    Multi_InfoItem(0, gi, 0x01);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
