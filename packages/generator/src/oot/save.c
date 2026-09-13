@@ -7,10 +7,12 @@
 #include <combo/config.h>
 #include <combo/context.h>
 #include <combo/entrance.h>
+#include <combo/multi.h>
 
 static void fixSpawn(void)
 {
     u32 entrance;
+    u32 entranceOriginal;
     s32 override;
 
     gSaveContext.respawnFlag = 0;
@@ -42,6 +44,7 @@ static void fixSpawn(void)
     if (gSave.info.sceneId == SCE_OOT_LINK_HOUSE)
     {
         gSave.entrance = ENTR_OOT_SPAWN_CHILD;
+        Multi_InfoEntrance(0xffffffff, ENTR_OOT_SPAWN_CHILD, gSave.age);
         return;
     }
 
@@ -52,10 +55,13 @@ static void fixSpawn(void)
     }
 
     entrance = gSave.age == AGE_CHILD ? ENTR_OOT_SPAWN_CHILD : ENTR_OOT_SPAWN_ADULT;
+    entranceOriginal = entrance;
     override = comboEntranceOverride(entrance);
     if (override != -1)
         entrance = (u32)override;
     gSave.entrance = entrance;
+
+    Multi_InfoEntrance(entranceOriginal, gSave.entrance, gSave.age);
 }
 
 void Sram_AfterOpenSave(void)
