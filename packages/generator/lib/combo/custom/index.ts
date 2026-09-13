@@ -246,6 +246,8 @@ const OOT_ADULT_EFFECTS: readonly number[] = [
   ...Array.from({ length: 28 }, (_, i) => i),
   55, 56, 60, 61, 67, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 134];
 
+const MM_HUMAN_VOICE_TABLE_OFFSET = 0xB34E;
+const MM_HUMAN_VOICE_TABLE_SIZE = 0x40;
 const adultEffectSlot = (effect: number) => OOT_ADULT_EFFECTS.indexOf(effect);
 const readU16BE = (data: Uint8Array, off: number) => (data[off] << 8) | data[off + 1];
 
@@ -256,6 +258,7 @@ const writeU16BE = (data: Uint8Array, off: number, value: number) => {
 
 const alignUp = (value: number, alignment: number) =>
     Math.ceil(value / alignment) * alignment;
+const mmAdultEffectBase = (numSfx: number) => alignUp(numSfx, 0x40);
 
 const readSoundfont0 = (table: Uint8Array) => ({
   addr: bufReadU32BE(table, 0),
@@ -335,7 +338,7 @@ const buildMmAdultVoiceHybridBank = async (roms: DecompressedRoms, mmBankTable: 
 
   sampleBankIds[targetSampleSelector] = foreignSampleBank;
 
-  const adultEffectBase = alignUp(mm.numSfx, 0x40);
+  const adultEffectBase = mmAdultEffectBase(mm.numSfx);
   const newNumSfx = adultEffectBase + OOT_ADULT_EFFECTS.length;
   const out = new MutableBinary(mmFont);
   const newSfxTable = out.alloc(newNumSfx * 8, 0x10);
@@ -578,10 +581,13 @@ function patchMmAdultVoiceSequence(seq: Uint8Array, adultEffectBase: number): Ui
     'adultPush', 'adultHookshotHang', 'adultLandDamage', 'adultNull1B', 'adultMagicAttack', 'adultFallL', 'adultDemoDamage', 'adultSwordN',
   ] as const;
 
-  const out = concatUint8Arrays([seq, b.finish()]);
-  adultVoiceTargets.forEach((target, i) => writeU16BE(out, 0xB30E + i * 2, b.getLabel(target)));
+  const body = b.finish();
 
-  return out;
+  const childPointerTable = seq.slice(MM_HUMAN_VOICE_TABLE_OFFSET, MM_HUMAN_VOICE_TABLE_OFFSET + MM_HUMAN_VOICE_TABLE_SIZE);
+  const adultPointerTable = new Uint8Array(MM_HUMAN_VOICE_TABLE_SIZE);
+  adultVoiceTargets.forEach((target, i) => writeU16BE(adultPointerTable, i * 2, b.getLabel(target)));
+  const data = concatUint8Arrays([seq, body, childPointerTable, adultPointerTable,]);
+  return data;
 }
 
 class CustomAssetsBuilder {
@@ -649,6 +655,22 @@ class CustomAssetsBuilder {
     bufWriteU32BE(data, 0, a);
     bufWriteU32BE(data, 4, b);
     return data;
+  }
+
+  private mmAudioGrowth = 0;
+
+  private addMmAudioGrowth(oldSize: number, newSize: number) {
+    this.mmAudioGrowth += alignUp(newSize, 0x10) - alignUp(oldSize, 0x10);
+  }
+  private async patchMmAudioHeap() {
+    if (!this.mmAudioGrowth)
+      return;
+    const offset = 0x13b644;
+    const data = new Uint8Array(await extractRaw(this.roms, 'mm', 'code', offset, 0x0c));
+    const growth = this.mmAudioGrowth;
+    bufWriteU32BE(data, 4, alignUp(bufReadU32BE(data, 4) + growth, 0x10));
+    bufWriteU32BE(data, 8, alignUp(bufReadU32BE(data, 8) + growth, 0x10));
+    this.patch.addPatch('mm/code', offset, data);
   }
 
   async addHumanAgeProperties() {
@@ -764,7 +786,7 @@ class CustomAssetsBuilder {
     ]);
 
     /* Adult voice, human surface sounds. */
-    writeU16(0x92, 0x0000);
+    writeU16(0x92, 0x0020);
     writeU16(0x94, 0x0080);
 
     writeF32(0x98, 22.0);
@@ -934,7 +956,7 @@ class CustomAssetsBuilder {
         extractRaw(this.roms, 'mm', 'code', 0x13B6D0, 0x29 * 0x10),
       ]);
       mmAudioseq = audioseq;
-      adultEffectBase = alignUp(readSoundfont0(mmBankTable).numSfx, 0x40);
+      adultEffectBase = mmAdultEffectBase(readSoundfont0(mmBankTable).numSfx);
     }
 
     for (let i = 0; i < count; ++i) {
@@ -946,10 +968,16 @@ class CustomAssetsBuilder {
       }
 
       if (game === 'mm' && i === 0) {
+        const originalSize = size;
         const seq = mmAudioseq!.slice(addr, addr + size);
         const data = patchMmAdultVoiceSequence(seq, adultEffectBase);
         addr = this.addRawData('mm/seq_0_oot_adult_voice', data, false);
         size = data.length;
+        this.addMmAudioGrowth(originalSize, size);
+
+        this.cg.define('CUSTOM_MM_HUMAN_VOICE_POINTER_TABLE_OFFSET', MM_HUMAN_VOICE_TABLE_OFFSET);
+        this.cg.define('CUSTOM_MM_CHILD_VOICE_POINTER_TABLE_OFFSET', data.length - 0x80);
+        this.cg.define('CUSTOM_MM_ADULT_VOICE_POINTER_TABLE_OFFSET', data.length - 0x40);
       } else
         addr += romOffset;
       bufWriteU32BE(seqTableDataPatched, i * 0x10, addr);
@@ -1003,7 +1031,9 @@ class CustomAssetsBuilder {
     }
 
     if (game === 'mm') {
+      const originalFont0Size = bufReadU32BE(dataOrig, 0x04);
       const hybrid = await buildMmAdultVoiceHybridBank(this.roms, dataOrig);
+      this.addMmAudioGrowth(originalFont0Size, hybrid.data.length);
       const hybridVrom = this.addRawData('mm/bank_0_oot_adult_voice', hybrid.data, false);
       bufWriteU32BE(dataPatched, 0x00, hybridVrom);
       bufWriteU32BE(dataPatched, 0x04, hybrid.data.length);
@@ -1055,6 +1085,7 @@ class CustomAssetsBuilder {
 
     await this.extractBankTable('oot', 0x26, 0x1026b0, 0xd390);
     await this.extractBankTable('mm',  0x29, 0x13b6d0, 0x20700 + mmBase);
+    await this.patchMmAudioHeap();
     await this.extractCustomBankTable();
 
     await this.extractAudioTable('oot', 0x07, 0x1031d0, 0x79470);
@@ -1128,9 +1159,20 @@ class CustomAssetsBuilder {
     await this.addObjectFile('MASK_ADULT_TRANSFORM_PLAYER', 'object_mask_adult.zobj', [0x0a000900,]);
     await this.addObjectFile('ADULT_MASK_EQUIPMENT', 'adult_mask_equipment_standalone.zobj', [0x0a000920,]);
 
+    {
+      const rootCount = 40;
+      const data = new Uint8Array(rootCount * 8);
+      const offsets: number[] = [];
+      for (let i = 0; i < rootCount; ++i) {
+        data[i * 8] = 0xdf;
+        offsets.push(0x0a000000 | (i * 8));
+      }
+      await this.addCustomObject('EQ_COSMETICS_OOT', data, offsets);
+    }
+
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());
-    const objectTableVrom = this.addRawData(null, objectTableBuffer, true);
+    const objectTableVrom = this.addRawData('custom/object_table', objectTableBuffer, true);
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 

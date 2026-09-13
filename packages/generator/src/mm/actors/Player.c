@@ -18,6 +18,38 @@
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
+#define MM_AUDIO_CONTEXT_ADDR               0x80200c70u
+#define MM_AUDIO_CONTEXT_SEQ_PLAYERS_OFFSET 0x4460u
+#define MM_SEQUENCE_PLAYER_SIZE             0x0160u
+#define MM_SEQUENCE_PLAYER_SFX              2u
+#define MM_HUMAN_VOICE_POINTER_BYTES        0x40u
+
+static void PlayerVoice_UpdateHumanAgeRouting(Player* player)
+{
+    u8* seqPlayer;
+    u8* seqData;
+    u8* dst;
+    const u8* src;
+
+    if (!player || player->transformation != MM_PLAYER_FORM_HUMAN)
+        return;
+
+    seqPlayer = (u8*)(MM_AUDIO_CONTEXT_ADDR + MM_AUDIO_CONTEXT_SEQ_PLAYERS_OFFSET + MM_SEQUENCE_PLAYER_SFX * MM_SEQUENCE_PLAYER_SIZE);
+    if (seqPlayer[4] != 0)
+        return;
+
+    seqData = *(u8**)(seqPlayer + 0x18);
+    if (!seqData)
+        return;
+
+    dst = seqData + CUSTOM_MM_HUMAN_VOICE_POINTER_TABLE_OFFSET;
+    src = seqData + (
+        comboIsLinkAdult() ? CUSTOM_MM_ADULT_VOICE_POINTER_TABLE_OFFSET : CUSTOM_MM_CHILD_VOICE_POINTER_TABLE_OFFSET);
+
+    if (memcmp(dst, src, MM_HUMAN_VOICE_POINTER_BYTES))
+        memcpy(dst, src, MM_HUMAN_VOICE_POINTER_BYTES);
+}
+
 static void Player_TryBurnDekuShield(Player* this, PlayState* play)
 {
     char* b;
@@ -152,7 +184,9 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     Player_HandleBurningDekuShield(this, play);
     Player_ClearCustomMaskSpoofBeforeUpdate(this);
     Player_RefreshMaskObjectForAge(this);
+    PlayerVoice_UpdateHumanAgeRouting(this);
     Player_Update(this, play);
+    PlayerVoice_UpdateHumanAgeRouting(this);
     Player_UpdateCustomMaskBehavior(this);
     Player_HandleBronzeScale(this, play);
     Dpad_Update(play);
@@ -1745,6 +1779,25 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         postLimbDraw = Player_PostLimbDrawGameplayWrapper;
 
     sPlayerOverrideLimb = overrideLimbDraw;
+    if (player->transformation == MM_PLAYER_FORM_HUMAN && comboIsLinkAdult())
+    {
+        s32 slot = player->actor.objectSlot;
+        if (slot >= 0 && slot < ARRAY_COUNT(play->objectCtx.slots))
+        {
+            u8* segment = play->objectCtx.slots[slot].segment;
+            if (segment)
+            {
+                u32 addr = *(u32*)(segment + 0x5420);
+                if ((addr >> 24) == 0x06)
+                {
+                    gSegments[6] = OS_K0_TO_PHYSICAL(segment);
+                    gSPSegment(POLY_OPA_DISP++, 0x06, segment);
+                    gSPSegment(POLY_XLU_DISP++, 0x06, segment);
+                    skeleton = (void**)(segment + (addr & 0x00ffffff));
+                }
+            }
+        }
+    }
     SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, Player_OverrideLimbWrapper, postLimbDraw, &player->actor, lod);
 
     if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != GAMEMODE_END_CREDITS)
