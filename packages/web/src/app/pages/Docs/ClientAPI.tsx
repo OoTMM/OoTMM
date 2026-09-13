@@ -1,7 +1,69 @@
-import type { TypeDef } from './Components';
-import { TypeCard, TypeIndex, TypeRef, t } from './Components';
+import type { RouteDef, TypeDef } from './Components';
+import { RouteCard, RouteIndex, TypeCard, TypeIndex, TypeRef, t } from './Components';
+
+const BASE_URL = 'http://localhost:39278';
+
+const ROUTES: RouteDef[] = [
+  {
+    method: 'GET',
+    path: '/clients',
+    summary: 'Lists the multiplayer clients currently connected to the daemon.',
+    response: {
+      type: t.object([
+        { name: 'clients', type: t.array(t.ref('Client')) },
+      ]),
+      example: {
+        clients: [
+          { id: '9f86d081884c7d659a2feaa0c55ad015' },
+        ],
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/clients/{id}/events',
+    websocket: true,
+    summary: 'Opens a WebSocket that streams the events of a client as they happen.',
+    description: <p>Each message is a text frame containing a single JSON-encoded <TypeRef name="Event"/>. Messages sent to the server are ignored.</p>,
+    params: [
+      { name: 'id', type: t.string, description: 'The client ID, as returned by GET /clients.' },
+    ],
+    messages: {
+      type: t.ref('Event'),
+      example: {
+        type: 'INFO_ITEM',
+        item: 'OOT_BOMBS_5',
+        location: 'OOT Deku Tree Map Chest',
+        self: true,
+      },
+    },
+    errors: [
+      { status: 400, description: 'The client ID is not valid hex.' },
+      { status: 404, description: 'No client with this ID is connected.' },
+    ],
+    usage: `
+const { clients } = await fetch('${BASE_URL}/clients').then(r => r.json());
+const ws = new WebSocket(\`ws://localhost:39278/clients/\${clients[0].id}/events\`);
+
+ws.onmessage = (msg) => {
+  const event = JSON.parse(msg.data);
+  console.log(event.type, event);
+};
+`,
+  },
+];
 
 const TYPES: TypeDef[] = [
+  {
+    name: 'Client',
+    kind: 'struct',
+    fields: [
+      { name: 'id', type: t.string },
+    ],
+    example: {
+      id: '9f86d081884c7d659a2feaa0c55ad015',
+    },
+  },
   {
     name: 'Event',
     kind: 'union',
@@ -94,11 +156,16 @@ export const ClientAPI = () => {
     <div className="pb-16">
       <h1 className="text-3xl font-bold mb-2">Client API</h1>
       <p className="mb-6 text-gray-600 dark:text-gray-400">
+        All routes are served on <code className="font-mono">{BASE_URL}</code>.
         Types are shown as annotated JSON. Fields marked with <code className="font-mono">?</code> may be omitted.
         Click a type name to jump to its definition.
       </p>
 
-      <h2 className="text-xl font-semibold mb-3">Types</h2>
+      <h2 className="text-xl font-semibold mb-3">Routes</h2>
+      <RouteIndex routes={ROUTES}/>
+      {ROUTES.map(route => <RouteCard key={`${route.method} ${route.path}`} route={route} baseUrl={BASE_URL}/>)}
+
+      <h2 className="text-xl font-semibold mt-10 mb-3">Types</h2>
       <TypeIndex defs={TYPES}/>
       {TYPES.map(def => <TypeCard key={def.name} def={def}/>)}
     </div>
