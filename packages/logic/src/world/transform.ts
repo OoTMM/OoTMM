@@ -601,9 +601,12 @@ class LogicPassWorldTransform {
       items.push(Items.OOT_SWORD_MASTER);
     }
 
-    if (settings.zoraKing === 'open') {
-      items.push(Items.OOT_BOTTLE_EMPTY);
-    }
+    if (settings.zoraKing === 'open')
+      items.push(settings.sharedBottles ? Items.SHARED_BOTTLE_EMPTY : Items.OOT_BOTTLE_EMPTY);
+    else if (settings.sharedBottles)
+      items.push(Items.SHARED_BOTTLE_RUTO_LETTER);
+    if (settings.sharedBottles)
+      items.push(Items.SHARED_BOTTLED_GOLD_DUST);
 
     if (settings.smallKeyShuffleOot === 'anywhere') {
       items = [...items, ...ItemGroups.SMALL_KEYS_OOT, ...ItemGroups.KEY_RINGS_OOT];
@@ -1912,7 +1915,7 @@ class LogicPassWorldTransform {
       if (srp.has('Ganon_Spirit')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_SPIRIT, Items.OOT_POUCH_SILVER_GANON_SPIRIT);
     }
 
-    if (settings.zoraKing === 'open' && !settings.sharedBottles) {
+    if (settings.zoraKing === 'open') {
       this.replaceItem(Items.OOT_BOTTLE_RUTO_LETTER, Items.OOT_BOTTLE_EMPTY);
       this.replaceItem(Items.MM_BOTTLE_RUTO_LETTER, Items.MM_BOTTLE_EMPTY);
       this.replaceItem(Items.SHARED_BOTTLE_RUTO_LETTER, Items.SHARED_BOTTLE_EMPTY);
@@ -2006,6 +2009,11 @@ class LogicPassWorldTransform {
     case 'plentiful':
       this.plentifulPool();
       break;
+    }
+
+    /* Add extra OoT bottles */
+    if (settings.extraBottlesOot && !settings.sharedBottles) {
+      this.addItem(Items.OOT_BOTTLE_EMPTY, 2);
     }
 
     /* handle random bottle contents */

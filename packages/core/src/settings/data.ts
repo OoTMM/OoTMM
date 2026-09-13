@@ -2474,6 +2474,16 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'extraBottlesOot',
+  name: 'Extra Bottles (OoT)',
+  category: 'items.extensions.crossGame.items',
+  game: 'oot',
+  group: 'Bottles',
+  type: 'boolean',
+  description: 'Allows Ocarina of Time to have up to six bottles by using the Adult and Child trade slots for the fifth and sixth bottles.',
+  default: false,
+  cond: (s: any) => hasOoT(s) && !s.sharedBottles,
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons (OoT)',
   category: 'items.extensions.systems',
@@ -3496,7 +3506,7 @@ export const SETTINGS = [{
 }, {
   key: 'sharedBottles',
   name: 'Shared Bottles',
-  category: 'items.extensions.shared',
+  category: 'items.extensions.crossGame.items',
   game: 'shared',
   group: 'Bottles',
   type: 'boolean',

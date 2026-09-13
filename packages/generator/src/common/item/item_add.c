@@ -986,17 +986,32 @@ static int addItemBottleNewOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         }
     }
 
+    if (!Config_Flag(CFG_OOT_EXTRA_BOTTLES))
+        return 0;
+
     if (!(gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_BOTTLE)))
     {
+        int slotWasEmpty = gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE;
         gOotExtraItems.bottleAdultSlot = itemId;
         addItemTradeOotAdult(play, itemId, gi, XITEM_OOT_ADULT_BOTTLE);
+        if (slotWasEmpty)
+        {
+            gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
+            reloadSlotOot(play, ITS_OOT_TRADE_ADULT);
+        }
         return 0;
     }
 
     if (!(gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BOTTLE)))
     {
+        int slotWasEmpty = gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE;
         gOotExtraItems.bottleChildSlot = itemId;
         addItemTradeOotChild(play, itemId, gi, XITEM_OOT_CHILD_BOTTLE);
+        if (slotWasEmpty)
+        {
+            gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
+            reloadSlotOot(play, ITS_OOT_TRADE_CHILD);
+        }
         return 0;
     }
 

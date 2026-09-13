@@ -218,6 +218,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_SONG_ORDER: settings.sharedSongOrder,
     OOT_POWDER_KEG: settings.powderKegOot,
     SHARED_POWDER_KEG: settings.sharedPowderKeg,
+    OOT_EXTRA_BOTTLES: settings.extraBottlesOot,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
     MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',
