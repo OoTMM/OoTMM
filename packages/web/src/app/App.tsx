@@ -10,7 +10,7 @@ export function App() {
       <LocationProvider>
         <Layout>
           <Router>
-            <Route path="/docs/multiplayer-api" component={Pages.MultiplayerAPI}/>
+            <Route path="/docs/client-api" component={Pages.ClientAPI}/>
             <Route path="/gen/old" component={Pages.GeneratorVersions}/>
             <Route path="/gen/:id" component={Pages.Generator}/>
             <Route path="/" component={Pages.Home}/>

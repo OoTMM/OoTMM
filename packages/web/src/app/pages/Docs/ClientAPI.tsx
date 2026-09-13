@@ -89,10 +89,10 @@ const TYPES: TypeDef[] = [
   },
 ];
 
-export const MultiplayerAPI = () => {
+export const ClientAPI = () => {
   return (
     <div className="pb-16">
-      <h1 className="text-3xl font-bold mb-2">Multiplayer API</h1>
+      <h1 className="text-3xl font-bold mb-2">Client API</h1>
       <p className="mb-6 text-gray-600 dark:text-gray-400">
         Types are shown as annotated JSON. Fields marked with <code className="font-mono">?</code> may be omitted.
         Click a type name to jump to its definition.
