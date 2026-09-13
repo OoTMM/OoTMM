@@ -490,7 +490,7 @@ static int Multi_BeforeSend(void)
     return 1;
 }
 
-void Multi_InfoItem(u32 ovKey, s16 gi)
+void Multi_InfoItem(u32 ovKey, s16 gi, u8 flags)
 {
     MultiPacketOutInfoItem pkt;
 
@@ -501,6 +501,7 @@ void Multi_InfoItem(u32 ovKey, s16 gi)
     pkt.header.op = MULTI_OP_INFO_ITEM;
     pkt.overrideKey = ovKey;
     pkt.gi = gi;
+    pkt.flags = flags;
 
     Multi_SendPacket(&pkt.header, sizeof(pkt));
 }
