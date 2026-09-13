@@ -492,7 +492,7 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
 
         if (dekuNut == 1) {
             change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8),
-                       0.0f, 0.0f, 0.0f);
+                       1.0f, 1.0f, 1.0f);
         } else if (dekuNut == 2) {
             change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8),
                        0.0f, 0.15f, 1.6f);
@@ -712,7 +712,7 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
             u8 dekuNut = gMmSave.info.inventory.upgrades.dekuNut;
 
             if (dekuNut == 1) {
-                change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8), 0.0f, 0.0f, 0.0f);
+                change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8), 1.0f, 1.0f, 1.0f);
             } else if (dekuNut == 2) {
                 change_hsv((Color_RGBA8*)nutTex, 0x1000 / sizeof(Color_RGBA8), 0.0f, 0.15f, 1.6f);
             } else if (dekuNut >= 3) {
