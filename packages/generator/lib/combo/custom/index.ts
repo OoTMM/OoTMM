@@ -242,6 +242,348 @@ type ObjectRef = {
   vend: number;
 }
 
+const OOT_ADULT_EFFECTS: readonly number[] = [
+  ...Array.from({ length: 28 }, (_, i) => i),
+  55, 56, 60, 61, 67, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 134];
+
+const adultEffectSlot = (effect: number) => OOT_ADULT_EFFECTS.indexOf(effect);
+const readU16BE = (data: Uint8Array, off: number) => (data[off] << 8) | data[off + 1];
+
+const writeU16BE = (data: Uint8Array, off: number, value: number) => {
+  data[off] = value >>> 8;
+  data[off + 1] = value;
+};
+
+const alignUp = (value: number, alignment: number) =>
+    Math.ceil(value / alignment) * alignment;
+
+const readSoundfont0 = (table: Uint8Array) => ({
+  addr: bufReadU32BE(table, 0),
+  size: bufReadU32BE(table, 4),
+  sampleBank1: table[0x0A],
+  sampleBank2: table[0x0B],
+  numSfx: readU16BE(table, 0x0E),
+});
+
+class MutableBinary {
+  private readonly bytes: number[];
+
+  constructor(data: Uint8Array) {
+    this.bytes = [...data];
+  }
+
+  align(alignment: number) {
+    while (this.bytes.length % alignment) this.bytes.push(0);
+  }
+
+  alloc(size: number, alignment = 1) {
+    this.align(alignment);
+    const off = this.bytes.length;
+    this.bytes.length += size;
+    this.bytes.fill(0, off);
+    return off;
+  }
+
+  write(off: number, data: Uint8Array) {
+    data.forEach((v, i) => this.bytes[off + i] = v);
+  }
+
+  append(data: Uint8Array, alignment = 1) {
+    const off = this.alloc(data.length, alignment);
+    this.write(off, data);
+    return off;
+  }
+
+  writeU8(off: number, value: number) {
+    this.bytes[off] = value & 0xff;
+  }
+
+  writeU32BE(off: number, value: number) {
+    for (let i = 0; i < 4; ++i)
+      this.bytes[off + i] = (value >>> (24 - i * 8)) & 0xff;
+  }
+
+  finish() {
+    return Uint8Array.from(this.bytes);
+  }
+}
+
+const buildMmAdultVoiceHybridBank = async (roms: DecompressedRoms, mmBankTable: Uint8Array) => {
+  const [ootBankTable, mmAudiobank, ootAudiobank] = await Promise.all([
+    extractRaw(roms, 'oot', 'code', 0x1026B0, 0x26 * 0x10),
+    getObjectBuffer(roms, 'mm', 'Audiobank'),
+    getObjectBuffer(roms, 'oot', 'Audiobank'),
+  ]);
+
+  const mm = readSoundfont0(mmBankTable);
+  const oot = readSoundfont0(ootBankTable);
+  const mmFont = mmAudiobank.subarray(mm.addr, mm.addr + mm.size);
+  const ootFont = ootAudiobank.subarray(oot.addr, oot.addr + oot.size);
+  const mmSfxTable = bufReadU32BE(mmFont, 4);
+  const ootSfxTable = bufReadU32BE(ootFont, 4);
+
+  const firstSample = bufReadU32BE(ootFont, ootSfxTable + OOT_ADULT_EFFECTS[0] * 8);
+  const sourceSelector = (ootFont[firstSample] >>> 2) & 3;
+  const ootSampleBank = sourceSelector ? oot.sampleBank2 : oot.sampleBank1;
+  const foreignSampleBank = 8 + ootSampleBank;
+
+  const sampleBankIds = [mm.sampleBank1, mm.sampleBank2];
+  const targetSampleSelector = sampleBankIds.lastIndexOf(0xff);
+
+  if (targetSampleSelector < 0)
+    throw new Error('MM Soundfont 0 has no free samplebank slot');
+
+  sampleBankIds[targetSampleSelector] = foreignSampleBank;
+
+  const adultEffectBase = alignUp(mm.numSfx, 0x40);
+  const newNumSfx = adultEffectBase + OOT_ADULT_EFFECTS.length;
+  const out = new MutableBinary(mmFont);
+  const newSfxTable = out.alloc(newNumSfx * 8, 0x10);
+  const mmEffect0 = mmFont.subarray(mmSfxTable, mmSfxTable + 8);
+
+  out.write(newSfxTable, mmFont.subarray(mmSfxTable, mmSfxTable + mm.numSfx * 8));
+
+  for (let i = mm.numSfx; i < adultEffectBase; ++i)
+    out.write(newSfxTable + i * 8, mmEffect0);
+
+  out.writeU32BE(4, newSfxTable);
+
+  const sampleMap = new Map<number, number>();
+  const loopMap = new Map<number, number>();
+  const bookMap = new Map<number, number>();
+
+  const cloneBlob = (
+      map: Map<number, number>,
+      src: number,
+      size: number,
+      alignment = 8
+  ) => {
+    const cached = map.get(src);
+    if (cached !== undefined) return cached;
+
+    const dst = out.append(ootFont.subarray(src, src + size), alignment);
+    map.set(src, dst);
+    return dst;
+  };
+
+  const cloneLoop = (src: number) =>
+      src ? cloneBlob(loopMap, src, bufReadU32BE(ootFont, src + 8) ? 0x30 : 0x10) : 0;
+
+  const cloneBook = (src: number) => {
+    if (!src) return 0;
+    const order = bufReadU32BE(ootFont, src);
+    const predictors = bufReadU32BE(ootFont, src + 4);
+    return cloneBlob(bookMap, src, 8 + 16 * order * predictors);
+  };
+
+  const cloneSample = (src: number): number => {
+    const cached = sampleMap.get(src);
+    if (cached !== undefined) return cached;
+
+    const dst = out.append(ootFont.subarray(src, src + 0x10), 0x10);
+    out.writeU8(dst, (ootFont[src] & ~0x0c) | (targetSampleSelector << 2));
+    out.writeU32BE(dst + 8, cloneLoop(bufReadU32BE(ootFont, src + 8)));
+    out.writeU32BE(dst + 0x0C, cloneBook(bufReadU32BE(ootFont, src + 0x0C)));
+
+    sampleMap.set(src, dst);
+    return dst;
+  };
+
+  for (const effect of OOT_ADULT_EFFECTS) {
+    const src = ootSfxTable + effect * 8;
+    const dst = newSfxTable + (adultEffectBase + adultEffectSlot(effect)) * 8;
+    out.writeU32BE(dst, cloneSample(bufReadU32BE(ootFont, src)));
+    out.write(dst + 4, ootFont.subarray(src + 4, src + 8));
+  }
+
+  out.align(0x10);
+
+  return {
+    data: out.finish(),
+    sampleBankId1: sampleBankIds[0],
+    sampleBankId2: sampleBankIds[1],
+    numSfx: newNumSfx,
+  };
+};
+
+type AseqTarget = number | string;
+
+class AseqAppendBuilder {
+  private readonly data: number[] = [];
+  private readonly labels = new Map<string, number>();
+  private readonly fixups: { offset: number; label: string }[] = [];
+
+  constructor(private readonly base: number) {}
+
+  label(name: string) {
+    this.labels.set(name, this.base + this.data.length);
+  }
+
+  getLabel(name: string) {
+    return this.labels.get(name)!;
+  }
+
+  u8(...values: number[]) {
+    this.data.push(...values);
+  }
+
+  private ref(target: AseqTarget) {
+    if (typeof target === 'string') {
+      this.fixups.push({ offset: this.data.length, label: target });
+      target = 0;
+    }
+    this.u8(target >>> 8, target);
+  }
+
+  opPtr(op: number, target: AseqTarget, arg?: number) {
+    this.u8(op);
+    if (arg !== undefined) this.u8(arg);
+    this.ref(target);
+  }
+
+  finish() {
+    const out = Uint8Array.from(this.data);
+    for (const { offset, label } of this.fixups)
+      writeU16BE(out, offset, this.getLabel(label));
+    return out;
+  }
+}
+
+type AdultNote = readonly [effect: number, ...args: number[]];
+
+function patchMmAdultVoiceSequence(seq: Uint8Array, adultEffectBase: number): Uint8Array {
+  const adultBlock = adultEffectBase >>> 6;
+  const b = new AseqAppendBuilder(seq.length);
+
+  const addRandomVoice = (
+      name: string,
+      effects: readonly number[],
+      velocity: number | readonly number[]
+  ) => {
+    const velocities: readonly number[] =
+        typeof velocity === 'number' ? Array(effects.length).fill(velocity) : velocity;
+    const l = (s: string) => `${name}${s}`;
+
+    b.label(name);
+    b.u8(0xB8, effects.length, 0x77, 0x56);
+    b.opPtr(0xFA, l('D'));
+    b.u8(0x67);
+    b.opPtr(0xFB, l('S'));
+
+    b.label(l('D'));
+    b.u8(0x67, 0xC8, 0xFF, 0x77, 0xC8, effects.length);
+    b.opPtr(0xFA, l('W'));
+    b.u8(0x67);
+    b.opPtr(0xFB, l('S'));
+
+    b.label(l('W'));
+    b.u8(0xCC, 0x00, 0x77);
+
+    b.label(l('S'));
+    b.u8(0x76, 0x3E, 0x06, 0x3F, 0x06);
+    b.opPtr(0xCB, l('E'));
+    b.opPtr(0xC7, l('N'), 0x40);
+    b.u8(0x67);
+    b.opPtr(0xCB, l('V'));
+    b.opPtr(0xC7, l('X'), 0x00);
+    b.opPtr(0x88, l('L'));
+    b.u8(0xFF);
+
+    b.label(l('E')); b.u8(...effects.map(adultEffectSlot));
+    b.label(l('V')); b.u8(...velocities);
+    b.label(l('L')); b.u8(0xC2, adultBlock);
+    b.label(l('N')); b.u8(0x40, 0x00);
+    b.label(l('X')); b.u8(0x7F, 0xFF);
+  };
+
+  const addFixedVoice = (name: string, notes: readonly AdultNote[]) => {
+    const layer = `${name}L`;
+
+    b.label(name);
+    b.opPtr(0x88, layer);
+    b.u8(0xFF);
+
+    b.label(layer);
+    b.u8(0xC2, adultBlock);
+    for (const [effect, ...args] of notes)
+      b.u8(0x40 + adultEffectSlot(effect), ...args);
+    b.u8(0xFF);
+  };
+
+  const randomVoices = [
+    ['adultSwordN', [0, 1, 2, 3], 105],
+    ['adultSwordL', [4, 5], 110],
+    ['adultLash', [21, 22], 105],
+    ['adultHang', [6, 25], [95, 105]],
+    ['adultClimbEnd', [7, 8], [72, 80]],
+    ['adultDamageS', [9, 10, 11], 117],
+    ['adultFreeze', [12, 13, 14], 113],
+    ['adultFallS', [17, 18], 100],
+    ['adultFallL', [15, 16], 110],
+    ['adultBreathRest', [19, 23], 90],
+    ['adultTakenAway', [15, 16], 105],
+  ] as const;
+
+  const fixedVoices = [
+    ['adultBreathDrink', [[56, 0x00, 96]]],
+    ['adultDown', [[77, 0x57, 0x64], [78, 0x61, 0x64], [79, 0x47, 0x64]]],
+    ['adultSneeze', [[80, 0x7F, 0x64], [81, 0x81, 0x18, 0x64], [82, 0x81, 0x3E, 0x64]]],
+    ['adultSweat', [[83, 0x81, 0x22, 0x64], [84, 0x80, 0xA3, 0x64], [85, 0x35, 0x64]]],
+    ['adultRelax', [[86, 0x80, 0xB9, 0x64], [87, 0x80, 0x86, 0x64], [88, 0x74, 0x64]]],
+    ['adultSwordPutaway', [[0, 0x00, 100]]],
+    ['adultGroan', [[67, 0x00, 50]]],
+    ['adultMagicNale', [[5, 0x00, 110]]],
+    ['adultSurprise', [[134, 0x00, 85]]],
+    ['adultMagicFrol', [[4, 0x00, 95]]],
+    ['adultPush', [[7, 0x00, 82]]],
+    ['adultHookshotHang', [[6, 0x00, 95]]],
+    ['adultLandDamage', [[24, 0x00, 110]]],
+    ['adultNull1B', [[60, 0x00, 100]]],
+    ['adultMagicAttack', [[61, 0x00, 110]]],
+    ['adultDemoDamage', [[13, 0x00, 113]]],
+  ] as const;
+
+  for (const [name, effects, velocity] of randomVoices)
+    addRandomVoice(name, effects, velocity);
+
+  for (const [name, notes] of fixedVoices)
+    addFixedVoice(name, notes);
+
+  b.label('adultDrink');
+  b.opPtr(0x88, 'adultDrinkL');
+  b.u8(0xFF);
+  b.label('adultDrinkL');
+  b.u8(0xC2, adultBlock, 0x40 + adultEffectSlot(55), 0x50, 0x50, 0xF4, 0xFB);
+
+  b.label('adultAutoJump');
+  b.u8(0x66, 0xC8, 0xFF, 0xC9, 0x01, 0x77, 0x76, 0x3E, 0x06, 0x3F, 0x06);
+  b.opPtr(0xCB, 'adultAutoJumpE');
+  b.opPtr(0xC7, 'adultAutoJumpN', 0x40);
+  b.u8(0xB8, 0x02);
+  b.opPtr(0xCB, 'adultAutoJumpV');
+  b.opPtr(0xC7, 'adultAutoJumpW', 0x00);
+  b.opPtr(0x88, 'adultAutoJumpL');
+  b.u8(0xFF);
+
+  b.label('adultAutoJumpE'); b.u8(adultEffectSlot(26), adultEffectSlot(27));
+  b.label('adultAutoJumpV'); b.u8(0x50, 0x55);
+  b.label('adultAutoJumpL'); b.u8(0xC2, adultBlock);
+  b.label('adultAutoJumpN'); b.u8(0x40, 0x00);
+  b.label('adultAutoJumpW'); b.u8(0x50, 0xFF);
+
+  const adultVoiceTargets = [
+    'adultSwordN', 'adultSwordL', 'adultLash', 'adultHang', 'adultClimbEnd', 'adultDamageS', 'adultFreeze', 'adultFallS',
+    'adultFallL', 'adultBreathRest', 'adultBreathDrink', 'adultDown', 'adultTakenAway', 'adultDamageS', 'adultSneeze', 'adultSweat',
+    'adultDrink', 'adultRelax', 'adultSwordPutaway', 'adultGroan', 'adultAutoJump', 'adultMagicNale', 'adultSurprise', 'adultMagicFrol',
+    'adultPush', 'adultHookshotHang', 'adultLandDamage', 'adultNull1B', 'adultMagicAttack', 'adultFallL', 'adultDemoDamage', 'adultSwordN',
+  ] as const;
+
+  const out = concatUint8Arrays([seq, b.finish()]);
+  adultVoiceTargets.forEach((target, i) => writeU16BE(out, 0xB30E + i * 2, b.getLabel(target)));
+
+  return out;
+}
+
 class CustomAssetsBuilder {
   private defines: Map<string, number>;
   private cg: CodeGen;
@@ -333,8 +675,7 @@ class CustomAssetsBuilder {
     };
 
     const childHuman = read(AGE_BASE + AGE_SIZE * 4);
-    const zora = read(AGE_BASE + AGE_SIZE * 2);
-    const adultHuman = new Uint8Array(zora);
+    const adultHuman = new Uint8Array(AGE_SIZE);
 
     const view = new DataView(
         adultHuman.buffer,
@@ -375,8 +716,25 @@ class CustomAssetsBuilder {
         writeVec3s(offset + index * 6, value);
       });
     };
+
+    // OoT adult Link PlayerAgeProperties.
+    writeF32(0x00, 56.0);
+    writeF32(0x04, 90.0);
+    writeF32(0x08, 1.0);
+    writeF32(0x0C, 111.0);
+    writeF32(0x10, 70.0);
+    writeF32(0x14, 79.4);
+    writeF32(0x18, 59.0);
+    writeF32(0x1C, 41.0);
+    writeF32(0x20, 19.0);
+    writeF32(0x24, 36.0);
     writeF32(0x28, 44.8);
+    writeF32(0x2C, 56.0);
+    writeF32(0x30, 68.0);
+    writeF32(0x34, 70.0);
+    writeF32(0x38, 18.0);
     writeF32(0x3C, 15.0);
+    writeF32(0x40, 70.0);
 
     /* PlayerAgeProperties::unk_44 */
     writeVec3s(0x44, [9, 0x123F, 0x0167]);
@@ -413,26 +771,27 @@ class CustomAssetsBuilder {
     writeF32(0x9C, 36.0);
 
     const animations: readonly (readonly [number, number])[] = [
-      [0xA0, 0x0400E300], // openChestAnim
+      [0xA0, 0x0400D540], // openChestAnim
       [0xA4, 0x0400D548],
       [0xA8, 0x0400D660],
 
-      [0xAC, 0x0400E378], // climb start A
-      [0xB0, 0x0400E380], // climb start B
+      [0xAC, 0x0400DB90], // climb start A
+      [0xB0, 0x0400DB98], // climb start B
 
-      [0xB4, 0x0400E388], // climb up L
-      [0xB8, 0x0400E390], // climb up R
-      [0xBC, 0x0400DAB0], // fast climb up L
-      [0xC0, 0x0400DAB8], // fast climb up R
+      [0xB4, 0x0400DBA0], // climb up L
+      [0xB8, 0x0400DBA8], // climb up R
+
+      [0xBC, 0x0400DAB0], // climb side L
+      [0xC0, 0x0400DAB8], // climb side R
 
       [0xC4, 0x0400DA90], // climb side L
       [0xC8, 0x0400DA98], // climb side R
 
-      [0xCC, 0x0400E358], // climb end A L
-      [0xD0, 0x0400E360], // climb end A R — corrected address
+      [0xCC, 0x0400DB70], // climb end A L
+      [0xD0, 0x0400DB78], // climb end A R
 
-      [0xD4, 0x0400E370], // climb end B R
-      [0xD8, 0x0400E368], // climb end B L
+      [0xD4, 0x0400DB88], // climb end B R
+      [0xD8, 0x0400DB80], // climb end B L
     ];
 
     for (const [offset, address] of animations) {
@@ -520,7 +879,7 @@ class CustomAssetsBuilder {
     w32(0x801c0d80, 0x457a0000); // meleeWeaponLengths[2] = 4000.0f
     w32(0x801c0d84, 0x45abe000); // meleeWeaponLengths[3] = 5500.0f
     w32(0x801c0d88, 0x45abe000); // meleeWeaponLengths[4] = 5500.0f
-    copy32(0x801dca68, 0x801dca60); // playerHeightJtbl[HUMAN] = playerHeightJtbl[ZORA]
+    copy32(0x801dca68, 0x801dca60); // playerHeightJtbl[HUMAN] = 68.0f
 
     const data = new Uint8Array((writes.length + 1) * 0x0c);
     [...writes, { op: AGE_MODEL_CMD_END, addr: 0, value: 0 }].forEach(({ op, addr, value }, i) => {
@@ -566,6 +925,18 @@ class CustomAssetsBuilder {
     const seqTableDataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
     const seqTableDataPatched = new Uint8Array(0x80 * 0x10);
     seqTableDataPatched.set(seqTableDataOrig);
+
+    let mmAudioseq: Uint8Array | undefined;
+    let adultEffectBase = 0;
+    if (game === 'mm') {
+      const [audioseq, mmBankTable] = await Promise.all([
+        getObjectBuffer(this.roms, 'mm', 'Audioseq'),
+        extractRaw(this.roms, 'mm', 'code', 0x13B6D0, 0x29 * 0x10),
+      ]);
+      mmAudioseq = audioseq;
+      adultEffectBase = alignUp(readSoundfont0(mmBankTable).numSfx, 0x40);
+    }
+
     for (let i = 0; i < count; ++i) {
       let addr = bufReadU32BE(seqTableDataOrig, i * 0x10);
       let size = bufReadU32BE(seqTableDataOrig, i * 0x10 + 4);
@@ -573,7 +944,14 @@ class CustomAssetsBuilder {
         size = bufReadU32BE(seqTableDataOrig, addr * 0x10 + 4);
         addr = bufReadU32BE(seqTableDataOrig, addr * 0x10);
       }
-      addr += romOffset;
+
+      if (game === 'mm' && i === 0) {
+        const seq = mmAudioseq!.slice(addr, addr + size);
+        const data = patchMmAdultVoiceSequence(seq, adultEffectBase);
+        addr = this.addRawData('mm/seq_0_oot_adult_voice', data, false);
+        size = data.length;
+      } else
+        addr += romOffset;
       bufWriteU32BE(seqTableDataPatched, i * 0x10, addr);
       bufWriteU32BE(seqTableDataPatched, i * 0x10 + 4, size);
     }
@@ -622,6 +1000,16 @@ class CustomAssetsBuilder {
       addr += romOffset;
       bufWriteU32BE(dataPatched, i * 0x10, addr);
       bufWriteU32BE(dataPatched, i * 0x10 + 4, size);
+    }
+
+    if (game === 'mm') {
+      const hybrid = await buildMmAdultVoiceHybridBank(this.roms, dataOrig);
+      const hybridVrom = this.addRawData('mm/bank_0_oot_adult_voice', hybrid.data, false);
+      bufWriteU32BE(dataPatched, 0x00, hybridVrom);
+      bufWriteU32BE(dataPatched, 0x04, hybrid.data.length);
+      dataPatched[0x0A] = hybrid.sampleBankId1;
+      dataPatched[0x0B] = hybrid.sampleBankId2;
+      writeU16BE(dataPatched, 0x0E, hybrid.numSfx);
     }
     const dataVrom = this.addRawData(`${game}/bank_table`, dataPatched, false);
     this.cg.define(`CUSTOM_BANK_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
