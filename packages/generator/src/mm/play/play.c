@@ -20,42 +20,9 @@
 #include <combo/time.h>
 #include <actors/Obj_Grass/Obj_Grass.h>
 
-/* Grass hooks */
-ObjGrass* gObjGrass;
+#include "combo/age.h"
+
 static u8 sNeedsScreenClear;
-
-void ObjGrass_GetID(int* dstPackId, int* dstBushId, ObjGrassElement* grass)
-{
-    u32 offset;
-    u32 offsetPack;
-    u32 offsetBush;
-    int packId;
-    int bushId;
-
-    /* Extract the pack ID */
-    offset = (u32)grass - (u32)gObjGrass;
-    offsetPack = (offset - offsetof(ObjGrassGroup, elements) - offsetof(ObjGrass, grassGroups));
-    packId = offsetPack / sizeof(ObjGrassGroup);
-
-    /* Extract the bush ID */
-    offset = (u32)grass - ((u32)&gObjGrass->grassGroups[packId]);
-    offsetBush = offset - offsetof(ObjGrassGroup, elements);
-    bushId = offsetBush / sizeof(ObjGrassElement);
-
-    /* Store the IDs */
-    *dstPackId = packId;
-    *dstBushId = bushId;
-}
-
-void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem)
-{
-    int packId;
-    int bushId;
-
-    ObjGrass_GetID(&packId, &bushId, grassElem);
-    memcpy(xflag, &gObjGrass->xflag[packId], sizeof(Xflag));
-    xflag->sliceId = bushId;
-}
 
 PlayState* gPlay;
 
@@ -110,13 +77,14 @@ static void sendSelfMajorasMask(void)
     int npc;
     s16 gi;
 
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
     gi = GI_MM_MASK_MAJORA;
     npc = NPC_MM_MAJORA;
 
+    if (BITMAP8_GET(gSharedCustomSave.mm.npc, npc))
+        return;
+
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
+    Multi_InfoItem(0, gi);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
@@ -546,7 +514,7 @@ static void Play_AfterInit(PlayState* play)
 }
 
 u32 gGameEntrance;
-
+void ComboPlayer_ApplyAgeModelTables(void);
 void hookPlay_Init(PlayState* play)
 {
     u32 entrance;
@@ -573,6 +541,11 @@ void hookPlay_Init(PlayState* play)
 
     if (gSaveContext.respawnFlag == 8)
     {
+        u8 fwAge;
+        if (gComboCtx.isFwSpawn)
+            fwAge = gComboCtx.fwSpawnAge;
+        else
+            fwAge = comboMmFwAge();
         s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance);
         Vec3f* pos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
         if (fwSceneId == SCE_MM_GORON_VILLAGE_SPRING || fwSceneId == SCE_MM_GORON_VILLAGE_WINTER)
@@ -604,114 +577,11 @@ void hookPlay_Init(PlayState* play)
                 }
             }
         }
-        gCustomSave.fw[gOotSave.age].pos = *pos;
+        gCustomSave.fw[fwAge].pos = *pos;
+        gComboCtx.isFwSpawn = 0;
     }
 
-    if (comboIsLinkAdult())
-    {
-        s16* playerFormObjectIds = (s16*)0x801c2730;
-        playerFormObjectIds[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_ID_MM_ADULT_LINK;
-
-        u32* playerSkeletons = (u32*)0x801bfe00;
-        playerSkeletons[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_0;
-
-        u32* playerWaistDLs = (u32*)0x801bfffc;
-        u32* playerHandHoldingShieldDLs = (u32*)0x801c0024;
-        u32* playerSheath12DLs = (u32*)0x801c0034;
-        u32* playerSheath13DLs = (u32*)0x801c005c;
-        u32* playerSheath14DLs = (u32*)0x801c0084;
-        u32* playerShieldDLs = (u32*)0x801c00ac;
-        u32* playerSheathedSwordDLs = (u32*)0x801c00bc;
-        u32* playerSwordSheathsDLs = (u32*)0x801c00d4;
-        u32* playerLeftHandTwoHandSwordDLs = (u32*)0x801c00ec;
-        u32* playerLeftHandOpenDLs = (u32*)0x801c0114;
-        u32* playerLeftHandClosedDLs = (u32*)0x801c013c;
-        u32* playerLeftHandOneHandSwordDLs = (u32*)0x801c0164;
-        u32* playerEquipValueDLs = (u32*)0x801c018c;
-        u32* playerRightHandOpenDLs = (u32*)0x801c01a4;
-        u32* playerRightHandClosedDLs = (u32*)0x801c01cc;
-        u32* playerRightHandBowDLs = (u32*)0x801c01f4;
-        u32* playerRightHandInstrumentDLs = (u32*)0x801c021c;
-        u32* playerRightHandHookshotDLs = (u32*)0x801c0244;
-        u32* playerLeftHandBottleDLs = (u32*)0x801c026c;
-        u32* playerFirstPersonLeftForearmDLs = (u32*)0x801c0294;
-        u32* playerFirstPersonLeftHandDLs = (u32*)0x801c02a8;
-        u32* playerFirstPersonRightShoulderDLs = (u32*)0x801c02bc;
-        u32* playerFirstPersonRightHandDLs = (u32*)0x801c02d0;
-        u32* playerFirstPersonRightHandHookshotDLs = (u32*)0x801c02e4;
-
-        playerWaistDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_1;
-        playerWaistDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_1;
-        playerHandHoldingShieldDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_2;
-        playerHandHoldingShieldDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_2;
-        playerHandHoldingShieldDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_3;
-        playerHandHoldingShieldDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_3;
-        playerSheath12DLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerSheath12DLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerSheath13DLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerSheath13DLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerSheath14DLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerSheath14DLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerShieldDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_5;
-        playerShieldDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_5;
-        playerShieldDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_6;
-        playerShieldDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_6;
-        playerSheathedSwordDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_7;
-        playerSheathedSwordDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_7;
-        playerSheathedSwordDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_8;
-        playerSheathedSwordDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_8;
-        playerSheathedSwordDLs[4] = CUSTOM_OBJECT_MM_ADULT_LINK_9;
-        playerSheathedSwordDLs[5] = CUSTOM_OBJECT_MM_ADULT_LINK_9;
-        playerSwordSheathsDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_10;
-        playerSwordSheathsDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_10;
-        playerSwordSheathsDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_11;
-        playerSwordSheathsDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_11;
-        playerSwordSheathsDLs[4] = CUSTOM_OBJECT_MM_ADULT_LINK_12;
-        playerSwordSheathsDLs[5] = CUSTOM_OBJECT_MM_ADULT_LINK_12;
-        playerLeftHandTwoHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_13;
-        playerLeftHandTwoHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_13;
-        playerLeftHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_14;
-        playerLeftHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_14;
-        playerLeftHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_15;
-        playerLeftHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_15;
-        playerLeftHandOneHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_16;
-        playerLeftHandOneHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_16;
-        playerEquipValueDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_17;
-        playerEquipValueDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_17;
-        playerEquipValueDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_18;
-        playerEquipValueDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_18;
-        playerEquipValueDLs[4] = CUSTOM_OBJECT_MM_ADULT_LINK_19;
-        playerEquipValueDLs[5] = CUSTOM_OBJECT_MM_ADULT_LINK_19;
-        playerRightHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_20;
-        playerRightHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_20;
-        playerRightHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_21;
-        playerRightHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_21;
-        playerRightHandBowDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_22;
-        playerRightHandBowDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_22;
-        playerRightHandInstrumentDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_23;
-        playerRightHandInstrumentDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_23;
-        playerRightHandHookshotDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_24;
-        playerRightHandHookshotDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_24;
-        playerLeftHandBottleDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_25;
-        playerLeftHandBottleDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_25;
-        playerFirstPersonLeftForearmDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
-        playerFirstPersonLeftHandDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_15;
-        playerFirstPersonRightShoulderDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_26;
-        playerFirstPersonRightHandDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_27;
-        playerFirstPersonRightHandHookshotDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_28;
-
-        f32* meleeWeaponLengths = (f32*)0x801c0d78;
-        meleeWeaponLengths[1] = 4000.0f;
-        meleeWeaponLengths[2] = 4000.0f;
-        meleeWeaponLengths[3] = 5500.0f;
-        meleeWeaponLengths[4] = 5500.0f;
-
-        u32* playerRightHandBowDLs2 = (u32*)0x801c0d94;
-        *playerRightHandBowDLs2 = CUSTOM_OBJECT_MM_ADULT_LINK_29;
-
-        u32* playerHeightJtbl = (u32*)0x801dca58;
-        playerHeightJtbl[MM_PLAYER_FORM_HUMAN] = playerHeightJtbl[MM_PLAYER_FORM_ZORA];
-    }
+    ComboPlayer_ApplyAgeModelTables();
 
     if (!g.customKeep)
     {
@@ -863,10 +733,23 @@ void Play_TransitionDone(PlayState* play)
     case ENTR_EXTENDED:
         entrance = g.nextEntrance;
         break;
-    case ENTR_FW_CROSS:
-        entrance = gForeignSave.info.fw.entrance | MASK_FOREIGN_ENTRANCE;
+    case ENTR_FW_CROSS: {
+        u8 fwAge = comboMmFwAge();
+        OotFaroreWind* fw = Age_GetFaroreOot(fwAge);
+        if (fw->set <= 0 || fw->entrance == ENTR_FW_CROSS)
+        {
+            gCustomSave.fw[fwAge].data = 0;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+
+            gIsEntranceOverride = 0;
+            entrance = gSave.entrance;
+            break;
+        }
+        entrance = fw->entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
+        gComboCtx.fwSpawnAge = fwAge;
         break;
+    }
     case ENTR_CROSS_RESPAWN:
         entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isDungeonEntranceSpawn = 1;
@@ -897,9 +780,10 @@ void Play_TransitionDone(PlayState* play)
 
     applyCustomEntrance(&entrance);
 
-    /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)
     {
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawMm(NULL, gOotSave.age);
         comboGameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
     }
     else
@@ -964,14 +848,15 @@ void Play_FastInit(GameState* gs)
 
     if (gComboCtx.isFwSpawn)
     {
+        u8 fwAge = gComboCtx.fwSpawnAge;
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawMm(NULL, fwAge);
+        RespawnData* fw = &gCustomSave.fw[fwAge];
         gSaveContext.respawnFlag = 8;
-        gComboCtx.isFwSpawn = 0;
 
         /* Restore Game Over / Soar to Entrance respawn data. */
-        memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[gOotSave.age], sizeof(RespawnData));
-        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(RespawnData));
-
-        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+        memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[fwAge], sizeof(RespawnData));
+        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[fwAge], sizeof(RespawnData));
 
         if (fw->data)
         {

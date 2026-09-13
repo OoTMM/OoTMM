@@ -326,45 +326,6 @@ s32 ObjBean_CheckForHorseTrample(ObjBean* this, PlayState* play) {
 
 static Xflag sXflag;
 
-static void ObjBean_Alias(void)
-{
-    switch (sXflag.sceneId)
-    {
-    case SCE_OOT_KOKIRI_FOREST:
-        sXflag.setupId = 0;
-        sXflag.id = 73;
-        break;
-    case SCE_OOT_GRAVEYARD:
-        sXflag.setupId = 0;
-        sXflag.id = 18;
-        break;
-    case SCE_OOT_ZORA_RIVER:
-        sXflag.setupId = 0;
-        sXflag.id = 56;
-        break;
-    case SCE_OOT_LOST_WOODS:
-        sXflag.setupId = 0;
-        sXflag.id = (sXflag.roomId == 5) ? 3 : 5;
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        sXflag.setupId = 0;
-        sXflag.id = 29;
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        sXflag.setupId = 0;
-        sXflag.id = 43;
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
-        sXflag.setupId = 0;
-        sXflag.id = 33;
-        break;
-    case SCE_OOT_GERUDO_VALLEY:
-    case SCE_OOT_LAKE_HYLIA:
-        sXflag.setupId = 0;
-        break;
-    }
-}
-
 void ObjBean_Break(ObjBean* this, PlayState* play) {
     Vec3f pos;
     Vec3f velocity;
@@ -532,9 +493,7 @@ void ObjBean_Init(Actor* thisx, PlayState* play) {
     s32 path;
     ObjBean* this = (ObjBean*)thisx;
 
-    if (Xflag_Init(&sXflag, thisx, play)) {
-        ObjBean_Alias();
-    }
+    Xflag_Init(&sXflag, thisx, play);
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     if (gOotSave.age == AGE_ADULT) {

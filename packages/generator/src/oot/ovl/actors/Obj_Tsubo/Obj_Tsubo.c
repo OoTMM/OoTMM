@@ -72,90 +72,13 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 800, ICHAIN_STOP),
 };
 
-#if defined(GAME_OOT)
-void ObjTsubo_Alias(Actor_ObjTsubo* this)
-{
-    Xflag* xflag;
-
-    xflag = &this->xflag;
-
-    switch (xflag->sceneId)
-    {
-    case SCE_OOT_KAKARIKO_VILLAGE:
-    case SCE_OOT_LON_LON_RANCH:
-        if (xflag->setupId == 1)
-        {
-            xflag->setupId = 0;
-            xflag->id += 1;
-        }
-        break;
-    case SCE_OOT_ZORA_DOMAIN:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            switch (xflag->id)
-            {
-            case 1: xflag->id = 25; break;
-            case 2: xflag->id = 22; break;
-            case 3: xflag->id = 24; break;
-            case 4: xflag->id = 21; break;
-            case 5: xflag->id = 23; break;
-            }
-        }
-        break;
-    case SCE_OOT_ZORA_FOUNTAIN:
-        if (xflag->setupId == 1)
-            xflag->setupId = 0;
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
-        if (xflag->setupId == 0)
-        {
-            xflag->setupId = 2;
-            xflag->id -= 2;
-        }
-        break;
-    case SCE_OOT_GORON_CITY:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            switch (xflag->roomId)
-            {
-            case 1: xflag->id += 4; break;
-            case 3: xflag->id += 33; break;
-            }
-        }
-        break;
-    case SCE_OOT_LAIR_GANONDORF:
-        xflag->sceneId = SCE_OOT_GANON_TOWER;
-        xflag->roomId = 8;
-        xflag->id -= 46;
-        break;
-    case SCE_OOT_GANON_TOWER_COLLAPSING:
-        xflag->sceneId = SCE_OOT_GANON_TOWER;
-        xflag->roomId = 8;
-        xflag->id -= 15;
-        break;
-    default:
-        break;
-    }
-}
-#endif
-
-int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
-{
-    if (!this->isExtended || comboXflagsGet(&this->xflag))
-        return 0;
-    return 1;
-}
-
 void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 {
     s16 dropParams = this->actor.params & 0x1F;
 
-    /* Potsanity */
-    if (ObjTsubo_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -206,10 +129,9 @@ void ObjTsubo_InitCollider(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
 {
-    /* Set the extended properties */
-    if (Xflag_Init(&this->xflag, &this->actor, play))
-        ObjTsubo_Alias(this);
-    this->isExtended = Xflag_IsShuffled(&this->xflag);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     ObjTsubo_InitCollider(this, play);
@@ -442,6 +364,9 @@ void ObjTsubo_Thrown(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_Update(Actor_ObjTsubo* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 }
 
@@ -450,11 +375,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
     int type;
     ComboItemOverride o;
 
-    if (ObjTsubo_IsShuffled(this))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
-
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     if (this->actor.params & (1 << 8))
         type = CSMC_POT_NORMAL;
     else

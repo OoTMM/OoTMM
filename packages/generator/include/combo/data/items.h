@@ -482,12 +482,13 @@
 #define ITEM_MM_MASK_GERUDO                 0xb9
 #define ITEM_MM_MASK_SKULL                  0xba
 #define ITEM_MM_MASK_SPOOKY                 0xbb
-#define ITEM_MM_CUSTOM_USABLE_MAX           0xbc
-#define ITEM_MM_SEEDS_5                     0xbc
-#define ITEM_MM_SEEDS_30                    0xbd
-#define ITEM_MM_BULLET_BAG2                 0xbe
-#define ITEM_MM_BULLET_BAG3                 0xbf
-#define ITEM_MM_CUSTOM_MAX                  0xc0
+#define ITEM_MM_MASK_ADULT                  0xbc
+#define ITEM_MM_CUSTOM_USABLE_MAX           0xbd
+#define ITEM_MM_SEEDS_5                     0xbd
+#define ITEM_MM_SEEDS_30                    0xbe
+#define ITEM_MM_BULLET_BAG2                 0xbf
+#define ITEM_MM_BULLET_BAG3                 0xc0
+#define ITEM_MM_CUSTOM_MAX                  0xc1
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 

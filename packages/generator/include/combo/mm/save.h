@@ -2,7 +2,6 @@
 #define MM_SAVE_H
 
 #include <combo/types.h>
-#include <combo/xflags.h>
 
 typedef struct
 {
@@ -198,15 +197,15 @@ typedef struct
     u32                     pictoFlags1;
     u32                     unk_E80;
     u32                     unk_E84;
-    u32                     unk_E88[7];
+    u32                     alienInfo[7];
     u32                     scenesVisible[7];
     u16                     skullCountSwamp;
     u16                     skullCountOcean;
-    u32                     unk_EC4;
-    u32                     unk_EC8;
-    u32                     unk_ECC[2];
+    u32                     unk_EA0;
+    u32                     unk_EA4;
+    u32                     unk_EA8[2];
     u32                     stolenItems;
-    u32                     unk_ED8;
+    u32                     unk_EB4;
     u32                     bankRupees;
     u32                     unk_ee0;
     u32                     unk_ee4;
@@ -219,7 +218,7 @@ typedef struct
     u32                     mapsVisited;
     u32                     worldMapCloudVisibility;
     u8                      unk_F64;
-    u8                      unk_F65;
+    u8                      scarecrowSpawnSongSet;
     u8                      scarecrowSpawnSong[128];
     s8                      bombersCaughtNum;
     s8                      bombersCaughtOrder[5];
@@ -466,7 +465,8 @@ typedef struct
     u32 bowSlingshot:2;
     u32 stoneGerudoSkull:3;
     u32 gibdoSpooky:2;
-    u32 unused:16;
+    u32 fierceDeityAdult:2;
+    u32 unused:14;
 }
 MmExtraItems;
 
@@ -576,9 +576,20 @@ MmExtraFlags3;
 #define MM_PLAYER_FORM_DEKU         3
 #define MM_PLAYER_FORM_HUMAN        4
 
+typedef struct
+{
+    u8 buttonItems[4];
+    u8 cButtonSlots[4];
+
+    u8 boots;
+    u8 tunic;
+    u8 shield;
+    u8 sword;
+}
+MmHumanAgeLoadout;
+
 typedef struct ALIGNED(16)
 {
-    u8 xflags[XFLAGS_COUNT_MM];
     u8 npc[32];
     u8 shops[4];
     u8 halfDays;
@@ -600,6 +611,7 @@ typedef struct ALIGNED(16)
         u8 value;
     } ootSongs;
     u8 customMask;
+    MmHumanAgeLoadout humanAgeLoadouts[2];
 }
 MmCustomSave;
 

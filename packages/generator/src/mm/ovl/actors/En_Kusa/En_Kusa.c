@@ -109,41 +109,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 200, ICHAIN_STOP),
 };
 
-void EnKusa_Aliases(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
-        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
-        if (xflag->roomId == 0x00)
-            xflag->id += 6;
-        else
-            xflag->id += 3;
-        break;
-    case SCE_MM_IKANA_CANYON:
-        if (xflag->setupId == 3)
-        {
-            xflag->setupId = 0;
-            xflag->id += 30;
-        }
-        break;
-    case SCE_MM_GREAT_BAY_COAST:
-        if (xflag->setupId == 1)
-        {
-            xflag->setupId = 0;
-            xflag->id -= 4;
-        }
-        break;
-    case SCE_MM_WOODFALL:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            xflag->id += 8;
-        }
-        break;
-    }
-}
-
 /**
  * @brief Applies a "swaying" motion to the provided matrix
  *
@@ -274,9 +239,9 @@ void EnKusa_DropCollectible(EnKusa* this, PlayState* play) {
     s32 collectible;
     s32 collectableParams;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -397,8 +362,9 @@ void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = THIS;
     s32 kusaType = KUSA_GET_TYPE(&this->actor);
 
-    if (Xflag_Init(&this->xflag, thisx, play))
-        EnKusa_Aliases(&this->xflag);
+    this->xflag = Xflag_InitEx(thisx, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
@@ -717,6 +683,9 @@ void EnKusa_Update(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
     EnKusa* this = THIS;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 
     if (this->isCut) {
@@ -736,10 +705,7 @@ void EnKusa_PreDraw(EnKusa* this, PlayState* play)
     ComboItemOverride o;
     int alt;
 
-    if (Xflag_IsShuffled(&this->xflag))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
 
     /* Prepare */
     if ((this->actor.params & 3) == 0)

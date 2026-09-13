@@ -1,4 +1,4 @@
-import type { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
 import type { DmaDataRecord } from './dma';
 
 import { compressFile } from './compress';

@@ -19,8 +19,7 @@ struct Actor_ObjFlowerpot
     s8                      unk_1EB;
     s8                      unk_1EC;
 
-    Xflag  xflags;
-    u8     isExtendedFlags;
+    XflagID xflag;
 };
 
 #endif

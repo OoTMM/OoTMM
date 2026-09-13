@@ -8,7 +8,7 @@ async function makeDataZipPromise(): Promise<JSZip> {
   if (!process.env.__IS_BROWSER__) {
     const fs = await import('fs/promises');
     const path = await import('path');
-    data = await fs.readFile(path.resolve(__dirname, '..', '..', 'dist', 'data.zip'));
+    data = await fs.readFile(path.resolve(import.meta.dirname, '..', '..', 'dist', 'data.zip'));
   } else {
     const dataZipUrl = new URL('../../dist/data.zip', import.meta.url).href;
     const response = await fetch(dataZipUrl);

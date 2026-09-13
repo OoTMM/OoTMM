@@ -68,38 +68,9 @@ s32 func_808D7928(Actor_ObjMure* this, PlayState* play)
     return TRUE;
 }
 
-void ObjMure_AliasButterfly(Actor_ObjMure* this)
-{
-    Xflag* xf;
-
-    xf = &this->xflag;
-    switch (xf->sceneId)
-    {
-    case SCE_MM_GREAT_BAY_COAST:
-        if (xf->setupId == 0)
-        {
-            xf->setupId = 1;
-            xf->id += 69;
-        }
-        break;
-    }
-}
-
-void ObjMure_Alias(Actor_ObjMure* this)
-{
-    switch (OBJ_MURE_GET_TYPE(&this->actor))
-    {
-    case OBJMURE_TYPE_BUTTERFLY:
-        ObjMure_AliasButterfly(this);
-        break;
-    }
-}
-
 void ObjMure_Init(Actor_ObjMure* this, PlayState* play)
 {
-    Xflag_Init(&this->xflag, &this->actor, play);
-    if (!g.xflagOverride)
-        ObjMure_Alias(this);
+    this->xflag = Xflag_InitEx(&this->actor, play);
 
     this->chNum = OBJ_MURE_GET_CHNUM(&this->actor);
     this->ptn = OBJ_MURE_GET_PTN(&this->actor);
@@ -139,8 +110,7 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, PlayState* play, s16 actor
 {
     Actor* tmp;
 
-    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-    g.xflag.sliceId = (u8)index;
+    g.xflagId = Xflag_LookupSlice(this->xflag, index);
     g.xflagOverride = TRUE;
     tmp = Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
     g.xflagOverride = FALSE;

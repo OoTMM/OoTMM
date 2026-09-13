@@ -1,15 +1,16 @@
-import type { Settings, Item, PlayerItems } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { Location, ItemPlacement } from '../types';
 import type { World } from '../world';
-import type { ItemProperties } from '../item-properties';
+import type { Item, PlayerItems, ItemProperties } from '../items';
 import type { PathfinderState } from '../pathfind';
 import type { Triforce3Type, Analysis, AnalysisPath, AnalysisPathType } from './types';
 
-import { Monitor, Random, Items, makePlayerItem } from '@ootmm/core';
+import { Monitor, Random } from '@ootmm/core';
 import { BOSS_DUNGEONS, BOSS_METADATA_BY_DUNGEON, END_BOSS_METADATA_BY_NAME } from '../data';
 import { cloneWorld } from '../world';
 import { Pathfinder } from '../pathfind';
 import { AGE_ADULT, AGE_CHILD } from '../age';
+import { Items, makePlayerItem } from '../items';
 
 const TRIFORCE3_ITEMS: { [key in Triforce3Type]: Item } = {
   Power: Items.SHARED_TRIFORCE_POWER,

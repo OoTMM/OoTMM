@@ -2,7 +2,9 @@ import type { Settings } from '@ootmm/core';
 import type { World } from '../world';
 import type { Location } from '../types';
 
-import { Monitor, ItemHelpers, Items, CHECKS_BY_LOCATION } from '@ootmm/core';
+import { Monitor } from '@ootmm/core';
+import { CHECKS_BY_LOCATION } from '@ootmm/data';
+import { ItemHelpers, Items } from '../items';
 import { mustStartWithMasterSword } from '../helpers';
 import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_FROGS, OOT_MERCHANTS, OOT_ONE_TIME_SCRUBS, MM_LOTTERY, isLocationChestFairy, isLocationOtherFairy, makeLocation } from '../locations';
 
@@ -141,18 +143,16 @@ class LogicPassFixer {
       return true;
     }
 
-    if (this.state.settings.housesSkulltulaTokens !== 'cross') {
-      if (ItemHelpers.isGoldToken(item)) {
-        switch (this.state.settings.goldSkulltulaTokens) {
-        case 'none': return true;
-        case 'overworld': return this.dungeonLocations.has(loc);
-        case 'dungeons': return !this.dungeonLocations.has(loc);
-        }
+    if (ItemHelpers.isGoldToken(item)) {
+      switch (this.state.settings.goldSkulltulaTokens) {
+      case 'none': return true;
+      case 'overworld': return this.dungeonLocations.has(loc);
+      case 'dungeons': return !this.dungeonLocations.has(loc);
       }
+    }
 
-      if (ItemHelpers.isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
-        return true;
-      }
+    if (ItemHelpers.isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
+      return true;
     }
 
     return false;

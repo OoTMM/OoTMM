@@ -1,11 +1,12 @@
-import type { Settings, PlayerItem, PlayerItems } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { AnalysisPath, SphereEntry } from './types';
 import type { ItemPlacement, Location } from '../types';
 import type { World } from '../world';
-import type { ItemProperties } from '../item-properties';
+import type { PlayerItem, PlayerItems, ItemProperties } from '../items';
 import type { PathfinderState } from '../pathfind';
 
-import { Monitor, Random, shuffle, ItemHelpers } from '@ootmm/core';
+import { Monitor, Random, shuffle } from '@ootmm/core';
+import { ItemHelpers } from '../items';
 import { cloneWorld } from '../world';
 import { isLocationRenewable, makeLocation, locationData } from '../locations';
 import { ANALYSIS_EVENTS } from './events';
@@ -81,7 +82,7 @@ class LogicPassAnalysis {
 
     do {
       this.progress(count++, 10);
-      pathfinderState = pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true });
+      pathfinderState = pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true });
       const sphere: SphereEntry[] = [];
       const locs = Array.from(pathfinderState.newLocations).filter(x => this.state.itemProperties.important.has(this.state.items.get(x)!.item));
       for (const loc of locs) {
@@ -149,8 +150,7 @@ class LogicPassAnalysis {
 
   private isLocUselessNonRenewable(loc: Location) {
     const pi = this.state.items.get(loc)!;
-    const locD = locationData(loc);
-    return (ItemHelpers.isItemConsumable(pi.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !this.state.itemProperties.license.has(pi.item));
+    return (ItemHelpers.isItemConsumable(pi.item) && !isLocationRenewable(loc) && !this.state.itemProperties.license.has(pi.item));
   }
 
   private makeUselessLocs() {

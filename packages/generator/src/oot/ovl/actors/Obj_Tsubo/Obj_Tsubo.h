@@ -15,8 +15,7 @@ typedef struct Actor_ObjTsubo
     s8                          requiredObjectSlot;
 
     /* Extended flags */
-    Xflag   xflag;
-    u8      isExtended;
+    XflagID xflag;
 }
 Actor_ObjTsubo;
 

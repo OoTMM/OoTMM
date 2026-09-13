@@ -707,12 +707,12 @@ function getGameRoomActor(rom: Buffer, game: Game) {
 
 async function run() {
   /* Get OoT ROM */
-  const ootRomCompressed = await fs.readFile(__dirname + '/../../../roms/oot.z64');
+  const ootRomCompressed = await fs.readFile(import.meta.dirname + '/../../../roms/oot.z64');
   const ootDecompressed = await decompressGame('oot', ootRomCompressed);
   const ootRom = Buffer.from(ootDecompressed.rom);
 
   /* Get MQ ROM */
-  const mqRom = await fs.readFile(__dirname + '/../../../roms/mq.z64');
+  const mqRom = await fs.readFile(import.meta.dirname + '/../../../roms/mq.z64');
 
   /* Get OoT Rooms */
   const ootRooms = getGameRoomActor(ootRom, 'oot');

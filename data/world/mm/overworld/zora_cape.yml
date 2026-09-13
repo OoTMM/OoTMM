@@ -4,7 +4,7 @@
     MAGIC: "true"
     RUPEES: "(can_fight || has_explosives || has_arrows) && is_night && soul_like_like"
     FISH: "true"
-    FAIRY: "can_get_gossip_fairy"
+    FAIRY: "gossip_fairy"
   exits:
     "GLOBAL": "true"
     "Great Bay Coast": "true"
@@ -41,7 +41,8 @@
     "Zora Cape Palm Tree Island Near Beach": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Palm Tree Island Center": "can_hookshot || (can_use_ice_arrows && (is_tall || can_hookshot_short))"
     "Zora Cape Boulder": "can_break_boulders"
-
+    "Zora Cape Gossip Fairy": "gossip_fairy"
+    "Zora Cape Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Zora Cape Gossip": "true"
 
@@ -84,8 +85,6 @@
     "Zora Cape Grotto Grass 12": "true"
     "Zora Cape Grotto Grass 13": "true"
     "Zora Cape Grotto Grass 14": "true"
-  gossip:
-    "Zora Cape Gossip": "true"
 
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE

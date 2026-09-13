@@ -5,14 +5,14 @@ const VERSION = process.env.VERSION || 'dev';
 const WEB_COMPONENTS = ['gui'];
 
 async function buildCurrentVersion(dstName: string) {
-  const dst = path.resolve(__dirname, dstName);
+  const dst = path.resolve(import.meta.dirname, dstName);
   await fs.rm(dst, { recursive: true, force: true });
   await fs.mkdir(dst, { recursive: true });
 
   let globalConfig = {};
   for (const component of WEB_COMPONENTS) {
     let config: {} | null = null;
-    const src = path.resolve(__dirname, 'node_modules/@ootmm/', component, 'dist', 'web');
+    const src = path.resolve(import.meta.dirname, 'node_modules/@ootmm/', component, 'dist', 'web');
     const files = await fs.readdir(src, { recursive: true });
     const dirs = files.filter(file => statSync(path.resolve(src, file)).isDirectory());
     const filesNoDirs = files.filter(file => !statSync(path.resolve(src, file)).isDirectory());
@@ -44,16 +44,16 @@ async function buildCurrentVersion(dstName: string) {
 
 async function build() {
   /* Clean dist folder & tmp folder */
-  await fs.rm(path.resolve(__dirname, 'dist'), { recursive: true, force: true });
+  await fs.rm(path.resolve(import.meta.dirname, 'dist'), { recursive: true, force: true });
 
   /* Build the current version */
   await buildCurrentVersion(`dist/current`);
 
   /* Build a tree for development */
-  await fs.cp(path.resolve(__dirname, `dist/current`), path.resolve(__dirname, 'dist/tree'), { recursive: true });
-  const config = JSON.parse(await fs.readFile(path.resolve(__dirname, 'dist/tree/config.json'), 'utf8'));
+  await fs.cp(path.resolve(import.meta.dirname, `dist/current`), path.resolve(import.meta.dirname, 'dist/tree'), { recursive: true });
+  const config = JSON.parse(await fs.readFile(path.resolve(import.meta.dirname, 'dist/tree/config.json'), 'utf8'));
   const newConfig = { [VERSION]: config };
-  await fs.writeFile(path.resolve(__dirname, 'dist/tree/config.json'), JSON.stringify(newConfig));
+  await fs.writeFile(path.resolve(import.meta.dirname, 'dist/tree/config.json'), JSON.stringify(newConfig));
 }
 
 build().catch(err => {

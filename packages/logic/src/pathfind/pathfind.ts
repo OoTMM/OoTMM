@@ -1,15 +1,16 @@
-import type { Settings, Item, ItemsCount, PlayerItems } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { ItemPlacement, Location } from '../types';
 import type { World } from '../world';
 import type { Expr, AreaData, ExprDependencies, ExprResult } from '../expr';
 import type { Age } from '../age';
+import type { Item, ItemsCount, PlayerItems } from '../items';
 
-import { cloneDeep } from 'lodash-es';
-import { countMapAdd, ItemHelpers, Items } from '@ootmm/core';
+import { countMapAdd } from '@ootmm/core';
+import { ItemHelpers, Items } from '../items';
 import { MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '../expr';
 import { AGE_ADULT, AGE_CHILD, AGES } from '../age';
 import { isLocationLicenseGranting, isLocationRenewable, locationData, makeLocation } from '../locations';
-import { ANALYSIS_EVENTS } from '../analysis/events';
+import { ANALYSIS_EVENTS } from '../analysis';
 
 const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
 
@@ -177,7 +178,6 @@ const cloneAreaData = (a: AreaData): AreaData => ({
   flagsOff: a.flagsOff,
 });
 
-export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
 type PathfinderOptions = {
   assumedItems?: PlayerItems;
   items?: ItemPlacement;
@@ -187,7 +187,6 @@ type PathfinderOptions = {
   forbiddenLocations?: Set<Location>;
   includeForbiddenReachable?: boolean;
   gossips?: boolean;
-  inPlace?: boolean;
   singleWorld?: number;
 };
 
@@ -204,7 +203,7 @@ export class Pathfinder {
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
-    this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds.length);
+    this.state = state ?? defaultState(this.startingItems, this.worlds.length);
 
     /* Restricted locations */
     if (this.opts.restrictedLocations) {
@@ -332,7 +331,9 @@ export class Pathfinder {
             } else {
               /* We can't wait! */
               waitMode = false;
-              this.trackDependencies('exits', as.dependencies, area, fromArea, result);
+              if (area !== fromArea) {
+                this.trackDependencies('exits', as.dependencies, area, fromArea, result);
+              }
             }
           }
         }
@@ -340,7 +341,12 @@ export class Pathfinder {
     }
 
     /* Age swap */
-    if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.ageChange && area !== fromArea) {
+    if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.game === 'oot' && worldArea.ageChange && area !== fromArea) {
+      const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
+      this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
+    }
+
+    if (ws.items.has(Items.MM_MASK_ADULT) && this.settings.crossAge && worldArea.game === 'mm' && area !== fromArea) {
       const otherAge = age === AGE_CHILD ? AGE_ADULT : AGE_CHILD;
       this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
     }
@@ -447,6 +453,21 @@ export class Pathfinder {
         }
       }
     }
+
+    /* If the item is MM adult mask & cross-age is enabled, re-explore every area */
+    if (item === Items.MM_MASK_ADULT && this.settings.crossAge) {
+      const world = this.worlds[worldId];
+      for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
+        const a = world.areas[area];
+        if (a.game === 'mm')
+          this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
+      }
+      for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
+        const a = world.areas[area];
+        if (a.game === 'mm')
+          this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
+      }
+    }
   }
 
   private addLocationDelayed(worldId: number, loc: string) {
@@ -477,7 +498,7 @@ export class Pathfinder {
       for (const otherWs of otherWss) {
         countMapAdd(otherWs.items, playerItem.item);
       }
-      if (isLocationRenewable(world, globalLoc)) {
+      if (isLocationRenewable(globalLoc)) {
         for (const otherWs of otherWss) {
           countMapAdd(otherWs.renewables, playerItem.item);
         }
@@ -540,12 +561,12 @@ export class Pathfinder {
     if (event === EVENT_TIME_TRAVEL) {
       for (const [area, areaData] of ws.ages[AGE_CHILD].areas) {
         const a = world.areas[area];
-        if (a.ageChange)
+        if (a.game === 'oot' && a.ageChange)
           this.exploreArea(worldId, AGE_ADULT, area, cloneAreaData(areaData), area);
       }
       for (const [area, areaData] of ws.ages[AGE_ADULT].areas) {
         const a = world.areas[area];
-        if (a.ageChange)
+        if (a.game === 'oot' && a.ageChange)
           this.exploreArea(worldId, AGE_CHILD, area, cloneAreaData(areaData), area);
       }
     }

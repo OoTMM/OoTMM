@@ -270,6 +270,15 @@
     "GLOBAL": "true"
     "Market": "true"
     "Temple of Time": "true"
+  locations:
+    "Temple of Time Exterior Gossip Fairy 1": "gossip_fairy"
+    "Temple of Time Exterior Gossip Fairy 2": "gossip_fairy"
+    "Temple of Time Exterior Gossip Fairy 3": "gossip_fairy"
+    "Temple of Time Exterior Gossip Fairy 4": "gossip_fairy"
+    "Temple of Time Exterior Gossip Big Fairy 1": "gossip_fairy_big"
+    "Temple of Time Exterior Gossip Big Fairy 2": "gossip_fairy_big"
+    "Temple of Time Exterior Gossip Big Fairy 3": "gossip_fairy_big"
+    "Temple of Time Exterior Gossip Big Fairy 4": "gossip_fairy_big"
   gossip:
     "Market Gossip Outside Temple Leftmost": "true"
     "Market Gossip Outside Temple Left-Center": "true"

@@ -3,6 +3,12 @@
 
 #include <combo/types.h>
 
+#if defined(GAME_OOT)
+# include <combo/oot/ocarina.h>
+#elif defined(GAME_MM)
+# include <combo/mm/ocarina.h>
+#endif
+
 typedef enum
 {
     OCARINA_BTN_A = 0,

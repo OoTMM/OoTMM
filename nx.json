@@ -20,12 +20,7 @@
       ]
     },
     "typecheck": {
-      "cache": true
-    },
-    "deploy": {
-      "dependsOn": [
-        "build"
-      ]
+      "cache": false
     }
   },
   "defaultBase": "master",

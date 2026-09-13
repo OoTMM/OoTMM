@@ -13,25 +13,17 @@ typedef struct Actor_ObjTsubo
     Actor                       actor;
     Actor_ObjTsubo_ActionFunc   actionFunc;
     ColliderCylinder            collider;
-
-#if defined(GAME_MM)
-    s8 unk_194;
-    s8 unk_195;
-    s8 homeRoom;
-    s8 unk_197;
-    s8 unk_198;
-#endif
-
+    s8                          unk_194;
+    s8                          unk_195;
+    s8                          homeRoom;
+    s8                          unk_197;
+    s8                          unk_198;
     s8                          requiredObjectSlot;
-
-#if defined(GAME_MM)
-    s8 unk_19a;
-    u8 unk_19b;
-#endif
+    s8                          unk_19a;
+    u8                          unk_19b;
 
     /* Extended flags */
-    Xflag   xflag;
-    u8      isExtended;
+    XflagID xflag;
 }
 Actor_ObjTsubo;
 

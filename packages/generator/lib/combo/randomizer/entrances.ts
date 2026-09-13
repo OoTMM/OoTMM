@@ -1,7 +1,7 @@
-import type { Game } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
 import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
-import { ENTRANCES } from '@ootmm/core';
+import { ENTRANCES } from '@ootmm/data';
 import { padBuffer16, toU32Buffer } from '../util';
 
 function entranceId(srcGame: Game, dstGame: Game, name: string) {

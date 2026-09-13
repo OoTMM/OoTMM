@@ -1,11 +1,13 @@
-import type { Settings, ItemID, Item, PlayerItem, PlayerItems, CheckType } from '@ootmm/core';
+import type { CheckType } from '@ootmm/data';
+import type { Settings } from '@ootmm/core';
+import type { ItemID, Item, PlayerItem, PlayerItems, ItemSharedDef, ItemProperties } from '../items';
 import type { Location } from '../types';
-import type { ItemProperties } from '../item-properties';
-import type { ItemSharedDef } from '../data';
 import type { World } from './types';
 
-import { CHECKS, Monitor, sample, Random, randomInt, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem, countMapAdd, gameId, CHECKS_BY_LOCATION } from '@ootmm/core';
-import { TRAP_AMOUNTS, SharedItemGroups } from '../data';
+import { CHECKS, CHECKS_BY_LOCATION } from '@ootmm/data';
+import { Monitor, sample, Random, randomInt, countMapAdd } from '@ootmm/core';
+import { TRAP_AMOUNTS } from '../data';
+import { SharedItemGroups, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
 import { optimizeWorldStartingAndPool } from './optimizer';
 import { mustStartWithMasterSword } from '../helpers';
 import { exprTrue } from '../expr';
@@ -146,6 +148,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.SONG_NOTES,
   ...ItemGroups.OOT_RUSTY_KEYS,
   ...ItemGroups.MM_RUSTY_KEYS,
+  ...ItemGroups.MASKS_TRANSFORM,
   Items.OOT_SHOVEL,
   Items.MM_SHOVEL,
   Items.SHARED_SHOVEL,
@@ -217,9 +220,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_PLATINUM_TOKEN,
   Items.SHARED_PLATINUM_TOKEN,
   Items.MM_BOTTLED_GOLD_DUST,
-  Items.MM_MASK_DEKU,
-  Items.MM_MASK_GORON,
-  Items.MM_MASK_ZORA,
   Items.MM_MASK_CAPTAIN,
   Items.MM_MASK_GIANT,
   Items.MM_MASK_ALL_NIGHT,
@@ -246,7 +246,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_KAMARO,
   Items.MM_MASK_SCENTS,
   Items.MM_MASK_KAFEI,
-  Items.MM_MASK_FIERCE_DEITY,
   Items.MM_MAGIC_UPGRADE,
   Items.MM_BOMBER_NOTEBOOK,
   Items.MM_BOW,
@@ -299,8 +298,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_HOOKSHOT,
   Items.SHARED_LENS,
   Items.SHARED_OCARINA,
-  Items.SHARED_MASK_GORON,
-  Items.SHARED_MASK_ZORA,
   Items.SHARED_MASK_TRUTH,
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_KEATON,
@@ -973,6 +970,10 @@ class LogicPassWorldTransform {
       this.addItem(Items.MM_MASK_SPOOKY);
     }
 
+    if (settings.adultMaskMm) {
+      this.addItem(Items.MM_MASK_ADULT);
+    }
+
     if (settings.sharedSongElegy) {
       this.replaceItem(Items.MM_SONG_EMPTINESS, Items.SHARED_SONG_EMPTINESS);
     } else if (settings.elegyOot) {
@@ -1527,6 +1528,13 @@ class LogicPassWorldTransform {
     this.filterLocations(this.state.settings.shuffleSoilMm, 'soil', 'mm');
   }
 
+  private filterChecksGossipFairies() {
+    this.filterLocations(this.state.settings.shuffleGossipFairiesOot, 'gossip', 'oot');
+    this.filterLocations(this.state.settings.shuffleGossipBigFairiesOot, 'gossip-big', 'oot');
+    this.filterLocations(this.state.settings.shuffleGossipFairiesMm, 'gossip', 'mm');
+    this.filterLocations(this.state.settings.shuffleGossipBigFairiesMm, 'gossip-big', 'mm');
+  }
+
   private filterChecksWonder() {
     this.filterLocations(this.state.settings.shuffleWonderItemsOot, 'wonder', 'oot');
     this.filterLocationsBool(this.state.settings.shuffleWonderItemsMm, 'wonder', 'mm');
@@ -1581,7 +1589,7 @@ class LogicPassWorldTransform {
   }
 
   private filterChecksFairySpots() {
-    this.filterLocationsBool(this.state.settings.fairySpotShuffleOot, 'fairy_spot', 'oot');
+    this.filterLocationsBool(this.state.settings.fairySpotShuffleOot, 'fairy-spot', 'oot');
   }
 
   run() {
@@ -1609,6 +1617,7 @@ class LogicPassWorldTransform {
     this.filterChecksRocks();
     this.filterChecksTrees();
     this.filterChecksBushes();
+    this.filterChecksGossipFairies();
     this.filterChecksWonder();
     this.filterChecksButterflies();
     this.filterChecksBoulders();
@@ -2098,8 +2107,7 @@ class LogicPassWorldTransform {
     for (const pi of this.pool.keys()) {
       if (this.state.itemProperties.junk.has(pi.item) && ItemHelpers.isItemConsumable(pi.item)) {
         for (const loc of this.locsByItem.get(pi) || []) {
-          const world = this.state.worlds[locationData(loc).world as number];
-          if (isLocationRenewable(world, loc) && !this.fixedLocations.has(loc)) {
+          if (isLocationRenewable(loc) && !this.fixedLocations.has(loc)) {
             countMapAdd(renewableJunks, pi);
           }
         }

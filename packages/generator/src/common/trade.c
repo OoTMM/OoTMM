@@ -116,6 +116,11 @@ const u8 kMmGibdoSpooky[] = {
     ITEM_MM_MASK_SPOOKY,
 };
 
+const u8 kMmFierceDeityAdult[] = {
+    ITEM_MM_MASK_FIERCE_DEITY,
+    ITEM_MM_MASK_ADULT,
+};
+
 /* Return value is used to index gVertex */
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
@@ -183,6 +188,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kMmGibdoSpooky;
         *outTableSize = ARRAY_COUNT(kMmGibdoSpooky);
         result = 9;
+        break;
+    case ITS_MM_MASK_FIERCE_DEITY:
+        *outFlags = gMmExtraItems.fierceDeityAdult;
+        *outTable = kMmFierceDeityAdult;
+        *outTableSize = ARRAY_COUNT(kMmFierceDeityAdult);
+        result = 10;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:

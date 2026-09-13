@@ -1,8 +1,11 @@
-import type { Game, Settings } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
+import type { Settings } from '@ootmm/core';
 import type { Expr } from './types';
-import type { ResolvedWorldFlags } from '../world/flags';
+import type { ResolvedWorldFlags } from '../world';
 
-import { itemByID, gameId } from '@ootmm/core';
+import { gameId } from '@ootmm/data';
+import { itemByID } from '../items';
+
 import {
   exprTrue,
   exprFalse,

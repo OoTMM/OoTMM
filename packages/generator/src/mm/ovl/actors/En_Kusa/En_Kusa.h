@@ -50,7 +50,7 @@ typedef struct EnKusa {
     /* 0x197 */ u8 isCut;
     /* 0x198 */ u8 isInWater;
 
-    Xflag xflag;
+    XflagID xflag;
 } EnKusa; // size = 0x19C
 
 #endif

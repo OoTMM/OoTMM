@@ -104,15 +104,13 @@ void ObjGrassCarry_UpdateBgCheckInfo(ObjGrassCarry* this, PlayState* play) {
                                 UPDBGCHECKINFO_FLAG_MM_80);
 }
 
-void ObjGrass_GetID(int* dstPackId, int* dstBushId, ObjGrassElement* grass);
-void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem);
-
 void ObjGrassCarry_DropCollectible(ObjGrassCarry* this, s16 dropTable, PlayState* play) {
-    Xflag xflag;
+    XflagID id;
 
-    ObjGrass_GetXflag(&xflag, this->grassElem);
-    if (Xflag_IsShuffled(&xflag)) {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &xflag);
+    id = this->grassElem->xflag;
+    if (id != XFLAGID_NONE)
+    {
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, id);
         return;
     }
 
@@ -364,14 +362,9 @@ void ObjGrassCarry_Update(Actor* thisx, PlayState* play) {
 
 void ObjGrassCarry_PreDraw(ObjGrassElement* grassElem, PlayState* play)
 {
-    Xflag xflag;
     ComboItemOverride o;
 
-    ObjGrass_GetXflag(&xflag, grassElem);
-    if (Xflag_IsShuffled(&xflag))
-        comboXflagItemOverride(&o, &xflag, 0);
-    else
-        o.gi = 0;
+    Xflag_ItemOverride(&o, grassElem->xflag, GI_NONE);
     csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 0);
 }
 

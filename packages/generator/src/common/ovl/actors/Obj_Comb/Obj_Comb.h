@@ -35,7 +35,7 @@ struct Actor_ObjComb
     s8                      unk_1B8;
 #endif
 
-    Xflag   xflag;
+    XflagID   xflag;
 };
 
 #endif

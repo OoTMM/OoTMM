@@ -12,10 +12,10 @@ void ObjComb_Update(Actor_ObjComb* this, PlayState* play);
 
 static int ObjComb_DropCustom(Actor_ObjComb* this, PlayState* play)
 {
-    if (!Xflag_IsShuffled(&this->xflag))
-        return 0;
-    EnItem00_DropCustomNoInertia(play, &this->actor.world.pos, &this->xflag);
-    return 1;
+    if (this->xflag == XFLAGID_NONE)
+        return FALSE;
+    EnItem00_DropCustomNoInertiaEx(play, &this->actor.world.pos, this->xflag);
+    return TRUE;
 }
 
 #if defined(GAME_OOT)
@@ -151,7 +151,9 @@ void ObjComb_ChooseItemDrop(Actor_ObjComb* this, PlayState* play)
 void ObjComb_Init(Actor_ObjComb* this, PlayState* play)
 {
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    Xflag_Init(&this->xflag, &this->actor, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
     Collider_InitJntSph(play, &this->collider);
     Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
     ObjComb_SetupWait(this);
@@ -204,6 +206,8 @@ void ObjComb_Wait(Actor_ObjComb* this, PlayState* play)
 
 void ObjComb_Update(Actor_ObjComb* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
     this->unk_1B2 += 0x2EE0;
     this->actionFunc(this, play);
     this->actor.shape.rot.x = Math_SinS(this->unk_1B2) * this->unk_1B0 + this->actor.home.rot.x;
@@ -542,7 +546,9 @@ void ObjComb_Init(Actor_ObjComb* this, PlayState* play)
     s32 sp2C = OBJCOMB_GET_8000(this) | OBJCOMB_GET_80(this);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    Xflag_Init(&this->xflag, &this->actor, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
     Collider_InitJntSph(play, &this->collider);
 
     if ((sp2C == 1) && OBJCOMB_GET_10(this) && MM_GET_EVENT_WEEK(EV_MM_WEEK_PIRATES_BEES))
@@ -712,6 +718,8 @@ void func_8098E0B8(Actor_ObjComb* this, PlayState* play)
 
 void ObjComb_Update(Actor_ObjComb* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
     this->unk_1B3 = (this->collider.base.acFlags & AC_HIT) != 0;
     if (this->unk_1B3) {
         this->collider.base.acFlags &= ~AC_HIT;
@@ -794,13 +802,13 @@ static int ObjComb_CsmcType(Actor_ObjComb* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

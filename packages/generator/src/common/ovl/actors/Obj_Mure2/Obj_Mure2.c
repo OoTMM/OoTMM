@@ -130,11 +130,12 @@ Actor* ObjMure2_ActorSpawn(Actor_ObjMure2* this, PlayState* play, s16 actorId, f
 
 Actor* ObjMure2_ActorSpawnEx(Actor_ObjMure2* this, PlayState* play, int i, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
+    XflagID id;
     Actor* tmp;
 
-    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-    g.xflag.sliceId = (u8)i;
+    id = Xflag_LookupSlice(this->xflag, i);
     g.xflagOverride = TRUE;
+    g.xflagId = id;
     tmp = ObjMure2_ActorSpawn(this, play, actorId, x, y, z, rx, ry, rz, variable);
     g.xflagOverride = FALSE;
 
@@ -222,25 +223,9 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-void ObjMure2_AliasGrass(Xflag* xf);
-void ObjMure2_AliasRocks(Xflag* xf);
-
-void ObjMure2_Alias(Actor_ObjMure2* this, PlayState* play)
-{
-    Xflag* xf;
-
-    xf = &this->xflag;
-    if (OBJ_MURE2_GET_CHILD_TYPE(&this->actor) == OBJMURE2_CHILDTYPE_ROCK_RING)
-        ObjMure2_AliasRocks(xf);
-    else
-        ObjMure2_AliasGrass(xf);
-}
-
 void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)
 {
-    Xflag_Init(&this->xflag, &this->actor, play);
-    ObjMure2_Alias(this, play);
-
+    this->xflag = Xflag_InitEx(&this->actor, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (play->csCtx.state != CS_STATE_IDLE)
         this->actor.cullingVolumeDistance += 1200.0f;

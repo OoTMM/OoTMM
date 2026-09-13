@@ -39,17 +39,21 @@
     "Zora Domain Rock Circle Rock 6": "true"
     "Zora Domain Rock Circle Rock 7": "true"
     "Zora Domain Rock Circle Rock 8": "true"
+    "Zora Domain Gossip Fairy": "gossip_fairy"
+    "Zora Domain Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Zora Domain Gossip": "true"
 
 "Zora Domain Underwater":
   region: ZORA_DOMAIN
+  age_change: false
   exits:
     "Zora Domain": "can_swim_or_sink"
     "Zora Domain Shortcut": "has_iron_boots"
 
 "Zora Domain Shortcut":
   region: ZORA_DOMAIN
+  age_change: false
   exits:
     "Lake Hylia Underwater": "true"
 

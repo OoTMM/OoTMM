@@ -1,8 +1,8 @@
-import type { PlayerItems } from '@ootmm/core';
+import type { PlayerItems } from '../items';
 import type { Expr } from '../expr';
 import type { World } from './types';
 
-import { makePlayerItem } from '@ootmm/core';
+import { makePlayerItem } from '../items';
 import { exprAnd, exprFalse, exprOr, exprTrue } from '../expr';
 
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {

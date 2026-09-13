@@ -1,13 +1,12 @@
-import type { Settings, PlayerItems, Region, PlayerItem } from '@ootmm/core';
+import type { Settings, Region } from '@ootmm/core';
 import type { Location } from '../types';
 import type { World, WorldArea } from '../world';
-import type { ItemProperties } from '../item-properties'
-import type { Age } from '../age';
+import type { PlayerItem, PlayerItems, ItemProperties } from '../items';
 import type { Expr } from '../expr';
 
-import { Monitor, Random, sample, ENTRANCES } from '@ootmm/core';
-import { AGE_ADULT, AGE_CHILD } from '../age';
-import { exprAge, exprAnd, exprEvent, exprFalse, exprOr, exprTrue } from '../expr';
+import { ENTRANCES } from '@ootmm/data';
+import { Monitor, Random, sample } from '@ootmm/core';
+import { exprAnd, exprEvent, exprOr, exprTrue } from '../expr';
 import { BOSS_INDEX_BY_DUNGEON, cloneWorld, DUNGEONS_REGIONS } from '../world';
 import { BOSS_METADATA_BY_ENTRANCE } from '../data';
 import { Pathfinder } from '../pathfind';
@@ -207,9 +206,20 @@ class WorldShuffler {
 
     /* Change the world */
     let expr = this.getExpr(original);
+
     if (entranceReplacement.game === 'mm' && !(entranceReplacement.flags.includes('no-sot'))) {
+      /* Add MM Access rule */
+      let mmAccessExpr = expr;
+      const existing = areaFrom.exits['MM ACCESS'];
+      if (existing) {
+        mmAccessExpr = exprOr([expr, existing]);
+      }
+      areaFrom.exits['MM ACCESS'] = mmAccessExpr;
+
+      /* Account for song of time */
       expr = this.songOfTime(expr);
     }
+
     if (areaFrom.exits[entranceReplacement.to]) {
       expr = exprOr([expr, areaFrom.exits[entranceReplacement.to]]);
     }

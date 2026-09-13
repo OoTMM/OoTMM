@@ -2,19 +2,22 @@
   "name": "@ootmm/logic",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "bench": "node --import tsx bench/run.ts",
+    "bench:compare": "node --import tsx bench/compare.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ootmm/data": "workspace:*",
     "@ootmm/core": "workspace:*",
     "lodash-es": "catalog:"
   },
-  "packageManager": "pnpm@10.30.1",
   "devDependencies": {
     "@types/lodash-es": "catalog:",
     "type-fest": "catalog:"

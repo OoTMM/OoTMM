@@ -63,6 +63,8 @@
     "Lost Woods Wonder Item 2": "is_child"
     "Lost Woods Wonder Item 3": "is_child"
     "Lost Woods Boulder Early": "has_explosives_or_hammer"
+    "Lost Woods Gossip Fairy": "gossip_fairy"
+    "Lost Woods Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 
@@ -90,6 +92,7 @@
 
 "Lost Woods Rupee Arrow":
   region: LOST_WOODS
+  age_change: false
   locations:
     "Lost Woods Rupee Arrow 1": "true"
     "Lost Woods Rupee Arrow 2": "true"
@@ -118,6 +121,8 @@
     "Lost Woods Grotto Generic Butterfly 1": "butterfly"
     "Lost Woods Grotto Generic Butterfly 2": "butterfly"
     "Lost Woods Grotto Generic Butterfly 3": "butterfly"
+    "Lost Woods Generic Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Lost Woods Generic Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 

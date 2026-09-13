@@ -22,49 +22,11 @@
 # define EN_ELF_SFX_ICE_TRAP     0x31a4
 #endif
 
-void EnElf_Aliases(Xflag* xf)
-{
-#if defined(GAME_OOT)
-    u8 fairyFountainIndex;
-
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_FAIRY_FOUNTAIN:
-        switch (gLastScene)
-        {
-        case SCE_OOT_HYRULE_FIELD:
-            fairyFountainIndex = 0;
-            break;
-        case SCE_OOT_ZORA_RIVER:
-            fairyFountainIndex = 1;
-            break;
-        case SCE_OOT_SACRED_FOREST_MEADOW:
-            fairyFountainIndex = 2;
-            break;
-        case SCE_OOT_ZORA_DOMAIN:
-            fairyFountainIndex = 3;
-            break;
-        case SCE_OOT_GERUDO_FORTRESS:
-            fairyFountainIndex = 4;
-            break;
-        default:
-            UNREACHABLE();
-        }
-        xf->roomId = 0x20 | fairyFountainIndex;
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        xf->id = 1;
-        xf->setupId = 0;
-        break;
-    }
-#endif
-}
-
 void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
 {
-    comboXflagItemQuery(q, &this->xflag, this->extendedGi);
+    Xflag_ItemQuery(q, this->xflag, this->extendedGi);
     q->giRenew = this->extendedGi;
-    if (comboXflagsGet(&this->xflag)) {
+    if (Xflag_Get(this->xflag)) {
         q->ovFlags = OVF_RENEW;
     }
 }
@@ -189,7 +151,7 @@ void EnElf_GiveItem(Actor_EnElf* this, PlayState* play)
     }
 
     comboAddItemEx(play, &q, major);
-    comboXflagsSet(&this->xflag);
+    Xflag_Set(this->xflag);
 
     /* Play the sound */
     comboPlayItemFanfare(o.gi, 1);
@@ -200,8 +162,10 @@ static int EnElf_IsShuffled(Actor_EnElf* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    comboXflagItemQuery(&q, &this->xflag, 0);
-    if (comboXflagsGet(&this->xflag))
+    if (!Xflag_IsValidEx(this->xflag))
+        return FALSE;
+    Xflag_ItemQuery(&q, this->xflag, this->extendedGi);
+    if (Xflag_Get(this->xflag))
         q.ovFlags |= OVF_RENEW;
     comboItemOverride(&o, &q);
     return o.gi != GI_NONE;
@@ -213,15 +177,13 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     ActorCallback init;
 
     type = this->base.params & 0xf;
-    memset(&this->xflag, 0, sizeof(Xflag));
     if (type < 2)
     {
-        Xflag_Clear(&this->xflag);
+        this->xflag = XFLAGID_NONE;
     }
     else
     {
-        if (Xflag_Init(&this->xflag, &this->base, play))
-            EnElf_Aliases(&this->xflag);
+        this->xflag = Xflag_InitEx(&this->base, play);
     }
 
     init = actorAddr(ACTOR_EN_ELF, EN_ELF_INIT_VROM);
@@ -250,9 +212,11 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
 
 void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, u8 count)
 {
-    memcpy(&g.xflag, &spawner->xflag, sizeof(Xflag));
-    g.xflag.sliceId = count;
+    XflagID id;
+
+    id = Xflag_LookupSlice(spawner->xflag, count);
     g.xflagOverride = TRUE;
+    g.xflagId = id;
     Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
     g.xflagOverride = FALSE;
 }

@@ -88,10 +88,9 @@ void func_808B29E0(BgSpot11Oasis* this) {
 void func_808B29F0(BgSpot11Oasis* this, PlayState* play) {
     if (Math_StepToF(&this->actor.world.pos.y, 0.0f, 0.7f)) {
         func_808B2AA8(this);
+
         /* Spawn the fairies, with xflag */
-        Xflag_Clear(&g.xflag);
-        g.xflag.sceneId = SCE_OOT_DESERT_COLOSSUS;
-        g.xflag.id = 1;
+        g.xflagId = Xflag_InitEx(&this->actor, play);
         g.xflagOverride = TRUE;
         Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.world.pos.x, this->actor.world.pos.y + 40.0f,
                     this->actor.world.pos.z, 0, 0, 0, 0x0004);

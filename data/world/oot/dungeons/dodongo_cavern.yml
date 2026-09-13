@@ -16,6 +16,8 @@
   locations:
     "Dodongo Cavern Map Chest": "true"
     "Dodongo Cavern Lobby Scrub": "business_scrub(0x1f)"
+    "Dodongo Cavern Gossip Fairy": "gossip_fairy_sun"
+    "Dodongo Cavern Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Dodongo Cavern Gossip": "true"
 

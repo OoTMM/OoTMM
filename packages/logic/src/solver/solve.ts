@@ -1,10 +1,11 @@
-import type { Settings, PlayerItem, PlayerItems, Item } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { World } from '../world';
 import type { Location, ItemPlacement } from '../types';
-import type { ItemProperties } from '../item-properties';
+import type { PlayerItem, PlayerItems, Item, ItemProperties } from '../items';
 import type { PathfinderState } from '../pathfind';
 
-import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove, ItemHelpers, ItemGroups, Items, makePlayerItem } from '@ootmm/core';
+import { Monitor, Random, sample, shuffle, countMapAdd, countMapArray, countMapCombine, countMapRemove } from '@ootmm/core';
+import { ItemHelpers, ItemGroups, Items, makePlayerItem } from '../items';
 import { cloneWorld } from '../world';
 import { mustStartWithMasterSword } from '../helpers';
 import { LogicError, LogicSeedError } from '../error';
@@ -377,9 +378,6 @@ class LogicPassSolver {
     /* Fix vanilla items */
     this.fixItems();
 
-    /* KLUDGE: Fix the cross tokens */
-    this.fixCrossTokens();
-
     /* Place dungeon rewards (when set to dungeon locs) */
     if (['dungeons', 'dungeonsLimited'].includes(this.input.settings.dungeonRewardShuffle)) {
       this.retry(() => {
@@ -410,7 +408,7 @@ class LogicPassSolver {
 
         for (;;) {
           /* Pathfind */
-          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { inPlace: true, recursive: true, items: this.state.items });
+          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.state.items });
 
           let goal = true;
           if (this.input.settings.logic === 'allLocations') {
@@ -507,68 +505,13 @@ class LogicPassSolver {
     }
   }
 
-  private goldTokenLocations() {
-    const locations = new Set<Location>();
-    const setting = this.input.settings.goldSkulltulaTokens;
-    const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
-    const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const world = this.worlds[worldId];
-      const skullLocations = world.locations.values().filter(x => ItemHelpers.isGoldToken(world.checkItems.get(x)!));
-      const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
-
-      for (const location of skullLocations) {
-        const isDungeon = dungeonLocations.has(location);
-        if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
-          locations.add(makeLocation(location, worldId));
-        }
-      }
-    }
-
-    return locations;
-  }
-
-  private houseTokenLocations() {
-    const locations = new Set<Location>();
-    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const world = this.worlds[worldId];
-      for (const location of world.locations) {
-        const item = world.checkItems.get(location)!;
-        if (ItemHelpers.isHouseToken(item)) {
-          locations.add(makeLocation(location, worldId));
-        }
-      }
-    }
-    return locations;
-  }
-
-  private fixCrossTokens() {
-    if (this.input.settings.housesSkulltulaTokens !== 'cross') {
-      return;
-    }
-
-    const gs = this.goldTokenLocations();
-    const house = this.houseTokenLocations();
-
-    for (let player = 0; player < this.input.settings.players; ++player) {
-      const locations = [...gs, ...house].filter(x => locationData(x).world === player);
-      const world = this.worlds[player];
-      const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checkItems.get(locationData(loc).id)!, player)));
-      for (const location of locations) {
-        const item = pool.pop()!;
-        this.place(location, item);
-        removeItemPools(this.state.pools, item);
-      }
-    }
-  }
-
   private getSpheres() {
     let spheres = new Map<Location, number>;
     let sphereId = 1;
     let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items });
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items });
       if (!pathfinderState.newLocations.size) {
         break;
       }
@@ -1156,7 +1099,7 @@ class LogicPassSolver {
     }
 
     if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
-      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.worlds[locationData(x).world as number], x));
+      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(x));
     }
 
     if (unplacedLocs.length === 0) {
@@ -1204,7 +1147,7 @@ class LogicPassSolver {
 
         /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
         if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(requiredItem.item) && !this.state.criticalRenewables.has(requiredItem)) {
-          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.worlds[locationData(x).world as number], x));
+          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(x));
         }
 
         /* If there is nowhere to place an item, raise an error */
@@ -1271,7 +1214,7 @@ class LogicPassSolver {
     const junkDistributionRenewable = countMapArray(this.junkDistribution).filter(x => !ItemHelpers.isItemMajor(x.item));
     for (const loc of locs) {
       const locD = locationData(loc);
-      const junkPool = isLocationRenewable(this.worlds[locD.world as number], loc) ? junkDistributionRenewable : junkDistribution;
+      const junkPool = isLocationRenewable(loc) ? junkDistributionRenewable : junkDistribution;
       const item = sample(this.input.random, junkPool);
       this.place(loc, item);
     }
@@ -1303,7 +1246,7 @@ class LogicPassSolver {
       throw new Error('Location already placed: ' + location);
     }
     this.state.items.set(location, item);
-    if (isLocationRenewable(world, location) && ItemHelpers.isItemCriticalRenewable(item.item)) {
+    if (isLocationRenewable(location) && ItemHelpers.isItemCriticalRenewable(item.item)) {
       this.state.criticalRenewables.add(item);
     }
 

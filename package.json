@@ -7,7 +7,7 @@
     "start": "nx run @ootmm/generator:start",
     "start:config": "nx run @ootmm/generator:start:config",
     "build": "nx run @ootmm/gui:build",
-    "test": "nx run-many --output-style=stream --target=test",
+    "test": "nx run-many --parallel --output-style=stream --target=test",
     "typecheck": "nx run-many -t typecheck",
     "gui:dev": "nx run @ootmm/gui:dev",
     "web:dev": "nx run @ootmm/web:dev"
@@ -27,5 +27,6 @@
     "typescript": "^6.0.2",
     "vite": "^8.0.7",
     "vitest": "^4.1.3"
-  }
+  },
+  "packageManager": "pnpm@11.24.0"
 }

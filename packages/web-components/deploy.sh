@@ -41,11 +41,11 @@ done
 rm -rf tmp/download
 
 # Merge configs
-npx tsx ./merge-configs.ts || die "Failed to merge configs"
+node ./merge-configs.js || die "Failed to merge configs"
 rm -rf tmp/configs
 
 # Deploy to Netlify
-../../node_modules/.bin/netlify deploy -d "$PWD/tmp/tree" --site $NETLIFY_SITE_ID_STATIC --prod || die "Failed to deploy"
+netlify deploy --no-build -d "$PWD/tmp/tree" --site $NETLIFY_SITE_ID --prod || die "Failed to deploy"
 
 # Final cleanup
 rm -rf tmp

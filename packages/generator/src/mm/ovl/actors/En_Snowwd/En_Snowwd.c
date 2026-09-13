@@ -44,39 +44,10 @@ static ColliderCylinderInit sCylinderInit = {
     { 18, 60, 0, { 0, 0, 0 } },
 };
 
-static void EnSnowwd_Alias(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_MM_PATH_MOUNTAIN_VILLAGE:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            xf->id -= 5;
-        }
-        break;
-    case SCE_MM_PATH_SNOWHEAD:
-        if (xf->setupId == 1)
-        {
-            xf->setupId = 0;
-            switch (xf->id)
-            {
-            case 00: xf->id = 24; break;
-            case 01: xf->id = 23; break;
-            case 02: xf->id = 22; break;
-            case 03: xf->id = 25; break;
-            }
-        }
-        break;
-    }
-}
-
 void EnSnowwd_Init(Actor* thisx, PlayState* play) {
     EnSnowwd* this = (EnSnowwd*)thisx;
 
-    if (Xflag_Init(&this->xflag, thisx, play)) {
-        EnSnowwd_Alias(&this->xflag);
-    }
+    Xflag_Init(&this->xflag, thisx, play);
 
     SNOWWD_DROPPED_COLLECTIBLE(thisx) = false;
     this->actor.home.rot.y = 0;

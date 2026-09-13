@@ -18,6 +18,7 @@ typedef struct Actor_ObjMure3
     Actor_ObjMure3Func  actionFunc;
     Actor_EnItem00*     children[7];
     u16                 childrenBits;
+    XflagID             xflag;
 }
 Actor_ObjMure3;
 

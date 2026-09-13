@@ -87,82 +87,36 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-static void ObjFlowerpot_Xflag(Xflag* dst, int slice, Actor_ObjFlowerpot* this)
-{
-    memcpy(dst, &this->xflags, sizeof(Xflag));
-    dst->sliceId = slice;
-}
-
 static int ObjFlowerpot_IsShuffled(Actor_ObjFlowerpot* this, int slice)
 {
-    Xflag xflags;
+    XflagID id;
 
-    ObjFlowerpot_Xflag(&xflags, slice, this);
-    return !!((this->isExtendedFlags & (1 << slice)) && (!comboXflagsGet(&xflags)));
+    id = Xflag_LookupSlice(this->xflag, slice);
+    return Xflag_IsShuffledEx(id);
 }
 
 static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlowerpot* this, int slice)
 {
-    Xflag xf;
+    XflagID id;
 
-    ObjFlowerpot_Xflag(&xf, slice, this);
-    comboXflagItemOverride(o, &xf, 0);
-    if (comboXflagsGet(&xf))
+    id = Xflag_LookupSlice(this->xflag, slice);
+    Xflag_ItemOverride(o, id, GI_NONE);
+    if (Xflag_Get(id))
     {
-        o->gi = 0;
-        o->cloakGi = 0;
-    }
-}
-
-static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
-{
-    ComboItemOverride o;
-
-    ObjFlowerpot_ShuffledItemOverride(&o, this, slice);
-    return o.gi;
-}
-
-static void ObjFlowerpot_Alias(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
-        xf->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
-        xf->id -= 6;
-        break;
-    }
-}
-
-static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, PlayState* play)
-{
-    Xflag* xflag;
-
-    xflag = &this->xflags;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->roomId = this->actor.room;
-    xflag->sliceId = 0;
-    xflag->id = this->actor.actorIndex;
-
-    ObjFlowerpot_Alias(xflag);
-
-    this->isExtendedFlags = 0;
-    for (int i = 0; i < 2; ++i)
-    {
-        if (ObjFlowerpot_ShuffledItem(this, i))
-            this->isExtendedFlags |= 1 << i;
+        o->gi = GI_NONE;
+        o->cloakGi = GI_NONE;
     }
 }
 
 static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, PlayState* play, int slice)
 {
-    Xflag xf;
+    XflagID id;
 
     if (!ObjFlowerpot_IsShuffled(this, slice))
-        return 0;
-    ObjFlowerpot_Xflag(&xf, slice, this);
-    EnItem00_DropCustom(play, &this->actor.world.pos, &xf);
-    return 1;
+        return FALSE;
+    id = Xflag_LookupSlice(this->xflag, slice);
+    EnItem00_DropCustomEx(play, &this->actor.world.pos, id);
+    return TRUE;
 }
 
 void func_80A1B3D0(void)
@@ -471,7 +425,7 @@ void func_80A1C62C(Actor_ObjFlowerpot* this, PlayState* play) {
 
 void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, PlayState* play)
 {
-    ObjFlowerpot_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (this->actor.shape.rot.y == 0) {

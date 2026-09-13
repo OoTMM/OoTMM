@@ -22,8 +22,7 @@ typedef struct Actor_BgIceShelter {
     ColliderCylinder cylinder2; // Only used by no-dynapoly types to make weapons bounce off
     s16 alpha;
 
-    Xflag xflag;
-    u8 isExtended;
+    XflagID xflag;
 } Actor_BgIceShelter; // size = 0x0204
 
 #endif

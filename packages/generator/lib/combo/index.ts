@@ -1,5 +1,5 @@
-export type { Settings, SettingsPatch, SettingHint, SettingHintType, TrickKey, ItemsCount } from '@ootmm/core';
-export type { Cosmetics, OptionRandomSettings, OptionsInput, Options } from '@ootmm/core';
+export type { Settings, SettingsPatch, SettingHint, SettingHintType, TrickKey, Cosmetics, OptionRandomSettings, OptionsInput, Options } from '@ootmm/core';
+export type { ItemsCount } from '@ootmm/logic';
 
 export type { Presets } from './presets';
 export type { GeneratorOutput, GeneratorParams } from './generator';

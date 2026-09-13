@@ -24,7 +24,7 @@ static void EnHitTag_DrawGlitter(Actor_EnHitTag* this, PlayState* play)
     for (int i = 0; i < 3; ++i)
     {
         x.sliceId = i;
-        if (comboXflagsGet(&x))
+        if (Xflag_GetIndirect(&x))
             continue;
         comboXflagItemOverride(&o, &x, 0);
         if (o.gi == 0)
@@ -81,7 +81,7 @@ static void EnHitTag_ItemDropCollectible(PlayState* play, const Vec3f* pos, int 
     sHitTagCount++;
     comboXflagItemOverride(&o, &x, 0);
 
-    if (comboXflagsGet(&x) || o.gi == 0)
+    if (Xflag_GetIndirect(&x) || o.gi == 0)
         Item_DropCollectible(play, pos, param);
     else
         EnItem00_DropCustom(play, pos, &x);

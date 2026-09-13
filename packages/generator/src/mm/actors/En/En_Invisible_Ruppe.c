@@ -9,7 +9,7 @@ static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, PlayState
     ComboItemOverride o;
 
     /* Check xflag */
-    if (comboXflagsGet(&this->xflag))
+    if (Xflag_GetIndirect(&this->xflag))
     {
         this->base.draw = NULL;
         return;
@@ -24,7 +24,7 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* pl
     ComboItemQuery q;
     EnInvisibleRuppeFunc handleNormal;
 
-    if (comboXflagsGet(&this->xflag) || !this->isExtended)
+    if (Xflag_GetIndirect(&this->xflag) || !this->isExtended)
     {
         this->base.draw = NULL;
         handleNormal = actorAddr(ACTOR_EN_INVISIBLE_RUPPE, 0x80c2590c);
@@ -37,7 +37,7 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* pl
     {
         comboXflagItemQuery(&q, &this->xflag, 0);
         Item_AddWithDecoy(play, &q);
-        comboXflagsSet(&this->xflag);
+        Xflag_SetIndirect(&this->xflag);
 
         if (this->switchFlag > 0)
             Flags_SetSwitch(play, this->switchFlag);

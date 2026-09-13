@@ -45,6 +45,8 @@
     "Kokiri Forest Rock Circle Rock 6": "true"
     "Kokiri Forest Rock Circle Rock 7": "true"
     "Kokiri Forest Rock Circle Rock 8": "true"
+    "Kokiri Forest Gossip Fairy Near Lost Woods": "gossip_fairy"
+    "Kokiri Forest Gossip Big Fairy Near Lost Woods": "gossip_fairy_big"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
 
@@ -96,6 +98,9 @@
   exits:
     "Kokiri Forest Grass Child": "is_child"
     "Kokiri Forest Grass Adult": "is_adult"
+  locations:
+    "Kokiri Forest Grass Near Crawl 1": "true"
+    "Kokiri Forest Grass Near Crawl 2": "true"
 
 "Kokiri Forest Grass Child":
   region: KOKIRI_FOREST
@@ -107,8 +112,6 @@
     "Kokiri Forest Grass Child Near Crawl 4": "true"
     "Kokiri Forest Grass Child Near Crawl 5": "true"
     "Kokiri Forest Grass Child Near Crawl 6": "true"
-    "Kokiri Forest Grass Child Near Crawl 7": "true"
-    "Kokiri Forest Grass Child Near Crawl 8": "true"
     "Kokiri Forest Grass Child 1": "true"
     "Kokiri Forest Grass Child 2": "true"
     "Kokiri Forest Grass Child 3": "true"
@@ -140,8 +143,6 @@
     "Kokiri Forest Grass Adult Near Crawl 4": "true"
     "Kokiri Forest Grass Adult Near Crawl 5": "true"
     "Kokiri Forest Grass Adult Near Crawl 6": "true"
-    "Kokiri Forest Grass Adult Near Crawl 7": "true"
-    "Kokiri Forest Grass Adult Near Crawl 8": "true"
 
 "Kokiri Forest Adult Rupees":
   region: KOKIRI_FOREST
@@ -164,6 +165,11 @@
   events:
     STICKS: "is_child && soul_deku_baba && (can_boomerang || can_use_sword)"
     MIDO_MOVED: "can_move_mido"
+  locations:
+    "Kokiri Forest Gossip Fairy Near Deku Tree 1": "gossip_fairy"
+    "Kokiri Forest Gossip Fairy Near Deku Tree 2": "gossip_fairy"
+    "Kokiri Forest Gossip Big Fairy Near Deku Tree 1": "gossip_fairy_big"
+    "Kokiri Forest Gossip Big Fairy Near Deku Tree 2": "gossip_fairy_big"
   gossip:
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
@@ -248,5 +254,7 @@
     "Kokiri Forest Storms Grotto Butterfly 1": "butterfly"
     "Kokiri Forest Storms Grotto Butterfly 2": "butterfly"
     "Kokiri Forest Storms Grotto Butterfly 3": "butterfly"
+    "Kokiri Forest Storms Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Kokiri Forest Storms Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"

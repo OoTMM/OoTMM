@@ -14,10 +14,11 @@ import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
 
 import { setupAssetsMap } from './build/build-assets-map';
-import { buildManifests } from './build/build-manifests';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
+
+const DIR_OOTMM_DATA_DIST = path.resolve(import.meta.dirname, '..', 'node_modules', '@ootmm', 'data', 'dist');
 
 async function runCommand(cmd: string, args: string[]) {
   return new Promise((resolve, reject) => {
@@ -36,9 +37,9 @@ export async function buildNative() {
   const cmakeBuildType = isProd ? 'Release' : 'Debug';
 
   /* Resolve paths */
-  const installDir = path.resolve(__dirname, '..', 'build');
+  const installDir = path.resolve(import.meta.dirname, '..', 'build');
   const buildDir = path.resolve(installDir, 'tree', cmakeBuildType);
-  const sourceDir = path.resolve(__dirname, '..');
+  const sourceDir = path.resolve(import.meta.dirname, '..');
   const binDir = path.resolve(installDir, 'bin');
   const ovlDir = path.resolve(binDir, 'ovl');
 
@@ -80,6 +81,14 @@ async function codegenCustomAssets(monitor: Monitor) {
   await cg.emit();
 }
 
+async function copyFiles(dir: string, pattern: string, zip: JSZip) {
+  const matches = globSync(pattern, { cwd: dir });
+  for (const filename of matches) {
+    const data = await fs.readFile(path.join(dir, filename));
+    zip.file(filename, data);
+  }
+}
+
 async function build() {
   const dummyMonitor = new Monitor({});
 
@@ -88,7 +97,6 @@ async function build() {
     comboCodegen(dummyMonitor),
     cosmeticsAssets(),
     setupAssetsMap(),
-    buildManifests(),
   ]);
 
   const installDir = await buildNative();
@@ -111,6 +119,8 @@ async function build() {
       zip.file(filename, data);
     }
   }
+
+  await copyFiles(DIR_OOTMM_DATA_DIST, 'manifests/**/*.json', zip);
 
   /* Compress the data */
   const zipBuf = await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE', compressionOptions: { level: 9 } });

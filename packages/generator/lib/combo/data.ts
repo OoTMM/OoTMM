@@ -1,5 +1,5 @@
 import { isArray } from 'lodash-es';
-import { RAW_GI, RAW_DRAWGI } from '@ootmm/core';
+import { RAW_GI, RAW_DRAWGI } from '@ootmm/data';
 
 type DataGi = {
   index: number;

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/item.h>
 #include <combo/dungeon.h>
 #include <combo/dma.h>
@@ -15,7 +16,11 @@ static void fixSpawn(void)
     gSaveContext.respawnFlag = 0;
     gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance = 0xffff;
 
-    if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams && !gComboCtx.valid && gPlay)
+    /* Don't override anything if it's not a cold start */
+    if (gComboCtx.valid)
+        return;
+
+    if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].playerParams && gPlay)
     {
         if (gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].data & 0x80)
         {
@@ -33,11 +38,17 @@ static void fixSpawn(void)
         }
     }
 
-    /* If the player saved in link's house, and it's not ER, honor that */
-    if (gSave.info.sceneId == SCE_OOT_LINK_HOUSE && !Config_Flag(CFG_ER_ANY))
+    /* If the player saved in link's house, honor that */
+    if (gSave.info.sceneId == SCE_OOT_LINK_HOUSE)
     {
         gSave.entrance = ENTR_OOT_SPAWN_CHILD;
         return;
+    }
+
+    /* If the player hasn't reached ToT age swap and is supposed to reach their default spawn, ensure they're set to their default age */
+    if (!gCustomSave.hasTimeTraveledAtTemple)
+    {
+        Age_SetOot(NULL, Age_GetStarting());
     }
 
     entrance = gSave.age == AGE_CHILD ? ENTR_OOT_SPAWN_CHILD : ENTR_OOT_SPAWN_ADULT;
@@ -234,6 +245,34 @@ static void applyStartingEvents(void)
     }
 }
 
+static void Save_InitNewMmLinkAge(void)
+{
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+    {
+        gMmSave.linkAge = gOotSave.age;
+    }
+    else
+    {
+        gMmSave.linkAge = Config_Flag(CFG_MM_START_ADULT)
+            ? AGE_ADULT
+            : AGE_CHILD;
+    }
+
+    for (int age = 0; age < 2; ++age)
+    {
+        MmHumanAgeLoadout* equips = &gSharedCustomSave.mm.humanAgeLoadouts[age];
+        for (int i = 0; i < 4; ++i)
+        {
+            equips->buttonItems[i] = ITEM_NONE;
+            equips->cButtonSlots[i] = 0xff;
+        }
+        equips->boots = 0;
+        equips->tunic = 0;
+        equips->shield = 0;
+        equips->sword = 0;
+    }
+}
+
 void comboCreateSave(void* unk, void* buffer)
 {
     u32 base;
@@ -348,6 +387,8 @@ void comboCreateSave(void* unk, void* buffer)
             gSave.info.eventsMisc[29] = 0;
         }
     }
+
+    Save_InitNewMmLinkAge();
 
     /* Apply starting items */
     applyStartingItems();

@@ -247,48 +247,6 @@ static void setStrayFairyMarkMm(PlayState* play, int sceneId, int id)
         setCollectibleMarkMm(play, sceneId, id);
 }
 
-static void markXflag(Xflag* xf, int sliceId, int sceneId, int roomId, int id)
-{
-    bzero(xf, sizeof(*xf));
-    xf->sliceId = sliceId;
-    xf->setupId = (roomId & 0xc0) >> 6;
-    xf->sceneId = sceneId;
-    xf->roomId = roomId & 0x3f;
-    xf->id = id;
-}
-
-static int getXflagsMarkOot(PlayState* play, int sliceId, int sceneId, int roomId, int id)
-{
-    Xflag xf;
-
-    markXflag(&xf, sliceId, sceneId, roomId, id);
-    return comboXflagsGetOot(&xf);
-}
-
-static int getXflagsMarkMm(PlayState* play, int sliceId, int sceneId, int roomId, int id)
-{
-    Xflag xf;
-
-    markXflag(&xf, sliceId, sceneId, roomId, id);
-    return comboXflagsGetMm(&xf);
-}
-
-static void setXflagsMarkOot(PlayState* play, int sliceId, int sceneId, int roomId, int id)
-{
-    Xflag xf;
-
-    markXflag(&xf, sliceId, sceneId, roomId, id);
-    comboXflagsSetOot(&xf);
-}
-
-static void setXflagsMarkMm(PlayState* play, int sliceId, int sceneId, int roomId, int id)
-{
-    Xflag xf;
-
-    markXflag(&xf, sliceId, sceneId, roomId, id);
-    comboXflagsSetMm(&xf);
-}
-
 static int getGsFlagOot(int id)
 {
     if (id > 0xb0)
@@ -338,8 +296,8 @@ void Mark_SetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_FISH:
         BITMAP8_SET(gSharedCustomSave.caughtFishFlags, id);
         break;
-    default:
-        setXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
+    case OV_XFLAG:
+        Xflag_Set(roomId << 8 | id);
         break;
     }
 }
@@ -376,8 +334,8 @@ void Mark_SetMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         break;
     case OV_FISH:
         break;
-    default:
-        setXflagsMarkMm(play, ovType - OV_XFLAG0, sceneId, roomId, id);
+    case OV_XFLAG:
+        Xflag_Set(roomId << 8 | id);
         break;
     }
 }
@@ -408,8 +366,8 @@ int Mark_GetOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         return BITMAP8_GET(gSharedCustomSave.oot.sr, id & 0x7f);
     case OV_FISH:
         return BITMAP8_GET(gSharedCustomSave.caughtFishFlags, id);
-    default:
-        return getXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
+    case OV_XFLAG:
+        return Xflag_Get(roomId << 8 | id);
     }
 
     return 0;
@@ -441,8 +399,8 @@ int Mark_GetMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
         break;
     case OV_FISH:
         break;
-    default:
-        return getXflagsMarkMm(play, ovType - OV_XFLAG0, sceneId, roomId, id);
+    case OV_XFLAG:
+        return Xflag_Get(roomId << 8 | id);
     }
 
     return 0;

@@ -101,84 +101,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 100, ICHAIN_STOP),
 };
 
-static void ObjTsubo_Alias(Actor_ObjTsubo* this)
-{
-    Xflag* xflag;
-
-    xflag = &this->xflag;
-    switch (xflag->sceneId)
-    {
-    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
-        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
-        xflag->id += 3;
-        break;
-    case SCE_MM_GORON_SHRINE:
-        if (xflag->setupId == 1)
-        {
-            xflag->setupId = 0;
-            switch (xflag->roomId)
-            {
-            case 0: xflag->id -= 2; break;
-            case 1: xflag->id += 3; break;
-            }
-        }
-        break;
-    case SCE_MM_GREAT_BAY_COAST:
-        if (xflag->setupId == 1)
-        {
-            xflag->setupId = 0;
-            switch (xflag->id)
-            {
-            case 13: xflag->id = 123; break;
-            case 14: xflag->id = 124; break;
-            case 15: xflag->id = 125; break;
-            case 16: xflag->id = 133; break;
-            case 17: xflag->id = 119; break;
-            case 18: xflag->id = 129; break;
-            case 19: xflag->id = 118; break;
-            case 20: xflag->id = 128; break;
-            case 21: xflag->id = 130; break;
-            case 22: xflag->id = 120; break;
-            case 23: xflag->id = 121; break;
-            case 24: xflag->id = 62;  break;
-            case 25: xflag->id = 61;  break;
-            case 26: xflag->id = 63;  break;
-            case 27: xflag->id = 131;  break;
-            default: UNREACHABLE(); break;
-            }
-        }
-        break;
-    case SCE_MM_ZORA_CAPE:
-        if (xflag->setupId == 1)
-        {
-            xflag->setupId = 0;
-            xflag->id += 9;
-        }
-        break;
-    case SCE_MM_WOODFALL:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            xflag->id -= 36;
-        }
-        break;
-    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
-        xflag->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
-        xflag->id = 38;
-        break;
-    case SCE_MM_GORON_RACETRACK:
-        xflag->setupId = 0;
-        break;
-    }
-}
-
-static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
-{
-    if (!this->isExtended || comboXflagsGet(&this->xflag))
-        return 0;
-    return 1;
-}
-
 int func_809275C0(Actor_ObjTsubo* this, PlayState* play)
 {
     s32 chestFlag = -1;
@@ -194,9 +116,9 @@ int func_809275C0(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, PlayState* play)
 {
-    if (ObjTsubo_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -210,9 +132,9 @@ void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 {
     s32 itemDrop;
 
-    if (ObjTsubo_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -282,25 +204,21 @@ void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
     /* TODO: Inelegant, should use an xflag override on the spawner instead */
     if (play->sceneId == SCE_MM_ZORA_CAPE && this->actor.params == 0x13f)
     {
-        Xflag_Clear(&this->xflag);
-        this->xflag.sceneId = SCE_MM_EXTRA;
         switch ((s16)(this->actor.home.pos.x))
         {
-        case 0x04D0: this->xflag.id = 0; break;
-        case 0x0560: this->xflag.id = 1; break;
-        case 0x05BD: this->xflag.id = 2; break;
-        case 0x056F: this->xflag.id = 3; break;
-        case 0x0543: this->xflag.id = 4; break;
+        case 0x04D0: this->actor.actorIndex = 0xf0; break;
+        case 0x0560: this->actor.actorIndex = 0xf1; break;
+        case 0x05BD: this->actor.actorIndex = 0xf2; break;
+        case 0x056F: this->actor.actorIndex = 0xf3; break;
+        case 0x0543: this->actor.actorIndex = 0xf4; break;
         default: UNREACHABLE(); break;
         }
     }
-    else
-    {
-        /* Set the extended properties */
-        if (Xflag_Init(&this->xflag, &this->actor, play))
-            ObjTsubo_Alias(this);
-    }
-    this->isExtended = Xflag_IsShuffled(&this->xflag);
+
+    /* Set the extended properties */
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     type = OBJ_TSUBO_GET_TYPE(&this->actor);
     sp2C = OBJ_TSUBO_ZROT(&this->actor);
@@ -812,6 +730,9 @@ void func_8092926C(Actor_ObjTsubo* this, PlayState* play) {
 
 void ObjTsubo_Update(Actor_ObjTsubo* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
     if (this->actor.draw == NULL) {
         this->actor.shape.shadowDraw = NULL;
@@ -868,11 +789,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
         break;
     }
 
-    if (ObjTsubo_IsShuffled(this))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
-
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, type);
     Gfx_DrawDListOpa(play, sPotTypeData[OBJ_TSUBO_GET_TYPE(&this->actor)].modelDL);
 }

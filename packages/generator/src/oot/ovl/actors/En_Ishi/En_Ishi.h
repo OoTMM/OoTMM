@@ -23,7 +23,7 @@ typedef struct EnIshi {
     Actor               actor;
     EnIshiActionFunc    actionFunc;
     ColliderCylinder    collider;
-    Xflag               xflag;
+    XflagID             xflag;
 } EnIshi; // size = 0x019C
 
 #endif

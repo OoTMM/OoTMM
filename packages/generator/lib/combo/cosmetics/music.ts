@@ -1,4 +1,5 @@
-import type { Game, Cosmetics } from '@ootmm/core';
+import type { Game } from '@ootmm/data';
+import type { Cosmetics } from '@ootmm/core';
 
 import JSZip from 'jszip';
 import { Monitor, Random, sample, shuffle } from '@ootmm/core';

@@ -56,11 +56,18 @@ async function randomVariants(settings: Settings) {
   const randBytesAsHex = Array.from(randBytes).map(b => b.toString(16).padStart(2, '0')).join('');
   await random.seed(randBytesAsHex);
 
-  if (settings.startingAge === 'random') {
+  if (settings.startingAgeOot === 'random') {
     if (random.next() & 1) {
-      settings.startingAge = 'adult';
+      settings.startingAgeOot = 'adult';
     } else {
-      settings.startingAge = 'child';
+      settings.startingAgeOot = 'child';
+    }
+  }
+  if (settings.startingAgeMm === 'random') {
+    if (random.next() & 1) {
+      settings.startingAgeMm = 'adult';
+    } else {
+      settings.startingAgeMm = 'child';
     }
   }
 

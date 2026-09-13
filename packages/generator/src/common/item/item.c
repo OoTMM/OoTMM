@@ -13,6 +13,8 @@
 #include <combo/play.h>
 #include <combo/shop.h>
 #include <combo/checks.h>
+#include <combo/xflags.h>
+#include <combo/age.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -277,8 +279,9 @@ void comboSyncItems(void)
     if (Config_Flag(CFG_CROSS_GAME_FW))
     {
 #if defined(GAME_MM)
-        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
-        OotFaroreWind* foreignFw = &gForeignSave.info.fw;
+        u8 fwAge = comboMmFwAge();
+        RespawnData* fw = &gCustomSave.fw[fwAge];
+        OotFaroreWind* foreignFw = Age_GetFaroreOot(fwAge);
 
         if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
         {
@@ -291,8 +294,9 @@ void comboSyncItems(void)
             foreignFw->entrance = ENTR_FW_CROSS;
         }
 #else
-        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
-        OotFaroreWind* fw = &gSave.info.fw;
+        u8 fwAge = gOotSave.age;
+        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[fwAge];
+        OotFaroreWind* fw = Age_GetFaroreOot(fwAge);
 
         if (fw->set <= 0 || fw->entrance != ENTR_FW_CROSS)
         {
@@ -547,6 +551,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
+    u32 key;
     ComboItemOverride o;
     int count;
 
@@ -555,7 +560,14 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 
     /* Add the item if it's for us */
     if (Item_IsPlayerSelf(o.player))
+    {
         count = comboAddItemRaw(play, o.gi);
+        if (q->ovType == OV_NONE)
+            key = 0;
+        else
+            key = Checks_MakeOverrideKey(q);
+        Multi_InfoItem(key, o.gi);
+    }
 
     /* Update text */
     if (updateText)
@@ -682,4 +694,3 @@ Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q
 
     return decoy;
 }
-

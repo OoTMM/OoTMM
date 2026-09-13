@@ -6,10 +6,15 @@ sFlashromMesgQueue = 0x801fbe10;
 Collider_UpdatePlayerWeapon = 0x80126440;
 _Interface_Update = 0x801210e0;
 
+Actor_GetScreenPos = 0x800b8898;
+SubS_OfferTalkExchangeFacing = 0x8013e8f8;
+Play_SetMotionBlurAlpha = 0x80165658;
 CollisionCheck_SpawnShieldParticlesMetal = 0x800e8668;
 Collider_InitQuad = 0x800e1e18;
 Collider_SetQuad = 0x800e1f20;
-
+Actor_OfferOcarinaInteraction = 0x800b874c;
+SubS_FillCutscenesList = 0x8013e3b8;
+gOneVec3f = 0x801c5db0;
 bzero = 0x80089630;
 InitDmaManager = 0x80080d0c;
 Play_Init = 0x8016a2c8;
@@ -17,6 +22,10 @@ gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
 Camera_GetCamDir = 0x800DFC90;
 SkelAnime_DrawOpa = 0x80133b3c;
+Message_DisplayOcarinaStaff = 0x80152434;
+SubS_StartCutscene = 0x8013e2d4;
+Actor_OcarinaInteractionAccepted = 0x800b8718;
+Color_RGB8_Lerp = 0x801001b8;
 
 EffectSs_Delete = 0x800b0210;
 gEffectSsTable = 0x801ae3a0;
@@ -60,7 +69,6 @@ AudioSeq_QueueSeqCmd = 0x801a89a8;
 
 Sleep_Usec = 0x80087a1c;
 
-ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
 Magic_RequestChange = 0x80115db4;
 Magic_Reset = 0x80115D5C;
@@ -788,3 +796,30 @@ Player_GetCurMaskItemId = 0x80122EEC;
 
 Camera_SetFocalActor = 0x800e02ac;
 sCutsceneMgr = 0x801bd8b0;
+Actor_DeactivateLens = 0x800BAC14;
+Play_EnableMotionBlurPriority = 0x80165DCC;
+Play_DisableMotionBlurPriority = 0x80165DF0;
+Play_FillScreen = 0x8016A268;
+func_80123140 = 0x80123140;
+PlayerCall_Update = 0x80160B80;
+PlayerCall_Draw = 0x80160BC0;
+AnimatedMat_DrawXlu = 0x801317C0;
+gameplay_keep_Matanimheader_054F18 = 0x04054f18;
+AudioSfx_StopById = 0x801A75E8;
+Lib_PlaySfx_2 = 0x801000CC;
+Camera_ChangeMode = 0x800DF840;
+func_8012301C = 0x8012301C;
+func_800E0348 = 0x800E0348;
+Actor_Delete = 0x800BB498;
+Horse_Spawn = 0x800F40A0;
+Skin_Free = 0x80138700;
+Skin_Init = 0x8013859C;
+Skin_Setup = 0x80138410;
+func_8012F73C = 0x8012F73C;
+Message_StartTextbox = 0x801518b0;
+Math_Vec3f_StepTo = 0x80100448;
+Snap_ValidatePictograph = 0x8013a530;
+EffectSsDtBubble_SpawnCustomColor = 0x800b210c;
+Actor_SetColorFilter = 0x800bcb70;
+Actor_DrawDamageEffects = 0x800be680;
+Matrix_MultVecX = 0x80181b78;

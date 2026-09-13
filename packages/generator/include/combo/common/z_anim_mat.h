@@ -45,4 +45,6 @@ typedef struct {
     /* 0x4 */ void* params;
 } AnimatedMaterial; // size = 0x8
 
+void AnimatedMat_DrawXlu(struct PlayState* play, AnimatedMaterial* matAnim);
+
 #endif

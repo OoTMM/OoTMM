@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/entrance.h>
 #include <combo/player.h>
 #include <combo/config.h>
@@ -918,14 +919,8 @@ static void HandleSoaring(PlayState* play)
 
 void ageSwap(PlayState* play)
 {
-    /* Register flag */
-    gSharedCustomSave.hasBeenChildAndAdult = 1;
-
-    /* Set the correct farore */
-    Save_SwapFaroreOot();
-
     /* Age swap */
-    play->linkAgeOnLoad = !gSaveContext.save.age;
+    Age_SwapOot(play);
     Play_SetupRespawnPoint(play, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
     play->transitionTrigger = TRANS_TRIGGER_START;

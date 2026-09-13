@@ -1,12 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import type { Settings } from '@ootmm/core';
-import type { World, WorldArea } from '../../src/world/types';
-import type { ItemPlacement } from '../../src/types';
+import type { ItemPlacement, World, WorldArea } from '../../src';
 
-import { Items, makePlayerItem, makeSettings } from '@ootmm/core';
-import { exprTrue, exprFalse, exprHas, exprEvent } from '../../src';
-import { Pathfinder } from '../../src/pathfind/pathfind';
-import { makeLocation } from '../../src/locations';
+import { makeSettings } from '@ootmm/core';
+import { Items, makePlayerItem, Pathfinder, makeLocation, exprTrue, exprFalse, exprHas, exprEvent } from '../../src';
 
 /*
  * Check metadata (type, item) lives in the global CHECKS_BY_LOCATION table rather

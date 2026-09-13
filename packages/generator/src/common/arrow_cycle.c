@@ -205,7 +205,7 @@ static void HandleFrameDelay(Player* link, PlayState* play, Actor* arrow)
         special = arrow->child;
         if (special)
         {
-            ActorRemove(&play->actorCtx, special, play);
+            Actor_Delete(&play->actorCtx, special, play);
             arrow->child = NULL;
         }
 

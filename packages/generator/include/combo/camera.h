@@ -178,5 +178,12 @@ void _Camera_SetFocalActor(Camera* camera, Actor* actor);
 
 s32 Camera_RequestSetting(Camera* camera, s16 setting);
 int Camera_CheckValidMode(Camera* camera, s16 mode);
+s32 Camera_ChangeMode(Camera* camera, s16 mode);
+void func_800E0348(Camera* camera);
+
+#if defined(GAME_OOT)
+s32 func_8005B198(void);
+#endif
+
 
 #endif

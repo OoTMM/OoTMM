@@ -1,6 +1,8 @@
-import type { Settings, PlayerItems } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
+import type { PlayerItems } from '../items';
 
-import { Monitor, Random, sample, countMapAdd, countMapRemove, ItemGroups, Items, itemByID, makePlayerItem  } from '@ootmm/core';
+import { Monitor, Random, sample, countMapAdd, countMapRemove } from '@ootmm/core';
+import { ItemGroups, Items, itemByID, makePlayerItem } from '../items';
 import { mustStartWithMasterSword } from '../helpers';
 
 type LogicPassConfigState = {

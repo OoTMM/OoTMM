@@ -11,9 +11,6 @@
 # define DUMMY_MSG 0x52
 #endif
 
-void EnItem00_AliasFreestandingRupee(Xflag* xflag);
-void EnItem00_AliasFreestandingHeart(Xflag* xflag);
-
 static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
     ComboItemOverride o;
@@ -28,7 +25,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
     }
     else
     {
-        comboXflagItemOverride(&o, &this->xflag, 0);
+        Xflag_ItemOverride(&o, this->xflag, GI_NONE);
         gi = o.gi;
         cloakGi = o.cloakGi;
         this->xflagGi = gi;
@@ -60,24 +57,10 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtendedMajor = 0;
 
     /* Init the xflag */
-    if (Xflag_Init(&this->xflag, &this->actor, play))
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (Xflag_IsShuffledEx(this->xflag))
     {
-        switch (this->actor.params & 0xff)
-        {
-        case ITEM00_RUPEE_GREEN:
-        case ITEM00_RUPEE_BLUE:
-        case ITEM00_RUPEE_RED:
-            EnItem00_AliasFreestandingRupee(&this->xflag);
-            break;
-        case ITEM00_RECOVERY_HEART:
-            EnItem00_AliasFreestandingHeart(&this->xflag);
-            break;
-        }
-    }
-
-    if (Xflag_IsShuffled(&this->xflag))
-    {
-        comboXflagItemOverride(&o, &this->xflag, 0);
+        Xflag_ItemOverride(&o, this->xflag, 0);
         this->isExtended = 1;
         this->xflagGi = o.gi;
 
@@ -126,7 +109,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         return;
     }
 
-    comboXflagItemQuery(&q, &this->xflag, 0);
+    Xflag_ItemQuery(&q, this->xflag, 0);
     comboItemOverride(&o, &q);
     if (!isItemFastBuy(o.gi))
     {
@@ -135,7 +118,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         this->isExtendedMajor = 1;
     }
     comboAddItemEx(gPlay, &q, this->isExtendedMajor);
-    comboXflagsSet(&this->xflag);
+    Xflag_Set(this->xflag);
 
     comboPlayItemFanfare(o.gi, 1);
     this->isExtendedCollected = 1;
@@ -178,9 +161,21 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
 
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
+    XflagID id;
+
+    id = Xflag_Lookup(xflag);
+    return EnItem00_DropCustomEx(play, pos, id);
+}
+
+
+Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id)
+{
     Actor* actor;
     Actor_EnItem00* item;
     ComboItemOverride o;
+
+    if (id == XFLAGID_NONE)
+        return (Actor_EnItem00*)Item_DropCollectible(play, pos, 0x0000);
 
     /* Check if the xflag item is already spawned */
     for (actor = play->actorCtx.actors[0x08].first; actor != NULL; actor = actor->next)
@@ -188,21 +183,21 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
         if (actor->id != ACTOR_EN_ITEM00)
             continue;
         item = (Actor_EnItem00*)actor;
-        if (memcmp(&item->xflag, xflag, sizeof(Xflag)) == 0)
+        if (item->xflag == id)
             return NULL;
     }
 
     /* Check if the item to be spawned is literaly Nothing */
-    comboXflagItemOverride(&o, xflag, 0);
+    Xflag_ItemOverride(&o, id, GI_NONE);
     if (o.gi == GI_NOTHING)
     {
-        comboXflagsSet(xflag);
+        Xflag_Set(id);
         return NULL;
     }
 
     /* Spawn the item */
-    memcpy(&g.xflag, xflag, sizeof(Xflag));
     g.xflagOverride = TRUE;
+    g.xflagId = id;
     item = (Actor_EnItem00*)Item_DropCollectible(play, pos, 0x0000);
     g.xflagOverride = FALSE;
     if (!item)
@@ -219,6 +214,20 @@ Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, 
     Actor_EnItem00* item;
 
     item = EnItem00_DropCustom(play, pos, xflag);
+    if (!item)
+        return NULL;
+    item->actor.speed = 0.f;
+    item->actor.velocity.x = 0.f;
+    item->actor.velocity.y = 0.f;
+    item->actor.velocity.z = 0.f;
+    return item;
+}
+
+Actor_EnItem00* EnItem00_DropCustomNoInertiaEx(PlayState* play, const Vec3f* pos, XflagID xflag)
+{
+    Actor_EnItem00* item;
+
+    item = EnItem00_DropCustomEx(play, pos, xflag);
     if (!item)
         return NULL;
     item->actor.speed = 0.f;

@@ -235,9 +235,9 @@ void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play) {
 void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
     s16 dropParams;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -298,120 +298,13 @@ static InitChainEntry sInitChains[][5] = {
     },
 };
 
-static void EnIshi_AliasRock(Xflag* xf) {
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_LAKE_HYLIA:
-        xf->setupId = 0;
-        xf->id = 22;
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id -= 2;
-        }
-        break;
-    case SCE_OOT_GORON_CITY:
-        xf->setupId = 0;
-        xf->id = 47;
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        switch (xf->setupId)
-        {
-        case 1: xf->id += 5; break;
-        case 2: xf->id += 11; break;
-        case 3: xf->id += 12; break;
-        }
-        xf->setupId = 0;
-        break;
-    case SCE_OOT_GRAVEYARD:
-        xf->setupId = 0;
-        xf->id = 14;
-        break;
-    case SCE_OOT_ZORA_RIVER:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id += 29;
-        }
-        break;
-    case SCE_OOT_GERUDO_VALLEY:
-        if (xf->setupId == 0)
-        {
-            xf->setupId = 2;
-            switch (xf->id)
-            {
-            case 23: xf->id = 42; break;
-            case 24: xf->id = 43; break;
-            case 25: xf->id = 33; break;
-            case 26: xf->id = 34; break;
-            case 27: xf->id = 35; break;
-            case 28: xf->id = 44; break;
-            }
-        }
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id -= 8;
-        }
-        break;
-    }
-}
-
-static void EnIshi_AliasSilverBoulder(Xflag* xf) {
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_GORON_CITY:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            if (xf->id == 34)
-                xf->id = 44;
-            else
-                xf->id -= 6;
-        }
-        break;
-    case SCE_OOT_DESERT_COLOSSUS:
-        xf->setupId = 0;
-        xf->id = 18;
-        break;
-    case SCE_OOT_GERUDO_VALLEY:
-        xf->setupId = 0;
-        xf->id = 18;
-        break;
-    case SCE_OOT_ZORA_FOUNTAIN:
-        xf->setupId = 0;
-        xf->id = 5;
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        xf->setupId = 2;
-        xf->id = 48;
-        break;
-    case SCE_OOT_HYRULE_FIELD:
-        xf->setupId = 0;
-        xf->id = 30;
-        break;
-    }
-}
-
 void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
 
-    if (Xflag_Init(&this->xflag, &this->actor, play)) {
-        switch (type)
-        {
-        case ROCK_SMALL:
-            EnIshi_AliasRock(&this->xflag);
-            break;
-        case ROCK_LARGE:
-            EnIshi_AliasSilverBoulder(&this->xflag);
-            break;
-        }
-    }
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChains[type]);
     if (play->csCtx.state != CS_STATE_IDLE) {
@@ -422,7 +315,7 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
     }
     Actor_SetScale(&this->actor, sRockScales[type]);
     EnIshi_InitCollider(&this->actor, play);
-    if ((type == ROCK_LARGE) && Flags_GetSwitch(play, ISHI_GET_SWITCH_FLAG(&this->actor)) && !Xflag_IsShuffled(&this->xflag)) {
+    if ((type == ROCK_LARGE) && Flags_GetSwitch(play, ISHI_GET_SWITCH_FLAG(&this->actor)) && this->xflag == XFLAGID_NONE) {
         Actor_Kill(&this->actor);
         return;
     }
@@ -571,6 +464,9 @@ void EnIshi_Fly(EnIshi* this, PlayState* play) {
 void EnIshi_Update(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 }
 
@@ -578,13 +474,13 @@ int EnIshi_CAMC(EnIshi* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

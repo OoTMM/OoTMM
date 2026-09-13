@@ -275,6 +275,8 @@
     "Hyrule Field Grotto Open Butterfly 1": "butterfly"
     "Hyrule Field Grotto Open Butterfly 2": "butterfly"
     "Hyrule Field Grotto Open Butterfly 3": "butterfly"
+    "Hyrule Field Open Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Hyrule Field Open Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 
@@ -296,6 +298,8 @@
     "Hyrule Field Grotto Southeast Butterfly 1": "butterfly"
     "Hyrule Field Grotto Southeast Butterfly 2": "butterfly"
     "Hyrule Field Grotto Southeast Butterfly 3": "butterfly"
+    "Hyrule Field Southeast Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Hyrule Field Southeast Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 
@@ -317,6 +321,8 @@
     "Hyrule Field Grotto Market Butterfly 1": "butterfly"
     "Hyrule Field Grotto Market Butterfly 2": "butterfly"
     "Hyrule Field Grotto Market Butterfly 3": "butterfly"
+    "Hyrule Field Market Grotto Gossip Fairy": "gossip_fairy_sun"
+    "Hyrule Field Market Grotto Gossip Big Fairy": "gossip_fairy_big"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 
@@ -345,6 +351,8 @@
     "Hyrule Field Cow Grotto Pot 2": "has_fire"
     "Hyrule Field Grotto Near Gerudo Grass 1": "has_fire && can_cut_grass"
     "Hyrule Field Grotto Near Gerudo Grass 2": "has_fire && can_cut_grass"
+    "Hyrule Field Cow Grotto Gossip Fairy": "has_fire && gossip_fairy_sun"
+    "Hyrule Field Cow Grotto Gossip Big Fairy": "has_fire && gossip_fairy_big"
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 

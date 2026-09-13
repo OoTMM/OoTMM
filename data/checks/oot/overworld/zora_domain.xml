@@ -11,32 +11,64 @@
     <npc location="Zora Domain Tunic" npc="ZORA_KING_TUNIC" item="TUNIC_ZORA" hint="ZORA_KING"/>
     <npc location="Zora Domain Eyeball Frog" npc="TRADE_EYEBALL_FROG" item="EYEBALL_FROG" hint="ZORA_KING"/>
     <gs location="Zora Domain GS Waterfall" flag="0x8e" item="GS_TOKEN"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 1" slice="0x0" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 2" slice="0x1" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 3" slice="0x2" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 4" slice="0x3" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 5" slice="0x4" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 6" slice="0x5" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 7" slice="0x6" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="rock" location="Zora Domain Rock Circle Rock 8" slice="0x7" setup="0x0" room="0x1" actor="0xa" item="RANDOM"/>
-    <xflag type="pot" location="Zora Domain Pot 1" slice="0x0" setup="0x0" room="0x1" actor="0x15" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Zora Domain Pot 2" slice="0x0" setup="0x0" room="0x1" actor="0x16" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Zora Domain Pot 3" slice="0x0" setup="0x0" room="0x1" actor="0x17" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Zora Domain Pot 4" slice="0x0" setup="0x0" room="0x1" actor="0x18" item="NUTS_5"/>
-    <xflag type="pot" location="Zora Domain Pot 5" slice="0x0" setup="0x0" room="0x1" actor="0x19" item="STICK"/>
-    <xflag type="hive" location="Zora Domain Hive Front 1" slice="0x0" setup="0x0" room="0x0" actor="0x9" item="RUPEE_RED"/>
-    <xflag type="hive" location="Zora Domain Hive Front 2" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="RUPEE_RED"/>
-    <xflag type="hive" location="Zora Domain Hive Back" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="RUPEE_RED"/>
+    <actor room="0x1">
+      <match setup="0" actor="0xa"/>
+      <match setup="2" actor="0xb"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 1" slice="0" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 2" slice="1" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 3" slice="2" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 4" slice="3" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 5" slice="4" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 6" slice="5" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 7" slice="6" item="RANDOM"/>
+      <xflag type="rock" location="Zora Domain Rock Circle Rock 8" slice="7" item="RANDOM"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x15"/>
+      <match setup="2" actor="0x04"/>
+      <xflag type="pot" location="Zora Domain Pot 1" item="RUPEE_BLUE"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x16"/>
+      <match setup="2" actor="0x02"/>
+      <xflag type="pot" location="Zora Domain Pot 2" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x17"/>
+      <match setup="2" actor="0x05"/>
+      <xflag type="pot" location="Zora Domain Pot 3" item="RECOVERY_HEART"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x18"/>
+      <match setup="2" actor="0x03"/>
+      <xflag type="pot" location="Zora Domain Pot 4" item="NUTS_5"/>
+    </actor>
+    <actor room="0x1">
+      <match setup="0" actor="0x19"/>
+      <match setup="2" actor="0x01"/>
+      <xflag type="pot" location="Zora Domain Pot 5" item="STICK"/>
+    </actor>
+    <xflag type="hive" location="Zora Domain Hive Front 1" setup="0" room="0x0" actor="0x9" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Front 2" setup="0" room="0x0" actor="0xa" item="RUPEE_RED"/>
+    <xflag type="hive" location="Zora Domain Hive Back" setup="0" room="0x0" actor="0xb" item="RUPEE_RED"/>
+    <actor room="0x0">
+      <match setup="0" actor="0xd"/>
+      <match setup="2" actor="0x1"/>
+      <xflag type="gossip" location="Zora Domain Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Zora Domain Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="FAIRY_FOUNTAIN">
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 1" slice="0x0" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 2" slice="0x1" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 3" slice="0x2" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 4" slice="0x3" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 5" slice="0x4" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 6" slice="0x5" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 7" slice="0x6" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
-    <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 8" slice="0x7" setup="0x0" room="0x23" actor="0x0" item="FAIRY"/>
+    <actor room="0x23" actor="0x0">
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 1" slice="0" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 2" slice="1" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 3" slice="2" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 4" slice="3" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 5" slice="4" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 6" slice="5" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 7" slice="6" item="FAIRY"/>
+      <xflag type="fairy" location="Zora Domain Fairy Fountain Fairy 8" slice="7" item="FAIRY"/>
+    </actor>
   </scene>
   <scene id="ZORA_SHOP">
     <shop location="Zora Shop Item 1" flag="0x10" item="POTION_RED"/>

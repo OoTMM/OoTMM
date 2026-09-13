@@ -467,8 +467,21 @@ typedef struct PlayState
     char                unk_17104[0xc84];
     ObjectContext       objectCtx;
     RoomContext         roomCtx;
-    char                unk_18760[0x3c];
-    s16                 playerActorCsIds[10];
+    char                unk_18760[8];
+    /* 0x18768 */ void (*playerInit)(Player* player, struct PlayState* play, FlexSkeletonHeader* skelHeader);
+    /* 0x1876C */ void (*playerUpdate)(Player* player, struct PlayState* play, Input* input);
+    /* 0x18770 */ void (*unk_18770)(struct PlayState* play, Player* player);
+    /* 0x18774 */ s32 (*startPlayerFishing)(struct PlayState* play);
+    /* 0x18778 */ s32 (*grabPlayer)(struct PlayState* play, Player* player);
+    /* 0x1877C */ s32 (*tryPlayerCsAction)(struct PlayState* play, Player* player, PlayerCsAction csAction);
+    /* 0x18780 */ void (*func_18780)(Player* player, struct PlayState* play);
+    /* 0x18784 */ s32 (*damagePlayer)(struct PlayState* play, s32 damage);
+    /* 0x18788 */ void (*talkWithPlayer)(struct PlayState* play, Actor* actor);
+    /* 0x1878C */ void (*unk_1878C)(struct PlayState* play);
+    /* 0x18790 */ void (*unk_18790)(struct PlayState* play, s16 arg1);
+    /* 0x18794 */ PlayerItemAction (*unk_18794)(struct PlayState* play, Player* player, u8 itemId);
+    /* 0x18798 */ s32 (*setPlayerTalkAnim)(struct PlayState* play, PlayerAnimationHeader* talkAnim, AnimationMode animMode);
+    s16                 playerCsIds[10];
     MtxF                viewProjectionMtxF;
     Vec3f               projectionMtxFDiagonal;
     MtxF                billboardMtxF;
@@ -541,5 +554,7 @@ void Play_EnableMotionBlur(u32 alpha);
 s32 Play_SetCameraFov(PlayState* this, s16 camId, f32 fov);
 s32 _Play_SetCameraFov(PlayState* this, s16 camId, f32 fov);
 void Play_DisableMotionBlur(void);
+void Play_FillScreen(PlayState* this, s16 fillScreenOn, u8 red, u8 green, u8 blue, u8 alpha);
+void Play_SetMotionBlurAlpha(u32 alpha);
 
 #endif

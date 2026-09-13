@@ -23,6 +23,8 @@
 #define FILENAME_PERIOD                     0xEA
 #define FILENAME_SLASH                      0xEB
 
+typedef struct PlayState PlayState;
+
 typedef struct Font
 {
     u32 msgOffset;
@@ -264,17 +266,17 @@ ASSERT_SIZE(MessageContext, 0xe418);
 #define OCARINA_SONG_ZORA               0x1e
 #define OCARINA_SONG_ORDER              0x1f
 
-void Message_UpdateOcarinaMemoryGame(struct PlayState* play);
-// u8 Message_ShouldAdvance(struct PlayState* play); // currently in api.h
-void Message_CloseTextbox(struct PlayState*);
-void Message_StartTextbox(struct PlayState* play, u16 textId, struct Actor* actor);
-void Message_ContinueTextbox(struct PlayState* play, u16 textId);
-void Message_StartOcarina(struct PlayState* play, u16 ocarinaActionId);
-void Message_StartOcarinaSunsSongDisabled(struct PlayState* play, u16 ocarinaActionId);
+void Message_UpdateOcarinaMemoryGame(PlayState* play);
+// u8 Message_ShouldAdvance(PlayState* play); // currently in api.h
+void Message_CloseTextbox(PlayState*);
+void Message_StartTextbox(PlayState* play, u16 textId, struct Actor* actor);
+void Message_ContinueTextbox(PlayState* play, u16 textId);
+void Message_StartOcarina(PlayState* play, u16 ocarinaActionId);
+void Message_StartOcarinaSunsSongDisabled(PlayState* play, u16 ocarinaActionId);
 // u8 Message_GetState(MessageContext* msgCtx); // currently in api.h
-void Message_Draw(struct PlayState* play);
-void Message_Update(struct PlayState* play);
+void Message_Draw(PlayState* play);
+void Message_Update(PlayState* play);
 void Message_SetTables(void);
-void Message_Init(struct PlayState* play);
+void Message_Init(PlayState* play);
 
 #endif

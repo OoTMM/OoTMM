@@ -2,6 +2,7 @@
 #include <combo/util.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/age.h>
 
 u32 popcount(u32 x)
 {
@@ -74,8 +75,22 @@ int comboIsChateauActive(void)
 int comboIsLinkAdult(void)
 {
 #if defined(GAME_MM)
-    if (!Config_Flag(CFG_MM_CROSS_AGE))
-        return 0;
+    return gMmSave.linkAge == AGE_ADULT;
+#else
+    return gOotSave.age == AGE_ADULT;
 #endif
-    return gOotSave.age == 0;
+}
+
+u8 comboMmFwAge(void)
+{
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+        return gMmSave.linkAge;
+
+    if (Config_Flag(CFG_CROSS_GAME_FW))
+        return gOotSave.age;
+
+    if (Config_Flag(CFG_MM_MASK_ADULT))
+        return gMmSave.linkAge;
+
+    return gOotSave.age;
 }

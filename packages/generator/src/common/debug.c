@@ -592,6 +592,7 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.bowSlingshot = 3;
     gMmExtraItems.stoneGerudoSkull = 7;
     gMmExtraItems.gibdoSpooky = 3;
+    gMmExtraItems.fierceDeityAdult = 3;
 
     // gCustomSave.halfDays = 0b111111;
 

@@ -1,13 +1,15 @@
-import type { Settings, PlayerItems } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { PathfinderState } from '../pathfind';
 import type { World } from '../world';
 import type { ItemPlacement, Location } from '../types';
-import type { ItemProperties } from '../item-properties';
+import type { ItemProperties } from '../items/properties';
 import type { Analysis } from './types';
+import type { PlayerItems } from '../items';
 
-import { Monitor, Random, sample, ItemHelpers } from '@ootmm/core';
+import { Monitor, Random, sample } from '@ootmm/core';
 import { isLocationRenewable, locationData, makeLocation } from '../locations';
 import { Pathfinder } from '../pathfind';
+import { ItemHelpers } from '../items';
 
 type ZigZagState = {
   allowed: Set<Location>;
@@ -100,7 +102,7 @@ class LogicPassAnalysisFoolish {
       locations.delete(loc);
       forbidden.delete(loc);
       allowed.add(loc);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true, includeForbiddenReachable: true });
+      pathfinderState = this.pathfinder.run(pathfinderState, { recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true, includeForbiddenReachable: true });
       if (pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);
@@ -216,7 +218,7 @@ class LogicPassAnalysisFoolish {
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items.get(loc)!;
       const locD = locationData(loc);
-      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !this.state.itemProperties.license.has(item.item)) continue;
+      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(loc) && !this.state.itemProperties.license.has(item.item)) continue;
       locsSet.add(loc);
     }
 

@@ -1,13 +1,13 @@
 "Water Temple":
   dungeon: Water
   exits:
-    "GLOBAL": "true"
     "Lake Hylia Near Water Temple": "can_swim_or_sink"
     "Water Temple Main": "can_swim || (hookshot_anywhere && has_iron_boots)"
 
 "Water Temple Main":
   dungeon: Water
   exits:
+    "GLOBAL": "true"
     "Water Temple": "true"
     "Water Temple Ruto Room": "has_tunic_zora && (has_iron_boots || (can_longshot && trick(OOT_WATER_LONGSHOT)))"
     "Water Temple Center Bottom": "event(WATER_LEVEL_LOW) && small_keys_water(5)"

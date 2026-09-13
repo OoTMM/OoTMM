@@ -1,4 +1,6 @@
-import type { Entrance, Game, Item, Region } from '@ootmm/core';
+import type { Entrance, Game } from '@ootmm/data';
+import type { Region } from '@ootmm/core';
+import type { Item } from '../items';
 import type { ResolvedWorldFlags } from './flags';
 import type { Expr, ExprParser } from '../expr';
 

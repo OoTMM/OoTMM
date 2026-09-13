@@ -196,24 +196,6 @@ PATCH_CALL(0x8001376c, EnItem00_FixDrop);
 PATCH_CALL(0x80013998, EnItem00_FixDrop);
 PATCH_CALL(0x80013dec, EnItem00_FixDrop);
 
-void EnItem00_AliasFreestandingRupee(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_OOT_LOST_WOODS:
-        if (xflag->roomId == 7)
-        {
-            xflag->setupId = 0;
-            xflag->id = 4;
-        }
-        break;
-    }
-}
-
-void EnItem00_AliasFreestandingHeart(Xflag* xflag)
-{
-}
-
 void EnItem00_DrawShieldDeku(PlayState* play)
 {
     Draw_Gi(play, NULL, GI_OOT_SHIELD_DEKU, DRAW_RAW);

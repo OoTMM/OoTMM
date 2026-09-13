@@ -730,6 +730,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_CLOCK6:
     case GI_OOT_CLOCK:
         return Config_Flag(CFG_MM_CLOCKS) && Config_Flag(CFG_OOT_CLOCKS);
+    case GI_OOT_FAIRY_BIG:
+    case GI_MM_FAIRY_BIG:
+        return !(Config_Flag(CFG_SHARED_MAGIC) && Config_Flag(CFG_SHARED_HEALTH));
     case GI_MM_MAGIC_BEAN:
     case GI_OOT_MAGIC_BEAN:
         return 1;

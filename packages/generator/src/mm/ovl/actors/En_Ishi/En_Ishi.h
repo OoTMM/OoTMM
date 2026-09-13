@@ -45,7 +45,7 @@ typedef struct EnIshi {
     /* 0x195 */ s8 hitTimer;
     /* 0x196 */ s8 objectSlot;
     /* 0x197 */ u8 flags;
-    Xflag xflag;
+    XflagID xflag;
 } EnIshi; // size = 0x198
 
 #endif // Z_EN_ISHI_H

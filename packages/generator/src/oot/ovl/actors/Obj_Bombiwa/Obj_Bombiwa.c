@@ -66,86 +66,11 @@ void ObjBombiwa_InitCollision(Actor* thisx, PlayState* play) {
     Collider_UpdateCylinder(&this->actor, &this->collider);
 }
 
-static void ObjBombiwa_Alias(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_ZORA_RIVER:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            xf->id = 61;
-        }
-        break;
-    case SCE_OOT_GORON_CITY:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            if (xf->id >= 36)
-                xf->id -= 5;
-            else if (xf->id == 29)
-                xf->id = 22;
-            else
-                xf->id -= 6;
-        }
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            switch (xf->id)
-            {
-            case 47: xf->id = 35; break;
-            case 45: xf->id = 36; break;
-            case 46: xf->id = 37; break;
-            }
-        }
-        break;
-    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        if (xf->setupId == 2)
-            xf->setupId = 0;
-        break;
-    case SCE_OOT_LOST_WOODS:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 0;
-            switch (xf->roomId)
-            {
-            case 2: xf->id = 6; break;
-            case 7: xf->id = 5; break;
-            case 8: xf->id = 8; break;
-            }
-        }
-        break;
-    case SCE_OOT_ZORA_FOUNTAIN:
-        if (xf->setupId == 2)
-            xf->id -= 36;
-        xf->setupId = 0;
-        break;
-    case SCE_OOT_HYRULE_FIELD:
-        if (xf->setupId == 2)
-            xf->id += 1;
-        else if (xf->setupId == 1)
-        {
-            switch (xf->id)
-            {
-            case 68: xf->id = 68; break;
-            case 67: xf->id = 69; break;
-            case 66: xf->id = 70; break;
-            }
-        }
-        xf->setupId = 0;
-        break;
-    }
-}
-
 void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
 
     Actor_ProcessInitChain(thisx, sInitChain);
-    if (Xflag_Init(&this->xflag, &this->actor, play)) {
-        ObjBombiwa_Alias(&this->xflag);
-    }
+    Xflag_Init(&this->xflag, &this->actor, play);
     ObjBombiwa_InitCollision(thisx, play);
     if ((Flags_GetSwitch(play, PARAMS_GET_U(thisx->params, 0, 6)) != 0) && !Xflag_IsShuffled(&this->xflag)) {
         Actor_Kill(thisx);

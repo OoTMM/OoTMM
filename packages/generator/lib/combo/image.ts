@@ -1,6 +1,6 @@
 import { bufReadU16BE, bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from './util/buffer';
 
-type ImageFormat = 'rgba32' | 'rgba16' | 'ia8';
+type ImageFormat = 'rgba32' | 'rgba16' | 'ia4' | 'ia8';
 
 function packToRgb(color: number) {
   const r = (color >> 16) & 0xff;
@@ -17,6 +17,34 @@ function packToRgba(color: number) {
   const a = (color & 0xff) >>> 0;
 
   return [r / 255, g / 255, b / 255, a / 255] as const;
+}
+
+function toIA4(image: Uint8Array) {
+  const pixelCount = image.length / 4;
+  const newBuf = new Uint8Array((pixelCount + 1) >> 1);
+
+  for (let i = 0; i < pixelCount; ++i) {
+    const srcIndex = i * 4;
+
+    const r = image[srcIndex + 0];
+    const g = image[srcIndex + 1];
+    const b = image[srcIndex + 2];
+    const a = image[srcIndex + 3];
+
+    const intensity8 = Math.max(r, g, b);
+    const intensity3 = intensity8 >>> 5;
+    const alpha1 = a >= 0x80 ? 1 : 0;
+
+    const nibble = ((intensity3 << 1) | alpha1) & 0xf;
+
+    if ((i & 1) === 0) {
+      newBuf[i >> 1] = nibble << 4;
+    } else {
+      newBuf[i >> 1] |= nibble;
+    }
+  }
+
+  return newBuf;
 }
 
 function rgbToHsl(r: number, g: number, b: number) {
@@ -150,6 +178,8 @@ function fromFormat(image: Uint8Array, format: ImageFormat) {
     return image;
   } else if (format === 'rgba16') {
     return fromRgba16(image);
+  } else if (format === 'ia4') {
+    return fromIA4(image);
   } else {
     return fromIA8(image);
   }
@@ -179,9 +209,38 @@ export function toFormat(image: Uint8Array, format: ImageFormat) {
     return new Uint8Array(image);
   } else if (format === 'rgba16') {
     return toRgba16(image);
+  } else if (format === 'ia4') {
+    return toIA4(image);
   } else {
     return toIA8(image);
   }
+}
+
+function bits3to8(x: number) {
+  return (x << 5) | (x << 2) | (x >>> 1);
+}
+
+function fromIA4(image: Uint8Array) {
+  const newBuf = new Uint8Array(image.length * 8);
+
+  for (let i = 0; i < image.length * 2; ++i) {
+    const byte = image[i >> 1];
+    const nibble = (i & 1) === 0 ? (byte >>> 4) : (byte & 0xf);
+
+    const intensity3 = (nibble >>> 1) & 0x7;
+    const alpha1 = nibble & 0x1;
+
+    const v = bits3to8(intensity3);
+    const a = alpha1 ? 0xff : 0x00;
+
+    const dstIndex = i * 4;
+    newBuf[dstIndex + 0] = v;
+    newBuf[dstIndex + 1] = v;
+    newBuf[dstIndex + 2] = v;
+    newBuf[dstIndex + 3] = a;
+  }
+
+  return newBuf;
 }
 
 export function grayscale(image: Uint8Array, format: ImageFormat, gamma = 1) {

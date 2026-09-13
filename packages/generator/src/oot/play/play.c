@@ -159,13 +159,14 @@ static void sendSelfTriforce(void)
     int npc;
     s16 gi;
 
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
     gi = GI_OOT_TRIFORCE_FULL;
     npc = NPC_OOT_GANON;
 
+    if (BITMAP8_GET(gSharedCustomSave.oot.npc, npc))
+        return;
+
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
+    Multi_InfoItem(0, gi);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.oot.npc, npc);
@@ -744,10 +745,22 @@ void Play_TransitionDone(PlayState* play)
     case ENTR_EXTENDED:
         entrance = g.nextEntrance;
         break;
-    case ENTR_FW_CROSS:
-        entrance = gSharedCustomSave.mm.fw[gSave.age].entrance | MASK_FOREIGN_ENTRANCE;
+    case ENTR_FW_CROSS: {
+        u8 fwAge = gSave.age;
+        RespawnData* fw = &gSharedCustomSave.mm.fw[fwAge];
+        if (fw->data <= 0 || fw->entrance == ENTR_FW_CROSS)
+        {
+            gSave.info.fw.set = 0;
+
+            gIsEntranceOverride = 0;
+            entrance = gSave.entrance;
+            break;
+        }
+        entrance = fw->entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
+        gComboCtx.fwSpawnAge = fwAge;
         break;
+    }
     case ENTR_CROSS_RESPAWN:
         entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isDungeonEntranceSpawn = 1;
@@ -789,50 +802,6 @@ void Play_TransitionDone(PlayState* play)
     }
 }
 
-static void TimeTravelUpdateEquipment(void)
-{
-    OotItemEquips* prevAge;
-    OotItemEquips* nextAge;
-    u8 item;
-
-    if (gSave.age == AGE_ADULT)
-    {
-        prevAge = &gSave.info.adultEquips;
-        nextAge = &gSave.info.childEquips;
-    }
-    else
-    {
-        prevAge = &gSave.info.childEquips;
-        nextAge = &gSave.info.adultEquips;
-    }
-
-    memcpy(prevAge, &gSave.info.equips, sizeof(*prevAge));
-    if (EV_OOT_IS_SWORDLESS())
-        prevAge->buttonItems[0] = ITEM_NONE;
-    memcpy(&gSave.info.equips, nextAge, sizeof(*nextAge));
-
-    /* Reload bottles */
-    for (int i = 0; i < 3; ++i)
-    {
-        item = gSave.info.equips.buttonItems[i + 1];
-        if ((item >= ITEM_OOT_BOTTLE_EMPTY && item <= ITEM_OOT_POE) || comboIsTradeBottleOot(item))
-            item = gSave.info.inventory.items[gSave.info.equips.cButtonSlots[i]];
-        gSave.info.equips.buttonItems[i + 1] = item;
-    }
-
-    /* Fix sword */
-    if (gSave.info.equips.buttonItems[0] == ITEM_NONE)
-        EV_OOT_SET_SWORDLESS();
-    else
-        EV_OOT_UNSET_SWORDLESS();
-
-    /* Fix shield, if opposite age lost it */
-    if (gSave.info.equips.equipment.shields && !(gSave.info.inventory.equipment.shields & (1 << (gSave.info.equips.equipment.shields - 1))))
-        gSave.info.equips.equipment.shields = 0;
-}
-
-PATCH_FUNC(0x8006f804, TimeTravelUpdateEquipment);
-
 void Play_FastInit(GameState* gs)
 {
     u32 entrance;
@@ -857,23 +826,17 @@ void Play_FastInit(GameState* gs)
     gSaveContext.gameMode = GAMEMODE_NORMAL;
     gSaveContext.showTitleCard = TRUE;
 
-    /* Handle cross age spawns */
-    if (gComboCtx.isAgeSwapSpawn)
-    {
-        gComboCtx.isAgeSwapSpawn = 0;
-        TimeTravelUpdateEquipment();
-        gSave.age = !gSave.age;
-    }
-
     if (gComboCtx.isFwSpawn)
     {
+        u8 fwAge = gComboCtx.fwSpawnAge;
+        OotFaroreWind* fw;
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawOot(NULL, fwAge);
+
         gSaveContext.respawnFlag = 3;
         gComboCtx.isFwSpawn = 0;
-
-        /* Restore dungeon entrance respawn data. */
-        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(OotRespawnData));
-
-        OotFaroreWind* fw = &gSave.info.fw;
+        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[fwAge], sizeof(OotRespawnData));
+        fw = Age_GetFaroreOot(fwAge);
 
         if (fw->set)
         {

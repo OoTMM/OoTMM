@@ -5,173 +5,449 @@
     <npc location="Great Bay Coast Fisherman HP" npc="FISHERMAN_HEART_PIECE" item="HEART_PIECE" hint="FISHERMAN_GAME"/>
     <npc location="Great Bay Coast Owl Statue" npc="OWL_GREAT_BAY" item="OWL_GREAT_BAY"/>
     <collectible location="Great Bay Coast HP" flag="0x05" item="HEART_PIECE"/>
-    <xflag type="pot" location="Great Bay Coast Pot 1" slice="0x0" setup="0x0" room="0x0" actor="0x77" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot 2" slice="0x0" setup="0x0" room="0x0" actor="0x81" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 1" slice="0x0" setup="0x0" room="0x0" actor="0x7b" item="MAGIC_JAR_LARGE"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 2" slice="0x0" setup="0x0" room="0x0" actor="0x7d" item="BOMBS_5"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 3" slice="0x0" setup="0x0" room="0x0" actor="0x7c" item="FAIRY"/>
-    <xflag type="pot" location="Great Bay Coast Pot Platform 4" slice="0x0" setup="0x0" room="0x0" actor="0x85" item="ARROWS_20"/>
-    <xflag type="pot" location="Great Bay Coast Pot Ledge 1" slice="0x0" setup="0x0" room="0x0" actor="0x76" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot Ledge 2" slice="0x0" setup="0x0" room="0x0" actor="0x80" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 3" slice="0x0" setup="0x0" room="0x0" actor="0x78" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 2" slice="0x0" setup="0x0" room="0x0" actor="0x79" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 4" slice="0x0" setup="0x0" room="0x0" actor="0x82" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 1" slice="0x0" setup="0x0" room="0x0" actor="0x83" item="ARROWS_10"/>
-    <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 1" slice="0x0" setup="0x0" room="0x0" actor="0x3d" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 2" slice="0x0" setup="0x0" room="0x0" actor="0x3e" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 3" slice="0x0" setup="0x0" room="0x0" actor="0x3f" item="RUPEE_BLUE"/>
-    <xflag type="grass" location="Great Bay Coast Grass 1" slice="0x0" setup="0x0" room="0x0" actor="0x6e" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Grass 2" slice="0x0" setup="0x0" room="0x0" actor="0x6f" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Grass 3" slice="0x0" setup="0x0" room="0x0" actor="0x70" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Grass 4" slice="0x0" setup="0x0" room="0x0" actor="0x71" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Grass 5" slice="0x0" setup="0x0" room="0x0" actor="0x72" item="RANDOM"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Island" slice="0x0" setup="0x0" room="0x0" actor="0xa" item="NUT"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 1" slice="0x0" setup="0x0" room="0x0" actor="0xb" item="NUT"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 2" slice="0x0" setup="0x0" room="0x0" actor="0xc" item="NUT"/>
-    <xflag type="tree" location="Great Bay Coast Palm Tree Beach 3" slice="0x0" setup="0x0" room="0x0" actor="0xd" item="NUT"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water Cleared 1" slice="0x0" setup="0x0" room="0x0" actor="0x45" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water Cleared 2" slice="0x0" setup="0x0" room="0x0" actor="0x42" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 01" slice="0x0" setup="0x0" room="0x0" actor="0x43" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 02" slice="0x0" setup="0x0" room="0x0" actor="0x44" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 03" slice="0x0" setup="0x0" room="0x0" actor="0x46" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 04" slice="0x0" setup="0x0" room="0x0" actor="0x47" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 05" slice="0x0" setup="0x0" room="0x0" actor="0x48" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 06" slice="0x0" setup="0x0" room="0x0" actor="0x49" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 07" slice="0x0" setup="0x0" room="0x0" actor="0x4a" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 08" slice="0x0" setup="0x0" room="0x0" actor="0x4b" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 09" slice="0x0" setup="0x0" room="0x0" actor="0x4c" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 10" slice="0x0" setup="0x0" room="0x0" actor="0x4d" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 11" slice="0x0" setup="0x0" room="0x0" actor="0x4e" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 12" slice="0x0" setup="0x0" room="0x0" actor="0x4f" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 13" slice="0x0" setup="0x0" room="0x0" actor="0x50" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 14" slice="0x0" setup="0x0" room="0x0" actor="0x51" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 15" slice="0x0" setup="0x0" room="0x0" actor="0x52" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 16" slice="0x0" setup="0x0" room="0x0" actor="0x53" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 17" slice="0x0" setup="0x0" room="0x0" actor="0x54" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 18" slice="0x0" setup="0x0" room="0x0" actor="0x55" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 19" slice="0x0" setup="0x0" room="0x0" actor="0x56" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 20" slice="0x0" setup="0x0" room="0x0" actor="0x57" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 21" slice="0x0" setup="0x0" room="0x0" actor="0x58" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 22" slice="0x0" setup="0x0" room="0x0" actor="0x59" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 23" slice="0x0" setup="0x0" room="0x0" actor="0x5a" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 24" slice="0x0" setup="0x0" room="0x0" actor="0x5b" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 25" slice="0x0" setup="0x0" room="0x0" actor="0x5c" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 26" slice="0x0" setup="0x0" room="0x0" actor="0x5d" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 27" slice="0x0" setup="0x0" room="0x0" actor="0x5e" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Water 28" slice="0x0" setup="0x0" room="0x0" actor="0x67" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 1" slice="0x0" setup="0x0" room="0x0" actor="0x5f" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 2" slice="0x0" setup="0x0" room="0x0" actor="0x60" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 3" slice="0x0" setup="0x0" room="0x0" actor="0x61" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 4" slice="0x0" setup="0x0" room="0x0" actor="0x62" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Sand 5" slice="0x0" setup="0x0" room="0x0" actor="0x63" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Cliffs 1" slice="0x0" setup="0x0" room="0x0" actor="0x64" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Cliffs 2" slice="0x0" setup="0x0" room="0x0" actor="0x65" item="RANDOM"/>
-    <xflag type="rock" location="Great Bay Coast Rock Cliffs 3" slice="0x0" setup="0x0" room="0x0" actor="0x66" item="RANDOM"/>
-    <xflag type="butterfly" location="Great Bay Coast Common Butterfly 1" slice="0x0" setup="0x1" room="0x0" actor="0x85" item="FAIRY"/>
-    <xflag type="butterfly" location="Great Bay Coast Common Butterfly 2" slice="0x1" setup="0x1" room="0x0" actor="0x85" item="NOTHING"/>
-    <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 1" slice="0x2" setup="0x1" room="0x0" actor="0x85" item="NOTHING"/>
-    <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 2" slice="0x3" setup="0x1" room="0x0" actor="0x85" item="NOTHING"/>
-    <xflag type="soil" location="Great Bay Coast Soil" slice="0x0" setup="0x0" room="0x0" actor="0x0" item="RUPEE_RED"/>
+    <actor>
+      <match setup="0" actor="0x77"/>
+      <match setup="1" actor="0x11"/>
+      <xflag type="pot" location="Great Bay Coast Pot 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x81"/>
+      <match setup="1" actor="0x12"/>
+      <xflag type="pot" location="Great Bay Coast Pot 2" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7b"/>
+      <match setup="1" actor="0x0d"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 1" item="MAGIC_JAR_LARGE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7d"/>
+      <match setup="1" actor="0x0f"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 2" item="BOMBS_5"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7c"/>
+      <match setup="1" actor="0x0e"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 3" item="FAIRY"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x85"/>
+      <match setup="1" actor="0x10"/>
+      <xflag type="pot" location="Great Bay Coast Pot Platform 4" item="ARROWS_20"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x76"/>
+      <match setup="1" actor="0x14"/>
+      <xflag type="pot" location="Great Bay Coast Pot Ledge 1" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x80"/>
+      <match setup="1" actor="0x13"/>
+      <xflag type="pot" location="Great Bay Coast Pot Ledge 2" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x78"/>
+      <match setup="1" actor="0x16"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 3" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x79"/>
+      <match setup="1" actor="0x17"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 2" item="RECOVERY_HEART"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x82"/>
+      <match setup="1" actor="0x15"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 4" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x83"/>
+      <match setup="1" actor="0x1b"/>
+      <xflag type="pot" location="Great Bay Coast Pot Lower Cliffs 1" item="ARROWS_10"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3d"/>
+      <match setup="1" actor="0x19"/>
+      <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 1" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3e"/>
+      <match setup="1" actor="0x18"/>
+      <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 2" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x3f"/>
+      <match setup="1" actor="0x1a"/>
+      <xflag type="pot" location="Great Bay Coast Pot Upper Cliffs 3" item="RUPEE_BLUE"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x6e"/>
+      <match setup="1" actor="0x75"/>
+      <xflag type="grass" location="Great Bay Coast Grass 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x6f"/>
+      <match setup="1" actor="0x72"/>
+      <xflag type="grass" location="Great Bay Coast Grass 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x70"/>
+      <match setup="1" actor="0x76"/>
+      <xflag type="grass" location="Great Bay Coast Grass 3" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x71"/>
+      <match setup="1" actor="0x74"/>
+      <xflag type="grass" location="Great Bay Coast Grass 4" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x72"/>
+      <match setup="1" actor="0x73"/>
+      <xflag type="grass" location="Great Bay Coast Grass 5" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0a"/>
+      <match setup="1" actor="0x1f"/>
+      <xflag type="tree" location="Great Bay Coast Palm Tree Island" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0b"/>
+      <match setup="1" actor="0x21"/>
+      <xflag type="tree" location="Great Bay Coast Palm Tree Beach 1" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0c"/>
+      <match setup="1" actor="0x22"/>
+      <xflag type="tree" location="Great Bay Coast Palm Tree Beach 2" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x0d"/>
+      <match setup="1" actor="0x20"/>
+      <xflag type="tree" location="Great Bay Coast Palm Tree Beach 3" item="NUT"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x45"/>
+      <match setup="1" actor="0x56"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water Cleared 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x42"/>
+      <match setup="1" actor="0x59"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water Cleared 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x43"/>
+      <match setup="1" actor="0x5f"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 01" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x44"/>
+      <match setup="1" actor="0x5d"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 02" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x46"/>
+      <match setup="1" actor="0x4a"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 03" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x47"/>
+      <match setup="1" actor="0x4d"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 04" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x48"/>
+      <match setup="1" actor="0x4f"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 05" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x49"/>
+      <match setup="1" actor="0x51"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 06" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4a"/>
+      <match setup="1" actor="0x4e"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 07" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4b"/>
+      <match setup="1" actor="0x54"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 08" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4c"/>
+      <match setup="1" actor="0x52"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 09" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4d"/>
+      <match setup="1" actor="0x49"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 10" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4e"/>
+      <match setup="1" actor="0x4c"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 11" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x4f"/>
+      <match setup="1" actor="0x53"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 12" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x50"/>
+      <match setup="1" actor="0x5a"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 13" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x51"/>
+      <match setup="1" actor="0x60"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 14" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x52"/>
+      <match setup="1" actor="0x66"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 15" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x53"/>
+      <match setup="1" actor="0x63"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 16" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x54"/>
+      <match setup="1" actor="0x61"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 17" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x55"/>
+      <match setup="1" actor="0x62"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 18" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x56"/>
+      <match setup="1" actor="0x4b"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 19" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x57"/>
+      <match setup="1" actor="0x64"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 20" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x58"/>
+      <match setup="1" actor="0x5b"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 21" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x59"/>
+      <match setup="1" actor="0x55"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 22" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5a"/>
+      <match setup="1" actor="0x58"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 23" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5b"/>
+      <match setup="1" actor="0x57"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 24" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5c"/>
+      <match setup="1" actor="0x5c"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 25" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5d"/>
+      <match setup="1" actor="0x5e"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 26" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5e"/>
+      <match setup="1" actor="0x50"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 27" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x67"/>
+      <match setup="1" actor="0x65"/>
+      <xflag type="rock" location="Great Bay Coast Rock Water 28" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x5f"/>
+      <match setup="1" actor="0x69"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x60"/>
+      <match setup="1" actor="0x6b"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x61"/>
+      <match setup="1" actor="0x68"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 3" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x62"/>
+      <match setup="1" actor="0x6a"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 4" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x63"/>
+      <match setup="1" actor="0x67"/>
+      <xflag type="rock" location="Great Bay Coast Rock Sand 5" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x64"/>
+      <match setup="1" actor="0x6e"/>
+      <xflag type="rock" location="Great Bay Coast Rock Cliffs 1" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x65"/>
+      <match setup="1" actor="0x6d"/>
+      <xflag type="rock" location="Great Bay Coast Rock Cliffs 2" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x66"/>
+      <match setup="1" actor="0x6c"/>
+      <xflag type="rock" location="Great Bay Coast Rock Cliffs 3" item="RANDOM"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x40"/>
+      <match setup="1" actor="0x85"/>
+      <xflag type="butterfly" location="Great Bay Coast Common Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Great Bay Coast Common Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 1" slice="2" item="NOTHING"/>
+      <xflag type="butterfly" location="Great Bay Coast Cleared Butterfly 2" slice="3" item="NOTHING"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x00"/>
+      <match setup="1" actor="0x00"/>
+      <xflag type="soil" location="Great Bay Coast Soil" item="RUPEE_RED"/>
+    </actor>
+    <actor>
+      <match setup="0" actor="0x7a"/>
+      <match setup="1" actor="0x02"/>
+      <xflag type="gossip" location="Great Bay Coast Gossip Fairy" slice="0" item="FAIRY"/>
+      <xflag type="gossip-big" location="Great Bay Coast Gossip Big Fairy" slice="1" item="FAIRY_BIG"/>
+    </actor>
   </scene>
   <scene id="LABORATORY">
     <npc location="Laboratory Zora Song" npc="SONG_ZORA" item="SONG_ZORA"/>
     <npc location="Laboratory Fish HP" npc="LAB_FISH_HEART_PIECE" item="HEART_PIECE"/>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0x37">
     <chest location="Great Bay Coast Fisherman Grotto" flag="0x17" item="RUPEE_RED"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 01" slice="0x0" setup="0x0" room="0x37" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 02" slice="0x0" setup="0x0" room="0x37" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 03" slice="0x0" setup="0x0" room="0x37" actor="0x2" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 04" slice="0x0" setup="0x0" room="0x37" actor="0x3" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 05" slice="0x0" setup="0x0" room="0x37" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 06" slice="0x0" setup="0x0" room="0x37" actor="0x6" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 07" slice="0x0" setup="0x0" room="0x37" actor="0xa" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 08" slice="0x0" setup="0x0" room="0x37" actor="0xb" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 09" slice="0x0" setup="0x0" room="0x37" actor="0xc" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 10" slice="0x0" setup="0x0" room="0x37" actor="0xe" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 11" slice="0x0" setup="0x0" room="0x37" actor="0x10" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 12" slice="0x0" setup="0x0" room="0x37" actor="0x11" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 13" slice="0x0" setup="0x0" room="0x37" actor="0x12" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 14" slice="0x0" setup="0x0" room="0x37" actor="0x13" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 01" actor="0x0" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 02" actor="0x1" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 03" actor="0x2" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 04" actor="0x3" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 05" actor="0x5" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 06" actor="0x6" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 07" actor="0xa" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 08" actor="0xb" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 09" actor="0xc" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 10" actor="0xe" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 11" actor="0x10" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 12" actor="0x11" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 13" actor="0x12" item="RANDOM"/>
+    <xflag type="grass" location="Great Bay Coast Fisherman Grotto Grass 14" actor="0x13" item="RANDOM"/>
   </scene>
-  <scene id="GROTTOS">
+  <scene id="GROTTOS" room="0xf">
     <cow location="Great Bay Coast Cow Front" flag="0x15" item="MILK"/>
     <cow location="Great Bay Coast Cow Back" flag="0x16" item="MILK"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 01" slice="0x0" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 02" slice="0x1" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 03" slice="0x2" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 04" slice="0x3" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 05" slice="0x4" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 06" slice="0x5" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 07" slice="0x6" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 08" slice="0x7" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 09" slice="0x8" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 10" slice="0x9" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 11" slice="0xa" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 12" slice="0xb" setup="0x0" room="0xf" actor="0x0" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 13" slice="0x0" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 14" slice="0x1" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 15" slice="0x2" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 16" slice="0x3" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 17" slice="0x4" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 18" slice="0x5" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 19" slice="0x6" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 20" slice="0x7" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 21" slice="0x8" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 22" slice="0x9" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 23" slice="0xa" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 24" slice="0xb" setup="0x0" room="0xf" actor="0x1" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 25" slice="0x0" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 26" slice="0x1" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 27" slice="0x2" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 28" slice="0x3" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 29" slice="0x4" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 30" slice="0x5" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 31" slice="0x6" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 32" slice="0x7" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 33" slice="0x8" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 34" slice="0x9" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 35" slice="0xa" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 36" slice="0xb" setup="0x0" room="0xf" actor="0x4" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 37" slice="0x0" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 38" slice="0x1" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 39" slice="0x2" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 40" slice="0x3" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 41" slice="0x4" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 42" slice="0x5" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 43" slice="0x6" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 44" slice="0x7" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 45" slice="0x8" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 46" slice="0x9" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 47" slice="0xa" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 48" slice="0xb" setup="0x0" room="0xf" actor="0x5" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 49" slice="0x0" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 50" slice="0x1" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 51" slice="0x2" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 52" slice="0x3" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 53" slice="0x4" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 54" slice="0x5" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 55" slice="0x6" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 56" slice="0x7" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 57" slice="0x8" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 58" slice="0x9" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 59" slice="0xa" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 60" slice="0xb" setup="0x0" room="0xf" actor="0x8" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 61" slice="0x0" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 62" slice="0x1" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 63" slice="0x2" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 64" slice="0x3" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 65" slice="0x4" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 66" slice="0x5" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 67" slice="0x6" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 68" slice="0x7" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 69" slice="0x8" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 70" slice="0x9" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 71" slice="0xa" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="grass" location="Great Bay Cow Grotto Grass 72" slice="0xb" setup="0x0" room="0xf" actor="0x9" item="RANDOM"/>
-    <xflag type="hive" location="Great Bay Cow Grotto Hive" slice="0x0" setup="0x0" room="0xf" actor="0x2" item="NOTHING"/>
-    <xflag type="butterfly" location="Great Bay Cow Grotto Butterfly 1" slice="0x0" setup="0x0" room="0xf" actor="0x6" item="FAIRY"/>
-    <xflag type="butterfly" location="Great Bay Cow Grotto Butterfly 2" slice="0x1" setup="0x0" room="0xf" actor="0x6" item="NOTHING"/>
-    <xflag type="butterfly" location="Great Bay Cow Grotto Butterfly 3" slice="0x2" setup="0x0" room="0xf" actor="0x6" item="NOTHING"/>
+    <actor actor="0x0">
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 01" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 02" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 03" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 04" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 05" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 06" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 07" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 08" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 09" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 10" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 11" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 12" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x1">
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 13" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 14" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 15" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 16" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 17" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 18" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 19" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 20" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 21" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 22" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 23" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 24" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x4">
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 25" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 26" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 27" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 28" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 29" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 30" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 31" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 32" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 33" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 34" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 35" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 36" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x5">
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 37" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 38" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 39" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 40" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 41" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 42" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 43" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 44" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 45" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 46" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 47" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 48" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x8">
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 49" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 50" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 51" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 52" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 53" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 54" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 55" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 56" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 57" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 58" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 59" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 60" slice="0xb" item="RANDOM"/>
+    </actor>
+    <actor actor="0x9">
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 61" slice="0x0" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 62" slice="0x1" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 63" slice="0x2" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 64" slice="0x3" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 65" slice="0x4" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 66" slice="0x5" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 67" slice="0x6" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 68" slice="0x7" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 69" slice="0x8" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 70" slice="0x9" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 71" slice="0xa" item="RANDOM"/>
+      <xflag type="grass" location="Great Bay Cow Grotto Grass 72" slice="0xb" item="RANDOM"/>
+    </actor>
+    <xflag type="hive" location="Great Bay Cow Grotto Hive" actor="0x2" item="NOTHING"/>
+    <actor actor="0x6">
+      <xflag type="butterfly" location="Great Bay Cow Grotto Butterfly 1" slice="0" item="FAIRY"/>
+      <xflag type="butterfly" location="Great Bay Cow Grotto Butterfly 2" slice="1" item="NOTHING"/>
+      <xflag type="butterfly" location="Great Bay Cow Grotto Butterfly 3" slice="2" item="NOTHING"/>
+    </actor>
   </scene>
 </checks>

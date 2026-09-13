@@ -86,64 +86,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeScale, 100, ICHAIN_CONTINUE),         ICHAIN_F32(cullingVolumeDownward, 120, ICHAIN_STOP),
 };
 
-void EnKusa_Aliases(Xflag* xflag)
-{
-    switch (xflag->sceneId)
-    {
-    case SCE_OOT_MARKET_CHILD_NIGHT:
-        xflag->sceneId = SCE_OOT_MARKET_CHILD_DAY;
-        xflag->id += 16;
-        break;
-    case SCE_OOT_KAKARIKO_VILLAGE:
-        switch (xflag->setupId)
-        {
-        case 1: xflag->id += 5; break;
-        case 2: xflag->id += 12; break;
-        case 3: xflag->id += 14; break;
-        }
-        xflag->setupId = 0;
-        break;
-    case SCE_OOT_ZORA_RIVER:
-        if (xflag->setupId == 2)
-        {
-            xflag->id += 28;
-            xflag->setupId = 0;
-        }
-        break;
-    case SCE_OOT_KOKIRI_FOREST:
-        if (xflag->setupId == 3)
-        {
-            xflag->setupId = 2;
-            xflag->id -= 7;
-        }
-        if (xflag->setupId == 0 && xflag->roomId == 2 && xflag->id == 9)
-        {
-            xflag->roomId = 0;
-            xflag->id = 62;
-        }
-        break;
-    case SCE_OOT_LAKE_HYLIA:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            xflag->id -= 8;
-        }
-        break;
-    case SCE_OOT_LOST_WOODS:
-        if (xflag->setupId == 2)
-        {
-            xflag->setupId = 0;
-            switch (xflag->roomId)
-            {
-            case 2: xflag->id -= 2; break;
-            case 7: xflag->id -= 1; break;
-            case 8: xflag->id -= 1; break;
-            }
-        }
-        break;
-    }
-}
-
 void EnKusa_SetupAction(EnKusa* this, EnKusaActionFunc actionFunc) {
     this->timer = 0;
     this->actionFunc = actionFunc;
@@ -173,9 +115,9 @@ s32 EnKusa_SnapToFloor(EnKusa* this, PlayState* play, f32 yOffset) {
 void EnKusa_DropCollectible(EnKusa* this, PlayState* play) {
     s16 dropParams;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return;
     }
 
@@ -283,8 +225,9 @@ void EnKusa_InitCollider(Actor* thisx, PlayState* play) {
 void EnKusa_Init(Actor* thisx, PlayState* play) {
     EnKusa* this = (EnKusa*)thisx;
 
-    if (Xflag_Init(&this->xflag, thisx, play))
-        EnKusa_Aliases(&this->xflag);
+    this->xflag = Xflag_InitEx(thisx, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
@@ -536,6 +479,9 @@ void EnKusa_Regrow(EnKusa* this, PlayState* play) {
 void EnKusa_Update(Actor* thisx, PlayState* play) {
     EnKusa* this = (EnKusa*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->timer++;
 
     this->actionFunc(this, play);
@@ -564,10 +510,7 @@ void EnKusa_Draw(Actor* thisx, PlayState* play)
     int alt;
 
     this = (EnKusa*)thisx;
-    if (Xflag_IsShuffled(&this->xflag))
-        comboXflagItemOverride(&o, &this->xflag, 0);
-    else
-        o.gi = 0;
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
 
     /* Prepare */
     if ((this->actor.params & 3) == 0)

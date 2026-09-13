@@ -242,4 +242,6 @@ typedef union {
     /* Command: 0x1E */ SCmdMapDataChests       mapDataChests;
 } SceneCmd; // size = 0x8
 
+void Scene_ApplyHumanAgeGameplayKeep(ObjectContext* objectCtx, s32 isAdult);
+
 #endif

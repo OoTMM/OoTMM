@@ -1,8 +1,8 @@
-import type { Game, Settings } from '@ootmm/core';
+import type { Settings } from '@ootmm/core';
 import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 
 import { concatUint8Arrays } from 'uint8array-extras';
-import { CHECKS_BY_LOCATION, NPC, SCENES } from '@ootmm/core';
+import { CHECKS_BY_LOCATION } from '@ootmm/data';
 import { makeLocation } from '@ootmm/logic';
 
 import { gi, playerId } from './util';

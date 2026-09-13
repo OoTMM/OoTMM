@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/config.h>
 #include <combo/entrance.h>
 #include <combo/context.h>
@@ -103,19 +104,11 @@ static void KaleidoScope_GoBackToSpawn(PlayState* play, int age)
 {
     u32 entrance = gComboConfig.entrancesSpawns[age];
 
-    if (gOotSave.age != age)
-        Save_SwapFaroreOot();
-
-#if defined(GAME_OOT)
-    play->linkAgeOnLoad = age;
-#endif
-
 #if defined(GAME_MM)
-    if (gOotSave.age != age)
-        gComboCtx.isAgeSwapSpawn = 1;
-
-    /* Assume spawn is always an OoT spawn */
+    Age_SetRawOot(NULL, age);
     entrance |= MASK_FOREIGN_ENTRANCE;
+#else
+    Age_SetOot(play, age);
 #endif
 
     comboTransition(play, entrance);
@@ -148,6 +141,16 @@ static int KaleidoScope_HandleAfterSave(PlayState* play)
     return 0;
 }
 
+static int KaleidoScope_CanReturnToEitherSpawn(void)
+{
+    if (!gSharedCustomSave.oot.hasTimeTraveledAtTemple)
+        return FALSE;
+    if (gOotSave.age == Age_GetStarting())
+        return FALSE;
+
+    return TRUE;
+}
+
 static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
 {
     u16 buttons = play->state.input[0].press.button;
@@ -161,9 +164,9 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
         else if (play->msgCtx.choiceIndex == 1)
         {
             PlaySound(NA_SE_SY_DECIDE);
-            if (!gSharedCustomSave.hasBeenChildAndAdult)
+            if (!KaleidoScope_CanReturnToEitherSpawn())
             {
-                KaleidoScope_GoBackToSpawn(play, gOotSave.age);
+                KaleidoScope_GoBackToSpawn(play, Age_GetStarting());
                 return 1;
             }
             else

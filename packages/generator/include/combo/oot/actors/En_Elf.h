@@ -44,15 +44,15 @@ struct Actor_EnElf
     /* 0x02BC */ EnElfActionFunc actionFunc;
 
     /* Extended flags */
-    /* 0x02C0 */ Xflag xflag;
-    /* 0x02C6 */ s16 itemGiven;
-    /* 0x02C8 */ s16 extendedGi;
-    /* 0x02CA */ s16 extendedGiDraw;
+    /* 0x02C0 */ XflagID xflag;
+    /* 0x02C2 */ s16 itemGiven;
+    /* 0x02C4 */ s16 extendedGi;
+    /* 0x02C6 */ s16 extendedGiDraw;
 };
 
 void EnElf_ItemQuery(ComboItemQuery *q, Actor_EnElf *this);
 void EnElf_Draw(Actor_EnElf *this, PlayState *play);
 
-_Static_assert(sizeof(Actor_EnElf) == 0x02CC, "OoT Actor_EnElf size is wrong");
+_Static_assert(sizeof(Actor_EnElf) == 0x2c8, "OoT Actor_EnElf size is wrong");
 
 #endif

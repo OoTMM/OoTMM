@@ -7,110 +7,179 @@
 #include <combo/play.h>
 #include <combo/xflags.h>
 
-static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSetups, u32 paddrTableRooms)
-{
-    u16 setupIndex;
-    u16 roomIndex;
+#define CACHE_SIZE 32
 
-    setupIndex = IO_ReadPhysU16(paddrTableScenes + xf->sceneId * 2) + xf->setupId;
-    roomIndex = IO_ReadPhysU16(paddrTableSetups + setupIndex * 2) + (xf->roomId * 12) + xf->sliceId;
-    return IO_ReadPhysI16(paddrTableRooms + roomIndex * 2) + xf->id;
+typedef struct
+{
+    u32 key;
+    u16 id;
+    u16 zero;
+}
+XflagCheckData;
+
+static u32 sXflagDevAddr;
+static XflagCheckData sCache[CACHE_SIZE];
+static int sCacheIndex;
+
+void Xflag_InitSystem(void)
+{
+    DmaEntry e;
+
+    comboDmaLookup(&e, COMBO_VROM_XFLAGS);
+    sXflagDevAddr = e.pstart | PI_DOM1_ADDR2;
+    for (int i = 0; i < CACHE_SIZE; ++i)
+    {
+        sCache[i].key = 0xffffffff;
+        sCache[i].id = 0;
+        sCache[i].zero = 0;
+    }
+    sCacheIndex = 0;
 }
 
-static u16 bitPosLookupOot(const Xflag* xf)
+static u32 Xflag_GetKey(const Xflag* xf)
 {
-    static u32 paddrTableScenes;
-    static u32 paddrTableSetups;
-    static u32 paddrTableRooms;
-    DmaEntry dmaEntry;
+    u32 key;
 
-    /* Init */
-    if (paddrTableScenes == 0)
+    key = 0;
+    key |= xf->id;
+    key |= (xf->roomId & 0x3f) << 8;
+    key |= (xf->setupId & 0x3) << 16;
+    key |= (xf->sceneId & 0xff) << 18;
+
+#if defined(GAME_MM)
+    key |= 0x80000000;
+#endif
+
+    return key;
+}
+
+XflagID Xflag_LookupKey(u32 key)
+{
+    u32 cartKey;
+    u16 cartId;
+    u32 min;
+    u32 max;
+    u32 cursor;
+
+    /* Cache lookup */
+    for (int i = 0; i < CACHE_SIZE; ++i)
     {
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_SCENES_ADDR);
-        paddrTableScenes = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_SETUPS_ADDR);
-        paddrTableSetups = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_ROOMS_ADDR);
-        paddrTableRooms = dmaEntry.pstart;
+        if (sCache[i].key == key)
+            return sCache[i].id;
     }
 
-    return bitPosLookup(xf, paddrTableScenes, paddrTableSetups, paddrTableRooms);
-}
+    /* Cache lookup did not work, binary search */
+    min = 0;
+    max = XFLAGS_COUNT_IDS;
 
-static u16 bitPosLookupMm(const Xflag* xf)
-{
-    static u32 paddrTableScenes;
-    static u32 paddrTableSetups;
-    static u32 paddrTableRooms;
-    DmaEntry dmaEntry;
-
-    /* Init */
-    if (paddrTableScenes == 0)
+    for (;;)
     {
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_SCENES_ADDR);
-        paddrTableScenes = dmaEntry.pstart;
+        if (min >= max)
+        {
+            cartId = XFLAGID_NONE;
+            break;
+        }
 
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_SETUPS_ADDR);
-        paddrTableSetups = dmaEntry.pstart;
+        cursor = (min + max) / 2;
+        cartKey = IO_ReadPhysU32(sXflagDevAddr + cursor * sizeof(XflagCheckData) + 0x00);
+        if (cartKey == key)
+        {
+            cartId = IO_ReadPhysU16(sXflagDevAddr + cursor * sizeof(XflagCheckData) + 0x04);
+            break;
+        }
 
-        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_ROOMS_ADDR);
-        paddrTableRooms = dmaEntry.pstart;
+        if (key > cartKey)
+            min = cursor + 1;
+        else
+            max = cursor;
     }
 
-    return bitPosLookup(xf, paddrTableScenes, paddrTableSetups, paddrTableRooms);
+    sCache[sCacheIndex].key = key;
+    sCache[sCacheIndex].id = cartId;
+    sCacheIndex = (sCacheIndex + 1) % CACHE_SIZE;
+    return cartId;
 }
 
-int comboXflagsGetOot(const Xflag* xf)
+XflagID Xflag_LookupSlice(XflagID id, int sliceId)
 {
-    u16 bitPos;
+    u32 key;
+
+    if (id == XFLAGID_NONE)
+        return XFLAGID_NONE;
+    if (sliceId == 0)
+        return id;
+
+    key = 0x40000000 | ((sliceId & 0x3f) << 16) | id;
+    return Xflag_LookupKey(key);
+}
+
+XflagID Xflag_Lookup(const Xflag* xf)
+{
+    XflagID id;
+    u32 key;
 
     if (xf->sceneId == 0xff)
+        return XFLAGID_NONE;
+    key = Xflag_GetKey(xf);
+    id = Xflag_LookupKey(key);
+    id = Xflag_LookupSlice(id, xf->sliceId);
+    return id;
+}
+
+int Xflag_Get(XflagID id)
+{
+    if (id == XFLAGID_NONE)
         return 1;
-    bitPos = bitPosLookupOot(xf);
-    return BITMAP8_GET(gSharedCustomSave.oot.xflags, bitPos);
+    return BITMAP8_GET(gSharedCustomSave.xflags, id);
 }
 
-int comboXflagsGetMm(const Xflag* xf)
+void Xflag_Set(XflagID id)
 {
-    u16 bitPos;
-
-    if (xf->sceneId == 0xff)
-        return 1;
-    bitPos = bitPosLookupMm(xf);
-    return BITMAP8_GET(gSharedCustomSave.mm.xflags, bitPos);
-}
-
-void comboXflagsSetOot(const Xflag* xf)
-{
-    u16 bitPos;
-
-    if (xf->sceneId == 0xff)
+    if (id == XFLAGID_NONE)
         return;
-    bitPos = bitPosLookupOot(xf);
-    BITMAP8_SET(gSharedCustomSave.oot.xflags, bitPos);
+    BITMAP8_SET(gSharedCustomSave.xflags, id);
 }
 
-void comboXflagsSetMm(const Xflag* xf)
+int Xflag_GetIndirect(const Xflag* xf)
 {
-    u16 bitPos;
+    return Xflag_Get(Xflag_Lookup(xf));
+}
 
-    if (xf->sceneId == 0xff)
-        return;
-    bitPos = bitPosLookupMm(xf);
-    BITMAP8_SET(gSharedCustomSave.mm.xflags, bitPos);
+void Xflag_SetIndirect(const Xflag* xf)
+{
+    Xflag_Set(Xflag_Lookup(xf));
+}
+
+void Xflag_ItemQuery(ComboItemQuery* q, XflagID id, s16 gi)
+{
+    bzero(q, sizeof(*q));
+    if (id == XFLAGID_NONE)
+    {
+        q->ovType = OV_NONE;
+    }
+    else
+    {
+        q->ovType = OV_XFLAG;
+        q->roomId = (id >> 8) & 0xff;
+        q->id = id & 0xff;
+    }
+    q->gi = gi;
+}
+
+void Xflag_ItemOverride(ComboItemOverride* o, XflagID id, s16 gi)
+{
+    ComboItemQuery q;
+
+    Xflag_ItemQuery(&q, id, gi);
+    comboItemOverride(o, &q);
 }
 
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
 {
-    bzero(q, sizeof(*q));
-    q->ovType = OV_XFLAG0 + xf->sliceId;
-    q->sceneId = xf->sceneId;
-    q->roomId = (xf->roomId | ((xf->setupId & 3) << 6));
-    q->id = xf->id;
-    q->gi = gi;
+    XflagID id;
+
+    id = Xflag_Lookup(xf);
+    Xflag_ItemQuery(q, id, gi);
 }
 
 void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
@@ -121,14 +190,19 @@ void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
     comboItemOverride(o, &q);
 }
 
+XflagID Xflag_InitEx(Actor* actor, PlayState* play)
+{
+    Xflag xf;
+
+    if (g.xflagOverride)
+        return g.xflagId;
+
+    Xflag_Init(&xf, actor, play);
+    return Xflag_Lookup(&xf);
+}
+
 int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
 {
-    if (g.xflagOverride)
-    {
-        memcpy(xf, &g.xflag, sizeof(*xf));
-        return FALSE;
-    }
-
     /* Check for an actor index of 0xff, meaning NO XFLAG */
     if (actor->actorIndex == 0xff)
     {
@@ -144,9 +218,9 @@ int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
 
 #if defined(GAME_OOT)
     xf->sceneId = Play_ExpandMQ(play, xf->sceneId);
-
-    if (xf->sceneId == SCE_OOT_GROTTOS)
+    switch (xf->sceneId)
     {
+    case SCE_OOT_GROTTOS:
         switch (xf->roomId)
         {
         case 0x00:
@@ -176,6 +250,18 @@ int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
             }
             break;
         }
+        break;
+    case SCE_OOT_FAIRY_FOUNTAIN:
+        switch (gLastScene)
+        {
+        case SCE_OOT_HYRULE_FIELD: xf->roomId = 0x20; break;
+        case SCE_OOT_ZORA_RIVER: xf->roomId = 0x21; break;
+        case SCE_OOT_SACRED_FOREST_MEADOW: xf->roomId = 0x22; break;
+        case SCE_OOT_ZORA_DOMAIN: xf->roomId = 0x23; break;
+        case SCE_OOT_GERUDO_FORTRESS: xf->roomId = 0x24; break;
+        default: UNREACHABLE(); break;
+        }
+        break;
     }
 #endif
 
@@ -218,9 +304,25 @@ int Xflag_IsValid(Xflag* xf)
     return TRUE;
 }
 
+int Xflag_IsValidEx(XflagID id)
+{
+    ComboItemOverride o;
+
+    if (id == XFLAGID_NONE)
+        return FALSE;
+
+    Xflag_ItemOverride(&o, id, GI_NONE);
+    return (o.gi != GI_NONE);
+}
+
 int Xflag_IsShuffled(Xflag* xf)
 {
-    return Xflag_IsValid(xf) && !comboXflagsGet(xf);
+    return Xflag_IsValid(xf) && !Xflag_GetIndirect(xf);
+}
+
+int Xflag_IsShuffledEx(XflagID id)
+{
+    return Xflag_IsValidEx(id) && !Xflag_Get(id);
 }
 
 void Xflag_Clear(Xflag* xf)

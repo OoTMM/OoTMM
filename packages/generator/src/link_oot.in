@@ -21,6 +21,12 @@ osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 Audio_SetMainBgmTempoFreqAfterFanfare = 0x800c64a0;
+Actor_GetScreenPos = 0x80022b14;
+Color_RGBA8_Copy = 0x800646c8;
+CollisionCheck_SetInfo2 = 0x80050370;
+func_8005B198 = 0x80049da4;
+Sfx_PlaySfxAtPos = 0x80064780;
+Collider_SetCylinderPosition = 0x80050b44;
 
 gAudioLoadStatusFontSample = 0x80128a68;
 
@@ -53,7 +59,7 @@ AudioLoad_InitTable = 0x800b70c8;
 Audio_SetFileSelectSettings = 0x800c7420;
 Magic_Refill = 0x80072500;
 
-ActorRemove = 0x80025648;
+Actor_Delete = 0x80025648;
 
 Play_InitEnvironment = 0x8009cda0;
 gWeatherMode = 0x800f1640;

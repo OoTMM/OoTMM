@@ -153,9 +153,8 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
                     childParams = (((this->drawType & 0xF0) << 4) | (this->actor.params + 1));
                 }
 
-                memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
-                g.xflag.sliceId = i + 1;
                 g.xflagOverride = TRUE;
+                g.xflagId = Xflag_LookupSlice(this->xflagSpawner, i + 1);
                 childWood = (EnWood02*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_WOOD02,
                                                           childPos.x, childPos.y, childPos.z, this->actor.world.rot.x,
                                                           *childSpawnAngle, 0, childParams);
@@ -173,68 +172,6 @@ void EnWood02_SpawnOffspring(EnWood02* this, PlayState* play) {
     }
 }
 
-static void EnWood02_AliasBush(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_HYRULE_FIELD:
-        if (xf->setupId == 2)
-        {
-            xf->setupId = 1;
-            switch (xf->id)
-            {
-            case 54: xf->id = 38; break;
-            case 55: xf->id = 39; break;
-            case 56: xf->id = 40; break;
-            case 57: xf->id = 45; break;
-            case 58: xf->id = 46; break;
-            case 59: xf->id = 43; break;
-            default: Xflag_Clear(xf); break;
-            }
-        }
-        break;
-    case SCE_OOT_ZORA_FOUNTAIN:
-        xf->setupId = 0;
-        break;
-    }
-}
-
-static void EnWood02_AliasTree(Xflag* xf)
-{
-    switch (xf->sceneId)
-    {
-    case SCE_OOT_MARKET_CHILD_NIGHT:
-        xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
-        xf->id = 14;
-        break;
-    case SCE_OOT_HYRULE_FIELD:
-        if (xf->setupId == 2 && xf->id != 66)
-        {
-            xf->setupId = 1;
-            switch (xf->id)
-            {
-            case 38: xf->id = 33; break;
-            case 39: xf->id = 34; break;
-            case 40: xf->id = 35; break;
-            case 41: xf->id = 32; break;
-            case 42: xf->id = 31; break;
-            case 43: xf->id = 29; break;
-            case 44: xf->id = 36; break;
-            case 45: xf->id = 37; break;
-            case 46: xf->id = 49; break;
-            case 60: xf->id = 30; break;
-            case 61: xf->id = 62; break;
-            case 62: xf->id = 63; break;
-            case 63: xf->id = 64; break;
-            case 64: xf->id = 65; break;
-            case 65: xf->id = 61; break;
-            default: Xflag_Clear(xf); break;
-            }
-        }
-        break;
-    }
-}
-
 void EnWood02_Init(Actor* thisx, PlayState* play2) {
     s16 spawnType;
     f32 actorScale;
@@ -245,13 +182,10 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
     f32 floorY;
     s16 extraRot;
 
-    if (Xflag_Init(&this->xflag, thisx, play))
-    {
-        if (EnWood02_IsTree(this))
-            EnWood02_AliasTree(&this->xflag);
-        else
-            EnWood02_AliasBush(&this->xflag);
-    }
+    this->xflagSpawner = Xflag_InitEx(thisx, play);
+    this->xflag = this->xflagSpawner;
+    if (!Xflag_IsValidEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     spawnType = WOOD_SPAWN_NORMAL;
     actorScale = 1.0f;
@@ -344,7 +278,7 @@ void EnWood02_Init(Actor* thisx, PlayState* play2) {
     }
 
     /* Override tree type */
-    if (Xflag_IsValid(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
         if (EnWood02_IsTree(this))
             this->drawType = WOOD_DRAW_TREE_OVAL;
@@ -399,9 +333,9 @@ void EnWood02_Destroy(Actor* thisx, PlayState* play) {
 
 static int EnWood02_DropCustom(EnWood02* this, PlayState* play)
 {
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE && !Xflag_Get(this->xflag))
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
         return true;
     }
     return false;
@@ -520,13 +454,13 @@ int EnWood02_CAMC(EnWood02* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (Xflag_Get(this->xflag))
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
@@ -557,7 +491,7 @@ void EnWood02_Draw(Actor* thisx, PlayState* play) {
     }
 
     csmc = -1;
-    if (Xflag_IsValid(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
         csmc = EnWood02_CAMC(this, play);
         if (csmc == CSMC_NORMAL)

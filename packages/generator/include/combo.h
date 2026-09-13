@@ -11,6 +11,7 @@
 
 # include <ultra64.h>
 # include <combo/special_conds.h>
+# include <combo/subs.h>
 # include <combo/seqcmd.h>
 # include <combo/config.h>
 # include <combo/audio.h>
@@ -47,7 +48,7 @@
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
 # include <combo/common/cosmetics.h>
-# include <combo/common/actors/En_Tubo_Trap.h>
+# include <combo/message.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/sequence.h>
@@ -59,12 +60,12 @@
 #  include <combo/oot/actors/En_Ex_Ruppy.h>
 #  include <combo/oot/actors/En_Diving_Game.h>
 #  include <combo/oot/actors/En_Elf.h>
-#  include <combo/oot/actors/Shot_Sun.h>
 #  include <combo/oot/actors/Custom_Torch2.h>
 #  include <combo/oot/actors/Demo_Effect.h>
 # endif
 
 # if defined(GAME_MM)
+#  include <combo/mm/cutscene.h>
 #  include <combo/mm/play.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
@@ -128,7 +129,8 @@ extern u16 gBlastMaskDelayAcc;
 /* Switch */
 NORETURN void comboGameSwitch(PlayState* play, u32 entrance);
 
-void Save_SwapFaroreOot(void);
+u8 comboMmFwAge(void);
+OotFaroreWind* Age_GetFaroreOot(int age);
 
 extern const u8 kMaxSongNotes[];
 
