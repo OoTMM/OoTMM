@@ -1779,25 +1779,6 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         postLimbDraw = Player_PostLimbDrawGameplayWrapper;
 
     sPlayerOverrideLimb = overrideLimbDraw;
-    if (player->transformation == MM_PLAYER_FORM_HUMAN && comboIsLinkAdult())
-    {
-        s32 slot = player->actor.objectSlot;
-        if (slot >= 0 && slot < ARRAY_COUNT(play->objectCtx.slots))
-        {
-            u8* segment = play->objectCtx.slots[slot].segment;
-            if (segment)
-            {
-                u32 addr = *(u32*)(segment + 0x5420);
-                if ((addr >> 24) == 0x06)
-                {
-                    gSegments[6] = OS_K0_TO_PHYSICAL(segment);
-                    gSPSegment(POLY_OPA_DISP++, 0x06, segment);
-                    gSPSegment(POLY_XLU_DISP++, 0x06, segment);
-                    skeleton = (void**)(segment + (addr & 0x00ffffff));
-                }
-            }
-        }
-    }
     SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, Player_OverrideLimbWrapper, postLimbDraw, &player->actor, lod);
 
     if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != GAMEMODE_END_CREDITS)
