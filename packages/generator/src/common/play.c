@@ -93,8 +93,10 @@ static u32 Play_SetDefaultGrottoRespawn(void)
 void Play_TransitionDone(PlayState* play)
 {
     u32 entrance;
+    u32 originalEntrance;
     u32 fullEntrance;
     s32 override;
+    u8 age;
 
     /* Resolve extended entrance */
     entrance = play->nextEntrance;
@@ -128,22 +130,37 @@ void Play_TransitionDone(PlayState* play)
     /* Handle transition override */
     if (gIsEntranceOverride)
     {
+        originalEntrance = fullEntrance;
         gIsEntranceOverride = 0;
         override = comboEntranceOverride(Play_EntranceForOverride(entrance));
         if (override != -1)
+        {
             entrance = (u32)override;
+            fullEntrance = entrance;
+        }
 #if defined(GAME_MM)
         g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
 #endif
     }
+    else
+    {
+        originalEntrance = 0xffffffff;
+    }
 
-    entrance = Play_ApplyCustomEntrance(entrance);
-
-    /* Send entrance info */
+    /* Send tracking infos */
 #if defined(GAME_MM)
     fullEntrance ^= MASK_FOREIGN_ENTRANCE;
+    if (originalEntrance != 0xffffffff)
+        originalEntrance ^= MASK_FOREIGN_ENTRANCE;
+    age = gOotSave.age;
 #endif
-    Multi_InfoEntrance(0xffffffff, fullEntrance, 0);
+
+#if defined(GAME_OOT)
+    age = play->linkAgeOnLoad;
+#endif
+    Multi_InfoEntrance(originalEntrance, fullEntrance, age);
+
+    entrance = Play_ApplyCustomEntrance(entrance);
 
     if (entrance & MASK_FOREIGN_ENTRANCE)
     {
