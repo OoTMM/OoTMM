@@ -13,8 +13,8 @@
     <xflag type="pot" location="Gerudo Fortress Pot Jail 1 3" room="0x2" actor="0x8" item="RUPEE_RED"/>
     <xflag type="pot" location="Gerudo Fortress Pot Kitchen 1" room="0x3" actor="0x5" item="ARROWS_10"/>
     <xflag type="pot" location="Gerudo Fortress Pot Kitchen 2" room="0x3" actor="0x6" item="RECOVERY_HEART"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 3 1" room="0x4" actor="0x9" item="RUPEE_BLUE"/>
-    <xflag type="pot" location="Gerudo Fortress Pot Jail 3 2" room="0x4" actor="0xa" item="RECOVERY_HEART"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 4 1" room="0x4" actor="0x9" item="RUPEE_BLUE"/>
+    <xflag type="pot" location="Gerudo Fortress Pot Jail 4 2" room="0x4" actor="0xa" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Gerudo Fortress Pot Jail 2 1" room="0x5" actor="0x7" item="RECOVERY_HEART"/>
     <xflag type="pot" location="Gerudo Fortress Pot Jail 2 2" room="0x5" actor="0x8" item="RUPEE_BLUE"/>
     <xflag type="pot" location="Gerudo Fortress Pot Jail 2 3" room="0x5" actor="0x9" item="RUPEE_RED"/>

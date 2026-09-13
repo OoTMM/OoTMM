@@ -27,7 +27,7 @@
     "Mountain Village Waterfall Chest": "is_spring && can_use_lens && (can_swim || has(MASK_DEKU) || has_hover_boots || can_hookshot || short_hook_anywhere || hookshot_anywhere)"
     "Mountain Village Don Gero Mask": "is_winter && soul_goron && event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "is_spring && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
-    "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
+    "Mountain Village Pot": "(is_winter && scarecrow_hookshot_short) || (is_spring && scarecrow_hookshot) || short_hook_anywhere"
     "Mountain Village Grass 1": "is_spring"
     "Mountain Village Grass 2": "is_spring"
     "Mountain Village Grass 3": "is_spring"

@@ -23,14 +23,14 @@
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Behind Crates": "true"
     "Gerudo Fortress Carpenter 1 Left": "true"
 
 "Gerudo Fortress Carpenter 2 Bottom":
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Carpenter 2 Top": "true"
   events:
     RUPEES: "true"
@@ -54,14 +54,14 @@
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Upper-Center Ledge": "true"
     "Gerudo Fortress Carpenter 2 Bottom": "true"
 
 "Gerudo Fortress Carpenter 4 Bottom":
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Lower-Right Ledge": "true"
+    "Gerudo Fortress Behind Crates": "true"
     "Gerudo Fortress Carpenter 4 Top": "true"
 
 "Gerudo Fortress Carpenter 4 Top":
@@ -76,6 +76,8 @@
   locations:
     "Gerudo Fortress Jail 4": "(can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
     "Gerudo Member Card": "carpenters_rescued"
+    "Gerudo Fortress Pot Jail 4 1": "true"
+    "Gerudo Fortress Pot Jail 4 2": "true"
     "Gerudo Fortress Wonder Item Jail 4 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 4 2": "can_use_bow"
 
@@ -83,7 +85,7 @@
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Behind Crates": "true"
     "Gerudo Fortress Kitchen Tunnel Mid": "true"
 
 "Gerudo Fortress Kitchen Tunnel Mid":
@@ -112,13 +114,13 @@
     "Thieves Hideout Crate Kitchen": "true"
     "Gerudo Fortress Kitchen Big Fairy": "can_play_sun"
     "Gerudo Fortress Wonder Item Kitchen Skull": "can_use_bow"
-    "Gerudo Fortress Wonder Item Kitchen Soup": "evade_gerudo"
+    "Gerudo Fortress Wonder Item Kitchen Soup": "true"
 
 "Gerudo Fortress Kitchen Ledge Near Tunnel":
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Upper-Center Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
     "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
 
@@ -126,7 +128,7 @@
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Upper-Center Ledge": "true"
+    "Gerudo Fortress Upper-Left Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
     "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
 
@@ -134,14 +136,12 @@
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Center Ledge": "true"
+    "Gerudo Fortress Lower-Left Ledge": "true"
   events:
     CARPENTER_3: "can_rescue_carpenter"
   locations:
     "Gerudo Fortress Jail 3": "(can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
     "Gerudo Member Card": "carpenters_rescued"
-    "Gerudo Fortress Pot Jail 3 1": "true"
-    "Gerudo Fortress Pot Jail 3 2": "true"
     "Thieves Hideout Crate Jail 3": "true"
     "Gerudo Fortress Wonder Item Jail 3 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 3 2": "can_use_bow"
@@ -150,26 +150,26 @@
   dungeon: GF
   exits:
     "GLOBAL": "true"
-    "Gerudo Fortress Lower-Left Ledge": "true"
-    "Gerudo Fortress Break Room Top": "can_hookshot || climb_anywhere"
+    "Gerudo Fortress Break Room Ledge": "true"
+    "Gerudo Fortress Break Room Top": "can_hookshot || (climb_anywhere && evade_gerudo)"
   events:
     MAGIC: "evade_gerudo"
-    ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot || has_mask_stone)"
-    SEEDS: "is_child && has(GERUDO_CARD)"
+    ARROWS: "is_adult && evade_gerudo"
+    SEEDS: "is_child && evade_gerudo"
   locations:
-    "Gerudo Fortress Pot Break Room 1": "true"
-    "Gerudo Fortress Pot Break Room 2": "true"
+    "Gerudo Fortress Pot Break Room 1": "evade_gerudo"
+    "Gerudo Fortress Pot Break Room 2": "evade_gerudo"
     "Gerudo Fortress Wonder Item Break Room Bottom": "can_use_bow"
-    "Thieves Hideout Crate Break Room 1": "true"
-    "Thieves Hideout Crate Break Room 2": "true"
-    "Thieves Hideout Crate Break Room 3": "true"
-    "Thieves Hideout Crate Break Room 4": "true"
+    "Thieves Hideout Crate Break Room 1": "evade_gerudo"
+    "Thieves Hideout Crate Break Room 2": "evade_gerudo"
+    "Thieves Hideout Crate Break Room 3": "evade_gerudo"
+    "Thieves Hideout Crate Break Room 4": "evade_gerudo"
 
 "Gerudo Fortress Break Room Top":
   dungeon: GF
   exits:
     "GLOBAL": "true"
     "Gerudo Fortress Above Prison": "true"
-    "Gerudo Fortress Break Room Bottom": "can_hookshot || climb_anywhere"
+    "Gerudo Fortress Break Room Bottom": "can_hookshot || (climb_anywhere && evade_gerudo)"
   locations:
     "Gerudo Fortress Wonder Item Break Room Top": "can_use_bow"

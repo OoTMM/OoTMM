@@ -380,7 +380,7 @@
 "can_kill_freezards": "soul_freezard && (can_use_sticks || can_use_sword_master || can_use_sword_razor || can_use_sword_biggoron || can_hammer || can_hookshot || has_explosives || has_fire)"
 "can_kill_stingers": "soul_stingers && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || can_hookshot || can_use_din)"
 "can_kill_stingers_underwater": "soul_stingers && can_hookshot"
-"can_kill_wolfos": "soul_wolfos && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din)"
+"can_kill_wolfos": "soul_wolfos && (can_use_sword_or_sticks || can_hammer || can_use_slingshot || can_use_bow || has_explosives || can_use_din || has_mask_blast)"
 #"can_kill_stalchildren": "soul_stalchild" #Don't need to define combat, as they probably won't have enemy drops anyway, and they aren't in dungeons. Should be listed if ever part of enemizer.
 #"can_kill_invisible_enemies": "has_lens" #Enemizer or Actorizer might make this macro relevant for switching enemies.
 

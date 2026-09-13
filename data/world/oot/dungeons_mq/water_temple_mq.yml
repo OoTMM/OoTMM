@@ -12,7 +12,7 @@
     "GLOBAL": "true"
     "Water Temple": "can_swim_or_sink"
     "Water Temple Main Room Top Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_HIGH) || has_hover_boots || hookshot_anywhere)"
-    "Water Temple Main Room Middle Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_MID) || (has_iron_boots && has_tunic_zora) || (event(WATER_LEVEL_LOW) && hookshot_anywhere))"
+    "Water Temple Main Room Middle Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_MID) || (has_iron_boots && has_tunic_zora) || event(WATER_LEVEL_LOW))"
     "Water Temple Main Room Bottom Floor": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && (event(WATER_LEVEL_LOW) || (has_iron_boots && has_tunic_zora))"
     "Water Temple High Water Level Ledge": "event(WATER_MQ_BRONZE_SCALE_SOFTLOCK_PREVENTION) && longshot_anywhere"
 
@@ -20,7 +20,7 @@
   dungeon: Water
   exits:
     "Water Temple Entrance": "event(WATER_LEVEL_HIGH) || has_hover_boots || hookshot_anywhere || can_longshot"
-    "Water Temple Main Room Middle Floor": "(event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora) || event(WATER_LEVEL_MID) || (event(WATER_LEVEL_LOW) && longshot_anywhere)"
+    "Water Temple Main Room Middle Floor": "(event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora) || event(WATER_LEVEL_MID) || event(WATER_LEVEL_LOW)"
     "Water Temple Main Room Bottom Floor": "event(WATER_LEVEL_LOW) || (has_iron_boots && has_tunic_zora)"
     "Water Temple High Water Level Ledge": "can_hookshot || (is_adult && has_hover_boots)"
     "Water Temple Hookshot Staircase from Main": "small_keys_water(1) && event(WATER_LEVEL_HIGH)"

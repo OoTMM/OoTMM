@@ -33,6 +33,10 @@ All notable changes to this project will be documented in this file.
 - Megaflip is now logical to reach the grass in Zora's River.
 - Add the itemless jump to Fire Temple Boss door trick to all blitz presets
 - The Romani Ranch alien defense now accounts for Din's Fire as a trick
+- The pot on top of the Smithy in Mountain Village can now logically be reached with scarecrow and short hookshot in winter.
+- The grass item on the platform in Zora River can now be obtained with Boomerang from afar.
+- The Gerudo Fortress wonder item near the archery range can now be gotten logically as child without Gerudo Card.
+- Gerudo Fortress and Thieves' Hideout logic has been overhauled and is now entirely accurate for future settings.
 
 ### Fixed
 
@@ -44,6 +48,10 @@ All notable changes to this project will be documented in this file.
 - Fix some logic for warp songs, eggs, and age change that could create impossible seeds in rare circumstances.
 - Logic for when the cows in Romani Ranch can be interacted with has been fixed.
 - Fix logic for Market grass.
+- Fix logic for the entrance tree in Path to Snowhead considered as being in the middle section.
+- Fix logic for MQ Water Temple's "Storage Room" not being logical with the lowest water level outside hookshot anywhere.
+- Fix logic for Sacred Forest Meadow considering Hookshot to defeat Wolfos.
+- Fix logic for the pots in the jail with four torches considered as being in the room with three torches.
 
 ## [32.3] - 2026-08-23
 

@@ -3,7 +3,7 @@
   exits:
     "GLOBAL": "true"
     "Lost Woods Deep": "true"
-    "Sacred Meadow": "(is_child && (can_damage || can_hammer) && soul_wolfos) || is_adult || climb_anywhere || hookshot_anywhere"
+    "Sacred Meadow": "(is_child && can_kill_wolfos) || is_adult || climb_anywhere || hookshot_anywhere"
     "Wolfos Grotto": "hidden_grotto_bomb"
   events:
     RUPEES: "true"
