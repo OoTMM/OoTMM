@@ -1159,20 +1159,9 @@ class CustomAssetsBuilder {
     await this.addObjectFile('MASK_ADULT_TRANSFORM_PLAYER', 'object_mask_adult.zobj', [0x0a000900,]);
     await this.addObjectFile('ADULT_MASK_EQUIPMENT', 'adult_mask_equipment_standalone.zobj', [0x0a000920,]);
 
-    {
-      const rootCount = 40;
-      const data = new Uint8Array(rootCount * 8);
-      const offsets: number[] = [];
-      for (let i = 0; i < rootCount; ++i) {
-        data[i * 8] = 0xdf;
-        offsets.push(0x0a000000 | (i * 8));
-      }
-      await this.addCustomObject('EQ_COSMETICS_OOT', data, offsets);
-    }
-
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());
-    const objectTableVrom = this.addRawData('custom/object_table', objectTableBuffer, true);
+    const objectTableVrom = this.addRawData(null, objectTableBuffer, true);
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
