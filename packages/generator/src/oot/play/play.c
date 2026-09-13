@@ -227,7 +227,7 @@ static void endGame(void)
     }
 }
 
-static u32 entranceForOverride(u32 entrance)
+u32 Play_EntranceForOverride(u32 entrance)
 {
     switch (entrance)
     {
@@ -377,7 +377,7 @@ static const OotRespawnData kSpiritTempleMainEntrance = {
     0,
 };
 
-static void applyGrottoExit(u32* entrance, int id)
+static u32 applyGrottoExit(int id)
 {
     OotRespawnData* rs;
     const GrottoExit* ge;
@@ -402,44 +402,47 @@ static void applyGrottoExit(u32* entrance, int id)
     /* Set the respawn flags */
     gSaveContext.respawnFlag = 2;
     gSaveContext.nextTransitionType = 3;
-    *entrance = rs->entrance;
+    return rs->entrance;
 }
 
-static void applyCustomEntrance(u32* entrance)
+u32 Play_ApplyCustomEntrance(u32 entrance)
 {
-    u32 id;
-
-    id = *entrance;
-    if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MARKET)
+    if (entrance >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && entrance <= ENTR_OOT_GROTTO_GENERIC_HF_MARKET)
     {
-        id -= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
-        *entrance = ENTR_OOT_GROTTO_TYPE_GENERIC;
+        entrance -= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
         gGrottoData &= ~0x1f;
-        gGrottoData |= kGrottoDataGeneric[id];
+        gGrottoData |= kGrottoDataGeneric[entrance];
+        return ENTR_OOT_GROTTO_TYPE_GENERIC;
     }
-    else if (id >= ENTR_OOT_GROTTO_FAIRY_SFM && id <= ENTR_OOT_GROTTO_FAIRY_FORTRESS)
+
+    if (entrance >= ENTR_OOT_GROTTO_FAIRY_SFM && entrance <= ENTR_OOT_GROTTO_FAIRY_FORTRESS)
     {
-        id -= ENTR_OOT_GROTTO_FAIRY_SFM;
-        *entrance = ENTR_OOT_GROTTO_TYPE_FAIRY;
-        gLastScene = kGrottoDataFairy[id];
+        entrance -= ENTR_OOT_GROTTO_FAIRY_SFM;
+        gLastScene = kGrottoDataFairy[entrance];
+        return ENTR_OOT_GROTTO_TYPE_FAIRY;
     }
-    else if (id >= ENTR_OOT_GROTTO_SCRUBS2_SFM && id <= ENTR_OOT_GROTTO_SCRUBS2_COLOSSUS)
+
+    if (entrance >= ENTR_OOT_GROTTO_SCRUBS2_SFM && entrance <= ENTR_OOT_GROTTO_SCRUBS2_COLOSSUS)
     {
-        id -= ENTR_OOT_GROTTO_SCRUBS2_SFM;
-        *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB2;
-        gLastScene = kGrottoDataScrubs2[id];
+        entrance -= ENTR_OOT_GROTTO_SCRUBS2_SFM;
+        gLastScene = kGrottoDataScrubs2[entrance];
+        return ENTR_OOT_GROTTO_TYPE_SCRUB2;
     }
-    else if (id >= ENTR_OOT_GROTTO_SCRUBS3_RANCH && id <= ENTR_OOT_GROTTO_SCRUBS3_LAKE)
+
+    if (entrance >= ENTR_OOT_GROTTO_SCRUBS3_RANCH && entrance <= ENTR_OOT_GROTTO_SCRUBS3_LAKE)
     {
-        id -= ENTR_OOT_GROTTO_SCRUBS3_RANCH;
-        *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB3;
-        gLastScene = kGrottoDataScrubs3[id];
+        entrance -= ENTR_OOT_GROTTO_SCRUBS3_RANCH;
+        gLastScene = kGrottoDataScrubs3[entrance];
+        return ENTR_OOT_GROTTO_TYPE_SCRUB3;
     }
-    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_OCTOROK)
+
+    if (entrance >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && entrance <= ENTR_OOT_GROTTO_EXIT_OCTOROK)
     {
-        id -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
-        applyGrottoExit(entrance, id);
+        entrance -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
+        return applyGrottoExit(entrance);
     }
+
+    return entrance;
 }
 
 static void playAdjustEntrance(PlayState* play)
@@ -471,7 +474,7 @@ static void playAdjustEntrance(PlayState* play)
         break;
     }
 
-    applyCustomEntrance(&gSave.entrance);
+    gSave.entrance = Play_ApplyCustomEntrance(gSave.entrance);
 }
 
 static void masterSwordFix(PlayState* play)
@@ -651,18 +654,8 @@ static void Minigame_Fix(PlayState* play)
         ReloadSword(play);
 }
 
-NORETURN static void Play_GameSwitch(PlayState* play, u32 entrance)
+u32 Play_GrottoExitEntrance(PlayState* play)
 {
-    Horse_ForceUnmount(play);
-    Minigame_Fix(play);
-    comboGameSwitch(play, entrance);
-}
-
-static u32 entrGrottoExit(PlayState* play)
-{
-    if (!Config_Flag(CFG_ER_GROTTOS))
-        return ENTR_OOT_INTERNAL_EXIT_GROTTO;
-
     switch (play->sceneId)
     {
     case SCE_OOT_GROTTOS:
@@ -731,75 +724,6 @@ static u32 entrGrottoExit(PlayState* play)
     }
 
     return ENTR_OOT_INTERNAL_EXIT_GROTTO;
-}
-
-void Play_TransitionDone(PlayState* play)
-{
-    u32 entrance;
-    s32 override;
-
-    /* Resolve extended entrance */
-    entrance = play->nextEntranceIndex;
-    switch (entrance)
-    {
-    case ENTR_EXTENDED:
-        entrance = g.nextEntrance;
-        break;
-    case ENTR_FW_CROSS: {
-        u8 fwAge = gSave.age;
-        RespawnData* fw = &gSharedCustomSave.mm.fw[fwAge];
-        if (fw->data <= 0 || fw->entrance == ENTR_FW_CROSS)
-        {
-            gSave.info.fw.set = 0;
-
-            gIsEntranceOverride = 0;
-            entrance = gSave.entrance;
-            break;
-        }
-        entrance = fw->entrance | MASK_FOREIGN_ENTRANCE;
-        gComboCtx.isFwSpawn = 1;
-        gComboCtx.fwSpawnAge = fwAge;
-        break;
-    }
-    case ENTR_CROSS_RESPAWN:
-        entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
-        gComboCtx.isDungeonEntranceSpawn = 1;
-        break;
-    }
-
-    /* Handle grottos */
-    if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
-    {
-        entrance = entrGrottoExit(play);
-        if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
-        {
-            gIsEntranceOverride = 0;
-            entrance = gSaveContext.respawn[1].entrance;
-            gSaveContext.respawnFlag = 2;
-            gSaveContext.nextTransitionType = 3;
-        }
-    }
-
-    /* Handle transition override */
-    if (gIsEntranceOverride)
-    {
-        gIsEntranceOverride = 0;
-        override = comboEntranceOverride(entranceForOverride(entrance));
-        if (override != -1)
-            entrance = (u32)override;
-    }
-
-    applyCustomEntrance(&entrance);
-
-    /* Check for foreign */
-    if (entrance & MASK_FOREIGN_ENTRANCE)
-    {
-        Play_GameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
-    }
-    else
-    {
-        play->nextEntranceIndex = entrance & 0xffff;
-    }
 }
 
 void Play_FastInit(GameState* gs)
@@ -875,7 +799,7 @@ void Play_FastInit(GameState* gs)
 
     /* Set the entrance */
     entrance = gComboCtx.entrance;
-    applyCustomEntrance(&entrance);
+    entrance = Play_ApplyCustomEntrance(entrance);
     gSave.entrance = (s32)entrance;
 
     /* Set magic */
@@ -910,4 +834,11 @@ int Play_ExpandMQ(PlayState* play, int sceneId)
     }
 
     return sceneId;
+}
+
+NORETURN void Play_GameSwitch(PlayState* play, u32 entrance)
+{
+    Horse_ForceUnmount(play);
+    Minigame_Fix(play);
+    comboGameSwitch(play, entrance);
 }

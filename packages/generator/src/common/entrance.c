@@ -53,7 +53,7 @@ void comboTransitionOverride(PlayState* play, u32 entrance)
 {
 #if defined(GAME_OOT)
     g.nextEntrance = entrance;
-    play->nextEntranceIndex = ENTR_EXTENDED;
+    play->nextEntrance = ENTR_EXTENDED;
 #endif
 
 #if defined(GAME_MM)

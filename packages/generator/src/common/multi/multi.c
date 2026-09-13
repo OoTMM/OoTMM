@@ -505,6 +505,22 @@ void Multi_InfoItem(u32 ovKey, s16 gi)
     Multi_SendPacket(&pkt.header, sizeof(pkt));
 }
 
+void Multi_InfoEntrance(u32 original, u32 entrance, u8 age)
+{
+    MultiPacketOutInfoEntrance pkt;
+
+    if (!gComboCtx.isMultiConnected)
+        return;
+
+    memset(&pkt, 0, sizeof(pkt));
+    pkt.header.op = MULTI_OP_INFO_ENTRANCE;
+    pkt.original = original;
+    pkt.entrance = entrance;
+    pkt.age = age;
+
+    Multi_SendPacket(&pkt.header, sizeof(pkt));
+}
+
 static void Multi_ReliableSendWAL(MultiPacketWalOutHeader* pkt, u32 size)
 {
     u32 token;
