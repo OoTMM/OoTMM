@@ -46,23 +46,27 @@ const TYPES: TypeDef[] = [
     fields: [
       { name: 'type', type: t.lit('GAME_END') },
     ],
-    example: {
-      type: 'GAME_END',
-    },
   },
   {
     name: 'EventInfoItem',
     kind: 'struct',
-    description: <p>Sent when the player collects an item (for themselves).<br/>The <code>location</code> field will not be present for some items that don't map to any check (for example, the ganon boss key received through special conditions).</p>,
+    description: <p>
+      Sent when the player collects an item (for themselves).<br/>
+      The <code>location</code> field will not be present for some items that don't map to any check (for example, the ganon boss key received through special conditions).<br/>
+      <code>self</code> will be true if the collected item belong to the same player, false otherwise.<br/><br/>
+      Valid item values can be found <a href="https://github.com/OoTMM/OoTMM/blob/master/data/defs/gi.yml">here</a>.
+    </p>,
     fields: [
       { name: 'type', type: t.lit('INFO_ITEM') },
       { name: 'item', type: t.string },
       { name: 'location', type: t.string, optional: true },
+      { name: 'self', type: t.boolean }
     ],
     example: {
       type: 'INFO_ITEM',
       item: 'OOT_BOMBS_5',
       location: 'OOT Deku Tree Map Chest',
+      self: true,
     },
   },
   {

@@ -200,7 +200,7 @@ const KIND_STYLES: Record<TypeDef['kind'], string> = {
 export function TypeCard({ def }: { def: TypeDef }) {
   const anchor = typeAnchor(def.name);
   return (
-    <section id={anchor} className="scroll-mt-4 mb-6 rounded-lg border border-gray-200 dark:border-gray-700 p-5 target:ring-2 target:ring-blue-400">
+    <section id={anchor} className="doc scroll-mt-4 mb-6 rounded-lg border border-gray-200 dark:border-gray-700 p-5 target:ring-2 target:ring-blue-400">
       <header className="flex items-center gap-3 mb-3 group">
         <h3 className="text-lg font-semibold font-mono m-0">{def.name}</h3>
         <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${KIND_STYLES[def.kind]}`}>{def.kind}</span>
