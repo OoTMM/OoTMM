@@ -13,7 +13,7 @@ void EnGe1_AfterCaught(void)
     else
         entrance = ENTR_OOT_GERUDO_FORTRESS_CAUGHT;
 
-    gPlay->nextEntranceIndex = entrance;
+    gPlay->nextEntrance = entrance;
 }
 
 int EnGe1_IsPeaceful(void)

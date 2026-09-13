@@ -36,7 +36,7 @@ void BgTokiSwd_Handler(Actor* this, PlayState* play)
         Age_SwapOot(play);
         play->transitionTrigger = TRANS_TRIGGER_START;
         play->transitionType = TRANS_GFX_SHORTCUT;
-        play->nextEntranceIndex = 0x02ca;
+        play->nextEntrance = 0x02ca;
 
         Actor_Kill(this);
     }
