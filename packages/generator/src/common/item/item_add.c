@@ -598,7 +598,6 @@ static void addBowItemRawMm(PlayState* play)
     if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
         gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gMmExtraItems.bowSlingshot |= 1 << 0;
-    reloadSlotMm(play, ITS_MM_BOW);
 }
 
 static void addSlingshotItemRawMm(PlayState* play)
@@ -606,7 +605,6 @@ static void addSlingshotItemRawMm(PlayState* play)
     if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
         gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_SLINGSHOT;
     gMmExtraItems.bowSlingshot |= 1 << 1;
-    reloadSlotMm(play, ITS_MM_BOW);
 }
 
 static void addSlingshotRawOot(u8 index)
@@ -822,9 +820,9 @@ static void addHookshotRawMm(PlayState* play, int level)
         itemId = ITEM_MM_HOOKSHOT;
     else
         itemId = 0x11; /* ITEM_MM_BOTTLE_POTION_RED but that enum is wrong */
-    gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+    if (gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
     gMmExtraItems.hookshot |= (1 << (level - 1));
-    reloadSlotMm(play, ITS_MM_HOOKSHOT);
 #if defined(GAME_MM)
     if (Config_Flag(CFG_MM_HOOKSHOT_SHORT) && level >= 2)
         reloadHookshot(play);
@@ -948,9 +946,9 @@ static void addOcarinaRawMm(PlayState* play, int level)
         itemId = ITEM_MM_OCARINA_OF_TIME;
     else
         itemId = ITEM_MM_OCARINA_FAIRY;
-    gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
+    if (gMmSave.info.inventory.items[ITS_MM_OCARINA] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
     gMmExtraItems.ocarina |= (1 << (level - 1));
-    reloadSlotMm(play, ITS_MM_OCARINA);
 }
 
 static int addItemOcarinaOot(PlayState* play, u8 itemId, s16 gi, u16 param)
@@ -1246,13 +1244,6 @@ static int addItemStrengthMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gMmSave.info.inventory.upgrades.strength)
         gMmSave.info.inventory.upgrades.strength = param;
-
-#if defined(GAME_MM)
-    if (gPlayerFormItemRestrictions[MM_PLAYER_FORM_HUMAN][ITEM_MM_POWDER_KEG] == 0 && Config_Flag(CFG_MM_KEG_STRENGTH_3) && gSave.info.inventory.upgrades.strength >= 3)
-    {
-        gPlayerFormItemRestrictions[MM_PLAYER_FORM_HUMAN][ITEM_MM_POWDER_KEG] = 1;
-    }
-#endif
 
     return 0;
 }
