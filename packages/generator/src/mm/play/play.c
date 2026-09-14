@@ -26,7 +26,7 @@ static u8 sNeedsScreenClear;
 
 PlayState* gPlay;
 
-u32 Play_EntranceForOverride(u32 entrance)
+static u32 entranceForOverride(u32 entrance)
 {
     u32 entranceKey;
 
@@ -84,7 +84,7 @@ static void sendSelfMajorasMask(void)
         return;
 
     Multi_SendSelfItem(gi, 0, Checks_MakeNpcOverrideKey(npc));
-    Multi_InfoItem(0, gi, 0x01);
+    Multi_InfoItem(0, gi);
 
     /* Mark the NPC as obtained */
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
@@ -211,7 +211,7 @@ static const GrottoExit kGrottoExits[] = {
 
 static const GrottoExit kGrottoExitMountainWinter = { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 0, { 345, 8, -150 } };
 
-static u32 applyGrottoExit(const GrottoExit* ge)
+static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
 {
     RespawnData* rs;
 
@@ -235,11 +235,14 @@ static u32 applyGrottoExit(const GrottoExit* ge)
 
     /* Set the respawn flags */
     gSaveContext.respawnFlag = 4;
-    return rs->entrance;
+    *entrance = rs->entrance;
 }
 
-u32 Play_GrottoExitEntrance(PlayState* play)
+static u32 entrGrottoExit(PlayState* play)
 {
+    if (!Config_Flag(CFG_ER_GROTTOS))
+        return ENTR_MM_INTERNAL_EXIT_GROTTO;
+
     switch (play->sceneId)
     {
     case SCE_MM_GROTTOS:
@@ -287,38 +290,38 @@ u32 Play_GrottoExitEntrance(PlayState* play)
 
 static const u8 kGrottoDataGeneric[] = { 0x1a, 0x1f, 0x1e, 0x1c, 0x1d, 0x1b, 0x19, 0x13, 0x17, 0x15, 0x16, 0x18, 0x14 };
 
-u32 Play_ApplyCustomEntrance(u32 entrance)
+static void applyCustomEntrance(u32* entrance)
 {
     const GrottoExit* ge;
+    u32 id;
 
-    if (entrance >= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR && entrance <= ENTR_MM_GROTTO_GENERIC_VALLEY)
+    id = *entrance;
+    if (id >= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_GENERIC_VALLEY)
     {
+        id -= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR;
+        *entrance = ENTR_MM_GROTTO_TYPE_GENERIC;
         gGrottoData &= ~0x1f;
-        gGrottoData |= kGrottoDataGeneric[entrance - ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR];
-        return ENTR_MM_GROTTO_TYPE_GENERIC;
+        gGrottoData |= kGrottoDataGeneric[id];
     }
-
-    if (entrance >= ENTR_MM_GROTTO_COW_FIELD && entrance <= ENTR_MM_GROTTO_COW_COAST)
+    else if (id >= ENTR_MM_GROTTO_COW_FIELD && id <= ENTR_MM_GROTTO_COW_COAST)
     {
-        if (entrance == ENTR_MM_GROTTO_COW_FIELD)
+        if (id == ENTR_MM_GROTTO_COW_FIELD)
             gLastScene = SCE_MM_TERMINA_FIELD;
         else
             gLastScene = SCE_MM_GREAT_BAY_COAST;
-        return ENTR_MM_GROTTO_TYPE_COW;
+        *entrance = ENTR_MM_GROTTO_TYPE_COW;
     }
-
-    if (entrance >= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR && entrance <= ENTR_MM_GROTTO_EXIT_HOT_WATER)
+    else if (id >= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_EXIT_HOT_WATER)
     {
-        if ((entrance == ENTR_MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE) && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
+        if ((id == ENTR_MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE) && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
             ge = &kGrottoExitMountainWinter;
         else
         {
-            ge = &kGrottoExits[entrance - ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR];
+            id -= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
+            ge = &kGrottoExits[id];
         }
-        return applyGrottoExit(ge);
+        applyGrottoExit(entrance, ge);
     }
-
-    return entrance;
 }
 
 static void spawnSirloin(PlayState* play)
@@ -593,7 +596,8 @@ void hookPlay_Init(PlayState* play)
     if ((gSave.entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entrance == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
-        entrance = Play_ApplyCustomEntrance(g.initialEntrance);
+        entrance = g.initialEntrance;
+        applyCustomEntrance(&entrance);
         gSave.entrance = entrance;
     }
 
@@ -717,6 +721,77 @@ void Play_MainWrapper(PlayState* play)
     Debug_Update();
 }
 
+void Play_TransitionDone(PlayState* play)
+{
+    u32 entrance;
+    s32 override;
+
+    /* Resolve extended entrance */
+    entrance = play->nextEntrance;
+    switch (entrance)
+    {
+    case ENTR_EXTENDED:
+        entrance = g.nextEntrance;
+        break;
+    case ENTR_FW_CROSS: {
+        u8 fwAge = comboMmFwAge();
+        OotFaroreWind* fw = Age_GetFaroreOot(fwAge);
+        if (fw->set <= 0 || fw->entrance == ENTR_FW_CROSS)
+        {
+            gCustomSave.fw[fwAge].data = 0;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+
+            gIsEntranceOverride = 0;
+            entrance = gSave.entrance;
+            break;
+        }
+        entrance = fw->entrance | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isFwSpawn = 1;
+        gComboCtx.fwSpawnAge = fwAge;
+        break;
+    }
+    case ENTR_CROSS_RESPAWN:
+        entrance = gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE].entrance | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isDungeonEntranceSpawn = 1;
+        break;
+    }
+
+    /* Handle grotto exits */
+    if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
+    {
+        entrance = entrGrottoExit(play);
+        if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
+        {
+            gIsEntranceOverride = 0;
+            entrance = gSaveContext.respawn[3].entrance;
+            gSaveContext.respawnFlag = 4;
+        }
+    }
+
+    /* Handle transition override */
+    if (gIsEntranceOverride)
+    {
+        gIsEntranceOverride = 0;
+        override = comboEntranceOverride(entranceForOverride(entrance));
+        if (override != -1)
+            entrance = (u32)override;
+        g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
+    }
+
+    applyCustomEntrance(&entrance);
+
+    if (entrance & MASK_FOREIGN_ENTRANCE)
+    {
+        if (Config_Flag(CFG_MM_CROSS_AGE))
+            Age_SetRawMm(NULL, gOotSave.age);
+        comboGameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
+    }
+    else
+    {
+        play->nextEntrance = entrance & 0xffff;
+    }
+}
+
 void Play_SetupRespawnPointRaw(PlayState* play, int respawnId, int playerParams)
 {
     Player* link;
@@ -753,12 +828,7 @@ void CutsceneTransitionHook(PlayState* play)
     }
 }
 
-NORETURN void Play_GameSwitch(PlayState* play, u32 entrance)
-{
-    if (Config_Flag(CFG_MM_CROSS_AGE))
-        Age_SetRawMm(NULL, gOotSave.age);
-    comboGameSwitch(play, entrance);
-}
+
 
 void Play_FastInit(GameState* gs)
 {
@@ -810,7 +880,7 @@ void Play_FastInit(GameState* gs)
         g.initialEntrance = entrance;
     else
         g.initialEntrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER;
-    entrance = Play_ApplyCustomEntrance(entrance);
+    applyCustomEntrance(&entrance);
     gSave.entrance = entrance;
     g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
 

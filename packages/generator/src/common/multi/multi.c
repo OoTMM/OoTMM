@@ -490,7 +490,7 @@ static int Multi_BeforeSend(void)
     return 1;
 }
 
-void Multi_InfoItem(u32 ovKey, s16 gi, u8 flags)
+void Multi_InfoItem(u32 ovKey, s16 gi)
 {
     MultiPacketOutInfoItem pkt;
 
@@ -501,23 +501,6 @@ void Multi_InfoItem(u32 ovKey, s16 gi, u8 flags)
     pkt.header.op = MULTI_OP_INFO_ITEM;
     pkt.overrideKey = ovKey;
     pkt.gi = gi;
-    pkt.flags = flags;
-
-    Multi_SendPacket(&pkt.header, sizeof(pkt));
-}
-
-void Multi_InfoEntrance(u32 original, u32 entrance, u8 age)
-{
-    MultiPacketOutInfoEntrance pkt;
-
-    if (!gComboCtx.isMultiConnected)
-        return;
-
-    memset(&pkt, 0, sizeof(pkt));
-    pkt.header.op = MULTI_OP_INFO_ENTRANCE;
-    pkt.original = original;
-    pkt.entrance = entrance;
-    pkt.age = age;
 
     Multi_SendPacket(&pkt.header, sizeof(pkt));
 }

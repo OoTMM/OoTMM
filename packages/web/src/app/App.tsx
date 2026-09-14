@@ -1,8 +1,14 @@
 import { LocationProvider, Router, Route } from 'preact-iso';
 
 import { ThemeProvider } from './theme/ThemeProvider';
+import { Home } from './pages/Home';
+import { Generator } from './pages/Generator';
+import { GeneratorVersions } from './pages/GeneratorVersions';
+import { NotFound } from './pages/NotFound';
+import { Faq } from './pages/Faq';
+import { Multiplayer } from './pages/Multiplayer';
+import { MultiplayerLegacy } from './pages/MultiplayerLegacy';
 import { Layout } from './layout/Layout';
-import * as Pages from './pages';
 
 export function App() {
 	return (
@@ -10,14 +16,13 @@ export function App() {
       <LocationProvider>
         <Layout>
           <Router>
-            <Route path="/docs/client-api" component={Pages.ClientAPI}/>
-            <Route path="/gen/old" component={Pages.GeneratorVersions}/>
-            <Route path="/gen/:id" component={Pages.Generator}/>
-            <Route path="/" component={Pages.Home}/>
-            <Route path="/faq" component={Pages.Faq}/>
-            <Route path="/multiplayer/legacy" component={Pages.MultiplayerLegacy}/>
-            <Route path="/multiplayer" component={Pages.Multiplayer}/>
-            <Route default component={Pages.NotFound}/>
+            <Route path="/gen/old" component={GeneratorVersions} />
+            <Route path="/gen/:id" component={Generator} />
+            <Route path="/" component={Home} />
+            <Route path="/faq" component={Faq}/>
+            <Route path="/multiplayer/legacy" component={MultiplayerLegacy} />
+            <Route path="/multiplayer" component={Multiplayer} />
+            <Route default component={NotFound} />
           </Router>
         </Layout>
       </LocationProvider>

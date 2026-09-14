@@ -17,7 +17,6 @@ u8      Multi_WorldID(void);
 void    Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key);
 void    Multi_SendSelfItem(s16 gi, s16 flags, u32 key);
 void    Multi_SendEvent(u32 eventId);
-void    Multi_InfoItem(u32 ovKey, s16 gi, u8 flags);
-void    Multi_InfoEntrance(u32 original, u32 entrance, u8 age);
+void    Multi_InfoItem(u32 ovKey, s16 gi);
 
 #endif

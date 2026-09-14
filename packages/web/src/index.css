@@ -18,6 +18,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-.link, .doc a {
+.link {
   @apply text-blue-500 hover:text-blue-700;
 }

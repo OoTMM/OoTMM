@@ -34,9 +34,4 @@ int Play_ExpandMQ(PlayState* play, int sceneId);
 #endif
 int Play_MergeMQ(int sceneId);
 
-u32 Play_GrottoExitEntrance(PlayState* play);
-u32 Play_ApplyCustomEntrance(u32 entrance);
-u32 Play_EntranceForOverride(u32 entrance);
-NORETURN void Play_GameSwitch(PlayState* play, u32 entrance);
-
 #endif

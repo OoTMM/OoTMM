@@ -215,17 +215,6 @@ void AudioCustom_Init(void)
         }
     }
 
-    /* Resolve virtual bank addresses (for Voice data) */
-    for (int i = 0; i < 0x10; ++i)
-    {
-        DmaEntry dmaEntry;
-        AudioTableEntry* e;
-        e = gCustomAudioTables.audio->entries + i;
-        if (e->size && e->romAddr >= 0x08000000)
-            if (comboDmaLookup(&dmaEntry, e->romAddr))
-                e->romAddr = dmaEntry.pstart + (e->romAddr - dmaEntry.vstart);
-    }
-
     /* Build the custom bank table */
     for (int i = 0; i < 256; ++i)
     {

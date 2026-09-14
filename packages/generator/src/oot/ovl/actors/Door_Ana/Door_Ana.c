@@ -142,7 +142,7 @@ void DoorAna_WaitOpen(DoorAna* this, PlayState* play) {
             if (destinationIdx < 0) {
                 destinationIdx = this->actor.home.rot.z + 1;
             }
-            play->nextEntrance = sGrottoEntrances[destinationIdx];
+            play->nextEntranceIndex = sGrottoEntrances[destinationIdx];
             DoorAna_SetupAction(this, DoorAna_GrabPlayer);
         } else {
             if (!Player_InCsMode(play) && !(player->stateFlags1 & (PLAYER_STATE1_23 | PLAYER_STATE1_27)) &&

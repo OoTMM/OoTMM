@@ -185,13 +185,13 @@ static int KaleidoScope_HandleAfterSaveAction(PlayState* play)
 #if defined(GAME_OOT)
                 if (dungeonEntranceRespawn->data & 0x80)
                 {
-                    play->nextEntrance = ENTR_CROSS_RESPAWN;
+                    play->nextEntranceIndex = ENTR_CROSS_RESPAWN;
                 }
                 else
                 {
                     memcpy(&gSaveContext.respawn[RESPAWN_MODE_RETURN], dungeonEntranceRespawn, sizeof(OotRespawnData));
                     memcpy(&gSaveContext.respawn[RESPAWN_MODE_DOWN], dungeonEntranceRespawn, sizeof(OotRespawnData));
-                    play->nextEntrance = dungeonEntranceRespawn->entrance;
+                    play->nextEntranceIndex = dungeonEntranceRespawn->entrance;
                     gSaveContext.respawnFlag = 2;
                 }
 #else

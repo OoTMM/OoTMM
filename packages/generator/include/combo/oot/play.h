@@ -130,7 +130,7 @@ typedef struct PlayState
     s8                      transitionTrigger; /* "fade_direction" */
     s16                     unk_11E16;
     s16                     bgCoverAlpha;
-    u16                     nextEntrance;
+    u16                     nextEntranceIndex;
     char                    unk_11E1C[0x40];
     s8                      shootingGalleryStatus;
     s8                      bombchuBowlingStatus; /* "bombchu_game_flag" */
@@ -166,7 +166,7 @@ ASSERT_OFFSET(PlayState, objectCtx,                0x117a4);
 ASSERT_OFFSET(PlayState, roomCtx,                  0x11cbc);
 ASSERT_OFFSET(PlayState, transiActorCtx,           0x11d34);
 ASSERT_OFFSET(PlayState, transitionTrigger,        0x11e15);
-ASSERT_OFFSET(PlayState, nextEntrance,             0x11e1a);
+ASSERT_OFFSET(PlayState, nextEntranceIndex,        0x11e1a);
 ASSERT_OFFSET(PlayState, playerInit,               0x11d3c);
 ASSERT_OFFSET(PlayState, playerUpdate,             0x11d40);
 ASSERT_OFFSET(PlayState, isPlayerDroppingFish,     0x11d44);
@@ -198,7 +198,7 @@ ASSERT_OFFSET(PlayState, skyboxId,                 0x11e14);
 ASSERT_OFFSET(PlayState, transitionTrigger,        0x11e15);
 ASSERT_OFFSET(PlayState, unk_11E16,                0x11e16);
 ASSERT_OFFSET(PlayState, bgCoverAlpha,             0x11e18);
-ASSERT_OFFSET(PlayState, nextEntrance,             0x11e1a);
+ASSERT_OFFSET(PlayState, nextEntranceIndex,        0x11e1a);
 ASSERT_OFFSET(PlayState, unk_11E1C,                0x11e1c);
 ASSERT_OFFSET(PlayState, shootingGalleryStatus,    0x11e5c);
 ASSERT_OFFSET(PlayState, bombchuBowlingStatus,     0x11e5d);

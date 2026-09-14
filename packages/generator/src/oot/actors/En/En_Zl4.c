@@ -9,7 +9,7 @@ void EnZl4_Update6(Actor* actor, PlayState* play)
 
     play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_GFX_SHORTCUT;
-    play->nextEntrance = ENTR_OOT_CASTLE_CAUGHT;
+    play->nextEntranceIndex = ENTR_OOT_CASTLE_CAUGHT;
 }
 
 void EnZl4_Update5(Actor* actor, PlayState* play)

@@ -37,7 +37,7 @@
     "Great Bay Temple Central Room": "underwater_walking || (has_mask_goron && trick(MM_GBT_WATERWHEEL_GORON)) || short_hook_anywhere || (has_hover_boots && trick(MM_GBT_WATERWHEEL_HOVERS))"
     "WARP_SONGS": "true"
   locations:
-    "Great Bay Temple SF Water Wheel Platform": "can_dive_small || underwater_walking || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot)) || (short_hook_anywhere && trick(MM_GBT_FAIRY2_HOOK) && can_swim)"
+    "Great Bay Temple SF Water Wheel Platform": "can_dive_small || underwater_walking || (has_mask_great_fairy && (has_arrows || can_hookshot)) || (short_hook_anywhere && trick(MM_GBT_FAIRY2_HOOK) && can_swim)"
     "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives || deku_stick_fighting)"
     "Great Bay Temple Rupee Entrance 1": "true"
     "Great Bay Temple Rupee Entrance 2": "true"
@@ -59,7 +59,7 @@
     MAGIC: "true"
   locations:
     "Great Bay Temple SF Central Room Barrel": "true"
-    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || (underwater_walking_strict && has_mask_blast))) || (underwater_walking_strict && (has_mask_blast || has_arrows) && trick(MM_GBT_CENTER_POT_IRONS))"
+    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has_mask_great_fairy && (has_arrows || (underwater_walking_strict && has_mask_blast))) || (underwater_walking_strict && (has_mask_blast || has_arrows) && trick(MM_GBT_CENTER_POT_IRONS))"
     "Great Bay Temple Pot Central Room 1": "true"
     "Great Bay Temple Pot Central Room 2": "true"
 
@@ -73,11 +73,11 @@
     "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Great Bay Temple Map": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || can_hookshot || has(MASK_DEKU)"
-    "Great Bay Temple SF Map Room Pot": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
+    "Great Bay Temple Map": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || can_hookshot || has_mask_deku"
+    "Great Bay Temple SF Map Room Pot": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has_mask_deku"
     "Great Bay Temple Pot Map Room Surface 1": "true"
     "Great Bay Temple Pot Map Room Surface 2": "true"
-    "Great Bay Temple Pot Map Room Surface 3": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
+    "Great Bay Temple Pot Map Room Surface 3": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has_mask_deku"
     "Great Bay Temple Pot Map Room Water 1": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 2": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 3": "underwater_walking || hookshot_anywhere"
@@ -109,7 +109,7 @@
   locations:
     "Great Bay Temple Compass": "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls
     "Great Bay Temple Compass Room Underwater": "underwater_walking"
-    "Great Bay Temple SF Compass Room Pot": "has_mask_zora || short_hook_anywhere || ((has(MASK_GREAT_FAIRY) || underwater_walking || soul_enemy(SOUL_ENEMY_DEXIHAND)) && (has_weapon_range || has_bombchu)) || (underwater_walking && has_mask_blast)"
+    "Great Bay Temple SF Compass Room Pot": "has_mask_zora || short_hook_anywhere || ((has_mask_great_fairy || underwater_walking || soul_enemy(SOUL_ENEMY_DEXIHAND)) && (has_weapon_range || has_bombchu)) || (underwater_walking && has_mask_blast)"
     "Great Bay Temple Pot Compass Room Surface 1": "true"
     "Great Bay Temple Pot Compass Room Surface 2": "true"
     "Great Bay Temple Pot Compass Room Surface 3": "true"
@@ -142,7 +142,7 @@
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
-    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_mask_zora || has(MASK_DEKU) || has_explosives)"
+    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_mask_zora || has_mask_deku || has_explosives)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
     "WARP_SONGS": "true"
@@ -195,7 +195,7 @@
     "Great Bay Temple After Boss Key": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
     "WARP_SONGS": "true"
   events:
-    FROG_4: "has(MASK_DON_GERO) && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+    FROG_4: "has_mask_don_gero && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
   locations:
     "Great Bay Temple Crate Before Boss Key 01": "true"
     "Great Bay Temple Crate Before Boss Key 02": "true"
@@ -265,15 +265,15 @@
   dungeon: GB
   exits:
     "Great Bay Temple Green Pipe 2": "true"
-    "Great Bay Temple Map Room": "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Map Room": "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has_mask_deku && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "WARP_SONGS": "true"
   events:
-    GB_PIPE_GREEN2: "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    GB_PIPE_GREEN2: "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has_mask_deku && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
   locations:
-    "Great Bay Temple Green Pipe 3 Chest": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
-    "Great Bay Temple SF Green Pipe 3 Barrel": "underwater_walking || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || can_dive_small)) || (has(MASK_GREAT_FAIRY) && has_bombchu)"
-    "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
-    "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Green Pipe 3 Chest": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has_mask_deku && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple SF Green Pipe 3 Barrel": "underwater_walking || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || can_dive_small)) || (has_mask_great_fairy && has_bombchu)"
+    "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has_mask_deku && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has_mask_deku && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple Pot Green Pipe 3 Lower": "true"
     "Great Bay Temple Crate Green Pipe 1": "true"
     "Great Bay Temple Crate Green Pipe 2": "true"
@@ -289,8 +289,8 @@
     "Great Bay Temple Boss Access": "boss_key(BOSS_KEY_GB) && ((event(GB_PIPE_GREEN) && event(GB_PIPE_GREEN2)) || short_hook_anywhere)"
     "WARP_SONGS": "true"
   locations:
-    "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot)) || short_hook_anywhere"
-    "Great Bay Temple SF Pre-Boss Underwater": "has_mask_zora || (can_use_ice_arrows && (has(MASK_GREAT_FAIRY) || short_hook_anywhere || underwater_walking)) || (underwater_walking && can_hookshot_short)"
+    "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has_mask_great_fairy && (has_arrows || can_hookshot)) || short_hook_anywhere"
+    "Great Bay Temple SF Pre-Boss Underwater": "has_mask_zora || (can_use_ice_arrows && (has_mask_great_fairy || short_hook_anywhere || underwater_walking)) || (underwater_walking && can_hookshot_short)"
     "Great Bay Temple Pot Pre-Boss 1": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Pre-Boss 2": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Pre-Boss 3": "underwater_walking || hookshot_anywhere"

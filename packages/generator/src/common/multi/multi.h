@@ -12,7 +12,6 @@
 #define MULTI_OP_WAL_ACK        0x04
 #define MULTI_OP_POSITION       0x05
 #define MULTI_OP_INFO_ITEM      0x06
-#define MULTI_OP_INFO_ENTRANCE  0x07
 
 #define WAL_ITEM    0x01
 #define WAL_EVENT   0x02
@@ -143,18 +142,8 @@ typedef struct PACKED
     MultiPacketHeader header;
     u32 overrideKey;
     s16 gi;
-    u8 flags;
 }
 MultiPacketOutInfoItem;
-
-typedef struct PACKED
-{
-    MultiPacketHeader header;
-    u32 original;
-    u32 entrance;
-    u8 age;
-}
-MultiPacketOutInfoEntrance;
 
 typedef struct
 {

@@ -22,10 +22,10 @@ static void EnOwl_StartCutscene(void)
     switch (gPlay->sceneId)
     {
     case SCE_OOT_LAKE_HYLIA:
-        gPlay->nextEntrance = ENTR_OOT_FIELD_OWL;
+        gPlay->nextEntranceIndex = ENTR_OOT_FIELD_OWL;
         break;
     case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        gPlay->nextEntrance = ENTR_OOT_VILLAGE_OWL;
+        gPlay->nextEntranceIndex = ENTR_OOT_VILLAGE_OWL;
         break;
     }
 	gIsEntranceOverride = 1;
