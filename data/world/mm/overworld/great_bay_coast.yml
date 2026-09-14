@@ -308,7 +308,7 @@
 "Tingle Great Bay":
   region: TINGLE
   events:
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "can_use_pictograph_box"
   locations:
     "Tingle Map Great Bay": "tingle_price(0x08)"
     "Tingle Map Ikana": "tingle_price(0x09)"
