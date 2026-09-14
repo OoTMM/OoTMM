@@ -253,6 +253,21 @@ export class RomBuilder {
     }
   }
 
+  replaceFileData(name: string, data: Uint8Array) {
+    const file = this.fileByNameRequired(name);
+    if (file.injected) {
+      throw new Error(`Cannot replace already injected file: ${name}`);
+    }
+    if (file.alias) {
+      throw new Error(`Cannot replace aliased file: ${name}`);
+    }
+    if (file.type === 'dummy') {
+      throw new Error(`Cannot replace dummy file: ${name}`);
+    }
+    file.data = data;
+    file.vsize = undefined;
+  }
+
   alias(to: string, from: string) {
     const fileTo = this.fileByNameRequired(to);
     const fileFrom = this.fileByNameRequired(from);
