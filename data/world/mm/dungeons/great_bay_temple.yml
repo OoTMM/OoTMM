@@ -49,7 +49,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Water Wheel": "true"
-    "Great Bay Temple Map Room Underwater": "underwater_walking || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))" #Does Underwater Walking here need strict for the time?
+    "Great Bay Temple Map Room Underwater": "underwater_walking || (can_swim && (hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))))"
     "Great Bay Temple Red Pipe 1": "underwater_walking || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))"
     "Great Bay Temple Green Pipe 1": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Compass Room": "(underwater_walking || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))) && event(GB_WATER_WHEEL)"
