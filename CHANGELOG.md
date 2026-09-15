@@ -53,6 +53,7 @@ All notable changes to this project will be documented in this file.
 - Fix logic for Sacred Forest Meadow considering Hookshot to defeat Wolfos.
 - Fix logic for the pots in the jail with four torches considered as being in the room with three torches.
 - Fix MM great Bay Goast Gossip Stone and Fairy checks being in the wrong region.
+- Fix logic for the MM Great Bay Temple Map Room not expecting swimming to be able to surface in some circumstances.
 
 ## [32.3] - 2026-08-23
 
