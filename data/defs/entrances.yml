@@ -112,7 +112,7 @@ OOT_HOUSE_LON_LON:                              { game: oot, id: 0x04f, type: in
 OOT_SILO:                                       { game: oot, id: 0x5d0, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Silo"], reverse: OOT_LON_LON_RANCH_FROM_SILO }
 OOT_STABLES:                                    { game: oot, id: 0x2f9, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Stables"], reverse: OOT_LON_LON_RANCH_FROM_STABLES }
 OOT_FAIRY_MAGIC:                                { game: oot, id: 0x315, type: indoors, areas: ["OOT Death Mountain Summit", "OOT Fairy Fountain Magic"], reverse: OOT_DEATH_MOUNTAIN_FROM_FAIRY }
-OOT_FAIRY_MAGIC2:                               { game: oot, id: 0x4be, type: indoors, areas: ["OOT Death Mountain Crater Bottom", "OOT Fairy Fountain Double Magic"], reverse: OOT_DEATH_CRATER_FROM_FAIRY }
+OOT_FAIRY_MAGIC2:                               { game: oot, id: 0x4be, type: indoors, areas: ["OOT Death Mountain Crater Near Great Fairy", "OOT Fairy Fountain Double Magic"], reverse: OOT_DEATH_CRATER_FROM_FAIRY }
 OOT_FAIRY_DIN:                                  { game: oot, id: 0x578, type: indoors, areas: ["OOT Near Fairy Fountain Din", "OOT Fairy Fountain Din"], reverse: OOT_HYRULE_CASTLE_FROM_FAIRY }
 OOT_FAIRY_FARORE:                               { game: oot, id: 0x371, type: indoors, areas: ["OOT Zora Fountain", "OOT Fairy Fountain Farore"], reverse: OOT_ZORA_FOUNTAIN_FROM_FAIRY }
 OOT_FAIRY_NAYRU:                                { game: oot, id: 0x588, type: indoors, areas: ["OOT Desert Colossus", "OOT Fairy Fountain Nayru"], reverse: OOT_DESERT_COLOSSUS_FROM_FAIRY }
