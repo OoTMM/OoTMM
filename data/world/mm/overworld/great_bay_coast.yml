@@ -38,10 +38,6 @@
     "Great Bay Coast Palm Tree Beach 1": "true"
     "Great Bay Coast Palm Tree Beach 2": "true"
     "Great Bay Coast Palm Tree Beach 3": "true"
-    "Great Bay Coast Gossip Fairy": "gossip_fairy"
-    "Great Bay Coast Gossip Big Fairy": "gossip_fairy_big"
-  gossip:
-    "Great Bay Coast Gossip": "true"
 
 "Great Bay Coast Cliffs":
   region: GREAT_BAY_COAST
@@ -63,6 +59,10 @@
     "Great Bay Coast Rock Cliffs 2": "true"
     "Great Bay Coast Rock Cliffs 3": "true"
     "Great Bay Coast Soil": "(can_hookshot || short_hook_anywhere) && has_bugs"
+    "Great Bay Coast Gossip Fairy": "gossip_fairy"
+    "Great Bay Coast Gossip Big Fairy": "gossip_fairy_big"
+  gossip:
+    "Great Bay Coast Gossip": "true"
 
 "Great Bay Coast Water":
   region: GREAT_BAY_COAST
