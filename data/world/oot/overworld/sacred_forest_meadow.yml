@@ -17,7 +17,7 @@
     "GLOBAL": "true"
     "Sacred Meadow Entryway": "true"
   locations:
-    "Sacred Meadow Grotto": "soul_wolfos && (can_damage || can_hammer)"
+    "Sacred Meadow Grotto": "can_kill_wolfos"
 
 "Sacred Meadow":
   region: SACRED_MEADOW
