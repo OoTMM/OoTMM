@@ -108,8 +108,6 @@
 
 "Great Bay Temple Baba Room Underwater":
   dungeon: GB
-  events:
-    GBT_BABA_CHEST_SPAWN: "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || (underwater_walking && (can_hookshot || has_boomerang)))"
   exits:
     "Great Bay Temple Baba Room Surface": "has_mask_zora || can_swim || (underwater_walking && short_hook_anywhere)"
     "WARP_SONGS": "true"
