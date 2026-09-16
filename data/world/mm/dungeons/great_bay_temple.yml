@@ -49,7 +49,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Water Wheel": "true"
-    "Great Bay Temple Map Room": "underwater_walking || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))"
+    "Great Bay Temple Map Room Underwater": "underwater_walking || (can_swim && (hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))))"
     "Great Bay Temple Red Pipe 1": "underwater_walking || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))"
     "Great Bay Temple Green Pipe 1": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Compass Room": "(underwater_walking || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))) && event(GB_WATER_WHEEL)"
@@ -63,12 +63,31 @@
     "Great Bay Temple Pot Central Room 1": "true"
     "Great Bay Temple Pot Central Room 2": "true"
 
-"Great Bay Temple Map Room":
+"Great Bay Temple Map Room Underwater":
   dungeon: GB
   events:
     MAGIC: "true"
   exits:
-    "Great Bay Temple Baba Room": "has_mask_zora || (((has_bombchu && trick(MM_GBT_BABA_ENTRY_BOMBCHU)) || has_mask_blast || has_boomerang) && (short_hook_anywhere || underwater_walking || (can_dive_big && has_tunic_zora))) || hookshot_anywhere"
+    "Great Bay Temple Map Room Surface": "can_swim || has_mask_zora || hookshot_anywhere" #Might need long hook anywhere, needs testing
+    #"Great Bay Temple Central Room": "has_mask_zora || (short_hook_anywhere && has_iron_boots) || (hookshot_anywhere && can_swim_or_sink)" #Can only go through tunnel if water is reversed. Iron+Short Hook only leads to bottom of the room, so not entirely accurate. Separate bottom and surface in dungeon rework.
+    "WARP_SONGS": "true"
+  locations:
+    "Great Bay Temple Pot Map Room Water 1": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 2": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 3": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 4": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 5": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 6": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 7": "underwater_walking"
+    "Great Bay Temple Pot Map Room Water 8": "underwater_walking"
+
+"Great Bay Temple Map Room Surface":
+  dungeon: GB
+  events:
+    MAGIC: "true"
+  exits:
+    "Great Bay Temple Map Room Underwater": "underwater_walking"
+    "Great Bay Temple Baba Room Underwater": "has_mask_zora || (((has_bombchu && trick(MM_GBT_BABA_ENTRY_BOMBCHU)) || has_mask_blast || has_boomerang) && ((short_hook_anywhere && can_swim_or_sink) || underwater_walking || (can_dive_big && has_tunic_zora))) || (hookshot_anywhere && can_swim_or_sink)"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
     "WARP_SONGS": "true"
@@ -78,29 +97,38 @@
     "Great Bay Temple Pot Map Room Surface 1": "true"
     "Great Bay Temple Pot Map Room Surface 2": "true"
     "Great Bay Temple Pot Map Room Surface 3": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
-    "Great Bay Temple Pot Map Room Water 1": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 2": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 3": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 4": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 5": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 6": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 7": "underwater_walking || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Water 8": "underwater_walking || hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 1": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 2": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 3": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 4": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 5": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 6": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 7": "hookshot_anywhere"
+    "Great Bay Temple Pot Map Room Water 8": "hookshot_anywhere"
 
-"Great Bay Temple Baba Room":
+"Great Bay Temple Baba Room Underwater":
   dungeon: GB
   exits:
+    "Great Bay Temple Baba Room Surface": "has_mask_zora || can_swim || (underwater_walking && short_hook_anywhere)"
+    "WARP_SONGS": "true"
+
+"Great Bay Temple Baba Room Surface":
+  dungeon: GB
+  events:
+    GBT_BABA_CHEST_SPAWN: "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has_mask_blast && can_hookshot_short))"
+  exits:
+    "Great Bay Temple Baba Room Underwater": "underwater_walking"
     "Great Bay Temple Compass Room": "true"
     "WARP_SONGS": "true"
   locations:
-    "Great Bay Temple Baba Chest": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has_mask_blast && short_hook_anywhere))"
+    "Great Bay Temple Baba Chest": "event(GBT_BABA_CHEST_SPAWN)"
 
 "Great Bay Temple Compass Room":
   dungeon: GB
   events:
     MAGIC: "true"
   exits:
-    "Great Bay Temple Baba Room": "true"
+    "Great Bay Temple Baba Room Surface": "true"
     "Great Bay Temple Central Room": "true"
     "Great Bay Temple Boss Key Room": "can_use_ice_arrows && (can_use_fire_short_range || has_hot_water_farore)"
     "Great Bay Temple After Boss Key": "(can_use_ice_arrows && trick(MM_GBT_FIRELESS) && is_tall) || short_hook_anywhere"
@@ -172,7 +200,7 @@
 "Great Bay Temple Red Pipe 2":
   dungeon: GB
   exits:
-    "Great Bay Temple Map Room": "true"
+    "Great Bay Temple Map Room Surface": "true"
     "WARP_SONGS": "true"
   events:
     GB_PIPE_RED2: "(soul_enemy(SOUL_ENEMY_CHUCHU) && can_use_ice_arrows) || short_hook_anywhere"
@@ -265,7 +293,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Green Pipe 2": "true"
-    "Great Bay Temple Map Room": "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Map Room Surface": "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "WARP_SONGS": "true"
   events:
     GB_PIPE_GREEN2: "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
