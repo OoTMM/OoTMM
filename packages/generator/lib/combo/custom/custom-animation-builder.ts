@@ -6,6 +6,7 @@ import { DATA_ANIMATIONS, FILES as GAME_FILES } from '@ootmm/data';
 import { DmaData } from '../dma.ts';
 import { arrayToIndexMap } from '../util.ts';
 import { CodeGen } from '../util/codegen.ts';
+import {buildPlayerAnimationDedupePlan, remapImportedPlayerAnimationOffset, type PlayerAnimationDedupePlan} from '../compact.ts';
 
 type AnimationDef = {
   name: string;
@@ -150,7 +151,11 @@ function parseSourcePlayerAnimHeader(buf: Uint8Array, off: number): SourcePlayer
   };
 }
 
-function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation): ImportedAnimation {
+function buildImportedAnimation(
+  roms: DecompressedRoms,
+  def: CustomAnimation,
+  dedupePlan: PlayerAnimationDedupePlan,
+): ImportedAnimation {
   const srcGame = def.home_game;
   const dstGame = otherGame(srcGame);
   const frameDataOffset = parseNum(def.frame_data_offset, `${def.name}.frame_data_offset`);
@@ -195,13 +200,14 @@ function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation): I
     srcGame,
     dstGame,
     frameCount,
-    frameDataOffset,
+    frameDataOffset: remapImportedPlayerAnimationOffset(dedupePlan, srcGame, frameDataOffset),
     frameSize: PLAYER_ANIM_FRAME_SIZE,
   };
 }
 
 function buildImportedAnimationPack(roms: DecompressedRoms): ImportedAnimation[] {
-  return DATA_ANIMATIONS.map(anim => buildImportedAnimation(roms, anim));
+  const dedupePlan = buildPlayerAnimationDedupePlan(roms);
+  return DATA_ANIMATIONS.map(anim => buildImportedAnimation(roms, anim, dedupePlan));
 }
 
 function defineBaseForAnimation(name: string): string {
