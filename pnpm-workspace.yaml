@@ -7,9 +7,7 @@ allowBuilds:
   es5-ext: true
   esbuild: true
   microtime: true
-  netlify-cli: true
   nx: true
-  sharp: true
   unix-dgram: true
   utf-8-validate: true
   yaz0: true
@@ -32,9 +30,7 @@ onlyBuiltDependencies:
   - es5-ext
   - esbuild
   - microtime
-  - netlify-cli
   - nx
-  - sharp
   - unix-dgram
   - utf-8-validate
   - yaz0
