@@ -17,7 +17,7 @@
     "lodash-es": "catalog:",
     "pngjs": "^7.0.0",
     "uint8array-extras": "^1.5.0",
-    "yaz0": "^4.0.3"
+    "yaz0": "4.0.2"
   },
   "type": "module",
   "main": "lib/combo/index.ts",

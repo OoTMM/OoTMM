@@ -174,8 +174,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0
       yaz0:
-        specifier: ^4.0.3
-        version: 4.0.3(supports-color@10.2.2)
+        specifier: 4.0.2
+        version: 4.0.2(supports-color@10.2.2)
     devDependencies:
       '@types/lodash-es':
         specifier: 'catalog:'
@@ -7077,8 +7077,8 @@ packages:
     resolution: {integrity: sha512-PtGEvEP30p7sbIBJKUBjUnqgTVOyMURc4dLo9iNyAJnNIEz9pm88cCXF21w94Kg3k6RXkeZh5DHOGS0qEONvNQ==}
     engines: {node: '>=12'}
 
-  yaz0@4.0.3:
-    resolution: {integrity: sha512-QOnP3zjJtrOkcUxdWJZ+dhcW9zL/8emZP34ikx9nFucXLkeMY08F9u91niguk92v/EiXO6t208Vcwezv+1CoIw==}
+  yaz0@4.0.2:
+    resolution: {integrity: sha512-gZohwkoC8DXubUu40MqWCT6IZUv2y3bxvZNdNph7aSTPeBlVIDCnDer5HgmEUR87eteKwoe5pmrvCsQNaJq+ag==}
 
   yazl@3.3.1:
     resolution: {integrity: sha512-BbETDVWG+VcMUle37k5Fqp//7SDOK2/1+T7X8TD96M3D9G8jK5VLUdQVdVjGi8im7FGkazX7kk5hkU8X4L5Bng==}
@@ -14585,7 +14585,7 @@ snapshots:
       buffer-crc32: 0.2.13
       pend: 1.2.0
 
-  yaz0@4.0.3(supports-color@10.2.2):
+  yaz0@4.0.2(supports-color@10.2.2):
     dependencies:
       node-addon-api: 8.7.0
       node-gyp: 10.3.1(supports-color@10.2.2)
