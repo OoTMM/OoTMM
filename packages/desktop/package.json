@@ -9,15 +9,26 @@
   "author": "Nax",
   "license": "MIT",
   "devDependencies": {
-    "@neutralinojs/neu": "^11.7.1",
+    "@neutralinojs/neu": "^11.7.2",
     "@ootmm/gui": "workspace:*"
   },
   "nx": {
     "targets": {
       "build": {
-        "dependsOn": [{ "projects": ["@ootmm/gui"], "target": "build:desktop" }],
-        "inputs": ["{projectRoot}/**/*"],
-        "outputs": ["{projectRoot}/dist/**/*"]
+        "dependsOn": [
+          {
+            "projects": [
+              "@ootmm/gui"
+            ],
+            "target": "build:desktop"
+          }
+        ],
+        "inputs": [
+          "{projectRoot}/**/*"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ]
       }
     }
   }

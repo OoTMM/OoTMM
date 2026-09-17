@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/typography": "^0.5.20",
     "preact": "catalog:",
     "preact-iso": "^2.11.1",
     "react-icons": "catalog:",
