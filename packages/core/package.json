@@ -19,9 +19,9 @@
   "devDependencies": {
     "@types/lodash-es": "catalog:",
     "@types/pako": "^2.0.4",
-    "csv": "^6.5.1",
+    "csv": "^6.6.3",
+    "fast-xml-parser": "catalog:",
     "type-fest": "catalog:",
-    "yaml": "catalog:",
-    "fast-xml-parser": "catalog:"
+    "yaml": "catalog:"
   }
 }
