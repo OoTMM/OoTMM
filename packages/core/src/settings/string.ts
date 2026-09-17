@@ -67,7 +67,7 @@ export function importSettings(str: string): Settings {
 function importSettingsV2(str: string): any {
   const data = str.slice(3);
   const buf = base64ToUint8Array(data);
-  const decompressed = inflateRaw(buf, { to: 'string' });
+  const decompressed = inflateRaw(buf, { toText: true });
   const partial = JSON.parse(decompressed);
   return partial;
 }
@@ -75,7 +75,7 @@ function importSettingsV2(str: string): any {
 function importSettingsV1(str: string): any {
   const data = str.slice(3);
   const buf = base64ToUint8Array(data);
-  const decompressed = inflate(buf, { to: 'string' });
+  const decompressed = inflate(buf, { toText: true });
   const partial = JSON.parse(decompressed);
   return partial;
 }
