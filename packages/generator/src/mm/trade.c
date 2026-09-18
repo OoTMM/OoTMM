@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/inventory.h>
+#include "combo/common/Kaleido_Scope.h"
 
 static void removeButtonItem(u16 itemId)
 {
@@ -16,18 +17,6 @@ static void removeButtonItem(u16 itemId)
     }
 }
 
-static void removeCurrentCButtonsForSlot(u16 slot)
-{
-    for (int button = 1; button < 4; ++button)
-    {
-        if (gMmSave.info.itemEquips.cButtonSlots[0][button] == slot)
-        {
-            gMmSave.info.itemEquips.buttonItems[0][button] = ITEM_NONE;
-            gMmSave.info.itemEquips.cButtonSlots[0][button] = 0xff;
-        }
-    }
-}
-
 static void checkTradeSlotAgeRequirement(u16 slot)
 {
     u8 item;
@@ -35,7 +24,7 @@ static void checkTradeSlotAgeRequirement(u16 slot)
     item = gSave.info.inventory.items[slot];
 
     if (!KaleidoScope_CheckMmItemAgeReq(item))
-        removeCurrentCButtonsForSlot(slot);
+        removeMmSlotFromCurrentCButton(slot, item);
 }
 
 void comboRemoveTradeItem1(u16 xitemId)

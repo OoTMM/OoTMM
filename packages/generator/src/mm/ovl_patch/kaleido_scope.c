@@ -82,7 +82,7 @@ s32 Player_GetCurMaskItemId_Custom(PlayState* play)
 
 PATCH_FUNC(0x80122eec, Player_GetCurMaskItemId_Custom);
 
-static void removeMmSlotFromCurrentCButton(u16 slot, u8 item)
+void removeMmSlotFromCurrentCButton(u16 slot, u8 item)
 {
     for (int button = 1; button < 4; ++button)
     {
