@@ -53,6 +53,9 @@
         },
         {
           "env": "STATIC_URL"
+        },
+        {
+          "env": "ENV_KEYS"
         }
       ]
     },
