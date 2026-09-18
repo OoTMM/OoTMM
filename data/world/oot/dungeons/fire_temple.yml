@@ -21,11 +21,11 @@
     "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
 
-"Fire Temple Pre-Boss Room Entrance Side":
+"Fire Temple Pre-Boss":
   dungeon: Fire
   exits:
     "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (is_adult || has_hover_boots || (event(FIRE_TEMPLE_PILLAR_HAMMER) && air_movement) || hookshot_anywhere || climb_anywhere)"
-    "Fire Temple Pre-Boss": "boss_key(BOSS_KEY_FIRE)"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE)"
 
 "Fire Temple Boss Key Loop Start":
   dungeon: Fire
