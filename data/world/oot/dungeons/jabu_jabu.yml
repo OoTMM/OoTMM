@@ -9,7 +9,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Pre-Boss Room": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_emptiness)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_emptiness))"
+    "Jabu-Jabu Pre-Boss Room": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER)) || ((has_hover_boots || air_movement || glitch_megaflip) && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_emptiness)) || climb_anywhere"
     "Jabu-Jabu Hole Room": "true"
   locations:
     "Jabu-Jabu Scrub": "(can_swim && (is_child || can_dive_small || time_travel_at_will)) && business_scrub(0x20)"
@@ -98,12 +98,12 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Basement": "true"
-    "Jabu-Jabu Elevator": "(can_swim || is_adult || time_travel_at_will || has_hover_boots) && (has_ranged_weapon || has_bombs)" #|| Has soul_ruto && settingRutoF1=false
+    "Jabu-Jabu Elevator": "(can_swim || is_adult || time_travel_at_will || has_hover_boots || air_movement) && (has_ranged_weapon || has_bombs)" #|| Has soul_ruto && settingRutoF1=false
   locations:
-    "Jabu-Jabu GS Water Switch": "gs"
-    "Jabu-Jabu Pot Alcove 1": "can_swim || has_hover_boots || climb_anywhere"
-    "Jabu-Jabu Pot Alcove 2": "can_swim || has_hover_boots || climb_anywhere"
-    "Jabu-Jabu Pot Alcove 3": "can_swim || has_hover_boots || climb_anywhere"
+    "Jabu-Jabu GS Water Switch": "gs && (can_collect_distance || can_swim || has_hover_boots || climb_anywhere || air_movement)"
+    "Jabu-Jabu Pot Alcove 1": "can_swim || has_hover_boots || climb_anywhere || air_movement"
+    "Jabu-Jabu Pot Alcove 2": "can_swim || has_hover_boots || climb_anywhere || air_movement"
+    "Jabu-Jabu Pot Alcove 3": "can_swim || has_hover_boots || climb_anywhere || air_movement"
 
 "Jabu-Jabu Before Big Octo":
   dungeon: JJ

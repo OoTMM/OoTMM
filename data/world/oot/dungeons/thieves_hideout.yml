@@ -122,7 +122,7 @@
     "GLOBAL": "true"
     "Gerudo Fortress Upper-Center Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
-    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots || air_movement || climb_anywhere"
 
 "Gerudo Fortress Kitchen Ledge Away from Tunnel":
   dungeon: GF
@@ -130,7 +130,7 @@
     "GLOBAL": "true"
     "Gerudo Fortress Upper-Left Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
-    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots || air_movement || climb_anywhere"
 
 "Gerudo Fortress Carpenter 3":
   dungeon: GF

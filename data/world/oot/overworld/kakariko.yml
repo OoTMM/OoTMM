@@ -18,7 +18,7 @@
     "Shooting Gallery Adult": "(is_adult && is_day && rusty_key(RUSTY_KEY_ADULT_SHOOTING_GALLERY)) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
     "Kakariko Balcony": "(is_child && is_day && soul_cucco) || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
     "Kakariko Rooftop": "can_hookshot || climb_anywhere"
-    "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || (is_day && soul_cucco) || climb_anywhere"
+    "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || (is_day && soul_cucco) || air_movement || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day && rusty_key(RUSTY_KEY_ADULT_BAZAAR)"
     "Kakariko Potion Shop": "is_day && rusty_key(RUSTY_KEY_ADULT_POTION_SHOP)"
     "Windmill": "rusty_key(RUSTY_KEY_WINDMILL)"

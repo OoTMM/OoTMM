@@ -124,7 +124,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Main": "true"
-    "Forest Temple Garden West Ledge": "has_hover_boots || climb_anywhere || hookshot_anywhere"
+    "Forest Temple Garden West Ledge": "has_hover_boots || (has_goron_bracelet && air_movement && (is_adult || can_jump_slash)) || climb_anywhere || hookshot_anywhere"
     "Forest Temple Twisted 1 Normal": "(((is_adult || time_travel_at_will) && has_goron_bracelet) || climb_anywhere || hookshot_anywhere) && cond(!setting(hookshotAnywhereOot, off) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(2))"
     "Forest Temple Twisted 1 Alt": "event(FOREST_TWISTED_HALL) && cond(!setting(hookshotAnywhereOot, off) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(2))"
   events:

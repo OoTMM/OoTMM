@@ -37,6 +37,8 @@ All notable changes to this project will be documented in this file.
 - The grass item on the platform in Zora River can now be obtained with Boomerang from afar.
 - The Gerudo Fortress wonder item near the archery range can now be gotten logically as child without Gerudo Card.
 - Gerudo Fortress and Thieves' Hideout logic has been overhauled and is now entirely accurate for future settings.
+- Ice Arrow platforms are now logical to go to and from Ice Cavern in Zora Fountain.
+- The setting for MM Air Movement in OOT now has logic attached to it.
 
 ### Fixed
 
@@ -54,6 +56,9 @@ All notable changes to this project will be documented in this file.
 - Fix logic for the pots in the jail with four torches considered as being in the room with three torches.
 - Fix MM great Bay Goast Gossip Stone and Fairy checks being in the wrong region.
 - Fix ER logic bug that could expect you to access the Great Fairy in DMC from the top when it doesn't actually lead to the Great Fairy.
+- The GS at the bottom of Jabu-Jabu's Belly now accounts for Bronze Scale.
+- Death Mountain Crater logic has been restructured, which fixes issues that could occur within ER seeds.
+
 
 ## [32.3] - 2026-08-23
 

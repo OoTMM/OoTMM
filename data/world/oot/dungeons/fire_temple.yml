@@ -5,13 +5,13 @@
     "Death Mountain Crater Near Temple": "true"
     "Fire Temple Lava Room": "small_keys_fire(1)"
     "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_fire(7), true) && can_hammer"
-    "Fire Temple Pre-Boss": "true"
+    "Fire Temple Pre-Boss Room Entrance Side": "true"
 
-"Fire Temple Pre-Boss":
+"Fire Temple Pre-Boss Room Entrance Side":
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && has_tunic_goron && (((is_adult || time_travel_at_will) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || trick(OOT_FIRE_TEMPLE_BOSS_DOOR_ROLL_JUMP))) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pre-Boss": "has_tunic_goron && ((is_adult && (trick(OOT_FIRE_TEMPLE_BOSS_DOOR_ROLL_JUMP) || air_movement)) || (event(FIRE_TEMPLE_PILLAR_HAMMER) && (is_adult || air_movement)) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
     BOMBS_OR_BOMBCHU: "has_tunic_goron"
   locations:
@@ -20,6 +20,12 @@
     "Fire Temple Pot Pre-Boss Room 2": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
     "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
+
+"Fire Temple Pre-Boss Room Entrance Side":
+  dungeon: Fire
+  exits:
+    "Fire Temple Pre-Boss Room Entrance Side": "has_tunic_goron && (is_adult || has_hover_boots || (event(FIRE_TEMPLE_PILLAR_HAMMER) && air_movement) || hookshot_anywhere || climb_anywhere)"
+    "Fire Temple Pre-Boss": "boss_key(BOSS_KEY_FIRE)"
 
 "Fire Temple Boss Key Loop Start":
   dungeon: Fire
@@ -99,13 +105,13 @@
   locations:
     "Fire Temple Scarecrow Chest": "true"
     "Fire Temple GS Scarecrow Wall": "gs && (can_use_sword || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din)"
-    "Fire Temple GS Scarecrow Top": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Fire Temple GS Scarecrow Top": "gs && (can_collect_distance || has_ranged_weapon || has_explosives || can_use_din)"
 
 "Fire Temple Ring":
   dungeon: Fire
   exits:
     "Fire Temple Before Miniboss": "small_keys_fire(7) || hookshot_anywhere || climb_anywhere"
-    "Fire Temple Pillar Ledge": "has_hover_boots || hookshot_anywhere || climb_anywhere"
+    "Fire Temple Pillar Ledge": "has_hover_boots || (is_adult && air_movement) || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Compass": "true"
     "Fire Temple Pot Ring 1": "true"

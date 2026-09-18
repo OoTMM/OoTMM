@@ -37,7 +37,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Child Entrance": "true"
-    "Spirit Temple Child Back Left": "has_ranged_weapon_child || hookshot_anywhere || climb_anywhere || (can_hookshot && can_jump_slash) || can_longshot"
+    "Spirit Temple Child Back Left": "has_ranged_weapon_child || hookshot_anywhere || climb_anywhere || (can_hookshot && can_jump_slash) || can_longshot || (is_adult && air_movement)"
 
 "Spirit Temple Child Right":
   dungeon: Spirit

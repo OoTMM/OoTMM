@@ -123,7 +123,7 @@
   exits:
     "Dodongo Cavern Main Room Upper Entrance Side": "true"
     "Dodongo Cavern Room Before Upper Lizalfos": "(can_use_sticks && event(OPEN_MQ_DC_LARVAE_ROOM)) || has_fire"
-    "Dodongo Cavern Vanilla Bomb Bag Room Upper": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere"
+    "Dodongo Cavern Vanilla Bomb Bag Room Upper": "can_hookshot || has_hover_boots || ((is_adult || air_movement) && trick(OOT_DC_JUMP)) || climb_anywhere"
     "Dodongo Cavern MQ Larvae Room": "event(OPEN_MQ_DC_LARVAE_ROOM)"
   events:
     OPEN_MQ_DC_LARVAE_ROOM: "can_use_sticks || has_fire"

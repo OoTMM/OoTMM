@@ -119,7 +119,7 @@
   region: GORON_CITY
   exits:
     "GLOBAL": "true"
-    "Death Mountain Crater Bottom": "is_adult || time_travel_at_will"
+    "Death Mountain Crater Bridges": "is_adult || time_travel_at_will"
     "Goron City": "true"
   events:
     DARUNIA_TORCH: "is_child && can_use_sticks"

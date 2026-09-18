@@ -112,7 +112,7 @@
     "Gerudo Fortress Upper-Right Ledge": "true"
     "Gerudo Fortress Upper-Left Ledge": "true"
     "Gerudo Fortress Lower-Left Ledge": "true"
-    "Gerudo Fortress Left Roof": "(is_adult && scarecrow_hookshot) || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
+    "Gerudo Fortress Left Roof": "(is_adult && (scarecrow_hookshot || air_movement)) || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
   locations:
     "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || has_bombs || can_use_bow || can_use_slingshot || (climb_anywhere && can_damage))"
 
@@ -125,7 +125,7 @@
     "Gerudo Fortress Upper-Left Ledge": "true"
     "Gerudo Fortress Lower-Left Ledge": "true"
     "Gerudo Fortress Break Room Ledge": "true"
-    "Gerudo Fortress Above Prison": "(is_adult && hookshot_anywhere) || longshot_anywhere || climb_anywhere"
+    "Gerudo Fortress Above Prison": "(is_adult && (hookshot_anywhere || air_movement)) || longshot_anywhere || climb_anywhere"
   locations:
     "Gerudo Fortress Chest": "true"
     "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || has_bombs || can_use_bow || can_use_slingshot || (climb_anywhere && can_damage))"
