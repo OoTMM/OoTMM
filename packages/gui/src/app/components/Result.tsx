@@ -3,16 +3,23 @@ import type { ResultFile } from '../api';
 import { Button } from './ui';
 
 const download = (file: ResultFile) => {
-  const a = document.createElement('a');
+  /* Create a Blob */
   let blob: Blob;
   if (file.data instanceof Blob) {
     blob = file.data;
   } else {
     blob = new Blob([file.data as BlobPart], { type: file.mime });
   }
-  a.href = window.URL.createObjectURL(blob);
+  const href = window.URL.createObjectURL(blob);
+
+  /* Create a link and trigger download */
+  const a = document.createElement('a');
+  a.href = href;
   a.download = file.name;
   a.click();
+
+  /* Clean up the URL object */
+  window.URL.revokeObjectURL(a.href);
 };
 
 type ResultProps = {
