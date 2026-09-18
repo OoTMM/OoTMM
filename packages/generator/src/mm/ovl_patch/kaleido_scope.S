@@ -610,3 +610,14 @@ KaleidoScope_NativeItemAgeAndFormCheck_Hook:
 PATCH_START 0x80828b14
   jal     KaleidoScope_NativeItemAgeAndFormCheck_Hook
 PATCH_END
+
+/*
+==================================================================================================
+ Quest Status - extended rendering
+==================================================================================================
+*/
+
+PATCH_START 0x80821AD4
+  j     KaleidoScope_DrawTexQuadRGBA32Custom
+   nop
+PATCH_END

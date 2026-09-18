@@ -588,6 +588,19 @@ typedef struct
 }
 MmHumanAgeLoadout;
 
+typedef union
+{
+    struct
+    {
+        u8 sword:2;
+        u8 giantSword:2;
+        u8 masterSword:1;
+        u8 unused:3;
+    };
+    u8 value;
+}
+MmSwordInventory;
+
 typedef struct ALIGNED(16)
 {
     u8 npc[32];
@@ -611,6 +624,9 @@ typedef struct ALIGNED(16)
         u8 value;
     } ootSongs;
     u8 customMask;
+    MmSwordInventory swords;
+    u8 shieldsOwned;
+    u8 mmGiantsKnifeHealth;
     MmHumanAgeLoadout humanAgeLoadouts[2];
 }
 MmCustomSave;

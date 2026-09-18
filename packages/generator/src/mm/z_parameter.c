@@ -3,6 +3,7 @@
 #include <combo/souls.h>
 
 #include "combo/custom.h"
+#include "combo/inventory.h"
 
 void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
 {
@@ -67,6 +68,20 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_MASK_SPOOKY:
             id = ITEM_OOT_SPOOKY_MASK;
             break;
+        case ITEM_MM_SWORD_MASTER:
+            id = ITEM_OOT_SWORD_MASTER;
+            break;
+
+        case ITEM_MM_SWORD_GIANTS_KNIFE:
+            if (MmSword_GetGiantsKnifeHealth() == 0)
+                id = ITEM_OOT_SWORD_KNIFE_BROKEN;
+            else
+                id = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+            break;
+
+        case ITEM_MM_SWORD_BIGGORON:
+            id = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);
@@ -113,10 +128,19 @@ s8 Interface_GetItemRestriction(u8 playerForm, PlayState* play, s16* restoreHudV
         return gPlayerFormItemRestrictions[playerForm][item];
     }
 
-    if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring)
+    switch (item)
     {
-        return 0;
+        case ITEM_MM_SWORD_MASTER:
+        case ITEM_MM_SWORD_GIANTS_KNIFE:
+        case ITEM_MM_SWORD_BIGGORON:
+            return
+                playerForm == MM_PLAYER_FORM_HUMAN
+                    ? 1
+                    : 0;
     }
+
+    if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring)
+        return 0;
 
     u8 customItem = item - ITEM_MM_CUSTOM_MIN;
     s8 result = gPlayerFormCustomItemRestrictions[playerForm][customItem];

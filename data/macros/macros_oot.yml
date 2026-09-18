@@ -120,13 +120,13 @@
 
 # Swords
 "starts_with_master_sword": "setting(startingAgeOot, adult) && (!setting(shuffleMasterSword) && setting(timeTravelSword))"
-"has_sword_child(n)": "setting(extraChildSwordsOot) && cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
-"has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), cond(setting(extraChildSwordsOot), has_sword_child(1), has(SWORD_KOKIRI)))"
+"has_sword_child(n)": "setting(extraChildSwordsOot) && cond(setting(sharedChildSwords), has(SHARED_SWORD, n), has(SWORD, n))"
+"has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), cond(setting(sharedChildSwords), has(SHARED_SWORD), has(SWORD)), cond(setting(extraChildSwordsOot), has_sword_child(1), has(SWORD_KOKIRI)))"
 "has_sword_razor": "has_sword_child(2)"
 "has_sword_gilded": "has_sword_child(3)"
-"has_sword_master": "starts_with_master_sword || cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
-"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), cond(starts_with_master_sword, has(SWORD, 2), has(SWORD, 3)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
-"has_sword_biggoron": "cond(setting(progressiveSwordsOot, progressive), cond(starts_with_master_sword, has(SWORD, 3), has(SWORD, 4)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON, 2), has(SWORD_BIGGORON)))"
+"has_sword_master": "starts_with_master_sword || cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), cond(setting(sharedMasterSword), has(SHARED_SWORD_MASTER), has(SWORD_MASTER)))"
+"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), cond(starts_with_master_sword, has(SWORD, 2), has(SWORD, 3)), cond(setting(sharedGoronSwords), cond(setting(progressiveSwordsOot, goron), has(SHARED_SWORD_GORON), has(SHARED_SWORD_KNIFE) || has(SHARED_SWORD_GORON)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON))))"
+"has_sword_biggoron": "cond(setting(progressiveSwordsOot, progressive), cond(starts_with_master_sword, has(SWORD, 3), has(SWORD, 4)), cond(setting(sharedGoronSwords), cond(setting(progressiveSwordsOot, goron), has(SHARED_SWORD_GORON, 2), has(SHARED_SWORD_GORON)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON, 2), has(SWORD_BIGGORON))))"
 "has_sword_great_fairy": "setting(gfsOot) && cond(setting(sharedGFS), has(SHARED_GREAT_FAIRY_SWORD), has(GREAT_FAIRY_SWORD))"
 "can_use_sword_kokiri": "age_sword_child && has_sword_kokiri"
 "can_use_sword_razor": "age_sword_child && has_sword_razor"
@@ -146,7 +146,7 @@
 "has_shield_for_scrubs": "(is_adult && has_shield_hylian) || has_shield_deku"
 "has_mirror_shield_raw_nonshared": "cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
 "has_mirror_shield_raw_shared": "cond(setting(progressiveShieldsOot, progressive), has(SHARED_SHIELD, 3), has(SHARED_SHIELD_MIRROR))"
-"has_mirror_shield": "age_shield_adult && cond(setting(sharedShields), has_mirror_shield_raw_shared, has_mirror_shield_raw_nonshared)"
+"has_mirror_shield": "age_shield_adult && cond(setting(sharedMirrorShield), has_mirror_shield_raw_shared, has_mirror_shield_raw_nonshared)"
 "has_one_hand_shield": "has_shield_for_scrubs || has_mirror_shield"
 
 "can_reflect_light": "has_sunlight_arrows || has_mirror_shield"

@@ -91,6 +91,13 @@ static void Age_SwapEquipmentMm(void)
     curAge->boots = gMmSave.info.itemEquips.boots;
     curAge->tunic = gMmSave.info.itemEquips.tunic;
 
+    /* Validate new age logical equipment */
+    if (newAge->sword != MM_SWORD_NONE && !MmSword_IsOwned((MmSwordId)newAge->sword))
+        newAge->sword = MM_SWORD_NONE;
+
+    if (newAge->shield != MM_SHIELD_NONE && !MmShield_IsOwned((MmShieldId)newAge->shield))
+        newAge->shield = MM_SHIELD_NONE;
+
     /* Load new equips */
     for (int i = EQUIP_SLOT_C_LEFT; i <= EQUIP_SLOT_C_RIGHT; ++i)
     {
@@ -149,6 +156,8 @@ void Age_SetRawMm(PlayState* play, int age)
 
     Age_OnChangeMm();
     gMmSave.linkAge = age;
+    MmSword_RefreshNativeEquip(NULL);
+    MmShield_RefreshNativeEquip(NULL);
 }
 
 void Age_SetOot(PlayState* play, int age)

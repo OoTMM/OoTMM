@@ -337,6 +337,7 @@ Matrix_Push = 0x8018019c;
 Matrix_Pop = 0x801801cc;
 
 _AddRupees = 0x801159ec;
+Rupees_ChangeBy = 0x801159EC;
 Inventory_ChangeAmmo = 0x80115a14;
 
 PlayStoreFlags = 0x80169d40;
@@ -778,6 +779,7 @@ Player_CheckRangedShieldDraw = 0x80830B88;
 Player_CheckRangedRestart = 0x80830F9C;
 Player_CheckRangedHoldRelease = 0x80830FD4;
 EffectSsStone1_Spawn = 0x800B25D8;
+EffectSsStick_Spawn = 0x800B23D8;
 Gfx_SetupDL25_Xlu2 = 0x8012C240;
 
 Player_MaskIdToItemId = 0x80122ED8;
@@ -823,3 +825,6 @@ EffectSsDtBubble_SpawnCustomColor = 0x800b210c;
 Actor_SetColorFilter = 0x800bcb70;
 Actor_DrawDamageEffects = 0x800be680;
 Matrix_MultVecX = 0x80181b78;
+
+Player_SetModelsForHoldingShield = 0x801239AC;
+Inventory_GetBtnBItem = 0x8012EC80;

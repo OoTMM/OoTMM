@@ -127,6 +127,9 @@ void Sram_SaveEndOfCycle(PlayState* play)
         }
     }
 
+    if (!Config_Flag(CFG_SHARED_GORON_SWORDS) && gSharedCustomSave.mm.swords.giantSword == 1)
+        MmSword_SetGiantsKnifeHealth(8);
+
     /* Reload bottles */
     for (int i = 1; i <= 3; ++i)
     {

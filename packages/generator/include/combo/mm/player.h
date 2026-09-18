@@ -729,4 +729,7 @@ bool func_800B715C(struct PlayState* play);
 void func_8012301C(Actor* thisx, struct PlayState* play2);
 
 int KaleidoScope_CheckMmItemAgeReq(u8 item);
+
+void Player_SetModelsForHoldingShield(Player*);
+
 #endif

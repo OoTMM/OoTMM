@@ -603,17 +603,18 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BUTTON_C_UP:
         return !Config_Flag(CFG_SHARED_OCARINA_BUTTONS);
     case GI_OOT_SHIELD_HYLIAN:
-    case GI_OOT_SHIELD_MIRROR:
-    case GI_MM_SHIELD_HERO:
-    case GI_MM_SHIELD_MIRROR:
+    case GI_MM_SHIELD_HYLIAN:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
-        return !Config_Flag(CFG_SHARED_SHIELDS);
+        return !Config_Flag(CFG_SHARED_HYLIAN_SHIELD);
+    case GI_OOT_SHIELD_MIRROR:
+    case GI_MM_SHIELD_MIRROR:
+        return !Config_Flag(CFG_SHARED_MIRROR_SHIELD);
     case GI_OOT_SHIELD_DEKU:
     case GI_MM_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_MM_PROGRESSIVE_SHIELD_DEKU:
-        return !Config_Flag(CFG_SHARED_SHIELDS) && Config_Flag(CFG_MM_DEKU_SHIELD);
+        return !Config_Flag(CFG_SHARED_DEKU_SHIELD) && Config_Flag(CFG_MM_DEKU_SHIELD);
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
@@ -672,12 +673,12 @@ static int isItemAmbiguous(s16 gi)
         return (Config_Flag(CFG_MM_STRENGTH) && !Config_Flag(CFG_SHARED_STRENGTH));
     case GI_OOT_SWORD_KOKIRI:
     case GI_MM_SWORD_KOKIRI:
-        return !Config_Flag(CFG_SHARED_SWORDS);
+        return !Config_Flag(CFG_SHARED_CHILD_SWORDS);
     case GI_OOT_SWORD_RAZOR:
     case GI_OOT_SWORD_GILDED:
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:
-        return Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS) && !Config_Flag(CFG_SHARED_SWORDS);
+        return Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS) && !Config_Flag(CFG_SHARED_CHILD_SWORDS);
     case GI_OOT_HAMMER:
     case GI_MM_HAMMER:
         return Config_Flag(CFG_MM_HAMMER) && !Config_Flag(CFG_SHARED_HAMMER);
@@ -1055,7 +1056,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS) || Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
             {
                 itemName = "a " TEXT_C1 "Progressive Sword";
-                ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
+                ambiguous = !Config_Flag(CFG_SHARED_CHILD_SWORDS);
             }
             break;
         case GI_OOT_SWORD_KNIFE:
@@ -1064,14 +1065,22 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
                 itemName = "a " TEXT_C1 "Progressive Goron Sword";
             }
             break;
+        case GI_MM_SWORD_KNIFE:
+            if (Config_Flag(
+                    CFG_MM_PROGRESSIVE_SWORDS_GORON))
+            {
+                itemName =
+                    "a " TEXT_C1 "Progressive Biggoron Sword";
+            }
+            break;
         case GI_MM_SWORD_KOKIRI:
             itemName = "a " TEXT_C1 "Progressive Sword";
-            ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
+            ambiguous = !Config_Flag(CFG_SHARED_CHILD_SWORDS);
             break;
         case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         case GI_MM_PROGRESSIVE_SHIELD_DEKU:
             itemName = "a " TEXT_C1 "Progressive Shield";
-            ambiguous = !Config_Flag(CFG_SHARED_SHIELDS);
+            ambiguous = !Config_Flag(CFG_SHARED_DEKU_SHIELD);
             break;
         case GI_OOT_OCARINA_FAIRY:
         case GI_MM_OCARINA_FAIRY:

@@ -1809,7 +1809,7 @@ export const SETTINGS = [{
   name: 'OoT Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of the OoT Shields',
+  description: 'Alters the behavior of the OoT Shields. If both OoT and Mm shield progression is on, the trees are combined.',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields are removed from the item pool.' },
@@ -1830,14 +1830,29 @@ export const SETTINGS = [{
   default: 'goron',
   cond: hasOoT,
 }, {
+  key: 'progressiveGoronSwordsMm',
+  name: 'MM Goron Swords',
+  category: 'items.progressive',
+  type: 'enum',
+  description: 'Makes the Goron Swords in MM two progressive items instead of two separate items. If Shared Goron Swords is on, this setting is ignored and the OoT progression setting is used instead.',
+  values: [
+    { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Goron Sword will grant you the nextone. Giant\'s Knife -> Biggoron Sword' },
+  ],
+  default: 'progressive',
+  cond: (s: any) =>
+      hasMM(s) &&
+      s.goronSwordsMm &&
+      !s.sharedGoronSwords,
+}, {
   key: 'progressiveShieldsMm',
   name: 'MM Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of the MM Shields',
+  description: 'Alters the behavior of the MM Shields. If both OoT and Mm shield progression is on, the trees are combined.',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero\'s Shield -> Mirror Shield. Other Hero\'s Shields are removed from the item pool.' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield (If turned on) -> Hero\'s Shield (and Hylian Shield if turned on) -> Mirror Shield. Other Hero\'s Shields are removed from the item pool.' },
   ],
   default: 'separate',
   cond: hasMM,
@@ -1846,7 +1861,7 @@ export const SETTINGS = [{
   name: 'MM Great Fairy Sword',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Controls whether the Great Fairy Sword is included in sword progression',
+  description: 'Controls whether the Great Fairy Sword is included in child sword progression. If child swords and great fairy sword are both added in OoT, this setting also adds Great Fairy Sword to OoT child sword progression.',
   values: [
     { value: 'separate', name: 'Separate' },
     { value: 'progressive', name: 'Progressive' },
@@ -2261,6 +2276,18 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.progressiveSwordsOot !== 'progressive' && hasOoT(x),
 }, {
+  key: 'heroShieldOot',
+  name: "Hero's Shield (OoT)",
+  category: 'items.extensions.crossGame.items',
+  game: 'oot',
+  group: "Hero's Shield",
+  type: 'boolean',
+  description: "Adds the Hero's Shield in OoT as an alternate child shield in the Deku Shield slot.",
+  default: false,
+  cond: (s: any) =>
+      hasOoT(s) &&
+      s.progressiveShieldsOot !== 'progressive',
+}, {
   key: 'dekuShieldMm',
   name: "Deku Shield (MM)",
   category: 'items.extensions.crossGame.items',
@@ -2271,6 +2298,17 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'hylianShieldMm',
+  name: "Hylian Shield (MM)",
+  category: 'items.extensions.crossGame.items',
+  game: 'mm',
+  group: 'Hylian Shield',
+  type: 'boolean',
+  description:
+      "Adds the Hylian Shield to Majora's Mask. ",
+  default: false,
+  cond: hasMM,
+},{
   key: 'blastMaskOot',
   name: "Blast Mask (OoT)",
   category: 'items.extensions.crossGame.masks',
@@ -3269,7 +3307,54 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoTMM,
 }, {
-  key: 'sharedSwords',
+  key: 'masterSwordMm',
+  name: 'Master Sword (MM)',
+  category: 'items.extensions.crossGame.items',
+  game: 'mm',
+  group: 'Master Sword',
+  type: 'boolean',
+  description: 'Adds the Master Sword to Majora\'s Mask.',
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'sharedMasterSword',
+  name: 'Shared Master Sword',
+  category: 'items.extensions.crossGame.items',
+  game: 'shared',
+  group: 'Master Sword',
+  type: 'boolean',
+  description:
+      'Combines the OoT and MM Master Swords into one shared item. If progressive OoT swords are on, the MM Master Sword is not added to the pool and is instead granted when you get the OoT Master Sword.',
+  default: false,
+  cond: (s: any) =>
+      hasOoTMM(s) &&
+      s.masterSwordMm,
+}, {
+  key: 'goronSwordsMm',
+  name: 'Goron Swords (MM)',
+  category: 'items.extensions.crossGame.items',
+  game: 'mm',
+  group: 'Goron Swords',
+  type: 'boolean',
+  description:
+      'Adds the Giant\'s Knife and Biggoron Sword to Majora\'s Mask.',
+  default: false,
+  cond: hasMM,
+}, {
+  key: 'sharedGoronSwords',
+  name: 'Shared Goron Swords',
+  category: 'items.extensions.crossGame.items',
+  game: 'shared',
+  group: 'Goron Swords',
+  type: 'boolean',
+  description:
+      'Combines the OoT and MM Goron Swords into two shared items.',
+  default: false,
+  cond: (s: any) =>
+      hasOoTMM(s) &&
+      s.goronSwordsMm,
+}, {
+  key: 'sharedChildSwords',
   name: 'Shared Child Swords',
   category: 'items.extensions.crossGame.items',
   game: 'shared',
@@ -3277,17 +3362,51 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Combines the Kokiri, Razor and Gilded Swords from OoT and MM into three progressive items for both games',
   default: false,
-  cond: (s: any) => hasOoTMM(s) && s.extraChildSwordsOot && s.progressiveGFS !== 'progressive',
+  cond: (s: any) => hasOoTMM(s) && s.extraChildSwordsOot,
 }, {
-  key: 'sharedShields',
-  name: 'Shared Shields',
+  key: 'sharedDekuShield',
+  name: 'Shared Deku Shield',
   category: 'items.extensions.crossGame.items',
   game: 'shared',
   group: 'Deku Shield',
   type: 'boolean',
-  description: 'When you obtain a shield, the opposite game\'s equivalent is given to you as well. With this, the Hylian and Hero\'s Shields are considered equivalent.<br>If Shields are Progressive, all Shields are combined into three progressive items: Deku Shield -> Hylian/Hero\'s Shield -> Mirror Shield',
+  description: 'Combines the Deku Shield from OoT and MM into one item for both games.',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.dekuShieldMm && s.progressiveShieldsOot === s.progressiveShieldsMm,
+}, {
+  key: 'sharedHylianShield',
+  name: 'Shared Hylian Shield',
+  category: 'items.extensions.crossGame.items',
+  game: 'shared',
+  group: 'Hylian Shield',
+  type: 'boolean',
+  description: 'Combines the Hylian Shield from OoT and MM into one item for both games.',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.hylianShieldMm && s.progressiveShieldsOot === s.progressiveShieldsMm,
+}, {
+  key: 'sharedMirrorShield',
+  name: 'Shared Mirror Shield',
+  category: 'items.extensions.shared',
+  game: 'shared',
+  group: 'Mirror Shield',
+  type: 'boolean',
+  description: 'Combines the Mirror Shield from OoT and MM into one item for both games.',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.progressiveShieldsOot === s.progressiveShieldsMm,
+}, {
+  key: 'sharedHeroShield',
+  name: "Shared Hero's Shield",
+  category: 'items.extensions.crossGame.items',
+  game: 'shared',
+  group: "Hero's Shield",
+  type: 'boolean',
+  description: "Combines the Hero's Shield from OoT and MM into one item for both games.",
+  default: false,
+  cond: (s: any) =>
+      hasOoTMM(s) &&
+      s.heroShieldOot &&
+      s.progressiveShieldsOot === 'separate' &&
+      s.progressiveShieldsMm === 'separate',
 }, {
   key: 'sharedSoulsEnemy',
   name: 'Shared Enemy Souls',

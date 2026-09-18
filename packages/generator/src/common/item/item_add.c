@@ -7,6 +7,8 @@
 #include <combo/config.h>
 #include <combo/global.h>
 
+#include "combo/inventory.h"
+
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot
 #else
@@ -60,13 +62,6 @@ static const u16 kButtonMasks[] = {
     L_CBUTTONS,
     U_CBUTTONS,
     D_CBUTTONS,
-};
-
-static const u8 kMmSwords[] = {
-    ITEM_NONE,
-    ITEM_MM_SWORD_KOKIRI,
-    ITEM_MM_SWORD_RAZOR,
-    ITEM_MM_SWORD_GILDED,
 };
 
 static const u8 kItemSlotsOot[] = {
@@ -1138,25 +1133,90 @@ static int addItemSwordOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSwordMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    int shouldChangeBtn;
+    MmSwordId sword = (MmSwordId)param;
+    s32 refresh = 0;
 
-    shouldChangeBtn = 1;
-#if defined(GAME_MM)
-    if (gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
-        shouldChangeBtn = 0;
-#endif
+    switch (sword)
+    {
+    case MM_SWORD_KOKIRI:
+        if (gSharedCustomSave.mm.swords.sword < 1)
+            gSharedCustomSave.mm.swords.sword = 1;
+        break;
 
-    if (shouldChangeBtn)
-        gMmSave.info.itemEquips.buttonItems[0][0] = kMmSwords[param];
-    gMmSave.info.itemEquips.sword = param;
+    case MM_SWORD_RAZOR:
+        if (gSharedCustomSave.mm.swords.sword < 2)
+        {
+            gSharedCustomSave.mm.swords.sword = 2;
 
-    if (param == 2)
+            for (s32 age = 0; age < 2; age++)
+            {
+                if (gSharedCustomSave.mm.humanAgeLoadouts[age].sword == MM_SWORD_KOKIRI)
+                {
+                    gSharedCustomSave.mm.humanAgeLoadouts[age].sword = MM_SWORD_RAZOR;
+
+                    if (age == gMmSave.linkAge)
+                        refresh = 1;
+                }
+            }
+        }
+
         gMmSave.info.playerData.swordHealth = 100;
+        break;
 
-#if defined(GAME_MM)
-    if (play)
-        Interface_LoadItemIconImpl(play, 0);
-#endif
+    case MM_SWORD_GILDED:
+        if (gSharedCustomSave.mm.swords.sword < 3)
+        {
+            gSharedCustomSave.mm.swords.sword = 3;
+
+            for (s32 age = 0; age < 2; age++)
+            {
+                if (gSharedCustomSave.mm.humanAgeLoadouts[age].sword == MM_SWORD_KOKIRI ||
+                    gSharedCustomSave.mm.humanAgeLoadouts[age].sword == MM_SWORD_RAZOR)
+                {
+                    gSharedCustomSave.mm.humanAgeLoadouts[age].sword = MM_SWORD_GILDED;
+
+                    if (age == gMmSave.linkAge)
+                        refresh = 1;
+                }
+            }
+        }
+        break;
+
+    case MM_SWORD_MASTER:
+        gSharedCustomSave.mm.swords.masterSword = 1;
+        break;
+
+    case MM_SWORD_GIANTS_KNIFE:
+        if (gSharedCustomSave.mm.swords.giantSword < 1)
+            gSharedCustomSave.mm.swords.giantSword = 1;
+
+        if (gSharedCustomSave.mm.swords.giantSword == 1)
+            MmSword_SetGiantsKnifeHealth(8);
+        break;
+
+    case MM_SWORD_BIGGORON:
+        if (gSharedCustomSave.mm.swords.giantSword < 2)
+        {
+            gSharedCustomSave.mm.swords.giantSword = 2;
+
+            for (s32 age = 0; age < 2; age++)
+            {
+                if (gSharedCustomSave.mm.humanAgeLoadouts[age].sword == MM_SWORD_GIANTS_KNIFE)
+                {
+                    gSharedCustomSave.mm.humanAgeLoadouts[age].sword = MM_SWORD_BIGGORON;
+
+                    if (age == gMmSave.linkAge)
+                        refresh = 1;
+                }
+            }
+        }
+        break;
+
+    default:
+        break;
+    }
+    if (refresh)
+        MmSword_RefreshNativeEquip(play);
 
     return 0;
 }
@@ -1193,45 +1253,202 @@ static int addItemBombBagMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static void addShieldOotRaw(u8 shield, s32 progressive)
+{
+    u8 mask = 1 << (shield - 1);
+
+    gOotSave.info.inventory.equipment.shields |= mask;
+
+    if (shield == 1)
+    {
+        gSharedCustomSave.ootChildShields |=
+            1u << OOT_CHILD_SHIELD_DEKU;
+    }
+
+    if (progressive && shield != 3)
+        gOotExtraItems.shield |= mask;
+}
+
+static void addShieldMmRaw(MmShieldId shield, s32 progressive)
+{
+    gSharedCustomSave.mm.shieldsOwned |= 1u << (shield - 1);
+
+    if (!progressive)
+        return;
+
+    if (shield == MM_SHIELD_DEKU)
+        gSharedCustomSave.mmProgressiveShields |= 1;
+
+    if (shield == MM_SHIELD_HERO)
+        gSharedCustomSave.mmProgressiveShields |= 2;
+}
+
+static s32 allShieldsShared(void)
+{
+    return
+        Config_Flag(CFG_SHARED_DEKU_SHIELD) && Config_Flag(CFG_SHARED_HYLIAN_SHIELD) &&
+        Config_Flag(CFG_SHARED_MIRROR_SHIELD) && (!Config_Flag(CFG_OOT_HERO_SHIELD) || Config_Flag(CFG_SHARED_HERO_SHIELD));
+}
+
+static s32 sharedShieldAdvancesOot(s32 sourceProgressive)
+{
+    if (!Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
+        return 0;
+    if (!Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
+        return 1;
+    return sourceProgressive && allShieldsShared();
+}
+
+static s32 sharedShieldAdvancesMm(s32 sourceProgressive)
+{
+    if (!Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
+        return 0;
+    if (!Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
+        return 1;
+    return sourceProgressive && allShieldsShared();
+}
+
+static void addShieldHeroOotRaw(void)
+{
+    gSharedCustomSave.ootChildShields |=
+        1u << OOT_CHILD_SHIELD_HERO;
+
+    gOotSave.info.inventory.equipment.shields |=
+        EQ_OOT_SHIELD_DEKU;
+
+#if defined(GAME_OOT)
+    gOotChildShieldVariant = OOT_CHILD_SHIELD_HERO;
+#endif
+}
+
 static int addItemShieldOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    u8 shieldType;
-    u8 isProgressive;
-    u8 mask;
+    u8 shield = param & 0xff;
+    s32 progressive = !!(param & 0x100);
+    s32 hero = !!(param & 0x200);
+    s32 advanceMm = sharedShieldAdvancesMm(progressive);
+    if (hero)
+    {
+        addShieldHeroOotRaw();
 
-    shieldType = (param & 0xff);
-    isProgressive = !!((param >> 8) & 0xff);
-    mask = 1 << (shieldType - 1);
-    gOotSave.info.inventory.equipment.shields |= mask;
-    if (isProgressive)
-        gOotExtraItems.shield |= mask;
+        if (Config_Flag(CFG_SHARED_HERO_SHIELD))
+        {
+            addShieldMmRaw(MM_SHIELD_HERO, advanceMm);
+            if (advanceMm && Config_Flag(CFG_MM_HYLIAN_SHIELD))
+                addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
+        }
+
+        return 0;
+    }
+
+    addShieldOotRaw(shield, progressive);
+
+    if (progressive && shield == 2 && Config_Flag(CFG_OOT_HERO_SHIELD))
+        addShieldHeroOotRaw();
+
+    switch (shield)
+    {
+        case 1:
+            if (Config_Flag(CFG_SHARED_DEKU_SHIELD))
+            {
+                addShieldMmRaw(
+                    MM_SHIELD_DEKU,
+                    advanceMm);
+            }
+            break;
+
+        case 2:
+            if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD) && advanceMm)
+            {
+                addShieldMmRaw(MM_SHIELD_HERO, 1);
+
+                if (Config_Flag(CFG_MM_HYLIAN_SHIELD))
+                    addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
+            }
+            else
+            {
+                if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
+                    addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
+                if (progressive && Config_Flag(CFG_OOT_HERO_SHIELD) && Config_Flag(CFG_SHARED_HERO_SHIELD))
+                    addShieldMmRaw(MM_SHIELD_HERO, 0);
+            }
+            break;
+
+        case 3:
+            if (Config_Flag(CFG_SHARED_MIRROR_SHIELD))
+                addShieldMmRaw(MM_SHIELD_MIRROR, 0);
+            break;
+    }
+
     return 0;
 }
 
 static int addItemShieldMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    u8 shieldVal;
-    u8 shieldType;
-    u8 isProgressive;
+    MmShieldId shield = (MmShieldId)(param & 0xff);
+    s32 progressive = !!(param >> 8);
+    s32 advanceOot = sharedShieldAdvancesOot(progressive);
 
-    shieldType = (param & 0xff);
-    isProgressive = !!((param >> 8) & 0xff);
-    shieldVal = (shieldType == 3) ? 2 : 1;
-
-    if (isProgressive)
-        gSharedCustomSave.mmProgressiveShields |= (1 << (shieldType - 1));
-    if (!Config_Flag(CFG_MM_DEKU_SHIELD) && shieldType == 1)
+    if (shield == MM_SHIELD_DEKU && !Config_Flag(CFG_MM_DEKU_SHIELD))
         return 0;
 
-    if (shieldVal > gMmSave.info.itemEquips.shield)
-        gMmSave.info.itemEquips.shield = shieldVal;
-    if (shieldType >= 2)
-        gSharedCustomSave.mmShieldIsDeku = 0;
+    if (shield == MM_SHIELD_HERO && progressive)
+    {
+        addShieldMmRaw(MM_SHIELD_HERO, 1);
 
-#if defined(GAME_MM)
-    if (play)
-        UpdateEquipment(play, GET_PLAYER(play));
-#endif
+        if (Config_Flag(CFG_MM_HYLIAN_SHIELD))
+            addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
+    }
+    else
+    {
+        addShieldMmRaw(shield, progressive);
+    }
+
+    switch (shield)
+    {
+        case MM_SHIELD_DEKU:
+            if (Config_Flag(CFG_SHARED_DEKU_SHIELD))
+            {
+                addShieldOotRaw(
+                    1,
+                    advanceOot);
+            }
+            break;
+
+        case MM_SHIELD_HERO:
+            if (Config_Flag(CFG_SHARED_HERO_SHIELD) &&
+                advanceOot)
+            {
+                addShieldOotRaw(2, 1);
+                if (Config_Flag(CFG_OOT_HERO_SHIELD))
+                    addShieldHeroOotRaw();
+            }
+            else
+            {
+                if (Config_Flag(CFG_SHARED_HERO_SHIELD))
+                    addShieldHeroOotRaw();
+                if (progressive && Config_Flag(CFG_MM_HYLIAN_SHIELD) && Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
+                    addShieldOotRaw(2, 0);
+            }
+            break;
+
+        case MM_SHIELD_HYLIAN:
+            if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
+            {
+                addShieldOotRaw(
+                    2,
+                    advanceOot);
+            }
+            break;
+
+        case MM_SHIELD_MIRROR:
+            if (Config_Flag(CFG_SHARED_MIRROR_SHIELD))
+                addShieldOotRaw(3, 0);
+            break;
+
+        default:
+            break;
+    }
 
     return 0;
 }
@@ -2514,11 +2731,6 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SOULS_ANIMAL, GI_OOT_SOUL_ANIMAL_BUTTERFLY, GI_MM_SOUL_ANIMAL_BUTTERFLY },
     { CFG_SHARED_SOULS_MISC,  GI_OOT_SOUL_MISC_GS, GI_MM_SOUL_MISC_GS },
     { CFG_SHARED_SOULS_MISC,  GI_OOT_SOUL_MISC_BUSINESS_SCRUB, GI_MM_SOUL_MISC_BUSINESS_SCRUB },
-    { CFG_SHARED_SHIELDS, GI_OOT_SHIELD_DEKU,   GI_MM_SHIELD_DEKU },
-    { CFG_SHARED_SHIELDS, GI_OOT_SHIELD_HYLIAN, GI_MM_SHIELD_HERO },
-    { CFG_SHARED_SHIELDS, GI_OOT_SHIELD_MIRROR, GI_MM_SHIELD_MIRROR },
-    { CFG_SHARED_SHIELDS, GI_OOT_PROGRESSIVE_SHIELD_DEKU,   GI_MM_PROGRESSIVE_SHIELD_DEKU },
-    { CFG_SHARED_SHIELDS, GI_OOT_PROGRESSIVE_SHIELD_HYLIAN, GI_MM_PROGRESSIVE_SHIELD_HERO },
     { CFG_SHARED_SPELL_FIRE, GI_OOT_SPELL_FIRE, GI_MM_SPELL_FIRE },
     { CFG_SHARED_SPELL_WIND, GI_OOT_SPELL_WIND, GI_MM_SPELL_WIND },
     { CFG_SHARED_SPELL_LOVE, GI_OOT_SPELL_LOVE, GI_MM_SPELL_LOVE },
@@ -2538,9 +2750,12 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_STRENGTH, GI_OOT_GORON_BRACELET, GI_MM_GORON_BRACELET },
     { CFG_SHARED_STRENGTH, GI_OOT_SILVER_GAUNTLETS, GI_MM_SILVER_GAUNTLETS },
     { CFG_SHARED_STRENGTH, GI_OOT_GOLDEN_GAUNTLETS, GI_MM_GOLDEN_GAUNTLETS },
-    { CFG_SHARED_SWORDS, GI_OOT_SWORD_KOKIRI, GI_MM_SWORD_KOKIRI },
-    { CFG_SHARED_SWORDS, GI_OOT_SWORD_RAZOR, GI_MM_SWORD_RAZOR },
-    { CFG_SHARED_SWORDS, GI_OOT_SWORD_GILDED, GI_MM_SWORD_GILDED },
+    { CFG_SHARED_CHILD_SWORDS, GI_OOT_SWORD_KOKIRI, GI_MM_SWORD_KOKIRI },
+    { CFG_SHARED_CHILD_SWORDS, GI_OOT_SWORD_RAZOR, GI_MM_SWORD_RAZOR },
+    { CFG_SHARED_CHILD_SWORDS, GI_OOT_SWORD_GILDED, GI_MM_SWORD_GILDED },
+    { CFG_SHARED_MASTER_SWORD, GI_OOT_SWORD_MASTER, GI_MM_SWORD_MASTER },
+    { CFG_SHARED_GORON_SWORDS, GI_OOT_SWORD_KNIFE, GI_MM_SWORD_KNIFE },
+    { CFG_SHARED_GORON_SWORDS, GI_OOT_SWORD_BIGGORON,GI_MM_SWORD_BIGGORON },
     { CFG_SHARED_SOULS_NPC, GI_OOT_SOUL_NPC_THIEVES, GI_MM_SOUL_NPC_THIEVES },
     { CFG_SHARED_SOULS_ENEMY, GI_OOT_SOUL_ENEMY_THIEVES, GI_MM_SOUL_ENEMY_THIEVES },
     { CFG_SHARED_HAMMER, GI_OOT_HAMMER, GI_MM_HAMMER },

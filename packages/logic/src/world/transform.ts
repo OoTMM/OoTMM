@@ -137,6 +137,8 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
   Items.OOT_NUT_UPGRADE,
   Items.OOT_SWORD,
   Items.OOT_SWORD_GORON,
+  Items.MM_SWORD_GORON,
+  Items.SHARED_SWORD_GORON,
   Items.MM_STICK_UPGRADE,
   Items.MM_NUT_UPGRADE,
   Items.SHARED_STICK_UPGRADE,
@@ -176,6 +178,11 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_SCALE,
   Items.OOT_SHIELD,
   Items.OOT_SHIELD_MIRROR,
+  Items.SHARED_SHIELD,
+  Items.SHARED_SHIELD_DEKU,
+  Items.SHARED_SHIELD_HERO,
+  Items.SHARED_SHIELD_HYLIAN,
+  Items.SHARED_SHIELD_MIRROR,
   Items.OOT_SLINGSHOT,
   Items.OOT_SPELL_FIRE,
   Items.OOT_SPELL_WIND,
@@ -252,7 +259,16 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_SLINGSHOT,
   Items.MM_OCARINA,
   Items.MM_SWORD,
+  Items.MM_SWORD_MASTER,
+  Items.MM_SWORD_KNIFE,
+  Items.MM_SWORD_GORON,
+  Items.SHARED_SWORD_MASTER,
+  Items.SHARED_SWORD_KNIFE,
+  Items.SHARED_SWORD_GORON,
   Items.MM_SHIELD,
+  Items.MM_SHIELD_DEKU,
+  Items.MM_SHIELD_HERO,
+  Items.MM_SHIELD_HYLIAN,
   Items.MM_SHIELD_MIRROR,
   Items.MM_BOMB_BAG,
   Items.MM_BOMBCHU_BAG,
@@ -598,7 +614,7 @@ class LogicPassWorldTransform {
     }
 
     if (settings.shuffleMasterSword && settings.progressiveSwordsOot !== 'progressive') {
-      items.push(Items.OOT_SWORD_MASTER);
+      items.push(settings.sharedMasterSword ? Items.SHARED_SWORD_MASTER : Items.OOT_SWORD_MASTER);
     }
 
     if (settings.zoraKing === 'open')
@@ -725,7 +741,7 @@ class LogicPassWorldTransform {
   private setupSharedItems() {
     const { settings } = this.state;
 
-    if (settings.sharedSwords) {
+    if (settings.sharedChildSwords) {
       /* Swords */
       this.replaceItem(Items.OOT_SWORD, Items.SHARED_SWORD);
       this.replaceItem(Items.MM_SWORD, Items.SHARED_SWORD);
@@ -1231,13 +1247,40 @@ class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.OCARINA_BUTTONS, 'max');
     }
 
-    if (settings.sharedShields) {
-      this.shareItems(SharedItemGroups.SHIELDS, 'max');
-      this.replaceItem(Items.OOT_SHIELD_HYLIAN, Items.SHARED_SHIELD_HYLIAN);
-      this.replaceItem(Items.MM_SHIELD_HERO,    Items.SHARED_SHIELD_HYLIAN);
-      if (settings.dekuShieldMm) {
-        this.replaceItem(Items.OOT_SHIELD_DEKU, Items.SHARED_SHIELD_DEKU);
-        this.replaceItem(Items.MM_SHIELD_DEKU, Items.SHARED_SHIELD_DEKU);
+    const ootProgressiveShields = settings.progressiveShieldsOot === 'progressive';
+    const mmProgressiveShields = settings.progressiveShieldsMm === 'progressive';
+
+    if (ootProgressiveShields === mmProgressiveShields) {
+      if (ootProgressiveShields) {
+        const allShieldsShared =
+            settings.sharedDekuShield &&
+            settings.sharedHylianShield &&
+            settings.sharedMirrorShield &&
+            (!settings.heroShieldOot || settings.sharedHeroShield);
+
+        if (allShieldsShared) {
+          this.shareItems([{
+            shared: Items.SHARED_SHIELD,
+            oot: Items.OOT_SHIELD,
+            mm: Items.MM_SHIELD,
+          }], 'max');
+        }
+      } else {
+        if (settings.sharedDekuShield) {
+          this.shareItems(SharedItemGroups.DEKU_SHIELD, 'max');
+        }
+
+        if (settings.sharedHeroShield) {
+          this.shareItems(SharedItemGroups.HERO_SHIELD, 'max');
+        }
+
+        if (settings.sharedHylianShield) {
+          this.shareItems(SharedItemGroups.HYLIAN_SHIELD, 'max');
+        }
+
+        if (settings.sharedMirrorShield) {
+          this.shareItems(SharedItemGroups.MIRROR_SHIELD, 'max');
+        }
       }
     }
 
@@ -1254,7 +1297,9 @@ class LogicPassWorldTransform {
     }
 
     if (settings.sharedGFS) {
-      this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.SHARED_GREAT_FAIRY_SWORD);
+      if (settings.progressiveGFS !== 'progressive') {
+        this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.SHARED_GREAT_FAIRY_SWORD);
+      }
     } else if (settings.gfsOot) {
       this.addItem(Items.OOT_GREAT_FAIRY_SWORD);
     }
@@ -1789,6 +1834,22 @@ class LogicPassWorldTransform {
       this.addExtraWallet();
     }
 
+    /* Add MM sword extensions. */
+    if (
+        settings.masterSwordMm &&
+        !(
+            settings.sharedMasterSword &&
+            (settings.progressiveSwordsOot === 'progressive' || mustStartWithMasterSword(settings))
+        )
+    ) {
+      this.addItem(Items.MM_SWORD_MASTER);
+    }
+
+    if (settings.goronSwordsMm) {
+      this.addItem(Items.MM_SWORD_KNIFE);
+      this.addItem(Items.MM_SWORD_GORON);
+    }
+
     /* Handle progressive shields */
     if (this.state.settings.progressiveShieldsOot === 'progressive') {
       this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.OOT_SHIELD);
@@ -1806,11 +1867,21 @@ class LogicPassWorldTransform {
         this.addItem(Items.MM_SHIELD);
         this.removeItem(Items.MM_SHIELD_DEKU);
       }
-    }
-    else if (settings.dekuShieldMm) {
-      this.addItem(Items.MM_SHIELD_DEKU, 3);
-    }
+    } else {
+      if (settings.dekuShieldMm) {
+        this.addItem(Items.MM_SHIELD_DEKU, 3);
+      }
 
+      if (settings.hylianShieldMm) {
+        this.addItem(Items.MM_SHIELD_HYLIAN);
+      }
+    }
+    if (
+        settings.heroShieldOot && settings.progressiveShieldsOot !== 'progressive'
+    ) {
+      this.addItem(Items.OOT_SHIELD_HERO);
+    }
+    /* Normalize the OoT child sword extension before child-sword sharing. */
     if (settings.extraChildSwordsOot) {
       this.replaceItem(Items.OOT_SWORD_KOKIRI, Items.OOT_SWORD);
       this.addItem(Items.OOT_SWORD, 2);
@@ -1950,7 +2021,45 @@ class LogicPassWorldTransform {
 
     /* Handle MM Swords */
     if (settings.progressiveGFS === 'progressive') {
-      this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.MM_SWORD);
+      this.replaceItem(
+          Items.MM_GREAT_FAIRY_SWORD,
+          settings.sharedChildSwords ? Items.SHARED_SWORD : Items.MM_SWORD
+      );
+    }
+
+    if (
+        settings.goronSwordsMm &&
+        !settings.sharedGoronSwords &&
+        settings.progressiveGoronSwordsMm === 'progressive'
+    ) {
+      this.replaceItem(Items.MM_SWORD_KNIFE, Items.MM_SWORD_GORON);
+    }
+
+    /* Master Sword sharing is separate unless it is part of full OoT sword progression. */
+    if (
+        settings.sharedMasterSword &&
+        settings.progressiveSwordsOot !== 'progressive' &&
+        !mustStartWithMasterSword(settings)
+    ) {
+      this.shareItems(SharedItemGroups.MASTER_SWORD, 'max');
+    }
+
+    /* Shared Goron swords follow the OoT progression setting. */
+    if (settings.sharedGoronSwords) {
+      switch (settings.progressiveSwordsOot) {
+        case 'separate':
+          this.shareItems(SharedItemGroups.BIGGORON_SWORDS, 'max');
+          break;
+        case 'goron':
+          this.replaceItem(Items.MM_SWORD_KNIFE, Items.MM_SWORD_GORON);
+          this.shareItems(SharedItemGroups.BIGGORON_SWORD_PROGRESSIVE, 'max');
+          break;
+        case 'progressive':
+          /* OoT's progressive sword items provide the Knife and Biggoron stages. */
+          this.removeItem(Items.MM_SWORD_KNIFE);
+          this.removeItem(Items.MM_SWORD_GORON);
+          break;
+      }
     }
 
     if (settings.progressiveGoronLullabyMm === 'single') {

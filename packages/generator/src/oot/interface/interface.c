@@ -2,6 +2,7 @@
 #include <combo/dma.h>
 #include <combo/player.h>
 #include <combo/mask.h>
+#include <combo/inventory.h>
 
 ALIGNED(16) static u32 sIconHeader[2];
 
@@ -132,16 +133,19 @@ static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
 
     if (itemId == ITEM_OOT_SWORD_KOKIRI)
     {
-        if (gSharedCustomSave.extraSwordsOot == 1)
+        switch (OotChildSword_GetEquippedVariant())
         {
-            LoadMmItemIcon(dst, ITEM_MM_SWORD_RAZOR);
-            return;
-        }
+            case 1:
+                LoadMmItemIcon(dst, ITEM_MM_SWORD_RAZOR);
+                return;
 
-        if (gSharedCustomSave.extraSwordsOot == 2)
-        {
-            LoadMmItemIcon(dst, ITEM_MM_SWORD_GILDED);
-            return;
+            case 2:
+                LoadMmItemIcon(dst, ITEM_MM_SWORD_GILDED);
+                return;
+
+            case 0:
+            default:
+                break;
         }
     }
 

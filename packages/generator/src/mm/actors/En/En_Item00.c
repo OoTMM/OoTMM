@@ -4,6 +4,7 @@
 #include <combo/config.h>
 #include <combo/draw.h>
 #include "combo/custom.h"
+#include "combo/inventory.h"
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayState* play, s16 gi)
 {
@@ -39,7 +40,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play, s16 gi, float a, f
         if (Item_CheckObtainability(itemId) == 0xff)
             itemId = -1;
 
-        if (gi == GI_MM_SHIELD_HERO && gSharedCustomSave.mmShieldIsDeku)
+        if (gi == GI_MM_SHIELD_HERO && MmShield_GetLost() == MM_SHIELD_DEKU)
             q.gi = GI_MM_SHIELD_DEKU;
     }
 
@@ -198,7 +199,7 @@ void EnItem00_DrawShield(PlayState* play)
 {
     s16 gi;
 
-    if (gSharedCustomSave.mmShieldIsDeku)
+    if (MmShield_GetLost() == MM_SHIELD_DEKU)
         gi = GI_MM_SHIELD_DEKU;
     else
         gi = GI_MM_SHIELD_HERO;

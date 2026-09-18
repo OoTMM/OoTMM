@@ -63,9 +63,9 @@ typedef struct ALIGNED(16)
     u8              foundMasterSword:1;
     u8              storedSirloin:1;
     u8              extraSwordsOot:2;
+    u8              ootChildShields:2;
     u8              bombchuBagOot:2;
     u8              bombchuBagMm:2;
-    u8              mmShieldIsDeku:1;
     u8              mmProgressiveShields:2;
     u8              bronzeScaleOot:1;
     u8              bronzeScaleMm:1;

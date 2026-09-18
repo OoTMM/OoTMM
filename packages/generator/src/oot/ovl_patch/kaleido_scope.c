@@ -52,6 +52,50 @@ static int checkItemToggle(PlayState* play)
         }
     }
 
+    if (p->pageIndex == PAUSE_EQUIP &&
+    p->cursorSpecialPos == 0 &&
+    itemId == ITEM_OOT_SHIELD_DEKU)
+    {
+        u8 owned;
+        owned = gSharedCustomSave.ootChildShields;
+        if (popcount(owned) > 1)
+        {
+            ret = 1;
+
+            if (play->state.input[0].press.button &
+                U_CBUTTONS)
+            {
+                u8 next;
+                next = OotChildShield_GetNextOwned(OotChildShield_GetVariant());
+                if (next != OotChildShield_GetVariant())
+                {
+                    gOotChildShieldVariant = next;
+                    p->namedItem = PAUSE_ITEM_NONE;
+                    PlaySound(0x4809);
+                    play->state.input[0].press.button &= ~U_CBUTTONS;
+                    return 1;
+                }
+            }
+        }
+    }
+
+    if (p->pageIndex == PAUSE_EQUIP && p->cursorSpecialPos == 0 && itemId == ITEM_OOT_SWORD_KOKIRI && gSharedCustomSave.extraSwordsOot > 0)
+    {
+        ret = 1;
+        if (play->state.input[0].press.button & U_CBUTTONS)
+        {
+            u8 sword;
+            sword = OotChildSword_GetVariant() + 1;
+            if (sword > gSharedCustomSave.extraSwordsOot)
+                sword = 0;
+            gOotChildSwordVariant = sword;
+            p->namedItem = PAUSE_ITEM_NONE;
+            PlaySound(0x4809);
+            play->state.input[0].press.button &= ~U_CBUTTONS;
+            return 1;
+        }
+    }
+
     u8* itemPtr;
     u32 flags;
     const u8* table;
@@ -131,7 +175,11 @@ static int checkItemToggle(PlayState* play)
     {
         ret = 1;
         if (press)
+        {
+            if (itemId == ITEM_OOT_SHIELD_DEKU)
+                gOotChildShieldEquippedVariant = 0xff;
             gSave.info.equips.equipment.shields = 0;
+        }
     }
 
     if (gSave.age == AGE_CHILD && itemId == ITEM_OOT_SWORD_KOKIRI && gSave.info.equips.equipment.swords == 1)
@@ -141,6 +189,7 @@ static int checkItemToggle(PlayState* play)
             ret = 1;
             if (press)
             {
+                gOotChildSwordEquippedVariant = 0xff;
                 gSave.info.equips.equipment.swords = 0;
                 gSave.info.equips.buttonItems[0] = ITEM_NONE;
                 gSave.info.eventsMisc[29] = 1;
@@ -742,6 +791,26 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     MessageContext* msgCtx = &play->msgCtx;
     Input* input = &play->state.input[0];
+    if (pauseCtx->state == PAUSE_STATE_MAIN && pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE && pauseCtx->pageIndex == PAUSE_EQUIP && pauseCtx->cursorSpecialPos == 0 && (input->press.button & A_BUTTON))
+    {
+        switch (pauseCtx->cursorItem[PAUSE_EQUIP])
+        {
+            case ITEM_OOT_SWORD_KOKIRI:
+                if (gSharedCustomSave.extraSwordsOot > 0)
+                {
+                    gOotChildSwordEquippedVariant = OotChildSword_GetVariant();
+                    if (gSave.info.equips.equipment.swords == 1 && gSave.info.equips.buttonItems[0] == ITEM_OOT_SWORD_KOKIRI)
+                        Interface_LoadItemIconImpl(play, 0);
+                }
+                break;
+
+            case ITEM_OOT_SHIELD_DEKU:
+                if (gSharedCustomSave.ootChildShields)
+                    gOotChildShieldEquippedVariant = OotChildShield_GetVariant();
+                break;
+        }
+    }
+
     OotUpdateHammerSharedSlotAgeReq(play);
     if (pauseCtx->state >= PAUSE_STATE_OWLWARP_2 && pauseCtx->state <= PAUSE_STATE_OWLWARP_6)
     {
@@ -1690,6 +1759,71 @@ static void KaleidoScope_SetVertices(PlayState* play, GraphicsContext* gfxCtx)
 
 typedef void (*KaleidoScope_SetView_Func)(PauseContext*, f32, f32, f32);
 
+#define OOT_EQUIP_QUAD_SWORD_KOKIRI      1
+#define OOT_EQUIP_QUAD_SHIELD_DEKU       5
+#define OOT_EQUIP_QUAD_SELECTED_SWORD   16
+#define OOT_EQUIP_QUAD_SELECTED_SHIELD  17
+
+static void KaleidoScope_SetNativeVariantOutline(
+    PlayState* play,
+    s32 itemQuad,
+    s32 outlineQuad,
+    s32 visible)
+{
+    const Vtx* src;
+    Vtx* dst;
+    s32 i;
+
+    dst = &play->pauseCtx.equipVtx[outlineQuad * 4];
+
+    if (!visible)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            dst[i].v.ob[0] = -1000;
+            dst[i].v.ob[1] = -1000;
+        }
+        return;
+    }
+
+    src = &play->pauseCtx.equipVtx[itemQuad * 4];
+
+    dst[0].v.ob[0] = src[0].v.ob[0] - 2;
+    dst[2].v.ob[0] = src[2].v.ob[0] - 2;
+    dst[1].v.ob[0] = src[1].v.ob[0] + 2;
+    dst[3].v.ob[0] = src[3].v.ob[0] + 2;
+
+    dst[0].v.ob[1] = src[0].v.ob[1] + 2;
+    dst[1].v.ob[1] = src[1].v.ob[1] + 2;
+    dst[2].v.ob[1] = src[2].v.ob[1] - 2;
+    dst[3].v.ob[1] = src[3].v.ob[1] - 2;
+}
+
+static void KaleidoScope_UpdateEquipVariantOutlines(PlayState* play)
+{
+    PauseContext* pauseCtx;
+    u8 selected;
+    u8 equipped;
+    u8 owned;
+    pauseCtx = &play->pauseCtx;
+    if (!pauseCtx->equipVtx || pauseCtx->pageIndex != PAUSE_EQUIP)
+        return;
+    if (gSave.info.equips.equipment.swords == 1 && gSharedCustomSave.extraSwordsOot > 0)
+    {
+        selected = OotChildSword_GetVariant();
+        equipped = OotChildSword_GetEquippedVariant();
+        KaleidoScope_SetNativeVariantOutline(play, OOT_EQUIP_QUAD_SWORD_KOKIRI, OOT_EQUIP_QUAD_SELECTED_SWORD, selected == equipped);
+    }
+    owned = gSharedCustomSave.ootChildShields;
+
+    if (gSave.info.equips.equipment.shields == 1 && popcount(owned) > 1)
+    {
+        selected = OotChildShield_GetVariant();
+        equipped = OotChildShield_GetEquippedVariant();
+        KaleidoScope_SetNativeVariantOutline(play, OOT_EQUIP_QUAD_SHIELD_DEKU, OOT_EQUIP_QUAD_SELECTED_SHIELD, selected == equipped);
+    }
+}
+
 /* Returns true if called shouldn't draw menu */
 s32 KaleidoScope_BeforeDraw(PlayState* play)
 {
@@ -1728,6 +1862,11 @@ s32 KaleidoScope_BeforeDraw(PlayState* play)
         CLOSE_DISPS();
 
         return 1;
+    }
+
+    if (play->pauseCtx.pageIndex == PAUSE_EQUIP)
+    {
+        KaleidoScope_UpdateEquipVariantOutlines(play);
     }
 
     return 0;
@@ -1945,13 +2084,17 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     }
     else if (itemId == ITEM_OOT_SWORD_KOKIRI)
     {
-        switch (gSharedCustomSave.extraSwordsOot)
+        switch (OotChildSword_GetVariant())
         {
         case 0: LoadFile(dst, 0x880000 + 0x400 * id, 0x400); break;
         case 1: comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SWORD_RAZOR); break;
         case 2: comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SWORD_GILDED); break;
         default: UNREACHABLE();
         }
+    }
+    else if (itemId == ITEM_OOT_SHIELD_DEKU && OotChildShield_GetVariant() == OOT_CHILD_SHIELD_HERO)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SHIELD_HERO);
     }
     else if (itemId == ITEM_OOT_MASK_BLAST)
     {
@@ -2016,46 +2159,234 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     }
 }
 
-void KaleidoScope_DrawQuadEquipment(PlayState* play, u32 dlist, int w, int h, int flags)
+enum {
+    OOT_EQUIP_VARIANT_SWORD = 0,
+    OOT_EQUIP_VARIANT_SHIELD,
+    OOT_EQUIP_VARIANT_MAX,
+};
+
+static Vtx sEquipVariantVtx[OOT_EQUIP_VARIANT_MAX][8];
+static Vtx sEquipVariantOutlineVtx[OOT_EQUIP_VARIANT_MAX][8];
+
+static Vtx* KaleidoScope_GetEquipVariantVtx(PlayState* play, s32 equipType)
+{
+    const Vtx* src;
+    Vtx* dst;
+    s32 frame = play->state.gfxCtx->displayListCounter & 1;
+    s32 quad = equipType == OOT_EQUIP_VARIANT_SWORD ? 1 : 5;
+
+    src = play->pauseCtx.equipVtx + quad * 4;
+    dst = &sEquipVariantVtx[equipType][frame * 4];
+
+    for (s32 i = 0; i < 4; i++)
+        dst[i] = src[i];
+
+    dst[0].v.ob[0] += 16;
+    dst[2].v.ob[0] += 16;
+    dst[0].v.ob[1] -= 16;
+    dst[1].v.ob[1] -= 16;
+
+    return dst;
+}
+
+static Vtx* KaleidoScope_GetEquipVariantOutlineVtx(PlayState* play, s32 equipType)
+{
+    Vtx* src = KaleidoScope_GetEquipVariantVtx(play, equipType);
+    Vtx* dst = &sEquipVariantOutlineVtx[equipType][(play->state.gfxCtx->displayListCounter & 1) * 4];
+
+    for (s32 i = 0; i < 4; i++)
+        dst[i] = src[i];
+
+    dst[0].v.ob[0] -= 1;
+    dst[2].v.ob[0] -= 1;
+    dst[1].v.ob[0] += 1;
+    dst[3].v.ob[0] += 1;
+    dst[0].v.ob[1] += 1;
+    dst[1].v.ob[1] += 1;
+    dst[2].v.ob[1] -= 1;
+    dst[3].v.ob[1] -= 1;
+
+    return dst;
+}
+
+#define OOT_EQUIPPED_ITEM_OUTLINE 0x02000e00
+
+static void KaleidoScope_DrawEquipVariantOutline(GraphicsContext* gfxCtx, const Vtx* vtx)
+{
+    PauseContext* pauseCtx;
+
+    if (!vtx)
+        return;
+
+    pauseCtx = &gfxCtx->play->pauseCtx;
+
+    OPEN_DISPS(gfxCtx);
+
+    gDPPipeSync(POLY_OPA_DISP++);
+    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xff, 0xff, 0xff, pauseCtx->alpha & 0xff);
+    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0);
+    gDPLoadTextureBlock(POLY_OPA_DISP++, OOT_EQUIPPED_ITEM_OUTLINE, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
+        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
+
+    CLOSE_DISPS();
+}
+
+static void KaleidoScope_LoadChildSwordTexture(void* texture, u8 sword)
+{
+    switch (sword)
+    {
+    case 1:
+        LoadMmItemIcon(texture, ITEM_MM_SWORD_RAZOR);
+        break;
+    case 2:
+        LoadMmItemIcon(texture, ITEM_MM_SWORD_GILDED);
+        break;
+    }
+
+    if (gSave.age != AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_SWORDS))
+        Grayscale(texture, 0x400);
+}
+
+void KaleidoScope_DrawQuadEquipment(GraphicsContext* gfxCtx, u32 dlist, int w, int h, int flags)
 {
     static void* customKokiriSwordTexture;
-    static u8 customKokiriSwordId;
-    static u8 customKokiSwordAge;
+    static void* customKokiriSwordSmallTexture;
+    static void* customHeroShieldTexture;
+    static u8 customKokiriSwordId = 0xff;
+    static u8 customKokiriSwordAge = 0xff;
+    static u8 customKokiriSwordSmallId = 0xff;
+    static u8 customKokiriSwordSmallAge = 0xff;
+    static u8 customHeroShieldAge = 0xff;
 
-    void (*KaleidoScope_DrawQuadTextureRGBA32)(PlayState*, u32, int, int, int);
+    PlayState* play = gfxCtx->play;
+    void (*KaleidoScope_DrawQuadTextureRGBA32)(GraphicsContext*, u32, int, int, int);
+    u32 originalDlist = dlist;
+    u32 secondaryDlist = 0;
+    Vtx* smallVtx;
+    Vtx* outlineVtx;
+    s32 equipType = -1;
+    s32 secondaryEquipped = 0;
 
-    if (dlist == 0x0803b000 && gSharedCustomSave.extraSwordsOot)
+    if (originalDlist == 0x0803b000)
     {
-        /* Extra child sword */
-        if (!customKokiriSwordTexture)
+        u8 sword = OotChildSword_GetVariant();
+        u8 next;
+
+        if (sword != 0)
         {
-            customKokiriSwordTexture = malloc(0x1000);
-            customKokiriSwordId = 0;
-            customKokiSwordAge = 0xff;
+            if (!customKokiriSwordTexture)
+                customKokiriSwordTexture = malloc(0x1000);
+
+            if (customKokiriSwordTexture)
+            {
+                if (customKokiriSwordId != sword || customKokiriSwordAge != gSave.age)
+                {
+                    customKokiriSwordId = sword;
+                    customKokiriSwordAge = gSave.age;
+                    KaleidoScope_LoadChildSwordTexture(customKokiriSwordTexture, sword);
+                }
+
+                dlist = ((u32)customKokiriSwordTexture) & 0xffffff;
+            }
         }
 
-        if (customKokiriSwordTexture)
+        if (gSharedCustomSave.extraSwordsOot > 0)
         {
-            if (customKokiriSwordId != gSharedCustomSave.extraSwordsOot || customKokiSwordAge != gSave.age)
+            next = sword + 1;
+            if (next > gSharedCustomSave.extraSwordsOot)
+                next = 0;
+
+            if (gSave.info.equips.equipment.swords == 1 && OotChildSword_GetEquippedVariant() == next)
+                secondaryEquipped = 1;
+
+            if (next == 0)
             {
-                customKokiriSwordId = gSharedCustomSave.extraSwordsOot;
-                customKokiSwordAge = gSave.age;
+                secondaryDlist = originalDlist;
+            }
+            else
+            {
+                if (!customKokiriSwordSmallTexture)
+                    customKokiriSwordSmallTexture = malloc(0x1000);
 
-                if (gSharedCustomSave.extraSwordsOot == 1)
-                    LoadMmItemIcon(customKokiriSwordTexture, ITEM_MM_SWORD_RAZOR);
-                else
-                    LoadMmItemIcon(customKokiriSwordTexture, ITEM_MM_SWORD_GILDED);
+                if (customKokiriSwordSmallTexture)
+                {
+                    if (customKokiriSwordSmallId != next || customKokiriSwordSmallAge != gSave.age)
+                    {
+                        customKokiriSwordSmallId = next;
+                        customKokiriSwordSmallAge = gSave.age;
+                        KaleidoScope_LoadChildSwordTexture(customKokiriSwordSmallTexture, next);
+                    }
 
-                if (gSave.age != AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_SWORDS))
-                    Grayscale(customKokiriSwordTexture, 0x400);
+                    secondaryDlist = ((u32)customKokiriSwordSmallTexture) & 0xffffff;
+                }
             }
 
-            dlist = ((u32)customKokiriSwordTexture) & 0xffffff;
+            equipType = OOT_EQUIP_VARIANT_SWORD;
+        }
+    }
+
+    if (originalDlist == 0x0803e000)
+    {
+        u8 shield = OotChildShield_GetVariant();
+        u8 owned = gSharedCustomSave.ootChildShields;
+        u8 next = shield == OOT_CHILD_SHIELD_DEKU ? OOT_CHILD_SHIELD_HERO : OOT_CHILD_SHIELD_DEKU;
+        s32 hasSecondary = popcount(owned) > 1 && (owned & (1u << next));
+        s32 needHeroTexture = shield == OOT_CHILD_SHIELD_HERO || (hasSecondary && next == OOT_CHILD_SHIELD_HERO);
+
+        if (hasSecondary && gSave.info.equips.equipment.shields == 1 && OotChildShield_GetEquippedVariant() == next)
+            secondaryEquipped = 1;
+
+        if (needHeroTexture)
+        {
+            if (!customHeroShieldTexture)
+                customHeroShieldTexture = malloc(0x1000);
+
+            if (customHeroShieldTexture && customHeroShieldAge != gSave.age)
+            {
+                customHeroShieldAge = gSave.age;
+                LoadMmItemIcon(customHeroShieldTexture, ITEM_MM_SHIELD_HERO);
+
+                if (gSave.age != AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_SHIELDS))
+                    Grayscale(customHeroShieldTexture, 0x400);
+            }
+        }
+
+        if (shield == OOT_CHILD_SHIELD_HERO && customHeroShieldTexture)
+            dlist = ((u32)customHeroShieldTexture) & 0xffffff;
+
+        if (hasSecondary)
+        {
+            if (next == OOT_CHILD_SHIELD_HERO)
+            {
+                if (customHeroShieldTexture)
+                    secondaryDlist = ((u32)customHeroShieldTexture) & 0xffffff;
+            }
+            else
+            {
+                secondaryDlist = originalDlist;
+            }
+
+            equipType = OOT_EQUIP_VARIANT_SHIELD;
         }
     }
 
     KaleidoScope_DrawQuadTextureRGBA32 = OverlayAddr(0x8081f1e8);
-    KaleidoScope_DrawQuadTextureRGBA32(play, dlist, w, h, flags);
+    KaleidoScope_DrawQuadTextureRGBA32(gfxCtx, dlist, w, h, flags);
+
+    if (secondaryDlist && equipType >= 0)
+    {
+        smallVtx = KaleidoScope_GetEquipVariantVtx(play, equipType);
+
+        if (secondaryEquipped)
+        {
+            outlineVtx = KaleidoScope_GetEquipVariantOutlineVtx(play, equipType);
+            KaleidoScope_DrawEquipVariantOutline(gfxCtx, outlineVtx);
+        }
+
+        DrawIcon(gfxCtx, smallVtx, secondaryDlist, w, h, 0);
+    }
 }
 
 u8 KaleidoScope_GetSlotAgeRequirement(u16 item, u8 vanillaAgeRequirement)

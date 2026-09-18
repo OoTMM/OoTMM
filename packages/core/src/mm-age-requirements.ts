@@ -634,6 +634,69 @@ export const MM_AGE_REQ_ITEMS = [
         childConfvar: 'MM_AGE_REQ_CHILD_STRENGTH',
         adultConfvar: 'MM_AGE_REQ_ADULT_STRENGTH',
     },
+    {
+        id: 'swordChild',
+        label: 'Child Swords',
+        cItem: 'ITEM_MM_SWORD_KOKIRI',
+        childSetting: 'mmAgeReqChildSwordKokiri',
+        adultSetting: 'mmAgeReqAdultSwordKokiri',
+        childConfvar: 'MM_AGE_REQ_CHILD_SWORD_KOKIRI',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SWORD_KOKIRI',
+    },
+    {
+        id: 'swordMaster',
+        label: 'Master Sword',
+        cItem: 'ITEM_MM_SWORD_MASTER',
+        childSetting: 'mmAgeReqChildSwordMaster',
+        adultSetting: 'mmAgeReqAdultSwordMaster',
+        childConfvar: 'MM_AGE_REQ_CHILD_SWORD_MASTER',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SWORD_MASTER',
+    },
+    {
+        id: 'swordGiantsKnife',
+        label: 'Goron Swords',
+        cItem: 'ITEM_MM_SWORD_GIANTS_KNIFE',
+        childSetting: 'mmAgeReqChildSwordGiantsKnife',
+        adultSetting: 'mmAgeReqAdultSwordGiantsKnife',
+        childConfvar: 'MM_AGE_REQ_CHILD_SWORD_GIANTS_KNIFE',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SWORD_GIANTS_KNIFE',
+    },
+    {
+        id: 'shieldDeku',
+        label: 'Deku Shield',
+        cItem: 'ITEM_MM_SHIELD_DEKU',
+        childSetting: 'mmAgeReqChildShieldDeku',
+        adultSetting: 'mmAgeReqAdultShieldDeku',
+        childConfvar: 'MM_AGE_REQ_CHILD_SHIELD_DEKU',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SHIELD_DEKU',
+    },
+    {
+        id: 'shieldHero',
+        label: "Hero's Shield",
+        cItem: 'ITEM_MM_SHIELD_HERO',
+        childSetting: 'mmAgeReqChildShieldHero',
+        adultSetting: 'mmAgeReqAdultShieldHero',
+        childConfvar: 'MM_AGE_REQ_CHILD_SHIELD_HERO',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SHIELD_HERO',
+    },
+    {
+        id: 'shieldHylian',
+        label: 'Hylian Shield',
+        cItem: 'ITEM_MM_SHIELD_HYLIAN',
+        childSetting: 'mmAgeReqChildShieldHylian',
+        adultSetting: 'mmAgeReqAdultShieldHylian',
+        childConfvar: 'MM_AGE_REQ_CHILD_SHIELD_HYLIAN',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SHIELD_HYLIAN',
+    },
+    {
+        id: 'shieldMirror',
+        label: 'Mirror Shield',
+        cItem: 'ITEM_MM_SHIELD_MIRROR',
+        childSetting: 'mmAgeReqChildShieldMirror',
+        adultSetting: 'mmAgeReqAdultShieldMirror',
+        childConfvar: 'MM_AGE_REQ_CHILD_SHIELD_MIRROR',
+        adultConfvar: 'MM_AGE_REQ_ADULT_SHIELD_MIRROR',
+    },
 ] as const;
 
 export type MmAgeReqItemDef = typeof MM_AGE_REQ_ITEMS[number];
@@ -662,6 +725,11 @@ export const MM_AGE_REQ_ITEM_POOL_SETTINGS: Partial<Record<MmAgeReqItemId, strin
     maskSpooky: 'spookyMaskMm',
 
     strength: 'strengthMm',
+
+    swordMaster: 'masterSwordMm',
+    swordGiantsKnife: 'goronSwordsMm',
+    shieldDeku: 'dekuShieldMm',
+    shieldHylian: 'hylianShieldMm',
 };
 
 export const MM_AGE_REQ_RESTRICTION_DEPENDENCIES: Partial<

@@ -105,9 +105,19 @@ const OCARINA_BUTTONS: ItemSharedDef[] = [
 ];
 
 /* Junk shields handled separately */
-const SHIELDS: ItemSharedDef[] = [
-  { shared: Items.SHARED_SHIELD,         oot: Items.OOT_SHIELD,         mm: Items.MM_SHIELD },
-  { shared: Items.SHARED_SHIELD_MIRROR,  oot: Items.OOT_SHIELD_MIRROR,  mm: Items.MM_SHIELD_MIRROR },
+const DEKU_SHIELD: ItemSharedDef[] = [
+  {shared: Items.SHARED_SHIELD_DEKU, oot: Items.OOT_SHIELD_DEKU, mm: Items.MM_SHIELD_DEKU },
+];
+
+const HERO_SHIELD: ItemSharedDef[] = [
+  {shared: Items.SHARED_SHIELD_HERO, oot: Items.OOT_SHIELD_HERO, mm: Items.MM_SHIELD_HERO },
+];
+
+const HYLIAN_SHIELD: ItemSharedDef[] = [
+  {shared: Items.SHARED_SHIELD_HYLIAN, oot: Items.OOT_SHIELD_HYLIAN, mm: Items.MM_SHIELD_HYLIAN },
+];
+const MIRROR_SHIELD: ItemSharedDef[] = [
+  {shared: Items.SHARED_SHIELD_MIRROR, oot: Items.OOT_SHIELD_MIRROR, mm: Items.MM_SHIELD_MIRROR },
 ];
 
 const SHOVEL: ItemSharedDef[] = [
@@ -141,4 +151,34 @@ const BOTTLES: ItemSharedDef[] = [
   { shared: Items.SHARED_FISH, oot: Items.OOT_FISH, mm: Items.MM_FISH },
 ]
 
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, SHIELDS, BOTTLES, SHOVEL };
+const MASTER_SWORD: ItemSharedDef[] = [
+  {
+    shared: Items.SHARED_SWORD_MASTER,
+    oot: Items.OOT_SWORD_MASTER,
+    mm: Items.MM_SWORD_MASTER,
+  },
+];
+
+const BIGGORON_SWORDS: ItemSharedDef[] = [
+  {
+    shared: Items.SHARED_SWORD_KNIFE,
+    oot: Items.OOT_SWORD_KNIFE,
+    mm: Items.MM_SWORD_KNIFE,
+  },
+  {
+    shared: Items.SHARED_SWORD_GORON,
+    oot: Items.OOT_SWORD_GORON,
+    mm: Items.MM_SWORD_GORON,
+  },
+];
+
+const BIGGORON_SWORD_PROGRESSIVE: ItemSharedDef[] = [
+  {
+    shared: Items.SHARED_SWORD_GORON,
+    oot: Items.OOT_SWORD_GORON,
+    mm: Items.MM_SWORD_GORON,
+  },
+];
+
+
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_ANIMAL, SOULS_MISC, SKELETON_KEY, PLATINUM_TOKEN, OCARINA_BUTTONS, DEKU_SHIELD, HERO_SHIELD, HYLIAN_SHIELD, MIRROR_SHIELD, BOTTLES, SHOVEL, MASTER_SWORD, BIGGORON_SWORD_PROGRESSIVE, BIGGORON_SWORDS };
