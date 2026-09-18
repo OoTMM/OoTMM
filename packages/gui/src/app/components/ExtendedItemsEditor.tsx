@@ -131,14 +131,12 @@ const ITEM_SECTIONS = [
   },
 ] as const satisfies readonly ItemSectionDefinition[];
 
-const PROGRESSIVE_SECTION = {
-  name: 'Progressive Items',
-  description:
-  'Configure how related items and upgrades are combined into progressive item chains.',
-  settings: settingsForCategory('items.progressive'),
-} satisfies SimpleSectionDefinition;
-
 const SIMPLE_SECTIONS = [
+  {
+    name: 'Progressive Items',
+    description: 'Configure how related items and upgrades are combined into progressive item chains.',
+    settings: settingsForCategory('items.progressive'),
+  },
   {
     name: 'Ocarina of Time Extensions',
     description:
@@ -346,7 +344,7 @@ function ItemSectionView({
   );
 
   const setAll = useCallback((column: ItemColumn, value: boolean) => {
-    const patch = Object.fromEntries(settings.filter(x => (x as any).game === column).map(x => [x.key, value]));
+    const patch = Object.fromEntries(settings.filter(x => x.type === 'boolean' && (x as any).game === column).map(x => [x.key, value]));
     patchSettings(patch);
   }, [settings, patchSettings]);
 
@@ -427,13 +425,8 @@ export function ExtendedItemsEditor() {
       />
     ))}
 
-    <SimpleSection {...PROGRESSIVE_SECTION}/>
-
-    {SIMPLE_SECTIONS.map(section => (
-      <SimpleSection
-      key={section.name}
-      {...section}
-      />
+    {SIMPLE_SECTIONS.map((section, i) => (
+      <SimpleSection key={i} {...section}/>
     ))}
     </main>
   );
