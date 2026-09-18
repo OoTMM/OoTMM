@@ -8,6 +8,7 @@
     ".": "./lib/index.ts",
     "./build": "./build/index.ts"
   },
+  "sideEffects": false,
   "scripts": {
     "build": "tsx ./build/run.ts",
     "typecheck": "tsc --noEmit"

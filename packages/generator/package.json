@@ -21,6 +21,7 @@
   },
   "type": "module",
   "main": "lib/combo/index.ts",
+  "sideEffects": false,
   "devDependencies": {
     "@types/lodash-es": "catalog:",
     "@types/pngjs": "^6.0.5",
