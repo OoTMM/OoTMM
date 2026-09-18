@@ -1,3 +1,6 @@
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 export const VERSION = process.env.VERSION || 'XXX';
 export const ENV_KEYS = (process.env.ENV_KEYS || 'dev').split(',');
 
@@ -63,4 +66,8 @@ export function localStorageImport(data: any) {
   for (const [k, v] of Object.entries(data.data)) {
     localStoragePrefixedSet(k, v);
   }
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }

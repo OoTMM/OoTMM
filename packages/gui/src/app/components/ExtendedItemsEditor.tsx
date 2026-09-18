@@ -1,7 +1,9 @@
-import { useRef } from 'react';
+import { useCallback, useMemo } from 'react';
 import { SETTINGS } from '@ootmm/generator';
 import { useStore } from '@/app/store';
+import { cn } from '@/app/util';
 import { Setting } from './settings/Setting.tsx';
+import { Card } from './ui/Card.tsx';
 
 type SettingDefinition = (typeof SETTINGS)[number];
 type SettingKey = SettingDefinition['key'];
@@ -173,41 +175,6 @@ function gameEnabled(games: string, game: Game) {
   return games === 'ootmm' || games === game;
 }
 
-function setColumnCheckboxes(
-  section: HTMLElement | null,
-  column: ItemColumn,
-  checked: boolean,
-) {
-  if (!section) {
-    return;
-  }
-
-  const cells = section.querySelectorAll<HTMLElement>(
-    `[data-item-column="${column}"]`,
-  );
-
-  for (const cell of cells) {
-    const checkbox = cell.querySelector<HTMLInputElement>(
-      'input[type="checkbox"]',
-    );
-
-    if (!checkbox) {
-      continue;
-    }
-    const disabled =
-    checkbox.disabled ||
-    checkbox.getAttribute('aria-disabled') === 'true' ||
-    checkbox.closest('[aria-disabled="true"]') !== null;
-
-    if (disabled) {
-      continue;
-    }
-    if (checkbox.checked !== checked) {
-      checkbox.click();
-    }
-  }
-}
-
 function BulkButtons({
   disabled = false,
   onCheckAll,
@@ -332,14 +299,32 @@ function ItemCell({
       <NativeItem enabled={enabled}/>
     ) : (
       <Setting
-      setting={value}
-      showDisabled
-      label={label}
+        setting={value}
+        showDisabled
+        label={label}
       />
     )}
     </div>
     </div>
   );
+}
+
+type ItemSectionViewHeaderProps = {
+  disabled?: boolean;
+  label: string;
+  onSet: (value: boolean) => void;
+};
+function ItemSectionViewHeader({ disabled, label, onSet }: ItemSectionViewHeaderProps) {
+  return (
+    <div className="text-center">
+      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{label}</div>
+      <BulkButtons
+        disabled={disabled}
+        onCheckAll={() => onSet(true)}
+        onRemoveAll={() => onSet(false)}
+      />
+    </div>
+  )
 }
 
 function ItemSectionView({
@@ -349,7 +334,8 @@ function ItemSectionView({
   section: ItemSectionDefinition;
   games: string;
 }) {
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const settings = useMemo(() => SETTINGS.filter(x => x.category === section.category), [section.category]);
+  const patchSettings = useStore(state => state.patchSettings);
 
   const ootEnabled = gameEnabled(games, 'oot');
   const mmEnabled = gameEnabled(games, 'mm');
@@ -359,171 +345,43 @@ function ItemSectionView({
     section.nativeMissing,
   );
 
-  const checkAll = (column: ItemColumn) => {
-    setColumnCheckboxes(
-      sectionRef.current,
-      column,
-      true,
-    );
-  };
-
-  const removeAll = (column: ItemColumn) => {
-    setColumnCheckboxes(
-      sectionRef.current,
-      column,
-      false,
-    );
-  };
+  const setAll = useCallback((column: ItemColumn, value: boolean) => {
+    const patch = Object.fromEntries(settings.filter(x => (x as any).game === column).map(x => [x.key, value]));
+    patchSettings(patch);
+  }, [settings, patchSettings]);
 
   return (
-    <section
-    ref={sectionRef}
-    className="rounded-xl border bg-card"
-    >
-    <header className="border-b bg-muted/20 px-5 py-4">
-    <h2 className="text-lg font-semibold">
-    {section.name}
-    </h2>
-
-    <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-    {section.description}
-    </p>
-    </header>
-
-    <div className="border-b bg-muted/40 px-4 py-3 lg:hidden">
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-    <div className="text-center">
-    <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-    Ocarina of Time
-    </div>
-
-    <BulkButtons
-    disabled={!ootEnabled}
-    onCheckAll={() => checkAll('oot')}
-    onRemoveAll={() => removeAll('oot')}
-    />
-    </div>
-
-    <div className="text-center">
-    <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-    Majora&apos;s Mask
-    </div>
-
-    <BulkButtons
-    disabled={!mmEnabled}
-    onCheckAll={() => checkAll('mm')}
-    onRemoveAll={() => removeAll('mm')}
-    />
-    </div>
-
-    <div className="text-center">
-    <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-    Shared
-    </div>
-
-    <BulkButtons
-    onCheckAll={() => checkAll('shared')}
-    onRemoveAll={() => removeAll('shared')}
-    />
-    </div>
-    </div>
-    </div>
-
-    <div
-    className="
-              hidden
-              grid-cols-[minmax(13rem,1.3fr)_repeat(3,minmax(10rem,1fr))]
-              gap-4
-              border-b
-              bg-muted/40
-              px-5
-              py-2.5
-              text-xs
-              font-semibold
-              uppercase
-              tracking-wide
-              text-muted-foreground
-              lg:grid
-            "
-    >
-    <div className="flex items-center">
-    Item
-    </div>
-
-    <div className="text-center">
-    <div>Ocarina of Time</div>
-
-    <BulkButtons
-    disabled={!ootEnabled}
-    onCheckAll={() => checkAll('oot')}
-    onRemoveAll={() => removeAll('oot')}
-    />
-    </div>
-
-    <div className="text-center">
-    <div>Majora&apos;s Mask</div>
-
-    <BulkButtons
-    disabled={!mmEnabled}
-    onCheckAll={() => checkAll('mm')}
-    onRemoveAll={() => removeAll('mm')}
-    />
-    </div>
-
-    <div className="text-center">
-    <div>Shared</div>
-
-    <BulkButtons
-    onCheckAll={() => checkAll('shared')}
-    onRemoveAll={() => removeAll('shared')}
-    />
-    </div>
-    </div>
-
-    <div>
-    {rows.map((row, index) => (
-      <div
-      key={row.name}
-      className={[
-        'grid grid-cols-1 gap-3 px-4 py-3',
-        'sm:grid-cols-3',
-        'lg:grid-cols-[minmax(13rem,1.3fr)_repeat(3,minmax(10rem,1fr))]',
-        'lg:items-center lg:gap-4',
-        index % 2 === 1
-        ? 'bg-black/5 dark:bg-white/5'
-        : '',
-      ].join(' ')}
-      >
-      <div className="font-medium sm:col-span-3 lg:col-span-1">
-      {row.name}
+    <Card className="p-0">
+      <header className="border-b bg-muted/20 px-5 py-4">
+        <h2 className="text-lg font-semibold">{section.name}</h2>
+        <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{section.description}</p>
+      </header>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 border-b bg-muted/40 px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <div className="flex items-center">Item</div>
+        <ItemSectionViewHeader disabled={!ootEnabled} label="Ocarina of Time" onSet={x => setAll('oot', x)}/>
+        <ItemSectionViewHeader disabled={!mmEnabled} label="Majora's Mask" onSet={x => setAll('mm', x)}/>
+        <ItemSectionViewHeader label="Shared" onSet={x => setAll('shared', x)}/>
       </div>
 
-      <ItemCell
-      value={row.oot}
-      heading="OoT"
-      column="oot"
-      label={row.ootLabel}
-      enabled={ootEnabled}
-      />
-
-      <ItemCell
-      value={row.mm}
-      heading="MM"
-      column="mm"
-      label={row.mmLabel}
-      enabled={mmEnabled}
-      />
-
-      <ItemCell
-      value={row.shared}
-      heading="Shared"
-      column="shared"
-      label="Shared"
-      />
+      <div>
+      {rows.map((row, index) => (
+        <div
+        key={row.name}
+        className={cn(
+          'grid grid-cols-1 lg:grid-cols-4 gap-3 px-4 py-3',
+          'lg:items-center lg:gap-4',
+          index % 2 === 1
+          ? 'bg-black/5 dark:bg-white/5'
+          : '',
+        )}>
+          <div className="font-medium sm:col-span-3 lg:col-span-1">{row.name}</div>
+          <ItemCell value={row.oot} heading="OoT" column="oot" label={row.ootLabel} enabled={ootEnabled}/>
+          <ItemCell value={row.mm} heading="MM" column="mm" label={row.mmLabel} enabled={mmEnabled}/>
+          <ItemCell value={row.shared} heading="Shared" column="shared" label="Shared"/>
+        </div>
+      ))}
       </div>
-    ))}
-    </div>
-    </section>
+    </Card>
   );
 }
 
@@ -533,27 +391,15 @@ function SimpleSection({
   settings,
 }: SimpleSectionDefinition) {
   return (
-    <section className="rounded-xl border bg-card p-5">
-    <header>
-    <h2 className="text-lg font-semibold">
-    {name}
-    </h2>
-
-    <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-    {description}
-    </p>
-    </header>
-
-    <div className="mt-5 grid grid-cols-1 items-center gap-x-6 gap-y-4 md:grid-cols-2 xl:grid-cols-3">
-    {settings.map(setting => (
-      <Setting
-      key={setting}
-      setting={setting}
-      showDisabled
-      />
-    ))}
-    </div>
-    </section>
+    <Card>
+      <header>
+        <h2 className="text-lg font-semibold">{name}</h2>
+        <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{description}</p>
+      </header>
+      <div className="mt-5 grid grid-cols-1 items-center gap-x-6 gap-y-4 md:grid-cols-2 xl:grid-cols-3">
+        {settings.map(setting => (<Setting key={setting} setting={setting} showDisabled/>))}
+      </div>
+    </Card>
   );
 }
 
