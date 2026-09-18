@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
 import { FaXmark } from 'react-icons/fa6';
-import clsx from 'clsx';
+import { cn } from '@/app/util';
 
 export type SelectOption<T> = {
   value: T;
@@ -92,7 +92,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
             id={id}
             readOnly={!creatable && !searcheable}
             placeholder={placeholder}
-            className={clsx("outline-none text-left select-none", (multi && Array.isArray(value) && value.length > 0) ? 'sr-only' : 'w-full')}
+            className={cn("outline-none text-left select-none", (multi && Array.isArray(value) && value.length > 0) ? 'sr-only' : 'w-full')}
             value={(open && (creatable || searcheable)) ? inputValue : currentLabel}
             onFocus={onFocus}
             onInput={(e) => { setInputValue((e.target as HTMLInputElement).value); }}
@@ -105,7 +105,7 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
         </div>
       </div>
       <div className="relative select-none">
-        {open && (searcheable || !inputValue) && <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
+        {open && (searcheable || !inputValue) && <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-75 overflow-y-auto">
           {filteredOptions.length > 0 && filteredOptions.map((opt, i) =>
             <div key={i} className="ux-hover p-2" onClick={(e) => { setOpen(false); onSelect(opt.value); e.preventDefault(); e.stopPropagation(); setInputValue(''); }}>
               {opt.label}

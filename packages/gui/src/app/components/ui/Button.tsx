@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'preact';
 import type { ReactNode } from 'preact/compat';
-import clsx from 'clsx';
+import { cn } from '@/app/util';
 
 type ButtonProps = {
   className?: string;
@@ -11,7 +11,7 @@ type ButtonProps = {
 export function Button({ className, variant, children, ...props }: ButtonProps) {
   return (
     <button
-      className={clsx(
+      className={cn(
         'p-2 rounded cursor-pointer',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         'hover:opacity-90',

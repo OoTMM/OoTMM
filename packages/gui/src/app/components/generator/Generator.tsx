@@ -1,7 +1,6 @@
 import type { ComponentType } from 'preact';
 import type { IconType } from 'react-icons';
 
-import clsx from 'clsx';
 import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave, LuVideo } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';
@@ -15,6 +14,7 @@ import { GeneratorAdvanced } from './GeneratorAdvanced';
 import { GeneratorCutscenes } from './GeneratorCutscenes';
 import { useStore } from '@/app/store';
 import { Save } from '../Save';
+import { cn } from '@/app/util';
 
 type GeneratorRoute = {
   name: string;
@@ -49,7 +49,7 @@ export function Generator() {
             key={i}
             aria-disabled={route.disabled}
             tabIndex={route.disabled ? -1 : 0}
-            className={clsx(
+            className={cn(
               "inline-flex items-center gap-3 [font-variant:small-caps] m-2 p-2 transition-all rounded",
               i == router.currentIndex ? 'font-semibold bg-gray-800' : 'hover:bg-gray-900',
               route.disabled && 'opacity-50 cursor-not-allowed',

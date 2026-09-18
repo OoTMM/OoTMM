@@ -1,8 +1,8 @@
 import type { ComponentType } from 'preact';
 import type { IconType } from 'react-icons';
 
-import clsx from 'clsx';
 import { useRouter } from '@/app/hooks/useRouter';
+import { cn } from '@/app/util';
 
 export type TabViewRoute = {
   name: string;
@@ -21,8 +21,8 @@ export function TabView({ routes }: { routes: TabViewRoute[] }) {
           <button
             data-text={route.name}
             disabled={route.disabled}
-            className={clsx(
-              "p-2 w-[200px] flex items-center justify-center gap-2",
+            className={cn(
+              "p-2 w-50 flex items-center justify-center gap-2",
               "cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
               i === router.currentIndex
                 ? "font-semibold text-white bg-neutral-400 dark:bg-gray-800"

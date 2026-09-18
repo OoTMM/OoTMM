@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
 import { FaXmark } from 'react-icons/fa6';
-import clsx from 'clsx';
+
+import { cn } from '@/app/util';
 
 export type MultiSelectOption<T> = {
   value: T;
@@ -131,7 +132,7 @@ export function MultiSelect<T>({
                 />
             ) : (
                 <div
-                    className={clsx(
+                    className={cn(
                         'outline-none text-left select-none',
                         displayLabel ? '' : 'text-gray-500',
                     )}
@@ -161,7 +162,7 @@ export function MultiSelect<T>({
 
         <div className="relative select-none">
           {open && (
-              <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-[300px] overflow-y-auto">
+              <div className="ux-bg ux-border z-50 absolute top-1 dark:bg-gray-600 rounded border dark:border-gray-500 w-full max-h-75 overflow-y-auto">
                 {filteredOptions.length > 0 &&
                     filteredOptions.map((opt, i) => {
                       const checked = isSelected(opt.value);

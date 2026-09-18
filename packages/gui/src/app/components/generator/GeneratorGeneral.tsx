@@ -1,17 +1,17 @@
 import type { IconType } from 'react-icons';
 
-import clsx from 'clsx';
 import { LuHammer, LuDices, LuFileDiff } from 'react-icons/lu';
 
 import { Setting, SettingsImportExport } from '@/app/components/settings';
-import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Label, Card } from '../ui';
+import { CheckboxField, FileSelectField, InputField, Button, RadioCardGroup, RadioCard, Card } from '../ui';
 import { PresetSelector } from '../PresetSelector';
 import { Result } from '../Result';
 
-import logoOot from '../../../assets/oot.png';
-import logoMm from '../../../assets/mm.png';
-import logoOotmm from '../../../assets/logo.png';
+import logoOot from '@/assets/oot.png';
+import logoMm from '@/assets/mm.png';
+import logoOotmm from '@/assets/logo.png';
 import { useStore } from '@/app/store';
+import { cn } from '@/app/util';
 
 type ModeCardProps = {
   selected: boolean;
@@ -84,7 +84,7 @@ export function GeneratorGeneral() {
           {isModeCreate && <>
             <PresetSelector />
             <SettingsImportExport />
-            <InputField className={clsx(config.seed ? 'font-mono' : '')} type="text" label="Seed" placeholder="Leave blank to auto-generate" value={config.seed} onChange={setSeed}/>
+            <InputField className={cn(config.seed ? 'font-mono' : '')} type="text" label="Seed" placeholder="Leave blank to auto-generate" value={config.seed} onChange={setSeed}/>
           </>}
 
           {isModeRandom && (

@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import { ImCheckmark } from 'react-icons/im';
-import clsx from 'clsx';
+import { cn } from '@/app/util';
 
 type CheckboxProps = {
   checked: boolean;
@@ -16,7 +16,7 @@ export function Checkbox({ checked, onChange, className, ...props }: CheckboxPro
         type="checkbox"
         checked={checked}
         onChange={() => onChange(!checked)}
-        className={clsx(
+        className={cn(
           'ux-bg ux-border ux-hover ux-outline',
           'w-full h-full appearance-none cursor-pointer',
           'hover:bg-gray-100 dark:hover:bg-gray-700',
@@ -27,7 +27,7 @@ export function Checkbox({ checked, onChange, className, ...props }: CheckboxPro
         )}
         {...props}
       />
-      <div className={clsx(
+      <div className={cn(
         "absolute top-0 left-0 w-full h-full grid place-items-center pointer-events-none transition-all",
         checked ? 'scale-100' : 'scale-0'
       )}>

@@ -25,7 +25,7 @@ export function SelectField({ label, tooltip, color, ...props }: SelectFieldProp
           {label}
           {color !== undefined && color !== null && (
             <span
-              className="w-20 h-4 border border-gray-400 rounded flex-shrink-0"
+              className="w-20 h-4 border border-gray-400 rounded shrink-0"
               style={{ backgroundColor: hexToCSS(color) }}
             />
           )}

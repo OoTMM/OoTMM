@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
-import clsx from 'clsx';
 import { FaXmark } from 'react-icons/fa6';
+import { cn } from '@/app/util';
 
 type FileSelectProps = {
   imageSrc: string;
@@ -27,8 +27,8 @@ export const FileSelect = ({ imageSrc, accept, onInput, file, ...props }: FileSe
   return (
     <div className="ux-bg ux-border w-50 h-50 min-w-50 min-h-50 relative">
       <input type="file" accept={accept} className="opacity-0 w-full h-full cursor-pointer" onInput={handleInput} {...props}/>
-      <img src={imageSrc} className={clsx("absolute w-full h-full object-contain scale-75 inset-0 pointer-events-none", file ? '' : 'grayscale' )}/>
-      <span className="absolute bottom-1 left-0 w-full text-center select-none pointer-events-none overflow-hidden overflow-ellipsis">{file ? file.name : "No file selected"}</span>
+      <img src={imageSrc} className={cn("absolute w-full h-full object-contain scale-75 inset-0 pointer-events-none", file ? '' : 'grayscale' )}/>
+      <span className="absolute bottom-1 left-0 w-full text-center select-none pointer-events-none overflow-hidden text-ellipsis">{file ? file.name : "No file selected"}</span>
       {file && <span className="absolute top-1 right-1 cursor-pointer hover:text-gray-500" onClick={handleReset}><FaXmark/></span>}
     </div>
   );
