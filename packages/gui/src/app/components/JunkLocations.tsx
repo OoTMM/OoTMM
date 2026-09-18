@@ -42,7 +42,7 @@ export function JunkLocations() {
             <span className="text-gray-500 text-3xl">No Junk Locations</span>
           </div>
         )}
-        {junkLocationsCache.sort().map((loc, i) => (
+        {[...junkLocationsCache].sort().map((loc, i) => (
           <div key={i} className="flex gap-1 items-center">
             <span className="hover:text-gray-500 cursor-pointer" onClick={() => remove(loc)}><FaXmark/></span>
             <span>{loc}</span>
