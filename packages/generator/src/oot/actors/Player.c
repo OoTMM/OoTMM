@@ -930,7 +930,7 @@ int Player_OverrideLimbDrawPauseWrapper(PlayState* play, s32 limbIndex, Gfx** dL
 
 int Player_OverrideLimbDrawGameplayFirstPersonWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Player* player)
 {
-    if (!(gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_FOREARM && (player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2) && player->heldItemAction != 15 && play->sceneId != SCE_OOT_SHOOTING_GALLERY))
+    if (!(gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_FOREARM && player->heldItemAction != 15 && play->sceneId != SCE_OOT_SHOOTING_GALLERY))
     {
         /* Forward */
         if (Player_OverrideLimbDrawGameplayFirstPerson(play, limbIndex, dList, pos, rot, player))
