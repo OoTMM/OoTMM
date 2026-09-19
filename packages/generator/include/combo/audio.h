@@ -61,4 +61,14 @@ extern u8* gFrogsSongPtr;
 #define AudioSfx_SetChannelIO func_800F4C58
 #endif
 
+void Audio_SetLoadingSequenceId(u32 seqId);
+void Audio_ClearLoadingSequenceId(void);
+s8 Audio_GetLoadCachePolicy(s8 defaultPolicy, u32 tableType);
+
+void AudioSeq_QueueSeqCmd(u32 cmd);
+u16 AudioSeq_GetActiveSeqId(u8 seqPlayerIndex);
+s32 AudioSeq_IsSeqCmdNotQueued(u32 cmdVal, u32 cmdMask);
+void AudioSeq_StopSequence(u8 seqPlayerIndex, u16 fadeOutDuration);
+void AudioSeq_SetVolumeScale(u8 seqPlayerIndex, u8 scaleIndex, u8 targetVol, u8 volFadeTimer);
+
 #endif
