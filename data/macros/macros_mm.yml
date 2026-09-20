@@ -252,6 +252,7 @@
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "(song_event(2) && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB)) && is_ocean_cleared)"
 "can_use_sticks": "has_sticks" # Compat
+"access_keg_trial": "is_spring || can_use_fire_short_range || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS))"
 
 "rusty_key(x)": "cond(setting(rustyKeysMm), has(x), true)"
 
