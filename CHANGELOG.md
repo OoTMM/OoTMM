@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Pirate's Fortress Exterior access being too restrictive in ER.
 - Fix a logic issue making MM access way too restrictive in some cases.
 - Fix traps sometimes triggering at unsafe times.
 - Fixed MM Hyper enemy crash during Majora boss fight phase 3 when he spawns tops.
