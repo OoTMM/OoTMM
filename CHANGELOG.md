@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Dodogon's Cavern skull eyes to account for blast mask
 - Fix Pirate's Fortress Exterior access being too restrictive in ER.
 - Fix a logic issue making MM access way too restrictive in some cases.
 - Fix traps sometimes triggering at unsafe times.
