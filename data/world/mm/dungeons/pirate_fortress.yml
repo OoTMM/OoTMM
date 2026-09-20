@@ -13,7 +13,7 @@
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
     "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
   events:
-    PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && soul_thief_guard"
+    PHOTO_GERUDO: "can_use_pictograph_box && soul_thief_guard"
   locations:
     "Pirate Fortress Entrance Chest 1": "underwater_walking"
     "Pirate Fortress Entrance Chest 2": "underwater_walking"
@@ -126,7 +126,7 @@
   region: PIRATE_FORTRESS_INTERIOR
   events:
     RUPEES: "has_weapon_range || has_explosives || has_weapon"
-    PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && soul_thief_guard"
+    PHOTO_GERUDO: "can_use_pictograph_box && soul_thief_guard"
   exits:
     "GLOBAL": "true"
     "Pirate Fortress Entrance Balcony": "true"
@@ -201,7 +201,7 @@
 "Pirate Fortress Barrel Maze":
   region: PIRATE_FORTRESS_INTERIOR
   events:
-    PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && (soul_thief_guard || soul_thief_fighter)"
+    PHOTO_GERUDO: "can_use_pictograph_box && (soul_thief_guard || soul_thief_fighter)"
   exits:
     "Pirate Fortress Barrel Maze Entry": "true"
     "Pirate Fortress Barrel Maze Aquarium": "soul_thief_fighter && (can_fight || deku_stick_fighting) && can_evade_gerudo"
@@ -238,7 +238,7 @@
 "Pirate Fortress Lone Guard":
   region: PIRATE_FORTRESS_INTERIOR
   events:
-    PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && (soul_thief_fighter || soul_thief_guard)"
+    PHOTO_GERUDO: "can_use_pictograph_box && (soul_thief_fighter || soul_thief_guard)"
   exits:
     "Pirate Fortress Lone Guard Aquarium": "soul_thief_fighter && (can_fight || deku_stick_fighting) && can_evade_gerudo"
     "Pirate Fortress Lone Guard Entry": "true"
@@ -273,7 +273,7 @@
 "Pirate Fortress Treasure Room":
   region: PIRATE_FORTRESS_INTERIOR
   events:
-    PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && soul_thief_guard"
+    PHOTO_GERUDO: "can_use_pictograph_box && soul_thief_guard"
   exits:
     "Pirate Fortress Treasure Room Aquarium": "soul_thief_fighter && (can_fight || deku_stick_fighting) && can_evade_gerudo"
     "Pirate Fortress Treasure Room Entry": "true"
@@ -286,7 +286,7 @@
     "Pirate Fortress Treasure Room": "soul_thief_fighter && (can_fight || deku_stick_fighting) && can_evade_gerudo"
     "Pirate Fortress Treasure Room Exit": "true"
   events:
-    PHOTO_GERUDO: "has(PICTOGRAPH_BOX) && soul_thief_fighter"
+    PHOTO_GERUDO: "can_use_pictograph_box && soul_thief_fighter"
     ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
   locations:

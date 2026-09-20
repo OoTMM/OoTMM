@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/inventory.h>
+#include "combo/common/Kaleido_Scope.h"
 
 static void removeButtonItem(u16 itemId)
 {
@@ -16,6 +17,16 @@ static void removeButtonItem(u16 itemId)
     }
 }
 
+static void checkTradeSlotAgeRequirement(u16 slot)
+{
+    u8 item;
+
+    item = gSave.info.inventory.items[slot];
+
+    if (!KaleidoScope_CheckMmItemAgeReq(item))
+        removeMmSlotFromCurrentCButton(slot, item);
+}
+
 void comboRemoveTradeItem1(u16 xitemId)
 {
     u32 mask;
@@ -25,7 +36,10 @@ void comboRemoveTradeItem1(u16 xitemId)
     {
         gMmExtraTrade.trade1 &= ~mask;
         if (gMmExtraTrade.trade1)
+        {
             comboToggleSlot(ITS_MM_TRADE1);
+            checkTradeSlotAgeRequirement(ITS_MM_TRADE1);
+        }
         else
             gSave.info.inventory.items[ITS_MM_TRADE1] = ITEM_NONE;
         removeButtonItem(kMmTrade1[xitemId]);
@@ -41,7 +55,10 @@ void comboRemoveTradeItem2(u16 xitemId)
     {
         gMmExtraTrade.trade2 &= ~mask;
         if (gMmExtraTrade.trade2)
+        {
             comboToggleSlot(ITS_MM_TRADE2);
+            checkTradeSlotAgeRequirement(ITS_MM_TRADE2);
+        }
         else
             gSave.info.inventory.items[ITS_MM_TRADE2] = ITEM_NONE;
         removeButtonItem(kMmTrade2[xitemId]);
@@ -57,7 +74,10 @@ void comboRemoveTradeItem3(u16 xitemId)
     {
         gMmExtraTrade.trade3 &= ~mask;
         if (gMmExtraTrade.trade3)
+        {
             comboToggleSlot(ITS_MM_TRADE3);
+            checkTradeSlotAgeRequirement(ITS_MM_TRADE3);
+        }
         else
             gSave.info.inventory.items[ITS_MM_TRADE3] = ITEM_NONE;
         removeButtonItem(kMmTrade3[xitemId]);
