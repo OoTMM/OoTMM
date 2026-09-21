@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file.
 - Fix MM great Bay Goast Gossip Stone and Fairy checks being in the wrong region.
 - Fix ER logic bug that could expect you to access the Great Fairy in DMC from the top when it doesn't actually lead to the Great Fairy.
 - Fix logic for the MM Great Bay Temple Map Room not expecting swimming to be able to surface in some circumstances.
+- Fix the Powder Keg Trial item location being logically too strict outside ER.
 
 ## [32.3] - 2026-08-23
 
