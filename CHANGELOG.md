@@ -64,7 +64,7 @@ All notable changes to this project will be documented in this file.
 - Fix ER logic bug that could expect you to access the Great Fairy in DMC from the top when it doesn't actually lead to the Great Fairy.
 - Fix logic for the MM Great Bay Temple Map Room not expecting swimming to be able to surface in some circumstances.
 - Fix the Powder Keg Trial item location being logically too strict outside ER.
-- Fix a logic issue where Dampe's Gravedigging Tour could expect Sun's Song or Song of Double Time instead of access to areas where time flows.
+- Fix a logic issue where Dampe's Gravedigging Tour could expect Sun's Song instead of Song of Double Time or access to areas where time flows.
 
 ## [32.3] - 2026-08-23
 
