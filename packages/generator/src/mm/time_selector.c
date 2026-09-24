@@ -15,6 +15,7 @@
 #define DT_MAX_TICKS 0x2c000u
 #define DT_BASE_TEXT_ID 0x1b91
 #define DT_FINAL_NIGHT_FAIL_TEXT_ID 0x1b94
+#define DT_RESTRICTED_TEXT_ID 0x1b95
 #define DT_CLOCK_DRAW_TEXT_ID 0x0100
 #define DT_FAST_FORWARD_SPEED 400
 #define DT_SELECTOR_BOX_Y 90
@@ -77,6 +78,13 @@ static u32 DtGetLandingTicks(u32 ticks) {
     if (ticks && (!(ticks % DT_HALF_TICKS) || ticks == DT_MAX_TICKS))
         return DtMinutesToTicks(DtTicksToMinutes(ticks) - 1);
     return ticks;
+}
+
+static u32 DtGetAvailabilityHalf(u32 ticks) {
+    u32 half = ticks / DT_HALF_TICKS;
+    if (ticks && !(ticks % DT_HALF_TICKS))
+        half--;
+    return half >= DT_HALF_COUNT ? DT_HALF_COUNT - 1 : half;
 }
 
 static void DtLoadClockDayTexture(PlayState* play, u32 day) {
@@ -187,10 +195,10 @@ static void DtMoveTarget(PlayState* play, int dir) {
     s32 i;
     if (dir > 0) {
         next = DtNextSnapTicks(old);
-        half = next / DT_HALF_TICKS;
+        half = DtGetAvailabilityHalf(next);
         if (!(gSharedCustomSave.mm.halfDays & (1u << half))) {
             next = old;
-            for (i = half + 1; i < DT_HALF_COUNT; i++) {
+            for (i = (s32)(DtNextSnapTicks(old) / DT_HALF_TICKS) + 1; i < DT_HALF_COUNT; i++) {
                 if (!(gSharedCustomSave.mm.halfDays & (1u << i)))
                     continue;
                 next = (u32)i * DT_HALF_TICKS;
@@ -203,7 +211,7 @@ static void DtMoveTarget(PlayState* play, int dir) {
         if (next <= sDtStartTicks) {
             sDtTargetTicks = sDtStartTicks;
         } else {
-            half = next / DT_HALF_TICKS;
+            half = DtGetAvailabilityHalf(next);
             if (gSharedCustomSave.mm.halfDays & (1u << half)) {
                 sDtTargetTicks = next;
             } else {
@@ -224,6 +232,16 @@ static void DtMoveTarget(PlayState* play, int dir) {
     if ((s32)(sDtTargetTicks / DT_HALF_TICKS) != sDtDisplayedHalf)
         DtShowSelectorText(play);
 }
+static int DtShouldRejectFourthDay(PlayState* play) {
+    return gSave.day > 3 && play->msgCtx.ocarinaMode == OCARINA_MODE_PROCESS_DOUBLE_TIME;
+}
+
+static void DtRejectFourthDay(PlayState* play) {
+    Message_ContinueTextbox(play, DT_RESTRICTED_TEXT_ID);
+    play->msgCtx.ocarinaMode = OCARINA_MODE_PROCESS_RESTRICTED_SONG;
+    sDtTextDirty = 0;
+}
+
 static int DtShouldBegin(PlayState* play) {
     MessageContext* msg = &play->msgCtx;
     if (DtCurrentTicks() >= DT_MAX_TICKS)
@@ -365,13 +383,6 @@ static void DtFinishNormalDoubleTime(PlayState* play, int nativeTransition) {
     gSaveContext.nextDayTime = NEXT_TIME_NONE;
     MM_CLEAR_EVENT_INF(EVENTINF_TRIGGER_DAYTELOP);
     play->msgCtx.ocarinaMode = OCARINA_MODE_END;
-    if (nativeTransition) {
-        gSaveContext.respawnFlag = 2;
-        gSaveContext.nextCutscene = 0;
-        gDoubleTimeTargetPending = 0;
-        gDoubleTimeTargetDayChanged = 0;
-        return;
-    }
     if (reload) {
         gDoubleTimeTargetPending = 0;
         gDoubleTimeTargetDayChanged = 0;
@@ -474,7 +485,9 @@ void DoubleTimeSelector_Update(PlayState* play) {
         return;
     switch (sDtState) {
     case DT_STATE_NONE:
-        if (DtShouldBegin(play))
+        if (DtShouldRejectFourthDay(play))
+            DtRejectFourthDay(play);
+        else if (DtShouldBegin(play))
             DtBegin(play);
         break;
     case DT_STATE_SELECT:
