@@ -128,12 +128,18 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
         info = GetArrowInfo(current);
         magic = info->magicCost;
         hasMagic = HasEnoughMagicForArrow(magicCost, magic);
-        if (info && info->item == gSave.info.inventory.items[info->slot] && hasMagic
+        if (info && hasMagic
         #if defined(GAME_MM)
+            && ((info->item == ITEM_MM_BOW && (gMmExtraItems.bowSlingshot & 1)) ||
+                info->item == gSave.info.inventory.items[info->slot])
             && KaleidoScope_CheckMmItemAgeReq(info->item)
+        #else
+            && info->item == gSave.info.inventory.items[info->slot]
         #endif
         )
+        {
             return info;
+        }
     }
 
     return NULL;
@@ -321,7 +327,13 @@ void ArrowCycle_Handle(Player* link, PlayState* play)
     if (!curInfo || !nextInfo || curInfo->var == nextInfo->var)
     {
         item = BUTTON(link->heldItemButton);
-        if (curInfo->var == 2 && item != ITEM_BOW && gSave.info.inventory.items[ITS_BOW] == ITEM_BOW)
+        if (curInfo->var == 2 && item != ITEM_BOW &&
+        #if defined(GAME_MM)
+            (gMmExtraItems.bowSlingshot & 1)
+        #else
+            gSave.info.inventory.items[ITS_BOW] == ITEM_BOW
+        #endif
+        )
         {
             BUTTON(link->heldItemButton) = ITEM_BOW;
             Interface_LoadItemIconImpl(play, link->heldItemButton);
