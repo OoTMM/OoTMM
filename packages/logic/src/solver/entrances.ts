@@ -419,25 +419,6 @@ class WorldShuffler {
     throw new LogicEntranceError(`Unbalanced pool: ${name}`);
   }
 
-  private assumedFromPools(pools: EntrancePools, ignore: Set<Entrance>): Set<Entrance> {
-    const assumed = new Set<Entrance>();
-
-    for (const pool of Object.values(pools)) {
-      for (const dst of pool.dst) {
-        if (ignore.has(dst)) {
-          ignore.delete(dst);
-          continue;
-        }
-        const e = ENTRANCES[dst];
-        if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || dst === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erNoPolarity) {
-          assumed.add(dst);
-        }
-      }
-    }
-
-    return assumed;
-  }
-
   private isSelfLoop(src: Entrance, dst: Entrance) {
     const dstEntrance = ENTRANCES[dst];
     const srcEntrance = ENTRANCES[src];
