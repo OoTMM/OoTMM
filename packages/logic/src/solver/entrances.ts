@@ -66,6 +66,7 @@ const POLARITY_IN = new Set<string>([
   'indoors-pf',
   'indoors-extra',
   'indoors-special',
+  'indoors-telescope',
   'grotto',
   'grave',
 ]);
