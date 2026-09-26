@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Prevent telescopes from being valid spawn locations and wallmaster destinations.
 - When more than 4 OoT bottles are found, you no longer gain extra trade slot bottle slots unless Extra OoT Bottles is on.
 - When bottle random bottle contents is on, random bottles can be added to plando or starting items.
 - Remove the mostly-unused 'cross' tokens setting.

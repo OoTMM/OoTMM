@@ -621,6 +621,7 @@ class WorldShuffler {
     /* Compute types */
     const types = new Set(this.poolsTypesDst());
     types.delete('boss');
+    types.delete('indoors-telescope');
     types.add('spawn');
     types.add('indoors');
     types.add('one-way-song');
@@ -642,6 +643,7 @@ class WorldShuffler {
     types.add('dungeon');
     types.add('dungeon-minor');
     types.add('dungeon-sh');
+    types.delete('indoors-telescope');
 
     if (this.settings.erBoss !== 'none') {
       types.add('boss');
