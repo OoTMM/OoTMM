@@ -966,9 +966,9 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
             variant = OotChildShield_GetEquippedVariant();
 
             if (variant == OOT_CHILD_SHIELD_HERO)
-                *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HERO), CUSTOM_OBJECT_EQ_SHIELD_HERO_0);
+                *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HERO), CUSTOM_OBJECT_EQ_SHIELD_HERO_0);
             else
-                *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject( CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+                *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
         }
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
