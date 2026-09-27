@@ -356,6 +356,7 @@
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF)) && is_swamp_cleared)"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "event(TURTLE_WOKEN) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB)) && is_ocean_cleared)"
+"ikana_tree_spawned": "event(IKANA_TREE_SPAWNED)"
 "can_use_sticks": "has_sticks" # Compat
 
 "rusty_key(x)": "cond(setting(rustyKeysMm), has(x), true)"
