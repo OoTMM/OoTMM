@@ -1100,16 +1100,46 @@ static void Interface_UpdateButtons_Horse(PlayState* play)
     u8 itemBefore;
     int mounted;
     int spoofBow;
+    int bowAllowed;
 
     player = GET_PLAYER(play);
     bItem = &gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B];
     mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    bowAllowed = KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW);
     if (sHorseBowManaged)
     {
-        gSaveContext.buttonStatus[EQUIP_SLOT_B] = sHorsePreviousBItem;
-
-        if (*bItem == ITEM_NONE)
+        if (!mounted)
+        {
+            *bItem = sHorsePreviousBItem;
+            sHorseBowManaged = 0;
+        }
+        else if (bowAllowed)
+        {
             *bItem = ITEM_MM_BOW;
+            if (sHorsePreviousBItem == ITEM_NONE)
+                gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
+            else
+                gSaveContext.buttonStatus[EQUIP_SLOT_B] = sHorsePreviousBItem;
+        }
+        else
+        {
+            *bItem = ITEM_NONE;
+            gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_DISABLED;
+        }
+    }
+
+
+    if (!sHorseBowManaged &&
+        mounted &&
+        *bItem == ITEM_NONE &&
+        bowAllowed)
+    {
+        sHorsePreviousBItem = ITEM_NONE;
+        sHorseBowManaged = 1;
+
+        *bItem = ITEM_MM_BOW;
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
+        Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
     }
 
     itemBefore = *bItem;
@@ -1125,10 +1155,27 @@ static void Interface_UpdateButtons_Horse(PlayState* play)
     mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
     if (!mounted)
     {
-        sHorseBowManaged = 0;
+        if (sHorseBowManaged)
+        {
+            *bItem = sHorsePreviousBItem;
+
+            if (*bItem == ITEM_NONE)
+            {
+                gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_DISABLED;
+            }
+            else
+            {
+                gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
+                Interface_LoadItemIconImpl(play, EQUIP_SLOT_B);
+            }
+
+            sHorseBowManaged = 0;
+        }
+
         return;
     }
-    if (*bItem == ITEM_MM_BOW &&
+    if (!sHorseBowManaged &&
+        *bItem == ITEM_MM_BOW &&
         itemBefore != ITEM_MM_BOW &&
         itemBefore != ITEM_MM_BOMB &&
         itemBefore != ITEM_MM_BOMBCHU)
@@ -1139,13 +1186,19 @@ static void Interface_UpdateButtons_Horse(PlayState* play)
 
     if (!sHorseBowManaged)
         return;
+    if (!bowAllowed)
+    {
+        *bItem = ITEM_NONE;
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_DISABLED;
+        return;
+    }
     if (*bItem != ITEM_MM_BOW)
     {
         sHorseBowManaged = 0;
         return;
     }
-    if (!KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW))
-        *bItem = ITEM_NONE;
+    if (sHorsePreviousBItem == ITEM_NONE)
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
 }
 
 PATCH_CALL(0x80112e68, Interface_UpdateButtons_Horse);
