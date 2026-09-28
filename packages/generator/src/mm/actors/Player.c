@@ -2899,6 +2899,41 @@ static s32 Player_ExtendedSwordActionToNative(s32 itemAction)
     }
 }
 
+typedef s32 (*MagicConsumeFunc)(PlayState* play, s16 amount, s16 type);
+
+void Player_StartCustomSpinAttack(PlayState* play, Player* this, s32 magicCost, s32 isSwordBeam)
+{
+    s32 itemAction;
+    s32 swordType;
+
+    if (magicCost != 0)
+        this->unk_B08 = 0.0f;
+    else
+        this->unk_B08 = 0.5f;
+    this->stateFlags1 |= (1 << 12);
+    if ((this->actor.id == ACTOR_PLAYER) && (isSwordBeam || this->transformation == MM_PLAYER_FORM_HUMAN))
+    {
+        s16 pitch = 0;
+        Actor* thunder;
+        if (isSwordBeam)
+        {
+            if (this->lockOnActor != NULL)
+                pitch = Math_Vec3f_Pitch(&this->bodyPartsPos[PLAYER_BODYPART_WAIST], &this->lockOnActor->focus.pos);
+            if (gSaveContext.save.info.playerData.magic == 0)
+                return;
+        }
+        itemAction = Player_ExtendedSwordActionToNative(this->heldItemAction);
+        swordType = itemAction - PLAYER_IA_SWORD_KOKIRI;
+        thunder = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_M_THUNDER, this->bodyPartsPos[PLAYER_BODYPART_WAIST].x, this->bodyPartsPos[PLAYER_BODYPART_WAIST].y, this->bodyPartsPos[PLAYER_BODYPART_WAIST].z, pitch, 0, 0, swordType | magicCost);
+        if ((thunder != NULL) && isSwordBeam)
+        {
+            ((MagicConsumeFunc)0x80115DB4)(play, 1, MAGIC_CONSUME_DEITY_BEAM);
+            this->unk_D57 = 4;
+        }
+    }
+}
+PATCH_FUNC(0x808332A0, Player_StartCustomSpinAttack);
+
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
     switch (itemAction)
     {
