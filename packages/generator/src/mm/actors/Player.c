@@ -305,7 +305,11 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     Player_RefreshMaskObjectForAge(this);
     Player_UpdateHumanStrengthRestrictions();
     Player_SyncCustomSwordSpecialMaskB(this, play, 0);
-    Inventory_UpdateDeitySwordEquip(play);
+    if (this->transformation == MM_PLAYER_FORM_FIERCE_DEITY)
+    {
+        Inventory_UpdateDeitySwordEquip(play);
+    }
+
     Player_Update(this, play);
     PlayerVoice_UpdateHumanAgeRouting(this);
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
