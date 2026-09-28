@@ -287,6 +287,7 @@ static void Player_SyncCustomSwordSpecialMaskB(
     {
         gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B] =
             desiredItem;
+        sCustomSwordHudDirty = 1;
     }
 
     if (allowHudRefresh && sCustomSwordHudDirty && desiredItem == extendedSwordItem)
@@ -304,6 +305,7 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     Player_RefreshMaskObjectForAge(this);
     Player_UpdateHumanStrengthRestrictions();
     Player_SyncCustomSwordSpecialMaskB(this, play, 0);
+    Inventory_UpdateDeitySwordEquip(play);
     Player_Update(this, play);
     PlayerVoice_UpdateHumanAgeRouting(this);
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
@@ -566,6 +568,34 @@ s32 Player_CustomSwordFromIA(Player* player, s32 itemAction)
 }
 
 PATCH_FUNC(0x80124278, Player_CustomSwordFromIA);
+
+s32 Player_CustomBButtonSwordFromIA(Player* player, s32 itemAction)
+{
+    s32 bButtonSword;
+    switch (itemAction)
+    {
+    case PLAYER_CUSTOM_IA_SWORD_MASTER:
+    case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
+    case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
+        if (player->transformation != MM_PLAYER_FORM_GORON)
+            return 3;
+        return 0;
+
+    default:
+        break;
+    }
+    bButtonSword = itemAction - PLAYER_IA_SWORD_KOKIRI + 1;
+
+    if (player->transformation != MM_PLAYER_FORM_GORON)
+    {
+        if (bButtonSword > 0 && bButtonSword < 4)
+            return bButtonSword;
+    }
+
+    return 0;
+}
+
+PATCH_FUNC(0x80124110, Player_CustomBButtonSwordFromIA);
 
 Actor* Player_SpawnMagicSpellActor(PlayState* play, Player* this, s8 magicSpell)
 {

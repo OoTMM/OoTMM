@@ -828,3 +828,4 @@ Matrix_MultVecX = 0x80181b78;
 
 Player_SetModelsForHoldingShield = 0x801239AC;
 Inventory_GetBtnBItem = 0x8012EC80;
+Inventory_UpdateDeitySwordEquip = 0x80114CA0;
