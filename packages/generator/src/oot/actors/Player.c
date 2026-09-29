@@ -843,7 +843,7 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
     }
 
     if (shieldOnBack && gSave.info.equips.equipment.shields == 1 && OotChildShield_GetEquippedVariant() == OOT_CHILD_SHIELD_HERO)
-        *dlist = Player_CustomPair(sword, shield);
+        *dlist = Player_CustomPair(shield, sword);
     else
         *dlist = Player_CustomPair(shield, sword);
 }
@@ -970,6 +970,9 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
             else
                 *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
         }
+
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.info.equips.equipment.shields == 3)
+            *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
         {
