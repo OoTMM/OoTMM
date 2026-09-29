@@ -9,7 +9,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple": "true"
-    "Snowhead Temple Main": "has_mask_goron || has_mask_zora || can_lift_silver"
+    "Snowhead Temple Main": "has_mask_goron || has_mask_zora || (break_icicle && can_lift_silver)"
     "Snowhead Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_GOHT)"
     "WARP_SONGS": "true"
   locations:

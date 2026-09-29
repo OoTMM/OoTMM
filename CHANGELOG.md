@@ -67,6 +67,7 @@ All notable changes to this project will be documented in this file.
 - Fix logic for the MM Great Bay Temple Map Room not expecting swimming to be able to surface in some circumstances.
 - Fix the Powder Keg Trial item location being logically too strict outside ER.
 - Fix a logic issue where Dampe's Gravedigging Tour could expect Sun's Song instead of Song of Double Time or access to areas where time flows.
+- Fix logic in Snowhead Temple expecting access with only Silver Gauntlets and nothing to break the icicles.
 
 ## [32.3] - 2026-08-23
 
