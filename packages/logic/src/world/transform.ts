@@ -1846,8 +1846,17 @@ class LogicPassWorldTransform {
     }
 
     if (settings.goronSwordsMm) {
-      this.addItem(Items.MM_SWORD_KNIFE);
-      this.addItem(Items.MM_SWORD_GORON);
+      const progressiveGoronSwords =
+          settings.sharedGoronSwords
+              ? settings.progressiveSwordsOot === 'goron'
+              : settings.progressiveGoronSwordsMm === 'progressive';
+
+      if (progressiveGoronSwords) {
+        this.addItem(Items.MM_SWORD_GORON, 2);
+      } else {
+        this.addItem(Items.MM_SWORD_KNIFE);
+        this.addItem(Items.MM_SWORD_BIGGORON);
+      }
     }
 
     /* Handle progressive shields */
@@ -2025,14 +2034,6 @@ class LogicPassWorldTransform {
           Items.MM_GREAT_FAIRY_SWORD,
           settings.sharedChildSwords ? Items.SHARED_SWORD : Items.MM_SWORD
       );
-    }
-
-    if (
-        settings.goronSwordsMm &&
-        !settings.sharedGoronSwords &&
-        settings.progressiveGoronSwordsMm === 'progressive'
-    ) {
-      this.replaceItem(Items.MM_SWORD_KNIFE, Items.MM_SWORD_GORON);
     }
 
     /* Master Sword sharing is separate unless it is part of full OoT sword progression. */
