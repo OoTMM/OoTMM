@@ -126,14 +126,9 @@ static int fixDropArrowSeeds(int size)
     int isAllowedArrows;
     int isAllowedSeeds;
 
-    isAllowedArrows = TRUE;
-    isAllowedSeeds = TRUE;
+    isAllowedArrows = gSave.info.inventory.upgrades.quiver != 0 && (KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW) || KaleidoScope_CheckMmItemAgeReq(ITEM_MM_ARROW_FIRE) || KaleidoScope_CheckMmItemAgeReq(ITEM_MM_ARROW_ICE) || KaleidoScope_CheckMmItemAgeReq(ITEM_MM_ARROW_LIGHT));
 
-    if (gSave.info.inventory.upgrades.quiver == 0)
-        isAllowedArrows = FALSE;
-
-    if (gSave.info.inventory.upgrades.bulletBag == 0)
-        isAllowedSeeds = FALSE;
+    isAllowedSeeds = gSave.info.inventory.upgrades.bulletBag != 0 && KaleidoScope_CheckMmItemAgeReq(ITEM_MM_SLINGSHOT);
 
     if (!isAllowedArrows && !isAllowedSeeds)
         return -1;

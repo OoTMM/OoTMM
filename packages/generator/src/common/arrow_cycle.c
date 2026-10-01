@@ -62,6 +62,10 @@ ArrowCycleState;
 
 static ArrowCycleState sArrowCycleState;
 
+#if defined(GAME_MM)
+int KaleidoScope_CheckMmItemAgeReq(u8 item);
+#endif
+
 typedef struct
 {
     u8  item;
@@ -124,7 +128,13 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
         info = GetArrowInfo(current);
         magic = info->magicCost;
         hasMagic = HasEnoughMagicForArrow(magicCost, magic);
-        if (info && info->item == gSave.info.inventory.items[info->slot] && hasMagic)
+        if (info && hasMagic
+        #if defined(GAME_MM)
+            && ((info->item == ITEM_MM_BOW && (gMmExtraItems.bowSlingshot & 1)) || info->item == gSave.info.inventory.items[info->slot]) && KaleidoScope_CheckMmItemAgeReq(info->item)
+        #else
+            && info->item == gSave.info.inventory.items[info->slot]
+        #endif
+        )
             return info;
     }
 

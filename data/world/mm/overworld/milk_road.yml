@@ -11,7 +11,7 @@
     "Tingle Ranch": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
     "Milk Road Keaton": "true"
   events:
-    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && can_use_pictograph_box"
     RUPEES: "true"
     MAGIC: "true"
     ARROWS: "true"
