@@ -315,6 +315,7 @@ void Environment_StartTime(void);
 u8 Environment_IsTimeStopped(void);
 u32 Environment_GetStormState(struct PlayState* play);
 u8 Environment_IsFinalHours(struct PlayState* play);
+u8 func_800FE5D0(PlayState* play);
 u16 Environment_GetTimeSpeed(struct PlayState* play);
 void Environment_SetTimeJump(f32 minutes);
 u8 func_800FE6F8(struct PlayState* play, s16 timeAdvanceScaling, s16 nextTimeLimit);

@@ -45,7 +45,8 @@ PATCH_START 0x80baa6d0 + 0x2ee0
   lui     a1, 0x4080
 PATCH_END
 
-/* Replaces the call to AudioSeq_QueueSeqCmd in the EnSuttari_Destroy function */
-PATCH_START 0x80baa6d0 + 0x3a0c
-  nop
+/* Stop Sakon's chase music and restore the nighttime scene BGM. */
+PATCH_START 0x80BAE0A0
+    j       Sakon_Destroy_Hook
+     nop
 PATCH_END

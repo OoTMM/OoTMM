@@ -66,6 +66,37 @@ _Interface_UpdateButtonsPart2 = 0x80110038;
 Schedule_CheckMiscS = 0x8013296c;
 
 AudioSeq_QueueSeqCmd = 0x801a89a8;
+Environment_IsFinalHours = 0x800fe590;
+func_800FE5D0 = 0x800fe5d0;
+
+Audio_SplitBgmChannels = 0x801a0cb0;
+Audio_StopSequenceAtPos = 0x801a1a10;
+Audio_StartSubBgmAtPos = 0x801a1a8c;
+
+Audio_PlaySceneSequence = 0x801a25e4;
+Audio_StartSceneSequence = 0x801a2670;
+Audio_PlayAmbience = 0x801a4a28;
+
+AudioSeq_StopSequence = 0x801a7d04;
+AudioSeq_GetActiveSeqId = 0x801a8a50;
+AudioSeq_IsSeqCmdNotQueued = 0x801a8abc;
+AudioSeq_SetVolumeScale = 0x801a8bd0;
+
+sAudioCutsceneFlag = 0x801d66b0;
+sPrevMainBgmSeqId = 0x801d66cc;
+gAudioSpecId = 0x801db4d4;
+
+sRequestedSceneSeqId = 0x801fd2a0;
+sAudioPauseState = 0x801fd3b0;
+sSpatialSeqIsActive = 0x801fd3b4;
+sSpatialSeqNoFilterPos = 0x801fd410;
+sSpatialSeqFilterPos = 0x801fd420;
+sSpatialSeqMaxDist = 0x801fd42c;
+sSpatialSeqSeqId = 0x801fd430;
+sSpatialSeqFlags = 0x801fd431;
+sSpatialSubBgmFadeTimer = 0x801fd433;
+sSpatialSeqPlayerIndex = 0x801fd435;
+sSpatialSeqFadeTimer = 0x801fd436;
 
 Sleep_Usec = 0x80087a1c;
 
