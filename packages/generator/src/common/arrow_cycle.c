@@ -128,9 +128,11 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
         info = GetArrowInfo(current);
         magic = info->magicCost;
         hasMagic = HasEnoughMagicForArrow(magicCost, magic);
-        if (info && info->item == gSave.info.inventory.items[info->slot] && hasMagic
+        if (info && hasMagic
         #if defined(GAME_MM)
-            && KaleidoScope_CheckMmItemAgeReq(info->item)
+            && ((info->item == ITEM_MM_BOW && (gMmExtraItems.bowSlingshot & 1)) || info->item == gSave.info.inventory.items[info->slot]) && KaleidoScope_CheckMmItemAgeReq(info->item)
+        #else
+            && info->item == gSave.info.inventory.items[info->slot]
         #endif
         )
             return info;
