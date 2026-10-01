@@ -327,7 +327,7 @@
 "turtle_woken": "event(TURTLE_WOKEN) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB)) && is_ocean_cleared)"
 "can_use_sticks": "has_sticks" # Compat
 "access_keg_trial": "is_spring || can_use_fire_short_range || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS))"
-
+"ikana_tree_spawned": "event(IKANA_TREE_SPAWNED)"
 "rusty_key(x)": "cond(setting(rustyKeysMm), has(x), true)"
 
 # Items
