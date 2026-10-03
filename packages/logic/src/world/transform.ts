@@ -2049,15 +2049,31 @@ class LogicPassWorldTransform {
     if (settings.sharedGoronSwords) {
       switch (settings.progressiveSwordsOot) {
         case 'separate':
-          this.shareItems(SharedItemGroups.BIGGORON_SWORDS, 'max');
+          this.shareItems([
+            {
+              shared: Items.SHARED_SWORD_KNIFE,
+              oot: Items.OOT_SWORD_KNIFE,
+              mm: Items.MM_SWORD_KNIFE,
+            },
+            {
+              shared: Items.SHARED_SWORD_BIGGORON,
+              oot: Items.OOT_SWORD_BIGGORON,
+              mm: Items.MM_SWORD_BIGGORON,
+            },
+          ], 'max');
           break;
         case 'goron':
-          this.replaceItem(Items.MM_SWORD_KNIFE, Items.MM_SWORD_GORON);
-          this.shareItems(SharedItemGroups.BIGGORON_SWORD_PROGRESSIVE, 'max');
+          this.shareItems([
+            {
+              shared: Items.SHARED_SWORD_GORON,
+              oot: Items.OOT_SWORD_GORON,
+              mm: Items.MM_SWORD_GORON,
+            },
+          ], 'max');
           break;
         case 'progressive':
-          /* OoT's progressive sword items provide the Knife and Biggoron stages. */
           this.removeItem(Items.MM_SWORD_KNIFE);
+          this.removeItem(Items.MM_SWORD_BIGGORON);
           this.removeItem(Items.MM_SWORD_GORON);
           break;
       }
