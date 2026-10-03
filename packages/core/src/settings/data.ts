@@ -2482,7 +2482,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Allows Ocarina of Time to have up to six bottles by using the Adult and Child trade slots for the fifth and sixth bottles.',
   default: false,
-  cond: (s: any) => hasOoT(s) && !s.sharedBottles,
+  cond: (s: any) => hasOoT(s),
 }, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons (OoT)',
@@ -3512,7 +3512,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Combines the bottles from OoT and MM into six items for both games. The six bottles are: Red Potion, Gold Dust, Chateau, Milk, Ruto\'s Letter and an Empty Bottle. Bottle refills are also shared.',
   default: false,
-  cond: (s: any) => hasOoTMM(s),
+  cond: (s: any) => hasOoTMM(s) && s.extraBottlesOot,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
