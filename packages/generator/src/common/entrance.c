@@ -73,7 +73,7 @@ void comboTransitionOverride(PlayState* play, u32 entrance)
     }
 
     g.nextEntrance = entrance;
-    g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
+    g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER) && (entrance != gSave.entrance);
     play->nextEntrance = ENTR_EXTENDED;
 #endif
 }
