@@ -118,3 +118,79 @@ void EnJs_TryStartFight(Actor* this)
 }
 
 PATCH_CALL(0x8096a534, EnJs_TryStartFight);
+
+static s32 EnJs_GetRemainingMasksFixed(void)
+{
+    s32 count = 0;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_ROMANI] == ITEM_MM_MASK_ROMANI)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY)
+        count++;
+
+    if ((gSave.info.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO) ||
+        (gMmExtraItems.gibdoSpooky & (1 << 0)))
+    {
+        count++;
+    }
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_DON_GERO] == ITEM_MM_MASK_DON_GERO)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN)
+        count++;
+
+    if ((gSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) ||
+        (gMmExtraItems.stoneGerudoSkull & (1 << 0)))
+    {
+        count++;
+    }
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_BREMEN] == ITEM_MM_MASK_BREMEN)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_SCENTS] == ITEM_MM_MASK_SCENTS)
+        count++;
+
+    if (gSave.info.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT)
+        count++;
+    count -= ((s32 (*)(s32))actorAddr(0xbf, 0x80968e38))(0);
+
+    return count;
+}
+
+PATCH_FUNC(0x80968f48, EnJs_GetRemainingMasksFixed);
