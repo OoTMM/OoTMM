@@ -117,7 +117,7 @@ static void Age_OnChangeOot(void)
     if (Config_Flag(CFG_MM_CROSS_AGE))
     {
         gMmSave.equippedMask = 0;
-        gCustomSave.customMask = 0;
+        gSharedCustomSave.mm.customMask = 0;
     }
 #endif
 }
