@@ -113,6 +113,13 @@ static void Age_OnChangeOot(void)
 {
     Age_SwapFaroreOot();
     Age_SwapEquipmentOot();
+#if defined(GAME_OOT)
+    if (Config_Flag(CFG_MM_CROSS_AGE))
+    {
+        gMmSave.equippedMask = 0;
+        gCustomSave.customMask = PLAYER_CUSTOM_MASK_NONE;
+    }
+#endif
 }
 
 #if defined(GAME_OOT)
