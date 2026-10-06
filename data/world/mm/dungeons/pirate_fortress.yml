@@ -9,10 +9,11 @@
   exits:
     "GLOBAL": "true"
     "Pirate Fortress": "true"
-    "Pirate Fortress Sewers": "underwater_walking && (has_mask_goron || can_hammer)"
+    "Pirate Fortress Sewers": "event(PIRATE_FORTRESS_SEWERS_OPEN)"
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
     "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
   events:
+    PIRATE_FORTRESS_SEWERS_OPEN: "underwater_walking && (has_mask_goron || can_hammer)"
     PHOTO_GERUDO: "can_use_pictograph_box && soul_thief_guard"
   locations:
     "Pirate Fortress Entrance Chest 1": "underwater_walking"
