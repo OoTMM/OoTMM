@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - The grass item on the platform in Zora River can now be obtained with Boomerang from afar.
 - The Gerudo Fortress wonder item near the archery range can now be gotten logically as child without Gerudo Card.
 - Gerudo Fortress and Thieves' Hideout logic has been overhauled and is now entirely accurate for future settings.
+- Make using Bombs for the underwater rocks in Gerudo Valley a trick.
 
 ### Fixed
 
