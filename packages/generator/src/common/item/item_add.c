@@ -595,16 +595,30 @@ static int addItemSeedsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addBowItemRawMm(PlayState* play)
 {
-    if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
-        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gMmExtraItems.bowSlingshot |= 1 << 0;
+    if (KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW))
+    {
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+        reloadSlotMm(play, ITS_MM_BOW);
+    }
+    else if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
+    {
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    }
 }
 
 static void addSlingshotItemRawMm(PlayState* play)
 {
-    if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
-        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_SLINGSHOT;
     gMmExtraItems.bowSlingshot |= 1 << 1;
+    if (KaleidoScope_CheckMmItemAgeReq(ITEM_MM_SLINGSHOT))
+    {
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_SLINGSHOT;
+        reloadSlotMm(play, ITS_MM_BOW);
+    }
+    else if (gMmSave.info.inventory.items[ITS_MM_BOW] == ITEM_NONE)
+    {
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_SLINGSHOT;
+    }
 }
 
 static void addSlingshotRawOot(u8 index)
@@ -815,18 +829,33 @@ static void addHookshotRawOot(PlayState* play, int level)
 static void addHookshotRawMm(PlayState* play, int level)
 {
     u8 itemId;
+    u8 ageItemId;
 
     if (level >= 2)
+    {
         itemId = ITEM_MM_HOOKSHOT;
+        ageItemId = ITEM_MM_HOOKSHOT;
+    }
     else
+    {
         itemId = 0x11; /* ITEM_MM_BOTTLE_POTION_RED but that enum is wrong */
-    if (gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] == ITEM_NONE)
-        gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+        ageItemId = ITEM_MM_HOOKSHOT_SHORT;
+    }
     gMmExtraItems.hookshot |= (1 << (level - 1));
+
+    if (KaleidoScope_CheckMmItemAgeReq(ageItemId))
+    {
+        gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+        reloadSlotMm(play, ITS_MM_HOOKSHOT);
 #if defined(GAME_MM)
-    if (Config_Flag(CFG_MM_HOOKSHOT_SHORT) && level >= 2)
-        reloadHookshot(play);
+        if (Config_Flag(CFG_MM_HOOKSHOT_SHORT) && level >= 2)
+            reloadHookshot(play);
 #endif
+    }
+    else if (gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] == ITEM_NONE)
+    {
+        gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+    }
 }
 
 static void addHookshotOot(PlayState* play, int level)
@@ -946,9 +975,16 @@ static void addOcarinaRawMm(PlayState* play, int level)
         itemId = ITEM_MM_OCARINA_OF_TIME;
     else
         itemId = ITEM_MM_OCARINA_FAIRY;
-    if (gMmSave.info.inventory.items[ITS_MM_OCARINA] == ITEM_NONE)
-        gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
     gMmExtraItems.ocarina |= (1 << (level - 1));
+    if (KaleidoScope_CheckMmItemAgeReq(itemId))
+    {
+        gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
+        reloadSlotMm(play, ITS_MM_OCARINA);
+    }
+    else if (gMmSave.info.inventory.items[ITS_MM_OCARINA] == ITEM_NONE)
+    {
+        gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
+    }
 }
 
 static int addItemOcarinaOot(PlayState* play, u8 itemId, s16 gi, u16 param)
