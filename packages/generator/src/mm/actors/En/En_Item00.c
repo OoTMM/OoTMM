@@ -3,6 +3,8 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/draw.h>
+
+#include "combo/age.h"
 #include "combo/custom.h"
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayState* play, s16 gi)
@@ -126,9 +128,9 @@ static int fixDropArrowSeeds(int size)
     int isAllowedArrows;
     int isAllowedSeeds;
 
-    isAllowedArrows = gSave.info.inventory.upgrades.quiver != 0 && (KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW) || KaleidoScope_CheckMmItemAgeReq(ITEM_MM_ARROW_FIRE) || KaleidoScope_CheckMmItemAgeReq(ITEM_MM_ARROW_ICE) || KaleidoScope_CheckMmItemAgeReq(ITEM_MM_ARROW_LIGHT));
+    isAllowedArrows = gSave.info.inventory.upgrades.quiver != 0 && (comboCheckItemAgeReqMm(ITEM_MM_BOW) || comboCheckItemAgeReqMm(ITEM_MM_ARROW_FIRE) || comboCheckItemAgeReqMm(ITEM_MM_ARROW_ICE) || comboCheckItemAgeReqMm(ITEM_MM_ARROW_LIGHT));
 
-    isAllowedSeeds = gSave.info.inventory.upgrades.bulletBag != 0 && KaleidoScope_CheckMmItemAgeReq(ITEM_MM_SLINGSHOT);
+    isAllowedSeeds = gSave.info.inventory.upgrades.bulletBag != 0 && comboCheckItemAgeReqMm(ITEM_MM_SLINGSHOT);
 
     if (!isAllowedArrows && !isAllowedSeeds)
         return -1;

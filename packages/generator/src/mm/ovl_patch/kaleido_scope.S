@@ -594,7 +594,7 @@ KaleidoScope_NativeItemAgeAndFormCheck_Hook:
   beqz    t9, .L_native_age_form_restore
    nop
 
-  jal     KaleidoScope_CheckMmItemAgeReq
+  jal     comboCheckItemAgeReqMm
    andi   a0, a2, 0xffff
 
   move    t9, v0

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/player.h>
 #include <combo/actor.h>
+#include <combo/age.h>
 
 #if defined(GAME_OOT)
 # define ITEM_BOW ITEM_OOT_BOW
@@ -61,10 +62,6 @@ typedef struct
 ArrowCycleState;
 
 static ArrowCycleState sArrowCycleState;
-
-#if defined(GAME_MM)
-int KaleidoScope_CheckMmItemAgeReq(u8 item);
-#endif
 
 typedef struct
 {
@@ -130,7 +127,7 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
         hasMagic = HasEnoughMagicForArrow(magicCost, magic);
         if (info && hasMagic
         #if defined(GAME_MM)
-            && ((info->item == ITEM_MM_BOW && (gMmExtraItems.bowSlingshot & 1)) || info->item == gSave.info.inventory.items[info->slot]) && KaleidoScope_CheckMmItemAgeReq(info->item)
+            && ((info->item == ITEM_MM_BOW && (gMmExtraItems.bowSlingshot & 1)) || info->item == gSave.info.inventory.items[info->slot]) && comboCheckItemAgeReqMm(info->item)
         #else
             && info->item == gSave.info.inventory.items[info->slot]
         #endif

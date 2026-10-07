@@ -6,6 +6,7 @@
 #include <combo/magic.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include "combo/age.h"
 
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot
@@ -596,7 +597,7 @@ static int addItemSeedsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 static void addBowItemRawMm(PlayState* play)
 {
     gMmExtraItems.bowSlingshot |= 1 << 0;
-    if (KaleidoScope_CheckMmItemAgeReq(ITEM_MM_BOW))
+    if (comboCheckItemAgeReqMm(ITEM_MM_BOW))
     {
         gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         reloadSlotMm(play, ITS_MM_BOW);
@@ -610,7 +611,7 @@ static void addBowItemRawMm(PlayState* play)
 static void addSlingshotItemRawMm(PlayState* play)
 {
     gMmExtraItems.bowSlingshot |= 1 << 1;
-    if (KaleidoScope_CheckMmItemAgeReq(ITEM_MM_SLINGSHOT))
+    if (comboCheckItemAgeReqMm(ITEM_MM_SLINGSHOT))
     {
         gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_SLINGSHOT;
         reloadSlotMm(play, ITS_MM_BOW);
@@ -843,7 +844,7 @@ static void addHookshotRawMm(PlayState* play, int level)
     }
     gMmExtraItems.hookshot |= (1 << (level - 1));
 
-    if (KaleidoScope_CheckMmItemAgeReq(ageItemId))
+    if (comboCheckItemAgeReqMm(ageItemId))
     {
         gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
         reloadSlotMm(play, ITS_MM_HOOKSHOT);
@@ -976,7 +977,7 @@ static void addOcarinaRawMm(PlayState* play, int level)
     else
         itemId = ITEM_MM_OCARINA_FAIRY;
     gMmExtraItems.ocarina |= (1 << (level - 1));
-    if (KaleidoScope_CheckMmItemAgeReq(itemId))
+    if (comboCheckItemAgeReqMm(itemId))
     {
         gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
         reloadSlotMm(play, ITS_MM_OCARINA);

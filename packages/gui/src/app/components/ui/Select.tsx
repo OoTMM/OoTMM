@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
 import { FaXmark } from 'react-icons/fa6';
 import { cn } from '@/app/util';
+import {clsx} from "clsx";
 
 export type SelectOption<T> = {
   value: T;

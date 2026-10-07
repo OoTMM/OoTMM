@@ -8,6 +8,8 @@
 #include <combo/draw.h>
 #include <combo/inventory.h>
 
+#include "combo/age.h"
+
 #define DPAD_DOWN   0
 #define DPAD_UP     1
 #define DPAD_LEFT   2
@@ -62,10 +64,6 @@ static int canUseDpadItem(PlayState* play, s16 itemId, int flags)
     if (itemId == ITEM_NONE)
         return 0;
 
-#if defined(GAME_MM)
-    int KaleidoScope_CheckMmItemAgeReq(u8 item);
-#endif
-
     /* Boots */
 #if defined(GAME_OOT)
     if (itemId == ITEM_OOT_BOOTS_IRON || itemId == ITEM_OOT_BOOTS_HOVER)
@@ -85,7 +83,7 @@ static int canUseDpadItem(PlayState* play, s16 itemId, int flags)
 #if defined(GAME_MM)
 
     /* Respect MM age locks on dpad items/masks */
-    if (!KaleidoScope_CheckMmItemAgeReq((u8)itemId))
+    if (!comboCheckItemAgeReqMm((u8)itemId))
         return 0;
 
     /* Giant mask can't use any item */
