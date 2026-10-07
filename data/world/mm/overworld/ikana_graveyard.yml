@@ -29,7 +29,7 @@
     "Ikana Graveyard Grass Pack Grass 8": "true"
     "Ikana Graveyard Grass Pack Grass 9": "true"
     "Ikana Graveyard Rock Wall 1": "(event(KEETA_WOKEN) || short_hook_anywhere) && keeta_rock_wall"
-    "Ikana Graveyard Rock Wall 2": "(event(KEETA_WOKEN) || short_hook_anywhere) && has_explosives
+    "Ikana Graveyard Rock Wall 2": "(event(KEETA_WOKEN) || short_hook_anywhere) && has_explosives"
     "Ikana Graveyard Rock Wall 3": "(event(KEETA_WOKEN) || short_hook_anywhere) && keeta_rock_wall"
     "Ikana Graveyard Rock Wall 4": "(event(KEETA_WOKEN) || short_hook_anywhere) && keeta_rock_wall"
     "Ikana Graveyard Rock Wall 5": "(event(KEETA_WOKEN) || short_hook_anywhere) && has_explosives"

@@ -40,7 +40,7 @@ All notable changes to this project will be documented in this file.
 - The pot on top of the Smithy in Mountain Village can now logically be reached with scarecrow and short hookshot in winter.
 - The grass item on the platform in Zora River can now be obtained with Boomerang from afar.
 - The Gerudo Fortress wonder item near the archery range can now be gotten logically as child without Gerudo Card.
-- Add Blast Mask to logic for Dodogon's Cavern's skull eyes.
+- Add Blast Mask to logic for Dodongo's Cavern's skull eyes.
 - Add Iron Boots to logic to access Pirate's Fortress Exterior without Bronze Scale.
 - Gerudo Fortress and Thieves' Hideout logic has been overhauled and is now entirely accurate for future settings.
 - Make using Bombs for the underwater rocks in Gerudo Valley a trick.
