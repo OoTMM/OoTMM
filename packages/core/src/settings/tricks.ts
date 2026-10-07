@@ -369,6 +369,11 @@ export const TRICKS: Tricks = {
     name: "Roll Jump to Fire Temple Boss Door",
     tooltip: "Removes the hover boots or the temple climbing requirement to reach the boss door"
   },
+  OOT_GV_ROCKS_WATER_BOMB_DROP: {
+    game: 'oot',
+    name: "Gerudo Valley Underwater Rocks with Bombs",
+    tooltip: "Bombs can be used to destroy the rocks underwater at the Hyrule Field entrance of Gerudo Valley. Stand above them on the bridge and drop a bomb down right as it starts flashing repeatedly."
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',

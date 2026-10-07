@@ -139,7 +139,7 @@ void Play_TransitionDone(PlayState* play)
             fullEntrance = entrance;
         }
 #if defined(GAME_MM)
-        g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
+        g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER) && (entrance != gSave.entrance);
 #endif
     }
     else

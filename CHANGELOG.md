@@ -41,13 +41,15 @@ All notable changes to this project will be documented in this file.
 - The pot on top of the Smithy in Mountain Village can now logically be reached with scarecrow and short hookshot in winter.
 - The grass item on the platform in Zora River can now be obtained with Boomerang from afar.
 - The Gerudo Fortress wonder item near the archery range can now be gotten logically as child without Gerudo Card.
+- Add Blast Mask to logic for Dodongo's Cavern's skull eyes.
+- Add Iron Boots to logic to access Pirate's Fortress Exterior without Bronze Scale.
 - Gerudo Fortress and Thieves' Hideout logic has been overhauled and is now entirely accurate for future settings.
+- Make using Bombs for the underwater rocks in Gerudo Valley a trick.
+- Add Din's Fire and Sticks to logic for lighting the chandelier in Goron Shrine.
 
 ### Fixed
 
 - Fix Telescope ER not respecting polarity.
-- Fix Dodogon's Cavern skull eyes to account for blast mask
-- Fix Pirate's Fortress Exterior access being too restrictive in ER.
 - Fix a logic issue making MM access way too restrictive in some cases.
 - Fix traps sometimes triggering at unsafe times.
 - Plentiful item pool now properly has an extra shared bottle when bottles are shared.
@@ -69,6 +71,8 @@ All notable changes to this project will be documented in this file.
 - Fix the Powder Keg Trial item location being logically too strict outside ER.
 - Fix a logic issue where Dampe's Gravedigging Tour could expect Sun's Song instead of Song of Double Time or access to areas where time flows.
 - Fix logic in Snowhead Temple expecting access with only Silver Gauntlets and nothing to break the icicles.
+- Fix logic for the rocks on the wall in Ikana Graveyard expecting Blast Mask for the ones higher up.
+- Fix logic not accounting for Bronze Scale in Woodfall.
 
 ## [32.3] - 2026-08-23
 
