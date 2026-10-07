@@ -254,7 +254,13 @@ kItemToGi:
 .short GI_MM_LENS
 .short GI_MM_TUNIC_GORON
 .short GI_MM_TUNIC_ZORA
-.short 0x00
+.short GI_MM_HAMMER
+.short GI_MM_BOOMERANG
+.short GI_MM_SLINGSHOT
+.short GI_MM_MASK_GERUDO
+.short GI_MM_MASK_SKULL
+.short GI_MM_MASK_SPOOKY
+.short GI_MM_MASK_ADULT
 
 /*
 Replaces:
