@@ -68,6 +68,7 @@ All notable changes to this project will be documented in this file.
 - Fix the Powder Keg Trial item location being logically too strict outside ER.
 - Fix a logic issue where Dampe's Gravedigging Tour could expect Sun's Song instead of Song of Double Time or access to areas where time flows.
 - Fix logic in Snowhead Temple expecting access with only Silver Gauntlets and nothing to break the icicles.
+- Fix logic for the rocks on the wall in Ikana Graveyard expecting Blast Mask for the ones higher up.
 
 ## [32.3] - 2026-08-23
 
