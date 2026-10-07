@@ -34,7 +34,7 @@
     "GLOBAL": "true"
     "Woodfall": "(has_mask_deku && (soul_deku_scrub || is_swamp_cleared)) || ((can_swim || is_tall) && (is_swamp_cleared || can_use_nayru)) || hookshot_anywhere"
     "Woodfall Near Fairy Fountain": "(has_mask_deku && (soul_deku_scrub || is_swamp_cleared || short_hook_anywhere)) || (can_swim && short_hook_anywhere && (is_swamp_cleared || can_use_nayru)) || (is_tall && short_hook_anywhere) || hookshot_anywhere"
-    "Woodfall Front of Temple": "woodfall_raised && has_mask_deku || hookshot_anywhere)"
+    "Woodfall Front of Temple": "woodfall_raised && (has_mask_deku || hookshot_anywhere)"
     "Owl Woodfall": "true"
   events:
     OPEN_WOODFALL_TEMPLE: "has_mask_deku && song_event(0)"
