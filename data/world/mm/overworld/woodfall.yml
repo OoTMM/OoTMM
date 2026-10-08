@@ -25,7 +25,7 @@
   region: WOODFALL
   exits:
     "Woodfall Temple": "woodfall_raised"
-    "Woodfall Shrine": "cond(setting(openDungeonsMm, WF) || (setting(clearStateDungeonsMm, WF) && is_swamp_cleared), has_mask_deku || hookshot_anywhere, true)"
+    "Woodfall Shrine": "cond(setting(openDungeonsMm, WF), has_mask_deku || hookshot_anywhere, cond(setting(clearStateDungeonsMm, WF), is_swamp_poisoned || has_mask_deku || hookshot_anywhere, true))"
     "Woodfall": "(can_swim || is_tall) && (is_swamp_cleared || can_use_nayru)"
 
 "Woodfall Shrine":

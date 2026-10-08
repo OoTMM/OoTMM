@@ -90,7 +90,7 @@
     "Clock Town South": "true"
     "Clock Town East": "true"
     "Clock Town Fairy Fountain": "true"
-    "Deku Playground": "true"
+    "Deku Playground": "has_shovel"
     "Tingle Town": "soul_npc(SOUL_NPC_TINGLE) && is_day && (has_weapon_range || (has_weapon && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
     "Clock Town North Postbox": "true"
   events:
