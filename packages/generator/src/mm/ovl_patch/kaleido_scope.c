@@ -10,6 +10,7 @@
 #include <combo/entrance.h>
 #include <combo/misc.h>
 #include <combo/common/Kaleido_Scope.h>
+#include "combo/age.h"
 #include "combo/custom.h"
 #include "combo/mask.h"
 
@@ -82,6 +83,19 @@ s32 Player_GetCurMaskItemId_Custom(PlayState* play)
 
 PATCH_FUNC(0x80122eec, Player_GetCurMaskItemId_Custom);
 
+void removeMmSlotFromCurrentCButton(u16 slot, u8 item)
+{
+    for (int button = 1; button < 4; ++button)
+    {
+        if (gMmSave.info.itemEquips.cButtonSlots[0][button] == slot ||
+            gMmSave.info.itemEquips.buttonItems[0][button] == item)
+        {
+            gMmSave.info.itemEquips.buttonItems[0][button] = ITEM_NONE;
+            gMmSave.info.itemEquips.cButtonSlots[0][button] = 0xff;
+        }
+    }
+}
+
 void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
     u16 cursorSlot;
@@ -136,6 +150,10 @@ popcount(flags) > 1)
                 KaleidoScope_ToggleMaskSlotSkipHidden(cursorSlot);
             else
                 comboToggleSlot(cursorSlot);
+            if (!comboCheckItemAgeReqMm(*itemPtr))
+            {
+                removeMmSlotFromCurrentCButton(cursorSlot, *itemPtr);
+            }
 
             effect = 1;
         }
@@ -548,6 +566,98 @@ static u32 sCustomIcons[] = {
     ITEM_MM_MASK_ADULT,
 };
 
+#define PLAYER_STATE1_MOUNTED 0x00800000
+
+static u8 sHorseBowManaged;
+static u8 sHorsePreviousBItem;
+
+static void Interface_UpdateButtons_Horse(PlayState* play)
+{
+    Player* player;
+    u8* bItem;
+    u8 savedBowItem;
+    u8 itemBefore;
+    int mounted;
+    int spoofBow;
+
+    player = GET_PLAYER(play);
+    bItem = &gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B];
+    mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    if (sHorseBowManaged)
+    {
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = sHorsePreviousBItem;
+
+        if (*bItem == ITEM_NONE)
+            *bItem = ITEM_MM_BOW;
+    }
+
+    itemBefore = *bItem;
+    savedBowItem = gMmSave.info.inventory.items[ITS_MM_BOW];
+    spoofBow = mounted && savedBowItem == ITEM_NONE;
+    if (spoofBow)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    ((void (*)(PlayState*))0x80111cb4)(play);
+
+    if (spoofBow)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = savedBowItem;
+    player = GET_PLAYER(play);
+    mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    if (!mounted)
+    {
+        sHorseBowManaged = 0;
+        return;
+    }
+    if (*bItem == ITEM_MM_BOW &&
+        itemBefore != ITEM_MM_BOW &&
+        itemBefore != ITEM_MM_BOMB &&
+        itemBefore != ITEM_MM_BOMBCHU)
+    {
+        sHorsePreviousBItem = itemBefore;
+        sHorseBowManaged = 1;
+    }
+
+    if (!sHorseBowManaged)
+        return;
+    if (*bItem != ITEM_MM_BOW)
+    {
+        sHorseBowManaged = 0;
+        return;
+    }
+    if (!comboCheckItemAgeReqMm(ITEM_MM_BOW))
+        *bItem = ITEM_NONE;
+}
+
+PATCH_CALL(0x80112e68, Interface_UpdateButtons_Horse);
+PATCH_CALL(0x80121140, Interface_UpdateButtons_Horse);
+
+static u8 KaleidoScope_GetMmSlotItem(u16 slot)
+{
+    u8* itemPtr;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+
+    if (slot > ITS_MM_MASK_FIERCE_DEITY)
+        return ITEM_NONE;
+
+    if (comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize) >= 0)
+        return *itemPtr;
+
+    return gMmSave.info.inventory.items[slot];
+}
+
+int KaleidoScope_CheckMmSlotAgeReq(u16 slot)
+{
+    u8 item;
+
+    item = KaleidoScope_GetMmSlotItem(slot);
+
+    if (item != ITEM_NONE && item < 0xff)
+        return comboCheckItemAgeReqMm(item);
+
+    return 1;
+}
+
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN] =
 {
     { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
@@ -643,7 +753,7 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, (void*)customDestination, customIconSize);
 
         u8 customItemIndex = icon - ITEM_MM_CUSTOM_MIN;
-        if (customItemIndex >= (ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
+        if (customItemIndex >= (ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex] || !comboCheckItemAgeReqMm(icon))
         {
             KaleidoScope_GrayOutTextureRGBA32((u32*)customDestination, customIconSize);
         }
@@ -987,15 +1097,58 @@ void KaleidoScope_CustomDrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* g
 
     switch (item)
     {
+    case ITEM_MM_BOW:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BOW];
+        maxAmmo = kMaxArrows[gMmSave.info.inventory.upgrades.quiver];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
+    case ITEM_MM_BOMB:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BOMBS];
+        maxAmmo = kMaxBombs[gMmSave.info.inventory.upgrades.bombBag];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
     case ITEM_MM_BOMBCHU:
         ammo = gSave.info.inventory.ammo[ITS_MM_BOMBCHU];
         maxAmmo = gMaxBombchuMm;
-        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
         break;
+
+    case ITEM_MM_STICK:
+        ammo = gSave.info.inventory.ammo[ITS_MM_STICKS];
+        maxAmmo = kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
+    case ITEM_MM_NUT:
+        ammo = gSave.info.inventory.ammo[ITS_MM_NUTS];
+        maxAmmo = kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut];
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
+    case ITEM_MM_MAGIC_BEAN:
+        ammo = gSave.info.inventory.ammo[ITS_MM_BEANS];
+        maxAmmo = 20;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
+    case ITEM_MM_POWDER_KEG:
+        ammo = gSave.info.inventory.ammo[ITS_MM_KEG];
+        maxAmmo = 1;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
+    case ITEM_MM_PICTOGRAPH_BOX:
+        ammo = (gSave.info.inventory.quest.value & (1 << 0x19)) ? 1 : 0;
+        maxAmmo = 1;
+        canEquip = gPlayerFormItemRestrictions[gSaveContext.save.playerForm][item] && comboCheckItemAgeReqMm(item);
+        break;
+
     case ITEM_MM_SLINGSHOT:
         ammo = gMmExtraAmmo.slingshotSeeds;
         maxAmmo = kMaxSeeds[gMmSave.info.inventory.upgrades.bulletBag];
-        canEquip = gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][item - ITEM_MM_CUSTOM_MIN];
+        canEquip = gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][item - ITEM_MM_CUSTOM_MIN] && comboCheckItemAgeReqMm(item);
         break;
     default:
         return;
@@ -1038,7 +1191,14 @@ void KaleidoScope_DrawAmmoCountWrapper(PauseContext* pauseCtx, GraphicsContext* 
 {
     switch (item)
     {
+    case ITEM_MM_BOW:
+    case ITEM_MM_BOMB:
     case ITEM_MM_BOMBCHU:
+    case ITEM_MM_STICK:
+    case ITEM_MM_NUT:
+    case ITEM_MM_MAGIC_BEAN:
+    case ITEM_MM_POWDER_KEG:
+    case ITEM_MM_PICTOGRAPH_BOX:
     case ITEM_MM_SLINGSHOT:
         KaleidoScope_CustomDrawAmmoCount(pauseCtx, gfxCtx, item, ammoIndex);
         break;

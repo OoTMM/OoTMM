@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/player.h>
 #include <combo/actor.h>
+#include <combo/age.h>
 
 #if defined(GAME_OOT)
 # define ITEM_BOW ITEM_OOT_BOW
@@ -124,7 +125,13 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
         info = GetArrowInfo(current);
         magic = info->magicCost;
         hasMagic = HasEnoughMagicForArrow(magicCost, magic);
-        if (info && info->item == gSave.info.inventory.items[info->slot] && hasMagic)
+        if (info && hasMagic
+        #if defined(GAME_MM)
+            && ((info->item == ITEM_MM_BOW && (gMmExtraItems.bowSlingshot & 1)) || info->item == gSave.info.inventory.items[info->slot]) && comboCheckItemAgeReqMm(info->item)
+        #else
+            && info->item == gSave.info.inventory.items[info->slot]
+        #endif
+        )
             return info;
     }
 

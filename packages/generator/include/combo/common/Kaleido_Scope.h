@@ -21,5 +21,7 @@ typedef enum PauseMenuPage {
 #define MASK_NUM_SLOTS (MASK_GRID_ROWS * MASK_GRID_COLS)
 
 s32 Player_GetCurMaskItemId(PlayState* play);
-
+#if defined(GAME_MM)
+void removeMmSlotFromCurrentCButton(u16 slot, u8 item);
+#endif
 #endif

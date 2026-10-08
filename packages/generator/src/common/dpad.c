@@ -8,6 +8,8 @@
 #include <combo/draw.h>
 #include <combo/inventory.h>
 
+#include "combo/age.h"
+
 #define DPAD_DOWN   0
 #define DPAD_UP     1
 #define DPAD_LEFT   2
@@ -78,8 +80,13 @@ static int canUseDpadItem(PlayState* play, s16 itemId, int flags)
     if (!(flags & DPF_ITEMS))
         return 0;
 
-    /* Giant mask can't use any item */
 #if defined(GAME_MM)
+
+    /* Respect MM age locks on dpad items/masks */
+    if (!comboCheckItemAgeReqMm((u8)itemId))
+        return 0;
+
+    /* Giant mask can't use any item */
     if (gSave.equippedMask == MASK_GIANT)
         return 0;
 

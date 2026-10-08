@@ -3,6 +3,8 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/draw.h>
+
+#include "combo/age.h"
 #include "combo/custom.h"
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayState* play, s16 gi)
@@ -126,14 +128,9 @@ static int fixDropArrowSeeds(int size)
     int isAllowedArrows;
     int isAllowedSeeds;
 
-    isAllowedArrows = TRUE;
-    isAllowedSeeds = TRUE;
+    isAllowedArrows = gSave.info.inventory.upgrades.quiver != 0 && (comboCheckItemAgeReqMm(ITEM_MM_BOW) || comboCheckItemAgeReqMm(ITEM_MM_ARROW_FIRE) || comboCheckItemAgeReqMm(ITEM_MM_ARROW_ICE) || comboCheckItemAgeReqMm(ITEM_MM_ARROW_LIGHT));
 
-    if (gSave.info.inventory.upgrades.quiver == 0)
-        isAllowedArrows = FALSE;
-
-    if (gSave.info.inventory.upgrades.bulletBag == 0)
-        isAllowedSeeds = FALSE;
+    isAllowedSeeds = gSave.info.inventory.upgrades.bulletBag != 0 && comboCheckItemAgeReqMm(ITEM_MM_SLINGSHOT);
 
     if (!isAllowedArrows && !isAllowedSeeds)
         return -1;

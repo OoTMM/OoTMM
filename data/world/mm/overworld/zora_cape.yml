@@ -134,6 +134,8 @@
 
 "Zora Cape Peninsula":
   region: ZORA_CAPE
+  events:
+    TURTLE_WOKEN: "song_event(2) && has_mask_zora"
   exits:
     "GLOBAL": "true"
     "Zora Hall": "true"
