@@ -27,8 +27,17 @@ static void rupeesText(void)
     memcpy(gHudRupeesBuffer, tmp + (4 - digits), digits);
 }
 
+#if defined(GAME_MM)
+extern int Picto_IsCapturing(void);
+#endif
+
 void DrawHUDWrapper(PlayState* play)
 {
+    //needed because picto is directly grabbing frame buffer no to fix banding so we need to hide ui during the snap
+#if defined(GAME_MM)
+    if (Picto_IsCapturing())
+        return;
+#endif
     rupeesText();
     DrawHUD(play);
 }

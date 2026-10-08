@@ -26,6 +26,8 @@ static u8 sNeedsScreenClear;
 
 PlayState* gPlay;
 
+void Picto_PrepareDraw(void);
+
 u32 Play_EntranceForOverride(u32 entrance)
 {
     u32 entranceKey;
@@ -676,6 +678,7 @@ void Play_DrawMainWrapper(PlayState* play)
         sNeedsScreenClear--;
         return;
     }
+    Picto_PrepareDraw();
 
     Play_DrawMain(play);
 }
