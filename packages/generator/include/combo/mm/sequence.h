@@ -217,4 +217,25 @@ s16 Actor_WorldPitchTowardPoint(Actor* actor, Vec3f* refPoint);
 void Audio_SetSpec(u8 specId);
 void Audio_SetPauseState(u8 isPauseMenuOpen);
 
+extern u16 sRequestedSceneSeqId;
+extern u16 sPrevMainBgmSeqId;
+extern u8 sAudioPauseState;
+extern u8 sSpatialSeqIsActive[4];
+extern Vec3f sSpatialSeqNoFilterPos;
+extern Vec3f sSpatialSeqFilterPos;
+extern f32 sSpatialSeqMaxDist;
+extern u8 sSpatialSeqSeqId;
+extern u8 sSpatialSeqFlags;
+extern u8 sSpatialSubBgmFadeTimer;
+extern u8 sSpatialSeqPlayerIndex;
+extern u8 sSpatialSeqFadeTimer;
+extern s8 sAudioCutsceneFlag;
+extern u8 gAudioSpecId;
+
+void Audio_StartSceneSequence(u16 seqId);
+void Audio_PlayAmbience(u8 ambienceId);
+void Audio_StartSubBgmAtPos(u8 seqPlayerIndex, Vec3f* projectedPos, u8 seqId, u8 flags, f32 minDist, f32 maxDist, f32 arg6);
+void Audio_StopSequenceAtPos(u8 seqPlayerIndex, u8 volumeFadeTimer);
+void Audio_SplitBgmChannels(u8 volSplit);
+
 #endif
