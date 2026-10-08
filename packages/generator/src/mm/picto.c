@@ -67,3 +67,123 @@ static void PictoDisplayTextBox(PlayState* play, s16 messageId, Actor* actor)
 }
 
 PATCH_CALL(0x80120c34, PictoDisplayTextBox);
+
+//pictograph box fix
+
+typedef struct
+{
+    u16 width;
+    u16 height;
+    u8 pad[0x0c];
+    u16* fbuf;
+    u16* fbufSave;
+} PictoPreRender;
+
+static void PictoConvert(u8* dst, const u16* src, s32 stride, s32 left, s32 top, s32 right, s32 bottom)
+{
+    s32 x;
+    s32 y;
+    s32 index = 0;
+
+    for (y = top; y <= bottom; y++)
+    {
+        for (x = left; x <= right; x++)
+        {
+            u16 pixel = src[y * stride + x];
+            u32 r = (pixel >> 11) & 0x1f;
+            u32 g = (pixel >> 6) & 0x1f;
+            u32 b = (pixel >> 1) & 0x1f;
+            u32 intensity = ((r * 2 + g * 4 + b) * 255) / (31 * 7);
+            dst[index++] = (u8)intensity;
+        }
+    }
+}
+
+static void PictoTakePhotoDirect(PictoPreRender* prerender)
+{
+    const u16* src;
+    s32 width;
+    s32 height;
+
+    src = prerender->fbuf;
+    width = prerender->width;
+    height = prerender->height;
+
+    if (src == NULL)
+        return;
+
+    if (width != 320 || height != 240)
+        return;
+
+    osInvalDCache((void*)src, width * height * sizeof(u16));
+    PictoConvert(((u8*)0x80780000), src, width, 80, 64, 239, 175);
+}
+
+PATCH_FUNC(0x80165e1c, PictoTakePhotoDirect);
+
+static u8 sPictoCaptureActive = 0;
+static u8 sPictoCaptureStarted = 0;
+static u8 sPictoCleanFrames = 0;
+
+int Picto_IsCapturing(void)
+{
+    return sPictoCaptureActive;
+}
+
+void Picto_PrepareDraw(void)
+{
+    if (!sPictoCaptureActive)
+    {
+        if (R_PICTO_PHOTO_STATE == 1)
+        {
+            sPictoCaptureActive = 1;
+            sPictoCaptureStarted = 0;
+            sPictoCleanFrames = 3;
+            R_PICTO_PHOTO_STATE = 0;
+        }
+        return;
+    }
+    if (sPictoCaptureStarted)
+    {
+        if (R_PICTO_PHOTO_STATE == 0)
+        {
+            sPictoCaptureActive = 0;
+            sPictoCaptureStarted = 0;
+        }
+        return;
+    }
+    if (sPictoCleanFrames > 0)
+    {
+        sPictoCleanFrames--;
+        return;
+    }
+    sPictoCaptureStarted = 1;
+    R_PICTO_PHOTO_STATE = 1;
+}
+
+// Needed in order to not break photos on hardware with the above rework
+
+typedef struct
+{
+    u8 pad[0x10];
+    u16* fbuf;
+    u16* fbufSave;
+    u8* cvgSave;
+} PictoCoveragePreRender;
+
+extern void PreRender_FetchFbufCoverage(PictoCoveragePreRender* prerender, Gfx** gfx);
+extern void PreRender_CoverageRgba16ToI8(PictoCoveragePreRender* prerender, Gfx** gfx, void* src, void* dst);
+
+
+static void PictoDrawCoverage(PictoCoveragePreRender* prerender, Gfx** gfx)
+{
+    if (R_PICTO_PHOTO_STATE == 2)
+        return;
+
+    PreRender_FetchFbufCoverage(prerender, gfx);
+
+    if (prerender->cvgSave != NULL)
+        PreRender_CoverageRgba16ToI8(prerender, gfx, prerender->fbuf, prerender->cvgSave);
+}
+
+PATCH_FUNC(0x80170730, PictoDrawCoverage);
