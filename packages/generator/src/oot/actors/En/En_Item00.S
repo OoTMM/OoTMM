@@ -10,6 +10,11 @@ PATCH_START 0x800e7760
 .int EnItem00_InitWrapper
 PATCH_END
 
+/* Route Item00 updates through recovery before vanilla can self-delete. */
+PATCH_START 0x800e7768
+.int EnItem00_UpdateGuard
+PATCH_END
+
 /* Use our xflag post-collection handler */
 PATCH_START 0x80012f9c
   jal EnItem00_SetXflagCollectedHandler

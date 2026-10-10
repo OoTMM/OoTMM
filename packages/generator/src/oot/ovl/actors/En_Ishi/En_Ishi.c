@@ -232,12 +232,15 @@ void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play) {
     func_80033480(play, &pos, 140.0f, 0xA, 0xB4, 0x5A, 1);
 }
 
-void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
+void EnIshi_DropCollectibleAt(EnIshi* this, PlayState* play, Vec3f* dropPos, s32 noInertia) {
     s16 dropParams;
 
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        if (noInertia)
+            EnItem00_DropCustomNoInertiaEx(play, dropPos, this->xflag);
+        else
+            EnItem00_DropCustomEx(play, dropPos, this->xflag);
         return;
     }
 
@@ -248,8 +251,12 @@ void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
             dropParams = 0;
         }
 
-        Item_DropCollectibleRandom(play, NULL, &this->actor.world.pos, dropParams << 4);
+        Item_DropCollectibleRandom(play, NULL, dropPos, dropParams << 4);
     }
+}
+
+void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
+    EnIshi_DropCollectibleAt(this, play, &this->actor.world.pos, false);
 }
 
 void EnIshi_Fall(EnIshi* this) {
@@ -412,6 +419,13 @@ void EnIshi_Fly(EnIshi* this, PlayState* play) {
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
     s32 quakeIndex;
     Vec3f contactPos;
+
+
+    if (this->actor.world.pos.y < this->actor.home.pos.y - 1000) {
+        EnIshi_DropCollectibleAt(this, play, &this->actor.home.pos, true);
+        Actor_Kill(&this->actor);
+        return;
+    }
 
     if (this->actor.bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_WALL)) {
         EnIshi_DropCollectible(this, play);

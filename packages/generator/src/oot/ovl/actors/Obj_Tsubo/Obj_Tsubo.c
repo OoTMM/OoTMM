@@ -75,17 +75,19 @@ static InitChainEntry sInitChain[] = {
 void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 {
     s16 dropParams = this->actor.params & 0x1F;
+    Actor* drop = NULL;
 
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
-        return;
+        drop = (Actor*)EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
     }
-
-    if ((dropParams >= 0) && (dropParams < ITEM00_MAX))
+    else if ((dropParams >= 0) && (dropParams < ITEM00_MAX))
     {
-        Item_DropCollectible(play, &this->actor.world.pos, (dropParams | (((this->actor.params >> 9) & 0x3F) << 8)));
+        drop = Item_DropCollectible(play, &this->actor.world.pos,
+                                    (dropParams | (((this->actor.params >> 9) & 0x3F) << 8)));
     }
+    if (this->actionFunc == ObjTsubo_Thrown && drop != NULL && drop->id == ACTOR_EN_ITEM00)
+        drop->home.pos = this->actor.home.pos;
 }
 
 void ObjTsubo_ApplyGravity(Actor_ObjTsubo* this)
@@ -333,6 +335,19 @@ void ObjTsubo_SetupThrown(Actor_ObjTsubo* this) {
 
 void ObjTsubo_Thrown(Actor_ObjTsubo* this, PlayState* play)
 {
+    if (this->actor.world.pos.y < this->actor.home.pos.y - 1000.0f)
+    {
+        if (this->xflag != XFLAGID_NONE)
+            EnItem00_DropCustomNoInertiaEx(play, &this->actor.home.pos, this->xflag);
+        else
+        {
+            this->actor.world.pos = this->actor.home.pos;
+            ObjTsubo_SpawnCollectible(this, play);
+        }
+        Actor_Kill(&this->actor);
+        return;
+    }
+
     if ((this->actor.bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_GROUND_TOUCH | BGCHECKFLAG_WALL)) || (this->collider.base.atFlags & AT_HIT))
     {
         ObjTsubo_AirBreak(this, play);
