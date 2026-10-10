@@ -326,8 +326,13 @@ int EnIshi_DropCustom(EnIshi* this, PlayState* play)
 }
 
 void EnIshi_DropItem(EnIshi* this, PlayState* play) {
-    if (EnIshi_DropCustom(this, play))
+    Vec3f pos = GET_PLAYER(play)->actor.world.pos;
+    pos.y += 20.0f;
+
+    if (this->xflag != XFLAGID_NONE) {
+        EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
         return;
+    }
 
     if ((ENISHI_GET_SIZE_FLAG(&this->actor) == ISHI_SIZE_SMALL_ROCK) &&
         !ENISHI_GET_IGNORE_DROP_TABLE_FLAG(&this->actor)) {
@@ -630,6 +635,14 @@ void EnIshi_Thrown(EnIshi* this, PlayState* play) {
     s16 spashAngle;
     Vec3f pos;
     s32 colliderATHit = (this->collider.base.atFlags & AT_HIT) != 0;
+
+    /* Preserve items from throwable silver boulders that fall out of bounds. */
+    if (rockSize == ISHI_SIZE_SILVER_BOULDER &&
+        this->actor.world.pos.y < this->actor.home.pos.y - 1000.0f) {
+        EnIshi_DropItem(this, play);
+        Actor_Kill(&this->actor);
+        return;
+    }
 
     if (colliderATHit) {
         this->collider.base.atFlags &= ~AT_HIT;

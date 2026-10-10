@@ -10,6 +10,11 @@ PATCH_START 0x801aded0
 .int EnItem00_InitWrapper
 PATCH_END
 
+/* Route Item00 updates through recovery before vanilla can self-delete. */
+PATCH_START 0x801aded8
+.int EnItem00_UpdateGuard
+PATCH_END
+
 UpdateEnd:
   /* Original */
   sh    zero,0x14a(s0)

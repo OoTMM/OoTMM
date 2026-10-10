@@ -234,10 +234,12 @@ void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play) {
 
 void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
     s16 dropParams;
+    Vec3f pos = GET_PLAYER(play)->actor.world.pos;
 
+    pos.y += 20.0f;
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
         return;
     }
 
@@ -248,7 +250,7 @@ void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
             dropParams = 0;
         }
 
-        Item_DropCollectibleRandom(play, NULL, &this->actor.world.pos, dropParams << 4);
+        Item_DropCollectibleRandom(play, NULL, &pos, dropParams << 4);
     }
 }
 
@@ -412,6 +414,12 @@ void EnIshi_Fly(EnIshi* this, PlayState* play) {
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
     s32 quakeIndex;
     Vec3f contactPos;
+
+    if (this->actor.world.pos.y < this->actor.home.pos.y - 1000.0f) {
+        EnIshi_DropCollectible(this, play);
+        Actor_Kill(&this->actor);
+        return;
+    }
 
     if (this->actor.bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_WALL)) {
         EnIshi_DropCollectible(this, play);
