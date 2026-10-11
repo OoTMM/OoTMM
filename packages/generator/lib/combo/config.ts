@@ -34,9 +34,9 @@ export const CONFIG_MM: GameConfig = {
   dmaCount: 1552,
   actorsOvlAddr: 0xc45510,
   actorsOvlCount: 690,
-  effectsSsOvlAddr: 0, /* FIXME */
-  effectsSsOvlCount: 0, /* FIXME */
-  gamestatesOvlAddr: 0, /* FIXME */
+  effectsSsOvlAddr: 0xc449e0,
+  effectsSsOvlCount: 0x27,
+  gamestatesOvlAddr: 0xc53e50,
   objectTableAddr: 0xc58c80,
   objectCount: 0x283,
 };

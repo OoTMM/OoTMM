@@ -63,3 +63,8 @@ animations:
     home_game: oot
     header_offset: 0x2628
     frame_data_offset: 0x79090
+
+  - name: gPlayerAnim_oot_clink_normal_defense_ALL
+    home_game: oot
+    header_offset: 0x2400
+    frame_data_offset: 0x3A290

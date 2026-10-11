@@ -161,7 +161,7 @@ static s16 progressiveHookshotMm(s16 gi)
     return gi;
 }
 
-static s16 progressiveSwordGoron(void)
+static s16 progressiveSwordGoronOoT(void)
 {
     if (!(gOotSave.info.inventory.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
         return GI_OOT_SWORD_KNIFE;
@@ -170,16 +170,31 @@ static s16 progressiveSwordGoron(void)
 
 static s16 progressiveSwordOot(void)
 {
-    if (!(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
-        return GI_OOT_SWORD_KOKIRI;
-    if (!(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_MASTER))
+    if (!(gOotSave.info.inventory.equipment.swords &
+          EQ_OOT_SWORD_MASTER))
+    {
         return GI_OOT_SWORD_MASTER;
-    return progressiveSwordGoron();
+    }
+    return progressiveSwordGoronOoT();
 }
 
-static s16 progressiveSwordMm(void)
+static int progressiveChildSwordsOotEnabled(void)
 {
-    switch (gMmSave.info.itemEquips.sword)
+    if (Config_Flag(CFG_SHARED_CHILD_SWORDS))
+        return Config_Flag(CFG_MM_PROGRESSIVE_CHILD_SWORDS);
+    return Config_Flag(CFG_OOT_PROGRESSIVE_CHILD_SWORDS);
+}
+
+static int progressiveGfsOotEnabled(void)
+{
+    if (Config_Flag(CFG_SHARED_GREAT_FAIRY_SWORD))
+        return Config_Flag(CFG_MM_PROGRESSIVE_GFS);
+    return Config_Flag(CFG_OOT_PROGRESSIVE_GFS);
+}
+
+static s16 progressiveChildSwordMm(void)
+{
+    switch (gSharedCustomSave.mm.swords.sword)
     {
     case 0:
         return GI_MM_SWORD_KOKIRI;
@@ -192,7 +207,22 @@ static s16 progressiveSwordMm(void)
     }
 }
 
-/* We use an extra field to know which shields we got from shops */
+static s16 progressiveSwordGoronMm(void)
+{
+    if (gSharedCustomSave.mm.swords.giantSword == 0)
+        return GI_MM_SWORD_KNIFE;
+
+    return GI_MM_SWORD_BIGGORON;
+}
+
+static s16 progressiveSwordMm(void)
+{
+    if (!gSharedCustomSave.mm.swords.masterSword)
+        return GI_MM_SWORD_MASTER;
+
+    return progressiveSwordGoronMm();
+}
+
 static s16 progressiveShieldOot(void)
 {
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
@@ -204,7 +234,7 @@ static s16 progressiveShieldOot(void)
 
 static s16 progressiveShieldMm(void)
 {
-    if ((Config_Flag(CFG_MM_DEKU_SHIELD) || Config_Flag(CFG_SHARED_SHIELDS)) && !(gSharedCustomSave.mmProgressiveShields & 1))
+    if (Config_Flag(CFG_MM_DEKU_SHIELD) && !(gSharedCustomSave.mmProgressiveShields & 1))
         return GI_MM_PROGRESSIVE_SHIELD_DEKU;
     if (!(gSharedCustomSave.mmProgressiveShields & 2))
         return GI_MM_PROGRESSIVE_SHIELD_HERO;
@@ -448,12 +478,14 @@ static s16 progressiveExtraSwordOot(void)
         return GI_OOT_SWORD_KOKIRI;
     if (gSharedCustomSave.extraSwordsOot == 0)
         return GI_OOT_SWORD_RAZOR;
-    return GI_OOT_SWORD_GILDED;
+    if (gSharedCustomSave.extraSwordsOot == 1)
+        return GI_OOT_SWORD_GILDED;
+    return progressiveGfsOotEnabled() ? GI_OOT_GREAT_FAIRY_SWORD : GI_OOT_SWORD_GILDED;
 }
 
 s16 Item_Progressive(s16 gi, int ovflags)
 {
-    if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
+    if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS) && progressiveChildSwordsOotEnabled())
     {
         switch (gi)
         {
@@ -508,14 +540,17 @@ s16 Item_Progressive(s16 gi, int ovflags)
         break;
     /* Equipment */
     case GI_OOT_SWORD_KOKIRI:
+        break;
     case GI_OOT_SWORD_MASTER:
         if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS))
             gi = progressiveSwordOot();
         break;
-    case GI_OOT_SWORD_BIGGORON:
     case GI_OOT_SWORD_KNIFE:
-        if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS) || Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
-            gi = progressiveSwordGoron();
+    case GI_OOT_SWORD_BIGGORON:
+        if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS))
+            gi = progressiveSwordOot();
+        else if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+            gi = progressiveSwordGoronOoT();
         break;
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
@@ -584,14 +619,38 @@ s16 Item_Progressive(s16 gi, int ovflags)
         if (Config_Flag(CFG_MM_OCARINA_FAIRY))
             gi = progressiveOcarinaMm();
         break;
+    case GI_OOT_GREAT_FAIRY_SWORD:
+        if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS) && progressiveChildSwordsOotEnabled() && progressiveGfsOotEnabled())
+            gi = progressiveExtraSwordOot();
+        break;
     case GI_MM_SWORD_KOKIRI:
+        if (Config_Flag(CFG_MM_PROGRESSIVE_CHILD_SWORDS))
+            gi = progressiveChildSwordMm();
+        break;
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:
-        gi = progressiveSwordMm();
+        if (Config_Flag(CFG_MM_PROGRESSIVE_CHILD_SWORDS))
+            gi = progressiveChildSwordMm();
         break;
     case GI_MM_GREAT_FAIRY_SWORD:
-        if (Config_Flag(CFG_MM_PROGRESSIVE_GFS))
+        if (Config_Flag(CFG_MM_PROGRESSIVE_GFS) && Config_Flag(CFG_MM_PROGRESSIVE_CHILD_SWORDS))
+            gi = progressiveChildSwordMm();
+        break;
+    case GI_MM_SWORD_MASTER:
+        if (!Config_Flag(CFG_SHARED_MASTER_SWORD) && !Config_Flag(CFG_SHARED_GORON_SWORDS) && Config_Flag(CFG_MM_PROGRESSIVE_SWORDS))
             gi = progressiveSwordMm();
+        break;
+    case GI_MM_SWORD_KNIFE:
+    case GI_MM_SWORD_BIGGORON:
+        if (Config_Flag(CFG_SHARED_GORON_SWORDS))
+        {
+            if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS) || Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+                gi = progressiveSwordGoronMm();
+        }
+        else if (Config_Flag(CFG_MM_PROGRESSIVE_SWORDS) && !Config_Flag(CFG_SHARED_MASTER_SWORD))
+            gi = progressiveSwordMm();
+        else if (Config_Flag(CFG_MM_PROGRESSIVE_SWORDS_GORON))
+            gi = progressiveSwordGoronMm();
         break;
     case GI_MM_PROGRESSIVE_SHIELD_DEKU:
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
@@ -690,6 +749,7 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_SHIELD_DEKU:
+    case GI_OOT_SHIELD_HERO:
     case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_MILK:
     case GI_OOT_POTION_RED:
@@ -724,6 +784,8 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_MM_DEKU_SEEDS_5:
     case GI_MM_DEKU_SEEDS_30:
     case GI_MM_SHIELD_HERO:
+    case GI_MM_SHIELD_HYLIAN:
+    case GI_MM_SHIELD_DEKU:
     case GI_MM_MILK:
     case GI_MM_CHATEAU:
     case GI_MM_FISH:

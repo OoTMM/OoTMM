@@ -28,8 +28,10 @@ export async function itemPool(settings: Settings): Promise<Items> {
 
   /* Extract relevant items from the pool */
   for (const pi of pool.keys()) {
-    if (pi.player !== 0 || itemProperties.junk.has(pi.item) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item)) {
+    if (pi.player !== 0 || (itemProperties.junk.has(pi.item) && !ItemHelpers.isItemUnlimitedStarting(pi.item)) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item)) {
       pool.delete(pi);
+    } else if (ItemHelpers.isItemUnlimitedStarting(pi.item)) {
+      pool.set(pi, 999);
     }
   }
 

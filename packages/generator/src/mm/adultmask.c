@@ -8,6 +8,7 @@
 #include <combo/common/scene.h>
 #include <combo/config.h>
 #include "combo/actors.h"
+#include "combo/inventory.h"
 
 #define ADULT_MASK_SKIP_BUTTONS (BTN_A | BTN_B | BTN_CUP | BTN_CLEFT | BTN_CDOWN | BTN_CRIGHT)
 #define ADULT_MASK_ITEM_ICON_SIZE 0x1000
@@ -468,6 +469,7 @@ static void AdultMask_PlayerPostReloadUpdateWrapper(Actor* thisx, PlayState* pla
     Player_SetBootData(play, player);
     Player_CheckCustomBoots(play);
     UpdateEquipment(play, player);
+    MmSword_RefreshHudIcon(play);
     AdultMask_RefreshButtonIcons(play);
 
     player->actor.update = (ActorFunc)Player_UpdateWrapper;
