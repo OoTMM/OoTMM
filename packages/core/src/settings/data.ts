@@ -3410,7 +3410,7 @@ export const SETTINGS = [{
     101: 'Infinite',
   },
   description:
-      'Set how many hits OoT Giant\'s Knife can sustain before it breaks.',
+      'Set how many hits OoT Giant\'s Knife can sustain before it breaks. If goron swords are shared, this setting will set durability for both games.',
   default: 8,
   min: 1,
   max: 101,
@@ -3426,7 +3426,7 @@ export const SETTINGS = [{
     101: 'Infinite',
   },
   description:
-      'Set how many hits MM Giant\'s Knife can sustain before it breaks. If goron swords are shared, this setting will set durability for both games.',
+      'Set how many hits MM Giant\'s Knife can sustain before it breaks.',
   default: 8,
   min: 1,
   max: 101,
