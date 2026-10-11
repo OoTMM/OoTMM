@@ -25,6 +25,7 @@ void EnTab_GiveItem(Actor *actor, PlayState *play, s16 gi, float a, float b);
 
 typedef void (*TextBoxCallback)(Actor *, PlayState *, s16);
 void EnGo_AfterTextBox(Actor *this, PlayState *play, s16 messageId);
+void* EnGo_SelectMedigoronScript(Actor* actor, void* originalScript, s32* scriptPos);
 void EnTab_AfterTextBox(Actor *this, PlayState *play, s16 messageId);
 void EnBjt_AfterTextBox(Actor *this, PlayState *play, s16 messageId);
 
@@ -196,6 +197,8 @@ PATCH_CALL(0x8010bc60, Actor_ByteCode_RemoveItem);
 int Actor_RunByteCodeWrapper(Actor *this, PlayState *play, void *bytecode, void *unk1, void *unk2)
 {
     sByteCodeActor = this;
+    if (this->id == ACTOR_EN_GO)
+        bytecode = EnGo_SelectMedigoronScript(this, bytecode, (s32*)unk2);
     return Actor_RunByteCode(this, play, bytecode, unk1, unk2);
 }
 

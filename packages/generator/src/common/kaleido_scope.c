@@ -317,10 +317,21 @@ s32 KaleidoScope_Update(PlayState* play)
 
 typedef void (*KaleidoScopeUpdateFunc)(PlayState* play);
 
+#if defined(GAME_MM)
+void KaleidoScope_BeforeUpdateCustomMm(PlayState* play);
+void KaleidoScope_AfterUpdateCustomMm(PlayState* play);
+#endif
+
 void KaleidoScope_UpdateWrapper(PlayState* play, KaleidoScopeUpdateFunc update)
 {
     if (!KaleidoScope_Update(play))
     {
+#if defined(GAME_MM)
+        KaleidoScope_BeforeUpdateCustomMm(play);
+#endif
         update(play);
+#if defined(GAME_MM)
+        KaleidoScope_AfterUpdateCustomMm(play);
+#endif
     }
 }

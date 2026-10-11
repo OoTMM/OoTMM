@@ -94,6 +94,13 @@ static void Age_SwapEquipmentMm(void)
     curAge->boots = gMmSave.info.itemEquips.boots;
     curAge->tunic = gMmSave.info.itemEquips.tunic;
 
+    /* Validate new age logical equipment */
+    if (newAge->sword != MM_SWORD_NONE && !MmSword_IsOwned((MmSwordId)newAge->sword))
+        newAge->sword = MM_SWORD_NONE;
+
+    if (newAge->shield != MM_SHIELD_NONE && !MmShield_IsOwned((MmShieldId)newAge->shield))
+        newAge->shield = MM_SHIELD_NONE;
+
     /* Load new equips */
     for (int i = EQUIP_SLOT_C_LEFT; i <= EQUIP_SLOT_C_RIGHT; ++i)
     {
@@ -159,6 +166,8 @@ void Age_SetRawMm(PlayState* play, int age)
 
     Age_OnChangeMm();
     gMmSave.linkAge = age;
+    MmSword_RefreshNativeEquip(NULL);
+    MmShield_RefreshNativeEquip(NULL);
 }
 
 void Age_SetOot(PlayState* play, int age)
@@ -211,6 +220,19 @@ static const ItemAgeReqConfig kMmItemAgeReqConfigs[] =
     { ITEM_MM_PICTOGRAPH_BOX,     CFG_MM_AGE_REQ_ADULT_PICTOGRAPH_BOX,     CFG_MM_AGE_REQ_CHILD_PICTOGRAPH_BOX },
     { ITEM_MM_LENS_OF_TRUTH,      CFG_MM_AGE_REQ_ADULT_LENS_OF_TRUTH,      CFG_MM_AGE_REQ_CHILD_LENS_OF_TRUTH },
     { ITEM_MM_GREAT_FAIRY_SWORD,  CFG_MM_AGE_REQ_ADULT_GREAT_FAIRY_SWORD,  CFG_MM_AGE_REQ_CHILD_GREAT_FAIRY_SWORD },
+
+    { ITEM_MM_SWORD_KOKIRI,       CFG_MM_AGE_REQ_ADULT_SWORD_KOKIRI,       CFG_MM_AGE_REQ_CHILD_SWORD_KOKIRI },
+    { ITEM_MM_SWORD_RAZOR,        CFG_MM_AGE_REQ_ADULT_SWORD_RAZOR,        CFG_MM_AGE_REQ_CHILD_SWORD_RAZOR },
+    { ITEM_MM_SWORD_GILDED,       CFG_MM_AGE_REQ_ADULT_SWORD_GILDED,       CFG_MM_AGE_REQ_CHILD_SWORD_GILDED },
+    { ITEM_MM_SWORD_MASTER,       CFG_MM_AGE_REQ_ADULT_SWORD_MASTER,       CFG_MM_AGE_REQ_CHILD_SWORD_MASTER },
+    { ITEM_MM_SWORD_GIANTS_KNIFE, CFG_MM_AGE_REQ_ADULT_SWORD_GORON,        CFG_MM_AGE_REQ_CHILD_SWORD_GORON },
+    { ITEM_MM_SWORD_BIGGORON,     CFG_MM_AGE_REQ_ADULT_SWORD_GORON,        CFG_MM_AGE_REQ_CHILD_SWORD_GORON },
+
+    { ITEM_MM_SHIELD_DEKU,        CFG_MM_AGE_REQ_ADULT_SHIELD_DEKU,        CFG_MM_AGE_REQ_CHILD_SHIELD_DEKU },
+    { ITEM_MM_SHIELD_HERO,        CFG_MM_AGE_REQ_ADULT_SHIELD_HERO,        CFG_MM_AGE_REQ_CHILD_SHIELD_HERO },
+    { ITEM_MM_SHIELD_HYLIAN,      CFG_MM_AGE_REQ_ADULT_SHIELD_HYLIAN,      CFG_MM_AGE_REQ_CHILD_SHIELD_HYLIAN },
+    { ITEM_MM_SHIELD_MIRROR,      CFG_MM_AGE_REQ_ADULT_SHIELD_MIRROR,      CFG_MM_AGE_REQ_CHILD_SHIELD_MIRROR },
+
 
     { ITEM_MM_HAMMER,             CFG_MM_AGE_REQ_ADULT_HAMMER,             CFG_MM_AGE_REQ_CHILD_HAMMER },
     { ITEM_MM_BOOTS_IRON,         CFG_MM_AGE_REQ_ADULT_BOOTS_IRON,         CFG_MM_AGE_REQ_CHILD_BOOTS_IRON },
