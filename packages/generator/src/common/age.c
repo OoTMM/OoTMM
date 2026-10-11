@@ -365,3 +365,25 @@ int comboCheckItemAgeReqOot(u8 item)
     return comboCheckAgeReq(
         comboGetItemAgeReqOot(item));
 }
+
+
+#if defined(GAME_MM)
+int comboCheckSlotAgeReqMm(u16 slot)
+{
+    u8* itemPtr;
+    u8 item;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+
+    if (slot > ITS_MM_MASK_FIERCE_DEITY)
+        return 1;
+
+    if (comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize) >= 0)
+        item = *itemPtr;
+    else
+        item = gMmSave.info.inventory.items[slot];
+
+    return comboCheckItemAgeReqMm(item);
+}
+#endif

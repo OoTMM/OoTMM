@@ -497,7 +497,7 @@ KaleidoScope_MmEquipAgeGate_ButtonMask:
   beqz    t5, .L_mm_agegate_restore
    nop
 
-  jal     comboCheckItemAgeReqMm
+  jal     comboCheckSlotAgeReqMm
    lhu    a0, 0x0268(s0)
 
   bnez    v0, .L_mm_agegate_allow
@@ -547,7 +547,7 @@ KaleidoScope_MmMaskEquipAgeGate_Accept:
   sw      s0, 0x001c(sp)
   sw      t4, 0x0018(sp)
 
-  jal     comboCheckItemAgeReqMm
+  jal     comboCheckSlotAgeReqMm
    addiu  a0, v1, 0x0018
 
   sw      v0, 0x0014(sp)

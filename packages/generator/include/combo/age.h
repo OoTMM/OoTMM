@@ -24,6 +24,7 @@ typedef enum ComboAgeReq
 int comboCheckAgeReq(ComboAgeReq req);
 ComboAgeReq comboGetItemAgeReqMm(u8 item);
 int comboCheckItemAgeReqMm(u8 item);
+int comboCheckSlotAgeReqMm(u16 slot);
 ComboAgeReq comboGetItemAgeReqOot(u8 item);
 int comboCheckItemAgeReqOot(u8 item);
 // adding oot side now for future use
