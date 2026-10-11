@@ -83,6 +83,7 @@ typedef struct EffectBlureInit1 {
 
 void EffectSsDeadDb_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* prim, Color_RGBA8* env, s16 scale, s16 scaleStep, s32 life);
 void EffectSsStone1_Spawn(PlayState* play, Vec3f* pos, s32 arg2);
+void EffectSsStick_Spawn(PlayState* play, Vec3f* pos, s16 yaw);
 #define EFFECT_BLURE_COLOR_COUNT 4
 
 #define EFFECT_BLURE_FLAG_2         (1 << 1)

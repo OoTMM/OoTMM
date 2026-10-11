@@ -233,6 +233,8 @@ int isSlotEquippedAnyOot(int slot);
 void reloadSlotOot(PlayState* play, int slot);
 void reloadSlotMm(PlayState* play, int slot);
 
+u8 OotChildSword_GetOwnedMask(void);
+
 int comboAddItemRaw(PlayState* play, s16 gi);
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText);
 int comboAddItemEx(PlayState* play, const ComboItemQuery* q, int updateText);
