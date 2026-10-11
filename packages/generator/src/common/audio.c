@@ -489,110 +489,23 @@ s8 Audio_GetLoadCachePolicy(s8 defaultPolicy, u32 tableType)
 
 #if defined(GAME_MM)
 
-static u8 sSpatialOverridesFinalHours;
-
-static int Audio_CanSpatialOverrideFinalHours(void)
+void Audio_PlaySequenceAtPos_Hook(u8 seqPlayerIndex, Vec3f* pos, u16 seqId, f32 maxDist)
 {
-    u16 seqId;
+    u16 mainBgmSeqId = AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN);
 
-    if (sAudioCutsceneFlag || !Environment_IsFinalHours(NULL) || func_800FE5D0(NULL))
-        return 0;
-
-    seqId = AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN);
-    return (seqId & 0xff) != NA_BGM_SONG_OF_SOARING &&
-           AudioSeq_IsSeqCmdNotQueued(NA_BGM_SONG_OF_SOARING, 0xff0000ffu);
-}
-
-static void Audio_BeginSpatialFinalHoursOverride(void)
-{
-    if (sSpatialOverridesFinalHours || !Audio_CanSpatialOverrideFinalHours())
+    if (sAudioCutsceneFlag || (mainBgmSeqId & 0xff) == NA_BGM_SONG_OF_SOARING || gAudioSpecId == 0xC || pos == NULL)
         return;
 
-    sSpatialOverridesFinalHours = 1;
-    AudioSeq_StopSequence(SEQ_PLAYER_BGM_MAIN, 0);
-}
-
-static void Audio_RestoreFinalHoursAfterSpatial(void)
-{
-    if (!sSpatialOverridesFinalHours || sSpatialSeqFadeTimer || sSpatialSubBgmFadeTimer)
+    if (seqPlayerIndex == SEQ_PLAYER_BGM_MAIN && mainBgmSeqId == NA_BGM_FINAL_HOURS)
         return;
 
-    sSpatialOverridesFinalHours = 0;
-
-    if (AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_SUB) != NA_BGM_DISABLED || sSpatialSeqIsActive[SEQ_PLAYER_BGM_SUB])
-        AudioSeq_StopSequence(SEQ_PLAYER_BGM_SUB, 0);
-
-    sSpatialSeqIsActive[SEQ_PLAYER_BGM_SUB] = 0;
-    sSpatialSeqFlags = 0;
-    sSpatialSeqSeqId = NA_BGM_GENERAL_SFX;
-
-    AudioSeq_SetVolumeScale(SEQ_PLAYER_BGM_MAIN, VOL_SCALE_INDEX_BGM_SUB, 0x7f, 0);
-    Audio_SplitBgmChannels(0);
-
-    if (Environment_IsFinalHours(NULL) && !func_800FE5D0(NULL)) {
-        Audio_StartSceneSequence(NA_BGM_FINAL_HOURS);
-        AudioSeq_QueueSeqCmd(0x70040002u);
-        sRequestedSceneSeqId = NA_BGM_FINAL_HOURS;
-    }
-}
-
-static void Audio_EndSpatialFinalHoursOverride(void)
-{
-    AudioSeq_StopSequence(SEQ_PLAYER_BGM_SUB, 0);
-    sSpatialSeqIsActive[SEQ_PLAYER_BGM_SUB] = 0;
-    Audio_RestoreFinalHoursAfterSpatial();
-}
-
-void Audio_PlaySceneSequence_Hook(u16 seqId, u8 dayMinusOne)
-{
-    if (seqId == NA_BGM_FINAL_HOURS && sSpatialOverridesFinalHours) {
-        sRequestedSceneSeqId = seqId;
-        return;
-    }
-
-    if (seqId != NA_BGM_FINAL_HOURS)
-        sSpatialOverridesFinalHours = 0;
-
-    if (sRequestedSceneSeqId == seqId)
-        return;
-
-    if (seqId == NA_BGM_AMBIENCE) {
-        Audio_PlayAmbience(8);
-    } else if (seqId != NA_BGM_FINAL_HOURS || sPrevMainBgmSeqId == NA_BGM_DISABLED) {
-        if (seqId != NA_BGM_FINAL_HOURS && func_800FE5D0(NULL) &&
-            AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN) == NA_BGM_FINAL_HOURS)
-            AudioSeq_QueueSeqCmd(0x100000ffu);
-
-        Audio_StartSceneSequence(seqId);
-        AudioSeq_QueueSeqCmd(0x70040000u | dayMinusOne);
-    }
-
-    sRequestedSceneSeqId = seqId;
-}
-
-void Audio_UpdateSubBgmAtPos_Hook(void)
-{
-    if (!sSpatialSubBgmFadeTimer)
-        return;
-
-    if (Audio_CanSpatialOverrideFinalHours())
-        Audio_BeginSpatialFinalHoursOverride();
-
-    if (sSpatialSeqFlags & 2)
-        Audio_StartSubBgmAtPos(SEQ_PLAYER_BGM_SUB, &sSpatialSeqNoFilterPos, sSpatialSeqSeqId, 0x20, 100.0f, sSpatialSeqMaxDist, 1.0f);
-    else
-        Audio_StartSubBgmAtPos(SEQ_PLAYER_BGM_SUB, &sSpatialSeqFilterPos, sSpatialSeqSeqId, 0x28, 100.0f, sSpatialSeqMaxDist, 1.0f);
-
-    sSpatialSubBgmFadeTimer--;
-
-    if (!sSpatialSubBgmFadeTimer) {
-        if (sSpatialOverridesFinalHours)
-            Audio_EndSpatialFinalHoursOverride();
-        else
-            Audio_StopSequenceAtPos(SEQ_PLAYER_BGM_SUB, 10);
-    }
-
-    sSpatialSeqFlags = 0;
+    sSpatialSeqFilterPos.x = pos->x;
+    sSpatialSeqFilterPos.y = pos->y;
+    sSpatialSeqFilterPos.z = pos->z;
+    sSpatialSeqMaxDist = maxDist;
+    sSpatialSeqFadeTimer = 2;
+    sSpatialSeqSeqId = seqId & 0xff;
+    sSpatialSeqPlayerIndex = seqPlayerIndex;
 }
 
 void Audio_UpdateSequenceAtPos_Hook(void)
@@ -605,6 +518,13 @@ void Audio_UpdateSequenceAtPos_Hook(void)
 
     mainBgmSeqId = AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN);
 
+    if (sSpatialSeqPlayerIndex == SEQ_PLAYER_BGM_MAIN && mainBgmSeqId == NA_BGM_FINAL_HOURS) {
+        sSpatialSeqFadeTimer = 0;
+        sSpatialSeqSeqId = NA_BGM_GENERAL_SFX;
+        sSpatialSeqIsActive[SEQ_PLAYER_BGM_MAIN] = 0;
+        return;
+    }
+
     if (sSpatialSeqSeqId == NA_BGM_GENERAL_SFX || mainBgmSeqId == NA_BGM_SONG_OF_SOARING) {
         volumeFadeTimer = 10;
 
@@ -616,61 +536,18 @@ void Audio_UpdateSequenceAtPos_Hook(void)
         }
 
         if (!sSpatialSeqFadeTimer) {
-            if (sSpatialSeqPlayerIndex == SEQ_PLAYER_BGM_SUB && sSpatialOverridesFinalHours) {
-                Audio_EndSpatialFinalHoursOverride();
-            } else {
-                Audio_StopSequenceAtPos(sSpatialSeqPlayerIndex, volumeFadeTimer);
-                sSpatialSeqIsActive[sSpatialSeqPlayerIndex] = 0;
-            }
+            Audio_StopSequenceAtPos(sSpatialSeqPlayerIndex, volumeFadeTimer);
+            sSpatialSeqIsActive[sSpatialSeqPlayerIndex] = 0;
         }
     } else {
-        if (sSpatialSeqPlayerIndex == SEQ_PLAYER_BGM_SUB && Audio_CanSpatialOverrideFinalHours()) {
-            Audio_BeginSpatialFinalHoursOverride();
-            mainBgmSeqId = AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN);
-        }
-
-        if (sSpatialSeqPlayerIndex == SEQ_PLAYER_BGM_MAIN && mainBgmSeqId == NA_BGM_FINAL_HOURS) {
-            Audio_StopSequenceAtPos(sSpatialSeqPlayerIndex, 10);
-            sSpatialSeqIsActive[sSpatialSeqPlayerIndex] = 0;
-            return;
-        }
-
         Audio_StartSubBgmAtPos(sSpatialSeqPlayerIndex, &sSpatialSeqFilterPos, sSpatialSeqSeqId, 0x20, 200.0f, sSpatialSeqMaxDist, 1.0f);
 
-        if (!sSpatialSeqIsActive[sSpatialSeqPlayerIndex]) {
+        if (!sSpatialSeqIsActive[sSpatialSeqPlayerIndex])
             sSpatialSeqFadeTimer = 0;
-
-            if (sSpatialSeqPlayerIndex == SEQ_PLAYER_BGM_SUB && sSpatialOverridesFinalHours)
-                Audio_RestoreFinalHoursAfterSpatial();
-        }
     }
 
     if (sSpatialSeqFadeTimer < 128)
         sSpatialSeqSeqId = NA_BGM_GENERAL_SFX;
-}
-
-void Audio_PlaySequenceAtPos_Hook(u8 seqPlayerIndex, Vec3f* pos, u16 seqId, f32 maxDist)
-{
-    u16 mainBgmSeqId = AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN);
-
-    if (sAudioCutsceneFlag || (mainBgmSeqId & 0xff) == NA_BGM_SONG_OF_SOARING || gAudioSpecId == 0xC || pos == NULL)
-        return;
-
-    if (seqPlayerIndex == SEQ_PLAYER_BGM_SUB && Audio_CanSpatialOverrideFinalHours()) {
-        Audio_BeginSpatialFinalHoursOverride();
-        mainBgmSeqId = AudioSeq_GetActiveSeqId(SEQ_PLAYER_BGM_MAIN);
-    }
-
-    if (sSpatialSeqPlayerIndex == SEQ_PLAYER_BGM_MAIN && mainBgmSeqId == NA_BGM_FINAL_HOURS)
-        return;
-
-    sSpatialSeqFilterPos.x = pos->x;
-    sSpatialSeqFilterPos.y = pos->y;
-    sSpatialSeqFilterPos.z = pos->z;
-    sSpatialSeqMaxDist = maxDist;
-    sSpatialSeqFadeTimer = 2;
-    sSpatialSeqSeqId = seqId & 0xff;
-    sSpatialSeqPlayerIndex = seqPlayerIndex;
 }
 
 #endif

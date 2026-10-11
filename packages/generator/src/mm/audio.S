@@ -15,26 +15,14 @@ PATCH_START 0x80166D38
     nop
 PATCH_END
 
-/* Override positional SUB-BGM updates so they can safely replace Final Hours. */
-PATCH_START 0x801A1E0C
-    j       Audio_UpdateSubBgmAtPos_Hook
-     nop
-PATCH_END
-
-/* Let positional actor music temporarily take priority over Final Hours. */
+/* Allow positional actor music without incorrectly blocking SUB-BGM. */
 PATCH_START 0x801A1FB4
     j       Audio_PlaySequenceAtPos_Hook
      nop
 PATCH_END
 
-/* Manage positional BGM lifetime and restore Final Hours when it ends. */
+/* Prevent positional music cleanup from stopping Final Hours. */
 PATCH_START 0x801A2090
     j       Audio_UpdateSequenceAtPos_Hook
-     nop
-PATCH_END
-
-/* Safely hand off Final Hours to scene BGM on special scene transitions. */
-PATCH_START 0x801A25E4
-    j       Audio_PlaySceneSequence_Hook
      nop
 PATCH_END
