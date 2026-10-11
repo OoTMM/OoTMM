@@ -179,11 +179,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_SCALE,
   Items.OOT_SHIELD,
   Items.OOT_SHIELD_MIRROR,
-  Items.SHARED_SHIELD,
-  Items.SHARED_SHIELD_DEKU,
-  Items.SHARED_SHIELD_HERO,
-  Items.SHARED_SHIELD_HYLIAN,
-  Items.SHARED_SHIELD_MIRROR,
   Items.OOT_SLINGSHOT,
   Items.OOT_SPELL_FIRE,
   Items.OOT_SPELL_WIND,
@@ -270,9 +265,6 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_SWORD_KNIFE,
   Items.SHARED_SWORD_GORON,
   Items.MM_SHIELD,
-  Items.MM_SHIELD_DEKU,
-  Items.MM_SHIELD_HERO,
-  Items.MM_SHIELD_HYLIAN,
   Items.MM_SHIELD_MIRROR,
   Items.MM_BOMB_BAG,
   Items.MM_BOMBCHU_BAG,
@@ -1274,25 +1266,23 @@ class LogicPassWorldTransform {
 
     if (settings.sharedDekuShield) {
       this.replaceItem(Items.OOT_SHIELD_DEKU, Items.SHARED_SHIELD_DEKU);
-    } else if (settings.dekuShieldMm) {
-      this.addItem(Items.MM_SHIELD_DEKU);
+      this.replaceItem(Items.MM_SHIELD_DEKU, Items.SHARED_SHIELD_DEKU);
     }
 
     if (settings.sharedHeroShield) {
+      this.replaceItem(Items.OOT_SHIELD_HERO, Items.SHARED_SHIELD_HERO);
       this.replaceItem(Items.MM_SHIELD_HERO, Items.SHARED_SHIELD_HERO);
-    } else if (settings.heroShieldOot) {
-      this.addItem(Items.OOT_SHIELD_HERO);
     }
 
     if (settings.sharedHylianShield) {
       this.replaceItem(Items.OOT_SHIELD_HYLIAN, Items.SHARED_SHIELD_HYLIAN);
-    } else if (settings.hylianShieldMm) {
-      this.addItem(Items.MM_SHIELD_HYLIAN);
+      this.replaceItem(Items.MM_SHIELD_HYLIAN, Items.SHARED_SHIELD_HYLIAN);
     }
 
     if (settings.sharedMirrorShield) {
+      this.shareItems([{ shared: Items.SHARED_SHIELD_MIRROR, oot: Items.OOT_SHIELD_MIRROR, mm: Items.MM_SHIELD_MIRROR }], 'max');
       this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.SHARED_SHIELD_MIRROR);
-      this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.SHARED_SHIELD_MIRROR);
+      this.replaceItem(Items.MM_SHIELD_MIRROR, Items.SHARED_SHIELD_MIRROR);
     }
 
     if (settings.sharedHammer) {
