@@ -7,31 +7,8 @@ static MmShieldId sMmShieldSelected = MM_SHIELD_NONE;
 static MmShieldId sMmShieldLost = MM_SHIELD_NONE;
 s32 MmSword_IsOwned(MmSwordId sword)
 {
-    if (!Config_Flag(CFG_MM_PROGRESSIVE_CHILD_SWORDS))
-    {
-        if (sword >= MM_SWORD_KOKIRI && sword <= MM_SWORD_GILDED)
-        {
-            return !!(gSharedCustomSave.mm.swords.sword &
-                      (1u << (sword - MM_SWORD_KOKIRI)));
-        }
-    }
-    else
-    {
-        switch (sword)
-        {
-        case MM_SWORD_KOKIRI:
-            return gSharedCustomSave.mm.swords.sword >= 1;
-
-        case MM_SWORD_RAZOR:
-            return gSharedCustomSave.mm.swords.sword >= 2;
-
-        case MM_SWORD_GILDED:
-            return gSharedCustomSave.mm.swords.sword >= 3;
-
-        default:
-            break;
-        }
-    }
+    if (sword >= MM_SWORD_KOKIRI && sword <= MM_SWORD_GILDED)
+        return !!(gSharedCustomSave.mm.swords.sword & (1u << (sword - MM_SWORD_KOKIRI)));
 
     switch (sword)
     {
