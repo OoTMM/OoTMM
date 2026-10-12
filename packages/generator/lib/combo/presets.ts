@@ -741,7 +741,7 @@ const PRESET_HELL = makeSettings({
   trapShock: true,
   specialConds: {
     GANON_BK: {
-      count: 268,
+      count: 269,
       stones: true,
       medallions: true,
       remains: true,
@@ -758,7 +758,7 @@ const PRESET_HELL = makeSettings({
       masksOot: true
     },
     MAJORA: {
-      count: 268,
+      count: 269,
       stones: true,
       medallions: true,
       remains: true,
