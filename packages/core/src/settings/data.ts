@@ -1821,7 +1821,7 @@ export const SETTINGS = [{
   name: 'OoT Adult Swords',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the pickup behavior of the adult OoT Swords. If OoT swords are shared, setting setting will be used instead of the MM sword progression.',
+  description: 'Alters the pickup behavior of the adult OoT Swords. If OoT swords are shared, this setting will be used instead of the MM sword progression.',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'goron', name: 'Progressive Knife and Biggoron', description: 'Master Sword is independent. However, Giant\'s Knife and Biggoron Sword are progressive.' },
@@ -1852,7 +1852,7 @@ export const SETTINGS = [{
   name: 'MM Child Swords',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Makes the Kokiri, Razor, and Gilded Swords in MM, three progressive items instead of three separate items. If child swords are shared, this setting will be used in placed of the OoT progression setting.',
+  description: 'Makes the Kokiri, Razor, and Gilded Swords in MM, three progressive items instead of three separate items. If child swords are shared, this setting will be used instead of the OoT progression setting.',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
     { value: 'progressive', name: 'Progressive', description: 'Each Progressive Child Sword will grant you the next one. Kokiri Sword -> Razor Sword -> Gilded Sword' },
