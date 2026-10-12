@@ -15,6 +15,7 @@
 #include "../actors.h"
 #include <combo/mm/boomerang.h>
 #include <combo/mm/adultmask.h>
+#include "combo/age.h"
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 
@@ -557,6 +558,71 @@ s32 Player_CustomSwordFromIA(Player* player, s32 itemAction)
 }
 
 PATCH_FUNC(0x80124278, Player_CustomSwordFromIA);
+
+static u8 sHorseBowManaged;
+static u8 sHorsePreviousBItem;
+#define PLAYER_STATE1_MOUNTED 0x00800000
+
+static void Interface_UpdateButtons_Horse(PlayState* play)
+{
+    Player* player;
+    u8* bItem;
+    u8 savedBowItem;
+    u8 itemBefore;
+    int mounted;
+    int spoofBow;
+
+    player = GET_PLAYER(play);
+    bItem = &gMmSave.info.itemEquips.buttonItems[0][EQUIP_SLOT_B];
+    mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    if (sHorseBowManaged)
+    {
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = sHorsePreviousBItem;
+        if (*bItem == ITEM_NONE)
+            *bItem = ITEM_MM_BOW;
+    }
+
+    itemBefore = *bItem;
+    savedBowItem = gMmSave.info.inventory.items[ITS_MM_BOW];
+    spoofBow = mounted && savedBowItem == ITEM_NONE;
+    if (spoofBow)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    ((void (*)(PlayState*))0x80111cb4)(play);
+
+    if (spoofBow)
+        gMmSave.info.inventory.items[ITS_MM_BOW] = savedBowItem;
+    player = GET_PLAYER(play);
+    mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
+    if (!mounted)
+    {
+        sHorseBowManaged = 0;
+        return;
+    }
+    if (*bItem == ITEM_MM_BOW && itemBefore != ITEM_MM_BOW && itemBefore != ITEM_MM_BOMB && itemBefore != ITEM_MM_BOMBCHU)
+    {
+        sHorsePreviousBItem = itemBefore;
+        sHorseBowManaged = 1;
+    }
+
+    if (!sHorseBowManaged)
+        return;
+    if (*bItem != ITEM_MM_BOW)
+    {
+        sHorseBowManaged = 0;
+        return;
+    }
+    if (!comboCheckItemAgeReqMm(ITEM_MM_BOW))
+    {
+        *bItem = ITEM_NONE;
+    }
+    else if (sHorsePreviousBItem == ITEM_NONE)
+    {
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = BTN_ENABLED;
+    }
+}
+
+PATCH_CALL(0x80112e68, Interface_UpdateButtons_Horse);
+PATCH_CALL(0x80121140, Interface_UpdateButtons_Horse);
 
 s32 Player_CustomBButtonSwordFromIA(Player* player, s32 itemAction)
 {
