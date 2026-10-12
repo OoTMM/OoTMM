@@ -868,8 +868,6 @@ static u32 sCustomIcons[] = {
     ITEM_MM_SHIELD_DEKU,
 };
 
-#define PLAYER_STATE1_MOUNTED 0x00800000
-
 s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_USABLE_MAX - ITEM_MM_CUSTOM_MIN] =
 {
     { 0, 0, 0,  0,  0,  0,  0, 0, 0, 0, 1, 0, 0, 0, 0 },
