@@ -613,6 +613,8 @@ const ALLSANITY_HELL: PartialDeep<Settings> = {
 
 const PRESET_ALLSANITY = makeSettings({
   ...ALLSANITY_HELL,
+  songEventsShuffleOot: true,
+  songEventsShuffleMm: true,
   autoInvert: 'firstCycle',
   beneathWell: 'remorseless',
   bossWarpPads: 'remains',
