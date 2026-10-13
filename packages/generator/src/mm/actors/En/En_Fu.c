@@ -89,6 +89,7 @@ static u16 EnFu_GetWrongFormText(void)
     {
         case 1:
         case 2:
+        default:
             return 0x286F;
         case 3:
             return 0x2841;
