@@ -83,6 +83,8 @@ static void KaleidoScope_InvalidateNamedItem(PlayState* play)
 }
 
 static s32 sQuestEquipProxyActive;
+static s32 sQuestEquipProxyActive;
+static u8 sQuestSavedNativeSword;
 
 static void KaleidoScope_BeginQuestEquipProxy(PlayState* play)
 {
@@ -91,6 +93,9 @@ static void KaleidoScope_BeginQuestEquipProxy(PlayState* play)
 
     if (!play || play->pauseCtx.state == 0)
         return;
+
+    if (!sQuestEquipProxyActive)
+        sQuestSavedNativeSword = gMmSave.info.itemEquips.sword;
 
     MmSword_EnsureState();
     MmShield_EnsureState();
@@ -137,10 +142,15 @@ static void KaleidoScope_BeginQuestEquipProxy(PlayState* play)
 
 static void KaleidoScope_EndQuestEquipProxy(void)
 {
+    Player* player;
     if (!sQuestEquipProxyActive)
         return;
 
-    MmSword_RefreshNativeEquip(NULL);
+    player = gPlay ? GET_PLAYER(gPlay) : NULL;
+    if (player &&player->transformation == MM_PLAYER_FORM_FIERCE_DEITY && MmSword_GetEquipped() == MM_SWORD_NONE)
+        gMmSave.info.itemEquips.sword =sQuestSavedNativeSword;
+    else
+        MmSword_RefreshNativeEquip(NULL);
     MmShield_RefreshNativeEquip(NULL);
     sQuestEquipProxyActive = 0;
 }
