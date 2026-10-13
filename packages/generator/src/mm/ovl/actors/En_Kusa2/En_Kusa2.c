@@ -1364,6 +1364,11 @@ static void EnKusa2_DrawImpl(EnKusa2* this, PlayState* play)
         xflag = sXflagCurrent;
 
     Xflag_ItemOverride(&o, xflag, GI_NONE);
+    if (Xflag_Get(xflag))
+    {
+        o.gi = GI_NONE;
+        o.cloakGi = GI_NONE;
+    }
 
     /* Prepare */
     csmcGrassPreDraw(play, o.gi, o.cloakGi, CSMC_GRASS_NORMAL, 0, 0);

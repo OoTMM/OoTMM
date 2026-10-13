@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Change item drop behavior to prevent dropped items from going out of bounds.
 
+### Fixed
+
+- Fix an issue where keaton grass would sometimes not respect CAMC.
+
 ## [33.0] - 2026-10-13
 
 ### Added
