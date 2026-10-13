@@ -643,6 +643,23 @@ void func_80928F18(Actor_ObjTsubo* this, PlayState* play)
     }
     func_8092788C(this, play);
 
+    if (this->actor.world.pos.y < this->actor.home.pos.y - 1000.0f) {
+        this->actor.world.pos = this->actor.home.pos;
+        if (this->xflag != XFLAGID_NONE)
+            EnItem00_DropCustomNoInertiaEx(play, &this->actor.home.pos, this->xflag);
+        else if (type == OBJ_TSUBO_TYPE_3)
+            ObjTsubo_SpawnCollectibleFlexible(this, play);
+        else
+            ObjTsubo_SpawnCollectible(this, play);
+
+        if (ObjTsubo_IsSceneNotGohtOrTwinmold(this, play)) {
+            Actor_Kill(&this->actor);
+        } else {
+            func_809291DC(this);
+        }
+        return;
+    }
+
     if (this->unk_194 > 0) {
         this->unk_194--;
     }

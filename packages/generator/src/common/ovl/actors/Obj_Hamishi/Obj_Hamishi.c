@@ -85,18 +85,14 @@ static int ObjHamishi_IsShuffled(Actor_ObjHamishi* this)
 
 static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
 {
+    Vec3f pos;
+
     if (!ObjHamishi_IsShuffled(this))
         return 0;
-    if(this->xflag.sceneId == SCE_OOT_DEATH_MOUNTAIN_CRATER && this->xflag.id == 14)
-    {
-        Player* player;
-        player = GET_PLAYER(play);
-        EnItem00_DropCustom(play, &player->actor.world.pos, &this->xflag);
-    }
-    else
-    {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
-    }
+
+    pos = GET_PLAYER(play)->actor.world.pos;
+    pos.y += 20.0f;
+    EnItem00_DropCustomNoInertia(play, &pos, &this->xflag);
     return 1;
 }
 

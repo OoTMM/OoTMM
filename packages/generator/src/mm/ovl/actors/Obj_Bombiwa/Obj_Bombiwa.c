@@ -206,7 +206,9 @@ void ObjBombiwa_Destroy(Actor* thisx, PlayState* play2) {
 
 static void ObjBombiwa_OnBreak(ObjBombiwa* this, PlayState* play) {
     if (Xflag_IsShuffled(&this->xflag)) {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        Vec3f pos = GET_PLAYER(play)->actor.world.pos;
+        pos.y += 20.0f;
+        EnItem00_DropCustomNoInertia(play, &pos, &this->xflag);
     }
 }
 
