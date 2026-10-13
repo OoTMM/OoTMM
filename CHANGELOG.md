@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [33.0] - 2026-10-13
+
 ### Added
 
 - Add a setting to add extra OoT bottles without having to share bottles.
@@ -1876,7 +1878,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v32.3...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v33.0...HEAD
+[33.0]: https://github.com/OoTMM/OoTMM/compare/v32.2...v33.0
 [32.3]: https://github.com/OoTMM/OoTMM/compare/v32.2...v32.3
 [32.2]: https://github.com/OoTMM/OoTMM/compare/v32.1...v32.2
 [32.1]: https://github.com/OoTMM/OoTMM/compare/v32.0...v32.1
