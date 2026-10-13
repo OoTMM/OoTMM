@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Change item drop behavior to prevent dropped items from going out of bounds.
+
 ## [33.0] - 2026-10-13
 
 ### Added
