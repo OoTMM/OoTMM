@@ -302,11 +302,8 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     {
         MmShieldId shield = MmShield_GetEquipped();
 
-        if (shield != MM_SHIELD_NONE &&
-            gMmSave.info.itemEquips.shield == 0)
-        {
+        if (shield != MM_SHIELD_NONE && gMmSave.info.itemEquips.shield == 0 && !(shield == MM_SHIELD_HYLIAN && !comboCheckItemAgeReqMm(ITEM_MM_SHIELD_HYLIAN)))
             MmShield_Lose(play, shield);
-        }
     }
     Player_UpdateCustomMaskBehavior(this);
     Player_SyncCustomSwordSpecialMaskB(this, play, 1);
