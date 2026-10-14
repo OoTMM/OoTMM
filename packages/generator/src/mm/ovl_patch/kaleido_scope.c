@@ -216,7 +216,7 @@ static void KaleidoScope_EquipQuestItem(PlayState* play, s32 equipType)
         item = MmShield_GetItemId((MmShieldId)selected);
     }
 
-    if (!comboCheckItemAgeReqMm(item) ||
+    if ((item != ITEM_MM_SHIELD_HYLIAN && !comboCheckItemAgeReqMm(item)) ||
         (equipType == MM_QUEST_EQUIP_SWORD && item == ITEM_MM_SWORD_RAZOR &&
          gMmSave.info.playerData.swordHealth == 0))
     {
@@ -905,7 +905,7 @@ static int KaleidoScope_CustomIconAllowed(u8 item)
 {
     u8 customItemIndex;
 
-    if (!comboCheckItemAgeReqMm(item))
+    if (item != ITEM_MM_SHIELD_HYLIAN && !comboCheckItemAgeReqMm(item))
         return 0;
 
     if (item >= ITEM_MM_CUSTOM_MIN && item < ITEM_MM_CUSTOM_USABLE_MAX)
