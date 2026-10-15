@@ -405,10 +405,64 @@ s32 Player_BiggoronSwordHealthWrapper(PlayState* play, Player* this)
 
 PATCH_FUNC(0x80840c3c, Player_BiggoronSwordHealthWrapper);
 
+static void Player_ApplyChildSwordDamageBonus(Player* link)
+{
+    u8 variant;
+    int i;
+
+    if (link->heldItemAction != PLAYER_IA_SWORD_KOKIRI)
+        return;
+
+    variant = OotChildSword_GetEquippedVariant();
+    if (variant == 0 || variant >= 3)
+        return;
+
+    for (i = 0; i < 2; ++i)
+    {
+        ColliderQuad* sword = &link->meleeWeaponQuads[i];
+        Collider* targetCollider = sword->elem.atHit;
+        ColliderElement* targetElem = sword->elem.atHitElem;
+        Actor* target = sword->base.at;
+        u32 flags = sword->elem.atDmgInfo.dmgFlags;
+        int baseDamage;
+
+        if (!(sword->base.atFlags & AT_HIT) || !target || !targetCollider || !targetElem)
+            continue;
+        if (!(targetCollider->acFlags & AC_HIT) || (targetCollider->acFlags & AC_HARD))
+            continue;
+        if (!(targetElem->acElemFlags & ACELEM_HIT) || (targetElem->acElemFlags & ACELEM_NO_DAMAGE))
+            continue;
+        if (flags != DMG_SLASH_KOKIRI && flags != DMG_JUMP_KOKIRI)
+            continue;
+
+        if (target->colChkInfo.damageTable)
+        {
+            u32 bits = flags;
+            int index = 0;
+            while (index < 32 && !(bits & 1))
+            {
+                bits >>= 1;
+                ++index;
+            }
+            if (index == 32)
+                continue;
+            baseDamage = target->colChkInfo.damageTable->table[index] & 0x0f;
+        }
+        else
+        {
+            baseDamage = (int)sword->elem.atDmgInfo.damage - (int)targetElem->acDmgInfo.defense;
+            if (baseDamage < 0)
+                baseDamage = 0;
+        }
+        target->colChkInfo.damage += (u8)(baseDamage * variant);
+    }
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     Input* input;
     Input* kamaroInput;
+    Player_ApplyChildSwordDamageBonus(this);
     updateKokiriSwordLength();
 
     if (gBlastMaskDelayAcc)
