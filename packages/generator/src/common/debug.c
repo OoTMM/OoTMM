@@ -4,7 +4,7 @@
 #include <combo/entrance.h>
 #include <combo/player.h>
 #include <combo/global.h>
-
+#include <combo/inventory.h>
 #if defined(DEBUG)
 #define DEBUGMENU_PAGE_NONE     0
 #define DEBUGMENU_PAGE_MAIN     1
@@ -465,7 +465,6 @@ void Debug_Init(void)
 #if defined(GAME_MM)
 static void cheatAllItems(PlayState* play)
 {
-    gSharedCustomSave.mmShieldIsDeku = 0;
 
     /* Notebook */
     gSave.info.weekEventReg[66] = 0xff;
@@ -475,9 +474,12 @@ static void cheatAllItems(PlayState* play)
     gSave.info.weekEventReg[70] = 0xff;
     gSave.info.weekEventReg[71] = 0xff;
     gSave.info.weekEventReg[72] = 0x7f;
-
-    gSave.info.itemEquips.sword = 1;
-    gSave.info.itemEquips.shield = 2;
+    gSharedCustomSave.mm.swords.sword = 0x07;
+    gMmSave.info.playerData.swordHealth = 100;
+    gSharedCustomSave.mm.swords.masterSword = 1;
+    gSharedCustomSave.mm.swords.giantSword = 1;
+    MmSword_SetGiantsKnifeHealth(Config_Flag(CFG_SHARED_GORON_SWORDS) ? gComboConfig.giantsKnifeDurabilityOot : gComboConfig.giantsKnifeDurabilityMm);
+    gSharedCustomSave.mm.shieldsOwned = (1 << (MM_SHIELD_DEKU - 1)) | (1 << (MM_SHIELD_HERO - 1)) | (1 << (MM_SHIELD_HYLIAN - 1)) | (1 << (MM_SHIELD_MIRROR - 1));
     gSharedCustomSave.mmProgressiveShields = 3;
     gSave.info.inventory.upgrades.scale = 3;
     gSave.info.inventory.upgrades.quiver = 3;
@@ -491,8 +493,6 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.upgrades.bombBag = 3;
     gSharedCustomSave.bombchuBagMm = 3;
     Inventory_UpdateMaxBombchu();
-
-    gSave.info.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
     gSave.info.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
     gSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gSave.info.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
@@ -615,9 +615,10 @@ static void cheatAllItems(PlayState* play)
     MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
-    gSave.info.playerData.swordHealth = 8;
-    gSave.info.isBiggoronSword = 1;
-    gSharedCustomSave.extraSwordsOot = 2;
+    gSave.info.playerData.swordHealth = gComboConfig.giantsKnifeDurabilityOot;
+    gSave.info.isBiggoronSword = 0;
+    gSharedCustomSave.extraSwordsOot = 0x07;
+    gSharedCustomSave.ootChildShields = (1u << OOT_CHILD_SHIELD_DEKU) | (1u << OOT_CHILD_SHIELD_HERO);
     gSave.info.inventory.goldTokens = 100;
     gSharedCustomSave.foundMasterSword = 1;
 

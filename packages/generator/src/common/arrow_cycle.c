@@ -320,7 +320,13 @@ void ArrowCycle_Handle(Player* link, PlayState* play)
     if (!curInfo || !nextInfo || curInfo->var == nextInfo->var)
     {
         item = BUTTON(link->heldItemButton);
-        if (curInfo->var == 2 && item != ITEM_BOW && gSave.info.inventory.items[ITS_BOW] == ITEM_BOW)
+        if (curInfo->var == 2 && item != ITEM_BOW &&
+        #if defined(GAME_MM)
+            (gMmExtraItems.bowSlingshot & 1)
+        #else
+            gSave.info.inventory.items[ITS_BOW] == ITEM_BOW
+        #endif
+        )
         {
             BUTTON(link->heldItemButton) = ITEM_BOW;
             Interface_LoadItemIconImpl(play, link->heldItemButton);

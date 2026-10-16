@@ -1,4 +1,5 @@
 #include <combo.h>
+#include "combo/inventory.h"
 
 u8 CollisionCheck_GetSwordDamageWrapper(u32 flags)
 {
@@ -6,7 +7,7 @@ u8 CollisionCheck_GetSwordDamageWrapper(u32 flags)
     u8 kokiriLevel;
 
     dmg = CollisionCheck_GetSwordDamage(flags);
-    kokiriLevel = 1 + (u8)gSharedCustomSave.extraSwordsOot;
+    kokiriLevel = 1 + OotChildSword_GetDamageVariant();
     if (flags & (DMG_SLASH_KOKIRI | DMG_SPIN_KOKIRI))
         dmg = kokiriLevel;
     else if (flags & DMG_JUMP_KOKIRI)

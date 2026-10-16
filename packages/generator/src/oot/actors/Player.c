@@ -13,6 +13,7 @@
 #include <actors/En_Kanban/En_Kanban.h>
 #include <combo/oot/player_action.h>
 #include <actors/Custom_En_Bom/Custom_En_Bom.h>
+#include <combo/inventory.h>
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 void Ocarina_HandleCustomSongs(Player* link, PlayState* play);
@@ -145,76 +146,33 @@ static int prepareMask(PlayState* play, u16 objectId, int needsMatrix)
     return 1;
 }
 
-static void DrawExtendedMaskKeaton(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_KEATON, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_KEATON_0);
-    CLOSE_DISPS();
-}
+typedef struct {
+    u16 objectId;
+    u32 displayList;
+    u8 needsMatrix;
+} ExtendedMaskDraw;
 
-static void DrawExtendedMaskSkull(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SKULL, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SKULL_0);
-    CLOSE_DISPS();
-}
+static const ExtendedMaskDraw sExtendedMaskDraws[] = {
+    { CUSTOM_OBJECT_ID_MASK_OOT_KEATON, CUSTOM_OBJECT_MASK_OOT_KEATON_0, 1 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_SKULL,  CUSTOM_OBJECT_MASK_OOT_SKULL_0,  1 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY, CUSTOM_OBJECT_MASK_OOT_SPOOKY_0, 1 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_BUNNY,  CUSTOM_OBJECT_MASK_OOT_BUNNY_0,  0 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_GORON,  CUSTOM_OBJECT_MASK_OOT_GORON_0,  1 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_ZORA,   CUSTOM_OBJECT_MASK_OOT_ZORA_0,   1 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_GERUDO, CUSTOM_OBJECT_MASK_OOT_GERUDO_0, 1 },
+    { CUSTOM_OBJECT_ID_MASK_OOT_TRUTH,  CUSTOM_OBJECT_MASK_OOT_TRUTH_0,  1 },
+    { 0, 0, 0 }, // Blast
+    { 0x24e | MASK_FOREIGN_OBJECT, 0x0a000820, 1 }, // Stone
+    { 0x25f | MASK_FOREIGN_OBJECT, 0x0a000ef0, 1 }, // Kamaro
+};
 
-static void DrawExtendedMaskSpooky(PlayState* play, Player* link)
+static void DrawExtendedMaskStandard(PlayState* play, const ExtendedMaskDraw* mask)
 {
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SPOOKY_0);
-    CLOSE_DISPS();
-}
-
-static void DrawExtendedMaskBunny(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_BUNNY, 0))
+    if (!prepareMask(play, mask->objectId, mask->needsMatrix))
         return;
 
     OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_BUNNY_0);
-    CLOSE_DISPS();
-}
-
-static void DrawExtendedMaskGoron(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GORON, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GORON_0);
-    CLOSE_DISPS();
-}
-
-static void DrawExtendedMaskZora(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_ZORA, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_ZORA_0);
-    CLOSE_DISPS();
-}
-
-static void DrawExtendedMaskGerudo(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GERUDO, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GERUDO_0);
-    CLOSE_DISPS();
-}
-
-static void DrawExtendedMaskTruth(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_TRUTH, 1))
-        return;
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_TRUTH_0);
+    gSPDisplayList(POLY_OPA_DISP++, mask->displayList);
     CLOSE_DISPS();
 }
 
@@ -246,61 +204,108 @@ static void DrawExtendedMaskBlast(PlayState* play, Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskStone(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, 0x24e | MASK_FOREIGN_OBJECT, 1))
-        return;
-
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, 0x0a000820);
-    CLOSE_DISPS();
-}
-
-static void DrawExtendedMaskKamaro(PlayState* play, Player* link)
-{
-    if (!prepareMask(play, 0x25F | MASK_FOREIGN_OBJECT, 1))
-        return;
-
-    OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++, 0x0a000ef0);
-    CLOSE_DISPS();
-}
-
-typedef void (*MaskCallback)(PlayState*, Player*);
-
-static const MaskCallback kMaskCallbacks[] = {
-    DrawExtendedMaskKeaton,
-    DrawExtendedMaskSkull,
-    DrawExtendedMaskSpooky,
-    DrawExtendedMaskBunny,
-    DrawExtendedMaskGoron,
-    DrawExtendedMaskZora,
-    DrawExtendedMaskGerudo,
-    DrawExtendedMaskTruth,
-    DrawExtendedMaskBlast,
-    DrawExtendedMaskStone,
-    DrawExtendedMaskKamaro,
-};
-
 void comboDrawExtendedMask(void)
 {
     PlayState* play;
     Player* link;
-    MaskCallback cb;
     int index;
 
     play = gPlay;
     link = GET_PLAYER(play);
+    if (!link->mask)
+        return;
 
-    if (link->mask == 0)
-        return;
     index = link->mask - 1;
-    if (index >= ARRAY_COUNT(kMaskCallbacks))
+    if (index >= ARRAY_COUNT(sExtendedMaskDraws))
         return;
-    cb = kMaskCallbacks[index];
-    if (!cb)
-        return;
-    cb(play, link);
+
+    if (index == 8)
+        DrawExtendedMaskBlast(play, link);
+    else
+        DrawExtendedMaskStandard(play, &sExtendedMaskDraws[index]);
+}
+
+u8 gOotChildSwordVariant = 0xff;
+u8 gOotChildSwordEquippedVariant = 0xff;
+u8 gOotChildShieldEquippedVariant = 0xff;
+
+u8 OotChildSword_GetVariant(void)
+{
+    u8 owned = OotChildSword_GetOwnedMask();
+
+    if (gOotChildSwordVariant >= 3 ||
+        !(owned & (1u << gOotChildSwordVariant)))
+    {
+        if (owned & 0x04)
+            gOotChildSwordVariant = 2;
+        else if (owned & 0x02)
+            gOotChildSwordVariant = 1;
+        else
+            gOotChildSwordVariant = 0;
+    }
+
+    return gOotChildSwordVariant;
+}
+
+u8 OotChildSword_GetEquippedVariant(void)
+{
+    u8 owned;
+    if (gSave.info.equips.equipment.swords != 1)
+        return 0xff;
+    owned = OotChildSword_GetOwnedMask() & 0x07;
+    if (gOotChildSwordEquippedVariant >= 3 ||
+        !(owned & (1u << gOotChildSwordEquippedVariant)))
+        gOotChildSwordEquippedVariant = OotChildSword_GetVariant();
+    return gOotChildSwordEquippedVariant;
+}
+
+u8 OotChildSword_GetDamageVariant(void)
+{
+    Player* link;
+    u8 variant;
+
+    if (!gPlay)
+        return 0;
+    link = GET_PLAYER(gPlay);
+    if (!link || link->heldItemAction != PLAYER_IA_SWORD_KOKIRI)
+        return 0;
+    variant = OotChildSword_GetEquippedVariant();
+    return variant < 3 ? variant : 0;
+}
+
+u8 OotChildShield_GetEquippedVariant(void)
+{
+    u8 owned;
+    u8 selected;
+    u8 shield;
+
+    if (gSave.info.equips.equipment.shields != 1)
+        return 0xff;
+    owned = gSharedCustomSave.ootChildShields;
+    if (gOotChildShieldEquippedVariant >= OOT_CHILD_SHIELD_MAX || !(owned & (1u << gOotChildShieldEquippedVariant)))
+    {
+        selected = OotChildShield_GetVariant();
+
+        if (selected < OOT_CHILD_SHIELD_MAX && (owned & (1u << selected)))
+            gOotChildShieldEquippedVariant = selected;
+        else
+        {
+            for (shield = 0;
+                 shield < OOT_CHILD_SHIELD_MAX;
+                 shield++)
+            {
+                if (owned & (1u << shield))
+                {
+                    gOotChildShieldEquippedVariant = shield;
+                    return shield;
+                }
+            }
+
+            return 0xff;
+        }
+    }
+
+    return gOotChildShieldEquippedVariant;
 }
 
 static void updateKokiriSwordLength(void)
@@ -309,7 +314,7 @@ static void updateKokiriSwordLength(void)
 
     dst = (float*)0x800f7bb8;
 
-    switch (gSharedCustomSave.extraSwordsOot)
+    switch (OotChildSword_GetEquippedVariant())
     {
     case 0: *dst = 3000.f; break;
     case 1: *dst = 3000.f; break;
@@ -392,27 +397,24 @@ s32 Player_BiggoronSwordHealthWrapper(PlayState* play, Player* this)
 
     func_800849EC_addr = (func_800849EC_t)0x8006fad0;
 
-    if (this->heldItemAction == PLAYER_IA_SWORD_BIGGORON)
-    {
-        if (this->heldItemId != ITEM_OOT_GREAT_FAIRY_SWORD)
-        {
-            if (!gSaveContext.save.info.isBiggoronSword &&
-                (gSaveContext.save.info.playerData.swordHealth > 0.0f))
-            {
-                if ((gSaveContext.save.info.playerData.swordHealth -= 1.0f) <= 0.0f)
-                {
-                    EffectSsStick_Spawn(play, &this->bodyPartsPos[PLAYER_BODYPART_R_HAND],
-                                        this->actor.shape.rot.y + 0x8000);
-                    func_800849EC_addr(play);
-                    Player_PlaySfx(this, NA_SE_IT_MAJIN_SWORD_BROKEN);
-                }
-            }
-        }
-
+    if (this->heldItemAction != PLAYER_IA_SWORD_BIGGORON)
+        return 0;
+    if (this->heldItemId == ITEM_OOT_GREAT_FAIRY_SWORD)
         return 1;
+    if (gSaveContext.save.info.isBiggoronSword)
+        return 1;
+    if (gComboConfig.giantsKnifeDurabilityOot == 101)
+        return 1;
+    if (gSaveContext.save.info.playerData.swordHealth > 0)
+    {
+        if (--gSaveContext.save.info.playerData.swordHealth == 0)
+        {
+            EffectSsStick_Spawn(play, &this->bodyPartsPos[PLAYER_BODYPART_R_HAND], this->actor.shape.rot.y + 0x8000);
+            func_800849EC_addr(play);
+            Player_PlaySfx(this, NA_SE_IT_MAJIN_SWORD_BROKEN);
+        }
     }
-
-    return 0;
+    return 1;
 }
 
 PATCH_FUNC(0x80840c3c, Player_BiggoronSwordHealthWrapper);
@@ -648,20 +650,46 @@ void Player_AfterSetEquipmentData(PlayState* play)
 #define DLIST_CHILD_STRING          DLIST_INDIRECT(0x800f7c14)
 #define DLIST_ADULT_STRING          DLIST_INDIRECT(0x800f7c04)
 
-static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
+static void* Player_CustomEquipmentDlist(u32 handDlist, s32 includeHand, void* eqData, u32 eqDlist)
 {
     Gfx* dlist;
     Gfx* d;
 
-    if (!eqData) return (void*)kDListEmpty;
+    if (!eqData)
+        return (void*)kDListEmpty;
 
-    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 3);
-    gSPDisplayList(d++, handDlist);
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * (includeHand ? 3 : 2));
+    if (includeHand)
+        gSPDisplayList(d++, handDlist);
     gSPSegment(d++, 0x0a, eqData);
     gSPBranchList(d++, eqDlist);
 
     return dlist;
 }
+
+static void* Player_OffsetHeldShield(void* original)
+{
+    PlayState* play = gPlay;
+    Gfx* dlist;
+    Gfx* d;
+    Mtx* mtx;
+
+    if (!original)
+        return original;
+    mtx = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Mtx));
+    dlist = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Gfx) * 4);
+    if (!mtx || !dlist)
+        return original;
+    guTranslate(mtx, 0.0f, 0.0f, -110.0f);
+    d = dlist;
+    gSPMatrix(d++, mtx, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+    gSPDisplayList(d++, original);
+    gSPPopMatrix(d++, G_MTX_MODELVIEW);
+    gSPEndDisplayList(d++);
+    return dlist;
+}
+
+#define Player_CustomHandEq(hand, object, dl) Player_CustomEquipmentDlist((hand), 1, (object), (dl))
 
 const Gfx* gDlistHookshotEnd;
 const Gfx* gDlistHookshotChain;
@@ -669,19 +697,7 @@ const Gfx* gDlistHookshotReticle;
 const Gfx* gDlistHookshotBodyFP;
 const Gfx* gDlistHookshotBodyTP;
 
-static void* Player_CustomEq(void* eqData, u32 eqDlist)
-{
-    Gfx* dlist;
-    Gfx* d;
-
-    if (!eqData) return (void*)kDListEmpty;
-
-    d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 2);
-    gSPSegment(d++, 0x0a, eqData);
-    gSPBranchList(d++, eqDlist);
-
-    return dlist;
-}
+#define Player_CustomEq(object, dl) Player_CustomEquipmentDlist(0, 0, (object), (dl))
 
 static void* dlistOrNothing(void* dlist)
 {
@@ -699,6 +715,18 @@ static void* Player_CustomPair(void* a, void* b)
     gSPDisplayList(d++, dlistOrNothing(a));
     gSPBranchList(d++, dlistOrNothing(b));
 
+    return dlist;
+}
+
+static void* Player_DrawChildShieldInHand(u32 handDlist)
+{
+    void* dlist;
+    if (OotChildShield_GetEquippedVariant() == OOT_CHILD_SHIELD_HERO)
+        return Player_CustomHandEq(handDlist, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HERO), CUSTOM_OBJECT_EQ_SHIELD_HERO_0);
+
+    dlist = Player_CustomHandEq(handDlist, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+    if (gSave.age == AGE_ADULT)
+        dlist = Player_OffsetHeldShield(dlist);
     return dlist;
 }
 
@@ -736,8 +764,15 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
         switch (gSave.info.equips.equipment.shields)
         {
         case 1:
-            shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_1);
-            break;
+            {
+                u8 variant;
+                variant = OotChildShield_GetEquippedVariant();
+                if (variant == OOT_CHILD_SHIELD_HERO)
+                    shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HERO), CUSTOM_OBJECT_EQ_SHIELD_HERO_1);
+                else
+                    shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_1);
+                break;
+            }
         case 2:
             if (gSave.age == AGE_CHILD)
                 shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_CHILD), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_CHILD_0);
@@ -753,7 +788,7 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
     switch (gSave.info.equips.equipment.swords)
     {
     case 1:
-        switch (gSharedCustomSave.extraSwordsOot)
+        switch (OotChildSword_GetEquippedVariant())
         {
         case 0:
             if (swordInUse)
@@ -778,7 +813,10 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
         break;
     }
 
-    *dlist = Player_CustomPair(shield, sword);
+    if (shieldOnBack && gSave.info.equips.equipment.shields == 1 && OotChildShield_GetEquippedVariant() == OOT_CHILD_SHIELD_HERO)
+        *dlist = Player_CustomPair(sword, shield);
+    else
+        *dlist = Player_CustomPair(shield, sword);
 }
 
 static void fixTunicColoLimb(PlayState* play, int limb)
@@ -811,11 +849,13 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
             *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GREAT_FAIRY_SWORD), CUSTOM_OBJECT_EQ_GREAT_FAIRY_SWORD_0);
         if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.info.equips.equipment.swords == 1)
         {
-            if (gSharedCustomSave.extraSwordsOot == 0)
+            u8 sword = OotChildSword_GetEquippedVariant();
+
+            if (sword == 0)
                 *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
-            else if (gSharedCustomSave.extraSwordsOot == 1)
+            else if (sword == 1)
                 *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
-            else if (gSharedCustomSave.extraSwordsOot == 2)
+            else if (sword == 2)
                 *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
         }
 
@@ -826,7 +866,7 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
     if (limb == PLAYER_LIMB_R_HAND)
     {
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.info.equips.equipment.shields == 1)
-            *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+            *dlist = Player_DrawChildShieldInHand(DLIST_ADULT_RHAND_CLOSED);
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_OCARINA)
             *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_OCARINA_FAIRY), CUSTOM_OBJECT_EQ_OCARINA_FAIRY_0);
@@ -840,7 +880,7 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_SHEATH)
     {
-        if (gSave.info.equips.equipment.shields == 1 || gSave.info.equips.equipment.swords <= 1)
+        if (gSave.info.equips.equipment.shields == 1 || gSave.info.equips.equipment.shields == 3 || gSave.info.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
             Player_OverrideCustomSheath(play, this, dlist, isPause);
     }
 }
@@ -855,9 +895,10 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
         {
             if (gSave.info.equips.equipment.swords == 1)
             {
-                if (gSharedCustomSave.extraSwordsOot == 1)
+                u8 sword = OotChildSword_GetEquippedVariant();
+                if (sword == 1)
                     *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
-                else if (gSharedCustomSave.extraSwordsOot == 2)
+                else if (sword == 2)
                     *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
             }
             else if (gSave.info.equips.equipment.swords == 2)
@@ -883,6 +924,8 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_HOOKSHOT)
             *dlist = (Gfx*)gDlistHookshotBodyTP;
 
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.info.equips.equipment.shields == 1)
+            *dlist = Player_DrawChildShieldInHand(DLIST_CHILD_RHAND_CLOSED);
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.info.equips.equipment.shields == 3)
             *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
 
@@ -895,10 +938,24 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_SHEATH)
     {
-        if (gSave.info.equips.equipment.shields == 3 || gSave.info.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
+        if (gSave.info.equips.equipment.shields == 1 || gSave.info.equips.equipment.shields == 3 || gSave.info.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
             Player_OverrideCustomSheath(play, this, dlist, isPause);
     }
 }
+
+static void Player_BurnDekuShieldCustom(Player* this, PlayState* play)
+{
+    if (this->currentShield != 1)
+        return;
+
+    if (OotChildShield_GetEquippedVariant() != OOT_CHILD_SHIELD_DEKU)
+        return;
+    Actor_Spawn(&play->actorCtx, play, ACTOR_ITEM_SHIELD, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 1);
+    OotShield_Lose(play, MM_SHIELD_DEKU);
+    Message_StartTextbox(play, 0x305f, NULL);
+}
+
+PATCH_FUNC(0x80836298, Player_BurnDekuShieldCustom);
 
 static void Player_OverrideCustom(PlayState* play, Player* this, int limb, Gfx** dlist, int isPause)
 {
@@ -920,8 +977,17 @@ int Player_OverrideLimbDrawGameplayDefaultWrapper(PlayState* play, s32 limbIndex
 
 int Player_OverrideLimbDrawPauseWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Player* player)
 {
-    /* Forward */
-    if (Player_OverrideLimbDrawPause(play, limbIndex, dList, pos, rot, player))
+    int ret;
+    ret = Player_OverrideLimbDrawPause(play, limbIndex, dList, pos, rot, player);
+    if (limbIndex == PLAYER_LIMB_R_HAND && gSave.info.equips.equipment.shields == 1)
+    {
+        if (OotChildShield_GetEquippedVariant() == OOT_CHILD_SHIELD_HERO || gSave.age == AGE_ADULT)
+        {
+            *dList = Player_DrawChildShieldInHand(gSave.age == AGE_CHILD ? DLIST_CHILD_RHAND_CLOSED : DLIST_ADULT_RHAND_CLOSED);
+            return 0;
+        }
+    }
+    if (ret)
         return 0;
 
     Player_OverrideCustom(play, player, limbIndex, dList, 1);
