@@ -60,6 +60,8 @@ typedef struct
     u8              songEventsMm[0xd];
     u8              giantsKnifeDurabilityOot;
     u8              giantsKnifeDurabilityMm;
+    u8              mmStrengthAgeRequirement;
+    u8              mmAgeRequirements[0x40];
 }
 ComboConfig;
 

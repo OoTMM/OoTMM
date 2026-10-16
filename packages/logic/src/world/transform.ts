@@ -1551,15 +1551,13 @@ class LogicPassWorldTransform {
     this.filterLocationsBool(this.state.settings.shuffleRocksOot, 'rock', 'oot');
     this.filterLocations(this.state.settings.shuffleRocksMm, 'rock', 'mm');
 
-    const blastMaskChild = this.state.settings.mmAgeReqChildMaskBlast;
-    const blastMaskAdult = this.state.settings.mmAgeReqAdultMaskBlast;
-
-    const ironBootsChild = this.state.settings.mmAgeReqChildBootsIron;
-    const ironBootsAdult = this.state.settings.mmAgeReqAdultBootsIron;
+    const blastMaskAge = this.state.settings.mmAgeReqMaskBlast;
+    const ironBootsAge = this.state.settings.mmAgeReqBootsIron;
 
     const blastMaskAndIronBootsDifferentAges =
-        (blastMaskChild && ironBootsAdult) ||
-        (blastMaskAdult && ironBootsChild);
+        blastMaskAge !== 'none' &&
+        ironBootsAge !== 'none' &&
+        blastMaskAge !== ironBootsAge;
 
     if (
         !this.state.settings.bootsIronMm ||

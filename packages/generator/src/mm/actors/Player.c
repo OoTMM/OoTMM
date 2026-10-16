@@ -1650,13 +1650,9 @@ static s32 Player_IsExtendedSword(MmSwordId sword)
     return sword == MM_SWORD_MASTER || sword == MM_SWORD_GIANTS_KNIFE || sword == MM_SWORD_BIGGORON;
 }
 
-s32 MmAgeReq_CheckCurrentAge(u16 childReq, u16 adultReq)
-{
-    return !Config_Flag(comboIsLinkAdult() ? childReq : adultReq);
-}
 static s32 Player_UsesChildHylianShield(Player* player)
 {
-    return player->transformation == MM_PLAYER_FORM_HUMAN && player->currentShield != 0 && MmShield_GetEquipped() == MM_SHIELD_HYLIAN && !MmAgeReq_CheckCurrentAge(CFG_MM_AGE_REQ_CHILD_SHIELD_HYLIAN, CFG_MM_AGE_REQ_ADULT_SHIELD_HYLIAN);
+    return player->transformation == MM_PLAYER_FORM_HUMAN && player->currentShield != 0 && MmShield_GetEquipped() == MM_SHIELD_HYLIAN && !comboCheckItemAgeReqMm(ITEM_MM_SHIELD_HYLIAN);
 }
 
 static int (*sPlayerOverrideLimb)(PlayState*, s32, Gfx**, Vec3f*, Vec3s*, void*);
@@ -2180,9 +2176,7 @@ static u8 Player_GetEffectiveHumanStrength(void)
     if (strength <= 1)
         return strength;
 
-    if (!MmAgeReq_CheckCurrentAge(
-            CFG_MM_AGE_REQ_CHILD_STRENGTH,
-            CFG_MM_AGE_REQ_ADULT_STRENGTH))
+    if (!comboCheckStrengthAgeReqMm())
     {
         return 1;
     }
