@@ -446,7 +446,7 @@ static void Player_ApplyChildSwordDamageBonus(Player* link)
             }
             if (index == 32)
                 continue;
-            baseDamage = target->colChkInfo.damageTable->table[index] & 0x0f;
+            baseDamage = target->colChkInfo.damageTable->attack[index] & 0x0f;
         }
         else
         {
