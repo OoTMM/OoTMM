@@ -77,6 +77,8 @@ MmShieldId MmShield_GetNextOwned(MmShieldId shield);
 void MmShield_SetSelected(MmShieldId shield);
 void MmShield_Equip(PlayState* play, MmShieldId shield);
 void MmShield_Lose(PlayState* play, MmShieldId shield);
+s32 OotShield_IsOwned(MmShieldId shield);
+void OotShield_Lose(PlayState* play, MmShieldId shield);
 void MmShield_Unequip(PlayState* play);
 void MmShield_RefreshNativeEquip(PlayState* play);
 
@@ -90,6 +92,8 @@ typedef enum
 }
 OotChildShieldId;
 
+extern u8 gOotChildShieldVariant;
+
 #if defined(GAME_OOT)
 
 extern u8 gOotChildSwordVariant;
@@ -97,8 +101,7 @@ extern u8 gOotChildSwordEquippedVariant;
 
 u8 OotChildSword_GetVariant(void);
 u8 OotChildSword_GetEquippedVariant(void);
-
-extern u8 gOotChildShieldVariant;
+u8 OotChildSword_GetDamageVariant(void);
 extern u8 gOotChildShieldEquippedVariant;
 
 u8 OotChildShield_GetVariant(void);
