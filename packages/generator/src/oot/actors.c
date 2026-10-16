@@ -8,6 +8,7 @@
 #include <combo/actor.h>
 #include <combo/multi.h>
 #include <combo/actors.h>
+#include "combo/inventory.h"
 
 static s16 sActorIdToSpawn;
 
@@ -490,10 +491,11 @@ static void SetDamageEffect(DamageTable *tbl, int type, int value)
 
 static void Actor_UpdateDamageTable(Actor *this)
 {
-    DamageTable *tbl;
+    DamageTable* tbl;
     int dmg;
     int dmgEffectKokiri;
     int dmgEffectGiant;
+    u8 variant;
 
     tbl = this->colChkInfo.damageTable;
     if (!tbl)
@@ -501,14 +503,14 @@ static void Actor_UpdateDamageTable(Actor *this)
     if (GetDamage(tbl, 10) != 4)
         return; /* Weird table, better not touch */
 
+    variant = OotChildSword_GetDamageVariant();
     dmgEffectKokiri = GetDamageEffect(tbl, 8);
     dmgEffectGiant = GetDamageEffect(tbl, 10);
 
-    if (GetDamage(tbl, 8) == 0 && !gSharedCustomSave.extraSwordsOot)
+    if (GetDamage(tbl, 8) == 0 && !variant)
         return;
-    dmg = 1 + gSharedCustomSave.extraSwordsOot;
 
-    /* Dead hand takes MS-level damage from KS */
+    dmg = 1 + variant;
     if (dmg < 2 && (this->id == ACTOR_EN_DH || this->id == ACTOR_EN_DHA))
         dmg = 2;
 
@@ -516,7 +518,7 @@ static void Actor_UpdateDamageTable(Actor *this)
     SetDamage(tbl, 22, dmg);
     SetDamage(tbl, 25, dmg * 2);
 
-    if (gSharedCustomSave.extraSwordsOot && (dmgEffectKokiri != dmgEffectGiant))
+    if (variant && dmgEffectKokiri != dmgEffectGiant)
     {
         SetDamageEffect(tbl, 8, dmgEffectGiant);
         SetDamageEffect(tbl, 22, dmgEffectGiant);

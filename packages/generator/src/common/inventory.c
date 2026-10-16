@@ -388,7 +388,112 @@ void MmShield_Equip(PlayState* play, MmShieldId shield)
     MmShield_RefreshNativeEquip(play);
 }
 
-void MmShield_Lose(PlayState* play, MmShieldId shield)
+static s32 Shield_IsShared(MmShieldId shield)
+{
+    switch (shield)
+    {
+    case MM_SHIELD_DEKU:
+        return Config_Flag(CFG_SHARED_DEKU_SHIELD);
+    case MM_SHIELD_HERO:
+        return Config_Flag(CFG_SHARED_HERO_SHIELD);
+    case MM_SHIELD_HYLIAN:
+        return Config_Flag(CFG_SHARED_HYLIAN_SHIELD);
+    case MM_SHIELD_MIRROR:
+        return Config_Flag(CFG_SHARED_MIRROR_SHIELD);
+    default:
+        return 0;
+    }
+}
+
+s32 OotShield_IsOwned(MmShieldId shield)
+{
+    switch (shield)
+    {
+    case MM_SHIELD_DEKU:
+        if (!gSharedCustomSave.ootChildShields &&
+            (gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU))
+        {
+            gSharedCustomSave.ootChildShields = 1u << OOT_CHILD_SHIELD_DEKU;
+        }
+        return !!(gSharedCustomSave.ootChildShields & (1u << OOT_CHILD_SHIELD_DEKU));
+    case MM_SHIELD_HERO:
+        return !!(gSharedCustomSave.ootChildShields & (1u << OOT_CHILD_SHIELD_HERO));
+    case MM_SHIELD_HYLIAN:
+        return !!(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+    case MM_SHIELD_MIRROR:
+        return !!(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_MIRROR);
+    default:
+        return 0;
+    }
+}
+
+static void OotShield_ClearEquip(OotItemEquips* equips, u8 nativeShield)
+{
+    if (equips->equipment.shields == nativeShield)
+        equips->equipment.shields = 0;
+}
+
+static void OotShield_LoseRaw(PlayState* play, MmShieldId shield)
+{
+    u8 nativeShield;
+    s32 remainingChildShield;
+    s32 wasEquipped = 0;
+
+    if (!OotShield_IsOwned(shield))
+        return;
+
+    switch (shield)
+    {
+    case MM_SHIELD_DEKU:
+    case MM_SHIELD_HERO:
+        nativeShield = 1;
+#if defined(GAME_OOT)
+        wasEquipped = gOotSave.info.equips.equipment.shields == 1 && OotChildShield_GetEquippedVariant() == (shield == MM_SHIELD_DEKU ? OOT_CHILD_SHIELD_DEKU : OOT_CHILD_SHIELD_HERO);
+#endif
+        gSharedCustomSave.ootChildShields &=
+            ~(1u << (shield == MM_SHIELD_DEKU ? OOT_CHILD_SHIELD_DEKU : OOT_CHILD_SHIELD_HERO));
+        remainingChildShield = gSharedCustomSave.ootChildShields != 0;
+        if (!remainingChildShield)
+            gOotSave.info.inventory.equipment.shields &= ~EQ_OOT_SHIELD_DEKU;
+        gOotChildShieldVariant = 0xff;
+#if defined(GAME_OOT)
+        gOotChildShieldEquippedVariant = 0xff;
+#endif
+        if (remainingChildShield)
+        {
+            if (wasEquipped)
+                OotShield_ClearEquip(&gOotSave.info.equips, nativeShield);
+            goto refresh;
+        }
+        break;
+
+    case MM_SHIELD_HYLIAN:
+        nativeShield = 2;
+        gOotSave.info.inventory.equipment.shields &= ~EQ_OOT_SHIELD_HYLIAN;
+        break;
+
+    case MM_SHIELD_MIRROR:
+        nativeShield = 3;
+        gOotSave.info.inventory.equipment.shields &= ~EQ_OOT_SHIELD_MIRROR;
+        break;
+
+    default:
+        return;
+    }
+
+    OotShield_ClearEquip(&gOotSave.info.equips, nativeShield);
+    OotShield_ClearEquip(&gOotSave.info.childEquips, nativeShield);
+    OotShield_ClearEquip(&gOotSave.info.adultEquips, nativeShield);
+
+refresh:
+#if defined(GAME_OOT)
+    if (play && GET_PLAYER(play))
+        UpdateEquipment(play, GET_PLAYER(play));
+#endif
+    (void)play;
+}
+
+static void MmShield_LoseRaw(PlayState* play, MmShieldId shield)
 {
     s32 age;
 
@@ -417,6 +522,26 @@ void MmShield_Lose(PlayState* play, MmShieldId shield)
 
     MmShield_EnsureState();
     MmShield_RefreshNativeEquip(play);
+}
+
+void MmShield_Lose(PlayState* play, MmShieldId shield)
+{
+    if (!MmShield_IsOwned(shield))
+        return;
+
+    MmShield_LoseRaw(play, shield);
+    if (Shield_IsShared(shield))
+        OotShield_LoseRaw(NULL, shield);
+}
+
+void OotShield_Lose(PlayState* play, MmShieldId shield)
+{
+    if (!OotShield_IsOwned(shield))
+        return;
+
+    OotShield_LoseRaw(play, shield);
+    if (Shield_IsShared(shield))
+        MmShield_LoseRaw(NULL, shield);
 }
 
 void Inventory_ReobtainProgressiveShields(void)
