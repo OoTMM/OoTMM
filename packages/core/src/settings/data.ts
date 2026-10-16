@@ -20,26 +20,20 @@ const SETTING_PRICE = {
   default: 'vanilla',
 } as const;
 
-const MM_AGE_REQ_SETTINGS = MM_AGE_REQ_ITEMS.flatMap(item => [
-  {
-    key: item.childSetting,
-    name: `${item.label} requires Child Link`,
-    category: 'items.mmAgeRequirements',
-    type: 'boolean',
-    description: `Requires Child Link to equip ${item.label} in MM.`,
-    default: false,
-    cond: hasMM,
-  },
-  {
-    key: item.adultSetting,
-    name: `${item.label} requires Adult Link`,
-    category: 'items.mmAgeRequirements',
-    type: 'boolean',
-    description: `Requires Adult Link to equip ${item.label} in MM.`,
-    default: false,
-    cond: hasMM,
-  },
-] as const);
+const MM_AGE_REQ_SETTINGS = MM_AGE_REQ_ITEMS.map(item => ({
+  key: item.setting,
+  name: `${item.label} Age Requirement`,
+  category: 'items.mmAgeRequirements',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'child', name: 'Child' },
+    { value: 'adult', name: 'Adult' },
+  ],
+  description: `Required age to use ${item.label} in MM (None allows both).`,
+  default: 'none',
+  cond: hasMM,
+} as const));
 
 const MM_AGE_REQ_RANDOM_SETTING = {
   key: 'mmAgeReqRandom',
