@@ -1695,6 +1695,8 @@ void Player_DrawShield(PlayState* play, Player* player)
             return;
         OPEN_DISPS(play->state.gfxCtx);
         gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+        if (shield == MM_SHIELD_HYLIAN)
+            gSPClearGeometryMode(POLY_OPA_DISP++, G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR);
         gSPDisplayList(POLY_OPA_DISP++, dlist);
         CLOSE_DISPS();
         return;
