@@ -255,6 +255,7 @@ Matrix_Translate = 0x8018029c;
 Matrix_SetTranslateRotateYXZ = 0x80181650;
 ModelViewUnkTransform = 0x801820a0;
 ModelViewMult = 0x80180244;
+guTranslate = 0x80093CC0;
 
 PrepareSave = 0x8014546c;
 AudioOcarina_SetInstrument = 0x8019C300;

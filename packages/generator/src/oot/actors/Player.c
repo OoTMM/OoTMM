@@ -667,6 +667,28 @@ static void* Player_CustomEquipmentDlist(u32 handDlist, s32 includeHand, void* e
     return dlist;
 }
 
+static void* Player_OffsetHeldShield(void* original)
+{
+    PlayState* play = gPlay;
+    Gfx* dlist;
+    Gfx* d;
+    Mtx* mtx;
+
+    if (!original)
+        return original;
+    mtx = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Mtx));
+    dlist = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Gfx) * 4);
+    if (!mtx || !dlist)
+        return original;
+    guTranslate(mtx, 0.0f, 0.0f, -110.0f);
+    d = dlist;
+    gSPMatrix(d++, mtx, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+    gSPDisplayList(d++, original);
+    gSPPopMatrix(d++, G_MTX_MODELVIEW);
+    gSPEndDisplayList(d++);
+    return dlist;
+}
+
 #define Player_CustomHandEq(hand, object, dl) Player_CustomEquipmentDlist((hand), 1, (object), (dl))
 
 const Gfx* gDlistHookshotEnd;
@@ -698,10 +720,14 @@ static void* Player_CustomPair(void* a, void* b)
 
 static void* Player_DrawChildShieldInHand(u32 handDlist)
 {
+    void* dlist;
     if (OotChildShield_GetEquippedVariant() == OOT_CHILD_SHIELD_HERO)
         return Player_CustomHandEq(handDlist, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HERO), CUSTOM_OBJECT_EQ_SHIELD_HERO_0);
 
-    return Player_CustomHandEq(handDlist, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+    dlist = Player_CustomHandEq(handDlist, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+    if (gSave.age == AGE_ADULT)
+        dlist = Player_OffsetHeldShield(dlist);
+    return dlist;
 }
 
 static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dlist, int isPause)

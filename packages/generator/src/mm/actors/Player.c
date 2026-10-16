@@ -1609,6 +1609,27 @@ static void* Player_CustomEquipment(u32 baseDlist, void* object, u32 eqDlist)
     return dlist;
 }
 
+static Gfx* Player_OffsetHeldShield(PlayState* play, Gfx* original)
+{
+    Mtx* mtx;
+    Gfx* dlist;
+    Gfx* d;
+    if (!original)
+        return NULL;
+    mtx = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Mtx));
+    dlist = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Gfx) * 4);
+    if (!mtx || !dlist)
+        return original;
+    guTranslate(mtx, 0, 0, -110.0f);
+    d = dlist;
+    gSPMatrix(d++, mtx, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+    gSPDisplayList(d++, original);
+    gSPPopMatrix(d++, G_MTX_MODELVIEW);
+    gSPEndDisplayList(d++);
+    return dlist;
+}
+
+
 static MmSwordId Player_GetActiveCustomSword(Player* player)
 {
     switch (player->heldItemAction)
@@ -1664,10 +1685,7 @@ void Player_DrawShield(PlayState* play, Player* player)
         }
         else
         {
-            s32 useAdultModel;
-            if (Config_Flag(CFG_MM_AGE_REQ_CHILD_SHIELD_HYLIAN) || Config_Flag(CFG_MM_AGE_REQ_ADULT_SHIELD_HYLIAN))useAdultModel = MmAgeReq_CheckCurrentAge(CFG_MM_AGE_REQ_CHILD_SHIELD_HYLIAN, CFG_MM_AGE_REQ_ADULT_SHIELD_HYLIAN);
-            else
-                useAdultModel = comboIsLinkAdult();
+            s32 useAdultModel = comboIsLinkAdult();
 
             obj = comboGetObject(useAdultModel ? CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_ADULT : CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_CHILD);
             dlist = useAdultModel ? CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_ADULT_0 : CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_CHILD_0;
@@ -1683,8 +1701,20 @@ void Player_DrawShield(PlayState* play, Player* player)
     }
 
     OPEN_DISPS(play->state.gfxCtx);
-    gSPDisplayList(POLY_OPA_DISP++,
-        kLinkHumanShieldsDLs[(player->currentShield - 1) * 2]);
+    if (comboIsLinkAdult() && player->currentShield == 2)
+    {
+        Mtx* mtx = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Mtx));
+        if (mtx)
+        {
+            guTranslate(mtx, -280.0f, 0.0f, 0.0f);
+            gSPMatrix(POLY_OPA_DISP++, mtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        }
+        gSPDisplayList(POLY_OPA_DISP++, kLinkHumanShieldsDLs[(player->currentShield - 1) * 2]);
+        if (mtx)
+            gSPPopMatrix(POLY_OPA_DISP++, G_MTX_MODELVIEW);
+    }
+    else
+        gSPDisplayList(POLY_OPA_DISP++, kLinkHumanShieldsDLs[(player->currentShield - 1) * 2]);
     CLOSE_DISPS();
 }
 
@@ -2049,18 +2079,39 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
 
                 if (shield == MM_SHIELD_DEKU)
                 {
-                    *dList = Player_CustomEquipment(
-                        (u32)kDListEmpty,
-                        comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU),
-                        CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+                    if (comboIsLinkAdult())
+                    {
+                        *dList = Player_CustomEquipment(DLIST_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_2);
+                        *dList = Player_OffsetHeldShield(play, *dList);
+                    }
+                    else
+                        *dList = Player_CustomEquipment((u32)kDListEmpty, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+
                     return FALSE;
                 }
 
                 if (shield == MM_SHIELD_HYLIAN)
                 {
+                    if (!comboIsLinkAdult())
+                    {
+                        *dList = Player_CustomEquipment(DLIST_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HYLIAN_ADULT), CUSTOM_OBJECT_EQ_SHIELD_HYLIAN_ADULT_1);
+                        return FALSE;
+                    }
+                    else
+                    {
+                        s32 result;
+                        result = sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
+                        *dList = Player_CustomEquipment(0, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HYLIAN_ADULT), CUSTOM_OBJECT_EQ_SHIELD_HYLIAN_ADULT_0);
+                        return result;
+                    }
+                }
+
+                if (shield == MM_SHIELD_MIRROR && comboIsLinkAdult())
+                {
                     s32 result;
                     result = sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
-                    *dList = Player_CustomEquipment(0, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_HYLIAN_ADULT), CUSTOM_OBJECT_EQ_SHIELD_HYLIAN_ADULT_0);
+                    if (*dList)
+                        *dList = Player_OffsetHeldShield(play, *dList);
                     return result;
                 }
             }
