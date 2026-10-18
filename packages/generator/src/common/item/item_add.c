@@ -1389,63 +1389,84 @@ static void addShieldHeroOotRaw(void)
 #endif
 }
 
+
+static void addSharedProgressiveShield(u8 stage)
+{
+    switch (stage)
+    {
+    case 1:
+        addShieldOotRaw(1, 1);
+        addShieldMmRaw(MM_SHIELD_DEKU, 1);
+        break;
+
+    case 2:
+        addShieldOotRaw(2, 1);
+        addShieldHeroOotRaw();
+
+        addShieldMmRaw(MM_SHIELD_HERO, 1);
+        addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
+        break;
+
+    case 3:
+        addShieldOotRaw(3, 0);
+        addShieldMmRaw(MM_SHIELD_MIRROR, 0);
+        break;
+
+    default:
+        break;
+    }
+}
+
 static int addItemShieldOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     u8 shield = param & 0xff;
     s32 progressive = !!(param & 0x100);
     s32 hero = !!(param & 0x200);
-    s32 advanceMm = sharedShieldAdvancesMm(progressive);
+    if (Config_Flag(CFG_SHARED_PROGRESSIVE_SHIELDS) && (progressive || gi == GI_OOT_SHIELD_MIRROR))
+    {
+        addSharedProgressiveShield(hero ? 2 : shield);
+        return 0;
+    }
     if (hero)
     {
+        if (!Config_Flag(CFG_OOT_HERO_SHIELD))
+            return 0;
+
         addShieldHeroOotRaw();
 
         if (Config_Flag(CFG_SHARED_HERO_SHIELD))
-        {
-            addShieldMmRaw(MM_SHIELD_HERO, advanceMm);
-            if (advanceMm && Config_Flag(CFG_MM_HYLIAN_SHIELD))
-                addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
-        }
+            addShieldMmRaw(MM_SHIELD_HERO, 0);
 
         return 0;
     }
-
     addShieldOotRaw(shield, progressive);
-
-    if (progressive && shield == 2 && Config_Flag(CFG_OOT_HERO_SHIELD))
+    if (progressive && shield == 2 &&
+        Config_Flag(CFG_OOT_HERO_SHIELD))
+    {
         addShieldHeroOotRaw();
-
+    }
     switch (shield)
     {
-        case 1:
-            if (Config_Flag(CFG_SHARED_DEKU_SHIELD))
-            {
-                addShieldMmRaw(
-                    MM_SHIELD_DEKU,
-                    advanceMm);
-            }
-            break;
+    case 1:
+        if (Config_Flag(CFG_SHARED_DEKU_SHIELD) && Config_Flag(CFG_MM_DEKU_SHIELD))
+            addShieldMmRaw(MM_SHIELD_DEKU, 0);
+        break;
 
-        case 2:
-            if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD) && advanceMm)
-            {
-                addShieldMmRaw(MM_SHIELD_HERO, 1);
+    case 2:
+        if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD) && Config_Flag(CFG_MM_HYLIAN_SHIELD))
+            addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
 
-                if (Config_Flag(CFG_MM_HYLIAN_SHIELD))
-                    addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
-            }
-            else
-            {
-                if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
-                    addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
-                if (progressive && Config_Flag(CFG_OOT_HERO_SHIELD) && Config_Flag(CFG_SHARED_HERO_SHIELD))
-                    addShieldMmRaw(MM_SHIELD_HERO, 0);
-            }
-            break;
+        if (progressive && Config_Flag(CFG_OOT_HERO_SHIELD) && Config_Flag(CFG_SHARED_HERO_SHIELD))
+            addShieldMmRaw(MM_SHIELD_HERO, 0);
+        break;
 
-        case 3:
-            if (Config_Flag(CFG_SHARED_MIRROR_SHIELD))
-                addShieldMmRaw(MM_SHIELD_MIRROR, 0);
-            break;
+    case 3:
+        if (Config_Flag(CFG_SHARED_MIRROR_SHIELD))
+            addShieldMmRaw(MM_SHIELD_MIRROR, 0);
+        break;
+
+    default:
+        break;
     }
 
     return 0;
@@ -1454,68 +1475,65 @@ static int addItemShieldOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemShieldMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     MmShieldId shield = (MmShieldId)(param & 0xff);
-    s32 progressive = !!(param >> 8);
-    s32 advanceOot = sharedShieldAdvancesOot(progressive);
-
-    if (shield == MM_SHIELD_DEKU && !Config_Flag(CFG_MM_DEKU_SHIELD))
-        return 0;
-
-    if (shield == MM_SHIELD_HERO && progressive)
+    s32 progressive = !!(param & 0x100);
+    if (Config_Flag(CFG_SHARED_PROGRESSIVE_SHIELDS) && (progressive || gi == GI_MM_SHIELD_MIRROR))
     {
-        addShieldMmRaw(MM_SHIELD_HERO, 1);
-
-        if (Config_Flag(CFG_MM_HYLIAN_SHIELD))
-            addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
-    }
-    else
-    {
-        addShieldMmRaw(shield, progressive);
-    }
-
-    switch (shield)
-    {
+        switch (shield)
+        {
         case MM_SHIELD_DEKU:
-            if (Config_Flag(CFG_SHARED_DEKU_SHIELD))
-            {
-                addShieldOotRaw(
-                    1,
-                    advanceOot);
-            }
+            addSharedProgressiveShield(1);
             break;
 
         case MM_SHIELD_HERO:
-            if (Config_Flag(CFG_SHARED_HERO_SHIELD) &&
-                advanceOot)
-            {
-                addShieldOotRaw(2, 1);
-                if (Config_Flag(CFG_OOT_HERO_SHIELD))
-                    addShieldHeroOotRaw();
-            }
-            else
-            {
-                if (Config_Flag(CFG_SHARED_HERO_SHIELD))
-                    addShieldHeroOotRaw();
-                if (progressive && Config_Flag(CFG_MM_HYLIAN_SHIELD) && Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
-                    addShieldOotRaw(2, 0);
-            }
-            break;
-
         case MM_SHIELD_HYLIAN:
-            if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
-            {
-                addShieldOotRaw(
-                    2,
-                    advanceOot);
-            }
+            addSharedProgressiveShield(2);
             break;
 
         case MM_SHIELD_MIRROR:
-            if (Config_Flag(CFG_SHARED_MIRROR_SHIELD))
-                addShieldOotRaw(3, 0);
+            addSharedProgressiveShield(3);
             break;
 
         default:
             break;
+        }
+
+        return 0;
+    }
+    if (shield == MM_SHIELD_DEKU && !Config_Flag(CFG_MM_DEKU_SHIELD))
+        return 0;
+
+    if (shield == MM_SHIELD_HYLIAN && !Config_Flag(CFG_MM_HYLIAN_SHIELD))
+        return 0;
+    addShieldMmRaw(shield, progressive);
+    if (progressive && shield == MM_SHIELD_HERO && Config_Flag(CFG_MM_HYLIAN_SHIELD))
+        addShieldMmRaw(MM_SHIELD_HYLIAN, 0);
+    switch (shield)
+    {
+    case MM_SHIELD_DEKU:
+        if (Config_Flag(CFG_SHARED_DEKU_SHIELD))
+            addShieldOotRaw(1, 0);
+        break;
+
+    case MM_SHIELD_HERO:
+        if (Config_Flag(CFG_SHARED_HERO_SHIELD) && Config_Flag(CFG_OOT_HERO_SHIELD))
+            addShieldHeroOotRaw();
+
+        if (progressive && Config_Flag(CFG_MM_HYLIAN_SHIELD) && Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
+            addShieldOotRaw(2, 0);
+        break;
+
+    case MM_SHIELD_HYLIAN:
+        if (Config_Flag(CFG_SHARED_HYLIAN_SHIELD))
+            addShieldOotRaw(2, 0);
+        break;
+
+    case MM_SHIELD_MIRROR:
+        if (Config_Flag(CFG_SHARED_MIRROR_SHIELD))
+            addShieldOotRaw(3, 0);
+        break;
+
+    default:
+        break;
     }
 
     return 0;

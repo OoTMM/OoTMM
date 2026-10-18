@@ -1803,13 +1803,18 @@ export const SETTINGS = [{
   name: 'OoT Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of the OoT Shields. If both OoT and Mm shield progression is on, the trees are combined.',
+  description: 'Alters the pickup behavior of the OoT Shields.',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields are removed from the item pool.' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku, Hylian, and Hero Shields are removed from the OoT item pool.' },
   ],
   default: 'separate',
-  cond: hasOoT,
+  cond: (s: any) =>
+      hasOoT(s) &&
+      !s.sharedDekuShield &&
+      !s.sharedHylianShield &&
+      !s.sharedHeroShield &&
+      !s.sharedMirrorShield,
 }, {
   key: 'progressiveSwordsOot',
   name: 'OoT Adult Swords',
@@ -1873,13 +1878,37 @@ export const SETTINGS = [{
   name: 'MM Shields',
   category: 'items.progressive',
   type: 'enum',
-  description: 'Alters the behavior of the MM Shields. If both OoT and Mm shield progression is on, the trees are combined.',
+  description: 'Alters the pickup behavior of the MM Shields.',
   values: [
     { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
-    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield (If turned on) -> Hero\'s Shield (and Hylian Shield if turned on) -> Mirror Shield. Other Hero\'s Shields are removed from the item pool.' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield (If turned on) -> Hero\'s Shield (and Hylian Shield if turned on) -> Mirror Shield. Other Deku, Hylian, and Hero Shields are removed from the MM item pool.' },
   ],
   default: 'separate',
-  cond: hasMM,
+  cond: (s: any) =>
+      hasMM(s) &&
+      !s.sharedDekuShield &&
+      !s.sharedHylianShield &&
+      !s.sharedHeroShield &&
+      !s.sharedMirrorShield,
+}, {
+  key: 'progressiveShieldsShared',
+  name: 'Shared Shields',
+  category: 'items.progressive',
+  type: 'enum',
+  description: 'Alters the pickup behavior of Shields.',
+  values: [
+    { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hero\'s Shield and Hylian Shield -> Mirror Shield. Other Deku, Hylian, and Hero Shields are removed from the item pool.' },
+  ],
+  default: 'separate',
+  cond: (s: any) =>
+      hasOoTMM(s) &&
+      (
+          s.sharedDekuShield &&
+          s.sharedHylianShield &&
+          s.sharedHeroShield &&
+          s.sharedMirrorShield
+      ),
 }, {
   key: 'progressiveGFSMm',
   name: 'MM Great Fairy Sword',
@@ -2327,8 +2356,7 @@ export const SETTINGS = [{
   description: "Adds the Hero's Shield in OoT as an alternate child shield in the Deku Shield slot.",
   default: false,
   cond: (s: any) =>
-      hasOoT(s) &&
-      s.progressiveShieldsOot !== 'progressive',
+      hasOoT(s),
 }, {
   key: 'dekuShieldMm',
   name: "Deku Shield (MM)",
@@ -3492,9 +3520,7 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) =>
       hasOoTMM(s) &&
-      s.heroShieldOot &&
-      s.progressiveShieldsOot === 'separate' &&
-      s.progressiveShieldsMm === 'separate',
+      s.heroShieldOot,
 }, {
   key: 'sharedSoulsEnemy',
   name: 'Shared Enemy Souls',

@@ -240,6 +240,27 @@ static s16 progressiveShieldMm(void)
     return GI_MM_SHIELD_MIRROR;
 }
 
+static s16 progressiveShieldShared(s32 fromMm)
+{
+    if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
+    {
+        return fromMm
+            ? GI_MM_PROGRESSIVE_SHIELD_DEKU
+            : GI_OOT_PROGRESSIVE_SHIELD_DEKU;
+    }
+
+    if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
+    {
+        return fromMm
+            ? GI_MM_PROGRESSIVE_SHIELD_HERO
+            : GI_OOT_PROGRESSIVE_SHIELD_HYLIAN;
+    }
+
+    return fromMm
+        ? GI_MM_SHIELD_MIRROR
+        : GI_OOT_SHIELD_MIRROR;
+}
+
 static s16 progressiveStrengthOot(void)
 {
     switch (gOotSave.info.inventory.upgrades.strength)
@@ -555,7 +576,9 @@ s16 Item_Progressive(s16 gi, int ovflags)
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
-        if (Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
+        if (Config_Flag(CFG_SHARED_PROGRESSIVE_SHIELDS))
+            gi = progressiveShieldShared(0);
+        else if (Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
             gi = progressiveShieldOot();
         break;
     /* Upgrades */
@@ -655,7 +678,9 @@ s16 Item_Progressive(s16 gi, int ovflags)
     case GI_MM_PROGRESSIVE_SHIELD_DEKU:
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
-        if (Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
+        if (Config_Flag(CFG_SHARED_PROGRESSIVE_SHIELDS))
+            gi = progressiveShieldShared(1);
+        else if (Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
             gi = progressiveShieldMm();
         break;
     case GI_MM_BOMB_BAG:
