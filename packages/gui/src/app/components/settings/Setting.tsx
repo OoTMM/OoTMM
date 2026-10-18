@@ -4,6 +4,7 @@ import { SETTINGS } from '@ootmm/generator';
 import { InputField, SelectField, CheckboxField, Select, Tooltip, Label } from '@/app/components/ui';
 import { xor } from 'lodash-es';
 import { useStore } from '@/app/store';
+import { explainUnavailable } from './SettingDependencies';
 
 const SET_OPTIONS = [
   { value: 'none', label: 'None' },
@@ -200,6 +201,9 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
   const cond = (data as any).cond;
   const isDisabled = !!cond && !cond(settings);
   const settingLabel = label ?? data.name;
+  const unavailableMessage = isDisabled
+      ? explainUnavailable(cond, settings)
+      : undefined;
 
   if (isDisabled && !showDisabled) {
     return null;
@@ -318,7 +322,7 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
     <div
       className={isDisabled ? 'opacity-50' : undefined}
       aria-disabled={isDisabled || undefined}
-      title={isDisabled ? 'Unavailable with the current settings' : undefined}
+      title={unavailableMessage}
     >
       <fieldset
         disabled={isDisabled}
