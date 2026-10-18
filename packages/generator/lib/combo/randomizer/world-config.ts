@@ -34,6 +34,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_HERO_SHIELD: settings.heroShieldOot,
     SHARED_HERO_SHIELD: settings.sharedHeroShield,
     MM_PROGRESSIVE_SHIELDS: settings.progressiveShieldsMm === 'progressive',
+    SHARED_PROGRESSIVE_SHIELDS: settings.progressiveShieldsShared === 'progressive',
     MM_PROGRESSIVE_LULLABY: settings.progressiveGoronLullabyMm === 'progressive',
     OOT_PROGRESSIVE_LULLABY: settings.progressiveGoronLullabyOot === 'progressive',
     DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',

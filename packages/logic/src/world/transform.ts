@@ -1852,43 +1852,55 @@ class LogicPassWorldTransform {
     }
 
     /* Handle progressive shields */
-    if (this.state.settings.progressiveShieldsOot === 'progressive') {
-      this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.OOT_SHIELD);
-      this.addItem(Items.OOT_SHIELD, 2);
+    if (settings.progressiveShieldsShared === 'progressive') {
+      this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.SHARED_SHIELD);
+      this.replaceItem(Items.MM_SHIELD_MIRROR, Items.SHARED_SHIELD);
       this.removeItem(Items.OOT_SHIELD_DEKU);
       this.removeItem(Items.OOT_SHIELD_HYLIAN);
       this.removeItem(Items.OOT_SHIELD_HERO);
-    } else {
-      if (this.state.settings.heroShieldOot) {
-        this.addItem(Items.OOT_SHIELD_HERO, 3);
-      }
-    }
-
-    if (settings.progressiveShieldsMm === 'progressive') {
-      this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
-      this.addItem(Items.MM_SHIELD);
+      this.removeItem(Items.MM_SHIELD_DEKU);
+      this.removeItem(Items.MM_SHIELD_HYLIAN);
       this.removeItem(Items.MM_SHIELD_HERO);
-      if (settings.dekuShieldMm) {
-        this.addItem(Items.MM_SHIELD);
-        this.removeItem(Items.MM_SHIELD_DEKU);
-      }
-      if (settings.hylianShieldMm) {
-        this.removeItem(Items.MM_SHIELD_HYLIAN);
+      this.removeItem(Items.OOT_SHIELD);
+      this.removeItem(Items.MM_SHIELD);
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        this.pool.set(makePlayerItem(Items.SHARED_SHIELD, i), 3);
       }
     } else {
-      if (settings.dekuShieldMm)
-        this.addItem(Items.MM_SHIELD_DEKU, 3);
-      if (settings.hylianShieldMm)
-        this.addItem(Items.MM_SHIELD_HYLIAN, 3);
-    }
 
-    /* Handle shared progressive shields */
-    if (settings.progressiveShieldsOot === 'progressive' && settings.progressiveShieldsMm === 'progressive' &&
-        settings.sharedDekuShield && settings.sharedHeroShield && settings.sharedHylianShield && settings.sharedMirrorShield
-    ) {
-      this.replaceItem(Items.OOT_SHIELD, Items.SHARED_SHIELD);
-      this.replaceItem(Items.MM_SHIELD, Items.SHARED_SHIELD);
-      this.removeItem(Items.SHARED_SHIELD, 3);
+      /* OoT progressive shields */
+      if (settings.progressiveShieldsOot === 'progressive') {
+        this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.OOT_SHIELD);
+        this.addItem(Items.OOT_SHIELD, 2);
+        this.removeItem(Items.OOT_SHIELD_DEKU);
+        this.removeItem(Items.OOT_SHIELD_HYLIAN);
+        this.removeItem(Items.OOT_SHIELD_HERO);
+      } else {
+        if (settings.heroShieldOot) {
+          this.addItem(Items.OOT_SHIELD_HERO, 3);
+        }
+      }
+
+      /* MM progressive shields */
+      if (settings.progressiveShieldsMm === 'progressive') {
+        this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
+        this.addItem(Items.MM_SHIELD);
+        this.removeItem(Items.MM_SHIELD_HERO);
+        if (settings.dekuShieldMm) {
+          this.addItem(Items.MM_SHIELD);
+          this.removeItem(Items.MM_SHIELD_DEKU);
+        }
+        if (settings.hylianShieldMm) {
+          this.removeItem(Items.MM_SHIELD_HYLIAN);
+        }
+      } else {
+        if (settings.dekuShieldMm) {
+          this.addItem(Items.MM_SHIELD_DEKU, 3);
+        }
+        if (settings.hylianShieldMm) {
+          this.addItem(Items.MM_SHIELD_HYLIAN, 3);
+        }
+      }
     }
 
     const ootChildProgressive = settings.sharedChildSwords
