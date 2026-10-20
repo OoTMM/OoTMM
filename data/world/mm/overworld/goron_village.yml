@@ -99,7 +99,7 @@
     "Goron Shop": "true"
   events:
     GORON_CHANDELIER_LIT: "is_winter && (can_use_fire_arrows || (can_use_din && has_sticks) || (song_event(0x0a) && soul_goron_child))"
-    GORON_FOOD: "is_winter && goron_fast_roll && event(goron_chandelier_lit)"
+    GORON_FOOD: "is_winter && goron_fast_roll && goron_chandelier_lit"
     STICKS: "true"
     MAGIC: "true"
   locations:
