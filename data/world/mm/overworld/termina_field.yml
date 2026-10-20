@@ -27,6 +27,7 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FAIRY: "gossip_fairy"
+    NORTH_ICICLES_CLEARED: "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er || can_use_din"
   exits:
     "GLOBAL": "true"
     "Clock Town South": "true"
@@ -34,7 +35,7 @@
     "Clock Town East": "true"
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
-    "Behind Large Icicles": "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er || short_hook_anywhere || can_use_din"
+    "Behind Large Icicles": "north_icicles_cleared  || short_hook_anywhere"
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Road to Ikana Front": "true"
@@ -690,9 +691,11 @@
 
 "Behind Large Icicles":
   region: TERMINA_FIELD
+  events:
+    NORTH_ICICLES_CLEARED: "has_arrows || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn || has_hot_water_er || can_use_din"
   exits:
     "GLOBAL": "true"
-    "Termina Field": "has_arrows || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn || has_hot_water_er || short_hook_anywhere || can_use_din"
+    "Termina Field": "north_icicles_cleared  || short_hook_anywhere"
     "Mountain Village Path Lower": "true"
 
 "Great Bay Fence":
