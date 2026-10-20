@@ -261,14 +261,8 @@ u8 OotChildSword_GetEquippedVariant(void)
 
 u8 OotChildSword_GetDamageVariant(void)
 {
-    Player* link;
     u8 variant;
 
-    if (!gPlay)
-        return 0;
-    link = GET_PLAYER(gPlay);
-    if (!link || link->heldItemAction != PLAYER_IA_SWORD_KOKIRI)
-        return 0;
     variant = OotChildSword_GetEquippedVariant();
     return variant < 3 ? variant : 0;
 }
