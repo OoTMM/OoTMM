@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/age.h>
+#include <combo/item.h>
 
 s32 MsgEvent_CheckStrength3(Actor* actor, PlayState* play, u8** script, MsgScriptCallback callback, s32* endScript)
 {
@@ -24,11 +26,7 @@ typedef struct
 
 static int Koume_CheckBowAgeReq(void)
 {
-    if (Config_Flag(CFG_MM_AGE_REQ_ADULT_BOW))
-        return comboIsLinkAdult();
-    if (Config_Flag(CFG_MM_AGE_REQ_CHILD_BOW))
-        return !comboIsLinkAdult();
-    return 1;
+    return comboCheckItemAgeReqMm(ITEM_MM_BOW);
 }
 
 static void Koume_ShowWrongBowAge(PlayState* play)

@@ -63,12 +63,39 @@ static void EnGm_GiveItemHandler(Actor* this, PlayState* play)
 
 PATCH_FUNC(0x80aa0020, EnGm_GiveItemHandler);
 
+#define PRICE (gComboConfig.prices[PRICES_OOT_MERCHANTS + 0x00])
+#define PRICE_KEG 50
+#define PRICE_KNIFE 200
+
+static int EnGm_HasBrokenGiantsKnife(void)
+{
+    return
+        (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE) &&
+        (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE_BROKEN);
+}
+
+static int EnGm_CanTalkKnife(void)
+{
+    return gSave.age != AGE_CHILD || Config_Flag(CFG_OOT_AGELESS_SWORDS);
+}
+
+static int EnGm_CanTalkKeg(void)
+{
+    return gSave.age != AGE_CHILD || Config_Flag(CFG_OOT_AGELESS_STRENGTH);
+}
+
 int EnGm_GetState(void)
 {
-    if (gSave.age == AGE_CHILD)
+    if (!BITMAP16_GET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON))
+        return gSave.age == AGE_CHILD ? 0 : 1;
+
+    if (EnGm_HasBrokenGiantsKnife() && EnGm_CanTalkKnife())
+        return 2;
+
+    if (!EnGm_CanTalkKeg())
         return 0;
 
-    if (BITMAP16_GET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON) && !Config_Flag(CFG_OOT_POWDER_KEG))
+    if (!Config_Flag(CFG_OOT_POWDER_KEG))
         return 3;
 
     return 1;
@@ -256,8 +283,129 @@ static void textKegSaleConversation(Actor* this, PlayState* play)
     }
 }
 
+static void EnGm_KegChoiceHandler(Actor* this, PlayState* play)
+{
+    if (Message_GetState(&play->msgCtx) != TEXT_STATE_CHOICE)
+        return;
+
+    if (!Message_ShouldAdvance(play))
+        return;
+
+    switch (play->msgCtx.choiceIndex)
+    {
+    case 0: /* Yes */
+        SET_HANDLER(this, EnGm_GiveItemHandler);
+        break;
+
+    case 1: /* No */
+        Message_ContinueTextbox(play, 0x3050);
+        EnGm_Reset(this, 0x80a9fe98);
+        break;
+    }
+}
+
+static void EnGm_StartKegAfterKnife(Actor* this, PlayState* play)
+{
+    if (!Config_Flag(CFG_OOT_POWDER_KEG) || !EnGm_CanTalkKeg())
+    {
+        EnGm_Reset(this, 0x80a9fd5c);
+        return;
+    }
+
+    SET_HANDLER(this, EnGm_KegChoiceHandler);
+    this->messageId = 0x304f;
+    Message_ContinueTextbox(play, 0x304f);
+    textKegSaleConversation(this, play);
+}
+
+static void EnGm_KnifeResultHandler(Actor* this, PlayState* play)
+{
+    u8 state;
+
+    state = Message_GetState(&play->msgCtx);
+
+    if (state != TEXT_STATE_DONE && state != TEXT_STATE_EVENT)
+        return;
+
+    if (!Message_ShouldAdvance(play))
+        return;
+
+    if (!Config_Flag(CFG_OOT_POWDER_KEG) || !EnGm_CanTalkKeg())
+    {
+        if (state == TEXT_STATE_EVENT)
+        {
+            play->msgCtx.msgMode = MSGMODE_TEXT_CLOSING;
+            play->msgCtx.stateTimer = 4;
+        }
+
+        EnGm_Reset(this, 0x80a9fd5c);
+        return;
+    }
+
+    EnGm_StartKegAfterKnife(this, play);
+}
+
+static void EnGm_RepairGiantsKnife(Actor* this, PlayState* play)
+{
+    gOotSave.info.playerData.swordHealth = gComboConfig.giantsKnifeDurabilityOot;
+    gOotSave.info.inventory.equipment.swords &= ~EQ_OOT_SWORD_KNIFE_BROKEN;
+    if (gOotSave.info.equips.buttonItems[0] == ITEM_OOT_SWORD_KNIFE_BROKEN)
+    {
+        gOotSave.info.equips.buttonItems[0] = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+        Interface_LoadItemIconImpl(play, 0);
+    }
+    if (gOotSave.info.childEquips.buttonItems[0] == ITEM_OOT_SWORD_KNIFE_BROKEN)
+        gOotSave.info.childEquips.buttonItems[0] = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+
+    if (gOotSave.info.adultEquips.buttonItems[0] == ITEM_OOT_SWORD_KNIFE_BROKEN)
+        gOotSave.info.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+}
+
+static void EnGm_KnifeChoiceHandler(Actor* this, PlayState* play)
+{
+    if (Message_GetState(&play->msgCtx) != TEXT_STATE_CHOICE)
+        return;
+
+    if (!Message_ShouldAdvance(play))
+        return;
+
+    switch (play->msgCtx.choiceIndex)
+    {
+    case 0: /* Yes */
+        if (gSave.info.playerData.rupees < PRICE_KNIFE)
+        {
+            Message_ContinueTextbox(play, 0x00c8);
+            SET_HANDLER(this, EnGm_KnifeResultHandler);
+        }
+        else
+        {
+            AddRupeesRaw(-PRICE_KNIFE);
+            EnGm_RepairGiantsKnife(this, play);
+            Message_ContinueTextbox(play, 0x3050);
+            SET_HANDLER(this, EnGm_KnifeResultHandler);
+        }
+        break;
+
+    case 1: /* No */
+        Message_ContinueTextbox(play, 0x3050);
+        SET_HANDLER(this, EnGm_KnifeResultHandler);
+        break;
+    }
+}
+
 void EnGm_TalkedTo(Actor* this, PlayState* play)
 {
+    if (this->messageId == 0x304e)
+    {
+        if (BITMAP16_GET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON) &&
+            EnGm_HasBrokenGiantsKnife())
+        {
+            SET_HANDLER(this, EnGm_KnifeChoiceHandler);
+        }
+
+        return;
+    }
+
     if (this->messageId == 0x304f)
     {
         if (BITMAP16_GET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON))

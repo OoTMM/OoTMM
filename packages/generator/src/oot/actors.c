@@ -468,62 +468,6 @@ static int shouldActorIgnorePlayer(Actor *this, Player *link)
     }
 }
 
-static int GetDamage(DamageTable *tbl, int type)
-{
-    return tbl->attack[type] & 0xf;
-}
-
-static int GetDamageEffect(DamageTable *tbl, int type)
-{
-    return tbl->attack[type] >> 4;
-}
-
-static void SetDamage(DamageTable *tbl, int type, int value)
-{
-    tbl->attack[type] = (tbl->attack[type] & 0xf0) | (value & 0xf);
-}
-
-static void SetDamageEffect(DamageTable *tbl, int type, int value)
-{
-    tbl->attack[type] = (tbl->attack[type] & 0xf) | (value << 4);
-}
-
-static void Actor_UpdateDamageTable(Actor *this)
-{
-    DamageTable *tbl;
-    int dmg;
-    int dmgEffectKokiri;
-    int dmgEffectGiant;
-
-    tbl = this->colChkInfo.damageTable;
-    if (!tbl)
-        return;
-    if (GetDamage(tbl, 10) != 4)
-        return; /* Weird table, better not touch */
-
-    dmgEffectKokiri = GetDamageEffect(tbl, 8);
-    dmgEffectGiant = GetDamageEffect(tbl, 10);
-
-    if (GetDamage(tbl, 8) == 0 && !gSharedCustomSave.extraSwordsOot)
-        return;
-    dmg = 1 + gSharedCustomSave.extraSwordsOot;
-
-    /* Dead hand takes MS-level damage from KS */
-    if (dmg < 2 && (this->id == ACTOR_EN_DH || this->id == ACTOR_EN_DHA))
-        dmg = 2;
-
-    SetDamage(tbl, 8, dmg);
-    SetDamage(tbl, 22, dmg);
-    SetDamage(tbl, 25, dmg * 2);
-
-    if (gSharedCustomSave.extraSwordsOot && (dmgEffectKokiri != dmgEffectGiant))
-    {
-        SetDamageEffect(tbl, 8, dmgEffectGiant);
-        SetDamageEffect(tbl, 22, dmgEffectGiant);
-        SetDamageEffect(tbl, 25, dmgEffectGiant);
-    }
-}
-
 void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
 {
     int ignorePlayer;
@@ -532,7 +476,6 @@ void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
     f32 xzDistToPlayer;
     f32 yDistanceFromLink;
 
-    Actor_UpdateDamageTable(this);
     ignorePlayer = shouldActorIgnorePlayer(this, GET_PLAYER(play));
     if (ignorePlayer)
     {

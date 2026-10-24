@@ -58,6 +58,10 @@ typedef struct
     u8              bombchuBehaviorMm;
     u8              songEventsOot[0x12];
     u8              songEventsMm[0xd];
+    u8              giantsKnifeDurabilityOot;
+    u8              giantsKnifeDurabilityMm;
+    u8              mmStrengthAgeRequirement;
+    u8              mmAgeRequirements[0x40];
 }
 ComboConfig;
 
