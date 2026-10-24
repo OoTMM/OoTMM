@@ -620,7 +620,7 @@ void hookPlay_Init(PlayState* play)
         }
     }
 
-    if (gSave.entrance == ENTR_MM_DEKU_PALACE_THRONE && Config_Flag(CFG_ER_INDOORS) && gSave.info.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU)
+    if (gSave.entrance == ENTR_MM_DEKU_PALACE_THRONE && Config_Flag(CFG_ER_INDOORS) && gSave.info.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU  && comboCheckItemAgeReqMm(ITEM_MM_MASK_DEKU))
     {
         /* Force the player to spawn as deku */
         gSave.playerForm = MM_PLAYER_FORM_DEKU;
