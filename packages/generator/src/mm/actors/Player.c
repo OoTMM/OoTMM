@@ -574,7 +574,7 @@ static void Interface_UpdateButtons_Horse(PlayState* play)
     mounted = !!(player->stateFlags1 & PLAYER_STATE1_MOUNTED);
     if (sHorseBowManaged)
     {
-        gSaveContext.buttonStatus[EQUIP_SLOT_B] = sHorsePreviousBItem;
+        gSaveContext.buttonStatus[EQUIP_SLOT_B] = (mounted && sHorsePreviousBItem == ITEM_NONE) ? 0 : sHorsePreviousBItem;
         if (*bItem == ITEM_NONE)
             *bItem = ITEM_MM_BOW;
     }
