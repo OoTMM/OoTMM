@@ -45,11 +45,11 @@
     "Shadow Temple Main": "true"
     "Shadow Temple Boat": "(climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY)) || event(SHADOW_SHORTCUT)"
   locations:
-    "Shadow Temple SR Scythe 1": "true"
-    "Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
-    "Shadow Temple SR Scythe 3": "true"
-    "Shadow Temple SR Scythe 4": "true"
-    "Shadow Temple SR Scythe 5": "true"
+    "Shadow Temple SR Scythe 1": "true" # Floor, far side of scythe
+    "Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere" # You can get this with nothing as adult with a good jump
+    "Shadow Temple SR Scythe 3": "true" # right alcove
+    "Shadow Temple SR Scythe 4": "true" # left alcove
+    "Shadow Temple SR Scythe 5": "true" # floor, near door
     "Shadow Temple Silver Rupees": "silver_rupees_shadow_scythe"
 
 "Shadow Temple Open":

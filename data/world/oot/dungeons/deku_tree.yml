@@ -9,7 +9,7 @@
   dungeon: DT
   exits:
     "Deku Tree Slingshot Room": "soul_deku_scrub && (has_shield_for_scrubs || can_hammer)"
-    "Deku Tree Basement": "has_fire || has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_sticks"
+    "Deku Tree Basement": "get_past_skulltulas"
   events:
     STICKS: "can_kill_baba_sticks"
     NUTS: "can_kill_baba_nuts"
@@ -26,7 +26,7 @@
     "Deku Tree Grass Compass Room 1": "can_cut_grass"
     "Deku Tree Grass Compass Room 2": "can_cut_grass"
     "Deku Tree Heart Main Room Lower": "true"
-    "Deku Tree Heart Main Room Upper": "has_fire || has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_sticks"
+    "Deku Tree Heart Main Room Upper": "get_past_skulltulas"
 
 "Deku Tree Slingshot Room":
   dungeon: DT
