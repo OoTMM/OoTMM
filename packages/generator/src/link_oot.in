@@ -317,6 +317,7 @@ Matrix_RotateYF = 0x800aab94;
 Matrix_RotateZF = 0x800aad4c;
 Matrix_Translate = 0x800aa7f4;
 Matrix_Scale = 0x800aa8fc;
+guTranslate = 0x800d3338;
 
 SpawnSomeDust = 0x80026308;
 

@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
 import { SETTINGS } from '@ootmm/generator';
 
-import { InputField, SelectField, CheckboxField, Select } from '@/app/components/ui';
+import { InputField, SelectField, CheckboxField, Select, Tooltip, Label } from '@/app/components/ui';
 import { xor } from 'lodash-es';
 import { useStore } from '@/app/store';
+import { explainUnavailable } from './SettingDependencies';
 
 const SET_OPTIONS = [
   { value: 'none', label: 'None' },
@@ -200,6 +201,9 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
   const cond = (data as any).cond;
   const isDisabled = !!cond && !cond(settings);
   const settingLabel = label ?? data.name;
+  const unavailableMessage = isDisabled
+      ? explainUnavailable(cond, settings)
+      : undefined;
 
   if (isDisabled && !showDisabled) {
     return null;
@@ -245,16 +249,68 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
       maxValue = typeof max === 'function' ? max(settings) : max;
     }
 
-    content = (
-      <InputField
-        type="number"
-        label={settingLabel}
-        tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        value={settings[data.key].toString()}
-        onChange={(v) => patchSettings({ [data.key]: Number(v) })}
-        min={minValue}
-        max={maxValue}
-      />
+    const sliderLabels = (data as any).sliderLabels as
+        Record<number, string> | undefined;
+
+    const formatSliderValue = (value: number) =>
+        sliderLabels?.[value] ?? value.toString();
+
+
+    content = (data as any).slider ? (
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between gap-2">
+        <span className="flex items-center gap-2">
+        <Label htmlFor={`slider-${data.key}`}>
+          {settingLabel}
+        </Label>
+
+        {(data as any).description && (
+            <Tooltip>
+              <SettingTooltip setting={data.key} />
+            </Tooltip>
+        )}
+      </span>
+
+        <span className="font-bold">
+          {formatSliderValue(Number(settings[data.key]))}
+        </span>
+          </div>
+
+          <input
+              id={`slider-${data.key}`}
+              type="range"
+              min={minValue ?? 0}
+              max={maxValue ?? 100}
+              step={1}
+              value={Number(settings[data.key])}
+              onChange={(e) =>
+                  patchSettings({
+                    [data.key]: Number(e.currentTarget.value),
+                  })
+              }
+              className="w-full cursor-pointer"
+          />
+
+          <div className="flex justify-between text-xs opacity-60">
+            <span>{formatSliderValue(minValue ?? 0)}</span>
+            <span>{formatSliderValue(maxValue ?? 100)}</span>
+          </div>
+        </div>
+    ) : (
+        <InputField
+            type="number"
+            label={settingLabel}
+            tooltip={
+                (data as any).description &&
+                <SettingTooltip setting={data.key} />
+            }
+            value={settings[data.key].toString()}
+            onChange={(v) =>
+                patchSettings({ [data.key]: Number(v) })
+            }
+            min={minValue}
+            max={maxValue}
+        />
     );
     break;
   }
@@ -266,7 +322,7 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
     <div
       className={isDisabled ? 'opacity-50' : undefined}
       aria-disabled={isDisabled || undefined}
-      title={isDisabled ? 'Unavailable with the current settings' : undefined}
+      title={unavailableMessage}
     >
       <fieldset
         disabled={isDisabled}

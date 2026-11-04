@@ -168,8 +168,8 @@
     </actor>
   </scene>
   <scene id="BLACKSMITH">
-    <npc location="Blacksmith Razor Blade" npc="SWORD_RAZOR" item="SWORD" hint="BLACKSMITH"/>
-    <npc location="Blacksmith Gilded Sword" npc="SWORD_GILDED" item="SWORD" hint="BLACKSMITH"/>
+    <npc location="Blacksmith Razor Blade" npc="SWORD_RAZOR" item="SWORD_RAZOR" hint="BLACKSMITH"/>
+    <npc location="Blacksmith Gilded Sword" npc="SWORD_GILDED" item="SWORD_GILDED" hint="BLACKSMITH"/>
     <actor actor="0x4">
       <xflag type="pot" location="Blacksmith Potted Plant 1 Pot" slice="0" item="NOTHING"/>
       <xflag type="grass" location="Blacksmith Potted Plant 1 Grass" slice="1" item="RECOVERY_HEART"/>
