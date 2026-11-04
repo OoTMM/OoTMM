@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/item.h>
 #include <combo/player.h>
 
@@ -89,11 +90,7 @@ static int EnSyatekiMan_HasBow(void)
 
 static int EnSyatekiMan_CheckBowAgeReq(void)
 {
-    if (Config_Flag(CFG_MM_AGE_REQ_ADULT_BOW))
-        return comboIsLinkAdult();
-    if (Config_Flag(CFG_MM_AGE_REQ_CHILD_BOW))
-        return !comboIsLinkAdult();
-    return 1;
+    return comboCheckItemAgeReqMm(ITEM_MM_BOW);
 }
 
 static int EnSyatekiMan_WrongBowAge(void)

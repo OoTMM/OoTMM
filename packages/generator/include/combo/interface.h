@@ -14,6 +14,8 @@ void Interface_SetSubTimerToFinalSecond(PlayState* play);
 void Interface_NewDay(PlayState* play, int day);
 void Interface_SetHudVisibility(u16 hudVisibility);
 void Interface_SkipMoonCrash(PlayState* play);
+void Rupees_ChangeBy(s16 rupeeChange);
+
 #endif
 
 typedef enum {

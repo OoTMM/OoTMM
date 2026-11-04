@@ -42,28 +42,28 @@ const ALL_LOCATIONS_AGE_RULES: readonly AllLocationsAgeRule[] = [
         id: 'greatBayCoastBeanHp',
         label: 'Great Bay Coast HP',
         reliefChildSettings: [
-            'mmAgeReqChildMagicBean',
+            'mmAgeReqMagicBean',
         ],
         when: settings => settings.hookshotAnywhereMm !== 'logical',
         requirement: all(
-            req('mmAgeReqChildMagicBean'),
-            req('mmAgeReqChildHookshot'),
+            req('mmAgeReqMagicBean'),
+            req('mmAgeReqHookshot'),
         ),
     },
     {
         id: 'snowheadStrayFairies',
         label: 'Snowhead Stray Fairies',
         reliefChildSettings: [
-            'mmAgeReqChildMaskGreatFairy',
+            'mmAgeReqMaskGreatFairy',
         ],
         requirement: all(
-            req('mmAgeReqChildMaskGreatFairy'),
-            req('mmAgeReqChildLensOfTruth'),
+            req('mmAgeReqMaskGreatFairy'),
+            req('mmAgeReqLensOfTruth'),
             any(
-                req('mmAgeReqChildBow'),
+                req('mmAgeReqBow'),
                 all(
-                    req('mmAgeReqChildHookshot'),
-                    req('mmAgeReqChildHookshotShort'),
+                    req('mmAgeReqHookshot'),
+                    req('mmAgeReqHookshotShort'),
                 ),
             ),
         ),
@@ -72,31 +72,23 @@ const ALL_LOCATIONS_AGE_RULES: readonly AllLocationsAgeRule[] = [
         id: 'transformationMasks',
         label: 'Transformation Masks',
         reliefChildSettings: [
-            'mmAgeReqChildMaskDeku',
-            'mmAgeReqChildMaskGoron',
-            'mmAgeReqChildMaskZora',
+            'mmAgeReqMaskDeku',
+            'mmAgeReqMaskGoron',
+            'mmAgeReqMaskZora',
         ],
         requirement: all(
-            req('mmAgeReqChildMaskDeku'),
-            req('mmAgeReqChildMaskGoron'),
-            req('mmAgeReqChildMaskZora'),
-            req('mmAgeReqChildBow'),
-            req('mmAgeReqChildArrowFire'),
-            req('mmAgeReqChildArrowIce'),
-            req('mmAgeReqChildArrowLight'),
-            req('mmAgeReqChildHookshot'),
-            req('mmAgeReqChildHookshotShort'),
+            req('mmAgeReqMaskDeku'),
+            req('mmAgeReqMaskGoron'),
+            req('mmAgeReqMaskZora'),
+            req('mmAgeReqBow'),
+            req('mmAgeReqArrowFire'),
+            req('mmAgeReqArrowIce'),
+            req('mmAgeReqArrowLight'),
+            req('mmAgeReqHookshot'),
+            req('mmAgeReqHookshotShort'),
         ),
     },
 ];
-
-function itemSetting(item: AgeReqItem, side: AgeSide) {
-    return side === 'child' ? item.childSetting : item.adultSetting;
-}
-
-function oppositeSetting(item: AgeReqItem, side: AgeSide) {
-    return side === 'child' ? item.adultSetting : item.childSetting;
-}
 
 function isAdultMaskEnabled(settings: any) {
     return Boolean(settings.adultMaskMm);
@@ -180,7 +172,7 @@ const ALL_LOCATIONS_COUPLED_SETTINGS = (() => {
 })();
 
 function itemParticipatesInAllLocationsRule(item: AgeReqItem) {
-    return ALL_LOCATIONS_COUPLED_SETTINGS.has(item.childSetting);
+    return ALL_LOCATIONS_COUPLED_SETTINGS.has(item.setting);
 }
 
 function itemHasCoreAgeCoupling(item: AgeReqItem) {
@@ -210,11 +202,11 @@ function fixedSettingSets(
     adultItems: readonly AgeReqItem[],
 ) {
     const childLockedSettings = new Set<string>(
-        childItems.map(item => item.childSetting),
+        childItems.map(item => item.setting),
     );
 
     const adultLockedSettings = new Set<string>(
-        adultItems.map(item => item.childSetting),
+        adultItems.map(item => item.setting),
     );
 
     return {
@@ -234,7 +226,7 @@ function conflictingAllLocationsRules(
     }
 
     const availableSettings = new Set<string>(
-        poolItems.map(item => item.childSetting),
+        poolItems.map(item => item.setting),
     );
 
     const {
@@ -269,7 +261,7 @@ function wouldBreakAllLocationsRule(
     }
 
     const availableSettings = new Set<string>(
-        poolItems.map(poolItem => poolItem.childSetting),
+        poolItems.map(poolItem => poolItem.setting),
     );
 
     const {
@@ -277,13 +269,13 @@ function wouldBreakAllLocationsRule(
         adultLockedSettings,
     } = fixedSettingSets(childItems, adultItems);
 
-    childLockedSettings.delete(item.childSetting);
-    adultLockedSettings.delete(item.childSetting);
+    childLockedSettings.delete(item.setting);
+    adultLockedSettings.delete(item.setting);
 
     if (side === 'child') {
-        childLockedSettings.add(item.childSetting);
+        childLockedSettings.add(item.setting);
     } else {
-        adultLockedSettings.add(item.childSetting);
+        adultLockedSettings.add(item.setting);
     }
 
     return ALL_LOCATIONS_AGE_RULES.some(rule => {
@@ -390,14 +382,14 @@ export function MmAgeRequirements() {
     const childItems = useMemo(() => {
         return poolItems.filter(item =>
             !randomItemIds.has(item.id) &&
-            Boolean((settings as any)[item.childSetting])
+            (settings as any)[item.setting] === 'child'
         );
     }, [poolItems, randomItemIds, settings]);
 
     const adultItems = useMemo(() => {
         return poolItems.filter(item =>
             !randomItemIds.has(item.id) &&
-            Boolean((settings as any)[item.adultSetting])
+            (settings as any)[item.setting] === 'adult'
         );
     }, [poolItems, randomItemIds, settings]);
 
@@ -451,12 +443,8 @@ export function MmAgeRequirements() {
                 continue;
             }
 
-            if (Boolean((settings as any)[item.childSetting])) {
-                patch[item.childSetting] = false;
-            }
-
-            if (Boolean((settings as any)[item.adultSetting])) {
-                patch[item.adultSetting] = false;
+            if ((settings as any)[item.setting] !== 'none') {
+                patch[item.setting] = 'none';
             }
         }
 
@@ -513,7 +501,7 @@ export function MmAgeRequirements() {
                     );
 
                 if (hasConflict && !powderKegSplitAllowed) {
-                    patch[item.childSetting] = false;
+                    patch[item.setting] = 'none';
                 }
             }
 
@@ -535,7 +523,7 @@ export function MmAgeRequirements() {
                     );
 
                 if (hasConflict && !powderKegSplitAllowed) {
-                    patch[item.adultSetting] = false;
+                    patch[item.setting] = 'none';
                 }
             }
 
@@ -549,19 +537,15 @@ export function MmAgeRequirements() {
             for (const rule of conflicts) {
                 for (const reliefChildSetting of rule.reliefChildSettings) {
                     const reliefItem = poolItems.find(
-                        item => item.childSetting === reliefChildSetting,
+                        item => item.setting === reliefChildSetting,
                     );
 
                     if (!reliefItem) {
                         continue;
                     }
 
-                    if (Boolean((settings as any)[reliefItem.childSetting])) {
-                        patch[reliefItem.childSetting] = false;
-                    }
-
-                    if (Boolean((settings as any)[reliefItem.adultSetting])) {
-                        patch[reliefItem.adultSetting] = false;
+                    if ((settings as any)[reliefItem.setting] !== 'none') {
+                        patch[reliefItem.setting] = 'none';
                     }
                 }
             }
@@ -627,8 +611,7 @@ export function MmAgeRequirements() {
             .filter(id => id !== item.id);
 
         const patch: Record<string, any> = {
-            [itemSetting(item, side)]: true,
-            [oppositeSetting(item, side)]: false,
+            [item.setting]: side,
             mmAgeReqRandom: {
                 type: 'specific',
                 values: randomValues,
@@ -639,8 +622,9 @@ export function MmAgeRequirements() {
             for (const dependentItemId of conflictingDependentItems(item.id)) {
                 const dependentItem = poolItems.find(x => x.id === dependentItemId);
 
-                if (dependentItem) {
-                    patch[itemSetting(dependentItem, side === 'child' ? 'adult' : 'child')] = false;
+                if (dependentItem &&
+                    (settings as any)[dependentItem.setting] === (side === 'child' ? 'adult' : 'child')) {
+                    patch[dependentItem.setting] = 'none';
                 }
             }
         }
@@ -667,8 +651,7 @@ export function MmAgeRequirements() {
         values.add(item.id);
 
         patchSettings({
-            [item.childSetting]: false,
-            [item.adultSetting]: false,
+            [item.setting]: 'none',
             mmAgeReqRandom: {
                 type: 'specific',
                 values: [...values],
@@ -676,9 +659,9 @@ export function MmAgeRequirements() {
         } as any);
     }, [patchSettings, poolItems, settings]);
 
-    const removeItem = useCallback((side: AgeSide, item: AgeReqItem) => {
+    const removeItem = useCallback((_side: AgeSide, item: AgeReqItem) => {
         patchSettings({
-            [itemSetting(item, side)]: false,
+            [item.setting]: 'none',
         } as any);
     }, [patchSettings]);
 
@@ -687,8 +670,7 @@ export function MmAgeRequirements() {
             .filter(id => id !== item.id);
 
         patchSettings({
-            [item.childSetting]: false,
-            [item.adultSetting]: false,
+            [item.setting]: 'none',
             mmAgeReqRandom: {
                 type: 'specific',
                 values,
@@ -700,8 +682,7 @@ export function MmAgeRequirements() {
         const patch: Record<string, any> = {};
 
         for (const item of MM_AGE_REQ_ITEMS) {
-            patch[item.childSetting] = false;
-            patch[item.adultSetting] = false;
+            patch[item.setting] = 'none';
         }
 
         patch.mmAgeReqRandom = {

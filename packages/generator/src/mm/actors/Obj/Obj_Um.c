@@ -1,17 +1,11 @@
 #include <combo.h>
-#include <combo/player.h>
+#include <combo/age.h>
 
 static u8 sObjUmWrongBowAgeText;
 
 static int ObjUm_CheckBowAgeReq(void)
 {
-    if (Config_Flag(CFG_MM_AGE_REQ_ADULT_BOW))
-        return comboIsLinkAdult();
-
-    if (Config_Flag(CFG_MM_AGE_REQ_CHILD_BOW))
-        return !comboIsLinkAdult();
-
-    return 1;
+    return comboCheckItemAgeReqMm(ITEM_MM_BOW);
 }
 
 static void ObjUm_ShowWrongBowAge(PlayState* play)

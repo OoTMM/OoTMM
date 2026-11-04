@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/item.h>
 #include <combo/player.h>
 
@@ -43,15 +44,6 @@ void EnFu_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 PATCH_CALL(0x809635cc, EnFu_GiveItem);
 PATCH_CALL(0x809635ec, EnFu_GiveItem);
 
-static int EnFu_CheckAgeReq(int adultFlag, int childFlag)
-{
-    if (Config_Flag(adultFlag))
-        return comboIsLinkAdult();
-    if (Config_Flag(childFlag))
-        return !comboIsLinkAdult();
-    return 1;
-}
-
 static int EnFu_CheckCurrentGameAgeReq(PlayState* play)
 {
 
@@ -60,23 +52,14 @@ static int EnFu_CheckCurrentGameAgeReq(PlayState* play)
     switch (CURRENT_DAY)
     {
     case 1:
-        return EnFu_CheckAgeReq(
-            CFG_MM_AGE_REQ_ADULT_BOMBCHU,
-            CFG_MM_AGE_REQ_CHILD_BOMBCHU
-        );
+        return comboCheckItemAgeReqMm(ITEM_MM_BOMBCHU);
     case 2:
-        return EnFu_CheckAgeReq(
-            CFG_MM_AGE_REQ_ADULT_BOMB,
-            CFG_MM_AGE_REQ_CHILD_BOMB
-        );
+        return comboCheckItemAgeReqMm(ITEM_MM_BOMB);
     case 3:
         if (player->transformation == MM_PLAYER_FORM_DEKU)
             return 1;
 
-        return EnFu_CheckAgeReq(
-            CFG_MM_AGE_REQ_ADULT_BOW,
-            CFG_MM_AGE_REQ_CHILD_BOW
-        );
+        return comboCheckItemAgeReqMm(ITEM_MM_BOW);
 
     default:
         return 1;

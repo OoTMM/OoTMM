@@ -4,9 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Added MM Master Sword
+- Added MM Giants Knife and Biggoron Sword
+- Added MM Hylian Shield
+- Added OoT Hero's Shield
+- Added equipment swapping in MM
+- Added sword and shield cycling in OoT
+- Giants knife health settings
+- Giants Knife can now be repaired by medigoron like in vanilla
+- Giants knife in MM can now be repaired by medigoron at goron village
+
 ### Changed
 
 - Change item drop behavior to prevent dropped items from going out of bounds.
+- Change age requirement backend to use enums instead of two booleans
+- Child swords are now independently ownable instead of being forced to progressive
 
 ### Fixed
 
