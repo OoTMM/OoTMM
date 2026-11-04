@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Change item drop behavior to prevent dropped items from going out of bounds.
+- Names for Rusty Keys in the spoiler log now match those seen in-game.
 
 ### Fixed
 
