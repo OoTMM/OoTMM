@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+
 - Added MM Master Sword
 - Added MM Giants Knife and Biggoron Sword
 - Added MM Hylian Shield
@@ -19,11 +20,11 @@ All notable changes to this project will be documented in this file.
 
 - Blitz settings adjustments:
  - Added Master Sword to MM and shared it while adjusting the item specific hint to make sure Master Sword is still hinted.
- - Added Goron Swords to MM and shared it. 
- - Added Hylian Shield to MM and shared it. 
- - Bottles are back to being shared due to the setting adjustment that was made. 
- - Kamaro Mask was mistakenly enabled, turned it back off. 
- - Added Adult Mask to MM and made it a starting item. 
+ - Added Goron Swords to MM and shared it.
+ - Added Hylian Shield to MM and shared it.
+ - Bottles are back to being shared due to the setting adjustment that was made.
+ - Kamaro Mask was mistakenly enabled, turned it back off.
+ - Added Adult Mask to MM and made it a starting item.
  - Age restricted Master Sword and Goron Swords to Adult in MM.
  - Age restricted Child Swords to Child in MM.
  - Age restricted Deku Shield to Child in MM.
@@ -36,6 +37,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fix an issue where keaton grass would sometimes not respect CAMC.
+- Fix Twinmold logic expecting GFS when it shouldn't.
 
 ## [33.0] - 2026-10-13
 
