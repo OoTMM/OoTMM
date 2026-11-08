@@ -31,6 +31,7 @@ All notable changes to this project will be documented in this file.
  - Age restricted Mirror Shield to Adult in MM.
  - Enabled the Minor Cutscene Skips for both OOT and MM.
 - Change item drop behavior to prevent dropped items from going out of bounds.
+- Names for Rusty Keys in the spoiler log now match those seen in-game.
 - Change age requirement backend to use enums instead of two booleans
 - Child swords are now independently ownable instead of being forced to progressive
 
