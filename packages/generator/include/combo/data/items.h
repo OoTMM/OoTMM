@@ -165,7 +165,8 @@
 #define ITEM_OOT_ZORA_EGG               0xa6
 #define ITEM_OOT_POWDER_KEG             0xa7
 #define ITEM_OOT_GREAT_FAIRY_SWORD      0xa8
-#define ITEM_OOT_CUSTOM_MAX             0xa9
+#define ITEM_OOT_SHIELD_HERO            0xa9
+#define ITEM_OOT_CUSTOM_MAX             0xaa
 
 #if defined(GAME_OOT)
 # define ITEM_STICK                     ITEM_OOT_STICK
@@ -488,7 +489,12 @@
 #define ITEM_MM_SEEDS_30                    0xbe
 #define ITEM_MM_BULLET_BAG2                 0xbf
 #define ITEM_MM_BULLET_BAG3                 0xc0
-#define ITEM_MM_CUSTOM_MAX                  0xc1
+#define ITEM_MM_SWORD_MASTER                0xc1
+#define ITEM_MM_SWORD_GIANTS_KNIFE          0xc2
+#define ITEM_MM_SWORD_BIGGORON              0xc3
+#define ITEM_MM_SHIELD_HYLIAN               0xc4
+#define ITEM_MM_SHIELD_DEKU                 0xc5
+#define ITEM_MM_CUSTOM_MAX                  0xc6
 
 /* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 

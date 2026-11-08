@@ -2,6 +2,8 @@
 #include <combo/config.h>
 #include <assets/oot/textures/parameter_static.h>
 
+#include "combo/inventory.h"
+
 #define CUSTOM_FILE_INFO_BUFFER_SIZE    0x40000
 
 #define ICON_SIZE   12
@@ -343,7 +345,7 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     int startX;
     u16 iconMagic;
     u16 iconStrength;
-    u16 iconSwordKokiri;
+    u8 childSwordsOwned;
     u16 iconSwordKnife;
     u16 iconQuiver;
     u16 iconBombBag;
@@ -352,8 +354,8 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
 
     iconMagic = 0x12;
     iconStrength = ITEM_OOT_GORON_BRACELET;
-    iconSwordKokiri = ITEM_OOT_SWORD_KOKIRI;
-    iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BROKEN;
+    childSwordsOwned = OotChildSword_GetOwnedMask() & 0x07;
+    iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
     iconQuiver = ITEM_OOT_QUIVER;
     iconBombBag = ITEM_OOT_BOMB_BAG;
     iconBulletBag = ITEM_OOT_BULLET_BAG;
@@ -369,16 +371,6 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
         break;
     case 3:
         iconStrength = ITEM_OOT_GOLDEN_GAUNTLETS;
-        break;
-    }
-
-    switch (gSharedCustomSave.extraSwordsOot)
-    {
-    case 1:
-        iconSwordKokiri = ITEM_MM_SWORD_RAZOR | ICONF_MM;
-        break;
-    case 2:
-        iconSwordKokiri = ITEM_MM_SWORD_GILDED | ICONF_MM;
         break;
     }
 
@@ -416,8 +408,10 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
         break;
     }
 
-    if (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE && !(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE_BROKEN))
-        iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+    if ((gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE) && (gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KNIFE_BROKEN))
+    {
+        iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BROKEN;
+    }
 
     /* Row 1 */
     startX = x;
@@ -515,10 +509,17 @@ static void FileSelect_CustomFileInfoPrepareOotEquips(FileSelectState* this, Gfx
     x = startX;
 
     /* Row 3 */
-    x += drawItemIcon(list, end, x, y, iconSwordKokiri,       gOotSave.info.inventory.equipment.swords  & EQ_OOT_SWORD_KOKIRI);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_KOKIRI,          childSwordsOwned & 0x01);
+    if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
+    {
+        x += drawItemIcon(list, end, x, y, ITEM_MM_SWORD_RAZOR | ICONF_MM, childSwordsOwned & 0x02);
+        x += drawItemIcon(list, end, x, y, ITEM_MM_SWORD_GILDED | ICONF_MM, childSwordsOwned & 0x04);
+    }
     x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_MASTER, gOotSave.info.inventory.equipment.swords  & EQ_OOT_SWORD_MASTER);
     x += drawItemIcon(list, end, x, y, iconSwordKnife,        gOotSave.info.inventory.equipment.swords  & EQ_OOT_SWORD_KNIFE);
-    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU,  gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU,   gSharedCustomSave.ootChildShields & (1u << OOT_CHILD_SHIELD_DEKU));
+    if (Config_Flag(CFG_OOT_HERO_SHIELD))
+        x += drawItemIcon(list, end, x, y, ITEM_MM_SHIELD_HERO | ICONF_MM, gSharedCustomSave.ootChildShields & (1u << OOT_CHILD_SHIELD_HERO));
     x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_HYLIAN,gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
     x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_MIRROR,gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_MIRROR);
     y += ICON_SIZE;
@@ -554,21 +555,23 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
     int startX;
     u16 iconMagic;
     u16 iconStrength;
-    u16 iconSword;
-    u16 iconShield;
+    u8 childSwordsOwned;
     u16 iconQuiver;
     u16 iconBombBag;
     u16 iconBulletBag;
     u16 iconWallet;
+    u16 iconSwordKnife;
+    s32 hasSwordKnife;
 
     iconMagic = 0x12;
     iconStrength = ITEM_OOT_GORON_BRACELET;
-    iconSword = ITEM_MM_SWORD_KOKIRI | ICONF_MM;
-    iconShield = ITEM_MM_SHIELD_HERO | ICONF_MM;
+    childSwordsOwned = gSharedCustomSave.mm.swords.sword & 0x07;
     iconQuiver = ITEM_MM_QUIVER | ICONF_MM;
     iconBombBag = ITEM_MM_BOMB_BAG | ICONF_MM;
     iconBulletBag = ITEM_OOT_BULLET_BAG;
     iconWallet = ITEM_MM_WALLET2 | ICONF_MM;
+    iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+    hasSwordKnife = 0;
     if (gMmSave.info.playerData.isDoubleMagicAcquired)
         iconMagic = 0x13;
 
@@ -582,15 +585,6 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
         break;
     }
 
-    switch (gMmSave.info.itemEquips.sword)
-    {
-    case 2:
-        iconSword = ITEM_MM_SWORD_RAZOR | ICONF_MM;
-        break;
-    case 3:
-        iconSword = ITEM_MM_SWORD_GILDED | ICONF_MM;
-        break;
-    }
     switch (gMmSave.info.inventory.upgrades.quiver)
     {
     case 2:
@@ -624,11 +618,6 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
         iconWallet = ITEM_MM_WALLET3 | ICONF_MM;
         break;
     }
-
-    if (Config_Flag(CFG_MM_DEKU_SHIELD) && gSharedCustomSave.mmShieldIsDeku)
-        iconShield = ITEM_OOT_SHIELD_DEKU;
-    else if (gMmSave.info.itemEquips.shield >= 2)
-        iconShield = ITEM_MM_SHIELD_MIRROR | ICONF_MM;
 
     /* Row 1 */
     startX = x;
@@ -666,8 +655,19 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
         x += drawItemIcon(list, end, x, y, iconStrength, gMmSave.info.inventory.upgrades.strength);
     //x += drawItemIcon(list, end, x, y, ITEM_MM_BOMBER_NOTEBOOK | ICONF_MM, gMmSave.info.inventory.quest.notebook);
     // Disabled, not working
-    x += drawItemIcon(list, end, x, y, iconSword, gMmSave.info.itemEquips.sword);
-    x += drawItemIcon(list, end, x, y, iconShield, gMmSave.info.itemEquips.shield);
+
+    if (MmSword_IsOwned(MM_SWORD_BIGGORON)) {
+        iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+        hasSwordKnife = 1;
+    } else if (MmSword_IsOwned(MM_SWORD_GIANTS_KNIFE)) {
+        if (MmSword_GetGiantsKnifeHealth() == 0) {
+            iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BROKEN;
+        } else {
+            iconSwordKnife = ITEM_OOT_SWORD_KNIFE_BIGGORON;
+        }
+
+        hasSwordKnife = 1;
+    }
 
     y += ICON_SIZE;
     x = startX;
@@ -734,6 +734,25 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
     x = startX;
 
     /* Row 3 */
+    x += drawItemIcon(list, end, x, y, ITEM_MM_SWORD_KOKIRI | ICONF_MM, childSwordsOwned & 0x01);
+    x += drawItemIcon(list, end, x, y, ITEM_MM_SWORD_RAZOR | ICONF_MM,  childSwordsOwned & 0x02);
+    x += drawItemIcon(list, end, x, y, ITEM_MM_SWORD_GILDED | ICONF_MM, childSwordsOwned & 0x04);
+    if (Config_Flag(CFG_MM_MASTER_SWORD))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SWORD_MASTER, MmSword_IsOwned(MM_SWORD_MASTER));
+    if (Config_Flag(CFG_MM_GORON_SWORDS))
+    x += drawItemIcon(list, end, x, y, iconSwordKnife, hasSwordKnife);
+
+    if (Config_Flag(CFG_MM_DEKU_SHIELD))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_DEKU, MmShield_IsOwned(MM_SHIELD_DEKU));
+    x += drawItemIcon(list, end, x, y, ITEM_MM_SHIELD_HERO | ICONF_MM, MmShield_IsOwned(MM_SHIELD_HERO));
+    if (Config_Flag(CFG_MM_HYLIAN_SHIELD))
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_SHIELD_HYLIAN, MmShield_IsOwned(MM_SHIELD_HYLIAN));
+    x += drawItemIcon(list, end, x, y, ITEM_MM_SHIELD_MIRROR | ICONF_MM, MmShield_IsOwned(MM_SHIELD_MIRROR));
+
+    y += ICON_SIZE;
+    x = startX;
+
+    /* Row 4 */
     //OOT Kokiri tunic and boots are used for parity in the look. These should be swapped for actual MM variants once a full MM equipment menu port happens.
     x += drawItemIcon(list, end, x, y, ITEM_OOT_TUNIC_KOKIRI, gOotSave.info.inventory.equipment.tunics & EQ_OOT_TUNIC_KOKIRI);
     if (Config_Flag(CFG_MM_TUNIC_GORON))
@@ -745,8 +764,6 @@ static void FileSelect_CustomFileInfoPrepareMmEquips(FileSelectState* this, Gfx*
         x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_IRON, gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_BOOTS_IRON));
     if (Config_Flag(CFG_MM_BOOTS_HOVER))
         x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOTS_HOVER, gMmExtraTrade.trade3 & (1 << XITEM_MM_TRADE3_BOOTS_HOVER));
-    y += ICON_SIZE;
-    x = startX;
 }
 
 static void FileSelect_CustomFileInfoPrepareOotSongs(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -806,6 +823,7 @@ static void FileSelect_CustomFileInfoPrepareMmSongs(FileSelectState* this, Gfx**
     if (gMmSave.info.inventory.quest.songLullabyIntro && !gMmSave.info.inventory.quest.songLullaby)
         colorLullaby = 0xff8787;
     startX = x;
+    y += 12.f;
     x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songTime);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songHealing);
     x += drawNoteIcon(list, end, x, y, 0xffffff, gMmSave.info.inventory.quest.songEpona);

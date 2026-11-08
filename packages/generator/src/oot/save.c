@@ -340,10 +340,6 @@ void comboCreateSave(void* unk, void* buffer)
     if (!Config_Flag(CFG_MM_RUSTY_KEYS))
         memset(gSharedCustomSave.rustyKeysMm, 0xff, sizeof(gSharedCustomSave.rustyKeysMm));
 
-    /* Apply deku shield flag */
-    if (Config_Flag(CFG_MM_DEKU_SHIELD))
-        gSharedCustomSave.mmShieldIsDeku = 1;
-
     /* Apply bronze scale flag */
     if (!Config_Flag(CFG_BRONZE_SCALE))
     {

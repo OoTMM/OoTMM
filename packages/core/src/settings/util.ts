@@ -5,6 +5,7 @@ import type { SongEventSongs } from '../song-events';
 
 import { cloneDeep, isEqual } from 'lodash-es';
 import { SETTINGS } from './data';
+import { MM_AGE_REQ_ITEMS } from '../mm-age-requirements';
 import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
 import { patchArray } from './patch';

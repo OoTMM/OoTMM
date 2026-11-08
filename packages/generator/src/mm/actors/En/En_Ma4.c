@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/age.h>
 #include <combo/player.h>
 #include <combo/item.h>
 
@@ -33,11 +34,7 @@ PATCH_FUNC(0x80abf4a8, EnMa4_HandleLearnSongEpona);
 
 static int EnMa4_CheckBowAgeReq(void)
 {
-    if (Config_Flag(CFG_MM_AGE_REQ_ADULT_BOW))
-        return comboIsLinkAdult();
-    if (Config_Flag(CFG_MM_AGE_REQ_CHILD_BOW))
-        return !comboIsLinkAdult();
-    return 1;
+    return comboCheckItemAgeReqMm(ITEM_MM_BOW);
 }
 
 static void EnMa4_ShowWrongBowAge(PlayState* play)
