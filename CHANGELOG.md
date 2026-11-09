@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Added Deku Stick Fighting to Captain Keeta logic for the logic trick.
+- Accounted for Boomerang logic for Odolwa.
 - Blitz settings adjustments:
  - Added Master Sword to MM and shared it while adjusting the item specific hint to make sure Master Sword is still hinted.
  - Added Goron Swords to MM and shared it.
