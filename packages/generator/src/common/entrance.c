@@ -17,8 +17,8 @@ s32 gLastScene;
 
 typedef struct PACKED ALIGNED(4)
 {
-    s32 key;
-    s32 value;
+    u32 key;
+    u32 value;
 }
 Entrance;
 
