@@ -266,16 +266,6 @@ export class RandomizerPatcherConfig {
   }
 
   private randomizerWarps(): Uint8Array {
-    const songs = [
-      'OOT_WARP_SONG_MEADOW',
-      'OOT_WARP_SONG_CRATER',
-      'OOT_WARP_SONG_LAKE',
-      'OOT_WARP_SONG_DESERT',
-      'OOT_WARP_SONG_GRAVE',
-      'OOT_WARP_SONG_TEMPLE',
-    ];
-    const warpSongs = toU32Buffer(songs.map(e => entrance(e, this.world)));
-
     const owlStatues = [
       'MM_WARP_OWL_GREAT_BAY',
       'MM_WARP_OWL_ZORA_CAPE',
@@ -296,7 +286,7 @@ export class RandomizerPatcherConfig {
     ];
     const spawnsBuffer = toU32Buffer(spawns.map(e => entrance(e, this.world)));
 
-    return concatUint8Arrays([warpSongs, owlStatuesBuffer, spawnsBuffer]);
+    return concatUint8Arrays([owlStatuesBuffer, spawnsBuffer]);
   }
 
   private randomizerConfig(): Uint8Array {

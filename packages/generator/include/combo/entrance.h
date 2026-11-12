@@ -29,4 +29,6 @@ static inline u32 Entrance_ToAbsolute(u32 entranceId)
     return Entrance_ToRelative(entranceId);
 }
 
+extern const u16 kSongEntrances[];
+
 #endif

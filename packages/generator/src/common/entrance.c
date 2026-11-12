@@ -11,6 +11,15 @@
 # define ENTRANCES_ADDR 0x03ff5000
 #endif
 
+const u16 kSongEntrances[] = {
+    ENTR_OOT_WARP_SONG_MEADOW,
+    ENTR_OOT_WARP_SONG_CRATER,
+    ENTR_OOT_WARP_SONG_LAKE,
+    ENTR_OOT_WARP_SONG_DESERT,
+    ENTR_OOT_WARP_SONG_GRAVE,
+    ENTR_OOT_WARP_SONG_TEMPLE,
+};
+
 s8  gIsEntranceOverride;
 s32 gLastEntrance;
 s32 gLastScene;

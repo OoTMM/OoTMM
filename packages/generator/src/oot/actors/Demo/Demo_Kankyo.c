@@ -1,11 +1,14 @@
 #include <combo.h>
 #include <combo/entrance.h>
-#include <combo/config.h>
 
 /* Warp songs */
 static void DemoKankyo_Warp(PlayState* play, void* unk, Actor* this)
 {
-    comboTransition(play, gComboConfig.entrancesSong[play->msgCtx.lastPlayedSong]);
+    u32 entrance;
+
+    gIsEntranceOverride = 1;
+    entrance = Entrance_ToRelative(kSongEntrances[play->msgCtx.lastPlayedSong]);
+    comboTransition(play, entrance);
 }
 
 PATCH_CALL(0x80930ab0, DemoKankyo_Warp);

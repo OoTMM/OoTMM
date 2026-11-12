@@ -10,7 +10,8 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
 
     if (actor->params & 0x8000)
     {
-        entrance = gComboConfig.entrancesSong[actor->params & 0xff] ^ MASK_FOREIGN_ENTRANCE;
+        gIsEntranceOverride = 1;
+        entrance = Entrance_ToRelative(kSongEntrances[actor->params & 0xff]);
     }
     else
     {
