@@ -4,12 +4,12 @@
 void EnKaizoku_ThrowOut(PlayState* play)
 {
     u32 entrance;
-    s32 override;
+    u32 override;
 
     entrance = ENTR_MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR;
     override = comboEntranceOverride(entrance);
-    if (override != -1 && (u32)override != entrance)
-        comboTransition(play, (u32)override);
+    if (override != ENTR_INVALID && override != entrance)
+        comboTransition(play, override);
     else
         play->transitionType = 0x26;
 }

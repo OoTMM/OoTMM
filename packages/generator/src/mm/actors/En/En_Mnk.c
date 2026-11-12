@@ -5,11 +5,11 @@
 
 static void EnMnk_KickOverride(PlayState* play)
 {
-    s32 override;
+    u32 override;
 
     override = comboEntranceOverride(ENTR_MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE);
-    if (override != -1)
-        comboTransitionOverride(play, (u32)override);
+    if (override != ENTR_INVALID)
+        comboTransitionOverride(play, override);
 }
 
 /* TODO: Check for repeats */

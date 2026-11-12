@@ -22,30 +22,69 @@ typedef struct PACKED ALIGNED(4)
 }
 Entrance;
 
-static Entrance* gEntrances;
+static Entrance sEntranceCache[16];
+static u16 sEntranceCount;
+static u8 sEntranceCacheCursor;
 
 void comboInitEntrances(void)
 {
-    size_t size;
-
-    size = comboDmaLoadFile(NULL, COMBO_VROM_ENTRANCES);
-    gEntrances = malloc(size);
-    comboDmaLoadFile(gEntrances, COMBO_VROM_ENTRANCES);
+    memset(sEntranceCache, 0xff, sizeof(sEntranceCache));
+    sEntranceCacheCursor = 0;
+    sEntranceCount = (u16)(comboDmaLoadFile(NULL, COMBO_VROM_ENTRANCES) / sizeof(Entrance));
 }
 
-s32 comboEntranceOverride(u32 entranceId)
+static u32 comboEntranceOverrideRaw(u32 entranceId)
 {
-    int i;
+    ALIGNED(8) Entrance tmp;
+    Entrance* e;
+    u16 min;
+    u16 max;
+    u16 target;
 
-    i = 0;
-    for (;;)
+    /* Check the cache */
+    for (int i = 0; i < ARRAY_COUNT(sEntranceCache); ++i)
     {
-        if (gEntrances[i].key == -1)
-            return -1;
-        if (gEntrances[i].key == (s32)entranceId)
-            return gEntrances[i].value;
-        i++;
+        e = &sEntranceCache[i];
+        if (e->key == entranceId)
+            return e->value;
     }
+
+    /* Check the main entrance table */
+    min = 0;
+    max = sEntranceCount;
+
+    while (min < max)
+    {
+        target = (min + max) / 2;
+        comboDmaLoadFilePartial(&tmp, COMBO_VROM_ENTRANCES, target * sizeof(Entrance), sizeof(Entrance));
+
+        if (tmp.key == entranceId)
+        {
+            /* Write to the cache */
+            sEntranceCache[sEntranceCacheCursor].key = tmp.key;
+            sEntranceCache[sEntranceCacheCursor].value = tmp.value;
+            sEntranceCacheCursor = (sEntranceCacheCursor + 1) % ARRAY_COUNT(sEntranceCache);
+
+            return tmp.value;
+        }
+        else if (tmp.key < entranceId)
+            min = target + 1;
+        else
+            max = target;
+    }
+
+    return ENTR_INVALID;
+}
+
+u32 comboEntranceOverride(u32 entranceId)
+{
+    u32 override;
+
+    entranceId = Entrance_ToAbsolute(entranceId);
+    override = comboEntranceOverrideRaw(entranceId);
+    if (override == ENTR_INVALID)
+        return ENTR_INVALID;
+    return Entrance_ToRelative(override);
 }
 
 

@@ -15,7 +15,7 @@ typedef enum {
 
 static void EnGe2_ThrowPlayerOut(Actor* this, PlayState* play)
 {
-    s32 override;
+    u32 override;
     u32 entrance;
     u8* timer;
 
@@ -34,7 +34,7 @@ static void EnGe2_ThrowPlayerOut(Actor* this, PlayState* play)
         entrance = ENTR_MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR;
     override = comboEntranceOverride(entrance);
 
-    if (override == -1 || (u32)override == entrance)
+    if (override == ENTR_INVALID || override == entrance)
     {
         play->nextEntrance = play->setupExitList[this->params & 0x1f];
         play->transitionTrigger = TRANS_TRIGGER_START;
@@ -42,7 +42,7 @@ static void EnGe2_ThrowPlayerOut(Actor* this, PlayState* play)
     }
     else
     {
-        comboTransition(play, (u32)override);
+        comboTransition(play, override);
     }
 }
 

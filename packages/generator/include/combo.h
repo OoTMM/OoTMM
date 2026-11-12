@@ -170,7 +170,7 @@ int comboDoorIsUnlocked(PlayState* play, Actor* actor);
 
 /* Entrance */
 void comboInitEntrances(void);
-s32 comboEntranceOverride(u32 entranceId);
+u32 comboEntranceOverride(u32 entranceId);
 int comboBossLairIndex();
 
 extern s8 gIsEntranceOverride;

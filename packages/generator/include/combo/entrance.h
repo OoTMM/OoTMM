@@ -7,6 +7,7 @@
 #define ENTR_EXTENDED      0xfffe
 #define ENTR_FW_CROSS      0xfffd
 #define ENTR_CROSS_RESPAWN 0xfffc
+#define ENTR_INVALID       0xffffffff
 
 typedef struct PlayState PlayState;
 
