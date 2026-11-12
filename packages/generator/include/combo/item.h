@@ -258,7 +258,7 @@ u8 Play_SceneKey(u8 sceneId);
 
 void comboPlayItemFanfare(s16 gi, int isShort);
 
-s16 comboItemResolve(PlayState* play, s16 gi);
+s16 Item_ResolveGeneric(PlayState* play, s16 gi);
 
 s16 Item_Progressive(s16 gi, int ovflags);
 

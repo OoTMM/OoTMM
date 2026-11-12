@@ -578,7 +578,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
         key = 0;
     else
         key = Checks_MakeOverrideKey(q);
-    Multi_InfoItem(key, o.gi, !!Item_IsPlayerSelf(o.player));
+    Multi_InfoItem(play, key, o.gi, !!Item_IsPlayerSelf(o.player));
 
     /* Add the item if it's for us */
     if (Item_IsPlayerSelf(o.player))

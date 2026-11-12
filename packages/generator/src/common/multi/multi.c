@@ -490,12 +490,16 @@ static int Multi_BeforeSend(void)
     return 1;
 }
 
-void Multi_InfoItem(u32 ovKey, s16 gi, u8 flags)
+void Multi_InfoItem(PlayState* play, u32 ovKey, s16 gi, u8 flags)
 {
     MultiPacketOutInfoItem pkt;
 
     if (!gComboCtx.isMultiConnected)
         return;
+
+    /* KLUDGE: This should probably be moved somwehere up the call sites */
+    if (play)
+        gi = Item_ResolveGeneric(play, gi);
 
     memset(&pkt, 0, sizeof(pkt));
     pkt.header.op = MULTI_OP_INFO_ITEM;
@@ -548,7 +552,7 @@ void Multi_SendItem(u8 to, s16 gi, s16 flags, u32 key)
     pkt.wal.header.op = MULTI_OP_WAL;
     pkt.wal.type = WAL_ITEM;
     pkt.to = to;
-    pkt.gi = comboItemResolve(gPlay, gi);
+    pkt.gi = Item_ResolveGeneric(gPlay, gi);
     pkt.flags = flags;
     pkt.key = key;
 
