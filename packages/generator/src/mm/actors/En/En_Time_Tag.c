@@ -69,9 +69,13 @@ static void EnTimeTag_HandleGormanER(void)
         return;
     }
 
+    /* KLUDGE: This whole logic mixes multiple things, refactor this */
+    gIsEntranceOverride = 0;
     override = comboEntranceOverride(entrance);
     if (override != ENTR_INVALID)
+    {
         comboTransition(gPlay, override);
+    }
 }
 
 static void EnTimeTag_AfterKick(void)
