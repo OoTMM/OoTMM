@@ -73,6 +73,11 @@ static u32 comboEntranceOverrideRaw(u32 entranceId)
             max = target;
     }
 
+    /* Negative cache */
+    sEntranceCache[sEntranceCacheCursor].key = entranceId;
+    sEntranceCache[sEntranceCacheCursor].value = ENTR_INVALID;
+    sEntranceCacheCursor = (sEntranceCacheCursor + 1) % ARRAY_COUNT(sEntranceCache);
+
     return ENTR_INVALID;
 }
 
