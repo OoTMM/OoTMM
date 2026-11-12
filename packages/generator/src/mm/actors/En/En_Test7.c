@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <combo/entrance.h>
-#include <combo/dungeon.h>
 #include <combo/config.h>
 #include <combo/actor.h>
 
@@ -11,7 +10,7 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
 
     if (actor->params & 0x8000)
     {
-        entrance = gComboConfig.entrancesSong[actor->params & 0xff] ^ MASK_FOREIGN_ENTRANCE;
+        entrance = Entrance_ToRelative(kEntrancesSongs[actor->params & 0xff]);
     }
     else
     {
@@ -32,9 +31,10 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
             return;
         }
 
-        entrance = gComboConfig.entrancesOwl[(actor->params & 0xff) - 0x1c];
+        entrance = kEntrancesOwls[(actor->params & 0xff) - 0x1c];
     }
 
+    gIsEntranceOverride = 1;
     comboTransition(play, entrance);
     Actor_Kill(actor);
 }

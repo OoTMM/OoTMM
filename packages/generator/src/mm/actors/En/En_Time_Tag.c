@@ -51,7 +51,7 @@ PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
 static void EnTimeTag_HandleGormanER(void)
 {
     u32 entrance;
-    s32 override;
+    u32 override;
 
     switch (gSave.entrance)
     {
@@ -69,9 +69,13 @@ static void EnTimeTag_HandleGormanER(void)
         return;
     }
 
+    /* KLUDGE: This whole logic mixes multiple things, refactor this */
+    gIsEntranceOverride = 0;
     override = comboEntranceOverride(entrance);
-    if (override != -1)
-        comboTransition(gPlay, (u32)override);
+    if (override != ENTR_INVALID)
+    {
+        comboTransition(gPlay, override);
+    }
 }
 
 static void EnTimeTag_AfterKick(void)

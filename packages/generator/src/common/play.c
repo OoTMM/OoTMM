@@ -95,7 +95,7 @@ void Play_TransitionDone(PlayState* play)
     u32 entrance;
     u32 originalEntrance;
     u32 fullEntrance;
-    s32 override;
+    u32 override;
     u8 age;
 
     /* Resolve extended entrance */
@@ -133,9 +133,9 @@ void Play_TransitionDone(PlayState* play)
         originalEntrance = fullEntrance;
         gIsEntranceOverride = 0;
         override = comboEntranceOverride(Play_EntranceForOverride(entrance));
-        if (override != -1)
+        if (override != ENTR_INVALID)
         {
-            entrance = (u32)override;
+            entrance = override;
             fullEntrance = entrance;
         }
 #if defined(GAME_MM)
@@ -144,13 +144,13 @@ void Play_TransitionDone(PlayState* play)
     }
     else
     {
-        originalEntrance = 0xffffffff;
+        originalEntrance = ENTR_INVALID;
     }
 
     /* Send tracking infos */
 #if defined(GAME_MM)
     fullEntrance ^= MASK_FOREIGN_ENTRANCE;
-    if (originalEntrance != 0xffffffff)
+    if (originalEntrance != ENTR_INVALID)
         originalEntrance ^= MASK_FOREIGN_ENTRANCE;
     age = gOotSave.age;
 #endif

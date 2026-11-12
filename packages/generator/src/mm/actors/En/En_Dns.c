@@ -12,15 +12,15 @@ u32 SurfaceType_GetSceneExitIndex(CollisionContext* colCtx, CollisionPoly* poly,
 void EnDns_AfterDetection(void)
 {
     PlayState* play;
-    s32 override;
+    u32 override;
 
     play = gPlay;
     if (!play->nextEntrance)
         return;
 
     override = comboEntranceOverride(ENTR_MM_DEKU_PALACE_EXTERIOR_FROM_THRONE);
-    if (override != -1)
-        comboTransitionOverride(play, (u32)override);
+    if (override != ENTR_INVALID)
+        comboTransitionOverride(play, override);
 }
 
 s32 EnDns_IsHumanWithCustomSkullMask(PlayState* play)

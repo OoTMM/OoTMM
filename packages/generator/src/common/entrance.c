@@ -11,41 +11,107 @@
 # define ENTRANCES_ADDR 0x03ff5000
 #endif
 
+const u16 kEntrancesSongs[] = {
+    ENTR_OOT_WARP_SONG_MEADOW,
+    ENTR_OOT_WARP_SONG_CRATER,
+    ENTR_OOT_WARP_SONG_LAKE,
+    ENTR_OOT_WARP_SONG_DESERT,
+    ENTR_OOT_WARP_SONG_GRAVE,
+    ENTR_OOT_WARP_SONG_TEMPLE,
+};
+
+const u16 kEntrancesOwls[] = {
+    ENTR_MM_WARP_OWL_GREAT_BAY,
+    ENTR_MM_WARP_OWL_ZORA_CAPE,
+    ENTR_MM_WARP_OWL_SNOWHEAD,
+    ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE,
+    ENTR_MM_WARP_OWL_CLOCK_TOWN,
+    ENTR_MM_WARP_OWL_MILK_ROAD,
+    ENTR_MM_WARP_OWL_WOODFALL,
+    ENTR_MM_WARP_OWL_SOUTHERN_SWAMP,
+    ENTR_MM_WARP_OWL_IKANA_CANYON,
+    ENTR_MM_WARP_OWL_STONE_TOWER,
+};
+
 s8  gIsEntranceOverride;
 s32 gLastEntrance;
 s32 gLastScene;
 
 typedef struct PACKED ALIGNED(4)
 {
-    s32 key;
-    s32 value;
+    u32 key;
+    u32 value;
 }
 Entrance;
 
-static Entrance* gEntrances;
+static Entrance sEntranceCache[16];
+static u16 sEntranceCount;
+static u8 sEntranceCacheCursor;
 
 void comboInitEntrances(void)
 {
-    size_t size;
-
-    size = comboDmaLoadFile(NULL, COMBO_VROM_ENTRANCES);
-    gEntrances = malloc(size);
-    comboDmaLoadFile(gEntrances, COMBO_VROM_ENTRANCES);
+    memset(sEntranceCache, 0xff, sizeof(sEntranceCache));
+    sEntranceCacheCursor = 0;
+    sEntranceCount = (u16)(comboDmaLoadFile(NULL, COMBO_VROM_ENTRANCES) / sizeof(Entrance));
 }
 
-s32 comboEntranceOverride(u32 entranceId)
+static u32 comboEntranceOverrideRaw(u32 entranceId)
 {
-    int i;
+    ALIGNED(8) Entrance tmp;
+    Entrance* e;
+    u16 min;
+    u16 max;
+    u16 target;
 
-    i = 0;
-    for (;;)
+    /* Check the cache */
+    for (int i = 0; i < ARRAY_COUNT(sEntranceCache); ++i)
     {
-        if (gEntrances[i].key == -1)
-            return -1;
-        if (gEntrances[i].key == (s32)entranceId)
-            return gEntrances[i].value;
-        i++;
+        e = &sEntranceCache[i];
+        if (e->key == entranceId)
+            return e->value;
     }
+
+    /* Check the main entrance table */
+    min = 0;
+    max = sEntranceCount;
+
+    while (min < max)
+    {
+        target = (min + max) / 2;
+        comboDmaLoadFilePartial(&tmp, COMBO_VROM_ENTRANCES, target * sizeof(Entrance), sizeof(Entrance));
+
+        if (tmp.key == entranceId)
+        {
+            /* Write to the cache */
+            sEntranceCache[sEntranceCacheCursor].key = tmp.key;
+            sEntranceCache[sEntranceCacheCursor].value = tmp.value;
+            sEntranceCacheCursor = (sEntranceCacheCursor + 1) % ARRAY_COUNT(sEntranceCache);
+
+            return tmp.value;
+        }
+        else if (tmp.key < entranceId)
+            min = target + 1;
+        else
+            max = target;
+    }
+
+    /* Negative cache */
+    sEntranceCache[sEntranceCacheCursor].key = entranceId;
+    sEntranceCache[sEntranceCacheCursor].value = ENTR_INVALID;
+    sEntranceCacheCursor = (sEntranceCacheCursor + 1) % ARRAY_COUNT(sEntranceCache);
+
+    return ENTR_INVALID;
+}
+
+u32 comboEntranceOverride(u32 entranceId)
+{
+    u32 override;
+
+    entranceId = Entrance_ToAbsolute(entranceId);
+    override = comboEntranceOverrideRaw(entranceId);
+    if (override == ENTR_INVALID)
+        return ENTR_INVALID;
+    return Entrance_ToRelative(override);
 }
 
 

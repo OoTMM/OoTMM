@@ -18,8 +18,7 @@ export function patchRandomizer(worldId: number, logic: LogicResult, settings: S
   const bufXflags = RandomizerPatcherXflags.run();
   const bufHintsOot = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'oot' });
   const bufHintsMm = RandomizerPatcherHints.run({ worldId, logic, settings, game: 'mm' });
-  const bufEntrancesOot = RandomizerPatcherEntrances.run({ worldId, logic, game: 'oot' });
-  const bufEntrancesMm = RandomizerPatcherEntrances.run({ worldId, logic, game: 'mm' });
+  const bufEntrances = RandomizerPatcherEntrances.run({ worldId, logic });
 
   patchfile.addSymbolPatch('MULTI_WORLD_ID', toU8Buffer([worldId + 1]));
   patchfile.addNewFile({ vrom: 0xf0200000, data: bufConfig, compressed: true });
@@ -28,6 +27,5 @@ export function patchRandomizer(worldId: number, logic: LogicResult, settings: S
   patchfile.addNewFile({ vrom: 0xf0500000, data: bufXflags, compressed: false });
   patchfile.addNewFile({ vrom: 0xf0600000, data: bufHintsOot, compressed: true });
   patchfile.addNewFile({ vrom: 0xf0700000, data: bufHintsMm, compressed: true });
-  patchfile.addNewFile({ vrom: 0xf0800000, data: bufEntrancesOot, compressed: true });
-  patchfile.addNewFile({ vrom: 0xf0900000, data: bufEntrancesMm, compressed: true });
+  patchfile.addNewFile({ vrom: 0xf0800000, data: bufEntrances, compressed: false });
 }
