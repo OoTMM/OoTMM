@@ -93,8 +93,8 @@ static u32 Play_SetDefaultGrottoRespawn(void)
 void Play_TransitionDone(PlayState* play)
 {
     u32 entrance;
-    u32 originalEntrance;
-    u32 fullEntrance;
+    u32 infoOriginal;
+    u32 infoEntrance;
     u32 override;
     u8 age;
 
@@ -115,14 +115,14 @@ void Play_TransitionDone(PlayState* play)
         break;
     }
 
-    fullEntrance = entrance;
+    infoEntrance = entrance;
 
     /* Handle grotto exits */
     if (entrance == ENTR_INTERNAL_EXIT_GROTTO)
     {
-        fullEntrance = Play_GrottoExitEntrance(play);
+        infoEntrance = Play_GrottoExitEntrance(play);
         if (Config_Flag(CFG_ER_GROTTOS))
-            entrance = fullEntrance;
+            entrance = infoEntrance;
         if (entrance == ENTR_INTERNAL_EXIT_GROTTO)
             entrance = Play_SetDefaultGrottoRespawn();
     }
@@ -130,13 +130,17 @@ void Play_TransitionDone(PlayState* play)
     /* Handle transition override */
     if (gIsEntranceOverride)
     {
-        originalEntrance = fullEntrance;
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(Play_EntranceForOverride(entrance));
+        infoOriginal = Play_EntranceForOverride(entrance);
+        override = comboEntranceOverride(infoOriginal);
         if (override != ENTR_INVALID)
         {
             entrance = override;
-            fullEntrance = entrance;
+            infoEntrance = override;
+        }
+        else
+        {
+            infoEntrance = infoOriginal;
         }
 #if defined(GAME_MM)
         g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER) && (entrance != gSave.entrance);
@@ -144,21 +148,22 @@ void Play_TransitionDone(PlayState* play)
     }
     else
     {
-        originalEntrance = ENTR_INVALID;
+        infoOriginal = ENTR_INVALID;
+        infoEntrance = Play_EntranceForOverride(infoEntrance);
     }
 
     /* Send tracking infos */
 #if defined(GAME_MM)
-    fullEntrance ^= MASK_FOREIGN_ENTRANCE;
-    if (originalEntrance != ENTR_INVALID)
-        originalEntrance ^= MASK_FOREIGN_ENTRANCE;
+    infoEntrance ^= MASK_FOREIGN_ENTRANCE;
+    if (infoOriginal != ENTR_INVALID)
+        infoOriginal ^= MASK_FOREIGN_ENTRANCE;
     age = gOotSave.age;
 #endif
 
 #if defined(GAME_OOT)
     age = play->linkAgeOnLoad;
 #endif
-    Multi_InfoEntrance(originalEntrance, fullEntrance, age);
+    Multi_InfoEntrance(infoOriginal, infoEntrance, age);
 
     entrance = Play_ApplyCustomEntrance(entrance);
 
