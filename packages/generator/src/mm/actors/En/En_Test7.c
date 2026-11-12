@@ -10,8 +10,7 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
 
     if (actor->params & 0x8000)
     {
-        gIsEntranceOverride = 1;
-        entrance = Entrance_ToRelative(kSongEntrances[actor->params & 0xff]);
+        entrance = Entrance_ToRelative(kEntrancesSongs[actor->params & 0xff]);
     }
     else
     {
@@ -32,9 +31,10 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
             return;
         }
 
-        entrance = gComboConfig.entrancesOwl[(actor->params & 0xff) - 0x1c];
+        entrance = kEntrancesOwls[(actor->params & 0xff) - 0x1c];
     }
 
+    gIsEntranceOverride = 1;
     comboTransition(play, entrance);
     Actor_Kill(actor);
 }

@@ -7,7 +7,7 @@ static void DemoKankyo_Warp(PlayState* play, void* unk, Actor* this)
     u32 entrance;
 
     gIsEntranceOverride = 1;
-    entrance = Entrance_ToRelative(kSongEntrances[play->msgCtx.lastPlayedSong]);
+    entrance = Entrance_ToRelative(kEntrancesSongs[play->msgCtx.lastPlayedSong]);
     comboTransition(play, entrance);
 }
 

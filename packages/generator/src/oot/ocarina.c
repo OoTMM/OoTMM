@@ -905,7 +905,9 @@ static void HandleSoaring(PlayState* play)
             link = GET_PLAYER(play);
             link->stateFlags1 |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
             link->actor.freezeTimer = 10000;
-            u32 entrance = gComboConfig.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
+
+            gIsEntranceOverride = 1;
+            u32 entrance = kEntrancesOwls[songId] | MASK_FOREIGN_ENTRANCE;
             comboTransition(play, entrance);
         }
         else

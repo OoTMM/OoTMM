@@ -266,27 +266,11 @@ export class RandomizerPatcherConfig {
   }
 
   private randomizerWarps(): Uint8Array {
-    const owlStatues = [
-      'MM_WARP_OWL_GREAT_BAY',
-      'MM_WARP_OWL_ZORA_CAPE',
-      'MM_WARP_OWL_SNOWHEAD',
-      'MM_WARP_OWL_MOUNTAIN_VILLAGE',
-      'MM_WARP_OWL_CLOCK_TOWN',
-      'MM_WARP_OWL_MILK_ROAD',
-      'MM_WARP_OWL_WOODFALL',
-      'MM_WARP_OWL_SOUTHERN_SWAMP',
-      'MM_WARP_OWL_IKANA_CANYON',
-      'MM_WARP_OWL_STONE_TOWER',
-    ];
-    const owlStatuesBuffer = toU32Buffer(owlStatues.map(e => entrance(e, this.world)));
-
     const spawns = [
       'OOT_SPAWN_ADULT',
       'OOT_SPAWN_CHILD'
     ];
-    const spawnsBuffer = toU32Buffer(spawns.map(e => entrance(e, this.world)));
-
-    return concatUint8Arrays([owlStatuesBuffer, spawnsBuffer]);
+    return toU32Buffer(spawns.map(e => entrance(e, this.world)));
   }
 
   private randomizerConfig(): Uint8Array {
