@@ -362,7 +362,7 @@ const PRESET_BLITZ_PRECOMPLETED = makeBlitz({
     { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
     { type: "item", amount: 1, extra: 1, item: "SHARED_POWDER_KEG" },
     { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_ICE" },
-    { type: "item", amount: 1, extra: 1, item: "OOT_SWORD_MASTER" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_SWORD_MASTER" },
     { type: "woth", amount: 9, extra: 1 },
     { type: "sometimes", amount: "max", extra: 1 }
   ]
@@ -416,7 +416,7 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
     { type: "item", amount: 1, extra: 1, item: "SHARED_POWDER_KEG" },
     { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
     { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_LIGHT" },
-    { type: "item", amount: 1, extra: 1, item: "OOT_SWORD_MASTER" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_SWORD_MASTER" },
     { type: "woth", amount: 9, extra: 1 },
     { type: "sometimes", amount: "max", extra: 1 }
   ]
