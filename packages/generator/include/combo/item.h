@@ -264,6 +264,7 @@ s16 Item_Progressive(s16 gi, int ovflags);
 
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q);
 Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q, const char* name);
+Actor_ItemDecoy* Item_ReceiveWithDecoy(PlayState* play, const ComboItemQuery* q, u32 infoKey, const char* name);
 
 extern u8 gMaxBombchuOot;
 extern u8 gMaxBombchuMm;

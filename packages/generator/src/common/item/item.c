@@ -564,6 +564,22 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     dst->playerFrom = q->from;
 }
 
+static int Item_AddResolved(PlayState* play, const ComboItemOverride* o, u32 infoKey, int updateText)
+{
+    int count = 0;
+
+    /* Send the item event */
+    Multi_InfoItem(play, infoKey, o->gi, !!Item_IsPlayerSelf(o->player));
+
+    /* Add the item if it's for us */
+    if (Item_IsPlayerSelf(o->player))
+        count = comboAddItemRaw(play, o->gi);
+
+    if (updateText)
+        comboTextHijackItemEx(play, o, count);
+
+    return count;
+}
 
 int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
@@ -571,22 +587,13 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
     ComboItemOverride o;
     int count;
 
+    /* Add the item */
     comboItemOverride(&o, q);
-    count = 0;
-
     if (q->ovType == OV_NONE)
         key = 0;
     else
         key = Checks_MakeOverrideKey(q);
-    Multi_InfoItem(play, key, o.gi, !!Item_IsPlayerSelf(o.player));
-
-    /* Add the item if it's for us */
-    if (Item_IsPlayerSelf(o.player))
-        count = comboAddItemRaw(play, o.gi);
-
-    /* Update text */
-    if (updateText)
-        comboTextHijackItemEx(play, &o, count);
+    count = Item_AddResolved(play, &o, key, updateText);
 
     /* Mark the item, and add to GI skips in multi */
     if (Item_IsPlayerSelf(o.playerFrom) && q->ovType != OV_NONE)
@@ -681,6 +688,26 @@ u8 comboItemType(s16 gi)
     return kExtendedGetItems[gi - 1].type;
 }
 
+static Actor_ItemDecoy* Item_SpawnDecoy(PlayState* play, const ComboItemOverride* o, int count, const char* name)
+{
+    Actor_ItemDecoy* decoy;
+
+    decoy = (Actor_ItemDecoy*)Actor_Spawn(&play->actorCtx, play, ACTOR_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
+    if (!decoy)
+        return NULL;
+    decoy->count = (s16)count;
+    decoy->gi = o->gi;
+    decoy->player = o->player;
+    decoy->playerFrom = o->playerFrom;
+    if (name)
+        memcpy(decoy->playerName, name, sizeof(decoy->playerName));
+    else
+        memset(decoy->playerName, 0, sizeof(decoy->playerName));
+    g.decoysCount++;
+
+    return decoy;
+}
+
 Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 {
     return Item_AddWithDecoyNamed(play, q, NULL);
@@ -689,23 +716,19 @@ Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 Actor_ItemDecoy* Item_AddWithDecoyNamed(PlayState* play, const ComboItemQuery* q, const char* name)
 {
     int count;
-    Actor_ItemDecoy* decoy;
     ComboItemOverride o;
 
     comboItemOverride(&o, q);
     count = comboAddItemEx(play, q, FALSE);
-    decoy = (Actor_ItemDecoy*)Actor_Spawn(&play->actorCtx, play, ACTOR_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
-    if (!decoy)
-        return NULL;
-    decoy->count = (s16)count;
-    decoy->gi = o.gi;
-    decoy->player = o.player;
-    decoy->playerFrom = o.playerFrom;
-    if (name)
-        memcpy(decoy->playerName, name, sizeof(decoy->playerName));
-    else
-        memset(decoy->playerName, 0, sizeof(decoy->playerName));
-    g.decoysCount++;
+    return Item_SpawnDecoy(play, &o, count, name);
+}
 
-    return decoy;
+Actor_ItemDecoy* Item_ReceiveWithDecoy(PlayState* play, const ComboItemQuery* q, u32 infoKey, const char* name)
+{
+    ComboItemOverride o;
+    int count;
+
+    comboItemOverride(&o, q);
+    count = Item_AddResolved(play, &o, infoKey, FALSE);
+    return Item_SpawnDecoy(play, &o, count, name);
 }

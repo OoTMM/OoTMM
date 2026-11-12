@@ -100,7 +100,7 @@ static void Multi_ProcessMessagesDisconnected(void)
     return;
 }
 
-static void Multi_GiveItem(PlayState* play, s16 gi, u8 from, int flags, const char* name)
+static void Multi_GiveItem(PlayState* play, s16 gi, u8 from, u32 infoKey, int flags, const char* name)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
 
@@ -114,7 +114,7 @@ static void Multi_GiveItem(PlayState* play, s16 gi, u8 from, int flags, const ch
         q.gi = GI_RECOVERY_HEART;
     }
 
-    Item_AddWithDecoyNamed(play, &q, name);
+    Item_ReceiveWithDecoy(play, &q, infoKey, name);
 }
 
 u8 Multi_WorldID(void)
@@ -176,7 +176,7 @@ static int MultiProcessMessageItemWAL(MultiPacketWalItemIn* pkt, int size)
         /* Need to actually give the item */
         if (!Item_SafeToReceive(play) || g.decoysCount)
             return 0;
-        Multi_GiveItem(play, gi, pkt->wal.from, pkt->flags, (char*)pkt->wal.playerName);
+        Multi_GiveItem(play, gi, pkt->wal.from, isSamePlayer ? pkt->key : 0, pkt->flags, (char*)pkt->wal.playerName);
         if (needsMark)
         {
             if (pkt->key & 0x80000000)
