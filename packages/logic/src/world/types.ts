@@ -1,5 +1,5 @@
 import type { Entrance, Game } from '@ootmm/data';
-import type { Region } from '@ootmm/core';
+import type { EnemyPlan, Region } from '@ootmm/core';
 import type { Item } from '../items';
 import type { ResolvedWorldFlags } from './flags';
 import type { Expr, ExprParser } from '../expr';
@@ -56,6 +56,7 @@ export type World = {
   locations: Set<string>;
   songLocations: Set<string>;
   warpLocations: Set<string>;
+  enemyPlan: EnemyPlan;
   prices: number[];
   songEventsOot: number[];
   songEventsMm: number[];

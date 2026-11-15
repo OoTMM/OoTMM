@@ -251,12 +251,12 @@
 - { id: OOT_SOUL_ENEMY_TEKTITE, type: SOUL, add: [OOT_SOUL, 0x0005], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Tektites" }
 - { id: OOT_SOUL_ENEMY_LEEVER, type: SOUL, add: [OOT_SOUL, 0x0006], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Leevers" }
 - { id: OOT_SOUL_ENEMY_PEAHAT, type: SOUL, add: [OOT_SOUL, 0x0007], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Peahats" }
-- { id: OOT_SOUL_ENEMY_LIZALFOS_DINOLFOS, type: SOUL, add: [OOT_SOUL, 0x0008], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Lizalfos/Dinolfos" }
+- { id: OOT_SOUL_ENEMY_LIZALFOS, type: SOUL, add: [OOT_SOUL, 0x0008], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Lizalfos" }
 - { id: OOT_SOUL_ENEMY_GOHMA_LARVA, type: SOUL, add: [OOT_SOUL, 0x0009], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Gohma Larvae" }
 - { id: OOT_SOUL_ENEMY_SHABOM, type: SOUL, add: [OOT_SOUL, 0x000a], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Shaboms" }
 - { id: OOT_SOUL_ENEMY_BABY_DODONGO, type: SOUL, add: [OOT_SOUL, 0x000b], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Baby Dodongos" }
 - { id: OOT_SOUL_ENEMY_DARK_LINK, type: SOUL, add: [OOT_SOUL, 0x000c], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Dark Link" }
-- { id: OOT_SOUL_ENEMY_BIRI_BARI, type: SOUL, add: [OOT_SOUL, 0x000d], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Biris/Baris" }
+- { id: OOT_SOUL_ENEMY_BIRI, type: SOUL, add: [OOT_SOUL, 0x000d], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Biris" }
 - { id: OOT_SOUL_ENEMY_TAILPASARN, type: SOUL, add: [OOT_SOUL, 0x000e], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Tailpasarans" }
 - { id: OOT_SOUL_ENEMY_PARASITE, type: SOUL, add: [OOT_SOUL, 0x000f], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Jabu-Jabu's Parasites" }
 - { id: OOT_SOUL_ENEMY_SKULLTULA, type: SOUL, add: [OOT_SOUL, 0x0010], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Skulltulas" }
@@ -737,7 +737,7 @@
 - { id: MM_SOUL_ENEMY_KEESE, type: SOUL, add: [MM_SOUL, 0x0003], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Keeses" }
 - { id: MM_SOUL_ENEMY_TEKTITE, type: SOUL, add: [MM_SOUL, 0x0004], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Tektites" }
 - { id: MM_SOUL_ENEMY_PEAHAT, type: SOUL, add: [MM_SOUL, 0x0005], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Peahats" }
-- { id: MM_SOUL_ENEMY_LIZALFOS_DINOLFOS, type: SOUL, add: [MM_SOUL, 0x0006], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Lizalfos/Dinolfos" }
+- { id: MM_SOUL_ENEMY_DINOLFOS, type: SOUL, add: [MM_SOUL, 0x0006], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Dinolfos" }
 - { id: MM_SOUL_ENEMY_SKULLTULA, type: SOUL, add: [MM_SOUL, 0x0007], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Skulltulas" }
 - { id: MM_SOUL_ENEMY_ARMOS, type: SOUL, add: [MM_SOUL, 0x0008], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Armos" }
 - { id: MM_SOUL_ENEMY_DEKU_BABA, type: SOUL, add: [MM_SOUL, 0x0009], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Deku Babas" }
@@ -947,4 +947,52 @@
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
+- { id: OOT_NUT, item: OOT_NUT, type: MINOR, add: [OOT_NUTS, 1], flags: 0x0c, draw: [DEKU_NUT, 0], object: [oot, 0x00bb], name: "a <C0>Deku Nut" }
+- { id: OOT_SOUL_ENEMY_DINOLFOS, type: SOUL, add: [OOT_SOUL, 0x002b], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Dinolfos" }
+- { id: OOT_SOUL_ENEMY_ARWING, type: SOUL, add: [OOT_SOUL, 0x002c], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Arwing" }
+- { id: MM_SOUL_ENEMY_ARWING, type: SOUL, add: [MM_SOUL, 0x0030], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Arwing" }
+- { id: RESERVED_OLD_MM_SCOOP, flags: 0x00 }
+- { id: MM_SOUL_ENEMY_GIANT_BEE, type: SOUL, add: [MM_SOUL, 0x0031], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Giant Bees" }
+- { id: MM_SOUL_ENEMY_MOTH, type: SOUL, add: [MM_SOUL, 0x0032], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Moths" }
+- { id: MM_SOUL_ENEMY_GARAHNA, type: SOUL, add: [MM_SOUL, 0x0033], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Garahna" }
+- { id: OOT_SOUL_ENEMY_BAD_BAT, type: SOUL, add: [OOT_SOUL, 0x0040], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Bad Bats" }
+- { id: OOT_SOUL_ENEMY_BIO_BABA, type: SOUL, add: [OOT_SOUL, 0x0041], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Bio Babas" }
+- { id: OOT_SOUL_ENEMY_BOE, type: SOUL, add: [OOT_SOUL, 0x0042], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Boes" }
+- { id: OOT_SOUL_ENEMY_CAPTAIN_KEETA, type: SOUL, add: [OOT_SOUL, 0x0043], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Captain Keeta" }
+- { id: OOT_SOUL_ENEMY_CHUCHU, type: SOUL, add: [OOT_SOUL, 0x0044], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Chuchus" }
+- { id: OOT_SOUL_ENEMY_DEXIHAND, type: SOUL, add: [OOT_SOUL, 0x0045], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Dexihands" }
+- { id: OOT_SOUL_ENEMY_DRAGONFLY, type: SOUL, add: [OOT_SOUL, 0x0046], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Dragonflies" }
+- { id: OOT_SOUL_ENEMY_EENO, type: SOUL, add: [OOT_SOUL, 0x0047], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Eenos" }
+- { id: OOT_SOUL_ENEMY_EYEGORE, type: SOUL, add: [OOT_SOUL, 0x0048], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Eyegores" }
+- { id: OOT_SOUL_ENEMY_GARO, type: SOUL, add: [OOT_SOUL, 0x0049], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Garo" }
+- { id: OOT_SOUL_ENEMY_GEKKO, type: SOUL, add: [OOT_SOUL, 0x004a], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Gekkos" }
+- { id: OOT_SOUL_ENEMY_GIANT_BEE, type: SOUL, add: [OOT_SOUL, 0x004b], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Giant Bees" }
+- { id: OOT_SOUL_ENEMY_GOMESS, type: SOUL, add: [OOT_SOUL, 0x004c], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Gomess" }
+- { id: OOT_SOUL_ENEMY_HIPLOOP, type: SOUL, add: [OOT_SOUL, 0x004d], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Hiploops" }
+- { id: OOT_SOUL_ENEMY_NEJIRON, type: SOUL, add: [OOT_SOUL, 0x004e], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Nejirons" }
+- { id: OOT_SOUL_ENEMY_REAL_BOMBCHU, type: SOUL, add: [OOT_SOUL, 0x004f], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Real Bombchu" }
+- { id: OOT_SOUL_ENEMY_SKULLFISH, type: SOUL, add: [OOT_SOUL, 0x0050], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Skullfish" }
+- { id: OOT_SOUL_ENEMY_SNAPPER, type: SOUL, add: [OOT_SOUL, 0x0051], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Snappers" }
+- { id: OOT_SOUL_ENEMY_TAKKURI, type: SOUL, add: [OOT_SOUL, 0x0052], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Takkuri" }
+- { id: OOT_SOUL_ENEMY_WART, type: SOUL, add: [OOT_SOUL, 0x0053], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Warts" }
+- { id: OOT_SOUL_ENEMY_WIZZROBE, type: SOUL, add: [OOT_SOUL, 0x0054], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Wizzrobes" }
+- { id: MM_SOUL_ENEMY_ANUBIS, type: SOUL, add: [MM_SOUL, 0x0040], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Anubis" }
+- { id: MM_SOUL_ENEMY_BABY_DODONGO, type: SOUL, add: [MM_SOUL, 0x0041], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Baby Dodongos" }
+- { id: MM_SOUL_ENEMY_BIRI, type: SOUL, add: [MM_SOUL, 0x0042], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Biris" }
+- { id: MM_SOUL_ENEMY_DARK_LINK, type: SOUL, add: [MM_SOUL, 0x0043], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Dark Link" }
+- { id: MM_SOUL_ENEMY_DEAD_HAND, type: SOUL, add: [MM_SOUL, 0x0044], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Dead Hands" }
+- { id: MM_SOUL_ENEMY_FLARE_DANCER, type: SOUL, add: [MM_SOUL, 0x0045], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Flare Dancers" }
+- { id: MM_SOUL_ENEMY_GOHMA_LARVA, type: SOUL, add: [MM_SOUL, 0x0046], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Gohma Larvae" }
+- { id: MM_SOUL_ENEMY_LIZALFOS, type: SOUL, add: [MM_SOUL, 0x0047], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Lizalfos" }
+- { id: MM_SOUL_ENEMY_MOBLIN, type: SOUL, add: [MM_SOUL, 0x0048], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Moblins" }
+- { id: MM_SOUL_ENEMY_SKULL_KID, type: SOUL, add: [MM_SOUL, 0x0049], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Skull Kids" }
+- { id: MM_SOUL_ENEMY_SPIKE, type: SOUL, add: [MM_SOUL, 0x004a], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Spikes" }
+- { id: MM_SOUL_ENEMY_STALFOS, type: SOUL, add: [MM_SOUL, 0x004b], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Stalfos" }
+- { id: MM_SOUL_ENEMY_STINGER, type: SOUL, add: [MM_SOUL, 0x004c], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Stingers" }
+- { id: MM_SOUL_ENEMY_TAILPASARN, type: SOUL, add: [MM_SOUL, 0x004d], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Tailpasarans" }
+- { id: MM_SOUL_ENEMY_TORCH_SLUG, type: SOUL, add: [MM_SOUL, 0x004e], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Torch Slugs" }
+- { id: OOT_SOUL_ENEMY_MOTH, type: SOUL, add: [OOT_SOUL, 0x0055], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Moths" }
+- { id: OOT_SOUL_ENEMY_GARAHNA, type: SOUL, add: [OOT_SOUL, 0x0056], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Garahna" }
+- { id: OOT_SOUL_ENEMY_BARI, type: SOUL, add: [OOT_SOUL, 0x0057], flags: 0x80, draw: [GS_SOUL, 3], object: [oot, 0x015c], name: "the <C1>Soul of Baris" }
+- { id: MM_SOUL_ENEMY_BARI, type: SOUL, add: [MM_SOUL, 0x004f], flags: 0xa0, draw: [GS_SOUL, 3], object: [mm, 0x0125], name: "the <C1>Soul of Baris" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

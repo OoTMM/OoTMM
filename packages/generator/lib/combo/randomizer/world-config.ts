@@ -77,6 +77,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     SHARED_MASK_SPOOKY: settings.sharedMaskSpooky,
     SHARED_WALLETS: settings.sharedWallets,
     SHARED_HEALTH: settings.sharedHealth,
+    SOULS_ENEMY_LENS: settings.soulsEnemyLens && (settings.soulsEnemyOot || settings.soulsEnemyMm),
     SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
     SHARED_SOULS_MISC: settings.sharedSoulsMisc,
     SHARED_SOULS_NPC: settings.sharedSoulsNpc,

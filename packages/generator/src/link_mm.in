@@ -32,6 +32,7 @@ gEffectSsTable = 0x801ae3a0;
 
 EnItem00_SetObject = 0x800a5d00;
 EnItem00_Init = 0x800a5d70;
+EnemyPickupTossed = 0x800a6780;
 EnItem00_CollectedHandler = 0x800a6a40;
 EnItem00_Update = 0x800a6b98;
 EnItem00_DrawRupee = 0x800a72ac;
@@ -608,6 +609,8 @@ Math_Atan2F_XY = 0x8018012c;
 Matrix_MultZero = 0x80181b50;
 Actor_ChangeCategory = 0x800bc154;
 EffectSsKFire_Spawn = 0x800b2738;
+EnemyNativeFlyingIce = 0x800b2ac4;
+EnemyNativeFixedHitMark = 0x800b2684;
 EffectSsEnIce_Spawn = 0x800b2bc0;
 Actor_SetColorFilter = 0x800bcb70;
 Gfx_TwoTexScroll = 0x8012cbd0;
@@ -712,6 +715,7 @@ Actor_WorldPitchTowardPoint = 0x800b6da8;
 Math_SinF = 0x801794ec;
 Flags_SetClearTemp = 0x800b5d30;
 EffectSsHahen_Spawn = 0x800b219c;
+EffectSsHahen_SpawnBurst = 0x800b221c;
 CutsceneManager_GetCurrentSubCamId = 0x800F21B8;
 Audio_PlaySubBgm = 0x801a2bb8;
 Audio_PlayBgm_StorePrevBgm = 0x801a2e54;
@@ -724,6 +728,7 @@ Actor_MoveWithoutGravity = 0x800b6b24;
 Actor_WorldYawTowardActor = 0x800b6cd4;
 Actor_WorldYawTowardPoint = 0x800b6d2c;
 Actor_WorldPitchTowardPoint = 0x800b6da8;
+BgCheck_SphVsFirstPoly = 0x800c5a20;
 BgCheck_EntityLineTest1 = 0x800c55c4;
 Actor_WorldDistXZToActor = 0x800b6e1c;
 Player_IsHoldingHookshot = 0x801240c8;
@@ -864,3 +869,18 @@ Matrix_MultVecX = 0x80181b78;
 Player_SetModelsForHoldingShield = 0x801239AC;
 Inventory_GetBtnBItem = 0x8012EC80;
 Inventory_UpdateDeitySwordEquip = 0x80114CA0;
+Collider_FreeJntSph = 0x800e0b78;
+Collider_FreeTris = 0x800e16fc;
+CollisionCheck_SetAT_SAC = 0x800e2634;
+CollisionCheck_SetAC_SAC = 0x800e281c;
+CollisionCheck_SetOC_SAC = 0x800e2a04;
+
+Math_Vec3f_DistXZ = 0x800ff92c;
+
+Collider_SetCylinderType1 = 0x800e12a4;
+
+Animation_PlayOnceSetSpeed = 0x801374e4;
+
+Animation_Reverse = 0x80137650;
+
+Actor_SpawnFloorDustRing = 0x800bbdac;

@@ -72,3 +72,19 @@ export function bufWriteU32BE(data: Uint8Array, offset: number, value: number) {
   data[offset + 2] = (value >>> 8) & 0xff;
   data[offset + 3] = value & 0xff;
 }
+
+export function bufEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a === b) return true;
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+
+export function matchesRomBytes(rom: Uint8Array, offset: number, hex: string): boolean {
+  const size = hex.length / 2;
+  if (offset < 0 || offset + size > rom.length) return false;
+  return rom.subarray(offset, offset + size).every((value, i) =>
+    value === parseInt(hex.slice(i * 2, i * 2 + 2), 16));
+}

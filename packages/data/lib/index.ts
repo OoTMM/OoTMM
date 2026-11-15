@@ -16,3 +16,11 @@ export { default as HINTS } from '../dist/lib/data-hints.json';
 export { default as RAW_GI } from '../dist/lib/data-gi.json';
 export { default as RAW_DRAWGI } from '../dist/lib/data-drawgi.json';
 export { default as FILES } from '../dist/lib/data-files.json';
+
+export * from './enemy-catalog';
+export { ENEMY_SOUNDS_OOT, ENEMY_SOUNDS_MM, SFX_IDS } from './enemy-audio';
+export * from './engine-actors';
+
+export * from './foreign-enemy-souls';
+export { default as ENEMY_LOGIC_MM_ROOMS } from '../dist/lib/enemy-logic-mm-rooms.json';
+export { default as ENEMY_LOGIC_OOT_ROOMS } from '../dist/lib/enemy-logic-oot-rooms.json';

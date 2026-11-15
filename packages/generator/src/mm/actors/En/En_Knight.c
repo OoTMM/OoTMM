@@ -27,3 +27,5 @@ void EnKnight_OnDestroy(Actor* this, PlayState* play)
 }
 
 PATCH_FUNC(0x809b58d4, EnKnight_OnDestroy);
+
+EXPORT_SYMBOL(ENEMY_SCRIPTED_MM_KNIGHT_REWARD_V1, EnKnight_OnDestroy);

@@ -12,3 +12,13 @@ PATCH_START 0x80b23494
   j EnWonderTalk2_AfterInit_Trampoline
    nop
 PATCH_END
+
+.set push
+.set noreorder
+PATCH_START 0x80b233fc
+  lw ra,0x14(sp)
+  move a0,a2
+  j Actor_Kill
+   addiu sp,sp,0x18
+PATCH_END
+.set pop

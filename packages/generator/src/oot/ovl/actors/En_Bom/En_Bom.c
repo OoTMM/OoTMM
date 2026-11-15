@@ -375,4 +375,7 @@ ActorProfile En_Bom_Profile = {
     (ActorFunc)EnBom_Draw,
 };
 
+_Static_assert(sizeof(((EnBom*)0)->timer) == 2, "Bomb timer width");
+static const u32 kBombTimerLayout[] = { offsetof(EnBom, timer), sizeof(EnBom) };
+EXPORT_SYMBOL(FOREIGN_ENEMY_OOT_BOMB_TIMER_V1, kBombTimerLayout);
 OVL_INFO_ACTOR(ACTOR_EN_BOM, En_Bom_Profile);

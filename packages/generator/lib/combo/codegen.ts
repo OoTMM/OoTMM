@@ -48,6 +48,7 @@ async function genGI() {
   /* Header */
   const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'gi_data.h'), "GENERATED_GI_DATA_H");
   cgHeader.define('GI_NONE', 0);
+  cgHeader.define('GI_COUNT', Object.keys(GI).length);
   for (const gi of Object.values(GI)) {
     cgHeader.define(`GI_${gi.id}`, gi.index);
   }

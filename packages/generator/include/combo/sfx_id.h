@@ -4,6 +4,11 @@
 # define SFX_FLAG 0x800
 
 #if defined(GAME_OOT)
+# define NA_SE_VO_LI_DAMAGE_S                   0x6805
+# define NA_SE_VO_LI_AUTO_JUMP                  0x6814
+# define NA_SE_VO_LI_DAMAGE_S_KID               0x6825
+# define NA_SE_VO_LI_TAKEN_AWAY                  0x680c
+# define NA_SE_VO_LI_TAKEN_AWAY_KID              0x682c
 # define NA_SE_PL_WALK_GROUND                   0x800
 # define NA_SE_PL_WALK_SAND                     0x801
 # define NA_SE_PL_WALK_CONCRETE                 0x802

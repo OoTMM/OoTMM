@@ -1418,3 +1418,7 @@ PATCH_START Player_SetCsAction
   j Player_SetCsActionHook
    nop
 PATCH_END
+
+PATCH_START 0x808606d4
+.int 0
+PATCH_END

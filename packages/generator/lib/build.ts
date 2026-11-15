@@ -55,6 +55,10 @@ export async function buildNative() {
   await runCommand('cmake', ['--build', buildDir]);
   await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
 
+  for (const game of ['oot', 'mm']) {
+    const { size } = await fs.stat(path.join(binDir, `${game}_payload.bin`));
+    if (size > 0x80000) throw new Error(`${game} payload exceeds its reserved 512 KiB by ${size - 0x80000} bytes`);
+  }
   return binDir;
 }
 

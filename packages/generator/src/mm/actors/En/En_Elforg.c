@@ -99,3 +99,40 @@ void EnElforg_GiveItem(PlayState* play, Actor* this)
         gMmExtraFlags2.townStrayFairy = 1;
     }
 }
+
+#include <combo/enemy_placement.h>
+static void EnElforg_TrappedByReplacement(Actor* this, PlayState* play)
+{
+    Vec3f pos;
+    int status = comboEnemyFairyHost(this, play, &pos);
+    ActorCallback* action = (ActorCallback*)((u8*)this + 0x22c);
+    if (status < 0)
+    {
+        ActorCallback setup = actorAddr(ACTOR_EN_ELFORG, 0x80acd6a8);
+        setup(this, play);
+        return;
+    }
+    if (status == 1 || status == 2)
+        this->world.pos = this->home.pos = pos;
+    if (status == 2)
+    {
+        ((void (*)(Actor*))actorAddr(ACTOR_EN_ELFORG, 0x80acc470))(this);
+        *action = actorAddr(ACTOR_EN_ELFORG, 0x80acd2e4);
+        this->draw = EnElforg_DrawWrapper;
+        Actor_PlaySfx(this, NA_SE_EV_CHIBI_FAIRY_SAVED);
+    }
+    play->actorCtx.flags |= 8;
+}
+static void EnElforg_BindReplacement(Actor* this, PlayState* play)
+{
+    Vec3f pos;
+    if (comboEnemyFairyHost(this, play, &pos) < 0)
+    {
+        ((ActorCallback)actorAddr(ACTOR_EN_ELFORG, 0x80acd6a8))(this, play);
+        return;
+    }
+    *(ActorCallback*)((u8*)this + 0x22c) = EnElforg_TrappedByReplacement;
+    EnElforg_TrappedByReplacement(this, play);
+}
+
+PATCH_CALL(0x80acc728, EnElforg_BindReplacement);

@@ -82,10 +82,7 @@ static void AdultMask_ClearState(void);
 static void AdultMask_StartEndingAnim(Player* player, PlayState* play);
 static void AdultMask_PlayerReloadUpdateWrapper(Actor* thisx, PlayState* play);
 
-static PlayerAnimationHeader sAdultMask_ClMaskOffHeader = {
-    { 10 },
-    { (void*)0x0702C1A0 },
-};
+static PlayerAnimationHeader sAdultMask_ClMaskOffHeader;
 
 static void AdultMask_DrawObject(PlayState* play, void* object, u32 dl)
 {
@@ -668,6 +665,7 @@ static void AdultMask_UpdateEndingAnim(Player* player, PlayState* play)
 
 static void AdultMask_StartEndingAnim(Player* player, PlayState* play)
 {
+    sAdultMask_ClMaskOffHeader = *(PlayerAnimationHeader*)SEGMENTED_TO_VIRTUAL(&gPlayerAnim_cl_maskoff);
     PlayerAnimationHeader* endingAnim = sAdultMaskTargetAdult ? &gPlayerAnim_cl_setmaskend : &sAdultMask_ClMaskOffHeader;
     sAdultMaskCutsceneMode = ADULT_MASK_CS_ENDING_ANIM;
     sAdultMaskTimer = 0;

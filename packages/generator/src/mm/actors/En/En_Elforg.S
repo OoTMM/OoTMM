@@ -21,6 +21,10 @@ PATCH_START 0x80acda2c
 .int EnElforg_DrawWrapper
 PATCH_END
 
+PATCH_START 0x80acdb4c
+.int 0
+PATCH_END
+
 /* Remove relocs */
 PATCH_START 0x80acdc40
 .int 0

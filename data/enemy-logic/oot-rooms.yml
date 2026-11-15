@@ -1,0 +1,2415 @@
+"oot/Ganon Castle Forest":
+  rooms:
+    - &a1
+      scene: 13
+      room: 5
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Ganon Castle Forest Chest"
+      expectedRule: "soul_wolfos && (can_use_sword || has_explosives_or_hammer || can_hit_triggers_distance || can_use_sticks || can_use_din)"
+      enemyRule: "can_kill_named('Ganons Castle Forest Trial Wolfos')"
+      template: "$ENEMY"
+      selectors:
+        "Ganons Castle Forest Trial Wolfos": *a1
+
+"oot/Ganon Castle Light":
+  rooms:
+    - &a2
+      scene: 13
+      room: 9
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 9
+  rules:
+    - section: locations
+      key: "Ganon Castle Light Chest Center"
+      expectedRule: "soul_keese && soul_skulltula && has_lens && (can_use_sword || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
+      enemyRule: "can_clear_room(GANONS_CASTLE_LIGHT_TRIAL_INVISIBLE_ENEMIES)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_CASTLE_LIGHT_TRIAL_INVISIBLE_ENEMIES: *a2
+
+"mq/Dodongo Cavern Room After Upper Staircase":
+  rooms:
+    - &a3
+      scene: 1
+      room: 5
+      setup: 0
+      slots: &a95
+        - 4
+        - 5
+        - 6
+  rules:
+    - section: events
+      key: "DC_MQ_DEFEAT_DONDONGOS_AFTER_STAIRCASE"
+      expectedRule: "soul_dodongo && can_damage"
+      enemyRule: "can_clear_room(DC_MQ_COMPASS_CHEST)"
+      template: "$ENEMY"
+      selectors:
+        DC_MQ_COMPASS_CHEST: *a3
+
+"mq/Dodongo Cavern MQ Larvae Room":
+  rooms:
+    - &a4
+      scene: 1
+      room: 6
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  rules:
+    - section: events
+      key: "MQ_DC_CLEAR_LARVAE_ROOM"
+      expectedRule: "soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && can_damage"
+      enemyRule: "can_clear_room(DC_MQ_LARVAE_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        DC_MQ_LARVAE_ROOM: *a4
+
+"mq/MQ Deku Tree MQ Slingshot Room":
+  rooms:
+    - &a5
+      scene: 0
+      room: 10
+      setup: 0
+      slots:
+        - 4
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+  rules:
+    - section: events
+      key: "DEKU_MQ_SLINGSHOT_ENEMIES"
+      expectedRule: "soul_deku_baba && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || can_use_sticks || has_ranged_weapon_child)"
+      enemyRule: "can_clear_room(DEKU_MQ_SLINGSHOT_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        DEKU_MQ_SLINGSHOT_ROOM: *a5
+
+"oot/Jabu-Jabu Boomerang Room":
+  rooms:
+    - &a6
+      scene: 2
+      room: 9
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+  rules:
+    - section: locations
+      key: "Jabu-Jabu Boomerang Chest"
+      expectedRule: "can_kill_stingers && soul_ruto"
+      enemyRule: "can_clear_room('JABU BOOMERANG')"
+      template: "$ENEMY && soul_ruto"
+      selectors:
+        "JABU BOOMERANG": *a6
+
+"oot/Jabu-Jabu Compass Room":
+  rooms:
+    - &a7
+      scene: 2
+      room: 12
+      setup: 0
+      slots:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+  rules:
+    - section: locations
+      key: "Jabu-Jabu Compass Chest"
+      expectedRule: "soul_enemy(SOUL_ENEMY_SHABOM)"
+      enemyRule: "can_clear_room(JABU_COMPASS)"
+      template: "$ENEMY"
+      selectors:
+        JABU_COMPASS: *a7
+
+"oot/Ice Cavern End":
+  rooms:
+    - &a8
+      scene: 9
+      room: 7
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Ice Cavern Iron Boots"
+      expectedRule: "soul_wolfos && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+      enemyRule: "can_kill_named('Ice Cavern Wolfos')"
+      template: "$ENEMY"
+      selectors:
+        "Ice Cavern Wolfos": *a8
+    - section: locations
+      key: "Ice Cavern Sheik Song"
+      expectedRule: "soul_wolfos && soul_npc(SOUL_NPC_SHEIK) && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+      template: "$ENEMY && soul_npc(SOUL_NPC_SHEIK)"
+      enemyRule: "can_kill_named('Ice Cavern Wolfos')"
+      selectors:
+        "Ice Cavern Wolfos":
+          scene: 9
+          room: 7
+          setup: 0
+          slots:
+            - 0
+    - section: exits
+      key: "Ice Cavern Block Room"
+      expectedRule: "(climb_anywhere || hookshot_anywhere || has_blue_fire) && soul_wolfos && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+      template: "(climb_anywhere || hookshot_anywhere || has_blue_fire) && $ENEMY"
+      enemyRule: "can_kill_named('Ice Cavern Wolfos')"
+      selectors:
+        "Ice Cavern Wolfos":
+          scene: 9
+          room: 7
+          setup: 0
+          slots:
+            - 0
+
+"mq/Spirit Temple Child Upper":
+  rooms:
+    - &a9
+      scene: 6
+      room: 4
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 11
+  rules:
+    - section: locations
+      key: "MQ Spirit Temple Child Upper Ground Chest"
+      expectedRule: "soul_like_like && soul_beamos && soul_enemy(SOUL_ENEMY_BABY_DODONGO) && has_explosives"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_CLIMB)"
+      template: "$ENEMY && has_explosives"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_CLIMB: *a9
+
+"mq/Spirit Temple Adult Upper":
+  rooms:
+    - &a10
+      scene: 6
+      room: 17
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 9
+  rules:
+    - section: locations
+      key: "MQ Spirit Temple Beamos Room Chest"
+      expectedRule: "soul_beamos"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_MQ_BEAMOS)"
+      template: "$ENEMY"
+      selectors:
+        SPIRIT_TEMPLE_MQ_BEAMOS: *a10
+
+"mq/Ice Cavern Serenade Room":
+  rooms:
+    - &a11
+      scene: 9
+      room: 7
+      setup: 0
+      slots:
+        - 3
+  rules:
+    - section: events
+      key: "ICE_MQ_FINAL_ROOM_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+      enemyRule: "can_kill_named('Ice Cavern MQ Stalfos')"
+      template: "$ENEMY"
+      selectors:
+        "Ice Cavern MQ Stalfos": *a11
+
+"mq/Water Temple Compass Room":
+  rooms:
+    - &a12
+      scene: 5
+      room: 18
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+  rules:
+    - section: locations
+      key: "MQ Water Temple Compass Chest"
+      expectedRule: "event(RUTO_COLUMN_HOOKSHOTS)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_COMPASS)"
+      template: "event(RUTO_COLUMN_HOOKSHOTS) && $ENEMY"
+      selectors:
+        WATER_TEMPLE_MQ_COMPASS: *a12
+
+"mq/Water Temple Room Before Dark Link Upper":
+  rooms:
+    - &a13
+      scene: 5
+      room: 6
+      setup: 0
+      slots: &a14
+        - 2
+        - 3
+        - 4
+  rules:
+    - section: locations
+      key: "MQ Water Temple Pot Before Dark Link Near Door 1"
+      expectedRule: "true"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_BEFORE_DARK_LINK)"
+      template: "($ENEMY || hookshot_anywhere || climb_anywhere)"
+      selectors:
+        WATER_TEMPLE_MQ_BEFORE_DARK_LINK: *a13
+    - section: locations
+      key: "MQ Water Temple Pot Before Dark Link Near Door 2"
+      expectedRule: "true"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_BEFORE_DARK_LINK)"
+      template: "($ENEMY || hookshot_anywhere || climb_anywhere)"
+      selectors:
+        WATER_TEMPLE_MQ_BEFORE_DARK_LINK:
+          scene: 5
+          room: 6
+          setup: 0
+          slots: *a14
+    - section: locations
+      key: "MQ Water Temple Big Fairy Before Dark Link Near Door 1"
+      expectedRule: "can_play_sun"
+      template: "can_play_sun && ($ENEMY || hookshot_anywhere || climb_anywhere)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_BEFORE_DARK_LINK)"
+      selectors:
+        WATER_TEMPLE_MQ_BEFORE_DARK_LINK:
+          scene: 5
+          room: 6
+          setup: 0
+          slots: *a14
+    - section: locations
+      key: "MQ Water Temple Big Fairy Before Dark Link Near Door 2"
+      expectedRule: "can_play_storms"
+      template: "can_play_storms && ($ENEMY || hookshot_anywhere || climb_anywhere)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_BEFORE_DARK_LINK)"
+      selectors:
+        WATER_TEMPLE_MQ_BEFORE_DARK_LINK:
+          scene: 5
+          room: 6
+          setup: 0
+          slots: *a14
+
+"mq/Jabu-Jabu Back Forked Paths Right 1":
+  rooms:
+    - &a15
+      scene: 2
+      room: 11
+      setup: 0
+      slots: &a64
+        - 5
+        - 6
+  rules:
+    - section: events
+      key: "JABU_MQ_LIKE_LIKE_ROOM_CLEAR"
+      expectedRule: "soul_like_like && can_use_slingshot"
+      enemyRule: "can_clear_room(JABU_MQ_FALLING_LIKELIKE)"
+      template: "$ENEMY"
+      selectors:
+        JABU_MQ_FALLING_LIKELIKE: *a15
+
+"oot/Shadow Temple Pit":
+  rooms:
+    - &a2
+      scene: 7
+      room: 1
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+  rules:
+    - section: locations
+      key: "Shadow Temple Map"
+      expectedRule: "soul_redead_gibdo && soul_keese && has_lens && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_MAP_CHEST)"
+      template: "has_lens && $ENEMY"
+      selectors:
+        SHADOW_TEMPLE_MAP_CHEST: *a2
+  encounters:
+    - source: oot-dead-hand-encounter
+      rules:
+        - section: locations
+          key: "Shadow Temple Hover Boots"
+          expectedRule: "soul_enemy(SOUL_ENEMY_DEAD_HAND) && has_lens && (can_use_sword || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+          template: "has_lens && $ENEMY"
+
+"oot/Shadow Temple Main":
+  rooms:
+    - &a17
+      scene: 7
+      room: 7
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: locations
+      key: "Shadow Temple Compass"
+      expectedRule: "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_COMPASS_CHEST)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_COMPASS_CHEST: *a17
+
+"oot/Shadow Temple Open":
+  rooms:
+    - &a18
+      scene: 7
+      room: 16
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+  rules:
+    - section: events
+      key: "SHADOW_INVISIBLE_SCYTHE_GATE"
+      expectedRule: "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || can_use_sword)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_INVISIBLE_BLADES)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_INVISIBLE_BLADES: *a18
+
+"oot/Shadow Temple Invisible Spikes":
+  rooms:
+    - &a19
+      scene: 7
+      room: 11
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: locations
+      key: "Shadow Temple Invisible Spike Room"
+      expectedRule: "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_INVISIBLE_SPIKES)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_INVISIBLE_SPIKES: *a19
+
+"oot/Shadow Temple Wind Gibdo":
+  rooms:
+    - &a20
+      scene: 7
+      room: 20
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: locations
+      key: "Shadow Temple After Wind"
+      expectedRule: "soul_redead_gibdo && (can_use_sword || can_use_din || can_use_sticks || can_hammer)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_AFTER_WIND)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_AFTER_WIND: *a20
+
+"mq/Gerudo Training Grounds Left Path First Room":
+  rooms:
+    - &a21
+      scene: 11
+      room: 1
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: events
+      key: "GTG_IRON_KNUCKLE"
+      expectedRule: "soul_iron_knuckle && (has_weapon || can_use_sticks) && (has_shield || is_adult)"
+      enemyRule: "can_kill_named('Gerudo Training Ground MQ First Iron Knuckle')"
+      template: "$ENEMY"
+      selectors:
+        "Gerudo Training Ground MQ First Iron Knuckle": *a21
+
+"mq/Gerudo Training Grounds Stalfos Room Side Room":
+  rooms:
+    - &a22
+      scene: 11
+      room: 10
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+  rules:
+    - section: events
+      key: "GTG_MQ_STALFOS_SIDE_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_SPIKE) && soul_freezard && (can_use_sword_master || can_use_sword_razor || (has(SWORD_BIGGORON) && age_sword_adult))"
+      enemyRule: "can_clear_room(GTG_HEAVY_BLOCK)"
+      template: "$ENEMY"
+      selectors:
+        GTG_HEAVY_BLOCK: *a22
+
+"mq/Gerudo Training Grounds Room After Spinning Statue":
+  rooms:
+    - &a23
+      scene: 11
+      room: 5
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+  rules:
+    - section: events
+      key: "GTG_MQ_KNUCKLE_AND_SLUGS_CLEAR"
+      expectedRule: "soul_iron_knuckle && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_weapon"
+      enemyRule: "can_clear_room(GTG_HAMMER_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_HAMMER_ROOM: *a23
+
+"oot/Water Temple Map Room":
+  rooms:
+    - &a24
+      scene: 5
+      room: 19
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+  rules:
+    - section: locations
+      key: "Water Temple Map"
+      expectedRule: "soul_enemy(SOUL_ENEMY_SPIKE)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MAP_CHEST)"
+      template: "$ENEMY"
+      selectors:
+        WATER_TEMPLE_MAP_CHEST: *a24
+
+"oot/Water Temple Shell Room":
+  rooms:
+    - &a25
+      scene: 5
+      room: 18
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+  rules:
+    - section: locations
+      key: "Water Temple Shell Chest"
+      expectedRule: "soul_shell_blade"
+      enemyRule: "can_clear_room(WATER_TEMPLE_TORCHES_CHEST)"
+      template: "$ENEMY"
+      selectors:
+        WATER_TEMPLE_TORCHES_CHEST: *a25
+
+"oot/Water Temple Under Center":
+  rooms:
+    - &a26
+      scene: 5
+      room: 2
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+  rules:
+    - section: locations
+      key: "Water Temple Under Center"
+      expectedRule: "can_hookshot && soul_enemy(SOUL_ENEMY_SPIKE) && soul_shell_blade"
+      enemyRule: "can_clear_room(WATER_TEMPLE_CENTRAL_PILLAR)"
+      template: "can_hookshot && $ENEMY"
+      selectors:
+        WATER_TEMPLE_CENTRAL_PILLAR: *a26
+
+"oot/Gerudo Training Grounds":
+  rooms:
+    - &a27
+      scene: 11
+      room: 1
+      setup: 0
+      slots: &a29
+        - 0
+        - 1
+    - &a28
+      scene: 11
+      room: 7
+      setup: 0
+      slots: &a30
+        - 0
+        - 1
+        - 13
+  rules:
+    - section: locations
+      key: "Gerudo Training Grounds Stalfos"
+      expectedRule: "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
+      enemyRule: "can_clear_room(GTG_STALFOS_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_STALFOS_ROOM: *a27
+    - section: exits
+      key: "Gerudo Training Grounds Right Side"
+      expectedRule: "has_explosives && can_use_sword && soul_beamos && soul_dinolfos"
+      enemyRule: "can_clear_room(GTG_BEAMOS_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_BEAMOS_ROOM: *a28
+    - section: exits
+      key: "Gerudo Training Grounds Slopes"
+      expectedRule: "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
+      enemyRule: "can_clear_room(GTG_STALFOS_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_STALFOS_ROOM:
+          scene: 11
+          room: 1
+          setup: 0
+          slots: *a29
+
+"oot/Gerudo Training Grounds Right Side":
+  rooms:
+    - &a31
+      scene: 11
+      room: 7
+      setup: 0
+      slots: *a30
+  rules:
+    - section: locations
+      key: "Gerudo Training Grounds Lizalfos"
+      expectedRule: "true"
+      enemyRule: "can_clear_room(GTG_BEAMOS_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_BEAMOS_ROOM: *a31
+
+"oot/Gerudo Training Grounds Left Side":
+  rooms:
+    - &a32
+      scene: 11
+      room: 3
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 4
+        - 5
+  rules:
+    - section: locations
+      key: "Gerudo Training Grounds Near Block"
+      expectedRule: "soul_wolfos && (can_use_sword || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance || can_use_din)"
+      enemyRule: "can_clear_room(GTG_BEFORE_HEAVY_BLOCK)"
+      template: "$ENEMY"
+      selectors:
+        GTG_BEFORE_HEAVY_BLOCK: *a32
+
+"oot/Gerudo Training Grounds After Block":
+  rooms:
+    - &a33
+      scene: 11
+      room: 10
+      setup: 0
+      slots: &a34
+        - 0
+        - 1
+        - 2
+  rules:
+    - section: locations
+      key: "Gerudo Training Grounds Behind Block Enemy Front"
+      expectedRule: "soul_like_like && (can_use_sword || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance)"
+      enemyRule: "can_clear_room(GTG_HEAVY_BLOCK)"
+      template: "$ENEMY"
+      selectors:
+        GTG_HEAVY_BLOCK: *a33
+    - section: locations
+      key: "Gerudo Training Grounds Behind Block Enemy Back"
+      expectedRule: "soul_like_like && (can_use_sword || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance)"
+      enemyRule: "can_clear_room(GTG_HEAVY_BLOCK)"
+      template: "$ENEMY"
+      selectors:
+        GTG_HEAVY_BLOCK:
+          scene: 11
+          room: 10
+          setup: 0
+          slots: *a34
+
+"oot/Gerudo Training Grounds Hammer":
+  rooms:
+    - &a35
+      scene: 11
+      room: 5
+      setup: 0
+      slots: &a36
+        - 1
+        - 2
+        - 3
+        - 4
+  rules:
+    - section: locations
+      key: "Gerudo Training Grounds Hammer Room"
+      expectedRule: "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sword || can_use_sticks || can_hammer || can_use_bow)"
+      enemyRule: "can_clear_room(GTG_HAMMER_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_HAMMER_ROOM: *a35
+    - section: exits
+      key: "Gerudo Training Grounds Lava"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_keese && (can_use_sword || can_use_sticks || can_hammer || can_use_bow)"
+      enemyRule: "can_clear_room(GTG_HAMMER_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_HAMMER_ROOM:
+          scene: 11
+          room: 5
+          setup: 0
+          slots: *a36
+
+"oot/Fire Temple Boss Key Loop Flare Dancer":
+  rooms:
+    - &a37
+      scene: 4
+      room: 15
+      setup: 0
+      slots: &a39
+        - 0
+        - 1
+        - 2
+        - 3
+        - 5
+        - 6
+        - 7
+    - &a38
+      scene: 4
+      room: 3
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Fire Temple Boss Key Side Chest"
+      expectedRule: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (is_adult || can_hookshot || climb_anywhere)"
+      enemyRule: "can_clear_room(FIRE_TEMPLE_LOWER_LOCKED_DOOR) and can_kill_named('Fire Temple Lower Flare Dancer')"
+      template: "$ENEMY && (is_adult || can_hookshot || climb_anywhere)"
+      selectors:
+        FIRE_TEMPLE_LOWER_LOCKED_DOOR: *a37
+        "Fire Temple Lower Flare Dancer": *a38
+
+"oot/Fire Temple Boss Key Loop End":
+  rooms:
+    - &a40
+      scene: 4
+      room: 15
+      setup: 0
+      slots: *a39
+    - &a41
+      scene: 4
+      room: 3
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Fire Temple Boss Key Chest"
+      expectedRule: "true"
+      enemyRule: "can_clear_room(FIRE_TEMPLE_LOWER_LOCKED_DOOR) and can_kill_named('Fire Temple Lower Flare Dancer')"
+      template: "$ENEMY"
+      selectors:
+        FIRE_TEMPLE_LOWER_LOCKED_DOOR: *a40
+        "Fire Temple Lower Flare Dancer": *a41
+
+"oot/Fire Temple Boss Key Loop Floor Tiles":
+  rooms:
+    - &a42
+      scene: 4
+      room: 15
+      setup: 0
+      slots: *a39
+  rules:
+    - section: locations
+      key: "Fire Temple GS Hammer Statues"
+      expectedRule: "gs && can_clear_flying_floor_tiles"
+      enemyRule: "can_clear_room(FIRE_TEMPLE_LOWER_LOCKED_DOOR)"
+      template: "gs && $ENEMY"
+      selectors:
+        FIRE_TEMPLE_LOWER_LOCKED_DOOR: *a42
+
+"mq/Forest Temple West Garden Redead Battle Room":
+  rooms:
+    - &a43
+      scene: 3
+      room: 18
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: events
+      key: "FOREST_MQ_WEST_GARDEN_REDEAD_BATTLE_CLEAR"
+      expectedRule: "soul_redead_gibdo && has_weapon"
+      enemyRule: "can_kill_named('Forest Temple MQ ReDead Room Redead')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple MQ ReDead Room Redead": *a43
+
+"oot/Wolfos Grotto":
+  rooms:
+    - &a44
+      scene: 62
+      room: 7
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: locations
+      key: "Sacred Meadow Grotto"
+      expectedRule: "can_kill_wolfos"
+      enemyRule: "can_clear_room(SFM_WOLFOS_GROTTO)"
+      template: "$ENEMY"
+      selectors:
+        SFM_WOLFOS_GROTTO: *a44
+
+"oot/ReDead Grotto":
+  rooms:
+    - &a45
+      scene: 62
+      room: 2
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: locations
+      key: "Kakariko Grotto Front"
+      expectedRule: "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
+      enemyRule: "can_clear_room(KAK_REDEAD_GROTTO)"
+      template: "$ENEMY"
+      selectors:
+        KAK_REDEAD_GROTTO: *a45
+
+"mq/Shadow Temple Textured Maze First Half Side Room":
+  rooms:
+    - &a46
+      scene: 7
+      room: 1
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+  rules:
+    - section: events
+      key: "SHADOW_MQ_TEXTURED_MAZE_SIDE_ROOM_CLEAR"
+      expectedRule: "soul_redead_gibdo && (can_use_din || (can_play_sun && (has_weapon || can_use_sticks)))"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_MQ_COMPASS_CHEST)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_MQ_COMPASS_CHEST: *a46
+
+"mq/Shadow Temple First Beamos Fork Gibdo Room":
+  rooms:
+    - &a47
+      scene: 7
+      room: 7
+      setup: 0
+      slots:
+        - 0
+    - &a48
+      scene: 7
+      room: 7
+      setup: 0
+      slots:
+        - 1
+  rules:
+    - section: events
+      key: "SHADOW_MQ_FIRST_BEAMOS_FORK_GIBDOS_CLEAR"
+      expectedRule: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
+      enemyRule: "can_kill_named('Shadow Temple MQ Early Gibdo 1') and can_kill_named('Shadow Temple MQ Early Gibdo 2')"
+      template: "$ENEMY"
+      selectors:
+        "Shadow Temple MQ Early Gibdo 1": *a47
+        "Shadow Temple MQ Early Gibdo 2": *a48
+
+"mq/Shadow Temple Dual Staircase Stalfos Room":
+  rooms:
+    - &a49
+      scene: 7
+      room: 14
+      setup: 0
+      slots:
+        - 4
+        - 5
+  rules:
+    - section: events
+      key: "SHADOW_MQ_DUAL_STAIRCASE_STALFOS_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_MQ_STALFOS)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_MQ_STALFOS: *a49
+
+"mq/Shadow Temple After Wind Tunnel Gibdos Room":
+  rooms:
+    - &a50
+      scene: 7
+      room: 20
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: events
+      key: "SHADOW_MQ_AFTER_WIND_TUNNEL_GIBDOS_CLEAR"
+      expectedRule: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_AFTER_WIND)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_AFTER_WIND: *a50
+
+"mq/Fire Temple Hammer Loop Flare Dancer Room":
+  rooms:
+    - &a51
+      scene: 4
+      room: 3
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: events
+      key: "FIRE_MQ_HAMMER_LOOP_FLARE_DANCER_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || has_bombchu || can_use_mask_blast || can_hammer || can_hookshot) && (has_weapon || has_sticks || can_hammer)"
+      enemyRule: "can_kill_named('Fire Temple MQ Lower Flare Dancer')"
+      template: "$ENEMY"
+      selectors:
+        "Fire Temple MQ Lower Flare Dancer": *a51
+
+"oot/Forest Temple Mini-Boss":
+  rooms:
+    - &a52
+      scene: 3
+      room: 6
+      setup: 0
+      slots: &a87
+        - 0
+        - 1
+  rules:
+    - section: locations
+      key: "Forest Temple Mini-Boss Key"
+      expectedRule: "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
+      enemyRule: "can_clear_room(FOREST_TEMPLE_LOWER_STALFOS)"
+      template: "$ENEMY"
+      selectors:
+        FOREST_TEMPLE_LOWER_STALFOS: *a52
+
+"oot/Forest Temple Map Room":
+  rooms:
+    - &a53
+      scene: 3
+      room: 10
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Forest Temple Map"
+      expectedRule: "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
+      enemyRule: "can_kill_named('Forest Temple Map Chest Blue Bubble')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple Map Chest Blue Bubble": *a53
+    - section: exits
+      key: "Forest Temple Garden West"
+      expectedRule: "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
+      enemyRule: "can_kill_named('Forest Temple Map Chest Blue Bubble')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple Map Chest Blue Bubble":
+          scene: 3
+          room: 10
+          setup: 0
+          slots:
+            - 0
+    - section: exits
+      key: "Forest Temple Garden East Ledge"
+      expectedRule: "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
+      enemyRule: "can_kill_named('Forest Temple Map Chest Blue Bubble')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple Map Chest Blue Bubble":
+          scene: 3
+          room: 10
+          setup: 0
+          slots:
+            - 0
+
+"oot/Forest Temple Floormaster":
+  rooms:
+    - &a54
+      scene: 3
+      room: 18
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Forest Temple Floormaster"
+      expectedRule: "soul_floormaster && (can_use_sword || can_use_sticks)"
+      enemyRule: "can_kill_named('Forest Temple Floormaster')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple Floormaster": *a54
+
+"mq/Spirit Temple":
+  rooms:
+    - &a55
+      scene: 6
+      room: 10
+      setup: 0
+      slots:
+        - 5
+  rules:
+    - section: locations
+      key: "Spirit Temple Silver Gauntlets"
+      expectedRule: "small_keys_spirit(4) && has_bombchu && (can_play_time || can_play_emptiness) && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
+      template: "small_keys_spirit(4) && has_bombchu && (can_play_time || can_play_emptiness) && is_child && $ENEMY && has_lens"
+      enemyRule: "can_kill_named('Spirit Temple MQ Child Side Iron Knuckle')"
+      selectors:
+        "Spirit Temple MQ Child Side Iron Knuckle": *a55
+
+"mq/Spirit Temple Adult Upper 2":
+  rooms:
+    - &a56
+      scene: 6
+      room: 20
+      setup: 0
+      slots:
+        - 5
+    - &a57
+      scene: 6
+      room: 19
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Spirit Temple Mirror Shield"
+      expectedRule: "has_lens && soul_iron_knuckle && soul_floormaster"
+      template: "has_lens && $ENEMY"
+      enemyRule: "can_kill_named('Spirit Temple MQ Adult Side Iron Knuckle') and can_kill_named('Spirit Temple MQ Before Adult Knuckle Floormaster')"
+      selectors:
+        "Spirit Temple MQ Adult Side Iron Knuckle": *a56
+        "Spirit Temple MQ Before Adult Knuckle Floormaster": *a57
+    - section: exits
+      key: "Spirit Temple Adult Hand"
+      expectedRule: "has_lens && soul_iron_knuckle && soul_floormaster"
+      enemyRule: "can_kill_named('Spirit Temple MQ Before Adult Knuckle Floormaster') and can_kill_named('Spirit Temple MQ Adult Side Iron Knuckle')"
+      template: "has_lens && ($ENEMY)"
+      selectors:
+        "Spirit Temple MQ Before Adult Knuckle Floormaster":
+          scene: 6
+          room: 19
+          setup: 0
+          slots:
+            - 0
+        "Spirit Temple MQ Adult Side Iron Knuckle":
+          scene: 6
+          room: 20
+          setup: 0
+          slots:
+            - 5
+
+"oot/Spirit Temple Statue":
+  rooms:
+    - &a58
+      scene: 6
+      room: 17
+      setup: 0
+      slots: &a81
+        - 0
+        - 1
+        - 2
+        - 3
+    - &a59
+      scene: 6
+      room: 10
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: locations
+      key: "Spirit Temple Silver Gauntlets"
+      expectedRule: "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_ANUBIS) && soul_beamos && (soul_armos || can_play_emptiness)"
+      template: "small_keys_spirit(3) && has_hookshot(2) && has_explosives && $ENEMY && (soul_armos || can_play_emptiness)"
+      enemyRule: "can_kill_named('Spirit Temple Child Side Iron Knuckle') and can_clear_room(SPIRIT_TEMPLE_ADULT_ANUBIS_ROOM)"
+      selectors:
+        SPIRIT_TEMPLE_ADULT_ANUBIS_ROOM: *a58
+        "Spirit Temple Child Side Iron Knuckle": *a59
+
+"mq/Water Temple Room Before Dark Link Lower":
+  rooms:
+    - &a60
+      scene: 5
+      room: 6
+      setup: 0
+      slots: *a14
+  rules:
+    - section: locations
+      key: "MQ Water Temple Big Fairy Before Dark Link Ledge"
+      expectedRule: "can_play_sun && ((soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hookshot) || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+      template: "can_play_sun && (($ENEMY && can_hookshot) || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_BEFORE_DARK_LINK)"
+      selectors:
+        WATER_TEMPLE_MQ_BEFORE_DARK_LINK: *a60
+
+"mq/Jabu-Jabu Basement Side Room Entrance Side":
+  rooms:
+    - &a61
+      scene: 2
+      room: 13
+      setup: 0
+      slots: &a62
+        - 1
+        - 2
+        - 3
+        - 5
+        - 6
+  rules:
+    - section: events
+      key: "JABU_MQ_BASEMENT_SIDE_PLATFORM"
+      expectedRule: "has_lens && soul_keese && can_kill_stingers && has_ranged_weapon"
+      template: "has_lens && $ENEMY"
+      enemyRule: "can_clear_room(JABU_MQ_INVISIBLE_ENEMIES)"
+      selectors:
+        JABU_MQ_INVISIBLE_ENEMIES: *a61
+
+"mq/Jabu-Jabu Basement Side Room GS Side":
+  rooms:
+    - &a63
+      scene: 2
+      room: 13
+      setup: 0
+      slots: *a62
+  rules:
+    - section: events
+      key: "JABU_MQ_BASEMENT_SIDE_PLATFORM"
+      expectedRule: "has_lens && soul_keese && can_kill_stingers && has_ranged_weapon"
+      template: "has_lens && $ENEMY"
+      enemyRule: "can_clear_room(JABU_MQ_INVISIBLE_ENEMIES)"
+      selectors:
+        JABU_MQ_INVISIBLE_ENEMIES: *a63
+
+"mq/Jabu-Jabu Back Forked Paths Right 2":
+  rooms:
+    - &a65
+      scene: 2
+      room: 11
+      setup: 0
+      slots: *a64
+  rules:
+    - section: events
+      key: "JABU_TENTACLE_BLUE"
+      expectedRule: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+      template: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE) && ($ENEMY || can_use_din)"
+      enemyRule: "can_clear_room(JABU_MQ_FALLING_LIKELIKE)"
+      selectors:
+        JABU_MQ_FALLING_LIKELIKE: *a65
+
+"oot/Ganon Castle Water":
+  rooms:
+    - &a66
+      scene: 13
+      room: 2
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: exits
+      key: "Ganon Castle Water 2"
+      expectedRule: "soul_freezard && has_blue_fire && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives_or_hammer || can_use_din)"
+      enemyRule: "can_clear_room(GANONS_CASTLE_WATER_TRIAL_ENTRY)"
+      template: "has_blue_fire && ($ENEMY)"
+      selectors:
+        GANONS_CASTLE_WATER_TRIAL_ENTRY: *a66
+
+"oot/Dodongo Cavern Miniboss 1":
+  rooms:
+    - &a67
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 1
+    - &a68
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 2
+  rules:
+    - section: exits
+      key: "Dodongo Cavern Green Room"
+      expectedRule: "soul_lizalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+      enemyRule: "can_kill_named('Dodongos Cavern Lower Lizalfos 1') and can_kill_named('Dodongos Cavern Lower Lizalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Dodongos Cavern Lower Lizalfos 1": *a67
+        "Dodongos Cavern Lower Lizalfos 2": *a68
+    - section: exits
+      key: "Dodongo Cavern Right Corridor"
+      expectedRule: "soul_lizalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+      enemyRule: "can_kill_named('Dodongos Cavern Lower Lizalfos 1') and can_kill_named('Dodongos Cavern Lower Lizalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Dodongos Cavern Lower Lizalfos 1":
+          scene: 1
+          room: 3
+          setup: 0
+          slots:
+            - 1
+        "Dodongos Cavern Lower Lizalfos 2":
+          scene: 1
+          room: 3
+          setup: 0
+          slots:
+            - 2
+
+"oot/Dodongo Cavern Miniboss 2":
+  rooms:
+    - &a69
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 3
+    - &a70
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 4
+  rules:
+    - section: exits
+      key: "Dodongo Cavern Bomb Bag Room 1"
+      expectedRule: "soul_lizalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+      enemyRule: "can_kill_named('Dodongos Cavern Upper Lizalfos 1') and can_kill_named('Dodongos Cavern Upper Lizalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Dodongos Cavern Upper Lizalfos 1": *a69
+        "Dodongos Cavern Upper Lizalfos 2": *a70
+    - section: exits
+      key: "Dodongo Cavern Bomb Bag Room 2"
+      expectedRule: "soul_lizalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+      enemyRule: "can_kill_named('Dodongos Cavern Upper Lizalfos 1') and can_kill_named('Dodongos Cavern Upper Lizalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Dodongos Cavern Upper Lizalfos 1":
+          scene: 1
+          room: 3
+          setup: 0
+          slots:
+            - 3
+        "Dodongos Cavern Upper Lizalfos 2":
+          scene: 1
+          room: 3
+          setup: 0
+          slots:
+            - 4
+
+"oot/Ice Cavern":
+  rooms:
+    - &a71
+      scene: 9
+      room: 1
+      setup: 0
+      slots:
+        - 1
+        - 10
+        - 11
+        - 12
+  rules:
+    - section: exits
+      key: "Ice Cavern Scythe"
+      expectedRule: "soul_freezard && (can_use_sword_master || can_use_sword_biggoron || can_hammer || can_use_sticks || has_fire || has_explosives)"
+      enemyRule: "can_clear_room(ICE_CAVERN_ENTRYWAY)"
+      template: "$ENEMY"
+      selectors:
+        ICE_CAVERN_ENTRYWAY: *a71
+
+"oot/Deku Tree Lobby":
+  rooms:
+    - &a72
+      scene: 0
+      room: 1
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: exits
+      key: "Deku Tree Slingshot Room"
+      expectedRule: "soul_deku_scrub && (has_shield_for_scrubs || can_hammer)"
+      enemyRule: "can_kill_named('Deku Tree Before Slingshot Hint Scrub')"
+      template: "$ENEMY"
+      selectors:
+        "Deku Tree Before Slingshot Hint Scrub": *a72
+
+"oot/Deku Tree Before Boss":
+  rooms:
+    - &a73
+      scene: 0
+      room: 9
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 5
+  rules:
+    - section: exits
+      key: "Deku Tree Boss"
+      expectedRule: "soul_deku_scrub && has_shield_for_scrubs"
+      enemyRule: "can_clear_room(DEKU_BEFORE_BOSS)"
+      template: "$ENEMY"
+      selectors:
+        DEKU_BEFORE_BOSS: *a73
+
+"mq/Deku Tree Before Boss":
+  rooms:
+    - &a74
+      scene: 0
+      room: 9
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 5
+  rules:
+    - section: exits
+      key: "Deku Tree Boss"
+      expectedRule: "event(DEKU_TREE_MQ_PRE_BOSS_SCRUB_PUZZLE)"
+      enemyRule: "can_clear_room(DEKU_BEFORE_BOSS)"
+      template: "$ENEMY"
+      selectors:
+        DEKU_BEFORE_BOSS: *a74
+
+"oot/Fire Temple Before Miniboss":
+  rooms:
+    - &a75
+      scene: 4
+      room: 24
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: exits
+      key: "Fire Temple After Miniboss"
+      expectedRule: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && has_explosives && (can_use_sword || can_hammer || can_use_sticks)"
+      enemyRule: "can_kill_named('Fire Temple Upper Flare Dancer')"
+      template: "$ENEMY"
+      selectors:
+        "Fire Temple Upper Flare Dancer": *a75
+
+"oot/Spirit Temple Child Entrance":
+  rooms:
+    - &a76
+      scene: 6
+      room: 1
+      setup: 0
+      slots: &a77
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+  rules:
+    - section: exits
+      key: "Spirit Temple Child Left"
+      expectedRule: "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (can_use_sword || can_use_slingshot)) || time_travel_at_will)"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "$ENEMY"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START: *a76
+    - section: exits
+      key: "Spirit Temple Child Right"
+      expectedRule: "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (can_use_sword || can_use_slingshot)) || time_travel_at_will)"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "$ENEMY"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a77
+
+"oot/Spirit Temple Child Back Left":
+  rooms:
+    - &a78
+      scene: 6
+      room: 27
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: exits
+      key: "Spirit Temple Child Back Right"
+      expectedRule: "soul_enemy(SOUL_ENEMY_ANUBIS)"
+      enemyRule: "can_kill_named('Spirit Temple Child Anubis')"
+      template: "$ENEMY"
+      selectors:
+        "Spirit Temple Child Anubis": *a78
+
+"oot/Spirit Temple Child Back Right":
+  rooms:
+    - &a79
+      scene: 6
+      room: 27
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: exits
+      key: "Spirit Temple Child Back Left"
+      expectedRule: "soul_enemy(SOUL_ENEMY_ANUBIS)"
+      enemyRule: "can_kill_named('Spirit Temple Child Anubis')"
+      template: "$ENEMY"
+      selectors:
+        "Spirit Temple Child Anubis": *a79
+
+"oot/Spirit Temple Child Upper":
+  rooms:
+    - &a80
+      scene: 6
+      room: 10
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: exits
+      key: "Spirit Temple Child Hand"
+      expectedRule: "small_keys_spirit(5) && soul_iron_knuckle && (can_use_sword || has_explosives || can_use_sticks)"
+      enemyRule: "can_kill_named('Spirit Temple Child Side Iron Knuckle')"
+      template: "small_keys_spirit(5) && ($ENEMY)"
+      selectors:
+        "Spirit Temple Child Side Iron Knuckle": *a80
+
+"oot/Spirit Temple Adult Upper":
+  rooms:
+    - &a82
+      scene: 6
+      room: 17
+      setup: 0
+      slots: *a81
+  rules:
+    - section: exits
+      key: "Spirit Temple Adult Upper 2"
+      expectedRule: "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS)"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_ADULT_ANUBIS_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        SPIRIT_TEMPLE_ADULT_ANUBIS_ROOM: *a82
+    - section: exits
+      key: "Spirit Temple Statue Adult"
+      expectedRule: "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS) && ((small_keys_spirit(1) && can_reflect_light) || small_keys_spirit(2))"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_ADULT_ANUBIS_ROOM)"
+      template: "($ENEMY) && ((small_keys_spirit(1) && can_reflect_light) || small_keys_spirit(2))"
+      selectors:
+        SPIRIT_TEMPLE_ADULT_ANUBIS_ROOM:
+          scene: 6
+          room: 17
+          setup: 0
+          slots: *a81
+
+"oot/Sacred Meadow Entryway":
+  rooms:
+    - &a83
+      scene: 86
+      room: 0
+      setup: 0
+      slots:
+        - 1
+  rules:
+    - section: exits
+      key: "Sacred Meadow"
+      expectedRule: "(is_child && can_kill_wolfos) || is_adult || climb_anywhere || hookshot_anywhere"
+      enemyRule: "can_kill_named('SFM Child Wolfos')"
+      template: "(is_child && ($ENEMY)) || is_adult || climb_anywhere || hookshot_anywhere"
+      selectors:
+        "SFM Child Wolfos": *a83
+
+"oot/Bottom of the Well Front Hallway":
+  rooms:
+    - &a84
+      scene: 8
+      room: 0
+      setup: 0
+      slots:
+        - 1
+  rules:
+    - section: exits
+      key: "Bottom of the Well Main"
+      expectedRule: "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
+      enemyRule: "can_kill_named('Bottom of the Well Entryway Skulltula')"
+      template: "$ENEMY"
+      selectors:
+        "Bottom of the Well Entryway Skulltula": *a84
+
+"oot/Bottom of the Well Main":
+  rooms:
+    - &a2
+      scene: 8
+      room: 0
+      setup: 0
+      slots:
+        - 1
+  rules:
+    - section: exits
+      key: "Bottom of the Well Front Hallway"
+      expectedRule: "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
+      enemyRule: "can_kill_named('Bottom of the Well Entryway Skulltula')"
+      template: "$ENEMY"
+      selectors:
+        "Bottom of the Well Entryway Skulltula": *a2
+  encounters:
+    - source: oot-dead-hand-encounter
+      rules:
+        - section: locations
+          key: "Bottom of the Well Lens"
+          expectedRule: "soul_enemy(SOUL_ENEMY_DEAD_HAND) && event(BOTW_WATER_DRAINED) && (can_use_sword || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+          template: "event(BOTW_WATER_DRAINED) && $ENEMY"
+
+"oot/Forest Temple Twisted 1 Alt":
+  rooms:
+    - &a86
+      scene: 3
+      room: 21
+      setup: 0
+      slots:
+        - 0
+        - 1
+  rules:
+    - section: exits
+      key: "Forest Temple Garden West Ledge"
+      expectedRule: "soul_bubble && (can_use_bow || can_hammer || has_explosives || has_nuts || can_collect_distance || has_shield)"
+      enemyRule: "can_clear_room(FOREST_TEMPLE_BEFORE_LEDGE)"
+      template: "$ENEMY"
+      selectors:
+        FOREST_TEMPLE_BEFORE_LEDGE: *a86
+
+"oot/Forest Temple Mini-Boss 2":
+  rooms:
+    - &a88
+      scene: 3
+      room: 6
+      setup: 0
+      slots: *a87
+  rules:
+    - section: exits
+      key: "Forest Temple Poe 2"
+      expectedRule: "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
+      enemyRule: "can_clear_room(FOREST_TEMPLE_LOWER_STALFOS)"
+      template: "($ENEMY) && can_kill_stalfos"
+      selectors:
+        FOREST_TEMPLE_LOWER_STALFOS: *a88
+
+"mq/Water Temple Side Loop Dodongo Room":
+  rooms:
+    - &a89
+      scene: 5
+      room: 14
+      setup: 0
+      slots: &a90
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+  rules:
+    - section: exits
+      key: "Water Temple Side Loop Gate Room Past Gate"
+      expectedRule: "soul_dodongo && (has_explosives_or_hammer || has_weapon) && (can_hookshot || climb_anywhere)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_DODONGO)"
+      template: "($ENEMY) && (can_hookshot || climb_anywhere)"
+      selectors:
+        WATER_TEMPLE_MQ_DODONGO: *a89
+    - section: exits
+      key: "Water Temple Side Loop Room After Locked Door Target Side"
+      expectedRule: "soul_dodongo && (has_explosives_or_hammer || has_weapon) && (can_hookshot || climb_anywhere)"
+      enemyRule: "can_clear_room(WATER_TEMPLE_MQ_DODONGO)"
+      template: "($ENEMY) && (can_hookshot || climb_anywhere)"
+      selectors:
+        WATER_TEMPLE_MQ_DODONGO:
+          scene: 5
+          room: 14
+          setup: 0
+          slots: *a90
+
+"mq/Spirit Temple Statue":
+  rooms:
+    - &a91
+      scene: 6
+      room: 15
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 7
+        - 9
+        - 11
+  rules:
+    - section: exits
+      key: "Spirit Temple Adult Lower"
+      expectedRule: "has_fire_arrows && can_reflect_light && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_MQ_4_WALLMASTERS)"
+      template: "has_fire_arrows && can_reflect_light && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_MQ_4_WALLMASTERS: *a91
+
+"mq/Spirit Temple Sun Block Room":
+  rooms:
+    - &a92
+      scene: 6
+      room: 10
+      setup: 0
+      slots:
+        - 5
+    - &a93
+      scene: 6
+      room: 20
+      setup: 0
+      slots:
+        - 5
+    - &a94
+      scene: 6
+      room: 19
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: exits
+      key: "Spirit Temple Child Hand"
+      expectedRule: "soul_iron_knuckle && ((small_keys_spirit(7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys_spirit(4) && has_lens && (can_play_time || can_play_emptiness) && soul_floormaster))"
+      enemyRule: "can_kill_named('Spirit Temple MQ Child Side Iron Knuckle')"
+      template: "((small_keys_spirit(7) && ($CHILD)) || (is_adult && small_keys_spirit(4) && has_lens && (can_play_time || can_play_emptiness) && ($FLOOR) && ($ADULT)))"
+      requirements:
+        CHILD: can_kill_named('Spirit Temple MQ Child Side Iron Knuckle')
+        ADULT: can_kill_named('Spirit Temple MQ Adult Side Iron Knuckle')
+        FLOOR: can_kill_named('Spirit Temple MQ Before Adult Knuckle Floormaster')
+      vanillaRequirements:
+        CHILD: soul_iron_knuckle && (has_weapon || can_use_sticks)
+        ADULT: soul_iron_knuckle
+        FLOOR: soul_floormaster
+      selectors:
+        "Spirit Temple MQ Child Side Iron Knuckle": *a92
+        "Spirit Temple MQ Adult Side Iron Knuckle": *a93
+        "Spirit Temple MQ Before Adult Knuckle Floormaster": *a94
+
+"mq/Dodongo Cavern MQ Song of Time Block Room":
+  rooms:
+    - &a96
+      scene: 1
+      room: 5
+      setup: 0
+      slots: *a95
+  rules:
+    - section: exits
+      key: "Dodongo Cavern Staircase Room Lower"
+      expectedRule: "true"
+      enemyRule: "can_clear_room(DC_MQ_COMPASS_CHEST)"
+      template: "$ENEMY"
+      selectors:
+        DC_MQ_COMPASS_CHEST: *a96
+
+"mq/Dodongo Cavern Upper Lizalfos":
+  rooms:
+    - &a97
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 3
+    - &a98
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 4
+    - &a99
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 1
+    - &a100
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 2
+  rules:
+    - section: events
+      key: "DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_UPPER"
+      expectedRule: "soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+      enemyRule: "can_kill_named('Dodongos Cavern MQ Upper Lizalfos 1') and can_kill_named('Dodongos Cavern MQ Upper Lizalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Dodongos Cavern MQ Upper Lizalfos 1": *a97
+        "Dodongos Cavern MQ Upper Lizalfos 2": *a98
+    - section: events
+      key: "DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_UPPER"
+      expectedRule: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+      enemyRule: "can_kill_named('Dodongos Cavern MQ Lower Lizalfos 1') and can_kill_named('Dodongos Cavern MQ Lower Lizalfos 2')"
+      template: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && ($ENEMY)"
+      selectors:
+        "Dodongos Cavern MQ Lower Lizalfos 1": *a99
+        "Dodongos Cavern MQ Lower Lizalfos 2": *a100
+
+"mq/Dodongo Cavern Lower Lizalfos":
+  rooms:
+    - &a101
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 3
+    - &a102
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 4
+    - &a103
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 1
+    - &a104
+      scene: 1
+      room: 3
+      setup: 0
+      slots:
+        - 2
+  rules:
+    - section: events
+      key: "DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_LOWER"
+      expectedRule: "((climb_anywhere || longshot_anywhere) && time_travel_at_will) && soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+      enemyRule: "can_kill_named('Dodongos Cavern MQ Upper Lizalfos 1') and can_kill_named('Dodongos Cavern MQ Upper Lizalfos 2')"
+      template: "((climb_anywhere || longshot_anywhere) && time_travel_at_will) && ($ENEMY)"
+      selectors:
+        "Dodongos Cavern MQ Upper Lizalfos 1": *a101
+        "Dodongos Cavern MQ Upper Lizalfos 2": *a102
+    - section: events
+      key: "DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_LOWER"
+      expectedRule: "soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+      enemyRule: "can_kill_named('Dodongos Cavern MQ Lower Lizalfos 1') and can_kill_named('Dodongos Cavern MQ Lower Lizalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Dodongos Cavern MQ Lower Lizalfos 1": *a103
+        "Dodongos Cavern MQ Lower Lizalfos 2": *a104
+
+"mq/MQ Deku Tree Room After Water Room":
+  rooms:
+    - &a105
+      scene: 0
+      room: 6
+      setup: 0
+      slots:
+        - 0
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+  rules:
+    - section: events
+      key: "DEKU_MQ_ROOM_AFTER_WATER_CLEAR"
+      expectedRule: "soul_keese && soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child)"
+      enemyRule: "can_clear_room(DEKU_MQ_BASEMENT_LARVA_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        DEKU_MQ_BASEMENT_LARVA_ROOM: *a105
+
+"mq/Ice Cavern Main Room":
+  rooms:
+    - &a106
+      scene: 9
+      room: 3
+      setup: 0
+      slots:
+        - 5
+        - 6
+        - 7
+  rules:
+    - section: events
+      key: "ICE_MQ_MAIN_ENEMIES_CLEAR"
+      expectedRule: "soul_wolfos && soul_freezard && (has_weapon || can_use_sticks || has_explosives)"
+      enemyRule: "can_clear_room(ICE_CAVERN_CENTRAL)"
+      template: "$ENEMY"
+      selectors:
+        ICE_CAVERN_CENTRAL: *a106
+
+"mq/Gerudo Training Grounds Right Path First Room":
+  rooms:
+    - &a107
+      scene: 11
+      room: 7
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  rules:
+    - section: events
+      key: "GTG_MQ_RIGHT_FIRST_CLEAR"
+      expectedRule: "soul_dinolfos && soul_armos && soul_dodongo && (can_use_sword_master || (can_use_sword_goron && has(SWORD_BIGGORON)))"
+      enemyRule: "can_clear_room(GTG_RIGHT_SIDE_ROOM)"
+      template: "$ENEMY"
+      selectors:
+        GTG_RIGHT_SIDE_ROOM: *a107
+
+"mq/Gerudo Training Grounds Stalfos Room":
+  rooms:
+    - &a108
+      scene: 11
+      room: 3
+      setup: 0
+      slots:
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+  rules:
+    - section: events
+      key: "GTG_MQ_STALFOS_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_STALFOS) && soul_skulltula && has_weapon"
+      enemyRule: "can_clear_room(GTG_BEFORE_HEAVY_BLOCK)"
+      template: "$ENEMY"
+      selectors:
+        GTG_BEFORE_HEAVY_BLOCK: *a108
+
+"mq/Ganon Castle":
+  rooms:
+    - &a109
+      scene: 13
+      room: 0
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 9
+        - 10
+  rules:
+    - section: events
+      key: "MQ_GANON_OPEN_MAIN"
+      expectedRule: "soul_iron_knuckle && soul_armos && soul_bubble && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && (has_ranged_weapon_child || can_use_bow)) || has_explosives_or_hammer)"
+      enemyRule: "can_clear_room(GANONS_CASTLE_MQ_ENTRYWAY)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_CASTLE_MQ_ENTRYWAY: *a109
+
+"mq/Ganon Castle Forest Trial Entrance":
+  rooms:
+    - &a110
+      scene: 13
+      room: 5
+      setup: 0
+      slots:
+        - 1
+        - 2
+  rules:
+    - section: events
+      key: "GANON_MQ_FOREST_ENEMIES"
+      expectedRule: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+      enemyRule: "can_clear_room(GANONS_CASTLE_FOREST_TRIAL_BEGINNING)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_CASTLE_FOREST_TRIAL_BEGINNING: *a110
+
+"mq/Ganon Castle Light Trial Entrance":
+  rooms:
+    - &a111
+      scene: 13
+      room: 9
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+  rules:
+    - section: events
+      key: "GANON_MQ_LIGHT_ENEMIES"
+      expectedRule: "soul_dinolfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || (can_hammer && can_use_sticks))"
+      enemyRule: "can_clear_room(GANONS_CASTLE_LIGHT_TRIAL_BEGINNING)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_CASTLE_LIGHT_TRIAL_BEGINNING: *a111
+
+"mq/Forest Temple Hallway Before Climbing Block Puzzle Room":
+  rooms:
+    - &a112
+      scene: 3
+      room: 5
+      setup: 0
+      slots:
+        - 4
+  rules:
+    - section: events
+      key: "FOREST_MQ_HALLWAY_BEFORE_CLIMBING_BLOCKS_STALFOS_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+      enemyRule: "can_kill_named('Forest Temple MQ Hallway Stalfos')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple MQ Hallway Stalfos": *a112
+
+"mq/Forest Temple Floormaster Battle Room Below Hallway":
+  rooms:
+    - &a113
+      scene: 3
+      room: 21
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: events
+      key: "FOREST_MQ_FLOORMASTER_BATTLE_BELOW_HALLWAY_CLEAR"
+      expectedRule: "soul_floormaster && has_weapon"
+      enemyRule: "can_kill_named('Forest Temple MQ Floormaster')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple MQ Floormaster": *a113
+
+"mq/Forest Temple Lower Section Of Stalfos Battle Room":
+  rooms:
+    - &a114
+      scene: 3
+      room: 6
+      setup: 0
+      slots:
+        - 0
+    - &a115
+      scene: 3
+      room: 6
+      setup: 0
+      slots:
+        - 1
+  rules:
+    - section: events
+      key: "FOREST_MQ_UNDER_STALFOS_BATTLE_WOLFOS_CLEAR"
+      expectedRule: "soul_wolfos && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+      enemyRule: "can_kill_named('Forest Temple MQ Wolfos Room Wolfos 1') and can_kill_named('Forest Temple MQ Wolfos Room Wolfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple MQ Wolfos Room Wolfos 1": *a114
+        "Forest Temple MQ Wolfos Room Wolfos 2": *a115
+
+"mq/Forest Temple Upper Section Of Stalfos Battle Room":
+  rooms:
+    - &a116
+      scene: 3
+      room: 6
+      setup: 0
+      slots:
+        - 0
+    - &a117
+      scene: 3
+      room: 6
+      setup: 0
+      slots:
+        - 1
+  rules:
+    - section: events
+      key: "FOREST_MQ_UNDER_STALFOS_BATTLE_WOLFOS_CLEAR"
+      expectedRule: "soul_wolfos && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+      enemyRule: "can_kill_named('Forest Temple MQ Wolfos Room Wolfos 1') and can_kill_named('Forest Temple MQ Wolfos Room Wolfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Forest Temple MQ Wolfos Room Wolfos 1": *a116
+        "Forest Temple MQ Wolfos Room Wolfos 2": *a117
+
+"oot/Ganon Castle Tower Dinolfos Room":
+  rooms:
+    - &a118
+      scene: 10
+      room: 0
+      setup: 0
+      slots:
+        - 1
+        - 2
+  rules:
+    - section: events
+      key: "GANON_TOWER_LIZALFOS_CLEAR"
+      expectedRule: "soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+      enemyRule: "can_clear_room(GANONS_TOWER_LIZALFOS)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_TOWER_LIZALFOS: *a118
+
+"oot/Ganon Castle Tower Stalfos Room":
+  rooms:
+    - &a119
+      scene: 10
+      room: 2
+      setup: 0
+      slots:
+        - 5
+        - 6
+  rules:
+    - section: events
+      key: "GANON_TOWER_STALFOS_CLEAR"
+      expectedRule: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+      enemyRule: "can_clear_room(GANONS_TOWER_STALFOS)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_TOWER_STALFOS: *a119
+
+"oot/Ganon Castle Tower Iron Knuckle Room":
+  rooms:
+    - &a120
+      scene: 10
+      room: 4
+      setup: 0
+      slots:
+        - 1
+        - 2
+  rules:
+    - section: events
+      key: "GANON_TOWER_IRON_KNUCKLE_CLEAR"
+      expectedRule: "soul_iron_knuckle && has_weapon"
+      enemyRule: "can_clear_room(GANONS_TOWER_KNUCKLES)"
+      template: "$ENEMY"
+      selectors:
+        GANONS_TOWER_KNUCKLES: *a120
+
+"mq/Shadow Temple Invisible Spike Floors Room":
+  rooms:
+    - &a121
+      scene: 7
+      room: 11
+      setup: 0
+      slots:
+        - 8
+        - 9
+  rules:
+    - section: events
+      key: "SHADOW_MQ_INVISIBLE_SPIKE_FLOORS_REDEADS_CLEAR"
+      expectedRule: "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
+      enemyRule: "can_clear_room(SHADOW_TEMPLE_INVISIBLE_SPIKES)"
+      template: "$ENEMY"
+      selectors:
+        SHADOW_TEMPLE_INVISIBLE_SPIKES: *a121
+
+"mq/Fire Temple Hammer Loop Enemies Room":
+  rooms:
+    - &a122
+      scene: 4
+      room: 15
+      setup: 0
+      slots:
+        - 0
+    - &a123
+      scene: 4
+      room: 15
+      setup: 0
+      slots:
+        - 2
+    - &a124
+      scene: 4
+      room: 15
+      setup: 0
+      slots:
+        - 3
+  rules:
+    - section: events
+      key: "FIRE_MQ_HAMMER_LOOP_FIRST_CLEAR"
+      expectedRule: "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+      enemyRule: "can_kill_named('Fire Temple MQ Before Lower Flare Dancer Keese') and can_kill_named('Fire Temple MQ Before Lower Flare Dancer Stalfos 1') and can_kill_named('Fire Temple MQ Before Lower Flare Dancer Stalfos 2')"
+      template: "$ENEMY"
+      selectors:
+        "Fire Temple MQ Before Lower Flare Dancer Keese": *a122
+        "Fire Temple MQ Before Lower Flare Dancer Stalfos 1": *a123
+        "Fire Temple MQ Before Lower Flare Dancer Stalfos 2": *a124
+
+"mq/Fire Temple Hammer Loop Iron Knuckle Room":
+  rooms:
+    - &a125
+      scene: 4
+      room: 18
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: events
+      key: "FIRE_MQ_HAMMER_LOOP_KNUCKLE_CLEAR"
+      expectedRule: "soul_iron_knuckle && has_weapon"
+      enemyRule: "can_kill_named('Fire Temple MQ Iron Knuckle')"
+      template: "$ENEMY"
+      selectors:
+        "Fire Temple MQ Iron Knuckle": *a125
+
+"mq/Fire Temple Flare Dancer Room After Fire Walls":
+  rooms:
+    - &a126
+      scene: 4
+      room: 24
+      setup: 0
+      slots:
+        - 0
+  rules:
+    - section: events
+      key: "FIRE_MQ_FLARE_DANCER_AFTER_FIRE_WALLS"
+      expectedRule: "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || has_bombchu || can_use_mask_blast || can_hammer || can_hookshot) && (has_weapon || has_sticks || can_hammer)"
+      enemyRule: "can_kill_named('Fire Temple MQ Upper Flare Dancer')"
+      template: "$ENEMY"
+      selectors:
+        "Fire Temple MQ Upper Flare Dancer": *a126
+
+"oot/Graveyard Royal Tomb":
+  rooms:
+    - &a127
+      scene: 65
+      room: 0
+      setup: 0
+      slots: &a128
+        - 0
+        - 1
+        - 3
+        - 4
+  rules:
+    - section: locations
+      key: "Graveyard Royal Tomb Song"
+      expectedRule: "soul_keese && (has_ranged_weapon || can_use_sword || has_explosives || can_hammer || can_use_sticks)"
+      enemyRule: "can_clear_room(ROYAL_FAMILY_TOMB_ENTRYWAY)"
+      template: "$ENEMY"
+      selectors:
+        ROYAL_FAMILY_TOMB_ENTRYWAY: *a127
+    - section: locations
+      key: "Graveyard Royal Tomb Chest"
+      expectedRule: "has_fire"
+      enemyRule: "can_clear_room(ROYAL_FAMILY_TOMB_ENTRYWAY)"
+      template: "has_fire && ($ENEMY)"
+      selectors:
+        ROYAL_FAMILY_TOMB_ENTRYWAY:
+          scene: 65
+          room: 0
+          setup: 0
+          slots: *a128
+    - section: locations
+      key: "Graveyard Royal Tomb Big Fairy"
+      expectedRule: "can_play_sun"
+      enemyRule: "can_clear_room(ROYAL_FAMILY_TOMB_ENTRYWAY)"
+      template: "can_play_sun && ($ENEMY)"
+      selectors:
+        ROYAL_FAMILY_TOMB_ENTRYWAY:
+          scene: 65
+          room: 0
+          setup: 0
+          slots: *a128
+
+"mq/Spirit Temple Child Side":
+  rooms:
+    - &a129
+      scene: 6
+      room: 1
+      setup: 0
+      slots: &a130
+        - 0
+        - 1
+    - &a131
+      scene: 6
+      room: 2
+      setup: 0
+      slots: &a133
+        - 0
+        - 1
+        - 2
+    - &a132
+      scene: 6
+      room: 27
+      setup: 0
+      slots:
+        - 7
+    - &a134
+      scene: 6
+      room: 3
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 12
+  rules:
+    - section: locations
+      key: "MQ Spirit Temple Map Chest"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "$ENEMY"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START: *a129
+    - section: locations
+      key: "MQ Spirit Temple Pot Child Boulders 1"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+    - section: locations
+      key: "MQ Spirit Temple Pot Child Boulders 2"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+    - section: locations
+      key: "MQ Spirit Temple Boulder Child Bridge Ground"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+    - section: locations
+      key: "MQ Spirit Temple Boulder Child Bridge Wall Left"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+    - section: locations
+      key: "MQ Spirit Temple Boulder Child Bridge Wall Front"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START)"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+    - section: locations
+      key: "MQ Spirit Temple Pot Child Back 1"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START) and can_clear_room(SPIRIT_TEMPLE_MQ_CHILD_GIBDO) and can_kill_named('Spirit Temple MQ Child Stalfos Fight Stalfos')"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+        SPIRIT_TEMPLE_MQ_CHILD_GIBDO: *a131
+        "Spirit Temple MQ Child Stalfos Fight Stalfos": *a132
+    - section: locations
+      key: "MQ Spirit Temple Pot Child Back 2"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START) and can_clear_room(SPIRIT_TEMPLE_MQ_CHILD_GIBDO) and can_kill_named('Spirit Temple MQ Child Stalfos Fight Stalfos')"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+        SPIRIT_TEMPLE_MQ_CHILD_GIBDO:
+          scene: 6
+          room: 2
+          setup: 0
+          slots: *a133
+        "Spirit Temple MQ Child Stalfos Fight Stalfos":
+          scene: 6
+          room: 27
+          setup: 0
+          slots:
+            - 7
+    - section: locations
+      key: "MQ Spirit Temple Pot Child Back 3"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START) and can_clear_room(SPIRIT_TEMPLE_MQ_CHILD_GIBDO) and can_kill_named('Spirit Temple MQ Child Stalfos Fight Stalfos')"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+        SPIRIT_TEMPLE_MQ_CHILD_GIBDO:
+          scene: 6
+          room: 2
+          setup: 0
+          slots: *a133
+        "Spirit Temple MQ Child Stalfos Fight Stalfos":
+          scene: 6
+          room: 27
+          setup: 0
+          slots:
+            - 7
+    - section: locations
+      key: "MQ Spirit Temple Pot Child Back 4"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START) and can_clear_room(SPIRIT_TEMPLE_MQ_CHILD_GIBDO) and can_kill_named('Spirit Temple MQ Child Stalfos Fight Stalfos')"
+      template: "has_bombchu && can_use_slingshot && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+        SPIRIT_TEMPLE_MQ_CHILD_GIBDO:
+          scene: 6
+          room: 2
+          setup: 0
+          slots: *a133
+        "Spirit Temple MQ Child Stalfos Fight Stalfos":
+          scene: 6
+          room: 27
+          setup: 0
+          slots:
+            - 7
+    - section: locations
+      key: "MQ Spirit Temple Map Room Back Chest"
+      expectedRule: "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && has_fire"
+      enemyRule: "can_clear_room(SPIRIT_TEMPLE_CHILD_START) and can_clear_room(SPIRIT_TEMPLE_MQ_CHILD_GIBDO) and can_kill_named('Spirit Temple MQ Child Stalfos Fight Stalfos') and can_clear_room(SPIRIT_TEMPLE_MQ_MAP)"
+      template: "has_bombchu && can_use_slingshot && has_fire && ($ENEMY)"
+      selectors:
+        SPIRIT_TEMPLE_CHILD_START:
+          scene: 6
+          room: 1
+          setup: 0
+          slots: *a130
+        SPIRIT_TEMPLE_MQ_CHILD_GIBDO:
+          scene: 6
+          room: 2
+          setup: 0
+          slots: *a133
+        SPIRIT_TEMPLE_MQ_MAP: *a134
+        "Spirit Temple MQ Child Stalfos Fight Stalfos":
+          scene: 6
+          room: 27
+          setup: 0
+          slots:
+            - 7
+
+"oot/Gerudo Fortress Carpenter 1 Left":
+  rooms: []
+  encounters:
+    - source: oot-gerudo-fighter-restored
+      rules:
+        - section: locations
+          key: "Gerudo Fortress Jail 1"
+          expectedRule: "(can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+          template: "soul_carpenters && $ENEMY"
+        - section: events
+          key: "CARPENTER_1"
+          expectedRule: "can_rescue_carpenter"
+          template: "small_keys_hideout_all && soul_carpenters && $ENEMY"
+
+"oot/Gerudo Fortress Carpenter 2 Bottom":
+  rooms: []
+  encounters:
+    - source: oot-gerudo-fighter-restored
+      rules:
+        - section: locations
+          key: "Gerudo Fortress Jail 2"
+          expectedRule: "(can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+          template: "soul_carpenters && $ENEMY"
+        - section: events
+          key: "CARPENTER_2"
+          expectedRule: "can_rescue_carpenter"
+          template: "small_keys_hideout_all && soul_carpenters && $ENEMY"
+
+"oot/Gerudo Fortress Carpenter 4 Top":
+  rooms: []
+  encounters:
+    - source: oot-gerudo-fighter-restored
+      rules:
+        - section: locations
+          key: "Gerudo Fortress Jail 4"
+          expectedRule: "(can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+          template: "soul_carpenters && $ENEMY"
+        - section: events
+          key: "CARPENTER_4"
+          expectedRule: "can_rescue_carpenter"
+          template: "small_keys_hideout_all && soul_carpenters && $ENEMY"
+
+"oot/Gerudo Fortress Carpenter 3":
+  rooms: []
+  encounters:
+    - source: oot-gerudo-fighter-restored
+      rules:
+        - section: locations
+          key: "Gerudo Fortress Jail 3"
+          expectedRule: "(can_use_sword || can_hammer || can_use_bow || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
+          template: "soul_carpenters && $ENEMY"
+        - section: events
+          key: "CARPENTER_3"
+          expectedRule: "can_rescue_carpenter"
+          template: "small_keys_hideout_all && soul_carpenters && $ENEMY"
+
+"oot/Water Temple Dark Link":
+  rooms: []
+  encounters:
+    - source: oot-dark-link-encounter
+      rules:
+        - section: exits
+          key: "Water Temple Longshot Room"
+          expectedRule: "soul_enemy(SOUL_ENEMY_DARK_LINK) && can_use_sword"
+          template: "$ENEMY"
+        - section: exits
+          key: "Water Temple Before Dark Link"
+          expectedRule: "soul_enemy(SOUL_ENEMY_DARK_LINK) && can_use_sword"
+          template: "$ENEMY"

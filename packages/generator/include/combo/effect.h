@@ -15,6 +15,24 @@ KakeraColorIndex;
 
 typedef struct Actor Actor;
 
+#define EFFECT_BLURE_COLOR_COUNT 4
+
+typedef struct EffectBlureInit2 {
+    /* 0x00 */ s32 calcMode;
+    /* 0x04 */ u16 flags;
+    /* 0x06 */ s16 addAngleChange;
+    /* 0x08 */ u8 p1StartColor[EFFECT_BLURE_COLOR_COUNT];
+    /* 0x0C */ u8 p2StartColor[EFFECT_BLURE_COLOR_COUNT];
+    /* 0x10 */ u8 p1EndColor[EFFECT_BLURE_COLOR_COUNT];
+    /* 0x14 */ u8 p2EndColor[EFFECT_BLURE_COLOR_COUNT];
+    /* 0x18 */ u8 elemDuration;
+    /* 0x19 */ u8 unkFlag;
+    /* 0x1A */ u8 drawMode; // EffectBlureDrawMode enum
+    /* 0x1B */ u8 mode4Param;
+    /* 0x1C */ Color_RGBA8 altPrimColor; // used with EFF_BLURE_DRAW_MODE_SIMPLE_ALT_COLORS
+    /* 0x20 */ Color_RGBA8 altEnvColor; // used with EFF_BLURE_DRAW_MODE_SIMPLE_ALT_COLORS
+} EffectBlureInit2; // size = 0x24
+
 typedef struct
 {
     Vec3f       pos;
@@ -84,7 +102,6 @@ typedef struct EffectBlureInit1 {
 void EffectSsDeadDb_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* prim, Color_RGBA8* env, s16 scale, s16 scaleStep, s32 life);
 void EffectSsStone1_Spawn(PlayState* play, Vec3f* pos, s32 arg2);
 void EffectSsStick_Spawn(PlayState* play, Vec3f* pos, s16 yaw);
-#define EFFECT_BLURE_COLOR_COUNT 4
 
 #define EFFECT_BLURE_FLAG_2         (1 << 1)
 #define EFFECT_BLURE_FLAG_4         (1 << 2)
@@ -103,22 +120,6 @@ typedef enum EffectBlureDrawMode {
     /* 2 */ EFF_BLURE_DRAW_MODE_SMOOTH,
     /* 3 */ EFF_BLURE_DRAW_MODE_MAX
 } EffectBlureDrawMode;
-
-typedef struct EffectBlureInit2 {
-    /* 0x00 */ s32 calcMode;
-    /* 0x04 */ u16 flags;
-    /* 0x06 */ s16 addAngleChange;
-    /* 0x08 */ u8 p1StartColor[EFFECT_BLURE_COLOR_COUNT];
-    /* 0x0C */ u8 p2StartColor[EFFECT_BLURE_COLOR_COUNT];
-    /* 0x10 */ u8 p1EndColor[EFFECT_BLURE_COLOR_COUNT];
-    /* 0x14 */ u8 p2EndColor[EFFECT_BLURE_COLOR_COUNT];
-    /* 0x18 */ u8 elemDuration;
-    /* 0x19 */ u8 unkFlag;
-    /* 0x1A */ u8 drawMode; // EffectBlureDrawMode enum
-    /* 0x1B */ u8 mode4Param;
-    /* 0x1C */ Color_RGBA8 altPrimColor; // used with EFF_BLURE_DRAW_MODE_SIMPLE_ALT_COLORS
-    /* 0x20 */ Color_RGBA8 altEnvColor; // used with EFF_BLURE_DRAW_MODE_SIMPLE_ALT_COLORS
-} EffectBlureInit2; // size = 0x24
 
 typedef enum EffectType {
     /* 0 */ EFFECT_SPARK,

@@ -624,9 +624,9 @@ class CustomAssetsBuilder {
     return vrom;
   }
 
-  async addFile(define: string, filename: string, compressed: boolean) {
+  async addFile(define: string, filename: string, compressed: boolean, name: string | null = null) {
     const data = await raw(filename);
-    const vrom = this.addRawData(null, data, compressed);
+    const vrom = this.addRawData(name, data, compressed);
     this.cg.define('CUSTOM_' + define + '_ADDR', vrom);
     return vrom;
   }
@@ -1125,7 +1125,7 @@ class CustomAssetsBuilder {
     await this.addCustomExtractedFiles();
 
     /* Load MQ data */
-    await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false);
+    await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false, 'custom/mq_rooms');
     await this.addFile('MQ_SCENES', 'mq_scenes.bin', false);
     await this.addFile('MQ_MAPS', 'mq_maps.bin', true);
 

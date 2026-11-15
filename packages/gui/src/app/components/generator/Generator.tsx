@@ -1,7 +1,7 @@
 import type { ComponentType } from 'preact';
 import type { IconType } from 'react-icons';
 
-import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave, LuVideo } from 'react-icons/lu';
+import { LuSettings, LuGamepad2, LuBox, LuRoute, LuCpu, LuCompass, LuSparkle, LuSave, LuVideo, LuSword } from 'react-icons/lu';
 
 import { useRouter } from '@/app/hooks/useRouter';
 import { GeneratorGeneral } from './GeneratorGeneral';
@@ -10,6 +10,7 @@ import { GeneratorSettings } from './GeneratorSettings';
 import { GeneratorItems } from './GeneratorItems';
 import { GeneratorLogic } from './GeneratorLogic';
 import { GeneratorEntrances } from './GeneratorEntrances';
+import { GeneratorEnemies } from './GeneratorEnemies';
 import { GeneratorAdvanced } from './GeneratorAdvanced';
 import { GeneratorCutscenes } from './GeneratorCutscenes';
 import { useStore } from '@/app/store';
@@ -35,6 +36,7 @@ export function Generator() {
     { name: 'Items', icon: LuBox, disabled: isPatch || isRandom, component: GeneratorItems },
     { name: 'Logic', icon: LuRoute, disabled: isPatch, component: GeneratorLogic },
     { name: 'Entrances', icon: LuCompass, disabled: isPatch || isRandom, component: GeneratorEntrances },
+    { name: 'Enemies', icon: LuSword, disabled: isPatch || isRandom, component: GeneratorEnemies },
     { name: 'Advanced', icon: LuCpu, disabled: isPatch, component: GeneratorAdvanced },
     { name: 'Cutscenes', icon: LuVideo, disabled: isPatch || isRandom, component: GeneratorCutscenes },
     { name: 'Cosmetics', icon: LuSparkle, component: CosmeticsEditor },

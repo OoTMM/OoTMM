@@ -19,3 +19,7 @@ PATCH_START 0x80a40cdc
   j EnTest3_AfterUpdate_Trampoline
    nop
 PATCH_END
+
+PATCH_START 0x80a41ad4
+  .int 0
+PATCH_END

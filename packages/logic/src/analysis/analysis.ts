@@ -110,6 +110,7 @@ class LogicPassAnalysis {
 
     const entries = this.makeSpheresRaw().reverse().flat();
     const entriesCopy = [...entries];
+    let witness: PathfinderState | null = null;
 
     this.state.monitor.log('Analysis - Spheres (Playthrough)');
     let count = 0;
@@ -117,9 +118,12 @@ class LogicPassAnalysis {
       this.state.monitor.setProgress(count++, entriesCopy.length);
       const entriesIndex = entries.indexOf(e);
       entries.splice(entriesIndex, 1);
+
+      if (witness && (e.type === 'location' ? !witness.locations.has(e.location) : !witness.ws[e.playerId].events.has(e.event))) continue;
       const worlds = this.worldFromEntries(this.state.worlds, entries);
       const pathfinder = new Pathfinder(worlds, this.state.settings, this.state.startingItems);
       const pathfinderState = pathfinder.run(null, { recursive: true, items: this.state.items, stopAtGoal: true });
+      if (pathfinderState.goal) witness = pathfinderState;
       if (!pathfinderState.goal) {
         entries.push(e);
       }

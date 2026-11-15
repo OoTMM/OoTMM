@@ -86,6 +86,7 @@ typedef struct ALIGNED(4) Actor_EnItem00
     u8      isExtended:1;
     u8      isExtendedCollected:1;
     u8      isExtendedMajor:1;
+    u8      enemySourceQuantity:1;
     s16     xflagGi;
 }
 Actor_EnItem00;

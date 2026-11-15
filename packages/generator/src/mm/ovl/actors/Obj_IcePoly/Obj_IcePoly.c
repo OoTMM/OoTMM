@@ -20,6 +20,27 @@ void func_80931A38(ObjIcePoly* this, PlayState* play);
 void func_80931E58(ObjIcePoly* this, PlayState* play);
 void func_80931EEC(ObjIcePoly* this, PlayState* play);
 
+
+static int ObjIcePoly_IsFrozenRedead(const Actor* actor) {
+    return actor && actor->parent && actor->parent->id == ACTOR_EN_RD && (actor->parent->params & 0xff) == 4;
+}
+static void ObjIcePoly_StartMelt(ObjIcePoly* this, PlayState* play) {
+    if (ObjIcePoly_IsFrozenRedead(&this->actor)) {
+        this->actor.csId = -1;
+        this->unk_14A = 40;
+        this->actionFunc = func_80931EEC;
+        Actor_PlaySfx(&this->actor, NA_SE_EV_ICE_MELT);
+    } else {
+        CutsceneManager_Queue(this->actor.csId);
+        this->unk_14A = 0;
+        this->actionFunc = func_80931E58;
+    }
+}
+static int ObjIcePoly_ShouldChain(ObjIcePoly* this, PlayState* play, Actor* target) {
+    return play->sceneId == SCE_MM_TERMINA_FIELD && !ObjIcePoly_IsFrozenRedead(&this->actor) &&
+           !ObjIcePoly_IsFrozenRedead(target);
+}
+
 ActorProfile Obj_Ice_Poly_Profile = {
     /**/ ACTOR_OBJ_ICE_POLY,
     /**/ ACTORCAT_ITEMACTION,
@@ -81,6 +102,11 @@ void ObjIcePoly_Init(Actor* thisx, PlayState* play) {
     ObjIcePoly* this = (ObjIcePoly*)thisx;
     s32 i;
 
+
+    int frozenStart = (u16)thisx->params == 0xff4b;
+    if (frozenStart)
+        thisx->csId = -1;
+
     this->switchFlag = OBJICEPOLY_GET_SWITCH_FLAG(thisx);
     thisx->params = OBJICEPOLY_GET_SCALE(thisx);
     thisx->cullingVolumeDistance = 5600.0f;
@@ -116,7 +142,7 @@ void ObjIcePoly_Init(Actor* thisx, PlayState* play) {
     thisx->shape.rot.z = -0x500;
 
     if (((this->switchFlag != OBJICEPOLY_SWITCH_FLAG_NONE) && Flags_GetSwitch(play, this->switchFlag)) ||
-        ((play->sceneId == SCE_MM_BLACKSMITH) && MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))) {
+        (!frozenStart && (play->sceneId == SCE_MM_BLACKSMITH) && MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))) {
         Actor_Kill(thisx);
         return;
     }
@@ -197,18 +223,16 @@ void func_80931A38(ObjIcePoly* this, PlayState* play) {
         (this->colliders2[1].elem.acHitElem->atDmgInfo.dmgFlags == 0x800)) ||
         ((this->colliders2[1].base.ac->id == ACTOR_OBJ_AQUA) &&
         (this->colliders2[1].base.ac->params == 1 /* AQUA_TYPE_HOT */))))) {
-        CutsceneManager_Queue(this->actor.csId);
-        this->unk_14A = 0;
-        this->actionFunc = func_80931E58;
+        ObjIcePoly_StartMelt(this, play);
         this->actor.focus.rot.y = this->actor.yawTowardsPlayer;
 
-        if (play->sceneId == SCE_MM_TERMINA_FIELD) {
+        if (ObjIcePoly_ShouldChain(this, play, NULL)) {
             Actor* actor = NULL;
 
             do {
                 actor = SubS_FindActor(play, actor, ACTORCAT_ITEMACTION, ACTOR_OBJ_ICE_POLY);
                 if (actor != NULL) {
-                    if ((&this->actor != actor) && (&this->actor != actor)) {
+                    if ((&this->actor != actor) && ObjIcePoly_ShouldChain(this, play, actor)) {
                         ((ObjIcePoly*)actor)->unk_14A = 0;
                         ((ObjIcePoly*)actor)->actionFunc = func_80931E58;
                     }
@@ -262,6 +286,10 @@ void func_80931A38(ObjIcePoly* this, PlayState* play) {
 }
 
 void func_80931E58(ObjIcePoly* this, PlayState* play) {
+    if (ObjIcePoly_IsFrozenRedead(&this->actor)) {
+        ObjIcePoly_StartMelt(this, play);
+        return;
+    }
     if (CutsceneManager_IsNext(this->actor.csId)) {
         Audio_PlaySfx(NA_SE_SY_CORRECT_CHIME);
         if (this->unk_14A == 1) {
@@ -324,7 +352,8 @@ void func_80931EEC(ObjIcePoly* this, PlayState* play) {
     this->unk_148 -= 6;
 
     if (this->unk_14A == 0) {
-        CutsceneManager_Stop(this->actor.csId);
+        if (!ObjIcePoly_IsFrozenRedead(&this->actor))
+            CutsceneManager_Stop(this->actor.csId);
         if (this->switchFlag != OBJICEPOLY_SWITCH_FLAG_NONE) {
             Flags_SetSwitch(play, this->switchFlag);
         }

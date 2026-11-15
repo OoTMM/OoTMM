@@ -1,4 +1,5 @@
 #include "En_M_Thunder.h"
+#include <combo/enemy.h>
 #include <actors/Eff_Dust/Eff_Dust.h>
 #include <assets/mm/objects/gameplay_keep.h>
 #include <combo/magic.h>
@@ -85,6 +86,7 @@ void EnMThunder_Init(EnMThunder* this, PlayState* play) {
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
     this->type = ENMTHUNDER_GET_TYPE(&this->actor);
+    this->sourceSpinFlags = comboEnemyMeleeFlags(player, 1u << 9, 0, 1);
     Lights_PointNoGlowSetInfo(&this->lightInfo, this->actor.world.pos.x, this->actor.world.pos.y,
                               this->actor.world.pos.z, 255, 255, 255, 0);
     this->lightNode = LightContext_InsertLight(play, &play->lightCtx, &this->lightInfo);
@@ -171,6 +173,7 @@ void EnMThunder_Init(EnMThunder* this, PlayState* play) {
 }
 
 void EnMThunder_Destroy(EnMThunder* this, PlayState* play) {
+    comboEnemyAttackForget(&this->actor);
     if (this->isCharging) {
         Magic_Reset(play);
     }
@@ -359,6 +362,7 @@ void EnMThunder_Spin_Attack(EnMThunder* this, PlayState* play) {
         Actor_SetScale(&this->actor, this->actor.scale.x);
         this->collider.dim.radius = this->actor.scale.x * 30.0f;
         Collider_UpdateCylinder(&this->actor, &this->collider);
+        comboEnemyAttackRecord(&this->actor, &this->collider.elem, this->sourceSpinFlags);
         CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);
     }
 
@@ -414,6 +418,7 @@ void EnMThunder_SwordBeam_Attack(EnMThunder* this, PlayState* play) {
         this->collider.dim.pos.z =
             (Math_CosS(this->actor.shape.rot.y) * -5.0f * this->actor.scale.z) + this->actor.world.pos.z;
 
+        comboEnemyAttackRecord(&this->actor, &this->collider.elem, this->sourceSpinFlags);
         CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);
     }
 

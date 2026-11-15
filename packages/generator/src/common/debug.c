@@ -6,6 +6,9 @@
 #include <combo/global.h>
 #include <combo/inventory.h>
 #if defined(DEBUG)
+#include <combo/enemy.h>
+#include <combo/enemy_native.h>
+#include <combo/dma.h>
 #define DEBUGMENU_PAGE_NONE     0
 #define DEBUGMENU_PAGE_MAIN     1
 #define DEBUGMENU_PAGE_CHEATS   2
@@ -15,6 +18,7 @@
 #define DEBUGMENU_PAGE_AGE      6
 #define DEBUGMENU_PAGE_RELOAD   7
 #define DEBUGMENU_PAGE_WIN      8
+#define DEBUGMENU_PAGE_ENEMIES  9
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -32,6 +36,7 @@ static s16 sScroll[3];
 static u8 sDebugPage;
 static Input sInput;
 static const DebugMenuEntry* sMenuWarp;
+static const char* sEnemySpawnStatus;
 
 #if defined(GAME_MM)
 static int sTimeDay;
@@ -89,9 +94,15 @@ int btnPressed(u16 but)
 }
 
 static const DebugMenuFunc kDebugMenuFuncs[];
+static DebugMenuEntry* sDebugEnemyEntries;
 
 static void setPage(int page)
 {
+    if (page != DEBUGMENU_PAGE_ENEMIES && sDebugEnemyEntries)
+    {
+        free(sDebugEnemyEntries);
+        sDebugEnemyEntries = NULL;
+    }
     sDebugPage = page;
     kDebugMenuFuncs[page](1);
 }
@@ -238,21 +249,288 @@ static void DebugHandler_Cheats(int trigger)
         debugDrawStr(6, i, kCheats[i]);
     }
 
+    debugDrawStr(2, ARRAY_COUNT(kCheats), "Spawn Enemy");
     debugDrawChar(0, sCursor[1], '>');
     if (btnPressed(D_JPAD)) sCursor[1]++;
     if (btnPressed(U_JPAD)) sCursor[1]--;
     if (btnPressed(R_JPAD)) sCursor[1] += 5;
     if (btnPressed(L_JPAD)) sCursor[1] -= 5;
     if (sCursor[1] < 0) sCursor[1] = 0;
-    if (sCursor[1] >= ARRAY_COUNT(kCheats)) sCursor[1] = ARRAY_COUNT(kCheats) - 1;
+    if (sCursor[1] > ARRAY_COUNT(kCheats)) sCursor[1] = ARRAY_COUNT(kCheats);
 
     if (btnPressed(A_BUTTON))
     {
+        if (sCursor[1] == ARRAY_COUNT(kCheats))
+        {
+            setPage(DEBUGMENU_PAGE_ENEMIES);
+            return;
+        }
         if (BITMAP8_GET(gSharedCustomSave.cheats, sCursor[1]))
             CHEAT_CLEAR(sCursor[1]);
         else
             BITMAP8_SET(gSharedCustomSave.cheats, sCursor[1]);
     }
+}
+
+Actor* comboDebugSpawnForeignEnemy(PlayState* play, s16 actorId, u16 params, Vec3f* pos, s16 yaw);
+
+int gDebugEnemySpawn;
+int gDebugEnemyWater;
+f32 gDebugEnemyWaterSurface;
+
+typedef struct {
+    CollisionHeader* original;
+    CollisionHeader header;
+    WaterBox box;
+} DebugEnemyWaterScope;
+
+static void DebugEnemyWater_Begin(DebugEnemyWaterScope* scope, PlayState* play, Vec3f* pos, f32 surface)
+{
+    scope->original = play->colCtx.colHeader;
+    scope->header = *scope->original;
+    scope->box = (WaterBox){
+        CLAMP(pos->x - 512.f, -32768.f, 31743.f),
+        CLAMP(surface, -32768.f, 32767.f),
+        CLAMP(pos->z - 512.f, -32768.f, 31743.f),
+        1024,
+        1024,
+        0x3f << 13,
+    };
+    scope->header.numWaterBoxes = 1;
+    scope->header.waterBoxes = &scope->box;
+    play->colCtx.colHeader = &scope->header;
+}
+
+void comboDebugEnemyRunInWater(ActorFunc callback, Actor* actor, PlayState* play, f32 surface)
+{
+    DebugEnemyWaterScope scope;
+    DebugEnemyWater_Begin(&scope, play, &actor->world.pos, surface);
+    callback(actor, play);
+    play->colCtx.colHeader = scope.original;
+}
+
+typedef struct DebugAquaticActor {
+    struct DebugAquaticActor* next;
+    Actor* actor;
+    ActorFunc init, update, fini;
+    f32 surface;
+} DebugAquaticActor;
+
+static DebugAquaticActor* sDebugAquatics;
+
+static DebugAquaticActor** DebugAquatic_Find(Actor* actor)
+{
+    DebugAquaticActor** entry = &sDebugAquatics;
+    while (*entry && (*entry)->actor != actor)
+        entry = &(*entry)->next;
+    return entry;
+}
+
+static void DebugAquatic_Update(Actor* actor, PlayState* play);
+
+static void DebugAquatic_Call(DebugAquaticActor* entry, ActorFunc callback, Actor* actor, PlayState* play)
+{
+    int savedDebug = gDebugEnemySpawn;
+    int savedWater = gDebugEnemyWater;
+    f32 savedSurface = gDebugEnemyWaterSurface;
+    gDebugEnemySpawn = gDebugEnemyWater = 1;
+    gDebugEnemyWaterSurface = entry->surface;
+    actor->update = entry->update;
+    comboDebugEnemyRunInWater(callback, actor, play, entry->surface);
+    entry->update = actor->update;
+    if (actor->update) actor->update = DebugAquatic_Update;
+    gDebugEnemySpawn = savedDebug;
+    gDebugEnemyWater = savedWater;
+    gDebugEnemyWaterSurface = savedSurface;
+}
+
+static void DebugAquatic_Init(Actor* actor, PlayState* play)
+{
+    DebugAquaticActor* entry = *DebugAquatic_Find(actor);
+    if (entry) DebugAquatic_Call(entry, entry->init, actor, play);
+}
+
+static void DebugAquatic_Update(Actor* actor, PlayState* play)
+{
+    DebugAquaticActor* entry = *DebugAquatic_Find(actor);
+    if (entry && entry->update) DebugAquatic_Call(entry, entry->update, actor, play);
+}
+
+static void DebugAquatic_Destroy(Actor* actor, PlayState* play)
+{
+    DebugAquaticActor** link = DebugAquatic_Find(actor);
+    DebugAquaticActor* entry = *link;
+    if (!entry) return;
+    *link = entry->next;
+    if (entry->fini) comboDebugEnemyRunInWater(entry->fini, actor, play, entry->surface);
+    free(entry);
+}
+
+static void DebugAquatic_Track(Actor* actor, f32 surface)
+{
+    DebugAquaticActor* entry = malloc(sizeof(*entry));
+    if (!entry) return;
+    *entry = (DebugAquaticActor){ sDebugAquatics, actor, actor->init, actor->update, actor->fini, surface };
+    sDebugAquatics = entry;
+    if (actor->init) actor->init = DebugAquatic_Init;
+    actor->update = DebugAquatic_Update;
+    actor->fini = DebugAquatic_Destroy;
+}
+
+static const char* Debug_SpawnEnemy(u32 data)
+{
+    PlayState* play = gPlay;
+    Player* player = GET_PLAYER(play);
+    if (!player || play->roomCtx.curRoom.num < 0) return "Wait for the room to load";
+
+    Vec3f from = player->actor.world.pos;
+    from.y += 30.f;
+    s16 yaw = player->actor.shape.rot.y;
+    s16 actorId = (data >> 16) & 0xfff;
+    u16 params = data;
+    int habitat = data >> 28;
+    CollisionPoly* poly = NULL;
+    s32 bgId;
+    Vec3f hit;
+    Vec3f pos = from;
+    pos.x += 90.f * Math_SinS(yaw);
+    pos.z += 90.f * Math_CosS(yaw);
+    if (BgCheck_EntityLineTest1(&play->colCtx, &from, &pos, &hit, &poly, 1, 0, 0, 0, &bgId))
+    {
+        pos.x = (from.x + hit.x) * .5f;
+        pos.z = (from.z + hit.z) * .5f;
+    }
+
+    f32 floor = BgCheck_EntityRaycastDown4(&play->colCtx, &poly, &bgId, &player->actor, &pos);
+    pos.y = poly && fabsf(floor - player->actor.world.pos.y) <= 60.f ? floor : player->actor.world.pos.y;
+    int dryAquatic = 0;
+    f32 water = 0.f;
+    if (habitat == 1)
+        pos.y += 40.f;
+    else if (habitat >= 2)
+    {
+        WaterBox* box;
+        if (!WaterBox_GetSurface1_2(play, &play->colCtx, pos.x, pos.z, &water, &box) ||
+            water - pos.y < (habitat == 3 ? 40.f : 8.f))
+        {
+            dryAquatic = 1;
+            water = pos.y + 60.f;
+        }
+        pos.y = habitat == 3 ? water - 30.f : water - (dryAquatic ? 1.f : 0.f);
+    }
+    if (BgCheck_EntityLineTest1(&play->colCtx, &from, &pos, &hit, &poly, 1, 0, 1, 0, &bgId))
+    {
+        pos = from;
+        if (habitat >= 2)
+        {
+            dryAquatic = 1;
+            water = pos.y + (habitat == 3 ? 30.f : 1.f);
+        }
+    }
+
+    int lackSoul = g.roomEnemyLackSoul;
+    int foreign = comboIsForeignEnemyActor(actorId);
+    DebugEnemyWaterScope scope;
+    if (dryAquatic) DebugEnemyWater_Begin(&scope, play, &pos, water);
+    gDebugEnemySpawn = 1;
+    gDebugEnemyWater = dryAquatic;
+    gDebugEnemyWaterSurface = water;
+    Actor* enemy;
+    u32 variantOperation = 0;
+#if defined(GAME_OOT)
+    if (actorId == 0x1c0) variantOperation = 7;
+    if (actorId == 0x1b0) variantOperation = 3;
+    if (actorId == 0x1c) variantOperation = 10;
+#else
+    if (actorId == 0xf1) variantOperation = 30;
+    if (actorId == 0x216) variantOperation = 10;
+#endif
+    if (!foreign && variantOperation)
+    {
+        ActorEntry entry = { .id = actorId, .pos = { pos.x, pos.y, pos.z }, .params = params };
+#if defined(GAME_MM)
+        u16 degrees = ((u32)(u16)(yaw + 0x8000) * 360u) >> 16;
+        entry.rot = (Vec3s){ 7, (degrees << 7) | 0x7f, 0x7f };
+#else
+        entry.rot.y = yaw + 0x8000;
+#endif
+        enemy = comboEnemyNativeStandaloneSpawn(&play->actorCtx, &entry, play, variantOperation);
+    }
+    else
+#if defined(GAME_MM)
+    if (actorId == 0x184 && params == 0x1fc0)
+    {
+        ActorEntry entry = { actorId, { pos.x, pos.y, pos.z }, { 7, 0x7f, 0x7f }, params };
+        enemy = comboEnemyNativeEyegoreSpawn(&play->actorCtx, &entry, play);
+    }
+    else
+#endif
+    enemy = foreign
+                    ? comboDebugSpawnForeignEnemy(play, actorId, params, &pos, yaw + 0x8000)
+                    : Actor_Spawn(&play->actorCtx, play, actorId, pos.x, pos.y, pos.z, 0, yaw + 0x8000, 0, params);
+#if defined(GAME_OOT)
+    void comboDebugTrackOotDarkLink(Actor*);
+    comboDebugTrackOotDarkLink(enemy);
+#endif
+    gDebugEnemySpawn = gDebugEnemyWater = 0;
+    if (dryAquatic)
+    {
+        play->colCtx.colHeader = scope.original;
+        if (enemy && enemy->update && !foreign) DebugAquatic_Track(enemy, water);
+    }
+    g.roomEnemyLackSoul = lackSoul;
+    if (!enemy) return "Actor allocation or load failed";
+    if (!enemy->update) return "Actor ended during initialization";
+    return "Spawned";
+}
+
+EXPORT_SYMBOL(DEBUG_ENEMY_PICKER, Debug_SpawnEnemy);
+
+static u32 sDebugEnemyTableVrom __attribute__((section(".data"))) = 0;
+#if defined(GAME_OOT)
+EXPORT_SYMBOL(DEBUG_ENEMY_TABLE_OOT, sDebugEnemyTableVrom);
+#else
+EXPORT_SYMBOL(DEBUG_ENEMY_TABLE_MM, sDebugEnemyTableVrom);
+#endif
+
+static void DebugHandler_Enemies(int trigger)
+{
+    if (trigger)
+    {
+        sCursor[2] = sScroll[2] = 0;
+        sEnemySpawnStatus = NULL;
+        if (sDebugEnemyEntries || !sDebugEnemyTableVrom) return;
+        u32 size = comboDmaLoadFile(NULL, sDebugEnemyTableVrom);
+        if (size < 16 || size > 0x1000) return;
+        DebugMenuEntry* entries = malloc(size);
+        if (!entries) return;
+        if (comboDmaLoadFile(entries, sDebugEnemyTableVrom) != size)
+        {
+            free(entries);
+            return;
+        }
+        for (DebugMenuEntry* row = entries; row->name; ++row)
+            row->name = (const char*)entries + (u32)row->name;
+        sDebugEnemyEntries = entries;
+        return;
+    }
+    if (!sDebugEnemyEntries)
+    {
+        debugDrawStr(2, 0, "Enemy catalog load failed");
+        if (btnPressed(B_BUTTON)) setPage(DEBUGMENU_PAGE_CHEATS);
+        return;
+    }
+    u32 data;
+    switch (menu(sDebugEnemyEntries, &sCursor[2], &sScroll[2], &data))
+    {
+    case OPTION_OK:
+        sEnemySpawnStatus = Debug_SpawnEnemy(data);
+        break;
+    case OPTION_CANCEL:
+        setPage(DEBUGMENU_PAGE_CHEATS);
+        return;
+    }
+    if (sEnemySpawnStatus) debugDrawStr(2, 22, sEnemySpawnStatus);
 }
 
 static void DebugHandler_Warp(int trigger)
@@ -445,6 +723,7 @@ static const DebugMenuFunc kDebugMenuFuncs[] = {
 #endif
     DebugHandler_Reload,
     DebugHandler_Win,
+    DebugHandler_Enemies,
 };
 
 void Debug_Input(void)
@@ -630,10 +909,6 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.gerudoCard = 1;
     gSave.info.inventory.quest.agonyStone = 1;
 
-    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
-    gSave.info.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
-    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_SPIRIT] = 9;
-    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_SHADOW] = 9;
     gSave.info.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
     gSave.info.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
     gSave.info.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
@@ -710,9 +985,6 @@ static void cheatAllItems(PlayState* play)
     gOotSave.info.playerData.magicLevel = 0;
     gSaveContext.magicFillTarget = 0x60;
 
-    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
-    gSave.info.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
-    gSave.info.inventory.dungeonKeys[SCE_OOT_THIEVES_HIDEOUT] = 9;
 
     //gSave.info.inventory.quest.medallionShadow = 1;
     //gSave.info.inventory.quest.medallionSpirit = 1;
@@ -756,11 +1028,40 @@ static void cheatAllItems(PlayState* play)
 }
 #endif
 
+static void cheatAllSmallKeys(void)
+{
+    for (int dungeon = 0; dungeon < ARRAY_COUNT(g.maxKeysOot); ++dungeon)
+    {
+        u8 count = g.maxKeysOot[dungeon];
+        if (!count)
+            continue;
+        if (gOotSave.info.inventory.dungeonKeys[dungeon] < count)
+            gOotSave.info.inventory.dungeonKeys[dungeon] = count;
+        if (gOotSave.info.inventory.dungeonItems[dungeon].maxKeys < count)
+            gOotSave.info.inventory.dungeonItems[dungeon].maxKeys = count;
+    }
+
+    if (gOotSave.info.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] < 6)
+        gOotSave.info.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
+
+    for (int dungeon = 0; dungeon < ARRAY_COUNT(g.maxKeysMm); ++dungeon)
+    {
+        u8 count = g.maxKeysMm[dungeon];
+        if (!count)
+            continue;
+        if (gMmSave.info.inventory.dungeonKeys[dungeon] < count)
+            gMmSave.info.inventory.dungeonKeys[dungeon] = count;
+        if (gMmSave.info.inventory.dungeonItems[dungeon].maxKeys < count)
+            gMmSave.info.inventory.dungeonItems[dungeon].maxKeys = count;
+    }
+}
+
 static void debugApplyCheats(void)
 {
     if (CHEAT_ON(CHEAT_ALL_ITEMS))
     {
         cheatAllItems(gPlay);
+        cheatAllSmallKeys();
         CHEAT_CLEAR(CHEAT_ALL_ITEMS);
     }
 

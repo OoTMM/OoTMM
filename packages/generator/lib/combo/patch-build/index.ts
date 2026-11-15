@@ -1,3 +1,4 @@
+import CRC32 from 'crc-32';
 import type { Settings } from '@ootmm/core';
 import type { LogicResult, LogicResultWorld } from '@ootmm/logic';
 import type { GameAddresses } from '../addresses';
@@ -11,8 +12,11 @@ import { CONFIG } from '../config';
 import { Patcher } from './patcher';
 import { Patchfile } from './patchfile';
 import { patchRandomizer } from '../randomizer';
-import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
+import { patchEnemies } from '../randomizer/enemies';
+import { bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { FileResolver } from '../file-resolver';
+import { buildPlayerAnimationDedupePlan, installCompactPlayerAnimations } from '../compact';
+import { archiveEnemyPort } from '../enemies/overlay';
 
 export type BuildPatchfileIn = {
   patch: Patchfile;
@@ -111,6 +115,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
   let ovlAddr = 0xe0000000;
 
   const fileResolver = new FileResolver();
+  const compactAnimations = buildPlayerAnimationDedupePlan(args.roms);
 
   for (let world = 0; world < args.settings.players; ++world) {
     const p = args.patch.dup();
@@ -129,17 +134,18 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       }
       /* Pack the payload */
       const payload = await fileResolver.fetch(`${game}_payload.bin`);
-      if (payload.length > (game === 'mm' ? 0x60000 : 0x80000)) {
+      if (payload.length > 0x80000) {
         throw new Error(`Payload too large ${game}`);
       }
       const payloadVrom = game === 'oot' ? 0xf0000000 : 0xf0100000;
-      const payloadVram = game === 'oot' ? 0x80400000 : 0x80720000; /* TODO: Codegen this */
+      const payloadVram = game === 'oot' ? 0x80400000 : 0x80700000; /* TODO: Codegen this */
       const payloadVramEnd = payloadVram + payload.length;
       p.addNewFile({ name: `${game}/payload`, vrom: payloadVrom, vram: { [game]: [payloadVram, payloadVramEnd] }, data: payload, compressed: false });
 
       /* Handle extra overlays */
       const allOverlays = await fileResolver.glob(/ovl\/(oot|mm)\/.+\.zovlx$/);
       const overlays = allOverlays.filter((f) => f.startsWith(`ovl/${game}`));
+      const actorSlots = new Map<number, string>();
       for (const ov of overlays) {
         /* Resolve and inject the new overlay */
         const raw = await fileResolver.fetch(ov);
@@ -148,18 +154,48 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         const data = raw.subarray(64);
         const vramStart = bufReadU32BE(headerSize, 0x00);
         const vramEnd = bufReadU32BE(headerSize, 0x04);
-        p.addNewFile({ name: ov, vram: { [game]: [vramStart, vramEnd] }, vrom: ovlAddr, data, compressed: true });
-        const vromStart = ovlAddr;
-        const vromEnd = ovlAddr + data.length;
-        ovlAddr = vromEnd;
-
         const type = bufReadU32BE(header, 0x00);
+        let vromStart: number;
+        if (type === 0x04 || type === 0x05) {
+          vromStart = archiveEnemyPort(p, game, bufReadU32BE(header, 0x04), data);
+          const installed = p.newFiles.find(file => file.vrom === vromStart)!;
+          installed.name = ov;
+          installed.vram = { [game]: [vramStart, vramEnd] };
+        } else {
+          vromStart = ovlAddr;
+          p.addNewFile({ name: ov, vram: { [game]: [vramStart, vramEnd] }, vrom: vromStart, data, compressed: true });
+          ovlAddr += data.length;
+        }
+        const vromEnd = vromStart + data.length;
+        if (type === 0x05) {
+          const profile = bufReadU32BE(header, 8) - vramStart;
+          if (!ov.endsWith('_ovl_Enemy_Soul_Preview.zovlx') || profile < 0 || profile + 32 > data.length ||
+            bufReadU16BE(data, profile) !== 0x3ff) throw Error('Invalid soul preview module');
+          p.meta.enemySoulPreviewModules ??= {};
+          p.meta.enemySoulPreviewModules[game] = [vromStart, data.length, vramStart, vramEnd - vramStart, profile, 0, CRC32.buf(data) >>> 0];
+        }
+        const nativePort = /\/[^/]+_ovl_Native_Enemy_(oot|mm)_[a-z0-9_]+\.zovlx$/.exec(ov);
+        if (type === 0x04 || nativePort) {
+          const sourceId = bufReadU32BE(header, 0x04), profile = bufReadU32BE(header, 0x08) - vramStart;
+          if (type !== 0x04 || !nativePort || nativePort[1] === game || sourceId >= 0x400 ||
+            profile % 4 || profile < 0 || profile + 32 > data.length || data.length % 16 ||
+            bufReadU16BE(data, profile) !== 0xc00 + sourceId)
+            throw new Error('Invalid receiving-native enemy overlay metadata: ' + ov);
+        }
 
         /* TODO: Refactor this mess */
         if (type === 0x01) {
           /* Actor */
           const actorId = bufReadU32BE(header, 0x04);
           const vramInit = bufReadU32BE(header, 0x08);
+          const previous = actorSlots.get(actorId);
+          if (previous) throw new Error('Duplicate actor overlay slot: ' + previous + ' and ' + ov);
+          actorSlots.set(actorId, ov);
+          const gomessBat = ov.endsWith('_ovl_Enemy_GomessBat.zovlx');
+          const profileOffset = vramInit - vramStart;
+          if (gomessBat && (profileOffset < 0 || profileOffset + 32 > data.length ||
+            bufReadU16BE(data, profileOffset) !== actorId))
+            throw new Error('Invalid Gomess bat actor profile: ' + ov);
 
           const patch = new Uint8Array(4 * 6);
           bufWriteU32BE(patch, 0x00, vromStart);
@@ -172,6 +208,8 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
           /* Delete the old overlay if possible */
           const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
           const oldVramStart = bufReadU32BE(oldHeader, 0x08);
+          if ((gomessBat || ov.startsWith('ovl/mm/mm_ovl_Standalone_')) && (oldVramStart || bufReadU32BE(oldHeader, 0x14)))
+            throw new Error('Standalone enemy overlay requires an unused actor slot: ' + ov);
           if (oldVramStart !== 0) {
             const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
             p.removedFiles.push(oldFile.name);
@@ -258,6 +296,8 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
     }
 
     patchRandomizer(world, args.logic, args.settings, p);
+    patchEnemies(args.logic.worlds[world].enemyPlan, args.roms, args.addresses, p, args.settings);
+    installCompactPlayerAnimations(p, compactAnimations);
     patches.push(p);
   }
 

@@ -1,4 +1,4 @@
-import type { Options } from '@ootmm/core';
+import type { EnemyPlan, Options } from '@ootmm/core';
 import type { Item, PlayerItem, PlayerItems } from './items';
 import type { ItemPlacement } from './types';
 import type { Hints } from './hints';
@@ -33,6 +33,7 @@ class LogicPipeline<State> {
 
 export type LogicResultWorld = {
   resolvedFlags: ResolvedWorldFlags;
+  enemyPlan: EnemyPlan;
   prices: number[];
   entranceOverrides: Map<string, string>;
   bossIds: number[];
@@ -100,6 +101,7 @@ export async function logic(monitor: Monitor, opts: Options): Promise<LogicResul
 
     const worlds: LogicResultWorld[] = data.worlds.map(w => ({
       resolvedFlags: w.resolvedFlags,
+    enemyPlan: w.enemyPlan,
       prices: w.prices,
       entranceOverrides: w.entranceOverrides,
       bossIds: w.bossIds,

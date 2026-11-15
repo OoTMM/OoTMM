@@ -314,9 +314,15 @@ void comboCreateSave(void* unk, void* buffer)
 
     /* Apply enemy souls */
     if (!Config_Flag(CFG_OOT_SOULS_ENEMY))
+    {
         memset(gSharedCustomSave.soulsEnemyOot, 0xff, sizeof(gSharedCustomSave.soulsEnemyOot));
+        memset(gSharedCustomSave.soulsEnemyOotOverflow, 0xff, sizeof(gSharedCustomSave.soulsEnemyOotOverflow));
+    }
     if (!Config_Flag(CFG_MM_SOULS_ENEMY))
+    {
         memset(gSharedCustomSave.soulsEnemyMm, 0xff, sizeof(gSharedCustomSave.soulsEnemyMm));
+        memset(gSharedCustomSave.soulsEnemyMmOverflow, 0xff, sizeof(gSharedCustomSave.soulsEnemyMmOverflow));
+    }
     if (!Config_Flag(CFG_OOT_SOULS_BOSS))
         memset(gSharedCustomSave.soulsBossOot, 0xff, sizeof(gSharedCustomSave.soulsBossOot));
     if (!Config_Flag(CFG_MM_SOULS_BOSS))

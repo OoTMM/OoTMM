@@ -1,0 +1,120 @@
+#ifndef COMBO_ENEMY_NATIVE_TYPES_OOT_EN_VALI_H
+#define COMBO_ENEMY_NATIVE_TYPES_OOT_EN_VALI_H
+
+#include <combo.h>
+
+#ifndef BARI_LIMB_CORE
+#define BARI_LIMB_CORE 27
+#endif
+#ifndef BARI_LIMB_HOOD
+#define BARI_LIMB_HOOD 28
+#endif
+#ifndef BARI_LIMB_LEFT_FANG
+#define BARI_LIMB_LEFT_FANG 8
+#endif
+#ifndef BARI_LIMB_LEFT_FANG_ROOT
+#define BARI_LIMB_LEFT_FANG_ROOT 7
+#endif
+#ifndef BARI_LIMB_LEFT_FANG_ROOT_ROOT
+#define BARI_LIMB_LEFT_FANG_ROOT_ROOT 6
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_BODY
+#define BARI_LIMB_LEFT_TENTACLE_BODY 16
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_BODY_ROOT
+#define BARI_LIMB_LEFT_TENTACLE_BODY_ROOT 11
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_JOINT
+#define BARI_LIMB_LEFT_TENTACLE_JOINT 17
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_JOINT_ROOT
+#define BARI_LIMB_LEFT_TENTACLE_JOINT_ROOT 10
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_ROOT
+#define BARI_LIMB_LEFT_TENTACLE_ROOT 9
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_SPIKE
+#define BARI_LIMB_LEFT_TENTACLE_SPIKE 14
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_SPIKE_JOINT
+#define BARI_LIMB_LEFT_TENTACLE_SPIKE_JOINT 15
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_SPIKE_JOINT_ROOT
+#define BARI_LIMB_LEFT_TENTACLE_SPIKE_JOINT_ROOT 12
+#endif
+#ifndef BARI_LIMB_LEFT_TENTACLE_SPIKE_ROOT
+#define BARI_LIMB_LEFT_TENTACLE_SPIKE_ROOT 13
+#endif
+#ifndef BARI_LIMB_MAX
+#define BARI_LIMB_MAX 29
+#endif
+#ifndef BARI_LIMB_NONE
+#define BARI_LIMB_NONE 0
+#endif
+#ifndef BARI_LIMB_NUCLEUS
+#define BARI_LIMB_NUCLEUS 2
+#endif
+#ifndef BARI_LIMB_RIGHT_FANG
+#define BARI_LIMB_RIGHT_FANG 5
+#endif
+#ifndef BARI_LIMB_RIGHT_FANG_ROOT
+#define BARI_LIMB_RIGHT_FANG_ROOT 4
+#endif
+#ifndef BARI_LIMB_RIGHT_FANG_ROOT_ROOT
+#define BARI_LIMB_RIGHT_FANG_ROOT_ROOT 3
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_BODY
+#define BARI_LIMB_RIGHT_TENTACLE_BODY 25
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_BODY_ROOT
+#define BARI_LIMB_RIGHT_TENTACLE_BODY_ROOT 20
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_JOINT
+#define BARI_LIMB_RIGHT_TENTACLE_JOINT 26
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_JOINT_ROOT
+#define BARI_LIMB_RIGHT_TENTACLE_JOINT_ROOT 19
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_ROOT
+#define BARI_LIMB_RIGHT_TENTACLE_ROOT 18
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_SPIKE
+#define BARI_LIMB_RIGHT_TENTACLE_SPIKE 23
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_SPIKE_JOINT
+#define BARI_LIMB_RIGHT_TENTACLE_SPIKE_JOINT 24
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_SPIKE_JOINT_ROOT
+#define BARI_LIMB_RIGHT_TENTACLE_SPIKE_JOINT_ROOT 21
+#endif
+#ifndef BARI_LIMB_RIGHT_TENTACLE_SPIKE_ROOT
+#define BARI_LIMB_RIGHT_TENTACLE_SPIKE_ROOT 22
+#endif
+#ifndef BARI_LIMB_ROOT
+#define BARI_LIMB_ROOT 1
+#endif
+#ifndef COMBO_ENEMY_ASSET_ENUM_BariLimb
+#define COMBO_ENEMY_ASSET_ENUM_BariLimb
+typedef s32 BariLimb;
+#endif
+struct EnVali;
+
+typedef void (*EnValiActionFunc)(struct EnVali*, struct PlayState*);
+
+typedef struct EnVali {
+    Actor actor;
+    SkelAnime skelAnime;
+    EnValiActionFunc actionFunc;
+    u8 electrifyTimer;
+    u8 spinTimer;
+    s16 timer;
+    Vec3s jointTable[BARI_LIMB_MAX];
+    Vec3s morphTable[BARI_LIMB_MAX];
+    f32 tentaclesLengthFactor;
+    f32 spinHeight;
+    ColliderQuad leftTentacleCollider;
+    ColliderQuad rightTentacleCollider;
+    ColliderCylinder collider;
+} EnVali;
+
+#endif

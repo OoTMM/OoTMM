@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/enemy.h>
 #include <combo/custom.h>
 #include <combo/player.h>
 #include <combo/magic.h>
@@ -134,6 +135,7 @@ void MagicFire_Init(Actor_CustomMagicFire* this, PlayState* play)
 
 void MagicFire_Destroy(Actor_CustomMagicFire* this, PlayState* play)
 {
+    comboEnemyAttackForget(&this->actor);
     Magic_Reset(play);
 }
 
@@ -155,6 +157,7 @@ void MagicFire_Update(Actor_CustomMagicFire* this, PlayState* play)
     this->collider.dim.radius = (this->actor.scale.x * 325.0f);
     this->collider.dim.height = (this->actor.scale.y * 450.0f);
     this->collider.dim.yShift = (this->actor.scale.y * -225.0f);
+    comboEnemyAttackRecord(&this->actor, &this->collider.elem, 1u << 17);
     CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);
 
     switch (this->action) {

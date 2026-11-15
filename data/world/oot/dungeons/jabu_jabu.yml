@@ -41,7 +41,7 @@
   exits:
     "Jabu-Jabu Parasite Fork": "true"
   locations:
-    "Jabu-Jabu Boomerang Chest": "soul_enemy(SOUL_ENEMY_STINGER) && soul_ruto"
+    "Jabu-Jabu Boomerang Chest": "can_kill_stingers && soul_ruto"
 
 "Jabu-Jabu Map Room":
   events:
@@ -71,7 +71,7 @@
   events:
     GREEN_PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang"
   exits:
-    "Jabu-Jabu Parasite Fork": "event(GREEN_PARASITE) && soul_enemy(SOUL_ENEMY_BIRI_BARI)"
+    "Jabu-Jabu Parasite Fork": "event(GREEN_PARASITE) && soul_biri"
 
 "Jabu-Jabu Basement":
   dungeon: JJ

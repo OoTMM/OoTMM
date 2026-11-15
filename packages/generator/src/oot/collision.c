@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/enemy.h>
 #include "combo/inventory.h"
 
 static u8 CollisionCheck_GetDamageTableEntry(const DamageTable* tbl, s32 type)
@@ -30,6 +31,9 @@ void CollisionCheck_ApplyDamageCustom(PlayState* play, CollisionCheckContext* co
 {
     DamageTable* tbl;
     f32 damage;
+
+    if (comboEnemyApplySourceDamage(col, elem))
+        return;
 
     (void)play;
     (void)colChkCtx;

@@ -1,10 +1,11 @@
+import { enemyDefinition, enemySoulDependencies } from '../../../core/src/enemies';
 import type { CheckType } from '@ootmm/data';
 import type { Settings } from '@ootmm/core';
 import type { ItemID, Item, PlayerItem, PlayerItems, ItemSharedDef, ItemProperties } from '../items';
 import type { Location } from '../types';
 import type { World } from './types';
 
-import { CHECKS, CHECKS_BY_LOCATION } from '@ootmm/data';
+import { CHECKS, CHECKS_BY_LOCATION, FOREIGN_ENEMY_SOULS } from '@ootmm/data';
 import { Monitor, sample, Random, randomInt, countMapAdd } from '@ootmm/core';
 import { TRAP_AMOUNTS } from '../data';
 import { SharedItemGroups, ItemGroups, ItemHelpers, Items, itemByID, makePlayerItem } from '../items';
@@ -1745,12 +1746,57 @@ class LogicPassWorldTransform {
     }
 
     /* Add souls */
-    if (settings.soulsEnemyOot) this.addItems(ItemGroups.OOT_SOULS_ENEMY);
+    const enemyTargets = this.state.worlds.map(world => new Set(world.enemyPlan.flatMap(row =>
+      [row.target, ...(row.splitChildren ?? []), ...(row.splitPool ?? [])])));
+    if (settings.soulsEnemyOot) {
+      this.addItems([...ItemGroups.OOT_SOULS_ENEMY].filter(item => item !== Items.OOT_SOUL_ENEMY_ARWING));
+      for (const [player, targets] of enemyTargets.entries()) {
+        if (targets.has('oot-arwing'))
+          this.addPlayerItem(makePlayerItem(Items.OOT_SOUL_ENEMY_ARWING, player));
+      }
+    }
     if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
     if (settings.soulsNpcOot) this.addItems(ItemGroups.OOT_SOULS_NPC);
     if (settings.soulsAnimalOot) this.addItems(ItemGroups.OOT_SOULS_ANIMAL);
     if (settings.soulsMiscOot) this.addItems(ItemGroups.OOT_SOULS_MISC);
-    if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
+    if (settings.soulsEnemyMm) {
+      this.addItems([...ItemGroups.MM_SOULS_ENEMY].filter(item => item !== Items.MM_SOUL_ENEMY_ARWING));
+      for (const [player, world] of this.state.worlds.entries()) {
+        const targets = enemyTargets[player];
+        if (targets.has('mm-arwing'))
+          this.addPlayerItem(makePlayerItem(Items.MM_SOUL_ENEMY_ARWING, player));
+        const hasMmActor = (actorId: number) => world.enemyPlan.some(({ placement, ootr: ootPlacement, chaoticMmChoices }) =>
+          (placement?.targetGame === 'mm' && placement.targetActorId === actorId) ||
+          (ootPlacement?.foreign && ootPlacement.target.actorId === actorId) ||
+          chaoticMmChoices?.some(choice => choice.targetGame === 'mm' && choice.targetActorId === actorId));
+        if (targets.has('mm-bee') || hasMmActor(0x204))
+          this.addPlayerItem(makePlayerItem(Items.MM_SOUL_ENEMY_GIANT_BEE, player));
+        if (targets.has('mm-moth-foreign') || targets.has('mm-moth-native-target') || hasMmActor(0x23d))
+          this.addPlayerItem(makePlayerItem(Items.MM_SOUL_ENEMY_MOTH, player));
+        if (hasMmActor(0x23f))
+          this.addPlayerItem(makePlayerItem(Items.MM_SOUL_ENEMY_GARAHNA, player));
+      }
+    }
+    for (const [player, world] of this.state.worlds.entries()) {
+      if (!settings.crossGameEnemies) break;
+      const foreignSouls = new Set<ItemID>();
+      const foreignTargets = new Set<string>();
+      for (const row of world.enemyPlan) {
+        const host = row.ootr ? 'oot' : row.placement ? 'mm' : enemyDefinition(row.source).game;
+        if (!(host === 'oot' ? settings.enemyShuffleOot && settings.soulsEnemyOot : settings.enemyShuffleMm && settings.soulsEnemyMm)) continue;
+        for (const key of [row.target, ...(row.splitChildren ?? []), ...(row.splitPool ?? [])])
+          if (enemyDefinition(key).game !== host) foreignTargets.add(key);
+      }
+      for (const key of foreignTargets) {
+        const { game } = enemyDefinition(key);
+        const host = game === 'oot' ? 'mm' : 'oot';
+        const souls = enemySoulDependencies(key);
+        for (const { sourceGame, soul } of FOREIGN_ENEMY_SOULS)
+          if (sourceGame === game && souls.has(soul))
+            foreignSouls.add((host.toUpperCase() + '_' + soul) as ItemID);
+      }
+      for (const id of foreignSouls) this.addPlayerItem(makePlayerItem(itemByID(id), player));
+    }
     if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
     if (settings.soulsNpcMm) this.addItems(ItemGroups.MM_SOULS_NPC);
     if (settings.soulsAnimalMm) this.addItems(ItemGroups.MM_SOULS_ANIMAL);

@@ -1,3 +1,6 @@
+#include <combo/enemy_soul_preview.h>
+#include <combo/enemy_gold.h>
+#include <combo/enemy.h>
 #include <combo.h>
 #include <combo/souls.h>
 #include <combo/entrance.h>
@@ -264,6 +267,10 @@ static void Actor_ByteCode_DisplayTextBox2_Hook(PlayState *play, s16 messageId)
 
 PATCH_CALL(0x8010af50, Actor_ByteCode_DisplayTextBox2_Hook);
 
+#if defined(DEBUG)
+extern int gDebugEnemySpawn;
+#endif
+
 static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
 {
     if (g.isCredits)
@@ -271,6 +278,14 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
 
     switch (actorId)
     {
+    case 0x204:
+        return comboHasSoulMm(GI_MM_SOUL_ENEMY_GIANT_BEE);
+    case 0x23d:
+        return comboHasSoulMm(GI_MM_SOUL_ENEMY_MOTH);
+    case 0x23f:
+        return comboHasSoulMm(GI_MM_SOUL_ENEMY_GARAHNA);
+    case 0x056:
+        return variable ? 1 : comboHasSoulMm(GI_MM_SOUL_ENEMY_ARWING);
     case ACTOR_EN_GINKO_MAN:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BANKER));
     case ACTOR_EN_AN:
@@ -457,7 +472,7 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
     case ACTOR_EN_PEEHAT:
         return comboHasSoulMm(GI_MM_SOUL_ENEMY_PEAHAT);
     case ACTOR_EN_DINOFOS:
-        return comboHasSoulMm(GI_MM_SOUL_ENEMY_LIZALFOS_DINOLFOS);
+        return comboHasSoulMm(GI_MM_SOUL_ENEMY_DINOLFOS);
     case ACTOR_EN_ST:
         return comboHasSoulMm(GI_MM_SOUL_ENEMY_SKULLTULA);
     case ACTOR_EN_AM:
@@ -620,9 +635,31 @@ static int canSpawnActor(PlayState *play, s16 actorId, u16 variable)
 
 static s16 sActorIdToSpawn;
 
+s16 comboEnemyMmStandaloneMinibossSlot(s16 actorId, u16 params)
+{
+    if (actorId == ACTOR_EN_WIZ && (params == 0x807f || params == 0x817f))
+        return 0x127;
+    if (params != 0x807f && !(actorId == ACTOR_EN_KNIGHT && (params == 0x817f || params == 0x827f || params == 0x837f || params == 0x847f)))
+        return actorId;
+    switch (actorId)
+    {
+    case ACTOR_EN_JSO2: return 0x189;
+    case ACTOR_EN_DEATH: return 0x18a;
+    case ACTOR_BOSS_04: return 0x19d;
+    case ACTOR_EN_PAMETFROG: return 0x1b2;
+    case ACTOR_EN_BIGSLIME: return 0x1bf;
+    case ACTOR_EN_KNIGHT: return 0x1c6;
+    case ACTOR_EN_BSB: return 0x1cb;
+    default: return actorId;
+    }
+}
+
 Actor *Actor_SpawnAsChildAndCutsceneWrapper(ActorContext *actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     int ret;
+
+    if (comboIsForeignEnemyActor(actorId))
+        return comboSpawnForeignEnemy(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, (Actor *)ex3);
 
     if (!canSpawnActor(play, actorId, variable))
         return NULL;
@@ -631,21 +668,45 @@ Actor *Actor_SpawnAsChildAndCutsceneWrapper(ActorContext *actorCtx, PlayState *p
     if (actorId == ACTOR_EN_HORSE && ((variable & 0x1fff) == 0x13 || (variable & 0x1fff) == 0x14) && !comboHasSoulMm(GI_MM_SOUL_NPC_GORMAN))
         variable = (variable & 0xe000);
 
-    ret = canSpawnSoul(play, actorId, variable);
+    comboEnemySoulPreviewGateBegin();
+#if defined(DEBUG)
+    if (gDebugEnemySpawn)
+        ret = 1;
+    else
+#endif
+        ret = canSpawnSoul(play, actorId, variable);
+    ret = comboEnemySoulPreviewGate(play, 1, actorId, variable, x, y, z, ry, ret);
     if (ret <= 0)
     {
         if (ret == 0)
             g.roomEnemyLackSoul = 1;
         return NULL;
     }
+    u16 originalVariable = variable;
+    if (actorId == ACTOR_EN_RAF)
+        variable = comboEnemyLilyPrepare(play, variable);
     sActorIdToSpawn = actorId;
-    return _Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
+    Actor *actor = _Actor_SpawnAsChildAndCutscene(actorCtx, play, comboEnemyMmStandaloneMinibossSlot(actorId, variable), x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
+    if (actorId == ACTOR_EN_SW)
+        comboEnemyGoldWrap(actor, play, variable);
+    if (actorId == ACTOR_EN_RAF)
+        comboEnemyLilyWrap(actor, play, originalVariable);
+    return actor;
 }
+
+EXPORT_SYMBOL(ENEMY_NATIVE_DUEL_SPAWN_V2, Actor_SpawnAsChildAndCutsceneWrapper);
 
 static int GetRoomClearFlagForActor(PlayState *play, int flag)
 {
     int res;
 
+#if defined(DEBUG)
+    if (gDebugEnemySpawn)
+        return 0;
+#endif
+
+    if ((comboEnemyGoldSpawning() || comboEnemyLilySpawning()))
+        return 0;
     res = Flags_GetClear(play, flag);
     if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == ACTOR_EN_WALLMAS)
         res = 0;
@@ -896,6 +957,7 @@ void Actor_AfterDrawAll(PlayState *play)
         Actor_DrawLensActors(play, play->actorCtx.numLensActors, play->actorCtx.lensActors);
     }
 
+    comboEnemySoulPreviewDraw(play);
     Actor_DrawFaroresWindPointer(play);
     Multi_DrawWisps(play);
 }

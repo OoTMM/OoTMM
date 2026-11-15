@@ -337,6 +337,7 @@ export const CONFVARS = [
   'OOT_CS_GANONDORF',
   'MM_CS_ODOLWA',
   'MM_CS_WART',
+  'SOULS_ENEMY_LENS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

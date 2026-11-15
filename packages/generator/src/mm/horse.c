@@ -57,9 +57,13 @@ static int Horse_IsValidEntrance(u32 entranceId)
     }
 }
 
+#ifndef HorseNativeSceneAllows
+# define HorseNativeSceneAllows ((s32 (*)(s16))0x800f3a64)
+#endif
+
 void Horse_SpawnOverworldWrapper(PlayState* play, Player* link)
 {
-    if (!Horse_IsValidEntrance(gSave.entrance))
+    if (!Horse_IsValidEntrance(gSave.entrance) || !HorseNativeSceneAllows(play->sceneId))
     {
         gHorseIsMounted = 0;
 

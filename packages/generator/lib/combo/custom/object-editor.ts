@@ -385,7 +385,7 @@ export class ObjectEditor {
     }
 
     let i = 0;
-    for (;;) {
+    while (i + 8 <= d.length) {
       const data = bufReadU32BE(d, i);
       const op = (data >>> 24);
       const op2 = (data >>> 16) & 0xff;
@@ -394,6 +394,7 @@ export class ObjectEditor {
         return i;
       }
     }
+    throw new Error('Unterminated object display list');
   }
 
   listData(addr: number) {

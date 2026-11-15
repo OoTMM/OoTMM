@@ -374,4 +374,6 @@ typedef enum ExchangeItemID {
 #define FANFARE_SONG_DOUBLE_TIME    FANFARE_MM(NA_BGM_MM_SONG_OF_DOUBLE_TIME)
 #define FANFARE_KAMARO              FANFARE_MM(NA_BGM_MM_KAMARO_DANCE)
 
+void comboAddArrowsMm(u8 count);
+
 #endif

@@ -134,6 +134,7 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtended = 0;
     this->isExtendedCollected = 0;
     this->isExtendedMajor = 0;
+    this->enemySourceQuantity = 0;
 
     /* Init the xflag */
     this->xflag = Xflag_InitEx(&this->actor, play);
